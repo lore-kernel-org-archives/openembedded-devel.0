@@ -1,41 +1,41 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id EF1FD786D2
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id BF009786DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 09:17:11 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id f71so378389wmf.0
+	Mon, 15 Jan 2018 09:17:12 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id t74so351879wme.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 01:17:13 -0800 (PST)
+	Mon, 15 Jan 2018 01:17:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=3LUSjYztUXAb95dMyCfNtbKgcIKpVqkbtOV0qUNgM4U=;
-	b=ZEQAVjCrBxWasD4yF74XddG70IwXB/WaQBc0WRm510/ugqALkI2Ruld2OnQkcSMlcL
-	gTFXbtbchVxWz9gZUAOPhp2WcvFmPh8o/5aRZSq4mUwHyjFr1pgZitJc8U09qhCKk+yl
-	8QWIzJiViD77/IM3IO0cr0iQFh70VKF3I4UvzwCaoTmFm1JkWDO914QwoFaYkiQMRy97
-	qSu23NmuNBWa8qcxRCnnyb9nfqMsg8MoXnFyXyVQYOe4dr3w/oFeauz2Q17jQVS/m4aO
-	BEGiQ6iL/8SPL6/K6yudmWevAesEArayNzlx/+T0U8JIaxhSEjjmD2Lg7pIbqgHTaS6S
-	KOvA==
-X-Gm-Message-State: AKwxytf9wys5o/8AC+/PlaDvmHsq1G498OkEPKdH67JN329FCOpkNqfr
-	6D2kCRJST3EHFem8FbtcUaWPXqwR
-X-Google-Smtp-Source: ACJfBosarkFoiCq5nD5d5zFOQVPWjpfmkcDSCZEU/GCpTT5zjRLVSe6c5wYKpVmDxY90aiZIE5xQPA==
-X-Received: by 10.80.245.92 with SMTP id w28mr5486339edm.73.1516007832365;
-	Mon, 15 Jan 2018 01:17:12 -0800 (PST)
+	bh=TypW7dOKwZ0hX05+U//YPlUym43qp1cA18h1DrAgJsM=;
+	b=TJ5d5vWwZkq74N9DTf4K1qykedgZhag6GinqK4NBPS6QTbWgeQXIfY+JAavUJ5VmfR
+	7BO52OeqSS5t5+h7qmcUl5djiQj48NSfSa0f2l5iT6uOsKoeJzeriLUxlhCVeExCTm2F
+	54fY0D/mAqzveiWf3zs1l8F+I3KjezLoMmC9bOGbI3K312MVqgOB3BFYMkkBmIwuMyPe
+	PZqfxHjM2uoikBXzd9bS7n6ZLBTs1jvGPVmpH9eNHWqPx4zLMBNGJKF0EtaiVHVpZ1z1
+	5QkUZ72dTaRjSZ0Jl3bhxx5J+cJOk2JEUUr3qbAafkD7XVBgT6uUI8wVgFhO9ZcsaHcq
+	i2wA==
+X-Gm-Message-State: AKwxytdPKGEZ9dpba2fJocx1T9ys+C7ddFMYCa5Xj9SMitJuJG6SpjK/
+	m3uA/VXuBzson/sVrsZs9YddWz19
+X-Google-Smtp-Source: ACJfBotZiZWKGTpRdUInU9rcyWZqiJx1CpEvW5Tsx2VNOiMfegq+vzG/oSngXXL0jrUYYW7F/V54OQ==
+X-Received: by 10.80.181.130 with SMTP id a2mr25820057ede.287.1516007833178;
+	Mon, 15 Jan 2018 01:17:13 -0800 (PST)
 Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id 15sm780937eds.54.2018.01.15.01.17.11
+	by smtp.gmail.com with ESMTPSA id 15sm780937eds.54.2018.01.15.01.17.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Jan 2018 01:17:11 -0800 (PST)
+	Mon, 15 Jan 2018 01:17:12 -0800 (PST)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Jan 2018 09:17:06 +0000
-Message-Id: <20180115091707.1539-5-git@andred.net>
+Date: Mon, 15 Jan 2018 09:17:07 +0000
+Message-Id: <20180115091707.1539-6-git@andred.net>
 X-Mailer: git-send-email 2.15.1
 In-Reply-To: <20180115091707.1539-1-git@andred.net>
 References: <20180115091707.1539-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 5/6] python-pyjwt: add initial recipe for version 1.5.3
+Subject: [meta-python][PATCH 6/6] python-pyjks: add initial recipe for version 17.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,7 +48,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jan 2018 09:17:12 -0000
+X-List-Received-Date: Mon, 15 Jan 2018 09:17:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -56,52 +56,57 @@ From: André Draszik <andre.draszik@jci.com>
 
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- meta-python/recipes-devtools/python/python-pyjwt.inc    | 17 +++++++++++++++++
- .../recipes-devtools/python/python-pyjwt_1.5.3.bb       |  2 ++
- .../recipes-devtools/python/python3-pyjwt_1.5.3.bb      |  2 ++
- 3 files changed, 21 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyjwt.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pyjwt_1.5.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pyjwt_1.5.3.bb
+ .../recipes-devtools/python/python-pyjks.inc       | 22 ++++++++++++++++++++++
+ .../recipes-devtools/python/python-pyjks_17.1.1.bb |  2 ++
+ .../python/python3-pyjks_17.1.1.bb                 |  2 ++
+ 3 files changed, 26 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyjks.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pyjks_17.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyjks_17.1.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyjwt.inc b/meta-python/recipes-devtools/python/python-pyjwt.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyjks.inc b/meta-python/recipes-devtools/python/python-pyjks.inc
 new file mode 100644
-index 000000000..dda4b942d
+index 000000000..d866c5650
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyjwt.inc
-@@ -0,0 +1,17 @@
-+SUMMARY = "JSON Web Token implementation in Python"
-+SUMMARY = "JSON Web Token implementation in Python"
-+DESCRIPTION = "A Python implementation of JSON Web Token draft 32.\
-+ Original implementation was written by https://github.com/progrium"
-+HOMEPAGE = "http://github.com/jpadilla/pyjwt"
++++ b/meta-python/recipes-devtools/python/python-pyjks.inc
+@@ -0,0 +1,22 @@
++SUMMARY = "Pure-Python Java Keystore (JKS) library"
++DESCRIPTION = "PyJKS enables Python projects to load and manipulate\
++ Java KeyStore (JKS) data without a JVM dependency. PyJKS supports JKS,\
++ JCEKS, BKS and UBER (BouncyCastle) keystores."
++HOMEPAGE = "http://github.com/kurtbrose/pyjks"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9694d6cc724caf7f7386be88a4a81958"
 +
-+SRC_URI[md5sum] = "739494379f582ca98c89fb7ac229915b"
-+SRC_URI[sha256sum] = "500be75b17a63f70072416843dc80c8821109030be824f4d14758f114978bae7"
++SRC_URI[md5sum] = "d53501e7c80d465969742bc6bee91d49"
++SRC_URI[sha256sum] = "709c44a303dd6b2464078ebeb677417e717818d4b3dc3844a462bef9d215dcc8"
 +
-+PYPI_PACKAGE = "PyJWT"
 +inherit pypi
 +
-+RDEPENDS_${PN} = "${PYTHON_PN}-cryptography"
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-javaobj-py3 \
++    ${PYTHON_PN}-pyasn1 \
++    ${PYTHON_PN}-pyasn1-modules \
++    ${PYTHON_PN}-pycryptodome \
++    ${PYTHON_PN}-twofish\
++"
 +
 +BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-pyjwt_1.5.3.bb b/meta-python/recipes-devtools/python/python-pyjwt_1.5.3.bb
+diff --git a/meta-python/recipes-devtools/python/python-pyjks_17.1.1.bb b/meta-python/recipes-devtools/python/python-pyjks_17.1.1.bb
 new file mode 100644
-index 000000000..f0a77b674
+index 000000000..ce99f2835
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyjwt_1.5.3.bb
++++ b/meta-python/recipes-devtools/python/python-pyjks_17.1.1.bb
 @@ -0,0 +1,2 @@
-+require python-pyjwt.inc
++require python-pyjks.inc
 +inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_1.5.3.bb b/meta-python/recipes-devtools/python/python3-pyjwt_1.5.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyjks_17.1.1.bb b/meta-python/recipes-devtools/python/python3-pyjks_17.1.1.bb
 new file mode 100644
-index 000000000..dc16d2282
+index 000000000..8982fcebc
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyjwt_1.5.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjks_17.1.1.bb
 @@ -0,0 +1,2 @@
-+require python-pyjwt.inc
++require python-pyjks.inc
 +inherit setuptools3
 -- 
 2.15.1
