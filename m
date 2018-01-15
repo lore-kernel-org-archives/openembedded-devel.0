@@ -1,39 +1,43 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id DEB916010B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 254E578687
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 09:41:52 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id t74so509972wme.3
+	Mon, 15 Jan 2018 12:39:58 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id u42so13947879qte.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 01:41:54 -0800 (PST)
+	Mon, 15 Jan 2018 04:40:00 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:mime-version
-	:content-transfer-encoding;
-	bh=VLycZZ8lQ/deXaLDD2I3STdNltFoiwoBl4myn4yJ1OM=;
-	b=MoWRbGbtpz0XjR9fwMzp++SIVVFQDBuR7oUl2Vfpby/hagx1I2C8rFrrFKUq4X+qxv
-	4sah02rgLCNrqk/88P2OWuN+UAFeSe0YBNmP+znJFrfZ3sad8SaYUbIBgdlaEU//wVzi
-	LoHSZuHTS0DmN8RHZ7+LftOXb3xp4DWHLg2Gk80ZHYkq/AhyqTDPBQSrls+l9CvqzCQ3
-	tVsX55O2uwCFkMocXYf3gfvrTy8hIXGr4WGSoViUO2/UafpBlMLL+UQBi1MiPHjf5JUf
-	sZD7c+1eks0IXS+njHHpEZBvMEL0dD/+OIyYjlihUw2rdgUzwviOuIjylzEj47iZ1IAU
-	WZbA==
-X-Gm-Message-State: AKwxytdJhRmyWpXYz1Z5C5PdfGtpGYrDfufSw0OZIWPPMa2EAJaBwi5P
-	zRM+8pqA7Zu9WIAi+/LsQmTk8BWL
-X-Google-Smtp-Source: ACJfBovTU6SAulDW3HJVCGZMYu9rYBVhw1LbA6tgK6mYVWSjn4pp/ceUtVC2K4JUhU0//9fFkPrs7A==
-X-Received: by 10.80.149.136 with SMTP id w8mr19619861eda.70.1516009313647;
-	Mon, 15 Jan 2018 01:41:53 -0800 (PST)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id z2sm4260715edc.50.2018.01.15.01.41.52
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=1HnzDL53RM53DWTV6KPMhPxek0n7yGm77Ca6u+XTDmo=;
+	b=FcPxUGRWyE8gz2sLMGT4tLy0zND5s54EVy77sKnN1L6X1O0ASqwkyFwx5PlOhCnlMd
+	pY9j6W+kVMeQIhhmL1274KhIcUTB2X4loEbZ6e085o1cBHfFePZQHoEPAQl1DK/24OuF
+	KymqzFaJc+PCQo62/ExmmDSFb+ZhxxlEEHYanduqGAhQlODMumme9m62cmCZ3JJLe+L7
+	0ru+SD2orOP+4qCrH9s1q0LIhYcTaJSlOl9SLlspchOd78DCRCabEDU6IwB3Kt7w90AZ
+	P/apEbH0cxohSPjyFGsAipaIg4r3OZTiKcsAu4dOSgA1DzLNYyyk8t6CluIpAmjRWcdw
+	brxg==
+X-Gm-Message-State: AKwxytdRjfqHVOH3t6FpwMXHM7R9Aao63IFbJGKqbsbBdP4325SzoVNv
+	wqbMthU7BQD+JkZCOdSH/mYkFA==
+X-Google-Smtp-Source: ACJfBotXYUeHsKKaFnh/1v+RhhlFQyez4dhXmDY4XgJbW0xsd9DCLK7Z8XRbZr6JHYwRBsArAmOCPw==
+X-Received: by 10.237.59.113 with SMTP id q46mr6882136qte.222.1516019999958;
+	Mon, 15 Jan 2018 04:39:59 -0800 (PST)
+Received: from localhost.localdomain ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id
+	a27sm6101822qkj.94.2018.01.15.04.39.57
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 15 Jan 2018 01:41:52 -0800 (PST)
-Message-ID: <1516009312.28972.43.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Jan 2018 09:41:52 +0000
-X-Mailer: Evolution 3.26.2-1 
-Mime-Version: 1.0
-Subject: native python recipes (packages)
+	Mon, 15 Jan 2018 04:39:59 -0800 (PST)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Mon, 15 Jan 2018 10:39:52 -0200
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Jan 2018 10:39:45 -0200
+Message-Id: <20180115123946.26327-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.15.1
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-python PATCH 1/2] python-pycrypto: Consolidate recipe code inside of .inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,23 +50,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jan 2018 09:41:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Jan 2018 12:39:59 -0000
 
-Hi,
+This move the patches and installation tasks inside the .inc. This is
+required for the addition of python3 version of the recipe, in next
+patch.
 
-I need a few native python3 packages for a certain native recipe in my
-build, but because RDEPENDS are ignored for native sysroot purposes, all the
-runtime dependencies for each of the python packages have to be
-added explicitly (recursively!) as well.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-This is quite cumbersome and error-prone.
+Changes in v3:
+ - rebase on top of master-next
 
-Am I missing something? What do others do?
+ meta-python/recipes-devtools/python/python-pycrypto.inc      | 6 +++++-
+ meta-python/recipes-devtools/python/python-pycrypto_2.6.1.bb | 4 ----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-
-Cheers,
-Andre'
+diff --git a/meta-python/recipes-devtools/python/python-pycrypto.inc b/meta-python/recipes-devtools/python/python-pycrypto.inc
+index fb2c17df1..232cdb711 100644
+--- a/meta-python/recipes-devtools/python/python-pycrypto.inc
++++ b/meta-python/recipes-devtools/python/python-pycrypto.inc
+@@ -3,12 +3,16 @@ HOMEPAGE = "http://www.pycrypto.org/"
+ LICENSE = "PSFv2"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=35f354d199e8cb7667b059a23578e63d"
+ 
+-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
++FILESEXTRAPATHS_prepend := "${THISDIR}/python-pycrypto:"
+ 
+ DEPENDS += " gmp"
+ 
+ inherit pypi autotools-brokensep
+ 
++SRC_URI += "file://cross-compiling.patch \
++            file://CVE-2013-7459.patch \
++           "
++
+ SRC_URI[md5sum] = "55a61a054aa66812daf5161a0d5d7eda"
+ SRC_URI[sha256sum] = "f2ce1e989b272cfcb677616763e0a2e7ec659effa67a88aa92b3a65528f60a3c"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pycrypto_2.6.1.bb b/meta-python/recipes-devtools/python/python-pycrypto_2.6.1.bb
+index 919f91ecb..e13db01b7 100644
+--- a/meta-python/recipes-devtools/python/python-pycrypto_2.6.1.bb
++++ b/meta-python/recipes-devtools/python/python-pycrypto_2.6.1.bb
+@@ -1,10 +1,6 @@
+ inherit distutils
+ require python-pycrypto.inc
+ 
+-SRC_URI += "file://cross-compiling.patch \
+-            file://CVE-2013-7459.patch \
+-           "
+-
+ # We explicitly call distutils_do_install, since we want it to run, but
+ # *don't* want the autotools install to run, since this package doesn't
+ # provide a "make install" target.
+-- 
+2.15.1
 
 
