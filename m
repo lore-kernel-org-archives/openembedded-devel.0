@@ -1,28 +1,40 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 05D09600EA
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D58171A72
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 07:46:49 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	14 Jan 2018 23:46:51 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,362,1511856000"; d="scan'208";a="21502729"
-Received: from anmitta2-mobl1.png.intel.com (HELO [10.221.21.145])
-	([10.221.21.145])
-	by fmsmga004.fm.intel.com with ESMTP; 14 Jan 2018 23:46:50 -0800
+	Mon, 15 Jan 2018 09:12:15 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id v123so305576wmd.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Jan 2018 01:12:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=V32wvx2UhgAD9iRXuLUQfXOu14q03uWExqeYUeT10P4=;
+	b=euHbr2M6UaCIZDhFXuJpzExYcG7x2EzG+h2nfbBUIsKxPLgoXEuDVs62NEidk4peqe
+	p/x/km0R6Ay/MxN8dnDnl2axoBc0DQzkFsbeX38t1QFtrnPzIH0R/gB05BxC6K1jt0bc
+	dAYFqpL2cxZtP+QtBUDvxv0WDKY1HjCTBFqjLMH5CGhKnFMzqkLnn4vxx8UisMXuHDIY
+	3qgrtHnCKvl13GrW0Xq2KYJjjeVH8OvWgFgoFLbnUcMbef7ZbQrOlu1jQT7seOtcwv6+
+	hPJOE2ICUKpGUkyUX+akXCZDzHJPnSvdGkogem7dKZX4QNcdNeTBmeWKUvTmcMr0iMBl
+	U9Jw==
+X-Gm-Message-State: AKwxytc8W5GBUt5SShWRgRv7pjkG4v1B5gX+3CXvszYxY/8J3Bb+l1Kd
+	NNXQ9dFwvuLg/FbNtdbr8fAEUklD
+X-Google-Smtp-Source: ACJfBoveg48jK3Dvd5hqjrRASki/XofErGWRrP3Vvb6em9JTxho0HO0lGxsBpgK/xsXV/M94Wiu+IQ==
+X-Received: by 10.80.240.205 with SMTP id a13mr23964574edm.77.1516007535949;
+	Mon, 15 Jan 2018 01:12:15 -0800 (PST)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	g3sm15526487edi.11.2018.01.15.01.12.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 15 Jan 2018 01:12:14 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1515664514-79764-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Anuj Mittal <anuj.mittal@intel.com>
-Message-ID: <6c308618-ce08-efaf-fa8a-7a329720ad79@intel.com>
-Date: Mon, 15 Jan 2018 15:46:49 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+Date: Mon, 15 Jan 2018 09:12:13 +0000
+Message-Id: <20180115091213.618-1-git@andred.net>
+X-Mailer: git-send-email 2.15.1
 MIME-Version: 1.0
-In-Reply-To: <1515664514-79764-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe][PATCH v2] nautilus: new add
+Subject: [meta-oe][PATCH] engine-pkcs11: replace startline=1 with beginline=1 in LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,61 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jan 2018 07:46:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Jan 2018 09:12:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 01/11/2018 05:55 PM, zhengrq wrote:
-> Add a new recipe nautilus.
-> 
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  .../recipes-gnome/nautilus/nautilus_3.18.5.bb      | 29 ++++++++++++++++++++++
->  1 file changed, 29 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-> 
-> diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-> new file mode 100644
-> index 0000000..1119309
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-> @@ -0,0 +1,29 @@
-> +SUMMARY = "File manager for GNOME"
-> +SECTION = "x11/gnome"
-> +
-> +LICENSE="GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=36cf660aea2b8beffba7945f44a7e748 \
-> +                    file://COPYING.EXTENSIONS;md5=7579d6678402a1868631bf82c93ff0d4 \
-> +                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
-> +
+From: André Draszik <andre.draszik@jci.com>
 
-These license files point to a GPLv2 license.
+'startline' is not a recognised keyword, it's beginline
 
-Thanks,
-Anuj
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> +SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/3.18/nautilus-${PV}.tar.xz"
-> +
-> +SRC_URI[md5sum] = "0f578bda5655c0ce204befafca5803d7"
-> +SRC_URI[sha256sum] = "60a927c0522b4cced9d8f62baed2ee5e2fd4305be4523eb5bc44805971a6cc15"
-> +
-> +DEPENDS = "gtk+3 gnome-desktop3 gsettings-desktop-schemas glib-2.0-native intltool-native pango"
-> +
-> +inherit distro_features_check autotools pkgconfig gobject-introspection
-> +REQUIRED_DISTRO_FEATURES = "x11"
-> +
-> +EXTRA_OECONF = " \
-> +    --disable-gtk-doc \
-> +    --disable-update-mimedb \
-> +    --disable-nst-extension \
-> +    --enable-tracker=no \
-> +    --disable-schemas-compile \
-> +    --enable-xmp=no \
-> +    --enable-libexif=no \ 
-> +"
-> +
-> +FILES_${PN} += "${datadir}/*"
-> 
+diff --git a/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb b/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
+index 047f70110..bc79f356b 100644
+--- a/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
++++ b/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
+@@ -6,7 +6,7 @@ call by openssl to a PKCS cards and software for using smart cards in PKCS"
+ HOMEPAGE = "https://github.com/OpenSC/engine_pkcs11"
+ SECTION = "Development/Libraries"
+ LICENSE = "LGPLv2.1+"
+-LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
++LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;beginline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
+ DEPENDS = "openssl libp11"
+ 
+ SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
+-- 
+2.15.1
 
 
