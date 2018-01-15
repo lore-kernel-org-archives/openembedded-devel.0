@@ -1,43 +1,38 @@
-Return-Path: <nickaein.i@gmail.com>
-Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E31A786BD
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8797B71B31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jan 2018 16:31:59 +0000 (UTC)
-Received: by mail-qt0-f177.google.com with SMTP id d4so9620574qtj.5
+	Mon, 15 Jan 2018 00:46:56 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id u42so12381309qte.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jan 2018 08:32:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=DbbpnM5dOxT6vTFaQM2/ZogxmQ6SDzFWHIrABX5j64w=;
-	b=YNduyrVJZz3NQsiPcWSFNlCEp+A6/WPxwZZvvINUazADDv3JtZTykesH6Ej9NqIIor
-	vEyH03mMHMmm+fLqLsYwdzLBzPfi5aSxV2hrlofWC7Rw54r7D/9tZ9KZwX3kJQ+/1qy2
-	umn8kJ+/YLlBIwWukakub7A/EmgF/qC13QW/W1Qml/9nBqQ2jkKoB6xyL5qqH2h6Jr+O
-	mpBQrSZBSct48tlnk2hQHqynmOEvR5EivTu75pGWW1yKenIibtpaDBX6ZFxlkBPPlIol
-	kM/sE+KKJTIuyf+0+S2aKjS+r/buI5rOFSkjQ7LZqzDsfDz9KW+6DdR70rVMW8Faox1b
-	dd9g==
+	Sun, 14 Jan 2018 16:46:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=DbbpnM5dOxT6vTFaQM2/ZogxmQ6SDzFWHIrABX5j64w=;
-	b=O7sVpnGcKvBTf0mrrkKQ0Ur2g62RrmrwQqKi1dkHk5S1O33WLCJpwXPozofSfBQVAL
-	qO05TO1vDwwhYhaiy2rqRvMMJ1Go8S4CYb6fnhxj0FCMOPNvJYb4ZdQbdZzkt7UqfWx0
-	aS3oC+nV7ClTLanfcqlzvPhf3e/whIATJSC8VCn3HtZ06s7chziU7LBuu51rXVZw272f
-	xphqdhxG/XtrWru8AC6C/VAzIh9CkJThpi/b67TKRHovnAAYGyAtqzjpCkivuq2ucC2i
-	EtN4hghtNY0ziFGT+m65ATXilS56bulOykls/Frq8cCofEsCZpza8kS4WafqRc7XZS4F
-	AAMg==
-X-Gm-Message-State: AKwxytebdfGQHNmjPPOirSaPpHmv6dydGyTwxGSyof2OQL5hH0fSd1px
-	bEiSKy1v5msGRrtgAZd+5oo/09ay/TxaJPAXEtDu8g==
-X-Google-Smtp-Source: ACJfBosvUUTVIk79zEC0i2oFp8cepL3STF42mOtMlqCSysxIscP3GTkar6YleBeBeRpqyqoS5ZvRPIXZgt6ijNcoiKw=
-X-Received: by 10.237.45.165 with SMTP id i34mr40639912qtd.112.1515861120961; 
-	Sat, 13 Jan 2018 08:32:00 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.12.214.82 with HTTP; Sat, 13 Jan 2018 08:31:30 -0800 (PST)
-From: Isaac Nickaein <nickaein.i@gmail.com>
-Date: Sat, 13 Jan 2018 20:01:30 +0330
-Message-ID: <CA+NJmkdfNKmdi=6RZDtBt2tiZfp3nqZ=Nd5jy=+fGPXKGNODHw@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VEJ9kGz5T6jQHS5549m6WPkHwy+V/AAS9M2V3OaRIGc=;
+	b=iIoyVd7tTUDytcFE9VrHx8E/KhywdQvtoVDI+TTTiwI6Ogct0EjmTdqYi612JKELfo
+	N1HLonCrv1mVuo/gLB6dy2m7bTBn2k/F+gTyoaFiK6GAQ+IFOntDUpYJ7/j6txuiCMfj
+	q0Kmrh8ae8Sf9zf0OaB/KdetAOwMoOW0GS+VG5bai6ni5pSxVuw884y2oaX+5AIKGoVC
+	5VGp+Xp9dzaM3JnoTq1vuMDep563AYwSpp4sjYRyou98mFljrnL8Ycqc+2G3Yx9pRP90
+	Lm5CyZn0z+0UPVeopJ5FmGKdzfBA8RqwhRL5U7bd0xoCbDFY78fAb0yWaaPBjaG+mhj4
+	hL4w==
+X-Gm-Message-State: AKwxytcbV6f0bXFj+JxCKeoGFj7Hh6+oG+HoxoD93Wi7vsbELRAyzXa7
+	aFb3dQBwRts5SXWFrX5VAUXnp+3X
+X-Google-Smtp-Source: ACJfBotLn5sFJ4MInYPTbgu4xKf/pEg59kG0jrS37vt9a/j2v5E3VaPcbErt8U/r7Y6CpkqZ/P924w==
+X-Received: by 10.200.37.167 with SMTP id e36mr44453083qte.320.1515977217062; 
+	Sun, 14 Jan 2018 16:46:57 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	y16sm17502437qta.48.2018.01.14.16.46.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 14 Jan 2018 16:46:56 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-qt5] [rocko] qtbase fails at do_compile for i.MX7
+Date: Sun, 14 Jan 2018 19:46:38 -0500
+Message-Id: <1515977198-32517-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-cffi: update to version 1.11.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,79 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jan 2018 16:32:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 15 Jan 2018 00:46:56 -0000
 
-Hi,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-cffi.inc                   | 4 ++--
+ .../python/{python-cffi_1.11.2.bb => python-cffi_1.11.4.bb}           | 0
+ .../python/{python3-cffi_1.11.2.bb => python3-cffi_1.11.4.bb}         | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cffi_1.11.2.bb => python-cffi_1.11.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cffi_1.11.2.bb => python3-cffi_1.11.4.bb} (100%)
 
-I've been trying to build the qt5 using meta-qt5 layer for Colibri
-i.MX7 modules.
-I've cloned meta-oe and related layers on rocko branch and also
-meta-qt5. The list of all layers are mentioned down below.
+diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+index 78addb6..9c934b2 100644
+--- a/meta-python/recipes-devtools/python/python-cffi.inc
++++ b/meta-python/recipes-devtools/python/python-cffi.inc
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+ 
+-SRC_URI[md5sum] = "a731487324b501c8295221b629d3f5f3"
+-SRC_URI[sha256sum] = "ab87dd91c0c4073758d07334c1e5f712ce8fe48f007b86f8238773963ee700a6"
++SRC_URI[md5sum] = "8ef0f852498908b20bc508799901fe93"
++SRC_URI[sha256sum] = "df9083a992b17a28cd4251a3f5c879e0198bb26c9e808c4647e0a18739f1d11d"
+ 
+ RDEPENDS_${PN}_class-target = " \
+     ${PYTHON_PN}-ctypes \
+diff --git a/meta-python/recipes-devtools/python/python-cffi_1.11.2.bb b/meta-python/recipes-devtools/python/python-cffi_1.11.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cffi_1.11.2.bb
+rename to meta-python/recipes-devtools/python/python-cffi_1.11.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.11.2.bb b/meta-python/recipes-devtools/python/python3-cffi_1.11.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cffi_1.11.2.bb
+rename to meta-python/recipes-devtools/python/python3-cffi_1.11.4.bb
+-- 
+2.7.4
 
-The compile error I am getting is apparently related to
-mis-configuration of recipes that don't exactly know the i.MX7
-hardware. For instance:
-
-/opt/yocto/rocko-poky/poky/build-saba/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.9.3+gitAUTOINC+4d8ae444c2-r0/recipe-sysroot/usr/include/EGL/eglplatform.h:146:10:
-fatal error: X11/Xlib.h: No such file or directory
- #include <X11/Xlib.h>
-          ^~~~~~~~~~~~
-compilation terminated.
-Makefile:621: recipe for target '.obj/qeglstreamconvenience.o' failed
-
-
-Apparently something is wrong with Qt 5 configuration which tries to
-use X11 while I have removed it.
-
-I've tried various settings in my setup but none of them help to
-resolve the issue.
-I think there is a problem either in meta-oe or meta-qt5 that
-mis-configures the qt build.
-
-Here is the conf/local.conf:
-
-MACHINE = "colibri-imx6"
-DISTRO = "poky"
-
-PACKAGECONFIG_remove = " x11 wayland wifi 3g bluetooth irda nfc ipv6
-largefile pam pci pcmcia ppp smbfs"
-
-DISTRO_FEATURES_remove = " x11 wayland wifi 3g bluetooth irda nfc ipv6
-largefile pam pci pcmcia ppp smbfs"
-
-PACKAGECONFIG_append_pn-qtbase = " gles2 eglfs linuxfb "
-
-DISTRO_FEATURES_append = " opengles2 egl"
-
-
-
-Here is the bblayers.conf:
-
-
-BBLAYERS ?= " \
-  ${BSPDIR}/meta \
-  ${BSPDIR}/meta-poky \
-  ${BSPDIR}/meta-openembedded/meta-oe \
-  ${BSPDIR}/meta-openembedded/meta-python \
-  ${BSPDIR}/meta-openembedded/meta-networking \
-  ${BSPDIR}/meta-openembedded/meta-webserver \
-  ${BSPDIR}/meta-freescale \
-  ${BSPDIR}/meta-freescale-3rdparty \
-  ${BSPDIR}/meta-freescale-distro \
-  ${BSPDIR}/meta-toradex-bsp-common \
-  ${BSPDIR}/meta-toradex-nxp \
-  ${BSPDIR}/meta-swupdate \
-  ${BSPDIR}/meta-qt5 \
-"
-
-
-qtbase configuration log:
-https://pastebin.com/GLv04BAZ
-
-qtbase compile log (with errors):
-https://pastebin.com/JxnRx6nT
-
-Here is the env variables (outptut of bitbake -e qtbase):
-http://www.pastebin.xyz/p?q=eEIyNW8
 
