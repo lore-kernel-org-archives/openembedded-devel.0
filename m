@@ -1,30 +1,50 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id AEA8B601F6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jan 2018 01:52:57 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35347413"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Jan 2018 09:52:55 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7095948AE82D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jan 2018 09:52:53 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.156) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Tue, 16 Jan 2018 09:52:52 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Jan 2018 12:23:32 +0800
-Message-ID: <1515731012-91307-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Return-Path: <ka6sox@gmail.com>
+Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
+	[209.85.214.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BFE617865F;
+	Tue, 16 Jan 2018 03:57:47 +0000 (UTC)
+Received: by mail-it0-f43.google.com with SMTP id u62so3273623ita.2;
+	Mon, 15 Jan 2018 19:57:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=82sJ9c0xvLXvltD6fnPM4MNYoURttfjEKhqOkrOD/Dc=;
+	b=Vhw8rTVAlRNraDCLcW9THXnB8FflXwROdSaAlvcPO4+3yjvMbeiVVQkqJW2a8EFaWs
+	pOfTaglyeNIZzGJnaBFC+03MME0etCPNwurnMIB4fyRvdFPmuKYbEJhXWjuA7PaPmUjG
+	qFg9oykOyUzT5AVV1HfGpc+K4qIUtg9Kpx928LikRVIiQm8XKTxA4Ws495SDNguBVAKr
+	c+eNCbXeoNMnnsZsVvG8ZD5tM/nFYeONHAL9n0KYgAZODVqEtyQurA0C8dQNTfIBaEel
+	HeSNb82+fp+BhIf4Hajk+tXvBla0LTuIC0O40WjfiT1Hj19vD35h7p5GrxGM3hmWVFIf
+	+mDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=82sJ9c0xvLXvltD6fnPM4MNYoURttfjEKhqOkrOD/Dc=;
+	b=n114AwmOFjcW6h/NqkIE3+OJr9CxLTlD2d3bXScWBxKgARFfO+Fi3G8KdRgChKEzna
+	mx24R0pBZ9/dm69r+mYm6+i9iAPZA4Q9B1PXcpa+4tW2QU6YExCXgrfhgXN51atMTyPB
+	Q3kQ2DJjGVL7F0DFsI53hGM784djiWz7AK9yxlklQP/BUIy+an2eR0Kct2RAkIPijVio
+	RflOGhwPs25iQdrJ66elYQEkR1hVuFZrQQWBBjUz+rZnN0xH7A6UqrCkTZKlGm4hQOKe
+	opt05BojUOd4yNyg8NGRCcnMiBxi/Bh34bhoRKu4W7Qm70E+urNoFjhOGdXhBA9VvJrZ
+	vaJA==
+X-Gm-Message-State: AKwxytfF23V6kuAwZZ0WkRiUi5+RdMptKmaNv26f9m4/IYitMafF9m9M
+	ZgKfJGnUAd6lhEuvTCfZ7Y7vmZSEL4g8PNXA2qA=
+X-Google-Smtp-Source: ACJfBos6kS8CuHmhi9RIrajtghoFAIQExEVDMLdhADOfgDzYdXxYPXiNWr8CzSmc/blC/P7Sq8l5ldL+KaZt5i7c6cE=
+X-Received: by 10.36.28.20 with SMTP id c20mr17135227itc.142.1516075068990;
+	Mon, 15 Jan 2018 19:57:48 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 7095948AE82D.A6BFA
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v3] nautilus: new add
+Received: by 10.36.26.5 with HTTP; Mon, 15 Jan 2018 19:57:48 -0800 (PST)
+In-Reply-To: <CAGAf8Lws8HfvDvMvdpgXyTvKaVpmf5a1UUTbBc2OrTpw=mgPNA@mail.gmail.com>
+References: <137d31ae-329e-53ff-f495-259168b787d5@balister.org>
+	<CAGAf8Lws8HfvDvMvdpgXyTvKaVpmf5a1UUTbBc2OrTpw=mgPNA@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+Date: Mon, 15 Jan 2018 19:57:48 -0800
+Message-ID: <CAHQecY5FEt0jMY97Cfq7tR4KAETqied0t3zfFgXw=J5YBSz53A@mail.gmail.com>
+To: Zoran Stojsavljevic <zoran.stojsavljevic@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+Subject: Re: [yocto] OpenEmbedded developer meeting Sunday before ELC in Portland
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,55 +57,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jan 2018 01:52:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Jan 2018 03:57:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add a new recipe nautilus.
+What time...a number of us are headed up from SCaLE sunday morning to ELC...
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../recipes-gnome/nautilus/nautilus_3.18.5.bb      | 29 ++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+its only about 2.5hrs to get there but early will leave a number of us late.
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-new file mode 100644
-index 0000000..1119309
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "File manager for GNOME"
-+SECTION = "x11/gnome"
-+
-+LICENSE="GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=36cf660aea2b8beffba7945f44a7e748 \
-+                    file://COPYING.EXTENSIONS;md5=7579d6678402a1868631bf82c93ff0d4 \
-+                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
-+
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/3.18/nautilus-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "0f578bda5655c0ce204befafca5803d7"
-+SRC_URI[sha256sum] = "60a927c0522b4cced9d8f62baed2ee5e2fd4305be4523eb5bc44805971a6cc15"
-+
-+DEPENDS = "gtk+3 gnome-desktop3 gsettings-desktop-schemas glib-2.0-native intltool-native pango"
-+
-+inherit distro_features_check autotools pkgconfig gobject-introspection
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+EXTRA_OECONF = " \
-+    --disable-gtk-doc \
-+    --disable-update-mimedb \
-+    --disable-nst-extension \
-+    --enable-tracker=no \
-+    --disable-schemas-compile \
-+    --enable-xmp=no \
-+    --enable-libexif=no \ 
-+"
-+
-+FILES_${PN} += "${datadir}/*"
--- 
-2.7.4
+T
 
+On Mon, Jan 15, 2018 at 3:41 PM, Zoran Stojsavljevic <
+zoran.stojsavljevic@gmail.com> wrote:
 
-
+> > March 11, 2108, Portland
+>
+> I guess, by this date yocto community will experience release 24.7 or
+> similar... If?! ;-)
+>
+> Zoran
+> _______
+>
+> On Mon, Jan 15, 2018 at 11:30 PM, Philip Balister <philip@balister.org>
+> wrote:
+>
+>> We are setting up an OpenEmbedded developer meeting on the Sunday before
+>> ELC. More information to follow, I just wanted to make sure everyone had
+>> the date before making ELC travel arrangements.
+>>
+>> March 11, 2108, Portland
+>>
+>> Philip
+>> --
+>> _______________________________________________
+>> yocto mailing list
+>> yocto@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/yocto
+>>
+>
+>
+> --
+> _______________________________________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
+>
+>
 
