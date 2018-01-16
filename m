@@ -1,28 +1,30 @@
-Return-Path: <jaragunde@igalia.com>
-X-Greylist: delayed 2638 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 16 Jan 2018 13:06:24 UTC
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id AC45678548
+Return-Path: <s.mueller-klieser@phytec.de>
+X-Greylist: delayed 437 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 16 Jan 2018 13:54:17 UTC
+Received: from root.phytec.de (mail.phycore.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F31960777
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jan 2018 13:06:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; 
-	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject;
-	bh=pkNN5Y5pyph87PXqBF5/ekBtoqofR4Oo1sWQmHHRPEQ=; 
-	b=JUQTUp6+frQ31fcLFkOr881Zklx7jztvLTKAIO124L2BtrElBhPbjP42rx93AsaAFW1h0GrwS01VHEDXhjt5bcHKAlhslZzcvq7jXyN0/j/IiOIiRhgsCK90HEVu+3Gyck5BP6Hj9NZ86iLqEVO+mNNP4f91MkrW0qfZbBFqO9V5NUfRNH91fXhc7HoOcgEEX8nf2fhRBarOf1rvFeIxzPUOyroj+Raj6Icr+GQhsLd8Kib2c8FLdPd63N9fKtexsHtoZGQlL0xnsbET5SK2WvSAaO5G9LQYl/MiSQB7Gpe6jER/+dgSejHwgcrQ42Hzs2SPoKxnqeJiPsVSwQ17TQ==;
-Received: from [192.168.10.193] by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1ebQG3-00061x-GE; Tue, 16 Jan 2018 13:22:27 +0100
+	Tue, 16 Jan 2018 13:54:17 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id 3550DA00324
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jan 2018 14:47:07 +0100 (CET)
+Received: from augenblix.phytec.de ([172.16.0.56])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP7)
+	with ESMTP id 2018011614470063-63760 ;
+	Tue, 16 Jan 2018 14:47:00 +0100 
+From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
 To: openembedded-devel@lists.openembedded.org
-References: <CY1PR02MB1287081D0CCB26032B3B05F3B0EB0@CY1PR02MB1287.namprd02.prod.outlook.com>
-From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
-Message-ID: <4b27f51d-6d50-46d4-f814-c003f9be5613@igalia.com>
-Date: Tue, 16 Jan 2018 13:22:27 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+Date: Tue, 16 Jan 2018 14:46:55 +0100
+Message-Id: <1516110415-2058-1-git-send-email-s.mueller-klieser@phytec.de>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CY1PR02MB1287081D0CCB26032B3B05F3B0EB0@CY1PR02MB1287.namprd02.prod.outlook.com>
-Subject: Re: [meta-browser] Running chromium as root
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP7|August
+	17, 2016) at 16.01.2018 14:47:00,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP7|August  17,
+	2016) at 16.01.2018 14:47:00
+X-TNEFEvaluated: 1
+Subject: [meta-qt5][PATCH] qtbase: fix pcre PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,26 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jan 2018 13:06:25 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Jan 2018 13:54:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi!
+Qt switched to pcre2 for 5.9. The configure switch has not been renamed.
+We just need to update the build dependency.
+This requires the poky commit:
+0204af2 libpcre2: add packages for 16-bit and 32-bit code unit support
 
-On 15/01/18 23:14, Bhargava Sreekantappa Gayathri wrote:
-> Hello,
-> 
-> Has anyone has been able to run chromium-x11 as root user? Is there a flag or config I can tweak before building chromium?
-> 
+Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
+---
+ recipes-qt/qt5/qtbase=5Fgit.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-You should be able to run chromium as root with the runtime flag
-`--no-sandbox`. No changes in the build process are needed.
+diff --git a/recipes-qt/qt5/qtbase=5Fgit.bb b/recipes-qt/qt5/qtbase=5Fgit.bb
+index 2fff961..c1557d8 100644
+--- a/recipes-qt/qt5/qtbase=5Fgit.bb
++++ b/recipes-qt/qt5/qtbase=5Fgit.bb
+@@ -109,7 +109,7 @@ PACKAGECONFIG[libpng] =3D "-system-libpng,-no-libpng,li=
+bpng"
+ PACKAGECONFIG[gif] =3D "-gif,-no-gif"
+ PACKAGECONFIG[ico] =3D "-ico,-no-ico"
+ PACKAGECONFIG[zlib] =3D "-system-zlib,-qt-zlib,zlib"
+-PACKAGECONFIG[pcre] =3D "-system-pcre,-qt-pcre,pcre"
++PACKAGECONFIG[pcre] =3D "-system-pcre,-qt-pcre,pcre2"
+ PACKAGECONFIG[eglfs] =3D "-eglfs,-no-eglfs,drm"
+ PACKAGECONFIG[gl] =3D "-opengl desktop,,virtual/libgl"
+ PACKAGECONFIG[gles2] =3D "-opengl es2,,virtual/libgles2 virtual/egl"
+--=20
+2.7.4
 
-Take into account such a setup is discouraged for security reasons!
-
-Best,
--- 
-Jacobo Aragunde
-Software Engineer at Igalia
 
