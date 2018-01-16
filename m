@@ -1,31 +1,31 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id 35A2060807
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 0FC4D71B57
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jan 2018 04:15:15 +0000 (UTC)
-Received: (qmail 27394 invoked by uid 1003); 16 Jan 2018 04:15:19 -0000
-Received: from unknown (HELO ?192.168.11.100?)
-	(philip@opensdr.com@73.216.230.216)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	16 Jan 2018 04:15:19 -0000
-To: Tom King <ka6sox@gmail.com>,
-	Zoran Stojsavljevic <zoran.stojsavljevic@gmail.com>
-References: <137d31ae-329e-53ff-f495-259168b787d5@balister.org>
-	<CAGAf8Lws8HfvDvMvdpgXyTvKaVpmf5a1UUTbBc2OrTpw=mgPNA@mail.gmail.com>
-	<CAHQecY5FEt0jMY97Cfq7tR4KAETqied0t3zfFgXw=J5YBSz53A@mail.gmail.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <f94fc2c7-032a-651a-a0d2-d5860f133b6c@balister.org>
-Date: Mon, 15 Jan 2018 23:15:16 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
-MIME-Version: 1.0
-In-Reply-To: <CAHQecY5FEt0jMY97Cfq7tR4KAETqied0t3zfFgXw=J5YBSz53A@mail.gmail.com>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] OpenEmbedded developer meeting Sunday before ELC in Portland
+	Tue, 16 Jan 2018 06:43:36 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id E950F20B82;
+	Tue, 16 Jan 2018 06:43:37 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id Nbr2zAbuKHhQ; Tue, 16 Jan 2018 06:43:37 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C8C7720B77;
+	Tue, 16 Jan 2018 06:43:36 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 5576C163266;
+	Tue, 16 Jan 2018 01:43:36 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 16 Jan 2018 01:43:35 -0500
+Message-Id: <1516085015-89929-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-networking][PATCH] ndisc6: need to set USE_NLS="yes" to use gettext.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,61 +38,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jan 2018 04:15:16 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Jan 2018 06:43:37 -0000
 
-On 01/15/2018 10:57 PM, Tom King wrote:
-> What time...a number of us are headed up from SCaLE sunday morning to ELC...
-> 
-> its only about 2.5hrs to get there but early will leave a number of us late.
+From: Denys Dmytriyenko <denys@ti.com>
 
-We know. It is painful. YP Dev Day is the Thursday after, and I suspect
-we would lose people waiting until Friday.
+Otherwise we can get gettext-minimal-native dependency instead, which does not
+provide gettext.h header.
 
-I tried really hard to avoid the usual day/date error. I blundered the year.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ meta-networking/recipes-support/ndisc6/ndisc6_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Philip
+diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+index 48a83b8..58f1230 100644
+--- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
++++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+@@ -22,6 +22,8 @@ EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
+ LDFLAGS += "-fuse-ld=gold"
+ TOOLCHAIN = "gcc"
+ 
++USE_NLS = "yes"
++
+ do_configure_prepend() {
+     cp ${STAGING_DATADIR_NATIVE}/gettext/gettext.h ${S}/include
+     ${S}/autogen.sh
+-- 
+2.7.4
 
-> 
-> T
-> 
-> On Mon, Jan 15, 2018 at 3:41 PM, Zoran Stojsavljevic <
-> zoran.stojsavljevic@gmail.com> wrote:
-> 
->>> March 11, 2108, Portland
->>
->> I guess, by this date yocto community will experience release 24.7 or
->> similar... If?! ;-)
->>
->> Zoran
->> _______
->>
->> On Mon, Jan 15, 2018 at 11:30 PM, Philip Balister <philip@balister.org>
->> wrote:
->>
->>> We are setting up an OpenEmbedded developer meeting on the Sunday before
->>> ELC. More information to follow, I just wanted to make sure everyone had
->>> the date before making ELC travel arrangements.
->>>
->>> March 11, 2108, Portland
->>>
->>> Philip
->>> --
->>> _______________________________________________
->>> yocto mailing list
->>> yocto@yoctoproject.org
->>> https://lists.yoctoproject.org/listinfo/yocto
->>>
->>
->>
->> --
->> _______________________________________________
->> yocto mailing list
->> yocto@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/yocto
->>
->>
-> 
 
