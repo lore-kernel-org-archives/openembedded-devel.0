@@ -1,54 +1,57 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id AE52B786D8
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ot0-f173.google.com (mail-ot0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id A349678741
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jan 2018 11:09:44 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id i11so14771833wmf.4
+	Wed, 17 Jan 2018 11:19:36 +0000 (UTC)
+Received: by mail-ot0-f173.google.com with SMTP id t35so9831791otd.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jan 2018 03:09:46 -0800 (PST)
+	Wed, 17 Jan 2018 03:19:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:date:in-reply-to:references:organization
-	:mime-version:content-transfer-encoding;
-	bh=uoN29vWMlSBXomW/ajkV/Pf+XiD/1n6wZwOOg7Xw8tE=;
-	b=gXppHpikH1SiPL+z1K3tGV8zDoCXarPzQAJNtce2nzFuHeDEY9sojkUH3AnRoAqgja
-	W6paQ2+N9uNTjvJvFYUbfTDlzGPHIZbLJzOpry1v55x1pFp5TEvA0Cq+eZObGa4WKTvZ
-	fN8Ew4a2vro1zL0TKQHPrpsNQtsWSOigHWblPcmvf5X1luzSrKxQo+BZcoe3gyGCbj+R
-	m+mLC0WvcJPTBM9J4Z+Cm9fbGYdEVXUogES2sxP1XhLHCvYvNrTxT0reUw+dh00lBlbU
-	otCgJ/ziNCnfZEPOVGTFWPQYpMmztIIFEJC/30NRN2rikLxSMKj4ATbEO/cB6pgpLh2P
-	KI0g==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:date:message-id:subject:to;
+	bh=vzn9yJ1fYZzF7Iuo8tWEaPFzKQkzZ0Pka1hqSVSapek=;
+	b=to/W/KWKpAMzB250F/ysVfa5npCqzQx5qWb7jR6UQ8ZjaPPeJwe0nhepbQMqcDE9Qi
+	eIwyb0a5+YXB2gmdkEoXZx7el1HBbdZu2It6FlHCgpDz4U3avSSgm3oo+i9/zZZF2WX1
+	7YllAzwcCoQ8VGa8CwN3sPnMJin7Sg+AXd503WR60uWy2l6T1xh+pBbIndhekE5KUdO3
+	O1nqsAUXxnJ8weboFsVsfWT0epDrkYMZzzt8iDWlfamBn0mZCmF6wXCP9rjPIjOk0vVc
+	h3/Ay5t1HNbKzjLrC41kHOeNPrVznQje82zIjPXtokfuIIuqWMWNGT53XXUDxZxU4gTK
+	VrFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=uoN29vWMlSBXomW/ajkV/Pf+XiD/1n6wZwOOg7Xw8tE=;
-	b=qDSLh3us6HDQGrURhUh8z78+ne8ToUPZ62J6jzAfHHrXzS7uLt+fY3SkqmGEKWwwfy
-	0SKLBACfCSoCOvNkHYByUVJcN9O29DZY3BiDUdY42ultQeE+BOH/CqhwJWlM8yn7HX2D
-	087fZKoYSL/Z2PP67MDReYdhhHmH7/HibkkI2U7JWQ19QuUAreB0ZBqBTM3D40AlyJsq
-	rvFV/dsJD7wXbjQbLKzbjWqS5/9wD+eXwvG2maOOjWGUqzVpnWrpR9KLcBSzRxoQ0YvR
-	vQUS0KrTTUUuP9o49vx2wX4+BSTZvO92cWuL0808rKPmIiEET2FfkZ/h8AdbHNMFWpIq
-	sxJA==
-X-Gm-Message-State: AKwxytf7yiK7/GgHq+2LP1iKRx0l6F598c6OG6qSIPmwbFUfp7gpBMOd
-	2dG0JETLn8yiRGOoF7GLUE7rCqM=
-X-Google-Smtp-Source: ACJfBotsHIVUKWQM/aZQLEOjAbj2y9MN/d/Py0YFS6oqBus4xBaARf2PT2iKgwYQiNERbYOJQiq+og==
-X-Received: by 10.28.222.5 with SMTP id v5mr1791532wmg.161.1516187385290;
-	Wed, 17 Jan 2018 03:09:45 -0800 (PST)
-Received: from pohly-mobl1 (p54BD5DCA.dip0.t-ipconnect.de. [84.189.93.202])
-	by smtp.gmail.com with ESMTPSA id
-	s17sm5987596wmd.34.2018.01.17.03.09.44
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 17 Jan 2018 03:09:44 -0800 (PST)
-Message-ID: <1516187383.6718.35.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: Denys Dmytriyenko <denis@denix.org>, 
-	openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jan 2018 12:09:43 +0100
-In-Reply-To: <20171003234535.GG16828@denix.org>
-References: <20171003234535.GG16828@denix.org>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.22.6-1+deb9u1 
-Mime-Version: 1.0
-Subject: Re: nativesdk-qtbase 5.9.2 C++11 errors with gcc 6.3?
+	h=x-gm-message-state:from:mime-version:date:message-id:subject:to;
+	bh=vzn9yJ1fYZzF7Iuo8tWEaPFzKQkzZ0Pka1hqSVSapek=;
+	b=tPl096D3vaJJffA02urpl3FgD90UUJApOmAq54pWg5LVo3evnBdiqFYdI0QRJ+8Aws
+	pEoXU/kNyq4iIgdRR+BXFhLlkGF22y+Xf7lT76wp1tC2z9PfkgMxJMhRXIWZsRYLpTZC
+	MN9IsuRIytB4uvKeYYAvlSd8NGF9pV8LJ+Y4IRjsSnaeQkv9i2mXzhzzKXlQ4rE4JVy0
+	HpXeSYiibeMdwJ0pydlscj0OHusdS/s4gF6iA1UUUcLvCfSFZaqbeefHiN/f/mFwg/jn
+	misxuyMwDAz6YfhwFmxZ0rivfoemdvwgZSaK+2T5HQDq4R67xPAb7ZSIHVKcmlLoNc3a
+	R4wg==
+X-Gm-Message-State: AKwxytfz8a8E9fplD8TUOEQyKAN/Z2KpcdaJGTbqYE/2ZPb+njBQbaY6
+	Wakp2ecjY7uZ3Q4iUYNLHsih6AVa
+X-Google-Smtp-Source: ACJfBovoaIKm34PEcmqX4KaR47stkU7CvVRcQOxFLEjpIDMk0gRpMMJDiQl2OZaS3Vp7FMg8yxn2lg==
+X-Received: by 10.157.12.37 with SMTP id 34mr983532otr.84.1516187977578;
+	Wed, 17 Jan 2018 03:19:37 -0800 (PST)
+Received: from mail-ot0-f169.google.com (mail-ot0-f169.google.com.
+	[74.125.82.169]) by smtp.gmail.com with ESMTPSA id
+	q12sm2006088oti.48.2018.01.17.03.19.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 17 Jan 2018 03:19:36 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ot0-f169.google.com with SMTP id s3so16487164otc.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Jan 2018 03:19:36 -0800 (PST)
+X-Received: by 10.157.37.8 with SMTP id k8mr928883otb.392.1516187975718; Wed,
+	17 Jan 2018 03:19:35 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.157.38.102 with HTTP; Wed, 17 Jan 2018 03:19:35 -0800 (PST)
+Date: Wed, 17 Jan 2018 09:19:35 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKryMRC89jUui6wtsZii8Q_WHhGhrtRT=so019oHzLUjLA@mail.gmail.com>
+Message-ID: <CAP9ODKryMRC89jUui6wtsZii8Q_WHhGhrtRT=so019oHzLUjLA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: qtbase failing due host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,56 +64,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jan 2018 11:09:45 -0000
+X-List-Received-Date: Wed, 17 Jan 2018 11:19:36 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 
-On Tue, 2017-10-03 at 19:45 -0400, Denys Dmytriyenko wrote:
-> Martin, Khem,
-> 
-> Have you tried building Qt 5.9 with gcc 6.3 from oe-core? I'm seeing
-> bunch of 
-> what seems to be C++11 related errors during do_configure of
-> nativesdk-qtbase. 
-> Target qtbase builds fine and switching to gcc 7.2 seems to resolve
-> it as well.
-> 
-> Any ideas or pointers? Thanks!
-> 
-> 
-> Errors are like these:
-> 
-> In file included from
-> ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1:0,
->                  from /OE/master/build/tmp-glibc/work/x86_64-
-> nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-
-> r0/git/src/corelib/tools/qarraydata.cpp:42:
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/core
-> lib/global/qnumeric_p.h: In function 'bool
-> qnumeric_std_wrapper::__builtin_isnan(double)':
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/core
-> lib/global/qnumeric_p.h:104:45: error: '__builtin_isnan' is not a
-> member of 'std'
->  static inline bool isnan(double d) { return std::isnan(d); }
+Hello folks,
 
-I'm getting the same error when building qemu 2.8.0 for intel-corei7-64 
-with gcc 6.3.0.
+Did someone see:
 
-The reason seems to be that somewhere there's a
-  #define isnan __builtin_isnan
-which doesn't work in C++ because std::__builtin_isnan    does not
-exist.
+ERROR: qtbase-5.9.3+gitAUTOINC+4d8ae444c2-r0 do_package_qa: QA Issue:
+qtbase: /qtbase-staticdev/usr/lib/libQt5PlatformCompositorSupport.a is
+owned by uid 1001, which is the same as the user running bitbake. This
+may be due to host contamination [host-user-contaminated]
 
-I'm still looking for the define... if someone has suggestions, I'm all
-ears.
+In any builds?
 
 -- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
