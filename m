@@ -1,47 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D8E57871C
+Return-Path: <athoik@gmail.com>
+Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id CEDCA78062
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jan 2018 17:06:19 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id r78so17281318wme.0
+	Wed, 17 Jan 2018 21:20:32 +0000 (UTC)
+Received: by mail-pg0-f46.google.com with SMTP id g16so5480731pgn.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jan 2018 09:06:21 -0800 (PST)
+	Wed, 17 Jan 2018 13:20:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=SzWHqpF32lY3/cCjgaKCQuxLv/TsxNsubl1Jqo6KVzw=;
-	b=QpamqYc1uKrYu0wXRyEIgkAZKoB0rnfpGFIrLSfJYfxXvwgVz0MyUTK0XEW8MJAij9
-	Lg4ef0RhSmCx2zKVweij7VHdo/TS1rOyDG7cM2wvXpyfC73kYhqYe+PbIuOyHmnGZpvs
-	Hbg7sslpmaD3h/Cgjjf23fLfy+XRAYze/sh6jTQSsjemndoGpGZLsa0UEsitgODNtC+I
-	zaNIkbPFQzEdwG+c87ZO9nzFs72PXkWrM3UNu15hAXrHcjmoGdRwcWz1YWkn0260y5h5
-	Fq9v9xfoB61J5NGi3me/t6f2F389YkgyTvZfT+ovSatBy84CBso4DHiQrZ/ufnEFVr/g
-	+lkQ==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=bIE4N0WW5dqp5wbK8cWR6F6JWQJi1XdaXsN4rkD3QVE=;
+	b=cJPA/dM68CcfJyGnXhDcrpJvX5DzQSEAxyxoMzFI6qk/r+mm9ppQfPU/L/QxbW6XyI
+	AmmpaYEQ3sE9mDAh1U0sN0+wpA6ndcLBD8/sUxWKfXufeqtQCfSVBARN73iFitkcixVv
+	8LBPROAD/Tp3CkQiE4GfD6ZiA7s82fJtxr3dxNcdGTtNx9Z2QCiXwIBCTvcGRAsdHnTY
+	0L1x052j8Yiu5crK/zF4WU8LsSmf6y9bLxvQERk8bmD0AVMUxE7r7Xvv2iy4lAygVB/m
+	FE1WMjVoa8gK8wZdM3eupIxrPp7YgpBqujfdYRtEIVcl4LZufb9qvOXL49raRdAvQcNi
+	fCoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=SzWHqpF32lY3/cCjgaKCQuxLv/TsxNsubl1Jqo6KVzw=;
-	b=sHkIsrpG02nghOwK0r9lCNlXCZIqnnOLwpMPWzIAJV+zr+N5C+8PqPqtPRWw6r5QMU
-	4Va6TKXGChYWtUQsk4ZG5a0NPtqZoEjvE4d+KAjIYJ2gqyo+tsDQkYVk4R8STsIQxN0n
-	VJUPZdTjRSN749RhJf/U5vkZoPpAJdiBoHD8MRj4dDhNd/YCeBJHx6Xrqf2KN3QvCGyo
-	4HRSsDjOdK/1ycmRIDPKB8MttYrFkyFga9n8PVPuN4jIwPZVoo9LJ2wZ8sckmr9w8Bc7
-	o4YxoLD1BwtdC9G5r5qk4YySQC+r4sKCHoyacs6oDo97RmraJxl1gQiq/5OMz3lMuzej
-	evZQ==
-X-Gm-Message-State: AKwxytfZP6K5FKX/AAC/kSYH5Bzu17Z7bPx5KGbd0/hqIUL38dGocVpW
-	K7lRDeu/hIc/8HVH0Zc/GragE42qJhg9SRh3ONOslQ==
-X-Google-Smtp-Source: ACJfBotXjKV08WOyp6tqIUP3YQXzhBJaTfRgBSk7+50NgAB6YWOOaB6yolU8yk5VI7wHIi8KzgI4CUVBVk4/TCe/vio=
-X-Received: by 10.28.109.79 with SMTP id i76mr2575052wmc.142.1516208780799;
-	Wed, 17 Jan 2018 09:06:20 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=bIE4N0WW5dqp5wbK8cWR6F6JWQJi1XdaXsN4rkD3QVE=;
+	b=K5pxZfranH6SUC7behfmWP5oqAeebI1qoT3VUp5XJWo+ibH0ur1adQQElFYBGWq1wz
+	Pk1TnSD6yUWY8cKsbNdHS0E9C+kOA/4eLKBWLf8rm0aVEQUpzMiuyFnhKMUdrEBqUH6N
+	NM3vUOB4e6qASZQkXi7qvlPiGmwoBmurK+zBCp+2ojbSmI/4noq53xITfV+dc51sF6iD
+	Hc5ZSdx3IgeSr6t7cayavReeA8U6PQJZ9a1jVytiJsMl+s05qpb2vyxp8DfbbktgcTn3
+	FSSPCFAayDF/UGGBO94ljN6bvA2vf3hPbIQhEoCL8YuhI6HltkbIuznpwAee7mMKL1y4
+	XkNA==
+X-Gm-Message-State: AKwxytdRRnaDV+8QDqUhHF4axIMIrn9yBZxDIlvZfaLryjE4ejMqDO10
+	n3E1IGvHT/S9SJJmEalZwqwlSQkzxwiDQbjtA07l
+X-Google-Smtp-Source: ACJfBov/2/uizGLVXv/dVXRRz448Huxdc51S/SGz2Bkee3Gnn95xFXgUTLxcyYT1n1jYpJIPWPgOzgaB/uDjICuEwkY=
+X-Received: by 10.84.248.144 with SMTP id q16mr22985478pll.150.1516224031221; 
+	Wed, 17 Jan 2018 13:20:31 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.122.19 with HTTP; Wed, 17 Jan 2018 09:06:19 -0800 (PST)
-In-Reply-To: <CAP9ODKryMRC89jUui6wtsZii8Q_WHhGhrtRT=so019oHzLUjLA@mail.gmail.com>
-References: <CAP9ODKryMRC89jUui6wtsZii8Q_WHhGhrtRT=so019oHzLUjLA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 17 Jan 2018 18:06:19 +0100
-Message-ID: <CA+chaQdZE_4orLtqrQezX8bLFyb_kH3xMbW6OG07uobgNZ7_kw@mail.gmail.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: qtbase failing due host contamination
+Received: by 10.236.166.2 with HTTP; Wed, 17 Jan 2018 13:20:30 -0800 (PST)
+From: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
+	<athoik@gmail.com>
+Date: Wed, 17 Jan 2018 23:20:30 +0200
+Message-ID: <CANDbA3d=8s+fo78NAacpW31PRsO-UkpEApE8cC6EM=QsRPx16w@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-openembedded] fix getVar/setVar syntax on morty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,40 +50,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jan 2018 17:06:20 -0000
+X-List-Received-Date: Wed, 17 Jan 2018 21:20:32 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Yes, I'm seeing these errors on various files (including qtbase, e.g.
-ERROR: QA Issue: qtbase:
-/qtbase-mkspecs/usr/lib/mkspecs/modules/qt_lib_core.pri is owned by uid
-1101, which is the same as the user running bitbake. This may be due to
-host contamination [host-user-contaminated]) for some time.
+Hi,
 
-There is Yocto ticket with more details:
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=12434
 
-On Wed, Jan 17, 2018 at 12:19 PM, Otavio Salvador <
-otavio.salvador@ossystems.com.br> wrote:
+Is it possible to cherry-pick commit
+d361ef01a9a61cd8a83f7728f7d3e9f118233cb8 nis, opencv: Update
+getVar/setVar syntax on morty branch?
 
-> Hello folks,
->
-> Did someone see:
->
-> ERROR: qtbase-5.9.3+gitAUTOINC+4d8ae444c2-r0 do_package_qa: QA Issue:
-> qtbase: /qtbase-staticdev/usr/lib/libQt5PlatformCompositorSupport.a is
-> owned by uid 1001, which is the same as the user running bitbake. This
-> may be due to host contamination [host-user-contaminated]
->
-> In any builds?
->
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+It helps building morty using bitabake 1.34 where deadlock problem
+(commit 3cb0d1c78b4c2e4f251a59b86c8da583828ad08b bitbake-worker:
+Handle cooker/worker IO deadlocking) is resolved. Will 1.34 bitbake
+there are no delays any more on the building process.
+
+Of course if there is a fix for the 1.32 branch of bitbake, that would
+be fine too. It was faster to use 1.34 branch for me.
+
+Finally another small fix required in oe-core,
+meta/classes/binconfig.bbclass but that's another mailing list
+discussion.
+
+Thanks,
+Athanasios
 
