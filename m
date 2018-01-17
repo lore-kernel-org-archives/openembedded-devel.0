@@ -1,56 +1,53 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id BEEA3786D3
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8321378695
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jan 2018 06:20:13 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id l17so9679414ioc.3
+	Wed, 17 Jan 2018 08:34:51 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id f71so13416902wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jan 2018 22:20:15 -0800 (PST)
+	Wed, 17 Jan 2018 00:34:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=bG8KiiISCsb3qfIAjo5gw4qKTQDhP7A5wBC543iRC/U=;
-	b=YLt1dLGxnSY3y4jL7umB1ekqMirXIPYYIPRe1zhdeiTCwgPoVifKvcqXygAVC3YOZf
-	PtdwdmZenZ/dKfXqQY+UfadG3sTM5UFn0nKXyXf3NUXk7WE/8K7ws6WO1LS4bPD8J9jw
-	wCEBbDTN5bq6wC+tHBrvFWSJqhlQR764Q2RD7SnHEWWA8aVxbjVswZ/fyLnhu01C04B0
-	CRIcn76XGSy+7SzgwH8tOxEjiWmK+1jge3jhCG50/dFgBh8DH6UzFcU2NeOwGL/qAy61
-	lx8+suO2MknLZTZiemaUvpEFXAHG1m6RaNwNjY6ACzop4uOO6BV+nDGYZq4+dToNOASt
-	6nGA==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=IYuBhHRwoor6qQs66IiFWs6begc/s0KFbOx8r2Rsp78=;
+	b=A9Y7lxsVpMvjQlgDBgbfgyRfaWnVIZMTkT2dPOtWYl7PgSqbFOhAxf52qAuYdghG6p
+	zmqHgHmcntVNs3htQLEJCq/vEFxwuGEf0uhPxfKU5ccnaUWcH/LmXDcpK0djW4LwzjR0
+	WxwwOoWatFckJ8BGZlp4b6/AYYeJxqalxDtdUm7F0zUzmYpG9e+ygthHAy3X1er9X1x1
+	r4SkB4TXVFsEDAykY4RZmwXPvennVhqFOkv4LPMAK9BJ7HIJh1O+h5iFsC8cA5FnqRX7
+	/rjN9CbA6Zn8ANAV/cApS12amYOVZtJM2NrcDOXxCyQT08YdoTTw4CKVeKNkhjoJQHBQ
+	x59g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=bG8KiiISCsb3qfIAjo5gw4qKTQDhP7A5wBC543iRC/U=;
-	b=Cw9K/AUXxN/hWpNHm8HdtLX94mm4Ws9wsuwB0mv01RSj8VOgSja1lUizFf3lgyLUon
-	i0pI+wkd8XmjsWotsGuKan6oCL00QGkB9MhsPYEFNeMYb0ExQKNYRJvtIQLQwTWYM+G7
-	9tYt115aIuXNnxG7t4dLU8O4fAZNjWofNEBzYzmM6fN8+Y82uaWSlxUSeC+B4K7n+a6R
-	WYc/uv9V/5x0h0T0Ht4Rn+DLrke/veqif01b5RjnI3RRdGMbqBjX0hy7KF9aHtVE7NFf
-	zYxFU5q2wJR/qZnmHllGEqd9zC/24sro1ZshQw685hk5BVHs2T53kpiosi20EoUg2nQ7
-	P4tQ==
-X-Gm-Message-State: AKGB3mJEG6N+Y+YPOkTSwPoajSeuFlPWDAeOGN+xWuNycQHsskWWTFpd
-	P2B1CJGukBtxQjknEzg3Z1nIBA==
-X-Google-Smtp-Source: ACJfBos3ZUbVvRjR92lxJxcHWL7Hj8eGqx1ZCkY9szdy+1ebK2gaL77V3o2VYGlk3DpyxQH5VzVkgQ==
-X-Received: by 10.107.148.197 with SMTP id w188mr38186645iod.277.1516170014837;
-	Tue, 16 Jan 2018 22:20:14 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:242f:c14a:feac:fa0c?
-	([2601:202:4000:1184:242f:c14a:feac:fa0c])
-	by smtp.gmail.com with ESMTPSA id s4sm2022126ita.12.2018.01.16.22.20.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Jan 2018 22:20:14 -0800 (PST)
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	openembedded-devel@lists.openembedded.org
-References: <20180112122942.22396-1-git@andred.net>
-	<1515760402.28972.39.camel@andred.net>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <fcae9a6d-a41f-b22a-7d10-b84bf02bd056@gmail.com>
-Date: Tue, 16 Jan 2018 22:20:12 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=IYuBhHRwoor6qQs66IiFWs6begc/s0KFbOx8r2Rsp78=;
+	b=C88ll4F4ncl8y9CdmLK3WH7PJQ5rI1cZc6rO2pQlKWkiY5YwiuXt66F3ERJKL4CZmz
+	iKGxkfbnHR3RWTTpssRBex+LOpoGy4zMkOYJ5YxoEZXm1c9vxqKmiPubjJYwkniHx7Ra
+	wtQC/66We1pdK9cvaslMbpPRVuLRtq4v5+mhn507rQa0pZKiG4IAwDed2aKBdXygCon+
+	tLJ4+lW2SctlTAMPQoupuLgUgbZSvPdPa9Nij96HlUkzFRpcza2GJqNiMpFBJOMLdN0m
+	7Sg1zWE8wunr8HwLfpaiHl0epcwzmwnGzKikvknL/dEY3sxpMN1Ph/MJ+jdVhUcZngbi
+	md6w==
+X-Gm-Message-State: AKwxytdk6H4u6Th2WNurmO52KMb/Y5oPwP2uGr9NJzQafrFHiN4ygTKG
+	t0Kk06BiwBBtN0lYlgmD+OAhBg==
+X-Google-Smtp-Source: ACJfBouLyH3qv8XOnJZ6gY/HGjwxgH1MzGT8MyOwPyRSR85dhSy375OdweSXYcXOzakR09GrfO3oCA==
+X-Received: by 10.28.194.137 with SMTP id s131mr1611281wmf.3.1516178092060;
+	Wed, 17 Jan 2018 00:34:52 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-88-152-110-191.hsi03.unitymediagroup.de. [88.152.110.191])
+	by smtp.gmail.com with ESMTPSA id
+	c54sm4230832wrg.68.2018.01.17.00.34.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 17 Jan 2018 00:34:51 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Jan 2018 09:34:08 +0100
+Message-Id: <20180117083421.30233-2-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
+In-Reply-To: <20180117083421.30233-1-schnitzeltony@gmail.com>
+References: <20180117083421.30233-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1515760402.28972.39.camel@andred.net>
-Subject: Re: [meta-oe][PATCH 1/2] uthash: update to v2.0.2
+Subject: [PATCH 01/14] xfce4-panel: update 4.12.1 -> 4.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,35 +60,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jan 2018 06:20:14 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Wed, 17 Jan 2018 08:34:51 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../xfce4-panel/{xfce4-panel_4.12.1.bb => xfce4-panel_4.12.2.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.12.1.bb => xfce4-panel_4.12.2.bb} (91%)
 
-
-On 01/12/2018 04:33 AM, André Draszik wrote:
-> On Fri, 2018-01-12 at 12:29 +0000, André Draszik wrote:
-> [...]
->> +HOMEPAGE = "https://troydhanson.github.io/uthash/"
->> +SECTION = "base"
->> +LICENSE = "BSD-1-Clause"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5cc1f1e4c71f19f580458586756c02b4"
-> Note that there is no common license file for BSD-1-Clause in OE-core, which
-> causes this warning:
->
-> WARNING: <image> do_rootfs: The license listed BSD-1-Clause was not in the licenses collected for recipe uthash
->
-> Is this really the first recipe using BSD-1-Clause?
-
-Does the standalone "BSD" license over Clause 1?
-
-> Should a license file be added to OE-core, or is there a different approach
-> taken normally?
->
->
-> Cheers,
-> Andre'
->
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.1.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.2.bb
+similarity index 91%
+rename from meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.1.bb
+rename to meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.2.bb
+index 80332cebe..75bcdd716 100644
+--- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.1.bb
++++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.2.bb
+@@ -8,8 +8,8 @@ inherit xfce gtk-doc distro_features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI[md5sum] = "0b943f2e72a3693dddb1af559826cb62"
+-SRC_URI[sha256sum] = "93d58b80cca9c9eb58adb281bc75404df7cf6cae89f7f98bb9f38690009aa2e8"
++SRC_URI[md5sum] = "803c9aabc2925dc97f96de125c52ba2e"
++SRC_URI[sha256sum] = "42058abb81b8f87691d3999627447de71c3285bcf055f308aab5cefab2de0ce9"
+ SRC_URI += " \
+     file://0001-clock-time-make-change-of-system-s-timezone-change-t.patch \
+     file://0002-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
+-- 
+2.14.3
 
 
