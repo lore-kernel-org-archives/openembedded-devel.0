@@ -1,30 +1,55 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D37D786BB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jan 2018 01:38:07 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35427539"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Jan 2018 09:38:07 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 6D8C3486A76D
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jan 2018 09:38:06 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.156) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Thu, 18 Jan 2018 09:38:06 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 14 Jan 2018 12:08:37 +0800
-Message-ID: <1515902917-129721-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7934F71A32;
+	Thu, 18 Jan 2018 06:05:03 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id f3so20337528wmc.1;
+	Wed, 17 Jan 2018 22:05:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=foeeyFrzAbA0bGrBWd/LR+oyEu0lRN0WX6PhKCEVV8o=;
+	b=u6sRjZ70hJ/RXLPwn7ErG2LFLHzC+iHDao1keVjOYre2MPzxdZA63uBlXa48CAR/LP
+	SUmVA19uk3VUk9VflxU3Q7o/JSuAG49uiTZ/+coePzQ4g0NKDaQS2M8PU0VEE9V5EjYN
+	Eo2KnXFZb+775djaHVLnIoyBkFJ/FEp1/VOwQur4vq0gjUVHOCvh6SbYcQ7xvGLVNZLg
+	6UeWPS21II5kzDU1sq4SrftxN7dYgVLfiv0FAMeOyO653DnxQAp+4u+rcO4f+aDaRKgA
+	ywa5BFI2iXgM0gJXzqGcqzhdiyTx05/Iv1B6IaqJzLAW1aTH9/VLR7JOvbTpPL/sFvQN
+	nkug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=foeeyFrzAbA0bGrBWd/LR+oyEu0lRN0WX6PhKCEVV8o=;
+	b=PtkmeI1M01ghk1hcV2lmuJBATo+OhdhoLPchuNYNuIqkbVk7vAd2UeOra4l0Trzqxb
+	m2Zbv5eGocSyLfBmPOTjLWr5krMacQaYR7TbJT7RoQ67FvU+Z5eef1wtIAQyaZDUFz7s
+	3Pc3svR5t3f560QralLHC0TOYQ8RAYsIqLp7PFYrgyFMsc4WQjRNXgJkCVJZrPlnH5Tj
+	oPfr66OYUWxaSg5ZQnuSKTjw5oVVfr5ckv8/c+pvLgBqlCM4jhLjOAlnugWEPzz+mrk5
+	/9lnSFvqPgyoiN8TQQuwzijrxooif5Cw9VfRjxBSx2KIDEh7z9g9ILue54rXv4zMUtH4
+	R32Q==
+X-Gm-Message-State: AKwxytdTq0V5yAiiYRXoq5DK3v3JELXziW9Y6VOgTWm415eN0nhwUQmL
+	6ylsvCf3XzzJqVcyO82DS+NUkSUlBgNzhYmA2K8=
+X-Google-Smtp-Source: ACJfBovIbJoD/qJT38/Go7qXMn5qzeKb+khmibsYPdqj3GJCaQkWlGykHrgfuQm6mUUsGA2SpcJtEg+yhNmR2lFkq3g=
+X-Received: by 10.28.154.67 with SMTP id c64mr4287142wme.125.1516255504235;
+	Wed, 17 Jan 2018 22:05:04 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 6D8C3486A76D.A853A
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v4] nautilus: new add
+Sender: jefro.net@gmail.com
+Received: by 10.223.149.145 with HTTP; Wed, 17 Jan 2018 22:04:43 -0800 (PST)
+In-Reply-To: <f94fc2c7-032a-651a-a0d2-d5860f133b6c@balister.org>
+References: <137d31ae-329e-53ff-f495-259168b787d5@balister.org>
+	<CAGAf8Lws8HfvDvMvdpgXyTvKaVpmf5a1UUTbBc2OrTpw=mgPNA@mail.gmail.com>
+	<CAHQecY5FEt0jMY97Cfq7tR4KAETqied0t3zfFgXw=J5YBSz53A@mail.gmail.com>
+	<f94fc2c7-032a-651a-a0d2-d5860f133b6c@balister.org>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Wed, 17 Jan 2018 22:04:43 -0800
+X-Google-Sender-Auth: rR4E8ZDRt7Wf5Piywj-vVtMBxU4
+Message-ID: <CA+YB3rZ2ZthR+bV0RZR-Af4q4X1OhEWo4oy9YhizVbHDnw+=ug@mail.gmail.com>
+To: Philip Balister <philip@balister.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Zoran Stojsavljevic <zoran.stojsavljevic@gmail.com>
+Subject: Re: [yocto] OpenEmbedded developer meeting Sunday before ELC in Portland
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,54 +62,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jan 2018 01:38:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 Jan 2018 06:05:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add a new recipe nautilus.
+> We know. It is painful. YP Dev Day is the Thursday after, and I suspect
+> we would lose people waiting until Friday.
+>
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../recipes-gnome/nautilus/nautilus_3.18.5.bb      | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+SCaLE doesn't usually coincide the week before ELC, so this year was just
+bad timing from the universe.
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-new file mode 100644
-index 0000000..35fc711
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "File manager for GNOME"
-+SECTION = "x11/gnome"
-+
-+LICENSE="GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=36cf660aea2b8beffba7945f44a7e748 \
-+                    file://COPYING.EXTENSIONS;md5=7579d6678402a1868631bf82c93ff0d4 \
-+                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
-+
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/3.18/nautilus-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "0f578bda5655c0ce204befafca5803d7"
-+SRC_URI[sha256sum] = "60a927c0522b4cced9d8f62baed2ee5e2fd4305be4523eb5bc44805971a6cc15"
-+
-+DEPENDS = "gtk+3 gnome-desktop3 gsettings-desktop-schemas glib-2.0-native intltool-native pango"
-+
-+inherit distro_features_check autotools pkgconfig gobject-introspection gtk-doc
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+EXTRA_OECONF = " \
-+    --disable-update-mimedb \
-+    --disable-nst-extension \
-+    --enable-tracker=no \
-+    --disable-schemas-compile \
-+    --enable-xmp=no \
-+    --enable-libexif=no \ 
-+"
-+
-+FILES_${PN} += "${datadir}/*"
--- 
-2.7.4
-
-
-
+I propose we start with the board meeting at 9:30 and plan OEDAM to start
+at 10:30 to enable people to get there. We can have lunch late and go until
+6 if needed.
 
