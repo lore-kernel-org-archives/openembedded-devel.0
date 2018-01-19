@@ -1,54 +1,47 @@
-Return-Path: <darknighte@darknighte.com>
-Received: from mail-qt0-f182.google.com (mail-qt0-f182.google.com
-	[209.85.216.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C0E6787C1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 88D51787BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jan 2018 18:16:46 +0000 (UTC)
-Received: by mail-qt0-f182.google.com with SMTP id f4so11614273qtj.6
+	Fri, 19 Jan 2018 15:19:45 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id o7so1882935wro.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jan 2018 10:16:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=darknighte.com; s=darknighte;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=B2gzYosHFWNlEGcLtMlZhiVa109obO/2AaogLl7QclQ=;
-	b=JJOMYc3e+pKJkZKd6EqhoHqiQ1n9KTzBrupyPNGyhaOKyLdQD3nS0L5m9MKLGOmZLs
-	Y8QlrqSeTRo6aeXnA/TomiSmBx5sSoCyB70jZzB6B0rOAyNb4hLChBkDkPmYAtOBKOQ1
-	zDMraQbFxfqnt/KAYEskdVHWfsEZCsdyx+9ik=
+	Fri, 19 Jan 2018 07:19:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=VQClStHEetadvgzh4jeYfBSIPM+zDnCd1GbVLfgsWCo=;
+	b=RMjLnVCdtB3JqIjo5Br8W1Dv+M6VR2Nf8kkj1b8EgvY+8pgHWGyuoTUe1AOjIsahSU
+	gxf6fwDdEVLhfTDhybkNpjRIl2T7yezvDdEQ5UWIJfwANbSEwYMdu0/MBfY8Hsh80fzU
+	p/4DJ8yDTFJaMtZQ9jnyFIplj7d9BEG+H8CYnkqO41upM/qFHoQkkGQLRF4QxzI4GCqm
+	dp+/1vDBFFtLPqXl7S2OSPWFjZOOYJs7PBJAAYQOrYgUXtHjubVLbzDh7EsLYRtIvilg
+	gFlUanUWWJpUENvDjuF10ocxrEbcETFhp+87M+7mGl+nkk96A4QrFRRydwDLSQ1ex0Uo
+	+kyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=B2gzYosHFWNlEGcLtMlZhiVa109obO/2AaogLl7QclQ=;
-	b=bcwiJeRM26g7axbgO5iShCcKB9XNNVWiFvNLByVdH/rL6HXxczA8dH0vMyzIfQyonx
-	MqJ+v2yZfRXYQtg04/8sRBcqZ6hjIARdQMrQ8CETHNTulmuNvZLmNJ4O6e9P4OXllGmA
-	JQM++rxGi3e68T2fdDNMDdngWysyKIwaYGbuUSD8SB1SMA62wg1taFZGKNj30//Mltae
-	AvNFRZp+MMEi22pGkKCsBdlPazXQ7gcyXor+QV/4bDg9gotJ3/N2yzg/w/ThrB74dC0U
-	1mCgWswKBGLKHHfaOpUAnZBIK5wXWq/HaShA+nL5eP3Vom+Lpjc1heyZWmCeOkWCCDQ0
-	YhTA==
-X-Gm-Message-State: AKwxyte2kK6H3dNR75l4W+0i1zf8jAYt1fMCczANPm8f8xiwW/jYysNM
-	HOHSZgjK1kemfaAvXtASEudvOk0+1jgY4odnJVhLnQ==
-X-Google-Smtp-Source: ACJfBos66JoJm6cC4PqbPq6OuGHNN4+m9A9vgyON4npp6oFpaodDDUeznbqgfYY2ksJErzU9F5xJodgRW8F4iH0Ex8g=
-X-Received: by 10.200.7.133 with SMTP id l5mr8216487qth.91.1516299407307; Thu,
-	18 Jan 2018 10:16:47 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.12.190.142 with HTTP; Thu, 18 Jan 2018 10:16:46 -0800 (PST)
-X-Originating-IP: [47.220.159.208]
-In-Reply-To: <CA+YB3rZ2ZthR+bV0RZR-Af4q4X1OhEWo4oy9YhizVbHDnw+=ug@mail.gmail.com>
-References: <137d31ae-329e-53ff-f495-259168b787d5@balister.org>
-	<CAGAf8Lws8HfvDvMvdpgXyTvKaVpmf5a1UUTbBc2OrTpw=mgPNA@mail.gmail.com>
-	<CAHQecY5FEt0jMY97Cfq7tR4KAETqied0t3zfFgXw=J5YBSz53A@mail.gmail.com>
-	<f94fc2c7-032a-651a-a0d2-d5860f133b6c@balister.org>
-	<CA+YB3rZ2ZthR+bV0RZR-Af4q4X1OhEWo4oy9YhizVbHDnw+=ug@mail.gmail.com>
-From: darknighte <darknighte@darknighte.com>
-Date: Thu, 18 Jan 2018 12:16:46 -0600
-Message-ID: <CAKM2CVKDwg3-kTRaY87+0v5=n0MCaA34bLE4=roKwvfFGUe0Pg@mail.gmail.com>
-To: Jeff Osier-Mixon <jefro@jefro.net>
-Cc: Zoran Stojsavljevic <zoran.stojsavljevic@gmail.com>,
-	Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] OpenEmbedded developer meeting Sunday before ELC in Portland
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VQClStHEetadvgzh4jeYfBSIPM+zDnCd1GbVLfgsWCo=;
+	b=Rs2Bf8UiYPgXqhQ3Jsk7Xhszd8d/gTshbCKv496xybVzDG/XDb9TfotBMt2a9O1Xgz
+	5UKHoCjloiJiwOPrGb4RlxRGdSv1kFKm/VEU/WA6zTrylMkYrLuc9xaV81PIl89m1PdU
+	Cz9hCOAKVetqBi8UDX9n4sETrMydMbqbtrCZ7VOlsshLprryBKYOoiq8rHwxe2MgS1NZ
+	oNz+9frOxuyas4Z2Y8DLtdd+hJkmMZR3F6UrO4SSaqSgM8XXP8Hv+dLeo5zM8Wy+5Cxe
+	++/l4VsXbWJfxWPnAjNTb0Xru9+vUTHw9O3XxsLB7AEc++JnFNjyoKjC8bWP+zgxkrPq
+	+R0Q==
+X-Gm-Message-State: AKwxytd0o/xuXKD800qy+wTa+vNaWW5UdaGHCYikHBqn7e0LOjb8WvV6
+	//D+nGZ77UKuTX8DiTQ5nLyqxQ==
+X-Google-Smtp-Source: ACJfBouxRWC1ZXsjJNlFOsboOCLxIy7lhtdcCDkYAxjiY7LNs6bpJxj3atj5nXGQmH3oDuFvDxpeFg==
+X-Received: by 10.223.185.21 with SMTP id k21mr10372941wrf.37.1516375186051;
+	Fri, 19 Jan 2018 07:19:46 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id m6sm1722598wmd.37.2018.01.19.07.19.44
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 19 Jan 2018 07:19:45 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Jan 2018 15:19:40 +0000
+Message-Id: <20180119151942.19731-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.15.1
+Subject: [meta-oe][PATCH 1/3] fontforge: explicitly depend on gettext-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,29 +54,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jan 2018 18:16:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 19 Jan 2018 15:19:46 -0000
 
-Jefro, That sounds like a reasonable approach to me.  +1
+* fixes:
+  Making all in po
+  make[2]: Entering directory
+  `TOPDIR/BUILD/work/x86_64-linux/fontforge-native/20170731-r0/build/po'
+  msgfmt --check --output-file=ca.mo ../../git/po/ca.po
+  msgfmt --check --output-file=el.mo ../../git/po/el.po
+  msgfmt --check --output-file=es.mo ../../git/po/es.po
+  msgfmt --check --output-file=it.mo ../../git/po/it.po
+  /bin/bash: msgfmt: command not found
+  /bin/bash: msgfmt: command not found
+  /bin/bash: msgfmt: command not found
+  /bin/bash: msgfmt: command not found
+  make[2]: *** [ca.mo] Error 127
+  make[2]: *** Waiting for unfinished jobs....
+  make[2]: *** [el.mo] Error 127
+  make[2]: *** [es.mo] Error 127
+  make[2]: *** [it.mo] Error 127
+  make[2]: Leaving directory
+  `TOPDIR/BUILD/work/x86_64-linux/fontforge-native/20170731-r0/build/po'
 
-On Thu, Jan 18, 2018 at 12:04 AM, Jeff Osier-Mixon <jefro@jefro.net> wrote:
->
->> We know. It is painful. YP Dev Day is the Thursday after, and I suspect
->> we would lose people waiting until Friday.
->
->
-> SCaLE doesn't usually coincide the week before ELC, so this year was just
-> bad timing from the universe.
->
-> I propose we start with the board meeting at 9:30 and plan OEDAM to start at
-> 10:30 to enable people to get there. We can have lunch late and go until 6
-> if needed.
->
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
+* as Ross explained:
+  needs explicit dependency on gettext-native
+  native disables NLS so just has gettext-minimal-native in the depends
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
+index d9f086749f..481fedf983 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE;md5=3f922b42ed0033fa0fd4cd3268f6429c \
+ "
+ 
+-DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash gnulib"
++DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash gnulib gettext-native"
+ DEPENDS_append_class-target = " libxi"
+ 
+ inherit autotools pkgconfig pythonnative distro_features_check gettext
+-- 
+2.15.1
+
 
