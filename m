@@ -1,47 +1,48 @@
 Return-Path: <athoik@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id AE2EF6011C
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BECB46E650
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jan 2018 22:05:23 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id x4so9077494wmc.0
+	Fri, 19 Jan 2018 22:14:08 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id t16so2821078wrc.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jan 2018 14:05:24 -0800 (PST)
+	Fri, 19 Jan 2018 14:14:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
 	bh=pMwZwjfkDM9h0V9DMsr2u3Wa9vZpJMsgyK9Jmk54egM=;
-	b=WT70c9tqRIaTRXGLmyV9qKUyRwIEkzJbdyrjQlTF8oJv9MhZcsj06OBnq5OdY9iyvi
-	5Q/bcl3fX3l7R6Bg5WBXogOiJ0CX3a/u/vW7z6YZMNC/m6zvLRilM3cd/SnmZW/S05p9
-	QxKuHPlc2z3fXsKmt9hCRyU0Kv2hs0t97qWd1cDmrCgAxAL+juN7TVuU1P9+wX8YqVFj
-	7zumEIQepFWno0FsxwjlU05S7APpdxWO7wEbI2P42+YA2I/nIRWWLmCEzxibgXBoW8Wx
-	Bge+QuwUfgyLW4X/hsjBG3RSQ8EBnPoOSYizzaCa/znSbYCeZ1WS7qmNCRMJC0oXv1Cg
-	FFQg==
+	b=bJHucTSmS8YW4OVXP/HUtd/MubKPX9IcqeVUm0UQyMtxqbF/Njbq5YmNELQEvWVg3E
+	y/QsnqpYbl1y7ifODGoBbEOdFBC2T7IuW1cARlavYMbxnB6bIJI3qO2dgGdLHXc9ISg0
+	3P++fxxIuaA9et08j56GAU9i/ARX86FzCiUAlCFL0n9rZhZxsYL1K7dAGAQ3m/3C19Mq
+	boh7sVPJO3qWu8tW/3SvtaE+4VhXASfutuQpKrrb2RNZXI7a3oz3nWl7k3wqBmlW/auP
+	lilGOG0f1hqyDez445Yw6dNOvSjqSAmmjCx9xMUiGTRteeqMnNv4cQzThBta1wrzmYz+
+	7Z8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=pMwZwjfkDM9h0V9DMsr2u3Wa9vZpJMsgyK9Jmk54egM=;
-	b=H2MsM0JmDtp/a+M+AwI+UcDb/dEbVCn+EZ9J9RZK8nNXO6eMIGpVyKYYAxtYD73LDS
-	f0eF15De0CQQ0eqtRl2NO4QKkSHHlGinAb5VL+YBhMSONb3dEIE8VynkHQuXcSoQRhJI
-	iozK4CqZRsTvIBUOPTlbrBilYqiKjN5DJqRl/ZBT4QpRPoQ3M1DnfxGxK8y3A2LU1g9A
-	i8/6MspiRSRqKQxa4++Nz9OnhHoPFAqSLT8GKdHVXApFeunTz9/DQ9Sbi4IQlCQC6kz5
-	Dducb3oGn33TaOuWWKywYagyoLjyS66CBBIhbIWcxl9GRzvBxM4tKVWaH9KqzAtDHoa6
-	H73Q==
-X-Gm-Message-State: AKwxytez5y+gvjfGohLTJ31ZKChsWLb01lxXcsxbj+5Y2Vv/4ae6NJ6r
-	V+5EWQLSMxE+HLBOIafpqZHI
-X-Google-Smtp-Source: AH8x225aKvs/m7erI+4i4h2cZIeex658WGqetMu0bJbHPDOnvZNh5a9Y9G0dEwZOOHC8sYrrcL+phw==
-X-Received: by 10.28.146.141 with SMTP id u135mr234083wmd.26.1516399523778;
-	Fri, 19 Jan 2018 14:05:23 -0800 (PST)
+	b=O2CEgW50RfXQmcZMQeUXVxoEhN7zcMLmj/BKn+dMSNOSjIxRfdA84yXNLX1HciuB1n
+	kVxIQvqmRkbHruOWOKyMDmj3KCO1IiKnMVapuEwQlHOamUxs4ceFziCbv8yofoAsvuV2
+	DJOJY0XwmaK/ChtOzPgOYAJk+ipJOeey8c/98921Q/igVZj3QKK4hlz39uic4W0pMbf2
+	Y2uxFl/NOm0eSEODYC4akTgESLT8yWAt4e2nURwKndSX3RzTmIGcUYPNArltljeCbjbF
+	UJ1DTCkIXG2jFelVHuIf+MxQ+zaijJxB2nwrCxgPpeCs5sgEOhh8vpXINrguWtyE65RT
+	5N0w==
+X-Gm-Message-State: AKwxyteUnkpnTHAz7JumqJNjtkZylUycDkChtXCvJDEozQgXWJtkYrUD
+	45B1EGHWqHCQfM+DcphZmWIC
+X-Google-Smtp-Source: ACJfBouQuKrY9HJDlLoAdtNBrwgMK9kqwqayPULZnhu0S2Lcba1lBWNyxZwRc/2lVWiUmYUNYk5SbA==
+X-Received: by 10.223.151.195 with SMTP id t3mr9825992wrb.274.1516400049097;
+	Fri, 19 Jan 2018 14:14:09 -0800 (PST)
 Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
 	by smtp.gmail.com with ESMTPSA id
-	z71sm25730157wrc.11.2018.01.19.14.05.22
+	188sm3395257wmg.29.2018.01.19.14.14.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 Jan 2018 14:05:22 -0800 (PST)
+	Fri, 19 Jan 2018 14:14:08 -0800 (PST)
 From: Athanasios Oikonomou <athoik@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Jan 2018 00:05:02 +0200
-Message-Id: <1516399502-19193-1-git-send-email-athoik@gmail.com>
+Date: Sat, 20 Jan 2018 00:13:43 +0200
+Message-Id: <1516400023-14815-1-git-send-email-athoik@gmail.com>
 X-Mailer: git-send-email 2.1.4
 Cc: Athanasios Oikonomou <athoik@gmail.com>
-Subject: [meta-oe][PATCH] nis, opencv: Update getVar/setVar syntax
+Subject: [morty][PATCH] nis, opencv: Update getVar/setVar syntax
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jan 2018 22:05:24 -0000
+X-List-Received-Date: Fri, 19 Jan 2018 22:14:09 -0000
 
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
