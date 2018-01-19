@@ -1,50 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 760D5787CE
+Return-Path: <athoik@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id AE2EF6011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jan 2018 15:19:48 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id d9so1892520wre.3
+	Fri, 19 Jan 2018 22:05:23 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id x4so9077494wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jan 2018 07:19:49 -0800 (PST)
+	Fri, 19 Jan 2018 14:05:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Y5TFMoMwQRGZ9ayIv9YPjn87atE3PfVCkFDLUUWgkyQ=;
-	b=t5+Z6vcvz3KX26LuK2l3AwcGMCIngrEga4WmLrPQmcKZTdx/E6V81H38CuxFmMRaBj
-	+haNEITnaF21lIz2mNGAY/KAcXWp1bLkf3mMHHauSCpFn646yC8agFNUgOQ+/PpsoWcJ
-	8nrs1jvuy6xIDDvEnFq1cbzqydLHiDZ7OBocYJdGFW/KQb/0pPvk7OhME6H7LG1eVUoB
-	vusBdA+JuQ3jP6Tsm/yrs3yxp3ByfmctPtjvg9QAe4CJVafQnMJyjVIBWdGAe7/Y2IcA
-	tyIQuipKfkXA8FeXdzbPiueDFH+rtAFfACIYwUsfisn/plU8c7mMD4/ng9OfwnZgUYFt
-	m5NQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=pMwZwjfkDM9h0V9DMsr2u3Wa9vZpJMsgyK9Jmk54egM=;
+	b=WT70c9tqRIaTRXGLmyV9qKUyRwIEkzJbdyrjQlTF8oJv9MhZcsj06OBnq5OdY9iyvi
+	5Q/bcl3fX3l7R6Bg5WBXogOiJ0CX3a/u/vW7z6YZMNC/m6zvLRilM3cd/SnmZW/S05p9
+	QxKuHPlc2z3fXsKmt9hCRyU0Kv2hs0t97qWd1cDmrCgAxAL+juN7TVuU1P9+wX8YqVFj
+	7zumEIQepFWno0FsxwjlU05S7APpdxWO7wEbI2P42+YA2I/nIRWWLmCEzxibgXBoW8Wx
+	Bge+QuwUfgyLW4X/hsjBG3RSQ8EBnPoOSYizzaCa/znSbYCeZ1WS7qmNCRMJC0oXv1Cg
+	FFQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Y5TFMoMwQRGZ9ayIv9YPjn87atE3PfVCkFDLUUWgkyQ=;
-	b=jaxmpt39GqxU0lO8IpKdgDM15PJ4lHXX/MKyKXavydEgIL8Z/sVIZej3UPQK1NxJJS
-	oy1BulVfTmNhN+diOBm8BBAGFrM59iI8NbJn4oYXpAD2T47Nw58ENHJy0a6keYmkFEUX
-	lFCorJ2ehxTCCcPh+k5KZV9oBsdqSDUqJD7IiCSVSKMd9a6nIdgYiliNH3PI7oM+TL94
-	afcfFaJ9Iq0GWug8w9xs0yMbL3w3Wgvp8jta/HpoTVp/p17iKLaygsiJAXW3ptGilx+l
-	xA5WKTtdW+03cgakgWjRESLXMFLMb1gJx2ut69PTeMZRmV5vW/qmrm6TzzLKnIp3Lmaw
-	JPfg==
-X-Gm-Message-State: AKwxytcw4P797n7moXo5szE4+JlnFBz9yVTSclMsoY/9sywAOmmer4E0
-	3/eydJnCZLHspF/Ns274fABjzg==
-X-Google-Smtp-Source: ACJfBoscAJB67zVg1ury7M2ETVtIxbMajUfrQ4xiCS1zFOdndxm0cH6EYCQlLJRLIRuEOUb0v23oKg==
-X-Received: by 10.223.189.130 with SMTP id l2mr10165248wrh.61.1516375188922;
-	Fri, 19 Jan 2018 07:19:48 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	i1sm22496189wrh.96.2018.01.19.07.19.47
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 19 Jan 2018 07:19:48 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=pMwZwjfkDM9h0V9DMsr2u3Wa9vZpJMsgyK9Jmk54egM=;
+	b=H2MsM0JmDtp/a+M+AwI+UcDb/dEbVCn+EZ9J9RZK8nNXO6eMIGpVyKYYAxtYD73LDS
+	f0eF15De0CQQ0eqtRl2NO4QKkSHHlGinAb5VL+YBhMSONb3dEIE8VynkHQuXcSoQRhJI
+	iozK4CqZRsTvIBUOPTlbrBilYqiKjN5DJqRl/ZBT4QpRPoQ3M1DnfxGxK8y3A2LU1g9A
+	i8/6MspiRSRqKQxa4++Nz9OnhHoPFAqSLT8GKdHVXApFeunTz9/DQ9Sbi4IQlCQC6kz5
+	Dducb3oGn33TaOuWWKywYagyoLjyS66CBBIhbIWcxl9GRzvBxM4tKVWaH9KqzAtDHoa6
+	H73Q==
+X-Gm-Message-State: AKwxytez5y+gvjfGohLTJ31ZKChsWLb01lxXcsxbj+5Y2Vv/4ae6NJ6r
+	V+5EWQLSMxE+HLBOIafpqZHI
+X-Google-Smtp-Source: AH8x225aKvs/m7erI+4i4h2cZIeex658WGqetMu0bJbHPDOnvZNh5a9Y9G0dEwZOOHC8sYrrcL+phw==
+X-Received: by 10.28.146.141 with SMTP id u135mr234083wmd.26.1516399523778;
+	Fri, 19 Jan 2018 14:05:23 -0800 (PST)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
+	by smtp.gmail.com with ESMTPSA id
+	z71sm25730157wrc.11.2018.01.19.14.05.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 19 Jan 2018 14:05:22 -0800 (PST)
+From: Athanasios Oikonomou <athoik@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Jan 2018 15:19:42 +0000
-Message-Id: <20180119151942.19731-3-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
-In-Reply-To: <20180119151942.19731-1-Martin.Jansa@gmail.com>
-References: <20180119151942.19731-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] xorgxrdp: add distro_features_check for x11
+Date: Sat, 20 Jan 2018 00:05:02 +0200
+Message-Id: <1516399502-19193-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-oe][PATCH] nis, opencv: Update getVar/setVar syntax
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jan 2018 15:19:48 -0000
+X-List-Received-Date: Fri, 19 Jan 2018 22:05:24 -0000
 
-* fixes: following errors in every world build:
-  ERROR: Nothing PROVIDES 'xrdp' (but meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb DEPENDS on or otherwise requires it)
-  xrdp was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'xorgxrdp', 'xrdp']
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-  ERROR: Nothing PROVIDES 'virtual/libx11' (but meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb DEPENDS on or otherwise requires it)
-  libx11-diet PROVIDES virtual/libx11 but was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-  libx11 PROVIDES virtual/libx11 but was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'xorgxrdp', 'virtual/libx11']
+The deprecated APIs are removed from bitbake, update two old style references
+in meta-oe/meta-networking.
 
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
 ---
- meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ meta-networking/recipes-support/nis/nis.inc  | 2 +-
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-index 20cf45f06d..6150865795 100644
---- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-+++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-@@ -1,15 +1,16 @@
- SUMMARY = "Xorg drivers for xrdp."
+diff --git a/meta-networking/recipes-support/nis/nis.inc b/meta-networking/recipes-support/nis/nis.inc
+index c4aa10e..e027a1c 100644
+--- a/meta-networking/recipes-support/nis/nis.inc
++++ b/meta-networking/recipes-support/nis/nis.inc
+@@ -25,7 +25,7 @@ do_install() {
+ # so force the package to be skipped here (this will cause a
+ # 'nothing provides' error)
+ python () {
+-    os = bb.data.getVar("TARGET_OS", d, 1)
++    os = d.getVar("TARGET_OS", True)
+     if os == "linux-uclibc":
+         raise bb.parse.SkipPackage("NIS functionality requires rpcsvc/yp.h, uClibC does not provide this")
+ }
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index 1bbb965..cf7fd62 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -108,7 +108,7 @@ python populate_packages_prepend () {
+     for pkg in packages[1:]:
+         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale'):
+             metapkg_rdepends.append(pkg)
+-    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
++    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
  
- LICENSE = "X11"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a2523660329fdca3d954c0a87390e007 \
--"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a2523660329fdca3d954c0a87390e007"
- 
- inherit autotools pkgconfig 
- 
- DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
- 
--SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git \
--           "
-+inherit distro_features_check
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git"
- 
- SRCREV = "c122544f184d4031bbae1ad80fbab554c34a9427"
+ }
  
 -- 
-2.15.1
+2.1.4
 
 
