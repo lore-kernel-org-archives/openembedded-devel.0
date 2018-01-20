@@ -1,38 +1,47 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 407BC78733
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jan 2018 16:03:50 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id z10so11080151qti.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Jan 2018 08:03:52 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 249EC787BA;
+	Sat, 20 Jan 2018 23:51:25 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id f11so4819713wre.4;
+	Sat, 20 Jan 2018 15:51:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=369KJ6qP7Ma8kJf7cUdeUN0evzNYW8/mo21OH/H0tNM=;
+	b=ruG0zetjBy7VfeKkJmA1Ps1TZ2160so2iJ1IpXxseAiewXu22QatsJOGPc/N8TrQXe
+	TIh3iwwp5pZfEZOik2P/V1fTUOAGR3Jh65qWKK/yRTuqASHakGXykXeOYDDQs10C2XV/
+	kZQKGs2OriyXhRhSkTtmmbcK6DL7FaCwxMedYAZI12/GEWbkzmBubsVR2jHHlZ2Filxc
+	kw4//kyiDvSKU06U5DDOIHJeixF5nmnJBlH0brjdZRST0XelG1Q+QQLCL8JK4x0Wi2eb
+	0RJWOz4UivjJX2rVMYP3zXL6+nr/uAoYohlUW8UFcLTPbx/4YqKmk+HbBvokvMTnNE6v
+	oz7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AYMCV2lv+3I3KUZMg3hl5tdHDPJhFguVPa8aRtRnZn8=;
-	b=rDyGYfxJOPIUgiIMfiB2FzVKoIhWsnIzUUJIRUkalHkH40J0ZMVT+3M4yDQwC37nG2
-	liieOEulkWUpqGviYM1xC8bD2rOf6mnOQzQY2nOvBBR9CYI1Xg5ZjpsNUZQOVD8EhUdA
-	WHtBkVx+M12fYtFi6Yfg964YoRbkS+zJQIitJpRdM7IL4fTKHKWrT/4oxqTLMrU1qQtU
-	JVW3UwQJg0uQ1KOmtxwvxpxtY8tTrS+pBYUOpof41JJ0knT4tlOnWvklU+1oVBMSSUuf
-	RGitbBxY8QUIPQwFWo3cj+Fca/tyt+vIM//sfHlHj5JY2JHIzjaBhLUMtycAGXpb4WXp
-	8d1Q==
-X-Gm-Message-State: AKwxytcY2NvYQZaydnRNO8qVY88tqrAgSP+KZkLk0CmBfRvOtdDDxfN+
-	wNVVzMnxZNcDTi6+KKxNNGlCcSn3
-X-Google-Smtp-Source: AH8x224zWUZJhHG6xAsWJ2Y4WI3f9UepOcRzs788lM3rqSih3EquHPQ9URwnxczVqGe7gY6R8t9UmA==
-X-Received: by 10.200.19.130 with SMTP id h2mr2960140qtj.155.1516464231909;
-	Sat, 20 Jan 2018 08:03:51 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	e68sm1907976qkc.77.2018.01.20.08.03.51
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 20 Jan 2018 08:03:51 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Jan 2018 11:03:45 -0500
-Message-Id: <1516464225-16986-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-alembic: update to version 0.9.7
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=369KJ6qP7Ma8kJf7cUdeUN0evzNYW8/mo21OH/H0tNM=;
+	b=ukVXaP1AEeuKUZJWeUHz5yq638J5y19KId5z/EGUD3f3lhJHU8GvF0/7XQf5+mz4Fs
+	w+rcTqoEzyP5f8oVYCYIbEz1TfTmDzKpC7koGbRtt5J3f5A5N0fZ1yCcXLicjQw/HoD8
+	RqHjk3MSJshmENJBnri2AUm94gg+dSmVCJjmh+MX8tykHkIeFoi4jdVhll3gwRWGBpXY
+	n1uxLoB+PI/cMVOIqypeVDdpvDDZgPvZoolT1op+ggY7/CG6rmwmjep+tOpij+B5COXt
+	69dulR7IW56zIWfEvVVZgrcymB6My/iu3pQnbBtV1sNmDxlHukLeI134z/59aDtFDFTV
+	y7Ig==
+X-Gm-Message-State: AKwxytfMf7vNPzSyDVyOXXRsCUHxla5NLQGujRXjmUrdTf0F7v8XDgDV
+	LuTILelPT7JNH/lEtYJbs3ljGvHjmMaHEDzLFzeuhw==
+X-Google-Smtp-Source: AH8x227ZvzoF7hYYZmFb6ITLPy1sUwWU+B6r68Xtth8JLEZGrE/GHLWQGhXAu9qU7KjxLA00oF5khM/smtLKlcQNgsc=
+X-Received: by 10.223.177.158 with SMTP id q30mr2531339wra.206.1516492286722; 
+	Sat, 20 Jan 2018 15:51:26 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.28.74.211 with HTTP; Sat, 20 Jan 2018 15:51:26 -0800 (PST)
+In-Reply-To: <151648740023.29293.16416809305382382616@git.openembedded.org>
+References: <151648740023.29293.16416809305382382616@git.openembedded.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sun, 21 Jan 2018 00:51:26 +0100
+Message-ID: <CA+chaQcFLf+SuwaPq+Jg=8B11w_StoWE2iHzXjXDUynT8MyqQg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] branch morty updated: image: Expand PV to avoid AUTOREV parsing failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,53 +54,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Jan 2018 16:03:51 -0000
+X-List-Received-Date: Sat, 20 Jan 2018 23:51:26 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update RDEPENDS for mako
-Update license checksum for copyright date updates
+This causes:
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-alembic.inc         | 10 ++++++----
- .../{python-alembic_0.9.6.bb => python-alembic_0.9.7.bb}       |  0
- .../{python3-alembic_0.9.6.bb => python3-alembic_0.9.7.bb}     |  0
- 3 files changed, 6 insertions(+), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python-alembic_0.9.6.bb => python-alembic_0.9.7.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-alembic_0.9.6.bb => python3-alembic_0.9.7.bb} (100%)
+Exception: TypeError: getVar() missing 1 required positional argument:
+'expand'
 
-diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
-index 2ca6023..dfaf882 100644
---- a/meta-python/recipes-devtools/python/python-alembic.inc
-+++ b/meta-python/recipes-devtools/python/python-alembic.inc
-@@ -1,13 +1,15 @@
- DESCRIPTION = "A database migration tool for SQLAlchemy"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d07407716fd24408b5747b0fa2262775"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
- 
--SRC_URI[md5sum] = "fcb096bccc87c8770bd07a04606cb989"
--SRC_URI[sha256sum] = "042851ebe9efa07be6dc1395b1793b6c1d8964a39b73a0ce1649e2bcd41ea732"
-+SRC_URI[md5sum] = "3e82bbe325464fd542ab4cc44929c813"
-+SRC_URI[sha256sum] = "46f4849c6dce69f54dd5001b3215b6a983dee6b17512efee10e237fa11f20cfa"
- 
- PYPI_PACKAGE = "alembic"
- 
- RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-dateutil \
-     ${PYTHON_PN}-editor \
-+    ${PYTHON_PN}-mako \
-     ${PYTHON_PN}-sqlalchemy \
--    "
-+"
-diff --git a/meta-python/recipes-devtools/python/python-alembic_0.9.6.bb b/meta-python/recipes-devtools/python/python-alembic_0.9.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-alembic_0.9.6.bb
-rename to meta-python/recipes-devtools/python/python-alembic_0.9.7.bb
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb b/meta-python/recipes-devtools/python/python3-alembic_0.9.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_0.9.7.bb
--- 
-2.7.4
+On Sat, Jan 20, 2018 at 11:30 PM, <git@git.openembedded.org> wrote:
 
+> This is an automated email from the git hooks/post-receive script.
+>
+> rpurdie pushed a commit to branch morty
+> in repository openembedded-core.
+>
+> The following commit(s) were added to refs/heads/morty by this push:
+>      new 9ce26c1  image: Expand PV to avoid AUTOREV parsing failures
+> 9ce26c1 is described below
+>
+> commit 9ce26c121f52d5194732be34f93e86128e1fdeaf
+> Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> AuthorDate: Mon Jan 8 17:41:27 2018 +0000
+>
+>     image: Expand PV to avoid AUTOREV parsing failures
+>
+>     Currently, setting PV to include SRCPV for build-appliance results in:
+>
+>     bb.data_smart.ExpansionError: Failure expanding variable SRCPV,
+> expression was
+>     ${@bb.fetch2.get_srcrev(d)} which triggered exception FetchError:
+> Fetcher
+>     failure: Fetch command export ftp_proxy="http://proxy.yocto.io:5187/";
+> export
+>     FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="${TMPDIR}/work/
+>     qemux86_64-poky-linux/build-appliance-image/fetcheravoidrecurse-r0/
+>     recipe-sysroot-native/usr/bin/python3-native:${TMPDIR}/work/
+>     qemux86_64-poky-linux/build-appliance-image/fetcheravoidrecurse-r0/
+>     recipe-sysroot-native/usr/bin/python3-native:${TMPDIR}/work/
+>     qemux86_64-poky-linux/build-appliance-image/fetcheravoidrecurse-r0/
+>     recipe-sysroot-native/usr/bin/python3-native:/home/pokybuild/
+>     yocto-autobuilder/yocto-worker/buildtools/build/scripts:${TMPDIR}/
+>     work/qemux86_64-poky-linux/build-appliance-image/
+> fetcheravoidrecurse-r0/
+>     recipe-sysroot-native/usr/bin/x86_64-poky-linux:${TMPDIR}/work/
+>     qemux86_64-poky-linux/build-appliance-image/fetcheravoidrecurse-r0/
+>     recipe-sysroot/usr/bin/crossscripts:${TMPDIR}/work/
+> qemux86_64-poky-linux/
+>     build-appliance-image/fetcheravoidrecurse-r0/recipe-
+> sysroot-native/usr/sbin:
+>     ${TMPDIR}/work/qemux86_64-poky-linux/build-appliance-image/
+>     fetcheravoidrecurse-r0/recipe-sysroot-native/usr/bin:${TMPDIR}/work/
+>     qemux86_64-poky-linux/build-appliance-image/fetcheravoidrecurse-r0/
+>     recipe-sysroot-native/sbin:${TMPDIR}/work/qemux86_64-poky-linux/
+>     build-appliance-image/fetcheravoidrecurse-r0/recipe-
+> sysroot-native/bin:/home/
+>     pokybuild/yocto-autobuilder/yocto-worker/buildtools/build/
+> bitbake/bin:${TMPDIR}
+>     /hosttools"; export HOME="/home/pokybuild"; git -c
+> core.fsyncobjectfiles=0
+>     ls-remote git://git.yoctoproject.org/poky  failed with exit code 127,
+> output:
+>     /bin/sh: 1: git: not found
+>
+>     This is because PV is being expanded when TMPDIR is unset.
+>
+>     Expand PV in advance to avoid this problem.
+>
+>     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> ---
+>  meta/classes/image.bbclass | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta/classes/image.bbclass b/meta/classes/image.bbclass
+> index a9ab2fa..3e6b6e1 100644
+> --- a/meta/classes/image.bbclass
+> +++ b/meta/classes/image.bbclass
+> @@ -439,6 +439,8 @@ python () {
+>          # This means the task's hash can be stable rather than having
+> hardcoded
+>          # date/time values. It will get expanded at execution time.
+>          # Similarly TMPDIR since otherwise we see QA stamp comparision
+> problems
+> +        # Expand PV else it can trigger get_srcrev which can fail due to
+> these variables being unset
+> +        localdata.setVar('PV', d.getVar('PV'))
+>          localdata.delVar('DATETIME')
+>          localdata.delVar('TMPDIR')
+>
+>
+> --
+> To stop receiving notification emails like this one, please contact
+> the administrator of this repository.
+> --
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>
 
