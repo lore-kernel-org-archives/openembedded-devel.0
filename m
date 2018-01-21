@@ -1,47 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D458078744
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D27EC78744
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 13:37:40 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id g38so5720141wrd.2
+	Sun, 21 Jan 2018 13:37:41 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id 141so11794362wme.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 05:37:42 -0800 (PST)
+	Sun, 21 Jan 2018 05:37:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=+hQWGBw3LOUz/beP/I2CCcYVWKferhKOumO0F4FywZQ=;
-	b=sHNhYPYPRAD4Cw9DMkwFT2PmZn8XgLBfucjK7zc0x8dX3aWPjRI84BPMVPwXqpZFqC
-	O8orDIzs5H9+5oHq6z8yDAR8y9RxEVWrnWvUCy07b5fIa07AZHhN9yEbj9plFt0GBKpf
-	IMbOWQMGSvygZXsYxWeXuTa5QiqYDtGb0aYfOv+vTpxdPUUPdNAgj7zP4WU4/fm4YzLm
-	Xw2645O0u5yrxpMu8XsMyRg5usa57RB/CD2jVRNhNE4yESs9ifLxSv1/W+YbdZsSzYDd
-	xdKdiUb87o6vcH/ZLjWSn/2QMnlAJgmjB9w6B2a+dnwEaMuriWk8LLKgp/da5h/qjGhD
-	ouzw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=B5ZmcYaDqvswK3GVl6wWR5sKk46ACvnVrzmViaGazeY=;
+	b=t6l9QEDrnhUgsIg+0BWxoEeixdEwzGyOfkaoj9FvOqhpZQ2xAqWte0iH9ef8Tu/fQ3
+	RXNcbyiMKZmccikhaoc2CyLlctTjnPV+6YVKX447O7fqQEl6Z2ErrQ60bWlBNIQafqvy
+	+gbSbnBk8WPGwoG3e9T2gGrcCW7bAWAyMpzhLaRDi1u63Hkuc6BT9ifnlFfhCCfbvv6W
+	E2siOC1nxCY8Kt2yv5GQ7H5UO/Omp0GaBL0b4snUs3QKcMVhsypJV2xDL0u9UNZhPmfz
+	ehMg/wod5pNeQdShZQS6w26GviIjgBPD4TdxMXAbe9qrQvW4LwkPdtetbIxi/7S9mJ/0
+	cNzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+hQWGBw3LOUz/beP/I2CCcYVWKferhKOumO0F4FywZQ=;
-	b=VU01Rxrl0Z+di4v/wjouXzxwR4dxdLgyBae6srCVoptV/lB/IToGVycI/MGLoqLIfk
-	tWVubBFzvwJKpheb70rh8SWy00jXJltRnL0KUJfo7i4Zrq1qOCP+cjQZnHFS/PFNk6Z3
-	YjziOV/f/LEz4OrCQoI5VhQEG043ZCezoNwu1SL/8a94+lvu+o7Mx7rlWwRB+jRrFEDQ
-	PFh1/+x7Ku5LJ3+oMxt+rEMW6UxxrHxvGHGrZswun6g4uy04ntukA0isX/vUU63NIzYG
-	bdETCDaKG/VewG7CdFEgTLZEw6YYs6vNmuexAca7YrVmO8OF0WwjN3ic3IGcYmy+rjtt
-	EBNQ==
-X-Gm-Message-State: AKwxytdQTD+T5XcwzpfWePTFvAPv/KHGWb6vISOD14i/u9qOiqptVP36
-	HFoKd+W220PdpRAzp2IxdAd+qQ==
-X-Google-Smtp-Source: AH8x224a94ASDy+IWS6a/iOCBY+2VlpotvbH2Kyg8ueWdo59O/DRE3H67KrrTahjl3k5SXVB8BlynQ==
-X-Received: by 10.223.195.201 with SMTP id d9mr3615061wrg.134.1516541861237;
-	Sun, 21 Jan 2018 05:37:41 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	w11sm13099767wrg.42.2018.01.21.05.37.39
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=B5ZmcYaDqvswK3GVl6wWR5sKk46ACvnVrzmViaGazeY=;
+	b=l5lBb2TSkX6bGiMPryMD5fBupGIfnGMkoj+BLiIaIWgAnvMbcAWmWAaKuKZRY79au6
+	JnUfXu+sHLHvtBMb2TCX3whXYS+ROYbBZwNX9Nl1A2gPBw9aX0QrZr30/vZ//30gLHO8
+	jmLy5syWrUWAh1AZ29vVcY7sdNJ9onhZ2cg8kXA8JFa772NxvaOLLTvsvmqnw/6mF5gt
+	jblvUpGOBotAZIyhyUnfKNHtjOKOQMHFyLH4ERCZSq4mU89VI8F6SqwDSnJT7eFyhkRM
+	cyPhoTu6qZqpZ/OIoEGydWLnX7nfg6zrDILxeHk3ZNbf1XqdnjTaR6ICO+iI2XbEMI7c
+	3rqw==
+X-Gm-Message-State: AKwxytfr/OckVeP0zW/zw2zW0+eqStdS1vcL5r6Hc3egIZuYnJxqECYZ
+	fSLRR0Rr5dA9f56ewExtnF1QTQ==
+X-Google-Smtp-Source: AH8x2257vnoQVUXJ+z86Hxeng8YA2boEZU0WJ5463dl16SKyOuGMuMF43S338VK2Ptv2PSdQVpRPBA==
+X-Received: by 10.28.87.138 with SMTP id l132mr3145089wmb.27.1516541862367;
+	Sun, 21 Jan 2018 05:37:42 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id j6sm3443712wmg.41.2018.01.21.05.37.41
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 21 Jan 2018 05:37:40 -0800 (PST)
+	Sun, 21 Jan 2018 05:37:41 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jan 2018 14:37:37 +0100
-Message-Id: <20180121133739.6230-1-Martin.Jansa@gmail.com>
+Date: Sun, 21 Jan 2018 14:37:38 +0100
+Message-Id: <20180121133739.6230-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.16.0
-Subject: [meta-oe][PATCH 1/3] fluentbit: use Unix Makefiles OECMAKE generator
+In-Reply-To: <20180121133739.6230-1-Martin.Jansa@gmail.com>
+References: <20180121133739.6230-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/3] cmpi-bindings: use Unix Makefiles OECMAKE generator
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,28 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jan 2018 13:37:41 -0000
+X-List-Received-Date: Sun, 21 Jan 2018 13:37:42 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-extended/fluentbit/fluentbit_0.12.1.bb | 4 ++++
+ meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.1.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.1.bb
-index e2edd095a4..99f680f9ab 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.1.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.1.bb
-@@ -21,6 +21,10 @@ inherit cmake systemd
- 
- EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+index 25166ab580..987c09fe52 100644
+--- a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
+@@ -24,6 +24,10 @@ inherit cmake python3native
+ EXTRA_OECMAKE = "-DLIB='${baselib}' \
+                  -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/python${PYTHON_BASEVERSION}"
  
 +# With Ninja it fails with:
-+# ninja: error: build.ninja:134: bad $-escape (literal $ must be written as $$)
++# ninja: error: build.ninja:282: bad $-escape (literal $ must be written as $$)
 +OECMAKE_GENERATOR = "Unix Makefiles"
 +
- SYSTEMD_SERVICE_${PN} = "td-agent-bit.service"
- 
- TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
+ do_configure_prepend() {
+     export STAGING_LIBDIR=${STAGING_LIBDIR}
+     export STAGING_INCDIR=${STAGING_INCDIR}
 -- 
 2.16.0
 
