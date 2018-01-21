@@ -1,37 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C97327872A
+Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com
+	[209.85.216.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8930977CF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 16:54:23 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id d54so15269049qtd.4
+	Sun, 21 Jan 2018 19:58:10 +0000 (UTC)
+Received: by mail-qt0-f174.google.com with SMTP id s3so15988101qtb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 08:54:25 -0800 (PST)
+	Sun, 21 Jan 2018 11:58:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TorbEQDMJkOWm3eoGxDzfngjGQ7XsJ3TGuHiEp2ijpo=;
-	b=P6NqPIiZSFsR3VGgaYC3Z9F+zOf//03j9Ne1jSMsLDEiZAISXRDai3apLCbYARM6mI
-	oq4m26UUyy64nwyYKo5EuHZEiTSYsMK7qozqeqjdL8om8SXK85ZI1dgQfA+avfjl6itQ
-	gXdaVzNIuBn9D5c5nxpoQ7RP/WIRNa1tZ19mK9sNVfwX8x6iX+HXx0sP1BDSRe6id82s
-	bNtpL7SKN/pL01O12ZYRjg6S2aiTHm8878auyImlUCHcs3Pa9YU4/D8Rl+cxbS7tDQoC
-	BeIHbVeC2rRDSit0rMcj1MHjv29RSILiiXwuA671SALqKSlIDzE+xYndFFqa0RugIDr3
-	zveQ==
-X-Gm-Message-State: AKwxytdz33HULrzwJIUs3e3jdKn4NNKMok5nlrbnXLTPv6+nbPOaG9ds
-	WmADPZJM8mpG4G4mDUeqpsscgGKJ
-X-Google-Smtp-Source: AH8x224GwDe0EQnC+e8yZhDMvUcwr1exfxV+1MEx0H4RRRBfaumjix1SpfSc208CQlhCANreBx8yow==
-X-Received: by 10.200.38.243 with SMTP id 48mr7138397qtp.163.1516553664278;
-	Sun, 21 Jan 2018 08:54:24 -0800 (PST)
+	bh=P4+Jkl5NErhh3mKk3bQG5x1U9ESpHY/cQkr7CvLm9Yw=;
+	b=pEY7DszDk6I5LWnxfU+ZNIxwC/juldiFO2oHtbtlTekSE3qORDagw3DsVOOQjaigTt
+	LZr2PfvUR3Qibr83yInKF1Kxq9MEwgYyj80zx1EzKZgg1k3UvbqZ/Pnw3llGDS4E2tGI
+	C4/5jRXzcgiVlbPqGsF1eQ0EmU0UsgknA+Syd6RgryX/VH5SwWimq/IvPaZUgatswkRB
+	UPSjOT9TIu7Q69SWSO6f+ARdex3kkxOC0XV6E97CYhyy3yF4YiyT2PlsHJ9q+G+cUyqC
+	3qyWzvYGJkfcPEZQc6Txqi2wF88Rnu9m0nUB8QDEzKzX+rzL3XzKaZNJYR90QTyMm+VA
+	fkMQ==
+X-Gm-Message-State: AKwxyte9Z9pHOppZpDxs9TBX0gBpwiagJ/vPNrUejupO7JCMF7z1kv/Y
+	poGaHehsnxJBLGRXDGN5BsjeFG5A
+X-Google-Smtp-Source: AH8x227j1G2ocVRratZu7S7seDhFh/uqOXWRAQ5yraec9cvlTa/uOb3wU94W2RoE3Zr7io6KYK388w==
+X-Received: by 10.200.27.232 with SMTP id m37mr7632780qtk.171.1516564691227;
+	Sun, 21 Jan 2018 11:58:11 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id s3sm8866087qkb.52.2018.01.21.08.54.23
+	by smtp.gmail.com with ESMTPSA id
+	t23sm10137751qtc.95.2018.01.21.11.58.10
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 21 Jan 2018 08:54:23 -0800 (PST)
+	Sun, 21 Jan 2018 11:58:10 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jan 2018 11:54:14 -0500
-Message-Id: <1516553654-14732-1-git-send-email-derek@asterius.io>
+Date: Sun, 21 Jan 2018 14:58:04 -0500
+Message-Id: <1516564684-1690-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-smbus: update to version 4.0
+Subject: [meta-python][PATCH] python-tornado: update license checksum for whitespace changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,45 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jan 2018 16:54:23 -0000
-
-Fixes issues related to incompatibility with i2c-tools upgrade in oe-core
+X-List-Received-Date: Sun, 21 Jan 2018 19:58:10 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-smbus.inc               | 7 +++----
- .../python/{python-smbus_3.1.2.bb => python-smbus_4.0.bb}          | 0
- .../python/{python3-smbus_3.1.2.bb => python3-smbus_4.0.bb}        | 0
- 3 files changed, 3 insertions(+), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python-smbus_3.1.2.bb => python-smbus_4.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-smbus_3.1.2.bb => python3-smbus_4.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-tornado.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-smbus.inc b/meta-python/recipes-devtools/python/python-smbus.inc
-index de2a270..0bca58f 100644
---- a/meta-python/recipes-devtools/python/python-smbus.inc
-+++ b/meta-python/recipes-devtools/python/python-smbus.inc
-@@ -2,10 +2,9 @@ SUMMARY = "Set of i2c tools for linux - Python module"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=17;md5=fa24df321a520ff8e10f203425ab9fa8"
+diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
+index 052b76a..29d10da 100644
+--- a/meta-python/recipes-devtools/python/python-tornado.inc
++++ b/meta-python/recipes-devtools/python/python-tornado.inc
+@@ -4,7 +4,7 @@ By using non-blocking network I/O, Tornado can scale to tens of thousands of ope
+ polling, WebSockets, and other applications that require a long-lived connection to each user."
+ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=15;md5=5ab7571a79ad62d0ca7aea308bac7560"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=15;md5=8d463fc66ff8f275354ffe88d1896e12"
  
--SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/i2c-tools-${PV}.tar.bz2 \
--"
--SRC_URI[md5sum] = "7104a1043d11a5e2c7b131614eb1b962"
--SRC_URI[sha256sum] = "db5e69f2e2a6e3aa2ecdfe6a5f490b149c504468770f58921c8c5b8a7860a441"
-+SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
-+SRC_URI[md5sum] = "d92a288d70f306d3895e3a7e9c14c9aa"
-+SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f2054bb39f19961d67e0c91610f071ca403"
- 
- DEPENDS += "i2c-tools"
- 
-diff --git a/meta-python/recipes-devtools/python/python-smbus_3.1.2.bb b/meta-python/recipes-devtools/python/python-smbus_4.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
-rename to meta-python/recipes-devtools/python/python-smbus_4.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb b/meta-python/recipes-devtools/python/python3-smbus_4.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-smbus_4.0.bb
+ SRC_URI[md5sum] = "a5fc7fd4aea94867609a491ce65786f1"
+ SRC_URI[sha256sum] = "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a"
 -- 
 2.7.4
 
