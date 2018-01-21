@@ -1,25 +1,26 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
 Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by mail.openembedded.org (Postfix) with ESMTP id C581E787C2
+	by mail.openembedded.org (Postfix) with ESMTP id 1AAAD787C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 22:44:20 +0000 (UTC)
+	Sun, 21 Jan 2018 22:44:23 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
 	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 Jan 2018 14:44:22 -0800
+	21 Jan 2018 14:44:24 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,393,1511856000"; d="scan'208";a="21169349"
+X-IronPort-AV: E=Sophos;i="5.46,393,1511856000"; d="scan'208";a="21169357"
 Received: from wrath.jf.intel.com ([10.54.70.11])
-	by orsmga003.jf.intel.com with ESMTP; 21 Jan 2018 14:44:22 -0800
+	by orsmga003.jf.intel.com with ESMTP; 21 Jan 2018 14:44:24 -0800
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jan 2018 14:44:08 -0800
-Message-Id: <3817f7ffeb99d5e952ed80031b5c54586f20cfc1.1516574387.git.timothy.t.orling@linux.intel.com>
+Date: Sun, 21 Jan 2018 14:44:09 -0800
+Message-Id: <d57d839bd9663c4f808ed512164e4bcccf8e445d.1516574387.git.timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.13.6
 In-Reply-To: <cover.1516574387.git.timothy.t.orling@linux.intel.com>
 References: <cover.1516574387.git.timothy.t.orling@linux.intel.com>
-Subject: [meta-perl][PATCH 08/12] libnet-dns-perl: upgrade 1.13 -> 1.14
+MIME-Version: 1.0
+Subject: [meta-perl][PATCH 09/12] libnet-ssleay-perl: upgrade 1.81 -> 1.84
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,56 +33,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jan 2018 22:44:20 -0000
+X-List-Received-Date: Sun, 21 Jan 2018 22:44:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 * Fix RDEPENDS
+* Use OPENSSL_PREFIX to pick up proper OpenSSL
+* Fix mangled .so by rearranging EXTRA_CPANFLAGS
 
 Changes:
 
-**** 1.14 Dec 15, 2017
+1.84 2018-01-17
+* Fixed an error in t/local/04_basic.t causing a test failure if
+* Test::Exception not installed. Reported by Joel Berger.
 
-Fix rt.cpan.org #123702
+1.83 2018-01-16
+* Fixed a problem with exporting OPENSSL_NO_NEXTPROTONEG even though they are not availble
+  on LibreSSL
+* Patch patch-SSLeay_xs-NO_NPN from Alexander Bluhm.
+* Patch from Heikki Vatiainen adds support for SSL_set_default_passwd_cb* for
+* OpenSSL 1.1.0f and later. LibreSSL does not support these functions, at least yet.
+* Patch from Heikki Vatiainen adds new functions related to SSL_CTX_new.
+* Patch from Heikki Vatiainen adds two new functions introduced in OpenSSL 1.1.0, a number
+  of constants and a couple of const qualifiers to SSLeay.xs. Tests and
+  documentation .pod were also updated.
+* Patch from Heikki Vatiainen adds one new OpenSSL 1.1.0 function and has a minor fix for
+* LibreSSL version detection:
+  - Added support for SSL_use_certificate_chain_file
+    function introduced in OpenSSL 1.1.0.
+  - Fixed LibreSSL version detection to correctly parse
+* LibreSSL minor version.
+* Patch from Steffen Ulrich to fix memory leaks in OCSP handling. Thanks.
+* Patch from Heikki Vatiainen adds new functions for certificate verification introduced in
+* OpenSSL 1.02, a number of constants, new test data files, new tests and
+  updates to .pod documentation.
+* The new functions provide access to the built-in wildcard check
+  functionality available in OpenSSL 1.0.2 and later.
+* The patch also adds new tests for the new functions and updates some of
+  the current tests for CTX_set_default_passwd_cb* functions.
+* Added X509_STORE_CTX_new and X509_verify_cert.
+* SSL_OCSP_response_verify now clears the error queue if OCSP_basic_verify fails but the
+  intermediate certificate succeeds. Patch from Stefan Ullrich.
 
-        'use base' should not be used in packages with several
-        subpackages defined
-
-Fix rt.cpan.org #123676
-
-        Net::DNS::Nameserver malformed message on big axfr
+1.82 2017-10-31
+* Added support for building under Linuxbrew (a linuxbrew version of MacOS Homebrew)
+* Patch from Matthew Altus, that implements SSL_CTX_set_psk_client_callback() and
+  SSL_set_psk_client_callback().
+* Patch to build with LibreSSL has no support for NPN
+* Also skip the NPN test if the SSL library is LibreSSL.
+* Fixed a problem with a variable declaration in ssleay_session_secret_cb_invoke reported
+  by Graham Ollis.
+* Significant patch set from Open System Consultants:
+  - Bugfix: tlsext_status_cb_invoke(...): free ocsp_response only when allocated.
+  - The same callback is used on a server side for OCSP stapling and in that
+    case ocsp_response is NULL and not used.
+  - New feature: Added a binding SSL_set_session_ticket_ext_cb(ssl,callback,data)
+  - A callback used by EAP-FAST/EAP-TEAT to parse and process TLS session ticket.
+  - Tests are in t/local/65_ticket_sharing_2.t
+  - New feature: Added a binding SSL_set_session_ticket_ext(ssl,ticket)
+  - Used by EAP-FAST/EAP-TEAP to define TLS session ticket value.
+  - Tests are in t/local/65_ticket_sharing_2.t
+  - Bugfix: tlsext_ticket_key_cb_invoke(...): allow SHA256 HMAC key to be 32 bytes
+    instead of 16 bytes (which OpenSSL will pad with zeros up to 32 bytes).
+  - New feature: Added following bindings:
+    = X509_get_ex_data(cert,idx)
+    = X509_get_ex_new_index(argl,argp,new_func,dup_funL,free_func)
+    = X509_get_app_data(cert)
+    = X509_set_ex_data(cert,idx,data)
+    = X509_set_app_data(cert,arg)
+    = X509_STORE_CTX_get_ex_new_index(argl,argp,new_func,dup_func,free_func)
+    = X509_STORE_CTX_get_app_data(x509_store_ctx)
+    = X509_STORE_CTX_set_app_data(x509_store_ctx,arg)
+  - New feature: Added an implementation for SSL_get_finished(ssl,buf,count=2*EVP_MAX_MD_SIZE)
+  - Tests are in t/local/43_misc_functions.t
+  - New feature: Added an implementation for SSL_get_peer_finished(ssl,buf,count=2*EVP_MAX_MD_SIZE)
+  - Tests are in t/local/43_misc_functions.t
+  - Bugfix: SSL_get_keyblock_size(s): Calculate key block size correctly also with AEAD ciphers
+    which don’t use digest functions.
+  - New feature: Added a binding SSL_set_tlsext_status_ocsp_resp(ssl,staple)
+  - Used by a server side to include OCSP staple in ServerHello.
+  - Bugfix: SSL_OCSP_response_verify(ssl,rsp,svreq,flags): check that chain and last are not NULL
+    before trying to use them.
+  - Bugfix: inc/Module/Install/PRIVATE/Net/SSLeay.pm: Don’t quote include and lib paths.
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- .../libnet/{libnet-dns-perl_1.13.bb => libnet-dns-perl_1.14.bb}     | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.13.bb => libnet-dns-perl_1.14.bb} (77%)
+ ...eay-perl_1.81.bb => libnet-ssleay-perl_1.84.bb} | 27 ++++++++++++----------
+ 1 file changed, 15 insertions(+), 12 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-ssleay-perl_1.81.bb => libnet-ssleay-perl_1.84.bb} (65%)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.13.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
-similarity index 77%
-rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.13.bb
-rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
-index da274efdf..efaa7f7b1 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.13.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
-@@ -9,8 +9,8 @@ DEPENDS += "perl"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.81.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
+similarity index 65%
+rename from meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.81.bb
+rename to meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
+index a861b69e9..cfecef9cf 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.81.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
+@@ -11,27 +11,30 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+ DEPENDS = "openssl zlib openssl-native"
+-RDEPENDS_${PN} += "perl-module-carp \
+-                   perl-module-errno \
+-                   perl-module-extutils-makemaker \
+-                   perl-module-mime-base64 \
+-                   perl-module-socket \
+-                  "
++RDEPENDS_${PN} += "\
++    libssl \
++    libcrypto \
++    perl-module-carp \
++    perl-module-errno \
++    perl-module-extutils-makemaker \
++    perl-module-mime-base64 \
++    perl-module-socket \
++    zlib \
++"
  
--SRC_URI[md5sum] = "ed0c4c22daaf88c4071bae13b6f71f99"
--SRC_URI[sha256sum] = "7ec76663365f2f96de46fe07bd6c9d45ab21171ae83954e8d1b816428b518c36"
-+SRC_URI[md5sum] = "0da1099c0a3548d36ea9e31d5bb9e122"
-+SRC_URI[sha256sum] = "83c38a594eeb2c85d66e60047a0f5b403f34bd92a5d13606f02e828d450299fc"
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+            file://run-ptest \
+           "
+-SRC_URI[md5sum] = "71932ce34d4db44de8d00399c3405792"
+-SRC_URI[sha256sum] = "00cbb6174e628b42178e1445c9fd5a3c5ae2cfd6a5a43e03610ba14786f21b7d"
++SRC_URI[md5sum] = "cfbe968487149626978f427cc9fb8c77"
++SRC_URI[sha256sum] = "823ec3cbb428309d6a9e56f362a9300693ce3215b7fede109adb7be361fff177"
  
- S = "${WORKDIR}/Net-DNS-${PV}"
+ S = "${WORKDIR}/Net-SSLeay-${PV}"
  
-@@ -18,6 +18,8 @@ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}
+ inherit cpan ptest
  
- inherit cpan
- 
-+RDEPENDS_${PN} = "perl-module-integer"
+-EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
+-                   INC=-I=${STAGING_INCDIR} \
+-                   '-lssl -lcrypto -lz' \
+-                  "
++export OPENSSL_PREFIX="${STAGING_LIBDIR}"
 +
- do_compile() {
-     export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
-     cpan_do_compile
++EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
+ 
+ do_install_ptest() {
+     cp -r ${B}/t ${D}${PTEST_PATH}
 -- 
 2.13.6
 
