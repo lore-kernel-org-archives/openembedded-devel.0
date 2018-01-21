@@ -1,41 +1,41 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 157F67874D
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DC4978745
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 16:21:24 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id g14so5947860qti.2
+	Sun, 21 Jan 2018 16:21:25 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id z11so15151713qtm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 08:21:26 -0800 (PST)
+	Sun, 21 Jan 2018 08:21:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=v45PRrGrBhzz41WqcnEKg73b4ppanADBrX9QmqY0M/0=;
-	b=uaaRTauqz7kKBJ1rRq5wkt0bR0o7iGIDuQ0LlS96mbRS0frn8Ay5UUTCGurBlubbbP
-	n285YfE6nScFGoPp3vBUd/gxO69ysJIU2NQNy16URxVMFgeKwynUplSj0131lBDX+oog
-	6ak7v5aWLsXrAuv0vV/kBqz2yNEtBydzhk8PP23rOXX/nIAU+Sn4HVifhoV16leoY+Ef
-	SvqPwjg/tBfmEN8Wmw8NOhdiGgJz16Ezrs6+9bq/I1JjXTmeUB6Yg63dFRrSDKx8HwqT
-	ws4XdbQE3K0bsy4HbsMy66c4BU3QEAeKBCIO1Esybqa5aGL9pCLrKbD6bucW9HeN7vIx
-	9e8w==
-X-Gm-Message-State: AKwxytdVZMZ8QfPImv5tb1le7ZYn4qeKi4RvJ30Wto6C+D7axzYTNM8l
-	RiX5IGzrVIro23Z/hfC1/7TatHqi
-X-Google-Smtp-Source: AH8x225atTDM55x7N6tRJQdB5HjOnnuhlgmwUl66Lk+ZCszHNe+u723ulcNcVXdJY4b7KAYr1yesKg==
-X-Received: by 10.233.220.130 with SMTP id q124mr6940609qkf.170.1516551685716; 
-	Sun, 21 Jan 2018 08:21:25 -0800 (PST)
+	bh=ZwA2G9igCanPZtwJyUsGxwDvgqskvwJeXZ/+wFMkRX4=;
+	b=XVMMDh7FMxldSR46A27+YGJsSqZC3keE0UWptPrgtGFSAcHeSw3vHwubY25vzP82ud
+	D9fhMh5Pt3IPcT9ZpaAgtXC6JEvxe/ROi46WitgBNBnyQF6gXqKI3sa/HgBaa9cx4eV9
+	dYXRgpltJnb6Aq/RkNacsnb5Ll6N7dunRn/nFkFC0er/hG3HWH1Y8nUFf4eRDY0zOgVT
+	WdGg3iRdPHobNzYfNdX4RBBbNi2ngR/Ax3iW47MqPBVv6rh4jwdj61104fOHpo3ktySr
+	kgnHGJAU8OTceRo9Upf+quBU8vbjYv5Kgw5HuOyjQGDkBUfY4JfZNwMODH1WJBpH2F1t
+	ZPFg==
+X-Gm-Message-State: AKwxytd0j0kRIixE0hdwvLrbuNEYSkFXcsOOJc7/hHxrnO1JXUgkMHrL
+	joE5cUw38mVHVqrBmh3tHgepl0e0
+X-Google-Smtp-Source: AH8x224Oq7CIJUnuRM12pfqrdLE0uqYPDng7hzVWpMEkrOpmUQ4i18m8tupqrgxTaVW8yQww3GwQLg==
+X-Received: by 10.55.26.195 with SMTP id l64mr6078840qkh.150.1516551686663;
+	Sun, 21 Jan 2018 08:21:26 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
 	g103sm10121879qkh.75.2018.01.21.08.21.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 21 Jan 2018 08:21:25 -0800 (PST)
+	Sun, 21 Jan 2018 08:21:26 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jan 2018 11:20:33 -0500
-Message-Id: <1516551637-32255-7-git-send-email-derek@asterius.io>
+Date: Sun, 21 Jan 2018 11:20:34 -0500
+Message-Id: <1516551637-32255-8-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1516551637-32255-1-git-send-email-derek@asterius.io>
 References: <1516551637-32255-1-git-send-email-derek@asterius.io>
-Subject: [meta-python][PATCH 06/10] Remove deprecated python3-selectors from the RDEPENDS
+Subject: [meta-python][PATCH 07/10] Remove deprecated python3-lang from the RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,114 +50,129 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 21 Jan 2018 16:21:25 -0000
 
-The python3-selectors package was removed as part of the migration to the
+The python3-lang package was removed as part of the migration to the
 json manifest file.  The functionality is now part of core
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb | 1 -
- meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb  | 1 -
- meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb  | 2 --
- meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb    | 4 ----
- meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb      | 2 +-
- meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb     | 1 -
- meta-python/recipes-devtools/python/python3-pyserial_3.4.bb      | 2 --
- meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb     | 1 -
- meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb      | 1 -
- 9 files changed, 1 insertion(+), 14 deletions(-)
+ meta-python/recipes-devtools/python/python-jinja2.inc             | 2 +-
+ meta-python/recipes-devtools/python/python-jinja2_2.10.bb         | 2 +-
+ meta-python/recipes-devtools/python/python-jsonschema.inc         | 1 -
+ meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb    | 1 +
+ meta-python/recipes-devtools/python/python-pyasn1.inc             | 1 -
+ meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb        | 4 ++++
+ meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb | 4 ----
+ meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb      | 6 ------
+ meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb     | 2 --
+ 9 files changed, 7 insertions(+), 16 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
-index 9d98372..cfbe575 100644
---- a/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
-@@ -2,6 +2,5 @@ inherit setuptools3
- require python-asn1crypto.inc
+diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+index 72562fb..510765b 100644
+--- a/meta-python/recipes-devtools/python/python-jinja2.inc
++++ b/meta-python/recipes-devtools/python/python-jinja2.inc
+@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "f84be1bb0040caca4cea721fcbbbbd61f9be9464ca236387158b0feea0
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
+     ${PYTHON_PN}-math ${PYTHON_PN}-netclient ${PYTHON_PN}-textutils \
+-    ${PYTHON_PN}-lang ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
++    ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-markupsafe \
+     ${PYTHON_PN}-json ${PYTHON_PN}-threading ${PYTHON_PN}-numbers"
+ 
+ CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python-jinja2_2.10.bb b/meta-python/recipes-devtools/python/python-jinja2_2.10.bb
+index 19b2bfa..0607521 100644
+--- a/meta-python/recipes-devtools/python/python-jinja2_2.10.bb
++++ b/meta-python/recipes-devtools/python/python-jinja2_2.10.bb
+@@ -1,4 +1,4 @@
+ inherit pypi setuptools
+ require python-jinja2.inc
+ 
+-RDEPENDS_${PN} += "${PYTHON_PN}-re"
++RDEPENDS_${PN} += "${PYTHON_PN}-lang ${PYTHON_PN}-re"
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
+index b602b27..748ef6e 100644
+--- a/meta-python/recipes-devtools/python/python-jsonschema.inc
++++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
+@@ -11,7 +11,6 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-core \
+     ${PYTHON_PN}-io \
+     ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-lang \
+     ${PYTHON_PN}-netclient \
+     ${PYTHON_PN}-numbers \
+     ${PYTHON_PN}-pkgutil \
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb b/meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb
+index 55cbb20..c118f2d 100644
+--- a/meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb
+@@ -5,5 +5,6 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-argparse \
+     ${PYTHON_PN}-contextlib \
+     ${PYTHON_PN}-functools32 \
++    ${PYTHON_PN}-lang \
+     ${PYTHON_PN}-re \
+ "
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index 2539101..f3c32e0 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -8,7 +8,6 @@ SRC_URI[sha256sum] = "d258b0a71994f7770599835249cece1caef3c70def868c4915e6e5ca49
  
  RDEPENDS_${PN}_class-target += " \
--    ${PYTHON_PN}-selectors \
+     ${PYTHON_PN}-codecs \
+-    ${PYTHON_PN}-lang \
+     ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-math \
      ${PYTHON_PN}-shell \
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb
+index 4461918..a13c74d 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb
++++ b/meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb
+@@ -1,2 +1,6 @@
+ inherit pypi setuptools
+ require python-pyasn1.inc
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-lang \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb
+index f807042..f64e51d 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb
+@@ -4,7 +4,3 @@ require python-cryptography.inc
+ SRC_URI += " \
+     file://run-ptest \
  "
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
-index e28389e..091eb36 100644
---- a/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
-@@ -4,5 +4,4 @@ require python-dnspython.inc
- # Requires _pydecimal.py which is in misc
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-misc \
--    ${PYTHON_PN}-selectors \
- "
-diff --git a/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb b/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
-index bd2bcb3..70813bf 100644
---- a/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
-@@ -1,4 +1,2 @@
- inherit setuptools3
- require python-hyperlink.inc
--
--RDEPENDS_${PN} += "${PYTHON_PN}-selectors"
-diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
-index be55770..30416a4 100644
---- a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
-@@ -1,6 +1,2 @@
- require python-netaddr.inc
- inherit setuptools3
 -
 -RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-selectors \
+-    ${PYTHON_PN}-lang \
 -"
-diff --git a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
-index 997b0ca..93df83a 100644
---- a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
-@@ -11,4 +11,4 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
- inherit setuptools3 python3native pypi
- 
--RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-selectors"
-+RDEPENDS_${PN} += "${PYTHON_PN}-datetime"
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
-index 55b0314..e6e9726 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
-@@ -4,6 +4,5 @@ require python-pymongo.inc
- # Requires _pydecimal which is in misc
- RDEPENDS_${PYTHON_PN}-bson += " \
-     ${PYTHON_PN}-misc \
--    ${PYTHON_PN}-selectors \
-     ${PYTHON_PN}-subprocess \
- "
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-index 6807b95..17ed3f8 100644
---- a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-@@ -5,5 +5,3 @@ do_install_append() {
-     rm -f ${D}${bindir}/miniterm.py
-     rmdir ${D}${bindir}
- }
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+index 0292555..a62d944 100644
+--- a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+@@ -1,8 +1,2 @@
+ require python-pyudev.inc
 -
--RDEPENDS_${PN} += "${PYTHON_PN}-selectors"
-diff --git a/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb b/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
-index e5f00e8..bbda05a 100644
---- a/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
-@@ -3,5 +3,4 @@ require python-pysocks.inc
+-RDEPENDS_${PN} = "\
+-    ${PYTHON_PN}-lang \
+-"
+-
+ inherit pypi setuptools3
+-
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb b/meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb
+index d7533d8..dfb9d4a 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb
+@@ -1,8 +1,6 @@
+ inherit pypi setuptools3
+ require python-twisted.inc
  
- RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-selectors \
- "
-diff --git a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
-index b8dc174..8ad1c17 100644
---- a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
-@@ -4,5 +4,4 @@ require python-whoosh.inc
- # Requires _pydecimal.py which is in misc
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-misc \
--    ${PYTHON_PN}-selectors \
- "
+-RDEPENDS_${PN}-core += "python3-lang"
+-
+ FILES_${PN}-core_append += " \
+   ${libdir}/${PYTHON_DIR}/site-packages/twisted/__pycache__ \
+   ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__pycache__/*pyc \
 -- 
 2.7.4
 
