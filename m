@@ -1,41 +1,41 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2039E7875B
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 157F67874D
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 21 Jan 2018 16:21:24 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id c2so15147771qtn.9
+Received: by mail-qt0-f195.google.com with SMTP id g14so5947860qti.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 08:21:25 -0800 (PST)
+	Sun, 21 Jan 2018 08:21:26 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=01GpM2cbFQnnsOkPthhpiLtExp7yE0/ESTnLGSV0k+Y=;
-	b=YN7mzm6iqwJPTynBkjsmzJsDyxdYH89nY71ipkizM8yRKv9QQL2NqQeQZMW8kZMsdw
-	nQ4RJVEDu1MPzJT45kSPcx03mZUcUixbVAUjibF1Y+A6aYpDDGoxrv1k+WzHIrA968EF
-	Y7lqhb6WCPqyRNvhQzfQcduWs2+CubINskc9sH+/JpRWKkvNwoCyWVMJ8GP041EoNOvM
-	Dqn0i2HkUJXyFZgKBlIdyi8hqEh8D1i5QBvuiCUs5jzjcOPY2hxw/fIiddg7HN/7H6Ty
-	8zxqvohLJAv32dOFg53Nfzl76hww/anFqakT+D9YDyNHam0Ir8ymqRika9xqp8QgBha6
-	WW2Q==
-X-Gm-Message-State: AKwxytfERnzj33PYoaZ4IaIfOIAEUEjYBjk7Y8E5YL+0aJUSE7LVa1ts
-	nMA/VyjYIyaH28gFA7x4bV2nEQZI
-X-Google-Smtp-Source: AH8x224mLn/yOXtdY+3mQSfWURUm5nzEvb+0MK2WckL0/2/r2NUhBZladI+YvJAVupwoajqpxqaepA==
-X-Received: by 10.55.42.21 with SMTP id q21mr6184078qkh.282.1516551685206;
+	bh=v45PRrGrBhzz41WqcnEKg73b4ppanADBrX9QmqY0M/0=;
+	b=uaaRTauqz7kKBJ1rRq5wkt0bR0o7iGIDuQ0LlS96mbRS0frn8Ay5UUTCGurBlubbbP
+	n285YfE6nScFGoPp3vBUd/gxO69ysJIU2NQNy16URxVMFgeKwynUplSj0131lBDX+oog
+	6ak7v5aWLsXrAuv0vV/kBqz2yNEtBydzhk8PP23rOXX/nIAU+Sn4HVifhoV16leoY+Ef
+	SvqPwjg/tBfmEN8Wmw8NOhdiGgJz16Ezrs6+9bq/I1JjXTmeUB6Yg63dFRrSDKx8HwqT
+	ws4XdbQE3K0bsy4HbsMy66c4BU3QEAeKBCIO1Esybqa5aGL9pCLrKbD6bucW9HeN7vIx
+	9e8w==
+X-Gm-Message-State: AKwxytdVZMZ8QfPImv5tb1le7ZYn4qeKi4RvJ30Wto6C+D7axzYTNM8l
+	RiX5IGzrVIro23Z/hfC1/7TatHqi
+X-Google-Smtp-Source: AH8x225atTDM55x7N6tRJQdB5HjOnnuhlgmwUl66Lk+ZCszHNe+u723ulcNcVXdJY4b7KAYr1yesKg==
+X-Received: by 10.233.220.130 with SMTP id q124mr6940609qkf.170.1516551685716; 
 	Sun, 21 Jan 2018 08:21:25 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	g103sm10121879qkh.75.2018.01.21.08.21.24
+	g103sm10121879qkh.75.2018.01.21.08.21.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 21 Jan 2018 08:21:24 -0800 (PST)
+	Sun, 21 Jan 2018 08:21:25 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Jan 2018 11:20:32 -0500
-Message-Id: <1516551637-32255-6-git-send-email-derek@asterius.io>
+Date: Sun, 21 Jan 2018 11:20:33 -0500
+Message-Id: <1516551637-32255-7-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1516551637-32255-1-git-send-email-derek@asterius.io>
 References: <1516551637-32255-1-git-send-email-derek@asterius.io>
-Subject: [meta-python][PATCH 05/10] Remove deprecated ${PYTHON_PN}-importlib from the RDEPENDS
+Subject: [meta-python][PATCH 06/10] Remove deprecated python3-selectors from the RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,129 +48,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jan 2018 16:21:24 -0000
+X-List-Received-Date: Sun, 21 Jan 2018 16:21:25 -0000
 
-The ${PYTHON_PN}-importlib package was removed as part of the migration to the
+The python3-selectors package was removed as part of the migration to the
 json manifest file.  The functionality is now part of core
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb    | 2 +-
- meta-python/recipes-devtools/python/python-astroid_1.6.0.bb   | 1 -
- meta-python/recipes-devtools/python/python-behave_1.2.5.bb    | 2 +-
- meta-python/recipes-devtools/python/python-can.inc            | 1 -
- meta-python/recipes-devtools/python/python-dbusmock_0.16.7.bb | 1 -
- meta-python/recipes-devtools/python/python-django.inc         | 1 -
- meta-python/recipes-devtools/python/python-pandas_0.22.0.bb   | 1 -
- meta-python/recipes-devtools/python/python-pyroute2.inc       | 1 -
- meta-python/recipes-devtools/python/python-pyserial_3.4.bb    | 2 +-
- 9 files changed, 3 insertions(+), 9 deletions(-)
+ meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb | 1 -
+ meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb  | 1 -
+ meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb  | 2 --
+ meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb    | 4 ----
+ meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb      | 2 +-
+ meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb     | 1 -
+ meta-python/recipes-devtools/python/python3-pyserial_3.4.bb      | 2 --
+ meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb     | 1 -
+ meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb      | 1 -
+ 9 files changed, 1 insertion(+), 14 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb
-index 9d2e165..7ddf4e5 100644
---- a/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb
-+++ b/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb
-@@ -26,7 +26,7 @@ BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
+index 9d98372..cfbe575 100644
+--- a/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
++++ b/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
+@@ -2,6 +2,5 @@ inherit setuptools3
+ require python-asn1crypto.inc
  
- EXTRA_OECONF = "--disable-cairo --with-python=${PYTHON}"
- 
--RDEPENDS_${PN} += "python-setuptools python-importlib"
-+RDEPENDS_${PN} += "python-setuptools"
- RDEPENDS_${PN}_class-native = ""
- 
- do_install_append() {
-diff --git a/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb b/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb
-index 42208bc..fd98630 100644
---- a/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb
-@@ -4,7 +4,6 @@ require python-astroid.inc
  RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-enum34 \
-     ${PYTHON_PN}-backports-functools-lru-cache \
--    ${PYTHON_PN}-importlib \
-     ${PYTHON_PN}-re \
-     ${PYTHON_PN}-singledispatch \
+-    ${PYTHON_PN}-selectors \
+     ${PYTHON_PN}-shell \
  "
-diff --git a/meta-python/recipes-devtools/python/python-behave_1.2.5.bb b/meta-python/recipes-devtools/python/python-behave_1.2.5.bb
-index 541a79d..3db2016 100644
---- a/meta-python/recipes-devtools/python/python-behave_1.2.5.bb
-+++ b/meta-python/recipes-devtools/python/python-behave_1.2.5.bb
-@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
- SRC_URI[md5sum] = "3af4bc2886d2be982e41bfaba61da3bc"
- SRC_URI[sha256sum] = "81b731ac5187e31e4aad2594944fa914943683a9818320846d037c5ebd6d5d0b"
+diff --git a/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
+index e28389e..091eb36 100644
+--- a/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
+@@ -4,5 +4,4 @@ require python-dnspython.inc
+ # Requires _pydecimal.py which is in misc
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-misc \
+-    ${PYTHON_PN}-selectors \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb b/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
+index bd2bcb3..70813bf 100644
+--- a/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
+@@ -1,4 +1,2 @@
+ inherit setuptools3
+ require python-hyperlink.inc
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-selectors"
+diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
+index be55770..30416a4 100644
+--- a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
++++ b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
+@@ -1,6 +1,2 @@
+ require python-netaddr.inc
+ inherit setuptools3
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-selectors \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+index 997b0ca..93df83a 100644
+--- a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
++++ b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+@@ -11,4 +11,4 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
  
--RDEPENDS_${PN} += "python-difflib python-setuptools python-pkgutil python-misc python-argparse python-xml python-importlib python-enum34 python-parse python-parse-type python-six"
-+RDEPENDS_${PN} += "python-difflib python-setuptools python-pkgutil python-misc python-argparse python-xml python-enum34 python-parse python-parse-type python-six"
+ inherit setuptools3 python3native pypi
  
- inherit pypi setuptools
-diff --git a/meta-python/recipes-devtools/python/python-can.inc b/meta-python/recipes-devtools/python/python-can.inc
-index 8cdd4d3..2b15af4 100644
---- a/meta-python/recipes-devtools/python/python-can.inc
-+++ b/meta-python/recipes-devtools/python/python-can.inc
-@@ -10,7 +10,6 @@ PYPI_PACKAGE="python-can"
+-RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-selectors"
++RDEPENDS_${PN} += "${PYTHON_PN}-datetime"
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
+index 55b0314..e6e9726 100644
+--- a/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
+@@ -4,6 +4,5 @@ require python-pymongo.inc
+ # Requires _pydecimal which is in misc
+ RDEPENDS_${PYTHON_PN}-bson += " \
+     ${PYTHON_PN}-misc \
+-    ${PYTHON_PN}-selectors \
+     ${PYTHON_PN}-subprocess \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
+index 6807b95..17ed3f8 100644
+--- a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
+@@ -5,5 +5,3 @@ do_install_append() {
+     rm -f ${D}${bindir}/miniterm.py
+     rmdir ${D}${bindir}
+ }
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-selectors"
+diff --git a/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb b/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
+index e5f00e8..bbda05a 100644
+--- a/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
+@@ -3,5 +3,4 @@ require python-pysocks.inc
  
  RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-ctypes \
--    ${PYTHON_PN}-importlib \
-     ${PYTHON_PN}-logging \
-     ${PYTHON_PN}-misc \
-     ${PYTHON_PN}-netserver \
-diff --git a/meta-python/recipes-devtools/python/python-dbusmock_0.16.7.bb b/meta-python/recipes-devtools/python/python-dbusmock_0.16.7.bb
-index fb8c0aa..ec8c54a 100644
---- a/meta-python/recipes-devtools/python/python-dbusmock_0.16.7.bb
-+++ b/meta-python/recipes-devtools/python/python-dbusmock_0.16.7.bb
-@@ -20,7 +20,6 @@ inherit pypi setuptools
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-dbus \
--    ${PYTHON_PN}-importlib \
-     ${PYTHON_PN}-pygobject \
-     ${PYTHON_PN}-xml \
-     "
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index 9287715..3602a74 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-+++ b/meta-python/recipes-devtools/python/python-django.inc
-@@ -19,7 +19,6 @@ RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-datetime \
-     ${PYTHON_PN}-email \
-     ${PYTHON_PN}-html \
--    ${PYTHON_PN}-importlib \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-multiprocessing \
-     ${PYTHON_PN}-netserver \
-diff --git a/meta-python/recipes-devtools/python/python-pandas_0.22.0.bb b/meta-python/recipes-devtools/python/python-pandas_0.22.0.bb
-index 355074c..b3bfab9 100644
---- a/meta-python/recipes-devtools/python/python-pandas_0.22.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pandas_0.22.0.bb
-@@ -4,5 +4,4 @@ require python-pandas.inc
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-future \
-     ${PYTHON_PN}-json \
--    ${PYTHON_PN}-importlib \
+     ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-selectors \
  "
-diff --git a/meta-python/recipes-devtools/python/python-pyroute2.inc b/meta-python/recipes-devtools/python/python-pyroute2.inc
-index f63ccbd..24e3555 100644
---- a/meta-python/recipes-devtools/python/python-pyroute2.inc
-+++ b/meta-python/recipes-devtools/python/python-pyroute2.inc
-@@ -13,7 +13,6 @@ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
+index b8dc174..8ad1c17 100644
+--- a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
++++ b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
+@@ -4,5 +4,4 @@ require python-whoosh.inc
+ # Requires _pydecimal.py which is in misc
  RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-ctypes \
-     ${PYTHON_PN}-distutils \
--    ${PYTHON_PN}-importlib \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-logging \
-     ${PYTHON_PN}-multiprocessing \
-diff --git a/meta-python/recipes-devtools/python/python-pyserial_3.4.bb b/meta-python/recipes-devtools/python/python-pyserial_3.4.bb
-index 0497087..fd852a2 100644
---- a/meta-python/recipes-devtools/python/python-pyserial_3.4.bb
-+++ b/meta-python/recipes-devtools/python/python-pyserial_3.4.bb
-@@ -1,4 +1,4 @@
- inherit setuptools
- require python-pyserial.inc
- 
--RDEPENDS_${PN} += "${PYTHON_PN}-argparse ${PYTHON_PN}-importlib"
-+RDEPENDS_${PN} += "${PYTHON_PN}-argparse"
+     ${PYTHON_PN}-misc \
+-    ${PYTHON_PN}-selectors \
+ "
 -- 
 2.7.4
 
