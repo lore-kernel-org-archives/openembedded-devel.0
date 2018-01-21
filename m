@@ -1,25 +1,48 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0359F786F5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 06:18:34 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	20 Jan 2018 22:18:36 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,390,1511856000"; d="scan'208";a="12828778"
-Received: from wrath.jf.intel.com ([10.54.70.11])
-	by fmsmga002.fm.intel.com with ESMTP; 20 Jan 2018 22:18:36 -0800
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Jan 2018 22:18:33 -0800
-Message-Id: <13cdd884efc0ff6aa695bff1d8126cc02d9e82bc.1516515289.git.timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.13.6
-In-Reply-To: <cover.1516515289.git.timothy.t.orling@linux.intel.com>
-References: <cover.1516515289.git.timothy.t.orling@linux.intel.com>
-Subject: [meta-oe][PATCH 2/2] libdbi-perl: upgrade 1.636 -> 1.639
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 30E0A71BB9;
+	Sun, 21 Jan 2018 08:51:24 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id v71so11118782wmv.2;
+	Sun, 21 Jan 2018 00:51:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=01tQEh5hBvhwAfAZ31lci5rsd290qzd9mfBPkZl1izM=;
+	b=gty3E7INJLFmjleTKn2zle3K+fw4rfu19buPCKfLou8BsMSqjF/ObmMza09ifbB5aC
+	11B3pgDCNJuqTOm7EjJvIZpI/pbfhgV/8XbNdceiApY0bxE/+ifZguwZre2JuTP49Lil
+	/GFkarEOWaIF7qeqHOKteK+jRCzfzM7fEbwQiZM+UMETBCFOOM8uWKC4xhTl+Rn4vQ+/
+	Xo2fqicHYyIRuIFSNMvhgLEzxnWZzvK2mzMEYR28Dpr92QDccbv+VgzHfKsmfjWOm6Xs
+	hs+5NIr4KCPA8bNW3VhkMn8K2wcpuQo62hjIAAwj1prRq7ujzvxfT5H2o15BpTTdVq74
+	yLCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=01tQEh5hBvhwAfAZ31lci5rsd290qzd9mfBPkZl1izM=;
+	b=MH8NNH7fdPeNYZ9WW1VmWjNm/V1TntyV7Q+XizljqZgoiwUPLSDvHv2kmR68H/0NiB
+	pCmuMNQKuH3hyiwKlGDVPhXYPibYEXM8wiDQk0C9ekXQXqM/rLxo5QFSdUqOYtZ1tZ8s
+	N1vm+mNMw+IRUHsdLvlOgRt9n9oFUeVSehmRNRGlRWA88T4ROFwcaGfxWZOI/bATHol2
+	XdUcVt6ZfGBdJn/vEVjDFw9DUdypSKZrACrUQ7F9b5DMHKSbff87suHvBKGaODy/v1Dx
+	Wj6QT0DMnWsQ2GGgJy0uyWoZ/X2RJ/sElcU6C4jTy2ePkyojmqtlkvHAmnZeHaIxdaDG
+	f6Aw==
+X-Gm-Message-State: AKwxytdpgeZpbR0Mi1HK5IBnBX4OhhCdubwS5KBnHdDomBsmJJ9Go04l
+	seTA4mqTnbY+gmIUsvVXL/R2ZG9jsAnKUrb7n+c=
+X-Google-Smtp-Source: AH8x227QgzzegoNDVXuihMDqeA0AxQbtZq9+ivE4PX0uu/4JA1+yFduWnGs/Pfpm1lCALrTIJGAufJwQf9TfCBrI0dY=
+X-Received: by 10.28.74.141 with SMTP id n13mr2353296wmi.81.1516524685630;
+	Sun, 21 Jan 2018 00:51:25 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.28.74.211 with HTTP; Sun, 21 Jan 2018 00:51:25 -0800 (PST)
+In-Reply-To: <1516492892.24502.50.camel@linuxfoundation.org>
+References: <151648740023.29293.16416809305382382616@git.openembedded.org>
+	<CA+chaQcFLf+SuwaPq+Jg=8B11w_StoWE2iHzXjXDUynT8MyqQg@mail.gmail.com>
+	<1516492892.24502.50.camel@linuxfoundation.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sun, 21 Jan 2018 09:51:25 +0100
+Message-ID: <CA+chaQfJoeACB6+1KbM_+x1daYt80LW5Rrv3AOco4sFcURhpdw@mail.gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] branch morty updated: image: Expand PV to avoid AUTOREV parsing failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,72 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Jan 2018 06:18:35 -0000
+X-List-Received-Date: Sun, 21 Jan 2018 08:51:25 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Changes in DBI 1.638:
+Thanks, but was it really pushed?
 
-Fix UTF-8 support for warn/croak calls within DBI internals,
-    thanks to pali #53
-Fix dependency on Storable for perl older than 5.8.9,
-    thanks to H.Merijn Brand.
+http://git.openembedded.org/openembedded-core/log/?h=morty
 
-Add DBD::Mem driver, a pure-perl in-memory driver using DBI::DBD::SqlEngine,
-    thanks to Jens Rehsack #42
+still ends with:
+* image: Expand PV to avoid AUTOREV parsing failuresmorty Richard Purdie 10
+hours 1 -0/+2
+* libunwind: Disable documentation explicitlymorty-next Richard Purdie 8
+days 1 -0/+1
 
-Corrected missing semicolon in example in documentation,
-    thanks to pali #55
 
-Changes in DBI 1.637 - 16th August 2017:
+On Sun, Jan 21, 2018 at 1:01 AM, Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
 
-Fix use of externally controlled format string (CWE-134) thanks to pali #44
-    This could cause a crash if, for example, a db error contained a %.
-    https://cwe.mitre.org/data/definitions/134.html
-Fix extension detection for DBD::File related drivers
-Fix tests for perl without dot in @INC RT#120443
-Fix loss of error message on parent handle, thanks to charsbar #34
-Fix disappearing $_ inside callbacks, thanks to robschaber #47
-Fix dependency on Storable for perl older than 5.8.9
-
-Allow objects to be used as passwords without throwing an error, thanks to demerphq #40
-Allow $sth NAME_* attributes to be set from Perl code, re #45
-Added support for DBD::XMLSimple thanks to nigelhorne #38
-
-Documentation updates:
-Improve examples using eval to be more correct, thanks to pali #39
-Add cautionary note to prepare_cached docs re refs in %attr #46
-Small POD changes (Getting Help -> Online) thanks to openstrike #33
-Adds links to more module names and fix typo, thanks to oalders #43
-Typo fix thanks to bor #37
-
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- .../perl/{libdbi-perl_1.636.bb => libdbi-perl_1.639.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/perl/{libdbi-perl_1.636.bb => libdbi-perl_1.639.bb} (75%)
-
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.639.bb
-similarity index 75%
-rename from meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb
-rename to meta-oe/recipes-devtools/perl/libdbi-perl_1.639.bb
-index 085b90493..bef4a8258 100644
---- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.639.bb
-@@ -13,11 +13,11 @@ RDEPENDS_${PN} = " perl-module-carp \
-                    perl-module-dynaloader \
- "
- 
--LIC_FILES_CHKSUM = "file://DBI.pm;beginline=8147;endline=8151;md5=2e5f6cf47e5ad7b77dcb6172edc29292"
-+LIC_FILES_CHKSUM = "file://DBI.pm;md5=62a0479400fd3c7f793568af2e1f08ee;beginline=8147;endline=8151"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
--SRC_URI[md5sum] = "60f291e5f015550dde71d1858dfe93ba"
--SRC_URI[sha256sum] = "8f7ddce97c04b4b7a000e65e5d05f679c964d62c8b02c94c1a7d815bb2dd676c"
-+SRC_URI[md5sum] = "f9bf9775b3dbaabc4630b2b29941aa89"
-+SRC_URI[sha256sum] = "8e2cb3d6a8425bd68702aebbeee01e754ee11ad00e7f4f9a61b75483de104e8c"
- 
- S = "${WORKDIR}/DBI-${PV}"
- 
--- 
-2.13.6
-
+> On Sun, 2018-01-21 at 00:51 +0100, Martin Jansa wrote:
+> > This causes:
+> >
+> > Exception: TypeError: getVar() missing 1 required positional
+> > argument: 'expand'
+>
+> Sorry, fix pushed.
+>
+> Cheers,
+>
+> Richard
+>
 
