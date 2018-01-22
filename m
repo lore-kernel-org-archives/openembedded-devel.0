@@ -1,56 +1,48 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A903971AD1
+Return-Path: <prvs=05603e3aa4=adrian.ratiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 16DFA77FF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jan 2018 16:06:42 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id y26so7410490pfi.10
+	Mon, 22 Jan 2018 17:44:36 +0000 (UTC)
+Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w0MHf4xn009575 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jan 2018 11:44:38 -0600
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2fm45vn5r7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jan 2018 11:44:37 -0600
+Received: from us-aus-exch2.ni.corp.natinst.com
+	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
+	by us-aus-skprod3.natinst.com (8.16.0.21/8.16.0.21) with ESMTPS id
+	w0MHiaa4014706
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jan 2018 08:06:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=q/2fPe58ZYUjVkKGOf8wj5q7UygolArkpXwmpdBC71M=;
-	b=bdjtfXUNK+JAQTHf8ecR4TjZcBCxjkhJQl/fxNLKDVww7piIrZ5qsH8LnE/5Y6qokw
-	GP847tljR0dIyPgWFD0NuoSL81bRpgYERE8gA0+KYMZfPDRwdHMLHGB66rgZqA9wMWUU
-	kUkT1me8zN9y5HNW9tVqsHYeD7llaRuv5fwd0AHi0L0C77WKviDni+fBnOyxEq7AdPK8
-	L9ulvvw1CnWXWptKd2s6iKKFZ1C9Zdhk4TY7GYQm5CnE0b5QfiZG9WQnsBCAQ97CYQTC
-	cG17giZzRKlXK5fMhvMCM03AIPEeNoNz/jx1V7JnK28HIGfpqQSjtA/RWrmxYNpdQTzg
-	ysiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=q/2fPe58ZYUjVkKGOf8wj5q7UygolArkpXwmpdBC71M=;
-	b=Eyc1FhXZ0IHR3gaeGBXp0xcYfbyFKfH7Ruci4f5TvR195wGXozYl26FEipHaIrjl2n
-	UfUYN0Rn5lsymmb5WyNyoIlJFg5COi3tt70UFl472AVg9l510CGdyRep6ncnCI1udjTf
-	XJsyIhnaMgnogSz8e5qgk6CtW/QPTFE/cykU2tdFIx7//gvQmQOa5HJ9A7EFcLBa5v32
-	tr3FAjcgVlcNE9XsXZDDfP7aiZDrzga/zeeyLGjFun3pcI5IroDAGMUd9LQjCpMqMYEW
-	35RXu/nh+xwK5M0KfFIxXB4+sFEG+Dv8fmukOaLLh/6264T38JAY6jc54KYzMXZdRgnM
-	p2Kw==
-X-Gm-Message-State: AKwxytcHLMiQ3VzAoc/w5bt4SCRIeYKkKMCxJyZVNTVe62U1603cfNxi
-	vnVqfVvA3tjrQzajYt6arJFzmQ==
-X-Google-Smtp-Source: AH8x224X0lEkK39neCOZHgjZunQkMuYjy1UZaRCOfy4D9yTmRmZqpP3307gAtM69a64sAOCUDM/NZg==
-X-Received: by 2002:a17:902:6881:: with SMTP id
-	i1-v6mr3943777plk.323.1516637203456; 
-	Mon, 22 Jan 2018 08:06:43 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:c85d:e2c0:793e:901c?
-	([2601:202:4000:1184:c85d:e2c0:793e:901c])
-	by smtp.gmail.com with ESMTPSA id
-	p14sm1274826pff.108.2018.01.22.08.06.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 22 Jan 2018 08:06:42 -0800 (PST)
-To: "Mariia Movchan -X (mmovchan - GLOBALLOGIC INC@Cisco)" <mmovchan@cisco.com>, "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-References: <1516206797987.39279@cisco.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <2719dbc0-2769-20b3-ddd8-51b4ad4540db@gmail.com>
-Date: Mon, 22 Jan 2018 08:06:42 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+	Mon, 22 Jan 2018 11:44:36 -0600
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 22 Jan 2018 11:44:36 -0600
+Received: from ionel-work.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Mon, 22 Jan 2018 11:44:36 -0600
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 22 Jan 2018 19:45:13 +0200
+Message-ID: <20180122174515.5029-1-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.16.0
 MIME-Version: 1.0
-In-Reply-To: <1516206797987.39279@cisco.com>
-Subject: Re: [meta-networking] [PATCH] ipcalc: add initial recipe for version 0.2.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2018-01-22_07:, , signatures=0
+X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
+	score=30
+	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
+	bulkscore=0
+	spamscore=0 clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=266 adultscore=0 classifier=spam adjust=30 reason=mlx
+	scancount=1 engine=8.0.1-1711220000 definitions=main-1801220248
+Subject: [meta-oe][PATCH RESEND 0/2] Add back iperf2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,50 +55,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jan 2018 16:06:42 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 22 Jan 2018 17:44:37 -0000
+Content-Type: text/plain
 
+I'm resending this because the fix in OE-core for the ARM build failure got
+merged in commit 15af2d527d582 ("site/*-linux: don't cache ac_cv_sizeof_bool")
 
+Ioan-Adrian Ratiu (2):
+  Revert "iperf: remove deprecated package"
+  iperf: rename to iperf2 and bump 2.0.5 -> 2.0.10
 
-On 01/17/2018 08:30 AM, Mariia Movchan -X (mmovchan - GLOBALLOGIC INC at
-Cisco) wrote:
-> Signed-off-by: Mariia Movchan <mmovchan@cisco.com>
-> ---
->  .../recipes-support/ipcalc/ipcalc_0.2.0.bb            | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
+ meta-oe/recipes-benchmark/iperf2/iperf2_2.0.10.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/iperf2/iperf2_2.0.10.bb
 
-Failed to build successfully. please see
-http://errors.yoctoproject.org/Errors/Details/164986/
->  create mode 100644 meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb
->
-> diff --git a/meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb b/meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb
-> new file mode 100644
-> index 0000000..bb283c8
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY = "Tool to assist in network address calculations for IPv4 and IPv6."
-> +HOMEPAGE = "https://github.com/nmav/ipcalc"
-> +
-> +SECTION = "net"
-> +
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-> +
-> +SRC_URI = "https://github.com/nmav/ipcalc/archive/${PV}.tar.gz;downloadfilename=ipcalc-${PV}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "edbfc4cb64632e0c4f87cf81c7d8302d"
-> +SRC_URI[sha256sum] = "c965c1296172a6acc50d54dfe81f7e5d589f9762b5d9ae459eee00349675336b"
-> +
-> +export USE_GEOIP = "no"
-> +
-> +do_install() {
-> +    install -d ${D}/${bindir}
-> +    install -m 0755 ${S}/ipcalc ${D}/${bindir}
-> +}
-> --
-> 2.10.3.dirty
+-- 
+2.16.0
 
 
