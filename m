@@ -1,24 +1,41 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 69E9178544
+Return-Path: <cshored@thecshore.com>
+Received: from smtp113.iad3a.emailsrvr.com (smtp113.iad3a.emailsrvr.com
+	[173.203.187.113])
+	by mail.openembedded.org (Postfix) with ESMTP id B628F71A32
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jan 2018 06:47:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w0M6lsl1026845
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 22 Jan 2018 07:17:49 +0000 (UTC)
+Received: from smtp23.relay.iad3a.emailsrvr.com (localhost [127.0.0.1])
+	by smtp23.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
+	D508C25232 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jan 2018 02:17:50 -0500 (EST)
+X-Auth-ID: highvolume@thecshore.com
+Received: by smtp23.relay.iad3a.emailsrvr.com (Authenticated sender:
+	highvolume-AT-thecshore.com) with ESMTPSA id AB94B25234
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Jan 2018 22:47:54 -0800 (PST)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Sun, 21 Jan 2018 22:47:42 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 21 Jan 2018 22:47:41 -0800
-Message-ID: <20180122064741.32276-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	Mon, 22 Jan 2018 02:17:50 -0500 (EST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=thecshore.com;
+	s=20170504; t=1516605470;
+	bh=620yhlNAJbUn18ezzp/UpklzO5BWpjF8gfKdaFfB6HI=;
+	h=From:Subject:To:Date:From;
+	b=pdOo/SXvfmeZkftTodLrufyKny78sRql3PbRZucu/G3VhQm5iRvepvwQwYRqvfzL8
+	6Wh4ypNNnKXL/PHf8tx+tPo5In/STFR0AAjX9Uetz2WQMXdi/ApsjfsbGCh6VE80C5
+	s+Ac7dFlVTjaJJJNzmdoCEgNTCscPcnMOdPEHHV4=
+X-Sender-Id: highvolume@thecshore.com
+Received: from [10.50.1.148] (135-23-247-100.cpe.pppoe.ca [135.23.247.100])
+	(using TLSv1.2 with cipher DHE-RSA-AES128-SHA)
+	by 0.0.0.0:465 (trex/5.7.12); Mon, 22 Jan 2018 02:17:50 -0500
+From: "Daniel F. Dickinson" <cshored@thecshore.com>
+To: openembedded-devel@lists.openembedded.org
+References: <35308e99-f447-3e17-f652-be4f981c19fa@thecshore.com>
+	<CAMKF1spvbf1D8v_1j1O5TjMD8+aSdi40+sZW7+vALQ4PUcNQdw@mail.gmail.com>
+	<1f226dab-70ca-1ccb-0655-3612434fd89d@thecshore.com>
+Message-ID: <c3fb06c9-b801-27e8-3091-ca0776589c49@thecshore.com>
+Date: Mon, 22 Jan 2018 02:17:49 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] net-snmp: fix the invalid -fdebug-prefix-map
+In-Reply-To: <1f226dab-70ca-1ccb-0655-3612434fd89d@thecshore.com>
+Subject: Re: [meta-openwrt] PV for git versions for 17.01.4 upstream release, git for master?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,59 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jan 2018 06:47:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 22 Jan 2018 07:17:49 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: 8bit
 
-From: Yu Mingli <mingli.yu@windriver.com>
+On 22/01/18 12:36 AM, Daniel F. Dickinson wrote:
+[snip]
+>> Probably weakly define a global openwrt version e.g. OPENWRT_VERSION
+>> in layer.conf
+>> have two versions of recipes one for master and another one for
+>> release. OPENWRT_VERSION
+>> then can be overridden in local.conf if someone does not want to use
+>> release version.
+>> defining PREFERRED_VERSION for every recipe in layer.conf in 
+>> meta-openwrt.
+>>
+[snip]
+> Are there some examples of this kind of thing I could look at?  I'm not 
+> terribly familiar with OpenEmbedded yet (enough to do some work, but 
+> still lots to learn).
 
-The previous path value to -fdebug-prefix-map
-is null which may result in other package such as
-quagga do_config error as below:
-====================================================
-add DISTRO_FEATURES_append = " snmp" to conf/local.conf
-test@buildserver@ bitbake quagga
-| checking for i586-poky-linux-net-snmp-config... no
-| checking for net-snmp-config... $Prj/tmp/work/i586-poky-linux/quagga/1.2.1-r0/recipe-sysroot/usr/bin/crossscripts/net-snmp-config
-| checking whether we can link to Net-SNMP... no
-| configure: error: --enable-snmp given but not usable
-| NOTE: The following config.log files may provide further information.
-| NOTE: $Prj/tmp/work/i586-poky-linux/quagga/1.2.1-r0/build/config.log
-| ERROR: configure failed
-| WARNING: $Prj/tmp/work/i586-poky-linux/quagga/1.2.1-r0/temp/run.do_configure.80493:1 exit 1 from 'exit 1'
-| ERROR: Function failed: do_configure (log file is located at $Prj/tmp/work/i586-poky-linux/quagga/1.2.1-r0/temp/log.do_configure.80493)
-====================================================
+Actually I think I should be okay, I found 
+https://www.openembedded.org/wiki/Versioning_Policy which cleared up 
+some of what you said (I didn't understand why two versions).  Also you 
+sentence was a bit mangled, but I guess you mean set PREFERRED_VERSION 
+to OPENWRT_VERSION for the openwrt packages, and when you override 
+OPENWRT_VERSION you automatically get e.g master for the full set of 
+openwrt packages by default.
 
-Signed-off-by: Yu Mingli <mingli.yu@windriver.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+Regards,
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index 3c0587469..09f26c842 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -150,6 +150,7 @@ do_install_ptest() {
- }
- 
- SYSROOT_PREPROCESS_FUNCS += "net_snmp_sysroot_preprocess"
-+SNMP_DBGDIR = "/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}"
- 
- net_snmp_sysroot_preprocess () {
-     if [ -e ${D}${bindir}/net-snmp-config ]; then
-@@ -161,6 +162,12 @@ net_snmp_sysroot_preprocess () {
-             -e "s@^includedir=.*@includedir=${STAGING_INCDIR}@g" \
-             -e "s@^libdir=.*@libdir=${STAGING_LIBDIR}@g" \
-             -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=${S}@g" \
-+            -e "s@-fdebug-prefix-map=${SNMP_DBGDIR}@-fdebug-prefix-map=${WORKDIR}=${SNMP_DBGDIR}@g" \
-+            -e "s@-fdebug-prefix-map= -fdebug-prefix-map=@-fdebug-prefix-map=${STAGING_DIR_NATIVE}= \
-+                  -fdebug-prefix-map=${STAGING_DIR_HOST}=@g" \
-+            -e "s@--sysroot=@--sysroot=${STAGING_DIR_HOST}@g" \
-+            -e "s@--with-libtool-sysroot=@--with-libtool-sysroot=${STAGING_DIR_HOST}@g" \
-+            -e "s@--with-install-prefix=@--with-install-prefix=${D}@g" \
-           -i  ${SYSROOT_DESTDIR}${bindir_crossscripts}/net-snmp-config
-     fi
- }
+Daniel
+
 -- 
-2.11.0
-
+https://www.thecshore.com
 
