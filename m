@@ -1,40 +1,41 @@
 Return-Path: <cshored@thecshore.com>
-Received: from smtp81.iad3a.emailsrvr.com (smtp81.iad3a.emailsrvr.com
-	[173.203.187.81])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B3DB60851
+Received: from smtp81.ord1c.emailsrvr.com (smtp81.ord1c.emailsrvr.com
+	[108.166.43.81])
+	by mail.openembedded.org (Postfix) with ESMTP id B463D60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 09:19:05 +0000 (UTC)
-Received: from smtp35.relay.iad3a.emailsrvr.com (localhost [127.0.0.1])
-	by smtp35.relay.iad3a.emailsrvr.com (SMTP Server) with ESMTP id
-	611BF5D4D for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 04:19:07 -0500 (EST)
+	Tue, 23 Jan 2018 09:35:31 +0000 (UTC)
+Received: from smtp27.relay.ord1c.emailsrvr.com (localhost [127.0.0.1])
+	by smtp27.relay.ord1c.emailsrvr.com (SMTP Server) with ESMTP id
+	C04A6401D8 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jan 2018 04:35:32 -0500 (EST)
 X-Auth-ID: highvolume@thecshore.com
-Received: by smtp35.relay.iad3a.emailsrvr.com (Authenticated sender:
-	highvolume-AT-thecshore.com) with ESMTPSA id 364075D3E
+Received: by smtp27.relay.ord1c.emailsrvr.com (Authenticated sender:
+	highvolume-AT-thecshore.com) with ESMTPSA id 8C8F24017B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 04:19:07 -0500 (EST)
+	Tue, 23 Jan 2018 04:35:32 -0500 (EST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=thecshore.com;
-	s=20170504; t=1516699147;
-	bh=ulQCVpZSPN0MoobIXQMtMBsWkC6r2dgUJztk8pUxe6A=;
+	s=20170504; t=1516700132;
+	bh=SP1SuuS63UsIbewqQLrvHcjjq0vkR9oTTvnvD8CuX2A=;
 	h=From:Subject:To:Date:From;
-	b=yYMOOlxccS6Q+OBpf3OhEmKXvba/SiTgz5Ri+vYppe6Pa9gbDXZZ1SD9wfFFVaWjN
-	Nb6LhMAuI4ixESyK1x3xPvgT2d820jhegLPHf7dST5mNHv6U38cMDDigIlSUnz5GCE
-	t21hjeJGQwiQSiGsnQko4k1cuIx20/paIy0Lzfrg=
+	b=CTdYC9Y3osfRiyVQxsh6IP6XN2ew7n9YlETRUF9/1CZ8Ep4IS9NGaT5UgaMwvRrNE
+	nJGYdOyisIVIW6zIgtPpjPwZe6VIqGLfBRS9+NBEoQPzmZAPBTMUFK2LBg37kl3FRu
+	xeaO33jtAfDAomDadCYwnzdY0MhGI8TQqyU140W8=
 X-Sender-Id: highvolume@thecshore.com
 Received: from [10.50.1.148] (135-23-247-100.cpe.pppoe.ca [135.23.247.100])
 	(using TLSv1.2 with cipher DHE-RSA-AES128-SHA)
-	by 0.0.0.0:465 (trex/5.7.12); Tue, 23 Jan 2018 04:19:07 -0500
+	by 0.0.0.0:465 (trex/5.7.12); Tue, 23 Jan 2018 04:35:32 -0500
 From: "Daniel F. Dickinson" <cshored@thecshore.com>
 To: openembedded-devel@lists.openembedded.org
 References: <2e13c129-8fef-f0c9-a8d7-7645505370bf@thecshore.com>
 	<91db32d5-5a47-200f-1a43-53e53b71d41c@thecshore.com>
-Message-ID: <59ea8d68-37d1-b2de-b7b0-25c6cbb99718@thecshore.com>
-Date: Tue, 23 Jan 2018 04:19:06 -0500
+	<59ea8d68-37d1-b2de-b7b0-25c6cbb99718@thecshore.com>
+Message-ID: <278ec585-6d78-4406-abe7-3ebd7c2be466@thecshore.com>
+Date: Tue, 23 Jan 2018 04:35:32 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.5.2
 MIME-Version: 1.0
-In-Reply-To: <91db32d5-5a47-200f-1a43-53e53b71d41c@thecshore.com>
-Subject: Re: [meta-oe] add-layers fails with python error
+In-Reply-To: <59ea8d68-37d1-b2de-b7b0-25c6cbb99718@thecshore.com>
+Subject: Found offending commit: oe-core: 7267e7c000c76c44d09835d4cd2bc485b6a39a2a (was Re: [meta-oe] add-layers fails with python error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,42 +48,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2018 09:19:06 -0000
+X-List-Received-Date: Tue, 23 Jan 2018 09:35:31 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-CA
 Content-Transfer-Encoding: 8bit
 
-On 23/01/18 02:30 AM, Daniel F. Dickinson wrote:
-> On 23/01/18 01:50 AM, Daniel F. Dickinson wrote:
->> I'm not sure which list this belongs on, but since it's an attempt to 
->> use meta-oe that triggers the error, I post it here.  I've seen others 
->> reporting this issue prior to this, so perhaps it's related to the 
->> build environment?  (I'm on Debian 9).
+On 23/01/18 04:19 AM, Daniel F. Dickinson wrote:
+> On 23/01/18 02:30 AM, Daniel F. Dickinson wrote:
+>> On 23/01/18 01:50 AM, Daniel F. Dickinson wrote:
+>>> I'm not sure which list this belongs on, but since it's an attempt to 
+>>> use meta-oe that triggers the error, I post it here.  I've seen 
+>>> others reporting this issue prior to this, so perhaps it's related to 
+>>> the build environment?  (I'm on Debian 9).
+>>>
+>>> Steps:
+>>>
+>>> Checkout bitbake branch 1.34 (also occurs with 1.32 & 1.36)
+>>> Checkout oe-core master (also occurs with rocko)
+>>> Checkout meta-openembedded master (also occurs with rocko)
+>>>
+>>> source oe-init-env
+>>>
+>>> bitbake-layers add-layer /path/to/meta-openembedded/meta-oe
+>>>
+>> [snip]
 >>
->> Steps:
+>> Seems this is actually a core issue (bitbake -c listtasks
+>> with only core's autogenerated build dir gives a similar,
+>> but shorter, traceback).
 >>
->> Checkout bitbake branch 1.34 (also occurs with 1.32 & 1.36)
->> Checkout oe-core master (also occurs with rocko)
->> Checkout meta-openembedded master (also occurs with rocko)
+>> Perhaps it's significant that I see:
 >>
->> source oe-init-env
 >>
->> bitbake-layers add-layer /path/to/meta-openembedded/meta-oe
+>> LAYERVERSION_core = "11" in oe-core/meta/layers.conf
+>> and LCONF_VERSION = "7" in build/bblayers.conf?
 >>
-> [snip]
+> FYI git version f43290f6e302dbacf5581d1fe1c6c991dd387779 works (I had a 
+> previous checkout with that version, which was working,so I guess I'll 
+> try git bisect.
 > 
-> Seems this is actually a core issue (bitbake -c listtasks
-> with only core's autogenerated build dir gives a similar,
-> but shorter, traceback).
-> 
-> Perhaps it's significant that I see:
-> 
-> 
-> LAYERVERSION_core = "11" in oe-core/meta/layers.conf
-> and LCONF_VERSION = "7" in build/bblayers.conf?
-> 
-FYI git version f43290f6e302dbacf5581d1fe1c6c991dd387779 works (I had a 
-previous checkout with that version, which was working,so I guess I'll 
-try git bisect.
+
+Error is in core; I guess I'll join the core list and let them know...
+
+7267e7c000c76c44d09835d4cd2bc485b6a39a2a is the first bad commit
+commit 7267e7c000c76c44d09835d4cd2bc485b6a39a2a
+Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+Date:   Thu Jul 6 12:54:15 2017 +0100
+
+     base: Add MultiConfigParsed handler to deal with unstable build 
+signatures
+
+     This uses the newly added MultiConfigParsed event to handle 
+problems where
+     checksums in multiconfig build were not fuctioning as expected.
+
+     The issue arises around SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS which contains
+     entries like:
+
+     * gcc-cross-${TARGET_ARCH}->virtual/${TARGET_PREFIX}libc-for-gcc
+     * gcc-cross-${TARGET_ARCH}->linux-libc-headers
+
+     These need to be expanded in the multiconfig data store but then placed
+     into the shared main datastore used by the siggen code. The only other
+     alternative would be a siggen instance for each multiconfig however 
+that
+     seemed even more complex and invasive.
+
+     In real world usage, this issue would mean a qemux86 base config with
+     other armv5 and armv7 configs (e.g. beaglebone and qemuarm) would
+     try and build gcc-cross twice since dependencies normaly excluded
+     (e.g. linux-libc-headers) would now be included. This breaks sstate 
+reuse
+     as well as breaking builds unless separate tmpdirs are used.
+
+     This patch adds all the entries for each multiconfig. Whilst there may
+     be duplicates, this shouldn't be an issue.
+
+     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 
 
