@@ -1,23 +1,33 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CC3B787BE
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BFB4787B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 22:15:25 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	23 Jan 2018 14:15:23 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,403,1511856000"; d="scan'208";a="168597009"
-Received: from chiron.jf.intel.com ([10.7.159.61])
-	by orsmga004.jf.intel.com with ESMTP; 23 Jan 2018 14:15:09 -0800
-From: Tim Orling <timothy.t.orling@linux.intel.com>
+	Tue, 23 Jan 2018 22:39:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 04E2E20AA4;
+	Tue, 23 Jan 2018 22:39:15 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id LDyhCZtrkCWz; Tue, 23 Jan 2018 22:39:14 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D681A20151;
+	Tue, 23 Jan 2018 22:39:13 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 57F5B163270; Tue, 23 Jan 2018 17:39:13 -0500 (EST)
+Date: Tue, 23 Jan 2018 17:39:13 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Jan 2018 14:15:03 -0800
-Message-Id: <20180123221503.52037-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.14.3
-Subject: [meta-oe][PATCH] cpuid: add recipe for v20170122
+Message-ID: <20180123223913.GA2786@denix.org>
+References: <1516085015-89929-1-git-send-email-denis@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <1516085015-89929-1-git-send-email-denis@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-networking][PATCH] ndisc6: need to set USE_NLS="yes" to use gettext.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,50 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2018 22:15:25 -0000
+X-List-Received-Date: Tue, 23 Jan 2018 22:39:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-cpuid dumps detailed information about the CPU(s) gathered from the CPUID
-instruction, and also determines the exact model of CPU(s). It supports
-Intel, AMD, and VIA CPUs, as well as older Transmeta, Cyrix, UMC, NexGen,
-Rise, and SiS CPUs.
+Ping.
 
-http://www.etallen.com/cpuid.html
 
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-
-diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-new file mode 100644
-index 0000000000..7a70f75763
---- /dev/null
-+++ b/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Linux tool to dump x86 CPUID information about the CPU(s)"
-+DESCRIPTION = "cpuid dumps detailed information about the CPU(s) gathered \
-+from the CPUID instruction, and also determines the exact model of CPU(s). \
-+It supports Intel, AMD, and VIA CPUs, as well as older Transmeta, Cyrix, \
-+UMC, NexGen, Rise, and SiS CPUs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz"
-+SRC_URI[md5sum] = "1c46a6662626c5a6eaca626f23a5a7d7"
-+SRC_URI[sha256sum] = "667612aae6704341dd10844e97c84c5c5c8700817a5937a3c293b55013bc4865"
-+
-+COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
-+
-+# The install rule from the Makefile has hardcoded paths, so we duplicate
-+# the actions to accommodate different paths.
-+do_install () {
-+    install -d -m755 ${D}/${bindir}
-+    install -m755 ${B}/cpuid ${D}/${bindir}/cpuid
-+    install -d -m755 ${D}/${mandir}
-+    install -m444 ${B}/cpuid.man.gz ${D}/${mandir}
-+}
--- 
-2.14.3
-
+On Tue, Jan 16, 2018 at 01:43:35AM -0500, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+> 
+> Otherwise we can get gettext-minimal-native dependency instead, which does not
+> provide gettext.h header.
+> 
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  meta-networking/recipes-support/ndisc6/ndisc6_git.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+> index 48a83b8..58f1230 100644
+> --- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+> +++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
+> @@ -22,6 +22,8 @@ EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
+>  LDFLAGS += "-fuse-ld=gold"
+>  TOOLCHAIN = "gcc"
+>  
+> +USE_NLS = "yes"
+> +
+>  do_configure_prepend() {
+>      cp ${STAGING_DATADIR_NATIVE}/gettext/gettext.h ${S}/include
+>      ${S}/autogen.sh
+> -- 
+> 2.7.4
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
