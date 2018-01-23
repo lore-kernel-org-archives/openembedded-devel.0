@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id B8B9C60767
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 91D5178787
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 16:02:18 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id e76so657658pfk.1
+	Tue, 23 Jan 2018 16:05:45 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id y5so646591pff.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 08:02:20 -0800 (PST)
+	Tue, 23 Jan 2018 08:05:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=IpURHvoZeNT7veAcCH+JipNafwlM4Xyieut9cxmcEP0=;
-	b=YWi/OyJ9QFVMYq4LkXHRYbHlEN9i5lxON/2d0Uf8JnZGLfWWDANKJHyFQcK5DxMPVP
-	VTIRDCFQmDW7+5K4TFRDSVDq7PMqK0VzY/ySOHH/TlMNIaaKWXJ1akQLRMG/SyVXGUDI
-	XZmGVzm+1Yf5PA4oD6CG3On8VyD51QcOw1vrHo7eG+lhSpk/oR/FGv3k+W82Swi4MXi3
-	DazWlHL+Nb+sfe707z6Hg3fxralmb1RaNOPuqQxbP/HGD4slEegXgitW/w8nD+b09jGm
-	wuEI0P7YcH0AdmhH5EksLEvnqPA3kWcrr7OMFFV60vkM6mNo3elNSfiDA5ti+JcOHbXV
-	xDww==
+	:cc; bh=45hqV5gYTTWGlIqzADGR1EEBFGp3FX0/jyLd7wTyhZ8=;
+	b=F0wDNMs20prLJv/Wgjs9tEbL/aecxqiqFMqchWu/9Ai7rWq5+dWX9t9t5ofIcb0LNf
+	unV7P9AlwAZb8Hf/dIM2B1eX8tXGIcN8dbMzoSlBPSmM8CfXR6TBlBBhTOIGgM6F92t8
+	3D+i23y4HHEToYU5CK35fyodBztEmDgnC8+YE2p7uEALoN23ED9w51GtjYTMPziiDeFn
+	6KM3eLnnsE4d0nnt1+Yz4mt2B5W5luuHWF5VxLzALOz6YhRkDuRHHMhi66au/tW1xn1I
+	RZ9yw1JjJQ1DywCZgBtEk2jr6NMD9AfrLUYjk008tmSMDVSL3chaXveaDv6FLt2PUgbU
+	mkWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=IpURHvoZeNT7veAcCH+JipNafwlM4Xyieut9cxmcEP0=;
-	b=dBoJ0rHlOJ/no6JTIPPl5Ta/Ba8b0NFDYZ/i4SZY+kVb1450zf55OHYsHN3d0B0amI
-	gUvTJHLC2skaNijc3UiWf3dxUgwTBRbuMzY5zslld8SSugcVD3HB5om1K9TdsVOa+gZT
-	swb/MZxGKhxNn/oflkM+k/xDc6CHVRXNP/IWcRENrERItmh/gppO1TVinCOPJqAR4fPG
-	uPR3zfuUiLwbPYooYfGLfoD0AI0oldGetiI/R7yWY1qCMAPx27VDp7bhLQ1Hzillf6wc
-	9HqbTA3lhcpH0NqL1hjbI102vNtLoqY7TwQW6DFNTROcmcFA1dJrQ1/OK5qUjE+Ix7Dz
-	+9mw==
-X-Gm-Message-State: AKwxytemRhz/BB7o+1p9L2W0tFyEEpX1y55Yet1xel4Bn74qLadl2zT1
-	lMpQNYrn/5K3kpzIvW0NzvswCgfqwCsjsDIzExc=
-X-Google-Smtp-Source: AH8x224QeWLdo6V5eOQxyyUhZqdqwIYVO9hpaKJlQzjwLi+OTtyCA52XqwxFrjmBGTbblKaqlNNCwLABcD5PwRTHniM=
-X-Received: by 10.98.13.196 with SMTP id 65mr10789410pfn.155.1516723339540;
-	Tue, 23 Jan 2018 08:02:19 -0800 (PST)
+	bh=45hqV5gYTTWGlIqzADGR1EEBFGp3FX0/jyLd7wTyhZ8=;
+	b=OtO2S/HAxCDLaWn+Q4Mp5Q6JhLyYSoCgQ/716Y1BXZLdWJID58Rtsg6N9zTnblT0NS
+	F7oYREkh2IqiwcZ7Ck/0FZHruqcWGnGjmLd30s0T4Q7pLsbb/8FBiPtDYhhUusYUW6s9
+	Tkad5wgHD5T3Z8GLacWKdHCchbt9BUD1lAXFanqXMuibMHd8TUZF/0+C1xLaV76XHt6G
+	CWbLM2kem4+FwPiY3tZaew4NCiuLaZwiNZDbKrIP2gnGIHv/UCApb8iTFcX0/jC1yDRQ
+	tUK3sV8NuZFfB0/EmbCxJontGVjVsaMj0Wm02jIkJoyPjbK3WhvVVwGmaVevEMK3yRMS
+	jkfQ==
+X-Gm-Message-State: AKwxytd4dmHClWo9hMsWBbIsRC438Zb+y2hTd+wkJX+wUk9WMo3/noqg
+	QQyczz0fyl87rJudo7ZQuS1YBV7nvXVbwTnrTTM=
+X-Google-Smtp-Source: AH8x224xbRjoXpib36n0ZrhbOiJ9andDcFuWcwWmfxnOUugc2/pnDawtFRMPwF300IhkbRs9lAOoxPoS6Da+gpbC1HE=
+X-Received: by 2002:a17:902:5682:: with SMTP id
+	j2-v6mr6053281pli.339.1516723546703; 
+	Tue, 23 Jan 2018 08:05:46 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.100.161.170 with HTTP; Tue, 23 Jan 2018 08:01:49 -0800 (PST)
-In-Reply-To: <1516206797987.39279@cisco.com>
-References: <1516206797987.39279@cisco.com>
+Received: by 10.100.161.170 with HTTP; Tue, 23 Jan 2018 08:05:16 -0800 (PST)
+In-Reply-To: <20180122155228.27517-1-twoerner@gmail.com>
+References: <20180122155228.27517-1-twoerner@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 Jan 2018 10:01:49 -0600
-Message-ID: <CAMKF1sp91GwUs4tv_00uTufKcnYdg6ti+UHQ_V0x4N0VLC9xxQ@mail.gmail.com>
-To: "Mariia Movchan -X (mmovchan - GLOBALLOGIC INC@Cisco)" <mmovchan@cisco.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking] [PATCH] ipcalc: add initial recipe for version 0.2.0
+Date: Tue, 23 Jan 2018 10:05:16 -0600
+Message-ID: <CAMKF1sqy7i4TR9m5DNow0FeMyPAXMG+wRyQ5eA2txcEcCNZ5HA@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] uriparser: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,50 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2018 16:02:18 -0000
+X-List-Received-Date: Tue, 23 Jan 2018 16:05:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Jan 17, 2018 at 10:30 AM, Mariia Movchan -X (mmovchan -
-GLOBALLOGIC INC at Cisco) <mmovchan@cisco.com> wrote:
-> Signed-off-by: Mariia Movchan <mmovchan@cisco.com>
-> ---
->  .../recipes-support/ipcalc/ipcalc_0.2.0.bb            | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb
+On Mon, Jan 22, 2018 at 9:52 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+> Currently the following layers/recipes DEPEND on uriparser:
+>         - meta-measured/recipes-tpm/tpm2-tss
+>         - meta-webos-ports/meta-luneos/recipes-webos/luna-sysservice
+>         - meta-webos-ports/meta-luneos/recipes-webos/libpbnjson
 >
-> diff --git a/meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb b/meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+>
+> diff --git a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
 > new file mode 100644
-> index 0000000..bb283c8
+> index 0000000000..825c868ad4
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/ipcalc/ipcalc_0.2.0.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY = "Tool to assist in network address calculations for IPv4 and IPv6."
-> +HOMEPAGE = "https://github.com/nmav/ipcalc"
+> +++ b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "RFC 3986 compliant URI parsing library"
+> +HOMEPAGE = "https://uriparser.github.io"
 > +
-> +SECTION = "net"
-> +
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-> +
-> +SRC_URI = "https://github.com/nmav/ipcalc/archive/${PV}.tar.gz;downloadfilename=ipcalc-${PV}.tar.gz"
-> +
+> +LICENSE = "BSD"
 
-archives get rebuilt sometimes on github, perhaps we should be using a
-git fetcher with locked down
-SRCREV
+it seems to be BSD-3-Clause to be specific
 
-
-> +SRC_URI[md5sum] = "edbfc4cb64632e0c4f87cf81c7d8302d"
-> +SRC_URI[sha256sum] = "c965c1296172a6acc50d54dfe81f7e5d589f9762b5d9ae459eee00349675336b"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=72b0f9c74ae96eeab8cf1bf3efe08da2"
 > +
-> +export USE_GEOIP = "no"
+> +SRC_URI := "${SOURCEFORGE_MIRROR}/project/uriparser/Sources/${PV}/uriparser-${PV}.tar.bz2"
 > +
-> +do_install() {
-> +    install -d ${D}/${bindir}
-> +    install -m 0755 ${S}/ipcalc ${D}/${bindir}
-> +}
+> +inherit autotools
+> +
+> +EXTRA_OECONF = "--disable-test --disable-doc"
+> +
+> +SRC_URI[md5sum] = "9aabdc3611546f553f4af372167de6d6"
+> +SRC_URI[sha256sum] = "ce7ccda4136974889231e8426a785e7578e66a6283009cfd13f1b24a5e657b23"
 > --
-> 2.10.3.dirty
+> 2.14.1.459.g238e487ea
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
