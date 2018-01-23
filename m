@@ -1,52 +1,48 @@
-Return-Path: <andrey.konovalov@linaro.org>
-Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
-	[209.85.215.41])
-	by mail.openembedded.org (Postfix) with ESMTP id A6B4E78213
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 410086093A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 14:16:25 +0000 (UTC)
-Received: by mail-lf0-f41.google.com with SMTP id a204so809230lfa.2
+	Tue, 23 Jan 2018 15:41:30 +0000 (UTC)
+Received: by mail-pf0-f171.google.com with SMTP id 23so608615pfp.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 06:16:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=zK29j29BhfNQyFIb46o2aIx/xcqsu9By3CWqRqKzs1E=;
-	b=Kt7tAZVXb+M7oersOr96e6JpaX8JIWKZkFEyFHYk9U03Hc040i9tozlo0Iu6V5e937
-	P8xzic6f8h/0JepiumZiV+pi0KkRjV0ZIUEVkSBJuc0E5NQQ4Q5rhK9pq5quaRfAS2zu
-	Kzm3i+lS81b9xDak/dYoZ4BED+UVxvsz1tF7o=
+	Tue, 23 Jan 2018 07:41:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=9z4UdcyTn6YVO4lmRm8JE65UUhb4VRF352P1BiEOzY8=;
+	b=fLnuCPFmphE3qpQkkEVqNRe5lUnscvEy+7V81BgDYndxFzJ1fkzfQRFMinw/0f91KQ
+	xunC9nLTtej8VaqCWKxX+rteVAUJ+x8H3YNjZDA4wi4NcLNKAWUOIiT8oLPrlspkBjRo
+	2UhPv593LVssqOjIv5FxQOvlPrvFVK+q1gKIsJI5zuWDx+N/RrczlKBvCcT4DAwIVExx
+	q8AQoy4qkXut7zTxuOKojOPE2TSTIm66MKo5zUCPjGKQKKK/wDS1BOPVnn1kih6w987+
+	iGTj4DXv7y8IbAHIAcL8s7JIEOdS3c+MuMymbKpzruoYsH2G6JEotpYSq+0Kyn/Z4sAD
+	ckeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=zK29j29BhfNQyFIb46o2aIx/xcqsu9By3CWqRqKzs1E=;
-	b=m32mFcz07IqaNy66DH2F6J6qULK0+SE9mPWld9RE21Quqk5EpQFSpwpJlIwc1tZc24
-	geVS3kshfoIRWcVbAQ6HKjuK3/kB7qAZ2NPs8UlnYppqPZNoI2BcfhqbPb2oP/ThEcLH
-	NHB3DvhLQy4csa8l1y7sL923u4tl/ktV47ICs+cAPcufhWeiTFn1bVAfCz2GzluXr4VW
-	3Cj93TM0XFBcfin9aQyBdrfp+0S5qerw7cnOrPbuhhCqGYsX8clxNZEfEmEs79wosiL8
-	0i/Qj7frmRMU59qpyDtB+FrvCF91YMfV+AxXYnE/lVlNXS0/IzgKS+6pCUZoFveKxcFQ
-	0a7A==
-X-Gm-Message-State: AKwxytfXht+3k/njji3EZW9BcKD+FAEpPPrAqn6bxSX69s7g27ZhIxKy
-	U6V6HRmOxtdzhhe+u9/BUZ1JlA==
-X-Google-Smtp-Source: AH8x224QxG3zjRfZh9IkyU86NnmbduFg/7P0qvu0O8/RgGVcv5QDn+PjezSIH0jVwH5Y/IF+XkoPow==
-X-Received: by 10.25.32.131 with SMTP id g125mr1264305lfg.101.1516716986449;
-	Tue, 23 Jan 2018 06:16:26 -0800 (PST)
-Received: from [10.5.20.18] ([62.117.114.130])
-	by smtp.googlemail.com with ESMTPSA id
-	l136sm68338lfb.59.2018.01.23.06.16.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Jan 2018 06:16:25 -0800 (PST)
-To: Maksim Sisov <msisov@igalia.com>
-References: <63d85ca3-162a-84de-65af-dde8e02403ab@linaro.org>
-	<1832058a2acf7502847a3daf14d6012d@igalia.com>
-From: Andrey Konovalov <andrey.konovalov@linaro.org>
-Message-ID: <00cd549b-e261-6569-4117-a436467dba98@linaro.org>
-Date: Tue, 23 Jan 2018 17:16:24 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=9z4UdcyTn6YVO4lmRm8JE65UUhb4VRF352P1BiEOzY8=;
+	b=ts4R7wwnYrSzxmLZUvLSL7fY2moEFcKftgYa8f95jF5/AHr57LejOgSo3Zww24ktwe
+	j0ALKhrBIvhb+cm0o648skdrp9z7WkdvTuo7Mf3MgH+mb7G6nhb+gJ/n6lvF7cRl70ag
+	R5UXfcrGWOhWzMJsMy8YkMxmFwMxdWm0Ry9+b7CadfOwAUSCI1hVDEy3zn+TS73Zehr+
+	dCJoe+snDNjA8mM2+x6sLzqfNN89FNwB5I8t4jIEmjNI0jWVXJV2hJv6dXEB+M+ZIli9
+	Sd+UEpubwZy+2Fc/rloAJmmkxKlhxz687qHMhvO+n4cWsKIzV97q5shFvyd8kdyPvCPC
+	7Kug==
+X-Gm-Message-State: AKwxytd0gpbQtlb7OzSE8JGZaHO9rWaudmkbJBsZT9nkq0Viavbk8/1m
+	SPdGA1AHJ2y9uQJRG+ozxuUsK2A3neckDvjm4LU=
+X-Google-Smtp-Source: AH8x227Ww2gBt5sNYq+teB3f/zKLx32tU9n+mZkXGhLQWLh8bpZElbHCOrGW4G6jZSoyZQndNAdO2MdbvM+jqzNYVgM=
+X-Received: by 2002:a17:902:5682:: with SMTP id
+	j2-v6mr6022677pli.339.1516722092164; 
+	Tue, 23 Jan 2018 07:41:32 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1832058a2acf7502847a3daf14d6012d@igalia.com>
-Cc: openembedded-devel@lists.openembedded.org
+Received: by 10.100.161.170 with HTTP; Tue, 23 Jan 2018 07:41:01 -0800 (PST)
+In-Reply-To: <63d85ca3-162a-84de-65af-dde8e02403ab@linaro.org>
+References: <63d85ca3-162a-84de-65af-dde8e02403ab@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Jan 2018 09:41:01 -0600
+Message-ID: <CAMKF1sp_Mp-3L8XSeEnVR_+n_w2E+QT8wF4JaH-_vqQpw1kn+w@mail.gmail.com>
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: msisov@igalia.com,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-browser] RFC: updating chromium-ozone-wayland to 65.0.xxxx.0.rxxxxxx.igalia.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -60,76 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2018 14:16:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Jan 2018 15:41:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hello Maksim,
+On Mon, Jan 22, 2018 at 1:54 PM, Andrey Konovalov
+<andrey.konovalov@linaro.org> wrote:
+> Hello,
+>
+> chromium-ozone-wayland_64.0.3274.0.r517731.igalia.1.bb from current
+> meta-browser [1] didn't
+> quite worked for me: e.g. I was getting the "Aw Snap" after filling in the
+> search text box and pressing <Enter>
+> at youtube.com; sometimes when moving the mouse pointer over the screen the
+> mouse cursor became the arrow
+> and was not changing for quite a while when moving over the chromium window
+> (looks similar to the issue [2]
+> though it should have been fixed in r517731 if I got it correct).
+>
+> But when I tried updating chromium-ozone-wayland to version 65 using [3] as
+> the basis,
+> those two issues were gone, and chromium became much more usable for me.
+> Then I did the following:
+>   * from [3] took only the changes relevant to the version update,
+>   * rebased on the current OSSystems/meta-browser,
+>   * replaced the patches added to SRC_URI with the upstream versions where
+> applicable,
+>   * updated to the latest tarball at [4] (though I don't see a difference in
+> how 65.0.3298.0.r524623
+>     and 65.0.3315.0.r527534 behave, any of these are OK for me)
+> - thus ending up with [5] (the 3 topmost commits).
+> (If we go with r524623, the topmost commit is to be dropped. Or if we go
+> with r527534, the two topmost commits
+> are to be squashed into one.)
+> Basically this is still the subset of Maxim's work [3] with minor changes.
+>
+> Does it make sense to update chromium-ozone-wayland to version 65 now?
+> One of my concerns is that it was only tested on an aarch64 target
+> (dragonboard-410c) in rocko, and build-only-tested
+> for an armv7 machine (am57xx-evm, rocko as well).
 
-On 23.01.2018 15:52, Maksim Sisov wrote:
-> Hello Andrey,
-> 
-> Yes, it makes sense to update the recipe, which I'm going to do in the
-> end of this or in the beginning of the next week,
+65 is dev channel, so I think if you keep updating it until 65 hits
+release it should be ok
+Can you check it on x86 arch too ? may be qemux86-64
 
-That's great news!
-
-Thanks,
-Andrey
-
-> as long as the work is
-> based on chromium ToT, and the code base is always changing.
-> 
-> On 22.01.2018 21:54, Andrey Konovalov wrote:
->> Hello,
->>
->> chromium-ozone-wayland_64.0.3274.0.r517731.igalia.1.bb from current
->> meta-browser [1] didn't
->> quite worked for me: e.g. I was getting the "Aw Snap" after filling in
->> the search text box and pressing <Enter>
->> at youtube.com; sometimes when moving the mouse pointer over the
->> screen the mouse cursor became the arrow
->> and was not changing for quite a while when moving over the chromium
->> window (looks similar to the issue [2]
->> though it should have been fixed in r517731 if I got it correct).
->>
->> But when I tried updating chromium-ozone-wayland to version 65 using
->> [3] as the basis,
->> those two issues were gone, and chromium became much more usable for
->> me. Then I did the following:
->>    * from [3] took only the changes relevant to the version update,
->>    * rebased on the current OSSystems/meta-browser,
->>    * replaced the patches added to SRC_URI with the upstream versions
->> where applicable,
->>    * updated to the latest tarball at [4] (though I don't see a
->> difference in how 65.0.3298.0.r524623
->>      and 65.0.3315.0.r527534 behave, any of these are OK for me)
->> - thus ending up with [5] (the 3 topmost commits).
->> (If we go with r524623, the topmost commit is to be dropped. Or if we
->> go with r527534, the two topmost commits
->> are to be squashed into one.)
->> Basically this is still the subset of Maxim's work [3] with minor changes.
->>
->> Does it make sense to update chromium-ozone-wayland to version 65 now?
->> One of my concerns is that it was only tested on an aarch64 target
->> (dragonboard-410c) in rocko, and build-only-tested
->> for an armv7 machine (am57xx-evm, rocko as well).
->>
->>
->> Thanks,
->> Andrey
->>
->>
->> [1]
->> https://github.com/OSSystems/meta-browser/tree/master/recipes-browser/chromium
->> [2] https://github.com/Igalia/chromium/issues/317
->> [3]
->> https://github.com/Igalia/meta-browser/commits/ozone/wayland/65.0.3298.0.r524623
->> [4] https://tmp.igalia.com/chromium-tarballs/
->> [5] https://github.com/andrey-konovalov/meta-browser/commits/my.master
-> 
-> -Maksim
-> 
-
+>
+>
+> Thanks,
+> Andrey
+>
+>
+> [1]
+> https://github.com/OSSystems/meta-browser/tree/master/recipes-browser/chromium
+> [2] https://github.com/Igalia/chromium/issues/317
+> [3]
+> https://github.com/Igalia/meta-browser/commits/ozone/wayland/65.0.3298.0.r524623
+> [4] https://tmp.igalia.com/chromium-tarballs/
+> [5] https://github.com/andrey-konovalov/meta-browser/commits/my.master
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
