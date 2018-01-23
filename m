@@ -1,49 +1,57 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 410086093A
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f54.google.com (mail-pg0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FA086093A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 15:41:30 +0000 (UTC)
-Received: by mail-pf0-f171.google.com with SMTP id 23so608615pfp.3
+	Tue, 23 Jan 2018 15:43:57 +0000 (UTC)
+Received: by mail-pg0-f54.google.com with SMTP id g16so535247pgn.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 07:41:32 -0800 (PST)
+	Tue, 23 Jan 2018 07:43:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=9z4UdcyTn6YVO4lmRm8JE65UUhb4VRF352P1BiEOzY8=;
-	b=fLnuCPFmphE3qpQkkEVqNRe5lUnscvEy+7V81BgDYndxFzJ1fkzfQRFMinw/0f91KQ
-	xunC9nLTtej8VaqCWKxX+rteVAUJ+x8H3YNjZDA4wi4NcLNKAWUOIiT8oLPrlspkBjRo
-	2UhPv593LVssqOjIv5FxQOvlPrvFVK+q1gKIsJI5zuWDx+N/RrczlKBvCcT4DAwIVExx
-	q8AQoy4qkXut7zTxuOKojOPE2TSTIm66MKo5zUCPjGKQKKK/wDS1BOPVnn1kih6w987+
-	iGTj4DXv7y8IbAHIAcL8s7JIEOdS3c+MuMymbKpzruoYsH2G6JEotpYSq+0Kyn/Z4sAD
-	ckeQ==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=r4eWCB9y+K+e1pTVGaEvr8zeMvcSKzrmwl1kBlYg/Ho=;
+	b=fPbZ8tycWoRIwlW3DohCrv3DCSg9AaPKp+qCX+MoLlqtSmjZ8NBATgoCl52OLNp2nV
+	psSVFSk8ChKtuKWPTKJ3TUw2B/NH8+jp0NeNk9JdC9/IdzHdyP9ThwVr7lhIdRNUTrv+
+	LcLVlEuys90QgIj+DoxHhW0IGa6kEAdxGeh5qiwd9kM1g8KIbL5iALFBiekqJbJrMxAr
+	hli4/ZLx7HY7xUuxX0Sm7Es7JCBObJx7pg+LUCjgb5pm28KyDAhKmLrCOXKDS+NBtSAT
+	EoD1oRLBJQcTZ7jLWlfd4RlE/oKyfy25rkz0flRCXVOskseFyKLtAhvP/7vk6syj4GI4
+	UMkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=9z4UdcyTn6YVO4lmRm8JE65UUhb4VRF352P1BiEOzY8=;
-	b=ts4R7wwnYrSzxmLZUvLSL7fY2moEFcKftgYa8f95jF5/AHr57LejOgSo3Zww24ktwe
-	j0ALKhrBIvhb+cm0o648skdrp9z7WkdvTuo7Mf3MgH+mb7G6nhb+gJ/n6lvF7cRl70ag
-	R5UXfcrGWOhWzMJsMy8YkMxmFwMxdWm0Ry9+b7CadfOwAUSCI1hVDEy3zn+TS73Zehr+
-	dCJoe+snDNjA8mM2+x6sLzqfNN89FNwB5I8t4jIEmjNI0jWVXJV2hJv6dXEB+M+ZIli9
-	Sd+UEpubwZy+2Fc/rloAJmmkxKlhxz687qHMhvO+n4cWsKIzV97q5shFvyd8kdyPvCPC
-	7Kug==
-X-Gm-Message-State: AKwxytd0gpbQtlb7OzSE8JGZaHO9rWaudmkbJBsZT9nkq0Viavbk8/1m
-	SPdGA1AHJ2y9uQJRG+ozxuUsK2A3neckDvjm4LU=
-X-Google-Smtp-Source: AH8x227Ww2gBt5sNYq+teB3f/zKLx32tU9n+mZkXGhLQWLh8bpZElbHCOrGW4G6jZSoyZQndNAdO2MdbvM+jqzNYVgM=
-X-Received: by 2002:a17:902:5682:: with SMTP id
-	j2-v6mr6022677pli.339.1516722092164; 
-	Tue, 23 Jan 2018 07:41:32 -0800 (PST)
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=r4eWCB9y+K+e1pTVGaEvr8zeMvcSKzrmwl1kBlYg/Ho=;
+	b=mw4mTBW7qRPRQAWckXvTV7PyODosV0509ayyZf91Rs7ydBWxhekdhl74bXxphUxUH3
+	NWDGqK4ByoY2DftlN4KrcqcooST2R3Wh9G3fQI2yYFUAegJqDgmwgPw3mQq8H+JOVEnk
+	e+rLF8gQ0FwjjTk7KQQqQ4FQrMTaNck85DYCzaeFv6Yeg+enAbTqta5KaKc7ytNTK9Ee
+	++S2cANhGjbfGja6HTUcIqRL0MqZ+Zm6EMoEHc9CY2lSrErrWRrE46MhgBLpPM60WHuF
+	O+1YtaKbmk6w5PhJL0JQmdruYX7mt9YvYwoN9HY+zh0om+MDhEzb70hDVYracP8nx7rL
+	2zoQ==
+X-Gm-Message-State: AKwxytdOqaB5mUqWDOsSPUtdD7EnejFjTiKiDbcPEBu3VnYW12wKf2xn
+	q/VRFoBshnQdPGyDv4cVo9bsnw==
+X-Google-Smtp-Source: AH8x227fpkx0c+cc9wrAwIq0j4b4Ho+Ums8gUyqfKeEpepGtQQueePobvSV/25OKUzPwB8/+H6EJgA==
+X-Received: by 10.98.170.24 with SMTP id e24mr10764397pff.177.1516722239306;
+	Tue, 23 Jan 2018 07:43:59 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1184:c15:67c4:d558:a329?
+	([2601:202:4000:1184:c15:67c4:d558:a329])
+	by smtp.gmail.com with ESMTPSA id
+	y17sm7305787pfk.67.2018.01.23.07.43.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 23 Jan 2018 07:43:58 -0800 (PST)
+To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1515141913-120084-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<33D4DBCAC5F2D74E96B07F6E7632BF7363A9A981@G08CNEXMBPEKD01.g08.fujitsu.local>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <3a00bb76-d692-19bf-764a-a2508dd1de19@gmail.com>
+Date: Tue, 23 Jan 2018 07:43:56 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.0
 MIME-Version: 1.0
-Received: by 10.100.161.170 with HTTP; Tue, 23 Jan 2018 07:41:01 -0800 (PST)
-In-Reply-To: <63d85ca3-162a-84de-65af-dde8e02403ab@linaro.org>
-References: <63d85ca3-162a-84de-65af-dde8e02403ab@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 Jan 2018 09:41:01 -0600
-Message-ID: <CAMKF1sp_Mp-3L8XSeEnVR_+n_w2E+QT8wF4JaH-_vqQpw1kn+w@mail.gmail.com>
-To: Andrey Konovalov <andrey.konovalov@linaro.org>
-Cc: msisov@igalia.com,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] RFC: updating chromium-ozone-wayland to 65.0.xxxx.0.rxxxxxx.igalia.1
+In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF7363A9A981@G08CNEXMBPEKD01.g08.fujitsu.local>
+Subject: Re: [meta-oe][PATCH v2] xorgxrdp: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,65 +64,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2018 15:41:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 23 Jan 2018 15:43:58 -0000
+Content-Type: text/plain; charset=gbk
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Mon, Jan 22, 2018 at 1:54 PM, Andrey Konovalov
-<andrey.konovalov@linaro.org> wrote:
-> Hello,
->
-> chromium-ozone-wayland_64.0.3274.0.r517731.igalia.1.bb from current
-> meta-browser [1] didn't
-> quite worked for me: e.g. I was getting the "Aw Snap" after filling in the
-> search text box and pressing <Enter>
-> at youtube.com; sometimes when moving the mouse pointer over the screen the
-> mouse cursor became the arrow
-> and was not changing for quite a while when moving over the chromium window
-> (looks similar to the issue [2]
-> though it should have been fixed in r517731 if I got it correct).
->
-> But when I tried updating chromium-ozone-wayland to version 65 using [3] as
-> the basis,
-> those two issues were gone, and chromium became much more usable for me.
-> Then I did the following:
->   * from [3] took only the changes relevant to the version update,
->   * rebased on the current OSSystems/meta-browser,
->   * replaced the patches added to SRC_URI with the upstream versions where
-> applicable,
->   * updated to the latest tarball at [4] (though I don't see a difference in
-> how 65.0.3298.0.r524623
->     and 65.0.3315.0.r527534 behave, any of these are OK for me)
-> - thus ending up with [5] (the 3 topmost commits).
-> (If we go with r524623, the topmost commit is to be dropped. Or if we go
-> with r527534, the two topmost commits
-> are to be squashed into one.)
-> Basically this is still the subset of Maxim's work [3] with minor changes.
->
-> Does it make sense to update chromium-ozone-wayland to version 65 now?
-> One of my concerns is that it was only tested on an aarch64 target
-> (dragonboard-410c) in rocko, and build-only-tested
-> for an armv7 machine (am57xx-evm, rocko as well).
 
-65 is dev channel, so I think if you keep updating it until 65 hits
-release it should be ok
-Can you check it on x86 arch too ? may be qemux86-64
+
+On 01/22/2018 11:38 PM, Zheng, Ruoqin wrote:
+> ping
+
+its in master
+http://cgit.openembedded.org/meta-openembedded/commit/?id=5e4dfb7ee63cdaa2de447e24e916474fc19f9560
 
 >
+> --------------------------------------------------
+> Zheng Ruoqin
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
+> ADDR.: No.6 Wenzhu Road, Software Avenue,
+>        Nanjing, 210012, China
+> MAIL : zhengrq.fnst@cn.fujistu.com
 >
-> Thanks,
-> Andrey
 >
+> -----Original Message-----
+> From: Zheng, Ruoqin/÷£ »Ù«’ 
+> Sent: Friday, January 05, 2018 4:45 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Zheng, Ruoqin/÷£ »Ù«’ <zhengrq.fnst@cn.fujitsu.com>
+> Subject: [oe][meta-oe][PATCH v2] xorgxrdp: new add
 >
-> [1]
-> https://github.com/OSSystems/meta-browser/tree/master/recipes-browser/chromium
-> [2] https://github.com/Igalia/chromium/issues/317
-> [3]
-> https://github.com/Igalia/meta-browser/commits/ozone/wayland/65.0.3298.0.r524623
-> [4] https://tmp.igalia.com/chromium-tarballs/
-> [5] https://github.com/andrey-konovalov/meta-browser/commits/my.master
+> Add a new recipe xorgxrdp_0.2.5.bb.
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  .../recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb    | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+>
+> diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+> new file mode 100644
+> index 0000000..20cf45f
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "Xorg drivers for xrdp."
+> +
+> +LICENSE = "X11"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=a2523660329fdca3d954c0a87390e007 
+> +\ "
+> +
+> +inherit autotools pkgconfig
+> +
+> +DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
+> +
+> +SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git \
+> +           "
+> +
+> +SRCREV = "c122544f184d4031bbae1ad80fbab554c34a9427"
+> +
+> +PV = "0.2.5+git${SRCPV}"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +FILES_${PN} += "${libdir}/xorg/modules/*"
+> +
+> +INSANE_SKIP_${PN} += "xorg-driver-abi"
 > --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 2.7.4
+>
+>
+>
+
 
