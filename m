@@ -1,57 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f54.google.com (mail-pg0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FA086093A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 150817873D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 15:43:57 +0000 (UTC)
-Received: by mail-pg0-f54.google.com with SMTP id g16so535247pgn.7
+	Tue, 23 Jan 2018 15:48:43 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id u1so554080pgr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jan 2018 07:43:59 -0800 (PST)
+	Tue, 23 Jan 2018 07:48:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=r4eWCB9y+K+e1pTVGaEvr8zeMvcSKzrmwl1kBlYg/Ho=;
-	b=fPbZ8tycWoRIwlW3DohCrv3DCSg9AaPKp+qCX+MoLlqtSmjZ8NBATgoCl52OLNp2nV
-	psSVFSk8ChKtuKWPTKJ3TUw2B/NH8+jp0NeNk9JdC9/IdzHdyP9ThwVr7lhIdRNUTrv+
-	LcLVlEuys90QgIj+DoxHhW0IGa6kEAdxGeh5qiwd9kM1g8KIbL5iALFBiekqJbJrMxAr
-	hli4/ZLx7HY7xUuxX0Sm7Es7JCBObJx7pg+LUCjgb5pm28KyDAhKmLrCOXKDS+NBtSAT
-	EoD1oRLBJQcTZ7jLWlfd4RlE/oKyfy25rkz0flRCXVOskseFyKLtAhvP/7vk6syj4GI4
-	UMkw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=EmYpR3nG12WYAuJysBeh6jK5OOxmFNGsKiAs7R0B8YA=;
+	b=NB7+ytEfW3fnlbQ0My6e8FH6YUIg8QEanLDVn1ejGLW9t5QNIp/viTOLzZ8d4GROOz
+	r7TFaBZNJb/pMwmrO963yn2sBpsZVk+GXKUlKAHXeW4iKDEYq83DwS16nmU1XkC54kbH
+	e8qPsq5d63zYIQyHl7UqY7I0YuFYkF1m1mS4cZBgcSy/4PypwLNeJJt2TwLwe0D99NDz
+	K80j1aRmtOe2i0ytIpg9k5Zsdv+1wVC95h+OCYkZAFm1mR+uCysjIkiWRPlbim8m7mhS
+	vZkA1AM4msTTaRYUEWlGWsMcqMJ4hztWbvrxYHD+WAfnVPgFfepOUFhV8y3ul+zjakeU
+	pibQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=r4eWCB9y+K+e1pTVGaEvr8zeMvcSKzrmwl1kBlYg/Ho=;
-	b=mw4mTBW7qRPRQAWckXvTV7PyODosV0509ayyZf91Rs7ydBWxhekdhl74bXxphUxUH3
-	NWDGqK4ByoY2DftlN4KrcqcooST2R3Wh9G3fQI2yYFUAegJqDgmwgPw3mQq8H+JOVEnk
-	e+rLF8gQ0FwjjTk7KQQqQ4FQrMTaNck85DYCzaeFv6Yeg+enAbTqta5KaKc7ytNTK9Ee
-	++S2cANhGjbfGja6HTUcIqRL0MqZ+Zm6EMoEHc9CY2lSrErrWRrE46MhgBLpPM60WHuF
-	O+1YtaKbmk6w5PhJL0JQmdruYX7mt9YvYwoN9HY+zh0om+MDhEzb70hDVYracP8nx7rL
-	2zoQ==
-X-Gm-Message-State: AKwxytdOqaB5mUqWDOsSPUtdD7EnejFjTiKiDbcPEBu3VnYW12wKf2xn
-	q/VRFoBshnQdPGyDv4cVo9bsnw==
-X-Google-Smtp-Source: AH8x227fpkx0c+cc9wrAwIq0j4b4Ho+Ums8gUyqfKeEpepGtQQueePobvSV/25OKUzPwB8/+H6EJgA==
-X-Received: by 10.98.170.24 with SMTP id e24mr10764397pff.177.1516722239306;
-	Tue, 23 Jan 2018 07:43:59 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:c15:67c4:d558:a329?
-	([2601:202:4000:1184:c15:67c4:d558:a329])
-	by smtp.gmail.com with ESMTPSA id
-	y17sm7305787pfk.67.2018.01.23.07.43.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Jan 2018 07:43:58 -0800 (PST)
-To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <1515141913-120084-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<33D4DBCAC5F2D74E96B07F6E7632BF7363A9A981@G08CNEXMBPEKD01.g08.fujitsu.local>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <3a00bb76-d692-19bf-764a-a2508dd1de19@gmail.com>
-Date: Tue, 23 Jan 2018 07:43:56 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=EmYpR3nG12WYAuJysBeh6jK5OOxmFNGsKiAs7R0B8YA=;
+	b=M1jf9RIIHsjXNbz/kVNpMVxV/dVScZVdYiTtqd4LM4niwO+Otrj2N9QHzUYyrqFOBV
+	BPzSbaWgQ3mlUIHzXwbypNAfmjJPZYN7Uo9NGwrYC2KzvPl+mhJy5WJDW9AraYK3RHbo
+	K6hQL+eeJokYC9yMTQHzDqoVLyMz3q/8BO4a0/Uk5zoRHU1ZstuK9iR3Lh2QzRemTywi
+	caYJZGpUbn/E+1Yhi255fZy4iwXSqcU3g1s7Y1rPrl1n/z3EE9MUu/JjFtrJT7xjBaQE
+	b6eBYnVwLO+v09mWyngJ8ywFxfR0LyBVTgWB7cT74B1IcMScZ+nOntDge6GsydjNUdM1
+	ucrQ==
+X-Gm-Message-State: AKwxytez909w3CLBdOEYNwAUjWcEeenfH6w8dOLYAtfll5kW/8DrJmCz
+	mXuK/lVsUA4X/3aAw0dcjugwOloh6ZBqztrGDtU=
+X-Google-Smtp-Source: AH8x227Q3wbvpHYVlE/AhEUpe8snVYGxw3MlQdvoH4zyVmfDKwl/AbM9TTR05lbFPU/3MZrP2Kvjh3EzmnBUvfMyGyk=
+X-Received: by 10.99.137.195 with SMTP id v186mr9275315pgd.25.1516722525109;
+	Tue, 23 Jan 2018 07:48:45 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF7363A9A981@G08CNEXMBPEKD01.g08.fujitsu.local>
-Subject: Re: [meta-oe][PATCH v2] xorgxrdp: new add
+Received: by 10.100.161.170 with HTTP; Tue, 23 Jan 2018 07:48:14 -0800 (PST)
+In-Reply-To: <1513002095-5152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <1513002095-5152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Jan 2018 09:48:14 -0600
+Message-ID: <CAMKF1srSpv3GbrkHrLej6uEB0ikyE77LV4h4w-c0BoWaCfM0Kg@mail.gmail.com>
+To: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCHv2] samba: Add packagegroup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,75 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jan 2018 15:43:58 -0000
-Content-Type: text/plain; charset=gbk
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 23 Jan 2018 15:48:44 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-
-
-On 01/22/2018 11:38 PM, Zheng, Ruoqin wrote:
-> ping
-
-its in master
-http://cgit.openembedded.org/meta-openembedded/commit/?id=5e4dfb7ee63cdaa2de447e24e916474fc19f9560
-
->
-> --------------------------------------------------
-> Zheng Ruoqin
-> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
-> ADDR.: No.6 Wenzhu Road, Software Avenue,
->        Nanjing, 210012, China
-> MAIL : zhengrq.fnst@cn.fujistu.com
->
->
-> -----Original Message-----
-> From: Zheng, Ruoqin/÷£ »Ù«’ 
-> Sent: Friday, January 05, 2018 4:45 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Zheng, Ruoqin/÷£ »Ù«’ <zhengrq.fnst@cn.fujitsu.com>
-> Subject: [oe][meta-oe][PATCH v2] xorgxrdp: new add
->
-> Add a new recipe xorgxrdp_0.2.5.bb.
+On Mon, Dec 11, 2017 at 8:21 AM, zhengrq <zhengrq.fnst@cn.fujitsu.com> wrote:
+> Add packagegroup for samba, for there are too many rpms in samba and it's hard to manage.
 >
 > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 > ---
->  .../recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb    | 22 ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+>  .../recipes-connectivity/samba/samba_4.6.7.bb         | 19 ++++++++++++++++++-
+>  1 file changed, 18 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-> new file mode 100644
-> index 0000000..20cf45f
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY = "Xorg drivers for xrdp."
-> +
-> +LICENSE = "X11"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=a2523660329fdca3d954c0a87390e007 
-> +\ "
-> +
-> +inherit autotools pkgconfig
-> +
-> +DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
-> +
-> +SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git \
-> +           "
-> +
-> +SRCREV = "c122544f184d4031bbae1ad80fbab554c34a9427"
-> +
-> +PV = "0.2.5+git${SRCPV}"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +FILES_${PN} += "${libdir}/xorg/modules/*"
-> +
-> +INSANE_SKIP_${PN} += "xorg-driver-abi"
-> --
-> 2.7.4
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> index 2b227c9..0bacb02 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> @@ -162,7 +162,7 @@ PACKAGES =+ "${PN}-python ${PN}-pidl \
+>               ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
+>               winbind \
+>               ${PN}-common ${PN}-base ${PN}-ctdb-tests \
+> -             smbclient"
+> +             smbclient ${PN}-client ${PN}-test"
 >
+>  python samba_populate_packages() {
+>      def module_hook(file, pkg, pattern, format, basename):
+> @@ -254,3 +254,20 @@ FILES_smbclient = "${bindir}/cifsdd \
 >
->
+>  RDEPENDS_${PN}-pidl_append = " perl"
+>  FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
+> +
+> +SUMMARY_${PN}-client = "samba client"
+> +RDEPENDS_${PN}-client = "\
+> +    smbclient \
+> +    winbind \
+> +    registry-tools \
+> +    ${PN}-pidl \
+> +    "
+> +
+> +ALLOW_EMPTY_${PN}-client = "1"
+> +
+> +RDEPENDS_${PN}-test = "\
+> +    ${PN}-ctdb-tests \
+> +    ${PN}-testsuite \
+> +    "
+> +
+> +ALLOW_EMPTY_${PN}-test = "1"
 
+perhaps better to add a packagegroup recipe explicitly
 
