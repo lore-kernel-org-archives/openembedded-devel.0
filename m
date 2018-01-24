@@ -1,39 +1,38 @@
 Return-Path: <hainsvdbosch@ziggo.nl>
-X-Greylist: delayed 923 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 24 Jan 2018 10:58:30 UTC
 Received: from smtpq3.tb.mail.iss.as9143.net (smtpq3.tb.mail.iss.as9143.net
 	[212.54.42.166])
-	by mail.openembedded.org (Postfix) with ESMTP id 53175784D7
+	by mail.openembedded.org (Postfix) with ESMTP id 85E7F786E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 10:58:30 +0000 (UTC)
+	Wed, 24 Jan 2018 11:01:18 +0000 (UTC)
 Received: from [212.54.42.132] (helo=smtp8.tb.mail.iss.as9143.net)
 	by smtpq3.tb.mail.iss.as9143.net with esmtp (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>) id 1eeIWK-0001JD-Lc
+	(envelope-from <hainsvdbosch@ziggo.nl>) id 1eeIWT-0001Kz-Ef
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Jan 2018 11:43:08 +0100
+	Wed, 24 Jan 2018 11:43:17 +0100
 Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
 	helo=localhost.localdomain)
 	by smtp8.tb.mail.iss.as9143.net with esmtpsa
 	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
 	(envelope-from <hainsvdbosch@ziggo.nl>)
-	id 1eeIWK-0003G8-HQ; Wed, 24 Jan 2018 11:43:08 +0100
+	id 1eeIWT-0003G8-B8; Wed, 24 Jan 2018 11:43:17 +0100
 From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jan 2018 11:42:14 +0100
-Message-Id: <20180124104215.5132-1-hainsvdbosch@ziggo.nl>
+Date: Wed, 24 Jan 2018 11:42:15 +0100
+Message-Id: <20180124104215.5132-2-hainsvdbosch@ziggo.nl>
 X-Mailer: git-send-email 2.15.1
+In-Reply-To: <20180124104215.5132-1-hainsvdbosch@ziggo.nl>
+References: <20180124104215.5132-1-hainsvdbosch@ziggo.nl>
 X-SourceIP: 82.73.120.193
 X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
 X-Ziggo-spambar: /
 X-Ziggo-spamscore: 0.0
 X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=YI2xNyOx c=1 sm=1 tr=0
 	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
-	a=RgaUWeydRksA:10 a=FP58Ms26AAAA:8 a=owKgz8PGAg_C-DH5x5QA:9
-	none
+	a=RgaUWeydRksA:10 a=_HefgGF2nv_A8RK-Hg8A:9 none
 X-Ziggo-Spam-Status: No
 X-Spam-Status: No
 X-Spam-Flag: No
-Subject: [meta-oe][PATCH 1/2] smbnetfs: update to version 0.6.1
+Subject: [meta-oe][PATCH 2/2] libcdio: update to version 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,46 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2018 10:58:31 -0000
+X-List-Received-Date: Wed, 24 Jan 2018 11:01:18 -0000
 
 ---
- .../recipes-filesystems/smbnetfs/smbnetfs/configure.patch             | 2 +-
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb         | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-multimedia/libcdio/{libcdio_0.93.bb => libcdio_2.0.0.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/libcdio/{libcdio_0.93.bb => libcdio_2.0.0.bb} (86%)
 
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-index 152507cf3..55275669b 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-@@ -3,7 +3,7 @@ Index: git/configure.in
- --- git.orig/configure.ac	2014-06-18 16:06:16.040721349 +0000
- +++ git/configure.ac	2014-07-18 07:49:17.085552256 +0000
- @@ -1,5 +1,5 @@
-- AC_INIT([SMBNetFS],[0.6.0])
-+ AC_INIT([SMBNetFS],[0.6.1])
- -AM_INIT_AUTOMAKE
- +AM_INIT_AUTOMAKE([foreign])
-  AC_CONFIG_HEADERS([src/config.h])
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index 0fcfd6ae7..fefc04538 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -15,14 +15,14 @@ inherit autotools gitpkgv pkgconfig
+diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio_0.93.bb b/meta-oe/recipes-multimedia/libcdio/libcdio_2.0.0.bb
+similarity index 86%
+rename from meta-oe/recipes-multimedia/libcdio/libcdio_0.93.bb
+rename to meta-oe/recipes-multimedia/libcdio/libcdio_2.0.0.bb
+index 99e6a84bc..6bf64d663 100644
+--- a/meta-oe/recipes-multimedia/libcdio/libcdio_0.93.bb
++++ b/meta-oe/recipes-multimedia/libcdio/libcdio_2.0.0.bb
+@@ -5,8 +5,9 @@ LICENSE = "GPLv3+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- PKGV = "${GITPKGVTAG}"
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "d154476feaac5a7b5f180e83eaf3d689"
+-SRC_URI[sha256sum] = "4972cd22fd8d0e8bff922d35c7a645be0db0ab0e7b3dfaecc9cd8272429d6975"
++
++SRC_URI[md5sum] = "0cb25905113b930e4539d2f4eb6574b0"
++SRC_URI[sha256sum] = "1b481b5da009bea31db875805665974e2fc568e2b2afa516f4036733657cf958"
  
--SRCREV = "21c63ed60202e5540613d4c822a57a0b81764499"
-+SRCREV = "bc6b94b015fdaf7c4dab56ccb996eecea8bc4373"
- 
- SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
-            file://configure.patch \
-            file://Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch"
- 
- PACKAGECONFIG ??= ""
--PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
-+PACKAGECONFIG[libsecret] = "--with-libsecret=yes,--with-libsecret=no,libsecret"
- 
- S = "${WORKDIR}/git"
+ inherit autotools pkgconfig
  
 -- 
 2.15.1
