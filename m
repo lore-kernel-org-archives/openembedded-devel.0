@@ -1,51 +1,39 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
-	[209.85.214.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 52B9D78688
+Return-Path: <hainsvdbosch@ziggo.nl>
+X-Greylist: delayed 923 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 24 Jan 2018 10:58:30 UTC
+Received: from smtpq3.tb.mail.iss.as9143.net (smtpq3.tb.mail.iss.as9143.net
+	[212.54.42.166])
+	by mail.openembedded.org (Postfix) with ESMTP id 53175784D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 10:53:27 +0000 (UTC)
-Received: by mail-it0-f52.google.com with SMTP id q8so4704694itb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 02:53:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=OCVhwTOYiraS4BFCyapuGFNnGoYBpKlQ1UjvtASCVIU=;
-	b=HQUVF6ueHN3a8iYVRNGqn7eFvsiUPyJFNY9fi1xECVHKu5KywZSpLMndcmfaIwAGtv
-	KrZZnMjzdgIJEx/zCsVpkb0Y5IeA7TK1ofBn7ImNCdfYoIwwKYW00BVQAAWhcEMxokrq
-	H5iLtNRB24C1j+LeGMaaDFKbsrEMo06VhZ6rWjMu/q6Oxac7pj7zwu7WHqm985K/wCOs
-	GQnibGaHjLye7zkqNQmDOhHz6mh8V3GWneawBm6EwyY6fQeV5Sq3FTcBwEiEJbdPuMvE
-	E6jMG7NZsIYXWorvnjGc5ERaM9nk82Twys2NM9riDHY44/TTkLu5gNpTr49Yzs4ull+1
-	hdiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=OCVhwTOYiraS4BFCyapuGFNnGoYBpKlQ1UjvtASCVIU=;
-	b=a8sX2PI1cmqFNbphEFJXCpSkU7TvIpuKPvvCZxu3dNUqKYaTyZ91n3bdNhH0TTcXHC
-	5j3Z4LdzqjN+jM89FmZ13fV6nz6rGHKnEge85GIH9XZfIo0zIZvgLf/vPSEiHlFw3uAE
-	03uBiU9Y+NoFaQwze/YtjN2oG3wePXaEzMKRh77dr1n9kkE926LA98/ZXY8nqkt0t6Gh
-	NhTR5ZYjb9XZwUuuPmTHVmc1P81WoPKLsYyMi+fy/2QzPOU/VW/cGHqQxKWpFjza/xdr
-	tQJP59G81sxGqQ0IvPr47Qvl39iSy8TthEajUYufZPShde97X35BIjzIL4SjfzYovXzp
-	6arw==
-X-Gm-Message-State: AKwxytdGHFbb8yqQnh45kXdd/JHFRPz9Yrkubakn+Iak2kvWDtC60iEb
-	eJ6rSl9rCTGCDuMMffajVnrpwGoXXg8ktIwntwKn+g==
-X-Google-Smtp-Source: AH8x226ww5Cv/GliIydpTyLtPqnNohIKyN8uzbtRrJy7rIA7SjasrPG2RVlbsmaRxfr7iy0Ps4R05gmwnoEY0nycQz8=
-X-Received: by 10.36.85.206 with SMTP id e197mr8049905itb.124.1516791209352;
-	Wed, 24 Jan 2018 02:53:29 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.17.206 with HTTP; Wed, 24 Jan 2018 02:53:08 -0800 (PST)
-In-Reply-To: <20180123223913.GA2786@denix.org>
-References: <1516085015-89929-1-git-send-email-denis@denix.org>
-	<20180123223913.GA2786@denix.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 24 Jan 2018 10:53:08 +0000
-Message-ID: <CAJTo0LZDJDT8d+bGbeMLxAFD3Jr54PTbNr4GdA3mR-msbfPJSA@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-networking][PATCH] ndisc6: need to set USE_NLS="yes" to use gettext.h
+	Wed, 24 Jan 2018 10:58:30 +0000 (UTC)
+Received: from [212.54.42.132] (helo=smtp8.tb.mail.iss.as9143.net)
+	by smtpq3.tb.mail.iss.as9143.net with esmtp (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>) id 1eeIWK-0001JD-Lc
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Jan 2018 11:43:08 +0100
+Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
+	helo=localhost.localdomain)
+	by smtp8.tb.mail.iss.as9143.net with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>)
+	id 1eeIWK-0003G8-HQ; Wed, 24 Jan 2018 11:43:08 +0100
+From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 24 Jan 2018 11:42:14 +0100
+Message-Id: <20180124104215.5132-1-hainsvdbosch@ziggo.nl>
+X-Mailer: git-send-email 2.15.1
+X-SourceIP: 82.73.120.193
+X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
+X-Ziggo-spambar: /
+X-Ziggo-spamscore: 0.0
+X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=YI2xNyOx c=1 sm=1 tr=0
+	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
+	a=RgaUWeydRksA:10 a=FP58Ms26AAAA:8 a=owKgz8PGAg_C-DH5x5QA:9
+	none
+X-Ziggo-Spam-Status: No
+X-Spam-Status: No
+X-Spam-Flag: No
+Subject: [meta-oe][PATCH 1/2] smbnetfs: update to version 0.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,54 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2018 10:53:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 24 Jan 2018 10:58:31 -0000
 
-That should only be true for native recipes?
+---
+ .../recipes-filesystems/smbnetfs/smbnetfs/configure.patch             | 2 +-
+ meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb         | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-On 23 January 2018 at 22:39, Denys Dmytriyenko <denis@denix.org> wrote:
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
+index 152507cf3..55275669b 100644
+--- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
+@@ -3,7 +3,7 @@ Index: git/configure.in
+ --- git.orig/configure.ac	2014-06-18 16:06:16.040721349 +0000
+ +++ git/configure.ac	2014-07-18 07:49:17.085552256 +0000
+ @@ -1,5 +1,5 @@
+- AC_INIT([SMBNetFS],[0.6.0])
++ AC_INIT([SMBNetFS],[0.6.1])
+ -AM_INIT_AUTOMAKE
+ +AM_INIT_AUTOMAKE([foreign])
+  AC_CONFIG_HEADERS([src/config.h])
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+index 0fcfd6ae7..fefc04538 100644
+--- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+@@ -15,14 +15,14 @@ inherit autotools gitpkgv pkgconfig
+ 
+ PKGV = "${GITPKGVTAG}"
+ 
+-SRCREV = "21c63ed60202e5540613d4c822a57a0b81764499"
++SRCREV = "bc6b94b015fdaf7c4dab56ccb996eecea8bc4373"
+ 
+ SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
+            file://configure.patch \
+            file://Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch"
+ 
+ PACKAGECONFIG ??= ""
+-PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
++PACKAGECONFIG[libsecret] = "--with-libsecret=yes,--with-libsecret=no,libsecret"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.15.1
 
-> Ping.
->
->
-> On Tue, Jan 16, 2018 at 01:43:35AM -0500, Denys Dmytriyenko wrote:
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > Otherwise we can get gettext-minimal-native dependency instead, which
-> does not
-> > provide gettext.h header.
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  meta-networking/recipes-support/ndisc6/ndisc6_git.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> > index 48a83b8..58f1230 100644
-> > --- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> > +++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> > @@ -22,6 +22,8 @@ EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
-> >  LDFLAGS += "-fuse-ld=gold"
-> >  TOOLCHAIN = "gcc"
-> >
-> > +USE_NLS = "yes"
-> > +
-> >  do_configure_prepend() {
-> >      cp ${STAGING_DATADIR_NATIVE}/gettext/gettext.h ${S}/include
-> >      ${S}/autogen.sh
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
