@@ -1,47 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
-	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 26B8D6FEFE
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw0-f176.google.com (mail-yw0-f176.google.com
+	[209.85.161.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A0657803F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 13:18:04 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id m11so4806727iob.2
+	Wed, 24 Jan 2018 15:27:08 +0000 (UTC)
+Received: by mail-yw0-f176.google.com with SMTP id b129so1613714ywa.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 05:18:06 -0800 (PST)
+	Wed, 24 Jan 2018 07:27:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=7KKvxvZOjWeiq7iKTDVJEwj3vyrNIuroT4wgJjGlciY=;
-	b=CcgVXejDH+RTOdzjcoLmUlh+afKq7lUAxOFpYzVMQvBTG0Y9kS8YaNrEElQuLGizi8
-	sxZqrLorEfJogCV6cGTUXGH3cCbjJbbs35b5i9nPmPVIITvk+++Y3aDiKa4jKo50MdgO
-	7oz7UNPSMo3qMz11Af54q/3yEzUEpRsl2O7b3kSXyZWXVBo7RCrRPl4SC6MnoHy9gsu5
-	SCVcOwu3zqWUdKdaL0E+FawzyWVGRJPQYcQ6I8NGGDlBWo9HFYIRdQHOQLugafnHNYgX
-	8kX5L6PsND3cZA8L5ff4+JNi4Qng1AQMel3XVaQMLi7UpOu1O5PSxAaTFN5+SOQYCq0a
-	awPQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=7BL/6JAUFmpDQnjLGHVNMk8DPDp8m8keLYVdMeZOKDI=;
+	b=oaMRpY4fY60Yg+cI5ALZWE+kkp7/RC5vUe5dcqHPXHYii7mFJbHSO6tJEsjo+jIHaY
+	cFTEfZ859AKof922c2bVlnxbGK1atvReN4oz33chGHC/+Bxt3Cxr/Fj8D6C51JlxtbCN
+	EzcSF2KttUdalG4jozP2vL/Tle17MXA8ci55JMNqIj7sncAOPkUqltZZN9ckYaXB0LBu
+	M6IduL2MNK+pBK736p+G2PuH8YgGqvZyyxZbKb68CR+fKEHrcsIGXKaDTP4EOE3m8DhN
+	XWeyftnLVPMiZjnfcz3FKDDLej+UF1FXrH4gjHO1UDxJtOPgtl736Jk5Krx2yhtiqyuv
+	OSPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=7KKvxvZOjWeiq7iKTDVJEwj3vyrNIuroT4wgJjGlciY=;
-	b=ESAkda5HuVsAuOD6EwOHcsU/2w2g7BNgd9pMHj9x9HFdROckpCSEyCDECklohIHRwI
-	B65pjw7dOq8reenJuPX4eOE6bBT10KgN5cuVfwtjYdd76xDDMoXlRkFGcAkJxpGo51Zh
-	SdPeMxAJ9BKSX1ICeO98ixtxLdSbUczYhQ+S3KC4nwyIE9VoWylV4AiNDiK4F6s8MTB5
-	PaiGa3EzqSqmnbFy0sr+4SqbqTL1QiJIWrfxXAzLUO+H0WvXt0+u5dJfmZA83/ttuiIW
-	VUv74W2RntzFcYo5z697mk3dJaef021Vu28jUDs1Zm9GQAQk82OFPeZ5dHZFrFTI/+EV
-	4FaA==
-X-Gm-Message-State: AKwxytfzM0q7lT5GB/tqgoJJfMS2UKu42UXX4dWTfq2xied1zE2ShwxC
-	0wKZDmu8pLIzANGVJo/EZAdy4K7L
-X-Google-Smtp-Source: AH8x224uZDZZSwhoCWCQ1oadGlGQ2N9VwaTm2ksj7j2h461kSGkj3ZURPLgCnlZ/TWnFGgL9sjxwUQ==
-X-Received: by 10.107.198.140 with SMTP id w134mr7946803iof.255.1516799885784; 
-	Wed, 24 Jan 2018 05:18:05 -0800 (PST)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id r139sm167963itc.9.2018.01.24.05.18.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 24 Jan 2018 05:18:04 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Jan 2018 08:17:59 -0500
-Message-Id: <20180124131759.5884-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.14.1.459.g238e487ea
-Subject: [meta-oe][PATCH v2] uriparser: add
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=7BL/6JAUFmpDQnjLGHVNMk8DPDp8m8keLYVdMeZOKDI=;
+	b=h6sE3FJMKg1uFSeojtFXhgVn99ovYbvCngMq2VQOJDYxRO1MO5d2ZyXqo8Gx0zO2iY
+	tl4rj7quRHPO+cGoPecbpjFQvwyJWy5n6g926LVka5JWKqVJegwBlKK/5ETK0uKOPg00
+	z7QDIrURCo6c5U3f9WyKkuMEJp00i2Yy87nXe4uhd7ypBR2I71GdCiDgtgxsziM6d3Dl
+	c6ray6332INEpA9GD3iEtx8RmtoeX+/2E4Y0E8IX173JprornBwvhYuPvjqz9WZF6Tg9
+	oNhRuKcNMQP2tsvhi1qwtMUnfhQ0cXUihtsHyiD5HqtApyqiAvyC73GYzjOOBp0OVfzT
+	XMlQ==
+X-Gm-Message-State: AKwxyted78qpcRYD2VXrhJbbN8/ghSYrSRRGjlDj0GZNG2SKVxer1TCa
+	qs8GuyN0fSHuMGXRnt5MaHdYITQn7Lt6QaiJt2A=
+X-Google-Smtp-Source: AH8x224t3/rVD2N8fFOMHWnSrt15mOLJnKeSdabIz9iggDLzaWsxUEk2MFSAxCooXo9LqJz3NbU/DfR1cUg1XxVBx0U=
+X-Received: by 10.129.222.12 with SMTP id k12mr5503180ywj.225.1516807630054;
+	Wed, 24 Jan 2018 07:27:10 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.37.199.133 with HTTP; Wed, 24 Jan 2018 07:27:09 -0800 (PST)
+In-Reply-To: <20171130081026.25414-1-schnitzeltony@gmail.com>
+References: <20171130081026.25414-1-schnitzeltony@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 24 Jan 2018 16:27:09 +0100
+Message-ID: <CALbNGRSuQkYnh22ChTz3g9HcZrjRbf0FzQJrUbZwES-Jm21Cog@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt5][PATCH] qwt-qt5: rewrite completely
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,44 +54,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2018 13:18:05 -0000
+X-List-Received-Date: Wed, 24 Jan 2018 15:27:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Currently I'm aware of the following layers/recipes which depend on uriparser:
-	- meta-measured/recipes-tpm/tpm2-tss
-	- meta-webos-ports/meta-luneos/recipes-webos/luna-sysservice
-	- meta-webos-ports/meta-luneos/recipes-webos/libpbnjson
+On Thu, Nov 30, 2017 at 9:10 AM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om>
+wrote:
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
+> * install pkgconfig
+> * fix examples
+> * DESCRIPTION -> SUMMARY
+> * overall cleanup
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>
 
-changes in v2:
-	- update license from "BSD" to "BSD-3-Clause"
+Is it possible to get this into rocko?
 
- meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
-
-diff --git a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
-new file mode 100644
-index 0000000000..b4be853ddb
---- /dev/null
-+++ b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "RFC 3986 compliant URI parsing library"
-+HOMEPAGE = "https://uriparser.github.io"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=72b0f9c74ae96eeab8cf1bf3efe08da2"
-+
-+SRC_URI := "${SOURCEFORGE_MIRROR}/project/uriparser/Sources/${PV}/uriparser-${PV}.tar.bz2"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--disable-test --disable-doc"
-+
-+SRC_URI[md5sum] = "9aabdc3611546f553f4af372167de6d6"
-+SRC_URI[sha256sum] = "ce7ccda4136974889231e8426a785e7578e66a6283009cfd13f1b24a5e657b23"
--- 
-2.14.1.459.g238e487ea
-
+Andreas
 
