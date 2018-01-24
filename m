@@ -1,59 +1,55 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-ot0-f194.google.com (mail-ot0-f194.google.com
 	[74.125.82.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D408571C9F
+	by mail.openembedded.org (Postfix) with ESMTP id 9075565D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 18:08:59 +0000 (UTC)
-Received: by mail-ot0-f194.google.com with SMTP id f100so4371513otf.3
+	Wed, 24 Jan 2018 18:46:34 +0000 (UTC)
+Received: by mail-ot0-f194.google.com with SMTP id p36so4479801otd.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 10:09:01 -0800 (PST)
+	Wed, 24 Jan 2018 10:46:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-language:content-transfer-encoding;
-	bh=CZHqcMGnYhbYFml4z13ZHeu9RwexplLCYI/BTCLG0Rw=;
-	b=QbMKu/zKiefs0f1UzwsRmMxP8xuXwRjPIcgSssTaW3T6ROBJh5B0IpJoakED6nWxSs
-	oHyMBlKAp3snYdFxs6L2m/jhd/QWDtSV6fxY2Qt3tMFh02agxe0pBHn7VC4AxDq9eZQD
-	tiLo4FkuE7WT60eW6zSg3lUYXua/YErD2nAkLHnejgnM9moJUODgcDOTFpCVyBue1XhC
-	rSQWUrvyeUluPd63O+Qi+u3PTjj15zGnIi1tUBqLJG6LdgUa0+fIdnFUxe3bPDPDBkW6
-	MJUcMzD0Lm7H5gEtYCEzQwOLLwd0EqXzb3XnVgV9oH/vfi1k8hQQocd6m9XmQ18azF2w
-	gNyw==
+	bh=RxGR7wFlh1eLyYhnZ7fw87eSc3mvopfBN8muUHPeOxw=;
+	b=QQJB6kft6CIk0HfH4yT3DJgiSTpwGjiTRILK40H91ypw+f/AWzi+V64TE+9WjVCq3F
+	sqfsDSkLZ+Ar7Nnf1PG5vAazWh+vRg40xsxDcIgViekK0lxSY4Y2VeM9BjU5KeoyPdGl
+	rCTtSPstJjWrHktdvURJV9EBKd97giHulPNQxXkfYZLJMUypVyvCfNX9JAczQSCX6uWA
+	7xpwIy+hIWkL8/ibDM1wK08vtN35ypOk7b27uBNs5aaYFidlnBl8S5pTn6tkG9XmZplx
+	5DdYUmQIQwbD3ZEDrORsfVpzRnelmZ2KQeLfX1759CoYJ9vxdU8t57f4CtAx1VDubKPg
+	JRCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=CZHqcMGnYhbYFml4z13ZHeu9RwexplLCYI/BTCLG0Rw=;
-	b=N++zSI7O4bAOgkZzAiiF0lbhigtw/S/hUIn3/Vqxe7gTLgrFhfDl0R8nOdYElzmkZG
-	QGEmXoxak13fHe03ZsKGF3xMQ96gfXWlBezyOJMW5SxcGicC1sH2vM1OqPjhHyAmaksY
-	Ob6RptUfnl5boXGochfZ1wzengQSdgQ/71oGlt5SU0ruYa/kD8DNFMOnroQoCnlukFSI
-	UwtmfJopGbQE5Swwx9jCO68GMSaLfo2FDVvO1ZdRcy5CIf+FxSM9Wm0Zk9W0p3TBHBH0
-	fGlXddij5GX8ggGbnSZIjrXMwKSLZWLv0kGj0ifzygtYvaBSS0RmjaTib2Z+krchPky5
-	iZAg==
-X-Gm-Message-State: AKwxytfBLVkVTapQuA3gxQYXXgXrN9yoEFpO5ci7PcYHvnTt2WTJrcuX
-	kQWKmf2xc+Wu56h7RJ0WQGDXFWbF
-X-Google-Smtp-Source: AH8x224/2v8Wpw0asgR3C7s2BJ5fQ0X22trdxmKw3iiUvp9b90U+VrukWxqBmFahuKzQM33DrcRGBQ==
-X-Received: by 10.157.41.35 with SMTP id d32mr10681254otb.17.1516817340453;
-	Wed, 24 Jan 2018 10:09:00 -0800 (PST)
+	bh=RxGR7wFlh1eLyYhnZ7fw87eSc3mvopfBN8muUHPeOxw=;
+	b=M7B4KadrRYgNJfZDQ+7MDpPvWVq9DxWH7iWCz5ax85A+F8jcSRLA7SZrmZMXjVqEKC
+	BiVbEx9AWmOOtJQlx4Ym9kZ2TK0vbfQjV7R4JDGppFO5AJF72iXT1/50TZVyMFDSfwPm
+	BFdj4PjZaC7vUTRXVQSxFmknqpbR9Kwn7Geoz/4oK6BPrJeyoutkDc24QRWgKT+ehPts
+	8MkpbcelDHLmFmZR9lfPnDzSOwu3RN8PnDlptK5vCvcGJNvJGNfA0RjhSnNwBY7zEIAC
+	4AXuEdtr2Gec9IxUsqVZw4FzON6vdW5N9mQ8eZSOiQQxf5l2hiS8nABvnuAoeQep9noW
+	bytw==
+X-Gm-Message-State: AKwxytfHfJVskfM64ts3qUct/htfxi7DQ9AIZ2F+HfQZiiOZ2ueRXHPg
+	jziYhbWmh8073UU1Y9XJ4VapgraL
+X-Google-Smtp-Source: AH8x224IX5gdPa7Fpfjq8OEbDGOwLpaVHkxIIst+efNVYY6LHiQpim/7l8q8B7aJRVZV1Lv+FRUNiA==
+X-Received: by 10.157.63.248 with SMTP id i53mr9950604ote.51.1516819595029;
+	Wed, 24 Jan 2018 10:46:35 -0800 (PST)
 Received: from [172.27.88.46] ([217.140.111.136])
 	by smtp.gmail.com with ESMTPSA id
-	r28sm1618826otc.68.2018.01.24.10.08.59
+	j126sm2320454oih.14.2018.01.24.10.46.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Jan 2018 10:08:59 -0800 (PST)
+	Wed, 24 Jan 2018 10:46:34 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-References: <1513002095-5152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CAMKF1srSpv3GbrkHrLej6uEB0ikyE77LV4h4w-c0BoWaCfM0Kg@mail.gmail.com>
-	<20180124005848.208d7757@t460p>
-	<e79fca87-a7ea-cd80-7fe1-b3815cdef0db@gmail.com>
-	<20180124124440.38d77839@t460p>
+References: <20180124131759.5884-1-twoerner@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <26f32ad3-ce9f-ba0c-6b22-16d61765feb7@gmail.com>
-Date: Wed, 24 Jan 2018 12:08:58 -0600
+Message-ID: <86d7223c-86f9-0283-c286-17803430e083@gmail.com>
+Date: Wed, 24 Jan 2018 12:46:33 -0600
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0)
 	Gecko/20100101 Thunderbird/58.0
 MIME-Version: 1.0
-In-Reply-To: <20180124124440.38d77839@t460p>
-Subject: Re: [meta-networking][PATCHv2] samba: Add packagegroup
+In-Reply-To: <20180124131759.5884-1-twoerner@gmail.com>
+Subject: Re: [meta-oe][PATCH v2] uriparser: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,77 +62,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2018 18:09:00 -0000
+X-List-Received-Date: Wed, 24 Jan 2018 18:46:34 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 1/24/18 5:44 AM, Andreas Oberritter wrote:
-> On Tue, 23 Jan 2018 23:25:11 -0600
-> Khem Raj <raj.khem@gmail.com> wrote:
+On 1/24/18 7:17 AM, Trevor Woerner wrote:
+> Currently I'm aware of the following layers/recipes which depend on uriparser:
+> 	- meta-measured/recipes-tpm/tpm2-tss
+> 	- meta-webos-ports/meta-luneos/recipes-webos/luna-sysservice
+> 	- meta-webos-ports/meta-luneos/recipes-webos/libpbnjson
 > 
->> On 1/23/18 5:58 PM, Andreas Oberritter wrote:
->>> On Tue, 23 Jan 2018 09:48:14 -0600
->>> Khem Raj <raj.khem@gmail.com> wrote:
->>>   
->>>> On Mon, Dec 11, 2017 at 8:21 AM, zhengrq <zhengrq.fnst@cn.fujitsu.com> wrote:  
->>>>> Add packagegroup for samba, for there are too many rpms in samba and it's hard to manage.
->>>>>
->>>>> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->>>>> ---
->>>>>  .../recipes-connectivity/samba/samba_4.6.7.bb         | 19 ++++++++++++++++++-
->>>>>  1 file changed, 18 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
->>>>> index 2b227c9..0bacb02 100644
->>>>> --- a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
->>>>> +++ b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
->>>>> @@ -162,7 +162,7 @@ PACKAGES =+ "${PN}-python ${PN}-pidl \
->>>>>               ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
->>>>>               winbind \
->>>>>               ${PN}-common ${PN}-base ${PN}-ctdb-tests \
->>>>> -             smbclient"
->>>>> +             smbclient ${PN}-client ${PN}-test"
->>>>>
->>>>>  python samba_populate_packages() {
->>>>>      def module_hook(file, pkg, pattern, format, basename):
->>>>> @@ -254,3 +254,20 @@ FILES_smbclient = "${bindir}/cifsdd \
->>>>>
->>>>>  RDEPENDS_${PN}-pidl_append = " perl"
->>>>>  FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
->>>>> +
->>>>> +SUMMARY_${PN}-client = "samba client"
->>>>> +RDEPENDS_${PN}-client = "\
->>>>> +    smbclient \
->>>>> +    winbind \
->>>>> +    registry-tools \
->>>>> +    ${PN}-pidl \
->>>>> +    "
->>>>> +
->>>>> +ALLOW_EMPTY_${PN}-client = "1"
->>>>> +
->>>>> +RDEPENDS_${PN}-test = "\
->>>>> +    ${PN}-ctdb-tests \
->>>>> +    ${PN}-testsuite \
->>>>> +    "
->>>>> +
->>>>> +ALLOW_EMPTY_${PN}-test = "1"    
->>>>
->>>> perhaps better to add a packagegroup recipe explicitly  
->>>
->>> How would a packagegroup be useful for a single recipe? We discussed this
->>> back in December:  
->>
->> why does single recipe matter ?
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
 > 
-> Because the most simple form of a group of packages is a meta package in the
-> recipe creating the packages. And simple, in case of doubt, wins against
-> complicated.
+> changes in v2:
+> 	- update license from "BSD" to "BSD-3-Clause"
 > 
 
-Yes thats correct and usually, meta packages are a bit rare, where as
-packagegroups are more or less self explanatory. If we are defining a
-meta package, perhaps the package granularity of samba should also be
-looked at, it might be too granular to be useful. Either way, I think
-its fine, I personally prefer packagegroups
+this one looks good.
+
+>  meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+> 
+> diff --git a/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+> new file mode 100644
+> index 0000000000..b4be853ddb
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/uriparser/uriparser_0.8.4.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "RFC 3986 compliant URI parsing library"
+> +HOMEPAGE = "https://uriparser.github.io"
+> +
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=72b0f9c74ae96eeab8cf1bf3efe08da2"
+> +
+> +SRC_URI := "${SOURCEFORGE_MIRROR}/project/uriparser/Sources/${PV}/uriparser-${PV}.tar.bz2"
+> +
+> +inherit autotools
+> +
+> +EXTRA_OECONF = "--disable-test --disable-doc"
+> +
+> +SRC_URI[md5sum] = "9aabdc3611546f553f4af372167de6d6"
+> +SRC_URI[sha256sum] = "ce7ccda4136974889231e8426a785e7578e66a6283009cfd13f1b24a5e657b23"
+> 
+
 
