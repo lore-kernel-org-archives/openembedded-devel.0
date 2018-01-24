@@ -1,46 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw0-f176.google.com (mail-yw0-f176.google.com
-	[209.85.161.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A0657803F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f180.google.com (mail-wr0-f180.google.com
+	[209.85.128.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A1A2786A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 15:27:08 +0000 (UTC)
-Received: by mail-yw0-f176.google.com with SMTP id b129so1613714ywa.8
+	Wed, 24 Jan 2018 15:39:24 +0000 (UTC)
+Received: by mail-wr0-f180.google.com with SMTP id t16so4463734wrc.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jan 2018 07:27:10 -0800 (PST)
+	Wed, 24 Jan 2018 07:39:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=7BL/6JAUFmpDQnjLGHVNMk8DPDp8m8keLYVdMeZOKDI=;
-	b=oaMRpY4fY60Yg+cI5ALZWE+kkp7/RC5vUe5dcqHPXHYii7mFJbHSO6tJEsjo+jIHaY
-	cFTEfZ859AKof922c2bVlnxbGK1atvReN4oz33chGHC/+Bxt3Cxr/Fj8D6C51JlxtbCN
-	EzcSF2KttUdalG4jozP2vL/Tle17MXA8ci55JMNqIj7sncAOPkUqltZZN9ckYaXB0LBu
-	M6IduL2MNK+pBK736p+G2PuH8YgGqvZyyxZbKb68CR+fKEHrcsIGXKaDTP4EOE3m8DhN
-	XWeyftnLVPMiZjnfcz3FKDDLej+UF1FXrH4gjHO1UDxJtOPgtl736Jk5Krx2yhtiqyuv
-	OSPA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=T9EkOqRMGpoCZoPXX+btHni+VfVTePVhWFDMftIGyqo=;
+	b=IRuswsWC37yZ5OYrvqfqrn0DxcOTITlmfb7KH2ShUmD8XR5TKNBbWhMj0/cDat8YUw
+	dwWph5uhCiRQC3e03pmSPIoO9Gb9/LJ4CvH/iFGBByZDubPe1ujkA4flt0ku0ABsxX+7
+	BeC8yGdyPG/GlcDtUhnT8/Q0p7XH9wqyImnmj2NN0QBgZrdvXXeUeMcDalPYYUTOTXi6
+	HeXYtPJHqAG8L8j2afmiguQJpAHZyKOifkAG845JFtsYO4agW97VUDTlP8xcbzfyfeIM
+	6XqdRyTm+9y7t09WzOuFLGXr7dDBrScHlzOlHTSTxbw8HTeutp76KKROLFSv/dMiy/y1
+	BR2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=7BL/6JAUFmpDQnjLGHVNMk8DPDp8m8keLYVdMeZOKDI=;
-	b=h6sE3FJMKg1uFSeojtFXhgVn99ovYbvCngMq2VQOJDYxRO1MO5d2ZyXqo8Gx0zO2iY
-	tl4rj7quRHPO+cGoPecbpjFQvwyJWy5n6g926LVka5JWKqVJegwBlKK/5ETK0uKOPg00
-	z7QDIrURCo6c5U3f9WyKkuMEJp00i2Yy87nXe4uhd7ypBR2I71GdCiDgtgxsziM6d3Dl
-	c6ray6332INEpA9GD3iEtx8RmtoeX+/2E4Y0E8IX173JprornBwvhYuPvjqz9WZF6Tg9
-	oNhRuKcNMQP2tsvhi1qwtMUnfhQ0cXUihtsHyiD5HqtApyqiAvyC73GYzjOOBp0OVfzT
-	XMlQ==
-X-Gm-Message-State: AKwxyted78qpcRYD2VXrhJbbN8/ghSYrSRRGjlDj0GZNG2SKVxer1TCa
-	qs8GuyN0fSHuMGXRnt5MaHdYITQn7Lt6QaiJt2A=
-X-Google-Smtp-Source: AH8x224t3/rVD2N8fFOMHWnSrt15mOLJnKeSdabIz9iggDLzaWsxUEk2MFSAxCooXo9LqJz3NbU/DfR1cUg1XxVBx0U=
-X-Received: by 10.129.222.12 with SMTP id k12mr5503180ywj.225.1516807630054;
-	Wed, 24 Jan 2018 07:27:10 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=T9EkOqRMGpoCZoPXX+btHni+VfVTePVhWFDMftIGyqo=;
+	b=O5/U75mtQfTcJ9I2FWqRDbBUfScK0OdN4Ep/z+pYIqVPHmscxQJwzE/60/GHMPuooU
+	xyaagHMg5Q8CmooY1nBaN4Vezkp6xZBBOnH742siZbE43RqOu82r3KhKCQXqva4W0Yr8
+	9hIAZmeQtzNmTt40iJ2PfckW3MHtrcSQ5iO3SUFN6K7JhFbUIe1+9XKKE8UKCtJ1GmQs
+	PSpqcmNrTwjuO/uQRy0c7kT8NvwOqRS/K6oYF764vSdbqy9oHAAAWxqVtARyDAtuPa37
+	aSF8cWTY1PxJoovCkaTmn5oi6i3mQ//VBq4lZQ8roXxSmU8CHkI0diQaoGqhzuj269op
+	MnHw==
+X-Gm-Message-State: AKwxyteaKsYZr+kAWB1YAgruV76PDLE98Qh9dkopqGX3Zqngs9vbcHt6
+	uiUIykA7VTrr1WwTLnwBcPaVVlITW7BKA+HMxao=
+X-Google-Smtp-Source: AH8x225lUehIxvrl4xSC7T9DzeFiY2wKzYs9FD9gfgFJGg9z5atEOgI4mTR69Pp1HjMd8EdkeWZo9qWSvnuWsTg1t68=
+X-Received: by 10.223.177.158 with SMTP id q30mr6120115wra.206.1516808364973; 
+	Wed, 24 Jan 2018 07:39:24 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.37.199.133 with HTTP; Wed, 24 Jan 2018 07:27:09 -0800 (PST)
-In-Reply-To: <20171130081026.25414-1-schnitzeltony@gmail.com>
+Received: by 10.28.74.211 with HTTP; Wed, 24 Jan 2018 07:39:24 -0800 (PST)
+In-Reply-To: <CALbNGRSuQkYnh22ChTz3g9HcZrjRbf0FzQJrUbZwES-Jm21Cog@mail.gmail.com>
 References: <20171130081026.25414-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 24 Jan 2018 16:27:09 +0100
-Message-ID: <CALbNGRSuQkYnh22ChTz3g9HcZrjRbf0FzQJrUbZwES-Jm21Cog@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CALbNGRSuQkYnh22ChTz3g9HcZrjRbf0FzQJrUbZwES-Jm21Cog@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 24 Jan 2018 16:39:24 +0100
+Message-ID: <CA+chaQfUH4js3Ed90Rz6FKbaZke-BZQakArASai9cWnjiqRvRA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5][PATCH] qwt-qt5: rewrite completely
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -54,23 +56,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jan 2018 15:27:09 -0000
+X-List-Received-Date: Wed, 24 Jan 2018 15:39:24 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 30, 2017 at 9:10 AM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+I don't have problem with that, but I don't use qwt-qt5 anywhere so I'll
+let other to test it in master for a bit later.
+
+Maybe send the patch for rocko, so that more people might notice that it
+will land there.
+
+Regards,
+
+On Wed, Jan 24, 2018 at 4:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
 om>
 wrote:
 
-> * install pkgconfig
-> * fix examples
-> * DESCRIPTION -> SUMMARY
-> * overall cleanup
+> On Thu, Nov 30, 2017 at 9:10 AM, Andreas M=C3=BCller <schnitzeltony@gmail=
+.com>
+> wrote:
 >
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > * install pkgconfig
+> > * fix examples
+> > * DESCRIPTION -> SUMMARY
+> > * overall cleanup
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> >
 >
-
-Is it possible to get this into rocko?
-
-Andreas
+> Is it possible to get this into rocko?
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
