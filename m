@@ -1,37 +1,39 @@
-Return-Path: <hainsvdbosch@ziggo.nl>
-Received: from smtpq3.tb.mail.iss.as9143.net (smtpq3.tb.mail.iss.as9143.net
-	[212.54.42.166])
-	by mail.openembedded.org (Postfix) with ESMTP id BC79F7806D
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id DDCD178787
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jan 2018 03:55:56 +0000 (UTC)
-Received: from [212.54.42.137] (helo=smtp6.tb.mail.iss.as9143.net)
-	by smtpq3.tb.mail.iss.as9143.net with esmtp (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>) id 1eeYdp-0002tf-7e
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Jan 2018 04:55:57 +0100
-Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
-	helo=localhost.localdomain)
-	by smtp6.tb.mail.iss.as9143.net with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>)
-	id 1eeYdp-000719-4K; Thu, 25 Jan 2018 04:55:57 +0100
-From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Jan 2018 04:55:24 +0100
-Message-Id: <20180125035524.4149-1-hainsvdbosch@ziggo.nl>
-X-Mailer: git-send-email 2.15.1
-X-SourceIP: 82.73.120.193
-X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
-X-Ziggo-spambar: /
-X-Ziggo-spamscore: 0.0
-X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=V/BTL9vi c=1 sm=1 tr=0
-	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
-	a=RgaUWeydRksA:10 a=FP58Ms26AAAA:8 a=owKgz8PGAg_C-DH5x5QA:9
-	none
-X-Ziggo-Spam-Status: No
+	Thu, 25 Jan 2018 05:10:36 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35896796"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Jan 2018 13:10:33 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id D4D27486A777;
+	Thu, 25 Jan 2018 13:10:30 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0361.001; Thu, 25 Jan 2018 13:10:30 +0800
+From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: akuster808 <akuster808@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2] xorgxrdp: new add
+Thread-Index: AQHTlGECfpCCowYESEy8vLiN3liMKaOEDMkQ
+Date: Thu, 25 Jan 2018 05:10:34 +0000
+Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF7363A9AD74@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1515141913-120084-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<33D4DBCAC5F2D74E96B07F6E7632BF7363A9A981@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<3a00bb76-d692-19bf-764a-a2508dd1de19@gmail.com>
+In-Reply-To: <3a00bb76-d692-19bf-764a-a2508dd1de19@gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.225.156]
+MIME-Version: 1.0
+X-yoursite-MailScanner-ID: D4D27486A777.A8891
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-X-Spam-Flag: No
-Subject: [meta-oe][PATCH] smbnetfs: update to version 0.6.1
+Subject: Re: [meta-oe][PATCH v2] xorgxrdp: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,49 +46,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jan 2018 03:55:57 -0000
+X-List-Received-Date: Thu, 25 Jan 2018 05:10:38 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-gnome-keyring is deprecated and replaced with libsecret.
----
- .../recipes-filesystems/smbnetfs/smbnetfs/configure.patch             | 2 +-
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb         | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-index 152507cf3..55275669b 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-@@ -3,7 +3,7 @@ Index: git/configure.in
- --- git.orig/configure.ac	2014-06-18 16:06:16.040721349 +0000
- +++ git/configure.ac	2014-07-18 07:49:17.085552256 +0000
- @@ -1,5 +1,5 @@
-- AC_INIT([SMBNetFS],[0.6.0])
-+ AC_INIT([SMBNetFS],[0.6.1])
- -AM_INIT_AUTOMAKE
- +AM_INIT_AUTOMAKE([foreign])
-  AC_CONFIG_HEADERS([src/config.h])
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index 0fcfd6ae7..fefc04538 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -15,14 +15,14 @@ inherit autotools gitpkgv pkgconfig
- 
- PKGV = "${GITPKGVTAG}"
- 
--SRCREV = "21c63ed60202e5540613d4c822a57a0b81764499"
-+SRCREV = "bc6b94b015fdaf7c4dab56ccb996eecea8bc4373"
- 
- SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
-            file://configure.patch \
-            file://Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch"
- 
- PACKAGECONFIG ??= ""
--PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
-+PACKAGECONFIG[libsecret] = "--with-libsecret=yes,--with-libsecret=no,libsecret"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.15.1
-
+WWVzLCB0aGFuayB5b3UuDQoNCi0tDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVvcWluDQpO
+YW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQu
+KEZOU1QpDQpBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdhcmUgQXZl
+bnVlLA0KICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1BSUwgOiB6
+aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20NCg0KDQotLS0tLU9yaWdpbmFs
+IE1lc3NhZ2UtLS0tLQ0KRnJvbTogYWt1c3RlcjgwOCBbbWFpbHRvOmFrdXN0
+ZXI4MDhAZ21haWwuY29tXSANClNlbnQ6IFR1ZXNkYXksIEphbnVhcnkgMjMs
+IDIwMTggMTE6NDQgUE0NClRvOiBaaGVuZywgUnVvcWluL9ajIMj0x9UgPHpo
+ZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT47IG9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBb
+bWV0YS1vZV1bUEFUQ0ggdjJdIHhvcmd4cmRwOiBuZXcgYWRkDQoNCg0KDQpP
+biAwMS8yMi8yMDE4IDExOjM4IFBNLCBaaGVuZywgUnVvcWluIHdyb3RlOg0K
+PiBwaW5nDQoNCml0cyBpbiBtYXN0ZXINCmh0dHA6Ly9jZ2l0Lm9wZW5lbWJl
+ZGRlZC5vcmcvbWV0YS1vcGVuZW1iZWRkZWQvY29tbWl0Lz9pZD01ZTRkZmI3
+ZWU2M2NkYWEyZGU0NDdlMjRlOTE2NDc0ZmMxOWY5NTYwDQoNCj4NCj4gLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0NCj4gWmhlbmcgUnVvcWluDQo+IE5hbmppbmcgRnVqaXRzdSBOYW5kYSBT
+b2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkNCj4gQUREUi46IE5vLjYg
+V2Vuemh1IFJvYWQsIFNvZnR3YXJlIEF2ZW51ZSwNCj4gICAgICAgIE5hbmpp
+bmcsIDIxMDAxMiwgQ2hpbmENCj4gTUFJTCA6IHpoZW5ncnEuZm5zdEBjbi5m
+dWppc3R1LmNvbQ0KPg0KPg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0t
+LQ0KPiBGcm9tOiBaaGVuZywgUnVvcWluL9ajIMj0x9UgDQo+IFNlbnQ6IEZy
+aWRheSwgSmFudWFyeSAwNSwgMjAxOCA0OjQ1IFBNDQo+IFRvOiBvcGVuZW1i
+ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBDYzogWmhl
+bmcsIFJ1b3Fpbi/WoyDI9MfVIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5j
+b20+DQo+IFN1YmplY3Q6IFtvZV1bbWV0YS1vZV1bUEFUQ0ggdjJdIHhvcmd4
+cmRwOiBuZXcgYWRkDQo+DQo+IEFkZCBhIG5ldyByZWNpcGUgeG9yZ3hyZHBf
+MC4yLjUuYmIuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IFpoZW5nIFJ1b3FpbiA8
+emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPiAtLS0NCj4gIC4uLi9y
+ZWNpcGVzLXN1cHBvcnQveG9yZy14cmRwL3hvcmd4cmRwXzAuMi41LmJiICAg
+IHwgMjIgKysrKysrKysrKysrKysrKysrKysrKw0KPiAgMSBmaWxlIGNoYW5n
+ZWQsIDIyIGluc2VydGlvbnMoKykNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBt
+ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC94b3JnLXhyZHAveG9yZ3hyZHBfMC4y
+LjUuYmINCj4NCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBw
+b3J0L3hvcmcteHJkcC94b3JneHJkcF8wLjIuNS5iYiBiL21ldGEtb2UvcmVj
+aXBlcy1zdXBwb3J0L3hvcmcteHJkcC94b3JneHJkcF8wLjIuNS5iYg0KPiBu
+ZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwLi4yMGNmNDVm
+DQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1
+cHBvcnQveG9yZy14cmRwL3hvcmd4cmRwXzAuMi41LmJiDQo+IEBAIC0wLDAg
+KzEsMjIgQEANCj4gK1NVTU1BUlkgPSAiWG9yZyBkcml2ZXJzIGZvciB4cmRw
+LiINCj4gKw0KPiArTElDRU5TRSA9ICJYMTEiDQo+ICtMSUNfRklMRVNfQ0hL
+U1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT1hMjUyMzY2MDMyOWZkY2EzZDk1
+NGMwYTg3MzkwZTAwNyANCj4gK1wgIg0KPiArDQo+ICtpbmhlcml0IGF1dG90
+b29scyBwa2djb25maWcNCj4gKw0KPiArREVQRU5EUyA9ICJ2aXJ0dWFsL2xp
+YngxMSB4c2VydmVyLXhvcmcgeHJkcCBuYXNtLW5hdGl2ZSINCj4gKw0KPiAr
+U1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL25ldXRyaW5vbGFicy94b3Jn
+eHJkcC5naXQgXA0KPiArICAgICAgICAgICAiDQo+ICsNCj4gK1NSQ1JFViA9
+ICJjMTIyNTQ0ZjE4NGQ0MDMxYmJhZTFhZDgwZmJhYjU1NGMzNGE5NDI3Ig0K
+PiArDQo+ICtQViA9ICIwLjIuNStnaXQke1NSQ1BWfSINCj4gKw0KPiArUyA9
+ICIke1dPUktESVJ9L2dpdCINCj4gKw0KPiArRklMRVNfJHtQTn0gKz0gIiR7
+bGliZGlyfS94b3JnL21vZHVsZXMvKiINCj4gKw0KPiArSU5TQU5FX1NLSVBf
+JHtQTn0gKz0gInhvcmctZHJpdmVyLWFiaSINCj4gLS0NCj4gMi43LjQNCj4N
+Cj4NCj4NCg0KDQoNCgoK
 
