@@ -1,39 +1,52 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 370EE771F5
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id AE18278447
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jan 2018 05:48:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35900087"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Jan 2018 13:48:33 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 14F4E49F19A2;
-	Thu, 25 Jan 2018 13:48:35 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0361.001; Thu, 25 Jan 2018 13:48:39 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: Andreas Oberritter <obi@opendreambox.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCHv2] samba: Add packagegroup
-Thread-Index: AQHTlKcuOL0MjvyQfEegaXc5wxoOWqOEDwKw
-Date: Thu, 25 Jan 2018 05:48:38 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF7363A9AD94@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1513002095-5152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<33D4DBCAC5F2D74E96B07F6E7632BF7363A9A988@G08CNEXMBPEKD01.g08.fujitsu.local>
-	<20180124010556.367817ec@t460p>
-In-Reply-To: <20180124010556.367817ec@t460p>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.156]
+	Thu, 25 Jan 2018 07:27:15 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id e41so6533932wre.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Jan 2018 23:27:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=30LSlwTKxBd9dl4iDglZB96K9bEYk7WxsK1HVzz3N5I=;
+	b=WeFdrVNVmaU9cGCcMbzhyx+IpwCndh34HtL5w4EPFfSxFIjmVWOT5W4U3+vfTpRFNn
+	MSON0DSYLrQvjhnICwPgmOf/4BhEafLs1uCcWzQsnjLgqNwSJSlW8cdjyPIxmVBw0F6Q
+	GclPMR30VJcOUU5SaebuBfFFXvRIOqD7R8Quo4i5NCTiLqbI3yEWFeRIv8HkGQ8paS5/
+	KfqAnN6OLYUKwrz1KHuxR+2dYPFiwq+Lc4qnbCIX3khluhjyh87Q2/e3JRSfRDa3Caq1
+	LGFpoJhAn+SQ3lDc1QAex0t0oq61QCjkIR/J2K8LIq+xWQyU8olBVr9P7Xh7KTiSeGUh
+	ml9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=30LSlwTKxBd9dl4iDglZB96K9bEYk7WxsK1HVzz3N5I=;
+	b=RzZ9WQEU4YT00NAknWDOggvskjJbvUHf4d9eQBdtHlEO3vRjlk8C9D5Q9wXMc9UpUs
+	Muk0vl5bmLkBOmcLuRs+0xQAaXTCcqLUWqmcA+yjXMGmh3yU7HSSOUZNNigjTVHXGWLX
+	JYy2q/F0V30UkgM3E+IJbtvBI1kRbJm4Wa4vnDR1j1fGSCk1JE9oxDInN/UbvCl3aezT
+	8ZBS4l+MSiN76pDJZRq0c46exzNC2CHvE8Sck/c1GnGgsvHFkoCNZqoEaw72G749lPX+
+	bs4BXdweX+UKM0pgVsbFylfaAbU04JWQme2Eyb10k7uAehAJ2FR/Dd+YIGpWYJiC3U+n
+	VGYA==
+X-Gm-Message-State: AKwxyte4iRZghWG6RhqYmjeazBEVZfqbGS5TVq44LfpNbntOX8yCa4lY
+	uTx1kuvF6s6P4UfUVTxfUC2ZQg==
+X-Google-Smtp-Source: AH8x224hYZioHatq9+T2ai1sNObBOPPLJSvjfyU5NIMowrd/SRaZeGa8S8XwvsIkycsCXbkWufX28g==
+X-Received: by 10.223.201.2 with SMTP id m2mr7240562wrh.264.1516865235986;
+	Wed, 24 Jan 2018 23:27:15 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p200300F07BC194041E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bc1:9404:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id w83sm559369wma.47.2018.01.24.23.27.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 24 Jan 2018 23:27:15 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 25 Jan 2018 08:27:07 +0100
+Message-Id: <20180125072707.3349-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 14F4E49F19A2.AD03D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-networking][PATCHv2] samba: Add packagegroup
+Subject: [PATCH][rocko][meta-qt5 V2] qwt-qt5: rewrite completely
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,95 +59,240 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jan 2018 05:48:36 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 25 Jan 2018 07:27:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-SGkgQW5kcmVhczoNCiAgICAgSSdtIHNvcnJ5IEkgZGlkbid0IGV4cGxhaW4g
-aXQuIA0KPiBZb3UgZGlkbid0IGFuc3dlciBteSBxdWVzdGlvbiBhYm91dCB0
-aGUgZGVwZW5kZW5jeSBvbiBwZXJsOg0KDQogICBXZWxsLCB0aGUgc2FtYmEt
-cGlkbCBpcyBub3QgcmVxdWlyZWQgdG8gcnVuIHRoZSBTYW1iYSBzZXJ2ZXIu
-DQoNCj4gSW5zdGVhZCB5b3UgcmVtb3ZlZCB0aGUgc2VydmVyIG1ldGEgcGFj
-a2FnZSB3aXRob3V0IGV4cGxhbmF0aW9uLiBJdCdzIGhhcmQgdG8gZm9sbG93
-IHRoZSByZWFzb25pbmcgYmVoaW5kIHlvdXIgcGF0Y2ggaXRlcmF0aW9ucyB0
-aGlzIHdheS4NCg0KICAgSSdtIHNvcnJ5IEkgbWlzcyBpdCwgaW4gbXkgdjMg
-cGF0Y2gsIEkgd2lsbCBpbmNsdWRlIGl0IGxpa2UgdGhpczoNCitSREVQRU5E
-U18ke1BOfS1zZXJ2ZXIgPSAiXA0KKyAgICAke1BOfSBcDQorICAgIHdpbmJp
-bmQgXA0KKyAgICByZWdpc3RyeS10b29scyBcDQorICAgICINCg0KLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQ0KWmhlbmcgUnVvcWluDQpOYW5qaW5nIEZ1aml0c3UgTmFuZGEgU29mdHdh
-cmUgVGVjaC4gQ28uLCBMdGQuKEZOU1QpDQpBRERSLjogTm8uNiBXZW56aHUg
-Um9hZCwgU29mdHdhcmUgQXZlbnVlLA0KICAgICAgIE5hbmppbmcsIDIxMDAx
-MiwgQ2hpbmENCk1BSUwgOiB6aGVuZ3JxLmZuc3RAY24uZnVqaXN0dS5jb20N
-Cg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3BlbmVt
-YmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBb
-bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBBbmRyZWFzIE9iZXJyaXR0ZXIN
-ClNlbnQ6IFdlZG5lc2RheSwgSmFudWFyeSAyNCwgMjAxOCA4OjA2IEFNDQpU
-bzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
-ClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW5ldHdvcmtpbmddW1BBVENIdjJd
-IHNhbWJhOiBBZGQgcGFja2FnZWdyb3VwDQoNCk9uIFR1ZSwgMjMgSmFuIDIw
-MTggMDc6Mzg6MzMgKzAwMDANCiJaaGVuZywgUnVvcWluIiA8emhlbmdycS5m
-bnN0QGNuLmZ1aml0c3UuY29tPiB3cm90ZToNCg0KPiBwaW5nDQoNCllvdSBk
-aWRuJ3QgYW5zd2VyIG15IHF1ZXN0aW9uIGFib3V0IHRoZSBkZXBlbmRlbmN5
-IG9uIHBlcmw6DQoNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL3Bp
-cGVybWFpbC9vcGVuZW1iZWRkZWQtZGV2ZWwvMjAxNy1EZWNlbWJlci8xMTU5
-MzguaHRtbA0KDQpJbnN0ZWFkIHlvdSByZW1vdmVkIHRoZSBzZXJ2ZXIgbWV0
-YSBwYWNrYWdlIHdpdGhvdXQgZXhwbGFuYXRpb24uIEl0J3MgaGFyZCB0byBm
-b2xsb3cgdGhlIHJlYXNvbmluZyBiZWhpbmQgeW91ciBwYXRjaCBpdGVyYXRp
-b25zIHRoaXMgd2F5Lg0KDQpCdHcsIHlvdSBrZXB0IG9uZSBvZiB0aGUgU1VN
-TUFSWSBsaW5lcywgd2hpY2ggZG9lc24ndCBjb250YWluIGFueXRoaW5nIGJ1
-dCB0aGUgcGFja2FnZSBuYW1lLg0KDQpSZWdhcmRzLA0KQW5kcmVhcw0KDQoN
-Cg0KPiANCj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0NCj4gWmhlbmcgUnVvcWluDQo+IE5hbmppbmcgRnVq
-aXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkNCj4g
-QUREUi46IE5vLjYgV2Vuemh1IFJvYWQsIFNvZnR3YXJlIEF2ZW51ZSwNCj4g
-ICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCj4gTUFJTCA6IHpoZW5n
-cnEuZm5zdEBjbi5mdWppc3R1LmNvbQ0KPiANCj4gDQo+IC0tLS0tT3JpZ2lu
-YWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFpoZW5nLCBSdW9xaW4v6YORIOiL
-pemSpg0KPiBTZW50OiBNb25kYXksIERlY2VtYmVyIDExLCAyMDE3IDEwOjIy
-IFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZw0KPiBDYzogWmhlbmcsIFJ1b3Fpbi/pg5Eg6Iul6ZKmIDx6aGVu
-Z3JxLmZuc3RAY24uZnVqaXRzdS5jb20+DQo+IFN1YmplY3Q6IFtvZV1bbWV0
-YS1uZXR3b3JraW5nXVtQQVRDSHYyXSBzYW1iYTogQWRkIHBhY2thZ2Vncm91
-cA0KPiANCj4gQWRkIHBhY2thZ2Vncm91cCBmb3Igc2FtYmEsIGZvciB0aGVy
-ZSBhcmUgdG9vIG1hbnkgcnBtcyBpbiBzYW1iYSBhbmQgaXQncyBoYXJkIHRv
-IG1hbmFnZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFpoZW5nIFJ1b3FpbiA8
-emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPiAtLS0NCj4gIC4uLi9y
-ZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9zYW1iYV80LjYuNy5iYiAgICAg
-ICAgIHwgMTkgKysrKysrKysrKysrKysrKysrLQ0KPiAgMSBmaWxlIGNoYW5n
-ZWQsIDE4IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4gDQo+IGRp
-ZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZp
-dHkvc2FtYmEvc2FtYmFfNC42LjcuYmIgDQo+IGIvbWV0YS1uZXR3b3JraW5n
-L3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuNi43LmJiDQo+
-IGluZGV4IDJiMjI3YzkuLjBiYWNiMDIgMTAwNjQ0DQo+IC0tLSBhL21ldGEt
-bmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9zYW1iYV80
-LjYuNy5iYg0KPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25u
-ZWN0aXZpdHkvc2FtYmEvc2FtYmFfNC42LjcuYmINCj4gQEAgLTE2Miw3ICsx
-NjIsNyBAQCBQQUNLQUdFUyA9KyAiJHtQTn0tcHl0aG9uICR7UE59LXBpZGwg
-XA0KPiAgICAgICAgICAgICAgICR7UE59LWRzZGItbW9kdWxlcyAke1BOfS10
-ZXN0c3VpdGUgcmVnaXN0cnktdG9vbHMgXA0KPiAgICAgICAgICAgICAgIHdp
-bmJpbmQgXA0KPiAgICAgICAgICAgICAgICR7UE59LWNvbW1vbiAke1BOfS1i
-YXNlICR7UE59LWN0ZGItdGVzdHMgXA0KPiAtICAgICAgICAgICAgIHNtYmNs
-aWVudCINCj4gKyAgICAgICAgICAgICBzbWJjbGllbnQgJHtQTn0tY2xpZW50
-ICR7UE59LXRlc3QiDQo+ICANCj4gIHB5dGhvbiBzYW1iYV9wb3B1bGF0ZV9w
-YWNrYWdlcygpIHsNCj4gICAgICBkZWYgbW9kdWxlX2hvb2soZmlsZSwgcGtn
-LCBwYXR0ZXJuLCBmb3JtYXQsIGJhc2VuYW1lKToNCj4gQEAgLTI1NCwzICsy
-NTQsMjAgQEAgRklMRVNfc21iY2xpZW50ID0gIiR7YmluZGlyfS9jaWZzZGQg
-XA0KPiAgDQo+ICBSREVQRU5EU18ke1BOfS1waWRsX2FwcGVuZCA9ICIgcGVy
-bCINCj4gIEZJTEVTXyR7UE59LXBpZGwgPSAiJHtiaW5kaXJ9L3BpZGwgJHtk
-YXRhZGlyfS9wZXJsNS9QYXJzZSINCj4gKw0KPiArU1VNTUFSWV8ke1BOfS1j
-bGllbnQgPSAic2FtYmEgY2xpZW50Ig0KPiArUkRFUEVORFNfJHtQTn0tY2xp
-ZW50ID0gIlwNCj4gKyAgICBzbWJjbGllbnQgXA0KPiArICAgIHdpbmJpbmQg
-XA0KPiArICAgIHJlZ2lzdHJ5LXRvb2xzIFwNCj4gKyAgICAke1BOfS1waWRs
-IFwNCj4gKyAgICAiIA0KPiArDQo+ICtBTExPV19FTVBUWV8ke1BOfS1jbGll
-bnQgPSAiMSINCj4gKw0KPiArUkRFUEVORFNfJHtQTn0tdGVzdCA9ICJcDQo+
-ICsgICAgJHtQTn0tY3RkYi10ZXN0cyBcDQo+ICsgICAgJHtQTn0tdGVzdHN1
-aXRlIFwNCj4gKyAgICAiDQo+ICsNCj4gK0FMTE9XX0VNUFRZXyR7UE59LXRl
-c3QgPSAiMSINCg0KLS0NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fDQpPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGlu
-ZyBsaXN0DQpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZw0KaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg0KDQoKCg==
+commit 1be652e5075bf3c65b521093556e9611c4a57541 master.
+
+* install pkgconfig
+* fix examples
+* DESCRIPTION -> SUMMARY
+* overall cleanup
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+
+V1 -> V2: Commit ID was incorrect (from my private work-branch)
+
+ recipes-qt/qwt/qwt-qt5.inc                         | 48 ---------------
+ ...h-from-binaries-they-point-to-buuild-area.patch | 69 ++++++++++++++++++++++
+ recipes-qt/qwt/qwt-qt5/remove_rpath.patch          | 17 ------
+ recipes-qt/qwt/qwt-qt5_6.1.3.bb                    | 45 +++++++++++++-
+ 4 files changed, 112 insertions(+), 67 deletions(-)
+ delete mode 100644 recipes-qt/qwt/qwt-qt5.inc
+ create mode 100644 recipes-qt/qwt/qwt-qt5/0001-Remove-rpath-from-binaries-they-point-to-buuild-area.patch
+ delete mode 100644 recipes-qt/qwt/qwt-qt5/remove_rpath.patch
+
+diff --git a/recipes-qt/qwt/qwt-qt5.inc b/recipes-qt/qwt/qwt-qt5.inc
+deleted file mode 100644
+index f3ece39..0000000
+--- a/recipes-qt/qwt/qwt-qt5.inc
++++ /dev/null
+@@ -1,48 +0,0 @@
+-DESCRIPTION = "Qt Widget Extension for Technical Applications"
+-SECTION = "libs"
+-
+-# LGPLv2.1 + some exceptions
+-LICENSE = "QWTv1.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=dac2743472b0462ff3cfb4af42051c88"
+-
+-DEPENDS = "qtbase qtsvg qttools"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt \
+-           file://remove_rpath.patch \
+-          "
+-
+-S = "${WORKDIR}/qwt-${PV}"
+-
+-do_configure_prepend() {
+-    cd ${S}
+-    sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = ${QT_LIBINFIX}:' *.pri
+-    sed -i -e 's:qtAddLibrary(qwt:qtAddLibrary(qwt)${QT_LIBINFIX}:g' *.prf
+-    sed -e 's/# QWT_CONFIG     += QwtExamples/QWT_CONFIG     += QwtExamples/g' -i qwtconfig.pri
+-    sed -i -e 's:/usr/local/qwt-$$QWT_VERSION:${D}${prefix}:g' ${S}/*.pri
+-}
+-
+-do_install() {
+-    cd ${S}
+-    oe_runmake -e install
+-#    install -d ${D}${datadir}/doc/${PN}
+-#    mv ${D}${prefix}/doc/* ${D}${datadir}/doc/${PN}/
+-#    rmdir ${D}${prefix}/doc
+-#    cd ${S}/examples
+-#    install -d ${D}/${bindir}
+-#    cd bin${QT_LIBINFIX}/
+-#    for i in * ; do
+-#        cp -pPR ${i} ${D}/${bindir}/${i}${QT_LIBINFIX}
+-#    done
+-#    install -d ${D}${libdir}/${QT_DIR_NAME}
+-#    mv ${D}${prefix}/plugins ${D}${libdir}/${QT_DIR_NAME}
+-}
+-
+-PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
+-FILES_${PN}-examples = "${bindir}/*"
+-FILES_${PN}-features = "${prefix}/features"
+-FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
+-FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
+-FILES_${PN}-doc += "${prefix}/doc"
+-
+-INSANE_SKIP_${PN}-plugins += "libdir"
+-INSANE_SKIP_${PN}-dbg += "libdir"
+diff --git a/recipes-qt/qwt/qwt-qt5/0001-Remove-rpath-from-binaries-they-point-to-buuild-area.patch b/recipes-qt/qwt/qwt-qt5/0001-Remove-rpath-from-binaries-they-point-to-buuild-area.patch
+new file mode 100644
+index 0000000..fa63c34
+--- /dev/null
++++ b/recipes-qt/qwt/qwt-qt5/0001-Remove-rpath-from-binaries-they-point-to-buuild-area.patch
+@@ -0,0 +1,69 @@
++From ff950c71bf841a4d62952aac72f3c5a830cf9cff Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Wed, 29 Nov 2017 22:31:07 +0100
++Subject: [PATCH] Remove rpath from binaries - they point to buuild area
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++This is a rework of the patch submitted by Khem Raj.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ designer/designer.pro     | 1 -
++ examples/examples.pri     | 1 -
++ playground/playground.pri | 1 -
++ qwt.prf                   | 1 -
++ 4 files changed, 4 deletions(-)
++
++diff --git a/designer/designer.pro b/designer/designer.pro
++index 7d44a44..a11847d 100644
++--- a/designer/designer.pro
+++++ b/designer/designer.pro
++@@ -83,7 +83,6 @@ contains(QWT_CONFIG, QwtDesigner) {
++         # compile the path for finding the Qwt library
++         # into the plugin. Not supported on Windows !
++ 
++-        QMAKE_RPATHDIR *= $${QWT_INSTALL_LIBS}
++         qwtAddLibrary($${QWT_OUT_ROOT}/lib, qwt)
++ 
++         contains(QWT_CONFIG, QwtDll) {
++diff --git a/examples/examples.pri b/examples/examples.pri
++index 200b188..b7776a8 100644
++--- a/examples/examples.pri
+++++ b/examples/examples.pri
++@@ -34,7 +34,6 @@ else {
++     }
++ }
++ 
++-QMAKE_RPATHDIR *= $${QWT_OUT_ROOT}/lib
++ qwtAddLibrary($${QWT_OUT_ROOT}/lib, qwt)
++ 
++ greaterThan(QT_MAJOR_VERSION, 4) {
++diff --git a/playground/playground.pri b/playground/playground.pri
++index c544360..fd0275f 100644
++--- a/playground/playground.pri
+++++ b/playground/playground.pri
++@@ -35,7 +35,6 @@ else {
++ }
++ 
++ 
++-QMAKE_RPATHDIR *= $${QWT_ROOT}/lib
++ qwtAddLibrary($${QWT_OUT_ROOT}/lib, qwt)
++ 
++ greaterThan(QT_MAJOR_VERSION, 4) {
++diff --git a/qwt.prf b/qwt.prf
++index 2625b31..7860153 100644
++--- a/qwt.prf
+++++ b/qwt.prf
++@@ -33,5 +33,4 @@ else {
++     INCLUDEPATH *= $${QWT_INSTALL_HEADERS}
++ }   
++ 
++-# QMAKE_RPATHDIR *= $${QWT_INSTALL_LIBS}
++ qwtAddLibrary($${QWT_INSTALL_LIBS}, qwt)
++-- 
++2.9.5
++
+diff --git a/recipes-qt/qwt/qwt-qt5/remove_rpath.patch b/recipes-qt/qwt/qwt-qt5/remove_rpath.patch
+deleted file mode 100644
+index 14b65d6..0000000
+--- a/recipes-qt/qwt/qwt-qt5/remove_rpath.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+-Remove rpath from library, it points to build area which is not
+-ok
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+-Index: qwt-6.1.3/designer/designer.pro
+-===================================================================
+---- qwt-6.1.3.orig/designer/designer.pro
+-+++ qwt-6.1.3/designer/designer.pro
+-@@ -83,7 +83,6 @@ contains(QWT_CONFIG, QwtDesigner) {
+-         # compile the path for finding the Qwt library
+-         # into the plugin. Not supported on Windows !
+- 
+--        QMAKE_RPATHDIR *= $${QWT_INSTALL_LIBS}
+-         qwtAddLibrary($${QWT_OUT_ROOT}/lib, qwt)
+- 
+-         contains(QWT_CONFIG, QwtDll) {
+diff --git a/recipes-qt/qwt/qwt-qt5_6.1.3.bb b/recipes-qt/qwt/qwt-qt5_6.1.3.bb
+index 626bd0a..1c6e10b 100644
+--- a/recipes-qt/qwt/qwt-qt5_6.1.3.bb
++++ b/recipes-qt/qwt/qwt-qt5_6.1.3.bb
+@@ -1,8 +1,49 @@
+-inherit qmake5
++SUMMARY = "Qt Widget Extension for Technical Applications"
++SECTION = "libs"
++HOMEPAGE = "http://qwt.sourceforge.net/index.html"
++
++# LGPLv2.1 + some exceptions
++LICENSE = "QWTv1.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=dac2743472b0462ff3cfb4af42051c88"
++
++DEPENDS = "qtbase qtsvg qttools"
+ 
+-require qwt-qt5.inc
++inherit qmake5
+ 
++SRC_URI = " \
++    ${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt \
++    file://0001-Remove-rpath-from-binaries-they-point-to-buuild-area.patch \
++"
+ SRC_URI[qwt.md5sum] = "19d1f5fa5e22054d22ee3accc37c54ba"
+ SRC_URI[qwt.sha256sum] = "f3ecd34e72a9a2b08422fb6c8e909ca76f4ce5fa77acad7a2883b701f4309733"
+ 
++S = "${WORKDIR}/qwt-${PV}"
++
++EXTRA_QMAKEVARS_PRE += " \
++    QWT_CONFIG+=QwtPkgConfig \
++    QWT_CONFIG+=QwtExamples \
++"
++
++do_configure_prepend() {
++    sed -i 's:/usr/local/qwt-$$QWT_VERSION:${prefix}:' ${S}/*.pri
++}
++
++do_install_append() {
++    # seems out of tree build confuses installation of examples
++    # so install them manually
++    install -d ${D}${bindir}/
++    cp ${B}/examples/bin/* ${D}${bindir}/
++}
++
++
++PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
++FILES_${PN}-examples = "${bindir}/*"
++FILES_${PN}-features = "${prefix}/features"
++FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
++FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
++FILES_${PN}-doc += "${prefix}/doc"
++
++INSANE_SKIP_${PN}-plugins += "libdir"
++INSANE_SKIP_${PN}-dbg += "libdir"
++
+ RPROVIDES_${PN}-dev = "libqwt-qt5-dev"
+-- 
+2.14.3
+
 
