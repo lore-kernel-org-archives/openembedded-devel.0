@@ -1,30 +1,30 @@
 Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 632BC7871D
+	by mail.openembedded.org (Postfix) with ESMTP id 0C43F78520
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 05:05:47 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35997652"
+	Fri, 26 Jan 2018 05:23:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35998928"
 Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Jan 2018 13:05:46 +0800
+	by heian.cn.fujitsu.com with ESMTP; 26 Jan 2018 13:23:30 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 366EB49F19B0
+	by cn.fujitsu.com (Postfix) with ESMTP id 523C049F19B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 13:05:43 +0800 (CST)
+	Fri, 26 Jan 2018 13:23:27 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.156) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Fri, 26 Jan 2018 13:05:42 +0800
+	Server (TLS) id 14.3.361.1; Fri, 26 Jan 2018 13:23:26 +0800
 From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Jan 2018 22:05:38 +0800
-Message-ID: <1516975538-2585-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Date: Fri, 26 Jan 2018 22:23:11 +0800
+Message-ID: <1516976591-2793-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 366EB49F19B0.A6821
+X-yoursite-MailScanner-ID: 523C049F19B1.A4E91
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-networking][PATCH v3] samba: Add packagegroup
+Subject: [meta-oe][PATCH] dnfdragora: fix PV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,57 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jan 2018 05:05:49 -0000
+X-List-Received-Date: Fri, 26 Jan 2018 05:23:32 -0000
 Content-Type: text/plain
 
-Add packagegroup for samba, for there are too many rpms in samba and it's hard to manage.
+Include SRCPV in PV.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../recipes-connectivity/samba/samba_4.7.0.bb      | 26 +++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+ meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb b/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-index f33c138..dd55363 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-@@ -197,7 +197,7 @@ PACKAGES =+ "${PN}-python ${PN}-pidl \
-              ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
-              winbind \
-              ${PN}-common ${PN}-base ${PN}-ad-dc ${PN}-ctdb-tests \
--             smbclient"
-+             smbclient ${PN}-client ${PN}-server ${PN}-test"
+diff --git a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb
+index 5678f73..9cd1efb 100644
+--- a/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb
++++ b/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/manatools/dnfdragora.git \
+            file://0001-Run-python-scripts-using-env.patch \
+            "
  
- python samba_populate_packages() {
-     def module_hook(file, pkg, pattern, format, basename):
-@@ -294,3 +294,27 @@ FILES_smbclient = "${bindir}/cifsdd \
+-PV = "1.0.1+git"
++PV = "1.0.1+git${SRCPV}"
+ SRCREV = "4fef4ce889b8e4fa03191d414f63bfd50796152a"
  
- RDEPENDS_${PN}-pidl_append = " perl"
- FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
-+
-+RDEPENDS_${PN}-client = "\
-+    smbclient \
-+    winbind \
-+    registry-tools \
-+    ${PN}-pidl \
-+    " 
-+
-+ALLOW_EMPTY_${PN}-client = "1"
-+
-+RDEPENDS_${PN}-server = "\
-+    ${PN} \
-+    winbind \
-+    registry-tools \
-+    " 
-+
-+ALLOW_EMPTY_${PN}-server = "1"
-+
-+RDEPENDS_${PN}-test = "\
-+    ${PN}-ctdb-tests \
-+    ${PN}-testsuite \
-+    "
-+
-+ALLOW_EMPTY_${PN}-test = "1"
+ S = "${WORKDIR}/git"
 -- 
 2.7.4
 
