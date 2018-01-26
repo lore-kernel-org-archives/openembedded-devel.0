@@ -1,36 +1,38 @@
-Return-Path: <prvs=5572ecbe2=Martin.Hundeboll@prevas.dk>
-X-Greylist: delayed 599 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 26 Jan 2018 12:46:06 UTC
-Received: from mail02.prevas.se (mail02.prevas.se [62.95.78.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FED87871B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 13B276067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 12:46:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=prevas.dk; i=@prevas.dk; l=1389; q=dns/txt;
-	s=ironport2; t=1516970770; x=1548506770;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=kXjgsQLPjbj/q3koEHoT+jwi8Lk4opZ+P7r7JnVgdIY=;
-	b=NizYVpq+iD9BBMaMnOGj0kSGfL54fnMy0O3C914fjlN41ePPe9UwN/e9
-	tCA0yRfdaQD708tm+3bvcOAfDrFU5gmLnfuR8+W38oZKdAllXynRrUHoN
-	H4h3EVUxFrglm6QJqDq+tK/o3TvQAsPt0IFykhz09V41AfoG34hijezL6 I=;
-X-IronPort-AV: E=Sophos;i="5.46,416,1511823600"; 
-   d="scan'208";a="2968699"
-Received: from vmprevas4.prevas.se (HELO smtp.prevas.se) ([172.16.8.104])
-	by ironport2.prevas.se with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	26 Jan 2018 13:36:07 +0100
-Received: from mnhu.prevas.se (172.16.8.31) by smtp.prevas.se (172.16.8.104)
-	with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Fri, 26 Jan 2018 13:36:06 +0100
-From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <mnhu@prevas.dk>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Jan 2018 13:35:58 +0100
-Message-ID: <20180126123558.12940-1-mnhu@prevas.dk>
-X-Mailer: git-send-email 2.16.1
-MIME-Version: 1.0
-X-Originating-IP: [172.16.8.31]
-Cc: skny@prevas.dk
-Subject: [PATCH] libgpiod: fix packaging of tools
+	Fri, 26 Jan 2018 13:10:32 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id z10so1077220qti.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Jan 2018 05:10:34 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=XZ9K1H1G8r2lSjHLo6ywcdLSyHyqoLeQ/n2+sla9x+M=;
+	b=Py2P3WMR8GHFCOxF+dEwJ+QRvsOViLa0zVlus8phXHfTxO+Si8hXcnvIYgjGAriaUF
+	fXQFMo4oPnPD9wufGtq4C6/rwnly9TbfFtWHwLpTko40YZAzZThreus6XJptVMFTZ7Ru
+	pZd66rrk3TF/rW3MzDSL3GuecpJgL7CkbEdWjSyG81Dh3c9Ufo6RovlOlybZDmMmKNxv
+	7Atcc6SSUFNGf+okjfML5gssWLXNQni28ja8g2SjF++RotRXOA7SUBQKAqqO9ra/+NC9
+	ADAqfu74C0bJEOCamyu7NhMeIAaPwMzoZiETFu0Vr3I7EeBz9YEDucuk7Z/eEC1rugbi
+	ZakQ==
+X-Gm-Message-State: AKwxyteO2vZoDkVkx3dlTBV5iTNk4R5FldMHqbJnYx9U/1Rj9oib9258
+	gIU1f1eWV+Cqd0nSnAt/XzP1AEuf
+X-Google-Smtp-Source: AH8x224sZCV+ST+mGgBaP9tKQbfxW+QIRMOw0JxlDWuH0LQjdWhePsSvQym4MRDX1ruTTBFDNlm5Ww==
+X-Received: by 10.200.37.216 with SMTP id f24mr22806140qtf.165.1516972233625; 
+	Fri, 26 Jan 2018 05:10:33 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	v20sm5186499qtg.79.2018.01.26.05.10.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 26 Jan 2018 05:10:32 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 26 Jan 2018 08:10:26 -0500
+Message-Id: <1516972226-22174-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pylint: update to version 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,43 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jan 2018 12:46:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 26 Jan 2018 13:10:33 -0000
 
-The default packaging adds files from ${bindir} to the primary package,
-so that following packages don't see any files in ${bindir}. This causes
-the libgpiod-tools package to empty, as it is appended (+=) to PACKAGES.
-
-Change the assignment to PACKAGES to a prepend (=+) to populate the
-libgpiod-tools package with the gpio{detect,find,get,info,mon,set}
-executables.
-
-To avoid missing tools for existing installations of libgpiod, the
-libgpiod-tools package is setup as a recommendation by libgpiod when the
-tools package config is enabled.
-
-Signed-off-by: Martin Hundebøll <mnhu@prevas.dk>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-pylint.inc                 | 4 ++--
+ .../python/{python-pylint_1.8.1.bb => python-pylint_1.8.2.bb}         | 0
+ .../python/{python3-pylint_1.8.1.bb => python3-pylint_1.8.2.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pylint_1.8.1.bb => python-pylint_1.8.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pylint_1.8.1.bb => python3-pylint_1.8.2.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.bb b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-index 6aa27ad57..b2e3bae69 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-@@ -18,6 +18,9 @@ PACKAGECONFIG ?= "tools"
- PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
- PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
+diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
+index 9dd1d65..fd4739f 100644
+--- a/meta-python/recipes-devtools/python/python-pylint.inc
++++ b/meta-python/recipes-devtools/python/python-pylint.inc
+@@ -3,8 +3,8 @@ HOMEPAGE= "http://www.pylint.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
  
--PACKAGES += " ${PN}-tools"
-+PACKAGES =+ " ${PN}-tools"
+-SRC_URI[md5sum] = "b7cca873fb60d420a4db8d3bfa4824b1"
+-SRC_URI[sha256sum] = "3035e44e37cd09919e9edad5573af01d7c6b9c52a0ebb4781185ae7ab690458b"
++SRC_URI[md5sum] = "f6c290e2ff171e83694e82096f13fd4f"
++SRC_URI[sha256sum] = "4fe3b99da7e789545327b75548cee6b511e4faa98afe268130fea1af4b5ec022"
  
- FILES_${PN}-tools = "${bindir}/*"
-+
-+RRECOMMENDS_TOOLS = "${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '',d)}"
-+RRECOMMENDS_${PN} += "${RRECOMMENDS_TOOLS}"
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pylint_1.8.1.bb b/meta-python/recipes-devtools/python/python-pylint_1.8.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pylint_1.8.1.bb
+rename to meta-python/recipes-devtools/python/python-pylint_1.8.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.1.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pylint_1.8.1.bb
+rename to meta-python/recipes-devtools/python/python3-pylint_1.8.2.bb
 -- 
-2.16.1
+2.7.4
 
 
