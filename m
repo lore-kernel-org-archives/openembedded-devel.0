@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DBEE7886D
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 6325978864
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:24:48 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id q3so167077plr.8
+	Sat, 27 Jan 2018 03:24:49 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id ay8so166764plb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:24:49 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=+o0Rp8Ip0WMMJAcvD2Aod+4T21VjgV3cq+NS0ML78n8=;
-	b=tHMyWMI8BcbTj0ugR6/W0SLAJuIiazIlJgWQAXTmXzCngVgSPr7yVkVpp9+qStuB6g
-	gFZ55JNu/a99bg04/fkAzHlqJ5M6mxnyHCOd2yukrIJYCfNVnR2KFUcHeMQVi7yC12Xy
-	9eEI74Df1CEyYCFGR2TdH/Liew8yYcDqysf7JPAFUQX289gUJVK5D6dQfrTF3hCocERQ
-	nCWalhGk9c6IKiubKnl+GwVtUzvCTqECdakCBhvWJYA1bbLN1e2rXdqtS/EFvIZuDsNx
-	wIevwbZWEft+0H9Mm25ya1k0imZeEuuaiX8cy8qdPtAlVQTicoF3sp4+Io6lAJJBHeX2
-	JS0Q==
+	bh=Ra6wJrFtg4x1Di/JjrnLtyJQBAC0ErIPT1hY64ThfV8=;
+	b=cRSxcXL646+WBoYsToIXFqBBjbvthiI+k/Ius6zCC+NvcXiBRNCwoM3RYpnymQkeZG
+	eUOj4X425nWiff4zF/L7yOqMIC9gSNzmpO9uupUSb2w3uQOo+2mSeLKxFZTTiBjjkfYL
+	V4WKOi2tGj9Yotg8MA9IwXXgQz4VvkcgvA+K81WPsKwCxoH+HsUgcrc7K7H0eUsacQ3A
+	rlLchCUtRa0LcFIf7pv69A5HZLAqq+xkBybqWH29CXVng2qNy/N+zxzTzup4dLcW33yJ
+	dumV4PiwQanOcKtYkNv1dYxKg3Br+6rIa0V7BfPjck2fwaPVUuY1HQdr0ohkZ4VwGVUl
+	eCcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=+o0Rp8Ip0WMMJAcvD2Aod+4T21VjgV3cq+NS0ML78n8=;
-	b=WGN8PHOQhlgZ0gwcMyVaU3UfK3xdyujAOCYLlZxi/maZeVIryetzOru90x/uauVYEn
-	CrP+Z/m0iPYV49+seCOTtnhaZ1HGl8qxyvS1GWB4/xCrO77N8mGkh9w7iS3mddDQ151l
-	jM+VGDnPb21hioK/CLtgAtfW5zZ1ELUSl11kOfaMGi8J9T5/G2SencA/CPqozuHY7ERU
-	QmvdjViy38Py9alYRlULrNl/Fi59Lm9RLgEguUNmfBTRhQ4olZM8YGC8xSZZrWaii5iA
-	aWmzRIJQnPKIaHmH4Z72EuYGvtoPFTwSQ7PHY2oPHMXi5Pp5ae6VLFpAtWlZSfVGjdx0
-	2xIA==
-X-Gm-Message-State: AKwxytewQ0VTXrIzFeZfT8wHoNWUHrPp0hLhlVOSTfZv9kcJIY3LcpNQ
-	kLy+iDR8KQlKVuE6VvlcYqA=
-X-Google-Smtp-Source: AH8x227+RU2qlAAk5oY7i2la/pTC8jNZgowHcOkMsisymJho/OogfJ9aEHEF3SS2xUnByXV3no1gJA==
-X-Received: by 2002:a17:902:7006:: with SMTP id
-	y6-v6mr6049506plk.35.1517023489726; 
-	Fri, 26 Jan 2018 19:24:49 -0800 (PST)
+	bh=Ra6wJrFtg4x1Di/JjrnLtyJQBAC0ErIPT1hY64ThfV8=;
+	b=hTlTHZJLRIvdx9ePPJLFqNWW2NMRCCGn/AzQHJh9ZJilLpGXKKJjYnSAA4SaY8jMww
+	hekvmE+aNjSE9AfRIXZ/A+OCcyYsw73+kL2cy04qKlrN5yZfBS3v583MO5QpjCRsF93u
+	ORkBgJgNksjZWNtoQJRXrR5ECGMT/6Xs11lfFdh7oeJlPHHqQ/ut2oOA+Xws+8apTBJu
+	oiiDH4w6FsDSZpjHde1LhZs+Hx+FBQ26kySxTB+kPwwSLZJzzB62JENnLlCqW/AwxXFf
+	BCuE1hTQxu1IWhCmbH6sMEapNQgbX6YaPeA5ZY9S4AE8WGEFaiVqHdndnw214L52vlsJ
+	r1OQ==
+X-Gm-Message-State: AKwxytciqcVkoelKef6id8aXvPVRR/cBfUJGGo7/Arv2ISp0DOtZZviD
+	hX34mM/3JNXr9aEnRHPjIZs/MQ==
+X-Google-Smtp-Source: AH8x227lmhFFk9AF5/3zr7Zf16L56tofXE4mzUiKkJPZfwN+hlLI2uhUrqsndUz1th4F3q/jq3XYKQ==
+X-Received: by 2002:a17:902:bf41:: with SMTP id
+	u1-v6mr6705265pls.416.1517023490743; 
+	Fri, 26 Jan 2018 19:24:50 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.24.48
+	v22sm6692206pfa.158.2018.01.26.19.24.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:24:49 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:50 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:09 -0800
-Message-Id: <7b52b9641f7520314cad26489eaa870e8a69f945.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:10 -0800
+Message-Id: <43b3251a706ee6c951448591e5bbfa95cd40a062.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 09/36] polkit: add consolekit only when x11 is enabled
+Subject: [PATCH 10/36] hiredis: fix paths in pkgconfig conf file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,37 +60,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:24:48 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:24:49 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Andrea Galbusera <gizero@gmail.com>
 
-consolekit depends on virtual/libx11 then it requires x11
-distro feature, so add consolekit option only when x11
-is in DISTRO_FEATURES.
+Set PREFIX via EXTRA_OEMAKE instead of exporting it in do_install_prepend():
+than ensuring the correct prefix gets into hiredis.pc, which is generated by
+upstream makefile at do_compile() time.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit 19f0e8b40b88162483198934ac38c04d60102791)
+(cherry picked from commit 73ac0e419a6c78dfc68a34a0675c525bc6f01271)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/polkit/polkit_0.113.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.113.bb b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-index 326c934..f34928f 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-@@ -10,7 +10,9 @@ DEPENDS = "expat glib-2.0 intltool-native mozjs"
- inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
+index 96b86f9..fae30d7 100644
+--- a/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
++++ b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
+@@ -12,10 +12,11 @@ S = "${WORKDIR}/git"
  
- PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
--                 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'consolekit', d)}"
-+                 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
-+                    bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
-+                "
+ inherit autotools-brokensep pkgconfig
  
- PACKAGECONFIG[pam] = "--with-authfw=pam,--with-authfw=shadow,libpam,libpam"
- PACKAGECONFIG[systemd] = "--enable-libsystemd-login=yes --with-systemdsystemunitdir=${systemd_unitdir}/system/,--enable-libsystemd-login=no --with-systemdsystemunitdir=,systemd"
++EXTRA_OEMAKE = "PREFIX=${prefix}"
++
+ # By default INSTALL variable in Makefile is equal to 'cp -a', which preserves
+ # ownership and causes host-user-contamination QA issue.
+ # And PREFIX defaults to /usr/local.
+ do_install_prepend() {
+-  export PREFIX=${prefix}
+   export INSTALL='cp -r'
+ }
 -- 
 2.7.4
 
