@@ -1,51 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 14B2B787DE
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F31E78889
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 27 Jan 2018 03:25:04 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id n17so1366543pgf.10
+Received: by mail-pl0-f65.google.com with SMTP id 36so167097ple.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:25:05 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=l0IqFSCJd/Z8vgEDGoxTizO6/f6zuvWS0AjS2dbhRIk=;
-	b=cjm/eChhQsvrHNG7XBNNltGig+9NYL7r1knNlKPaPvMH55qwdEPr9oB5EJE3zmeKyV
-	jEOXFflW3i5qG8HX3oDEfjhjIzYSAbpu5z5nY6e/b5h1nsUFmcdCtXeg968/zI8+gt0A
-	er3Bz+aK9Bj+fALQ1VL5e8SMl6sF2pfYVB9aGQox8IPewmNHCUSh8wo/eMnYCGHxEqRA
-	wSRIK13N3Bd+olYHN6k9BoyShdPB3Yu0Msav5avNBBp6syrWQ8d4ccXfP3D/lyZQ2x7U
-	ujGU47xyuZhG2V9MyloVDxB5Z7dg2QrJhiehFH5+LXu+xzlqGp1bjFs+1hy2Jlr0LFD8
-	ZCUQ==
+	bh=h0E358ZbzVmba2tQEE5E5suAFoMzVj4oZ5HgcA5amcE=;
+	b=sAkOU12tlRKh/Afb7NtT39sBvGUTH5yxOJsFLidJn+eVxlphZ8bEypzxbgPOZbTb3A
+	qjz1A/8DVqvuoeOLCVqrChdL96D0UxGdM/LNxcTc1Gz1JWvqlMxthJ6qDS6JbqNVZZdT
+	MIlK3h2ZuekkZFrDbXBZE1Tn7c0L3tX8muSO/T8waeQrcdM71lSgQv0b+IjJdFf8919J
+	AkszexA+crQ0Rqfn9P+7ceX7TfMLL3RslJwvUylYNM5pNsJpZ6aiukHv+rk4AJl/9Dzu
+	GTS498vuCjNGdHhOH/Q8ntTosM/473dkkQhVqPPJ4P237Kp6MDmxVJ+tvcRZoqzifS8j
+	AB9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=l0IqFSCJd/Z8vgEDGoxTizO6/f6zuvWS0AjS2dbhRIk=;
-	b=RxFdn/nT7606X3ZHDogyyFKJ9USyHiThs/mDc51QegOgI6AuI8nFi8M49IlzyOPrP0
-	ECnbmNB2SWxplCbEVJhxP+vY/q7cebgnlbIvJGxfx4cnuI9TbfsJy8K6U38yU5yv5Ynr
-	7HxTI9c9QIC7WoPGg7QDAe3Uhf/uMtf4WYvuSji1FsIFjOruV4BzSjhjhq+eHthjb7SP
-	a5b/pwNLO6912MwstCcmOvU7pdUIa2Eu+GQ7YU/GCMYOUL2r+IM9S1KmiSn2aUA/pGM5
-	oqD1HrkD6VG1GjWVx+X2tbzpXQAnZmgSLaherxZ7tA4D9nyZOIr5IYv+w6ZGK5otLwoN
-	+5Ow==
-X-Gm-Message-State: AKwxytchrFgirzq1pJPrGtWZ8MdGr6l/0GPxyyHflgCDbSQGOHdYB3xm
-	+1ZtcoQctEBcH2oiE7/6chqYow==
-X-Google-Smtp-Source: AH8x2266unO6FPtTtgD3XspMtUTGjK64HRzShrKBYpLSetJ4W4ny0ay+MDzSFMO4IW/gW0Xgx53xOA==
-X-Received: by 10.99.65.199 with SMTP id o190mr14042111pga.238.1517023505767; 
-	Fri, 26 Jan 2018 19:25:05 -0800 (PST)
+	bh=h0E358ZbzVmba2tQEE5E5suAFoMzVj4oZ5HgcA5amcE=;
+	b=cbV2SKPYjCtW/JtPlEeubfKNzN++hfevfm+Z1UAE3kMGaLtgqXf8nE+wIKTT/X+/OM
+	JjFpre+iqXDtQodMKg8w0Y0b9SXuyoD72SThp8yRuN7c+lbx2ajQxtVlDsl0gY50TBJZ
+	mUSd2Hj4Guhd6FV3S+M6EFNwpz0dXhvvBA/5IeZxNm4SWEvuXjivqCJm1Jv0lG4pO9wz
+	t46w0VbEC+LlQLQm1ujUlkIIGj9dLMuu6tQhLS7J4J5mqj25c33Kz8cqNEL67hiRjyy9
+	DbGpgzYePxeUJC7VE2PTE6JBjgoqrWcpWoOyQX/jz5UJqD1I3Rz45pRIeElBuivbdgCh
+	yTOQ==
+X-Gm-Message-State: AKwxytfN4Sx3wz4mijkJaXrUo8IwOWrzhxcDTFm7RSwVeA4gC8t6fJqP
+	fs8v0hY7j+NMumjlAfogiXXvFA==
+X-Google-Smtp-Source: AH8x226M1IVlorOZUsOqubu1hJEuQG5DJaSwzi1Oz7p02wO6IJQF6d0bXsbvn9dIN/XTLRozx3M71w==
+X-Received: by 2002:a17:902:5902:: with SMTP id
+	o2-v6mr15826626pli.79.1517023506524; 
+	Fri, 26 Jan 2018 19:25:06 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
 	v22sm6692206pfa.158.2018.01.26.19.25.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:25:05 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:06 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:27 -0800
-Message-Id: <df66128a8ae428b8f4f90b0958232917edb6e160.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:28 -0800
+Message-Id: <ef80cfd67b022bafa241cd774666b45082bf7e47.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 27/36] leveldb: fix checking for SSE flag
+Subject: [PATCH 28/36] open-isns: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,51 +60,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:25:04 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:25:05 -0000
 
-From: Yi Zhao <yi.zhao@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-The build_detect_platform-Check-for-__SSE4_2__.patch tries to use fgrep
-with pipe to get the SSE flag. But actually it would fail with error:
-fgrep: /tmp/leveldb_build_detect_platform-cxx.25886: No such file or
-directory
-
-That means it can not get the correct SSE flag.
-We should make sure the fgrep command runs after g++ command has
-finished and redirect the stdout and stderr to /dev/null to avoid make
-error:
-Makefile:18: *** missing separator. Stop.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit fa211625598c9cc2ef965bf95548d21930622aaa)
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+(cherry picked from commit 43d2d966b957886bc54d7f15e6632211c41114c3)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch    | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ ....h-endian.h-is-available-on-musl-on-linux.patch | 38 ++++++++++++++++++++++
+ .../recipes-support/open-isns/open-isns_0.97.bb    |  6 ++--
+ 2 files changed, 41 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch
 
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch b/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
-index bbabf68..8f93cb3 100644
---- a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
-+++ b/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
-@@ -19,14 +19,15 @@ Index: git/build_detect_platform
- ===================================================================
- --- git.orig/build_detect_platform
- +++ git/build_detect_platform
--@@ -230,13 +230,12 @@ EOF
-+@@ -224,13 +224,13 @@ EOF
-      rm -f $CXXOUTPUT 2>/dev/null
-  
-      # Test if gcc SSE 4.2 is supported
- -    $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -msse4.2 2>/dev/null  <<EOF
--+    $CXX $CXXFLAGS -Werror -x c++ - -o $CXXOUTPUT -msse4.2 -dD -E 2>/dev/null | fgrep __SSE4_2__ $CXXOUTPUT 2>/dev/null  <<EOF
-++    $CXX $CXXFLAGS -Werror -x c++ - -o $CXXOUTPUT -msse4.2 -dD -E 2>/dev/null  <<EOF
-        int main() {}
-  EOF
-++    eval fgrep __SSE4_2__ $CXXOUTPUT >/dev/null 2>&1
-      if [ "$?" = 0 ]; then
-          PLATFORM_SSEFLAGS="-msse4.2"
-      fi
+diff --git a/meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch b/meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch
+new file mode 100644
+index 0000000..825e2bf
+--- /dev/null
++++ b/meta-networking/recipes-support/open-isns/open-isns/0001-util.h-endian.h-is-available-on-musl-on-linux.patch
+@@ -0,0 +1,38 @@
++From e0d86318227a23f00cf0f6639a6685bb9f5771a1 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 12 Dec 2017 09:42:19 -0800
++Subject: [PATCH] util.h: endian.h is available on musl on linux
++
++just checking for glibc alone is not enough since
++it excludes musl, therefore check for platform
++being linux as well
++
++Fixes build issues
++
++include/libisns/util.h:114:12: fatal error: sys/endian.h: No such file or directory
++ #  include <sys/endian.h>
++            ^~~~~~~~~~~~~~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Submitted
++
++ include/libisns/util.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/include/libisns/util.h b/include/libisns/util.h
++index 9a2bd13..6cc1a1b 100644
++--- a/include/libisns/util.h
+++++ b/include/libisns/util.h
++@@ -100,7 +100,7 @@ enum {
++  * There's no htonll yet
++  */
++ #ifndef htonll
++-# ifdef __GLIBC__
+++# if defined(__GLIBC__) || defined(__linux__)
++ #  include <endian.h>
++ #  include <byteswap.h>
++ #  if __BYTE_ORDER == __BIG_ENDIAN
++-- 
++2.15.1
++
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+index 420ef5b..cc2959e 100644
+--- a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+@@ -13,9 +13,9 @@ SECTION = "net"
+ 
+ DEPENDS = "openssl systemd"
+ 
+-SRC_URI = " \
+-    git://github.com/open-iscsi/open-isns \
+-"
++SRC_URI = "git://github.com/open-iscsi/open-isns \
++           file://0001-util.h-endian.h-is-available-on-musl-on-linux.patch \
++           "
+ 
+ SRCREV ?= "09954404e948e41eb0fce8e28836018b4ce3d20d"
+ 
 -- 
 2.7.4
 
