@@ -1,53 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 18852787DE
+Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B91678889
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:25:08 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id o13so166032pli.6
+	Sat, 27 Jan 2018 03:25:09 +0000 (UTC)
+Received: by mail-pf0-f173.google.com with SMTP id y26so1447765pfi.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:25:09 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=MzuTUd0bn8Y8nBdb4C9U+BHE+Ey4iKBih/CIQPo+xZM=;
-	b=J4DSUCMI6HiN8/7PCBgwlU/2PhTsZeW62lr5wWGNA4maNQ5Xd2yR/yilz53D44N6Ie
-	6VqxahY/novTpQ5sjfOhyL0s95whuXbzn2rAag/LiFJAPg4Cc2O6qzgTAdeBkeixJvIz
-	Qg/YOb997bFHQ8ncsgXMdp5XLp/lcrOAuqQffIRS/H6yZwqLqqpLJ4hEgueiMjPGAmB3
-	87ZdTN5IB2CI3wZtm0r7BWQvHVFfhN29CXxgTAMV6DH0k/VAsnQTxjKCgzTM7K08XKpV
-	C65RdjFI4pdFAGaioPzxhmHHoAflIoh5gB+Q5OtVdRgysK5fu9S64M4rMSTCt+hG+ttB
-	c1Rw==
+	bh=6c0QlxqcvaAotbLycaLZeVcozB/t9AwXb+Ck8OwgE6o=;
+	b=bOGJA6cnCtRprelPJu/cit4MAE5t8ixpdNA8nCLhaJJd+k9od6n/e/+cecRBfujJVq
+	TtaxozhXY92XKbj+vr5YIXFEquEhdYTOLpKhXvwOGExFmO/BPBSAw++6tHx8iRSd4ZMT
+	6OxAl9TUazut1DTZ9JFrj+RMthLsHlaIKxkQ/lpwMK+kZ2G2LBg/CrjJUvzKy5W+qWmn
+	4IFFiW85UFwciRKO4EtHEcC0lR6u0QNugfZPEbJ8QluUQs/79kmd9BFcuBzztkOb4zCh
+	iRt9Er+tCKOwXsTfjXBn5wO7sU745PBuBM4X8wWD/PggLA6yjFPTTHAJOcRXWiidmnAl
+	6wBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=MzuTUd0bn8Y8nBdb4C9U+BHE+Ey4iKBih/CIQPo+xZM=;
-	b=jK0luyI5yBh5nYp6JUAUFe5CDjnx15PlOQwL8gg/em/3HPi4XmxHKPED5GIsuULrD+
-	K0bNX8yBmyHf/BduGH30J6/C10RaMuOtWNgtckgVFmviICUwqyYVDQT+NCFEm0NchrpQ
-	ZLN+suN5BKWmPJy4jUToYL1S9uyV8qDgTPaUPUAHGBepnWN7pPeHNR0glNg7nrOMPWxR
-	/n1/KOlCZ5gOA3VGjkN98kjZHRndR8du0KZ95tWbbxOdgZlVmLCZ6fbW35maxyRfugHY
-	IjZqhzutyUqQ6PKaYgi9rNAbZLwbMYnBn6nN6nNghlLqiyNyrmhZmRorvbBKzj0RSvvt
-	WcIQ==
-X-Gm-Message-State: AKwxyte+WqABSDn3OQJARTFuKrjqo59EEDQN7LMtPn506K0o+IYsIXh+
-	iUnjsGIu3QsV6kk1kQOikkA=
-X-Google-Smtp-Source: AH8x226JgaJQy6V64SL3+NO/9UcJLWz6BB2m50j3lWbD+0Abexo5pmZthydHqk/rOwkzmSJ6qRnHhQ==
-X-Received: by 2002:a17:902:bc3:: with SMTP id
-	61-v6mr13872602plr.407.1517023509750; 
-	Fri, 26 Jan 2018 19:25:09 -0800 (PST)
+	bh=6c0QlxqcvaAotbLycaLZeVcozB/t9AwXb+Ck8OwgE6o=;
+	b=QoqevzBNG43NqhdyW5MU8mEe/kNgqcnBMnJjbJvcJ1JvRyV19gTKPPf+jgPAJmHXjH
+	qlqvhbgNhW8R2KmM9Av5ZmtAGLcvKu8GjRt1s0GKBq7qJAg2YWjQI67CEhSq+KE+zUrm
+	ZkcvlykW2btgObd/1Js5qO2khmmYnJRA8PMFUs7sFDp538KKfLttYziAIGY3zWcpIb12
+	MERCWvCouYPF0wjhcLKnO6I7jtoG6cv8RIV62U+EcTiURpIMNMZrBx77/2c1doxYnMcG
+	fLLHiMAI3/Nn4T8jR6mbIDtTbwdBAM+RRJNfyW14ADRGLXoysPpVhpbsVX7QgSFN4UcK
+	JWGQ==
+X-Gm-Message-State: AKwxytdhDU31RgBpUDvRvu3F8/LQi2VmDhFjwhTrxcRvfXTOc5tfyAgd
+	ynv++XLki4qKVA4zjucNRus=
+X-Google-Smtp-Source: AH8x2276faw7vilcknXMk0YZuK800Rp1iqXn3PoqMtT0MDHU1jiEHvA0f4APXDOivRT6bxMleT3fSQ==
+X-Received: by 10.98.166.195 with SMTP id r64mr20750960pfl.175.1517023510640; 
+	Fri, 26 Jan 2018 19:25:10 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
 	v22sm6692206pfa.158.2018.01.26.19.25.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:25:09 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:10 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:32 -0800
-Message-Id: <2c10e739ff6f72cd9b50ba4aa94754d38fcffd25.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:33 -0800
+Message-Id: <c65e16cd8e13985dda982f4286510d6a065c8a8e.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 32/36] net-snmp: support openssl without 3des
+Subject: [PATCH 33/36] stunnel: fix compile error when openssl disable des support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,92 +59,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:25:08 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:25:09 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-net-snmp enables 3des support by default and fails to build with distro
-feature openssl-no-weak-ciphers:
+When openssl disable des support with configure option 'no-des', it
+doesn't provide des related header file and functions. That causes
+stunnel compile failed. Fix it by checking macro OPENSSL_NO_DES to use
+openssl des related library conditionaly.
 
-| ../../net-snmp-5.7.3/snmplib/scapi.c:82:25: fatal error: openssl/des.h: No such file or directory
-|  #include <openssl/des.h>
-
-To fix the issue:
-* add a patch to include des.h only if it's found in openssl
-* disable des when openssl-no-weak-ciphers is enabled
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-(cherry picked from commit d8e69bc9e9c183346a11eb31915c12558565f881)
+(cherry picked from commit f9a1fe6ab2dfb6a53e58fc8da3a1580e76954e5e)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../net-snmp/net-snmp-fix-for-disable-des.patch    | 32 ++++++++++++++++++++++
- .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  4 ++-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
+ .../stunnel/stunnel/fix-openssl-no-des.patch       | 54 ++++++++++++++++++++++
+ .../recipes-support/stunnel/stunnel_5.35.bb        |  4 +-
+ 2 files changed, 57 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
+diff --git a/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
 new file mode 100644
-index 0000000..25eb9c9
+index 0000000..209b0dd
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
-@@ -0,0 +1,32 @@
-+From 270e952f58a7e5ddeabe5a15e3ddaaadf40017d0 Mon Sep 17 00:00:00 2001
-+From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Thu, 22 Jun 2017 10:25:08 +0800
-+Subject: [PATCH] net-snmp: fix for --disable-des
++++ b/meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
+@@ -0,0 +1,54 @@
++Upstream-Status: Pending
 +
-+Include des.h only if it's found in openssl so that
-+the --disable-des works correctly.
++When openssl disable des support with configure option 'no-des', it doesn't
++provide des related header file and functions. That causes stunnel compile
++failed. Fix it by checking macro OPENSSL_NO_DES to use openssl des related
++library conditionaly.
 +
-+Upstream-Status: Submitted [net-snmp-coders@lists.sourceforge.net]
-+
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ snmplib/scapi.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/snmplib/scapi.c b/snmplib/scapi.c
-+index 16ac829..271684b 100644
-+--- a/snmplib/scapi.c
-++++ b/snmplib/scapi.c
-+@@ -79,7 +79,9 @@ netsnmp_feature_child_of(usm_scapi, usm_support)
-+ #include <openssl/hmac.h>
-+ #include <openssl/evp.h>
-+ #include <openssl/rand.h>
-++#ifdef HAVE_OPENSSL_DES_H
++diff --git a/src/common.h b/src/common.h
++index f7d38b0..bf485af 100644
++--- a/src/common.h
+++++ b/src/common.h
++@@ -471,7 +471,9 @@ extern char *sys_errlist[];
++ #ifndef OPENSSL_NO_MD4
++ #include <openssl/md4.h>
++ #endif /* !defined(OPENSSL_NO_MD4) */
+++#ifndef OPENSSL_NO_DES
 + #include <openssl/des.h>
 ++#endif
-+ #ifdef HAVE_AES
-+ #include <openssl/aes.h>
-+ #endif
-+-- 
-+2.11.0
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index af6fd1b..849ae07 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-            file://0003-CHANGES-BUG-2712-Fix-Perl-module-compilation.patch \
-            file://0004-configure-fix-incorrect-variable.patch \
-            file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
-+           file://net-snmp-fix-for-disable-des.patch \
-            "
- SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
- SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
-@@ -59,7 +60,8 @@ EXTRA_OECONF = "--enable-shared \
-                 --with-defaults \
-                 --with-install-prefix=${D} \
-                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
--                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
-+                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
++ #ifndef OPENSSL_NO_DH
++ #include <openssl/dh.h>
++ #if OPENSSL_VERSION_NUMBER<0x10100000L
++diff --git a/src/protocol.c b/src/protocol.c
++index 587df09..8198eb6 100644
++--- a/src/protocol.c
+++++ b/src/protocol.c
++@@ -66,7 +66,7 @@ NOEXPORT char *imap_server(CLI *, SERVICE_OPTIONS *, const PHASE);
++ NOEXPORT char *nntp_client(CLI *, SERVICE_OPTIONS *, const PHASE);
++ NOEXPORT char *connect_server(CLI *, SERVICE_OPTIONS *, const PHASE);
++ NOEXPORT char *connect_client(CLI *, SERVICE_OPTIONS *, const PHASE);
++-#ifndef OPENSSL_NO_MD4
+++#if !defined(OPENSSL_NO_MD4) && !defined(OPENSSL_NO_DES)
++ NOEXPORT void ntlm(CLI *, SERVICE_OPTIONS *);
++ NOEXPORT char *ntlm1();
++ NOEXPORT char *ntlm3(char *, char *, char *, char *);
++@@ -1175,7 +1175,7 @@ NOEXPORT char *connect_client(CLI *c, SERVICE_OPTIONS *opt, const PHASE phase) {
++     fd_printf(c, c->remote_fd.fd, "Host: %s", opt->protocol_host);
++     if(opt->protocol_username && opt->protocol_password) {
++         if(!strcasecmp(opt->protocol_authentication, "ntlm")) {
++-#ifndef OPENSSL_NO_MD4
+++#if !defined(OPENSSL_NO_MD4) && !defined(OPENSSL_NO_DES)
++             ntlm(c, opt);
++ #else
++             s_log(LOG_ERR, "NTLM authentication is not available");
++@@ -1216,7 +1216,7 @@ NOEXPORT char *connect_client(CLI *c, SERVICE_OPTIONS *opt, const PHASE phase) {
++     return NULL;
++ }
++ 
++-#ifndef OPENSSL_NO_MD4
+++#if !defined(OPENSSL_NO_MD4) && !defined(OPENSSL_NO_DES)
++ 
++ /*
++  * NTLM code is based on the following documentation:
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+index efe9d9e..ec8478d 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+@@ -8,7 +8,9 @@ DEPENDS = "openssl zlib tcp-wrappers"
+ 
+ RDEPENDS_${PN} += "perl"
+ 
+-SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz"
++SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
++           file://fix-openssl-no-des.patch \
 +"
  
- # net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp
- EXTRA_OECONF += "--with-mib-modules=smux"
+ SRC_URI[md5sum] = "9079f5fafbccaf88b7d92b227d78249a"
+ SRC_URI[sha256sum] = "ffa386ae4c825f35f35157c285e7402a6d58779ad8c3822f74a9d355b54aba1d"
 -- 
 2.7.4
 
