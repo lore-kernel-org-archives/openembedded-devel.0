@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C1CF78855
+	by mail.openembedded.org (Postfix) with ESMTP id 808FA78855
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:24:42 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id p1so1458326pfh.4
+	Sat, 27 Jan 2018 03:24:43 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id a88so1444938pfe.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:24:44 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=/opZ0NR30TSSluxKgvlffo2OKEa/daNsXyvseFGwz58=;
-	b=fnfjc3LKIHLHF0uJWmfXMoOOrXj9k5HVrYqhRmTfrLmgGkbpOzidOW1Y4ft3czdWjC
-	c5wZHlXkXBLfSfTLde2Yi9sv6SAJPy7cgK2sHZY4o5LjrkRa0BaFMnh/b+DfH9VDqZNN
-	tZQ+EVKtuiBFQ+ypQYXfYfhCyshudNlIzu3MWgnd+bmI2JbQI83b2kFtoFqdjlWAXoc9
-	0aNv7bFRFnOBBgVJWMSz0PbDnTroMImiSks7HEV7w4wuyJeK+JzKevojqmd9hwsqqV3R
-	dEFE5z3rctk5HMxB/81JoEdkNl99e3WmqAOw3ynjyA97blQC9K4AvkyRq6dDHUQ4wYLL
-	ll/w==
+	bh=er/EyKpDG+atcSJj+WYr0LhGZci6Bf85vH9mWUWA3Aw=;
+	b=hMGTpRwEhk28xsyuEC/FViDclA4IrsHRTFyRJnesuuUN303OqwDPgAWG7if4oLgbur
+	qcGPHlzrCT3XLhWFLFpHzfKiAb1Fci/raHnSRejxyOwMgf273upd88LTClf7SEsi5zgy
+	f6fK/EHLUPXDSdWTbKcKa56gD5COtiAjVQupPITXIlIIYun85wAAj/7zCI6uJBjpgDZu
+	LzmZl3SF+8D93JvrXIZadT56dxY/AqVnz+Ix0MCpdVfj5vnH7D/6Vgt90VAAf/rrSF7E
+	6g0uQiDVi6OZa0MSjE4biogkJvpRTKwnbv0znAfhKi+4yXLEDuLuI/WggNDgDtG/G2zt
+	EiKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=/opZ0NR30TSSluxKgvlffo2OKEa/daNsXyvseFGwz58=;
-	b=m9+cXOru3Qndcx1zmbMwbegD/Iow5Plp8xcEep0yDPER66NQZOvMqHOSbfd+Vbi9cu
-	D6oimX0rydeQsxm+XNlAywjSmSyUqxwtGCQ8zFt6s7e7tH3DOKFHYSBZwW2tjCImVRA+
-	mTpWmXy2TqemAxfW952pu06MfXf90qAjGfRAG8I6vh1SS6SJp0vi5RBzN3rY4e19ScFq
-	ycxg09Kzr7o8h3oEZ4c4ll7qyNwicR8TNFHY7khDRnUPGjF9o5Sz3gefFE6iaHfhaVSU
-	GEmj+WT/AzBtf/ddxQqIE47ZUaem8Y6KLlYEdUH7hpV9tpLX0aDmkF9anTnN3UVbogmM
-	L1Jg==
-X-Gm-Message-State: AKwxytezRpXsX6/IgaeDvntVxJw63QbM0HQUfmM+sFGo8ZSX2FEnCt2B
-	8aV0Zk/UH7jMyGBRFmjXi2AYmg==
-X-Google-Smtp-Source: AH8x226jqfvn5xLP6Wr3JWpLe1EMH9OiCi//sk3fBQ8I5v5borWWClAe+R/78aGbMyUwdbykVnbwzg==
-X-Received: by 10.98.7.73 with SMTP id b70mr20538097pfd.39.1517023484246;
-	Fri, 26 Jan 2018 19:24:44 -0800 (PST)
+	bh=er/EyKpDG+atcSJj+WYr0LhGZci6Bf85vH9mWUWA3Aw=;
+	b=dP+jw4a5YxSdjjie0KDjKsB2KHk4NI9OG5gmNrIu6NcSjSbi4N2DnqtafY4N+qHH5B
+	GqKwHlxyf21WyFzP+PNEokCyHXJHf1X0u7ntdxZmgXNUcA4mjAeq4UEq/W0YMmtpTTQt
+	TJstp/A9YcdBorvquCLd2evL/JHerHm04PODUejPhLMZ12XwL5GuGN9o5vO5uCucDPk9
+	JDJRZpm58Ac8RENC+nr+UiPKdcnsd5GvJYhzLeklabCYkG3RMfc8t5hBdj5sIVHL0Mj1
+	bTyfzZE1+bXvpT/Y1Ev37G0Nm0Is0tq+4R+AvJez0yFVGKmN1iTH+jDQqGcdgq/x1MQs
+	6i4w==
+X-Gm-Message-State: AKwxyteD4QxvDF0wQ+EAmZFXyLoKtvMP1UpXq+q+Otd8JJTRXBdFIRsp
+	3xqf52cf8qwPIwWaHhGv7tA=
+X-Google-Smtp-Source: AH8x224zcTDRHvtO7swnir273nvN5qZvOPX03RXPr3x8ru/3THZBg82rVy3welhloghl15PxzuHtPA==
+X-Received: by 10.98.150.213 with SMTP id s82mr21126950pfk.10.1517023485207;
+	Fri, 26 Jan 2018 19:24:45 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.24.43
+	v22sm6692206pfa.158.2018.01.26.19.24.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:24:43 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:44 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:03 -0800
-Message-Id: <80985a36504d808dfe1ad548042687af007f2f50.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:04 -0800
+Message-Id: <2a5d1690ae0ff48b0fcb504c241dff9a12f6c3b1.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 03/36] libpwquality: fix Nothing RPROVIDES 'lib32-python3-libpwquality'
+Subject: [PATCH 04/36] libreport: fix Nothing RPROVIDES 'lib32-python3-libreport'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,48 +59,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:24:42 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:24:43 -0000
 
 From: Hongxu Jia <hongxu.jia@windriver.com>
 
-While multilib enabled, if other recipe RDEPENDS python3-libpwquality,
+While multilib enabled, if other recipe RDEPENDS python3-libreport,
 it failed with:
 ...
-ERROR: Nothing RPROVIDES 'lib32-python3-libpwquality'
+ERROR: Nothing RPROVIDES 'lib32-python3-libreport'
 ...
 
 Do not use python3-${PN} could fix the issue.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-(cherry picked from commit 3c73befc036fed4506c9bb8adc6c615dd2d2999c)
+(cherry picked from commit 5d6d21e98ed594809169d2b2f6964e90a3369a96)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/libreport/libreport_2.9.2.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
-index daf6604..2c96063 100644
---- a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
-+++ b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
-@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "1de6ff046cf2172d265a2cb6f8da439d894f3e4e8157b056c515515232
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+diff --git a/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb b/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb
+index 2fdfd7d..525437b 100644
+--- a/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb
++++ b/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb
+@@ -26,7 +26,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
  
- DEPENDS = "cracklib virtual/gettext python3"
--RDEPENDS_python3-${PN} = "${PN}"
-+RDEPENDS_python3-libpwquality = "${PN}"
+ inherit gettext autotools python3native pkgconfig
  
- inherit autotools python3native gettext
+-RDEPENDS_${PN}-python3 += "${PN}"
++RDEPENDS_python3-libreport += "${PN}"
  
-@@ -36,7 +36,7 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
+ do_patch[prefuncs] += "do_gen_version"
+ do_gen_version() {
+@@ -34,9 +34,9 @@ do_gen_version() {
+     ./gen-version
+ }
  
--PACKAGES += "python3-${PN} python3-${PN}-dbg"
-+PACKAGES += "python3-libpwquality python3-libpwquality-dbg"
- FILES_${PN} += "${libdir}/security/pam_pwquality.so"
- FILES_${PN}-dbg += "${libdir}/security/.debug"
- FILES_${PN}-staticdev += "${libdir}/security/pam_pwquality.a"
+-PACKAGES += "python3-${PN}"
++PACKAGES += "python3-libreport"
+ 
+ FILES_${PN} += "${datadir}/*"
+ FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug"
+-FILES_python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
++FILES_python3-libreport = "${PYTHON_SITEPACKAGES_DIR}/*"
+ 
 -- 
 2.7.4
 
