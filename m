@@ -1,51 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f45.google.com (mail-pg0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id DD59478869
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id B1F4C787E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:24:56 +0000 (UTC)
-Received: by mail-pg0-f45.google.com with SMTP id 136so1368972pgd.8
+	Sat, 27 Jan 2018 03:24:57 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id ay8so166853plb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:24:58 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=zlnl0qYBdlb8b9wZK9QuZW4SWzJryViMsplo7gJ9xxo=;
-	b=FSXqEyxsQogBCFcLfbWdlkhCv85SRC39w0+YtSDMckxINo/uvDNO71u3PCr6XK8qvp
-	TbpR5iv27MZp0+LRvBu3AtylRp8RfIoEGbGgb0OoJcfmhs2jn5w1QmaeIa2yShb11Zs0
-	HUnsSxYD9K7v57ImWobIIo6hfIRYLtPGUdt/4rcQYpUq3FkGdgrDjNuJwPcmD5gTvq+a
-	zNnrCacwpmlWwwAmhZgkpgvuSUbt/xy4+VPyAc4iAsJgRwAOBrmj/6WQe/+TcHTB2w4n
-	c+UzHpi+WYND6TxngQP1dnQdfVaxHeWOFAbFVlCg3BQgBk/1+YRC6vNCICk7c9VOTfVO
-	H7PA==
+	bh=sPPbRsvqHswWrrjQN2BVm8q0JLPggyKIseZ5JmTCBH0=;
+	b=Hy2FUOMt0F+ZhnbVI+cdOlZsHDVKudvv+5XcatbBhsUH+Z3JG6r7rLaRprSXxlxQu3
+	oX8zoHFABtAKjG87qZRYWms36IhN3m1C8zxBVpWohH0HWQS2oOTr2WztvmF9lIBLvoA/
+	u997SwCfcKCGCWTp2rs+mTwsb1wX4zKnAw3h8DDNzwAcJthjc+8jsu6jCilW6HGyiRMZ
+	fvSGk8iFbuH43MkMO31rfibDwo5gUtrEJ1IF4KK5IO/Tnij3gTNQULfkjZWtdCNHvplo
+	KP0JXdCOR1lWGOHulZf5CTxhRa1Bu2x6atoQhT1aK7DNd0IZp/aka1SyNNV1iU+OG2CY
+	moXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=zlnl0qYBdlb8b9wZK9QuZW4SWzJryViMsplo7gJ9xxo=;
-	b=ZEXskGalWZyIlgmO7drAV94+u7rlUw2mbeiUheNAno8/Qa7tPCVQhDHBcZZUs9C5tX
-	s0gOPBJw2d4fiam6rMhkKQUHRHckBTnS+G3fIGaCwTnULK4Jpl3gCQeOdfyefPAn4MS3
-	4JIpoJz+VcYZ/jPDE93qkGw6gey/8RgU0JNZ412MbxSNlT2td5Gz1tpu8vFLF57GVQUO
-	+8oexzV7fWbdlCwzVDj0y/+xXihVBVUAZ2k3tl+nxeENIZ/uvZWHansIhUGigVzf00uX
-	nI4KwRoK0Sli5kWZUG5rx+GH4f/nAf8cuKhC4oZ7E/ShT616sv7yWilz5ywfQsFv6nKw
-	35kQ==
-X-Gm-Message-State: AKwxytcgNdIMW5vZQK0C1d0PP9c/rOaXfnht33LbPovCgK95DyZX5MpL
-	qRypsD24eBTFt7ncWzD7lhXV7Q==
-X-Google-Smtp-Source: AH8x226iqGOUPjINoFSZOr9K3PGn06hv+7+ltQF+PdCJ0vDmoAtf7Sr5b/Qx2GZMYSNkObygbSgDkg==
-X-Received: by 10.98.76.150 with SMTP id e22mr20676638pfj.28.1517023498058;
+	bh=sPPbRsvqHswWrrjQN2BVm8q0JLPggyKIseZ5JmTCBH0=;
+	b=VS3zJH+s0EPNgqAvFmZWS9mdv+SfK7wMHbdwOlklSwD0RRXo72z+VJfEuSw+WNknkW
+	adfNdcMPj1pGd68Xs7WNEd0x+AMskSxtKHnI2ARaqI9cebYrgtI27kRNJAuG7+2S0xAW
+	2MZDMCwU2GEcm3gZCfx9wyqsCbMPgCfqVuoRCw5XhuZjvcXU6QBJFNfnD1Nk9bdsnfja
+	9Vjr24/Y8Gizz3suCEZBtkqvA8mj2Ye1XxvPsRrP50KCjc2BmQfXkRe2ak6mEiT181HC
+	D2+lI/wXq3fJjeO7Esq4DBkWtLJ1g6CR3PjSIOCD7aBrQz6octi4CtxlHzI0ymgBJlMY
+	l+4A==
+X-Gm-Message-State: AKwxytc23pQ1Fb9jc12ZFsI+ctR8e+srCjQr6Uk8XPB0SxiHjPZWocB7
+	nJplTKLcnULgOzy71Dz9HBVaSw==
+X-Google-Smtp-Source: AH8x225c6HGLcKub1md168SqCUtNN/oVFgEntN+FpmNzySbMbCMdsvdUWkxQSGmnkW5SsuyCu+cIjQ==
+X-Received: by 2002:a17:902:5582:: with SMTP id
+	g2-v6mr16601165pli.349.1517023498879; 
 	Fri, 26 Jan 2018 19:24:58 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.24.57
+	v22sm6692206pfa.158.2018.01.26.19.24.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:24:57 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:58 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:18 -0800
-Message-Id: <154290781cf4b8397f5457e29881894f2c43db52.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:19 -0800
+Message-Id: <267301eda9bc0dc3cc02ba5cfffa4167457b7965.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 18/36] Move RDEPENDS on libasound-module to bluez4 since it has been removed from bluez5
+Subject: [PATCH 19/36] passwdqc: add pam-passwdqc to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,37 +62,33 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Jan 2018 03:24:57 -0000
 
-From: Tobias Olausson <tobias.olausson@pelagicore.com>
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-See also: https://patchwork.openembedded.org/patch/139422/
+Some basic function such as password change invoked
+by programs such as passwd depends on pam_passwdqc.so
+which is provided by subpackage pam-passwdqc.
 
-Signed-off-by: Tobias Olausson <tobias.olausson@pelagicore.com>
+Add pam-passwdqc to RDEPENDS for passwdqc.
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit cf993a2c9e10dea286979850c4c5ecd751735ce8)
+(cherry picked from commit 1d943254ce7fb9a88e79ef175c8ec0d3d26dbbad)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb  | 2 +-
+ meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-index 317f972..f2a16dc 100644
---- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-+++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-@@ -15,13 +15,13 @@ inherit bluetooth
+diff --git a/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb b/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb
+index b8f923c..198db3c 100644
+--- a/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb
++++ b/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb
+@@ -59,5 +59,5 @@ FILES_lib${BPN} = "${base_libdir}/libpasswdqc.so.0"
+ FILES_pam-${BPN} = "${base_libdir}/security/pam_passwdqc.so"
+ FILES_${PN}-dbg += "${base_libdir}/security/.debug"
  
- RDEPENDS_bluez4 = " \
-     obexftp \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'libasound-module-bluez', '', d)} \
- "
- 
- RDEPENDS_bluez5 = " \
-     bluez5-noinst-tools \
-     bluez5-obex \
-     bluez5-testtools  \
--    libasound-module-bluez \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', \
-         'pulseaudio-module-bluetooth-discover \
-          pulseaudio-module-bluetooth-policy \
+-RDEPENDS_${PN} = "lib${BPN}"
++RDEPENDS_${PN} = "lib${BPN} pam-${BPN}"
+ RDEPENDS_pam-${BPN} = "lib${BPN}"
 -- 
 2.7.4
 
