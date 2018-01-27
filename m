@@ -1,53 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
-	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 532A178889
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 14B2B787DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:25:03 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id q3so167277plr.8
+	Sat, 27 Jan 2018 03:25:04 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id n17so1366543pgf.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 26 Jan 2018 19:25:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=hz/NvcCdl9GZlWA1WF8JWjGkKMYi9av5bqI4jkURqZc=;
-	b=CW/48Pztc4zl/pJHlb6RWwqwFwaKaPaBZ25Oviwo+BBsURrsRtQmxFX1zBADFSsAVa
-	tCWo/0z5/8LJajy6ALQkRb7X9JCW97Zu0WApdNdY5pfmMom+RzCyB1qc1OL+L4rZQpHV
-	kpMi3tCdrEhVQIEiMyy9KQBc4MtBxt90jsgPpR/C9DpL2z5Ssex6Zne7sdo11Vv1vge7
-	KpkRGV8Kw+Yp4INiNHluqnWyZytnWSfrip1epwI6Ddredd2WXbU7x0Xv2m7RYSbTQT8k
-	4LVPFXiwY+X0Mb0s5cJNQnAYoR67dDU1TEe8eLPIr7fozQjaqGotKXzOhvtN/6Vxxvvq
-	s7zg==
+	bh=l0IqFSCJd/Z8vgEDGoxTizO6/f6zuvWS0AjS2dbhRIk=;
+	b=cjm/eChhQsvrHNG7XBNNltGig+9NYL7r1knNlKPaPvMH55qwdEPr9oB5EJE3zmeKyV
+	jEOXFflW3i5qG8HX3oDEfjhjIzYSAbpu5z5nY6e/b5h1nsUFmcdCtXeg968/zI8+gt0A
+	er3Bz+aK9Bj+fALQ1VL5e8SMl6sF2pfYVB9aGQox8IPewmNHCUSh8wo/eMnYCGHxEqRA
+	wSRIK13N3Bd+olYHN6k9BoyShdPB3Yu0Msav5avNBBp6syrWQ8d4ccXfP3D/lyZQ2x7U
+	ujGU47xyuZhG2V9MyloVDxB5Z7dg2QrJhiehFH5+LXu+xzlqGp1bjFs+1hy2Jlr0LFD8
+	ZCUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=hz/NvcCdl9GZlWA1WF8JWjGkKMYi9av5bqI4jkURqZc=;
-	b=bB1/rWx+E2FtR9DKR7jZWRU2/VfyPtDSyZ55WejaRMI5jX1aaX14nr2RnLCV/rCF+O
-	ejsxkf5ji5J8NP6Kz8pcvYSNxDoHw4iy2kn5exZDBRcH3Ga9X+cvai7OVJ4uXNI2BjX5
-	p0typuLTFUGoSneezXlo90DVeAx8brkbf6HouWQL+soCddbRlJjDtZ+7w2YtpnLFJ+r5
-	u0Me82/rMPTEaODi6Hg4x8Mpw81zD1L2kH8RHvuGjPIf0HbexWeyTmYjFUxJT+5WiaaY
-	ok+QECnd7Mey2Ox5Fzys1zOBfb2P+3OY5h84x9hYo1p6MSZ0qwpXrWQ2YYtCMuVDqBmE
-	huKA==
-X-Gm-Message-State: AKwxytf5vxyIDwNUWeOnl3zuk7gLVVZMOcNynTR5F5DV6Eg93U+zK0MC
-	NhQaipJlidLehNPtb0vCif8pIg==
-X-Google-Smtp-Source: AH8x227rcZlDO0GcuHKjsZblXHq5G/HTDHlIx5q9SOhFhxBrAZPA2dl4hILXrMDtO3G483L7JFzjEQ==
-X-Received: by 2002:a17:902:3225:: with SMTP id
-	y34-v6mr15718109plb.399.1517023504934; 
-	Fri, 26 Jan 2018 19:25:04 -0800 (PST)
+	bh=l0IqFSCJd/Z8vgEDGoxTizO6/f6zuvWS0AjS2dbhRIk=;
+	b=RxFdn/nT7606X3ZHDogyyFKJ9USyHiThs/mDc51QegOgI6AuI8nFi8M49IlzyOPrP0
+	ECnbmNB2SWxplCbEVJhxP+vY/q7cebgnlbIvJGxfx4cnuI9TbfsJy8K6U38yU5yv5Ynr
+	7HxTI9c9QIC7WoPGg7QDAe3Uhf/uMtf4WYvuSji1FsIFjOruV4BzSjhjhq+eHthjb7SP
+	a5b/pwNLO6912MwstCcmOvU7pdUIa2Eu+GQ7YU/GCMYOUL2r+IM9S1KmiSn2aUA/pGM5
+	oqD1HrkD6VG1GjWVx+X2tbzpXQAnZmgSLaherxZ7tA4D9nyZOIr5IYv+w6ZGK5otLwoN
+	+5Ow==
+X-Gm-Message-State: AKwxytchrFgirzq1pJPrGtWZ8MdGr6l/0GPxyyHflgCDbSQGOHdYB3xm
+	+1ZtcoQctEBcH2oiE7/6chqYow==
+X-Google-Smtp-Source: AH8x2266unO6FPtTtgD3XspMtUTGjK64HRzShrKBYpLSetJ4W4ny0ay+MDzSFMO4IW/gW0Xgx53xOA==
+X-Received: by 10.99.65.199 with SMTP id o190mr14042111pga.238.1517023505767; 
+	Fri, 26 Jan 2018 19:25:05 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.25.04
+	v22sm6692206pfa.158.2018.01.26.19.25.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:25:04 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:05 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:26 -0800
-Message-Id: <b18def36cfcdcfeaa01b6e9ed078cca2a6b3318f.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:27 -0800
+Message-Id: <df66128a8ae428b8f4f90b0958232917edb6e160.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 26/36] hwloc: fix multilib problem
+Subject: [PATCH 27/36] leveldb: fix checking for SSE flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,44 +58,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:25:03 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:25:04 -0000
 
-From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Use libhwloc instead of lib${PN} to fix problem in case of multilib.
-Otherwise, when installing lib32-hwloc into image, we would have the
-following error at do_rootfs.
+The build_detect_platform-Check-for-__SSE4_2__.patch tries to use fgrep
+with pipe to get the SSE flag. But actually it would fail with error:
+fgrep: /tmp/leveldb_build_detect_platform-cxx.25886: No such file or
+directory
 
-  - nothing provides lib32-liblib32-hwloc = 1.11.5-r0 needed by lib32-hwloc-1.11.5-r0.corei7_32
+That means it can not get the correct SSE flag.
+We should make sure the fgrep command runs after g++ command has
+finished and redirect the stdout and stderr to /dev/null to avoid make
+error:
+Makefile:18: *** missing separator. Stop.
 
-Also, fix FILES variable for libhwloc to not contain .so link file.
-This would fix the QA issue, and the INSANE_SKIP line is no longer needed.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit 303fd6d589250c4a2ef23342d639348464e1a593)
+(cherry picked from commit fa211625598c9cc2ef965bf95548d21930622aaa)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ .../leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch    | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-index d7fdd82..5a335b9 100644
---- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-+++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-@@ -24,9 +24,6 @@ PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 cairo,cairo"
- PACKAGECONFIG[pci] = "--enable-pci,--disable-pci,libpciaccess,libpciaccess"
- 
- # Split hwloc library into separate subpackage
--PACKAGES_prepend = " lib${PN} "
--FILES_lib${PN} += "${libdir}/lib${PN}.so*"
--RDEPENDS_${PN} += "lib${PN} (= ${EXTENDPKGV})"
--
--# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
--INSANE_SKIP_lib${PN} += "dev-so"
-+PACKAGES_prepend = " libhwloc "
-+FILES_libhwloc += "${libdir}/libhwloc.so.*"
-+RDEPENDS_${PN} += "libhwloc (= ${EXTENDPKGV})"
+diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch b/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+index bbabf68..8f93cb3 100644
+--- a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
++++ b/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+@@ -19,14 +19,15 @@ Index: git/build_detect_platform
+ ===================================================================
+ --- git.orig/build_detect_platform
+ +++ git/build_detect_platform
+-@@ -230,13 +230,12 @@ EOF
++@@ -224,13 +224,13 @@ EOF
+      rm -f $CXXOUTPUT 2>/dev/null
+  
+      # Test if gcc SSE 4.2 is supported
+ -    $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -msse4.2 2>/dev/null  <<EOF
+-+    $CXX $CXXFLAGS -Werror -x c++ - -o $CXXOUTPUT -msse4.2 -dD -E 2>/dev/null | fgrep __SSE4_2__ $CXXOUTPUT 2>/dev/null  <<EOF
+++    $CXX $CXXFLAGS -Werror -x c++ - -o $CXXOUTPUT -msse4.2 -dD -E 2>/dev/null  <<EOF
+        int main() {}
+  EOF
+++    eval fgrep __SSE4_2__ $CXXOUTPUT >/dev/null 2>&1
+      if [ "$?" = 0 ]; then
+          PLATFORM_SSEFLAGS="-msse4.2"
+      fi
 -- 
 2.7.4
 
