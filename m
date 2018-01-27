@@ -1,53 +1,55 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
 	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 050677886D
+	by mail.openembedded.org (Postfix) with ESMTP id 7B86978874
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:24:59 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id 13so167377plb.5
+	Sat, 27 Jan 2018 03:25:00 +0000 (UTC)
+Received: by mail-pl0-f67.google.com with SMTP id p5so167658plo.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:25:01 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Voh0sO2CJrcnmyiM3BCA+uBu+VjJ5Nr+d5uXe8v+yak=;
-	b=tYecBGGwzyfzEGpyc5Se+5WGaeoe7mmIr1p0qByA3mF21EPVv8MG1cw8yiSGzBnxHB
-	BJ5MhA0LV2qxMFpHmAAWgrbfSLjFC/ba8EGYQ+gBWilhFeTQQFx8M9fJ6nS00yaA59hj
-	8ZlOIT9VQyXaY39lnKfCaKGe0Kf7ctxxbqi6oWHNbgyHi0g5iqlFIR4zEWPP05kiRDyZ
-	EwixA3vKoM94RvTkj4Evu9nywHuyJgojcleDpu9HmsCfOd/cYoCiKUGZ9Ml3/FRhoEWX
-	X8xgb/4odE2Ca7LW8b95FO+bFDvsGJx+xs9U3OC7ATXda5fmIvXyZUgCIplZBhxPnNe4
-	7xTA==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=2WHnDY4nLrNFKOSOonXSPjnWWnt2Z1eN5iv2lhl/nIQ=;
+	b=ijUaWhE5DJtRwCMCQaPIhuIJHrKUHxAnEem2chCagkLrzDUyxwyznh2/CH7gkRhYMp
+	cC6KL71MDyOKc0FNsekSwMlMweVIHRcGAxXb1vYBHHyXKbi5HtZSa6flRJB8mGa2TUn3
+	tml9d7orTOZe3TNgeIeyhhMXFuHW5DMHlQPHDoL1iLfldTZ6JKAbHdxGwoyPN/KPJAlL
+	TuGkSvhAEBKpnFSQXkLnFShmdQ9MK4fjsyyK2Dfil9V2ku8lRzSKQtP1SYm060o1kHDc
+	8E9rMMeQUv9v9uuCoiMhlt1QeH3btJgvfSKLdfxxVOMdc9MUOCHdxlDImQFpqRsi8/Qw
+	fCRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=Voh0sO2CJrcnmyiM3BCA+uBu+VjJ5Nr+d5uXe8v+yak=;
-	b=e7SiwjzzZbB5fvFU0MUqD0GW6ratWYJeRTECAgnMYBLp3xANvywvItzHaximCK4siD
-	e1VO3Mu+kx35MsYN0ZSAKCKGcjnxxCvYo2uxUxQhWAJx3B3em+4BFmaxU0JTlaGVZbUM
-	Vz5oP3r5tpw64YZQHt3agAABh9eIDWaP81KZKi8KTacrCuCQH8ctsB6raF42oEiJa2lg
-	d0UGs6QDf/ePOmaYE2ozYp3PR9Ix1LJFghYsvI2p4R1ecl+rwrLntFVoOkm0ClRHNWhH
-	TyG4+ZmPSPbfCEbkkQdF5DavUjBB18wa085x6UvcvkCkShm25Di3EuXApPhN8t5QASG3
-	uziw==
-X-Gm-Message-State: AKwxyteTAb2tWZSJW7o+9TonRN0UshRvDqcN/aDgLiWdlK5DpWKzQg9T
-	rEjCCP0bLJeXKfRKuXztuyw99Q==
-X-Google-Smtp-Source: AH8x226FbwoWqGYKehLya+2lNVZnndXWkW+T9haedQhTe5FFQ8HlWxKEQcKI3ASkyaq8ZAEDbEWXJw==
-X-Received: by 2002:a17:902:1c3:: with SMTP id
-	b61-v6mr15791100plb.190.1517023501451; 
-	Fri, 26 Jan 2018 19:25:01 -0800 (PST)
+	:references:mime-version:content-transfer-encoding;
+	bh=2WHnDY4nLrNFKOSOonXSPjnWWnt2Z1eN5iv2lhl/nIQ=;
+	b=Uwimq/Id6v+mjewdukRYDY3A+rYsinL06ZmLL0rfVD/3C2lPm1/sc6yvxISKSIgS2e
+	jbZtW/FanrhymzMKGO27nmaG+iPrH5LNXqFK/rD64hC7RnBrKweO8wpWtO3/oph4u+Go
+	P3CmV+ablcIBHNLrOb1kbEuxJEs5GSRoTMXOubHRmBa1tpTXB23gHDimxfswGjtOxwHB
+	mc3VUPq9KnkTbPr2jz/eEtaTf/itxB/cuCCf1sW2k9ecrHID+CXFbV76iVWgPT8KQz44
+	KHnJ6cjmvfp4HbPWMvFmcj5FYb8+iBeRmnRk1L5u5iS84MECJ4JLeEEP9DJWAmOAaewT
+	R3Xw==
+X-Gm-Message-State: AKwxytc01CDPENo77/QELVX86hVRe0czdF/MJG0GIjCds5OHZNv0TamJ
+	ISOAusP03wAnPB++6OU/dMnD0g==
+X-Google-Smtp-Source: AH8x226/UQBkX3167zFEHiKnreZCEQX1o6EQt6NYAtGOnWgoKNqqf1n+RSrh5PybTsGbM/fDqdDy4A==
+X-Received: by 2002:a17:902:bf0a:: with SMTP id
+	bi10-v6mr9696005plb.181.1517023502194; 
+	Fri, 26 Jan 2018 19:25:02 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.25.00
+	v22sm6692206pfa.158.2018.01.26.19.25.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Fri, 26 Jan 2018 19:25:01 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:22 -0800
-Message-Id: <78804e1d5d2bbc7b351c5bae085d8fc93e035fcb.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:23 -0800
+Message-Id: <2452c72b74154befa837c5ed1f1664ed665c4849.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 22/36] Adding LUA to SDK
+MIME-Version: 1.0
+Subject: [PATCH 23/36] fltk-native: remove fltk-config from image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,32 +63,34 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Jan 2018 03:25:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Romain Forlot <romain.forlot@iot.bzh>
+From: Andreas Müller <schnitzeltony@gmail.com>
 
-A project could need to have LUA in SDK, an example is
-to compile LUA scripts which checks its syntax before embedded
-them into a project compiled by Yocto.
+Make sure fltk-config will not be used accidentaly.
 
-Change-Id: I3c36acd58d45121c3344b5322244bdc0b12061b9
-Signed-off-by: Romain Forlot <romain.forlot@iot.bzh>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit 13c84c645b6126f0cb3d768e8934992f594a82ab)
+(cherry picked from commit 66601de45ff88a2a267d50f27553956611c8a174)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-devtools/lua/lua_5.3.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/fltk/fltk-native.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-index 28d71fa..8f4e8fe 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
-@@ -56,4 +56,4 @@ do_install_ptest () {
-         cp -R --no-dereference --preserve=mode,links -v ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
- }
- 
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-support/fltk/fltk-native.bb b/meta-oe/recipes-support/fltk/fltk-native.bb
+index 353987e..2636287 100644
+--- a/meta-oe/recipes-support/fltk/fltk-native.bb
++++ b/meta-oe/recipes-support/fltk/fltk-native.bb
+@@ -14,3 +14,8 @@ EXTRA_OECMAKE += " \
+     -DOPTION_USE_XFIXES=OFF \
+     -DOPTION_USE_XCURSOR=OFF \
+ "
++
++do_install_append() {
++    # make sure native fltk-config is not used accidentaly
++    rm -f ${D}${bindir}/fltk-config
++}
 -- 
 2.7.4
 
