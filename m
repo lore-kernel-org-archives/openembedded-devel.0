@@ -1,53 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7620178860
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9525B788C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:25:10 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id f4so167677plr.10
+	Sat, 27 Jan 2018 03:25:11 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id y26so1447791pfi.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:25:12 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=5O4K2VpZse35NDywwMhdEczaiNfQTcqY798XoeSdtwY=;
-	b=o/fOJ2Bpe3qjMkD1cVMcDE0x/kFagOHni++pPdgK3cJo/c/EqoYCeAFFvglGarqedF
-	g87UtIM2X+tUNbmvAdPM10e6Z/pKM2VfT/gb6GswGrIhqwiApxe35wZUMPangpjlRf+n
-	3CQgL/u3COFE39RKLpctnLcMoXiz1ExkH5LKsd/upX2yqmwus5vIeTrCIR3y07MdPrR0
-	4s/Zd6sLeaR9mRQQBzfHj2AhfoeIfkPWhYWf4t6L9BNEth1LylBin7UttyNzWV2F1BwE
-	/1zbbYSxKOVw2NUGsbGHBeTt0mmkkU14dvbSyG9LnUB/JXudiH3RX14mnRrpwOyRArQP
-	o0QA==
+	bh=OvettxvBOIeSgbmp6UbV+zdXRYDjbCaSWjzeNtsaFew=;
+	b=uhUqE2CmqyjDUMogOVDFQg7wyFyrunleb0zYYr8mmD9siMYHMRFussViK2a+9IaRH+
+	IVUxDf06mVatby/QyRIkwi1+zet/CQcQBn0Zc1GZ6mCjCOgtVnKdj0sovL+oprmpkVdo
+	XOSiFuKeUgOx5d1Szmf6sJTLzd8SRlYr7B5JK49CGlirArY/FO4MlovGX9/XqDlDkab5
+	u8T21j/kp6TsQLX+b/wI6g60l6SFDkbQBmhQGYJZYGBy8KTC1+Rb7UDh/p5/RuIrp9hi
+	WYehYh3lONah9D9qhhotAS2/lhFLiaACc2BFROM36oXEtbDlTnsKYTdNALEZkG8ClQDw
+	tY/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=5O4K2VpZse35NDywwMhdEczaiNfQTcqY798XoeSdtwY=;
-	b=ZvgRZjH3UaFMJEuxJg9dRCzElwvrzO6ka+fOG/05BVJO8qffBZzDX/4GXiaNH1DAC6
-	qiWqrK/2FkWwx9ckZIzAgfNLpzEhzUEiWEyC4YinVno1XUNLg6V141xlZ2IleYOHmEK1
-	rPGxziWQftYHzLH9wluUin/vqXAkkju/SuRspSQHwchjwR83JU1HN/X3wzAzn8B5fy8q
-	nct8rzYPQWS+v7k/VvezZ1ZPedFvvGZidK0esngDFyF6IZBZX6g6fHhli0H8qxPEAynz
-	eNhVXpXmcpWgGOLcGYbBG50ubxAOspkYZ12B3phmJtrOFVUCbsc5BpHpkFibRVhma32d
-	XqsA==
-X-Gm-Message-State: AKwxytcr7ejYIoZ6fWkV3iv/UQ2zeI7HmqxW4oqOsWYykPNEMLmGi8aT
-	Kmcr9WlA9UTt8r3QQXJLReM=
-X-Google-Smtp-Source: AH8x226wUMHiurBLZGDu7XaAH3tI6KXNxlAFeUsD9XKekNlKVU2nHxWO9R0aJgZdm2FV4+ob0944Eg==
-X-Received: by 2002:a17:902:d681:: with SMTP id
-	v1-v6mr15665627ply.170.1517023512159; 
-	Fri, 26 Jan 2018 19:25:12 -0800 (PST)
+	bh=OvettxvBOIeSgbmp6UbV+zdXRYDjbCaSWjzeNtsaFew=;
+	b=FlR0ncKXlNrnBOemTVNFrWYMlVknYOi9FVPP9fgJXqS/ZS4T7zWmjoE3XIHKkl/PQV
+	loRZGOIgtwrueqSbDANi8L90TbD/9hbpU1ORZMHcuaPygUPaqCPUzqKq8UrISb9wL2d3
+	MS+pUu5dPv50Zdpnp1Jc81CBJC9cUUmcyk4DR0WMCTLOq6Kt6hciCVYtRj1sfFcum7g0
+	/Xh7Jk5AGjh0nDBiZ9sVf5WLjrty8+lKIHJomBhbLr9yswcFUR932GC7m1Xs8VhQ5XJj
+	ctTg1QeVHftW9Ye2XZ2dTnUAUBFi76SoAXzssy2/3az0IU3RUapYylkDHhisZ/2XGVvy
+	fQLw==
+X-Gm-Message-State: AKwxytczFp7PmHP4DVuFfIC7ybAiQcNnKrwuX7QQHPtsAk7N0acqx1/9
+	fEuI2h2l9TfIeRzFApuoxFikxw==
+X-Google-Smtp-Source: AH8x2245c3ty4I3DGb9wnncyw1doWQPuw3M+g7/N1MXK/BdsxhU/T1srQLGzPUtzEOuPOKcYxIBbYg==
+X-Received: by 10.98.16.79 with SMTP id y76mr20897489pfi.111.1517023513017;
+	Fri, 26 Jan 2018 19:25:13 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.25.11
+	v22sm6692206pfa.158.2018.01.26.19.25.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:25:11 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:12 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:35 -0800
-Message-Id: <31556ce39f46bc0e8483fe077c8fda834ee6b91a.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:36 -0800
+Message-Id: <84119b2d1704197f57b1491e71c55f00e1ed7cc3.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 35/36] dialog: update SRC_URI
+Subject: [PATCH 36/36] uw-imap: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +59,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:25:10 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:25:12 -0000
 
 From: Yi Zhao <yi.zhao@windriver.com>
 
-Update the SRC_URI since the upstream server is changed from
-ftp://invisible-island.net to ftp://ftp.invisible-island.net
+Switch SRC_URI to fossies.org since the original site is not available.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit 550acd329584cb3fe9f167cd85e1efdace304e8a)
+(cherry picked from commit 884e4ba5353dda109ec101bd7e6c588e41665807)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb | 2 +-
+ meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb
-index bff3d97..85dede1 100644
---- a/meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb
-@@ -8,7 +8,7 @@ DEPENDS = "ncurses"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index 0849e88..91003f6 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a6a4ddbb7cd2999f6827ee143f6fcd97"
  
--SRC_URI = "ftp://invisible-island.net/dialog/dialog-${PV}.tgz \
-+SRC_URI = "ftp://ftp.invisible-island.net/${BPN}/${BP}.tgz \
-           "
- SRC_URI[md5sum] = "a39ec183517bc1feaff017d067300b8c"
- SRC_URI[sha256sum] = "453095abaec288bfbc1ca9faced917e17742cff1ea45ec46210071ac153562f9"
+ DEPENDS = "openssl"
+ 
+-SRC_URI = "ftp://ftp.cac.washington.edu/imap/imap-${PV}.tar.gz \
++SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
+            file://quote_cctype.patch \
+            file://imap-2007e-shared.patch \
+            file://imap-2007f-format-security.patch \
 -- 
 2.7.4
 
