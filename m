@@ -1,54 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 818B678883
+Received: from mail-pg0-f45.google.com (mail-pg0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id DD59478869
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:24:55 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id t12so1460988pfg.2
+	Sat, 27 Jan 2018 03:24:56 +0000 (UTC)
+Received: by mail-pg0-f45.google.com with SMTP id 136so1368972pgd.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:24:57 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=WlIWz4wOQVzpisJUA4JPUg4uVX+gGyQ+EgKeV05AsLA=;
-	b=LdyGVjzMHrIRfothf8eLI4jzWTCjy3yKL/d8UwOpihA+NVou+t21CJfDs0XD8WR5s3
-	5eDAYGroBk4l07OkeuvkK/zVwHaXIi09rBEyw49PyZOM/K2dSMgfjKlNJzObFoRl73vQ
-	Wk1VEBDk8C7aK8cNvPKTu4flzuMnbXzaW1tet8yKmKD7hWv/AS6U+ywm/eF11r647WU6
-	L4G+JvakpJi+48nSXfhwTDHbFxxlT36uAp3XaSq8P5fS/+4o7RBh5mAg3FkGUBI8JEOT
-	DYU4AsxpaO687Oz893IvXBlKp2Bqq2dt4ZH0wH4DEv1ggGxWYYKF+OLYu5ldFRualpE7
-	itLw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=zlnl0qYBdlb8b9wZK9QuZW4SWzJryViMsplo7gJ9xxo=;
+	b=FSXqEyxsQogBCFcLfbWdlkhCv85SRC39w0+YtSDMckxINo/uvDNO71u3PCr6XK8qvp
+	TbpR5iv27MZp0+LRvBu3AtylRp8RfIoEGbGgb0OoJcfmhs2jn5w1QmaeIa2yShb11Zs0
+	HUnsSxYD9K7v57ImWobIIo6hfIRYLtPGUdt/4rcQYpUq3FkGdgrDjNuJwPcmD5gTvq+a
+	zNnrCacwpmlWwwAmhZgkpgvuSUbt/xy4+VPyAc4iAsJgRwAOBrmj/6WQe/+TcHTB2w4n
+	c+UzHpi+WYND6TxngQP1dnQdfVaxHeWOFAbFVlCg3BQgBk/1+YRC6vNCICk7c9VOTfVO
+	H7PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=WlIWz4wOQVzpisJUA4JPUg4uVX+gGyQ+EgKeV05AsLA=;
-	b=TFveStzwRRpQ2xV9fDyRpvs3NVATY9EPynqNE0PlBMz5w5Nr/hv91RRQugip6JEpOr
-	brWFI6UjOO6ct2deLSJjVZDXN0mAgr5FVhnCgv5s/9jW9gQeodVgz8w8esTJzOzBYjRt
-	nyToPd/7DipW040k7yjkWhFavgkRd7pfzr7yE5ay+Lj7aeJyIqHM7hinrDF2Ct9XfuzH
-	xUyMvHadKr6At/1eFqYcJvu5g13GFttHF+olB2LvjR229HPAF1azIDA4Q+j3upSsyyul
-	BXtL7kMJ93BPlZJsmNcbVVM0Ot44f7A1ezc9hGCqgtXvD79QWKwa3ebNt2o7LIWiqzua
-	ahLw==
-X-Gm-Message-State: AKwxytfUc9QAxxulSmDWE9OYSJWYVQfgBHq0BcpB4nCcvWUKqKURFMdh
-	dL91NLcEGbB0Xv2jFmAVztupNw==
-X-Google-Smtp-Source: AH8x226+UyPKWWkbyzACgn4oYSB60p97UuwzH4kxXMjT8H4i8C3gKg1W7uNMGOqHEypeOn2DS4N/KA==
-X-Received: by 10.98.137.197 with SMTP id n66mr20947701pfk.70.1517023497210;
-	Fri, 26 Jan 2018 19:24:57 -0800 (PST)
+	:references;
+	bh=zlnl0qYBdlb8b9wZK9QuZW4SWzJryViMsplo7gJ9xxo=;
+	b=ZEXskGalWZyIlgmO7drAV94+u7rlUw2mbeiUheNAno8/Qa7tPCVQhDHBcZZUs9C5tX
+	s0gOPBJw2d4fiam6rMhkKQUHRHckBTnS+G3fIGaCwTnULK4Jpl3gCQeOdfyefPAn4MS3
+	4JIpoJz+VcYZ/jPDE93qkGw6gey/8RgU0JNZ412MbxSNlT2td5Gz1tpu8vFLF57GVQUO
+	+8oexzV7fWbdlCwzVDj0y/+xXihVBVUAZ2k3tl+nxeENIZ/uvZWHansIhUGigVzf00uX
+	nI4KwRoK0Sli5kWZUG5rx+GH4f/nAf8cuKhC4oZ7E/ShT616sv7yWilz5ywfQsFv6nKw
+	35kQ==
+X-Gm-Message-State: AKwxytcgNdIMW5vZQK0C1d0PP9c/rOaXfnht33LbPovCgK95DyZX5MpL
+	qRypsD24eBTFt7ncWzD7lhXV7Q==
+X-Google-Smtp-Source: AH8x226iqGOUPjINoFSZOr9K3PGn06hv+7+ltQF+PdCJ0vDmoAtf7Sr5b/Qx2GZMYSNkObygbSgDkg==
+X-Received: by 10.98.76.150 with SMTP id e22mr20676638pfj.28.1517023498058;
+	Fri, 26 Jan 2018 19:24:58 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.24.56
+	v22sm6692206pfa.158.2018.01.26.19.24.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:24:56 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:57 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:17 -0800
-Message-Id: <b1a842876c3fe0af5209fe6314fb7de799d9eb3b.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:18 -0800
+Message-Id: <154290781cf4b8397f5457e29881894f2c43db52.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH 17/36] dfu-utils-native: fix do_deploy sstate handling
+Subject: [PATCH 18/36] Move RDEPENDS on libasound-module to bluez4 since it has been removed from bluez5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,40 +58,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:24:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 27 Jan 2018 03:24:57 -0000
 
-From: Stefan Müller-Klieser <s.mueller-klieser@phytec.de>
+From: Tobias Olausson <tobias.olausson@pelagicore.com>
 
-We need to install to the sstate input dir and not the output dir, so
-sstate handling will work correctly.
+See also: https://patchwork.openembedded.org/patch/139422/
 
-Signed-off-by: Stefan Müller-Klieser <s.mueller-klieser@phytec.de>
+Signed-off-by: Tobias Olausson <tobias.olausson@pelagicore.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-(cherry picked from commit 1ef92d2423d6d6546e4f0585478540212b26f3a0)
+(cherry picked from commit cf993a2c9e10dea286979850c4c5ecd751735ce8)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ .../recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb
-index 7a7a662..aeca23b 100644
---- a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb
-+++ b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb
-@@ -8,9 +8,8 @@ SRC_URI += "file://0001-Revert-Makefile.am-Drop-static-dfu-util.patch"
+diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+index 317f972..f2a16dc 100644
+--- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
++++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+@@ -15,13 +15,13 @@ inherit bluetooth
  
- do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
- do_deploy() {
--    install -d ${DEPLOY_DIR_TOOLS}
--    install -m 0755 src/dfu-util_static ${DEPLOY_DIR_TOOLS}/dfu-util-${PV}
--    rm -f ${DEPLOY_DIR_TOOLS}/dfu-util
--    ln -sf ./dfu-util-${PV} ${DEPLOY_DIR_TOOLS}/dfu-util
-+    install -m 0755 src/dfu-util_static ${DEPLOYDIR}/dfu-util-${PV}
-+    rm -f ${DEPLOYDIR}/dfu-util
-+    ln -sf ./dfu-util-${PV} ${DEPLOYDIR}/dfu-util
- }
- addtask deploy before do_package after do_install
+ RDEPENDS_bluez4 = " \
+     obexftp \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'libasound-module-bluez', '', d)} \
+ "
+ 
+ RDEPENDS_bluez5 = " \
+     bluez5-noinst-tools \
+     bluez5-obex \
+     bluez5-testtools  \
+-    libasound-module-bluez \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', \
+         'pulseaudio-module-bluetooth-discover \
+          pulseaudio-module-bluetooth-policy \
 -- 
 2.7.4
 
