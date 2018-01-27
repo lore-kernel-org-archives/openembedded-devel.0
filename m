@@ -1,51 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id EE18978873
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A82D78864
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:25:06 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id m136so1363996pga.12
+	Sat, 27 Jan 2018 03:25:07 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c6so1452398pfi.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:25:08 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=HfUxk3zfQowBB+4nYj/pqKtXtFSEtgF7PoucgQ8atKw=;
-	b=og5RkraMJ5wzpgPkq3eM6SXexX+bJepne8yfVhEjhaqYKX2u2sX0Nbe0EuwvAYZgZB
-	S0bukSKGN+BfTqMPg/ChPQAQnweZCszy+bpuJxJ5f+PuCgAmo3FnMNhHHBkBQ1HQnbwc
-	OmSU+uFw95CzAs4D1BdqLaQvVm4RbEih0Rxb35OB4QmowAzxTocvSh/fNQHkPV6GByl0
-	+iXzYUkyKmTrrIi17CbGYCm+MyCPMjdxkZFD8NaTvb1RA9B0JltSGJK090qKu71CMR7A
-	LY01oY0WLKVnq3rDJWup35IsmszHME9mV8bcW8FLUhlEcLQi4aIRh4G79OSo7+sPE9VD
-	YFKg==
+	bh=cZM2Uaw+WKPd20qrsWDNG3xtR5cQD8XQPIFsX7/Yvuo=;
+	b=m+1Pbynio4ZA4cPsuPxx3tcIycfjQY+aadVdRKuPsI7jcySGvqnPaTMgPGByJskJJb
+	yNUIuPDYpm+f1eA/w8Mo82lV/vh5H3ZAs1eEIX22UuIzK6eqjBTIxiWkvzV7NnapMXdj
+	jTEOyOP/V0kToZ/oJ0gXPJU4GlIOXCiq6LeA1b6WpXKuFyVH6LcpVo0OvSMBa1ne5cX4
+	E0y4mh//g1F41kDhbcJr03yhnytkWDC/WOb8UEGjwL8C+sQUSAMZkwCzn7NYl5LqCsXf
+	FJ/N2cqNkjNsC/vJcV/Y774BVZLd0eHSyZlbJfi5DjXKjmZ+ipdBMmrrQEIeM6KjCTUn
+	zGCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=HfUxk3zfQowBB+4nYj/pqKtXtFSEtgF7PoucgQ8atKw=;
-	b=qTiKEFJ1vvhS7jYXB4K3xIlTltJ8GR1EqAJ5Q5rxeRJe31H7eci4uMncRsDyP5DW4N
-	yct6drxrwlyEJdneL0u/j4E2gajjXN5r0uz1zC2rjXTBWkxutoDWL7UWhghgV4gbq28m
-	d8bztHHx4jB+teC4Py82sSkORdtsZlh1/UOIqNwtzMdp0MHl3zoWyEkXku5QVsJdUoc8
-	dVX8mBSKXX8mlcE9xEznGqtyEHG56AhEQ1VCuOzzgVcs9tjeed0IXZc0FOIShoZ3cMl2
-	+mJ/jDfka47kqvbUxRFZbgoONpuWlcCE/GWPkRVZd/lUn2nlXh8+5PrMdIBCOCXsv4rA
-	rHBQ==
-X-Gm-Message-State: AKwxytfHSSgm0+DuXwkPgD4gWGSt3zgquZuKAPcbcnb5z5Sr2sp95ghy
-	KsnXf/ttoiqCMzpl5a94IvY=
-X-Google-Smtp-Source: AH8x225rnHSMAwAx+yFEhUe3AvWgu2XMTUdY61iCNbkmSmnFIHzh+gmyxk/u/6MhKZO4EQ4wp+JYDQ==
-X-Received: by 10.98.134.206 with SMTP id x197mr9202714pfd.82.1517023508174;
+	bh=cZM2Uaw+WKPd20qrsWDNG3xtR5cQD8XQPIFsX7/Yvuo=;
+	b=fViCkJDMS4pO/E/zTCp26Xr41M2moHPCw/3/ncmjMh8XYJk/SPZhFf+j6vjcZD0m/9
+	O5f35h0q8CPvIEP2316AGZpeGeZoAUz+N78iCLYXx47t8JL4chlZ9nIUjaui3sbuM7aT
+	B42GG58XJTkIQ1eQhEAhCA+Vg8UheoWZGenc/jw/9D/A/yMy8Yr3IjKIZsu5MqMmOWei
+	AuDSZpJcpxWg5ODYoZ0kZiLyUwzgL7+GOFCMF7ERXoV+TuIKG5GBXeH3MZa2YMEKQgDQ
+	CBgZOyYzM6AJZ+Hc92BoI+S5Wcp89KD/PyM6ARHwbMQTCR56JnwvXyWVnxR+hdz3sjpl
+	3WUA==
+X-Gm-Message-State: AKwxytc/ZWH/cslk4FdCeV9Y/KCLw0YbeSwBvjRCGPTYJdDqdEjySd78
+	tzvrSfRHRHY44f9ExBQgY3A0pg==
+X-Google-Smtp-Source: AH8x225IlJeE8Wy4HBUSHExtGwfdhKiDTcvUMFBGcqRED2ri2E1aAdlSWqUCMIgfT4X5PMU9J3tlFg==
+X-Received: by 10.98.15.27 with SMTP id x27mr21233911pfi.197.1517023508972;
 	Fri, 26 Jan 2018 19:25:08 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.25.07
+	v22sm6692206pfa.158.2018.01.26.19.25.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:25:07 -0800 (PST)
+	Fri, 26 Jan 2018 19:25:08 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:30 -0800
-Message-Id: <083bef011a3ebac67b4a5d56ec10d8430ab3d6c0.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:31 -0800
+Message-Id: <d5400dd1b2b5fb40588c40f2e5a8e83ace1e7b7b.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 30/36] dnsmasq: update SRC_URI for versions 2.69 and earlier
+Subject: [PATCH 31/36] arptables: Fix do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +61,35 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Jan 2018 03:25:07 -0000
 
-From: Andre McCurdy <armccurdy@gmail.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 
-Versions 2.16 to 2.69 have now also moved into the archives folder.
+We need to run oe_runmake install with DESTDIR variable to install all
+arptables files. Without this the only file installed in package is
+systemd unit.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-(cherry picked from commit d338d219dfbcbbdd133c7d4364bc8a1b19835e0b)
+(cherry picked from commit f122ecd7171b2258452131cc75d809b02a1f4f02)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/arptables/arptables_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-index ef79c5f..4f4bbf1 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-@@ -6,8 +6,8 @@ LICENSE = "GPLv2 | GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://COPYING-v3;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index 274a55d..cec1d1f 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -23,7 +23,8 @@ inherit systemd
  
--#at least versions 2.15 and prior are moved to the archive folder on the server
--SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 15]}dnsmasq-${PV}.tar.gz;name=dnsmasq-${PV} \
-+#at least versions 2.69 and prior are moved to the archive folder on the server
-+SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 69]}dnsmasq-${PV}.tar.gz;name=dnsmasq-${PV} \
-            file://init \
-            file://dnsmasq.conf \
-            file://dnsmasq-resolvconf.service \
+ EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
+ 
+-do_install_append() {
++do_install() {
++    oe_runmake install DESTDIR=${D}
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -d ${D}${systemd_unitdir}/system
+         install -m 644 ${WORKDIR}/arptables.service ${D}${systemd_unitdir}/system
 -- 
 2.7.4
 
