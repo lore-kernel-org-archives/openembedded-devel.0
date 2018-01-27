@@ -1,53 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
-	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 393077885C
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D6A2B787DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 03:24:40 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id t8so166757plz.1
+	Sat, 27 Jan 2018 03:24:41 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id t12so1460832pfg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jan 2018 19:24:42 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=T/zHgCzSk4lom1jeE4ZAEUqKEPNKpfHmuYeSV26SXFI=;
-	b=lnvfsyVfyJqyjTQ05OddHn/4nUg9BYiT1uZHYajr3DAJxFhDRgrPlltrFuK3vj3gNw
-	Rfwp392L3ono/L6kLOc1xILwebK9qB8eiOX7b0+t4BhUgV7DGU3LYcoVviiq6WU+dga4
-	V1XgMhgWk6J5IGyK0qgBylPnMQsMYZ8Zhp5yVoT89FzrbPbhZ/dFKb2WUmdYkCK5L3nE
-	zFzJjHhp+kHSf1HIm2mERMd1YwsLpzOP1ORsIn97RlWVuiVpgEvQWcciSYbLi9tPUMsv
-	qGSB4kK3AlJ3TKgrpc8UTeW8PmcRyeCISQsehMA34dK+MpFiEw8esHziSv58u22J1PCm
-	aCYg==
+	bh=nGHG25fo57jeJU0EKv0FrhXMYX3gTon7IvdayYtd71s=;
+	b=vU4EYaOEL6e90wfynIolYnPyTSV/vtEIcoZOrNbK9UQF6nFM5nEtuOkn9L5Dz2YmEm
+	5EB8PigO3zPi2yNZtNY6cl9SPL/xozUIdi0BMwPKmCyKjnpHHZHqA5MV6Pmf0ZU+3pZ6
+	u5z72VTP5PcxTmYJ2rxzAoNqIXmXOyIC7Vrq2cg9fmshUPtMqBki8Xov35EJ2VUJweKp
+	44yZRDa26Vf3BO+7qjZV74UShqC3hShW2eg4Zpaa51/6EuwC+/CD2AKoXQMAicPL25LN
+	FsGk32c7pWH7uXQoxddU44T9F1Zt+iOPhWSlPCaTRt7Obg5nI5PYsQp/C3TUdaL9Dabb
+	ZUfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=T/zHgCzSk4lom1jeE4ZAEUqKEPNKpfHmuYeSV26SXFI=;
-	b=BY0IFC+Tf962q0dkWQhrlxlTSN0MrcGOmicFC+vzqbDfxka9oUjlKs7Tg7j96Wkuyb
-	E7/jIklw7Y77d5//IFGwhRvso3myEJ3Fsju3dY4WpG6yOA5N+8Qy/cka4AM/4gLG3wHI
-	Q0t5tR6GluZc+fslpKWWQWiYufl12PO/gd/+heK5CAwZT2eGu/dTH40pKwJyO87hsgid
-	H7TKl//Fk64IFoOgDs/P8DG8+dtot0mkgZ/Y5f8VPTZGE7wHg62mh3grIiQ6+0qeaen0
-	XJhhMda5l/T5omkomCKeJjCN/aCgk7fBW6+jPTyf4WSrAKagSPPv7n71PjTLYXSxvAs7
-	U+NA==
-X-Gm-Message-State: AKwxytcTtn7OqEID+V1tuujIq22czDXMcYfIpAr9bboGNOsXPOJYyON5
-	s+0qzvxncgtVMekk+IEFAe4=
-X-Google-Smtp-Source: AH8x224BaoHNUAF5sSTiTm0uKArY/COocpXw3C2wp7/LzEZ//5fQrMneFBoK3q0dUpLxe6KQI6UvIg==
-X-Received: by 2002:a17:902:6d09:: with SMTP id
-	s9-v6mr16159022plk.176.1517023482320; 
-	Fri, 26 Jan 2018 19:24:42 -0800 (PST)
+	bh=nGHG25fo57jeJU0EKv0FrhXMYX3gTon7IvdayYtd71s=;
+	b=TPdQwvcAGPf6VEYnNRIqygU//g7H7/jg4TAbUViS3b6oDkhYjqcCSkbmnTZhCxuoZm
+	ZrIUHptdaHilnQCG7qvNfmsWONekstgobbbr3eOgV39tXaTauvOR1HRw8WZwJAHJQ3cS
+	pfT3SD0XpyvvJY6gqxA30IEUSxm74HxMiDsNr8miKvmslpFjpekv1XXKlSG1YrK4lnvC
+	Ffbpg3wPmBFQb25U74EDKqhwzU1yYA/GPgJFuuWH0ODbNl+TAcfTTMbBh50Cr50RxIOe
+	w2hG+l+GC+49L7YBtznFwfhvs+GC2ZdVnJajZdULDSRqMyKerIMlBBmAS0iqPaKHQ4at
+	qXiQ==
+X-Gm-Message-State: AKwxytfIMInYFyAkw04PnId4k7V5dOjhUU/e+YqFGhuZIfyMFBr+wyTM
+	XS6gTMruXoj+HLJ8fOw2uzg=
+X-Google-Smtp-Source: AH8x225a/UgHBAJtRT/dI9vl1VWMJvV7Zg1JhCeHKM6u7C93ogo6Kfd23mYoi36m4c2B6q2mRoPh/A==
+X-Received: by 10.98.75.146 with SMTP id d18mr21095019pfj.11.1517023483239;
+	Fri, 26 Jan 2018 19:24:43 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:2999:2a82:b9b6:e74c])
 	by smtp.gmail.com with ESMTPSA id
-	v22sm6692206pfa.158.2018.01.26.19.24.41
+	v22sm6692206pfa.158.2018.01.26.19.24.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jan 2018 19:24:41 -0800 (PST)
+	Fri, 26 Jan 2018 19:24:42 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jan 2018 19:24:01 -0800
-Message-Id: <a58438d441fcb836ac6a7b8af3126455812025a0.1517023286.git.akuster808@gmail.com>
+Date: Fri, 26 Jan 2018 19:24:02 -0800
+Message-Id: <ee8272f71176d5e99efce289bfbf3565c7ad1ca7.1517023286.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1517023286.git.akuster808@gmail.com>
 References: <cover.1517023286.git.akuster808@gmail.com>
-Subject: [PATCH 01/36] gperftools: Fix build on musl/mips
+Subject: [PATCH 02/36] tslib: update project homepage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,55 +59,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 03:24:41 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 03:24:42 -0000
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Martin Kepplinger <martink@posteo.de>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+The berlios project has been dead for a long time. tslib is hosted and
+developed on github for years already.
+
+Signed-off-by: Martin Kepplinger <martink@posteo.de>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-(cherry picked from commit 738bea45bc51d9a78a3d46ee8c18390427ccd547)
+(cherry picked from commit 0d220e002e4f525469f0c24e0585318d2178e7a1)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/gperftools/gperftools/sgidef.patch  | 17 +++++++++++++++++
- meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb  |  1 +
- 2 files changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-support/gperftools/gperftools/sgidef.patch
+ meta-oe/recipes-graphics/tslib/tslib_1.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch b/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch
-new file mode 100644
-index 0000000..7e1a23b
---- /dev/null
-+++ b/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch
-@@ -0,0 +1,17 @@
-+sgidef.h does not exist on musl and its not needed to compile
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Pending
-+Index: git/src/base/linux_syscall_support.h
-+===================================================================
-+--- git.orig/src/base/linux_syscall_support.h
-++++ git/src/base/linux_syscall_support.h
-+@@ -164,7 +164,7 @@ extern "C" {
-+ #include <endian.h>
-+ #include <fcntl.h>
-+ 
-+-#ifdef __mips__
-++#if defined(__mips__) && defined(__glibc__)
-+ /* Include definitions of the ABI currently in use.                          */
-+ #include <sgidefs.h>
-+ #endif
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb b/meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb
-index 8ce376c..ecac6c5 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/gperftools/gperftools \
-            file://0001-include-fcntl.h-for-loff_t-definition.patch \
-            file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
-            file://disable_libunwind_aarch64.patch \
-+           file://sgidef.patch \
-            "
+diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.1.bb b/meta-oe/recipes-graphics/tslib/tslib_1.1.bb
+index 502034a..e7c48ff 100644
+--- a/meta-oe/recipes-graphics/tslib/tslib_1.1.bb
++++ b/meta-oe/recipes-graphics/tslib/tslib_1.1.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "Tslib is an abstraction layer for touchscreen panel \
+ events, as well as a filter stack for the manipulation of those events. \
+ Tslib is generally used on embedded devices to provide a common user \
+ space interface to touchscreen functionality."
+-HOMEPAGE = "http://tslib.berlios.de/"
++HOMEPAGE = "http://tslib.org/"
  
- inherit autotools
+ AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
+ SECTION = "base"
 -- 
 2.7.4
 
