@@ -1,25 +1,23 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 98C677888F
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 00894780BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 09:29:30 +0000 (UTC)
+	Sat, 27 Jan 2018 10:24:33 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Jan 2018 01:29:32 -0800
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Jan 2018 02:24:35 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,421,1511856000"; d="scan'208";a="13446863"
+X-IronPort-AV: E=Sophos;i="5.46,421,1511856000"; d="scan'208";a="13389003"
 Received: from wrath.jf.intel.com ([10.54.70.11])
-	by orsmga008.jf.intel.com with ESMTP; 27 Jan 2018 01:29:32 -0800
+	by fmsmga007.fm.intel.com with ESMTP; 27 Jan 2018 02:24:34 -0800
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Jan 2018 01:29:03 -0800
-Message-Id: <20180127092903.17475-3-timothy.t.orling@linux.intel.com>
+Date: Sat, 27 Jan 2018 02:24:28 -0800
+Message-Id: <20180127102428.16599-1-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.13.6
-In-Reply-To: <20180127092903.17475-1-timothy.t.orling@linux.intel.com>
-References: <20180127092903.17475-1-timothy.t.orling@linux.intel.com>
-Subject: [meta-perl][PATCH 3/3] libmime-types-perl: upgrade 2.14 -> 2.17
+Subject: [meta-oe][PATCH] mraa: fix build for musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,56 +30,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 09:29:30 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 10:24:34 -0000
 
-* Fix RDEPENDS
-* Install bin/collect-types
+* be16toh and le16toh are defined in endian.h
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- ...types-perl_2.14.bb => libmime-types-perl_2.17.bb} | 20 ++++++++++++++++++--
- 1 file changed, 18 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libmime/{libmime-types-perl_2.14.bb => libmime-types-perl_2.17.bb} (61%)
+ ...o_driver.c-include-endian.h-to-fix-musl-b.patch | 29 ++++++++++++++++++++++
+ meta-oe/recipes-extended/mraa/mraa_git.bb          |  2 ++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch
 
-diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.14.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-similarity index 61%
-rename from meta-perl/recipes-perl/libmime/libmime-types-perl_2.14.bb
-rename to meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-index ade0a062a..414753030 100644
---- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.14.bb
-+++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
-@@ -14,13 +14,29 @@ LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[md5sum] = "c1b9b7dea40fbb96c0e0048d10d66268"
--SRC_URI[sha256sum] = "4049cf0fc05205893f25fdbe07d1ab12bfc72259517db2c3348c1d1059730070"
-+SRC_URI[md5sum] = "6f1441addab947137bac92c379a47ba3"
-+SRC_URI[sha256sum] = "e04ed7d42f1ff3150a303805f2689c28f80b92c511784d4641cb7f040d3e8ff6"
- 
- S = "${WORKDIR}/MIME-Types-${PV}"
- 
- inherit cpan ptest
- 
-+RDEPENDS_${PN} = "\
-+    perl-module-base \
-+    perl-module-file-basename \
-+    perl-module-file-spec \
-+    perl-module-overload \
-+"
+diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch b/meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch
+new file mode 100644
+index 000000000..401949e2e
+--- /dev/null
++++ b/meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch
+@@ -0,0 +1,29 @@
++From 6c2649718fc9818da0d602a0b4767ea21a367e9e Mon Sep 17 00:00:00 2001
++From: Tim Orling <timothy.t.orling@linux.intel.com>
++Date: Sat, 27 Jan 2018 02:06:36 -0800
++Subject: [PATCH] examples/iio_driver.c: include endian.h to fix musl build
 +
-+RDEPENDS_${PN}-ptest = "perl-module-lib perl-module-test-more"
-+#RSUGGESTS_${PN}-ptest = "libmojo-base-perl"
++* be16toh and le16toh are defined in endian.h
 +
-+do_install () {
-+    cpan_do_install
-+    install -d ${D}${bindir}
-+    install -m 755 ${S}/bin/collect-types ${D}${bindir}/collect-types
-+}
++Upstream-Status: Pending
 +
- do_install_ptest () {
-     cp -r ${B}/t ${D}${PTEST_PATH}
- }
++Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
++---
++ examples/iio_driver.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/examples/iio_driver.c b/examples/iio_driver.c
++index c5a0181..e3dc438 100644
++--- a/examples/iio_driver.c
+++++ b/examples/iio_driver.c
++@@ -23,6 +23,7 @@
++  */
++ 
++ #include <unistd.h>
+++#include <endian.h>
++ #include "mraa/iio.h"
++ 
++ static void
++-- 
++2.13.6
++
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index c4b9c6f90..e1d593cbe 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -10,6 +10,8 @@ PV = "1.7.0-git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http"
+ 
++SRC_URI_append_libc-musl = " file://0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch"
++
+ S = "${WORKDIR}/git"
+ 
+ # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
 -- 
 2.13.6
 
