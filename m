@@ -1,25 +1,25 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E74078889
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 98C677888F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Jan 2018 09:29:19 +0000 (UTC)
+	Sat, 27 Jan 2018 09:29:30 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga008.jf.intel.com ([10.7.209.65])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Jan 2018 01:29:20 -0800
+	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Jan 2018 01:29:32 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,421,1511856000"; d="scan'208";a="13446843"
+X-IronPort-AV: E=Sophos;i="5.46,421,1511856000"; d="scan'208";a="13446863"
 Received: from wrath.jf.intel.com ([10.54.70.11])
-	by orsmga008.jf.intel.com with ESMTP; 27 Jan 2018 01:29:20 -0800
+	by orsmga008.jf.intel.com with ESMTP; 27 Jan 2018 01:29:32 -0800
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Jan 2018 01:29:02 -0800
-Message-Id: <20180127092903.17475-2-timothy.t.orling@linux.intel.com>
+Date: Sat, 27 Jan 2018 01:29:03 -0800
+Message-Id: <20180127092903.17475-3-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.13.6
 In-Reply-To: <20180127092903.17475-1-timothy.t.orling@linux.intel.com>
 References: <20180127092903.17475-1-timothy.t.orling@linux.intel.com>
-Subject: [meta-perl][PATCH 2/3] libio-socket-ssl-perl: upgrade from 2.052 -> 2.054
+Subject: [meta-perl][PATCH 3/3] libmime-types-perl: upgrade 2.14 -> 2.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,53 +32,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 09:29:19 -0000
+X-List-Received-Date: Sat, 27 Jan 2018 09:29:30 -0000
 
-Changes:
-
-2.054 2018/01/22
-- added missing test certificates to MANIFEST
-
-2.053 2018/01/21
-- small behavior fixes
-  - if SSL_fingerprint is used and matches don't check for OCSP
-  - Utils::CERT_create - small fixes to properly specific purpose, ability to
-    use predefined complex purpose but disable some features
-- update PublicSuffix
-- updates for documentation, especially regarding pitfalls with forking or using
-  non-blocking sockets. Spelling fixes.
-- test fixes and improvements
-  - stability improvements for live tests
-  - regenerate certificate in certs/ and make sure they are limited to the
-    correct purpose. Checkin program used to generate certificates.
-  - adjust tests since certificates have changed and some tests used
-    certificates intended for client authentication as server certificates,
-    which now no longer works
+* Fix RDEPENDS
+* Install bin/collect-types
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- ...{libio-socket-ssl-perl_2.052.bb => libio-socket-ssl-perl_2.054.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.052.bb => libio-socket-ssl-perl_2.054.bb} (91%)
+ ...types-perl_2.14.bb => libmime-types-perl_2.17.bb} | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libmime/{libmime-types-perl_2.14.bb => libmime-types-perl_2.17.bb} (61%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.052.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
-similarity index 91%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.052.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
-index e4fc49344..ea78bc4e0 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.052.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
-@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "\
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.14.bb b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
+similarity index 61%
+rename from meta-perl/recipes-perl/libmime/libmime-types-perl_2.14.bb
+rename to meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
+index ade0a062a..414753030 100644
+--- a/meta-perl/recipes-perl/libmime/libmime-types-perl_2.14.bb
++++ b/meta-perl/recipes-perl/libmime/libmime-types-perl_2.17.bb
+@@ -14,13 +14,29 @@ LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MA/MARKOV/MIME-Types-${PV}.tar.gz \
             file://run-ptest \
            "
--SRC_URI[md5sum] = "26c9bcdfb4ba8763ef89264f21326a48"
--SRC_URI[sha256sum] = "e4897a9b17cb18a3c44aa683980d52cef534cdfcb8063d6877c879bfa2f26673"
-+SRC_URI[md5sum] = "e1b412e28d107c716e7ca637e2b7f8bd"
-+SRC_URI[sha256sum] = "02ea04e9a336a7d3ca9aa604c0c5b5aaf3efa513cefecfc73cc79ceeb5131e4b"
+-SRC_URI[md5sum] = "c1b9b7dea40fbb96c0e0048d10d66268"
+-SRC_URI[sha256sum] = "4049cf0fc05205893f25fdbe07d1ab12bfc72259517db2c3348c1d1059730070"
++SRC_URI[md5sum] = "6f1441addab947137bac92c379a47ba3"
++SRC_URI[sha256sum] = "e04ed7d42f1ff3150a303805f2689c28f80b92c511784d4641cb7f040d3e8ff6"
  
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+ S = "${WORKDIR}/MIME-Types-${PV}"
  
+ inherit cpan ptest
+ 
++RDEPENDS_${PN} = "\
++    perl-module-base \
++    perl-module-file-basename \
++    perl-module-file-spec \
++    perl-module-overload \
++"
++
++RDEPENDS_${PN}-ptest = "perl-module-lib perl-module-test-more"
++#RSUGGESTS_${PN}-ptest = "libmojo-base-perl"
++
++do_install () {
++    cpan_do_install
++    install -d ${D}${bindir}
++    install -m 755 ${S}/bin/collect-types ${D}${bindir}/collect-types
++}
++
+ do_install_ptest () {
+     cp -r ${B}/t ${D}${PTEST_PATH}
+ }
 -- 
 2.13.6
 
