@@ -1,52 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw0-f181.google.com (mail-yw0-f181.google.com
-	[209.85.161.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 688C0784D2;
-	Sun, 28 Jan 2018 20:30:52 +0000 (UTC)
-Received: by mail-yw0-f181.google.com with SMTP id m19so1988205ywh.12;
-	Sun, 28 Jan 2018 12:30:54 -0800 (PST)
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A1D7719A4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Jan 2018 23:05:10 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id 16so5234833wry.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Jan 2018 15:05:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Bl2xYsgIURyJwLWaDre245C4Gh+1+vMG4sADivkHNG0=;
-	b=LKe9ePWZmR1V8imnqDBULMH0do2x2jm3l9k6YGqCbdPsJm4umVqHRjfOKP8VrhOFSQ
-	G0wFBMQo+5HpzDftY6wo29LY4rkHymwoTaSi0vLR8DnpR+8wRTIDgnlmKQuwKWtvCjhw
-	idksz64z0iw+Qh0DboAuNL5Q3QlphWixbhqFMy1RhMrmKvVeKK9jkAmdKbJfGlQDSWSU
-	uDrQdDchdI1NSrLopt5D8fByzZqc1DteeD+O5n3kNQwOEihu0sj9QgMW8wJtQ3VnHAAm
-	tHbyvWMnRws+XSSClnBLu70L68WLNH2ugxNfxB2aFI8a072/bR1WT17nwmzyBbxXjffb
-	XOHA==
+	h=from:to:cc:subject:date:message-id;
+	bh=2unpSbbx1RgxPkJx65U9ybAgE/KLLKphMnp1+9RKHk4=;
+	b=MhOca83vj+jDzxAdCLwb2p0lTq73+tqSpXnULUyOqZL2hQmm+ggxcBA3Bqjugz9E1e
+	/l8/EsuBXu85LvF9XF2xeY0cLcM2COhaFAvSdb02J3+5E8NoGaXQIiMR6srtnmQYPQp/
+	ip+cG+h/wPekImzwu/TP6hmfzUZSzyeCvpwELW3j1Rv60QKv9WxNt4A01CLpfPPCpIGI
+	7L9jspndkaQNlbZe6gVQaU8gqSQK4VIK/SUCh/imA5cCPooyiRV/uRHopFBrYLnRXh0J
+	151p7Ersxq8/W8R7R8xhfQvVSp1JtSVl0IRNplExKlZ5SgQZOs6TvtLN789AZvu1wZPX
+	OxUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Bl2xYsgIURyJwLWaDre245C4Gh+1+vMG4sADivkHNG0=;
-	b=GdC0JBIIZMCfWGWukUFB1qyKNBu0AhrO0m4C8ZV0syifs+mN6pO8AZOMuM8vEGxehk
-	jADVajZKrV3nx55nseGZyEwdzr7hIBX1KPwT/cW+PaT6TNQSKOF+gX3F3NS3E89+m4pG
-	K1nKqZY3fbNmsd4RGNRdC7SA4Wf2tCv1j3ehB48l+n3ZF+TPw6YvZonQbPDW2pbNxBQj
-	AKzf7MZT59159jQRSu2TCTue7MPWbFlxNp6xd0u0l28Cs+YoOQ/PUGevTmGUZLtZ1NCh
-	TGCtb74e9l+/BvrVil+aj3s2xMlARQoDCr/DbkAcdy4UxGFwkiXUgMu+1CnGDdh25tCF
-	5dLg==
-X-Gm-Message-State: AKwxytdKh34ugqKymCMJxkpyq+2lX66tTiL+OI2JGMQofX+Nqi0BW9se
-	Eg5YE6vKcwI0bxOWGfMwQH6k0KW4nKr5X6n23a7wyA==
-X-Google-Smtp-Source: AH8x225vPjnx/31xC91RWQh117qkjnAHGqJZqCe+L0K9PEUHNyk4vj8u2z/6o8QJN/w6+cXHN2fkl47y6WCOdXKnfSA=
-X-Received: by 10.13.255.133 with SMTP id p127mr15230668ywf.360.1517171454032; 
-	Sun, 28 Jan 2018 12:30:54 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.37.199.133 with HTTP; Sun, 28 Jan 2018 12:30:53 -0800 (PST)
-In-Reply-To: <CAPyrkgwxYUBGb4wLa83Bcm5dRDFh0m7X3o0tZx9sCYy2PEZV=A@mail.gmail.com>
-References: <CAPyrkgwxYUBGb4wLa83Bcm5dRDFh0m7X3o0tZx9sCYy2PEZV=A@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 28 Jan 2018 21:30:53 +0100
-Message-ID: <CALbNGRQDOpbFhkpTpXYjc0PnpaWsCchT-Oe3n_2kmOxpEhkSPA@mail.gmail.com>
-To: Paul Barker <pbarker@toganlabs.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [Openembedded-architecture] OpenEmbedded stand at FOSDEM 2018
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=2unpSbbx1RgxPkJx65U9ybAgE/KLLKphMnp1+9RKHk4=;
+	b=OqlSALNfmMWGjc9y3RhKShVCWFhq1kRJGDwJSq7wIvlVwAoNZGUs14Qlm+YNNSEhUc
+	deESCOUIi5gWRSD41y7HuKQu9o3/LOKLCr0NkwyCkatq5V5x/GXQmQBQI2qB9+kL71t7
+	wUqhitoaXrconD0+KgzE7yMZGhudr9tBRfaYXegI8n2io3wq5eZcnIZ7btu+SwvyI9z3
+	eeJZ1PXJ3rtoe9zyN6na9K0hczugH7RV2setAEVcaIe1KkzP57kTTma2e1M9Gj8OMLdF
+	ryEUuWgYTefEOvYrmejMgpO6ihxyMn1LEbljJ+l0d1Tw5ykIuUI07Umqq/h80yILkkrE
+	oslQ==
+X-Gm-Message-State: AKwxytcFVPe+7PPYZRIsZvaOzvBqS38aiZakOw+/3citdTroRSFSlbbM
+	gb9WVvN7qAXExgiZntslzBgAXQ==
+X-Google-Smtp-Source: AH8x225C4lvYPMkhBajHHEQytA8RJ7sJ/d4dnvfIpcFc0yPcVw9uiUyuk5pCuJzQSpw892JSsa6ONw==
+X-Received: by 10.223.168.120 with SMTP id l111mr7596150wrc.118.1517180711467; 
+	Sun, 28 Jan 2018 15:05:11 -0800 (PST)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
+	(host57-10-dynamic.248-95-r.retail.telecomitalia.it. [95.248.10.57])
+	by smtp.gmail.com with ESMTPSA id
+	188sm9240263wmg.29.2018.01.28.15.05.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 28 Jan 2018 15:05:10 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Jan 2018 00:05:07 +0100
+Message-Id: <1517180707-20227-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-initramfs][PATCH v3] ubi-utils-klibc_1.5.2: fix build for qemuarm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,58 +55,516 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Jan 2018 20:30:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 28 Jan 2018 23:05:11 -0000
 
-On Mon, Dec 11, 2017 at 9:55 AM, Paul Barker <pbarker@toganlabs.com> wrote:
+Building the recipe with TUNE_FEATURES = "aarch64" and TARGET_FPU = ""
+fails. See patch headers for more details.
 
-> Hi all,
->
-> We've got confirmation for an OpenEmbedded stand at FOSDEM 2018! We're
-> in the AW building as usual, you can see the full list of stands and
-> location details here: https://fosdem.org/2018/stands/
->
-> What we need:
->
-> * People to help out on the stand and chat about the project. If
-> you're going to FOSDEM and don't know many people in the OE project
-> this is a great way to get to know some. Even if you can only help out
-> for an hour or two this would be much appreciated!
->
-> * Device/product demos which show off the features of OE. We only have
-> one table this year so please let us know if you're bringing hardware,
-> that way we can make sure everything fits. Preference will go to
-> hobbyist projects as this is FOSDEM but we're happy with commercial
-> projects as long as they're not an explicit sales pitch.
->
-> * Build system demo. I really want us to show off toaster again as
-> that got a lot of interest last time we demo'd it at FOSDEM.
-> Unfortunately I'm on holiday before FOSDEM and I'm not travelling
-> directly from home so I'll be unable to bring something to run this
-> demo on. So if someone could bring a laptop or mini-PC/monitor/etc to
-> run a build system demo on that would be excellent. If not I'll see if
-> I can get something shipped to Brussels.
->
-> I've created a wiki page here:
-> https://www.openembedded.org/wiki/FOSDEM_2018. Please add to this if
-> you're planning to bring anything or just attend.
->
-> Look forward to seeing many of you in Feb :)
->
-> --
-> Paul Barker
-> Tog=C3=A1n Labs Ltd
->
+Patch sent upstream for master, here rebased for 1.5.2.
+Tested runtime on armv5.
 
-My machine is finally done - it turned larger and heavier than expected
-originally. Pictures at [1] taken with my very old mobile. Would like to
-bring this with me with smaller keyboard - hope there is some place for
-it...
+While there backport one more patch fixing warnings in libmtd.c and
+move the patches in their specific dir, preparing for v2.0.1.
 
-[1]
-https://drive.google.com/drive/folders/1VUMqcRO8WxWpwMKYy06WZPZcSgrokq0h?us=
-p=3Dsharing
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+Changelog;
+v1 initial patch
+v2 fix comments and update Upstream_Status
+v3 refresh and move patches to ubi-utils-1.5.2 subdir
 
-Andreas
+ .../0001-Makefile-build-ubi-utils-only.patch}      | 19 ++++---
+ .../0002-common.mk-for-klibc-CC-is-klcc.patch      | 10 ++--
+ ...ubi.c-add-klibc-specific-fixes-for-ioctl.patch} | 10 ++--
+ ...atibility-to-dietlibc-klibc-musl-libc-af.patch} | 18 +++---
+ ...more-workarounds-for-klibc-compatibility.patch} | 23 ++++----
+ ...rser-remove-unused-function-needing-float.patch |  8 +--
+ ...ls-common.c-convert-to-integer-arithmetic.patch | 64 ++++++++++++++++++++++
+ ...ubiformat.c-convert-to-integer-arithmetic.patch | 44 +++++++++++++++
+ ...arnings-about-implicit-non-const-casting-.patch | 48 ++++++++++++++++
+ .../recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb  | 11 ++--
+ 10 files changed, 212 insertions(+), 43 deletions(-)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch => ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch} (86%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc => ubi-utils-klibc-1.5.2}/0002-common.mk-for-klibc-CC-is-klcc.patch (71%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc/0003-libubi.c-add-klibc-specific-fixes.patch => ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch} (91%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc/0004-common.h-klibc-fixes-1.patch => ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch} (86%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch => ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch} (71%)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc => ubi-utils-klibc-1.5.2}/0006-libiniparser-remove-unused-function-needing-float.patch (95%)
+ create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch
+ create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch
+ create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch
+
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch
+similarity index 86%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch
+index 6e1b9ff..6ac2cca 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch
+@@ -1,7 +1,7 @@
+-From c4e6bd9378645d577e9d9f85da85f1438afe7c50 Mon Sep 17 00:00:00 2001
++From 1c989e4c36d0bf76ab444f984bc73b98eeacd03f Mon Sep 17 00:00:00 2001
+ From: Andrea Adami <andrea.adami@gmail.com>
+ Date: Sun, 29 Jun 2014 00:32:29 +0200
+-Subject: [PATCH 1/6] Makefile: build ubi-utils only
++Subject: [PATCH 1/9] Makefile: build ubi-utils only
+ 
+ We build all the static ubi-utils but actually only ubiattach is needed in
+ a minimalistic initramfs for the mount of ubi volumes.
+@@ -22,13 +22,13 @@ Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ ---
+- Makefile | 24 ++----------------------
+- 1 file changed, 2 insertions(+), 22 deletions(-)
++ Makefile | 26 ++------------------------
++ 1 file changed, 2 insertions(+), 24 deletions(-)
+ 
+-Index: git/Makefile
+-===================================================================
+---- git.orig/Makefile
+-+++ git/Makefile
++diff --git a/Makefile b/Makefile
++index 3ce8587..8b79f71 100644
++--- a/Makefile
+++++ b/Makefile
+ @@ -16,28 +16,11 @@ endif
+  
+  TESTS = tests
+@@ -82,3 +82,6 @@ Index: git/Makefile
+  #
+  # Common libmtd
+  #
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0002-common.mk-for-klibc-CC-is-klcc.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch
+similarity index 71%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0002-common.mk-for-klibc-CC-is-klcc.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch
+index f46824b..c23d11f 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0002-common.mk-for-klibc-CC-is-klcc.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch
+@@ -1,11 +1,11 @@
+-From f3609c7c0450b4c31e1d4603fcf2cfb1ba46f994 Mon Sep 17 00:00:00 2001
++From 89c76bbe82a2029a25b0654eb0a1d0b22d6e6877 Mon Sep 17 00:00:00 2001
+ From: Andrea Adami <andrea.adami@gmail.com>
+ Date: Sun, 29 Jun 2014 00:37:28 +0200
+-Subject: [PATCH 2/6] common.mk: for klibc $(CC) is klcc
++Subject: [PATCH 2/9] common.mk: for klibc $(CC) is klcc
+ 
+ Do not hardcode: assign the value to the variable if it is not already defined.
+ 
+-Upstream-Status: Pending
++Upstream-Status: Submitted
+ 
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ ---
+@@ -13,7 +13,7 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/common.mk b/common.mk
+-index ba87377..59c56df 100644
++index ba87377..126d11a 100644
+ --- a/common.mk
+ +++ b/common.mk
+ @@ -1,4 +1,4 @@
+@@ -23,5 +23,5 @@ index ba87377..59c56df 100644
+  RANLIB := $(CROSS)ranlib
+  
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0003-libubi.c-add-klibc-specific-fixes.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch
+similarity index 91%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0003-libubi.c-add-klibc-specific-fixes.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch
+index 962b368..9ad4a5b 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0003-libubi.c-add-klibc-specific-fixes.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch
+@@ -1,7 +1,7 @@
+-From 72a39bb3290a79e76b0dbf59eef83ea2d9b577a1 Mon Sep 17 00:00:00 2001
++From fecbb7056d621a30f7106e67f5fe209763571b70 Mon Sep 17 00:00:00 2001
+ From: Andrea Adami <andrea.adami@gmail.com>
+ Date: Sun, 29 Jun 2014 00:40:15 +0200
+-Subject: [PATCH 3/6] libubi.c: add klibc specific fixes for ioctl
++Subject: [PATCH 3/9] libubi.c: add klibc specific fixes for ioctl
+ 
+ First issue is that ioctl() in klibc doesn't expect a constant as arg3.
+ Second issue is that arg3 in klibc ioctl() implementation is not optional.
+@@ -36,7 +36,7 @@ Fixes:
+ |  __extern int ioctl(int, int, void *);
+ |               ^
+ 
+-Upstream-Status: Inappropriate [klibc specific]
++Upstream-Status: Accepted
+ 
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ ---
+@@ -44,7 +44,7 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  1 file changed, 3 insertions(+), 3 deletions(-)
+ 
+ diff --git a/ubi-utils/libubi.c b/ubi-utils/libubi.c
+-index 1e08b7d..491e525 100644
++index 97c0434..2b49833 100644
+ --- a/ubi-utils/libubi.c
+ +++ b/ubi-utils/libubi.c
+ @@ -687,7 +687,7 @@ void libubi_close(libubi_t desc)
+@@ -72,5 +72,5 @@ index 1e08b7d..491e525 100644
+  
+  int ubi_update_start(libubi_t desc, int fd, long long bytes)
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0004-common.h-klibc-fixes-1.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch
+similarity index 86%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0004-common.h-klibc-fixes-1.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch
+index fee1cbc..2f31fb4 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0004-common.h-klibc-fixes-1.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch
+@@ -1,7 +1,11 @@
+-From e56767b9caa02e7c41803499c77dc939d5a7f64a Mon Sep 17 00:00:00 2001
++From b668cb75cb7e72ff92055209130d4cd4b3cacbdb Mon Sep 17 00:00:00 2001
+ From: Thorsten Glaser <tg@mirbsd.org>
+ Date: Fri, 20 Jun 2014 10:56:27 +0000
+-Subject: [PATCH 4/6] Restore compatibility to dietlibc, klibc, musl libc after commit 4f1b108
++Subject: [PATCH 4/9] Restore compatibility to dietlibc, klibc, musl libc after
++ commit 4f1b108
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
+ 
+ Each C library has their own way to define off_t, and the <features.h>
+ header is nonstandard and specific to the GNU libc and those that clone
+@@ -21,7 +25,7 @@ Fixes:
+ |                       ^
+ | compilation terminated.
+ 
+-Upstream-Status: Pending
++Upstream-Status: Submitted
+ 
+ Signed-off-by: Thorsten Glaser <tg@mirbsd.org>
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+@@ -30,7 +34,7 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  1 file changed, 24 insertions(+)
+ 
+ diff --git a/include/common.h b/include/common.h
+-index 6895e5c..77f3f7d 100644
++index fb0ca83..5a20964 100644
+ --- a/include/common.h
+ +++ b/include/common.h
+ @@ -26,7 +26,9 @@
+@@ -43,7 +47,7 @@ index 6895e5c..77f3f7d 100644
+  #include <inttypes.h>
+  #include "version.h"
+  
+-@@ -52,6 +54,21 @@ extern "C" {
++@@ -67,6 +69,21 @@ extern "C" {
+  #endif
+  
+  /* define a print format specifier for off_t */
+@@ -65,7 +69,7 @@ index 6895e5c..77f3f7d 100644
+  #ifdef __USE_FILE_OFFSET64
+  #define PRIxoff_t PRIx64
+  #define PRIdoff_t PRId64
+-@@ -59,6 +76,13 @@ extern "C" {
++@@ -74,6 +91,13 @@ extern "C" {
+  #define PRIxoff_t "l"PRIx32
+  #define PRIdoff_t "l"PRId32
+  #endif
+@@ -80,5 +84,5 @@ index 6895e5c..77f3f7d 100644
+  /* Verbose messages */
+  #define bareverbose(verbose, fmt, ...) do {                        \
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch
+similarity index 71%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch
+index 6b09c14..8309a72 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch
+@@ -1,7 +1,7 @@
+-From 8318852ef4f768bed31072aa7b57e11adc1f639c Mon Sep 17 00:00:00 2001
++From 5d4a66b502003ef385dab31a17012246407e7364 Mon Sep 17 00:00:00 2001
+ From: Andrea Adami <andrea.adami@gmail.com>
+ Date: Sun, 29 Jun 2014 00:44:03 +0200
+-Subject: [PATCH 5/6] common.h: more workarounds for klibc compatibility
++Subject: [PATCH 5/9] common.h: more workarounds for klibc compatibility
+ 
+ Patch is addressing two issues:
+ * First,  Klibc doesn't have rpmatch().
+@@ -15,18 +15,18 @@ Fixes:
+ | .../git/./include/common.h:157: undefined reference to `getline'
+ | .../git/./include/common.h:164: undefined reference to `rpmatch'
+ 
+-Upstream-Status: Pending
++Upstream-Status: Submitted
+ 
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ ---
+- include/common.h | 10 ++++++----
+- 1 file changed, 6 insertions(+), 4 deletions(-)
++ include/common.h | 8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
+ 
+-Index: git/include/common.h
+-===================================================================
+---- git.orig/include/common.h
+-+++ git/include/common.h
+-@@ -161,15 +161,17 @@ static inline int __rpmatch(const char *
++diff --git a/include/common.h b/include/common.h
++index 5a20964..2f51e1c 100644
++--- a/include/common.h
+++++ b/include/common.h
++@@ -161,15 +161,17 @@ static inline int __rpmatch(const char *resp)
+   */
+  static inline bool prompt(const char *msg, bool def)
+  {
+@@ -47,3 +47,6 @@ Index: git/include/common.h
+  			printf("failed to read prompt; assuming '%s'\n",
+  				def ? "yes" : "no");
+  			break;
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0006-libiniparser-remove-unused-function-needing-float.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch
+similarity index 95%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0006-libiniparser-remove-unused-function-needing-float.patch
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch
+index 043a89d..d046f95 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0006-libiniparser-remove-unused-function-needing-float.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch
+@@ -1,7 +1,7 @@
+-From 72a04a9b9ed33c889d2e2b86f306c5be9f6cde35 Mon Sep 17 00:00:00 2001
++From 2af30e9b2988111e45ed6ea6af55e49ec7cb1cb1 Mon Sep 17 00:00:00 2001
+ From: Andrea Adami <andrea.adami@gmail.com>
+ Date: Sun, 29 Jun 2014 00:44:57 +0200
+-Subject: [PATCH 6/6] libiniparser: remove unused function needing float
++Subject: [PATCH 6/9] libiniparser: remove unused function needing float
+ 
+ Fixes:
+ |   LD      ubi-utils/ubiformat
+@@ -13,7 +13,7 @@ Fixes:
+ Grep doesn't reveal any occurrence of iniparser_getdouble(), using atof() so
+ remove it: floating-point is not supported in klibc
+ 
+-Upstream-Status: Pending
++Upstream-Status: Accepted
+ 
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ ---
+@@ -81,5 +81,5 @@ index 898f57f..ba70c08 100644
+    @param    d Dictionary to search
+    @param    key Key string to look for
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch
+new file mode 100644
+index 0000000..36b012f
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch
+@@ -0,0 +1,64 @@
++From 41e7c76b0853bf5241b38b8167dfd57c27fef1eb Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sun, 28 Jan 2018 21:47:59 +0100
++Subject: [PATCH 7/9] mtd-utils: common.c: convert to integer arithmetic
++
++We use floating point just to print out KiB, MiB, GiB.
++Avoid that to be klibc friendly.
++
++Fixes compilation for aarch64 against klibc:
++
++error: '-mgeneral-regs-only' is incompatible with floating-point argument
++|    printf("%s%.1f GiB", p, (double)bytes / (1024 * 1024 * 1024));
++etc.
++
++Note:
++* In the KiB case, we could apparently multiply by 100 before dividing
++  without risking overflow. This code simply avoids multiplications.
++
++Upstream-Status: Submitted
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ ubi-utils/ubiutils-common.c | 18 ++++++++++++------
++ 1 file changed, 12 insertions(+), 6 deletions(-)
++
++diff --git a/ubi-utils/ubiutils-common.c b/ubi-utils/ubiutils-common.c
++index 6609a6b..0ded2a4 100644
++--- a/ubi-utils/ubiutils-common.c
+++++ b/ubi-utils/ubiutils-common.c
++@@ -107,6 +107,9 @@ long long ubiutils_get_bytes(const char *str)
++ void ubiutils_print_bytes(long long bytes, int bracket)
++ {
++ 	const char *p;
+++	int GiB = 1024 * 1024 * 1024;
+++	int MiB = 1024 * 1024;
+++	int KiB = 1024;
++ 
++ 	if (bracket)
++ 		p = " (";
++@@ -115,12 +118,15 @@ void ubiutils_print_bytes(long long bytes, int bracket)
++ 
++ 	printf("%lld bytes", bytes);
++ 
++-	if (bytes > 1024 * 1024 * 1024)
++-		printf("%s%.1f GiB", p, (double)bytes / (1024 * 1024 * 1024));
++-	else if (bytes > 1024 * 1024)
++-		printf("%s%.1f MiB", p, (double)bytes / (1024 * 1024));
++-	else if (bytes > 1024 && bytes != 0)
++-		printf("%s%.1f KiB", p, (double)bytes / 1024);
+++	if (bytes > GiB)
+++		printf("%s%lld.%lld GiB", p,
+++		       bytes / GiB, bytes % GiB / (GiB / 10));
+++	else if (bytes > MiB)
+++		printf("%s%lld.%lld MiB", p,
+++		       bytes / MiB, bytes % MiB / (MiB / 10));
+++	else if (bytes > KiB && bytes != 0)
+++		printf("%s%lld.%lld KiB", p,
+++		       bytes / KiB, bytes % KiB / (KiB / 10));
++ 	else
++ 		return;
++ 
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch
+new file mode 100644
+index 0000000..5bd0574
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch
+@@ -0,0 +1,44 @@
++From e6f1a85c0a3df24fe3ca9a520dc697105e75a80c Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sat, 27 Jan 2018 09:39:26 +0100
++Subject: [PATCH 8/9] ubi-utils: ubiformat.c: convert to integer arithmetic
++
++Do not cast percent to double, it is just used as upper limit.
++Avoid floating point to fix compilation for aarch64 against klibc:
++
++error: '-mgeneral-regs-only' is incompatible with floating-point code
++|    int percent = ((double)si->ok_cnt)/si->good_cnt * 100;
++|        ^~~~~~~
++
++Notes:
++* The checks in the code above this line ensure that si->good_cnt is not 0.
++
++* The code assumes  si->good_cnt * 100  will not overflow, then we can use
++  (si->ok_cnt * 100) safely because the former is bigger.
++
++* The truncated result does not affect the logic:
++  i.e. a value of 49.9 is truncated to 49 and is still <50.
++
++Upstream-Status: Submitted
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ ubi-utils/ubiformat.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/ubi-utils/ubiformat.c b/ubi-utils/ubiformat.c
++index 21409ca..d93164a 100644
++--- a/ubi-utils/ubiformat.c
+++++ b/ubi-utils/ubiformat.c
++@@ -843,7 +843,7 @@ int main(int argc, char * const argv[])
++ 	}
++ 
++ 	if (!args.override_ec && si->empty_cnt < si->good_cnt) {
++-		int percent = ((double)si->ok_cnt)/si->good_cnt * 100;
+++		int percent = (si->ok_cnt * 100) / si->good_cnt;
++ 
++ 		/*
++ 		 * Make sure the majority of eraseblocks have valid
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch
+new file mode 100644
+index 0000000..658246a
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch
+@@ -0,0 +1,48 @@
++From 2229f3b9fd4bad47794c28e558ad273173cea73d Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sat, 27 Jan 2018 09:52:46 +0100
++Subject: [PATCH 9/9] Eliminate warnings about implicit non-const casting in
++ libmtd
++
++The mtd_get_dev_info1 function reads (among other things) name and type
++string into coresponding struct mtd_dev_info fields.
++
++The struct mtd_dev_info has the string fields marked const, requiring
++them to be cast to non-const version during initialization.
++
++This cast was previously omitted from the dev_read_data calls,
++triggering warnings during compilation.
++
++Signed-off-by: David Oberhollenzer <david.oberhollenzer@sigma-star.at>
++Signed-off-by: Richard Weinberger <richard@nod.at>
++
++Upstream-Status: Backport
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ lib/libmtd.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/lib/libmtd.c b/lib/libmtd.c
++index 60b4782..5f0bcbc 100644
++--- a/lib/libmtd.c
+++++ b/lib/libmtd.c
++@@ -746,13 +746,13 @@ int mtd_get_dev_info1(libmtd_t desc, int mtd_num, struct mtd_dev_info *mtd)
++ 	if (dev_get_major(lib, mtd_num, &mtd->major, &mtd->minor))
++ 		return -1;
++ 
++-	ret = dev_read_data(lib->mtd_name, mtd_num, &mtd->name,
+++	ret = dev_read_data(lib->mtd_name, mtd_num, (char *)&mtd->name,
++ 			    MTD_NAME_MAX + 1);
++ 	if (ret < 0)
++ 		return -1;
++ 	((char *)mtd->name)[ret - 1] = '\0';
++ 
++-	ret = dev_read_data(lib->mtd_type, mtd_num, &mtd->type_str,
+++	ret = dev_read_data(lib->mtd_type, mtd_num, (char *)&mtd->type_str,
++ 			    MTD_TYPE_MAX + 1);
++ 	if (ret < 0)
++ 		return -1;
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
+index 518c02f..abb0d4b 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
+@@ -11,12 +11,15 @@ inherit klibc
+ 
+ SRCREV = "aea36417067dade75192bafa03af70b6eb2677b1"
+ SRC_URI = "git://git.infradead.org/mtd-utils.git \
+-             file://0001-Makefile-only-build-ubi-utils.patch \
++             file://0001-Makefile-build-ubi-utils-only.patch \
+              file://0002-common.mk-for-klibc-CC-is-klcc.patch \
+-             file://0003-libubi.c-add-klibc-specific-fixes.patch \
+-             file://0004-common.h-klibc-fixes-1.patch \
+-             file://0005-common.h-klibc-fixes-2.patch \
++             file://0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch \
++             file://0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch \
++             file://0005-common.h-more-workarounds-for-klibc-compatibility.patch \
+              file://0006-libiniparser-remove-unused-function-needing-float.patch \
++             file://0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch \
++             file://0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch \
++             file://0009-Eliminate-warnings-about-implicit-non-const-casting-.patch \
+              "
+ 
+ S = "${WORKDIR}/git/"
+-- 
+2.7.4
+
 
