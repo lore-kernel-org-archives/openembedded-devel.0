@@ -1,52 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f54.google.com (mail-pl0-f54.google.com
-	[209.85.160.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 5013D785AD;
-	Sat, 27 Jan 2018 21:44:23 +0000 (UTC)
-Received: by mail-pl0-f54.google.com with SMTP id v3so1069911plg.3;
-	Sat, 27 Jan 2018 13:44:25 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw0-f181.google.com (mail-yw0-f181.google.com
+	[209.85.161.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 688C0784D2;
+	Sun, 28 Jan 2018 20:30:52 +0000 (UTC)
+Received: by mail-yw0-f181.google.com with SMTP id m19so1988205ywh.12;
+	Sun, 28 Jan 2018 12:30:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:from:subject:organization:message-id:date:user-agent
-	:mime-version:content-language:content-transfer-encoding;
-	bh=KoxI15wzV5vvOz3OsxB88zxrxhWESy8UlQnyFMBxUTI=;
-	b=bshYixr1Lb6V2EqSoWW7EKokQ+uDRynveAcHYFgY8FRryuMbuMqqQ4BkR0m1GGBl5j
-	8aIRyms0wTe6OXJNhTZjtvyd+BLAP4aMtjLCwrkquMSLvvtALgdB7aCGeTwZVfkeQWbO
-	nsaZRTIFZW5esJT3gp2mbXLxPl8bBberQkkPiMgvKIloHcg6UFiauT2Tvpfj/oax1FU9
-	I3TScFdFWnvKihXmxe/qLvTIuOSV3xrgR5gX58DMlQCCESu9EmgSDJYN2d69UudWSGu1
-	8uQTluDPIde5qIF4bsTETInoW2lRlNBroc0A4n2OYDMfR3mJW+BGSWOKVryXzGHAB715
-	3pCQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Bl2xYsgIURyJwLWaDre245C4Gh+1+vMG4sADivkHNG0=;
+	b=LKe9ePWZmR1V8imnqDBULMH0do2x2jm3l9k6YGqCbdPsJm4umVqHRjfOKP8VrhOFSQ
+	G0wFBMQo+5HpzDftY6wo29LY4rkHymwoTaSi0vLR8DnpR+8wRTIDgnlmKQuwKWtvCjhw
+	idksz64z0iw+Qh0DboAuNL5Q3QlphWixbhqFMy1RhMrmKvVeKK9jkAmdKbJfGlQDSWSU
+	uDrQdDchdI1NSrLopt5D8fByzZqc1DteeD+O5n3kNQwOEihu0sj9QgMW8wJtQ3VnHAAm
+	tHbyvWMnRws+XSSClnBLu70L68WLNH2ugxNfxB2aFI8a072/bR1WT17nwmzyBbxXjffb
+	XOHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:organization:message-id:date
-	:user-agent:mime-version:content-language:content-transfer-encoding;
-	bh=KoxI15wzV5vvOz3OsxB88zxrxhWESy8UlQnyFMBxUTI=;
-	b=pJUACvUm3R6nGGIN6DWMEc0D+uMylE97dQ/kpAovC5bENBMbV4on+wcg96zciWVWKe
-	PS/hcmttTbL966CdxgNtqk+RNHpmHj0kPdT6R/BLwNAAjGGNjIdGApGyElKPV72KOejE
-	rEHyAdEd9UQjCcNAlEIyiFZiqcWcI5UbjhVr2BgQeKH5NUYCyRAyNkpug/GiRQ7fN65c
-	kLA3OV53K0MGjaAWOf2Zzi2SkcfZ0Vzszl/XapD6QHcCAowqxabKLFWKKhSPlPT5Vbph
-	16Ghll4Yf1lgV4aeqTouh8OVkm2JcI9qM0U8Sp4ceysRpKEOdYTIYkAn8S8ARYN41hQi
-	Ha1A==
-X-Gm-Message-State: AKwxyteugYBLCJKZpKMjQh2xszFvQSkgwIp1k9JYixw8AuAIrcEUYlY/
-	Tjd7e8lWzmmEpmz++j4IvrU=
-X-Google-Smtp-Source: AH8x225Vk0hQbpThV9fhlI+YGKYCiI7LQqqSdiQsCwxtmEoXRz2ESUjJaGJzoUrr32qhOw1vj1qIjA==
-X-Received: by 2002:a17:902:8498:: with SMTP id
-	c24-v6mr17551519plo.450.1517089465474; 
-	Sat, 27 Jan 2018 13:44:25 -0800 (PST)
-Received: from hermes.local ([2601:646:8880:466c:8cc2:eed3:a043:ef2a])
-	by smtp.gmail.com with ESMTPSA id d4sm6036716pgc.58.2018.01.27.13.44.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 27 Jan 2018 13:44:24 -0800 (PST)
-To: OE-core <openembedded-core@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <45db0f72-d93f-ebbd-83aa-80ceaeabc083@gmail.com>
-Date: Sat, 27 Jan 2018 13:44:23 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0)
-	Gecko/20100101 Thunderbird/58.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Bl2xYsgIURyJwLWaDre245C4Gh+1+vMG4sADivkHNG0=;
+	b=GdC0JBIIZMCfWGWukUFB1qyKNBu0AhrO0m4C8ZV0syifs+mN6pO8AZOMuM8vEGxehk
+	jADVajZKrV3nx55nseGZyEwdzr7hIBX1KPwT/cW+PaT6TNQSKOF+gX3F3NS3E89+m4pG
+	K1nKqZY3fbNmsd4RGNRdC7SA4Wf2tCv1j3ehB48l+n3ZF+TPw6YvZonQbPDW2pbNxBQj
+	AKzf7MZT59159jQRSu2TCTue7MPWbFlxNp6xd0u0l28Cs+YoOQ/PUGevTmGUZLtZ1NCh
+	TGCtb74e9l+/BvrVil+aj3s2xMlARQoDCr/DbkAcdy4UxGFwkiXUgMu+1CnGDdh25tCF
+	5dLg==
+X-Gm-Message-State: AKwxytdKh34ugqKymCMJxkpyq+2lX66tTiL+OI2JGMQofX+Nqi0BW9se
+	Eg5YE6vKcwI0bxOWGfMwQH6k0KW4nKr5X6n23a7wyA==
+X-Google-Smtp-Source: AH8x225vPjnx/31xC91RWQh117qkjnAHGqJZqCe+L0K9PEUHNyk4vj8u2z/6o8QJN/w6+cXHN2fkl47y6WCOdXKnfSA=
+X-Received: by 10.13.255.133 with SMTP id p127mr15230668ywf.360.1517171454032; 
+	Sun, 28 Jan 2018 12:30:54 -0800 (PST)
 MIME-Version: 1.0
-Subject: [RFT] Glibc 2.27
+Received: by 10.37.199.133 with HTTP; Sun, 28 Jan 2018 12:30:53 -0800 (PST)
+In-Reply-To: <CAPyrkgwxYUBGb4wLa83Bcm5dRDFh0m7X3o0tZx9sCYy2PEZV=A@mail.gmail.com>
+References: <CAPyrkgwxYUBGb4wLa83Bcm5dRDFh0m7X3o0tZx9sCYy2PEZV=A@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 28 Jan 2018 21:30:53 +0100
+Message-ID: <CALbNGRQDOpbFhkpTpXYjc0PnpaWsCchT-Oe3n_2kmOxpEhkSPA@mail.gmail.com>
+To: Paul Barker <pbarker@toganlabs.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [Openembedded-architecture] OpenEmbedded stand at FOSDEM 2018
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,23 +59,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Jan 2018 21:44:24 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 28 Jan 2018 20:30:53 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi All
+On Mon, Dec 11, 2017 at 9:55 AM, Paul Barker <pbarker@toganlabs.com> wrote:
 
-glibc 2.27 is releasing soon in few weeks. I have put together the 
-recipes for upgrade, along with fixes for some of packages that I ran 
-into here
+> Hi all,
+>
+> We've got confirmation for an OpenEmbedded stand at FOSDEM 2018! We're
+> in the AW building as usual, you can see the full list of stands and
+> location details here: https://fosdem.org/2018/stands/
+>
+> What we need:
+>
+> * People to help out on the stand and chat about the project. If
+> you're going to FOSDEM and don't know many people in the OE project
+> this is a great way to get to know some. Even if you can only help out
+> for an hour or two this would be much appreciated!
+>
+> * Device/product demos which show off the features of OE. We only have
+> one table this year so please let us know if you're bringing hardware,
+> that way we can make sure everything fits. Preference will go to
+> hobbyist projects as this is FOSDEM but we're happy with commercial
+> projects as long as they're not an explicit sales pitch.
+>
+> * Build system demo. I really want us to show off toaster again as
+> that got a lot of interest last time we demo'd it at FOSDEM.
+> Unfortunately I'm on holiday before FOSDEM and I'm not travelling
+> directly from home so I'll be unable to bring something to run this
+> demo on. So if someone could bring a laptop or mini-PC/monitor/etc to
+> run a build system demo on that would be excellent. If not I'll see if
+> I can get something shipped to Brussels.
+>
+> I've created a wiki page here:
+> https://www.openembedded.org/wiki/FOSDEM_2018. Please add to this if
+> you're planning to bring anything or just attend.
+>
+> Look forward to seeing many of you in Feb :)
+>
+> --
+> Paul Barker
+> Tog=C3=A1n Labs Ltd
+>
 
-http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/glibc-2.27
+My machine is finally done - it turned larger and heavier than expected
+originally. Pictures at [1] taken with my very old mobile. Would like to
+bring this with me with smaller keyboard - hope there is some place for
+it...
 
-This has gotten limited testing. I plan to put the package fixes as we 
-plough through. Please test this out in your setups and report problems 
-or fixes ( preferred ) to get various packages working on 2.27 release
+[1]
+https://drive.google.com/drive/folders/1VUMqcRO8WxWpwMKYy06WZPZcSgrokq0h?us=
+p=3Dsharing
 
-Thanks
--Khem
+Andreas
 
