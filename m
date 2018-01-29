@@ -1,38 +1,47 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 988FF78733
+Return-Path: <peter.kjellerstedt@axis.com>
+X-Greylist: delayed 491 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 29 Jan 2018 18:54:27 UTC
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C136B786A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jan 2018 13:45:13 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id s39so12673043qth.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jan 2018 05:45:15 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=p+EQlqiEkhAcUY8T6lgqP+3OA9gXtEkHwDQBXtHICHw=;
-	b=BWchsosXU3r20u5v8QMIGtnXxJizik1gXCsW9cRyn9g8d+vHeKVbv3a92CcpfwLP+x
-	dovUUOYggXr56dOBCJKgewxuRlTEORbxnupwZbSMxxlwPQTwlnLb9qeMx3QCEu2MPuqr
-	5FeGcFKf3FD81WETRG2NxTh5u52IoM8jg/WfHEAG7AA6o7n939Vc9+Rdr2UZOlNLQmaV
-	OX4giOOdrUQrTzNy1a8rgChJGS692JLyigIpzlELkUIopPOwVLZbI/S73IDV0NUD9Ocb
-	AS7TUuW70zFMQOqV2MOSHE9DkmGW6mt5+ymOvgH7OIWkq0MFzSioTLy2DM8A0ojm/JtN
-	RC9g==
-X-Gm-Message-State: AKwxytevqDCX3g7GR/PLxMK58oURXgv8dG9l4g3Yu9bYdSgiAYjvdG+7
-	VVtwOpiayOrP8FwQ0kzWIhluxz4R
-X-Google-Smtp-Source: AH8x226kbUIJYUduWonkDM/a9Cige6IED2n6T02WqOewNJi6svQnHLoK5qTjPv+T5GeLQUQFEDlnBQ==
-X-Received: by 10.237.44.231 with SMTP id g94mr38511077qtd.108.1517233514291; 
-	Mon, 29 Jan 2018 05:45:14 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	u10sm2979791qka.35.2018.01.29.05.45.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 29 Jan 2018 05:45:13 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Jan 2018 08:45:04 -0500
-Message-Id: <1517233504-15498-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-jsonpointer: update to version 2.0
+	Mon, 29 Jan 2018 18:54:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 5A402184A7;
+	Mon, 29 Jan 2018 19:46:17 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id 8SXp1LEmEcED; Mon, 29 Jan 2018 19:46:16 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id B0F15184A0;
+	Mon, 29 Jan 2018 19:46:16 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 9E5631A05E;
+	Mon, 29 Jan 2018 19:46:16 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 939F01A07F;
+	Mon, 29 Jan 2018 19:46:16 +0100 (CET)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Mon, 29 Jan 2018 19:46:16 +0100 (CET)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by thoth.se.axis.com (Postfix) with ESMTP id 8807D31B8;
+	Mon, 29 Jan 2018 19:46:16 +0100 (CET)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id w0TIkFYh025264;
+	Mon, 29 Jan 2018 19:46:15 +0100
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id w0TIkFwX025263;
+	Mon, 29 Jan 2018 19:46:15 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org,
+	Scott Rifenbark <srifenbark@gmail.com>
+Date: Mon, 29 Jan 2018 19:45:47 +0100
+Message-Id: <20180129184547.25199-1-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+X-TM-AS-GCONF: 00
+Subject: [PATCH] ref-manual: Document the task feature of BUILDHISTORY_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,41 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jan 2018 13:45:13 -0000
+X-List-Received-Date: Mon, 29 Jan 2018 18:54:28 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-python/recipes-devtools/python/python-jsonpointer.inc            | 4 ++--
- .../python/{python-jsonpointer_1.14.bb => python-jsonpointer_2.0.bb}  | 0
- .../{python3-jsonpointer_1.14.bb => python3-jsonpointer_2.0.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-jsonpointer_1.14.bb => python-jsonpointer_2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-jsonpointer_1.14.bb => python3-jsonpointer_2.0.bb} (100%)
+ documentation/ref-manual/ref-variables.xml | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpointer.inc b/meta-python/recipes-devtools/python/python-jsonpointer.inc
-index 5381fbe..4ed01ed 100644
---- a/meta-python/recipes-devtools/python/python-jsonpointer.inc
-+++ b/meta-python/recipes-devtools/python/python-jsonpointer.inc
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=32b15c843b7a329130f4e266a281ebb3"
+diff --git a/documentation/ref-manual/ref-variables.xml b/documentation/ref-manual/ref-variables.xml
+index 521eaeaed2..70e5e3428b 100644
+--- a/documentation/ref-manual/ref-variables.xml
++++ b/documentation/ref-manual/ref-variables.xml
+@@ -1927,8 +1927,8 @@
+                 </para>
  
- inherit pypi
+                 <para>
+-                    You can specify three features in the form of a
+-                    space-separated list:
++                    You can specify features in the form of a space-separated
++                    list:
+                     <itemizedlist>
+                         <listitem><para><emphasis>image:</emphasis>
+                             Analysis of the contents of images, which
+@@ -1942,12 +1942,17 @@
+                             Analysis of the contents of the software
+                             development kit (SDK).
+                             </para></listitem>
++                        <listitem><para><emphasis>task:</emphasis>
++                            Save output file signatures for sstate tasks.  This
++                            saves a file per task listing the SHA-256 checksums
++                            for each file staged, i.e., the output of the task.
++                            </para></listitem>
+                     </itemizedlist>
+                 </para>
  
--SRC_URI[md5sum] = "190aeb8afcb0efddfe831a4e533e163b"
--SRC_URI[sha256sum] = "c681af823545c731b7b38aedd5d4eee4c5eff87bc0f25e0ff25444a4189eac4d"
-+SRC_URI[md5sum] = "741b98d0e693b08b5e44e0a9da5a7bb7"
-+SRC_URI[sha256sum] = "c192ba86648e05fdae4f08a17ec25180a9aef5008d973407b581798a83975362"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-json \
-diff --git a/meta-python/recipes-devtools/python/python-jsonpointer_1.14.bb b/meta-python/recipes-devtools/python/python-jsonpointer_2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-jsonpointer_1.14.bb
-rename to meta-python/recipes-devtools/python/python-jsonpointer_2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-jsonpointer_1.14.bb b/meta-python/recipes-devtools/python/python3-jsonpointer_2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-jsonpointer_1.14.bb
-rename to meta-python/recipes-devtools/python/python3-jsonpointer_2.0.bb
+                 <para>
+                     By default, the <filename>buildhistory</filename> class
+-                    enables all three features:
++                    enables the following features:
+                     <literallayout class='monospaced'>
+      BUILDHISTORY_FEATURES ?= "image package sdk"
+                     </literallayout>
 -- 
-2.7.4
+2.12.0
 
 
