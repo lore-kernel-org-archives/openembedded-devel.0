@@ -1,37 +1,56 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 23F7F77FDE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id EED2278260
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 18:46:12 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id z12so11429289qkf.12
+	Tue, 30 Jan 2018 20:46:11 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id p1so10254756pfh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 10:46:14 -0800 (PST)
+	Tue, 30 Jan 2018 12:46:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=OKcWP/p5Qvem2uXXVeho1+EAjbGeX+hDk3oIxZLIbVU=;
+	b=FHlP0OWaJW5lM/6T8BkV10Njoolr+ZHbZO3b45yYk1O8DZpV4OjYTNhXAVoqEBWudl
+	+jbP7XZk2zMYyCyMqrvAcc3SUAKLSk5cscWMZrOfFR3IdEZobhARnMMc/HyuBEgMEARp
+	KxAu6fdWNqexZkjnA479gEVDgsWh2NzG6h/bB12lV8B+odH5GQ1hKu2KAaYN1Nj4F6Sp
+	qF/Z80JC9Ks4k4LGS7xZ67tHoI1cLq7OM6O8a/E+/PWrVLzKFz8/ge34Lo+KiyUGg3zU
+	oBNZ1B0LOZNG8Aqc+y0TKuVvCboLy/0zEEY/mgvW1NjsRX+TiMd7MsOLY71qBHEqzUzs
+	LW4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TS/cS0WIxUt0C1ugLBzkJVLme+HgXf4CQCA1cwtYdio=;
-	b=k2JPjAE0Z+djZKteQj4vPBrwroGR5Ke64Ljqv9mDPbt9/cDG6nIHn1nbLV4b/QkDWg
-	I85mHjzghS8+ocisyAzjhJNfor94or1kKARdK+G4HOOVAWplRCUeJ+q4ilwDONgnnANF
-	XDLZ8Av5Ynkyxc6aef8gqr/HCcEh4E8sH7Fv8oK1JIkHa+78rnQaW7FFlIUTP7LlFiu3
-	evl9IwBVGvoXhTQGeWslrK0ynzns/IWtIo13ccUqDbFa8Xji2t+jTFM8yGBkwHPV/LKk
-	onTVNTBo5jcNjgtQJRSfdRqCmdOymvU9gIMJVSZ6QoS5mhyl4SU5GML1X3/l10+eM1uV
-	+jUQ==
-X-Gm-Message-State: AKwxytctQmAicrEYVf8kUi2Azezj5dteMzrtbVA/kGqkv3OyuTJCfxj1
-	tvXu3Va0leAd6hsMTQuM2qZNbXkg
-X-Google-Smtp-Source: AH8x225nisjIm1441NrqwUYeyOXF02pKwXo4VjShjs9XV0CgNsw6QONQOg7Ow+BztYv+CK02gPr/kg==
-X-Received: by 10.55.99.143 with SMTP id x137mr41823743qkb.90.1517337973565;
-	Tue, 30 Jan 2018 10:46:13 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id 68sm9450594qke.80.2018.01.30.10.46.12
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Jan 2018 10:46:13 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=OKcWP/p5Qvem2uXXVeho1+EAjbGeX+hDk3oIxZLIbVU=;
+	b=pEMqPo81XWz8r4VDGrWuFv4f3nxOrb3yY5tQ8ek9MSr0WqmAtzV8Ocx9ZXZuGKIzq7
+	tD1UQIxG4kfwGgcstEDI0quoiJ30hOSsBe4A9MOoUJx3ihgUdVv9h+/95zmfHfzKuHgv
+	o+PfDi0OwQO5Mpsc18C0UDS7kNviKT29chJRbonzvbzAZ7TjrhRLrF6bco2BXt9AMSvo
+	oBw8mn0pUoYGyGq5gY3y8IXdgDAQgFMBSVjcYcZhG6WTkyR+Nzm5ej19Ma0RDq8aFXCu
+	m4/HWkC1vhfSLd2f0XI3SyEcfHYs4FZ25pr4Tw6wAcmyF8vwSTQW53LlX/GHKB/Uwj/3
+	8zOQ==
+X-Gm-Message-State: AKwxyteciZm0rlwxaHPHKOKut7uMHPGOxdaMSKTG4bAngVTt3cJp0dYZ
+	6qNGK0lVyAo354dxHJWvfbuUBQ6U
+X-Google-Smtp-Source: AH8x225DXiPvDi92VPzL9J6Y2uGnYqL28v25sysxCIsipc5sIT5OVms32JOyuNnCUt/YDIK8Tn7Iqw==
+X-Received: by 10.98.166.195 with SMTP id r64mr31277675pfl.175.1517345172713; 
+	Tue, 30 Jan 2018 12:46:12 -0800 (PST)
+Received: from ?IPv6:2601:646:8880:466c:4c3e:ac59:6e73:b998?
+	([2601:646:8880:466c:4c3e:ac59:6e73:b998])
+	by smtp.gmail.com with ESMTPSA id
+	e26sm15947842pfi.76.2018.01.30.12.46.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Jan 2018 12:46:12 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Jan 2018 13:45:59 -0500
-Message-Id: <1517337959-11060-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pycryptodome: update to version 3.4.8
+References: <20180130113708.14018-1-cshored@thecshore.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <f8e096f2-bc45-4689-8af0-93207f41361a@gmail.com>
+Date: Tue, 30 Jan 2018 12:46:11 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0)
+	Gecko/20100101 Thunderbird/58.0
+MIME-Version: 1.0
+In-Reply-To: <20180130113708.14018-1-cshored@thecshore.com>
+Subject: Re: [networking] [PATCH 0/2] Move openwrt-upstream packages to meta-openwrt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,47 +63,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 18:46:13 -0000
+X-List-Received-Date: Tue, 30 Jan 2018 20:46:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Update the license checksum for latest version and
-verify the terms remain the same
+On 1/30/18 3:37 AM, cshored@thecshore.com wrote:
+> 
+>  ...01-rtnl_flush-Error-on-failed-write.patch | 34 ---------------
+>  .../relayd/relayd_git.bb                     | 17 --------
+>  .../libubox/0001-version-libraries.patch     | 28 ------------
+>  .../libubox/libubox/fix-libdir.patch         | 40 ------------------
+>  .../recipes-devtools/libubox/libubox_git.bb  | 30 -------------
+>  5 files changed, 149 deletions(-)
+> 
+> libubox is probably uncontroversial and in fact was suggested by
+> Khem Raj here: http://lists.openembedded.org/pipermail/openembedded-devel/2018-January/116565.html
+> 
+> relayd I'm not as sure about as it's in meta-networking and there is
+> the off chance it's actually in use.  I'm open to opinions.
+> 
+> In any event I'm updating meta-openwrt with the good things done in
+> meta-openembedded, as well as other work to meake meta-openwrt
+> more generally useful (for use as a hybrid with regular OE, 
+> as a more openwrt-built-with-OE distro, and as a pick the bits
+> that make sense to you repo).
+> 
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-pycryptodome.inc         | 6 +++---
- .../{python-pycryptodome_3.4.7.bb => python-pycryptodome_3.4.8.bb}  | 0
- ...{python3-pycryptodome_3.4.7.bb => python3-pycryptodome_3.4.8.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pycryptodome_3.4.7.bb => python-pycryptodome_3.4.8.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pycryptodome_3.4.7.bb => python3-pycryptodome_3.4.8.bb} (100%)
+it does. Thanks for sending the patches.
 
-diff --git a/meta-python/recipes-devtools/python/python-pycryptodome.inc b/meta-python/recipes-devtools/python/python-pycryptodome.inc
-index ecfcc9d..1efe1eb 100644
---- a/meta-python/recipes-devtools/python/python-pycryptodome.inc
-+++ b/meta-python/recipes-devtools/python/python-pycryptodome.inc
-@@ -3,10 +3,10 @@ DESCRIPTION = "PyCryptodome is a self-contained Python package of low-level\
-  cryptographic primitives."
- HOMEPAGE = "http://www.pycryptodome.org"
- LICENSE = "PD & BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=690cd8c71f0367a558f24fe53d943a2e"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=775fe77831c03bf82f35abc0e230d4c1"
- 
--SRC_URI[md5sum] = "8744863c7d5980ae3f81c2e288701a61"
--SRC_URI[sha256sum] = "18d8dfe31bf0cb53d58694903e526be68f3cf48e6e3c6dfbbc1e7042b1693af7"
-+SRC_URI[md5sum] = "030c40da6377bbc82deef8e884fa22cd"
-+SRC_URI[sha256sum] = "ede7f1f44b0895feb8ddbf882d1a7eb504deb3fa34fcc4860d6065c25cbdf175"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-pycryptodome_3.4.7.bb b/meta-python/recipes-devtools/python/python-pycryptodome_3.4.8.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pycryptodome_3.4.7.bb
-rename to meta-python/recipes-devtools/python/python-pycryptodome_3.4.8.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pycryptodome_3.4.7.bb b/meta-python/recipes-devtools/python/python3-pycryptodome_3.4.8.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pycryptodome_3.4.7.bb
-rename to meta-python/recipes-devtools/python/python3-pycryptodome_3.4.8.bb
--- 
-2.7.4
+> Regards,
+> 
+> Daniel
+> 
 
 
