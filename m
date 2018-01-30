@@ -1,46 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
 	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 557DE7884B;
-	Tue, 30 Jan 2018 14:27:14 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id a1so11381643wri.5;
-	Tue, 30 Jan 2018 06:27:16 -0800 (PST)
+	by mail.openembedded.org (Postfix) with ESMTP id 604F178859
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jan 2018 15:07:47 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id g21so11499512wrb.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jan 2018 07:07:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=U2w0hH0Yw14bN6VkvV/S6r7VbD6kLRZBFh2yHVLsE7U=;
-	b=krCqDuZLnd/NUbi9sNasi6pEYcwW7vWp05F9KRbT16C40TzHqhoEU35gczEictTbKh
-	m7akgj2/wjLZ7nU9juA/+BKdw1JfaxwviywCPepTOrXIr7/kKv/3ts88sVfh80zuLRUo
-	wljmwLUkVsAf5+cwJp+RCAOuokOFHlSY7daVeL2D3c1Ia4Jo4W7Kmk/qG0KC5CYWfQES
-	r0m3cE83QnpdgzhDvwOi/ubYU/a4CG8935bXG2OS6zWpBDX+1U+bInwrGlqC8BhSEnQo
-	SAl0HDxNyZeiSBG9yTxdpXkYzfIZgzJhAxTUEY4oSrjAxAEyH8S/raDrFYBG9exP1wKV
-	njlw==
+	:cc; bh=ZZkEsgCoUYJ17v/gBzEhGjy3mGviTO8g0O2CX5rDYfM=;
+	b=lTKIKeiuLPy94qcYb9oi5fO6QTm0cHLf2X2oR0mEDh4D9q9dQoFHBuRLlGZRPPis3h
+	H0GUaAKN+rba0mwbFsawvXzk8LXpI2uw2jxbaSR1wFtSxFPLdX5irKfwhvTvEjkrde3a
+	3tQ433FEUqxvqdkIN8TFM/GjvDyyKzD6LfABO24xns111DFUcuYUqNPXHUrafTFYxyzU
+	Yn15+VEUArazOwooMr2h6VhzHnER+KVbzpJbtZkL1ozIETdbqAXWhrzmIEmw9yj1TLjl
+	riFnszL6DV3cIFCXOD0VueeSEJrM5+y6sm00qLJdyzjCczU8v54eZZ7+Gm7YxpUJnpab
+	vfiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=U2w0hH0Yw14bN6VkvV/S6r7VbD6kLRZBFh2yHVLsE7U=;
-	b=uj2AKzr1R9lFfwOMldM0ZTTvB3QphNwmSiANLTrFYuV1992uVtizOGw9Hz+RsGOQkK
-	EqryD8TdkkvOW5CNcMfIU0O5nI9qJsQltl3zCcnifwVAnkIfw2tiVYX42F4OpiSvY2wb
-	BDycb3o+hF9iaWFJVhhnh2kjNDrivvOT7BWl96FDAmwUMbqNAXwuEZhgwzESJmuiiTMH
-	mp51mJAYHMXQI+dBGpwIpZ0sv8RMrs01wvkjwAZopKOc+nUXssNXDnZo8QG3TtW0NekX
-	XbBtc/rO6i3miNqh0ja7qDGiuHraRrJnlHTmBrg+c9x5yEdAUTusfaD66YSRzpsQ2mVq
-	S3aQ==
-X-Gm-Message-State: AKwxytd7r4l5WROFGeMK1wi61nxIBQ8A1lVG8KUKPBtsLxNIee7BtYD7
-	jaRGl2RNr9lW5yj010cvZU42RisvhG8a6U5rpeup8A==
-X-Google-Smtp-Source: AH8x225hky6X2d2VpaKrfdvGQo/o5UYA7Eu/zDA4WMNNW9l5WhfbART6LEHOBFj1AsdoL2iFwWCpVjMuDG5rEmrNej0=
-X-Received: by 10.223.171.24 with SMTP id q24mr8697551wrc.206.1517322435982;
-	Tue, 30 Jan 2018 06:27:15 -0800 (PST)
+	bh=ZZkEsgCoUYJ17v/gBzEhGjy3mGviTO8g0O2CX5rDYfM=;
+	b=e700zOaCrWgdeT/klRHdK5vDsh9/ZVhuoEgKrzjDpaO6O7KaCXPi5pnvivKwtAH5M6
+	lheH6oS3kRBr28U3Ha+Ne1pu+Sw2VK0I4ZL5C4j8fi7j3kbElbRiD/Sbpm4dt6dhrY7x
+	VjG6k0v7WPhBGK1YvYauysevZ5mCp9wbwx03/0AB8R7o+V1B3+2ghIc/oEiYlaEbVH0N
+	DlM6aC/Rd1KSShKobKHgw5LRnKiko2rqoPHufaUqNZ+yfkmRTlh0thKP1itK8RItAECf
+	WEMGx1hPHqv5wUPMhXxcgupYmOej1DAPg+5yuRW7oBTx4ZlXsU3uUMekonKvotInuboR
+	v4xg==
+X-Gm-Message-State: AKwxytcVCHMOrUDsBxAwhfe0dPMJ8pGbywdkLKvsfdhBUG4aOJDdSm+y
+	iesXt6YUObz0lnenxNmJrMt3jEQijrQuH5p1rng=
+X-Google-Smtp-Source: AH8x225D/Eh5v7DyiBFossv/nsdRwk7Y6fwVrMyrJxwTVJ6m0T++pimyNv/c1C+tMm7sSB4Q7RWjsvqgjOHhbbz2WwA=
+X-Received: by 10.223.195.78 with SMTP id e14mr22496932wrg.68.1517324868255;
+	Tue, 30 Jan 2018 07:07:48 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Tue, 30 Jan 2018 06:27:15 -0800 (PST)
-In-Reply-To: <20150818095451.0B5435036F@opal.openembedded.org>
-References: <20150818095451.0B5435036F@opal.openembedded.org>
+Received: by 10.28.74.211 with HTTP; Tue, 30 Jan 2018 07:07:47 -0800 (PST)
+In-Reply-To: <1d1b437e-fa66-ea0f-6af2-c04933376a2c@gmail.com>
+References: <20180117144230.6819-1-pascal.bach@siemens.com>
+	<1d1b437e-fa66-ea0f-6af2-c04933376a2c@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 30 Jan 2018 15:27:15 +0100
-Message-ID: <CA+chaQeSwgn=YjGCifcokcB7eAe4Ygr-Y9c7_--urFd-2=3QVA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 30 Jan 2018 16:07:47 +0100
+Message-ID: <CA+chaQdJuci0QP4Eg4UjpxC91JRRy2EQ5GSZ0HvLumbYMS6dbQ@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Li xin : tiptop: upgrade 2.2 -> 2.3
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] poco: update to 1.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,72 +56,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 14:27:15 -0000
+X-List-Received-Date: Tue, 30 Jan 2018 15:07:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Anyone else seeing random failures with this one?
+Anyone else seeing strange behavior with poco and libCppUnit.so.1 library?
 
-/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/utils-expression.c:191: error:
-undefined reference to 'yyparse'
-/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:75: error: undefined
-reference to 'yylval'
-/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:75: error: undefined
-reference to 'yylval'
-/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:65: error: undefined
-reference to 'yylval'
-/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:65: error: undefined
-reference to 'yylval'
-collect2: error: ld returned 1 exit status
-make[1]: *** [tiptop] Error 1
+WARNING: poco-1.8.0.1-r0 do_package: poco-cppunit-1.8.0.1 was registered as
+shlib provider for libCppUnit.so.1, changing it to poco-1.8.0.1 because it
+was built later
+WARNING: poco-1.8.0.1-r0 do_package: poco-1.8.0.1 was registered as shlib
+provider for libCppUnit.so.1, changing it to poco-cppunit-1.8.0.1 because
+it was built later
 
-On Tue, Aug 18, 2015 at 11:54 AM, <git@git.openembedded.org> wrote:
+this is happening with the 1.8.0.1 version already, but it would be good to
+fix if it isn't fixed in 1.8.1 already. Maybe just passing explicit
+-DENABLE_TESTS=OFF in
+${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
+might help (I haven't tried, I don't use poco anywhere, so I've just
+blacklisted it locally).
 
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 4638d7223aa48639238c35b019e1ca86151a0b65
-> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=
-> 4638d7223aa48639238c35b019e1ca86151a0b65
+On Mon, Jan 22, 2018 at 5:05 PM, akuster808 <akuster808@gmail.com> wrote:
+
 >
-> Author: Li xin <lixin.fnst@cn.fujitsu.com>
-> Date:   Wed Jul 29 17:54:11 2015 +0800
 >
-> tiptop: upgrade 2.2 -> 2.3
+> On 01/17/2018 06:42 AM, Pascal Bach wrote:
+> > Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 >
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Failed to build. Please see
 >
-> ---
->
->  meta-oe/recipes-extended/tiptop/{tiptop_2.2.bb => tiptop_2.3.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-> b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
-> similarity index 87%
-> rename from meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-> rename to meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
-> index a803e26..5a98116 100644
-> --- a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-> +++ b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
-> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
-> b234ee4d69f5fce4486a80fdaf4a4263"
->  DEPENDS = "ncurses libxml2"
->
->  SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
-> -SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
-> -SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877
-> ce8501b0aac1116a86bed8a16aa96b171d"
-> +SRC_URI[md5sum] = "f1fba1e90465b0e5a3865b19133fa19d"
-> +SRC_URI[sha256sum] = "3f07e958b40acaeab98e9eb1326c9f
-> 91b0be0a782c1cc2bd7a9e18d31fab18ca"
->
->  inherit autotools-brokensep
->  EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
+> http://errors.yoctoproject.org/Errors/Build/51576/
+> > ---
+> >  meta-oe/recipes-support/poco/{poco_1.8.0.1.bb => poco_1.8.1.bb} | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >  rename meta-oe/recipes-support/poco/{poco_1.8.0.1.bb => poco_1.8.1.bb}
+> (98%)
+> >
+> > diff --git a/meta-oe/recipes-support/poco/poco_1.8.0.1.bb
+> b/meta-oe/recipes-support/poco/poco_1.8.1.bb
+> > similarity index 98%
+> > rename from meta-oe/recipes-support/poco/poco_1.8.0.1.bb
+> > rename to meta-oe/recipes-support/poco/poco_1.8.1.bb
+> > index 160b4d391..e44ff4470 100644
+> > --- a/meta-oe/recipes-support/poco/poco_1.8.0.1.bb
+> > +++ b/meta-oe/recipes-support/poco/poco_1.8.1.bb
+> > @@ -12,7 +12,7 @@ inherit cmake ptest
+> >
+> >  BBCLASSEXTEND = "native"
+> >
+> > -SRCREV = "af527ab21fca5ab2659285408aec9920ed7c7b17"
+> > +SRCREV = "2eca6c1813632fb779e07f1e1968afefa81e1dd0"
+> >  SRC_URI = " \
+> >      git://github.com/pocoproject/poco.git \
+> >      file://run-ptest \
 >
 > --
 > _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
