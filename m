@@ -1,49 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CED578784
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 14:26:22 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id f6so9730791wra.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 06:26:24 -0800 (PST)
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 557DE7884B;
+	Tue, 30 Jan 2018 14:27:14 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id a1so11381643wri.5;
+	Tue, 30 Jan 2018 06:27:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=y+0z/UEzeN3+6VMbUZ7dXlaBTXWuV1S7kB9RpwyWcAw=;
-	b=VU+tCk/jzl5f2f1kflbiw4oXz5iOk6q5JVBeuz70+zS57pXuInoo89d6bA3XN8Yv4R
-	PKMYJuVOGFA+z4hOMaLv2GtH94sJ3oiVkyuMRvdyCEa5PipxzTOiJB5M5NK06YrPT0Lj
-	3kOwse/cgsXhp8vtL9pqKffWkF8UUSX3laStibfg5fZJK6y+hGKjgGHeSqxvZvQlZiUm
-	TjzEXY7nxMaeRtX8T9HDJDoyQoRqt2XtUdMvEE44hOZiVaDieJ5VEgqIEzaOkBiAikbO
-	HE5tAczJthyaoKfKQBp0wEBtMiPg/XQu4rTZ/+ajG6CUhmDE2arxfljLCfU/v3+ZKb4C
-	4F+Q==
+	:cc; bh=U2w0hH0Yw14bN6VkvV/S6r7VbD6kLRZBFh2yHVLsE7U=;
+	b=krCqDuZLnd/NUbi9sNasi6pEYcwW7vWp05F9KRbT16C40TzHqhoEU35gczEictTbKh
+	m7akgj2/wjLZ7nU9juA/+BKdw1JfaxwviywCPepTOrXIr7/kKv/3ts88sVfh80zuLRUo
+	wljmwLUkVsAf5+cwJp+RCAOuokOFHlSY7daVeL2D3c1Ia4Jo4W7Kmk/qG0KC5CYWfQES
+	r0m3cE83QnpdgzhDvwOi/ubYU/a4CG8935bXG2OS6zWpBDX+1U+bInwrGlqC8BhSEnQo
+	SAl0HDxNyZeiSBG9yTxdpXkYzfIZgzJhAxTUEY4oSrjAxAEyH8S/raDrFYBG9exP1wKV
+	njlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=y+0z/UEzeN3+6VMbUZ7dXlaBTXWuV1S7kB9RpwyWcAw=;
-	b=NjrgqFI1XlPrckttyNuCVWB6ez/o3+zmEtjUZ2O3vxx/RcYMXNP1C3KPHLTK1FtOMV
-	pY791rdAVb8CP9Uc8sGI+EklyJ0GZkQaTOjpaMhNDpcC4tB5EoPvbPJQ6puakPzaQILb
-	v68gljhvp22kL+8Wenif4uai71SH9U2ltleZZRbXlUSEp6And4C9MjXvrBT8YH08TzhH
-	zjCesdDDrpbe/+t9sGtamSCdUVE2QpJ7Hq+d176TakRW60BS8Ln5H6NO5ZWmzxaTfq/G
-	X+lQRMKfi+Rrama5mX5yXEW2V4wK8iOcmbZTKLhRqv8sfYKYehigbi/m8wEOE4UTxvrn
-	fFYA==
-X-Gm-Message-State: AKwxytfI4bikfAA0AfBgRqmoRfNhkRLcdduBDwzqbbQrlqz/m3DjE11Z
-	k1AxsuN0WiJwZHOhOgrjFubLe5hK4UUq7So51koTlQ==
-X-Google-Smtp-Source: AH8x2265eK0yM+U3w+cVjv3sDG4AbDFRsQidPRI1TNWCRZYZXbuA/n1iWsfkj8DuDIuJReQ+dAgOjaz6Bx04vhYuHrE=
-X-Received: by 10.223.189.136 with SMTP id l8mr5983127wrh.58.1517322383514;
-	Tue, 30 Jan 2018 06:26:23 -0800 (PST)
+	bh=U2w0hH0Yw14bN6VkvV/S6r7VbD6kLRZBFh2yHVLsE7U=;
+	b=uj2AKzr1R9lFfwOMldM0ZTTvB3QphNwmSiANLTrFYuV1992uVtizOGw9Hz+RsGOQkK
+	EqryD8TdkkvOW5CNcMfIU0O5nI9qJsQltl3zCcnifwVAnkIfw2tiVYX42F4OpiSvY2wb
+	BDycb3o+hF9iaWFJVhhnh2kjNDrivvOT7BWl96FDAmwUMbqNAXwuEZhgwzESJmuiiTMH
+	mp51mJAYHMXQI+dBGpwIpZ0sv8RMrs01wvkjwAZopKOc+nUXssNXDnZo8QG3TtW0NekX
+	XbBtc/rO6i3miNqh0ja7qDGiuHraRrJnlHTmBrg+c9x5yEdAUTusfaD66YSRzpsQ2mVq
+	S3aQ==
+X-Gm-Message-State: AKwxytd7r4l5WROFGeMK1wi61nxIBQ8A1lVG8KUKPBtsLxNIee7BtYD7
+	jaRGl2RNr9lW5yj010cvZU42RisvhG8a6U5rpeup8A==
+X-Google-Smtp-Source: AH8x225hky6X2d2VpaKrfdvGQo/o5UYA7Eu/zDA4WMNNW9l5WhfbART6LEHOBFj1AsdoL2iFwWCpVjMuDG5rEmrNej0=
+X-Received: by 10.223.171.24 with SMTP id q24mr8697551wrc.206.1517322435982;
+	Tue, 30 Jan 2018 06:27:15 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Tue, 30 Jan 2018 06:26:22 -0800 (PST)
-In-Reply-To: <385dfd3c60bcebaf2b96ad65b75b1ce07f706be3.1504238509.git.paul.eggleton@linux.intel.com>
-References: <cover.1504238509.git.paul.eggleton@linux.intel.com>
-	<385dfd3c60bcebaf2b96ad65b75b1ce07f706be3.1504238509.git.paul.eggleton@linux.intel.com>
+Received: by 10.28.74.211 with HTTP; Tue, 30 Jan 2018 06:27:15 -0800 (PST)
+In-Reply-To: <20150818095451.0B5435036F@opal.openembedded.org>
+References: <20150818095451.0B5435036F@opal.openembedded.org>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 30 Jan 2018 15:26:22 +0100
-Message-ID: <CA+chaQfxzxYcPB75P-vPkV++zTo2PxqNWVPgHp2cTcVqV+bjBg@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Tue, 30 Jan 2018 15:27:15 +0100
+Message-ID: <CA+chaQeSwgn=YjGCifcokcB7eAe4Ygr-Y9c7_--urFd-2=3QVA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] paho-mqtt-c: add recipe from meta-intel-iot-middleware and update
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Li xin : tiptop: upgrade 2.2 -> 2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,152 +53,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 14:26:23 -0000
+X-List-Received-Date: Tue, 30 Jan 2018 14:27:15 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+Anyone else seeing random failures with this one?
 
-it's quite rare, but I got few build failures with this component like this:
+/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/utils-expression.c:191: error:
+undefined reference to 'yyparse'
+/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:75: error: undefined
+reference to 'yylval'
+/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:75: error: undefined
+reference to 'yylval'
+/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:65: error: undefined
+reference to 'yylval'
+/usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:65: error: undefined
+reference to 'yylval'
+collect2: error: ld returned 1 exit status
+make[1]: *** [tiptop] Error 1
 
-DEBUG: Executing shell function do_compile
-NOTE: make -j 24
-mkdir -p build/output/samples
-sed -e "s/@CLIENT_VERSION@/1.2.0/g" -e "s/@BUILD_TIMESTAMP@/Fri Jan 26
-21:18:06 UTC 2018/g" src/VersionInfo.h.in > build/VersionInfo.h
-/bin/sh: 1: cannot create build/VersionInfo.h: Directory nonexistent
-make: *** [build/VersionInfo.h] Error 2
-make: *** Waiting for unfinished jobs....
-mkdir -p build/output/test
-echo OSTYPE is Linux
-OSTYPE is Linux
-ERROR: oe_runmake failed
-WARNING: exit code 1 from a shell command.
+On Tue, Aug 18, 2015 at 11:54 AM, <git@git.openembedded.org> wrote:
 
-anyone else seeing this issue?
-
-On Fri, Sep 1, 2017 at 6:02 AM, Paul Eggleton <paul.eggleton@linux.intel.com
-> wrote:
-
-> The following improvements have been made over the recipe that was in
-> meta-intel-iot-middleware (a layer which is no longer actively
-> maintained):
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 4638d7223aa48639238c35b019e1ca86151a0b65
+> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=
+> 4638d7223aa48639238c35b019e1ca86151a0b65
 >
-> * Upgrade to 1.2.0. The version number being used previously (3.1) was
->   bogus - I guess someone saw that it supported the MQTT *protocol*
->   version 3.1 and assumed that was the library version. Since we are
->   renaming it to paho-mqtt-c at the same time to distinguish it from
->   other Eclipse Paho MQTT library flavours, we don't need to bump PE.
-> * Fix SRC_URI since the repository has been moved
-> * Fix "No GNU_HASH in the elf binary" QA error
-> * Add notice.html and about.html to LIC_FILES_CHKSUM since they cover
->   licensing
-> * Add description, Signed-off-by and Upstream-Status to makefile.patch
-> * Set short description in SUMMARY
-> * Drop unnecessary custom do_compile - the default implementation
->   basically does the same thing
-> * Drop RDEPENDS on openssl - linking already ensures runtime
->   dependencies get set correctly
-> * Move DEPENDS further up
+> Author: Li xin <lixin.fnst@cn.fujitsu.com>
+> Date:   Wed Jul 29 17:54:11 2015 +0800
 >
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> tiptop: upgrade 2.2 -> 2.3
+>
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
 > ---
->  .../paho-mqtt-c/files/makefile.patch               | 25 ++++++++++++++++
->  .../paho-mqtt-c/paho-mqtt-c_1.2.0.bb               | 35
-> ++++++++++++++++++++++
->  2 files changed, 60 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/
-> paho-mqtt-c/files/makefile.patch
->  create mode 100644 meta-oe/recipes-connectivity/paho-mqtt-c/
-> paho-mqtt-c_1.2.0.bb
 >
-> diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/files/makefile.patch
-> b/meta-oe/recipes-connectivity/paho-mqtt-c/files/makefile.patch
-> new file mode 100644
-> index 0000000..a31bfaa
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/paho-mqtt-c/files/makefile.patch
-> @@ -0,0 +1,25 @@
-> +Disable building some things we don't need
-> +
-> +Upstream-Status: Inappropriate [config]
-> +
-> +Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> +
-> +---
-> + Makefile |    3 ++-
-> + 1 file changed, 2 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/Makefile b/Makefile
-> +index 33bd2d0..84262bd 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -115,7 +115,8 @@ LDFLAGS_AS = -shared -Wl,-soname,lib${MQTTLIB_AS}.so.${MAJOR_VERSION}
-> -lpthread
-> +
-> + all: build
-> +
-> +-build: | mkdir ${MQTTLIB_C_TARGET} ${MQTTLIB_CS_TARGET}
-> ${MQTTLIB_A_TARGET} ${MQTTLIB_AS_TARGET} ${MQTTVERSION_TARGET}
-> ${SYNC_SAMPLES} ${ASYNC_SAMPLES} ${SYNC_TESTS} ${SYNC_SSL_TESTS}
-> ${ASYNC_TESTS} ${ASYNC_SSL_TESTS}
-> ++build: | mkdir ${MQTTLIB_C_TARGET} ${MQTTLIB_CS_TARGET}
-> ${MQTTLIB_A_TARGET} ${MQTTLIB_AS_TARGET}
-> ++#${MQTTVERSION_TARGET} ${SYNC_SAMPLES} ${ASYNC_SAMPLES} ${SYNC_TESTS}
-> ${SYNC_SSL_TESTS} ${ASYNC_TESTS} ${ASYNC_SSL_TESTS}
-> +
-> + clean:
-> +       rm -rf ${blddir}/*
-> +--
-> diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.0.bb
-> b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.0.bb
-> new file mode 100644
-> index 0000000..fec380c
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.0.bb
-> @@ -0,0 +1,35 @@
-> +SUMMARY = "Paho MQTT - C libraries for the MQTT and MQTT-SN protocols"
-> +DESCRIPTION = "Client implementation of open and standard messaging
-> protocols for Machine-to-Machine (M2M) and Internet of Things (IoT)."
-> +HOMEPAGE = "http://www.eclipse.org/paho/"
-> +SECTION = "console/network"
-> +LICENSE = "EPL-1.0 | EDL-1.0"
-> +
-> +LIC_FILES_CHKSUM = " \
-> +        file://edl-v10;md5=3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
-> +        file://epl-v10;md5=659c8e92a40b6df1d9e3dccf5ae45a08 \
-> +        file://notice.html;md5=a00d6f9ab542be7babc2d8b80d5d2a4c \
-> +        file://about.html;md5=dcde438d73cf42393da9d40fabc0c9bc \
-> +"
-> +
-> +SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http"
-> +
-> +SRCREV = "e8d34da24ad807f5e698b327d67591fd4b4bfa7e"
-> +
-> +DEPENDS = "openssl"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +TARGET_CC_ARCH += "${LDFLAGS}"
-> +
-> +do_install() {
-> +    install -d ${D}${libdir}
-> +    oe_libinstall -C build/output -so libpaho-mqtt3a ${D}${libdir}
-> +    oe_libinstall -C build/output -so libpaho-mqtt3as ${D}${libdir}
-> +    oe_libinstall -C build/output -so libpaho-mqtt3c  ${D}${libdir}
-> +    oe_libinstall -C build/output -so libpaho-mqtt3cs ${D}${libdir}
-> +    install -d ${D}${includedir}
-> +    install -m 644 src/MQTTAsync.h ${D}${includedir}
-> +    install -m 644 src/MQTTClient.h ${D}${includedir}
-> +    install -m 644 src/MQTTClientPersistence.h ${D}${includedir}
-> +}
-> +
-> --
-> 2.9.5
+>  meta-oe/recipes-extended/tiptop/{tiptop_2.2.bb => tiptop_2.3.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+> b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
+> similarity index 87%
+> rename from meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+> rename to meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
+> index a803e26..5a98116 100644
+> --- a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+> +++ b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
+> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
+> b234ee4d69f5fce4486a80fdaf4a4263"
+>  DEPENDS = "ncurses libxml2"
+>
+>  SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
+> -SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
+> -SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877
+> ce8501b0aac1116a86bed8a16aa96b171d"
+> +SRC_URI[md5sum] = "f1fba1e90465b0e5a3865b19133fa19d"
+> +SRC_URI[sha256sum] = "3f07e958b40acaeab98e9eb1326c9f
+> 91b0be0a782c1cc2bd7a9e18d31fab18ca"
+>
+>  inherit autotools-brokensep
+>  EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
 >
 > --
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 >
 
