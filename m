@@ -1,41 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B4CD47883A
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 34ED660053
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 17:53:10 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id z10so18370907qti.5
+	Tue, 30 Jan 2018 18:31:08 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id g14so18531390qti.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 09:53:12 -0800 (PST)
+	Tue, 30 Jan 2018 10:31:10 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=gZOn2r89V7hgkxVQ8MQ9KFb0X33TrCgveLsnw56Cpjw=;
-	b=ulbS/Fcu7j68SuMhJDMZPeTQmzDESG5WZucIC+s6hetfikIVFZaLgfH1G+KdbS7WYV
-	xWO0RUkGjuCB5p70LWz6pAP1Xkq54nc3I+LAHX/ZuHoSxi1MnbJimPHqERhAFdJOq+W5
-	puKrUWFB4T5+JtO78wtBNOZ4iLFWk+Xl7jUyPXDDR66AfKj1bfGJE61teQwsC61Dd+tD
-	Dk+0p+Xk3DO0eQ6Cwojkfx1Qvo4K7svT6kiXnDLqhBDSqvoR3TS9F/pLOOgJaqAm/LzK
-	22DneU2E5yOstZrWKtjEoI17GTTaRIIYHs7S3ykwpU6j6+ewC70nTybYlOoUYzXUvqs3
-	tX7w==
-X-Gm-Message-State: AKwxytfYvuNBkexyGinR18VWO43JPXsSzs0tJ9WfQIb33aAYKq0jk3rG
-	slKaooRifGEvOyToNh1UH3Crc2Mz
-X-Google-Smtp-Source: AH8x2247i7/5ofA9OBaHqT3BhCa0xO5tbL/PL0hLUzw/EvGybZQi8HmEo5ecZTQL8X6YKfYtRrfNqQ==
-X-Received: by 10.237.42.165 with SMTP id t34mr44517624qtd.60.1517334791384;
-	Tue, 30 Jan 2018 09:53:11 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=d4PLyXNdmqbtx1uYd7q0Ex7iAE4G1bXGQ4pmePcifKE=;
+	b=QvBbE0ZQviIEY7EFxgDv+ji9LStafbQTAlS+FDQ929IY8xxvMbEjWRy+Bi+fprtQ3t
+	rzV7c/0Dp00qfIr4gCL5htVpqR+tapeohTGea/6Y008oOT1s9t7NtHlb2UNoUe5CSJ9c
+	DDHc/eMFR/JeFqtA/C5DxtHTszy4FQltHx3JOQ2+E/Cc30GnEDdlQ14ylow56rB7njs9
+	TqYWPboEuuDheGHDqtJyzUhQb9qGc4yw6XkpYgYYlIx8C0KdE2qLquEvBUjSQR2jVXUv
+	J7DQiIMNzTcyskS7+3moWO/b2t0MGsIkeS3xnlhZSOfKIACGc9HCAG632dc1K+gk6JlG
+	jnwA==
+X-Gm-Message-State: AKwxytfo2rTZSJzivdrTKhXTy1Jt2EHbyLliX9CcqyjYk8wYIpEAw1++
+	KJGSUYrwiHssq3YUV9aLGIXF1pTQ
+X-Google-Smtp-Source: AH8x226zLxyi7yWFOTwzirp6dDer07Kwj0RoTnMChUoA5e3TV3au4Px29eus6QIMSe5zeGh1HDbjhQ==
+X-Received: by 10.200.51.103 with SMTP id u36mr28915444qta.127.1517337069743; 
+	Tue, 30 Jan 2018 10:31:09 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	d16sm9830965qkj.47.2018.01.30.09.53.10
+	m31sm11446420qtd.23.2018.01.30.10.31.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Jan 2018 09:53:11 -0800 (PST)
+	Tue, 30 Jan 2018 10:31:09 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Jan 2018 12:52:58 -0500
-Message-Id: <1517334778-30445-2-git-send-email-derek@asterius.io>
+Date: Tue, 30 Jan 2018 13:30:58 -0500
+Message-Id: <1517337058-21997-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1517334778-30445-1-git-send-email-derek@asterius.io>
-References: <1517334778-30445-1-git-send-email-derek@asterius.io>
-Subject: [meta-python][PATCH 2/2] python-grpcio-tools: update to version 1.8.4
+Subject: [meta-python][PATCH] python-ndg-httpsclient: update to version 0.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 17:53:10 -0000
+X-List-Received-Date: Tue, 30 Jan 2018 18:31:09 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{python-grpcio-tools_1.8.3.bb => python-grpcio-tools_1.8.4.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-grpcio-tools_1.8.3.bb => python-grpcio-tools_1.8.4.bb} (74%)
+ meta-python/recipes-devtools/python/python-ndg-httpsclient.inc       | 4 ++--
+ meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb  | 2 ++
+ meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb | 2 ++
+ 3 files changed, 6 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools_1.8.3.bb b/meta-python/recipes-devtools/python/python-grpcio-tools_1.8.4.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python-grpcio-tools_1.8.3.bb
-rename to meta-python/recipes-devtools/python/python-grpcio-tools_1.8.4.bb
-index 85bb000..45e0cc1 100644
---- a/meta-python/recipes-devtools/python/python-grpcio-tools_1.8.3.bb
-+++ b/meta-python/recipes-devtools/python/python-grpcio-tools_1.8.4.bb
-@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
+diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+index 133cab1..b556432 100644
+--- a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
++++ b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://MANIFEST.in;md5=ce22c0cd986d2de3f7073cd6b5523ae0"
  
- inherit pypi setuptools
+-SRC_URI[md5sum] = "59a2f0a5b3b60e6c520a9cc7be9aff87"
+-SRC_URI[sha256sum] = "7bfd8c5cfcbc241a93ca6a4e45f952650f5c7ecf7c49b1dbcf5f4d390240be0b"
++SRC_URI[md5sum] = "a0d349cf9530e331697a6e5ab1f40de6"
++SRC_URI[sha256sum] = "fba4d4798dcac2965874f24afb6631b4326baa4bd02505744d34f690c354856a"
  
--SRC_URI[md5sum] = "108e5d231074d5eeac9dd5515e0c434f"
--SRC_URI[sha256sum] = "195e5b8d4cfac2492769eb6b0f7b53fda54344a1dc7b4bbfa653889a83038219"
-+SRC_URI[md5sum] = "e04e65afe60410cf178ff2698f052a7c"
-+SRC_URI[sha256sum] = "edc84c09039d3a01012ccd97450abd06ee6b980710f6d9f191b50deb6774a75c"
+ PYPI_PACKAGE = "ndg_httpsclient"
  
- # For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
- BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb b/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb
+new file mode 100644
+index 0000000..ca0eb32
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb
+@@ -0,0 +1,2 @@
++require python-ndg-httpsclient.inc
++inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb
+new file mode 100644
+index 0000000..3f07b2e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-ndg-httpsclient.inc
 -- 
 2.7.4
 
