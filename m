@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 45A3F7886B
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1835B7883A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 17:31:33 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id i1so18239986qtj.8
+	Tue, 30 Jan 2018 17:53:09 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id d18so11215514qke.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 09:31:35 -0800 (PST)
+	Tue, 30 Jan 2018 09:53:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ik6L8piBgnVUaTsPz8N/SdOSzspEcvzVjePDmEqmAtU=;
-	b=VCf0ujhJZfBwnIFbiLkTu+yr0FhF8EAKDh7m1Pj5DsS9hMFI+QLVzAT0moljPwQTUJ
-	BGgaPQXCBbY4d3PPeVnB7q8OnZkyccI52M7n6iCCQanj2uKl0GNCFCb55z3YugBSaxE0
-	4sdW0z4OZGgjxbPgp1BIEHSbniIri1UMQu5hGj1lvAd4fYSXTp5jFQUCcV5k0TF6t/BD
-	stG2m1sZq2myif7Lr5zEqzgZjdu3he4VpROEsOKrKAMFX63XLDcEegsVZBtOCui5lhae
-	1bjESpHyBJqIT5tubJ+GgoxhPsNoJxaDF/hSyjpI8uHYFz9VGfe0WOmgz/GVf3LsP7oq
-	7FRg==
-X-Gm-Message-State: AKwxytdeLp+eLqidxoV0tErhB6EJc9fwL6UQ6C72yNPQoXRdvQHM1hOP
-	sRYzhuIfmfpFO6OBfhI7vfMiZyca
-X-Google-Smtp-Source: AH8x227bcP21/D3boNUjm3L12zWVzV7BfE9W1C64KE7olarW86+Sodwr66Z3BrSCzQNNAc9te3B3ig==
-X-Received: by 10.237.41.163 with SMTP id o32mr47451611qtd.80.1517333494797;
-	Tue, 30 Jan 2018 09:31:34 -0800 (PST)
+	bh=F+5TcCkoAR0+t24KDWJU6vqR38AZcrusLjcG7HgtkiE=;
+	b=E3xY25c41cjJlsNx2Xi9xS0gsiQCPLhY+eexg6a8bw51WmXnJ7p+lkhpwC3WJc591z
+	TOwFcHTFpabESKPhQH2Wf5I0h+Z0Gec60qo9L8XQOj7rRTHhITnm5OsepVO43Sv0qz5X
+	yDnPdU950WhQNSeqJzHjDHsFoNdiYpQrccV1uAd3y/laAlJyLaefZZSyucKtwSY0Pveb
+	8VfiGsDDYpvVrhcnp8nQDu6/2biL4r4ZtzpalVqBQXh+D8o9jX37Lf+QmV7PdX+hmLah
+	cg/fNpvxMicqXvjBBdm2R8V2YbaQddyVxwcHMaE8WnbVH/0brh3Qj1/fdQwYXkDVvdIF
+	W4zQ==
+X-Gm-Message-State: AKwxyteTSMwQBzxtg9yIBGCLWwxxtxsNVeIEbGzhkNpwY2zNMd/m5YLS
+	/0UVOJk66iU4GyNblpfz7OGgMjzw
+X-Google-Smtp-Source: AH8x225NpR1b6SiXvzGS7yD7UE+zTezIW0bV0lnyfgabZZIKj0g0xNYzJVGwKEpGTOkAuKryVh5G4g==
+X-Received: by 10.55.75.216 with SMTP id y207mr20727018qka.7.1517334790917;
+	Tue, 30 Jan 2018 09:53:10 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	r34sm11496929qtd.48.2018.01.30.09.31.34
+	d16sm9830965qkj.47.2018.01.30.09.53.10
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Jan 2018 09:31:34 -0800 (PST)
+	Tue, 30 Jan 2018 09:53:10 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Jan 2018 12:31:29 -0500
-Message-Id: <1517333489-20422-1-git-send-email-derek@asterius.io>
+Date: Tue, 30 Jan 2018 12:52:57 -0500
+Message-Id: <1517334778-30445-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python: remove python3 DEPENDS on python3-misc due to missing _pydecimal.py
+Subject: [meta-python][PATCH 1/2] python-grpcio: update to version 1.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,131 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 17:31:34 -0000
-
-Several packages required numbers, but the _pydecimal.py file was incorrectly
-placed in the misc package.  The underlying issue has been resolved upstream,
-so remove the RDEPENDS here
-
-http://lists.openembedded.org/pipermail/openembedded-core/2018-January/146808.html
+X-List-Received-Date: Tue, 30 Jan 2018 17:53:10 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python3-babel_2.5.3.bb       | 3 ---
- meta-python/recipes-devtools/python/python3-django_1.11.9.bb     | 5 -----
- meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb  | 5 -----
- meta-python/recipes-devtools/python/python3-jinja2_2.10.bb       | 5 -----
- meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb     | 5 -----
- meta-python/recipes-devtools/python/python3-serpent_1.23.bb      | 5 -----
- meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb | 5 -----
- meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb | 3 ---
- meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb      | 5 -----
- 9 files changed, 41 deletions(-)
+ .../python/{python-grpcio_1.8.3.bb => python-grpcio_1.8.4.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-grpcio_1.8.3.bb => python-grpcio_1.8.4.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-babel_2.5.3.bb b/meta-python/recipes-devtools/python/python3-babel_2.5.3.bb
-index 05084ac..0715d59 100644
---- a/meta-python/recipes-devtools/python/python3-babel_2.5.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-babel_2.5.3.bb
-@@ -1,5 +1,2 @@
- inherit setuptools3
- require python-babel.inc
--
--# Requires _pydecimal.py which is in misc
--RDEPENDS_${PN} += "${PYTHON_PN}-misc"
-diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.9.bb b/meta-python/recipes-devtools/python/python3-django_1.11.9.bb
-index ef77603..e1e38c3 100644
---- a/meta-python/recipes-devtools/python/python3-django_1.11.9.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_1.11.9.bb
-@@ -1,7 +1,2 @@
- require python-django.inc
- inherit setuptools3
--
--# Requires _pydecimal which is in misc
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb b/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
-index 091eb36..ce4dfdc 100644
---- a/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-dnspython_1.15.0.bb
-@@ -1,7 +1,2 @@
- inherit setuptools3
- require python-dnspython.inc
--
--# Requires _pydecimal.py which is in misc
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.10.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.10.bb
-index 8375f8c..61156b6 100644
---- a/meta-python/recipes-devtools/python/python3-jinja2_2.10.bb
-+++ b/meta-python/recipes-devtools/python/python3-jinja2_2.10.bb
-@@ -1,7 +1,2 @@
- inherit pypi setuptools3
- require python-jinja2.inc
--
--# Requires _pydecimal which is in misc
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
-index 415ca9f..5164b18 100644
---- a/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymongo_3.6.0.bb
-@@ -1,7 +1,2 @@
- inherit pypi setuptools3
- require python-pymongo.inc
--
--# Requires _pydecimal which is in misc
--RDEPENDS_${PYTHON_PN}-bson += " \
--    ${PYTHON_PN}-misc \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.23.bb b/meta-python/recipes-devtools/python/python3-serpent_1.23.bb
-index bc8bfff..1e04def 100644
---- a/meta-python/recipes-devtools/python/python3-serpent_1.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-serpent_1.23.bb
-@@ -1,7 +1,2 @@
- inherit setuptools3
- require python-serpent.inc
--
--# Requires _pydecimal which is in misc
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb b/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb
-index d44bc15..38f406c 100644
---- a/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb
-@@ -1,7 +1,2 @@
- inherit setuptools3
- require python-simplejson.inc
--
--# Requires _pydecimal which is in misc
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb
-index eaa0090..86cf9ed 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb
-@@ -1,5 +1,2 @@
- inherit setuptools3
- require python-sqlalchemy.inc
--
--# Requires _pydecimal.py which is in misc
--RDEPENDS_${PN} += "${PYTHON_PN}-misc"
-diff --git a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
-index 8ad1c17..5d8af30 100644
---- a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
-@@ -1,7 +1,2 @@
- inherit pypi setuptools3
- require python-whoosh.inc
--
--# Requires _pydecimal.py which is in misc
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
+diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.8.3.bb b/meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python-grpcio_1.8.3.bb
+rename to meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb
+index ab0b85c..bec9d84 100644
+--- a/meta-python/recipes-devtools/python/python-grpcio_1.8.3.bb
++++ b/meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
+ 
+ inherit pypi setuptools
+ 
+-SRC_URI[md5sum] = "a611ac877a1e613ba7dc24dc06d9bf88"
+-SRC_URI[sha256sum] = "6ce5fd3093ddc09a152981d5c477ac645eda19dfcc819e45d8c57da6b743bd53"
++SRC_URI[md5sum] = "7860f7c61de3890323670b7b1ff63e56"
++SRC_URI[sha256sum] = "88d87aab9c7889b3ab29dd74aac1a5493ed78b9bf5afba1c069c9dd5531f951d"
+ 
+ # For usage in other recipes when compiling protobuf files (e.g. by grpcio-tools)
+ BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
