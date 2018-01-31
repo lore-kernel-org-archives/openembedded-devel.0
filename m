@@ -1,48 +1,63 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 99931787EA
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
+	[209.85.218.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 00D0B6FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jan 2018 15:37:57 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id i56so15449315wra.7
+	Wed, 31 Jan 2018 15:53:39 +0000 (UTC)
+Received: by mail-oi0-f41.google.com with SMTP id m83so10904479oik.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jan 2018 07:37:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=PXZhkEKXaFfyClRx/YIbjyqWIH+U6B6Gs5Yt5QC/3Bc=;
-	b=RhlVx/8uSyE+CEtI0fjELpajpVvgM038e3mM7celkwikVqgGaSSUe2uw+bxI4QBMJw
-	K/GhkJCKo28XAJqt6DAwmXWg19Joa9bD5znUDlrucse2SXSHa+5Uz6m/2Rch1421BJQW
-	1j/LlckJLkzIvgHRA4/dccjjUua6K5ukWrlmZHSJQd9P9M/zRS1NKo2Dzna/72F6e9dX
-	J5vUOs6e4JndEWA/kF2uJoarKLSHG7gZTtXD28lzn20YnWIKTUr8GKeDLsDrV/vpTXHA
-	gkC2xIZOw+v3mHf+HvqkQif3Nps7zSc+/1+LR4T5fhYe9GQAjwjkiyE2LQXPK14iTWlv
-	HlOw==
+	Wed, 31 Jan 2018 07:53:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=RIzeIixafyb4YXhikH8XxFDWul3Mk04JkbcPmD9paCo=;
+	b=PjMPH1/jVhLxYcruNLkzz4RnNVYujl7I6g2O6uAKooS20bjqOm2Ajn5itMORb6WeYq
+	hDOqttutsI6FqiCy0Ve++ZXYNeGjPxLgZeW47LoXgHlc8hQIUz62Y1yqJtStkqByU+2+
+	7/J7HaVP3jGWTLScMIuPM2cKliqsWPPzFtjxwHDLdRuDl7MWxl566wR6PvKZPLyj/wyD
+	NnlPYh2GNQcbidJ4+LxUhoC8rE2Sku3FEYAQ2aFaSQnTiRCp3Q4pTM5m7e8Vs76uzglG
+	y/Y088+bYc9fbIyOnU7f52v4nH2xvssUE84BEbM6XR+XXnj55xv2HBY2JOk4TbYapcV0
+	kYHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
 	:message-id:subject:to:cc;
-	bh=PXZhkEKXaFfyClRx/YIbjyqWIH+U6B6Gs5Yt5QC/3Bc=;
-	b=SdTO0SzT6I3RTOZCJYWcM3qPIrcU+XcoMIrNcYxWwUYrHZgtXT8XzkcUVOwGNS2Uno
-	vAIn+CBgZeRW1lRIib/DYVROVGL8Ns0N0EEmsFBi8ue85t+bUDzG1d9a8NA8bqRqBx5a
-	jCu9gdJzZ0trnI6guDrY9YjDqybuTynhiwzTWUkU+2tWgQMKCHl3qDkKSaQUq/C8lDht
-	fCSTGvJGj35n6UzxalysrRwJ5M6D/AT0ouHb4zFLT70SVqx8/ZVmP4n/tkTxpGREcNcg
-	UPi1HdRUfa1bF2rtZpZoZAwxq/P/RMkXMEJnbwBcJSapX/82po2FCxyHDeFO/BK+Uhof
-	jbxQ==
-X-Gm-Message-State: AKwxytetyln17wZm79hvZ+4Mg5upuoa4cE5ZTp07vs/IxqrJYIanErif
-	FjA7+AH3Yxw0g142+glySPYOqLkUyW5GKN8nhBQ=
-X-Google-Smtp-Source: AH8x225UBPDE69LeTWzeOBYbsPudpL4cltngSjkHBR7UHqZB/u7leNhfzVaobqKIN6noJd0n+Bm1vrLoyh4J0FAjHgk=
-X-Received: by 10.223.136.167 with SMTP id f36mr14202285wrf.200.1517413078215; 
-	Wed, 31 Jan 2018 07:37:58 -0800 (PST)
+	bh=RIzeIixafyb4YXhikH8XxFDWul3Mk04JkbcPmD9paCo=;
+	b=PqYM0AKPIfZl7O5Wql6TXtvFCVDpWS7yMVNswQlBo4aYK3HAuBJQMLdAbmEA/te3Px
+	COGuZOEeUAGG66MVaC5JVLARObDY45OUFYmS69ggFP/Iscd5nuNaAPQdM7d5ikPnOLzo
+	gKjrWRz4bdN0HK5OTzt0Lqj1nd2IZW38/0XSIAayaLjPcsVCbZTJSzSjDCtR39SFWhz4
+	7DPPxcqbOQtjU9BPWi+1lqoFzLlklt0GnmGMmIysY73TqMpFk2dGkdhgaztlZunN1Le0
+	Q3siM9jRXQETsfaiBuKhErENmvu4F3Qh5aaOgv0mJgdQTr6/mOeUDFyvkggbgrnUzRbA
+	hW9g==
+X-Gm-Message-State: AKwxytf0Gf2w0xYCwpTjbvH9X1GDjWVatumQVJ9EJwdPsj0A8wtIomcC
+	7fJdTxmQ/sArOW4qZd1Qt7prL2yn
+X-Google-Smtp-Source: AH8x226oNvQ/xl2KwEI2LOvvGcK0sJjxj0nTFgZflHDxVIq0MgokG4IYutWgUR35Jwvn+14AX1s6JA==
+X-Received: by 10.202.95.193 with SMTP id t184mr4801899oib.90.1517414020636;
+	Wed, 31 Jan 2018 07:53:40 -0800 (PST)
+Received: from mail-oi0-f47.google.com (mail-oi0-f47.google.com.
+	[209.85.218.47]) by smtp.gmail.com with ESMTPSA id
+	p57sm3136841otd.13.2018.01.31.07.53.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 31 Jan 2018 07:53:39 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi0-f47.google.com with SMTP id l6so4717288oii.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Jan 2018 07:53:39 -0800 (PST)
+X-Received: by 10.202.65.194 with SMTP id o185mr5065003oia.166.1517414018615; 
+	Wed, 31 Jan 2018 07:53:38 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Wed, 31 Jan 2018 07:37:57 -0800 (PST)
-In-Reply-To: <20180131152754.25696-1-otavio@ossystems.com.br>
+Received: by 10.157.13.115 with HTTP; Wed, 31 Jan 2018 07:53:35 -0800 (PST)
+In-Reply-To: <CA+chaQdGSCfm2aNj+EXFy+unv4c+D7oBNmz3uWdHUFpjFO_DPg@mail.gmail.com>
 References: <20180131152754.25696-1-otavio@ossystems.com.br>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 31 Jan 2018 16:37:57 +0100
-Message-ID: <CA+chaQdGSCfm2aNj+EXFy+unv4c+D7oBNmz3uWdHUFpjFO_DPg@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CA+chaQdGSCfm2aNj+EXFy+unv4c+D7oBNmz3uWdHUFpjFO_DPg@mail.gmail.com>
+Date: Wed, 31 Jan 2018 13:53:35 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKq3xOnxc3PjpkbFWgsS8R2xvZgZy+yb3tJ9ST7p3SsjAg@mail.gmail.com>
+Message-ID: <CAP9ODKq3xOnxc3PjpkbFWgsS8R2xvZgZy+yb3tJ9ST7p3SsjAg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>, akuster808 <akuster808@gmail.com>
 Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: [global meta-oe PATCH] Stop using base_conditional utility method
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -56,233 +71,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jan 2018 15:37:58 -0000
+X-List-Received-Date: Wed, 31 Jan 2018 15:53:40 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-FWIW: I've sent the same change yesterday.
+On Wed, Jan 31, 2018 at 1:37 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> FWIW: I've sent the same change yesterday.
 
-On Wed, Jan 31, 2018 at 4:27 PM, Otavio Salvador <otavio@ossystems.com.br>
-wrote:
+Great; it was not merged yet it seems as I got parse errors :-(  Armin?
 
-> OE-Core finally removed the base_conditional method and the recipes
-> must move to bb.utils.contains instead. This patch does the change on
-> all recipes from meta-openembedded so they are compatible with current
-> OE-Core.
->
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->
->  meta-initramfs/recipes-devtools/klibc/klibc-utils.inc        | 2 +-
->  meta-networking/recipes-connectivity/samba/samba_4.7.0.bb    | 2 +-
->  meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 2 +-
->  meta-oe/recipes-devtools/php/php.inc                         | 2 +-
->  meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb    | 4 ++--
->  meta-oe/recipes-kernel/linux/linux.inc                       | 2 +-
->  meta-oe/recipes-support/mongodb/mongodb_git.bb               | 2 +-
->  meta-oe/recipes-support/opencv/opencv_3.3.bb                 | 4 ++--
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc              | 4 ++--
->  meta-webserver/recipes-httpd/nginx/nginx.inc                 | 2 +-
->  10 files changed, 13 insertions(+), 13 deletions(-)
->
-> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-> b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-> index 9014f5267..85639e31c 100644
-> --- a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-> @@ -48,7 +48,7 @@ do_install() {
->      ln -s gzip ${D}${base_bindir}/zcat
->  }
->
-> -EXTRA_KLIBC_DEPS = "${@base_conditional('KLIBC_UTILS_VARIANT', 'shared',
-> '${THIS_LIBKLIBC}', '', d)}"
-> +EXTRA_KLIBC_DEPS = "${@bb.utils.contains('KLIBC_UTILS_VARIANT',
-> 'shared', '${THIS_LIBKLIBC}', '', d)}"
->
->  PACKAGES_DYNAMIC += "^${KLIBC_UTILS_PKGNAME}-.*"
->
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-> b/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-> index f33c1384b..7f8cfcc47 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.7.0.bb
-> @@ -119,7 +119,7 @@ EXTRA_OECONF += "--enable-fhs \
->                   --disable-rpath-install \
->                   --with-shared-modules=${SAMBA4_MODULES} \
->                   --bundled-libraries=${SAMBA4_LIBS} \
-> -                 ${@base_conditional('TARGET_ARCH', 'x86_64', '',
-> '--disable-glusterfs', d)} \
-> +                 ${@bb.utils.contains('TARGET_ARCH', 'x86_64', '',
-> '--disable-glusterfs', d)} \
->                   --with-cluster-support \
->                   --with-profiling-data \
->                   --with-libiconv=${STAGING_DIR_HOST}${prefix} \
-> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> index 3c0587469..9b8452c9b 100644
-> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-> @@ -60,7 +60,7 @@ EXTRA_OECONF = "--enable-shared \
->                  --with-defaults \
->                  --with-install-prefix=${D} \
->                  --with-persistent-directory=${localstatedir}/lib/net-snmp
-> \
-> -                ${@base_conditional('SITEINFO_ENDIANNESS', 'le',
-> '--with-endianness=little', '--with-endianness=big', d)} \
-> +                ${@bb.utils.contains('SITEINFO_ENDIANNESS', 'le',
-> '--with-endianness=little', '--with-endianness=big', d)} \
->  "
->
->  # net-snmp needs to have mib-modules=smux enabled to enable quagga to
-> support snmp
-> diff --git a/meta-oe/recipes-devtools/php/php.inc
-> b/meta-oe/recipes-devtools/php/php.inc
-> index e466cdaf6..e3b73daa4 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
-> @@ -60,7 +60,7 @@ EXTRA_OECONF = "--enable-mbstring \
->                  --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
->                  --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
->                  --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}
-> \
-> -                ${@base_conditional('SITEINFO_ENDIANNESS', 'le',
-> 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
-> +                ${@bb.utils.contains('SITEINFO_ENDIANNESS', 'le',
-> 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
->                  ${@bb.utils.contains('PACKAGECONFIG', 'pam', '',
-> 'ac_cv_lib_pam_pam_start=no', d)} \
->                  ${COMMON_EXTRA_OECONF} \
->  "
-> diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-> b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-> index cbf04734e..391d63c82 100644
-> --- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-> +++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-> @@ -20,8 +20,8 @@ S = "${WORKDIR}/git"
->  inherit cmake
->
->  EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
-> -                 ${@base_conditional("libdir", "/usr/lib64",
-> "-DLIB_SUFFIX=64", "", d)} \
-> -                 ${@base_conditional("libdir", "/usr/lib32",
-> "-DLIB_SUFFIX=32", "", d)} \
-> +                 ${@bb.utils.contains("libdir", "/usr/lib64",
-> "-DLIB_SUFFIX=64", "", d)} \
-> +                 ${@bb.utils.contains("libdir", "/usr/lib32",
-> "-DLIB_SUFFIX=32", "", d)} \
->                  "
->
->  LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold',
-> ' -fuse-ld=bfd ', '', d)}"
-> diff --git a/meta-oe/recipes-kernel/linux/linux.inc
-> b/meta-oe/recipes-kernel/linux/linux.inc
-> index e20012771..e39cfbbf5 100644
-> --- a/meta-oe/recipes-kernel/linux/linux.inc
-> +++ b/meta-oe/recipes-kernel/linux/linux.inc
-> @@ -16,7 +16,7 @@ CMDLINE_DEBUG ?= "loglevel=3"
->
->  # Kernel bootlogo is distro-specific (default is OE logo).
->  # Logo resolution (qvga, vga, ...) is machine-specific.
-> -LOGO_SIZE ?= '${@base_conditional("MACHINE_GUI_CLASS", "bigscreen",
-> "vga", "qvga", d)}'
-> +LOGO_SIZE ?= '${@bb.utils.contains("MACHINE_GUI_CLASS", "bigscreen",
-> "vga", "qvga", d)}'
->  # To use this, add file://${LOGO_SIZE}/logo_linux_clut224.ppm.bz2 or
-> similar
->  # to your kernel recipe, and then structure your logos for each resolution
->  # accordingly.
-> diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-> b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-> index 0ff7d0b59..a9dd23435 100644
-> --- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-> +++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-> @@ -58,7 +58,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
->                   --use-system-zlib \
->                   --js-engine=none \
->                   --nostrip \
-> -                 --endian=${@base_conditional('SITEINFO_ENDIANNESS',
-> 'le', 'little', 'big', d)} \
-> +                 --endian=${@bb.utils.contains('SITEINFO_ENDIANNESS',
-> 'le', 'little', 'big', d)} \
->                   ${PACKAGECONFIG_CONFARGS} \
->                   mongod mongos"
->
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> index 3663d30e9..08dd0bae0 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> @@ -82,8 +82,8 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules
-> \
->      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1
-> -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
->      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1
-> -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)}
-> \
->      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1
-> -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1
-> -DENABLE_SSE42=1", "", d)} \
-> -    ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "",
-> d)} \
-> -    ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "",
-> d)} \
-> +    ${@bb.utils.contains("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "",
-> d)} \
-> +    ${@bb.utils.contains("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "",
-> d)} \
->  "
->  EXTRA_OECMAKE_append_x86 = " -DX86=ON"
->
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index f1bf9b06f..3f4e2f25d 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -41,7 +41,7 @@ EXTRA_OECONF = " \
->  "
->
->  CONFIG_TLS = "--enable-thread-tls"
-> -CONFIG_TLS_arm = "${@base_conditional( "DEBUG_BUILD", "1", "
-> --disable-thread-tls", " --enable-thread-tls", d )}"
-> +CONFIG_TLS_arm = "${@bb.utils.contains( "DEBUG_BUILD", "1", "
-> --disable-thread-tls", " --enable-thread-tls", d )}"
->
->  PACKAGECONFIG ??= " \
->      ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} \
-> @@ -101,7 +101,7 @@ CONFFILES_${PN} = "${sysconfdir}/${BPN}.conf
-> ${sysconfdir}/scl.conf"
->
->  # syslog initscript is handled explicitly because order of
->  # update-rc.d and update-alternatives is important
-> -RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT",
-> "none", "", "update-rc.d", d)}"
-> +RDEPENDS_${PN} += " ${@bb.utils.contains("ONLINE_PACKAGE_MANAGEMENT",
-> "none", "", "update-rc.d", d)}"
->
->  RCONFLICTS_${PN} = "busybox-syslog sysklogd rsyslog"
->
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> index 51523b606..7a48d607a 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -51,7 +51,7 @@ do_configure () {
->
->      ./configure \
->      --crossbuild=Linux:${TUNE_ARCH} \
-> -    --with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le',
-> 'little', 'big', d)} \
-> +    --with-endian=${@bb.utils.contains('SITEINFO_ENDIANNESS', 'le',
-> 'little', 'big', d)} \
->      --with-int=4 \
->      --with-long=${PTRSIZE} \
->      --with-long-long=8 \
-> --
-> 2.16.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
