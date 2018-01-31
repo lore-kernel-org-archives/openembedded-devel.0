@@ -1,58 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9127078260
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
+	[209.85.128.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 989FB71BFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 20:50:59 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id 17so8816700pfw.11
+	Wed, 31 Jan 2018 00:34:49 +0000 (UTC)
+Received: by mail-wr0-f182.google.com with SMTP id g21so13142707wrb.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jan 2018 12:51:01 -0800 (PST)
+	Tue, 30 Jan 2018 16:34:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=BLmGix4LLUqqE/l4Nil8mTyJgh1dOYRgvoxVjX9WQAY=;
-	b=gMVQEDY65GIBVQBYiye7Mi8sN4rRWsucOZD853IUCrXCX2BKNLSk0Rce6MOXp7QPOI
-	PBsrvGdLm0vlT2YvSR1kKDJolKliYqWr8h6QE5LNJrNdLuMPYDJznag68hpcI9CcWy0r
-	/RHcBzwth9paU1VHtRjFe7I0YpqbQxPkRPIA6FSlmcFFLHW5dYO2PGixQmJQ+9HeZ7FR
-	dOXiV+Lki5mQpoXXmIhomVEuxjltuZ5ntOkP5DbwH9SpQ5BTfez4l7YVWWQY6h+UN2tr
-	qVbfz37HIpEWVH59/BpGrvePLBXtzcAp5csxWkBzFgrZRp5SgYWmycrPEQ6p3FecpUXX
-	FMWQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=3i87hE/GPY0tG+WMEs4CiMj7KycMgUSjTfoW+9XsWR0=;
+	b=dIzWW69TdcnrBZmmdYaUBDI6QPhc8A3Ts9GxNdhYwYNLXaAJcZ/+Np3zy+54Qtf24f
+	2GnK08PC6Xawd+MmhAHzNJF2XWxvHWrKlfGAJ16/dgk/aphM/ZIIYZCIE733JYagWDWP
+	vQS9B5goO4dbbyyMhA5MbhPSKA+G4vSBQDhnAimhperYIwIlNBbYT4BPQcwr4fDLU/WW
+	RpOjFO53k0fRs+VzIkNBJNlq5fJV9o2l2ngFf/mja/sKvLYzjajO/BEI6SEoQhXlHA3C
+	5wSqwre9RPUlSC8xaepdTZC19onb+CuhWsY4Lv+pnNrydMKiLLHNr0eZ4pnQF80AIKSf
+	y2Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=BLmGix4LLUqqE/l4Nil8mTyJgh1dOYRgvoxVjX9WQAY=;
-	b=L5OJjL9vF4jwPqZP12RKn3gn4JMldbTuXuFH+n3ft+WBG41N564h4b/4p7xEPdd/vD
-	DjOd4UC6YnO1+boRlNVX3sOyq/5zgXiK/ZUIGTCB0Pu2fe3u8raErWpGvDJlZyClxpiU
-	6tskhCNVQ0J92078I6aJiy1XsQfgFQPXAzAbuahgrGO6k1t3tSL+aFncB58keirLpLYX
-	oHdQ2qE1cXBd1CB+KHs+0wd5U9xAF22ALuUuEWe/PWUl5/1gqY9iv5EfcKci53j0qvDb
-	eZ2z9L2TMWHDOT3A++oFmAlJRKIwU4fToZYrArCgau0EjeEivPYs+3BgSI8qpXZYl4ve
-	K3Cw==
-X-Gm-Message-State: AKwxytfs2YThkgMIomElXRpOyk1bGZLruyzSPRDM3MsJlA6fCFWxhfJJ
-	+0aYB+I8fYrL4OZF0OPr1zWsdY6o
-X-Google-Smtp-Source: AH8x224Cnc/DKMVyUbQ5h1DXK46jxzlbocCLaXrtYatu1cviytftO7jU9XBs95QNoFSYBhEwWpBb7Q==
-X-Received: by 2002:a17:902:988b:: with SMTP id
-	s11-v6mr25077132plp.99.1517345460559; 
-	Tue, 30 Jan 2018 12:51:00 -0800 (PST)
-Received: from ?IPv6:2601:646:8880:466c:4c3e:ac59:6e73:b998?
-	([2601:646:8880:466c:4c3e:ac59:6e73:b998])
-	by smtp.gmail.com with ESMTPSA id
-	v1sm21742692pfg.33.2018.01.30.12.50.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Jan 2018 12:50:59 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3i87hE/GPY0tG+WMEs4CiMj7KycMgUSjTfoW+9XsWR0=;
+	b=lVRnK2dN7EmctQfJff0ANx6KM2HFLt7/BP0cDFZYgKB9agbMwrfPnjIs2H9oHaWQbV
+	32UVKhgum5nFHVaH9z2K2DoWmW8y4NXqbYvG+qp1Vzg4/aGcfR16L0WvMYbPAn2xf6Vk
+	m+746x0giMwBXLZN2nL2ElGUWS6i3cRIVtYLi6Cnx0iixHxTCpRuTf9Ue9TXGsEk7xKF
+	mkor3TTyKYZCurEgB52Sju+GUjf+Fwvx1OprJsn+gQ+RbmEEgVUNsdO9kDvuzzQ6xIZ9
+	GuqY03NVdjj9KmQ22EejYdyazipJrnCKWPvVxfkmFzKBknRncFC028+bPQ8PIlcUxRM3
+	2DDw==
+X-Gm-Message-State: AKwxytfCvJXx/L7mfWNtOlsK1/mGmd2nRY5e363nARRNlg+IAwOHPOO/
+	LMF2uA/9ede+QfOvy1AYM/fOrg==
+X-Google-Smtp-Source: AH8x226MQULkIZI1tpAKOdq39xAotUXeiirXOossPvptiIH4ADwYQYXNUGv2CykCempHT6sOfMyvww==
+X-Received: by 10.223.182.153 with SMTP id j25mr25838536wre.43.1517358890107; 
+	Tue, 30 Jan 2018 16:34:50 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	r5sm16989418wmg.30.2018.01.30.16.34.48
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 30 Jan 2018 16:34:49 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20150818095451.0B5435036F@opal.openembedded.org>
-	<CA+chaQeSwgn=YjGCifcokcB7eAe4Ygr-Y9c7_--urFd-2=3QVA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <cfa2831f-e6ee-6916-342f-d9f4a94ef1d3@gmail.com>
-Date: Tue, 30 Jan 2018 12:50:59 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0)
-	Gecko/20100101 Thunderbird/58.0
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQeSwgn=YjGCifcokcB7eAe4Ygr-Y9c7_--urFd-2=3QVA@mail.gmail.com>
-Subject: Re: [oe-commits] Li xin : tiptop: upgrade 2.2 -> 2.3
+Date: Wed, 31 Jan 2018 00:34:48 +0000
+Message-Id: <20180131003448.5471-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.15.1
+Subject: [meta-oe][PATCH] zsh: fix base_bindir installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,79 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jan 2018 20:51:00 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 31 Jan 2018 00:34:50 -0000
 
-On 1/30/18 6:27 AM, Martin Jansa wrote:
-> Anyone else seeing random failures with this one?
-> 
-> /usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/utils-expression.c:191: error:
-> undefined reference to 'yyparse'
-> /usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:75: error: undefined
-> reference to 'yylval'
-> /usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:75: error: undefined
-> reference to 'yylval'
-> /usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:65: error: undefined
-> reference to 'yylval'
-> /usr/src/debug/tiptop/2.3-r0/tiptop-2.3/src/calc.lex:65: error: undefined
-> reference to 'yylval'
-> collect2: error: ld returned 1 exit status
-> make[1]: *** [tiptop] Error 1
-> 
+* fixes:
+  WARNING: zsh-5.3.1-r0 do_package: zsh: NOT adding alternative provide /bin/sh: /bin/zsh does not exist
+* it was installing zsh into /usr/bin even when log.do_configure confirms correct path:
+  installation basename     : zsh
+  binary install path       : /bin
+* no other files were moved:
+$ find 5.3.1-r0.*/image
+5.3.1-r0.new/image
+5.3.1-r0.new/image/bin
+5.3.1-r0.new/image/bin/zsh-5.3.1
+5.3.1-r0.new/image/bin/zsh
+5.3.1-r0.new/image/usr
+5.3.1-r0.old/image
+5.3.1-r0.old/image/usr
+5.3.1-r0.old/image/usr/bin
+5.3.1-r0.old/image/usr/bin/zsh-5.3.1
+5.3.1-r0.old/image/usr/bin/zsh
 
-wonder if its missing dep on bison
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/zsh/zsh_5.3.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> On Tue, Aug 18, 2015 at 11:54 AM, <git@git.openembedded.org> wrote:
-> 
->> Module: meta-openembedded.git
->> Branch: master
->> Commit: 4638d7223aa48639238c35b019e1ca86151a0b65
->> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=
->> 4638d7223aa48639238c35b019e1ca86151a0b65
->>
->> Author: Li xin <lixin.fnst@cn.fujitsu.com>
->> Date:   Wed Jul 29 17:54:11 2015 +0800
->>
->> tiptop: upgrade 2.2 -> 2.3
->>
->> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>
->> ---
->>
->>  meta-oe/recipes-extended/tiptop/{tiptop_2.2.bb => tiptop_2.3.bb} | 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
->> b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
->> similarity index 87%
->> rename from meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
->> rename to meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
->> index a803e26..5a98116 100644
->> --- a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
->> +++ b/meta-oe/recipes-extended/tiptop/tiptop_2.3.bb
->> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
->> b234ee4d69f5fce4486a80fdaf4a4263"
->>  DEPENDS = "ncurses libxml2"
->>
->>  SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
->> -SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
->> -SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877
->> ce8501b0aac1116a86bed8a16aa96b171d"
->> +SRC_URI[md5sum] = "f1fba1e90465b0e5a3865b19133fa19d"
->> +SRC_URI[sha256sum] = "3f07e958b40acaeab98e9eb1326c9f
->> 91b0be0a782c1cc2bd7a9e18d31fab18ca"
->>
->>  inherit autotools-brokensep
->>  EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
->>
->> --
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->>
+diff --git a/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb b/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
+index 1f5e390000..96d21a8b34 100644
+--- a/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
++++ b/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
+@@ -30,6 +30,9 @@ EXTRA_OECONF = " \
+     zsh_cv_shared_environ=yes \
+ "
+ 
++# Configure respects --bindir from EXTRA_OECONF, but then Src/Makefile will read bindir from environment
++export bindir="${base_bindir}"
++
+ EXTRA_OEMAKE = "-e MAKEFLAGS="
+ 
+ ALTERNATIVE_${PN} = "sh"
+-- 
+2.15.1
 
 
