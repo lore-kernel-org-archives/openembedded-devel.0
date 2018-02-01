@@ -1,42 +1,24 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6234477E44
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 802B37780A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Feb 2018 19:50:28 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id a5so20977637qkg.10
+	Thu,  1 Feb 2018 21:26:17 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w11LQIhx024497
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Feb 2018 11:50:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=y9HlV/XZxhbp8p4viq35dvZMWk0A5dtevb8fGhnl/Ek=;
-	b=YpICOuv5+q6c0nSjIQiLxHQfnixwojiAdWM5wi7NNiYRrCAWXu6VZaOZ6tMT5WRZJW
-	+DD0BbqUQQnDosVqOMog8Mh+HZkcGP/nM3ODzjMdBVB0RH80H4fNVegMgxbY8S2HvR22
-	ic/+zFW2VysRxS1afP5skFWIPLpMNBvdcmkafOd0Hks3H1/e7o9iDQe1gNzYOmWypWyL
-	pvbwD03juQpTADEtSNLa5yaTWrds97GF4+1mD+IiNfG6BsltZTX0eJUkQW7UsijMFHU5
-	oDb82GtsbpwHS9PtNLF12U8EiOZdnPnNtCP36FGtB4Kq9jHJCLd4ioWtkd14j7zP0Hds
-	FrJg==
-X-Gm-Message-State: APf1xPAgLhJuSnW+893n/mdrXnsV9KFnvtHgYO/qYzr/bssnR7SmzbnS
-	q8hiyS8uyiU6KGGFXvg0FJuuzQ==
-X-Google-Smtp-Source: AH8x226nL5VwAp/oJckST1uV6krk4923ko5iceei5H7omWs8j0VNbl7K4fFnW/pwXqS81MLudVgfnA==
-X-Received: by 10.55.4.139 with SMTP id 133mr4748921qke.54.1517514629158;
-	Thu, 01 Feb 2018 11:50:29 -0800 (PST)
-Received: from localhost.localdomain ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id l1sm241882qki.60.2018.02.01.11.50.26
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 01 Feb 2018 11:50:28 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Thu, 01 Feb 2018 17:50:21 -0200
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu,  1 Feb 2018 17:50:20 -0200
-Message-Id: <20180201195020.32757-1-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.16.1
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH v4] nghttp2: Move to meta-networking
+	Thu, 1 Feb 2018 13:26:18 -0800 (PST)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 1 Feb 2018 13:26:17 -0800
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 1 Feb 2018 13:26:17 -0800
+Message-ID: <20180201212617.94472-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.3
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/1] postfix: move running newaliases back to pkg_postinst
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,32 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Feb 2018 19:50:28 -0000
+X-List-Received-Date: Thu, 01 Feb 2018 21:26:17 -0000
+Content-Type: text/plain
 
-The nghttp2 depends on c-ares which is provided by meta-networking
-layer, so it should be moved there as well.
+newaliases, when run on the host, will fail if /var/spool/postfix
+does not exist.  Run it during pkg_postinst() so that we can defer
+it to first boot.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
+ meta-networking/recipes-daemons/postfix/postfix.inc | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-Changes in v4:
- - rebase on top of master
-
-Changes in v3:
- - rebase on top of master-next
-
-Changes in v2:
- - rebase on top of master
-
- {meta-oe => meta-networking}/recipes-support/nghttp2/nghttp2_1.26.0.bb | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename {meta-oe => meta-networking}/recipes-support/nghttp2/nghttp2_1.26.0.bb (100%)
-
-diff --git a/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
-similarity index 100%
-rename from meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
-rename to meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index e48fc39..d5d0789 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -217,12 +217,6 @@ do_install_append_class-native() {
+ do_install_append_class-target() {
+     # Remove references to buildmachine paths in target makedefs.out
+     sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
+-    # Since we are building recipe postfix, newaliases and postmap come from our sysroot_native.
+-    touch ${D}/etc/aliases
+-    newaliases -C ${D}/etc/postfix/main.cf -oA${D}/etc/aliases
+-    touch ${D}/etc/postfix/virtual_alias
+-    postmap -c ${D}/etc/postfix ${D}/etc/postfix/virtual_alias
+-
+ }
+ 
+ ALTERNATIVE_${PN} = "sendmail"
+@@ -235,6 +229,7 @@ ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
+ ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
+ ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
+ 
++PACKAGE_WRITE_DEPS += "postfix-native"
+ pkg_postinst_${PN} () {
+     if [ "x$D" = "x" ]; then
+         touch /etc/aliases
+@@ -248,6 +243,12 @@ pkg_postinst_${PN} () {
+             # /usr/lib/sendmail is required by LSB core test
+             [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
+         fi
++
++        touch $D/etc/aliases
++        # fails if /var/spool/postfix is not on host
++        newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases  ||  exit 1
++        touch $D/etc/postfix/virtual_alias
++        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+     fi
+ }
+ 
 -- 
-2.16.1
+2.7.4
 
 
