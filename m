@@ -1,50 +1,46 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id B484B60110
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 22DCD78622
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Feb 2018 14:22:14 +0000 (UTC)
-Received: by mail-lf0-f43.google.com with SMTP id v188so26461980lfa.11
+	Thu,  1 Feb 2018 14:23:41 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id f3so6066114wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Feb 2018 06:22:15 -0800 (PST)
+	Thu, 01 Feb 2018 06:23:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=mj5q6P5b+ltDgkHSY4+MT7xXld8yNnSDBgvMPoZ1o34=;
-	b=B0e/smhCcn7GH/BZWkcaHD+CwHtVoNgYMmlEDp7QJh7lcImYH9FIkxwOH8siC3N9lB
-	lV2UUVQDbFjZMzlW77vpyBKMiBQPPErqXGc9HcOg8vhzDI/NeDWeBetrVzzyMlqN51aU
-	JYrRCoMozc5moByjAaTBsWHMXqx9OgrqvTxXz9tYlG4lKaAdW04D2wrvN0G2m89bN43O
-	ynhwVuiK7mDRp4NZBSafToP0gqhDJcY/XbKN8CxxO9kES3ZU/kU6dCL5T0WtosWTyOPW
-	vQIj4qHagkFcjVuCCvMibuBF6kkvZi9O5EcrLCktzOvPX2PeArxmHwn9HDygWr4+QSV+
-	nRMg==
+	h=from:to:cc:subject:date:message-id;
+	bh=3i87hE/GPY0tG+WMEs4CiMj7KycMgUSjTfoW+9XsWR0=;
+	b=tosvNKdIOwk8/yizNgDWjC1cnOAguUhpIl08iYdltLFKviSr+H/H8ri1dulRKrLtJ5
+	5CqdyV1bztUJhCgkrvfUmweIIn/30XNeIQF8NGGS1ig3OaoRl+s+VHLLha/ywoMlPhpt
+	uQeIfYW5KFjeit2MX6qxTQNWV+GJbVmw4ZGWCP1UZRynWhZaRnig2DG7uFBQD0Q7l8UC
+	KzHh4XGDUxUHZLaSY7MZpG8YsqQM7Lju7CZoy2qkp5PzUUL/to4QmKxLT7U6cROrEf0W
+	nQxTSvI3hBHGHz6ItQtxCRI/P35QlGfjjgkjLmW6YS76LOnxvbJ9OiUmOHiUpfaEuSTq
+	TpYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=mj5q6P5b+ltDgkHSY4+MT7xXld8yNnSDBgvMPoZ1o34=;
-	b=eOQRFin9bCp5lVltGBBI0qcWeChjiM4MvoEDr3Y4lD3vepmBV4UoTw/5DRgKw6SVFW
-	KhZP6A/trYEwdT1cpEwdP5CTD+onDMtZDkOQ1xjDeupVjhVWoMM8AEXi2LNeIhv4ApXG
-	0Bt50Eq/hWOIteAEuvxmcC1qe2Z0Er2c1WozLmakSjpsE1tLhAg9GVW8gSU6JOgOQtxC
-	kP8HZTxsLEbqf5GcmIVi6nD6icaGyxphe9UgmzS2voceX0VNfrXtZI6KPiiMG680ylzK
-	gKimK4lAWA8O3D/IRp/E+VerybDC5Aju3XErBFsvulgairUPGK99sxjDhFbFO/QMBX7a
-	dTWQ==
-X-Gm-Message-State: AKwxytf7iUxs9NnJ1RtyHmrRrykx4PQmHoo38iuLof73fcB5fUdTYWZY
-	mQqOdCKKum9sWmJ5mJkhp0vEsMzoKHKDba8PY3I=
-X-Google-Smtp-Source: AH8x227gY/aMLfJS2/Rx2kI1LNX3TzuB5Nn9yVZteVo0KrnE6RY9A3ZF9P21+SGeMqCV52Y41D6Fz3sawCJ2P5O/mCY=
-X-Received: by 10.25.193.7 with SMTP id r7mr20314446lff.29.1517494935258; Thu,
-	01 Feb 2018 06:22:15 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.25.217.21 with HTTP; Thu, 1 Feb 2018 06:22:14 -0800 (PST)
-In-Reply-To: <CA+chaQcCkNLS49AeBALYKyiW+_Q_kAgtjqfKE+Orz-mWGMyE+w@mail.gmail.com>
-References: <20180130121432.508-1-Martin.Jansa@gmail.com>
-	<ec48cca7-f05b-826c-e3a5-a23ccdc9d7dd@gmail.com>
-	<CA+chaQcCkNLS49AeBALYKyiW+_Q_kAgtjqfKE+Orz-mWGMyE+w@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Thu, 1 Feb 2018 09:22:14 -0500
-Message-ID: <CAHUNapSQJoSJbexQd6_NWU=YO4ekubf5fwNeBdtrGxP_okkByQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] recipes: use oe.utils.conditional instead of deprecated base_conditional
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3i87hE/GPY0tG+WMEs4CiMj7KycMgUSjTfoW+9XsWR0=;
+	b=NEY+8l6ku8sdBOzKkoGC882JROMZhbjVo0y/FblmY01azYn2IP12tMnKMI7c5CjnYh
+	xvoWIEVMf8kJEusTbVu2ZglGT7/7JMVsbqDnPFa9JRRSA2Uj32GgmlLwELns46729aKh
+	pcBOmIc7BPB3u/JKPxyMUN0twJb8tmBXfjuw5znuuT7m7IoEqxgZCv0wsEPzisMrO4OC
+	lwgpOM99CbvlK096+UZydQT3aRUbW0RSCamBYjZEokbZv17VsNJ9W1CTb7l9wRXi1rpR
+	cNdfHZg7shtrMocbDov0THy63XW9AjSyzSFqjjdIRQXeycb5gk+EJ7S8wFnSj8flUsLT
+	zHYg==
+X-Gm-Message-State: AKwxytcl2b6dCM17c8X8tgQMlNyX9VdEgXNBisiVdefP5yRqaW/mOGN5
+	8ld3i3n3xeGvTnYNdAoQ19b7Ow==
+X-Google-Smtp-Source: AH8x2258gDqmcFC1haomplOPet473YlhgdG5OofWOzUokvBIZvXqtDZKwG6F8zWCFA0NGz5LUyZzmg==
+X-Received: by 10.28.10.206 with SMTP id 197mr25664029wmk.61.1517495022834;
+	Thu, 01 Feb 2018 06:23:42 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	p4sm12152838wrb.59.2018.02.01.06.23.41
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 01 Feb 2018 06:23:41 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Feb 2018 14:23:39 +0000
+Message-Id: <20180201142340.11083-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.15.1
+Subject: [meta-oe][PATCH 1/2] zsh: fix base_bindir installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,14 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Feb 2018 14:22:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Feb 2018 14:23:42 -0000
 
-On Thu, Feb 1, 2018 at 8:51 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+* fixes:
+  WARNING: zsh-5.3.1-r0 do_package: zsh: NOT adding alternative provide /bin/sh: /bin/zsh does not exist
+* it was installing zsh into /usr/bin even when log.do_configure confirms correct path:
+  installation basename     : zsh
+  binary install path       : /bin
+* no other files were moved:
+$ find 5.3.1-r0.*/image
+5.3.1-r0.new/image
+5.3.1-r0.new/image/bin
+5.3.1-r0.new/image/bin/zsh-5.3.1
+5.3.1-r0.new/image/bin/zsh
+5.3.1-r0.new/image/usr
+5.3.1-r0.old/image
+5.3.1-r0.old/image/usr
+5.3.1-r0.old/image/usr/bin
+5.3.1-r0.old/image/usr/bin/zsh-5.3.1
+5.3.1-r0.old/image/usr/bin/zsh
 
-> I've merged it now to unblock people doing the builds as discussed on
-> meta-oe github and also meta-raspberrypi github.
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/zsh/zsh_5.3.1.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Thank you, it'll be nice to have a working master again
+diff --git a/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb b/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
+index 1f5e390000..96d21a8b34 100644
+--- a/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
++++ b/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
+@@ -30,6 +30,9 @@ EXTRA_OECONF = " \
+     zsh_cv_shared_environ=yes \
+ "
+ 
++# Configure respects --bindir from EXTRA_OECONF, but then Src/Makefile will read bindir from environment
++export bindir="${base_bindir}"
++
+ EXTRA_OEMAKE = "-e MAKEFLAGS="
+ 
+ ALTERNATIVE_${PN} = "sh"
+-- 
+2.15.1
+
 
