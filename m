@@ -1,52 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id EBBCF6093D
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 6234477E44
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Feb 2018 19:40:38 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id x4-v6so1544880wmc.0
+	Thu,  1 Feb 2018 19:50:28 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id a5so20977637qkg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Feb 2018 11:40:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=yoN3tl9vMvVZE34SrwVUrCc+LyBdnT3JaV40BeU8ARk=;
-	b=HEjdJ+xFT+qgdpmDy3vSHshUM7YL1irzj7m7WRueHeICN+Fj1BJ+8LizQms1n4xS/0
-	Ri7jI6RZZwHhFkvT4NS8TrWQGVfurDUsI3dqT89Tw/UV5TthfY+o9qtr0uHC0LSCWseY
-	O5tRonB7UQmaNwld5rU52ommmUuU3OpGEl2gXIaZ/cGFzbRJNMc6BE/l5uavtxv5yoYM
-	zAVtpFfkMA2XCqTLmJEjysqJKx0xh8m1RW7ia1vfRPB6kjdrLVzjottMc1krPNWqjydu
-	HIlwoZxZ0ChQSrsYAY3aMI2zossTNCXbn7BRxK/pmlh6CMVBidORYxQWsiWVKpHOjoA6
-	pGiw==
+	Thu, 01 Feb 2018 11:50:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=yoN3tl9vMvVZE34SrwVUrCc+LyBdnT3JaV40BeU8ARk=;
-	b=kuk/aeH824+Yyafm5k2fkuZRyY0DFAs+N9FDVTmLttM+QANlgWSjY/6WLxCRLzNG+g
-	Pbhj31qV4yxz4xtSxbBNYX4oqYml8Rpt8VChYzsPz7UgjdttVrr470RIijSQ5gPLNW+w
-	6khmA0yb9x1P6YyPVG8q9URokrOkZu5kjnufc9OC7Tnmaxhlf18RgpOgX8w//Jyly6GF
-	RQzMzRwmMigmDDP64EP9IId5EK9WSpbYFFY4Um0vWxVg+vasQ7+UI4KYn/Gy8gFyYYL8
-	/oANy0BSsk901Mtq1o12ovdAvm3OV9ogMN/71KCN9d4FisAnco01//C7PiZHYcmAHhVw
-	vZ2A==
-X-Gm-Message-State: AKwxytfmtAkjXnRg0VUb690EXVPenQbbs1LrbWmbIkxVSRA4z0gqLUEn
-	I27j0n4da3Ajw6DXges9Sob7J3k2AHYCUgidoB4=
-X-Google-Smtp-Source: AH8x224RWOZxTE30SmfEOC+Pk77JdxPg8v1w9ovUMGXemcOUgS8CB/1+/a4AGEhXG9SVpimsQNay8EGWuNLHGCGyqk4=
-X-Received: by 10.28.191.19 with SMTP id p19mr26057800wmf.142.1517514039746;
-	Thu, 01 Feb 2018 11:40:39 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Thu, 1 Feb 2018 11:40:39 -0800 (PST)
-In-Reply-To: <CAPuovEJfXdpKs2XFp6Y6hmh5Mg8u=3Vo_dL98GSGbAp2DVwbww@mail.gmail.com>
-References: <20180130121432.508-1-Martin.Jansa@gmail.com>
-	<ec48cca7-f05b-826c-e3a5-a23ccdc9d7dd@gmail.com>
-	<CA+chaQcCkNLS49AeBALYKyiW+_Q_kAgtjqfKE+Orz-mWGMyE+w@mail.gmail.com>
-	<CAHUNapSQJoSJbexQd6_NWU=YO4ekubf5fwNeBdtrGxP_okkByQ@mail.gmail.com>
-	<CAK18fxFuSkpsd4hb-9hvDSYTZGisJ73otqpxk-xW0ZYoGkU+-A@mail.gmail.com>
-	<CAPuovEJfXdpKs2XFp6Y6hmh5Mg8u=3Vo_dL98GSGbAp2DVwbww@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 1 Feb 2018 20:40:39 +0100
-Message-ID: <CA+chaQdTTxfeeZogrfYYi_VMYTwbAUHjpbAArWTa=MdbrxxyRg@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] recipes: use oe.utils.conditional instead of deprecated base_conditional
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=y9HlV/XZxhbp8p4viq35dvZMWk0A5dtevb8fGhnl/Ek=;
+	b=YpICOuv5+q6c0nSjIQiLxHQfnixwojiAdWM5wi7NNiYRrCAWXu6VZaOZ6tMT5WRZJW
+	+DD0BbqUQQnDosVqOMog8Mh+HZkcGP/nM3ODzjMdBVB0RH80H4fNVegMgxbY8S2HvR22
+	ic/+zFW2VysRxS1afP5skFWIPLpMNBvdcmkafOd0Hks3H1/e7o9iDQe1gNzYOmWypWyL
+	pvbwD03juQpTADEtSNLa5yaTWrds97GF4+1mD+IiNfG6BsltZTX0eJUkQW7UsijMFHU5
+	oDb82GtsbpwHS9PtNLF12U8EiOZdnPnNtCP36FGtB4Kq9jHJCLd4ioWtkd14j7zP0Hds
+	FrJg==
+X-Gm-Message-State: APf1xPAgLhJuSnW+893n/mdrXnsV9KFnvtHgYO/qYzr/bssnR7SmzbnS
+	q8hiyS8uyiU6KGGFXvg0FJuuzQ==
+X-Google-Smtp-Source: AH8x226nL5VwAp/oJckST1uV6krk4923ko5iceei5H7omWs8j0VNbl7K4fFnW/pwXqS81MLudVgfnA==
+X-Received: by 10.55.4.139 with SMTP id 133mr4748921qke.54.1517514629158;
+	Thu, 01 Feb 2018 11:50:29 -0800 (PST)
+Received: from localhost.localdomain ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id l1sm241882qki.60.2018.02.01.11.50.26
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 01 Feb 2018 11:50:28 -0800 (PST)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Thu, 01 Feb 2018 17:50:21 -0200
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu,  1 Feb 2018 17:50:20 -0200
+Message-Id: <20180201195020.32757-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.16.1
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [PATCH v4] nghttp2: Move to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,46 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Feb 2018 19:40:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Feb 2018 19:50:28 -0000
 
-I didn't want to disrupt Armin's work flow more than I already did, but
-I've rebased and pushed updated master-next now.
+The nghttp2 depends on c-ares which is provided by meta-networking
+layer, so it should be moved there as well.
 
-On Thu, Feb 1, 2018 at 8:36 PM, Mark Asselstine <
-mark.asselstine@windriver.com> wrote:
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-> On Thu, Feb 1, 2018 at 1:47 PM, Andrei Gherzan <andrei@gherzan.com> wrote:
-> > On Thu, Feb 1, 2018 at 2:22 PM, Trevor Woerner <twoerner@gmail.com>
-> wrote:
-> >
-> >> On Thu, Feb 1, 2018 at 8:51 AM, Martin Jansa <martin.jansa@gmail.com>
-> >> wrote:
-> >>
-> >> > I've merged it now to unblock people doing the builds as discussed on
-> >> > meta-oe github and also meta-raspberrypi github.
-> >> >
-> >>
-> >> Thank you, it'll be nice to have a working master again
-> >>
-> >>
-> > Should be fixed now.
-> >
->
-> Martin,
->
-> Any chance you can merge this to master-next? No reason to leave that
-> branch busted.
->
-> Thanks,
-> Mark
->
-> > --
-> > Andrei Gherzan
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Changes in v4:
+ - rebase on top of master
+
+Changes in v3:
+ - rebase on top of master-next
+
+Changes in v2:
+ - rebase on top of master
+
+ {meta-oe => meta-networking}/recipes-support/nghttp2/nghttp2_1.26.0.bb | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => meta-networking}/recipes-support/nghttp2/nghttp2_1.26.0.bb (100%)
+
+diff --git a/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
+similarity index 100%
+rename from meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
+rename to meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
+-- 
+2.16.1
+
 
