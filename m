@@ -1,64 +1,48 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
-	[209.85.218.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 00D0B6FF56
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F47477D16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jan 2018 15:53:39 +0000 (UTC)
-Received: by mail-oi0-f41.google.com with SMTP id m83so10904479oik.8
+	Thu,  1 Feb 2018 01:44:26 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id o13so2259486pli.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jan 2018 07:53:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=RIzeIixafyb4YXhikH8XxFDWul3Mk04JkbcPmD9paCo=;
-	b=PjMPH1/jVhLxYcruNLkzz4RnNVYujl7I6g2O6uAKooS20bjqOm2Ajn5itMORb6WeYq
-	hDOqttutsI6FqiCy0Ve++ZXYNeGjPxLgZeW47LoXgHlc8hQIUz62Y1yqJtStkqByU+2+
-	7/J7HaVP3jGWTLScMIuPM2cKliqsWPPzFtjxwHDLdRuDl7MWxl566wR6PvKZPLyj/wyD
-	NnlPYh2GNQcbidJ4+LxUhoC8rE2Sku3FEYAQ2aFaSQnTiRCp3Q4pTM5m7e8Vs76uzglG
-	y/Y088+bYc9fbIyOnU7f52v4nH2xvssUE84BEbM6XR+XXnj55xv2HBY2JOk4TbYapcV0
-	kYHQ==
+	Wed, 31 Jan 2018 17:44:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=IAhm0AcgYUrlodoMbWeQspYXApIhrtll30cKb+aoKKA=;
+	b=bA+vS7TaH9eV0qMHSAQqCjA6y5hRU3qNmKTpUAwwlRNt2hdcjhD1RfTqdkXWAP4onb
+	5cfmAGMAkQU+qtFsfQ6Dc8Nh9b58lV4YPTzX2LZM9/tsebCESfLZVDwDyPpd6/RO556Y
+	fTXSoYtzUlu9fskNhZ2sV1As/dcZ/GAgZlUhIOIfQlPBoiZvEICxByL3AKOBcA8pIEL1
+	6A30wfQ+zEA2C843DRjETUFZ4EyZ1IpYeqXeUONnnFlyMqK/ogVIZdhJnW+6wrwNfGFS
+	7F4qTIVmO1NxMJBZsJKm+d4coLrHe1P8jqgtGjNI/H/d5TITe7vhpHtNfOPz6p3wYGph
+	FN4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=RIzeIixafyb4YXhikH8XxFDWul3Mk04JkbcPmD9paCo=;
-	b=PqYM0AKPIfZl7O5Wql6TXtvFCVDpWS7yMVNswQlBo4aYK3HAuBJQMLdAbmEA/te3Px
-	COGuZOEeUAGG66MVaC5JVLARObDY45OUFYmS69ggFP/Iscd5nuNaAPQdM7d5ikPnOLzo
-	gKjrWRz4bdN0HK5OTzt0Lqj1nd2IZW38/0XSIAayaLjPcsVCbZTJSzSjDCtR39SFWhz4
-	7DPPxcqbOQtjU9BPWi+1lqoFzLlklt0GnmGMmIysY73TqMpFk2dGkdhgaztlZunN1Le0
-	Q3siM9jRXQETsfaiBuKhErENmvu4F3Qh5aaOgv0mJgdQTr6/mOeUDFyvkggbgrnUzRbA
-	hW9g==
-X-Gm-Message-State: AKwxytf0Gf2w0xYCwpTjbvH9X1GDjWVatumQVJ9EJwdPsj0A8wtIomcC
-	7fJdTxmQ/sArOW4qZd1Qt7prL2yn
-X-Google-Smtp-Source: AH8x226oNvQ/xl2KwEI2LOvvGcK0sJjxj0nTFgZflHDxVIq0MgokG4IYutWgUR35Jwvn+14AX1s6JA==
-X-Received: by 10.202.95.193 with SMTP id t184mr4801899oib.90.1517414020636;
-	Wed, 31 Jan 2018 07:53:40 -0800 (PST)
-Received: from mail-oi0-f47.google.com (mail-oi0-f47.google.com.
-	[209.85.218.47]) by smtp.gmail.com with ESMTPSA id
-	p57sm3136841otd.13.2018.01.31.07.53.39
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IAhm0AcgYUrlodoMbWeQspYXApIhrtll30cKb+aoKKA=;
+	b=Scniiopz/ZjBPo1uFD+b7LRLn6EfvufuSqHF2Ld+lyj4udRKSoaWaRrq5+wjNYi9w5
+	lCoKdR6OJ8m9Z8hbZtDrmAkiKj3yilNC5j1fRqpt1R3s9IFavjpyIhQXpqy286JoOMzb
+	kcLPLIW+ZyeqZLjJWGxfNW4CuGhZ/nOFNaIkXonb/3Gn1lR6IMCUNBhM0CuMF8N4eToH
+	kpyfIbIsBCPFs8Ak0A1sy2I529Iw6K+RSgwBPjmnCxLzdC0/VLVmdI2SLSO0R4n/Ix0E
+	ApKqLAIn34e+o7VzFYXamMO/UhdP8ZWZWL+LMLRdsI5Lnts/5rtUuVAUyCln2uvYdpp/
+	dm+Q==
+X-Gm-Message-State: AKwxyteT7ZNyiMPd9AYYlzZhxtNC6FUdx08VGBlSHcwLIMyJhu0LafPp
+	MesbFsQRqgt8cDIxDp2dnl4foQ==
+X-Google-Smtp-Source: AH8x226/r0Y6FoYuqn76uhFy4EX4JAXE4/Yj2cfqSnojI9myI6GeOKIHoP8ll0oq4YcyTMdVPYP5CA==
+X-Received: by 2002:a17:902:12f:: with SMTP id
+	44-v6mr28880855plb.403.1517449467993; 
+	Wed, 31 Jan 2018 17:44:27 -0800 (PST)
+Received: from localhost.localdomain ([2601:646:8880:466c::a8d6])
+	by smtp.gmail.com with ESMTPSA id
+	b63sm48160246pfl.78.2018.01.31.17.44.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Jan 2018 07:53:39 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f47.google.com with SMTP id l6so4717288oii.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Jan 2018 07:53:39 -0800 (PST)
-X-Received: by 10.202.65.194 with SMTP id o185mr5065003oia.166.1517414018615; 
-	Wed, 31 Jan 2018 07:53:38 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.157.13.115 with HTTP; Wed, 31 Jan 2018 07:53:35 -0800 (PST)
-In-Reply-To: <CA+chaQdGSCfm2aNj+EXFy+unv4c+D7oBNmz3uWdHUFpjFO_DPg@mail.gmail.com>
-References: <20180131152754.25696-1-otavio@ossystems.com.br>
-	<CA+chaQdGSCfm2aNj+EXFy+unv4c+D7oBNmz3uWdHUFpjFO_DPg@mail.gmail.com>
-Date: Wed, 31 Jan 2018 13:53:35 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKq3xOnxc3PjpkbFWgsS8R2xvZgZy+yb3tJ9ST7p3SsjAg@mail.gmail.com>
-Message-ID: <CAP9ODKq3xOnxc3PjpkbFWgsS8R2xvZgZy+yb3tJ9ST7p3SsjAg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>, akuster808 <akuster808@gmail.com>
-Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [global meta-oe PATCH] Stop using base_conditional utility method
+	Wed, 31 Jan 2018 17:44:27 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 31 Jan 2018 17:44:13 -0800
+Message-Id: <20180201014414.12948-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.16.1
+Subject: [meta-networking][PATCH 1/2] net-snmp: Fix compiler options with paths in net-snmp-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,16 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Jan 2018 15:53:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Feb 2018 01:44:27 -0000
 
-On Wed, Jan 31, 2018 at 1:37 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> FWIW: I've sent the same change yesterday.
+options which involve paths into workspace are usually filtered out
+with the sed command, however currently it does half the job and the
+resulting config file gets partial replacements leaving the compiler
+options with bad syntax e.g.
 
-Great; it was not merged yet it seems as I got parse errors :-(  Armin?
+-fdebug-prefix-map option is left with -fdebug-prefix-map=
+which is not correct syntax, the effect of this is seen in other
+recipes which then invoke net-snmp-config script and add the
+flags obtained from this script into its own configure scripts
+and then tries to execute tests, these tests fail because of
+bad compiler options e.g. keepalived where configure tests fails like
 
+| configure: error: *** incorrect CFLAGS from net-snmp-config
+
+this is because of wrong compiler options that it got from
+recipe-sysroot/usr/bin/crossscripts/net-snmp-config
+
+This patch tries to be specific about which options should
+be skimmed and removes the options completely
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index 29cd6b3bf..584593b17 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -118,10 +118,10 @@ do_install_append() {
+     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+         -i ${D}${bindir}/net-snmp-create-v3-user
+     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+-           -e "s@${STAGING_DIR_NATIVE}[=]*@@g" \
+-           -e "s@${STAGING_DIR_HOST}[=]*@@g" \
+-           -e "s@${WORKDIR}[=]*@@g" \
+-           -e "s@${D}@@g" \
++           -e "s@\([^ ]*-fdebug-prefix-map=[^ ]*\)\1*@@g" \
++           -e "s@\([^ ]*--sysroot=[^ ]*\)\1*@@g" \
++           -e "s@\([^ ]*--with-libtool-sysroot=[^ ]*\)\1*@@g" \
++           -e "s@\([^ ]*--with-install-prefix=[^ ]*\)\1*@@g" \
+         -i ${D}${bindir}/net-snmp-config
+ 
+     if [ "${HAS_PERL}" = "1" ]; then
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.16.1
+
 
