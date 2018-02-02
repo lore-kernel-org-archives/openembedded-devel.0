@@ -1,46 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
-	[209.85.128.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 011CA6FFF7;
-	Fri,  2 Feb 2018 11:35:50 +0000 (UTC)
-Received: by mail-wr0-f182.google.com with SMTP id y3so12423958wrh.3;
-	Fri, 02 Feb 2018 03:35:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=sWExv29ldYQDzgt8Fp+pwpihWhJbwG9UsNlOyVpqiF8=;
-	b=QCzLq4TyJoHW7dbHzibKdfJSWTfOWUgrUCwpPmYCicaW+YrYCqwHoxZp/uX+l46XLQ
-	KRZjd/pyVfobtSa7Azc/41uvfrw2erpQw0q52bcZVsrVS7vvOzPWcfPNjJm2WYjUUD8l
-	7ZQqPqpJ0vXN/d87tkQ0Y1VDjo4sXN5wfvlnQcuDXFEEjDCXzH0qZYROpsMqqXJ7Vz/u
-	9XjPTUTaLNgMTnZe8zMBghfrmjFd5sdpu15MYKiT6o3K7QZTPZ8+HoOGByJJ36cZ9ZXH
-	nMt7AhZrXZDTzYl1Pm2CuLS8Q7gEoP+19qwLj2WGwJ8vIL5Jyj6vXxjn2jiTq20IilpI
-	zH+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=sWExv29ldYQDzgt8Fp+pwpihWhJbwG9UsNlOyVpqiF8=;
-	b=MRwnNnngI5ao6+kPPLVrEF6Yw9iwY7rwbdusuW0GRNW/dqSmNfNZX4S1opKWlALCmb
-	c1ljQbSjZSfICtOsCnpVJJmrYkEGOJybu0EAkkSGAK2ME3HyUMh7ZWf4MKRUVNmBE/EI
-	4Pl8eHedLbOCyKZ2/mNxWPN4V6/J+lRnnRi8j9BKVxqN2Y0r9ACtO9AfmyXvpQRMQv5r
-	r9aMj+niAvlocwsXZIbylwAlkABQKSdzhrSynVfLa0clpjlm0BLR+Lli17m+hfOw6lsZ
-	kx1A0xwLfSdV+D1EB0JK2PhNupI4W7l+20iydm5Cw7gkwDktSQXv3187iTH6B+Yowhdm
-	tyaA==
-X-Gm-Message-State: AKwxytcYog+0nFibZl1N25Wp53PHoumIn2JsEdxwNgHrKfsqfWlq3Bn6
-	YbtYyhs02mM8eC/dEavtxfa/2Xv3s21Kb4v3+2Ci7Q==
-X-Google-Smtp-Source: AH8x227qlzQfwyqi52bOCb5jG59sTqCwcRrOZybSD/mfbsSHDVkqupAihBiVz25ymb0oj1vNWuuHZu49LVKxXuADkwo=
-X-Received: by 10.223.136.167 with SMTP id f36mr20603294wrf.200.1517571346624; 
-	Fri, 02 Feb 2018 03:35:46 -0800 (PST)
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 50761786E7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Feb 2018 11:42:07 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1517571729; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=ITO2WOnifOpVicmRgLsAi4sxXXHwrYcr1TQKaBHen1A=;
+	b=XvnttJBfd3WPalKF0VMEskXU05FyAdWr0vAppJWA/kcOqHVrJccKI0z+3kX4FnVrOgACoSlU
+	gXj0FGJMTTGmEyurzhP2j7Chq79D8y3gBBeP5IBQm388trOQ0hLtbhDjfBOaDR1Mm7oiZsGw
+	1VY2cu4eLtgQE6WAqIpEFtO2lJw=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-qt0-f179.google.com (mail-qt0-f179.google.com
+	[209.85.216.179])
+	by mxa.mailgun.org with ESMTP id 5a744e91.7f659442c130-smtp-out-n03;
+	Fri, 02 Feb 2018 11:42:09 -0000 (UTC)
+Received: by mail-qt0-f179.google.com with SMTP id d54so30481313qtd.4;
+	Fri, 02 Feb 2018 03:42:09 -0800 (PST)
+X-Gm-Message-State: APf1xPAfuRcHBNcO1VWXC/PkgeUnr77xRRkjLsDwyrenlC4dfvrQz3sy
+	sH0qpDRVmv06CgYM1CWBKAlPkXa+p3ifAb7D1XE=
+X-Google-Smtp-Source: AH8x224jBYuvi+DoDC/r1dGL+Q/5/0/QbcP8aDQ6PC1aBEF+buNoVYxi1TGTdmN209t0LNmMKyImWeTsQ7Wrat6A1aA=
+X-Received: by 10.200.57.3 with SMTP id s3mr3491456qtb.328.1517571728905; Fri,
+	02 Feb 2018 03:42:08 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Fri, 2 Feb 2018 03:35:46 -0800 (PST)
-In-Reply-To: <151750087874.30832.4117930919339260762@git.openembedded.org>
+Received: by 10.140.83.228 with HTTP; Fri, 2 Feb 2018 03:42:08 -0800 (PST)
+Received: by 10.140.83.228 with HTTP; Fri, 2 Feb 2018 03:42:08 -0800 (PST)
+In-Reply-To: <CA+chaQfugMhAbs+u4jQYaGDgMoK-sSXfXFyxerOoM6H6feEpAQ@mail.gmail.com>
 References: <151750087874.30832.4117930919339260762@git.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 2 Feb 2018 12:35:46 +0100
-Message-ID: <CA+chaQfugMhAbs+u4jQYaGDgMoK-sSXfXFyxerOoM6H6feEpAQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	akuster808 <akuster808@gmail.com>, Derek Straka <derek@asterius.io>
+	<CA+chaQfugMhAbs+u4jQYaGDgMoK-sSXfXFyxerOoM6H6feEpAQ@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Fri, 2 Feb 2018 06:42:08 -0500
+X-Gmail-Original-Message-ID: <CADNbA1q4MXAuD7Qon2du5xF3siSt-HYBUZ2qbvOSNrMUxP25_g@mail.gmail.com>
+Message-ID: <CADNbA1q4MXAuD7Qon2du5xF3siSt-HYBUZ2qbvOSNrMUxP25_g@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>,
+	Mark Asselstine <mark.asselstine@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-commits@lists.openembedded.org
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-commits@lists.openembedded.org
 Subject: Re: [oe-commits] [meta-openembedded] branch rocko updated (6e3fc5b -> a65c1ac)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -54,8 +53,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Feb 2018 11:35:51 -0000
+X-List-Received-Date: Fri, 02 Feb 2018 11:42:08 -0000
 Content-Type: text/plain; charset="UTF-8"
+
+Mark had cherry picked the twisted changes from master.  I thought he had
+pulled in the full change set, but I must have missed some of the commits
+when I reviewed it.  I'll take a look once I get off the train.  Sorry for
+the breakage.
+
+On Feb 2, 2018 6:35 AM, "Martin Jansa" <martin.jansa@gmail.com> wrote:
 
 Why was this change backported to rocko?
   add 0f1dff9  python-twisted: clean-up the dependencies
@@ -229,20 +235,21 @@ On Thu, Feb 1, 2018 at 5:01 PM, <git@git.openembedded.org> wrote:
 >  meta-xfce/README                                   |   11 +-
 >  .../xfce4-screenshooter_1.9.1.bb                   |    1 +
 >  56 files changed, 5785 insertions(+), 258 deletions(-)
->  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/
-> net-snmp-fix-for-disable-des.patch
->  create mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-
-> doveadm-Fix-parallel-build.patch
->  create mode 100644 meta-networking/recipes-support/open-isns/open-isns/
-> 0001-util.h-endian.h-is-available-on-musl-on-linux.patch
->  create mode 100644 meta-networking/recipes-support/stunnel/stunnel/fix-
-> openssl-no-des.patch
+>  create mode 100644 meta-networking/recipes-protoc
+> ols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
+>  create mode 100644 meta-networking/recipes-suppor
+> t/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
+>  create mode 100644 meta-networking/recipes-suppor
+> t/open-isns/open-isns/0001-util.h-endian.h-is-available-
+> on-musl-on-linux.patch
+>  create mode 100644 meta-networking/recipes-suppor
+> t/stunnel/stunnel/fix-openssl-no-des.patch
 >  copy meta-oe/licenses/{QWTv1.0 => FLTK} (72%)
 >  create mode 100644 meta-oe/licenses/UFL
->  create mode 100644 meta-oe/recipes-devtools/php/
-> php-7.1.9/CVE-2017-16642.patch
->  create mode 100644 meta-oe/recipes-support/gperftools/gperftools/sgidef.
-> patch
+>  create mode 100644 meta-oe/recipes-devtools/php/p
+> hp-7.1.9/CVE-2017-16642.patch
+>  create mode 100644 meta-oe/recipes-support/gperft
+> ools/gperftools/sgidef.patch
 >  rename meta-oe/recipes-support/postgresql/{postgresql_9.4.13.bb =>
 > postgresql_9.4.15.bb} (67%)
 >  rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.7.3.bb =>
