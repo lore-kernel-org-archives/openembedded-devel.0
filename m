@@ -1,30 +1,50 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E31478415
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f52.google.com (mail-pg0-f52.google.com [74.125.83.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 7812C7841C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Feb 2018 06:57:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="36706634"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Feb 2018 14:57:46 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5BCBC486A78A
+	Mon,  5 Feb 2018 02:49:57 +0000 (UTC)
+Received: by mail-pg0-f52.google.com with SMTP id m28so726514pgc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Feb 2018 14:57:45 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.156) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Sun, 4 Feb 2018 14:57:44 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 4 Feb 2018 23:56:54 +0800
-Message-ID: <1517759814-106891-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Sun, 04 Feb 2018 18:49:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding:content-language;
+	bh=i0zMeCk/AXpcngCOsuqqmvFczbLBuZxDNg/PxcCbY/U=;
+	b=NibYbOkldOYfzcgQ/LZ2TmaaEmZ+N6A9wzl9KrBiGk6/Q3J1Cr85QSpzQhH9S654eZ
+	Vk1++Pj8LJIzSFlv694iCFGunLdrM7vQxJF2OlYQUB9DqAWNjpAER6UMBkaUCslrk00P
+	t4ryj7/FdjJXDMLHDGoK98/zWuWYSLwXmR2kZpCGZMhTuJ02s3mCl5oSbf4hrjrLNCQV
+	KYFgWyAi4cXlZute+qnaEUx6RhU/zGDxQfWNZySnyyazP42QNfzvnfo6ddgkxWozQIe1
+	D2HNcIIulvBOxI0Mxyc6RAWu92+Ewq/vfc9Pge2nKZCoFfJrW3uZb+zqk/1/VUKH8Ssd
+	Txtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=i0zMeCk/AXpcngCOsuqqmvFczbLBuZxDNg/PxcCbY/U=;
+	b=q3eVrZTbIYF0YtkkTmh/+wtzi7EzmoDqAmcKBlr5YeOu+5yZIxKyrkEQAoVZZPCLUB
+	y6oNip3AhfIKYaXiQKGDZ1R1j1qJFYmNVTOGbrLv6bF8wcrmGjV2bwWwKFpc0yLEM/hY
+	/BLrF2qwSm6RgWPphcxk7nd19jT6dQ0YCoOZdgPQyV/WG75EIKuBCOqpOgFAR5LRNJRt
+	SuRh8CL5fL04QT3a2A2vNLIWA8RaYgMEG7NkMoRVGm7k9k2m+n3Yci9jLO08MMs5E2W0
+	D1GxQhXIuBxhAGk95N4IgVyqnsH+uIShhDAi5f1k1r6KFYI1rM7TsBkZ3Jr0ek6o8sih
+	+HdA==
+X-Gm-Message-State: AKwxytd392RMLRcxcyA4sZvtXasmgwjylh0wMpvyKkQ3zesyXDBTDW/l
+	g5BA4cbEd/0zBUvHm4V4A4PVAg==
+X-Google-Smtp-Source: AH8x225FgsPx5Eq95zINbOJgS6f62irCd0Jt0MDz0qI4abm6pyVbb9/r7wV2G7up6kC/LgkgzvZ2ZQ==
+X-Received: by 10.99.174.15 with SMTP id q15mr36464788pgf.265.1517798999355;
+	Sun, 04 Feb 2018 18:49:59 -0800 (PST)
+Received: from [10.5.7.147] ([223.196.115.131])
+	by smtp.gmail.com with ESMTPSA id g8sm2267791pgs.22.2018.02.04.18.49.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 04 Feb 2018 18:49:58 -0800 (PST)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <bbc09ab4-1bc7-3120-5de5-0bf02636c629@gmail.com>
+Date: Mon, 5 Feb 2018 08:19:56 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 5BCBC486A78A.A93B7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v2] xrdp: bug fix
+Subject: World builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,40 +57,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Feb 2018 06:57:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Feb 2018 02:49:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-Change default config file for pam to fix the pam problem.
+Hello,
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+There will be delays merging=C2=A0 changes into meta-openembedded.=C2=A0 =
+One of
+our two build nodes has go off-line again. This the second time in a
+week it has happened.
 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-index ccc8e35..86a8023 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-@@ -37,7 +37,7 @@ FILES_${PN}-dev += "${libdir}/xrdp/libcommon.so \
-                     ${libdir}/xrdp/libscp.so \
-                     ${libdir}/xrdp/libxrdpapi.so "
- 
--#EXTRA_OECONF = "--disable-rfxcodec --disable-painter"
-+EXTRA_OECONF = "--enable-pam-config=suse"
- 
- do_configure_prepend() {
-     cd ${S}
-@@ -65,7 +65,6 @@ do_install_append() {
- 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
- 
- 	install -m 0644 ${S}/instfiles/*.ini ${D}${sysconfdir}/xrdp/
--	install -m 0644 ${S}/instfiles/pam.d/xrdp-sesman.debian ${D}${sysconfdir}/xrdp/pam.d/xrdp-sesman
- 	install -m 0644 ${S}/sesman/sesman.ini ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/xrdp/xrdp.ini ${D}${sysconfdir}/xrdp/
--- 
-2.7.4
+I am currently running basic world builds on my home system.
 
+
+Regards,
+
+Armin
 
 
 
