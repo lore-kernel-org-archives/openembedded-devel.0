@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A5F671A92
+Received: from mail-pl0-f54.google.com (mail-pl0-f54.google.com
+	[209.85.160.54])
+	by mail.openembedded.org (Postfix) with ESMTP id B7FD8784CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Feb 2018 07:46:29 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id f4so760079plr.10
+	Tue,  6 Feb 2018 07:46:30 +0000 (UTC)
+Received: by mail-pl0-f54.google.com with SMTP id g18so772281plo.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Feb 2018 23:46:31 -0800 (PST)
+	Mon, 05 Feb 2018 23:46:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=CKm2VRI+x/2U4IDOeQSsfPMPKJ11xSsyr6Sol6Y+KV0=;
-	b=okPi/43A7lqZ7pcxXpZuzvQQVbpA7usQE9u4uQOb1i5P5Ez4jkwasU7BpR4Sq6Op0A
-	j3iWklaWYI9eN/5kzRCEOrA1alwfzclVwfJ1JT6tyi3xjJMp9RcCu8Liuxhh/VTuJj/N
-	iUQ4gLXxvEIFBxs0T2Gnl9yMWBClvsHsxs9qy1doWfEsEOqz7sCNUpr5akHJOemyl4cc
-	iFx46ZRKq6gGXDT77jH76suH+3DPDbmKNzDUnBpPMnhl7mb5PgsysO2tAcp8K7BwBeww
-	LtDzE4FudxDUQShE7EluwdHT4buiT1FpWQTJmX9Nvg1BFXjRGTevFpidO1LuBl3etIN7
-	uwZQ==
+	bh=61B90Hi6y2vUo8TJjTA1hQ9oCg8Ctcg37vRmOW3wwX8=;
+	b=RjApfdxCAGsMCCKJN093jhiodDFYsla1fsLIjhGXjnStpT6Igz9OXV8OqAP1M4ckUS
+	+vqlv3qW2bC1o2Zj+/Vh41TVQ3zbylTIV6eryyZnFT1jKFyjXVm8+eV60o02W9mRgbyK
+	S3pN3tCELJtevKweCanuG3od8ARa8Ms/SRkKqYe2OKF5bLfTG3ttIBfg2ae400LDXrY2
+	NhQ3/W4HTvuMkhfrbeqpofHPHADvRqfjYrE1DnLyS7G0wa2kBlqueZ7czmNRAQzokEeG
+	LsgUbUybCm+7LCVydBdfysKhaVzawZcz+5F++r985LABz2Wq8UvW2rI1ehOYCvWoh2Tb
+	YY4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=CKm2VRI+x/2U4IDOeQSsfPMPKJ11xSsyr6Sol6Y+KV0=;
-	b=GgGa7y9T7Ar9YLVNbhx/or16VNBLRqcXTPgMvR9ZvEfu83uZZ4B4LevYO3HgRr2lAt
-	Jcq/f7L0h9KzbUhdhdzunJ+GGASjF41e4pvbIsZ7VNnUjKeshK59s43P8TfljcMAyIFH
-	hww6R97i3UrqQii5hR+R9RdshbPTZHHvUrBW7N2d3DDgnd7pgwo2EKVFNKwiiP1JT6SW
-	YRTcIJFrP3f39fgjhzkoGqVAIqnwnj0Dmjabk9yAj7I7chQ1sTIaXPaGqmxxF3Gh0ATm
-	PfWYAiXfPbIZD5F+AObGgXejAM6yaacgPU7iIUvFPEZGp3DLbyPKewIb4gH1DiWLHy+T
-	CrUw==
-X-Gm-Message-State: APf1xPBdQhVHHHOSqFgp9fz4nTE62rQjbDFfRaDnvdu88T/aia+qFkUb
-	QR/dm+emgNqtOEzwVwk+0ntDzw==
-X-Google-Smtp-Source: AH8x227fCVixTdBkexsl4BMhw8PLq/7vLWVof80yWT4Lph8hbQRi5qo9NWwI3Z7wukA8wNSdaqWrrg==
-X-Received: by 2002:a17:902:968e:: with SMTP id
-	n14-v6mr1561245plp.21.1517903190412; 
-	Mon, 05 Feb 2018 23:46:30 -0800 (PST)
+	bh=61B90Hi6y2vUo8TJjTA1hQ9oCg8Ctcg37vRmOW3wwX8=;
+	b=rhMmgOYiDc45a1vg3aqDPLk2cdegL7/MqDCYA/lgYNRkOEKp7HVkRfQnwkx5l/vldr
+	56cijE5avOQcV6FPIRCphBzkNdaM+UZMcRsik7tfLP+IbDR2ZD5NujD6qT77nVEeeE4y
+	pBQaDmkoEaHmr9nOzICqx2GhehtGPIPUHJgDhT9BuBDCXErefqTqQcfYW7+EZoK5EQzl
+	fOyR/Wyprjh1O5jE7fNGTdcH9mlkr195o2SFDsM8M8CvKfKh04IcXKjgX8hHhrMzn/eG
+	HX6OeXW9y3zioZ9gI6cy564TNB1jqlasUikleDlJPixcpXOVXVkJL231WJOHrx97iXvr
+	SKzQ==
+X-Gm-Message-State: APf1xPDjG7LldFMpI9Ayixri7JaYj1aIKfVcauABVsgHFUY8pn/Bc/Aq
+	wCsp+IL4J3EnS8l++8kzOWKclg==
+X-Google-Smtp-Source: AH8x227zLwvZ9A/YRyipT0p/NPKlcQlV1Ax/VYBhyiglULWOXGxwbhCm7aPtK8rlVQUZ56uqYCbnWw==
+X-Received: by 2002:a17:902:3363:: with SMTP id
+	a90-v6mr1500017plc.159.1517903191607; 
+	Mon, 05 Feb 2018 23:46:31 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:8880:466c::5590])
 	by smtp.gmail.com with ESMTPSA id
-	s90sm20976060pfi.139.2018.02.05.23.46.28
+	s90sm20976060pfi.139.2018.02.05.23.46.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Feb 2018 23:46:28 -0800 (PST)
+	Mon, 05 Feb 2018 23:46:30 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Feb 2018 23:46:15 -0800
-Message-Id: <20180206074619.22165-2-raj.khem@gmail.com>
+Date: Mon,  5 Feb 2018 23:46:16 -0800
+Message-Id: <20180206074619.22165-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.16.1
 In-Reply-To: <20180206074619.22165-1-raj.khem@gmail.com>
 References: <20180206074619.22165-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/6] alsa-oss: Upgrade to 1.0.28
+Subject: [meta-oe][PATCH 3/6] mraa: Fix build on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,87 +58,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Feb 2018 07:46:29 -0000
+X-List-Received-Date: Tue, 06 Feb 2018 07:46:30 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../alsa/{alsa-oss-1.0.17 => alsa-oss}/libio.patch       | 16 ++++++++--------
- .../alsa/{alsa-oss_1.0.17.bb => alsa-oss_1.0.28.bb}      |  6 ++----
- 2 files changed, 10 insertions(+), 12 deletions(-)
- rename meta-oe/recipes-multimedia/alsa/{alsa-oss-1.0.17 => alsa-oss}/libio.patch (66%)
- rename meta-oe/recipes-multimedia/alsa/{alsa-oss_1.0.17.bb => alsa-oss_1.0.28.bb} (75%)
+ ...ian.h-for-be16toh-and-le16toh-declaration.patch | 27 ++++++++++++++++++++++
+ meta-oe/recipes-extended/mraa/mraa_git.bb          |  4 +++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch
 
-diff --git a/meta-oe/recipes-multimedia/alsa/alsa-oss-1.0.17/libio.patch b/meta-oe/recipes-multimedia/alsa/alsa-oss/libio.patch
-similarity index 66%
-rename from meta-oe/recipes-multimedia/alsa/alsa-oss-1.0.17/libio.patch
-rename to meta-oe/recipes-multimedia/alsa/alsa-oss/libio.patch
-index a053e4c60..5299945e1 100644
---- a/meta-oe/recipes-multimedia/alsa/alsa-oss-1.0.17/libio.patch
-+++ b/meta-oe/recipes-multimedia/alsa/alsa-oss/libio.patch
-@@ -1,7 +1,7 @@
--Index: alsa-oss-1.0.15/alsa/stdioemu.c
-+Index: alsa-oss-1.0.28/alsa/stdioemu.c
- ===================================================================
----- alsa-oss-1.0.15.orig/alsa/stdioemu.c	2007-10-15 10:50:40.000000000 +0200
--+++ alsa-oss-1.0.15/alsa/stdioemu.c	2008-07-21 22:17:06.303161438 +0200
-+--- alsa-oss-1.0.28.orig/alsa/stdioemu.c
-++++ alsa-oss-1.0.28/alsa/stdioemu.c
- @@ -37,7 +37,9 @@
-  #endif
-  
-@@ -12,7 +12,7 @@ Index: alsa-oss-1.0.15/alsa/stdioemu.c
-  
-  struct fd_cookie {
-  	int fd;
--@@ -99,7 +101,11 @@
-+@@ -99,7 +101,11 @@ static FILE *fake_fopen(const char *path
-  
-  	if (open_mode && fdc->fd > 0) {
-  		result = fopencookie (fdc,"w", fns);
-@@ -24,11 +24,11 @@ Index: alsa-oss-1.0.15/alsa/stdioemu.c
-  	}
-  	return result;
-  }
--Index: alsa-oss-1.0.15/configure.in
-+Index: alsa-oss-1.0.28/configure.ac
- ===================================================================
----- alsa-oss-1.0.15.orig/configure.in	2007-10-15 10:50:40.000000000 +0200
--+++ alsa-oss-1.0.15/configure.in	2008-07-21 22:16:11.719837298 +0200
--@@ -33,6 +33,12 @@
-+--- alsa-oss-1.0.28.orig/configure.ac
-++++ alsa-oss-1.0.28/configure.ac
-+@@ -35,6 +35,12 @@ if test "$with_aoss" = "yes"; then
-    LIBS="$OLD_LIBS"
-  fi
-  
-diff --git a/meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.17.bb b/meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.28.bb
-similarity index 75%
-rename from meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.17.bb
-rename to meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.28.bb
-index 8966dbbc1..0c4a9f545 100644
---- a/meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.17.bb
-+++ b/meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.28.bb
-@@ -3,11 +3,12 @@ SECTION = "libs/multimedia"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
- DEPENDS = "alsa-lib"
--PR = "r1"
+diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch b/meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch
+new file mode 100644
+index 000000000..711738a92
+--- /dev/null
++++ b/meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch
+@@ -0,0 +1,27 @@
++From 2c85decc3b93bfe7322309d2ca7d6377e746c18f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 5 Feb 2018 09:51:08 -0800
++Subject: [PATCH] include endian.h for be16toh and le16toh declarations
++
++Upstream-Status: Submitted [https://github.com/intel-iot-devkit/mraa/pull/863]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ examples/iio_driver.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/examples/iio_driver.c b/examples/iio_driver.c
++index c5a0181..568011c 100644
++--- a/examples/iio_driver.c
+++++ b/examples/iio_driver.c
++@@ -22,6 +22,7 @@
++  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++  */
++ 
+++#include <endian.h>
++ #include <unistd.h>
++ #include "mraa/iio.h"
++ 
++-- 
++2.16.1
++
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index c4b9c6f90..473116e63 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=66493d54e65bfc12c7983ff2e884f37f"
+ SRCREV = "8ddbcde84e2d146bc0f9e38504d6c89c14291480"
+ PV = "1.7.0-git${SRCPV}"
  
- SRC_URI = "ftp://ftp.alsa-project.org/pub/oss-lib/alsa-oss-${PV}.tar.bz2 \
-     file://libio.patch \
- "
-+SRC_URI[md5sum] = "91f57e8cee1ad4cc956caa8b62ac5d43"
-+SRC_URI[sha256sum] = "3ae62caa88a0bc7b30ed836dcb794dc6ef4d3650439e2260db54cace7d5c6ad5"
+-SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http"
++SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
++           file://0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch \
++           "
  
- inherit autotools
+ S = "${WORKDIR}/git"
  
-@@ -17,6 +18,3 @@ do_configure_prepend () {
-     touch NEWS README AUTHORS ChangeLog
-     sed -i "s/libaoss.so/${LEAD_SONAME}/" ${S}/alsa/aoss.in
- }
--
--SRC_URI[md5sum] = "1b1850c2fc91476a73d50f537cbd402f"
--SRC_URI[sha256sum] = "8d009e23e2cbee1691ec3c95d1838056a804d98440eae7715d6c3aebc710f9ca"
 -- 
 2.16.1
 
