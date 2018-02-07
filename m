@@ -1,47 +1,48 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f45.google.com (mail-pg0-f45.google.com [74.125.83.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 8243665D00
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C55C7807D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Feb 2018 01:59:45 +0000 (UTC)
-Received: by mail-pg0-f45.google.com with SMTP id f6so1882742pgs.10
+	Wed,  7 Feb 2018 09:05:39 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id t94so145676wrc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Feb 2018 17:59:47 -0800 (PST)
+	Wed, 07 Feb 2018 01:05:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=uhxbm4vvwoeo8ke7jR8+WEI90OLqemOttzNWYgX+mtg=;
-	b=Nxu9xGehbXJNp2O617QhRZs85M97gwf60c9jinTpxndSMEXm3nZQx3kaG7+MJ4VME9
-	aencWvH5h5xYKoIKbakua298uM85WqyP4T6Gx6SJ4Aq2UVM7SZicVdKXHii3g2/UIVeK
-	0xubKwj6e8MgeeOhKLi1jSf2IOHwKhiTqxOjpgvGhZMgBKlwHlsdWf6vywQPUGhfthlU
-	OSKN6gozA1EGUlWwMVRzJSaNuFlfemE1fBy1gCeCQBoamWhv6mkuME7KgylKu9pIBXox
-	lZUYZ9nnljZZZaSPnSW3h98UeU5rlTZs2N//qp/iBv5ZrWxrO64IsARd8M9m142H9hcr
-	TSCA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=zPoWTIjQBmxMJI0oFzArtyuWa0rf/5UnZboG9Tpmjgc=;
+	b=c+Dgzs6PuZlu33I1/1+Z5841s++dS8EfiI7+kP6nejuZddt85eH4QvtjnXwpxV857V
+	4+qTp5V/xmnSJOZC0uh8JaGGhl2ju6p8BWBRWkngLsIV/zu7kHrm4eagYyhEQ7rNR4ia
+	ic7Xrs9tg+lRr7U28jXeraR3iwbVmTPanazP0fNFdzsM6eNWHS9l3c4gCh0HbdXESKh7
+	FcU4PBvDrhJOiExUgpP14eFC2npl89RrQOgQRcpbpb4Bal3dvyRrIg1riw9gYPXlvBDr
+	Nw0O4oDvEVcZEI3VAHSZlZUg4S40Oef5z8/cbHdUER1G7JAzYqS4wRfyhwBawPyn/YRp
+	mDUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=uhxbm4vvwoeo8ke7jR8+WEI90OLqemOttzNWYgX+mtg=;
-	b=dKtd2mPvpq+pZMsRe1EqxkKn68sy3SaEevX2Ncl523dZAQx+5TpHhFat+XiBTvxZdP
-	sqAR295fDJrlJ6O4Vfjf2kNzRQ0pI6iYhuu4DeF7SzQQyjWnlF3zXR7IIp1IKxK3Eq9b
-	wGXiCRt6nU8Ii48q3hx9Ud1E40IQGyjbJDIX0nWus7n92/jzrqoElXzk84uG6HAHbFSQ
-	6Oqu+y/jhD3J+Qm+PaHk8fn15rkEbMgy8ftteHaZpWVMAJAmM7JAHWtWRUjBzb9MpqJM
-	AQ3OgGDN0RGELdklBbMKj+apEkYwIvjPlDYwgq8UUvPIifO0IrUlzQbsgzcaEemDQlot
-	ny5w==
-X-Gm-Message-State: APf1xPATUa3cngJuahA40QcIXKXkgVYUCUOw/cBs6Ei1SoPJNGvLR6l5
-	5b/R8/dp08n4qHHIArLUD08/zA==
-X-Google-Smtp-Source: AH8x224CNNlbBCP3Y07jx3wJIjUjEslf556YWc+nKPpLGykd3zFgQChqrVXqFlT02Iyu3ArtHUF5Tw==
-X-Received: by 10.98.195.2 with SMTP id v2mr4223333pfg.141.1517968784997;
-	Tue, 06 Feb 2018 17:59:44 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.mvista.com ([223.196.115.131])
-	by smtp.gmail.com with ESMTPSA id
-	m83sm565823pfk.107.2018.02.06.17.59.43
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 06 Feb 2018 17:59:44 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Feb 2018 07:29:40 +0530
-Message-Id: <1517968780-16074-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireshark: update to new 2.4 series
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=zPoWTIjQBmxMJI0oFzArtyuWa0rf/5UnZboG9Tpmjgc=;
+	b=AJxtPDdevPZXdRL45LsCD5eKwHZ9DEfK+6E7ilF27bTScNJ/Ex4wrAzdn04gn3UPPA
+	1x+yyeCj1oM2FNrW0y83bPNWDT2ox2HPSP42O6kbsOK/YeJg3qabg0Ap8GLVvnr3a5LC
+	PYw1co+zY9BQ7cQIDHFOpeQQWxnbZ+6cCwT6zuxBBdcE9uhFfZLs+13Td1xl+FjUWTRG
+	wvLi/jG7gpWUtMlGJs8Y4UUxZ+kZ7ifd4Y1sEmHYq3Z4UpRCpygR9OqqcpuieViFO2yX
+	Ll8SEdNr/HIKm9ZoAXZ0ZGMwJ/P/OcvTYzkup7jKuFz58Nhx7ZYWXRStSYOpDZa6nWcu
+	waKw==
+X-Gm-Message-State: APf1xPD7l2ZAyIf0zNuhBIpb/UWLQ9hAOs5xmcZlTJ3xAtEkZ2JEWIwi
+	ApaWJUZxizzNKZDqcb7AjvCfIkym7wMQKL/0WRsC5A==
+X-Google-Smtp-Source: AH8x225oCI7JRQs3627rXYn8o0ak2+ZhQkgLu+0JnU+wb6q4JP9j8h2wiOxeXJREmV2XZWE49Mop/hIC6dkOfz14vAc=
+X-Received: by 10.223.171.24 with SMTP id q24mr4997314wrc.206.1517994340249;
+	Wed, 07 Feb 2018 01:05:40 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.28.74.211 with HTTP; Wed, 7 Feb 2018 01:05:39 -0800 (PST)
+In-Reply-To: <1516553654-14732-1-git-send-email-derek@asterius.io>
+References: <1516553654-14732-1-git-send-email-derek@asterius.io>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 7 Feb 2018 10:05:39 +0100
+Message-ID: <CA+chaQcGrgxOvQ-7QC46eOZWWUQLKoTW=Mm+nzWDqA3hwn0MnQ@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-smbus: update to version 4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,137 +55,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Feb 2018 01:59:45 -0000
+X-List-Received-Date: Wed, 07 Feb 2018 09:05:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../wireshark/files/libgcrypt.patch                | 53 ++++++++++++++++++++++
- .../{wireshark_2.2.12.bb => wireshark_2.4.4.bb}    | 17 ++++---
- 2 files changed, 61 insertions(+), 9 deletions(-)
- create mode 100644 meta-networking/recipes-support/wireshark/files/libgcrypt.patch
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.12.bb => wireshark_2.4.4.bb} (84%)
+We might need another upgrade for this after last oe-core changes, now it
+fails with:
 
-diff --git a/meta-networking/recipes-support/wireshark/files/libgcrypt.patch b/meta-networking/recipes-support/wireshark/files/libgcrypt.patch
-new file mode 100644
-index 0000000..2aa58f7
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/libgcrypt.patch
-@@ -0,0 +1,53 @@
-+use OR PKG_CONFIG scheme for libgcrypt
-+
-+Upstream-Status: Inappropriate OE specific
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+Index: wireshark-2.4.4/m4/libgcrypt.m4
-+===================================================================
-+--- wireshark-2.4.4.orig/m4/libgcrypt.m4
-++++ wireshark-2.4.4/m4/libgcrypt.m4
-+@@ -27,11 +27,11 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-+      libgcrypt_config_prefix="$withval", libgcrypt_config_prefix="")
-+   if test x$libgcrypt_config_prefix != x ; then
-+      if test x${LIBGCRYPT_CONFIG+set} != xset ; then
-+-        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/bin/libgcrypt-config
-++        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/libgcrypt.pc
-+      fi
-+   fi
-+ 
-+-  AC_PATH_PROG(LIBGCRYPT_CONFIG, libgcrypt-config, no)
-++  AC_PATH_PROG(LIBGCRYPT_CONFIG, libgcrypt.pc, no)
-+   tmp=ifelse([$1], ,1:1.2.0,$1)
-+   if echo "$tmp" | grep ':' >/dev/null 2>/dev/null ; then
-+      req_libgcrypt_api=`echo "$tmp"     | sed 's/\(.*\):\(.*\)/\1/'`
-+@@ -50,7 +50,7 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-+                sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
-+     req_micro=`echo $min_libgcrypt_version | \
-+                sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
-+-    libgcrypt_config_version=`$LIBGCRYPT_CONFIG --version`
-++    libgcrypt_config_version=`$PKG_CONFIG --modversion libgcrypt`
-+     major=`echo $libgcrypt_config_version | \
-+                sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\1/'`
-+     minor=`echo $libgcrypt_config_version | \
-+@@ -82,7 +82,7 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-+      # If we have a recent libgcrypt, we should also check that the
-+      # API is compatible
-+      if test "$req_libgcrypt_api" -gt 0 ; then
-+-        tmp=`$LIBGCRYPT_CONFIG --api-version 2>/dev/null || echo 0`
-++        tmp=`$PKG_CONFIG --api-version libgcrypt 2>/dev/null || echo 0`
-+         if test "$tmp" -gt 0 ; then
-+            AC_MSG_CHECKING([LIBGCRYPT API version])
-+            if test "$req_libgcrypt_api" -eq "$tmp" ; then
-+@@ -95,8 +95,8 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
-+      fi
-+   fi
-+   if test $ok = yes; then
-+-    LIBGCRYPT_CFLAGS=`$LIBGCRYPT_CONFIG --cflags`
-+-    LIBGCRYPT_LIBS=`$LIBGCRYPT_CONFIG --libs`
-++    LIBGCRYPT_CFLAGS=`$PKG_CONFIG --cflags libgcrypt`
-++    LIBGCRYPT_LIBS=`$PKG_CONFIG --libs libgcrypt`
-+     ifelse([$2], , :, [$2])
-+   else
-+     LIBGCRYPT_CFLAGS=""
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.12.bb b/meta-networking/recipes-support/wireshark/wireshark_2.4.4.bb
-similarity index 84%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.12.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.4.4.bb
-index 6c0b644..4a2336e 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.12.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.4.4.bb
-@@ -4,14 +4,16 @@ SECTION = "net"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
- 
--DEPENDS = "pcre expat glib-2.0 glib-2.0-native"
-+DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt"
- 
--SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
-+SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz"
-+SRC_URI += "file://libgcrypt.patch"
-+
-+SRC_URI[md5sum] = "660db152b7d6974c0e2ff12aa8a4fce6"
-++SRC_URI[sha256sum] = "049a758e39422dcd536d7f75cebbfaa44e4f305d602bf22964d6459821126f58"
- 
- PE = "1"
- 
--SRC_URI[md5sum] = "ebf3d4230d7a13408758cdf037c42d66"
--SRC_URI[sha256sum] = "3274458d1bb1658a5001465ecb07c7cbfc709571ef36bd062897570d4bab3ebc"
- 
- inherit autotools pkgconfig perlnative
- 
-@@ -19,7 +21,6 @@ ARM_INSTRUCTION_SET = "arm"
- 
- PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
- PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
--#PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3", "", d)}"
- 
- PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_LIBDIR}, --with-libcap=no --enable-pcap-ng-default , libcap"
- PACKAGECONFIG[libpcap] = "--with-pcap=${STAGING_LIBDIR} --with-pcap-remote, --with-pcap=no --enable-pcap-ng-default  , libpcap"
-@@ -30,7 +31,6 @@ PACKAGECONFIG[gtk2] = "--with-gtk=2, , gtk+"
- PACKAGECONFIG[gtk3] = "--with-gtk=3, , gtk+3"
- PACKAGECONFIG[graphics] = "--enable-wireshark, --with-gtk=no --disable-wireshark,"
- PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
--PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
- PACKAGECONFIG[ssl] = "--with-ssl=yes, --with-ssl=no, openssl"
- PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
- PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
-@@ -38,14 +38,13 @@ PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
- PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
- PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
- PACKAGECONFIG[sbc] = "--with-sbc=yes, --with-sbc=no, sbc"
--
- PACKAGECONFIG[libssh] = "--with-libssh=${STAGING_LIBDIR}, --with-libssh=no, libssh2"
--
-+PACKAGECONFIG[lz4] = "--with-lz4=${STAGING_LIBDIR}, --with-lz4=no, lz4"
- 
- # these next two options require addional layers
- PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
- 
--EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
-+EXTRA_OECONF += "--with-libgcrypt-prefix=${PKG_CONFIG_DIR} --with-qt=no --enable-tshark --enable-rawshark"
- 
- # Currently wireshark does not install header files
- do_install_append () {
--- 
-2.7.4
+smbusmodule.c:26:10: fatal error: linux/i2c-dev-user.h: No such file or
+directory
+ #include <linux/i2c-dev-user.h>
+          ^~~~~~~~~~~~~~~~~~~~~~
 
+Do you have something already in your queue?
+
+On Sun, Jan 21, 2018 at 5:54 PM, Derek Straka <derek@asterius.io> wrote:
+
+> Fixes issues related to incompatibility with i2c-tools upgrade in oe-core
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/recipes-devtools/python/python-smbus.inc               | 7
+> +++----
+>  .../python/{python-smbus_3.1.2.bb => python-smbus_4.0.bb}          | 0
+>  .../python/{python3-smbus_3.1.2.bb => python3-smbus_4.0.bb}        | 0
+>  3 files changed, 3 insertions(+), 4 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-smbus_3.1.2.bb =>
+> python-smbus_4.0.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-smbus_3.1.2.bb =>
+> python3-smbus_4.0.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-smbus.inc
+> b/meta-python/recipes-devtools/python/python-smbus.inc
+> index de2a270..0bca58f 100644
+> --- a/meta-python/recipes-devtools/python/python-smbus.inc
+> +++ b/meta-python/recipes-devtools/python/python-smbus.inc
+> @@ -2,10 +2,9 @@ SUMMARY = "Set of i2c tools for linux - Python module"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=17;md5=
+> fa24df321a520ff8e10f203425ab9fa8"
+>
+> -SRC_URI = "http://downloads.yoctoproject.org/mirror/
+> sources/i2c-tools-${PV}.tar.bz2 \
+> -"
+> -SRC_URI[md5sum] = "7104a1043d11a5e2c7b131614eb1b962"
+> -SRC_URI[sha256sum] = "db5e69f2e2a6e3aa2ecdfe6a5f490b
+> 149c504468770f58921c8c5b8a7860a441"
+> +SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz
+> "
+> +SRC_URI[md5sum] = "d92a288d70f306d3895e3a7e9c14c9aa"
+> +SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f
+> 2054bb39f19961d67e0c91610f071ca403"
+>
+>  DEPENDS += "i2c-tools"
+>
+> diff --git a/meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+> b/meta-python/recipes-devtools/python/python-smbus_4.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+> rename to meta-python/recipes-devtools/python/python-smbus_4.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+> b/meta-python/recipes-devtools/python/python3-smbus_4.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+> rename to meta-python/recipes-devtools/python/python3-smbus_4.0.bb
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
