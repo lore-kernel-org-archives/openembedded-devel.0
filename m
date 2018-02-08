@@ -1,34 +1,53 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 4597A607A4
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 9767978448
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Feb 2018 17:37:55 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 38C182085A;
-	Thu,  8 Feb 2018 17:37:57 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id HNsd8ELYAuPB; Thu,  8 Feb 2018 17:37:57 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1452B2006D;
-	Thu,  8 Feb 2018 17:37:56 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 92483163296; Thu,  8 Feb 2018 12:37:55 -0500 (EST)
-Date: Thu, 8 Feb 2018 12:37:55 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180208173755.GI2786@denix.org>
-References: <1516085015-89929-1-git-send-email-denis@denix.org>
-	<20180123223913.GA2786@denix.org>
+	Thu,  8 Feb 2018 19:55:48 +0000 (UTC)
+Received: by mail-io0-f181.google.com with SMTP id g14so891139iob.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Feb 2018 11:55:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=f4N0r+5qMDvi2jo9QGIs3REiEBPhEuCpMIOO9i1mMcg=;
+	b=qEd8mp30QPT4B+onkXcSx9Q7EO/tWBGj87pI/4z+cylXhUyT4+cxQQLguSBCno0WCX
+	rv2+yQldzNAmvXN+ysxWASTtvjXYNc/u8/hGUgnSCJocqHL3STNfZ7AsGg0wwhzwLm1p
+	O9XpHldxb6EKLTPlBJAAkEz7yBIIY79YnyiWSBJZJlKg9yp07NIpK1gmb8iyb0Yx12aG
+	pn6fx5gXFKPJpChlQ1hTotwt2RnMOQ/G/b1PFaTwWAyzprzhPbgtTj5+aFS36bUUgchk
+	oUWIRjSEjCxzTMUxIQ6KzamkqnIsUJiRioreCe8yr56VE2wZ53665bXbYMRWZ9H0qWPG
+	ozaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=f4N0r+5qMDvi2jo9QGIs3REiEBPhEuCpMIOO9i1mMcg=;
+	b=kAn6uKS8SMOkEMNPE8B+X8znVrxVgtI0V93FpkFYFGoga7qLaor7IrLPaZtF3xDXb/
+	unL28JaqyUVR0yOKpDZ7awZ+mgqud4MbcydYw5wOH+TZpFRR/o2s48xjbC5inlNnNnqn
+	X2362zZLuGzgOvgjdCxG8AXLMdBPQutME7ZtLb0SqKdriemid61vFrRmM3kBJ3Rsqb4q
+	ZaA+OOR4vlaI/CCPmMeP2qI8xr1yNqALf15OMdvoPSsDwdmdLwAwbff1aLdu7Qk6jB4T
+	Z0LAB/R4uX/aUq34+nhOWoauRUPHYLgSXP7t7Pzq4NpjPbnIrcApZVkxuxs9StSNUbBE
+	tsqg==
+X-Gm-Message-State: APf1xPCL6ATPYi6gugV0HKKVPuVVWnty5c6gcLElMoeWlX9w0eS9QQbv
+	ULWFb3c8xntSpvuOlilOo7Q=
+X-Google-Smtp-Source: AH8x226kZbOplpiXe3VPeDPO71TQj44rtSlqFy23s6JtIJ5DWC+LCKWmCAbkOwpblDc1aJZNaVOAxA==
+X-Received: by 10.107.134.194 with SMTP id q63mr422061ioi.225.1518119749738;
+	Thu, 08 Feb 2018 11:55:49 -0800 (PST)
+Received: from linux-uys3 ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id 17sm501977ioc.33.2018.02.08.11.55.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 08 Feb 2018 11:55:48 -0800 (PST)
+Date: Thu, 8 Feb 2018 14:55:43 -0500
+From: Trevor Woerner <twoerner@gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20180208195543.GA29027@linux-uys3>
+References: <bbc09ab4-1bc7-3120-5de5-0bf02636c629@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20180123223913.GA2786@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-networking][PATCH] ndisc6: need to set USE_NLS="yes" to use gettext.h
+In-Reply-To: <bbc09ab4-1bc7-3120-5de5-0bf02636c629@gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: World builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,51 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2018 17:37:56 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 08 Feb 2018 19:55:48 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Ping?
+Hi Armin,
 
-On Tue, Jan 23, 2018 at 05:39:13PM -0500, Denys Dmytriyenko wrote:
-> Ping.
-> 
-> 
-> On Tue, Jan 16, 2018 at 01:43:35AM -0500, Denys Dmytriyenko wrote:
-> > From: Denys Dmytriyenko <denys@ti.com>
-> > 
-> > Otherwise we can get gettext-minimal-native dependency instead, which does not
-> > provide gettext.h header.
-> > 
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  meta-networking/recipes-support/ndisc6/ndisc6_git.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> > index 48a83b8..58f1230 100644
-> > --- a/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> > +++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> > @@ -22,6 +22,8 @@ EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
-> >  LDFLAGS += "-fuse-ld=gold"
-> >  TOOLCHAIN = "gcc"
-> >  
-> > +USE_NLS = "yes"
-> > +
-> >  do_configure_prepend() {
-> >      cp ${STAGING_DATADIR_NATIVE}/gettext/gettext.h ${S}/include
-> >      ${S}/autogen.sh
-> > -- 
-> > 2.7.4
-> > 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On Mon 2018-02-05 @ 08:19:56 AM, akuster808 wrote:
+> There will be delays merging  changes into meta-openembedded.  One of
+> our two build nodes has go off-line again. This the second time in a
+> week it has happened.
+
+Thanks for the update.
+
+This makes me curious to know a bit more about how the world builds are done.
+Can you give details about these nodes? What are they? Where are the hosted?
+How pays their electricity?
+
+> I am currently running basic world builds on my home system.
+
+Is your home machine beefy enough? Is there a way to divide up the world build
+so members of the community to volunteer to run some parts of the build?
+
+Best regards,
+	Trevor
 
