@@ -1,23 +1,37 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 57A586E630
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B697A78477
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Feb 2018 13:51:59 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	08 Feb 2018 05:52:01 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,478,1511856000"; d="scan'208";a="29881123"
-Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga001.jf.intel.com with ESMTP; 08 Feb 2018 05:52:00 -0800
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+	Thu,  8 Feb 2018 13:58:43 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id w128so5683483qkb.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Feb 2018 05:58:45 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=hnfhA49EuKIWxUUP7aUXnZYZ+WzE7EGcrvSmtFUb5jU=;
+	b=IGI6tnjpsQyIu1rvpEVRbHtaPPDSskwZ6ENM/MqwMcP6FdKbFAWSLmgSzOnojNI6pF
+	6bTw4237keJmnX6lYrLh7Cq/VkIjTKYI7uj8LldrRkcJkbJSEQGPyanuTGQkHfV01u/L
+	qtpdU9VB+X6Qe8XHhy5ZDlmfiHPUdYccfFO9tgWkOLRW75gTIX8mowfiqtNcvKuikwVI
+	yeg/mKfsgn18RvXgoPdUYGJbIVt4yfO2grzzRGujZuqfQr8dnzETqhlWT+oIjh/m9/7x
+	aPPvgDFwLd1XWgpqW3jnOWDMYkhyMAUeOGqFOlOcdfsb2C2XmsByNbRv0wcK2HY434KY
+	hFmQ==
+X-Gm-Message-State: APf1xPBnLprEZYv6bWY562LQrSOLqDMJNJOd2ko2PSOj7PQwGoc0Oi7o
+	3oFaP7z5jLRN9QDPHLdH+TB9bf+z
+X-Google-Smtp-Source: AH8x225ioQJ+Np7QUXz8AzXG63STHSq2RL71E6nn/6u5BOvYU0/FqZC+1rD2PvKTEX/WKZXaKskUqQ==
+X-Received: by 10.55.21.142 with SMTP id 14mr1075420qkv.19.1518098324244;
+	Thu, 08 Feb 2018 05:58:44 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id v20sm13275qtg.79.2018.02.08.05.58.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 08 Feb 2018 05:58:43 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Feb 2018 15:44:15 +0200
-Message-Id: <20180208134415.42347-1-alexander.kanavin@linux.intel.com>
-X-Mailer: git-send-email 2.15.1
-Subject: [PATCH] gtk-doc: fix build failures for libgdata and libunique
+Date: Thu,  8 Feb 2018 08:58:02 -0500
+Message-Id: <1518098282-23564-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-smbus: remove sed to replace i2c path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,44 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2018 13:52:00 -0000
+X-List-Received-Date: Thu, 08 Feb 2018 13:58:43 -0000
 
-The failures appeared with recent gtk-doc 1.27 update in oe-core.
+The i2c-dev file is now installed in the standard location, so
+the sed to change the path can be removed
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb | 4 ++++
- meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb   | 2 +-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-smbus.inc | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-index c2157df0c..9b025128b 100644
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-@@ -15,6 +15,10 @@ do_configure_prepend_class-target () {
-     # introspection.m4 pre-packaged with upstream tarballs does not yet
-     # have our fixes
-     rm -f ${S}/introspection.m4
-+    
-+    # remove the pre-built gtk-doc files, as they're installed (or attempted to be installed)
-+    # even if gtk-doc is explicitly disabled
-+    rm -rf ${S}/docs/reference/html
- }
+diff --git a/meta-python/recipes-devtools/python/python-smbus.inc b/meta-python/recipes-devtools/python/python-smbus.inc
+index 0bca58f..57ca8ae 100644
+--- a/meta-python/recipes-devtools/python/python-smbus.inc
++++ b/meta-python/recipes-devtools/python/python-smbus.inc
+@@ -9,9 +9,3 @@ SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f2054bb39f19961d67e0c91610f07
+ DEPENDS += "i2c-tools"
  
- do_compile_prepend() {
-diff --git a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb b/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-index 9133cccb1..49ed07ad9 100644
---- a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-+++ b/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-@@ -25,6 +25,6 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
- 
--inherit autotools pkgconfig gobject-introspection distro_features_check
-+inherit autotools pkgconfig gobject-introspection distro_features_check gtk-doc
- 
- REQUIRED_DISTRO_FEATURES = "x11"
+ S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
+-
+-do_configure_prepend() {
+-    # Adjust for OE header rename
+-    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: Module.mk
+-    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: smbusmodule.c
+-}
 -- 
-2.15.1
+2.7.4
 
 
