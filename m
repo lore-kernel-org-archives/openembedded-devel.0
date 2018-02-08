@@ -1,37 +1,45 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B697A78477
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id EA19777FED
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Feb 2018 13:58:43 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id w128so5683483qkb.5
+	Thu,  8 Feb 2018 13:59:43 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1518098384; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=IMWGbR+dfdZBQI0AuPnUKyVd234Y1eoio+XZZcCyJik=;
+	b=C95zugevyNs+7kMaoGpKXKq9CWLZL05rhk+FM/YWxKaHsBVj/kuXi84n3mQ4FDB1jOamvTq6
+	IBus2uRHVRUicrNcPapYnk6O/r53YzYJ+pOMqUPPrdUwXQ2aq1ZJriTSdkRv+1YGP07esdIr
+	lRcYvdwdCsZlmfkWtjmLAZpBJzo=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
+	[209.85.216.172])
+	by mxa.mailgun.org with ESMTP id 5a7c57d0.7f987c6965b0-smtp-out-n03;
+	Thu, 08 Feb 2018 13:59:44 -0000 (UTC)
+Received: by mail-qt0-f172.google.com with SMTP id d8so6262112qtm.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Feb 2018 05:58:45 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hnfhA49EuKIWxUUP7aUXnZYZ+WzE7EGcrvSmtFUb5jU=;
-	b=IGI6tnjpsQyIu1rvpEVRbHtaPPDSskwZ6ENM/MqwMcP6FdKbFAWSLmgSzOnojNI6pF
-	6bTw4237keJmnX6lYrLh7Cq/VkIjTKYI7uj8LldrRkcJkbJSEQGPyanuTGQkHfV01u/L
-	qtpdU9VB+X6Qe8XHhy5ZDlmfiHPUdYccfFO9tgWkOLRW75gTIX8mowfiqtNcvKuikwVI
-	yeg/mKfsgn18RvXgoPdUYGJbIVt4yfO2grzzRGujZuqfQr8dnzETqhlWT+oIjh/m9/7x
-	aPPvgDFwLd1XWgpqW3jnOWDMYkhyMAUeOGqFOlOcdfsb2C2XmsByNbRv0wcK2HY434KY
-	hFmQ==
-X-Gm-Message-State: APf1xPBnLprEZYv6bWY562LQrSOLqDMJNJOd2ko2PSOj7PQwGoc0Oi7o
-	3oFaP7z5jLRN9QDPHLdH+TB9bf+z
-X-Google-Smtp-Source: AH8x225ioQJ+Np7QUXz8AzXG63STHSq2RL71E6nn/6u5BOvYU0/FqZC+1rD2PvKTEX/WKZXaKskUqQ==
-X-Received: by 10.55.21.142 with SMTP id 14mr1075420qkv.19.1518098324244;
-	Thu, 08 Feb 2018 05:58:44 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id v20sm13275qtg.79.2018.02.08.05.58.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 08 Feb 2018 05:58:43 -0800 (PST)
+	Thu, 08 Feb 2018 05:59:44 -0800 (PST)
+X-Gm-Message-State: APf1xPBi87qx1zcTDI0T09awVYMVAH4p6iYKTJVx4Y7ly/qPYYnHHlRp
+	Rl/3A0dZegKlpBGWEzgiIPNO9Owe7W25EzeZF8E=
+X-Google-Smtp-Source: AH8x224eKo8v+JAXyfzlr8JnMHr4ymhjAN/Yf3ZVZFLZtjW6PvBxrzY2AbKgV/jUs+61M20KrsGGKYa/7AyAS20Qous=
+X-Received: by 10.237.45.231 with SMTP id i94mr1311025qtd.44.1518098383429;
+	Thu, 08 Feb 2018 05:59:43 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.81.10 with HTTP; Thu, 8 Feb 2018 05:59:43 -0800 (PST)
+In-Reply-To: <CADNbA1qY92ErjOtR7pK+NthF5DZE9-x+AeigDHG=syr6h2kETg@mail.gmail.com>
+References: <1516553654-14732-1-git-send-email-derek@asterius.io>
+	<CA+chaQcGrgxOvQ-7QC46eOZWWUQLKoTW=Mm+nzWDqA3hwn0MnQ@mail.gmail.com>
+	<CADNbA1qY92ErjOtR7pK+NthF5DZE9-x+AeigDHG=syr6h2kETg@mail.gmail.com>
 From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Feb 2018 08:58:02 -0500
-Message-Id: <1518098282-23564-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-smbus: remove sed to replace i2c path
+Date: Thu, 8 Feb 2018 08:59:43 -0500
+X-Gmail-Original-Message-ID: <CADNbA1rRSi9FSrnrBf9EgCDeRwQxcgf-a=qHY-RkGofA2d+Vdw@mail.gmail.com>
+Message-ID: <CADNbA1rRSi9FSrnrBf9EgCDeRwQxcgf-a=qHY-RkGofA2d+Vdw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-smbus: update to version 4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +52,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2018 13:58:43 -0000
+X-List-Received-Date: Thu, 08 Feb 2018 13:59:44 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The i2c-dev file is now installed in the standard location, so
-the sed to change the path can be removed
+Give this one a try:
+http://lists.openembedded.org/pipermail/openembedded-devel/2018-February/116666.html
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-smbus.inc | 6 ------
- 1 file changed, 6 deletions(-)
+On Wed, Feb 7, 2018 at 7:55 AM, Derek Straka <derek@asterius.io> wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python-smbus.inc b/meta-python/recipes-devtools/python/python-smbus.inc
-index 0bca58f..57ca8ae 100644
---- a/meta-python/recipes-devtools/python/python-smbus.inc
-+++ b/meta-python/recipes-devtools/python/python-smbus.inc
-@@ -9,9 +9,3 @@ SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f2054bb39f19961d67e0c91610f07
- DEPENDS += "i2c-tools"
- 
- S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
--
--do_configure_prepend() {
--    # Adjust for OE header rename
--    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: Module.mk
--    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: smbusmodule.c
--}
--- 
-2.7.4
-
+> Yeah.  IIRC there is a sed to replace the path of the include.  I'll take
+> a look.
+>
+> On Feb 7, 2018 4:05 AM, "Martin Jansa" <martin.jansa@gmail.com> wrote:
+>
+>> We might need another upgrade for this after last oe-core changes, now it
+>> fails with:
+>>
+>> smbusmodule.c:26:10: fatal error: linux/i2c-dev-user.h: No such file or
+>> directory
+>>  #include <linux/i2c-dev-user.h>
+>>           ^~~~~~~~~~~~~~~~~~~~~~
+>>
+>> Do you have something already in your queue?
+>>
+>> On Sun, Jan 21, 2018 at 5:54 PM, Derek Straka <derek@asterius.io> wrote:
+>>
+>>> Fixes issues related to incompatibility with i2c-tools upgrade in oe-core
+>>>
+>>> Signed-off-by: Derek Straka <derek@asterius.io>
+>>> ---
+>>>  meta-python/recipes-devtools/python/python-smbus.inc               | 7
+>>> +++----
+>>>  .../python/{python-smbus_3.1.2.bb => python-smbus_4.0.bb}          | 0
+>>>  .../python/{python3-smbus_3.1.2.bb => python3-smbus_4.0.bb}        | 0
+>>>  3 files changed, 3 insertions(+), 4 deletions(-)
+>>>  rename meta-python/recipes-devtools/python/{python-smbus_3.1.2.bb =>
+>>> python-smbus_4.0.bb} (100%)
+>>>  rename meta-python/recipes-devtools/python/{python3-smbus_3.1.2.bb =>
+>>> python3-smbus_4.0.bb} (100%)
+>>>
+>>> diff --git a/meta-python/recipes-devtools/python/python-smbus.inc
+>>> b/meta-python/recipes-devtools/python/python-smbus.inc
+>>> index de2a270..0bca58f 100644
+>>> --- a/meta-python/recipes-devtools/python/python-smbus.inc
+>>> +++ b/meta-python/recipes-devtools/python/python-smbus.inc
+>>> @@ -2,10 +2,9 @@ SUMMARY = "Set of i2c tools for linux - Python module"
+>>>  LICENSE = "GPLv2"
+>>>  LIC_FILES_CHKSUM = "file://smbusmodule.c;beginlin
+>>> e=1;endline=17;md5=fa24df321a520ff8e10f203425ab9fa8"
+>>>
+>>> -SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/i2c-tools-
+>>> ${PV}.tar.bz2 \
+>>> -"
+>>> -SRC_URI[md5sum] = "7104a1043d11a5e2c7b131614eb1b962"
+>>> -SRC_URI[sha256sum] = "db5e69f2e2a6e3aa2ecdfe6a5f490
+>>> b149c504468770f58921c8c5b8a7860a441"
+>>> +SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz
+>>> "
+>>> +SRC_URI[md5sum] = "d92a288d70f306d3895e3a7e9c14c9aa"
+>>> +SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62
+>>> f2054bb39f19961d67e0c91610f071ca403"
+>>>
+>>>  DEPENDS += "i2c-tools"
+>>>
+>>> diff --git a/meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+>>> b/meta-python/recipes-devtools/python/python-smbus_4.0.bb
+>>> similarity index 100%
+>>> rename from meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+>>> rename to meta-python/recipes-devtools/python/python-smbus_4.0.bb
+>>> diff --git a/meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+>>> b/meta-python/recipes-devtools/python/python3-smbus_4.0.bb
+>>> similarity index 100%
+>>> rename from meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+>>> rename to meta-python/recipes-devtools/python/python3-smbus_4.0.bb
+>>> --
+>>> 2.7.4
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>
+>>
 
