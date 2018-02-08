@@ -1,42 +1,45 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 52B5060191
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AD90F71C69
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Feb 2018 14:01:33 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id c4so3393414qkm.2
+	Thu,  8 Feb 2018 14:01:41 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id s39so6261374qth.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Feb 2018 06:01:35 -0800 (PST)
+	Thu, 08 Feb 2018 06:01:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=uOz2zmnW+XUQrIGiMS1+ewYwJqT0j8ZuthjPO7ULOAw=;
-	b=K7kxUGkdh1XCDB653kA7A88TUspSnx/efEgbj30qMFBSbbO3FOXPMpp5nM8pY6+fiO
-	Ha+XQ56Cx6j/WT7ndQz1rkKYAjphqe5QWEhxHFe5e3er7ZKAhNCZhghwYx6V79B4JIo9
-	YbiivbLLttgsPwuc/kJbpOtt0ArxzKfuei40pHAswSYlarKsaK8sqgGKwELw1JpB0dD1
-	X+okWxDdNN2QnhWrJQz+HC8tRYNUdADU/Rw9xgWD29fkjiQFFtHC3Q/ai2Rrwe4u7f/c
-	Aj7a1bqhgDV3MZFp6e+MKSmVxWcYQOI46zUnNucOMSNko/+yIG+qg+47q5++RfUjwWxl
-	osgA==
-X-Gm-Message-State: APf1xPA/+YVyq37bROmj4L1SNQs8kupJ7+/HxQy9HdplhPi837VHe5us
-	rH/6L7zqqZN96Toa2AwU50gkjg==
-X-Google-Smtp-Source: AH8x226GsL9JPFk2cJXB1X0OSU/Vz1vOIfUdxGibgyT4/f3kHyCJ6u2VT3P1NLOIIIlyvClKlXGxOA==
-X-Received: by 10.55.39.88 with SMTP id n85mr1070075qkn.33.1518098494826;
-	Thu, 08 Feb 2018 06:01:34 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:organization;
+	bh=JHYpb2oX2ndifIWmPIBzA3QORP/ZHjwiNtAWjrp8Bt8=;
+	b=f2P1MGMglmyk/W489K7bRWLFsK2Vq3wt9rUugeiiLsAtalN4nz21WtKBdcWwebjNzi
+	8IV5OjhEeyRL8y9rE/f/x0UImCiOZdGwU+nl2TwpBIJy0/Yzyx9y2/ef+4MuqEI/VOqa
+	Z0n4BLpRoWTn8DlwH8vT2nGNqWn9hKgh6vyAsFIIsZEikOT+fL1tacsYo1FhpyNrzsOB
+	z8ZZQugemZHvuVuVlikkir4uQnj+CLetrq8r/GSo3ETlvUOT6pOPbwvh257FgsG8YTaK
+	FnvbqqsNpT5GHQi6LQNc0vDLbR9uhOL7eWq9rn2e25z1QPLwWjQiKu/ALPYdHF/w/fnA
+	6zkw==
+X-Gm-Message-State: APf1xPACJyTYIz4VzXe455t2Gd3/TgNRpnmwysVcswLF/L7m7d99vsFr
+	K1yL3u3n9L9xOVGIQGuAgwG/rg==
+X-Google-Smtp-Source: AH8x225HFGPJePxzt0PDUIQfXyvREwvHC4atlid3G37PN4jQ00ecocXI21GJaKwN6OskVZLZMcLw+w==
+X-Received: by 10.237.57.165 with SMTP id m34mr1234143qte.258.1518098502443;
+	Thu, 08 Feb 2018 06:01:42 -0800 (PST)
 Received: from localhost.localdomain ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id x1sm2745qkd.77.2018.02.08.06.01.31
+	by smtp.gmail.com with ESMTPSA id q2sm32186qta.47.2018.02.08.06.01.39
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 08 Feb 2018 06:01:33 -0800 (PST)
+	Thu, 08 Feb 2018 06:01:41 -0800 (PST)
 Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Thu, 08 Feb 2018 12:01:27 -0200
+	Thu, 08 Feb 2018 12:01:35 -0200
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Thu,  8 Feb 2018 12:01:25 -0200
-Message-Id: <20180208140126.20887-1-otavio@ossystems.com.br>
+Date: Thu,  8 Feb 2018 12:01:26 -0200
+Message-Id: <20180208140126.20887-2-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.16.1
+In-Reply-To: <20180208140126.20887-1-otavio@ossystems.com.br>
+References: <20180208140126.20887-1-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-python PATCH 1/2] python3-jsonschema: Remove RDEPENDS on python3-misc
+Subject: [meta-python PATCH 2/2] python3-requests: Remove RDEPENDS on python3-misc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,7 +52,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Feb 2018 14:01:34 -0000
+X-List-Received-Date: Thu, 08 Feb 2018 14:01:41 -0000
 
 The misc package has been removed when the python3 was reworked.
 
@@ -58,20 +61,19 @@ Tested using updatehub's uhu utility.
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb | 4 ----
- 1 file changed, 4 deletions(-)
+ meta-python/recipes-devtools/python/python3-requests_2.18.4.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb b/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
-index 5aaee682b..926990747 100644
---- a/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
-@@ -1,6 +1,2 @@
- inherit pypi setuptools3
- require python-jsonschema.inc
+diff --git a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
+index d91d993bf..0a2410f85 100644
+--- a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
++++ b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
+@@ -1,5 +1,2 @@
+ inherit setuptools3
+ require python-requests.inc
 -
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-misc \
--"
+-# Add the runtime depends for selectors.py
+-RDEPENDS_${PN} += "${PYTHON_PN}-misc"
 -- 
 2.16.1
 
