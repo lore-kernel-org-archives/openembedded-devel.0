@@ -1,58 +1,48 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B4A41785D3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 47EAB78558
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Feb 2018 17:30:02 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 32A3618946;
-	Fri,  9 Feb 2018 18:30:01 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id iQceajXAL6DX; Fri,  9 Feb 2018 18:30:00 +0100 (CET)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 0EFC018446;
-	Fri,  9 Feb 2018 18:30:00 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id EE5E41A069;
-	Fri,  9 Feb 2018 18:29:59 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E1C191A061;
-	Fri,  9 Feb 2018 18:29:59 +0100 (CET)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Fri,  9 Feb 2018 18:29:59 +0100 (CET)
-Received: from XBOX01.axis.com (xbox01.axis.com [10.0.5.15])
-	by seth.se.axis.com (Postfix) with ESMTP id D5505311;
-	Fri,  9 Feb 2018 18:29:59 +0100 (CET)
-Received: from xbox12.axis.com (10.0.5.26) by XBOX01.axis.com (10.0.5.15) with
-	Microsoft SMTP Server (TLS) id 15.0.1263.5;
-	Fri, 9 Feb 2018 18:29:59 +0100
-Received: from XBOX02.axis.com (10.0.5.16) by xbox12.axis.com (10.0.5.26) with
-	Microsoft SMTP Server (TLS) id 15.0.1263.5;
-	Fri, 9 Feb 2018 18:29:59 +0100
-Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
-	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
-	15.00.1263.000; Fri, 9 Feb 2018 18:29:59 +0100
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: "pidge@toganlabs.com" <pidge@toganlabs.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [RFC] Using OE with Fossology.
-Thread-Index: AQHToPjHDc1lbc8yH0C3jL4/C3T7i6OcU87A
-Date: Fri, 9 Feb 2018 17:29:59 +0000
-Message-ID: <f51cf26bd4424c64953d3f6590289180@XBOX02.axis.com>
-References: <014bfa20-b9c7-9a23-4fc7-ac515a3c3452@toganlabs.com>
-In-Reply-To: <014bfa20-b9c7-9a23-4fc7-ac515a3c3452@toganlabs.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	Fri,  9 Feb 2018 19:16:03 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id o76so6169847wrb.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Feb 2018 11:16:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=sdio36T5ycW3l5ytP6akjSC3yeiU8vU9sWu6i9D0aao=;
+	b=Ng77rnFKkI1HWHtgfejh3SdIF+MnTxRX7BxYZy5ZoBm1xP9U3JY93WyYsmZGj74Ezn
+	TcSB9jo0WET6JHuJjcOl1Xq/zSZDRjZvC3IFx1R7G6Sl+q+2L4oh1xsD6fHh8ZsnjrP8
+	12ZBJY+OIhUOR7EbfKSO7IIQkzKVDcBMzY75vABHdHym820m0PGXRQ7/EQVWgKYDn4ib
+	pQ11d1WZzqXZVcbXYzQs9d14PhTmKKHF1Tl+SSFM5tlaXY+cDQGgc0d0HM2xmqOBvhvG
+	Z+25LYH9CVA/UxHTkXIYXe53oUG3KMLAwpEbhmxpWw4ZhdRhsSESwtK2p52hRPlNeC/w
+	9T8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=sdio36T5ycW3l5ytP6akjSC3yeiU8vU9sWu6i9D0aao=;
+	b=ikoLviqw314ggkpFAPFogKZ0Wfq8LRyjqriq5cVOUJsM2GrrpyKVpPvGBbYhkzyYqs
+	c5MlwZlUeMejfBjsDNp+FEifGSmhEKGB3HwqpyF2r+p2C8GX9CD/jd1rlw65R79MsPhW
+	er8ULrxGWl4HLiYtVhXtXC+JmO1qQQxKuSfH0UAcLpQ0Hmcto9jBLPN3jh+K1ZYgMcVT
+	sqkPbMFQoYUNVYCk9CsddegACz1v4mfyqvSkbyImenn8u/LZONznQvCasbNqDx+zPSfS
+	TuVgxoQxqnZE1UZELFxr90y2pY9+iYnh4KM76A7ltjLIbljT0MtohmEx3upyieuRSrqm
+	ARWA==
+X-Gm-Message-State: APf1xPCQI0ju2PYfOuwVHV0JTPo06RVNMDFitDlrAl7b/aIu0DB7lxgk
+	GVbf5nddLLbUtBza1l1pgJ5kJIdsyqYen4FUSz8=
+X-Google-Smtp-Source: AH8x225ScaJKH1uxX2ZNMVdRRHqILrEkPN2Hic/50QqFeZRoYsnmST7D1uXzMI/UfUU43ZlFYilcCu3/UvjnqI+tAWg=
+X-Received: by 10.223.189.136 with SMTP id l8mr3473771wrh.58.1518203764992;
+	Fri, 09 Feb 2018 11:16:04 -0800 (PST)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Subject: Re: [RFC] Using OE with Fossology.
+Received: by 10.28.74.211 with HTTP; Fri, 9 Feb 2018 11:16:04 -0800 (PST)
+In-Reply-To: <1518098282-23564-1-git-send-email-derek@asterius.io>
+References: <1518098282-23564-1-git-send-email-derek@asterius.io>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 9 Feb 2018 20:16:04 +0100
+Message-ID: <CA+chaQdUtAC0EkTiebPUYBWybk972E89x2tTNvAnC2r0cMpVqw@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-smbus: remove sed to replace i2c path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,63 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Feb 2018 17:30:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Feb 2018 19:16:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Beth 'pidge' Flanagan
-> Sent: den 8 februari 2018 17:21
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [RFC] Using OE with Fossology.
->=20
-> All,
->=20
-> I wanted to make folks aware that we've released a new layer to do
-> automated fossology runs within OE. The old spdx.bbclass is bitrot and
-> we needed something to make some of our license clearance and tracking
-> easier to manage.
->=20
-> http://layers.openembedded.org/layerindex/branch/master/layer/meta-licens=
-e-tools/
->=20
-> This layer takes patched archives created by the source archiver during
-> the build and, using a utility we wrote called fossup, sends them on to
-> a fossology instance for out of build scanning.
->=20
-> The impact on build times is relatively small. If you want to use it,
-> you'll need to install fossup (https://gitlab.com/toganlabs/fossup), set
+Thanks, works for me.
 
-Any particular reason you don't provide a recipe for fossup in the=20
-layer so you can avoid having to install it manually?
+On Thu, Feb 8, 2018 at 2:58 PM, Derek Straka <derek@asterius.io> wrote:
 
-> up the fossup rc file to point to your fossology instance (all of this
-> is in the README), and ensure that the bits needed for an archiver build
-> are included in your local.conf
->=20
-> Typically this will look like the following:
->=20
-> INHERIT +=3D "archiver"
-> ARCHIVER_MODE[src] =3D "patched"
-> ARCHIVER_MODE[diff] =3D "0"
-> ARCHIVER_MODE[dumpdata] =3D "0"
-> ARCHIVER_MODE[recipe] =3D "1"
-> COPYLEFT_LICENSE_INCLUDE =3D 'GPL* LGPL*'
-> COPYLEFT_LICENSE_EXCLUDE =3D 'CLOSED Proprietary'
-> COPYLEFT_RECIPE_TYPES =3D 'target'
-> INHERIT +=3D "fossology"
->=20
-> Feedback welcome of course.
->=20
-> -b
->=20
-> ----
-> Beth 'pidge' Flanagan
-> pidge@toganlabs.com
-
-//Peter
-
+> The i2c-dev file is now installed in the standard location, so
+> the sed to change the path can be removed
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/recipes-devtools/python/python-smbus.inc | 6 ------
+>  1 file changed, 6 deletions(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-smbus.inc
+> b/meta-python/recipes-devtools/python/python-smbus.inc
+> index 0bca58f..57ca8ae 100644
+> --- a/meta-python/recipes-devtools/python/python-smbus.inc
+> +++ b/meta-python/recipes-devtools/python/python-smbus.inc
+> @@ -9,9 +9,3 @@ SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f
+> 2054bb39f19961d67e0c91610f07
+>  DEPENDS += "i2c-tools"
+>
+>  S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
+> -
+> -do_configure_prepend() {
+> -    # Adjust for OE header rename
+> -    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: Module.mk
+> -    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: smbusmodule.c
+> -}
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
