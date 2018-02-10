@@ -1,49 +1,59 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f180.google.com (mail-wr0-f180.google.com
-	[209.85.128.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 094916AC37
+Return-Path: <pidge@toganlabs.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A30D60116
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Feb 2018 10:35:03 +0000 (UTC)
-Received: by mail-wr0-f180.google.com with SMTP id y3so10586650wrh.3
+	Sat, 10 Feb 2018 12:56:29 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id v123so2111264wmd.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Feb 2018 02:35:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=xNQPymwedk7JpqC4lotCHQ6HVIC1f6PFQS2t5lLdKlE=;
-	b=Uvmvu6a7C4o+Ze6RwpVjs0nQTgbwWgDY3Q4NvUSJem3qgw1k08ZUxUK0GFsbNTSQwV
-	nvO79FCJEIbnpLyiYDRLC322B5J2gH+qs9RGxuBP/NwnS8L8J7iGd9NDibn30ZdYvH5I
-	e7r6vjQDAe9OEjLd/XPAS5+njUBhczhEBnjUubN+r7s7yZYAeFPevAQqvQU8YFWfvZYY
-	Ho0zyQCzgz74pvq0/q8BaXhwEcLjzFkQipMbOjZgrrmX/YhULatXKzIZR5BL9ndPkfQa
-	dwH5i5WGB5cQGRtNbl/gaz6bZz7GOtkgH6IKq9TGY3WLYmou0c3q+T8jfJZdaLLw4Yqn
-	Pmhw==
+	Sat, 10 Feb 2018 04:56:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
+	h=reply-to:subject:to:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=jtPTOwM6losjFNv8Y9K+rZYW3Rf75hGeh/A4lMZG0+M=;
+	b=fiNE15SYCeU73+BvPxfqdMNCd/qWLNPkBU/RE4AVHXo3rqXNUDYOFOeWsLKoZTT4Ic
+	jzvg1fs8poKrPJHs85ya3+6Cit476aE+82Aq0OGAHdSR3Ytvkvr41ReyvW/VUKJFJmik
+	3hwNzdpNm2eazNAkKM7h14yc0pV3fgX6VITwzFubZIP3Q1Mc2tklbbWZ6FLc4bfNIVCu
+	VZUu5XyOG/Y0LTiZ/x/s5JR8F6M1rQloUhwa/GLmUIBl4yAHFOSV9uw4OgxJ6tIhqL2I
+	fxXmQWh2SZQ6vpxf9skQezjLhRpJH0gRfdKLB+1saLFCgJkBhaCouDQofKhRPTbt6ODo
+	eRGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=xNQPymwedk7JpqC4lotCHQ6HVIC1f6PFQS2t5lLdKlE=;
-	b=pkrGUleKPY6J3NZws9/rqxzhB6OexM5t8LhzpSb/ldRJNctHwkfktcQWb1CamzHhMC
-	b/hVrebutUOe5cMCmDL37ujzKG5vystatNXaqG/wQHV1JhxjiNGnaOJEA1Y7buOzICx7
-	jkwbbmERVqskjm7oSx4Bs6fiMx/7tdEva/An5AtKh77pM3edQtuN2Pr0QZww5T0rGfW7
-	AdRouWbjoWIe5d3Y4o/QJtWffD4sFWsa4WynbRZBZl74azUAvWtI28nXH8tsM13QnQuo
-	AIiq5RDNKoKzZw2hLlKH7MbuMRcjntZM+gADBfcaY1/HjVJQAHGxjWQHWSSjZtL1mpnh
-	Wz4g==
-X-Gm-Message-State: APf1xPDZUUhw7s7GLIE9lZVCRt+EFgNrFp1uvpsrt8xgFaRwuyXvNjTF
-	mUiin0U+Prz+Y+dsvlbfpm5f9ljfFYC2xdoZLso=
-X-Google-Smtp-Source: AH8x226z4Tkobp0lPQX29RMxu7VWlz4LD0Q3e1uJKoY93RZu9LPhDjpg4WCM4o2H0xqkTvbrgLyYeq51rO+y4UFQwrQ=
-X-Received: by 10.223.189.136 with SMTP id l8mr5016527wrh.58.1518258904699;
-	Sat, 10 Feb 2018 02:35:04 -0800 (PST)
+	h=x-gm-message-state:reply-to:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=jtPTOwM6losjFNv8Y9K+rZYW3Rf75hGeh/A4lMZG0+M=;
+	b=rTMKUlm32QvDej6oN4Xg3RdAbLzljQXDjjv5nr0pL86OlaJyUrhRtJ3ZHgm4sBRW11
+	1uEAkm5cD5lBj03fTwbmCVS1dQKcyLRA9sa88XtUgBgolNcCo3sSl7YcQHG/JuYJtr+v
+	cfLrFY5yL84RrQG2J2u/puromAuGqulN3oEyvYk+IKsRB1tK6lhFss5KHNyeVu6lna1H
+	cPHxi08OEUGKY1+VKlIISNM6plxxyJJ4uEANPYjRKqncezU2UBJL082m2S5PT26eu39s
+	U+ic6V96YAzAZTeEUTUY9HIrw3n49sjLLCQcD8kdzqEXUX7xtJjHh9w1JAJvWkiBWi2q
+	v+Jg==
+X-Gm-Message-State: APf1xPCxPu/SANLGChYnA9nO7rtfnEZxaW0tP2gwCA8kFkSMAhfnyQMP
+	xNXi6u6XFA3WiN8ojxvSNu4o5HSlE/8=
+X-Google-Smtp-Source: AH8x224+WeYbdheag5Ae/hk4zy/GSEch3h6Wf0Rs4eGzb9EjoXAeOW5/kUIi8yqhoa+pH7HUq0WHbg==
+X-Received: by 10.80.180.16 with SMTP id b16mr7903573edh.111.1518267390556;
+	Sat, 10 Feb 2018 04:56:30 -0800 (PST)
+Received: from [192.168.1.104] ([83.136.43.184])
+	by smtp.gmail.com with ESMTPSA id f5sm2596748edb.65.2018.02.10.04.56.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 10 Feb 2018 04:56:29 -0800 (PST)
+Reply-To: pidge@toganlabs.com
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <014bfa20-b9c7-9a23-4fc7-ac515a3c3452@toganlabs.com>
+	<f51cf26bd4424c64953d3f6590289180@XBOX02.axis.com>
+From: Beth 'pidge' Flanagan <pidge@toganlabs.com>
+Organization: =?UTF-8?Q?Tog=c3=a1n_Labs_Ltd.?=
+Message-ID: <d168cb86-2614-f3ac-0037-428f16f2c0b9@toganlabs.com>
+Date: Sat, 10 Feb 2018 12:56:28 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.0
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Sat, 10 Feb 2018 02:35:04 -0800 (PST)
-In-Reply-To: <CA+chaQdUtAC0EkTiebPUYBWybk972E89x2tTNvAnC2r0cMpVqw@mail.gmail.com>
-References: <1518098282-23564-1-git-send-email-derek@asterius.io>
-	<CA+chaQdUtAC0EkTiebPUYBWybk972E89x2tTNvAnC2r0cMpVqw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 10 Feb 2018 11:35:04 +0100
-Message-ID: <CA+chaQcZvX7f-yuZHxM_+urhOquTNg1iTv3ev5s9b-vfoE2VmA@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-smbus: remove sed to replace i2c path
+In-Reply-To: <f51cf26bd4424c64953d3f6590289180@XBOX02.axis.com>
+Subject: Re: [RFC] Using OE with Fossology.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,54 +66,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Feb 2018 10:35:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 10 Feb 2018 12:56:30 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-There is small issue I've noticed in incremental builds.. when do_configure
-is re-executed in the same WORKDIR where this sed was already executed it
-will fail with the same error about missing i2c-dev-user.h.
 
-It can be fixed by additional PR bump to force new WORKDIR.
 
-On Fri, Feb 9, 2018 at 8:16 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+On 09.02.18 17:29, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>> Beth 'pidge' Flanagan
+>> Sent: den 8 februari 2018 17:21
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: [oe] [RFC] Using OE with Fossology.
+>>
+>> All,
+>>
+>> I wanted to make folks aware that we've released a new layer to do
+>> automated fossology runs within OE. The old spdx.bbclass is bitrot and
+>> we needed something to make some of our license clearance and tracking
+>> easier to manage.
+>>
+>> http://layers.openembedded.org/layerindex/branch/master/layer/meta-license-tools/
+>>
+>> This layer takes patched archives created by the source archiver during
+>> the build and, using a utility we wrote called fossup, sends them on to
+>> a fossology instance for out of build scanning.
+>>
+>> The impact on build times is relatively small. If you want to use it,
+>> you'll need to install fossup (https://gitlab.com/toganlabs/fossup), set
+> 
+> Any particular reason you don't provide a recipe for fossup in the 
+> layer so you can avoid having to install it manually?
 
-> Thanks, works for me.
->
-> On Thu, Feb 8, 2018 at 2:58 PM, Derek Straka <derek@asterius.io> wrote:
->
->> The i2c-dev file is now installed in the standard location, so
->> the sed to change the path can be removed
+Yes. Because a fossup and a fossology instance is generally something
+that I just assume is provided (username/passwd/URL etc all need
+configuring).
+
+I don't see an issue in providing that recipe, though, but for my use
+cases, it's going to be something I have already installed and
+configured for my fossology instances outside of the build process.
+
+I'll be happy to work up a recipe for it when I've a moment (or a patch
+is always welcome).
+
+-b
+
+> 
+>> up the fossup rc file to point to your fossology instance (all of this
+>> is in the README), and ensure that the bits needed for an archiver build
+>> are included in your local.conf
 >>
->> Signed-off-by: Derek Straka <derek@asterius.io>
->> ---
->>  meta-python/recipes-devtools/python/python-smbus.inc | 6 ------
->>  1 file changed, 6 deletions(-)
+>> Typically this will look like the following:
 >>
->> diff --git a/meta-python/recipes-devtools/python/python-smbus.inc
->> b/meta-python/recipes-devtools/python/python-smbus.inc
->> index 0bca58f..57ca8ae 100644
->> --- a/meta-python/recipes-devtools/python/python-smbus.inc
->> +++ b/meta-python/recipes-devtools/python/python-smbus.inc
->> @@ -9,9 +9,3 @@ SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62
->> f2054bb39f19961d67e0c91610f07
->>  DEPENDS += "i2c-tools"
+>> INHERIT += "archiver"
+>> ARCHIVER_MODE[src] = "patched"
+>> ARCHIVER_MODE[diff] = "0"
+>> ARCHIVER_MODE[dumpdata] = "0"
+>> ARCHIVER_MODE[recipe] = "1"
+>> COPYLEFT_LICENSE_INCLUDE = 'GPL* LGPL*'
+>> COPYLEFT_LICENSE_EXCLUDE = 'CLOSED Proprietary'
+>> COPYLEFT_RECIPE_TYPES = 'target'
+>> INHERIT += "fossology"
 >>
->>  S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
->> -
->> -do_configure_prepend() {
->> -    # Adjust for OE header rename
->> -    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: Module.mk
->> -    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: smbusmodule.c
->> -}
->> --
->> 2.7.4
+>> Feedback welcome of course.
 >>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> -b
 >>
->
->
+>> ----
+>> Beth 'pidge' Flanagan
+>> pidge@toganlabs.com
+> 
+> //Peter
+> 
 
