@@ -1,59 +1,38 @@
-Return-Path: <pidge@toganlabs.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A30D60116
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A162E700F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Feb 2018 12:56:29 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id v123so2111264wmd.5
+	Sat, 10 Feb 2018 14:12:13 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id f18so13861767qth.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Feb 2018 04:56:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
-	h=reply-to:subject:to:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=jtPTOwM6losjFNv8Y9K+rZYW3Rf75hGeh/A4lMZG0+M=;
-	b=fiNE15SYCeU73+BvPxfqdMNCd/qWLNPkBU/RE4AVHXo3rqXNUDYOFOeWsLKoZTT4Ic
-	jzvg1fs8poKrPJHs85ya3+6Cit476aE+82Aq0OGAHdSR3Ytvkvr41ReyvW/VUKJFJmik
-	3hwNzdpNm2eazNAkKM7h14yc0pV3fgX6VITwzFubZIP3Q1Mc2tklbbWZ6FLc4bfNIVCu
-	VZUu5XyOG/Y0LTiZ/x/s5JR8F6M1rQloUhwa/GLmUIBl4yAHFOSV9uw4OgxJ6tIhqL2I
-	fxXmQWh2SZQ6vpxf9skQezjLhRpJH0gRfdKLB+1saLFCgJkBhaCouDQofKhRPTbt6ODo
-	eRGA==
+	Sat, 10 Feb 2018 06:12:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:reply-to:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=jtPTOwM6losjFNv8Y9K+rZYW3Rf75hGeh/A4lMZG0+M=;
-	b=rTMKUlm32QvDej6oN4Xg3RdAbLzljQXDjjv5nr0pL86OlaJyUrhRtJ3ZHgm4sBRW11
-	1uEAkm5cD5lBj03fTwbmCVS1dQKcyLRA9sa88XtUgBgolNcCo3sSl7YcQHG/JuYJtr+v
-	cfLrFY5yL84RrQG2J2u/puromAuGqulN3oEyvYk+IKsRB1tK6lhFss5KHNyeVu6lna1H
-	cPHxi08OEUGKY1+VKlIISNM6plxxyJJ4uEANPYjRKqncezU2UBJL082m2S5PT26eu39s
-	U+ic6V96YAzAZTeEUTUY9HIrw3n49sjLLCQcD8kdzqEXUX7xtJjHh9w1JAJvWkiBWi2q
-	v+Jg==
-X-Gm-Message-State: APf1xPCxPu/SANLGChYnA9nO7rtfnEZxaW0tP2gwCA8kFkSMAhfnyQMP
-	xNXi6u6XFA3WiN8ojxvSNu4o5HSlE/8=
-X-Google-Smtp-Source: AH8x224+WeYbdheag5Ae/hk4zy/GSEch3h6Wf0Rs4eGzb9EjoXAeOW5/kUIi8yqhoa+pH7HUq0WHbg==
-X-Received: by 10.80.180.16 with SMTP id b16mr7903573edh.111.1518267390556;
-	Sat, 10 Feb 2018 04:56:30 -0800 (PST)
-Received: from [192.168.1.104] ([83.136.43.184])
-	by smtp.gmail.com with ESMTPSA id f5sm2596748edb.65.2018.02.10.04.56.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 10 Feb 2018 04:56:29 -0800 (PST)
-Reply-To: pidge@toganlabs.com
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <014bfa20-b9c7-9a23-4fc7-ac515a3c3452@toganlabs.com>
-	<f51cf26bd4424c64953d3f6590289180@XBOX02.axis.com>
-From: Beth 'pidge' Flanagan <pidge@toganlabs.com>
-Organization: =?UTF-8?Q?Tog=c3=a1n_Labs_Ltd.?=
-Message-ID: <d168cb86-2614-f3ac-0037-428f16f2c0b9@toganlabs.com>
-Date: Sat, 10 Feb 2018 12:56:28 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
-MIME-Version: 1.0
-In-Reply-To: <f51cf26bd4424c64953d3f6590289180@XBOX02.axis.com>
-Subject: Re: [RFC] Using OE with Fossology.
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nGqrQdDfpwF/ELK4psxLp6IfJ7CrYrKVfv4i6+sf+G0=;
+	b=S/hC135sLj1W/EVuO+N09O/LBfoqi+d6cwGGvzq7jKzSrpw6rlH5F4SmZJfxM67MfR
+	3MBQS2bGh8xl/jK7g9dsC2U/9CH+pU/mj4+4rhp+KFhGyh64zRhzwX3DycKLXLPN1+a6
+	jy0qkFzWCedyDesh9hKo2ODFwMdX6OICf7gYfGfpSvXbRpU/iSTk6qHPFV8RnKPvX/XZ
+	fyq1PnvTnwiyFcSSDi4lg0/VgczoYAOpzlpoCpgRa0xvPWtyMCKqOM4GMlxmze7uFVuZ
+	nrcTdGcJGWMqocUuMATaXKbDn/iYM/56T9+MiF7ChrxNvNWcuSVTuSjRYKh6tMIXbzDs
+	3AKQ==
+X-Gm-Message-State: APf1xPAyDJY1U+YKXiw2UXkDaZfArOrd3wGpKlg2c0hNhjELHqLofZj4
+	IcAgb++KsGa/J8gQcVSByDOnOveL
+X-Google-Smtp-Source: AH8x227CCuyAQ4+s68G9/8JW1aX9tR4Vm/3D0GCHX2JX57nrHfex8yMokOF6it2zRT+yeMHtfX7byA==
+X-Received: by 10.237.37.168 with SMTP id x37mr9768743qtc.78.1518271934279;
+	Sat, 10 Feb 2018 06:12:14 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	b22sm3620954qta.25.2018.02.10.06.12.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 10 Feb 2018 06:12:13 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 10 Feb 2018 09:11:48 -0500
+Message-Id: <1518271908-29119-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCHv2] python-smbus: remove sed to replace i2c path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,79 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Feb 2018 12:56:30 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 10 Feb 2018 14:12:14 -0000
 
+The i2c-dev file is now installed in the standard location, so
+the sed to change the path can be removed.  Add a PR value to
+ensure that if the sed already ran, the build can succeed.
 
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-smbus.inc | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-On 09.02.18 17:29, Peter Kjellerstedt wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Beth 'pidge' Flanagan
->> Sent: den 8 februari 2018 17:21
->> To: openembedded-devel@lists.openembedded.org
->> Subject: [oe] [RFC] Using OE with Fossology.
->>
->> All,
->>
->> I wanted to make folks aware that we've released a new layer to do
->> automated fossology runs within OE. The old spdx.bbclass is bitrot and
->> we needed something to make some of our license clearance and tracking
->> easier to manage.
->>
->> http://layers.openembedded.org/layerindex/branch/master/layer/meta-license-tools/
->>
->> This layer takes patched archives created by the source archiver during
->> the build and, using a utility we wrote called fossup, sends them on to
->> a fossology instance for out of build scanning.
->>
->> The impact on build times is relatively small. If you want to use it,
->> you'll need to install fossup (https://gitlab.com/toganlabs/fossup), set
-> 
-> Any particular reason you don't provide a recipe for fossup in the 
-> layer so you can avoid having to install it manually?
+diff --git a/meta-python/recipes-devtools/python/python-smbus.inc b/meta-python/recipes-devtools/python/python-smbus.inc
+index 0bca58f..f472a57 100644
+--- a/meta-python/recipes-devtools/python/python-smbus.inc
++++ b/meta-python/recipes-devtools/python/python-smbus.inc
+@@ -1,6 +1,7 @@
+ SUMMARY = "Set of i2c tools for linux - Python module"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=17;md5=fa24df321a520ff8e10f203425ab9fa8"
++PR = "r1"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
+ SRC_URI[md5sum] = "d92a288d70f306d3895e3a7e9c14c9aa"
+@@ -9,9 +10,3 @@ SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f2054bb39f19961d67e0c91610f07
+ DEPENDS += "i2c-tools"
+ 
+ S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
+-
+-do_configure_prepend() {
+-    # Adjust for OE header rename
+-    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: Module.mk
+-    sed -i s:linux/i2c-dev.h:linux/i2c-dev-user.h: smbusmodule.c
+-}
+-- 
+2.7.4
 
-Yes. Because a fossup and a fossology instance is generally something
-that I just assume is provided (username/passwd/URL etc all need
-configuring).
-
-I don't see an issue in providing that recipe, though, but for my use
-cases, it's going to be something I have already installed and
-configured for my fossology instances outside of the build process.
-
-I'll be happy to work up a recipe for it when I've a moment (or a patch
-is always welcome).
-
--b
-
-> 
->> up the fossup rc file to point to your fossology instance (all of this
->> is in the README), and ensure that the bits needed for an archiver build
->> are included in your local.conf
->>
->> Typically this will look like the following:
->>
->> INHERIT += "archiver"
->> ARCHIVER_MODE[src] = "patched"
->> ARCHIVER_MODE[diff] = "0"
->> ARCHIVER_MODE[dumpdata] = "0"
->> ARCHIVER_MODE[recipe] = "1"
->> COPYLEFT_LICENSE_INCLUDE = 'GPL* LGPL*'
->> COPYLEFT_LICENSE_EXCLUDE = 'CLOSED Proprietary'
->> COPYLEFT_RECIPE_TYPES = 'target'
->> INHERIT += "fossology"
->>
->> Feedback welcome of course.
->>
->> -b
->>
->> ----
->> Beth 'pidge' Flanagan
->> pidge@toganlabs.com
-> 
-> //Peter
-> 
 
