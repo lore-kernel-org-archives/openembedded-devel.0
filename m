@@ -1,49 +1,37 @@
-Return-Path: <bkylerussell@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8156C783C6
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 57F68605BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Feb 2018 15:39:44 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id k8so2839623pli.8
+	Sun, 11 Feb 2018 15:16:21 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id f4so16232311qtj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 10 Feb 2018 07:39:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=V3wjDN1/dht8zPSAkb23zSQi1urhzG4i8KF3rMr5B5U=;
-	b=cmzuE/ZFCMr8DRpS++SmlAas2xEwEU0ROm24ioeIP098NuWWacr7EZ/mIqSNKeqqH8
-	UFLmE9ArZ2fQMCMbbIVMn7dMz3Ew9u0uhZD/nNB8D9zJTSlR+9qIL1yw2/bxPac0axXr
-	ZCjNbiG4aDGmvzYrS186KVXneBpGq8wk48WSPPkJw5X/RZMUyFXV3E4LxPVeQf166zVJ
-	kALhk8qsIHfjVoAiBlQrp+0v2tm4CN84SSlftRfKXj8yPIqenqprcIRmQ9lyl+IQBsgj
-	Gdst7E0a1XO9P/6Ur8pdkQrXdDpSbGADZ0t6HcDRe4aq/UnucDTkmNOvpXwq1CUAUh9X
-	rTew==
+	Sun, 11 Feb 2018 07:16:23 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=V3wjDN1/dht8zPSAkb23zSQi1urhzG4i8KF3rMr5B5U=;
-	b=XCqB/t/5BmaC7fFALW9FuMiZYHqjvkZIpQwk4FpOEAvXipEZy6qVkM+HIxfkszX4hQ
-	rQUsleD3cR+rd2wkK+S2isAMYu5vB0ITDvAvNIUFl3wE4UFbIXEhZq2GvgAJXeSW/Azs
-	0kzLsbOzV5nPJyttKhxEu4mD/5UXHHTimj4KTfXFBGITeY2uWXoD+qfgUm9XY3U0Q612
-	lmMg2Zgj8z4yyyyPpIUqcPdzOOFzlIrxclIEo6kjNnPdq063BoTm9tBhV7b5wFQBjqDj
-	mctCWd1U4a3vBBDWeYZdeELgcb3JdBut0RAEMCrJdDeAgs1/YAmTd9vw51yBR9Qplk9e
-	2e7g==
-X-Gm-Message-State: APf1xPBLUnDGo1023M3DvEVOz1eAlWZGfAQLdSQ+CIegXjiYmX3wqisH
-	qCwqMgOuLV+9iHnaqZff98D3VA==
-X-Google-Smtp-Source: AH8x227u2qzpUbspE8Od2MUF/jFz2iM4YdzCliNv+KyxdOQcRhsaddromcWJ1FFDoZIexaqfbpEGZg==
-X-Received: by 2002:a17:902:44c:: with SMTP id
-	70-v6mr5754662ple.221.1518277185471; 
-	Sat, 10 Feb 2018 07:39:45 -0800 (PST)
-Received: from brrussell-Latitude-E6530.lexmark.com
-	([2605:a000:1707:83:1c32:53d8:cdda:b72a])
-	by smtp.gmail.com with ESMTPSA id
-	u84sm12476173pfg.10.2018.02.10.07.39.43
+	bh=VWSEmGgXohLVTHyrd73bHD3eqo/eD6TSivkRce9D23g=;
+	b=AmVglM6qcfypjHYRTSdMyFyUopUYpGPmIVIwj2ng5xKBLtsuiR40/dMlMqSHD/TFDX
+	3HJeW5Zy09On7BZW8nkzGtmxsEUlUMw70eqQMnibCX982ZQTAXqKz9K3Og7XbC/3kxjh
+	9afAAqrOWEQufrjM3T2hKhb6JBVRiO8q0Lqugm0W4PXQKKyRSBJkqoUaXo7vOLzhiyVe
+	7/iRYBePIIqBZm62B9A3Ns2XLZOE7ftPRiB7bH/5TB9HfVpGEa6yba3dYTWuNUBkJ4gO
+	dmkcCenN3P5cFYoxnt05Mhy/h/a18UdNeJG7l0KinTIFwpd9HgcTbhPu/R9VXnRmZ56g
+	XDLw==
+X-Gm-Message-State: APf1xPCK/JHkWVDh9ydXonz+iq0nsBbyRv2rRuCSslS4uoYBFQU7KuCj
+	drPbRERm3pF64NR0IHnOuHxZRf5m
+X-Google-Smtp-Source: AH8x224mpoI+vvb/ngD3qOJFF8RuKbNNguwN+f2pnUqOQ3ixFDD2l6aS1GOmoD68HDTueoPFf9QGRQ==
+X-Received: by 10.237.58.67 with SMTP id n61mr14437205qte.31.1518362182919;
+	Sun, 11 Feb 2018 07:16:22 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id y9sm3293155qti.20.2018.02.11.07.16.21
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 10 Feb 2018 07:39:45 -0800 (PST)
-From: Kyle Russell <bkylerussell@gmail.com>
+	Sun, 11 Feb 2018 07:16:22 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 10 Feb 2018 10:39:33 -0500
-Message-Id: <1518277173-32712-1-git-send-email-bkylerussell@gmail.com>
+Date: Sun, 11 Feb 2018 10:15:54 -0500
+Message-Id: <1518362154-21864-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] waf-samba: skip waf_preconfigure() prefunc from waf.bbclass
+Subject: [meta-python][PATCH] python-pycryptodome: update to version 3.4.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +44,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Feb 2018 15:39:44 -0000
+X-List-Received-Date: Sun, 11 Feb 2018 15:16:22 -0000
 
-waf_preconfigure() fails in samba packages because wafbin is packaged
-differently, and we already pass bindir and libdir through
-CONFIGUREOPTS.
+Update RDEPENDS to work on minimal python distribution
+Create a test package for unit tests
 
-Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-networking/classes/waf-samba.bbclass | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-devtools/python/python-pycryptodome.inc  | 20 ++++++++++++++++++--
+ ...todome_3.4.8.bb => python-pycryptodome_3.4.11.bb} |  0
+ ...odome_3.4.8.bb => python3-pycryptodome_3.4.11.bb} |  0
+ 3 files changed, 18 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pycryptodome_3.4.8.bb => python-pycryptodome_3.4.11.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pycryptodome_3.4.8.bb => python3-pycryptodome_3.4.11.bb} (100%)
 
-diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
-index e490176..94ecf4a 100644
---- a/meta-networking/classes/waf-samba.bbclass
-+++ b/meta-networking/classes/waf-samba.bbclass
-@@ -42,6 +42,7 @@ CONFIGUREOPTS = " --prefix=${prefix} \
- # to help generate the cross answer when adding new board support.
- CROSS_METHOD ?= "answer"
+diff --git a/meta-python/recipes-devtools/python/python-pycryptodome.inc b/meta-python/recipes-devtools/python/python-pycryptodome.inc
+index 1efe1eb..c4969f9 100644
+--- a/meta-python/recipes-devtools/python/python-pycryptodome.inc
++++ b/meta-python/recipes-devtools/python/python-pycryptodome.inc
+@@ -5,9 +5,25 @@ HOMEPAGE = "http://www.pycryptodome.org"
+ LICENSE = "PD & BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=775fe77831c03bf82f35abc0e230d4c1"
  
-+do_configure[prefuncs] = ""
- do_configure() {
+-SRC_URI[md5sum] = "030c40da6377bbc82deef8e884fa22cd"
+-SRC_URI[sha256sum] = "ede7f1f44b0895feb8ddbf882d1a7eb504deb3fa34fcc4860d6065c25cbdf175"
++SRC_URI[md5sum] = "a2587b6381b0ef4eb960cea1e7507d04"
++SRC_URI[sha256sum] = "c5dd29e9f1b733e74311bf95d0e544e91bd1d14bc0366e8f443562d8d9920b7d"
  
-     # Prepare the cross-answers file
+ inherit pypi
+ 
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-math \
++"
++
++RDEPENDS_${PN}-tests += " \
++    ${PYTHON_PN}-unittest \
++"
++
++PACKAGES =+ "${PN}-tests"
++
++FILES_${PN}-tests += " \
++    ${PYTHON_SITEPACKAGES_DIR}/Crypto/SelfTest/ \
++    ${PYTHON_SITEPACKAGES_DIR}/Crypto/SelfTest/__pycache__/ \
++"
++
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pycryptodome_3.4.8.bb b/meta-python/recipes-devtools/python/python-pycryptodome_3.4.11.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pycryptodome_3.4.8.bb
+rename to meta-python/recipes-devtools/python/python-pycryptodome_3.4.11.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pycryptodome_3.4.8.bb b/meta-python/recipes-devtools/python/python3-pycryptodome_3.4.11.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pycryptodome_3.4.8.bb
+rename to meta-python/recipes-devtools/python/python3-pycryptodome_3.4.11.bb
 -- 
 2.7.4
 
