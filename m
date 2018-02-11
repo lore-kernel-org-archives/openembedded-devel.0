@@ -1,47 +1,49 @@
 Return-Path: <jpewhacker@gmail.com>
-Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
-	[209.85.218.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B06877D6D
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 074D8600BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Feb 2018 21:30:27 +0000 (UTC)
-Received: by mail-oi0-f65.google.com with SMTP id l8so9781756oig.0
+	Sun, 11 Feb 2018 21:51:30 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id t22so15326457ioa.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Feb 2018 13:30:29 -0800 (PST)
+	Sun, 11 Feb 2018 13:51:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=C7+OJQqMjSm1B0+MKyQdp4c5k3tLdRkMlrdlKLt369s=;
-	b=CIE2KTTfhj64e5Sr9OA0bhClV7UgG1bSrhKWi9kGizGaSv2W8eCWo1ewFvEF+PWNNs
-	umEM8XCq4p6zfVfTvMvuGhlNyhALCfsMbGJFYymx6RcUR2xWyNIp7C3DM6fFhvw42c/i
-	+qGvZWsA/lPbe7p+cyfX5lb0Xqxs1yhASedYONwOlqx6d+7BFdzvWTRXFgFP4K3IjQ/U
-	CPVmy8sPZ977tUr/Tb70t3/EW4tMAu6+fY7pV5Obx7+ajzWOVjsbnvLV/qBrfIdnOOOb
-	wBQAGirXU0b4BMQ3J8FOAHB8tPDXrTg6wxJhegctOeG1T9PKT8ItguigPhIf44zs2FpM
-	Rfmw==
+	h=from:to:cc:subject:date:message-id;
+	bh=9a9xfjlfrpArw29lrpqi7nQcjenRJOAF2TlaRzECCq0=;
+	b=giW7M2Mbws+aHZ+9HSuJCdH9FEZmv/nKUKOeFGG9rcS662P/9egxq9cpMqz/1SJfPn
+	Aup8V4rdTyKjH1r0zt5DtSFxEFSiPX+Y/xD0NxhEgVkPqxsseZnp8eQZFGLyAD9ZN/Z6
+	ufPFgUG60Qdr4g0xMpwo2m8OLk0Xe2UaVgBGIJrVO2JhN4hdbPHJiGmsUDwW79vcAj7D
+	0HXOndfHoB7pUPzz9s+WgSeQ8voUKcnWNFtu5p8K8a49a/yKnQGlkVVGl6qbPp40iOac
+	2JS2TLiTERWz3Ha9PNBW7QIB2TL8ZkfIPc7UJyn8bN+V8iAFVYl8tb9O3oxNLPDXD3Dt
+	p7YQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=C7+OJQqMjSm1B0+MKyQdp4c5k3tLdRkMlrdlKLt369s=;
-	b=oID+tsHyCnH3lDkq9ZrEyXZN7OUPBBBQX3bpjCzMJNfWQYCsyjLogt45iolSMblBkZ
-	6PgxMRN7Qu6qROsfZ1eHXJNVhkyXTwijbAkZjK0LqxEbN+QovBOsHlP6YA31d+hoXlv+
-	1M/lEQkhsvdEWYbR26IYM5UULxwyH6hgWU7rxo7d06TE0C9mxuXOzYuSwisixCTJFUn6
-	eJNEjgqrw9JyNTYvCs6tdlQg2z34QvFnaFCtGEl5SaKLsx1kHzfbIOqVsfzK1txE7MJ7
-	TmsUVtmHLhnjqOYjvE+YQRv/iLTXI+Oud7ZuxUMmKdHQsaH6eFq7SkpdW+vspsIFfmbt
-	YLTA==
-X-Gm-Message-State: APf1xPAVvlwm7+Q4HKgw2e3vbupVsPkS2F1ly/+sUxYpem7Mv+aidLan
-	FW10TzyahNFq5t0ud1t3/clJ/49Z68wGSFBCniM=
-X-Google-Smtp-Source: AH8x226cmnwVpUqPgaMQ47+sA3YQ4RBvhe79ZPCZOV6BJdLYaY5Gqs/LbIqJtD72hbW5cEKF9tdVR/dWTm/scg84r3U=
-X-Received: by 10.202.225.133 with SMTP id y127mr1726387oig.217.1518384629026; 
-	Sun, 11 Feb 2018 13:30:29 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.157.48.29 with HTTP; Sun, 11 Feb 2018 13:30:28 -0800 (PST)
-In-Reply-To: <1518277173-32712-1-git-send-email-bkylerussell@gmail.com>
-References: <1518277173-32712-1-git-send-email-bkylerussell@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9a9xfjlfrpArw29lrpqi7nQcjenRJOAF2TlaRzECCq0=;
+	b=s38aIUtB9qVBp8PMCs1uD2J5d5P1A9H6DGSXrIT869u9hb0AKa2U3kpvNqjb7PI3jB
+	5O9GpI5SrayB2KvxOTRqkEInCI+7nXp1gh4XmyeUxqXWi4Ybx+7wWJfI3SyoP/+tN3Wl
+	d0V6U+t75OuTL4xmBA3cfhHhW04/8IsbuV7pRyDxzrkOAjKyd1rrYwP9lyBnZhnKOiym
+	DagcD5sVTFskLThCIda0gmFuMb60HliHU16j2/EqEioqQGx8c/dFWA6NkXKsqwyJ0JKe
+	XctoHpB1wndsrjb3b3OMuLCP10JmfyBwly9oLmvAXpylFOH/TVJwAVkEZizIhdNpFjrr
+	IEyg==
+X-Gm-Message-State: APf1xPCgAkbUHB+xDnSC3yxAS+i9mglTWw/JVcvhO8IQvixkgovzmkgl
+	UP9HoL74dwzRef6CTtWALncRKPWP
+X-Google-Smtp-Source: AH8x224wJl+STfgaEP17OrowTUW6gJWrif6+kLFbb+r1bbzj/4QmGPuBYxHsg+6OcDNjPmLgImXdOA==
+X-Received: by 10.107.198.86 with SMTP id w83mr10514769iof.75.1518385891769;
+	Sun, 11 Feb 2018 13:51:31 -0800 (PST)
+Received: from localhost.localdomain ([2605:a601:a83:3700:10fb:b4c1:2c33:798c])
+	by smtp.gmail.com with ESMTPSA id
+	v76sm4712333itb.41.2018.02.11.13.51.31
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 11 Feb 2018 13:51:31 -0800 (PST)
 From: Joshua Watt <jpewhacker@gmail.com>
-Date: Sun, 11 Feb 2018 15:30:28 -0600
-Message-ID: <CAJdd5GZhQVmfWA7m16nWZL2BwUT6L8LNjJunoiHwXvk56KrALQ@mail.gmail.com>
-To: Kyle Russell <bkylerussell@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] waf-samba: skip waf_preconfigure() prefunc from waf.bbclass
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 11 Feb 2018 15:51:29 -0600
+Message-Id: <20180211215129.9564-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.14.3
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-networking][PATCH] waf-samba.bbclass: No longer inherit waf.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,50 +56,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Feb 2018 21:30:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 11 Feb 2018 21:51:31 -0000
 
-On Sat, Feb 10, 2018 at 9:39 AM, Kyle Russell <bkylerussell@gmail.com> wrote:
-> waf_preconfigure() fails in samba packages because wafbin is packaged
-> differently, and we already pass bindir and libdir through
-> CONFIGUREOPTS.
->
-> Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
-> ---
->  meta-networking/classes/waf-samba.bbclass | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
-> index e490176..94ecf4a 100644
-> --- a/meta-networking/classes/waf-samba.bbclass
-> +++ b/meta-networking/classes/waf-samba.bbclass
-> @@ -42,6 +42,7 @@ CONFIGUREOPTS = " --prefix=${prefix} \
->  # to help generate the cross answer when adding new board support.
->  CROSS_METHOD ?= "answer"
->
-> +do_configure[prefuncs] = ""
+waf-samba.bbclass uses waf in a very different way than the "standard"
+method that waf.bbclass targets and ends getting very little useful
+functionality from that class.
 
-Hmm, I'm not sure we want to unconditionally remove all prefuncs.
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+---
+ meta-networking/classes/waf-samba.bbclass | 29 +++++++++++++++++++++++++++--
+ 1 file changed, 27 insertions(+), 2 deletions(-)
 
-This breaking samba was brought up to me (since I wrote the patch that
-broke samba), and I actually think a better approach would be to make
-waf-samba no longer inherit from waf.bbclass. The samba method of
-using waf is so different from a "standard" waf usage, that the
-inheritance doesn't really make sense IHMO. I'm preparing a patch to
-do this, and it appears that the only two things that
-waf-samba.bbclass actually needs from waf.bbclass are
-get_waf_parallel_make() and DISABLE_STATIC = "", neither of which it
-can't implement itself.
+diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
+index e49017624..4b1499fd4 100644
+--- a/meta-networking/classes/waf-samba.bbclass
++++ b/meta-networking/classes/waf-samba.bbclass
+@@ -1,7 +1,7 @@
+ # waf is a build system which is used by samba related project.
+ # Obtain details from https://wiki.samba.org/index.php/Waf
+-# 
+-inherit qemu pythonnative waf
++#
++inherit qemu pythonnative
+ 
+ DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python"
+ 
+@@ -21,6 +21,31 @@ CONFIGUREOPTS = " --prefix=${prefix} \
+                   ${PACKAGECONFIG_CONFARGS} \
+                 "
+ 
++# avoids build breaks when using no-static-libs.inc
++DISABLE_STATIC = ""
++
++def get_waf_parallel_make(d):
++    pm = d.getVar('PARALLEL_MAKE')
++    if pm:
++        # look for '-j' and throw other options (e.g. '-l') away
++        # because they might have different meaning in bjam
++        pm = pm.split()
++        while pm:
++            v = None
++            opt = pm.pop(0)
++            if opt == '-j':
++                v = pm.pop(0)
++            elif opt.startswith('-j'):
++                v = opt[2:].strip()
++            else:
++                v = None
++
++            if v:
++                v = min(64, int(v))
++                return '-j' + str(v)
++
++    return ""
++
+ # Three methods for waf cross compile:
+ # 1. answers:
+ #    Only --cross-answers - try the cross-answers file, and if
+-- 
+2.14.3
 
->  do_configure() {
->
->      # Prepare the cross-answers file
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
