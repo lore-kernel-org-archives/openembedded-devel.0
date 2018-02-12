@@ -1,29 +1,52 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 627A871A9D
+Return-Path: <jpewhacker@gmail.com>
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EAB86E650
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Feb 2018 04:39:16 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	11 Feb 2018 20:39:18 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,500,1511856000"; d="scan'208";a="30007490"
-Received: from anmitta2-mobl1.png.intel.com (HELO [10.221.21.157])
-	([10.221.21.157])
-	by fmsmga001.fm.intel.com with ESMTP; 11 Feb 2018 20:39:17 -0800
-To: zhengrq <zhengrq.fnst@cn.fujitsu.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1518435370-89543-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Anuj Mittal <anuj.mittal@intel.com>
-Message-ID: <57f565b2-d742-2d56-66f9-0af89a7cd76d@intel.com>
-Date: Mon, 12 Feb 2018 12:39:16 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-In-Reply-To: <1518435370-89543-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe][PATCH] xrdp: enable cpliboard
+	Mon, 12 Feb 2018 16:20:50 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id e1so7143546ita.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Feb 2018 08:20:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=ePKVOtXsxKGM9gwMaTXdm7LkVIeCkFH+5Y1xW+H4yuQ=;
+	b=mjcSdvP7Lcxq5BbXexD/ab0w92HJwSo6+DRRrkXM4GJT5Prd1Hby62Cbqvku/7EQ8L
+	kxmwOQQAhoihTxu0JVkiGdYrs7m+Bx2TnIkTgWqBEMulIxrErU9/1m6QxckJPr1Dq3ZH
+	4hZvrtQ/A3/NMmELTPQiU3iEXI5eyOerXWhEJcjB1NEWpQegziG+jpN4ygjfjHh8bKWf
+	SJoY+EmOFDjMgnVMszisEJsN965d5th/7fOu4XUF72P9nL/mg+EmiaGoIoKfZ4TokbEo
+	+BW1oG/2aXrQmrLD16iZqEJHMtkuHN7pQke+ARDNLl/IWY1p1AZLU6MgeTf7X6wYdrwf
+	ylDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=ePKVOtXsxKGM9gwMaTXdm7LkVIeCkFH+5Y1xW+H4yuQ=;
+	b=eglAcD/Y7Jizcgdl31RCjQ+aox5AL6fyDf/PDmv/Zxl6mn5iPwnBZ+JTyXWNy6t4ue
+	a6rTAIFYv27CFLZ/ZcOHtt0g6gamyNo+9juchADe5E2LgrQUaiPz+4z+hQQixC70aZ1H
+	Vwte6ItzlC5cFka2gGiJ8KW8Dny1gQELZOsGOzH4/WrE9AFtI2NGJFtMdG26d1MG5VVz
+	+PSePQmp/bAGSYBvM4psfc04g7oysBZIk0BWG08t5r2qEFGEW6MZR9xsayIuGu/XXLFq
+	0lED1lDaNn3pFOBLNaPmaCYw6Tx09EbcwBSLctIlu9pGCtSppYbnUL4M4eP4iMdttzBR
+	95Dg==
+X-Gm-Message-State: APf1xPBeuufy9Sy/PGSa1jPdLNe/WP9kCQUeejiPq+TaRIOkf5USWhtX
+	uvsbJO8L9WvJw65QgmJVJkdVu+DU
+X-Google-Smtp-Source: AH8x224EonfZUzWr94rxg8Gzc3lwWLef99gzF88JJIsQLzoHjlPCCZq6Q9VmKNJsWwY7ivHAWyujgw==
+X-Received: by 10.36.41.76 with SMTP id p73mr5767663itp.127.1518452451178;
+	Mon, 12 Feb 2018 08:20:51 -0800 (PST)
+Received: from ola-842mrw1.ad.garmin.com ([204.77.163.55])
+	by smtp.googlemail.com with ESMTPSA id
+	a13sm7503965itj.13.2018.02.12.08.20.50
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 12 Feb 2018 08:20:50 -0800 (PST)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 12 Feb 2018 10:20:41 -0600
+Message-Id: <20180212162041.25713-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.14.3
+In-Reply-To: <20180211215129.9564-1-JPEWhacker@gmail.com>
+References: <20180211215129.9564-1-JPEWhacker@gmail.com>
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-networking][PATCH v2] waf-samba.bbclass: No longer inherit waf.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +59,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Feb 2018 04:39:17 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 Feb 2018 16:20:50 -0000
 
-On 02/12/2018 07:36 PM, zhengrq wrote:
-> Add --enable-fuse option to enable cpliboard when copying from window OS to linux.
-> 
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> index 86a8023..d848f1d 100644
-> --- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> @@ -37,7 +37,7 @@ FILES_${PN}-dev += "${libdir}/xrdp/libcommon.so \
->                      ${libdir}/xrdp/libscp.so \
->                      ${libdir}/xrdp/libxrdpapi.so "
->  
-> -EXTRA_OECONF = "--enable-pam-config=suse"
-> +EXTRA_OECONF = "--enable-pam-config=suse --enable-fuse"
+waf-samba.bbclass uses waf in a very different way than the "standard"
+method that waf.bbclass targets and ends getting very little useful
+functionality from that class.
 
-Shouldn't this be done using a PACKAGECONFIG so a DEPENDS is added on
-fuse when enabled?
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+---
+ meta-networking/classes/waf-samba.bbclass | 28 ++++++++++++++++++++++++++--
+ 1 file changed, 26 insertions(+), 2 deletions(-)
 
-Thanks,
-Anuj
+diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
+index e490176241..0ce51610f3 100644
+--- a/meta-networking/classes/waf-samba.bbclass
++++ b/meta-networking/classes/waf-samba.bbclass
+@@ -1,7 +1,7 @@
+ # waf is a build system which is used by samba related project.
+ # Obtain details from https://wiki.samba.org/index.php/Waf
+-# 
+-inherit qemu pythonnative waf
++#
++inherit qemu pythonnative
+ 
+ DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python"
+ 
+@@ -21,6 +21,29 @@ CONFIGUREOPTS = " --prefix=${prefix} \
+                   ${PACKAGECONFIG_CONFARGS} \
+                 "
+ 
++# avoids build breaks when using no-static-libs.inc
++DISABLE_STATIC = ""
++
++def get_waf_parallel_make(d):
++    pm = d.getVar('PARALLEL_MAKE')
++    if pm:
++        # look for '-j' and throw other options (e.g. '-l') away
++        # because they might have different meaning in bjam
++        pm = pm.split()
++        while pm:
++            opt = pm.pop(0)
++            if opt == '-j':
++                v = pm.pop(0)
++            elif opt.startswith('-j'):
++                v = opt[2:].strip()
++            else:
++                continue
++
++            v = min(64, int(v))
++            return '-j' + str(v)
++
++    return ""
++
+ # Three methods for waf cross compile:
+ # 1. answers:
+ #    Only --cross-answers - try the cross-answers file, and if
+@@ -86,6 +109,7 @@ do_configure() {
+     fi
+ }
+ 
++do_compile[progress] = "outof:^\[\s*(\d+)/\s*(\d+)\]\s+"
+ do_compile () {
+     python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
+ }
+-- 
+2.14.3
+
 
