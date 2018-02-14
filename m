@@ -1,52 +1,48 @@
-Return-Path: <krussell7711@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 553D760068
+Return-Path: <bkylerussell@gmail.com>
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BFAA60750
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Feb 2018 16:28:27 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id v71so23052961wmv.2
+	Wed, 14 Feb 2018 21:13:46 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id t4so9252134plo.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Feb 2018 08:28:28 -0800 (PST)
+	Wed, 14 Feb 2018 13:13:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=e3otO5aTzIZCHDeWJ2DXgnt2BFEXdTv8S9ipU2ML9VM=;
-	b=LD8HEmWvtIwHydoc+CA38wxC5+7YTujvzY9Urmxy3wvqlWiUsP8ymamVDssq5bo1zu
-	rxdmAM4pL/CVn1/M8S1lAUiJsuvEfhLN9MqGUmB0ucugvV5BpSHzRj+mk7bAjcb8wyA8
-	X6uWttMvKZ/YKR7BFlNMZPoFaoX2sLZ69diOQVuLyfO80/3EazJHQ/oNk2JI7RfdU2Ee
-	TX8TaYvCFhl61Khk3ZQYmkAragK3nj3A3QMb/oHt9TDPBKPx0FogRpqluV2ZYJQrexlo
-	VFb1v4rXAXzLFW9opTlVOAea+LvoRxhJddWgYPDnwssAyPCEXXxEQ9oQRVjxwHKzuBNX
-	LZkQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=PG5zWEAZDoqNV//UQ3FOrk2286UCLt7ErEPZipQWr4s=;
+	b=fp/GolFDStYIsmcv76Bg5gaHEts4INxCzcVjJKKgKCQRkDndXUQihJVjQvcEna7AzE
+	R1A8J+BdfL+9yvM8nw4XEmbQA7KS7XspWaWMppuMgz3P0SS1IldDondF9vP+uvfy2uJa
+	KGK41X6itiMHOWK/5nluVkJvNMeyg87C5DeBG3580ChWqvhbju2rMOBtQVDp80iBGEGK
+	fWcdJ114LkOr3oApGVzmV+s0U6V9gZVVOMFquwQA4kKqGK1pLAKJikONaoAlwaKT9Q2A
+	1SkwPqgi5MM+hpBzy236R6tETuJvfousAsH93JfTIrd7hPh8Kh+/ymBvHWh2aZ2I+npg
+	b1Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=e3otO5aTzIZCHDeWJ2DXgnt2BFEXdTv8S9ipU2ML9VM=;
-	b=YhRu9K9CvGzy0OJl8zudQl4MmUWPLuj4lA8rg3FO2O9DO/n6OLk+VDa04mx+j2PSNE
-	Vxz+ZDov/z53tEypbvEquiSWT2fJ1QYovx5+4pbbrZkYge6RyQNcnfvJTmLm1wrKhCQG
-	T3BRvAn7XzOU1kN41yGktrRTSCYZ/hVh+BF/v5I/9qJKRIJEnNze5IxlkCD8km9KHKFR
-	M1Dos9CXLNBtdTEDLZ3X7ecujxawzbBcbnCmf9905UcFzIrdGJ6yn7LbxzxwTa/4Dsgt
-	v5llB5ZzUdjE/0NNRJcQF0UmuDT0S1tmqbdRsRxKW31HgyZCypa9BOYaFxWQSwEmifG7
-	akgA==
-X-Gm-Message-State: APf1xPCBW479q3AmOzS5lrWILi6VDxIKWreuCHmHLAZWFmpqyyd7DG6k
-	2cNOcyUX6+yCDr3jTbCwf2wlyPihGrNG2bLsj/g=
-X-Google-Smtp-Source: AH8x224Smk3GLbz2kl6y2/Pvav6DqOGdNJ5qCW78fP9AtkbWdoWkeQhm0bAVBUNlluBkxx1LSNF+xZxAihQ7zS6ubhw=
-X-Received: by 10.80.166.212 with SMTP id f20mr7520663edc.266.1518625707858;
-	Wed, 14 Feb 2018 08:28:27 -0800 (PST)
-MIME-Version: 1.0
-Sender: krussell7711@gmail.com
-Received: by 10.80.173.171 with HTTP; Wed, 14 Feb 2018 08:28:07 -0800 (PST)
-In-Reply-To: <20180212162041.25713-1-JPEWhacker@gmail.com>
-References: <20180211215129.9564-1-JPEWhacker@gmail.com>
-	<20180212162041.25713-1-JPEWhacker@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=PG5zWEAZDoqNV//UQ3FOrk2286UCLt7ErEPZipQWr4s=;
+	b=i4tlwbQ2249L8MN+ObYcNN2j8CC6tRK52ZndZCwpmgKyQ26aEYVCyRJuh2haXZQPdU
+	zdt9QJ8emjLi/A7pY3ScJewlJIAX01Elhc43iz99/D4PcNERba5SxFVsELEUi3SCUfVn
+	BhTuvzUx7HJBBTauy5VA7JNbSr5Q4O18NRM3hKx+i7IJtzoKTUmlU0EK1nZbFw+GiC12
+	ulG6yx28CfcFrHJrrhFm0gpMeGtfkykAsr40VnwiQvpc+fGXe44Z6GcR3PZ5nIZDpX+C
+	yPOcBYoDRmoHEfxIUjPeagdMRMcwHadKMLwfTddYhRjFF8zMvMl8rOm9lCdyiEGaExhr
+	RIRw==
+X-Gm-Message-State: APf1xPCXFsSBWye+nHrTi116TRNy+5IXNlBpWiX7/AKOY7HpW6cLFHTh
+	fVIFi4rCXIPaxnwFe4t3WwI4Fw==
+X-Google-Smtp-Source: AH8x226YNfzpYcUBLwW04bn6JmBtCMzMwnb2zPZFXrq1tK11M5DQIMuSnXHGuz+xWmZTV0iHBHXwtQ==
+X-Received: by 2002:a17:902:57d8:: with SMTP id
+	g24-v6mr309206plj.381.1518642827207; 
+	Wed, 14 Feb 2018 13:13:47 -0800 (PST)
+Received: from brrussell-Latitude-E6530.dhcp.lexmark.com ([192.146.101.90])
+	by smtp.gmail.com with ESMTPSA id
+	l64sm38372352pfi.46.2018.02.14.13.13.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 14 Feb 2018 13:13:46 -0800 (PST)
 From: Kyle Russell <bkylerussell@gmail.com>
-Date: Wed, 14 Feb 2018 11:28:07 -0500
-X-Google-Sender-Auth: xd1-5wdhRHAR-9cB0di9u2Ss6Xs
-Message-ID: <CAFrQVPMCc2acmGGfFeOx2hqoOQTzCyiNsLKXy9819jcDdSbjJg@mail.gmail.com>
-To: Joshua Watt <jpewhacker@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	Stefan Agner <stefan.agner@toradex.com>
-Subject: Re: [meta-networking][PATCH v2] waf-samba.bbclass: No longer inherit waf.bbclass
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Feb 2018 16:13:33 -0500
+Message-Id: <1518642813-23093-1-git-send-email-bkylerussell@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] dhcpcd: update to 6.11.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,79 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2018 16:28:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 14 Feb 2018 21:13:46 -0000
 
-This works for me.
+Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
+---
+ .../dhcpcd/{dhcpcd_6.11.3.bb => dhcpcd_6.11.5.bb}                     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_6.11.3.bb => dhcpcd_6.11.5.bb} (84%)
 
-On Mon, Feb 12, 2018 at 11:20 AM, Joshua Watt <jpewhacker@gmail.com> wrote:
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.3.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.5.bb
+similarity index 84%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.3.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.5.bb
+index cb3b5c2..885c6c0 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.3.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.5.bb
+@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://dhcpcd.c;endline=26;md5=77c40d671aff804ca91ea99556da8
+ 
+ SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+-SRC_URI[md5sum] = "d4f2f3ed4964197dee7767219c33a9df"
+-SRC_URI[sha256sum] = "5abd12c4df2947d608f60a35227f9bf8ae8ab9de06ce975cdab1144d8f229b06"
++SRC_URI[md5sum] = "2465624b62c1154f0e89dc69c42c849b"
++SRC_URI[sha256sum] = "6f9674dc7e27e936cc787175404a6171618675ecfb6903ab9887b1b66a87d69e"
+ 
+ inherit autotools-brokensep
+ 
+-- 
+2.7.4
 
-> waf-samba.bbclass uses waf in a very different way than the "standard"
-> method that waf.bbclass targets and ends getting very little useful
-> functionality from that class.
->
-> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> ---
->  meta-networking/classes/waf-samba.bbclass | 28
-> ++++++++++++++++++++++++++--
->  1 file changed, 26 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-networking/classes/waf-samba.bbclass
-> b/meta-networking/classes/waf-samba.bbclass
-> index e490176241..0ce51610f3 100644
-> --- a/meta-networking/classes/waf-samba.bbclass
-> +++ b/meta-networking/classes/waf-samba.bbclass
-> @@ -1,7 +1,7 @@
->  # waf is a build system which is used by samba related project.
->  # Obtain details from https://wiki.samba.org/index.php/Waf
-> -#
-> -inherit qemu pythonnative waf
-> +#
-> +inherit qemu pythonnative
->
->  DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native
-> python"
->
-> @@ -21,6 +21,29 @@ CONFIGUREOPTS = " --prefix=${prefix} \
->                    ${PACKAGECONFIG_CONFARGS} \
->                  "
->
-> +# avoids build breaks when using no-static-libs.inc
-> +DISABLE_STATIC = ""
-> +
-> +def get_waf_parallel_make(d):
-> +    pm = d.getVar('PARALLEL_MAKE')
-> +    if pm:
-> +        # look for '-j' and throw other options (e.g. '-l') away
-> +        # because they might have different meaning in bjam
-> +        pm = pm.split()
-> +        while pm:
-> +            opt = pm.pop(0)
-> +            if opt == '-j':
-> +                v = pm.pop(0)
-> +            elif opt.startswith('-j'):
-> +                v = opt[2:].strip()
-> +            else:
-> +                continue
-> +
-> +            v = min(64, int(v))
-> +            return '-j' + str(v)
-> +
-> +    return ""
-> +
->  # Three methods for waf cross compile:
->  # 1. answers:
->  #    Only --cross-answers - try the cross-answers file, and if
-> @@ -86,6 +109,7 @@ do_configure() {
->      fi
->  }
->
-> +do_compile[progress] = "outof:^\[\s*(\d+)/\s*(\d+)\]\s+"
->  do_compile () {
->      python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
->  }
-> --
-> 2.14.3
->
->
 
