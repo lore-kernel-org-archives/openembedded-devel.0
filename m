@@ -1,28 +1,52 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 13F3478258;
-	Wed, 14 Feb 2018 00:46:14 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	13 Feb 2018 16:46:16 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,509,1511856000"; d="scan'208";a="34485748"
-Received: from eagelaga-mobl.amr.corp.intel.com ([10.255.67.138])
-	by orsmga002.jf.intel.com with ESMTP; 13 Feb 2018 16:46:15 -0800
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Message-Id: <6A1E70EB-B5DE-4271-AFD1-F4DD3C2AC369@linux.intel.com>
-Date: Tue, 13 Feb 2018 16:46:14 -0800
-To: Yocto-mailing-list <yocto@yoctoproject.org>,
-	OE-core <openembedded-core@lists.openembedded.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>, 
-	eclipse-poky@yoctoproject.org
-X-Mailer: Apple Mail (2.3273)
-Subject: [ANNOUNCE] eclipse-poky is now eclipse-yocto
+Return-Path: <krussell7711@gmail.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 553D760068
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Feb 2018 16:28:27 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id v71so23052961wmv.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Feb 2018 08:28:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=e3otO5aTzIZCHDeWJ2DXgnt2BFEXdTv8S9ipU2ML9VM=;
+	b=LD8HEmWvtIwHydoc+CA38wxC5+7YTujvzY9Urmxy3wvqlWiUsP8ymamVDssq5bo1zu
+	rxdmAM4pL/CVn1/M8S1lAUiJsuvEfhLN9MqGUmB0ucugvV5BpSHzRj+mk7bAjcb8wyA8
+	X6uWttMvKZ/YKR7BFlNMZPoFaoX2sLZ69diOQVuLyfO80/3EazJHQ/oNk2JI7RfdU2Ee
+	TX8TaYvCFhl61Khk3ZQYmkAragK3nj3A3QMb/oHt9TDPBKPx0FogRpqluV2ZYJQrexlo
+	VFb1v4rXAXzLFW9opTlVOAea+LvoRxhJddWgYPDnwssAyPCEXXxEQ9oQRVjxwHKzuBNX
+	LZkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=e3otO5aTzIZCHDeWJ2DXgnt2BFEXdTv8S9ipU2ML9VM=;
+	b=YhRu9K9CvGzy0OJl8zudQl4MmUWPLuj4lA8rg3FO2O9DO/n6OLk+VDa04mx+j2PSNE
+	Vxz+ZDov/z53tEypbvEquiSWT2fJ1QYovx5+4pbbrZkYge6RyQNcnfvJTmLm1wrKhCQG
+	T3BRvAn7XzOU1kN41yGktrRTSCYZ/hVh+BF/v5I/9qJKRIJEnNze5IxlkCD8km9KHKFR
+	M1Dos9CXLNBtdTEDLZ3X7ecujxawzbBcbnCmf9905UcFzIrdGJ6yn7LbxzxwTa/4Dsgt
+	v5llB5ZzUdjE/0NNRJcQF0UmuDT0S1tmqbdRsRxKW31HgyZCypa9BOYaFxWQSwEmifG7
+	akgA==
+X-Gm-Message-State: APf1xPCBW479q3AmOzS5lrWILi6VDxIKWreuCHmHLAZWFmpqyyd7DG6k
+	2cNOcyUX6+yCDr3jTbCwf2wlyPihGrNG2bLsj/g=
+X-Google-Smtp-Source: AH8x224Smk3GLbz2kl6y2/Pvav6DqOGdNJ5qCW78fP9AtkbWdoWkeQhm0bAVBUNlluBkxx1LSNF+xZxAihQ7zS6ubhw=
+X-Received: by 10.80.166.212 with SMTP id f20mr7520663edc.266.1518625707858;
+	Wed, 14 Feb 2018 08:28:27 -0800 (PST)
+MIME-Version: 1.0
+Sender: krussell7711@gmail.com
+Received: by 10.80.173.171 with HTTP; Wed, 14 Feb 2018 08:28:07 -0800 (PST)
+In-Reply-To: <20180212162041.25713-1-JPEWhacker@gmail.com>
+References: <20180211215129.9564-1-JPEWhacker@gmail.com>
+	<20180212162041.25713-1-JPEWhacker@gmail.com>
+From: Kyle Russell <bkylerussell@gmail.com>
+Date: Wed, 14 Feb 2018 11:28:07 -0500
+X-Google-Sender-Auth: xd1-5wdhRHAR-9cB0di9u2Ss6Xs
+Message-ID: <CAFrQVPMCc2acmGGfFeOx2hqoOQTzCyiNsLKXy9819jcDdSbjJg@mail.gmail.com>
+To: Joshua Watt <jpewhacker@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org,
+	Stefan Agner <stefan.agner@toradex.com>
+Subject: Re: [meta-networking][PATCH v2] waf-samba.bbclass: No longer inherit waf.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,24 +59,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Feb 2018 00:46:15 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 14 Feb 2018 16:28:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Please excuse the wide broadcast of this announcement.
+This works for me.
 
-With the refresh of the Yocto Project plugins for the Eclipse IDE, we =
-realized it is high time we change the name of the plugins from =
-eclipse-poky to eclipse-yocto. There has never been anything =
-particularly =E2=80=9Cpoky=E2=80=9D specific about the plugins. The =
-=E2=80=9Cdocumentation=E2=80=9D plugins are tied to specific Yocto =
-Project releases, as they are built from the same files that become the =
-Yocto Project Documentation.
+On Mon, Feb 12, 2018 at 11:20 AM, Joshua Watt <jpewhacker@gmail.com> wrote:
 
-We apologize for any inconvenience and disruption in your workflow as we =
-change the name everywhere, across the board.
-
-Regards,
-
-=E2=80=94Tim=
+> waf-samba.bbclass uses waf in a very different way than the "standard"
+> method that waf.bbclass targets and ends getting very little useful
+> functionality from that class.
+>
+> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+> ---
+>  meta-networking/classes/waf-samba.bbclass | 28
+> ++++++++++++++++++++++++++--
+>  1 file changed, 26 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/classes/waf-samba.bbclass
+> b/meta-networking/classes/waf-samba.bbclass
+> index e490176241..0ce51610f3 100644
+> --- a/meta-networking/classes/waf-samba.bbclass
+> +++ b/meta-networking/classes/waf-samba.bbclass
+> @@ -1,7 +1,7 @@
+>  # waf is a build system which is used by samba related project.
+>  # Obtain details from https://wiki.samba.org/index.php/Waf
+> -#
+> -inherit qemu pythonnative waf
+> +#
+> +inherit qemu pythonnative
+>
+>  DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native
+> python"
+>
+> @@ -21,6 +21,29 @@ CONFIGUREOPTS = " --prefix=${prefix} \
+>                    ${PACKAGECONFIG_CONFARGS} \
+>                  "
+>
+> +# avoids build breaks when using no-static-libs.inc
+> +DISABLE_STATIC = ""
+> +
+> +def get_waf_parallel_make(d):
+> +    pm = d.getVar('PARALLEL_MAKE')
+> +    if pm:
+> +        # look for '-j' and throw other options (e.g. '-l') away
+> +        # because they might have different meaning in bjam
+> +        pm = pm.split()
+> +        while pm:
+> +            opt = pm.pop(0)
+> +            if opt == '-j':
+> +                v = pm.pop(0)
+> +            elif opt.startswith('-j'):
+> +                v = opt[2:].strip()
+> +            else:
+> +                continue
+> +
+> +            v = min(64, int(v))
+> +            return '-j' + str(v)
+> +
+> +    return ""
+> +
+>  # Three methods for waf cross compile:
+>  # 1. answers:
+>  #    Only --cross-answers - try the cross-answers file, and if
+> @@ -86,6 +109,7 @@ do_configure() {
+>      fi
+>  }
+>
+> +do_compile[progress] = "outof:^\[\s*(\d+)/\s*(\d+)\]\s+"
+>  do_compile () {
+>      python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
+>  }
+> --
+> 2.14.3
+>
+>
 
