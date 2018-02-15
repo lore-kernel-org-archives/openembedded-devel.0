@@ -1,58 +1,33 @@
-Return-Path: <jpewhacker@gmail.com>
-Received: from mail-it0-f49.google.com (mail-it0-f49.google.com
-	[209.85.214.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 15B4271A8C
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 24A5D78235
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Feb 2018 23:35:04 +0000 (UTC)
-Received: by mail-it0-f49.google.com with SMTP id 140so2282187iti.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Feb 2018 15:35:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:message-id:subject:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=Jtq74JkhOSNxVrIOITtK8CCG1axOwzxSPOFWwhT1yIo=;
-	b=gIfPeYBmUGD8MntARoObSnpNGYybtIkQ601z0weZFf1SkJ/7/ApG2GF9hLIQMkgXq7
-	NvUCwGDxTPqfu4jsPTJ452DXIAtZVtKJEwz6y/vhiZsh2mkL82AUM0hCGBVA3LYFFTDM
-	XRrEtBvOAYiH2vPogMOS05V5jkHKFWdH9LSs5YG+M427hOz0zWJ7SEo4al4E5C4Q8dqd
-	XxIKbOeiw8rKghqMdNtdqodydz2fdJxZYMh7qdWsoHXOC+rNLJdW+wGO6mysYuT+6Z+I
-	YsUU4nwOitLm5re9G3UVv9aXMhclT8Dbxqmu094FIg0vI5Tsq6cv1QUkb6WVimxmjjyg
-	QmfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:message-id:subject:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Jtq74JkhOSNxVrIOITtK8CCG1axOwzxSPOFWwhT1yIo=;
-	b=N6Y7DcqpSZ+dxhLanf9Gusx7Yxij3Eg5bGIQqzgdQ7uAyABvgLf93GuBShTIkb2WbJ
-	4LW7vB/UchEOh8pPvi4u4/BVOAjWWxaOTZd9FI9kipLB0lSknp4x0anEoxF2whdA6+Gy
-	ALwiSEBu+DSC5FCcced3hso9P4XuTn6+p5Sn7zq2IW4zQOyErM39zEx48fPMuh3J8XD/
-	NvQyP7JBwX3NpbAuxaLFDlYRnD27EXFYT9234bKsmHs+fcei0kXJmaVgEhriigwMBg/s
-	mJiyDxw5GvzN8ALCUTbm+l7WnU1bZ4YEQkU4rzneSjPMw9u6cL/M+6Efu0ITlFTJQF8e
-	Oc2g==
-X-Gm-Message-State: APf1xPAHOMB/CYRSAXJ8mazCY0aKA3mTDve9u8FOYoFfU2AK+vnCdBDu
-	aaYtOvRPgY7bmXDGDTbWiS0=
-X-Google-Smtp-Source: AH8x225+adViYZcQ+k7fqch5jqjUXOJ4sgGPx01a/xp76LOGLAJ+DMMMAi8FbFrJKVu/uTjUvTn7Yw==
-X-Received: by 10.36.101.203 with SMTP id u194mr688690itb.27.1518737705935;
-	Thu, 15 Feb 2018 15:35:05 -0800 (PST)
-Received: from ola-842mrw1.ad.garmin.com ([204.77.163.55])
-	by smtp.googlemail.com with ESMTPSA id
-	o201sm15910355itb.7.2018.02.15.15.35.05
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 15 Feb 2018 15:35:05 -0800 (PST)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
-Message-ID: <1518737705.6900.29.camel@gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>, Tim Orling <ticotimo@gmail.com>
-Date: Thu, 15 Feb 2018 17:35:05 -0600
-In-Reply-To: <20180215232440.GM2786@denix.org>
-References: <20180215225339.GL2786@denix.org>
-	<CANx9H-AcRnG-Er1bE-uVxSFEQX9X8_p8T=+TyGHXn0dLnbN2=w@mail.gmail.com>
-	<1518736584.6900.18.camel@gmail.com>
-	<CANx9H-BJ7-n8oSovzCMSVnQnUqXDYBs-SWsFEA06iT4Du8nTLw@mail.gmail.com>
-	<20180215232440.GM2786@denix.org>
-X-Mailer: Evolution 3.26.4 (3.26.4-1.fc27) 
-Mime-Version: 1.0
+	Thu, 15 Feb 2018 23:41:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 60DB320B15;
+	Thu, 15 Feb 2018 23:41:54 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id Srr1O_1RWMJL; Thu, 15 Feb 2018 23:41:54 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1180B20862;
+	Thu, 15 Feb 2018 23:41:53 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 9EFB31632B0; Thu, 15 Feb 2018 18:41:52 -0500 (EST)
+Date: Thu, 15 Feb 2018 18:41:52 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20180215234152.GQ2786@denix.org>
+References: <20180215043848.14310-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20180215043848.14310-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: libtalloc failure due to waf
+Subject: Re: [meta-qt5][PATCH] qtbase: Replace -isystem with -I
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,190 +40,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Feb 2018 23:35:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 15 Feb 2018 23:41:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, 2018-02-15 at 18:24 -0500, Denys Dmytriyenko wrote:
-> On Thu, Feb 15, 2018 at 11:20:49PM +0000, Tim Orling wrote:
-> > Then why did ‘sudo dnf install waf’ get me past the error above?
-> > And why
-> > does Fedora have a package for it?
-> > 
-> > https://src.fedoraproject.org/rpms/waf
-> > 
-> > Regardless, something broke.
+On Wed, Feb 14, 2018 at 08:38:48PM -0800, Khem Raj wrote:
+> Fixes no-x11 builds (eglfs)
 > 
-> I thought so too. As waf.bbclass from oe-core looks for waf binary in
-> the root 
-> of the source package, I looked inside libtalloc 2.1.9 and 2.1.10 and
-> neither 
-> of them have any "waf" files at the root. How was it working before?
-> What 
-> broke?
-
-We added support for detecting the waf version to waf.bbclass so that
-we could correctly supply --bindir and --libdir.
-
-libtalloc (and some others) were indirectly getting waf.bbclass via
-waf-samba.bbclass. waf-samba.bbclass redirects the build to look for
-waf elsewhere than the project root, and really didn't need to be
-inheriting from waf.bbclass at all, hence my patch.
-
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes-qt/qt5/qtbase-native_git.bb                |  1 +
+>  ...mon-gcc-base.conf-Use-I-instead-of-isyste.patch | 36 ++++++++++++++++++++++
+>  recipes-qt/qt5/qtbase_git.bb                       |  1 +
+>  3 files changed, 38 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
 > 
+> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+> index ac3924e..ffde8ee 100644
+> --- a/recipes-qt/qt5/qtbase-native_git.bb
+> +++ b/recipes-qt/qt5/qtbase-native_git.bb
+> @@ -34,6 +34,7 @@ SRC_URI += "\
+>      file://0009-Add-OE-specific-specs-for-clang-compiler.patch \
+>      file://0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch \
+>      file://0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch \
+> +    file://0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch \
+>  "
+>  
+>  # common for qtbase-native and nativesdk-qtbase
+> diff --git a/recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch b/recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
+> new file mode 100644
+> index 0000000..44e9009
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
+> @@ -0,0 +1,36 @@
+> +From 61c858474804fd772d612e6c5b4bb6df261d521a Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Wed, 14 Feb 2018 17:08:43 -0800
+> +Subject: [PATCH] mkspecs/common/gcc-base.conf: Use -I instead of -isystem
+> +
+> +-isystem fails to build when code uses include_next on certain files e.g.
+> +
+> +qtbase/5.10.0+gitAUTOINC+50117d738a-r0/recipe-sysroot/usr/include/c++/7.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+> + #include_next <stdlib.h>
+> +               ^~~~~~~~~~
+
+I'm building qt 5.10.0 in master with gcc 7.3.0 in a no-x11 environment with 
+eglfs and not seeing this issue. What else is different?
+
+
+> +compilation terminated.
+> +make[2]: *** [Makefile:11592: .obj/qgenericpluginfactory.o] Error 1
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + mkspecs/common/gcc-base.conf | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/mkspecs/common/gcc-base.conf b/mkspecs/common/gcc-base.conf
+> +index 234f71d495..ee3da023e6 100644
+> +--- a/mkspecs/common/gcc-base.conf
+> ++++ b/mkspecs/common/gcc-base.conf
+> +@@ -46,7 +46,7 @@ QMAKE_CFLAGS_DEBUG         += -g
+> + QMAKE_CFLAGS_SHLIB         += $$QMAKE_CFLAGS_PIC
+> + QMAKE_CFLAGS_STATIC_LIB    += $$QMAKE_CFLAGS_PIC
+> + QMAKE_CFLAGS_APP           += $$QMAKE_CFLAGS_PIC
+> +-QMAKE_CFLAGS_ISYSTEM        = -isystem
+> ++QMAKE_CFLAGS_ISYSTEM        = -I
+> + QMAKE_CFLAGS_YACC          += -Wno-unused -Wno-parentheses
+> + QMAKE_CFLAGS_HIDESYMS      += -fvisibility=hidden
+> + QMAKE_CFLAGS_EXCEPTIONS_OFF += -fno-exceptions
+> +-- 
+> +2.16.1
+> +
+> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index 4f3ade2..cc9bce3 100644
+> --- a/recipes-qt/qt5/qtbase_git.bb
+> +++ b/recipes-qt/qt5/qtbase_git.bb
+> @@ -29,6 +29,7 @@ SRC_URI += "\
+>      file://0009-Add-OE-specific-specs-for-clang-compiler.patch \
+>      file://0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch \
+>      file://0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch \
+> +    file://0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch \
+>      file://run-ptest \
+>  "
+>  
+> -- 
+> 2.16.1
 > 
-> > On Thu, Feb 15, 2018 at 3:16 PM Joshua Watt <jpewhacker@gmail.com>
-> > wrote:
-> > 
-> > > On Thu, 2018-02-15 at 23:10 +0000, Tim Orling wrote:
-> > > > Seeing the same and trying to figure it out. Also, seems there
-> > > > is no
-> > > > recipe
-> > > > for waf-native, so it becomes a new required host tool.
-> > > 
-> > > There is no "waf" tool, so a "waf-native" tool doesn't make
-> > > sense...
-> > > it's not how waf works. Each project has their own copy of the
-> > > waf
-> > > program, it's not something the host has to provide.
-> > > 
-> > > > On Thu, Feb 15, 2018 at 2:57 PM Denys Dmytriyenko <denis@denix.
-> > > > org>
-> > > > wrote:
-> > > > 
-> > > > > Hi,
-> > > > > 
-> > > > > I'm getting below stack dump building libtalloc 2.1.10 in
-> > > > > master.
-> > > > > Works
-> > > > > fine in
-> > > > > rocko with libtalloc 2.1.9. I need it for cifs-utils. I'm not
-> > > > > familiar with
-> > > > > waf, any help? Thanks.
-> > > > > 
-> > > > > 
-> > > > > ERROR: libtalloc-2.1.10-r0 do_configure: Error executing a
-> > > > > python
-> > > > > function
-> > > > > in exec_python_func() autogenerated:
-> > > > > 
-> > > > > The stack trace of python calls that resulted in this
-> > > > > exception/failure
-> > > > > was:
-> > > > > File: 'exec_python_func() autogenerated', lineno: 2,
-> > > > > function:
-> > > > > <module>
-> > > > >      0001:
-> > > > >  *** 0002:waf_preconfigure(d)
-> > > > >      0003:
-> > > > > File: '/OE/master/sources/oe-core/meta/classes/waf.bbclass',
-> > > > > lineno: 34,
-> > > > > function: waf_preconfigure
-> > > > >      0030:    from distutils.version import StrictVersion
-> > > > >      0031:    subsrcdir = d.getVar('S')
-> > > > >      0032:    wafbin = os.path.join(subsrcdir, 'waf')
-> > > > >      0033:    try:
-> > > > >  *** 0034:        result = subprocess.check_output([wafbin, '
-> > > > > --version'],
-> > > > > cwd=subsrcdir, stderr=subprocess.STDOUT)
-> > > > >      0035:        version = result.decode('utf-8').split()[1]
-> > > > >      0036:        if StrictVersion(version) >=
-> > > > > StrictVersion("1.8.7"):
-> > > > >      0037:            d.setVar("WAF_EXTRA_CONF", "
-> > > > > --bindir=${bindir}
-> > > > > --libdir=${libdir}")
-> > > > >      0038:    except subprocess.CalledProcessError as e:
-> > > > > File: '/usr/lib/python3.5/subprocess.py', lineno: 626,
-> > > > > function:
-> > > > > check_output
-> > > > >      0622:        # empty string. That is maintained here for
-> > > > > backwards
-> > > > > compatibility.
-> > > > >      0623:        kwargs['input'] = '' if
-> > > > > kwargs.get('universal_newlines',
-> > > > > False) else b''
-> > > > >      0624:
-> > > > >      0625:    return run(*popenargs, stdout=PIPE,
-> > > > > timeout=timeout,
-> > > > > check=True,
-> > > > >  *** 0626:               **kwargs).stdout
-> > > > >      0627:
-> > > > >      0628:
-> > > > >      0629:class CompletedProcess(object):
-> > > > >      0630:    """A process that has finished running.
-> > > > > File: '/usr/lib/python3.5/subprocess.py', lineno: 693,
-> > > > > function:
-> > > > > run
-> > > > >      0689:        if 'stdin' in kwargs:
-> > > > >      0690:            raise ValueError('stdin and input
-> > > > > arguments
-> > > > > may not
-> > > > > both be used.')
-> > > > >      0691:        kwargs['stdin'] = PIPE
-> > > > >      0692:
-> > > > >  *** 0693:    with Popen(*popenargs, **kwargs) as process:
-> > > > >      0694:        try:
-> > > > >      0695:            stdout, stderr =
-> > > > > process.communicate(input,
-> > > > > timeout=timeout)
-> > > > >      0696:        except TimeoutExpired:
-> > > > >      0697:            process.kill()
-> > > > > File: '/usr/lib/python3.5/subprocess.py', lineno: 947,
-> > > > > function:
-> > > > > __init__
-> > > > >      0943:                                startupinfo,
-> > > > > creationflags,
-> > > > > shell,
-> > > > >      0944:                                p2cread, p2cwrite,
-> > > > >      0945:                                c2pread, c2pwrite,
-> > > > >      0946:                                errread, errwrite,
-> > > > >  *** 0947:                                restore_signals,
-> > > > > start_new_session)
-> > > > >      0948:        except:
-> > > > >      0949:            # Cleanup if the child failed starting.
-> > > > >      0950:            for f in filter(None, (self.stdin,
-> > > > > self.stdout,
-> > > > > self.stderr)):
-> > > > >      0951:                try:
-> > > > > File: '/usr/lib/python3.5/subprocess.py', lineno: 1551,
-> > > > > function:
-> > > > > _execute_child
-> > > > >      1547:                                # The error must be
-> > > > > from
-> > > > > chdir(cwd).
-> > > > >      1548:                                err_msg += ': ' +
-> > > > > repr(cwd)
-> > > > >      1549:                            else:
-> > > > >      1550:                                err_msg += ': ' +
-> > > > > repr(orig_executable)
-> > > > >  *** 1551:                    raise
-> > > > > child_exception_type(errno_num,
-> > > > > err_msg)
-> > > > >      1552:                raise child_exception_type(err_msg)
-> > > > >      1553:
-> > > > >      1554:
-> > > > >      1555:        def _handle_exitstatus(self, sts,
-> > > > > _WIFSIGNALED=os.WIFSIGNALED,
-> > > > > Exception: FileNotFoundError: [Errno 2] No such file or
-> > > > > directory:
-> > > > > '/OE/master/build/tmp-glibc/work/armv7ahf-neon-oe-linux-
-> > > > > gnueabi/libtalloc/2.1.10-r0/talloc-2.1.10/waf'
-> > > > > 
-> > > > > ERROR: libtalloc-2.1.10-r0 do_configure: Function failed:
-> > > > > waf_preconfigure
-> > > > > ERROR: Logfile of failure stored in:
-> > > > > /OE/master/build/tmp-glibc/work/armv7ahf-neon-oe-linux-
-> > > > > gnueabi/libtalloc/2.1.10-r0/temp/log.do_configure.52699
-> > > > > ERROR: Task
-> > > > > (/OE/master/sources/meta-openembedded/meta-
-> > > > > networking/recipes-
-> > > > > support/libtalloc/libtalloc_2.1.10.bb:do_configure)
-> > > > > failed with exit code '1'
-> > > > > --
-> > > > > _______________________________________________
-> > > > > Openembedded-devel mailing list
-> > > > > Openembedded-devel@lists.openembedded.org
-> > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-d
-> > > > > evel
-> > > > > 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
