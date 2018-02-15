@@ -1,48 +1,46 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 990A46069C
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id A458F780FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Feb 2018 23:20:59 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id w3so850274uaj.6
+	Thu, 15 Feb 2018 23:24:16 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id k87so192360wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Feb 2018 15:21:00 -0800 (PST)
+	Thu, 15 Feb 2018 15:24:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5jOqiqyBVqTqrXrkZkoQTjXXALTMBYnv3CB5q3Op98k=;
-	b=Lb8u+who5pYEVBS64Ic7vOOWee/uLA316487ytUBQX0zI/aQw+6OE7VNVYu/wTYUBK
-	ufU0glv5Lv6Sl687sdQ35TXISWZ7haBZRb0xmjlT8d/aokrcjlQSHE4/i2mdylNIweBu
-	Twcx9zRCHNyvl2M6Az9Mv+O6REzXOdnTBvLkuWmMcKgSyVAGdywjNAf+ux5TCM6dycOL
-	Ab20IuZk/wRXuzbozaP65iwOvScvoNCNpzQVpVW8UIMpo0J1C5oFjp6Zc7rYDcLMVO8v
-	K5uNMK9PsOCWu+wM22DbInQL3LH+XCwm7tf/9bITOfJexDeYDejGwamAXN1RdEUp01Ni
-	5Hzg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=oYiNTaTJckxf5xdhh3HX8FoOv7L9X9ZrQUwCv8nHQsY=;
+	b=uCzfO2w0FfUqGj1B2elVfW0eZb3Okc/dDOM+KoQ2SFDbFGYTIKY5AWk+bddJtKlMPd
+	qC2vvOAjT7p1amCiLxejgBUeFgJ+0mjTlkWFFQFJi5QrSvDlnzhId11oaQ+G+ndQle3X
+	9C5iKeZ5P2u47efR60boOX22oUw1dbP4nNjPz3bY5W9qCC8ifQbSX67Sm6LJoKcun1ZD
+	VaVOxr8NQnlFuI4Qiii9dqti9kVCU1B0j46idil1JoHczgH0Rafh56HAFKv8TsWO8V8+
+	CZr2q6mYkyHoqeAnPr5yPFqk+xnhpYiYl3wAqSWzeTsUEDzG7MxNJTwLVUUkLNsqwSxt
+	xRzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=5jOqiqyBVqTqrXrkZkoQTjXXALTMBYnv3CB5q3Op98k=;
-	b=HIu6rVvEvL9/k2CcthlDDffDmWBrg1yg2p4unF3uYuDj3x4VJK1mD8UrAr9xLEFhXU
-	oF2mpCNKUCmJ60G/0UqHpYifTkgvtMssVAhYLYe0Dh+kegmojg6yiNJf6fj2l/fkSw83
-	lYYq0OiIctz6jCodkCjC6HndX7hLLZv5hHMCVzRrhrs2uvzs+wLVqGYqxNPnITeh+hxF
-	0IuBuaE/qar6Fet8Lh/7RkcWPVXcaCKgUEgTA1su76DvGiPTAhFxJHekDzMENlPF8uqD
-	AYp2YV4s815Y0pDzTN478m4KaN8fdkJVpDH9xsgvjCqiucE7/dHtm3waioXk0FOV68Cv
-	TXmQ==
-X-Gm-Message-State: APf1xPA0l/Jf/tmGwWABW57Ym4lWP7uaq8HpMwoE1mJ56U0av+XE8OXW
-	6Tl4OAw4exdt/Nxk1fLffR4pKAkygJ1xIBPrHa0=
-X-Google-Smtp-Source: AH8x227noNecBMbMhjCK28FVvT/wKWeOHwA1cUGaMR9GDMqLAyxdCqQHAOqtGKleCNDT0nf+T558aXbVKeEcCJqyLq0=
-X-Received: by 10.176.92.149 with SMTP id s21mr3282170uaf.60.1518736860141;
-	Thu, 15 Feb 2018 15:21:00 -0800 (PST)
+	bh=oYiNTaTJckxf5xdhh3HX8FoOv7L9X9ZrQUwCv8nHQsY=;
+	b=XHUolwKdR/rvuT0IOja2mYIUNFsSB91Fquppjfo8feTpY0jA6XzL5t5ZRqaNwHWk9j
+	ProRazIxndV1mE8JMrGfkJAcqAUSpxOvyZfXjF5/tLOqaczxjEaPhXZVMfKmrq41lDQK
+	qidtf+EtX0TuFUSMvbT9A24UZYt4dvJ/ipPVMSF1rAuyx+yAsOFspoa1AoEmv9iQZIxi
+	kWwJjAeQur+EjUCNR5XKAnJQ7IbyV6suz9IL+RXhfZlVuLj2X0hZJi0J9uWxFFn7BjeH
+	w3REtXFo/WiT1nbVO4gmcBf64o289CMY3yjMTOrNQ5VrkZmShb/RJ9kCoyWbPI0iPaYp
+	zd0Q==
+X-Gm-Message-State: APf1xPA/FkEFHmTN9OsrvUxLD8f9ILFwU9qb1n0gFfj5asfUM04wDy+E
+	n7jWXimm5TEzb3BeupBUVOwMWwucNZRp8BYAl3Y=
+X-Google-Smtp-Source: AH8x226l/MQvkYKcAsfmy2xvAsm42/bgLqSCnnZaxT+TZ2s3M4fyQxFmHr7xxtethU+Nk9YDH6qbOeZBv+K0qX2uhYM=
+X-Received: by 10.28.145.21 with SMTP id t21mr3776269wmd.136.1518737057436;
+	Thu, 15 Feb 2018 15:24:17 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.223.144.193 with HTTP; Thu, 15 Feb 2018 15:24:16 -0800 (PST)
+In-Reply-To: <CANx9H-AcRnG-Er1bE-uVxSFEQX9X8_p8T=+TyGHXn0dLnbN2=w@mail.gmail.com>
 References: <20180215225339.GL2786@denix.org>
 	<CANx9H-AcRnG-Er1bE-uVxSFEQX9X8_p8T=+TyGHXn0dLnbN2=w@mail.gmail.com>
-	<1518736584.6900.18.camel@gmail.com>
-In-Reply-To: <1518736584.6900.18.camel@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 15 Feb 2018 23:20:49 +0000
-Message-ID: <CANx9H-BJ7-n8oSovzCMSVnQnUqXDYBs-SWsFEA06iT4Du8nTLw@mail.gmail.com>
-To: Joshua Watt <jpewhacker@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Thu, 15 Feb 2018 15:24:16 -0800
+Message-ID: <CAJ86T=WS5dkQ8K9jqgK5vGG1vCpnOTNFzd4WA6Qvp6pFXEKV8g@mail.gmail.com>
+To: Tim Orling <ticotimo@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: libtalloc failure due to waf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -56,151 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Feb 2018 23:20:59 -0000
+X-List-Received-Date: Thu, 15 Feb 2018 23:24:16 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Then why did =E2=80=98sudo dnf install waf=E2=80=99 get me past the error a=
-bove? And why
-does Fedora have a package for it?
-
-https://src.fedoraproject.org/rpms/waf
-
-Regardless, something broke.
-On Thu, Feb 15, 2018 at 3:16 PM Joshua Watt <jpewhacker@gmail.com> wrote:
-
-> On Thu, 2018-02-15 at 23:10 +0000, Tim Orling wrote:
-> > Seeing the same and trying to figure it out. Also, seems there is no
-> > recipe
-> > for waf-native, so it becomes a new required host tool.
+On Thu, Feb 15, 2018 at 3:10 PM, Tim Orling <ticotimo@gmail.com> wrote:
+> Seeing the same and trying to figure it out. Also, seems there is no recipe
+> for waf-native, so it becomes a new required host tool.
+> On Thu, Feb 15, 2018 at 2:57 PM Denys Dmytriyenko <denis@denix.org> wrote:
 >
-> There is no "waf" tool, so a "waf-native" tool doesn't make sense...
-> it's not how waf works. Each project has their own copy of the waf
-> program, it's not something the host has to provide.
->
-> > On Thu, Feb 15, 2018 at 2:57 PM Denys Dmytriyenko <denis@denix.org>
-> > wrote:
-> >
-> > > Hi,
-> > >
-> > > I'm getting below stack dump building libtalloc 2.1.10 in master.
-> > > Works
-> > > fine in
-> > > rocko with libtalloc 2.1.9. I need it for cifs-utils. I'm not
-> > > familiar with
-> > > waf, any help? Thanks.
-> > >
-> > >
-> > > ERROR: libtalloc-2.1.10-r0 do_configure: Error executing a python
-> > > function
-> > > in exec_python_func() autogenerated:
-> > >
-> > > The stack trace of python calls that resulted in this
-> > > exception/failure
-> > > was:
-> > > File: 'exec_python_func() autogenerated', lineno: 2, function:
-> > > <module>
-> > >      0001:
-> > >  *** 0002:waf_preconfigure(d)
-> > >      0003:
-> > > File: '/OE/master/sources/oe-core/meta/classes/waf.bbclass',
-> > > lineno: 34,
-> > > function: waf_preconfigure
-> > >      0030:    from distutils.version import StrictVersion
-> > >      0031:    subsrcdir =3D d.getVar('S')
-> > >      0032:    wafbin =3D os.path.join(subsrcdir, 'waf')
-> > >      0033:    try:
-> > >  *** 0034:        result =3D subprocess.check_output([wafbin, '
-> > > --version'],
-> > > cwd=3Dsubsrcdir, stderr=3Dsubprocess.STDOUT)
-> > >      0035:        version =3D result.decode('utf-8').split()[1]
-> > >      0036:        if StrictVersion(version) >=3D
-> > > StrictVersion("1.8.7"):
-> > >      0037:            d.setVar("WAF_EXTRA_CONF", "
-> > > --bindir=3D${bindir}
-> > > --libdir=3D${libdir}")
-> > >      0038:    except subprocess.CalledProcessError as e:
-> > > File: '/usr/lib/python3.5/subprocess.py', lineno: 626, function:
-> > > check_output
-> > >      0622:        # empty string. That is maintained here for
-> > > backwards
-> > > compatibility.
-> > >      0623:        kwargs['input'] =3D '' if
-> > > kwargs.get('universal_newlines',
-> > > False) else b''
-> > >      0624:
-> > >      0625:    return run(*popenargs, stdout=3DPIPE, timeout=3Dtimeout=
-,
-> > > check=3DTrue,
-> > >  *** 0626:               **kwargs).stdout
-> > >      0627:
-> > >      0628:
-> > >      0629:class CompletedProcess(object):
-> > >      0630:    """A process that has finished running.
-> > > File: '/usr/lib/python3.5/subprocess.py', lineno: 693, function:
-> > > run
-> > >      0689:        if 'stdin' in kwargs:
-> > >      0690:            raise ValueError('stdin and input arguments
-> > > may not
-> > > both be used.')
-> > >      0691:        kwargs['stdin'] =3D PIPE
-> > >      0692:
-> > >  *** 0693:    with Popen(*popenargs, **kwargs) as process:
-> > >      0694:        try:
-> > >      0695:            stdout, stderr =3D process.communicate(input,
-> > > timeout=3Dtimeout)
-> > >      0696:        except TimeoutExpired:
-> > >      0697:            process.kill()
-> > > File: '/usr/lib/python3.5/subprocess.py', lineno: 947, function:
-> > > __init__
-> > >      0943:                                startupinfo,
-> > > creationflags,
-> > > shell,
-> > >      0944:                                p2cread, p2cwrite,
-> > >      0945:                                c2pread, c2pwrite,
-> > >      0946:                                errread, errwrite,
-> > >  *** 0947:                                restore_signals,
-> > > start_new_session)
-> > >      0948:        except:
-> > >      0949:            # Cleanup if the child failed starting.
-> > >      0950:            for f in filter(None, (self.stdin,
-> > > self.stdout,
-> > > self.stderr)):
-> > >      0951:                try:
-> > > File: '/usr/lib/python3.5/subprocess.py', lineno: 1551, function:
-> > > _execute_child
-> > >      1547:                                # The error must be from
-> > > chdir(cwd).
-> > >      1548:                                err_msg +=3D ': ' +
-> > > repr(cwd)
-> > >      1549:                            else:
-> > >      1550:                                err_msg +=3D ': ' +
-> > > repr(orig_executable)
-> > >  *** 1551:                    raise child_exception_type(errno_num,
-> > > err_msg)
-> > >      1552:                raise child_exception_type(err_msg)
-> > >      1553:
-> > >      1554:
-> > >      1555:        def _handle_exitstatus(self, sts,
-> > > _WIFSIGNALED=3Dos.WIFSIGNALED,
-> > > Exception: FileNotFoundError: [Errno 2] No such file or directory:
-> > > '/OE/master/build/tmp-glibc/work/armv7ahf-neon-oe-linux-
-> > > gnueabi/libtalloc/2.1.10-r0/talloc-2.1.10/waf'
-> > >
-> > > ERROR: libtalloc-2.1.10-r0 do_configure: Function failed:
-> > > waf_preconfigure
-> > > ERROR: Logfile of failure stored in:
-> > > /OE/master/build/tmp-glibc/work/armv7ahf-neon-oe-linux-
-> > > gnueabi/libtalloc/2.1.10-r0/temp/log.do_configure.52699
-> > > ERROR: Task
-> > > (/OE/master/sources/meta-openembedded/meta-networking/recipes-
-> > > support/libtalloc/libtalloc_2.1.10.bb:do_configure)
-> > > failed with exit code '1'
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
->
+>> Hi,
+>>
+>> I'm getting below stack dump building libtalloc 2.1.10 in master. Works
+>> fine in
+>> rocko with libtalloc 2.1.9. I need it for cifs-utils. I'm not familiar with
+>> waf, any help? Thanks.
+
+Does reverting this help?
+
+  http://git.openembedded.org/openembedded-core/commit/?id=aa168ee7f785ff007ca645db57698883922b5eb3
+
+It looks like the new version may need to be a little more forgiving
+if ${S}/waf doesn't exist?
 
