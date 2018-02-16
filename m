@@ -1,37 +1,49 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DC576093A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DEA946093F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Feb 2018 23:08:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9B3AC20A8A;
-	Fri, 16 Feb 2018 23:08:48 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id FV-kcPhEpHmg; Fri, 16 Feb 2018 23:08:48 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6F01F20862;
-	Fri, 16 Feb 2018 23:08:47 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id EAAF31632A8; Fri, 16 Feb 2018 18:08:46 -0500 (EST)
-Date: Fri, 16 Feb 2018 18:08:46 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20180216230846.GT2786@denix.org>
-References: <20180215043848.14310-1-raj.khem@gmail.com>
-	<20180215234152.GQ2786@denix.org>
-	<CAMKF1sp7e7mQRWQPNHYPDHm-QZXtKuNFv_YrwLiD57+Q=JhQOg@mail.gmail.com>
-	<20180216220142.GS2786@denix.org>
-	<CAMKF1spkGJpYTAmQ9gh+af51ya3qkZja8XMmVP5u=Q-ycc5qbw@mail.gmail.com>
+	Fri, 16 Feb 2018 23:09:59 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id b52so4355337wrd.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Feb 2018 15:10:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=EBqb++DdwJ6NvMT2vgG6HVdRW8FiAB7j2rKy9Rn5o8c=;
+	b=RNStBib2yTOnDjl2gbJjwobNzacKkuhX2kVwn3nV4SznoV7K/GEuf5/60wXrLFpLEx
+	/KlzFAc2nBElMAqWi4MT3j2IW22KGCrSnMn7LF/qybib3+EW2jVK7Y82BvxBp1YdaJep
+	q5JgJ7MN+6CzAsNbeqUG0KcVniYqT/steQVt1Cm7GYulNfKLTECR21ISw6hvtJNTJRBD
+	RGd1e6lGR4cBG357+mWsZUcqYn5lDzDaWFbstKEynDhyvuB7E3WQQXazt3G0jJjfwx7O
+	7Cs5q+i0ivyEXBtjy9cI2uuP45Kt+dFXeOQ+YqgXWCRZ8NxIRQjUcOcX/XQdGwYRDs4i
+	mPrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=EBqb++DdwJ6NvMT2vgG6HVdRW8FiAB7j2rKy9Rn5o8c=;
+	b=AOHV02n+pgGiaX024HeoEVZnDT6NtFBGnw3yDlLBiFJP8U57nb4ThXLJBq7NKqopEc
+	GUgJb7ViQPktMfz268rXx/xRpxkml69ii8V1S3UZMmO0kSzUbUd7CjWkMBvBfIVn0+2v
+	WVAHJZyYUvmUDJWJ3QKKPBYVqZN3NhcO740ZBPXkI98m9WNmic+fqtcBw/F3xZ/JL2wu
+	WMY7mSQE9VS5GOrFrGSv2tnCcvBhOMua8OyNmMCClJ9sFIXx+dXQJg4bbXZLAwCgVV60
+	WQliqGoii5LuD/QFCzWT3XVpw3NP3vpbA+ArKp6V6nhTajY3v+0iLByOHJ9mZES93cLg
+	KNXQ==
+X-Gm-Message-State: APf1xPDx4vvhJgjIpe9cuBu9WZ66b+q63B3XIm1k67VkDYcQ9S7ziOrD
+	hoVfPY2Yd/6cMBBHrapcKjI/ew+bxsqrncskXkI=
+X-Google-Smtp-Source: AH8x227xB08lR7SxIqElIa5/eAkvGR4ofzcI5zJPxgfG2KmgTzoPWqSa9I/Ryj8ejfLPC1Okq/+S62S8Q3jHhSFmN+M=
+X-Received: by 10.223.151.129 with SMTP id s1mr7224637wrb.206.1518822600596;
+	Fri, 16 Feb 2018 15:10:00 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spkGJpYTAmQ9gh+af51ya3qkZja8XMmVP5u=Q-ycc5qbw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtbase: Replace -isystem with -I
+Received: by 10.28.74.211 with HTTP; Fri, 16 Feb 2018 15:10:00 -0800 (PST)
+In-Reply-To: <1518819754.6900.50.camel@gmail.com>
+References: <20180216213511.117-1-Martin.Jansa@gmail.com>
+	<1518819754.6900.50.camel@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 17 Feb 2018 00:10:00 +0100
+Message-ID: <CA+chaQcKXbteCmzE7SCZdZ5zjBnnAefyH+JdJDGChKmUpNvG+g@mail.gmail.com>
+To: Joshua Watt <jpewhacker@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] waf-samba: use new oe.utils.parallel_make_argument function instead of removed get_waf_parallel_make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,148 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Feb 2018 23:08:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Feb 2018 23:10:00 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Feb 16, 2018 at 10:59:39PM +0000, Khem Raj wrote:
-> I am using arch Linux for host distro and security flags enabled May be
-> that is something
+This is just to fix the parsing ASAP, you can still send your updated
+change which removes the waf inherit completely.
 
-Could be... I'm on Ubuntu 16.04.
+On Fri, Feb 16, 2018 at 11:22 PM, Joshua Watt <jpewhacker@gmail.com> wrote:
 
-
-> On Fri, Feb 16, 2018 at 2:01 PM Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > On Thu, Feb 15, 2018 at 03:50:56PM -0800, Khem Raj wrote:
-> > > On Thu, Feb 15, 2018 at 3:41 PM, Denys Dmytriyenko <denis@denix.org>
-> > wrote:
-> > > > On Wed, Feb 14, 2018 at 08:38:48PM -0800, Khem Raj wrote:
-> > > >> Fixes no-x11 builds (eglfs)
-> > > >>
-> > > >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > > >> ---
-> > > >>  recipes-qt/qt5/qtbase-native_git.bb                |  1 +
-> > > >>  ...mon-gcc-base.conf-Use-I-instead-of-isyste.patch | 36
-> > ++++++++++++++++++++++
-> > > >>  recipes-qt/qt5/qtbase_git.bb                       |  1 +
-> > > >>  3 files changed, 38 insertions(+)
-> > > >>  create mode 100644
-> > recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
-> > > >>
-> > > >> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/
-> > qtbase-native_git.bb
-> > > >> index ac3924e..ffde8ee 100644
-> > > >> --- a/recipes-qt/qt5/qtbase-native_git.bb
-> > > >> +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> > > >> @@ -34,6 +34,7 @@ SRC_URI += "\
-> > > >>      file://0009-Add-OE-specific-specs-for-clang-compiler.patch \
-> > > >>
-> > file://0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch \
-> > > >>      file://0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch \
-> > > >> +
-> > file://0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch \
-> > > >>  "
-> > > >>
-> > > >>  # common for qtbase-native and nativesdk-qtbase
-> > > >> diff --git
-> > a/recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
-> > b/recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
-> > > >> new file mode 100644
-> > > >> index 0000000..44e9009
-> > > >> --- /dev/null
-> > > >> +++
-> > b/recipes-qt/qt5/qtbase/0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch
-> > > >> @@ -0,0 +1,36 @@
-> > > >> +From 61c858474804fd772d612e6c5b4bb6df261d521a Mon Sep 17 00:00:00
-> > 2001
-> > > >> +From: Khem Raj <raj.khem@gmail.com>
-> > > >> +Date: Wed, 14 Feb 2018 17:08:43 -0800
-> > > >> +Subject: [PATCH] mkspecs/common/gcc-base.conf: Use -I instead of
-> > -isystem
-> > > >> +
-> > > >> +-isystem fails to build when code uses include_next on certain files
-> > e.g.
-> > > >> +
-> > > >>
-> > +qtbase/5.10.0+gitAUTOINC+50117d738a-r0/recipe-sysroot/usr/include/c++/7.3.0/cstdlib:75:15:
-> > fatal error: stdlib.h: No such file or directory
-> > > >> + #include_next <stdlib.h>
-> > > >> +               ^~~~~~~~~~
-> > > >
-> > > > I'm building qt 5.10.0 in master with gcc 7.3.0 in a no-x11
-> > environment with
-> > > > eglfs and not seeing this issue. What else is different?
-> > >
-> > > DISTRO_FEATURES_remove = "x11"
-> > > DISTRO_FEATURES_remove = "wayland"
-> > > DISTRO_FEATURES_append = " directfb"
-> > >
-> > > then in qtbase
-> > > PACKAGECONFIG_GL = "gles2"
-> > > PACKAGECONFIG_FONTS = "fontconfig"
-> > > PACKAGECONFIG_append = " libinput eglfs"
-> > > PACKAGECONFIG_remove = "tests"
+> On Fri, 2018-02-16 at 21:35 +0000, Martin Jansa wrote:
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  meta-networking/classes/waf-samba.bbclass | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
 > >
-> > Yeah, I had slightly different flags - no-x11, but wayland+kms.
+> > diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-
+> > networking/classes/waf-samba.bbclass
+> > index e490176241..a63842cadc 100644
+> > --- a/meta-networking/classes/waf-samba.bbclass
+> > +++ b/meta-networking/classes/waf-samba.bbclass
+> > @@ -87,7 +87,7 @@ do_configure() {
+> >  }
 > >
-> > After disabling wayland and enabling eglfs explicitly, I still don't see
-> > any
-> > issues building qtbase.
+> >  do_compile () {
+> > -    python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
+> > +    python ./buildtools/bin/waf ${@oe.utils.parallel_make_argument(d
+> > , '-j%d', limit=64)}
+>
+> Ah, beat me to it. Either way, I approve FWIW.
+>
+> >  }
 > >
-> > Anyone else see the problem?
+> >  do_install() {
+> > --
+> > 2.15.1
 > >
-> >
-> > > >> +compilation terminated.
-> > > >> +make[2]: *** [Makefile:11592: .obj/qgenericpluginfactory.o] Error 1
-> > > >> +
-> > > >> +Upstream-Status: Pending
-> > > >> +
-> > > >> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > > >> +---
-> > > >> + mkspecs/common/gcc-base.conf | 2 +-
-> > > >> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >> +
-> > > >> +diff --git a/mkspecs/common/gcc-base.conf
-> > b/mkspecs/common/gcc-base.conf
-> > > >> +index 234f71d495..ee3da023e6 100644
-> > > >> +--- a/mkspecs/common/gcc-base.conf
-> > > >> ++++ b/mkspecs/common/gcc-base.conf
-> > > >> +@@ -46,7 +46,7 @@ QMAKE_CFLAGS_DEBUG         += -g
-> > > >> + QMAKE_CFLAGS_SHLIB         += $$QMAKE_CFLAGS_PIC
-> > > >> + QMAKE_CFLAGS_STATIC_LIB    += $$QMAKE_CFLAGS_PIC
-> > > >> + QMAKE_CFLAGS_APP           += $$QMAKE_CFLAGS_PIC
-> > > >> +-QMAKE_CFLAGS_ISYSTEM        = -isystem
-> > > >> ++QMAKE_CFLAGS_ISYSTEM        = -I
-> > > >> + QMAKE_CFLAGS_YACC          += -Wno-unused -Wno-parentheses
-> > > >> + QMAKE_CFLAGS_HIDESYMS      += -fvisibility=hidden
-> > > >> + QMAKE_CFLAGS_EXCEPTIONS_OFF += -fno-exceptions
-> > > >> +--
-> > > >> +2.16.1
-> > > >> +
-> > > >> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/
-> > qtbase_git.bb
-> > > >> index 4f3ade2..cc9bce3 100644
-> > > >> --- a/recipes-qt/qt5/qtbase_git.bb
-> > > >> +++ b/recipes-qt/qt5/qtbase_git.bb
-> > > >> @@ -29,6 +29,7 @@ SRC_URI += "\
-> > > >>      file://0009-Add-OE-specific-specs-for-clang-compiler.patch \
-> > > >>
-> > file://0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch \
-> > > >>      file://0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch \
-> > > >> +
-> > file://0014-mkspecs-common-gcc-base.conf-Use-I-instead-of-isyste.patch \
-> > > >>      file://run-ptest \
-> > > >>  "
-> > > >>
-> > > >> --
-> > > >> 2.16.1
-> > > >>
-> > > >> --
-> > > >> _______________________________________________
-> > > >> Openembedded-devel mailing list
-> > > >> Openembedded-devel@lists.openembedded.org
-> > > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> >
+>
 
