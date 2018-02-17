@@ -1,51 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 25E39786DD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 14DCD77E4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Feb 2018 02:35:46 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id a11so3797040pgu.13
+	Sat, 17 Feb 2018 09:33:46 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id s5so5097044wra.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Feb 2018 18:35:48 -0800 (PST)
+	Sat, 17 Feb 2018 01:33:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=cx1M8qDpLwnYteInV2jmTub+gFgVQC5goUTpJc4ZIO0=;
-	b=ZNLK3Ulz6duyAQEAt1e10uokW1SzfvC3Yi0NRYqj9AmHDtuwwfZVAnDDUhtqD9mBe6
-	Ts0pJVBbv/vn2HZjVmvcs4PUi+YssHQDkkSXlyxotx/bQ+0R8Ptr4H/4gg3H3mHD212W
-	L5qVPJZPzB6v50CB/rSHuOeL2/M14uF/z7HU58P84ifUEQ6qRlrgpRP80dhcH0LIPtiK
-	fynOAM9aiCgE6x04fjdwNARBA85hW8rNI5DSQeS1o9naAtcSuuqEdLGOLJojRFkKsTJf
-	32fnDE+g5G8b5+w8UKR/vC8v1YV1/MJAxU6Cs1eoCtHoKL7Lf2piN9FOXFfqlQSw/yMh
-	zaag==
+	:cc; bh=JVP0kk8Oj9EACfO9JM83uFCiH6KZ7v4s8HgqeHm04CI=;
+	b=SkfRc545tO7mqJFU4a3C+n9BpUQGhXm8TnsOUV2JTfoAN9o9mRYqHcVJISnWxYkVBy
+	YRailkyKpnPFXfRGXO1ZemoCjHSPeuZNRmhGT2pj64UBnkeJlygdKyD6FOb1fsOUlrxS
+	f49d/4QQBrJhRI6nOJ+ZHoXj23nvo9KRTPND5iRSBsimkJtxvoZQgVrbr1ZgIoy0mR6V
+	17wCdD0DzCGc5ic4PX3ZT68kgvnFpLfptAnAwI4DknZd1xCmacOUPoUC0w/mPBQFUUmJ
+	nFwEUajhjzHXWq2KSp6qgo29sbb7yx2JqZ/kYu7H2Hg/KGTSpPhHudtBaOQwZogHgSIb
+	JE9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=cx1M8qDpLwnYteInV2jmTub+gFgVQC5goUTpJc4ZIO0=;
-	b=WY0X8Q2II+B9HXrG0EzMos9okvn4khcWdRu6xi+AP4B817hB86QIR+ND5kIXgg+A+B
-	MPVC8H/UlBzIFjb3zLj9Ao5F5kZTZ8eucPnICKcNI9chSv4w/oMDtRyNm5g+ufjsq/Dp
-	218eY7BUDy4/CyAFoy94IJ+BlsX6NbpYoSrLyUU2UbtjoYDhrY7tMCa89+XALTYPsMPh
-	Wnhi+7rA6PTTv2Jn958X7HWhuc1z9Ma0NaLX+F/IiU91MuIZq0CfzRlBzYOemR0PJdFI
-	KvQ51T6Y1pF5K9vhi3R1SXlPtA9XWLnDMFr5TfMXbrDXOrfYtfcTzIBE4BYO7a4n3TAr
-	HxwA==
-X-Gm-Message-State: APf1xPDYUI7mHQPe9v0eacPcGZeLXQaRcUck61OvtklKnFZlw3ZT1fDL
-	fzb6YP2c7fa9Vp3aVbAAnv7x/WUJjX1djznXHiE=
-X-Google-Smtp-Source: AH8x226Bv6qDWJZTOAGibkYp8PrA/qJpmpFek4vWZRYY7qECWouTzCCG5xOAEl9X84kg0TIrPjDOpBKeXlCLMlUEz8s=
-X-Received: by 10.98.229.21 with SMTP id n21mr6898526pff.158.1518834947937;
-	Fri, 16 Feb 2018 18:35:47 -0800 (PST)
+	bh=JVP0kk8Oj9EACfO9JM83uFCiH6KZ7v4s8HgqeHm04CI=;
+	b=agXwQoCmYJ8j+LIbSYYfl9PiqggorHt+OSxWcM4Y/x3WDvi1tgm6xGnjPHBOBq5ztQ
+	p2ER6udxBg8xUblBuvBXBuz3yj8FhCpfrbnL8TpXlH3oZ8/tI/1jLr46j3fGeeP0KF2P
+	dPELGTmQdSXeiP3UU59s+YexhahsAzFqJQeNF7tIRogqMEvtgmpnGRvTuVtIdEHdwDBQ
+	lxPq3ejbkWRgntl76OUjvHzK6y+IbJL9KdtX4jNbZsFrqBgf2EprgS/VQMhRK0AkuwuO
+	A3S2WKuZCshoLTsqeSx2RUtVyJ4k6EOoOKEABxGDoKgZG47OV9FuLokJ/lD1f5zBg3BL
+	9AOg==
+X-Gm-Message-State: APf1xPDep2BzJ3sH8FEEsTem1fkmHFX4bAQU/ugPNvegYx9Neq4E9SH0
+	yO7ecAIQgAJt3QGPYNWg/Q7DAfR5v1myKVvfm8E=
+X-Google-Smtp-Source: AH8x224ahg+qzAVKVNGJPfzEALp8DZJ46SYNQNgNV2Pe6KzqWjak86AFvqvCcnq96OZ+hcnl4rqPEXWH9lbaaV/ENAU=
+X-Received: by 10.223.199.140 with SMTP id l12mr7902883wrg.68.1518860027675;
+	Sat, 17 Feb 2018 01:33:47 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.100.207.166 with HTTP; Fri, 16 Feb 2018 18:35:17 -0800 (PST)
-In-Reply-To: <20180216230846.GT2786@denix.org>
-References: <20180215043848.14310-1-raj.khem@gmail.com>
-	<20180215234152.GQ2786@denix.org>
-	<CAMKF1sp7e7mQRWQPNHYPDHm-QZXtKuNFv_YrwLiD57+Q=JhQOg@mail.gmail.com>
-	<20180216220142.GS2786@denix.org>
-	<CAMKF1spkGJpYTAmQ9gh+af51ya3qkZja8XMmVP5u=Q-ycc5qbw@mail.gmail.com>
-	<20180216230846.GT2786@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 16 Feb 2018 18:35:17 -0800
-Message-ID: <CAMKF1spcrZQ34imyqaXtcHRmphyU1Kfo5nNdo6qaaeOVSx51eg@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtbase: Replace -isystem with -I
+Received: by 10.28.74.211 with HTTP; Sat, 17 Feb 2018 01:33:46 -0800 (PST)
+In-Reply-To: <20180205125319.18132-1-pascal.huerst@gmail.com>
+References: <20180205125319.18132-1-pascal.huerst@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 17 Feb 2018 10:33:46 +0100
+Message-ID: <CA+chaQdDx-r=WPd6MvtRODmhk+Jfv60+J5Fegv5am+2wCqRYnA@mail.gmail.com>
+To: Pascal Huerst <pascal.huerst@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtwebengine: add PACKAGECONFIG for proprietary_codecs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,15 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Feb 2018 02:35:47 -0000
+X-List-Received-Date: Sat, 17 Feb 2018 09:33:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Feb 16, 2018 at 3:08 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Fri, Feb 16, 2018 at 10:59:39PM +0000, Khem Raj wrote:
->> I am using arch Linux for host distro and security flags enabled May be
->> that is something
->
-> Could be... I'm on Ubuntu 16.04.
+This doesn't apply in master, WEBENGINE_CONFIG was last used in 5.9.
 
-maybe you can try to enable security flags and see if you see it
+On Mon, Feb 5, 2018 at 1:53 PM, Pascal Huerst <pascal.huerst@gmail.com>
+wrote:
+
+> Signed-off-by: Pascal Huerst <pascal.huerst@gmail.com>
+> ---
+>  recipes-qt/qt5/qtwebengine_git.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/
+> qtwebengine_git.bb
+> index ecf4657..4d6c7b6 100644
+> --- a/recipes-qt/qt5/qtwebengine_git.bb
+> +++ b/recipes-qt/qt5/qtwebengine_git.bb
+> @@ -57,6 +57,7 @@ PACKAGECONFIG[speex] = "WEBENGINE_CONFIG+=use_system_
+> speex,,speex"
+>  PACKAGECONFIG[vpx] = "WEBENGINE_CONFIG+=use_system_vpx,,libvpx"
+>  PACKAGECONFIG[webrtc] = "WEBENGINE_CONFIG+=use_webrtc,,libvpx"
+>  PACKAGECONFIG[nss] = "WEBENGINE_CONFIG+=use_nss,,nss"
+> +PACKAGECONFIG[proprietary_codecs] = "WEBENGINE_CONFIG+=use_
+> proprietary_codecs,,"
+>
+>  EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
+>
+> --
+> 2.14.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
