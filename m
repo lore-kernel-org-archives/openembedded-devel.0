@@ -1,48 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 14DCD77E4D
+Return-Path: <timothy.t.orling@linux.intel.com>
+X-Greylist: delayed 567 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 17 Feb 2018 16:48:51 UTC
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by mail.openembedded.org (Postfix) with ESMTP id 489A760290
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Feb 2018 09:33:46 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id s5so5097044wra.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Feb 2018 01:33:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JVP0kk8Oj9EACfO9JM83uFCiH6KZ7v4s8HgqeHm04CI=;
-	b=SkfRc545tO7mqJFU4a3C+n9BpUQGhXm8TnsOUV2JTfoAN9o9mRYqHcVJISnWxYkVBy
-	YRailkyKpnPFXfRGXO1ZemoCjHSPeuZNRmhGT2pj64UBnkeJlygdKyD6FOb1fsOUlrxS
-	f49d/4QQBrJhRI6nOJ+ZHoXj23nvo9KRTPND5iRSBsimkJtxvoZQgVrbr1ZgIoy0mR6V
-	17wCdD0DzCGc5ic4PX3ZT68kgvnFpLfptAnAwI4DknZd1xCmacOUPoUC0w/mPBQFUUmJ
-	nFwEUajhjzHXWq2KSp6qgo29sbb7yx2JqZ/kYu7H2Hg/KGTSpPhHudtBaOQwZogHgSIb
-	JE9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JVP0kk8Oj9EACfO9JM83uFCiH6KZ7v4s8HgqeHm04CI=;
-	b=agXwQoCmYJ8j+LIbSYYfl9PiqggorHt+OSxWcM4Y/x3WDvi1tgm6xGnjPHBOBq5ztQ
-	p2ER6udxBg8xUblBuvBXBuz3yj8FhCpfrbnL8TpXlH3oZ8/tI/1jLr46j3fGeeP0KF2P
-	dPELGTmQdSXeiP3UU59s+YexhahsAzFqJQeNF7tIRogqMEvtgmpnGRvTuVtIdEHdwDBQ
-	lxPq3ejbkWRgntl76OUjvHzK6y+IbJL9KdtX4jNbZsFrqBgf2EprgS/VQMhRK0AkuwuO
-	A3S2WKuZCshoLTsqeSx2RUtVyJ4k6EOoOKEABxGDoKgZG47OV9FuLokJ/lD1f5zBg3BL
-	9AOg==
-X-Gm-Message-State: APf1xPDep2BzJ3sH8FEEsTem1fkmHFX4bAQU/ugPNvegYx9Neq4E9SH0
-	yO7ecAIQgAJt3QGPYNWg/Q7DAfR5v1myKVvfm8E=
-X-Google-Smtp-Source: AH8x224ahg+qzAVKVNGJPfzEALp8DZJ46SYNQNgNV2Pe6KzqWjak86AFvqvCcnq96OZ+hcnl4rqPEXWH9lbaaV/ENAU=
-X-Received: by 10.223.199.140 with SMTP id l12mr7902883wrg.68.1518860027675;
-	Sat, 17 Feb 2018 01:33:47 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Sat, 17 Feb 2018 01:33:46 -0800 (PST)
-In-Reply-To: <20180205125319.18132-1-pascal.huerst@gmail.com>
-References: <20180205125319.18132-1-pascal.huerst@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 17 Feb 2018 10:33:46 +0100
-Message-ID: <CA+chaQdDx-r=WPd6MvtRODmhk+Jfv60+J5Fegv5am+2wCqRYnA@mail.gmail.com>
-To: Pascal Huerst <pascal.huerst@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	Sat, 17 Feb 2018 16:48:51 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	17 Feb 2018 08:39:25 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.46,525,1511856000"; d="scan'208";a="18920513"
+Received: from gkresge-mobl.amr.corp.intel.com ([10.254.65.152])
+	by orsmga008.jf.intel.com with ESMTP; 17 Feb 2018 08:39:25 -0800
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+In-Reply-To: <CA+chaQcKXbteCmzE7SCZdZ5zjBnnAefyH+JdJDGChKmUpNvG+g@mail.gmail.com>
+Date: Sat, 17 Feb 2018 08:39:24 -0800
+Message-Id: <BA94AA8C-F764-4EC2-ABA5-6ACC1E805F90@linux.intel.com>
+References: <20180216213511.117-1-Martin.Jansa@gmail.com>
+	<1518819754.6900.50.camel@gmail.com>
+	<CA+chaQcKXbteCmzE7SCZdZ5zjBnnAefyH+JdJDGChKmUpNvG+g@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.3273)
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtwebengine: add PACKAGECONFIG for proprietary_codecs
+Subject: Re: [meta-networking][PATCH] waf-samba: use new oe.utils.parallel_make_argument function instead of removed get_waf_parallel_make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +38,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Feb 2018 09:33:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 17 Feb 2018 16:48:51 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-This doesn't apply in master, WEBENGINE_CONFIG was last used in 5.9.
+Now libevent fails:
 
-On Mon, Feb 5, 2018 at 1:53 PM, Pascal Huerst <pascal.huerst@gmail.com>
+08:35:10=20
+ERROR: ExpansionError during parsing =
+/workdir/openembedded-core/../meta-openembedded/meta-networking/recipes-su=
+pport/libtevent/libtevent_0.9.33.bb
+
+08:35:10=20
+Traceback (most recent call last):
+
+08:35:10=20
+bb.data_smart.ExpansionError: Failure expanding variable do_compile, =
+expression was     python ./buildtools/bin/waf =
+${@oe.utils.parallel_make_argument(d, '-j%d', limit=3D64)}
+
+08:35:10  which triggered exception AttributeError: module 'oe.utils' =
+has no attribute =E2=80=98parallel_make_argument'
+
+> On Feb 16, 2018, at 3:10 PM, Martin Jansa <martin.jansa@gmail.com> =
 wrote:
-
-> Signed-off-by: Pascal Huerst <pascal.huerst@gmail.com>
-> ---
->  recipes-qt/qt5/qtwebengine_git.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/
-> qtwebengine_git.bb
-> index ecf4657..4d6c7b6 100644
-> --- a/recipes-qt/qt5/qtwebengine_git.bb
-> +++ b/recipes-qt/qt5/qtwebengine_git.bb
-> @@ -57,6 +57,7 @@ PACKAGECONFIG[speex] = "WEBENGINE_CONFIG+=use_system_
-> speex,,speex"
->  PACKAGECONFIG[vpx] = "WEBENGINE_CONFIG+=use_system_vpx,,libvpx"
->  PACKAGECONFIG[webrtc] = "WEBENGINE_CONFIG+=use_webrtc,,libvpx"
->  PACKAGECONFIG[nss] = "WEBENGINE_CONFIG+=use_nss,,nss"
-> +PACKAGECONFIG[proprietary_codecs] = "WEBENGINE_CONFIG+=use_
-> proprietary_codecs,,"
->
->  EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
->
-> --
-> 2.14.3
->
-> --
+>=20
+> This is just to fix the parsing ASAP, you can still send your updated
+> change which removes the waf inherit completely.
+>=20
+> On Fri, Feb 16, 2018 at 11:22 PM, Joshua Watt <jpewhacker@gmail.com> =
+wrote:
+>=20
+>> On Fri, 2018-02-16 at 21:35 +0000, Martin Jansa wrote:
+>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>>> ---
+>>> meta-networking/classes/waf-samba.bbclass | 2 +-
+>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>=20
+>>> diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-
+>>> networking/classes/waf-samba.bbclass
+>>> index e490176241..a63842cadc 100644
+>>> --- a/meta-networking/classes/waf-samba.bbclass
+>>> +++ b/meta-networking/classes/waf-samba.bbclass
+>>> @@ -87,7 +87,7 @@ do_configure() {
+>>> }
+>>>=20
+>>> do_compile () {
+>>> -    python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
+>>> +    python ./buildtools/bin/waf =
+${@oe.utils.parallel_make_argument(d
+>>> , '-j%d', limit=3D64)}
+>>=20
+>> Ah, beat me to it. Either way, I approve FWIW.
+>>=20
+>>> }
+>>>=20
+>>> do_install() {
+>>> --
+>>> 2.15.1
+>>>=20
+>>=20
+> --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
 
