@@ -1,49 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DEA946093F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 25E39786DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Feb 2018 23:09:59 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id b52so4355337wrd.10
+	Sat, 17 Feb 2018 02:35:46 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id a11so3797040pgu.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Feb 2018 15:10:01 -0800 (PST)
+	Fri, 16 Feb 2018 18:35:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=EBqb++DdwJ6NvMT2vgG6HVdRW8FiAB7j2rKy9Rn5o8c=;
-	b=RNStBib2yTOnDjl2gbJjwobNzacKkuhX2kVwn3nV4SznoV7K/GEuf5/60wXrLFpLEx
-	/KlzFAc2nBElMAqWi4MT3j2IW22KGCrSnMn7LF/qybib3+EW2jVK7Y82BvxBp1YdaJep
-	q5JgJ7MN+6CzAsNbeqUG0KcVniYqT/steQVt1Cm7GYulNfKLTECR21ISw6hvtJNTJRBD
-	RGd1e6lGR4cBG357+mWsZUcqYn5lDzDaWFbstKEynDhyvuB7E3WQQXazt3G0jJjfwx7O
-	7Cs5q+i0ivyEXBtjy9cI2uuP45Kt+dFXeOQ+YqgXWCRZ8NxIRQjUcOcX/XQdGwYRDs4i
-	mPrQ==
+	:cc; bh=cx1M8qDpLwnYteInV2jmTub+gFgVQC5goUTpJc4ZIO0=;
+	b=ZNLK3Ulz6duyAQEAt1e10uokW1SzfvC3Yi0NRYqj9AmHDtuwwfZVAnDDUhtqD9mBe6
+	Ts0pJVBbv/vn2HZjVmvcs4PUi+YssHQDkkSXlyxotx/bQ+0R8Ptr4H/4gg3H3mHD212W
+	L5qVPJZPzB6v50CB/rSHuOeL2/M14uF/z7HU58P84ifUEQ6qRlrgpRP80dhcH0LIPtiK
+	fynOAM9aiCgE6x04fjdwNARBA85hW8rNI5DSQeS1o9naAtcSuuqEdLGOLJojRFkKsTJf
+	32fnDE+g5G8b5+w8UKR/vC8v1YV1/MJAxU6Cs1eoCtHoKL7Lf2piN9FOXFfqlQSw/yMh
+	zaag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=EBqb++DdwJ6NvMT2vgG6HVdRW8FiAB7j2rKy9Rn5o8c=;
-	b=AOHV02n+pgGiaX024HeoEVZnDT6NtFBGnw3yDlLBiFJP8U57nb4ThXLJBq7NKqopEc
-	GUgJb7ViQPktMfz268rXx/xRpxkml69ii8V1S3UZMmO0kSzUbUd7CjWkMBvBfIVn0+2v
-	WVAHJZyYUvmUDJWJ3QKKPBYVqZN3NhcO740ZBPXkI98m9WNmic+fqtcBw/F3xZ/JL2wu
-	WMY7mSQE9VS5GOrFrGSv2tnCcvBhOMua8OyNmMCClJ9sFIXx+dXQJg4bbXZLAwCgVV60
-	WQliqGoii5LuD/QFCzWT3XVpw3NP3vpbA+ArKp6V6nhTajY3v+0iLByOHJ9mZES93cLg
-	KNXQ==
-X-Gm-Message-State: APf1xPDx4vvhJgjIpe9cuBu9WZ66b+q63B3XIm1k67VkDYcQ9S7ziOrD
-	hoVfPY2Yd/6cMBBHrapcKjI/ew+bxsqrncskXkI=
-X-Google-Smtp-Source: AH8x227xB08lR7SxIqElIa5/eAkvGR4ofzcI5zJPxgfG2KmgTzoPWqSa9I/Ryj8ejfLPC1Okq/+S62S8Q3jHhSFmN+M=
-X-Received: by 10.223.151.129 with SMTP id s1mr7224637wrb.206.1518822600596;
-	Fri, 16 Feb 2018 15:10:00 -0800 (PST)
+	bh=cx1M8qDpLwnYteInV2jmTub+gFgVQC5goUTpJc4ZIO0=;
+	b=WY0X8Q2II+B9HXrG0EzMos9okvn4khcWdRu6xi+AP4B817hB86QIR+ND5kIXgg+A+B
+	MPVC8H/UlBzIFjb3zLj9Ao5F5kZTZ8eucPnICKcNI9chSv4w/oMDtRyNm5g+ufjsq/Dp
+	218eY7BUDy4/CyAFoy94IJ+BlsX6NbpYoSrLyUU2UbtjoYDhrY7tMCa89+XALTYPsMPh
+	Wnhi+7rA6PTTv2Jn958X7HWhuc1z9Ma0NaLX+F/IiU91MuIZq0CfzRlBzYOemR0PJdFI
+	KvQ51T6Y1pF5K9vhi3R1SXlPtA9XWLnDMFr5TfMXbrDXOrfYtfcTzIBE4BYO7a4n3TAr
+	HxwA==
+X-Gm-Message-State: APf1xPDYUI7mHQPe9v0eacPcGZeLXQaRcUck61OvtklKnFZlw3ZT1fDL
+	fzb6YP2c7fa9Vp3aVbAAnv7x/WUJjX1djznXHiE=
+X-Google-Smtp-Source: AH8x226Bv6qDWJZTOAGibkYp8PrA/qJpmpFek4vWZRYY7qECWouTzCCG5xOAEl9X84kg0TIrPjDOpBKeXlCLMlUEz8s=
+X-Received: by 10.98.229.21 with SMTP id n21mr6898526pff.158.1518834947937;
+	Fri, 16 Feb 2018 18:35:47 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Fri, 16 Feb 2018 15:10:00 -0800 (PST)
-In-Reply-To: <1518819754.6900.50.camel@gmail.com>
-References: <20180216213511.117-1-Martin.Jansa@gmail.com>
-	<1518819754.6900.50.camel@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 17 Feb 2018 00:10:00 +0100
-Message-ID: <CA+chaQcKXbteCmzE7SCZdZ5zjBnnAefyH+JdJDGChKmUpNvG+g@mail.gmail.com>
-To: Joshua Watt <jpewhacker@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] waf-samba: use new oe.utils.parallel_make_argument function instead of removed get_waf_parallel_make
+Received: by 10.100.207.166 with HTTP; Fri, 16 Feb 2018 18:35:17 -0800 (PST)
+In-Reply-To: <20180216230846.GT2786@denix.org>
+References: <20180215043848.14310-1-raj.khem@gmail.com>
+	<20180215234152.GQ2786@denix.org>
+	<CAMKF1sp7e7mQRWQPNHYPDHm-QZXtKuNFv_YrwLiD57+Q=JhQOg@mail.gmail.com>
+	<20180216220142.GS2786@denix.org>
+	<CAMKF1spkGJpYTAmQ9gh+af51ya3qkZja8XMmVP5u=Q-ycc5qbw@mail.gmail.com>
+	<20180216230846.GT2786@denix.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 16 Feb 2018 18:35:17 -0800
+Message-ID: <CAMKF1spcrZQ34imyqaXtcHRmphyU1Kfo5nNdo6qaaeOVSx51eg@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtbase: Replace -isystem with -I
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,40 +58,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Feb 2018 23:10:00 -0000
+X-List-Received-Date: Sat, 17 Feb 2018 02:35:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-This is just to fix the parsing ASAP, you can still send your updated
-change which removes the waf inherit completely.
+On Fri, Feb 16, 2018 at 3:08 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Fri, Feb 16, 2018 at 10:59:39PM +0000, Khem Raj wrote:
+>> I am using arch Linux for host distro and security flags enabled May be
+>> that is something
+>
+> Could be... I'm on Ubuntu 16.04.
 
-On Fri, Feb 16, 2018 at 11:22 PM, Joshua Watt <jpewhacker@gmail.com> wrote:
-
-> On Fri, 2018-02-16 at 21:35 +0000, Martin Jansa wrote:
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-networking/classes/waf-samba.bbclass | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-
-> > networking/classes/waf-samba.bbclass
-> > index e490176241..a63842cadc 100644
-> > --- a/meta-networking/classes/waf-samba.bbclass
-> > +++ b/meta-networking/classes/waf-samba.bbclass
-> > @@ -87,7 +87,7 @@ do_configure() {
-> >  }
-> >
-> >  do_compile () {
-> > -    python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
-> > +    python ./buildtools/bin/waf ${@oe.utils.parallel_make_argument(d
-> > , '-j%d', limit=64)}
->
-> Ah, beat me to it. Either way, I approve FWIW.
->
-> >  }
-> >
-> >  do_install() {
-> > --
-> > 2.15.1
-> >
->
+maybe you can try to enable security flags and see if you see it
 
