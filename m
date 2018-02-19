@@ -1,75 +1,48 @@
-Return-Path: <kwangsub.kim@qt.io>
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0106.outbound.protection.outlook.com [104.47.2.106])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E4DE784F5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f49.google.com (mail-pl0-f49.google.com
+	[209.85.160.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DE9B6022F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Feb 2018 14:52:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=qtcompany.onmicrosoft.com; s=selector1-qt-io;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=JAF8Frl0mastKk2fNAs3vEF4IgfFtXzyHLhyYXWSOOI=;
-	b=Ppn2n75pKdJOAkoQFXOmtje36cADk4YxGDOBhJoYuXRPRoPMJRHvAEs4i0D9AbVswwam4aGJ0W6tOFxP/I4TWL6kc1i0N5/KaF9WnHHUzQDbbBTx1rGvBUyXZbzSIPOKJhBcqbwmo17fDuf1F0vueUqpt3rrHzDo5o3HzrWGYCM=
-Received: from HE1PR0202MB2491.eurprd02.prod.outlook.com (10.168.183.137) by
-	HE1PR0202MB2652.eurprd02.prod.outlook.com (10.168.184.144) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.506.18;
-	Mon, 19 Feb 2018 07:18:54 +0000
-Received: from HE1PR0202MB2491.eurprd02.prod.outlook.com
-	([fe80::6469:f629:e6b6:b57a]) by
-	HE1PR0202MB2491.eurprd02.prod.outlook.com
-	([fe80::6469:f629:e6b6:b57a%14]) with mapi id 15.20.0506.021;
-	Mon, 19 Feb 2018 07:18:54 +0000
-From: Kwangsub Kim <kwangsub.kim@qt.io>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-qt5][PATCH] qtbase: add a config option to optimize
-	for size
-Thread-Index: AQHTp/SPWlDEduu5QEyNX8zEnJ5GK6OpZPyAgAKFwIA=
-Date: Mon, 19 Feb 2018 07:18:52 +0000
-Message-ID: <47022AA3-C340-485C-8BE1-A23A69001DE8@qt.io>
-References: <1518874632-22199-1-git-send-email-kwangsub.kim@qt.io>
-	<1f1d405a-33ea-980b-994f-c0e83a2e7c48@gmail.com>
-In-Reply-To: <1f1d405a-33ea-980b-994f-c0e83a2e7c48@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=kwangsub.kim@qt.io; 
-x-originating-ip: [175.195.156.153]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; HE1PR0202MB2652;
-	7:g00c0v+ZaIKd9hCiivD9YH1fCuWUs4CdUZE+9sA1BU0apzhut4J8A7LWVo5Oni2ccgyc6BPpVGHM2lpZ/RU3/hSZRk4z9vdjuRhkm9bv6HomhmDSTKm/nN8b51DTOwmW3hhsSWK97CBKN3nD3UHsbDMSibebOhd1gEpY48em4p60gc9D4WSfbAvN9YVGloDOKVDb5rVIOrJ3JXIjKbfDkrYIyyoqwStMck6Do29dhQXIf6qtw0wefiBmFSMwkTKU
-x-ms-exchange-antispam-srfa-diagnostics: SSOS;
-x-ms-office365-filtering-correlation-id: f77ff8e8-a60b-4471-083c-08d577690897
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652020)(5600026)(4604075)(3008032)(4534165)(4627221)(201703031133081)(201702281549075)(2017052603307)(7153060)(7193020);
-	SRVR:HE1PR0202MB2652; 
-x-ms-traffictypediagnostic: HE1PR0202MB2652:
-x-microsoft-antispam-prvs: <HE1PR0202MB26524B1D1601366E92C4114086C80@HE1PR0202MB2652.eurprd02.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(278428928389397)(264703809997249);
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(6040501)(2401047)(8121501046)(5005006)(10201501046)(93006095)(93001095)(3231101)(944501161)(3002001)(6041288)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123560045)(20161123562045)(20161123558120)(20161123564045)(6072148)(201708071742011);
-	SRVR:HE1PR0202MB2652; BCL:0; PCL:0; RULEID:;
-	SRVR:HE1PR0202MB2652; 
-x-forefront-prvs: 0588B2BD96
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(39380400002)(39840400004)(396003)(346002)(366004)(376002)(189003)(199004)(2950100002)(2900100001)(76176011)(6486002)(7736002)(74482002)(105586002)(6436002)(68736007)(106356001)(25786009)(5660300001)(3280700002)(26005)(99286004)(186003)(3660700001)(66066001)(1720100001)(39060400002)(81156014)(33656002)(14454004)(478600001)(966005)(5250100002)(102836004)(305945005)(81166006)(8936002)(8676002)(110136005)(316002)(2501003)(2906002)(97736004)(229853002)(6306002)(6512007)(53936002)(36756003)(3846002)(6116002)(82746002)(53546011)(86362001)(6506007)(83716003)(6246003)(33896004);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR0202MB2652;
-	H:HE1PR0202MB2491.eurprd02.prod.outlook.com; FPR:; SPF:None;
-	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
-received-spf: None (protection.outlook.com: qt.io does not designate permitted
-	sender hosts)
-x-microsoft-antispam-message-info: NEIAZmf9w/KTum9GasDtnRSRL/L1Ohb8YdBc0hhpCwWOxile6+NN9I4IV+YY9MjEqsby0gBMrVAlPeejEv3VW0M1MDGOeze4rr6qhoTz57YV/aUwXTe44sPRa3X5WUi2+W0yzXyk9o+Fpl1F3yKq72fGN6ScEiXInrPnRadwdig=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Mon, 19 Feb 2018 17:26:26 +0000 (UTC)
+Received: by mail-pl0-f49.google.com with SMTP id x18so416279pln.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Feb 2018 09:26:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=T+Oxi2nLms9gUWp86rY52WXEvaJ0q+yMNdY2loEczek=;
+	b=KQw2r0vx1JZQ3snsVUNh9fmJ9m7CBnoRKDXfEbSBHppEAZ/9YyEof5ApSqBUBKFj83
+	MrdSvzw8gt8gmU+CuxepjCsOvuTKmVkccHOVV9WHZy/HCxm3BpgtPyNb3Q6uRrz6qHmF
+	1L/Nw2vRQwXHC4TLA+OXXSXAEbJ4tLrtC/aHcZCPRr7PozE/AfbEGwtG4KEUNDvadKDD
+	/ZgXJILBNvCgBUud4M3I/mVPcYOVcl0lIvZM379GdtvfMJ5kNcDjatei2tGN/R/a94Vb
+	0CFs0F7kQ+YnqbA2rt/a6pGKyYGMAbNBxKLN/Upjc57y0wAPBtqXpMyjVL45jW8FoCbl
+	0zQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=T+Oxi2nLms9gUWp86rY52WXEvaJ0q+yMNdY2loEczek=;
+	b=Sb12cEHYCTgS9UCKwKbGZDLKeKZuy5h8lIntEJ7NvpzC3fk+9IAQjc3y4XKqcGdG58
+	mB1U3sChGsJz9nY6ymKVavt2mD3L49gz68LIUx9clDD4Zw8XUmsX6ttMu1ACKExbfm8a
+	2fblpdFyWcftZ9QsmmcEU3R0WzFlRWlWSxPQmp+uWhr4Ita1u+glXvdAljWV5hDYP7/8
+	tuFRXXJ+kHo5uGyhDYtxnZWatTXVZggLWZoVmQFVZHAcN7hVaZYaCmFt9eDIVgqAbWbV
+	BKRk2DmFE7JuY53gaO9tzlcrAtKwSAHl7WiJCsBHoJs1tCGb61xdMKjmvb3TL/ToLO39
+	uHtg==
+X-Gm-Message-State: APf1xPChDes8b+hgBYAb1lAHpjy3QMETbv0m7uMHVrji/r5pE7b+7fje
+	ZvjOzW0W7PASu7EtjnNovt6+tyqHDISInxigS6PGZQ==
+X-Google-Smtp-Source: AH8x225hr78NUNXEQVzo+lyBY9SADdRDKS4nCya4PZ7oaayQkqTwMFOBD9wUR9os45UXFXWZIf90k5mYiSOp2EhBISY=
+X-Received: by 2002:a17:902:4827:: with SMTP id
+	s36-v6mr14931875pld.337.1519061187312; 
+	Mon, 19 Feb 2018 09:26:27 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: qt.io
-X-MS-Exchange-CrossTenant-Network-Message-Id: f77ff8e8-a60b-4471-083c-08d577690897
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2018 07:18:53.5617 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 20d0b167-794d-448a-9d01-aaeccc1124ac
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0202MB2652
-Subject: Re: [meta-qt5][PATCH] qtbase: add a config option to optimize for size
+Received: by 10.100.207.166 with HTTP; Mon, 19 Feb 2018 09:25:56 -0800 (PST)
+In-Reply-To: <f5c98ff3-53a6-3044-fe92-b459845a721c@rudloff.pro>
+References: <f5c98ff3-53a6-3044-fe92-b459845a721c@rudloff.pro>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 19 Feb 2018 09:25:56 -0800
+Message-ID: <CAMKF1spY7xim5Uyg=GET066qBJxmM4r+v3st0CS1JXg-LwGMNA@mail.gmail.com>
+To: Pierre Rudloff <pierre@rudloff.pro>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] qtbase-native configure script can't find Perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -82,42 +55,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Feb 2018 14:52:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <6DBE7B82F406AD4180C0D84CB31F781F@eurprd02.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 19 Feb 2018 17:26:26 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-SGkgS2hlbSwNCg0KVGhhdOKAmXMgYSBnb29kIHBvaW50LiBUaGFua3MgZm9yIHlvdXIgcmV2aWV3
-Lg0KSSB3aWxsIHB1dCB0aGUgdXBkYXRlZCBwYXRjaCB0aGF0IGNoZWNrcyBTRUxFQ1RFRF9PUFRJ
-TUlaQVRJT04gYW5kIGRldGVybWluZXMgdGhlIGRlZmF1bHQgb3B0aW9uLiBQbGVhc2UgaGF2ZSBh
-IGxvb2sgaWYgaXTigJlzIGFjY2VwdGFibGUuDQoNCkJSLA0KS3dhbmdzdWINCg0KT24gMTgvMDIv
-MjAxOCwgMTE6MTEgQU0sIEtoZW0gUmFqIHdyb3RlOg0KDQogICAgT24gMi8xNy8xOCA1OjM3IEFN
-LCBLd2FuZ3N1YiBLaW0gd3JvdGU6DQogICAgPiBUaGUgJy1vcHRpbWl6ZS1zaXplJyBvcHRpb24g
-d291bGQgZW5hYmxlIHRoZSBjb21waWxlciB0byBvcHRpbWl6ZQ0KICAgID4gZm9yIHNpemUgaW5z
-dGVhZCBvZiBzcGVlZC4gSXQgd291bGQgYWZmZWN0IHRoZSB3aG9sZSBRdCBsaWJyYXJpZXMNCiAg
-ICA+IGFuZCBRdCBhcHBsaWNhdGlvbnMgYXMgd2VsbC4NCiAgICA+IA0KICAgID4gVGhpcyBmZWF0
-dXJlIGlzIGF2YWlsYWJsZSBpbiBRdCA1LjkrLg0KICAgID4gDQogICAgPiBTaWduZWQtb2ZmLWJ5
-OiBLd2FuZ3N1YiBLaW0gPGt3YW5nc3ViLmtpbUBxdC5pbz4NCiAgICA+IC0tLQ0KICAgID4gICBy
-ZWNpcGVzLXF0L3F0NS9xdGJhc2VfZ2l0LmJiIHwgMSArDQogICAgPiAgIDEgZmlsZSBjaGFuZ2Vk
-LCAxIGluc2VydGlvbigrKQ0KICAgID4gDQogICAgPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1xdC9x
-dDUvcXRiYXNlX2dpdC5iYiBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZV9naXQuYmINCiAgICA+IGlu
-ZGV4IDRmM2FkZTIuLjhkZGE2YTIgMTAwNjQ0DQogICAgPiAtLS0gYS9yZWNpcGVzLXF0L3F0NS9x
-dGJhc2VfZ2l0LmJiDQogICAgPiArKysgYi9yZWNpcGVzLXF0L3F0NS9xdGJhc2VfZ2l0LmJiDQog
-ICAgPiBAQCAtOTAsNiArOTAsNyBAQCBQQUNLQUdFQ09ORklHW3JlbGVhc2VdID0gIi1yZWxlYXNl
-LC1kZWJ1ZyINCiAgICA+ICAgUEFDS0FHRUNPTkZJR1tkZWJ1Z10gPSAiIg0KICAgID4gICBQQUNL
-QUdFQ09ORklHW2RldmVsb3Blcl0gPSAiLWRldmVsb3Blci1idWlsZCINCiAgICA+ICAgUEFDS0FH
-RUNPTkZJR1txbWwtZGVidWddID0gIi1xbWwtZGVidWcsLW5vLXFtbC1kZWJ1ZyINCiAgICA+ICtQ
-QUNLQUdFQ09ORklHW29wdGltaXplLXNpemVdID0gIi1vcHRpbWl6ZS1zaXplIg0KICAgIA0KICAg
-IFdlIGFsc28gaGF2ZSBnbG9iYWwgY29tcGlsZXIgb3B0aW9ucyB3aGljaCB3aWxsIGJlIHBhc3Nl
-ZCBpbi4gU28gcGVyaGFwcyANCiAgICBpdCBzaG91bGQgY2hlY2sgZm9yIC1PcyBpbiBTRUxFQ1RF
-RF9PUFRJTUlaQVRJT04gYW5kIGVuYWJsZSB0aGlzIA0KICAgIHBhY2thZ2Vjb25maWcgYnkgZGVm
-YXVsdCBpZiBmb3VuZC4NCiAgICANCiAgICA+ICAgUEFDS0FHRUNPTkZJR1tzbV0gPSAiLXNtLC1u
-by1zbSINCiAgICA+ICAgUEFDS0FHRUNPTkZJR1t0ZXN0c10gPSAiLW1ha2UgdGVzdHMsLW5vbWFr
-ZSB0ZXN0cyINCiAgICA+ICAgUEFDS0FHRUNPTkZJR1tleGFtcGxlc10gPSAiLW1ha2UgZXhhbXBs
-ZXMgLWNvbXBpbGUtZXhhbXBsZXMsLW5vbWFrZSBleGFtcGxlcyINCiAgICA+IA0KICAgIC0tIA0K
-ICAgIF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQogICAg
-T3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KICAgIE9wZW5lbWJlZGRlZC1kZXZlbEBs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnDQogICAgaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
-bWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCiAgICANCg0K
+meta-qt5             = "5.10:0924e7a15d9ce36ef1869175cae3738071bd9edb"
+
+It seems you are using local branch called 5.10, I would suggest to
+use upstream rocko branch since thats what you are using for other
+layers.
+
+On Mon, Feb 19, 2018 at 2:51 AM, Pierre Rudloff <pierre@rudloff.pro> wrote:
+> Hello,
+>
+> I'm trying to build AsteroidOS, an OpenEmbedded distribution that depends on
+> meta-qt5 and "bitbake qtbase-native" complains that it can't find Perl.
+>
+> I do have Perl 5.24.1 installed (I'm using Debian 9.3) and I can see it in
+> build/tmp-glibc/hosttools/perl.
+>
+> I reported the error to AsteroidOS
+> (https://github.com/AsteroidOS/asteroid/issues/55) and QT
+> (https://bugreports.qt.io/browse/QTBUG-66467) but they suggested I ask here.
+>
+> Here is the full log:
+>>
+>> Loading cache: 100%
+>> |##########################################################################################################################################################|
+>> Time: 0:00:00
+>> Loaded 3046 entries from dependency cache.
+>> Parsing recipes: 100%
+>> |########################################################################################################################################################|
+>> Time: 0:00:06
+>> Parsing of 2240 .bb files complete (2225 cached, 15 parsed). 3060 targets,
+>> 308 skipped, 0 masked, 0 errors.
+>> NOTE: Resolving any missing task queue dependencies
+>>
+>> Build Configuration:
+>> BB_VERSION           = "1.36.0"
+>> BUILD_SYS            = "x86_64-linux"
+>> NATIVELSBSTRING      = "debian-9"
+>> TARGET_SYS           = "arm-oe-linux-gnueabi"
+>> MACHINE              = "tetra"
+>> DISTRO               = "asteroid"
+>> DISTRO_VERSION       = "alpha-1.0"
+>> TUNE_FEATURES        = "arm armv7ve vfp thumb neon callconvention-hard"
+>> TARGET_FPU           = "hard"
+>> meta-qt5             = "5.10:0924e7a15d9ce36ef1869175cae3738071bd9edb"
+>> meta                 = "rocko:abc7fbab2c125b247f3274ca4b29e4f858b5ae12"
+>> meta-asteroid        = "master:3c49fd588bf8743cc93e5e88edba1ffb02602b1d"
+>> meta-oe              meta-multimedia      meta-gnome
+>> meta-networking      = "rocko:a65c1acb1822966c3553de9fc98d8bb6be705c4e"
+>> meta-android         = "rocko:4dc893c799951d8a9418860a6db9b3b7eed7bb49"
+>> meta-python          meta-filesystems     =
+>> "rocko:a65c1acb1822966c3553de9fc98d8bb6be705c4e"
+>> meta-anthias-hybris  = "master:7e45263168efcb1696732b70204bd4fc6113c8d6"
+>> meta-sparrow-hybris  = "master:55f5c9daf3e8e0797d9f49312e71e245f010fbe6"
+>> meta-sprat-hybris    = "master:e64adbc6db63f7f1a90f0bdfaf8db123c3ac4a02"
+>> meta-tetra-hybris    = "master:014b3436b930831dfaa5dd37510ebe7ac4944325"
+>> meta-bass-hybris     = "master:248c7d5431ee2b540edbd5828ee125947f6b0de5"
+>> meta-dory-hybris     = "master:cfa0f5c1c92dece99060c96da06f422c519a6d0b"
+>> meta-lenok-hybris    = "master:462f80f0c45c8fdb4c37f943fbe8e3145324f8b8"
+>> meta-swift-hybris    = "master:afd2e55dd62ef154e07afe66ee49418b51338314"
+>> meta-wren-hybris     = "master:ef7d856fa95791bc03190ad2db704490c4ef96b1"
+>>
+>> Initialising tasks: 100%
+>> |#####################################################################################################################################################|
+>> Time: 0:00:00
+>> NOTE: Executing SetScene Tasks
+>> NOTE: Executing RunQueue Tasks
+>> ERROR: qtbase-native-5.10.1+gitAUTOINC+6c6ace9d23-r0 do_configure:
+>> Configuring qt failed. PACKAGECONFIG_CONFARGS was      -sysroot
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native
+>> -no-gcc-sysroot     -system-zlib     -qt-pcre     -no-libjpeg     -no-libpng
+>> -no-gif     -no-accessibility     -no-cups     -no-gui     -no-qml-debug
+>> -no-sql-mysql     -no-sql-sqlite     -no-opengl     -no-openssl     -no-xcb
+>> -no-icu     -verbose     -release     -prefix
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
+>> -hostprefix
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
+>> -bindir
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
+>> -hostbind
+>
+> ir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
+> -libdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
+> -hostlibdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
+> -headerdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/include
+> -archdatadir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
+> -datadir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share
+> -hostdatadir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/
+> 5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib     -docdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share/doc
+> -sysconfdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/etc
+> -no-glib     -no-iconv     -silent     -nomake examples     -nomake tests
+> -no-rpath     -no-feature-linkat     -platform linux-oe-g++
+>>
+>> ERROR: qtbase-native-5.10.1+gitAUTOINC+6c6ace9d23-r0 do_configure:
+>> Function failed: do_configure (log file is located at
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/temp/log.do_configure.6022)
+>> ERROR: Logfile of failure stored in:
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/temp/log.do_configure.6022
+>> Log data follows:
+>> DEBUG: Executing shell function qmake5_base_preconfigure
+>> DEBUG: Shell function qmake5_base_preconfigure finished
+>> DEBUG: Executing shell function do_configure
+>> Performing shadow build...
+>> Preparing build tree...
+>> You need perl in your PATH to make a build from GIT.
+>> Cannot proceed.
+>> ERROR: Configuring qt failed. PACKAGECONFIG_CONFARGS was      -sysroot
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native
+>> -no-gcc-sysroot     -system-zlib     -qt-pcre     -no-libjpeg     -no-libpng
+>> -no-gif     -no-accessibility     -no-cups     -no-gui     -no-qml-debug
+>> -no-sql-mysql     -no-sql-sqlite     -no-opengl     -no-openssl     -no-xcb
+>> -no-icu     -verbose     -release     -prefix
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
+>> -hostprefix
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
+>> -bindir
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
+>> -hostbindir /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-lin
+>
+> ux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
+> -libdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
+> -hostlibdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
+> -headerdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/include
+> -archdatadir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
+> -datadir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share
+> -hostdatadir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/li
+> b     -docdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share/doc
+> -sysconfdir
+> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/etc
+> -no-glib     -no-iconv     -silent     -nomake examples     -nomake tests
+> -no-rpath     -no-feature-linkat     -platform linux-oe-g++
+>>
+>> WARNING: exit code 1 from a shell command.
+>> ERROR: Function failed: do_configure (log file is located at
+>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/temp/log.do_configure.6022)
+>> ERROR: Task
+>> (/home/pierre/www/asteroid/src/meta-qt5/recipes-qt/qt5/qtbase-native_git.bb:do_configure)
+>> failed with exit code '1'
+>> NOTE: Tasks Summary: Attempted 118 tasks of which 117 didn't need to be
+>> rerun and 1 failed.
+>> Summary: 1 task failed:
+>>
+>> /home/pierre/www/asteroid/src/meta-qt5/recipes-qt/qt5/qtbase-native_git.bb:do_configure
+>> Summary: There were 2 ERROR messages shown, returning a non-zero exit
+>> code.
+>
+>
+> I also tried building a very minimalist i586-oe-linux distribution requiring
+> only meta-qt5 and I get the same error.
+> Do you know what could cause this?
+>
+> Regards,
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
