@@ -1,34 +1,47 @@
-Return-Path: <pierre@rudloff.pro>
-Received: from smtp-out.ouvaton.coop (smtp-out.ouvaton.coop [163.172.154.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BDFE71B1D
+Return-Path: <carlos.rodriguez@ridgerun.com>
+Received: from mail-vk0-f54.google.com (mail-vk0-f54.google.com
+	[209.85.213.54])
+	by mail.openembedded.org (Postfix) with ESMTP id CAC89787B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Feb 2018 18:54:09 +0000 (UTC)
-Received: from panel.vitry.ouvaton.coop (panel.vitry.ouvaton.coop
-	[194.36.166.20])
-	by smtp-out.ouvaton.coop (Postfix) with ESMTPS id 1523822049A;
-	Mon, 19 Feb 2018 18:54:10 +0000 (UTC)
-Received: from pierre.rudloff.pro (LFbn-1-6079-192.w90-110.abo.wanadoo.fr
-	[90.110.4.192])
-	by panel.vitry.ouvaton.coop (Postfix) with ESMTPSA id D8092A7258;
-	Mon, 19 Feb 2018 19:54:09 +0100 (CET)
-Authentication-Results: panel.vitry.ouvaton.coop;
-	spf=pass (sender IP is 90.110.4.192) smtp.mailfrom=pierre@rudloff.pro
-	smtp.helo=pierre.rudloff.pro
-Received-SPF: pass (panel.vitry.ouvaton.coop: connection is authenticated)
-To: Khem Raj <raj.khem@gmail.com>
-References: <f5c98ff3-53a6-3044-fe92-b459845a721c@rudloff.pro>
-	<CAMKF1spY7xim5Uyg=GET066qBJxmM4r+v3st0CS1JXg-LwGMNA@mail.gmail.com>
-From: Pierre Rudloff <pierre@rudloff.pro>
-Message-ID: <8883ef7f-61fc-cbd5-8ac1-dced080c10a9@rudloff.pro>
-Date: Mon, 19 Feb 2018 19:54:09 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1spY7xim5Uyg=GET066qBJxmM4r+v3st0CS1JXg-LwGMNA@mail.gmail.com>
-X-PPP-Message-ID: <20180219185409.19402.50937@panel.vitry.ouvaton.coop>
-X-PPP-Vhost: rudloff.pro
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] qtbase-native configure script can't find Perl
+	Mon, 19 Feb 2018 20:14:18 +0000 (UTC)
+Received: by mail-vk0-f54.google.com with SMTP id t201so6366688vke.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Feb 2018 12:14:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=L45kz/c5OOc2deJtup7GVxZ7GRJe5KUx4yEuk7nInpM=;
+	b=OneZyziM3mIii4GFvoqCnJiJbq4vTpIaq1YnkHDsEj6twJVQv5IdiCQRH3M4hzMBvU
+	cBu/jn19qugEc9vOfwX4DWAzTR8VXUgEuGYZJGFp/yzljuus0dCdGwysqNUELtm1I+Qo
+	5mWuCMuzcaqvDoCrQGAEYfOfuieawad0bNDHs4YSi0rrP3UABd9hoFOmzPkT9E8kfgF5
+	E+p4SmaUOq29CoKbQG+OUqikJeCTWlBsigAeE26I9+f89ii4n0HZ6CQtoRTr+qq7+hlO
+	jDjpCvsCng1Lhge5ZOaSE7fonnvOtRNzIdE41GaoCPW05dpX9lhpWS5u1vCNe8vTnqAg
+	USeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=L45kz/c5OOc2deJtup7GVxZ7GRJe5KUx4yEuk7nInpM=;
+	b=tHRoFag/vjT8oB8IaaLb61cWWWxXkHtH66NTuWGAuD/O6BICzHaU1lufsG0zRIaW+N
+	BOJLmf8YGX+7EmaGY5cpBv8dFZN6sO4wBrsserC6e1u0bfdNp7owyjM7O73wzVgCyPRU
+	bNBN5a9oov/daEYxirKZrY1Oy0tnwEB7BbqMWAbXsQbE3PM3jgR5KrTtbvvktKDTQ73V
+	vPXGJIwivRUBBUZB/m2rQFZ2iEmiW1Uew99l90coi6+fTjJ1owSUW5bbbrRGw/uHTVnt
+	e77G8Odc/rh4FHBY6uOp6THLIXV/qCNe6uTnOCG7Mzi1uDM81V98S41HrMy57ocKUi+g
+	pmZA==
+X-Gm-Message-State: APf1xPDcCel0qVmADCOtmr/a99pMHUTcs/E6bYfR2Sq4ScTETgUnA3ef
+	XlSdE1z5fWPLSSacPG3l+O3MIvM0
+X-Google-Smtp-Source: AH8x224zS9eMuP74CRals35gdXFnPGxMYT0tEkCGdD3tbN3pjy5jEwMPNE6X/COVkru7ed2z/xv+Jg==
+X-Received: by 10.31.148.199 with SMTP id w190mr12166608vkd.130.1519071259662; 
+	Mon, 19 Feb 2018 12:14:19 -0800 (PST)
+Received: from crodriguez.cr.ridgerun.com ([201.206.221.6])
+	by smtp.gmail.com with ESMTPSA id q5sm8274696uaj.17.2018.02.19.12.14.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 19 Feb 2018 12:14:19 -0800 (PST)
+From: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Feb 2018 14:14:10 -0600
+Message-Id: <1519071250-14245-1-git-send-email-carlos.rodriguez@ridgerun.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH v3] gstd: Add Gst-Deamon recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,186 +54,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Feb 2018 18:54:10 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: fr-FR
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 19 Feb 2018 20:14:18 -0000
 
-Thanks. I tried to use rocko:
-> meta-qt5             = "rocko:db881bb4917628ad3eb1fa7c4f27915cf2ae60f4"
-But I still get the same error.
+GStreamer Daemon, also called gstd, is a GStreamer framework
+for controlling audio and video streaming using TCP connection
+messages. Qt applications, web interfaces, and GStreamer element
+test suites show different ways the framework can be utilized.
+GStreamer Daemon is gst-launch on steroids where you can create a
+GStreamer pipeline, play, pause, change speed, skip around, and
+even change element parameter settings all while the pipeline
+is active.
 
+Signed-off-by: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
+---
+ .../recipes-multimedia/gstreamer-1.0/gstd.inc      | 25 +++++++++
+ .../gstd/0001-gstd-yocto-compatibility.patch       | 63 ++++++++++++++++++++++
+ .../recipes-multimedia/gstreamer-1.0/gstd_1.0.bb   |  3 ++
+ 3 files changed, 91 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
 
-Le 19/02/2018 à 18:25, Khem Raj a écrit :
-> meta-qt5             = "5.10:0924e7a15d9ce36ef1869175cae3738071bd9edb"
-> 
-> It seems you are using local branch called 5.10, I would suggest to
-> use upstream rocko branch since thats what you are using for other
-> layers.
-> 
-> On Mon, Feb 19, 2018 at 2:51 AM, Pierre Rudloff <pierre@rudloff.pro> wrote:
->> Hello,
->>
->> I'm trying to build AsteroidOS, an OpenEmbedded distribution that depends on
->> meta-qt5 and "bitbake qtbase-native" complains that it can't find Perl.
->>
->> I do have Perl 5.24.1 installed (I'm using Debian 9.3) and I can see it in
->> build/tmp-glibc/hosttools/perl.
->>
->> I reported the error to AsteroidOS
->> (https://github.com/AsteroidOS/asteroid/issues/55) and QT
->> (https://bugreports.qt.io/browse/QTBUG-66467) but they suggested I ask here.
->>
->> Here is the full log:
->>>
->>> Loading cache: 100%
->>> |##########################################################################################################################################################|
->>> Time: 0:00:00
->>> Loaded 3046 entries from dependency cache.
->>> Parsing recipes: 100%
->>> |########################################################################################################################################################|
->>> Time: 0:00:06
->>> Parsing of 2240 .bb files complete (2225 cached, 15 parsed). 3060 targets,
->>> 308 skipped, 0 masked, 0 errors.
->>> NOTE: Resolving any missing task queue dependencies
->>>
->>> Build Configuration:
->>> BB_VERSION           = "1.36.0"
->>> BUILD_SYS            = "x86_64-linux"
->>> NATIVELSBSTRING      = "debian-9"
->>> TARGET_SYS           = "arm-oe-linux-gnueabi"
->>> MACHINE              = "tetra"
->>> DISTRO               = "asteroid"
->>> DISTRO_VERSION       = "alpha-1.0"
->>> TUNE_FEATURES        = "arm armv7ve vfp thumb neon callconvention-hard"
->>> TARGET_FPU           = "hard"
->>> meta-qt5             = "5.10:0924e7a15d9ce36ef1869175cae3738071bd9edb"
->>> meta                 = "rocko:abc7fbab2c125b247f3274ca4b29e4f858b5ae12"
->>> meta-asteroid        = "master:3c49fd588bf8743cc93e5e88edba1ffb02602b1d"
->>> meta-oe              meta-multimedia      meta-gnome
->>> meta-networking      = "rocko:a65c1acb1822966c3553de9fc98d8bb6be705c4e"
->>> meta-android         = "rocko:4dc893c799951d8a9418860a6db9b3b7eed7bb49"
->>> meta-python          meta-filesystems     =
->>> "rocko:a65c1acb1822966c3553de9fc98d8bb6be705c4e"
->>> meta-anthias-hybris  = "master:7e45263168efcb1696732b70204bd4fc6113c8d6"
->>> meta-sparrow-hybris  = "master:55f5c9daf3e8e0797d9f49312e71e245f010fbe6"
->>> meta-sprat-hybris    = "master:e64adbc6db63f7f1a90f0bdfaf8db123c3ac4a02"
->>> meta-tetra-hybris    = "master:014b3436b930831dfaa5dd37510ebe7ac4944325"
->>> meta-bass-hybris     = "master:248c7d5431ee2b540edbd5828ee125947f6b0de5"
->>> meta-dory-hybris     = "master:cfa0f5c1c92dece99060c96da06f422c519a6d0b"
->>> meta-lenok-hybris    = "master:462f80f0c45c8fdb4c37f943fbe8e3145324f8b8"
->>> meta-swift-hybris    = "master:afd2e55dd62ef154e07afe66ee49418b51338314"
->>> meta-wren-hybris     = "master:ef7d856fa95791bc03190ad2db704490c4ef96b1"
->>>
->>> Initialising tasks: 100%
->>> |#####################################################################################################################################################|
->>> Time: 0:00:00
->>> NOTE: Executing SetScene Tasks
->>> NOTE: Executing RunQueue Tasks
->>> ERROR: qtbase-native-5.10.1+gitAUTOINC+6c6ace9d23-r0 do_configure:
->>> Configuring qt failed. PACKAGECONFIG_CONFARGS was      -sysroot
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native
->>> -no-gcc-sysroot     -system-zlib     -qt-pcre     -no-libjpeg     -no-libpng
->>> -no-gif     -no-accessibility     -no-cups     -no-gui     -no-qml-debug
->>> -no-sql-mysql     -no-sql-sqlite     -no-opengl     -no-openssl     -no-xcb
->>> -no-icu     -verbose     -release     -prefix
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
->>> -hostprefix
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
->>> -bindir
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
->>> -hostbind
->>
->> ir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
->> -libdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
->> -hostlibdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
->> -headerdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/include
->> -archdatadir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
->> -datadir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share
->> -hostdatadir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/
->> 5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib     -docdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share/doc
->> -sysconfdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/etc
->> -no-glib     -no-iconv     -silent     -nomake examples     -nomake tests
->> -no-rpath     -no-feature-linkat     -platform linux-oe-g++
->>>
->>> ERROR: qtbase-native-5.10.1+gitAUTOINC+6c6ace9d23-r0 do_configure:
->>> Function failed: do_configure (log file is located at
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/temp/log.do_configure.6022)
->>> ERROR: Logfile of failure stored in:
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/temp/log.do_configure.6022
->>> Log data follows:
->>> DEBUG: Executing shell function qmake5_base_preconfigure
->>> DEBUG: Shell function qmake5_base_preconfigure finished
->>> DEBUG: Executing shell function do_configure
->>> Performing shadow build...
->>> Preparing build tree...
->>> You need perl in your PATH to make a build from GIT.
->>> Cannot proceed.
->>> ERROR: Configuring qt failed. PACKAGECONFIG_CONFARGS was      -sysroot
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native
->>> -no-gcc-sysroot     -system-zlib     -qt-pcre     -no-libjpeg     -no-libpng
->>> -no-gif     -no-accessibility     -no-cups     -no-gui     -no-qml-debug
->>> -no-sql-mysql     -no-sql-sqlite     -no-opengl     -no-openssl     -no-xcb
->>> -no-icu     -verbose     -release     -prefix
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
->>> -hostprefix
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr
->>> -bindir
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
->>> -hostbindir /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-lin
->>
->> ux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/bin
->> -libdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
->> -hostlibdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
->> -headerdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/include
->> -archdatadir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/lib
->> -datadir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share
->> -hostdatadir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/li
->> b     -docdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/usr/share/doc
->> -sysconfdir
->> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/recipe-sysroot-native/etc
->> -no-glib     -no-iconv     -silent     -nomake examples     -nomake tests
->> -no-rpath     -no-feature-linkat     -platform linux-oe-g++
->>>
->>> WARNING: exit code 1 from a shell command.
->>> ERROR: Function failed: do_configure (log file is located at
->>> /home/pierre/www/asteroid/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.10.1+gitAUTOINC+6c6ace9d23-r0/temp/log.do_configure.6022)
->>> ERROR: Task
->>> (/home/pierre/www/asteroid/src/meta-qt5/recipes-qt/qt5/qtbase-native_git.bb:do_configure)
->>> failed with exit code '1'
->>> NOTE: Tasks Summary: Attempted 118 tasks of which 117 didn't need to be
->>> rerun and 1 failed.
->>> Summary: 1 task failed:
->>>
->>> /home/pierre/www/asteroid/src/meta-qt5/recipes-qt/qt5/qtbase-native_git.bb:do_configure
->>> Summary: There were 2 ERROR messages shown, returning a non-zero exit
->>> code.
->>
->>
->> I also tried building a very minimalist i586-oe-linux distribution requiring
->> only meta-qt5 and I get the same error.
->> Do you know what could cause this?
->>
->> Regards,
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc
+new file mode 100644
+index 0000000..10ee5bc
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Gstreamer Daemon 1.0"
++SUMMARY = "GStreamer framework for controlling audio and video streaming using TCP connection messages"
++HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=Gstd-1.0"
++SECTION = "multimedia"
++LICENSE = "GPLv2+"
++
++DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstreamer1.0-rtsp-server json-glib libdaemon"
++
++SRCBRANCH ?= "master"
++SRCREV = "097a086a8606dcb368c7d38c7ec4fefc2497401b"
++SRC_URI = "git://git@github.com/RidgeRun/gstd-1.x.git;protocol=https;branch=${SRCBRANCH} \
++	   file://0001-gstd-yocto-compatibility.patch"
++
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG_CONFARGS = " \
++	--disable-gtk-doc \
++"
++
++inherit autotools pkgconfig gettext
++
++do_configure() {
++${S}/autogen.sh
++oe_runconf
++}
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
+new file mode 100644
+index 0000000..ddc1831
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
+@@ -0,0 +1,63 @@
++From eaf51d6420c63713f62025583681007c3502d387 Mon Sep 17 00:00:00 2001
++From: Carlos <carlos.rodriguez@ridgerun.com>
++Date: Fri, 15 Dec 2017 10:14:05 -0600
++Subject: [PATCH] gstd:yocto compatibility
++
++---
++ autogen.sh                      | 8 +++++++-
++ docs/reference/gstd/Makefile.am | 2 +-
++ gstd/Makefile.am                | 2 +-
++ 3 files changed, 9 insertions(+), 3 deletions(-)
++
++diff --git a/autogen.sh b/autogen.sh
++index 66dbd42..793ee2f 100755
++--- a/autogen.sh
+++++ b/autogen.sh
++@@ -21,7 +21,11 @@
++ # ACLOCAL, AUTOPOINT and/or LIBTOOLIZE to the right versions, or leave them
++ # unset and get the defaults
++ 
++-gtkdocize || exit 1
+++test -n "$srcdir" || srcdir=`dirname "$0"`
+++test -n "$srcdir" || srcdir=.
+++
+++olddir=`pwd`
+++cd "$srcdir"
++ 
++ autoreconf --verbose --force --install || {
++  echo 'autogen.sh failed';
++@@ -31,3 +35,5 @@ autoreconf --verbose --force --install || {
++ echo
++ echo "Now run './configure' with your system settings followed by 'make' to compile this module."
++ echo
+++
+++cd "$olddir"
++diff --git a/docs/reference/gstd/Makefile.am b/docs/reference/gstd/Makefile.am
++index f860fa1..153a13b 100644
++--- a/docs/reference/gstd/Makefile.am
+++++ b/docs/reference/gstd/Makefile.am
++@@ -66,7 +66,7 @@ GTKDOC_LIBS=$(top_builddir)/gstd/libgstd-core.la
++ 
++ 
++ # This includes the standard gtk-doc make rules, copied by gtkdocize.
++-include $(top_srcdir)/docs/gtk-doc.make
+++# include $(top_srcdir)/docs/gtk-doc.make
++ 
++ # Comment this out if you want 'make check' to test you doc status
++ # and run some sanity checks
++diff --git a/gstd/Makefile.am b/gstd/Makefile.am
++index 13c551d..11fe202 100644
++--- a/gstd/Makefile.am
+++++ b/gstd/Makefile.am
++@@ -49,7 +49,7 @@ bin_PROGRAMS = gstd
++ 
++ gstd_SOURCES = gstd.c
++ gstd_CFLAGS = $(GST_CFLAGS) $(GIO_CFLAGS) $(GJSON_CFLAGS)
++-gstd_LDFLAGS = $(GST_LIBS) $(GIO_LIBS) $(GJSON_LIBS) -Wl,-rpath -Wl,$(libdir)
+++gstd_LDFLAGS = $(GST_LIBS) $(GIO_LIBS) $(GJSON_LIBS)
++ gstd_LDADD = libgstd-core.la
++ 
++ gstdincludedir = $(includedir)/gstd
++-- 
++1.9.1
++
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
+new file mode 100644
+index 0000000..94f6b57
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
+@@ -0,0 +1,3 @@
++require gstd.inc
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-- 
+1.9.1
+
 
