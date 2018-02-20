@@ -1,50 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
-	[209.85.128.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B66671A6B
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
+	[209.85.214.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 650D478852
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 10:05:18 +0000 (UTC)
-Received: by mail-wr0-f178.google.com with SMTP id m5so12630904wrg.1
+	Tue, 20 Feb 2018 10:45:34 +0000 (UTC)
+Received: by mail-it0-f52.google.com with SMTP id l129so8233212ita.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 02:05:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JdWnbT0E9CAgfF0tPhZjvK22pvYqffuqlpqsPW+sSEc=;
-	b=eACQPwWaFoyfn2AHztWgBpai3GszrXC9G1m7cvNjmsBOBoTri0pXXn7R/g3beup5aT
-	WuNO4H23e6cluEahphuAUmOaNyqqklCXreh1QJmbYE+eLkYCgND/RIC31AfjTVev1kF6
-	aDP96fWHEGms5JHflvAoX+VhRDY+PkZSCLWVA4Da684pf1Dmfp3ptj4NXTtCkFDgAZ5V
-	wM3ST4EEopdnPucG7KgVPDpIvI2OZFazKeJRxA3FK5cZu2DFv1tdavqhQeChMWxYft5f
-	D82g/tKeIoJ8wUO6GZn3jvBKZ5p3j4gHZey3fXxR0Cix9lbTLGO3S41SpAG2TSUA9VjZ
-	TqWw==
+	Tue, 20 Feb 2018 02:45:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=yCuoYhE9AtofzEtTGAlHo4l7DdbyEzT4MS5+bAfrGQQ=;
+	b=RgnU/7tHaQPYHt9sFYmXrzX0ZE2v4dditaSe7Xy15sJa6kvhOLy1J3UlQj8cec7YWh
+	7uIsSdkbyhPKcG6EpxPM+meFGfz1JaytkG5sP2MhOosNy4dx7qJM52COZJyHO0iA5dY3
+	UZ56b0lSQD4AoCeSUWzao6r2SyECLLq4Dt3WEI4LnluGZda9XRl09uWSZbqbEEOxuSJu
+	x8eWUg6t5Udab7sahWTRopIvz6OTcRoJ/8pIETz+NYocyBa2CPioCskukAQLhhVMusPB
+	zgKeHweYo2k1KG0y10pSPNcTe16VoWSmbUmFoEi9dNocMyB25NH44eTvVbUoOrBEz6m1
+	iO1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JdWnbT0E9CAgfF0tPhZjvK22pvYqffuqlpqsPW+sSEc=;
-	b=R+/6RgPF94VsXN4U7thLX8qNp6cKWSHNQjPSpCC/RgrCqz0vcdmnRvWfSLZy82xxb9
-	DzGX8Ew/dmG0BKP5ctMdjJ9y83paHHTS/ek3HPiP2t19FfpUN1gp2cBzH1UhNyXOWqdT
-	H7nHtbQKwUYKMCFNAH4+QWwpBmRuwuSKHLpizCpnRVHMj3c9TRoPUljQt8ymj8KPnCYs
-	XV7J5i0MQZfJwlfwbP2XsqKrm0z5e6NavHPFB5Xvpaiy5WVthm+3ANkNE68aABzFPwOw
-	4WeXCkR/f2pCLe/vRiSMYAO5AuwTwoVpplfVHSczPUARV3d/MM7c2/WSlI0DcR9XBGz2
-	L2+g==
-X-Gm-Message-State: APf1xPC0LqvDk1MqHtLM/RtFXpg+5Pf3QgJSCR7Pd2+5q2q0GRa6y+lG
-	mszIq9Ujzk/mHOcW6xEzim3Huq43D7CRO+B5HmCw/A==
-X-Google-Smtp-Source: AH8x225SjkvUHCd3eqU3Nr65+xFvcmfFjxW3xtxGMOwa4lFUuBlh7smuZausQCvxRPJBcetQp3YMFh6ix7UJ8IwfWnU=
-X-Received: by 10.223.161.77 with SMTP id r13mr15466788wrr.230.1519121119781; 
-	Tue, 20 Feb 2018 02:05:19 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=yCuoYhE9AtofzEtTGAlHo4l7DdbyEzT4MS5+bAfrGQQ=;
+	b=o2v/pLF9VW75WQ1X6pWexFdEXk6kHjMX1upHEfJRe0RmA1GxNt64m4we9OO168P481
+	kVaLmPWxyQpE3EIIII4kZjayfivs0H5Q1uYgyjWWi9lAjdG6v8dYGHWKjmt06mmM0OJD
+	dsoiRlWw9l/A+xZt53COPXSIi3SdkTQuMR3bT4W3ojHtFaVuXyt3941oRFKfvcXjHEYM
+	Y6ZQSf4OlBC+Wh6Xm3Qri4jXUJJiF7Xr9dcb47/qnbJYLQIzUS1CWskjZoMZWdP9alof
+	Ov2W0UkTsMDAPMOh3gVks6zCdrhNHI1gv0ipiOFzcRgpnpCKhzHKAzffsnd7/SCxBq3O
+	lbJw==
+X-Gm-Message-State: APf1xPBkVc+dA0Q7vlHqZtKkNHaXGMjom8sOSahmHBvHvZZbrJ9uBg8s
+	urLhJqlpVXlbVETbIthD7k3sZuStBvwMd+Z0FsQDtg==
+X-Google-Smtp-Source: AH8x225Z6NertCWCaoq6DaWyWbC8IerHRwq/T6G4K7CorGdMj0YIYsZjMSa1QPjo/N3ADjqAdhkVGaGBDEnSg0gAxq4=
+X-Received: by 10.36.144.68 with SMTP id x65mr23575752itd.60.1519123535554;
+	Tue, 20 Feb 2018 02:45:35 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Tue, 20 Feb 2018 02:05:18 -0800 (PST)
-In-Reply-To: <B2794334-CD7F-4E09-9E3B-51AB564E3A04@qt.io>
-References: <1519030401-9299-1-git-send-email-kwangsub.kim@qt.io>
-	<CA+chaQfbgo2cG1zJ+UmBRWGaKu6vUy4Kod7SSOZk7=ZhjzF5SQ@mail.gmail.com>
-	<B2794334-CD7F-4E09-9E3B-51AB564E3A04@qt.io>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 20 Feb 2018 11:05:18 +0100
-Message-ID: <CA+chaQffOATO2cZbZBR5u=YSO6T74icL7W2hA88bZ0SwX25rAA@mail.gmail.com>
-To: Kwangsub Kim <kwangsub.kim@qt.io>
+Received: by 10.107.17.200 with HTTP; Tue, 20 Feb 2018 02:45:15 -0800 (PST)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 20 Feb 2018 10:45:15 +0000
+Message-ID: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v2] qtbase: add a config option to optimize for size
+Subject: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,120 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2018 10:05:19 -0000
+X-List-Received-Date: Tue, 20 Feb 2018 10:45:34 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-that's not what is wrong with this.
+Is now a good time to talk about splitting up meta-oe?  Some layers are
+actively developed and maintained (one example: meta-python), others are
+basically bitrotting and only get touched when something else causes them
+to break world builds (one example: meta-gnome).  I've long felt that
+meta-oe should be split up and the high quality layers managed in their own
+repositories so patches to them don't get held up by breakage in other
+sub-layers.
 
-What you're doing is:
-PACKAGECONFIG[optimize-size] =3D "-optimize-size,-optimize-size"
-when -Os is enabled and
-PACKAGECONFIG[optimize-size] =3D "-optimize-size"
-when it isn't but, that's not how PACKAGECONFIG is used by any sane person.
+Another advantage of splitting out the high quality layers is that we'd
+like to look at running more community layers through the Yocto
+autobuilder, and granular layers make that easier to manage.
 
-What you should do is to keep:
-PACKAGECONFIG[optimize-size] =3D "-optimize-size"
+Comments?
 
-as it was and add:
-${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Os', 'optimize-size', '',
-d)}
-in default PACKAGECONFIG variable (search "PACKAGECONFIG ?=3D " \", or you
-can add it to PACKAGECONFIG_DEFAULT variable).
-
-Regards,
-
-On Tue, Feb 20, 2018 at 8:39 AM, Kwangsub Kim <kwangsub.kim@qt.io> wrote:
-
-> Hi Martin,
->
->
->
-> Thanks for your feedback.
->
-> I failed to find a right way to add the inline function. That=E2=80=99s w=
-hy I
-> added new variable. I tried to update like below but it caused a syntax
-> error. The function (bb.utils.contains) was not evaluated and just copied
-> as a string. Could you kindly advise me to fix this?
->
->
->
-> PACKAGECONFIG[optimize-size] =3D "-optimize-size,${@bb.utils.
-> contains('SELECTED_OPTIMIZATION', '-Os', '-optimize-size', '', d)}"
->
->
->
-> Best regards,
->
-> Kwangsub
->
->
->
-> *From: *Martin Jansa <martin.jansa@gmail.com>
-> *Date: *Monday, 19 February 2018 at 9:07 PM
-> *To: *Kwangsub Kim <kwangsub.kim@qt.io>
-> *Cc: *openembedded-devel <openembedded-devel@lists.openembedded.org>
-> *Subject: *Re: [oe] [meta-qt5][PATCH v2] qtbase: add a config option to
-> optimize for size
->
->
->
-> This doesn't make sense.
->
->
->
-> Leave PACKAGECONFIG[optimize-size] as it was in v2 and add
-> ${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Os', 'optimize-size', '',
-> d)} to default PACKAGECONFIG value.
->
->
->
->
->
-> On Mon, Feb 19, 2018 at 9:53 AM, Kwangsub Kim <kwangsub.kim@qt.io> wrote:
->
-> The '-optimize-size' option would enable the compiler to optimize
-> for size instead of speed. If the global compiler option already
-> included '-Os', this option would be enabled by default.
->
-> It would affect the whole Qt libraries and Qt applications as well.
-> This feature is available in Qt 5.9+.
->
-> Signed-off-by: Kwangsub Kim <kwangsub.kim@qt.io>
-> ---
->  recipes-qt/qt5/qtbase_git.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index 4f3ade2..208a755 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -147,6 +147,9 @@ PACKAGECONFIG[widgets] =3D "-widgets,-no-widgets"
->  PACKAGECONFIG[libproxy] =3D "-libproxy,-no-libproxy,libproxy"
->  PACKAGECONFIG[libinput] =3D "-libinput,-no-libinput,libinput"
->  PACKAGECONFIG[journald] =3D "-journald,-no-journald,systemd"
-> +PACKAGECONFIG[optimize-size] =3D "-optimize-size,${QT_DEFAULT_
-> OPTIMIZATION_FOR_SIZE}"
-> +
-> +QT_DEFAULT_OPTIMIZATION_FOR_SIZE =3D "${@bb.utils.contains('SELECTED_OPT=
-IMIZATION',
-> '-Os', '-optimize-size', '', d)}"
->
->  QT_CONFIG_FLAGS_GOLD =3D "${@bb.utils.contains('DISTRO_FEATURES',
-> 'ld-is-gold', '-use-gold-linker', '-no-use-gold-linker', d)}"
->  QT_CONFIG_FLAGS +=3D " \
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
+Ross
 
