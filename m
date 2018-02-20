@@ -1,57 +1,32 @@
-Return-Path: <dachaac@gmail.com>
-Received: from mail-lf0-f51.google.com (mail-lf0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 7160B7780A
+Return-Path: <pn@denx.de>
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id A2E8078745
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 16:55:10 +0000 (UTC)
-Received: by mail-lf0-f51.google.com with SMTP id v9so5130830lfa.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 08:55:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=K1euFDsKwbDQNO9eHb15BIVNuGwuJ8kdRxwym0qsPiU=;
-	b=sI71TFhdiSRcK84Q6p4NU75h7gkXVSp7QAoX8XrH2VggmyQhbc1K4V2lYSM9CxM63J
-	kgiFG8Q1d6AVSlhbc4x6m0hzTltl1nQ3+1VlP6wDTX7MBh3taGNcRCsOvR0uyCzhhMj/
-	TfjhEKjmVP+kt30IR6IY1ApnX8y0p9aCwf9/L5PdCyGD7MyrtNV68GrYq+0kQpetw4Hx
-	mfIsoOPeWvuSBSWWgFFcMzny9m1WtfOwmTbYL6oQazXNYILj8Io0Ukaj2053WnSelrjc
-	QYFHY9Ff4r01ZP27gQB3bOXW58vNGy1nbnxcbraH8Q3Szphc7vCHdkyBZtg4qXmOIPTR
-	swcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=K1euFDsKwbDQNO9eHb15BIVNuGwuJ8kdRxwym0qsPiU=;
-	b=H2gRXuefSwO/AmZYBUkTLhoOfXImXeZpBct3n2bvYxfKxrQMIBQESWdDO4uIrrQ6BA
-	e69t5cAe+U8PQabqIgWx2MBVfzdnWQBDAeQZlPNLwgoYZcAjvVm/rMQqAVZ5wgONsEJ2
-	cDNA0EmkF0qoVR9hSOR4QwxSRZdCGWGGlhRS20hKmSaDH+Fv1Wn9nrXzSbMxRjpjtDSW
-	OszsEhI8C38FDUVS8LKVLA+l2zaFmhPJ/Gqz4WzRiTc/nuuhD6XAwF+gBpe75qmvYBkG
-	YrgOJhBwwGAOvtQbkur9O7JEK9hAcuYOE5/FwyGmaVh537qwSj4LD8fyCaVtCMwFTmKM
-	SKhg==
-X-Gm-Message-State: APf1xPCNOKiEuG870chYNQysao1iw3fdWRYLIOKsozqSI+YTNpfQnscK
-	TKDaktu2uBId6ZYVMpis6rA+iQ==
-X-Google-Smtp-Source: AH8x224xkcopbhQCIssvNRLBZGDxyE8KC38/KPmaoP+2XDdMiPEY3nrpayCAP+rKP9aVTh8FdXT7/w==
-X-Received: by 10.25.56.22 with SMTP id f22mr184600lfa.109.1519145710561;
-	Tue, 20 Feb 2018 08:55:10 -0800 (PST)
-Received: from ?IPv6:2001:14ba:806b:f800:d18f:4ece:351c:9de1?
-	(dtb1-tyhvv9jp8qk8x3tt-3.rev.dnainternet.fi.
-	[2001:14ba:806b:f800:d18f:4ece:351c:9de1])
-	by smtp.googlemail.com with ESMTPSA id
-	p77sm3321715lje.56.2018.02.20.08.55.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Feb 2018 08:55:09 -0800 (PST)
+	Tue, 20 Feb 2018 17:04:59 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 3zm6Rw216cz1r19k;
+	Tue, 20 Feb 2018 18:05:00 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+	by mail.m-online.net (Postfix) with ESMTP id 3zm6Rw1XP8z1qqkQ;
+	Tue, 20 Feb 2018 18:05:00 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+	port 10024)
+	with ESMTP id zrGnUOmq3FyS; Tue, 20 Feb 2018 18:04:59 +0100 (CET)
+X-Auth-Info: uubYLEHp8PlSAMzfk4JHdSVXw5e0dmR1XBlaCsMkwpM=
+Received: from xpert.denx.de (unknown [62.91.23.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTPSA;
+	Tue, 20 Feb 2018 18:04:59 +0100 (CET)
+From: Parthiban Nallathambi <pn@denx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
-From: =?UTF-8?B?VmVzYSBKw6TDpHNrZWzDpGluZW4=?= <dachaac@gmail.com>
-Message-ID: <c9fb6fbe-93d5-8638-b504-d3dd2d6fdf0b@gmail.com>
-Date: Tue, 20 Feb 2018 18:54:35 +0200
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
-	Gecko/20100101 Thunderbird/52.6.0
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
-Subject: Re: Splitting meta-oe?
+Date: Tue, 20 Feb 2018 18:04:43 +0100
+Message-Id: <20180220170444.10057-1-pn@denx.de>
+X-Mailer: git-send-email 2.14.3
+Cc: lusus@denx.de, ch@denx.de
+Subject: [PATCH] nodejs: Remove unreferenced patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,40 +39,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2018 16:55:10 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 20 Feb 2018 17:05:00 -0000
 
-On 20/02/2018 12.45, Burton, Ross wrote:
-> Hi,
->
-> Is now a good time to talk about splitting up meta-oe?  Some layers are
-> actively developed and maintained (one example: meta-python), others are
-> basically bitrotting and only get touched when something else causes them
-> to break world builds (one example: meta-gnome).  I've long felt that
-> meta-oe should be split up and the high quality layers managed in their own
-> repositories so patches to them don't get held up by breakage in other
-> sub-layers.
->
-> Another advantage of splitting out the high quality layers is that we'd
-> like to look at running more community layers through the Yocto
-> autobuilder, and granular layers make that easier to manage.
->
-> Comments?
->
-> Ross
-Other related problem to meta layer management is that should there be 
-recommended scheme for meta layer priority usage. Now they are a bit 
-randomly used in different layers as there is no guidance what priority 
-should be used for what purpose.
+From: Jonathan Liu <net147@gmail.com>
 
-Eg. what should in-house layers use so that they fit properly in scheme 
-and does not conflict with layer X that can be found from github.
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...isable-running-gyp-files-for-bundled-deps.patch | 29 -----------
+ .../nodejs/nodejs/no-registry.patch                | 59 ----------------------
+ 2 files changed, 88 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch
 
-Eg. we had to once re-base our layer priorities due to conflicts in 
-priorities.
+diff --git a/meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
+deleted file mode 100644
+index 324a4683d..000000000
+--- a/meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From c2aff16cc196a61f4ab1cdae4a91c7926123c239 Mon Sep 17 00:00:00 2001
+-From: Zuzana Svetlikova <zsvetlik@redhat.com>
+-Date: Thu, 27 Apr 2017 14:25:42 +0200
+-Subject: [PATCH] Disable running gyp on shared deps
+-
+----
+- Makefile | 7 +++----
+- 1 file changed, 3 insertions(+), 4 deletions(-)
+-
+-diff --git a/Makefile b/Makefile
+-index 0a217bd893..e1229ad07f 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -79,10 +79,9 @@ $(NODE_G_EXE): config.gypi out/Makefile
+- 	$(MAKE) -C out BUILDTYPE=Debug V=$(V)
+- 	if [ ! -r $@ -o ! -L $@ ]; then ln -fs out/Debug/$(NODE_EXE) $@; fi
+- 
+--out/Makefile: common.gypi deps/uv/uv.gyp deps/http_parser/http_parser.gyp \
+--              deps/zlib/zlib.gyp deps/v8/gypfiles/toolchain.gypi \
+--              deps/v8/gypfiles/features.gypi deps/v8/src/v8.gyp node.gyp \
+--              config.gypi
+-+out/Makefile: common.gypi deps/http_parser/http_parser.gyp \
+-+              deps/v8/gypfiles/toolchain.gypi deps/v8/gypfiles/features.gypi \
+-+			  deps/v8/src/v8.gyp node.gyp config.gypi
+- 	$(PYTHON) tools/gyp_node.py -f make
+- 
+- config.gypi: configure
+--- 
+-2.12.2
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch b/meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch
+deleted file mode 100644
+index ed2473897..000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch
++++ /dev/null
+@@ -1,59 +0,0 @@
+-Bugfix for --no-registry in nodejs-v0.12.2
+-
+-diff -u -r node-v0.12.2_def/deps/npm/lib/cache/caching-client.js node-v0.12.2/deps/npm/lib/cache/caching-client.js
+---- node-v0.12.2_def/deps/npm/lib/cache/caching-client.js	2015-04-01 01:13:01.000000000 +0300
+-+++ node-v0.12.2/deps/npm/lib/cache/caching-client.js	2015-05-18 00:47:10.738599686 +0300
+-@@ -67,6 +67,22 @@
+-   var cacheBase = cacheFile(npm.config.get("cache"))(uri)
+-   var cachePath = path.join(cacheBase, ".cache.json")
+- 
+-+  if (parsed.host === "noregistry") (function() {
+-+    var stat = null
+-+    var file = npm.config.get("cache") + parsed.pathname + "/.cache.json"
+-+    try {
+-+      stat = fs.statSync(cachePath)
+-+    } catch (ex) {}
+-+    if (!stat) try {
+-+      stat = fs.statSync(file) 
+-+      cachePath = file
+-+    } catch (ex) {
+-+      stat = "Registry not defined and registry files not found: \"" +
+-+             cachePath + "\", \"" + file + "\"."
+-+      throw new Error(stat)
+-+    }
+-+  })()
+-+
+-   // If the GET is part of a write operation (PUT or DELETE), then
+-   // skip past the cache entirely, but still save the results.
+-   if (uri.match(/\?write=true$/)) {
+-@@ -83,12 +99,17 @@
+-         }
+-         catch (ex) {
+-           data = null
+-+          if (parsed.host === "noregistry")
+-+            throw new Error("File \"" + cachePath+"\"" + " corrupted.")
+-         }
+- 
+-         params.stat = stat
+-         params.data = data
+- 
+--        get_.call(client, uri, cachePath, params, cb)
+-+        if (parsed.host === "noregistry")
+-+          cb(null, data, JSON.stringify(data), { statusCode : 304 })
+-+        else
+-+          get_.call(client, uri, cachePath, params, cb)
+-       })
+-     }
+-     else {
+-diff -u -r node-v0.12.2_def/deps/npm/lib/utils/map-to-registry.js node-v0.12.2/deps/npm/lib/utils/map-to-registry.js
+---- node-v0.12.2_def/deps/npm/lib/utils/map-to-registry.js	2015-04-01 01:13:01.000000000 +0300
+-+++ node-v0.12.2/deps/npm/lib/utils/map-to-registry.js	2015-05-18 01:15:10.030569613 +0300
+-@@ -45,6 +45,8 @@
+- 
+-   log.silly("mapToRegistry", "registry", registry)
+- 
+-+  if (!registry) return cb(null, "http://noregistry/" + name, {})
+-+
+-   var auth = config.getCredentialsByURI(registry)
+- 
+-   // normalize registry URL so resolution doesn't drop a piece of registry URL
+-- 
+2.14.3
 
-Thanks,
-Vesa Jääskeläinen
 
