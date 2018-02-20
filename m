@@ -1,25 +1,49 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 694BC77D01
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id AAFB778771
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 17:46:57 +0000 (UTC)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
-	w1KHkpiK026061
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
-	verify=NOT); Tue, 20 Feb 2018 17:46:52 GMT
-Message-ID: <1519148811.24236.321.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: akuster808 <akuster808@gmail.com>, "Burton, Ross" <ross.burton@intel.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 Feb 2018 17:46:51 +0000
-In-Reply-To: <f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+	Tue, 20 Feb 2018 18:00:21 +0000 (UTC)
+Received: by mail-ua0-f177.google.com with SMTP id z3so8897688uae.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Feb 2018 10:00:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=MObDl9Vx2pyvnxLfk4bs6mHvpA0iopUmDRmNFYKHXn4=;
+	b=U4crBbX+4YZ2SQTJBJ3IKQh/dGkzlnDYi5dik3mplBkA4HuUZMpU91QXn18QdFiyo2
+	bYjhkkgK+5wgI4RzHKjRKGvl6RFlKmHTDjZufj3CkGhYKvxWW1GM4ljyuNyhPR7PaS4/
+	GUZGKoOEuEI5cmWB/oD0T9iO133LckJCw/UBYCulDw3ahA78l4y7h4IfUwr3H+i55zrf
+	rHo1iOhuvTJX7hNsOMv8TyCmFTFvA9WB30NRehPNSZPdJX+wljS1GJEs/cLyDAYfOe7U
+	3+pQzx8T/eao8PrZ+DRMczRw4v4g4lPjyveXpmLJvjGjgHTwrZ+8XfpNjBbIk25rQRZB
+	2bkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=MObDl9Vx2pyvnxLfk4bs6mHvpA0iopUmDRmNFYKHXn4=;
+	b=Aas6EAL61/o4nMXAsSXUIVXfogDBNx7Ww8IZKB03cC8ohuvVSv3BEaMlsR8TwiyXuC
+	JTFmchlPOrNDepHVYRs2jkd6lKpqE3ZGGMYavwBEysk1XX6GoqEEhvHBKflsD60Qazyn
+	L68cgXtwvLj+aLz0oRltZZamFhGT9PQeguJxSqNTXSBp/rifp2Dxa0f72gynzW5es5cK
+	XRZ9wv1S3ciYybqMoXjtFKCCtdz3IJ/pP70rvu6pf0vOzkKM3BWQaTjjF2kDkBTTVV6g
+	ue+oIdIosthl0hbK8ht1rUaePz6KnfGoHHcPdjT7ofAWlCS/p9pVV8vK7GkymS5X6teM
+	MJlA==
+X-Gm-Message-State: APf1xPCKPsTBhlceoCDX7uHjsSPCgvo36CgTjRqtkhbz52fF8HNaIecM
+	sNDb3wmkFxhFs4AUb0hjugSlC+8mZulNIUNYg+g=
+X-Google-Smtp-Source: AH8x227bp62Y5CP23Ra5AegDzMNwxSKKU2D7rpM4ScfmMaigYbVkghgj6J/HCUtkEhGGrTn+h4VZTF7a0+hfLACFPnc=
+X-Received: by 10.176.82.75 with SMTP id j11mr408548uaa.86.1519149622463; Tue,
+	20 Feb 2018 10:00:22 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.31.168.136 with HTTP; Tue, 20 Feb 2018 10:00:22 -0800 (PST)
+In-Reply-To: <1519148811.24236.321.camel@linuxfoundation.org>
 References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
 	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
-Mime-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.99.3 at dan
-X-Virus-Status: Clean
+	<1519148811.24236.321.camel@linuxfoundation.org>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Tue, 20 Feb 2018 10:00:22 -0800
+Message-ID: <CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -33,64 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2018 17:46:59 -0000
+X-List-Received-Date: Tue, 20 Feb 2018 18:00:21 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 
-Repositories have reputations. OE-Core is fairly heavily curated and
-tested and has certain "guarantees" about what people can expect to
-work. The meta-oe repo is a little trickier as the different pieces do
-have different 'SLA's (service level agreements). Some pieces like
-meta-networking/meta-python likely build well, other pieces like some
-of the bitrotting pieces of the meta-oe layer probably don't build in
-as many different configurations/architectures and on balance may be
-more likely to hit issues.
+The recent improvements to the Auto Upgrade Helper have made maintenance of
+meta-perl less effort and therefore you have seen an uptick in my updates
+to recipes. I also plan to mass-add ptest to all perl module recipes
+"sometime soon", which will further simplify my upgrade workflow and add to
+the confidence of said recipes. My upgrade workflow touches all recipes in
+oe-core, meta-oe and meta-perl that fit a lib*perl regex.
 
-I think the world may need to change a bit. We should probably change:
+I will note, however, that we are revisiting meta-cpan and that may
+ultimately be the preferred perl layer. If you really heavily on perl
+modules, please comment on whether meta-cpan would fit your needs.
 
-* The way people get started with the Yocto Project and Poky
-  to move away from the combo repo and into specific layers.
-* to have YP testing more layers as part of its builds and testing
-* to make it easier for people to establish an SLA type reputation for 
-  a layer.
+Derek and others have been doing a great job keeping meta-python up to
+date. I mostly jump in when there are trickier failures that need more
+concentrated effort. I would like to see increased testing (more packages
+with ptest), but that is trickier with python recipes as there are many
+more approaches to testing than there are in perl. I am happy with the
+current efforts to keep recipes up to date as a priority. I would like to
+see complete coverage of python3 for all recipes that are capable in
+meta-python.
 
-Part of this is a need for a more universal "using OE" later setup
-tooling. I've wanted to work on that for a while and I will get there
-but if I spend time on it, I want to get it right. I've not had enough
-time to get it right (as yet).
-
-Part of this means redefining poky, the YP autobuilders and so on.
-Pieces of the autobuilder work are in process and will lead to wider
-layer testing.
-
-I have strong influence over the above so I can likely make those
-happen, time constraints aside. One piece I need the help of others
-with is meta-oe (the repo).
-
-Even just splitting meta-oe out from meta-oe might be enough to
-establish the SLA differences, I don't know.
-
-There is a question about what problem would this solve. The move from
-OE-Classic was partly about defining maintainership and processes for
-recipes which we do with layers. The pieces in the separate layers have
-now become the things we set out to create but the catchall of meta-oe
-(the layer) remains. I do think we should still be aiming to filter
-meta-oe into distinct layers with distinct maintainership. There will
-always be some "leftovers" in a catchall but I think it does have a
-different personality to the other well separated components and we
-need to show to users that they do have different expectations from
-them.
-
-I hope I'm managing to convey this concept ok, I'm really trying to
-take a step back here and think what will help OE users and the project
-and where we need to go with things. I'm not saying we should/shouldn't
-do this for 100% certain, I do want people to think about the
-alternatives though and what options may be possible.
+I am open to discussion about what direction we go. Individual layers that
+are curated and built together by YP auto builders sounds like an
+intriguing path. If this was coupled with increased ptest or testimage
+usage, our confidence in layer quality would go up dramatically.
 
 Cheers,
 
-Richard
-
-
-
+--Tim
 
