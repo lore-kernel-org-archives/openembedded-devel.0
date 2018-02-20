@@ -1,32 +1,48 @@
-Return-Path: <pn@denx.de>
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A23A786D8
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D19517780A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 17:08:21 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 3zm6Wp2jfBz1qshf;
-	Tue, 20 Feb 2018 18:08:22 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 3zm6Wp2Khyz1qrrk;
-	Tue, 20 Feb 2018 18:08:22 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id 6u0Fw1mQGHjh; Tue, 20 Feb 2018 18:08:20 +0100 (CET)
-X-Auth-Info: Trke9tgGrA9u0rKKk1JbYSnHqN8qIBJeqzuzQTgoxRQ=
-Received: from xpert.denx.de (unknown [62.91.23.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Tue, 20 Feb 2018 18:08:20 +0100 (CET)
-From: Parthiban Nallathambi <pn@denx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Feb 2018 18:08:01 +0100
-Message-Id: <20180220170801.10922-1-pn@denx.de>
-X-Mailer: git-send-email 2.14.3
-Cc: lusus@denx.de, ch@denx.de
-Subject: [PATCH] nodejs: Update from 8.9.0 -> 8.9.4
+	Tue, 20 Feb 2018 17:13:42 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id q69so5217949lfi.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Feb 2018 09:13:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=xCPA4aD23fQ1FbOp+G3hceqT+KXoDv7gq5XtZBnM/Zk=;
+	b=HYUFeXlPii4p3NCdj1og1eTRyIfCGiXI5Iyu8K68NrSS2r0lOmzSB5Fn/FcU9gqtIH
+	cTznvP6QplhF274CIgO/wLZXZjjjGusFdQYS30ycM7Ug7NljBNIewvL1t2wcIMPl23ha
+	KG7+L1V3MEhhfrq3E+yBMpOubn3CA8gDBsidq3RSDrK3yGP5vXeIImXOeQwYru7OcliN
+	c6P+62dbuA0A036momwAA3fqOuo5InT2GSxa9GezFk1onVyTdWVVNWGAW1WNnpuvr52m
+	FtpgS5pVp/tbV3Geheo+zJMDLrj3GqYB9BuAmhk4/E0DtnZD87LZRLjSatLqIZROZYnR
+	JIsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=xCPA4aD23fQ1FbOp+G3hceqT+KXoDv7gq5XtZBnM/Zk=;
+	b=AWC07tywk1BwO9DX6IXjeMqEthhFjKReK1/PiteSvmFKeIIwJGvrQ9dJ2rlH2gaEER
+	cgZuoEb2qRR4HAvgwQrUWRFNkfyK8iQjYBNVoLbq9BbVfh9Zlb+2A78hKAbXwRmrWQ3g
+	k2QZ/6FgZrSaR42nxN2MjriMrLcVRc5+Xkl/ji7xIY5sOBtog9CVtfKWWWIef3zHjt/K
+	SZ7AgxXrWFMBHE+rc8VAkAC8lX/PvMnkdxYGdBAF/x+7FqDCf9A3zKsDrJZIqyO115Rk
+	RSO7XjThq3PmlqC3a1mGOzud+k0NfxLgCLM9/GDF1j0uacdIw1qM6BoYLM2xjH2Pbbn1
+	XHbw==
+X-Gm-Message-State: APf1xPArjGkK5xbTvqlgmmJYeSf+Y8tmhgtX2ECaWLc1H+6YC9bPB40T
+	zkYPqrNbEqz3BEL/XlvrHePQuMrrF1LWhmmA50s=
+X-Google-Smtp-Source: AH8x227D0bW3ZsgUI+BKpnRjGagt7qC8I/2wQq1EnhMlEwsWcbQroO7YTo4n94xEydqyIt9b4qxRBjeRA/T3YgCFSuA=
+X-Received: by 10.25.181.8 with SMTP id e8mr225921lff.94.1519146823328; Tue,
+	20 Feb 2018 09:13:43 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.46.48.4 with HTTP; Tue, 20 Feb 2018 09:13:42 -0800 (PST)
+In-Reply-To: <f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
+	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+Date: Tue, 20 Feb 2018 12:13:42 -0500
+Message-ID: <CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,44 +55,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2018 17:08:21 -0000
+X-List-Received-Date: Tue, 20 Feb 2018 17:13:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update nodejs to latest stable release 8.9.4
+On Tue, Feb 20, 2018 at 11:50 AM, akuster808 <akuster808@gmail.com> wrote:
+>
+>
+> On 02/20/2018 02:45 AM, Burton, Ross wrote:
+>> Hi,
+>>
+>> Is now a good time to talk about splitting up meta-oe?  Some layers are
+>> actively developed and maintained (one example: meta-python), others are
+>> basically bitrotting and only get touched when something else causes them
+>> to break world builds (one example: meta-gnome).  I've long felt that
+>> meta-oe should be split up and the high quality layers managed in their own
+>> repositories so patches to them don't get held up by breakage in other
+>> sub-layers.
+> You make it sound like meta-oe is not a high quality layer.  I could
+> make the same claim about oe-core master.
+>
+> I don't see the connection in patches being held up due to breakage in
+> other sub layers. This only happens if the dependency fail to build.
+>
+> You lose control over the quality in current layers that reside in
+> meta-openbedded just like you have no control over all the other layers
+> residing in the community. It makes maintaining stable versions very
+> difficult. Well, unless The Yocto Project takes over them.. I guess that
+> would work then.
+>
+>>
+>> Another advantage of splitting out the high quality layers is that we'd
+>> like to look at running more community layers through the Yocto
+>> autobuilder, and granular layers make that easier to manage.
+>  I thought not including layers in bblayers.conf was easy enough.
+>>
+>> Comments?
+>
+> What problem do you thing you are trying to solve here?
 
-Signed-off-by: Parthiban Nallathambi <pn@denx.de>
----
- .../recipes-devtools/nodejs/{nodejs_8.9.0.bb => nodejs_8.9.4.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_8.9.0.bb => nodejs_8.9.4.bb} (94%)
+My unrelated issues are that I can't update one layer, without getting
+all of the updates.
+.. but that is both a good thing (i.e. they are all tested together,
+so you know that the
+single SRCREV update is good for all layers), and a bad thing (when
+you just want a
+new python recipe update from meta-python, but don't want other changes).
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.9.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_8.9.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
-index 1cab6a497..6164f9108 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_8.9.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=14045ee6ae930d784435884f8aa1be0d"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=270f7477a1705f7cd3e29d3d4512915d"
- 
- DEPENDS = "openssl10 zlib"
- 
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
- "
--SRC_URI[md5sum] = "49001b4037b2ddf10c2174c38a40f112"
--SRC_URI[sha256sum] = "ae8258f89e127a76d4b4aff6fdb8dc395b7da0069cba054b913dfc36b3c91189"
-+SRC_URI[md5sum] = "631ed102fe58c13cf63bc92a68cf4759"
-+SRC_URI[sha256sum] = "6cdcde9c9c1ca9f450a0b24eafa229ca759e576daa0fae892ce74d541ecdc86f"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+It is very likely that splitting the layer would help one issue, but
+make the other worse.
+
+So no solution from me, just an observation about potential issue.
+
+Cheers,
+
+Bruce
+
+>
+> - armin
+>>
+>> Ross
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
 -- 
-2.14.3
-
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
