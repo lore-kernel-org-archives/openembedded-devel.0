@@ -1,45 +1,26 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
-	[209.85.214.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 650D478852
+Return-Path: <andrej.valek@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id DD29578824
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 10:45:34 +0000 (UTC)
-Received: by mail-it0-f52.google.com with SMTP id l129so8233212ita.3
+	Tue, 20 Feb 2018 11:08:27 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id w1KB8RIu010258
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 02:45:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=yCuoYhE9AtofzEtTGAlHo4l7DdbyEzT4MS5+bAfrGQQ=;
-	b=RgnU/7tHaQPYHt9sFYmXrzX0ZE2v4dditaSe7Xy15sJa6kvhOLy1J3UlQj8cec7YWh
-	7uIsSdkbyhPKcG6EpxPM+meFGfz1JaytkG5sP2MhOosNy4dx7qJM52COZJyHO0iA5dY3
-	UZ56b0lSQD4AoCeSUWzao6r2SyECLLq4Dt3WEI4LnluGZda9XRl09uWSZbqbEEOxuSJu
-	x8eWUg6t5Udab7sahWTRopIvz6OTcRoJ/8pIETz+NYocyBa2CPioCskukAQLhhVMusPB
-	zgKeHweYo2k1KG0y10pSPNcTe16VoWSmbUmFoEi9dNocMyB25NH44eTvVbUoOrBEz6m1
-	iO1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=yCuoYhE9AtofzEtTGAlHo4l7DdbyEzT4MS5+bAfrGQQ=;
-	b=o2v/pLF9VW75WQ1X6pWexFdEXk6kHjMX1upHEfJRe0RmA1GxNt64m4we9OO168P481
-	kVaLmPWxyQpE3EIIII4kZjayfivs0H5Q1uYgyjWWi9lAjdG6v8dYGHWKjmt06mmM0OJD
-	dsoiRlWw9l/A+xZt53COPXSIi3SdkTQuMR3bT4W3ojHtFaVuXyt3941oRFKfvcXjHEYM
-	Y6ZQSf4OlBC+Wh6Xm3Qri4jXUJJiF7Xr9dcb47/qnbJYLQIzUS1CWskjZoMZWdP9alof
-	Ov2W0UkTsMDAPMOh3gVks6zCdrhNHI1gv0ipiOFzcRgpnpCKhzHKAzffsnd7/SCxBq3O
-	lbJw==
-X-Gm-Message-State: APf1xPBkVc+dA0Q7vlHqZtKkNHaXGMjom8sOSahmHBvHvZZbrJ9uBg8s
-	urLhJqlpVXlbVETbIthD7k3sZuStBvwMd+Z0FsQDtg==
-X-Google-Smtp-Source: AH8x225Z6NertCWCaoq6DaWyWbC8IerHRwq/T6G4K7CorGdMj0YIYsZjMSa1QPjo/N3ADjqAdhkVGaGBDEnSg0gAxq4=
-X-Received: by 10.36.144.68 with SMTP id x65mr23575752itd.60.1519123535554;
-	Tue, 20 Feb 2018 02:45:35 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.17.200 with HTTP; Tue, 20 Feb 2018 02:45:15 -0800 (PST)
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 20 Feb 2018 10:45:15 +0000
-Message-ID: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Splitting meta-oe?
+	Tue, 20 Feb 2018 12:08:27 +0100
+Received: from dev.vm6.ccp.siemens.com (sk1d124c.siemens.sk [163.242.57.217])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id w1KB8RWQ029147;
+	Tue, 20 Feb 2018 12:08:27 +0100
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 69E409D9EF5;
+	Tue, 20 Feb 2018 12:08:27 +0100 (CET)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 20 Feb 2018 12:08:13 +0100
+Message-Id: <20180220110813.2952-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Cc: Radovan Scasny <radovan.scasny@siemens.com>
+Subject: [meta-oe][PATCH] fix(p7zip): fix CVE-2017-17969
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,24 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2018 10:45:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 20 Feb 2018 11:08:28 -0000
 
-Hi,
+From: Radovan Scasny <radovan.scasny@siemens.com>
 
-Is now a good time to talk about splitting up meta-oe?  Some layers are
-actively developed and maintained (one example: meta-python), others are
-basically bitrotting and only get touched when something else causes them
-to break world builds (one example: meta-gnome).  I've long felt that
-meta-oe should be split up and the high quality layers managed in their own
-repositories so patches to them don't get held up by breakage in other
-sub-layers.
+Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+---
+ .../p7zip/files/CVE-2017-17969.patch               | 31 ++++++++++++++++++++++
+ meta-oe/recipes-extended/p7zip/p7zip_16.02.bb      |  3 ++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
 
-Another advantage of splitting out the high quality layers is that we'd
-like to look at running more community layers through the Yocto
-autobuilder, and granular layers make that easier to manage.
+diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
+new file mode 100644
+index 000000000..177d1455f
+--- /dev/null
++++ b/meta-oe/recipes-extended/p7zip/files/CVE-2017-17969.patch
+@@ -0,0 +1,31 @@
++p7zip: Fix CVE-2017-17969
++
++[No upstream tracking] -- https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=888297
++
++Heap-based buffer overflow in 7zip
++
++Compress/ShrinkDecoder.cpp: Heap-based buffer overflow
++in the NCompress::NShrink::CDecoder::CodeReal method
++in 7-Zip before 18.00 and p7zip allows remote attackers
++to cause a denial of service (out-of-bounds write)
++or potentially execute arbitrary code via a crafted ZIP archive. 
++
++Upstream-Status: Backport [https://sourceforge.net/p/p7zip/bugs/_discuss/thread/0920f369/8316/attachment/CVE-2017-17969.patch]
++CVE: CVE-2017-17969
++Signed-off-by: Radovan Scasny <radovan.scasny@siemens.com>
++
++--- a/CPP/7zip/Compress/ShrinkDecoder.cpp
+++++ b/CPP/7zip/Compress/ShrinkDecoder.cpp
++@@ -121,7 +121,12 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
++     {
++       _stack[i++] = _suffixes[cur];
++       cur = _parents[cur];
+++	  if (cur >= kNumItems || i >= kNumItems)
+++	  	break;
++     }
+++	
+++	if (cur >= kNumItems || i >= kNumItems)
+++		break;
++     
++     _stack[i++] = (Byte)cur;
++     lastChar2 = (Byte)cur;
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+index 67ffbc67c..edf47f7bc 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c
+                     file://DOC/License.txt;md5=879598edf1f54dddb6930d7581357f8b"
+ 
+ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
+-          file://do_not_override_compiler_and_do_not_strip.patch"
++          file://do_not_override_compiler_and_do_not_strip.patch \
++          file://CVE-2017-17969.patch"
+ 
+ SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
+ SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
+-- 
+2.11.0
 
-Comments?
-
-Ross
 
