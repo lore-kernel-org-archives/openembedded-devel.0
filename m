@@ -1,69 +1,41 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
-	[209.85.218.42])
-	by mail.openembedded.org (Postfix) with ESMTP id CB80D78754
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 2573271BA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 14:00:28 +0000 (UTC)
-Received: by mail-oi0-f42.google.com with SMTP id a207so1155964oii.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 06:00:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=UvgtYkbMN4O31abceqM0IBvftEzBHRGPIq+e1AkLA98=;
-	b=LBCtTK3zogEkp8QoPa7Wn0qY7BGss+4BeSdiyyca4TE4oI/INixgzd8lxaO2GqsN7Q
-	LfzflredxutIWkm3yLccAC16u99xfABo1LBHHMKiw7iMcv/fGIg2f/0Rb8NKMAsGl+dO
-	xyZsA+DI1Et8BUHMu4N+bOvR0+H2KxFSsZaZ5nM9kbaqW6vCupamTSIGODRqwkRr/Ecw
-	J183LBj5pPXUV7e9sxNK93Nx02+82l+LxVubY86Yg0QyWXx4IVu9I9LY/rDbCndFNRiK
-	1OaFPDm/9F/VmWiaHcEVuaSGMrVyHsa6vtwTA/H9sQtjMcf7972qG2stNsxkNdKhGdEb
-	0O7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=UvgtYkbMN4O31abceqM0IBvftEzBHRGPIq+e1AkLA98=;
-	b=d+rSE8M2bVGsqxepP4heK2gRDSVFA9JiVkNy6i+INzztDcPu8+hC/2Sot8pPoSyd0t
-	ODscUtz0Je5w9hCakxLIRQaW2AvNC6V2AMNXx4qKt2e0IzGK/BJxO7rDOTpd0w+oMPrQ
-	8HNdgbuFA2WhjS/8Y4xquHaluiNfvwLsTnsItWVstClZvBzOSc+wAO8rZy+qYuIbeblp
-	n74tLE5wihwXvG2ORv+KT4vYiP8y1XNcmIqddfNL5IKvt0NV0OEFphlMht8BrL8E7hms
-	vdbd9Xjr/o7eF7UfO/hYkt4sz0OHWCn9Qck7FZ/kngF42gknS1TFJE8ZK1AByqaPFPdE
-	5i3g==
-X-Gm-Message-State: APf1xPAmRQqkc9udotz24jZt17afCmK2t7D4hMAQ6owziA4mCX/lPdb3
-	LhlllXXsgsYQFmChEOLruukWn+R5
-X-Google-Smtp-Source: AH8x227IW9KB7+8xsNczy6asg3DgulodsZEgZHNq60nZ7cWRsaB9dZkcp3DuSlfmUHdqsTk28EAlCw==
-X-Received: by 10.202.58.8 with SMTP id h8mr2008468oia.88.1519221629419;
-	Wed, 21 Feb 2018 06:00:29 -0800 (PST)
-Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com.
-	[209.85.218.53])
-	by smtp.gmail.com with ESMTPSA id q4sm4508181oia.35.2018.02.21.06.00.28
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Feb 2018 06:00:28 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f53.google.com with SMTP id b8so1155802oib.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 06:00:28 -0800 (PST)
-X-Received: by 10.202.80.13 with SMTP id e13mr2201675oib.304.1519221627709;
-	Wed, 21 Feb 2018 06:00:27 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.157.80.129 with HTTP; Wed, 21 Feb 2018 06:00:27 -0800 (PST)
-In-Reply-To: <20180221135732.GI4311@bill-the-cat>
+	Wed, 21 Feb 2018 14:02:55 +0000 (UTC)
+Received: from svr-orw-mbx-07.mgc.mentorg.com ([147.34.90.207])
+	by relay1.mentorg.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-SHA384:256)
+	id 1eoUz3-0003PX-7I from Joe_MacDonald@mentor.com ;
+	Wed, 21 Feb 2018 06:02:57 -0800
+Received: from svr-orw-mbx-03.mgc.mentorg.com (147.34.90.203) by
+	SVR-ORW-MBX-07.mgc.mentorg.com (147.34.90.207) with Microsoft SMTP
+	Server (TLS) id 15.0.1320.4; Wed, 21 Feb 2018 06:02:54 -0800
+Received: from burninator.cal.mentorg.com (147.34.91.1) by
+	svr-orw-mbx-03.mgc.mentorg.com (147.34.90.203) with Microsoft SMTP
+	Server id
+	15.0.1320.4 via Frontend Transport; Wed, 21 Feb 2018 06:02:54 -0800
+Received: by burninator.cal.mentorg.com (Postfix, from userid 1000)
+	id A4F4358D591; Wed, 21 Feb 2018 09:02:53 -0500 (EST)
+Date: Wed, 21 Feb 2018 09:02:53 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20180221140252.d4rmbn73c3nzsvac@mentor.com>
 References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
 	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<1519148811.24236.321.camel@linuxfoundation.org>
-	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
-	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
-	<1519152750.24236.330.camel@linuxfoundation.org>
-	<CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
-	<CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
-	<20180221135732.GI4311@bill-the-cat>
-Date: Wed, 21 Feb 2018 11:00:27 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKq2CgQj_C1KnmGrN6giJa5SFLrq6jjg-mGQgJwO0QQwhQ@mail.gmail.com>
-Message-ID: <CAP9ODKq2CgQj_C1KnmGrN6giJa5SFLrq6jjg-mGQgJwO0QQwhQ@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
+	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
+	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
+	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
+	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
+	<CA+chaQfpXBL3=z3QwTKQ6MNBKUVhbMjA6G+nADz562zFuYUTUw@mail.gmail.com>
+	<CAAQYJAsOFo6md-ZCRg+KmGQtC9O+pwFzVjpEMOXOFVFWzr4iMw@mail.gmail.com>
+	<CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-800 http://www.vim.org
+User-Agent: NeoMutt/20170113 (1.7.2)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -77,47 +49,365 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 14:00:29 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 21 Feb 2018 14:02:56 -0000
+X-Groupsio-MsgNum: 70797
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="f7homqn4gxwckkdn"
+Content-Disposition: inline
 
-On Wed, Feb 21, 2018 at 10:57 AM, Tom Rini <trini@konsulko.com> wrote:
-> On Tue, Feb 20, 2018 at 09:10:25PM -0300, Otavio Salvador wrote:
->> On Tue, Feb 20, 2018 at 9:07 PM, Otavio Salvador
->> <otavio@ossystems.com.br> wrote:
->> > On Tue, Feb 20, 2018 at 3:52 PM, Richard Purdie
->> > <richard.purdie@linuxfoundation.org> wrote:
->> >> I could combo-layer pieces of meta-oe into poky but I'd imagine that
->> >> would create more problems than it would solve too and given the
->> >> general dislike of combo-layer, I think ultimately better layer tooling
->> >> would be a better answer and more acceptable to everyone.
->> >
->> > Poky creates more problems then it solves
->>
->> ... send was too soon ...
->>
->> Poky creates more problems then it solves.
->>
->>  - it causes confusion
->>  - it avoids the urgency in adopting a setup script
->>  - it does not use the layers as we market as being a good thing
->>
->> So adding more things to it, just makes it worse.
->>
->> The setup script is more urgent to be discussed then splitting meta-oe.
->
-> I agree that a setup script of some sort (off the top of my head,
-> something that takes layer-names as input, checks vs a list,
-> fetches/clones, creates a wrapper around bitbake-layers to always add
-> them) should be a high priority.  I don't have a problem telling my
-> customers to clone meta-openembedded and then use the layers that are
-> needed in that specific project.  But it's painful to have a shell
-> for-loop in the docs we provide so they can setup a build.
+--f7homqn4gxwckkdn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I think we ought to start a thread about the tooling, but let's focus
-on meta-oe split here.
+[Re: [oe] Splitting meta-oe?] On 18.02.21 (Wed 11:22) Martin Jansa wrote:
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> There is good example of inter-layer dependencies from real world:
+> http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/=
+111447.html
+>=20
+> Do you want
+> A) new git repository meta-libio-socket-ssl-perl so that meta-networking
+> will depend on this on instead of whole meta-perl
+> B) meta-ddclient which will probably depend on both meta-perl and
+> meta-networking
+> C) ddclient and its dependencies in meta-perl
+> D) libio-socket-ssl-perl moved to oe-core, so that next time we can say
+> that oe-core is just like old oe-classic just with a bit less stuff in it
+>=20
+> Neither of these options is ideal, but meta-networking getting meta-perl
+> dependency is the one which causes fewest issues to OE users.
 
+Yeah, I've been thinking about this and trying to decide what is the
+"right" thing to do here.  Because I already have added layer
+dependencies in meta-networking that I didn't originally envision, so
+what's one more that is, as you say, almost certainly in the majority of
+consumers' projects anyway?  But it does force a new layer dependency on
+consumers of the meta-networking layer who may not care about ddclient,
+and I'd like to avoid that if possible.
+
+Honestly, now that I'm back from my vacation, I think the right thing is
+to add the dependency and then start thinking about a way to specify
+layer dependencies with greater granularity than on a meta-layer basis.
+Like, there's no question meta-networking depends on core.  It's
+nonsense to think of it without that dependency.  But it'd be nice to be
+able to specify a layer dependency that only exists if your project
+includes specific recipes out of that layer.
+
+But that kind of mechanism seems highly prone to breakage and likely to
+be highly contentious even if it was shown to be reliable, so it may not
+get beyond a "that'd be nice" thing for me.
+
+Unless someone else has already implemented it and I'm just not aware of
+how to use it?  :-)
+
+-J.
+
+> As mentioned
+> before by few people, most builds for "real world products" are already
+> including many layers, adding meta-perl to BBLAYERS (it's probably there
+> already for other recipes) without the need to update other build setup
+> like checking additional git repositories is simple and I don't see how it
+> makes meta-oe to be like oe-classic. The layers still separate stuff and I
+> don't need to include layers from where I don't need anything at all.
+>=20
+> Smallest set of upstream layers we use at LGE already contains half of
+> meta-oe repository:
+> oe-core meta-gplv2 meta-oe meta-multimedia meta-networking meta-python
+> meta-filesystems meta-qt5
+> and around 8 internal layers, so it's far from oe-classic days and
+> different builds for different products have different subset of layers.
+>=20
+> For internal layers we also use only a few git repositories 12 layers in
+> the main one, because it makes it easier to keep them all compatible with
+> each other at all times (e.g. by triggering the CI for all products from
+> each gerrit review for this single repository).
+>=20
+> I'm not advocating for putting _everything_ into single git repository or
+> even the use of combo-layer tool, but keeping the layers maintained by the
+> same "organization" with the same update cycle makes things easier to
+> maintain and easier to consume by others.
+>=20
+> Regards,
+>=20
+> On Wed, Feb 21, 2018 at 10:48 AM, Andrea Adami <andrea.adami@gmail.com>
+> wrote:
+>=20
+> > On Wed, Feb 21, 2018 at 10:06 AM, Martin Jansa <martin.jansa@gmail.com>
+> > wrote:
+> > >> I'm actually very worried about these (re)tired maintainers. If the
+> > > layers were more independent it would allow some of the patch handling
+> > > responsibilities and testing responsibilities to move to other people,
+> > > reducing the load on those maintainers.
+> > >
+> > > Armin can update his own view, but for me the main issue wasn't the
+> > "patch
+> > > handling" part, but actually the lack of patches for the new issues
+> > (often
+> > > caused by new changes in oe-core).
+> > >
+> >
+> > That's one point.
+> > If I may add my experience as maintainer of two minor layers
+> > (meta-handheld and meta-initramfs), I have to say there have been many
+> > cases where an upgrade to oe-core did break one of these layers.
+> > Just a variable rename for example...this fall-outs could have been
+> > avoided if the oe-core dev would have spent a minute grepping the
+> > repository,
+> > Heh..now we have to define what is the public repository, which layers
+> > have to be checked...
+> >
+> > And about layer interdependencies...well..it is very delicate.
+> > For example meta-handheld, a BSP layer, must depend since some time on
+> > meta-oe. Why? Because tslib was removed from oe-core.
+> > This is ugly...here a more separated layering structure would help
+> >
+> > So I somehow feel we should refine what is in the repository but
+> > absolutely not split it around.
+> > Even, I think we should host all public layers (definition lacks
+> > today) in the OpenEmbedded Git Repository .
+> >
+> > My 2 cents
+> > Andrea
+> >
+> > > Yes, the "patch handling" part was the most boring piece, but patches
+> > from
+> > > regular contributors or co-maintainers were always easy to handle and
+> > > rarely caused any extra work.
+> > >
+> > > The untested drive-by contributions from people who don't even reply =
+to
+> > > review comments are completely different category, but separate git
+> > > repositories won't drive those away (until it gets so confusing that
+> > these
+> > > people will even fail to find correct repository and just gave up try=
+ing
+> > to
+> > > contribute anything at all). Nothing is blocking more people to colle=
+ct,
+> > > fix, test these drive-by contributions and then send consolidated
+> > > pull-request which will be easily merged to shared repository - but I
+> > never
+> > > seen this happen and I don't know how separate git repositories will =
+help
+> > > with this.
+> > >
+> > > In the end after spending a lot of own time doing this boring part, I
+> > > always felt responsible for fixing as many build failures detected in
+> > world
+> > > build as I could, but that's never-ending uphill battle where very few
+> > > people ever help (big thanks to those exceptions who sometimes help).=
+ And
+> > > what you get for that extra afford to get it building as much as poss=
+ible
+> > > in spare time? Comments about how garbage meta-oe layers are.
+> > >
+> > > We need patches not more git repos!
+> > >
+> > > On Wed, Feb 21, 2018 at 9:49 AM, Martin Jansa <martin.jansa@gmail.com>
+> > > wrote:
+> > >
+> > >> > I need an updated python-<foo> package for an unrelated package
+> > >>
+> > >> And how far will you go?
+> > >>
+> > >> If you want just newer python-<foo> and nothing else, will you take
+> > other
+> > >> changes to other python-* recipes from meta-python layer? There is a
+> > lot of
+> > >> recipes there, if you're so picky about updates, then you shouldn't
+> > update
+> > >> whole oe-core as well.
+> > >>
+> > >> On Wed, Feb 21, 2018 at 1:51 AM, Bruce Ashfield <
+> > bruce.ashfield@gmail.com>
+> > >> wrote:
+> > >>
+> > >>> On Tue, Feb 20, 2018 at 1:52 PM, Khem Raj <raj.khem@gmail.com> wrot=
+e:
+> > >>> > On 2/20/18 9:13 AM, Bruce Ashfield wrote:
+> > >>> >> On Tue, Feb 20, 2018 at 11:50 AM, akuster808 <akuster808@gmail.c=
+om>
+> > >>> wrote:
+> > >>> >>>
+> > >>> >>>
+> > >>> >>> On 02/20/2018 02:45 AM, Burton, Ross wrote:
+> > >>> >>>> Hi,
+> > >>> >>>>
+> > >>> >>>> Is now a good time to talk about splitting up meta-oe?  Some
+> > layers
+> > >>> are
+> > >>> >>>> actively developed and maintained (one example: meta-python),
+> > others
+> > >>> are
+> > >>> >>>> basically bitrotting and only get touched when something else
+> > causes
+> > >>> them
+> > >>> >>>> to break world builds (one example: meta-gnome).  I've long fe=
+lt
+> > that
+> > >>> >>>> meta-oe should be split up and the high quality layers managed=
+ in
+> > >>> their own
+> > >>> >>>> repositories so patches to them don't get held up by breakage =
+in
+> > >>> other
+> > >>> >>>> sub-layers.
+> > >>> >>> You make it sound like meta-oe is not a high quality layer.  I
+> > could
+> > >>> >>> make the same claim about oe-core master.
+> > >>> >>>
+> > >>> >>> I don't see the connection in patches being held up due to
+> > breakage in
+> > >>> >>> other sub layers. This only happens if the dependency fail to
+> > build.
+> > >>> >>>
+> > >>> >>> You lose control over the quality in current layers that reside=
+ in
+> > >>> >>> meta-openbedded just like you have no control over all the other
+> > >>> layers
+> > >>> >>> residing in the community. It makes maintaining stable versions
+> > very
+> > >>> >>> difficult. Well, unless The Yocto Project takes over them.. I g=
+uess
+> > >>> that
+> > >>> >>> would work then.
+> > >>> >>>
+> > >>> >>>>
+> > >>> >>>> Another advantage of splitting out the high quality layers is =
+that
+> > >>> we'd
+> > >>> >>>> like to look at running more community layers through the Yocto
+> > >>> >>>> autobuilder, and granular layers make that easier to manage.
+> > >>> >>>  I thought not including layers in bblayers.conf was easy enoug=
+h.
+> > >>> >>>>
+> > >>> >>>> Comments?
+> > >>> >>>
+> > >>> >>> What problem do you thing you are trying to solve here?
+> > >>> >>
+> > >>> >> My unrelated issues are that I can't update one layer, without
+> > getting
+> > >>> >> all of the updates.
+> > >>> >> .. but that is both a good thing (i.e. they are all tested toget=
+her,
+> > >>> >> so you know that the
+> > >>> >> single SRCREV update is good for all layers), and a bad thing (w=
+hen
+> > >>> >> you just want a
+> > >>> >> new python recipe update from meta-python, but don't want other
+> > >>> changes).
+> > >>> >>
+> > >>> >
+> > >>> > if you dont include the layers in your BBLAYERS and they become
+> > >>> > effectively non existent, unless you are on metered internet
+> > connection,
+> > >>> > where downloading unused stuff would save you bandwidth, it shoul=
+d be
+> > >>> > ok.  No ?
+> > >>>
+> > >>> Its not that.
+> > >>>
+> > >>> I *am* building the different layers, but say I have a stable set of
+> > >>> packages
+> > >>> and working images .. but for whatever reason, I need an updated
+> > >>> python-<foo>
+> > >>> package for an unrelated package, or some other layer that needs a
+> > newer
+> > >>> version, etc.
+> > >>>
+> > >>> How do I get that, without taking updates to all the layers ? .. and
+> > >>> layers that
+> > >>> I really didn't want to update. I have to do some sort of combo-lay=
+er,
+> > >>> carry
+> > >>> my own copy of the recipe, etc.
+> > >>>
+> > >>> So there are definitely ways to do it, I'm just pointing out that I
+> > >>> end up taking
+> > >>> some build failures/issues from time to time on packages I didn't
+> > really
+> > >>> need to update.
+> > >>>
+> > >>> The flip side of that argument is that all of the layers and sub la=
+yers
+> > >>> have
+> > >>> gone through some sort of global build, and hence I know that they =
+all
+> > >>> have
+> > >>> worked together for someone. If I can update pieces individually, I
+> > break
+> > >>> that .. and I own the broken bits after that .. which again, goes to
+> > >>> my point that
+> > >>> fixing one workflow/issue can break another :D
+> > >>>
+> > >>> Bruce
+> > >>>
+> > >>> >
+> > >>> >> It is very likely that splitting the layer would help one issue,=
+ but
+> > >>> >> make the other worse.
+> > >>> >>
+> > >>> >> So no solution from me, just an observation about potential issu=
+e.
+> > >>> >>
+> > >>> >> Cheers,
+> > >>> >>
+> > >>> >> Bruce
+> > >>> >>
+> > >>> >>>
+> > >>> >>> - armin
+> > >>> >>>>
+> > >>> >>>> Ross
+> > >>> >>>
+> > >>> >>>
+> > >>> >>> --
+> > >>> >>> _______________________________________________
+> > >>> >>> Openembedded-devel mailing list
+> > >>> >>> Openembedded-devel@lists.openembedded.org
+> > >>> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-dev=
+el
+> > >>> >>
+> > >>> >>
+> > >>> >>
+> > >>> >
+> > >>>
+> > >>>
+> > >>>
+> > >>> --
+> > >>> "Thou shalt not follow the NULL pointer, for chaos and madness await
+> > >>> thee at its end"
+> > >>> --
+> > >>> _______________________________________________
+> > >>> Openembedded-devel mailing list
+> > >>> Openembedded-devel@lists.openembedded.org
+> > >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >>>
+> > >>
+> > >>
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+--=20
+-Joe MacDonald.
+:wq
+
+--f7homqn4gxwckkdn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEEkMd/b97HINT8/zEqSfx99yw59pYFAlqNfAwACgkQSfx99yw5
+9pbsYAgAg9l318i1Fhzf3fFFLuKUL3JlfQBEeh+mFueI66gGpX575Od+jWgoRq3w
+OcPj7QUL7PkHhJYpdNY3nVyWaSYEKkEs2zg9i7VBqW8hENm56brEG74X/CFTqIrW
+DKsTHCjOd1kKQHKj3iapD8u0v92msPfzz4pNnXruT0Ojf9funyqcXIma/pzD9JW9
+icms9Ezt+BaPOHd/UmnJpaVN5ENarpVC8/geL/ZraOU1xr6cB/hjBGDCyH79pCzi
+S2bzSjMKYfD+tgu621zavBlgO5UJqDcpaRKbH83z7bb1YhTJOIprNF6xgO75e1Ni
+2DJCMDN8WT6usFff18LG5Au1a+mxTQ==
+=J/ds
+-----END PGP SIGNATURE-----
+
+--f7homqn4gxwckkdn--
