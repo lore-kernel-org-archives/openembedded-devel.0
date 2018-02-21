@@ -1,65 +1,48 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
-	[209.85.218.51])
-	by mail.openembedded.org (Postfix) with ESMTP id A80BB782A9
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A87B7863B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 00:10:26 +0000 (UTC)
-Received: by mail-oi0-f51.google.com with SMTP id e10so7477815oiy.8
+	Wed, 21 Feb 2018 00:51:10 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id f19so3949lfg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 16:10:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=A+X2DWTVzjOOYwfsxOKhJwZmic3sTpWKK95GCYzoPIY=;
-	b=GZhTBjNZVgHbY6asLgPD/Hh7r9oURUxD2lH9xvu+DFssRaukHVQaFhV5wTmDV2ZapL
-	sIrpBOe+GQ2iZUEzQH4LJmG+WjUEBm8sDzaJJUD5IiZixUdHvp3AI21dMhgSAHCdxHJJ
-	wmogyqwVs8kIJGs2p+IuAyl+WPmIEtIi29UH/3Ia25Iqvt7Jc/IJusYxcmMZkcneQwGD
-	/Y2nev3WkXsZHcCtX9IA9nMK16eQZDCj+oX8kWrKYpKM41JPqV3i3/LKiIbq8fsbAa7o
-	1K2SRcsVlDvaweVv99RRErmyvRlGBKd8sZIc2+o1kxHAjHN8rQrg+clVCzG45BEcuXY2
-	N9SQ==
+	Tue, 20 Feb 2018 16:51:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=EAEtsdXliWa3ZHf3uTS11pufiAFJLB/HPGdmArUGbHM=;
+	b=HHkzN3858WxJBzCI+WrvZle9jstO6Cnr9JPxU9HKJzqFuT8KBn/teOh9hCSzu018Ey
+	dsOmqrtiJwzYUTxRhuTTuxOMxkzhGLVFr79Nlq3hnaLOmWTPFY6+pxB3hWY0YGdKV8aA
+	jIIxb4xJCaNj0TMRXO7CQm/f1uTBieA4Y19q6wCxUy+opnXiKoeLH2RBU30rVNEVa4Zd
+	uG1D1WqCmNP0ww01hccz+2XH5QhGUtj2/dhlvxOTSCbUV0I66M6pwkX08h6eTV0H+sLZ
+	CPM+O4E5me8ay1NYJeLj7/qMtpo0NvbPo76V0d4uCTP4Y52afVnqWPkiWjT+041KYgry
+	tEcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=A+X2DWTVzjOOYwfsxOKhJwZmic3sTpWKK95GCYzoPIY=;
-	b=RfJrKWLzHhf+lqHMc130MALdzQ1bNnHMJaSmBXgiODDeNid8Qmvi2peYG3MBF7G6cF
-	2oljJ5EyDUqR0YVDZsoG2L1yal+SWK+BJOiq2kqxsP1KuswpOYR9J6CT0m1V7qx+WX+m
-	VRfNNmy6Ge9y8FFAcWq8nPwxW0bA2ylf71yyrQUJiWx8SAgotws9EwEymsc9DnSkDQDb
-	ZiiJV6TayiU5Exsfqq+eDSKmgfPuATvsZ7v6/c9bIzPAOcvl8Wu0kspwLd80j8Dy4RP0
-	qQDx8WgutxeFfc4O6RSduivYkE3ZNuoWsrxzrQPEZth33EiC7AQ2ED7rIgJM9EboA17z
-	mSTQ==
-X-Gm-Message-State: APf1xPBB/NBvg+Kh5NvT1haweTeMSoE95dC/dsYByOAhtzFTtmKzYKg6
-	vTN2L6eCf7g9AQ9nQ3UcdvuKKy2a
-X-Google-Smtp-Source: AH8x225JwFpuifGitAEUNfPHNeG3kvo2blqgvyPvzV+zsCwLfw/1WE6s93PS3X9X3Xrxm0kQFWGg/A==
-X-Received: by 10.202.9.19 with SMTP id 19mr137869oij.152.1519171827222;
-	Tue, 20 Feb 2018 16:10:27 -0800 (PST)
-Received: from mail-ot0-f169.google.com (mail-ot0-f169.google.com.
-	[74.125.82.169]) by smtp.gmail.com with ESMTPSA id
-	f30sm15095206otd.38.2018.02.20.16.10.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Feb 2018 16:10:26 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ot0-f169.google.com with SMTP id e64so13110582ote.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 16:10:25 -0800 (PST)
-X-Received: by 10.157.63.184 with SMTP id r53mr1047188otc.168.1519171825617;
-	Tue, 20 Feb 2018 16:10:25 -0800 (PST)
+	bh=EAEtsdXliWa3ZHf3uTS11pufiAFJLB/HPGdmArUGbHM=;
+	b=UzbOxXMlJWXqmNmUAyeYwBtt+HeyI6+CC3feQX/DAd9HLLSvelveX2pKFmZrV/vu7g
+	MvO7g+gwM+Qk10nggg1lLKqQKbq2nBnnpOg0bCJQ+Ef3VHr7QlsgNgYHd0yrm4A7rS94
+	jajHeun+r21S5o2eeLGRzxabSkr0caxqmG3CaplIBqUCi8DWeDEfthkdwQcAgq7DoTys
+	pCYJjZNssGg2UHUBztjxOaMNY3BnFDzQn4XuduucD4uGMqqa2xUCeCDUVR1eG7rZo4I4
+	wVwWO6HJQGl2801oCM2wKfepqZaPY94Cl9Gi9yLc0S815SZEG4tNP8+ZN6SWVrN+kOGe
+	fwkw==
+X-Gm-Message-State: APf1xPDPnVNznP6jDTw4ddgos5uNkHI0O/Nbmj7EoDIBcuJZ0cVgJcAM
+	Fb2UBqnEg/WVOWUktV0Jzdc/XeHADKSGF88hKco=
+X-Google-Smtp-Source: AH8x225DEKNagtSx1jb9OcVFAx/P9L7lG7vS/AIB69rfHLUo6ib/mverwK/tMTenqBvu3dREffwCTBTwoU+fCFYeZpU=
+X-Received: by 10.25.25.9 with SMTP id 9mr923969lfz.3.1519174271833; Tue, 20
+	Feb 2018 16:51:11 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.157.80.129 with HTTP; Tue, 20 Feb 2018 16:10:25 -0800 (PST)
-In-Reply-To: <CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
+Received: by 10.46.48.4 with HTTP; Tue, 20 Feb 2018 16:51:11 -0800 (PST)
+In-Reply-To: <8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
 References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
 	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<1519148811.24236.321.camel@linuxfoundation.org>
-	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
-	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
-	<1519152750.24236.330.camel@linuxfoundation.org>
-	<CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
-Date: Tue, 20 Feb 2018 21:10:25 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
-Message-ID: <CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
+	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
+	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+Date: Tue, 20 Feb 2018 19:51:11 -0500
+Message-ID: <CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -74,34 +57,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 00:10:26 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 00:51:11 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Feb 20, 2018 at 9:07 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Tue, Feb 20, 2018 at 3:52 PM, Richard Purdie
-> <richard.purdie@linuxfoundation.org> wrote:
->> I could combo-layer pieces of meta-oe into poky but I'd imagine that
->> would create more problems than it would solve too and given the
->> general dislike of combo-layer, I think ultimately better layer tooling
->> would be a better answer and more acceptable to everyone.
+On Tue, Feb 20, 2018 at 1:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On 2/20/18 9:13 AM, Bruce Ashfield wrote:
+>> On Tue, Feb 20, 2018 at 11:50 AM, akuster808 <akuster808@gmail.com> wrote:
+>>>
+>>>
+>>> On 02/20/2018 02:45 AM, Burton, Ross wrote:
+>>>> Hi,
+>>>>
+>>>> Is now a good time to talk about splitting up meta-oe?  Some layers are
+>>>> actively developed and maintained (one example: meta-python), others are
+>>>> basically bitrotting and only get touched when something else causes them
+>>>> to break world builds (one example: meta-gnome).  I've long felt that
+>>>> meta-oe should be split up and the high quality layers managed in their own
+>>>> repositories so patches to them don't get held up by breakage in other
+>>>> sub-layers.
+>>> You make it sound like meta-oe is not a high quality layer.  I could
+>>> make the same claim about oe-core master.
+>>>
+>>> I don't see the connection in patches being held up due to breakage in
+>>> other sub layers. This only happens if the dependency fail to build.
+>>>
+>>> You lose control over the quality in current layers that reside in
+>>> meta-openbedded just like you have no control over all the other layers
+>>> residing in the community. It makes maintaining stable versions very
+>>> difficult. Well, unless The Yocto Project takes over them.. I guess that
+>>> would work then.
+>>>
+>>>>
+>>>> Another advantage of splitting out the high quality layers is that we'd
+>>>> like to look at running more community layers through the Yocto
+>>>> autobuilder, and granular layers make that easier to manage.
+>>>  I thought not including layers in bblayers.conf was easy enough.
+>>>>
+>>>> Comments?
+>>>
+>>> What problem do you thing you are trying to solve here?
+>>
+>> My unrelated issues are that I can't update one layer, without getting
+>> all of the updates.
+>> .. but that is both a good thing (i.e. they are all tested together,
+>> so you know that the
+>> single SRCREV update is good for all layers), and a bad thing (when
+>> you just want a
+>> new python recipe update from meta-python, but don't want other changes).
+>>
 >
-> Poky creates more problems then it solves
+> if you dont include the layers in your BBLAYERS and they become
+> effectively non existent, unless you are on metered internet connection,
+> where downloading unused stuff would save you bandwidth, it should be
+> ok.  No ?
 
-... send was too soon ...
+Its not that.
 
-Poky creates more problems then it solves.
+I *am* building the different layers, but say I have a stable set of packages
+and working images .. but for whatever reason, I need an updated python-<foo>
+package for an unrelated package, or some other layer that needs a newer
+version, etc.
 
- - it causes confusion
- - it avoids the urgency in adopting a setup script
- - it does not use the layers as we market as being a good thing
+How do I get that, without taking updates to all the layers ? .. and layers that
+I really didn't want to update. I have to do some sort of combo-layer, carry
+my own copy of the recipe, etc.
 
-So adding more things to it, just makes it worse.
+So there are definitely ways to do it, I'm just pointing out that I
+end up taking
+some build failures/issues from time to time on packages I didn't really
+need to update.
 
-The setup script is more urgent to be discussed then splitting meta-oe.
+The flip side of that argument is that all of the layers and sub layers have
+gone through some sort of global build, and hence I know that they all have
+worked together for someone. If I can update pieces individually, I break
+that .. and I own the broken bits after that .. which again, goes to
+my point that
+fixing one workflow/issue can break another :D
+
+Bruce
+
+>
+>> It is very likely that splitting the layer would help one issue, but
+>> make the other worse.
+>>
+>> So no solution from me, just an observation about potential issue.
+>>
+>> Cheers,
+>>
+>> Bruce
+>>
+>>>
+>>> - armin
+>>>>
+>>>> Ross
+>>>
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>>
+>>
+>
+
+
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
