@@ -1,46 +1,42 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 5587678726
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 7AA6078066
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 19:21:41 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id d206so3425787qkb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 11:21:43 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:organization;
-	bh=veF3bG+NHA0iRQwXmjPApgOWFN3J4gHubQxC8kMm6ow=;
-	b=H1xlxZB/wfCICbhyEE21R9zNiUaLxeoFwhlTXFEKsWSV9/wrnXzqlGiWkNxt0wIsH+
-	d0rxg1dWcJoi2olNYuiAy5D5MF1kuybCQTW99y0HLcxv3h/HEML0sI2Z/h1FJnkYJ51E
-	QzLiPkuqxnbwZmPWOxag2TX7rMD7ekEIOIeRvbtnmAB6qa5fAcTnhFv6ejBEXmNFHJ7s
-	KVBABX5n+RM4ZrIgYtFims2bPjFdPngShj1nmE0p8hOGEXIN1nsypVT6sUTTDgR8kDP1
-	vixev4CMG8Cyd3C+9TTMJ4FlcrPJuiudEei9K6GJ6RAi0IIC89SW6J74y6b1ce/rsmP8
-	Mzjw==
-X-Gm-Message-State: APf1xPAysPIRZQCSXtUeKfcyDVzsRVh484rCQ9NKTkOjsURq7r4L40Am
-	rpcJ+eBFU2bcuN9DUo8tSzAh5A==
-X-Google-Smtp-Source: AH8x225xBzvr3brxLmwZW51m+lRS3UZzGCgzjnQVtPmXlk7S1r7SuFP9ierh+bsedy5n5eMOZ4JUjg==
-X-Received: by 10.55.88.7 with SMTP id m7mr6767705qkb.142.1519240903097;
-	Wed, 21 Feb 2018 11:21:43 -0800 (PST)
-Received: from localhost.localdomain ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id
-	r51sm7759475qtr.93.2018.02.21.11.21.40
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 21 Feb 2018 11:21:42 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Wed, 21 Feb 2018 16:21:38 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Feb 2018 16:21:29 -0300
-Message-Id: <20180221192129.2759-2-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.16.2
-In-Reply-To: <20180221192129.2759-1-otavio@ossystems.com.br>
-References: <20180221192129.2759-1-otavio@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [RESEND meta-python PATCH 2/2] python3-requests: Remove RDEPENDS on python3-misc
+	Wed, 21 Feb 2018 19:33:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 9A67031E0F0D;
+	Wed, 21 Feb 2018 20:33:56 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id ei1XbjYjeqiG; Wed, 21 Feb 2018 20:33:54 +0100 (CET)
+Received: from t460p (p57A611C8.dip0.t-ipconnect.de [87.166.17.200])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 06DF731E0925;
+	Wed, 21 Feb 2018 20:33:53 +0100 (CET)
+Date: Wed, 21 Feb 2018 20:33:52 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+To: Patrick Ohly <patrick.ohly@intel.com>
+Message-ID: <20180221203352.55cd9a96@t460p>
+In-Reply-To: <1519225097.6698.8.camel@intel.com>
+References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
+	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
+	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
+	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
+	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
+	<CA+chaQfpXBL3=z3QwTKQ6MNBKUVhbMjA6G+nADz562zFuYUTUw@mail.gmail.com>
+	<CAAQYJAsOFo6md-ZCRg+KmGQtC9O+pwFzVjpEMOXOFVFWzr4iMw@mail.gmail.com>
+	<CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
+	<20180221140252.d4rmbn73c3nzsvac@mentor.com>
+	<CAJTo0LYe1koEr7kJg7RfXLDbZLVa0qQyWiig5Sng_hpRTr_3dw@mail.gmail.com>
+	<1519225097.6698.8.camel@intel.com>
+MIME-Version: 1.0
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +49,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 19:21:42 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 19:33:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The misc package has been removed when the python3 was reworked.
+On Wed, 21 Feb 2018 15:58:17 +0100
+Patrick Ohly <patrick.ohly@intel.com> wrote:
 
-Tested using updatehub's uhu utility.
+> On Wed, 2018-02-21 at 14:14 +0000, Burton, Ross wrote:
+> > > But that kind of mechanism seems highly prone to breakage and
+> > > likely to
+> > > be highly contentious even if it was shown to be reliable, so it
+> > > may not
+> > > get beyond a "that'd be nice" thing for me.
+> > >=20
+> > > Unless someone else has already implemented it and I'm just not
+> > > aware of
+> > > how to use it?=C2=A0 :-)
+> > >  =20
+> >=20
+> > meta-freescale (iirc) does this, conditionally adds
+> > sub-layers to BBLAYERS based on what other layers are already
+> > enabled. =20
+>=20
+> The approach used by meta-freescale works with older releases.
+> BBFILES_DYNAMIC [1] (supported by bitbake 1.36/Yocto 2.4) is a bit more
+> robust.
+>=20
+> [1] https://patchwork.openembedded.org/patch/140532/
+>=20
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
+That's interesting. Is it possible to express dependencies on more than one
+layer for a group of recipes with this mechanism?
 
- meta-python/recipes-devtools/python/python3-requests_2.18.4.bb | 3 ---
- 1 file changed, 3 deletions(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-index d91d993bf..0a2410f85 100644
---- a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-@@ -1,5 +1,2 @@
- inherit setuptools3
- require python-requests.inc
--
--# Add the runtime depends for selectors.py
--RDEPENDS_${PN} += "${PYTHON_PN}-misc"
--- 
-2.16.2
-
+Regards,
+Andreas
 
