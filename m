@@ -1,52 +1,57 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 14FFF78745
+Return-Path: <trini@konsulko.com>
+Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B03C786CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 13:55:26 +0000 (UTC)
-Received: by mail-lf0-f46.google.com with SMTP id f19so2483210lfg.0
+	Wed, 21 Feb 2018 13:57:34 +0000 (UTC)
+Received: by mail-qk0-f181.google.com with SMTP id g2so1981723qkd.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 05:55:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=M/iPPxEuX/UZQMiRAhGZE8lvVo/kkYnSXcnNdgtaw8Q=;
-	b=VQ6PuNB9VN1P3Xp6+oChUhRKnzDP7CG9feABY+e8wBPoW4Y4bhJ2pl063tJsebz+vJ
-	5+yNkOWT9wKrOrxcsI6u3PktZHzHFz+BNJm7SJObbDJmi3AlqXLL9j59/FTtTXJq7MvS
-	Wt4UvYBT+aed+dbPVF4gh1nz5BTccH53yB7M2sxZblyI/ELtpMR7tyQEFory2B8Pni42
-	TAJ57dvlMGKEypCw+Sr66kj21rdkP6LfgNDV9yowFoFUdc3K7S+7lJkGulRlPD7mPQsx
-	CTAtCze2glXuklx1oswqm9606u7KO/s4GPIgToYXrIkvvQWCcqGHB6BRn4ZcShjtQvq2
-	dI1Q==
+	Wed, 21 Feb 2018 05:57:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=6hpMMoz5HOUJW99p5F8eFIml+o0+UAt/jFOs+SmgmH0=;
+	b=M2RPufjYutvy2oNOzGvM2pXe3vN20NFuJygfCzoMV8hQNVI7MLKQghYkZ07tktRyhE
+	5kNrBdS5C7BfCpQyw+SVT5InaYY62yk9WMAPSG1l6p9nkGc8UCVsw3y2eKDAde+RfipW
+	fuzur19hAoJpo1YW0V6ivbI72kELpEmyWptCE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=M/iPPxEuX/UZQMiRAhGZE8lvVo/kkYnSXcnNdgtaw8Q=;
-	b=nhM+P3lcqEXxSaFCRTbTAhBIPeSitaPz1UUQXQ5wBQAi8/6Wj9HNF61pDYwnuvBl52
-	iQV7COu9W9MUfhMtH3U3GN/2h7D8E3LpSrDK38bnVR7gyuhZmnldVLsy08Rh4g6EqQjd
-	7teZJPcNi7s2jKamIrBNLq6OCs5PJCWbDpgk0fcexcAZOb5BbRBzu8/gCXUhANpkCjYi
-	2ivneAwFO9xta/AFFOubBiRDDgWsjfzHfkthTmITX7prt/ny8s2hOBTiNzJ2JkDOIVu3
-	95i4hbKRd9SfYsZ0e+u9Pxss5F8oP5qlWviwtmQ1A98JvNV1Za1VWQXriX61PdTajS82
-	KF1A==
-X-Gm-Message-State: APf1xPCQRFxfV//pJNDtGh3/Xszxq07yHLdMsoI9v4RwJt692VkG3LST
-	C0cxWPEUBj3Yg2F9DAJTmDY3w2sYbGOLGizLK40=
-X-Google-Smtp-Source: AH8x224pIIdzylyzuqEyBBliY8ISb09CeRXKLTMO9JY/0s89bVYm6E7X5HL6hYIiW/4JLwrEGIjt6QB7WNBJ3Ao4GW4=
-X-Received: by 10.46.86.74 with SMTP id k71mr2398122ljb.28.1519221327423; Wed,
-	21 Feb 2018 05:55:27 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.46.48.4 with HTTP; Wed, 21 Feb 2018 05:55:26 -0800 (PST)
-In-Reply-To: <20180221134509.wheeephzdzqytopy@mentor.com>
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=6hpMMoz5HOUJW99p5F8eFIml+o0+UAt/jFOs+SmgmH0=;
+	b=NTgUdd2NTDBETAdMSvh7Pd8wUwYXN6JWTx3OyQo1LBqmEaoWHGcyMp/5hccAtk39yg
+	GZIBTGTN/0YkFPyC4To26amZESZ4XNeo/ZZLz3sViMaKCSxMiqYgpMxF25r7tAmkrB1Y
+	CsoHHFycWhfSS3PDQ7qDXn0qvP3bLfAwiy/MWc7YPaL3RIbqShjyCzamC9XOgeJ3hxOl
+	5EWFXF95lXVAYHrhEVteE/SIoZhjRT3SB2h376TtU8YEF0kp9jG+0ps/DgZP+WrkCX4D
+	ZNLK402bxRF0XVctlZH0S7lEVA2BlNEAgGIuUgu44wvewqx1ClMu/8LPqRYSVBUt0BQv
+	O1Qg==
+X-Gm-Message-State: APf1xPCI5R5gdPtN6f0WSW4wcGX/Py8yD/gzkc3UaIZ0CYg+pc00oQxo
+	+7BNRMxGu2wJBSh8BJX4H0c3OA==
+X-Google-Smtp-Source: AG47ELu3AOEZA4JG+apNxaSJbuME4Tjbh/0oqM4UaUDVoZ10Ilg1aGJI4d72mzwqwyZwmmJKH8BUcA==
+X-Received: by 10.55.128.195 with SMTP id b186mr5166675qkd.118.1519221455949; 
+	Wed, 21 Feb 2018 05:57:35 -0800 (PST)
+Received: from bill-the-cat (cpe-65-184-142-68.ec.res.rr.com. [65.184.142.68])
+	by smtp.gmail.com with ESMTPSA id
+	g9sm21228553qtg.90.2018.02.21.05.57.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 Feb 2018 05:57:35 -0800 (PST)
+Date: Wed, 21 Feb 2018 08:57:32 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Message-ID: <20180221135732.GI4311@bill-the-cat>
 References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
 	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
-	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
-	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
-	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
-	<20180221134509.wheeephzdzqytopy@mentor.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Wed, 21 Feb 2018 08:55:26 -0500
-Message-ID: <CADkTA4OUy=njCwt5OwsSvRrnDQbF+m2bY+iF=Oj8OEA156Fraw@mail.gmail.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+	<1519148811.24236.321.camel@linuxfoundation.org>
+	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
+	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
+	<1519152750.24236.330.camel@linuxfoundation.org>
+	<CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
+	<CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -60,182 +65,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 13:55:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 21 Feb 2018 13:57:35 -0000
+X-Groupsio-MsgNum: 70791
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3r2sERxeG5twY2zu"
+Content-Disposition: inline
 
-On Wed, Feb 21, 2018 at 8:45 AM, Joe MacDonald <Joe_MacDonald@mentor.com> wrote:
-> [Re: [oe] Splitting meta-oe?] On 18.02.21 (Wed 09:49) Martin Jansa wrote:
->
->> > I need an updated python-<foo> package for an unrelated package
->>
->> And how far will you go?
->>
->> If you want just newer python-<foo> and nothing else, will you take other
->> changes to other python-* recipes from meta-python layer? There is a lot of
->> recipes there, if you're so picky about updates, then you shouldn't update
->> whole oe-core as well.
->
-> It seems like this part is already settled, but it would seem to me that
-> this scenario, if I understand it correctly, is "I'm using oe-core and
-> see up-stream meta-oe/meta-somethingorother has an updated or new recipe
-> for something I want in my image but I don't want to do a pull on all of
-> meta-oe and potentially cause a huge rebuild of stuff I don't really
-> care about".
->
-> That sounds like a problem better solved with 'git branch', 'git fetch'
-> and 'git cherry-pick' on the developer's side than breaking up meta-oe
-> across existing meta-boundaries.
+--3r2sERxeG5twY2zu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Agreed. I was just probing to see if anyone had ideas on how that could
-be managed by infrastructure, versus me mucking about.
+On Tue, Feb 20, 2018 at 09:10:25PM -0300, Otavio Salvador wrote:
+> On Tue, Feb 20, 2018 at 9:07 PM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+> > On Tue, Feb 20, 2018 at 3:52 PM, Richard Purdie
+> > <richard.purdie@linuxfoundation.org> wrote:
+> >> I could combo-layer pieces of meta-oe into poky but I'd imagine that
+> >> would create more problems than it would solve too and given the
+> >> general dislike of combo-layer, I think ultimately better layer tooling
+> >> would be a better answer and more acceptable to everyone.
+> >
+> > Poky creates more problems then it solves
+>=20
+> ... send was too soon ...
+>=20
+> Poky creates more problems then it solves.
+>=20
+>  - it causes confusion
+>  - it avoids the urgency in adopting a setup script
+>  - it does not use the layers as we market as being a good thing
+>=20
+> So adding more things to it, just makes it worse.
+>=20
+> The setup script is more urgent to be discussed then splitting meta-oe.
 
-Maybe RP's thoughts on layer tooling or setup possibilities would help,
-but either way, I'll keep chugging along :D
+I agree that a setup script of some sort (off the top of my head,
+something that takes layer-names as input, checks vs a list,
+fetches/clones, creates a wrapper around bitbake-layers to always add
+them) should be a high priority.  I don't have a problem telling my
+customers to clone meta-openembedded and then use the layers that are
+needed in that specific project.  But it's painful to have a shell
+for-loop in the docs we provide so they can setup a build.
 
-Cheers,
+--=20
+Tom
 
-Bruce
+--3r2sERxeG5twY2zu
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
-> -J.
->
->>
->> On Wed, Feb 21, 2018 at 1:51 AM, Bruce Ashfield <bruce.ashfield@gmail.com>
->> wrote:
->>
->> > On Tue, Feb 20, 2018 at 1:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> > > On 2/20/18 9:13 AM, Bruce Ashfield wrote:
->> > >> On Tue, Feb 20, 2018 at 11:50 AM, akuster808 <akuster808@gmail.com>
->> > wrote:
->> > >>>
->> > >>>
->> > >>> On 02/20/2018 02:45 AM, Burton, Ross wrote:
->> > >>>> Hi,
->> > >>>>
->> > >>>> Is now a good time to talk about splitting up meta-oe?  Some layers
->> > are
->> > >>>> actively developed and maintained (one example: meta-python), others
->> > are
->> > >>>> basically bitrotting and only get touched when something else causes
->> > them
->> > >>>> to break world builds (one example: meta-gnome).  I've long felt that
->> > >>>> meta-oe should be split up and the high quality layers managed in
->> > their own
->> > >>>> repositories so patches to them don't get held up by breakage in other
->> > >>>> sub-layers.
->> > >>> You make it sound like meta-oe is not a high quality layer.  I could
->> > >>> make the same claim about oe-core master.
->> > >>>
->> > >>> I don't see the connection in patches being held up due to breakage in
->> > >>> other sub layers. This only happens if the dependency fail to build.
->> > >>>
->> > >>> You lose control over the quality in current layers that reside in
->> > >>> meta-openbedded just like you have no control over all the other layers
->> > >>> residing in the community. It makes maintaining stable versions very
->> > >>> difficult. Well, unless The Yocto Project takes over them.. I guess
->> > that
->> > >>> would work then.
->> > >>>
->> > >>>>
->> > >>>> Another advantage of splitting out the high quality layers is that
->> > we'd
->> > >>>> like to look at running more community layers through the Yocto
->> > >>>> autobuilder, and granular layers make that easier to manage.
->> > >>>  I thought not including layers in bblayers.conf was easy enough.
->> > >>>>
->> > >>>> Comments?
->> > >>>
->> > >>> What problem do you thing you are trying to solve here?
->> > >>
->> > >> My unrelated issues are that I can't update one layer, without getting
->> > >> all of the updates.
->> > >> .. but that is both a good thing (i.e. they are all tested together,
->> > >> so you know that the
->> > >> single SRCREV update is good for all layers), and a bad thing (when
->> > >> you just want a
->> > >> new python recipe update from meta-python, but don't want other
->> > changes).
->> > >>
->> > >
->> > > if you dont include the layers in your BBLAYERS and they become
->> > > effectively non existent, unless you are on metered internet connection,
->> > > where downloading unused stuff would save you bandwidth, it should be
->> > > ok.  No ?
->> >
->> > Its not that.
->> >
->> > I *am* building the different layers, but say I have a stable set of
->> > packages
->> > and working images .. but for whatever reason, I need an updated
->> > python-<foo>
->> > package for an unrelated package, or some other layer that needs a newer
->> > version, etc.
->> >
->> > How do I get that, without taking updates to all the layers ? .. and
->> > layers that
->> > I really didn't want to update. I have to do some sort of combo-layer,
->> > carry
->> > my own copy of the recipe, etc.
->> >
->> > So there are definitely ways to do it, I'm just pointing out that I
->> > end up taking
->> > some build failures/issues from time to time on packages I didn't really
->> > need to update.
->> >
->> > The flip side of that argument is that all of the layers and sub layers
->> > have
->> > gone through some sort of global build, and hence I know that they all have
->> > worked together for someone. If I can update pieces individually, I break
->> > that .. and I own the broken bits after that .. which again, goes to
->> > my point that
->> > fixing one workflow/issue can break another :D
->> >
->> > Bruce
->> >
->> > >
->> > >> It is very likely that splitting the layer would help one issue, but
->> > >> make the other worse.
->> > >>
->> > >> So no solution from me, just an observation about potential issue.
->> > >>
->> > >> Cheers,
->> > >>
->> > >> Bruce
->> > >>
->> > >>>
->> > >>> - armin
->> > >>>>
->> > >>>> Ross
->> > >>>
->> > >>>
->> > >>> --
->> > >>> _______________________________________________
->> > >>> Openembedded-devel mailing list
->> > >>> Openembedded-devel@lists.openembedded.org
->> > >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> > >>
->> > >>
->> > >>
->> > >
->> >
->> >
->> >
->> > --
->> > "Thou shalt not follow the NULL pointer, for chaos and madness await
->> > thee at its end"
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >
-> --
-> -Joe MacDonald.
-> :wq
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
 
+iQIcBAEBAgAGBQJajXrMAAoJEIf59jXTHXZSNmcQAMADBWhVu+SREdwln2clMOR9
+3jNVnTL6K/DP58UuZPlxFKhU5Yag620JgVOIHTUD/wDQxP9tpSStBh1USrdAk8qr
+4kpbCSkO7Us2I9ttX6MgynarkhSMmh+GVC2kKK08WkhW2nZLAsIwsjx6VHhtxvJb
+dten+U3il7/igVZFL5HEt2YafQQQ4S31ke9XpRfOFMJYjDxEPDlGVHJJWuIybUxp
+7WNHjemh7CpfOGz3Q23ceGmjyTWqkw544mbPbmoWBfkFb810bgetMuEjThIE0nEt
+PiBYoY6UHFVarfR7HqaDUxf3FTA3O2RiWjSLnGjZmzjwmU6t1PvhySmDIm2GByh4
+xpKMO/KIaYOWZZygSRaU5rOert/kXCSLxR6Fu4jrs8kipuA53e2mWRGZzt+8omEO
+2yOkYRzboGtcGg+Hh7Tqm83eXySITRx+KoWms7HPWD6jZhbP2dxWtrBArEVPv/w3
+y+cRXO5YcOO8aZmM3yIRnxR7g9OAu1/MzrhxLrn3A92gscv0GEGMdfFBeQU9D/0g
+tphp4yDoH3Ofi7VYELgssGeLSktbTnfxaOIa9ZD05ZTJaO75/nJ2BhrYgEvVjzEh
+St3Yj23RVOdhyfHqp3BOI0LP8TNsA/2cDH8dMgxHGaNuJj6R+rx+dRPprQIEdenA
+N8YwuHlGhhHdal4ug5DH
+=Zzp2
+-----END PGP SIGNATURE-----
 
-
--- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end"
-
+--3r2sERxeG5twY2zu--
