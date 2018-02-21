@@ -1,68 +1,49 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ot0-f171.google.com (mail-ot0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 966CC71BA6
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f177.google.com (mail-yb0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 510F87875C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 13:59:22 +0000 (UTC)
-Received: by mail-ot0-f171.google.com with SMTP id n74so1255003ota.1
+	Wed, 21 Feb 2018 13:59:29 +0000 (UTC)
+Received: by mail-yb0-f177.google.com with SMTP id e3-v6so534969ybk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 05:59:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=j1vtpaaLGxoeInL54gnjCDRd2w3wSm2G9V5qz7fmzbc=;
-	b=wkllseJ5YGp/mk8ZxAgbJHscq4lUu84OGbWYYZBNVD930vjurJJWL6MRr/s66Z/WEq
-	+f1ubI6gumn6jCh2TVsffaJYQ7om49Mczrqyq1Hw5d+8emulx8XAtih03vD9N6iSuT6J
-	QQ2aj27+jwpySSmQNkcP11ZtdvWafpAn7RRA+ib+KUUNyJeo5rdqUrJrjKxQlYUx/D9y
-	Mz+a3bz8S6RNRaojzCVy4qvZ5ht9a5JJJKfuFwoLKxBDdr5ZMIP3FxTlBoYzjukaWNrT
-	Q/slMq421ZmBXSgpVWXDjRxIfLCBCIg4Th5OSljUqhY0LUh3vhJg7mT5xwXLQOrVatl+
-	ejEQ==
+	Wed, 21 Feb 2018 05:59:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=UtlfkI56S6utMG8YEzovTbsDiZ7ng96UZwxok4Fjyxw=;
+	b=B7A1E3ms7pUMdijObgW6XwNXltQtfluAC9fcj0g6NZ9lWNoWDiPPalsnKHuGZEBHTr
+	3P2CjRnrN+acjGvahrsuM4Nk4tOvJebjfUtdhY9YPzTKiJA0Jp1U/DS34DANRXODFZc6
+	fb8Bg4tsOfoLCAB5MojxI/aG0fScNcFYOWUpMufssBuQL99vyP0lInBCrL1RdiP1DMdK
+	2WR4/OzkE8DMdukbkCF12VrkYf1IAX8aTWx93rl3PiqTlQYBL/7awKd8duuq3ngrrdf8
+	sQrgbYM8vuBVLstZoKt3xaZREoikseSliLHKNFQ4kS3kVLIwf4RgnmJXN9gy+ioNr0Tm
+	Z2SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=j1vtpaaLGxoeInL54gnjCDRd2w3wSm2G9V5qz7fmzbc=;
-	b=ELjB24ftr8HeYxcl+n+bZSIi3D5S/wna1E8L/hMyGzXfu8c0kydySNZNBAM9mCI4oW
-	CLAiMMQYeQPVAlGT+rOasGIfA8bQXgJ5KnofwJmrsJ3LFbDx5nnZIT0XN0GajRogszRH
-	Pf8/bwwJXoWLGSEIsw1616DdceNG0f6BmOdtfyohdXZo3yDBELVOz/w/ckZFZ3XzLmYa
-	BMveFaSyl7AeG4hp+v59rZA88YP89imSiFxywtVkrsmJM/vuKKss/UX3E1wG7IZn9Oc4
-	aM/RnDyupYGArSFElYZ19NfOMElWCTki5k6l+6yCdwYBDui5BO6OYllhxsDIYeo3SxlA
-	oY7Q==
-X-Gm-Message-State: APf1xPDme82fkZqZLtkrermEHhWIx5c8atl+GGzsZMbfa/ctz9UDHChN
-	Gno/43JIQTieW2vJ/fFxvl9VMj0t
-X-Google-Smtp-Source: AG47ELsXa2J9+ihkvn2PXxP4HIpkhkQdKGWO3MMy1FEEZYy6cri0tTx8mxej929SV50p2ka7IN+zhw==
-X-Received: by 10.157.35.99 with SMTP id k32mr2466453otd.154.1519221563200;
-	Wed, 21 Feb 2018 05:59:23 -0800 (PST)
-Received: from mail-ot0-f179.google.com (mail-ot0-f179.google.com.
-	[74.125.82.179])
-	by smtp.gmail.com with ESMTPSA id 9sm4882401otd.2.2018.02.21.05.59.21
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Feb 2018 05:59:22 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ot0-f179.google.com with SMTP id p8so1463175otf.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 05:59:21 -0800 (PST)
-X-Received: by 10.157.63.102 with SMTP id m93mr2523586otc.327.1519221561428;
-	Wed, 21 Feb 2018 05:59:21 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=UtlfkI56S6utMG8YEzovTbsDiZ7ng96UZwxok4Fjyxw=;
+	b=LdXMCOE6G9PfxDi47yaSRUgD8ASiUFD8eolFBndqsnGGYBBK0Ceh6Kkb9UhAwlC73o
+	9KwK701Dzv8weblYiATuTGpAlnt+6q+8Ooku+i4Zppq9katLpwAeDIuLlPGgvZS1dijU
+	ZzjS1YqKz2p9a3D4W/iYMbHvJx3gZE1HGAjQ4LYWp9ogATPjQ/886p+kQ3RqB0/9VHpo
+	r2iYdFD+1PMagfbYL+U1rP3AO49wndR9P60PUxHajUrpZTYTXgErNuZ4h5Lix+87q22H
+	4o+K43lXulttIe+LJhmmC29yHp1/wt25eAS77iZ3wE+SNrrpq1tk5yy5+BwLjLgZkcs0
+	Q+Ng==
+X-Gm-Message-State: APf1xPAzdx7e5NRyjQTpZts36RQ9Ro1k33AHEh770bBAYLpp1Ss7fA3z
+	42XO1R8xgfwJIjTxNRXtGqgoWgFX9y7UZW0K+Sr+/g==
+X-Google-Smtp-Source: AH8x226w5NcNbEyo6mC+Rvgry85xYO260FQQa6vY/EiujnEi2qmy+dQ+eZFH2IFvOTAPgViiFd+zwggiFNkJu1EzD/U=
+X-Received: by 2002:a25:6281:: with SMTP id
+	w123-v6mr2128149ybb.237.1519221570909; 
+	Wed, 21 Feb 2018 05:59:30 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.157.80.129 with HTTP; Wed, 21 Feb 2018 05:59:20 -0800 (PST)
-In-Reply-To: <CADkTA4OUy=njCwt5OwsSvRrnDQbF+m2bY+iF=Oj8OEA156Fraw@mail.gmail.com>
-References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
-	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
-	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
-	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
-	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
-	<20180221134509.wheeephzdzqytopy@mentor.com>
-	<CADkTA4OUy=njCwt5OwsSvRrnDQbF+m2bY+iF=Oj8OEA156Fraw@mail.gmail.com>
-Date: Wed, 21 Feb 2018 10:59:20 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKo08YgHUtnr4TrQ5V0C7BbXRc2UEj=-pnGAo+TMxB1H5g@mail.gmail.com>
-Message-ID: <CAP9ODKo08YgHUtnr4TrQ5V0C7BbXRc2UEj=-pnGAo+TMxB1H5g@mail.gmail.com>
-To: Bruce Ashfield <bruce.ashfield@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Splitting meta-oe?
+Received: by 2002:a25:c787:0:0:0:0:0 with HTTP; Wed, 21 Feb 2018 05:59:30
+	-0800 (PST)
+In-Reply-To: <CALbNGRRAoHBSpsC0Ngenp2dPVxccOb+OeTerw44Bi4Of+bOACA@mail.gmail.com>
+References: <CALbNGRRAoHBSpsC0Ngenp2dPVxccOb+OeTerw44Bi4Of+bOACA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 21 Feb 2018 14:59:30 +0100
+Message-ID: <CALbNGRS4ENbv=WU5LxiKeSYKpfNXmXYEriCM7zVQGfwXT07vbw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] qtbase-native/qmake broken for 5.10?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,53 +56,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 13:59:22 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 13:59:30 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 21, 2018 at 10:55 AM, Bruce Ashfield
-<bruce.ashfield@gmail.com> wrote:
-> On Wed, Feb 21, 2018 at 8:45 AM, Joe MacDonald <Joe_MacDonald@mentor.com> wrote:
->> [Re: [oe] Splitting meta-oe?] On 18.02.21 (Wed 09:49) Martin Jansa wrote:
->>
->>> > I need an updated python-<foo> package for an unrelated package
->>>
->>> And how far will you go?
->>>
->>> If you want just newer python-<foo> and nothing else, will you take other
->>> changes to other python-* recipes from meta-python layer? There is a lot of
->>> recipes there, if you're so picky about updates, then you shouldn't update
->>> whole oe-core as well.
->>
->> It seems like this part is already settled, but it would seem to me that
->> this scenario, if I understand it correctly, is "I'm using oe-core and
->> see up-stream meta-oe/meta-somethingorother has an updated or new recipe
->> for something I want in my image but I don't want to do a pull on all of
->> meta-oe and potentially cause a huge rebuild of stuff I don't really
->> care about".
->>
->> That sounds like a problem better solved with 'git branch', 'git fetch'
->> and 'git cherry-pick' on the developer's side than breaking up meta-oe
->> across existing meta-boundaries.
+On Tue, Feb 20, 2018 at 10:54 AM, Andreas M=C3=BCller
+<schnitzeltony@gmail.com> wrote:
+> Hi,
 >
-> Agreed. I was just probing to see if anyone had ideas on how that could
-> be managed by infrastructure, versus me mucking about.
+> giving Qt 5.10.0 a build I ran into the following issue detected by
+> meta-qt5-extra/sddm build failure:
 >
-> Maybe RP's thoughts on layer tooling or setup possibilities would help,
-> but either way, I'll keep chugging along :D
+> Running native 'qmake -query' outputs
+>
+> | qmake -query
+> | Empty filename passed to function
+> | QT_SYSROOT:/home/superandy/tmp/oe-core-glibc/work/x86_64-linux/qtbase-n=
+ative/5.10.0+gitAUTOINC+50117d738a-r0/recipe-sysroot-native
+> | ...
+>
+> ask for a certain property e.g QT_INSTALL_IMPORTS (this is what sddm
+> does during build):
+>
+> | qmake -query QT_INSTALL_IMPORTS
+> | Empty filename passed to function
+> | /home/superandy/tmp/oe-core-glibc/work/x86_64-linux/qtbase-native/5.10.=
+0+gitAUTOINC+50117d738a-r0/recipe-sysroot-native/home/superandy/tmp/oe-core=
+-glibc/work/x86_64-linux/qtbase-native/5.10.0+gitAUTOINC+50117d738a-r0/reci=
+pe-sysroot-native/usr/lib/qt5/imports
+>
+> First line always reports 'Empty filename passed to function' which is
+> not exactly useful when expecting a path.
+>
+> I've searched the web without success for this so I decided to start
+> debugging. Due to standard optimization most interesting variables are
+> optimized out :(
+>
+> So before I rebuild qtbase-native without optimization and debug again
+> I thought there might be someone here knowing something helpful
+> regarding this issue.
+>
+> Thanks in advance
+>
+Fixed for sddm:
+sddm is a bit special: It asks qmake from within cmake for paths.
+Debugging showed that environment OE_QMAKE_QTCONF_PATH was missing.
+Exporting this in sddm recipe did the job.
 
-I think this is a valid thing to discuss but not in this thread (as
-well as for tooling and etc.).
+See qtbase source:
 
-Here I think we ought to focus in:
+QSettings *QLibraryInfoPrivate::findConfiguration()
+{
+#ifdef QT_BUILD_QMAKE
+    QByteArray config =3D getenv("OE_QMAKE_QTCONF_PATH");
+    QString qtconfig =3D QFile::decodeName(config);
+    if(!QFile::exists(qtconfig))    <<<<<-- This caused "Empty
+filename passed to function"
+...
 
- Should we split meta-oe?
+Seems qmake-native 5.9 behaved differently here...
 
-My vote is no! Yocto Project as a whole would benefit of people inside
-of Yocto Project QA sending fixes for parse errors introduced by their
-changes in OE-Core  and so I'd prefer to keep it as is.
+Thinking this more over I wonder if there might be another common
+place for exporting OE_QMAKE_QTCONF_PATH. How about
+qmake5_paths.bbclass?
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Andreas
 
