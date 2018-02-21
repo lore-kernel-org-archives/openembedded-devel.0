@@ -1,28 +1,24 @@
 Return-Path: <brendan.le.foll@intel.com>
-X-Greylist: delayed 576 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 21 Feb 2018 14:00:19 UTC
 Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
-	by mail.openembedded.org (Postfix) with ESMTP id B65F871BA6
+	by mail.openembedded.org (Postfix) with ESMTP id 5579D787F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 14:00:19 +0000 (UTC)
+	Wed, 21 Feb 2018 14:00:21 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
 	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
 	21 Feb 2018 05:50:45 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,543,1511856000"; d="scan'208";a="19361456"
+X-IronPort-AV: E=Sophos;i="5.46,543,1511856000"; d="scan'208";a="19361450"
 Received: from schultz.iul.intel.com ([172.28.50.124])
-	by fmsmga008.fm.intel.com with ESMTP; 21 Feb 2018 05:50:45 -0800
+	by fmsmga008.fm.intel.com with ESMTP; 21 Feb 2018 05:50:44 -0800
 From: Brendan Le Foll <brendan.le.foll@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Feb 2018 14:50:42 +0100
-Message-Id: <20180221135042.24289-2-brendan.le.foll@intel.com>
+Date: Wed, 21 Feb 2018 14:50:41 +0100
+Message-Id: <20180221135042.24289-1-brendan.le.foll@intel.com>
 X-Mailer: git-send-email 2.16.2
-In-Reply-To: <20180221135042.24289-1-brendan.le.foll@intel.com>
-References: <20180221135042.24289-1-brendan.le.foll@intel.com>
 Cc: Brendan Le Foll <brendan.le.foll@intel.com>
-Subject: [meta-oe][PATCH 2/2] upm: Update recipe to use v1.6.0
+Subject: [meta-oe][PATCH 1/2] mraa: Update recipe to use v1.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,96 +31,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 14:00:19 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 14:00:21 -0000
 
-ads1x15 patch is no longer required as it has been merged upstream
+The musl endian patch has been merged upstream so is no longer needed
 
 Signed-off-by: Brendan Le Foll <brendan.le.foll@intel.com>
 ---
- ...15-fixed-case-logic-in-getThresh-function.patch | 54 ----------------------
- meta-oe/recipes-extended/upm/upm_git.bb            |  5 +-
- 2 files changed, 2 insertions(+), 57 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
+ ...o_driver.c-include-endian.h-to-fix-musl-b.patch | 29 ----------------------
+ meta-oe/recipes-extended/mraa/mraa_git.bb          |  8 +++---
+ 2 files changed, 3 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch
 
-diff --git a/meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch b/meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
+diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch b/meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch
 deleted file mode 100644
-index c617d14a1..000000000
---- a/meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
+index 401949e2e..000000000
+--- a/meta-oe/recipes-extended/mraa/mraa/0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch
 +++ /dev/null
-@@ -1,54 +0,0 @@
--From c64d04d084f47b4cb3e1cdee6e96348fcc6a756e Mon Sep 17 00:00:00 2001
--From: Mihai Tudor Panu <mihai.tudor.panu@intel.com>
--Date: Tue, 30 May 2017 15:14:09 -0700
--Subject: [PATCH 1/1] ads1x15: fixed case logic in getThresh() function
+@@ -1,29 +0,0 @@
+-From 6c2649718fc9818da0d602a0b4767ea21a367e9e Mon Sep 17 00:00:00 2001
+-From: Tim Orling <timothy.t.orling@linux.intel.com>
+-Date: Sat, 27 Jan 2018 02:06:36 -0800
+-Subject: [PATCH] examples/iio_driver.c: include endian.h to fix musl build
 -
--Signed-off-by: Mihai Tudor Panu <mihai.tudor.panu@intel.com>
+-* be16toh and le16toh are defined in endian.h
 -
--Upstream-Status: Backported [c64d04d084f47b4cb3e1cdee6e96348fcc6a756e]
+-Upstream-Status: Pending
 -
--Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
--
+-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ----
-- src/ads1x15/ads1x15.cxx | 4 ++--
-- src/ads1x15/ads1x15.hpp | 2 +-
-- 2 files changed, 3 insertions(+), 3 deletions(-)
+- examples/iio_driver.c | 1 +
+- 1 file changed, 1 insertion(+)
 -
--diff --git a/src/ads1x15/ads1x15.cxx b/src/ads1x15/ads1x15.cxx
--index 35782709..47701b2a 100644
----- a/src/ads1x15/ads1x15.cxx
--+++ b/src/ads1x15/ads1x15.cxx
--@@ -116,7 +116,7 @@ ADS1X15::setContinuous(bool mode){
+-diff --git a/examples/iio_driver.c b/examples/iio_driver.c
+-index c5a0181..e3dc438 100644
+---- a/examples/iio_driver.c
+-+++ b/examples/iio_driver.c
+-@@ -23,6 +23,7 @@
+-  */
 - 
-- float
-- ADS1X15::getThresh(ADSTHRESH reg){
---     if( THRESH_HIGH && THRESH_LOW) return getLastSample(reg);
--+     if(reg == THRESH_HIGH || reg == THRESH_LOW) return getLastSample(reg);
--      else return 0.0;
-- }
+- #include <unistd.h>
+-+#include <endian.h>
+- #include "mraa/iio.h"
 - 
--@@ -137,7 +137,7 @@ ADS1X15::setThresh(ADSTHRESH reg, float value){
--      case 2:
--      case 3:
--           set_value = value / getMultiplier();
---         set_value = set_value << m_bitShift;
--+          set_value = set_value << m_bitShift;
--           if(i2c->writeWordReg(reg, swapWord(set_value)) != mraa::SUCCESS){
--             throw std::runtime_error(std::string(__FUNCTION__) + ": I2c.write() failed");
--             return;
--diff --git a/src/ads1x15/ads1x15.hpp b/src/ads1x15/ads1x15.hpp
--index 7524572d..efd8c8ec 100644
----- a/src/ads1x15/ads1x15.hpp
--+++ b/src/ads1x15/ads1x15.hpp
--@@ -390,7 +390,7 @@ namespace upm {
--              * @param reg ADSTHRES enum value.
--              * Returns 0.0 unless THRESH_HIGH or THRESH_LOW requested.
--              */
---            float getThresh(ADSTHRESH reg = THRESH_LOW);
--+            float getThresh(ADSTHRESH reg = THRESH_DEFAULT);
-- 
--             /**
--              * Sets threshold levels or configures for conversion ready
+- static void
 --- 
--2.11.0
+-2.13.6
 -
-diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
-index a5c2bb321..d742a5e46 100644
---- a/meta-oe/recipes-extended/upm/upm_git.bb
-+++ b/meta-oe/recipes-extended/upm/upm_git.bb
-@@ -7,12 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index e1d593cbe..16883be3a 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -3,15 +3,13 @@ HOMEPAGE = "https://github.com/intel-iot-devkit/mraa"
+ SECTION = "libs"
  
- DEPENDS = "libjpeg-turbo mraa"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=66493d54e65bfc12c7983ff2e884f37f"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4b92a3b497d7943042a6db40c088c3f2"
  
--SRCREV = "106b6c706268522ab0168a4ddb19e89ce832e084"
--PV = "1.3.0-git${SRCPV}"
-+SRCREV = "cc7fec9ae0228add9011bf1c2cd5e0ca2ba0d4f0"
-+PV = "1.6.0-git${SRCPV}"
+-SRCREV = "8ddbcde84e2d146bc0f9e38504d6c89c14291480"
+-PV = "1.7.0-git${SRCPV}"
++SRCREV = "fbb7d9232067eac3f4508a37a8f7ea0c4fcebacb"
++PV = "1.9.0-git${SRCPV}"
  
- SRC_URI = " \
-     git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
--    file://ads1x15-fixed-case-logic-in-getThresh-function.patch \
- "
+ SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http"
  
+-SRC_URI_append_libc-musl = " file://0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch"
+-
  S = "${WORKDIR}/git"
+ 
+ # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
 -- 
 2.16.2
 
