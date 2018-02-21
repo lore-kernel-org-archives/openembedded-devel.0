@@ -1,31 +1,64 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C6FB78678
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com
+	[209.85.218.53])
+	by mail.openembedded.org (Postfix) with ESMTP id BE8DE784F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Feb 2018 23:41:16 +0000 (UTC)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
-	w1KNfFR9014013
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
-	verify=NOT); Tue, 20 Feb 2018 23:41:16 GMT
-Message-ID: <1519170075.24236.345.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 20 Feb 2018 23:41:15 +0000
-In-Reply-To: <CA+chaQd=QE4fc32LDKepRsNn0gtuyQSfFi3aQ2YxmRbZtJjp1Q@mail.gmail.com>
+	Wed, 21 Feb 2018 00:07:36 +0000 (UTC)
+Received: by mail-oi0-f53.google.com with SMTP id b8so6852770oib.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Feb 2018 16:07:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=ucQZVvDjZSHiBrC/2drHkpf2spPDKXzdHrcTNrN0pBE=;
+	b=DxJQGaYCrbMahvBmfa/ahgz3nkQxuZF4FP0KhEiGqcZ9ruiUjUywI7/2D0i7UfHq0Y
+	0Wpo60PAwuuUl8ik5pu0yHW/6spWTkpJo7X8ptiXq2bFnAAajUO2ND00XsyMGL8G21O6
+	2lawLYxI/0ZMhD2tlZABNDcsKali2TdxaVVp84YhKRBHsGrRjmkWycngQu/BWdtOoCHu
+	NjtlVsy8ckTUIPVE4Fu7ADN/iOzpjmG7kjXvrZeVzM5zMXhkPQ1aWC37fHidpA0ruyMi
+	Fs4L+NPK9Bu2N53MP5TcvVrz4obxdMlBJg37ClhF78h8KBIzQJ8ysA7PHXC20Pzmy104
+	bucA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=ucQZVvDjZSHiBrC/2drHkpf2spPDKXzdHrcTNrN0pBE=;
+	b=Sel0cLQSTUaEtlCt4kVLQY+mrY1oTfTntp0VAJCI/K2xIkziPfVM0lgiilAhTpL16Z
+	HAwVh+7EtLKubW/SZMetg5oRXLKUTacFj3dMY+1s76WkEZqOwAtl6kFPpvv/26oxFCk6
+	GtO/hyANueoSdxXOtKrs8mfrRpHV6bOM6pNks8rHl/k0p39btX9eXSOe3yHkif7XUghH
+	W+2Tih2xYd1aRkqpfggMEIRvX8EWYERpDKfaPBB+sfGkCWWR2dlRZUaTk6OXkpp+ska5
+	tJcA2QMEdwAd9/E/NB2p0zV4YS2kA2AHVJU2I1Hz+EeqxPoJMgu5GqLlM63nuOvGpTQZ
+	0BMg==
+X-Gm-Message-State: APf1xPCgXUjdDHkEvxZHR0kg/asNuiyp83NhzckhU8rikQZCBRKGEq+M
+	Q+fzvWtqXAhMkRv/oIWP29KOZJog
+X-Google-Smtp-Source: AH8x225JFVJGK6uVJOTzNodh0KbCs89MIRUXJArg0+k4Cl7C92uQeSxVeXym+UzDFVPF5Fj/fgrbdA==
+X-Received: by 10.202.19.24 with SMTP id e24mr1002755oii.142.1519171657271;
+	Tue, 20 Feb 2018 16:07:37 -0800 (PST)
+Received: from mail-ot0-f178.google.com (mail-ot0-f178.google.com.
+	[74.125.82.178]) by smtp.gmail.com with ESMTPSA id
+	p41sm14293774otg.33.2018.02.20.16.07.35
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 20 Feb 2018 16:07:35 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ot0-f178.google.com with SMTP id b15so7153983otf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Feb 2018 16:07:35 -0800 (PST)
+X-Received: by 10.157.49.84 with SMTP id v20mr1116707otd.103.1519171654928;
+	Tue, 20 Feb 2018 16:07:34 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.157.80.129 with HTTP; Tue, 20 Feb 2018 16:07:34 -0800 (PST)
+In-Reply-To: <1519152750.24236.330.camel@linuxfoundation.org>
 References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
 	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
 	<1519148811.24236.321.camel@linuxfoundation.org>
 	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
 	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
 	<1519152750.24236.330.camel@linuxfoundation.org>
-	<1fad6cab-f195-1dca-3b10-ebefe0e44fe3@gmail.com>
-	<1519163708.24236.337.camel@linuxfoundation.org>
-	<CA+chaQd=QE4fc32LDKepRsNn0gtuyQSfFi3aQ2YxmRbZtJjp1Q@mail.gmail.com>
-X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
-Mime-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.99.3 at dan
-X-Virus-Status: Clean
+Date: Tue, 20 Feb 2018 21:07:34 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
+Message-ID: <CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -40,60 +73,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Feb 2018 23:41:17 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 00:07:36 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
 
-On Tue, 2018-02-20 at 23:27 +0100, Martin Jansa wrote:
-> Richard, I agree with all you said.
-> 
-> But I still don't see how replacing meta-oe git repository with 10
-> different git repositories helps with anything.
-> 
-> It won't give you more time, it would only cause more work to already
-> exhausted and (re)tired meta-oe maintainers.
+On Tue, Feb 20, 2018 at 3:52 PM, Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+> I could combo-layer pieces of meta-oe into poky but I'd imagine that
+> would create more problems than it would solve too and given the
+> general dislike of combo-layer, I think ultimately better layer tooling
+> would be a better answer and more acceptable to everyone.
 
-I'm actually very worried about these (re)tired maintainers. If the
-layers were more independent it would allow some of the patch handling
-responsibilities and testing responsibilities to move to other people,
-reducing the load on those maintainers.
+Poky creates more problems then it solves
+>
+> Cheers,
+>
+> Richard
+>
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Obviously this can't happen with everything all at once but I think
-some pieces of the current repo may not be far away or that difficult
-to separate out.
 
-Therefore raising the question doesn't seem unreasonable.
 
-The separate layers and maintainership is the way we designed the new
-layered approach to OE to scale.
-
-> It won't make the layers independent.
-
-It won't, but it would give people more of a reason to fix it.
-
-> It won't improve existing tooling.
-> 
-> It won't improve automated upgrades or testing.
-> 
-> Yes meta-oe needs to improve and it would be great to have layers as
-> those fancy colorful boxes from Yocto documentation, which you can
-> willy-nilly add to your BBLAYERS without any dependencies. But that's
-> not how it is now and splitting the repository alone won't help with
-> that. If there are people willing to make it work better, then they
-> can improve it in existing git repository and when it works well and
-> there are really independent layers, then we can re-evaluate
-> splitting the independent ones to separate repositories for easier
-> consumption.
-
-It alone will not change things but it *might* just trigger more people
-to get involved, help and take some of the workload from those
-maintainers who are overloaded right now. Its a chicken and egg
-problem, our difference is we disagree on which step might help. We've
-tried the monolithic repo for quite a while, it might be time to try a
-different approach maybe with one piece of meta-oe?
-
-Cheers,
-
-Richard
-[away tomorrow so further replies may be delayed]
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
