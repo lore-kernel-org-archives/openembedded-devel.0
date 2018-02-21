@@ -1,49 +1,60 @@
-Return-Path: <mans.zigher@gmail.com>
-Received: from mail-ot0-f177.google.com (mail-ot0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 89458787ED
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EA3CD78754
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 15:49:47 +0000 (UTC)
-Received: by mail-ot0-f177.google.com with SMTP id q12so1789474otg.10
+	Wed, 21 Feb 2018 15:54:02 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id o76so5828386wrb.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 07:49:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ahm6PRCAPdY+RQOin2d/xmwQeXZ1Uypi2dEgwaMuPio=;
-	b=Lpsrq0PJUXnPd6snEdG3AuJ1eQsFndgAq2QtSVLYSc63wzQew8iAxz6zd3h2Yit66w
-	9ZA4b1T/g425UB9e2oS5dOcd354UTpSsg2T+3EPOfADfpVVp7pGeMWbXpJyqItAZkAxp
-	GBCgfpU0SuUNzlfJN1H+OEieT12Lo+0xsCbsKoiJjkt+7yiBftTVBMthU/L5qVm3+BVF
-	TwpDoqHT0mUVLXc1B/fO71bQxhf2/+TPHmCmEkrT91KC8ABvB5dcE2voVodE/nOznzDV
-	G1GlZKHfh7wZ4E0krVP1Se88SMuFjBSpRcTBvyBqhPTitIu12nqsSUA/t9wMG/eBHj2S
-	Sv1w==
+	Wed, 21 Feb 2018 07:54:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:organization:mime-version:content-transfer-encoding;
+	bh=a+9cQFllKfJcsKXCgBtH6fcnAUaXjLjMymI5va9CjGA=;
+	b=k4sI1poLNSSVX0VHD7CQr913Ov/bfYLV3BYkmOvfsalue3vasWyoGUlu+KkU97gtw+
+	FTz93tW+wyZ4hWUkEPg1QVEHGbl+LW9CLYY651U1OoKP5Z8EW5bnH+qFHdaR+7nYnxPs
+	QA8R2Iqi8aPS7KYDeaWWyWFLxZ2qYh/BieFFdEMyntt0X0xYJto3sI6aqxrZnDnCxMXC
+	CphVPW5geZGK+xV1a/QZzvm0Cj0KGLujrm1qJRfbR5dhqkGFFdxBgf1vIwloTuiP1cWS
+	z5C25cjdqomXOY0CpRKBMyorjXosQqg4M+MG3yODhKzQ+sWnIkc12gzfURHuei0dBqR6
+	FcbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ahm6PRCAPdY+RQOin2d/xmwQeXZ1Uypi2dEgwaMuPio=;
-	b=QlILbXThhpUlo//hBcf1GGosXzmfiDSr+hU4dPcheTl6AeWEqHrn+z5g5BL4CkToxD
-	bIW9GCG2bQEpVwu5f7tNsDtHp7uR8C7211OOvyCtwDMTihSbDtFSJwIsNNyfJnf9IX8t
-	Ch3ftRyqgpPG9HqwBLUypxfuoHRkNkViEEmewnX+bCk26Yr8Hs76v+CJYYgr+c6TNJ02
-	koHDy6P3K6FBbTE7BEwjjXRvbDnKOEYhDNhDBjhiKi/4h6/nChbxbyVBvDHieQbhKSg1
-	U20AtBLuJCWmK5WvLYv1CGyvV/V1rHDP4Jsx0Aobw/pVb8554Drsqs3fImJfr/gL7Gfy
-	ZBdQ==
-X-Gm-Message-State: APf1xPAtnxLYV7jbFMa8lvJQHiyLA6JGSJQZ9l3WZwaK/jsDS3so11jh
-	aaHYf/3LrH22a/gVW34NHL8j9heRjtaVMCtsUFI=
-X-Google-Smtp-Source: AH8x224OacKzC3ckBTnFG4JzImxvYrJTuW+4MdkUoL4C7Y08UIbLtjIE4YqwsAw7Gjehdfx8ufxIm2s1f1KqPiiIbtU=
-X-Received: by 10.157.3.196 with SMTP id f62mr2836526otf.360.1519228188674;
-	Wed, 21 Feb 2018 07:49:48 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.74.110.68 with HTTP; Wed, 21 Feb 2018 07:49:48 -0800 (PST)
-In-Reply-To: <CAEhQi8kt8eOUDvP9UpZ5vYCW9fSxbhkZ3x6hcbnLRqV=K=7HGQ@mail.gmail.com>
-References: <CAEhQi8kZmV0Ar0gfW-JWufQM6c0Fg+rp5E5bCzAKDj6YvsLugw@mail.gmail.com>
-	<CAEhQi8=ugNDV7HtziAGdEikhkuSH88JjUaYnx8W50TrMPJNVDw@mail.gmail.com>
-	<CAEhQi8kt8eOUDvP9UpZ5vYCW9fSxbhkZ3x6hcbnLRqV=K=7HGQ@mail.gmail.com>
-From: =?UTF-8?B?TcOlbnMgWmlnaGVy?= <mans.zigher@gmail.com>
-Date: Wed, 21 Feb 2018 16:49:48 +0100
-Message-ID: <CAEhQi8kYxwU+o-MTDcGafFMvYt=fU0CFR6mb5On05Gk_ryvJyw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt4] Cmake Could NOT find Qt4, missing: QT_MOC_EXECUTABLE
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=a+9cQFllKfJcsKXCgBtH6fcnAUaXjLjMymI5va9CjGA=;
+	b=JnZOxu5gDu5+izsLFw2ySRg1gsLcMeb4UjadWMw7VEqUCFARercHgC7tLSmQDJ+oxC
+	ZmyIOejf2LFpHQEh5mNgZZR3w7TO6fbgME2Ne018IIRNHVNIulnqSjbgsOdbnYcJdG7G
+	wUr/xkAfxDld69ypuCDBvrnHreGh1oCc17Bag+n3obk4wEB9joorHr7/zwQ0EWqydmLy
+	OzFBr1Ju7fyZcel1heLUD8cv7EAHNK6OC3FjyftLhniXwA0A6RAP1XMcLDEYoieYctvR
+	+62FVLvYLwzevPczZkjpVwSWmGB70LTn4lNvXxRAdnrc2ga2ZtfpkRS2F3LzkQavJKNu
+	3o5A==
+X-Gm-Message-State: APf1xPCCsTiuXjaeI1ejK4qMyIvp6eMvTuOlAiH6BWAcnrs1KvwEd355
+	XXVuRR5QlRNPPfwvXgVoLsvy
+X-Google-Smtp-Source: AH8x2256vztHZ6uT0XUpsE+/xPtdjYwniE3IWG48UHEvVmqvzJOOJqB9lajrPJsBVvQa7eWSMXe14w==
+X-Received: by 10.223.128.227 with SMTP id 90mr3608563wrl.50.1519228443765;
+	Wed, 21 Feb 2018 07:54:03 -0800 (PST)
+Received: from pohly-mobl1 (p548497B7.dip0.t-ipconnect.de. [84.132.151.183])
+	by smtp.gmail.com with ESMTPSA id 77sm966819wmu.17.2018.02.21.07.54.02
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 21 Feb 2018 07:54:02 -0800 (PST)
+Message-ID: <1519228441.6698.10.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>, Khem Raj
+	<raj.khem@gmail.com>, Tim Orling <ticotimo@gmail.com>
+Date: Wed, 21 Feb 2018 16:54:01 +0100
+In-Reply-To: <1519152750.24236.330.camel@linuxfoundation.org>
+References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
+	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+	<1519148811.24236.321.camel@linuxfoundation.org>
+	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
+	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
+	<1519152750.24236.330.camel@linuxfoundation.org>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.22.6-1+deb9u1 
+Mime-Version: 1.0
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,146 +67,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 15:49:47 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 15:54:03 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Shouldn't it actually point to sysroot-components? Even if the directory
-would actually exists and containing the moc4 then what if the recipe is
-cleared after building qt4-native it would break. Is the problem that
-qt4-native is actually broken for rocko?
+On Tue, 2018-02-20 at 18:52 +0000, Richard Purdie wrote:
+> Even once we do that, we (as in YP) can't send out a clear message
+> about what we're testing and users will clone meta-oe and expect
+> everything to work. So right now I do have problems trying to get to
+> a point where YP can use meta-oe effectively.
 
-BR
-Mans Zigher
+We had the same issue in refkit: the bblayers.conf.sample enabled a
+large amount of layers, but the distro itself only needed and could
+test only a subset of the recipes in those layers.
 
-2018-02-21 15:51 GMT+01:00 M=C3=A5ns Zigher <mans.zigher@gmail.com>:
+We solved this with supported-recipes.bbclass [1] and an explicit list
+of recipes that were considered part of the distro [2] and thus got
+tested. A "bitbake world" only builds those recipes. Users of the
+distro could enable additional recipes, but then knew that they were on
+their own regarding those.
 
-> After some more investigation I realized that qmake is actually detected
-> correctly the problem is that when running qmake2 -query I get the
-> following results
->
-> qmake2 -query
->
-> QT_INSTALL_PREFIX:/home/build/tmp/work/x86_64-linux/qt4-nati
-> ve/4.8.7-r0/recipe-sysroot-native/usr
->
->
-> QT_INSTALL_DATA:/home/build/tmp/work/x86_64-linux/qt4-native
-> /4.8.7-r0/recipe-sysroot-native/usr/share/qt4
->
->
-> QT_INSTALL_DOCS:/home/build/tmp/work/x86_64-linux/qt4-native
-> /4.8.7-r0/recipe-sysroot-native/usr/share/doc/qt4
->
->
-> QT_INSTALL_HEADERS:/home/build/tmp/work/x86_64-linux/qt4-
-> native/4.8.7-r0/recipe-sysroot-native/usr/include/qt4
->
->
-> QT_INSTALL_LIBS:/home/build/tmp/work/x86_64-linux/qt4-native
-> /4.8.7-r0/recipe-sysroot-native/usr/lib
->
->
-> QT_INSTALL_BINS:/home/build/tmp/work/x86_64-linux/qt4-native
-> /4.8.7-r0/recipe-sysroot-native/usr/bin
->
->
-> QT_INSTALL_PLUGINS:/home/build/tmp/work/x86_64-linux/qt4-
-> native/4.8.7-r0/recipe-sysroot-native/usr/lib/qt4/plugins
->
->
-> QT_INSTALL_IMPORTS:/home/build/tmp/work/x86_64-linux/qt4-
-> native/4.8.7-r0/recipe-sysroot-native/usr/lib/qt4/imports
->
->
-> QT_INSTALL_TRANSLATIONS:/home/build/tmp/work/x86_64-linux/qt
-> 4-native/4.8.7-r0/recipe-sysroot-native/usr/share/qt4/translations
->
->
-> QT_INSTALL_CONFIGURATION:/home/build/tmp/work/x86_64-linux/
-> qt4-native/4.8.7-r0/recipe-sysroot-native/etc/qt4
->
->
-> QT_INSTALL_EXAMPLES:/home/build/tmp/work/x86_64-linux/qt4-
-> native/4.8.7-r0/recipe-sysroot-native/usr/bin/qt4/examples
->
->
-> QT_INSTALL_DEMOS:/home/build/tmp/work/x86_64-linux/qt4-nativ
-> e/4.8.7-r0/recipe-sysroot-native/usr/bin/qt4/demos
->
->
-> QMAKE_MKSPECS:/home/build/tmp/work/x86_64-linux/qt4-native/4
-> .8.7-r0/recipe-sysroot-native/usr/share/qt4/mkspecs
->
->
-> QMAKE_VERSION:2.01a
-> QT_VERSION:4.8.7
->
-> QT_INSTALL_BINS:/home/build/tmp/work/x86_64-linux/qt4-native
-> /4.8.7-r0/recipe-sysroot-native/usr/bin is a directory that is none
-> existing.
->
-> BR
-> Mans Zigher
->
->
-> 2018-02-21 13:13 GMT+01:00 M=C3=A5ns Zigher <mans.zigher@gmail.com>:
->
->> When running devshell I can verify that echo $PATH includes the
->> recipe-sysroot-native dir and if I run "whereis qmake2" the
->> recipe-sysroot-native dir appears. So the question remains why is CMake =
-not
->> detecting the binaries?
->>
->> BR
->> Mans Zigher
->>
->> 2018-02-21 13:02 GMT+01:00 M=C3=A5ns Zigher <mans.zigher@gmail.com>:
->>
->>> Hi,
->>>
->>> I am trying to build a native QT application that is required when
->>> generating the image. The recipe is depending on qt4-native and i am us=
-ing
->>> poky version rocko. The application is using CMake which is producing t=
-he
->>> following error
->>>
->>> | -- Looking for Q_WS_MAC - not found
->>> | CMake Error at recipe-sysroot-native/usr/shar
->>> e/cmake-3.8/Modules/FindPackageHandleStandardArgs.cmake:137 (message):
->>>
->>> |   Could NOT find Qt4 (missing: QT_MOC_EXECUTABLE QT_RCC_EXECUTABLE
->>> |   QT_UIC_EXECUTABLE) (found version "4.8.7")
->>> | Call Stack (most recent call first):
->>> |   recipe-sysroot-native/usr/share/cmake-3.8/Modules/FindPackageHandle=
-StandardArgs.cmake:377
->>> (_FPHSA_FAILURE_MESSAGE)
->>> |   recipe-sysroot-native/usr/share/cmake-3.8/Modules/FindQt4.cmake:132=
-6
->>> (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
->>> |   CMakeLists.txt:5 (find_package)
->>>
->>> When using jethro the recipe works fine. If I search for qmake2 in the
->>> build directory we get the following hits
->>>
->>> ./tmp/sysroots-components/x86_64/qt4-native/usr/bin/qmake2
->>> ./tmp/work/x86_64-linux/my-qt-application/0.1-r0/recipe-sysr
->>> oot-native/usr/bin/qmake2
->>> ./tmp/work/x86_64-linux/qt4-native/4.8.7-r0/sysroot-destdir/
->>> home/build/tmp/work/x86_64-linux/qt4-native/4.8.7-r0/recipe-
->>> sysroot-native/usr/bin/qmake2
->>>
->>> I would think that CMake should find qmake2 in the recipe-sysroot-nativ=
-e
->>> dir. Any help would be appreciated. How can I point CMake in the direct=
-ion
->>> so it finds the qt tools.
->>>
->>> BR
->>> M=C3=A5ns Zigher
->>>
->>>
->>
->
+[1] https://github.com/intel/intel-iot-refkit/blob/master/meta-refkit-core/classes/supported-recipes.bbclass
+[2] https://github.com/intel/intel-iot-refkit/blob/master/meta-refkit/conf/distro/include/refkit-supported-recipes.txt
+
+Note that this mechanism also allowed us to support only a subset of,
+for example, OE-core: we settled on systemd as the only supported init
+system, so sysvinit wasn't listed as supported. This is something that
+cannot realistically be achieved by splitting up layers and/or repos
+containing layers.
+
+-- 
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
 
