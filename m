@@ -1,49 +1,28 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f177.google.com (mail-yb0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 510F87875C
+Return-Path: <brendan.le.foll@intel.com>
+X-Greylist: delayed 576 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 21 Feb 2018 14:00:19 UTC
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by mail.openembedded.org (Postfix) with ESMTP id B65F871BA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 13:59:29 +0000 (UTC)
-Received: by mail-yb0-f177.google.com with SMTP id e3-v6so534969ybk.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 05:59:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=UtlfkI56S6utMG8YEzovTbsDiZ7ng96UZwxok4Fjyxw=;
-	b=B7A1E3ms7pUMdijObgW6XwNXltQtfluAC9fcj0g6NZ9lWNoWDiPPalsnKHuGZEBHTr
-	3P2CjRnrN+acjGvahrsuM4Nk4tOvJebjfUtdhY9YPzTKiJA0Jp1U/DS34DANRXODFZc6
-	fb8Bg4tsOfoLCAB5MojxI/aG0fScNcFYOWUpMufssBuQL99vyP0lInBCrL1RdiP1DMdK
-	2WR4/OzkE8DMdukbkCF12VrkYf1IAX8aTWx93rl3PiqTlQYBL/7awKd8duuq3ngrrdf8
-	sQrgbYM8vuBVLstZoKt3xaZREoikseSliLHKNFQ4kS3kVLIwf4RgnmJXN9gy+ioNr0Tm
-	Z2SQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=UtlfkI56S6utMG8YEzovTbsDiZ7ng96UZwxok4Fjyxw=;
-	b=LdXMCOE6G9PfxDi47yaSRUgD8ASiUFD8eolFBndqsnGGYBBK0Ceh6Kkb9UhAwlC73o
-	9KwK701Dzv8weblYiATuTGpAlnt+6q+8Ooku+i4Zppq9katLpwAeDIuLlPGgvZS1dijU
-	ZzjS1YqKz2p9a3D4W/iYMbHvJx3gZE1HGAjQ4LYWp9ogATPjQ/886p+kQ3RqB0/9VHpo
-	r2iYdFD+1PMagfbYL+U1rP3AO49wndR9P60PUxHajUrpZTYTXgErNuZ4h5Lix+87q22H
-	4o+K43lXulttIe+LJhmmC29yHp1/wt25eAS77iZ3wE+SNrrpq1tk5yy5+BwLjLgZkcs0
-	Q+Ng==
-X-Gm-Message-State: APf1xPAzdx7e5NRyjQTpZts36RQ9Ro1k33AHEh770bBAYLpp1Ss7fA3z
-	42XO1R8xgfwJIjTxNRXtGqgoWgFX9y7UZW0K+Sr+/g==
-X-Google-Smtp-Source: AH8x226w5NcNbEyo6mC+Rvgry85xYO260FQQa6vY/EiujnEi2qmy+dQ+eZFH2IFvOTAPgViiFd+zwggiFNkJu1EzD/U=
-X-Received: by 2002:a25:6281:: with SMTP id
-	w123-v6mr2128149ybb.237.1519221570909; 
-	Wed, 21 Feb 2018 05:59:30 -0800 (PST)
-MIME-Version: 1.0
-Received: by 2002:a25:c787:0:0:0:0:0 with HTTP; Wed, 21 Feb 2018 05:59:30
-	-0800 (PST)
-In-Reply-To: <CALbNGRRAoHBSpsC0Ngenp2dPVxccOb+OeTerw44Bi4Of+bOACA@mail.gmail.com>
-References: <CALbNGRRAoHBSpsC0Ngenp2dPVxccOb+OeTerw44Bi4Of+bOACA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 21 Feb 2018 14:59:30 +0100
-Message-ID: <CALbNGRS4ENbv=WU5LxiKeSYKpfNXmXYEriCM7zVQGfwXT07vbw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] qtbase-native/qmake broken for 5.10?
+	Wed, 21 Feb 2018 14:00:19 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	21 Feb 2018 05:50:45 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.46,543,1511856000"; d="scan'208";a="19361456"
+Received: from schultz.iul.intel.com ([172.28.50.124])
+	by fmsmga008.fm.intel.com with ESMTP; 21 Feb 2018 05:50:45 -0800
+From: Brendan Le Foll <brendan.le.foll@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Feb 2018 14:50:42 +0100
+Message-Id: <20180221135042.24289-2-brendan.le.foll@intel.com>
+X-Mailer: git-send-email 2.16.2
+In-Reply-To: <20180221135042.24289-1-brendan.le.foll@intel.com>
+References: <20180221135042.24289-1-brendan.le.foll@intel.com>
+Cc: Brendan Le Foll <brendan.le.foll@intel.com>
+Subject: [meta-oe][PATCH 2/2] upm: Update recipe to use v1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,69 +35,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 13:59:30 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Feb 2018 14:00:19 -0000
 
-On Tue, Feb 20, 2018 at 10:54 AM, Andreas M=C3=BCller
-<schnitzeltony@gmail.com> wrote:
-> Hi,
->
-> giving Qt 5.10.0 a build I ran into the following issue detected by
-> meta-qt5-extra/sddm build failure:
->
-> Running native 'qmake -query' outputs
->
-> | qmake -query
-> | Empty filename passed to function
-> | QT_SYSROOT:/home/superandy/tmp/oe-core-glibc/work/x86_64-linux/qtbase-n=
-ative/5.10.0+gitAUTOINC+50117d738a-r0/recipe-sysroot-native
-> | ...
->
-> ask for a certain property e.g QT_INSTALL_IMPORTS (this is what sddm
-> does during build):
->
-> | qmake -query QT_INSTALL_IMPORTS
-> | Empty filename passed to function
-> | /home/superandy/tmp/oe-core-glibc/work/x86_64-linux/qtbase-native/5.10.=
-0+gitAUTOINC+50117d738a-r0/recipe-sysroot-native/home/superandy/tmp/oe-core=
--glibc/work/x86_64-linux/qtbase-native/5.10.0+gitAUTOINC+50117d738a-r0/reci=
-pe-sysroot-native/usr/lib/qt5/imports
->
-> First line always reports 'Empty filename passed to function' which is
-> not exactly useful when expecting a path.
->
-> I've searched the web without success for this so I decided to start
-> debugging. Due to standard optimization most interesting variables are
-> optimized out :(
->
-> So before I rebuild qtbase-native without optimization and debug again
-> I thought there might be someone here knowing something helpful
-> regarding this issue.
->
-> Thanks in advance
->
-Fixed for sddm:
-sddm is a bit special: It asks qmake from within cmake for paths.
-Debugging showed that environment OE_QMAKE_QTCONF_PATH was missing.
-Exporting this in sddm recipe did the job.
+ads1x15 patch is no longer required as it has been merged upstream
 
-See qtbase source:
+Signed-off-by: Brendan Le Foll <brendan.le.foll@intel.com>
+---
+ ...15-fixed-case-logic-in-getThresh-function.patch | 54 ----------------------
+ meta-oe/recipes-extended/upm/upm_git.bb            |  5 +-
+ 2 files changed, 2 insertions(+), 57 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
 
-QSettings *QLibraryInfoPrivate::findConfiguration()
-{
-#ifdef QT_BUILD_QMAKE
-    QByteArray config =3D getenv("OE_QMAKE_QTCONF_PATH");
-    QString qtconfig =3D QFile::decodeName(config);
-    if(!QFile::exists(qtconfig))    <<<<<-- This caused "Empty
-filename passed to function"
-...
+diff --git a/meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch b/meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
+deleted file mode 100644
+index c617d14a1..000000000
+--- a/meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
++++ /dev/null
+@@ -1,54 +0,0 @@
+-From c64d04d084f47b4cb3e1cdee6e96348fcc6a756e Mon Sep 17 00:00:00 2001
+-From: Mihai Tudor Panu <mihai.tudor.panu@intel.com>
+-Date: Tue, 30 May 2017 15:14:09 -0700
+-Subject: [PATCH 1/1] ads1x15: fixed case logic in getThresh() function
+-
+-Signed-off-by: Mihai Tudor Panu <mihai.tudor.panu@intel.com>
+-
+-Upstream-Status: Backported [c64d04d084f47b4cb3e1cdee6e96348fcc6a756e]
+-
+-Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
+-
+----
+- src/ads1x15/ads1x15.cxx | 4 ++--
+- src/ads1x15/ads1x15.hpp | 2 +-
+- 2 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/ads1x15/ads1x15.cxx b/src/ads1x15/ads1x15.cxx
+-index 35782709..47701b2a 100644
+---- a/src/ads1x15/ads1x15.cxx
+-+++ b/src/ads1x15/ads1x15.cxx
+-@@ -116,7 +116,7 @@ ADS1X15::setContinuous(bool mode){
+- 
+- float
+- ADS1X15::getThresh(ADSTHRESH reg){
+--     if( THRESH_HIGH && THRESH_LOW) return getLastSample(reg);
+-+     if(reg == THRESH_HIGH || reg == THRESH_LOW) return getLastSample(reg);
+-      else return 0.0;
+- }
+- 
+-@@ -137,7 +137,7 @@ ADS1X15::setThresh(ADSTHRESH reg, float value){
+-      case 2:
+-      case 3:
+-           set_value = value / getMultiplier();
+--         set_value = set_value << m_bitShift;
+-+          set_value = set_value << m_bitShift;
+-           if(i2c->writeWordReg(reg, swapWord(set_value)) != mraa::SUCCESS){
+-             throw std::runtime_error(std::string(__FUNCTION__) + ": I2c.write() failed");
+-             return;
+-diff --git a/src/ads1x15/ads1x15.hpp b/src/ads1x15/ads1x15.hpp
+-index 7524572d..efd8c8ec 100644
+---- a/src/ads1x15/ads1x15.hpp
+-+++ b/src/ads1x15/ads1x15.hpp
+-@@ -390,7 +390,7 @@ namespace upm {
+-              * @param reg ADSTHRES enum value.
+-              * Returns 0.0 unless THRESH_HIGH or THRESH_LOW requested.
+-              */
+--            float getThresh(ADSTHRESH reg = THRESH_LOW);
+-+            float getThresh(ADSTHRESH reg = THRESH_DEFAULT);
+- 
+-             /**
+-              * Sets threshold levels or configures for conversion ready
+--- 
+-2.11.0
+-
+diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
+index a5c2bb321..d742a5e46 100644
+--- a/meta-oe/recipes-extended/upm/upm_git.bb
++++ b/meta-oe/recipes-extended/upm/upm_git.bb
+@@ -7,12 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
+ 
+ DEPENDS = "libjpeg-turbo mraa"
+ 
+-SRCREV = "106b6c706268522ab0168a4ddb19e89ce832e084"
+-PV = "1.3.0-git${SRCPV}"
++SRCREV = "cc7fec9ae0228add9011bf1c2cd5e0ca2ba0d4f0"
++PV = "1.6.0-git${SRCPV}"
+ 
+ SRC_URI = " \
+     git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
+-    file://ads1x15-fixed-case-logic-in-getThresh-function.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.16.2
 
-Seems qmake-native 5.9 behaved differently here...
-
-Thinking this more over I wonder if there might be another common
-place for exporting OE_QMAKE_QTCONF_PATH. How about
-qmake5_paths.bbclass?
-
-Andreas
 
