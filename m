@@ -1,72 +1,49 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
-	[209.85.218.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 625E8784E6
+Return-Path: <mans.zigher@gmail.com>
+Received: from mail-ot0-f177.google.com (mail-ot0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 89458787ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 15:01:12 +0000 (UTC)
-Received: by mail-oi0-f65.google.com with SMTP id l124so1314890oib.0
+	Wed, 21 Feb 2018 15:49:47 +0000 (UTC)
+Received: by mail-ot0-f177.google.com with SMTP id q12so1789474otg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 07:01:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=xP3nQ/AP2XGZ7MDQChLFPmLTr0advL/qbaVR9JYO2jE=;
-	b=wqz9n/NSY6kF7zlxWZWkHHydildxFxRM43pWayd7l4eIqXSUfsAqyozrd16UANI5lw
-	cEeOBlTk8AOQkVCzCO6UaaMPY3DnjI8W08irLc/wvSyQv+tCZ1tLx9MgK09jx2FHImtV
-	1aygSXEk95QggCwIjPnNpm35dpC4sTSQXV3iYVjKQW8VDH+3JhPUZ/w+aNloGPRlz7oE
-	qG7ebs0m9uxFJXmoLChluxHX71/UkkBYnXz76Q/xnjDj+/zl8G2bvnqVrHOqqnd5zDMQ
-	YQNMeLGEpglEr0byQ+UZiIintD0SdaIiptvSKCPX30GCfPzu2ZKGyktI9BBd6y+CF1zT
-	D0ng==
+	Wed, 21 Feb 2018 07:49:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=ahm6PRCAPdY+RQOin2d/xmwQeXZ1Uypi2dEgwaMuPio=;
+	b=Lpsrq0PJUXnPd6snEdG3AuJ1eQsFndgAq2QtSVLYSc63wzQew8iAxz6zd3h2Yit66w
+	9ZA4b1T/g425UB9e2oS5dOcd354UTpSsg2T+3EPOfADfpVVp7pGeMWbXpJyqItAZkAxp
+	GBCgfpU0SuUNzlfJN1H+OEieT12Lo+0xsCbsKoiJjkt+7yiBftTVBMthU/L5qVm3+BVF
+	TwpDoqHT0mUVLXc1B/fO71bQxhf2/+TPHmCmEkrT91KC8ABvB5dcE2voVodE/nOznzDV
+	G1GlZKHfh7wZ4E0krVP1Se88SMuFjBSpRcTBvyBqhPTitIu12nqsSUA/t9wMG/eBHj2S
+	Sv1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=xP3nQ/AP2XGZ7MDQChLFPmLTr0advL/qbaVR9JYO2jE=;
-	b=mRk9GBy02wuIzfxPkqTfEXic5PL58SZKJWMVCdSkkwaHVMhMeeLPB1FwlBIVh6VhIu
-	CgOwY4/WKiQ9RbDNQvJ9VgjKUYJEpoFDBmcdfh0CTlYHrJwrjB9Ra9AyW7X5+ZLiBiXh
-	c4Viho17+iJmjV8A/GnHcHuSKRf11Vyn3YaY2eSLpeD+fgWfFGGj3BQti15/UqPvyG+T
-	hzN+XxAMF4/Cq0VX6itz1XRw0qVWKvHt5f5QRs5nHGA/QsCC1lbgJ9Ui5EoS/QhE+Ach
-	wb4Z0RMBtYwzDkp0WYCFbE5cNWOxPFleuVVe4tneM5a9tLui+2pc9ZFFRoPw/TAeqXF8
-	uKEA==
-X-Gm-Message-State: APf1xPAxTOQmc1fXbimPjG3YFP8Vz5Iu0OefOGsCgM8bq0Yi6+yAYTW+
-	19fq6zVLMBwlewrqXsYJsq5DR/jq
-X-Google-Smtp-Source: AH8x227PNw5njXpp8TeV+W0108cVHr7rGH+oOTlPU+eowOPU+WYr2VtodUfwHyAbkAvlfzvZOdeQ6A==
-X-Received: by 10.202.26.18 with SMTP id a18mr2150653oia.223.1519225272942;
-	Wed, 21 Feb 2018 07:01:12 -0800 (PST)
-Received: from mail-oi0-f44.google.com (mail-oi0-f44.google.com.
-	[209.85.218.44]) by smtp.gmail.com with ESMTPSA id
-	v81sm13921307oig.12.2018.02.21.07.01.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Feb 2018 07:01:11 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f44.google.com with SMTP id b8so1300605oib.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 07:01:10 -0800 (PST)
-X-Received: by 10.202.68.213 with SMTP id r204mr2431563oia.80.1519225270234;
-	Wed, 21 Feb 2018 07:01:10 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=ahm6PRCAPdY+RQOin2d/xmwQeXZ1Uypi2dEgwaMuPio=;
+	b=QlILbXThhpUlo//hBcf1GGosXzmfiDSr+hU4dPcheTl6AeWEqHrn+z5g5BL4CkToxD
+	bIW9GCG2bQEpVwu5f7tNsDtHp7uR8C7211OOvyCtwDMTihSbDtFSJwIsNNyfJnf9IX8t
+	Ch3ftRyqgpPG9HqwBLUypxfuoHRkNkViEEmewnX+bCk26Yr8Hs76v+CJYYgr+c6TNJ02
+	koHDy6P3K6FBbTE7BEwjjXRvbDnKOEYhDNhDBjhiKi/4h6/nChbxbyVBvDHieQbhKSg1
+	U20AtBLuJCWmK5WvLYv1CGyvV/V1rHDP4Jsx0Aobw/pVb8554Drsqs3fImJfr/gL7Gfy
+	ZBdQ==
+X-Gm-Message-State: APf1xPAtnxLYV7jbFMa8lvJQHiyLA6JGSJQZ9l3WZwaK/jsDS3so11jh
+	aaHYf/3LrH22a/gVW34NHL8j9heRjtaVMCtsUFI=
+X-Google-Smtp-Source: AH8x224OacKzC3ckBTnFG4JzImxvYrJTuW+4MdkUoL4C7Y08UIbLtjIE4YqwsAw7Gjehdfx8ufxIm2s1f1KqPiiIbtU=
+X-Received: by 10.157.3.196 with SMTP id f62mr2836526otf.360.1519228188674;
+	Wed, 21 Feb 2018 07:49:48 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.157.80.129 with HTTP; Wed, 21 Feb 2018 07:01:09 -0800 (PST)
-In-Reply-To: <1519225097.6698.8.camel@intel.com>
-References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
-	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
-	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
-	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
-	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
-	<CA+chaQfpXBL3=z3QwTKQ6MNBKUVhbMjA6G+nADz562zFuYUTUw@mail.gmail.com>
-	<CAAQYJAsOFo6md-ZCRg+KmGQtC9O+pwFzVjpEMOXOFVFWzr4iMw@mail.gmail.com>
-	<CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
-	<20180221140252.d4rmbn73c3nzsvac@mentor.com>
-	<CAJTo0LYe1koEr7kJg7RfXLDbZLVa0qQyWiig5Sng_hpRTr_3dw@mail.gmail.com>
-	<1519225097.6698.8.camel@intel.com>
-Date: Wed, 21 Feb 2018 12:01:09 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKrGH+77XRa9TPbzLxdGWY0z4EE2NBue+YciYkf1Na_rQQ@mail.gmail.com>
-Message-ID: <CAP9ODKrGH+77XRa9TPbzLxdGWY0z4EE2NBue+YciYkf1Na_rQQ@mail.gmail.com>
-To: Patrick Ohly <patrick.ohly@intel.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Splitting meta-oe?
+Received: by 10.74.110.68 with HTTP; Wed, 21 Feb 2018 07:49:48 -0800 (PST)
+In-Reply-To: <CAEhQi8kt8eOUDvP9UpZ5vYCW9fSxbhkZ3x6hcbnLRqV=K=7HGQ@mail.gmail.com>
+References: <CAEhQi8kZmV0Ar0gfW-JWufQM6c0Fg+rp5E5bCzAKDj6YvsLugw@mail.gmail.com>
+	<CAEhQi8=ugNDV7HtziAGdEikhkuSH88JjUaYnx8W50TrMPJNVDw@mail.gmail.com>
+	<CAEhQi8kt8eOUDvP9UpZ5vYCW9fSxbhkZ3x6hcbnLRqV=K=7HGQ@mail.gmail.com>
+From: =?UTF-8?B?TcOlbnMgWmlnaGVy?= <mans.zigher@gmail.com>
+Date: Wed, 21 Feb 2018 16:49:48 +0100
+Message-ID: <CAEhQi8kYxwU+o-MTDcGafFMvYt=fU0CFR6mb5On05Gk_ryvJyw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-qt4] Cmake Could NOT find Qt4, missing: QT_MOC_EXECUTABLE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,36 +56,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 15:01:12 -0000
+X-List-Received-Date: Wed, 21 Feb 2018 15:49:47 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 21, 2018 at 11:58 AM, Patrick Ohly <patrick.ohly@intel.com> wrote:
-> On Wed, 2018-02-21 at 14:14 +0000, Burton, Ross wrote:
->> > But that kind of mechanism seems highly prone to breakage and
->> > likely to
->> > be highly contentious even if it was shown to be reliable, so it
->> > may not
->> > get beyond a "that'd be nice" thing for me.
->> >
->> > Unless someone else has already implemented it and I'm just not
->> > aware of
->> > how to use it?  :-)
->> >
+Shouldn't it actually point to sysroot-components? Even if the directory
+would actually exists and containing the moc4 then what if the recipe is
+cleared after building qt4-native it would break. Is the problem that
+qt4-native is actually broken for rocko?
+
+BR
+Mans Zigher
+
+2018-02-21 15:51 GMT+01:00 M=C3=A5ns Zigher <mans.zigher@gmail.com>:
+
+> After some more investigation I realized that qmake is actually detected
+> correctly the problem is that when running qmake2 -query I get the
+> following results
+>
+> qmake2 -query
+>
+> QT_INSTALL_PREFIX:/home/build/tmp/work/x86_64-linux/qt4-nati
+> ve/4.8.7-r0/recipe-sysroot-native/usr
+>
+>
+> QT_INSTALL_DATA:/home/build/tmp/work/x86_64-linux/qt4-native
+> /4.8.7-r0/recipe-sysroot-native/usr/share/qt4
+>
+>
+> QT_INSTALL_DOCS:/home/build/tmp/work/x86_64-linux/qt4-native
+> /4.8.7-r0/recipe-sysroot-native/usr/share/doc/qt4
+>
+>
+> QT_INSTALL_HEADERS:/home/build/tmp/work/x86_64-linux/qt4-
+> native/4.8.7-r0/recipe-sysroot-native/usr/include/qt4
+>
+>
+> QT_INSTALL_LIBS:/home/build/tmp/work/x86_64-linux/qt4-native
+> /4.8.7-r0/recipe-sysroot-native/usr/lib
+>
+>
+> QT_INSTALL_BINS:/home/build/tmp/work/x86_64-linux/qt4-native
+> /4.8.7-r0/recipe-sysroot-native/usr/bin
+>
+>
+> QT_INSTALL_PLUGINS:/home/build/tmp/work/x86_64-linux/qt4-
+> native/4.8.7-r0/recipe-sysroot-native/usr/lib/qt4/plugins
+>
+>
+> QT_INSTALL_IMPORTS:/home/build/tmp/work/x86_64-linux/qt4-
+> native/4.8.7-r0/recipe-sysroot-native/usr/lib/qt4/imports
+>
+>
+> QT_INSTALL_TRANSLATIONS:/home/build/tmp/work/x86_64-linux/qt
+> 4-native/4.8.7-r0/recipe-sysroot-native/usr/share/qt4/translations
+>
+>
+> QT_INSTALL_CONFIGURATION:/home/build/tmp/work/x86_64-linux/
+> qt4-native/4.8.7-r0/recipe-sysroot-native/etc/qt4
+>
+>
+> QT_INSTALL_EXAMPLES:/home/build/tmp/work/x86_64-linux/qt4-
+> native/4.8.7-r0/recipe-sysroot-native/usr/bin/qt4/examples
+>
+>
+> QT_INSTALL_DEMOS:/home/build/tmp/work/x86_64-linux/qt4-nativ
+> e/4.8.7-r0/recipe-sysroot-native/usr/bin/qt4/demos
+>
+>
+> QMAKE_MKSPECS:/home/build/tmp/work/x86_64-linux/qt4-native/4
+> .8.7-r0/recipe-sysroot-native/usr/share/qt4/mkspecs
+>
+>
+> QMAKE_VERSION:2.01a
+> QT_VERSION:4.8.7
+>
+> QT_INSTALL_BINS:/home/build/tmp/work/x86_64-linux/qt4-native
+> /4.8.7-r0/recipe-sysroot-native/usr/bin is a directory that is none
+> existing.
+>
+> BR
+> Mans Zigher
+>
+>
+> 2018-02-21 13:13 GMT+01:00 M=C3=A5ns Zigher <mans.zigher@gmail.com>:
+>
+>> When running devshell I can verify that echo $PATH includes the
+>> recipe-sysroot-native dir and if I run "whereis qmake2" the
+>> recipe-sysroot-native dir appears. So the question remains why is CMake =
+not
+>> detecting the binaries?
 >>
->> meta-freescale (iirc) does this, conditionally adds
->> sub-layers to BBLAYERS based on what other layers are already
->> enabled.
+>> BR
+>> Mans Zigher
+>>
+>> 2018-02-21 13:02 GMT+01:00 M=C3=A5ns Zigher <mans.zigher@gmail.com>:
+>>
+>>> Hi,
+>>>
+>>> I am trying to build a native QT application that is required when
+>>> generating the image. The recipe is depending on qt4-native and i am us=
+ing
+>>> poky version rocko. The application is using CMake which is producing t=
+he
+>>> following error
+>>>
+>>> | -- Looking for Q_WS_MAC - not found
+>>> | CMake Error at recipe-sysroot-native/usr/shar
+>>> e/cmake-3.8/Modules/FindPackageHandleStandardArgs.cmake:137 (message):
+>>>
+>>> |   Could NOT find Qt4 (missing: QT_MOC_EXECUTABLE QT_RCC_EXECUTABLE
+>>> |   QT_UIC_EXECUTABLE) (found version "4.8.7")
+>>> | Call Stack (most recent call first):
+>>> |   recipe-sysroot-native/usr/share/cmake-3.8/Modules/FindPackageHandle=
+StandardArgs.cmake:377
+>>> (_FPHSA_FAILURE_MESSAGE)
+>>> |   recipe-sysroot-native/usr/share/cmake-3.8/Modules/FindQt4.cmake:132=
+6
+>>> (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+>>> |   CMakeLists.txt:5 (find_package)
+>>>
+>>> When using jethro the recipe works fine. If I search for qmake2 in the
+>>> build directory we get the following hits
+>>>
+>>> ./tmp/sysroots-components/x86_64/qt4-native/usr/bin/qmake2
+>>> ./tmp/work/x86_64-linux/my-qt-application/0.1-r0/recipe-sysr
+>>> oot-native/usr/bin/qmake2
+>>> ./tmp/work/x86_64-linux/qt4-native/4.8.7-r0/sysroot-destdir/
+>>> home/build/tmp/work/x86_64-linux/qt4-native/4.8.7-r0/recipe-
+>>> sysroot-native/usr/bin/qmake2
+>>>
+>>> I would think that CMake should find qmake2 in the recipe-sysroot-nativ=
+e
+>>> dir. Any help would be appreciated. How can I point CMake in the direct=
+ion
+>>> so it finds the qt tools.
+>>>
+>>> BR
+>>> M=C3=A5ns Zigher
+>>>
+>>>
+>>
 >
-> The approach used by meta-freescale works with older releases.
-> BBFILES_DYNAMIC [1] (supported by bitbake 1.36/Yocto 2.4) is a bit more
-> robust.
->
-> [1] https://patchwork.openembedded.org/patch/140532/
-
-That's nice; I will update our use for rocko and beyond! :-)
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
