@@ -1,43 +1,59 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BE1B78757
+Return-Path: <trini@konsulko.com>
+Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
+	[209.85.161.178])
+	by mail.openembedded.org (Postfix) with ESMTP id E67D178741
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 14:44:26 +0000 (UTC)
-Received: from svr-orw-mbx-09.mgc.mentorg.com ([147.34.90.209])
-	by relay1.mentorg.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-SHA384:256)
-	id 1eoVdE-0004QH-2J from Joe_MacDonald@mentor.com ;
-	Wed, 21 Feb 2018 06:44:28 -0800
-Received: from SVR-ORW-MBX-05.mgc.mentorg.com (2002:9322:5acd::9322:5acd) by
-	SVR-ORW-MBX-09.mgc.mentorg.com (2002:9322:5ad1::9322:5ad1) with
-	Microsoft
-	SMTP Server (TLS) id 15.0.1320.4; Wed, 21 Feb 2018 06:44:24 -0800
-Received: from burninator.cal.mentorg.com (147.34.91.1) by
-	SVR-ORW-MBX-05.mgc.mentorg.com (147.34.90.205) with Microsoft SMTP
-	Server id
-	15.0.1320.4 via Frontend Transport; Wed, 21 Feb 2018 06:44:23 -0800
-Received: by burninator.cal.mentorg.com (Postfix, from userid 1000)
-	id 2AC6958D5A8; Wed, 21 Feb 2018 09:44:23 -0500 (EST)
-Date: Wed, 21 Feb 2018 09:44:23 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Tom Rini <trini@konsulko.com>
-Message-ID: <20180221144422.6sec4lqytkk4ifyp@mentor.com>
-References: <f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
-	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
-	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
-	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
-	<CA+chaQfpXBL3=z3QwTKQ6MNBKUVhbMjA6G+nADz562zFuYUTUw@mail.gmail.com>
-	<CAAQYJAsOFo6md-ZCRg+KmGQtC9O+pwFzVjpEMOXOFVFWzr4iMw@mail.gmail.com>
-	<CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
-	<20180221140252.d4rmbn73c3nzsvac@mentor.com>
-	<20180221142058.GJ4311@bill-the-cat>
+	Wed, 21 Feb 2018 14:48:56 +0000 (UTC)
+Received: by mail-yw0-f178.google.com with SMTP id c193so569403ywb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Feb 2018 06:48:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=A5D7/PNbNWLl3U+SqItYYCjsM2WiVNVWircqXsB+PU0=;
+	b=gOZeS9O9s4Kjh06nlg88MY2bkxBlD+c7DFoXD2XaU4LvfBDlkb6D8dNuM7Sm1553N5
+	Zg8LtE6h5w8ACHvqhDhoPMLUQBK2ef8QmXGUVsDQQNkNEW+gxKR5mjKJNYHKFNd45QRY
+	ueQm0lcH2XBPr9zfG1usrnsFVfP1ZKkMy/bNM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=A5D7/PNbNWLl3U+SqItYYCjsM2WiVNVWircqXsB+PU0=;
+	b=GAR2l+NLzIQXBN+uo2j28ejz2KSBjpLf1yF8Dv87hg2/vh6eILlMaCFC6DbK/ZhOnK
+	6UEPzJyPTikiZlPr0heZ3Mc37aOepT+n0JFpM1MLvfouba6GzmZxwEeyYuIpSJjUx1PO
+	vy+Auhb52JeyQmi+e+scgNe6HGKr16E60voSHbpWuNFGwWA7INCRebsF5eF3MCJj5+dm
+	o6IEBGC0Te+n+TYnVccCgTwuoGcAXP4qovDSZVJdiiaEu4dzg7wFJtQAV0fVLwGb3YoO
+	BjMl1IM3cxE1EHhjzHeZ+SNST2Y0C/ZGMm8OSjgDSBoZxtOjXIooDvj9zee8U4uYj7yd
+	qUnA==
+X-Gm-Message-State: APf1xPDha3XWjbQ5AilfCQpxJgGZwXswUrT6nbC1QAdCIswWQ5YpoSnq
+	+lk0RDxMgQVBrLdE9SqIPVosyaucuWY=
+X-Google-Smtp-Source: AH8x224iMBtwME4mAqz0mxTG8SaEq6SezxDWoVAWETrCBfCFH8cvGUuRjhRPsJ+Zya6jDWYabOcKFQ==
+X-Received: by 10.13.239.3 with SMTP id y3mr2366038ywe.330.1519224537859;
+	Wed, 21 Feb 2018 06:48:57 -0800 (PST)
+Received: from bill-the-cat (cpe-65-184-142-68.ec.res.rr.com. [65.184.142.68])
+	by smtp.gmail.com with ESMTPSA id
+	q5sm10943568ywb.90.2018.02.21.06.48.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 Feb 2018 06:48:57 -0800 (PST)
+Date: Wed, 21 Feb 2018 09:48:55 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Message-ID: <20180221144855.GL4311@bill-the-cat>
+References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
+	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+	<1519148811.24236.321.camel@linuxfoundation.org>
+	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
+	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
+	<1519152750.24236.330.camel@linuxfoundation.org>
+	<CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
+	<CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
+	<20180221135732.GI4311@bill-the-cat>
+	<CAP9ODKq2CgQj_C1KnmGrN6giJa5SFLrq6jjg-mGQgJwO0QQwhQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20180221142058.GJ4311@bill-the-cat>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-800 http://www.vim.org
-User-Agent: NeoMutt/20170113 (1.7.2)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <CAP9ODKq2CgQj_C1KnmGrN6giJa5SFLrq6jjg-mGQgJwO0QQwhQ@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -51,104 +67,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Feb 2018 14:44:27 -0000
-X-Groupsio-MsgNum: 70800
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ws6mes72coxy3en7"
+X-List-Received-Date: Wed, 21 Feb 2018 14:48:57 -0000
+X-Groupsio-MsgNum: 70801
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="NqBeRcvybb6C9jMF"
 Content-Disposition: inline
 
---ws6mes72coxy3en7
+--NqBeRcvybb6C9jMF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] Splitting meta-oe?] On 18.02.21 (Wed 09:20) Tom Rini wrote:
-
-> On Wed, Feb 21, 2018 at 09:02:53AM -0500, Joe MacDonald wrote:
-> > [Re: [oe] Splitting meta-oe?] On 18.02.21 (Wed 11:22) Martin Jansa wrot=
-e:
-> >=20
-> > > There is good example of inter-layer dependencies from real world:
-> > > http://lists.openembedded.org/pipermail/openembedded-devel/2017-Febru=
-ary/111447.html
-> > >=20
-> > > Do you want
-> > > A) new git repository meta-libio-socket-ssl-perl so that meta-network=
-ing
-> > > will depend on this on instead of whole meta-perl
-> > > B) meta-ddclient which will probably depend on both meta-perl and
-> > > meta-networking
-> > > C) ddclient and its dependencies in meta-perl
-> > > D) libio-socket-ssl-perl moved to oe-core, so that next time we can s=
-ay
-> > > that oe-core is just like old oe-classic just with a bit less stuff i=
-n it
-> > >=20
-> > > Neither of these options is ideal, but meta-networking getting meta-p=
-erl
-> > > dependency is the one which causes fewest issues to OE users.
-> >=20
-> > Yeah, I've been thinking about this and trying to decide what is the
-> > "right" thing to do here.  Because I already have added layer
-> > dependencies in meta-networking that I didn't originally envision, so
-> > what's one more that is, as you say, almost certainly in the majority of
-> > consumers' projects anyway?  But it does force a new layer dependency on
-> > consumers of the meta-networking layer who may not care about ddclient,
-> > and I'd like to avoid that if possible.
-> >=20
-> > Honestly, now that I'm back from my vacation, I think the right thing is
-> > to add the dependency and then start thinking about a way to specify
-> > layer dependencies with greater granularity than on a meta-layer basis.
-> > Like, there's no question meta-networking depends on core.  It's
-> > nonsense to think of it without that dependency.  But it'd be nice to be
-> > able to specify a layer dependency that only exists if your project
-> > includes specific recipes out of that layer.
-> >=20
-> > But that kind of mechanism seems highly prone to breakage and likely to
-> > be highly contentious even if it was shown to be reliable, so it may not
-> > get beyond a "that'd be nice" thing for me.
-> >=20
-> > Unless someone else has already implemented it and I'm just not aware of
-> > how to use it?  :-)
+On Wed, Feb 21, 2018 at 11:00:27AM -0300, Otavio Salvador wrote:
+> On Wed, Feb 21, 2018 at 10:57 AM, Tom Rini <trini@konsulko.com> wrote:
+> > On Tue, Feb 20, 2018 at 09:10:25PM -0300, Otavio Salvador wrote:
+> >> On Tue, Feb 20, 2018 at 9:07 PM, Otavio Salvador
+> >> <otavio@ossystems.com.br> wrote:
+> >> > On Tue, Feb 20, 2018 at 3:52 PM, Richard Purdie
+> >> > <richard.purdie@linuxfoundation.org> wrote:
+> >> >> I could combo-layer pieces of meta-oe into poky but I'd imagine that
+> >> >> would create more problems than it would solve too and given the
+> >> >> general dislike of combo-layer, I think ultimately better layer too=
+ling
+> >> >> would be a better answer and more acceptable to everyone.
+> >> >
+> >> > Poky creates more problems then it solves
+> >>
+> >> ... send was too soon ...
+> >>
+> >> Poky creates more problems then it solves.
+> >>
+> >>  - it causes confusion
+> >>  - it avoids the urgency in adopting a setup script
+> >>  - it does not use the layers as we market as being a good thing
+> >>
+> >> So adding more things to it, just makes it worse.
+> >>
+> >> The setup script is more urgent to be discussed then splitting meta-oe.
+> >
+> > I agree that a setup script of some sort (off the top of my head,
+> > something that takes layer-names as input, checks vs a list,
+> > fetches/clones, creates a wrapper around bitbake-layers to always add
+> > them) should be a high priority.  I don't have a problem telling my
+> > customers to clone meta-openembedded and then use the layers that are
+> > needed in that specific project.  But it's painful to have a shell
+> > for-loop in the docs we provide so they can setup a build.
 >=20
-> One thing I've been thinking about is that some layers need more
-> sub-layers.  Taking a very tiny peek into meta-networking, perhaps
-> re-organize into meta-networking-core, meta-networking-iscsi,
-> meta-networking-vpn, etc.  Or maybe that won't help with dependencies.
-> But the need for layer X for a single recipe can sometimes I think be
-> solved by re-thinking the layer.
+> I think we ought to start a thread about the tooling, but let's focus
+> on meta-oe split here.
 
-I really like that idea.  We effectively started that with the netkit
-stuff when Armin first submitted it, so making it more formal isn't a
-big step anyway.
-
-> All that said, it might be better instead to add something like
-> RECIPE_LAYERDEPENDS so that for the one-or-two offs, the recipe will
-> fail to build (and implement that similar to the logic in
-> image-container.bbclass? so that you only get a failure on building that
-> recipe rather than anything in the layer) ?
-
-Yeah, that's kind of what I'd been thinking.  In the short term, though,
-the reorg you suggested above sounds *very* appealing to me at first
-glance.  Might be a "let's do both" situation.
+Agreed.  And to be clear, I'm another vote against splitting meta-oe.
 
 --=20
--Joe MacDonald.
-:wq
+Tom
 
---ws6mes72coxy3en7
+--NqBeRcvybb6C9jMF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
 
-iQEzBAABCAAdFiEEkMd/b97HINT8/zEqSfx99yw59pYFAlqNhcYACgkQSfx99yw5
-9pY6fwgAwYDUPVrlWSzOPHgUREtP2IodZXNCe2vSy5NeQj0bjTqsA6j5fcv+6R0b
-u+XQegK+9906S041W5abi8pkNQtf9NF+fVVE4At1vl9PQ4aHbVwI2O7EZZveLJAZ
-v9Ih2vDdbGj3jfvzd9sctItLxvr+5aB/PLcfo0YCGnQB1Slg9M6DLwlC0dSjeQvQ
-gGt054ACt/N06gdfesR3t59ykVj4cB7iziXPtMTi4z6LyWyT9qVKlgiqKHJ7xQds
-/R8G3sY9ePr6ag9VpeOFQMBJ/kPvzBsS6ylUet4msZRgovwmzCt29DvcMk/6CXmC
-J1gnhYThKYsF3a5xxI+F8fNbUcf+LA==
-=wuli
+iQIcBAEBAgAGBQJajYbWAAoJEIf59jXTHXZS8FwQALPtJx/30CA1mRkixu6r9t3w
+YOBn5vFXKWCIlLdnaeF96FZk+s6tR6x4qOneVDkXpUtLxKskyXRNVEZExpecpzhX
+RjmJni7NtCROCs/rnWrOxLtf6c1OQ2OWMFG8oJcTw6JSdgEBRJnqV8GKnw6WnX4m
+YHofs3s7voXy1b89uw9HK2PCKJsOdIt1JA/GHsxXXRNb88yz4JFdUF6+5lHNqaN8
+dty8rATg//UiSszU3SqHlaof5Rx5lB7NjwcmQ99qfgDxqoE/yBsYqpT5tNCtDQja
+5C413/e2pCj0+iSSMkvUm1D4gu1/Dw8qAEpZm24nyMHqihcrEFILGNx0l4MbPNED
+Hau567mVmSYMWWlUvSOnn8II8VsYJ4uqr7zN79jLvuK0GgJ9aBn1nld4AG50oc+i
+rXUXT/umWelR6toh5xQcbgTMtlfFCQFLLkreTqsOUMVD3GVpRfTsPzW7erO2umwU
+IdzmCNG2Uu0uux7oa7QUPav0TIDyeFvXur1DI0uN7DS4LPFwBtiTQhHUVIZDvh6b
+/2kIrArkfI65sfWzmjJgApHN4VYbFV9zeRDF+vYee2Qv+DCqfZJhbGfEHKOZmmvr
+zpt7njQcATLa0YIZbh+X8vODtjMejnyYXw3tv+2pIg2UWlY72BwabtZLiUBiIkXz
+lGopRVVXEoNmkQJGsUiv
+=WtdZ
 -----END PGP SIGNATURE-----
 
---ws6mes72coxy3en7--
+--NqBeRcvybb6C9jMF--
