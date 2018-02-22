@@ -1,65 +1,64 @@
 Return-Path: <patrick.ohly@intel.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 12B6371AB3
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id DAB836FFD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 09:18:33 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id v65so9759017wrc.11
+	Thu, 22 Feb 2018 09:27:34 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id t74so2560193wme.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 01:18:35 -0800 (PST)
+	Thu, 22 Feb 2018 01:27:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=message-id:subject:from:to:cc:date:in-reply-to:references
 	:organization:mime-version:content-transfer-encoding;
-	bh=0YALnYX4QTAPoGVBV56lWfx2kjlejbApQEMufnwhZjE=;
-	b=VrHMZwFvkZUbBv/g/iYGYAU/683Jfo7ivPPLOXD4iUFt1Rm0Ty2OCchkA4iKeTm9mU
-	1bBTbaBYNWG9qnTURJa09x72LnlP9dL0eN8tGwRmmuefAW511oARRTWoW/3yhEB7ft73
-	reaIIfKFxWOG1jTCkE36czJsXFcydOBn2IfboqDaf50j8c0T9ZfHjtFO2KmGDhnO4hwG
-	0d4J5w0X9okQ/llHgGkeDDUXxLdcNszSWa0aeW6CeL68FC30C+k5iEaxCYZg2rvxqV/Y
-	CP6NUgTyTTo34ireYDnSAHVu2h4w+vrHUftrAg4x836C0z4xGtuG7xyW4bMW0LAQ3zpT
-	CBYw==
+	bh=/CcQp2xY6Ipt+BuVVlvmqtMBSQgCRANuvcMZXKGXC2o=;
+	b=hx2ibKAupyw62Amn+mtFq2ec5A1YHChuzn1demBoz6et37S89fyL+hQBEiiwJHCEUS
+	ripjq5gKv7oZyqw0f+yQJNsE/BECspNIv0Byoh+9kl2Zz8HqdyjEtX5YAP/9cwKS48vQ
+	IaUBgyOhCIOU1QT/Siy0vAsO6w9uXpGcVMVlr3ayjPi7H1B+3TQL9HdeIn0vOYHbIhlN
+	WenJ6DKzcVxftyTKKWq2IaaZWHJIVGU70GKtQU+zTHMHsm8Hp/g4SaO9vdkP9I7EOx3I
+	5hSSsrbVD2B3dO7ZxRIPZpcAU3bBGog1w8ZyCk5bUFjcYrzWcmP4uYqsfifczcU6kUhv
+	EZpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
 	:references:organization:mime-version:content-transfer-encoding;
-	bh=0YALnYX4QTAPoGVBV56lWfx2kjlejbApQEMufnwhZjE=;
-	b=WRYe04Y/LlDGmBBxWHhK7140l7zsFSnaRdDgBh/96BSeW7RF9sT4tO+KKXVGBhHH55
-	t8g98/qqBt8wFJWMfS1eHUWNX8S//48l1N8ZbkJlVV5TDxhQCnqgAmPbgG0JCoI9pgDQ
-	+9hLwov7rntO7ltDfGrtNDk6AAGAgaRkt8s1wkmcBtnUiAlHcwETpGixFX+W1O6yOpnJ
-	1mvFhE9y2QFeS+2d23P0lYMSz34VDcVOg1fUAPficMc5jxA6e2YiOaz9g9HMtGUyXz4T
-	Pt41+Cdnoq0/DDNx7McJXCV4IeVYc9HhzhPzwzF84KR0x1RIBE8IoP1heZOFZ6dTKXoS
-	wfIw==
-X-Gm-Message-State: APf1xPBV+D7duUOINnG4y/5H9kjUrby9gBmJE2GkkDd9kowDNtPa7JbK
-	fz0C23Cj7PWc/0nXtkXpQWCCkf8=
-X-Google-Smtp-Source: AH8x2266qastuk6EmF7hNebHsVCO0AaAhRB0/irHXRFr8MNW0kJeumhQeLw9+zKYBJm8Tzk/vw+oRg==
-X-Received: by 10.223.197.197 with SMTP id v5mr5657814wrg.161.1519291114736;
-	Thu, 22 Feb 2018 01:18:34 -0800 (PST)
+	bh=/CcQp2xY6Ipt+BuVVlvmqtMBSQgCRANuvcMZXKGXC2o=;
+	b=Hiz5l/13Psf8VJNz/Mik5XTvTl9MWYmphzEigjDOALo5F10Rtsbr1urt1mb0QKfDjT
+	2/RTq9y82lqcRjcst8XTFo5GcjC/5GVi1zLnk3h0w0FraxbUeCQFL8ZDbgFFDucEG7K4
+	w5piX8wVRqsfCVsVeYdkhIfUSIM5Lmv/lMC1FGAXmdOsYfz40lU3Tscbk89iJkmbLah4
+	XbJeh4nDt1u1XTjTKXXqL+qKaz5pUYaRQ/qJZL9eaudXTADHaTbfHu1THnnp3aBGSKR7
+	C60ADeBm4CDywYIFWMYqZKHhqC8a/c4XZtjgw0BZ9pfRZShJ6ooVnrrqM8yTnxpkjQ5I
+	PP/Q==
+X-Gm-Message-State: APf1xPBuZeTe+REjg1nQHwsVesK0vmkqOKEsU3h7TCIopPffV4NOm67c
+	tnZ1liq9WiyoeKLKdLGddd1C
+X-Google-Smtp-Source: AH8x2248cgzoY/yFgl/kLddf6WUpT90hwTJQYOPSZZYT1CAzBe/bFkwf7RIz/NKRHKY3ipJNGWEe1g==
+X-Received: by 10.28.215.200 with SMTP id o191mr4449295wmg.84.1519291655442;
+	Thu, 22 Feb 2018 01:27:35 -0800 (PST)
 Received: from pohly-mobl1 (p548497B7.dip0.t-ipconnect.de. [84.132.151.183])
 	by smtp.gmail.com with ESMTPSA id
-	e15sm38219060wmd.26.2018.02.22.01.18.33
+	s125sm9518282wmf.4.2018.02.22.01.27.34
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 22 Feb 2018 01:18:33 -0800 (PST)
-Message-ID: <1519291113.6698.11.camel@intel.com>
+	Thu, 22 Feb 2018 01:27:34 -0800 (PST)
+Message-ID: <1519291653.6698.13.camel@intel.com>
 From: Patrick Ohly <patrick.ohly@intel.com>
-To: Andreas Oberritter <obi@opendreambox.org>
-Date: Thu, 22 Feb 2018 10:18:33 +0100
-In-Reply-To: <20180221203352.55cd9a96@t460p>
+To: Jonas Bonn <jonas.bonn@gmail.com>, Martin =?ISO-8859-1?Q?Hundeb=F8ll?=
+	<mnhu@prevas.dk>
+Date: Thu, 22 Feb 2018 10:27:33 +0100
+In-Reply-To: <CACM3HyG=gT1anu6qh1jbm0+J=Tf15KNUUSN-pYLy_L1nJa7kEQ@mail.gmail.com>
 References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
 	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
-	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
-	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
-	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
-	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
-	<CA+chaQfpXBL3=z3QwTKQ6MNBKUVhbMjA6G+nADz562zFuYUTUw@mail.gmail.com>
-	<CAAQYJAsOFo6md-ZCRg+KmGQtC9O+pwFzVjpEMOXOFVFWzr4iMw@mail.gmail.com>
-	<CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
-	<20180221140252.d4rmbn73c3nzsvac@mentor.com>
-	<CAJTo0LYe1koEr7kJg7RfXLDbZLVa0qQyWiig5Sng_hpRTr_3dw@mail.gmail.com>
-	<1519225097.6698.8.camel@intel.com> <20180221203352.55cd9a96@t460p>
+	<1519148811.24236.321.camel@linuxfoundation.org>
+	<CANx9H-AioXLbdF=aZjuFSU3Ev3d131wFQbF1b-RH1PtMES3-3Q@mail.gmail.com>
+	<f16ec80b-f2b9-c154-5262-ac4562da8cba@gmail.com>
+	<1519152750.24236.330.camel@linuxfoundation.org>
+	<CAP9ODKrxvspWQ9hXd7gWvGmTzTqHUYZyMejL=yVXHqG258ggkA@mail.gmail.com>
+	<CAP9ODKo=z65e9_kj0fxpGRugsKTOun6mnTzdfpAbkmekKSKpCA@mail.gmail.com>
+	<20180221135732.GI4311@bill-the-cat>
+	<766040fa-b622-5610-4ba3-87d416c7ee4f@prevas.dk>
+	<CACM3HyG=gT1anu6qh1jbm0+J=Tf15KNUUSN-pYLy_L1nJa7kEQ@mail.gmail.com>
 Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
 X-Mailer: Evolution 3.22.6-1+deb9u1 
 Mime-Version: 1.0
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -73,25 +72,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2018 09:18:34 -0000
+X-List-Received-Date: Thu, 22 Feb 2018 09:27:35 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2018-02-21 at 20:33 +0100, Andreas Oberritter wrote:
-> On Wed, 21 Feb 2018 15:58:17 +0100
-> Patrick Ohly <patrick.ohly@intel.com> wrote:
-> > The approach used by meta-freescale works with older releases.
-> > BBFILES_DYNAMIC [1] (supported by bitbake 1.36/Yocto 2.4) is a bit
-> > more
-> > robust.
-> > 
-> > [1] https://patchwork.openembedded.org/patch/140532/
-> > 
+On Thu, 2018-02-22 at 07:53 +0100, Jonas Bonn wrote:
+> On 21 February 2018 at 15:09, Martin Hundebøll <mnhu@prevas.dk>
+> wrote:
 > 
-> That's interesting. Is it possible to express dependencies on more
-> than one layer for a group of recipes with this mechanism?
+> > Now that the discussion branched out a bit...
+> > 
+> > We would like better support for this too. Our setup uses a
+> > "manifest"
+> > repository with git submodules to setup the layers:
+> > 
+> > > yocto/
+> > >       meta-poky/
+> > >       meta-qt5/
+> > >       meta-foo/
+> > >       meta-bar/
+> > >       conf/
+> > >            bblayers.conf
+> > >            local.conf
+> > >       .gitmodules
+> > 
+> > With this setup, customers simply need to clone our yocto repo
+> > recursively, run `yocto/meta-poky/oe-init-build-env yocto` and then
+> > `bitbake image-recipe`.
+> > 
+> > But this is rather inflexible, as it requires the "yocto" folder to
+> > be the
+> > build folder to activate the config files...
+> > 
+> > We looked into putting the configs in "meta-foo/conf/*.conf.sample" 
+> > and
+> > using TEMPLATECONF, but the "oe-init-build-env" script is rather
+> > picky
+> > about poky being the "top" directory.
+> > 
+> > I guess the oe-init-build-env script can be changed to look for
+> > .templateconf in any parent folder?
+> 
+> 
+> Putting together a deliverable setup that's easy for the customer to
+> get
+> started with is a bit tricky.  Here's the approach that's worked well
+> for
+> me:
+> 
+> /myproject
+>     /env        <-- script
+>     /build
+>     /meta-myproject
+>     /bitbake
+>     /oe-core
+>     /meta-layer1
+>     /meta-layer2
+> 
+> env, build, meta-myproject are part of the myproject repo, everything
+> else is a submodule.
 
-No, not at the moment.
+refkit used the same approach. One thing that I would prefer to do
+differently is the location of the submodule: having them in their own
+directory would make it more transparent which code is "external" and
+which is "internal".
+
+> "env" is a script containing just the following:
+> . ./oe-core/oe-init-build-env build/ bitbake/
+
+We ended up with a top-level "oe-init-build-env" wrapper script around
+the actual oe-core/oe-init-build-env. That way the repo could be used
+the same way as poky. The script sets TEMPLATECONF, so the usual local
+build setup happens based on refkit sample files.
 
 -- 
 Best Regards, Patrick Ohly
