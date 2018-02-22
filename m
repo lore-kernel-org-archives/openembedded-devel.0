@@ -1,60 +1,66 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 192087871D
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 12B6371AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 09:15:50 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id w6so2858806uae.10
+	Thu, 22 Feb 2018 09:18:33 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id v65so9759017wrc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 01:15:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DXX5VCJEk9fXjzGS+PFr96Hu3Raa7HHIDp0OhLtyp0o=;
-	b=KBEb1BRI67Dsf15S4C35Yz5LM/pXbQIsyOjQF1N6yH0Re9ntJduvlIsPRzWYheo5gS
-	ILKdlv/dneBjU9E3ZndPPClqitg2u4TnNIQyDYZJrOwLO0ubjM0YxPDZr3BzHZ6dEvp4
-	Y6x456xKTg/794Q6VZZhRVQKPaR+57BBzyv5+ociYkG6QDki5Lfr7P+FUMtf4Rx+EmL+
-	IYcYDVUnpX2j9F4okt3dZDAyGVx4uugKROIrOcyqUlTQ2yt9/jzei9MI1RdY2cz0SQ0Q
-	1tkCKtHXVHQfDdwowehLVO8ZqQhbLn88be4svGRrjpOLacI80S0yq/6cKywApwZ6UfLG
-	oDWQ==
+	Thu, 22 Feb 2018 01:18:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:organization:mime-version:content-transfer-encoding;
+	bh=0YALnYX4QTAPoGVBV56lWfx2kjlejbApQEMufnwhZjE=;
+	b=VrHMZwFvkZUbBv/g/iYGYAU/683Jfo7ivPPLOXD4iUFt1Rm0Ty2OCchkA4iKeTm9mU
+	1bBTbaBYNWG9qnTURJa09x72LnlP9dL0eN8tGwRmmuefAW511oARRTWoW/3yhEB7ft73
+	reaIIfKFxWOG1jTCkE36czJsXFcydOBn2IfboqDaf50j8c0T9ZfHjtFO2KmGDhnO4hwG
+	0d4J5w0X9okQ/llHgGkeDDUXxLdcNszSWa0aeW6CeL68FC30C+k5iEaxCYZg2rvxqV/Y
+	CP6NUgTyTTo34ireYDnSAHVu2h4w+vrHUftrAg4x836C0z4xGtuG7xyW4bMW0LAQ3zpT
+	CBYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DXX5VCJEk9fXjzGS+PFr96Hu3Raa7HHIDp0OhLtyp0o=;
-	b=hUL+BOu2zQHCCE6WMobZYG7sYAFi4aXulhJ2kC886MK12nwVU/GeMtBEdmIzdfVUcp
-	tEdmS/Of6V6X637Yi3p6NswZyv6iGpIz/Dgzm1UAw2jAWBjnA0UGaIVtfCw+aOwWrWem
-	qBR20ybNAirfD7aXsimeK4Pee92QYMwUlnsHJT/pAEJ34QVr2tqj5CWN3NB6GRlFbQ7Y
-	XvUDAZ5wYYimCwC6g+y1rJP3OR2D6te9NcFaBJA38q6Zv5Si60yIPoCyItcYqDY0HYH0
-	p8fOEL3MH05b05IDmh5Y+bOC1AL2RMTj+J6f4RC/A63Q3MsPKBOu1scRfD8pgzKNuvL/
-	zqBw==
-X-Gm-Message-State: APf1xPBM3bkXzVNiPI9f1LmMsW5NhaY8j3/KPuks0tdlJX9BvNOqYXU/
-	ghR+GfygyQ2+1HwbcPRcsuH4Oj3yyKAyQJ0+Rvs=
-X-Google-Smtp-Source: AH8x227B+GajbXn7afQV3V6IEJ/mxhJgaHn/olYIIoMjR5iwEjiG7O0JL9jYHeV5lltRfZD9+RG0eGVWQMKUq3wV6XM=
-X-Received: by 10.176.82.75 with SMTP id j11mr4690015uaa.86.1519290951717;
-	Thu, 22 Feb 2018 01:15:51 -0800 (PST)
-MIME-Version: 1.0
-References: <CAMKF1srn=JvEXM2WG2Y0r_L+iB-dT44LFgMU7LmeFq3etiauTw@mail.gmail.com>
-	<20180215233345.GP2786@denix.org>
-	<CAJdd5Gaow=CjNB1jbKjW80EYXv-a0vMqHgxzSjojz0N4Dh_ejA@mail.gmail.com>
-	<20180216010333.GR2786@denix.org>
-	<CA+chaQdkwxsJ1Z0wvPFEDwi4h+NsXzEapUqyxsqNDsTEg453SQ@mail.gmail.com>
-	<CA+chaQeYpA1oM3pHLu9Nuw3e+sGipvOnXh9GVinJQaAOFwHs2g@mail.gmail.com>
-	<1518812283.6900.47.camel@gmail.com>
-	<CA+chaQeE4=jqCufB3f+O2E=cHp-TxbZyW-kLwq_xPY5dQjzN4A@mail.gmail.com>
-	<1518814859.6900.49.camel@gmail.com>
-	<CANx9H-A=C9PZPRsJ6AyFMKcGFk3=UTO6UB7avz1bTKM6UfVMfw@mail.gmail.com>
-	<20180222013650.GE2786@denix.org>
-	<1AE70E4D-231C-4E48-866C-CFBA4E266FB9@linux.intel.com>
-	<CA+chaQfJmAXa_vftmhidupmdpL9SSYrwyfjq1r4dv9dk6PywLg@mail.gmail.com>
-	<CA+chaQf0pjENm-B=81sZqiHFhjN5c2DC+O_caFxFgfhOtGAJiQ@mail.gmail.com>
-In-Reply-To: <CA+chaQf0pjENm-B=81sZqiHFhjN5c2DC+O_caFxFgfhOtGAJiQ@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 22 Feb 2018 09:15:41 +0000
-Message-ID: <CANx9H-C5QG72bXL7O+S5wEFbCNDxdsFNyAwQ1-sW=pt4Z57cQw@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: libtalloc failure due to waf
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=0YALnYX4QTAPoGVBV56lWfx2kjlejbApQEMufnwhZjE=;
+	b=WRYe04Y/LlDGmBBxWHhK7140l7zsFSnaRdDgBh/96BSeW7RF9sT4tO+KKXVGBhHH55
+	t8g98/qqBt8wFJWMfS1eHUWNX8S//48l1N8ZbkJlVV5TDxhQCnqgAmPbgG0JCoI9pgDQ
+	+9hLwov7rntO7ltDfGrtNDk6AAGAgaRkt8s1wkmcBtnUiAlHcwETpGixFX+W1O6yOpnJ
+	1mvFhE9y2QFeS+2d23P0lYMSz34VDcVOg1fUAPficMc5jxA6e2YiOaz9g9HMtGUyXz4T
+	Pt41+Cdnoq0/DDNx7McJXCV4IeVYc9HhzhPzwzF84KR0x1RIBE8IoP1heZOFZ6dTKXoS
+	wfIw==
+X-Gm-Message-State: APf1xPBV+D7duUOINnG4y/5H9kjUrby9gBmJE2GkkDd9kowDNtPa7JbK
+	fz0C23Cj7PWc/0nXtkXpQWCCkf8=
+X-Google-Smtp-Source: AH8x2266qastuk6EmF7hNebHsVCO0AaAhRB0/irHXRFr8MNW0kJeumhQeLw9+zKYBJm8Tzk/vw+oRg==
+X-Received: by 10.223.197.197 with SMTP id v5mr5657814wrg.161.1519291114736;
+	Thu, 22 Feb 2018 01:18:34 -0800 (PST)
+Received: from pohly-mobl1 (p548497B7.dip0.t-ipconnect.de. [84.132.151.183])
+	by smtp.gmail.com with ESMTPSA id
+	e15sm38219060wmd.26.2018.02.22.01.18.33
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 22 Feb 2018 01:18:33 -0800 (PST)
+Message-ID: <1519291113.6698.11.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: Andreas Oberritter <obi@opendreambox.org>
+Date: Thu, 22 Feb 2018 10:18:33 +0100
+In-Reply-To: <20180221203352.55cd9a96@t460p>
+References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
+	<f808dcd5-82b9-b9c7-2c4a-b5b35b21fb42@gmail.com>
+	<CADkTA4MdQgigdN+hSsyZjk=1nfDB3M2799Pf-jy4WYt=6PdXyA@mail.gmail.com>
+	<8d5be4e4-3fd9-a0f2-c5cf-b967cf428416@gmail.com>
+	<CADkTA4P46zCdHEUeAdsC7Ej+N3gp7-6Rxx=UTTYN7U91fL3Z1w@mail.gmail.com>
+	<CA+chaQd=LFUw8wV0h6O2O_RvH2R9APE=X3Mn+DarPSwxefs6bg@mail.gmail.com>
+	<CA+chaQfpXBL3=z3QwTKQ6MNBKUVhbMjA6G+nADz562zFuYUTUw@mail.gmail.com>
+	<CAAQYJAsOFo6md-ZCRg+KmGQtC9O+pwFzVjpEMOXOFVFWzr4iMw@mail.gmail.com>
+	<CA+chaQfcD5n9Gs+Hos26qOqE5D8ch0JwTm+7pn_ZtysPCpHmjw@mail.gmail.com>
+	<20180221140252.d4rmbn73c3nzsvac@mentor.com>
+	<CAJTo0LYe1koEr7kJg7RfXLDbZLVa0qQyWiig5Sng_hpRTr_3dw@mail.gmail.com>
+	<1519225097.6698.8.camel@intel.com> <20180221203352.55cd9a96@t460p>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.22.6-1+deb9u1 
+Mime-Version: 1.0
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,657 +73,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2018 09:15:51 -0000
+X-List-Received-Date: Thu, 22 Feb 2018 09:18:34 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-I automatically sync about 12 layers every day. This is a show stopper
-because it breaks that workflow and forces a deviation from just building
-on =E2=80=9Cmaster=E2=80=9D. I am now about two months behind =E2=80=9Cmast=
-er=E2=80=9D for various reasons,
-but this is the one remaining blocker. I have zero interest in carrying
-local patches for this. Just frustrated. I wish I had a suggestion for a
-better way.
+On Wed, 2018-02-21 at 20:33 +0100, Andreas Oberritter wrote:
+> On Wed, 21 Feb 2018 15:58:17 +0100
+> Patrick Ohly <patrick.ohly@intel.com> wrote:
+> > The approach used by meta-freescale works with older releases.
+> > BBFILES_DYNAMIC [1] (supported by bitbake 1.36/Yocto 2.4) is a bit
+> > more
+> > robust.
+> > 
+> > [1] https://patchwork.openembedded.org/patch/140532/
+> > 
+> 
+> That's interesting. Is it possible to express dependencies on more
+> than one layer for a group of recipes with this mechanism?
 
-In particular, this points out the frailty of bbclasses not having a
-mechanism like bbapends. It is invasive to fix this locally. Or I am just
-being dumb. And frustrated. And should be sleeping now.
-On Thu, Feb 22, 2018 at 12:48 AM Martin Jansa <martin.jansa@gmail.com>
-wrote:
+No, not at the moment.
 
-> +Joe who will merge it to meta-networking
->
-> maybe you meant show stopper as libtalloc failure not the whole OE world
-> failing to parse because of waf-samba.bbclass (even if you don't build an=
-y
-> recipes using it).
->
-> FWIW: I've also sent simple fix for that to oe-core a while ago:
->
-> http://git.openembedded.org/openembedded-core-contrib/commit/?h=3Djansa/m=
-aster&id=3D71debaa06cb6f0d8996527e6d3bd6634508bd4a5
-> that's why it isn't failing for me, but it wasn't merged to oe-core and n=
-ot
-> sure if it ever will be.
->
-> Regards,
->
->
-> On Thu, Feb 22, 2018 at 9:30 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
-> > I've merged the fix for parsing issues immediately after sending it (6
-> > days ago):
-> > http://git.openembedded.org/meta-openembedded/commit/?id=3D2f7
-> > de931885c1b9e63c4e4238f0f7ad1388e8b6d
-> >
-> > So it shouldn't fail to parse for you if you use new enough oe-core (it
-> > doesn't fail for me).
-> >
-> > waf.bbclass is still broken in rocko and master, but that's different
-> > issue and not as fatal as missing get_waf_parallel_make function.
-> >
-> > On Thu, Feb 22, 2018 at 3:48 AM, Tim Orling
-> <timothy.t.orling@linux.intel.
-> > com> wrote:
-> >
-> >> Still failing for me, which is a show stopper. :(
-> >>
-> >> > On Feb 21, 2018, at 5:36 PM, Denys Dmytriyenko <denis@denix.org>
-> wrote:
-> >> >
-> >> > Any updates on this one yet? Thanks.
-> >> >
-> >> > On Fri, Feb 16, 2018 at 02:18:32PM -0800, Tim Orling wrote:
-> >> >> Expediting the fix is greatly appreciated.
-> >> >>
-> >> >> Thank you!
-> >> >>
-> >> >> --Tim
-> >> >>
-> >> >> On Fri, Feb 16, 2018 at 1:00 PM, Joshua Watt <jpewhacker@gmail.com>
-> >> wrote:
-> >> >>
-> >> >>> On Fri, 2018-02-16 at 21:55 +0100, Martin Jansa wrote:
-> >> >>>> Don't you want to update that one to use the new function from
-> utils
-> >> >>>> instead of re-introducing get_waf_parallel_make?
-> >> >>>
-> >> >>> .... yes. I guess I can do that now. It didn't exist when I wrote
-> the
-> >> >>> first version of this patch
-> >> >>>> On Fri, Feb 16, 2018 at 9:18 PM, Joshua Watt <jpewhacker@gmail.co=
-m
-> >
-> >> >>>> wrote:
-> >> >>>>> On Fri, 2018-02-16 at 21:08 +0100, Martin Jansa wrote:
-> >> >>>>>> And now it will fail to parse as well:
-> >> >>>>>>
-> http://git.openembedded.org/openembedded-core/commit/?id=3Dccd1142d
-> >> >>>>>> 22b31ed85d8823b1bc9e11ccfd72b61f
-> >> >>>>>>
-> >> >>>>>> removed get_waf_parallel_make from waf.bbclass, so now all waf-
-> >> >>>>>> samba.bbclass users will fail to parse with:
-> >> >>>>>
-> >> >>>>>
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-Feb
-> >> >>>>> ruary/116701.html will fix that as well.... We probably need to
-> >> >>>>> speed along that getting merged.
-> >> >>>>> Armin can you help with that?
-> >> >>>>>
-> >> >>>>> This patch should resolve all of the waf issues that have been
-> >> >>>>> discussed here, with exception of the one improvement proposed b=
-y
-> >> >>>>> Denys. While it should probably be improved, I don't beleive it
-> >> >>>>> actually affects any recipes (some please give me an example if =
-I
-> >> >>>>> am wrong).
-> >> >>>>>
-> >> >>>>> Sorry for the churn. Hopefull this will be better in the future
-> >> >>>>> since waf and samba-waf are no longer tied together.
-> >> >>>>>
-> >> >>>>> Joshua Watt
-> >> >>>>>> bb.data_smart.ExpansionError: Failure expanding variable
-> >> >>>>>> do_compile, expression was
-> >> >>>>>>    python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
-> >> >>>>>> which triggered exception NameError: name
-> >> >>>>>> 'get_waf_parallel_make' is not defined
-> >> >>>>>> On Fri, Feb 16, 2018 at 9:45 AM, Martin Jansa <martin.jansa@gma=
-il
-> >> >>>>>> .com> wrote:
-> >> >>>>>>> Check this thread:
-> >> >>>>>>> http://lists.openembedded.org/pipermail/openembedded-commits/2=
-0
-> >> >>>>>>> 18-January/218460.html
-> >> >>>>>>>
-> >> >>>>>>> but my patch wasn't merged:
-> >> >>>>>>> http://lists.openembedded.org/pipermail/openembedded-core/2018=
--
-> >> >>>>>>> January/146974.html
-> >> >>>>>>> only the one from Joshua.
-> >> >>>>>>>
-> >> >>>>>>>
-> >> >>>>>>> The original issue is still in rocko as well, the backported
-> >> >>>>>>> waf change doesn't work and causes useless warning.
-> >> >>>>>>>
-> >> >>>>>>> Either the "waf.bbclass: explicitly pass bindir and libdir if
-> >> >>>>>>> supported" should be reverted in rocko or all fixes for this
-> >> >>>>>>> should be backported to rocko once they are all in oe-core and
-> >> >>>>>>> meta-oe master.
-> >> >>>>>>>
-> >> >>>>>>> Regards,
-> >> >>>>>>>
-> >> >>>>>>> On Fri, Feb 16, 2018 at 2:03 AM, Denys Dmytriyenko <denis@deni=
-x
-> >> >>>>>>> .org> wrote:
-> >> >>>>>>>> On Thu, Feb 15, 2018 at 06:37:11PM -0600, Joshua Watt wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>> On Feb 15, 2018 17:42, "Denys Dmytriyenko" <denis@denix.org
-> >> >>>>>>>>> wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>> On Thu, Feb 15, 2018 at 03:30:06PM -0800, Khem Raj wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>> On Thu, Feb 15, 2018 at 3:24 PM, Denys Dmytriyenko <denis
-> >> >>>>>>>> @denix.org>
-> >> >>>>>>>>
-> >> >>>>>>>>> wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>>> On Thu, Feb 15, 2018 at 11:20:49PM +0000, Tim Orling
-> >> >>>>>>>> wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>> Then why did =E2=80=98sudo dnf install waf=E2=80=99 get m=
-e past the
-> >> >>>>>>>> error above? And
-> >> >>>>>>>>
-> >> >>>>>>>>> why
-> >> >>>>>>>>
-> >> >>>>>>>>>>>> does Fedora have a package for it?
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>> https://src.fedoraproject.org/rpms/waf
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>> Regardless, something broke.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>> I thought so too. As waf.bbclass from oe-core looks for
-> >> >>>>>>>> waf binary in
-> >> >>>>>>>>
-> >> >>>>>>>>> the root
-> >> >>>>>>>>
-> >> >>>>>>>>>>> of the source package, I looked inside libtalloc 2.1.9
-> >> >>>>>>>> and 2.1.10 and
-> >> >>>>>>>>
-> >> >>>>>>>>> neither
-> >> >>>>>>>>
-> >> >>>>>>>>>>> of them have any "waf" files at the root. How was it
-> >> >>>>>>>> working before?
-> >> >>>>>>>>
-> >> >>>>>>>>> What
-> >> >>>>>>>>
-> >> >>>>>>>>>>> broke?
-> >> >>>>>>>>
-> >> >>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>> its using waf-samba.bbclass, there is a patch floating
-> >> >>>>>>>> for that
-> >> >>>>>>>>
-> >> >>>>>>>>>> https://patchwork.openembedded.org/patch/148046/
-> >> >>>>>>>>
-> >> >>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>> So, it will fix libtalloc, but some other packages that
-> >> >>>>>>>> still use
-> >> >>>>>>>>
-> >> >>>>>>>>> waf.bbclass
-> >> >>>>>>>>
-> >> >>>>>>>>> will keep on failing with an exception?
-> >> >>>>>>>>
-> >> >>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>> They shouldn't. I tested all the ones I could find. The way
-> >> >>>>>>>> waf-samba uses
-> >> >>>>>>>>
-> >> >>>>>>>>> waf is more of the exception than the rule.... Most
-> >> >>>>>>>> projects will follow
-> >> >>>>>>>>
-> >> >>>>>>>>> the waf.bbclass pattern of a wscript and waf in $S, but we
-> >> >>>>>>>> can probably
-> >> >>>>>>>>
-> >> >>>>>>>>> parameterize it if necessary.
-> >> >>>>>>>>
-> >> >>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>> Do you know of a specific recipe that fails?
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>> No, but as Andre said here earlier, it should be more
-> >> >>>>>>>> forgiving when ${S}/waf
-> >> >>>>>>>>
-> >> >>>>>>>> is not available or at least give a proper error message
-> >> >>>>>>>> instead of dumping a
-> >> >>>>>>>>
-> >> >>>>>>>> cryptic exception stack...
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>> In other words, before this waf.bbclass change in oe-core it
-> >> >>>>>>>> was handling such
-> >> >>>>>>>>
-> >> >>>>>>>> situation just fine and there was a warning "Unable to
-> >> >>>>>>>> execute waf --version,
-> >> >>>>>>>>
-> >> >>>>>>>> exit code 127". Now it never reaches that code and just
-> >> >>>>>>>> throws an exception.
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>> On Thu, Feb 15, 2018 at 3:16 PM Joshua Watt <jpewhacke
-> >> >>>>>>>> r@gmail.com>
-> >> >>>>>>>>
-> >> >>>>>>>>> wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>> On Thu, 2018-02-15 at 23:10 +0000, Tim Orling wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>> Seeing the same and trying to figure it out. Also,
-> >> >>>>>>>> seems there is
-> >> >>>>>>>>
-> >> >>>>>>>>> no
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>> recipe
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>> for waf-native, so it becomes a new required host
-> >> >>>>>>>> tool.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>> There is no "waf" tool, so a "waf-native" tool
-> >> >>>>>>>> doesn't make sense...
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>> it's not how waf works. Each project has their own
-> >> >>>>>>>> copy of the waf
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>> program, it's not something the host has to provide.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>> On Thu, Feb 15, 2018 at 2:57 PM Denys Dmytriyenko
-> >> >>>>>>>> <denis@denix.org>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>> wrote:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> Hi,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> I'm getting below stack dump building libtalloc
-> >> >>>>>>>> 2.1.10 in master.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> Works
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> fine in
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> rocko with libtalloc 2.1.9. I need it for cifs-
-> >> >>>>>>>> utils. I'm not
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> familiar with
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> waf, any help? Thanks.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> ERROR: libtalloc-2.1.10-r0 do_configure: Error
-> >> >>>>>>>> executing a python
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> function
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> in exec_python_func() autogenerated:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> The stack trace of python calls that resulted in
-> >> >>>>>>>> this
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> exception/failure
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> was:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> File: 'exec_python_func() autogenerated',
-> >> >>>>>>>> lineno: 2, function:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> <module>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0001:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> *** 0002:waf_preconfigure(d)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0003:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> File: '/OE/master/sources/oe-
-> >> >>>>>>>> core/meta/classes/waf.bbclass',
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> lineno: 34,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> function: waf_preconfigure
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0030:    from distutils.version import
-> >> >>>>>>>> StrictVersion
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0031:    subsrcdir =3D d.getVar('S')
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0032:    wafbin =3D os.path.join(subsrcdir,
-> >> >>>>>>>> 'waf')
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0033:    try:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> *** 0034:        result =3D
-> >> >>>>>>>> subprocess.check_output([wafbin, '
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> --version'],
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> cwd=3Dsubsrcdir, stderr=3Dsubprocess.STDOUT)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0035:        version =3D result.decode('utf-
-> >> >>>>>>>> 8').split()[1]
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0036:        if StrictVersion(version) >=3D
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> StrictVersion("1.8.7"):
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0037:            d.setVar("WAF_EXTRA_CONF",
-> >> >>>>>>>> "
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> --bindir=3D${bindir}
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> --libdir=3D${libdir}")
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0038:    except
-> >> >>>>>>>> subprocess.CalledProcessError as e:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> File: '/usr/lib/python3.5/subprocess.py',
-> >> >>>>>>>> lineno: 626, function:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> check_output
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0622:        # empty string. That is
-> >> >>>>>>>> maintained here for
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> backwards
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> compatibility.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0623:        kwargs['input'] =3D '' if
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> kwargs.get('universal_newlines',
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> False) else b''
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0624:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0625:    return run(*popenargs,
-> >> >>>>>>>> stdout=3DPIPE,
-> >> >>>>>>>>
-> >> >>>>>>>>> timeout=3Dtimeout,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> check=3DTrue,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> *** 0626:               **kwargs).stdout
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0627:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0628:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0629:class CompletedProcess(object):
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0630:    """A process that has finished
-> >> >>>>>>>> running.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> File: '/usr/lib/python3.5/subprocess.py',
-> >> >>>>>>>> lineno: 693, function:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> run
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0689:        if 'stdin' in kwargs:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0690:            raise ValueError('stdin
-> >> >>>>>>>> and input arguments
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> may not
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> both be used.')
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0691:        kwargs['stdin'] =3D PIPE
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0692:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> *** 0693:    with Popen(*popenargs, **kwargs)
-> >> >>>>>>>> as process:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0694:        try:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0695:            stdout, stderr =3D
-> >> >>>>>>>> process.communicate(input,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> timeout=3Dtimeout)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0696:        except TimeoutExpired:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0697:            process.kill()
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> File: '/usr/lib/python3.5/subprocess.py',
-> >> >>>>>>>> lineno: 947, function:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> __init__
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0943:
-> >> >>>>>>>> startupinfo,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> creationflags,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> shell,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0944:
-> >> >>>>>>>> p2cread, p2cwrite,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0945:
-> >> >>>>>>>> c2pread, c2pwrite,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0946:
-> >> >>>>>>>> errread, errwrite,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> *** 0947:
-> >> >>>>>>>> restore_signals,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> start_new_session)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0948:        except:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0949:            # Cleanup if the child
-> >> >>>>>>>> failed starting.
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0950:            for f in filter(None,
-> >> >>>>>>>> (self.stdin,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> self.stdout,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> self.stderr)):
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     0951:                try:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> File: '/usr/lib/python3.5/subprocess.py',
-> >> >>>>>>>> lineno: 1551, function:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> _execute_child
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1547:                                # The
-> >> >>>>>>>> error must be
-> >> >>>>>>>>
-> >> >>>>>>>>> from
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> chdir(cwd).
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1548:
-> >> >>>>>>>> err_msg +=3D ': ' +
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> repr(cwd)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1549:                            else:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1550:
-> >> >>>>>>>> err_msg +=3D ': ' +
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> repr(orig_executable)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> *** 1551:                    raise
-> >> >>>>>>>> child_exception_type(errno_
-> >> >>>>>>>>
-> >> >>>>>>>>> num,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> err_msg)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1552:                raise
-> >> >>>>>>>> child_exception_type(err_msg)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1553:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1554:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>     1555:        def _handle_exitstatus(self,
-> >> >>>>>>>> sts,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> _WIFSIGNALED=3Dos.WIFSIGNALED,
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> Exception: FileNotFoundError: [Errno 2] No such
-> >> >>>>>>>> file or
-> >> >>>>>>>>
-> >> >>>>>>>>> directory:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> '/OE/master/build/tmp-glibc/work/armv7ahf-neon-
-> >> >>>>>>>> oe-linux-
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> gnueabi/libtalloc/2.1.10-r0/talloc-2.1.10/waf'
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> ERROR: libtalloc-2.1.10-r0 do_configure:
-> >> >>>>>>>> Function failed:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> waf_preconfigure
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> ERROR: Logfile of failure stored in:
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> /OE/master/build/tmp-glibc/work/armv7ahf-neon-
-> >> >>>>>>>> oe-linux-
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> gnueabi/libtalloc/2.1.10-
-> >> >>>>>>>> r0/temp/log.do_configure.52699
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> ERROR: Task
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> (/OE/master/sources/meta-openembedded/meta-
-> >> >>>>>>>> networking/recipes-
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>> support/libtalloc/libtalloc_2.1.10.bb:do_configure)
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> failed with exit code '1'
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> --
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> _______________________________________________
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> Openembedded-devel mailing list
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> Openembedded-devel@lists.openembedded.org
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>> http://lists.openembedded.org/mailman/listinfo/o
-> >> >>>>>>>> penembedded-devel
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>>>> --
-> >> >>>>>>>>
-> >> >>>>>>>>>>> _______________________________________________
-> >> >>>>>>>>
-> >> >>>>>>>>>>> Openembedded-devel mailing list
-> >> >>>>>>>>
-> >> >>>>>>>>>>> Openembedded-devel@lists.openembedded.org
-> >> >>>>>>>>
-> >> >>>>>>>>>>> http://lists.openembedded.org/mailman/listinfo/openembe
-> >> >>>>>>>> dded-devel
-> >> >>>>>>>>
-> >> >>>>>>>>>>
-> >> >>>>>>>>
-> >> >>>>>>>>> --
-> >> >>>>>>>>
-> >> >>>>>>>>> _______________________________________________
-> >> >>>>>>>>
-> >> >>>>>>>>> Openembedded-devel mailing list
-> >> >>>>>>>>
-> >> >>>>>>>>> Openembedded-devel@lists.openembedded.org
-> >> >>>>>>>>
-> >> >>>>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded
-> >> >>>>>>>> -devel
-> >> >>>>>>>>
-> >> >>>>>>>> --
-> >> >>>>>>>>
-> >> >>>>>>>> _______________________________________________
-> >> >>>>>>>>
-> >> >>>>>>>> Openembedded-devel mailing list
-> >> >>>>>>>>
-> >> >>>>>>>> Openembedded-devel@lists.openembedded.org
-> >> >>>>>>>>
-> >> >>>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-d
-> >> >>>>>>>> evel
-> >> >>>>>>>>
-> >> >>> --
-> >> >>> _______________________________________________
-> >> >>> Openembedded-devel mailing list
-> >> >>> Openembedded-devel@lists.openembedded.org
-> >> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> >>>
-> >> >> --
-> >> >> _______________________________________________
-> >> >> Openembedded-devel mailing list
-> >> >> Openembedded-devel@lists.openembedded.org
-> >> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> > --
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+-- 
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
 
