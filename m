@@ -1,23 +1,25 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
 Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id ED62771C7A
+	by mail.openembedded.org (Postfix) with ESMTP id 2E2DE60807
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 06:26:41 +0000 (UTC)
+	Thu, 22 Feb 2018 06:26:44 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from fmsmga007.fm.intel.com ([10.253.24.52])
 	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 Feb 2018 22:26:41 -0800
+	21 Feb 2018 22:26:45 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.47,377,1515484800"; d="scan'208";a="19378039"
+X-IronPort-AV: E=Sophos;i="5.47,377,1515484800"; d="scan'208";a="19378051"
 Received: from wrath.jf.intel.com ([10.54.31.19])
-	by fmsmga007.fm.intel.com with ESMTP; 21 Feb 2018 22:26:40 -0800
+	by fmsmga007.fm.intel.com with ESMTP; 21 Feb 2018 22:26:45 -0800
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Feb 2018 22:26:30 -0800
-Message-Id: <20180222062631.11026-1-timothy.t.orling@linux.intel.com>
+Date: Wed, 21 Feb 2018 22:26:31 -0800
+Message-Id: <20180222062631.11026-2-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.13.6
-Subject: [meta-perl][PATCH 1/2] libmodule-pluggable-perl: use upstream instead of github.com/moto-timo
+In-Reply-To: <20180222062631.11026-1-timothy.t.orling@linux.intel.com>
+References: <20180222062631.11026-1-timothy.t.orling@linux.intel.com>
+Subject: [meta-perl][PATCH 2/2] libmodule-runtime-perl: upgrade to 0.016, use upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,39 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2018 06:26:42 -0000
+X-List-Received-Date: Thu, 22 Feb 2018 06:26:44 -0000
 
-Upstream has updated the build system to use EUMM, so the fix on
-github.com/moto-timo is no longer needed.
+Upstream has fixed build system to use EUMM, so we no
+longer need the fix on github.com/moto-timo.
 
-Because the versions where out of sync, reflect the bump in PR.
+Add UPSTREAM_CHECK_REGEX to ensure we catch future updates.
 
-Add UPSTREAM_CHECK_REGEX to properly catch upstream updates.
+Extended the license checksum to include the Copyright.
+The length of the README file has changed, so the checksum
+has changed. Verified that the license remains the same.
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- .../recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb    | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ ...runtime-perl_0.015.bb => libmodule-runtime-perl_0.016.bb} | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+ rename meta-perl/recipes-perl/libmodule/{libmodule-runtime-perl_0.015.bb => libmodule-runtime-perl_0.016.bb} (75%)
 
-diff --git a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
-index c73a15a4f..aed65d3a8 100644
---- a/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
-+++ b/meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
-@@ -17,9 +17,14 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://README;beginline=322;endline=325;md5=086450ce010f6fda25db0b38fcc41086"
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.015.bb b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+similarity index 75%
+rename from meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.015.bb
+rename to meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+index b92842c46..89f0f709a 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.015.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.016.bb
+@@ -17,12 +17,14 @@ SECTION = "libs"
+ HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
  
- SRCNAME = "Module-Pluggable"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+-LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=62e24a93342fede7221d66335c716f34"
++LIC_FILES_CHKSUM = "file://README;beginline=36;endline=44;md5=9416434672a57853d6181f3da9094963"
+ 
+-SRCNAME = "module-runtime"
 -SRC_URI = "https://github.com/moto-timo/${SRCNAME}/archive/${PV}.tar.gz"
--SRC_URI[md5sum] = "e32475d6ff5843f738cedacd3b7a2cdb"
--SRC_URI[sha256sum] = "58c62292eea6d06959eba1b97598650813211265403242d57efb2f605c96059f"
-+SRC_URI = "${CPAN_MIRROR}/authors/id/S/SI/SIMONW/${SRCNAME}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "87ce2971662efd0b69a81bb4dc9ea76c"
-+SRC_URI[sha256sum] = "b3f2ad45e4fd10b3fb90d912d78d8b795ab295480db56dc64e86b9fa75c5a6df"
+-SRC_URI[md5sum] = "ad6ca179c978aa02ac8aa29244ef9beb"
+-SRC_URI[sha256sum] = "59effa82b3f6986d28de6154a8f2428157691004d951f936a81e851f4dbcb045"
++SRCNAME = "Module-Runtime"
++SRC_URI = "${CPAN_MIRROR}/authors/id/Z/ZE/ZEFRAM/${SRCNAME}-${PV}.tar.gz"
++SRC_URI[md5sum] = "d3d47222fa2e3dfcb4526f6cc8437b20"
++SRC_URI[sha256sum] = "68302ec646833547d410be28e09676db75006f4aa58a11f3bdb44ffe99f0f024"
 +
-+PR = "r1"
-+
-+UPSTREAM_CHECK_REGEX = "Module\-Pluggable\-(?P<pver>(\d+\.\d+))"
-+UPSTREAM_CHECK_URI = "https://metacpan.org/release/${SRCNAME}"
++UPSTREAM_CHECK_REGEX = "Module\-Runtime\-(?P<pver>(\d+\.\d+)).tar"
  
  S = "${WORKDIR}/${SRCNAME}-${PV}"
  
