@@ -1,142 +1,42 @@
-Return-Path: <alejandr@xilinx.com>
-Received: from NAM03-BY2-obe.outbound.protection.outlook.com
-	(mail-by2nam03on0074.outbound.protection.outlook.com [104.47.42.74])
-	by mail.openembedded.org (Postfix) with ESMTP id DBBB671A88
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 6721A77EFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 00:22:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=271toRTp9D578qoNKwUhMwCVNFVLj/Na7Ad8hW7R3ik=;
-	b=jk31uWstOf51CoO/N3jARVHZN0eYEZHL1eqW/9wWgkLUncrPnXzXKUDNixj6+x+qNu70eKOtNPs7iC15/8a6VgtoQAFaTHswIGUb+fHxBWKQdpadIK9EtFMUj3L5V21fxQZJ9c3x0wLpHms5LModS2NGK03iDDwizXU/boCYvGk=
-Received: from MWHPR0201CA0095.namprd02.prod.outlook.com
-	(2603:10b6:301:75::36) by CY4PR02MB3157.namprd02.prod.outlook.com
-	(2603:10b6:910:7c::26) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.506.18;
-	Wed, 21 Feb 2018 21:48:06 +0000
-Received: from SN1NAM02FT034.eop-nam02.prod.protection.outlook.com
-	(2a01:111:f400:7e44::202) by MWHPR0201CA0095.outlook.office365.com
-	(2603:10b6:301:75::36) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.506.18 via
-	Frontend Transport; Wed, 21 Feb 2018 21:48:04 +0000
-Authentication-Results: spf=pass (sender IP is 149.199.60.100)
-	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
-	signed) header.d=none; lists.openembedded.org;
-	dmarc=bestguesspass action=none header.from=xilinx.com;
-Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
-	149.199.60.100 as permitted sender) receiver=protection.outlook.com;
-	client-ip=149.199.60.100; helo=xsj-pvapsmtpgw02;
-Received: from xsj-pvapsmtpgw02 (149.199.60.100) by
-	SN1NAM02FT034.mail.protection.outlook.com (10.152.72.141) with
-	Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.506.19
-	via Frontend Transport; Wed, 21 Feb 2018 21:48:03 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66]:49021
-	helo=xsj-pvapsmtp01) by xsj-pvapsmtpgw02 with esmtp (Exim 4.63)
-	(envelope-from <alejandro.enedino.hernandez-samaniego@xilinx.com>)
-	id 1eocF9-0007ob-AZ for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Feb 2018 13:48:03 -0800
-Received: from [127.0.0.1] (helo=xsj-smtp-dlp2.xlnx.xilinx.com)
-	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-	(envelope-from <alejandro.enedino.hernandez-samaniego@xilinx.com>)
-	id 1eocF9-0005nS-55 for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Feb 2018 13:48:03 -0800
-Received: from xsj-pvapsmtp01 (smtp3.xilinx.com [149.199.38.66])
-	by xsj-smtp-dlp2.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
-	w1LLm2N4025928 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Feb 2018 13:48:02 -0800
-Received: from [172.19.2.8] by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-	(envelope-from <alejandr@xilinx.com>) id 1eocF8-0005nF-5w
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Feb 2018 13:48:02 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180221192129.2759-1-otavio@ossystems.com.br>
-	<20180221192129.2759-2-otavio@ossystems.com.br>
-From: Alejandro Enedino Hernandez Samaniego
-	<alejandro.enedino.hernandez-samaniego@xilinx.com>
-Message-ID: <bd62279e-5896-e416-7768-f52552752b46@xilinx.com>
-Date: Wed, 21 Feb 2018 13:48:02 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.1.1
+	Thu, 22 Feb 2018 01:36:51 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 808D720AD5;
+	Thu, 22 Feb 2018 01:36:53 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id NU7lYykFFxSU; Thu, 22 Feb 2018 01:36:53 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 29D2920059;
+	Thu, 22 Feb 2018 01:36:51 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id A461A1632C4; Wed, 21 Feb 2018 20:36:50 -0500 (EST)
+Date: Wed, 21 Feb 2018 20:36:50 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Tim Orling <ticotimo@gmail.com>
+Message-ID: <20180222013650.GE2786@denix.org>
+References: <CAMKF1srn=JvEXM2WG2Y0r_L+iB-dT44LFgMU7LmeFq3etiauTw@mail.gmail.com>
+	<20180215233345.GP2786@denix.org>
+	<CAJdd5Gaow=CjNB1jbKjW80EYXv-a0vMqHgxzSjojz0N4Dh_ejA@mail.gmail.com>
+	<20180216010333.GR2786@denix.org>
+	<CA+chaQdkwxsJ1Z0wvPFEDwi4h+NsXzEapUqyxsqNDsTEg453SQ@mail.gmail.com>
+	<CA+chaQeYpA1oM3pHLu9Nuw3e+sGipvOnXh9GVinJQaAOFwHs2g@mail.gmail.com>
+	<1518812283.6900.47.camel@gmail.com>
+	<CA+chaQeE4=jqCufB3f+O2E=cHp-TxbZyW-kLwq_xPY5dQjzN4A@mail.gmail.com>
+	<1518814859.6900.49.camel@gmail.com>
+	<CANx9H-A=C9PZPRsJ6AyFMKcGFk3=UTO6UB7avz1bTKM6UfVMfw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20180221192129.2759-2-otavio@ossystems.com.br>
-X-RCIS-Action: ALLOW
-X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.2.0.1013-23620.005
-X-TM-AS-User-Approved-Sender: Yes;Yes
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:149.199.60.100; IPV:NLI; CTRY:US; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(39860400002)(396003)(39380400002)(346002)(376002)(2980300002)(438002)(189003)(199004)(5660300001)(6246003)(230700001)(6916009)(2950100002)(65826007)(2906002)(356003)(305945005)(64126003)(81156014)(8936002)(336011)(8676002)(478600001)(9786002)(316002)(67846002)(26005)(23676004)(186003)(36756003)(31696002)(2351001)(50466002)(77096007)(2486003)(47776003)(81166006)(58126008)(63266004)(53546011)(106002)(229853002)(76176011)(106466001)(31686004)(65806001)(65956001)(107986001)(5001870100001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:CY4PR02MB3157; H:xsj-pvapsmtpgw02;
-	FPR:; SPF:Pass; PTR:unknown-60-100.xilinx.com,xapps1.xilinx.com;
-	MX:1; A:1; LANG:en; 
-X-Microsoft-Exchange-Diagnostics: 1; SN1NAM02FT034;
-	1:oEIYv9+h2svSVyqkPNcRULXU65SDkCPKliAjk5lSDKCASXRS93bPNydZrKEUuiK4mXkOjBViPHUv9Ptq8KTmz+cY5El2PVBSx3kk6uVD1BXSB+ukMuzH+HJ8M1BwEidB
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 489255eb-34e1-4951-2648-08d57974c90b
-X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652020)(4534165)(4627221)(201703031133081)(201702281549075)(5600026)(4604075)(4608076)(2017052603307)(7153060);
-	SRVR:CY4PR02MB3157; 
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3157;
-	3:+AQuOkjqrWlrz+nj7q2DXv+eCLrICcZKIhF06cP7MHatTyeSi8vzxrWUeOlGMiPoQZP+YJYmVNre6M5YLkL3e5kkYZkO/uFpoS4tHbcH/w4+eS1JYbhXYcRTBzuB/qBCiJ6J3kzVKlYgUkVWzWYYCYRtPP6iIDs3xfMu2JX5uZlhlML05QkJD5oJDCGkt6QIzW6G7pQCQGx0PfrjpE6fWEPxE5n8h7OMgr/LAdbucKRjV/CyfAmNziB3cUki3CIgs3EexPI6vzz+ion+hcefxhbdwgvqkmUvkyV8Y4mbM9vIHSGap8epX3Q4f6QrTii3h0+wKlRFWQkoWjCyrC0tHCJMlNNPlW0zzyvLPfP3R2s=;
-	25:d+9COSWRIThEPZnKZiplAXFNfrn9c62m7N2NioHvLW5ZgWDL8ecLbsgXkIUm0FIW4kRM18BvecrhbK5Puck9c/UetX+4IxA+ewAeuUh7SQrvlBr/pLYm+pmgFDOzerSq2Ut623xbss8j1iUR9Ov8Um77MPTlBKe5RzYJLmzgbiK/u6gjV1QhDngH7qCMl/IllmP5lAoOdbeJ493BHedA/tr7w+2mVGFOEjfZwFXauFQiVeNtxpFEF1eUPUlmhVmw/VRIVnxHymeCyqgxEZhmjI72/bsjR0OYlsd0Afhm97wklQY+eKBc/zlPZ/EgVKO6k5pAVQGpTXDTat82Etx9zw==
-X-MS-TrafficTypeDiagnostic: CY4PR02MB3157:
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3157;
-	31:ig9YNKKw2A9TnuRuASp5M4MwOmvAOH5cdFG17cD1QR1DWe8SXQrpayUyVK1Rj+ApqbGoPYhQvzF65ovQtng2S89H7PLtZ7RwFgRvSjnZl1uINc+Z1t+jcY3js2WpmV0jqIOG1Wu0piVY3yKyX9uQJC+A8mv5kJdPeBSo2KJt6xZAPdy+dKiFskxYBaZsa5nyKQfI6SNBAhZIZy2qqGqSBGvkKHxRpyyDWHr/cU2EafY=;
-	20:vmft9k7F4joPYxT+6XpLQcVwHfuf3WO+FsUEmYfaMsz3dirRuv9Y9VDWqWLUHeFqnRQTGz03zM0f7Qj1lRTYIoaLQtGsJey301RzjjTAgiRIMhQo0yMpvs0But6SQIIp3p9STCHOiTLi8/OcbfpSVqKd+x8Gb+VmQXGH4Ltl6pyQlsf1gOWjA57xTTDPSYn5aB21UvuLcngoYmh8M1g8FJ5goHW7DCtRVMuAwPgDFavPNVD74rxjVeHTZICTxhbv0bkAQhTRLFX4nvb4G5HQqKb0N9L8QYzlleg4irNSFq7+i0bbzSi/2NOUYH18gF0T1n/rfJnPfSxK1gjiPpmp3axDNEbKyMnClJOUeBFpRkxy9+W9eaev248N5+qioEYvQUcN2ND2p9HCPeyqQIGriT/mA765Xt5MzJCXjchcGFbADzHKaxeD3eh6KxLL8V83rwLMvnwVdQsCQiGY9CDRhiHnbgV/RDikA08vU6vEBbZ00ZRZiu0fLbPS9Nu/w9gj
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-Microsoft-Antispam-PRVS: <CY4PR02MB315766B60B8F89D7AA2BD922ACCE0@CY4PR02MB3157.namprd02.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:(166494164430575);
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(6040501)(2401047)(5005006)(8121501046)(3231101)(944501161)(10201501046)(93006095)(93004095)(3002001)(6055026)(6041288)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123562045)(20161123560045)(20161123558120)(20161123564045)(6072148)(201708071742011);
-	SRVR:CY4PR02MB3157; BCL:0; PCL:0; RULEID:; SRVR:CY4PR02MB3157; 
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3157;
-	4:qbXkorhXZ25xYt3GmL+80sTmY5lLoDMzP9oVReCKl5z0SROzUrR+ga7eFS8FnEGQl3U6aF7fSIo24HDrRmC6WuEhGnO7CtgYIezSYGckdD2bjSoQZGDs7g1x6Zo6mSvVmnPPCAUU/H+DaA8osRLXWMKpuwu5H7Jk9wSbNa8hBzA/2LoLqfSU87q3KSJdQu/y4i4lCb60Sta1JfJS0acpYPjR4j7P9VE0wwwaykmEr4uOZoHSmortdWqeN7658weyqyBS/JfrjtuB9yh5Z1WcKW1ffcqNcIlY23lhi/OlEXHE2iKA66X+j+dIG6LpQmpU
-X-Forefront-PRVS: 0590BBCCBC
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtDWTRQUjAyTUIzMTU3OzIzOlB6SkFuREJyVHB1RXgvZ215VW9DM3h3Rmda?=
-	=?utf-8?B?ZVdOWEpXRU5FejI2d2xxTWdZdy83ODYwYlcyUThKZjdkbTl6OG9SUVFZWkhi?=
-	=?utf-8?B?WGVMMmtjVEFiTE0yMEQ5RGZUYWtFK0NWcmc1bllqRjN0RWpYU0xzREJTY0xq?=
-	=?utf-8?B?dncxYW5MUFA2RmRJbXdtMEwwV3lDSTVPRi9hekxMMzI5SXhPNjRKeHNKaVhU?=
-	=?utf-8?B?bTJGRi94RlBlSWlvNzMyaEE4Qlc4SnFzLzlJL3YxK2FlQlNmQ2RnYy9sdU5v?=
-	=?utf-8?B?YXJXcmhrSVJLL05yQVdLcG1IbzZsbHB1NkczbmJRZ2tJd1VNUFQycm5maG9M?=
-	=?utf-8?B?ckFJZCswMythVEN6eS9jVnZBSUNEMUxmR3BjQmJKVzFxZ0h2WXJtZmtBS2hL?=
-	=?utf-8?B?ckt4MHBMdVdKUFZRMmQva0dlMWdOZVNCQ3g5NXQrWVIzeGV0MExhVmt2M0Q3?=
-	=?utf-8?B?dU52NlVqeWtPTFd1cEIxQmhsai9BZGs4QVFSOGhtbW9BRHpKU0VnUjZpY0Y1?=
-	=?utf-8?B?SnB1RHpwOHVNWTNITkU4L3ZwajhQcnlLOUhYTlJ4TElsK1k2azdCbEluRWpa?=
-	=?utf-8?B?b3NmN1RZRHBqZXpHMWphdm9LMW1OaTB2ZzNjVTJKTUpTeGpIVDkxKzV1Y3l4?=
-	=?utf-8?B?cVFRZzBiYkNTQ1Jhc3BORTQvcDVpYzRMVlVtK0thTWk2WkswZW05SXlOSGlh?=
-	=?utf-8?B?YU5aYmltampEYVNIOWw3OXlqQkZKbmFDR0Y2SU5MVzFNbHBXbHFEL1Zab2RN?=
-	=?utf-8?B?VXlBRUlUeFVMTnNHOUdhM2hTOUNPVlJDNTZDUThtRmFSY1FUK1VZL2tOT3NZ?=
-	=?utf-8?B?aXlDZXFRVS9OaXRRRnNNd3Y3d1RoVzV2OHBMcmkwUkpWMERpc2N2OU05SVMv?=
-	=?utf-8?B?a045RHdzWnNQWUphanlaRWV0TzZUS1lJV3NuallDTG9JcCtkVU1qN0FmTm9j?=
-	=?utf-8?B?S2pwaVd6OGxFWWptMklrdkYweFZNVm5qL1J4SnhVRWZTM1FNcVlPNGZoTHRY?=
-	=?utf-8?B?ZVdkWXJsMFFKTGxFSE9oVG9oeUc2dzB3ZXh4c1ZBR2dNbElEWUtNN3BMbExm?=
-	=?utf-8?B?WDB4UHZXeWMrQnQrakNlRHVGUjN0QXNCbnJVM3dwTzJWcENKWjVtcWNvekE0?=
-	=?utf-8?B?WWtSb0t5RnRzSURXWUpoUENpRjFlV3Y2Qm5YQkorM3NTV3F2VXcwdGV2MXJO?=
-	=?utf-8?B?RHhFUmk1OXhMVHVERlVzTjN2V2dFOXFDMzJlYjQ0MWpTYkw1djRIdVJnVXJz?=
-	=?utf-8?B?R3dlQkdKYjhDVU1QeGd2aW9SNGpibmZxdDU3L0ZpUnZ0QTYxNWJCdU43L0xV?=
-	=?utf-8?B?UDdOUDV1SkFzRm42aFZ4cWpweGNlR1M4bnZWU1FFUlZZYW1ReHRNSk9ZWnRU?=
-	=?utf-8?B?bVVIS1pIamNEWHZMUkkraVJKRHBZYjBvZVplRmo0RmZhQVFUNUkwNnlTUUlZ?=
-	=?utf-8?B?NWM2a3NraUxUYkYrNXNmbEQrNzRqeXpkd0R4eTltY3R0UzR2RnZvZHg4dDlT?=
-	=?utf-8?B?WDlyOUVEWVhqN0Y0eXZ5ZjFwK2NaY0xkdUh5N01iSkZBRXZ2NzQ5SUtxcExM?=
-	=?utf-8?B?OWJqTmFsSmFrL3FYS1IwNTlOTzByU1E9PQ==?=
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3157;
-	6:SjKKjihpr16O0TLyCIheebpSWRhDRnigLgqNijTgvjV9ca8dZpHoDInlkdmdByECof5Benf/CkXGfV2goSjfgobg9XxGhdnWx8b/pbxFBGQI8y84cZwFjLu3QqrjeUO3pdYyv6GLipFK7d/Nck3nC7oDcWmA5q6hixr6JVv/6WX3S42/EENOtDzdMhHjHqXa1057N+zaJJ70y95KvY5YEB3Wbs8N913GtRRKcVRgwuKzXg7bLyivoU3mQsfSlsxrbolnd8idBflSqXV4CHwO6KA/bCifPZy81R7CbiUtBLmw1YmC8/QemLKh6u9veRHxDTtuKcyXWQsDdqo5HfCed+DheB0ffCYRClOZfzXmrFg=;
-	5:G0tU2tioyWH28YApHhbpYmbSz+crvVlyyjNC58a89BUojxGWZOYz16iIPGWMWhRPZaWR1W42ldagHGi+b7hlhcBfp5kca/fjrlPt66Uq7ajNfuInSfuQVRK61yr1eaxYXWWGQYlmERCftjW8DjsC5kpT4UomN0y6NWHMqglD+zY=;
-	24:oaqTDAaIiy2jw3rVTyvP74TJXXcrSJ1fWy1SnluAHORWl+0Edrcgz+ol83qvh5f0kO1kP1McKH0ECmz+NHzb7eOQQrKTyloUu4lpimrbbNk=;
-	7:LX+7BqngdC3izQHkVB8xtniPlz4l2FxnaDKnpieh2ZAqK45hEJzhPOcawto6jUnI6kboLGZ0doe8Qs5vMPnvE+8gSen5aC28DE0M+ijXYl5O9SMY+hYJrIXe5eVnvzjQgXEINemeR+QBzH7XHsa1Ys2JG2BwMSQpQRxlTYViauMbl9yRTpCFQ54Djzathr6pK+YrvZjAzA66wG4Arco/QvxtQms+jg7qchi14m0+DD05TsjYB5N/zEZn/vB21DIT
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2018 21:48:03.7661 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 489255eb-34e1-4951-2648-08d57974c90b
-X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
-	Ip=[149.199.60.100]; Helo=[xsj-pvapsmtpgw02]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR02MB3157
-Subject: Re: [RESEND meta-python PATCH 2/2] python3-requests: Remove RDEPENDS on python3-misc
+In-Reply-To: <CANx9H-A=C9PZPRsJ6AyFMKcGFk3=UTO6UB7avz1bTKM6UfVMfw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: libtalloc failure due to waf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -149,49 +49,569 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2018 00:22:08 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 22 Feb 2018 01:36:52 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Hey Otavio,
+Any updates on this one yet? Thanks.
 
-
-Just to clarify that the misc package wasnt removed, it still exists, 
-but with the rework
-
-selectors was put on core, so your patch is fine, but what was removed 
-was the
-
-dependency on misc, not the package itself, just a technicality.
-
-
-Cheers,
-
-
-Alejandro
-
-
-On 02/21/2018 11:21 AM, Otavio Salvador wrote:
-> The misc package has been removed when the python3 was reworked.
->
-> Tested using updatehub's uhu utility.
->
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->
->   meta-python/recipes-devtools/python/python3-requests_2.18.4.bb | 3 ---
->   1 file changed, 3 deletions(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-> index d91d993bf..0a2410f85 100644
-> --- a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-> +++ b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-> @@ -1,5 +1,2 @@
->   inherit setuptools3
->   require python-requests.inc
-> -
-> -# Add the runtime depends for selectors.py
-> -RDEPENDS_${PN} += "${PYTHON_PN}-misc"
-
+On Fri, Feb 16, 2018 at 02:18:32PM -0800, Tim Orling wrote:
+> Expediting the fix is greatly appreciated.
+> 
+> Thank you!
+> 
+> --Tim
+> 
+> On Fri, Feb 16, 2018 at 1:00 PM, Joshua Watt <jpewhacker@gmail.com> wrote:
+> 
+> > On Fri, 2018-02-16 at 21:55 +0100, Martin Jansa wrote:
+> > > Don't you want to update that one to use the new function from utils
+> > > instead of re-introducing get_waf_parallel_make?
+> >
+> > .... yes. I guess I can do that now. It didn't exist when I wrote the
+> > first version of this patch
+> > > On Fri, Feb 16, 2018 at 9:18 PM, Joshua Watt <jpewhacker@gmail.com>
+> > > wrote:
+> > > > On Fri, 2018-02-16 at 21:08 +0100, Martin Jansa wrote:
+> > > > > And now it will fail to parse as well:
+> > > > > http://git.openembedded.org/openembedded-core/commit/?id=ccd1142d
+> > > > > 22b31ed85d8823b1bc9e11ccfd72b61f
+> > > > >
+> > > > > removed get_waf_parallel_make from waf.bbclass, so now all waf-
+> > > > > samba.bbclass users will fail to parse with:
+> > > >
+> > > > http://lists.openembedded.org/pipermail/openembedded-devel/2018-Feb
+> > > > ruary/116701.html will fix that as well.... We probably need to
+> > > > speed along that getting merged.
+> > > > Armin can you help with that?
+> > > >
+> > > > This patch should resolve all of the waf issues that have been
+> > > > discussed here, with exception of the one improvement proposed by
+> > > > Denys. While it should probably be improved, I don't beleive it
+> > > > actually affects any recipes (some please give me an example if I
+> > > > am wrong).
+> > > >
+> > > > Sorry for the churn. Hopefull this will be better in the future
+> > > > since waf and samba-waf are no longer tied together.
+> > > >
+> > > > Joshua Watt
+> > > > > bb.data_smart.ExpansionError: Failure expanding variable
+> > > > > do_compile, expression was
+> > > > >     python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
+> > > > >  which triggered exception NameError: name
+> > > > > 'get_waf_parallel_make' is not defined
+> > > > > On Fri, Feb 16, 2018 at 9:45 AM, Martin Jansa <martin.jansa@gmail
+> > > > > .com> wrote:
+> > > > > > Check this thread:
+> > > > > > http://lists.openembedded.org/pipermail/openembedded-commits/20
+> > > > > > 18-January/218460.html
+> > > > > >
+> > > > > > but my patch wasn't merged:
+> > > > > > http://lists.openembedded.org/pipermail/openembedded-core/2018-
+> > > > > > January/146974.html
+> > > > > > only the one from Joshua.
+> > > > > >
+> > > > > >
+> > > > > > The original issue is still in rocko as well, the backported
+> > > > > > waf change doesn't work and causes useless warning.
+> > > > > >
+> > > > > > Either the "waf.bbclass: explicitly pass bindir and libdir if
+> > > > > > supported" should be reverted in rocko or all fixes for this
+> > > > > > should be backported to rocko once they are all in oe-core and
+> > > > > > meta-oe master.
+> > > > > >
+> > > > > > Regards,
+> > > > > >
+> > > > > > On Fri, Feb 16, 2018 at 2:03 AM, Denys Dmytriyenko <denis@denix
+> > > > > > .org> wrote:
+> > > > > > > On Thu, Feb 15, 2018 at 06:37:11PM -0600, Joshua Watt wrote:
+> > > > > > >
+> > > > > > > > On Feb 15, 2018 17:42, "Denys Dmytriyenko" <denis@denix.org
+> > > > > > > > wrote:
+> > > > > > >
+> > > > > > > >
+> > > > > > >
+> > > > > > > > On Thu, Feb 15, 2018 at 03:30:06PM -0800, Khem Raj wrote:
+> > > > > > >
+> > > > > > > > > On Thu, Feb 15, 2018 at 3:24 PM, Denys Dmytriyenko <denis
+> > > > > > > @denix.org>
+> > > > > > >
+> > > > > > > > wrote:
+> > > > > > >
+> > > > > > > > > > On Thu, Feb 15, 2018 at 11:20:49PM +0000, Tim Orling
+> > > > > > > wrote:
+> > > > > > >
+> > > > > > > > > >> Then why did ‘sudo dnf install waf’ get me past the
+> > > > > > > error above? And
+> > > > > > >
+> > > > > > > > why
+> > > > > > >
+> > > > > > > > > >> does Fedora have a package for it?
+> > > > > > >
+> > > > > > > > > >>
+> > > > > > >
+> > > > > > > > > >> https://src.fedoraproject.org/rpms/waf
+> > > > > > >
+> > > > > > > > > >>
+> > > > > > >
+> > > > > > > > > >> Regardless, something broke.
+> > > > > > >
+> > > > > > > > > >
+> > > > > > >
+> > > > > > > > > > I thought so too. As waf.bbclass from oe-core looks for
+> > > > > > > waf binary in
+> > > > > > >
+> > > > > > > > the root
+> > > > > > >
+> > > > > > > > > > of the source package, I looked inside libtalloc 2.1.9
+> > > > > > > and 2.1.10 and
+> > > > > > >
+> > > > > > > > neither
+> > > > > > >
+> > > > > > > > > > of them have any "waf" files at the root. How was it
+> > > > > > > working before?
+> > > > > > >
+> > > > > > > > What
+> > > > > > >
+> > > > > > > > > > broke?
+> > > > > > >
+> > > > > > > > >
+> > > > > > >
+> > > > > > > > > its using waf-samba.bbclass, there is a patch floating
+> > > > > > > for that
+> > > > > > >
+> > > > > > > > > https://patchwork.openembedded.org/patch/148046/
+> > > > > > >
+> > > > > > > >
+> > > > > > >
+> > > > > > > > So, it will fix libtalloc, but some other packages that
+> > > > > > > still use
+> > > > > > >
+> > > > > > > > waf.bbclass
+> > > > > > >
+> > > > > > > > will keep on failing with an exception?
+> > > > > > >
+> > > > > > > >
+> > > > > > >
+> > > > > > > >
+> > > > > > >
+> > > > > > > > They shouldn't. I tested all the ones I could find. The way
+> > > > > > > waf-samba uses
+> > > > > > >
+> > > > > > > > waf is more of the exception than the rule.... Most
+> > > > > > > projects will follow
+> > > > > > >
+> > > > > > > > the waf.bbclass pattern of a wscript and waf in $S, but we
+> > > > > > > can probably
+> > > > > > >
+> > > > > > > > parameterize it if necessary.
+> > > > > > >
+> > > > > > > >
+> > > > > > >
+> > > > > > > > Do you know of a specific recipe that fails?
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > > > No, but as Andre said here earlier, it should be more
+> > > > > > > forgiving when ${S}/waf
+> > > > > > >
+> > > > > > > is not available or at least give a proper error message
+> > > > > > > instead of dumping a
+> > > > > > >
+> > > > > > > cryptic exception stack...
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > > > In other words, before this waf.bbclass change in oe-core it
+> > > > > > > was handling such
+> > > > > > >
+> > > > > > > situation just fine and there was a warning "Unable to
+> > > > > > > execute waf --version,
+> > > > > > >
+> > > > > > > exit code 127". Now it never reaches that code and just
+> > > > > > > throws an exception.
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > > > > > >> On Thu, Feb 15, 2018 at 3:16 PM Joshua Watt <jpewhacke
+> > > > > > > r@gmail.com>
+> > > > > > >
+> > > > > > > > wrote:
+> > > > > > >
+> > > > > > > > > >>
+> > > > > > >
+> > > > > > > > > >> > On Thu, 2018-02-15 at 23:10 +0000, Tim Orling wrote:
+> > > > > > >
+> > > > > > > > > >> > > Seeing the same and trying to figure it out. Also,
+> > > > > > > seems there is
+> > > > > > >
+> > > > > > > > no
+> > > > > > >
+> > > > > > > > > >> > > recipe
+> > > > > > >
+> > > > > > > > > >> > > for waf-native, so it becomes a new required host
+> > > > > > > tool.
+> > > > > > >
+> > > > > > > > > >> >
+> > > > > > >
+> > > > > > > > > >> > There is no "waf" tool, so a "waf-native" tool
+> > > > > > > doesn't make sense...
+> > > > > > >
+> > > > > > > > > >> > it's not how waf works. Each project has their own
+> > > > > > > copy of the waf
+> > > > > > >
+> > > > > > > > > >> > program, it's not something the host has to provide.
+> > > > > > >
+> > > > > > > > > >> >
+> > > > > > >
+> > > > > > > > > >> > > On Thu, Feb 15, 2018 at 2:57 PM Denys Dmytriyenko
+> > > > > > > <denis@denix.org>
+> > > > > > >
+> > > > > > > > > >> > > wrote:
+> > > > > > >
+> > > > > > > > > >> > >
+> > > > > > >
+> > > > > > > > > >> > > > Hi,
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > >
+> > > > > > > > > >> > > > I'm getting below stack dump building libtalloc
+> > > > > > > 2.1.10 in master.
+> > > > > > >
+> > > > > > > > > >> > > > Works
+> > > > > > >
+> > > > > > > > > >> > > > fine in
+> > > > > > >
+> > > > > > > > > >> > > > rocko with libtalloc 2.1.9. I need it for cifs-
+> > > > > > > utils. I'm not
+> > > > > > >
+> > > > > > > > > >> > > > familiar with
+> > > > > > >
+> > > > > > > > > >> > > > waf, any help? Thanks.
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > >
+> > > > > > > > > >> > > > ERROR: libtalloc-2.1.10-r0 do_configure: Error
+> > > > > > > executing a python
+> > > > > > >
+> > > > > > > > > >> > > > function
+> > > > > > >
+> > > > > > > > > >> > > > in exec_python_func() autogenerated:
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > >
+> > > > > > > > > >> > > > The stack trace of python calls that resulted in
+> > > > > > > this
+> > > > > > >
+> > > > > > > > > >> > > > exception/failure
+> > > > > > >
+> > > > > > > > > >> > > > was:
+> > > > > > >
+> > > > > > > > > >> > > > File: 'exec_python_func() autogenerated',
+> > > > > > > lineno: 2, function:
+> > > > > > >
+> > > > > > > > > >> > > > <module>
+> > > > > > >
+> > > > > > > > > >> > > >      0001:
+> > > > > > >
+> > > > > > > > > >> > > >  *** 0002:waf_preconfigure(d)
+> > > > > > >
+> > > > > > > > > >> > > >      0003:
+> > > > > > >
+> > > > > > > > > >> > > > File: '/OE/master/sources/oe-
+> > > > > > > core/meta/classes/waf.bbclass',
+> > > > > > >
+> > > > > > > > > >> > > > lineno: 34,
+> > > > > > >
+> > > > > > > > > >> > > > function: waf_preconfigure
+> > > > > > >
+> > > > > > > > > >> > > >      0030:    from distutils.version import
+> > > > > > > StrictVersion
+> > > > > > >
+> > > > > > > > > >> > > >      0031:    subsrcdir = d.getVar('S')
+> > > > > > >
+> > > > > > > > > >> > > >      0032:    wafbin = os.path.join(subsrcdir,
+> > > > > > > 'waf')
+> > > > > > >
+> > > > > > > > > >> > > >      0033:    try:
+> > > > > > >
+> > > > > > > > > >> > > >  *** 0034:        result =
+> > > > > > > subprocess.check_output([wafbin, '
+> > > > > > >
+> > > > > > > > > >> > > > --version'],
+> > > > > > >
+> > > > > > > > > >> > > > cwd=subsrcdir, stderr=subprocess.STDOUT)
+> > > > > > >
+> > > > > > > > > >> > > >      0035:        version = result.decode('utf-
+> > > > > > > 8').split()[1]
+> > > > > > >
+> > > > > > > > > >> > > >      0036:        if StrictVersion(version) >=
+> > > > > > >
+> > > > > > > > > >> > > > StrictVersion("1.8.7"):
+> > > > > > >
+> > > > > > > > > >> > > >      0037:            d.setVar("WAF_EXTRA_CONF",
+> > > > > > > "
+> > > > > > >
+> > > > > > > > > >> > > > --bindir=${bindir}
+> > > > > > >
+> > > > > > > > > >> > > > --libdir=${libdir}")
+> > > > > > >
+> > > > > > > > > >> > > >      0038:    except
+> > > > > > > subprocess.CalledProcessError as e:
+> > > > > > >
+> > > > > > > > > >> > > > File: '/usr/lib/python3.5/subprocess.py',
+> > > > > > > lineno: 626, function:
+> > > > > > >
+> > > > > > > > > >> > > > check_output
+> > > > > > >
+> > > > > > > > > >> > > >      0622:        # empty string. That is
+> > > > > > > maintained here for
+> > > > > > >
+> > > > > > > > > >> > > > backwards
+> > > > > > >
+> > > > > > > > > >> > > > compatibility.
+> > > > > > >
+> > > > > > > > > >> > > >      0623:        kwargs['input'] = '' if
+> > > > > > >
+> > > > > > > > > >> > > > kwargs.get('universal_newlines',
+> > > > > > >
+> > > > > > > > > >> > > > False) else b''
+> > > > > > >
+> > > > > > > > > >> > > >      0624:
+> > > > > > >
+> > > > > > > > > >> > > >      0625:    return run(*popenargs,
+> > > > > > > stdout=PIPE,
+> > > > > > >
+> > > > > > > > timeout=timeout,
+> > > > > > >
+> > > > > > > > > >> > > > check=True,
+> > > > > > >
+> > > > > > > > > >> > > >  *** 0626:               **kwargs).stdout
+> > > > > > >
+> > > > > > > > > >> > > >      0627:
+> > > > > > >
+> > > > > > > > > >> > > >      0628:
+> > > > > > >
+> > > > > > > > > >> > > >      0629:class CompletedProcess(object):
+> > > > > > >
+> > > > > > > > > >> > > >      0630:    """A process that has finished
+> > > > > > > running.
+> > > > > > >
+> > > > > > > > > >> > > > File: '/usr/lib/python3.5/subprocess.py',
+> > > > > > > lineno: 693, function:
+> > > > > > >
+> > > > > > > > > >> > > > run
+> > > > > > >
+> > > > > > > > > >> > > >      0689:        if 'stdin' in kwargs:
+> > > > > > >
+> > > > > > > > > >> > > >      0690:            raise ValueError('stdin
+> > > > > > > and input arguments
+> > > > > > >
+> > > > > > > > > >> > > > may not
+> > > > > > >
+> > > > > > > > > >> > > > both be used.')
+> > > > > > >
+> > > > > > > > > >> > > >      0691:        kwargs['stdin'] = PIPE
+> > > > > > >
+> > > > > > > > > >> > > >      0692:
+> > > > > > >
+> > > > > > > > > >> > > >  *** 0693:    with Popen(*popenargs, **kwargs)
+> > > > > > > as process:
+> > > > > > >
+> > > > > > > > > >> > > >      0694:        try:
+> > > > > > >
+> > > > > > > > > >> > > >      0695:            stdout, stderr =
+> > > > > > > process.communicate(input,
+> > > > > > >
+> > > > > > > > > >> > > > timeout=timeout)
+> > > > > > >
+> > > > > > > > > >> > > >      0696:        except TimeoutExpired:
+> > > > > > >
+> > > > > > > > > >> > > >      0697:            process.kill()
+> > > > > > >
+> > > > > > > > > >> > > > File: '/usr/lib/python3.5/subprocess.py',
+> > > > > > > lineno: 947, function:
+> > > > > > >
+> > > > > > > > > >> > > > __init__
+> > > > > > >
+> > > > > > > > > >> > > >      0943:
+> > > > > > > startupinfo,
+> > > > > > >
+> > > > > > > > > >> > > > creationflags,
+> > > > > > >
+> > > > > > > > > >> > > > shell,
+> > > > > > >
+> > > > > > > > > >> > > >      0944:
+> > > > > > > p2cread, p2cwrite,
+> > > > > > >
+> > > > > > > > > >> > > >      0945:
+> > > > > > > c2pread, c2pwrite,
+> > > > > > >
+> > > > > > > > > >> > > >      0946:
+> > > > > > > errread, errwrite,
+> > > > > > >
+> > > > > > > > > >> > > >  *** 0947:
+> > > > > > > restore_signals,
+> > > > > > >
+> > > > > > > > > >> > > > start_new_session)
+> > > > > > >
+> > > > > > > > > >> > > >      0948:        except:
+> > > > > > >
+> > > > > > > > > >> > > >      0949:            # Cleanup if the child
+> > > > > > > failed starting.
+> > > > > > >
+> > > > > > > > > >> > > >      0950:            for f in filter(None,
+> > > > > > > (self.stdin,
+> > > > > > >
+> > > > > > > > > >> > > > self.stdout,
+> > > > > > >
+> > > > > > > > > >> > > > self.stderr)):
+> > > > > > >
+> > > > > > > > > >> > > >      0951:                try:
+> > > > > > >
+> > > > > > > > > >> > > > File: '/usr/lib/python3.5/subprocess.py',
+> > > > > > > lineno: 1551, function:
+> > > > > > >
+> > > > > > > > > >> > > > _execute_child
+> > > > > > >
+> > > > > > > > > >> > > >      1547:                                # The
+> > > > > > > error must be
+> > > > > > >
+> > > > > > > > from
+> > > > > > >
+> > > > > > > > > >> > > > chdir(cwd).
+> > > > > > >
+> > > > > > > > > >> > > >      1548:
+> > > > > > > err_msg += ': ' +
+> > > > > > >
+> > > > > > > > > >> > > > repr(cwd)
+> > > > > > >
+> > > > > > > > > >> > > >      1549:                            else:
+> > > > > > >
+> > > > > > > > > >> > > >      1550:
+> > > > > > > err_msg += ': ' +
+> > > > > > >
+> > > > > > > > > >> > > > repr(orig_executable)
+> > > > > > >
+> > > > > > > > > >> > > >  *** 1551:                    raise
+> > > > > > > child_exception_type(errno_
+> > > > > > >
+> > > > > > > > num,
+> > > > > > >
+> > > > > > > > > >> > > > err_msg)
+> > > > > > >
+> > > > > > > > > >> > > >      1552:                raise
+> > > > > > > child_exception_type(err_msg)
+> > > > > > >
+> > > > > > > > > >> > > >      1553:
+> > > > > > >
+> > > > > > > > > >> > > >      1554:
+> > > > > > >
+> > > > > > > > > >> > > >      1555:        def _handle_exitstatus(self,
+> > > > > > > sts,
+> > > > > > >
+> > > > > > > > > >> > > > _WIFSIGNALED=os.WIFSIGNALED,
+> > > > > > >
+> > > > > > > > > >> > > > Exception: FileNotFoundError: [Errno 2] No such
+> > > > > > > file or
+> > > > > > >
+> > > > > > > > directory:
+> > > > > > >
+> > > > > > > > > >> > > > '/OE/master/build/tmp-glibc/work/armv7ahf-neon-
+> > > > > > > oe-linux-
+> > > > > > >
+> > > > > > > > > >> > > > gnueabi/libtalloc/2.1.10-r0/talloc-2.1.10/waf'
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > >
+> > > > > > > > > >> > > > ERROR: libtalloc-2.1.10-r0 do_configure:
+> > > > > > > Function failed:
+> > > > > > >
+> > > > > > > > > >> > > > waf_preconfigure
+> > > > > > >
+> > > > > > > > > >> > > > ERROR: Logfile of failure stored in:
+> > > > > > >
+> > > > > > > > > >> > > > /OE/master/build/tmp-glibc/work/armv7ahf-neon-
+> > > > > > > oe-linux-
+> > > > > > >
+> > > > > > > > > >> > > > gnueabi/libtalloc/2.1.10-
+> > > > > > > r0/temp/log.do_configure.52699
+> > > > > > >
+> > > > > > > > > >> > > > ERROR: Task
+> > > > > > >
+> > > > > > > > > >> > > > (/OE/master/sources/meta-openembedded/meta-
+> > > > > > > networking/recipes-
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > > support/libtalloc/libtalloc_2.1.10.bb:do_configure)
+> > > > > > >
+> > > > > > > > > >> > > > failed with exit code '1'
+> > > > > > >
+> > > > > > > > > >> > > > --
+> > > > > > >
+> > > > > > > > > >> > > > _______________________________________________
+> > > > > > >
+> > > > > > > > > >> > > > Openembedded-devel mailing list
+> > > > > > >
+> > > > > > > > > >> > > > Openembedded-devel@lists.openembedded.org
+> > > > > > >
+> > > > > > > > > >> > > > http://lists.openembedded.org/mailman/listinfo/o
+> > > > > > > penembedded-devel
+> > > > > > >
+> > > > > > > > > >> > > >
+> > > > > > >
+> > > > > > > > > >> >
+> > > > > > >
+> > > > > > > > > > --
+> > > > > > >
+> > > > > > > > > > _______________________________________________
+> > > > > > >
+> > > > > > > > > > Openembedded-devel mailing list
+> > > > > > >
+> > > > > > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > >
+> > > > > > > > > > http://lists.openembedded.org/mailman/listinfo/openembe
+> > > > > > > dded-devel
+> > > > > > >
+> > > > > > > > >
+> > > > > > >
+> > > > > > > > --
+> > > > > > >
+> > > > > > > > _______________________________________________
+> > > > > > >
+> > > > > > > > Openembedded-devel mailing list
+> > > > > > >
+> > > > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > >
+> > > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded
+> > > > > > > -devel
+> > > > > > >
+> > > > > > > --
+> > > > > > >
+> > > > > > > _______________________________________________
+> > > > > > >
+> > > > > > > Openembedded-devel mailing list
+> > > > > > >
+> > > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > >
+> > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-d
+> > > > > > > evel
+> > > > > > >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
