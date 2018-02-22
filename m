@@ -1,47 +1,56 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 55D2171C0F
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 18:00:24 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id z12so11497321wrg.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 10:00:26 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 030C2784DC;
+	Thu, 22 Feb 2018 20:37:44 +0000 (UTC)
+Received: by mail-pf0-f171.google.com with SMTP id y186so1872167pfb.2;
+	Thu, 22 Feb 2018 12:37:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=EeHtlpbD4PPC6E1RZlF0J1cS2tVIn40M+t11ELy6bZw=;
-	b=dOcreEF3era6UQCNhdRqsgn/MUNEFapEcwk3PM6/BEU4IKD9fmbPtZ3uYzIM4xJ+aW
-	IJ3L8ab65uRduFxfM5el/IZ1jr8vatB+os5RYOhUKb8EfjNKYbtQ3E87QdOFReTEMCUF
-	BB4FaeJG63TmJEAuKejSkpsEjzgfQ+Zfx5jWZJBNL4FTeHQes75ekYyZF1XEUrhFt5x3
-	P6SJvEfh/jwW44v2aBec48igQr+AuUHlf3rIbDb6/GwsmSnENha9KpwXcqOP06TNUvox
-	74Ufx4Jj0hW6QQnncsNt/QlUG8Kj3JEVBrxu/RlQERgHFyxt1x5awsBeL4zd3XOXh/gL
-	G79A==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=f9hsO+Xyv+uXSZ4o71jL/AxqarlLQsk5by2sNnS1VZc=;
+	b=WEH2JmpntGddDUzzqLNAmVIRAsEBqypcblujjI8M6ko0eLfU4VvbciFozTtc/LHP6a
+	UWDvddPYpwCkOOUL/Q3Vw9v0rJY/Z9myov8zSFF0ttzVEl4FzReGPds76/F+VjzdaisM
+	hkaJ8hSLEUFerWoUIonIx6KH86BUnoIqiJA+S8+dml9IVD+EQ+yMydmcMWQHfmrHmaYH
+	7o18s8ANbVkr3vAzwRdUJR+9PHvP6TCHE1sGb3iiWIBppT/YyWc9TfIt1Y6pQ0S8RIk7
+	qDZ17MXmqwyXZPgWAYakB661Cyq+cLXUjV3GGsZBRnAlOadHKGGzNFjz+bLxa2oNWo5A
+	kmkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EeHtlpbD4PPC6E1RZlF0J1cS2tVIn40M+t11ELy6bZw=;
-	b=I5pf7IdGu/pVeFqb+/ErqRVCLjmN9SGtqc/wX75cZxV8vFs9uZWk5XXqWgH2sVilsp
-	3aTbk3sU1rRkwZzMFp5Ut2C2tbpoCzNxalZKQh81G5o+2nw+i4CMBkYVsHS1OgvUoPYz
-	eR0sTXSRaSBXkQgLwRV3wZuv2gfaCu4BLxcuSrpeNN8Of8PMgEf5XkNH1ZsEQONcIZFz
-	zMiCgDv0jvRR7srKnzvdQmInmvOcOBAh0UHQWkr1axzxQOU5JRSOe9NgkA7GW9E1qOoZ
-	D5F10bPFB1mxB9BNEHbGAEHEYSE5XjXpeHYVRQ9lSH7Nk17EdbNdW2tXW+6u59ZE1kl0
-	uDyQ==
-X-Gm-Message-State: APf1xPBp1eth1J0CGb5nRPB4RLvJeqhfJdw3q+D9dBWWeoRlKvdZ275o
-	hLwMbfVgPyP8klNqaiotDfVuVA==
-X-Google-Smtp-Source: AH8x225f8eg4ib0h0Sn6UF3UdbVwG0LvcFyCB5G1BeonDyzZpybdFFadM0Kas5Am8ZxKGG8RLD0mVA==
-X-Received: by 10.223.164.215 with SMTP id h23mr7140552wrb.38.1519322425847;
-	Thu, 22 Feb 2018 10:00:25 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 55sm854447wrw.87.2018.02.22.10.00.24
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 22 Feb 2018 10:00:24 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Feb 2018 18:00:22 +0000
-Message-Id: <20180222180022.32270-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
-Subject: [meta-qt5][pyro][PATCH] qt5-git.inc: drop nobranch=1
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=f9hsO+Xyv+uXSZ4o71jL/AxqarlLQsk5by2sNnS1VZc=;
+	b=Z04yzStjpsfK2TZz/yQmrVlS6x+u29bokosLXzwBjMqo5Is/S4EPSYvcGnCA/Ivyft
+	FwmkO7cABLM86vDMS8GmpmvyMojRfqHuAym7nENHBAjWp+lQoSUl/badrM09Hif7TESV
+	9OtXbwxIWOAxRFwjDF7gdUhlrFHNnIh+7DElpD4gQnlZUqcj5sw+nbM9sPJHruNpFG2s
+	KJ0Q+wOtEtbYRTaj6bb7Qf+K7DiNkj2mfFKvlIkWTkRmGJuzUIT2gzGK3HosHiDiJUW1
+	ISp9ILHpBh5x8G+LKXBPFAwjCPmZGMRSlvpN2tQabf5HuttCZ2zfKKeRXBFy+K9FwFWg
+	dfFA==
+X-Gm-Message-State: APf1xPDgm5DD/8foG30/kTLtYyOL22aCfot7Oqg9oUB+8WvKkf0uQw1V
+	sMX+utrOjn9o33Xp7Mf46okFpA==
+X-Google-Smtp-Source: AH8x226Wb/biuxAhiCuUd+wAGmGN2n3pPRAqyZsFyFQkrrJwFo+qjfmcvrmBhz8OQHIu/jOJ/tBUQA==
+X-Received: by 10.99.143.69 with SMTP id r5mr6570665pgn.160.1519331865916;
+	Thu, 22 Feb 2018 12:37:45 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1184:18a7:7dde:bcc7:31a7?
+	([2601:202:4000:1184:18a7:7dde:bcc7:31a7])
+	by smtp.gmail.com with ESMTPSA id
+	j25sm1302602pgn.92.2018.02.22.12.37.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 22 Feb 2018 12:37:45 -0800 (PST)
+To: Andrea Adami <andrea.adami@gmail.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+References: <CAAQYJAudtnFaY1S2j6FF_pN9B1OJhN-6fEBY8nWCtM73Kx8tSw@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <0bb858dc-a43f-ae14-01c9-2a42855e4409@gmail.com>
+Date: Thu, 22 Feb 2018 12:37:44 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
+MIME-Version: 1.0
+In-Reply-To: <CAAQYJAudtnFaY1S2j6FF_pN9B1OJhN-6fEBY8nWCtM73Kx8tSw@mail.gmail.com>
+Subject: Re: [OE-core] [RFC] Rename meta-openembedded to openembedded-extras
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +63,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Feb 2018 18:00:25 -0000
+X-List-Received-Date: Thu, 22 Feb 2018 20:37:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-* sneaked in with:
-  commit 333949a8239dfa7788b35f1059614733e11a6a25
-  Author: Samuli Piippo <samuli.piippo@qt.io>
-  Date:   Thu Jan 26 16:54:50 2017 +0200
 
-    Upgrade to Qt 5.8
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qt5-git.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 02/21/2018 11:55 PM, Andrea Adami wrote:
+> All,
+> it seems there is some consensus about reordering/cleaning the
+> "OpenEmbedded layers".
+>
+> I think that before starting any cleaning *inside* we should finally
+> clean up the confusion about meta-oe meta-openembedded
+> openembedded-layers, etc..
+>
+> I think it would be advisable to rename the repository from
+> meta-openembedded to openembedded-extras, matching the
+> openembedded-core naming schema.
+Renaming an existing repo will cause more damage than what benefit one
+thinks it may solve.=C2=A0
 
-diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index f864953..a1dd16a 100644
---- a/recipes-qt/qt5/qt5-git.inc
-+++ b/recipes-qt/qt5/qt5-git.inc
-@@ -3,7 +3,7 @@
- 
- QT_MODULE ?= "${BPN}"
- QT_MODULE_BRANCH ?= "5.8"
--QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH};nobranch=1"
-+QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH}"
- 
- # each module needs to define valid SRCREV
- SRC_URI = " \
--- 
-2.15.1
+I think openembededd-core is incorrect. it should have been
+meta-openbedded-core or meta-core.
+
+- armin
+>
+> Regards
+> Andrea
+>
+>
+> P.S.
+> One layer of this repo would be the (in)famous meta-oe.
+> I can't imagine right now a definition for it: it contains old
+> versions of oe-core recipes, expunged recipes, tools and libraries
+> needed by other layers (i.e. tslib), etc. etc.
+> This one will need a separate thread.
+
 
 
