@@ -1,49 +1,50 @@
 Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
-	[209.85.214.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 2399778815
+Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
+	[209.85.223.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 53F9E7881D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 06:54:31 +0000 (UTC)
-Received: by mail-it0-f68.google.com with SMTP id w63so1908197ita.3
+	Fri, 23 Feb 2018 08:00:18 +0000 (UTC)
+Received: by mail-io0-f195.google.com with SMTP id p78so8895150iod.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Feb 2018 22:54:33 -0800 (PST)
+	Fri, 23 Feb 2018 00:00:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=nMQC6iMjx/3RBF2/7zKP+OmFALcS2QjfA+dJw5PZl+0=;
-	b=pDrX+XuyAcel4hpEW+vHrXEQMOOJtgOgWZ0HPa5G3bOSF/W++NpSfRh+wxpNS8H8xu
-	8JSqc2aZClsbfWTXJYGeVTBT9FKBzuH4t1bTqNpcbKaT3mG/Efv9kLM5MsLx/FhWvzSJ
-	9A9dW38JNbxeo5jG3SiJmVDK0WqviKTkWMVIFJFjm57ZyYONoiyV+gsyAhYF/V/nr+/n
-	yNK50H7ykp5My7siwNpupdnyYwDgZQjm2adMjw0zepjXs54t44yVCziLjJHGijE+IMWC
-	1M8Sq1ZqfYU4JG1/DUt5Vw+vkHkrPNe15W1YQV7vz15Hh5M7ngrSa2rT7y4o0PqIZUFx
-	h/lg==
+	:cc; bh=BvzAo3aST7LEwBAW0UyBqcwc6+sOfb29678qEOR9gbU=;
+	b=URcjeWvHK86Ccb/qW3VbpB/uNcDf8ej1mWAFW+49K6KJG9rtGyeCKhU68CcxwOLbW+
+	BHqCSDkauuPBNLT4eezjGIS7K0KQgLAHouZCG6HlPz16aFVkLqI3yE04kMCIU74dL7UC
+	n6weHagHmk6TM3TTxrRIcVKM2SFhlmdvRGkcQxIJwj9IGv2rgwZ9pK0Ko9ApjSOkh09b
+	j9P3o7ZcNF8r9SUqyvqH/ahV04UDcLtKlrw4aKpZOcqSUWCdlOyW7J4pIKlQe+/a6aMU
+	MPTIHyC++qXho4X2nzHhvJQoVmd30i/UgNKzj7ABsmoDVl6grfQJemq1oFuUne827z+p
+	uueQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=nMQC6iMjx/3RBF2/7zKP+OmFALcS2QjfA+dJw5PZl+0=;
-	b=eNof0XwKVryIGbTRHoNQXb+Y2Xh3cu3LTdYlsidwt94Rm4C6t1V74SOx72YVCRfxM0
-	OLT1SwOHQUoThMSlFsLgnG4jskvy4rOn+oJplcTEtRAqrtnxHzuSaZI2lYJL6jzrpbl2
-	vyKOB63O0Sm24thrfI1FbPOzFeFlwAQX01qXHNeCIiz4y2vdsELqgFDH/XzCoCvTkN+2
-	Rr5uV0Bh4Asr5JxfVvDomfxN+scGc49UAbfLFQ8WgxxlRtfgMGS+nxeJqr0+4x05az9G
-	6c1PYplCRdEwy426PyFFztBztBvzzgyf6rHqiweLlyQwzibtoOwExqaExAdG7VW1U7G2
-	1xwg==
-X-Gm-Message-State: APf1xPAYvnvoOJcRQgLmLwVGh8/PViIVM73/Q/z3fQNiVZvRNbAwDgil
-	olFL1eF2TBHeIqQmTil0QCvFOPPpMgUA8exduGY=
-X-Google-Smtp-Source: AH8x226tNgKQsmC2X4udIHBhyiTvD+s3/An47/BO1peOl1F9PbTtVC/dNHv/BIiE5qRZjn1tHkG4QI8EMoYAyXXzdAk=
-X-Received: by 10.36.163.193 with SMTP id p184mr1289731ite.9.1519368873261;
-	Thu, 22 Feb 2018 22:54:33 -0800 (PST)
+	bh=BvzAo3aST7LEwBAW0UyBqcwc6+sOfb29678qEOR9gbU=;
+	b=KGgnekwVsltuO8RAjXKvKtxvcWlXrONBhH8vzgfDiKrSTRZFdcon1mMtG5UhsAkFv8
+	Zb/Nj7h6GJ1fcuKMmdTemJRaFs+NvDZjjtj++asiL4SynWWslWtsqkJB06xCWPljlve5
+	UAEHd2QVem8jH3qwaqHeC2aQvQ19rz/7MM6toysLQ6bk9/+cUQLSFYvOitjxGtxPYDNa
+	dXFt1v+11TGAXgsgcAg9BJoSSo0qzWlcACI3naiG2qIpDunNsVUZI0m6BM+eJbdl/y/w
+	rQuuOiEJucC3S889e8iSll+DRgDqky0sCGHL0Bzz/AmqLEmyYOyYzo/A+eytEHUPMHHl
+	0A5Q==
+X-Gm-Message-State: APf1xPBFe6ZtoLg1HDFdbqiYlOYxVuKSeriGPL7UhjF+A/aoniqa4US6
+	hy/UQ+iMBhiEF3HpJXXqjfpr0o1rVqG8y2ereCk=
+X-Google-Smtp-Source: AG47ELuMN0ePNce2vRkz0PalPeArPW1fXe9Ej0migXoe5hVetyMVN6aUDfZ0w009XsNrGZjThRlo9Wm43YfZ4JQDGEI=
+X-Received: by 10.107.161.200 with SMTP id k191mr786213ioe.270.1519372819420; 
+	Fri, 23 Feb 2018 00:00:19 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.107.166.68 with HTTP; Thu, 22 Feb 2018 22:54:32 -0800 (PST)
-In-Reply-To: <CA+chaQfhzr_yoorzLy8RJ_tRH16yby=G4hgPWUTuf3r=zO+K1w@mail.gmail.com>
-References: <20180222170221.1887-1-Martin.Jansa@gmail.com>
-	<CABXoSoWp7E1DdcreEo1o0E9U_Hv5B15dzsSagFJTYQHH7XzvmQ@mail.gmail.com>
-	<CA+chaQfhzr_yoorzLy8RJ_tRH16yby=G4hgPWUTuf3r=zO+K1w@mail.gmail.com>
+Received: by 10.107.166.68 with HTTP; Fri, 23 Feb 2018 00:00:18 -0800 (PST)
+In-Reply-To: <CAMKF1soxS4aUMzd5d+uiHvnEjFEh5vyUvZcGQ_9CUdNugb7LvQ@mail.gmail.com>
+References: <20180222042940.3770-1-raj.khem@gmail.com>
+	<20180222042940.3770-2-raj.khem@gmail.com>
+	<20180223012757.GA1413@jama>
+	<CAMKF1soxS4aUMzd5d+uiHvnEjFEh5vyUvZcGQ_9CUdNugb7LvQ@mail.gmail.com>
 From: Samuli Piippo <samuli.piippo@gmail.com>
-Date: Fri, 23 Feb 2018 08:54:32 +0200
-Message-ID: <CABXoSoUZMv+HBRn0MpJhqTQo2=xsauQzBFH_+F-FC_Tdv17EiA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCHv2] qt5-git.inc: drop nobranch=1
+Date: Fri, 23 Feb 2018 10:00:18 +0200
+Message-ID: <CABXoSoUtZuS+u_YjAPQYUKwoMPtxUXP6ABNDBq-Ww03O7_9Gaw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 2/2] qtbase: Add packageconfigs for renameat2 and getentropy use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,121 +57,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Feb 2018 06:54:32 -0000
+X-List-Received-Date: Fri, 23 Feb 2018 08:00:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-What I don't understand is that why are we checking if SRCREV is found
-from the branch.
-Full git repo is always fetched and if the SHA1 is valid, it will be
-found, regardless of from which branch it is accessible at the time.
+renameat2 is a system call without a libc wrapper, so the configure
+test will always fail. The system call will still be used if that is
+defined, so PACKAGECONFIG doesn't make sense for it.
 
-On 22 February 2018 at 19:59, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Why do they disappear? Or why aren't they included in 5.x branches at the
-> time of the release so that we can use just 5.x without the SRCREVs being
-> only on 5.x.x branches?
->
-> On Thu, Feb 22, 2018 at 6:27 PM, Samuli Piippo <samuli.piippo@gmail.com>
-> wrote:
+On 23 February 2018 at 04:17, Khem Raj <raj.khem@gmail.com> wrote:
+> On Thu, Feb 22, 2018 at 5:27 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> On Wed, Feb 21, 2018 at 08:29:40PM -0800, Khem Raj wrote:
+>>> These features depend on underlying syscall support in kernel
+>>> and if older kernels are in use, then we can have a knob to
+>>> turn them off.
+>>>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> ---
+>>>  recipes-qt/qt5/qtbase_git.bb | 6 +++++-
+>>>  1 file changed, 5 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+>>> index e495b8c..843648f 100644
+>>> --- a/recipes-qt/qt5/qtbase_git.bb
+>>> +++ b/recipes-qt/qt5/qtbase_git.bb
+>>> @@ -71,7 +71,7 @@ PACKAGECONFIG_DISTRO ?= ""
+>>>  PACKAGECONFIG_RELEASE ?= "release"
+>>>  # This is in qt5.inc, because qtwebkit-examples are using it to enable ca-certificates dependency
+>>>  # PACKAGECONFIG_OPENSSL ?= "openssl"
+>>> -PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests"
+>>> +PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests renameat2 getentropy"
 >>
->> Note that the Qt release branches (5.x.x) will usually disappear right
->> after the release, which will break the build without nobranch=1
+>> Should renameat2 be enabled by default?
 >>
->> On 22 February 2018 at 19:02, Martin Jansa <martin.jansa@gmail.com> wrote:
->> > * sneaked in with:
->> >   commit 333949a8239dfa7788b35f1059614733e11a6a25
->> >   Author: Samuli Piippo <samuli.piippo@qt.io>
->> >   Date:   Thu Jan 26 16:54:50 2017 +0200
->> >
->> >     Upgrade to Qt 5.8
->> > * use 5.10.1 branch by defaut and fix QT_MODULE_BRANCH
->> >   in qtknx, qtmqtt, qtwebkit-examples, qtwebkit which don't
->> >   have 5.10.1 branch at all
->> >
->> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> > ---
->> >  recipes-qt/qt5/qt5-git.inc              | 6 +++---
->> >  recipes-qt/qt5/qtknx_git.bb             | 2 ++
->> >  recipes-qt/qt5/qtmqtt_git.bb            | 2 ++
->> >  recipes-qt/qt5/qtwebkit-examples_git.bb | 2 ++
->> >  recipes-qt/qt5/qtwebkit_git.bb          | 2 ++
->> >  5 files changed, 11 insertions(+), 3 deletions(-)
->> >
->> > diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
->> > index 7ee0643..beba913 100644
->> > --- a/recipes-qt/qt5/qt5-git.inc
->> > +++ b/recipes-qt/qt5/qt5-git.inc
->> > @@ -1,9 +1,9 @@
->> >  # Copyright (C) 2012-2016 O.S. Systems Software LTDA.
->> > -# Copyright (C) 2013-2017 Martin Jansa <martin.jansa@gmail.com>
->> > +# Copyright (C) 2013-2018 Martin Jansa <martin.jansa@gmail.com>
->> >
->> >  QT_MODULE ?= "${BPN}"
->> > -QT_MODULE_BRANCH ?= "5.10"
->> > -QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH};nobranch=1"
->> > +QT_MODULE_BRANCH ?= "5.10.1"
->> > +QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH}"
->> >
->> >  # each module needs to define valid SRCREV
->> >  SRC_URI = " \
->> > diff --git a/recipes-qt/qt5/qtknx_git.bb b/recipes-qt/qt5/qtknx_git.bb
->> > index 5e01e3c..fa981ab 100644
->> > --- a/recipes-qt/qt5/qtknx_git.bb
->> > +++ b/recipes-qt/qt5/qtknx_git.bb
->> > @@ -9,4 +9,6 @@ LIC_FILES_CHKSUM = " \
->> >
->> >  DEPENDS += "qtbase"
->> >
->> > +QT_MODULE_BRANCH = "5.10"
->> > +
->> >  SRCREV = "29c34e8f072afd01002ed3847d752b4e065f977e"
->> > diff --git a/recipes-qt/qt5/qtmqtt_git.bb b/recipes-qt/qt5/qtmqtt_git.bb
->> > index b705f7c..90c255d 100644
->> > --- a/recipes-qt/qt5/qtmqtt_git.bb
->> > +++ b/recipes-qt/qt5/qtmqtt_git.bb
->> > @@ -9,4 +9,6 @@ LIC_FILES_CHKSUM = " \
->> >
->> >  DEPENDS += "qtbase"
->> >
->> > +QT_MODULE_BRANCH = "5.10"
->> > +
->> >  SRCREV = "2c3c2a41c55a179332ec2a076856990f36dd5ef9"
->> > diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb
->> > b/recipes-qt/qt5/qtwebkit-examples_git.bb
->> > index 3e3e4a0..114fab7 100644
->> > --- a/recipes-qt/qt5/qtwebkit-examples_git.bb
->> > +++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
->> > @@ -17,4 +17,6 @@ DEPENDS += "qtwebkit qtxmlpatterns"
->> >  RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
->> >  RDEPENDS_${PN}-examples +=
->> > "${@bb.utils.contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates',
->> > '', d)}"
->> >
->> > +QT_MODULE_BRANCH = "5.9"
->> > +
->> >  SRCREV = "a24c780b60d7d8bc00c4a48042cf7f32db777d55"
->> > diff --git a/recipes-qt/qt5/qtwebkit_git.bb
->> > b/recipes-qt/qt5/qtwebkit_git.bb
->> > index 5dee6a4..b23d4d6 100644
->> > --- a/recipes-qt/qt5/qtwebkit_git.bb
->> > +++ b/recipes-qt/qt5/qtwebkit_git.bb
->> > @@ -87,4 +87,6 @@ PACKAGES_remove = "${PN}-examples-dev
->> > ${PN}-examples-staticdev ${PN}-examples-db
->> >  RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586',
->> > 'i386').replace('i686', 'i386') }"
->> >  export
->> > RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
->> >
->> > +QT_MODULE_BRANCH = "5.9"
->> > +
->> >  SRCREV = "97c4a80a1282c8c3eaa343011286b76fd4838c5f"
->> > --
->> > 2.15.1
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> Either the test for it is broken in 5.11 or it's not available in
+>> default setup.
+>>
 >
->
+> Its ok to keep them enabled by default. but I think this is a bug that
+> should be reported
+> to upstream QT, if the feature is knobbale then it should have worked.
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
