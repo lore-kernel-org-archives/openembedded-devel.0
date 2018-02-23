@@ -1,47 +1,52 @@
-Return-Path: <timo.jyrinki@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E712177F34
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 59CBE786DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 12:05:43 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id f75so7014517lfg.6
+	Fri, 23 Feb 2018 14:53:55 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id i6so5018265plt.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 04:05:45 -0800 (PST)
+	Fri, 23 Feb 2018 06:53:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=uxX5h7ugsky8KLw4pvfQq252P1iLuNBmgclUT9Dm0Pc=;
-	b=ReiGHirbgMdjbrUt8BU6Qv/vt+ql8ZBk3POZrrqYHv9nZ+YtME1YMyqt+uny8TGQtD
-	1H5mFesFVmvlk31Pd9JTbNMfEsR9Nsw/8vvyLy17GuzfycrelsvfT8bxlxTZNfYz4C5c
-	kGPZmBD6rliwc9RjF7wNhMrU+4dHcj0nPS7qFxX799iNZMMQSw1B6gGog3KCJ95687O0
-	OGMaFKHOKD2l7uIOkZ/4Pm/LULyRmuap+Q93H8m0XanHHm+MI95+8sO6WBgUh2K6Yn3+
-	7iSxkqUb2i7Z54cwzWkpOxPjlbCe155NUyTE7MQyeTTjTAe0Dw9wO2HrMy8OXmvGB6s5
-	lWvA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=xl7xE+X48LPFUq0PefaqdFKsIkTKUniIJtFX3T3jrbI=;
+	b=LPQfuG25hTfsEkNDF3LNwbymiYSNqI+N0B/ts33s/t3DZttC1RrmI5ptmYY/PONkWk
+	BBwbM21bBHZm932jxXPVynVC81CleGh7VJoGOKM7WJ6Q5NnsMXNLI1u5GAR4FRz/xtHp
+	jiQ47QH9eZ/OtEFuFrzn/MKAlasNltMFSPJonrfzuwJ7UCk4Lo33v6zCSUXj6JvqpRfb
+	vYyk15+j30SILATRvnhcbqBNxqnfsnW3gN2KQA6vJYxYP8ffPz3Yv0NRvPxDXZAbxZq5
+	u3j0G9eNuVLJ7CjUSYNWY8cKOAi0/lW+GQuM60IIvCEnUygz48TJeZdv2hmV56NPNKmz
+	WUqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=uxX5h7ugsky8KLw4pvfQq252P1iLuNBmgclUT9Dm0Pc=;
-	b=gRtt9BM8EQzeWizLEEGTUlPv7n/TY/JNAop2EVU8qymV+i+Kc1ToAAyYcNNKorUlLg
-	cQmE89LhQR1i6glJu1E3Ug/UoRj7Qh9yrM9IKehfu2X+cWndqpXXSPRR6GPtZZPbi27v
-	W5/KiqVu6G/DZgC24LV5SPrcxn+ofnLnn+o+2YoQzGpxcgqvJTmxmUuVrJa15rv9yG+w
-	7jHYICVSpAFukwKPEF5yzEqRZw5JaCwl9ymDEEpiWSn5uUCc+2vph4nhR7BBVyYzLLWA
-	SMlatCxo8kOPje7Wx1bMfUSZDr8TYBugZgKA7ed1NBPNTsxpdtw7ScNbfIYGMs5206WB
-	kYjA==
-X-Gm-Message-State: APf1xPDwIz9uV5Pese5hpr68Pe2S1C+tRshsSdTK7wf0IRM6DjXwD8v8
-	Pc9th2XhvSzPYjam7ZY//hqVYw==
-X-Google-Smtp-Source: AH8x226bNHOCPOVjLwBu9vb096jcQFnaVbTYrwt/P8jnwRHcEcPcpX1C4MAmj+xEjynLM6DYXz/qcg==
-X-Received: by 10.25.155.211 with SMTP id d202mr1218895lfe.125.1519387544223; 
-	Fri, 23 Feb 2018 04:05:44 -0800 (PST)
-Received: from localhost.localdomain ([2001:999:51:ec1b:508a:7d4c:b474:b280])
-	by smtp.gmail.com with ESMTPSA id
-	h78sm443500lfk.94.2018.02.23.04.05.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 Feb 2018 04:05:43 -0800 (PST)
-From: Timo Jyrinki <timo.jyrinki@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Feb 2018 14:05:39 +0200
-Message-Id: <1519387539-10077-1-git-send-email-timo.jyrinki@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-qt5][PATCH] qt5: Add recipe for qtpurchasing.
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=xl7xE+X48LPFUq0PefaqdFKsIkTKUniIJtFX3T3jrbI=;
+	b=ZTXdT/pCr4qO9/JoSUVf2b2dh6pDK6bC+eu0swCwfx1dyw9Opco2O6Qsv5TUVx50PL
+	wSu5wfy+QgtqEqOBiECHQHaqhZqa1/U9NHMO3gbHpOVvlA9jA5ZBDU11cSeIIrYoj3O/
+	5QjFhSHwiIxvG5fZduoAdCsZ5OhSjyXJtmfysBkODP7vkPg/Iu0qU38vb5wbXv0cHN7r
+	Qh71XmsevK/GbN6BJaghFLDn9aWHjSeXpe0/37iBXxgw9LvkjJRl5EttFFIlUIxxYK7U
+	RQ9g9HAj/3SxH0CUvzxBeSHjyNSsuZcCBXHTEVZpfigLpKdNsJGW3aX7IYpproExPG4/
+	OXHQ==
+X-Gm-Message-State: APf1xPAiC43Tn6nYX8t0/8iKbCo2O4LvFVlHbJOnofWcltHCvUhdb2Fa
+	GAElx+o9qs05/txJ1Xfc3CRYtpXsKUvARaPJiNo=
+X-Google-Smtp-Source: AH8x225cr/bO6S+59OcLNje8VPs/r0k0iDzsq0MHr1aOpIPQWhAuziie1wxkYlNt5GexRqLAcsm799isQ6otNbRKlII=
+X-Received: by 2002:a17:902:328:: with SMTP id
+	37-v6mr2012213pld.398.1519397636998; 
+	Fri, 23 Feb 2018 06:53:56 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.100.139.97 with HTTP; Fri, 23 Feb 2018 06:53:26 -0800 (PST)
+In-Reply-To: <CABXoSoUtZuS+u_YjAPQYUKwoMPtxUXP6ABNDBq-Ww03O7_9Gaw@mail.gmail.com>
+References: <20180222042940.3770-1-raj.khem@gmail.com>
+	<20180222042940.3770-2-raj.khem@gmail.com>
+	<20180223012757.GA1413@jama>
+	<CAMKF1soxS4aUMzd5d+uiHvnEjFEh5vyUvZcGQ_9CUdNugb7LvQ@mail.gmail.com>
+	<CABXoSoUtZuS+u_YjAPQYUKwoMPtxUXP6ABNDBq-Ww03O7_9Gaw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 23 Feb 2018 06:53:26 -0800
+Message-ID: <CAMKF1sq7PX0hH6m_5UR8=4Yv19SLX32qe2OT2D2VegFWPcYbxg@mail.gmail.com>
+To: Samuli Piippo <samuli.piippo@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 2/2] qtbase: Add packageconfigs for renameat2 and getentropy use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +59,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Feb 2018 12:05:44 -0000
+X-List-Received-Date: Fri, 23 Feb 2018 14:53:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Qt Purchasing was introduced as a new module in Qt 5.7. It was previously
-only available with Qt's commercial license. It can be used to build payment
-features.
+On Fri, Feb 23, 2018 at 12:00 AM, Samuli Piippo <samuli.piippo@gmail.com> wrote:
+> renameat2 is a system call without a libc wrapper, so the configure
+> test will always fail. The system call will still be used if that is
+> defined, so PACKAGECONFIG doesn't make sense for it.
+>
 
-The commit hash in the recipe is the latest in the 5.10 branch. Licenses
-were combed with licensecheck tool.
+thats what I was thinking that testing kernel headers for the syscall
+may not be sufficient. We might have to pass minimum supported kernel
+version to make this decision to enable/disable these calls.
 
-Signed-off-by: Timo Jyrinki <timo.jyrinki@gmail.com>
----
- recipes-qt/qt5/qtpurchasing_git.bb | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 recipes-qt/qt5/qtpurchasing_git.bb
-
-diff --git a/recipes-qt/qt5/qtpurchasing_git.bb b/recipes-qt/qt5/qtpurchasing_git.bb
-new file mode 100644
-index 0000000..2415f38
---- /dev/null
-+++ b/recipes-qt/qt5/qtpurchasing_git.bb
-@@ -0,0 +1,13 @@
-+require qt5.inc
-+require qt5-git.inc
-+
-+HOMEPAGE = "http://www.qt.io"
-+LICENSE = "Apache-2.0 & BSD & ( LGPL-3.0 | GPL-3.0 | The-Qt-Company-Commercial )"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
-+    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+"
-+
-+DEPENDS += "qtbase qtdeclarative"
-+
-+SRCREV = "49c5461af0888950b80eb9558647ccd764d55737"
--- 
-2.7.4
-
+> On 23 February 2018 at 04:17, Khem Raj <raj.khem@gmail.com> wrote:
+>> On Thu, Feb 22, 2018 at 5:27 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>>> On Wed, Feb 21, 2018 at 08:29:40PM -0800, Khem Raj wrote:
+>>>> These features depend on underlying syscall support in kernel
+>>>> and if older kernels are in use, then we can have a knob to
+>>>> turn them off.
+>>>>
+>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>> ---
+>>>>  recipes-qt/qt5/qtbase_git.bb | 6 +++++-
+>>>>  1 file changed, 5 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+>>>> index e495b8c..843648f 100644
+>>>> --- a/recipes-qt/qt5/qtbase_git.bb
+>>>> +++ b/recipes-qt/qt5/qtbase_git.bb
+>>>> @@ -71,7 +71,7 @@ PACKAGECONFIG_DISTRO ?= ""
+>>>>  PACKAGECONFIG_RELEASE ?= "release"
+>>>>  # This is in qt5.inc, because qtwebkit-examples are using it to enable ca-certificates dependency
+>>>>  # PACKAGECONFIG_OPENSSL ?= "openssl"
+>>>> -PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests"
+>>>> +PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests renameat2 getentropy"
+>>>
+>>> Should renameat2 be enabled by default?
+>>>
+>>> Either the test for it is broken in 5.11 or it's not available in
+>>> default setup.
+>>>
+>>
+>> Its ok to keep them enabled by default. but I think this is a bug that
+>> should be reported
+>> to upstream QT, if the feature is knobbale then it should have worked.
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
