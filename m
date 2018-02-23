@@ -1,43 +1,47 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 42B907884D
+Return-Path: <timo.jyrinki@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E712177F34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 11:00:40 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id v65so13631175wrc.11
+	Fri, 23 Feb 2018 12:05:43 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id f75so7014517lfg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 03:00:42 -0800 (PST)
+	Fri, 23 Feb 2018 04:05:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=uxX5h7ugsky8KLw4pvfQq252P1iLuNBmgclUT9Dm0Pc=;
+	b=ReiGHirbgMdjbrUt8BU6Qv/vt+ql8ZBk3POZrrqYHv9nZ+YtME1YMyqt+uny8TGQtD
+	1H5mFesFVmvlk31Pd9JTbNMfEsR9Nsw/8vvyLy17GuzfycrelsvfT8bxlxTZNfYz4C5c
+	kGPZmBD6rliwc9RjF7wNhMrU+4dHcj0nPS7qFxX799iNZMMQSw1B6gGog3KCJ95687O0
+	OGMaFKHOKD2l7uIOkZ/4Pm/LULyRmuap+Q93H8m0XanHHm+MI95+8sO6WBgUh2K6Yn3+
+	7iSxkqUb2i7Z54cwzWkpOxPjlbCe155NUyTE7MQyeTTjTAe0Dw9wO2HrMy8OXmvGB6s5
+	lWvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=9IPibZzJ/BznwOQAziOvoaAXgbaA3rjPvn3DE1Vq9Ww=;
-	b=omLu3At8FY06VpakACg2D2xApssOSlEbOQpUV1GB8vrDkwLOuN0Zub/vETODsNAWnW
-	H4nsFRY8e6GDM3DHVRjOWNxex+mLx1DiP+BInJm09bixv7FFgaC5kP9JW/h8+3EYlWVF
-	d68dIgNeagnhTpQwOYoH472kGpM5GZGF7jhkupgnIkQNFxzCRo94/22yI1ONvDQboYEG
-	iuY0d3G/fmzx/xJGxvClepV1xfYMjwUabtKAGwkEV3SRIvYJ8XAHLP9swYP79duD2/mA
-	BmqXQq85U1V0qBA4PcbO6sE2BDSmI5s6L9SdMTkrhofnsKQZCobHsW3wKfIBaNEZqK15
-	I6Pw==
-X-Gm-Message-State: APf1xPA3ELk6MohOpDqeFm+DwCvmTs2R2Oh5/Q4GWnRXYqqLcgQ0pxZg
-	WDmYMiZnJcPxABEte+h/PjN1Rb7R
-X-Google-Smtp-Source: AH8x225tvavA9XhMlGNwMO/CFrUYf5sp8iaxcU7c/8lyLKGV81DmnaBT5WoVVLAtW1yMmJgwGABQtw==
-X-Received: by 10.223.134.42 with SMTP id 39mr1304567wrv.10.1519383641740;
-	Fri, 23 Feb 2018 03:00:41 -0800 (PST)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id 47sm2139067wrb.48.2018.02.23.03.00.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 23 Feb 2018 03:00:40 -0800 (PST)
-Message-ID: <1519383638.10914.14.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uxX5h7ugsky8KLw4pvfQq252P1iLuNBmgclUT9Dm0Pc=;
+	b=gRtt9BM8EQzeWizLEEGTUlPv7n/TY/JNAop2EVU8qymV+i+Kc1ToAAyYcNNKorUlLg
+	cQmE89LhQR1i6glJu1E3Ug/UoRj7Qh9yrM9IKehfu2X+cWndqpXXSPRR6GPtZZPbi27v
+	W5/KiqVu6G/DZgC24LV5SPrcxn+ofnLnn+o+2YoQzGpxcgqvJTmxmUuVrJa15rv9yG+w
+	7jHYICVSpAFukwKPEF5yzEqRZw5JaCwl9ymDEEpiWSn5uUCc+2vph4nhR7BBVyYzLLWA
+	SMlatCxo8kOPje7Wx1bMfUSZDr8TYBugZgKA7ed1NBPNTsxpdtw7ScNbfIYGMs5206WB
+	kYjA==
+X-Gm-Message-State: APf1xPDwIz9uV5Pese5hpr68Pe2S1C+tRshsSdTK7wf0IRM6DjXwD8v8
+	Pc9th2XhvSzPYjam7ZY//hqVYw==
+X-Google-Smtp-Source: AH8x226bNHOCPOVjLwBu9vb096jcQFnaVbTYrwt/P8jnwRHcEcPcpX1C4MAmj+xEjynLM6DYXz/qcg==
+X-Received: by 10.25.155.211 with SMTP id d202mr1218895lfe.125.1519387544223; 
+	Fri, 23 Feb 2018 04:05:44 -0800 (PST)
+Received: from localhost.localdomain ([2001:999:51:ec1b:508a:7d4c:b474:b280])
+	by smtp.gmail.com with ESMTPSA id
+	h78sm443500lfk.94.2018.02.23.04.05.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 23 Feb 2018 04:05:43 -0800 (PST)
+From: Timo Jyrinki <timo.jyrinki@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Feb 2018 11:00:38 +0000
-In-Reply-To: <20180222075116.4175-2-otavio@ossystems.com.br>
-References: <20180222075116.4175-1-otavio@ossystems.com.br>
-	<20180222075116.4175-2-otavio@ossystems.com.br>
-X-Mailer: Evolution 3.26.5-1 
-Mime-Version: 1.0
-Subject: Re: [meta-python PATCH v2 2/2] python3-requests: Remove RDEPENDS on python3-misc
+Date: Fri, 23 Feb 2018 14:05:39 +0200
+Message-Id: <1519387539-10077-1-git-send-email-timo.jyrinki@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-qt5][PATCH] qt5: Add recipe for qtpurchasing.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,42 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Feb 2018 11:00:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Feb 2018 12:05:44 -0000
 
-On Thu, 2018-02-22 at 04:51 -0300, Otavio Salvador wrote:
-> The selectors module is now part of python3-core. Remove this
-> dependency.
+Qt Purchasing was introduced as a new module in Qt 5.7. It was previously
+only available with Qt's commercial license. It can be used to build payment
+features.
 
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-February/116731.html
+The commit hash in the recipe is the latest in the 5.10 branch. Licenses
+were combed with licensecheck tool.
 
-:-)
+Signed-off-by: Timo Jyrinki <timo.jyrinki@gmail.com>
+---
+ recipes-qt/qt5/qtpurchasing_git.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtpurchasing_git.bb
 
-> Tested using updatehub's uhu utility.
-> 
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
-> 
-> Changes in v2:
-> - Fix commit log
-> 
->  meta-python/recipes-devtools/python/python3-requests_2.18.4.bb | 3 ---
->  1 file changed, 3 deletions(-)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python3-
-> requests_2.18.4.bb b/meta-python/recipes-devtools/python/python3-
-> requests_2.18.4.bb
-> index d91d993bf..0a2410f85 100644
-> --- a/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-> +++ b/meta-python/recipes-devtools/python/python3-requests_2.18.4.bb
-> @@ -1,5 +1,2 @@
->  inherit setuptools3
->  require python-requests.inc
-> -
-> -# Add the runtime depends for selectors.py
-> -RDEPENDS_${PN} += "${PYTHON_PN}-misc"
-> -- 
-> 2.16.2
-> 
+diff --git a/recipes-qt/qt5/qtpurchasing_git.bb b/recipes-qt/qt5/qtpurchasing_git.bb
+new file mode 100644
+index 0000000..2415f38
+--- /dev/null
++++ b/recipes-qt/qt5/qtpurchasing_git.bb
+@@ -0,0 +1,13 @@
++require qt5.inc
++require qt5-git.inc
++
++HOMEPAGE = "http://www.qt.io"
++LICENSE = "Apache-2.0 & BSD & ( LGPL-3.0 | GPL-3.0 | The-Qt-Company-Commercial )"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
++    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++"
++
++DEPENDS += "qtbase qtdeclarative"
++
++SRCREV = "49c5461af0888950b80eb9558647ccd764d55737"
+-- 
+2.7.4
+
 
