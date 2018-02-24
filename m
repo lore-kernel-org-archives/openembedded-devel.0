@@ -1,52 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 8ED98787D0;
-	Sat, 24 Feb 2018 17:56:44 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id y186so4166173pfb.2;
-	Sat, 24 Feb 2018 09:56:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:from:subject:message-id:date:user-agent:mime-version
-	:content-transfer-encoding:content-language;
-	bh=KCAbH0En4IZLaWcYAvE4JoboZNUHQFzLzTB7kwkyUnI=;
-	b=ovqcUgzuFP6ULZcgzODJbz5Ug3Z0cq9NXX/3W7msHzTXX57+TVgR5c+EzgPYd0bPBE
-	ee0yCOkZ2MusB3AFqSoa8hXhScdi4R9g/vEu42sYtjXHiZT2/D/ly+L2s1qRjW05xEGX
-	8ZVxSSREpifiNYKkUjtiAk72fogQgUe+NhBjt34cYFeBRGqK2mBJEsPmOxT72Y1SNxr1
-	pWGbR4ssu/Sl7SGbjnDWpjfolR5lx/qXb1q3P0srxb/1plFs2qYLTkM6QySVCslhEy3T
-	NpPE9WoWWJJSgnuytIowms2IPL9KAVWAy6PkOGzUsJX07/N04ZwR/YDFaA0ZMx5RP63g
-	qXzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-	:mime-version:content-transfer-encoding:content-language;
-	bh=KCAbH0En4IZLaWcYAvE4JoboZNUHQFzLzTB7kwkyUnI=;
-	b=MFcgSdbAsS+Ejup1NbH0AsCaDArUkjkTlq+W9h3+LioZpzMUNtCOj5QMtlQPL2hqPo
-	z9bRLxXGqx6dKxDLy5SfXyCb0uUdFEIBjJUxTnJd+Va2k00+Ilbvsp6F5qGFTl+kiOCk
-	klBCtk/R9aVzwteZfxj/e98gNTicdQ8Xek5i3xnLBF19QJQlRN0UK+Z+E9cZJMpl/h6q
-	WhUk6+Ux3nURFyAPHZcHzizbOA8DSg/2hCCKua4/9wT0TjrS5Jgb3b85dU840gmCW+oM
-	pwSI3KspucaVxtdfegHYWYoQXy4o8WmCmDIqVsCFypqxwoj8wx7Q5Z3vFMgUs7elyYpB
-	XnXw==
-X-Gm-Message-State: APf1xPDFEwTHjLZ0UuzBh/PPe6CML36aZqmcH8U/W41EtO0t3/1DY05Z
-	cYoT28dewwDxS15lXrThwbXCcQ==
-X-Google-Smtp-Source: AH8x224JBi3xgasG+4l3AEz2yNqCC7gqR2d//9xrwF0MPMlDrTVyHXs3Dc7QG40tR1kr5JiJhy+YzA==
-X-Received: by 10.101.70.133 with SMTP id h5mr4541118pgr.166.1519495005599;
-	Sat, 24 Feb 2018 09:56:45 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:301f:20d9:41ea:5ba?
-	([2601:202:4000:1184:301f:20d9:41ea:5ba])
-	by smtp.gmail.com with ESMTPSA id
-	t11sm10036823pfe.17.2018.02.24.09.56.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 24 Feb 2018 09:56:44 -0800 (PST)
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 0734978812
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Feb 2018 18:26:57 +0000 (UTC)
+Received: from svr-orw-mbx-01.mgc.mentorg.com ([147.34.90.201])
+	by relay1.mentorg.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-SHA384:256)
+	id 1epeXC-0006JB-Gy from Joe_MacDonald@mentor.com ;
+	Sat, 24 Feb 2018 10:26:58 -0800
+Received: from svr-orw-mbx-04.mgc.mentorg.com (147.34.90.204) by
+	svr-orw-mbx-01.mgc.mentorg.com (147.34.90.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1320.4; Sat, 24 Feb 2018 10:26:56 -0800
+Received: from svr-orw-mbx-04.mgc.mentorg.com ([fe80::4967:8f7f:4a15:68a4]) by
+	SVR-ORW-MBX-04.mgc.mentorg.com ([fe80::4967:8f7f:4a15:68a4%22]) with
+	mapi id 15.00.1320.000; Sat, 24 Feb 2018 10:26:56 -0800
+From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+To: akuster808 <akuster808@gmail.com>
+Thread-Topic: [OE-core] [RFC] meta-openembedded/meta-oe re-org
+Thread-Index: AQHTrZ0Mv+Yd9al56UizIm4J0IW4Vg==
+Date: Sat, 24 Feb 2018 18:26:56 +0000
+Message-ID: <7e8d4f35-6212-46c1-84d3-a386aeae326d@email.android.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <966e95a6-4401-5c12-b69c-9bd37bb236fd@gmail.com>
-Date: Sat, 24 Feb 2018 09:56:42 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-Subject: [RFC] meta-openembedded/meta-oe re-org
+Subject: Re: [OE-core] [RFC] meta-openembedded/meta-oe re-org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,30 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Feb 2018 17:56:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 24 Feb 2018 18:26:58 -0000
 Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hello,
-
-I am planning on moving some recipes to new locations that are more
-in-line with their function.
-
-Also, I plan on adding *-shells, *-dbs, *-security and *.crypto and
-moving the appropriate recipes there.
-
-This might help facilitate folks signing up to maintain a grouping like
-recipes-crypto if that is their thing.
-
-
-I will be sending out patches later today for review.
-
-I have staged the changes @
-http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=3Dakuster/m=
-eta-oe-reorg
-
-- armin
-
-
+SGV5IEFybWluLA0KDQpZb3VyIGJyYW5jaCBpbmNsdWRlcyBhdCBsZWFzdCBzb21lIChJIGhhdmVu
+J3QgbG9va2VkIHRvIHNlZSBpZiBpdCdzIGFsbCwgc2VlbXMgbGlrZWx5KSBvZiB0aGUgY2hhbmdl
+cyBJIGhhdmUgbWVyZ2VkIGFuZCByZWFkeSB0byBpbmNsdWRlIGZvciBtZXRhLW5ldHdvcmtpbmcu
+IFNpbmNlIEkgaGF2ZW4ndCBwdXNoZWQgdGhlbSB5ZXQgYW5kIHdvdWxkbid0IGJlIGJlZm9yZSB0
+b25pZ2h0IGF0IHRoZSBlYXJsaWVzdCwgZG8geW91IHdhbnQgbWUgdG8gd2FpdD8gT3Igd2VyZSB0
+aGV5IGp1c3QgaW5jbHVkZWQgaW4geW91ciB0cmVlIGZvciB0ZXN0aW5nPyBJIGRvbid0IHdhbnQg
+dG8gY2F1c2UgeW91IHVubmVjZXNzYXJ5IG1lcmdlIGNvbmZsaWN0cy4NCg0KLUouDQoNCk9uIEZl
+YiAyNCwgMjAxOCAxMjo1NyBQTSwgYWt1c3RlcjgwOCA8YWt1c3RlcjgwOEBnbWFpbC5jb20+IHdy
+b3RlOg0KSGVsbG8sDQoNCkkgYW0gcGxhbm5pbmcgb24gbW92aW5nIHNvbWUgcmVjaXBlcyB0byBu
+ZXcgbG9jYXRpb25zIHRoYXQgYXJlIG1vcmUNCmluLWxpbmUgd2l0aCB0aGVpciBmdW5jdGlvbi4N
+Cg0KQWxzbywgSSBwbGFuIG9uIGFkZGluZyAqLXNoZWxscywgKi1kYnMsICotc2VjdXJpdHkgYW5k
+ICouY3J5cHRvIGFuZA0KbW92aW5nIHRoZSBhcHByb3ByaWF0ZSByZWNpcGVzIHRoZXJlLg0KDQpU
+aGlzIG1pZ2h0IGhlbHAgZmFjaWxpdGF0ZSBmb2xrcyBzaWduaW5nIHVwIHRvIG1haW50YWluIGEg
+Z3JvdXBpbmcgbGlrZQ0KcmVjaXBlcy1jcnlwdG8gaWYgdGhhdCBpcyB0aGVpciB0aGluZy4NCg0K
+DQpJIHdpbGwgYmUgc2VuZGluZyBvdXQgcGF0Y2hlcyBsYXRlciB0b2RheSBmb3IgcmV2aWV3Lg0K
+DQpJIGhhdmUgc3RhZ2VkIHRoZSBjaGFuZ2VzIEANCmh0dHA6Ly9jZ2l0Lm9wZW5lbWJlZGRlZC5v
+cmcvbWV0YS1vcGVuZW1iZWRkZWQtY29udHJpYi9sb2cvP2g9YWt1c3Rlci9tZXRhLW9lLXJlb3Jn
+DQoNCi0gYXJtaW4NCg0KDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18NCk9wZW5lbWJlZGRlZC1jb3JlIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVk
+LWNvcmVAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtY29yZQ0KDQo=
 
