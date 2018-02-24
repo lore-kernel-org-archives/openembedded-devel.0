@@ -1,49 +1,51 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
-	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id AC5ED78898
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Feb 2018 18:38:13 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id x197so3624401ywg.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Feb 2018 10:38:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=n5KekgZjAdGHh8NR6riEDpWgeG+qZwYWoJoUq/7aqTE=;
-	b=BDQ8G1nCi+kcPU1wXUfQLmtJeJZR7EiHUUfpvOX9GHbD3o3ooXFOZapi3THWqAQfGK
-	0F0VO6Jv4gg/Y1yZqc53TY+e7XAQLFR06ITNaq+9yTb0LbmvEoFRY0wtZlK6fIh6/OrR
-	K752V3na/6KS7FHCfGcPZe12ohqh/mEOl5AFs=
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id BD12D788BF;
+	Sat, 24 Feb 2018 19:30:28 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id q27so3059211pgn.8;
+	Sat, 24 Feb 2018 11:30:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=Z0pF6MUmV6y0QP7IIguEuXeCQ29MZbDePG08y3LZ90Y=;
+	b=EGeu0AogrLNAeUzXOZfu4gV5YQGql5GwPZWaUApq8Xzi5oWNDZalAOP7D2/9Icv9h/
+	TDE+zHy2+vULWpaIlwkwUkOU1/uHmiz2KOE2xggPuOnEL05FBt7FQHmPdb+AYK+iA4lk
+	Ga5+guuEvGhYJAn+tODCTlNHa0EhPBShC7yp1rXrevTltIi/nR3+BvqDQwsL/ZikrJ22
+	ZmMV4OMolJAvvGeC9jA5WRPLDrKUFYko1sEcza6dderhkSizyj4RCO5XRftUMIvdfXna
+	a6Ism2rDZknSYX3/kisfV42lltgSa22gxNpuUZBASBFib+vfvxowv0XEmiIWVlOvbcdm
+	LWqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=n5KekgZjAdGHh8NR6riEDpWgeG+qZwYWoJoUq/7aqTE=;
-	b=aJI1RSOmkMkct1ICpsumD48UFPAeVPankKdB36vJH18hA+I0e5JTDIFS7pSZ6Sv3BB
-	hAwX0IVtRvFK2pHGgmKf0suJgpfjuToUtWVPWo/BGeVnpED5v3yYf6/epirCqpIBE4s8
-	TJRfdiJ2+gCs3onzLtr6sO0q+mOSdIyctCX33Q1VlZ8Hu6wH4+ImkXviWZmCwQ/PIi0X
-	f7Lc+Psxv/9adcLTNXAGrl4drFhFk3XOXoXulf96ZYx0T56qe1pBBaFw48xBne/RziXd
-	okF9s8cL9Okdp4ZbCHU7vzwmBW98l5UVxqrhPZLmnd9oFVRy1ZcFU7cV8sCGgvpkpR0R
-	A2vw==
-X-Gm-Message-State: APf1xPBweG/j5qM6MTBa+l03XbjlS5Z1vJquf1J32qOPrxVzDmi0qgwV
-	4C+hklEvm9eq2gekMbIUm64Uqg==
-X-Google-Smtp-Source: AH8x225CpPqV2Kvba5sMiReQp16DCuUeN0+spEn3Vt+zyR94bgClhNhBcWaOWm3uKHDsQHJ8Bf+nyw==
-X-Received: by 10.129.242.1 with SMTP id i1mr3785619ywm.265.1519497494484;
-	Sat, 24 Feb 2018 10:38:14 -0800 (PST)
-Received: from bill-the-cat
-	(cpe-2606-A000-1401-80F8-6172-C866-F8F3-5207.dyn6.twc.com.
-	[2606:a000:1401:80f8:6172:c866:f8f3:5207])
-	by smtp.gmail.com with ESMTPSA id k2sm1969367ywi.52.2018.02.24.10.38.13
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=Z0pF6MUmV6y0QP7IIguEuXeCQ29MZbDePG08y3LZ90Y=;
+	b=GDTw9j7k3PTrUJ1Re005nEyzzMErrVuFckUZQ9wEjvOTj1Q7GTwfn7AGA0hrWx3SPn
+	P8lkVkNvG6vb40ipftUYLW2g5y+4b24YEQk8VUFvZJE2LJKNF2u/mFIvvq5Nf563J96F
+	VDosu+EluVl51kTLUDD66Kg+6pLqTLT7hViCobuWODpem53sSqjNwwgwnYte1mfT8C96
+	OvlnxAzCLsPj3aNAQF8DV4YSFXdgmkjZhvVLzHQhDXaZr/sj30O3YE4QXqLNbRUqWUAR
+	571ZNzQ6AykNbtQxkco7w3Pfc5KC749Lcz4FTmQKnL/q0Mn7Wl5uIu/Ls5nOZv7lAjry
+	E6Bg==
+X-Gm-Message-State: APf1xPDm4YURYnk/JXOJhvjkluLuHk8rN7AIu5dyFoyBMe1Hxlp6W/pY
+	xUnluF2OGixAMKJGlOrQn8qT7Q==
+X-Google-Smtp-Source: AH8x226cYjDHk+XbL7QtFgPD4sKvYsyxJpiqCS023Ki7D+r5PMGTfBLOypLF3LhNc2ar3SkcoGgs9g==
+X-Received: by 10.101.98.201 with SMTP id m9mr4551134pgv.100.1519500629716;
+	Sat, 24 Feb 2018 11:30:29 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1184:301f:20d9:41ea:5ba?
+	([2601:202:4000:1184:301f:20d9:41ea:5ba])
+	by smtp.gmail.com with ESMTPSA id
+	r62sm14816447pfi.52.2018.02.24.11.30.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 24 Feb 2018 10:38:13 -0800 (PST)
-Date: Sat, 24 Feb 2018 13:38:11 -0500
-From: Tom Rini <trini@konsulko.com>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20180224183811.GL4311@bill-the-cat>
-References: <966e95a6-4401-5c12-b69c-9bd37bb236fd@gmail.com>
+	Sat, 24 Feb 2018 11:30:29 -0800 (PST)
+To: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+References: <7e8d4f35-6212-46c1-84d3-a386aeae326d@email.android.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <61ed17a3-a0d3-6bc1-c84b-e914ecfcc399@gmail.com>
+Date: Sat, 24 Feb 2018 11:30:27 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-In-Reply-To: <966e95a6-4401-5c12-b69c-9bd37bb236fd@gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+In-Reply-To: <7e8d4f35-6212-46c1-84d3-a386aeae326d@email.android.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
@@ -60,64 +62,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Feb 2018 18:38:13 -0000
-X-Groupsio-MsgNum: 70868
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="93PtfIrfSh2q5s6/"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 24 Feb 2018 19:30:29 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---93PtfIrfSh2q5s6/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 24, 2018 at 09:56:42AM -0800, akuster808 wrote:
 
-> Hello,
->=20
-> I am planning on moving some recipes to new locations that are more
-> in-line with their function.
->=20
-> Also, I plan on adding *-shells, *-dbs, *-security and *.crypto and
-> moving the appropriate recipes there.
->=20
-> This might help facilitate folks signing up to maintain a grouping like
-> recipes-crypto if that is their thing.
->=20
->=20
-> I will be sending out patches later today for review.
->=20
-> I have staged the changes @
-> http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=3Dakuster/m=
-eta-oe-reorg
+On 02/24/2018 10:26 AM, MacDonald, Joe wrote:
+> Hey Armin,
+>
+> Your branch includes at least some (I haven't looked to see if it's
+> all, seems likely) of the changes I have merged and ready to include
+> for meta-networking. Since I haven't pushed them yet and wouldn't be
+> before tonight at the earliest, do you want me to wait? Or were they
+> just included in your tree for testing? I don't want to cause you
+> unnecessary merge conflicts.
+>
+Yeah, After I sent it, I thought maybe I should have given the start and
+end range.
 
-Should some stuff perhaps be moved out to other layers?  More
-specifically, should at least tomoyo-tools get moved to meta-security
-with the rest of the tomoyo stuff?  I have less strong opinions on
-leveldb (but maybe recipes-dbs instead) and passwdqc.
 
---=20
-Tom
+"zsh: move to recipes-shells" to top "postgres: move to recipes-dbs"
 
---93PtfIrfSh2q5s6/
-Content-Type: application/pgp-signature; name="signature.asc"
+- armin
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
+> -J.
+>
+> On Feb 24, 2018 12:57 PM, akuster808 <akuster808@gmail.com> wrote:
+>
+>     Hello,
+>
+>     I am planning on moving some recipes to new locations that are more
+>     in-line with their function.
+>
+>     Also, I plan on adding *-shells, *-dbs, *-security and *.crypto and
+>     moving the appropriate recipes there.
+>
+>     This might help facilitate folks signing up to maintain a grouping
+>     like
+>     recipes-crypto if that is their thing.
+>
+>
+>     I will be sending out patches later today for review.
+>
+>     I have staged the changes @
+>     http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=akuster/meta-oe-reorg
+>
+>     - armin
+>
+>
+>     -- 
+>     _______________________________________________
+>     Openembedded-core mailing list
+>     Openembedded-core@lists.openembedded.org
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>
+>
 
-iQIcBAEBAgAGBQJakbETAAoJEIf59jXTHXZSYEcP/3w1FDmbTQnqgMgQ2iohUv2J
-IGdqAlCnNbyH7JeYbcccRxUlHswj8xAVzuJzhP092pM7/iA9vvG4I7l6Bj4qVohY
-JzRbXo1kOV5v1+Ig/JpkUVjUJEWczhcc56ojhvqmVex3WGTdox44CDdYq/2M9YQz
-xVQ9ygWtJ5Xw/KXL15/3fXbttfw+tc2igxljJW+DrXggjJ/qZwzFF+RVavfnmxOX
-wHvKy+yyhIAlC7sfJRPgD/Co/kyNnIA7bVvtwhPRKSC8dDSIVhZz/x74pNT0xp9X
-+bxwVNPCsj0XQXeuI0wdy7iE5J84IP4zjOL42kpVTvmXgElkABqL7BoBRjZJU6Zi
-vqREklMcW7rXyXSLPLmWuVsKzhkvBlceA2mwXXn8KezE2QHP+ZprgFdIYO71/Knz
-sGSX4S4AldAkcdNwcPR4AOKMVaVETlM2RyD5hdYyHuFX5aX+UE34MW3v+bb40iN/
-3d3CwQ2xH0Ef7mjBKs9YVQvg+PrTBCSqBRA3Ek8iETehUcF5G8sKxAZGcQIg6CTR
-XNt0sYcMKArUsa2PZJ2lVfcgZvJ+DaYkTWXREas4S/+6pkB8+MhgoxtGAnk9Jz17
-dReOeGO2XC74equoKXt2iQeZXY17SPwTOSVzNAFsu7b3ipOtlVGSeAZXdxUxwh0p
-GFtNWVjPlW2QoU9xri9e
-=fzCn
------END PGP SIGNATURE-----
 
---93PtfIrfSh2q5s6/--
