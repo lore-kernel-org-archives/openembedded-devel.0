@@ -1,48 +1,73 @@
-Return-Path: <prvs=1592237712=adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E0D6784E6
+Return-Path: <JAEWON@xilinx.com>
+X-Greylist: delayed 876 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 24 Feb 2018 02:37:32 UTC
+Received: from NAM01-BN3-obe.outbound.protection.outlook.com
+	(mail-bn3nam01on0078.outbound.protection.outlook.com [104.47.33.78])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EEA46E672
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 17:12:17 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w1NHB6kR025193 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 11:12:18 -0600
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2ga6qtt8bt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 11:12:18 -0600
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w1NHCFjh018634
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Feb 2018 11:12:17 -0600
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 23 Feb 2018 11:12:15 -0600
-Received: from ionel-work.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 23 Feb 2018 11:12:15 -0600
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Feb 2018 19:13:11 +0200
-Message-ID: <20180223171312.3619-1-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.16.2
+	Sat, 24 Feb 2018 02:37:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=ImbC9zQsMsankS9+8j1scgQiHG+htB3io257OxFcN34=;
+	b=dbDV2kGoWdaPt/SQrynaOFgLupYoERY0KW+0hZZsYRGRvF8Izjbo7MD0UahZ8yyk/OPaOXVnE6A/ioJiAwy7QW4b9D7IBQjPwWhlH5L4dRBN/EIX5oGEmbo7PGOmooLFl1fbdRrrPyPUDHHvB5KOcRbe144bHq60bA93M8kr0C4=
+Received: from BY2PR02MB425.namprd02.prod.outlook.com (10.141.143.141) by
+	BY2PR02MB329.namprd02.prod.outlook.com (10.141.140.142) with Microsoft
+	SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
+	15.20.506.18; Sat, 24 Feb 2018 02:22:54 +0000
+Received: from BY2PR02MB425.namprd02.prod.outlook.com ([10.141.143.141]) by
+	BY2PR02MB425.namprd02.prod.outlook.com ([10.141.143.141]) with mapi id
+	15.20.0506.023; Sat, 24 Feb 2018 02:22:53 +0000
+From: Jaewon Lee <JAEWON@xilinx.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: qt moc issue
+Thread-Index: AdOtFl9couJcZTeaQ8+lfiZwb1491A==
+Date: Sat, 24 Feb 2018 02:22:53 +0000
+Message-ID: <BY2PR02MB42550445A4D2199CF004546AFC30@BY2PR02MB425.namprd02.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=JAEWON@xilinx.com; 
+x-originating-ip: [149.199.62.254]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; BY2PR02MB329;
+	7:LWcrElBDq0quAUQU6vTqp5LrhzkD77Bcw0Fmh9WVTNBqG/efTqPRXB2K/yawA961EKReX+ZSWT+z8NprzPwMOWSD9v3xPJzAJ/naOBAcjOcnYHic0tPLG5HHe/syMHdR6C0fjyErQyY4gk4dMk1rWqnVV2DZPt3XikgQMvg/TzaV8uHJRRLaNDTQpDQeTZZEQhqCph5WVRynEA3KP2k3HOszVCNZYUgZUe7NnEbBxb9RY2gRoQgJXNPKQrIMnI0f
+x-ms-exchange-antispam-srfa-diagnostics: SSOS;
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: a78befbf-fafe-478b-9c42-08d57b2d82ac
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(7020095)(4652020)(48565401081)(4534165)(4627221)(201703031133081)(201702281549075)(5600026)(4604075)(3008032)(2017052603307)(7153060)(7193020);
+	SRVR:BY2PR02MB329; 
+x-ms-traffictypediagnostic: BY2PR02MB329:
+x-microsoft-antispam-prvs: <BY2PR02MB3295B5A89DCBF596A50D0FFAFC30@BY2PR02MB329.namprd02.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(28532068793085)(21748063052155);
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040501)(2401047)(5005006)(8121501046)(3002001)(3231207)(944501161)(52105095)(10201501046)(93006095)(93001095)(6055026)(6041288)(20161123560045)(20161123564045)(20161123562045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(6072148)(201708071742011);
+	SRVR:BY2PR02MB329; BCL:0; PCL:0; RULEID:; SRVR:BY2PR02MB329; 
+x-forefront-prvs: 0593E261C4
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(39860400002)(396003)(39380400002)(366004)(376002)(346002)(189003)(199004)(53754006)(6506007)(77096007)(7696005)(2900100001)(26005)(102836004)(2906002)(2351001)(86362001)(106356001)(72206003)(3846002)(790700001)(6116002)(7116003)(68736007)(59450400001)(99286004)(186003)(316002)(3280700002)(478600001)(6436002)(2501003)(3480700004)(81156014)(81166006)(97736004)(25786009)(3660700001)(53936002)(74316002)(6916009)(7736002)(55016002)(5890100001)(5660300001)(14454004)(8676002)(9326002)(66066001)(8936002)(54896002)(6306002)(9686003)(105586002)(33656002)(5640700003);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BY2PR02MB329;
+	H:BY2PR02MB425.namprd02.prod.outlook.com; FPR:; SPF:None;
+	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+received-spf: None (protection.outlook.com: xilinx.com does not designate
+	permitted sender hosts)
+x-microsoft-antispam-message-info: 0N5NxS4lwB7vi3lUgtQej8qnBqJ8dF2JnZzsNSvc8hjlwM06u8XTmL22cQw882nO0uDPLDXsnVZUM9XPSUjXIiOncJMO2yYxn7fZlPdNaMnvy12QqqfLd6iumftPN7OOMbp3+UzeZyKcFLMzV7wZoywH6cKJTNp3iWolUm7OmIk=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2018-02-23_06:, , signatures=0
-X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=816 adultscore=0 classifier=spam adjust=30 reason=mlx
-	scancount=1 engine=8.0.1-1711220000 definitions=main-1802230213
-Subject: [meta-multimedia][PATCH 1/2] opusfile: add new recipe
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a78befbf-fafe-478b-9c42-08d57b2d82ac
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Feb 2018 02:22:53.6700 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR02MB329
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: qt moc issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +80,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Feb 2018 17:12:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 24 Feb 2018 02:37:33 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Library for decoding opus audio files. Used by newer versions of sox.
+Hi All,
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
----
- .../recipes-multimedia/opusfile/opusfile_0.10.bb           | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
+I'm seeing the following build error:
 
-diff --git a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
-new file mode 100644
-index 000000000..189dc87c4
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.10.bb
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Library for opening, seeking, and decoding opus audio files"
-+HOMEPAGE = "https://www.opus-codec.org/"
-+SECTION = "audio"
-+
-+DEPENDS = "libogg openssl libopus"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6ac22b992dde6a891f8949c3e2da8576"
-+
-+SRC_URI = "https://downloads.xiph.org/releases/opus/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "ab3f7d15d766f5b36b0951ee435f9ebf"
-+SRC_URI[sha256sum] = "48e03526ba87ef9cf5f1c47b5ebe3aa195bd89b912a57060c36184a6cd19412f"
-+
-+inherit autotools pkgconfig
--- 
-2.16.2
+| /scratch/DAILYBUILD/build/tmp/work/aarch64-xilinx-linux/qtdeclarative/5.9=
+.4+gitAUTOINC+317908e72a-r0/git/tests/benchmarks/qml/binding/tst_binding.cp=
+p:175:10: fatal error: tst_binding.moc: No such file or directory
+|  #include "tst_binding.moc"
+|           ^~~~~~~~~~~~~~~~~
+| compilation terminated.
+| make[4]: *** [.obj/tst_binding.o] Error 1
+| make[4]: *** Waiting for unfinished jobs....
 
+There are a the same errors for a bunch of other moc files,
+#include "tst_qxmlquery.moc"
+#include "tst_qxmlresultitems.moc"
+#include "tst_qxmlname.moc"
+#include "tst_qxmlformatter.moc"
+
+If I check for the file after the error, the files are there.
+Im also seeing the same for other qt recipes, like  qtxmlpatterns
+
+Has anybody seen the same error/is there a fix for this out there?
+
+
+Thanks,
+Jaewon
+
+This email and any attachments are intended for the sole use of the named r=
+ecipient(s) and contain(s) confidential information that may be proprietary=
+, privileged or copyrighted under applicable law. If you are not the intend=
+ed recipient, do not read, copy, or forward this email message or any attac=
+hments. Delete this email message and any attachments immediately.
 
