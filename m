@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id BF5CD601F1
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EFF5601F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 20:22:41 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id g14so16547744qti.2
+	Sun, 25 Feb 2018 20:25:14 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id o25so11265734qkl.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 12:22:43 -0800 (PST)
+	Sun, 25 Feb 2018 12:25:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RrKfQOTiBJsKbRPr4XwYlFFxGi6IVQ5jxHaj5efDP6E=;
-	b=RgGhou6TVuW1/M/e0I/3bp5EP4y/YflAfbAoc9HlGt5n6fyZdxiPmtofwRa5KdMb4U
-	+puvNlqk/NoXclhaJU6pVX/DMR7KApvHbyUkH+gGUtrVc2YM6BhyNs9t4w1DeCuKxFFG
-	DHJxsQTWzphWbF8cnoxL9p3VSlZGGCtZb2W8Enohe/hV8mBMsV0ZvnJVWCCirEUhzWhv
-	1wzyp+yUKhQYug4cDS7ZZxc08zBolZ4YDZmI40yS8l/SDnnnCsX4acOFUKnRMfRPK8VH
-	TBZrnpIIneS2MequuSJIqg+yEQdWQXLQye1aEE43twGI0pOaI5Arr8LizmACUYVJHx/w
-	t2OA==
-X-Gm-Message-State: APf1xPDm4Jde0mFiZlzCkIxg0mm1pYP5y64UpGtox9sT9vLGyuh2tQZW
-	GYAs3ctxFfwcYoTh4dY6w8+snWZi
-X-Google-Smtp-Source: AG47ELscRfaOX8IkHd/FC0Pdj+plU+dBa41gH0OTVaHgb1+J6Wzo2exXE/Mxs644/svxw7Zx1VfFyA==
-X-Received: by 10.200.54.39 with SMTP id m36mr14608683qtb.304.1519590162452;
-	Sun, 25 Feb 2018 12:22:42 -0800 (PST)
+	bh=iwY/UsPcETysY19IydUtxIwMcXKULtTBdx3rjmXSzbI=;
+	b=gm0pARFjaflpobXLbxBpmgM+kXQ1uPDnPeJ1P+5khvWgkFJEIiibUFcHeqsp+XDKSH
+	3D/sMD/joos/EHkXIWtaBa8YEwfp8pht5cnpwhgh0wpo6obNKIjUrBBkjCUZepQKhCCX
+	4oCqlP6D0SzWLNr1NSzLAWMyC6xPYxPaN3muUvt+wLEetCvVf14yuyBF3EF9qutg3Ng2
+	WYmRQ+KHOkvta2szNlQ1pHwMmASrvzOJ7Kwv87o89xHsy3nnr6qJYOZoxcOKMm0fxpE+
+	ip49zqoJKLM7QfuFJ+ESlLu/akPVlOOHg1Ae6qMEBpblfLZ8J7RwpPixMNeFT2tDROBH
+	lqlA==
+X-Gm-Message-State: APf1xPAOIuNw+aKc3STSSY9lVr6fcr01hrG0TH5V/eVHpurS0l0CCIX0
+	VFvxzdEGbFS+8TBACMIF54TqLu/x
+X-Google-Smtp-Source: AG47ELuIKxrnB2E0uYOevq8lWIOIIESQr1bYdJcqBZexkf3GtFIhY1StmevSRdIIJ/DWveJWpnWNNw==
+X-Received: by 10.55.200.15 with SMTP id c15mr13775585qkj.73.1519590316128;
+	Sun, 25 Feb 2018 12:25:16 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	r22sm4956446qkr.21.2018.02.25.12.22.41
+	m187sm4119250qkd.6.2018.02.25.12.25.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 12:22:42 -0800 (PST)
+	Sun, 25 Feb 2018 12:25:15 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 15:22:33 -0500
-Message-Id: <1519590153-7797-1-git-send-email-derek@asterius.io>
+Date: Sun, 25 Feb 2018 15:25:06 -0500
+Message-Id: <1519590306-8966-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-alembic: update to version 0.9.8
+Subject: [meta-python][PATCH] python-webcolors: update to version 1.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 20:22:42 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 20:25:15 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-alembic.inc                | 4 ++--
- .../python/{python-alembic_0.9.7.bb => python-alembic_0.9.8.bb}       | 0
- .../python/{python3-alembic_0.9.7.bb => python3-alembic_0.9.8.bb}     | 0
+ meta-python/recipes-devtools/python/python-webcolors.inc              | 4 ++--
+ .../python/{python-webcolors_1.8.bb => python-webcolors_1.8.1.bb}     | 0
+ .../python/{python3-webcolors_1.8.bb => python3-webcolors_1.8.1.bb}   | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-alembic_0.9.7.bb => python-alembic_0.9.8.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-alembic_0.9.7.bb => python3-alembic_0.9.8.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-webcolors_1.8.bb => python-webcolors_1.8.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-webcolors_1.8.bb => python3-webcolors_1.8.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
-index dfaf882..f1a6412 100644
---- a/meta-python/recipes-devtools/python/python-alembic.inc
-+++ b/meta-python/recipes-devtools/python/python-alembic.inc
-@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
+diff --git a/meta-python/recipes-devtools/python/python-webcolors.inc b/meta-python/recipes-devtools/python/python-webcolors.inc
+index a67b32f..a02bbbb 100644
+--- a/meta-python/recipes-devtools/python/python-webcolors.inc
++++ b/meta-python/recipes-devtools/python/python-webcolors.inc
+@@ -2,8 +2,8 @@ SUMMARY = "Simple Python module for working with HTML/CSS color definitions."
  LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=197add016087e6884a012b0f185d44ad"
  
--SRC_URI[md5sum] = "3e82bbe325464fd542ab4cc44929c813"
--SRC_URI[sha256sum] = "46f4849c6dce69f54dd5001b3215b6a983dee6b17512efee10e237fa11f20cfa"
-+SRC_URI[md5sum] = "5cfef58641c9a94d4a5d547e951a7dda"
-+SRC_URI[sha256sum] = "13b8611788acf0d7b617775db5c2ae26554a6d4263c590ef628d448fd05aef56"
+-SRC_URI[md5sum] = "d7a17135f8b8374a75c2f1d08253c026"
+-SRC_URI[sha256sum] = "da3cb551060f46f417341b041b36d329d699c125a13a4412dde5c2e310d63344"
++SRC_URI[md5sum] = "40890db38b2a856e526a568864025fe6"
++SRC_URI[sha256sum] = "030562f624467a9901f0b455fef05486a88cfb5daa1e356bd4aacea043850b59"
  
- PYPI_PACKAGE = "alembic"
- 
-diff --git a/meta-python/recipes-devtools/python/python-alembic_0.9.7.bb b/meta-python/recipes-devtools/python/python-alembic_0.9.8.bb
+ RDEPENDS_${PN}_class-target = "\
+     ${PYTHON_PN}-stringold \
+diff --git a/meta-python/recipes-devtools/python/python-webcolors_1.8.bb b/meta-python/recipes-devtools/python/python-webcolors_1.8.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-alembic_0.9.7.bb
-rename to meta-python/recipes-devtools/python/python-alembic_0.9.8.bb
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_0.9.7.bb b/meta-python/recipes-devtools/python/python3-alembic_0.9.8.bb
+rename from meta-python/recipes-devtools/python/python-webcolors_1.8.bb
+rename to meta-python/recipes-devtools/python/python-webcolors_1.8.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-webcolors_1.8.bb b/meta-python/recipes-devtools/python/python3-webcolors_1.8.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-alembic_0.9.7.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_0.9.8.bb
+rename from meta-python/recipes-devtools/python/python3-webcolors_1.8.bb
+rename to meta-python/recipes-devtools/python/python3-webcolors_1.8.1.bb
 -- 
 2.7.4
 
