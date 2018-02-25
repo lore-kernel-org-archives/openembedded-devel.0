@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A19572F42
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 11EC27878B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:33:29 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id v3so8123683plg.3
+	Sun, 25 Feb 2018 21:33:30 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id v9-v6so6112229plp.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:33:31 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=OsSiWhE/LO/cEidoDibv0N6CWtMHLeHiFzwPV/8PB4I=;
-	b=fxQ8kQ74VdBohqKPuBI9r4AouCW23GlgsENVwdrR1H7PASfLzVWyBHGxcy4iEUkVLC
-	cokPzG8RiaPLyLmpJBQXH77OC3jjIWF58qYiwo+1xP5skSixdFvfoWnU2O/PXsea8PpR
-	t2QjXzMPfdK8Q8VXx5I2gpA7sLOnV9xyNHE54oSt6KjrVlNsFLDaZGLPBv+FjEmhxSjf
-	rIZW6k8WF6YRFbCy51qe51dCzbLERrkDlMoZlxlf4ChTE6mzTTP/GX/9HbYQKc2DsfVX
-	sUSAv4Rg0WTX1TUvUGcD50s+0z9hed8eyxrltQlsJ+0vSETShW16r7Mb1OztaiOWwv1A
-	oOQA==
+	bh=XY2lzW7wNUh3uxf8m1tU4NupVox3fQVLWkUiCGXpNWA=;
+	b=RHkcR+jpvp9ErfEoFyxV5VAEeFYgtPoavWHjpH1tq6yubsKLhWkWy+MIyEYz7CpEt2
+	YzO4+PGFAYN5km18NxdN9vzb677XRphbsF7Ew8EzTByrhMZPaELooN3a3rlpB405FJw7
+	6VWnlI0rzCCTKO8XJGmq7qD16N2qo6JkY2J1eQzOkJOPiWuJ5WTVqrIRI8CeZ93xCe9+
+	39LyJ7aZVvifHeuTMa4f1/EDOYw7F+eOUAfmEbqoQBbyCBHhKY1iG4FEKYS9G6f9xj2P
+	5kI1ySIhtdJ3o4ytMgfXTxBI2axFRU57qRaMdS+JZmCZOvplD8m1djTrMfcYqgdxkm+E
+	bNyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=OsSiWhE/LO/cEidoDibv0N6CWtMHLeHiFzwPV/8PB4I=;
-	b=Yvqp/l2n18NsTgQ4I470dn4H31zon57ArKxExYPPY6JIuj1WEoyGgySr7LqoO/Zvxc
-	ee4qkqufpsGiIMEuSsPtgM0JcaJQGRqdg9ThhNwPqJHiLUAKI6Lc1tAwVtkF8aKpT7x6
-	ywM6yrR8n5rVlr8oRksbKaAfv9qx3bEW72rtsm4iLfuWBQQhWl4iSXGniLzXk9yzz3Q9
-	LuuJ2412seZcEy8BlzmDEWogadGwdL7Sdw+gn8ERhwS+Vj91lv8sBM5pekKDblvLZaqZ
-	vBrbSEwqvoFUy86BoN2SuFvIJArcoqP2imVqRAvac3Oka7eqUMA4nPg4MCPvhh+k5/fv
-	Cang==
-X-Gm-Message-State: APf1xPA+nTvKVhzRzfRhhy8h74KCtxj48pS+adrKtWhJLs6uyFBoTr/W
-	VbzfNnQOYy1ef1WzGdr6ld+7Hw==
-X-Google-Smtp-Source: AH8x224aeA99qHqaotaA/kgl9SBfIHjU7KHelptnsYAq0k+f0WpzH7S1EgBZz20woNkhufGZfEUTCQ==
-X-Received: by 2002:a17:902:7082:: with SMTP id
-	z2-v6mr8631553plk.244.1519594411194; 
-	Sun, 25 Feb 2018 13:33:31 -0800 (PST)
+	bh=XY2lzW7wNUh3uxf8m1tU4NupVox3fQVLWkUiCGXpNWA=;
+	b=XSGNANOqqgeTNZ2+rumHIh28x8cQWYBO6/i5+hukhKBcgEAsSUXJsviHLJA7IudOYA
+	o9E0WAd6gHVb4OAOku2BBPwlORYDY5p/X/AKAzaOX90p3+LG4gEjxRvtjIbmo1hMG4UG
+	l5sCTnsHHqIuDzYvqY4I1SNNGdTF/sAf9wYBxhuqdJljfHwJUO/MeasuPFrEdcr4tSvb
+	YfUXROJd2eqsBjVbWoNqiRa+9DdQyesmgbakvlDBktiKnYdb5aGCjqmPS00/75sA5dHJ
+	SnwdfhlahbjU5sgkMfGHhZmu7wlRWOvT7XSAG9SFjoylCfuckKVPPaniDAQLCfLrv29H
+	K0ag==
+X-Gm-Message-State: APf1xPD8PUqt5alBoGolbFz2V1AvADn1BugkirXIPuIo0/omPr3czLFY
+	o5w3stH8ka87HYPpBj/mAdAgBA==
+X-Google-Smtp-Source: AH8x226rM7ZeqtwQw5Dg1O5qMeiKnWAOHSJ7R/UJjtfqsejfEhW5z4DcXcgQmwz14lfX3lTdbYdEeQ==
+X-Received: by 2002:a17:902:c1:: with SMTP id
+	a59-v6mr8300347pla.284.1519594412224; 
+	Sun, 25 Feb 2018 13:33:32 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
 	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.33.30
+	64sm12014600pgj.39.2018.02.25.13.33.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:33:30 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:31 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:32:54 -0800
-Message-Id: <1519594406-24490-4-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:32:55 -0800
+Message-Id: <1519594406-24490-5-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 04/36] mysql: move to recipes-dbs
+Subject: [meta-oe][PATCH 05/36] psqlodbc: move to recipes-dbs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,108 +60,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:33:30 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 21:33:31 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb-native_5.5.57.bb   | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb.inc                | 0
- .../mysql/mariadb/0001-disable-ucontext-on-musl.patch                     | 0
- .../mysql/mariadb/change-cc-to-cc-version.patch                           | 0
- .../mysql/mariadb/configure.cmake-fix-valgrind.patch                      | 0
- .../mysql/mariadb/fix-a-building-failure.patch                            | 0
- .../mysql/mariadb/fix-cmake-module-path.patch                             | 0
- .../mysql/mariadb/fix-mysqlclient-r-version.patch                         | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/install_db         | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/install_db.service | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/my.cnf             | 0
- .../{recipes-support => recipes-dbs}/mysql/mariadb/mysql-systemd-start    | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/mysqld.service     | 0
- .../{recipes-support => recipes-dbs}/mysql/mariadb/remove-bad-path.patch  | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb_5.5.57.bb          | 0
- meta-oe/{recipes-support => recipes-dbs}/mysql/mysql-python_1.2.5.bb      | 0
- 16 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb-native_5.5.57.bb (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb.inc (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/0001-disable-ucontext-on-musl.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/change-cc-to-cc-version.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/configure.cmake-fix-valgrind.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/fix-a-building-failure.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/fix-cmake-module-path.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/fix-mysqlclient-r-version.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/install_db (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/install_db.service (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/my.cnf (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/mysql-systemd-start (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/mysqld.service (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb/remove-bad-path.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mariadb_5.5.57.bb (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/mysql/mysql-python_1.2.5.bb (100%)
+ .../psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch           | 0
+ .../psqlodbc/files/psqlodbc-fix-for-ptest-support.patch                   | 0
+ .../psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch  | 0
+ meta-oe/{recipes-support => recipes-dbs}/psqlodbc/files/run-ptest         | 0
+ meta-oe/{recipes-support => recipes-dbs}/psqlodbc/psqlodbc.inc            | 0
+ meta-oe/{recipes-support => recipes-dbs}/psqlodbc/psqlodbc_09.05.0300.bb  | 0
+ 6 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-support => recipes-dbs}/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch (100%)
+ rename meta-oe/{recipes-support => recipes-dbs}/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch (100%)
+ rename meta-oe/{recipes-support => recipes-dbs}/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch (100%)
+ rename meta-oe/{recipes-support => recipes-dbs}/psqlodbc/files/run-ptest (100%)
+ rename meta-oe/{recipes-support => recipes-dbs}/psqlodbc/psqlodbc.inc (100%)
+ rename meta-oe/{recipes-support => recipes-dbs}/psqlodbc/psqlodbc_09.05.0300.bb (100%)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.57.bb
+diff --git a/meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch b/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
 similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.57.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+rename from meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
+rename to meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
+diff --git a/meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch b/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
 similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb.inc
-rename to meta-oe/recipes-dbs/mysql/mariadb.inc
-diff --git a/meta-oe/recipes-support/mysql/mariadb/0001-disable-ucontext-on-musl.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-disable-ucontext-on-musl.patch
+rename from meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
+rename to meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
+diff --git a/meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch b/meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
 similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/0001-disable-ucontext-on-musl.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/0001-disable-ucontext-on-musl.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb/change-cc-to-cc-version.patch b/meta-oe/recipes-dbs/mysql/mariadb/change-cc-to-cc-version.patch
+rename from meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
+rename to meta-oe/recipes-dbs/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
+diff --git a/meta-oe/recipes-support/psqlodbc/files/run-ptest b/meta-oe/recipes-dbs/psqlodbc/files/run-ptest
 similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/change-cc-to-cc-version.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/change-cc-to-cc-version.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb/configure.cmake-fix-valgrind.patch b/meta-oe/recipes-dbs/mysql/mariadb/configure.cmake-fix-valgrind.patch
+rename from meta-oe/recipes-support/psqlodbc/files/run-ptest
+rename to meta-oe/recipes-dbs/psqlodbc/files/run-ptest
+diff --git a/meta-oe/recipes-support/psqlodbc/psqlodbc.inc b/meta-oe/recipes-dbs/psqlodbc/psqlodbc.inc
 similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/configure.cmake-fix-valgrind.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/configure.cmake-fix-valgrind.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-a-building-failure.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
+rename from meta-oe/recipes-support/psqlodbc/psqlodbc.inc
+rename to meta-oe/recipes-dbs/psqlodbc/psqlodbc.inc
+diff --git a/meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb b/meta-oe/recipes-dbs/psqlodbc/psqlodbc_09.05.0300.bb
 similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/fix-a-building-failure.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/fix-a-building-failure.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-cmake-module-path.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-cmake-module-path.patch
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/fix-cmake-module-path.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/fix-cmake-module-path.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-mysqlclient-r-version.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/fix-mysqlclient-r-version.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb/install_db b/meta-oe/recipes-dbs/mysql/mariadb/install_db
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/install_db
-rename to meta-oe/recipes-dbs/mysql/mariadb/install_db
-diff --git a/meta-oe/recipes-support/mysql/mariadb/install_db.service b/meta-oe/recipes-dbs/mysql/mariadb/install_db.service
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/install_db.service
-rename to meta-oe/recipes-dbs/mysql/mariadb/install_db.service
-diff --git a/meta-oe/recipes-support/mysql/mariadb/my.cnf b/meta-oe/recipes-dbs/mysql/mariadb/my.cnf
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/my.cnf
-rename to meta-oe/recipes-dbs/mysql/mariadb/my.cnf
-diff --git a/meta-oe/recipes-support/mysql/mariadb/mysql-systemd-start b/meta-oe/recipes-dbs/mysql/mariadb/mysql-systemd-start
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/mysql-systemd-start
-rename to meta-oe/recipes-dbs/mysql/mariadb/mysql-systemd-start
-diff --git a/meta-oe/recipes-support/mysql/mariadb/mysqld.service b/meta-oe/recipes-dbs/mysql/mariadb/mysqld.service
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/mysqld.service
-rename to meta-oe/recipes-dbs/mysql/mariadb/mysqld.service
-diff --git a/meta-oe/recipes-support/mysql/mariadb/remove-bad-path.patch b/meta-oe/recipes-dbs/mysql/mariadb/remove-bad-path.patch
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb/remove-bad-path.patch
-rename to meta-oe/recipes-dbs/mysql/mariadb/remove-bad-path.patch
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.57.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.57.bb
-diff --git a/meta-oe/recipes-support/mysql/mysql-python_1.2.5.bb b/meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mysql-python_1.2.5.bb
-rename to meta-oe/recipes-dbs/mysql/mysql-python_1.2.5.bb
+rename from meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb
+rename to meta-oe/recipes-dbs/psqlodbc/psqlodbc_09.05.0300.bb
 -- 
 2.7.4
 
