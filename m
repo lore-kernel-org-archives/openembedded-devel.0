@@ -1,51 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 77696788A0
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F535788CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:33:56 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id l131so5438706pga.2
+	Sun, 25 Feb 2018 21:33:57 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id y8so5432250pgr.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:33:58 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=F1rD8Ce2P9NU/ApckoLtaCctBBt+ik+H5ytgNTBnAsM=;
-	b=iAkvmXaIeUM0eqCyzh+8dkviLvQpgHyiOKd3abGjY5zk7cNLAOaq3elsfq8nCnc6kM
-	SdMS5GSKRoHM759nf5539rd0Pu2NpgxOJCbo1iBc2OA4h3J1haFPe2KgEmcNVgAnCb0F
-	EnGfO/UTP02oC7mwvZBKeGE1tPHcXEb/2P3gavWNkS3oBievlk/+a4G46l37o7ehozp0
-	QVUf9Mf6qwx62TztehVovvA02ceu/QWqW2qUONsaVof6t+HBUPGcoEg9yPbyq3NBW+Ho
-	SDfHwYfgKeoa73Ek+ksJ7awBGJCgiz7wj2LU+fNoBNNn2S2OAcx0cCakDzZ4vZodv2bB
-	7jTw==
+	bh=+qkFT42czVa52ieccNp4S++Bal8wKlaC9hnkvp4Z4p4=;
+	b=phAy/YapXEAyJfKofBhP8mRYuXCtGUOIlwoj8aymMefUhwEJB7bv907N3qmh8fNLbY
+	1tNt3ZmE1SPUFRCdT6hUcScqeNvk6jifxv5rRrAXxhrIL0mzRN7190/rI3eJFP9PxTfB
+	t2B/UuSAmlGVobqfyyrZk6yOfnoz++vVyrQHg+18um4VpBERRt2Brau9m6347l6UWX2r
+	EkKwiVXytCLUVQeE0njkfEHneyRDqQ0SI8vAsVklROvNSBSwflEPNJdRGhaNO+T5a3Ad
+	BWyqn5XrP3SEMI0o8SsHKZzR8Rxcn5jMHrWCN6pgaj3SVRmIqmQIEoPAKh3f35BMJvzN
+	U2zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=F1rD8Ce2P9NU/ApckoLtaCctBBt+ik+H5ytgNTBnAsM=;
-	b=mQ6quHJXXrwZ5z374OrdF45zKFLajWG1Dz1PUyLWbUgNLQVY0WlFRhKr1Xvhglflq9
-	CS2lhRsQC8pjNNwWV4+vfsecnLmgN+zJ5HN0F+aAatji7GiblBhZzKQHJgs5ms7gjmio
-	nvrMs/JHaOm9uxA7TKMFvFvtdubob718TCAFDlWnKLiFFofvCXZIyoWy0GD+3t6HhIUK
-	HJJKnLzxHAOiFXX0kWppXRN3UporsVNomLBG9SYHJu94rfn7Wjyc8V/q98VQMU8pUEFe
-	Vb8pAkGnx6w3a6rvdc2KXWTU2ERjOmePpJD5BV7ZWPdAbs7hVLnQzkU8Sez74FaIvMYv
-	DAEw==
-X-Gm-Message-State: APf1xPAPAuaRayXRAPctuEvLGn1MsLyYSx+3F0Px/94zdU7W9MNzIGvv
-	AvvLv7MuJD6Ekhwlp897K4QM3Q==
-X-Google-Smtp-Source: AG47ELumtYsRo11BOKeIymek0NnbpriyPPXQ1t6z4jH7DFWU54c/8O1z14XXem4Ci59mQBKYtbWb0A==
-X-Received: by 10.98.65.72 with SMTP id o69mr6410049pfa.97.1519594437950;
-	Sun, 25 Feb 2018 13:33:57 -0800 (PST)
+	bh=+qkFT42czVa52ieccNp4S++Bal8wKlaC9hnkvp4Z4p4=;
+	b=DZDav0WsjMSZjGeJPYXN6exChv6O+z2zeaFBOFjgkqsKrEJtknBAY1XP9x1XyPbMdI
+	MJ0kAom4M2IjKXDJGchb8tSncdItWsPYGUhxBZqQGZ0AFlx12hvxWMf1CTw13tlXHIJZ
+	nKS+1w2Tae/jn/CE/CO+rXZv8gI7R8Ytm4A3kSLUT9StJxgdnyEuSAZudhRqPWLtaYW8
+	sQVfCHuUF2zY9eV7a3sbot4IhNbpRFWg6796tE2xKOHlO5YAPKI+jkdnzhj9PJE64jfh
+	akwMzT1ARu84vHEUwtHs4cOzQr0TfIUr7NFvlM3wKOgMYWc/yn/JiSKKbwLrWVbKfkgZ
+	mN2Q==
+X-Gm-Message-State: APf1xPDczzGKIzZNZmCDhbkr9KiSaftGFmktXHLDZxfIcy10rmoAdu3D
+	XlbxiLlaam+mhzi81Cr8+xtcjQ==
+X-Google-Smtp-Source: AH8x225T4+jn/KNHqFw80VJZvBVsHUYkfLT8Kct3Eh2cyo+GUsC0KW35oui30k4FHwIvn1u788j6yQ==
+X-Received: by 10.98.234.22 with SMTP id t22mr8454634pfh.56.1519594438839;
+	Sun, 25 Feb 2018 13:33:58 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
 	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.33.57
+	64sm12014600pgj.39.2018.02.25.13.33.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:33:57 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:58 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:33:19 -0800
-Message-Id: <1519594406-24490-29-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:33:20 -0800
+Message-Id: <1519594406-24490-30-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 29/36] flashrom: move to recipes-bsp
+Subject: [meta-oe][PATCH 30/36] efibootmgr: move to recipes-bsps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,36 +58,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:33:56 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 21:33:57 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../flashrom/flashrom/0001-Remove-undefined-behavior.patch                | 0
- .../flashrom/0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch   | 0
- meta-oe/{recipes-extended => recipes-bsp}/flashrom/flashrom/sst26.patch   | 0
- meta-oe/{recipes-extended => recipes-bsp}/flashrom/flashrom_0.9.9.bb      | 0
- 4 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-extended => recipes-bsp}/flashrom/flashrom/0001-Remove-undefined-behavior.patch (100%)
- rename meta-oe/{recipes-extended => recipes-bsp}/flashrom/flashrom/0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch (100%)
- rename meta-oe/{recipes-extended => recipes-bsp}/flashrom/flashrom/sst26.patch (100%)
- rename meta-oe/{recipes-extended => recipes-bsp}/flashrom/flashrom_0.9.9.bb (100%)
+ meta-oe/{recipes-extended => recipes-bsp}/efibootmgr/efibootmgr_0.15.bb | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-extended => recipes-bsp}/efibootmgr/efibootmgr_0.15.bb (100%)
 
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom/0001-Remove-undefined-behavior.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-Remove-undefined-behavior.patch
+diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.15.bb b/meta-oe/recipes-bsp/efibootmgr/efibootmgr_0.15.bb
 similarity index 100%
-rename from meta-oe/recipes-extended/flashrom/flashrom/0001-Remove-undefined-behavior.patch
-rename to meta-oe/recipes-bsp/flashrom/flashrom/0001-Remove-undefined-behavior.patch
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom/0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/flashrom/flashrom/0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch
-rename to meta-oe/recipes-bsp/flashrom/flashrom/0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom/sst26.patch b/meta-oe/recipes-bsp/flashrom/flashrom/sst26.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/flashrom/flashrom/sst26.patch
-rename to meta-oe/recipes-bsp/flashrom/flashrom/sst26.patch
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom_0.9.9.bb b/meta-oe/recipes-bsp/flashrom/flashrom_0.9.9.bb
-similarity index 100%
-rename from meta-oe/recipes-extended/flashrom/flashrom_0.9.9.bb
-rename to meta-oe/recipes-bsp/flashrom/flashrom_0.9.9.bb
+rename from meta-oe/recipes-extended/efibootmgr/efibootmgr_0.15.bb
+rename to meta-oe/recipes-bsp/efibootmgr/efibootmgr_0.15.bb
 -- 
 2.7.4
 
