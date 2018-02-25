@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B020787ED
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 78C8B7886C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:33:46 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id q13so5717148pff.0
+	Sun, 25 Feb 2018 21:33:47 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id 17so5706725pfw.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:33:47 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=xBcwUSOpGonBJntB9L9K1ZUgghHsvAZAriMVlPvXWMY=;
-	b=vZNcVYJWofE23wFkFmN5EiwyxSviyUSwU+EOJrRokDRGm5L0iNl2iitvNf+yTNL2Si
-	jQIDGEzmh5S4AbLjVhjzdYVN20x12FELKA3spYksdiXSRmWh50HuLRishDq8djMOR/W3
-	12z6h5X5iP/gMQ5u+r9SRNICBi07pAbl0BghiiKj1D79ktNMFgvLGXUeaZ7boWE14M3C
-	4ARscEhXsOHwieaGV4Gy/RsJQo8QPfWCRCwRLQ3TGAHH0MNJ4tDVt6npRpJ2SvyKh/ho
-	lbLkALVa9ArcRqRuAcSNH3pXlKsrUqp6sHkxDb/sYhiEzke26PkxqCHJ9xCVLqahSTrq
-	X2XA==
+	bh=SXlnfArKhiGNFYbZMGRNfwSidOQO0w+nTl5f1C8Va2A=;
+	b=d53h+avbTZZ/MGZZL+mhpgc47B7R5lfKc3ikKF2+YxTk6mfvtdh3941rRBZTbDcb2L
+	sjEhYZjFxOdKYBbPiOUEcT89yrFL1wb7VWpprKhzvab3jDvJs50nJkZyevU32MWigMnx
+	Mj0Gm/coNdcyxTjismKw267S4gQ+XtIPiKU6k+oQOOZVmjOhsH7CbqkmDWj+7U5mJiKO
+	keeXmtOnRvrl9k4ppl5QeDRH4e57JwlyYQzeswMJ8SPjTRUw7KshtfC6y+utSa9uK5EL
+	NzcHNph0Q2gsaYto9gzC8ycztprE1tjhOCxkfuIKPj9jBAGimALprMUtP3x1a1rjuKqE
+	LxlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=xBcwUSOpGonBJntB9L9K1ZUgghHsvAZAriMVlPvXWMY=;
-	b=FDlYV4kjQtcjaF0BEVVldvuP2+qcSKyZoVH63kAfatzRx6cJRH5UZFXZODF6bQkZTw
-	3gTgX8GKR/0d0dyQVN34JM14B5ubr/qECxk2Xi4tsNuymvqOf9Pemkr4aqlpFd/rgF3P
-	1GxbS8QDGmV7nah+jKPtSRZW0lIuLL7w4R4FHcCVop2ZxkWkJYSjlXP9bNQS9ErUpCGS
-	vU4eG7xDS6VfrLcAMpbyjObcjFyq4v907ZKBO5GLt5e7zLKpTcgxv5GNh2YjgaJeL/ZE
-	UCMdb4XTo2ZBonxhx6lSfSJxPd5mafkeArjFCP4m0Px67eexq09LL6p3h7IE8Pdvtmsh
-	f68A==
-X-Gm-Message-State: APf1xPCPM1ifdqs5XHbL1Ph0hUgrxmT/RfnEzdZLZ2Kou2fXLDC6PuW2
-	1iJsy3vb+QDCyhCwLA03UgB1Jg==
-X-Google-Smtp-Source: AH8x225iuoUzEse6Chb2bkvUdpGIW6GRhGjzQhM81Lddp9T4EHpuE9HSe0VLo/In1adO4yICu37xNg==
-X-Received: by 10.98.137.147 with SMTP id n19mr8525482pfk.193.1519594427484;
-	Sun, 25 Feb 2018 13:33:47 -0800 (PST)
+	bh=SXlnfArKhiGNFYbZMGRNfwSidOQO0w+nTl5f1C8Va2A=;
+	b=cHmT50oFeJet3nlRtacLi2n4xhSiCFGYEiKm24h+MqLHbP3EZ4P6Sq1mjumh+OFAMJ
+	f+Kr/mu9yRjRby4AHYNH2kfOsqB2vtJfAWNxegJSo7cNIzbmhzzgFjN7ZcckFL+ndNJO
+	XKtiJgMUK/YOLwAK1LzGNwYFzjGsuNrDANMvIhumuMzOgrYJbn+uQ41iOgf1BXBTNPl5
+	uaGXkuCuF7htZJ7CdBHb7qzPwT1jT8HCdTmjE5h3PYlFlXQ/9FCwjbTQOJ1ZQvmmtM3M
+	DtwoB1zuINNxm1JLV/hbs7YljwJfCuLdpsBNmzjcLSAJNBCfxsQxJG+kvdgVXuVi20HF
+	r58w==
+X-Gm-Message-State: APf1xPBCOuENJqkLdacwqTrbyf6sXcvNCs13ZWSMCXyf6YmJ2gsSLRgW
+	I0QfMIy3/0chnQS4q3UM8P0H3g==
+X-Google-Smtp-Source: AH8x227p+nDN2taZMsbZpNf7qrCKX8/xScD8XYi3/0JVYrTwuuktuoefY75jQDIRtwWczs66scHb6g==
+X-Received: by 10.98.13.24 with SMTP id v24mr8384569pfi.89.1519594428559;
+	Sun, 25 Feb 2018 13:33:48 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
 	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.33.46
+	64sm12014600pgj.39.2018.02.25.13.33.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:33:47 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:48 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:33:09 -0800
-Message-Id: <1519594406-24490-19-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:33:10 -0800
+Message-Id: <1519594406-24490-20-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 19/36] cpufrequtils: move to recipes-bsp
+Subject: [meta-oe][PATCH 20/36] lm_sensors: move to recipes-bsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,24 +59,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:33:46 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 21:33:47 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch                | 0
- meta-oe/{recipes-support => recipes-bsp}/cpufrequtils/cpufrequtils_008.bb | 0
- 2 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-support => recipes-bsp}/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch (100%)
- rename meta-oe/{recipes-support => recipes-bsp}/cpufrequtils/cpufrequtils_008.bb (100%)
+ .../lm_sensors/lmsensors-config/fancontrol                                | 0
+ .../{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config/sensord  | 0
+ .../lm_sensors/lmsensors-config/sensord.cgi                               | 0
+ .../lm_sensors/lmsensors-config/sensord.conf                              | 0
+ .../lm_sensors/lmsensors-config/sensors.conf                              | 0
+ .../{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config_1.0.bb   | 0
+ .../0001-lmsensors-sensors-detect-print-a-special-message-whe.patch       | 0
+ .../0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch       | 0
+ .../{recipes-support => recipes-bsp}/lm_sensors/lmsensors/fancontrol.init | 0
+ .../{recipes-support => recipes-bsp}/lm_sensors/lmsensors/sensord.init    | 0
+ meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors_3.4.0.bb    | 0
+ 11 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config/fancontrol (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config/sensord (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config/sensord.cgi (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config/sensord.conf (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config/sensors.conf (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors-config_1.0.bb (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors/fancontrol.init (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors/sensord.init (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/lm_sensors/lmsensors_3.4.0.bb (100%)
 
-diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config/fancontrol b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config/fancontrol
 similarity index 100%
-rename from meta-oe/recipes-support/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
-rename to meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
-diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
+rename from meta-oe/recipes-support/lm_sensors/lmsensors-config/fancontrol
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors-config/fancontrol
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensord
 similarity index 100%
-rename from meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
-rename to meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
+rename from meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensord
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord.cgi b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensord.cgi
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord.cgi
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensord.cgi
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord.conf b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensord.conf
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors-config/sensord.conf
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensord.conf
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config/sensors.conf b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensors.conf
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors-config/sensors.conf
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors-config/sensors.conf
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors-config_1.0.bb
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors-config_1.0.bb
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch b/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch b/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/fancontrol.init b/meta-oe/recipes-bsp/lm_sensors/lmsensors/fancontrol.init
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors/fancontrol.init
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors/fancontrol.init
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/sensord.init b/meta-oe/recipes-bsp/lm_sensors/lmsensors/sensord.init
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors/sensord.init
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors/sensord.init
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.4.0.bb
+similarity index 100%
+rename from meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+rename to meta-oe/recipes-bsp/lm_sensors/lmsensors_3.4.0.bb
 -- 
 2.7.4
 
