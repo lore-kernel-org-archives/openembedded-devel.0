@@ -1,52 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 6632E785EE
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id DDD556006E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:31:16 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id s13so8109235plq.6
+	Sun, 25 Feb 2018 21:33:26 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id d26so5711576pfn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:31:18 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=WRB3GKdIoWmyelIqahNClPe9gI4hGbRB2Yq1NwfV4ew=;
-	b=QW6g5Q3f7zZ2YeQGC1SR2CMf1FlBKbmITFjZDP5bCcGNeYPUIRR714q6mYGBDZEihG
-	ZouSyYFvFHdR/0I3lkkQqO4rKZyP7WG2PtglIFTEuOC4J7KS0WqRAN41Ac43AhqnsTGU
-	8aHUjqTe83Cv1WnpRph2Gfovv//5VsgwG6Ezi2JkPcDdnJdseiBzIqNsZx1bZ0cbhzJ8
-	mA2bt5Wb1jwWExekHzA9YFM3+NdeywoQqqUkJWMBcr+wkCUjSLEuRoAURufLqPu1yYwm
-	fOk9oB5vTYXW97BD3P4r04F7wq1+kHYfl+bnuVzXnM8mVOjJQvNP/7MxjN7yYlojqLh6
-	XskQ==
+	h=from:to:subject:date:message-id;
+	bh=V2fG2/SAEIr3u/E9nRtU1BgdMiMlGpSXGh7KDMcFb/s=;
+	b=Xfw8vzBGWWM2bWnCiq5HS1EHLOEzSJxL/CEoE2FXJtSFtmjOrujS9yDZP4CQTDq0A+
+	tJhu4ATbw7lJrGS1kGoXg9ISHpfW+a/ODNC9CNC0j9mVut3ahivz+Cd9Vk15mjTqBF0m
+	L+qVscQOoeUOwkwiFm6oJjPtgExBMHRnD7RE/NhNghsKQ1w/FHa/MWJ/yzK7ZTp1FTW+
+	DxV9zxe4HTyjbcaDaiKhT9w8v8g1/d7dBa1oI6HYsURGH+4xg+4FQljGa9vNPxSv/XF3
+	dfxollKmnHmvEzSN1mzr2sg3wJEE0HbwPp05mlIgirzsJmjz24qUgt3Yb+pOtb+TheLP
+	y3Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=WRB3GKdIoWmyelIqahNClPe9gI4hGbRB2Yq1NwfV4ew=;
-	b=WtiZnhtDqVt0I2GSziJACwP/vomrn1v6GCgD44P5bE5XpyZkr8v16pEh9CQVjilEwB
-	jUKquQ0o0wrXpgBEI7jptXHb5kv8e9svmhBReDgxw7p8wGKjtWp/n8gud+Taz0vU+VW4
-	xOOzCKZxDiBfksu9H4Dyoch8sJtZjEWgw3uFe+oBwRlqtSSNJ3BSjsYzZTjA1aWLlmvq
-	jO3c8HB/A1o5YQ887lyWVAktUiosFE/bqNZ01yn50QAgg/aJW3lkahgr1QyTgj3GepEs
-	v41+/pvks/lFPN5Selhr78g0VZj/WUdZkGIEtnQVj6NQbmyfYK8kLCrB6qig/7gJG0XZ
-	BpdQ==
-X-Gm-Message-State: APf1xPAfT0t7zQ1NZ0c2UgkOm/TRRcs2VQhmk/mXjcrQSQAtaSEsd6Qb
-	e6euTKAf17nkee653cHx9agMgA==
-X-Google-Smtp-Source: AH8x226zBkBAdRgD3v4B/a0K08irVvrA8tPBWQsnAg+Tb88bTOYtEFlDWkw3PT+f8pO2CqNpSL804Q==
-X-Received: by 2002:a17:902:6b43:: with SMTP id
-	g3-v6mr8314879plt.177.1519594278428; 
-	Sun, 25 Feb 2018 13:31:18 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=V2fG2/SAEIr3u/E9nRtU1BgdMiMlGpSXGh7KDMcFb/s=;
+	b=OIYx4lakdcECWGff4SlimaJ+R3pzQvUE+tFp+VxrLY87qWIVa1eDQQaDo/4N13mYXt
+	d4xVtheqfF/hLuLVg+W7So1//9IvgrY3VuxzzAeek+psoBe5eQ8G6y3kw39DDNL3APqy
+	ckaBTwg+YW+2ziFpRuavnbUf2GUVubEf7GnG484vDn6OhLNDDScLkRABWjqK7jHrnnEf
+	7dyw0NpVacpHy2+qCsdwy8VOmVk6owESpLFFPEpAeSJ0AxrEnhES47C124O0k65gWz0C
+	oGRK6lDM4O8ZFP3K6F4Ex+ULbRcxoXhnYce6ewgbLbuuuGUrJd0EZUdEuk7UM9iKeRcH
+	JFkQ==
+X-Gm-Message-State: APf1xPBx9nNxMLMXQusRUk2H+Y2CWNt1MT4HJYpyVSLSNPGkJECXOnYv
+	IBrrD8mfw+7AdR0sE60GEcIpwQ==
+X-Google-Smtp-Source: AH8x224SreadECTcD/Npn6IJbm0bNOgavguJrnOXytaVoKosM/c78UMdHXfNBE+hKnp7O/pFGGVnlQ==
+X-Received: by 10.98.234.22 with SMTP id t22mr8453847pfh.56.1519594408055;
+	Sun, 25 Feb 2018 13:33:28 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
-	by smtp.gmail.com with ESMTPSA id f3sm12467918pgn.9.2018.02.25.13.31.17
+	by smtp.gmail.com with ESMTPSA id
+	64sm12014600pgj.39.2018.02.25.13.33.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:31:17 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:27 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:31:12 -0800
-Message-Id: <1519594272-24403-2-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:32:51 -0800
+Message-Id: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1519594272-24403-1-git-send-email-akuster808@gmail.com>
-References: <1519594272-24403-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-networking][PATCH 2/2] openl2tp: fix compile issue with 4.15 kernel
+Subject: [meta-oe][PATCH 01/36] zsh: move to recipes-shells
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,79 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:31:17 -0000
-
-see: http://errors.yoctoproject.org/Errors/Details/168101/ for errors.
+X-List-Received-Date: Sun, 25 Feb 2018 21:33:27 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../openl2tp/openl2tp/fix_linux_4.15_compile.patch | 44 ++++++++++++++++++++++
- .../recipes-protocols/openl2tp/openl2tp_1.8.bb     |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp/fix_linux_4.15_compile.patch
+ meta-oe/{recipes-extended => recipes-shells}/zsh/zsh_5.3.1.bb | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-extended => recipes-shells}/zsh/zsh_5.3.1.bb (100%)
 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/fix_linux_4.15_compile.patch b/meta-networking/recipes-protocols/openl2tp/openl2tp/fix_linux_4.15_compile.patch
-new file mode 100644
-index 0000000..4597df8
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/fix_linux_4.15_compile.patch
-@@ -0,0 +1,44 @@
-+This fixes a compile issue introduced with linux kernel 4.15
-+
-+include/linux/in.h:222:8: error: redefinition of 'struct in_pktinfo'
-+|  struct in_pktinfo {
-+
-+
-+Upstream-Status: Pending
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+Index: openl2tp-1.8/plugins/ppp_unix.c
-+===================================================================
-+--- openl2tp-1.8.orig/plugins/ppp_unix.c
-++++ openl2tp-1.8/plugins/ppp_unix.c
-+@@ -25,9 +25,14 @@
-+ #include <fcntl.h>
-+ #include <sys/types.h>
-+ #include <signal.h>
-++#include <linux/version.h>
-++
-++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
-+ #include <net/ethernet.h>
-+ #include <net/if.h>
-+ #include <netinet/in.h>
-++#endif
-++
-+ #include <arpa/inet.h>
-+ #include <sys/stat.h>
-+ #include <unistd.h>
-+@@ -41,12 +46,12 @@
-+ #define __user
-+ #endif
-+ #include <sys/ioctl.h>
-+-#include <linux/if_ether.h>
-+-#include <linux/if_pppox.h>
-+ #include <linux/ppp_defs.h>
-+ #include <linux/if_ppp.h>
-++#include <linux/if_pppox.h>
-++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
-+ #include <linux/if_pppol2tp.h>
-+-
-++#endif
-+ #include "usl.h"
-+ #include "l2tp_private.h"
-+ 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-index bf6850b..1f6b4de 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-@@ -33,6 +33,7 @@ SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
-            file://openl2tpd.service \
-            file://openl2tpd-enable-tests.patch \
-            file://run-ptest \
-+           file://fix_linux_4.15_compile.patch \
-            "
- 
- SRC_URI_append_libc-musl = "\
+diff --git a/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb b/meta-oe/recipes-shells/zsh/zsh_5.3.1.bb
+similarity index 100%
+rename from meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
+rename to meta-oe/recipes-shells/zsh/zsh_5.3.1.bb
 -- 
 2.7.4
 
