@@ -1,52 +1,43 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 899297876D
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B132787D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:34:03 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id q13so5717294pff.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:34:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=RfkO4pEr9CthMSj6w5MWYKGVfnKAzBe1wd3evsp5PmM=;
-	b=Dg4fOtMkfGCmPPZ3G8HVzPdFIivt8TvVJoy7K4DW3Y3amOcc+z4IWPiEfKBp4vVVhI
-	I0mIfT5QGe9ueLF4axdx4Az6iThuG5fhf3qv3pc5/M4qFiL4HSa5iGAvbeNr145hSvDN
-	Al1fPQSqQqNbv5EwxAJqOboZMeugQJnPPFaNl2YTQ5YRHUdT05vte+AS5fWg1nn85Xgr
-	uBUgC8vDRRszI9/YkaSDdxx6Ac9NGnoOGSrrOwbcV5cedOcZ7jxN/zj43zzx4SrmeB2T
-	qtJk9QzZxCw/CtpBbxzIunzNQgGzSZMTDckMTRL9D1uAn92BO4RMitER4U1K/RYRyYRO
-	NKRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=RfkO4pEr9CthMSj6w5MWYKGVfnKAzBe1wd3evsp5PmM=;
-	b=KQ9NlqJpCI/Vv7qZgDsQACc/ekD8148+sgbnqJY3en6puLdgTY+8whFCrQ1Atp7FJc
-	1l6QR3Te1DfqevsVI0uz8+ALvbsRPvEM1wW2CW7ZwYjthrBqbAq5Lc40FZ93yQNu6cyi
-	8AmOxibZ6A/p4bBs4UFbStnSWO/oHePMu0unYYILyhJVvM98FXq/WR5XC4Zqxr6+5liJ
-	XyIwRBODM4o0Hxexpiv9NaGDUbiZxIGNBtCIEx1zm2HLp4Rc/Gvy1e5viTfmMWMY18L1
-	EDUfvcMFXZHkWYfaT0qJFixOqyhJGWzubd0oLk1eXH7lUkLp70VBFLTOlAtuawZ7PONZ
-	rzzA==
-X-Gm-Message-State: APf1xPAVjNzQrbXuvEvx4WVdf1eS0G5RCWSV4Gy7c43tR2cIeTPNjdU0
-	ORPyLcqnNhSeGPKcimCDhdH4CA==
-X-Google-Smtp-Source: AH8x2251Q9UlkVxS1Rz8LSASWWN6yBFEqH3JTxnpukiEiFYCuL/C1o0aeH50S4Bcm3n7HO8zpmZ+ug==
-X-Received: by 10.101.81.12 with SMTP id f12mr6639053pgq.81.1519594444818;
-	Sun, 25 Feb 2018 13:34:04 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
-	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.34.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:34:04 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:33:26 -0800
-Message-Id: <1519594406-24490-36-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 36/36] postgres: move to recipes-dbs
+	Sun, 25 Feb 2018 22:46:28 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1519598790; h=Content-Type: To: Subject: Message-ID: Date:
+	From: References: In-Reply-To: MIME-Version: Sender;
+	bh=kYbt6R8OZ8o6CbOLkbDmd3zf2MxMDEFF4M69t7spjRI=;
+	b=fq423HfIHCj2vRIYyQ0oJD/8QqQVALsHsaECxEh2bQ5Gc3hfb7niYR5Jnf0JgFeqtpN211i1
+	o1XaUx8gdk9Fgxu2OeDVPY/7ScQwDUMP+KTRdgVSwhEEalcC6ada7VT9koQkKZgPFcWeFV55
+	FgQAqQwOAUbllE9mDt6HbXWLjak=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
+	[209.85.216.172])
+	by mxa.mailgun.org with ESMTP id 5a933cc6.7fcbb818b730-smtp-out-n02;
+	Sun, 25 Feb 2018 22:46:30 -0000 (UTC)
+Received: by mail-qt0-f172.google.com with SMTP id m13so12036715qtg.13;
+	Sun, 25 Feb 2018 14:46:29 -0800 (PST)
+X-Gm-Message-State: APf1xPDrwRfo2TmjbRHixJQEOd5a6z3VgYTfEGcnGA3A6IlcqWTKhiqW
+	x4CqCeJVvs1Q2tJyzS2v15UKol3UOxSJbDVRdxY=
+X-Google-Smtp-Source: AG47ELsWOIzGSZJANSs/Tq9zxh4M2+VBaVL9oM8nfy9FgWABXAB/6v8PZfYB/b9ZVEl3ajTVZK43YZG5efEeZ1Gjaok=
+X-Received: by 10.200.6.5 with SMTP id d5mr14971934qth.205.1519598789098; Sun,
+	25 Feb 2018 14:46:29 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.108.75 with HTTP; Sun, 25 Feb 2018 14:46:28 -0800 (PST)
+In-Reply-To: <CADNbA1rnfQfQJ-78WFXdJHeZKGQXPnQ+hUY1zFi0SEDRiew4ig@mail.gmail.com>
+References: <966e95a6-4401-5c12-b69c-9bd37bb236fd@gmail.com>
+	<CADNbA1rnfQfQJ-78WFXdJHeZKGQXPnQ+hUY1zFi0SEDRiew4ig@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Sun, 25 Feb 2018 17:46:28 -0500
+X-Gmail-Original-Message-ID: <CADNbA1q9b5+ehN=d=p+ymLYKnRBWR6SwgVaqfU=hNhiwxU4WFg@mail.gmail.com>
+Message-ID: <CADNbA1q9b5+ehN=d=p+ymLYKnRBWR6SwgVaqfU=hNhiwxU4WFg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [OE-core] [RFC] meta-openembedded/meta-oe re-org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,73 +50,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:34:03 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 22:46:29 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch      | 0
- .../postgresql/files/not-check-libperl.patch                              | 0
- .../postgresql/files/postgresql-bashprofile                               | 0
- .../{recipes-support => recipes-dbs}/postgresql/files/postgresql-setup    | 0
- meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql.init | 0
- meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql.pam  | 0
- .../{recipes-support => recipes-dbs}/postgresql/files/postgresql.service  | 0
- .../postgresql/files/remove.autoconf.version.check.patch                  | 0
- meta-oe/{recipes-support => recipes-dbs}/postgresql/postgresql.inc        | 0
- meta-oe/{recipes-support => recipes-dbs}/postgresql/postgresql_9.4.15.bb  | 0
- 10 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/not-check-libperl.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql-bashprofile (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql-setup (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql.init (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql.pam (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/postgresql.service (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/files/remove.autoconf.version.check.patch (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/postgresql.inc (100%)
- rename meta-oe/{recipes-support => recipes-dbs}/postgresql/postgresql_9.4.15.bb (100%)
+On Sat, Feb 24, 2018 at 12:56 PM, akuster808 <akuster808@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
-rename to meta-oe/recipes-dbs/postgresql/files/0001-Use-pkg-config-for-libxml2-detection.patch
-diff --git a/meta-oe/recipes-support/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/not-check-libperl.patch
-rename to meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
-diff --git a/meta-oe/recipes-support/postgresql/files/postgresql-bashprofile b/meta-oe/recipes-dbs/postgresql/files/postgresql-bashprofile
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/postgresql-bashprofile
-rename to meta-oe/recipes-dbs/postgresql/files/postgresql-bashprofile
-diff --git a/meta-oe/recipes-support/postgresql/files/postgresql-setup b/meta-oe/recipes-dbs/postgresql/files/postgresql-setup
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/postgresql-setup
-rename to meta-oe/recipes-dbs/postgresql/files/postgresql-setup
-diff --git a/meta-oe/recipes-support/postgresql/files/postgresql.init b/meta-oe/recipes-dbs/postgresql/files/postgresql.init
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/postgresql.init
-rename to meta-oe/recipes-dbs/postgresql/files/postgresql.init
-diff --git a/meta-oe/recipes-support/postgresql/files/postgresql.pam b/meta-oe/recipes-dbs/postgresql/files/postgresql.pam
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/postgresql.pam
-rename to meta-oe/recipes-dbs/postgresql/files/postgresql.pam
-diff --git a/meta-oe/recipes-support/postgresql/files/postgresql.service b/meta-oe/recipes-dbs/postgresql/files/postgresql.service
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/postgresql.service
-rename to meta-oe/recipes-dbs/postgresql/files/postgresql.service
-diff --git a/meta-oe/recipes-support/postgresql/files/remove.autoconf.version.check.patch b/meta-oe/recipes-dbs/postgresql/files/remove.autoconf.version.check.patch
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/files/remove.autoconf.version.check.patch
-rename to meta-oe/recipes-dbs/postgresql/files/remove.autoconf.version.check.patch
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/postgresql.inc
-rename to meta-oe/recipes-dbs/postgresql/postgresql.inc
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb b/meta-oe/recipes-dbs/postgresql/postgresql_9.4.15.bb
-similarity index 100%
-rename from meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_9.4.15.bb
--- 
-2.7.4
+> Hello,
+>
+> I am planning on moving some recipes to new locations that are more
+> in-line with their function.
+>
+> Also, I plan on adding *-shells, *-dbs, *-security and *.crypto and
+> moving the appropriate recipes there.
 
+
+I can take maintenance of *-shells and *-dbs once you merge things in
+unless someone else wants to take them on.
+
+-Derek
+
+
+> This might help facilitate folks signing up to maintain a grouping like
+> recipes-crypto if that is their thing.
+>
+>
+> I will be sending out patches later today for review.
+>
+> I have staged the changes @
+> http://cgit.openembedded.org/meta-openembedded-contrib/log/?
+> h=akuster/meta-oe-reorg
+>
+> - armin
+>
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>
 
