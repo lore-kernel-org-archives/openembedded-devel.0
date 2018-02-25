@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 52CE2787EE
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 394D07881D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:33:36 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id d4so8116707pll.5
+	Sun, 25 Feb 2018 21:33:37 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id f23so8114577plr.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:33:37 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Eumqhs9dcdmWfoQQTbWSZ85COdEPnvh06V6+o+rUtAY=;
-	b=aB48yAxLPmH3lzhb2uw7n1f58cNWlnQeWRJ6ixuIhwi7WPzDvrG+ixfi8f4SWYQa44
-	NTVYBURgdsr91tse6TrtjLxY4jeL+nSpS0n4Tj5tdRwaisjktESRYjOY7/X1ktKCY2c+
-	vblv0p7DMlDfJgpr+vMdkfdj3TCZbz6edaXmM3ahGB3EarY+IkZzlIEZxLJmWzd9/qbv
-	x5PUVA7LrIXDUQMUTIiyh4xHTecLLb1nqtsWwD86qzKKtrHLup3eOCcz/mIWZXSpw2jr
-	UeZEPffvYpXvJVxpXi03tvVQCyUkq/FD4S40l3qCcoYqHGI+9bZ/RJUC+z8Zjrd0Lg5u
-	r70g==
+	bh=gOJUSuAAhKdDYCgI5eF/HaaTcmFEHuaDzTPN1KJ7fYw=;
+	b=jM4FS8KdqMBDtzkzVM5spoK1dh3pgDBrDxL/MgaD2PFrKSuj9CcMO5KzqMRrsbl979
+	488nAeLjPgPoHAGjZVttLPH75+Te1Z9Yrf/xBaXtFNfJRmMTDgyAnVp27qROIGHBkoVy
+	LmAPXHHV0gHNr2hsxQkyJr3THjUYVDRGhPg9LHz+67thjKtxr81hq6II1us1jQZY7Gam
+	LNAxTXwpGjuytmoQqLT6ccwbTF1bETr37RUjQt1tr9C9YONhbw56SiOmhotKZ8GDlDag
+	QIrqzmRDAvJXCZb1oq/qScfdTu+ttKivx4MOn5uT4o8xgXo3E04x3ZxKOpF9Iq3RXYbm
+	wpuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=Eumqhs9dcdmWfoQQTbWSZ85COdEPnvh06V6+o+rUtAY=;
-	b=qqnkncjAQq4Jja5qKW7ZIS7zzWa1q/lKpXnsXpvfDts3BSLzuy2lT82ebm9+c22zZj
-	lvLXYzjhM/N/1JXVYOzVfNoD+UVPX452zo2urIhi2n9HKK0OSqiRjIWR4UDlRWCyKPRb
-	F2uOPJL5ySeD4v3AThDOqH97PG6PgIzAZMG9plT37DrpY2KnyDa3hBUak1bY/li7kjJd
-	OZYJDvySC+5pZPVnU52SS/pJd4QFVxaNKHttlaxG+WuOfbqXzHQL1EvKAkYboTGkyn26
-	d+uZuLr1N9hxNlyNYp/APvVcwFHr8CyX462UOwjLneVOahCknYZ5KI/Wr7ncUdazGZ03
-	xh0Q==
-X-Gm-Message-State: APf1xPC70oMiqPIbtHGg83tPW4nHRGjkborFR6BY9KGkS8cXjS23lpcw
-	n/8vcMMF+BTQiBIFHl35f48ZIQ==
-X-Google-Smtp-Source: AH8x225RZfwjHHVMPAu2nX6wlqKK0qwlx4wFLDg+LNtP2awLZ3jvByat0X+CK2++dTkskChc/vVYHg==
-X-Received: by 2002:a17:902:6184:: with SMTP id
-	u4-v6mr8352735plj.390.1519594417654; 
-	Sun, 25 Feb 2018 13:33:37 -0800 (PST)
+	bh=gOJUSuAAhKdDYCgI5eF/HaaTcmFEHuaDzTPN1KJ7fYw=;
+	b=W2tV7D/9ov6HagHvStDKTNq9Ucay7Nems6uAydxdwGHr8F8BnfswFpfaDRT7zDIjRI
+	CIEWUczDepT0WDRu4e/pGnHPAhy4hCAsKx1AHuLDi5ZJ2dfQUfSF1zT/ZHh6B5aro1av
+	xvpaXX8SlmxiypjmhCgn13r7Nf2z9pwo9+/aYBsjfj0j2q7dQWhgJcO2xwSTI1Mbh5GZ
+	yIx1/XR3Pp4Wl7BSM4DHyKwfsarE173bZmxblHAiIE9gUngKMZNRfYMNg2avAXs+MjIe
+	H7nQSOaY+yB0fMhmObPhE647H9uofqvWe6CSr22xvnaDMK1IOCBq3FiwGdZZf/2IaOc6
+	YQwQ==
+X-Gm-Message-State: APf1xPDLHzOy7MdMnEcb1FuXgRmhmmBoCMttoQhj35e9k4lIxW/e1u7X
+	xm98bdpcGD0PZOZf/KkoGr8JuQ==
+X-Google-Smtp-Source: AH8x2268mkJZJ8BX2wDXsOM2v5N2858XCTYmAlg7N6A44Xb7yVKTAO4sqLCDef4HCc0yqEJK58VS1A==
+X-Received: by 2002:a17:902:5269:: with SMTP id
+	z96-v6mr8494795plh.385.1519594418699; 
+	Sun, 25 Feb 2018 13:33:38 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
 	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.33.36
+	64sm12014600pgj.39.2018.02.25.13.33.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:33:37 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:38 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:33:00 -0800
-Message-Id: <1519594406-24490-10-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:33:01 -0800
+Message-Id: <1519594406-24490-11-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 10/36] ipmiutil: move to recipes-kernel
+Subject: [meta-oe][PATCH 11/36] testfloat: move to recipe-tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,24 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:33:36 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 21:33:37 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../ipmiutil/ipmiutil/fix_systemd_path.patch                              | 0
- meta-oe/{recipes-support => recipes-kernel}/ipmiutil/ipmiutil_3.0.5.bb    | 0
- 2 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-support => recipes-kernel}/ipmiutil/ipmiutil/fix_systemd_path.patch (100%)
- rename meta-oe/{recipes-support => recipes-kernel}/ipmiutil/ipmiutil_3.0.5.bb (100%)
+ .../testfloat/files/0001-Makefile-for-cross-compile-SoftFloat.patch       | 0
+ .../testfloat/files/0002-Makefile-for-cross-compile-TestFloat.patch       | 0
+ meta-oe/{recipes-extended => recipes-test}/testfloat/testfloat_3a.bb      | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-extended => recipes-test}/testfloat/files/0001-Makefile-for-cross-compile-SoftFloat.patch (100%)
+ rename meta-oe/{recipes-extended => recipes-test}/testfloat/files/0002-Makefile-for-cross-compile-TestFloat.patch (100%)
+ rename meta-oe/{recipes-extended => recipes-test}/testfloat/testfloat_3a.bb (100%)
 
-diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch b/meta-oe/recipes-kernel/ipmiutil/ipmiutil/fix_systemd_path.patch
+diff --git a/meta-oe/recipes-extended/testfloat/files/0001-Makefile-for-cross-compile-SoftFloat.patch b/meta-oe/recipes-test/testfloat/files/0001-Makefile-for-cross-compile-SoftFloat.patch
 similarity index 100%
-rename from meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
-rename to meta-oe/recipes-kernel/ipmiutil/ipmiutil/fix_systemd_path.patch
-diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb b/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.0.5.bb
+rename from meta-oe/recipes-extended/testfloat/files/0001-Makefile-for-cross-compile-SoftFloat.patch
+rename to meta-oe/recipes-test/testfloat/files/0001-Makefile-for-cross-compile-SoftFloat.patch
+diff --git a/meta-oe/recipes-extended/testfloat/files/0002-Makefile-for-cross-compile-TestFloat.patch b/meta-oe/recipes-test/testfloat/files/0002-Makefile-for-cross-compile-TestFloat.patch
 similarity index 100%
-rename from meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-rename to meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.0.5.bb
+rename from meta-oe/recipes-extended/testfloat/files/0002-Makefile-for-cross-compile-TestFloat.patch
+rename to meta-oe/recipes-test/testfloat/files/0002-Makefile-for-cross-compile-TestFloat.patch
+diff --git a/meta-oe/recipes-extended/testfloat/testfloat_3a.bb b/meta-oe/recipes-test/testfloat/testfloat_3a.bb
+similarity index 100%
+rename from meta-oe/recipes-extended/testfloat/testfloat_3a.bb
+rename to meta-oe/recipes-test/testfloat/testfloat_3a.bb
 -- 
 2.7.4
 
