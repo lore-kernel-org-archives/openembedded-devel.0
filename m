@@ -1,53 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 359E878825
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 831DB787DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:33:38 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id w21so8113068plp.11
+	Sun, 25 Feb 2018 21:33:39 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id r26so202077pgv.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:33:40 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=vFAwAGOLM33Jv2avZXHpOJWsFg8N29WQMRA85U9O6hU=;
-	b=muHa/xJwF9uy3ZDS861Egxs4C8EABEzBa6ZwQNtKZkCM+P7dSZDb4W6xzhUXOPAn0Z
-	Qh6YQGYXAcDZdQjdBSFJ61ZD/Os59N083/zsjKc1THwcBMRJ/Rn7EBxXNHO1Mt9R/Hb2
-	eQ3N+VQlEzqIIs6BIm4Rekj8NYSW4bDxZF7dlWQaMXt4FH4zL1fciPuKz5GDX7l/EFIR
-	jEAhhNqSLkdka7Sw+beJMmebZyaWEdfPory0zupTfnATdDcTTZaT3nHT8mIgOrb6uPMt
-	jj+QqfjzgdaGxCLVGlESLICZjWaYOSIeYEuNGqW3ALRozyayKx+sRPOrlckEhyQi6P7x
-	W9Kw==
+	bh=DYNxc7yM8EToyBvqMpQTf/7GLVjQYPKIpS53PqTGgjE=;
+	b=T0CDpPg0l4shzcbR2E2hksVZpyq8WA1v50e+U/HCSB1n6rb+A6pwNHZUmr88PAM0sW
+	qA/VQ6+9S8NiwotDKYCPG9cktGNItZEzHhnOsPtC2EmYKijU1STBU7fpcCLvSsk1BeHR
+	53FJgPeArBUdh8ZWC0h6mHgWS3R9L5ACb5bvYZSGeRO6uRi9mYXGmARikr15oMPA0E+4
+	Cxbtr/yC/2a42HqjyWZh5NWRjqMreAijYqX5UkP4KmBEJZQM00h7ac/BayFkXdBO8slk
+	kpk7MeMOYBojC/9fbGZEZ0emLpkpWIP82dAmLn4u9vCi2Bys437NjXaOcTF8RBAKu+py
+	BAJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=vFAwAGOLM33Jv2avZXHpOJWsFg8N29WQMRA85U9O6hU=;
-	b=byVo0lRguTCtrmksvQWsBW3ToNpUTeIHrqQb/ZInZQHTAFjWysP3ik9ShapPj8S9ms
-	lWcFHeNuPZPzUTyLne7qjDT7z2cmrYLfRYoautiQ5LvcGfR69cMCvo+1ff2PNeh5EDoG
-	YRboAaADfJCqay358NoWwUeOQ4g5LuEQClikaryWXCEZFLxU5xPYtCsbjsRalxIUy8DW
-	jm3hNLNgvS6iN5WRX6bMTlOyiOxzFb8UQHNCjkFjACzA+bxGqxJV4Mdsrb4MmkM7Tk87
-	H6CkFgVLQut/31eIMS3G7yYDaHj158B1su3uFaYUicjMABVLGYtwkO8D2lOWHmgvztOz
-	Hwbg==
-X-Gm-Message-State: APf1xPBV86Dxr1z2OsjU7kH5iWacZQEmvNfNWi1JvjYZHPv01bCimeMU
-	8MG0KNwbzaoRO//gNO98R1JCxw==
-X-Google-Smtp-Source: AH8x227D1kCYP+C8BVKqr1G87eiEEfNMBUxUKLeTGUxomWeJRMgNnSVhHTCwkg9Yy1Uby+JVVAthDA==
-X-Received: by 2002:a17:902:bc02:: with SMTP id
-	n2-v6mr8552529pls.52.1519594419793; 
-	Sun, 25 Feb 2018 13:33:39 -0800 (PST)
+	bh=DYNxc7yM8EToyBvqMpQTf/7GLVjQYPKIpS53PqTGgjE=;
+	b=cG28haIQarMe+/f+UBlXvggVMElyxGHkNztMGyEdodGjAG5AVG/3iWL97pXLUhcduy
+	i2Yh7j+G2SEK3SM+82fu8mGM9WOqkkP/u/yHmSKhqdjrP22zt/abxqptA35KO04BHZ2n
+	qEZSyKB7PSPHu1afNjUMv8aRIm1flmpBWgkj3bOlymbQrxns9o3J4Zd8djMNHAOBK63p
+	gGLgtep5am+r7Feo1v5+fS/s3H0+rDrTmHEqVjbDXCorpDW1XObxE1IavB1zAWNESwW+
+	PNSyjRbZfmY89yJY7phc2EH5NHrQo1tjAWTmJg58kTHxam0ygh839+vUSLZI9QC6y1BG
+	Ivhw==
+X-Gm-Message-State: APf1xPD7qLFT6AcwfoClwqjg0oAA4BeGtSn/OUmqTGqm0gXGIWQAJj7N
+	Lb6ZF7jhOphIjttmAlobhaHC5w==
+X-Google-Smtp-Source: AG47ELsa2Xyi5dIyqwRD5B1fDCBW7oIMgNduui/q9czMSWqoOm2ioWXnc9oeJ5WxBoXf3WLTYyAheA==
+X-Received: by 10.99.180.77 with SMTP id n13mr974430pgu.361.1519594420798;
+	Sun, 25 Feb 2018 13:33:40 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
 	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.33.39
+	64sm12014600pgj.39.2018.02.25.13.33.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:33:39 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:40 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:33:02 -0800
-Message-Id: <1519594406-24490-12-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:33:03 -0800
+Message-Id: <1519594406-24490-13-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 12/36] fbtest: move to recipe-tests
+Subject: [meta-oe][PATCH 13/36] cxxtest: move to recipes-test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,18 +58,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Feb 2018 21:33:38 -0000
+X-List-Received-Date: Sun, 25 Feb 2018 21:33:40 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/{recipes-support => recipes-test}/fbtest/fb-test_git.bb | 0
+ meta-oe/{recipes-devtools => recipes-test}/cxxtest/cxxtest_4.3.bb | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-support => recipes-test}/fbtest/fb-test_git.bb (100%)
+ rename meta-oe/{recipes-devtools => recipes-test}/cxxtest/cxxtest_4.3.bb (100%)
 
-diff --git a/meta-oe/recipes-support/fbtest/fb-test_git.bb b/meta-oe/recipes-test/fbtest/fb-test_git.bb
+diff --git a/meta-oe/recipes-devtools/cxxtest/cxxtest_4.3.bb b/meta-oe/recipes-test/cxxtest/cxxtest_4.3.bb
 similarity index 100%
-rename from meta-oe/recipes-support/fbtest/fb-test_git.bb
-rename to meta-oe/recipes-test/fbtest/fb-test_git.bb
+rename from meta-oe/recipes-devtools/cxxtest/cxxtest_4.3.bb
+rename to meta-oe/recipes-test/cxxtest/cxxtest_4.3.bb
 -- 
 2.7.4
 
