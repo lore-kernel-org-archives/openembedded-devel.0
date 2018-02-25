@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DE1B3787ED
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B020787ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 21:33:44 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id q13so5717130pff.0
+	Sun, 25 Feb 2018 21:33:46 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id q13so5717148pff.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Feb 2018 13:33:46 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=u293BbTEFQX5IDKg1P0QrsVNQjA8nXb4y7DMDfHYYO8=;
-	b=j7uFEkyWEg8caTRKkjHRNsYufWwlqEHPm1E7UIhMxvg3Z94DHvHc8nrUGe3ZOvt3U0
-	xkx9iSwv8YYLUrjSoMjd8X0/c5n4tuE04W3E7Ir1MQKbfd6JKq/pDVXPILyTjUILJUNs
-	wm3wYj3AGifvhCUBPfQTBd1Yx/5YkygIfI6PH/1I9vHQgPpQm0shmswhsFNUTbm1QW1d
-	d7xNGUeI1/UBuByf4oBodqbFw2HQYr7b+IsACXSWLN1SXyeKQeHBXHM1ag9uVN/S5WN8
-	0Fs9ec5Y5zTrc3Q8YIuS0hU+XLMMZqJdyFpi9ExVdcD6Kx9I3oyyviaER9/EfpSsV0uj
-	xV9Q==
+	bh=xBcwUSOpGonBJntB9L9K1ZUgghHsvAZAriMVlPvXWMY=;
+	b=vZNcVYJWofE23wFkFmN5EiwyxSviyUSwU+EOJrRokDRGm5L0iNl2iitvNf+yTNL2Si
+	jQIDGEzmh5S4AbLjVhjzdYVN20x12FELKA3spYksdiXSRmWh50HuLRishDq8djMOR/W3
+	12z6h5X5iP/gMQ5u+r9SRNICBi07pAbl0BghiiKj1D79ktNMFgvLGXUeaZ7boWE14M3C
+	4ARscEhXsOHwieaGV4Gy/RsJQo8QPfWCRCwRLQ3TGAHH0MNJ4tDVt6npRpJ2SvyKh/ho
+	lbLkALVa9ArcRqRuAcSNH3pXlKsrUqp6sHkxDb/sYhiEzke26PkxqCHJ9xCVLqahSTrq
+	X2XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=u293BbTEFQX5IDKg1P0QrsVNQjA8nXb4y7DMDfHYYO8=;
-	b=MuMFQwBatJX0OTgUfR/8iKZ5CGlsCdeyVlf2PQm+riaXJ47ab+a1Eh59z6nB9odgfS
-	dvMjoLIR5MeWN3MpS8yUMiyEfh3bTdEEAwWHaPfNlGN78Y3IOhMUNWLbmu5l3GxqTmOo
-	VZEsZkmUSPqy+eyVTn1OeLvNfOXLPqYZ0Bb3EMV3+CpJgtSBIrckhJm8HYFYh1oGQA2w
-	eXZaEuSqKBrrhcX0qgf9z1i0/W96X/K7xx1nnneGBXA9DPbEwbZ5ZRRin6tMoL2wMMPJ
-	xLLFUZrFDQmCpeRXQ8TUVhA5tfw17aD+7b4CJIQj/Jlv4b0Bl3m4KFn0C3AXJZfw2Mx2
-	qr0w==
-X-Gm-Message-State: APf1xPDnLnGxmn9pXc7nT925lE8+eXbLRa1w+yJN3mTZ68nqMYeHNII1
-	QDnbM8M0dtcnctz3TxHP/JjWGA==
-X-Google-Smtp-Source: AH8x226qfYOG/1Z8g5P9RBq7I5WdHNbVswQCyMOLclaM/tSaX6TPB2W1OPWHJbUgZr8Uf3tGfPOw0Q==
-X-Received: by 10.98.245.18 with SMTP id n18mr8264387pfh.25.1519594426160;
-	Sun, 25 Feb 2018 13:33:46 -0800 (PST)
+	bh=xBcwUSOpGonBJntB9L9K1ZUgghHsvAZAriMVlPvXWMY=;
+	b=FDlYV4kjQtcjaF0BEVVldvuP2+qcSKyZoVH63kAfatzRx6cJRH5UZFXZODF6bQkZTw
+	3gTgX8GKR/0d0dyQVN34JM14B5ubr/qECxk2Xi4tsNuymvqOf9Pemkr4aqlpFd/rgF3P
+	1GxbS8QDGmV7nah+jKPtSRZW0lIuLL7w4R4FHcCVop2ZxkWkJYSjlXP9bNQS9ErUpCGS
+	vU4eG7xDS6VfrLcAMpbyjObcjFyq4v907ZKBO5GLt5e7zLKpTcgxv5GNh2YjgaJeL/ZE
+	UCMdb4XTo2ZBonxhx6lSfSJxPd5mafkeArjFCP4m0Px67eexq09LL6p3h7IE8Pdvtmsh
+	f68A==
+X-Gm-Message-State: APf1xPCPM1ifdqs5XHbL1Ph0hUgrxmT/RfnEzdZLZ2Kou2fXLDC6PuW2
+	1iJsy3vb+QDCyhCwLA03UgB1Jg==
+X-Google-Smtp-Source: AH8x225iuoUzEse6Chb2bkvUdpGIW6GRhGjzQhM81Lddp9T4EHpuE9HSe0VLo/In1adO4yICu37xNg==
+X-Received: by 10.98.137.147 with SMTP id n19mr8525482pfk.193.1519594427484;
+	Sun, 25 Feb 2018 13:33:47 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:ad95:2a34:2e02:2fdf])
 	by smtp.gmail.com with ESMTPSA id
-	64sm12014600pgj.39.2018.02.25.13.33.45
+	64sm12014600pgj.39.2018.02.25.13.33.46
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Feb 2018 13:33:45 -0800 (PST)
+	Sun, 25 Feb 2018 13:33:47 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Feb 2018 13:33:08 -0800
-Message-Id: <1519594406-24490-18-git-send-email-akuster808@gmail.com>
+Date: Sun, 25 Feb 2018 13:33:09 -0800
+Message-Id: <1519594406-24490-19-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
 References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 18/36] leveldb: move to recipes-security
+Subject: [meta-oe][PATCH 19/36] cpufrequtils: move to recipes-bsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,32 +63,20 @@ X-List-Received-Date: Sun, 25 Feb 2018 21:33:46 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch                | 0
- .../leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch | 0
- .../leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch            | 0
- meta-oe/{recipes-extended => recipes-security}/leveldb/leveldb_git.bb     | 0
- 4 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{recipes-extended => recipes-security}/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch (100%)
- rename meta-oe/{recipes-extended => recipes-security}/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch (100%)
- rename meta-oe/{recipes-extended => recipes-security}/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch (100%)
- rename meta-oe/{recipes-extended => recipes-security}/leveldb/leveldb_git.bb (100%)
+ .../cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch                | 0
+ meta-oe/{recipes-support => recipes-bsp}/cpufrequtils/cpufrequtils_008.bb | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-support => recipes-bsp}/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch (100%)
+ rename meta-oe/{recipes-support => recipes-bsp}/cpufrequtils/cpufrequtils_008.bb (100%)
 
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch b/meta-oe/recipes-security/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
 similarity index 100%
-rename from meta-oe/recipes-extended/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
-rename to meta-oe/recipes-security/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch b/meta-oe/recipes-security/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+rename from meta-oe/recipes-support/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
+rename to meta-oe/recipes-bsp/cpufrequtils/cpufrequtils/0001-dont-unset-cflags.patch
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
 similarity index 100%
-rename from meta-oe/recipes-extended/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
-rename to meta-oe/recipes-security/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch b/meta-oe/recipes-security/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
-rename to meta-oe/recipes-security/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb_git.bb b/meta-oe/recipes-security/leveldb/leveldb_git.bb
-similarity index 100%
-rename from meta-oe/recipes-extended/leveldb/leveldb_git.bb
-rename to meta-oe/recipes-security/leveldb/leveldb_git.bb
+rename from meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+rename to meta-oe/recipes-bsp/cpufrequtils/cpufrequtils_008.bb
 -- 
 2.7.4
 
