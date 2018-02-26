@@ -1,47 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AD03719C8
+Return-Path: <jsbronder@cold-front.org>
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
+	[66.111.4.26])
+	by mail.openembedded.org (Postfix) with ESMTP id DAFE8786F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Feb 2018 16:33:33 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id x7so16098139wmc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Feb 2018 08:33:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=DvPBRpPEzZokFZnIZlKsGGqqzvAacHAe4EADwUrmBSA=;
-	b=R/GiJBzmvgNcCSSqzgH8ACgzGlIACwvZRq+9k37kj/iEyJmIlRjhF8mUJu/cSwBAqD
-	6u4zFSTDFyRfI9B1z+Iheu4e8FI5JmZ05pAPcER5Dv1FbfOVAL+IIcxSdiZsWAaklSCD
-	RiW+YX2HEo4fkf3A//pmz8uA/lQ+sPPtOfQUPZm4VMtDPbmb5RleYEZmmoCskDmNYlhy
-	ZZsOE0/y4FsRRZ8b9QmORxHEYg9/6kpTTXdpMoWXV35mEQ5bocDTB+Z1QIQXg/TqRqsa
-	iczp9VtCb/apRmd2eldV36lnOPo0z/wcSeFEhNFDBtvRQ23T/RpzrFz/euQvKA4G1gHh
-	GHMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=DvPBRpPEzZokFZnIZlKsGGqqzvAacHAe4EADwUrmBSA=;
-	b=iVi9sQNTFolFBYlLcU/SLDNLi7VkJjtUMl4GDyUvy9qjUQEAEOKB37s3vzTA20Ixp/
-	Q+dNTEpz0979RW4EDGRlbTqn1L71rJT9N2qCvZnRRk4RMSQFhQ56CB8LfRV722f7JneB
-	qd6dTLhyXOn7R6pE2m3/5hdPXc027MRmp/MB4n2YBGIgqb44RGqj3fk37nA6oO9evvqF
-	YHMA19E2EKrrxYgZCiR2g7mqGjqFntCswGRgIdFNI/Meqzlf0ht1vatG/QwcGAGElDxp
-	8pFbxer0KYW+ulEQ70KD/hefG8uGtMvB4EQTMYwnXbsvHBCctFTbrKHG4drnDE5sH+6w
-	ef4g==
-X-Gm-Message-State: APf1xPC6KgoS/97mKE0wgrIQD+X/uB4pZ/q/zbRexUOJbi5ZD3Nlzjpk
-	l8rycWo5l01XD1YvRrjpMB4DKmGE/VvYUTGW4zY=
-X-Google-Smtp-Source: AG47ELsLR7G6EKz/k/7JnnSgRIPmLCvLvyWCXl/GSgnORXU//U67ra8lpJu4EODEvU0XyfyTQD2FNN4Qc564LjuYcG4=
-X-Received: by 10.28.196.200 with SMTP id u191mr9028868wmf.17.1519662814374;
-	Mon, 26 Feb 2018 08:33:34 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.74.211 with HTTP; Mon, 26 Feb 2018 08:33:33 -0800 (PST)
-In-Reply-To: <1519637845-8644-1-git-send-email-timo.jyrinki@gmail.com>
-References: <1519637845-8644-1-git-send-email-timo.jyrinki@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 26 Feb 2018 17:33:33 +0100
-Message-ID: <CA+chaQcr-xj-Ob24Npf8diTQ-F+zbywBzzBW9fhb-TG_1gomAQ@mail.gmail.com>
-To: Timo Jyrinki <timo.jyrinki@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtlocation: Add licenses used under mapboxgl.
+	Mon, 26 Feb 2018 20:22:46 +0000 (UTC)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+	by mailout.nyi.internal (Postfix) with ESMTP id BB68120D7B;
+	Mon, 26 Feb 2018 15:16:10 -0500 (EST)
+Received: from frontend1 ([10.202.2.160])
+	by compute7.internal (MEProxy); Mon, 26 Feb 2018 15:16:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
+	h=cc:date:from:message-id:subject:to:x-me-sender:x-me-sender
+	:x-sasl-enc; s=mesmtp; bh=RfZ7c+5QDRixEIdWUU2BtVwa0w4FMC2Idq1cvP
+	N9CZw=; b=zbM53j9m58TtpNdQ3gmCTS0mU2ybRcZ2Mm3Uf+eJdGuwmA61mhjc84
+	STkQKab2q7FcXyjVqvXIEHuZyZlhflhKgDQ4c6Af3OkO6jXQw2KPYGV5CL/yQ6Ct
+	yA67nw6z12uBckE38D1PjhgtLYvA3Nbrx0KIGR/54+5Vf4Yz8IbCY=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:date:from:message-id:subject:to
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=RfZ7c+5QDRixEIdWU
+	U2BtVwa0w4FMC2Idq1cvPN9CZw=; b=S6N2tozYGJjCzxWJJRzlGIa9U7wly9hwR
+	NnIMpCtNsIp2Kgui8uyqeVq21pyYayvSyfnCgxRKzN/r+yq51ok1cZFg027UUhT2
+	PrQ+NMxzf/91WPcCIRwgoumzTeY7gUeIP38eAG2/LvdDqO+RQBCNd9CAWfQKS735
+	caZrwTTGIim+8r9PrgqRrobgc29N44bMhwX60gG9enSe1HxjME7JtGWNYx7rsZqA
+	u9LQIi0BuEpJL78Lula1anbmnmRWv/DShKSzFuwltTA/QGInM5ufJ/i34VnHeO0k
+	EbSaTCY1engVqJgVkYaqRxxHRxAtGKxFso8LS0/Y6Y+SDL6i7xnmA==
+X-ME-Sender: <xms:CmuUWsC5Bs8yePWFJd0SHQ8SFvkGO_YT61GR3cvqtcCC67TzhQUcGA>
+Received: from localhost (c-24-60-203-86.hsd1.ma.comcast.net [24.60.203.86])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 777C57E188;
+	Mon, 26 Feb 2018 15:16:10 -0500 (EST)
+From: Justin Bronder <jsbronder@cold-front.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Feb 2018 15:16:04 -0500
+Message-Id: <20180226201605.29261-1-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.13.6
+Subject: [meta-oe][PATCH 1/2] cppzmq: 4.2.3 update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,46 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Feb 2018 16:33:33 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 26 Feb 2018 20:22:47 -0000
 
-Update LIC_FILES_CHKSUM to cover license files from mapboxgl.
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+---
+ meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Mon, Feb 26, 2018 at 10:37 AM, Timo Jyrinki <timo.jyrinki@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+index a64745c94..9e8ad5151 100644
+--- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
++++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
+ DEPENDS = "zeromq"
+ 
+-SRCREV = "68a7b09cfce01c4c279fba2cf91686fcfc566848"
+-PV = "4.1.5+git${SRCPV}"
++PV = "4.2.3"
++SRCREV = "v${PV}"
+ 
+ SRC_URI = "git://github.com/zeromq/cppzmq.git"
+ 
+-- 
+2.13.6
 
-> These licenses are in use in the fetched mapboxgl submodule but not
-> currently listed in the recipe: Apache-2.0, MIT, openssl and BSL-1.0.
->
-> Signed-off-by: Timo Jyrinki <timo.jyrinki@gmail.com>
-> ---
->  recipes-qt/qt5/qtlocation_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_
-> git.bb
-> index fce37b8..f6d3e09 100644
-> --- a/recipes-qt/qt5/qtlocation_git.bb
-> +++ b/recipes-qt/qt5/qtlocation_git.bb
-> @@ -1,7 +1,7 @@
->  require qt5.inc
->  require qt5-git.inc
->
-> -LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1
-> | LGPL-3.0) | GPL-2.0 | The-Qt-Company-Commercial"
-> +LICENSE = "Apache-2.0 & MIT & openssl & BSL-1.0 & GFDL-1.3 & BSD &
-> (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0 |
-> The-Qt-Company-Commercial"
->  LIC_FILES_CHKSUM = " \
->      file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
->      file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
