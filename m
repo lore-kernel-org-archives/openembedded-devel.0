@@ -1,44 +1,47 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-yw0-f174.google.com (mail-yw0-f174.google.com
-	[209.85.161.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 1826C786D8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AD03719C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Feb 2018 14:50:35 +0000 (UTC)
-Received: by mail-yw0-f174.google.com with SMTP id d205so5134251ywe.2
+	Mon, 26 Feb 2018 16:33:33 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id x7so16098139wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Feb 2018 06:50:37 -0800 (PST)
+	Mon, 26 Feb 2018 08:33:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=2Jt3J91yK0239KvObD9xIaWSBhSC3gyTS6QvY72G6s4=;
-	b=YStqimvAszY+HWzxZYHm2JsRtDVsuPy1CVN7/VwH6AyFnT9ZMx4lR20EzxBIIA5Zv3
-	JMbCRylVR0aqZRt4E7AegKH7yFcMfMDypCMIxyoCQziljtqAz1BlOrykSZcibEoLHDnw
-	b9uc44VnZTVBKMjtbzeM1nyi+11Q7hB1heewFVfYnyqtWe9X5SoPnZ37ZUNInSJQA+RZ
-	59qQL208dp9nNaQlESHuDYcAHcnk8Y9lXND+C3uEuQkVpMzLh3g3y71GtBGnZpNM5bsP
-	IxUMLLZ1W5mxwFZGwJhXvXO7dmJzVZB6KKlI7T30BHBobMbpvxvSdpvDkyopndXsBfrP
-	Zd1g==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=DvPBRpPEzZokFZnIZlKsGGqqzvAacHAe4EADwUrmBSA=;
+	b=R/GiJBzmvgNcCSSqzgH8ACgzGlIACwvZRq+9k37kj/iEyJmIlRjhF8mUJu/cSwBAqD
+	6u4zFSTDFyRfI9B1z+Iheu4e8FI5JmZ05pAPcER5Dv1FbfOVAL+IIcxSdiZsWAaklSCD
+	RiW+YX2HEo4fkf3A//pmz8uA/lQ+sPPtOfQUPZm4VMtDPbmb5RleYEZmmoCskDmNYlhy
+	ZZsOE0/y4FsRRZ8b9QmORxHEYg9/6kpTTXdpMoWXV35mEQ5bocDTB+Z1QIQXg/TqRqsa
+	iczp9VtCb/apRmd2eldV36lnOPo0z/wcSeFEhNFDBtvRQ23T/RpzrFz/euQvKA4G1gHh
+	GHMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=2Jt3J91yK0239KvObD9xIaWSBhSC3gyTS6QvY72G6s4=;
-	b=Cp3ZJmYik8q0DnbCOPuktWBoTrCgCtN3+VYOcg2fhm9njDPFOkXkTZU5o8Pj1FeZ33
-	IbxPNM8a8kXXfIeY41/4zo1sLVh+Y6KNpZOXk7CdCKQrIZfzy/kvarCrqwV7/hxQ7jkx
-	gc4RKFJmprgLfJV2VnJSkmOOHAQVlPBY+JuDpfMoruWqeIOijd+R7yDK0SJE+Bzg1QpC
-	nCx6WpITcOlCJloyPx3FvHPkuSlECUN10IZbsbx//pkLOt4L9+N3chxwQ0AZOxE2VflR
-	xkH+rEgCGVwUaeSzgr5kOcrANIE/9qYPHcLM7/q0FQ2IGqS0Ks6MxLSkWyAVIrXqTYok
-	sVVA==
-X-Gm-Message-State: APf1xPB7qP9veQFPZmfqQGYYxHELLqe76oKs6kQI6fwZ/i5RDlQqWMTE
-	3TvkK1pbfq25Th6KRMH8YkBobf6H6PpQ85X7tDQ=
-X-Google-Smtp-Source: AG47ELswNKFG5AXr3s5KaBywUlj9ELzHZtGsftRokKeeE8HuCXl0ZjbtgSgRNP6BlOPztpkTrck5A2HY5k46hZo513E=
-X-Received: by 10.129.178.199 with SMTP id q190mr3997346ywh.272.1519656636779; 
-	Mon, 26 Feb 2018 06:50:36 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=DvPBRpPEzZokFZnIZlKsGGqqzvAacHAe4EADwUrmBSA=;
+	b=iVi9sQNTFolFBYlLcU/SLDNLi7VkJjtUMl4GDyUvy9qjUQEAEOKB37s3vzTA20Ixp/
+	Q+dNTEpz0979RW4EDGRlbTqn1L71rJT9N2qCvZnRRk4RMSQFhQ56CB8LfRV722f7JneB
+	qd6dTLhyXOn7R6pE2m3/5hdPXc027MRmp/MB4n2YBGIgqb44RGqj3fk37nA6oO9evvqF
+	YHMA19E2EKrrxYgZCiR2g7mqGjqFntCswGRgIdFNI/Meqzlf0ht1vatG/QwcGAGElDxp
+	8pFbxer0KYW+ulEQ70KD/hefG8uGtMvB4EQTMYwnXbsvHBCctFTbrKHG4drnDE5sH+6w
+	ef4g==
+X-Gm-Message-State: APf1xPC6KgoS/97mKE0wgrIQD+X/uB4pZ/q/zbRexUOJbi5ZD3Nlzjpk
+	l8rycWo5l01XD1YvRrjpMB4DKmGE/VvYUTGW4zY=
+X-Google-Smtp-Source: AG47ELsLR7G6EKz/k/7JnnSgRIPmLCvLvyWCXl/GSgnORXU//U67ra8lpJu4EODEvU0XyfyTQD2FNN4Qc564LjuYcG4=
+X-Received: by 10.28.196.200 with SMTP id u191mr9028868wmf.17.1519662814374;
+	Mon, 26 Feb 2018 08:33:34 -0800 (PST)
 MIME-Version: 1.0
-From: Adam Lee <adam.yh.lee@gmail.com>
-Date: Mon, 26 Feb 2018 14:50:26 +0000
-Message-ID: <CAFeBWL4LZ=xd=eEn=+B+MUziFNBuaczJU1gGk0-rqXHPWW7D-g@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+Received: by 10.28.74.211 with HTTP; Mon, 26 Feb 2018 08:33:33 -0800 (PST)
+In-Reply-To: <1519637845-8644-1-git-send-email-timo.jyrinki@gmail.com>
+References: <1519637845-8644-1-git-send-email-timo.jyrinki@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 26 Feb 2018 17:33:33 +0100
+Message-ID: <CA+chaQcr-xj-Ob24Npf8diTQ-F+zbywBzzBW9fhb-TG_1gomAQ@mail.gmail.com>
+To: Timo Jyrinki <timo.jyrinki@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] Problem with /default-qt/tooldir
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtlocation: Add licenses used under mapboxgl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,21 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Feb 2018 14:50:36 -0000
+X-List-Received-Date: Mon, 26 Feb 2018 16:33:33 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Building on git #db881bb4917628ad, my images are showing these errors:
+Update LIC_FILES_CHKSUM to cover license files from mapboxgl.
 
-# qmake
-qmake: could not exec '/default-qt/tooldir/qmake': No such file or directory
+On Mon, Feb 26, 2018 at 10:37 AM, Timo Jyrinki <timo.jyrinki@gmail.com>
+wrote:
 
-# qmlviewer
-qmlviewer: could not exec '/default-qt/tooldir/qmlviewer': No such file or
-directory
-
-Has anyone else seen this lately?
-
-BR,
-
-Adam
+> These licenses are in use in the fetched mapboxgl submodule but not
+> currently listed in the recipe: Apache-2.0, MIT, openssl and BSL-1.0.
+>
+> Signed-off-by: Timo Jyrinki <timo.jyrinki@gmail.com>
+> ---
+>  recipes-qt/qt5/qtlocation_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_
+> git.bb
+> index fce37b8..f6d3e09 100644
+> --- a/recipes-qt/qt5/qtlocation_git.bb
+> +++ b/recipes-qt/qt5/qtlocation_git.bb
+> @@ -1,7 +1,7 @@
+>  require qt5.inc
+>  require qt5-git.inc
+>
+> -LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1
+> | LGPL-3.0) | GPL-2.0 | The-Qt-Company-Commercial"
+> +LICENSE = "Apache-2.0 & MIT & openssl & BSL-1.0 & GFDL-1.3 & BSD &
+> (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0 |
+> The-Qt-Company-Commercial"
+>  LIC_FILES_CHKSUM = " \
+>      file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
+>      file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
