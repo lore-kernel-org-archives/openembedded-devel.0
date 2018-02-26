@@ -1,45 +1,33 @@
-Return-Path: <jsbronder@cold-front.org>
-X-Greylist: delayed 397 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 26 Feb 2018 20:22:46 UTC
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
-	[66.111.4.26])
-	by mail.openembedded.org (Postfix) with ESMTP id DCF527871C
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id C881F71BA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Feb 2018 20:22:46 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
-	by mailout.nyi.internal (Postfix) with ESMTP id BE6D220F5F;
-	Mon, 26 Feb 2018 15:16:12 -0500 (EST)
-Received: from frontend2 ([10.202.2.161])
-	by compute7.internal (MEProxy); Mon, 26 Feb 2018 15:16:12 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	h=cc:date:from:in-reply-to:message-id:references:subject:to
-	:x-me-sender:x-me-sender:x-sasl-enc; s=mesmtp; bh=PlugUNc0lZie1I
-	21zjBg4Uc5q3AEYkllrMxGM5Oo22k=; b=WpcRGHLkHI6TgZf7cE1m/zdQxNKOc1
-	tA509xQHABzREdmfCzc1q7hMNtmLgO8Dwn01qexPDdWggrxmyW7HRB5EuPgXu5sp
-	CpKDFEy9UbyfDqTPN17R4l8ayVkc3XgsW0IYjFN5zYCvk0qSIdeTuimTDxi83VbD
-	xLJBszNiMkpDc=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:date:from:in-reply-to:message-id
-	:references:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; bh=PlugUNc0lZie1I21zjBg4Uc5q3AEYkllrMxGM5Oo22k=; b=hgdUNpk6
-	3GVpVAIEBJ1Yt8QF8fBKMv1vq7pxFPXAhb6H8v6hahjb+l7qY3NTUQoVhYHuVQj5
-	jdoV+J92LfhFjm20/wQwox+c2ty0fWc/a/j/xhf9MkNggjGFje05GX16AJbXaZON
-	WXOS/MFs02UQP7eqAWxyaoMCbIlw4gJuR7EjOAiemOB8tM/hHMdA3StgfBZ0RPPB
-	4EwvRWpKfluOBbkmsC2xMl8YmbYSV2tOnRh/YgfikqeS3Zpq3bxGCh67ZX6bNr02
-	4cAChOCSpMJEXXG2fB5Btt/9tvGK1o99HmsXWSt0uYdqiVeHSYhXyUaBFQBAOmbE
-	X99WYsbphmqzMw==
-X-ME-Sender: <xms:DGuUWi2aVxOuRE7jP1xwXlZOrqDI40FLZPX2tLIbeD6dYakvJ-_26Q>
-Received: from localhost (c-24-60-203-86.hsd1.ma.comcast.net [24.60.203.86])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 7EAEF24610;
-	Mon, 26 Feb 2018 15:16:12 -0500 (EST)
-From: Justin Bronder <jsbronder@cold-front.org>
+	Mon, 26 Feb 2018 21:57:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8999F209AE
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Feb 2018 21:57:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id F5Bid1KAI4X0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Feb 2018 21:57:19 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6F6DB20059
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Feb 2018 21:57:19 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id F04181632CD; Mon, 26 Feb 2018 16:57:18 -0500 (EST)
+Date: Mon, 26 Feb 2018 16:57:18 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Feb 2018 15:16:05 -0500
-Message-Id: <20180226201605.29261-2-jsbronder@cold-front.org>
-X-Mailer: git-send-email 2.13.6
-In-Reply-To: <20180226201605.29261-1-jsbronder@cold-front.org>
-References: <20180226201605.29261-1-jsbronder@cold-front.org>
-Subject: [meta-oe][PATCH 2/2] zeromq: 4.2.3 update
+Message-ID: <20180226215718.GK2786@denix.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: [meta-qt5] qtwebengine/chromium/v8 requires lib32 version of host C++ headers (libc++-dev:i386)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,37 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Feb 2018 20:22:47 -0000
+X-List-Received-Date: Mon, 26 Feb 2018 21:57:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
----
- .../zeromq/{zeromq_4.1.6.bb => zeromq_4.2.3.bb}                     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.1.6.bb => zeromq_4.2.3.bb} (78%)
+I've got this error below on one of my build machines, and on close=20
+inspection, it looks like qtwebengine/chromium/v8 requires host side C++=20
+headers in 32-bit besides normal 64-bit version, i.e. libc++-dev:i386 or=20
+lib32stdc++-dev.
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.6.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.3.bb
-similarity index 78%
-rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.1.6.bb
-rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.2.3.bb
-index e126f3239..71d7e7cbf 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.6.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.3.bb
-@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
- PACKAGECONFIG ??= "libsodium"
- PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
- 
--SRC_URI = "http://github.com/zeromq/zeromq4-1/releases/download/v${PV}/zeromq-${PV}.tar.gz \
-+SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
-     file://run-ptest \
- "
--SRC_URI[md5sum] = "c89db4dbc0b90c34c9f4983cbff6d321"
--SRC_URI[sha256sum] = "02ebf60a43011e770799336365bcbce2eb85569e9b5f52aa0d8cc04672438a0a"
-+SRC_URI[md5sum] = "c4e18bd0584ccd34213f152c11f54d6c"
-+SRC_URI[sha256sum] = "8f1e2b2aade4dbfde98d82366d61baef2f62e812530160d2e6d0a5bb24e40bc0"
- 
- S = "${WORKDIR}/zeromq-${PV}"
- 
--- 
-2.13.6
+How can we check for this and/or document this requirement?
 
+Logs (notice hosttools/g++ and -m32):
+
+FAILED: v8_snapshot/obj/v8/mkpeephole/bytecodes.o=20
+=2E../tmp-glibc/hosttools/g++ -MMD -MF v8_snapshot/obj/v8/mkpeephole/byteco=
+des.o.d -DV8_DEPRECATION_WARNINGS -DUSE_UDEV -DUSE_AURA=3D1 -DUSE_NSS_CERTS=
+=3D1 -DUSE_OZONE=3D1 -DNO_TCMALLOC -DDISABLE_NACL -DENABLE_TASK_MANAGER=3D1=
+ -DENABLE_THEMES=3D1 -DFULL_SAFE_BROWSING -DSAFE_BROWSING_CSD -DSAFE_BROWSI=
+NG_DB_LOCAL -DCHROMIUM_BUILD -DFIELDTRIAL_TESTING_ENABLED -DTOOLKIT_QT -D_F=
+ILE_OFFSET_BITS=3D64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -DNDEBUG -DN=
+VALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=3D0 -DV8_I18N_SUPPORT -DV8_TARGET_AR=
+CH_ARM -DCAN_USE_ARMV7_INSTRUCTIONS -DCAN_USE_VFP3_INSTRUCTIONS -DCAN_USE_V=
+FP32DREGS -DCAN_USE_NEON -DUSE_EABI_HARDFLOAT=3D1 -Iv8_snapshot/gen -I../..=
+/../../git/src/3rdparty/chromium -I../../../../git/src/3rdparty/chromium/v8=
+/include -Iv8_snapshot/gen/v8/include -I../../../../git/src/3rdparty/chromi=
+um/v8 -fno-strict-aliasing --param=3Dssp-buffer-size=3D4 -fstack-protector =
+-funwind-tables -fPIC -pipe -pthread -m32 -msse2 -mfpmath=3Dsse -mmmx -g0 -=
+fvisibility=3Dhidden -Wno-unused-local-typedefs -Wno-maybe-uninitialized -W=
+no-missing-field-initializers -Wno-unused-parameter -O3 -fno-ident -fdata-s=
+ections -ffunction-sections -fno-threadsafe-statics -fvisibility-inlines-hi=
+dden -std=3Dgnu++11 -fno-delete-null-pointer-checks -fno-rtti -fno-exceptio=
+ns -Wno-deprecated -Wno-narrowing -c ../../../../git/src/3rdparty/chromium/=
+v8/src/interpreter/bytecodes.cc -o v8_snapshot/obj/v8/mkpeephole/bytecodes.o
+In file included from ../../../../git/src/3rdparty/chromium/v8/src/interpre=
+ter/bytecodes.h:8:0,
+                 from ../../../../git/src/3rdparty/chromium/v8/src/interpre=
+ter/bytecodes.cc:5:
+/usr/include/c++/5/cstdint:38:28: fatal error: bits/c++config.h: No such fi=
+le or directory
+compilation terminated.
 
