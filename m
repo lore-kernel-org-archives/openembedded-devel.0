@@ -1,49 +1,59 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
-	[209.85.215.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B93646AC37;
-	Tue, 27 Feb 2018 15:27:15 +0000 (UTC)
-Received: by mail-lf0-f65.google.com with SMTP id 70so28123335lfw.2;
-	Tue, 27 Feb 2018 07:27:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=MTushSkSd5FU9Z4TIHZcIRLuo8dDd/7u+kkG38QrOqw=;
-	b=Cw21537T/ObrHMSkawbmttIGxKD+0mXxJ5zZBGVaHjywlMbAiV4vdR25Dv4pD7sbfm
-	TRADSjcRhEIMD7RiD/5qpn4I1qQap6/hRs9mHjZyG+LaJlw01Dwp1tFcLTJbo/b3YAg2
-	Xat7NNtNOEH70CRWVv1IFSIjlZe1z4Fr0Qce0xxHfxeGXi3P2N1jw0Utelt8kIPqnIRr
-	SUURWaUPonft2tEyrAQahPINAcrfR6zvi83ogtPpLeTHL3SKaiJfGb5JVoepRcek6cVb
-	fwL36eA5DDCau/uqVz8e4eJ6UkQAbA/Ua+P7LauvrhQFSUQy7NEl2mpDg0jKoC7EuF4y
-	nl5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=MTushSkSd5FU9Z4TIHZcIRLuo8dDd/7u+kkG38QrOqw=;
-	b=PNvfFE+Q+eyolxKJZo3fzBaQPByojzZR0NTADaVjOG68ISy5XGEjHtgyMtPw+ZQ5Cr
-	5rUaHqUx04nU66YceXv/JSFsqdQYnopNjG+GDs8B1VBrY+2BuuLz+Mqyc1zOEFC2fsCx
-	m/mvmNlZnfGXmfftFTNai4zYSjMCst1UC90DhezDJJde8aSxw0IaZAtIdZraQG31XZop
-	/aZ760DxV3YopRqoL83cp06cayUcoEgIO8vhRfo4S/Ye+/4lEH2GagV/4vYHST8p/kNJ
-	GmtdiwYTRdo53ySc+chFFjmT1EFxrwWyQVJnMWdrGvDmMkb/j+6Z/y4w7j1YHmLOS50T
-	8o0w==
-X-Gm-Message-State: APf1xPCjf/BRPx0iTHPE5fIwsVhkBvPxcCEOn1sOWlJ2SDuiV4IehM7P
-	QKYJ5YoM2qK/x606bImzGCcGLI1pbVjlJWUDuGlrCw==
-X-Google-Smtp-Source: AH8x2242+Gz1G5a6oVyAR9Oc8iKyCVarNkbtxaYsGOYATVazZNNKuYw2pMReB2BXawCJfsdG7qM+9FPkfkMlT6rrdzk=
-X-Received: by 10.46.46.12 with SMTP id u12mr9776879lju.110.1519745236482;
-	Tue, 27 Feb 2018 07:27:16 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.25.168.137 with HTTP; Tue, 27 Feb 2018 07:27:15 -0800 (PST)
-In-Reply-To: <20180224034807.GF2786@denix.org>
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 93DBC7878B;
+	Tue, 27 Feb 2018 16:56:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 32204185CE;
+	Tue, 27 Feb 2018 17:56:59 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id zNB9zkPXoDi0; Tue, 27 Feb 2018 17:56:58 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id DD65E1858D;
+	Tue, 27 Feb 2018 17:56:57 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id CB4881A081;
+	Tue, 27 Feb 2018 17:56:57 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id B64EE1A07F;
+	Tue, 27 Feb 2018 17:56:57 +0100 (CET)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Tue, 27 Feb 2018 17:56:57 +0100 (CET)
+Received: from XBOX02.axis.com (xbox02.axis.com [10.0.5.16])
+	by seth.se.axis.com (Postfix) with ESMTP id AA5651AFC;
+	Tue, 27 Feb 2018 17:56:57 +0100 (CET)
+Received: from XBOX02.axis.com (10.0.5.16) by XBOX02.axis.com (10.0.5.16) with
+	Microsoft SMTP Server (TLS) id 15.0.1263.5;
+	Tue, 27 Feb 2018 17:56:57 +0100
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1263.000; Tue, 27 Feb 2018 17:56:57 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Trevor Woerner <twoerner@gmail.com>, OpenEmbedded Devel List
+	<openembedded-devel@lists.openembedded.org>, "Patches and discussions about
+	the oe-core layer" <openembedded-core@lists.openembedded.org>
+Thread-Topic: [OE-core] [oe] [RFC] Rename meta-openembedded to
+	openembedded-extras
+Thread-Index: AQHTr993RXcPnvEtT0Sk9kytfXmEJaO4dVmw
+Date: Tue, 27 Feb 2018 16:56:57 +0000
+Message-ID: <63be8ac8a2744c64b18e252afd2e6307@XBOX02.axis.com>
 References: <CAAQYJAudtnFaY1S2j6FF_pN9B1OJhN-6fEBY8nWCtM73Kx8tSw@mail.gmail.com>
 	<0bb858dc-a43f-ae14-01c9-2a42855e4409@gmail.com>
 	<20180224034807.GF2786@denix.org>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Tue, 27 Feb 2018 10:27:15 -0500
-Message-ID: <CAHUNapQYRJ=qNnQt8GT7eZ+m=iOdFDRWnY4Vuu4twB+VLA05jw@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
+	<CAHUNapQYRJ=qNnQt8GT7eZ+m=iOdFDRWnY4Vuu4twB+VLA05jw@mail.gmail.com>
+In-Reply-To: <CAHUNapQYRJ=qNnQt8GT7eZ+m=iOdFDRWnY4Vuu4twB+VLA05jw@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [OE-core] [RFC] Rename meta-openembedded to openembedded-extras
+Subject: Re: [OE-core] [RFC] Rename meta-openembedded to	openembedded-extras
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,23 +66,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2018 15:27:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 27 Feb 2018 16:56:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Fri, Feb 23, 2018 at 10:48 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-
-> On Thu, Feb 22, 2018 at 12:37:44PM -0800, akuster808 wrote:
-> > I think openembededd-core is incorrect. it should have been
-> > meta-openbedded-core or meta-core.
->
-> It does have a layer called just "meta" though...
->
-
-In retrospect, using the word "meta" everywhere becomes useless. No layer
-contains actual sources and never should, so they're all "meta" data, it's
-redundant to have to say so in every layer's name (etc).
-
-It would have been better to use that space to convey something meaningful,
-such as: "whether a layer was designed to be a bsp, a distro, something
-else, or a combination", or perhaps other meaningful information.
+V2VsbCwgdGhlcmUgaXMgYSBiZW5lZml0IGluIGhhdmluZyBhIGNvbW1vbiBuYW1pbmcgZm9yIGxh
+eWVycyBpbiB0aGF0IGl0IGlzIHBvc3NpYmxlIHRvIGVhc2lseSBpZGVudGlmeSB0aGVtIHByb2dy
+YW1tYXRpY2FsbHkuIEUuZy4sIG91ciBzZXR1cCB3aWxsIGF1dG9tYXRpY2FsbHkgdGFrZSBhbGwg
+Y2hlY2tlZCBvdXQgbGF5ZXJzIG5hbWVkIOKAnG1ldGEq4oCdIGFuZCBhZGQgdGhlbSB0byB0aGUg
+YmJsYXllcnMuY29uZi5zYW1wbGUgZmlsZS4gVGhhdCBzYWlkLCB0aGUgbmFtZSDigJxtZXRh4oCd
+IGFzIGl0IGhhcyBiZWVuIHVzZWQsIGJvdGggZm9yIGEgc3BlY2lmaWMgbGF5ZXIgKGkuZS4sIG1l
+dGEpLCBhcyBwcmVmaXggZm9yIGluZGl2aWR1YWwgbGF5ZXJzIChlLmcuLCBtZXRhLW9lKSBhbmQg
+YXMgcHJlZml4IGZvciBhIGdyb3VwIG9mIGxheWVycyAoZS5nLiwgbWV0YS1vcGVuZW1iZWRkZWQp
+LCBpcyBtb3N0bHkgY29uZnVzaW5n4oCmDQoNCi8vUGV0ZXINCg0KRnJvbTogb3BlbmVtYmVkZGVk
+LWNvcmUtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVk
+LWNvcmUtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYgT2YgVHJldm9y
+IFdvZXJuZXINClNlbnQ6IGRlbiAyNyBmZWJydWFyaSAyMDE4IDE2OjI3DQpUbzogT3BlbkVtYmVk
+ZGVkIERldmVsIExpc3QgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
+PjsgUGF0Y2hlcyBhbmQgZGlzY3Vzc2lvbnMgYWJvdXQgdGhlIG9lLWNvcmUgbGF5ZXIgPG9wZW5l
+bWJlZGRlZC1jb3JlQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQpTdWJqZWN0OiBSZTogW09FLWNv
+cmVdIFtvZV0gW1JGQ10gUmVuYW1lIG1ldGEtb3BlbmVtYmVkZGVkIHRvIG9wZW5lbWJlZGRlZC1l
+eHRyYXMNCg0KT24gRnJpLCBGZWIgMjMsIDIwMTggYXQgMTA6NDggUE0sIERlbnlzIERteXRyaXll
+bmtvIDxkZW5pc0BkZW5peC5vcmc8bWFpbHRvOmRlbmlzQGRlbml4Lm9yZz4+IHdyb3RlOg0KT24g
+VGh1LCBGZWIgMjIsIDIwMTggYXQgMTI6Mzc6NDRQTSAtMDgwMCwgYWt1c3RlcjgwOCB3cm90ZToN
+Cj4gSSB0aGluayBvcGVuZW1iZWRlZGQtY29yZSBpcyBpbmNvcnJlY3QuIGl0IHNob3VsZCBoYXZl
+IGJlZW4NCj4gbWV0YS1vcGVuYmVkZGVkLWNvcmUgb3IgbWV0YS1jb3JlLg0KDQpJdCBkb2VzIGhh
+dmUgYSBsYXllciBjYWxsZWQganVzdCAibWV0YSIgdGhvdWdoLi4uDQoNCkluIHJldHJvc3BlY3Qs
+IHVzaW5nIHRoZSB3b3JkICJtZXRhIiBldmVyeXdoZXJlIGJlY29tZXMgdXNlbGVzcy4gTm8gbGF5
+ZXIgY29udGFpbnMgYWN0dWFsIHNvdXJjZXMgYW5kIG5ldmVyIHNob3VsZCwgc28gdGhleSdyZSBh
+bGwgIm1ldGEiIGRhdGEsIGl0J3MgcmVkdW5kYW50IHRvIGhhdmUgdG8gc2F5IHNvIGluIGV2ZXJ5
+IGxheWVyJ3MgbmFtZSAoZXRjKS4NCkl0IHdvdWxkIGhhdmUgYmVlbiBiZXR0ZXIgdG8gdXNlIHRo
+YXQgc3BhY2UgdG8gY29udmV5IHNvbWV0aGluZyBtZWFuaW5nZnVsLCBzdWNoIGFzOiAid2hldGhl
+ciBhIGxheWVyIHdhcyBkZXNpZ25lZCB0byBiZSBhIGJzcCwgYSBkaXN0cm8sIHNvbWV0aGluZyBl
+bHNlLCBvciBhIGNvbWJpbmF0aW9uIiwgb3IgcGVyaGFwcyBvdGhlciBtZWFuaW5nZnVsIGluZm9y
+bWF0aW9uLg0KDQo=
 
