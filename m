@@ -1,71 +1,48 @@
-Return-Path: <JAEWON@xilinx.com>
-Received: from NAM03-BY2-obe.outbound.protection.outlook.com
-	(mail-by2nam03on0058.outbound.protection.outlook.com [104.47.42.58])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E98F78803
+Return-Path: <carlos.rodriguez@ridgerun.com>
+Received: from mail-ua0-f175.google.com (mail-ua0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E402B78866
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 21:32:53 +0000 (UTC)
+	Tue, 27 Feb 2018 23:40:34 +0000 (UTC)
+Received: by mail-ua0-f175.google.com with SMTP id c14so392963uak.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Feb 2018 15:40:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=hBOb0sZSfo6i+iABudtXv6AeBqMRGBts7YjEig2ETso=;
-	b=4dMBez6PCGwZdtSLKGz6Jw1+eI8UvFliP5xPJKLC38VkC48w9326bjOJ5K3NTWl2Oex61ar/LhcjB6XE8wlyY+j1TuNdBtReglW+4FkDD4TNsilxS56MULdhSJdfXf+iUd1x1E3/QILq0uA3pwUcj8ayHtACf6z9cMm4lS8WW4M=
-Received: from BY2PR02MB425.namprd02.prod.outlook.com (10.141.143.141) by
-	BY2PR02MB2120.namprd02.prod.outlook.com (10.166.110.142) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
-	15.20.527.15; Tue, 27 Feb 2018 17:59:01 +0000
-Received: from BY2PR02MB425.namprd02.prod.outlook.com ([10.141.143.141]) by
-	BY2PR02MB425.namprd02.prod.outlook.com ([10.141.143.141]) with mapi id
-	15.20.0527.021; Tue, 27 Feb 2018 17:59:02 +0000
-From: Jaewon Lee <JAEWON@xilinx.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: qt moc issue
-Thread-Index: AdOtFl9couJcZTeaQ8+lfiZwb1491AC3j+CQ
-Date: Tue, 27 Feb 2018 17:59:02 +0000
-Message-ID: <BY2PR02MB4253E02A1E05FE35944B351AFC00@BY2PR02MB425.namprd02.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=JAEWON@xilinx.com; 
-x-originating-ip: [149.199.62.254]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; BY2PR02MB2120;
-	7:5WsZeOHKxy6KnS87bPHItyuzlCqp6TzqpLjV863UcwYJS32UCsxLYwFZR4zjjHFQ0sWvieXW0PtVvkhBENAdPtpr4wkFBEC7lMBrpOmhhS4g3Q0z72YTerEHNE3vurm9PapyH0/Yxoh9t5Z3meGpOA4CGE+V1zr7WpE3JexWXvAXvCOMqM6NtlZXpscKh2ioG2MMt0zWD15/WFkIrpj7TTzpIISFKuzk8YJwZ9bbAod6xJv+nfjJVAE3JNYrYc+Y
-x-ms-exchange-antispam-srfa-diagnostics: SSOS;
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 1a0409ec-8e27-449e-2f31-08d57e0bc8de
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652020)(48565401081)(4534165)(4627221)(201703031133081)(201702281549075)(5600026)(4604075)(3008032)(2017052603307)(7153060)(7193020);
-	SRVR:BY2PR02MB2120; 
-x-ms-traffictypediagnostic: BY2PR02MB2120:
-x-microsoft-antispam-prvs: <BY2PR02MB2120573565C2EA37DF1142D2AFC00@BY2PR02MB2120.namprd02.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(28532068793085)(21748063052155);
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040501)(2401047)(5005006)(8121501046)(93006095)(93001095)(10201501046)(3231220)(944501198)(3002001)(6055026)(6041288)(20161123562045)(20161123558120)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123560045)(20161123564045)(6072148)(201708071742011);
-	SRVR:BY2PR02MB2120; BCL:0; PCL:0; RULEID:; SRVR:BY2PR02MB2120; 
-x-forefront-prvs: 05961EBAFC
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(346002)(366004)(396003)(376002)(39380400002)(39860400002)(199004)(189003)(53754006)(6436002)(6916009)(99286004)(316002)(86362001)(77096007)(97736004)(2501003)(7696005)(6506007)(2351001)(106356001)(59450400001)(7736002)(7116003)(6116002)(68736007)(66066001)(5660300001)(3480700004)(790700001)(2906002)(2900100001)(72206003)(105586002)(9326002)(8936002)(81156014)(3280700002)(25786009)(74316002)(53936002)(6306002)(55016002)(5640700003)(3660700001)(186003)(33656002)(5890100001)(102836004)(26005)(8676002)(81166006)(54896002)(14454004)(9686003)(3846002)(478600001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BY2PR02MB2120;
-	H:BY2PR02MB425.namprd02.prod.outlook.com; FPR:; SPF:None;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
-received-spf: None (protection.outlook.com: xilinx.com does not designate
-	permitted sender hosts)
-x-microsoft-antispam-message-info: KbVFLD0x2++d/n1Fnmu0Sql6O5oA5JIFv728Z7E48YFSZY9ArvzrJyDxL+4ZkzyxEJL0iQM62ddiCIxGFb9uOFq0yW4agzi5zJt9sBpBi5DUHrkwECCG8Ai8UvBV3aHUqt4Cq2q7OqizUnS/sYBhwmW8nbEAx8lxLIIqJ9VCkWk=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
-MIME-Version: 1.0
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a0409ec-8e27-449e-2f31-08d57e0bc8de
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Feb 2018 17:59:02.0662 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR02MB2120
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: qt moc issue
+	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=uFmGdIMl0kL6fq3gJtUu8SNZs7EEEeyKQH0dRMO8KnM=;
+	b=BPcRonB0dcHD0WgvrnapXVQvCDav9OXE9mko6UkS07O8MGI0gTM8jMxbNGe7whV3Qo
+	knxBUtMkW5ZrXok26SxLEP1cRgrYZE0LFgMlOf/KGyI9w49hoii3VMoxsuNqBbktUaad
+	/6rZ5eOn5s0amw099xlg0XQlkVIcWamg3YzwicwFgIBUDYcjBY9uuEnFtB46ozj0CKhV
+	GiSoHO/dLeV3ZXVEBqDzfOLbe/Y229Z5nkj/2YE+y+9S9nAC8twZ/as7ArQdvmadwM0D
+	UvH+UFhIrnDTflzq9uD+cjw4YGkY4EQfJ+Muov/SkmUW8KYLcrBJS2gZ45rhHBHLuVKr
+	X96A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uFmGdIMl0kL6fq3gJtUu8SNZs7EEEeyKQH0dRMO8KnM=;
+	b=EBgMetM1G9tUpbrsYP7UaKjhYsxJjK64AL00Z3e3Ym8yYklGNNY0yM+b74hEaqgeRi
+	kpIBdr9U7Bxc+Hyhi13FhV3HBx2fYzj3nRm5hUMO8dFy3iQCK1aOo93efz+D31u5GPRo
+	5PwCG6Enid8/zeH4DY8oQXmfLP5T3Y6+xa9vWuCmNSqXeQg6a/s0aVw48F4Tu3X1wPe/
+	KIlzrk9VEpyZW+jt+MalU0F0ivMd8cbHyjGzWfO+vb8MSsj8E2j1uLFF3DOdxrmCA0n0
+	1Imlo1MmG+enY1ctX7sm8jb7ROnknzUv2EizH0f3vYVB2Vq2H6B0RMOEuYnNYRU7y/Nm
+	kNLw==
+X-Gm-Message-State: APf1xPD53jpypJNkKUz2pqEgdTf7j3/FZrYtp0Du/53Q/QQv7SFWbJB5
+	cnizzMi1lCfRr/MvXnQ/hmcgmbF2
+X-Google-Smtp-Source: AG47ELtUppCbzvfuV+iKtdeWq0BYqw4j71P09Exju+05j+1g057+PIhCfG84FrNH0Pie0DYsuBHvyA==
+X-Received: by 10.176.23.37 with SMTP id j37mr12445812uaf.153.1519774835614;
+	Tue, 27 Feb 2018 15:40:35 -0800 (PST)
+Received: from crodriguez.cr.ridgerun.com ([201.206.221.6])
+	by smtp.gmail.com with ESMTPSA id
+	r129sm119105vkf.36.2018.02.27.15.40.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 27 Feb 2018 15:40:34 -0800 (PST)
+From: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 27 Feb 2018 17:40:24 -0600
+Message-Id: <1519774824-30065-1-git-send-email-carlos.rodriguez@ridgerun.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH v4] gstd: Add Gst-Deamon recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -78,42 +55,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2018 21:32:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Feb 2018 23:40:35 -0000
 
-Hi All,
+GStreamer Daemon, also called gstd, is a GStreamer framework
+for controlling audio and video streaming using TCP connection
+messages. Qt applications, web interfaces, and GStreamer element
+test suites show different ways the framework can be utilized.
+GStreamer Daemon is gst-launch on steroids where you can create a
+GStreamer pipeline, play, pause, change speed, skip around, and
+even change element parameter settings all while the pipeline
+is active.
 
-I'm seeing the following build error:
+Signed-off-by: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
+---
+ .../gstd/0001-gstd-yocto-compatibility.patch       | 63 ++++++++++++++++++++++
+ .../recipes-multimedia/gstreamer-1.0/gstd_1.0.bb   | 27 ++++++++++
+ 2 files changed, 90 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
 
-| /scratch/DAILYBUILD/build/tmp/work/aarch64-xilinx-linux/qtdeclarative/5.9=
-.4+gitAUTOINC+317908e72a-r0/git/tests/benchmarks/qml/binding/tst_binding.cp=
-p:175:10: fatal error: tst_binding.moc: No such file or directory
-|  #include "tst_binding.moc"
-|           ^~~~~~~~~~~~~~~~~
-| compilation terminated.
-| make[4]: *** [.obj/tst_binding.o] Error 1
-| make[4]: *** Waiting for unfinished jobs....
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
+new file mode 100644
+index 0000000..ddc1831
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
+@@ -0,0 +1,63 @@
++From eaf51d6420c63713f62025583681007c3502d387 Mon Sep 17 00:00:00 2001
++From: Carlos <carlos.rodriguez@ridgerun.com>
++Date: Fri, 15 Dec 2017 10:14:05 -0600
++Subject: [PATCH] gstd:yocto compatibility
++
++---
++ autogen.sh                      | 8 +++++++-
++ docs/reference/gstd/Makefile.am | 2 +-
++ gstd/Makefile.am                | 2 +-
++ 3 files changed, 9 insertions(+), 3 deletions(-)
++
++diff --git a/autogen.sh b/autogen.sh
++index 66dbd42..793ee2f 100755
++--- a/autogen.sh
+++++ b/autogen.sh
++@@ -21,7 +21,11 @@
++ # ACLOCAL, AUTOPOINT and/or LIBTOOLIZE to the right versions, or leave them
++ # unset and get the defaults
++ 
++-gtkdocize || exit 1
+++test -n "$srcdir" || srcdir=`dirname "$0"`
+++test -n "$srcdir" || srcdir=.
+++
+++olddir=`pwd`
+++cd "$srcdir"
++ 
++ autoreconf --verbose --force --install || {
++  echo 'autogen.sh failed';
++@@ -31,3 +35,5 @@ autoreconf --verbose --force --install || {
++ echo
++ echo "Now run './configure' with your system settings followed by 'make' to compile this module."
++ echo
+++
+++cd "$olddir"
++diff --git a/docs/reference/gstd/Makefile.am b/docs/reference/gstd/Makefile.am
++index f860fa1..153a13b 100644
++--- a/docs/reference/gstd/Makefile.am
+++++ b/docs/reference/gstd/Makefile.am
++@@ -66,7 +66,7 @@ GTKDOC_LIBS=$(top_builddir)/gstd/libgstd-core.la
++ 
++ 
++ # This includes the standard gtk-doc make rules, copied by gtkdocize.
++-include $(top_srcdir)/docs/gtk-doc.make
+++# include $(top_srcdir)/docs/gtk-doc.make
++ 
++ # Comment this out if you want 'make check' to test you doc status
++ # and run some sanity checks
++diff --git a/gstd/Makefile.am b/gstd/Makefile.am
++index 13c551d..11fe202 100644
++--- a/gstd/Makefile.am
+++++ b/gstd/Makefile.am
++@@ -49,7 +49,7 @@ bin_PROGRAMS = gstd
++ 
++ gstd_SOURCES = gstd.c
++ gstd_CFLAGS = $(GST_CFLAGS) $(GIO_CFLAGS) $(GJSON_CFLAGS)
++-gstd_LDFLAGS = $(GST_LIBS) $(GIO_LIBS) $(GJSON_LIBS) -Wl,-rpath -Wl,$(libdir)
+++gstd_LDFLAGS = $(GST_LIBS) $(GIO_LIBS) $(GJSON_LIBS)
++ gstd_LDADD = libgstd-core.la
++ 
++ gstdincludedir = $(includedir)/gstd
++-- 
++1.9.1
++
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
+new file mode 100644
+index 0000000..ae5a9c6
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "Gstreamer Daemon 1.0"
++DESCRIPTION = "GStreamer framework for controlling audio and video streaming using TCP connection messages"
++HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=Gstd-1.0"
++SECTION = "multimedia"
++LICENSE = "GPLv2+"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstreamer1.0-rtsp-server json-glib libdaemon"
++
++SRCBRANCH ?= "master"
++SRCREV = "097a086a8606dcb368c7d38c7ec4fefc2497401b"
++SRC_URI = "git://github.com/RidgeRun/gstd-1.x.git;protocol=https;branch=${SRCBRANCH} \
++	   file://0001-gstd-yocto-compatibility.patch"
++
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG_CONFARGS = " \
++	--disable-gtk-doc \
++"
++
++inherit autotools pkgconfig gettext
++
++do_configure() {
++${S}/autogen.sh
++oe_runconf
++}
+-- 
+1.9.1
 
-There are a the same errors for a bunch of other moc files,
-#include "tst_qxmlquery.moc"
-#include "tst_qxmlresultitems.moc"
-#include "tst_qxmlname.moc"
-#include "tst_qxmlformatter.moc"
-
-If I check for the file after the error, the files are there.
-Im also seeing the same for other qt recipes, like  qtxmlpatterns
-
-Has anybody seen the same error/is there a fix for this out there?
-
-
-Thanks,
-Jaewon
-
-This email and any attachments are intended for the sole use of the named r=
-ecipient(s) and contain(s) confidential information that may be proprietary=
-, privileged or copyrighted under applicable law. If you are not the intend=
-ed recipient, do not read, copy, or forward this email message or any attac=
-hments. Delete this email message and any attachments immediately.
 
