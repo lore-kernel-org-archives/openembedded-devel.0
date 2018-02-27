@@ -1,17 +1,17 @@
 Return-Path: <johannes.pointner@br-automation.com>
 Received: from mail2.br-automation.com (mail.automotion.info [213.33.116.60])
-	by mail.openembedded.org (Postfix) with ESMTP id 08662787E5
+	by mail.openembedded.org (Postfix) with ESMTP id BFDBF787E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 07:35:24 +0000 (UTC)
-X-AuditID: c0a80110-ee5ff70000000ea0-0d-5a9506a96e04
+	Tue, 27 Feb 2018 07:35:25 +0000 (UTC)
+X-AuditID: c0a80110-303e09e000000ea0-0e-5a9506a9ea1a
 Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
-	by mail2.br-automation.com () with SMTP id 32.F0.03744.9A6059A5;
+	by mail2.br-automation.com () with SMTP id 42.F0.03744.9A6059A5;
 	Tue, 27 Feb 2018 08:20:09 +0100 (CET)
 MIME-Version: 1.0
 From: Johannes Pointner <johannes.pointner@br-automation.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Feb 2018 08:18:42 +0100
-Message-Id: <20180227071844.23571-2-johannes.pointner@br-automation.com>
+Date: Tue, 27 Feb 2018 08:18:43 +0100
+Message-Id: <20180227071844.23571-3-johannes.pointner@br-automation.com>
 In-Reply-To: <20180227071844.23571-1-johannes.pointner@br-automation.com>
 X-Mailer: git-send-email 2.16.2
 References: <20180227071844.23571-1-johannes.pointner@br-automation.com>
@@ -23,18 +23,18 @@ X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
 	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
 	9.0.1FP5|November 22, 2015) at 27.02.2018 08:20:08
 X-TNEFEvaluated: 1
-X-Disclaimed: 5935
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrALMWRmVeSWpSXmKPExsVyYAWjje5KtqlRBv9PilhcPLyU2YHR49zG
-	FYwBjFFcNimpOZllqUX6dglcGXtvcBacs684sbSXrYGxwbSLkZNDQsBE4mDnDqYuRi4OIYFN
-	jBL37z9gB0nwCghKnJz5hAXEZhOwlTgy4SuYLSKgK/Hxw1xGEJtZwFri/fIFrCC2sICnxLTz
-	f8B6WQRUJW61rWCGmOMhsf9kO1gvJ1DN3Rm/WCF6tSWWLXzNDHGEvMTCs1fBbCGg+vmbGthA
-	DpIQ6GCW2LZyGitEkZDE6cVnmWHsNVs2sk5gFJiF5NZZSOYuYGRaxSiem5iZY6SXVKSbWFqS
-	n5tYkpmfp5ecn7uJERJuAjsYd7/RPsQowMGoxMObwzA1Sog1say4MvcQowQHs5II78rFk6OE
-	eFMSK6tSi/Lji0pzUosPMUpzsCiJ8+YkGUcJCaQnlqRmp6YWpBbBZJk4OKUaGPM7jzjN2TB1
-	8ewZqxrvMi/nOHg+6LVtdXCdbf3LW215z3bPmimf/9PlZJXCFO0PtyIezN1/qsJ3RT/DST3v
-	vmuvzvv6Xns86fcrjZTi//wTZ/jIa7/+mOTx7FBlaFqNUsGSXb1rdW3X+hXt9T+y9gTrCpvV
-	9//EL9/2ccs7Gxstt9i+5F9z5I4qsRRnJBpqMRcVJwIApsYAvzMCAAA=
-Subject: [meta-networking][PATCH 1/3] libtevent: update to version 0.9.36
+X-Disclaimed: 64411
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprPLMWRmVeSWpSXmKPExsVyYAWjje5KtqlRBvMeS1pcPLyU2YHR49zG
+	FYwBjFFcNimpOZllqUX6dglcGV82P2MuWGpZcfPAZKYGxrn6XYycHBICJhKdR/YxdTFycQgJ
+	bGKUeDTjPTNIgldAUOLkzCcsIDabgK3EkQlfwWwRAV2Jjx/mMoLYzALWEu+XL2AFsYUFXCW2
+	vTkAZrMIqEq8vLeSrYuRA2iOh8SacykgYU4BT4m7M36xQrRqSyxb+JoZ4gZ5iYVnr4LZQkDl
+	8zc1sIHcIyHQwSyxbeU0VogiIYnTi88yg8yUEBCWONXmO4FRYBaSS2chGbuAkWkVo3huYmaO
+	kV5SkW5iaUl+bmJJZn6eXnJ+7iZGSLAJ7GDc/Ub7EKMAB6MSD28Ow9QoIdbEsuLK3EOMEhzM
+	SiK8KxdPjhLiTUmsrEotyo8vKs1JLT7EKM3BoiTOm5NkHCUkkJ5YkpqdmlqQWgSTZeLglGpg
+	XLJ5dsSdz6nzfucuzF/wN0bEZ/W1BgnlEsFNBapGGf0e5hEPr7JG3369NUKl5+StxrAlIhli
+	IW+W7zTz/GgpFe+6q8pN41/X7G0/N+upRiRcOHL3wkQb2633/n0/dM4vaJ+k4DlBlbcemZNq
+	zGQ7+ZZ85dy5sGL2Vftts/gteVpLslseWyw4r8RSnJFoqMVcVJwIACrp4BwyAgAA
+Subject: [meta-networking][PATCH 2/3] libldb: update to version 1.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,110 +47,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2018 07:35:25 -0000
+X-List-Received-Date: Tue, 27 Feb 2018 07:35:26 -0000
 Content-Transfer-Encoding: quoted-printable
 
-Version >=3D 0.9.34 needed to build samba 4.7.5.
+Version >=3D 1.2.3 needed to build samba 4.7.5.
 
 Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
 ---
- .../{options-0.9.33.patch =3D> options-0.9.36.patch} | 68 ++++++++++------=
+ ...ions-for-packages.patch =3D> options-1.3.1.patch} | 38 +++++++++++++++-=
 ------
- .../{libtevent=5F0.9.33.bb =3D> libtevent=5F0.9.36.bb}   |  6 +-
- 2 files changed, 35 insertions(+), 39 deletions(-)
- rename meta-networking/recipes-support/libtevent/libtevent/{options-0.9.33=
-.patch =3D> options-0.9.36.patch} (81%)
- rename meta-networking/recipes-support/libtevent/{libtevent=5F0.9.33.bb =
-=3D> libtevent=5F0.9.36.bb} (89%)
+ .../libldb/{libldb=5F1.2.2.bb =3D> libldb=5F1.3.1.bb}    |  6 ++--
+ 2 files changed, 30 insertions(+), 14 deletions(-)
+ rename meta-networking/recipes-support/libldb/libldb/{ldb-Add-configure-op=
+tions-for-packages.patch =3D> options-1.3.1.patch} (83%)
+ rename meta-networking/recipes-support/libldb/{libldb=5F1.2.2.bb =3D> libl=
+db=5F1.3.1.bb} (91%)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent/options-0.=
-9.33.patch b/meta-networking/recipes-support/libtevent/libtevent/options-0.=
-9.36.patch
-similarity index 81%
-rename from meta-networking/recipes-support/libtevent/libtevent/options-0.9=
-.33.patch
-rename to meta-networking/recipes-support/libtevent/libtevent/options-0.9.3=
-6.patch
-index 84b1a3688..363c5867c 100644
---- a/meta-networking/recipes-support/libtevent/libtevent/options-0.9.33.pa=
-tch
-+++ b/meta-networking/recipes-support/libtevent/libtevent/options-0.9.36.pa=
-tch
+diff --git a/meta-networking/recipes-support/libldb/libldb/ldb-Add-configur=
+e-options-for-packages.patch b/meta-networking/recipes-support/libldb/libld=
+b/options-1.3.1.patch
+similarity index 83%
+rename from meta-networking/recipes-support/libldb/libldb/ldb-Add-configure=
+-options-for-packages.patch
+rename to meta-networking/recipes-support/libldb/libldb/options-1.3.1.patch
+index 93bd4578e..ffe253b63 100644
+--- a/meta-networking/recipes-support/libldb/libldb/ldb-Add-configure-optio=
+ns-for-packages.patch
++++ b/meta-networking/recipes-support/libldb/libldb/options-1.3.1.patch
 @@ -1,7 +1,7 @@
--From c00f6d35bdc06dffb54daa815e57b44210a5de04 Mon Sep 17 00:00:00 2001
-+From c3e2e4f89cf37b27609fd02ad67eb02d0015cc1e Mon Sep 17 00:00:00 2001
+-From 49dde22e798fd7f39fd59250036c0ae1fe2b9152 Mon Sep 17 00:00:00 2001
++From a4da3ab4d76013aaa731d43d52ccca1ebd37c395 Mon Sep 17 00:00:00 2001
  From: Jackie Huang <jackie.huang@windriver.com>
- Date: Wed, 21 Sep 2016 09:57:49 +0800
--Subject: [PATCH] tevent: Add configure options for packages
-+Subject: [PATCH 1/1] tevent: Add configure options for packages
+ Date: Wed, 21 Sep 2016 10:06:39 +0800
+-Subject: [PATCH] ldb: Add configure options for packages
++Subject: [PATCH 1/1] ldb: Add configure options for packages
 =20
  Add configure options for the following packages:
   - acl
-@@ -19,30 +19,12 @@ Modified to apply to version 0.9.33.
-=20
- Signed-off-by: Joe Slater <joe.slater@windriver.com>
+@@ -16,9 +16,9 @@ Upstream-Status: Inappropriate [oe deterministic build sp=
+ecific]
+ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
  ---
-- lib/replace/system/wscript=5Fconfigure |  6 ++-
+  lib/replace/system/wscript=5Fconfigure |  6 ++-
 - lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++---=
 -----
-- wscript                              |  7 ++-
-- 3 files changed, 79 insertions(+), 19 deletions(-)
-- mode change 100755 =3D> 100644 wscript
-+ lib/replace/wscript | 89 ++++++++++++++++++++++++++++++++++++++++--------=
++ lib/replace/wscript                  | 94 +++++++++++++++++++++++++++----=
 -----
-+ wscript             |  7 ++++-
-+ 2 files changed, 73 insertions(+), 23 deletions(-)
+  wscript                              |  7 +++
+- 3 files changed, 80 insertions(+), 18 deletions(-)
++ 3 files changed, 83 insertions(+), 24 deletions(-)
 =20
--diff --git a/lib/replace/system/wscript=5Fconfigure b/lib/replace/system/w=
+ diff --git a/lib/replace/system/wscript=5Fconfigure b/lib/replace/system/w=
 script=5Fconfigure
--index 2035474..10f9ae7 100644
----- a/lib/replace/system/wscript=5Fconfigure
--+++ b/lib/replace/system/wscript=5Fconfigure
--@@ -1,6 +1,10 @@
-- #!/usr/bin/env python
--=20
---conf.CHECK=5FHEADERS('sys/capability.h')
--+import Options
--+
--+if Options.options.enable=5Flibcap:
--+    conf.CHECK=5FHEADERS('sys/capability.h')
--+
-- conf.CHECK=5FFUNCS('getpwnam=5Fr getpwuid=5Fr getpwent=5Fr')
--=20
-- # solaris varients of getXXent=5Fr
+ index 2035474..10f9ae7 100644
+@@ -37,7 +37,7 @@ index 2035474..10f9ae7 100644
+ =20
+  # solaris varients of getXXent=5Fr
  diff --git a/lib/replace/wscript b/lib/replace/wscript
--index fc43e1a..12d2a70 100644
-+index 2c638b7..079761d 100644
+-index 145300d..8218fa5 100644
++index 2f94d49..68b2d3a 100644
  --- a/lib/replace/wscript
  +++ b/lib/replace/wscript
  @@ -23,6 +23,41 @@ def set=5Foptions(opt):
-@@ -118,32 +100,33 @@ index fc43e1a..12d2a70 100644
-      conf.CHECK=5FHEADERS('port.h')
-      conf.CHECK=5FHEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5p=
-aram.h sys/fs/vx/quota.h')
-      conf.CHECK=5FHEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/m=
-ode.h sys/ndir.h sys/priv.h')
--@@ -73,7 +121,9 @@ def configure(conf):
--=20
--     conf.CHECK=5FCODE('', headers=3D'rpc/rpc.h rpcsvc/yp=5Fprot.h', defin=
-e=3D'HAVE=5FRPCSVC=5FYP=5FPROT=5FH')
-+@@ -101,7 +149,8 @@ def configure(conf):
-+     conf.CHECK=5FHEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sys=
-macros.h')
-+     conf.CHECK=5FHEADERS('xfs/libxfs.h netgroup.h')
- =20
- -    conf.CHECK=5FHEADERS('valgrind.h valgrind/valgrind.h valgrind/memchec=
-k.h')
- +    if Options.options.enable=5Fvalgrind:
- +        conf.CHECK=5FHEADERS('valgrind.h valgrind/valgrind.h valgrind/mem=
-check.h')
--+
+@@ -124,18 +124,23 @@ index 145300d..8218fa5 100644
       conf.CHECK=5FHEADERS('nss=5Fcommon.h nsswitch.h ns=5Fapi.h')
       conf.CHECK=5FHEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs=
 .h')
       conf.CHECK=5FHEADERS('utmp.h utmpx.h lastlog.h')
 -@@ -248,17 +298,18 @@ def configure(conf):
-+@@ -294,22 +343,18 @@ def configure(conf):
++@@ -266,22 +316,20 @@ def configure(conf):
  =20
       conf.CHECK=5FFUNCS('prctl dirname basename')
  =20
@@ -172,35 +137,31 @@ sd/string.h',
 s=3D'setproctitle.h'):
  -        conf.CHECK=5FFUNCS=5FIN('setproctitle', 'bsd', headers=3D'sys/typ=
 es.h bsd/unistd.h')
---
---    if not conf.CHECK=5FFUNCS('closefrom'):
---        conf.CHECK=5FFUNCS=5FIN('closefrom', 'bsd', headers=3D'bsd/unistd=
-.h')
 +-    if not conf.CHECK=5FFUNCS('setproctitle=5Finit'):
 +-        conf.CHECK=5FFUNCS=5FIN('setproctitle=5Finit', 'bsd', headers=3D'=
 sys/types.h bsd/unistd.h')
- +    if Options.options.enable=5Flibbsd:
- +        # libbsd on some platforms provides strlcpy and strlcat
- +        if not conf.CHECK=5FFUNCS('strlcpy strlcat'):
-@@ -153,12 +136,25 @@ index fc43e1a..12d2a70 100644
+ -
+ -    if not conf.CHECK=5FFUNCS('closefrom'):
+ -        conf.CHECK=5FFUNCS=5FIN('closefrom', 'bsd', headers=3D'bsd/unistd=
+.h')
+@@ -148,17 +153,28 @@ index 145300d..8218fa5 100644
  +            conf.CHECK=5FFUNCS=5FIN('getpeereid', 'bsd', headers=3D'sys/t=
 ypes.h bsd/unistd.h')
  +        if not conf.CHECK=5FFUNCS=5FIN('setproctitle', 'setproctitle', he=
 aders=3D'setproctitle.h'):
  +            conf.CHECK=5FFUNCS=5FIN('setproctitle', 'bsd', headers=3D'sys=
 /types.h bsd/unistd.h')
--+
-+=20
-+-    if not conf.CHECK=5FFUNCS('closefrom'):
-+-        conf.CHECK=5FFUNCS=5FIN('closefrom', 'bsd', headers=3D'bsd/unistd=
-.h')
+++        if not conf.CHECK=5FFUNCS('setproctitle=5Finit'):
+++            conf.CHECK=5FFUNCS=5FIN('setproctitle=5Finit', 'bsd', headers=
+=3D'sys/types.h bsd/unistd.h')
+ +
  +        if not conf.CHECK=5FFUNCS('closefrom'):
  +            conf.CHECK=5FFUNCS=5FIN('closefrom', 'bsd', headers=3D'bsd/un=
 istd.h')
  =20
       conf.CHECK=5FCODE('''
                   struct ucred cred;
-+@@ -660,7 +705,7 @@ removeea setea
++@@ -632,7 +680,7 @@ removeea setea
 +     # look for a method of finding the list of network interfaces
 +     for method in ['HAVE=5FIFACE=5FGETIFADDRS', 'HAVE=5FIFACE=5FAIX', 'HA=
 VE=5FIFACE=5FIFCONF', 'HAVE=5FIFACE=5FIFREQ']:
@@ -210,42 +171,54 @@ VE=5FIFACE=5FIFCONF', 'HAVE=5FIFACE=5FIFREQ']:
 +             bsd=5Ffor=5Fstrlcpy =3D ' bsd'
 +         if conf.CHECK=5FCODE('''
 +                            #define %s 1
-+diff --git a/wscript b/wscript
-+index 94d190f..742f779 100644
+ diff --git a/wscript b/wscript
+-index 2af8571..059408b 100755
++index 8ae5be3..a178cc4 100644
  --- a/wscript
  +++ b/wscript
- @@ -22,7 +22,12 @@ def set=5Foptions(opt):
-@@ -176,5 +172,5 @@ index fc43e1a..12d2a70 100644
-  def configure(conf):
-      conf.RECURSE('lib/replace')
+-@@ -29,6 +29,13 @@ def set=5Foptions(opt):
++@@ -31,6 +31,13 @@ def set=5Foptions(opt):
+      opt.RECURSE('lib/replace')
+      opt.tool=5Foptions('python') # options for disabling pyc or pyo compi=
+lation
+ =20
+@@ -173,5 +189,5 @@ index 2af8571..059408b 100755
+      conf.RECURSE('lib/tdb')
+      conf.RECURSE('lib/tevent')
  --=20
 -2.8.3
 +2.16.2
 =20
-diff --git a/meta-networking/recipes-support/libtevent/libtevent=5F0.9.33.b=
-b b/meta-networking/recipes-support/libtevent/libtevent=5F0.9.36.bb
-similarity index 89%
-rename from meta-networking/recipes-support/libtevent/libtevent=5F0.9.33.bb
-rename to meta-networking/recipes-support/libtevent/libtevent=5F0.9.36.bb
-index f50830069..a83851ea4 100644
---- a/meta-networking/recipes-support/libtevent/libtevent=5F0.9.33.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent=5F0.9.36.bb
-@@ -7,12 +7,12 @@ DEPENDS +=3D "libtalloc"
- RDEPENDS=5Fpython-tevent =3D "python"
+diff --git a/meta-networking/recipes-support/libldb/libldb=5F1.2.2.bb b/met=
+a-networking/recipes-support/libldb/libldb=5F1.3.1.bb
+similarity index 91%
+rename from meta-networking/recipes-support/libldb/libldb=5F1.2.2.bb
+rename to meta-networking/recipes-support/libldb/libldb=5F1.3.1.bb
+index cb9ea9283..7e14cde35 100644
+--- a/meta-networking/recipes-support/libldb/libldb=5F1.2.2.bb
++++ b/meta-networking/recipes-support/libldb/libldb=5F1.3.1.bb
+@@ -8,7 +8,7 @@ RDEPENDS=5Fpyldb +=3D "python"
 =20
- SRC=5FURI =3D "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
--           file://options-0.9.33.patch \
-+           file://options-0.9.36.patch \
- "
- LIC=5FFILES=5FCHKSUM =3D "file://tevent.h;endline=3D26;md5=3D4e458d658cb25=
-e21efc16f720e78b85a"
+ SRC=5FURI =3D "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+            file://do-not-import-target-module-while-cross-compile.patch \
+-           file://ldb-Add-configure-options-for-packages.patch \
++           file://options-1.3.1.patch \
+           "
 =20
--SRC=5FURI[md5sum] =3D "527a43f35b4251e46f28921342895223"
--SRC=5FURI[sha256sum] =3D "22712ee981fd4298fcd5f3afb27d87a72257cebad37812cf=
-bd3da5d968ed1bdc"
-+SRC=5FURI[md5sum] =3D "87d67bca75b231814435c47bec0aff8a"
-+SRC=5FURI[sha256sum] =3D "bd2b6be3fd1601ed7f176e99111e322c57d58e425cc149ee=
-80c7dd4fed263b4c"
+ PACKAGECONFIG ??=3D "\
+@@ -29,8 +29,8 @@ LIC=5FFILES=5FCHKSUM =3D "file://pyldb.h;endline=3D24;md5=
+=3Ddfbd238cecad76957f7f860fbe9ada
+                     file://man/ldb.3.xml;beginline=3D261;endline=3D262;md5=
+=3D137f9fd61040c1505d1aa1019663fd08 \
+                     file://tools/ldbdump.c;endline=3D19;md5=3Da7d4fc5d1f75=
+676b49df491575a86a42"
+=20
+-SRC=5FURI[md5sum] =3D "91284a12423def99a6592e393e3b7fbb"
+-SRC=5FURI[sha256sum] =3D "0cedeadb75de401c9735127f654dbc1a391c4327a2b83be5=
+4078be286fed1113"
++SRC=5FURI[md5sum] =3D "e5233f202bca27f6ce8474fb8ae65983"
++SRC=5FURI[sha256sum] =3D "b19f2c9f55ae0f46aa5ebaea0bf1a47ec1ac135e1d78af0f=
+6318cf50bf62cbd2"
 =20
  inherit waf-samba
 =20
