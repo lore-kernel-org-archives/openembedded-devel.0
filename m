@@ -1,17 +1,71 @@
-Return-Path: <sebastian.reichel@collabora.co.uk>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id BFB2C7871D
+Return-Path: <JAEWON@xilinx.com>
+Received: from NAM03-BY2-obe.outbound.protection.outlook.com
+	(mail-by2nam03on0058.outbound.protection.outlook.com [104.47.42.58])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E98F78803
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 17:24:53 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) (Authenticated sender: sre)
-	with ESMTPSA id 6D7012602CC
-From: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Feb 2018 18:24:50 +0100
-Message-Id: <20180227172450.25507-1-sebastian.reichel@collabora.co.uk>
-X-Mailer: git-send-email 2.16.1
+	Tue, 27 Feb 2018 21:32:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=hBOb0sZSfo6i+iABudtXv6AeBqMRGBts7YjEig2ETso=;
+	b=4dMBez6PCGwZdtSLKGz6Jw1+eI8UvFliP5xPJKLC38VkC48w9326bjOJ5K3NTWl2Oex61ar/LhcjB6XE8wlyY+j1TuNdBtReglW+4FkDD4TNsilxS56MULdhSJdfXf+iUd1x1E3/QILq0uA3pwUcj8ayHtACf6z9cMm4lS8WW4M=
+Received: from BY2PR02MB425.namprd02.prod.outlook.com (10.141.143.141) by
+	BY2PR02MB2120.namprd02.prod.outlook.com (10.166.110.142) with Microsoft
+	SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
+	15.20.527.15; Tue, 27 Feb 2018 17:59:01 +0000
+Received: from BY2PR02MB425.namprd02.prod.outlook.com ([10.141.143.141]) by
+	BY2PR02MB425.namprd02.prod.outlook.com ([10.141.143.141]) with mapi id
+	15.20.0527.021; Tue, 27 Feb 2018 17:59:02 +0000
+From: Jaewon Lee <JAEWON@xilinx.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: qt moc issue
+Thread-Index: AdOtFl9couJcZTeaQ8+lfiZwb1491AC3j+CQ
+Date: Tue, 27 Feb 2018 17:59:02 +0000
+Message-ID: <BY2PR02MB4253E02A1E05FE35944B351AFC00@BY2PR02MB425.namprd02.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=JAEWON@xilinx.com; 
+x-originating-ip: [149.199.62.254]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; BY2PR02MB2120;
+	7:5WsZeOHKxy6KnS87bPHItyuzlCqp6TzqpLjV863UcwYJS32UCsxLYwFZR4zjjHFQ0sWvieXW0PtVvkhBENAdPtpr4wkFBEC7lMBrpOmhhS4g3Q0z72YTerEHNE3vurm9PapyH0/Yxoh9t5Z3meGpOA4CGE+V1zr7WpE3JexWXvAXvCOMqM6NtlZXpscKh2ioG2MMt0zWD15/WFkIrpj7TTzpIISFKuzk8YJwZ9bbAod6xJv+nfjJVAE3JNYrYc+Y
+x-ms-exchange-antispam-srfa-diagnostics: SSOS;
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 1a0409ec-8e27-449e-2f31-08d57e0bc8de
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(7020095)(4652020)(48565401081)(4534165)(4627221)(201703031133081)(201702281549075)(5600026)(4604075)(3008032)(2017052603307)(7153060)(7193020);
+	SRVR:BY2PR02MB2120; 
+x-ms-traffictypediagnostic: BY2PR02MB2120:
+x-microsoft-antispam-prvs: <BY2PR02MB2120573565C2EA37DF1142D2AFC00@BY2PR02MB2120.namprd02.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(28532068793085)(21748063052155);
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040501)(2401047)(5005006)(8121501046)(93006095)(93001095)(10201501046)(3231220)(944501198)(3002001)(6055026)(6041288)(20161123562045)(20161123558120)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123560045)(20161123564045)(6072148)(201708071742011);
+	SRVR:BY2PR02MB2120; BCL:0; PCL:0; RULEID:; SRVR:BY2PR02MB2120; 
+x-forefront-prvs: 05961EBAFC
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(346002)(366004)(396003)(376002)(39380400002)(39860400002)(199004)(189003)(53754006)(6436002)(6916009)(99286004)(316002)(86362001)(77096007)(97736004)(2501003)(7696005)(6506007)(2351001)(106356001)(59450400001)(7736002)(7116003)(6116002)(68736007)(66066001)(5660300001)(3480700004)(790700001)(2906002)(2900100001)(72206003)(105586002)(9326002)(8936002)(81156014)(3280700002)(25786009)(74316002)(53936002)(6306002)(55016002)(5640700003)(3660700001)(186003)(33656002)(5890100001)(102836004)(26005)(8676002)(81166006)(54896002)(14454004)(9686003)(3846002)(478600001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BY2PR02MB2120;
+	H:BY2PR02MB425.namprd02.prod.outlook.com; FPR:; SPF:None;
+	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+received-spf: None (protection.outlook.com: xilinx.com does not designate
+	permitted sender hosts)
+x-microsoft-antispam-message-info: KbVFLD0x2++d/n1Fnmu0Sql6O5oA5JIFv728Z7E48YFSZY9ArvzrJyDxL+4ZkzyxEJL0iQM62ddiCIxGFb9uOFq0yW4agzi5zJt9sBpBi5DUHrkwECCG8Ai8UvBV3aHUqt4Cq2q7OqizUnS/sYBhwmW8nbEAx8lxLIIqJ9VCkWk=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fvwm: add new recipe
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a0409ec-8e27-449e-2f31-08d57e0bc8de
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Feb 2018 17:59:02.0662 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR02MB2120
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: qt moc issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -24,246 +78,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2018 17:24:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Feb 2018 21:32:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Add recipe for a minimal built of fvwm.
+Hi All,
 
-Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
----
- .../0001-Fix-compilation-for-disabled-gnome.patch  |  67 ++++++++++++
- .../fvwm/fvwm/0002-Avoid-absolute-symlinks.patch   |  26 +++++
- meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb        | 112 +++++++++++++++++++++
- 3 files changed, 205 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
- create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
- create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
+I'm seeing the following build error:
 
-diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
-new file mode 100644
-index 000000000000..97d6bc1b7ab6
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
-@@ -0,0 +1,67 @@
-+From 60c17eb49121bf2aa485acd30750b2fc6c8eb61f Mon Sep 17 00:00:00 2001
-+From: Jarmo Jaakkola <jarmo.jaakkola@vincit.fi>
-+Date: Mon, 19 Jun 2017 16:41:36 +0300
-+Subject: [PATCH] Fix compilation for Helix.
-+
-+Gnome support, including GNOME_INIT_HOOK, has been removed, but it was
-+still being called.
-+
-+COMPAT_OLD_KEYSYMDEF is a check for a legacy system, which our system
-+most definitely is not.  It is accomplished by trying to execute
-+a program, which does not work when cross compiling.
-+
-+The fvwm(1) man page is created from Docbook XML which is set for
-+a Windows code page that is not available when compiling.  Easiest is
-+to just not create the man page as those are not needed on the monitor.
-+
-+Signed-off-by: Jarmo Jaakkola <jarmo.jaakkola@vincit.fi>
-+Signed-off-by: Riku Hämäläinen <riku.hamalainen@ge.com>
-+---
-+ configure.ac         | 20 ++++----------------
-+ doc/fvwm/Makefile.am |  2 +-
-+ 3 files changed, 7 insertions(+), 17 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 48ce264..fab7b44 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -1413,23 +1413,7 @@ else
-+   problem_gdkimlib=": Failed on gdk-imlib, see config.log"
-+ fi
-+ 
-+-GNOME_INIT_HOOK
-+-
-+-# Unfortunately we have 2 gnome supports: WM hints and gnome libs.
-+-# The $with_gnomehints below refers to the first, not GNOME_INIT_HOOK.
-+-if test ! x"$enable_gnome_hints" = xno; then
-+-  with_gnomehints=yes
-+-  problem_gnomehints=""
-+-else
-+-  with_gnomehints=no
-+-  problem_gnomehints=": Explicitly disabled"
-+-fi
-+-
-+ # Define some compatibility macros needed for config.h.
-+-mg_DEFINE_IF_NOT([#include <X11/keysym.h>],
-+-  [defined XK_Page_Up && defined XK_Page_Down],
-+-  [COMPAT_OLD_KEYSYMDEF], [$X_CFLAGS],
-+-  [Old AIX systems (3.2.5) don't define some common keysyms.])
-+ AH_VERBATIM([_COMPAT_OLD_KEYSYMDEF],
-+ [#ifdef COMPAT_OLD_KEYSYMDEF
-+ #  define XK_Page_Up   XK_Prior
-+diff --git a/doc/fvwm/Makefile.am b/doc/fvwm/Makefile.am
-+index cddb102..ff00149 100755
-+--- a/doc/fvwm/Makefile.am
-++++ b/doc/fvwm/Makefile.am
-+@@ -10,7 +10,7 @@ XSL_PROFILE = $(srcdir)/../docbook-xsl/profiling/profile.xsl
-+ HTML_FILES = fvwm.man.html
-+ XML_FILES = @DOC_SECTIONS_XML_PATH@
-+ EXTRA_DIST = @DOC_SECTIONS_XML@ $(man_MANS) sections
-+-man_MANS = fvwm.1
-++man_MANS =
-+ 
-+ if FVWM_BUILD_HTMLDOC
-+ doc_DATA = $(HTML_FILES)
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
-new file mode 100644
-index 000000000000..2a5a6a90b70c
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
-@@ -0,0 +1,26 @@
-+From: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
-+Date: Tue, 29 Auf 2017 16:08:42 +0200
-+Subject: [PATCH] Avoid absolute symlinks
-+
-+Avoid usage of absolute symlinks, which breaks yocto builds
-+with pyro branch.
-+
-+Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
-+
-+diff --git a/default-config/Makefile.am b/default-config/Makefile.am
-+index 5e16d095a137..5404145a742c 100644
-+--- a/default-config/Makefile.am
-++++ b/default-config/Makefile.am
-+@@ -17,9 +17,9 @@ EXTRA_DIST  = images \
-+ 
-+ install-data-hook:
-+ 	cp -r $(srcdir)/images $(inst_location)
-+-	ln -sf $(inst_location)/FvwmScript-DateTime $(inst_location)/..
-+-	ln -sf $(inst_location)/FvwmScript-ConfirmQuit $(inst_location)/..
-+-	ln -sf $(inst_location)/FvwmScript-ConfirmCopyConfig $(inst_location)/..
-++	ln -sf default-config/FvwmScript-DateTime $(inst_location)/..
-++	ln -sf default-config/FvwmScript-ConfirmQuit $(inst_location)/..
-++	ln -sf default-config/FvwmScript-ConfirmCopyConfig $(inst_location)/..
-+ 
-+ uninstall-hook:
-+ 	rm -fr $(DESTDIR)/$(configdir)
-diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
-new file mode 100644
-index 000000000000..822411aeff5e
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
-@@ -0,0 +1,112 @@
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=363fbcfb59124689af72c914560eaf6e"
-+
-+SRC_URI = "\
-+    git://github.com/fvwmorg/fvwm.git;protocol=https \
-+    file://0001-Fix-compilation-for-disabled-gnome.patch \
-+    file://0002-Avoid-absolute-symlinks.patch \
-+"
-+
-+# Modify these as desired
-+PV = "2.6.7+git${SRCPV}"
-+SRCREV = "597a4e296da4f21e71a17facab297e016a3a80a8"
-+
-+S = "${WORKDIR}/git"
-+
-+# NOTE: the following prog dependencies are unknown, ignoring: imlib-config fribidi-config fontconfig-config xft-config cpp gmsgfmt
-+# NOTE: the following library dependencies are unknown, ignoring: ifelse($2 dmalloc efence xpg4 fribidi intl
-+#       (this is based on recipes that have previously been built and packaged)
-+DEPENDS = "\
-+    bison-native \
-+    flex-native \
-+    freetype-native \
-+    gettext-native \
-+    libxslt-native \
-+\
-+    fontconfig \
-+    libice \
-+    libpng \
-+    librsvg \
-+    libsm \
-+    libxau \
-+    libxcb \
-+    libxcursor \
-+    libxdmcp \
-+    libxext \
-+    libxfixes \
-+    libxft \
-+    libxinerama \
-+    libxml2 \
-+    libxrender \
-+    libxt \
-+    virtual/libx11 \
-+    xrandr \
-+    zlib \
-+"
-+
-+RDEPENDS_${PN} = "\
-+    xuser-account \
-+"
-+
-+inherit pythonnative gettext pkgconfig perlnative autotools
-+
-+EXTRA_OECONF = "\
-+    --disable-bidi \
-+    --disable-fontconfigtest \
-+    --disable-freetypetest \
-+    --disable-htmldoc \
-+    --disable-imlibtest \
-+    --disable-mandoc \
-+    --disable-nls \
-+    --disable-perllib \
-+    --disable-rsvg \
-+    --disable-shape \
-+    --disable-sm \
-+    --disable-xfttest \
-+\
-+    --with-imlib-exec-prefix=/nonexistent \
-+    --with-imlib-prefix=/nonexistent \
-+\
-+    --without-ncurses-library \
-+    --without-readline-library \
-+    --without-rplay-library \
-+    --without-stroke-library \
-+    --without-termcap-library \
-+    --without-xpm-library \
-+\
-+    ac_cv_func_mkstemp=no \
-+    has_safety_mkstemp=yes \
-+"
-+
-+# show the exact commands in the log file
-+EXTRA_OEMAKE = "\
-+    V=1 \
-+"
-+
-+# the only needed packages (note: locale packages are automatically generated
-+# as well)
-+PACKAGES = "\
-+    fvwm \
-+    fvwm-dbg \
-+"
-+
-+# minimal set of binaries
-+FILES_${PN} = "\
-+    ${bindir}/fvwm \
-+    ${bindir}/fvwm-root \
-+    ${datadir}/fvwm/ConfigFvwmDefaults \
-+"
-+
-+# by default a lot of stuff is installed and it's not easy to control what to
-+# install, so install everything, but skip the check
-+INSANE_SKIP_${PN} = "\
-+    installed-vs-shipped \
-+"
-+
-+do_install_append() {
-+    install -d -m 0755 ${D}/${sysconfdir}/xdg/fvwm
-+	# You can install the config file here
-+
-+    install -d -m 0755 ${D}/${datadir}/fvwm
-+    touch ${D}/${datadir}/fvwm/ConfigFvwmDefaults
-+}
--- 
-2.16.1
+| /scratch/DAILYBUILD/build/tmp/work/aarch64-xilinx-linux/qtdeclarative/5.9=
+.4+gitAUTOINC+317908e72a-r0/git/tests/benchmarks/qml/binding/tst_binding.cp=
+p:175:10: fatal error: tst_binding.moc: No such file or directory
+|  #include "tst_binding.moc"
+|           ^~~~~~~~~~~~~~~~~
+| compilation terminated.
+| make[4]: *** [.obj/tst_binding.o] Error 1
+| make[4]: *** Waiting for unfinished jobs....
 
+There are a the same errors for a bunch of other moc files,
+#include "tst_qxmlquery.moc"
+#include "tst_qxmlresultitems.moc"
+#include "tst_qxmlname.moc"
+#include "tst_qxmlformatter.moc"
+
+If I check for the file after the error, the files are there.
+Im also seeing the same for other qt recipes, like  qtxmlpatterns
+
+Has anybody seen the same error/is there a fix for this out there?
+
+
+Thanks,
+Jaewon
+
+This email and any attachments are intended for the sole use of the named r=
+ecipient(s) and contain(s) confidential information that may be proprietary=
+, privileged or copyrighted under applicable law. If you are not the intend=
+ed recipient, do not read, copy, or forward this email message or any attac=
+hments. Delete this email message and any attachments immediately.
 
