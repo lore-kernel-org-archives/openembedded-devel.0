@@ -1,48 +1,49 @@
-Return-Path: <timo.jyrinki@gmail.com>
-Received: from mail-oi0-f44.google.com (mail-oi0-f44.google.com
-	[209.85.218.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DE85786C9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 12:40:58 +0000 (UTC)
-Received: by mail-oi0-f44.google.com with SMTP id j79so12723838oib.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 04:41:00 -0800 (PST)
+Return-Path: <twoerner@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B93646AC37;
+	Tue, 27 Feb 2018 15:27:15 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id 70so28123335lfw.2;
+	Tue, 27 Feb 2018 07:27:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ncplHd69dR4uZC6MK7rr8jBwnFTGEfD8UU9aIQAeTMk=;
-	b=PmPvpmqaVFkXbd3uf0nBhVQ5HK5uDMqc3mb99CsvrldtGpMbB+hz681rFDRYfl/ilg
-	vrJdJuLgpn7w7rgFQZlTJwO8/A5dcYeo/P8oCSRF5XNfCZHjNjqzTvKaFchVzBtpI0La
-	KVVscAFyhgeJLZgERuslbx0LTXT1VnxJ/8IUBOauAOBE8QFKzRkRdhR64jFSQ/h7v37I
-	WFfwk5l6ilA5THTDF+mE8MqcayZJ/QpW2/8erqcsHY1KGZXmUKq/RqV649iKjgdaB/qJ
-	l51Xv1hE8/NnwoZ5cUdBFNCpy4JjXEZKGhg/3SqZh4mqisXARzNpGcD5lDoX06r11cde
-	V4vQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=MTushSkSd5FU9Z4TIHZcIRLuo8dDd/7u+kkG38QrOqw=;
+	b=Cw21537T/ObrHMSkawbmttIGxKD+0mXxJ5zZBGVaHjywlMbAiV4vdR25Dv4pD7sbfm
+	TRADSjcRhEIMD7RiD/5qpn4I1qQap6/hRs9mHjZyG+LaJlw01Dwp1tFcLTJbo/b3YAg2
+	Xat7NNtNOEH70CRWVv1IFSIjlZe1z4Fr0Qce0xxHfxeGXi3P2N1jw0Utelt8kIPqnIRr
+	SUURWaUPonft2tEyrAQahPINAcrfR6zvi83ogtPpLeTHL3SKaiJfGb5JVoepRcek6cVb
+	fwL36eA5DDCau/uqVz8e4eJ6UkQAbA/Ua+P7LauvrhQFSUQy7NEl2mpDg0jKoC7EuF4y
+	nl5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ncplHd69dR4uZC6MK7rr8jBwnFTGEfD8UU9aIQAeTMk=;
-	b=bGmZ3YvmaqSZiqyAAlERReykhJE+ZHlzWcfWFFdbAeRFTl+YtCaFQj04U1LZ9dcrw9
-	KYheC0oQVV4jMt4Qmp5hORVuoFQZ5I+bTU50o5TKxF5+8Exvoo7wpM2IuJ76LH5w9Mvy
-	2toVJfb7L/NutBh2EPxhBWnYFHD7dZJYV2f3+pC3ileeyjtUusPTPD9keen4GC3jZCRE
-	bUkSPAS2h1+3SVzYRVk8bDpS8I5s9angXiCoMW/XjrOjYpe4cKkNK9uaWIW9lt9ygb2W
-	pz5RjmmiJt1E+JhJDfIudWyOcSy/UIIeJRFf8rTqjugbDRUprebGLvH8C2qEgyt6n7Oq
-	/IYA==
-X-Gm-Message-State: APf1xPADdaZqTsUg0ZfmQu4JxMUSXV3uN+D9jRzRlI+sIcAk0cW0YHaw
-	9PQBYjCvsxFWUC4/iEtNma2jqrqVwT6jBmE+uMY=
-X-Google-Smtp-Source: AG47ELsDIuNmUYm6t4TWBXTd97vs9P4mR5hPR50/1wXYjmidB72LK+D8BJ9h/Ojhhehj5ItgWIYzLCVYb83t8hi146o=
-X-Received: by 10.202.43.25 with SMTP id i25mr2595318oik.352.1519735260156;
-	Tue, 27 Feb 2018 04:41:00 -0800 (PST)
+	:message-id:subject:to;
+	bh=MTushSkSd5FU9Z4TIHZcIRLuo8dDd/7u+kkG38QrOqw=;
+	b=PNvfFE+Q+eyolxKJZo3fzBaQPByojzZR0NTADaVjOG68ISy5XGEjHtgyMtPw+ZQ5Cr
+	5rUaHqUx04nU66YceXv/JSFsqdQYnopNjG+GDs8B1VBrY+2BuuLz+Mqyc1zOEFC2fsCx
+	m/mvmNlZnfGXmfftFTNai4zYSjMCst1UC90DhezDJJde8aSxw0IaZAtIdZraQG31XZop
+	/aZ760DxV3YopRqoL83cp06cayUcoEgIO8vhRfo4S/Ye+/4lEH2GagV/4vYHST8p/kNJ
+	GmtdiwYTRdo53ySc+chFFjmT1EFxrwWyQVJnMWdrGvDmMkb/j+6Z/y4w7j1YHmLOS50T
+	8o0w==
+X-Gm-Message-State: APf1xPCjf/BRPx0iTHPE5fIwsVhkBvPxcCEOn1sOWlJ2SDuiV4IehM7P
+	QKYJ5YoM2qK/x606bImzGCcGLI1pbVjlJWUDuGlrCw==
+X-Google-Smtp-Source: AH8x2242+Gz1G5a6oVyAR9Oc8iKyCVarNkbtxaYsGOYATVazZNNKuYw2pMReB2BXawCJfsdG7qM+9FPkfkMlT6rrdzk=
+X-Received: by 10.46.46.12 with SMTP id u12mr9776879lju.110.1519745236482;
+	Tue, 27 Feb 2018 07:27:16 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.74.193.15 with HTTP; Tue, 27 Feb 2018 04:40:59 -0800 (PST)
-In-Reply-To: <CA+chaQcr-xj-Ob24Npf8diTQ-F+zbywBzzBW9fhb-TG_1gomAQ@mail.gmail.com>
-References: <1519637845-8644-1-git-send-email-timo.jyrinki@gmail.com>
-	<CA+chaQcr-xj-Ob24Npf8diTQ-F+zbywBzzBW9fhb-TG_1gomAQ@mail.gmail.com>
-From: Timo Jyrinki <timo.jyrinki@gmail.com>
-Date: Tue, 27 Feb 2018 14:40:59 +0200
-Message-ID: <CAJtFfx=R1dUYf6F5xJZJ4vex7xs00aKa7B4Ac9t1HN6iN7S62w@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtlocation: Add licenses used under mapboxgl.
+Received: by 10.25.168.137 with HTTP; Tue, 27 Feb 2018 07:27:15 -0800 (PST)
+In-Reply-To: <20180224034807.GF2786@denix.org>
+References: <CAAQYJAudtnFaY1S2j6FF_pN9B1OJhN-6fEBY8nWCtM73Kx8tSw@mail.gmail.com>
+	<0bb858dc-a43f-ae14-01c9-2a42855e4409@gmail.com>
+	<20180224034807.GF2786@denix.org>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Tue, 27 Feb 2018 10:27:15 -0500
+Message-ID: <CAHUNapQYRJ=qNnQt8GT7eZ+m=iOdFDRWnY4Vuu4twB+VLA05jw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [OE-core] [RFC] Rename meta-openembedded to openembedded-extras
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2018 12:40:59 -0000
+X-List-Received-Date: Tue, 27 Feb 2018 15:27:17 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Ok, thank you. I posted a v2 patch that includes a checksum for their
-combined license & copyright file, for the version currently referred
-to from the recipe.
+On Fri, Feb 23, 2018 at 10:48 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-2018-02-26 18:33 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
-> Update LIC_FILES_CHKSUM to cover license files from mapboxgl.
+> On Thu, Feb 22, 2018 at 12:37:44PM -0800, akuster808 wrote:
+> > I think openembededd-core is incorrect. it should have been
+> > meta-openbedded-core or meta-core.
 >
-> On Mon, Feb 26, 2018 at 10:37 AM, Timo Jyrinki <timo.jyrinki@gmail.com>
-> wrote:
->>
->> These licenses are in use in the fetched mapboxgl submodule but not
->> currently listed in the recipe: Apache-2.0, MIT, openssl and BSL-1.0.
->>
->> Signed-off-by: Timo Jyrinki <timo.jyrinki@gmail.com>
->> ---
->>  recipes-qt/qt5/qtlocation_git.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/recipes-qt/qt5/qtlocation_git.bb
->> b/recipes-qt/qt5/qtlocation_git.bb
->> index fce37b8..f6d3e09 100644
->> --- a/recipes-qt/qt5/qtlocation_git.bb
->> +++ b/recipes-qt/qt5/qtlocation_git.bb
->> @@ -1,7 +1,7 @@
->>  require qt5.inc
->>  require qt5-git.inc
->>
->> -LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 &
->> The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0 |
->> The-Qt-Company-Commercial"
->> +LICENSE = "Apache-2.0 & MIT & openssl & BSL-1.0 & GFDL-1.3 & BSD &
->> (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0 |
->> The-Qt-Company-Commercial"
->>  LIC_FILES_CHKSUM = " \
->>      file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
->>      file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> It does have a layer called just "meta" though...
 >
->
+
+In retrospect, using the word "meta" everywhere becomes useless. No layer
+contains actual sources and never should, so they're all "meta" data, it's
+redundant to have to say so in every layer's name (etc).
+
+It would have been better to use that space to convey something meaningful,
+such as: "whether a layer was designed to be a bsp, a distro, something
+else, or a combination", or perhaps other meaningful information.
 
