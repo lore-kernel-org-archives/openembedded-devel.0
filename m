@@ -1,30 +1,57 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 296B1788A0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f41.google.com (mail-pl0-f41.google.com
+	[209.85.160.41])
+	by mail.openembedded.org (Postfix) with ESMTP id B82257887B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 01:26:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="37311897"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 28 Feb 2018 09:26:27 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 544CF48AE765
+	Wed, 28 Feb 2018 03:40:00 +0000 (UTC)
+Received: by mail-pl0-f41.google.com with SMTP id k8-v6so740046pli.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 09:26:26 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.125) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Wed, 28 Feb 2018 09:26:24 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 28 Feb 2018 09:26:11 +0800
-Message-ID: <1519781171-1889-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+	Tue, 27 Feb 2018 19:40:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=6n2l/0rmYTLpIQW5MARzVcbpzKaf9jM6AUFzv4/NNJI=;
+	b=UXo5/l3I942y4xvF6RMUU76HQQ0PrLz7AWrHvUa7NXmzf/sL1JNc5G9cwx/nuUQNWQ
+	I2lnT75XHGEYRh4Tj3S5VYsiDJuu3RzMU5Zyi/xvnrGZeQbg8YIs1NHLTJ0mu/gK1IOF
+	aCSKGKUK91NLR6ZI4gdI5hlc6nb6Q+LNUCa8Lv3paaEG9qOOWr121zTMZUfUETPURA7+
+	Zz6Rx9HvNWBQKGBTHhZctOfK7PdJPbH38wFsCvmGNmXh/5X2a5Ia5mvxK4Y932pI8ddi
+	iKl0mqk5Q8CevxHugf2xMCjEBGlkUqWsix3PqcP3OG/NxNFLrjnkH+Y82LCfXuWAWggx
+	TuMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=6n2l/0rmYTLpIQW5MARzVcbpzKaf9jM6AUFzv4/NNJI=;
+	b=YDwc8T4cwO1F2vbkn0jEOMdZ35NxRR5Mx/HUBoHWJb1mt0r9R118IKtjPZUzpy9qra
+	KuFo/YEHzTKjO5u3vXZyf6Ul/p3hMz2L893Zuhvx6XjdZZRZbwwhHPbKbtRse9Nrfya4
+	iSioRei2zwoOxXHu/kDkRdEgqzGVmlhNnDX4uWuUKFsOtTPfyxGfJdWd3bazpFe1tQ9F
+	bYmI2nyQb8888WyHeXgStnA/C1f7u1w58csCmIv1tiymxtDWvCz3LZq4vNj5qXO4h+nx
+	Dgo172V50kVl3p1CA8JJNdZcDF6PTwVZRj4KkFxj8q/pAk60Xb/g/7VXqCcxBOJU5rss
+	AQYA==
+X-Gm-Message-State: APf1xPD8BRGWq6z2Api+2IkfkcwrkoHu5BhvoX+9GwrvsGfhUlKkkJpy
+	VVKe5OUvhH3r0X/GRgOIrc4tlUQ3
+X-Google-Smtp-Source: AH8x225zTioKC1Z6nUGd+ZRww4M/EEKwosEMYwIHe2WDoU2GtuHgO5RuxX0/0sT/qGUv4rfmICLnYA==
+X-Received: by 2002:a17:902:40a:: with SMTP id
+	10-v6mr16492663ple.245.1519789201333; 
+	Tue, 27 Feb 2018 19:40:01 -0800 (PST)
+Received: from hermes.local ([2601:646:8880:466c:812d:b93c:3785:4a27])
+	by smtp.gmail.com with ESMTPSA id
+	o128sm886363pfg.96.2018.02.27.19.40.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 Feb 2018 19:40:00 -0800 (PST)
+To: Jaewon Lee <JAEWON@xilinx.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <BY2PR02MB4253E02A1E05FE35944B351AFC00@BY2PR02MB425.namprd02.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <6cd44716-fc35-e7a0-96c1-b1c2edb04315@gmail.com>
+Date: Tue, 27 Feb 2018 19:39:59 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0)
+	Gecko/20100101 Thunderbird/59.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.125]
-X-yoursite-MailScanner-ID: 544CF48AE765.A7EB2
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] nano: 2.7.4 -> 2.9.3
+In-Reply-To: <BY2PR02MB4253E02A1E05FE35944B351AFC00@BY2PR02MB425.namprd02.prod.outlook.com>
+Subject: Re: qt moc issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +64,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2018 01:26:27 -0000
-Content-Type: text/plain
-
-Upgrade nano form 2.7.4 to 2.9.3.
-
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/nano/nano_2.7.4.bb | 4 ----
- meta-oe/recipes-support/nano/nano_2.9.3.bb | 4 ++++
- 2 files changed, 4 insertions(+), 4 deletions(-)
- delete mode 100644 meta-oe/recipes-support/nano/nano_2.7.4.bb
- create mode 100644 meta-oe/recipes-support/nano/nano_2.9.3.bb
-
-diff --git a/meta-oe/recipes-support/nano/nano_2.7.4.bb b/meta-oe/recipes-support/nano/nano_2.7.4.bb
-deleted file mode 100644
-index eaf393e..0000000
---- a/meta-oe/recipes-support/nano/nano_2.7.4.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--include nano.inc
--
--SRC_URI[md5sum] = "c011c7f9e47cb1da27d4e7cc8b56ec6a"
--SRC_URI[sha256sum] = "752170643039e2c95a433de357f0c70a8c4c4c561a90a7e7259a63e225b659b9"
-diff --git a/meta-oe/recipes-support/nano/nano_2.9.3.bb b/meta-oe/recipes-support/nano/nano_2.9.3.bb
-new file mode 100644
-index 0000000..afb0cf2
---- /dev/null
-+++ b/meta-oe/recipes-support/nano/nano_2.9.3.bb
-@@ -0,0 +1,4 @@
-+include nano.inc
-+
-+SRC_URI[md5sum] = "6dd37f010d6a985bf0e5f8ed091ff919"
-+SRC_URI[sha256sum] = "7783bcfd4b2d5dc0bf64d4bd07b1a19e7ba3c91da881a4249772a36b972d4012"
--- 
-2.7.4
+X-List-Received-Date: Wed, 28 Feb 2018 03:40:00 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
 
 
+On 2/27/18 9:59 AM, Jaewon Lee wrote:
+> Hi All,
+> 
+> I'm seeing the following build error:
+> 
+> | /scratch/DAILYBUILD/build/tmp/work/aarch64-xilinx-linux/qtdeclarative/5.9.4+gitAUTOINC+317908e72a-r0/git/tests/benchmarks/qml/binding/tst_binding.cpp:175:10: fatal error: tst_binding.moc: No such file or directory
+> |  #include "tst_binding.moc"
+> |           ^~~~~~~~~~~~~~~~~
+> | compilation terminated.
+> | make[4]: *** [.obj/tst_binding.o] Error 1
+> | make[4]: *** Waiting for unfinished jobs....
+> 
+> There are a the same errors for a bunch of other moc files,
+> #include "tst_qxmlquery.moc"
+> #include "tst_qxmlresultitems.moc"
+> #include "tst_qxmlname.moc"
+> #include "tst_qxmlformatter.moc"
+> 
+> If I check for the file after the error, the files are there.
+> Im also seeing the same for other qt recipes, like  qtxmlpatterns
+> 
+> Has anybody seen the same error/is there a fix for this out there?
+> 
+
+I have seen this, my hunch is its a race in parallel build. I have a
+
+workaround/hack that I use is
+
+PACKAGECONFIG_remove = "tests" in qtbase_%.bbappend
+
+> 
+> Thanks,
+> Jaewon
+> 
+> This email and any attachments are intended for the sole use of the named recipient(s) and contain(s) confidential information that may be proprietary, privileged or copyrighted under applicable law. If you are not the intended recipient, do not read, copy, or forward this email message or any attachments. Delete this email message and any attachments immediately.
+> 
 
