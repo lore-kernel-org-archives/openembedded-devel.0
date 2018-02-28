@@ -1,47 +1,30 @@
-Return-Path: <carlos.rodriguez@ridgerun.com>
-Received: from mail-vk0-f51.google.com (mail-vk0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 97F5D78844
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 296B1788A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 23:42:28 +0000 (UTC)
-Received: by mail-vk0-f51.google.com with SMTP id k187so374993vke.12
+	Wed, 28 Feb 2018 01:26:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="37311897"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 28 Feb 2018 09:26:27 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 544CF48AE765
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 15:42:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=QXjmCvCmiraWHIvwjaLNYTUOZ9+6X72L1exbR8Q6YLY=;
-	b=u7tdTKi/4imk/YPbPMgRwo96MOCXAeR/AyeW/Lr+V7QfaDFtUk1DkZ+lG/5DWn3ZGK
-	WYi+q61dPLe7iqzdLlsJxjGdbrDp1xg+PgZ5Af85jXjpvY0k38ICWkpSX/5kncgkg17g
-	5Bj32HM5Aphbk9z/Ud0pTjyZKiG7dVbBFaEV9ArtbfmkQJ2PHVcABhKy7joXQaRKe8K0
-	lxPWsvcOGjhHGdP9/rNX+cQljK9dqX/RejGHrraaMaJRviyUsvHT9bay7y3HmwVo2Fce
-	uMUJzRkc/JMx5b/XnT9vKULdLFzN33ijMldpbRdBylRrAUWkY9Mu//89At2Hf3u2vtm+
-	pprQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QXjmCvCmiraWHIvwjaLNYTUOZ9+6X72L1exbR8Q6YLY=;
-	b=NOtDd1dC1b9sad3R724iRpD78OkGw1QwSVUKqbey196qQFNpCJmnq+1s1PSzWWFr8z
-	kOXZ0CrvXHJJloqPgtZMkKgkzHMqMhCVPMKuhi6QZL3eSSjiglHG0D/tyWWpGaDoCJst
-	zeViRJtVaL19GpHu9NA4nkj1t0P1ZEGtS07fMchBMl7lasWVHoW9x4s3Cj37sQaElRbE
-	zlTaoF0jMlxGkGupDFWun/FavBH4YmbgDC4vmUfFPYGnYXs5DX7p3gEd0aG8Ns8SMJ1E
-	tt1ZpSlnXmQJhp3RQzzEchS6GNbx7/kYXT8M7/vFGmqBYDhVD0xISzvIHOl+5X41Lq2t
-	RIkg==
-X-Gm-Message-State: APf1xPDZEmqeT1/kdghNTMBlyKDaFuqgD5TsUS8rx6hB/gzxUNuuE5co
-	Lx9VSJ1j4XYOY0YmiMqApOzzBbQK
-X-Google-Smtp-Source: AG47ELtTN6V8B5x3/+ltmxo6Klazfqdw+QiDf7iIvwOR+Hdp3jsO2d2EvoNFb7lsjesRAAngX/9/jg==
-X-Received: by 10.31.3.102 with SMTP id 99mr12012635vkd.124.1519774949335;
-	Tue, 27 Feb 2018 15:42:29 -0800 (PST)
-Received: from crodriguez.cr.ridgerun.com ([201.206.221.6])
-	by smtp.gmail.com with ESMTPSA id y14sm308171vky.51.2018.02.27.15.42.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 27 Feb 2018 15:42:28 -0800 (PST)
-From: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Feb 2018 17:42:20 -0600
-Message-Id: <1519774940-2279-1-git-send-email-carlos.rodriguez@ridgerun.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH v2] gst-shark: Add Gst-Shark recipe
+	Wed, 28 Feb 2018 09:26:26 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.125) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Wed, 28 Feb 2018 09:26:24 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Feb 2018 09:26:11 +0800
+Message-ID: <1519781171-1889-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.125]
+X-yoursite-MailScanner-ID: 544CF48AE765.A7EB2
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] nano: 2.7.4 -> 2.9.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,66 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Feb 2018 23:42:28 -0000
+X-List-Received-Date: Wed, 28 Feb 2018 01:26:27 -0000
+Content-Type: text/plain
 
-GstShark is an open-source project from RidgeRun that provides
-benchmarks and profiling tools for GStreamer 1.7.1 (and above).
-It includes tracers for generating debug information plus some
-tools to analyze the debug information. GstShark provides easy
-to use and useful tracers, paired with analysis tools to enable
-straightforward optimizations.
+Upgrade nano form 2.7.4 to 2.9.3.
 
-Signed-off-by: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- .../gstreamer-1.0/gst-shark_0.2.1.bb               | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
+ meta-oe/recipes-support/nano/nano_2.7.4.bb | 4 ----
+ meta-oe/recipes-support/nano/nano_2.9.3.bb | 4 ++++
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/nano/nano_2.7.4.bb
+ create mode 100644 meta-oe/recipes-support/nano/nano_2.9.3.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
+diff --git a/meta-oe/recipes-support/nano/nano_2.7.4.bb b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+deleted file mode 100644
+index eaf393e..0000000
+--- a/meta-oe/recipes-support/nano/nano_2.7.4.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-include nano.inc
+-
+-SRC_URI[md5sum] = "c011c7f9e47cb1da27d4e7cc8b56ec6a"
+-SRC_URI[sha256sum] = "752170643039e2c95a433de357f0c70a8c4c4c561a90a7e7259a63e225b659b9"
+diff --git a/meta-oe/recipes-support/nano/nano_2.9.3.bb b/meta-oe/recipes-support/nano/nano_2.9.3.bb
 new file mode 100644
-index 0000000..981bbe8
+index 0000000..afb0cf2
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "Gst-Shark Tracers"
-+DESCRIPTION = "Benchmarks and profiling tools for GStreamer"
-+HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=GstShark"
-+SECTION = "multimedia" 
-+LICENSE = "GPLv2+" 
++++ b/meta-oe/recipes-support/nano/nano_2.9.3.bb
+@@ -0,0 +1,4 @@
++include nano.inc
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e1caa368743492879002ad032445fa97"
-+
-+DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
-+
-+SRCBRANCH ?= "master"
-+
-+SRCREV_base = "a60b3996fe3376d42334fc89014e9d6f6af62899"
-+SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
-+
-+SRC_URI = " \
-+    git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
-+    git://anongit.freedesktop.org/git/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common; \
-+    "
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG_CONFARGS = " \
-+	--disable-graphviz \
-+	--enable-gtk-doc=no \
-+"
-+
-+FILES_${PN} += "\
-+	${libdir}/gstreamer-1.0/libgstsharktracers.so  \
-+	${libdir}/gstreamer-1.0/libgstsharktracers.la \
-+"
-+
-+inherit autotools gettext 
-+
-+do_configure() {
-+${S}/autogen.sh --noconfigure
-+oe_runconf
-+}
++SRC_URI[md5sum] = "6dd37f010d6a985bf0e5f8ed091ff919"
++SRC_URI[sha256sum] = "7783bcfd4b2d5dc0bf64d4bd07b1a19e7ba3c91da881a4249772a36b972d4012"
 -- 
-1.9.1
+2.7.4
+
+
 
 
