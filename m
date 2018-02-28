@@ -1,44 +1,47 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-ot0-f171.google.com (mail-ot0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 20D977886C
+Return-Path: <carlos.rodriguez@ridgerun.com>
+Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
+	[209.85.217.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 77A8878856
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 12:58:28 +0000 (UTC)
-Received: by mail-ot0-f171.google.com with SMTP id g97so2083746otg.13
+	Wed, 28 Feb 2018 14:53:20 +0000 (UTC)
+Received: by mail-ua0-f174.google.com with SMTP id z3so1679212uae.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 04:58:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=45tPOTsxqtv/wM0ftVpvimsyls0TTQ2c4anrwwoxyDc=;
-	b=tChq5cwig5FJqt7Me8h2FSS9Zr+JLFFdun0+4eWLguPPQDc+8e71rltznTSgv74SNA
-	7yFYZYULYAj+KKIKsG68qNiqcOzvbq6hfx9a2YfPkRo6a5MfPGOED3qfteUdlumDwIhn
-	cvaV8wL3WCvyVlJpoRpdX1QKqzCxaZIjGB745zBvRsgGwKsPWrdVDc6QbH0DTikJZW0L
-	Pzh5J8ftEOo1w9Br1evEzzGCgvifS8QzmEmHdY1KnlwA8FGBMA4lmAHeNzfILecIIeUu
-	rYb6oD1hg22v7P2mRhSfk7YFsKC3RxWp6whx58+53D1aLt5+AE2hFRkZe1u4+gDO1Y2c
-	wjog==
+	Wed, 28 Feb 2018 06:53:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=rNY946YJVavyWpH9ni40wF2sO4BysdcwLxN8S26Edmg=;
+	b=N8Gee43O8uK0qRrYhe/0udl0AQHgy2IC6AHvAIVuuaiWxSOTUr6tYMjpg3k95M/3SA
+	LLaK9FTrE8r706V/Jv3Q1L11ZT4VBinOZE3erDAuUAGLY1bQoFoG7LLjWjOUN3dUOZSx
+	oKiRkxywM/DHHXYNNimSjhyQ2e+gj5giRou3qnJ1sqhZyKjhpWFIE2W5Ap8BPU/ejSAj
+	iw46o+IVp9FxgWQzPeBhu6wWj3YfRDILf82kCCGVSSGMLR6pdnch32b6VBA6JiDJSHPC
+	VhQYljEhPw7mIc9NvNknD7PCFZioRFEVFkxc52lb+kLvWaS+CxXvdHzPTAgwzcR/733d
+	0L3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=45tPOTsxqtv/wM0ftVpvimsyls0TTQ2c4anrwwoxyDc=;
-	b=XkCJ8qmpe20Qo2ezWCn7HbV5CaSumQy53izCHfOcL9mLDhiCyvJNKlwBljGgD6LPT2
-	MUrNPC4wBi1O36izdjbIVOXjTJRS2lM6+9LpM/sXDv/01QVs0jSWhyy3C7rfFYLP6J2j
-	WktIlCxcsTYuWR+mWC4O5iuubfth7d1xrzOBmX/VJK+13U2Lf5ctBhwtEyyppcO43fR8
-	qD2IbbDUxACLO1YPyNp95dNi08omJiqyezB1HU1VZeWuVyGJ4oM/BayldXUfgKQ9SOFw
-	pxbF7y8uTTB5T4b+2GLlQI3gQUByr44P41t86vE9atDsjVvNOsFPbFzubZ9sJGUXRrUq
-	1W3g==
-X-Gm-Message-State: APf1xPB4u6rdjiVim+MGG6gpsy3aK1p/Ffv+/YoxXc69fec4MUmLu97N
-	l9l9OXzM7FDUqM3TutwvduUjN3j2Lj0sg9gywCSLGw==
-X-Google-Smtp-Source: AG47ELs5+fCQMjUYoC8TDSSbXMhGaWIhUEGfdWFcV0hym5zYMx8p9H0IQVZEslAMlDZSFalO9faYIc6CgMpYBvHPXLw=
-X-Received: by 10.157.1.4 with SMTP id 4mr13086751otu.328.1519822709760; Wed,
-	28 Feb 2018 04:58:29 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.157.50.136 with HTTP; Wed, 28 Feb 2018 04:58:09 -0800 (PST)
-From: nick83ola <nick83ola@gmail.com>
-Date: Wed, 28 Feb 2018 12:58:09 +0000
-Message-ID: <CABPh3UNxJfqzMtZKNNtEAVzHBm--=fA7mxH5szKX+jm=Y2_AwQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=rNY946YJVavyWpH9ni40wF2sO4BysdcwLxN8S26Edmg=;
+	b=fkJ15qKeWSrQxJ/6EdURjb+Gnorfyo4IEWdCXQD13xleDzPaK7uMRUKNBKpwqktA30
+	utxbtQpyKmkQ+hGI22CLnsVE5gKvqETlgxZKSd6RUVN5X2Ae11onWDAY7dP6vq3z+ssx
+	iK7Xx0beJJnm9fLPUAu4RQNhT25CN5+wYNm9gNeC5XJw+OpyUv5/M0rlod0DljgB2KV8
+	erSH2aEo0DM624Ilt6v8dIvzow6nc/fnRJkJ7BOJ2hBArfDjmZohvShSLPNVwi7nd48a
+	mw+OMBnEu6YVsI9o2hTLoTVYPNWAI68ZqCiDMwW0Kdq//V1QDXfLwMEacQwWFs+pQfhu
+	424A==
+X-Gm-Message-State: APf1xPBLm/VKWhuv+fOK9X65Ux/XDR8i6xET8k1zW4HmAJEZBgPE56rI
+	eU2BNi7Wz9w+CpLm/xEgdVHmPhD6
+X-Google-Smtp-Source: AG47ELs9v70Y/waiTACXLmPObFq9NDIHJTNA2qef/zjuLrLUnd4hJTb/+uY9XKGrH4ig/kHwTmvttA==
+X-Received: by 10.176.2.244 with SMTP id 107mr2180046uah.52.1519829601530;
+	Wed, 28 Feb 2018 06:53:21 -0800 (PST)
+Received: from crodriguez.cr.ridgerun.com ([201.206.221.6])
+	by smtp.gmail.com with ESMTPSA id j192sm321962vke.9.2018.02.28.06.53.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 28 Feb 2018 06:53:21 -0800 (PST)
+From: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: BUG: openjre-8 won't compile on qemux86/ latest meta-java repo
+Date: Wed, 28 Feb 2018 08:53:12 -0600
+Message-Id: <1519829592-17286-1-git-send-email-carlos.rodriguez@ridgerun.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH v3] gst-shark: Add Gst-Shark recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,73 +54,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2018 12:58:29 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 28 Feb 2018 14:53:21 -0000
 
-$ bitbake openjre-8
+GstShark is an open-source project from RidgeRun that provides
+benchmarks and profiling tools for GStreamer 1.7.1 (and above).
+It includes tracers for generating debug information plus some
+tools to analyze the debug information. GstShark provides easy
+to use and useful tracers, paired with analysis tools to enable
+straightforward optimizations.
 
-Build Configuration:
-BB_VERSION           = "1.36.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "i586-poky-linux"
-MACHINE              = "qemux86"
-DISTRO               = "poky"
-DISTRO_VERSION       = "2.4.2"
-TUNE_FEATURES        = "m32 i586"
-TARGET_FPU           = ""
-meta
-meta-poky
-meta-yocto-bsp       = "rocko:342fbd6a3e57021c8e28b124b3adb241936f3d9d"
-meta-oe
-meta-python
-meta-networking      = "rocko:a65c1acb1822966c3553de9fc98d8bb6be705c4e"
-meta-java            = "master:fbe0b0eb30d93f5fa2101fb015f20c1dc118b4a6"
-meta-openhab         = "nick-dev:9daedbd7dd9348f3107e58e57675f620dbfd75cc"
+Signed-off-by: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
+---
+ .../gstreamer-1.0/gst-shark_0.2.1.bb               | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
 
-Initialising tasks: 100%
-|################################################################| Time:
-0:00:02
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-ERROR: jaxp1.3-native-1.4.01-r0 do_compile: Function failed: do_compile
-(log file is located at
-/home/nicklunghi/src/yocto-openhab/build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.24176)
-ERROR: Logfile of failure stored in:
-/home/nicklunghi/src/yocto-openhab/build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.24176
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| Illegal instruction
-| WARNING: exit code 132 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at
-/home/nicklunghi/src/yocto-openhab/build/tmp/work/x86_64-linux/jaxp1.3-native/1.4.01-r0/temp/log.do_compile.24176)
-ERROR: Task
-(virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:do_compile)
-failed with exit code '1'
-ERROR: gnujaf-native-1.1.1-r1 do_compile: Function failed: do_compile (log
-file is located at
-/home/nicklunghi/src/yocto-openhab/build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.24312)
-ERROR: Logfile of failure stored in:
-/home/nicklunghi/src/yocto-openhab/build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.24312
-Log data follows:
-| DEBUG: Executing shell function do_compile
-| Illegal instruction
-| WARNING: exit code 132 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at
-/home/nicklunghi/src/yocto-openhab/build/tmp/work/x86_64-linux/gnujaf-native/1.1.1-r1/temp/log.do_compile.24312)
-ERROR: Task
-(virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/classpathx/gnujaf_1.1.1.bb:do_compile)
-failed with exit code '1'
-NOTE: Tasks Summary: Attempted 956 tasks of which 946 didn't need to be
-rerun and 2 failed.
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
+new file mode 100644
+index 0000000..8ca165c
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Gst-Shark Tracers"
++DESCRIPTION = "Benchmarks and profiling tools for GStreamer"
++HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=GstShark"
++SECTION = "multimedia" 
++LICENSE = "GPLv2+" 
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=e1caa368743492879002ad032445fa97"
++
++DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
++
++SRCBRANCH ?= "master"
++
++SRCREV_base = "a60b3996fe3376d42334fc89014e9d6f6af62899"
++SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
++
++SRC_URI = " \
++    git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
++    git://anongit.freedesktop.org/git/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common; \
++    "
++
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG_CONFARGS = " \
++	--disable-graphviz \
++	--enable-gtk-doc=no \
++"
++
++FILES_${PN} += "\
++	${libdir}/gstreamer-1.0/libgstsharktracers.so  \
++	${libdir}/gstreamer-1.0/libgstsharktracers.la \
++"
++
++inherit autotools gettext 
++
++do_configure() {
++	${S}/autogen.sh --noconfigure
++	oe_runconf
++}
+-- 
+1.9.1
 
-Summary: 2 tasks failed:
-
-virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:
-do_compile
-
-virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/classpathx/gnujaf_1.1.1.bb:
-do_compile
-Summary: There was 1 WARNING message shown.
-Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
 
