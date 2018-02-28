@@ -1,40 +1,58 @@
-Return-Path: <zakiah.md.ismail@intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id B14857846C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f44.google.com (mail-pl0-f44.google.com
+	[209.85.160.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 528D97878B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 03:48:53 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Feb 2018 19:48:55 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.47,403,1515484800"; 
-	d="scan'208,217";a="178638480"
-Received: from kmsmsx151.gar.corp.intel.com ([172.21.73.86])
-	by orsmga004.jf.intel.com with ESMTP; 27 Feb 2018 19:48:54 -0800
-Received: from pgsmsx103.gar.corp.intel.com ([169.254.2.160]) by
-	KMSMSX151.gar.corp.intel.com ([169.254.10.67]) with mapi id
-	14.03.0319.002; Wed, 28 Feb 2018 11:48:53 +0800
-From: "Md Ismail, Zakiah" <zakiah.md.ismail@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
+	Wed, 28 Feb 2018 03:58:39 +0000 (UTC)
+Received: by mail-pl0-f44.google.com with SMTP id c11-v6so779267plo.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Feb 2018 19:58:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=pmqUDZ2ZDZW6dXx/QBedTvaeOJtPIFS7dtZIHRBAGS4=;
+	b=sIwqeQQlEkJwh0bj9D4EiF7ByWpDDEtDzg5o7etSFDCFrM849yP8/DufuM7XoeOd4f
+	IJhIHyilPW6tbbSPPQWwSLly680dmwAeFdOyXHE3/OY3thwzouWxpqJ8T7hJA5/AXG5U
+	Co1BE5sHDkFqztAweUpa3iFWo2pbRALADxlUCoe0wpx+99Ugq+rHreBqwN3NC10xN7w5
+	bBVSf6lS3cTgfAAMdNXlxdUcJR89cryVoHTV0jkOwBnA4I0nwD13ndEU2i0qshXE3wxA
+	nc9HTDz84ISh0dnPOMlWRr3/goTAqUjcnM9f1PE5VNjaOBX3BZBHy1uF8mfzV6V3Q0VT
+	SLNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=pmqUDZ2ZDZW6dXx/QBedTvaeOJtPIFS7dtZIHRBAGS4=;
+	b=ft+nsJnc+PPDSxovCGNWzrEfdAhfD/ANPQ51gEOJSOCWtzUanGvggbuNvTi3ZTqSHh
+	PEUf7ye+ONVrhQziI9SIK8a9PBOxDe9o1RiUeeBo06SxBbLPOyfBhLi1TIISJ448uPZO
+	UkdIHGwYP2hoFRMCuv+5phwNBmYOHxgp9hw5NAPSKmVTL1XXpddAq9bfo1V6lEcpgklZ
+	OZg026p/58FfH5zHRbpyWDOLMmE/MnroSr+3nA79h1H07+lB2lOFqyZLxWRYcXugyxyu
+	j2SkCS5fUfGYm0paTdy1EDkJ5SzWw/95G0KLoC/7YBtBdaFXIB+pYF9WVFJ+TlHee4CQ
+	mX+w==
+X-Gm-Message-State: APf1xPBZYJpahOSqC47VlPzpK4C5+TPMZ5Yrja2yvx+wQQ5uw0x2/zdi
+	21CCfgcl7eiJG8vEQRYHDzBADS94
+X-Google-Smtp-Source: AH8x226yiPUfeJhlpImCOdXZT7tM3EONJizVhq2vuZVlXH1IvMGigNgEKzhN4yozFh6Z2IrRkzx/vQ==
+X-Received: by 2002:a17:902:74c3:: with SMTP id
+	f3-v6mr16617958plt.444.1519790321133; 
+	Tue, 27 Feb 2018 19:58:41 -0800 (PST)
+Received: from hermes.local ([2601:646:8880:466c:812d:b93c:3785:4a27])
+	by smtp.gmail.com with ESMTPSA id
+	b88sm894660pfd.108.2018.02.27.19.58.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 Feb 2018 19:58:40 -0800 (PST)
+To: "Md Ismail, Zakiah" <zakiah.md.ismail@intel.com>,
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Dependency loop in cryptsetup
-Thread-Index: AdOwRwoR1Kgn94eTS/+PgBRAOALaiA==
-Date: Wed, 28 Feb 2018 03:48:52 +0000
-Message-ID: <1A5BB22468458840B08C979DDA869BF27EB738@PGSMSX103.gar.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.0.116
-dlp-reaction: no-action
-x-ctpclassification: CTP_NT
-x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiMDJiNzRiNzEtOWNkMi00OGIwLThhOTMtMjc4YTI3NGQyOTE3IiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjIuNS4xOCIsIlRydXN0ZWRMYWJlbEhhc2giOiJMRlZzZEY0MDBRWEZ3Vlg3WWRRcTBJeUJwTG9cL2JHcDVFSGVxakthNDZXcHRcL210b1hFa05iV1wvbGhPSTRWNUgxIn0=
-x-originating-ip: [172.30.20.205]
+References: <1A5BB22468458840B08C979DDA869BF27EB738@PGSMSX103.gar.corp.intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <0ca3f04d-dd55-cbbb-3b3e-dba03f54ebd6@gmail.com>
+Date: Tue, 27 Feb 2018 19:58:39 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0)
+	Gecko/20100101 Thunderbird/59.0
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Dependency loop in cryptsetup
+In-Reply-To: <1A5BB22468458840B08C979DDA869BF27EB738@PGSMSX103.gar.corp.intel.com>
+Subject: Re: Dependency loop in cryptsetup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,22 +65,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2018 03:48:53 -0000
+X-List-Received-Date: Wed, 28 Feb 2018 03:58:40 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-I want to enable cyrptsetup in systemd by adding PACKAGECONFIG_append_pn-sy=
-stemd =3D " cryptsetup" in my local.conf; however, I encounter the dependen=
-cy loop issue. The issue is similar to this: https://bugzilla.yoctoproject.=
-org/show_bug.cgi?id=3D11856. The difference is I'm using the latest commit =
-from meta-openembedded rocko branch. Please advise on the steps to solve th=
-is issue. Thanks in advance!
-
-Regards,
-Zakiah
+Content-Transfer-Encoding: 7bit
 
 
+
+On 2/27/18 7:48 PM, Md Ismail, Zakiah wrote:
+> Hi,
+> 
+> I want to enable cyrptsetup in systemd by adding PACKAGECONFIG_append_pn-systemd = " cryptsetup" in my local.conf; however, I encounter the dependency loop issue. The issue is similar to this: https://bugzilla.yoctoproject.org/show_bug.cgi?id=11856. The difference is I'm using the latest commit from meta-openembedded rocko branch. Please advise on the steps to solve this issue. Thanks in advance!
+> 
+
+are you using latest of rocko for OE-Core as well ?
+
+> Regards,
+> Zakiah
+> 
+> 
 
