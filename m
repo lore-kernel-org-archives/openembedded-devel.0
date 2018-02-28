@@ -1,57 +1,55 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f45.google.com (mail-pl0-f45.google.com
-	[209.85.160.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 1878878449
+Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
+	[209.85.214.54])
+	by mail.openembedded.org (Postfix) with ESMTP id D30D3788C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 05:33:03 +0000 (UTC)
-Received: by mail-pl0-f45.google.com with SMTP id 93-v6so898874plc.9
+	Wed, 28 Feb 2018 05:40:05 +0000 (UTC)
+Received: by mail-it0-f54.google.com with SMTP id j7so2034190ita.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 21:33:05 -0800 (PST)
+	Tue, 27 Feb 2018 21:40:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=ZwzT+EzOuX/JAMJbjUuPW7Nsk3Js+bdLP30tzrHb1Lc=;
-	b=UpyE2yTPzNRhtzzmYsuaz2p+E5cLnrxd2TWBXpeYG4KjRDlCCUoNvrWhZ6dmn+BDN6
-	YvZz/pwBTy0Tuf8egYfNq5jPcRifrawyqCz5UsAy6eDcPc5kKYxG7xPDMcZXvieb3v7h
-	2bmgNwLh3lcGvs4bHF0WLtGrcwL8j8i1NApyk16+W5WFuC2usk5OWRB0d957S3oN0/Qn
-	7MIxn9n93cRnBdV7dA1ZhICtH1JpNIT1ym+eTWKg9gbb0FtSBo/oj5SmDfOFdB9Bk6M6
-	4aukIhqZDQacYovb+l6t9VwNF1L0uUTB/mvM1Cge4vMuNqARMCZU1/foBW37ras/sf3v
-	KboA==
+	h=subject:to:references:from:cc:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=zPIE7MZLUgGlIHovCob9sGQsLFIrLE/4o/qM5i/WiOA=;
+	b=jzMbGBr6I2V5RLcMGs77cMmGwKHywyzqWWMRJxDcqa8SD4vVQ+bTIIy6RwZ0JpuDoS
+	XZMEVj75h46TTSu7ZCFq2Y6kUnmpFH7V7QdhJ2ysmaGXt1cw9sCv0AENxntsw/TgEKw3
+	SRVkndOr0Nxi8GZIC64Rw1kA3FGWsfMxeNXaBBKUneB55N8VEKnhh6Z+DnxZotPI7Dcv
+	7G0WhVURtehtFJJw7i2WtNbYkjLXK1bkuQelmTYvoah4mw+rSZHC+aBsImRTi1/I0Klv
+	w6os+9yUVTbKYFh1odr6vBuiuLUcFdw8GhgvPi/bMsnw2akUy+yM48ISrY5n9yoBup9o
+	wxkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
+	h=x-gm-message-state:subject:to:references:from:cc:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=ZwzT+EzOuX/JAMJbjUuPW7Nsk3Js+bdLP30tzrHb1Lc=;
-	b=TW9JFdMS4cEzHHENGfo7qR5UmHs7imQFHB2DR4Zsry6h9Y3Z6uM+J55kgzlj38JuZR
-	j1koUGYxD6gr8J4sUiwhg05uy1MNYXrmJo8tGYelzMw3cdN+/g10Z+NT44vgLdiikDfz
-	eroLXTuPCTvCvCQJrTOmYGNj1O262UFeZC/hZXrGOG9jUJNCkLLuhbHEMpOm90HWD1UG
-	wrelKMjEeAfFBUOxOM+N9btqt5rVIeq7jYAnhNJWQDJYS50KAxC5Mm9g2XX5eBsqEFLw
-	Eu+5gNUsa9lA91X8r1gvc6VWk+arpHHgTLDm+yiItZe3aV2t8dcdwoenZULhvgh2lwbx
-	Nacg==
-X-Gm-Message-State: APf1xPCL0/0vOULafP0fgG8R0z0dzI2f6p+/+XD1Osk1qbBSrJkJrOxy
-	3ixh/cJlOEwFp2N2L+zsW+z2JQ==
-X-Google-Smtp-Source: AH8x2258nIEMFc3Vdtm1w0lnnrMgVBa9x2Sqtgn80WjNei9zmTHUfGb3mGSWhm1EyufeF9fPtHlw6Q==
-X-Received: by 2002:a17:902:64d7:: with SMTP id
-	y23-v6mr16660134pli.258.1519795984953; 
-	Tue, 27 Feb 2018 21:33:04 -0800 (PST)
+	bh=zPIE7MZLUgGlIHovCob9sGQsLFIrLE/4o/qM5i/WiOA=;
+	b=R7TjmCA1/wnQer3TYFGpgXJLQl2/dhefGP04dj6jbYUlw+LUjITVk9RKlakjg1BztQ
+	azm/63jgvt4+boGZZpIAAX/kLEFsyX+29knd5kwwr4Q/4pWnfj1Y/+/ndsSC5keEwWRd
+	SDZVcpaARnm10uN13ZUQlzzBjHx0prIylxkeRwNQ9mtN1yBMIiVDw0N7mzJ3+Q3O4KiR
+	+3mBAziAhIH2NAgYoOol52keYpX1YGQ2K/wq4iqf+4NQ+g66EAqdrqf6IpEvSebNYybr
+	wX3wp5Fu6ODenDJu3eYNIhfgNmxYKjN/byhNYL31dd4kL0wI/VJ2ACxflxZ+foF3fEDD
+	8/gA==
+X-Gm-Message-State: APf1xPD8WtloyCcq9WKvIu6ca6LNjZ2Urr/wzZwr0hYeQ4RvuzZfoIlD
+	Sl03FjPdWgHfN+UP5VI4ZoM4PA==
+X-Google-Smtp-Source: AG47ELsuBn/uKgDFnGehjow9T2bVkFMSNh3L7yhMIVsFAyQ8NPgkAS9kXnI8TC+JbAJEBSIPEE6TCA==
+X-Received: by 10.36.94.65 with SMTP id h62mr20200174itb.144.1519796406451;
+	Tue, 27 Feb 2018 21:40:06 -0800 (PST)
 Received: from ?IPv6:2601:202:4000:1184:b885:642e:b8e3:aa2c?
 	([2601:202:4000:1184:b885:642e:b8e3:aa2c])
-	by smtp.gmail.com with ESMTPSA id
-	y84sm1341529pff.81.2018.02.27.21.33.03
+	by smtp.gmail.com with ESMTPSA id i31sm578966iod.78.2018.02.27.21.40.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Feb 2018 21:33:04 -0800 (PST)
-To: Sebastian Reichel <sebastian.reichel@collabora.co.uk>,
-	openembedded-devel@lists.openembedded.org
-References: <20180227172450.25507-1-sebastian.reichel@collabora.co.uk>
+	Tue, 27 Feb 2018 21:40:06 -0800 (PST)
+To: carlos.rodriguez@ridgerun.com
+References: <1519774824-30065-1-git-send-email-carlos.rodriguez@ridgerun.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <5b5750a8-7894-ae5b-5b2a-1800e9270cb5@gmail.com>
-Date: Tue, 27 Feb 2018 21:33:03 -0800
+Message-ID: <1711123d-03b8-bf6a-b66d-6a83fcaa0e4f@gmail.com>
+Date: Tue, 27 Feb 2018 21:40:04 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.6.0
 MIME-Version: 1.0
-In-Reply-To: <20180227172450.25507-1-sebastian.reichel@collabora.co.uk>
-Subject: Re: [meta-oe][PATCH] fvwm: add new recipe
+In-Reply-To: <1519774824-30065-1-git-send-email-carlos.rodriguez@ridgerun.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v4] gstd: Add Gst-Deamon recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,259 +62,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2018 05:33:04 -0000
+X-List-Received-Date: Wed, 28 Feb 2018 05:40:06 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 Content-Language: en-US
 
 
 
-On 02/27/2018 09:24 AM, Sebastian Reichel wrote:
-> Add recipe for a minimal built of fvwm.
+On 02/27/2018 03:40 PM, Carlos Rodriguez wrote:
+> GStreamer Daemon, also called gstd, is a GStreamer framework
+> for controlling audio and video streaming using TCP connection
+> messages. Qt applications, web interfaces, and GStreamer element
+> test suites show different ways the framework can be utilized.
+> GStreamer Daemon is gst-launch on steroids where you can create a
+> GStreamer pipeline, play, pause, change speed, skip around, and
+> even change element parameter settings all while the pipeline
+> is active.
 >
-> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
+> Signed-off-by: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
 > ---
->  .../0001-Fix-compilation-for-disabled-gnome.patch  |  67 ++++++++++++
->  .../fvwm/fvwm/0002-Avoid-absolute-symlinks.patch   |  26 +++++
->  meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb        | 112 +++++++++++++++++++++
->  3 files changed, 205 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
->  create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
->  create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
+>  .../gstd/0001-gstd-yocto-compatibility.patch       | 63 ++++++++++++++=
+++++++++
+>  .../recipes-multimedia/gstreamer-1.0/gstd_1.0.bb   | 27 ++++++++++
+>  2 files changed, 90 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gs=
+td/0001-gstd-yocto-compatibility.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gs=
+td_1.0.bb
 >
-> diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001=
+-gstd-yocto-compatibility.patch b/meta-multimedia/recipes-multimedia/gstr=
+eamer-1.0/gstd/0001-gstd-yocto-compatibility.patch
 > new file mode 100644
-> index 000000000000..97d6bc1b7ab6
+> index 0000000..ddc1831
 > --- /dev/null
-> +++ b/meta-oe/recipes-graphics/fvwm/fvwm/0001-Fix-compilation-for-disabled-gnome.patch
-> @@ -0,0 +1,67 @@
-> +From 60c17eb49121bf2aa485acd30750b2fc6c8eb61f Mon Sep 17 00:00:00 2001
-> +From: Jarmo Jaakkola <jarmo.jaakkola@vincit.fi>
-> +Date: Mon, 19 Jun 2017 16:41:36 +0300
-> +Subject: [PATCH] Fix compilation for Helix.
-> +
-> +Gnome support, including GNOME_INIT_HOOK, has been removed, but it was
-> +still being called.
-> +
-> +COMPAT_OLD_KEYSYMDEF is a check for a legacy system, which our system
-> +most definitely is not.  It is accomplished by trying to execute
-> +a program, which does not work when cross compiling.
-> +
-> +The fvwm(1) man page is created from Docbook XML which is set for
-> +a Windows code page that is not available when compiling.  Easiest is
-> +to just not create the man page as those are not needed on the monitor.
-> +
-> +Signed-off-by: Jarmo Jaakkola <jarmo.jaakkola@vincit.fi>
-> +Signed-off-by: Riku Hämäläinen <riku.hamalainen@ge.com>
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd/0001-gstd-y=
+octo-compatibility.patch
+> @@ -0,0 +1,63 @@
+> +From eaf51d6420c63713f62025583681007c3502d387 Mon Sep 17 00:00:00 2001=
 
-Missing Upstream-Status and signed-off-by
+> +From: Carlos <carlos.rodriguez@ridgerun.com>
+> +Date: Fri, 15 Dec 2017 10:14:05 -0600
+> +Subject: [PATCH] gstd:yocto compatibility
 
+Missing Upstream-Status and Signed-off-by
+> +
 > +---
-> + configure.ac         | 20 ++++----------------
-> + doc/fvwm/Makefile.am |  2 +-
-> + 3 files changed, 7 insertions(+), 17 deletions(-)
+> + autogen.sh                      | 8 +++++++-
+> + docs/reference/gstd/Makefile.am | 2 +-
+> + gstd/Makefile.am                | 2 +-
+> + 3 files changed, 9 insertions(+), 3 deletions(-)
 > +
-> +diff --git a/configure.ac b/configure.ac
-> +index 48ce264..fab7b44 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -1413,23 +1413,7 @@ else
-> +   problem_gdkimlib=": Failed on gdk-imlib, see config.log"
-> + fi
-> + 
-> +-GNOME_INIT_HOOK
-> +-
-> +-# Unfortunately we have 2 gnome supports: WM hints and gnome libs.
-> +-# The $with_gnomehints below refers to the first, not GNOME_INIT_HOOK.
-> +-if test ! x"$enable_gnome_hints" = xno; then
-> +-  with_gnomehints=yes
-> +-  problem_gnomehints=""
-> +-else
-> +-  with_gnomehints=no
-> +-  problem_gnomehints=": Explicitly disabled"
-> +-fi
-> +-
-> + # Define some compatibility macros needed for config.h.
-> +-mg_DEFINE_IF_NOT([#include <X11/keysym.h>],
-> +-  [defined XK_Page_Up && defined XK_Page_Down],
-> +-  [COMPAT_OLD_KEYSYMDEF], [$X_CFLAGS],
-> +-  [Old AIX systems (3.2.5) don't define some common keysyms.])
-> + AH_VERBATIM([_COMPAT_OLD_KEYSYMDEF],
-> + [#ifdef COMPAT_OLD_KEYSYMDEF
-> + #  define XK_Page_Up   XK_Prior
-> +diff --git a/doc/fvwm/Makefile.am b/doc/fvwm/Makefile.am
-> +index cddb102..ff00149 100755
-> +--- a/doc/fvwm/Makefile.am
-> ++++ b/doc/fvwm/Makefile.am
-> +@@ -10,7 +10,7 @@ XSL_PROFILE = $(srcdir)/../docbook-xsl/profiling/profile.xsl
-> + HTML_FILES = fvwm.man.html
-> + XML_FILES = @DOC_SECTIONS_XML_PATH@
-> + EXTRA_DIST = @DOC_SECTIONS_XML@ $(man_MANS) sections
-> +-man_MANS = fvwm.1
-> ++man_MANS =
-> + 
-> + if FVWM_BUILD_HTMLDOC
-> + doc_DATA = $(HTML_FILES)
-> +-- 
+> +diff --git a/autogen.sh b/autogen.sh
+> +index 66dbd42..793ee2f 100755
+> +--- a/autogen.sh
+> ++++ b/autogen.sh
+> +@@ -21,7 +21,11 @@
+> + # ACLOCAL, AUTOPOINT and/or LIBTOOLIZE to the right versions, or leav=
+e them
+> + # unset and get the defaults
+> +=20
+> +-gtkdocize || exit 1
+> ++test -n "$srcdir" || srcdir=3D`dirname "$0"`
+> ++test -n "$srcdir" || srcdir=3D.
+> ++
+> ++olddir=3D`pwd`
+> ++cd "$srcdir"
+> +=20
+> + autoreconf --verbose --force --install || {
+> +  echo 'autogen.sh failed';
+> +@@ -31,3 +35,5 @@ autoreconf --verbose --force --install || {
+> + echo
+> + echo "Now run './configure' with your system settings followed by 'ma=
+ke' to compile this module."
+> + echo
+> ++
+> ++cd "$olddir"
+> +diff --git a/docs/reference/gstd/Makefile.am b/docs/reference/gstd/Mak=
+efile.am
+> +index f860fa1..153a13b 100644
+> +--- a/docs/reference/gstd/Makefile.am
+> ++++ b/docs/reference/gstd/Makefile.am
+> +@@ -66,7 +66,7 @@ GTKDOC_LIBS=3D$(top_builddir)/gstd/libgstd-core.la
+> +=20
+> +=20
+> + # This includes the standard gtk-doc make rules, copied by gtkdocize.=
+
+> +-include $(top_srcdir)/docs/gtk-doc.make
+> ++# include $(top_srcdir)/docs/gtk-doc.make
+> +=20
+> + # Comment this out if you want 'make check' to test you doc status
+> + # and run some sanity checks
+> +diff --git a/gstd/Makefile.am b/gstd/Makefile.am
+> +index 13c551d..11fe202 100644
+> +--- a/gstd/Makefile.am
+> ++++ b/gstd/Makefile.am
+> +@@ -49,7 +49,7 @@ bin_PROGRAMS =3D gstd
+> +=20
+> + gstd_SOURCES =3D gstd.c
+> + gstd_CFLAGS =3D $(GST_CFLAGS) $(GIO_CFLAGS) $(GJSON_CFLAGS)
+> +-gstd_LDFLAGS =3D $(GST_LIBS) $(GIO_LIBS) $(GJSON_LIBS) -Wl,-rpath -Wl=
+,$(libdir)
+> ++gstd_LDFLAGS =3D $(GST_LIBS) $(GIO_LIBS) $(GJSON_LIBS)
+> + gstd_LDADD =3D libgstd-core.la
+> +=20
+> + gstdincludedir =3D $(includedir)/gstd
+> +--=20
 > +1.9.1
 > +
-> diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.=
+bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
 > new file mode 100644
-> index 000000000000..2a5a6a90b70c
+> index 0000000..ae5a9c6
 > --- /dev/null
-> +++ b/meta-oe/recipes-graphics/fvwm/fvwm/0002-Avoid-absolute-symlinks.patch
-> @@ -0,0 +1,26 @@
-> +From: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
-> +Date: Tue, 29 Auf 2017 16:08:42 +0200
-> +Subject: [PATCH] Avoid absolute symlinks
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY =3D "Gstreamer Daemon 1.0"
+> +DESCRIPTION =3D "GStreamer framework for controlling audio and video s=
+treaming using TCP connection messages"
+> +HOMEPAGE =3D "https://developer.ridgerun.com/wiki/index.php?title=3DGs=
+td-1.0"
+> +SECTION =3D "multimedia"
+> +LICENSE =3D "GPLv2+"
 > +
-> +Avoid usage of absolute symlinks, which breaks yocto builds
-> +with pyro branch.
-Why is Pyro noted here?
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4=
+a4263"
+> +
+> +DEPENDS =3D "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugi=
+ns-bad gstreamer1.0-rtsp-server json-glib libdaemon"
+> +
+> +SRCBRANCH ?=3D "master"
+> +SRCREV =3D "097a086a8606dcb368c7d38c7ec4fefc2497401b"
+> +SRC_URI =3D "git://github.com/RidgeRun/gstd-1.x.git;protocol=3Dhttps;b=
+ranch=3D${SRCBRANCH} \
+> +	   file://0001-gstd-yocto-compatibility.patch"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +PACKAGECONFIG_CONFARGS =3D " \
+> +	--disable-gtk-doc \
+> +"
+> +
+> +inherit autotools pkgconfig gettext
+> +
+> +do_configure() {
+> +${S}/autogen.sh
+> +oe_runconf
+missing proper spacing.
 
-Missing Upstream-Status:
-> +
-> +Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
-> +
-> +diff --git a/default-config/Makefile.am b/default-config/Makefile.am
-> +index 5e16d095a137..5404145a742c 100644
-> +--- a/default-config/Makefile.am
-> ++++ b/default-config/Makefile.am
-> +@@ -17,9 +17,9 @@ EXTRA_DIST  = images \
-> + 
-> + install-data-hook:
-> + 	cp -r $(srcdir)/images $(inst_location)
-> +-	ln -sf $(inst_location)/FvwmScript-DateTime $(inst_location)/..
-> +-	ln -sf $(inst_location)/FvwmScript-ConfirmQuit $(inst_location)/..
-> +-	ln -sf $(inst_location)/FvwmScript-ConfirmCopyConfig $(inst_location)/..
-> ++	ln -sf default-config/FvwmScript-DateTime $(inst_location)/..
-> ++	ln -sf default-config/FvwmScript-ConfirmQuit $(inst_location)/..
-> ++	ln -sf default-config/FvwmScript-ConfirmCopyConfig $(inst_location)/..
-> + 
-> + uninstall-hook:
-> + 	rm -fr $(DESTDIR)/$(configdir)
-> diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
-> new file mode 100644
-> index 000000000000..822411aeff5e
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.6.7.bb
-
-please take a look at https://www.openembedded.org/wiki/Styleguide
-
-thanks,
-Armin
-> @@ -0,0 +1,112 @@
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=363fbcfb59124689af72c914560eaf6e"
-> +
-> +SRC_URI = "\
-> +    git://github.com/fvwmorg/fvwm.git;protocol=https \
-> +    file://0001-Fix-compilation-for-disabled-gnome.patch \
-> +    file://0002-Avoid-absolute-symlinks.patch \
-> +"
-> +
-> +# Modify these as desired
-> +PV = "2.6.7+git${SRCPV}"
-> +SRCREV = "597a4e296da4f21e71a17facab297e016a3a80a8"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +# NOTE: the following prog dependencies are unknown, ignoring: imlib-config fribidi-config fontconfig-config xft-config cpp gmsgfmt
-> +# NOTE: the following library dependencies are unknown, ignoring: ifelse($2 dmalloc efence xpg4 fribidi intl
-> +#       (this is based on recipes that have previously been built and packaged)
-> +DEPENDS = "\
-> +    bison-native \
-> +    flex-native \
-> +    freetype-native \
-> +    gettext-native \
-> +    libxslt-native \
-> +\
-> +    fontconfig \
-> +    libice \
-> +    libpng \
-> +    librsvg \
-> +    libsm \
-> +    libxau \
-> +    libxcb \
-> +    libxcursor \
-> +    libxdmcp \
-> +    libxext \
-> +    libxfixes \
-> +    libxft \
-> +    libxinerama \
-> +    libxml2 \
-> +    libxrender \
-> +    libxt \
-> +    virtual/libx11 \
-> +    xrandr \
-> +    zlib \
-> +"
-> +
-> +RDEPENDS_${PN} = "\
-> +    xuser-account \
-> +"
-> +
-> +inherit pythonnative gettext pkgconfig perlnative autotools
-> +
-> +EXTRA_OECONF = "\
-> +    --disable-bidi \
-> +    --disable-fontconfigtest \
-> +    --disable-freetypetest \
-> +    --disable-htmldoc \
-> +    --disable-imlibtest \
-> +    --disable-mandoc \
-> +    --disable-nls \
-> +    --disable-perllib \
-> +    --disable-rsvg \
-> +    --disable-shape \
-> +    --disable-sm \
-> +    --disable-xfttest \
-> +\
-> +    --with-imlib-exec-prefix=/nonexistent \
-> +    --with-imlib-prefix=/nonexistent \
-> +\
-> +    --without-ncurses-library \
-> +    --without-readline-library \
-> +    --without-rplay-library \
-> +    --without-stroke-library \
-> +    --without-termcap-library \
-> +    --without-xpm-library \
-> +\
-> +    ac_cv_func_mkstemp=no \
-> +    has_safety_mkstemp=yes \
-> +"
-> +
-> +# show the exact commands in the log file
-> +EXTRA_OEMAKE = "\
-> +    V=1 \
-> +"
-> +
-> +# the only needed packages (note: locale packages are automatically generated
-> +# as well)
-> +PACKAGES = "\
-> +    fvwm \
-> +    fvwm-dbg \
-> +"
-> +
-> +# minimal set of binaries
-> +FILES_${PN} = "\
-> +    ${bindir}/fvwm \
-> +    ${bindir}/fvwm-root \
-> +    ${datadir}/fvwm/ConfigFvwmDefaults \
-> +"
-> +
-> +# by default a lot of stuff is installed and it's not easy to control what to
-> +# install, so install everything, but skip the check
-> +INSANE_SKIP_${PN} = "\
-> +    installed-vs-shipped \
-> +"
-> +
-> +do_install_append() {
-> +    install -d -m 0755 ${D}/${sysconfdir}/xdg/fvwm
-> +	# You can install the config file here
-> +
-> +    install -d -m 0755 ${D}/${datadir}/fvwm
-> +    touch ${D}/${datadir}/fvwm/ConfigFvwmDefaults
+- Armin
 > +}
+
 
 
