@@ -1,58 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
-	[209.85.160.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 97E41788C0
+Return-Path: <zakiah.md.ismail@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A3B97875F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 04:11:10 +0000 (UTC)
-Received: by mail-pl0-f46.google.com with SMTP id ay8-v6so793733plb.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Feb 2018 20:11:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=16gg8gltGnkMMgJQM9W3bQ+PYuANyezdQBIfQGT9dZo=;
-	b=QWfgG1DK2/7Qy5Kqd5rmjB7j0MYZeS7cSsxRkdTEDQu0BqJ6dJS02Lr2e2ca4drS+h
-	EsAxgOQZvC5luJvGRU9fll/GFuoAWIyBWJSZreK9O3CLfuLU4fqlnHDRZlve2wDdGOvV
-	xpUtKRS+AonowO8Hq2LRrf1rkILf1EdW4ISEelMdp0PRwl7snucWyxRpwtXYZtw0aUNz
-	nc/c541a5tNj/4nAgpMS+g9ozASODMve/lOrOY5naBnKFRH7u6RUOV2n6Z7rZn1skqec
-	GT3K3q6gG5pbRsCDvYyuEsP7glxlWRfKhWlVcMz/5MJS5RlN+KOXOR9URam8MO2AoxWL
-	7++w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=16gg8gltGnkMMgJQM9W3bQ+PYuANyezdQBIfQGT9dZo=;
-	b=Bzye8N5dfAw4lpkU30bmNuS5QTXNfPj64ZMphIXmSHYhBLOVbRY7v68OGvgg6jdlVM
-	6aTbSAvCgjBWIGRWBu6mb7yqLzaeMVD33HF4zc+skHqJoxD/6KFuRAA+ZDCqGgBOO1F8
-	7Hk4qNC1eps7LoXjOxDPW/ySCP9GETqWjLSduYx7r2rGW52BzLBhqRaHgPEYKYTMVlI/
-	jfwv5yumyjo6QUBL4DYYAugOPApUcLNxIOy5MhxiObhtmTmCH/ILG4gji6Pw+tJ4k3tO
-	IZhAe/OLrNYfCz8cOeDwWCiGHd2/zqGBONK18cQWBG+iNxiIbAPW5Lx+Y5x+s3WC5prI
-	dYhg==
-X-Gm-Message-State: APf1xPBQumlTnP+E3PIJKJ9xJ6vtjIQm7vnqJVC36Vrpmk6AgeUxDruM
-	UpX3gsVX1R0L5VFANtjSOP31AjA8
-X-Google-Smtp-Source: AH8x227lW2rKVUejKbf3pYqcFmk5G84n+10axmGiJu55pk/qz+CI4Ihy3tsmvGfrLvalaPK0Dehxzg==
-X-Received: by 2002:a17:902:7d17:: with SMTP id
-	z23-v6mr16390726pll.427.1519791071447; 
-	Tue, 27 Feb 2018 20:11:11 -0800 (PST)
-Received: from hermes.local ([2601:646:8880:466c:812d:b93c:3785:4a27])
-	by smtp.gmail.com with ESMTPSA id u28sm973133pfl.19.2018.02.27.20.11.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Feb 2018 20:11:10 -0800 (PST)
-To: "Md Ismail, Zakiah" <zakiah.md.ismail@intel.com>,
-	"openembedded-devel@lists.openembedded.org"
+	Wed, 28 Feb 2018 04:42:00 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Feb 2018 20:42:02 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.47,404,1515484800"; d="scan'208";a="20725038"
+Received: from kmsmsx151.gar.corp.intel.com ([172.21.73.86])
+	by fmsmga007.fm.intel.com with ESMTP; 27 Feb 2018 20:42:01 -0800
+Received: from pgsmsx103.gar.corp.intel.com ([169.254.2.160]) by
+	KMSMSX151.gar.corp.intel.com ([169.254.10.67]) with mapi id
+	14.03.0319.002; Wed, 28 Feb 2018 12:42:00 +0800
+From: "Md Ismail, Zakiah" <zakiah.md.ismail@intel.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Dependency loop in cryptsetup
+Thread-Index: AdOwRwoR1Kgn94eTS/+PgBRAOALaiP//fKSA//95R8CAAIo3gP//doNw
+Date: Wed, 28 Feb 2018 04:42:00 +0000
+Message-ID: <1A5BB22468458840B08C979DDA869BF27EBA5F@PGSMSX103.gar.corp.intel.com>
 References: <1A5BB22468458840B08C979DDA869BF27EB738@PGSMSX103.gar.corp.intel.com>
 	<0ca3f04d-dd55-cbbb-3b3e-dba03f54ebd6@gmail.com>
 	<1A5BB22468458840B08C979DDA869BF27EB7CA@PGSMSX103.gar.corp.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <4d770b95-e279-7fda-8322-64911ac47431@gmail.com>
-Date: Tue, 27 Feb 2018 20:11:09 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0)
-	Gecko/20100101 Thunderbird/59.0
+	<4d770b95-e279-7fda-8322-64911ac47431@gmail.com>
+In-Reply-To: <4d770b95-e279-7fda-8322-64911ac47431@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.0.0.116
+dlp-reaction: no-action
+x-ctpclassification: CTP_NT
+x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiOWE4MzJkNjQtMDIyNC00MzBhLTkyZTAtOTIwOTZjZGI1NjNiIiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjIuNS4xOCIsIlRydXN0ZWRMYWJlbEhhc2giOiJtZW5PVDFBd0lubUtscmQ5cWxZQmNvVzZUYWhsdXFGXC9tM015cG5jd1dOZWl5ZElvYytGSjZwZUxBOHVPRmRPciJ9
+x-originating-ip: [172.30.20.205]
 MIME-Version: 1.0
-In-Reply-To: <1A5BB22468458840B08C979DDA869BF27EB7CA@PGSMSX103.gar.corp.intel.com>
 Subject: Re: Dependency loop in cryptsetup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -66,38 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2018 04:11:10 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Wed, 28 Feb 2018 04:42:01 -0000
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-
-On 2/27/18 8:01 PM, Md Ismail, Zakiah wrote:
-> Yes. Currently using OE-Core rocko branch, commit a8eb060cbbbb00581e8260dd6bfc31cff5558e8f.
-
-Does removing libgcrypt from DEPENDS in
-meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.4.bb
-help?
-> 
-> -----Original Message-----
-> From: Khem Raj [mailto:raj.khem@gmail.com]
-> Sent: Wednesday, February 28, 2018 11:59 AM
-> To: Md Ismail, Zakiah <zakiah.md.ismail@intel.com>; openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Dependency loop in cryptsetup
-> 
-> 
-> 
-> On 2/27/18 7:48 PM, Md Ismail, Zakiah wrote:
->> Hi,
->>
->> I want to enable cyrptsetup in systemd by adding PACKAGECONFIG_append_pn-systemd = " cryptsetup" in my local.conf; however, I encounter the dependency loop issue. The issue is similar to this: https://bugzilla.yoctoproject.org/show_bug.cgi?id=11856. The difference is I'm using the latest commit from meta-openembedded rocko branch. Please advise on the steps to solve this issue. Thanks in advance!
->>
-> 
-> are you using latest of rocko for OE-Core as well ?
-> 
->> Regards,
->> Zakiah
->>
->>
+UmVtb3ZpbmcgbGliZ2NyeXB0IGZyb20gREVQRU5EUyBpbiBtZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9jcnlwdHNldHVwL2NyeXB0c2V0dXBfMS43LjQuYmIgZG9lc24ndCBzb2x2ZSB0aGUgaXNzdWUu
+IFRoZSBkZXBlbmRlbmN5IGxvb3BzIGFyZSBzdGlsbCB0aGVyZS4NCg0KLS0tLS1PcmlnaW5hbCBN
+ZXNzYWdlLS0tLS0NCkZyb206IEtoZW0gUmFqIFttYWlsdG86cmFqLmtoZW1AZ21haWwuY29tXSAN
+ClNlbnQ6IFdlZG5lc2RheSwgRmVicnVhcnkgMjgsIDIwMTggMTI6MTEgUE0NClRvOiBNZCBJc21h
+aWwsIFpha2lhaCA8emFraWFoLm1kLmlzbWFpbEBpbnRlbC5jb20+OyBvcGVuZW1iZWRkZWQtZGV2
+ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3ViamVjdDogUmU6IFtvZV0gRGVwZW5kZW5jeSBs
+b29wIGluIGNyeXB0c2V0dXANCg0KDQoNCk9uIDIvMjcvMTggODowMSBQTSwgTWQgSXNtYWlsLCBa
+YWtpYWggd3JvdGU6DQo+IFllcy4gQ3VycmVudGx5IHVzaW5nIE9FLUNvcmUgcm9ja28gYnJhbmNo
+LCBjb21taXQgYThlYjA2MGNiYmJiMDA1ODFlODI2MGRkNmJmYzMxY2ZmNTU1OGU4Zi4NCg0KRG9l
+cyByZW1vdmluZyBsaWJnY3J5cHQgZnJvbSBERVBFTkRTIGluDQptZXRhLW9lL3JlY2lwZXMtc3Vw
+cG9ydC9jcnlwdHNldHVwL2NyeXB0c2V0dXBfMS43LjQuYmINCmhlbHA/DQo+IA0KPiAtLS0tLU9y
+aWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBLaGVtIFJhaiBbbWFpbHRvOnJhai5raGVtQGdt
+YWlsLmNvbV0NCj4gU2VudDogV2VkbmVzZGF5LCBGZWJydWFyeSAyOCwgMjAxOCAxMTo1OSBBTQ0K
+PiBUbzogTWQgSXNtYWlsLCBaYWtpYWggPHpha2lhaC5tZC5pc21haWxAaW50ZWwuY29tPjsgb3Bl
+bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtv
+ZV0gRGVwZW5kZW5jeSBsb29wIGluIGNyeXB0c2V0dXANCj4gDQo+IA0KPiANCj4gT24gMi8yNy8x
+OCA3OjQ4IFBNLCBNZCBJc21haWwsIFpha2lhaCB3cm90ZToNCj4+IEhpLA0KPj4NCj4+IEkgd2Fu
+dCB0byBlbmFibGUgY3lycHRzZXR1cCBpbiBzeXN0ZW1kIGJ5IGFkZGluZyBQQUNLQUdFQ09ORklH
+X2FwcGVuZF9wbi1zeXN0ZW1kID0gIiBjcnlwdHNldHVwIiBpbiBteSBsb2NhbC5jb25mOyBob3dl
+dmVyLCBJIGVuY291bnRlciB0aGUgZGVwZW5kZW5jeSBsb29wIGlzc3VlLiBUaGUgaXNzdWUgaXMg
+c2ltaWxhciB0byB0aGlzOiBodHRwczovL2J1Z3ppbGxhLnlvY3RvcHJvamVjdC5vcmcvc2hvd19i
+dWcuY2dpP2lkPTExODU2LiBUaGUgZGlmZmVyZW5jZSBpcyBJJ20gdXNpbmcgdGhlIGxhdGVzdCBj
+b21taXQgZnJvbSBtZXRhLW9wZW5lbWJlZGRlZCByb2NrbyBicmFuY2guIFBsZWFzZSBhZHZpc2Ug
+b24gdGhlIHN0ZXBzIHRvIHNvbHZlIHRoaXMgaXNzdWUuIFRoYW5rcyBpbiBhZHZhbmNlIQ0KPj4N
+Cj4gDQo+IGFyZSB5b3UgdXNpbmcgbGF0ZXN0IG9mIHJvY2tvIGZvciBPRS1Db3JlIGFzIHdlbGwg
+Pw0KPiANCj4+IFJlZ2FyZHMsDQo+PiBaYWtpYWgNCj4+DQo+Pg0K
 
