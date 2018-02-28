@@ -1,43 +1,58 @@
-Return-Path: <zakiah.md.ismail@intel.com>
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id A708F77DCD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
+	[209.85.160.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 97E41788C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Feb 2018 04:01:58 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Feb 2018 20:01:59 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.47,403,1515484800"; d="scan'208";a="31198846"
-Received: from pgsmsx101.gar.corp.intel.com ([10.221.44.78])
-	by orsmga003.jf.intel.com with ESMTP; 27 Feb 2018 20:01:58 -0800
-Received: from pgsmsx109.gar.corp.intel.com (10.221.44.109) by
-	PGSMSX101.gar.corp.intel.com (10.221.44.78) with Microsoft SMTP Server
-	(TLS) id 14.3.319.2; Wed, 28 Feb 2018 12:01:57 +0800
-Received: from pgsmsx103.gar.corp.intel.com ([169.254.2.160]) by
-	PGSMSX109.gar.corp.intel.com ([169.254.14.206]) with mapi id
-	14.03.0319.002; Wed, 28 Feb 2018 12:01:57 +0800
-From: "Md Ismail, Zakiah" <zakiah.md.ismail@intel.com>
-To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	Wed, 28 Feb 2018 04:11:10 +0000 (UTC)
+Received: by mail-pl0-f46.google.com with SMTP id ay8-v6so793733plb.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Feb 2018 20:11:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=16gg8gltGnkMMgJQM9W3bQ+PYuANyezdQBIfQGT9dZo=;
+	b=QWfgG1DK2/7Qy5Kqd5rmjB7j0MYZeS7cSsxRkdTEDQu0BqJ6dJS02Lr2e2ca4drS+h
+	EsAxgOQZvC5luJvGRU9fll/GFuoAWIyBWJSZreK9O3CLfuLU4fqlnHDRZlve2wDdGOvV
+	xpUtKRS+AonowO8Hq2LRrf1rkILf1EdW4ISEelMdp0PRwl7snucWyxRpwtXYZtw0aUNz
+	nc/c541a5tNj/4nAgpMS+g9ozASODMve/lOrOY5naBnKFRH7u6RUOV2n6Z7rZn1skqec
+	GT3K3q6gG5pbRsCDvYyuEsP7glxlWRfKhWlVcMz/5MJS5RlN+KOXOR9URam8MO2AoxWL
+	7++w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=16gg8gltGnkMMgJQM9W3bQ+PYuANyezdQBIfQGT9dZo=;
+	b=Bzye8N5dfAw4lpkU30bmNuS5QTXNfPj64ZMphIXmSHYhBLOVbRY7v68OGvgg6jdlVM
+	6aTbSAvCgjBWIGRWBu6mb7yqLzaeMVD33HF4zc+skHqJoxD/6KFuRAA+ZDCqGgBOO1F8
+	7Hk4qNC1eps7LoXjOxDPW/ySCP9GETqWjLSduYx7r2rGW52BzLBhqRaHgPEYKYTMVlI/
+	jfwv5yumyjo6QUBL4DYYAugOPApUcLNxIOy5MhxiObhtmTmCH/ILG4gji6Pw+tJ4k3tO
+	IZhAe/OLrNYfCz8cOeDwWCiGHd2/zqGBONK18cQWBG+iNxiIbAPW5Lx+Y5x+s3WC5prI
+	dYhg==
+X-Gm-Message-State: APf1xPBQumlTnP+E3PIJKJ9xJ6vtjIQm7vnqJVC36Vrpmk6AgeUxDruM
+	UpX3gsVX1R0L5VFANtjSOP31AjA8
+X-Google-Smtp-Source: AH8x227lW2rKVUejKbf3pYqcFmk5G84n+10axmGiJu55pk/qz+CI4Ihy3tsmvGfrLvalaPK0Dehxzg==
+X-Received: by 2002:a17:902:7d17:: with SMTP id
+	z23-v6mr16390726pll.427.1519791071447; 
+	Tue, 27 Feb 2018 20:11:11 -0800 (PST)
+Received: from hermes.local ([2601:646:8880:466c:812d:b93c:3785:4a27])
+	by smtp.gmail.com with ESMTPSA id u28sm973133pfl.19.2018.02.27.20.11.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 27 Feb 2018 20:11:10 -0800 (PST)
+To: "Md Ismail, Zakiah" <zakiah.md.ismail@intel.com>,
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Dependency loop in cryptsetup
-Thread-Index: AdOwRwoR1Kgn94eTS/+PgBRAOALaiP//fKSA//95R8A=
-Date: Wed, 28 Feb 2018 04:01:56 +0000
-Message-ID: <1A5BB22468458840B08C979DDA869BF27EB7CA@PGSMSX103.gar.corp.intel.com>
 References: <1A5BB22468458840B08C979DDA869BF27EB738@PGSMSX103.gar.corp.intel.com>
 	<0ca3f04d-dd55-cbbb-3b3e-dba03f54ebd6@gmail.com>
-In-Reply-To: <0ca3f04d-dd55-cbbb-3b3e-dba03f54ebd6@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.0.116
-dlp-reaction: no-action
-x-ctpclassification: CTP_NT
-x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiNWIyNmI2MmYtMTQ3Zi00YmMxLTlkODktZDQ3MzhjYWU4YzRiIiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjIuNS4xOCIsIlRydXN0ZWRMYWJlbEhhc2giOiJmUGRHcTF5QStid1ZMcDk3OWxkMzducG1NOGt2eFwvN3ptZng3SFBVRUt5NzE3cmw1MTJITExNOWtYWUZqK3BYWCJ9
-x-originating-ip: [172.30.20.205]
+	<1A5BB22468458840B08C979DDA869BF27EB7CA@PGSMSX103.gar.corp.intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <4d770b95-e279-7fda-8322-64911ac47431@gmail.com>
+Date: Tue, 27 Feb 2018 20:11:09 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0)
+	Gecko/20100101 Thunderbird/59.0
 MIME-Version: 1.0
+In-Reply-To: <1A5BB22468458840B08C979DDA869BF27EB7CA@PGSMSX103.gar.corp.intel.com>
 Subject: Re: Dependency loop in cryptsetup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -51,26 +66,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Feb 2018 04:01:58 -0000
+X-List-Received-Date: Wed, 28 Feb 2018 04:11:10 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
 
-WWVzLiBDdXJyZW50bHkgdXNpbmcgT0UtQ29yZSByb2NrbyBicmFuY2gsIGNvbW1pdCBhOGViMDYw
-Y2JiYmIwMDU4MWU4MjYwZGQ2YmZjMzFjZmY1NTU4ZThmLg0KDQotLS0tLU9yaWdpbmFsIE1lc3Nh
-Z2UtLS0tLQ0KRnJvbTogS2hlbSBSYWogW21haWx0bzpyYWoua2hlbUBnbWFpbC5jb21dIA0KU2Vu
-dDogV2VkbmVzZGF5LCBGZWJydWFyeSAyOCwgMjAxOCAxMTo1OSBBTQ0KVG86IE1kIElzbWFpbCwg
-WmFraWFoIDx6YWtpYWgubWQuaXNtYWlsQGludGVsLmNvbT47IG9wZW5lbWJlZGRlZC1kZXZlbEBs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBEZXBlbmRlbmN5IGxvb3Ag
-aW4gY3J5cHRzZXR1cA0KDQoNCg0KT24gMi8yNy8xOCA3OjQ4IFBNLCBNZCBJc21haWwsIFpha2lh
-aCB3cm90ZToNCj4gSGksDQo+IA0KPiBJIHdhbnQgdG8gZW5hYmxlIGN5cnB0c2V0dXAgaW4gc3lz
-dGVtZCBieSBhZGRpbmcgUEFDS0FHRUNPTkZJR19hcHBlbmRfcG4tc3lzdGVtZCA9ICIgY3J5cHRz
-ZXR1cCIgaW4gbXkgbG9jYWwuY29uZjsgaG93ZXZlciwgSSBlbmNvdW50ZXIgdGhlIGRlcGVuZGVu
-Y3kgbG9vcCBpc3N1ZS4gVGhlIGlzc3VlIGlzIHNpbWlsYXIgdG8gdGhpczogaHR0cHM6Ly9idWd6
-aWxsYS55b2N0b3Byb2plY3Qub3JnL3Nob3dfYnVnLmNnaT9pZD0xMTg1Ni4gVGhlIGRpZmZlcmVu
-Y2UgaXMgSSdtIHVzaW5nIHRoZSBsYXRlc3QgY29tbWl0IGZyb20gbWV0YS1vcGVuZW1iZWRkZWQg
-cm9ja28gYnJhbmNoLiBQbGVhc2UgYWR2aXNlIG9uIHRoZSBzdGVwcyB0byBzb2x2ZSB0aGlzIGlz
-c3VlLiBUaGFua3MgaW4gYWR2YW5jZSENCj4gDQoNCmFyZSB5b3UgdXNpbmcgbGF0ZXN0IG9mIHJv
-Y2tvIGZvciBPRS1Db3JlIGFzIHdlbGwgPw0KDQo+IFJlZ2FyZHMsDQo+IFpha2lhaA0KPiANCj4g
-DQo=
+
+
+On 2/27/18 8:01 PM, Md Ismail, Zakiah wrote:
+> Yes. Currently using OE-Core rocko branch, commit a8eb060cbbbb00581e8260dd6bfc31cff5558e8f.
+
+Does removing libgcrypt from DEPENDS in
+meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.4.bb
+help?
+> 
+> -----Original Message-----
+> From: Khem Raj [mailto:raj.khem@gmail.com]
+> Sent: Wednesday, February 28, 2018 11:59 AM
+> To: Md Ismail, Zakiah <zakiah.md.ismail@intel.com>; openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Dependency loop in cryptsetup
+> 
+> 
+> 
+> On 2/27/18 7:48 PM, Md Ismail, Zakiah wrote:
+>> Hi,
+>>
+>> I want to enable cyrptsetup in systemd by adding PACKAGECONFIG_append_pn-systemd = " cryptsetup" in my local.conf; however, I encounter the dependency loop issue. The issue is similar to this: https://bugzilla.yoctoproject.org/show_bug.cgi?id=11856. The difference is I'm using the latest commit from meta-openembedded rocko branch. Please advise on the steps to solve this issue. Thanks in advance!
+>>
+> 
+> are you using latest of rocko for OE-Core as well ?
+> 
+>> Regards,
+>> Zakiah
+>>
+>>
 
