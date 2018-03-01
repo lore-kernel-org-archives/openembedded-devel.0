@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E5ABC78925
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D86BB788D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Mar 2018 23:02:10 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id x7so15180817wmc.0
+	Thu,  1 Mar 2018 23:02:11 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id h21so15133913wmd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2018 15:02:12 -0800 (PST)
+	Thu, 01 Mar 2018 15:02:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=A0kA9sqwwLfZ++BvnS0DhiiHfx6xSBnJb9f8q3NK/Pg=;
-	b=iKISeFleoEYVhfipB2e7iYLCKYZ28TwGEGsBaXTpyzbg8OCU8QM4eliF1oHEXRfvtO
-	BReGAWs9worOMGWcmCvYblP/CLmIPjv1hH/DVYWYd6pUh0TV0SoPIFM9JLAyGZATPi29
-	nb0QneAGDAiYxHL9VoeZU68fQwqM1JPsLwnzvhe9VGOIVHr/Q8GvRbotlTksaeP2T2mc
-	RMupOpPD943kjsb42hMXcEVL9v/bPONx1U/yALk4qwta0RuOQ1t4n4TfjlON7ABOp63o
-	dc63KOe5w5jGhDgb+qLSALN/VT+zRB8tVfCmEL9Aq/bcpmGse6kdSQGqMvKH7Vj9Xu3d
-	OgSw==
+	bh=VuxdWdNta5NKZ4ZeVrpvg9AKjDX2O/fZaW4DaKar+FM=;
+	b=IBxODQ8AVkyLzfTKU2ndxyr+QC1sRlUPgc/bBJZK/P4P/VAW2lydMxfFQXwsU+T/bt
+	W8woLVgAAlJdemD9412mTP+EnAopWuHJMyXUC78LVhqMt3jtokU4g3HMTAuXZKUlYOe7
+	Ogg0/CU79OQfP4vhmo6NXq61/FTfCewYTBfTd9EfUFSZemMDnhOYmy6RnfCsYIQA12Oc
+	BdE+2kB4n/AgBHbu5Fko45jTkxmAQTHbrypymGqBREttk1R1JfJ1GPG3HJf9AgeDfzx8
+	hYg3Kfeo8OuDHRvEf3g+2kc+Iw4UFFLkj7ml5wYYr3HYQB7a3wMkxyqpTvxP1UUNtKjN
+	Fkog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=A0kA9sqwwLfZ++BvnS0DhiiHfx6xSBnJb9f8q3NK/Pg=;
-	b=omuCIbl2xctf/7b6XNRmH5Pi/7Z9oVa63xo7myETWgiAu74jr+qFuRYfuvhNVh8nDl
-	8yxhnRN0LEIOUgNfUlK+/OBUUvXFnpp5Wxby3ycPuiQa78MLd8H9Mz1peTWaQ1mHYqjo
-	YCrsJ8PlTACNa0qVdqqfpJDVWO5NBYRvaVJXEy1PT48MoGg2fGs28FJsTW1qh1QaPGoM
-	AivbeYmrs+e2VTo+t64HgFE2RrqbB4U6Zczt7WoBq69KD5sboYSDn7YNwaA1ZPiJ4nd/
-	pKUpPmIJl5MPq4etiS+fNlmY16Yd5QhTKkKOlpxOR8Eb7m5u30aah+S1Mo1sWNHR7hHN
-	b3/g==
-X-Gm-Message-State: AElRT7EyNi+3ReWcjMJUtcrlOZjEAabU9M7FkTQpMpLOz6DclBV3O2MK
-	CbrCj8T3kgqhaR4JNDoq6BFs9g==
-X-Google-Smtp-Source: AG47ELu5m99Qzi8Frd9ucgOf6K11t72oZqZU2nKsxynBVJ/9FakH2VxxtcfOtriNueBKJi8ZRtxWYA==
-X-Received: by 10.28.74.88 with SMTP id x85mr2480878wma.106.1519945331760;
-	Thu, 01 Mar 2018 15:02:11 -0800 (PST)
+	bh=VuxdWdNta5NKZ4ZeVrpvg9AKjDX2O/fZaW4DaKar+FM=;
+	b=UuRLEqGldUobHh+dlx5DRacQY4VnTJeRPt7gxOyTHx+dYuZnGkDZn33nXqe06fZE0H
+	OagsHcJUZFBrf8ccjkwKr1zaZg3N6ouzEaQdKeOZsAiJVbhpPI6iKw5XIyHoLZwouNUQ
+	q/JT/l09oe37bMsg94Ui61+ySxinvDRyDOZ1jmFwStHuPj1qQ42qUNx1hXcmFlRWJtHE
+	D1tQOuR0lfWK6SYJrKAmoiqf9dIXZ48y3X/7bMbu8vYBz0ZICVRZlwof+6wmhPnhv2vm
+	Wg0WEITfj8KjiKWp+USK8yPlILTWEsd5OLIkj7qeGaBlq6EXIVT5agmBTB/x8KjePkNX
+	/uHA==
+X-Gm-Message-State: AElRT7FPCrwd9WxK5SQIzXBSfD4OWmBeP7hCG4Z68YiCbcdJLjJwYVZs
+	EcpM6Hxtw/FJg8jGP9qOEhbNiA==
+X-Google-Smtp-Source: AG47ELsvF/e3IXp1+K/LDr4JxiEIgS2CyU/JD77RqKHDi6qq+d71vflYAQmSeABjMn2ki1ZMh6DI+Q==
+X-Received: by 10.28.64.193 with SMTP id n184mr2446071wma.4.1519945332732;
+	Thu, 01 Mar 2018 15:02:12 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC063001E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc0:6300:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id 8sm5490wmf.13.2018.03.01.15.02.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 01 Mar 2018 15:02:11 -0800 (PST)
+	Thu, 01 Mar 2018 15:02:12 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Mar 2018 00:01:46 +0100
-Message-Id: <20180301230148.2284-11-schnitzeltony@gmail.com>
+Date: Fri,  2 Mar 2018 00:01:47 +0100
+Message-Id: <20180301230148.2284-12-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180301230148.2284-1-schnitzeltony@gmail.com>
 References: <20180301230148.2284-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/12] parole: update 0.8.1 -> 1.0.0
+Subject: [PATCH 11/12] xfce4-pulseaudio-plugin: update 0.3.4 -> 0.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 23:02:12 -0000
+X-List-Received-Date: Thu, 01 Mar 2018 23:02:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-multimedia/parole/{parole_0.8.1.bb => parole_1.0.0.bb}    | 4 ++--
+ ...e4-pulseaudio-plugin_0.3.4.bb => xfce4-pulseaudio-plugin_0.3.5.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-multimedia/parole/{parole_0.8.1.bb => parole_1.0.0.bb} (86%)
+ rename meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.3.4.bb => xfce4-pulseaudio-plugin_0.3.5.bb} (73%)
 
-diff --git a/meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb b/meta-xfce/recipes-multimedia/parole/parole_1.0.0.bb
-similarity index 86%
-rename from meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb
-rename to meta-xfce/recipes-multimedia/parole/parole_1.0.0.bb
-index 824611abe..479f1a4df 100644
---- a/meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb
-+++ b/meta-xfce/recipes-multimedia/parole/parole_1.0.0.bb
-@@ -19,8 +19,8 @@ DEPENDS += " \
-     taglib \
- "
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.4.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.5.bb
+similarity index 73%
+rename from meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.4.bb
+rename to meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.5.bb
+index 32032a26a..a1d60c527 100644
+--- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.4.bb
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.5.bb
+@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
  
--SRC_URI[md5sum] = "361e3059f1263c76a3711db2c7c1a97b"
--SRC_URI[sha256sum] = "4b216f5200490f8d2a9bf1b3fcd9a8b20834c95249bf13b9170c82e1fcbd80f4"
-+SRC_URI[md5sum] = "d00d3ca571900826bf5e1f6986e42992"
-+SRC_URI[sha256sum] = "6666b335aeb690fb527f77b62c322baf34834b593659fdcd21d21ed3f1e14010"
+ DEPENDS += "pulseaudio"
  
- RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
+-SRC_URI[md5sum] = "05633b8776dd3dcd4cda8580613644c3"
+-SRC_URI[sha256sum] = "43fa39400eccab1f3980064f42dde76f5cf4546a6ea0a5dc5c4c5b9ed2a01220"
++SRC_URI[md5sum] = "30cd40be36895c4ced48c2433ff440c4"
++SRC_URI[sha256sum] = "25e7bc414edf6e16140c31ca4e7dcedd4e17d40ea23a2921beb799fed11a99bb"
  
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
 -- 
 2.14.3
 
