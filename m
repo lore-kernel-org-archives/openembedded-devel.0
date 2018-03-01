@@ -1,32 +1,49 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F1AC78842
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BED378889
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Mar 2018 16:14:15 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 5CECC31E176D;
-	Thu,  1 Mar 2018 17:14:16 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id JcTr-q3kxxMM; Thu,  1 Mar 2018 17:14:14 +0100 (CET)
-Received: from t460p (p57A611C8.dip0.t-ipconnect.de [87.166.17.200])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 6757A31E176C;
-	Thu,  1 Mar 2018 17:14:14 +0100 (CET)
-Date: Thu, 1 Mar 2018 17:14:13 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-To: Justin Bronder <jsbronder@cold-front.org>
-Message-ID: <20180301171413.1076cb68@t460p>
-In-Reply-To: <20180301154702.GJ23655@lasswell>
-References: <20180226201605.29261-1-jsbronder@cold-front.org>
-	<20180301163636.494655bb@t460p> <20180301154702.GJ23655@lasswell>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: cppzmq: 4.2.3 update
+	Thu,  1 Mar 2018 17:52:29 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id a23so8647021qtn.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Mar 2018 09:52:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id:organization;
+	bh=LcN8zL6N53vO5lKXXamLc/Ol5FNFYi2ClxCrzPOVZw4=;
+	b=cxGwglfQXfF4zHpIYfizdzV+2L/rlPIuJbYZ28+KuUyMQY0VPytO8ALZ1+3sMQGC1q
+	q4/IzT8PbDvZ+QpblSFWc1UccPmneAlEJPOqjuqAara5y+bDqCZab1qPUTL9tl5Q/Zs+
+	pfRICNOgQxNxrRILbt9yLjhT0yUeXmkeC2fw5sHV4MSlxS2CxoPUlISIFe6GDJ5b7WlJ
+	of3F7wIZiD8M7N7l7V5qKPsZC1A7qNdfMbsrbjSIX1Uv9LAgQJtweSZroEwwQeaobXyV
+	2nAaToynCZEn2BMukEWMfnwDclGZDKP2ZlwhhtYO1mRg8K0WZMz3/68LVYu8CJAKoyAX
+	SHuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:organization;
+	bh=LcN8zL6N53vO5lKXXamLc/Ol5FNFYi2ClxCrzPOVZw4=;
+	b=Qao5gswFSxRoYXs4cMMYQTgK5gY/6mHBW7Nh3qf9tE0MJoH2dRGJB9BJirvh6BqJv+
+	qffs5DLXDBS134qdMmkz0F690eamjBN0T2+jXHW6ogwxRN/jECr2xoLHdYGWXmIuewFC
+	K+y3GEsEMGhHs8qz4H/XaprkqGJjuNuba9DOPN4RM+63ptadRPHSZLk4BkDBFPRD2A09
+	lWJOXnqnpIJA5z1kpRIo1EiuQ8T8B4+tsRRyRBeQuEI4CLczBJ4C/UY8kD/t8lPTC/WQ
+	RHlsTsDXTTfSoLbTckLPIpi2oCL//dP9IKEclHvZPcB4HsrjIZYI4O+s/ovCFsyKowRG
+	Qc3g==
+X-Gm-Message-State: AElRT7GfeqwBggAe3GViFxgM8WaBKiK/Q1fnv/HaOeWb5Kay2vDN60qB
+	oow9H7/FfzeG0kRfmDrfqPKnY3UY
+X-Google-Smtp-Source: AG47ELvw4zpHAriooaaS5tWcMM1EdTTuBjIkEHwXqtqs4sW3VSp/M2VMU+CNYF8qTx6ZL1qqUePleQ==
+X-Received: by 10.200.53.220 with SMTP id l28mr4253271qtb.273.1519926750185;
+	Thu, 01 Mar 2018 09:52:30 -0800 (PST)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id t38sm3318389qtb.4.2018.03.01.09.52.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 01 Mar 2018 09:52:29 -0800 (PST)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Mar 2018 14:52:15 -0300
+Message-Id: <20180301175215.23791-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.14.2
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-qt5][PATCH] cinematicexperience: Add liberation-fonts to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,47 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 16:14:15 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Mar 2018 17:52:29 -0000
 
-On Thu, 1 Mar 2018 10:47:02 -0500
-Justin Bronder <jsbronder@cold-front.org> wrote:
+Install liberation-fonts package to show cinematicexperience fonts.
 
-> On 01/03/18 16:36 +0100, Andreas Oberritter wrote:
-> > Hi Justin,
-> > 
-> > On Mon, 26 Feb 2018 15:16:04 -0500
-> > Justin Bronder <jsbronder@cold-front.org> wrote:
-> >   
-> > > Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
-> > > ---
-> > >  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > 
-> > > diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> > > index a64745c94..9e8ad5151 100644
-> > > --- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> > > +++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> > > @@ -4,8 +4,8 @@ LICENSE = "MIT"
-> > >  LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
-> > >  DEPENDS = "zeromq"
-> > >  
-> > > -SRCREV = "68a7b09cfce01c4c279fba2cf91686fcfc566848"
-> > > -PV = "4.1.5+git${SRCPV}"
-> > > +PV = "4.2.3"
-> > > +SRCREV = "v${PV}"  
-> > 
-> > we usually don't use tags in SRCREV, because tags may change over time, and
-> > therefore bitbake has to query the server each time it parses the recipe, IIRC.  
-> 
-> Ok.  Should I submit a v2 with the file rename that akuster808 suggested and
-> pulling a tarball instead?
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ recipes-qt/examples/cinematicexperience_1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I'd say keep the filename and just update PV to 4.2.3+git${SRCPV} in v2. This
-reduces the number of changed lines in case SRCREV gets advanced to a commit
-between 4.2.3 and a future release.
+diff --git a/recipes-qt/examples/cinematicexperience_1.0.bb b/recipes-qt/examples/cinematicexperience_1.0.bb
+index 0c53573..7f921d8 100644
+--- a/recipes-qt/examples/cinematicexperience_1.0.bb
++++ b/recipes-qt/examples/cinematicexperience_1.0.bb
+@@ -19,7 +19,7 @@ S = "${WORKDIR}/Qt5_CinematicExperience_rpi_${PV}/"
+ #S = "${WORKDIR}/Qt5_CinematicExperience_${PV}/"
+ 
+ DEPENDS = "qtdeclarative qtgraphicaleffects"
+-RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
++RDEPENDS_${PN} = "liberation-fonts qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+ 
+ require recipes-qt/qt5/qt5.inc
+ 
+-- 
+2.14.2
 
-Regards,
-Andreas
 
