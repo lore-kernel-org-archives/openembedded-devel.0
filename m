@@ -1,46 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A78BE78199
+Return-Path: <maxin.john@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 53B7678816
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Mar 2018 10:38:15 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id 188so10610802wme.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2018 02:38:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=1nTNvOtn9kKzNCVsIR2nrPGu1hemwn/iUQQtcEmzW1E=;
-	b=dqOe37lKXgJLT2tfl9PLK5mRZBGTqLYQXFNWRqtkocRS9rowqO0fIaHS2oK6T5MKtL
-	DwTKWMI6FhNV8HBqQqQJJJQkSbDIyXpOf/Jgy9dZXdcY48YjWyVfpDah2oa9d869tdBd
-	lj/zjo5uZglopXkl3Uc8nBY5jyXGfaHH+/IqaCuFL54cvnA+IkeoaO3MtwQn4DWphDW/
-	36B3dlqWEPrqKx4s5oy+y75d2tpyQx/tC7b5mCP9qYTUll4+L9qeITJVQ2wrXQSGE1lP
-	+mv+g4xrYJJeerr9FWUl4OnGRXBhA92dp1nr2yzL7JMKe7Sa0VSm9B+Ln5NIPOPOAxjL
-	gG4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1nTNvOtn9kKzNCVsIR2nrPGu1hemwn/iUQQtcEmzW1E=;
-	b=Qixsa3ShfJDjz6YY9NoDhbzbpham7P9dXtkd+Hp6CaZSsn9Z/GZzWyFAjwO/eVSV8L
-	6dqA+zDYHSIN0liHnxLevjfepX2e0pch978qd+uE0dRBlZeuLATN+Lmo7n9kvynKOkX6
-	+DqxtxcNKH/8e2KfDnyxFWfVGuzHzrIejUTkQd2xAwjL3KNRetga809lmgXJVHIu6kU0
-	0ajLwAzWeJLSVptHwb75Ry082MM/Xc9YjRx51ofBUMmqd6RBTqUAf7UQ6CgfZTnSS0z7
-	7tvbLM0FjquhZRkxEvNyFiZaaEIJtCvb1RxlX3GY18oFORkUYyfmpvlWrpmUs4Ix93ix
-	LHCQ==
-X-Gm-Message-State: AElRT7EBvHNvkIvwTe49z17MKDQ/JU79u75XU2i/Ob15v9g4/esnJwY5
-	DYOefw0+2M/3kOZMgTVcJrrozQ==
-X-Google-Smtp-Source: AG47ELvMM8cF8Ws/JNQ5aObi7C2cukVN7BP1Z65eYGN5bsNK+M1lV+GvZVanu1QmeXVUbaU1cQ4zIQ==
-X-Received: by 10.28.54.150 with SMTP id y22mr1246676wmh.74.1519900696028;
-	Thu, 01 Mar 2018 02:38:16 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	p76sm4481949wmb.19.2018.03.01.02.38.15
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 01 Mar 2018 02:38:15 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Mar 2018 10:38:13 +0000
-Message-Id: <20180301103813.8027-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
-Subject: [meta-oe][PATCH] xrdp, xorgxrdp: require pam in DISTRO_FEATURES
+	Thu,  1 Mar 2018 11:48:49 +0000 (UTC)
+X-Amp-Result: UNSCANNABLE
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	01 Mar 2018 03:48:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.47,408,1515484800"; d="scan'208";a="208001712"
+Received: from mbabyjoh-desk.fi.intel.com (HELO
+	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.84])
+	by fmsmga005.fm.intel.com with ESMTP; 01 Mar 2018 03:48:49 -0800
+Date: Thu, 1 Mar 2018 13:51:53 +0200
+From: "Maxin B. John" <maxin.john@intel.com>
+To: nick83ola <nick83ola@gmail.com>
+Message-ID: <20180301115152.GB14042@mbabyjoh-desk.ger.corp.intel.com>
+References: <CABPh3UNxJfqzMtZKNNtEAVzHBm--=fA7mxH5szKX+jm=Y2_AwQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CABPh3UNxJfqzMtZKNNtEAVzHBm--=fA7mxH5szKX+jm=Y2_AwQ@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: BUG: openjre-8 won't compile on qemux86/ latest meta-java repo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,44 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 10:38:16 -0000
+X-List-Received-Date: Thu, 01 Mar 2018 11:48:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* libpam dependency was added to xrdp in
-  http://git.openembedded.org/meta-openembedded/commit/?id=cc32ca8030c02a2b1b22f6b43e1894dc5f00e14e
+Hi,
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb | 2 +-
- meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb          | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+On Wed, Feb 28, 2018 at 12:58:09PM +0000, nick83ola wrote:
+> $ bitbake openjre-8
+<snip> 
+> (virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/classpathx/gnujaf_1.1.1.bb:do_compile)
+> failed with exit code '1'
+> NOTE: Tasks Summary: Attempted 956 tasks of which 946 didn't need to be
+> rerun and 2 failed.
+> 
+> Summary: 2 tasks failed:
+> 
+> virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/xml-commons/jaxp1.3_1.4.01.bb:
+> do_compile
+> 
+> virtual:native:/home/nicklunghi/src/yocto-openhab/sources/meta-java/recipes-core/classpathx/gnujaf_1.1.1.bb:
+> do_compile
 
-diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-index 9355379840..558a1982f5 100644
---- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-+++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
-@@ -8,7 +8,7 @@ inherit autotools pkgconfig
- DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
- 
- inherit distro_features_check
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
- SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git"
- 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-index 88e309a59f..671a251962 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-@@ -8,7 +8,7 @@ inherit distro_features_check autotools pkgconfig useradd systemd
- 
- DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native fuse"
- 
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
- SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
-            file://xrdp.sysconfig \
--- 
-2.15.1
+Please share details about the build machine and "PREFERRED_PROVIDER_virtual/java*" settings in your local.conf.
+(fired an openjre-8 for qemux86 build on a fedora 22 and it was successful with meta-java master branch)
 
+Best Regards,
+Maxin
 
