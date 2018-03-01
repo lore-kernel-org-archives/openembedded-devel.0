@@ -1,51 +1,51 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 33B23788AA
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id E970C78766
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Mar 2018 22:11:43 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id h127so9572881lfg.12
+	Thu,  1 Mar 2018 23:02:02 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id z81so15081370wmb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2018 14:11:45 -0800 (PST)
+	Thu, 01 Mar 2018 15:02:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=2wQClyRGwVF3UontM3+FEYNGfxNfSkpZTVILJOHJmmE=;
-	b=N9tkwXsn/rN736jaOMVxqcT5WHbKA9Ul0k3EplwTQRIRErQSMYckvrjniUV/Ne6pij
-	j3QBYQVOrXe/D1nL5OcrkK6b090qGSsc2HBTRVosoEuHC5zkGxYVID2Advv5KtbTpcsM
-	d8LpPTAjUWSLjmfanlQxDleguaqtwpFDvffeGa2HlNFlTgVPrvABfFmjbZc7IWiCHXcC
-	4UKmTO7FcW1Wj1/uN1OThAudC3w56QSV13s+AA4Z0gxDigqi/RfHUj/XiyEwsOF8+jqr
-	fQttYHPeTQB8Z0vFhoQykc14WT/58VleIHYxNbKCM3d9o8W/8gXjlEToN2XWiSuGy3C8
-	a9tQ==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=AVnEoTf2VWnamnb+0PVN66Sf7l3zK0eRWu7GCmuRhzU=;
+	b=N58r/X2X2mXBq15G9FtGnlFX+VBdUIttI3rVm1uWXLetFe6eDE4o2xMlBhQGGV8obq
+	QWWuvfzuxQ+CQgHqdKnzapI7vgq0jFSRWtXP3Fq9zvYT0HBJkIVojhZ3Llt2dA63SMrR
+	efrpBIOBReyN/2XrHQOFl6y3Ux3q/34Uf90tdGkj2jcuNo5Kovcxx8gNnFv5mI7NXmiq
+	vlIDzTxFkWlgXBgOutdW6v+1RKR1YKVaY2o1GyAM2EKd9I+a87ox/twIR/w2/2/n+ySu
+	Ch4hIO+V1owoEqu1zdVIvSshr+oINIUm6t0TYkGTrTC9SWY+kMPjJCZj9T27FBgebSHu
+	cGOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=2wQClyRGwVF3UontM3+FEYNGfxNfSkpZTVILJOHJmmE=;
-	b=umuvbLTxHNhxaOR0vJD64Bay6xilB2qNVyAaprx0FJemvssEW6Lz/X6xEe/reISWAV
-	WfUlIPEQ5DT2J1wuf37DExcw5g/6oZ+MqJQX6JgbHb/eoKUlaQ1EQfbGsFykOcLRu1Ms
-	c4qahKDB41eVsa3sJQ5PeqEe0hINzM//7TZtLXBwZjFtE07ttOlThxTLSJl80A4/BxR0
-	ftWwVC26DHIIn98TxRxVeByGdrJ43zyRfccIQQ4bd5oIz1kqyGER8nxjS1g+aFtKaSus
-	k9NOZsf+QmxluZ9RQsnNca9iUeE4GzjIBgd7wDax1XJ2/bMTMvkCmVK72KbzL0S523RM
-	RGRw==
-X-Gm-Message-State: APf1xPDV0N1B+uVjJgyt90NsjR0/4p/dxZMx9iw7OsnLBMCBgn58rOUV
-	REZ58Q22AhWJDqLPdMEt8fDZ2fUKk2lSpSShWdQ=
-X-Google-Smtp-Source: AG47ELu4O3ns5Gfje+RR6m7HgQjcn4iMVt3giQlFm2FNEu4jIgMi99RUNvySNFjG2WTzDpvZDFMRFmB/LxgXyzgxg7g=
-X-Received: by 10.46.17.220 with SMTP id 89mr2359416ljr.87.1519942304659; Thu,
-	01 Mar 2018 14:11:44 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=AVnEoTf2VWnamnb+0PVN66Sf7l3zK0eRWu7GCmuRhzU=;
+	b=o6itdB5v1+yTrALPzqNaQYPHzBZbcNEUQYEeljXZ/Ns/Fv1j8YUWLjxeo5lF7k1VSH
+	C/7CAn8/8xvcmta0Ka0dZ+IppMswBH2hiN/+/ZSx2QKhh3woKpy66llnUqSMqkE0er0m
+	XxYsLMykd6s9jCXl7g3pSBJ77AKMklq5AXMU6Duj7uI6Lvvpk7c4jFe3PF2vVoE3uQbD
+	TQLou/blSJ/fPPSdh0tuYmuuYWAuy7CSGCWpb/r6jpOKfrCBBXbesHxOXcu9RamFh5dw
+	y+9Saem4fKNfrqzvE3mNMixsCmepSELWSyU341tYwxdRpaSO3p6R0S8H/MqJEy9zQ9P7
+	NuVg==
+X-Gm-Message-State: APf1xPCPUyfA4UznO7KLL1BC+neQnE3f9HlWx3UkQ/MZ+4Dyj0MhZt3v
+	GJBUeuNlgqeDB36SUCbffrfCUg==
+X-Google-Smtp-Source: AG47ELtNpdOg3G3Rdprq86543/4Wske5YBpfYXaFzONm0TVn4SBSJYO7FbXumBPNCq5Mg+scTYwlDg==
+X-Received: by 10.28.139.19 with SMTP id n19mr3249791wmd.40.1519945323048;
+	Thu, 01 Mar 2018 15:02:03 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p200300F07BC063001E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bc0:6300:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id 8sm5490wmf.13.2018.03.01.15.02.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 01 Mar 2018 15:02:02 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 Mar 2018 00:01:36 +0100
+Message-Id: <20180301230148.2284-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-Received: by 10.46.48.4 with HTTP; Thu, 1 Mar 2018 14:11:43 -0800 (PST)
-In-Reply-To: <da663886-ec79-fea4-3b44-7d5f03658945@gmail.com>
-References: <CAJTo0LYxqFFmUA9XcCO3_WO32NB4YLYy7pJK5ivyzPQYY5-hvQ@mail.gmail.com>
-	<17c4a7f6-c188-1a8c-2371-74ec67ebfdac@linux.intel.com>
-	<1d48c1f1-8b2d-2f8d-ff23-31890aeadbcc@gmail.com>
-	<5542c5ec-fbbc-694a-3183-98bc78b12702@linux.intel.com>
-	<da663886-ec79-fea4-3b44-7d5f03658945@gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Thu, 1 Mar 2018 17:11:43 -0500
-Message-ID: <CADkTA4M57xk9zq+qzs0oSNhMBqHmte+pR7yTbpEsGACN6GA4Mw@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Splitting meta-oe?
+Subject: [PATCH 00/12] meta-xfce updates + fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,65 +58,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 22:11:44 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Mar 2018 23:02:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Mar 1, 2018 at 1:44 PM, akuster808 <akuster808@gmail.com> wrote:
->
->
-> On 03/01/2018 01:04 AM, Alexander Kanavin wrote:
->> On 03/01/2018 03:17 AM, akuster808 wrote:
->>> We had/have a situation with the Yocto 4.12 kernel that broke wireguard
->>> in meta-networking. Their are two patches that don't exist in K.O. which
->>> are causing the problem.
->>> Meta-openembedded can't fix that, do I blacklist wireguard? Wireguard
->>> builds fine with K.O 4.12.
->>
->> I'm not sure what is K.O.,
-> Kernel.org. Upstream linux-4.12.y branch in this case.
->
->> but if the breakage can be resolved by changing things in oe-core,
->> then by all means do let us know.
->
-> These two commits introduced an ABI change.
->
-> http://git.yoctoproject.org/cgit/cgit.cgi/linux-yocto-4.12/commit/include/linux/random.h?h=standard/base&id=6e4990d8d226e1861a5a2b632cf93bc70feab3af
-> http://git.yoctoproject.org/cgit/cgit.cgi/linux-yocto-4.12/commit/include/linux/random.h?h=standard/base&id=20543a488913755be70f54be52b32f727e8179d8
->
-> This makes linux-kernel_4.12 different than linux 4.12.y.
+To be honest:
+* For those patches possible a run test was performed
+* Builds were made close to rocko (don't have enough build machines :) so hope
+  world build does not turn red on these..
 
-To be clear, the work that PaulG is doing is the korg 4.12.y. He's
-doing -stable off the end of where Greg EOL'd it, so it doesn't differ
-.. it continues on from where the other left off.
+The following changes since commit d0619b667202cb1e99f5eec2232b86d509437b3d:
 
-Those commits are from the 4.x -stable queue from Greg's other
-kernels, so they are consistent with the other stable trees and
-mainline kernel.
+  xrdp: enable cpliboard (2018-02-23 20:29:06 -0800)
 
-But yah, if you have questions on the process, email Paul, cc' the
-linux-yocto list and it can get sorted out. Paul documents everything
-he does in a patch queue, a tree and in his pull requests, so the info
-is all floating around.
+are available in the Git repository at:
 
-Cheers,
+  https://github.com/schnitzeltony/meta-openembedded.git patches
 
-Bruce
+for you to fetch changes up to b97e5db88cebbd1f06b3840a8b170b1816da3fef:
 
->
-> - Armin
->>
->> Alex
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  fltk: rework packaging (2018-03-01 23:40:58 +0100)
 
+----------------------------------------------------------------
+Andreas Müller (12):
+      xfce4-panel: add gtk-icon-cache to inherit
+      devilspie2: update 0.42 -> 0.43
+      xfce4-whiskermenu-plugin: update 2.1.4 -> 2.1.5
+      xfce4-terminal: update 0.8.6 -> 0.8.7.1
+      exo: update 0.11.5 -> 0.12.0
+      thunar: update 1.6.13 -> 1.6.14
+      xfce4-timer-plugin: update 1.6.0 -> 1.7.0
+      menulibre: update 2.1.3 -> 2.1.5
+      xfce4-notifyd: update 0.4.0 -> 0.4.2
+      parole: update 0.8.1 -> 1.0.0
+      xfce4-pulseaudio-plugin: update 0.3.4 -> 0.3.5
+      fltk: rework packaging
 
+ meta-gnome/recipes-gnome/devilspie/{devilspie2_0.42.bb => devilspie2_0.43.bb}                                        |   4 ++--
+ meta-gnome/recipes-gnome/devilspie/files/devilspie2.desktop                                                          |   1 +
+ meta-oe/recipes-support/fltk/fltk.bb                                                                                 |  10 ++++++++-
+ meta-xfce/recipes-apps/menulibre/files/0001-add_launcher-Exit-early-if-no-row-is-selected.patch                      |  37 ------------------------------
+ meta-xfce/recipes-apps/menulibre/files/0002-setup.py-avoid-usr-share-share-paths.patch                               |  40 ---------------------------------
+ meta-xfce/recipes-apps/menulibre/files/0003-MenulibreXdg.py-fix-loading-of-desktop-files.patch                       |  36 ------------------------------
+ meta-xfce/recipes-apps/menulibre/{menulibre_2.1.3.bb => menulibre_2.1.5.bb}                                          |  21 ++++++++++--------
+ meta-xfce/recipes-apps/xfce4-notifyd/files/0001-Add-a-configure-option-to-start-daemon-by-autostart-.patch           | 105 --------------------------------------------------------------------------------------
+ meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.4.0.bb => xfce4-notifyd_0.4.2.bb}                              |   5 ++---
+ meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.6.bb => xfce4-terminal_0.8.7.1.bb}                         |   4 ++--
+ meta-xfce/recipes-multimedia/parole/{parole_0.8.1.bb => parole_1.0.0.bb}                                             |   4 ++--
+ meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.3.4.bb => xfce4-pulseaudio-plugin_0.3.5.bb}    |   4 ++--
+ meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin/0001-Specify-string-format-explicitly.patch                 |  32 --------------------------
+ meta-xfce/recipes-panel-plugins/timer/{xfce4-timer-plugin_1.6.0.bb => xfce4-timer-plugin_1.7.0.bb}                   |   6 ++---
+ meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.1.4.bb => xfce4-whiskermenu-plugin_2.1.5.bb} |   4 ++--
+ meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch                                                |   8 +++----
+ meta-xfce/recipes-xfce/exo/{exo_0.11.5.bb => exo_0.12.0.bb}                                                          |   4 ++--
+ meta-xfce/recipes-xfce/thunar/{thunar_1.6.13.bb => thunar_1.6.14.bb}                                                 |   4 ++--
+ meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.2.bb                                                             |   5 +++--
+ 19 files changed, 47 insertions(+), 287 deletions(-)
+ rename meta-gnome/recipes-gnome/devilspie/{devilspie2_0.42.bb => devilspie2_0.43.bb} (87%)
+ delete mode 100644 meta-xfce/recipes-apps/menulibre/files/0001-add_launcher-Exit-early-if-no-row-is-selected.patch
+ delete mode 100644 meta-xfce/recipes-apps/menulibre/files/0002-setup.py-avoid-usr-share-share-paths.patch
+ delete mode 100644 meta-xfce/recipes-apps/menulibre/files/0003-MenulibreXdg.py-fix-loading-of-desktop-files.patch
+ rename meta-xfce/recipes-apps/menulibre/{menulibre_2.1.3.bb => menulibre_2.1.5.bb} (53%)
+ delete mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/files/0001-Add-a-configure-option-to-start-daemon-by-autostart-.patch
+ rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.4.0.bb => xfce4-notifyd_0.4.2.bb} (77%)
+ rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.6.bb => xfce4-terminal_0.8.7.1.bb} (68%)
+ rename meta-xfce/recipes-multimedia/parole/{parole_0.8.1.bb => parole_1.0.0.bb} (86%)
+ rename meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.3.4.bb => xfce4-pulseaudio-plugin_0.3.5.bb} (73%)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin/0001-Specify-string-format-explicitly.patch
+ rename meta-xfce/recipes-panel-plugins/timer/{xfce4-timer-plugin_1.6.0.bb => xfce4-timer-plugin_1.7.0.bb} (65%)
+ rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.1.4.bb => xfce4-whiskermenu-plugin_2.1.5.bb} (66%)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.11.5.bb => exo_0.12.0.bb} (88%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.6.13.bb => thunar_1.6.14.bb} (88%)
 
 -- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end"
+2.14.3
+
 
