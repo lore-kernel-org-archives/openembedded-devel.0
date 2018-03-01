@@ -1,49 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id EA1B578917
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A78BE78199
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Mar 2018 10:35:23 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id h21so10600915wmd.1
+	Thu,  1 Mar 2018 10:38:15 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id 188so10610802wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Mar 2018 02:35:25 -0800 (PST)
+	Thu, 01 Mar 2018 02:38:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=4WZiv4CaUo6RWpE3409hc/4C5HsGPW3D/FEb4IoRZDI=;
-	b=QbIAMI27FHJdlfw9aivNuh9IqmNO+Sgv3nZTDO1+JPZNPBUUTGsS/Iw9LAwGrOk64k
-	kgYqWo0FrYtZ6J2iycS0/W10czeSf1BwSgmJvIJN+fOHb/gRxWHz96XjmmxAspLkqKdu
-	l/EcpQ/6EXOc1ozg/k9GLUWLWNP2jQXyNN8O/IDuapxV8JniHnte9jUFUYb6cJzQd3m7
-	SzQrZYLrozuDO2HKpHKUoQVywfHs2Jn3woozen4WY2PcOAUA4WB5EpU4IoPqFfGZ/vrS
-	0XDi9Q3Cq7Z9hxF2ucm/RzgKdKK+tjooLoZ5wC02QpS31AkG9f1ijIyUskUGQTqpuCVO
-	kzzg==
+	h=from:to:cc:subject:date:message-id;
+	bh=1nTNvOtn9kKzNCVsIR2nrPGu1hemwn/iUQQtcEmzW1E=;
+	b=dqOe37lKXgJLT2tfl9PLK5mRZBGTqLYQXFNWRqtkocRS9rowqO0fIaHS2oK6T5MKtL
+	DwTKWMI6FhNV8HBqQqQJJJQkSbDIyXpOf/Jgy9dZXdcY48YjWyVfpDah2oa9d869tdBd
+	lj/zjo5uZglopXkl3Uc8nBY5jyXGfaHH+/IqaCuFL54cvnA+IkeoaO3MtwQn4DWphDW/
+	36B3dlqWEPrqKx4s5oy+y75d2tpyQx/tC7b5mCP9qYTUll4+L9qeITJVQ2wrXQSGE1lP
+	+mv+g4xrYJJeerr9FWUl4OnGRXBhA92dp1nr2yzL7JMKe7Sa0VSm9B+Ln5NIPOPOAxjL
+	gG4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=4WZiv4CaUo6RWpE3409hc/4C5HsGPW3D/FEb4IoRZDI=;
-	b=YJJORXbjcFuHiXEY3YPY2CD/eDTmXRJQV5P4AY6p7zugjCjUMxTNpclZQQcoI168X0
-	tEuW67eicLCYL2i5MtyDgY9WBBkVvf8KiaYbK0SYGmGuepv0yGz147gnE9yCUPcz4Y16
-	ZgsC45tZjO14ADs82jXZB41rq6qJkk766djgYIsIWhLseIxakLa/naLbQj/KJma9BIqj
-	Pjz7FBygrOyCpzB84R8XPhKaO26503utKGLQi20W0H+WDZS00FKQnOLG8pb3vXn+m+0V
-	BvHM6D/Noav5TyobP8WviQ0Uy/oUGeMKcz5yfK8jLLWssc0oubmL+Vwg9NFB/AUnezAy
-	2yng==
-X-Gm-Message-State: APf1xPCB9zdpWC/6xwQ0CvSUzEh525649UHKX969sXoFSQ9TRdEQ1rfF
-	oln5hmMGLkxfomdGnxpyBQHWdw==
-X-Google-Smtp-Source: AG47ELu5KNgkKTdawKNNnkhT0AZM4To+lpAAZaXbKOBlpUfHWMRbe6b6Tp9PnTveIxXyNIBnRXilCQ==
-X-Received: by 10.28.22.208 with SMTP id 199mr1441630wmw.79.1519900525056;
-	Thu, 01 Mar 2018 02:35:25 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1nTNvOtn9kKzNCVsIR2nrPGu1hemwn/iUQQtcEmzW1E=;
+	b=Qixsa3ShfJDjz6YY9NoDhbzbpham7P9dXtkd+Hp6CaZSsn9Z/GZzWyFAjwO/eVSV8L
+	6dqA+zDYHSIN0liHnxLevjfepX2e0pch978qd+uE0dRBlZeuLATN+Lmo7n9kvynKOkX6
+	+DqxtxcNKH/8e2KfDnyxFWfVGuzHzrIejUTkQd2xAwjL3KNRetga809lmgXJVHIu6kU0
+	0ajLwAzWeJLSVptHwb75Ry082MM/Xc9YjRx51ofBUMmqd6RBTqUAf7UQ6CgfZTnSS0z7
+	7tvbLM0FjquhZRkxEvNyFiZaaEIJtCvb1RxlX3GY18oFORkUYyfmpvlWrpmUs4Ix93ix
+	LHCQ==
+X-Gm-Message-State: AElRT7EBvHNvkIvwTe49z17MKDQ/JU79u75XU2i/Ob15v9g4/esnJwY5
+	DYOefw0+2M/3kOZMgTVcJrrozQ==
+X-Google-Smtp-Source: AG47ELvMM8cF8Ws/JNQ5aObi7C2cukVN7BP1Z65eYGN5bsNK+M1lV+GvZVanu1QmeXVUbaU1cQ4zIQ==
+X-Received: by 10.28.54.150 with SMTP id y22mr1246676wmh.74.1519900696028;
+	Thu, 01 Mar 2018 02:38:16 -0800 (PST)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	p60sm4196300wrc.88.2018.03.01.02.35.24
+	p76sm4481949wmb.19.2018.03.01.02.38.15
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 01 Mar 2018 02:35:24 -0800 (PST)
+	Thu, 01 Mar 2018 02:38:15 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Mar 2018 10:35:17 +0000
-Message-Id: <20180301103517.7653-3-Martin.Jansa@gmail.com>
+Date: Thu,  1 Mar 2018 10:38:13 +0000
+Message-Id: <20180301103813.8027-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.15.1
-In-Reply-To: <20180301103517.7653-1-Martin.Jansa@gmail.com>
-References: <20180301103517.7653-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/3] uim: add glibc-utils glibc-gconv-euc-jp only for libc-glibc
+Subject: [meta-oe][PATCH] xrdp, xorgxrdp: require pam in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,31 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Mar 2018 10:35:24 -0000
+X-List-Received-Date: Thu, 01 Mar 2018 10:38:16 -0000
 
-* musl doesn't provide these
-* I'm not using uim, but this is breaking signatures test in world builds
-  for many months and nobody seems to care
+* libpam dependency was added to xrdp in
+  http://git.openembedded.org/meta-openembedded/commit/?id=cc32ca8030c02a2b1b22f6b43e1894dc5f00e14e
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/uim/uim_1.8.6.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb | 2 +-
+ meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb          | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-index 271718e5e4..6bf0bb7ce1 100644
---- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
-+++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-@@ -17,7 +17,8 @@ DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
- DEPENDS_append_class-target = " intltool-native gtk+ gtk+3 uim-native takao-fonts"
+diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+index 9355379840..558a1982f5 100644
+--- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
++++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+@@ -8,7 +8,7 @@ inherit autotools pkgconfig
+ DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
  
- RDEPENDS_uim = "libuim0 libedit"
--RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0 glibc-utils glibc-gconv-euc-jp"
-+RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0"
-+RDEPENDS_uim-anthy_append_libc-glibc = " glibc-utils glibc-gconv-euc-jp"
+ inherit distro_features_check
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 pam"
  
- LEAD_SONAME = "libuim.so.1"
+ SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git"
  
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+index 88e309a59f..671a251962 100644
+--- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+@@ -8,7 +8,7 @@ inherit distro_features_check autotools pkgconfig useradd systemd
+ 
+ DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native fuse"
+ 
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 pam"
+ 
+ SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
+            file://xrdp.sysconfig \
 -- 
 2.15.1
 
