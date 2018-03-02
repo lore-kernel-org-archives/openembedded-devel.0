@@ -1,51 +1,52 @@
-Return-Path: <prvs=2599396995=adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id A25CA7899B
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id ED839789AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 18:32:44 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w22IVT2a021129 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Mar 2018 12:32:45 -0600
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2gb4y2k789-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2018 12:32:45 -0600
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w22IWiJM028219
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Fri,  2 Mar 2018 18:39:56 +0000 (UTC)
+Received: by mail-ua0-f177.google.com with SMTP id f5so6652820uam.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Mar 2018 12:32:44 -0600
-Received: from us-aus-exch5.ni.corp.natinst.com (130.164.68.15) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 2 Mar 2018 12:32:44 -0600
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch5.ni.corp.natinst.com (130.164.68.15) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 2 Mar 2018 12:32:43 -0600
-Received: from ionel-work.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 2 Mar 2018 12:32:43 -0600
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 2 Mar 2018 20:33:46 +0200
-Message-ID: <20180302183346.19849-1-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.16.2
+	Fri, 02 Mar 2018 10:39:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=cD1zJfXMUJvYUBAkKIZX+bewiZlfSqvbOaUI/UkVpmU=;
+	b=ApMXuDGUGQ/97noICjFpFMtRdO6DI7udSEPN64NtoTNCduVg/KG7GBeFYByCHlvhjw
+	a90k6Hc8dwfih3CMQCpXRRtLc5gTgodQwV1w0GlWP62B1PMFFFN+cyua1cnhDjbFsT6T
+	lu03L/t2lB4bediN2Mc87BwOZs6N6fCJ6dfbBbhBxvb1p/mWZ4pBXGOTYG8ddDD94H03
+	IH3RlkHAP9P/8MYEyQGMZlG6tjgSj6rvV2gOVCgZQYAUuNmLO/V3WaQhmuuUTtZf/Tq8
+	sC8/T0lWOwd6DGG5e2itE0NXYiYakHuwaKOi3Rcqlx8W+5JL1btL19mlc2LB3ba2KNmR
+	leqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=cD1zJfXMUJvYUBAkKIZX+bewiZlfSqvbOaUI/UkVpmU=;
+	b=l7pFA7psZFB6tl8lAGDgtali1JKuN953sMDKrkkPuNMKDDpJaGfQUZ3/xOcCPqDiEO
+	vK/LvOaZjYoGMSBB0GBUStmQKulcmXtBM0HLyNiWxjY11XU1NP9OuyVgVZq4t9aO1z4N
+	z4utB5tQyzg5V2DQMzqjStX+dO3uV/QoEehvd59yvG+TVNHdRkk4DhuCztMJqMZNG1ow
+	K2xB51f2c5zRzlFxLA31yokI40EaZtYUnMuGiXKHVQuQLSMUc0lYOwDUzm7gsH3QFn2F
+	iktHe/2cRuuwksZFBiUzdhnGA1RJSXoUSkFoQ9xRWw4zPkWOi+eAmnQNVBid6t+TQX70
+	OkZA==
+X-Gm-Message-State: APf1xPAu8BgO6HFFFaJ27TI9vEJsgdofXr8I3vQF3Wbxy+quYoMeG1bR
+	BFVlCYsO/jTNuhamUE/tx9wdFQeJuvFy3Yp+VRU=
+X-Google-Smtp-Source: AG47ELsxMCFV4wdYbGldouV2GDUVPjNmzqIJQEbYphxjj9AyW8VGlGflVx+lpeb+hzFbamGE0gZmlpZvZ/LLSj5NrIs=
+X-Received: by 10.159.61.88 with SMTP id m24mr4524203uai.139.1520015997689;
+	Fri, 02 Mar 2018 10:39:57 -0800 (PST)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2018-03-02_10:, , signatures=0
-X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=850 adultscore=0 classifier=spam adjust=30 reason=mlx
-	scancount=1 engine=8.0.1-1711220000 definitions=main-1803020218
-Subject: [meta-multimedia][PATCH] sox: backport fix for dynamically linked flac builds
+Received: by 10.31.52.207 with HTTP; Fri, 2 Mar 2018 10:39:57 -0800 (PST)
+In-Reply-To: <CANx9H-CgyZi-FDu5vhqTMr01TSM1JXcrimWiEWRZNPKE-L0MDg@mail.gmail.com>
+References: <20180302170307.jmf5hyru6lwv6kjq@mbedesk.sonatest.net>
+	<CAE=T-s72xDp1uwWSeB3si3Nyq3r=SYhoEgJHscyOkmCqsv6cjg@mail.gmail.com>
+	<CANx9H-CgyZi-FDu5vhqTMr01TSM1JXcrimWiEWRZNPKE-L0MDg@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Fri, 2 Mar 2018 10:39:57 -0800
+Message-ID: <CANx9H-B9+hpz0rG8LzOQeNVbxBXm5brWnrvwie5+Eqw_QDB+qg@mail.gmail.com>
+To: =?UTF-8?Q?Maxime_Roussin=2DB=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-python/python-matplotlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,78 +59,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 18:32:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 02 Mar 2018 18:39:57 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The sox project upstream is dead, non-responsive, and various
-developers started maintaining their own branches where they do
-feature development (eg. adding DSD/DSF format support) and
-bug-fixing. They don't have access to the central sox git repo.
+Rather than keep all the work I have done in the dark, I pushed the (not
+ready for prime time) WIP branch to contrib [1]. I was a bit over zealous
+and tried to also get the documentation to build (as there are tests for
+documentation). I also have not completely gotten the pytest.ini to skip
+tests as needed (some of the tests hang or take too long to run or have
+other issues). I have been working on this off and on for months.
 
-So basically the project will eventually get forked (I started a
-discussion in this direction). Until then, backport this flac build
-fix which was lingering around out of tree for years.
+[1]
+http://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/python-=
+matplotlib-2.1.2-WIP
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
----
- .../sox/sox/0001-Update-exported-symbol-list.patch | 34 ++++++++++++++++++++++
- .../recipes-multimedia/sox/sox_14.4.2.bb           |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/sox/sox/0001-Update-exported-symbol-list.patch
+On Fri, Mar 2, 2018 at 10:16 AM, Tim Orling <ticotimo@gmail.com> wrote:
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox/0001-Update-exported-symbol-list.patch b/meta-multimedia/recipes-multimedia/sox/sox/0001-Update-exported-symbol-list.patch
-new file mode 100644
-index 000000000..44c6b19be
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sox/sox/0001-Update-exported-symbol-list.patch
-@@ -0,0 +1,34 @@
-+From b1809d82031aa7c5bcaad58bcb4b59e082e0446e Mon Sep 17 00:00:00 2001
-+From: Mans Rullgard <mans@mansr.com>
-+Date: Sun, 5 Nov 2017 15:40:16 +0000
-+Subject: [PATCH] Update exported symbol list
-+
-+commit 5c58413544 ("Don't export (most) internal libsox symbols")
-+breaks dynamic flac builds as flac.c references lsx.error, so add it
-+to the list of exceptions.
-+
-+| .libs/flac.o: In function `decoder_read_callback':
-+| /usr/src/debug/sox/14.4.2-r0/sox-14.4.2/src/flac.c:63: undefined reference to `lsx_error'
-+
-+Upstream-Status: Backport [https://bogomips.org/sox.git ("pu" branch)]
-+
-+---
-+ src/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 7cceaafd..a3a04ed1 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -95,7 +95,7 @@ libsox_la_LIBADD += @GOMP_LIBS@
-+ 
-+ libsox_la_CFLAGS = @WARN_CFLAGS@
-+ libsox_la_LDFLAGS = @APP_LDFLAGS@ -version-info @SHLIB_VERSION@ \
-+-  -export-symbols-regex '^(sox_.*|lsx_(check_read_params|(close|open)_dllibrary|(debug(_more|_most)?|fail|report|warn)_impl|eof|fail_errno|filelength|find_(enum_(text|value)|file_extension)|getopt(_init)?|lpc10_(create_(de|en)coder_state|(de|en)code)|raw(read|write)|read(_b_buf|buf|chars)|realloc|rewind|seeki|sigfigs3p?|strcasecmp|tell|unreadb|write(b|_b_buf|buf|s)))$$'
-++  -export-symbols-regex '^(sox_.*|lsx_(([cm]|re)alloc|check_read_params|(close|open)_dllibrary|(debug(_more|_most)?|fail|report|warn)_impl|eof|error|fail_errno|filelength|find_(enum_(text|value)|file_extension)|flush|getopt(_init)?|id3_read_tag|lpc10_(create_(de|en)coder_state|(de|en)code)|raw(read|write)|read(_b_buf|buf|chars)|rewind|seeki|sigfigs3p?|strcasecmp|strdup|tell|unreadb|write(b|_b_buf|buf|s)))$$'
-+ 
-+ if HAVE_WIN32_LTDL
-+   libsox_la_SOURCES += win32-ltdl.c win32-ltdl.h
-+-- 
-+2.16.2
-+
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-index d1ed08a89..21fddd1e1 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-@@ -32,6 +32,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
-            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
-+           file://0001-Update-exported-symbol-list.patch \
-            "
- SRC_URI[md5sum] = "d04fba2d9245e661f245de0577f48a33"
- SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c"
--- 
-2.16.2
-
+> Yes, this is a known issue. I don't know that python-matplotlib was ever
+> actually complete enough to run. I have about 90% of the solution to make
+> it run (and add ptest to prove it runs), but sadly this is a free-time
+> activity and ELC and other things are pre-empting that right now.
+>
+> On Fri, Mar 2, 2018 at 9:17 AM, Maxime Roussin-B=C3=A9langer <
+> maxime.roussinbelanger@gmail.com> wrote:
+>
+>> It should read
+>>
+>> "
+>> python
+>> import matplotlib.pyplot as plt
+>> "
+>>
+>> instead of
+>>
+>> "
+>> python
+>> import matplotlib.plot as plt
+>> "
+>>
+>> On Fri, Mar 2, 2018 at 12:03 PM Maxime Roussin-Belanger <
+>> maxime.roussinbelanger@gmail.com> wrote:
+>>
+>> > When I run matplotlib in a genericx86-64 image it's missing the
+>> dependency,
+>> > python-cycler.
+>> >
+>> > I patch that dependency, and then run it again with
+>> >
+>> > "
+>> > python
+>> > import matplotlib.plot as plt
+>> > "
+>> >
+>> > Now I get another missing dependency "Cannot import name '_path'"
+>> >
+>> > I've tried to make it work, but alas. Have any other developers
+>> encountered
+>> > this problem?
+>> >
+>> > Is it a problem with the recipe itself?
+>> >
+>> > Thanks,
+>> > Max
+>> >
+>> > --
+>> Max
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
