@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
 	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D71E78983
+	by mail.openembedded.org (Postfix) with ESMTP id E2C896E660
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 13:48:01 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id f25so11953404qkm.0
+	Fri,  2 Mar 2018 14:06:12 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id g2so11982324qkd.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2018 05:48:03 -0800 (PST)
+	Fri, 02 Mar 2018 06:06:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=sp0v5CI/5QFrGMnPIfUTnpzj483G4eRpEwpk0dFfjCU=;
-	b=frLLa2otVFiG/6ZOvfS1qpb8MZMFXWQs6ED/aTmMxP+ADdWan0b3ZClxLDPKP77TWV
-	L6gdiLxIAN3sSvrNHj/KKEPLjN7Vnut2GMlNfNslbcM2qBFdYUm7ffQaoojrDoVfNrB4
-	moPO84W2uG67wHfFC+3mmQAXWpV+JQSjXpu3q92Qj0M8ycj80iK8YmMo3v0l5dHtCOSB
-	3HF7kQGdGthy0g7MxoBOUN9BeCVbUqqHqD6mkVqC5SYnGSWq+dUDpNaqChH4M70krp9A
-	9rdJygko9TtoSS0ku7IbRrMbS7+zECo2YL03PsZR2jLd1ZgUNnTTjPOlPC61PjAjZDQB
-	K2OA==
-X-Gm-Message-State: AElRT7G4kzhKIM0Jm5lCMcL7curaRyjrSC58XMdHeCYwcG5V0lGFx0P6
-	fpait679jh2RWiqU4oFZgOeYDTzf
-X-Google-Smtp-Source: AG47ELtQA1tZ4BOgeumaL4ZGSjN/YPtalP0yo1D4qmOza1OreX3O6anlaiq4Wd3zMoCdYqyc3ToWpQ==
-X-Received: by 10.55.123.197 with SMTP id w188mr8495046qkc.70.1519998482448;
-	Fri, 02 Mar 2018 05:48:02 -0800 (PST)
+	bh=mi1Cuai2xFCxytN7V9Yp3UseLDhfpyz0ke+kCXrX9cM=;
+	b=nfY5AWVSwMBzHhB6brvteq5MraMCBvSjQoiOIX6SwCO27vGP5L5vxZbLDQ83NlZPN5
+	gcLuYsZ9pVdb3eto4o+2ZERhOS66YTYfqzXP4aiq1Hj9AuBQ3tLUJD/YghmRi8UdryNS
+	iKlDxntGKCCQGclv5Je+MxRbvew1hf4wrcEOD0PyUvP+H76nacH9CZe4DUaRvGZ92slj
+	gnTq7Exdt6fRcw17aV4/GZH9qaVuFO2C2bBTKobqS/PM8iLF+t7Wi6TCPkKkqPy1CulZ
+	HaHGDOMeuoDcSKcrgkahOulRV23E0JA8mvwAWBqmBAfy4jx9mqM2et+F91GC12DpvixA
+	SS6g==
+X-Gm-Message-State: AElRT7HLhjhuksi+amVR9yP/LZy2IUxXGNHVzCFpsDBBwlMOoYoP+iAJ
+	ZFIqH0qLUJVgzOKQaaNJfx1N9UnP
+X-Google-Smtp-Source: AG47ELvQDS6FWlH0lR8jE+FATj3t7j26Wfccs2C9ciSh+rjyoUni7b6+JjfUqiWG3G8jSxtSRkEAgQ==
+X-Received: by 10.55.189.196 with SMTP id n187mr8281093qkf.141.1519999573611; 
+	Fri, 02 Mar 2018 06:06:13 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	z127sm4225029qkb.1.2018.03.02.05.48.01
+	y14sm4881179qth.84.2018.03.02.06.06.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 02 Mar 2018 05:48:02 -0800 (PST)
+	Fri, 02 Mar 2018 06:06:13 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Mar 2018 08:47:51 -0500
-Message-Id: <1519998471-1729-1-git-send-email-derek@asterius.io>
+Date: Fri,  2 Mar 2018 09:06:01 -0500
+Message-Id: <1519999561-9599-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-serpent: update to version 1.24
+Subject: [meta-python][PATCH] python-sqlalchemy: update to version 1.1.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,44 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 13:48:02 -0000
+X-List-Received-Date: Fri, 02 Mar 2018 14:06:13 -0000
 
-Update license file checksum and verify the terms remain the same
+Update the license checksum and verify the terms remain the same
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-serpent.inc              | 6 +++---
- .../python/{python-serpent_1.23.bb => python-serpent_1.24.bb}       | 0
- .../python/{python3-serpent_1.23.bb => python3-serpent_1.24.bb}     | 0
+ meta-python/recipes-devtools/python/python-sqlalchemy.inc           | 6 +++---
+ .../{python-sqlalchemy_1.1.15.bb => python-sqlalchemy_1.1.17.bb}    | 0
+ .../{python3-sqlalchemy_1.1.15.bb => python3-sqlalchemy_1.1.17.bb}  | 0
  3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-serpent_1.23.bb => python-serpent_1.24.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-serpent_1.23.bb => python3-serpent_1.24.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-sqlalchemy_1.1.15.bb => python-sqlalchemy_1.1.17.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.1.15.bb => python3-sqlalchemy_1.1.17.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-serpent.inc b/meta-python/recipes-devtools/python/python-serpent.inc
-index 6454ee0..3f51bc2 100644
---- a/meta-python/recipes-devtools/python/python-serpent.inc
-+++ b/meta-python/recipes-devtools/python/python-serpent.inc
-@@ -1,9 +1,9 @@
- SUMMARY = "Serialization based on ast.literal_eval"
+diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy.inc b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+index 2683a6a..0c191ae 100644
+--- a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
++++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+@@ -2,13 +2,13 @@ DESCRIPTION = "Python SQL toolkit and Object Relational Mapper that gives \
+ application developers the full power and flexibility of SQL"
+ HOMEPAGE = "http://www.sqlalchemy.org/"
  LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9f611d4c9e2816d387bab64c40d93294"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=acdea68f0e5a89eb6cbfdf54e38c356e"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=452f4b8adb0feba42e5be5f1fbfbf538"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b1c412c9d8d1ce018f7a9374407c22bb"
  
--SRC_URI[md5sum] = "d9d6afa51f2560cf5933dcdfd947011d"
--SRC_URI[sha256sum] = "8480ce3d8864b8974d9fe396998c6a7dae96edb68edf905bfd32ea9a11853ba5"
-+SRC_URI[md5sum] = "d0c50f1943ff86d830eb3fe40f6dc1e3"
-+SRC_URI[sha256sum] = "b6855483d95a03b6aee358363684cd38a3a670240da5bc6da4253079cb07b8df"
- 
+ PYPI_PACKAGE = "SQLAlchemy"
  inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-serpent_1.23.bb b/meta-python/recipes-devtools/python/python-serpent_1.24.bb
+-SRC_URI[md5sum] = "077f9bd3339957f53068b5572a152674"
+-SRC_URI[sha256sum] = "8b79a5ed91cdcb5abe97b0045664c55c140aec09e5dd5c01303e23de5fe7a95a"
++SRC_URI[md5sum] = "03db1c8f8ae911977c0bf3950a4c9c21"
++SRC_URI[sha256sum] = "6b55ec379c11ad696f9371ce8e0de93c7f21134323f56a56a1b0d8fbef17013c"
+ 
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-json \
+diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.15.bb b/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.17.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-serpent_1.23.bb
-rename to meta-python/recipes-devtools/python/python-serpent_1.24.bb
-diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.23.bb b/meta-python/recipes-devtools/python/python3-serpent_1.24.bb
+rename from meta-python/recipes-devtools/python/python-sqlalchemy_1.1.15.bb
+rename to meta-python/recipes-devtools/python/python-sqlalchemy_1.1.17.bb
+diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.17.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-serpent_1.23.bb
-rename to meta-python/recipes-devtools/python/python3-serpent_1.24.bb
+rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.15.bb
+rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.17.bb
 -- 
 2.7.4
 
