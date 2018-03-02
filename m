@@ -1,51 +1,47 @@
 Return-Path: <maxime.roussinbelanger@gmail.com>
-Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
-	[209.85.220.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 9AB617806D
+Received: from mail-it0-f42.google.com (mail-it0-f42.google.com
+	[209.85.214.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AB0071993
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 17:03:09 +0000 (UTC)
-Received: by mail-qk0-f177.google.com with SMTP id z197so12753589qkb.6
+	Fri,  2 Mar 2018 17:17:10 +0000 (UTC)
+Received: by mail-it0-f42.google.com with SMTP id w63so2442048ita.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2018 09:03:11 -0800 (PST)
+	Fri, 02 Mar 2018 09:17:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=ZoEBI3gIa+KgZv9Ws2BRzeAgGljNFpgqU6nTD7Y9vM4=;
-	b=EgmWjngg1z9zAnwGrr8nX56qTVA8i/tLtlWmFnK2ZaNH/0XlJaobayR28LSzq3wZCO
-	jYv92lkz8rqxnoN4b3GWRLb8Rq6aMCh9V9S51cx8Ze4DoSAdDbOF5DRkIikjFsgxBpVm
-	GyDMcJSDYeBxg2/DLlIxR1oubM88U1kInVdmuz7moZldB1m99rIyEh+3PrR1PGK7vUig
-	ERXkvNdqhPgo5b6+3oyD1F5ACV80iBJpYyJdJzJR/z1RUEbSMhKE53E35eH/S8nylL+x
-	J26DC3I35RxWDnqpOoNWpZ5nF0LLlUQxWEgUxvvFNwWnQK0D2osSAX/lOKN4mqEWrfn3
-	LmLA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=Guo2koL7e0iIK6gsb5GXE8WpUJxeR0GffJTakp4AG58=;
+	b=M4CZkqe+9nNJZadfcW+bukivwx2e6BM7VjWExbObTTv9kxGmYVWblw00O7QzGhhYmb
+	9/n+o0JaPdYWwc4cLFcKpTUfDujJ+1TLPXflWEZrx9/MFbsHDu0+HIFRmTvgTEgnqEkr
+	fJ6mHWgunnHnUeq34Cg3iobovY4bNSGe+Io88iF1Y47/7KZqq/brIFYqr17r2wDRjUQF
+	HC/BR03afIxeNTiqr1cO2S1NgiCEp7A04s5EQkg6c0Xxc+jQbi6KdeQX9VZKkj9QBu/R
+	+hpQ1MBDoyk82h36pnXTV4wu+9IW2Q0qa+X3IOZ5aVXwggcU7E98ie94yL1MD0Jfi+8F
+	5Vgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=ZoEBI3gIa+KgZv9Ws2BRzeAgGljNFpgqU6nTD7Y9vM4=;
-	b=pI+y/G1tG8Nq+d7oHpjbmuBhpk0t7+0i5PCTyVnL8mi6lKJsxmegeGBlz648Ekjxgx
-	WZFT2AZ03qXkc36nu5AROpl0tzHV6n3YmNb1V4o+d7rpPn0hFPH0f3e0BJvQm3Rd4IP7
-	noVrkvPaVkYE+Jdd3DsiKJcU9bVwZJ5v2o0AzvmIuEv2M0GqDXvZU/+FvKVo+8AXFFl1
-	YeSQgBzUmVYTB64OBKNMzUmpozQ34iDdFR4Tj09ZofB56Mvnl8Xn5GZ/H9zNgiIHfK4H
-	ZtEuuA8fbL9ETCFVFKxDjRYVz0osVh0FrDdHgsENPvVPe6zGa+OQ6YjhPg0l6Ka5qG2E
-	Tkbg==
-X-Gm-Message-State: AElRT7EY4GwQbs2IttiaVcvyzndB+evBO5IaKlNuvvoCOUtTiY1uioAg
-	PuyLLjK5iEFe543hJI0iGsArXp2U
-X-Google-Smtp-Source: AG47ELvdJ/ZI9KBpycIvj/Pygnz8sWdaFVYqHcpH4+M2TdnlYEmPBaHnEcJQaHwJeRGAcC1E0QtkNQ==
-X-Received: by 10.55.41.92 with SMTP id p89mr9224468qkh.208.1520010190523;
-	Fri, 02 Mar 2018 09:03:10 -0800 (PST)
-Received: from mbedesk.sonatest.net
-	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
-	[174.94.156.236])
-	by smtp.gmail.com with ESMTPSA id a79sm2201725qkg.4.2018.03.02.09.03.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 02 Mar 2018 09:03:10 -0800 (PST)
-Date: Fri, 2 Mar 2018 12:03:08 -0500
-From: Maxime Roussin-Belanger <maxime.roussinbelanger@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180302170307.jmf5hyru6lwv6kjq@mbedesk.sonatest.net>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=Guo2koL7e0iIK6gsb5GXE8WpUJxeR0GffJTakp4AG58=;
+	b=tIh2hQV3UXOswPygnrWvCdHtix7x3bEVEEV8ev2j2T04sJ5MU+Lj08lEG4bJLtDDbF
+	YVR8FWA8wrV0U4C2VwHunDTFXbH7QtVyAmuwBx6JeHoaEAoO0kKDX13DqjeO1x98TCzu
+	lU5+G3z8Df0VR7hf5BuZGQT2y5q8OF3wrs0wBHnlAF03wTiPOmYUs0hRc5kK/12i6y2/
+	xr1lITz4UccGT9yqjsDkBzVA2aUmlVRkyYrDL4UDwb2dUs04E1OSMhvwTp8pjc//OAz9
+	S54vIu3FXe8flZ5MYOYepoWgZ3FCJKlG+67lu/DAKz0umvc3STuztYiYzcvOkE+RxMKu
+	syuw==
+X-Gm-Message-State: AElRT7HzmLPJcDP7Y+PdWfnUWWehm7gOCkbaf+gRPaV3Ufa0nFmBLBwH
+	yFFxer1Qt1VfdAC0EuIS4L846fz1vioCgv4grkOJ8A==
+X-Google-Smtp-Source: AG47ELv/+bWJn9Ox+q6XcNSd0varETIjWyrygc6wBLwiI+N9zWdoSJUXx74HbXlDv32DVrEW7EGKsxu0HxTxhX3Qg3E=
+X-Received: by 10.36.81.196 with SMTP id s187mr3402819ita.139.1520011032162;
+	Fri, 02 Mar 2018 09:17:12 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: NeoMutt/20170113 (1.7.2)
-Subject: meta-python/python-matplotlib
+References: <20180302170307.jmf5hyru6lwv6kjq@mbedesk.sonatest.net>
+In-Reply-To: <20180302170307.jmf5hyru6lwv6kjq@mbedesk.sonatest.net>
+From: =?UTF-8?Q?Maxime_Roussin=2DB=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
+Date: Fri, 02 Mar 2018 17:17:01 +0000
+Message-ID: <CAE=T-s72xDp1uwWSeB3si3Nyq3r=SYhoEgJHscyOkmCqsv6cjg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: meta-python/python-matplotlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,28 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 17:03:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 Mar 2018 17:17:11 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-When I run matplotlib in a genericx86-64 image it's missing the dependency, 
-python-cycler.
+It should read
 
-I patch that dependency, and then run it again with
+"
+python
+import matplotlib.pyplot as plt
+"
+
+instead of
 
 "
 python
 import matplotlib.plot as plt
 "
 
-Now I get another missing dependency "Cannot import name '_path'"
+On Fri, Mar 2, 2018 at 12:03 PM Maxime Roussin-Belanger <
+maxime.roussinbelanger@gmail.com> wrote:
 
-I've tried to make it work, but alas. Have any other developers encountered 
-this problem?
-
-Is it a problem with the recipe itself?
-
-Thanks,
+> When I run matplotlib in a genericx86-64 image it's missing the dependency,
+> python-cycler.
+>
+> I patch that dependency, and then run it again with
+>
+> "
+> python
+> import matplotlib.plot as plt
+> "
+>
+> Now I get another missing dependency "Cannot import name '_path'"
+>
+> I've tried to make it work, but alas. Have any other developers encountered
+> this problem?
+>
+> Is it a problem with the recipe itself?
+>
+> Thanks,
+> Max
+>
+> --
 Max
-
 
