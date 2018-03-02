@@ -1,39 +1,23 @@
-Return-Path: <jsbronder@cold-front.org>
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
-	[66.111.4.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D83678989
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 14B8D78995
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 21:46:27 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
-	by mailout.nyi.internal (Postfix) with ESMTP id 0A853211D8;
-	Fri,  2 Mar 2018 16:46:29 -0500 (EST)
-Received: from frontend1 ([10.202.2.160])
-	by compute7.internal (MEProxy); Fri, 02 Mar 2018 16:46:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	h=cc:date:from:message-id:subject:to:x-me-sender:x-me-sender
-	:x-sasl-enc; s=mesmtp; bh=tzDfBSAM3xt3hE4Ur7wWrhgPKirqkc88EgFvTV
-	6o8W0=; b=UUrYDspUHUKl70mcyJhD1Q/tvWtI/usMl5RHn+tru/1qcg5FW2KFmV
-	zUoG7XEtL3ank0QpB+8s2kUdvYrzfyBNaCMyY2qU2whKRA0ctkTZSj544vkQrmGt
-	ZGra98MN44vxtHy5uLdOJZT7ntyfPOJ5z1x7GJiI8udIOv0LpByJ0=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:date:from:message-id:subject:to
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=tzDfBSAM3xt3hE4Ur
-	7wWrhgPKirqkc88EgFvTV6o8W0=; b=nYuHTFcx6GvCmLtpy8PJ8qo07Rp2eU8Fa
-	s8yGS5e0baocecfvM6dMD5cw5haOeWPSDb3eKAJaeIEtMTHCLD2cEOmT3xwMpCdM
-	BxO3HXMPl28MzV1+zieGPsGM+5djoulb0VRRwXK+g4YHT62vL0Coo1o1sx3vkNXS
-	LsX9mIvFYtFHy6Ee9gMpcFK/s0/MC9NgDLrnGWSU931PBwf6RR2b8c4J/FTF87fp
-	QUN14yPM3PDt4YYKzHIp/p3kxN20xH7b+LmefgxrP/wlM1tqSUyjesha5yWthof9
-	7wFG+uSo2NeqfVzep8rCs1jr00bW4+wH1wFZFNT31uFQ/wUcCPfsg==
-X-ME-Sender: <xms:NMaZWpQuYERah6_r7yxvJcaaRIRm5qZErqJu2wl4x6wRe7ti-jyEvQ>
-Received: from localhost (unknown [96.237.180.55])
-	by mail.messagingengine.com (Postfix) with ESMTPA id AE0927E5A8;
-	Fri,  2 Mar 2018 16:46:28 -0500 (EST)
-From: Justin Bronder <jsbronder@cold-front.org>
+	Fri,  2 Mar 2018 23:22:34 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	02 Mar 2018 15:22:36 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.47,414,1515484800"; d="scan'208";a="21674549"
+Received: from wrath.jf.intel.com ([10.54.31.19])
+	by fmsmga008.fm.intel.com with ESMTP; 02 Mar 2018 15:22:35 -0800
+From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Mar 2018 16:46:23 -0500
-Message-Id: <20180302214624.18596-1-jsbronder@cold-front.org>
+Date: Fri,  2 Mar 2018 15:22:34 -0800
+Message-Id: <20180302232234.27834-1-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.13.6
-Subject: [meta-oe][PATCH v3 1/2] cppzmq: 4.2.3 update
+Subject: [meta-python][PATCH] python-pytest.inc: add ${PYTHON_PN}-doctest to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,28 +30,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 21:46:28 -0000
+X-List-Received-Date: Fri, 02 Mar 2018 23:22:35 -0000
 
-Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+If pytest fallsback to pdb, it needs python-doctest module or
+else it fails with:
+
+Traceback (most recent call last):
+  File \"/usr/bin/pytest\", line 11, in <module>
+    load_entry_point('pytest==3.4.1', 'console_scripts', 'pytest')()
+  File \"/usr/lib64/python3.5/site-packages/pkg_resources/__init__.py\", line 572, in load_entry_point
+    return get_distribution(dist).load_entry_point(group, name)
+  File \"/usr/lib64/python3.5/site-packages/pkg_resources/__init__.py\", line 2755, in load_entry_point
+    return ep.load()
+  File \"/usr/lib64/python3.5/site-packages/pkg_resources/__init__.py\", line 2408, in load
+    return self.resolve()
+  File \"/usr/lib64/python3.5/site-packages/pkg_resources/__init__.py\", line 2414, in resolve
+    module = __import__(self.module_name, fromlist=['__name__'], level=0)
+  File \"/usr/lib64/python3.5/site-packages/pytest.py\", line 17, in <module>
+    from _pytest.debugging import pytestPDB as __pytestPDB
+  File \"/usr/lib64/python3.5/site-packages/_pytest/debugging.py\", line 5, in <module>
+    from doctest import UnexpectedException
+ImportError: No module named 'doctest'
+
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python-pytest.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-index a64745c94..4920bce8c 100644
---- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
- DEPENDS = "zeromq"
- 
--SRCREV = "68a7b09cfce01c4c279fba2cf91686fcfc566848"
--PV = "4.1.5+git${SRCPV}"
-+SRCREV = "6aa3ab686e916cb0e62df7fa7d12e0b13ae9fae6"
-+PV = "4.2.3+git${SRCPV}"
- 
- SRC_URI = "git://github.com/zeromq/cppzmq.git"
- 
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index ecb729331..60ff83008 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -12,6 +12,7 @@ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-attrs \
+     ${PYTHON_PN}-debugger \
++    ${PYTHON_PN}-doctest \
+     ${PYTHON_PN}-json \
+     ${PYTHON_PN}-pluggy \
+     ${PYTHON_PN}-py \
 -- 
 2.13.6
 
