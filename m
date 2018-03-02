@@ -1,48 +1,43 @@
 Return-Path: <jsbronder@cold-front.org>
 Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
 	[66.111.4.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 84128789C3
+	by mail.openembedded.org (Postfix) with ESMTP id 1C4187897B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 20:54:57 +0000 (UTC)
+	Fri,  2 Mar 2018 21:46:27 +0000 (UTC)
 Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
-	by mailout.nyi.internal (Postfix) with ESMTP id 6447520F9E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 15:54:58 -0500 (EST)
-Received: from frontend2 ([10.202.2.161])
-	by compute7.internal (MEProxy); Fri, 02 Mar 2018 15:54:58 -0500
+	by mailout.nyi.internal (Postfix) with ESMTP id 6CE6E211C8;
+	Fri,  2 Mar 2018 16:46:29 -0500 (EST)
+Received: from frontend1 ([10.202.2.160])
+	by compute7.internal (MEProxy); Fri, 02 Mar 2018 16:46:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cold-front.org;
-	h=content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=
-	mesmtp; bh=yUw+SBBxPSqcyIw/kfnMLV77kARASOA91OHQ3RHmrJs=; b=EBDVa
-	UTpbIoKhxj+pSIZ61N5HgmiBNa+4o5mDQnRsfPUrIc1ISw03uW5E0ZTjMCUAtbxW
-	BSHHS0QnJMblHybFnPNDgozwlZg8a0nHZCK5OzawezfWfmYIQpEQHcmN4WkYrlGH
-	WhTGf/ovTR/TxAFI5eKNjpmu4Kw+0pfvLqKNfg=
+	h=cc:date:from:in-reply-to:message-id:references:subject:to
+	:x-me-sender:x-me-sender:x-sasl-enc; s=mesmtp; bh=rZBcX4pPxwukbe
+	JoRtlID1XvcQ2qaT3rhncBADa6/m4=; b=QkUcx0wd5TUAkKqw/HhXtgWHBVQQge
+	6dx0cewvQEngIzFXpsX73zkwIuABlreI0foDHAPtG931Go4HjVTxHeD6SmQPo1lp
+	BBCpx6ClH233SvHIzb8bokOrFVHpf4R6Der+TZOxqzKa0M2yVFLmQhqLzPLv+Zn1
+	mMpUxqMs8XZm4=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=yUw+SBBxPSqcyIw/kfnMLV77kARAS
-	OA91OHQ3RHmrJs=; b=XMe26hbVk/nQ2CSn5xKqW8upZfj5nk1TpK2xRm2LEYXPa
-	OoBmodIPspAJwQDmOxPVgFvskWT4q3tvpJ1tzsZeLJvnIF3MECnIhYdhpOlSw/TG
-	MKi/vSghvgirjgMzN3eUVwuiyx4E0lmsYDGYKTSTrBdPM15Dq2aKzkGrfdiyW8j2
-	nw1pygR3jG2wdIUD1bkMFHk0TSamGTbT+bZij2PiJfG64A5H2U7UJ6og71kclxiI
-	wLCy38Chtd4Aps3wmrq3QPE7k9c2cusvWcrInmrelhnmBT+iMaPu9oviFY4VxGcw
-	wrZFe+YpzVAXDliM2obfGV8vYRS+5v4FBEFo7fj3A==
-X-ME-Sender: <xms:IrqZWhJ5-cDf1Y3w4PbkmorM4tB7WyQp7pmUM40flKU7l1YUB0gxUg>
-Received: from localhost (cold-front.org [173.230.129.52])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 1D52D2482D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 15:54:58 -0500 (EST)
-Date: Fri, 2 Mar 2018 15:54:57 -0500
+	messagingengine.com; h=cc:date:from:in-reply-to:message-id
+	:references:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm2; bh=rZBcX4pPxwukbeJoRtlID1XvcQ2qaT3rhncBADa6/m4=; b=WsNtW80q
+	nQ21dVBWaabPVbWSF870PHIF1cvykzHagkjFwTUsd3NcJmYqjfpLHlL5uhXahYb7
+	1M3Rx59wte6ZiJ/H55kGEqJ/DPzJYPOvQbW3iDnwupkeY6W36BxBLEpPu3ECzLWE
+	kJo1Jo6TRk6NgjMtkrHt9srH2n1ThAMLB568+/kZGAM+EMan0mTYIyQbd5AOc2nz
+	pmVMjLTRn6+dWRN5Ve/QDWtWMz06vqNv4c7/9qUhigTycMxIBtqj3FrOUll6Zzes
+	BdSSaJCjNVkF0UETUTnNai8z+1JW/47vgQgjErwmgF6TX2dmQEwOcNIPYOubwhaL
+	1yAtRSLFza+8cg==
+X-ME-Sender: <xms:NcaZWkYA-wIZgLEhJKAV9M1giVZILWtGojOiTaOTzCiDn6mhH594ww>
+Received: from localhost (unknown [96.237.180.55])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 1E4277E5A8;
+	Fri,  2 Mar 2018 16:46:29 -0500 (EST)
 From: Justin Bronder <jsbronder@cold-front.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180302205457.GL23655@lasswell>
-Mail-Followup-To: Justin Bronder <jsbronder@cold-front.org>,
-	openembedded-devel@lists.openembedded.org
-References: <20180302203140.6397-1-jsbronder@cold-front.org>
-MIME-Version: 1.0
-In-Reply-To: <20180302203140.6397-1-jsbronder@cold-front.org>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Re: cppzmq: 4.2.3 update
+Date: Fri,  2 Mar 2018 16:46:24 -0500
+Message-Id: <20180302214624.18596-2-jsbronder@cold-front.org>
+X-Mailer: git-send-email 2.13.6
+In-Reply-To: <20180302214624.18596-1-jsbronder@cold-front.org>
+References: <20180302214624.18596-1-jsbronder@cold-front.org>
+Subject: [meta-oe][PATCH v3 2/2] zeromq: 4.2.3 update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,37 +50,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 20:54:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 Mar 2018 21:46:28 -0000
 
-Please ignore this, I pasted in the wrong sha.  I'll fix and resubmit.
+4.1.6 was released in late 2016 and upstream has moved on to the 4.2
+series which has a number of new APIs but remains ABI compatible with
+4.1.2+ per https://github.com/zeromq/libzmq/releases/tag/v4.2.0.
 
-On 02/03/18 15:31 -0500, Justin Bronder wrote:
-> Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
-> ---
->  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> index a64745c94..b660b69da 100644
-> --- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> +++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
-> @@ -4,8 +4,8 @@ LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=db174eaf7b55a34a7c89551197f66e94"
->  DEPENDS = "zeromq"
->  
-> -SRCREV = "68a7b09cfce01c4c279fba2cf91686fcfc566848"
-> -PV = "4.1.5+git${SRCPV}"
-> +SRCREV = "3226b8ebddd9c6c738ba42986822c26418a49afb"
-> +PV = "4.2.3+git${SRCPV}"
->  
->  SRC_URI = "git://github.com/zeromq/cppzmq.git"
->  
-> -- 
-> 2.13.6
-> 
+4.2.3 ChangeLog: https://github.com/zeromq/libzmq/releases/tag/v4.2.3
 
+Signed-off-by: Justin Bronder <jsbronder@cold-front.org>
+---
+ .../zeromq/{zeromq_4.1.6.bb => zeromq_4.2.3.bb}                     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.1.6.bb => zeromq_4.2.3.bb} (78%)
+
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.6.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.3.bb
+similarity index 78%
+rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.1.6.bb
+rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.2.3.bb
+index e126f3239..71d7e7cbf 100644
+--- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.6.bb
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.2.3.bb
+@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
+ PACKAGECONFIG ??= "libsodium"
+ PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
+ 
+-SRC_URI = "http://github.com/zeromq/zeromq4-1/releases/download/v${PV}/zeromq-${PV}.tar.gz \
++SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
+     file://run-ptest \
+ "
+-SRC_URI[md5sum] = "c89db4dbc0b90c34c9f4983cbff6d321"
+-SRC_URI[sha256sum] = "02ebf60a43011e770799336365bcbce2eb85569e9b5f52aa0d8cc04672438a0a"
++SRC_URI[md5sum] = "c4e18bd0584ccd34213f152c11f54d6c"
++SRC_URI[sha256sum] = "8f1e2b2aade4dbfde98d82366d61baef2f62e812530160d2e6d0a5bb24e40bc0"
+ 
+ S = "${WORKDIR}/zeromq-${PV}"
+ 
 -- 
-Justin Bronder
+2.13.6
+
 
