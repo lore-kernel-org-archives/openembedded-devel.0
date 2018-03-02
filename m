@@ -1,43 +1,51 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C6F6789AE
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-vk0-f51.google.com (mail-vk0-f51.google.com
+	[209.85.213.51])
+	by mail.openembedded.org (Postfix) with ESMTP id B89AC789AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 18:10:54 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1520014255; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=AwKRo8STRasKQwXi5z6qF450OgEaxv2v1ahwfIjIFJ4=;
-	b=Y45Z2WZu4jqbJ8ckqHdmhJoZVUaJ3nyQLTYQ/Et8qHLDn+YcrUdDT6g/TeRXcIhomgQJjiF1
-	qGbpfhyPyl6hWcvtVoa+5FxiPpxADCTJYV+hw2PrOPEf/V21IAWh0enqDR4S9h+RUFAaGosQ
-	sjZJMDfDE7569dxCA3AIPjvmq9E=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
-	[209.85.216.177])
-	by mxa.mailgun.org with ESMTP id 5a9993af.7fd19848e0b0-smtp-out-n03;
-	Fri, 02 Mar 2018 18:10:55 -0000 (UTC)
-Received: by mail-qt0-f177.google.com with SMTP id a23so12963316qtn.0
+	Fri,  2 Mar 2018 18:16:18 +0000 (UTC)
+Received: by mail-vk0-f51.google.com with SMTP id p189so6237564vkd.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2018 10:10:54 -0800 (PST)
-X-Gm-Message-State: AElRT7GcNMZQ/btvsJp251+0nzafBgaoQ44lh/oHLiUPH5h/vSURzg9w
-	YAYSOkhBk0Ka6UXSYQg7COaQd5b9/dcNKDFP60M=
-X-Google-Smtp-Source: AG47ELvuMqYUiUM/T+IX+ZojfwQ+9QL5R0J7sdbM6ujUv2t8wjZ6f0J6fKcVOzUhw1yB4Xk1yTOT2Q165or2v4+BLtY=
-X-Received: by 10.200.50.75 with SMTP id y11mr9564656qta.153.1520014254248;
-	Fri, 02 Mar 2018 10:10:54 -0800 (PST)
+	Fri, 02 Mar 2018 10:16:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ThT37nUTNFT8Bnq7UBeXFBp5OdqDJbSu0+WB4USYSBA=;
+	b=p5ShXAGvGaCRG/DnV+hlfFZkctv2SyAkCMbPehfkG8++VIRaocRspdtST4iPX79GCk
+	KjUT1Zqd0tuAibI/+Kh99eXJuSFbmAS9Ev7qnia+ga+cIUIE4A3m0Hsi4/mC6Q1qVJ+t
+	jHxUVvguL9PKM9OjXKsMKzRECkZImQHL7Ge2Xwxb3wP8NaSJPrtQ95k1I7+h+MjS1wDy
+	Nzmeu+JFiwuPtW7CkLmPY6r8qG1N4lHvX0X8/9xvuFvnKOnixR91HXhkOyBLQ85hjbSt
+	Wu+7g3IPDIAure1xj3STdXd7u2rs5QLylgQUfmDZlgERm/jC3FQcZ6yLZpy59P4QrHuu
+	N1eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ThT37nUTNFT8Bnq7UBeXFBp5OdqDJbSu0+WB4USYSBA=;
+	b=F0co1YdtKtPbputcqFk2T1nY9Etf4suWjLZHVGkJwo+dXZgn8C6maV/dTsIOIEz/Zz
+	2UXmbgnpAcIuz8EFlcGmu40ZeEHayuunmxAZlQs95d3XXPOqppiObe761ayyfV2XQeRK
+	Isuh/QeLcAK5u8XYrhh5uW38S06kLb0LV1DIlvJ+OMIrGvpg4JCG+DyHOhImIgRAtZnA
+	GIgQ2DBvc23rEZj0yY24XpWFK1WzE3Ee8aJgQHuEOf7o+tV+hlM6BZXLLHZDaXxyhpt4
+	DN3wryJGTKOb8xfQZadcWulwDdwkHdDMsq+exxEIZ/Xgwox6C72ovrPX16So9VQ65+51
+	wauQ==
+X-Gm-Message-State: AElRT7GWQTkox8unOfWIF3cFXzJ/+Jii0m4xnnBjlt8UxAtwYOMsunJv
+	b+lbdRmjGgInaN+LNYhOyZiZ1/T1t6Il7siZxZ8=
+X-Google-Smtp-Source: AG47ELucCCQIj8RMFqgvuRBRje8HBHqKpgwlD71hGlyNW0J6bs/9mJ+9gnBp/itHPqgwaNVBnhs/DEhZCT9wF0+iyKk=
+X-Received: by 10.31.176.130 with SMTP id z124mr4354625vke.88.1520014579481;
+	Fri, 02 Mar 2018 10:16:19 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.140.108.35 with HTTP; Fri, 2 Mar 2018 10:10:53 -0800 (PST)
-In-Reply-To: <20180302180820.3332-1-alexandru.vasiu@ni.com>
-References: <20180302180820.3332-1-alexandru.vasiu@ni.com>
-From: Derek Straka <derek@asterius.io>
-Date: Fri, 2 Mar 2018 13:10:53 -0500
-X-Gmail-Original-Message-ID: <CADNbA1qmDXLNn61VWKT3yMkU826__zDB+gpn-sRsxP82ZK=ksA@mail.gmail.com>
-Message-ID: <CADNbA1qmDXLNn61VWKT3yMkU826__zDB+gpn-sRsxP82ZK=ksA@mail.gmail.com>
-To: Alexandru Vasiu <alexandru.vasiu@ni.com>
+Received: by 10.31.52.207 with HTTP; Fri, 2 Mar 2018 10:16:19 -0800 (PST)
+In-Reply-To: <CAE=T-s72xDp1uwWSeB3si3Nyq3r=SYhoEgJHscyOkmCqsv6cjg@mail.gmail.com>
+References: <20180302170307.jmf5hyru6lwv6kjq@mbedesk.sonatest.net>
+	<CAE=T-s72xDp1uwWSeB3si3Nyq3r=SYhoEgJHscyOkmCqsv6cjg@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Fri, 2 Mar 2018 10:16:19 -0800
+Message-ID: <CANx9H-CgyZi-FDu5vhqTMr01TSM1JXcrimWiEWRZNPKE-L0MDg@mail.gmail.com>
+To: =?UTF-8?Q?Maxime_Roussin=2DB=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][meta-python][PATCH] Add support for pyiface
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-python/python-matplotlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,50 +58,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 18:10:54 -0000
+X-List-Received-Date: Fri, 02 Mar 2018 18:16:18 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Can this be extended to python3?  If so, can you add that as part of the
-patch set?  Thanks.
+Yes, this is a known issue. I don't know that python-matplotlib was ever
+actually complete enough to run. I have about 90% of the solution to make
+it run (and add ptest to prove it runs), but sadly this is a free-time
+activity and ELC and other things are pre-empting that right now.
 
--Derek
+On Fri, Mar 2, 2018 at 9:17 AM, Maxime Roussin-B=C3=A9langer <
+maxime.roussinbelanger@gmail.com> wrote:
 
-On Fri, Mar 2, 2018 at 1:08 PM, Alexandru Vasiu <alexandru.vasiu@ni.com>
-wrote:
-
-> Pyiface is a package that exposes the network interfaces of the
-> operating system in a easy to use and transparent way.
+> It should read
 >
-> Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
-> ---
->  meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb | 10
-> ++++++++++
->  1 file changed, 10 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-pyiface_0.0.2.bb
+> "
+> python
+> import matplotlib.pyplot as plt
+> "
 >
-> diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb
-> b/meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb
-> new file mode 100644
-> index 000000000..fad75af06
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb
-> @@ -0,0 +1,10 @@
-> +SUMMARY = "Pyiface Recipe - Adds Pyiface library for Python"
-> +HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
-> +LICENSE = "GPLv3+"
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47
-> f1"
-> +
-> +SRC_URI[md5sum] = "8ced1d8ef89376a5aed97a59f11ae683"
-> +SRC_URI[sha256sum] = "bf5b1ff115344d388b0f9409a440ee
-> 06f67478b6c63bc8d8ce8f843f2652a8d3"
-> +
-> +inherit pypi setuptools
-> --
-> 2.16.2
+> instead of
 >
+> "
+> python
+> import matplotlib.plot as plt
+> "
+>
+> On Fri, Mar 2, 2018 at 12:03 PM Maxime Roussin-Belanger <
+> maxime.roussinbelanger@gmail.com> wrote:
+>
+> > When I run matplotlib in a genericx86-64 image it's missing the
+> dependency,
+> > python-cycler.
+> >
+> > I patch that dependency, and then run it again with
+> >
+> > "
+> > python
+> > import matplotlib.plot as plt
+> > "
+> >
+> > Now I get another missing dependency "Cannot import name '_path'"
+> >
+> > I've tried to make it work, but alas. Have any other developers
+> encountered
+> > this problem?
+> >
+> > Is it a problem with the recipe itself?
+> >
+> > Thanks,
+> > Max
+> >
+> > --
+> Max
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
