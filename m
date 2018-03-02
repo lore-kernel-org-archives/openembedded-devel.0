@@ -1,31 +1,48 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6347D78981
+Return-Path: <prvs=2599704a79=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id DF2D371AB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Mar 2018 17:51:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w22HpHEQ015698
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Fri, 2 Mar 2018 09:51:17 -0800
-Received: from soho-mhatle-m.local (172.25.36.227) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 2 Mar 2018 09:50:48 -0800
-To: ZhangXiao <xiao.zhang@windriver.com>, Khem Raj <raj.khem@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <5A9676C2.9030208@windriver.com>
-	<52061e9a-5cbf-57c4-5a13-1f83394a54b2@gmail.com>
-	<5A9905F4.2030304@windriver.com>
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-Message-ID: <c4923cd2-8cca-8739-c4dd-6ab6fc1adfa5@windriver.com>
-Date: Fri, 2 Mar 2018 11:51:15 -0600
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
-	Gecko/20100101 Thunderbird/52.6.0
+	Fri,  2 Mar 2018 18:08:29 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w22I7WTV004429 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 2 Mar 2018 12:08:31 -0600
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2gb4y2k50e-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Mar 2018 12:08:30 -0600
+Received: from us-aus-exch1.ni.corp.natinst.com
+	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w22I8T56015275
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 2 Mar 2018 12:08:29 -0600
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Fri, 2 Mar 2018 12:08:29 -0600
+Received: from avasiuPC.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Fri, 2 Mar 2018 12:08:28 -0600
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Mar 2018 20:08:20 +0200
+Message-ID: <20180302180820.3332-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.16.2
 MIME-Version: 1.0
-In-Reply-To: <5A9905F4.2030304@windriver.com>
-Subject: Re: multilib SDK issue
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2018-03-02_09:, , signatures=0
+X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
+	score=30
+	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
+	bulkscore=0
+	spamscore=0 clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=921 adultscore=0 classifier=spam adjust=30 reason=mlx
+	scancount=1 engine=8.0.1-1711220000 definitions=main-1803020214
+Subject: [meta-oe][meta-python][PATCH] Add support for pyiface
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,80 +55,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Mar 2018 17:51:17 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 02 Mar 2018 18:08:30 -0000
+Content-Type: text/plain
 
-On 3/2/18 2:06 AM, ZhangXiao wrote:
-> For the conflict of the config file, how about use "update-alternatives"
-> to avoid it?
+Pyiface is a package that exposes the network interfaces of the
+operating system in a easy to use and transparent way.
 
-This is my recommendation.  Rename the conflicting scripts to append the
-'base_libdir' value, and then use the update-alternatives to install them.
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+---
+ meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb
 
---Mark
-
-> Thanks
-> Xiao
-> 
-> 在 2018年03月01日 10:13, Khem Raj 写道:
->> On 2/28/18 1:30 AM, ZhangXiao wrote:
->>> Hi All,
->>>
->>> With below settings on my local.conf, I get several errors when
->>> extracting SDK:
->>>
->>> Modify local.conf as the example of section 4.10.2.2 of
->>> http://www.yoctoproject.org/docs/2.4.1/mega-manual/mega-manual.html#combining-multiple-versions-library-files-into-one-image
->>>
->>> ...
->>> MACHINE = "qemux86-64"
->>> require conf/multilib.conf
->>> MULTILIBS = "multilib:lib32"
->>> DEFAULTTUNE_virtclass-multilib-lib32 = "x86"
->>> IMAGE_INSTALL_append = " lib32-glib-2.0"
->>> ..
->>>
->>> # bitbake core-image-minimal -c populate_sdk
->>>
->>> ...
->>> Transaction Summary
->>> ================================================================================
->>> Install  416 Packages
->>>
->>> Total size: 57 M
->>> Installed size: 276 M
->>> Downloading Packages:
->>> Running transaction check
->>> Transaction check succeeded.
->>> Running transaction test
->>> Error: Transaction check error:
->>>   file /usr/include/gmp.h conflicts between attempted installs of
->>> libgmp-dev-6.1.2-r0.core2_64 and lib32-libgmp-dev-6.1.2-r0.x86
->>
->> this means we need to install gmp.h as multilib header during do_install
->> in recipe
->>
->> e.g.
->>
->> oe_multilib_header gmp.h
->>
->>>   file /usr/bin/python3.5m-config conflicts between attempted installs
->>> of python3-dev-3.5.4-r1.0.core2_64 and lib32-python3-dev-3.5.4-r1.0.x86
->>>   file /usr/share/pkgconfig/xtrans.pc conflicts between attempted
->>> installs of lib32-xtrans-dev-1:1.3.5-r0.x86 and
->>> xtrans-dev-1:1.3.5-r0.core2_64
->>>
->>> Error Summary
->>> -------------
->>>
->>> Any advices?
->>>
->>> Thanks a lot!
->>> Xiao
->>>
->>
->>
+diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb
+new file mode 100644
+index 000000000..fad75af06
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.2.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Pyiface Recipe - Adds Pyiface library for Python"
++HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
++LICENSE = "GPLv3+"
++
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
++
++SRC_URI[md5sum] = "8ced1d8ef89376a5aed97a59f11ae683"
++SRC_URI[sha256sum] = "bf5b1ff115344d388b0f9409a440ee06f67478b6c63bc8d8ce8f843f2652a8d3"
++
++inherit pypi setuptools
+-- 
+2.16.2
 
 
