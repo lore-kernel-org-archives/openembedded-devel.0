@@ -1,51 +1,37 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 88C28789C6
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A48C2789D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Mar 2018 06:06:38 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1520057200; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=0n66YM0eDg/IUOL8j7RfXeAjxYj7YLikr6sUbJP1QgQ=;
-	b=d+xpA8H5E8N2KlS/fql7rztyLE8CJkHFSIq2HaXVp+4TXaUp7V+XjYP8+KUTpi5HSYcI8CzO
-	gVcZ20SywdJrNgtCCJuReeK3hcvl0SIyiaSnA8NKOHqFxEfT7fU1M8Fn/4VInHUdO9VfcsGK
-	AgQHOW5nu5uQky/jgVDYIO55+Xs=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-qt0-f176.google.com (mail-qt0-f176.google.com
-	[209.85.216.176])
-	by mxa.mailgun.org with ESMTP id 5a9a3b70.7ff33c5443b0-smtp-out-n02;
-	Sat, 03 Mar 2018 06:06:40 -0000 (UTC)
-Received: by mail-qt0-f176.google.com with SMTP id z14so14603146qti.2
+	Sat,  3 Mar 2018 06:20:20 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id v90so14566187qte.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2018 22:06:39 -0800 (PST)
-X-Gm-Message-State: AElRT7FxIV/miE4PwwI1DXGOBC2PPTWj/FCoCjjS5grKzrKsxkTy7yaw
-	0TwvSMn4n+g06zhIX7RjtIGggbd9ZUm/14BLXPc=
-X-Google-Smtp-Source: AG47ELvFC0ESWoOWn0xE/awafBSLt2ArCNbRDrd8XPKkItiTlYFU/aHtW8bpvgODc7Kb6UHO1HsgscWLl8jC16zV16I=
-X-Received: by 10.200.57.97 with SMTP id t30mr12562987qtb.22.1520057199130;
-	Fri, 02 Mar 2018 22:06:39 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.108.35 with HTTP; Fri, 2 Mar 2018 22:06:38 -0800 (PST)
-Received: by 10.140.108.35 with HTTP; Fri, 2 Mar 2018 22:06:38 -0800 (PST)
-In-Reply-To: <CAMKF1sq1qDUaq4-D=kP8d5j=ckwyA5o+K3WTd+PA=EsXReTReA@mail.gmail.com>
-References: <1519999561-9599-1-git-send-email-derek@asterius.io>
-	<3f95e0a7-4663-cb73-6ab1-7eed4ab8927f@gmail.com>
-	<CADNbA1p09wdEJGEW7d4wpoVWMLEzEKPAaF6PvPEtdOJFf2f0wA@mail.gmail.com>
-	<CAMKF1srYnC2_hNEHfHC6hoH5wp8Y+OHqAD6fZpFzqpTHxOqwXQ@mail.gmail.com>
-	<CADNbA1p=3uip_ROcCBwxZ4GJs0grUe1v6vhN5NoRUyacVJnS5w@mail.gmail.com>
-	<CANx9H-CserwUFp2PyQEnYxAoL_dY6xwvJvz6ExuPwmbYOaLsnQ@mail.gmail.com>
-	<CADNbA1qDZ+fdr7a6_408hTVeaUojT+OFYjyoNdVy5kiaeK=gpg@mail.gmail.com>
-	<CAMKF1sq1qDUaq4-D=kP8d5j=ckwyA5o+K3WTd+PA=EsXReTReA@mail.gmail.com>
+	Fri, 02 Mar 2018 22:20:21 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KlXVFpKj+lusKE89kHziunf5rFgetnoEEc/0PoCBMAw=;
+	b=SvincP57JH8UxSP2PsjqzhaJK61lmz94KgD3SK07gPH417GCmh8Y83Ikl7/1LwtttC
+	gI5TK+YP+sFt8FALpSNjX3foezLYmvyo2h0TvJ4i9b9tMc12nweLvZUh4A4iWs3ZP3MQ
+	R7rko1wfzNxXBdvbUHSOR4glIlUN/3XHhzRqD2FXRx0F7hGBK4gxZqzyONAq5mJtW0DC
+	6MjRN8O16Fr/I7ysLE0NJezWXJNBFQGDQSNT8MKWVy5MLuegJAL62JadYwCKfqAptxiq
+	7huncV/5uebkT0FsRRkzEL/MEKMc6UNjmYz/bacc3jiDJMPKooa16Z13bq1EWXgIQp+8
+	YraA==
+X-Gm-Message-State: AElRT7Ft1OMSGfO65BD8rp9pIFaVnpbC9k2VEzgSP9BqkeXNomNQvFUx
+	VSUubbe4srcUgf4EesfsPbgqJWzn
+X-Google-Smtp-Source: AG47ELtAJxEmQPXmu+Lm//2Zq9FrGcA5Hu0E7UiM5v5npRuYAD1jGNG9ng8murCGUX7EZv7dCafChw==
+X-Received: by 10.237.42.34 with SMTP id c31mr12171240qtd.199.1520058021086;
+	Fri, 02 Mar 2018 22:20:21 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id n4sm5134899qtc.0.2018.03.02.22.20.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 02 Mar 2018 22:20:20 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-Date: Sat, 3 Mar 2018 01:06:38 -0500
-X-Gmail-Original-Message-ID: <CADNbA1rhxuwEjo=p=FsjB8+YC_jdU=U25xYgxSgRd=4ws6+UuA@mail.gmail.com>
-Message-ID: <CADNbA1rhxuwEjo=p=FsjB8+YC_jdU=U25xYgxSgRd=4ws6+UuA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-sqlalchemy: update to version 1.1.17
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  3 Mar 2018 01:13:40 -0500
+Message-Id: <1520057620-12155-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] Remove Derek Straka as maintainer for meta-python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,138 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2018 06:06:39 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 03 Mar 2018 06:20:20 -0000
 
-Sure.  I'll start following those requirements, but honestly one of the
-reasons I dislike contributing to anything yocto/meta-oe is the lack of
-clear rules and consistency in general.  Most of the wiki page are
-completely out of date and none of the style items are consistently
-enforced.  It makes it difficult to contribute and discourages
-contributions at least for me.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/README | 1 -
+ 1 file changed, 1 deletion(-)
 
-On Mar 3, 2018 12:57 AM, "Khem Raj" <raj.khem@gmail.com> wrote:
+diff --git a/meta-python/README b/meta-python/README
+index 905d5ee..f62ab8f 100644
+--- a/meta-python/README
++++ b/meta-python/README
+@@ -50,5 +50,4 @@ Maintenance
+ Maintainers:
+         Tim "moto-timo" Orling <TicoTimo@gmail.com>
+         Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
+-        Derek Straka <derek@asterius.io>
+ 
+-- 
+2.7.4
 
-On Fri, Mar 2, 2018 at 9:22 PM, Derek Straka <derek@asterius.io> wrote:
-> Overall, it seems like there are bigger issues to worry about.  I just
-want
-> consistency.  I'm willing to conform to whatever people want.
->
-
-There is no issue here.
-
-read through several reviews on ML where license checksums are changed,
-you will find reviewers calling out of explanations if it was missing.
-
-moreover Its also described in commit guidelines
-
-https://www.openembedded.org/wiki/Commit_Patch_Message_
-Guidelines#Describing_license_changes
-
-
-> On Mar 3, 2018 12:19 AM, "Tim Orling" <ticotimo@gmail.com> wrote:
->>
->> I usually would have said =E2=80=9Cthe copyright year changed, but the t=
-erms
->> remain the same=E2=80=9D, but I agree we need consistency. Tooling to ma=
-ke the
->> license diff easy to generate is probably the key (and is in progress).
->>
->> Thank you again, Derek, for all your efforts to keep meta-python up to
->> date.
->>
->> And thank you to Khem for taking the time to review and comment when few
->> others ever do.
->>
->> On Fri, Mar 2, 2018 at 8:45 PM Derek Straka <derek@asterius.io> wrote:
->>>
->>> This is the exact same commit message I've used at least 10s of times
->>> without any negative feedback.  Saying the terms remain the same seems
->>> sufficient to me to acknowledge the fact I looked at the license and it
->>> was
->>> reviewed as you stated.  I can start putting the diff in the commit if
-it
->>> adds value but let's start being consistent as a community in what we
->>> expect.
->>>
->>> Even as a maintainer of several layers in meta-openembedded I don't kno=
-w
->>> what we as a community expect...
->>>
->>> On Mar 2, 2018 11:34 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
->>>
->>> On Fri, Mar 2, 2018 at 8:15 PM, Derek Straka <derek@asterius.io> wrote:
->>> > What more would you like in the commit message?  The license terms ar=
-e
->>> > the
->>> > same; the copyright moved to 2018.  Do we really need to put the
->>> > results
->>> of
->>> > the diff in the commit message?
->>> >
->>>
->>> Not strictly, but you can. In general a line or two about the reason
->>> is always a good thing.
->>> The commit message wasn't clear about it.
->>> This is essentially to let users as well as reviewers know that license
->>> changes
->>> were reviewed and a line in commit message is there for later to go bac=
-k
->>> and see what changed
->>>
->>>
->>> >
->>> > On Mar 2, 2018 9:52 PM, "Khem Raj" <raj.khem@gmail.com> wrote:
->>> >
->>> > On 3/2/18 6:06 AM, Derek Straka wrote:
->>> >> Update the license checksum and verify the terms remain the same
->>> >>
->>> >> Signed-off-by: Derek Straka <derek@asterius.io>
->>> >> ---
->>> >>  meta-python/recipes-devtools/python/python-sqlalchemy.inc
- |
->>> >> 6
->>> >> +++---
->>> >>  .../{python-sqlalchemy_1.1.15.bb =3D> python-sqlalchemy_1.1.17.bb}
-|
->>> >> 0
->>> >>  .../{python3-sqlalchemy_1.1.15.bb =3D> python3-sqlalchemy_1.1.17.bb=
-}
-|
->>> >> 0
->>> >>  3 files changed, 3 insertions(+), 3 deletions(-)
->>> >>  rename
->>> >> meta-python/recipes-devtools/python/{python-sqlalchemy_1.1.15.bb
->>> >> =3D> python-sqlalchemy_1.1.17.bb} (100%)
->>> >>  rename
->>> >> meta-python/recipes-devtools/python/{python3-sqlalchemy_1.1.15.bb
->>> >> =3D> python3-sqlalchemy_1.1.17.bb} (100%)
->>> >>
->>> >> diff --git a/meta-python/recipes-devtools/python/python-
-sqlalchemy.inc
->>> >> b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
->>> >> index 2683a6a..0c191ae 100644
->>> >> --- a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
->>> >> +++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
->>> >> @@ -2,13 +2,13 @@ DESCRIPTION =3D "Python SQL toolkit and Object
->>> >> Relational
->>> >> Mapper that gives \
->>> >>  application developers the full power and flexibility of SQL"
->>> >>  HOMEPAGE =3D "http://www.sqlalchemy.org/"
->>> >>  LICENSE =3D "MIT"
->>> >> -LIC_FILES_CHKSUM =3D
->>> >> "file://LICENSE;md5=3D452f4b8adb0feba42e5be5f1fbfbf538"
->>> >> +LIC_FILES_CHKSUM =3D
->>> >> "file://LICENSE;md5=3Db1c412c9d8d1ce018f7a9374407c22bb"
->>> >>
->>> >
->>> > what changed here ?
->>> >
->>> >
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
