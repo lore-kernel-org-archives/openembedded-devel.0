@@ -1,37 +1,40 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id A48C2789D4
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 88166789D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Mar 2018 06:20:20 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id v90so14566187qte.12
+	Sat,  3 Mar 2018 06:23:32 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1520058214; h=Content-Type: To: Subject: Message-ID: Date:
+	From: MIME-Version: Sender;
+	bh=4FLV52yiwoqx8411Lo8zkKfDC+Kelgx+erIjMEIFC2I=;
+	b=SNZWPUNttdharvYoachaRrrkujhA9+GOwAVwMbS6rtlKxGJwKPl6Fbb6CxHFdznWERPiUfb6
+	o/ESxorqh7/T9xjCBFOz7D8Rcr/Mbqx7K5DL/v/vMDf6nph64U4kRvzAW3gwysED9i5gB+9h
+	esQnOc+59SB7mf6hVqalddA9hzA=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mxa.mailgun.org with ESMTP id 5a9a3f66.7f22b06836f0-smtp-out-n01;
+	Sat, 03 Mar 2018 06:23:34 -0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id d206so14736814qkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Mar 2018 22:20:21 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KlXVFpKj+lusKE89kHziunf5rFgetnoEEc/0PoCBMAw=;
-	b=SvincP57JH8UxSP2PsjqzhaJK61lmz94KgD3SK07gPH417GCmh8Y83Ikl7/1LwtttC
-	gI5TK+YP+sFt8FALpSNjX3foezLYmvyo2h0TvJ4i9b9tMc12nweLvZUh4A4iWs3ZP3MQ
-	R7rko1wfzNxXBdvbUHSOR4glIlUN/3XHhzRqD2FXRx0F7hGBK4gxZqzyONAq5mJtW0DC
-	6MjRN8O16Fr/I7ysLE0NJezWXJNBFQGDQSNT8MKWVy5MLuegJAL62JadYwCKfqAptxiq
-	7huncV/5uebkT0FsRRkzEL/MEKMc6UNjmYz/bacc3jiDJMPKooa16Z13bq1EWXgIQp+8
-	YraA==
-X-Gm-Message-State: AElRT7Ft1OMSGfO65BD8rp9pIFaVnpbC9k2VEzgSP9BqkeXNomNQvFUx
-	VSUubbe4srcUgf4EesfsPbgqJWzn
-X-Google-Smtp-Source: AG47ELtAJxEmQPXmu+Lm//2Zq9FrGcA5Hu0E7UiM5v5npRuYAD1jGNG9ng8murCGUX7EZv7dCafChw==
-X-Received: by 10.237.42.34 with SMTP id c31mr12171240qtd.199.1520058021086;
-	Fri, 02 Mar 2018 22:20:21 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id n4sm5134899qtc.0.2018.03.02.22.20.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 02 Mar 2018 22:20:20 -0800 (PST)
+	Fri, 02 Mar 2018 22:23:34 -0800 (PST)
+X-Gm-Message-State: AElRT7HMNlXZ6HPS9nMvA7ZqSZaVr5u1ynpFRlfu4gpLDKUxnxXurTF0
+	8yglFxk8qaNM6TaYvtvsiHaR4xfinlJoex9AraU=
+X-Google-Smtp-Source: AG47ELs/yvPNQYDOZGn5ndJXB/R/uGuI2P4oyuCL+jQE/M+oJ8w2BPOwXXQt/9FRo0AoktKJBn4UNGPKb2lYdy5toWs=
+X-Received: by 10.55.27.27 with SMTP id b27mr11462758qkb.19.1520058213865;
+	Fri, 02 Mar 2018 22:23:33 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.108.35 with HTTP; Fri, 2 Mar 2018 22:23:33 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  3 Mar 2018 01:13:40 -0500
-Message-Id: <1520057620-12155-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] Remove Derek Straka as maintainer for meta-python
+Date: Sat, 3 Mar 2018 01:23:33 -0500
+X-Gmail-Original-Message-ID: <CADNbA1qz1NORDroqdVZ1tRKGywq0-_1he3sC5jA-mnJ9_5xo2A@mail.gmail.com>
+Message-ID: <CADNbA1qz1NORDroqdVZ1tRKGywq0-_1he3sC5jA-mnJ9_5xo2A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-webserver]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,24 +47,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2018 06:20:20 -0000
+X-List-Received-Date: Sat, 03 Mar 2018 06:23:33 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/README | 1 -
- 1 file changed, 1 deletion(-)
+Hello,
 
-diff --git a/meta-python/README b/meta-python/README
-index 905d5ee..f62ab8f 100644
---- a/meta-python/README
-+++ b/meta-python/README
-@@ -50,5 +50,4 @@ Maintenance
- Maintainers:
-         Tim "moto-timo" Orling <TicoTimo@gmail.com>
-         Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
--        Derek Straka <derek@asterius.io>
- 
--- 
-2.7.4
+I'm currently looking to remove divest maintaining meta-oe layers.  Is
+there anyone in the community interested in maintaining meta-webserver?
+Feel free to submit a patchset removing me and I'll ack it.  Thanks.
 
+-Derek
 
