@@ -1,58 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D8C178A50
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id EC28360107
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Mar 2018 16:44:53 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id 68so5355019pfx.3
+	Sat,  3 Mar 2018 19:24:05 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1520105046; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=8ZMxbcSKH3ibTozK0iXHmsSMS6wTylOZpMdaMkBZiNY=;
+	b=PfL5FYjxTR7FT8IQRLJ8dSKbpN8ekx9pfdMkRiLZX+hFlVI2BzSZ4zU4IXhI/gnOpY3owuQE
+	fskbA3kiYukPOSLT3K2dXCbaaNyEy31QT4apc4QG/a3o6FXVmoY6WoF+oCZez9Povbc3yH9q
+	1cPY9/nQX2zOrqgrSuQ1u+IlO6s=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mxa.mailgun.org with ESMTP id 5a9af656.7f51502a5370-smtp-out-n03;
+	Sat, 03 Mar 2018 19:24:06 -0000 (UTC)
+Received: by mail-qk0-f177.google.com with SMTP id l206so16131548qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Mar 2018 08:44:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=/Q3PLc5MpoOmlHre3J+8CUsFC8hjb+XNzyi36Pmd3IM=;
-	b=HD73XkwjmFwSexj6Sd3T6m54W/9pVxSBS4DB7dwyD6ENrM8Et+jHT3FOWUSgdfwowq
-	9YzTiPBlGSyxDNsurc4CgxN1NGRACovj/Bv8ezRfaYzVC6+M9MeNY4cZRPU2BBPxDXzw
-	d923NGWX2idkQG5A5tObsGImpV6q17+eURl0vSBF4LsBWw5blxj6Baw1we6aNO8VAfEA
-	VH4aKx+0MGX1+lz/cWDLPQBFgY1DC+APzzr2TBVZj5nsdt9Xg1aJjYrhUVDCMX4M3i+K
-	LJpFatUrTRs5Ute+7MtJuZWRF9juqAkqTmBKoa56kskl1USDXGvdAM14Nq8LOpva6BOe
-	Bjug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=/Q3PLc5MpoOmlHre3J+8CUsFC8hjb+XNzyi36Pmd3IM=;
-	b=nHjZl78DBbXz10N2FYAp+q8dy8WNdB/KIIoVLHXdBsAIfzAaR87WjqJm5gwLRtQiNT
-	ZVveOB8puSD50pWGxVRpGCFthFTBd+GrFP5Fic3rmJTvibELfoXJE45MJLFZzmDPUrV2
-	b+u+nVuLwViH87DrC9/4c/KZAU2vEsQN/Or/beNcRetVy1gPfQ68LIpsW+uFIBNf1J7e
-	DHqKeJMnUIssi6GFzMl7wtvqSB0HDuY0i/4k/dtXXS9zqhP9cuBArzJ87a5kCwwSxo00
-	EITTTqrP4pyONx9C2cQ0ToRXajFQ3s7UU2C/gHqJ0Fqd1214x1cgnvUV/0H0fR3RYuho
-	ab4g==
-X-Gm-Message-State: APf1xPAG6oPinKlyasG4LdbRR49UBfAWGlsca+xf2P3RjYxiuSGcUUY/
-	i3wbvhVVmpx7WV57kZZ7qwYJk3Lu
-X-Google-Smtp-Source: AG47ELuKvaj5yv3hcl9UxiUISSyxzMyhRnGNDikY61yiyHdlScQfFTTag1R07oeLFUE/3UcjSsibbQ==
-X-Received: by 10.101.97.139 with SMTP id c11mr7915805pgv.447.1520095494469;
-	Sat, 03 Mar 2018 08:44:54 -0800 (PST)
-Received: from hermes.local ([2601:646:8880:466c:7529:c02c:43de:27ec])
-	by smtp.gmail.com with ESMTPSA id
-	h80sm18107337pfj.181.2018.03.03.08.44.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 03 Mar 2018 08:44:53 -0800 (PST)
-To: Andrea Adami <andrea.adami@gmail.com>, akuster808 <akuster808@gmail.com>
-References: <c6d3abbb-841a-7f24-4b82-474992493bec@gmail.com>
-	<CAAQYJAvnmosr9TP5ieytDOt-W48ix+yw-Z_aobYpvxZaGx=XXg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <db0211d9-cf35-b455-f604-cfa343853806@gmail.com>
-Date: Sat, 3 Mar 2018 08:44:52 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0)
-	Gecko/20100101 Thunderbird/59.0
+	Sat, 03 Mar 2018 11:24:05 -0800 (PST)
+X-Gm-Message-State: AElRT7GejXHZlm9SKwxB3lFsmRPV+6Q8bg2yxPc9R7wFpURcKhQgzUja
+	PoZzTNKqGLSlWf/1d9cHSpDrXA3sef2tQF5spTc=
+X-Google-Smtp-Source: AG47ELvq33bCEddRHwEejsfyf3b6fR1tx8sHVfYBA5A4H/qLzvNlE0dUajVmBWVU8ENtUU7gxUyU4drLErrLVLhNLxU=
+X-Received: by 10.55.166.215 with SMTP id p206mr15214849qke.69.1520105045238; 
+	Sat, 03 Mar 2018 11:24:05 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAAQYJAvnmosr9TP5ieytDOt-W48ix+yw-Z_aobYpvxZaGx=XXg@mail.gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: State of the World, Failed tasks 2018-02-26
+Received: by 10.140.108.35 with HTTP; Sat, 3 Mar 2018 11:24:04 -0800 (PST)
+In-Reply-To: <4ef80f7b-18fa-2615-3b08-bfe25ad169da@gmail.com>
+References: <1520089170-25302-1-git-send-email-derek@asterius.io>
+	<4ef80f7b-18fa-2615-3b08-bfe25ad169da@gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Sat, 3 Mar 2018 14:24:04 -0500
+X-Gmail-Original-Message-ID: <CADNbA1pnZFQqyNpxqiGtW8m4YGONHB1kcCZxmeCLr=LkBkg=gA@mail.gmail.com>
+Message-ID: <CADNbA1pnZFQqyNpxqiGtW8m4YGONHB1kcCZxmeCLr=LkBkg=gA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCHv2] python-sqlalchemy: update to version 1.1.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,74 +51,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Mar 2018 16:44:53 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Mar 2018 19:24:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 
+Is there a reason the patchtest scripts are not run on the openembedded
+layers?  Is it just a matter of doing the work?
 
+On Sat, Mar 3, 2018 at 11:42 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-On 3/3/18 8:25 AM, Andrea Adami wrote:
-> On Fri, Mar 2, 2018 at 12:37 AM, akuster808 <akuster808@gmail.com> wrote:
->> Several of the new failures popped up after 4.15 kernel update.
+>
+>
+> On 3/3/18 6:59 AM, Derek Straka wrote:
+>
+>> Update the license checksum for copyright year and verify the terms
+>> remain the same
+>>
+>> diff -u SQLAlchemy-1.1.15/LICENSE SQLAlchemy-1.1.17/LICENSE
+>> --- SQLAlchemy-1.1.15/LICENSE   2017-11-03 16:47:01.000000000 -0400
+>> +++ SQLAlchemy-1.1.17/LICENSE   2018-02-22 16:08:41.000000000 -0500
+>> @@ -1,6 +1,6 @@
+>>   This is the MIT license: http://www.opensource.org/lice
+>> nses/mit-license.php
+>>
+>> -Copyright (c) 2005-2017 the SQLAlchemy authors and contributors <see
+>> AUTHORS file>.
+>> +Copyright (c) 2005-2018 the SQLAlchemy authors and contributors <see
+>> AUTHORS file>.
+>>
+>
+> Thanks for follow up. This looks good.
+>
+>
+>   SQLAlchemy is a trademark of Michael Bayer.
+>>
+>>   Permission is hereby granted, free of charge, to any person obtaining a
+>> copy of this
+>>
+>> Signed-off-by: Derek Straka <derek@asterius.io>
+>> ---
+>>   meta-python/recipes-devtools/python/python-sqlalchemy.inc           |
+>> 6 +++---
+>>   .../{python-sqlalchemy_1.1.15.bb => python-sqlalchemy_1.1.17.bb}    | 0
+>>   .../{python3-sqlalchemy_1.1.15.bb => python3-sqlalchemy_1.1.17.bb}  | 0
+>>   3 files changed, 3 insertions(+), 3 deletions(-)
+>>   rename meta-python/recipes-devtools/python/{python-sqlalchemy_1.1.15.bb
+>> => python-sqlalchemy_1.1.17.bb} (100%)
+>>   rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.1.
+>> 15.bb => python3-sqlalchemy_1.1.17.bb} (100%)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+>> b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+>> index 2683a6a..0c191ae 100644
+>> --- a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+>> +++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+>> @@ -2,13 +2,13 @@ DESCRIPTION = "Python SQL toolkit and Object Relational
+>> Mapper that gives \
+>>   application developers the full power and flexibility of SQL"
+>>   HOMEPAGE = "http://www.sqlalchemy.org/"
+>>   LICENSE = "MIT"
+>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=452f4b8adb0feba42e5be5f1fbfbf538"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b1c412c9d8d1ce018f7a9374407c22bb"
+>>     PYPI_PACKAGE = "SQLAlchemy"
+>>   inherit pypi
+>>   -SRC_URI[md5sum] = "077f9bd3339957f53068b5572a152674"
+>> -SRC_URI[sha256sum] = "8b79a5ed91cdcb5abe97b0045664c
+>> 55c140aec09e5dd5c01303e23de5fe7a95a"
+>> +SRC_URI[md5sum] = "03db1c8f8ae911977c0bf3950a4c9c21"
+>> +SRC_URI[sha256sum] = "6b55ec379c11ad696f9371ce8e0de
+>> 93c7f21134323f56a56a1b0d8fbef17013c"
+>>     RDEPENDS_${PN} += " \
+>>       ${PYTHON_PN}-json \
+>> diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.
+>> 15.bb b/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.17.bb
+>> similarity index 100%
+>> rename from meta-python/recipes-devtools/python/python-sqlalchemy_1.1.15
+>> .bb
+>> rename to meta-python/recipes-devtools/python/python-sqlalchemy_1.1.17.bb
+>> diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.
+>> 1.15.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.
+>> 1.17.bb
+>> similarity index 100%
+>> rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.1
+>> 5.bb
+>> rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.1
+>> 7.bb
 >>
 >>
->>
->> == Failed tasks 2018-02-26 ==
->>
->> INFO: jenkins-job.sh-1.8.43 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/sumo/log.report.20180228_061518.log
->>
->> === common (8) ===
->>      * meta-openembedded/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb:do_compile
->>      * meta-openembedded/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb:do_compile
->>      * meta-openembedded/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb:do_compile
->>      * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb:do_compile
->>      * meta-openembedded/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb:do_compile
->>      * meta-openembedded/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb:do_compile
->>      * meta-openembedded/meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb:do_packagedata
->>      * meta-openembedded/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb:do_compile
->>
->> === common-x86 (0) ===
->>
->> === qemuarm (10) ===
->>      * meta-openembedded/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb:do_compile
->>      * meta-openembedded/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb:do_configure
->>      * meta-openembedded/meta-networking/recipes-daemons/keepalived/keepalived_1.3.5.bb:do_compile
->>      * meta-openembedded/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb:do_compile
->>      * meta-openembedded/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb:do_compile
->>      * meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
->>      * meta-qt5/recipes-qt/qt5/qtgraphicaleffects_git.bb:do_compile
->>      * meta-qt5/recipes-qt/qt5/qtquickcontrols2_git.bb:do_compile
->>      * meta-qt5/recipes-qt/qt5/qtquickcontrols_git.bb:do_compile
->>      * openembedded-core/meta/recipes-sato/webkit/webkitgtk_2.18.6.bb:do_compile
->>
->> === qemuarm64 (4) ===
->>      * meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb:do_configure
->>      * meta-openembedded/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb:do_compile
->>      * meta-qt5/recipes-qt/qt5/qt5-creator_4.5.1.bb:do_compile
->>      * openembedded-core/meta/recipes-kernel/kexec/kexec-tools_2.0.16.bb:do_compile
->>
-> 
-> I am about upgrading kexec-tools-klibc to newer release supporting aarch64.
-> 
-> Strangely I see the oe-core recipe failing in your builder.
-> I build here with musl and have seen the differences are basically
-> about security flags:
-> 
-> autobuilder
-> 
-> | aarch64-oe-linux-gcc  -fstack-protector-strong  -D_FORTIFY_SOURCE=2
-> -Wformat -Wformat-security -Werror=format-security
-> --sysroot=/home/jenkins/oe/world/shr-core/tmpfs/work/aarch64-oe-linux/kexec-tools/2.0.16-r1/recipe-sysroot
->   -mcmodel=large ...
-> 
-> musl:
-> aarch64-oe-linux-musl-gcc
-> --sysroot=/tmp/build/tmp-musl/work/aarch64-oe-linux-musl/kexec-tools/2.0.16-r1/recipe-sysroot
->   -mcmodel=large ...
-> 
-> Here the recipe builds just fine.
-
-This could perhaps be due to using security_flags in world builds.
-
 
