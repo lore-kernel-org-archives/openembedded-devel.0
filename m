@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C5FE78A95
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B17C078A8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Mar 2018 20:41:45 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id h11so5941951pfn.4
+	Sun,  4 Mar 2018 20:41:46 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id u5so6336001pfh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Mar 2018 12:41:47 -0800 (PST)
+	Sun, 04 Mar 2018 12:41:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=KeQCL46gPz7Edq+MjYYASiEBRv30AbZjwOy7yjGPQUs=;
-	b=XF78UDOlDHUcqi+0lFzc+6yPCdAsKZt0X4EsHbAOB1mq3u8H4/D+eaTlOZg2gwWHTN
-	dQXaUw8vqb7RXpDeO5DOjfx8+WxUAZmSLKKnvHFTtA7vVW1P4WxMjMkALaCKk4JgSWmo
-	m4oh0lZzf1glKk1d7ViqULwepaqWaQoV74H+xuFdOEtCZGpvXP9YNcpQyhccDtsGkdgG
-	tJlHmq6HJJSnwXZ20gy448Vyjzn72lQawF/Z0lZt9E7n5FGzShKZcUi/ivtHNavUwwhC
-	pzlYyZVH2FR1kX+n0mPikBVR3WmY/N8V1MBh65n1Gho5t9FjTJca79GEYX8BS8HZjDOa
-	V/Hw==
+	bh=3RoWVr7bVCDotjaIwRYkQ2HYN1aVYHmamy0WqC/XtIc=;
+	b=OiUJeiPdGOYVjOC8BgO0UbcF1TlIZk/hr4f5R3vNNNuP6hA/cXHImfd7MK6qO0nrhH
+	O1x382rPAUZf+lJc3rBz3maqR0KCvTUua27/J+QQAX8FFpSwM4Dp7Rqmbi1YkwJIHfW0
+	EYgJZRFawlNDrCl7RVyq8Zx8c6A/mOzint+YEsJOBVT7QkDms6+1TPVwLN2DUe61kCzU
+	+Io6F9cgwgjVKkBFty2yjynzzZ0eheIEvdVyd+YYOy0HAwt4MBc5HxqvaA0MBRsEoMKA
+	pzpgHcQ7PytuZAOEVx6Digc7DAx+NZReZzbNAqbp9xnOPtMi0cFeqF/uhnu5e2QFsCGe
+	IoSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=KeQCL46gPz7Edq+MjYYASiEBRv30AbZjwOy7yjGPQUs=;
-	b=ANeJtxJKdJOJazkgHaFvUPaSMucwnfFP3FYpdyYL+drNXZ6r6RIUivkhVG8+z6/lga
-	hUpruF/lAl+yx3Q979hS66QBPkiJftPPXYXu/kAFOrM1yviQR44L0Vr7cZOZeVAPJ4RM
-	xoI+5n2/EM10bX5FpCbAEk4AgYNHEjIMzq1646QreMNfthv5tnQTY0fH4lKXrgWk3xhR
-	NuxHU7t3BA65x/fGJC9YaNOcq9OjeOoK4eutg01r/w9YAsYG/8Wmg2DsWeFIspL8QPOw
-	u5hIUTOTKuL0WSNyN6r2BJISzapEHEkOYXLazv1AZeP5qxoHztMTvmhNQF8E8nOaemeo
-	cDRQ==
-X-Gm-Message-State: APf1xPD8WjiBq8BkkVC4r7gmugOTbCOOPbw3E8Eq8qsasKO45nGFbwyv
-	xdFBlu2X2J68CeTGad9DNc2RJg==
-X-Google-Smtp-Source: AG47ELuDZkkwJRlByR0FxusjOzj6Iu0Phr4MYkmYdLhE7DEorAU1wzCswhJF5yh7taQ0lV51El9Ylw==
-X-Received: by 10.98.10.219 with SMTP id 88mr13006576pfk.202.1520196106473;
-	Sun, 04 Mar 2018 12:41:46 -0800 (PST)
+	bh=3RoWVr7bVCDotjaIwRYkQ2HYN1aVYHmamy0WqC/XtIc=;
+	b=hTeE9thPXr+zA14nVHaSPwDbzHJR93la2ykGcQNDAJHk3dRt0cpSppAhOxRYzlMzqo
+	7C6L0E/5A4bsaHsyQzdMtasJD9/VUIpis6KQi9xtb6ngVSaKcGwqI/fNcGjQvjQyMps3
+	upC4L560lK4reBphSDMg0DeVfz+eFehhzoor7hKsqXrN6Fn5dWF+Xq2vKfHZQeBHVfkF
+	xBLZv+IoieUpNPpyFWtdBN8oWxr1ip6v02ttyA58dGJyig8nP5PX2nFSjVyJK6mUnAGj
+	kpR8DqI+sPYijMVwwJAhpgLaPe4uNKr32JJLEVtM7FUEMT2Dh7yR5x6isP6B1WQFZn7h
+	ifcg==
+X-Gm-Message-State: APf1xPBHf6ImBdmDPASBMSkH7i43A80txXMT8NMNQFSkmOIOe9x0PLEt
+	1xe/wvIXR4CzlKzhmmYdMQywcw==
+X-Google-Smtp-Source: AG47ELvgiEKugsC/VUkBmIgtjd8s8ftGqulwD+2m0AHbxjYMmOrWcP1pYGuu5/EYvMA/9XDaZ7y5nQ==
+X-Received: by 10.98.17.147 with SMTP id 19mr12855146pfr.160.1520196107601;
+	Sun, 04 Mar 2018 12:41:47 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	u28sm22943090pfl.19.2018.03.04.12.41.45
+	u28sm22943090pfl.19.2018.03.04.12.41.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 04 Mar 2018 12:41:45 -0800 (PST)
+	Sun, 04 Mar 2018 12:41:46 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Mar 2018 12:41:27 -0800
-Message-Id: <20180304204130.23962-4-raj.khem@gmail.com>
+Date: Sun,  4 Mar 2018 12:41:28 -0800
+Message-Id: <20180304204130.23962-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.16.2
 In-Reply-To: <20180304204130.23962-1-raj.khem@gmail.com>
 References: <20180304204130.23962-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/7] keepalived: Upgrade from 1.3.5 -> 1.4.2
+Subject: [meta-oe][PATCH 5/7] mraa: Drop residual patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,33 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Mar 2018 20:41:45 -0000
+X-List-Received-Date: Sun, 04 Mar 2018 20:41:46 -0000
+
+This patch is already applied upstream see
+https://github.com/intel-iot-devkit/mraa/commit/c9566bdc6ff706f80140396a9980eba3d6bd52a1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../keepalived/{keepalived_1.3.5.bb => keepalived_1.4.2.bb}          | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-daemons/keepalived/{keepalived_1.3.5.bb => keepalived_1.4.2.bb} (92%)
+ ...ian.h-for-be16toh-and-le16toh-declaration.patch | 27 ----------------------
+ meta-oe/recipes-extended/mraa/mraa_git.bb          |  1 -
+ 2 files changed, 28 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch
 
-diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_1.3.5.bb b/meta-networking/recipes-daemons/keepalived/keepalived_1.4.2.bb
-similarity index 92%
-rename from meta-networking/recipes-daemons/keepalived/keepalived_1.3.5.bb
-rename to meta-networking/recipes-daemons/keepalived/keepalived_1.4.2.bb
-index 5e7e6e49f..36417b72a 100644
---- a/meta-networking/recipes-daemons/keepalived/keepalived_1.3.5.bb
-+++ b/meta-networking/recipes-daemons/keepalived/keepalived_1.4.2.bb
-@@ -11,9 +11,8 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
+diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch b/meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch
+deleted file mode 100644
+index 711738a92..000000000
+--- a/meta-oe/recipes-extended/mraa/mraa/0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 2c85decc3b93bfe7322309d2ca7d6377e746c18f Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 5 Feb 2018 09:51:08 -0800
+-Subject: [PATCH] include endian.h for be16toh and le16toh declarations
 -
--SRC_URI[md5sum] = "9964d295ec9d34ed3408b57d28847b68"
--SRC_URI[sha256sum] = "c0114d86ea4c896557beb0d9367819a423ffba772bc5d7c548dc455e6b3bd048"
-+SRC_URI[md5sum] = "610af6e04071f02d3469191de7499f4e"
-+SRC_URI[sha256sum] = "4e2d7cc01a6ee29a3955f5c622d47704ba7d9dd758189f15e9def016a2d1faa3"
+-Upstream-Status: Submitted [https://github.com/intel-iot-devkit/mraa/pull/863]
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- examples/iio_driver.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/examples/iio_driver.c b/examples/iio_driver.c
+-index c5a0181..568011c 100644
+---- a/examples/iio_driver.c
+-+++ b/examples/iio_driver.c
+-@@ -22,6 +22,7 @@
+-  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-  */
+- 
+-+#include <endian.h>
+- #include <unistd.h>
+- #include "mraa/iio.h"
+- 
+--- 
+-2.16.1
+-
+diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+index 366d6b70f..930c04123 100644
+--- a/meta-oe/recipes-extended/mraa/mraa_git.bb
++++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+@@ -9,7 +9,6 @@ SRCREV = "fbb7d9232067eac3f4508a37a8f7ea0c4fcebacb"
+ PV = "1.9.0-git${SRCPV}"
  
- DEPENDS = "libnfnetlink openssl"
+ SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
+-           file://0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch \
+            "
  
+ S = "${WORKDIR}/git"
 -- 
 2.16.2
 
