@@ -1,30 +1,49 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A69706060F
+Return-Path: <bobadeshrikant@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D89D078A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Mar 2018 09:37:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="37481546"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Mar 2018 17:37:03 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9851848AE761
+	Mon,  5 Mar 2018 10:55:50 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id n7so16754721wrn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Mar 2018 17:37:01 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.156) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Mon, 5 Mar 2018 17:37:01 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Mar 2018 02:20:26 +0800
-Message-ID: <1520274026-127690-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 9851848AE761.A579D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] hexedit: 1.2.13 -> 1.4.2
+	Mon, 05 Mar 2018 02:55:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=Mxv3el96EPtLCBm7zPBPQ+lHwfS6/LgdCQyP5AypxMA=;
+	b=Zq/aTygwiOoDkKOVcx9NdZFiuI6N76ZleKpjkO/szWsOsTqOtqaW90JJrvabxIIqdW
+	UWM3308yOukwXWjIYnIKo2gdfGVB8WVhDhGk19zh+yTg/GSeK26XcAn8WVCnGEZ9LkM4
+	ll9xWvaoNDYGhVZIVi+iIRCm1DG9US3zckNueJZlVXD2fsPGzw0edzQ9WWjOmWybu09y
+	/ufDeODMqlBb700y3mUG4008BJmdFOhh5NB138C/Mx9qXRTd/9oRJdNNWWB/EvrL4PYt
+	adwk1yZ/Q8OATp9RrrOMasPid4ODf6xBPpxN3YceIPPNUlFMp7YZimYy5KqENj0RSCqj
+	k1Ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Mxv3el96EPtLCBm7zPBPQ+lHwfS6/LgdCQyP5AypxMA=;
+	b=hkX4i4QpBQSyaXk7gpjWKv4lWtd/oq8ynv7NoJp4j1hSDIEsY3AgDtVRQi/qqjMeYG
+	E07uciW/pkypWkGJefHodDcDR9j3ANYYSPKvRR8vphHH22q0jjVRpKicxeilV//mMIv5
+	kIbBqM0RGeK2sCDJI5ZZbd7m16awXWd9TWRI2fwXz12so5BDHLLAER23LieM6wtlkSaO
+	Pz6FfOdMz4HY6AKmQV25HUA5umkxg7lZX5zWHPhO3sqXIAoF5dpIORawKz3+dfivPzY+
+	j+pzssSkLo+D900T5oCnwdN+v7skYQG8+T6xP85E4YY5G+zyBtonfho/zvOuapyXeYxC
+	BvBg==
+X-Gm-Message-State: APf1xPDBZK7d4m4eDsdmHYFmnCgcjTuR/SRn/uAu5CkVvtgNTB/sqJCc
+	q5qnJUa/2544GLnSf6S8SRviTA==
+X-Google-Smtp-Source: AG47ELvG+b5WTYv42d0eeYPE8vhz9vs/2jrpsxmM1aJmcfP8L09i2U8T9V5Vadjbs8PsHiRzx9AIag==
+X-Received: by 10.223.130.176 with SMTP id 45mr12142590wrc.250.1520247351204; 
+	Mon, 05 Mar 2018 02:55:51 -0800 (PST)
+Received: from shrikant-Precision-Tower-3420.mgc.mentorg.com
+	(nat-sch.mentorg.com. [139.181.36.34])
+	by smtp.gmail.com with ESMTPSA id
+	s125sm6222158wmf.4.2018.03.05.02.55.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 05 Mar 2018 02:55:50 -0800 (PST)
+From: Shrikant Bobade <bobadeshrikant@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Mar 2018 16:25:43 +0530
+Message-Id: <1520247343-906-1-git-send-email-bobadeshrikant@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Shrikant Bobade <shrikant_bobade@mentor.com>
+Subject: [meta-networking][PATCH] ntp: add libgcc as runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,84 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2018 09:37:03 -0000
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 05 Mar 2018 10:55:51 -0000
 
-Upgrade hexedit from 1.2.13 to 1.4.2
+From: Shrikant Bobade <shrikant_bobade@mentor.com>
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+libgcc is required by ntpd for execution, so add it as runtime dependency.
+
+ntpd execution ref. log.
+~# /etc/init.d/ntpd start
+Starting ntpd: libgcc_s.so.1 must be installed for pthread_cancel to work
+Aborted
+done
+~#
+
+Signed-off-by: Shrikant Bobade <shrikant_bobade@mentor.com>
 ---
- .../hexedit/0001-don-t-strip-when-installing.patch | 30 ----------------------
- .../{hexedit_1.2.13.bb => hexedit_1.4.2.bb}        | 11 ++++----
- 2 files changed, 5 insertions(+), 36 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
- rename meta-oe/recipes-extended/hexedit/{hexedit_1.2.13.bb => hexedit_1.4.2.bb} (51%)
+ meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch b/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
-deleted file mode 100644
-index a384b05..0000000
---- a/meta-oe/recipes-extended/hexedit/hexedit/0001-don-t-strip-when-installing.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From cc67246ca6839e5b3f6a286f10ed24c225b77a5e Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
--Date: Thu, 4 Jul 2013 12:34:32 +0200
--Subject: [PATCH] don't strip when installing
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Signed-off-by: Eric Bénard <eric@eukrea.com>
--
--Upstream-Status: Inappropriate [configuration]
-----
-- Makefile.in |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Makefile.in b/Makefile.in
--index 159463e..735cc72 100644
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -42,6 +42,6 @@ distclean: clean
-- 
-- install: $(PRODUCT)
-- 	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
---	$(INSTALL) -s -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
--+	$(INSTALL) -m 755 $(PRODUCT) $(DESTDIR)$(bindir)
-- 	$(INSTALL) -d -m 755 $(DESTDIR)$(mandir)/man1
-- 	$(INSTALL) -m 644 $(PRODUCT).1 $(DESTDIR)$(mandir)/man1
---- 
--1.7.10.4
--
-diff --git a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb b/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
-similarity index 51%
-rename from meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-rename to meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
-index 39df5b2..050b7da 100644
---- a/meta-oe/recipes-extended/hexedit/hexedit_1.2.13.bb
-+++ b/meta-oe/recipes-extended/hexedit/hexedit_1.4.2.bb
-@@ -6,12 +6,11 @@ DEPENDS = "ncurses"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--SRC_URI = "http://rigaux.org/${BP}.src.tgz \
--    file://0001-don-t-strip-when-installing.patch "
-+SRC_URI = "git://github.com/pixel/hexedit.git \
-+    "
- 
--SRC_URI[md5sum] = "a5af1378d028512a9cad27a5ba3e15f9"
--SRC_URI[sha256sum] = "6a126da30a77f5c0b08038aa7a881d910e3b65d13767fb54c58c983963b88dd7"
-+SRCREV = "800e4b2e6280531a84fd23ee0b48e16baeb90878"
- 
--inherit autotools-brokensep
-+S = "${WORKDIR}/git"
- 
--S = "${WORKDIR}/${BPN}"
-+inherit autotools-brokensep
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
+index 719c60b..6db165a 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
+@@ -109,6 +109,8 @@ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+ # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
+ # with wonky clocks (e.g. OpenSlug)
+ RDEPENDS_${PN} = "${PN}-tickadj"
++# ntpd require libgcc for execution
++RDEPENDS_${PN} += "libgcc"
+ # Handle move from bin to utils package
+ RPROVIDES_${PN}-utils = "${PN}-bin"
+ RREPLACES_${PN}-utils = "${PN}-bin"
 -- 
 2.7.4
-
-
 
 
