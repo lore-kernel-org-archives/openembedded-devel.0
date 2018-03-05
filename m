@@ -1,48 +1,29 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4433D7884B
+Return-Path: <Li.Zhou@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9824A78A1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Mar 2018 04:43:41 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id l191so21127957lfe.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Mar 2018 20:43:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=XwGsB3nFSAYm6iS3SLZzkeH9iMrslUuHgUPEXtW2t+E=;
-	b=FLATQzAenqSiPyM9KU/4omBXsOrENu7+b2QoUlTe4l2Wd9KmSYeV7hsobIbikBnmjv
-	qWOFwC02W/HqQjf+qfEqyax7vyy15cljWysFJMIHroCccYuE8HpQmUAQn753+5YqFUgs
-	mL+F8hZnp70DIWZoIEHyEgz9h3p7i/H5qzkqApCG2jl2RevNMYVNrdGkwjFpk+npRTjm
-	CGmbMdkOPZX8DmEttWqSw6EyNAF5jGrX1wHc9z/P77p8QQ3C4/O2vd1VARoZ+cZ6uim/
-	YS/NCslvj3DZvxm0zK1ZbEtDIu/LSlKJvwUffBYoCAGQOzxmXrvYijWlhorLNZ7T5m4B
-	wS3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=XwGsB3nFSAYm6iS3SLZzkeH9iMrslUuHgUPEXtW2t+E=;
-	b=qNlLkirpgWKDpWTa195EedMN2qvlQ/NhKVoPHQ1ydp0cYvGLMm+M2442UM61RFLVni
-	87xGFXy3TnXfS+oEnQOSnVoi7fUW7/CuytdX8MCPhOzAWDqXmxmPPo0Kxwzx/uDCb53W
-	Z7Px2ak8dNe1RXWnE+pDWn2qnF1nVibsDwXrZLOXSJKEENWfuU4RBqqwryQBve4hURpN
-	XDXVC0JWhmzZqN9eAV1ET+oKRpgWn+ja3GczMQPlgI74ejzTGymryevwaVOOB4E4bajj
-	3hJECPQtaI3z4W73HdMpl3gxRVw/xlrI8BSRqcYxav+A6cQlmc0IaK3ahriIC4U6PSTn
-	dcRA==
-X-Gm-Message-State: APf1xPAOgysDXxe+di5S1fS8YSC2te9Vizv3juVWSeqIpbIlYFG+zo8P
-	RAqDBMCllFAMo9EiZ+nmbTByDX9hWEI0TPrPr2I=
-X-Google-Smtp-Source: AG47ELvZdldD4nkE5/sgxAH5XLkiAK9lRIqhPE0p4sWyXMI2bdjLon0eWDRVctZ6C01Hjwbou/ZufTkpbGR/0uxppzM=
-X-Received: by 10.46.17.220 with SMTP id 89mr8685308ljr.87.1520225022433; Sun,
-	04 Mar 2018 20:43:42 -0800 (PST)
+	Mon,  5 Mar 2018 05:13:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w255D2hn025967
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Sun, 4 Mar 2018 21:13:02 -0800
+Received: from [128.224.163.239] (128.224.163.239) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Sun, 4 Mar 2018 21:12:30 -0800
+To: akuster808 <akuster808@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20180226075031.17262-1-li.zhou@windriver.com>
+	<20180226075031.17262-2-li.zhou@windriver.com>
+	<1b2ac28d-be01-fd0b-0f8e-0ab723e8c56a@gmail.com>
+From: "Zhou, Li" <li.zhou@windriver.com>
+Message-ID: <7f336a1f-8129-e442-3341-bf35dd09de66@windriver.com>
+Date: Mon, 5 Mar 2018 13:08:31 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Received: by 10.46.48.4 with HTTP; Sun, 4 Mar 2018 20:43:41 -0800 (PST)
-In-Reply-To: <20180305030116.1901-2-raj.khem@gmail.com>
-References: <20180305030116.1901-1-raj.khem@gmail.com>
-	<20180305030116.1901-2-raj.khem@gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Sun, 4 Mar 2018 23:43:41 -0500
-Message-ID: <CADkTA4PoXBk8jpJk2Jngtw0VnKoVW-dLwHCOLyaownqz0ZufCg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH V2 2/2] ebtables: Fix duplicate definition errors due to netinet/ether.h
+In-Reply-To: <1b2ac28d-be01-fd0b-0f8e-0ab723e8c56a@gmail.com>
+Subject: Re: [meta-oe][PATCH 2/2] php: Security Advisory - php - CVE-2018-5712
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,65 +36,705 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2018 04:43:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 05 Mar 2018 05:13:02 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-FYI: I'm also about to spin a new linux-libc-headers that addresses this issue
-as well.
 
-There's a -stable patch that fixes the regression introduced in 4.15 headers, so
-I've bumped to 4.15.7 to pick up that fix.  I also had to adjust the
-musl libc-headers
-patches for it slightly, but after those chances, this should build
-without needing
-any package specific patches.
 
-I'm doing final testing (and will build ebtables directly to confirm),
-and I expect to
-get the series out Monday.
-
-Bruce
-
-On Sun, Mar 4, 2018 at 10:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Make the patch musl specific as it is regressing glibc 2.27
+On 03/04/2018 11:00 PM, akuster808 wrote:
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> Changes since v1:
-> - Drop the new patch since it was reverting existing patch partially
-> - Apply the regressing patch conditionally to musl builds alone
+> On 02/25/2018 11:50 PM, Li Zhou wrote:
+>> Porting the patch from <http://git.php.net/?p=3Dphp-src.git;a=3Dcommit=
+;
+>> h=3D73ca9b37731dd9690ffd9706333b17eaf90ea091> to solve CVE-2018-5712.
+>>
+>> Signed-off-by: Li Zhou <li.zhou@windriver.com>
+> This would not apply.
+> can you double check?
+
+I just downloaded the newest code and it can apply successfully.
+Have you already applied the patch for CVE-2018-5711 which I sent=20
+together with this patch?
+If yes, please give me more information about the failure. Thanks.
+
+> - amrin
+>> ---
+>>   .../php/php-7.1.9/CVE-2018-5712.patch              | 432 +++++++++++=
+++++++++++
+>>   meta-oe/recipes-devtools/php/php_7.1.9.bb          |   1 +
+>>   2 files changed, 433 insertions(+)
+>>   create mode 100644 meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5=
+712.patch
+>>
+>> diff --git a/meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patc=
+h b/meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patch
+>> new file mode 100644
+>> index 0000000..87ccc02
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patch
+>> @@ -0,0 +1,432 @@
+>> +From fc2ac180fdaf4589c203802fff308fb8cbce58c6 Mon Sep 17 00:00:00 200=
+1
+>> +From: Li Zhou <li.zhou@windriver.com>
+>> +Date: Sun, 11 Feb 2018 15:45:32 +0800
+>> +Subject: [PATCH] Fix bug #74782: remove file name from output to avoi=
+d XSS
+>> +
+>> +Upstream-Status: Backport
+>> +CVE: CVE-2018-5712
+>> +Signed-off-by: Li Zhou <li.zhou@windriver.com>
+>> +---
+>> + ext/phar/shortarc.php                             |  2 +-
+>> + ext/phar/stub.h                                   |  4 ++--
+>> + ext/phar/tests/cache_list/copyonwrite11.phar.phpt |  4 ++--
+>> + ext/phar/tests/phar_commitwrite.phpt              |  2 +-
+>> + ext/phar/tests/phar_convert_repeated.phpt         |  2 +-
+>> + ext/phar/tests/phar_create_in_cwd.phpt            |  2 +-
+>> + ext/phar/tests/phar_createdefaultstub.phpt        | 22 +++++++++++--=
+---------
+>> + ext/phar/tests/phar_offset_check.phpt             |  4 ++--
+>> + ext/phar/tests/phar_setdefaultstub.phpt           | 20 ++++++++++---=
+-------
+>> + ext/phar/tests/tar/phar_convert_phar.phpt         |  6 +++---
+>> + ext/phar/tests/tar/phar_convert_phar2.phpt        |  6 +++---
+>> + ext/phar/tests/tar/phar_convert_phar3.phpt        |  6 +++---
+>> + ext/phar/tests/tar/phar_convert_phar4.phpt        |  6 +++---
+>> + ext/phar/tests/zip/phar_convert_phar.phpt         |  6 +++---
+>> + 14 files changed, 46 insertions(+), 46 deletions(-)
+>> +
+>> +diff --git a/ext/phar/shortarc.php b/ext/phar/shortarc.php
+>> +index 1bf3baa..e5ac8ba 100644
+>> +--- a/ext/phar/shortarc.php
+>> ++++ b/ext/phar/shortarc.php
+>> +@@ -74,7 +74,7 @@ if (@(isset($_SERVER['REQUEST_URI']) && isset($_SER=
+VER['REQUEST_METHOD']) && ($_
+>> +     $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt)=
+;
+>> +     if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> +         header('HTTP/1.0 404 Not Found');
+>> +-        echo "<html>\n <head>\n  <title>File Not Found<title>\n </he=
+ad>\n <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html=
+>";
+>> ++        echo "<html>\n <head>\n  <title>File Not Found<title>\n </he=
+ad>\n <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> +         exit;
+>> +     }
+>> +     $b =3D pathinfo($a);
+>> +diff --git a/ext/phar/stub.h b/ext/phar/stub.h
+>> +index 28e3252..dd8baed 100644
+>> +--- a/ext/phar/stub.h
+>> ++++ b/ext/phar/stub.h
+>> +@@ -22,12 +22,12 @@ static inline zend_string* phar_get_stub(const ch=
+ar *index_php, const char *web,
+>> + {
+>> + 	static const char newstub0[] =3D "<?php\n\n$web =3D '";
+>> + 	static const char newstub1_0[] =3D "';\n\nif (in_array('phar', stre=
+am_get_wrappers()) && class_exists('Phar', 0)) {\nPhar::interceptFileFunc=
+s();\nset_include_path('phar://' . __FILE__ . PATH_SEPARATOR . get_includ=
+e_path());\nPhar::webPhar(null, $web);\ninclude 'phar://' . __FILE__ . '/=
+' . Extract_Phar::START;\nreturn;\n}\n\nif (@(isset($_SERVER['REQUEST_URI=
+']) && isset($_SERVER['REQUEST_METHOD']) && ($_SERVER['REQUEST_METHOD'] =3D=
+=3D 'GET' || $_SERVER['REQUEST_METHOD'] =3D=3D 'POST'))) {\nExtract_Phar:=
+:go(true);\n$mimes =3D array(\n'phps' =3D> 2,\n'c' =3D> 'text/plain',\n'c=
+c' =3D> 'text/plain',\n'cpp' =3D> 'text/plain',\n'c++' =3D> 'text/plain',=
+\n'dtd' =3D> 'text/plain',\n'h' =3D> 'text/plain',\n'log' =3D> 'text/plai=
+n',\n'rng' =3D> 'text/plain',\n'txt' =3D> 'text/plain',\n'xsd' =3D> 'text=
+/plain',\n'php' =3D> 1,\n'inc' =3D> 1,\n'avi' =3D> 'video/avi',\n'bmp' =3D=
+> 'image/bmp',\n'css' =3D> 'text/css',\n'gif' =3D> 'image/gif',\n'htm' =3D=
+> 'text/html',\n'html' =3D> 'text/html',\n'htmls' =3D> 'text/html',\n'ico=
+' =3D> 'image/x-ico',
+>>   \n'jpe' =3D> 'image/jpeg',\n'jpg' =3D> 'image/jpeg',\n'jpeg' =3D> 'i=
+mage/jpeg',\n'js' =3D> 'application/x-javascript',\n'midi' =3D> 'audio/mi=
+di',\n'mid' =3D> 'audio/midi',\n'mod' =3D> 'audio/mod',\n'mov' =3D> 'movi=
+e/quicktime',\n'mp3' =3D> 'audio/mp3',\n'mpg' =3D> 'video/mpeg',\n'mpeg' =
+=3D> 'video/mpeg',\n'pdf' =3D> 'application/pdf',\n'png' =3D> 'image/png'=
+,\n'swf' =3D> 'application/shockwave-flash',\n'tif' =3D> 'image/tiff',\n'=
+tiff' =3D> 'image/tiff',\n'wav' =3D> 'audio/wav',\n'xbm' =3D> 'image/xbm'=
+,\n'xml' =3D> 'text/xml',\n);\n\nheader(\"Cache-Control: no-cache, must-r=
+evalidate\");\nheader(\"Pragma: no-cache\");\n\n$basename =3D basename(__=
+FILE__);\nif (!strpos($_SERVER['REQUEST_URI'], $basename)) {\nchdir(Extra=
+ct_Phar::$temp);\ninclude $web;\nreturn;\n}\n$pt =3D substr($_SERVER['REQ=
+UEST_URI'], strpos($_SERVER['REQUEST_URI'], $basename) + strlen($basename=
+));\nif (!$pt || $pt =3D=3D '/') {\n$pt =3D $web;\nheader('HTTP/1.1 301 M=
+oved Permanently');\nheader('Location: ' . $_SERVER['REQUEST_URI'] . '/' =
+=2E $pt);\nexit;\n}\n$
+>>   a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);\nif=
+ (!$a || strlen(dirname($a)) < strlen(";
+>> +-	static const char newstub1_1[] =3D "Extract_Phar::$temp)) {\nheader=
+('HTTP/1.0 404 Not Found');\necho \"<html>\\n <head>\\n  <title>File Not =
+Found<title>\\n </head>\\n <body>\\n  <h1>404 - File \", $pt, \" Not Foun=
+d</h1>\\n </body>\\n</html>\";\nexit;\n}\n$b =3D pathinfo($a);\nif (!isse=
+t($b['extension'])) {\nheader('Content-Type: text/plain');\nheader('Conte=
+nt-Length: ' . filesize($a));\nreadfile($a);\nexit;\n}\nif (isset($mimes[=
+$b['extension']])) {\nif ($mimes[$b['extension']] =3D=3D=3D 1) {\ninclude=
+ $a;\nexit;\n}\nif ($mimes[$b['extension']] =3D=3D=3D 2) {\nhighlight_fil=
+e($a);\nexit;\n}\nheader('Content-Type: ' .$mimes[$b['extension']]);\nhea=
+der('Content-Length: ' . filesize($a));\nreadfile($a);\nexit;\n}\n}\n\ncl=
+ass Extract_Phar\n{\nstatic $temp;\nstatic $origdir;\nconst GZ =3D 0x1000=
+;\nconst BZ2 =3D 0x2000;\nconst MASK =3D 0x3000;\nconst START =3D '";
+>> ++	static const char newstub1_1[] =3D "Extract_Phar::$temp)) {\nheader=
+('HTTP/1.0 404 Not Found');\necho \"<html>\\n <head>\\n  <title>File Not =
+Found<title>\\n </head>\\n <body>\\n  <h1>404 - File Not Found</h1>\\n </=
+body>\\n</html>\";\nexit;\n}\n$b =3D pathinfo($a);\nif (!isset($b['extens=
+ion'])) {\nheader('Content-Type: text/plain');\nheader('Content-Length: '=
+ . filesize($a));\nreadfile($a);\nexit;\n}\nif (isset($mimes[$b['extensio=
+n']])) {\nif ($mimes[$b['extension']] =3D=3D=3D 1) {\ninclude $a;\nexit;\=
+n}\nif ($mimes[$b['extension']] =3D=3D=3D 2) {\nhighlight_file($a);\nexit=
+;\n}\nheader('Content-Type: ' .$mimes[$b['extension']]);\nheader('Content=
+-Length: ' . filesize($a));\nreadfile($a);\nexit;\n}\n}\n\nclass Extract_=
+Phar\n{\nstatic $temp;\nstatic $origdir;\nconst GZ =3D 0x1000;\nconst BZ2=
+ =3D 0x2000;\nconst MASK =3D 0x3000;\nconst START =3D '";
+>> + 	static const char newstub2[] =3D "';\nconst LEN =3D ";
+>> + 	static const char newstub3_0[] =3D ";\n\nstatic function go($return=
+ =3D false)\n{\n$fp =3D fopen(__FILE__, 'rb');\nfseek($fp, self::LEN);\n$=
+L =3D unpack('V', $a =3D fread($fp, 4));\n$m =3D '';\n\ndo {\n$read =3D 8=
+192;\nif ($L[1] - strlen($m) < 8192) {\n$read =3D $L[1] - strlen($m);\n}\=
+n$last =3D fread($fp, $read);\n$m .=3D $last;\n} while (strlen($last) && =
+strlen($m) < $L[1]);\n\nif (strlen($m) < $L[1]) {\ndie('ERROR: manifest l=
+ength read was \"' .\nstrlen($m) .'\" should be \"' .\n$L[1] . '\"');\n}\=
+n\n$info =3D self::_unpack($m);\n$f =3D $info['c'];\n\nif ($f & self::GZ)=
+ {\nif (!function_exists('gzinflate')) {\ndie('Error: zlib extension is n=
+ot enabled -' .\n' gzinflate() function needed for zlib-compressed .phars=
+');\n}\n}\n\nif ($f & self::BZ2) {\nif (!function_exists('bzdecompress'))=
+ {\ndie('Error: bzip2 extension is not enabled -' .\n' bzdecompress() fun=
+ction needed for bz2-compressed .phars');\n}\n}\n\n$temp =3D self::tmpdir=
+();\n\nif (!$temp || !is_writable($temp)) {\n$sessionpath =3D session_sa
+>>   ve_path();\nif (strpos ($sessionpath, \";\") !=3D=3D false)\n$sessio=
+npath =3D substr ($sessionpath, strpos ($sessionpath, \";\")+1);\nif (!fi=
+le_exists($sessionpath) || !is_dir($sessionpath)) {\ndie('Could not locat=
+e temporary directory to extract phar');\n}\n$temp =3D $sessionpath;\n}\n=
+\n$temp .=3D '/pharextract/'.basename(__FILE__, '.phar');\nself::$temp =3D=
+ $temp;\nself::$origdir =3D getcwd();\n@mkdir($temp, 0777, true);\n$temp =
+=3D realpath($temp);\n\nif (!file_exists($temp . DIRECTORY_SEPARATOR . md=
+5_file(__FILE__))) {\nself::_removeTmpFiles($temp, getcwd());\n@mkdir($te=
+mp, 0777, true);\n@file_put_contents($temp . '/' . md5_file(__FILE__), ''=
+);\n\nforeach ($info['m'] as $path =3D> $file) {\n$a =3D !file_exists(dir=
+name($temp . '/' . $path));\n@mkdir(dirname($temp . '/' . $path), 0777, t=
+rue);\nclearstatcache();\n\nif ($path[strlen($path) - 1] =3D=3D '/') {\n@=
+mkdir($temp . '/' . $path, 0777);\n} else {\nfile_put_contents($temp . '/=
+' . $path, self::extractFile($path, $file, $fp));\n@chmod($temp . '/
+>>   ' . $path, 0666);\n}\n}\n}\n\nchdir($temp);\n\nif (!$return) {\nincl=
+ude self::START;\n}\n}\n\nstatic fun";
+>> + 	static const char newstub3_1[] =3D "ction tmpdir()\n{\nif (strpos(P=
+HP_OS, 'WIN') !=3D=3D false) {\nif ($var =3D getenv('TMP') ? getenv('TMP'=
+) : getenv('TEMP')) {\nreturn $var;\n}\nif (is_dir('/temp') || mkdir('/te=
+mp')) {\nreturn realpath('/temp');\n}\nreturn false;\n}\nif ($var =3D get=
+env('TMPDIR')) {\nreturn $var;\n}\nreturn realpath('/tmp');\n}\n\nstatic =
+function _unpack($m)\n{\n$info =3D unpack('V', substr($m, 0, 4));\n $l =3D=
+ unpack('V', substr($m, 10, 4));\n$m =3D substr($m, 14 + $l[1]);\n$s =3D =
+unpack('V', substr($m, 0, 4));\n$o =3D 0;\n$start =3D 4 + $s[1];\n$ret['c=
+'] =3D 0;\n\nfor ($i =3D 0; $i < $info[1]; $i++) {\n $len =3D unpack('V',=
+ substr($m, $start, 4));\n$start +=3D 4;\n $savepath =3D substr($m, $star=
+t, $len[1]);\n$start +=3D $len[1];\n   $ret['m'][$savepath] =3D array_val=
+ues(unpack('Va/Vb/Vc/Vd/Ve/Vf', substr($m, $start, 24)));\n$ret['m'][$sav=
+epath][3] =3D sprintf('%u', $ret['m'][$savepath][3]\n& 0xffffffff);\n$ret=
+['m'][$savepath][7] =3D $o;\n$o +=3D $ret['m'][$savepath][2];\n$start +=3D=
+ 24 + $ret['m
+>>   '][$savepath][5];\n$ret['c'] |=3D $ret['m'][$savepath][4] & self::MA=
+SK;\n}\nreturn $ret;\n}\n\nstatic function extractFile($path, $entry, $fp=
+)\n{\n$data =3D '';\n$c =3D $entry[2];\n\nwhile ($c) {\nif ($c < 8192) {\=
+n$data .=3D @fread($fp, $c);\n$c =3D 0;\n} else {\n$c -=3D 8192;\n$data .=
+=3D @fread($fp, 8192);\n}\n}\n\nif ($entry[4] & self::GZ) {\n$data =3D gz=
+inflate($data);\n} elseif ($entry[4] & self::BZ2) {\n$data =3D bzdecompre=
+ss($data);\n}\n\nif (strlen($data) !=3D $entry[0]) {\ndie(\"Invalid inter=
+nal .phar file (size error \" . strlen($data) . \" !=3D \" .\n$stat[7] . =
+\")\");\n}\n\nif ($entry[3] !=3D sprintf(\"%u\", crc32($data) & 0xfffffff=
+f)) {\ndie(\"Invalid internal .phar file (checksum error)\");\n}\n\nretur=
+n $data;\n}\n\nstatic function _removeTmpFiles($temp, $origdir)\n{\nchdir=
+($temp);\n\nforeach (glob('*') as $f) {\nif (file_exists($f)) {\nis_dir($=
+f) ? @rmdir($f) : @unlink($f);\nif (file_exists($f) && is_dir($f)) {\nsel=
+f::_removeTmpFiles($f, getcwd());\n}\n}\n}\n\n@rmdir($temp);\nclearst
+>>   atcache();\nchdir($origdir);\n}\n}\n\nExtract_Phar::go();\n__HALT_CO=
+MPILER(); ?>";
+>> +
+>> +-	static const int newstub_len =3D 6633;
+>> ++	static const int newstub_len =3D 6623;
+>> +
+>> + 	return strpprintf(name_len + web_len + newstub_len, "%s%s%s%s%s%s%d=
+%s%s", newstub0, web, newstub1_0, newstub1_1, index_php, newstub2, name_l=
+en + web_len + newstub_len, newstub3_0, newstub3_1);
+>> + }
+>> +diff --git a/ext/phar/tests/cache_list/copyonwrite11.phar.phpt b/ext/=
+phar/tests/cache_list/copyonwrite11.phar.phpt
+>> +index bf7367c..c1d3a42 100644
+>> +--- a/ext/phar/tests/cache_list/copyonwrite11.phar.phpt
+>> ++++ b/ext/phar/tests/cache_list/copyonwrite11.phar.phpt
+>> +@@ -18,5 +18,5 @@ echo strlen($p2->getStub()),"\n";
+>> + echo "ok\n";
+>> + __HALT_COMPILER(); ?>
+>> + "
+>> +-6653
+>> +-ok
+>> +\ No newline at end of file
+>> ++6643
+>> ++ok
+>> +diff --git a/ext/phar/tests/phar_commitwrite.phpt b/ext/phar/tests/ph=
+ar_commitwrite.phpt
+>> +index 6387835..cd9e52f 100644
+>> +--- a/ext/phar/tests/phar_commitwrite.phpt
+>> ++++ b/ext/phar/tests/phar_commitwrite.phpt
+>> +@@ -29,7 +29,7 @@ unlink(dirname(__FILE__) . '/brandnewphar.phar');
+>> + __HALT_COMPILER();
+>> + ?>
+>> + --EXPECT--
+>> +-int(6651)
+>> ++int(6641)
+>> + string(200) "<?php
+>> + function __autoload($class)
+>> + {
+>> +diff --git a/ext/phar/tests/phar_convert_repeated.phpt b/ext/phar/tes=
+ts/phar_convert_repeated.phpt
+>> +index b2ef195..99ff901 100644
+>> +--- a/ext/phar/tests/phar_convert_repeated.phpt
+>> ++++ b/ext/phar/tests/phar_convert_repeated.phpt
+>> +@@ -123,7 +123,7 @@ NULL
+>> + bool(true)
+>> + bool(false)
+>> + bool(false)
+>> +-int(6651)
+>> ++int(6641)
+>> + NULL
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D convertToZip() =3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> + bool(false)
+>> +diff --git a/ext/phar/tests/phar_create_in_cwd.phpt b/ext/phar/tests/=
+phar_create_in_cwd.phpt
+>> +index 83de7be..cafc8a1 100644
+>> +--- a/ext/phar/tests/phar_create_in_cwd.phpt
+>> ++++ b/ext/phar/tests/phar_create_in_cwd.phpt
+>> +@@ -32,7 +32,7 @@ __HALT_COMPILER();
+>> + unlink(dirname(__FILE__) . '/brandnewphar.phar');
+>> + ?>
+>> + --EXPECT--
+>> +-int(6651)
+>> ++int(6641)
+>> + string(200) "<?php
+>> + function __autoload($class)
+>> + {
+>> +diff --git a/ext/phar/tests/phar_createdefaultstub.phpt b/ext/phar/te=
+sts/phar_createdefaultstub.phpt
+>> +index a8648dc..e074d64 100644
+>> +--- a/ext/phar/tests/phar_createdefaultstub.phpt
+>> ++++ b/ext/phar/tests/phar_createdefaultstub.phpt
+>> +@@ -34,7 +34,7 @@ echo $e->getMessage() . "\n";
+>> + ?>
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> + --EXPECT--
+>> +-string(6651) "<?php
+>> ++string(6641) "<?php
+>> +
+>> + $web =3D 'index.php';
+>> +
+>> +@@ -110,7 +110,7 @@ exit;
+>> + $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> + header('HTTP/1.0 404 Not Found');
+>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> + exit;
+>> + }
+>> + $b =3D pathinfo($a);
+>> +@@ -144,7 +144,7 @@ const GZ =3D 0x1000;
+>> + const BZ2 =3D 0x2000;
+>> + const MASK =3D 0x3000;
+>> + const START =3D 'index.php';
+>> +-const LEN =3D 6653;
+>> ++const LEN =3D 6643;
+>> +
+>> + static function go($return =3D false)
+>> + {
+>> +@@ -328,7 +328,7 @@ Extract_Phar::go();
+>> + __HALT_COMPILER(); ?>"
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-string(6662) "<?php
+>> ++string(6652) "<?php
+>> +
+>> + $web =3D 'index.php';
+>> +
+>> +@@ -404,7 +404,7 @@ exit;
+>> + $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> + header('HTTP/1.0 404 Not Found');
+>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> + exit;
+>> + }
+>> + $b =3D pathinfo($a);
+>> +@@ -438,7 +438,7 @@ const GZ =3D 0x1000;
+>> + const BZ2 =3D 0x2000;
+>> + const MASK =3D 0x3000;
+>> + const START =3D 'my/custom/thingy.php';
+>> +-const LEN =3D 6664;
+>> ++const LEN =3D 6654;
+>> +
+>> + static function go($return =3D false)
+>> + {
+>> +@@ -622,7 +622,7 @@ Extract_Phar::go();
+>> + __HALT_COMPILER(); ?>"
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-int(7042)
+>> ++int(7032)
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + Illegal filename passed in for stub creation, was 401 characters lon=
+g, and only 400 or less is allowed
+>> +@@ -630,7 +630,7 @@ Illegal filename passed in for stub creation, was=
+ 401 characters long, and only
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-string(6664) "<?php
+>> ++string(6654) "<?php
+>> +
+>> + $web =3D 'the/web.php';
+>> +
+>> +@@ -706,7 +706,7 @@ exit;
+>> + $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> + header('HTTP/1.0 404 Not Found');
+>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> + exit;
+>> + }
+>> + $b =3D pathinfo($a);
+>> +@@ -740,7 +740,7 @@ const GZ =3D 0x1000;
+>> + const BZ2 =3D 0x2000;
+>> + const MASK =3D 0x3000;
+>> + const START =3D 'my/custom/thingy.php';
+>> +-const LEN =3D 6666;
+>> ++const LEN =3D 6656;
+>> +
+>> + static function go($return =3D false)
+>> + {
+>> +@@ -924,6 +924,6 @@ Extract_Phar::go();
+>> + __HALT_COMPILER(); ?>"
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-int(7042)
+>> ++int(7032)
+>> + Illegal web filename passed in for stub creation, was 401 characters=
+ long, and only 400 or less is allowed
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +diff --git a/ext/phar/tests/phar_offset_check.phpt b/ext/phar/tests/p=
+har_offset_check.phpt
+>> +index a4a65e9..7609f20 100644
+>> +--- a/ext/phar/tests/phar_offset_check.phpt
+>> ++++ b/ext/phar/tests/phar_offset_check.phpt
+>> +@@ -70,8 +70,8 @@ var_dump($phar->getAlias());
+>> + Entry .phar/stub.php does not exist
+>> + Entry .phar/alias.txt does not exist
+>> + Cannot set stub ".phar/stub.php" directly in phar "%sphar_offset_che=
+ck.phar.php", use setStub
+>> +-int(6653)
+>> +-int(6653)
+>> ++int(6643)
+>> ++int(6643)
+>> + Cannot set alias ".phar/alias.txt" directly in phar "%sphar_offset_c=
+heck.phar.php", use setAlias
+>> + string(5) "susan"
+>> + string(5) "susan"
+>> +diff --git a/ext/phar/tests/phar_setdefaultstub.phpt b/ext/phar/tests=
+/phar_setdefaultstub.phpt
+>> +index a36c005..fc7143a 100644
+>> +--- a/ext/phar/tests/phar_setdefaultstub.phpt
+>> ++++ b/ext/phar/tests/phar_setdefaultstub.phpt
+>> +@@ -54,7 +54,7 @@ try {
+>> + unlink(dirname(__FILE__) . '/' . basename(__FILE__, '.clean.php') . =
+'.phar');
+>> + ?>
+>> + --EXPECT--
+>> +-string(6653) "<?php
+>> ++string(6643) "<?php
+>> +
+>> + $web =3D 'index.php';
+>> +
+>> +@@ -130,7 +130,7 @@ exit;
+>> + $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> + header('HTTP/1.0 404 Not Found');
+>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> + exit;
+>> + }
+>> + $b =3D pathinfo($a);
+>> +@@ -164,7 +164,7 @@ const GZ =3D 0x1000;
+>> + const BZ2 =3D 0x2000;
+>> + const MASK =3D 0x3000;
+>> + const START =3D 'index.php';
+>> +-const LEN =3D 6653;
+>> ++const LEN =3D 6643;
+>> +
+>> + static function go($return =3D false)
+>> + {
+>> +@@ -349,7 +349,7 @@ __HALT_COMPILER(); ?>
+>> + "
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-string(6664) "<?php
+>> ++string(6654) "<?php
+>> +
+>> + $web =3D 'index.php';
+>> +
+>> +@@ -425,7 +425,7 @@ exit;
+>> + $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> + header('HTTP/1.0 404 Not Found');
+>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> + exit;
+>> + }
+>> + $b =3D pathinfo($a);
+>> +@@ -459,7 +459,7 @@ const GZ =3D 0x1000;
+>> + const BZ2 =3D 0x2000;
+>> + const MASK =3D 0x3000;
+>> + const START =3D 'my/custom/thingy.php';
+>> +-const LEN =3D 6664;
+>> ++const LEN =3D 6654;
+>> +
+>> + static function go($return =3D false)
+>> + {
+>> +@@ -644,7 +644,7 @@ __HALT_COMPILER(); ?>
+>> + "
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-string(6666) "<?php
+>> ++string(6656) "<?php
+>> +
+>> + $web =3D 'the/web.php';
+>> +
+>> +@@ -720,7 +720,7 @@ exit;
+>> + $a =3D realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>> + header('HTTP/1.0 404 Not Found');
+>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n <b=
+ody>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>> + exit;
+>> + }
+>> + $b =3D pathinfo($a);
+>> +@@ -754,7 +754,7 @@ const GZ =3D 0x1000;
+>> + const BZ2 =3D 0x2000;
+>> + const MASK =3D 0x3000;
+>> + const START =3D 'my/custom/thingy.php';
+>> +-const LEN =3D 6666;
+>> ++const LEN =3D 6656;
+>> +
+>> + static function go($return =3D false)
+>> + {
+>> +@@ -939,6 +939,6 @@ __HALT_COMPILER(); ?>
+>> + "
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> + =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>> +-int(7044)
+>> ++int(7034)
+>> + Illegal filename passed in for stub creation, was 401 characters lon=
+g, and only 400 or less is allowed
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +diff --git a/ext/phar/tests/tar/phar_convert_phar.phpt b/ext/phar/tes=
+ts/tar/phar_convert_phar.phpt
+>> +index fce826a..c827c21 100644
+>> +--- a/ext/phar/tests/tar/phar_convert_phar.phpt
+>> ++++ b/ext/phar/tests/tar/phar_convert_phar.phpt
+>> +@@ -47,12 +47,12 @@ __HALT_COMPILER();
+>> + ?>
+>> + --EXPECT--
+>> + bool(false)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> + string(60) "<?php // tar-based phar archive stub file
+>> + __HALT_COMPILER();"
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +diff --git a/ext/phar/tests/tar/phar_convert_phar2.phpt b/ext/phar/te=
+sts/tar/phar_convert_phar2.phpt
+>> +index 496948b..e21a984 100644
+>> +--- a/ext/phar/tests/tar/phar_convert_phar2.phpt
+>> ++++ b/ext/phar/tests/tar/phar_convert_phar2.phpt
+>> +@@ -49,14 +49,14 @@ __HALT_COMPILER();
+>> + ?>
+>> + --EXPECT--
+>> + bool(false)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> + string(60) "<?php // tar-based phar archive stub file
+>> + __HALT_COMPILER();"
+>> + bool(true)
+>> + int(4096)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +diff --git a/ext/phar/tests/tar/phar_convert_phar3.phpt b/ext/phar/te=
+sts/tar/phar_convert_phar3.phpt
+>> +index f476819..39cf120 100644
+>> +--- a/ext/phar/tests/tar/phar_convert_phar3.phpt
+>> ++++ b/ext/phar/tests/tar/phar_convert_phar3.phpt
+>> +@@ -49,14 +49,14 @@ __HALT_COMPILER();
+>> + ?>
+>> + --EXPECT--
+>> + bool(false)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> + string(60) "<?php // tar-based phar archive stub file
+>> + __HALT_COMPILER();"
+>> + bool(true)
+>> + int(8192)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +diff --git a/ext/phar/tests/tar/phar_convert_phar4.phpt b/ext/phar/te=
+sts/tar/phar_convert_phar4.phpt
+>> +index 544b96b..3ad27dc 100644
+>> +--- a/ext/phar/tests/tar/phar_convert_phar4.phpt
+>> ++++ b/ext/phar/tests/tar/phar_convert_phar4.phpt
+>> +@@ -54,7 +54,7 @@ __HALT_COMPILER();
+>> + ?>
+>> + --EXPECT--
+>> + bool(false)
+>> +-int(6651)
+>> ++int(6641)
+>> + string(2) "hi"
+>> + bool(true)
+>> + string(60) "<?php // tar-based phar archive stub file
+>> +@@ -62,10 +62,10 @@ __HALT_COMPILER();"
+>> + string(2) "hi"
+>> + bool(true)
+>> + int(4096)
+>> +-int(6651)
+>> ++int(6641)
+>> + string(2) "hi"
+>> + bool(true)
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + string(2) "hi"
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +diff --git a/ext/phar/tests/zip/phar_convert_phar.phpt b/ext/phar/tes=
+ts/zip/phar_convert_phar.phpt
+>> +index 815656d..9cf942b 100644
+>> +--- a/ext/phar/tests/zip/phar_convert_phar.phpt
+>> ++++ b/ext/phar/tests/zip/phar_convert_phar.phpt
+>> +@@ -46,12 +46,12 @@ __HALT_COMPILER();
+>> + ?>
+>> + --EXPECT--
+>> + bool(false)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> + string(60) "<?php // zip-based phar archive stub file
+>> + __HALT_COMPILER();"
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + bool(true)
+>> +-int(6651)
+>> ++int(6641)
+>> + =3D=3D=3DDONE=3D=3D=3D
+>> +--
+>> +1.9.1
+>> +
+>> diff --git a/meta-oe/recipes-devtools/php/php_7.1.9.bb b/meta-oe/recip=
+es-devtools/php/php_7.1.9.bb
+>> index 1d9e35a..374f345 100644
+>> --- a/meta-oe/recipes-devtools/php/php_7.1.9.bb
+>> +++ b/meta-oe/recipes-devtools/php/php_7.1.9.bb
+>> @@ -6,6 +6,7 @@ SRC_URI +=3D "file://change-AC_TRY_RUN-to-AC_TRY_LINK.=
+patch \
+>>               file://0001-Specify-tag-with-libtool.patch \
+>>               file://CVE-2017-16642.patch \
+>>               file://CVE-2018-5711.patch \
+>> +            file://CVE-2018-5712.patch \
+>>              "
+>>   SRC_URI[md5sum] =3D "2397be54f3281cdf30c7ef076b28f7d0"
+>>   SRC_URI[sha256sum] =3D "314dcc10dfdd7c4443edb4fe1e133a44f2b2a8351be8=
+c9eb6ab9222d45fd9bae"
 >
->  meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> index d5e7341a0..e4adafd3c 100644
-> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> @@ -29,9 +29,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
->             file://0007-extensions-Use-stdint-types.patch \
->             file://0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch \
->             file://0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch \
-> -           file://0010-Adjust-header-include-sequence.patch \
->             "
->
-> +SRC_URI_append_libc-musl = " file://0010-Adjust-header-include-sequence.patch"
-> +
->  SRC_URI[md5sum] = "506742a3d44b9925955425a659c1a8d0"
->  SRC_URI[sha256sum] = "dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9a4455d"
->
-> --
-> 2.16.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Best Regards!
+Zhou Li
+Phone number: 86-10-84778511
 
 
-
--- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await
-thee at its end"
 
