@@ -1,49 +1,40 @@
-Return-Path: <bobadeshrikant@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D89D078A92
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 97C0478645
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Mar 2018 10:55:50 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id n7so16754721wrn.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Mar 2018 02:55:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Mxv3el96EPtLCBm7zPBPQ+lHwfS6/LgdCQyP5AypxMA=;
-	b=Zq/aTygwiOoDkKOVcx9NdZFiuI6N76ZleKpjkO/szWsOsTqOtqaW90JJrvabxIIqdW
-	UWM3308yOukwXWjIYnIKo2gdfGVB8WVhDhGk19zh+yTg/GSeK26XcAn8WVCnGEZ9LkM4
-	ll9xWvaoNDYGhVZIVi+iIRCm1DG9US3zckNueJZlVXD2fsPGzw0edzQ9WWjOmWybu09y
-	/ufDeODMqlBb700y3mUG4008BJmdFOhh5NB138C/Mx9qXRTd/9oRJdNNWWB/EvrL4PYt
-	adwk1yZ/Q8OATp9RrrOMasPid4ODf6xBPpxN3YceIPPNUlFMp7YZimYy5KqENj0RSCqj
-	k1Ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Mxv3el96EPtLCBm7zPBPQ+lHwfS6/LgdCQyP5AypxMA=;
-	b=hkX4i4QpBQSyaXk7gpjWKv4lWtd/oq8ynv7NoJp4j1hSDIEsY3AgDtVRQi/qqjMeYG
-	E07uciW/pkypWkGJefHodDcDR9j3ANYYSPKvRR8vphHH22q0jjVRpKicxeilV//mMIv5
-	kIbBqM0RGeK2sCDJI5ZZbd7m16awXWd9TWRI2fwXz12so5BDHLLAER23LieM6wtlkSaO
-	Pz6FfOdMz4HY6AKmQV25HUA5umkxg7lZX5zWHPhO3sqXIAoF5dpIORawKz3+dfivPzY+
-	j+pzssSkLo+D900T5oCnwdN+v7skYQG8+T6xP85E4YY5G+zyBtonfho/zvOuapyXeYxC
-	BvBg==
-X-Gm-Message-State: APf1xPDBZK7d4m4eDsdmHYFmnCgcjTuR/SRn/uAu5CkVvtgNTB/sqJCc
-	q5qnJUa/2544GLnSf6S8SRviTA==
-X-Google-Smtp-Source: AG47ELvG+b5WTYv42d0eeYPE8vhz9vs/2jrpsxmM1aJmcfP8L09i2U8T9V5Vadjbs8PsHiRzx9AIag==
-X-Received: by 10.223.130.176 with SMTP id 45mr12142590wrc.250.1520247351204; 
-	Mon, 05 Mar 2018 02:55:51 -0800 (PST)
-Received: from shrikant-Precision-Tower-3420.mgc.mentorg.com
-	(nat-sch.mentorg.com. [139.181.36.34])
-	by smtp.gmail.com with ESMTPSA id
-	s125sm6222158wmf.4.2018.03.05.02.55.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 05 Mar 2018 02:55:50 -0800 (PST)
-From: Shrikant Bobade <bobadeshrikant@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Mar 2018 16:25:43 +0530
-Message-Id: <1520247343-906-1-git-send-email-bobadeshrikant@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Shrikant Bobade <shrikant_bobade@mentor.com>
-Subject: [meta-networking][PATCH] ntp: add libgcc as runtime dependency
+	Mon,  5 Mar 2018 12:44:14 +0000 (UTC)
+Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id w25CiEr4011153
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Mon, 5 Mar 2018 13:44:14 +0100
+Received: from DEFTHW99ERGMSX.ww902.siemens.net
+	(defthw99ergmsx.ww902.siemens.net [139.22.70.132])
+	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id w25CiDKu009631
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Mon, 5 Mar 2018 13:44:14 +0100
+Received: from DEFTHW99ERPMSX.ww902.siemens.net (139.22.70.202) by
+	DEFTHW99ERGMSX.ww902.siemens.net (139.22.70.132) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Mon, 5 Mar 2018 13:44:13 +0100
+Received: from DEFTHW99EH4MSX.ww902.siemens.net ([169.254.2.118]) by
+	DEFTHW99ERPMSX.ww902.siemens.net ([139.22.70.202]) with mapi id
+	14.03.0361.001; Mon, 5 Mar 2018 13:44:10 +0100
+From: "Bach, Pascal" <pascal.bach@siemens.com>
+To: Armin Kuster <akuster808@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
+Thread-Index: AQHTroDB7sqoR2ZId0+yM3GOWx/226PBoZfA
+Date: Mon, 5 Mar 2018 12:44:09 +0000
+Message-ID: <355BE46A91031048906B695426A8D8E61733E141@DEFTHW99EH4MSX.ww902.siemens.net>
+References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
+	<1519594406-24490-32-git-send-email-akuster808@gmail.com>
+In-Reply-To: <1519594406-24490-32-git-send-email-akuster808@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [139.22.70.9]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,38 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Mar 2018 10:55:51 -0000
+X-List-Received-Date: Mon, 05 Mar 2018 12:44:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Shrikant Bobade <shrikant_bobade@mentor.com>
+Hi Armin
 
-libgcc is required by ntpd for execution, so add it as runtime dependency.
+Why was this moved to recipes-bsp? I don't see the relation.
+The same question is why leveldb was moved to recipes-security?
 
-ntpd execution ref. log.
-~# /etc/init.d/ntpd start
-Starting ntpd: libgcc_s.so.1 must be installed for pthread_cancel to work
-Aborted
-done
-~#
+What did I miss?
 
-Signed-off-by: Shrikant Bobade <shrikant_bobade@mentor.com>
----
- meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Pascal
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-index 719c60b..6db165a 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-@@ -109,6 +109,8 @@ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
- # with wonky clocks (e.g. OpenSlug)
- RDEPENDS_${PN} = "${PN}-tickadj"
-+# ntpd require libgcc for execution
-+RDEPENDS_${PN} += "libgcc"
- # Handle move from bin to utils package
- RPROVIDES_${PN}-utils = "${PN}-bin"
- RREPLACES_${PN}-utils = "${PN}-bin"
--- 
-2.7.4
-
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Armin Kuster
+> Sent: Sonntag, 25. Februar 2018 22:33
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
+>=20
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-oe/{recipes-extended =3D> recipes-bsp}/rocksdb/rocksdb_git.bb | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)  rename meta-oe/{recipes=
+-
+> extended =3D> recipes-bsp}/rocksdb/rocksdb_git.bb (100%)
+>=20
+> diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb b/meta-
+> oe/recipes-bsp/rocksdb/rocksdb_git.bb
+> similarity index 100%
+> rename from meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
+> rename to meta-oe/recipes-bsp/rocksdb/rocksdb_git.bb
+> --
+> 2.7.4
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
