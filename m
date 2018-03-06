@@ -1,25 +1,26 @@
 Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5821878954
+	by mail.openembedded.org (Postfix) with ESMTP id EB0126FFCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 02:02:22 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="37517723"
+	Tue,  6 Mar 2018 03:09:20 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="37520529"
 Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Mar 2018 10:02:22 +0800
+	by heian.cn.fujitsu.com with ESMTP; 06 Mar 2018 11:09:21 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 131E848AE765
+	by cn.fujitsu.com (Postfix) with ESMTP id 6DBB848AE766
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 10:02:23 +0800 (CST)
+	Tue,  6 Mar 2018 11:09:22 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.156) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Tue, 6 Mar 2018 10:02:20 +0800
+	Server (TLS) id 14.3.361.1; Tue, 6 Mar 2018 11:09:19 +0800
 From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <1488765705-9483-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Date: Tue, 6 Mar 2018 20:09:14 +0800
+Message-ID: <1520338154-25127-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 131E848AE765.A34AF
+X-yoursite-MailScanner-ID: 6DBB848AE766.A7FE0
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
@@ -36,12 +37,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Tue, 06 Mar 2018 02:02:23 -0000
-X-Original-Date: Mon, 6 Mar 2017 10:01:45 +0800
-X-List-Received-Date: Tue, 06 Mar 2018 02:02:23 -0000
+X-List-Received-Date: Tue, 06 Mar 2018 03:09:21 -0000
 Content-Type: text/plain
 
-Change the License to MIT.
+Change the License to MIT as Fedora. And I also found the license it's MIT in the spdx file of xorgxrdp. 
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
