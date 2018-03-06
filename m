@@ -1,51 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AC8F78AB7
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E1F078A6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 15:18:11 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id j2so6695043pff.10
+	Tue,  6 Mar 2018 15:18:12 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id w12-v6so289056plp.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2018 07:18:12 -0800 (PST)
+	Tue, 06 Mar 2018 07:18:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=xhExmsb4NpvFBdLOyuToIDoPcAcBzniJ2ZlfPe+zJfw=;
-	b=tWAx0WPeAultW3FMVSPUpCMwSCxVO8kP+wIdt5DtPaw+J7b/Bt2wWgRZxvrqYZt24D
-	SaVFdQlWYMdstdQhC3X97EjMoUXqiRwnFBIzgDk7kCvvr0GK+a110+BSANvFeZ5I6A6n
-	j4HKZUPPpUpVTPlcoNARjfhHBvYGvGn7XO1dfG+asli5sPQszJm0OzmQ+YRJM9Vl2ocq
-	xiv16phtLHjspBF9jYTR7S6aB9ygcGg+4aeBrv098VTrDhRKgRtf17MjiSz+mepaK6V6
-	vR4fmVLueef4TIpKMr5eLoWabzNHeSkNvn4VtLOsi/gbGGj52ugj06RSdpFstw+sumIj
-	ftAg==
+	bh=gDqFtBVtqa/lBo+8Z+7NEGzMChHMK95CYLEDW/VTLZo=;
+	b=m+1ZtuDcZ4eLdqCszigf3dLQ3vxhjzqKmOIUz/7Ma3NAsSIvTYFhqgtSPSkOxZPtUt
+	lNrBC7RRLY7DpcwXSyl9/qM8C9vYTy6man36pDM+l0SqG9JDkzyWBzKEVC4tRPWW37Pe
+	rh/1cS5FaR0u5tybSCqxPzeyXCRS9anmVGS5R7If9nM8mhOujAHAt8LTmj0s3s6EBewv
+	QiTEPNGXiBPkwBc5DbruAEaL4MWDiNO+XVcrzN4HHWfGr5v3caOhXanbPe5HZGzoUeeq
+	pxj3ACltmQX7cxxFY4m1sLKb8qR+jIrqr+YZJJ/6BUysP9dqU+uIEXa3CACAcX6mN3NQ
+	9GTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=xhExmsb4NpvFBdLOyuToIDoPcAcBzniJ2ZlfPe+zJfw=;
-	b=Kdr506aVCdGp+BNx2SM6/lx/qtBWXhoASWh1841Z+uWtgaQxo3Ta1Z+vYqPmD3jL65
-	V+UIPk7Rd2BR5d36UTOAetoDGPEntRWJiCPmDxTG64na98xBLZEWNsX5jTeAoT8XlFhL
-	8zYiYzHEpijmhZzk85xXeUFrazjcGQDry22KBtlJs78bieRCdezHyzrnoi94Dvkj3BfX
-	+wxUF83U2todBO8qfJzr2CR52Lyx07YT7LOA9QKCZYdZlgW+9TbK3iJt2I+OPgLa1GsS
-	izXlNOeZyYn3la2prQ/X/lF+XJNtj5Ybk8al6nOBJPGRdFllNmeYlMRkCxJKl9l3CCDQ
-	ogHg==
-X-Gm-Message-State: APf1xPCDNi05JZKLasr1zWRF16bcySSGoTUIK1VzmbtKRhHdMZz4UHGg
-	dh7qntZonXAGeb+I0Ei4iiw=
-X-Google-Smtp-Source: AG47ELthz/Az/OC6+6h8y7xSR95Saxgmx8ov16eO60BR63o49yI49DKpjJklZPVGRoPDDzSi5YVN8A==
-X-Received: by 10.99.191.15 with SMTP id v15mr15416238pgf.396.1520349492727;
-	Tue, 06 Mar 2018 07:18:12 -0800 (PST)
+	bh=gDqFtBVtqa/lBo+8Z+7NEGzMChHMK95CYLEDW/VTLZo=;
+	b=dXBOzGGiJJ5ApP5Q19n888YmtGcDqj1stWb5P8OvPSfp2SUHUOXVHC5AfPOVguL4Bs
+	fnXbXyXXqirQiLQn43fm5XD8/CoFrA/54KjRxO5mZyCjlvU2AaIQ273e7RL41Ba6aS47
+	/17MS+G5LX78tc5wAgiV1OBLL49Up/2Ehl5PVageI5onJUL+2bkynC6gfegMI2D55ltv
+	dEW3uyUf1XVoOfpCMGs/zEyLIk5R4q4+cr8A7qy4JnleDf+7nwBz0BdCqPk06Gi9bwVs
+	IIkUapUNDMlE+SLoZSbTRCucHDEQndadd6upj3RUsooDJfgnaFPuY8Q7mx7GyVBR9FlF
+	2r+g==
+X-Gm-Message-State: APf1xPCsC4SalzOfWz56wF/6PTc41DrdNO6bUhB3hgyPJhu2pwRJVF+0
+	s+/zm5WAR1/RoeOEfrzSQPpPDQ==
+X-Google-Smtp-Source: AG47ELtjTgNHhLEEH30Nf5KGPE8O9F7vNIAQV/Z3fDDQHNKcKZcgbT0/Rdq4FAbU9mh/a/dI+VsNKA==
+X-Received: by 2002:a17:902:7045:: with SMTP id
+	h5-v6mr17283767plt.217.1520349493713; 
+	Tue, 06 Mar 2018 07:18:13 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:19f8:73b2:93e:af3a])
-	by smtp.gmail.com with ESMTPSA id z4sm23817068pgb.4.2018.03.06.07.18.11
+	by smtp.gmail.com with ESMTPSA id z4sm23817068pgb.4.2018.03.06.07.18.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 06 Mar 2018 07:18:12 -0800 (PST)
+	Tue, 06 Mar 2018 07:18:13 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2018 07:18:08 -0800
-Message-Id: <1520349489-9063-2-git-send-email-akuster808@gmail.com>
+Date: Tue,  6 Mar 2018 07:18:09 -0800
+Message-Id: <1520349489-9063-3-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1520349489-9063-1-git-send-email-akuster808@gmail.com>
 References: <1520349489-9063-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 2/3] meta-gnome: layer.conf remove gtk depends
+Subject: [meta-oe][PATCH 3/3] usermode: require pam in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +59,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2018 15:18:11 -0000
-
-commit ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
-removed gnome-disk-utility so AVAHI_GTK_pn-avahi-ui = "gtk gtk3"
-is no longer needed
+X-List-Received-Date: Tue, 06 Mar 2018 15:18:12 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/conf/layer.conf | 2 --
- 1 file changed, 2 deletions(-)
+ meta-gnome/recipes-support/usermode/usermode_1.111.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index a138818..fb89c14 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -13,5 +13,3 @@ BBFILE_PRIORITY_gnome-layer = "7"
- LAYERVERSION_gnome-layer = "1"
+diff --git a/meta-gnome/recipes-support/usermode/usermode_1.111.bb b/meta-gnome/recipes-support/usermode/usermode_1.111.bb
+index c2d7328..0f88040 100644
+--- a/meta-gnome/recipes-support/usermode/usermode_1.111.bb
++++ b/meta-gnome/recipes-support/usermode/usermode_1.111.bb
+@@ -23,7 +23,8 @@ SRC_URI[sha256sum] = "3dd0b9639b5bd396b7ea5fada6aaa694dbfdaa3ad06eb95a6eabcdfd02
  
- LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
--
--AVAHI_GTK_pn-avahi-ui = "gtk gtk3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-inherit autotools gettext pkgconfig
++inherit distro_features_check autotools gettext pkgconfig
+ 
+ EXTRA_OEMAKE += "INSTALL='install -p'"
+ 
++REQUIRED_DISTRO_FEATURES = "pam"
 -- 
 2.7.4
 
