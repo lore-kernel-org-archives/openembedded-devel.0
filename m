@@ -1,58 +1,47 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id B131A78A4F
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 84E0B78A6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 15:14:35 +0000 (UTC)
-Received: by mail-pg0-f46.google.com with SMTP id r26so8364025pgv.13
+	Tue,  6 Mar 2018 15:18:09 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id y26so8377970pgv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2018 07:14:37 -0800 (PST)
+	Tue, 06 Mar 2018 07:18:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=jAGckw0hYik/q50+Q1gp+ozy69RMhUVydXRSINADPvg=;
-	b=sBVjE6V6YYFIKnfB4/a/FN2H6MG/BGw2WgU11DMH4N3SscFc5r8HOZeyC5IHIkbksG
-	oEDqh2t49GfBkp9Am+Y0g/hIiDxDiu6PmkIl8vAFmKY3m6I7XtT7QtquCPv4/tjeWyTs
-	X8fHukXc9nPfbZEyG2JW2rQmQGlYi+vGux0o5r5WZaovy8YnuWnYAlvAzSJAGBXHn3q9
-	RyZMHzh28Zx0pVg1LXFCl9ovJeaB0R0trD6al6E5GTqj8V9zpgDjitV5hoJH9Yf7p2fJ
-	xgGpw+s/ZnW3+ZdPztUYkVjmmKGLvLYngVlW62QYLH8KvvARuWsfvyPL06xjmLsRqhBq
-	GgXw==
+	h=from:to:subject:date:message-id;
+	bh=ASGE+n2BYSym0Jo1c7ZSPYbLZGJ7MqsegX8EhJHIMIw=;
+	b=Cy4nY72Y3yw1h+TeXECROJyI3wC8tBTpEXPrOQM2CDqnfpGgIeLqhDrLwIoRC1kllj
+	RplYUL3JfZR9lPiYndGU6CHp0exBCQtoJ/62MTBJuYtFKchTczua4V2Fh9MOAymKLxWL
+	2j237iKMcewMAtFglE0azpp0lnIeT2ufI1N710Yz6SYQpIWfbkab7NzXYm4fNCOBuRh2
+	5Hk6fabU0cbp2D8jdbtgL76QbtuJFAp+n4UhBkmMXtaEWp+2CHaW9xMpHCLewOv8Ht24
+	kHThPfb4S7lahyFBavxITlXloHlH2hFA5kDFUVpVKuQjWDQp9Z3WXbTDqjxDMi97xC0D
+	TunA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=jAGckw0hYik/q50+Q1gp+ozy69RMhUVydXRSINADPvg=;
-	b=udWjJ9dhsZhxtWQGhhkeNnsWzs4fN0bS2yPPISCdqdA+zmgJO7bZpvGapAtPUoNdHC
-	L5SOPh3jSjuoVWQ2GC27SspdyDPntYqHS49Gcbh5UeEQWcEL0o9q8wNYFR4lcwUVyoGt
-	/kzJUV9KLwPjYVXJZYcoOwl7dlshQz3Zs18EtJ9xNJK7wMmJ0wUe4e7naA3vNahq40JY
-	qXa2tP9z52zNJ84czEGm5otvyNbwpeEug1/xxyO1wiaTmjPxUzl4F8JV3aQ2peCXa9zB
-	g3HN+C7VLw3AYTRT/WNBn2rol4TWeOMGnvCsX0dkoo5guYCNzcbsVTJjaj/HVjurKM4c
-	aZpA==
-X-Gm-Message-State: APf1xPD8YTnY1x62Sd5vkpfriiIRbAI/Mvqg2pqRYeW9WQKFK/z1ykiU
-	qkOPIOnfWsQDzQGZNs3GxIXnxw==
-X-Google-Smtp-Source: AG47ELuUNawT1MxC3sCunNlb5ERg7pzDK3v3Jj6Kp16jdrVkRbs0my19/aDHs+q8+FNaUb0u6H5ibw==
-X-Received: by 10.101.71.202 with SMTP id f10mr15120178pgs.91.1520349275316;
-	Tue, 06 Mar 2018 07:14:35 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:19f8:73b2:93e:af3a?
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=ASGE+n2BYSym0Jo1c7ZSPYbLZGJ7MqsegX8EhJHIMIw=;
+	b=XGMey4Rwbh6fu7iQ2zL+Fv1EQRJOgj/vdKriPlwUWghQH9Yy4sfj9QLLzydA5KdUyh
+	4o2TrA3gWD/tTgCRhmJPNnYLCNs9edeZxyaKI4uMxlv7/DKo8XV/wj82evePXPg8HAuT
+	PW0QvTKQ4WNejSiv0FWSqsK63fLH52iiTbHUd8iGNPqUQOx2thl8ezxjY9Lj4eht50K3
+	+o1wsNc4a9D3OrxyJodMs9DGlLWfwKqjEtV4Atai1dHY1SabiBHjVGCO9k71X0iTGYR1
+	KyYuM7jSLTb0CzZFZmiIWdYuhxQvxLX9xXfO3+490Gi5Yr1XDvRQDe1QK/Nt6ZQgvqEE
+	PDRQ==
+X-Gm-Message-State: APf1xPAjkezZHlE6o5DNnDKMpeM/GWOMHt+xgecM1JFftspbK+tQsubI
+	8/mVZ7qqCPOiOGfewMPQIXs=
+X-Google-Smtp-Source: AG47ELvSyRHtpredM8Nf5gbggaSVvD37OvqeBmMVPTbKrcm71zHAr3KRiWOri69NSEMicHXXpU4OTQ==
+X-Received: by 10.99.115.73 with SMTP id d9mr15922086pgn.354.1520349491601;
+	Tue, 06 Mar 2018 07:18:11 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:19f8:73b2:93e:af3a])
-	by smtp.gmail.com with ESMTPSA id
-	a138sm30631344pfd.47.2018.03.06.07.14.34
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Mar 2018 07:14:34 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1520301312-29879-1-git-send-email-akuster808@gmail.com>
-	<1520301312-29879-2-git-send-email-akuster808@gmail.com>
-	<CA+chaQdRsH54+GBVbW_FmaVoBz0Ry=CORNi5-uzy-gnBDHN3gg@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <0431b9be-ba51-3581-b5ca-7cc8a0884cd7@gmail.com>
-Date: Tue, 6 Mar 2018 07:14:33 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQdRsH54+GBVbW_FmaVoBz0Ry=CORNi5-uzy-gnBDHN3gg@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "akuster@mvista" <akuster@mvista.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/4] xorgxrdp: require x11 and pam in DISTRO_FEATURES
+	by smtp.gmail.com with ESMTPSA id z4sm23817068pgb.4.2018.03.06.07.18.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 06 Mar 2018 07:18:11 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Mar 2018 07:18:07 -0800
+Message-Id: <1520349489-9063-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/3] glade3: move from oe to gnome layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,77 +54,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2018 15:14:35 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 06 Mar 2018 15:18:10 -0000
 
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch       | 0
+ .../glade/glade3/0001-gnome-doc-utils.make-sysrooted-pkg-config.patch   | 0
+ .../recipes-devtools/glade/glade3/0002-fix-gcc-6-build.patch            | 0
+ meta-gnome/recipes-devtools/glade/glade3_%.bbappend                     | 1 -
+ {meta-oe => meta-gnome}/recipes-devtools/glade/glade3_3.8.5.bb          | 2 +-
+ 5 files changed, 1 insertion(+), 2 deletions(-)
+ rename {meta-oe => meta-gnome}/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch (100%)
+ rename {meta-oe => meta-gnome}/recipes-devtools/glade/glade3/0001-gnome-doc-utils.make-sysrooted-pkg-config.patch (100%)
+ rename {meta-oe => meta-gnome}/recipes-devtools/glade/glade3/0002-fix-gcc-6-build.patch (100%)
+ delete mode 100644 meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+ rename {meta-oe => meta-gnome}/recipes-devtools/glade/glade3_3.8.5.bb (97%)
 
-
-On 03/06/2018 01:16 AM, Martin Jansa wrote:
-> Duplicates:
-> https://patchwork.openembedded.org/patch/147412/
-> +
-> https://patchwork.openembedded.org/patch/148545/
->
-> But ok.
->
-> BTW: The first one is "StateMaster Next, archived", but it isn't in:
-> http://git.openembedded.org/openembedded-core/log/?h=master-next
-> something might be a bit off with your scripts.
-Go them this time. I had to apply them to master first then cherry pick
-to the stagging/master-next
-
-- armin
->
-> Regards,
->
-> On Tue, Mar 6, 2018 at 2:55 AM, Armin Kuster <akuster808@gmail.com
-> <mailto:akuster808@gmail.com>> wrote:
->
->     Signed-off-by: Armin Kuster <akuster808@gmail.com
->     <mailto:akuster808@gmail.com>>
->     ---
->      meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
->     <http://xorgxrdp_0.2.5.bb> | 4 +++-
->      1 file changed, 3 insertions(+), 1 deletion(-)
->
->     diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
->     <http://xorgxrdp_0.2.5.bb>
->     b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
->     <http://xorgxrdp_0.2.5.bb>
->     index 0c779b5..e86ebb5 100644
->     --- a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
->     <http://xorgxrdp_0.2.5.bb>
->     +++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
->     <http://xorgxrdp_0.2.5.bb>
->     @@ -4,10 +4,12 @@ LICENSE = "X11"
->      LIC_FILES_CHKSUM =
->     "file://COPYING;md5=a2523660329fdca3d954c0a87390e007 \
->      "
->
->     -inherit autotools pkgconfig
->     +inherit distro_features_check autotools pkgconfig
->
->      DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
->
->     +REQUIRED_DISTRO_FEATURES = "x11 pam"
->     +
->      SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git
->     <http://github.com/neutrinolabs/xorgxrdp.git> \
->                 "
->
->     --
->     2.7.4
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
+diff --git a/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch b/meta-gnome/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
+rename to meta-gnome/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
+diff --git a/meta-oe/recipes-devtools/glade/glade3/0001-gnome-doc-utils.make-sysrooted-pkg-config.patch b/meta-gnome/recipes-devtools/glade/glade3/0001-gnome-doc-utils.make-sysrooted-pkg-config.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/glade/glade3/0001-gnome-doc-utils.make-sysrooted-pkg-config.patch
+rename to meta-gnome/recipes-devtools/glade/glade3/0001-gnome-doc-utils.make-sysrooted-pkg-config.patch
+diff --git a/meta-oe/recipes-devtools/glade/glade3/0002-fix-gcc-6-build.patch b/meta-gnome/recipes-devtools/glade/glade3/0002-fix-gcc-6-build.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/glade/glade3/0002-fix-gcc-6-build.patch
+rename to meta-gnome/recipes-devtools/glade/glade3/0002-fix-gcc-6-build.patch
+diff --git a/meta-gnome/recipes-devtools/glade/glade3_%.bbappend b/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+deleted file mode 100644
+index 3abacfb..0000000
+--- a/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
++++ /dev/null
+@@ -1 +0,0 @@
+-PACKAGECONFIG ??= "gnome"
+diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb b/meta-gnome/recipes-devtools/glade/glade3_3.8.5.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
+rename to meta-gnome/recipes-devtools/glade/glade3_3.8.5.bb
+index c4f6000..69162bd 100644
+--- a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
++++ b/meta-gnome/recipes-devtools/glade/glade3_3.8.5.bb
+@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e29304f778b
+ 
+ EXTRA_OECONF += "--disable-scrollkeeper"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ?= "gnome"
+ PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
+ 
+ FILES_${PN} += "${datadir}/icons"
+-- 
+2.7.4
 
 
