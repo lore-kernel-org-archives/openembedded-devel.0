@@ -1,43 +1,38 @@
-Return-Path: <A.Baumfalk@astro-kom.de>
-X-Greylist: delayed 474 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 06 Mar 2018 12:43:27 UTC
-Received: from mailrelay-out1.netcologne.de (mailrelay-out1.netcologne.de
-	[81.173.193.131])
-	by mail.openembedded.org (Postfix) with ESMTP id F422478A44
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BE44678A5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 12:43:27 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailrelay-out1.netcologne.de (Postfix) with ESMTP id 7AA4110B408
+	Tue,  6 Mar 2018 12:50:53 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id c7so24362204qtn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 13:35:34 +0100 (CET)
-Received: from [213.196.222.82] (helo=mailrelay-out1.netcologne.de)
-	by localhost with ESMTP (eXpurgate 4.3.1)
-	(envelope-from <A.Baumfalk@astro-kom.de>)
-	id 5a9e8b16-5654-7f0000012729-7f000001e7a1-1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2018 13:35:34 +0100
-Received: from ASTRO-EX1.Bensberg.de (unknown [213.196.222.82])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailrelay-out1.netcologne.de (Postfix) with ESMTPS
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 13:35:34 +0100 (CET)
-Received: from [192.168.8.2] (192.168.100.114) by ASTRO-EX1.Bensberg.de
-	(192.168.100.26) with Microsoft SMTP Server (TLS) id 15.0.775.38;
-	Tue, 6 Mar 2018 13:35:27 +0100
-To: <openembedded-devel@lists.openembedded.org>
-From: Arno Baumfalk <a.baumfalk@astro-kom.de>
-Message-ID: <319a0294-5326-62d4-9cf6-16d6649a8fc4@astro-kom.de>
-Date: Tue, 6 Mar 2018 13:35:26 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-X-Originating-IP: [192.168.100.114]
-X-ClientProxiedBy: ASTRO-EX1.Bensberg.de (192.168.100.26) To
-	ASTRO-EX1.Bensberg.de (192.168.100.26)
-X-purgate-ID: 153929::1520339734-00005654-AAFA560F/0/0
-X-purgate: clean
-Subject: apache2 startup problem
+	Tue, 06 Mar 2018 04:50:55 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=F0DjVSCPnKQvRVVn83EJsSIYXqod1vMKZgqJRAc32F4=;
+	b=qMIoI/78ciuD8KEmwfomKbfeSFO81fG6tyWrmM7oD5bOBuL7H4gB7dvt/Sj4+heW7I
+	xmGkgygt73KN7B0LlchVfqO2Pv+bJRsbBxkmQd9YmFx6dqkbrb30xPgC/E6Grcypv+5J
+	0qLwJgzEjspPLGoYqldirEot8Q6qlIC6v5aNkflwjnIYQ34WlQSBYRa6F7Pl73epFXnB
+	iCmljqWnfPWS01k4dJkrJg+/s0ISSErEL3q/7bhzHtl/P85EAbhAkWm32L4KiF26MK2O
+	vaS24S9SvdqRPPAs2M+uzB4LIjD3dmET7fa13NfNiYCTIeIWesariG71jP/6qOmsV491
+	qRoA==
+X-Gm-Message-State: AElRT7EGPBu6pkGGgqRFP+OrgbvM1Qba3LgoXRlv8TxTOM+p9K8ZgJ9t
+	OuwDk4Z9Wj0PqevGdTl3AqEnDOQX
+X-Google-Smtp-Source: AG47ELtmlY3IGUuLY7rtgz4QeI4xlWjorFghl9t1DAxA2EJi3bi6OciOGfX7hRM40J2UrTEUiehy1Q==
+X-Received: by 10.200.48.13 with SMTP id f13mr28552316qte.140.1520340654648;
+	Tue, 06 Mar 2018 04:50:54 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	f134sm9255600qke.78.2018.03.06.04.50.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 06 Mar 2018 04:50:53 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Mar 2018 07:50:08 -0500
+Message-Id: <1520340608-30412-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-jsonschema: remove unneeded depends on python3-misc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,35 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2018 12:43:28 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: de-DE
+X-List-Received-Date: Tue, 06 Mar 2018 12:50:54 -0000
 
-Hi,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-on my system, which is based on the pyro-brances of poky and 
-meta-openembedded, I have the problem, that the apache2 webserver does 
-not start.
-The reason seems to be in the file 
-meta-oe/recipes-devtools/php/php/70_mod_php7.conf:
+diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb b/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
+index 5aaee68..9269907 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
+@@ -1,6 +1,2 @@
+ inherit pypi setuptools3
+ require python-jsonschema.inc
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-misc \
+-"
+-- 
+2.7.4
 
-LoadModule php7_module lib/apache2/modules/libphp7.so
-
-<FilesMatch "\.ph(p[2-7]?|tml)$">
-     SetHandler application/x-httpd-php
-</FilesMatch>
-
-<FilesMatch "\.phps$">
-     SetHandler application/x-httpd-php-source
-</FilesMatch>
-
-When checking the apache2 configuration, I get following error message:
-
-$> /usr/sbin/apachectl configtest
-AH00526: Syntax error on line 7 of /etc/apache2/modules.d/70_mod_php7.conf:
-Multiple <FilesMatch> arguments not (yet) supported.
-
-Can somebody help?
-Arno
 
