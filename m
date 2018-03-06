@@ -1,52 +1,44 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E1F078A6F
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
+	[209.85.161.178])
+	by mail.openembedded.org (Postfix) with ESMTP id B76E6789F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Mar 2018 15:18:12 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id w12-v6so289056plp.4
+	Tue,  6 Mar 2018 17:23:52 +0000 (UTC)
+Received: by mail-yw0-f178.google.com with SMTP id q184so7192002ywh.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2018 07:18:13 -0800 (PST)
+	Tue, 06 Mar 2018 09:23:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=gDqFtBVtqa/lBo+8Z+7NEGzMChHMK95CYLEDW/VTLZo=;
-	b=m+1ZtuDcZ4eLdqCszigf3dLQ3vxhjzqKmOIUz/7Ma3NAsSIvTYFhqgtSPSkOxZPtUt
-	lNrBC7RRLY7DpcwXSyl9/qM8C9vYTy6man36pDM+l0SqG9JDkzyWBzKEVC4tRPWW37Pe
-	rh/1cS5FaR0u5tybSCqxPzeyXCRS9anmVGS5R7If9nM8mhOujAHAt8LTmj0s3s6EBewv
-	QiTEPNGXiBPkwBc5DbruAEaL4MWDiNO+XVcrzN4HHWfGr5v3caOhXanbPe5HZGzoUeeq
-	pxj3ACltmQX7cxxFY4m1sLKb8qR+jIrqr+YZJJ/6BUysP9dqU+uIEXa3CACAcX6mN3NQ
-	9GTg==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Pec3EP2vJdOBDgXYAWf8ItoSM0ugjFcjLVRFyi7Sy0o=;
+	b=fvjXHt+TK/xQEsO89ustv8wfgx7J/WJSY5nUGzE3Iqm05f5QdQ/Q5ZxD37Hswy692+
+	HtcMwOn02AaZwWXbJbFa6lkVLc+gYTr+Q8MBVdcyq+FUSQRLi+XA9Ni7046cqsjLC+X8
+	GpthnXBkkpAqACWV1OVlWzcBn++GGh4xmmMevlcsCoRez7ASEXJ2+Mxve5iGgLcOZc63
+	GT9ClH1BY6TPtX5Qg7zmav9Tbkx9ZOV/TY2vXU+Hmv/+MjIfXAy+SaXtJ0aJ1UgJwpJm
+	EW6+wBCNL7yXEJghFuJ66L6xS06BS9Mkwx0oHVsbpvELIrggJYe1SbCzxCU9wl4BpwF1
+	Iotw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=gDqFtBVtqa/lBo+8Z+7NEGzMChHMK95CYLEDW/VTLZo=;
-	b=dXBOzGGiJJ5ApP5Q19n888YmtGcDqj1stWb5P8OvPSfp2SUHUOXVHC5AfPOVguL4Bs
-	fnXbXyXXqirQiLQn43fm5XD8/CoFrA/54KjRxO5mZyCjlvU2AaIQ273e7RL41Ba6aS47
-	/17MS+G5LX78tc5wAgiV1OBLL49Up/2Ehl5PVageI5onJUL+2bkynC6gfegMI2D55ltv
-	dEW3uyUf1XVoOfpCMGs/zEyLIk5R4q4+cr8A7qy4JnleDf+7nwBz0BdCqPk06Gi9bwVs
-	IIkUapUNDMlE+SLoZSbTRCucHDEQndadd6upj3RUsooDJfgnaFPuY8Q7mx7GyVBR9FlF
-	2r+g==
-X-Gm-Message-State: APf1xPCsC4SalzOfWz56wF/6PTc41DrdNO6bUhB3hgyPJhu2pwRJVF+0
-	s+/zm5WAR1/RoeOEfrzSQPpPDQ==
-X-Google-Smtp-Source: AG47ELtjTgNHhLEEH30Nf5KGPE8O9F7vNIAQV/Z3fDDQHNKcKZcgbT0/Rdq4FAbU9mh/a/dI+VsNKA==
-X-Received: by 2002:a17:902:7045:: with SMTP id
-	h5-v6mr17283767plt.217.1520349493713; 
-	Tue, 06 Mar 2018 07:18:13 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4000:1184:19f8:73b2:93e:af3a])
-	by smtp.gmail.com with ESMTPSA id z4sm23817068pgb.4.2018.03.06.07.18.12
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 06 Mar 2018 07:18:13 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2018 07:18:09 -0800
-Message-Id: <1520349489-9063-3-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1520349489-9063-1-git-send-email-akuster808@gmail.com>
-References: <1520349489-9063-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 3/3] usermode: require pam in DISTRO_FEATURES
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Pec3EP2vJdOBDgXYAWf8ItoSM0ugjFcjLVRFyi7Sy0o=;
+	b=k66nEcb9o085lY3oZOxGVTwVB67plwmZ9pbNK4FxfH+RV8tk4EJzYupxVvldAEL897
+	EHfuR37B/MmMP14wE23BWd/37gxl//4kr1wT2CzrTCYfJBP/OO8/RBiiTBIL6VkmnQVT
+	C0UsvegPNA/r3QpvzE1u/a0jUdmcFrnHnT6/qWIfdsOu7T+iivv8IR12fDyp44d52DY4
+	mVR5EMONJFKd36pcMR/NOl4S+Tbgnn71M3fEQmc6Le/6+lLRdH2xs0OdDKYd+ZDeTAao
+	GmRwmRsp/azKgKEVu0TyExRW9pimUbYsmxZLR+9gmR326Y96c2H4liYwGmN/7L+MRIsM
+	AZJw==
+X-Gm-Message-State: AElRT7HnFLv+MB2tvtn7cGcJsn7arSj8AgitGi0eifHAEOsyLJNk8kZU
+	7XHUf5zKVbDqdJm6NSC1a9QV1u4wCRO18QgzEzg=
+X-Google-Smtp-Source: AG47ELulFaObT6qwme63pHc+2KqCjsvgveZV/S8l4818a85j+p25dijt3nbuMNDHQ8ghcUz7RuGzXbU/Mys2FhPu1og=
+X-Received: by 10.129.178.198 with SMTP id q189mr1945986ywh.272.1520357033545; 
+	Tue, 06 Mar 2018 09:23:53 -0800 (PST)
+MIME-Version: 1.0
+From: Adam Lee <adam.yh.lee@gmail.com>
+Date: Tue, 06 Mar 2018 17:23:42 +0000
+Message-ID: <CAFeBWL6QUQZR-+YyMta6Nfu0qiDnCYoWqRQqRphgLnMQn2KF7w@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5] Has anyone been able to run minimal-qml (or any Wayland) example?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,28 +51,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Mar 2018 15:18:12 -0000
+X-List-Received-Date: Tue, 06 Mar 2018 17:23:52 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-gnome/recipes-support/usermode/usermode_1.111.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+I'd like to try out a Wayland example [1]. It can be found in
+"/usr/share/qt5/examples/wayland".
+Unfortunately I have not been able to run it on Rocko with AM57xx EVM from
+TI.
+Has anyone successfully ran this example application at all..? I just want
+to be sure that there is a working example somewhere out there.
 
-diff --git a/meta-gnome/recipes-support/usermode/usermode_1.111.bb b/meta-gnome/recipes-support/usermode/usermode_1.111.bb
-index c2d7328..0f88040 100644
---- a/meta-gnome/recipes-support/usermode/usermode_1.111.bb
-+++ b/meta-gnome/recipes-support/usermode/usermode_1.111.bb
-@@ -23,7 +23,8 @@ SRC_URI[sha256sum] = "3dd0b9639b5bd396b7ea5fada6aaa694dbfdaa3ad06eb95a6eabcdfd02
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
--inherit autotools gettext pkgconfig
-+inherit distro_features_check autotools gettext pkgconfig
- 
- EXTRA_OEMAKE += "INSTALL='install -p'"
- 
-+REQUIRED_DISTRO_FEATURES = "pam"
--- 
-2.7.4
-
+[1] https://doc.qt.io/qt-5.10/qtwaylandcompositor-examples.html
 
