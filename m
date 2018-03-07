@@ -1,58 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CF68600B3
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B15878A12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:00:43 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id y26so1236969pgv.4
+	Wed,  7 Mar 2018 19:01:15 +0000 (UTC)
+Received: by mail-pf0-f177.google.com with SMTP id a16so1308728pfn.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:00:45 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=gC0pGAhe4O5QeMNymft1rpej1lbatDxoNWxoFXrxD6I=;
-	b=hetQTIY/CLisdDRFAbL3xK3PqKMfMVQN/k+Yf45Q/3OdwfbW1laxJlX/wjQ1N3m4p+
-	c6P+VkHcNCuoCDcLuvDq9c/wrpWp9pwiagH2fpVxkEzZ38a1Et8VuTP/Jsa0qjDLZPSu
-	mp7bxdVcVnUmQA0jXW9bYIa4S2sHxR1CbrEyEayCIs+4H3V9w30LUeFBUFK5OPbDmBNK
-	cq5Dtmsi5ljqX/LrRAU2ewF3DutS4EetCUNLP9xcOoANEymOdPdaGlcMEOIoHNZMyYmj
-	fr2RmPSL/8ovi15bHBp+SKCe63GMnjQKEh4RuBcIARNq+Wg5oXTW0VK6Z5ORclHHnSHk
-	X+pw==
+	h=from:to:subject:date:message-id;
+	bh=EBRtrtB51KTNFmhWOU+8z3Ccx3gPJoa0YAmldDCYYjo=;
+	b=Jez8Z+k0PmQ3IbL98mgvrmOpaoL67g+X900U7vBcztSrZBIm8a1HqQfPW0tNJ3ps8m
+	3aPlkSFFh87zRWL7nC6uvCNNrwZIOZoeAyGXpc+k7T+NkuU8NVMryY5/auuutK1NmPkB
+	KnOALiE5HVphDw4zEp/5IKpUENnalIspG0vblGjZN90oli1EmPee8ZH5bFlTNNPSe9rp
+	GEh/4aieDi/JK47+OuIzCN2boLP37zCimMIj6OOpuFc+78NT184aaHei8UxPNesSUKWF
+	bW31BK+YH+5JYAZCnzPb2px81wamjYqLJkB54/hEG1Hi2vNgI74TU+KG8pwjJdmXgegu
+	TzuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=gC0pGAhe4O5QeMNymft1rpej1lbatDxoNWxoFXrxD6I=;
-	b=eC1wwP8wnWPrExWSDHvvx25s+zMdyd18po57H226JUpQ0VJd2ZuTntXyRu7dIe6Na3
-	uDHyDrr2XlkXGJuBqzLrtZaBR++nf8pl2/p/RyrRFeeyxzsSI+9Kes5cPQ2xtHIyIYXr
-	KJb3yk866tO4BHGv4/NMb3aNibcCaDVQa6/6Avfux1LaACVlq07StV4TiXxwxRRh+vLv
-	v20TBmhQqpQhOJMVloPKAyxk8V9wZxC+8PHNO4ykEEpNNTKDR5NY55ZjmLxDb6KUv4ND
-	sIMLS7ZZ1EXfhWB/fBba6iJ56VLKSKGwmNn7UxlAX1FyXOmUtcDmcLi5RNqMh1X6F1nD
-	7tLw==
-X-Gm-Message-State: APf1xPAKllOzKP/d0Hxha3ttea4Cm6M6cDjeDMkGEWNLQjUXFTnibYxI
-	rE7kFblvs6m4Oa0wrrq3503v8Q==
-X-Google-Smtp-Source: AG47ELutZFihyNuXWYtI+cKNdmrvhuA6mEUTVOj7NEnnqjKyz91FmlxJ2HLOkZ0EB8o3En342qnMjg==
-X-Received: by 10.101.65.5 with SMTP id w5mr18955392pgp.214.1520449244420;
-	Wed, 07 Mar 2018 11:00:44 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:6d76:b853:98d2:431c?
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=EBRtrtB51KTNFmhWOU+8z3Ccx3gPJoa0YAmldDCYYjo=;
+	b=fUSrLHc4vz1xNPqoubBR1FHAb+muC9QZfxqE7lgGm6bzx4Yks39yYW7e6srgcAtw4o
+	PEUtVUohjOX3jgOUQxVo0xGhYb6Rvj+wV3g5lUwLJNvOJI1PlLE3OmFLSHyeE4CoWi5T
+	8wG4UlCBdWgWbTC+bPYSpDC3/Tq2C52g0Pzoq0ZJ7hBxcznLjH/PcGqqGPxzL2qaplaW
+	qas1i4XQoOxtZy/FxT3fQrKlQ+E1SBIPsGoqvM4ViSaUo8s43Z9VFRe4y8UplG2OhP+9
+	PahykIttBeXjd97y1k+mtw1waIJdvDbatcIqpoksckFQ6ocEme1zBaC+3nSLPUGtZTsD
+	wrsg==
+X-Gm-Message-State: APf1xPAD+n5eP4eO6zQNEJjLpdqNtvptL6B/hukjcqpmD8iKeORL4tpJ
+	YZvhPhBBDQbO9qF4u/sISRYH5A==
+X-Google-Smtp-Source: AG47ELvsQclOqnts1tqyUyPDqscNjBawoJWYUWlHXlP0aLwh0E8VAxEXBUcHwaRTLpwiwV+XgY4zRg==
+X-Received: by 10.101.98.17 with SMTP id d17mr19074174pgv.221.1520449277186;
+	Wed, 07 Mar 2018 11:01:17 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	q66sm36364785pfi.95.2018.03.07.11.00.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 Mar 2018 11:00:43 -0800 (PST)
-To: "Bach, Pascal" <pascal.bach@siemens.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
-	<1519594406-24490-32-git-send-email-akuster808@gmail.com>
-	<355BE46A91031048906B695426A8D8E61733E141@DEFTHW99EH4MSX.ww902.siemens.net>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <4e31641e-29b1-b4a3-e0ec-4dff8fc5ad5d@gmail.com>
-Date: Wed, 7 Mar 2018 11:00:42 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-In-Reply-To: <355BE46A91031048906B695426A8D8E61733E141@DEFTHW99EH4MSX.ww902.siemens.net>
-Subject: Re: [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
+	s67sm36835461pfg.104.2018.03.07.11.01.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 07 Mar 2018 11:01:16 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Mar 2018 11:00:53 -0800
+Message-Id: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-gnome][PATCH 01/23] santiy-meta-gnome: add class for bbappend files checking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,54 +56,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:00:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 07 Mar 2018 19:01:16 -0000
 
+Idea taken from meta-virt
 
+Add a new class, sanity-meta-gnome.bbclass, to check for whether necessary
+settings are available for bbappend files in this layer to be effective,
+and warn users if not.
 
-On 03/05/2018 04:44 AM, Bach, Pascal wrote:
-> Hi Armin
->
-> Why was this moved to recipes-bsp? I don't see the relation.
-Hmm, don't recall how I came to that conclusion. recipes-dbs better?
-> The same question is why leveldb was moved to recipes-security?
-same response as above.
->
-> What did I miss?
-you didn't. Thanks for query.
+In addition, a variable SKIP_SANITY_BBAPPEND_CHECK is added to enable users
+to explicitly skip the checking to avoid unwanted warnings.
 
-- armin
->
-> Pascal
->
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
->> Behalf Of Armin Kuster
->> Sent: Sonntag, 25. Februar 2018 22:33
->> To: openembedded-devel@lists.openembedded.org
->> Subject: [oe] [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
->>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>  meta-oe/{recipes-extended => recipes-bsp}/rocksdb/rocksdb_git.bb | 0
->>  1 file changed, 0 insertions(+), 0 deletions(-)  rename meta-oe/{recipes-
->> extended => recipes-bsp}/rocksdb/rocksdb_git.bb (100%)
->>
->> diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb b/meta-
->> oe/recipes-bsp/rocksdb/rocksdb_git.bb
->> similarity index 100%
->> rename from meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
->> rename to meta-oe/recipes-bsp/rocksdb/rocksdb_git.bb
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-gnome/README                            | 23 +++++++++++++++++++++++
+ meta-gnome/classes/sanity-meta-gnome.bbclass | 10 ++++++++++
+ meta-gnome/conf/layer.conf                   |  4 ++++
+ 3 files changed, 37 insertions(+)
+ create mode 100644 meta-gnome/classes/sanity-meta-gnome.bbclass
+
+diff --git a/meta-gnome/README b/meta-gnome/README
+index 0c4fbd2..ef3a6f3 100644
+--- a/meta-gnome/README
++++ b/meta-gnome/README
+@@ -1,3 +1,25 @@
++meta-gnome
++===========
++
++The recipe in this layer needs to have 'x11' in DISTRO_FEATURES 
++to have effect. To enable them, add in configuration file the following line.
++
++  DISTRO_FEATURES_append = " x11"
++
++If meta-gnome is included, but x11 is not enabled as a
++distro feature a warning is printed at parse time:
++
++    You have included the meta-gnome layer, but
++    'x11' has not been enabled in your DISTRO_FEATURES.
++
++If you know what you are doing, this warning can be disabled by setting the following
++variable in your configuration:
++
++  SKIP_META_VIRT_SANITY_CHECK = 1
++
++
++Dependencies
++------------
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+@@ -14,3 +36,4 @@ When sending single patches, please using something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
+ 
+ Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
++
+diff --git a/meta-gnome/classes/sanity-meta-gnome.bbclass b/meta-gnome/classes/sanity-meta-gnome.bbclass
+new file mode 100644
+index 0000000..331ea19
+--- /dev/null
++++ b/meta-gnome/classes/sanity-meta-gnome.bbclass
+@@ -0,0 +1,10 @@
++addhandler gnome_bbappend_distrocheck
++gnome_bbappend_distrocheck[eventmask] = "bb.event.SanityCheck"
++python gnome_bbappend_distrocheck() {
++    skip_check = e.data.getVar('SKIP_META_GNOME_SANITY_CHECK') == "1"
++    if 'x11' not in e.data.getVar('DISTRO_FEATURES').split() and not skip_check:
++        bb.warn("You have included the meta-gnome layer, but \
++'x11' has not been enabled in your DISTRO_FEATURES. Some bbappend files \
++may not take effect. See the meta-gnome README for details on enabling \
++meta-gnome support.")
++}
+diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+index fb89c14..37215a7 100644
+--- a/meta-gnome/conf/layer.conf
++++ b/meta-gnome/conf/layer.conf
+@@ -13,3 +13,7 @@ BBFILE_PRIORITY_gnome-layer = "7"
+ LAYERVERSION_gnome-layer = "1"
+ 
+ LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
++
++# Sanity check for meta-gnome layer.
++# Setting SKIP_META_GNOME_SANITY_CHECK to "1" would skip the bbappend files check.
++INHERIT += "sanity-meta-gnome"
+-- 
+2.7.4
 
 
