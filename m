@@ -1,50 +1,53 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
 	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A970D78694
+	by mail.openembedded.org (Postfix) with ESMTP id 38DBA78694
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 04:03:28 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id w22-v6so635468pll.2
+	Wed,  7 Mar 2018 04:03:29 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id w12-v6so632235plp.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Mar 2018 20:03:30 -0800 (PST)
+	Tue, 06 Mar 2018 20:03:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=mq0rOvphiBH02NmObQyxGKA1jPWpwfzHvGGEslGv2ZI=;
-	b=P2WTvpHgiKI9GmYbEwYuHgGTXebaIZwZSX17KVsfYU9lQxW8gX4P9FL8hNE2IMjiMe
-	H72Uj6izdXPkjb0va8iqPZkK9JGlE5WRmkAjeHy0dH83IqDYpL18vhSbxJLLsx1jrfBh
-	knIpo2fPYQQNi590iM66Nr10dliiVgzoFgOppSU/QIU3KU9gtgfAGB2RxsS55hg5LuZ3
-	1jOT5+wVq9TDEZzqa4tTSn2DEkTTk0iTk33QksCvQQcrAVkZliKJJ0qnHpWpZi5T30FD
-	yLgc0PTqbfE2dcSIpgD3aG1l8Mps5ZZ1rC8HD6+wqxzDRYRuYclejWn8fj31iKOfftN1
-	5C+w==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=4Q/2Z3xcbq14C32Cocmlov2UQkynYd4h4rQfzhoO5BQ=;
+	b=A564ty729pND7LnwvV/0QcjtQYo1o8DC4aTIotEGp7/3Yqw/nezaGfcLk66+Y2i8ws
+	UzoWL3pJvHUSFsxRQJGx0cvOii8zJE/LAlB0oYwhV5+K5pDFkT0dY8q9vivhQUgHhBYV
+	yhLA5KNqiAZ5yOj+qLtTwuh9dO/e0y+wpKbwLoRWqLB25Yqmy6FuRWrXj77q84kAmskN
+	hDE23HclUjAlcr+CckDClZitG8Ddyd94wN2xLDjEe9/7IHVqMOYdGwIlPRqbgmRF/V+V
+	w+uaECNx0mCclqliy+Uz7m68f3+JxKVt4svNKFBM01phhPZgIfZ+KManG+Ij9LKvZseA
+	5xxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=mq0rOvphiBH02NmObQyxGKA1jPWpwfzHvGGEslGv2ZI=;
-	b=BO331UtDMY3ULwju5VS0n8kPNryv2hEuuKqBoAbZ5PuD2ADgi+ahrjww6TaA8iAIhl
-	xjftoqVPSSccUp6PU7gAnSa1fADkMJjaJyEU3ov8Nalt6yqDL1u5HbMQFNlC4HvauPDp
-	Jv2Eyu5MdggJPQIUkcWpgqUDUmSK2LsW8ubtHCxAJUO8j4YLEytKa9eDPCfiF7paDR1J
-	V7WXoC/FethrnUyt+Ag0UOiu2eDGmgqWK0r7eXCQ4N57KqCeQxvjF+yq04nOXIp5ZYtc
-	aTgWi67MQE5wfclK6WHnAYcBnfLrcqeVZXhBeU7i83IOXQNRdRsLo45PFK+Ma+RKoDN9
-	dKnA==
-X-Gm-Message-State: APf1xPBhwBfITT81YjMcEjAFg+Pr6yssqOZ3eAa+KDdaq9zCQw84avrQ
-	ulmSJ0f7inHaSawpfVGq97U=
-X-Google-Smtp-Source: AG47ELvyPXeuqn0QvE7VV3MrImPyF36rz+AFA/wO/+hS9QZzhj4gzxKnuLSHXcLnL+b+YoZdP74fuA==
-X-Received: by 2002:a17:902:5596:: with SMTP id
-	g22-v6mr18438005pli.4.1520395409855; 
-	Tue, 06 Mar 2018 20:03:29 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=4Q/2Z3xcbq14C32Cocmlov2UQkynYd4h4rQfzhoO5BQ=;
+	b=kpRgB3hn4gX+xZ8KfrspWDVTlxiyNBsF+7liB9XAb/8j/ffxnJkrRg3OyAE05ClPz9
+	bL3tsc1TZ1wOQNANvruv6sUeQAJPGOjQa9UFav/dGdU/H3M7rUAMy4yLPca6wL48KyD7
+	aczkaK3XADpbw/HGXooURPXkkkyQkaTCTriMs45YDdf04ydt9xWj0U9zALKWLGsAPrB+
+	UsdY5f7nq2OLEKFW6+gDQ6nubsxlo1gaxDgoOzHa+XNDg5y2yFs2P9ZYXKeoGww38GbY
+	rPequundJTsAz9i5WW68oSdw9AKOfpU5tXCHUP8liibjx5cwYV7l+4rCDXRuAbPXmuV/
+	6pvg==
+X-Gm-Message-State: APf1xPB0S3ynD98eqhjnVgVkmHRbeYfI+kcyXJzRkcl+DqQNAN/OxvTX
+	7znqv+nt7TLJFrG3rNUJ3Pw=
+X-Google-Smtp-Source: AG47ELsHfqFKURp4blJfg96mQ6QrCBZ/KzRxcqrHytU8xSZGi3f+sJAelJJNoQ9nAkeM9WC6h9V2WA==
+X-Received: by 2002:a17:902:7045:: with SMTP id
+	h5-v6mr19159545plt.217.1520395410920; 
+	Tue, 06 Mar 2018 20:03:30 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
 	14sm30677152pga.53.2018.03.06.20.03.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 06 Mar 2018 20:03:29 -0800 (PST)
+	Tue, 06 Mar 2018 20:03:30 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Mar 2018 20:03:04 -0800
-Message-Id: <1520395408-19266-1-git-send-email-akuster808@gmail.com>
+Date: Tue,  6 Mar 2018 20:03:05 -0800
+Message-Id: <1520395408-19266-2-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH 01/25] vim: only include when x11 in DISTRO_FEATURES
+In-Reply-To: <1520395408-19266-1-git-send-email-akuster808@gmail.com>
+References: <1520395408-19266-1-git-send-email-akuster808@gmail.com>
+Subject: [meta-oe][PATCH 02/25] uim: add distro_features_check for x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,55 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 04:03:28 -0000
-
-fixes:
-
- vim:do_install: 6a98ed60a33e0915e83ddf4411cb98a4 -> fab6a8f9b3c3978de44b458939712d90
-      bitbake-diffsigs --task vim do_install --signature 6a98ed60a33e0915e83ddf4411cb98a4 fab6a8f9b3c3978de44b458939712d90
-      NOTE: Starting bitbake server...
-      basehash changed from 7302bf635913317779cf6e19324032a4 to 4a66ac61a894cf5b09db9afc053c77e6
-      Variable do_install value changed:
-      @@ -11,3 +11,7 @@
-
-           # we use --with-features=big as default
-           mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
-      +	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-      +	# drag make vim go into visual mode and there is no right click menu),
-      +	# delete the block.
-      +	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
+X-List-Received-Date: Wed, 07 Mar 2018 04:03:29 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-xfce/recipes-support/vim/vim_%.bbappend | 7 +------
- meta-xfce/recipes-support/vim/vim_xfce.inc   | 6 ++++++
- 2 files changed, 7 insertions(+), 6 deletions(-)
- create mode 100644 meta-xfce/recipes-support/vim/vim_xfce.inc
+ meta-oe/recipes-support/uim/uim_1.8.6.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-support/vim/vim_%.bbappend b/meta-xfce/recipes-support/vim/vim_%.bbappend
-index 25403e6..7b44963 100644
---- a/meta-xfce/recipes-support/vim/vim_%.bbappend
-+++ b/meta-xfce/recipes-support/vim/vim_%.bbappend
-@@ -1,6 +1 @@
--do_install_append() {
--	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
--	# drag make vim go into visual mode and there is no right click menu),
--	# delete the block.
--	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
--}
-+require ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '${BPN}_xfce.inc', '', d)}
-diff --git a/meta-xfce/recipes-support/vim/vim_xfce.inc b/meta-xfce/recipes-support/vim/vim_xfce.inc
-new file mode 100644
-index 0000000..25403e6
---- /dev/null
-+++ b/meta-xfce/recipes-support/vim/vim_xfce.inc
-@@ -0,0 +1,6 @@
-+do_install_append() {
-+	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
-+	# drag make vim go into visual mode and there is no right click menu),
-+	# delete the block.
-+	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
-+}
+diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+index 271718e..ec1b832 100644
+--- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
++++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+@@ -21,7 +21,10 @@ RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0 glibc-utils glibc-gconv-euc-jp
+ 
+ LEAD_SONAME = "libuim.so.1"
+ 
+-inherit autotools pkgconfig gettext qemu gtk-immodules-cache
++inherit distro_features_check autotools pkgconfig gettext qemu gtk-immodules-cache
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
+ GTKIMMODULES_PACKAGES = "uim-gtk2.0 uim-gtk3"
+ 
+ EXTRA_OECONF += "--disable-emacs \
 -- 
 2.7.4
 
