@@ -1,52 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7563478A87
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C1F678A79
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:41 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id h19so1300315pfd.12
+	Wed,  7 Mar 2018 19:01:42 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id i14so1240723pgv.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:01:43 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=K6iMHC0pmlIxDHcsJJUdIJdW4NmRJNcrFyFuUd5hD80=;
-	b=N6MfvfVitGT4sYeucuVtF85x6z8Ic5mhFYBjq07vCkq7EL9l4jkKDYtoXL3XpTCZ4p
-	scPA9IuFut8W3u8VVAHoFkGYWoxtxWZd6ttrRzuAIaq5N5b528ap4FrwM6/K+iTV8e5O
-	sRmJUxr1d6b3yiMauEYlLRatanXmo4af+aLLJEt7h2j4UvqJNiunj4kwPbNKplxekTa9
-	us2NOl1YyiYVCST0KOZGtRAPwuYdbsTMBKMk6ugceoo8jM3DJv5JcRvU6fz5b4xKAmrL
-	GoAO/YkTwZ/UfF2ibaurOhBushPYn1A7if643Q+YsxVKeHZ6Omt+mmObRPDYJQG/Kt14
-	tH3Q==
+	bh=bGsPPnXsnDWWD30hACJeKxgZJ3aadfH8MMroGHeHMm4=;
+	b=P0ksYmKs6HdCK0IvU9qfczYi3L5ILP4l7QND4VEtMgAWGt3eLJz2k0aRt/w8R2N94p
+	ZKY0cTacon8B580vPjRX247yZ3j+G9KkMZF2zeQfyBEbShNk5w1kWn8KiLmI5u1F3hIn
+	bh0nIbhStlbHwhDifAf1r6MfCoarx3vmDrKPfLECzPWePX44zv10+JzMGN2cig2CC0oq
+	w4TB+lq+RIqVUkUNOkrDjIp7BB1HxUDKG4/QgqFXz2Fr8xfz8ajMmP1t91sp98qUksEC
+	7bTKUe9mENPE9FdYjZYOd+RO/2uwSHAuzfI/lMA5wXNVn91Rx2S/VY0oKU7bY4ecu5py
+	9AkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=K6iMHC0pmlIxDHcsJJUdIJdW4NmRJNcrFyFuUd5hD80=;
-	b=V14fQmWnx59gPhAtwZjravcNHkotT6iI/us4cfksWIzEWTA4MBNeUwvDN+q4nRJeYg
-	WXjbnPbhJdSKERORTLVeMYlPkqPA8AVayZIp6WT1ePIW+4ArsCvx0MfJfwG7z3MbuJIO
-	4cyfvNk2oIkcfjKc8nTjNY/d20AasPPlOKLfF2cU0msdmJPQGCjiz/eB6u0mxOIMWbz4
-	/4dGUOWxNP/P1d585COtQwhdW/5bN807KsTsTggbeBY4eHW07bPEtxvV8pF5d2nvaz5f
-	/VdJHj/K8bOPRYQ6cqYMJsUsdySOMb++IWufzReqWzVAu39Kl1rf6jWce2Q1ntEih5j6
-	ne2g==
-X-Gm-Message-State: APf1xPDqXE4ApUpcQN2Kys5UDS/OqWxqBvMaxNdo57+vKfmrrEZLtQRH
-	bUjhS416Y2hN5ONnIx+PkzTZ0Q==
-X-Google-Smtp-Source: AG47ELsPKA2avjUt5jHOVR8rMQwIxO/4m0oufB3i0rHo6vEcWuZ270OgfFl3mQP6Lo2ASapcen/eEA==
-X-Received: by 10.99.114.77 with SMTP id c13mr18809427pgn.286.1520449302923;
-	Wed, 07 Mar 2018 11:01:42 -0800 (PST)
+	bh=bGsPPnXsnDWWD30hACJeKxgZJ3aadfH8MMroGHeHMm4=;
+	b=foN8HRpTorbFknkdv2kUw2w/2/cNZb8u2R2y21YrUQ3KGZKwQxQyXalmpCR2Ciuwlz
+	ToOLCavRCfszuuX2xc1vRJYrQ17L5xnjIoRKQ3V0urQXpj9/eCKwv5Iy7GuWSolUj7Zq
+	XTchGJCOkrm0X0difYcBbvXrsfNr7WkokdXs9MuxNW+pcU4K/C/Fy61UXmW1WRdSulhC
+	bXopuhLtogunbokAsJqsoJlh6bmD1jHNBy2KKmwprEjA58nNjyf21Ri9noZcp28T8q53
+	Ee49CfUZefa3qrugya9ZlWgzIny4xcJnofAHXTb+zbzjKowtvvb7M3MOyYlq8hh9NVXX
+	5uuw==
+X-Gm-Message-State: APf1xPBfV6IntkN4bKWlBIq1StB7na8s7xbbeeYdqSpM/MEimWapq5vX
+	4rlRb0U5JlnRJ8n2mfdmIoqQFg==
+X-Google-Smtp-Source: AG47ELvicH0zNDKBSvnBOheTR7Qjb2bWKl2X7lWdtJa5Gd4i5HSQJdOUexo6ywPM9kmAo8Bju3IZfg==
+X-Received: by 10.101.98.17 with SMTP id d17mr19075640pgv.221.1520449303987;
+	Wed, 07 Mar 2018 11:01:43 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.41
+	s67sm36835461pfg.104.2018.03.07.11.01.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:42 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:43 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:01:13 -0800
-Message-Id: <1520449275-29492-21-git-send-email-akuster808@gmail.com>
+Date: Wed,  7 Mar 2018 11:01:14 -0800
+Message-Id: <1520449275-29492-22-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
 References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-gnome][PATCH 21/23] libbonoboui: only include when x11 in DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 22/23] libgdata: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,28 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:01:41 -0000
+X-List-Received-Date: Wed, 07 Mar 2018 19:01:42 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb | 4 +++-
+ meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
-index b3ca0a4..8e3169e 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
-@@ -3,7 +3,9 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
+diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
+index 9b02512..80cbae3 100644
+--- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
++++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
+@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
  
--inherit gnomebase pkgconfig gtk-doc
-+inherit distro_features_check gnomebase pkgconfig gtk-doc
+ DEPENDS = "gnome-common-native libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
+ 
+-inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
++inherit distro_features_check gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
  
- SRC_URI += "file://gcc5.patch \
-             file://0001-bonobo-ui-node-qualify-functions-with-G_GNUC_PRINTF.patch \
+ do_configure_prepend_class-target () {
+     # introspection.m4 pre-packaged with upstream tarballs does not yet
 -- 
 2.7.4
 
