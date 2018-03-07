@@ -1,51 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C1F678A79
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C12CC78A8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:42 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id i14so1240723pgv.3
+	Wed,  7 Mar 2018 19:01:43 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id i6-v6so1857407plt.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:01:44 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=bGsPPnXsnDWWD30hACJeKxgZJ3aadfH8MMroGHeHMm4=;
-	b=P0ksYmKs6HdCK0IvU9qfczYi3L5ILP4l7QND4VEtMgAWGt3eLJz2k0aRt/w8R2N94p
-	ZKY0cTacon8B580vPjRX247yZ3j+G9KkMZF2zeQfyBEbShNk5w1kWn8KiLmI5u1F3hIn
-	bh0nIbhStlbHwhDifAf1r6MfCoarx3vmDrKPfLECzPWePX44zv10+JzMGN2cig2CC0oq
-	w4TB+lq+RIqVUkUNOkrDjIp7BB1HxUDKG4/QgqFXz2Fr8xfz8ajMmP1t91sp98qUksEC
-	7bTKUe9mENPE9FdYjZYOd+RO/2uwSHAuzfI/lMA5wXNVn91Rx2S/VY0oKU7bY4ecu5py
-	9AkA==
+	bh=jmVaQxcrUTpjNJNiD3uQ+Akj0JJUN/eDFHGzpNxI7cI=;
+	b=nsfdjgqyAVkEkStpga5AAvGFlIJb0StXaRcp2oBhNuGFVdGTO7MQiMbKz+J6oHgxC8
+	PN9eMkSfC3Y1GnMsaFO36JKFpxmPjraXU4Iz4uxIJWzH5jsTINUbpnXIsL+GDXm92GNN
+	AHJAodX8nQL7NDH62fq4E8j8gMt+v/bZ1tZRLSbP1lgVBYdfTV7kZJL2vByYzNw0PulH
+	nOVA+JNaRFVpqv/llaHuaBTrsMBm3g6cMfEQC/jI2wI7OOk7P6JqO2RveuYo2QTZtpMk
+	8oW7fhtintpgXca8tRp8sYZvy+uHZEkRrntjnMu7t0ZqHc6mDuBusvhY9vmBkLEmUoJJ
+	vU+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=bGsPPnXsnDWWD30hACJeKxgZJ3aadfH8MMroGHeHMm4=;
-	b=foN8HRpTorbFknkdv2kUw2w/2/cNZb8u2R2y21YrUQ3KGZKwQxQyXalmpCR2Ciuwlz
-	ToOLCavRCfszuuX2xc1vRJYrQ17L5xnjIoRKQ3V0urQXpj9/eCKwv5Iy7GuWSolUj7Zq
-	XTchGJCOkrm0X0difYcBbvXrsfNr7WkokdXs9MuxNW+pcU4K/C/Fy61UXmW1WRdSulhC
-	bXopuhLtogunbokAsJqsoJlh6bmD1jHNBy2KKmwprEjA58nNjyf21Ri9noZcp28T8q53
-	Ee49CfUZefa3qrugya9ZlWgzIny4xcJnofAHXTb+zbzjKowtvvb7M3MOyYlq8hh9NVXX
-	5uuw==
-X-Gm-Message-State: APf1xPBfV6IntkN4bKWlBIq1StB7na8s7xbbeeYdqSpM/MEimWapq5vX
-	4rlRb0U5JlnRJ8n2mfdmIoqQFg==
-X-Google-Smtp-Source: AG47ELvicH0zNDKBSvnBOheTR7Qjb2bWKl2X7lWdtJa5Gd4i5HSQJdOUexo6ywPM9kmAo8Bju3IZfg==
-X-Received: by 10.101.98.17 with SMTP id d17mr19075640pgv.221.1520449303987;
-	Wed, 07 Mar 2018 11:01:43 -0800 (PST)
+	bh=jmVaQxcrUTpjNJNiD3uQ+Akj0JJUN/eDFHGzpNxI7cI=;
+	b=oTiJBr5jIPE8kq/VOImzv11iKZIvSAVgtcDyNzmNhFoTMprLOuDA8PahdDtUkuK5DC
+	rewLFKF/xMAY5HSSrIKUZC7YCa5Cr99I+QSJn/Cg4X+zJkax5khjOtStNl0WOWdjGqTy
+	slyUcEg6yI74GqedawjCmX8rJJrK87fcbW82U8KsalE6AaLmMb3CFXKo9RjTe/rmZ3up
+	QkKBIot3ADGzfbj66rgkizMfE/O7rkxUQk/HQCyNhi+qN+/KtLojJBvR1Ks2FrBqNczi
+	N/bCGVtiFCqnWmSsvl+YMrHB6iYchbQj8JlMEXtbgutycR4HMk6P+A0YUK5082KUY3mH
+	2vfQ==
+X-Gm-Message-State: APf1xPAiN+WEKYYz70FLX3+pdY0F6BZS9R/TEGDAVEdpbosOHuxGSKOF
+	hiu8db5+mLrXegv09LvBZTQKmg==
+X-Google-Smtp-Source: AG47ELuANfwHBcCzXCGqyJWafJtQ6nRYUbRFLnu3qclMp5hsVqZjogeUSl1rzd7cXI6Opc5nrMZc6w==
+X-Received: by 2002:a17:902:7b90:: with SMTP id
+	w16-v6mr20795502pll.26.1520449304905; 
+	Wed, 07 Mar 2018 11:01:44 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.42
+	s67sm36835461pfg.104.2018.03.07.11.01.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:43 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:44 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:01:14 -0800
-Message-Id: <1520449275-29492-22-git-send-email-akuster808@gmail.com>
+Date: Wed,  7 Mar 2018 11:01:15 -0800
+Message-Id: <1520449275-29492-23-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
 References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-gnome][PATCH 22/23] libgdata: only include when x11 in DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 23/23] gnome-themes: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,28 +60,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:01:42 -0000
+X-List-Received-Date: Wed, 07 Mar 2018 19:01:44 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb | 4 +++-
+ meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-index 9b02512..80cbae3 100644
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index 1a89f48..c1ecc23 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -15,7 +15,9 @@ EXTRA_OECONF += "--enable-all-themes \
+     --with-iconmap=${STAGING_LIBEXECDIR_NATIVE}/icon-name-mapping \
+ "
  
- DEPENDS = "gnome-common-native libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
- 
--inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
-+inherit distro_features_check gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
+-inherit gnomebase perlnative
++inherit distro_features_check gnomebase perlnative
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
  
- do_configure_prepend_class-target () {
-     # introspection.m4 pre-packaged with upstream tarballs does not yet
+ PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"
+ FILES_gnome-theme-crux = "${datadir}/themes/Crux ${datadir}/icons/Crux"
 -- 
 2.7.4
 
