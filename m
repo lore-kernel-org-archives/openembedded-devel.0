@@ -1,51 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 94BAD78A50
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id BE48B78A26
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:33 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id y8so1230869pgr.9
+	Wed,  7 Mar 2018 19:01:34 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id w22-v6so1865225pll.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:01:35 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=n79H2C5pLBZZ9XEO/bzoPfiZdGpRKnUMQ9RrejRX50o=;
-	b=E/7JH6/jVoJxo3mG/gvd34dBDI3GB20lKZVFx0rrtFS9KwvCq+AOKXgil/aHMth1Y3
-	oZz9jnuPLgSaoQ0hXzl/DB1RQ/2DPVGDYdYUpvAR0/bThtAzsdbLfqlYEEvRHmjcCKhH
-	bRTsV6sIfrc3K2iej9Df++/K2Iik8h7ukUOyHKPXRjQeirLQZchWI3ZqK/xj2N7eSMeG
-	HjPVw20jpDkAyvexT3aJDeOUh+nfvXbwup0kaHVo1F/eCSyS2JZK5Y4RS04ZDYPQq4+/
-	hnruYpqiYIULc1tuhpc0t3c4PFkq6zU5ZCxPcFoMbUyoX2THjHS2uK3yAwTFzf8SZeKV
-	oNBw==
+	bh=AlCcBXxPO6ovcg7/E34MaYOMzvjWZEsIobskWl8CNfw=;
+	b=jBvatL+13eFQdBLGbtFlqxs2wQCHBeMvRa4M6JpQ+SWi/8L3s7HlfLUyEyDwmf5e+l
+	+HtvuhmI5QLoZrqpfLEwN9Ylv7vXLW3SVLX7HpYvoTD3XedxT94W/yVNdtHjklwfjc09
+	J/qTWRKr2/Id87mLiafMUgAoEM6ymz77PQEK86gXYzvdfzpB+mOmX4zCrY3XRb0gY0Uh
+	cWRFsl0z5AB8RkVrf4fWAm3dMeSbSkBzmF6DzRtHlWFP+O8G3AGCcvLMBSMBrvR5mCaG
+	jjwZUnxeHl9Cgf1lBLvCprYHeYAqKg+M2k5feYJC5TzY8IoOumsAcrHoQX3Y1lqTvqYv
+	UEJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=n79H2C5pLBZZ9XEO/bzoPfiZdGpRKnUMQ9RrejRX50o=;
-	b=KRcPuJUqYfP5Asvy3uAc6Dza2bg1uAJHAHvDM0qS0bL1I8IFw34vPorgft0FS+dNFP
-	7K5VFAmG0bM0132u47Hvj+PTVmvqvE66n/tko5lY1KKniRIuavVc9jp/7qUdmXb6qgpi
-	o2M6OvfkEzC8W2U6rMzujBCDmS09NYcOsHbUkvY28W1noDz6UAC/7g6EwmkHFx+rDFWr
-	8hICC46OYMTk6AgQoi0i6c3pe/ksPcEXsRn6baeORyRO3FvEtNSffAzjUc/coZamlHmX
-	Gq8NiJIRbS25tpU6y99T8ACN6ZXTioolVbF57Mn/h6UviLvdTjCQTkSZZvHQ5ldmcnYK
-	G8Pw==
-X-Gm-Message-State: APf1xPDuZCGa4a+nr3MFmsOqTTeWhmernllaIlDN7TXD5kCWbwn/YkL8
-	f16idv+jvXvI4K+wXJv8wXI=
-X-Google-Smtp-Source: AG47ELsaUn16LgAXOgY04LMwkX9MNdGNifWf01RjsiHLHXQ5YQSYY2GuKWHlbmQZJODGUb/+KLotnQ==
-X-Received: by 10.99.136.195 with SMTP id l186mr18447448pgd.427.1520449294859; 
-	Wed, 07 Mar 2018 11:01:34 -0800 (PST)
+	bh=AlCcBXxPO6ovcg7/E34MaYOMzvjWZEsIobskWl8CNfw=;
+	b=YO7aTHnwxGD/8zC5LGvgPb5Obmqno/zuJsZ7a7SMVTh7eKHR3j5fB+JIIU0Mqqrv1O
+	IMtz17P/CjeizJk3tvSFIvkYgUgKl2nacJyLcx1I5HBrG/iGUV2TVL/VF/LIUpieXCjE
+	KAXme3OH/N4pCXCf26vLrxYwhslfKLiZg++RQiwdwxogdbXpcIOgc04BpdZZnAjvs9/q
+	e8PFWx9F5F7JUzbukC9TaxvxuyaAMzm4sPmRWpDoLhkI7puu/VhOPpRQLDRQoXHF6N4X
+	3lsaVk02AKto56EeW0N8we4PhGiBKSvoO53KBaF8Is9uf2dWUNDy8LBATVBn5o3b16lW
+	4Elg==
+X-Gm-Message-State: APf1xPAt4e2SFzhA63uNkPs3BDlf4Ka0f4a2c46QsqOra3vg0z8x7GOf
+	0L1PSmYjFkRthb3jin1i5lrO0Q==
+X-Google-Smtp-Source: AG47ELvqp0Q+x5e+WQ5xMk4LzCvMYoxJwGrclNfvuTCUWan66owTvwpmM6UppRgy6rRrqpK4d58kLg==
+X-Received: by 2002:a17:902:5797:: with SMTP id
+	l23-v6mr21019753pli.56.1520449295963; 
+	Wed, 07 Mar 2018 11:01:35 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.33
+	s67sm36835461pfg.104.2018.03.07.11.01.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:34 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:35 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:01:05 -0800
-Message-Id: <1520449275-29492-13-git-send-email-akuster808@gmail.com>
+Date: Wed,  7 Mar 2018 11:01:06 -0800
+Message-Id: <1520449275-29492-14-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
 References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-gnome][PATCH 13/23] devilspie: only include when x11 in DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 14/23] gparted: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,28 +60,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:01:33 -0000
+X-List-Received-Date: Wed, 07 Mar 2018 19:01:35 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb | 4 +++-
+ meta-gnome/recipes-extended/gparted/gparted_0.30.0.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb
-index ae2ec5a..1c7f79f 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb
-@@ -14,7 +14,9 @@ SRC_URI = " \
- SRC_URI[md5sum] = "f205409e921aa2d86481f1b8d518da45"
- SRC_URI[sha256sum] = "11f5bc310fba4df404c057461ffb3fadac8ef51d211008c665c48f587a5a3f85"
+diff --git a/meta-gnome/recipes-extended/gparted/gparted_0.30.0.bb b/meta-gnome/recipes-extended/gparted/gparted_0.30.0.bb
+index cea0e3a..cdc882a 100644
+--- a/meta-gnome/recipes-extended/gparted/gparted_0.30.0.bb
++++ b/meta-gnome/recipes-extended/gparted/gparted_0.30.0.bb
+@@ -3,7 +3,9 @@ HOMEPAGE = "http://gparted.org/index.php"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--inherit pkgconfig gettext
-+inherit distro_features_check pkgconfig gettext
+-inherit autotools pkgconfig gtk-icon-cache
++inherit distro_features_check autotools pkgconfig gtk-icon-cache
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
  
- do_compile() {
-     export GTK2=1
+ SRC_URI = " \
+     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
 -- 
 2.7.4
 
