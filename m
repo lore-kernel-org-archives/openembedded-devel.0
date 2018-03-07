@@ -1,49 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B15878A12
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 98E7F78A14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:15 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id a16so1308728pfn.9
+	Wed,  7 Mar 2018 19:01:17 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id c11-v6so1872330plo.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:01:17 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=EBRtrtB51KTNFmhWOU+8z3Ccx3gPJoa0YAmldDCYYjo=;
-	b=Jez8Z+k0PmQ3IbL98mgvrmOpaoL67g+X900U7vBcztSrZBIm8a1HqQfPW0tNJ3ps8m
-	3aPlkSFFh87zRWL7nC6uvCNNrwZIOZoeAyGXpc+k7T+NkuU8NVMryY5/auuutK1NmPkB
-	KnOALiE5HVphDw4zEp/5IKpUENnalIspG0vblGjZN90oli1EmPee8ZH5bFlTNNPSe9rp
-	GEh/4aieDi/JK47+OuIzCN2boLP37zCimMIj6OOpuFc+78NT184aaHei8UxPNesSUKWF
-	bW31BK+YH+5JYAZCnzPb2px81wamjYqLJkB54/hEG1Hi2vNgI74TU+KG8pwjJdmXgegu
-	TzuA==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=rS48X2lBcknG2RO6KUdsqxiFeiZhAUEW+bb9+Wud+u0=;
+	b=U2Gtken0NAcCM6hqib77sCWqZIOLwt9EkC1upHTkuOgjRTL2p0P7DrfJFmfzdUuhsw
+	bBLH2ZmT8JSPsU2c9/xFQgsucTwq9dE8CxyW9BKISQ9ddiDOO0K97zwxQhAEtikAYwlE
+	LIN/2yu1sr0wUMzKlUemQiZ+39FIGVKbeAfHBiI6FPRgH1QotZiGlgM+jsUyQfc3JOXt
+	oMie+z6mUEe3zWCelo6u/9uTlnmCGKKuAlCBcwHkuMwzLMZvsOs1XPrrMXyimKuqy1V2
+	6+jc1OUXtxBWE8fJRNi/GovBCMg4nVFa1nbUNm+flFugEN/26J1361Am7fUVeYs5QqpG
+	0GXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=EBRtrtB51KTNFmhWOU+8z3Ccx3gPJoa0YAmldDCYYjo=;
-	b=fUSrLHc4vz1xNPqoubBR1FHAb+muC9QZfxqE7lgGm6bzx4Yks39yYW7e6srgcAtw4o
-	PEUtVUohjOX3jgOUQxVo0xGhYb6Rvj+wV3g5lUwLJNvOJI1PlLE3OmFLSHyeE4CoWi5T
-	8wG4UlCBdWgWbTC+bPYSpDC3/Tq2C52g0Pzoq0ZJ7hBxcznLjH/PcGqqGPxzL2qaplaW
-	qas1i4XQoOxtZy/FxT3fQrKlQ+E1SBIPsGoqvM4ViSaUo8s43Z9VFRe4y8UplG2OhP+9
-	PahykIttBeXjd97y1k+mtw1waIJdvDbatcIqpoksckFQ6ocEme1zBaC+3nSLPUGtZTsD
-	wrsg==
-X-Gm-Message-State: APf1xPAD+n5eP4eO6zQNEJjLpdqNtvptL6B/hukjcqpmD8iKeORL4tpJ
-	YZvhPhBBDQbO9qF4u/sISRYH5A==
-X-Google-Smtp-Source: AG47ELvsQclOqnts1tqyUyPDqscNjBawoJWYUWlHXlP0aLwh0E8VAxEXBUcHwaRTLpwiwV+XgY4zRg==
-X-Received: by 10.101.98.17 with SMTP id d17mr19074174pgv.221.1520449277186;
-	Wed, 07 Mar 2018 11:01:17 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=rS48X2lBcknG2RO6KUdsqxiFeiZhAUEW+bb9+Wud+u0=;
+	b=WT3sFhsGOwan4afEQPyV77E+0ijuPKiSODExVFn3MY6FXZggw9oyduaXLKJ45p4rR1
+	o3vveDpsKS15tvlp6gxAWretGe08O6ppIUOdmSYxgEpFxU1jyYaw+IJgjfxYGwzSVJfL
+	Kqozdv8YfvWgLdAahtX0I79CjRb2m4lxNl+HQ0SWGDnmsVT6iAndzskMMcWZ736mS8Ig
+	zbOneVTgI9aEyNhX0GdI3tX/1Fka8hMtmXukNRi9qqCyl1JdiN9Sqws9EUH4cGyYeKyJ
+	iut6xx10tbE5tant9e++sHC3utVzPtJKc1kAIVkM2t+sHJnBsjHFwljHlvy9yQSmoz3c
+	vb3w==
+X-Gm-Message-State: APf1xPD5z8stIUHkiedute/JUKgs4VKoJu14MmlE7DvSe9xAM1XJIleR
+	e+mhbmH9GExYtsY8vQHvyR8=
+X-Google-Smtp-Source: AG47ELvJRaxV7HR+KO78QsXX7SKgVneaEnnL2nRDwg9CbRpzj2nKRduHnTRvo77z/8QDeTP1Spnidg==
+X-Received: by 2002:a17:902:684a:: with SMTP id
+	f10-v6mr21899072pln.129.1520449278816; 
+	Wed, 07 Mar 2018 11:01:18 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.16
+	s67sm36835461pfg.104.2018.03.07.11.01.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:16 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:18 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:00:53 -0800
-Message-Id: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
+Date: Wed,  7 Mar 2018 11:00:54 -0800
+Message-Id: <1520449275-29492-2-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-gnome][PATCH 01/23] santiy-meta-gnome: add class for bbappend files checking
+In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
+References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
+Subject: [meta-gnome][PATCH 02/23] gupnp-tools: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,88 +60,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:01:16 -0000
-
-Idea taken from meta-virt
-
-Add a new class, sanity-meta-gnome.bbclass, to check for whether necessary
-settings are available for bbappend files in this layer to be effective,
-and warn users if not.
-
-In addition, a variable SKIP_SANITY_BBAPPEND_CHECK is added to enable users
-to explicitly skip the checking to avoid unwanted warnings.
+X-List-Received-Date: Wed, 07 Mar 2018 19:01:18 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/README                            | 23 +++++++++++++++++++++++
- meta-gnome/classes/sanity-meta-gnome.bbclass | 10 ++++++++++
- meta-gnome/conf/layer.conf                   |  4 ++++
- 3 files changed, 37 insertions(+)
- create mode 100644 meta-gnome/classes/sanity-meta-gnome.bbclass
+ meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/README b/meta-gnome/README
-index 0c4fbd2..ef3a6f3 100644
---- a/meta-gnome/README
-+++ b/meta-gnome/README
-@@ -1,3 +1,25 @@
-+meta-gnome
-+===========
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb
+index 9360d65..3ddb818 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb
+@@ -8,4 +8,6 @@ RRECOMMENDS_${PN} = "adwaita-icon-theme"
+ SRC_URI = "http://download.gnome.org/sources/${BPN}/0.8/${BPN}-${PV}.tar.xz"
+ SRC_URI[md5sum] = "212d85ebce89b32468b59e1164050d40"
+ SRC_URI[sha256sum] = "aa3decb9d532c0e2e505adc592f431fd81c0231ded2981129e87da13712479ed"
+-inherit autotools pkgconfig gettext
++inherit distro_features_check autotools pkgconfig gettext
 +
-+The recipe in this layer needs to have 'x11' in DISTRO_FEATURES 
-+to have effect. To enable them, add in configuration file the following line.
-+
-+  DISTRO_FEATURES_append = " x11"
-+
-+If meta-gnome is included, but x11 is not enabled as a
-+distro feature a warning is printed at parse time:
-+
-+    You have included the meta-gnome layer, but
-+    'x11' has not been enabled in your DISTRO_FEATURES.
-+
-+If you know what you are doing, this warning can be disabled by setting the following
-+variable in your configuration:
-+
-+  SKIP_META_VIRT_SANITY_CHECK = 1
-+
-+
-+Dependencies
-+------------
- This layer depends on:
- 
- URI: git://github.com/openembedded/oe-core.git
-@@ -14,3 +36,4 @@ When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
- 
- Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
-+
-diff --git a/meta-gnome/classes/sanity-meta-gnome.bbclass b/meta-gnome/classes/sanity-meta-gnome.bbclass
-new file mode 100644
-index 0000000..331ea19
---- /dev/null
-+++ b/meta-gnome/classes/sanity-meta-gnome.bbclass
-@@ -0,0 +1,10 @@
-+addhandler gnome_bbappend_distrocheck
-+gnome_bbappend_distrocheck[eventmask] = "bb.event.SanityCheck"
-+python gnome_bbappend_distrocheck() {
-+    skip_check = e.data.getVar('SKIP_META_GNOME_SANITY_CHECK') == "1"
-+    if 'x11' not in e.data.getVar('DISTRO_FEATURES').split() and not skip_check:
-+        bb.warn("You have included the meta-gnome layer, but \
-+'x11' has not been enabled in your DISTRO_FEATURES. Some bbappend files \
-+may not take effect. See the meta-gnome README for details on enabling \
-+meta-gnome support.")
-+}
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index fb89c14..37215a7 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -13,3 +13,7 @@ BBFILE_PRIORITY_gnome-layer = "7"
- LAYERVERSION_gnome-layer = "1"
- 
- LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
-+
-+# Sanity check for meta-gnome layer.
-+# Setting SKIP_META_GNOME_SANITY_CHECK to "1" would skip the bbappend files check.
-+INHERIT += "sanity-meta-gnome"
++REQUIRED_DISTRO_FEATURES = "x11"
 -- 
 2.7.4
 
