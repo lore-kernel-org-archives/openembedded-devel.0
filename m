@@ -1,53 +1,60 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C12CC78A8D
+Received: from mail-pl0-f52.google.com (mail-pl0-f52.google.com
+	[209.85.160.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 32BDD78A0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:43 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id i6-v6so1857407plt.7
+	Wed,  7 Mar 2018 19:40:39 +0000 (UTC)
+Received: by mail-pl0-f52.google.com with SMTP id v9-v6so1910712plp.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:01:45 -0800 (PST)
+	Wed, 07 Mar 2018 11:40:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=jmVaQxcrUTpjNJNiD3uQ+Akj0JJUN/eDFHGzpNxI7cI=;
-	b=nsfdjgqyAVkEkStpga5AAvGFlIJb0StXaRcp2oBhNuGFVdGTO7MQiMbKz+J6oHgxC8
-	PN9eMkSfC3Y1GnMsaFO36JKFpxmPjraXU4Iz4uxIJWzH5jsTINUbpnXIsL+GDXm92GNN
-	AHJAodX8nQL7NDH62fq4E8j8gMt+v/bZ1tZRLSbP1lgVBYdfTV7kZJL2vByYzNw0PulH
-	nOVA+JNaRFVpqv/llaHuaBTrsMBm3g6cMfEQC/jI2wI7OOk7P6JqO2RveuYo2QTZtpMk
-	8oW7fhtintpgXca8tRp8sYZvy+uHZEkRrntjnMu7t0ZqHc6mDuBusvhY9vmBkLEmUoJJ
-	vU+w==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=jdlSCkKN25MQovRSDlHVAAiHCMcwwV75tlh7RFpfYM8=;
+	b=lAVXbrm4kehPnJAb1h3QIVtSEW+E/ZTDZ1rEyVGreH+w1AJ3FWjze8zr4S0Y5jQWlu
+	rreDGhwDbBnooZ4r4xurVZlt22iLSP3Z/03HHuGMjAAuT+6qEOgcEIok+Tc0hGxsic7c
+	NPwOJs8vr4lt5lY4+XsgODf4eZRGFZVU2JrZ7paGVUv7na5vGnT63XZk9FF/OLhty0nQ
+	hHi7bma0eyY9Y1X/apWW39qFDzAsx3UFMZTbdaFXNj1W8PsI5ed+6F5rFIvgntAde1Q4
+	ZZ9PWrfvoecTFzrhK+xfcSp1jZf+lc8Xgb35O8DRPRYSu44c6evstNMTsSgPL+2cfOQR
+	xYpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=jmVaQxcrUTpjNJNiD3uQ+Akj0JJUN/eDFHGzpNxI7cI=;
-	b=oTiJBr5jIPE8kq/VOImzv11iKZIvSAVgtcDyNzmNhFoTMprLOuDA8PahdDtUkuK5DC
-	rewLFKF/xMAY5HSSrIKUZC7YCa5Cr99I+QSJn/Cg4X+zJkax5khjOtStNl0WOWdjGqTy
-	slyUcEg6yI74GqedawjCmX8rJJrK87fcbW82U8KsalE6AaLmMb3CFXKo9RjTe/rmZ3up
-	QkKBIot3ADGzfbj66rgkizMfE/O7rkxUQk/HQCyNhi+qN+/KtLojJBvR1Ks2FrBqNczi
-	N/bCGVtiFCqnWmSsvl+YMrHB6iYchbQj8JlMEXtbgutycR4HMk6P+A0YUK5082KUY3mH
-	2vfQ==
-X-Gm-Message-State: APf1xPAiN+WEKYYz70FLX3+pdY0F6BZS9R/TEGDAVEdpbosOHuxGSKOF
-	hiu8db5+mLrXegv09LvBZTQKmg==
-X-Google-Smtp-Source: AG47ELuANfwHBcCzXCGqyJWafJtQ6nRYUbRFLnu3qclMp5hsVqZjogeUSl1rzd7cXI6Opc5nrMZc6w==
-X-Received: by 2002:a17:902:7b90:: with SMTP id
-	w16-v6mr20795502pll.26.1520449304905; 
-	Wed, 07 Mar 2018 11:01:44 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.mvista.com
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=jdlSCkKN25MQovRSDlHVAAiHCMcwwV75tlh7RFpfYM8=;
+	b=Bb2udHahrNEkcxIWKOEH+3L2bIK37pL+zXvRdWNWXmqPu4VuDGNUDbCyAVwrpm71rs
+	lvN/MqOckk7Tek4lNwY84gnavM7VjZXg7aZjLeQXB60i759eeAvSd1Kk6bONiTQsm3Qd
+	5HkOBwBy1nr+4wYtXjjMBwAs0lDQEyj4EroThCUEHkg/mR21vdj+0JPAkF544J7kGkLi
+	RftW5fDPcKI5gDO81FfStVBBa5OmC/amjqBHQoaOCCUWjqaatBVFqaWFNSJZwsUqzqx5
+	qwOL5P/cQ5/9JvA7a1CrGxuEkdJ2aLn9YKBfMEJ8f/jpN6wVXK0nPQ44GSFRqNEGSQiM
+	ElHQ==
+X-Gm-Message-State: AElRT7FFsNVZMZ787EK7TaKwF4KpfETA8uufljQBAZ6Buvr8QGSVaQd6
+	E0YckQWQWhce2LF4trE36G2jag==
+X-Google-Smtp-Source: AG47ELva6wYhsEzk/uam0wB6lwtIbTdkjmnkZa1jjU3sHy4SZg98THynPXkjWD/vI0veIp5CGzp9Kg==
+X-Received: by 2002:a17:902:8602:: with SMTP id
+	f2-v6mr11788541plo.6.1520451640911; 
+	Wed, 07 Mar 2018 11:40:40 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1184:6d76:b853:98d2:431c?
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:44 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
+	d15sm41416633pfj.121.2018.03.07.11.40.38
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 Mar 2018 11:40:39 -0800 (PST)
+To: "Zhou, Li" <li.zhou@windriver.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:01:15 -0800
-Message-Id: <1520449275-29492-23-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-gnome][PATCH 23/23] gnome-themes: only include when x11 in DISTRO_FEATURES
+References: <20180226075031.17262-1-li.zhou@windriver.com>
+	<20180226075031.17262-2-li.zhou@windriver.com>
+	<1b2ac28d-be01-fd0b-0f8e-0ab723e8c56a@gmail.com>
+	<7f336a1f-8129-e442-3341-bf35dd09de66@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <61ea2876-84d3-7340-6a06-a7800a56b671@gmail.com>
+Date: Wed, 7 Mar 2018 11:40:38 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
+MIME-Version: 1.0
+In-Reply-To: <7f336a1f-8129-e442-3341-bf35dd09de66@windriver.com>
+Subject: Re: [meta-oe][PATCH 2/2] php: Security Advisory - php - CVE-2018-5712
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,29 +67,751 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:01:44 -0000
+X-List-Received-Date: Wed, 07 Mar 2018 19:40:40 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-index 1a89f48..c1ecc23 100644
---- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
-@@ -15,7 +15,9 @@ EXTRA_OECONF += "--enable-all-themes \
-     --with-iconmap=${STAGING_LIBEXECDIR_NATIVE}/icon-name-mapping \
- "
- 
--inherit gnomebase perlnative
-+inherit distro_features_check gnomebase perlnative
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"
- FILES_gnome-theme-crux = "${datadir}/themes/Crux ${datadir}/icons/Crux"
--- 
-2.7.4
+
+On 03/04/2018 09:08 PM, Zhou, Li wrote:
+>
+>
+> On 03/04/2018 11:00 PM, akuster808 wrote:
+>>
+>> On 02/25/2018 11:50 PM, Li Zhou wrote:
+>>> Porting the patch from <http://git.php.net/?p=php-src.git;a=commit;
+>>> h=73ca9b37731dd9690ffd9706333b17eaf90ea091> to solve CVE-2018-5712.
+>>>
+>>> Signed-off-by: Li Zhou <li.zhou@windriver.com>
+>> This would not apply.
+>> can you double check?
+>
+> I just downloaded the newest code and it can apply successfully.
+> Have you already applied the patch for CVE-2018-5711 which I sent
+> together with this patch?
+yes.
+
+> If yes, please give me more information about the failure. Thanks.
+
+./contrib/pw-am.sh 148343
+2018-03-07 11:39:39
+URL:https://patchwork.openembedded.org/patch/148343/mbox/ [24852] ->
+"pw-am-148343.patch" [1]
+Applying: php: Security Advisory - php - CVE-2018-5712
+.git/rebase-apply/patch:57: space before tab in indent.
+     static const char newstub0[] = "<?php\n\n$web = '";
+.git/rebase-apply/patch:58: space before tab in indent.
+     static const char newstub1_0[] = "';\n\nif (in_array('phar',
+stream_get_wrappers()) && class_exists('Phar', 0))
+{\nPhar::interceptFileFuncs();\nset_include_path('phar://' . __FILE__ .
+PATH_SEPARATOR . get_include_path());\nPhar::webPhar(null,
+$web);\ninclude 'phar://' . __FILE__ . '/' .
+Extract_Phar::START;\nreturn;\n}\n\nif (@(isset($_SERVER['REQUEST_URI'])
+&& isset($_SERVER['REQUEST_METHOD']) && ($_SERVER['REQUEST_METHOD'] ==
+'GET' || $_SERVER['REQUEST_METHOD'] == 'POST')))
+{\nExtract_Phar::go(true);\n$mimes = array(\n'phps' => 2,\n'c' =>
+'text/plain',\n'cc' => 'text/plain',\n'cpp' => 'text/plain',\n'c++' =>
+'text/plain',\n'dtd' => 'text/plain',\n'h' => 'text/plain',\n'log' =>
+'text/plain',\n'rng' => 'text/plain',\n'txt' => 'text/plain',\n'xsd' =>
+'text/plain',\n'php' => 1,\n'inc' => 1,\n'avi' => 'video/avi',\n'bmp' =>
+'image/bmp',\n'css' => 'text/css',\n'gif' => 'image/gif',\n'htm' =>
+'text/html',\n'html' => 'text/html',\n'htmls' => 'text/html',\n'ico' =>
+'image/x-ico',
+.git/rebase-apply/patch:63: space before tab in indent.
+     static const char newstub2[] = "';\nconst LEN = ";
+.git/rebase-apply/patch:64: space before tab in indent.
+     static const char newstub3_0[] = ";\n\nstatic function go($return =
+false)\n{\n$fp = fopen(__FILE__, 'rb');\nfseek($fp, self::LEN);\n$L =
+unpack('V', $a = fread($fp, 4));\n$m = '';\n\ndo {\n$read = 8192;\nif
+($L[1] - strlen($m) < 8192) {\n$read = $L[1] - strlen($m);\n}\n$last =
+fread($fp, $read);\n$m .= $last;\n} while (strlen($last) && strlen($m) <
+$L[1]);\n\nif (strlen($m) < $L[1]) {\ndie('ERROR: manifest length read
+was \"' .\nstrlen($m) .'\" should be \"' .\n$L[1] . '\"');\n}\n\n$info =
+self::_unpack($m);\n$f = $info['c'];\n\nif ($f & self::GZ) {\nif
+(!function_exists('gzinflate')) {\ndie('Error: zlib extension is not
+enabled -' .\n' gzinflate() function needed for zlib-compressed
+.phars');\n}\n}\n\nif ($f & self::BZ2) {\nif
+(!function_exists('bzdecompress')) {\ndie('Error: bzip2 extension is not
+enabled -' .\n' bzdecompress() function needed for bz2-compressed
+.phars');\n}\n}\n\n$temp = self::tmpdir();\n\nif (!$temp ||
+!is_writable($temp)) {\n$sessionpath = session_sa
+.git/rebase-apply/patch:67: space before tab in indent.
+     static const char newstub3_1[] = "ction tmpdir()\n{\nif
+(strpos(PHP_OS, 'WIN') !== false) {\nif ($var = getenv('TMP') ?
+getenv('TMP') : getenv('TEMP')) {\nreturn $var;\n}\nif (is_dir('/temp')
+|| mkdir('/temp')) {\nreturn realpath('/temp');\n}\nreturn false;\n}\nif
+($var = getenv('TMPDIR')) {\nreturn $var;\n}\nreturn
+realpath('/tmp');\n}\n\nstatic function _unpack($m)\n{\n$info =
+unpack('V', substr($m, 0, 4));\n $l = unpack('V', substr($m, 10,
+4));\n$m = substr($m, 14 + $l[1]);\n$s = unpack('V', substr($m, 0,
+4));\n$o = 0;\n$start = 4 + $s[1];\n$ret['c'] = 0;\n\nfor ($i = 0; $i <
+$info[1]; $i++) {\n $len = unpack('V', substr($m, $start, 4));\n$start
++= 4;\n $savepath = substr($m, $start, $len[1]);\n$start += $len[1];\n  
+$ret['m'][$savepath] = array_values(unpack('Va/Vb/Vc/Vd/Ve/Vf',
+substr($m, $start, 24)));\n$ret['m'][$savepath][3] = sprintf('%u',
+$ret['m'][$savepath][3]\n& 0xffffffff);\n$ret['m'][$savepath][7] =
+$o;\n$o += $ret['m'][$savepath][2];\n$start += 24 + $ret['m
+fatal: corrupt patch at line 451
+Patch failed at 0001 php: Security Advisory - php - CVE-2018-5712
+
+>
+>> - amrin
+>>> ---
+>>>   .../php/php-7.1.9/CVE-2018-5712.patch              | 432
+>>> +++++++++++++++++++++
+>>>   meta-oe/recipes-devtools/php/php_7.1.9.bb          |   1 +
+>>>   2 files changed, 433 insertions(+)
+>>>   create mode 100644
+>>> meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patch
+>>>
+>>> diff --git
+>>> a/meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patch
+>>> b/meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patch
+>>> new file mode 100644
+>>> index 0000000..87ccc02
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-devtools/php/php-7.1.9/CVE-2018-5712.patch
+>>> @@ -0,0 +1,432 @@
+>>> +From fc2ac180fdaf4589c203802fff308fb8cbce58c6 Mon Sep 17 00:00:00 2001
+>>> +From: Li Zhou <li.zhou@windriver.com>
+>>> +Date: Sun, 11 Feb 2018 15:45:32 +0800
+>>> +Subject: [PATCH] Fix bug #74782: remove file name from output to
+>>> avoid XSS
+>>> +
+>>> +Upstream-Status: Backport
+>>> +CVE: CVE-2018-5712
+>>> +Signed-off-by: Li Zhou <li.zhou@windriver.com>
+>>> +---
+>>> + ext/phar/shortarc.php                             |  2 +-
+>>> + ext/phar/stub.h                                   |  4 ++--
+>>> + ext/phar/tests/cache_list/copyonwrite11.phar.phpt |  4 ++--
+>>> + ext/phar/tests/phar_commitwrite.phpt              |  2 +-
+>>> + ext/phar/tests/phar_convert_repeated.phpt         |  2 +-
+>>> + ext/phar/tests/phar_create_in_cwd.phpt            |  2 +-
+>>> + ext/phar/tests/phar_createdefaultstub.phpt        | 22
+>>> +++++++++++-----------
+>>> + ext/phar/tests/phar_offset_check.phpt             |  4 ++--
+>>> + ext/phar/tests/phar_setdefaultstub.phpt           | 20
+>>> ++++++++++----------
+>>> + ext/phar/tests/tar/phar_convert_phar.phpt         |  6 +++---
+>>> + ext/phar/tests/tar/phar_convert_phar2.phpt        |  6 +++---
+>>> + ext/phar/tests/tar/phar_convert_phar3.phpt        |  6 +++---
+>>> + ext/phar/tests/tar/phar_convert_phar4.phpt        |  6 +++---
+>>> + ext/phar/tests/zip/phar_convert_phar.phpt         |  6 +++---
+>>> + 14 files changed, 46 insertions(+), 46 deletions(-)
+>>> +
+>>> +diff --git a/ext/phar/shortarc.php b/ext/phar/shortarc.php
+>>> +index 1bf3baa..e5ac8ba 100644
+>>> +--- a/ext/phar/shortarc.php
+>>> ++++ b/ext/phar/shortarc.php
+>>> +@@ -74,7 +74,7 @@ if (@(isset($_SERVER['REQUEST_URI']) &&
+>>> isset($_SERVER['REQUEST_METHOD']) && ($_
+>>> +     $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> +     if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> +         header('HTTP/1.0 404 Not Found');
+>>> +-        echo "<html>\n <head>\n  <title>File Not Found<title>\n
+>>> </head>\n <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n
+>>> </body>\n</html>";
+>>> ++        echo "<html>\n <head>\n  <title>File Not Found<title>\n
+>>> </head>\n <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> +         exit;
+>>> +     }
+>>> +     $b = pathinfo($a);
+>>> +diff --git a/ext/phar/stub.h b/ext/phar/stub.h
+>>> +index 28e3252..dd8baed 100644
+>>> +--- a/ext/phar/stub.h
+>>> ++++ b/ext/phar/stub.h
+>>> +@@ -22,12 +22,12 @@ static inline zend_string* phar_get_stub(const
+>>> char *index_php, const char *web,
+>>> + {
+>>> +     static const char newstub0[] = "<?php\n\n$web = '";
+>>> +     static const char newstub1_0[] = "';\n\nif (in_array('phar',
+>>> stream_get_wrappers()) && class_exists('Phar', 0))
+>>> {\nPhar::interceptFileFuncs();\nset_include_path('phar://' .
+>>> __FILE__ . PATH_SEPARATOR .
+>>> get_include_path());\nPhar::webPhar(null, $web);\ninclude 'phar://'
+>>> . __FILE__ . '/' . Extract_Phar::START;\nreturn;\n}\n\nif
+>>> (@(isset($_SERVER['REQUEST_URI']) &&
+>>> isset($_SERVER['REQUEST_METHOD']) && ($_SERVER['REQUEST_METHOD'] ==
+>>> 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST')))
+>>> {\nExtract_Phar::go(true);\n$mimes = array(\n'phps' => 2,\n'c' =>
+>>> 'text/plain',\n'cc' => 'text/plain',\n'cpp' => 'text/plain',\n'c++'
+>>> => 'text/plain',\n'dtd' => 'text/plain',\n'h' =>
+>>> 'text/plain',\n'log' => 'text/plain',\n'rng' => 'text/plain',\n'txt'
+>>> => 'text/plain',\n'xsd' => 'text/plain',\n'php' => 1,\n'inc' =>
+>>> 1,\n'avi' => 'video/avi',\n'bmp' => 'image/bmp',\n'css' =>
+>>> 'text/css',\n'gif' => 'image/gif',\n'htm' => 'text/html',\n'html' =>
+>>> 'text/html',\n'htmls' => 'text/html',\n'ico' => 'image/x-ico',
+>>>   \n'jpe' => 'image/jpeg',\n'jpg' => 'image/jpeg',\n'jpeg' =>
+>>> 'image/jpeg',\n'js' => 'application/x-javascript',\n'midi' =>
+>>> 'audio/midi',\n'mid' => 'audio/midi',\n'mod' => 'audio/mod',\n'mov'
+>>> => 'movie/quicktime',\n'mp3' => 'audio/mp3',\n'mpg' =>
+>>> 'video/mpeg',\n'mpeg' => 'video/mpeg',\n'pdf' =>
+>>> 'application/pdf',\n'png' => 'image/png',\n'swf' =>
+>>> 'application/shockwave-flash',\n'tif' => 'image/tiff',\n'tiff' =>
+>>> 'image/tiff',\n'wav' => 'audio/wav',\n'xbm' => 'image/xbm',\n'xml'
+>>> => 'text/xml',\n);\n\nheader(\"Cache-Control: no-cache,
+>>> must-revalidate\");\nheader(\"Pragma: no-cache\");\n\n$basename =
+>>> basename(__FILE__);\nif (!strpos($_SERVER['REQUEST_URI'],
+>>> $basename)) {\nchdir(Extract_Phar::$temp);\ninclude
+>>> $web;\nreturn;\n}\n$pt = substr($_SERVER['REQUEST_URI'],
+>>> strpos($_SERVER['REQUEST_URI'], $basename) + strlen($basename));\nif
+>>> (!$pt || $pt == '/') {\n$pt = $web;\nheader('HTTP/1.1 301 Moved
+>>> Permanently');\nheader('Location: ' . $_SERVER['REQUEST_URI'] . '/'
+>>> . $pt);\nexit;\n}\n$
+>>>   a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);\nif
+>>> (!$a || strlen(dirname($a)) < strlen(";
+>>> +-    static const char newstub1_1[] = "Extract_Phar::$temp))
+>>> {\nheader('HTTP/1.0 404 Not Found');\necho \"<html>\\n <head>\\n 
+>>> <title>File Not Found<title>\\n </head>\\n <body>\\n  <h1>404 - File
+>>> \", $pt, \" Not Found</h1>\\n </body>\\n</html>\";\nexit;\n}\n$b =
+>>> pathinfo($a);\nif (!isset($b['extension'])) {\nheader('Content-Type:
+>>> text/plain');\nheader('Content-Length: ' .
+>>> filesize($a));\nreadfile($a);\nexit;\n}\nif
+>>> (isset($mimes[$b['extension']])) {\nif ($mimes[$b['extension']] ===
+>>> 1) {\ninclude $a;\nexit;\n}\nif ($mimes[$b['extension']] === 2)
+>>> {\nhighlight_file($a);\nexit;\n}\nheader('Content-Type: '
+>>> .$mimes[$b['extension']]);\nheader('Content-Length: ' .
+>>> filesize($a));\nreadfile($a);\nexit;\n}\n}\n\nclass
+>>> Extract_Phar\n{\nstatic $temp;\nstatic $origdir;\nconst GZ =
+>>> 0x1000;\nconst BZ2 = 0x2000;\nconst MASK = 0x3000;\nconst START = '";
+>>> ++    static const char newstub1_1[] = "Extract_Phar::$temp))
+>>> {\nheader('HTTP/1.0 404 Not Found');\necho \"<html>\\n <head>\\n 
+>>> <title>File Not Found<title>\\n </head>\\n <body>\\n  <h1>404 - File
+>>> Not Found</h1>\\n </body>\\n</html>\";\nexit;\n}\n$b =
+>>> pathinfo($a);\nif (!isset($b['extension'])) {\nheader('Content-Type:
+>>> text/plain');\nheader('Content-Length: ' .
+>>> filesize($a));\nreadfile($a);\nexit;\n}\nif
+>>> (isset($mimes[$b['extension']])) {\nif ($mimes[$b['extension']] ===
+>>> 1) {\ninclude $a;\nexit;\n}\nif ($mimes[$b['extension']] === 2)
+>>> {\nhighlight_file($a);\nexit;\n}\nheader('Content-Type: '
+>>> .$mimes[$b['extension']]);\nheader('Content-Length: ' .
+>>> filesize($a));\nreadfile($a);\nexit;\n}\n}\n\nclass
+>>> Extract_Phar\n{\nstatic $temp;\nstatic $origdir;\nconst GZ =
+>>> 0x1000;\nconst BZ2 = 0x2000;\nconst MASK = 0x3000;\nconst START = '";
+>>> +     static const char newstub2[] = "';\nconst LEN = ";
+>>> +     static const char newstub3_0[] = ";\n\nstatic function
+>>> go($return = false)\n{\n$fp = fopen(__FILE__, 'rb');\nfseek($fp,
+>>> self::LEN);\n$L = unpack('V', $a = fread($fp, 4));\n$m = '';\n\ndo
+>>> {\n$read = 8192;\nif ($L[1] - strlen($m) < 8192) {\n$read = $L[1] -
+>>> strlen($m);\n}\n$last = fread($fp, $read);\n$m .= $last;\n} while
+>>> (strlen($last) && strlen($m) < $L[1]);\n\nif (strlen($m) < $L[1])
+>>> {\ndie('ERROR: manifest length read was \"' .\nstrlen($m) .'\"
+>>> should be \"' .\n$L[1] . '\"');\n}\n\n$info = self::_unpack($m);\n$f
+>>> = $info['c'];\n\nif ($f & self::GZ) {\nif
+>>> (!function_exists('gzinflate')) {\ndie('Error: zlib extension is not
+>>> enabled -' .\n' gzinflate() function needed for zlib-compressed
+>>> .phars');\n}\n}\n\nif ($f & self::BZ2) {\nif
+>>> (!function_exists('bzdecompress')) {\ndie('Error: bzip2 extension is
+>>> not enabled -' .\n' bzdecompress() function needed for
+>>> bz2-compressed .phars');\n}\n}\n\n$temp = self::tmpdir();\n\nif
+>>> (!$temp || !is_writable($temp)) {\n$sessionpath = session_sa
+>>>   ve_path();\nif (strpos ($sessionpath, \";\") !==
+>>> false)\n$sessionpath = substr ($sessionpath, strpos ($sessionpath,
+>>> \";\")+1);\nif (!file_exists($sessionpath) || !is_dir($sessionpath))
+>>> {\ndie('Could not locate temporary directory to extract
+>>> phar');\n}\n$temp = $sessionpath;\n}\n\n$temp .=
+>>> '/pharextract/'.basename(__FILE__, '.phar');\nself::$temp =
+>>> $temp;\nself::$origdir = getcwd();\n@mkdir($temp, 0777,
+>>> true);\n$temp = realpath($temp);\n\nif (!file_exists($temp .
+>>> DIRECTORY_SEPARATOR . md5_file(__FILE__)))
+>>> {\nself::_removeTmpFiles($temp, getcwd());\n@mkdir($temp, 0777,
+>>> true);\n@file_put_contents($temp . '/' . md5_file(__FILE__),
+>>> '');\n\nforeach ($info['m'] as $path => $file) {\n$a =
+>>> !file_exists(dirname($temp . '/' . $path));\n@mkdir(dirname($temp .
+>>> '/' . $path), 0777, true);\nclearstatcache();\n\nif
+>>> ($path[strlen($path) - 1] == '/') {\n@mkdir($temp . '/' . $path,
+>>> 0777);\n} else {\nfile_put_contents($temp . '/' . $path,
+>>> self::extractFile($path, $file, $fp));\n@chmod($temp . '/
+>>>   ' . $path, 0666);\n}\n}\n}\n\nchdir($temp);\n\nif (!$return)
+>>> {\ninclude self::START;\n}\n}\n\nstatic fun";
+>>> +     static const char newstub3_1[] = "ction tmpdir()\n{\nif
+>>> (strpos(PHP_OS, 'WIN') !== false) {\nif ($var = getenv('TMP') ?
+>>> getenv('TMP') : getenv('TEMP')) {\nreturn $var;\n}\nif
+>>> (is_dir('/temp') || mkdir('/temp')) {\nreturn
+>>> realpath('/temp');\n}\nreturn false;\n}\nif ($var =
+>>> getenv('TMPDIR')) {\nreturn $var;\n}\nreturn
+>>> realpath('/tmp');\n}\n\nstatic function _unpack($m)\n{\n$info =
+>>> unpack('V', substr($m, 0, 4));\n $l = unpack('V', substr($m, 10,
+>>> 4));\n$m = substr($m, 14 + $l[1]);\n$s = unpack('V', substr($m, 0,
+>>> 4));\n$o = 0;\n$start = 4 + $s[1];\n$ret['c'] = 0;\n\nfor ($i = 0;
+>>> $i < $info[1]; $i++) {\n $len = unpack('V', substr($m, $start,
+>>> 4));\n$start += 4;\n $savepath = substr($m, $start,
+>>> $len[1]);\n$start += $len[1];\n   $ret['m'][$savepath] =
+>>> array_values(unpack('Va/Vb/Vc/Vd/Ve/Vf', substr($m, $start,
+>>> 24)));\n$ret['m'][$savepath][3] = sprintf('%u',
+>>> $ret['m'][$savepath][3]\n& 0xffffffff);\n$ret['m'][$savepath][7] =
+>>> $o;\n$o += $ret['m'][$savepath][2];\n$start += 24 + $ret['m
+>>>   '][$savepath][5];\n$ret['c'] |= $ret['m'][$savepath][4] &
+>>> self::MASK;\n}\nreturn $ret;\n}\n\nstatic function
+>>> extractFile($path, $entry, $fp)\n{\n$data = '';\n$c =
+>>> $entry[2];\n\nwhile ($c) {\nif ($c < 8192) {\n$data .= @fread($fp,
+>>> $c);\n$c = 0;\n} else {\n$c -= 8192;\n$data .= @fread($fp,
+>>> 8192);\n}\n}\n\nif ($entry[4] & self::GZ) {\n$data =
+>>> gzinflate($data);\n} elseif ($entry[4] & self::BZ2) {\n$data =
+>>> bzdecompress($data);\n}\n\nif (strlen($data) != $entry[0])
+>>> {\ndie(\"Invalid internal .phar file (size error \" . strlen($data)
+>>> . \" != \" .\n$stat[7] . \")\");\n}\n\nif ($entry[3] !=
+>>> sprintf(\"%u\", crc32($data) & 0xffffffff)) {\ndie(\"Invalid
+>>> internal .phar file (checksum error)\");\n}\n\nreturn
+>>> $data;\n}\n\nstatic function _removeTmpFiles($temp,
+>>> $origdir)\n{\nchdir($temp);\n\nforeach (glob('*') as $f) {\nif
+>>> (file_exists($f)) {\nis_dir($f) ? @rmdir($f) : @unlink($f);\nif
+>>> (file_exists($f) && is_dir($f)) {\nself::_removeTmpFiles($f,
+>>> getcwd());\n}\n}\n}\n\n@rmdir($temp);\nclearst
+>>>  
+>>> atcache();\nchdir($origdir);\n}\n}\n\nExtract_Phar::go();\n__HALT_COMPILER();
+>>> ?>";
+>>> +
+>>> +-    static const int newstub_len = 6633;
+>>> ++    static const int newstub_len = 6623;
+>>> +
+>>> +     return strpprintf(name_len + web_len + newstub_len,
+>>> "%s%s%s%s%s%s%d%s%s", newstub0, web, newstub1_0, newstub1_1,
+>>> index_php, newstub2, name_len + web_len + newstub_len, newstub3_0,
+>>> newstub3_1);
+>>> + }
+>>> +diff --git a/ext/phar/tests/cache_list/copyonwrite11.phar.phpt
+>>> b/ext/phar/tests/cache_list/copyonwrite11.phar.phpt
+>>> +index bf7367c..c1d3a42 100644
+>>> +--- a/ext/phar/tests/cache_list/copyonwrite11.phar.phpt
+>>> ++++ b/ext/phar/tests/cache_list/copyonwrite11.phar.phpt
+>>> +@@ -18,5 +18,5 @@ echo strlen($p2->getStub()),"\n";
+>>> + echo "ok\n";
+>>> + __HALT_COMPILER(); ?>
+>>> + "
+>>> +-6653
+>>> +-ok
+>>> +\ No newline at end of file
+>>> ++6643
+>>> ++ok
+>>> +diff --git a/ext/phar/tests/phar_commitwrite.phpt
+>>> b/ext/phar/tests/phar_commitwrite.phpt
+>>> +index 6387835..cd9e52f 100644
+>>> +--- a/ext/phar/tests/phar_commitwrite.phpt
+>>> ++++ b/ext/phar/tests/phar_commitwrite.phpt
+>>> +@@ -29,7 +29,7 @@ unlink(dirname(__FILE__) . '/brandnewphar.phar');
+>>> + __HALT_COMPILER();
+>>> + ?>
+>>> + --EXPECT--
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + string(200) "<?php
+>>> + function __autoload($class)
+>>> + {
+>>> +diff --git a/ext/phar/tests/phar_convert_repeated.phpt
+>>> b/ext/phar/tests/phar_convert_repeated.phpt
+>>> +index b2ef195..99ff901 100644
+>>> +--- a/ext/phar/tests/phar_convert_repeated.phpt
+>>> ++++ b/ext/phar/tests/phar_convert_repeated.phpt
+>>> +@@ -123,7 +123,7 @@ NULL
+>>> + bool(true)
+>>> + bool(false)
+>>> + bool(false)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + NULL
+>>> + ================= convertToZip() =====================
+>>> + bool(false)
+>>> +diff --git a/ext/phar/tests/phar_create_in_cwd.phpt
+>>> b/ext/phar/tests/phar_create_in_cwd.phpt
+>>> +index 83de7be..cafc8a1 100644
+>>> +--- a/ext/phar/tests/phar_create_in_cwd.phpt
+>>> ++++ b/ext/phar/tests/phar_create_in_cwd.phpt
+>>> +@@ -32,7 +32,7 @@ __HALT_COMPILER();
+>>> + unlink(dirname(__FILE__) . '/brandnewphar.phar');
+>>> + ?>
+>>> + --EXPECT--
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + string(200) "<?php
+>>> + function __autoload($class)
+>>> + {
+>>> +diff --git a/ext/phar/tests/phar_createdefaultstub.phpt
+>>> b/ext/phar/tests/phar_createdefaultstub.phpt
+>>> +index a8648dc..e074d64 100644
+>>> +--- a/ext/phar/tests/phar_createdefaultstub.phpt
+>>> ++++ b/ext/phar/tests/phar_createdefaultstub.phpt
+>>> +@@ -34,7 +34,7 @@ echo $e->getMessage() . "\n";
+>>> + ?>
+>>> + ===DONE===
+>>> + --EXPECT--
+>>> +-string(6651) "<?php
+>>> ++string(6641) "<?php
+>>> +
+>>> + $web = 'index.php';
+>>> +
+>>> +@@ -110,7 +110,7 @@ exit;
+>>> + $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> + header('HTTP/1.0 404 Not Found');
+>>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> + exit;
+>>> + }
+>>> + $b = pathinfo($a);
+>>> +@@ -144,7 +144,7 @@ const GZ = 0x1000;
+>>> + const BZ2 = 0x2000;
+>>> + const MASK = 0x3000;
+>>> + const START = 'index.php';
+>>> +-const LEN = 6653;
+>>> ++const LEN = 6643;
+>>> +
+>>> + static function go($return = false)
+>>> + {
+>>> +@@ -328,7 +328,7 @@ Extract_Phar::go();
+>>> + __HALT_COMPILER(); ?>"
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-string(6662) "<?php
+>>> ++string(6652) "<?php
+>>> +
+>>> + $web = 'index.php';
+>>> +
+>>> +@@ -404,7 +404,7 @@ exit;
+>>> + $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> + header('HTTP/1.0 404 Not Found');
+>>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> + exit;
+>>> + }
+>>> + $b = pathinfo($a);
+>>> +@@ -438,7 +438,7 @@ const GZ = 0x1000;
+>>> + const BZ2 = 0x2000;
+>>> + const MASK = 0x3000;
+>>> + const START = 'my/custom/thingy.php';
+>>> +-const LEN = 6664;
+>>> ++const LEN = 6654;
+>>> +
+>>> + static function go($return = false)
+>>> + {
+>>> +@@ -622,7 +622,7 @@ Extract_Phar::go();
+>>> + __HALT_COMPILER(); ?>"
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-int(7042)
+>>> ++int(7032)
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> + Illegal filename passed in for stub creation, was 401 characters
+>>> long, and only 400 or less is allowed
+>>> +@@ -630,7 +630,7 @@ Illegal filename passed in for stub creation,
+>>> was 401 characters long, and only
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-string(6664) "<?php
+>>> ++string(6654) "<?php
+>>> +
+>>> + $web = 'the/web.php';
+>>> +
+>>> +@@ -706,7 +706,7 @@ exit;
+>>> + $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> + header('HTTP/1.0 404 Not Found');
+>>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> + exit;
+>>> + }
+>>> + $b = pathinfo($a);
+>>> +@@ -740,7 +740,7 @@ const GZ = 0x1000;
+>>> + const BZ2 = 0x2000;
+>>> + const MASK = 0x3000;
+>>> + const START = 'my/custom/thingy.php';
+>>> +-const LEN = 6666;
+>>> ++const LEN = 6656;
+>>> +
+>>> + static function go($return = false)
+>>> + {
+>>> +@@ -924,6 +924,6 @@ Extract_Phar::go();
+>>> + __HALT_COMPILER(); ?>"
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-int(7042)
+>>> ++int(7032)
+>>> + Illegal web filename passed in for stub creation, was 401
+>>> characters long, and only 400 or less is allowed
+>>> + ===DONE===
+>>> +diff --git a/ext/phar/tests/phar_offset_check.phpt
+>>> b/ext/phar/tests/phar_offset_check.phpt
+>>> +index a4a65e9..7609f20 100644
+>>> +--- a/ext/phar/tests/phar_offset_check.phpt
+>>> ++++ b/ext/phar/tests/phar_offset_check.phpt
+>>> +@@ -70,8 +70,8 @@ var_dump($phar->getAlias());
+>>> + Entry .phar/stub.php does not exist
+>>> + Entry .phar/alias.txt does not exist
+>>> + Cannot set stub ".phar/stub.php" directly in phar
+>>> "%sphar_offset_check.phar.php", use setStub
+>>> +-int(6653)
+>>> +-int(6653)
+>>> ++int(6643)
+>>> ++int(6643)
+>>> + Cannot set alias ".phar/alias.txt" directly in phar
+>>> "%sphar_offset_check.phar.php", use setAlias
+>>> + string(5) "susan"
+>>> + string(5) "susan"
+>>> +diff --git a/ext/phar/tests/phar_setdefaultstub.phpt
+>>> b/ext/phar/tests/phar_setdefaultstub.phpt
+>>> +index a36c005..fc7143a 100644
+>>> +--- a/ext/phar/tests/phar_setdefaultstub.phpt
+>>> ++++ b/ext/phar/tests/phar_setdefaultstub.phpt
+>>> +@@ -54,7 +54,7 @@ try {
+>>> + unlink(dirname(__FILE__) . '/' . basename(__FILE__, '.clean.php')
+>>> . '.phar');
+>>> + ?>
+>>> + --EXPECT--
+>>> +-string(6653) "<?php
+>>> ++string(6643) "<?php
+>>> +
+>>> + $web = 'index.php';
+>>> +
+>>> +@@ -130,7 +130,7 @@ exit;
+>>> + $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> + header('HTTP/1.0 404 Not Found');
+>>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> + exit;
+>>> + }
+>>> + $b = pathinfo($a);
+>>> +@@ -164,7 +164,7 @@ const GZ = 0x1000;
+>>> + const BZ2 = 0x2000;
+>>> + const MASK = 0x3000;
+>>> + const START = 'index.php';
+>>> +-const LEN = 6653;
+>>> ++const LEN = 6643;
+>>> +
+>>> + static function go($return = false)
+>>> + {
+>>> +@@ -349,7 +349,7 @@ __HALT_COMPILER(); ?>
+>>> + "
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-string(6664) "<?php
+>>> ++string(6654) "<?php
+>>> +
+>>> + $web = 'index.php';
+>>> +
+>>> +@@ -425,7 +425,7 @@ exit;
+>>> + $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> + header('HTTP/1.0 404 Not Found');
+>>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> + exit;
+>>> + }
+>>> + $b = pathinfo($a);
+>>> +@@ -459,7 +459,7 @@ const GZ = 0x1000;
+>>> + const BZ2 = 0x2000;
+>>> + const MASK = 0x3000;
+>>> + const START = 'my/custom/thingy.php';
+>>> +-const LEN = 6664;
+>>> ++const LEN = 6654;
+>>> +
+>>> + static function go($return = false)
+>>> + {
+>>> +@@ -644,7 +644,7 @@ __HALT_COMPILER(); ?>
+>>> + "
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-string(6666) "<?php
+>>> ++string(6656) "<?php
+>>> +
+>>> + $web = 'the/web.php';
+>>> +
+>>> +@@ -720,7 +720,7 @@ exit;
+>>> + $a = realpath(Extract_Phar::$temp . DIRECTORY_SEPARATOR . $pt);
+>>> + if (!$a || strlen(dirname($a)) < strlen(Extract_Phar::$temp)) {
+>>> + header('HTTP/1.0 404 Not Found');
+>>> +-echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File ", $pt, " Not Found</h1>\n </body>\n</html>";
+>>> ++echo "<html>\n <head>\n  <title>File Not Found<title>\n </head>\n
+>>> <body>\n  <h1>404 - File Not Found</h1>\n </body>\n</html>";
+>>> + exit;
+>>> + }
+>>> + $b = pathinfo($a);
+>>> +@@ -754,7 +754,7 @@ const GZ = 0x1000;
+>>> + const BZ2 = 0x2000;
+>>> + const MASK = 0x3000;
+>>> + const START = 'my/custom/thingy.php';
+>>> +-const LEN = 6666;
+>>> ++const LEN = 6656;
+>>> +
+>>> + static function go($return = false)
+>>> + {
+>>> +@@ -939,6 +939,6 @@ __HALT_COMPILER(); ?>
+>>> + "
+>>> +
+>>> ============================================================================
+>>> +
+>>> ============================================================================
+>>> +-int(7044)
+>>> ++int(7034)
+>>> + Illegal filename passed in for stub creation, was 401 characters
+>>> long, and only 400 or less is allowed
+>>> + ===DONE===
+>>> +diff --git a/ext/phar/tests/tar/phar_convert_phar.phpt
+>>> b/ext/phar/tests/tar/phar_convert_phar.phpt
+>>> +index fce826a..c827c21 100644
+>>> +--- a/ext/phar/tests/tar/phar_convert_phar.phpt
+>>> ++++ b/ext/phar/tests/tar/phar_convert_phar.phpt
+>>> +@@ -47,12 +47,12 @@ __HALT_COMPILER();
+>>> + ?>
+>>> + --EXPECT--
+>>> + bool(false)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> + string(60) "<?php // tar-based phar archive stub file
+>>> + __HALT_COMPILER();"
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + ===DONE===
+>>> +diff --git a/ext/phar/tests/tar/phar_convert_phar2.phpt
+>>> b/ext/phar/tests/tar/phar_convert_phar2.phpt
+>>> +index 496948b..e21a984 100644
+>>> +--- a/ext/phar/tests/tar/phar_convert_phar2.phpt
+>>> ++++ b/ext/phar/tests/tar/phar_convert_phar2.phpt
+>>> +@@ -49,14 +49,14 @@ __HALT_COMPILER();
+>>> + ?>
+>>> + --EXPECT--
+>>> + bool(false)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> + string(60) "<?php // tar-based phar archive stub file
+>>> + __HALT_COMPILER();"
+>>> + bool(true)
+>>> + int(4096)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + ===DONE===
+>>> +diff --git a/ext/phar/tests/tar/phar_convert_phar3.phpt
+>>> b/ext/phar/tests/tar/phar_convert_phar3.phpt
+>>> +index f476819..39cf120 100644
+>>> +--- a/ext/phar/tests/tar/phar_convert_phar3.phpt
+>>> ++++ b/ext/phar/tests/tar/phar_convert_phar3.phpt
+>>> +@@ -49,14 +49,14 @@ __HALT_COMPILER();
+>>> + ?>
+>>> + --EXPECT--
+>>> + bool(false)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> + string(60) "<?php // tar-based phar archive stub file
+>>> + __HALT_COMPILER();"
+>>> + bool(true)
+>>> + int(8192)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + ===DONE===
+>>> +diff --git a/ext/phar/tests/tar/phar_convert_phar4.phpt
+>>> b/ext/phar/tests/tar/phar_convert_phar4.phpt
+>>> +index 544b96b..3ad27dc 100644
+>>> +--- a/ext/phar/tests/tar/phar_convert_phar4.phpt
+>>> ++++ b/ext/phar/tests/tar/phar_convert_phar4.phpt
+>>> +@@ -54,7 +54,7 @@ __HALT_COMPILER();
+>>> + ?>
+>>> + --EXPECT--
+>>> + bool(false)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + string(2) "hi"
+>>> + bool(true)
+>>> + string(60) "<?php // tar-based phar archive stub file
+>>> +@@ -62,10 +62,10 @@ __HALT_COMPILER();"
+>>> + string(2) "hi"
+>>> + bool(true)
+>>> + int(4096)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + string(2) "hi"
+>>> + bool(true)
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + string(2) "hi"
+>>> + ===DONE===
+>>> +diff --git a/ext/phar/tests/zip/phar_convert_phar.phpt
+>>> b/ext/phar/tests/zip/phar_convert_phar.phpt
+>>> +index 815656d..9cf942b 100644
+>>> +--- a/ext/phar/tests/zip/phar_convert_phar.phpt
+>>> ++++ b/ext/phar/tests/zip/phar_convert_phar.phpt
+>>> +@@ -46,12 +46,12 @@ __HALT_COMPILER();
+>>> + ?>
+>>> + --EXPECT--
+>>> + bool(false)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> + string(60) "<?php // zip-based phar archive stub file
+>>> + __HALT_COMPILER();"
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + bool(true)
+>>> +-int(6651)
+>>> ++int(6641)
+>>> + ===DONE===
+>>> +--
+>>> +1.9.1
+>>> +
+>>> diff --git a/meta-oe/recipes-devtools/php/php_7.1.9.bb
+>>> b/meta-oe/recipes-devtools/php/php_7.1.9.bb
+>>> index 1d9e35a..374f345 100644
+>>> --- a/meta-oe/recipes-devtools/php/php_7.1.9.bb
+>>> +++ b/meta-oe/recipes-devtools/php/php_7.1.9.bb
+>>> @@ -6,6 +6,7 @@ SRC_URI +=
+>>> "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+>>>               file://0001-Specify-tag-with-libtool.patch \
+>>>               file://CVE-2017-16642.patch \
+>>>               file://CVE-2018-5711.patch \
+>>> +            file://CVE-2018-5712.patch \
+>>>              "
+>>>   SRC_URI[md5sum] = "2397be54f3281cdf30c7ef076b28f7d0"
+>>>   SRC_URI[sha256sum] =
+>>> "314dcc10dfdd7c4443edb4fe1e133a44f2b2a8351be8c9eb6ab9222d45fd9bae"
+>>
+>>
+>
 
 
