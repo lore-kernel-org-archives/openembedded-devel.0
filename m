@@ -1,24 +1,58 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B7216FF80
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CF68600B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 16:12:23 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w27GCOfG027584
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  7 Mar 2018 19:00:43 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id y26so1236969pgv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 7 Mar 2018 08:12:24 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 7 Mar 2018 08:11:50 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Mar 2018 11:12:18 -0500
-Message-ID: <1520439138-15577-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 07 Mar 2018 11:00:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=gC0pGAhe4O5QeMNymft1rpej1lbatDxoNWxoFXrxD6I=;
+	b=hetQTIY/CLisdDRFAbL3xK3PqKMfMVQN/k+Yf45Q/3OdwfbW1laxJlX/wjQ1N3m4p+
+	c6P+VkHcNCuoCDcLuvDq9c/wrpWp9pwiagH2fpVxkEzZ38a1Et8VuTP/Jsa0qjDLZPSu
+	mp7bxdVcVnUmQA0jXW9bYIa4S2sHxR1CbrEyEayCIs+4H3V9w30LUeFBUFK5OPbDmBNK
+	cq5Dtmsi5ljqX/LrRAU2ewF3DutS4EetCUNLP9xcOoANEymOdPdaGlcMEOIoHNZMyYmj
+	fr2RmPSL/8ovi15bHBp+SKCe63GMnjQKEh4RuBcIARNq+Wg5oXTW0VK6Z5ORclHHnSHk
+	X+pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=gC0pGAhe4O5QeMNymft1rpej1lbatDxoNWxoFXrxD6I=;
+	b=eC1wwP8wnWPrExWSDHvvx25s+zMdyd18po57H226JUpQ0VJd2ZuTntXyRu7dIe6Na3
+	uDHyDrr2XlkXGJuBqzLrtZaBR++nf8pl2/p/RyrRFeeyxzsSI+9Kes5cPQ2xtHIyIYXr
+	KJb3yk866tO4BHGv4/NMb3aNibcCaDVQa6/6Avfux1LaACVlq07StV4TiXxwxRRh+vLv
+	v20TBmhQqpQhOJMVloPKAyxk8V9wZxC+8PHNO4ykEEpNNTKDR5NY55ZjmLxDb6KUv4ND
+	sIMLS7ZZ1EXfhWB/fBba6iJ56VLKSKGwmNn7UxlAX1FyXOmUtcDmcLi5RNqMh1X6F1nD
+	7tLw==
+X-Gm-Message-State: APf1xPAKllOzKP/d0Hxha3ttea4Cm6M6cDjeDMkGEWNLQjUXFTnibYxI
+	rE7kFblvs6m4Oa0wrrq3503v8Q==
+X-Google-Smtp-Source: AG47ELutZFihyNuXWYtI+cKNdmrvhuA6mEUTVOj7NEnnqjKyz91FmlxJ2HLOkZ0EB8o3En342qnMjg==
+X-Received: by 10.101.65.5 with SMTP id w5mr18955392pgp.214.1520449244420;
+	Wed, 07 Mar 2018 11:00:44 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1184:6d76:b853:98d2:431c?
+	([2601:202:4000:1184:6d76:b853:98d2:431c])
+	by smtp.gmail.com with ESMTPSA id
+	q66sm36364785pfi.95.2018.03.07.11.00.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 Mar 2018 11:00:43 -0800 (PST)
+To: "Bach, Pascal" <pascal.bach@siemens.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1519594406-24490-1-git-send-email-akuster808@gmail.com>
+	<1519594406-24490-32-git-send-email-akuster808@gmail.com>
+	<355BE46A91031048906B695426A8D8E61733E141@DEFTHW99EH4MSX.ww902.siemens.net>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <4e31641e-29b1-b4a3-e0ec-4dff8fc5ad5d@gmail.com>
+Date: Wed, 7 Mar 2018 11:00:42 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gnulib: use deltask instead of noexec
+In-Reply-To: <355BE46A91031048906B695426A8D8E61733E141@DEFTHW99EH4MSX.ww902.siemens.net>
+Subject: Re: [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,48 +65,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 16:12:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Mar 2018 19:00:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-When building an image which included 'netcf' I saw the following
-warning which is followed by a python backtrace:
 
-  WARNING: cube-dom0-0.6-r0 do_rootfs: \
-  Manifest .../manifest-x86_64_x86_64-nativesdk-gnulib.package_write_rpm \
-  not found in genericx86_64 core2-64 x86_64 allarch x86_64_x86_64-nativesdk \
-  (variant '')?
 
-From this we find that the 'gnulib' package would fail the manifest
-crosscheck for the 'package_write_rpm' task. By switching from
-'noexec' to 'deltask' for this task (and its "siblings") we completely
-remove the task and thus there is not crosscheck to fail.
+On 03/05/2018 04:44 AM, Bach, Pascal wrote:
+> Hi Armin
+>
+> Why was this moved to recipes-bsp? I don't see the relation.
+Hmm, don't recall how I came to that conclusion. recipes-dbs better?
+> The same question is why leveldb was moved to recipes-security?
+same response as above.
+>
+> What did I miss?
+you didn't. Thanks for query.
 
-NOTE that there is a pending merge which will change the backtrace for
-a proper ERROR: [package_manager.py: Print offending package instead
-of non-sense trace]
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
- meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-index b505ac1..b72ffa9 100644
---- a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-+++ b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-@@ -29,8 +29,8 @@ do_configure[noexec] = "1"
- do_compile[noexec] = "1"
- do_package[noexec] = "1"
- do_packagedata[noexec] = "1"
--do_package_write_ipk[noexec] = "1"
--do_package_write_deb[noexec] = "1"
--do_package_write_rpm[noexec] = "1"
-+deltask package_write_ipk
-+deltask package_write_deb
-+deltask package_write_rpm
- 
- BBCLASSEXTEND = "native"
--- 
-2.7.4
+- armin
+>
+> Pascal
+>
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+>> Behalf Of Armin Kuster
+>> Sent: Sonntag, 25. Februar 2018 22:33
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: [oe] [meta-oe][PATCH 32/36] rocksdb: move to recipes-bsp
+>>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>  meta-oe/{recipes-extended => recipes-bsp}/rocksdb/rocksdb_git.bb | 0
+>>  1 file changed, 0 insertions(+), 0 deletions(-)  rename meta-oe/{recipes-
+>> extended => recipes-bsp}/rocksdb/rocksdb_git.bb (100%)
+>>
+>> diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb b/meta-
+>> oe/recipes-bsp/rocksdb/rocksdb_git.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
+>> rename to meta-oe/recipes-bsp/rocksdb/rocksdb_git.bb
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
