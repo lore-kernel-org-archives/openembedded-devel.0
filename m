@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id EDE6D78A26
+Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
+	[209.85.160.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D1A678A26
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:28 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id f23-v6so1860172plr.10
+	Wed,  7 Mar 2018 19:01:29 +0000 (UTC)
+Received: by mail-pl0-f67.google.com with SMTP id m22-v6so1863967pls.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 07 Mar 2018 11:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=+4qjkGU8LQ9L8ZvzcSM+YBPKGUQZe/Bvcn95OqE2GpI=;
-	b=bg2SxkVZ+JWCpku1qw6uPbIvi6eq42+1yNQXMThIT2oKvrDEXXGFH19liicn6TqPTh
-	v1LZpCA1pXH8euz4hWhP3kc81kTcFG2z/Jb5i+qxL8V5xjwV28ZbFbci4Wvr9aDGbags
-	UUJbLdxcWi2dhAaOkLCM5GwwMrjB1WVoXfNaoIVlBcuqmDl1nRvr6DwQEM2kGCbEntS8
-	6NNCU7H9KD4b8oymIyeRfdjcUkufe1xVaGfFbuUpYKGCu4SLewCbGB4PO49fCRS2XxPh
-	cJdUkS52uBbV835CDY08gU77vpZwe7jFu0k09Qbeoe4L6+KYs5ePZQ/bHXbrMctdjn3l
-	Hsxg==
+	bh=GlS6pwYENPFpgm2FWkDC0kaqGLM1EZ6Olidz1kkquqU=;
+	b=eo7gPoeYYnF2V0rIamu2URTHM6ig1VYxeKmy98G0YeINr2qY3fpt3aSqNUIxZoG5M+
+	2erA39sBcdxpfi3nxVde6MH90OoCfb2PdD3c+pmrAUrNJQMSPgnGhxvXDLax1DIC3WBo
+	4X12deR8NVQUP2kYJKyUqjM7XKwCWINcUV/vF4BUl5RK50QkTESSNWPrtOlHu96Gvewy
+	eHLJJXFIoNDj+ZiCgNRtu581Gue8KLIHIhWl9DU5neC7oJ2UEscortnEMyCaO8bH0V9L
+	yoRuMWisOz/7isLDHbg1j/rezo/jc/CVe0dscPgGVc8sky7EQuxNhl9523WKkgQK/oMN
+	H1eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=+4qjkGU8LQ9L8ZvzcSM+YBPKGUQZe/Bvcn95OqE2GpI=;
-	b=fIWzdFXo4b5es07Gi0C9dZlWOo7SX/3uue21jwFwZU0gARUzS7OCeb9ur5WMD1BlCd
-	Cr3DeZOE4HyJ+NekbXPhYoRJ2X5aR8mhWaJi4zdGY3bm9jmP4T93I3zTDjSIdhEFYrtD
-	zvSJC8YdCMp2fWL6vPhHStIla0Ly9R2wgx+AU8MZ55RiulAhRbge63lFDd0AY88CkWdZ
-	jvqmbTx+nw3BR9E32XA3Y1sU2R+Q0BofgZmkUaAEG41a2G4zPoFH1BURRELknQZCc4uN
-	rAoTfp1/JCTbgIjKXdkaw+PDjBKrEdjoN5Oe/UfoMgsAUv1TOMDTmZ3iMR4+8IWJ4232
-	0I6A==
-X-Gm-Message-State: AElRT7FVNEyN998cqKOPEzuV1jvQwn61yf7mUJaDxPY1n7oT+m4UJpeG
-	w7z42aH7QYs/JChyzwyY5DWIuQ==
-X-Google-Smtp-Source: AG47ELsYTSGf3f0pGaw8bWxSp4EkW4dv2oNbNFfuYGj7Y2iAeDo5/T1zx2KrKo/PLQabUBZmn/yD0g==
-X-Received: by 2002:a17:902:b713:: with SMTP id
-	d19-v6mr17952683pls.91.1520449289659; 
-	Wed, 07 Mar 2018 11:01:29 -0800 (PST)
+	bh=GlS6pwYENPFpgm2FWkDC0kaqGLM1EZ6Olidz1kkquqU=;
+	b=UGz599PP57kkBWBXO1RO05M8koMrDRGNtUn2eTP/WK/D0Qk78stiIDLtNrSyL5sEth
+	NouLAXIqIyhkC/Zsmrwu6TH3TpTyvXLHohaJ5GsS5PByRd7/acTsLUAHtCHwPoPNM+2A
+	vBvfeZCZcbkyUxpY8HmKBWjgBtuU4goCw92P+ogYuu+AxYuZ0nT+Btkn4jF8C3w6diGN
+	EUFFleqqT8kmIbfplkC9B1GIA/0oVsXbEuhkWFP/tG55n52qt3+cLYizfVyMb4Ksd2eu
+	FP1bmSGVZGf7m0rp+uqBuBe1dYTe1GsRPgeg1GzCISclx8U3XYIgbj409EI5dntJLRqT
+	0nOA==
+X-Gm-Message-State: APf1xPAJw1nhN5gRx5sCESOtEl61MASgjKP8QLWheCib2AUGL/6k+Oov
+	s8PYY2zgwsk8nZOksbkAMu8=
+X-Google-Smtp-Source: AG47ELsIkCwoYfa6P/1oN/WV9NXq4mH6gZP89VpLYCvx/PhSxRdB/bDnMhL1uUca5naLVgNcy6uvOw==
+X-Received: by 2002:a17:902:aa43:: with SMTP id
+	c3-v6mr21528692plr.357.1520449290816; 
+	Wed, 07 Mar 2018 11:01:30 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.28
+	s67sm36835461pfg.104.2018.03.07.11.01.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:29 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:30 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:01:00 -0800
-Message-Id: <1520449275-29492-8-git-send-email-akuster808@gmail.com>
+Date: Wed,  7 Mar 2018 11:01:01 -0800
+Message-Id: <1520449275-29492-9-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
 References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-gnome][PATCH 08/23] libgnomekbd: only include when x11 in DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 09/23] keybinder: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,24 +64,24 @@ X-List-Received-Date: Wed, 07 Mar 2018 19:01:29 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb | 4 +++-
+ meta-gnome/recipes-support/keybinder/keybinder_3.0.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
-index 12ed81d..40249fd 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
-@@ -6,7 +6,9 @@ SECTION = "x11/gnome/libs"
+diff --git a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+index d6744a3..0a0a3e6 100644
+--- a/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
++++ b/meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+@@ -18,7 +18,9 @@ SRC_URI = "git://github.com/engla/keybinder.git;branch=keybinder-3.0 \
  
- DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
+ RDEPENDS_${PN} = "gtk+"
  
--inherit gnome gobject-introspection gettext
-+inherit distro_features_check gnome gobject-introspection gettext
+-inherit autotools gtk-doc gobject-introspection
++inherit distro_features_check autotools gtk-doc gobject-introspection
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
- 
- GNOME_COMPRESS_TYPE = "xz"
- 
+ do_configure_prepend() {
+ 	touch ${S}/ChangeLog
+ }
 -- 
 2.7.4
 
