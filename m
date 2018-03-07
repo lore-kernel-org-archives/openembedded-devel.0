@@ -1,53 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 98E7F78A14
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D455C78A1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 19:01:17 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id c11-v6so1872330plo.0
+	Wed,  7 Mar 2018 19:01:22 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id l4so1228791pgp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 11:01:19 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=rS48X2lBcknG2RO6KUdsqxiFeiZhAUEW+bb9+Wud+u0=;
-	b=U2Gtken0NAcCM6hqib77sCWqZIOLwt9EkC1upHTkuOgjRTL2p0P7DrfJFmfzdUuhsw
-	bBLH2ZmT8JSPsU2c9/xFQgsucTwq9dE8CxyW9BKISQ9ddiDOO0K97zwxQhAEtikAYwlE
-	LIN/2yu1sr0wUMzKlUemQiZ+39FIGVKbeAfHBiI6FPRgH1QotZiGlgM+jsUyQfc3JOXt
-	oMie+z6mUEe3zWCelo6u/9uTlnmCGKKuAlCBcwHkuMwzLMZvsOs1XPrrMXyimKuqy1V2
-	6+jc1OUXtxBWE8fJRNi/GovBCMg4nVFa1nbUNm+flFugEN/26J1361Am7fUVeYs5QqpG
-	0GXg==
+	bh=LihhtaBGlJId9xRUscTg2eu5IOLdT5qWvcVV6L8ci68=;
+	b=tphlH0ZFisVbXG4EkNV1NkDv1gn/p0b+0swqhGBJrvxnYh0Yq0Ov6GOIQmmEA2QVTE
+	VFyoYZLG2xP6y2Bh2B0IfI5w+/sT8YYv1QJIPHAJBDrLyl62069usB0YfVdsR6vA0j9l
+	ixwLOMGOJcfDeY2HRGN0pi0bu190k5toesHSgq5DgshGKPsBdMU7tUWLGe6IHDx3S1a6
+	zRUMpcyTgSF3pjwFvYsH1D0aj6QThIKFExFJqPoUtkLzXMCU0gG2snrU4PbntVh6W5DQ
+	0DjZ+QBgNwpKJK/xeCECG0XLxTc66XmAmi3zzQlarl7EpS1oQtqGURdFT2qlEBicVM8q
+	2iAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=rS48X2lBcknG2RO6KUdsqxiFeiZhAUEW+bb9+Wud+u0=;
-	b=WT3sFhsGOwan4afEQPyV77E+0ijuPKiSODExVFn3MY6FXZggw9oyduaXLKJ45p4rR1
-	o3vveDpsKS15tvlp6gxAWretGe08O6ppIUOdmSYxgEpFxU1jyYaw+IJgjfxYGwzSVJfL
-	Kqozdv8YfvWgLdAahtX0I79CjRb2m4lxNl+HQ0SWGDnmsVT6iAndzskMMcWZ736mS8Ig
-	zbOneVTgI9aEyNhX0GdI3tX/1Fka8hMtmXukNRi9qqCyl1JdiN9Sqws9EUH4cGyYeKyJ
-	iut6xx10tbE5tant9e++sHC3utVzPtJKc1kAIVkM2t+sHJnBsjHFwljHlvy9yQSmoz3c
-	vb3w==
-X-Gm-Message-State: APf1xPD5z8stIUHkiedute/JUKgs4VKoJu14MmlE7DvSe9xAM1XJIleR
-	e+mhbmH9GExYtsY8vQHvyR8=
-X-Google-Smtp-Source: AG47ELvJRaxV7HR+KO78QsXX7SKgVneaEnnL2nRDwg9CbRpzj2nKRduHnTRvo77z/8QDeTP1Spnidg==
-X-Received: by 2002:a17:902:684a:: with SMTP id
-	f10-v6mr21899072pln.129.1520449278816; 
-	Wed, 07 Mar 2018 11:01:18 -0800 (PST)
+	bh=LihhtaBGlJId9xRUscTg2eu5IOLdT5qWvcVV6L8ci68=;
+	b=pNpIt2kS115eHXf0j1uN0u87R4yaODAueTPXNfPQgC91ISdf3WabN6soL8pPxPChuk
+	WP7ejmEBZI0JIlyTDw84NzBSgWbxp/OrlBFh5uJ59pA+AJCfTNaAisez38Y1aTQTZlWJ
+	HWhasxV2wS5GDdl4ErD3buwcPcawAvo+gwHiEFKVBouYE9ZOquPX+hwmh9EyBecIRO+V
+	/HaDKlHKmkfJ71vKeroMbJWgyGiuhUVR5FkIkfnxbtkpZMzctRb6cA8JWzO6grbU//20
+	3wtx1L+ci5aLUnvE/6mgsRlU0JE2z/X1E990bo45MvTWIRvWRcQp6MXYDC9MmpUxCpec
+	C+BQ==
+X-Gm-Message-State: APf1xPCuq3bHZq61raBb/TT4xX+57VoNFPQdH9bdKc/fug1uuxqlijO/
+	kBJbGRrWdanmHLf3G7YE52hoXQ==
+X-Google-Smtp-Source: AG47ELvEumvgNECsG88N4nRJKsifgbzN9HHcLuttSf4q0uB1OrsilxKY5ioXatC2JYsKADnftMyW7A==
+X-Received: by 10.98.25.10 with SMTP id 10mr23291028pfz.136.1520449283944;
+	Wed, 07 Mar 2018 11:01:23 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:6d76:b853:98d2:431c])
 	by smtp.gmail.com with ESMTPSA id
-	s67sm36835461pfg.104.2018.03.07.11.01.17
+	s67sm36835461pfg.104.2018.03.07.11.01.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 07 Mar 2018 11:01:18 -0800 (PST)
+	Wed, 07 Mar 2018 11:01:19 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Mar 2018 11:00:54 -0800
-Message-Id: <1520449275-29492-2-git-send-email-akuster808@gmail.com>
+Date: Wed,  7 Mar 2018 11:00:55 -0800
+Message-Id: <1520449275-29492-3-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
 References: <1520449275-29492-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-gnome][PATCH 02/23] gupnp-tools: only include when x11 in DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 03/23] florence: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,25 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 19:01:18 -0000
+X-List-Received-Date: Wed, 07 Mar 2018 19:01:22 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb | 4 +++-
+ meta-gnome/recipes-support/florence/florence_0.6.3.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb
-index 9360d65..3ddb818 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.13.bb
-@@ -8,4 +8,6 @@ RRECOMMENDS_${PN} = "adwaita-icon-theme"
- SRC_URI = "http://download.gnome.org/sources/${BPN}/0.8/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "212d85ebce89b32468b59e1164050d40"
- SRC_URI[sha256sum] = "aa3decb9d532c0e2e505adc592f431fd81c0231ded2981129e87da13712479ed"
--inherit autotools pkgconfig gettext
-+inherit distro_features_check autotools pkgconfig gettext
+diff --git a/meta-gnome/recipes-support/florence/florence_0.6.3.bb b/meta-gnome/recipes-support/florence/florence_0.6.3.bb
+index b9b7d0c..bb55721 100644
+--- a/meta-gnome/recipes-support/florence/florence_0.6.3.bb
++++ b/meta-gnome/recipes-support/florence/florence_0.6.3.bb
+@@ -12,7 +12,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/${PN}/${PV}/${PN}-${PV}.tar.bz2"
+ SRC_URI[md5sum] = "8775051d7352f75dec5a86dc9964e8e0"
+ SRC_URI[sha256sum] = "422992fd07d285be73cce721a203e22cee21320d69b0fda1579ce62944c5091e"
+ 
+-inherit gettext autotools gconf pkgconfig
++inherit distro_features_check gettext autotools gconf pkgconfig
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet --without-xrecord"
+ 
 -- 
 2.7.4
 
