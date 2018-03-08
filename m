@@ -1,44 +1,29 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id CAF2E78A09
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C533789F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Mar 2018 21:09:44 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1520456985; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=BYwEDjb+Lo/n6oC669ntaBXJGaVeMeSagy1cJUZGnv8=;
-	b=XoaA9/gzBPmptbxD4xojyLzBsHbAeC1j97hZj+mLnrxXWCEM4BPwZKFrZMDm4FbRqm0VNrmV
-	hRFbtwToYQFBcMVIwnAM2jkQFnibp0nNHdRCrqJuIgnsk+IFFDCYQBZAFUvMEhHpOXhlpgLp
-	FsmBloD6h3kQzxBxgWFth8Q/HIQ=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-qt0-f176.google.com (mail-qt0-f176.google.com
-	[209.85.216.176])
-	by mxa.mailgun.org with ESMTP id 5aa05519.7f51382bb7f0-smtp-out-n01;
-	Wed, 07 Mar 2018 21:09:45 -0000 (UTC)
-Received: by mail-qt0-f176.google.com with SMTP id n9so4353754qtk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Mar 2018 13:09:45 -0800 (PST)
-X-Gm-Message-State: AElRT7FQuTtZydDtNOa2lxNGNJXD6AAHL+OATBQuIvM7GJ4ax9nPrnFY
-	Ry+GW1BnRnFCaPrA2rspbBh04nEeQ0bNtOpibxw=
-X-Google-Smtp-Source: AG47ELtJDf6Dvm2IhCMTe2Lm7piysEvaPxiGnwTjyPkq9Br8VdoPOi89fyHBwU5njvvrKqmwg2c1rjkKi2rEt75hdqs=
-X-Received: by 10.200.50.155 with SMTP id z27mr34958146qta.250.1520456985352; 
-	Wed, 07 Mar 2018 13:09:45 -0800 (PST)
+	Thu,  8 Mar 2018 01:10:20 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w281AIpr025200
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 7 Mar 2018 17:10:20 -0800
+Received: from [128.224.163.159] (128.224.163.159) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 7 Mar 2018 17:09:33 -0800
+To: Tim Orling <ticotimo@gmail.com>
+References: <1520385452-205564-1-git-send-email-hongxu.jia@windriver.com>
+	<CANx9H-CNoBQUc2_GmrcO8y5wCTQN-9Dr-u7=Dxv7kP9ScTLP1w@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <fa8d68e4-5ef4-5dbf-99d0-d3fb814d6503@windriver.com>
+Date: Thu, 8 Mar 2018 09:10:05 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-Received: by 10.140.108.35 with HTTP; Wed, 7 Mar 2018 13:09:44 -0800 (PST)
-In-Reply-To: <1284db2a-8cff-7f97-dc7b-dc17370167c6@gmail.com>
-References: <1520091651-25420-1-git-send-email-derek@asterius.io>
-	<1284db2a-8cff-7f97-dc7b-dc17370167c6@gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Wed, 7 Mar 2018 16:09:44 -0500
-X-Gmail-Original-Message-ID: <CADNbA1okmMSAE4ivTaKaX09i51rG4KiAFDUF2kp=DtZaAYF6AA@mail.gmail.com>
-Message-ID: <CADNbA1okmMSAE4ivTaKaX09i51rG4KiAFDUF2kp=DtZaAYF6AA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
+In-Reply-To: <CANx9H-CNoBQUc2_GmrcO8y5wCTQN-9Dr-u7=Dxv7kP9ScTLP1w@mail.gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCHv3] python-sqlalchemy: update to version 1.1.17
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] python3-blivet: fix invoking dd timeout caused partition failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,93 +36,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Mar 2018 21:09:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 08 Mar 2018 01:10:21 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Feel free to drop that portion of the commit message or I can send another
-rev.
+On 2018年03月07日 21:39, Tim Orling wrote:
+> Can we make the default not be infinite timeout? You are solving a 
+> corner case, special need with a default infinite timeout that may 
+> have unforeseen side effects in the general case (like a system that 
+> never responds). Just a thought. What does upstream think?
 
-On Wed, Mar 7, 2018 at 2:42 PM, akuster808 <akuster808@gmail.com> wrote:
+The python3-blivet is part of target installer anaconda, while you do the
+installation by using qemu to simulate without kvm on your desktop,
+it will have a low speed disk/cpu to triger the above issue.
+(BTW if you use virtualbox to simulate, it works well)
 
+I guess the upstream fedora almost not have the situation to work
+(which runqemu is our yocto specific), so they do not care about it.
+
+But I will try to talk with them, to see whether they accept our fixes 
+or not.
+
+See:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-anaconda/tree/README
+
+//Hongxu
+
+> On Tue, Mar 6, 2018 at 5:18 PM Hongxu Jia <hongxu.jia@windriver.com 
+> <mailto:hongxu.jia@windriver.com>> wrote:
 >
+>     This large timeout is needed when running on machines with
+>     lots of disks, or with slow disks.
 >
-> On 03/03/2018 07:40 AM, Derek Straka wrote:
-> > License-Update: Update the license checksum for copyright year and
-> verify the terms remain the same
-> >
-> > diff -u SQLAlchemy-1.1.15/LICENSE SQLAlchemy-1.1.17/LICENSE
-> > --- SQLAlchemy-1.1.15/LICENSE 2017-11-03 16:47:01.000000000 -0400
-> > +++ SQLAlchemy-1.1.17/LICENSE 2018-02-22 16:08:41.000000000 -0500
-> > @@ -1,6 +1,6 @@
-> >  This is the MIT license: http://www.opensource.org/
-> licenses/mit-license.php
-> >
-> > -Copyright (c) 2005-2017 the SQLAlchemy authors and contributors <see
-> AUTHORS file>.
-> > +Copyright (c) 2005-2018 the SQLAlchemy authors and contributors <see
-> AUTHORS file>.
-> >  SQLAlchemy is a trademark of Michael Bayer.
-> >
-> >  Permission is hereby granted, free of charge, to any person obtaining a
-> copy of this
-> The above is confusing pw.sh as it thinks it a patch to be applied.
+>     Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com
+>     <mailto:hongxu.jia@windriver.com>>
+>     ---
+>      .../0014-invoking-dd-with-infinite-timeout.patch   | 31
+>     ++++++++++++++++++++++
+>      .../python-blivet/python3-blivet_2.2.0.bb
+>     <http://python3-blivet_2.2.0.bb>         |  1 +
+>      2 files changed, 32 insertions(+)
+>      create mode 100644
+>     meta-python/recipes-extended/python-blivet/python3-blivet/0014-invoking-dd-with-infinite-timeout.patch
 >
-> - armin
-> >
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> >  meta-python/recipes-devtools/python/python-sqlalchemy.inc           |
-> 6 +++---
-> >  .../{python-sqlalchemy_1.1.15.bb => python-sqlalchemy_1.1.17.bb}    | 0
-> >  .../{python3-sqlalchemy_1.1.15.bb => python3-sqlalchemy_1.1.17.bb}  | 0
-> >  3 files changed, 3 insertions(+), 3 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{python-sqlalchemy_1.1.15.bb
-> => python-sqlalchemy_1.1.17.bb} (100%)
-> >  rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.
-> 1.15.bb => python3-sqlalchemy_1.1.17.bb} (100%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-> b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-> > index 2683a6a..0c191ae 100644
-> > --- a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-> > +++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-> > @@ -2,13 +2,13 @@ DESCRIPTION = "Python SQL toolkit and Object
-> Relational Mapper that gives \
-> >  application developers the full power and flexibility of SQL"
-> >  HOMEPAGE = "http://www.sqlalchemy.org/"
-> >  LICENSE = "MIT"
-> > -LIC_FILES_CHKSUM = "file://LICENSE;md5=452f4b8adb0feba42e5be5f1fbfbf5
-> 38"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=b1c412c9d8d1ce018f7a9374407c22
-> bb"
-> >
-> >  PYPI_PACKAGE = "SQLAlchemy"
-> >  inherit pypi
-> >
-> > -SRC_URI[md5sum] = "077f9bd3339957f53068b5572a152674"
-> > -SRC_URI[sha256sum] = "8b79a5ed91cdcb5abe97b0045664c5
-> 5c140aec09e5dd5c01303e23de5fe7a95a"
-> > +SRC_URI[md5sum] = "03db1c8f8ae911977c0bf3950a4c9c21"
-> > +SRC_URI[sha256sum] = "6b55ec379c11ad696f9371ce8e0de9
-> 3c7f21134323f56a56a1b0d8fbef17013c"
-> >
-> >  RDEPENDS_${PN} += " \
-> >      ${PYTHON_PN}-json \
-> > diff --git a/meta-python/recipes-devtools/python/python-
-> sqlalchemy_1.1.15.bb b/meta-python/recipes-devtools/python/python-
-> sqlalchemy_1.1.17.bb
-> > similarity index 100%
-> > rename from meta-python/recipes-devtools/python/python-sqlalchemy_1.1.
-> 15.bb
-> > rename to meta-python/recipes-devtools/python/python-sqlalchemy_1.1.
-> 17.bb
-> > diff --git a/meta-python/recipes-devtools/python/python3-
-> sqlalchemy_1.1.15.bb b/meta-python/recipes-devtools/python/python3-
-> sqlalchemy_1.1.17.bb
-> > similarity index 100%
-> > rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.
-> 15.bb
-> > rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.
-> 17.bb
+>     diff --git
+>     a/meta-python/recipes-extended/python-blivet/python3-blivet/0014-invoking-dd-with-infinite-timeout.patch
+>     b/meta-python/recipes-extended/python-blivet/python3-blivet/0014-invoking-dd-with-infinite-timeout.patch
+>     new file mode 100644
+>     index 0000000..12a9e4f
+>     --- /dev/null
+>     +++
+>     b/meta-python/recipes-extended/python-blivet/python3-blivet/0014-invoking-dd-with-infinite-timeout.patch
+>     @@ -0,0 +1,31 @@
+>     +From 92fe7dfd01131c93a9b2013cabf77d5f46900fab Mon Sep 17 00:00:00
+>     2001
+>     +From: Hongxu Jia <hongxu.jia@windriver.com
+>     <mailto:hongxu.jia@windriver.com>>
+>     +Date: Tue, 6 Mar 2018 17:28:56 +0800
+>     +Subject: [PATCH] invoking dd with infinite timeout
+>     +
+>     +This large timeout is needed when running on machines with
+>     +lots of disks, or with slow disks.
+>     +
+>     +Upstream-Status: Pending
+>     +
+>     +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com
+>     <mailto:hongxu.jia@windriver.com>>
+>     +---
+>     + blivet/devices/partition.py | 2 +-
+>     + 1 file changed, 1 insertion(+), 1 deletion(-)
+>     +
+>     +diff --git a/blivet/devices/partition.py
+>     b/blivet/devices/partition.py
+>     +index a7372fb..8947472 100644
+>     +--- a/blivet/devices/partition.py
+>     ++++ b/blivet/devices/partition.py
+>     +@@ -594,7 +594,7 @@ class PartitionDevice(StorageDevice):
+>     +         cmd = ["dd", "if=/dev/zero", "of=%s" % device, "bs=%d" % bs,
+>     +                "seek=%d" % start, "count=%d" % count]
+>     +         try:
+>     +-            util.run_program(cmd)
+>     ++            util.run_program(cmd, timeout=-1)
+>     +         except OSError as e:
+>     +             log.error(str(e))
+>     +         finally:
+>     +--
+>     +1.8.3.1
+>     +
+>     diff --git
+>     a/meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
+>     <http://python3-blivet_2.2.0.bb>
+>     b/meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
+>     <http://python3-blivet_2.2.0.bb>
+>     index cacca67..46dc32d 100644
+>     ---
+>     a/meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
+>     <http://python3-blivet_2.2.0.bb>
+>     +++
+>     b/meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
+>     <http://python3-blivet_2.2.0.bb>
+>     @@ -23,6 +23,7 @@ SRC_URI =
+>     "git://github.com/rhinstaller/blivet;branch=2.2-devel
+>     <http://github.com/rhinstaller/blivet;branch=2.2-devel> \
+>     file://0011-invoking-fsck-with-infinite-timeout.patch \
+>     file://0012-invoking-mkfs-with-infinite-timeout.patch \
+>     file://0013-Revert-Adapt-to-logging-module-name-change.patch \
+>     +  file://0014-invoking-dd-with-infinite-timeout.patch \
+>      "
 >
+>      inherit distro_features_check
+>     --
+>     1.8.3.1
+>
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
 
