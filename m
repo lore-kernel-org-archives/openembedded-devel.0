@@ -1,48 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f42.google.com (mail-pl0-f42.google.com
-	[209.85.160.42])
-	by mail.openembedded.org (Postfix) with ESMTP id C0CF078956
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BEB8789BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Mar 2018 17:43:25 +0000 (UTC)
-Received: by mail-pl0-f42.google.com with SMTP id 93-v6so3699008plc.9
+	Thu,  8 Mar 2018 21:53:26 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id 188so532464wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Mar 2018 09:43:27 -0800 (PST)
+	Thu, 08 Mar 2018 13:53:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=bIpbThjvyDKy29Uw4JRML7FAj1ll23lZxNCwbgv8r7U=;
-	b=Nz4bFnQNSW/+n7dqlZc2zlIYBgvZ6jOs+BLwjQsBhmfr0YeatpY0riy4JnNoAW3psj
-	e4eU5rchO/PZKsXH0DBJV6xu2iqzA0+uZqrXbEhBnUpFMRlHmxf0Z1LRTgjuSNVqYcX3
-	4wBc5ijB2me3tIeIrJYhB+3XBFFCSM+xbXZyb9cO3okxKzN/CKXXJV6XEIOOmyZfPK6r
-	TgOm+84umDLtB+ADkcg51P4IeS2gXuk1iI3FhRxOwkia/PilId+JD2yKQg6GyiL0QyO4
-	5ihSaY9J6qhqsQmxVV7NSniTsjEzrsLijtOMmHJEA/8pcDwVusrMMPxqsLhNP/OF1xnH
-	5BSQ==
+	bh=Db3KOAWx1oSTehTpAeT2vbHsEXoI7imz/VW/o355Bkw=;
+	b=UCjGcu3/izaZxU/QWRwnijdO4uvstBBimuE9bCrEkXtQDVy5y0x2YPa58orQpMeHKI
+	S5Wi8nhjVUC+Yp0UaKzwBmz0/kpJtNrP5vrZbrF8wo6ElTihTXzta5HvBlR+yp4etRmP
+	QOaoWa+/o3px5exH/ZIxA16QP9koebJ5uIwtiFIVbcjBMLsyiG6sPj97cORTRiBeVjkA
+	qrC14kP0bP/AGrLaNjS/yH9Ujj3bOVYjnNPLxkwhSO8h6ja2sbjjyIJPrlH89d9PgWhj
+	z5tcK3X2VBNeyuQkcIuwqU6iR92z1n9crgUmowewhZmCsIOD2ZwS/44H0nqjgrJZ8aET
+	tTzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bIpbThjvyDKy29Uw4JRML7FAj1ll23lZxNCwbgv8r7U=;
-	b=Qng63T5X/X4vCcNCTq5Rz2E+IVXWQlQsq/7VWc3nTLhXnfWJwWyGf0mhigxVK4Onmw
-	UoWQyERSJFfSpq3BclmhWU/H+240YJ+1I/OmuEMahtY2AJt7ShEA9dIqPB2X6+CR9mJx
-	NFSlBO6ShFaicZFN0h9OxCkC+i8miK2g7gUozQGic9A9UGyi4bp6DoQvnQNuTotCrStF
-	u++YkStU+qkXbt/xNHZhcsZ1pE/bUCEOtRsWINsM5zgEbbxhv9cl/RV/swnSFHnNYIE/
-	WUJplR+AC6ttIb2fLe2d7/LWRVYdcUEh3t3Qr3W5Uknb2t4TQ/mQySTu8vZ1hZb6TcKD
-	3AJg==
-X-Gm-Message-State: APf1xPAaR7CcDMbP7Cj5O5ddGDZiPJjm8W9PkbUZBoFEwQKm1qeyJPhE
-	4BkiwjYxWaijUidNATT1Cl0CqQ==
-X-Google-Smtp-Source: AG47ELthqbH0lLjE39ecVZqTLYxzNws+dJEVfSvkYj1/j/4ytvFmKRPJ2oS5KFPKpp5lDsmWQPiCPg==
-X-Received: by 2002:a17:902:7282:: with SMTP id
-	d2-v6mr25251254pll.303.1520531006617; 
-	Thu, 08 Mar 2018 09:43:26 -0800 (PST)
-Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
-	by smtp.gmail.com with ESMTPSA id
-	f23sm26485575pfn.132.2018.03.08.09.43.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Mar 2018 09:43:25 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	bh=Db3KOAWx1oSTehTpAeT2vbHsEXoI7imz/VW/o355Bkw=;
+	b=CHJUQUmoiJ12YE+m9YlbxaVq/a3fLp2Jtr3tE+0NAr7hqfPr/bjWbQBM3OqzqIHXep
+	YRaigYWIA6DJXArfY7cELt/spgrJg8y4GWCH0YQVxDs9hTox50ASSvGDFiO9MqZdwZ/J
+	qJ2+i/lVAc9twwjuP2TyDowbOyZ1XIVT1Qi7RRGiqMj2vlfbt/gnJf7B9CpA2AnvbpGA
+	cHviRSm0fgubedDm4iZhpdopaXt4cizRwNwjshzphLU2TPt3eA01Xbv9E+qwij+CBK3k
+	h9pJWNUZdPkvQswW+DIVCVnI1+/H3Ku83TVNgdqn7nH9ps8N29KdWFq/Z64soIQvOMzw
+	sGdA==
+X-Gm-Message-State: APf1xPAtoM9fcSfw8pMfs9oa5J4mpY4blnCfgjSRsxD1sNnvgB5sjpbv
+	FoX1F6fqgBvOA1KDUbEqeaO3MA==
+X-Google-Smtp-Source: AG47ELtt9GjWC2vU0YeD+d8h9D3bk6YrR7ahScZsjJHj0D6RA5+q+gkpeqnG0AXEDznqYZEIY29kyQ==
+X-Received: by 10.80.182.141 with SMTP id d13mr33725606ede.250.1520546007698; 
+	Thu, 08 Mar 2018 13:53:27 -0800 (PST)
+Received: from wsadrian2.lan97.ffah.ch (c-93-184-18-27.customer.ggaweb.ch.
+	[93.184.18.27]) by smtp.gmail.com with ESMTPSA id
+	l91sm1721100ede.50.2018.03.08.13.53.26
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 08 Mar 2018 13:53:26 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Mar 2018 09:43:16 -0800
-Message-Id: <20180308174316.36662-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.16.2
-Subject: [meta-qt5][PATCH] Pass -DMESA_EGL_NO_X11_HEADERS=1 when x is disabled
+Date: Thu,  8 Mar 2018 22:53:00 +0100
+Message-Id: <20180308215300.4206-1-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.14.3
+Subject: [meta-oe][PATCH] libiio: update and improve recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,40 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2018 17:43:25 -0000
+X-List-Received-Date: Thu, 08 Mar 2018 21:53:28 -0000
 
-Some graphics drives e.g. mali/mesa depend on this define
-to use proper guards in eglplatform.h
+* Update to latest version 0.14.
+* Make depends on avahi, libusb1 and libxml2 optional by
+  PACKAGECONFIG or DISTRO flags.
+* Install iiod.service file
 
-Fixes
-
-| In file included from /mnt/a/zonit/build/tmp/work/aarch64-bec-linux/qtmultimedia/5.10.1+gitAUTOINC+038716bb1f-r0/recipe-sysroot/usr/include/EGL/egl.h:36:0,
-|                  from .moc/../../../../../../git/src/plugins/videonode/egl/qsgvideonode_egl.h:48,
-|                  from .moc/moc_qsgvideonode_egl.cpp:9:
-| /mnt/a/zonit/build/tmp/work/aarch64-bec-linux/qtmultimedia/5.10.1+gitAUTOINC+038716bb1f-r0/recipe-sysroot/usr/include/EGL/eglplatform.h:125:10: fatal error: X11/Xlib.h: No such file or directory
-|  #include <X11/Xlib.h>
-|           ^~~~~~~~~~~~
-| compilation terminated.
-| make[4]: *** [Makefile:461: .obj/moc_qsgvideonode_egl.o] Error 1
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
 ---
- recipes-qt/qt5/qtmultimedia_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/libiio/libiio_git.bb | 32 ++++++++++++++++++++++------
+ 1 file changed, 26 insertions(+), 6 deletions(-)
 
-diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-index 2cb1bd5..efe848f 100644
---- a/recipes-qt/qt5/qtmultimedia_git.bb
-+++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -25,6 +25,7 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
- # Disable GStreamer if completely disabled
- EXTRA_QMAKEVARS_CONFIGURE += "${@bb.utils.contains_any('PACKAGECONFIG', 'gstreamer gstreamer010', '', '-no-gstreamer', d)}"
+diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
+index d66ac58d5..ba380ed30 100644
+--- a/meta-oe/recipes-support/libiio/libiio_git.bb
++++ b/meta-oe/recipes-support/libiio/libiio_git.bb
+@@ -4,21 +4,41 @@ SECTION = "libs"
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
  
-+CXXFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DMESA_EGL_NO_X11_HEADERS=1', d)}"
- # Patches from https://github.com/meta-qt5/qtmultimedia/commits/b5.10
- # 5.10.meta-qt5.2
- SRC_URI += "\
+-SRCREV = "08f947d5e40600259bb698c3b95538e9f2bfecc2"
+-PV = "0.8+git${SRCPV}"
++SRCREV = "fa82974d8bd1fded78e630ab71a7ded1b11d0e33"
++PV = "0.14+git${SRCPV}"
+ 
+-SRC_URI = "git://github.com/analogdevicesinc/libiio.git"
++SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+ 
+-DEPENDS = "flex-native bison-native avahi libaio libusb1 libxml2"
++inherit cmake pythonnative systemd
+ 
+-inherit cmake pythonnative
++DEPENDS = " \
++    flex-native bison-native libaio \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
++"
++
++EXTRA_OECMAKE = " \
++    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
++    -DUDEV_RULES_INSTALL_DIR=${nonarch_base_libdir}/udev/rules.d \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
++"
++
++PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
++
++PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
++PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
+ 
+ PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-python"
+ 
+ RDEPENDS_${PN}-python = "${PN} python-ctypes python-stringold"
+ 
+-FILES_${PN}-iiod = "${sbindir}/iiod"
++FILES_${PN}-iiod = " \
++    ${sbindir}/iiod \
++    ${systemd_system_unitdir}/iiod.service \
++"
+ FILES_${PN}-tests = "${bindir}"
+ FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
++
++SYSTEMD_PACKAGES = "${PN}-iiod"
++SYSTEMD_SERVICE_${PN}-iiod = "iiod.service"
 -- 
-2.16.2
+2.14.3
 
 
