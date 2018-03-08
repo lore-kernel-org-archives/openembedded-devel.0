@@ -1,45 +1,47 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
-	[209.85.128.181])
-	by mail.openembedded.org (Postfix) with ESMTP id BA2C77885B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f49.google.com (mail-pl0-f49.google.com
+	[209.85.160.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 08D7A6FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Mar 2018 22:07:28 +0000 (UTC)
-Received: by mail-wr0-f181.google.com with SMTP id v65so7178329wrc.11
+	Thu,  8 Mar 2018 23:22:33 +0000 (UTC)
+Received: by mail-pl0-f49.google.com with SMTP id f23-v6so4200301plr.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Mar 2018 14:07:30 -0800 (PST)
+	Thu, 08 Mar 2018 15:22:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=QtUzi5waHJBuGpp+PstmgQfy7oWhsZnzT6Nc7KtlOq0=;
-	b=goJzImrbpB1Uh7fY4xG48OxQGByPIXpyktH09OEKz7WTsmV6QOrzgFFZLx5WFmqMA6
-	0zQzFc8+pR2g90FzCnCeZ45JI55TGWLd+6pPqIfv0f4rRNvj06PxWRxmp74vf3c16apr
-	GphQ+eWnseMc2yNTLc3TSCYbC/WgwR0nAPSHWPpzGH1or9pxj608YJeqrGKx68wEDILJ
-	4QY0LIrOl6I9eBp4tl1wKwa9+d4u7c56/xgijqzRXOrC9HO/pyLKwUR6t9pT0IaSazoO
-	PBC8O8baPZaDUp0twQUO+b8pSFZa8n7zXbyJDywuwclDOzodPOEM2wq3YIlOGmFVo2YV
-	vMfw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=3vAcyL3B5B8pfdQNV6NVGWoMBJi9oo6HANOUqP1iOow=;
+	b=qeneR7xLmJM9EIVDEQCrOtyOhVSL3PdPQGkYClOXEVLg8AgJLBBWa0MDV+QPUCghjT
+	LZPfyIlp5PtUG9W/azmmGsZ6PiD1YF7to9QdAJx5zDaUPgItwkaSq72VeZAPgJ2HuViw
+	jSILDwBpOVTJw8d1JQkLZB+BO0C23/YPj+azJkUoee29qvMY32rD6TXC8TvKR7B2BDkk
+	A5IdV2wpdKHHsFgtJAqUuTjIZiyaWNk1+TchF7QhRX59+acv6zW4YlXsu6upUZBWjfpW
+	Rn4IDx8Wk04Bn5YOgZpGYwOQdGT1lxeHPnF3j1YZq4TGgo29lFeN0QI0YZFj6LsQdIMt
+	nO1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=QtUzi5waHJBuGpp+PstmgQfy7oWhsZnzT6Nc7KtlOq0=;
-	b=kKEfMXu6wpRS1agYyvBs+SlnHXgjpqqytD2gQJ6ZpnEmD68fpHywqIQmFjsqin2EKZ
-	qeBRcR/7nOWt/Swqil19Vntm6Y/cfM3q+U2//JYfDlsB5DKOB0eSiNSFlgnI3an8ogIe
-	KEn/5jFPJQp63mFPSKXJtIY3xQE79BkAoqlBKkRY6dMHeewW0mZQ5bBIVwVlIEVQ/eBh
-	uE0uv8Wul8lMCKzBjCGxfC/Z3SKX0BHNcjfQBwmWhAzB7RcIIhoY6MqFZu9mJyMpTotW
-	MT8yTqktAvhVp/oWbzXWRjnhW9qsqJTCYu06cXBe2urdMQ5cuSz+6Dzxt2XDbHVsqeDv
-	izGQ==
-X-Gm-Message-State: APf1xPB0KhdttVEhbiQZRFil7sG1kZPxmzLze0n87BxGhe6+FyTgkgBR
-	4nI2QPkMHSJKDQmClXpXEe9OlHo/PmP8s8yBy+U=
-X-Google-Smtp-Source: AG47ELsZfX8GYw3Dpp5AYnI9PVbg4r+WL79zishPdrtCCk2f2BiCJcCJngMTncrTs1+P0RsCOWU0wyN1eD1Y2qfVSEU=
-X-Received: by 10.223.144.2 with SMTP id h2mr23007656wrh.114.1520546849506;
-	Thu, 08 Mar 2018 14:07:29 -0800 (PST)
+	bh=3vAcyL3B5B8pfdQNV6NVGWoMBJi9oo6HANOUqP1iOow=;
+	b=FlpueZ1WzCjWzw0Cytv+b98C8Xr5nZLsRazEgDBbaduPQWXqHkS/h7+f5MgDBc+8wv
+	y9HhsfU9kQt8iUsuqzWZAYOi12SAZoxSAOs4cS2oAw8QBX1nqy7TCMW9bPDX/oEaLbiG
+	w7r6MupkqXrrbMCMZO6wDpw2MhToH2mNVr6gYQ8KKqmoTASCL9xxBzCoHp7YinhSHPEb
+	FcRxjnWu4L3ZCk0uhJ9Dgu20OL1rHadqKg5Obux8TwX2iPlo0y5BMuuhQUvc68pUSwCH
+	4thVvC6g+XJlJqHSdS22fuYCd05QbT2TSnxslPlQIYN9CCqwDSdlzkPzZoX3Ec2o/1kH
+	NBkg==
+X-Gm-Message-State: AElRT7HeC8sw51ZG7rUjO4pmOyWeB9ecLg7unC4FS1WvbgOdwKd+AGo2
+	nchm6fE3lxhc4dfYofNJh7E/v8FGstRHolaS/+4=
+X-Google-Smtp-Source: AG47ELtyyRsAX9W3ektlb4reJ6SLAO4+xEf0Y5S+AgzLNzA7GQh1+gIfNOxTV5jsQT3pwUBbTvv/IhIOP3ni5QhiROo=
+X-Received: by 2002:a17:902:9a81:: with SMTP id
+	w1-v6mr2426399plp.344.1520551355058; 
+	Thu, 08 Mar 2018 15:22:35 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.173.193 with HTTP; Thu, 8 Mar 2018 14:07:29 -0800 (PST)
-In-Reply-To: <20180308174316.36662-1-raj.khem@gmail.com>
 References: <20180308174316.36662-1-raj.khem@gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Thu, 8 Mar 2018 14:07:29 -0800
-Message-ID: <CAJ86T=WNtG1GCk4AkR5Ysd6jTZYWeUKabbR724fouKueOjoXcQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CAJ86T=WNtG1GCk4AkR5Ysd6jTZYWeUKabbR724fouKueOjoXcQ@mail.gmail.com>
+In-Reply-To: <CAJ86T=WNtG1GCk4AkR5Ysd6jTZYWeUKabbR724fouKueOjoXcQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 08 Mar 2018 23:22:24 +0000
+Message-ID: <CAMKF1srssLFbR5RzJjpg2R7xPAjLa8B7i50eyp+pbFujKtJ_OA@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5][PATCH] Pass -DMESA_EGL_NO_X11_HEADERS=1 when x is disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -54,51 +56,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Mar 2018 22:07:29 -0000
+X-List-Received-Date: Thu, 08 Mar 2018 23:22:34 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Mar 8, 2018 at 9:43 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Some graphics drives e.g. mali/mesa depend on this define
-> to use proper guards in eglplatform.h
+On Thu, Mar 8, 2018 at 2:07 PM Andre McCurdy <armccurdy@gmail.com> wrote:
 
-Would it be better to patch the header directly rather than try to
-arrange that every application which uses it defines the correct
-CFLAGS?
+> On Thu, Mar 8, 2018 at 9:43 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> > Some graphics drives e.g. mali/mesa depend on this define
+> > to use proper guards in eglplatform.h
+>
+> Would it be better to patch the header directly rather than try to
+> arrange that every application which uses it defines the correct
+> CFLAGS?
 
-> Fixes
+
+It would mean to change all of driver sdk for Mali variants and also Mesa
+
+
 >
-> | In file included from /mnt/a/zonit/build/tmp/work/aarch64-bec-linux/qtmultimedia/5.10.1+gitAUTOINC+038716bb1f-r0/recipe-sysroot/usr/include/EGL/egl.h:36:0,
-> |                  from .moc/../../../../../../git/src/plugins/videonode/egl/qsgvideonode_egl.h:48,
-> |                  from .moc/moc_qsgvideonode_egl.cpp:9:
-> | /mnt/a/zonit/build/tmp/work/aarch64-bec-linux/qtmultimedia/5.10.1+gitAUTOINC+038716bb1f-r0/recipe-sysroot/usr/include/EGL/eglplatform.h:125:10: fatal error: X11/Xlib.h: No such file or directory
-> |  #include <X11/Xlib.h>
-> |           ^~~~~~~~~~~~
-> | compilation terminated.
-> | make[4]: *** [Makefile:461: .obj/moc_qsgvideonode_egl.o] Error 1
+> > Fixes
+> >
+> > | In file included from
+> /mnt/a/zonit/build/tmp/work/aarch64-bec-linux/qtmultimedia/5.10.1+gitAUTOINC+038716bb1f-r0/recipe-sysroot/usr/include/EGL/egl.h:36:0,
+> > |                  from
+> .moc/../../../../../../git/src/plugins/videonode/egl/qsgvideonode_egl.h:48,
+> > |                  from .moc/moc_qsgvideonode_egl.cpp:9:
+> > |
+> /mnt/a/zonit/build/tmp/work/aarch64-bec-linux/qtmultimedia/5.10.1+gitAUTOINC+038716bb1f-r0/recipe-sysroot/usr/include/EGL/eglplatform.h:125:10:
+> fatal error: X11/Xlib.h: No such file or directory
+> > |  #include <X11/Xlib.h>
+> > |           ^~~~~~~~~~~~
+> > | compilation terminated.
+> > | make[4]: *** [Makefile:461: .obj/moc_qsgvideonode_egl.o] Error 1
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  recipes-qt/qt5/qtmultimedia_git.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/
+> qtmultimedia_git.bb
+> > index 2cb1bd5..efe848f 100644
+> > --- a/recipes-qt/qt5/qtmultimedia_git.bb
+> > +++ b/recipes-qt/qt5/qtmultimedia_git.bb
+> > @@ -25,6 +25,7 @@ EXTRA_QMAKEVARS_CONFIGURE +=
+> "${PACKAGECONFIG_CONFARGS}"
+> >  # Disable GStreamer if completely disabled
+> >  EXTRA_QMAKEVARS_CONFIGURE += "${@bb.utils.contains_any('PACKAGECONFIG',
+> 'gstreamer gstreamer010', '', '-no-gstreamer', d)}"
+> >
+> > +CXXFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '',
+> '-DMESA_EGL_NO_X11_HEADERS=1', d)}"
+> >  # Patches from https://github.com/meta-qt5/qtmultimedia/commits/b5.10
+> >  # 5.10.meta-qt5.2
+> >  SRC_URI += "\
+> > --
+> > 2.16.2
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes-qt/qt5/qtmultimedia_git.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-> index 2cb1bd5..efe848f 100644
-> --- a/recipes-qt/qt5/qtmultimedia_git.bb
-> +++ b/recipes-qt/qt5/qtmultimedia_git.bb
-> @@ -25,6 +25,7 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
->  # Disable GStreamer if completely disabled
->  EXTRA_QMAKEVARS_CONFIGURE += "${@bb.utils.contains_any('PACKAGECONFIG', 'gstreamer gstreamer010', '', '-no-gstreamer', d)}"
->
-> +CXXFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DMESA_EGL_NO_X11_HEADERS=1', d)}"
->  # Patches from https://github.com/meta-qt5/qtmultimedia/commits/b5.10
->  # 5.10.meta-qt5.2
->  SRC_URI += "\
-> --
-> 2.16.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
