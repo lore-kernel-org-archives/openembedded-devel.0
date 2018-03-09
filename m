@@ -1,42 +1,48 @@
-Return-Path: <prvs=26064fd15d=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id B0AEE600BC
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C636E71A88
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2018 08:17:28 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w298ASpP001956 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Mar 2018 02:17:29 -0600
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2gjac2gjyt-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Mar 2018 02:17:29 -0600
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w298HSnT017039
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Fri,  9 Mar 2018 09:52:18 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id t6so2765848wmt.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Mar 2018 02:17:28 -0600
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 9 Mar 2018 02:17:28 -0600
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 9 Mar 2018 02:17:27 -0600
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 Mar 2018 10:17:18 +0200
-Message-ID: <20180309081718.14146-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.16.2
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2018-03-09_04:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH v2] Add support for pyiface
+	Fri, 09 Mar 2018 01:52:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=8v2OzRWtcmWIYZ/dKfmkOXxVVo0yNUccAwaNC+0muBU=;
+	b=ux7+GiyE6qZz3sMqb2LtLi7jyg94sr6BKd+h7UgjoiLgor3Dd72sNha83ufkGgt/no
+	ux5v0uT/MXB+4ulvVuXzfk4oDFAveULWWVq4rLx6OBxKDs3l8Z45NsUYDMfrpTLpLt4o
+	82abcgMkmoo8g6Xqn3I/Dd3YZw0ngj43InPaJgJfc282lOv5DivPBtZJFrtVhtZHV+/u
+	chBe2UOleslE+QbuoObm9i6Uim1UlKGsD9N35QDI52K1hZ7phZQ4UX66q533F4ZbSObI
+	YXfR3SmdI9xXKcmg1Q1G2KYFplG2YuwP42NCxfrNp1oK37YGxRCTRYxldV5hr6Y8/evc
+	FAVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8v2OzRWtcmWIYZ/dKfmkOXxVVo0yNUccAwaNC+0muBU=;
+	b=IK8a5Rz/GLWtmQt9eQybqr6ZnT8ThSKr2M2a1nDIbWRpYpD2sSvhGA0h3qvzDby6UB
+	Cp0Y/GVXHxxLHC33/ygUFaahP1OSvVuTW5R5a5j7IcTQqJ3h4+kBZVWxkFaOUyWV6q7Y
+	OXnipGNdnkUf/555jgVQV+dPcoAB5PTarnZGlOHJ2QcRVMEEn6seX5o55VwPJPKwd+uv
+	TwE/OgOL4kQ22fKCkrLSviGTyIdu9A3VAwbNQHNXrGYkvCCOpgvMG+0tXBulc+fsT7AX
+	G4TyaCe00q+QLNdgWMoT1v0cQdkXUKK/Pr+25q8KYQQVEWKgJZk4g8R9beZgAUsCkm0M
+	tfUw==
+X-Gm-Message-State: APf1xPApkpsewFqvpID/qGp9+p5t7AWnUrDOJls7XMAjyNR0+1rH/joS
+	bCxLMjjQXxsJMZ74Ptnofr8cbv7y
+X-Google-Smtp-Source: AG47ELt9rQ2CipUkl+Xg1Kzb6mnFiXvRFGBMqib/3OOL6pw2h9NZltr6i7QGcoDkkNAQnTiYgIykUA==
+X-Received: by 10.80.232.1 with SMTP id e1mr36771016edn.257.1520589139053;
+	Fri, 09 Mar 2018 01:52:19 -0800 (PST)
+Received: from localhost.localdomain ([185.47.135.167])
+	by smtp.gmail.com with ESMTPSA id e24sm680924edb.0.2018.03.09.01.52.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 09 Mar 2018 01:52:18 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+X-Google-Original-From: Koen Kooi <koen.kooi@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Mar 2018 10:51:47 +0100
+Message-Id: <20180309095147.23136-1-koen.kooi@linaro.org>
+X-Mailer: git-send-email 2.9.5
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [PATCH] ncurses: fix do_install failure when base_libdir has more than one level
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,35 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2018 08:17:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 09 Mar 2018 09:52:19 -0000
 
-Pyiface is a package that exposes the network interfaces of the
-operating system in a easy to use and transparent way.
+Other sections of the .inc already use mkdir -p, so use it here as well.
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
+ meta/recipes-core/ncurses/ncurses.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-new file mode 100644
-index 000000000..5449e21c9
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Pyiface Recipe - Adds Pyiface library for Python 2 & 3"
-+HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
-+LICENSE = "GPLv3+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
-+
-+SRC_URI[md5sum] = "edcdd71109c4259af8348006a8049c9c"
-+SRC_URI[sha256sum] = "dc984de0e1bcf6871ef88b1a92d1fb75717d4f602a60caeb66136093d4a8f62e"
-+
-+inherit pypi setuptools
+diff --git a/meta/recipes-core/ncurses/ncurses.inc b/meta/recipes-core/ncurses/ncurses.inc
+index 1f21cd4..106dcb0 100644
+--- a/meta/recipes-core/ncurses/ncurses.inc
++++ b/meta/recipes-core/ncurses/ncurses.inc
+@@ -227,7 +227,7 @@ do_install() {
+         if [ ! -d "${D}${base_libdir}" ]; then
+             # Setting base_libdir to libdir as is done in the -native
+             # case will skip this code
+-            mkdir ${D}${base_libdir}
++            mkdir -p ${D}${base_libdir}
+             mv ${D}${libdir}/libncurses.so.* ${D}${base_libdir}
+             ! ${ENABLE_WIDEC} || \
+                 mv ${D}${libdir}/libncursesw.so.* ${D}${base_libdir}
 -- 
-2.16.2
+2.9.5
 
 
