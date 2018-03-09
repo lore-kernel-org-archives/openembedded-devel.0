@@ -1,26 +1,29 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-X-Greylist: delayed 902 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 09 Mar 2018 10:08:57 UTC
-Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id A75C96E688
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C7306E671
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2018 10:08:57 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.84_2)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1euEgl-0002tx-3c for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Mar 2018 10:51:47 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 9 Mar 2018 10:53:43 +0100
-Message-ID: <p7tlf7$8f1$1@blaine.gmane.org>
-References: <20180309095147.23136-1-koen.kooi@linaro.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@blaine.gmane.org
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
-	Gecko/20100101 Thunderbird/52.6.0
-In-Reply-To: <20180309095147.23136-1-koen.kooi@linaro.org>
-Subject: Re: [PATCH] ncurses: fix do_install failure when base_libdir has more than one level
+	Fri,  9 Mar 2018 10:22:44 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	09 Mar 2018 02:22:44 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.47,444,1515484800"; d="scan'208";a="23802533"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga008.jf.intel.com with ESMTP; 09 Mar 2018 02:22:43 -0800
+To: Zhang Xiao <xiao.zhang@windriver.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20180309074650.5997-1-xiao.zhang@windriver.com>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <26c24905-f579-2018-d866-8b55cf1ba8a7@linux.intel.com>
+Date: Fri, 9 Mar 2018 12:16:06 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
+MIME-Version: 1.0
+In-Reply-To: <20180309074650.5997-1-xiao.zhang@windriver.com>
+Subject: Re: [PATCH 1/3] valgrind: Fix multilib header conflict - valgrind/config.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,23 +36,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2018 10:08:58 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Fri, 09 Mar 2018 10:22:45 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Content-Language: nl
 
-Wrong list, sorry
+On 03/09/2018 09:46 AM, Zhang Xiao wrote:
+> Header file conflict between 32-bit and 64-bit versions.
 
-Op 09-03-18 om 10:51 schreef Koen Kooi:
-> Other sections of the .inc already use mkdir -p, so use it here as well.
-> 
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org> --- meta/recipes-core/ncurses/ncurses.inc | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta/recipes-core/ncurses/ncurses.inc b/meta/recipes-core/ncurses/ncurses.inc index 1f21cd4..106dcb0 100644 --- a/meta/recipes-core/ncurses/ncurses.inc +++
-> b/meta/recipes-core/ncurses/ncurses.inc @@ -227,7 +227,7 @@ do_install() { if [ ! -d "${D}${base_libdir}" ]; then # Setting base_libdir to libdir as is done in the -native #
-> case will skip this code -            mkdir ${D}${base_libdir} +            mkdir -p ${D}${base_libdir} mv ${D}${libdir}/libncurses.so.* ${D}${base_libdir} ! ${ENABLE_WIDEC}
-> || \ mv ${D}${libdir}/libncursesw.so.* ${D}${base_libdir}
-> 
+I believe these patches should go to oe-core list.
 
-
+Alex
 
