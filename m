@@ -1,26 +1,26 @@
 Return-Path: <xiao.zhang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 347A178287
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DF0E7894A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Mar 2018 07:47:14 +0000 (UTC)
+	Fri,  9 Mar 2018 07:47:51 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w297lGVo017792
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w297lR6K022270
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 8 Mar 2018 23:47:16 -0800 (PST)
+	Thu, 8 Mar 2018 23:47:42 -0800
 Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 8 Mar 2018 23:46:40 -0800
+	Thu, 8 Mar 2018 23:46:41 -0800
 From: Zhang Xiao <xiao.zhang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 8 Mar 2018 23:46:49 -0800
-Message-ID: <20180309074650.5997-2-xiao.zhang@windriver.com>
+Date: Thu, 8 Mar 2018 23:46:50 -0800
+Message-ID: <20180309074650.5997-3-xiao.zhang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180309074650.5997-1-xiao.zhang@windriver.com>
 References: <20180309074650.5997-1-xiao.zhang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] tiff: Fix multilib header conflict - tiffconf.h
+Subject: [PATCH 3/3] libgpg-error: Fix multilib header conflict - pg-error.h and gpgrt.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,38 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Mar 2018 07:47:15 -0000
+X-List-Received-Date: Fri, 09 Mar 2018 07:47:51 -0000
 Content-Type: text/plain
 
 Header file conflict between 32-bit and 64-bit versions.
 
 Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
 ---
- meta/recipes-multimedia/libtiff/tiff_4.0.9.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta/recipes-support/libgpg-error/libgpg-error_1.27.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta/recipes-multimedia/libtiff/tiff_4.0.9.bb b/meta/recipes-multimedia/libtiff/tiff_4.0.9.bb
-index 57bf7408d0..b8f895b143 100644
---- a/meta/recipes-multimedia/libtiff/tiff_4.0.9.bb
-+++ b/meta/recipes-multimedia/libtiff/tiff_4.0.9.bb
-@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "6e7bdeec2c310734e734d19aae3a71ebe37a4d842e0e23dbb1b8921c00
- # exclude betas
- UPSTREAM_CHECK_REGEX = "tiff-(?P<pver>\d+(\.\d+)+).tar"
+diff --git a/meta/recipes-support/libgpg-error/libgpg-error_1.27.bb b/meta/recipes-support/libgpg-error/libgpg-error_1.27.bb
+index b2e2d507c9..b74f079f5d 100644
+--- a/meta/recipes-support/libgpg-error/libgpg-error_1.27.bb
++++ b/meta/recipes-support/libgpg-error/libgpg-error_1.27.bb
+@@ -21,7 +21,7 @@ SRC_URI[sha256sum] = "4f93aac6fecb7da2b92871bb9ee33032be6a87b174f54abf8ddf0911a2
  
--inherit autotools
-+inherit autotools multilib_header
+ BINCONFIG = "${bindir}/gpg-error-config"
  
- CACHED_CONFIGUREVARS = "ax_cv_check_gl_libgl=no"
+-inherit autotools binconfig-disabled pkgconfig gettext
++inherit autotools binconfig-disabled pkgconfig gettext multilib_header
+ CPPFLAGS += "-P"
+ do_compile_prepend() {
+ 	TARGET_FILE=linux-gnu
+@@ -53,6 +53,7 @@ do_compile_prepend() {
+ do_install_append() {
+ 	# we don't have common lisp in OE
+ 	rm -rf "${D}${datadir}/common-lisp/"
++	oe_multilib_header gpg-error.h gpgrt.h
+ }
  
-@@ -45,4 +45,8 @@ PACKAGES =+ "tiffxx tiff-utils"
- FILES_tiffxx = "${libdir}/libtiffxx.so.*"
- FILES_tiff-utils = "${bindir}/*"
- 
-+do_install_append() {
-+    oe_multilib_header tiffconf.h
-+}
-+
- BBCLASSEXTEND = "native"
+ FILES_${PN}-dev += "${bindir}/gpg-error"
 -- 
 2.11.0
 
