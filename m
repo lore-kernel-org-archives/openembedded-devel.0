@@ -1,38 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C7AC278891
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id CF50278898
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2018 21:34:35 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id j4so9422329qke.10
+	Sun, 11 Mar 2018 21:38:35 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id v90so16809953qte.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2018 14:34:37 -0700 (PDT)
+	Sun, 11 Mar 2018 14:38:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=S7xQUrlQlvOX9qUmJ7F35KSo1MdRvUeuby+EScW16YQ=;
-	b=Me+B8qAxOpcPoXBR2R68Yja1E9Ig8QFESntV04aQWGE1/hv09rTH2B1uc1Lviuk+XZ
-	LGoy8b4QQcNg7YehrL10iOAD6fcQeshgrRz3Is1IFABc4iv8RQqm/wBw4dOaK2GEvwLs
-	KV0cdxk6XvqaJZlR2N+QSwWHROHNDtmv6rIayDyvIwFfyRkhZssQiuM1JP+TIU88SCha
-	l8fOmuQevkR6/QkdfQ1rG3Eedd5kgtK61Fr8gV+kcPjEGlQ2MZqDh4gu4BqolU+hI+sY
-	osFuWyBk6MLTYjQy8rl6FISWggb1cc/JSYSvTOXxoycM88kIxi864KEuwfSeF2jadEg2
-	rrrw==
-X-Gm-Message-State: AElRT7Fka0OEM+tN+PjvMyntfKb6JrVJG1f5g9Xdv8RgJDB8B5L/5Xch
-	P6+/1R+2A7GhVORsCEx3+YJ7QImW
-X-Google-Smtp-Source: AG47ELsYV1Qz42ha+IgB16/vkwHu9qXypNqitkK9QQ5ygcBbQ2zwU66CAcdJaLYv5V4VEd42SNGuqA==
-X-Received: by 10.55.98.70 with SMTP id w67mr8339484qkb.278.1520804076317;
-	Sun, 11 Mar 2018 14:34:36 -0700 (PDT)
+	bh=mSJBd+IeS07XKfBQTQ5X/dv9LxDovY79ZvWiZdsebGQ=;
+	b=SD+/KAi+jVQriUo8N5KKU/Y6KwZRZt/ZNAwdoJVa5IXLZta3yeKir9JjBIq8nQ35bF
+	9fQrKR7fC0tf7kGYDnOIyfZweJN+XEEJ9IrWIzMnmG2eqqwMrf1e8qGTe27q0mJxkQpV
+	pQJzS2A0NLqLjHA/ANNLHR+vvnqCVZvmYaj2SogouS9LxpCbs26nRvityiowiPZc4fgX
+	x2hKF6GirZ08NM7u8RLoj2CkLSHr6RlvzIy/13sLS/XU46m+1VBvoyTYZIL/np8ZoE4t
+	pWt8lkhRxoGa4v6lBkxcj8fuBGl7WbkIHGnkrP0q5wzn1QSliBL60cf1i2GH4EQzky/S
+	i1vA==
+X-Gm-Message-State: AElRT7F5JbTgnhrxJWkIUbHaWtZZp6ZjFO3TaXNadSaygr/AJNs+oqqR
+	TFfQsDZiNxlxkUsFeaDO8pi9WjF7
+X-Google-Smtp-Source: AG47ELtA6ZIFZmo2CEE7nBbE9EsnV9Y3juG2b0nD+R1dUAsVcj+3l+D++c2n9mFIfOH1Y11DqwDDbw==
+X-Received: by 10.200.24.46 with SMTP id q43mr9159360qtj.309.1520804316439;
+	Sun, 11 Mar 2018 14:38:36 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	d36sm4302587qtk.47.2018.03.11.14.34.35
+	by smtp.gmail.com with ESMTPSA id n4sm4321937qtc.0.2018.03.11.14.38.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 11 Mar 2018 14:34:35 -0700 (PDT)
+	Sun, 11 Mar 2018 14:38:36 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Mar 2018 17:34:30 -0400
-Message-Id: <1520804070-24631-1-git-send-email-derek@asterius.io>
+Date: Sun, 11 Mar 2018 17:38:29 -0400
+Message-Id: <1520804309-26938-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] hthttpd: add a valid upstream check uri and regex
+Subject: [meta-webserver][PATCH] webmin: add a valid upstream check uri and regex
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,27 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2018 21:34:35 -0000
+X-List-Received-Date: Sun, 11 Mar 2018 21:38:36 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb | 3 +++
+ meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
-index c9fe55b..37bd753 100644
---- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
-+++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
-@@ -14,6 +14,9 @@ SRC_URI = "https://github.com/blueness/${BPN}/archive/v${PV}.tar.gz;downloadfile
- SRC_URI[md5sum] = "3cda1b6c8c8542b1510eadb8e540d8b6"
- SRC_URI[sha256sum] = "a1ee2806432eaf5b5dd267a0523701f9f1fa00fefd499d5bec42165a41e05846"
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+index ae88eb6..ce9bc92 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+@@ -24,6 +24,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+ SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
+ SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
  
-+UPSTREAM_CHECK_URI = "https://github.com/blueness/sthttpd/releases/"
-+UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
++UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
++UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
 +
- S = "${WORKDIR}/sthttpd-${PV}"
+ inherit perlnative update-rc.d systemd
  
- inherit autotools update-rc.d systemd
+ do_configure() {
 -- 
 2.7.4
 
