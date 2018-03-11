@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E4F1788CA
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9671A788AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2018 14:53:37 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id y137so8815118qka.4
+	Sun, 11 Mar 2018 21:25:42 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id d206so9414782qkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2018 07:53:39 -0700 (PDT)
+	Sun, 11 Mar 2018 14:25:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fW7dNcCVAAElFjzhhZhzsMdOBM2DO2wrrScbkZ9xYXQ=;
-	b=pEnjdpkGhd1e+Z515gLHIpf1W42DkNk5YBqZwkNIZ3fPGMCK/nsq+Lerheq7mytfLW
-	ETYa1C9N4oZ+zZloqJQjQfw4720xiFdWegHXwclqpcaTIqINVRCE/IAlw4kanlrPnLgG
-	z6O1oP2jjjjuduwJghShlPe/EPgIpYyklwWsgBlUQNUO3f0rLjR60V2B+QbtPJazTKn9
-	8dBJvR38dOnz+YAC0B7KfJXCXZTd84aTlJSaxd6duDfFBUEAZH9kKIEeavArQ0ISiPSq
-	/Ccc1ZlAJun7jmfRfrWGxkWIpjj/vlGs0agg7D5dasSLOi1HsT7X464xwP6PWdL1mXNN
-	/Sqg==
-X-Gm-Message-State: AElRT7GnUY0ZrCICoxEYNGy37TqEqD9SdJxwOa/Le80+iAIqwlvFOmys
-	YGkQvglKPxnqQt42k5X4RUB+5YmG
-X-Google-Smtp-Source: AG47ELtuNeIsMzhhn9WrCm5EVw2IDvM7fiqxdUUf8tv7NjORTFoenC9LSkHtLqBh7Tu2996TOWNFQA==
-X-Received: by 10.55.217.77 with SMTP id u74mr2765148qki.148.1520780018885;
-	Sun, 11 Mar 2018 07:53:38 -0700 (PDT)
+	bh=zZrKSnZ7CibfPVNrLT/39NLIRhNER1yE3nuQlyXXbtA=;
+	b=AXsoApc6tYCSJgjFEl99qmYz4iQnmTIwtJs2F/58i0M53paPeJuBwZJNcZrPyjuuDW
+	fCPTRUQOuhp1K5rk2AkRT2l8Ea/GVsQ7wjjtjU2cKUh6sNcwFkRaRQmrzgXSUoE5hp7G
+	WDSvl8HvVD/HSffPpCTHji0cY9peyrhdvNe35SfY4soqUgqlbhnTipE+drLGVFMMIJCF
+	gP3M4bD7T5X1vynl5O/U3rm5B6KGAKgRC54gHsE4v665PY99Ss8TZnutB4mo2NT4htlC
+	BkJicC4ttQG1MQoOqi+QWS9rCcFXuUkV+Nr1lpo+mjLk/KK2XMqLojs6fNQ1Xs9kxvAI
+	aVUw==
+X-Gm-Message-State: AElRT7Gwb6je20272FRIKquLDRz+gFgy6rT2WiKrNsYX9nSXyrhJMsr1
+	ciHjspEWn86W1oXqtLAF20xPW2Hm
+X-Google-Smtp-Source: AG47ELsS7DFJmr+60Zyb7TTtIbtMQ915g6f2JCPr7Mh1+PRHKbe3IFxC3+YfksOzPZRisKO5MNr49A==
+X-Received: by 10.55.145.4 with SMTP id t4mr8374420qkd.135.1520803543251;
+	Sun, 11 Mar 2018 14:25:43 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	s39sm3822988qth.10.2018.03.11.07.53.38
+	w56sm4262115qta.65.2018.03.11.14.25.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 11 Mar 2018 07:53:38 -0700 (PDT)
+	Sun, 11 Mar 2018 14:25:42 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Mar 2018 10:53:33 -0400
-Message-Id: <1520780013-3822-1-git-send-email-derek@asterius.io>
+Date: Sun, 11 Mar 2018 17:25:39 -0400
+Message-Id: <1520803540-21139-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pymisp: add dateutil to the set of RDEPENDS
+Subject: [meta-webserver][PATCH 1/2] phpmyadmin: update to version 4.7.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2018 14:53:38 -0000
+X-List-Received-Date: Sun, 11 Mar 2018 21:25:42 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pymisp.inc | 1 +
- 1 file changed, 1 insertion(+)
+ .../phpmyadmin/{phpmyadmin_4.7.6.bb => phpmyadmin_4.7.9.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.7.6.bb => phpmyadmin_4.7.9.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index 9bbcd89..6c7ceb8 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -7,6 +7,7 @@ SRC_URI[md5sum] = "5003442bffbb15c227decbe2a1fd2d66"
- SRC_URI[sha256sum] = "44af4fa5ba092a9bee413cedf4bf9453827fd2185b6a609a5388af8b72b6abd6"
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.9.bb
+similarity index 90%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.9.bb
+index 672db58..27dfe0b 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.9.bb
+@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
+            file://apache.conf \
+ "
  
- RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-dateutil \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-jsonschema \
-     ${PYTHON_PN}-requests \
+-SRC_URI[md5sum] = "a9aec05d44c68b4ac5e4987118d70cd7"
+-SRC_URI[sha256sum] = "5fab6b92336386646bbb189d55817799487b5c27b06cab0cdfdcab3c88f5988f"
++SRC_URI[md5sum] = "0a862e3fa52c8b9078e0441ee82be831"
++SRC_URI[sha256sum] = "f19b503f0afb0dd3389d4bb11dab3f438d36e85eef11a5c400c592fd5f539398"
+ 
+ S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
+ 
 -- 
 2.7.4
 
