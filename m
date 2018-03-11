@@ -1,37 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id CF50278898
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 42DCC77FC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2018 21:38:35 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id v90so16809953qte.12
+	Sun, 11 Mar 2018 21:44:05 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id l15so4255122qtn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Mar 2018 14:38:37 -0700 (PDT)
+	Sun, 11 Mar 2018 14:44:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=mSJBd+IeS07XKfBQTQ5X/dv9LxDovY79ZvWiZdsebGQ=;
-	b=SD+/KAi+jVQriUo8N5KKU/Y6KwZRZt/ZNAwdoJVa5IXLZta3yeKir9JjBIq8nQ35bF
-	9fQrKR7fC0tf7kGYDnOIyfZweJN+XEEJ9IrWIzMnmG2eqqwMrf1e8qGTe27q0mJxkQpV
-	pQJzS2A0NLqLjHA/ANNLHR+vvnqCVZvmYaj2SogouS9LxpCbs26nRvityiowiPZc4fgX
-	x2hKF6GirZ08NM7u8RLoj2CkLSHr6RlvzIy/13sLS/XU46m+1VBvoyTYZIL/np8ZoE4t
-	pWt8lkhRxoGa4v6lBkxcj8fuBGl7WbkIHGnkrP0q5wzn1QSliBL60cf1i2GH4EQzky/S
-	i1vA==
-X-Gm-Message-State: AElRT7F5JbTgnhrxJWkIUbHaWtZZp6ZjFO3TaXNadSaygr/AJNs+oqqR
-	TFfQsDZiNxlxkUsFeaDO8pi9WjF7
-X-Google-Smtp-Source: AG47ELtA6ZIFZmo2CEE7nBbE9EsnV9Y3juG2b0nD+R1dUAsVcj+3l+D++c2n9mFIfOH1Y11DqwDDbw==
-X-Received: by 10.200.24.46 with SMTP id q43mr9159360qtj.309.1520804316439;
-	Sun, 11 Mar 2018 14:38:36 -0700 (PDT)
+	bh=H7vPzz3Av0Cx6V/vV8tp3BBxoulzXWf+QJQEXmmF0Hg=;
+	b=twqZin0WWb3IPRtFoMsQZfKH1nk1nDmSa0kWnqiE/UEuT69sos03BvAMZqCjUluDiv
+	+09offv6azBYU/omzs3zQFyarzzbDj6yvkeAe5mysywSP9ZCd84TRxw1lXMg6qFdDrUW
+	62vMZ6pEh6VvnTKGc1pNj0D4GkoNHkNaq3npI/NiTes27v+e0lfBHGPAs4y7ewGyyY+H
+	aGndQvWXKRMNH3jssYynLBUEy0C2QIeIUmbwDKdpt52/C+rLMhrv7bravB0Vb9fqbmIh
+	JxMMEB8YT7A/dpuU1gQFTvTl8nu9O0KVSskCdg69VkRGagmum4y/u76Uk9N/FoQfDIgT
+	LPTA==
+X-Gm-Message-State: AElRT7Gs55DDWhuowlM6TsrcPZpvcCtXOcH5LCxmMfYARw8SBHVwuKdi
+	o+roslJoezFT3ysaiYUMX08+4Azx
+X-Google-Smtp-Source: AG47ELs9022rYPKrOl4JyjGCXb9DWyxSRAYYC26jM6z5eaZBGBIE7ZkGtosaFF2vZ7MggXqr5oFnYA==
+X-Received: by 10.200.25.157 with SMTP id u29mr5483795qtj.221.1520804646980;
+	Sun, 11 Mar 2018 14:44:06 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id n4sm4321937qtc.0.2018.03.11.14.38.35
+	by smtp.gmail.com with ESMTPSA id
+	x30sm4037872qtm.13.2018.03.11.14.44.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 11 Mar 2018 14:38:36 -0700 (PDT)
+	Sun, 11 Mar 2018 14:44:06 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Mar 2018 17:38:29 -0400
-Message-Id: <1520804309-26938-1-git-send-email-derek@asterius.io>
+Date: Sun, 11 Mar 2018 17:44:00 -0400
+Message-Id: <1520804640-29798-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] webmin: add a valid upstream check uri and regex
+Subject: [meta-webserver][PATCH] monkey: add a valid upstream check uri and regex
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Mar 2018 21:38:36 -0000
+X-List-Received-Date: Sun, 11 Mar 2018 21:44:06 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb | 3 +++
+ meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-index ae88eb6..ce9bc92 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-@@ -24,6 +24,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
- SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
- SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+index 97dc276..559d251 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+@@ -17,6 +17,9 @@ SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
+ SRC_URI[md5sum] = "9699e4c9ea6ce6b989907c252ae80254"
+ SRC_URI[sha256sum] = "7c3d845306aa74ee6effd7ab6169d16ac4e6450e564954d0d0baa2d1e9be1a22"
  
-+UPSTREAM_CHECK_URI = "http://www.webmin.com/download.html"
-+UPSTREAM_CHECK_REGEX = "webmin-(?P<pver>\d+(\.\d+)+).tar.gz"
++UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
++UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
 +
- inherit perlnative update-rc.d systemd
- 
- do_configure() {
+ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
+                 --logdir=${localstatedir}/log/monkey/ \
+                 --pidfile=${localstatedir}/run/monkey.pid \
 -- 
 2.7.4
 
