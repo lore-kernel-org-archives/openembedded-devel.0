@@ -1,45 +1,29 @@
-Return-Path: <prvs=2609448c5c=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id D206378854
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2018 09:06:30 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w2C96Me1002451 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2018 04:06:31 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2gmc92ks4d-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2018 04:06:31 -0500
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w2C96UMW006113
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2018 04:06:30 -0500
-Received: from us-aus-exch4.ni.corp.natinst.com (130.164.68.14) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 12 Mar 2018 04:06:30 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch4.ni.corp.natinst.com (130.164.68.14) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 12 Mar 2018 04:06:30 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Mon, 12 Mar 2018 04:06:29 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 12 Mar 2018 11:06:27 +0200
-Message-ID: <20180312090627.9422-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.16.2
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by mail.openembedded.org (Postfix) with ESMTP id C184F78489;
+	Mon, 12 Mar 2018 15:21:26 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	12 Mar 2018 08:21:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.47,461,1515484800"; d="scan'208";a="24516586"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga008.jf.intel.com with ESMTP; 12 Mar 2018 08:21:26 -0700
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <fe9f6f5b-1b12-91be-01e2-8b8e9b6eaae4@linux.intel.com>
+Date: Mon, 12 Mar 2018 17:14:52 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2018-03-12_04:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH v3] Add support for pyiface
+Subject: IMPORTANT: do_patch() fuzz warnings and how to deal with them
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,47 +36,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Mar 2018 09:06:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 12 Mar 2018 15:21:27 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Pyiface is a package that exposes the network interfaces of the
-operating system in a easy to use and transparent way.
+*Executive summary*
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc      | 10 ++++++++++
- meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb |  2 ++
- 2 files changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyiface.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
+do_patch() will shortly start issuing warnings when recipe patches are 
+applied with some of the patch context ignored. This email explains why 
+this is necessary, and how the warnings can be eliminated.
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-new file mode 100644
-index 000000000..08733fcc8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -0,0 +1,10 @@
-+SUMMARY = "Pyiface Recipe - Adds Pyiface library for Python"
-+HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
-+LICENSE = "GPLv3+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
-+
-+SRC_URI[md5sum] = "edcdd71109c4259af8348006a8049c9c"
-+SRC_URI[sha256sum] = "dc984de0e1bcf6871ef88b1a92d1fb75717d4f602a60caeb66136093d4a8f62e"
-+
-+inherit pypi
-\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-new file mode 100644
-index 000000000..854cb30ee
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-pyiface.inc
-\ No newline at end of file
--- 
-2.16.2
+*What is patch fuzz?*
 
+Patch fuzz is a situation when the patch tool ignores some of the 
+context lines in order to apply the patch. Consider this example:
+
+Patch to be applied:
+
+========
+context line 1
+context line 2
+context line 3
++newly added line
+context line 4
+context line 5
+context line 6
+========
+
+Original source code:
+
+========
+different context line 1
+different context line 2
+context line 3
+context line 4
+different context line 5
+different context line 6
+========
+
+Outcome:
+
+========
+different context line 1
+different context line 2
+context line 3
+newly added line
+context line 4
+different context line 5
+different context line 6
+========
+
+Chances are, the newly added line was actually added in a completely 
+wrong location, or it was already in the original source, and was added 
+for the second time. This is especially possible, if the context line 3 
+and 4 are blank or have only generic things in them like #endif or }. 
+Even worse, there is currently no warning when this happens, and 
+depending on the patched code, it can (and does) still compile without 
+errors.
+
+*What is changing*
+
+When patch fuzz is detected, there will be a warning printed, similar to 
+this:
+
+     WARNING: vulkan-1.0.61.1-r0 do_patch:
+     Some of the context lines in patches were ignored. This can lead to 
+incorrectly applied patches.
+     The context lines in the patches can be updated with devtool:
+
+         devtool modify <recipe>
+         devtool finish --force-patch-refresh <recipe> <layer_path>
+
+     Then the updated patches and the source tree (in devtool's workspace)
+     should be reviewed to make sure the patches apply in the correct place
+     and don't introduce duplicate lines (which can, and does happen
+     when some of the context is ignored).
+     Details:
+     Applying patch demos-Don-t-build-tri-or-cube.patch
+     patching file demos/CMakeLists.txt
+     Hunk #1 succeeded at 63 (offset 2 lines).
+     Hunk #2 succeeded at 76 with fuzz 1 (offset 2 lines).
+
+*How to elimimate the warnings?*
+
+Use devtool command as explained by the warning. First, unpack the 
+source into devtool workspace:
+
+	devtool modify <recipe>
+
+This will apply all the patches, and create new commits out of them in 
+the workspace - with the patch context updated.
+
+Then, replace the patches in the recipe layer:
+
+         devtool finish --force-patch-refresh <recipe> <layer_path>
+
+The patch updates need be reviewed (preferably, with a side-by-side diff 
+tool) to ensure they are indeed doing the right thing:
+
+1) they get applied in the correct location;
+2) they do not introduce duplicate lines, or otherwise do things that 
+are not anymore necessary.
+
+To confirm these things, you can also review the patched source code in 
+devtool's workspace, typically in <build_dir>/workspace/sources/<recipe>/
+
+Once the review is done, you can create and publish a layer commit with 
+the patch updates that modify the context. Devtool may also refresh 
+other things in the patches, those can be discarded.
+
+
+Alex
 
