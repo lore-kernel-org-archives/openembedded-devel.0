@@ -1,24 +1,51 @@
-Return-Path: <jason.wessel@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D4C071C71
+Return-Path: <zyong@qti.qualcomm.com>
+Received: from alexa-out-tai-02.qualcomm.com (alexa-out-tai-02.qualcomm.com
+	[103.229.16.227])
+	by mail.openembedded.org (Postfix) with ESMTP id 004AB78937
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Mar 2018 03:03:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w2D33fEN000834
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Mar 2018 20:03:45 -0700 (PDT)
-Received: from localhost.localdomain (172.25.59.221) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Mon, 12 Mar 2018 20:03:01 -0700
-From: Jason Wessel <jason.wessel@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 12 Mar 2018 22:03:37 -0500
-Message-ID: <1520910217-1468-1-git-send-email-jason.wessel@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Tue, 13 Mar 2018 05:35:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=qti.qualcomm.com; i=@qti.qualcomm.com; q=dns/txt;
+	s=qcdkim; t=1520919324; x=1552455324;
+	h=from:to:subject:date:message-id:references:in-reply-to:
+	content-transfer-encoding:mime-version;
+	bh=XjDKlb7ZCzd92OrO8Sq8VrSoUL0T6d3+m+9xnq4WngM=;
+	b=Yx+yrDd1IrpTZ2wPq0qKw31J0+vVkFQB+UxWdJTtvIhgG7OyhHQIbT7p
+	9441V7mAavj0cymsRQ5OXa4Byi9Nqo72GQU/BQ2oqPo6yj82h/DtVhf+I
+	lSnBgNi/fsC5rHoS2nOeiYIHc+EC/9rQp5C107dMQ54B6TCHERFVa04e5 M=;
+X-IronPort-AV: E=Sophos;i="5.47,464,1515427200"; 
+   d="scan'208";a="66607"
+Received: from ironmsg01-tai.qualcomm.com ([10.249.140.6])
+	by alexa-out-tai-02.qualcomm.com with ESMTP; 13 Mar 2018 13:35:21 +0800
+X-IronPort-AV: E=McAfee;i="5900,7806,8830"; a="3591693"
+Received: from aptaiexm02b.ap.qualcomm.com ([10.249.150.12])
+	by ironmsg01-tai.qualcomm.com with ESMTP/TLS/AES256-SHA;
+	12 Mar 2018 22:35:17 -0700
+Received: from aptaiexm02b.ap.qualcomm.com (10.249.150.12) by
+	aptaiexm02b.ap.qualcomm.com (10.249.150.12) with Microsoft SMTP Server
+	(TLS) id 15.0.1365.1; Tue, 13 Mar 2018 13:35:15 +0800
+Received: from aptaiexm02b.ap.qualcomm.com ([fe80::d4db:8980:a041:2e5d]) by
+	aptaiexm02b.ap.qualcomm.com ([fe80::d4db:8980:a041:2e5d%19]) with mapi
+	id 15.00.1365.000; Tue, 13 Mar 2018 13:35:15 +0800
+From: "Yong Zhang (AUTO-BI)" <zyong@qti.qualcomm.com>
+To: Andre McCurdy <armccurdy@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] The license of hostapd v2.6
+Thread-Index: AdO3SmTWwqkzEwuaSOCd9D2p82ldBv//gGQA//92LBD/+HOxsA==
+Date: Tue, 13 Mar 2018 05:35:15 +0000
+Message-ID: <c8d0dd7b9f20416c9cf54ef6e27929ef@aptaiexm02b.ap.qualcomm.com>
+References: <b7d094dae2b84636912a257ba07f0e9e@aptaiexm02b.ap.qualcomm.com>
+	<CAJ86T=V72v+PmGadiTJTe8PVtbQmmfYjHu+ot_aaTUBjS3bR8g@mail.gmail.com>
+	<90e3ba77fe6343818693e52ebd9f7b01@aptaiexm02b.ap.qualcomm.com>
+In-Reply-To: <90e3ba77fe6343818693e52ebd9f7b01@aptaiexm02b.ap.qualcomm.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.249.136.10]
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH] gnome-keyring, libgnome-keyring: Fix to compile with latest oe-core
+Subject: Re: The license of hostapd v2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,49 +58,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Mar 2018 03:03:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 13 Mar 2018 05:35:22 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-The glib-2.0 was upreved and now you must use a depency to pull it in
-for the build.  To avoid this error:
-
-NOTE: Executing glib-gettextize --force --copy
-./temp/run.do_configure: line 170: glib-gettextize: command not found
-WARNING: ./temp/run.do_configure:1 exit 127 from 'glib-gettextize --force --copy'
-
-Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
----
- meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb    | 2 +-
- meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-index 9d85c65..5a9ca5f 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
-@@ -21,7 +21,7 @@ SRC_URI += "file://egg-asn1x.patch \
-             file://musl.patch \
- "
- 
--DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native"
-+DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native glib-2.0-native"
- RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
- 
- LDFLAGS += "-lgmodule-2.0"
-diff --git a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
-index e241882..7e9de50 100644
---- a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_2.32.0.bb
-@@ -13,7 +13,7 @@ PR = "r3"
- 
- inherit gnomebase gtk-doc
- 
--DEPENDS = "dbus libgcrypt glib-2.0 intltool-native"
-+DEPENDS = "dbus libgcrypt glib-2.0 glib-2.0-native intltool-native"
- 
- SRC_URI[archive.md5sum] = "c42b2ca66204835d901d3dbfc1fa5ae6"
- SRC_URI[archive.sha256sum] = "56388c0d81ddfdb57d30e4963c83ecc1c18498aab99395420e0fff69929a0f0c"
--- 
-2.7.4
-
+SGkgQW5kcmUgLyBvcGVuZW1iZWRkZWQgdGVhbSwgDQoNCk1heSBJIGFzayB3aHkgdGhlIGhvc3Rh
+cGQgbGljZW5zZSBpcyBzZXQgdG8gIkdQTHYyIHwgQlNEIj8gQWNjb3JkaW5nIHRvIHRoZSBpbmZv
+cm1hdGlvbiB3ZSBnZXQsIHRoZSBob3N0YXBkIGxpY2Vuc2UgaXMgIkJTRCIuIENvdWxkIHlvdSBw
+cm92aWRlIHRoZSBiYXNpcyBvZiAiR1BMdjIiIGxpY2Vuc2U/DQoNCg0KVGhhbmtzLA0KWW9uZw0K
+DQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogWW9uZyBaaGFuZyAoQVVUTy1CSSkg
+DQpTZW50OiBGcmlkYXksIE1hcmNoIDA5LCAyMDE4IDM6MjQgUE0NClRvOiAnQW5kcmUgTWNDdXJk
+eScgPGFybWNjdXJkeUBnbWFpbC5jb20+DQpDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmcNClN1YmplY3Q6IFJFOiBbb2VdIFRoZSBsaWNlbnNlIG9mIGhvc3RhcGQg
+djIuNg0KDQpIaSBBbmRyZSwNCg0KVGhhbmtzLiBJIGZpbmQgSSBtYWRlIGEgbWlzdGFrZS4NCmh0
+dHA6Ly9naXQub3BlbmVtYmVkZGVkLm9yZy9tZXRhLW9wZW5lbWJlZGRlZC90cmVlL21ldGEtb2Uv
+cmVjaXBlcy1jb25uZWN0aXZpdHkvaG9zdGFwZC9ob3N0YXBkXzIuNi5iYj9oPXB5cm8NCmh0dHA6
+Ly9naXQub3BlbmVtYmVkZGVkLm9yZy9tZXRhLW9wZW5lbWJlZGRlZC90cmVlL21ldGEtb2UvcmVj
+aXBlcy1jb25uZWN0aXZpdHkvaG9zdGFwZC9ob3N0YXBkXzIuNS5iYj9oPWtyb2dvdGgNCg0KWW9u
+Zw0KDQoNCg0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogQW5kcmUgTWNDdXJk
+eSBbbWFpbHRvOmFybWNjdXJkeUBnbWFpbC5jb21dIA0KU2VudDogRnJpZGF5LCBNYXJjaCAwOSwg
+MjAxOCAxMDoyNCBBTQ0KVG86IFlvbmcgWmhhbmcgKEFVVE8tQkkpIDx6eW9uZ0BxdGkucXVhbGNv
+bW0uY29tPg0KQ2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpT
+dWJqZWN0OiBSZTogW29lXSBUaGUgbGljZW5zZSBvZiBob3N0YXBkIHYyLjYNCg0KT24gVGh1LCBN
+YXIgOCwgMjAxOCBhdCA2OjAwIFBNLCBZb25nIFpoYW5nIChBVVRPLUJJKSA8enlvbmdAcXRpLnF1
+YWxjb21tLmNvbT4gd3JvdGU6DQo+DQo+IEkgYW0gZG9pbmcgWW9jdG8yLjMgdXBncmFkZSB3aGlj
+aCBhbHNvIHVwZGF0ZSBtZXRhLW9wZW5lbWJlZGRlZCBsYXllci4gSSBmaW5kIHRoYXQgdGhlIHZl
+cnNpb24gb2YgcGFja2FnZSBob3N0YXBkIGlzIHVwZGF0ZWQgZnJvbSAyLjUgdG8gMi42LiBBbmQg
+dGhlIGxpY2Vuc2UgaXMgdXBkYXRlZCBmcm9tICJCU0QiIHRvICJHUEx2MiB8IEJTRCIgaW4gaG9z
+dGFwZCByZWNpcGUuIEFzIEkga25vdywgVGhlcmUgaXMgbm8gY2hhbmdlIGluIHRoZSBob3N0YXBk
+IGxpY2Vuc2luZyB0ZXJtcyBiZXR3ZWVuIDIuNSBhbmQgMi42IHJlbGVhc2VzIG9yIGFueXRoaW5n
+IHRoYXQgaGFzIGhhcHBlbmVkIHNpbmNlIDIuNjsgbm9yIGFyZSB0aGVyZSBwbGFucyBvZiBjaGFu
+Z2luZyB0aGUgbGljZW5zZSBpbiB0aGUgZnV0dXJlLiBXaHkgZG8geW91IHB1dCBkdWFsIGxpY2Vu
+c2UgaW4gaG9zdGFwZCByZWNpcGU/DQoNClRoZSBMSUNFTlNFIHZhbHVlIGluIHRoZSBtZXRhLW9l
+IGhvc3RhcGQgcmVjaXBlIGhhcyBiZWVuIHNldCB0byAiR1BMdjINCnwgQlNEIiBzaW5jZSB0aGUg
+b3JpZ2luYWwgcmVjaXBlIHdhcyBmaXJzdCBhZGRlZCBpbiAyMDEyOg0KDQogIGh0dHA6Ly9naXQu
+b3BlbmVtYmVkZGVkLm9yZy9tZXRhLW9wZW5lbWJlZGRlZC9jb21taXQvP2lkPTc4MzliNDE3NzM5
+NjIwMTE2OTZlZDAyOTI0MTM2YjAwNDQ3Y2IzODINCg0KV2hpY2ggcmVjaXBlIGFyZSB5b3UgbG9v
+a2luZyBhdCB3aGVuIHlvdSBzZWUgdGhlIExJQ0VOU0UgdmFsdWUgaGFzIGNoYW5nZWQgZHVyaW5n
+IHRoZSB1cGRhdGUgZnJvbSBob3N0YXBkIDIuNSB0byAyLjYgPw0K
 
