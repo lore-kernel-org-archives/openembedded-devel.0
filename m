@@ -1,49 +1,51 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5282E65CC7
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wr0-f176.google.com (mail-wr0-f176.google.com
+	[209.85.128.176])
+	by mail.openembedded.org (Postfix) with ESMTP id A8F3B784F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Mar 2018 17:03:26 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id m22-v6so158564pls.5
+	Tue, 13 Mar 2018 22:19:13 +0000 (UTC)
+Received: by mail-wr0-f176.google.com with SMTP id h2so2427461wre.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Mar 2018 10:03:28 -0700 (PDT)
+	Tue, 13 Mar 2018 15:19:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=FIXEsemG0WDCzY1Lq0vJm886MeV4BZPPXnkzdJdD2KU=;
-	b=rShiy5v6uE3G5Yh0BoOaNbPN9ns4YqVZb3K/Tuki8Br5cpzW/9vbGJg5McpEEwp9T4
-	yljdnASgYF4MuqMIJ5KYv6ltHKUA6xB9baTO8uyveOwhGW2bIBOgGeYdmZy8p/wxnrqj
-	QMYUj3I166pIxgWP4UQHJaW5TPHeq/cNwNfoaH4twwjPePLX1+yskPIHiC9IsAOLjAwG
-	P7UVi94btYUlJ1JnxVuZIoA0Btx3rrpXpGQXRozh633RaTGy4K4DBLBt86JnQdA/U/C8
-	xgLgzzXRI4LjL8L467klaY9xI3oRLApaTaQ8ZVwnaUhuNtjOmcMvioA6rhl6in0OfkSF
-	fTHQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=VRqYIM9IMHsq4uK/uqvWwdyeYddBmhePSxWKhm19nt8=;
+	b=KRhjb6Te5Lcgz4pUaGSXoHFo8prtEpy9lSB/fTrWxnCUZKnIjhhKurj/lkICjGJK+n
+	HnQ6Wi3VzmPTWxyMzud1Ofu2t/obS8ayooLF3RMcJhKkD4/1pM54tXN8ouQg0j3j276q
+	aQJ21mr0PMR4yYL4OqCjKNi6ICpkvu1n2GfF9LFydmdp04DiBqV9uJrd45F9T2Bbhs6D
+	x16dU5JUtCvaxxHFqgiMlO8QYkCOEsKEJeHlmwtm0zfFaBCoRbsvIIkSbrRagYwUMBFU
+	+eRb/Y0obioOYZ9H5P/V4awu/aPuiACPvXDHIQOK0fzexRrLMB3g6gAz79xrdbe/AvXd
+	VQCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=FIXEsemG0WDCzY1Lq0vJm886MeV4BZPPXnkzdJdD2KU=;
-	b=CAe15CYm/CvGRO+ktgYHDD+7pz00zbrrXr4ZNTaWaKtuilJCZ19IwZSzALioZtoQQ2
-	6hxzzQuqVYh15Bb2RF+Ns7mPn2FlYW8uVNiPSNkTmhYulRIc5SMqu3Mo+//2unhgFBOF
-	zbXEYu85maJW0xXNcup89rlG/dYnzcjFOeLmWoaWOrm4nJLaMcl+YlMGN4hvPJ9fCySA
-	wc0ssaVz+R1veABS8qwc7bKd+C7J5lXRIg7c12JWR2UkgBddx9eNKyuyzxckcznQTff5
-	CW/GNCuPwQ697GUvRPiNwz84HRp1q/pbSIHgZiZ9pIjlxKmL+MnnFrM2M0OeHuf6/dIu
-	dfPA==
-X-Gm-Message-State: AElRT7ECKTP9RBZTGxE9wz2TFq7scNswYVcvQcpIDIvaaHGLmDkeTzWI
-	4n2gENGSZHHMrJKp+atJSxs=
-X-Google-Smtp-Source: AG47ELvgYSBFRFv4cGPVEnHblo9XlyJPUVzAr15G8KLPlYGYYVoxdwP7D0+Va93mf22rN+ZJfgZUqQ==
-X-Received: by 2002:a17:902:51ee:: with SMTP id
-	y101-v6mr1157989plh.157.1520960608563; 
-	Tue, 13 Mar 2018 10:03:28 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.event.rightround.com ([67.208.111.18])
-	by smtp.gmail.com with ESMTPSA id
-	189sm1384201pfu.129.2018.03.13.10.03.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 13 Mar 2018 10:03:27 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Mar 2018 10:03:27 -0700
-Message-Id: <1520960607-22392-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] sysdig: don't build for aarch64
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=VRqYIM9IMHsq4uK/uqvWwdyeYddBmhePSxWKhm19nt8=;
+	b=CQUyXhq6oH+WDbtiU17QGoF9pckGNcd7fTjquzbH50qdgxgm+y/t8L5NVNcvDtBWkb
+	sVDDQ90IkCTDWozxD1Y4fIfERrd44x/cq5W2FOzc9HJFkGjnhu3nbGfQbxgG/4IcN1WR
+	gK392hk0UZHsrUb2ctxaQn3MVj5kKqrGpqd1CSsFeCHk/GHUELYKC2KZi/zKZjLcmkCR
+	KrtRvOwvwRj8pUXsQQSUZuN7Gs7VqVhFsmjZ7PT0pW+xXcFqeiYKxqzLAG73NlWYlX0F
+	aaJqr27PFiu3qu1+N0wqwBYxt3G2FykokhP8CVySjD/RMmBAFHfTMi4ogwEv2S6+6Jin
+	+wFg==
+X-Gm-Message-State: AElRT7EkFECPZFeeoB69VTeIKoJvO/xWXOVYd+onNP3q/k0sLGkDo60G
+	0Hh7gG/MleGGty4P0KLW1WDxSJIklxjLdgOHTemybw==
+X-Google-Smtp-Source: AG47ELsd3nFLTS6Em0xCAC8GlXK/wjdvmljkKjdndxToCE81wYVj1ml+gUtfFIFP4qKbkk7sS4abKM6CAYrBBdByegs=
+X-Received: by 10.223.170.157 with SMTP id h29mr1866973wrc.107.1520979554364; 
+	Tue, 13 Mar 2018 15:19:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.133.98 with HTTP; Tue, 13 Mar 2018 15:19:13 -0700 (PDT)
+In-Reply-To: <c8d0dd7b9f20416c9cf54ef6e27929ef@aptaiexm02b.ap.qualcomm.com>
+References: <b7d094dae2b84636912a257ba07f0e9e@aptaiexm02b.ap.qualcomm.com>
+	<CAJ86T=V72v+PmGadiTJTe8PVtbQmmfYjHu+ot_aaTUBjS3bR8g@mail.gmail.com>
+	<90e3ba77fe6343818693e52ebd9f7b01@aptaiexm02b.ap.qualcomm.com>
+	<c8d0dd7b9f20416c9cf54ef6e27929ef@aptaiexm02b.ap.qualcomm.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Tue, 13 Mar 2018 15:19:13 -0700
+Message-ID: <CAJ86T=V6Uz6EhL6GbRswaf9ZsmZ7JEgjRHowpYEN+wKvy0Sa-A@mail.gmail.com>
+To: "Yong Zhang (AUTO-BI)" <zyong@qti.qualcomm.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: The license of hostapd v2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +58,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Mar 2018 17:03:27 -0000
+X-List-Received-Date: Tue, 13 Mar 2018 22:19:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-this package depends on luajit which is not supported on aarch64
+On Mon, Mar 12, 2018 at 10:35 PM, Yong Zhang (AUTO-BI)
+<zyong@qti.qualcomm.com> wrote:
+>
+> May I ask why the hostapd license is set to "GPLv2 | BSD"? According to the information we get, the hostapd license is "BSD". Could you provide the basis of "GPLv2" license?
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-extended/sysdig/sysdig_git.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+Because it's a mistake. The LICENSE definition in the recipe was not
+updated when the hostapd licensing was changed in 2012.
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-index 67d06dc..4f58281 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-@@ -35,3 +35,7 @@ FILES_${PN} += " \
-     ${datadir}/zsh/* \
-     ${prefix}/src/*  \
- "
-+
-+# luajit not supported on Aarch64
-+COMPATIBLE_HOST = "^(?!aarch64).*"
-+
--- 
-2.7.4
+Unfortunately these kind of mistakes are not uncommon. Contributors of
+version update patches often don't take the time to check carefully
+for changes in the source (licensing changes, new configure options,
+etc) and there are very few people who review patches sent to the list
+(even worse, a negative review on the list is no guarantee that a
+patch won't just get merged anyway - so over time people who may be
+inclined to review patches tend to stop bothering).
 
+So, in summary - you have found a bug! Perhaps you can submit a patch
+to fix the LICENSE definition in the recipe?
+
+----
+
+For reference, the top level of the hostapd source tree contains a
+COPYING file which states:
+
+This software was previously distributed under BSD/GPL v2 dual license
+terms that allowed either of those license alternatives to be
+selected. As of February 11, 2012, the project has chosen to use only
+the BSD license option for future distribution. As such, the GPL v2
+license option is no longer used. It should be noted that the BSD
+license option (the one with advertisement clause removed) is compatible
+with GPL and as such, does not prevent use of this software in projects
+that use GPL.
+
+Some of the files may still include pointers to GPL version 2 license
+terms. However, such copyright and license notifications are maintained
+only for attribution purposes and any distribution of this software
+after February 11, 2012 is no longer under the GPL v2 option.
 
