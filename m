@@ -1,56 +1,52 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 966716FFF7
+Return-Path: <mhalstead@linuxfoundation.org>
+Received: from mail-pl0-f43.google.com (mail-pl0-f43.google.com
+	[209.85.160.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A3A0777F90
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 16:39:42 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id d1so4283074pgv.2
+	Fri, 16 Mar 2018 17:56:22 +0000 (UTC)
+Received: by mail-pl0-f43.google.com with SMTP id w12-v6so6367063plp.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 09:39:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=YKLxJ2zko6X8Thi677M/Drmz534nCshlYcjNPt02CQ0=;
-	b=PJg5/FEY7a1+qMXIhFGEQu/4q1mLRhBMGQuA7Or7axaG+7gtFKmFRTuA6XTrq4cQu9
-	/iFufe8/ZqEY4ipO6yhTaaX/f7n722sI0DhwqBqDcjc5/wY3kOIYdhV3ve/IgUlb+AlP
-	9t9hjxJZidn0+prv2bCfIx4rNpXLmWQMbDHv7Dsh9jsji2fdaddXCkylFCj/Ze0X5l3c
-	bhKYBMTH1b5QX4cnqM74/eySlqN946puTann21DEGHuDFlYefIun8ZbJeyybzNN1SOGY
-	ua6Hyv1l9Iz4D7ep1oAPTQpDRV7PYKZgMWZW/Mi95gEMaZHkNjdlM6k/BxV3gr2Q+Jzy
-	fhqQ==
+	Fri, 16 Mar 2018 10:56:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=to:from:subject:organization:message-id:date:user-agent
+	:mime-version:content-language:content-transfer-encoding;
+	bh=ErnusRJ04fqK4PXY5BhTb31IPBCb7xySFYR2DBw6aB8=;
+	b=BCNwZvfRuri49sj5HM97n3gCQxLiNSnSN2uDDRZ9K5cTx4mFcc4RS1utP5F6/0PKXq
+	I48qc1bSanDsBYhS5obsOu1f55WiY8s+I+bO61VC9AFEJvzW07Lf1wekUdmPKCyWW4x8
+	LnfjnGMh4t8Ddy1SnezPPZI6OYtq7rF4i1GvE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=YKLxJ2zko6X8Thi677M/Drmz534nCshlYcjNPt02CQ0=;
-	b=CmzqiOjRgb7DFyQXrUWqjkCCBh64lYVY4tyS+mPOlO2eu7186b8yqmEz2+86c61scz
-	YAAyPjfkoN9KVrt/K6y2F4yxiYFRBxH5CLC1qEZyf+/95ulyIK/ssLZ2q2HQGYr2kOH8
-	gWx7yr0hSaaBT16Hw/ecxbgWVs/gdpl+K9CSXv1fEPlZKcHlJAfx3AjMIX9FJDG9YYZo
-	2yUWoCSBwpvFvCQE7JVuyQyLip7QX7covkAad1kM597rI53jgWAA6dmfvH5H0Z9BR0l3
-	19yPFWptrq+6lCNkdxe7mYe4VLFJdL7QIz+q/q1SUD8dtCR6j9RHMzcDBJGcbSRg8fdX
-	O9rw==
-X-Gm-Message-State: AElRT7H0XBqIylFfzvDs/i4DNv5qCVU9poVm+eyRvRrDPjlDb71wp+Ud
-	Kr7YwcsvXJZDiNHj/o107CxhrQ7y
-X-Google-Smtp-Source: AG47ELuZV2hOR0yFQfvrGWE/x/MssSAIh/NIsNdinNN5YHXnHCN9bvQq8j2TkF2iSQjaGeoo9QQnbQ==
-X-Received: by 10.99.167.66 with SMTP id w2mr1945156pgo.357.1521218383556;
-	Fri, 16 Mar 2018 09:39:43 -0700 (PDT)
-Received: from [192.168.6.215] (ip-64-134-134-5.public.wayport.net.
-	[64.134.134.5]) by smtp.gmail.com with ESMTPSA id
-	x14sm12276775pgc.13.2018.03.16.09.39.40
+	h=x-gm-message-state:to:from:subject:organization:message-id:date
+	:user-agent:mime-version:content-language:content-transfer-encoding;
+	bh=ErnusRJ04fqK4PXY5BhTb31IPBCb7xySFYR2DBw6aB8=;
+	b=A9ZNJ7t+CTLiFIcmrrjs7Zh6eIjBF8ocgansPeziqVyGEQyC5VkM8pUFb1CXA9NUop
+	wzxbO7knLhGdZzV/DIJEuo5bbKTeDc+R0446B0CVcnkqhmNzT07KNGCJoc+8NgjO4i0r
+	d8WZbtyBALbsoOYAgGJkD/s0jWzrSg1nJHYWYRuxXZpsYEtTmAacnf8c0dsIxWfT8CSZ
+	dD//2V62pY12lpHkrB6Y6ebzA1zviTX4Z0pZV23e/E0ZzZNhHJmNUk2AOugrY2WwoaO9
+	DgsWikBRaS/FQlG1Fbj5CpBZh6ZuyCVdq6LHUccf9Pv6IhoyIp3a0Kk/HZIAv40AekLH
+	FyaQ==
+X-Gm-Message-State: AElRT7H5GIWbepyAXzcG+l6c+10ibkd4lKPuoEggGqLqRH6/nWpdtAoJ
+	yl7St6LUoOcE+kLJwg6GkGJLDVf0D1I=
+X-Google-Smtp-Source: AG47ELtDfyEwpTWUy/aA5bXq6Htj8sc/Y2qTawi6v3/6IgFWxdBuxkhoe/5+Bk25doOJjw+Hl6W5Uw==
+X-Received: by 2002:a17:902:bd4b:: with SMTP id
+	b11-v6mr3035310plx.225.1521222983754; 
+	Fri, 16 Mar 2018 10:56:23 -0700 (PDT)
+Received: from [192.168.17.68] (50-39-175-47.bvtn.or.frontiernet.net.
+	[50.39.175.47]) by smtp.gmail.com with ESMTPSA id
+	c11sm19495449pfe.109.2018.03.16.10.56.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 16 Mar 2018 09:39:42 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1520395408-19266-1-git-send-email-akuster808@gmail.com>
-	<1520395408-19266-20-git-send-email-akuster808@gmail.com>
-	<CA+chaQc23Fs6xdFF==qWb5Nid9hvFoFqYyL9nvURHQo_GRLqvw@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <a7b63985-1e9c-f40a-f97f-1e1de23dad20@gmail.com>
-Date: Fri, 16 Mar 2018 09:39:38 -0700
+	Fri, 16 Mar 2018 10:56:22 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org,
+	yocto-infrastructure@yoctoproject.org
+From: MIchael Halstead <mhalstead@linuxfoundation.org>
+Organization: Linux Foundation
+Message-ID: <608c81f2-6c48-a68d-aee9-d85f8eae65f0@linuxfoundation.org>
+Date: Fri, 16 Mar 2018 10:56:21 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.6.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQc23Fs6xdFF==qWb5Nid9hvFoFqYyL9nvURHQo_GRLqvw@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 20/25] libxml++: only include when x11 in DISTRO_FEATURES
+Subject: [Infra] 1 minute unplanned outage http://layers.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,65 +59,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 16:39:42 -0000
+X-List-Received-Date: Fri, 16 Mar 2018 17:56:22 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
+The layerindex was offline between the following times:
+Fri Mar 16 17:40:17 UTC 2018
+Fri Mar 16 17:40:57 UTC 2018
 
+The webserver failed to come back up after renewing the SSL cert and 
+routine updates due to failing pre-launch configuration checks. We will 
+avoid this in the future by running configuration checks in a test 
+container before restarting the webserver.
 
-On 03/12/2018 11:40 AM, Martin Jansa wrote:
-> What in libxml++ requires x11? I'm building it in DISTRO without x11
-> for years and never noticed any issue with that.
-
-I was using the yocto-check-layer on meta-openembedded to clean it up
-and most likely got the recipe name wrong as we had a lot of cleanup.
-I send out a patch to remove this check as it appears to not be needed.
-thanks for catching this.
-
-- armin
->
-> On Wed, Mar 7, 2018 at 5:03 AM, Armin Kuster <akuster808@gmail.com
-> <mailto:akuster808@gmail.com>> wrote:
->
->     Signed-off-by: Armin Kuster <akuster808@gmail.com
->     <mailto:akuster808@gmail.com>>
->     ---
->      meta-oe/recipes-core/libxml/libxml++_2.40.1.bb <http://2.40.1.bb>
->     | 4 +++-
->      1 file changed, 3 insertions(+), 1 deletion(-)
->
->     diff --git a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
->     <http://2.40.1.bb>
->     b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb <http://2.40.1.bb>
->     index c001c18..c3d647c 100644
->     --- a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
->     <http://2.40.1.bb>
->     +++ b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
->     <http://2.40.1.bb>
->     @@ -16,7 +16,9 @@ SRC_URI[sha256sum] =
->     "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f3
->
->      DEPENDS = "libxml2 glibmm"
->
->     -inherit autotools pkgconfig ptest
->     +inherit distro_features_check autotools pkgconfig ptest
->     +
->     +REQUIRED_DISTRO_FEATURES = "x11"
->
->      do_compile_ptest() {
->        oe_runmake -C examples buildtest
->     --
->     2.7.4
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
-
+-- 
+Michael Halstead
+Linux Foundation / SysAdmin
 
