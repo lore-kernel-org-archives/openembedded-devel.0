@@ -1,45 +1,56 @@
-Return-Path: <prvs=261329a6b7=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 74717788E6
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 966716FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 13:22:06 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w2GDLVfm014372 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 08:22:07 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2gr8sh8yjw-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 08:22:07 -0500
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w2GDM6XJ011563
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Fri, 16 Mar 2018 16:39:42 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id d1so4283074pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 08:22:06 -0500
-Received: from us-aus-exch5.ni.corp.natinst.com (130.164.68.15) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 16 Mar 2018 08:22:06 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch5.ni.corp.natinst.com (130.164.68.15) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 16 Mar 2018 08:22:05 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 16 Mar 2018 08:22:05 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Mar 2018 15:21:41 +0200
-Message-ID: <20180316132141.22580-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.16.2
+	Fri, 16 Mar 2018 09:39:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=YKLxJ2zko6X8Thi677M/Drmz534nCshlYcjNPt02CQ0=;
+	b=PJg5/FEY7a1+qMXIhFGEQu/4q1mLRhBMGQuA7Or7axaG+7gtFKmFRTuA6XTrq4cQu9
+	/iFufe8/ZqEY4ipO6yhTaaX/f7n722sI0DhwqBqDcjc5/wY3kOIYdhV3ve/IgUlb+AlP
+	9t9hjxJZidn0+prv2bCfIx4rNpXLmWQMbDHv7Dsh9jsji2fdaddXCkylFCj/Ze0X5l3c
+	bhKYBMTH1b5QX4cnqM74/eySlqN946puTann21DEGHuDFlYefIun8ZbJeyybzNN1SOGY
+	ua6Hyv1l9Iz4D7ep1oAPTQpDRV7PYKZgMWZW/Mi95gEMaZHkNjdlM6k/BxV3gr2Q+Jzy
+	fhqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=YKLxJ2zko6X8Thi677M/Drmz534nCshlYcjNPt02CQ0=;
+	b=CmzqiOjRgb7DFyQXrUWqjkCCBh64lYVY4tyS+mPOlO2eu7186b8yqmEz2+86c61scz
+	YAAyPjfkoN9KVrt/K6y2F4yxiYFRBxH5CLC1qEZyf+/95ulyIK/ssLZ2q2HQGYr2kOH8
+	gWx7yr0hSaaBT16Hw/ecxbgWVs/gdpl+K9CSXv1fEPlZKcHlJAfx3AjMIX9FJDG9YYZo
+	2yUWoCSBwpvFvCQE7JVuyQyLip7QX7covkAad1kM597rI53jgWAA6dmfvH5H0Z9BR0l3
+	19yPFWptrq+6lCNkdxe7mYe4VLFJdL7QIz+q/q1SUD8dtCR6j9RHMzcDBJGcbSRg8fdX
+	O9rw==
+X-Gm-Message-State: AElRT7H0XBqIylFfzvDs/i4DNv5qCVU9poVm+eyRvRrDPjlDb71wp+Ud
+	Kr7YwcsvXJZDiNHj/o107CxhrQ7y
+X-Google-Smtp-Source: AG47ELuZV2hOR0yFQfvrGWE/x/MssSAIh/NIsNdinNN5YHXnHCN9bvQq8j2TkF2iSQjaGeoo9QQnbQ==
+X-Received: by 10.99.167.66 with SMTP id w2mr1945156pgo.357.1521218383556;
+	Fri, 16 Mar 2018 09:39:43 -0700 (PDT)
+Received: from [192.168.6.215] (ip-64-134-134-5.public.wayport.net.
+	[64.134.134.5]) by smtp.gmail.com with ESMTPSA id
+	x14sm12276775pgc.13.2018.03.16.09.39.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 16 Mar 2018 09:39:42 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1520395408-19266-1-git-send-email-akuster808@gmail.com>
+	<1520395408-19266-20-git-send-email-akuster808@gmail.com>
+	<CA+chaQc23Fs6xdFF==qWb5Nid9hvFoFqYyL9nvURHQo_GRLqvw@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <a7b63985-1e9c-f40a-f97f-1e1de23dad20@gmail.com>
+Date: Fri, 16 Mar 2018 09:39:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2018-03-16_06:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH v4] Add support for pyiface
+In-Reply-To: <CA+chaQc23Fs6xdFF==qWb5Nid9hvFoFqYyL9nvURHQo_GRLqvw@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 20/25] libxml++: only include when x11 in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,57 +63,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 13:22:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 16 Mar 2018 16:39:42 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Pyiface is a package that exposes the network interfaces of the
-operating system in a easy to use and transparent way.
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc       | 11 +++++++++++
- meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb  |  2 ++
- meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb |  2 ++
- 3 files changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyiface.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-new file mode 100644
-index 000000000..4d0c8dc9e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -0,0 +1,11 @@
-+SUMMARY = "Pyiface is a package that exposes the network interfaces of the operating system in a easy to use and transparent way"
-+SECTION = "devel/python"
-+HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
-+LICENSE = "GPLv3+"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
-+
-+SRC_URI[md5sum] = "edcdd71109c4259af8348006a8049c9c"
-+SRC_URI[sha256sum] = "dc984de0e1bcf6871ef88b1a92d1fb75717d4f602a60caeb66136093d4a8f62e"
-+
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-new file mode 100644
-index 000000000..854cb30ee
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-pyiface.inc
-\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
-new file mode 100644
-index 000000000..721e7b1c9
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pyiface.inc
--- 
-2.16.2
+On 03/12/2018 11:40 AM, Martin Jansa wrote:
+> What in libxml++ requires x11? I'm building it in DISTRO without x11
+> for years and never noticed any issue with that.
+
+I was using the yocto-check-layer on meta-openembedded to clean it up
+and most likely got the recipe name wrong as we had a lot of cleanup.
+I send out a patch to remove this check as it appears to not be needed.
+thanks for catching this.
+
+- armin
+>
+> On Wed, Mar 7, 2018 at 5:03 AM, Armin Kuster <akuster808@gmail.com
+> <mailto:akuster808@gmail.com>> wrote:
+>
+>     Signed-off-by: Armin Kuster <akuster808@gmail.com
+>     <mailto:akuster808@gmail.com>>
+>     ---
+>      meta-oe/recipes-core/libxml/libxml++_2.40.1.bb <http://2.40.1.bb>
+>     | 4 +++-
+>      1 file changed, 3 insertions(+), 1 deletion(-)
+>
+>     diff --git a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
+>     <http://2.40.1.bb>
+>     b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb <http://2.40.1.bb>
+>     index c001c18..c3d647c 100644
+>     --- a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
+>     <http://2.40.1.bb>
+>     +++ b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
+>     <http://2.40.1.bb>
+>     @@ -16,7 +16,9 @@ SRC_URI[sha256sum] =
+>     "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f3
+>
+>      DEPENDS = "libxml2 glibmm"
+>
+>     -inherit autotools pkgconfig ptest
+>     +inherit distro_features_check autotools pkgconfig ptest
+>     +
+>     +REQUIRED_DISTRO_FEATURES = "x11"
+>
+>      do_compile_ptest() {
+>        oe_runmake -C examples buildtest
+>     --
+>     2.7.4
+>
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>
+>
 
 
