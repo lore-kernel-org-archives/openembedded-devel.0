@@ -1,50 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DEA06FF0E
+Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id C22AC78686
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 20:12:33 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id z73so8522857wrb.0
+	Fri, 16 Mar 2018 20:12:43 +0000 (UTC)
+Received: by mail-wr0-f169.google.com with SMTP id c24so965073wrc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 13:12:35 -0700 (PDT)
+	Fri, 16 Mar 2018 13:12:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6Dhl9qizCDuge3/8YaqhopqUEDiNL8juZxHBPrPg4Yw=;
-	b=ZPfwHN2ZZRgmXJKdzrNeLr7pPGkka1Lh5zuze8XzDhffvE6zokzVNYGgKyogQDBmjQ
-	2kKDuLNApzE+f9JKdhnoLdxp2ophJ5qK67Gm/5r1jOxcbHl67CywcgW0M2i3bQIIsJ/q
-	fO+yhjZK4CvzHa+4wKvK4WPUHrdIYjsr6eNG1a2d9LcyNJw8mcD86kPXTMmnBqOfbxfE
-	rQw/yYda2T/A76GoOvQ9nKiWnAQ3ciqgWr5oKnUepEaWVnStOKCu94C7udNcitbJ8I8q
-	GOkqZ+uHIhptn/ymIW6SCX0Y9LiEMe7QrQm4DfHCjUIMDC0V93gYXAs3cw3gNOGeVDKy
-	R4iw==
+	h=from:to:cc:subject:date:message-id;
+	bh=uMnW+BvHh2/SXaGJ8OtaQiMgaPPvaRCDl5YrElFO5Y0=;
+	b=qqpnA9x/Z41evGn0Oe+CfHBlNHSmj8cKNgybCefZqBLEsySlHPwNqMhcMB44dRFk5b
+	1sB1DCMCIju9hUA6ISyKrQYTNIFyqiNe9vWAYKqKfSKSUyqq8MWMo6+rHLlDV6JU5xkN
+	dFQJDrY2YVjHaGzDmk7Z7hYBVCz27TrMzsZX0W+MZHJgjqaOVDvcw2iJAq9x+sIUib2i
+	Ym15c4Adc5KKaz5L8VWqRCiv4zsJmB9p9/5ZWEIZd7Lt1YOKBDPde+vZ8TPoIRzkxZYS
+	UsDMCIfTATjZO/YKSaZOAOFRXMeIm+YzaGdAOxN6cZRW9MtdOfUJknSo+m3dIwA1SqDE
+	xh+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=6Dhl9qizCDuge3/8YaqhopqUEDiNL8juZxHBPrPg4Yw=;
-	b=lIXauiNu3m4PIu4cSmPSqriI0oW7YO7t9HPYc1P/6YHiMeGg8FgWBfhrjpPgYTjnCV
-	C55sav2J+NQIgUF8lE1wjOhzmg9UsQnCR9BFM+ZQpe4o/mkgblcuDwxWluLhJtVTZmPQ
-	eFqzcaBxIajjQEAURmYoC4lj0zGQq02KcMOu5PxClDAaWg97Jc3YQqZjDW8KzoJQTOLe
-	AQomefUBCXvGXhlxnOOzBzKW8iz+IBEs1TlWbgmTDEtoqNv65t9hg6VlfD+exs+/Srqp
-	smUftH1unTScbYr/B+Ar8h1dChrVeEsLec5XgGH11aX8c+lZdj1t1FlDR+MT+9vyrSwG
-	kUXw==
-X-Gm-Message-State: AElRT7FKDsNVi1AeeLmCzURHqAViT8Ll2vOYHBJLQ3bAvXFRSNlX2dHO
-	v1NQ1qMvzpbrKcJXJM+MBu+BnQ==
-X-Google-Smtp-Source: AG47ELueeWjJkVq5XmfCgs8bGvNQZpZx8SwNH2m4YT2hSdtNNDEd3MuDemybcjKMwsY+ztMZ9WarZw==
-X-Received: by 10.223.199.132 with SMTP id l4mr2883683wrg.6.1521231154472;
-	Fri, 16 Mar 2018 13:12:34 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uMnW+BvHh2/SXaGJ8OtaQiMgaPPvaRCDl5YrElFO5Y0=;
+	b=V8tuMZFT7fMsjeV3UeYWmZtTLTIDFgE3DC8vq6329pKcKiNBiMaY/4MUcQbqlHQ4Eu
+	khQuHaclKU8epiCEAmuVW9znd6oGQzQTpPgwYRJ1VeHFQTs2FxeDdOp1Fj2dupM0YjD6
+	AJWDE/HLYh5gLc1wBw3VcYc6fJ2u6R5ApV5bFy9IOA6mZEIDvIRKG4fJ1YJSSmh/ymgB
+	p/PfApY1f5pVKKfMI4Fv5XJ5Xy7tAET20hGQ1Ge95Jtqyoaal6afsIgAZLdwtQlYs2AC
+	CsOcmIeClhmUnJU7zS1hdmc7IzINM0x9RwFaQUxe8woqsEoN3OWFGyJ6q9zg3ariOd06
+	9ggg==
+X-Gm-Message-State: AElRT7HjA++okZuQVIKrHh7d9j497pCfv/ZILnzjdc1cYHfKe5DFbM5S
+	SuM8fg0MqHRBM67cqDdlPIW+sQ==
+X-Google-Smtp-Source: AG47ELsKcqAaPgN6pLmCpJJr8aSFHhw7o63ky89PQsfDd4sTVgVYb11Rtlfj7/SHxz0y60YYKCPu1g==
+X-Received: by 10.223.197.139 with SMTP id m11mr2645399wrg.198.1521231164434; 
+	Fri, 16 Mar 2018 13:12:44 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	k20sm2246123wre.67.2018.03.16.13.12.33
+	v23sm2307073wmh.30.2018.03.16.13.12.43
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 16 Mar 2018 13:12:33 -0700 (PDT)
+	Fri, 16 Mar 2018 13:12:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Mar 2018 20:12:33 +0000
-Message-Id: <20180316201233.4746-2-Martin.Jansa@gmail.com>
+Date: Fri, 16 Mar 2018 20:12:46 +0000
+Message-Id: <20180316201246.4794-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.15.1
-In-Reply-To: <20180316201233.4746-1-Martin.Jansa@gmail.com>
-References: <20180316201233.4746-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] gperftools: refresh the patches
+Subject: [meta-networking][PATCH] tcpdump: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,9 +54,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 20:12:34 -0000
+X-List-Received-Date: Fri, 16 Mar 2018 20:12:44 -0000
 
-WARNING: gperftools-2.6.1-r0 do_patch:
+WARNING: tcpdump-4.9.2-r0 do_patch:
 Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
 The context lines in the patches can be updated with devtool:
 
@@ -73,240 +70,93 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-Applying patch 0001-Support-Atomic-ops-on-clang.patch
-patching file src/base/atomicops.h
-Hunk #1 succeeded at 124 with fuzz 2 (offset 6 lines).
+Applying patch unnecessary-to-check-libpcap.patch
+patching file configure.in
+Hunk #1 succeeded at 418 with fuzz 2 (offset -149 lines).
 
-Now at patch 0001-Support-Atomic-ops-on-clang.patch
+Now at patch unnecessary-to-check-libpcap.patch
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../gperftools/0001-Support-Atomic-ops-on-clang.patch | 16 +++++++---------
- ...01-Use-ucontext_t-instead-of-struct-ucontext.patch |  8 +++-----
- ...le-heap-checkers-and-debug-allocator-on-musl.patch | 13 +++++++------
- .../gperftools/0001-fix-build-with-musl-libc.patch    |  6 ++----
- .../0001-include-fcntl.h-for-loff_t-definition.patch  |  6 ++----
- .../gperftools/disable_libunwind_aarch64.patch        | 19 +++++++++++++------
- .../gperftools/gperftools/sgidef.patch                | 18 +++++++++++++-----
- 7 files changed, 47 insertions(+), 39 deletions(-)
+ .../recipes-support/tcpdump/tcpdump/add-ptest.patch   | 13 +++++++------
+ .../tcpdump/unnecessary-to-check-libpcap.patch        | 19 ++++++++++---------
+ 2 files changed, 17 insertions(+), 15 deletions(-)
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-Support-Atomic-ops-on-clang.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-Support-Atomic-ops-on-clang.patch
-index e582c0da6e..2fd21c2783 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/0001-Support-Atomic-ops-on-clang.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-Support-Atomic-ops-on-clang.patch
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
+index 196cec7f20..b71435a043 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
++++ b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
 @@ -1,4 +1,4 @@
--From ea9f64eb2cdf3be6c4dc65fa1472d854616e43ca Mon Sep 17 00:00:00 2001
-+From aa0a63209af6813d87255ec3ab339f2dbbf27d6d Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 6 Mar 2017 13:38:46 -0800
- Subject: [PATCH] Support Atomic ops on clang
-@@ -9,25 +9,23 @@ gcc 4.2, here it depends on gcc 4.7 to enable
- the atomics and fails for clang
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-+
+-From 7b259580800e259d232229dc89f97058b56e2fe8 Mon Sep 17 00:00:00 2001
++From 8ee1ab1ac89557d48ac1ab7ddcc3c51be9b734ad Mon Sep 17 00:00:00 2001
+ From: "Hongjun.Yang" <hongjun.yang@windriver.com>
+ Date: Wed, 22 Oct 2014 10:02:48 +0800
+ Subject: [PATCH] Add ptest for tcpdump
+@@ -6,15 +6,16 @@ Subject: [PATCH] Add ptest for tcpdump
  Upstream-Status: Pending
  
-+---
-  src/base/atomicops.h | 2 +-
+ Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
++
+ ---
+  Makefile.in | 10 +++++++++-
+  1 file changed, 9 insertions(+), 1 deletion(-)
+ 
+-Index: tcpdump-4.9.0/Makefile.in
+-===================================================================
+---- tcpdump-4.9.0.orig/Makefile.in
+-+++ tcpdump-4.9.0/Makefile.in
+-@@ -436,9 +436,17 @@ distclean:
++diff --git a/Makefile.in b/Makefile.in
++index 0941f0e..3ce40c6 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -437,9 +437,17 @@ distclean:
+  	    tests/failure-outputs.txt
+  	rm -rf autom4te.cache tests/DIFF tests/NEW
+  
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+index d7a3ac23b1..8cefadf284 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
++++ b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+@@ -1,4 +1,7 @@
+-unnecessary to check libpcap
++From 741d77e42fc4af49804f7ee43b7237e01633cbcd Mon Sep 17 00:00:00 2001
++From: Roy Li <rongqing.li@windriver.com>
++Date: Tue, 8 Jul 2014 13:20:47 +0800
++Subject: [PATCH] unnecessary to check libpcap
+ 
+ Upstream-Status: Pending
+ 
+@@ -11,23 +14,21 @@ In fact, the libpcap has been added into the tcpdump's DEPENDS, not need to
+ check if libpcap existed.
+ 
+ Signed-off-by: Roy Li <rongqing.li@windriver.com>
++
+ ---
+- configure.in |    2 +-
++ configure.in | 2 +-
   1 file changed, 1 insertion(+), 1 deletion(-)
  
- diff --git a/src/base/atomicops.h b/src/base/atomicops.h
--index be038f3..f1a21ff 100644
-+index dac95be..390733c 100644
- --- a/src/base/atomicops.h
- +++ b/src/base/atomicops.h
--@@ -118,7 +118,7 @@
-+@@ -124,7 +124,7 @@
-  #include "base/atomicops-internals-linuxppc.h"
-  #elif defined(__GNUC__) && defined(__mips__)
-  #include "base/atomicops-internals-mips.h"
- -#elif defined(__GNUC__) && GCC_VERSION >= 40700
- +#elif defined(__GNUC__) && GCC_VERSION >= 40700 || defined(__clang__)
-  #include "base/atomicops-internals-gcc.h"
-- #else
-- #error You need to implement atomic operations for this architecture
---- 
--2.12.0
--
-+ #elif defined(__clang__) && CLANG_VERSION >= 30400
-+ #include "base/atomicops-internals-gcc.h"
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch
-index 5bd0b6fa4f..b3033621b5 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch
-@@ -1,4 +1,4 @@
--From 12ac0dc6742e1bcdfaf1842186c9002f0820a5e8 Mon Sep 17 00:00:00 2001
-+From 230cd84486145c5bb1d69d4c9a544e00adbcc9b5 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 1 Jul 2017 13:21:21 -0700
- Subject: [PATCH] Use ucontext_t instead of struct ucontext
-@@ -6,12 +6,13 @@ Subject: [PATCH] Use ucontext_t instead of struct ucontext
- Newer glibc has dropped the ucontext tag from exposing
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/stacktrace_powerpc-linux-inl.h | 3 +--
-  1 file changed, 1 insertion(+), 2 deletions(-)
- 
- diff --git a/src/stacktrace_powerpc-linux-inl.h b/src/stacktrace_powerpc-linux-inl.h
--index a9bf775..47ff2d7 100644
-+index 3b3843b..a301a46 100644
- --- a/src/stacktrace_powerpc-linux-inl.h
- +++ b/src/stacktrace_powerpc-linux-inl.h
- @@ -53,7 +53,6 @@
-@@ -31,6 +32,3 @@ index a9bf775..47ff2d7 100644
-            // We don't care about the rest, since IP value is at 'uc' field.A
-          } *sigframe = reinterpret_cast<rt_signal_frame_32*>(current);
-          result[n] = (void*) sigframe->uc.uc_mcontext.uc_regs->gregs[PT_NIP];
---- 
--2.13.2
--
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch
-index 99127e11a6..ab3ceb964f 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch
-@@ -1,19 +1,20 @@
--From b5961f17e9d7f2bc44da611b3e4b27c8a641fc72 Mon Sep 17 00:00:00 2001
-+From 06605158852f9364519391fa11070ba5ec4303e9 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 2 Sep 2017 08:07:17 -0700
- Subject: [PATCH] disbale heap checkers and debug allocator on musl
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-+
- Upstream-Status: Pending
- 
-+---
-  configure.ac | 2 ++
-  1 file changed, 2 insertions(+)
- 
--Index: git/configure.ac
--===================================================================
----- git.orig/configure.ac
--+++ git/configure.ac
-+diff --git a/configure.ac b/configure.ac
-+index 70b49a3..8154c5c 100644
-+--- a/configure.ac
-++++ b/configure.ac
- @@ -51,6 +51,8 @@ case "$host" in
-     *-cygwin*) default_enable_heap_checker=no; default_enable_cpu_profiler=no;;
-     *-freebsd*) default_enable_heap_checker=no;;
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
-index 78621c7fe0..0a72ff27c8 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
-@@ -1,4 +1,4 @@
--From 157914941bd38f1a38bb6bd7294ca6c2bc1b8dcb Mon Sep 17 00:00:00 2001
-+From 034e7da08c3fbffcba8cf8d4e24a71a16558db5a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 16 Jul 2017 15:51:28 -0700
- Subject: [PATCH] fix build with musl libc
-@@ -6,6 +6,7 @@ Subject: [PATCH] fix build with musl libc
- Patch from https://github.com/gperftools/gperftools/pull/765/
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  configure.ac                 | 1 +
-  src/malloc_hook_mmap_linux.h | 8 ++++++--
-@@ -56,6 +57,3 @@ index 79ac4e3..d444635 100755
-  // libc's version:
-  extern "C" void* __sbrk(ptrdiff_t increment);
+ diff --git a/configure.in b/configure.in
+-index 06fade1..9125de7 100644
++index b2305a5..b3b5dbf 100644
+ --- a/configure.in
+ +++ b/configure.in
+-@@ -567,7 +567,7 @@ AC_SEARCH_LIBS(getrpcbynumber, nsl,
+- dnl AC_CHECK_LIB(z, uncompress)
+- dnl AC_CHECK_HEADERS(zlib.h)
++@@ -418,7 +418,7 @@ dnl Some platforms may need -lnsl for getrpcbynumber.
++ AC_SEARCH_LIBS(getrpcbynumber, nsl,
++     AC_DEFINE(HAVE_GETRPCBYNUMBER, 1, [define if you have getrpcbynumber()]))
   
---- 
--2.13.3
--
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
-index 667008a5b1..4c63e73b3c 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
-@@ -1,4 +1,4 @@
--From 04ea8e001501931f4dbf20288aca78469617b08a Mon Sep 17 00:00:00 2001
-+From a16a73f0819d26219ee83cd98eea82786d7c1755 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 16 Jul 2017 19:28:17 -0700
- Subject: [PATCH] include fcntl.h for loff_t definition
-@@ -7,6 +7,7 @@ Fixes
- linux_syscall_support.h:2641:26: error: 'loff_t' has not been declared
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/base/linux_syscall_support.h | 1 +
-  1 file changed, 1 insertion(+)
-@@ -23,6 +24,3 @@ index 85347a2..70431ca 100644
+ -AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
+ +#AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
   
-  #ifdef __mips__
-  /* Include definitions of the ABI currently in use.                          */
+  #
+  # Check for these after AC_LBL_LIBPCAP, so we link with the appropriate
 --- 
--2.13.3
+-1.7.9.5
 -
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/disable_libunwind_aarch64.patch b/meta-oe/recipes-support/gperftools/gperftools/disable_libunwind_aarch64.patch
-index f2647404bf..c3c5784186 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/disable_libunwind_aarch64.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/disable_libunwind_aarch64.patch
-@@ -1,15 +1,22 @@
--Disable libunwind on aarch64
-+From 564f800e3e24647c095f7a321bf3ebdccfbf762d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 2 Sep 2017 12:02:04 -0700
-+Subject: [PATCH] Disable libunwind on aarch64
- 
- Fixes hangs when using libtcmalloc.so
- 
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
--Index: git/configure.ac
--===================================================================
----- git.orig/configure.ac
--+++ git/configure.ac
--@@ -69,6 +69,11 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(, [re
-+---
-+ configure.ac | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 8154c5c..063b260 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -69,6 +69,11 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(, [return __PPC64__])],
-                    [default_enable_libunwind=yes
-                     default_tcmalloc_pagesize=8])
-  
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch b/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch
-index 7e1a23bf68..10274a6dec 100644
---- a/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch
-+++ b/meta-oe/recipes-support/gperftools/gperftools/sgidef.patch
-@@ -1,11 +1,19 @@
--sgidef.h does not exist on musl and its not needed to compile
-+From 259b420444c52463795b4b582a2ab7511149eea7 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 16 Oct 2017 21:26:40 -0700
-+Subject: [PATCH] sgidef.h does not exist on musl and its not needed to compile
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Upstream-Status: Pending
--Index: git/src/base/linux_syscall_support.h
--===================================================================
----- git.orig/src/base/linux_syscall_support.h
--+++ git/src/base/linux_syscall_support.h
-+
-+---
-+ src/base/linux_syscall_support.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/base/linux_syscall_support.h b/src/base/linux_syscall_support.h
-+index 70431ca..b23ca59 100644
-+--- a/src/base/linux_syscall_support.h
-++++ b/src/base/linux_syscall_support.h
- @@ -164,7 +164,7 @@ extern "C" {
-  #include <endian.h>
-  #include <fcntl.h>
 -- 
 2.15.1
 
