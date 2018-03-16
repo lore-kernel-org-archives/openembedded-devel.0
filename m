@@ -1,47 +1,45 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3163E788CD
+Return-Path: <prvs=261329a6b7=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 74717788E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 12:58:11 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id e79so4311162ioi.7
+	Fri, 16 Mar 2018 13:22:06 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w2GDLVfm014372 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Mar 2018 08:22:07 -0500
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2gr8sh8yjw-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Mar 2018 08:22:07 -0500
+Received: from us-aus-exch1.ni.corp.natinst.com
+	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w2GDM6XJ011563
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 05:58:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=PzJ2NH8GIaDEIykKtxMaehyXfB4Qquw/fFqv4fW1fww=;
-	b=YgwS5iii2WQfUOZe2EFsfZrPA8mUc+Mh9pdMBk5yOVH07fSGD3ObKU4YsvXWVn8QsA
-	Hsxj6T4+z+5HrZZLVnskqmDEKEiVP9RmODl+WAl7OxFQkaxMjPMupjg7KI+hQbWCXvJz
-	YonOotr5WsWX5WgnjBip5y376/mUbtiIjB3u/IUlWc7DAPZwx7ceaN9ljiukDP/wimxP
-	cfvj/SsRWGiF0/VGL1byHysbWEVYPa6sYFjMg0yuKyNaaWd6FRV8KbcbOETcfLzhGEcs
-	nlAQpU3GzvxrbVLVl9iovs9U0ChrFBeKXvX4IVpyR2XoKitfKghAmQlCFz1Z6p2YJEQj
-	iEZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=PzJ2NH8GIaDEIykKtxMaehyXfB4Qquw/fFqv4fW1fww=;
-	b=aXVfyDuFhs8/dUlRPhG/Ii1GXzpogzT71EUJioc67dJOX8nr8CI7K0x6j8oC7IJBCt
-	plXCOn0xCZfcBvIcRpXys/cHKRQfNEF6X3ffiDdQMxG/bBnYXoaP5Zzref8/S5I7OENW
-	Du+xYDtqX37VWVjUNBloiVKPb9DV+tmOqkovHYFbozpmjUSB/QwmI63ZWkFKdGzQuyrN
-	hJMsu+7i0m2+mSqhrEyLgB2YXG7F24VXSp5q0L2btaiSrzSywKpBv+5MGRe5ciRIWgww
-	7OWmDw9cFB0P9Cqvab3CuGj+TYlCABrIqQ4wTS6aiGnIMiHoum1fd3Fw0A/JWH14V+ZW
-	J7kA==
-X-Gm-Message-State: AElRT7Hs1dzfigVk6cMazrdwgdPhgkea/OYfKKTx0YEvEcYo0xH/uOCO
-	u6UWl9aownQB1icz5i6joYybyC2R4FDtQ7Rh4dY=
-X-Google-Smtp-Source: AG47ELttQ2tQ9I3ofQrmiGKONxRXJgrHDo2VhlJia7fpr6glhibHeeM/feILopz2QW9TURGJDjgNjkhhRLrPN4S69j8=
-X-Received: by 10.107.137.158 with SMTP id t30mr1644073ioi.230.1521205092973; 
-	Fri, 16 Mar 2018 05:58:12 -0700 (PDT)
+	Fri, 16 Mar 2018 08:22:06 -0500
+Received: from us-aus-exch5.ni.corp.natinst.com (130.164.68.15) by
+	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Fri, 16 Mar 2018 08:22:06 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch5.ni.corp.natinst.com (130.164.68.15) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Fri, 16 Mar 2018 08:22:05 -0500
+Received: from avasiuPC.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Fri, 16 Mar 2018 08:22:05 -0500
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 16 Mar 2018 15:21:41 +0200
+Message-ID: <20180316132141.22580-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.16.2
 MIME-Version: 1.0
-Received: by 10.107.146.139 with HTTP; Fri, 16 Mar 2018 05:58:12 -0700 (PDT)
-In-Reply-To: <1521190809-26444-1-git-send-email-liu.ming50@gmail.com>
-References: <1521190809-26444-1-git-send-email-liu.ming50@gmail.com>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Date: Fri, 16 Mar 2018 14:58:12 +0200
-Message-ID: <CABXoSoWWN3EESu3VKEeSONt9NTrYD+5wXEwGRo8Bccuc8t8PSg@mail.gmail.com>
-To: liu.ming50@gmail.com
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH] qtwayland: handle examples, tests PACKAGECONFIG
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2018-03-16_06:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-oe][meta-python][PATCH v4] Add support for pyiface
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +52,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 12:58:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 16 Mar 2018 13:22:06 -0000
+Content-Type: text/plain
 
-This happens on every module, but only if you have examples enabled in
-qtbase: https://github.com/meta-qt5/meta-qt5/commit/909858baf064216a3b221edb59b40cc93d536a44
+Pyiface is a package that exposes the network interfaces of the
+operating system in a easy to use and transparent way.
 
-On 16 March 2018 at 11:00,  <liu.ming50@gmail.com> wrote:
-> From: Ming Liu <liu.ming50@gmail.com>
->
-> The examples and tests parts of qtwayland are enabled by default even
-> they are not passed by QT_BUILD_PARTS, so we need special logic set
-> in qtwayland to explicitly disable them if they are not being chosen
-> in PACKAGECONFIG.
->
-> Signed-off-by: Ming Liu <liu.ming50@gmail.com>
-> ---
->  recipes-qt/qt5/qtwayland_git.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-> index 91ffcd7..aece932 100644
-> --- a/recipes-qt/qt5/qtwayland_git.bb
-> +++ b/recipes-qt/qt5/qtwayland_git.bb
-> @@ -35,6 +35,9 @@ PACKAGECONFIG[wayland-brcm] = "-feature-wayland-brcm,-no-feature-wayland-brcm,vi
->  PACKAGECONFIG[drm-egl-server] = "-feature-drm-egl-server,-no-feature-drm-egl-server,libdrm virtual/egl"
->  PACKAGECONFIG[libhybris-egl-server] = "-feature-libhybris-egl-server,-no-feature-libhybris-egl-server,libhybris"
->
-> +EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'examples', '', 'QT_BUILD_PARTS-=examples', d)}"
-> +EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'tests', '', 'QT_BUILD_PARTS-=tests', d)}"
-> +
->  EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
->
->  SRCREV = "db36bc0d9ccae21e84cd54be3e18ae539542eadc"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+---
+ meta-python/recipes-devtools/python/python-pyiface.inc       | 11 +++++++++++
+ meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb  |  2 ++
+ meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb |  2 ++
+ 3 files changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyiface.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
+
+diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
+new file mode 100644
+index 000000000..4d0c8dc9e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyiface.inc
+@@ -0,0 +1,11 @@
++SUMMARY = "Pyiface is a package that exposes the network interfaces of the operating system in a easy to use and transparent way"
++SECTION = "devel/python"
++HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
++LICENSE = "GPLv3+"
++
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
++
++SRC_URI[md5sum] = "edcdd71109c4259af8348006a8049c9c"
++SRC_URI[sha256sum] = "dc984de0e1bcf6871ef88b1a92d1fb75717d4f602a60caeb66136093d4a8f62e"
++
++inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
+new file mode 100644
+index 000000000..854cb30ee
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-pyiface.inc
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
+new file mode 100644
+index 000000000..721e7b1c9
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pyiface.inc
+-- 
+2.16.2
+
 
