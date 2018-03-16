@@ -1,47 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
-	[209.85.128.169])
-	by mail.openembedded.org (Postfix) with ESMTP id C22AC78686
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id BB230786EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 20:12:43 +0000 (UTC)
-Received: by mail-wr0-f169.google.com with SMTP id c24so965073wrc.6
+	Fri, 16 Mar 2018 22:46:01 +0000 (UTC)
+Received: by mail-pg0-f49.google.com with SMTP id m15so4642147pgc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 13:12:45 -0700 (PDT)
+	Fri, 16 Mar 2018 15:46:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=uMnW+BvHh2/SXaGJ8OtaQiMgaPPvaRCDl5YrElFO5Y0=;
-	b=qqpnA9x/Z41evGn0Oe+CfHBlNHSmj8cKNgybCefZqBLEsySlHPwNqMhcMB44dRFk5b
-	1sB1DCMCIju9hUA6ISyKrQYTNIFyqiNe9vWAYKqKfSKSUyqq8MWMo6+rHLlDV6JU5xkN
-	dFQJDrY2YVjHaGzDmk7Z7hYBVCz27TrMzsZX0W+MZHJgjqaOVDvcw2iJAq9x+sIUib2i
-	Ym15c4Adc5KKaz5L8VWqRCiv4zsJmB9p9/5ZWEIZd7Lt1YOKBDPde+vZ8TPoIRzkxZYS
-	UsDMCIfTATjZO/YKSaZOAOFRXMeIm+YzaGdAOxN6cZRW9MtdOfUJknSo+m3dIwA1SqDE
-	xh+g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=0tBICuuUylGHa10J/ru/7JZf2ifl9cygA4ftJk1hAeg=;
+	b=iqbTFvB40eCYzrtNF1elVTG8xK3HnNkHn20jmDK+6wQ1wz3WkAWDuP4VdJ2N3ZZL8g
+	Y/nbs4MBRpLVh7kOU5iRdrWJ/iMUPK2PaS24N/pWVL5DRCwj9SqP7qeFjkrfJjFajALC
+	gOg6MBBy8F4LVauqP1cVaDZK/ZqKkiRlcgwzNHe/5RjMRF5O4gnrl89qOJjCn+tHl0Pg
+	mSs0nHzF7Dg+VM8J7qa9lhVPstRVFHWDDDI+uCek8I3un5Bbeh3vYafn4/Uc7PhsfbX+
+	4ebtxwANQiRkwPZvWULY+U+ltpQWMvUl7zkPoZDG4DqSKr5fgwFiR6Vg4JPD9mGISEvT
+	fZyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=uMnW+BvHh2/SXaGJ8OtaQiMgaPPvaRCDl5YrElFO5Y0=;
-	b=V8tuMZFT7fMsjeV3UeYWmZtTLTIDFgE3DC8vq6329pKcKiNBiMaY/4MUcQbqlHQ4Eu
-	khQuHaclKU8epiCEAmuVW9znd6oGQzQTpPgwYRJ1VeHFQTs2FxeDdOp1Fj2dupM0YjD6
-	AJWDE/HLYh5gLc1wBw3VcYc6fJ2u6R5ApV5bFy9IOA6mZEIDvIRKG4fJ1YJSSmh/ymgB
-	p/PfApY1f5pVKKfMI4Fv5XJ5Xy7tAET20hGQ1Ge95Jtqyoaal6afsIgAZLdwtQlYs2AC
-	CsOcmIeClhmUnJU7zS1hdmc7IzINM0x9RwFaQUxe8woqsEoN3OWFGyJ6q9zg3ariOd06
-	9ggg==
-X-Gm-Message-State: AElRT7HjA++okZuQVIKrHh7d9j497pCfv/ZILnzjdc1cYHfKe5DFbM5S
-	SuM8fg0MqHRBM67cqDdlPIW+sQ==
-X-Google-Smtp-Source: AG47ELsKcqAaPgN6pLmCpJJr8aSFHhw7o63ky89PQsfDd4sTVgVYb11Rtlfj7/SHxz0y60YYKCPu1g==
-X-Received: by 10.223.197.139 with SMTP id m11mr2645399wrg.198.1521231164434; 
-	Fri, 16 Mar 2018 13:12:44 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	v23sm2307073wmh.30.2018.03.16.13.12.43
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 16 Mar 2018 13:12:43 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Mar 2018 20:12:46 +0000
-Message-Id: <20180316201246.4794-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
-Subject: [meta-networking][PATCH] tcpdump: refresh patches
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=0tBICuuUylGHa10J/ru/7JZf2ifl9cygA4ftJk1hAeg=;
+	b=JCao8bhWLAC7ITbSlEf8M88dxXT/oJIzQqQC78yB9pL3b8+/b4q68umbPMH8aFGZeZ
+	q6kxGvad+L54NDcLgf82ya/RI481ogkcB90N1U216OVOAoLYiM9qUCX42CLIj2g9zt4Z
+	E5LIsMkJaCwJBWhAYXN3bfric5MkSf3l0wX4Nem9LE44st10iz7vQLhRfiJ2/E6oYkUh
+	Y/kzosaZ8ffaT0gUZofHXVvaLfE/DHJVu3w/bjvJyWjJyPv2YLovGHDmTieUwtB5Ej8S
+	UzQjs4YWgVgCDe7L64Drp0j7vfGWRkrT3b7qWP0+dQKMTfFPeG8hAvzZ7uR/Lvrt/1/t
+	118w==
+X-Gm-Message-State: AElRT7GKQCF5AQIUcRyTpa9Gm4cb9jSthCiOKJZtfrjkNKa/VfRQytBc
+	WUZP6u20lFwyjJMtlsI0nSRvMqHJA5qvfBi3Ifw=
+X-Google-Smtp-Source: AG47ELv4K0ibR8+wNqjWyx43VUzgQg1e6p931Tu3LNio2sLlbURAMiHv8Gne8/D2r4Ft282E3KNEyFhbOFhyj0CzZhA=
+X-Received: by 10.101.99.66 with SMTP id p2mr2701610pgv.384.1521240362543;
+	Fri, 16 Mar 2018 15:46:02 -0700 (PDT)
+MIME-Version: 1.0
+References: <608c81f2-6c48-a68d-aee9-d85f8eae65f0@linuxfoundation.org>
+In-Reply-To: <608c81f2-6c48-a68d-aee9-d85f8eae65f0@linuxfoundation.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 16 Mar 2018 22:45:51 +0000
+Message-ID: <CAMKF1spQHF9KNfr3_Q1oNZauzwjcxZ6_eE=Ay6DCQObk51dsrQ@mail.gmail.com>
+To: MIchael Halstead <mhalstead@linuxfoundation.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org,
+	yocto-infrastructure@yoctoproject.org
+Subject: Re: [Infra] 1 minute unplanned outage http://layers.openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,110 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 20:12:44 -0000
+X-List-Received-Date: Fri, 16 Mar 2018 22:46:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-WARNING: tcpdump-4.9.2-r0 do_patch:
-Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
-The context lines in the patches can be updated with devtool:
+On Fri, Mar 16, 2018 at 10:56 AM MIchael Halstead <
+mhalstead@linuxfoundation.org> wrote:
 
-    devtool modify <recipe>
-    devtool finish --force-patch-refresh <recipe> <layer_path>
+> The layerindex was offline between the following times:
+> Fri Mar 16 17:40:17 UTC 2018
+> Fri Mar 16 17:40:57 UTC 2018
+>
 
-Then the updated patches and the source tree (in devtool's workspace)
-should be reviewed to make sure the patches apply in the correct place
-and don't introduce duplicate lines (which can, and does happen
-when some of the context is ignored). Further information:
-http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
-Details:
-Applying patch unnecessary-to-check-libpcap.patch
-patching file configure.in
-Hunk #1 succeeded at 418 with fuzz 2 (offset -149 lines).
+Thanks for being so vigilant and keeping the community informed much
+appreciated
 
-Now at patch unnecessary-to-check-libpcap.patch
+Thank you
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-support/tcpdump/tcpdump/add-ptest.patch   | 13 +++++++------
- .../tcpdump/unnecessary-to-check-libpcap.patch        | 19 ++++++++++---------
- 2 files changed, 17 insertions(+), 15 deletions(-)
+Khem
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-index 196cec7f20..b71435a043 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-@@ -1,4 +1,4 @@
--From 7b259580800e259d232229dc89f97058b56e2fe8 Mon Sep 17 00:00:00 2001
-+From 8ee1ab1ac89557d48ac1ab7ddcc3c51be9b734ad Mon Sep 17 00:00:00 2001
- From: "Hongjun.Yang" <hongjun.yang@windriver.com>
- Date: Wed, 22 Oct 2014 10:02:48 +0800
- Subject: [PATCH] Add ptest for tcpdump
-@@ -6,15 +6,16 @@ Subject: [PATCH] Add ptest for tcpdump
- Upstream-Status: Pending
- 
- Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-+
- ---
-  Makefile.in | 10 +++++++++-
-  1 file changed, 9 insertions(+), 1 deletion(-)
- 
--Index: tcpdump-4.9.0/Makefile.in
--===================================================================
----- tcpdump-4.9.0.orig/Makefile.in
--+++ tcpdump-4.9.0/Makefile.in
--@@ -436,9 +436,17 @@ distclean:
-+diff --git a/Makefile.in b/Makefile.in
-+index 0941f0e..3ce40c6 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -437,9 +437,17 @@ distclean:
-  	    tests/failure-outputs.txt
-  	rm -rf autom4te.cache tests/DIFF tests/NEW
-  
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-index d7a3ac23b1..8cefadf284 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-@@ -1,4 +1,7 @@
--unnecessary to check libpcap
-+From 741d77e42fc4af49804f7ee43b7237e01633cbcd Mon Sep 17 00:00:00 2001
-+From: Roy Li <rongqing.li@windriver.com>
-+Date: Tue, 8 Jul 2014 13:20:47 +0800
-+Subject: [PATCH] unnecessary to check libpcap
- 
- Upstream-Status: Pending
- 
-@@ -11,23 +14,21 @@ In fact, the libpcap has been added into the tcpdump's DEPENDS, not need to
- check if libpcap existed.
- 
- Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+
- ---
-- configure.in |    2 +-
-+ configure.in | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.in b/configure.in
--index 06fade1..9125de7 100644
-+index b2305a5..b3b5dbf 100644
- --- a/configure.in
- +++ b/configure.in
--@@ -567,7 +567,7 @@ AC_SEARCH_LIBS(getrpcbynumber, nsl,
-- dnl AC_CHECK_LIB(z, uncompress)
-- dnl AC_CHECK_HEADERS(zlib.h)
-+@@ -418,7 +418,7 @@ dnl Some platforms may need -lnsl for getrpcbynumber.
-+ AC_SEARCH_LIBS(getrpcbynumber, nsl,
-+     AC_DEFINE(HAVE_GETRPCBYNUMBER, 1, [define if you have getrpcbynumber()]))
-  
- -AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
- +#AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
-  
-  #
-  # Check for these after AC_LBL_LIBPCAP, so we link with the appropriate
---- 
--1.7.9.5
--
--- 
-2.15.1
-
+>
+> The webserver failed to come back up after renewing the SSL cert and
+> routine updates due to failing pre-launch configuration checks. We will
+> avoid this in the future by running configuration checks in a test
+> container before restarting the webserver.
+>
+> --
+> Michael Halstead
+> Linux Foundation / SysAdmin
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
