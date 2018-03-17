@@ -1,47 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id BB230786EE
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id EDEAD71C0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 22:46:01 +0000 (UTC)
-Received: by mail-pg0-f49.google.com with SMTP id m15so4642147pgc.1
+	Sat, 17 Mar 2018 01:23:27 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id r10-v6so3851049iti.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Mar 2018 15:46:03 -0700 (PDT)
+	Fri, 16 Mar 2018 18:23:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0tBICuuUylGHa10J/ru/7JZf2ifl9cygA4ftJk1hAeg=;
-	b=iqbTFvB40eCYzrtNF1elVTG8xK3HnNkHn20jmDK+6wQ1wz3WkAWDuP4VdJ2N3ZZL8g
-	Y/nbs4MBRpLVh7kOU5iRdrWJ/iMUPK2PaS24N/pWVL5DRCwj9SqP7qeFjkrfJjFajALC
-	gOg6MBBy8F4LVauqP1cVaDZK/ZqKkiRlcgwzNHe/5RjMRF5O4gnrl89qOJjCn+tHl0Pg
-	mSs0nHzF7Dg+VM8J7qa9lhVPstRVFHWDDDI+uCek8I3un5Bbeh3vYafn4/Uc7PhsfbX+
-	4ebtxwANQiRkwPZvWULY+U+ltpQWMvUl7zkPoZDG4DqSKr5fgwFiR6Vg4JPD9mGISEvT
-	fZyA==
+	h=from:to:subject:date:message-id;
+	bh=W5oh1utZOxoAVebHVZ7kHiYhTR81DJ1cxYjhPYOTzTk=;
+	b=ZJQ5keXTUuWDZXsu4WRwbu3yyCgg1TlqMqLhGfttiIfmUifIASPXXFlClzN+VaNLU0
+	oHVDrkJsrO3j+engknN7yK5wTzOMmhHXtIha4erQImRzlZZF8awbdWLNIx7bBVOGiLyr
+	CkGHNxyNXwbaMyGtx+tlxGtEZzA9XLeeOoDkD3h0GTOneMXlCO4b9TWl5ro2zelSBRg6
+	TQPp3YYBZUhGoT5BxLKyjPfzZdPWUi+yeVdRE6jC1D7+BapiWiQrwKI/Aql3WV5zU9/Z
+	hktj5VPaUudpMEyCYIkMtePyNgQMCjDeOrJZGA9+LCxXxwmNpAG1/Ftz6D1ItQVFpriw
+	bJPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0tBICuuUylGHa10J/ru/7JZf2ifl9cygA4ftJk1hAeg=;
-	b=JCao8bhWLAC7ITbSlEf8M88dxXT/oJIzQqQC78yB9pL3b8+/b4q68umbPMH8aFGZeZ
-	q6kxGvad+L54NDcLgf82ya/RI481ogkcB90N1U216OVOAoLYiM9qUCX42CLIj2g9zt4Z
-	E5LIsMkJaCwJBWhAYXN3bfric5MkSf3l0wX4Nem9LE44st10iz7vQLhRfiJ2/E6oYkUh
-	Y/kzosaZ8ffaT0gUZofHXVvaLfE/DHJVu3w/bjvJyWjJyPv2YLovGHDmTieUwtB5Ej8S
-	UzQjs4YWgVgCDe7L64Drp0j7vfGWRkrT3b7qWP0+dQKMTfFPeG8hAvzZ7uR/Lvrt/1/t
-	118w==
-X-Gm-Message-State: AElRT7GKQCF5AQIUcRyTpa9Gm4cb9jSthCiOKJZtfrjkNKa/VfRQytBc
-	WUZP6u20lFwyjJMtlsI0nSRvMqHJA5qvfBi3Ifw=
-X-Google-Smtp-Source: AG47ELv4K0ibR8+wNqjWyx43VUzgQg1e6p931Tu3LNio2sLlbURAMiHv8Gne8/D2r4Ft282E3KNEyFhbOFhyj0CzZhA=
-X-Received: by 10.101.99.66 with SMTP id p2mr2701610pgv.384.1521240362543;
-	Fri, 16 Mar 2018 15:46:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <608c81f2-6c48-a68d-aee9-d85f8eae65f0@linuxfoundation.org>
-In-Reply-To: <608c81f2-6c48-a68d-aee9-d85f8eae65f0@linuxfoundation.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 16 Mar 2018 22:45:51 +0000
-Message-ID: <CAMKF1spQHF9KNfr3_Q1oNZauzwjcxZ6_eE=Ay6DCQObk51dsrQ@mail.gmail.com>
-To: MIchael Halstead <mhalstead@linuxfoundation.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	yocto-infrastructure@yoctoproject.org
-Subject: Re: [Infra] 1 minute unplanned outage http://layers.openembedded.org
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=W5oh1utZOxoAVebHVZ7kHiYhTR81DJ1cxYjhPYOTzTk=;
+	b=cqwJ3m4g3Je3HzHWGVZK5HdZvHbAVXOhqd3cQ0ww+RSdHPa5RoBJrorUTnoJsnv/HU
+	/xADumGMhAbOaEdfHgWbxkix3vtarecSLo19mRzEH67Dqc38DyyvdpCu868QuaZIlsnb
+	2xypSg5YuSvp7g91kgBQTirlB3CxmBKzC+c6iRVOk27CgU5G2RmyE14rRkMeNQOpFVTC
+	o4UDw9zXe/9waMd0Bq42ntoQJv/Csk1XAhGJGU9oL5JgL5rfhEqWNmK1yKggnQOUKwm4
+	XlwqILosmbwTfqYZ2yJFryJYLOQ9Ntx51kiz4MUs8nzh15r6nWk5NyZVtux9Vvf49YdL
+	4d2A==
+X-Gm-Message-State: AElRT7E4lV+yMIiUTdabsOc7fECdi6ivYkB67mrVvemFtKVJ3CEpgOLs
+	IyCt2uk0DB15m2QLEmAzvYsyL110
+X-Google-Smtp-Source: AG47ELsowB6cdwXNWYRoxLdXF8WsC/JzpBb835VUrXki1zvgJgUQ1uCgphJ7wFBBAzxijuEJ100ydg==
+X-Received: by 2002:a24:2111:: with SMTP id
+	e17-v6mr4426888ita.44.1521249808772; 
+	Fri, 16 Mar 2018 18:23:28 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	b185sm5318904itb.20.2018.03.16.18.23.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 16 Mar 2018 18:23:27 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Mar 2018 21:23:21 -0400
+Message-Id: <20180317012321.24676-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.14.1.459.g238e487ea
+Subject: [PATCH] directfb: add more PACKAGECONFIGs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,37 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Mar 2018 22:46:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 17 Mar 2018 01:23:28 -0000
 
-On Fri, Mar 16, 2018 at 10:56 AM MIchael Halstead <
-mhalstead@linuxfoundation.org> wrote:
+Allow the following features to be enabled by the user during configuration:
+mesa, x11.
 
-> The layerindex was offline between the following times:
-> Fri Mar 16 17:40:17 UTC 2018
-> Fri Mar 16 17:40:57 UTC 2018
->
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-oe/recipes-graphics/directfb/directfb.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks for being so vigilant and keeping the community informed much
-appreciated
+diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+index bfbd9c29e5..bd66a28207 100644
+--- a/meta-oe/recipes-graphics/directfb/directfb.inc
++++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+@@ -41,16 +41,16 @@ PACKAGECONFIG[webp] = "--enable-webp,--disable-webp,libwebp"
+ PACKAGECONFIG[tslib] = "--with-inputdrivers=tslib,,tslib"
+ PACKAGECONFIG[linuxinput] = "--with-inputdrivers=linuxinput,,"
+ PACKAGECONFIG[noinput] = "--with-inputdrivers=none,,"
++PACKAGECONFIG[mesa] = "--enable-mesa,--disable-mesa,virtual/mesa,"
++PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,xserver-xorg,"
+ 
+ EXTRA_OECONF = "\
+   --with-gfxdrivers=none \
+   --enable-freetype=yes \
+   --enable-zlib \
+   --disable-imlib2 \
+-  --disable-mesa \
+   --disable-sdl \
+   --disable-vnc \
+-  --disable-x11 \
+   --disable-x11vdpau \
+   --disable-xine-vdpau \
+ "
+-- 
+2.14.1.459.g238e487ea
 
-Thank you
-
-Khem
-
->
-> The webserver failed to come back up after renewing the SSL cert and
-> routine updates due to failing pre-launch configuration checks. We will
-> avoid this in the future by running configuration checks in a test
-> container before restarting the webserver.
->
-> --
-> Michael Halstead
-> Linux Foundation / SysAdmin
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
