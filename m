@@ -1,48 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f48.google.com (mail-pl0-f48.google.com
-	[209.85.160.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C5C771C9F
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 315297878B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 21:39:04 +0000 (UTC)
-Received: by mail-pl0-f48.google.com with SMTP id m22-v6so9052828pls.5
+	Sun, 18 Mar 2018 22:27:06 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id s13so6160716pgn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 14:39:06 -0700 (PDT)
+	Sun, 18 Mar 2018 15:27:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=FhbduGCGJLMLz9Y6zEgPb9tYJfQlysgI6JDnJ9zLV10=;
-	b=HoPGPvt8BQR4E0d2/ppR9JNSGq4d/VPG02lroV5QYYzlYnjhPypfUoaUySakIsB2mT
-	mX9LuesILp9ppr+OCe4nmgbg2IvjWVYWCZNAyAxIyYeW/oH3B3imdjkYB0EChxPGrzXw
-	DEYFVAJWfOvfaaUgBsDOrQOj7N7dRBNy3I9hRquNC/ZyDCj2N+YyiY5COuJYLMZFpg/A
-	Cg+dPJdVrOk47Zzv0o/OENG7nKxAPwS7qmjVzh63kSMrHAcgQgw2GxinfPz09/ndCBjC
-	yGR0WA03L/DVul9T1udysjGmkDBrx6CkIwB9dVkxuaCT+f7Ib51g4vHBiTsUo4RL/XOL
-	Ghyw==
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding:content-language;
+	bh=0fnZLPDvuRDHQ3/vu2ceBYfqwL6Z/O2luAyg6UOqOX8=;
+	b=R8WLnfyJDUzg27AJ/aGjUlSDSjJwLGTSThg0bg5Mxmnjs21gi23Z98psuSZphI6pjE
+	xG2ZI3YOoNHXD+j1VxPnHudMDYe+ZWlmoxxHr54V87sh7KDnc/WjTsdLjV4BZxQG6aMC
+	bPmc/WHM94Xk9/lk66c7FS12RqWuTUXxLbvzDP/fX8Z5SbxB61tn0p2EtRj+JieXKo9N
+	kPo1OZ0i7WsvkTk/Nsaa2jSiZAVOO3kCYyayAKWVsqnTMpGkaoKM7EsoEPiEQfhm4q3n
+	zLoemmoSRy86iM0Kt+6w7IIRDcFlj5ouMuiyzwR8Kx0aaj3rk5XR6yilepdZgeEXLNlV
+	r+fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=FhbduGCGJLMLz9Y6zEgPb9tYJfQlysgI6JDnJ9zLV10=;
-	b=JBteGBF70PtvplZgz2FssiPtfaGmZsO/pankNB3BXzEa+Dn08OArga+qVhQL2P0LOG
-	g61/Pq7b/RabtQ0U/aDQDe/ic8eBeevFiiqmoDIQ6VqGhvu7vdA1KdxXEf4KnnZuOhN0
-	nVfspZiBcJaApbphcVn6sL1auhfot2RZvAdPMVNAzTa8T9NQEOgB/8nJ2nJp226dpTlH
-	mcV4iwkhf0YJQWpMSDOu5LI3cJwJ5vXfWXOG3NVCqwPnkKZbpeZoDe4blWJatfCwDK29
-	XR03riUTBnZyG9+M1ytycmBcdJADUxywhMCcYQdkQQYB48SDR2/6nX6SAjmo8ftrNx+Q
-	HRUg==
-X-Gm-Message-State: AElRT7G3u7VF4qw+mfVequWGouCbGvmK+5MEm9VLPc5zkySAdc+BSYzK
-	/zzZVXab89zK6Pi805iz3F1LLJy5/TX8kVnOYkg=
-X-Google-Smtp-Source: AG47ELuZrMSqEYiTw+wughhbBpoENycybvDn6LLWH43UnB7uChVArqhzgjwlFvGNziCq2XTMq5lRwWlZGfrFW/mAxAw=
-X-Received: by 2002:a17:902:63:: with SMTP id
-	90-v6mr10246744pla.125.1521409146093; 
-	Sun, 18 Mar 2018 14:39:06 -0700 (PDT)
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=0fnZLPDvuRDHQ3/vu2ceBYfqwL6Z/O2luAyg6UOqOX8=;
+	b=r1CjV+iyzX3miE+jwo+PoJsQi0i5KVO+sYO0FZ87FWZ68BT9BOQaDi6ij1ACe4kNbe
+	P7eBzSHptVl9eBvqX7HWN2CwBuiKAZzi1tOOXNCDULTf0WjZfTZamDL/M+o8IHM3Agyo
+	DRcOrWtEJi5pz35j10fJkwfFeE16vdRML36+rvTJ6glGS3LFbqrOeOgclvE7YBVHAG0o
+	OIbXicRjZn9iilaWCEbVvc9ydBMNuF8BaQ+EjmlDRiVmooCnJigjBK9xGh6JcEjsO1ZM
+	iSk2Z7UJpQ5y+Le5pRutgqCYhMs9fihkDV4Ut6sRjJRhKsdzvjYwyeDuZvIa5p0GLXOl
+	HXzQ==
+X-Gm-Message-State: AElRT7EjbHP/Kz6oXOgrGRxxGXpzBsVHiKFgyF9h83gLfzncM3cMbqAg
+	WbqeIYmB5hpfiPPK119ebyKdMA==
+X-Google-Smtp-Source: AG47ELubShqjXPpUFEl1vVAen8wAwUHk7FMXsP2moPIN+r+R5tK6BmeDRf9lUGaM1NX2nnv1Im0hdw==
+X-Received: by 10.101.96.47 with SMTP id p15mr694870pgu.430.1521412028289;
+	Sun, 18 Mar 2018 15:27:08 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:4088:e426:a566:fc98?
+	([2601:202:4000:1184:4088:e426:a566:fc98])
+	by smtp.gmail.com with ESMTPSA id
+	g80sm25875062pfj.101.2018.03.18.15.27.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 18 Mar 2018 15:27:07 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <662de5ec-d65f-f08f-547f-8034ecdf32b4@gmail.com>
+Date: Sun, 18 Mar 2018 15:27:06 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-Received: by 10.100.241.68 with HTTP; Sun, 18 Mar 2018 14:38:35 -0700 (PDT)
-In-Reply-To: <48f2945a-e330-4bc8-a4da-ab970b63ea5f@gmail.com>
-References: <48f2945a-e330-4bc8-a4da-ab970b63ea5f@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 18 Mar 2018 14:38:35 -0700
-Message-ID: <CAMKF1sqJhAeFwH22g-0CA0T1=i_fg6CTQym8xBCYefw+vfSRhQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-openembedded Layers
+Subject: Improving meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,57 +59,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2018 21:39:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 18 Mar 2018 22:27:07 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-On Sun, Mar 18, 2018 at 2:32 PM, akuster808 <akuster808@gmail.com> wrote:
-> Hello all,
->
-> I have been reviewing the meta-openembedded sub-layers and I plan on
-> taking the following actions:
->
-> Please keep your comments focused on the 3 items below.
->
->
-> 1) I plan on resetting the sub-layer maintainers. Several maintainers
-> listed have been inactive.
->
-> If a currently listed maintainer is interested in continuing, please
-> send me an email.  I plan on removing in-active maintainers in 12 days (
-> March 30th).
->
+Hello,
 
-This sounds like a good plan.
+I have heard on this mailing list and in person at ELC concerns
+regarding the quality of=C2=A0 meta-openembedded.=C2=A0 I believe we can =
+address
+these concerns by taking incrementally steppes to achieve the end goal.=C2=
+=A0
+Since these layers are maintained by volunteers, I will not put a date
+for this goal.=C2=A0 This goal as I have expressed it at ELC are testimag=
+e
+capable builds that cover multilib, musl, lsb , more architectures and
+the alike.=C2=A0 We can leverage similar build configurations that are us=
+ed
+for oe-core. This is where the "*" comes into play. As each
+meta-openembedded sub-layer maintains ticks off at step, we will get us
+one step closer to this goal.=C2=A0 We work=C2=A0 from the bottom up and =
+at their
+own pace. I think we should start a wiki so we can start on the list of
+steps/configurations.=C2=A0
 
->
-> 2) I plan removing meta-filesystem and moving recipes to other layers.
->
+Well, that are my high level thoughts ( hope it makes some sense ??).=C2=A0=
+ I
+hope those who have been vocal about layer quality will see we are
+trying and have a plan and they are more than welcome in participating.
 
-LGTM, this also means some changes in external layers who might
-depends on this layer explicitly. I hope those layer maintainers will
-take needed action.
+kind regards,
 
->
-> 3)  Meta-gnome, I have heard feed back regarding this layer. Does it
-> make sense to remove it and push needed recipes out to  other layers?
->
+armin
 
-Agreed here again, I have only fixed this layer in past to keep it afloat to
-reduce compile failures e.g. with clang or musl.
 
->
-> I want to get any restructuring done prior to sumo release to lessen
-> impact on the Sumo maintainer.
->
->
-> regards,
->
-> Armin
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
