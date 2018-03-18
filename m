@@ -1,37 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C32D78907
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 49E707888D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 14:13:10 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id g184so15756311qkd.10
+	Sun, 18 Mar 2018 14:14:57 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id j4so15488337qth.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 07:13:12 -0700 (PDT)
+	Sun, 18 Mar 2018 07:14:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0zuvux2KsX2qFbXzMRSdDOv0jOFZl9Y+uU0mF65Y4xM=;
-	b=LrdEX/JHOIGOvDdcrhhY1lZ3nAQ3I6l14TB+1G13WreIiH28nzSmBT80mGYyAgyamE
-	itScO0SA5t8fU+K9d2DvzLUm5Pl2M3eJyZuK7EAk7/Vnv1/Ck2kr1aBvUcILZ2M52OOj
-	gFCiVApaxlAzMxZkJWBclWE2ykLsp1RBbvZQ/WbENMcdxCVJH6FOYEagx6wiTq/QshTm
-	8nIXbECpf2O0BkoP/Lcps4ozZD2Gh5JuiX6dKBd0v7+wpAxTBSjRghZKTUK2fKJh5XMN
-	rmdkiA/OLl2Lk/PZupHtP1qZXGm16kdtjmmJml/NdnsfnVaZO8A5kqbozahF30hEZzzZ
-	OYgg==
-X-Gm-Message-State: AElRT7HMofR7cxmgFhvK+uU5xB/HGY6ABNYwSDIt9ZneJS8IdO2+J31x
-	+TQO1VzE2zbKzwdj4n7J1IxkqpgL
-X-Google-Smtp-Source: AG47ELsA133ohnHJDF5mDb9Tnsj1DgseHUpkpMLh1h3dOnp69kAbA/X3+Nysx2jgwbv6qFfwZmVh/g==
-X-Received: by 10.55.121.4 with SMTP id u4mr13173697qkc.139.1521382391649;
-	Sun, 18 Mar 2018 07:13:11 -0700 (PDT)
+	bh=JNpJLTJAuVBS8dpSFRIYdEzihB375pErunlCzVdRC7Q=;
+	b=eaSFP7lUag/63+7pteTFIHmJBeg1p318jIJ9yqLkbUZC4Riz4V3gSPVc/GEGoT7mnV
+	euLS50WxpgegKkJBioY+KLN1lVD+/vlM5WqLy24RvyQOxAvvcEHthOxi8EytFw2+QYkY
+	PPxb1Da0JYUKiPvwP/DEAOszqiaQ4vtg5Reh+CyDGCLauPd75zooEgOiuGUFP/q3PkTb
+	EfbfJruBLH3P1JG4Maq42zNEcia2xh/o7sZCFH2hkyN8WiqBIBQtl0QqhNgH5+evOH5o
+	FhW57tJlr96OsJCCqOGxxSnqO6SKu4qo3vClXNK0eGjvxEbyv4GCZPOmChb7TGc5q3NO
+	at5g==
+X-Gm-Message-State: AElRT7FoH48Km5MigF1TBMcCkjkdrs6//qbqnkruEVw8nIQj/2LUYNbN
+	fWwu2Dcqb6BfaKw8mZ+3sHVTC0Z1
+X-Google-Smtp-Source: AG47ELvXmphM9Cz2tA1QHFwQvRc44PxfFeHWEtb8Xw0eHCIIsjp25BNXvIzm/mKo27fDNlciYhYflA==
+X-Received: by 10.200.40.219 with SMTP id j27mr12968371qtj.331.1521382498957; 
+	Sun, 18 Mar 2018 07:14:58 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id y2sm8212641qkj.32.2018.03.18.07.13.10
+	by smtp.gmail.com with ESMTPSA id
+	s186sm8207143qkf.70.2018.03.18.07.14.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 18 Mar 2018 07:13:11 -0700 (PDT)
+	Sun, 18 Mar 2018 07:14:58 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Mar 2018 10:13:01 -0400
-Message-Id: <1521382381-16370-1-git-send-email-derek@asterius.io>
+Date: Sun, 18 Mar 2018 10:14:52 -0400
+Message-Id: <1521382492-24677-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pylint: update to version 1.8.3
+Subject: [meta-python][PATCH] python-pip: update to version 9.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2018 14:13:11 -0000
+X-List-Received-Date: Sun, 18 Mar 2018 14:14:58 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pylint.inc                 | 4 ++--
- .../python/{python-pylint_1.8.2.bb => python-pylint_1.8.3.bb}         | 0
- .../python/{python3-pylint_1.8.2.bb => python3-pylint_1.8.3.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pylint_1.8.2.bb => python-pylint_1.8.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pylint_1.8.2.bb => python3-pylint_1.8.3.bb} (100%)
+ .../python/{python-pip_9.0.1.bb => python-pip_9.0.2.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pip_9.0.1.bb => python-pip_9.0.2.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
-index fd4739f..ba85b98 100644
---- a/meta-python/recipes-devtools/python/python-pylint.inc
-+++ b/meta-python/recipes-devtools/python/python-pylint.inc
-@@ -3,8 +3,8 @@ HOMEPAGE= "http://www.pylint.org/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+diff --git a/meta-python/recipes-devtools/python/python-pip_9.0.1.bb b/meta-python/recipes-devtools/python/python-pip_9.0.2.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python-pip_9.0.1.bb
+rename to meta-python/recipes-devtools/python/python-pip_9.0.2.bb
+index 5ddd8d5..fa709a1 100644
+--- a/meta-python/recipes-devtools/python/python-pip_9.0.1.bb
++++ b/meta-python/recipes-devtools/python/python-pip_9.0.2.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://pip.pypa.io/"
+ LICENSE = "MIT & LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=25fba45109565f87de20bae85bc39452"
  
--SRC_URI[md5sum] = "f6c290e2ff171e83694e82096f13fd4f"
--SRC_URI[sha256sum] = "4fe3b99da7e789545327b75548cee6b511e4faa98afe268130fea1af4b5ec022"
-+SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
-+SRC_URI[sha256sum] = "c77311859e0c2d7932095f30d2b1bfdc4b6fe111f534450ba727a52eae330ef2"
+-SRC_URI[md5sum] = "35f01da33009719497f01a4ba69d63c9"
+-SRC_URI[sha256sum] = "09f243e1a7b461f654c26a725fa373211bb7ff17a9300058b205c61658ca940d"
++SRC_URI[md5sum] = "2fddd680422326b9d1fbf56112cf341d"
++SRC_URI[sha256sum] = "88110a224e9d30e5d76592a0b2130ef10e7e67a6426e8617bb918fffbfe91fe5"
  
- inherit pypi
+ inherit pypi setuptools
  
-diff --git a/meta-python/recipes-devtools/python/python-pylint_1.8.2.bb b/meta-python/recipes-devtools/python/python-pylint_1.8.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pylint_1.8.2.bb
-rename to meta-python/recipes-devtools/python/python-pylint_1.8.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.2.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pylint_1.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
 -- 
 2.7.4
 
