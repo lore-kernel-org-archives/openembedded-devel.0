@@ -1,23 +1,37 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
-	by mail.openembedded.org (Postfix) with ESMTP id 87170788FF
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C32D78907
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 05:50:06 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	17 Mar 2018 22:50:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,323,1517904000"; d="scan'208";a="26609914"
-Received: from chiron.jf.intel.com ([10.7.159.63])
-	by orsmga006.jf.intel.com with ESMTP; 17 Mar 2018 22:50:07 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
+	Sun, 18 Mar 2018 14:13:10 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id g184so15756311qkd.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Mar 2018 07:13:12 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0zuvux2KsX2qFbXzMRSdDOv0jOFZl9Y+uU0mF65Y4xM=;
+	b=LrdEX/JHOIGOvDdcrhhY1lZ3nAQ3I6l14TB+1G13WreIiH28nzSmBT80mGYyAgyamE
+	itScO0SA5t8fU+K9d2DvzLUm5Pl2M3eJyZuK7EAk7/Vnv1/Ck2kr1aBvUcILZ2M52OOj
+	gFCiVApaxlAzMxZkJWBclWE2ykLsp1RBbvZQ/WbENMcdxCVJH6FOYEagx6wiTq/QshTm
+	8nIXbECpf2O0BkoP/Lcps4ozZD2Gh5JuiX6dKBd0v7+wpAxTBSjRghZKTUK2fKJh5XMN
+	rmdkiA/OLl2Lk/PZupHtP1qZXGm16kdtjmmJml/NdnsfnVaZO8A5kqbozahF30hEZzzZ
+	OYgg==
+X-Gm-Message-State: AElRT7HMofR7cxmgFhvK+uU5xB/HGY6ABNYwSDIt9ZneJS8IdO2+J31x
+	+TQO1VzE2zbKzwdj4n7J1IxkqpgL
+X-Google-Smtp-Source: AG47ELsA133ohnHJDF5mDb9Tnsj1DgseHUpkpMLh1h3dOnp69kAbA/X3+Nysx2jgwbv6qFfwZmVh/g==
+X-Received: by 10.55.121.4 with SMTP id u4mr13173697qkc.139.1521382391649;
+	Sun, 18 Mar 2018 07:13:11 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id y2sm8212641qkj.32.2018.03.18.07.13.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 18 Mar 2018 07:13:11 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Mar 2018 22:49:59 -0700
-Message-Id: <20180318054959.59712-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.14.3
-Subject: [meta-oe][PATCH] python-futures: upgrade v3.0.5 -> v3.2.0; inherit pypi
+Date: Sun, 18 Mar 2018 10:13:01 -0400
+Message-Id: <1521382381-16370-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pylint: update to version 1.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,70 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2018 05:50:06 -0000
+X-List-Received-Date: Sun, 18 Mar 2018 14:13:11 -0000
 
-* For changes, see:
-https://github.com/agronholm/pythonfutures/blob/master/CHANGES.rst
-
-* Inheriting pypi class has the benefit of allowing
-  auto-upgrade-helper to properly check for new versions
-* HOMEPAGE is now on github
-* Add nativesdk to BBCLASSEXTEND
-* Use LICENSE file for license checksum
-* License has changed from BSD to PSF
-
-License-Update: use LICENSE file; license is now PSF
-
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-devtools/python/python-futures_3.0.5.bb | 16 ----------------
- meta-oe/recipes-devtools/python/python-futures_3.2.0.bb | 13 +++++++++++++
- 2 files changed, 13 insertions(+), 16 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/python/python-futures_3.0.5.bb
- create mode 100644 meta-oe/recipes-devtools/python/python-futures_3.2.0.bb
+ meta-python/recipes-devtools/python/python-pylint.inc                 | 4 ++--
+ .../python/{python-pylint_1.8.2.bb => python-pylint_1.8.3.bb}         | 0
+ .../python/{python3-pylint_1.8.2.bb => python3-pylint_1.8.3.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pylint_1.8.2.bb => python-pylint_1.8.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pylint_1.8.2.bb => python3-pylint_1.8.3.bb} (100%)
 
-diff --git a/meta-oe/recipes-devtools/python/python-futures_3.0.5.bb b/meta-oe/recipes-devtools/python/python-futures_3.0.5.bb
-deleted file mode 100644
-index c85fc56b83..0000000000
---- a/meta-oe/recipes-devtools/python/python-futures_3.0.5.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--DESCRIPTION = "The concurrent.futures module provides a high-level interface for asynchronously executing callables."
--SECTION = "devel/python"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3d78c5bb15ac641d34f2ddc3bd7f51fa"
--HOMEPAGE = "http://code.google.com/p/pythonfutures"
--DEPENDS = "python"
--
--SRC_URI = "https://pypi.python.org/packages/source/f/futures/futures-${PV}.tar.gz"
--SRC_URI[md5sum] = "ced2c365e518242512d7a398b515ff95"
--SRC_URI[sha256sum] = "0542525145d5afc984c88f914a0c85c77527f65946617edb5274f72406f981df"
--
--S = "${WORKDIR}/futures-${PV}"
--
--inherit setuptools
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-devtools/python/python-futures_3.2.0.bb b/meta-oe/recipes-devtools/python/python-futures_3.2.0.bb
-new file mode 100644
-index 0000000000..3ee945fc9c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-futures_3.2.0.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "The concurrent.futures module provides a high-level interface for asynchronously executing callables."
-+SECTION = "devel/python"
-+LICENSE = "PSF"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=834d982f973c48b6d662b5944c5ab567"
-+HOMEPAGE = "https://github.com/agronholm/pythonfutures"
-+DEPENDS = "python"
-+
-+SRC_URI[md5sum] = "d1b299a06b96ccb59f70324716dc0016"
-+SRC_URI[sha256sum] = "9ec02aa7d674acb8618afb127e27fde7fc68994c0437ad759fa094a574adb265"
-+
-+inherit pypi setuptools
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
+index fd4739f..ba85b98 100644
+--- a/meta-python/recipes-devtools/python/python-pylint.inc
++++ b/meta-python/recipes-devtools/python/python-pylint.inc
+@@ -3,8 +3,8 @@ HOMEPAGE= "http://www.pylint.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+ 
+-SRC_URI[md5sum] = "f6c290e2ff171e83694e82096f13fd4f"
+-SRC_URI[sha256sum] = "4fe3b99da7e789545327b75548cee6b511e4faa98afe268130fea1af4b5ec022"
++SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
++SRC_URI[sha256sum] = "c77311859e0c2d7932095f30d2b1bfdc4b6fe111f534450ba727a52eae330ef2"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pylint_1.8.2.bb b/meta-python/recipes-devtools/python/python-pylint_1.8.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pylint_1.8.2.bb
+rename to meta-python/recipes-devtools/python/python-pylint_1.8.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.2.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pylint_1.8.2.bb
+rename to meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
 -- 
-2.14.3
+2.7.4
 
 
