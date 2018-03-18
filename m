@@ -1,35 +1,53 @@
-Return-Path: <pn@denx.de>
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 81D977867B
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 657A9606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 16:50:59 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 4044vm34cLz1qsVy;
-	Sun, 18 Mar 2018 17:51:00 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 4044vm2pHMz1qql0;
-	Sun, 18 Mar 2018 17:51:00 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id C-fB1RG71xgV; Sun, 18 Mar 2018 17:50:59 +0100 (CET)
-X-Auth-Info: coiciNpxnos1m132Hhi9seVznthm5+aU3e9EcDzakhI=
-Received: from hercules.denx.de (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Sun, 18 Mar 2018 17:50:59 +0100 (CET)
-From: Parthiban Nallathambi <pn@denx.de>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Date: Sun, 18 Mar 2018 17:49:19 +0100
-Message-Id: <20180318164919.5142-2-pn@denx.de>
+	Sun, 18 Mar 2018 19:08:45 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id f14so16417853wre.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Mar 2018 12:08:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=27QUCj0+XnDT0dhFlsEocYzfNWnwRWcsez1+hoD5u+M=;
+	b=lvJCpMryWOemImmt1D+heJgsaj6xDU2V76khpnGfOnEcadHRD0uiNmNKg/ZPHLVdty
+	k8pq6c07EGdKBi91X4zMbnIFoVu9S7szWWQ1Ws7Wj93E/OwidmEQ5OjLlPFVrEaJV6Q2
+	YJrxKUrFtjr0OFf41dzduoGKmNSiSXK+cLSktMZzhGdJ7p/b24mzDFYRAbPv3rnEYIoo
+	X5FpGLcLeFbe8yYvrBpk+AXd3UOgIZvKFyHVP1UOyQqm0W2dUADJZl+B+OpVJ1xYH41g
+	rCjg2cAA0WAjpLWUFncFCQOp31SqwPFJfX3p5zq8FGQGQ+XkNHWbPKD6tdOX+n38d3DZ
+	AORg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=27QUCj0+XnDT0dhFlsEocYzfNWnwRWcsez1+hoD5u+M=;
+	b=ifRVa+AGrUhHOM6w86frjNzZmI2s//f4o+Jd/1IwwQt9uJNz6FnVYRSJSZnXGrfiRq
+	WeDw+EBV1l58AppN+TQgmq2Bu3n9qzJZghj+n6RyHOoXi0AfR1+jSyewQPvlF+GavC4r
+	qkqrjN1kfZhxZB6v3U5fePo3a1k7GVj6TgajtY9Pi01imbjcn+i+iccN8ZyGrhnrYLGj
+	6FmlybSxiAZMRqfhm+x4UGuiPudKVlaSteoGUdhSKKlC8t+G1DfyykOUvmNesY5kdI39
+	7jGA5o6Qap7NFueAdgriMus5xDr+kQiwzS0xH8V05ePfX0XOusoe6+Yf5EYtdIwptSR1
+	aHug==
+X-Gm-Message-State: AElRT7G3X3kCMgg1clrRPpTq7VJsL9JPM9kXRY83YYv8TTN8VLAQ34BO
+	JoTZU+wlgqNXIbgepGnPy2bPew==
+X-Google-Smtp-Source: AG47ELsYVndsfIR59SdQjBtaJ4lnWpoMHIaGnItmi6Sir4vCmQgMBcJbrrFyiFaR0tQBc3BFnSWBvQ==
+X-Received: by 10.223.164.26 with SMTP id d26mr7119820wra.199.1521400125589;
+	Sun, 18 Mar 2018 12:08:45 -0700 (PDT)
+Received: from PC192-168-2-116.speedport.ip
+	(p200300F07BC08B781E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bc0:8b78:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id
+	b8sm11614531wrf.29.2018.03.18.12.08.44
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 18 Mar 2018 12:08:45 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 18 Mar 2018 20:08:25 +0100
+Message-Id: <20180318190833.1393-1-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
-In-Reply-To: <20180318164919.5142-1-pn@denx.de>
-References: <20180318164919.5142-1-pn@denx.de>
-Cc: barathiraja@gmail.com
-Subject: [meta-openwrt][PATCH] [hostapd]: Update patch based on 2.6 version
+MIME-Version: 1.0
+Subject: [PATCH 0/8] Updates and minor fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,109 +60,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Mar 2018 16:50:59 -0000
+X-List-Received-Date: Sun, 18 Mar 2018 19:08:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Update the existing patch to work for hostapd 2.6
-(which is the current version of openembedded-core
-rocko branch).
+* 0001 (glm update): Is a resend and patchwork says it is under test [1]. Added
+      it again because 0002.. requires it.
+* 0002 (glm fix): Unbreaks packages using glm/glx headers
+* 0003 (abiword/libglade): Can' say goodbye yet...
+* 0004-0008 misc updates
 
-"netifd.sh" is no more part of hostapd source, so
-removing it from do_install section of tweak
+[1] https://patchwork.openembedded.org/patch/149250/
 
-Signed-off-by: Parthiban Nallathambi <pn@denx.de>
----
- recipes-tweaks/hostapd/hostapd/300-noscan.patch | 42 ++++++++++++-------------
- recipes-tweaks/hostapd/hostapd_%.bbappend       |  2 --
- 2 files changed, 21 insertions(+), 23 deletions(-)
+The following changes since commit 4598769a96980b756b3489ac71ed46a075cfabd7:
 
-diff --git a/recipes-tweaks/hostapd/hostapd/300-noscan.patch b/recipes-tweaks/hostapd/hostapd/300-noscan.patch
-index e89cb9d..e9f8ee1 100644
---- a/recipes-tweaks/hostapd/hostapd/300-noscan.patch
-+++ b/recipes-tweaks/hostapd/hostapd/300-noscan.patch
-@@ -1,7 +1,7 @@
--diff -ruN hostapd-2.5.orig/hostapd/config_file.c hostapd-2.5/hostapd/config_file.c
----- hostapd-2.5.orig/hostapd/config_file.c	2017-02-15 16:20:07.102232803 -0700
--+++ hostapd-2.5/hostapd/config_file.c	2017-02-15 16:20:35.132232593 -0700
--@@ -2795,6 +2795,10 @@
-+diff -ruN hostapd-2.6/hostapd/config_file.c hostapd-2.6.orig/hostapd/config_file.c
-+--- hostapd-2.6/hostapd/config_file.c	2016-10-02 20:51:11.000000000 +0200
-++++ hostapd-2.6.orig/hostapd/config_file.c	2018-03-17 23:05:11.032723997 +0100
-+@@ -2863,6 +2863,10 @@
-  		}
-  #endif /* CONFIG_IEEE80211W */
-  #ifdef CONFIG_IEEE80211N
-@@ -12,10 +12,10 @@ diff -ruN hostapd-2.5.orig/hostapd/config_file.c hostapd-2.5/hostapd/config_file
-  	} else if (os_strcmp(buf, "ieee80211n") == 0) {
-  		conf->ieee80211n = atoi(pos);
-  	} else if (os_strcmp(buf, "ht_capab") == 0) {
--diff -ruN hostapd-2.5.orig/src/ap/ap_config.h hostapd-2.5/src/ap/ap_config.h
----- hostapd-2.5.orig/src/ap/ap_config.h	2017-02-15 16:20:07.105566137 -0700
--+++ hostapd-2.5/src/ap/ap_config.h	2017-02-15 16:20:35.135565927 -0700
--@@ -626,6 +626,8 @@
-+diff -ruN hostapd-2.6/src/ap/ap_config.h hostapd-2.6.orig/src/ap/ap_config.h
-+--- hostapd-2.6/src/ap/ap_config.h	2016-10-02 20:51:11.000000000 +0200
-++++ hostapd-2.6.orig/src/ap/ap_config.h	2018-03-17 23:04:30.697722861 +0100
-+@@ -664,6 +664,8 @@
-  
-  	int ht_op_mode_fixed;
-  	u16 ht_capab;
-@@ -24,22 +24,22 @@ diff -ruN hostapd-2.5.orig/src/ap/ap_config.h hostapd-2.5/src/ap/ap_config.h
-  	int ieee80211n;
-  	int secondary_channel;
-  	int no_pri_sec_switch;
--diff -ruN hostapd-2.5.orig/src/ap/hw_features.c hostapd-2.5/src/ap/hw_features.c
----- hostapd-2.5.orig/src/ap/hw_features.c	2017-02-15 16:20:07.105566137 -0700
--+++ hostapd-2.5/src/ap/hw_features.c	2017-02-15 16:22:03.158898602 -0700
--@@ -472,7 +472,7 @@
-- 	struct wpa_driver_scan_params params;
-- 	int ret;
-+diff -ruN hostapd-2.6/src/ap/hw_features.c hostapd-2.6.orig/src/ap/hw_features.c
-+--- hostapd-2.6/src/ap/hw_features.c	2016-10-02 20:51:11.000000000 +0200
-++++ hostapd-2.6.orig/src/ap/hw_features.c	2018-03-17 23:05:54.273725214 +0100
-+@@ -226,7 +226,7 @@
-+ {
-+ 	int pri_chan, sec_chan;
-  
- -	if (!iface->conf->secondary_channel)
- +	if (!iface->conf->secondary_channel || iface->conf->noscan)
-- 		return 0; /* HT40 not used */
-+ 		return 1; /* HT40 not used */
-  
-- 	hostapd_set_state(iface, HAPD_IFACE_HT_SCAN);
--diff -ruN hostapd-2.5.orig/src/ap/ieee802_11_ht.c hostapd-2.5/src/ap/ieee802_11_ht.c
----- hostapd-2.5.orig/src/ap/ieee802_11_ht.c	2017-02-15 16:20:07.105566137 -0700
--+++ hostapd-2.5/src/ap/ieee802_11_ht.c	2017-02-15 16:20:35.135565927 -0700
--@@ -221,6 +221,9 @@
-+ 	pri_chan = iface->conf->channel;
-+diff -ruN hostapd-2.6/src/ap/ieee802_11_ht.c hostapd-2.6.orig/src/ap/ieee802_11_ht.c
-+--- hostapd-2.6/src/ap/ieee802_11_ht.c	2016-10-02 20:51:11.000000000 +0200
-++++ hostapd-2.6.orig/src/ap/ieee802_11_ht.c	2018-03-17 23:08:20.303729325 +0100
-+@@ -244,6 +244,9 @@
-  	if (!(iface->conf->ht_capab & HT_CAP_INFO_SUPP_CHANNEL_WIDTH_SET))
-  		return;
-  
-@@ -49,7 +49,7 @@ diff -ruN hostapd-2.5.orig/src/ap/ieee802_11_ht.c hostapd-2.5/src/ap/ieee802_11_
-  	if (len < IEEE80211_HDRLEN + 2 + sizeof(*bc_ie))
-  		return;
-  
--@@ -345,6 +348,9 @@
-+@@ -368,6 +371,9 @@
-  	if (iface->current_mode->mode != HOSTAPD_MODE_IEEE80211G)
-  		return;
-  
-diff --git a/recipes-tweaks/hostapd/hostapd_%.bbappend b/recipes-tweaks/hostapd/hostapd_%.bbappend
-index be45723..3b2f646 100644
---- a/recipes-tweaks/hostapd/hostapd_%.bbappend
-+++ b/recipes-tweaks/hostapd/hostapd_%.bbappend
-@@ -15,8 +15,6 @@ do_install_append() {
-     install -d ${D}${base_libdir}/netifd/wireless
-     install -d ${D}${base_libdir}/wifi
- 
--    install -m 0755 ${WORKDIR}/git/openwrt/package/network/services/hostapd/files/netifd.sh ${D}${base_libdir}/netifd/hostapd.sh
--
-     install -m 0755 ${WORKDIR}/git/openwrt/package/kernel/mac80211/files/lib/wifi/mac80211.sh ${D}${base_libdir}/wifi/mac80211.sh
-     install -m 0755 ${WORKDIR}/git/openwrt/package/kernel/mac80211/files/lib/netifd/wireless/mac80211.sh ${D}${base_libdir}/netifd/wireless/mac80211.sh
- }
+  openbox: Improve handling of openbox-session / gnome-openbox-session (2018-03-16 19:27:54 -0700)
+
+are available in the Git repository at:
+
+  https://github.com/schnitzeltony/meta-openembedded.git patches
+
+for you to fetch changes up to 8cbabfa65784e69d00819afa019b6f32cd02a5e8:
+
+  poppler: update 0.57.0 -> 0.62.0 (2018-03-18 20:04:19 +0100)
+
+----------------------------------------------------------------
+Andreas Müller (8):
+      glm: update 0.9.8.5 -> 0.9.9-a2 to fix x86_64 (sse-simd) build
+      glm: fix build breaks when using glx headers / fix install
+      abiword: remove unneeded libglade from dependencies
+      fluidsynth: update 1.1.9 -> 1.1.10
+      xfce4-terminal: update 0.8.7.1 -> 0.8.7.2
+      xfce4-settings: update 4.12.1 -> 4.12.2
+      gnuplot: update 5.0.5 -> 5.2.2 and rework
+      poppler: update 0.57.0 -> 0.62.0
+
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb                                                     |   1 -
+ meta-multimedia/recipes-multimedia/fluidsynth/{fluidsynth_1.1.9.bb => fluidsynth_1.1.10.bb}           |   2 +-
+ meta-oe/recipes-extended/gnuplot/gnuplot.inc                                                          |  42 -----
+ meta-oe/recipes-extended/gnuplot/gnuplot/0001-reduce-build-to-conversion-tools-for-native-build.patch |  31 ++++
+ meta-oe/recipes-extended/gnuplot/gnuplot/0002-do-not-build-demos.patch                                |  31 ++++
+ meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch                    | 111 +++++++++++++
+ meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch     |  42 +++++
+ meta-oe/recipes-extended/gnuplot/gnuplot/gnuplot.desktop                                              |   4 +-
+ meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch                          |  16 --
+ meta-oe/recipes-extended/gnuplot/gnuplot/qtopia.trm                                                   | 483 ---------------------------------------------------------
+ meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch                                                |  11 --
+ meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb                                                     |  14 --
+ meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb                                                     |  69 +++++++++
+ meta-oe/recipes-graphics/glm/files/0001-Make-GLM_ENABLE_EXPERIMENTAL-a-configurable-option.patch      | 860 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ meta-oe/recipes-graphics/glm/files/0002-glm-install-headers-only.patch                                |  46 ++++++
+ meta-oe/recipes-graphics/glm/{glm_0.9.8.5.bb => glm_0.9.9-a2.bb}                                      |  12 +-
+ meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch               |  36 +++++
+ meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch         |  91 -----------
+ meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-6-math-ambiguous-errors.patch                    |  11 --
+ meta-oe/recipes-support/poppler/poppler_0.57.0.bb                                                     |  55 -------
+ meta-oe/recipes-support/poppler/poppler_0.62.0.bb                                                     |  55 +++++++
+ meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.7.1.bb => xfce4-terminal_0.8.7.2.bb}        |   4 +-
+ meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb                                           |   6 +-
+ 23 files changed, 1298 insertions(+), 735 deletions(-)
+ rename meta-multimedia/recipes-multimedia/fluidsynth/{fluidsynth_1.1.9.bb => fluidsynth_1.1.10.bb} (95%)
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot.inc
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0001-reduce-build-to-conversion-tools-for-native-build.patch
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0002-do-not-build-demos.patch
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0003-Use-native-tools-to-build-docs.patch
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/0004-Add-configure-option-to-find-qt5-native-tools.patch
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/qtopia.trm
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb
+ create mode 100644 meta-oe/recipes-graphics/glm/files/0001-Make-GLM_ENABLE_EXPERIMENTAL-a-configurable-option.patch
+ create mode 100644 meta-oe/recipes-graphics/glm/files/0002-glm-install-headers-only.patch
+ rename meta-oe/recipes-graphics/glm/{glm_0.9.8.5.bb => glm_0.9.9-a2.bb} (54%)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-6-math-ambiguous-errors.patch
+ delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.57.0.bb
+ create mode 100644 meta-oe/recipes-support/poppler/poppler_0.62.0.bb
+ rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.7.1.bb => xfce4-terminal_0.8.7.2.bb} (68%)
+
 -- 
 2.14.3
 
