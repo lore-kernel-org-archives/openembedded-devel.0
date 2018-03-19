@@ -1,46 +1,28 @@
-Return-Path: <mirza.krak@gmail.com>
-Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
-	[209.85.160.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 7157278928
+Return-Path: <psaavedra@igalia.com>
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id DE49678943
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 13:45:03 +0000 (UTC)
-Received: by mail-pl0-f46.google.com with SMTP id 61-v6so10243150plf.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 06:45:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=NzQjUuLeG+oYPyWruv+zvV872GZTz6npzILhR+UWePc=;
-	b=GnTIXCtNcHgH8I15UqOzduL/vWmZBNF4B0Ac9NLnxznsm8NKZPoYT6bQiMtCdfojNV
-	jBffhoRUIPVkiEXA2nPI5jG4ZnzaJ1ZmN9aZMq4Oni8pmB0ASxec4B2aBx7ZWLtp+IyO
-	O3X8TEPmkONTsgv37aJdzgukCdExMwy23MwJEX/8aXXIGX5jm59KhAXLxNXLDJMOQFC0
-	QNhcrtJcw6rrL1JFQuMfrF9ofbNexBuTakIRmReOOWZKw8SB5v655EOCSStHHnKvqv/C
-	/nn2XQXjEvZRM3nbFS8862vFCIM47izwoAK4YynSP63c/HlKUekZkNbfaX/DUcnC3OfC
-	xkZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=NzQjUuLeG+oYPyWruv+zvV872GZTz6npzILhR+UWePc=;
-	b=blkFPkNHrSaGt6yfd5Ct8kGsWFVxpOIx4S5wxfQ94OjtWoPQ2PvOrlizrHxX2zd8DB
-	9c5FaeLvIGG0H4mhkX7wt6BkFNrmh00FtNMiQpjqjuUD/CwCI7AfVr0/xQPnVlqTdvHk
-	bvCTHizJyP26YfIkK8/SFSyHMnbFwYoyRUvVv5yLPSBbNC7Znqm3xDq7v+aoHPDhNMn1
-	lV2YH3jXrJsjiNMCjwu6W0Loh2eLvlI5eQg4/2yYzFne2E5O2AEyV1rP7WykCnu855RJ
-	8zzTB1ph/7AKmzoC2yyu4lyUFluv/2sZSU2JKoipFEPxwdLQ0Zoe/tNnYtT9FMRTHRN8
-	1qvg==
-X-Gm-Message-State: AElRT7EdD+tT4/OCRnNzwuGYWAMeITYyKFF9OOuosXjcNJZVA29Bmmcl
-	fhJrPXZOEuZnDcHMDdsadqZsCX335AaUkSCi/3OMzQ==
-X-Google-Smtp-Source: AG47ELuVqCIqezDuoP8ncBjSvjUroFO74ilnCFhHRknCb66cjTQprUnDYIqQJUaHt+WGD67WQnXt0BBqTyHcrS0lsNo=
-X-Received: by 2002:a17:902:8602:: with SMTP id
-	f2-v6mr12465801plo.6.1521467104415; 
-	Mon, 19 Mar 2018 06:45:04 -0700 (PDT)
+	Mon, 19 Mar 2018 13:47:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; 
+	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=o1m+I4/SiRi4KlqE70w6DgDW3IqFJ8/fTAXVY8epZNQ=; 
+	b=myzsrr7ZkHjzh+HgntHrPaLMQIYJiRxfX+bBu14mWqgWwK3/bDlpaDn6bya9pz2DjS9XqpYxJ6DdmARnwfUbnTvh6G/3gDgKVoVecp47bqnBxaETwFMmqSK1RQE3VdTrw+Qr9RcgqezlIzERQrg4EkjbpxSBkdcsOAG4vjlJJZLfGbXYOiOby+Ztv+4RpLUjUnt75VBp9Zwv4uuM4I8lqCr5rtv0JHknuZt+jW812oqFh0mb2LEuRagTH5nmcEOGBp3VSOULjwM/uMdGawB5JXUaeix054Du6P4KYUTEzMTfjv1ULN9HaTvgtWbUIgUf8UvQBJOEKThsyX9iylPYMA==;
+Received: from [192.168.10.146] by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1exv89-0004Tg-OO; Mon, 19 Mar 2018 14:47:17 +0100
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+References: <20180313222055.47545-1-psaavedra@igalia.com>
+	<CALbNGRSvpDc4TzpOgumGtF7t+C+PQx16hZyB=vaSW7dMkc-gGA@mail.gmail.com>
+From: Pablo Saavedra <psaavedra@igalia.com>
+Message-ID: <f5e40164-17cd-19b1-68be-3e3f0a6c4fe5@igalia.com>
+Date: Mon, 19 Mar 2018 14:47:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-Received: by 10.100.182.228 with HTTP; Mon, 19 Mar 2018 06:45:03 -0700 (PDT)
-From: Mirza Krak <mirza.krak@gmail.com>
-Date: Mon, 19 Mar 2018 14:45:03 +0100
-Message-ID: <CALw8SCUwyJA29Ytmgo4rOL+cyVDDZyOePFWnVp-H2Y03BWDYkg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: meta-python/rocko
+In-Reply-To: <CALbNGRSvpDc4TzpOgumGtF7t+C+PQx16hZyB=vaSW7dMkc-gGA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] networkmanager upgrade to 1.10.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,40 +35,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 13:45:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi.
-
-I came across some break-age in meta-python/rocko. More specifically
-that there is no python3-asn1crypto recipe though several packages
-depend on it.  I can trigger this by building python3-requests.
-
-I was reading the archives of the mailing list that indicated that
-there some some instability regarding meta-python recently but nothing
-covering this.
-
-I noticed the following commit [1], which mentions that it should be
-merged together with another commit to actually add the
-python3-asn1crypto. Which seems did not actually happen when the merge
-was done.
-
-python3-asn1crypto was actually added in this commit [1] on master and
-I can not seen that it has been back-ported. Note the somewhat commit
-cryptic commit message in [2] where it does not actually say that it
-added a python3-asn1crypto package.
+X-List-Received-Date: Mon, 19 Mar 2018 13:47:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
 
-[1]. http://cgit.openembedded.org/meta-openembedded/commit/meta-python?h=3D=
-rocko&id=3D187f959fbd220678595c2aa1fe1e17b00a0b2d92
 
-[2]. http://cgit.openembedded.org/meta-openembedded/commit/meta-python/reci=
-pes-devtools/python/python3-asn1crypto_0.24.0.bb?id=3D80b6e6f151588765000cf=
-17d2b86d0ded762def1
+On 15/03/18 15:30, Andreas Müller wrote:
+> 2. Does this patch has a chance to land before sumo split (if
+> autobuilds are ok)? Do we follow Yocto feature freeze these days?
 
---=20
-Med V=C3=A4nliga H=C3=A4lsningar / Best Regards
+If we find an arrangement for the issues that you found in the others
+replies of this patch submission I guess we have a chance.
 
-Mirza Krak
 
