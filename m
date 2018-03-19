@@ -1,59 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 57B2D78901
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A51786093E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 05:10:18 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id m22-v6so9592066pls.5
+	Mon, 19 Mar 2018 06:03:12 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id d1so6541059pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Mar 2018 22:10:20 -0700 (PDT)
+	Sun, 18 Mar 2018 23:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=DUGVVtdsy0sD5oLsrrpaAJfu6Sfovzp6Ns0KrPqBKhs=;
-	b=AgarTOoQ/blXtG4YBUpfqDvDuA7UAwGU0ITsBDRmpIZzWCQsgQqFuNDfNfNDsrFVlm
-	ZGvVsssCio7GwaYZY4DQQsNbLAu1gdtnsKAHFMhxGzAv8DM6lNST+S92lam4b6SYNZSn
-	Tpm5WCzQOz8VrurgK+x/i3ZymxaLlV2qNE/hirqa3WbqhbqlhFhSrSa9aB31COeHqvz0
-	YTc1h7YUlDtIxPM//hiKnx+ApH26E+nxSzvSPuFaCDuayKdk2gZh7SkX8YBa0wbyfkR/
-	WuXuR6y/kdq1+bglAT8tUqu/L3mfiitjJqMBORxNAIdMH7hArE7C8Vxv42xvsakQYR24
-	CjRw==
+	h=from:to:cc:subject:date:message-id;
+	bh=phB79/3QY+3obx3d+sN1qAqSSooYEX2k6hQg2Uw23us=;
+	b=mWsddFZwnDOupthWU+dzZIUlcSbyvmeAgwTCcf15AIEQvw301ewfaCPlIwpNRCW3d4
+	OlCpbVLIPXRBN47LFZvnWGaK6CzDBVImpFYlTEjEN52O4i1lIEBgwChUtiABbJ8N7coH
+	9f1keNfzZpyQUWXl5czxnXGzo6cIW8xhfFGtSDB8SG6Ai2GhKm8wJl/17od3bqfrIoJ/
+	cSfd8FUX1mI+ZDs9ByaNYMFlqpoCaguwZHC815BI+yZvHNhnFCZB1fFGAgKeNqMi63nN
+	0EPnaymFgeOjoviysjKAss41BHSl0gpWYuNuW6n2W2M0nk1BZYWzNEON1u7Q1HEkxey6
+	mkFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=DUGVVtdsy0sD5oLsrrpaAJfu6Sfovzp6Ns0KrPqBKhs=;
-	b=Ns4N6xRsscPWRGNUpmvPr8qvPB0nvByNWJmPiD5dlb1zc+0WCUR3BTT0WH91m3W+EC
-	zrkxonXkIh5yk9Zj7XzVNjyki31xM2RQnQoV8cnyC0m3+C9TSBh4YbVnQtR4qTY9ScTH
-	sMU6+xC5GN0y221YwS5r/N7Nu8icjH3CNTmCzQ19g1EaGiC0pmST4HZ3WI4ksHQtvwkN
-	nQT/8oKwRH20EVtQuxDKu6abAGa2P0ksO2LJSD/Hdq1VhI6tgBaDes0Zp0hBzuBf3JIF
-	jqXNsYqR4nAKeL+lEC03y+fdJ9foMssYM9ZX4AyGyySETcBhpI6Jj2Vo1QCx5yxByi66
-	dU1g==
-X-Gm-Message-State: AElRT7FdF3ijGBJSXt4wQGXCaQAdRZ543yRbmCjz9DR8tQSQrvLnx+Bs
-	Yx8ONA0tUFIZkgB8tMauYRc=
-X-Google-Smtp-Source: AG47ELuy58w2XRgMBRwtIUPpzzO97UBJXFlb5L6Aw/lbR06yUGBskOvUSOMrt5zbHbtVVZapvt2UXw==
-X-Received: by 2002:a17:902:8d92:: with SMTP id
-	v18-v6mr11050018plo.21.1521436220424; 
-	Sun, 18 Mar 2018 22:10:20 -0700 (PDT)
-Received: from hermes.local ([2601:646:8880:466c:88cb:1f0a:76ca:272f])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=phB79/3QY+3obx3d+sN1qAqSSooYEX2k6hQg2Uw23us=;
+	b=rLhvJtrZjxwSsILKWBdodeFtJkN2u8fTFzJI915ZmRqtAZOaESZCmnbigMiF1UTTTa
+	eSxn+B7/lDHOd4TiUMPFCeQWnM4GlvqtKa1DF/LF9qbx09EGUQm4oIrZeEotOtMVuP1T
+	qjSivf5yBiDf3ZT1VKnRlp4uOXGNBw5hudEvhRvf3+TA+O97/vHwYOimLAgErZHFnfqi
+	CVxjRafMZUoGgh9TWrG1wx1tAMwG3/Ep0LgefLTV1wrsIhPXvaFgxNzmyER2OPY9wehQ
+	wS+s4GGBZw2UMO4oV4ZZxoiA6EIMA9loAqnrqP0CTMr9I+d8Y4nFfLJcbKqaoD1iJ5Q/
+	Soiw==
+X-Gm-Message-State: AElRT7H/Vt21N/NRcO08T79L5YBENvmsVjVRtV+qOXZEbV9bvsBshJyP
+	BEHYnRUaoM5JDkbNleAaHwNoLA==
+X-Google-Smtp-Source: AG47ELtc7krSgsCUp5iQCrjOeqmdX33ccr4MwXlOL+T9B8QGkLXi+xm4fZql2D71KThPtChzYmiNuA==
+X-Received: by 10.98.30.66 with SMTP id e63mr9218023pfe.67.1521439393482;
+	Sun, 18 Mar 2018 23:03:13 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	l64sm27742391pfi.142.2018.03.18.22.10.19
+	a22sm5047426pgw.10.2018.03.18.23.03.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 18 Mar 2018 22:10:19 -0700 (PDT)
-To: Parthiban Nallathambi <pn@denx.de>,
-	openembedded-devel@lists.openembedded.org
-References: <20180318164919.5142-1-pn@denx.de>
+	Sun, 18 Mar 2018 23:03:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <cf67ffc0-84fc-5ed5-5826-eec9b8bffabe@gmail.com>
-Date: Sun, 18 Mar 2018 22:10:18 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0)
-	Gecko/20100101 Thunderbird/59.0
-MIME-Version: 1.0
-In-Reply-To: <20180318164919.5142-1-pn@denx.de>
-Cc: barathiraja@gmail.com
-Subject: Re: [PATCH] [busybox]: Adjust the correct version according with patches and meta-oe
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 18 Mar 2018 23:02:43 -0700
+Message-Id: <20180319060300.5366-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.16.2
+Subject: [meta-oe][PATCH 01/18] obexftp: use makefile instead of ninja cmake generator
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,35 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 05:10:19 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 Mar 2018 06:03:12 -0000
 
+Fixes
 
+| NOTE: make -j 44 crctable
+| make: *** No rule to make target 'crctable'.  Stop.
 
-On 3/18/18 9:49 AM, Parthiban Nallathambi wrote:
-> Patches reffered in bbapend are with 1.24 (based on
-> meta-oe 'rocko') version but the bbappend naming is
-> with 1.27 (based on meta-oe 'master'.
-> 
-> Rename the bbappend to point to correct version of
-> meta-oe rocko branch.
-> 
-> Signed-off-by: Parthiban Nallathambi <pn@denx.de>
-> ---
->   recipes-tweaks/busybox/{busybox_1.27%.bbappend => busybox_1.24%.bbappend} | 0
->   1 file changed, 0 insertions(+), 0 deletions(-)
->   rename recipes-tweaks/busybox/{busybox_1.27%.bbappend => busybox_1.24%.bbappend} (100%)
-> 
-> diff --git a/recipes-tweaks/busybox/busybox_1.27%.bbappend b/recipes-tweaks/busybox/busybox_1.24%.bbappend
-> similarity index 100%
-> rename from recipes-tweaks/busybox/busybox_1.27%.bbappend
-> rename to recipes-tweaks/busybox/busybox_1.24%.bbappend
-> 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Please add [meta-openwrt] in subject, and [branchname] as well 
-otherwise, I will miss it, best is to send a github pull request. we do 
-not have rocko branch for meta-openwrt because we only have it working 
-with master and we will create sumo branch once core layers branch out.
+diff --git a/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb b/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
+index 489861cb7..b4a914d92 100644
+--- a/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
++++ b/meta-oe/recipes-connectivity/obexftp/obexftp_0.24.2.bb
+@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "d40fb48e0a0eea997b3e582774b29f793919a625d54b87182e31a3f3d1
+ 
+ inherit cmake pkgconfig
+ 
++OECMAKE_GENERATOR = "Unix Makefiles"
++
+ PACKAGECONFIG ?= ""
+ # fuse support will need meta-filesystems layer
+ PACKAGECONFIG[fuse] = "-DENABLE_FUSE=ON,-DENABLE_FUSE=OFF,fuse"
+-- 
+2.16.2
+
 
