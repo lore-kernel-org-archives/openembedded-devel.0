@@ -1,29 +1,46 @@
-Return-Path: <psaavedra@igalia.com>
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 79D7178262
+Return-Path: <mirza.krak@gmail.com>
+Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
+	[209.85.160.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 7157278928
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 13:44:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; 
-	h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=Ji5STGH01x1EeGsickU1WAbn0kefp1IdicPgULAZ2sA=; 
-	b=OUgTi+3e7Vj2rHWwyPT/sX96TZXB/+TdiuS9s6ixuRNsgINemYUICSidi7yH4hR+z0ZZ+Ym7rFpncY4WQlcSRISYNpkswyJgteea4G08rGyyy75+r/+hw6bSnyx9Dz29Hg8D4Kv/DpXBmVl8Dkplxps5OAsnXQceKQ03UR0W09dKtWIaFPZnTt1SZMXgzWFNpRrVjvbwFe7svfyLKsXpaSgK5lcUcK22EYAzLcGB8geWjgAkHKXo9DqvGGeN4oWznGkhqCANzLgXP/p8R5d1fvrvZNoND9KqYQvcDdgaALQmkk/LXcB7KlDjwI51V84fTZocdZkHdOkwb0YtHgfEMg==;
-Received: from [192.168.10.146] by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1exv5A-0004Au-Hy; Mon, 19 Mar 2018 14:44:12 +0100
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <20180313222055.47545-1-psaavedra@igalia.com>
-	<CALbNGRRU1BZis6nTNj_q+gGX1nzvKCxjYpM_Sk7vdcK3km79Gw@mail.gmail.com>
-From: Pablo Saavedra <psaavedra@igalia.com>
-Message-ID: <9c3a5a1f-9b3a-4eb2-c19e-08518b32edc5@igalia.com>
-Date: Mon, 19 Mar 2018 14:44:12 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
+	Mon, 19 Mar 2018 13:45:03 +0000 (UTC)
+Received: by mail-pl0-f46.google.com with SMTP id 61-v6so10243150plf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Mar 2018 06:45:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=NzQjUuLeG+oYPyWruv+zvV872GZTz6npzILhR+UWePc=;
+	b=GnTIXCtNcHgH8I15UqOzduL/vWmZBNF4B0Ac9NLnxznsm8NKZPoYT6bQiMtCdfojNV
+	jBffhoRUIPVkiEXA2nPI5jG4ZnzaJ1ZmN9aZMq4Oni8pmB0ASxec4B2aBx7ZWLtp+IyO
+	O3X8TEPmkONTsgv37aJdzgukCdExMwy23MwJEX/8aXXIGX5jm59KhAXLxNXLDJMOQFC0
+	QNhcrtJcw6rrL1JFQuMfrF9ofbNexBuTakIRmReOOWZKw8SB5v655EOCSStHHnKvqv/C
+	/nn2XQXjEvZRM3nbFS8862vFCIM47izwoAK4YynSP63c/HlKUekZkNbfaX/DUcnC3OfC
+	xkZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=NzQjUuLeG+oYPyWruv+zvV872GZTz6npzILhR+UWePc=;
+	b=blkFPkNHrSaGt6yfd5Ct8kGsWFVxpOIx4S5wxfQ94OjtWoPQ2PvOrlizrHxX2zd8DB
+	9c5FaeLvIGG0H4mhkX7wt6BkFNrmh00FtNMiQpjqjuUD/CwCI7AfVr0/xQPnVlqTdvHk
+	bvCTHizJyP26YfIkK8/SFSyHMnbFwYoyRUvVv5yLPSBbNC7Znqm3xDq7v+aoHPDhNMn1
+	lV2YH3jXrJsjiNMCjwu6W0Loh2eLvlI5eQg4/2yYzFne2E5O2AEyV1rP7WykCnu855RJ
+	8zzTB1ph/7AKmzoC2yyu4lyUFluv/2sZSU2JKoipFEPxwdLQ0Zoe/tNnYtT9FMRTHRN8
+	1qvg==
+X-Gm-Message-State: AElRT7EdD+tT4/OCRnNzwuGYWAMeITYyKFF9OOuosXjcNJZVA29Bmmcl
+	fhJrPXZOEuZnDcHMDdsadqZsCX335AaUkSCi/3OMzQ==
+X-Google-Smtp-Source: AG47ELuVqCIqezDuoP8ncBjSvjUroFO74ilnCFhHRknCb66cjTQprUnDYIqQJUaHt+WGD67WQnXt0BBqTyHcrS0lsNo=
+X-Received: by 2002:a17:902:8602:: with SMTP id
+	f2-v6mr12465801plo.6.1521467104415; 
+	Mon, 19 Mar 2018 06:45:04 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRRU1BZis6nTNj_q+gGX1nzvKCxjYpM_Sk7vdcK3km79Gw@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] networkmanager upgrade to 1.10.6
+Received: by 10.100.182.228 with HTTP; Mon, 19 Mar 2018 06:45:03 -0700 (PDT)
+From: Mirza Krak <mirza.krak@gmail.com>
+Date: Mon, 19 Mar 2018 14:45:03 +0100
+Message-ID: <CALw8SCUwyJA29Ytmgo4rOL+cyVDDZyOePFWnVp-H2Y03BWDYkg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: meta-python/rocko
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,70 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 13:44:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 19 Mar 2018 13:45:03 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Andreas,
+Hi.
 
-On 15/03/18 15:33, Andreas Müller wrote:
->> @@ -49,6 +44,7 @@ EXTRA_OECONF = " \
->>      --disable-ifcfg-rh \
->>      --disable-ifnet \
->>      --disable-ifcfg-suse \
->> +    --disable-introspection \
-> ^ Why disable introspection?
->>      --disable-more-warnings \
->>      --with-iptables=${sbindir}/iptables \
->>      --with-tests \
+I came across some break-age in meta-python/rocko. More specifically
+that there is no python3-asn1crypto recipe though several packages
+depend on it.  I can trigger this by building python3-requests.
 
-NM fails in configuration time if `--enable-introspection` ins enabled.
-Configure fails in L1290:
+I was reading the archives of the mailing list that indicated that
+there some some instability regarding meta-python recently but nothing
+covering this.
 
-        if ! "$PYTHON" -c 'from gi.repository import GObject' >&
-/dev/null; then
-                AC_MSG_ERROR(["--enable-introspection aims to build the
-settings documentation. This requires GObject introspection for python
-(pygobject)])
-        fi
+I noticed the following commit [1], which mentions that it should be
+merged together with another commit to actually add the
+python3-asn1crypto. Which seems did not actually happen when the merge
+was done.
 
-The execution of GObject check in the native environment causes this
-exception:
-
-    $PYTHON -c 'from gi.repository import GObject'
-    Traceback (most recent call last):
-     File "<frozen importlib._bootstrap>", line 890, in _find_spec
-    AttributeError: 'DynamicImporter' object has no attribute 'find_spec'
-
-    During handling of the above exception, another exception occurred:
-
-    Traceback (most recent call last):
-      File "<string>", line 1, in <module>
-      File
-"/home/igalia/psaavedra/yocto/build/tmp/work/i586-poky-linux/networkmanager/1.10.6-r0/recipe-sysroot-native/usr/lib/python3.5/site-packages/gi/importer.py",
-line 127, in find_module
-        'introspection typelib not found' % namespace)
-    ImportError: cannot import name GObject, introspection typelib not found
+python3-asn1crypto was actually added in this commit [1] on master and
+I can not seen that it has been back-ported. Note the somewhat commit
+cryptic commit message in [2] where it does not actually say that it
+added a python3-asn1crypto package.
 
 
-I tried to add these depends:
+[1]. http://cgit.openembedded.org/meta-openembedded/commit/meta-python?h=3D=
+rocko&id=3D187f959fbd220678595c2aa1fe1e17b00a0b2d92
 
-    python3-pygobject \
-    python3-pygobject-native \
+[2]. http://cgit.openembedded.org/meta-openembedded/commit/meta-python/reci=
+pes-devtools/python/python3-asn1crypto_0.24.0.bb?id=3D80b6e6f151588765000cf=
+17d2b86d0ded762def1
 
-with no success.
+--=20
+Med V=C3=A4nliga H=C3=A4lsningar / Best Regards
 
-
-I didn't find any examples of similar solution for this issues. Only I
-found a unreplied email with this very similar issue, so any suggestion
-is welcome to make a good fix.
-
-Alternatively, since the introspection is interesting as a run depends
-for D-Bus discovery, WDYT about patch the `configure.ac` in order to
-skip this failing assertion but adding an explicit RDEPEND with
-python3-pygobject in the recipe?
-
-
-[1] https://lists.yoctoproject.org/pipermail/poky/2017-December/011190.html
+Mirza Krak
 
