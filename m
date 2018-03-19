@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 598386E672
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id EBB9B78965
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 12:02:47 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id w6so4964134qkb.4
+	Mon, 19 Mar 2018 12:06:53 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id s48so17599246qtb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 05:02:48 -0700 (PDT)
+	Mon, 19 Mar 2018 05:06:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OpY2bO1W2Qs0I6VpWkvUEsdPK+PSROh2sTqA+uH8OeE=;
-	b=gF1RRhrHWpwQYM/jYpTTvETmjAU69kfRWiUoE5e5U569OQ9BjeQ6ANPYFBjKh8sJFi
-	1b3OTXWha9+f13htbisRVwK/WS47uSKqsTz1QDHcgT0KcB9gZau/n6otKVmEOgiKVytn
-	5Eew0HfnkAZOJH7av0ovTvknX/XDX9Y6GD3V+9irqEAffP4/FU/3g1LqBQT1X3kzmaxG
-	B0ce1HEw3oJt4co42+Ftyi40R9e0Do59RsxOQRsWqICyVWZbxs4f9KdH80gpqUQUEL9F
-	s2RNA2gIXATm1hqkYR90DYdAqn3EBW8Zbp9gjAqAzfmE1YgjtEtnyZdsJDqvApv9EhOI
-	Hv6g==
-X-Gm-Message-State: AElRT7F10gt4tHK2KCIYjYY9KvJD+2Q9K48EEmk8C6XPMhT9BCQ/Es/a
-	Wx/uzZ87vGUhStIRRTPuSZPc1eHE
-X-Google-Smtp-Source: AG47ELsn6f4AjGsQvkgzhIGWgSKxhP3Tua9evnJqKXqzhmq2g9nxFrxF3ODizMGGBPg0cGIPlHgRww==
-X-Received: by 10.55.22.207 with SMTP id 76mr15139342qkw.305.1521460967960;
-	Mon, 19 Mar 2018 05:02:47 -0700 (PDT)
+	bh=bb8NWpIRpgtezAnSRIpS/I8lQyIgOSk4jWqfORwIR54=;
+	b=BjuwxdUoWZHqcK23J32o9ngJkGaCmLu1sYm3DiBj3Mm1LmrrVzoDbKgd0Yuc+7MC1/
+	zJvF7mkYq6FQtgyknFMU3u4oW/LbFoWbcx/9KlPtT5khtIHrt9QSo2d2mjuAcJabikbN
+	lLiV5exwfbT68cOJ+axUALaoIpBJ59SSdlN1HfWRtSci5nwPnduyclstKiD72XkS2uzn
+	ZygYxiAhcM+iYhFqACmUB3JLwTjXKHHhpHOCeikGjCScnZPiLBT3/NoHWh+e1BfRSsxE
+	HQbgP7JVPrXaEJKzySCkQKrQMKNikRmFKuEI1Vd8l8PFrkkiZ0/HvBF5L8hIDducrze4
+	ABhQ==
+X-Gm-Message-State: AElRT7GnxSGCJ9LBfXYMV/m2UY6AQNSyeBs6rOULMx27GWNdrCNE39VF
+	GBx+68P143xtsDRN/C9mCMljBJvs
+X-Google-Smtp-Source: AG47ELswAASQh5U9Su9ven1Ytv2mEc6cogT8YWEfXm2VZC4N/MDxUcl3Y225okiTJRpxoOV3raO8vA==
+X-Received: by 10.200.34.59 with SMTP id o56mr17697486qto.103.1521461214517;
+	Mon, 19 Mar 2018 05:06:54 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	f17sm1735586qtk.21.2018.03.19.05.02.46
+	t28sm9556489qkj.61.2018.03.19.05.06.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 19 Mar 2018 05:02:47 -0700 (PDT)
+	Mon, 19 Mar 2018 05:06:53 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2018 08:02:43 -0400
-Message-Id: <1521460963-30813-1-git-send-email-derek@asterius.io>
+Date: Mon, 19 Mar 2018 08:06:47 -0400
+Message-Id: <1521461207-31938-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyjwt: update to version 1.6.1
+Subject: [meta-python][PATCH] python-cmd2: update to version 0.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 12:02:48 -0000
+X-List-Received-Date: Mon, 19 Mar 2018 12:06:54 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pyjwt.inc                  | 4 ++--
- .../python/{python-pyjwt_1.6.0.bb => python-pyjwt_1.6.1.bb}           | 0
- .../python/{python3-pyjwt_1.6.0.bb => python3-pyjwt_1.6.1.bb}         | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyjwt_1.6.0.bb => python-pyjwt_1.6.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyjwt_1.6.0.bb => python3-pyjwt_1.6.1.bb} (100%)
+ .../python/{python-cmd2_0.8.0.bb => python-cmd2_0.8.1.bb}           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cmd2_0.8.0.bb => python-cmd2_0.8.1.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyjwt.inc b/meta-python/recipes-devtools/python/python-pyjwt.inc
-index baecc39..9f9282e 100644
---- a/meta-python/recipes-devtools/python/python-pyjwt.inc
-+++ b/meta-python/recipes-devtools/python/python-pyjwt.inc
-@@ -6,8 +6,8 @@ HOMEPAGE = "http://github.com/jpadilla/pyjwt"
+diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.8.0.bb b/meta-python/recipes-devtools/python/python-cmd2_0.8.1.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python-cmd2_0.8.0.bb
+rename to meta-python/recipes-devtools/python/python-cmd2_0.8.1.bb
+index c4bdceb..145ab98 100644
+--- a/meta-python/recipes-devtools/python/python-cmd2_0.8.0.bb
++++ b/meta-python/recipes-devtools/python/python-cmd2_0.8.1.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "Extra features for standard library's cmd module"
+ HOMEPAGE = "http://packages.python.org/cmd2/"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=50;endline=50;md5=0f13c9cfc75288223cf7edd2f3b985a2"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=51;endline=51;md5=0f13c9cfc75288223cf7edd2f3b985a2"
  
--SRC_URI[md5sum] = "3c3762c88b210763a311a5db06aa7d6f"
--SRC_URI[sha256sum] = "9c3016e4a292151c5396e25cc0c28c4e1cdf13fa19118eb84f500f9670e3f628"
-+SRC_URI[md5sum] = "f7dbe0d62f2087a7605946aeeca02541"
-+SRC_URI[sha256sum] = "dacba5786fe3bf1a0ae8673874e29f9ac497860955c501289c63b15d3daae63a"
+-SRC_URI[md5sum] = "0988674436fde36bbfc5cd650f4808ac"
+-SRC_URI[sha256sum] = "4b3a9d9f305039ca94deb93e0a54ba896f12d1aae7206c6283fe02c6dbb0b7ba"
++SRC_URI[md5sum] = "701b916ffac99137bea413205106f993"
++SRC_URI[sha256sum] = "d09976f9ad2327883c2d07b5acb42e66ad52b17e352873c22041ed124bfe8aba"
  
- PYPI_PACKAGE = "PyJWT"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyjwt_1.6.0.bb b/meta-python/recipes-devtools/python/python-pyjwt_1.6.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyjwt_1.6.0.bb
-rename to meta-python/recipes-devtools/python/python-pyjwt_1.6.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_1.6.0.bb b/meta-python/recipes-devtools/python/python3-pyjwt_1.6.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyjwt_1.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-pyjwt_1.6.1.bb
+ inherit pypi setuptools
+ 
 -- 
 2.7.4
 
