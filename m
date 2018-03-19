@@ -1,53 +1,52 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id C5928789D7
+Return-Path: <trini@konsulko.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E9ED78978
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 20:29:25 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id f19so4953424wmc.0
+	Mon, 19 Mar 2018 20:29:26 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id s188so19795943qkb.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 19 Mar 2018 13:29:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=pHx5p0x4XvFk+kxgpRQYg53qdZEByYSazN0IsZl7gkU=;
-	b=BeSovCyMpzBmYe+8NYCgCKPxUCTt2fvHkzamhEHWuoFEmUrnvbSZ/LxnAOK22M2P9q
-	+RKOwKPyTazvnCE0Wla+zJzwo6PvDpM2p6w1uLFfsoFBHd7Uc5ZdXArYKGGX3QRqYhzF
-	M8inNmQYqIid5tm926JO1hiFqwRE7vm6750GT7aEXBvXkUUbgpgmuLBYLgxh+GSDT+l0
-	R0meV/R+UyVjQ4gSLjtThCxSBy6CMYViBKUgzujfnnfcSyDSp5fpkQysth+OQ/ZgASYw
-	V4oaMe6bBeAeNvYunlXgu4Jh1G0csitWgSfZ6KSEvJXYowyGgFEuNdY3KMDPmhhe4Edj
-	xzGg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=SzaRHu8MF96RCNd5UoasqR/6Fnyvf9rqv7yA1MvjWw8=;
+	b=q3is0FPgIQHg05h0MG3sUjcZH38/o5y/7XPjJ47XwFmnq1xF4L7qXI9//B91E0Vm0x
+	BeE2z18RvBtUXIcTwIls5VKlflK9eCEyrhfvaKactneJU78Gpfb4Ro5pi75E+9WglPFf
+	DbJmpu/8Vgft1YAQuusga3FHQyxhk3RYxU3y0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=pHx5p0x4XvFk+kxgpRQYg53qdZEByYSazN0IsZl7gkU=;
-	b=aDoj7XfpuNJYxdYLbFrhZsE1snyM8ta7PZvvz+GZOUTn44Fv7TVIPmV7wWeXBtj7tH
-	6sqIbtFlYmQH0NbFPSwEeLfJ2UYHVkcVm0FSlPPk2KxDHcV1CIwdKNbwwwJRK2VYG+2u
-	pga4uXXGcxklB5zXYBZFiyjtmwGT1NosUzN2Y+pMhZnAuX7hwLXMmMNZYna+GVxruJgh
-	1VeH+PLRiMip0BTIlivlkIwmlnYwRwiCkQKaIMzQ5K8MSheTuloTHlowNS54L+3n30cK
-	eBG13PmMQY58ZXtoPVsGYFVnIjzq0PqYkHFP6+8t1Tx5RfRiJQAvwDhFnywmzbS/H/z4
-	Rgpg==
-X-Gm-Message-State: AElRT7GxnCX8/ftQBfo0F6qW2pMZoi6gpSTqOX4+Msb1jdJsRIZX69DG
-	kfun5rhWzTgGHcqGOONqtFE2/A==
-X-Google-Smtp-Source: AG47ELukqZbKloHVXwVQT+QynuuicyyfMVe9zQ0JBbw8ZOtjS5osGa38Yogf+aTbc7XKFE88Jw4Xcg==
-X-Received: by 10.28.164.3 with SMTP id n3mr68227wme.121.1521491366146;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=SzaRHu8MF96RCNd5UoasqR/6Fnyvf9rqv7yA1MvjWw8=;
+	b=h1YqC0AjL81MAbYCXhG647Wa/G9SpwU3CI3TsrmIkM/MEj4zYXetyiv6XSTbLS8CbU
+	ywTTWsYWhTStbwjciBeCJ0K5iVSbTqnAazFrIWPSp5HfEDPbTeHIXqTq87lsG6FunJ6M
+	HdQs55nIKLkrNpR5Ch1EprjeWgKTyIhCps1f+DB5RFPTngWj9Ml9R5AKDDAdvx4ifjBX
+	JYkdzzjOUSVYlgjFxQ1SHu9lbV60b8jhIah2wrtRrKrl6Jnn68k+qN9x9M18SUNqgiQE
+	ZfDpmzbJm2pkXDbkNVQ+ngiFQc4oVvHznRKDGwBPbJDw0hzA2FMDyFp38Peoz+rmaJZV
+	TaHg==
+X-Gm-Message-State: AElRT7HRTDNpBS7lR1yzRcio6ntKRKL+NJQPzpo24LA1fbwu/R9BVrjO
+	zPNSwxItl6y1sKDvpb+FIbiCyQ==
+X-Google-Smtp-Source: AG47ELu0FEwCIesKPN60zfmL71lzUmh0jvdKbR03qRZ8Zj/cI/uH6WnU1vm0zhYXgW5rlsdst7NxBw==
+X-Received: by 10.55.112.199 with SMTP id l190mr20100992qkc.335.1521491367235; 
+	Mon, 19 Mar 2018 13:29:27 -0700 (PDT)
+Received: from bill-the-cat.ec.rr.com (cpe-65-184-142-68.ec.res.rr.com.
+	[65.184.142.68])
+	by smtp.gmail.com with ESMTPSA id e30sm51072qtg.1.2018.03.19.13.29.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Mon, 19 Mar 2018 13:29:26 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p200300F07BC08B501E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc0:8b50:1e6f:65ff:fe3e:7f61])
-	by smtp.gmail.com with ESMTPSA id j42sm47589wre.55.2018.03.19.13.29.25
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 19 Mar 2018 13:29:25 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2018 21:28:57 +0100
-Message-Id: <20180319202911.30760-4-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <20180319202911.30760-1-schnitzeltony@gmail.com>
-References: <20180319202911.30760-1-schnitzeltony@gmail.com>
+Date: Mon, 19 Mar 2018 16:29:24 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Vesa =?iso-8859-1?B?SuTkc2tlbORpbmVu?= <dachaac@gmail.com>
+Message-ID: <20180319202924.GZ4418@bill-the-cat.ec.rr.com>
+References: <48f2945a-e330-4bc8-a4da-ab970b63ea5f@gmail.com>
+	<20180319155951.GW4418@bill-the-cat.ec.rr.com>
+	<cacb3c83-0b9d-c1c1-4685-58b48f277a04@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/17] libgnomecanvas: remove
+In-Reply-To: <cacb3c83-0b9d-c1c1-4685-58b48f277a04@gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: meta-openembedded Layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,47 +60,55 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 19 Mar 2018 20:29:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-Groupsio-MsgNum: 71348
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="DHs1QIiRxKbdokJu"
+Content-Disposition: inline
 
-* it depends on removed libglade
-* project is dead - last release in 2011
+--DHs1QIiRxKbdokJu
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../libgnome/libgnomecanvas_2.30.3.bb              | 22 ----------------------
- 1 file changed, 22 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
+On Mon, Mar 19, 2018 at 09:29:53PM +0200, Vesa J=E4=E4skel=E4inen wrote:
+> On 19/03/2018 17.59, Tom Rini wrote:
+>=20
+> >I would suggest that for sumo, any layers that do get moved /
+> >re-distributed / whatever, a "dummy" version be kept in place that says
+> >where it moved to (or where recipes were migrated to, or whatever is
+> >appropriate) and then they can be dropped in master.
+> >
+> Commit message with details should be enough for this kind of information.
+> Leaving files behind would be just confusing.
 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb b/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-deleted file mode 100644
-index f21cc5ed9..000000000
---- a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY = "A powerful object-oriented display"
--LICENSE = "LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
--SECTION = "x11/gnome/libs"
--
--inherit distro_features_check gnomebase gtk-doc
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--# intltool to provide IT_PROG_INTLTOOL
--# configure: line 12654: syntax error near unexpected token `0.35.0'
--# configure: line 12654: `IT_PROG_INTLTOOL(0.35.0)'
--DEPENDS = "gtk+ libglade libart-lgpl xineramaproto intltool-native gnome-common-native"
--
--SRC_URI[archive.md5sum] = "ffcbb719c671ff5cd86e59aeba8d0b92"
--SRC_URI[archive.sha256sum] = "859b78e08489fce4d5c15c676fec1cd79782f115f516e8ad8bed6abcb8dedd40"
--GNOME_COMPRESS_TYPE="bz2"
--
--FILES_${PN} += "${libdir}/libglade/*/libcanvas.so"
--FILES_${PN}-dbg += "${libdir}/libglade/*/.debug/"
--FILES_${PN}-dev += "${libdir}/libglade/*/libcanvas*.la"
--FILES_${PN}-staticdev += "${libdir}/libglade/*/libcanvas*.a"
--- 
-2.14.3
+I don't mean recipes.  I do mean a README update.  Perhaps even a
+layer.conf file that throws an error?  There's a lot of people / use
+cases that won't catch the git log nearly as easily as they'll catch a
+README.  Even more so since we're talking about layers that've been
+around for a long time.
 
+--=20
+Tom
 
+--DHs1QIiRxKbdokJu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJasB2kAAoJEIf59jXTHXZSK5gP/RwBsD4F0+fLklbK8TBEuBzX
+5ILSqTKyRNko9+GCWmAstguBZNEo8Yw5n5Cw5tQN3hlkksMN4rOzNDBOrr2vTDsE
+oCLRXWDbHqNwLn5GcGxo0BoPkcgbinDH7X9vWZiBS5QmyBFyfZvHGV7ZBU/Z0DEp
+XZ5Kk6DQ1rDlW5yh8ezzPWUwvkpyaeIecXBgXAxLDalpHiJBX8HSB2FFiZIci7gH
+uAucYB4lDxTPkHG/cu0ZKThwU0Z4CdVXo33onh1xDHgTFC6CspBFVJppc4Yz+PGt
+T4KpyJS72L2XUIJoshbOaQ57AX+AJGCl3dCERL168iB0zcsR/SxMjy4nssOWlExU
+cZ/fqTeVsl3H/Etno2SaxqI+JlcV21XeSkQTvVHQywRQ75oWIa4Hvn4h71PJD7o+
+563665LwbINGCPERtmZuJLp52DvOK1m12sR+mf1OxMhnsB/1DjcXMaHHYxBbOEpT
+yFE6VY+X9YyEyxWnch6/NIPKoEDkUr6G//GQpVE90x5O5S4+dWhRkhpMWkFNgU7K
+LerMPq8XuJ+P2FCvXGUAQLSUk+ofP+HXhY9Cm4ApjnGxPCFrwaXptdNnC5XfMdmW
+NDESpIAMq5/bWkbe1qgVQBHkvAbIzX0FlbwCkSc5k9ou8IQHJ38n7F7iPspzIC8D
+GSHwX8+skZJFQN3WFccy
+=PB3W
+-----END PGP SIGNATURE-----
+
+--DHs1QIiRxKbdokJu--
