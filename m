@@ -1,49 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DB89678945
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 598386E672
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 10:47:20 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id u46so4047877wrc.11
+	Mon, 19 Mar 2018 12:02:47 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id w6so4964134qkb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 03:47:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=mPj7eXrBc8feU/8UvTbwKEdsUCd5t7/nxrtQ3SMksws=;
-	b=KWBepK11hJVOVhBoiu2BOLcNoEh2T9AEfzjFBGfpYjCqUcqAg+WrVbwFb/IeVONKH6
-	5utxEwhZk4pHc7fOM26z2l5uMu2CdK4VceGg7xO6OBQjEyfxtv/NVjKPbllkEsVRbxiV
-	R5nPA7GYJcNSDV8cf27PiKFmcbH+DOd/sV0jWiuXJ0FCTU6VQJtcSeU40VLcxMNTntHK
-	6FjEq+KDZo/2frOe2NfkPlsJt/BBj6dFAxEZfBWlRWP+zb1Z1zCcdxtM5wDy0m/Yzhse
-	Uw+s4FJMiCIGMDT3sUS84rbVKKa2lsslp6oFc3vbAs0rvrGQ2BPT43cuhGkr5ozgRrP8
-	qFxA==
+	Mon, 19 Mar 2018 05:02:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=mPj7eXrBc8feU/8UvTbwKEdsUCd5t7/nxrtQ3SMksws=;
-	b=Dy8foYT9tHIDsSRveX+5BRXSTUilogz2OVqiMIiA+aiZbG2imAXB5DLq2Kal+rpw1U
-	G/L2NF4QOy7I7uVP+2qt9jHxNCMfGhOq3MxVVwUtItAHeYtOMmVagP/J7dO2vW3CuKaM
-	EPV+vo3XHrC08VdolNN2XH7cwq1nVI5FlUEgYRDDYyUH9eAMMNS2Hd7BYNm9aekDJB2a
-	JaUZLHGIA1obt7CFJQNDv2yTcJI13IwSu0eAqSxOCMpNrTBwvtdBFHxqm3LGKBP97CAr
-	dhXp45ebFm7i6rXGXulN2qvmEU1pn0duGbg+uW/MIXiVAUytEunuvLICt0opbhb7/bfZ
-	/N1g==
-X-Gm-Message-State: AElRT7FjvHRCERLZVgvggsJIywEgWu1stIvMKkZZxSHHIShbMxK3z6gj
-	KWXOV7iCqr4YuTHRe6V+BdvDqqPQB1/P2IzukHE=
-X-Google-Smtp-Source: AG47ELv88ZVtsj0j8vSKLoVsbuoG3BhcvLkeqTUG6cfcqSbb3by3bE/JVbq7mkcQxwMJeGmuOyVSlqrfuPuzQTvDbZE=
-X-Received: by 10.223.146.230 with SMTP id 93mr8583463wrn.241.1521456441605;
-	Mon, 19 Mar 2018 03:47:21 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.30.136 with HTTP; Mon, 19 Mar 2018 03:47:20 -0700 (PDT)
-In-Reply-To: <CAMKF1sqJhAeFwH22g-0CA0T1=i_fg6CTQym8xBCYefw+vfSRhQ@mail.gmail.com>
-References: <48f2945a-e330-4bc8-a4da-ab970b63ea5f@gmail.com>
-	<CAMKF1sqJhAeFwH22g-0CA0T1=i_fg6CTQym8xBCYefw+vfSRhQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 19 Mar 2018 11:47:20 +0100
-Message-ID: <CA+chaQfh5zOSjGMTyDQdQSkMb4aCUOqHGTs=H4gM2QTQvDWYmA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-openembedded Layers
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=OpY2bO1W2Qs0I6VpWkvUEsdPK+PSROh2sTqA+uH8OeE=;
+	b=gF1RRhrHWpwQYM/jYpTTvETmjAU69kfRWiUoE5e5U569OQ9BjeQ6ANPYFBjKh8sJFi
+	1b3OTXWha9+f13htbisRVwK/WS47uSKqsTz1QDHcgT0KcB9gZau/n6otKVmEOgiKVytn
+	5Eew0HfnkAZOJH7av0ovTvknX/XDX9Y6GD3V+9irqEAffP4/FU/3g1LqBQT1X3kzmaxG
+	B0ce1HEw3oJt4co42+Ftyi40R9e0Do59RsxOQRsWqICyVWZbxs4f9KdH80gpqUQUEL9F
+	s2RNA2gIXATm1hqkYR90DYdAqn3EBW8Zbp9gjAqAzfmE1YgjtEtnyZdsJDqvApv9EhOI
+	Hv6g==
+X-Gm-Message-State: AElRT7F10gt4tHK2KCIYjYY9KvJD+2Q9K48EEmk8C6XPMhT9BCQ/Es/a
+	Wx/uzZ87vGUhStIRRTPuSZPc1eHE
+X-Google-Smtp-Source: AG47ELsn6f4AjGsQvkgzhIGWgSKxhP3Tua9evnJqKXqzhmq2g9nxFrxF3ODizMGGBPg0cGIPlHgRww==
+X-Received: by 10.55.22.207 with SMTP id 76mr15139342qkw.305.1521460967960;
+	Mon, 19 Mar 2018 05:02:47 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	f17sm1735586qtk.21.2018.03.19.05.02.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 19 Mar 2018 05:02:47 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Mar 2018 08:02:43 -0400
+Message-Id: <1521460963-30813-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pyjwt: update to version 1.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,80 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 10:47:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 19 Mar 2018 12:02:48 -0000
 
-> 2) I plan removing meta-filesystem and moving recipes to other layers.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pyjwt.inc                  | 4 ++--
+ .../python/{python-pyjwt_1.6.0.bb => python-pyjwt_1.6.1.bb}           | 0
+ .../python/{python3-pyjwt_1.6.0.bb => python3-pyjwt_1.6.1.bb}         | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyjwt_1.6.0.bb => python-pyjwt_1.6.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyjwt_1.6.0.bb => python3-pyjwt_1.6.1.bb} (100%)
 
-I don't have a strong opinion about this, but why meta-filesystems?
+diff --git a/meta-python/recipes-devtools/python/python-pyjwt.inc b/meta-python/recipes-devtools/python/python-pyjwt.inc
+index baecc39..9f9282e 100644
+--- a/meta-python/recipes-devtools/python/python-pyjwt.inc
++++ b/meta-python/recipes-devtools/python/python-pyjwt.inc
+@@ -6,8 +6,8 @@ HOMEPAGE = "http://github.com/jpadilla/pyjwt"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
+ 
+-SRC_URI[md5sum] = "3c3762c88b210763a311a5db06aa7d6f"
+-SRC_URI[sha256sum] = "9c3016e4a292151c5396e25cc0c28c4e1cdf13fa19118eb84f500f9670e3f628"
++SRC_URI[md5sum] = "f7dbe0d62f2087a7605946aeeca02541"
++SRC_URI[sha256sum] = "dacba5786fe3bf1a0ae8673874e29f9ac497860955c501289c63b15d3daae63a"
+ 
+ PYPI_PACKAGE = "PyJWT"
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyjwt_1.6.0.bb b/meta-python/recipes-devtools/python/python-pyjwt_1.6.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyjwt_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python-pyjwt_1.6.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_1.6.0.bb b/meta-python/recipes-devtools/python/python3-pyjwt_1.6.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyjwt_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyjwt_1.6.1.bb
+-- 
+2.7.4
 
-In previous discussion there were some requests for smaller, better
-manageable layers and this one with 19 recipes and only dependency on
-oe-core and meta-oe doesn't look too bad from that POV.
-
-If you move some recipes from it to meta-oe, then some people might
-complain even more that meta-oe has too many recipes and doesn't serve any
-specific purpose.
-
-Regards,
-
-On Sun, Mar 18, 2018 at 10:38 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Sun, Mar 18, 2018 at 2:32 PM, akuster808 <akuster808@gmail.com> wrote:
-> > Hello all,
-> >
-> > I have been reviewing the meta-openembedded sub-layers and I plan on
-> > taking the following actions:
-> >
-> > Please keep your comments focused on the 3 items below.
-> >
-> >
-> > 1) I plan on resetting the sub-layer maintainers. Several maintainers
-> > listed have been inactive.
-> >
-> > If a currently listed maintainer is interested in continuing, please
-> > send me an email.  I plan on removing in-active maintainers in 12 days (
-> > March 30th).
-> >
->
-> This sounds like a good plan.
->
-> >
-> > 2) I plan removing meta-filesystem and moving recipes to other layers.
-> >
->
-> LGTM, this also means some changes in external layers who might
-> depends on this layer explicitly. I hope those layer maintainers will
-> take needed action.
->
-> >
-> > 3)  Meta-gnome, I have heard feed back regarding this layer. Does it
-> > make sense to remove it and push needed recipes out to  other layers?
-> >
->
-> Agreed here again, I have only fixed this layer in past to keep it afloat
-> to
-> reduce compile failures e.g. with clang or musl.
->
-> >
-> > I want to get any restructuring done prior to sumo release to lessen
-> > impact on the Sumo maintainer.
-> >
-> >
-> > regards,
-> >
-> > Armin
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
