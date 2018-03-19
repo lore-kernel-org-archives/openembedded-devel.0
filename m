@@ -1,53 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id F0DB878A03
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EE5A8789D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 20:29:39 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id f125so9820408wme.4
+	Mon, 19 Mar 2018 20:29:40 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id s18so19911348wrg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 13:29:41 -0700 (PDT)
+	Mon, 19 Mar 2018 13:29:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=ldhQTMncaUR4D4wgunq6xkdZyRn+RG0rr0v+JiFYzsg=;
-	b=tbS34tBxvsrdyf+XyHks06I7IqL9FrQEz85pr4LD92HRXv8VMsoIjIIoRukafNy5xW
-	4UT36HEIWGBSgCEGPo5LbAP7MaeE+oJ7h/wZhqg9fy0K4WeKO7gkUJKDruuoqIutDpza
-	+rPwmxwZPMXEpsL5VGy38w3dEV8RIb2rEPzKBiYIQYEA4z128CiF8XO9lfxSyirWaBnv
-	9Lgh9OjffO9dPtMsea88nPHnVKVDpIJI099/7IiMzY9bVkLERpcVgWStE5ePuKOryzEp
-	AyY5e3xWypK9v8lOnlBbLUhcS70h7qVv1aAbOAotXM7CT1rAuW/X1BhLNMtmXrHASyJy
-	wAMQ==
+	bh=PeHYZ952IpXRFaiNJ2MtEweYNX6xpGi2IAi/boRUUMM=;
+	b=ndDWmZnluk3kp+uQt6mGVurLdCOOJIVfJeOSPOFPb7+NosWddROYruIAia+lS1Ejpv
+	jbNluqxKKGS9/38K3T/0RAzQy5weTWiFMyDBWhWooGtxnKBg2+WYpGOnF7DpfRjgOGRu
+	tZdPH5H2UBnTnuWjxOUd9pmOcJf5L00O2vi7ygu32b4clvNxDENJeTqS6G21RR4dA0/m
+	K0Uj5GpLuFXjNwwpECXCXN6hyTXTrlgUPZ87r+Q66yHp0Ojc7L6ntZreDcfDotbi8+0H
+	W0jBZgWbiXcFcEShMwc+uLTzi5NNo6WbMp6LUZ4vzIvqd24E46KipFHN66Gq0/vWkHEV
+	YX7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=ldhQTMncaUR4D4wgunq6xkdZyRn+RG0rr0v+JiFYzsg=;
-	b=ghYITXLIJS15rYfYaC5wQpKjGkKbE3oootu8Od01vj5vsXbH63153g5B7VEIsj4nsd
-	i80ai5OvE6k+NUf36Mz7fsRcV5zYZJ1ttCnpv+hDgoqLnispH9T5Gh962jPRjmu6AK2w
-	naz3sx0MsWxWdzEO1aM4sle4uo0XpE0mmoYxVy8Oscu7pko/R0B696FnIF6Ds5CJVHEP
-	wT7gaHz19tIWXQjzZw+EqT+O8bYvNLxsv/tMUuvXleCZ52TnEPTnOwDJPp2MQIhtAP9o
-	oQDTUgmQKt5GhIwWU3JBVKMKM4A3kqK48HZEl3VTAU0PzIEhN/UGeEOoHhwMtMLjb5OO
-	bJ3g==
-X-Gm-Message-State: AElRT7EXVVFWB6obtzdVBHyXOVL2L7RkyW0lSbqKuJJSXac0OKDhLGvx
-	u7hiZjuABGSRk240R/n1It3bAQ==
-X-Google-Smtp-Source: AG47ELvwHz1PmLct3ppMudeo0cCiz7Y9CCHeYScxhB7hIimvyMwiGCQPtvSvvVQqh0tB6mU3c9kjtg==
-X-Received: by 10.28.43.66 with SMTP id r63mr73077wmr.93.1521491380444;
-	Mon, 19 Mar 2018 13:29:40 -0700 (PDT)
+	bh=PeHYZ952IpXRFaiNJ2MtEweYNX6xpGi2IAi/boRUUMM=;
+	b=DkTErt2UP18RbmQJoh8AZIWP7drXni21/3Na1g9cTOGdxTWGK6a2npaiF3lptfE713
+	tiQJW3Ya3BnLsQOizLFDjTU4Df/iAFQ8ZNHVx39utueErC5T1x2JoRU7VxdmocojRmV5
+	sQnwtkJ8HQzNgZtW062/aF0L3UWoIKPt+7886+OdWfmVsZ3cjWrBaBrAhJmk4NjuRfXo
+	XtgnoJWzujKWb5jFJ70lWSq77PloHd0SapBe6dFXAy3MzZbgJh5RKwjrSaELvdC7nRCh
+	YwuOK67wwn6W5cy/ba/QXIrNSzNEyPM/OrEzcdEr7Ktg3MwogXpcb6O365MO7bRFPDOL
+	kMRg==
+X-Gm-Message-State: AElRT7H+HMaTh1fl0Ycp8+vMteQ7Sf0K9uySUTaWXEzJx/9npcjnHZcz
+	sp6KR1VqVzo+KJ/V2/iHjjK6nQ==
+X-Google-Smtp-Source: AG47ELtXkNrdQbJJ0w7Gf3/TPYLE91boteJzGlRbb0ad9SMOLhHo6CBlb4N48GyT6a56rHItdMBbbQ==
+X-Received: by 10.223.158.208 with SMTP id b16mr9929181wrf.274.1521491381608; 
+	Mon, 19 Mar 2018 13:29:41 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC08B501E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc0:8b50:1e6f:65ff:fe3e:7f61])
-	by smtp.gmail.com with ESMTPSA id j42sm47589wre.55.2018.03.19.13.29.39
+	by smtp.gmail.com with ESMTPSA id j42sm47589wre.55.2018.03.19.13.29.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 19 Mar 2018 13:29:39 -0700 (PDT)
+	Mon, 19 Mar 2018 13:29:40 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Mar 2018 21:29:10 +0100
-Message-Id: <20180319202911.30760-17-schnitzeltony@gmail.com>
+Date: Mon, 19 Mar 2018 21:29:11 +0100
+Message-Id: <20180319202911.30760-18-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180319202911.30760-1-schnitzeltony@gmail.com>
 References: <20180319202911.30760-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 16/17] gtk-engines: remove
+Subject: [PATCH 17/17] libidl: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,155 +61,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 20:29:40 -0000
+X-List-Received-Date: Mon, 19 Mar 2018 20:29:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-project is dead - last stable release was in 2010
+project is dead - last release was in 2010
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gtk-engines/files/glib-2.32.patch              | 23 ---------
- .../gtk-engines/files/substitute-tests.patch       | 37 ---------------
- .../gtk-engines/gtk-engines_2.20.2.bb              | 55 ----------------------
- 3 files changed, 115 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch
- delete mode 100644 meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch
- delete mode 100644 meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
+ meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb | 10 ----------
+ meta-gnome/recipes-gnome/libidl/libidl.inc              | 13 -------------
+ meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb        | 13 -------------
+ 3 files changed, 36 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb
+ delete mode 100644 meta-gnome/recipes-gnome/libidl/libidl.inc
+ delete mode 100644 meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
 
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch b/meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch
+diff --git a/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb b/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb
 deleted file mode 100644
-index f0b878d37..000000000
---- a/meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch
+index 2252c44ee..000000000
+--- a/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb
 +++ /dev/null
-@@ -1,23 +0,0 @@
--From 8d49a386f467cbf8e0842d2218126f643e50f834 Mon Sep 17 00:00:00 2001
--From: Dominique Leuenberger <dimstar@opensuse.org>
--Date: Sun, 27 Nov 2011 14:24:57 +0000
--Subject: Fix build with glib 2.31: Only glib.h can be #include'd. Fixes bug #664914
+@@ -1,10 +0,0 @@
+-SECTION = "libs"
+-require libidl_${PV}.bb
+-inherit native
 -
--Upstream-Status: Backport
+-PR = "r1"
 -
-----
--diff --git a/engines/clearlooks/src/animation.c b/engines/clearlooks/src/animation.c
--index 1f7a41f..56a9286 100644
----- a/engines/clearlooks/src/animation.c
--+++ b/engines/clearlooks/src/animation.c
--@@ -28,7 +28,7 @@
-- #include "animation.h"
-- 
-- #ifdef HAVE_WORKING_ANIMATION
---#include <glib/gtimer.h>
--+#include <glib.h>
-- 
-- struct _AnimationInfo {
-- 	GTimer *timer;
----
--cgit v0.9.0.2
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch b/meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch
+-DEPENDS = "bison-native glib-2.0-native flex-native"
+-
+-SRC_URI[md5sum] = "bb8e10a218fac793a52d404d14adedcb"
+-SRC_URI[sha256sum] = "c5d24d8c096546353fbc7cedf208392d5a02afe9d56ebcc1cccb258d7c4d2220"
+diff --git a/meta-gnome/recipes-gnome/libidl/libidl.inc b/meta-gnome/recipes-gnome/libidl/libidl.inc
 deleted file mode 100644
-index 5c557ba68..000000000
---- a/meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch
+index 1a5c81582..000000000
+--- a/meta-gnome/recipes-gnome/libidl/libidl.inc
 +++ /dev/null
-@@ -1,37 +0,0 @@
--Upstream-Status: Pending
+@@ -1,13 +0,0 @@
+-DESCRIPTION = "Library for parsing CORBA IDL files"
+-HOMEPAGE = "http://andrewtv.org/libIDL/"
+-SECTION = "x11/gnome/libs"
+-LICENSE = "LGPLv2+"
 -
--Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
--diff -Nurd gtk-engines-2.20.2/configure.ac gtk-engines-2.20.2/configure.ac
----- gtk-engines-2.20.2/configure.ac	2010-10-01 15:42:37.000000000 +0300
--+++ gtk-engines-2.20.2/configure.ac	2013-08-20 02:50:27.930510565 +0300
--@@ -166,6 +166,9 @@
+-inherit autotools pkgconfig
 -
-- AC_SUBST(DEVELOPMENT_CFLAGS)
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libIDL/0.8/libIDL-${PV}.tar.bz2"
 -
--+AC_SUBST([exported_symbols_tests], [[$(EXPORTED_SYMBOLS_TESTS)]])
--+AC_SUBST([torture_test_tests], [[$(TORTURE_TEST_TESTS)]])
--+
-- AM_CONFIG_HEADER([engines/support/config.h])
+-S = "${WORKDIR}/libIDL-${PV}"
 -
-- AC_CONFIG_FILES([
--diff -Nurd gtk-engines-2.20.2/test/Makefile.am gtk-engines-2.20.2/test/Makefile.am
----- gtk-engines-2.20.2/test/Makefile.am	2010-09-19 18:18:21.000000000 +0300
--+++ gtk-engines-2.20.2/test/Makefile.am	2013-08-20 02:50:36.842510865 +0300
--@@ -66,7 +66,7 @@
-- # Prefix with exported_
-- EXPORTED_SYMBOLS_TESTS = $(patsubst %,exported_%,$(BUILD_ENGINES))
--
---TESTS += $(EXPORTED_SYMBOLS_TESTS)
--+TESTS += @exported_symbols_tests@
--
--
-- #############################################################
--@@ -88,7 +88,7 @@
-- TORTURE_TEST_TESTS = torture_buildin $(patsubst %,torture_%,$(TORTURE_TEST_ENGINES))
--
-- # Add TORTURE_TEST_ENGINES to list of tests
---TESTS += $(TORTURE_TEST_TESTS)
--+TESTS += @torture_test_tests@
--
-- # Possible other tests:
-- #  - An extensive theme switch tests that loads/unloads the engine
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb b/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
+-FILES_${PN} = "${libdir}/*.so.*"
+-FILES_${PN}-dev += " ${bindir}"
+diff --git a/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb b/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
 deleted file mode 100644
-index 83aa74968..000000000
---- a/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
+index 86dfcf2f0..000000000
+--- a/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
 +++ /dev/null
-@@ -1,55 +0,0 @@
--SUMMARY = "GTK+ theme engines"
--HOMEPAGE = "http://www.gnome.org/"
--BUGTRACKER = "https://bugzilla.gnome.org/"
+@@ -1,13 +0,0 @@
+-require libidl.inc
 -
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
 -
--SECTION = "x11/base"
--DEPENDS = "intltool-native gtk+ gettext-native glib-2.0-native"
+-DEPENDS = "glib-2.0 flex-native libidl-native"
 -
--PR = "r3"
+-PR = "r1"
 -
--PACKAGES += "${PN}-schemas"
--PACKAGES_DYNAMIC += "^gtk-engine-.* ^gtk-theme-.*"
+-BINCONFIG_GLOB = "*-config-2"
+-inherit autotools pkgconfig binconfig
 -
--RDEPENDS_gtk-theme-redmond = "gtk-engine-redmond95"
--RDEPENDS_gtk-theme-metal = "gtk-engine-metal"
--RDEPENDS_gtk-theme-mist = "gtk-engine-mist"
--RDEPENDS_gtk-theme-crux = "gtk-engine-crux-engine"
--RDEPENDS_gtk-theme-lighthouseblue = "gtk-engine-lighthouseblue"
--RDEPENDS_gtk-theme-thinice = "gtk-engine-thinice"
--RDEPENDS_gtk-theme-industrial = "gtk-engine-industrial"
--RDEPENDS_gtk-theme-clearlooks = "gtk-engine-clearlooks"
--
--FILES_${PN} = ""
--FILES_${PN}-dev += "${libdir}/gtk-2.0/*/engines/*.la"
--FILES_${PN}-schemas = "${datadir}/gtk-engines/*.xml"
--
--CFLAGS_prepend = "-DHAVE_ANIMATION "
--
--RDEPENDS_${PN}-dev = ""
--
--inherit gnomebase
--GNOME_COMPRESS_TYPE="bz2"
--
--inherit distro_features_check
--ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
--
--# This picks stable releases in the 2.x series (but not 2.90 onwards,
--# which were GNOME 3 betas).
--UPSTREAM_CHECK_REGEX = "(?P<pver>2\.([0-8]*[02468])+(\.\d+)+)"
--
--python populate_packages_prepend() {
--    engines_root = os.path.join(d.getVar('libdir'), "gtk-2.0/2.10.0/engines")
--    themes_root = os.path.join(d.getVar('datadir'), "themes")
--
--    do_split_packages(d, engines_root, '^lib(.*)\.so$', 'gtk-engine-%s', 'GTK %s theme engine', extra_depends='')
--    do_split_packages(d, themes_root, '(.*)', 'gtk-theme-%s', 'GTK theme %s', allow_dirs=True, extra_depends='')
--    # TODO: mark theme packages as arch all
--}
--
--SRC_URI += "file://glib-2.32.patch \
--            file://substitute-tests.patch"
--SRC_URI[archive.md5sum] = "5deb287bc6075dc21812130604c7dc4f"
--SRC_URI[archive.sha256sum] = "15b680abca6c773ecb85253521fa100dd3b8549befeecc7595b10209d62d66b5"
+-SRC_URI[md5sum] = "bb8e10a218fac793a52d404d14adedcb"
+-SRC_URI[sha256sum] = "c5d24d8c096546353fbc7cedf208392d5a02afe9d56ebcc1cccb258d7c4d2220"
 -- 
 2.14.3
 
