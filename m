@@ -1,28 +1,44 @@
-Return-Path: <psaavedra@igalia.com>
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id DE49678943
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 4568D60777
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 13:47:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; 
-	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=o1m+I4/SiRi4KlqE70w6DgDW3IqFJ8/fTAXVY8epZNQ=; 
-	b=myzsrr7ZkHjzh+HgntHrPaLMQIYJiRxfX+bBu14mWqgWwK3/bDlpaDn6bya9pz2DjS9XqpYxJ6DdmARnwfUbnTvh6G/3gDgKVoVecp47bqnBxaETwFMmqSK1RQE3VdTrw+Qr9RcgqezlIzERQrg4EkjbpxSBkdcsOAG4vjlJJZLfGbXYOiOby+Ztv+4RpLUjUnt75VBp9Zwv4uuM4I8lqCr5rtv0JHknuZt+jW812oqFh0mb2LEuRagTH5nmcEOGBp3VSOULjwM/uMdGawB5JXUaeix054Du6P4KYUTEzMTfjv1ULN9HaTvgtWbUIgUf8UvQBJOEKThsyX9iylPYMA==;
-Received: from [192.168.10.146] by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1exv89-0004Tg-OO; Mon, 19 Mar 2018 14:47:17 +0100
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <20180313222055.47545-1-psaavedra@igalia.com>
-	<CALbNGRSvpDc4TzpOgumGtF7t+C+PQx16hZyB=vaSW7dMkc-gGA@mail.gmail.com>
-From: Pablo Saavedra <psaavedra@igalia.com>
-Message-ID: <f5e40164-17cd-19b1-68be-3e3f0a6c4fe5@igalia.com>
-Date: Mon, 19 Mar 2018 14:47:17 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
+	Mon, 19 Mar 2018 13:54:50 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1521467692; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=Cu7HU8xVwFGx08v1+lWgGMWSGSH/g9oquSH0SGaMSZE=;
+	b=KHuASl4XSxYTRVBrI3bMrxdIWs/ZD9NRuLY0YYZmciSIH5GqIQSZzv8Oz5bPjPthX8ccIU3r
+	6sT+RSlOZJCecDKY+lbbf6BgMgXhtgXynVn3C4WGUfDaISOSDIvLod3iJqaeC4J5bt/QeIVy
+	6hufit2wKeqbmNgO8YjDSvpEOOE=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
+	[209.85.214.43])
+	by mxa.mailgun.org with ESMTP id 5aafc12b.7faca0239570-smtp-out-n01;
+	Mon, 19 Mar 2018 13:54:51 -0000 (UTC)
+Received: by mail-it0-f43.google.com with SMTP id z7-v6so9363266iti.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Mar 2018 06:54:51 -0700 (PDT)
+X-Gm-Message-State: AElRT7HjFgqEcly0AdXByGyZbk6mk/csFW4FClwTHHiflbT5LxHo4/Sm
+	qXpOvpIe6655JmSTz6kSLNdUeMUEAMXYRgCiBCc=
+X-Google-Smtp-Source: AG47ELupVHpy1Yb/ae8ZCxfhs80G3ZWhX3Ce3gngW5EGSFCzpnVLUJGlB3cD8EwBb+ZiD3rq21Jn+bo3496hVF9rt/A=
+X-Received: by 2002:a24:4286:: with SMTP id
+	i128-v6mr12392422itb.73.1521467691181; 
+	Mon, 19 Mar 2018 06:54:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRSvpDc4TzpOgumGtF7t+C+PQx16hZyB=vaSW7dMkc-gGA@mail.gmail.com>
+Received: by 10.107.140.6 with HTTP; Mon, 19 Mar 2018 06:54:50 -0700 (PDT)
+In-Reply-To: <CALw8SCUwyJA29Ytmgo4rOL+cyVDDZyOePFWnVp-H2Y03BWDYkg@mail.gmail.com>
+References: <CALw8SCUwyJA29Ytmgo4rOL+cyVDDZyOePFWnVp-H2Y03BWDYkg@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Mon, 19 Mar 2018 09:54:50 -0400
+X-Gmail-Original-Message-ID: <CADNbA1pcjD7BjF20VrXGOF5Qe7tj_kj6Jr8bGfNcKj2tSTgLwQ@mail.gmail.com>
+Message-ID: <CADNbA1pcjD7BjF20VrXGOF5Qe7tj_kj6Jr8bGfNcKj2tSTgLwQ@mail.gmail.com>
+To: Mirza Krak <mirza.krak@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] networkmanager upgrade to 1.10.6
+Subject: Re: meta-python/rocko
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,18 +51,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 13:47:17 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 19 Mar 2018 13:54:51 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Mar 19, 2018 at 9:45 AM, Mirza Krak <mirza.krak@gmail.com> wrote:
+
+> Hi.
+>
+> I came across some break-age in meta-python/rocko. More specifically
+> that there is no python3-asn1crypto recipe though several packages
+> depend on it.  I can trigger this by building python3-requests.
+>
+
+I see the commit adding python-asn1cryto in the rocko branch.  Are you
+using an outdated rocko branch?  What commit is HEAD in your rocko branch?
 
 
+> I was reading the archives of the mailing list that indicated that
+> there some some instability regarding meta-python recently but nothing
+> covering this.
+>
+> I noticed the following commit [1], which mentions that it should be
+> merged together with another commit to actually add the
+> python3-asn1crypto. Which seems did not actually happen when the merge
+> was done.
+>
+> python3-asn1crypto was actually added in this commit [1] on master and
+> I can not seen that it has been back-ported. Note the somewhat commit
+> cryptic commit message in [2] where it does not actually say that it
+> added a python3-asn1crypto package.
+>
 
-On 15/03/18 15:30, Andreas Müller wrote:
-> 2. Does this patch has a chance to land before sumo split (if
-> autobuilds are ok)? Do we follow Yocto feature freeze these days?
+To see the full history of a file, you'll need to tell git to follow, and
+you can see it was added in commit 8ceeb8b[1] not 80b6e6; however, both are
+in rocko.
 
-If we find an arrangement for the issues that you found in the others
-replies of this patch submission I guess we have a chance.
+`git log --follow ./meta-python/recipes-devtools/python/python3-
+asn1crypto_0.24.0.bb`
 
+[1] -
+http://cgit.openembedded.org/meta-openembedded/commit/meta-python?h=3Drocko=
+&id=3D8ceeb8b512a265b03b2175943a01d9318ebb8634
+
+
+-Derek
+
+>
+>
+> [1]. http://cgit.openembedded.org/meta-openembedded/commit/meta-p
+> ython?h=3Drocko&id=3D187f959fbd220678595c2aa1fe1e17b00a0b2d92
+>
+> [2]. http://cgit.openembedded.org/meta-openembedded/commit/meta-p
+> ython/recipes-devtools/python/python3-asn1crypto_0.24.0.bb?
+> id=3D80b6e6f151588765000cf17d2b86d0ded762def1
+>
+> --
+> Med V=C3=A4nliga H=C3=A4lsningar / Best Regards
+>
+> Mirza Krak
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
