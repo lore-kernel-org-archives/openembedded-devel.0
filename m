@@ -1,45 +1,37 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C8857893E
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AAE38782CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 13:56:43 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1521467804; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=P6W1L9mctxF4z+wO2gfuy9dHV1xv/9yfhpYaZlV30UE=;
-	b=f+jSi1t52qHSsH+YrTwDN0MVM+xNmib3rX66lQm/hVtPmybmTeASW5zIaTN+RVP0SxAZRrTi
-	Xi6XqF/RkrlKc9eZAeW8QiYEjbsIoV5GNPSbqBDW5TxrAZNKUsdMN9wKXT3B9MVnJOZ+uvyH
-	zT+2uXO80PiOAqvtNBvFvFw3mLE=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mxa.mailgun.org with ESMTP id 5aafc19c.7fd38b4e9530-smtp-out-n02;
-	Mon, 19 Mar 2018 13:56:44 -0000 (UTC)
-Received: by mail-io0-f174.google.com with SMTP id o4so6635506iod.3
+	Mon, 19 Mar 2018 13:59:39 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id o184so18319995qkd.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Mar 2018 06:56:44 -0700 (PDT)
-X-Gm-Message-State: AElRT7ELCdqpKI6ROWJIBBJzFEpOfJ7HeX3X7ZOZbWEC2jpfxXOv7Rfk
-	6NbW33EZra0ehWt4Z+IpU6M3cc0CtBbrL0ry034=
-X-Google-Smtp-Source: AG47ELt/waTVhjMUJ58pAurLmv+konqm3KRyJ51jrk2hZcirBMyRFGbYbQXEMxBFBy4Z/0jQ2z/nRLUQiibTDqFki4w=
-X-Received: by 10.107.176.208 with SMTP id z199mr5079850ioe.245.1521467804108; 
-	Mon, 19 Mar 2018 06:56:44 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.140.6 with HTTP; Mon, 19 Mar 2018 06:56:43 -0700 (PDT)
-In-Reply-To: <CADNbA1o0SFW-QkcV8vsBTN8i9pC-MV6Ycff_j6iVgLZ_+6YHVQ@mail.gmail.com>
-References: <CALw8SCUwyJA29Ytmgo4rOL+cyVDDZyOePFWnVp-H2Y03BWDYkg@mail.gmail.com>
-	<CADNbA1pcjD7BjF20VrXGOF5Qe7tj_kj6Jr8bGfNcKj2tSTgLwQ@mail.gmail.com>
-	<CADNbA1o0SFW-QkcV8vsBTN8i9pC-MV6Ycff_j6iVgLZ_+6YHVQ@mail.gmail.com>
+	Mon, 19 Mar 2018 06:59:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=veHdnlKRFGR5evkUfbwOjEHEVHgjwKpGQ8iXwaCd6Xw=;
+	b=sHjam+4D77H56eYgUYcGEvtvHbl2MqZHNBOHsSIHWuOGNb4GLSwf5zdaGZ0Inl5qXt
+	ug+Fk4A6R9m4msntpN+6QUe0ccjkbIpUuQLG1gxWPHIg5NTSKHdlP+2IIqjEfd4TqGfi
+	feAGOSlYV44c5VXxr4ED77LAoOWoOzMswoD9oQS8mH2lfZrC9HgXfWgzvjQRDXboy+7B
+	+dX6VtcfkJoCp98WkCXF0ejmD1gxVVUYEqYYii07+ibrzYAnVcbN6iEcqgQeWNHYEdxC
+	CDkoBhJ6wvkoa69GTZblMKYX64I82Jw4J4dbUtY9mZVdcRYoxILpMbSL3PUAXsgA9cjU
+	3Ffw==
+X-Gm-Message-State: AElRT7FGJZE/AQouVcK35eCUB6hFrBvjHDHHAEXVdoK/MggdOedWJTpT
+	qw6mw/ISF6/Ubps2RqM5HMwUJNZ3
+X-Google-Smtp-Source: AG47ELttFS1ZSrlH0PANz5f9y0arZotvS40d/vmqGvfrFSn9VFBQrrhAWe7hWRsamR6dPL1CJKyv2g==
+X-Received: by 10.55.186.193 with SMTP id k184mr17824092qkf.4.1521467980210;
+	Mon, 19 Mar 2018 06:59:40 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id m187sm73413qkc.17.2018.03.19.06.59.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 19 Mar 2018 06:59:39 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
-Date: Mon, 19 Mar 2018 09:56:43 -0400
-X-Gmail-Original-Message-ID: <CADNbA1o5minKhZgwfG6kisd06S9t2hgJ8AmfphThdwSD-Y6FYg@mail.gmail.com>
-Message-ID: <CADNbA1o5minKhZgwfG6kisd06S9t2hgJ8AmfphThdwSD-Y6FYg@mail.gmail.com>
-To: Mirza Krak <mirza.krak@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-python/rocko
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Mar 2018 09:59:30 -0400
+Message-Id: <1521467970-27387-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][rocko][PATCH] python3-asn1crypto: add support for Python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,86 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Mar 2018 13:56:43 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Mar 2018 13:59:39 -0000
 
-Yeah.  The python3 version wasn't there in rocko.  I'll send out a patch.
-Thanks for catching this.
+From: Ricardo Salveti <ricardo@opensourcefoundries.com>
 
-On Mon, Mar 19, 2018 at 9:55 AM, Derek Straka <derek@asterius.io> wrote:
+python-asn1crypto.inc already available and used by the Python 2
+version.
 
-> Ah, you wanted the python3 version.  I just noticed that.  Stand by
->
-> On Mon, Mar 19, 2018 at 9:54 AM, Derek Straka <derek@asterius.io> wrote:
->
->>
->>
->> On Mon, Mar 19, 2018 at 9:45 AM, Mirza Krak <mirza.krak@gmail.com> wrote=
-:
->>
->>> Hi.
->>>
->>> I came across some break-age in meta-python/rocko. More specifically
->>> that there is no python3-asn1crypto recipe though several packages
->>> depend on it.  I can trigger this by building python3-requests.
->>>
->>
->> I see the commit adding python-asn1cryto in the rocko branch.  Are you
->> using an outdated rocko branch?  What commit is HEAD in your rocko branc=
-h?
->>
->>
->>> I was reading the archives of the mailing list that indicated that
->>> there some some instability regarding meta-python recently but nothing
->>> covering this.
->>>
->>> I noticed the following commit [1], which mentions that it should be
->>> merged together with another commit to actually add the
->>> python3-asn1crypto. Which seems did not actually happen when the merge
->>> was done.
->>>
->>> python3-asn1crypto was actually added in this commit [1] on master and
->>> I can not seen that it has been back-ported. Note the somewhat commit
->>> cryptic commit message in [2] where it does not actually say that it
->>> added a python3-asn1crypto package.
->>>
->>
->> To see the full history of a file, you'll need to tell git to follow, an=
-d
->> you can see it was added in commit 8ceeb8b[1] not 80b6e6; however, both =
-are
->> in rocko.
->>
->> `git log --follow ./meta-python/recipes-devtools/python/python3-
->> asn1crypto_0.24.0.bb`
->>
->> [1] - http://cgit.openembedded.org/meta-openembedded/commit/meta
->> -python?h=3Drocko&id=3D8ceeb8b512a265b03b2175943a01d9318ebb8634
->>
->>
->> -Derek
->>
->>>
->>>
->>> [1]. http://cgit.openembedded.org/meta-openembedded/commit/meta-p
->>> ython?h=3Drocko&id=3D187f959fbd220678595c2aa1fe1e17b00a0b2d92
->>>
->>> [2]. http://cgit.openembedded.org/meta-openembedded/commit/meta-p
->>> ython/recipes-devtools/python/python3-asn1crypto_0.24.0.bb?i
->>> d=3D80b6e6f151588765000cf17d2b86d0ded762def1
->>>
->>> --
->>> Med V=C3=A4nliga H=C3=A4lsningar / Best Regards
->>>
->>> Mirza Krak
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->>
->
+Signed-off-by: Ricardo Salveti <ricardo@opensourcefoundries.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
+new file mode 100644
+index 0000000..30f3404
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-asn1crypto.inc
+-- 
+2.7.4
+
 
