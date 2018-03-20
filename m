@@ -1,42 +1,38 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 4695678966
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 623E06FF73
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 14:07:22 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1521554844; h=Content-Type: To: Subject: Message-ID: Date:
-	From: References: In-Reply-To: MIME-Version: Sender;
-	bh=LdD+UwxK3jGoef5Z93xco+KC6K9oF3L6QzXnfGI8FyA=;
-	b=fHc2h2MmgDW42/PL6PrauncbjcM4CBTb0YPlxzoBxTtzFA5hCUT4CiYknDjB+j268Dw68lJb
-	7IKio5cme//9VP52lapdb/WIVjQwbXKjvrocnwmXE3Z0c1Lrb2q322PH09cg/Ve9SQ+fUgvk
-	7s0i2bs0JiPEkNj37EX8hQ+mR5o=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mxa.mailgun.org with ESMTP id 5ab1159b.7ff2d830c4f0-smtp-out-n03;
-	Tue, 20 Mar 2018 14:07:23 -0000 (UTC)
-Received: by mail-io0-f174.google.com with SMTP id 141so2470862iou.12
+	Tue, 20 Mar 2018 14:15:02 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id f8so1697234qtg.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 07:07:23 -0700 (PDT)
-X-Gm-Message-State: AElRT7HKIw7nyR9zgWToe6ulvSe6BBuGcn/zuU0NnD8lmBtQp6BiV9Z0
-	rbWM1TUMxGpcA/OylSMHd5HSGCrBiNk9DYI7n/M=
-X-Google-Smtp-Source: AG47ELsxHuAVP1JUnd3rDD/nvIrPI5FRxOdenvdK23TJU41LhqUNBOG1UB80Uyngtxs9TdRFUdKgg9c2hoM3vOXoamg=
-X-Received: by 10.107.36.204 with SMTP id k195mr15954522iok.131.1521554843201; 
-	Tue, 20 Mar 2018 07:07:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.140.6 with HTTP; Tue, 20 Mar 2018 07:07:22 -0700 (PDT)
-In-Reply-To: <1521554658-10933-1-git-send-email-derek@asterius.io>
-References: <1521554658-10933-1-git-send-email-derek@asterius.io>
+	Tue, 20 Mar 2018 07:15:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tQ4AFCCcd9qU+/ZDqb4+zxNpDEIX7cywe1EipkQtCzQ=;
+	b=KVfB6R3cwj5G8Isjp3FLhBjiMSXcGbt+Htv4Q9RPfGnhh0wxZyoSvqoILxiOCY9vuO
+	fjbnlo9oMQ5WJYVH+ZO8M1yp12fquDDbhjnxuKnNVVMCXaD4UhhTK9lBeM9NvTs653xt
+	DM9AtP4ZASgof0Ut/9r9wQv5VXxrN6IvH1b3YxwB9goVtgliRYyH8m2dO6wLplGjDgvv
+	pdxH25Lz5SbJGvcG5hpZyGVGcoGkhHomVnM1Ld20qnhvYB9KwDOyS3qCt7cXChQ8VS6O
+	4D9eGf98h5esg/dxGSNOsg4hMD0OOKkSa1rPWMHPqFTdDBgHMd9G6uXsx6+BMSF01/vZ
+	jDNw==
+X-Gm-Message-State: AElRT7GrUMycljkFmlejxkvNOrXCB9Kjsc8SmVT59QG8dh0YOJbHvaen
+	uMCdBuRi2FSo2cDJJpVmR1pUa48c
+X-Google-Smtp-Source: AG47ELt6OPeWHgJZlHM618/3iQMuiJ2eH8Yh0Fa1Yxk9oB5n2OGZ9Ki3XoSW47Q5bnR89meP/Fjs5g==
+X-Received: by 10.200.35.48 with SMTP id a45mr8337610qta.311.1521555302932;
+	Tue, 20 Mar 2018 07:15:02 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	t68sm1716796qkf.62.2018.03.20.07.15.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 20 Mar 2018 07:15:02 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
-Date: Tue, 20 Mar 2018 10:07:22 -0400
-X-Gmail-Original-Message-ID: <CADNbA1q6z6rAhvCcn8P5Job6kCQM1R2kDuwVRq8JfMRAwMLhWQ@mail.gmail.com>
-Message-ID: <CADNbA1q6z6rAhvCcn8P5Job6kCQM1R2kDuwVRq8JfMRAwMLhWQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-attrs: add logging to the RDEPENDS
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 20 Mar 2018 10:14:54 -0400
+Message-Id: <1521555294-6378-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH2] python-pyroute2: add io and pickle to the RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,33 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2018 14:07:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 20 Mar 2018 14:15:02 -0000
 
-Ignore this one.  Commit message fail.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pyroute2.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Tue, Mar 20, 2018 at 10:04 AM, Derek Straka <derek@asterius.io> wrote:
+diff --git a/meta-python/recipes-devtools/python/python-pyroute2.inc b/meta-python/recipes-devtools/python/python-pyroute2.inc
+index f7b57d9..9ec9866 100644
+--- a/meta-python/recipes-devtools/python/python-pyroute2.inc
++++ b/meta-python/recipes-devtools/python/python-pyroute2.inc
+@@ -13,9 +13,11 @@ inherit pypi
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-ctypes \
+     ${PYTHON_PN}-distutils \
++    ${PYTHON_PN}-io \
+     ${PYTHON_PN}-json \
+     ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-multiprocessing \
++    ${PYTHON_PN}-pickle \
+     ${PYTHON_PN}-pkgutil \
+     ${PYTHON_PN}-pprint \
+     ${PYTHON_PN}-shell \
+-- 
+2.7.4
 
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  meta-python/recipes-devtools/python/python-attrs.inc | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python-attrs.inc
-> b/meta-python/recipes-devtools/python/python-attrs.inc
-> index 12410bf..360f9c6 100644
-> --- a/meta-python/recipes-devtools/python/python-attrs.inc
-> +++ b/meta-python/recipes-devtools/python/python-attrs.inc
-> @@ -9,5 +9,6 @@ SRC_URI[sha256sum] = "1c7960ccfd6a005cd9f7ba884e6316
-> b5e430a3f1a6c37c5f87d8b43f83
->  inherit pypi
->
->  RDEPENDS_${PN}_class-target += " \
-> +    ${PYTHON_PN}-crypto \
->      ${PYTHON_PN}-ctypes \
->  "
-> --
-> 2.7.4
->
->
 
