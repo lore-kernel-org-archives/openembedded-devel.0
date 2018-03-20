@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f196.google.com (mail-yb0-f196.google.com
-	[209.85.213.196])
-	by mail.openembedded.org (Postfix) with ESMTP id ABDD360616
+Received: from mail-yb0-f194.google.com (mail-yb0-f194.google.com
+	[209.85.213.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B80E78986
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 18:03:57 +0000 (UTC)
-Received: by mail-yb0-f196.google.com with SMTP id t5-v6so849618ybg.13
+	Tue, 20 Mar 2018 21:57:17 +0000 (UTC)
+Received: by mail-yb0-f194.google.com with SMTP id v66-v6so1089753ybv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 11:03:59 -0700 (PDT)
+	Tue, 20 Mar 2018 14:57:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=owGGES5ThaHDN2AljIDY4h+nSv/bupfVI//qHMxwKqo=;
-	b=gbmiPuzg9aGKWoeZb48spjCZGreJYRkoeZQL2RQbK5Wip43aVwV8YRSdad7PpeGaYt
-	tx+GyHGf+X8efut5ZojzpTkOrcfSsXW6Z9SRC/AGWQmTaYQlggB2aY2D/gfFu//rncij
-	Jdn461nM7kqzy9G1rGCWrkHU6u5wVS9RmeWwv0J/eBfHAm7dFDIljvaMzREmsMQEy3KZ
-	K2xhCM5/wHk6fLa5Km6D96UJBu+yrETDLe/Rq7EOxGFqjlEbpG45DLc3qIRwGdgMQZfZ
-	7+dSRVeevzA72vn+wdtaWWoluNj3zt61kdQjyiHTzu50HEI/X2l/VER8pWxNlo52eWix
-	HoTg==
+	bh=p0xUgiC+Xh19EoIakXRK34anru3RLh7OtK3lm8kVK6M=;
+	b=J+64wo/N5xF6WoNZ93BRVFBEHOp8zzBtVBRbB3IeE1EACjfoyQXwg1E3sesseSTVz9
+	RZ/9AXcvEgIwwJSrmWxDvW1Mdfps+ZDTbO8VCF0E+q9smRdnDd44QgxuWzlC+Yvy/Fiv
+	TW3W+XDpKMHd0sA7w2Xl0sm421e6rl1mc+zLdWKV25tXczhvAjSgmPxvOhfDCR3fOE5f
+	YWHTBECIX74EzsC/OvYBMOu2LSDYRZpedM4Sf8ZTwBjTFAsoMcr7iGHusVvTJG5Zg0X2
+	XxUDztJqiwydXrTxbX9kp+0wZyoZ/f8PCq1c47gKU5WUwu4sL7pHP0LIWUzUCwrUAH+l
+	7r3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=owGGES5ThaHDN2AljIDY4h+nSv/bupfVI//qHMxwKqo=;
-	b=OaKbTTW5B/LXm/53oWulTmHVOUjK+1BKwh5SwAvSMW+S0UWQxg24pi1g39Imrzkbgs
-	t0q+sg8sL1uxv+qBZTQ0zZcB5xtMfMlRJw2GbW6fZjVdrPyOrU/3zyHBrxhGTRJmcCh2
-	oNk6WH1bJJnbsH2iBXtLKQ8orQZXKay8rdguHeb1P0Whf5jduJsY6fctRgyqj0Swmwlx
-	raCaptU8QAC0W+KCkwOu0FZLflYYxzBAa9oUvCkWPqxW6SBtXVnnuuZ+Wk6+kEEtMwWz
-	4wY1l1y7eu1Ol9jAGnhJEHNeMLQGImiSd915+jifIFroPMf9JasoQ3z6xgAbm0qbL0Gz
-	SzDA==
-X-Gm-Message-State: AElRT7GwI0eyP6EgrovAS2r2w+1nG/Vnig8tbf5AgECvCF5W89xWDSsr
-	QFcETu4D89aXAbyiVZDoTXgS4bkgZGQIVNKPOVH03g==
-X-Google-Smtp-Source: AG47ELv1OwqQ0wKnp9uFm7W9puKQ/h6wuo8sQOtgsCD1zGRPxLg5cmqqAKmfpFmkKtAcyjYkHHtNmgf+cAmBpNlL0H4=
-X-Received: by 2002:a25:2d48:: with SMTP id
-	s8-v6mr10091485ybe.224.1521569038648; 
-	Tue, 20 Mar 2018 11:03:58 -0700 (PDT)
+	bh=p0xUgiC+Xh19EoIakXRK34anru3RLh7OtK3lm8kVK6M=;
+	b=mlHz31zvr4LO/AlB8B7OTwcg1APsqo1kxCotWQnCpDFRi+IvFKFXR6F4lDwZAebtw0
+	XVhIlkUZ1n4zPyprShY4+XeKEujeU2iSdppyWWG5jgOLXvJe9TWbrpxJcu/zs06BLPGv
+	IOWwOxqi2oUnmvREQKeZJMOD+HvcQAvZTGRZpgzqWmHkXua8J6uuvO6zro/BXrtstPzg
+	Ycrx7w9ebUTxdK41M5uybAiz3mwqtzPVcpxsXazrAUlFuKpWqgnSwGVL9Er1OGKlNTe7
+	MDdgg8/EJK64/1Jt2uxP/G7FyA00R4pfRcZTVL1kvPodPNQLt40u9+W4gLqLwT9Qu0+G
+	P/bg==
+X-Gm-Message-State: AElRT7GsrUAOZ/0U/UbJ6EtMCk1q7a2HnTLmXiF5TvsnIUN/oSAYB7pd
+	6kUQlgXgYiH02xI1CWbfhfIQy/RcUkNpNviBi5A=
+X-Google-Smtp-Source: AG47ELs7jY7LCVe0FGyealowP4FQKAa16ZeigF0Se4dh5zWR9LjCBfAQ88O8ia90okHweNHBQI3+souuixBe86VesIU=
+X-Received: by 2002:a25:6505:: with SMTP id
+	z5-v6mr10459728ybb.88.1521583038980; 
+	Tue, 20 Mar 2018 14:57:18 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Tue, 20 Mar 2018 11:03:57
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Tue, 20 Mar 2018 14:57:18
 	-0700 (PDT)
-In-Reply-To: <6d77f84f-1808-b929-7719-7fef10bc11b4@linux.intel.com>
-References: <20180319202911.30760-1-schnitzeltony@gmail.com>
-	<6d77f84f-1808-b929-7719-7fef10bc11b4@linux.intel.com>
+In-Reply-To: <CALbNGRRU1BZis6nTNj_q+gGX1nzvKCxjYpM_Sk7vdcK3km79Gw@mail.gmail.com>
+References: <20180313222055.47545-1-psaavedra@igalia.com>
+	<CALbNGRRU1BZis6nTNj_q+gGX1nzvKCxjYpM_Sk7vdcK3km79Gw@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 20 Mar 2018 19:03:57 +0100
-Message-ID: <CALbNGRStZxv6Mt3phdup6dJ-jNMHsMRNNodBJP9mSjMx62P4rg@mail.gmail.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Date: Tue, 20 Mar 2018 22:57:18 +0100
+Message-ID: <CALbNGRQniLTF5Rmv7E_4Sj+WU84ovs94b6++=YrFJP6kJEforg@mail.gmail.com>
+To: Pablo Saavedra <psaavedra@igalia.com>, Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/17] remove gnome2 recipes for discontinued projects
+Subject: Re: [meta-oe][PATCH] networkmanager upgrade to 1.10.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,40 +58,184 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2018 18:03:57 -0000
+X-List-Received-Date: Tue, 20 Mar 2018 21:57:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 20, 2018 at 11:18 AM, Alexander Kanavin
-<alexander.kanavin@linux.intel.com> wrote:
-> On 03/19/2018 10:28 PM, Andreas M=C3=BCller wrote:
+On Thu, Mar 15, 2018 at 3:33 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+> On Tue, Mar 13, 2018 at 11:20 PM, Pablo Saavedra <psaavedra@igalia.com> w=
+rote:
+>> * Upgraded to latest stable version [1]
+>> * Forward-port of the Yocto patches
+>> * Disabled 0004-Define-missing-features-to-cater-for-musl.patch
+>> * This version keeps fixed 'Fixed setting 802-1x.password-raw
+>>   property in nmcli' error. Fixed on 1.6.4 [2].
 >>
->> I can't stand the low-quality/split/maintainer-spam anymore: Guys one wa=
-y
->> to
->> change things is start sending patches.
->
->
-> Yes, yes, yes. And yes. Even more could be removed, e.g. libunique and
-> everything that wants it. I'll look when I have a bit of time.
->
-> Alex
-You are invited :)
+>> References:
+>>
+>> [1] https://cgit.freedesktop.org/NetworkManager/NetworkManager/tree/NEWS=
+?h=3Dnm-1-10
+>> [2] https://cgit.freedesktop.org/NetworkManager/NetworkManager/tree/NEWS=
+?h=3D1.6.4#n11
+>>
+>> Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
+>> ---
+>>  ...adjust-net-headers-for-musl-compatibility.patch |  32 +-
+>>  ...dns-resolved-add-systemd-resolved-backend.patch | 621 --------------=
+-------
+>>  ...ed-also-check-for-etc-resolv-conf.systemd.patch |  29 -
+>>  ...o-run-sbin-dhclient-to-get-the-version-nu.patch |  36 --
+>>  ...stemd-xlocale.h-is-dropped-by-newer-glibc.patch |  29 -
+>>  .../0002-Fix-nm-version-macro-includes.patch       |  58 --
+>>  ...et-util.h-Include-linux-sockios.h-on-musl.patch |  14 +-
+>>  ...-string-in-g_dbus_message_new_method_erro.patch |  67 ---
+>>  .../networkmanager/0003-Define-ETH_ALEN.patch      |  10 +-
+>>  ...Define-missing-features-to-cater-for-musl.patch |  41 +-
+>>  ...emove-net-ethernet.h-seems-to-be-over-spe.patch |  44 +-
+>>  ... 0006-check-for-strndupa-before-using-it.patch} |  22 +-
+>>  ...figure.ac-Fix-pkgconfig-sysroot-locations.patch |  25 +
+>>  ...rkmanager_1.4.4.bb =3D> networkmanager_1.10.6.bb} |  21 +-
+>>  14 files changed, 119 insertions(+), 930 deletions(-)
+>>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0001-dns-resolved-add-systemd-resolved-backend.patch
+>>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.pat=
+ch
+>>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.pa=
+tch
+>>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0001-systemd-xlocale.h-is-dropped-by-newer-glibc.patch
+>>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0002-Fix-nm-version-macro-includes.patch
+>>  delete mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0002-user-format-string-in-g_dbus_message_new_method_erro.pa=
+tch
+>>  rename meta-networking/recipes-connectivity/networkmanager/networkmanag=
+er/{0001-check-for-strndupa-before-using-it.patch =3D> 0006-check-for-strnd=
+upa-before-using-it.patch} (77%)
+>>  create mode 100644 meta-networking/recipes-connectivity/networkmanager/=
+networkmanager/0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patc=
+h
+>>  rename meta-networking/recipes-connectivity/networkmanager/{networkmana=
+ger_1.4.4.bb =3D> networkmanager_1.10.6.bb} (81%)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/network=
+manager_1.4.4.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
+orkmanager_1.10.6.bb
+>> similarity index 81%
+>> rename from meta-networking/recipes-connectivity/networkmanager/networkm=
+anager_1.4.4.bb
+>> rename to meta-networking/recipes-connectivity/networkmanager/networkman=
+ager_1.10.6.bb
+>> index d5f456f37..6538e7b82 100644
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager=
+_1.4.4.bb
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager=
+_1.10.6.bb
+>> @@ -5,7 +5,7 @@ SECTION =3D "net/misc"
+>>  LICENSE =3D "GPLv2+"
+>>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dcbbffd568227ada506640fe950a4=
+823b \
+>>                      file://libnm-util/COPYING;md5=3D1c4fa765d6eb3cd2fbd=
+84344a1b816cd \
+>> -                    file://docs/api/html/license.html;md5=3D8eb8e72bab0=
+97b9d11763002cb003697 \
+>> +                    file://docs/api/html/license.html;md5=3D77b9e362690=
+c149da196aefe7712db30 \
+>>  "
+>>
+>>  DEPENDS =3D " \
+>> @@ -20,6 +20,7 @@ DEPENDS =3D " \
+>>      libnewt \
+>>      polkit \
+>>      jansson \
+>> +    curl \
+>>  "
+>>
+>>  inherit gnomebase gettext systemd bluetooth bash-completion vala gobjec=
+t-introspection
+>> @@ -27,21 +28,15 @@ inherit gnomebase gettext systemd bluetooth bash-com=
+pletion vala gobject-introsp
+>>  GI_DATA_ENABLED_libc-musl =3D "False"
+>>
+>>  SRC_URI =3D "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/N=
+etworkManager-${PV}.tar.xz \
+>> -           file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-versio=
+n-nu.patch \
+>> -           file://0002-Fix-nm-version-macro-includes.patch \
+>>             file://0001-adjust-net-headers-for-musl-compatibility.patch =
+\
+>>             file://0002-socket-util.h-Include-linux-sockios.h-on-musl.pa=
+tch \
+>>             file://0003-Define-ETH_ALEN.patch \
+>> -           file://0004-Define-missing-features-to-cater-for-musl.patch =
+\
+>>             file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over=
+-spe.patch \
+>> -           file://0001-check-for-strndupa-before-using-it.patch \
+>> -           file://0001-dns-resolved-add-systemd-resolved-backend.patch =
+\
+>> -           file://0001-dns-resolved-also-check-for-etc-resolv-conf.syst=
+emd.patch \
+>> -           file://0001-systemd-xlocale.h-is-dropped-by-newer-glibc.patc=
+h \
+>> -           file://0002-user-format-string-in-g_dbus_message_new_method_=
+erro.patch \
+>> +           file://0006-check-for-strndupa-before-using-it.patch \
+>> +           file://0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locatio=
+ns.patch \
+>>             "
+>> -SRC_URI[md5sum] =3D "63f1e0d6d7e9099499d062c84c927a75"
+>> -SRC_URI[sha256sum] =3D "829378f318cc008d138a23ca6a9191928ce75344e7e47a2=
+f2c35f4ac82133309"
+>> +SRC_URI[md5sum] =3D "de3c7147a693da6f80eb22f126086a14"
+>> +SRC_URI[sha256sum] =3D "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182a=
+aec8aad16481fac76"
+>>
+>>  S =3D "${WORKDIR}/NetworkManager-${PV}"
+>>
+>> @@ -49,6 +44,7 @@ EXTRA_OECONF =3D " \
+>>      --disable-ifcfg-rh \
+>>      --disable-ifnet \
+>>      --disable-ifcfg-suse \
+>> +    --disable-introspection \
+> ^ Why disable introspection?
+>>      --disable-more-warnings \
+>>      --with-iptables=3D${sbindir}/iptables \
+>>      --with-tests \
+>> @@ -73,7 +69,6 @@ PACKAGECONFIG[systemd] =3D " \
+>>  PACKAGECONFIG[bluez5] =3D "--enable-bluez5-dun,--disable-bluez5-dun,blu=
+ez5"
+>>  # consolekit is not picked by shlibs, so add it to RDEPENDS too
+>>  PACKAGECONFIG[consolekit] =3D "--with-session-tracking=3Dconsolekit,,co=
+nsolekit,consolekit"
+>> -PACKAGECONFIG[concheck] =3D "--with-libsoup=3Dyes,--with-libsoup=3Dno,l=
+ibsoup-2.4"
+>>  PACKAGECONFIG[modemmanager] =3D "--with-modem-manager-1=3Dyes,--with-mo=
+dem-manager-1=3Dno,modemmanager"
+>>  PACKAGECONFIG[ppp] =3D "--enable-ppp,--disable-ppp,ppp,ppp"
+>>  # Use full featured dhcp client instead of internal one
+>> @@ -101,6 +96,8 @@ FILES_${PN} +=3D " \
+>>      ${libexecdir} \
+>>      ${libdir}/pppd/*/nm-pppd-plugin.so \
+>>      ${libdir}/NetworkManager/*.so \
+>> +    ${libdir}/NetworkManager/VPN \
+>> +    ${libdir}/NetworkManager/conf.d \
+>>      ${datadir}/polkit-1 \
+>>      ${datadir}/dbus-1 \
+>>      ${base_libdir}/udev/* \
+>> --
+>> 2.11.0
+>>
+Just build tested this patch: It breaks networkmanager-applet. From
+the first glance it seems error is caused by missing introspection -
+but I have to update nm-applet to check further.
 
-Off-Topic:
-Today I changed to master builds and started fixing the patch-fuzz-thingy.
-
-* Thanks for doing that
-* This is a perfect advertisement for devtool - have not yet used
-before. Am not sure if I am going to use that for daily recipe
-handling but for this task it is VERY helpful. Together with with git
-add -p the diff can be kept readable. There are two 'bugs' I found:
-
-1. If I am not mistaken it creates wrong file path when using
-'patchdir' - sorry but I forgot where it was
-2. An interesting case is mariadb-native/fix-cmake-module-path.patch
-(current meta-openembedded master / meta-oe): Although the patch moves
-just one line, devtool creates a heavy monster diff - have no idea why
+Suggestion: I take care of nm-applet-update/introspection (based on
+this patch - or do you have V2 close to send?)  and you (and/or Khem)
+take care of musl?
 
 Andreas
 
