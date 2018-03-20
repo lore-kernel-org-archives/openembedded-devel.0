@@ -1,24 +1,38 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E0976E5CB
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 70A0460721
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 10:58:32 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	20 Mar 2018 03:58:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,335,1517904000"; d="scan'208";a="43635906"
-Received: from rlin98-mobl1.gar.corp.intel.com (HELO
-	anmitta2-MOBL1.gar.corp.intel.com) ([10.255.138.18])
-	by orsmga002.jf.intel.com with ESMTP; 20 Mar 2018 03:58:33 -0700
-From: Anuj Mittal <anuj.mittal@intel.com>
+	Tue, 20 Mar 2018 13:06:24 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id n12so1443760qtl.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Mar 2018 06:06:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=29c1O5GDFF3/bm0bikFBGrQe0f3byjdxZicRHUn+Wfs=;
+	b=j90WgT/xzxqGnjI5xaeCXSzUV14yk4BqIMi5P14L10JJx6TKLx/cwtgczkGyO3wAeQ
+	16JBhlGyhItzhTi0nYmnLpgikhANfHgkL3ftqcgUS20jkCKe3obXY+kagdd1oDCGF4JL
+	3yzr8/j/t0y1gkP3f64uVstoaIfXMcJjeZgIExvltyDvk7WPCaPkFhNHDQxjClbQ4vpR
+	GzsnfGKxFZBUBC24AfTVYD/ziZbiK6OEEq8wsJeODqwu9cioc0PdwW//i0HkppLzKX66
+	EaF/k8tKaEbvMDnQEmoDEzU7czdnDxOIEPW4jU0WhQiCZlxrW0gDUJeXXXen2SmSoFMr
+	93JA==
+X-Gm-Message-State: AElRT7FgtnpDQYxa7EvtHT1f6pBvkl6abN8/eh/jjMvAglbJCsT801oe
+	MhWdf3hIuDdGXxAI8LR0DFIXUZ1l
+X-Google-Smtp-Source: AG47ELtWwolcjPvSqD8+bSuTIqN+SWMUPJQCrtQZIV3Fwd6h5HBEnNKKQp5beoZ/1dBQsKtR87+dxg==
+X-Received: by 10.237.52.103 with SMTP id w94mr23380631qtd.218.1521551184539; 
+	Tue, 20 Mar 2018 06:06:24 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	v56sm1214433qtc.20.2018.03.20.06.06.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 20 Mar 2018 06:06:23 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Mar 2018 18:58:24 +0800
-Message-Id: <1521543504-28155-1-git-send-email-anuj.mittal@intel.com>
+Date: Tue, 20 Mar 2018 09:06:03 -0400
+Message-Id: <1521551163-29634-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] phoronix-test-suite: upgrade 7.4.0 -> 7.8.0
+Subject: [meta-python][PATCH] python-pytz: Add dependency on pickle
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2018 10:58:33 -0000
+X-List-Received-Date: Tue, 20 Mar 2018 13:06:24 -0000
 
-List of changes here:
-
-https://github.com/phoronix-test-suite/phoronix-test-suite/blob/master/ChangeLog
-
-Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{phoronix-test-suite_7.4.0.bb => phoronix-test-suite_7.8.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-benchmark/phoronix-test-suite/{phoronix-test-suite_7.4.0.bb => phoronix-test-suite_7.8.0.bb} (89%)
+ meta-python/recipes-devtools/python/python-pytz.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.4.0.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
-similarity index 89%
-rename from meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.4.0.bb
-rename to meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
-index 3ccd5db..b205821 100644
---- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.4.0.bb
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SECTION = "console/tests"
- 
- SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
--SRC_URI[md5sum] = "86fa3eede43ffff88992fe21368b11b7"
--SRC_URI[sha256sum] = "de9aec3ef4f980581756fd0bf7b30dd1ccb20e7aae637078a587606bf75a6b67"
-+SRC_URI[md5sum] = "850843bd9252823e7e24bc0849773000"
-+SRC_URI[sha256sum] = "cd6c869841f28e4ac1e8a5e4cda05fafce9a523a6b4f0f3a47805efd30494d88"
- 
- S = "${WORKDIR}/phoronix-test-suite"
- 
+diff --git a/meta-python/recipes-devtools/python/python-pytz.inc b/meta-python/recipes-devtools/python/python-pytz.inc
+index 1390b91..979faa6 100644
+--- a/meta-python/recipes-devtools/python/python-pytz.inc
++++ b/meta-python/recipes-devtools/python/python-pytz.inc
+@@ -12,6 +12,7 @@ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-datetime \
+     ${PYTHON_PN}-doctest \
+     ${PYTHON_PN}-io \
++    ${PYTHON_PN}-pickle \
+     ${PYTHON_PN}-pprint \
+     ${PYTHON_PN}-threading \
+ "
 -- 
 2.7.4
 
