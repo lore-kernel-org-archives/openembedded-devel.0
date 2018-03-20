@@ -1,29 +1,24 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FD036060F
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E0976E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 10:24:41 +0000 (UTC)
+	Tue, 20 Mar 2018 10:58:32 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	20 Mar 2018 03:24:43 -0700
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	20 Mar 2018 03:58:34 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,334,1517904000"; d="scan'208";a="43629867"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
-	([10.237.68.161])
-	by orsmga002.jf.intel.com with ESMTP; 20 Mar 2018 03:24:42 -0700
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20180319202911.30760-1-schnitzeltony@gmail.com>
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <6d77f84f-1808-b929-7719-7fef10bc11b4@linux.intel.com>
-Date: Tue, 20 Mar 2018 12:18:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
-MIME-Version: 1.0
-In-Reply-To: <20180319202911.30760-1-schnitzeltony@gmail.com>
-Subject: Re: [PATCH 00/17] remove gnome2 recipes for discontinued projects
+X-IronPort-AV: E=Sophos;i="5.48,335,1517904000"; d="scan'208";a="43635906"
+Received: from rlin98-mobl1.gar.corp.intel.com (HELO
+	anmitta2-MOBL1.gar.corp.intel.com) ([10.255.138.18])
+	by orsmga002.jf.intel.com with ESMTP; 20 Mar 2018 03:58:33 -0700
+From: Anuj Mittal <anuj.mittal@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 20 Mar 2018 18:58:24 +0800
+Message-Id: <1521543504-28155-1-git-send-email-anuj.mittal@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] phoronix-test-suite: upgrade 7.4.0 -> 7.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,17 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2018 10:24:42 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 20 Mar 2018 10:58:33 -0000
 
-On 03/19/2018 10:28 PM, Andreas Müller wrote:
-> I can't stand the low-quality/split/maintainer-spam anymore: Guys one way to
-> change things is start sending patches.
+List of changes here:
 
-Yes, yes, yes. And yes. Even more could be removed, e.g. libunique and 
-everything that wants it. I'll look when I have a bit of time.
+https://github.com/phoronix-test-suite/phoronix-test-suite/blob/master/ChangeLog
 
-Alex
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+---
+ .../{phoronix-test-suite_7.4.0.bb => phoronix-test-suite_7.8.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-benchmark/phoronix-test-suite/{phoronix-test-suite_7.4.0.bb => phoronix-test-suite_7.8.0.bb} (89%)
+
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.4.0.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
+similarity index 89%
+rename from meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.4.0.bb
+rename to meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
+index 3ccd5db..b205821 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.4.0.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SECTION = "console/tests"
+ 
+ SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
+-SRC_URI[md5sum] = "86fa3eede43ffff88992fe21368b11b7"
+-SRC_URI[sha256sum] = "de9aec3ef4f980581756fd0bf7b30dd1ccb20e7aae637078a587606bf75a6b67"
++SRC_URI[md5sum] = "850843bd9252823e7e24bc0849773000"
++SRC_URI[sha256sum] = "cd6c869841f28e4ac1e8a5e4cda05fafce9a523a6b4f0f3a47805efd30494d88"
+ 
+ S = "${WORKDIR}/phoronix-test-suite"
+ 
+-- 
+2.7.4
+
 
