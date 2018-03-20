@@ -1,38 +1,42 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 36FA578998
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 4695678966
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 14:04:58 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id b198so1711386qkg.9
+	Tue, 20 Mar 2018 14:07:22 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1521554844; h=Content-Type: To: Subject: Message-ID: Date:
+	From: References: In-Reply-To: MIME-Version: Sender;
+	bh=LdD+UwxK3jGoef5Z93xco+KC6K9oF3L6QzXnfGI8FyA=;
+	b=fHc2h2MmgDW42/PL6PrauncbjcM4CBTb0YPlxzoBxTtzFA5hCUT4CiYknDjB+j268Dw68lJb
+	7IKio5cme//9VP52lapdb/WIVjQwbXKjvrocnwmXE3Z0c1Lrb2q322PH09cg/Ve9SQ+fUgvk
+	7s0i2bs0JiPEkNj37EX8hQ+mR5o=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
+	[209.85.223.174])
+	by mxa.mailgun.org with ESMTP id 5ab1159b.7ff2d830c4f0-smtp-out-n03;
+	Tue, 20 Mar 2018 14:07:23 -0000 (UTC)
+Received: by mail-io0-f174.google.com with SMTP id 141so2470862iou.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Mar 2018 07:05:00 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=X5V6nx9qLH0UrTlBWhfnE3WN2IM78+s2Tz9OyX378PY=;
-	b=bZ9DqwXTFd02aDf+HC1HlUlU7fBGvYqNOY++ZOQKS4F3f0J6M9M2szimaWDGBbAb56
-	0g4+HNBDsxUp+QhXOs0uha0olpwtZFQbDVQw28VQT5UU6Nm+e4LR6Hk0BTf+Z3ArYI5r
-	Y094FIdjODxd5yXGJ3yo3FI8BNRTmV3YzoSwL1xbws2g7ZatQ3edVzUTjThModZPWwU/
-	X3Qlqs+2wx3fotUOitardpW71sfIxnKktyTyzZdEZvH9WFCODBDtbx8B1xoADO/w5jFJ
-	s4RdL84DRbT2MgWhri5BcAxiQvsK8QfrZZZj//nNOesnOHB4jRORStN3qjcJFhkaBT4X
-	d1xA==
-X-Gm-Message-State: AElRT7HMQWGCubzzTbsnzMX/wxCDjSPSE4KcksZs2Lp8mSbH8bHBc4Oa
-	rW5r8p/ypECbzN7+b8AdKbsYjT6b
-X-Google-Smtp-Source: AG47ELttsxr8IEPdG/ack9RY7REgEgXLG2PbfVaz52FS4fFcrM62F1s1yPenJgzfkIFYhm/LCmz7sQ==
-X-Received: by 10.55.133.131 with SMTP id h125mr24279813qkd.79.1521554699495; 
-	Tue, 20 Mar 2018 07:04:59 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	n58sm1295948qta.34.2018.03.20.07.04.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 20 Mar 2018 07:04:58 -0700 (PDT)
+	Tue, 20 Mar 2018 07:07:23 -0700 (PDT)
+X-Gm-Message-State: AElRT7HKIw7nyR9zgWToe6ulvSe6BBuGcn/zuU0NnD8lmBtQp6BiV9Z0
+	rbWM1TUMxGpcA/OylSMHd5HSGCrBiNk9DYI7n/M=
+X-Google-Smtp-Source: AG47ELsxHuAVP1JUnd3rDD/nvIrPI5FRxOdenvdK23TJU41LhqUNBOG1UB80Uyngtxs9TdRFUdKgg9c2hoM3vOXoamg=
+X-Received: by 10.107.36.204 with SMTP id k195mr15954522iok.131.1521554843201; 
+	Tue, 20 Mar 2018 07:07:23 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.140.6 with HTTP; Tue, 20 Mar 2018 07:07:22 -0700 (PDT)
+In-Reply-To: <1521554658-10933-1-git-send-email-derek@asterius.io>
+References: <1521554658-10933-1-git-send-email-derek@asterius.io>
 From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Mar 2018 10:04:52 -0400
-Message-Id: <1521554692-23906-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCHv2] python-attrs: add crypto to the RDEPENDS
+Date: Tue, 20 Mar 2018 10:07:22 -0400
+X-Gmail-Original-Message-ID: <CADNbA1q6z6rAhvCcn8P5Job6kCQM1R2kDuwVRq8JfMRAwMLhWQ@mail.gmail.com>
+Message-ID: <CADNbA1q6z6rAhvCcn8P5Job6kCQM1R2kDuwVRq8JfMRAwMLhWQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH] python-attrs: add logging to the RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Mar 2018 14:04:59 -0000
+X-List-Received-Date: Tue, 20 Mar 2018 14:07:23 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-attrs.inc | 1 +
- 1 file changed, 1 insertion(+)
+Ignore this one.  Commit message fail.
 
-diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
-index 12410bf..360f9c6 100644
---- a/meta-python/recipes-devtools/python/python-attrs.inc
-+++ b/meta-python/recipes-devtools/python/python-attrs.inc
-@@ -9,5 +9,6 @@ SRC_URI[sha256sum] = "1c7960ccfd6a005cd9f7ba884e6316b5e430a3f1a6c37c5f87d8b43f83
- inherit pypi
- 
- RDEPENDS_${PN}_class-target += " \
-+    ${PYTHON_PN}-crypto \
-     ${PYTHON_PN}-ctypes \
- "    
--- 
-2.7.4
+On Tue, Mar 20, 2018 at 10:04 AM, Derek Straka <derek@asterius.io> wrote:
 
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/recipes-devtools/python/python-attrs.inc | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-attrs.inc
+> b/meta-python/recipes-devtools/python/python-attrs.inc
+> index 12410bf..360f9c6 100644
+> --- a/meta-python/recipes-devtools/python/python-attrs.inc
+> +++ b/meta-python/recipes-devtools/python/python-attrs.inc
+> @@ -9,5 +9,6 @@ SRC_URI[sha256sum] = "1c7960ccfd6a005cd9f7ba884e6316
+> b5e430a3f1a6c37c5f87d8b43f83
+>  inherit pypi
+>
+>  RDEPENDS_${PN}_class-target += " \
+> +    ${PYTHON_PN}-crypto \
+>      ${PYTHON_PN}-ctypes \
+>  "
+> --
+> 2.7.4
+>
+>
 
