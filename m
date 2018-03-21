@@ -1,58 +1,57 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f53.google.com (mail-pl0-f53.google.com
-	[209.85.160.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 767A978991
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 23FFD78978
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 14:48:26 +0000 (UTC)
-Received: by mail-pl0-f53.google.com with SMTP id c11-v6so3251589plo.0
+	Wed, 21 Mar 2018 14:49:18 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id j2so2051705pff.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 07:48:28 -0700 (PDT)
+	Wed, 21 Mar 2018 07:49:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-transfer-encoding:content-language;
-	bh=HlgURkU6CZxXDMKP7yQR8xlyrdF7NNkvUk1ZyfW+KrU=;
-	b=MIQKrBxQbIdlKEM9CqoCyTdGD/O3t7tqpQwUWXM8qkCqiL4WMkDnA+YL5O/ydY8qfB
-	3pkohwdYIY7RH0V9BVzdVZzrd+QywbxuZzSKgXa99TkNiTulRg8zAISzHlcgTTB2hR/l
-	3BLjR3o3FUvU72+jgIF6sEV3x6MLIW5xIQKuAodkZG0m/nV/mmNBqXYti6pEY18XMFXp
-	4rSlmgXZon2db23V2UhMNU3o8Nde36tdnQQPpwDw4uybuVpANP9Jz/heMEFuTqjup+hx
-	JjD5lrsYhshQK7bv8hODZpctsu62UP/lm6/JjpYxLMf9L40egYM2AquvY28agTaE5asg
-	3H8g==
+	bh=9+rtJVXm0dT9C3iODtreZF2OVj3OV0qFhvsSDvcQi4Y=;
+	b=G2oLCvhIxDT7xFlT2bPMcDCd+4XgpLFW+yK5gdOfyIzR48kPX05Ls1QIgy2Ga98DM1
+	AZ5/s3diyrGWhRepN0XROAk5tUC8IrIRK6vrvt+LUk710E8eqJXbKzNkiHI86FVUZawb
+	szkm2oXnyanLNPSFY3fDULgTHd4yYJDkQC58XuxI6hiY1ISyV4ZzVj0fPoF9HJHcdVxs
+	2PJjg/dYx1dgY1JNuwTr2U+46dL+HkWXZSZqMWSdlC5hioR1qVESSrohFgc8Zo/Ew6PU
+	edJXC7p1oCk92/PNiV8iOob2tCB4KOYhMGYNBIZaGG2PUOG59qW5EEs118MGUDfIilNL
+	IuUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=HlgURkU6CZxXDMKP7yQR8xlyrdF7NNkvUk1ZyfW+KrU=;
-	b=DZzBduyT6TXGBLvIY/KUk+JyzBZAzspRS8WLQ4h308rgs1N6n/9XhPPNF94JzYZZ3V
-	lBZtBIwVx28Y7YhHWiCpyoPKinGtExykkQQ4Y+n5gCkIW0AVY8TdttYMxvS5ebfB2DoB
-	f7eaIA3pMYBW3moxYJM4WuFnX9be5yWGt4CRhHtuTkjBRYay4k+xPSj+qoKHk2oDNlI3
-	89rNeSI2JOVN7d0PbA6cA1ORoqrC4LOfSkkNQQ4p8jyY0idTIsEQjFWLzSSuXrtYF0cJ
-	AQ4LKNOGQe9Byd6iku792OWdSPeBaM66MatW2YuttMJleAXs63cFpC34ZYGVmLPYFWDl
-	3udg==
-X-Gm-Message-State: AElRT7ELz3nqYpgblWDTyLYZJuRevSXoT1xdr0Ww7I22eWTjughKk7OD
-	XWYtc9/Py9+WTZxXxDl2IO4mUg==
-X-Google-Smtp-Source: AG47ELsse3uk48cpuRa645qFm4hIAeG9NkD2D4CFng/CjlWU+FdGPWeXH9tK+6fdNJuhxVXd6Kg2LA==
-X-Received: by 2002:a17:902:8c96:: with SMTP id
-	t22-v6mr5364082plo.213.1521643708321; 
-	Wed, 21 Mar 2018 07:48:28 -0700 (PDT)
+	bh=9+rtJVXm0dT9C3iODtreZF2OVj3OV0qFhvsSDvcQi4Y=;
+	b=rRrjfW1h1NvsKdnKANJ3oSlKPQOcAIGrmt+yzn2SFcxb2JWqM/tmxKsV6+qR0gNe5W
+	7J9PbuqIVYgSENu4DkBpGpryyoJcKH1VASQ/X22JgmG84o4J4I3f3YjA+T27twS0FMCB
+	wXbiBsPdJHTmGQNClRdSef2tkr6/szlJwsSk1cq2TlAA/J/MN8jCEr405Ffta3UaBhtY
+	KpEK1L08Wk/vS9jU4ItHAYpQezcJ9BvDewi8CQpF4STFOg6lZnR99PrbkdAZcbTB9FMw
+	zGhxWimI1ZoMTN9HKGFrXmBFzzcY1tTmTYQeQsL3evvOudb7LWNShlTnyuLRSARydN9x
+	eH5g==
+X-Gm-Message-State: AElRT7GWvhMLHDaFjikUGB47rn/fyvlPIQ+G0/ZDUGn3rIq7y2hnYGRj
+	O0Ta7izR557gFQOPudrI6GvIWQ==
+X-Google-Smtp-Source: AG47ELt8fivLfMNu61mdQ/cv5tjsSIqO2bzBH7DZIxmPMJlnjfBM+quGbBFXwcxOlrBqaFHe1QuVxw==
+X-Received: by 10.99.178.88 with SMTP id t24mr11580889pgo.212.1521643760067;
+	Wed, 21 Mar 2018 07:49:20 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1184:a1c1:eb3f:f249:aed1?
 	([2601:202:4000:1184:a1c1:eb3f:f249:aed1])
 	by smtp.gmail.com with ESMTPSA id
-	68sm8898475pfx.130.2018.03.21.07.48.27
+	k185sm8224201pgk.94.2018.03.21.07.49.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Mar 2018 07:48:27 -0700 (PDT)
+	Wed, 21 Mar 2018 07:49:19 -0700 (PDT)
 To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>,
 	openembedded-devel@lists.openembedded.org
 References: <1521603377-34881-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<1521603377-34881-7-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<1521603377-34881-11-git-send-email-huangqy.fnst@cn.fujitsu.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <d7e16b7f-ce38-3233-f5b5-746a28a6274f@gmail.com>
-Date: Wed, 21 Mar 2018 07:48:27 -0700
+Message-ID: <0e9a6374-9e23-8775-cf07-49a59a80a793@gmail.com>
+Date: Wed, 21 Mar 2018 07:49:18 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.6.0
 MIME-Version: 1.0
-In-Reply-To: <1521603377-34881-7-git-send-email-huangqy.fnst@cn.fujitsu.com>
-Subject: Re: [meta-python][PATCH] python-cryptography-vectors: 2.1.4 -> 2.2
+In-Reply-To: <1521603377-34881-11-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Subject: Re: [meta-python][PATCH] python-pip: 9.0.1 -> 9.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,73 +64,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 14:48:27 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 14:49:19 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
-
 On 03/20/2018 08:36 PM, Huang Qiyu wrote:
-> Upgrade python-cryptography-vectors from 2.1.4 to 2.2.
+> Upgrade python-pip from 9.0.1 to 9.0.2.
 
-I am seeing:
+Already have an update queued up in stagging/master-next
 
-ERROR: python3-cryptography-vectors-2.1.4-r0 do_fetch: Checksum failure
-fetching
-https://files.pythonhosted.org/packages/source/c/cryptography_vectors/cryptography_vectors-2.1.4.tar.gz
-ERROR: python3-cryptography-vectors-2.1.4-r0 do_fetch: Fetcher failure
-for URL:
-'https://files.pythonhosted.org/packages/source/c/cryptography_vectors/cryptography_vectors-2.1.4.tar.gz'.
-Checksum mismatch!
-File: '/home/akuster/OE/downloads/cryptography_vectors-2.1.4.tar.gz' has
-md5 checksum ef115b870cc8d8b9f0f4189b512bc170 when
-303a08ff50a5590d0ba05252981417ee was expected
-File: '/home/akuster/OE/downloads/cryptography_vectors-2.1.4.tar.gz' has
-sha256 checksum
-78c4b4f3f84853ea5d038e2f53d355229dd8119fe9cf949c3e497c85c760a5ca when
-cf601c7d87ad6a938bcea29062375dce1d3e26dabd1db52bbc37eeaf4aac970d was
-expected
-If this change is expected (e.g. you have upgraded to a new version
-without updating the checksums) then you can use these lines within the
-recipe:
-SRC_URI[md5sum] = "ef115b870cc8d8b9f0f4189b512bc170"
-SRC_URI[sha256sum] =
-"78c4b4f3f84853ea5d038e2f53d355229dd8119fe9cf949c3e497c85c760a5ca"
-Otherwise you should retry the download and/or check with upstream to
-determine if the file has become corrupted or otherwise unexpectedly
-modified.
-
-
-please double check
-
-- armin
 >
 > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 > ---
->  meta-python/recipes-devtools/python/python-cryptography-vectors.inc   | 4 ++--
->  ...yptography-vectors_2.1.4.bb => python-cryptography-vectors_2.2.bb} | 0
->  2 files changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-cryptography-vectors_2.1.4.bb => python-cryptography-vectors_2.2.bb} (100%)
+>  .../python/{python-pip_9.0.1.bb => python-pip_9.0.2.bb}               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-pip_9.0.1.bb => python-pip_9.0.2.bb} (75%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-> index 00bb87b..31461ec 100644
-> --- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-> +++ b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
-> @@ -8,8 +8,8 @@ DEPENDS += " \
->      ${PYTHON_PN}-cryptography \
->  "
+> diff --git a/meta-python/recipes-devtools/python/python-pip_9.0.1.bb b/meta-python/recipes-devtools/python/python-pip_9.0.2.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python-pip_9.0.1.bb
+> rename to meta-python/recipes-devtools/python/python-pip_9.0.2.bb
+> index 5ddd8d5..fa709a1 100644
+> --- a/meta-python/recipes-devtools/python/python-pip_9.0.1.bb
+> +++ b/meta-python/recipes-devtools/python/python-pip_9.0.2.bb
+> @@ -3,8 +3,8 @@ HOMEPAGE = "https://pip.pypa.io/"
+>  LICENSE = "MIT & LGPL-2.1"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=25fba45109565f87de20bae85bc39452"
 >  
-> -SRC_URI[md5sum] = "ef115b870cc8d8b9f0f4189b512bc170"
-> -SRC_URI[sha256sum] = "78c4b4f3f84853ea5d038e2f53d355229dd8119fe9cf949c3e497c85c760a5ca"
-> +SRC_URI[md5sum] = "303a08ff50a5590d0ba05252981417ee"
-> +SRC_URI[sha256sum] = "cf601c7d87ad6a938bcea29062375dce1d3e26dabd1db52bbc37eeaf4aac970d"
+> -SRC_URI[md5sum] = "35f01da33009719497f01a4ba69d63c9"
+> -SRC_URI[sha256sum] = "09f243e1a7b461f654c26a725fa373211bb7ff17a9300058b205c61658ca940d"
+> +SRC_URI[md5sum] = "2fddd680422326b9d1fbf56112cf341d"
+> +SRC_URI[sha256sum] = "88110a224e9d30e5d76592a0b2130ef10e7e67a6426e8617bb918fffbfe91fe5"
 >  
->  PYPI_PACKAGE = "cryptography_vectors"
+>  inherit pypi setuptools
 >  
-> diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.4.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_2.2.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.4.bb
-> rename to meta-python/recipes-devtools/python/python-cryptography-vectors_2.2.bb
 
 
