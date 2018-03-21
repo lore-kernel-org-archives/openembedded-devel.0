@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E0B17899B
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5067178997
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 21:00:34 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id o1so6573662wro.10
+	Wed, 21 Mar 2018 21:00:35 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id o1so6573700wro.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 21 Mar 2018 14:00:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Ziv5J5oPiOKJtn80xfHrIigjZyKH+A6zKYbiEzc2zQk=;
-	b=SFX6kE4+kQLjWd++QoM6LR8dgPBywbX2AnAAk/IfwqY+dV+RBLo7SSEJAxFpnpscUi
-	5SNpz2QdKxFOhBGcxeo5JJ5jWeTC0ljKxpbsVMB3dXvUXDqQqu703t7imbevFNMaBK3P
-	C1A1FDUmcjg44Qqnx4PAPQBzsBkguRWdm4J75FpG2KnOq0JNmEKxsuJ+cnKT87nRVqcM
-	cg8FxzyCPlwDBYbjQCsoo74fSJwLLZ4o5wu1bJsRy/+MTVfkV95p2cBWg5DAtSlmWlqm
-	qqulHRAdxLJ24TiyCRVy/qBMJzJwLEU3adIDftAuNcNa1bOInITWNIe2q/16GBK+tAFF
-	FQfw==
+	bh=CWkFamm5QCOdcaw3aeaP2jAIPyhqsqu8En2tEXQfn08=;
+	b=Ty/mHfLz+aM8OxadkBeWRfARej9diNvfhRPT5z8e8GCNth2Hy6gb5CXnoG5ybQVs1v
+	G0Xb1ovZhmrGWvnWwlRBOgdISEtiVzRZ6GW2G7cImKbICki/YJSDdzH2awf0y1N/qN+Q
+	/g1rAUPgQknipowxEiDHkmz42zr3Jg7d4w+Mk3QW/zMnvnB0Ib8Y5oZiy5b9XZxmW6GH
+	Z3Kr+fiF7myU3QodZSayC8GhXcSRtcZhtb7k/RH1/sTxmjCWUKK98SqQUCfx2JZDZxwp
+	IbF8eOmo1HTnOsNQ9YHcs5//3MKkTgOM2wNa3SP0jZ3mZ+Dd24Rs/BM7qSEGTylocWQO
+	MxXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Ziv5J5oPiOKJtn80xfHrIigjZyKH+A6zKYbiEzc2zQk=;
-	b=ZOb9AFxZG9hbbnSovg5dZq7t/T03c38rPywSYU1Kqz8S2lwaCXryA+K8SoGTKycz2F
-	XT7K2R1C5Bjbr3hbivI+pMgdUVuH0hv/CyodRKeCIZ0cMxl/RlyvW++/ZnLROxQD5XPc
-	18OgQL9l3tuZ43uKm/+xSBPBsX7TKwn/L0AZOIQXUPfykx+j678eJsvjNhNF5AqLXUkX
-	gLGbbM4dEHCDfyX/ajda0etOprwkuII1qwVgfN4+vCARuESnwiuXnjM3NJHvIvVfiU5r
-	OBmi2y0Q01rBJ6k25Fh7TIJ+bmDhIwU6nG7ZckiDtVsmi1OtzhiFOXn29xt/CkwSkxly
-	jQLw==
-X-Gm-Message-State: AElRT7FKn7B65lVaWLeDkrfouqax0VKoyDDmBBJPSbAsNcMLnU/Zoxf/
-	YLEvPC8nhnuQY7v5yZkw0KH1/A==
-X-Google-Smtp-Source: AG47ELv0BDF3xe1QRH4M16NWOump/cbwNZ0bQumPyUDQAn9jQxUpNmYBuB2YIIhaXcya2wy+0oT7dg==
-X-Received: by 10.223.196.132 with SMTP id m4mr19150357wrf.9.1521666035273;
-	Wed, 21 Mar 2018 14:00:35 -0700 (PDT)
+	bh=CWkFamm5QCOdcaw3aeaP2jAIPyhqsqu8En2tEXQfn08=;
+	b=YfOKU0OwIPkU9eaIZybtpvbGk0QyZCciI65beuSfKLDqzWHJ0Ktba9UNGnmfeFXvAF
+	L5locqk0D/D4kp5f3bXqWt4lZe7BkIsJXJ2zyzyGJiZ/sQ5EDuzWI04QPaQyi8n9Lxm+
+	1rJ27T0nqSr9aBCFvi75exqpc+n3Gh7nDcZJn2Yvxp88mOVRGkMUphtjcFtgkdw9n/T1
+	eFCjjDYCli+wYWODA/ldh1YL5N2xO27rcpgu7TSj6cNNCMEUrbSOckVCuxzj9eQqY/Vz
+	00a6BCu0k+5tq0jjipPKu4lKsCRks4RuqC3eBazO3Col2rm+HzsrHBwuQRgr53AHQRhp
+	c85w==
+X-Gm-Message-State: AElRT7FvC3UTKkp6Zq5v0jQPrr5f+6KzjsYojg8LtOdTGDFa7ez/cAO9
+	nG03vALqF10kqAvWTyiV+gtn4Q==
+X-Google-Smtp-Source: AG47ELv1ObHcBfaj7uUii13EPYK/MsIALkwi5Xq5nx4skQIRDbd8ijvALn2k8ea/MVrwxY8CCmxOXA==
+X-Received: by 10.223.184.219 with SMTP id c27mr18994895wrg.30.1521666036064; 
+	Wed, 21 Mar 2018 14:00:36 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC111801E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:1180:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	q21sm5916339wmd.12.2018.03.21.14.00.34
+	q21sm5916339wmd.12.2018.03.21.14.00.35
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 21 Mar 2018 14:00:34 -0700 (PDT)
+	Wed, 21 Mar 2018 14:00:35 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 22:00:20 +0100
-Message-Id: <20180321210022.4682-3-schnitzeltony@gmail.com>
+Date: Wed, 21 Mar 2018 22:00:21 +0100
+Message-Id: <20180321210022.4682-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180321210022.4682-1-schnitzeltony@gmail.com>
 References: <20180321210022.4682-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/5] exo: refresh patches
+Subject: [PATCH 4/5] glmark2: refresh Fix-configure-for-sqrt-check.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,107 +62,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 21:00:34 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 21:00:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-xfce/recipes-xfce/exo/exo/configure.patch      | 20 +++++++++++++++++---
- .../recipes-xfce/exo/exo/exo-no-tests-0.8.patch     | 21 ++++++++++-----------
- .../exo/exo/reduce-build-to-exo-csource-only.patch  |  3 ++-
- 3 files changed, 29 insertions(+), 15 deletions(-)
+ .../files/Fix-configure-for-sqrt-check.patch       | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo/configure.patch b/meta-xfce/recipes-xfce/exo/exo/configure.patch
-index ef27e423b..89cc1f387 100644
---- a/meta-xfce/recipes-xfce/exo/exo/configure.patch
-+++ b/meta-xfce/recipes-xfce/exo/exo/configure.patch
-@@ -1,6 +1,20 @@
----- a/configure.ac	2007-12-02 10:37:06.000000000 -0200
--+++ b/configure.ac	2008-06-05 17:21:42.000000000 -0300
--@@ -127,22 +127,24 @@
-+From 13a74582ffd7f81dbd66a7296fc76007718e9d4d Mon Sep 17 00:00:00 2001
-+From: Andreas Mueller <schnitzeltony@gmx.de>
-+Date: Mon, 1 Aug 2011 17:16:29 +0200
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+diff --git a/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch b/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch
+index fde82381d..7de05ee58 100644
+--- a/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch
++++ b/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch
+@@ -1,13 +1,21 @@
+-Index: git/wscript
+-===================================================================
+---- git.orig/wscript	2016-07-29 13:15:44.954249796 -0500
+-+++ git/wscript	2016-07-29 15:52:06.196768865 -0500
+-@@ -90,7 +90,7 @@
+-         ctx.check_cxx(lib = lib, uselib_store = uselib)
++From 9fb298c398f88a63d71432be1410d52fae089063 Mon Sep 17 00:00:00 2001
++From: Tom Hochstein <tom.hochstein@nxp.com>
++Date: Mon, 8 Aug 2016 11:39:54 -0500
 +
 +---
-+ configure.ac | 34 ++++++++++++++++++----------------
-+ 1 file changed, 18 insertions(+), 16 deletions(-)
++ wscript | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 0de5ceb..3f92d1b 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -143,22 +143,24 @@ AC_FUNC_MMAP()
-  dnl ***************************************
-  dnl *** Check for strftime() extensions ***
-  dnl ***************************************
-diff --git a/meta-xfce/recipes-xfce/exo/exo/exo-no-tests-0.8.patch b/meta-xfce/recipes-xfce/exo/exo/exo-no-tests-0.8.patch
-index ac8bca5f3..348e147cf 100644
---- a/meta-xfce/recipes-xfce/exo/exo/exo-no-tests-0.8.patch
-+++ b/meta-xfce/recipes-xfce/exo/exo/exo-no-tests-0.8.patch
-@@ -1,22 +1,24 @@
--From 5f1e19860d89647488bdd32a02fb332f69434405 Mon Sep 17 00:00:00 2001
-+From 9231a2d5b9c5406f33aef3ab4de2dbec9b08ed13 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
- Date: Fri, 18 May 2012 21:13:00 +0200
- Subject: [PATCH] Do not run tests at build time
- MIME-Version: 1.0
- Content-Type: text/plain; charset=UTF-8
- Content-Transfer-Encoding: 8bit
--Upstream-Status: Not-Applicable
-+
-+Upstream-Status: Inappropriate [embedded specific]
- 
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+
- ---
-- Makefile.am |    3 +--
-- 1 files changed, 1 insertions(+), 2 deletions(-)
-+ Makefile.am | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
- 
- diff --git a/Makefile.am b/Makefile.am
--index 0ab3853..3e72391 100644
-+index 226e79d..62ad18d 100644
- --- a/Makefile.am
- +++ b/Makefile.am
--@@ -8,8 +8,7 @@ SUBDIRS =								\
-+@@ -9,8 +9,7 @@ SUBDIRS =								\
-  	docs								\
-  	icons								\
-  	pixmaps								\
-@@ -24,8 +26,5 @@ index 0ab3853..3e72391 100644
- -	tests
- +	po
++diff --git a/wscript b/wscript
++index ca843f4..eb4a26a 100644
++--- a/wscript
+++++ b/wscript
++@@ -84,7 +84,7 @@ def configure(ctx):
++         ctx.check_cc(lib = lib, uselib_store = uselib)
   
-- AUTOMAKE_OPTIONS =							\
-- 	1.9								\
---- 
--1.7.4.4
--
-+ distclean-local:
-+ 	rm -rf *.cache *~
-diff --git a/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch b/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-index f5c5e8dac..076477581 100644
---- a/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-+++ b/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-@@ -10,9 +10,10 @@ exo-csource creates c-header files from glade resource output files. When
- building xfce-packages from git instead of tarball this exo-csource-native is
- required.
- 
--Upstream-Status: Inappropriate [configuration]
-+Upstream-Status: Inappropriate [embedded specific]
- 
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+
- ---
-  Makefile.am  | 10 +---------
-  configure.ac | 22 ----------------------
+      # Check required functions
+ -    req_funcs = [('memset', 'string.h', []) ,('sqrt', 'math.h', ['m'])]
+ +    req_funcs = [('memset', 'string.h', [])]
+      for func, header, uselib in req_funcs:
+-         ctx.check_cxx(function_name = func, header_name = header,
++         ctx.check_cc(function_name = func, header_name = header,
+                        uselib = uselib, mandatory = True)
 -- 
 2.14.3
 
