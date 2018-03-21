@@ -1,47 +1,48 @@
-Return-Path: <yang.lyu@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C01178963
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 172AF7896C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 11:41:29 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 6AFA81844B
+	Wed, 21 Mar 2018 14:16:15 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id d1so1979850pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:30 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 188k64teblSF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id B455418440
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9B8BB1E09F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 906C81E09B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder03.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-Received: from lnxyangl.se.axis.com (lnxyangl.se.axis.com [10.92.172.14])
-	by thoth.se.axis.com (Postfix) with ESMTP id 849AE1A13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-Received: by lnxyangl.se.axis.com (Postfix, from userid 12173)
-	id 8129F400B5; Wed, 21 Mar 2018 12:41:28 +0100 (CET)
-From: Yang Lyu <yang.lyu@axis.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 12:40:54 +0100
-Message-Id: <1521632454-11233-1-git-send-email-yangl@axis.com>
-X-Mailer: git-send-email 2.1.4
-X-TM-AS-GCONF: 00
-Subject: [meta-oe][PATCH] dbus-broker: Add recipe
+	Wed, 21 Mar 2018 07:16:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=nV8cskB3QKaWvC3yRSiQVZNvHYDjs1EWZT/tawfAu84=;
+	b=COE3sqdDTRqhmQgDMmyKZc5raSwxcfjK/3Z8YO7oEz0ruDRb9mN/iNu3n1h5cjvmZm
+	o8e2l5JL1/s9bIHRhhwiMumrTCKROwYxHQNxKvjC3EDdn5dqYFazVxMYRjoXet2eNe5x
+	JAEk21NCAkReKXdDtohx4Rk12b6AdIr2vqaWTB96StN32b8FB5uHtrYbH4p2RthQ/e01
+	30aUpLyT0Tw3i3HKYamRa7tK2cG2sBRUGnFeLj+uTiO/wH1UxfQXKg9mqpwnOQhgyJxK
+	yWOdIb3s4WxZ37klcT89FzXy1vZFKP1JNqfGqOjZjj6lH5IxR0jeE2qmF0nwWuBwg3S6
+	0jFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=nV8cskB3QKaWvC3yRSiQVZNvHYDjs1EWZT/tawfAu84=;
+	b=oKoOob34+WWRB5Z66I+3yiicB6CO9RckBjOQRNgM5ic5cD9e77ZUcgaQqJBNOz4y5i
+	7pkXfbPpDNrAUXiEfqOKs9Zv5//ucElD4uCQN6iJZZ0pwymW4GTDpYrGMpfo1GiOyjnR
+	gzfQaINbhGasL1Qr73hmvmUnQDiic2mp9+E3Kxbwr/kSv5HLDQ6i1DVrEmY8OzWLRj58
+	KOKSCoPuZfnVdUjPhQbsk3ETxtWd4O9/0aZJyT9G9ou4jstHztg+8anebC4WoaOa+NTF
+	pUBWmJyV9eDQO6UALUhSfKV6Cy2qT5VLLMtzOtghnFOb95DwoSh6i77KVb/ydlLYrTdx
+	T01g==
+X-Gm-Message-State: AElRT7GmmGv+sm7sq/ABa0/fF62UUigs1JgyqnJBCBlLPjMQyWDoLUuy
+	xO4eBN94wo5qiXDY0pJ/Hjc=
+X-Google-Smtp-Source: AG47ELvPpVlyAdZMruBa/ryxIHkkmlNh7sGUNXtPMGSBZgCfcPvYj3+KOQoe3WebHQAris7dNyUi1w==
+X-Received: by 10.99.108.2 with SMTP id h2mr15103716pgc.396.1521641777394;
+	Wed, 21 Mar 2018 07:16:17 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4000:1184:a1c1:eb3f:f249:aed1])
+	by smtp.gmail.com with ESMTPSA id
+	v18sm8138907pgb.23.2018.03.21.07.16.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 21 Mar 2018 07:16:16 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Mar 2018 07:16:12 -0700
+Message-Id: <1521641775-2171-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/4] leveldb: move to recipes-dbs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,136 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 11:41:30 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 14:16:16 -0000
 
-DBus-broker is a drop-in replacement for dbus-daemon. It is an implementation of a message
-bus as defined by the D-Bus specification. Its aim is to provide high performance and
-reliability, while keeping compatibility to the D-Bus reference implementation.
-
-0001-Comment-rst2man-related-stuff.patch avoids using rst2man.
-
-0002-Correct-including-directory-for-conf.patch fixs path computation for <include> node.
-The patch should be dropped when a newer version of dbus-broker that includes commit:
-    https://github.com/bus1/dbus-broker/commit/9af79016f0f6b1ee60779bc6dc4acd7b4b9e6c70
-is available.
-
-Signed-off-by: Yang Lyu <yang.lyu@axis.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../0001-Comment-rst2man-related-stuff.patch       | 34 ++++++++++++++++++++++
- ...0002-Correct-including-directory-for-conf.patch | 25 ++++++++++++++++
- meta-oe/recipes-core/dbus/dbus-broker_git.bb       | 29 ++++++++++++++++++
- 3 files changed, 88 insertions(+)
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker_git.bb
+ .../leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch                | 0
+ .../leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch | 0
+ .../leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch            | 0
+ meta-oe/{recipes-security => recipes-dbs}/leveldb/leveldb_git.bb          | 0
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/{recipes-security => recipes-dbs}/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch (100%)
+ rename meta-oe/{recipes-security => recipes-dbs}/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch (100%)
+ rename meta-oe/{recipes-security => recipes-dbs}/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch (100%)
+ rename meta-oe/{recipes-security => recipes-dbs}/leveldb/leveldb_git.bb (100%)
 
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch b/meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch
-new file mode 100644
-index 0000000..f10c49e
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch
-@@ -0,0 +1,34 @@
-+From a92fd7da3a262e21c0970a3908eb0b4502819a01 Mon Sep 17 00:00:00 2001
-+From: Yang Lyu <yangl@axis.com>
-+Date: Fri, 23 Feb 2018 16:31:49 +0100
-+Subject: [PATCH] Comment rst2man related stuff
-+
-+---
-+ meson.build | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 56d38e4..3c3b109 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -15,7 +15,7 @@ add_project_arguments('-DBINDIR="' + join_paths(get_option('prefix'), get_option
-+ cc = meson.get_compiler('c')
-+ conf = configuration_data()
-+ mod_pkgconfig = import('pkgconfig')
-+-prog_rst2man = find_program('rst2man', 'rst2man.py')
-++#prog_rst2man = find_program('rst2man', 'rst2man.py')
-+ 
-+ sub_cdvar = subproject('c-dvar', version: '>=1')
-+ sub_clist = subproject('c-list', version: '>=3')
-+@@ -56,7 +56,7 @@ endif
-+ 
-+ conf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
-+ 
-+-subdir('docs')
-++#subdir('docs')
-+ subdir('src')
-+ 
-+ if use_launcher
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch b/meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch
-new file mode 100644
-index 0000000..4909dea
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch
-@@ -0,0 +1,25 @@
-+From 4b79f603b948709906c108796087de7b5643f61a Mon Sep 17 00:00:00 2001
-+From: Yang Lyu <yangl@axis.com>
-+Date: Mon, 26 Feb 2018 12:48:34 +0100
-+Subject: [PATCH] Correct including directory for conf
-+
-+---
-+ src/launch/config.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/launch/config.c b/src/launch/config.c
-+index 6a68699..579471b 100644
-+--- a/src/launch/config.c
-++++ b/src/launch/config.c
-+@@ -1022,7 +1022,7 @@ static void config_parser_end_fn(void *userdata, const XML_Char *name) {
-+                                     state->file,
-+                                     state->current->include.selinux_root_relative ?
-+                                         bus_selinux_policy_root() :
-+-                                        state->file->path,
-++                                        NULL,
-+                                     state->current->cdata);
-+                 if (r) {
-+                         state->error = error_trace(r);
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker_git.bb b/meta-oe/recipes-core/dbus/dbus-broker_git.bb
-new file mode 100644
-index 0000000..51dfe8c
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker_git.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "dbus broker"
-+DESCRIPTION = "Drop-in replacement for dbus-daemon."
-+
-+SECTION = "base"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
-+
-+DEPENDS = "dbus glib-2.0 expat systemd"
-+
-+PV = "9+git${SRCPV}"
-+SRCREV = "ccd06b284892182af569e69046262331150e3536"
-+
-+SRC_URI = "git://github.com/bus1/dbus-broker;protocol=git"
-+SRC_URI += "file://0001-Comment-rst2man-related-stuff.patch"
-+SRC_URI += "file://0002-Correct-including-directory-for-conf.patch"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit meson pkgconfig systemd
-+
-+SYSTEMD_SERVICE_${PN} = "${BPN}.service"
-+
-+FILES_${PN} += "${systemd_system_unitdir}"
-+FILES_${PN} += "${systemd_user_unitdir}"
-+
-+RDEPENDS_${PN} = "dbus systemd"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-security/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch b/meta-oe/recipes-dbs/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
+similarity index 100%
+rename from meta-oe/recipes-security/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
+rename to meta-oe/recipes-dbs/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
+diff --git a/meta-oe/recipes-security/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch b/meta-oe/recipes-dbs/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+similarity index 100%
+rename from meta-oe/recipes-security/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+rename to meta-oe/recipes-dbs/leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+diff --git a/meta-oe/recipes-security/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch b/meta-oe/recipes-dbs/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
+similarity index 100%
+rename from meta-oe/recipes-security/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
+rename to meta-oe/recipes-dbs/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
+diff --git a/meta-oe/recipes-security/leveldb/leveldb_git.bb b/meta-oe/recipes-dbs/leveldb/leveldb_git.bb
+similarity index 100%
+rename from meta-oe/recipes-security/leveldb/leveldb_git.bb
+rename to meta-oe/recipes-dbs/leveldb/leveldb_git.bb
 -- 
-2.1.4
+2.7.4
 
 
