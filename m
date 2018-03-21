@@ -1,50 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E856E78968
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f176.google.com (mail-yb0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 3645F7897A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 17:26:09 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id 9-v6so3531418ple.11
+	Wed, 21 Mar 2018 20:28:02 +0000 (UTC)
+Received: by mail-yb0-f176.google.com with SMTP id o197-v6so875222ybg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 10:26:11 -0700 (PDT)
+	Wed, 21 Mar 2018 13:28:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=9VwgefuI3Up8wKdO4LhXs07/R4TkRKozd7OatJNnSIY=;
-	b=WP/TzgWE0sFOx1cjtsuITPyPfyjtRK8wfXSAdQ1LTr6mcSNRGr/9zysXwECBxFmyfn
-	pebRS2f7xtP6Whns6ipz+cla1nEt577GPIOyxaOUanTh9xmMREIxvdKeDYvl3Zrg8QCg
-	5mAQkfmlLD3W/jDW+j9cW2FH4FUmh1U6x2VY8GbfMRTFhdXIlp9hqmrixU0081GMm8pj
-	vj4i8Db+4HLT1gfOdNmalpbsCUow9f5bBcx0mJve2a7HHFTx/z2w7gBNp8O10VTPKOuG
-	l6HpVpIKOmQi34gJFPzd2mEXNfWf8tUsHtol6avSs9V856Si2PRh0NSEfKJhHRUmaYdP
-	SDMw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=BLfiCb5Ml2m5No7gHTKjLcpPTOP8NlI6qpaQbvFJk/4=;
+	b=eJifVPdoQvshVWwux6VyBFiMoD8bgU+UT9dTAnPJm959UkjYU/zZ5Ywj6hCEvxCcZM
+	84UPBbw2yzzKIaBVjoIyQ6iT4xtQh3o8GbENwtqS82dyA3qQYYxxbaUsOAqrPvYpx/6X
+	yFb5oTpTHlqxSIQgJWQt5fn55GYHzjHOV56HTAYgSzz2X764mx7bmilLR4jhdu5qe21K
+	zD6ODnYo9U4jjl0FVcP7AfGcPPnZJTlr2pv/mYSzKyjt5FzzQIEHpyYnnsVBiADaYc9c
+	Hgn6DTUmtSWwhG6PU4fD/t0EI9tRSxDmvTVXLx1sgrg4WdHHagK88DqwAiJFxVtAYExs
+	cEYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=9VwgefuI3Up8wKdO4LhXs07/R4TkRKozd7OatJNnSIY=;
-	b=acKAzDUHlE4FZ2vdcaq/ZuMzW2B58snZBanJ5ugup8/CPm6jc/F72v93bhk/gxl3R6
-	qf8My6wDwh6dSxdzwOSMlm98fyaujqOEDmO/uyWot67VT00lMRwK9eGKS4lbZ+BVBDvv
-	0v/FGVFTn6DOVWuaQLZvwZXYKUH61sQ1pIxgJ7Sw0c0YeMdZGQ0JJXWYz33BQd1/TYOq
-	UyK57EnjgSxlyg32NaD9L8f630iTAIOkHkRE91es6pI+kovA/3CqG9p8QUNAxGb+VDk3
-	XkuYjJzbZplI8lH0ehXRxYyIn6wG7s7LMAs8EZaty44kxcpPbUajcV79vdDUrO7DkpXu
-	v0bw==
-X-Gm-Message-State: AElRT7Ek3tlJ3gl8QKwWoPa5f4doU89KcFVGJaRTO5NHqVJgF9a6HJfS
-	JA8NhovBKKZuj3Eh8L65n3Tiww==
-X-Google-Smtp-Source: AG47ELuvhHzZacFSfLgEb7AB0FWE3lZJX5iiE4N0OGuPx65rDSk2A6A55ywtViG5il3T3oqaU+HQ2Q==
-X-Received: by 2002:a17:902:7185:: with SMTP id
-	b5-v6mr21469239pll.221.1521653170723; 
-	Wed, 21 Mar 2018 10:26:10 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4000:1184:a1c1:eb3f:f249:aed1])
-	by smtp.gmail.com with ESMTPSA id
-	w24sm9595664pfl.14.2018.03.21.10.26.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Mar 2018 10:26:09 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 10:26:08 -0700
-Message-Id: <1521653168-15297-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][v2][PATCH] libxml++2: remove X11 distro check
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=BLfiCb5Ml2m5No7gHTKjLcpPTOP8NlI6qpaQbvFJk/4=;
+	b=GrWx7SwbOXdOMW6nOxI1785/NgAand8sb7lZpf/QBmOBNdgoG8+QEqQsKZHcf95OOc
+	3U1zr7ks6e4SEXcBjplkfd4S0tQzDiPoPpzGn5AMZKeXZRUMw68y2nBrr8Gr3n4WohPb
+	PkzhI8foFljaKOp0DVdKPBwsO7UsA2atQ32LuQNOC1uaom4ZN7UVhZdi7ZyEUdWfkPuG
+	sJXlTYzw5Uhye712xw80vqvYn8DYNn2h0I6RQYBlorDdMPWtJ7oc2o/qSnRUD2SHHC1E
+	T4BMORHw5myd0qhylUgMjLxZ6agaWUG46crwLlhmJGBQk+KvOuuhrqwCDJZF4K2Uthho
+	+8OA==
+X-Gm-Message-State: AElRT7HZ5opiq2D94E4LJ3Mt06Zbig1nKF6x9d4JJFBPMjGJzec2dFfU
+	Mszu2FQ27KULY4gn4dQiNH2Kh7XpayjfORbQQpY=
+X-Google-Smtp-Source: AG47ELtGAIRYUnTgnohWHNsZX5J3bKSBwZjZ6FrtBV5eMKWJiHzFDSvsxh/ks8dKPHZSctvMZdCSvCMgmflxZEVYebg=
+X-Received: by 2002:a25:d0c6:: with SMTP id
+	h189-v6mr11239995ybg.185.1521664084225; 
+	Wed, 21 Mar 2018 13:28:04 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Wed, 21 Mar 2018 13:28:03
+	-0700 (PDT)
+In-Reply-To: <CAC-M0MJn=c00dS1ZFMSjMzK58grbuMtiPq1PMqW8DUVZHA+pMg@mail.gmail.com>
+References: <CAC-M0MJn=c00dS1ZFMSjMzK58grbuMtiPq1PMqW8DUVZHA+pMg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 21 Mar 2018 21:28:03 +0100
+Message-ID: <CALbNGRSvE2u_7o=Xq_=Ak+sZu5u6kTZJwh9D_xRGHjPP-F9=Wg@mail.gmail.com>
+To: hunter hu <hunterhu.ca@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-xfce question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,34 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 17:26:10 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 20:28:03 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-looks like its not needed.
+On Wed, Mar 21, 2018 at 8:50 PM, hunter hu <hunterhu.ca@gmail.com> wrote:
+> Hi Andreas,
+>
+> How are you? I have a quick question about meta-xfce layer.
+>
+> After adding the meta-xfce layer into my Yocto build, building the
+> core-image-minimal-xfce image, loading it on my device and booting it up, I
+> am still facing a console login window, after logged in with root, I am
+> still ended up at the cmd line interface.  Tried startx command, but failed
+> too.
+>
+> How do I make the image boot into the xfce UI desktop env from here?
+>
+> Thank you for your help,
+> Hunter
+>
+Hi Hunter,
 
-V2]
-remove distro_features_check
+First of all: please no private emails - if somebody else has same
+problem, I have to answer again (so I added meta-oe lo CC)
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-core/libxml/libxml++_2.40.1.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+I see the following options:
 
-diff --git a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
-index c3d647c..c001c18 100644
---- a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
-+++ b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
-@@ -16,9 +16,7 @@ SRC_URI[sha256sum] = "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f3
- 
- DEPENDS = "libxml2 glibmm"
- 
--inherit distro_features_check autotools pkgconfig ptest
--
--REQUIRED_DISTRO_FEATURES = "x11"
-+inherit autotools pkgconfig ptest
- 
- do_compile_ptest() {
-   oe_runmake -C examples buildtest
--- 
-2.7.4
+* enter startxfce from console (disadvantage: you are still root
+operator and dbus connections are blocked as root so there might be
+issues)
+* add a display manager (e.g lxdm) to your image. That does the job
+for you to select/login an unprivileged user (you might need to create
+one)
+* I bet there is some headless manager/script available doing the
+(auto)login stuff. I don't know such because I am always using  lxdm
+(or sddm from meta-qt5-extra).
 
+Hope that helps
+
+Andreas
 
