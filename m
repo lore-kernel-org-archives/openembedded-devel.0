@@ -1,50 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A47FB787F8
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 46A7260807
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 17:03:07 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id z12so5944585wrg.4
+	Wed, 21 Mar 2018 17:03:41 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id f19so11097541wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 10:03:09 -0700 (PDT)
+	Wed, 21 Mar 2018 10:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fu9MZgZ6P1ZvOICjtG79wBCJNiAsZwG6Hou1Gp5omiY=;
-	b=j1v81wRPoUmA5EIia+vO7mDWe0YSa2Rd2QrGoxZ7kX6u09Wan9fG948W3Fd64zv/+w
-	f9TRdj/SBmlnKpMNIxD7rYWB+BdJ0wVsGVe4QTMFZ8dP0AlfQeiHIuD232pbZ6U07X/l
-	fXjoiO+B1k9Kr74EymWSVtg55V+B2ujgITi6xunOQghfMYQTmMHPCxafqiNhQnrstbuG
-	WTS4wMPGY5vQa4Fyds/LJBoHPPyKCedw1JI0E00L3Pn41FLmyYXgskGzuiWV08cz9syz
-	rtO62ij0j7X2ZpUoEDF+6ATGfW2AAD3nuKHQki2J3vPnatHdZAfOGY8R7EmR6d62+XGA
-	T/9Q==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=DmGyIwH06xcMbwQLj+hbat1phNoxpWKIdb6y4MsZvLc=;
+	b=EYInTobawnxdtBhZ5IjTmcSlLlL9JbtOfifd98CIBCRHBg7EmZg7WWettyZWqQBDgs
+	KAdExKw2p2UXgTWp5E0b3cPNyNBGn+3m+BV4kUPwHCkIEPOYAhOtAsiQiAjA/m5va1n8
+	mqFagg8vK7YuSt5jTdcG/+MgQMee0LZlrxrolSwPA7LKYNKKuu4jK556Xyp5z2eFDcbN
+	k6dNdOHoW8aZhMxii8gJjteTSpt/3Phdln/qpDcIyFnfF/oUs50n6upA6rsVeCU0CH89
+	eQGyxydEGDAbFaUPVYD0yh4bNbF5llgh+nraG7PjFbmUY4h302INo61RM8E/mNr/XFVb
+	+rwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=fu9MZgZ6P1ZvOICjtG79wBCJNiAsZwG6Hou1Gp5omiY=;
-	b=ZJ29uE5a/xdt/i1WiybmKXn3kXz/GK/x+dgE4v39sXvdZvl2ngeFabzj0vWz+2mb9C
-	ZP4sYRIk7E6VU47PNAxev8XNqnIB2/aUOE4RwV8KTRf99jz5+Kmm0rNf5/WU2zEVyhO6
-	ou1/fqBPrp0/jaHw7WH05CG69VNaQkcii4VWtapCTXxZiplNFxf9BxsYsYtfbDlEiBhL
-	wT6lhAj0fGBkSv+zS2yy/9AbgMoacFRfzFpBipuRsXRWIb/1guZUMQBFZCOZ5KBXg0bf
-	RGw5PSqa4HYL01CEBvVWLGxz6a5Dedw00Xynpsq9K9uFLJ2ik+GwgLifb+qKXxG99wUX
-	yO9A==
-X-Gm-Message-State: AElRT7FXO68TQy/sCUwQuD74oSwju2sdFmMHLRAzdpEnWYJqH6l/fift
-	jFNCS0+X+Mqu+Ofc8qyYdCCHHQ==
-X-Google-Smtp-Source: AG47ELuZKy1UaHCMjRoFohmxcwld9RtXr9c5YnjUgFIczz6HTBbKuBATTuToyX92hmRdH/0mjFlzEQ==
-X-Received: by 10.223.172.226 with SMTP id o89mr5289789wrc.264.1521651788171; 
-	Wed, 21 Mar 2018 10:03:08 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 95sm4599437wrb.47.2018.03.21.10.03.07
+	:references:mime-version:content-transfer-encoding;
+	bh=DmGyIwH06xcMbwQLj+hbat1phNoxpWKIdb6y4MsZvLc=;
+	b=tOkavNO89aOW5T7I+ZVChMXJRzjBEEmc8RsSdsvpTllz132UOPxtrdm8rYzGhgvVPa
+	FtYCUhCM5rnqniUIoAGAkf9WuiEW/UB5qSmzpeEjjhS0RkCLv/8wASzJ+/pDh2s3Otzf
+	zqYhBwEfdzMvBqg5DCgSp6xmh5SGr4fP7M/HBQsKcDtdCqwjLrpbXgrbZXD0Mp1JZuVr
+	+cMpi9z9KmmswB1tCOxb/2Zi2d13xlbSXt8JSz8N3FBwpcC/y+fN7tCmqcCMfMGORagn
+	q4eEt5YDOwCqQkG5BwBVgBwbUiDX0cS1Id/pvpLIhdnjUe2qce/5RtT7fJ+RStGKJP1E
+	ThSQ==
+X-Gm-Message-State: AElRT7HQey/fX1ZONIpxZhh0edhwcWp15TBMsP16X60Odkd5elnHWg+h
+	m5sPFIGcgXW3Xvg+vBNSWxd5IA==
+X-Google-Smtp-Source: AG47ELuQRr7P9QN342xo9WiBVtJL/IijkVsFGuA9itE1jefFYKXRO+40L4yf1XUuH+KzepDVXJUxCA==
+X-Received: by 10.28.232.200 with SMTP id f69mr3170929wmi.32.1521651821742;
+	Wed, 21 Mar 2018 10:03:41 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	b13sm3484342wmi.42.2018.03.21.10.03.40
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 21 Mar 2018 10:03:07 -0700 (PDT)
+	Wed, 21 Mar 2018 10:03:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 17:03:06 +0000
-Message-Id: <20180321170306.5607-1-Martin.Jansa@gmail.com>
+Date: Wed, 21 Mar 2018 17:03:40 +0000
+Message-Id: <20180321170340.5668-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.15.1
-In-Reply-To: <CA+chaQdJFduUSaZ=YqBczO9vkUcJpWjM42JUR=sfv2shcouS5g@mail.gmail.com>
-References: <CA+chaQdJFduUSaZ=YqBczO9vkUcJpWjM42JUR=sfv2shcouS5g@mail.gmail.com>
-Subject: [meta-oe][PATCHv2 1/4] krb5: refresh patches
+In-Reply-To: <20180321165202.1777-3-Martin.Jansa@gmail.com>
+References: <20180321165202.1777-3-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Subject: [meta-oe][PATCHv2 3/4] mozjs: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,9 +58,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 17:03:07 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 17:03:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-WARNING: krb5-1.16-r0 do_patch:
+WARNING: mozjs-17.0.0-r0 do_patch:
 Some of the context lines in patches were ignored. This can lead to
 incorrectly applied patches.
 The context lines in the patches can be updated with devtool:
@@ -74,145 +77,462 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-Applying patch
-0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-patching file aclocal.m4
-Hunk #1 succeeded at 1679 with fuzz 1 (offset 29 lines).
+Applying patch Manually_mmap_heap_memory_esr17.patch
+patching file js/src/gc/Memory.cpp
+Hunk #1 succeeded at 309 with fuzz 1 (offset 3 lines).
+Hunk #2 succeeded at 391 (offset 3 lines).
 
-Now at patch
-0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+Now at patch Manually_mmap_heap_memory_esr17.patch
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...-Add-parameter-to-disable-keyutils-detection.patch | 19 +++++++++----------
- .../krb5/krb5/crosscompile_nm.patch                   | 19 ++++++++++++-------
- .../krb5/debian-suppress-usr-lib-in-krb5-config.patch | 11 ++++++-----
- meta-oe/recipes-connectivity/krb5/krb5_1.16.bb        |  6 +++---
- 4 files changed, 30 insertions(+), 25 deletions(-)
+ ...-first-character-of-string-to-be-null-or-.patch |  6 ++----
+ ...-not-include-RequiredDefines.h-for-depend.patch | 16 +++++++--------
+ ...ozjs17.0.0-fix-the-compile-bug-of-powerpc.patch | 16 +++++++--------
+ .../mozjs/mozjs/0001-regenerate-configure.patch    |  7 ++-----
+ ...02-Move-JS_BYTES_PER_WORD-out-of-config.h.patch | 11 +++-------
+ .../mozjs/mozjs/0003-Add-AArch64-support.patch     | 24 +++-------------------
+ ...4-mozbug746112-no-decommit-on-large-pages.patch |  9 ++------
+ .../mozjs/mozjs/0005-aarch64-64k-page.patch        |  9 ++------
+ ...010-fix-cross-compilation-on-i586-targets.patch | 10 ++++-----
+ .../mozjs/Manually_mmap_heap_memory_esr17.patch    | 13 +++++-------
+ .../mozjs/fix-the-compile-error-of-powerpc64.patch | 18 +++++++++++-----
+ .../mozjs/mozjs/fix_milestone_compile_issue.patch  | 20 +++++++++++-------
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     | 24 +++++++++++-----------
+ 13 files changed, 75 insertions(+), 108 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-index f0c310c5e8..fe8282eba1 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-@@ -1,18 +1,19 @@
--From ecb62f3467f493cc0d679323f05367eebbf0fb67 Mon Sep 17 00:00:00 2001
-+From 16aaa5ee8b42cf6f628f6ab75fedc738e4d167ca Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Tue, 1 Oct 2013 22:22:57 +0200
- Subject: [PATCH] aclocal: Add parameter to disable keyutils detection
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch
+index 40d646c7df..57c2513492 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch
+@@ -1,4 +1,4 @@
+-From f36c9476d2816e0d3e61c9e13c22ed73883cb54a Mon Sep 17 00:00:00 2001
++From 8bcb42f2ea03e2b002750e5d7c43e7fc3f990e77 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 24 Apr 2017 12:13:43 -0700
+ Subject: [PATCH] compare the first character of string to be null or not
+@@ -10,6 +10,7 @@ error: ISO C++ forbids comparison between pointer and integer [-fpermissive]
+ |                          ^~~~
  
- Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
  ---
-- aclocal.m4 | 4 ++++
-+ src/aclocal.m4 | 4 ++++
-  1 file changed, 4 insertions(+)
- 
--diff --git a/aclocal.m4 b/aclocal.m4
--index 210c473..83b1f02 100644
----- a/aclocal.m4
--+++ b/aclocal.m4
--@@ -1650,11 +1650,15 @@ fi
-+diff --git a/src/aclocal.m4 b/src/aclocal.m4
-+index d6d1279..80ce604 100644
-+--- a/src/aclocal.m4
-++++ b/src/aclocal.m4
-+@@ -1679,12 +1679,16 @@ fi
-  dnl
-  dnl If libkeyutils exists (on Linux) include it and use keyring ccache
-  AC_DEFUN(KRB5_AC_KEYRING_CCACHE,[
-@@ -28,6 +29,4 @@ index 210c473..83b1f02 100644
- +fi
-  ])dnl
-  dnl
+  js/src/shell/jsoptparse.cpp | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+@@ -27,6 +28,3 @@ index b49d0a5..612aa00 100644
+              return error("A value is required for option %.*s", eq - argv[*i], argv[*i]);
+          return Okay;
+      }
 --- 
--1.8.3.2
+-2.12.2
 -
-+ dnl If libkeyutils supports persistent keyrings, use them
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
-index d3e6937515..ddca7090aa 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
-@@ -1,19 +1,24 @@
-+From cbce5720435778296c71811101ac732a833525d6 Mon Sep 17 00:00:00 2001
-+From: Amy Fong <amy.fong@windriver.com>
-+Date: Sun, 28 Sep 2014 05:35:37 -0400
-+Subject: [PATCH] krb5: update to version 1.12.2
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch
+index bc141d9d57..5944e914ac 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch
+@@ -1,4 +1,4 @@
+-From 0a61b0b98c152f10404ccbdeeac583a486638a7a Mon Sep 17 00:00:00 2001
++From a769e603140cd37882a347145d8231d7ca6b8f2c Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+ Date: Thu, 6 Jun 2013 18:36:01 +0200
+ Subject: [PATCH] js.pc.in: do not include RequiredDefines.h for depending
+@@ -16,20 +16,18 @@ and currently it only defines __STDC_LIMIT_MACROS
+ Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +
- Modifies export-check.pl to use look for $ENV{'NM'} before
- defaulting to using 'nm'
+ ---
+- js.pc.in |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
++ js/src/js.pc.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
  
- Upstream-Status: Pending
+-diff --git a/js.pc.in b/js.pc.in
++diff --git a/js/src/js.pc.in b/js/src/js.pc.in
+ index 13d761d..a95a7bd 100644
+---- a/js.pc.in
+-+++ b/js.pc.in
++--- a/js/src/js.pc.in
+++++ b/js/src/js.pc.in
+ @@ -8,4 +8,4 @@ Description: The Mozilla library for JavaScript
+  Version: @MOZILLA_VERSION@
+  Requires.private: @NSPR_PKGCONF_CHECK@
+  Libs: -L${libdir} -l@LIBRARY_NAME@
+ -Cflags: -include ${includedir}/@MODULE@/js/RequiredDefines.h -I${includedir}/@MODULE@
+ +Cflags: -I${includedir}/@MODULE@
+--- 
+-1.7.6.5
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
+index de72d4f9a3..3b96d86407 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
+@@ -1,4 +1,4 @@
+-From da3929a96d9c74e11bf37d128890e18fcb745365 Mon Sep 17 00:00:00 2001
++From e1fe3b4562d07b877fb0168fa351fd4c391f4c28 Mon Sep 17 00:00:00 2001
+ From: Lei Maohui <leimaohui@cn.fujitsu.com>
+ Date: Mon, 26 Jan 2015 08:53:19 +0900
+ Subject: [PATCH] mozjs17.0.0: fix the compile bug of powerpc
+@@ -10,14 +10,15 @@ argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const char**,
+ JSBool, jsval**, __va_list_tag (*)[1])'
  
- Signed-off-by: Amy Fong <amy.fong@windriver.com>
+ Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++
+ ---
+- jscpucfg.h | 6 ++++++
++ js/src/jscpucfg.h | 6 ++++++
+  1 file changed, 6 insertions(+)
+ 
+-diff --git a/jscpucfg.h b/jscpucfg.h
+-index dfb1c14..8683491 100644
+---- a/jscpucfg.h
+-+++ b/jscpucfg.h
++diff --git a/js/src/jscpucfg.h b/js/src/jscpucfg.h
++index 3d2022d..58d3987 100644
++--- a/js/src/jscpucfg.h
+++++ b/js/src/jscpucfg.h
+ @@ -47,6 +47,12 @@
+  #elif defined(JS_HAVE_ENDIAN_H)
+  # include <endian.h>
+@@ -31,6 +32,3 @@ index dfb1c14..8683491 100644
+  # if defined(__BYTE_ORDER)
+  #  if __BYTE_ORDER == __LITTLE_ENDIAN
+  #   define IS_LITTLE_ENDIAN 1
+--- 
+-1.8.4.2
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch
+index fa413ea9f3..befd76534b 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch
+@@ -1,4 +1,4 @@
+-From 6440b4901c6f4bcc69686ff10806e311cc5a927b Mon Sep 17 00:00:00 2001
++From a9ae196db082431155abd64045bea1fce647d0a4 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen.kooi@linaro.org>
+ Date: Tue, 3 Mar 2015 19:12:17 +0800
+ Subject: [PATCH] regenerate configure with autoconf-2.13
+@@ -11,7 +11,7 @@ Upstream-status: Inappropriate [generated file]
+  1 file changed, 389 insertions(+), 449 deletions(-)
+ 
+ diff --git a/js/src/configure b/js/src/configure
+-index cb6b41b..b05298f 100755
++index cb6b41b..d019b0f 100755
+ --- a/js/src/configure
+ +++ b/js/src/configure
+ @@ -5757,6 +5757,10 @@ arm*)
+@@ -3233,6 +3233,3 @@ index cb6b41b..b05298f 100755
+    rm -rf conftest*
+    eval "ac_cv_func_$ac_func=yes"
+  else
+--- 
+-1.9.3
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch b/meta-oe/recipes-extended/mozjs/mozjs/0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch
+index 6aeb2f6836..c924afe933 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch
+@@ -1,15 +1,13 @@
+-From d4a15ad82292ff6d772dcc631df98754d20be31b Mon Sep 17 00:00:00 2001
++From c761d61f7abafdb88d91d14936ccab66c4125529 Mon Sep 17 00:00:00 2001
+ From: Colin Walters <walters@verbum.org>
+ Date: Tue, 18 Mar 2014 11:46:05 -0400
+-Subject: [PATCH 2/5] Move JS_BYTES_PER_WORD out of config.h
++Subject: [PATCH] Move JS_BYTES_PER_WORD out of config.h
+ 
+ Instead define it in terms of the already extant GNU C extension
+ __SIZEOF_POINTER__.  This avoids multiarch conflicts when 32 and 64
+ bit packages of js are co-installed.
 ----
+-
+-Upstream-status: Pending
  
-- export-check.pl |    7 ++++++-
 +---
-+ src/util/export-check.pl | 7 ++++++-
-  1 file changed, 6 insertions(+), 1 deletion(-)
- 
--Index: src/util/export-check.pl
--===================================================================
----- src.orig/util/export-check.pl
--+++ src/util/export-check.pl
--@@ -38,7 +38,12 @@
-+diff --git a/src/util/export-check.pl b/src/util/export-check.pl
-+index eaec7d6..21a2300 100755
-+--- a/src/util/export-check.pl
-++++ b/src/util/export-check.pl
-+@@ -38,7 +38,12 @@ if ($#ARGV != 1) {
-  my($exfile, $libfile) = @ARGV;
+  js/src/configure.in   |  9 ---------
+  js/src/js-config.h.in |  1 -
+  js/src/jstypes.h      | 12 ++++++++++++
+@@ -70,6 +68,3 @@ index d0cf183..3e7928f 100644
   
-  @missing = ();
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch b/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
-index f0182ee5db..de21ae0945 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
-@@ -1,3 +1,6 @@
-+From 044be28e4de2cf6f47c719d1f8fbbfe46d1eac20 Mon Sep 17 00:00:00 2001
-+From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Sun, 28 Sep 2014 05:35:37 -0400
- Subject: [PATCH] debian: suppress /usr/lib in krb5-config
+  /***********************************************************************
+  ** MACROS:      JS_EXTERN_API
+--- 
+-1.9.3
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0003-Add-AArch64-support.patch b/meta-oe/recipes-extended/mozjs/mozjs/0003-Add-AArch64-support.patch
+index 6e724292a4..2eb7da138b 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0003-Add-AArch64-support.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0003-Add-AArch64-support.patch
+@@ -1,16 +1,13 @@
+-From 15e710e331d36eb279852b5cd1ba37a9a6005217 Mon Sep 17 00:00:00 2001
++From ff05c95e1cb28e01683dcf0ff17792b6b6564a9e Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen.kooi@linaro.org>
+ Date: Mon, 2 Mar 2015 19:08:22 +0800
+-Subject: [PATCH 3/5] Add AArch64 support
++Subject: [PATCH] Add AArch64 support
  
- Upstream-Status: Pending
-@@ -7,9 +10,10 @@ Handel multi-arch suppressions
- The patch is from debian.
+ ---
+-Upstream-status: Pending
+-
+  js/src/assembler/jit/ExecutableAllocator.h | 6 ++++++
+  js/src/assembler/wtf/Platform.h            | 4 ++++
+  js/src/configure.in                        | 4 ++++
+- mfbt/double-conversion/utils.h             | 1 +
+- 4 files changed, 15 insertions(+)
++ 3 files changed, 14 insertions(+)
  
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+ diff --git a/js/src/assembler/jit/ExecutableAllocator.h b/js/src/assembler/jit/ExecutableAllocator.h
+ index c071c33..90764c3 100644
+@@ -59,18 +56,3 @@ index 64c7606..0673aca 100644
+  mips|mipsel)
+      CPU_ARCH="mips"
+      ;;
+-diff --git a/mfbt/double-conversion/utils.h b/mfbt/double-conversion/utils.h
+-index 0eec2d9..fe26dab 100644
+---- a/mfbt/double-conversion/utils.h
+-+++ b/mfbt/double-conversion/utils.h
+-@@ -58,6 +58,7 @@
+-     defined(__mips__) || defined(__powerpc__) || \
+-     defined(__sparc__) || defined(__sparc) || defined(__s390__) || \
+-     defined(__SH4__) || defined(__alpha__) || \
+-+    defined(__aarch64__) || \
+-     defined(_MIPS_ARCH_MIPS32R2)
+- #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
+- #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
+--- 
+-1.9.3
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0004-mozbug746112-no-decommit-on-large-pages.patch b/meta-oe/recipes-extended/mozjs/mozjs/0004-mozbug746112-no-decommit-on-large-pages.patch
+index 8bd35d4055..cec3ab2f09 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0004-mozbug746112-no-decommit-on-large-pages.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0004-mozbug746112-no-decommit-on-large-pages.patch
+@@ -1,11 +1,9 @@
+-From 0128c5a9eeee0d3fc0deb9129dd20eb79338c8f4 Mon Sep 17 00:00:00 2001
++From 3ac9060a11eedc6b3911fd9f322956f66101d822 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen.kooi@linaro.org>
+ Date: Mon, 2 Mar 2015 19:08:59 +0800
+-Subject: [PATCH 4/5] mozbug746112-no-decommit-on-large-pages
++Subject: [PATCH] mozbug746112-no-decommit-on-large-pages
+ 
+ ---
+-Upstream-status: Pending
+-
+  js/src/gc/Heap.h | 15 ++++++++++-----
+  js/src/jsgc.cpp  | 15 ++++++++++++---
+  2 files changed, 22 insertions(+), 8 deletions(-)
+@@ -98,6 +96,3 @@ index b3caf05..a258d2d 100644
+              }
+  
+              if (ok) {
+--- 
+-1.9.3
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0005-aarch64-64k-page.patch b/meta-oe/recipes-extended/mozjs/mozjs/0005-aarch64-64k-page.patch
+index bc99ecc504..697d883b15 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0005-aarch64-64k-page.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0005-aarch64-64k-page.patch
+@@ -1,11 +1,9 @@
+-From 9c42920c2b635a399bd1f93833efdeb1696f17ee Mon Sep 17 00:00:00 2001
++From 84b397dc54028a4f00b93e111b11b69508ef8a42 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen.kooi@linaro.org>
+ Date: Mon, 2 Mar 2015 19:09:57 +0800
+-Subject: [PATCH 5/5] aarch64-64k-page
++Subject: [PATCH] aarch64-64k-page
+ 
+ ---
+-Upstream-status: Pending
+-
+  js/src/gc/Heap.h     | 2 +-
+  js/src/gc/Memory.cpp | 3 +++
+  2 files changed, 4 insertions(+), 1 deletion(-)
+@@ -39,6 +37,3 @@ index 5b386a2..e5ad018 100644
+  }
+  
+  void *
+--- 
+-1.9.3
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch b/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
+index 6432e1fb7b..b0551cafdf 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compilation-on-i586-targets.patch
+@@ -1,4 +1,4 @@
+-From a452138a1dd274bfad381a701729783360dc86fb Mon Sep 17 00:00:00 2001
++From 36832b5fafcf8014c7be516e5f7e5b6f1f6c86de Mon Sep 17 00:00:00 2001
+ From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+ Date: Tue, 5 Jan 2016 22:04:17 +0100
+ Subject: [PATCH] fix cross compilation on i586 targets
+@@ -10,13 +10,14 @@ regenerate configure, similar fix is applied there.
+ Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
 +
  ---
-- src/build-tools/krb5-config.in |   14 +++++++++-----
-- 1 files changed, 9 insertions(+), 5 deletions(-)
-+ src/build-tools/krb5-config.in | 14 +++++++++-----
-+ 1 file changed, 9 insertions(+), 5 deletions(-)
+  js/src/configure    | 2 +-
+  js/src/configure.in | 2 +-
+  2 files changed, 2 insertions(+), 2 deletions(-)
  
- diff --git a/src/build-tools/krb5-config.in b/src/build-tools/krb5-config.in
- index f6184da..637bad7 100755
-@@ -43,6 +47,3 @@ index f6184da..637bad7 100755
-      # Ugly gross hack for our build tree
-      lib_flags=`echo $CC_LINK | sed -e 's/\$(CC)//' \
-  	    -e 's/\$(PURE)//' \
+ diff --git a/js/src/configure b/js/src/configure
+-index d019b0fdba44233596541de94307010d85a8e32e..5aa40f757a3dbb7d6887175046f44212c15c2eac 100755
++index d019b0f..5aa40f7 100755
+ --- a/js/src/configure
+ +++ b/js/src/configure
+ @@ -5555,7 +5555,7 @@ TARGET_MD_ARCH=unix
+@@ -29,7 +30,7 @@ index d019b0fdba44233596541de94307010d85a8e32e..5aa40f757a3dbb7d6887175046f44212
+  MOZ_COMPONENT_NSPR_LIBS='-L$(LIBXUL_DIST)/bin $(NSPR_LIBS)'
+  
+ diff --git a/js/src/configure.in b/js/src/configure.in
+-index 0673aca12f6d83035549ade2a4a83906bf91f0f0..39b22724f9535ac1a6dba04658c91e4ef667fc47 100644
++index 0673aca..39b2272 100644
+ --- a/js/src/configure.in
+ +++ b/js/src/configure.in
+ @@ -919,7 +919,7 @@ TARGET_MD_ARCH=unix
+@@ -41,6 +42,3 @@ index 0673aca12f6d83035549ade2a4a83906bf91f0f0..39b22724f9535ac1a6dba04658c91e4e
+  
+  MOZ_COMPONENT_NSPR_LIBS='-L$(LIBXUL_DIST)/bin $(NSPR_LIBS)'
+  
 --- 
--1.7.1
+-2.5.0
 -
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
-index 80bc8afe94..f8eb0ec50b 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
-@@ -21,9 +21,9 @@ inherit autotools-brokensep binconfig perlnative systemd update-rc.d
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/Manually_mmap_heap_memory_esr17.patch b/meta-oe/recipes-extended/mozjs/mozjs/Manually_mmap_heap_memory_esr17.patch
+index 15ad03f712..94263764b7 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/Manually_mmap_heap_memory_esr17.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/Manually_mmap_heap_memory_esr17.patch
+@@ -1,4 +1,4 @@
+-From a0c0f32299419359b44ac0f880c1ea9073ae51e1 Mon Sep 17 00:00:00 2001
++From 342b53645b57a10e57f4db8ed181118d43e34735 Mon Sep 17 00:00:00 2001
+ From: Zheng Xu <zheng.xu@linaro.org>
+ Date: Fri, 2 Sep 2016 17:40:05 +0800
+ Subject: [PATCH] Bug 1143022 - Manually mmap on arm64 to ensure high 17 bits
+@@ -16,11 +16,11 @@ Upstream-status: Backport
+  1 file changed, 71 insertions(+), 2 deletions(-)
  
- SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
--           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
--           file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
--           file://crosscompile_nm.patch \
-+           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch;patchdir=..\
-+           file://debian-suppress-usr-lib-in-krb5-config.patch;patchdir=.. \
-+           file://crosscompile_nm.patch;patchdir=.. \
-            file://etc/init.d/krb5-kdc \
-            file://etc/init.d/krb5-admin-server \
-            file://etc/default/krb5-kdc \
+ diff --git a/js/src/gc/Memory.cpp b/js/src/gc/Memory.cpp
+-index 5b386a2..38101cf 100644
++index e5ad018..4149adf 100644
+ --- a/js/src/gc/Memory.cpp
+ +++ b/js/src/gc/Memory.cpp
+-@@ -306,6 +306,75 @@ InitMemorySubsystem()
+-         MOZ_CRASH();
++@@ -309,6 +309,75 @@ InitMemorySubsystem()
++ #endif
+  }
+  
+ +static inline void *
+@@ -95,7 +95,7 @@ index 5b386a2..38101cf 100644
+  void *
+  MapAlignedPages(size_t size, size_t alignment)
+  {
+-@@ -319,12 +388,12 @@ MapAlignedPages(size_t size, size_t alignment)
++@@ -322,12 +391,12 @@ MapAlignedPages(size_t size, size_t alignment)
+  
+      /* Special case: If we want page alignment, no further work is needed. */
+      if (alignment == PageSize) {
+@@ -110,6 +110,3 @@ index 5b386a2..38101cf 100644
+      if (region == MAP_FAILED)
+          return NULL;
+  
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/fix-the-compile-error-of-powerpc64.patch b/meta-oe/recipes-extended/mozjs/mozjs/fix-the-compile-error-of-powerpc64.patch
+index 43c459042b..e957dae107 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/fix-the-compile-error-of-powerpc64.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/fix-the-compile-error-of-powerpc64.patch
+@@ -1,14 +1,22 @@
+-fix the compile error of powerpc64
+- 
++From 848512fea4101057a8dd70e50d05fe480dd8decd Mon Sep 17 00:00:00 2001
++From: Chunrong Guo <B40290@freescale.com>
++Date: Fri, 24 Apr 2015 15:15:12 +0800
++Subject: [PATCH] fix the compile error of powerpc64
++
+ Upstream-status: Accepted
+ 
+  fix the following error
+  |error: 'jsuword' does not name a type
+ 
++---
++ js/src/jsval.h | 1 -
++ 1 file changed, 1 deletion(-)
+ 
+---- a/js/src/jsval.hold	2015-04-24 01:15:06.692970731 -0500
+-+++ b/js/src/jsval.h	2015-04-24 01:15:41.792969478 -0500
+-@@ -304,7 +304,6 @@
++diff --git a/js/src/jsval.h b/js/src/jsval.h
++index a6858ce..187f1b9 100644
++--- a/js/src/jsval.h
+++++ b/js/src/jsval.h
++@@ -304,7 +304,6 @@ typedef union jsval_layout
+              int32_t        i32;
+              uint32_t       u32;
+              JSWhyMagic     why;
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch b/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch
+index abde01bcdb..ef65d65810 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch
+@@ -1,15 +1,21 @@
+-fix the compile error do to perl update
++From 685474734bc1f576b4230fc533457a3c2347cf50 Mon Sep 17 00:00:00 2001
++From: Armin Kuster <akuster808@gmail.com>
++Date: Fri, 10 Jul 2015 20:49:41 -0700
++Subject: [PATCH] fix the compile error do to perl update
+ 
+ Upstream-status: Inappropriate
+ 
+-
+ Signed-of-by: Armin Kuster <akuster808@gmail.com>
+ 
+-Index: src/config/milestone.pl
+-===================================================================
+---- src.orig/config/milestone.pl
+-+++ src/config/milestone.pl
+-@@ -55,7 +55,7 @@ $MILESTONE_FILE  = "$TOPSRCDIR/config/mi
++---
++ js/src/config/milestone.pl | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/js/src/config/milestone.pl b/js/src/config/milestone.pl
++index db3f6dd..49b9568 100644
++--- a/js/src/config/milestone.pl
+++++ b/js/src/config/milestone.pl
++@@ -55,7 +55,7 @@ $MILESTONE_FILE  = "$TOPSRCDIR/config/milestone.txt";
+  #
+  my $milestone = Moz::Milestone::getOfficialMilestone($MILESTONE_FILE);
+  
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+index 49b7f156e1..cea97b2310 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+@@ -4,18 +4,18 @@ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://../../LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+ 
+ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
+-           file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch \
+-           file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
+-           file://0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch;patchdir=../../ \
+-           file://0003-Add-AArch64-support.patch;patchdir=../../ \
+-           file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
+-           file://0005-aarch64-64k-page.patch;patchdir=../../ \
+-           file://0001-regenerate-configure.patch;patchdir=../../ \
+-           file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
+-           file://fix_milestone_compile_issue.patch \
+-           file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
+-           file://Manually_mmap_heap_memory_esr17.patch;patchdir=../../ \
+-           file://0001-compare-the-first-character-of-string-to-be-null-or-.patch;patchdir=../../ \
++           file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch;patchdir=../.. \
++           file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch;patchdir=../.. \
++           file://0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch;patchdir=../.. \
++           file://0003-Add-AArch64-support.patch;patchdir=../.. \
++           file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../.. \
++           file://0005-aarch64-64k-page.patch;patchdir=../.. \
++           file://0001-regenerate-configure.patch;patchdir=../.. \
++           file://fix-the-compile-error-of-powerpc64.patch;patchdir=../.. \
++           file://fix_milestone_compile_issue.patch;patchdir=../.. \
++           file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../.. \
++           file://Manually_mmap_heap_memory_esr17.patch;patchdir=../.. \
++           file://0001-compare-the-first-character-of-string-to-be-null-or-.patch;patchdir=../.. \
+            "
+ 
+ SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
 -- 
 2.15.1
 
