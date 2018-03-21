@@ -1,43 +1,43 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C07C78964
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 60CD27899E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 16:59:26 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id o184so6154134qkd.13
+	Wed, 21 Mar 2018 16:59:27 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id y6so5977702qtm.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 09:59:28 -0700 (PDT)
+	Wed, 21 Mar 2018 09:59:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=J76fjE+p1TAg10f3ySVEFwBcsfyJ9HIi8eF+zChKm9M=;
-	b=lUZO8cDymIX7X93iyfIUp6+d+MUQ2HqBZZY+i3L+hyxEtYBlHAbYqzry8bQ+pj4Uwa
-	94S3psjooEDhe/pnVqOWErgIbwXy5BWYc72SYid4+v4Vr8HvJEgXq8B9JHCb+l/RGGSZ
-	D83R78GyYRjTwgJ6aECwSeLhTY0QkiJ3DUdocJdk2Vtxo5qoRBIf7oW5vNtK6Wpo6Fr8
-	OeLJwPxcPK6bzesHaylUDhN1A3pd7klpwsTtZaqsoH0uJJ+erqnpphV0X+PUZxTZm5U8
-	Hv8I/MJSG8PgbC/owIr3T/xeKWyHbVNHMBQxptQCH0G+QgtIdFKqSJNAHJMcQg+tOQTW
-	oPDQ==
-X-Gm-Message-State: AElRT7FainNRjIRZnyyY/TLXnVNyhOKeDM2E8EXE2h3yKjJWsYfq5NJ1
-	NNNTKyDV9b5AOPe83mXQvBwbPTFB
-X-Google-Smtp-Source: AG47ELvzhMcV7pHx0gW4asI2+QJD59NUKXQWryeYAmfcWO2kJsLFvQklN+6E5u8n4DGDRJ058En1vg==
-X-Received: by 10.55.144.71 with SMTP id s68mr30062262qkd.285.1521651567742;
-	Wed, 21 Mar 2018 09:59:27 -0700 (PDT)
+	bh=KqblLkwr6SylBci+TOZ01LyzU6Yako4g08YHGyPcAlI=;
+	b=bFS8fWpe1iV08vbvEb9i8r/xuinQzvYFog2makeqm8b8JMLiHecDwPjiV3RhOgVHe8
+	sZhvCxt75STTiSAchyaPN3mvOhXhsJ+kvF9nHQpaqH20u1ePzEbB8WeRx3L0CR4PRxFY
+	Td6FIDpJMNvKM+TwVLkojq0UJTYiIODcvdGOsSpnf8Zr1Qx0MnxbRpyX77dYY102NS/D
+	rA+CizRtl5vltuMkkBLcGVF7HQoKhDkJstA3hdG8aOPhYKvK9O9yrAOuIxYVCXoO5nl7
+	SvNFM7nDwuDO2xcNcnenWFGfTBCha0gkw8Aecu9jeODWZVKAB/Ipwf0UEyXhOAP46SiL
+	Ll/g==
+X-Gm-Message-State: AElRT7GhSuDSRsgwocU/SDwQ19zzRyw3aqS0EXyqrw1CdXrCQhMu59lg
+	O0e9ommYSXAGWkV/D6geHfwn0J/l
+X-Google-Smtp-Source: AG47ELte+9LDlYT/uqVg6uYTyU1J6ist2fRX8E6nd9IT6erMW1xQcOKDxb0W7/BzyT+/9zbfVN88OA==
+X-Received: by 10.200.4.9 with SMTP id v9mr29603465qtg.69.1521651569016;
+	Wed, 21 Mar 2018 09:59:29 -0700 (PDT)
 Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	d11sm3065587qth.97.2018.03.21.09.59.26
+	d11sm3065587qth.97.2018.03.21.09.59.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Mar 2018 09:59:26 -0700 (PDT)
+	Wed, 21 Mar 2018 09:59:28 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 16:59:22 +0000
-Message-Id: <20180321165923.31902-2-git@andred.net>
+Date: Wed, 21 Mar 2018 16:59:23 +0000
+Message-Id: <20180321165923.31902-3-git@andred.net>
 X-Mailer: git-send-email 2.16.2
 In-Reply-To: <20180321165923.31902-1-git@andred.net>
 References: <20180321165923.31902-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 2/3] python-aws-iot-device-sdk-python: fix LICENSE
+Subject: [meta-python][PATCH 3/3] python-aws-iot-device-sdk-python: also package examples (as additional package)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,50 +50,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 16:59:26 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 16:59:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: André Draszik <andre.draszik@jci.com>
 
-The SDK ships with an embedded, modified copy of python-paho,
-which is licensed under the EPL-1.0 license:
-
- vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
- # Copyright (c) 2012-2014 Roger Light <roger@atchoo.org>
- #
- # All rights reserved. This program and the accompanying materials
- # are made available under the terms of the Eclipse Public License v1.0
- # and Eclipse Distribution License v1.0 which accompany this distribution.
- #
- # The Eclipse Public License is available at
- #    http://www.eclipse.org/legal/epl-v10.html
- # and the Eclipse Distribution License is available at
- #   http://www.eclipse.org/org/documents/edl-v10.php.
- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ endline=10 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- .../recipes-devtools/python/python-aws-iot-device-sdk-python.inc   | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ .../python/python-aws-iot-device-sdk-python.inc             | 13 +++++++++++++
+ .../python/python-aws-iot-device-sdk-python_1.3.1.bb        |  2 ++
+ 2 files changed, 15 insertions(+)
 
 diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-index 1fc98bdbd..d31c01411 100644
+index d31c01411..1c9625259 100644
 --- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
 +++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-@@ -1,7 +1,10 @@
- DESCRIPTION = "SDK for connecting to AWS IoT using Python."
- HOMEPAGE = "https://github.com/aws/aws-iot-device-sdk-python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9ac49901b833e769c7d6f21e8dbd7b30"
-+LICENSE = "Apache-2.0 & EPL-1.0"
-+LIC_FILES_CHKSUM = "\
-+    file://LICENSE.txt;md5=9ac49901b833e769c7d6f21e8dbd7b30 \
-+    file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=10;md5=9381d38fd42b5ce6e76107252d75224a \
-+"
+@@ -13,6 +13,17 @@ inherit pypi
  
- SRC_URI[md5sum] = "97e8cf0d40ef3765d979c19b534a716d"
- SRC_URI[sha256sum] = "d68cbff396143e837b4c23b6621d3b7ae374281afc75eed8e51a28625d9125ba"
+ PYPI_PACKAGE = "AWSIoTPythonSDK"
+ 
++PACKAGES =+ "${PN}-examples"
++
++do_install_append() {
++        install -d -m0755 ${D}${datadir}/${BPN}/examples
++        cp --preserve=mode,timestamps -R ${S}/samples/* ${D}${datadir}/${BPN}/examples
++        # this requires the full blown AWS Python SDK
++        rm -r ${D}${datadir}/${BPN}/examples/basicPubSub
++}
++
++FILES_${PN}-examples = "${datadir}/${BPN}/examples"
++
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-crypt \
+     ${PYTHON_PN}-datetime \
+@@ -25,4 +36,6 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-threading \
+ "
+ 
++RDEPENDS_${PN}-examples += "${PN}"
++
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb
+index 12ae978e3..490e97391 100644
+--- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb
++++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb
+@@ -1,2 +1,4 @@
+ inherit setuptools
+ require python-aws-iot-device-sdk-python.inc
++
++RDEPENDS_${PN}-examples += "${PYTHON_PN}-argparse"
 -- 
 2.16.2
 
