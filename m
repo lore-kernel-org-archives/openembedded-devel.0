@@ -1,32 +1,32 @@
 Return-Path: <huangqy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E131E7894E
+	by mail.openembedded.org (Postfix) with ESMTP id 0DBC578961
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 03:36:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="38026081"
+	Wed, 21 Mar 2018 03:36:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="38026084"
 Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Mar 2018 11:36:27 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Mar 2018 11:36:29 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 8EA2648AE76D
+	by cn.fujitsu.com (Postfix) with ESMTP id 07EAA48AE76A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 11:36:26 +0800 (CST)
+	Wed, 21 Mar 2018 11:36:30 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.125) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Wed, 21 Mar 2018 11:36:25 +0800
+	Server (TLS) id 14.3.361.1; Wed, 21 Mar 2018 11:36:28 +0800
 From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Mar 2018 11:36:15 +0800
-Message-ID: <1521603377-34881-10-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Wed, 21 Mar 2018 11:36:17 +0800
+Message-ID: <1521603377-34881-12-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1521603377-34881-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 References: <1521603377-34881-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.125]
-X-yoursite-MailScanner-ID: 8EA2648AE76D.A80DC
+X-yoursite-MailScanner-ID: 07EAA48AE76A.A656A
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python][PATCH] python-msgpack: 0.5.5 -> 0.5.6
+Subject: [meta-python][PATCH] python-pytest: 3.4.1 -> 3.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,37 +39,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 03:36:28 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 03:36:29 -0000
 Content-Type: text/plain
 
-Upgrade python-msgpack from 0.5.5 to 0.5.6.
+1.Upgrade python-pytest from 3.4.1 to 3.4.2.
+2.Modify pytest_version_fix.patch, since the data has been changed.
 
 Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-msgpack.inc                | 4 ++--
- .../python/{python-msgpack_0.5.5.bb => python-msgpack_0.5.6.bb}       | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-msgpack_0.5.5.bb => python-msgpack_0.5.6.bb} (100%)
+ meta-python/recipes-devtools/python/python-pytest.inc                 | 4 ++--
+ .../recipes-devtools/python/python-pytest/pytest_version_fix.patch    | 2 +-
+ .../python/{python-pytest_3.4.1.bb => python-pytest_3.4.2.bb}         | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pytest_3.4.1.bb => python-pytest_3.4.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-msgpack.inc b/meta-python/recipes-devtools/python/python-msgpack.inc
-index 2e852cc..fdc8926 100644
---- a/meta-python/recipes-devtools/python/python-msgpack.inc
-+++ b/meta-python/recipes-devtools/python/python-msgpack.inc
-@@ -2,8 +2,8 @@ SUMMARY = "MessagePack (de)serializer"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index 60ff830..4feb9a0 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pytest.org"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
  
--SRC_URI[md5sum] = "62640290ea856420d83b7f9dc1dd789d"
--SRC_URI[sha256sum] = "7f5d6e59228b65c47cfdae76a4aea71f6902525f18256862cda69888a686b5f9"
-+SRC_URI[md5sum] = "6d644c06a87a5a111bbbf5b34b4be440"
-+SRC_URI[sha256sum] = "378cc8a6d3545b532dfd149da715abae4fda2a3adb6d74e525d0d5e51f46909b"
+-SRC_URI[md5sum] = "6768537cbb150022387c565051904a1c"
+-SRC_URI[sha256sum] = "9ddcb879c8cc859d2540204b5399011f842e5e8823674bf429f70ada281b3cc6"
++SRC_URI[md5sum] = "1b83a25d45fad893f430fc5031653c56"
++SRC_URI[sha256sum] = "117bad36c1a787e1a8a659df35de53ba05f9f3398fb9e4ac17e80ad5903eb8c5"
  
- PYPI_PACKAGE = "msgpack-python"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.5.5.bb b/meta-python/recipes-devtools/python/python-msgpack_0.5.6.bb
+ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
+                    file://pytest_version_fix.patch "
+diff --git a/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch b/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch
+index 908f862..b373d93 100644
+--- a/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch
++++ b/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch
+@@ -36,7 +36,7 @@ Index: pytest-3.2.2/setup.py
+ +        return version_match.group(1)
+ +    raise RuntimeError("Unable to find version string.")
+  
+- def has_environment_marker_support():
++ def get_environment_marker_support_level():
+      """
+ @@ -59,9 +72,7 @@ def main():
+          name='pytest',
+diff --git a/meta-python/recipes-devtools/python/python-pytest_3.4.1.bb b/meta-python/recipes-devtools/python/python-pytest_3.4.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-msgpack_0.5.5.bb
-rename to meta-python/recipes-devtools/python/python-msgpack_0.5.6.bb
+rename from meta-python/recipes-devtools/python/python-pytest_3.4.1.bb
+rename to meta-python/recipes-devtools/python/python-pytest_3.4.2.bb
 -- 
 2.7.4
 
