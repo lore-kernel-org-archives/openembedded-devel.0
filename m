@@ -1,50 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
-	[209.85.128.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B04578991
+Received: from mail-wr0-f175.google.com (mail-wr0-f175.google.com
+	[209.85.128.175])
+	by mail.openembedded.org (Postfix) with ESMTP id BF93B71B69
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 16:52:06 +0000 (UTC)
-Received: by mail-wr0-f169.google.com with SMTP id u46so5889339wrc.11
+	Wed, 21 Mar 2018 16:57:03 +0000 (UTC)
+Received: by mail-wr0-f175.google.com with SMTP id u46so5905372wrc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 09:52:08 -0700 (PDT)
+	Wed, 21 Mar 2018 09:57:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=g6X6XwRyGOzvvt2GgNm1PbI8SPaA5q1h71nF8isSmmY=;
-	b=B0EUzWnOgkAuuispLhS7FBrxcd3doZnH25xiTj5VGOaPush6k1h9WvOnjweuRT+ks/
-	PsJYt7P2zqj8fFUu8dS8juWgynzCh+kaIEIRHcmpYa5Wl0Z9HabtNgt1zCjzGBOIMgoh
-	tPbK4UIbS4GBCfHkryA9gq61/ogDGKFfZ4iTLOjFm41Z/YuEQ5LOt2n09aW2EOcuEmbO
-	+/WBIl4LaDBS6PoEHWtwLhRH/4lpRH9vyQy/pKNl8PiEEejjKdvHT6LtpiV4+8CxwiRZ
-	LRFRwCanlthPMX91nCJ4PK38cijievavSI5WDLTdFoJw+9vDI4L9QehN8+7W2a02jJbv
-	gisg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=thiTwZV1xweZDeUrIOvfMvYAxh4a0g17rw399sgAnH0=;
+	b=N0jjdZB2zl81tVPI4iPWjAC/Y/4u1kz4aAdIa+F7PrDjSIfomnjXZ++QgloSXWrXGr
+	dYqJPa5D2kAO/XfFKIiBEFhWqpxTZeAFagfXQqS2xjhuyoNk0bUAPUZB1o+0IUUYUuE5
+	w1UTb1PPxOXBGKY7FlZAMoTxghFtIdrVlqe03mzypqLI9Sw9evfyRtu9T2jvUbRShRqr
+	TUrC3RWEFVSYaD8k7KwNk+2o/HyYs5ra9Smm5wdSOTs3RfwZAo7Vmb/YWn9MWHrfZpbF
+	04FiT85FMouvH2rdbmEyG+PzvUJKUYHWyKDKpS5lPI6s7skOooRY8ouzDJaMI3J9SvZd
+	G+hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=g6X6XwRyGOzvvt2GgNm1PbI8SPaA5q1h71nF8isSmmY=;
-	b=CwFHWNVSasseI5atxlyYaaEwCLFJX7zjw2ngzDw2rwneRgJU1mgRDDt+2+xlvIBd/I
-	JALriTLnTNVm4Xzgg3uiqJxFS1q7FpDR54yriiN01kcVgrz4gz7V6JmpZfxPuvDwadX0
-	pN3nJQAp/0iVb9zUXdMOdVHbUTglbwUrVfAuSQ5+2ekvxbTCdN+rffg13ctPtfP0IBVo
-	p1BHWlBpFz0213HdirQpEdxFFig3iAy4+x+F9aqQ0ZDmUQ0R1YbqvtW9yP+JW3swzLOB
-	KZfiz2VTY+F7ik+hz1DGruX+CnbK4bBcAl/ywBr0OxlZGTY5I72+k0l8QTbyswU4YfYP
-	QakQ==
-X-Gm-Message-State: AElRT7Eb4Squg+Fy2JpdDXMnzBQzH2OJrsPF9dAGoommNcp+spnVoKbp
-	AAgg0ShCzRf3/CQdDGBzyDNPsg==
-X-Google-Smtp-Source: AG47ELsFlyUN9GH4hA1vge51X0h99LdfUvumorxfQfpNI017BDP4t69G7DgtNVnqjNP3KB+0MzNZ1Q==
-X-Received: by 10.223.151.69 with SMTP id r63mr16215944wrb.47.1521651127217;
-	Wed, 21 Mar 2018 09:52:07 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 96sm4286498wrk.54.2018.03.21.09.52.06
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 21 Mar 2018 09:52:06 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 16:52:02 +0000
-Message-Id: <20180321165202.1777-4-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=thiTwZV1xweZDeUrIOvfMvYAxh4a0g17rw399sgAnH0=;
+	b=FSTSBBhZjNjCs6PzZ6suD4Iw91yLeGTqRwg/iGZZjrucsQ6ZxFS2BuDUeChEFTcOB3
+	NWiCySsuiU90fhro0QTLc8SLU/IjQbttcWCq3tnSQxmelB3TKZV8LBUUgjEtxFtEI35M
+	7dcygRFBS646TgQbDCEvDiYLX4tuD9v6RKqS/8/pQ0/SGkExkv+v5iKIYZ1m0f++S6Bv
+	Ok6CyF3ZWXf4Oje+A7dKarNLkzqsTQlQL2+PgTFvxufLnTwXyVACSaJFPcEsmPq5lGlU
+	zkJmEIAUoY2c/CcLoKUO7DQ35s+0vE1dAIIVVP44JcInMpuGrXLe5fzOIpDb+cFPtSRQ
+	jv1A==
+X-Gm-Message-State: AElRT7Fcg2ACtmjZUEOgacqMbrYQ9eKlV09gMWmh09sXqEbO7vPD1F1v
+	vLpZ/Azo+jdDEiWjHzTsqD1viAKNqN5N/bQzLXEnEw==
+X-Google-Smtp-Source: AG47ELs1keZUaCyiSCWC9wuxcBYYWkMPG5UbC4BJv2W5SncWiptqtPW8/nKavLVTzDrWVzMthN23cckqIKuEWR5u0dw=
+X-Received: by 10.223.146.230 with SMTP id 93mr16288800wrn.241.1521651424287; 
+	Wed, 21 Mar 2018 09:57:04 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.30.136 with HTTP; Wed, 21 Mar 2018 09:57:03 -0700 (PDT)
 In-Reply-To: <20180321165202.1777-1-Martin.Jansa@gmail.com>
 References: <20180321165202.1777-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 4/4] pidgin: refresh patches
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 21 Mar 2018 17:57:03 +0100
+Message-ID: <CA+chaQdJFduUSaZ=YqBczO9vkUcJpWjM42JUR=sfv2shcouS5g@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 1/4] krb5: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,136 +54,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 16:52:06 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 16:57:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-WARNING: pidgin-2.12.0-r0 do_patch:
-Some of the context lines in patches were ignored. This can lead to
-incorrectly applied patches.
-The context lines in the patches can be updated with devtool:
+v2 on its way, I forgot to include update to krb5_1.16.bb
 
-    devtool modify <recipe>
-    devtool finish --force-patch-refresh <recipe> <layer_path>
+On Wed, Mar 21, 2018 at 5:51 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-Then the updated patches and the source tree (in devtool's workspace)
-should be reviewed to make sure the patches apply in the correct place
-and don't introduce duplicate lines (which can, and does happen
-when some of the context is ignored). Further information:
-http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
-Details:
-Applying patch sanitize-configure.ac.patch
-patching file configure.ac
-Hunk #1 succeeded at 642 with fuzz 1 (offset 170 lines).
-Hunk #2 succeeded at 2397 (offset 537 lines).
-Hunk #3 succeeded at 2429 (offset 537 lines).
-
-Now at patch sanitize-configure.ac.patch
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../pidgin/pidgin/pidgin-cross-python-265.patch    | 18 +++++++++++++-----
- .../pidgin/pidgin/purple-OE-branding-25.patch      | 18 +++++++++++++-----
- .../pidgin/pidgin/sanitize-configure.ac.patch      | 22 ++++++++++++++++------
- 3 files changed, 42 insertions(+), 16 deletions(-)
-
-diff --git a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-index 72bf4ed41b..312fc8593f 100644
---- a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-+++ b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-@@ -1,9 +1,17 @@
--Use pkg-config instead of ${PYTHON}-config to find python
-+From 855cc20bafa30597ae7a62f7672d42654b25cde0 Mon Sep 17 00:00:00 2001
-+From: Herrie <github.com@herrie.org>
-+Date: Mon, 24 Jul 2017 21:30:16 +0200
-+Subject: [PATCH] Use pkg-config instead of ${PYTHON}-config to find python
- 
--diff -uNr pidgin-2.10.12.orig/configure.ac pidgin-2.10.12/configure.ac
----- pidgin-2.10.12.orig/configure.ac	2016-01-01 00:19:40.000000000 +0100
--+++ pidgin-2.10.12/configure.ac	2016-05-05 16:55:13.258945925 +0200
--@@ -1585,20 +1585,15 @@
-+---
-+ configure.ac | 21 ++++++++-------------
-+ 1 file changed, 8 insertions(+), 13 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index d20a18e..c741829 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -1567,20 +1567,15 @@ AM_CONDITIONAL(ENABLE_DBUS, test "x$enable_dbus" = "xyes")
-  dnl Check for Python headers (currently useful only for libgnt)
-  dnl (Thanks to XChat)
-  if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
-diff --git a/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch b/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch
-index 293ef709d1..9a24fbbc5f 100644
---- a/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch
-+++ b/meta-oe/recipes-support/pidgin/pidgin/purple-OE-branding-25.patch
-@@ -1,8 +1,16 @@
--Index: pidgin-2.5.0/libpurple/protocols/irc/irc.h
--===================================================================
----- pidgin-2.5.0.orig/libpurple/protocols/irc/irc.h	2008-08-19 01:53:38.000000000 +0000
--+++ pidgin-2.5.0/libpurple/protocols/irc/irc.h	2008-08-27 11:15:58.000000000 +0000
--@@ -36,9 +36,9 @@
-+From 43e9db656431ffb22b429d5fca4ce3b4af21bc9e Mon Sep 17 00:00:00 2001
-+From: Herrie <github.com@herrie.org>
-+Date: Mon, 24 Jul 2017 21:30:16 +0200
-+
-+---
-+ libpurple/protocols/irc/irc.h | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/libpurple/protocols/irc/irc.h b/libpurple/protocols/irc/irc.h
-+index fde35c4..66e52dd 100644
-+--- a/libpurple/protocols/irc/irc.h
-++++ b/libpurple/protocols/irc/irc.h
-+@@ -40,9 +40,9 @@
-  
-  #define IRC_DEFAULT_CHARSET "UTF-8"
-  #define IRC_DEFAULT_AUTODETECT FALSE
-diff --git a/meta-oe/recipes-support/pidgin/pidgin/sanitize-configure.ac.patch b/meta-oe/recipes-support/pidgin/pidgin/sanitize-configure.ac.patch
-index a77d64f40b..84dbcdc276 100644
---- a/meta-oe/recipes-support/pidgin/pidgin/sanitize-configure.ac.patch
-+++ b/meta-oe/recipes-support/pidgin/pidgin/sanitize-configure.ac.patch
-@@ -1,6 +1,16 @@
----- /tmp/configure.ac	2007-05-08 17:29:02.000000000 +0200
--+++ pidgin-2.0.0/configure.ac	2007-05-08 17:30:30.325251000 +0200
--@@ -472,7 +472,7 @@
-+From c3058f9eadaf5ff28ba776cfed54b609a93a1249 Mon Sep 17 00:00:00 2001
-+From: Herrie <github.com@herrie.org>
-+Date: Mon, 24 Jul 2017 21:30:16 +0200
-+
-+---
-+ configure.ac | 10 +---------
-+ 1 file changed, 1 insertion(+), 9 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index b8acd2a..d20a18e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -642,7 +642,7 @@ if test "x$enable_consoleui" = "xyes"; then
-  	if test "x$enable_consoleui" = "xyes"; then
-  		dnl # Some distros put the headers in ncursesw/, some don't
-  		found_ncurses_h=no
-@@ -8,8 +18,8 @@
- +		for location in $ac_ncurses_includes $NCURSES_HEADERS 
-  		do
-  			f="$location/ncurses.h"
-- 			AC_CHECK_HEADER($f,[
--@@ -1860,10 +1860,6 @@
-+ 			orig_CFLAGS="$CFLAGS"
-+@@ -2397,10 +2397,6 @@ if test "$kerberos" != "no" ; then
-  			KRB4_CFLAGS="$KRB4_CFLAGS -I${kerberos}/include/kerberosIV"
-  		fi
-  		KRB4_LDFLAGS="-L${kerberos}/lib"
-@@ -20,7 +30,7 @@
-  	fi
-  	AC_DEFINE(ZEPHYR_USES_KERBEROS, 1, [Define if kerberos should be used in Zephyr.])
-  
--@@ -1896,10 +1892,6 @@
-+@@ -2433,10 +2429,6 @@ if test "$zephyr" != "no" ; then
-  		ZEPHYR_LDFLAGS="-L${zephyr}/lib"
-  	elif test -d /usr/athena/include/zephyr ; then
-  		ZEPHYR_CFLAGS="-I/usr/athena/include"
--- 
-2.15.1
-
+> WARNING: krb5-1.16-r0 do_patch:
+> Some of the context lines in patches were ignored. This can lead to
+> incorrectly applied patches.
+> The context lines in the patches can be updated with devtool:
+>
+>     devtool modify <recipe>
+>     devtool finish --force-patch-refresh <recipe> <layer_path>
+>
+> Then the updated patches and the source tree (in devtool's workspace)
+> should be reviewed to make sure the patches apply in the correct place
+> and don't introduce duplicate lines (which can, and does happen
+> when some of the context is ignored). Further information:
+> http://lists.openembedded.org/pipermail/openembedded-core/
+> 2018-March/148675.html
+> https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
+> Details:
+> Applying patch
+> 0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+> patching file aclocal.m4
+> Hunk #1 succeeded at 1679 with fuzz 1 (offset 29 lines).
+>
+> Now at patch
+> 0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  ...-Add-parameter-to-disable-keyutils-detection.patch | 19
+> +++++++++----------
+>  .../krb5/krb5/crosscompile_nm.patch                   | 19
+> ++++++++++++-------
+>  .../krb5/debian-suppress-usr-lib-in-krb5-config.patch | 11 ++++++-----
+>  3 files changed, 27 insertions(+), 22 deletions(-)
+>
+> diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-
+> aclocal-Add-parameter-to-disable-keyutils-detection.patch
+> b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-
+> disable-keyutils-detection.patch
+> index f0c310c5e8..fe8282eba1 100644
+> --- a/meta-oe/recipes-connectivity/krb5/krb5/0001-
+> aclocal-Add-parameter-to-disable-keyutils-detection.patch
+> +++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-
+> aclocal-Add-parameter-to-disable-keyutils-detection.patch
+> @@ -1,18 +1,19 @@
+> -From ecb62f3467f493cc0d679323f05367eebbf0fb67 Mon Sep 17 00:00:00 2001
+> +From 16aaa5ee8b42cf6f628f6ab75fedc738e4d167ca Mon Sep 17 00:00:00 2001
+>  From: Martin Jansa <Martin.Jansa@gmail.com>
+>  Date: Tue, 1 Oct 2013 22:22:57 +0200
+>  Subject: [PATCH] aclocal: Add parameter to disable keyutils detection
+>
+>  Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> +
+>  ---
+> - aclocal.m4 | 4 ++++
+> + src/aclocal.m4 | 4 ++++
+>   1 file changed, 4 insertions(+)
+>
+> -diff --git a/aclocal.m4 b/aclocal.m4
+> -index 210c473..83b1f02 100644
+> ---- a/aclocal.m4
+> -+++ b/aclocal.m4
+> -@@ -1650,11 +1650,15 @@ fi
+> +diff --git a/src/aclocal.m4 b/src/aclocal.m4
+> +index d6d1279..80ce604 100644
+> +--- a/src/aclocal.m4
+> ++++ b/src/aclocal.m4
+> +@@ -1679,12 +1679,16 @@ fi
+>   dnl
+>   dnl If libkeyutils exists (on Linux) include it and use keyring ccache
+>   AC_DEFUN(KRB5_AC_KEYRING_CCACHE,[
+> @@ -28,6 +29,4 @@ index 210c473..83b1f02 100644
+>  +fi
+>   ])dnl
+>   dnl
+> ---
+> -1.8.3.2
+> -
+> + dnl If libkeyutils supports persistent keyrings, use them
+> diff --git a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+> b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+> index d3e6937515..ddca7090aa 100644
+> --- a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+> +++ b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+> @@ -1,19 +1,24 @@
+> +From cbce5720435778296c71811101ac732a833525d6 Mon Sep 17 00:00:00 2001
+> +From: Amy Fong <amy.fong@windriver.com>
+> +Date: Sun, 28 Sep 2014 05:35:37 -0400
+> +Subject: [PATCH] krb5: update to version 1.12.2
+> +
+>  Modifies export-check.pl to use look for $ENV{'NM'} before
+>  defaulting to using 'nm'
+>
+>  Upstream-Status: Pending
+>
+>  Signed-off-by: Amy Fong <amy.fong@windriver.com>
+> ----
+>
+> - export-check.pl |    7 ++++++-
+> +---
+> + src/util/export-check.pl | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> -Index: src/util/export-check.pl
+> -===================================================================
+> ---- src.orig/util/export-check.pl
+> -+++ src/util/export-check.pl
+> -@@ -38,7 +38,12 @@
+> +diff --git a/src/util/export-check.pl b/src/util/export-check.pl
+> +index eaec7d6..21a2300 100755
+> +--- a/src/util/export-check.pl
+> ++++ b/src/util/export-check.pl
+> +@@ -38,7 +38,12 @@ if ($#ARGV != 1) {
+>   my($exfile, $libfile) = @ARGV;
+>
+>   @missing = ();
+> diff --git a/meta-oe/recipes-connectivity/krb5/krb5/debian-
+> suppress-usr-lib-in-krb5-config.patch b/meta-oe/recipes-
+> connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
+> index f0182ee5db..de21ae0945 100644
+> --- a/meta-oe/recipes-connectivity/krb5/krb5/debian-
+> suppress-usr-lib-in-krb5-config.patch
+> +++ b/meta-oe/recipes-connectivity/krb5/krb5/debian-
+> suppress-usr-lib-in-krb5-config.patch
+> @@ -1,3 +1,6 @@
+> +From 044be28e4de2cf6f47c719d1f8fbbfe46d1eac20 Mon Sep 17 00:00:00 2001
+> +From: Jackie Huang <jackie.huang@windriver.com>
+> +Date: Sun, 28 Sep 2014 05:35:37 -0400
+>  Subject: [PATCH] debian: suppress /usr/lib in krb5-config
+>
+>  Upstream-Status: Pending
+> @@ -7,9 +10,10 @@ Handel multi-arch suppressions
+>  The patch is from debian.
+>
+>  Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> +
+>  ---
+> - src/build-tools/krb5-config.in |   14 +++++++++-----
+> - 1 files changed, 9 insertions(+), 5 deletions(-)
+> + src/build-tools/krb5-config.in | 14 +++++++++-----
+> + 1 file changed, 9 insertions(+), 5 deletions(-)
+>
+>  diff --git a/src/build-tools/krb5-config.in b/src/build-tools/
+> krb5-config.in
+>  index f6184da..637bad7 100755
+> @@ -43,6 +47,3 @@ index f6184da..637bad7 100755
+>       # Ugly gross hack for our build tree
+>       lib_flags=`echo $CC_LINK | sed -e 's/\$(CC)//' \
+>             -e 's/\$(PURE)//' \
+> ---
+> -1.7.1
+> -
+> --
+> 2.15.1
+>
+>
 
