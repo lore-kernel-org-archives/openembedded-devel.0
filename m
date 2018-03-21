@@ -1,51 +1,55 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E6BF78972
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 3AB617898A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 14:16:19 +0000 (UTC)
-Received: by mail-pg0-f51.google.com with SMTP id f10so1809980pgs.9
+	Wed, 21 Mar 2018 14:47:20 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id g8so2011264pgv.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 07:16:20 -0700 (PDT)
+	Wed, 21 Mar 2018 07:47:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=i18pj3a8XF7M9jw8+RY0IA8BZ3of/vbggd6M/qIk5eA=;
-	b=RB+ugJbt4NU40wlQd8WufqmC61VVnSAR0Z+D28jUlyA3sdFEq0hk+/1vp1zv3YjpcG
-	zCtRTEM9aFvkxUGcTIjRx2nseD7Cm+5QZmH2g4iOA/vbaoxTYZ/rFe2t8+E/T6lNhYOn
-	0Hci+qVL9H3zR8N1VHjbuX4/0qituJAaR+/KCRu3CyN8Ij7GBqdLpuShqG0xjY8wBM/e
-	OPtQkMFlVzW3qRRb2dZDpAEOSZTK7pHySGTbwbrZ+chvSrTSGhorryv++oBntQ/XNJ2i
-	yQv0K/A5QIv9GBk+XkWN3tXIeS/1XWUuX63WwK1+9nQ/RzB3v+L6MLfH6rpdXJll5Y1U
-	YBNw==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=K5nGoqhtydiQopn7R11PsD1Io89zOmkCXx2LUYwvXKc=;
+	b=emnEGl4StCAyLy3k0r8j3Xper5fisFBQuQ6w4JCyHOHS3VqNmsPw522U++SuPnwhZb
+	ug3SerdAEOxfQI4sPaSqSdVfEzLRFs6w0XjnKuDLm515FZS4qaiWKMFpm0e9RHA4LI3A
+	PW9llApIcC1cINfslg1mX+XSrUXLf3P//4SQOXuceI699MFCnq6M37eQjlop4i1BwFse
+	olyvmrBdxZle80vfgEc7cOtqbYIYkzbhzjDXk5XNxC1kd5blVLJmj4jdaI/I9NBQoZT4
+	7ZXxsPKNK95xEWDoSXXz8kGHNSf0GWa6xMqmqHXJFp8ahlQwzkvUic3i0e2PRocNq7xl
+	Encg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=i18pj3a8XF7M9jw8+RY0IA8BZ3of/vbggd6M/qIk5eA=;
-	b=RHc6svzJ/21jZ2VMDzdNYE4QeU2jYquWg/aByvgJ4b9QXJs1GzOMNS6KCGTY1NvcTu
-	hcBNpNRwvZUqddnpp/9bQlnpMLNDU90fob9mIvCUefrqq74UvI5Y0QqRhPo/K63/gBHm
-	R75XRQ9YvZZjaWREksSL8tUGUWsJVcvekBY3Ljlzlu1yof/Z+sQsJPwhKo/UiATaPiFL
-	WUxUrz6M56RAY/EtmKC8dljZDgupxTAbC9kc/7CVC9OUgjkoHWZAXR/ibkmAu16UlQ4y
-	hwS6aUoSSO3AuiMNzGf3pw0My0dtJD7aHm9NFLKqZxC8hGqxVE54HT10/VyUMqekec+w
-	gX5Q==
-X-Gm-Message-State: AElRT7Fq1H2SUIURNt043e1dR5YBjfQ8BGE6a4hQGyRMj3RZUAa8bBmZ
-	/Jlyk5NVqLCtBHSwxD7WCO4=
-X-Google-Smtp-Source: AG47ELvGRXA9/8rj5VZOvMLpLG/n3ZOgA6PPLwc98Ob+k+rRqN81B05bFdtjIFu7994ttLtcisnzNw==
-X-Received: by 10.99.186.14 with SMTP id k14mr15336517pgf.43.1521641780644;
-	Wed, 21 Mar 2018 07:16:20 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=K5nGoqhtydiQopn7R11PsD1Io89zOmkCXx2LUYwvXKc=;
+	b=tOFu1Xk0qKDNk7Sj4mEB+8rU63nT/FS1JYh6lgvoDtVUjzq8LuN6CHJwcqm/axBhvF
+	fISOCJr9BETq4Jk0wKyYAomPzvp9owzmpWri4Z81IQgCKnQrqlTuF6ZVF1yUCf/gKti9
+	5O80wbSWmtKNP+5FvKt6bTrqVNr0qPDeWsF70XNJwNYhqkxd1udFMMmjTUXasho6LrOB
+	rMro42AGV2UTGLpIy+CdNb89VOWDADT6myNL7lJz+YKjZvZBGI2Zxl6EG+OxttVgLDiP
+	ONz410oGmyF67OpWesskZkOazpKB4atZlkSDEhgy1pYIjnqjxOjDUAHX097jiBMGzvMU
+	aPdA==
+X-Gm-Message-State: AElRT7G3Jv5QKDVNRPfnOqnIVZ027AuREPjLkWNVmZ87Ueqe+9Skfks/
+	7w0KYVDk/qpcIpWBJpiO9FfiQw==
+X-Google-Smtp-Source: AG47ELsk8Mi6gDpErPaR4ZoPOXZQRa2zkgF2/WAKX9ZQCTMhfh6cEymBW2x7mIWyn7kS/fF/qQGNTg==
+X-Received: by 10.98.135.202 with SMTP id i193mr1521668pfe.189.1521643641924; 
+	Wed, 21 Mar 2018 07:47:21 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:a1c1:eb3f:f249:aed1?
 	([2601:202:4000:1184:a1c1:eb3f:f249:aed1])
-	by smtp.gmail.com with ESMTPSA id
-	v18sm8138907pgb.23.2018.03.21.07.16.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Mar 2018 07:16:20 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
+	by smtp.gmail.com with ESMTPSA id a5sm8601589pfn.66.2018.03.21.07.47.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 Mar 2018 07:47:21 -0700 (PDT)
+To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 07:16:15 -0700
-Message-Id: <1521641775-2171-4-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1521641775-2171-1-git-send-email-akuster808@gmail.com>
-References: <1521641775-2171-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 4/4] flashrom: update SRC_URI
+References: <1521603377-34881-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<1521603377-34881-6-git-send-email-huangqy.fnst@cn.fujitsu.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <8af916ce-0d79-7be7-172f-07abb7540e30@gmail.com>
+Date: Wed, 21 Mar 2018 07:47:20 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
+MIME-Version: 1.0
+In-Reply-To: <1521603377-34881-6-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Subject: Re: [meta-python][PATCH] python-cryptography: 2.1.4 -> 2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +62,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 14:16:19 -0000
+X-List-Received-Date: Wed, 21 Mar 2018 14:47:21 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-fixes
-ERROR: flashrom-1.0-r0 do_fetch: Fetcher failure for URL: 'http://download.flashrom.org/releases/flashrom-1.0.tar.bz2'. Unable to fetch URL from any source.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb
-index 6f5c037..9eac876 100644
---- a/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "http://flashrom.org"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "pciutils libusb libusb-compat"
- 
--SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
-+SRC_URI = "https://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
-            file://sst26.patch \
-            file://0001-platform-Add-riscv-to-known-platforms.patch \
-            "
--- 
-2.7.4
+On 03/20/2018 08:36 PM, Huang Qiyu wrote:
+> 1.Upgrade python-cryptography from 2.1.4 to 2.2.
+> 2.Update the checksum of LIC_FILES_CHKSUM, but license remained the same.
+>
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+
+I am seeing:
+ERROR: python3-cryptography-2.1.4-r0 do_fetch: Checksum failure fetching
+https://files.pythonhosted.org/packages/source/c/cryptography/cryptography-2.1.4.tar.gz
+ERROR: python3-cryptography-2.1.4-r0 do_fetch: Fetcher failure for URL:
+'https://files.pythonhosted.org/packages/source/c/cryptography/cryptography-2.1.4.tar.gz'.
+Checksum mismatch!
+File: '/home/akuster/OE/downloads/cryptography-2.1.4.tar.gz' has md5
+checksum 9f39d4d8f2b05f295fa0ff52475ec4f2 when
+c49c1ee145a900313a216fa2c788208c was expected
+File: '/home/akuster/OE/downloads/cryptography-2.1.4.tar.gz' has sha256
+checksum
+e4d967371c5b6b2e67855066471d844c5d52d210c36c28d49a8507b96e2c5291 when
+f5a0279e362c37e2150a32fe35ec20226e9237b6c9927fce8d53ef8e49e64f48 was
+expected
+If this change is expected (e.g. you have upgraded to a new version
+without updating the checksums) then you can use these lines within the
+recipe:
+SRC_URI[md5sum] = "9f39d4d8f2b05f295fa0ff52475ec4f2"
+SRC_URI[sha256sum] =
+"e4d967371c5b6b2e67855066471d844c5d52d210c36c28d49a8507b96e2c5291"
+Otherwise you should retry the download and/or check with upstream to
+determine if the file has become corrupted or otherwise unexpectedly
+modified.
+
+
+please double check.
+- armin
+> ---
+>  meta-python/recipes-devtools/python/python-cryptography.inc         | 6 +++---
+>  .../{python-cryptography_2.1.4.bb => python-cryptography_2.2.bb}    | 0
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-cryptography_2.1.4.bb => python-cryptography_2.2.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
+> index 4be7907..fcd5358 100644
+> --- a/meta-python/recipes-devtools/python/python-cryptography.inc
+> +++ b/meta-python/recipes-devtools/python/python-cryptography.inc
+> @@ -1,7 +1,7 @@
+>  SUMMARY = "Provides cryptographic recipes and primitives to python developers"
+>  HOMEPAGE = "https://cryptography.io/"
+>  LICENSE = "Apache-2.0 | BSD"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d5ede125ed08d4fd14ec44d334bdb388"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
+>  
+>  DEPENDS += " \
+>      ${PYTHON_PN}-cffi \
+> @@ -10,8 +10,8 @@ DEPENDS += " \
+>      ${PYTHON_PN}-six \
+>  "
+>  
+> -SRC_URI[md5sum] = "9f39d4d8f2b05f295fa0ff52475ec4f2"
+> -SRC_URI[sha256sum] = "e4d967371c5b6b2e67855066471d844c5d52d210c36c28d49a8507b96e2c5291"
+> +SRC_URI[md5sum] = "c49c1ee145a900313a216fa2c788208c"
+> +SRC_URI[sha256sum] = "f5a0279e362c37e2150a32fe35ec20226e9237b6c9927fce8d53ef8e49e64f48"
+>  
+>  RDEPENDS_${PN} += " \
+>      ${PYTHON_PN}-cffi \
+> diff --git a/meta-python/recipes-devtools/python/python-cryptography_2.1.4.bb b/meta-python/recipes-devtools/python/python-cryptography_2.2.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-cryptography_2.1.4.bb
+> rename to meta-python/recipes-devtools/python/python-cryptography_2.2.bb
 
 
