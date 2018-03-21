@@ -1,43 +1,50 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 60CD27899E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A47FB787F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 16:59:27 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id y6so5977702qtm.7
+	Wed, 21 Mar 2018 17:03:07 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id z12so5944585wrg.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 09:59:29 -0700 (PDT)
+	Wed, 21 Mar 2018 10:03:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=fu9MZgZ6P1ZvOICjtG79wBCJNiAsZwG6Hou1Gp5omiY=;
+	b=j1v81wRPoUmA5EIia+vO7mDWe0YSa2Rd2QrGoxZ7kX6u09Wan9fG948W3Fd64zv/+w
+	f9TRdj/SBmlnKpMNIxD7rYWB+BdJ0wVsGVe4QTMFZ8dP0AlfQeiHIuD232pbZ6U07X/l
+	fXjoiO+B1k9Kr74EymWSVtg55V+B2ujgITi6xunOQghfMYQTmMHPCxafqiNhQnrstbuG
+	WTS4wMPGY5vQa4Fyds/LJBoHPPyKCedw1JI0E00L3Pn41FLmyYXgskGzuiWV08cz9syz
+	rtO62ij0j7X2ZpUoEDF+6ATGfW2AAD3nuKHQki2J3vPnatHdZAfOGY8R7EmR6d62+XGA
+	T/9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=KqblLkwr6SylBci+TOZ01LyzU6Yako4g08YHGyPcAlI=;
-	b=bFS8fWpe1iV08vbvEb9i8r/xuinQzvYFog2makeqm8b8JMLiHecDwPjiV3RhOgVHe8
-	sZhvCxt75STTiSAchyaPN3mvOhXhsJ+kvF9nHQpaqH20u1ePzEbB8WeRx3L0CR4PRxFY
-	Td6FIDpJMNvKM+TwVLkojq0UJTYiIODcvdGOsSpnf8Zr1Qx0MnxbRpyX77dYY102NS/D
-	rA+CizRtl5vltuMkkBLcGVF7HQoKhDkJstA3hdG8aOPhYKvK9O9yrAOuIxYVCXoO5nl7
-	SvNFM7nDwuDO2xcNcnenWFGfTBCha0gkw8Aecu9jeODWZVKAB/Ipwf0UEyXhOAP46SiL
-	Ll/g==
-X-Gm-Message-State: AElRT7GhSuDSRsgwocU/SDwQ19zzRyw3aqS0EXyqrw1CdXrCQhMu59lg
-	O0e9ommYSXAGWkV/D6geHfwn0J/l
-X-Google-Smtp-Source: AG47ELte+9LDlYT/uqVg6uYTyU1J6ist2fRX8E6nd9IT6erMW1xQcOKDxb0W7/BzyT+/9zbfVN88OA==
-X-Received: by 10.200.4.9 with SMTP id v9mr29603465qtg.69.1521651569016;
-	Wed, 21 Mar 2018 09:59:29 -0700 (PDT)
-Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	d11sm3065587qth.97.2018.03.21.09.59.27
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 21 Mar 2018 09:59:28 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=fu9MZgZ6P1ZvOICjtG79wBCJNiAsZwG6Hou1Gp5omiY=;
+	b=ZJ29uE5a/xdt/i1WiybmKXn3kXz/GK/x+dgE4v39sXvdZvl2ngeFabzj0vWz+2mb9C
+	ZP4sYRIk7E6VU47PNAxev8XNqnIB2/aUOE4RwV8KTRf99jz5+Kmm0rNf5/WU2zEVyhO6
+	ou1/fqBPrp0/jaHw7WH05CG69VNaQkcii4VWtapCTXxZiplNFxf9BxsYsYtfbDlEiBhL
+	wT6lhAj0fGBkSv+zS2yy/9AbgMoacFRfzFpBipuRsXRWIb/1guZUMQBFZCOZ5KBXg0bf
+	RGw5PSqa4HYL01CEBvVWLGxz6a5Dedw00Xynpsq9K9uFLJ2ik+GwgLifb+qKXxG99wUX
+	yO9A==
+X-Gm-Message-State: AElRT7FXO68TQy/sCUwQuD74oSwju2sdFmMHLRAzdpEnWYJqH6l/fift
+	jFNCS0+X+Mqu+Ofc8qyYdCCHHQ==
+X-Google-Smtp-Source: AG47ELuZKy1UaHCMjRoFohmxcwld9RtXr9c5YnjUgFIczz6HTBbKuBATTuToyX92hmRdH/0mjFlzEQ==
+X-Received: by 10.223.172.226 with SMTP id o89mr5289789wrc.264.1521651788171; 
+	Wed, 21 Mar 2018 10:03:08 -0700 (PDT)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id 95sm4599437wrb.47.2018.03.21.10.03.07
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 21 Mar 2018 10:03:07 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 16:59:23 +0000
-Message-Id: <20180321165923.31902-3-git@andred.net>
-X-Mailer: git-send-email 2.16.2
-In-Reply-To: <20180321165923.31902-1-git@andred.net>
-References: <20180321165923.31902-1-git@andred.net>
-MIME-Version: 1.0
-Subject: [meta-python][PATCH 3/3] python-aws-iot-device-sdk-python: also package examples (as additional package)
+Date: Wed, 21 Mar 2018 17:03:06 +0000
+Message-Id: <20180321170306.5607-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.15.1
+In-Reply-To: <CA+chaQdJFduUSaZ=YqBczO9vkUcJpWjM42JUR=sfv2shcouS5g@mail.gmail.com>
+References: <CA+chaQdJFduUSaZ=YqBczO9vkUcJpWjM42JUR=sfv2shcouS5g@mail.gmail.com>
+Subject: [meta-oe][PATCHv2 1/4] krb5: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,57 +57,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 16:59:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Mar 2018 17:03:07 -0000
 
-From: André Draszik <andre.draszik@jci.com>
+WARNING: krb5-1.16-r0 do_patch:
+Some of the context lines in patches were ignored. This can lead to
+incorrectly applied patches.
+The context lines in the patches can be updated with devtool:
 
-Signed-off-by: André Draszik <andre.draszik@jci.com>
+    devtool modify <recipe>
+    devtool finish --force-patch-refresh <recipe> <layer_path>
+
+Then the updated patches and the source tree (in devtool's workspace)
+should be reviewed to make sure the patches apply in the correct place
+and don't introduce duplicate lines (which can, and does happen
+when some of the context is ignored). Further information:
+http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
+Details:
+Applying patch
+0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+patching file aclocal.m4
+Hunk #1 succeeded at 1679 with fuzz 1 (offset 29 lines).
+
+Now at patch
+0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../python/python-aws-iot-device-sdk-python.inc             | 13 +++++++++++++
- .../python/python-aws-iot-device-sdk-python_1.3.1.bb        |  2 ++
- 2 files changed, 15 insertions(+)
+ ...-Add-parameter-to-disable-keyutils-detection.patch | 19 +++++++++----------
+ .../krb5/krb5/crosscompile_nm.patch                   | 19 ++++++++++++-------
+ .../krb5/debian-suppress-usr-lib-in-krb5-config.patch | 11 ++++++-----
+ meta-oe/recipes-connectivity/krb5/krb5_1.16.bb        |  6 +++---
+ 4 files changed, 30 insertions(+), 25 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-index d31c01411..1c9625259 100644
---- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-+++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-@@ -13,6 +13,17 @@ inherit pypi
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+index f0c310c5e8..fe8282eba1 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
++++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+@@ -1,18 +1,19 @@
+-From ecb62f3467f493cc0d679323f05367eebbf0fb67 Mon Sep 17 00:00:00 2001
++From 16aaa5ee8b42cf6f628f6ab75fedc738e4d167ca Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Tue, 1 Oct 2013 22:22:57 +0200
+ Subject: [PATCH] aclocal: Add parameter to disable keyutils detection
  
- PYPI_PACKAGE = "AWSIoTPythonSDK"
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
+ ---
+- aclocal.m4 | 4 ++++
++ src/aclocal.m4 | 4 ++++
+  1 file changed, 4 insertions(+)
  
-+PACKAGES =+ "${PN}-examples"
+-diff --git a/aclocal.m4 b/aclocal.m4
+-index 210c473..83b1f02 100644
+---- a/aclocal.m4
+-+++ b/aclocal.m4
+-@@ -1650,11 +1650,15 @@ fi
++diff --git a/src/aclocal.m4 b/src/aclocal.m4
++index d6d1279..80ce604 100644
++--- a/src/aclocal.m4
+++++ b/src/aclocal.m4
++@@ -1679,12 +1679,16 @@ fi
+  dnl
+  dnl If libkeyutils exists (on Linux) include it and use keyring ccache
+  AC_DEFUN(KRB5_AC_KEYRING_CCACHE,[
+@@ -28,6 +29,4 @@ index 210c473..83b1f02 100644
+ +fi
+  ])dnl
+  dnl
+--- 
+-1.8.3.2
+-
++ dnl If libkeyutils supports persistent keyrings, use them
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+index d3e6937515..ddca7090aa 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
++++ b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+@@ -1,19 +1,24 @@
++From cbce5720435778296c71811101ac732a833525d6 Mon Sep 17 00:00:00 2001
++From: Amy Fong <amy.fong@windriver.com>
++Date: Sun, 28 Sep 2014 05:35:37 -0400
++Subject: [PATCH] krb5: update to version 1.12.2
 +
-+do_install_append() {
-+        install -d -m0755 ${D}${datadir}/${BPN}/examples
-+        cp --preserve=mode,timestamps -R ${S}/samples/* ${D}${datadir}/${BPN}/examples
-+        # this requires the full blown AWS Python SDK
-+        rm -r ${D}${datadir}/${BPN}/examples/basicPubSub
-+}
-+
-+FILES_${PN}-examples = "${datadir}/${BPN}/examples"
-+
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-crypt \
-     ${PYTHON_PN}-datetime \
-@@ -25,4 +36,6 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-threading \
- "
+ Modifies export-check.pl to use look for $ENV{'NM'} before
+ defaulting to using 'nm'
  
-+RDEPENDS_${PN}-examples += "${PN}"
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Amy Fong <amy.fong@windriver.com>
+----
+ 
+- export-check.pl |    7 ++++++-
++---
++ src/util/export-check.pl | 7 ++++++-
+  1 file changed, 6 insertions(+), 1 deletion(-)
+ 
+-Index: src/util/export-check.pl
+-===================================================================
+---- src.orig/util/export-check.pl
+-+++ src/util/export-check.pl
+-@@ -38,7 +38,12 @@
++diff --git a/src/util/export-check.pl b/src/util/export-check.pl
++index eaec7d6..21a2300 100755
++--- a/src/util/export-check.pl
+++++ b/src/util/export-check.pl
++@@ -38,7 +38,12 @@ if ($#ARGV != 1) {
+  my($exfile, $libfile) = @ARGV;
+  
+  @missing = ();
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch b/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
+index f0182ee5db..de21ae0945 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
++++ b/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
+@@ -1,3 +1,6 @@
++From 044be28e4de2cf6f47c719d1f8fbbfe46d1eac20 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Sun, 28 Sep 2014 05:35:37 -0400
+ Subject: [PATCH] debian: suppress /usr/lib in krb5-config
+ 
+ Upstream-Status: Pending
+@@ -7,9 +10,10 @@ Handel multi-arch suppressions
+ The patch is from debian.
+ 
+ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 +
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb
-index 12ae978e3..490e97391 100644
---- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.3.1.bb
-@@ -1,2 +1,4 @@
- inherit setuptools
- require python-aws-iot-device-sdk-python.inc
-+
-+RDEPENDS_${PN}-examples += "${PYTHON_PN}-argparse"
+ ---
+- src/build-tools/krb5-config.in |   14 +++++++++-----
+- 1 files changed, 9 insertions(+), 5 deletions(-)
++ src/build-tools/krb5-config.in | 14 +++++++++-----
++ 1 file changed, 9 insertions(+), 5 deletions(-)
+ 
+ diff --git a/src/build-tools/krb5-config.in b/src/build-tools/krb5-config.in
+ index f6184da..637bad7 100755
+@@ -43,6 +47,3 @@ index f6184da..637bad7 100755
+      # Ugly gross hack for our build tree
+      lib_flags=`echo $CC_LINK | sed -e 's/\$(CC)//' \
+  	    -e 's/\$(PURE)//' \
+--- 
+-1.7.1
+-
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
+index 80bc8afe94..f8eb0ec50b 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
+@@ -21,9 +21,9 @@ inherit autotools-brokensep binconfig perlnative systemd update-rc.d
+ 
+ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+-           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
+-           file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
+-           file://crosscompile_nm.patch \
++           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch;patchdir=..\
++           file://debian-suppress-usr-lib-in-krb5-config.patch;patchdir=.. \
++           file://crosscompile_nm.patch;patchdir=.. \
+            file://etc/init.d/krb5-kdc \
+            file://etc/init.d/krb5-admin-server \
+            file://etc/default/krb5-kdc \
 -- 
-2.16.2
+2.15.1
 
 
