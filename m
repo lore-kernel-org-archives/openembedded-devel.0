@@ -1,54 +1,25 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E0DC78997
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 79B8171BFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 21:00:36 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id f125so12282916wme.4
+	Thu, 22 Mar 2018 05:53:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w2M5rmAO003836
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 14:00:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=r3Ao0jJ7vXeyg+RcGEAHcnUla9ezmp6WAxRgXJsNSBA=;
-	b=LEFPvwtW3fX9hiX9HfMpoKGGNrZkS8MFKgFBwnXpzeg86YyLnOPmm1it0ybUBDiShS
-	wlebWuwKM7v0voSPUCuIo4hWoJ1q7advQqtNZ4LObgmYpdyEtX1PQwn8ygGXF5FqoHZ2
-	CWTxIpQuG4CuC77SJENikyDPo1tgT/n9NJgsr34b1gVz57kwZ5b34T7BRZW/nbOExXf+
-	HO4qrfJ45TqbinJl2JhBaYx68geA/d/r3qT1Y934bc0AApw5n1tzWmzGsnU9VYV7Gmry
-	91d71lJUfCgjDmWLN38VtqYDnoWfF/Cx+puEOJ2D21PiAm+/ED8cXr+QwpuqECAYjF4M
-	+Qlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=r3Ao0jJ7vXeyg+RcGEAHcnUla9ezmp6WAxRgXJsNSBA=;
-	b=s2Tn369+KSh2uwde/mXfWIQkYF46o2cFMlNvgJMbSnApx2Az/SXCF5PJrtGD90SL9Y
-	MACqx7yhuX6EC29MnxM6100QjEW/AMk5s4CgmPQILdxqi8webeofTCmDynQwjy8/UFxQ
-	aveMSuPnuBRwYpCI9brlSf/xd1JMrMb5qjF0soCEvmCUFQbeofUAy2tD2SL2PnJF3bgC
-	AeEafNCLLqKa6d56x6/MEE1pf2nP++WTi6opoZZB1oA43rp6lLK/XQJzRQ3WTK2DM2r6
-	48Q+h91P/lIr/zU8D+4VvyZpDBNG2yGZAxARb1WVLSk7cEE4cs31p0f5qIourTnbIhxK
-	bXUw==
-X-Gm-Message-State: AElRT7FTI+nGUtW1c18E84adLugimeePq1nDybtwT8DJbF459fpUF/6k
-	guoQxgTaIl4bcLZnMRjbYdVJgA==
-X-Google-Smtp-Source: AG47ELu4nYDM0tQzMzIEJWVG4B04q9rgkbKSp8cIpibljM9SLm8SYnv/csYpxA0IXmH42zkJudl7ZA==
-X-Received: by 10.28.166.206 with SMTP id p197mr3521039wme.81.1521666037129;
-	Wed, 21 Mar 2018 14:00:37 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p200300F07BC111801E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc1:1180:1e6f:65ff:fe3e:7f61])
-	by smtp.gmail.com with ESMTPSA id
-	q21sm5916339wmd.12.2018.03.21.14.00.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 21 Mar 2018 14:00:36 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Mar 2018 22:00:22 +0100
-Message-Id: <20180321210022.4682-5-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <20180321210022.4682-1-schnitzeltony@gmail.com>
-References: <20180321210022.4682-1-schnitzeltony@gmail.com>
+	Wed, 21 Mar 2018 22:53:49 -0700 (PDT)
+Received: from localhost (128.224.163.220) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Wed, 21 Mar 2018 22:53:48 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 22 Mar 2018 13:53:46 +0800
+Message-ID: <1521698026-27617-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [PATCH 5/5] mariadb(-native): refresh fix-mysqlclient-r-version.patch
+X-Originating-IP: [128.224.163.220]
+Subject: [meta-networking][PATCH] crda: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,90 +32,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Mar 2018 21:00:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Mar 2018 05:53:48 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Fix QA warning:
+
+WARNING: crda-3.18-r0 do_patch:
+Some of the context lines in patches were ignored. This can lead to
+incorrectly applied patches.
+The context lines in the patches can be updated with devtool:
+
+    devtool modify <recipe>
+    devtool finish --force-patch-refresh <recipe> <layer_path>
+
+Then the updated patches and the source tree (in devtool's workspace)
+should be reviewed to make sure the patches apply in the correct place
+and don't introduce duplicate lines (which can, and does happen
+when some of the context is ignored). Further information:
+http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
+Details:
+Applying patch fix-linking-of-libraries-used-by-reglib.patch
+patching file Makefile
+Hunk #2 succeeded at 40 with fuzz 2.
+Hunk #3 succeeded at 46 (offset -5 lines).
+Hunk #4 succeeded at 116 (offset -5 lines).
+
+Now at patch fix-linking-of-libraries-used-by-reglib.patch
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../mysql/mariadb/fix-mysqlclient-r-version.patch   | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ .../fix-linking-of-libraries-used-by-reglib.patch   | 21 ++++++++++++++-------
+ 1 file changed, 14 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-index 7516619eb..a519e4292 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-@@ -25,9 +25,8 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+diff --git a/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch b/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
+index aceb56d..812e983 100644
+--- a/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
++++ b/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
+@@ -1,6 +1,7 @@
++From 890f5bf2654b695a866262d72bfa9750af921a3b Mon Sep 17 00:00:00 2001
+ From: Ben Hutchings <ben@decadent.org.uk>
+ Date: Sat, 23 Aug 2014 12:26:37 -0700
+-Subject: Fix linking of libraries used by libreg
++Subject: [PATCH] Fix linking of libraries used by libreg
  
- ---
-  cmake/install_macros.cmake | 25 +++++++++++++++----------
-- cmake/mysql_version.cmake  |  3 ++-
-- libmysql/CMakeLists.txt    | 36 ++++++++++++++++++++++++++++--------
-- 3 files changed, 45 insertions(+), 19 deletions(-)
-+ libmysql/CMakeLists.txt    | 34 +++++++++++++++++++++++++++-------
-+ 2 files changed, 42 insertions(+), 17 deletions(-)
+ The math and crypto libraries are called by and need to be linked to
+ libreg.so, not to the executables.
+@@ -9,10 +10,15 @@ Upstream-Status: Backport [http://www.spinics.net/lists/linux-wireless/msg126027
  
- diff --git a/cmake/install_macros.cmake b/cmake/install_macros.cmake
- index b8efdf8..a0d0e68 100644
-@@ -39,8 +38,8 @@ index b8efdf8..a0d0e68 100644
-  # 
-  # This program is free software; you can redistribute it and/or modify
-  # it under the terms of the GNU General Public License as published by
--@@ -111,28 +111,33 @@ FUNCTION(INSTALL_SCRIPT)
-- ENDFUNCTION()
-+@@ -167,28 +167,33 @@ ENDFUNCTION()
-+ 
+ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
++---
++ Makefile | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
+ 
++diff --git a/Makefile b/Makefile
++index a3ead30..da2dcc3 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -30,7 +30,7 @@ CFLAGS += -std=gnu99 -Wall -Werror -peda
++@@ -30,7 +30,7 @@ CFLAGS += -std=gnu99 -Wall -Werror -pedantic
+  CFLAGS += -Wall -g
+  LDLIBREG += -lreg
+  LDLIBS += $(LDLIBREG)
+@@ -21,16 +27,14 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+  LIBREG += libreg.so
+  LDFLAGS += -L ./
   
-  # Install symbolic link to CMake target. 
- -# the link is created in the same directory as target
-@@ -86,8 +85,8 @@ diff --git a/libmysql/CMakeLists.txt b/libmysql/CMakeLists.txt
- index be5760f..96286ff 100644
- --- a/libmysql/CMakeLists.txt
- +++ b/libmysql/CMakeLists.txt
--@@ -180,6 +180,12 @@ IF(MSVC)
--  INSTALL_DEBUG_TARGET(mysqlclient DESTINATION ${INSTALL_LIBDIR}/debug)
-+@@ -433,6 +433,12 @@ IF(MSVC)
-+  INSTALL_DEBUG_TARGET(clientlib DESTINATION ${INSTALL_LIBDIR}/debug)
-  ENDIF()
+-@@ -40,7 +40,7 @@ all_noverify: $(LIBREG) crda intersect r
++@@ -40,13 +40,13 @@ all_noverify: $(LIBREG) crda intersect regdbdump db2rd optimize
   
- +MACRO(GET_TARGET_NAME target out_name)
-@@ -99,7 +98,7 @@ index be5760f..96286ff 100644
-  IF(UNIX)
-    MACRO(GET_VERSIONED_LIBNAME LIBNAME EXTENSION VERSION OUTNAME)
-      SET(DOT_VERSION ".${VERSION}")
--@@ -192,7 +198,13 @@ IF(UNIX)
-+@@ -445,7 +451,13 @@ IF(UNIX)
-        SET(${OUTNAME} ${LIBNAME}${EXTENSION}${DOT_VERSION})
-      ENDIF() 
-    ENDMACRO()
-@@ -114,7 +113,7 @@ index be5760f..96286ff 100644
-  ENDIF()
+  ifeq ($(USE_OPENSSL),1)
+  CFLAGS += -DUSE_OPENSSL -DPUBKEY_DIR=\"$(RUNTIME_PUBKEY_DIR)\" `pkg-config --cflags openssl`
+ -LDLIBS += `pkg-config --libs openssl`
+ +LIBREGLDLIBS += `pkg-config --libs openssl`
   
-  IF(NOT DISABLE_SHARED)
--@@ -205,10 +217,9 @@ IF(NOT DISABLE_SHARED)
-+@@ -456,10 +468,9 @@ IF(NOT DISABLE_SHARED)
-      # libtool compatability
-      IF(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR APPLE)
-        SET(OS_SHARED_LIB_VERSION "${SHARED_LIB_MAJOR_VERSION}")
-@@ -127,7 +126,7 @@ index be5760f..96286ff 100644
-      ENDIF()
-      # Name of shared library is mysqlclient on Unix
-      SET_TARGET_PROPERTIES(libmysql PROPERTIES 
--@@ -239,8 +250,13 @@ IF(NOT DISABLE_SHARED)
-+@@ -482,8 +493,13 @@ IF(NOT DISABLE_SHARED)
-        "${CMAKE_SHARED_LIBRARY_SUFFIX}"
-        ""
-        linkname)
-@@ -143,7 +142,7 @@ index be5760f..96286ff 100644
-      LIST(REMOVE_DUPLICATES OS_SHARED_LIB_SYMLINKS)
-      FOREACH(ver ${OS_SHARED_LIB_SYMLINKS})
-        GET_VERSIONED_LIBNAME(
--@@ -248,7 +264,11 @@ IF(NOT DISABLE_SHARED)
-+@@ -491,7 +507,11 @@ IF(NOT DISABLE_SHARED)
-          "${CMAKE_SHARED_LIBRARY_SUFFIX}"
-          "${ver}"
-          linkname)
+- ifeq ($(RUNTIME_PUBKEY_ONLY),1)
+- CFLAGS += -DRUNTIME_PUBKEY_ONLY
+-@@ -51,7 +51,7 @@ endif
++ $(LIBREG): keys-ssl.c
+  
+  else
+  CFLAGS += -DUSE_GCRYPT
+@@ -39,7 +43,7 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+  
+  $(LIBREG): keys-gcrypt.c
+  
+-@@ -121,7 +121,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(
++@@ -116,7 +116,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(PUBKEY_DIR)/*.pem)
+  
+  $(LIBREG): regdb.h reglib.h reglib.c
+  	$(NQ) '  CC  ' $@
+@@ -48,3 +52,6 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+  
+  install-libreg-headers:
+  	$(NQ) '  INSTALL  libreg-headers'
++-- 
++2.7.4
++
 -- 
-2.14.3
+2.7.4
 
 
