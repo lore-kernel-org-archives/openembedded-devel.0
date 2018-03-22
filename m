@@ -1,49 +1,40 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw0-f169.google.com (mail-yw0-f169.google.com
-	[209.85.161.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 66B0678862
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 51802788E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 07:34:42 +0000 (UTC)
-Received: by mail-yw0-f169.google.com with SMTP id r145so2515360ywe.7
+	Thu, 22 Mar 2018 09:11:54 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id j73so8395981qke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 00:34:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=wI4FCeNi8azWFUyh8T8ptCBu24rcfUUF84tVuSzzBzc=;
-	b=PWlSAh89iT3GHDv/ygwQkLHKyXi+zsF6d/HoCVm5eIoPg9QFDxwgVBuzJhqLJlg8xQ
-	AQ8nTYnz2h5lmzlaVh1yPG0WhLqDjsR9PdX69EaJ+0mMjMtlXA0zCA7DB00QLAUwBfx9
-	aJAJfB7z8EAhWC70f5/KJB+QEnCJxVZ5BCISgWoSzOg44LJi4h75hA8O4DGUFsNYJSG6
-	z8qgEJnhXbkPFm2TV2zTPgIJdfNDwZ8GixBGmhLQUtXI70xfyWdczNzwWqKqEXl6Yd68
-	mbZuIF/WWjozdju2nC3QQbmpqUQ2DuK1Chg5vfCeiBx/q3Hsvmk+7z4XPjzlRDNmegrf
-	DW1Q==
+	Thu, 22 Mar 2018 02:11:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=wI4FCeNi8azWFUyh8T8ptCBu24rcfUUF84tVuSzzBzc=;
-	b=Vm24qeDXHQ0DUMgwONYEhSloNKnq6Y5iHEHIWXHysTsQ35xAZPd/JE+zG9uJCgcQnH
-	kwECP6s7tyoP0z3nupFzocjmjNx21Y6LXyQWCZp1FOsGkppy941qtUvHOaS1qi7wUPeS
-	K9d/q9GbC0ZgtRU0uTkX+0qX46wcDydoAFqi7XiiDGqyj7RJrJ7r1Nlvv8hSHaONcSy0
-	oglHkFtYxMCnNNBMnwg6PSFeWHFrvUJjTeBDM+OPbNykzz+gakMC59ftmxICH6FjDBKU
-	FcIDmi1o4QybY46QtN8eUYwCsUqW8rhBA6XLhRXg6jv19lmAKmQKdzXUwBxZqzKyyuDl
-	TbDA==
-X-Gm-Message-State: AElRT7Gei/dyeqMVLcP5wAQCPSvXl6G63JSHomtO+yj7zwgcBpCvXE6W
-	qBShadltgdUdRthpSW52qMM5uWZLLVDhzd1xyDI=
-X-Google-Smtp-Source: AG47ELvBKW5n3sRPJqMdysfUkDF2EuUBc7VPaOSsl9DXzgMFnDkNlNWEkIdOsCxM76RR2mKjCu41B5mOSRrkAHN+8Aw=
-X-Received: by 10.129.108.137 with SMTP id h131mr13422649ywc.180.1521704083248;
-	Thu, 22 Mar 2018 00:34:43 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E5VuCHDarGyzXDYyG1vqkq1esI4v5RhCk7oPmJ9RDRY=;
+	b=EuvNni1xOgAcYx9FLM/GkorGd4chs1o3Py5tr3w3W2cGgCAA7s5sYpNxkBx3vthWDq
+	/lZOqAw3SJ5BGthTrMqNeQoX39stj8YCxT5KHFZ5aztVGlJ6d5qZN2pVoJRgpXBcgANq
+	eH+55zoudwSqSzDI6SnsZoreWC+rQHJ3sBWS5qs0hb+LdcrEDHI2CL87TbzykpCESxPI
+	qXeSb2QFGcK0ar6J8FutCd6MSyONekNhR7CxodXEcBFZb7qeknPzbrO9aYKAQTJINHsS
+	98UZWMyek5BURNHzRYQCb4PxQZpYUlUwf+Em9oYjBEvCVZANjof4wg9iqXTffOKQP2d+
+	NfgQ==
+X-Gm-Message-State: AElRT7FcJ7va06zPOxVZdGhLF3rTbTq7lYgKByP+6IReobtOcROZyTJ+
+	2d9Q5ysjnnY5pIj68Lld2GxSF5KJ
+X-Google-Smtp-Source: AG47ELt6AYwZ/g4oDejiQ89Y8KN3snf6YESsYWlwUc4hIJJ4NZ6rsSacGKXJN1T2L3fwUdsXV6K66g==
+X-Received: by 10.55.136.129 with SMTP id k123mr32285908qkd.205.1521709916076; 
+	Thu, 22 Mar 2018 02:11:56 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id n68sm823747qke.25.2018.03.22.02.11.54
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 22 Mar 2018 02:11:55 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Mar 2018 09:11:50 +0000
+Message-Id: <20180322091152.3145-1-git@andred.net>
+X-Mailer: git-send-email 2.16.2
 MIME-Version: 1.0
-Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Thu, 22 Mar 2018 00:34:42
-	-0700 (PDT)
-In-Reply-To: <20180318190833.1393-9-schnitzeltony@gmail.com>
-References: <20180318190833.1393-1-schnitzeltony@gmail.com>
-	<20180318190833.1393-9-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 22 Mar 2018 08:34:42 +0100
-Message-ID: <CALbNGRQzeYw6crWUC9vigqBK=m1x1=Jhz121-0Do0hjg1Ug6rQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 8/8] poppler: update 0.57.0 -> 0.62.0
+Subject: [meta-python][PATCH v2 1/3] python-aws-iot-device-sdk-python: fix runtime dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2018 07:34:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Mar 2018 09:11:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sun, Mar 18, 2018 at 8:08 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> * poppler moved from autotools to cmake
-> * qt4 backend was removed
-> * build tested with all and none in packageconfig
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  ...0001-Do-not-overwrite-all-our-build-flags.patch | 36 +++++++++
->  ...dd-manadatory-options-to-find-qt4-qt5-moc.patch | 91 ----------------=
-------
->  .../0002-fix-gcc-6-math-ambiguous-errors.patch     | 11 ---
->  meta-oe/recipes-support/poppler/poppler_0.57.0.bb  | 55 -------------
->  meta-oe/recipes-support/poppler/poppler_0.62.0.bb  | 55 +++++++++++++
->  5 files changed, 91 insertions(+), 157 deletions(-)
->  create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-Do-not-o=
-verwrite-all-our-build-flags.patch
->  delete mode 100644 meta-oe/recipes-support/poppler/poppler/0001-add-mana=
-datory-options-to-find-qt4-qt5-moc.patch
->  delete mode 100644 meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-=
-6-math-ambiguous-errors.patch
->  delete mode 100644 meta-oe/recipes-support/poppler/poppler_0.57.0.bb
->  create mode 100644 meta-oe/recipes-support/poppler/poppler_0.62.0.bb
->
-Something wrong with this one or did it slip through? I am asking
-because the other patches of this series were applied in master.
+From: André Draszik <andre.draszik@jci.com>
 
-Andreas
+They were completely wrong...
+List of imports obtained via:
+   rgrep -w import \
+   | awk -F : '{ $1="" ; gsub(/^[ \t]+|[ \t]+$/, ""); print; }' \
+   | grep -v AWSIoTPythonSDK \
+   | sort -u
+and packages providing the relevant modules extracted using
+oe-pkgdata-util find-path.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+
+---
+v2:
+* no changes
+---
+ .../recipes-devtools/python/python-aws-iot-device-sdk-python.inc | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
+index 177b819d4..1fc98bdbd 100644
+--- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
++++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
+@@ -11,8 +11,15 @@ inherit pypi
+ PYPI_PACKAGE = "AWSIoTPythonSDK"
+ 
+ RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-pyopenssl \
++    ${PYTHON_PN}-crypt \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-io \
+     ${PYTHON_PN}-json \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-math \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-threading \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.16.2
+
 
