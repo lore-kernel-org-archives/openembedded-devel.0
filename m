@@ -1,25 +1,25 @@
 Return-Path: <Yi.Zhao@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 79B8171BFC
+	by mail.openembedded.org (Postfix) with ESMTP id C077478890
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 05:53:47 +0000 (UTC)
+	Thu, 22 Mar 2018 05:53:54 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w2M5rmAO003836
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w2M5rup8003839
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Mar 2018 22:53:49 -0700 (PDT)
+	Wed, 21 Mar 2018 22:53:56 -0700 (PDT)
 Received: from localhost (128.224.163.220) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Wed, 21 Mar 2018 22:53:48 -0700
+	Wed, 21 Mar 2018 22:53:55 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 22 Mar 2018 13:53:46 +0800
-Message-ID: <1521698026-27617-1-git-send-email-yi.zhao@windriver.com>
+Date: Thu, 22 Mar 2018 13:53:53 +0800
+Message-ID: <1521698033-27671-1-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.220]
-Subject: [meta-networking][PATCH] crda: refresh patch
+Subject: [meta-python][PATCH] python-m2crypto: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,12 +32,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2018 05:53:48 -0000
+X-List-Received-Date: Thu, 22 Mar 2018 05:53:54 -0000
 Content-Type: text/plain
 
 Fix QA warning:
 
-WARNING: crda-3.18-r0 do_patch:
+WARNING: python-m2crypto-native-0.26.4-r0 do_patch:
 Some of the context lines in patches were ignored. This can lead to
 incorrectly applied patches.
 The context lines in the patches can be updated with devtool:
@@ -52,81 +52,61 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-Applying patch fix-linking-of-libraries-used-by-reglib.patch
-patching file Makefile
-Hunk #2 succeeded at 40 with fuzz 2.
-Hunk #3 succeeded at 46 (offset -5 lines).
-Hunk #4 succeeded at 116 (offset -5 lines).
+Applying patch
+0001-setup.py-link-in-sysroot-not-in-host-directories.patch
+patching file setup.py
+Hunk #1 succeeded at 127 with fuzz 1 (offset 65 lines).
+Hunk #2 succeeded at 143 (offset 68 lines).
 
-Now at patch fix-linking-of-libraries-used-by-reglib.patch
+Now at patch 0001-setup.py-link-in-sysroot-not-in-host-directories.patch
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../fix-linking-of-libraries-used-by-reglib.patch   | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ ...p.py-link-in-sysroot-not-in-host-directories.patch | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch b/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-index aceb56d..812e983 100644
---- a/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-+++ b/meta-networking/recipes-connectivity/crda/crda/fix-linking-of-libraries-used-by-reglib.patch
-@@ -1,6 +1,7 @@
-+From 890f5bf2654b695a866262d72bfa9750af921a3b Mon Sep 17 00:00:00 2001
- From: Ben Hutchings <ben@decadent.org.uk>
- Date: Sat, 23 Aug 2014 12:26:37 -0700
--Subject: Fix linking of libraries used by libreg
-+Subject: [PATCH] Fix linking of libraries used by libreg
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch b/meta-python/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
+index 819c8e5..c71b16f 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
++++ b/meta-python/recipes-devtools/python/python-m2crypto/0001-setup.py-link-in-sysroot-not-in-host-directories.patch
+@@ -1,4 +1,4 @@
+-From f11b9c71080513f9b867ba8f40613ba2ebc6e960 Mon Sep 17 00:00:00 2001
++From dfb83a41aaeae326e9b6f02b233af375bc7b8815 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Fri, 29 Mar 2013 15:17:17 +0100
+ Subject: [PATCH] setup.py: link in sysroot, not in host directories
+@@ -10,12 +10,12 @@ Upstream-status: Unknown
+  setup.py | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
  
- The math and crypto libraries are called by and need to be linked to
- libreg.so, not to the executables.
-@@ -9,10 +10,15 @@ Upstream-Status: Backport [http://www.spinics.net/lists/linux-wireless/msg126027
- 
- Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
- Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-+---
-+ Makefile | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
- 
-+diff --git a/Makefile b/Makefile
-+index a3ead30..da2dcc3 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -30,7 +30,7 @@ CFLAGS += -std=gnu99 -Wall -Werror -peda
-+@@ -30,7 +30,7 @@ CFLAGS += -std=gnu99 -Wall -Werror -pedantic
-  CFLAGS += -Wall -g
-  LDLIBREG += -lreg
-  LDLIBS += $(LDLIBREG)
-@@ -21,16 +27,14 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-  LIBREG += libreg.so
-  LDFLAGS += -L ./
+-Index: M2Crypto-0.23.0/setup.py
+-===================================================================
+---- M2Crypto-0.23.0.orig/setup.py
+-+++ M2Crypto-0.23.0/setup.py
+-@@ -62,7 +62,7 @@ class _M2CryptoBuildExt(build_ext.build_
+-             self.openssl = 'c:\\pkg'
++diff --git a/setup.py b/setup.py
++index 3407c82..15ed7cd 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -127,7 +127,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
++                 self.openssl = os.path.join(self.openssl, 'OpenSSL')
+          else:
+              self.libraries = ['ssl', 'crypto']
+ -            self.openssl = '/usr'
+@@ -23,7 +23,7 @@ Index: M2Crypto-0.23.0/setup.py
   
--@@ -40,7 +40,7 @@ all_noverify: $(LIBREG) crda intersect r
-+@@ -40,13 +40,13 @@ all_noverify: $(LIBREG) crda intersect regdbdump db2rd optimize
+      def finalize_options(self):
+          '''Overloaded build_ext implementation to append custom openssl
+-@@ -75,8 +75,8 @@ class _M2CryptoBuildExt(build_ext.build_
++@@ -143,8 +143,8 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+          if _openssl and os.path.isdir(_openssl):
+              self.openssl = _openssl
   
-  ifeq ($(USE_OPENSSL),1)
-  CFLAGS += -DUSE_OPENSSL -DPUBKEY_DIR=\"$(RUNTIME_PUBKEY_DIR)\" `pkg-config --cflags openssl`
- -LDLIBS += `pkg-config --libs openssl`
- +LIBREGLDLIBS += `pkg-config --libs openssl`
+@@ -34,3 +34,6 @@ Index: M2Crypto-0.23.0/setup.py
   
-- ifeq ($(RUNTIME_PUBKEY_ONLY),1)
-- CFLAGS += -DRUNTIME_PUBKEY_ONLY
--@@ -51,7 +51,7 @@ endif
-+ $(LIBREG): keys-ssl.c
-  
-  else
-  CFLAGS += -DUSE_GCRYPT
-@@ -39,7 +43,7 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-  
-  $(LIBREG): keys-gcrypt.c
-  
--@@ -121,7 +121,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(
-+@@ -116,7 +116,7 @@ keys-%.c: utils/key2pub.py $(wildcard $(PUBKEY_DIR)/*.pem)
-  
-  $(LIBREG): regdb.h reglib.h reglib.c
-  	$(NQ) '  CC  ' $@
-@@ -48,3 +52,6 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-  
-  install-libreg-headers:
-  	$(NQ) '  INSTALL  libreg-headers'
+          if platform.system() == "Linux":
+              if _multiarch:  # on Fedora/RHEL it is an empty string
 +-- 
 +2.7.4
 +
