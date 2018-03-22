@@ -1,54 +1,50 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B8C778934
+Received: from mail-yb0-f196.google.com (mail-yb0-f196.google.com
+	[209.85.213.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BF4A26025E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 21:37:58 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id s18so10164155wrg.9
+	Thu, 22 Mar 2018 21:44:07 +0000 (UTC)
+Received: by mail-yb0-f196.google.com with SMTP id o197-v6so2149387ybg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 14:38:00 -0700 (PDT)
+	Thu, 22 Mar 2018 14:44:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-transfer-encoding;
-	bh=COW/6791UIq6eM5JvioO8vGdH7DNV8l3Vud8uPlbZVI=;
-	b=AHX8FZXy8uepyhlvENtY+JT1MUQxVAJfmhzhka+bFXQwp3tlSy4qTl0K8khn7DVB36
-	lsUzY69Rgr2t70HRTaM59Ky9DmbJnDmh9YqKL2o5JTlZbWpJ00aYMCRlX9YvABWOkagW
-	udme2hWEr2MdF0cnO1dJzFUiHpgBN7R5NwW+UU5D94YMmZsAGA3GlWhQK4WOI7ZNIehn
-	f64nc2JuhrKF3LuxWYArT35voEReUOArZ4wsMuajVuEmI1zPj7ir5tSVerUNYZB9Qpia
-	CiSySW6Z53v9y20ab0Lp7q54WH3QMgOFEMn9AS+BHnRp6YZBE/0Xd4Tg7NwMDHAGqdIG
-	Dv6w==
+	bh=SP8h9JgbTjqznTnzYp4xEkiiGARaRMf4RAoVDM7blbw=;
+	b=fJCruAbcWN8YJrFxJ8zB1o+Og9/7y84Wew/iMhLQxGVSQ0zvmiGkiPdV6iE8wlfKz7
+	fCTkFiLm9TuidxKsiiX+Q7kS7zC5pFcCN2BDNpY9HNWPFTlK8pw6AD5j1RVRIDuRg4Ng
+	+qn0xe9BpQzSloD+uWIhUbl/qt2esDzuj+K+PnlMYIGGwbmJwuM87G7Wdp1Be12qMsNr
+	NljsG3xUSXcwfBM++RhfRjIue9ajr5MsDh9YNnmNKnlY7VRsODvHei+GYSMe3j0RMPVv
+	BSLkuVlkBCBAMB5ScWZ6725/0MXrmowegLDjKNqnsTmktqLB5UtGWZDKBNo2pK1wogSB
+	DCfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=COW/6791UIq6eM5JvioO8vGdH7DNV8l3Vud8uPlbZVI=;
-	b=TfwtCove8IrqzvgVRlFpB9fmDLhJLaG9Z6UnuVX0ULmG1cEmBHJhM+101aAD7cSk3d
-	ehnaWrvLsGamp/sIxKfZdRooOdC+lKtu7Kg9HzlqL5ybOnTBRV4Zk+uV1S6H3H7D6VqJ
-	wylU/u3o3h1acbn0o1U5wM7oHCUs0q1rZDW5frOmFhN1S6WFkCcpZJYpKE4EyDzuEwg+
-	FAZzFxFNtU2rK28DlNi9w9m40uql4a3DaBqVXuPhqeQk2ZCoEREDq+MlNc7rUmd/8DlJ
-	Yt7Qnr3qTdqmPcvNVQ+22eLQEymVLX0tqqwKwDwr5uRmZM7cRz409IkyghYwmt+q9k/C
-	xa9Q==
-X-Gm-Message-State: AElRT7GAsqWdDMRHlxmWR1jOSMvOpeWzwJXmTCTyR8iNvOuTavJdI4l0
-	enmPE262snhpgo/oqxZ5Wns5hg==
-X-Google-Smtp-Source: AG47ELsS22R2/OKzcDeziycdfwJXWdAQB1b64mn3pofEbr763z6q1aSz3fNOKl137kYuWutJ0AJ0hg==
-X-Received: by 10.223.225.210 with SMTP id l18mr3006497wri.251.1521754679808; 
-	Thu, 22 Mar 2018 14:37:59 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p200300F07BC111611E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc1:1161:1e6f:65ff:fe3e:7f61])
-	by smtp.gmail.com with ESMTPSA id m7sm7558897wrb.86.2018.03.22.14.37.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 22 Mar 2018 14:37:59 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Mar 2018 22:37:41 +0100
-Message-Id: <20180322213741.29876-4-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=SP8h9JgbTjqznTnzYp4xEkiiGARaRMf4RAoVDM7blbw=;
+	b=Wj+4MxbCEZ/NpghPQz/OlIii35wAnu39urWHmD0jS5Tl+VONNY1vfh3V9foSjkDCwc
+	wRVXicVtNqoS9ANskswPpf2PWZZtpk1O2OY1HiWXUuU0vNGzvKy6Z2zl+Ly5HpwVy6pJ
+	o+IViVWvk6AEQ2oUmpTIZEskRb1l7i6UyvWclsSQWtLekWsCRhBqJd8aNZAFBqcl9Vzc
+	UvXhRvTR4jPhcnASwMtWDSjyKhSs5xpQ3MRpsFNDMnjAJVTgAw8sP27P8KVYMMeKniPN
+	U+2gc5cK7hP5yH6WyXChJbnHB84e82SwdIlNTeCPqJzfKclzqg2WG1Wiw8nfPIzcFwsD
+	O3aQ==
+X-Gm-Message-State: AElRT7GUoPphH1YDe56fMwlKYkxUDYI5TBLNr7XQ4+kbc7QECZOLQhAG
+	9PFIeERA7PSzj/f1EdR7HayG2w8Q/MvXc5jbQw4=
+X-Google-Smtp-Source: AG47ELskSGHXW+H98eaDzgnYsVnzUijghpia7igWRk0enrIaU7JmE+YqjSbi1l+j1N4QzcoPTGdbjeQkAh23XvMCaWY=
+X-Received: by 2002:a25:31d5:: with SMTP id
+	x204-v6mr2874730ybx.145.1521755047229; 
+	Thu, 22 Mar 2018 14:44:07 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Thu, 22 Mar 2018 14:44:06
+	-0700 (PDT)
 In-Reply-To: <20180322213741.29876-1-schnitzeltony@gmail.com>
 References: <20180322213741.29876-1-schnitzeltony@gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH 4/4] libunique: move to meta-xfce
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 22 Mar 2018 22:44:06 +0100
+Message-ID: <CALbNGRTpiqyWxrZqwevg5qpbLOLzyAWmTtWbq26n6o1k0QVEag@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Khem Raj <raj.khem@gmail.com>
+Subject: Re: [PATCH 1/4] networkmanager: fix gobject-introspection/musl and cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,53 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2018 21:37:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 22 Mar 2018 21:44:08 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There are the only recipes using it still and I take the maintenace burden
+On Thu, Mar 22, 2018 at 10:37 PM, Andreas M=C3=BCller
+<schnitzeltony@gmail.com> wrote:
+> This adresses the comments for recent patch which updated nm to 1.10.6 an=
+d is a
+> follow-up for [1].
+>
+> * Make gobject-introspection work by skipping creation of gobject-introsp=
+ection
+>   specific documentation. This fixes networkmanager-applet regression.
+> * Cleanup patches: Remove current musl patches completely and re-use thos=
+e
+>   found in void-linux because they do look much cleaner and don't touch g=
+libc
+>   build. One nice side effect: In the future when nm is updated we can st=
+eal
+>   again and don't need to reenvent here. Usually they are much faster tha=
+n we
+>   are (and I know one major contibutor personally from the good old Z80 t=
+imes..)
+> * Fix typo in PACKAGECONFIG
+>
+> [1] https://patchwork.openembedded.org/patch/149244/
+>
+Khem: can you give these a musl test? I do not have enough time and
+build resources (and am not using musl).
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch       | 0
- .../libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch    | 0
- .../recipes-extended}/libunique/libunique/build.patch                     | 0
- .../libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch              | 0
- .../recipes-extended}/libunique/libunique/noconst.patch                   | 0
- .../recipes-extended}/libunique/libunique_1.1.6.bb                        | 0
- 6 files changed, 0 insertions(+), 0 deletions(-)
- rename {meta-oe/recipes-gnome => meta-xfce/recipes-extended}/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch (100%)
- rename {meta-oe/recipes-gnome => meta-xfce/recipes-extended}/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch (100%)
- rename {meta-oe/recipes-gnome => meta-xfce/recipes-extended}/libunique/libunique/build.patch (100%)
- rename {meta-oe/recipes-gnome => meta-xfce/recipes-extended}/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch (100%)
- rename {meta-oe/recipes-gnome => meta-xfce/recipes-extended}/libunique/libunique/noconst.patch (100%)
- rename {meta-oe/recipes-gnome => meta-xfce/recipes-extended}/libunique/libunique_1.1.6.bb (100%)
-
-diff --git a/meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch b/meta-xfce/recipes-extended/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
-similarity index 100%
-rename from meta-oe/recipes-gnome/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
-rename to meta-xfce/recipes-extended/libunique/libunique/0001-Makefile.am-use-LIBTOOL-instead-of-hardcoded-libtool.patch
-diff --git a/meta-oe/recipes-gnome/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch b/meta-xfce/recipes-extended/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch
-similarity index 100%
-rename from meta-oe/recipes-gnome/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch
-rename to meta-xfce/recipes-extended/libunique/libunique/0001-test-unique-Add-format-qualifier-s-for-string.patch
-diff --git a/meta-oe/recipes-gnome/libunique/libunique/build.patch b/meta-xfce/recipes-extended/libunique/libunique/build.patch
-similarity index 100%
-rename from meta-oe/recipes-gnome/libunique/libunique/build.patch
-rename to meta-xfce/recipes-extended/libunique/libunique/build.patch
-diff --git a/meta-oe/recipes-gnome/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch b/meta-xfce/recipes-extended/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch
-similarity index 100%
-rename from meta-oe/recipes-gnome/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch
-rename to meta-xfce/recipes-extended/libunique/libunique/fix_for_compile_with_gcc-4.6.0.patch
-diff --git a/meta-oe/recipes-gnome/libunique/libunique/noconst.patch b/meta-xfce/recipes-extended/libunique/libunique/noconst.patch
-similarity index 100%
-rename from meta-oe/recipes-gnome/libunique/libunique/noconst.patch
-rename to meta-xfce/recipes-extended/libunique/libunique/noconst.patch
-diff --git a/meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb b/meta-xfce/recipes-extended/libunique/libunique_1.1.6.bb
-similarity index 100%
-rename from meta-oe/recipes-gnome/libunique/libunique_1.1.6.bb
-rename to meta-xfce/recipes-extended/libunique/libunique_1.1.6.bb
--- 
-2.14.3
-
+Andreas
 
