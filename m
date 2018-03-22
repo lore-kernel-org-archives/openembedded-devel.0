@@ -1,49 +1,49 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f196.google.com (mail-yb0-f196.google.com
-	[209.85.213.196])
-	by mail.openembedded.org (Postfix) with ESMTP id BF4A26025E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 73CFE7888F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 21:44:07 +0000 (UTC)
-Received: by mail-yb0-f196.google.com with SMTP id o197-v6so2149387ybg.5
+	Thu, 22 Mar 2018 21:51:49 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id x4-v6so6174351pln.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 14:44:09 -0700 (PDT)
+	Thu, 22 Mar 2018 14:51:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=SP8h9JgbTjqznTnzYp4xEkiiGARaRMf4RAoVDM7blbw=;
-	b=fJCruAbcWN8YJrFxJ8zB1o+Og9/7y84Wew/iMhLQxGVSQ0zvmiGkiPdV6iE8wlfKz7
-	fCTkFiLm9TuidxKsiiX+Q7kS7zC5pFcCN2BDNpY9HNWPFTlK8pw6AD5j1RVRIDuRg4Ng
-	+qn0xe9BpQzSloD+uWIhUbl/qt2esDzuj+K+PnlMYIGGwbmJwuM87G7Wdp1Be12qMsNr
-	NljsG3xUSXcwfBM++RhfRjIue9ajr5MsDh9YNnmNKnlY7VRsODvHei+GYSMe3j0RMPVv
-	BSLkuVlkBCBAMB5ScWZ6725/0MXrmowegLDjKNqnsTmktqLB5UtGWZDKBNo2pK1wogSB
-	DCfA==
+	:cc:content-transfer-encoding;
+	bh=eqMlAt720mYGBOtAoCIC8HCDAtO11UkVLt1l/Wh27bc=;
+	b=szb2eJjgUc7IC4jCCPaqbwabuioonMzPiNwaoX2+tlarsn8y5X01b7F0dZ/F16x5jy
+	98LMcvysgS8MWr1pMdyP+vtC/tuxRUiZqEwfGgVvpHN/OXGGThem+ZpjzI/gNY09K+JG
+	X6OBWfp5OodFvVSdLLpJZcKHxtESo9nflrsOztmlwna7Ypsg5oddCh4zeUxLWC2rLvJT
+	Ow9mi/zWFBSEo2X+Rl2cg9LzI+9p+ZHF2GNqVSW0NdAxWi9wkwy+aSmQCkG+DHNeDu1M
+	2wR2UxWSaVan8vlgbd34JwqtqmXeDQknjl2JwB6NeYLkXL33HYd7fzqGnJOlBeXhA9GU
+	DgGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=SP8h9JgbTjqznTnzYp4xEkiiGARaRMf4RAoVDM7blbw=;
-	b=Wj+4MxbCEZ/NpghPQz/OlIii35wAnu39urWHmD0jS5Tl+VONNY1vfh3V9foSjkDCwc
-	wRVXicVtNqoS9ANskswPpf2PWZZtpk1O2OY1HiWXUuU0vNGzvKy6Z2zl+Ly5HpwVy6pJ
-	o+IViVWvk6AEQ2oUmpTIZEskRb1l7i6UyvWclsSQWtLekWsCRhBqJd8aNZAFBqcl9Vzc
-	UvXhRvTR4jPhcnASwMtWDSjyKhSs5xpQ3MRpsFNDMnjAJVTgAw8sP27P8KVYMMeKniPN
-	U+2gc5cK7hP5yH6WyXChJbnHB84e82SwdIlNTeCPqJzfKclzqg2WG1Wiw8nfPIzcFwsD
-	O3aQ==
-X-Gm-Message-State: AElRT7GUoPphH1YDe56fMwlKYkxUDYI5TBLNr7XQ4+kbc7QECZOLQhAG
-	9PFIeERA7PSzj/f1EdR7HayG2w8Q/MvXc5jbQw4=
-X-Google-Smtp-Source: AG47ELskSGHXW+H98eaDzgnYsVnzUijghpia7igWRk0enrIaU7JmE+YqjSbi1l+j1N4QzcoPTGdbjeQkAh23XvMCaWY=
-X-Received: by 2002:a25:31d5:: with SMTP id
-	x204-v6mr2874730ybx.145.1521755047229; 
-	Thu, 22 Mar 2018 14:44:07 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=eqMlAt720mYGBOtAoCIC8HCDAtO11UkVLt1l/Wh27bc=;
+	b=JRFKwIcVR7cIrSxMG+ulpkdDZVe71TV86Y5Sy/tf1JbWbq4IU7hr9qYnzCfjCpC4Lc
+	ncpeXMShoXNCgYP+kN7A54IRaXO2A0HOt7+Z90TVvxF1QD8mZ2QMkNGBjgQ0Qcs2LsFj
+	GB+/jjaakvcwnt/NuASyOwVgiWd70+YIOduPUEGYzniHr9IQkVupCYDNTpzmW8qkimEx
+	nH+70Vd+BKCdNWblMb1obdCMdce1gH6B/NOqVu0OT65dBrN+c0zuhyLw1SMdPwEfQ0n2
+	e2oVJzvsVft1cupksv92kTcwiZzQypEGSSapMwmpzPC9z8GJtHDnagrO3YrMZdlV81s+
+	0TeQ==
+X-Gm-Message-State: AElRT7G2m7cXHNutcl3WvcEbfzhA3sxQZgE/+3rY7IVG0F+dQRjiHztn
+	vuc1TFphByqrEt8oxUIHQFGPqgBhPtPh4pPFuOM=
+X-Google-Smtp-Source: AG47ELvZOa2pbJsUT/y7pHaoRptIG6GFhwIasnV39CleDB7XV3HGUx/D5/nBzOXyng7cCnRoL9nX6HWyIbXLWU+8eoI=
+X-Received: by 2002:a17:902:6e01:: with SMTP id
+	u1-v6mr16654323plk.96.1521755510514; 
+	Thu, 22 Mar 2018 14:51:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Thu, 22 Mar 2018 14:44:06
-	-0700 (PDT)
-In-Reply-To: <20180322213741.29876-1-schnitzeltony@gmail.com>
+Received: by 10.100.241.68 with HTTP; Thu, 22 Mar 2018 14:51:20 -0700 (PDT)
+In-Reply-To: <CALbNGRTpiqyWxrZqwevg5qpbLOLzyAWmTtWbq26n6o1k0QVEag@mail.gmail.com>
 References: <20180322213741.29876-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 22 Mar 2018 22:44:06 +0100
-Message-ID: <CALbNGRTpiqyWxrZqwevg5qpbLOLzyAWmTtWbq26n6o1k0QVEag@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
+	<CALbNGRTpiqyWxrZqwevg5qpbLOLzyAWmTtWbq26n6o1k0QVEag@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 22 Mar 2018 14:51:20 -0700
+Message-ID: <CAMKF1sq9B04-As85yRQvtrLBoWYZvqsYN989QiGdJ8x8bfe7iQ@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/4] networkmanager: fix gobject-introspection/musl and cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,35 +57,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2018 21:44:08 -0000
+X-List-Received-Date: Thu, 22 Mar 2018 21:51:49 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 22, 2018 at 10:37 PM, Andreas M=C3=BCller
-<schnitzeltony@gmail.com> wrote:
-> This adresses the comments for recent patch which updated nm to 1.10.6 an=
-d is a
-> follow-up for [1].
->
-> * Make gobject-introspection work by skipping creation of gobject-introsp=
-ection
->   specific documentation. This fixes networkmanager-applet regression.
-> * Cleanup patches: Remove current musl patches completely and re-use thos=
-e
->   found in void-linux because they do look much cleaner and don't touch g=
-libc
->   build. One nice side effect: In the future when nm is updated we can st=
-eal
->   again and don't need to reenvent here. Usually they are much faster tha=
-n we
->   are (and I know one major contibutor personally from the good old Z80 t=
-imes..)
-> * Fix typo in PACKAGECONFIG
->
-> [1] https://patchwork.openembedded.org/patch/149244/
->
-Khem: can you give these a musl test? I do not have enough time and
-build resources (and am not using musl).
+On Thu, Mar 22, 2018 at 2:44 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+> On Thu, Mar 22, 2018 at 10:37 PM, Andreas M=C3=BCller
+> <schnitzeltony@gmail.com> wrote:
+>> This adresses the comments for recent patch which updated nm to 1.10.6 a=
+nd is a
+>> follow-up for [1].
+>>
+>> * Make gobject-introspection work by skipping creation of gobject-intros=
+pection
+>>   specific documentation. This fixes networkmanager-applet regression.
+>> * Cleanup patches: Remove current musl patches completely and re-use tho=
+se
+>>   found in void-linux because they do look much cleaner and don't touch =
+glibc
+>>   build. One nice side effect: In the future when nm is updated we can s=
+teal
+>>   again and don't need to reenvent here. Usually they are much faster th=
+an we
+>>   are (and I know one major contibutor personally from the good old Z80 =
+times..)
+>> * Fix typo in PACKAGECONFIG
+>>
+>> [1] https://patchwork.openembedded.org/patch/149244/
+>>
+> Khem: can you give these a musl test? I do not have enough time and
+> build resources (and am not using musl).
 
-Andreas
+I will try it out hopefully by weekend. What you dont use musl !!!! my god =
+:)
 
