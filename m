@@ -1,24 +1,24 @@
 Return-Path: <hainsvdbosch@ziggo.nl>
 Received: from smtpq3.mnd.mail.iss.as9143.net (smtpq3.mnd.mail.iss.as9143.net
 	[212.54.34.166])
-	by mail.openembedded.org (Postfix) with ESMTP id 521BA786EA
+	by mail.openembedded.org (Postfix) with ESMTP id A6BC478898
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 07:08:43 +0000 (UTC)
+	Fri, 23 Mar 2018 07:54:31 +0000 (UTC)
 Received: from [212.54.34.114] (helo=smtp6.mnd.mail.iss.as9143.net)
 	by smtpq3.mnd.mail.iss.as9143.net with esmtp (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>) id 1ezGoe-0004LU-Rc
+	(envelope-from <hainsvdbosch@ziggo.nl>) id 1ezHWz-0002CP-5N
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Mar 2018 08:08:44 +0100
+	Fri, 23 Mar 2018 08:54:33 +0100
 Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
 	helo=localhost.localdomain)
 	by smtp6.mnd.mail.iss.as9143.net with esmtpsa
 	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
 	(envelope-from <hainsvdbosch@ziggo.nl>)
-	id 1ezGoe-0002ci-Lo; Fri, 23 Mar 2018 08:08:44 +0100
+	id 1ezHWz-0007H9-2W; Fri, 23 Mar 2018 08:54:33 +0100
 From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Mar 2018 08:08:34 +0100
-Message-Id: <20180323070834.6649-1-hainsvdbosch@ziggo.nl>
+Date: Fri, 23 Mar 2018 08:54:24 +0100
+Message-Id: <20180323075424.7219-1-hainsvdbosch@ziggo.nl>
 X-Mailer: git-send-email 2.15.1
 X-SourceIP: 82.73.120.193
 X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
@@ -32,7 +32,7 @@ X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=HPnt6Llv c=1 sm=1 tr=0
 X-Ziggo-Spam-Status: No
 X-Spam-Status: No
 X-Spam-Flag: No
-Subject: [meta-oe][PATCH] iperf3: refresh patch
+Subject: [meta-oe][PATCH V2] iperf3: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,7 +45,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Mar 2018 07:08:44 -0000
+X-List-Received-Date: Fri, 23 Mar 2018 07:54:32 -0000
 
 WARNING: iperf3-3.2-r0 do_patch:
 Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
@@ -67,21 +67,27 @@ Hunk #1 succeeded at 28 with fuzz 2 (offset 5 lines).
 patching file src/timer.h
 
 Now at patch 0001-include-stdint.h-for-various-std-c99-int-types.patch
+---
 
-Patch for cjson.h already applied in version 3.2.
+Patch for cjson.h already applied with version 3.2.
 
 Signed-off-by: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 ---
- ...001-include-stdint.h-for-various-std-c99-int-types.patch | 13 -------------
- 1 file changed, 13 deletions(-)
+ ...-include-stdint.h-for-various-std-c99-int-types.patch | 16 +---------------
+ 1 file changed, 1 insertion(+), 15 deletions(-)
 
 diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
-index ae3620800..bcc32e253 100644
+index ae3620800..599ee1dfb 100644
 --- a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
 +++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
-@@ -9,19 +9,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+@@ -5,23 +5,9 @@ Subject: [PATCH 1/2] include stdint.h for various std c99 int types
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- src/cjson.h | 2 ++
   src/timer.h | 1 +
-  2 files changed, 3 insertions(+)
+- 2 files changed, 3 insertions(+)
++ 1 file changed, 1 insertions(+)
  
 -diff --git a/src/cjson.h b/src/cjson.h
 -index fb8cd3b..69cd272 100644
