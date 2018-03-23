@@ -1,47 +1,50 @@
-Return-Path: <yang.lyu@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A565D6FFD7
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 558F378771
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 09:17:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 6F010184EF
+	Fri, 23 Mar 2018 11:07:25 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id u46so11700080wrc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:51 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id S3RPV4jH6U7K
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 621E4182EE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 459FC1E07C
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3A6BC1E078
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder03.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-Received: from lnxyangl.se.axis.com (lnxyangl.se.axis.com [10.92.172.14])
-	by seth.se.axis.com (Postfix) with ESMTP id 2EF401A58
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-Received: by lnxyangl.se.axis.com (Postfix, from userid 12173)
-	id 29D54400B5; Fri, 23 Mar 2018 10:17:50 +0100 (CET)
-From: Yang Lyu <yang.lyu@axis.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Mar 2018 10:17:44 +0100
-Message-Id: <1521796664-16869-1-git-send-email-yangl@axis.com>
-X-Mailer: git-send-email 2.1.4
-X-TM-AS-GCONF: 00
-Subject: [meta-oe][PATCH] dbus-broker: Add recipe
+	Fri, 23 Mar 2018 04:07:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=tUDV3OghiXobuv6N2hl9B/tR7RgX6SZJz5WaJoNVvRo=;
+	b=sq1kRmnrU/3Mn7t1dHAF9rMJNsNpaMMQEkWrBMKjKm6TAyaC3ok3sKd3wxLxo6Jze3
+	4Ua6eSFSrKWjeg+QokO3WYbyBYozuwemKMMLH+E0eC7lrwuK+f+jZCm3yxsp6Xyivnih
+	Hqu6zOmifvJTTYlqsbbrd7ElIw0zprryF3a6gcLmm4RUMoMyoP8ioEo0p6XXIVDYALaT
+	XzOKuuD+8StJvYgqmwkgtZviUtNnymFUrajZgNaFLM28XlQM1tlQE2PCUJtMxATgHc5W
+	lY3sC8iO+eMAv/0kzDgJZUrCl1YDrGhlOCWoNypclf6sDtG5TRyoc8XH8b45cwF7jbwZ
+	ATpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tUDV3OghiXobuv6N2hl9B/tR7RgX6SZJz5WaJoNVvRo=;
+	b=Y6CMdbhRKhfC2YJ6QKyz26NvBHMJgW1gu5qFtlYg5h9cLSGDGwwfu6uZRn4skNRe4C
+	K3NRmredaWzrMQHvgpgOxSrnObJTArO/Wx5JY928zumKBNmavISd/K8u2us9RYyLhCg6
+	e5jy7DTRmbG1Tjfsui0mEWqrwz4fkIlUTa14+k2PoaRItHudZpPOOhqKfgvQd2UtbJdy
+	/lNe3wiRDA2H5Gtm5ybVLbGvHJ8NBTwiZoFUn0jZbl6VUjvGcrpEpIJjX9k4jmYOavU9
+	wuux9YJ5hyNauj/GPUC0Qtton027WSDmV9BDW8gx2gBWObBrmxaIA4+DI9rEPX7Cbz0x
+	p72Q==
+X-Gm-Message-State: AElRT7ESF6MXmr5VVeVoeF9JLwPlekYKXtl9OBNsihNE2NwsCavbjLlB
+	rAUsyeQ/cz/t8igVegzYwlVMgA==
+X-Google-Smtp-Source: AG47ELsMfQS4yRmslvTLTYtz3ox2Fsj+vNozMM/pxbynAOXOrXecyNlWVpR1h57Fyu2YhjiZ0HaT1g==
+X-Received: by 10.223.161.25 with SMTP id o25mr11115119wro.137.1521803246860; 
+	Fri, 23 Mar 2018 04:07:26 -0700 (PDT)
+Received: from brgl-bgdev.home ([2a01:cb1d:af:5b00:e837:b8d5:48c1:571b])
+	by smtp.gmail.com with ESMTPSA id
+	c57sm6184788wrg.84.2018.03.23.04.07.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 23 Mar 2018 04:07:26 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 23 Mar 2018 12:07:16 +0100
+Message-Id: <20180323110719.1010-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.16.1
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 0/3] libgpiod: support for v1.0 series
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,136 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Mar 2018 09:17:52 -0000
+X-List-Received-Date: Fri, 23 Mar 2018 11:07:26 -0000
 
-DBus-broker is a drop-in replacement for dbus-daemon. It is an implementation of a message
-bus as defined by the D-Bus specification. Its aim is to provide high performance and
-reliability, while keeping compatibility to the D-Bus reference implementation.
+I recently released a new major version of libgpiod in which the
+initial API was heavily reworked. Since it's no longer compatible
+with v0.3.2 but I know there are users of the latter and I also
+intend on supporting it for some time, I thought we should have both
+versions in recipes-support.
 
-0001-Comment-rst2man-related-stuff.patch avoids using rst2man.
+This series adds a new recipe for libgpiod v1.0 that can live next to
+v0.3.2.
 
-0002-Correct-including-directory-for-conf.patch fixs path computation for <include> node.
-The patch should be dropped when a newer version of dbus-broker that includes commit:
-    https://github.com/bus1/dbus-broker/commit/9af79016f0f6b1ee60779bc6dc4acd7b4b9e6c70
-is available.
+Bartosz Golaszewski (3):
+  libgpiod: include the version in the recipe filename
+  libgpiod: split recipe into .inc and .bb files
+  libgpiod: add support for v1.x series
 
-Signed-off-by: Yang Lyu <yang.lyu@axis.com>
----
- .../0001-Comment-rst2man-related-stuff.patch       | 34 ++++++++++++++++++++++
- ...0002-Correct-including-directory-for-conf.patch | 25 ++++++++++++++++
- meta-oe/recipes-core/dbus/dbus-broker_git.bb       | 29 ++++++++++++++++++
- 3 files changed, 88 insertions(+)
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker_git.bb
+ meta-oe/recipes-support/libgpiod/{libgpiod.bb => libgpiod.inc} | 5 -----
+ meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb             | 4 ++++
+ meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb               | 4 ++++
+ 3 files changed, 8 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod.bb => libgpiod.inc} (80%)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb
 
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch b/meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch
-new file mode 100644
-index 0000000..f10c49e
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker/0001-Comment-rst2man-related-stuff.patch
-@@ -0,0 +1,34 @@
-+From a92fd7da3a262e21c0970a3908eb0b4502819a01 Mon Sep 17 00:00:00 2001
-+From: Yang Lyu <yangl@axis.com>
-+Date: Fri, 23 Feb 2018 16:31:49 +0100
-+Subject: [PATCH] Comment rst2man related stuff
-+
-+---
-+ meson.build | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 56d38e4..3c3b109 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -15,7 +15,7 @@ add_project_arguments('-DBINDIR="' + join_paths(get_option('prefix'), get_option
-+ cc = meson.get_compiler('c')
-+ conf = configuration_data()
-+ mod_pkgconfig = import('pkgconfig')
-+-prog_rst2man = find_program('rst2man', 'rst2man.py')
-++#prog_rst2man = find_program('rst2man', 'rst2man.py')
-+ 
-+ sub_cdvar = subproject('c-dvar', version: '>=1')
-+ sub_clist = subproject('c-list', version: '>=3')
-+@@ -56,7 +56,7 @@ endif
-+ 
-+ conf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
-+ 
-+-subdir('docs')
-++#subdir('docs')
-+ subdir('src')
-+ 
-+ if use_launcher
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch b/meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch
-new file mode 100644
-index 0000000..4909dea
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker/0002-Correct-including-directory-for-conf.patch
-@@ -0,0 +1,25 @@
-+From 4b79f603b948709906c108796087de7b5643f61a Mon Sep 17 00:00:00 2001
-+From: Yang Lyu <yangl@axis.com>
-+Date: Mon, 26 Feb 2018 12:48:34 +0100
-+Subject: [PATCH] Correct including directory for conf
-+
-+---
-+ src/launch/config.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/launch/config.c b/src/launch/config.c
-+index 6a68699..579471b 100644
-+--- a/src/launch/config.c
-++++ b/src/launch/config.c
-+@@ -1022,7 +1022,7 @@ static void config_parser_end_fn(void *userdata, const XML_Char *name) {
-+                                     state->file,
-+                                     state->current->include.selinux_root_relative ?
-+                                         bus_selinux_policy_root() :
-+-                                        state->file->path,
-++                                        NULL,
-+                                     state->current->cdata);
-+                 if (r) {
-+                         state->error = error_trace(r);
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker_git.bb b/meta-oe/recipes-core/dbus/dbus-broker_git.bb
-new file mode 100644
-index 0000000..c21f1c6
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker_git.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "dbus broker"
-+DESCRIPTION = "Drop-in replacement for dbus-daemon."
-+
-+SECTION = "base"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
-+
-+DEPENDS = "dbus glib-2.0 expat"
-+
-+PV = "9+git${SRCPV}"
-+SRCREV = "ccd06b284892182af569e69046262331150e3536"
-+
-+SRC_URI = "git://github.com/bus1/dbus-broker"
-+SRC_URI += "file://0001-Comment-rst2man-related-stuff.patch"
-+SRC_URI += "file://0002-Correct-including-directory-for-conf.patch"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit meson pkgconfig systemd
-+
-+SYSTEMD_SERVICE_${PN} = "${BPN}.service"
-+
-+FILES_${PN} += "${systemd_system_unitdir}"
-+FILES_${PN} += "${systemd_user_unitdir}"
-+
-+RDEPENDS_${PN} = "dbus systemd"
-+
-+BBCLASSEXTEND = "native"
 -- 
-2.1.4
+2.16.1
 
 
