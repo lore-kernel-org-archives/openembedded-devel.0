@@ -1,52 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 233B36074F
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 10C3A787D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 23:47:21 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id w12-v6so6346125plp.4
+	Fri, 23 Mar 2018 05:44:31 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w2N5iWTm013193
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Mar 2018 16:47:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Y9OkpKJA21oGiRYnW1L3ZUYeE8YRtH7SbrNY0wjJHG4=;
-	b=TCMWcw/2UQlvRH3UpNTT3kreQnqyLgNNY95fk7LRXD8zLLptZAmm3gQpZoTGlSXOyD
-	aGBTkzedfTsFl0R3alax+CDSa4bK4Da+ydKJQte4ofyqIkD10swL7e8yK9B5mpiwJ6lZ
-	1TmGjbvHLcX14VUh5IvoXHtIIW2ZUGVfkbRjZrGC8A0SoFCT2Cz2qhdaGj7UluJwlfk4
-	oO8Z43Uyumm1dcOGOZEd7G5V4/bVe4EpjA0FNvr+9IWk+hoCYX6s4lbd/Cd1PPhh+D83
-	/AyS/kEwRDQAET72i06gKzRm1eWuR4mLFszoUOTjKuYytQQgfneFNwnwnqBRPRlv8DU3
-	eBdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Y9OkpKJA21oGiRYnW1L3ZUYeE8YRtH7SbrNY0wjJHG4=;
-	b=WCxZtkNrPmGjaEEr3ZijwOUyVIy5ZzQcqsN6S37fhqpykI0NGw3ZSP9CBjuSxDpgPv
-	soH6LXTsmWsT/5er6cXxh2t0OBgVP4+6le+X5Pi7Ceb70J9fClWKBL+ohBTQ5Qzlvs8M
-	RnRQZMISsGMTyCKS6b+qx5vVpGFhiy8FJAnxaFMoTLy2HFlCEZ0y6dFR8e0C5qfrmd8F
-	sfPFpLeYoola5DGSIl6xqDbV3k1Y8S4GeIODGpf8Mhux8Vq1CA1Ia/F4TIEF4UrHjH6T
-	YaHOO+jnk5UOKX47nZFwt7inKyblgwyU0H16pv/sHHKxBpV6xcEpo/UWhTERnEePxa7Y
-	7ivA==
-X-Gm-Message-State: AElRT7FlJw3QrVhYS9cSZzCYfViECCES4UcfvEt3suFQ23/iPst0fx8Z
-	n1nfb7vNDY3ZSuq+KPk614HJ8GlgRamIfVkdbUI=
-X-Google-Smtp-Source: AG47ELtl6B00Wxc9z4DWWhGDJpV0fl58QI15g6j+ZEw7o7/tWmnnVoCNMkcFy2B4a8sCuxs+jLHn0SmNcjtyt789eTQ=
-X-Received: by 2002:a17:902:8f97:: with SMTP id
-	z23-v6mr27125388plo.162.1521762442901; 
-	Thu, 22 Mar 2018 16:47:22 -0700 (PDT)
+	Thu, 22 Mar 2018 22:44:32 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 22 Mar 2018 22:44:14 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 23 Mar 2018 13:41:10 +0800
+Message-ID: <20180323054110.748-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 10.100.241.68 with HTTP; Thu, 22 Mar 2018 16:46:52 -0700 (PDT)
-In-Reply-To: <CALbNGRSN2HLPQ50RN9hE7XHGLLF0oLCgx22aT=DOsAGKqd5p4g@mail.gmail.com>
-References: <20180322213741.29876-1-schnitzeltony@gmail.com>
-	<CALbNGRTpiqyWxrZqwevg5qpbLOLzyAWmTtWbq26n6o1k0QVEag@mail.gmail.com>
-	<CAMKF1sq9B04-As85yRQvtrLBoWYZvqsYN989QiGdJ8x8bfe7iQ@mail.gmail.com>
-	<CALbNGRSN2HLPQ50RN9hE7XHGLLF0oLCgx22aT=DOsAGKqd5p4g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 22 Mar 2018 16:46:52 -0700
-Message-ID: <CAMKF1srfY4X7hhe6TY-=Hm=5hQh_zP_f2a92Fb127Cs3OwoHzg@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/4] networkmanager: fix gobject-introspection/musl and cleanup
+Subject: [meta-oe][PATCH] haveged: update to 1.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,48 +31,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Mar 2018 23:47:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Mar 2018 05:44:32 -0000
+Content-Type: text/plain
 
-On Thu, Mar 22, 2018 at 4:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> On Thu, Mar 22, 2018 at 10:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Thu, Mar 22, 2018 at 2:44 PM, Andreas M=C3=BCller <schnitzeltony@gmai=
-l.com> wrote:
->>> On Thu, Mar 22, 2018 at 10:37 PM, Andreas M=C3=BCller
->>> <schnitzeltony@gmail.com> wrote:
->>>> This adresses the comments for recent patch which updated nm to 1.10.6=
- and is a
->>>> follow-up for [1].
->>>>
->>>> * Make gobject-introspection work by skipping creation of gobject-intr=
-ospection
->>>>   specific documentation. This fixes networkmanager-applet regression.
->>>> * Cleanup patches: Remove current musl patches completely and re-use t=
-hose
->>>>   found in void-linux because they do look much cleaner and don't touc=
-h glibc
->>>>   build. One nice side effect: In the future when nm is updated we can=
- steal
->>>>   again and don't need to reenvent here. Usually they are much faster =
-than we
->>>>   are (and I know one major contibutor personally from the good old Z8=
-0 times..)
->>>> * Fix typo in PACKAGECONFIG
->>>>
->>>> [1] https://patchwork.openembedded.org/patch/149244/
->>>>
->>> Khem: can you give these a musl test? I do not have enough time and
->>> build resources (and am not using musl).
->>
->> I will try it out hopefully by weekend. What you dont use musl !!!! my g=
-od :)
->
-> Teach me: why should I?
->
+From: Jackie Huang <jackie.huang@windriver.com>
 
-over a beer sometime :)
+* Drop the patch remove-systemd-unit-503.patch and init script
+  haveged.sysvinit, and use PACKAGECONFIG to set the correct
+  sevice file or init script for systemd or sysvinit.
 
-> Andreas
+* Add SuccessExitStatus to fix the failure when the service
+  is stopped.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../haveged/haveged/haveged.sysvinit               | 35 ----------------------
+ .../haveged/haveged/remove-systemd-unit-503.patch  | 20 -------------
+ .../haveged/{haveged_1.9.1.bb => haveged_1.9.2.bb} | 21 +++++++------
+ 3 files changed, 10 insertions(+), 66 deletions(-)
+ delete mode 100755 meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
+ delete mode 100644 meta-oe/recipes-extended/haveged/haveged/remove-systemd-unit-503.patch
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.1.bb => haveged_1.9.2.bb} (61%)
+
+diff --git a/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit b/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
+deleted file mode 100755
+index 98b8857e7..000000000
+--- a/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
++++ /dev/null
+@@ -1,35 +0,0 @@
+-#!/bin/sh
+-
+-PATH=/bin:/usr/bin:/sbin:/usr/sbin
+-
+-pidfile=/var/run/haveged.pid
+-
+-# source function library
+-. /etc/init.d/functions
+-
+-case "$1" in
+-    start)
+-    echo -n "Starting havege entropy daemon... "
+-    start-stop-daemon --start --quiet --pidfile $pidfile --name haveged --startas haveged --  -w 1024 -v 0 && success || failure
+-    echo
+-    ;;
+-    stop)
+-    echo -n "Stopping havege entropy daemon... "
+-    start-stop-daemon --stop --quiet --pidfile $pidfile --name haveged
+-    success
+-    echo
+-    ;;
+-    restart)
+-    $0 stop
+-    sleep 1
+-    $0 start
+-    ;;
+-    status)
+-    status haveged
+-    ;;
+-    *)
+-    echo "Usage: /etc/init.d/haveged {start|stop|restart|status}"
+-    exit 1
+-esac
+-
+-exit 0
+diff --git a/meta-oe/recipes-extended/haveged/haveged/remove-systemd-unit-503.patch b/meta-oe/recipes-extended/haveged/haveged/remove-systemd-unit-503.patch
+deleted file mode 100644
+index df27bcb09..000000000
+--- a/meta-oe/recipes-extended/haveged/haveged/remove-systemd-unit-503.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+---- a/init.d/Makefile.am	2014-01-02 18:55:53.000000000 +0100
+-+++ b/init.d/Makefile.am	2014-08-11 10:59:40.000000000 +0200
+-@@ -34,11 +34,11 @@
+- 	$(do_subst) < $(srcdir)/$(src_tmpl) > haveged.service;
+- 
+- install-data-hook:
+--if ENABLE_SYSTEMD_LOOKUP
+--	install -p -m644 haveged.service `pkg-config --variable=systemdsystemunitdir systemd`/haveged.service;
+--else
+--	install -p -m644 haveged.service ($unit_dir)/haveged.service;
+--endif
+--	systemctl enable haveged.service;
+-+#if ENABLE_SYSTEMD_LOOKUP
+-+#	install -p -m644 haveged.service `pkg-config --variable=systemdsystemunitdir systemd`/haveged.service;
+-+#else
+-+#	install -p -m644 haveged.service ($unit_dir)/haveged.service;
+-+#endif
+-+#	systemctl enable haveged.service;
+- 
+- endif
+diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.2.bb
+similarity index 61%
+rename from meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
+rename to meta-oe/recipes-extended/haveged/haveged_1.9.2.bb
+index 419c85f51..d0e9fdaa7 100644
+--- a/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
++++ b/meta-oe/recipes-extended/haveged/haveged_1.9.2.bb
+@@ -5,23 +5,22 @@ HOMEPAGE = "http://www.issihosts.com/haveged/index.html"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-SRC_URI = "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz \
+-    file://remove-systemd-unit-503.patch \
+-    file://haveged.sysvinit \
+-"
++SRC_URI = "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "015ff58cd10607db0e0de60aeca2f5f8"
+-SRC_URI[sha256sum] = "9c2363ed9542a6784ff08e247182137e71f2ddb79e8e6c1ac4ad50d21ced3715"
++SRC_URI[md5sum] = "fb1d8b3dcbb9d06b30eccd8aa500fd31"
++SRC_URI[sha256sum] = "f77d9adbdf421b61601fa29faa9ce3b479d910f73c66b9e364ba8642ccbfbe70"
+ 
+ inherit autotools update-rc.d systemd
+ 
+ EXTRA_OECONF = "\
+-    --enable-init=service.redhat \
+     --enable-nistest=yes \
+     --enable-olt=yes \
+     --enable-threads=no \
+ "
+ 
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG[systemd] = "--enable-init=service.redhat --enable-initdir=${systemd_system_unitdir}, --enable-init=sysv.redhat, systemd"
++
+ INITSCRIPT_PACKAGES = "${PN}"
+ INITSCRIPT_NAME = "haveged"
+ INITSCRIPT_PARAMS_${PN} = "defaults 9"
+@@ -30,10 +29,10 @@ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE_${PN} = "haveged.service"
+ 
+ do_install_append() {
+-    install -D -m 755 ${WORKDIR}/haveged.sysvinit ${D}${sysconfdir}/init.d/haveged
+-
+-    mkdir -p ${D}${systemd_unitdir}/system
+-    install -p -m644 ${B}/init.d/haveged.service ${D}${systemd_unitdir}/system
++    # The exit status is 143 when the service is stopped
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        sed -i '/ExecStart/a SuccessExitStatus=143' ${D}${systemd_system_unitdir}/haveged.service
++    fi
+ }
+ 
+ MIPS_INSTRUCTION_SET = "mips"
+-- 
+2.11.0
+
 
