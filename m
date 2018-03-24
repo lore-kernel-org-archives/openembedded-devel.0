@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DA23719A4
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 3570D786EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2018 13:43:05 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id s78so15773783qkl.8
+	Sat, 24 Mar 2018 13:46:14 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id s48so15401853qtb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2018 06:43:07 -0700 (PDT)
+	Sat, 24 Mar 2018 06:46:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=MHBRBAbuPY5fEAjj9LWSMO35G7+o0vNFDUYl9e6ZhZg=;
-	b=W8xt7oH8rQO6xWqdnHPh4a9ShRpzaSU7YllWwQmLtOt5fFtNRqDG2tQruJO7asZdjn
-	vpbscNbb2fcXCa/IVQ9lYCFHdZOHqukR/yf8VaFpMjl+9jT75TiCad8U2/eEvF+4oThf
-	qDmX+ZFEZc1eo0LfRxd9WHxtViuDktTCNhYzrzx/jA9+5xTnIo0YU7OCyf0L67Hk7D4L
-	p0flhCrGb5a8RXL3S/TEHWavmzAkjN23BmhC0FhZ4CEI5/tW6qulHIXe+qJF0H6EiLtN
-	Z+DwVlWiexkRUOtKeJN6wEWl5ddEmX0KKlOfQMcG/3T8m9x1db9MOvUdoAQ7lVbrFP1o
-	j7/w==
-X-Gm-Message-State: AElRT7FyMrqoDEUJ3iQuet+JXqEbr7D0He79pVlQgXmBJVAnm6S5Ou13
-	fuXwCY99+0dYOirAyrCu8gfcGIoD
-X-Google-Smtp-Source: AG47ELuFKUeIr6u/LCfvM2Flvt1cmXfGsKJnNVDhKiI/lQVx2IXQGDN0UWASKY9oeBXacQBRr5XayQ==
-X-Received: by 10.55.149.135 with SMTP id x129mr47126838qkd.279.1521898986864; 
-	Sat, 24 Mar 2018 06:43:06 -0700 (PDT)
+	bh=K0N2Sy9D7LYDaxGYe4bGn/htd7Z8uVPyJfVdtT0jPq4=;
+	b=lyCc6wvHS3CZsOSxDnI0v31QiCKWFuSINVneFroc/afy64QDXAT659M0TlP3ha5vMp
+	fVGFnMRRkMekWJyGh46lEYDmWjEUnw/6Nui+teoaIwNqLOWJM9pf4y91CID2BqLHxjlU
+	y27GT8/xMnCuyG9vPnU5qEe+7Ypn+WgpRyBGcWqRqrtQOG/SwSo0vqpr2Kiv/CWAvl7M
+	za2hNTZc9GXHfDqzhe5IsxcJGmzUl5a5uJ2vUeTg4cdHjOKFEuRLlDVnAEkGfQnKLVLD
+	yAWeHzZM40KeyjoF2Ka2v6vX92gj8EKs10MYUZk4rF7LQKbgFmfCplztFJvM9GA7+neq
+	dKsQ==
+X-Gm-Message-State: AElRT7F7fuRaRVqIsnbeZTyx1HMk0slljZ3nKB86qpf2dhmVANoJQksy
+	Owv7FTFWlKrA49CXEJCAZjTNfokI
+X-Google-Smtp-Source: AG47ELsT469pgafyd2nPAgRgjHujh8URq+x+xikp7nBjuDXmsaCSn/99Ze0OWbOozktSqk9L31VQlQ==
+X-Received: by 10.237.43.228 with SMTP id e91mr48256671qtd.17.1521899175930;
+	Sat, 24 Mar 2018 06:46:15 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id p2sm8267330qkf.71.2018.03.24.06.43.06
+	by smtp.gmail.com with ESMTPSA id 10sm8250627qkl.65.2018.03.24.06.46.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 24 Mar 2018 06:43:06 -0700 (PDT)
+	Sat, 24 Mar 2018 06:46:15 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Mar 2018 09:42:58 -0400
-Message-Id: <1521898978-3587-1-git-send-email-derek@asterius.io>
+Date: Sat, 24 Mar 2018 09:46:05 -0400
+Message-Id: <1521899165-11434-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-py: update to version 1.5.3
+Subject: [meta-python][PATCH] python-flask-user: update to version 0.6.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Mar 2018 13:43:06 -0000
+X-List-Received-Date: Sat, 24 Mar 2018 13:46:15 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-py.inc                     | 4 ++--
- .../python/{python-py_1.5.2.bb => python-py_1.5.3.bb}                 | 0
- .../python/{python3-py_1.5.2.bb => python3-py_1.5.3.bb}               | 0
+ meta-python/recipes-devtools/python/python-flask-user.inc             | 4 ++--
+ .../{python-flask-user_0.6.19.bb => python-flask-user_0.6.20.bb}      | 0
+ .../{python3-flask-user_0.6.19.bb => python3-flask-user_0.6.20.bb}    | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-py_1.5.2.bb => python-py_1.5.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-py_1.5.2.bb => python3-py_1.5.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-flask-user_0.6.19.bb => python-flask-user_0.6.20.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-flask-user_0.6.19.bb => python3-flask-user_0.6.20.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-py.inc b/meta-python/recipes-devtools/python/python-py.inc
-index c7d6727..9105234 100644
---- a/meta-python/recipes-devtools/python/python-py.inc
-+++ b/meta-python/recipes-devtools/python/python-py.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://py.readthedocs.io/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
+diff --git a/meta-python/recipes-devtools/python/python-flask-user.inc b/meta-python/recipes-devtools/python/python-flask-user.inc
+index c2b7182..1955954 100644
+--- a/meta-python/recipes-devtools/python/python-flask-user.inc
++++ b/meta-python/recipes-devtools/python/python-flask-user.inc
+@@ -6,8 +6,8 @@ HOMEPAGE = " https://github.com/lingthio/Flask-User"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=97de97cd9d6e23c88129d884588ce71a"
  
--SRC_URI[md5sum] = "279ca69c632069e1b71e11b14641ca28"
--SRC_URI[sha256sum] = "ca18943e28235417756316bfada6cd96b23ce60dd532642690dcfdaba988a76d"
-+SRC_URI[md5sum] = "667d37a148ad9fb81266492903f2d880"
-+SRC_URI[sha256sum] = "29c9fab495d7528e80ba1e343b958684f4ace687327e6f789a94bf3d1915f881"
+-SRC_URI[md5sum] = "f7965e66ca139c8436896da07e66c21f"
+-SRC_URI[sha256sum] = "601abcc0343dfbae0c56273d98362d5cdc266ac84d20b3f65a212e4a2c83b302"
++SRC_URI[md5sum] = "9ce424f080659e1d5e1b75c9ed2f03af"
++SRC_URI[sha256sum] = "699df643471f08f9a4d10c3b17c0a53e92bb71c7feb414bedd76c7c9263dcf5e"
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-py_1.5.2.bb b/meta-python/recipes-devtools/python/python-py_1.5.3.bb
+ PYPI_PACKAGE = "Flask-User"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python-flask-user_0.6.20.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-py_1.5.2.bb
-rename to meta-python/recipes-devtools/python/python-py_1.5.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-py_1.5.2.bb b/meta-python/recipes-devtools/python/python3-py_1.5.3.bb
+rename from meta-python/recipes-devtools/python/python-flask-user_0.6.19.bb
+rename to meta-python/recipes-devtools/python/python-flask-user_0.6.20.bb
+diff --git a/meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb b/meta-python/recipes-devtools/python/python3-flask-user_0.6.20.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-py_1.5.2.bb
-rename to meta-python/recipes-devtools/python/python3-py_1.5.3.bb
+rename from meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+rename to meta-python/recipes-devtools/python/python3-flask-user_0.6.20.bb
 -- 
 2.7.4
 
