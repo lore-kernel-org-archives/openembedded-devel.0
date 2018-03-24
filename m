@@ -1,52 +1,20 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 08D7D788B6
+Return-Path: <dv@pseudoterminal.org>
+X-Greylist: delayed 472 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 24 Mar 2018 09:28:28 UTC
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 9AE9971B2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 11:07:28 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id a20so6419634wmd.1
+	Sat, 24 Mar 2018 09:28:28 +0000 (UTC)
+Received: from localhost.localdomain (62-178-50-190.cable.dynamic.surfer.at
+	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id 2BAEEBFF52
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Mar 2018 04:07:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=cfiWfFLygmi476/9iVy2pgor+ZHm2GLwpOeJNOuilhU=;
-	b=Y42ark7eKY1HHzpsAim/F8NhwDvlBaciyc6UVV4qgO087hXyZBrUuSdgeprekf7zWT
-	PXBv6aEaF7XuTIHW4EEJXW2Ini4eQrz3Ktu1QopCEDAtBbHm1sPLAHlIiMMXkEWPVxtn
-	dvbFw9RF393Xx155UYACrxE+8l5UTeIVMsYvtxRgv0KqTdNJKDZbLaDFqh2i3zq5giR6
-	wIjpM8KrlyAl7dMjCStP14BqUGtYFr21dnwPmXxG0IjMjNRUAiZTGfxQ78JaLw7YZgiW
-	eK7FmR7UsREXSGb5/qs3B41V/WfxTerFJKtW/swVdPCOtGsmyBYfetzbG+9TSlxt9xj3
-	mDdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=cfiWfFLygmi476/9iVy2pgor+ZHm2GLwpOeJNOuilhU=;
-	b=XlUHU4GNqrbhWgOjxjjSnZbsiCuzvAfZdboOvN8Sg2EL/ZSkZt0FpPjs4uVvYXq554
-	RNHwfNSyfSHyLEPUPV2dDIPELWmGEAxACjw9b/cr2GasgT01hqvF2b0Muk3y5YW/PN5X
-	Zs3oKDzd4bbX+ZRkJYDktohXlThwDEPCW+pv9IPaVM9aqsIfg5pXb2nBIfWqcSpcF7cZ
-	I/gpqNwo4K4CyOCKD/DkZgvRCxsWOhZUThtb6b/OyMhS0gmEzYV3EDXS/8s++JCImuN1
-	Ek2kGegi1l3SKolz58EJCcB7/K7ATc8VkRb36OjX9m+fMdLU7ZJ5rvUEY7pNZmoNt3x2
-	tX2g==
-X-Gm-Message-State: AElRT7EQBAuu4Qqe7XhwKiS79J/yx4v8pt8JODgyr19om0Q/FcoG+Umw
-	ImkmtaR3sYOsVK2jB8slJZaABg==
-X-Google-Smtp-Source: AG47ELueOiJ1zqiMdC0JMQPZEPqS/eNEShs9dDAIzSmXbcHB9U99RyhjpJ9mfhhJgTrqc4p5HxwH3Q==
-X-Received: by 10.28.150.14 with SMTP id y14mr8728930wmd.5.1521803249675;
-	Fri, 23 Mar 2018 04:07:29 -0700 (PDT)
-Received: from brgl-bgdev.home ([2a01:cb1d:af:5b00:e837:b8d5:48c1:571b])
-	by smtp.gmail.com with ESMTPSA id
-	c57sm6184788wrg.84.2018.03.23.04.07.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 23 Mar 2018 04:07:29 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Koen Kooi <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 23 Mar 2018 12:07:19 +0100
-Message-Id: <20180323110719.1010-4-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.16.1
-In-Reply-To: <20180323110719.1010-1-brgl@bgdev.pl>
-References: <20180323110719.1010-1-brgl@bgdev.pl>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/3] libgpiod: add support for v1.x series
+	Sat, 24 Mar 2018 10:20:36 +0100 (CET)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 24 Mar 2018 10:20:07 +0100
+Message-Id: <20180324092007.17319-1-dv@pseudoterminal.org>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-oe][PATCH] libnice: Upgrade to 0.1.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,27 +27,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Mar 2018 11:07:29 -0000
+X-List-Received-Date: Sat, 24 Mar 2018 09:28:28 -0000
 
-Add a recipe for libgpiod v1.0. It can live next to the one for v0.3.2.
+This is the minimum version needed by the new GStreamer 1.14.0 WebRTC
+support (not to be confused with the WebRTC DSP support).
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+New packageconfigs were added to make the GStreamer 0.10 and 1.0
+support configurable.
+
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb | 4 ++++
- 1 file changed, 4 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb
+ .../farsight/{libnice_0.1.13.bb => libnice_0.1.14.bb}  | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-support/farsight/{libnice_0.1.13.bb => libnice_0.1.14.bb} (55%)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb
-new file mode 100644
-index 000000000..06d7efeb0
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.0.bb
-@@ -0,0 +1,4 @@
-+require libgpiod.inc
-+
-+SRC_URI[md5sum] = "e38a67d01964f727703da9f698bfa53e"
-+SRC_URI[sha256sum] = "34c76b3730b9d4a1159bcb14000f78b1e890251b8a3823b794fa930654eabdd0"
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.1.13.bb b/meta-oe/recipes-support/farsight/libnice_0.1.14.bb
+similarity index 55%
+rename from meta-oe/recipes-support/farsight/libnice_0.1.13.bb
+rename to meta-oe/recipes-support/farsight/libnice_0.1.14.bb
+index 48c8221a3..775257f93 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.1.13.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.1.14.bb
+@@ -2,8 +2,8 @@ SUMMARY = "Interactive Connectivity Establishment library"
+ DESCRIPTION = "Libnice is an implementation of the IETF's draft Interactive Connectivity Establishment standard (ICE)."
+ HOMEPAGE = "http://nice.freedesktop.org/wiki/"
+ SRC_URI = "http://nice.freedesktop.org/releases/libnice-${PV}.tar.gz"
+-SRC_URI[md5sum] = "3226faeaf48a9150ada00da2e2865959"
+-SRC_URI[sha256sum] = "61112d9f3be933a827c8365f20551563953af6718057928f51f487bfe88419e1"
++SRC_URI[md5sum] = "c9b9b74b8ae1b3890e4bd93f1b70e8ff"
++SRC_URI[sha256sum] = "be120ba95d4490436f0da077ffa8f767bf727b82decf2bf499e39becc027809c"
+ 
+ LICENSE = "LGPLv2.1 & MPLv1.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9c42325015702feda4f4d2f19a55b767 \
+@@ -11,17 +11,19 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9c42325015702feda4f4d2f19a55b767 \
+                     file://COPYING.MPL;md5=3c617710e51cdbe0fc00716f056dfb1a \
+ "
+ 
+-DEPENDS = "glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
++DEPENDS = "glib-2.0 gnutls"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "gstreamer1.0"
+ PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
++PACKAGECONFIG[gstreamer0.10] = "--with-gstreamer-0.10,--without-gstreamer-0.10,gstreamer gst-plugins-base"
++PACKAGECONFIG[gstreamer1.0] = "--with-gstreamer,--without-gstreamer,gstreamer1.0 gstreamer1.0-plugins-base"
+ 
+ inherit autotools pkgconfig gtk-doc gobject-introspection
+ 
+-FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
+-FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.la"
+-FILES_${PN}-staticdev += "${libdir}/gstreamer-1.0/*.a"
+-FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
++FILES_${PN} += "${libdir}/gstreamer-0.10/*.so ${libdir}/gstreamer-1.0/*.so"
++FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-1.0/*.la"
++FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a ${libdir}/gstreamer-1.0/*.a"
++FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug ${libdir}/gstreamer-1.0/.debug"
+ 
+ do_configure_prepend() {
+     mkdir ${S}/m4 || true
 -- 
-2.16.1
+2.14.1
 
 
