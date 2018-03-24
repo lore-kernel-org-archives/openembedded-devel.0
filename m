@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
 	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A38DD600E3
+	by mail.openembedded.org (Postfix) with ESMTP id 9AE4478744
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2018 13:59:45 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id s9so15811459qke.12
+	Sat, 24 Mar 2018 14:18:25 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id j73so15838472qke.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Mar 2018 06:59:46 -0700 (PDT)
+	Sat, 24 Mar 2018 07:18:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bY+DJISqFW8b6DrL3sjMq9KPMPFRoil8gzqDpdKskg4=;
-	b=MkPbJeOrmltY3u4dgAQICwbEmPpFZ/v6GG2MJA0LYZ5lqq7/wtZEfplylfHVD8l8W4
-	ltvn6y9s5xROEBZSe1oD8IwXLAnvnl/gSbMu+N9NWux8ET4ZTnOM64/NAjkyxcaNXKft
-	8J0eGqH1ekM/dfzbNJIvXT5wJaVwHxrLfqO9T8Ydwle+oWZnnBtRuO+X1JdObxj8GjEJ
-	t1Az+46RedDFTCkvL5FCB1DJqC6Je1wV4eMa5MaGdJbePxQhNqHeuubHhjmJoFyCiPaa
-	XvfhXvJa+taBUdR4Ilj8KaNatMRBUZokqNmZzwhQ3pOljzbLGxH25B8RlGecJ3x8Amr1
-	HEpQ==
-X-Gm-Message-State: AElRT7HxNhY6JHFEmcTvRCpolzXOpRiiQZQKYjBWjh54xOjy/cHWen3b
-	7ABEvrr6fVLE8sxSK+79DDt/atCL
-X-Google-Smtp-Source: AG47ELslswLhudVEdlRlt7WoTlJY1DmMZyGt5ppREB5hZKTGeHW+BvaEmBFMmWdej7mbWRDQcaW00A==
-X-Received: by 10.55.164.23 with SMTP id n23mr33368283qke.259.1521899985962;
-	Sat, 24 Mar 2018 06:59:45 -0700 (PDT)
+	bh=F6iuFUITzH1GAEYeFvgk2NP/bxrQF4/UmMTpornIRHY=;
+	b=Dwngm8hmRaxOaxztjlvI5SjXotsVu42bN6z43iGafcgiUE0VmCoyrZrnbYJX8JrHro
+	zB0GJjYTg7OsZnUVdDrrJWnKrUkdp/D7+/0nCgFJGkCD1MaixKqO3KOf3KMrFgWt7DFp
+	TV/MClgjf2AU+eh5bRHdzwvvHlVWVbmMeaZt0xzgo6SlbZpOUELfnMgQdKPL7m/eQGiv
+	LclZAIybz1haAuu4ASyx3JcNZb391anvm28zKZZfPsFEX6D28x8Ix8M675or6b4ICCMt
+	nbtVx+Ld4acLu9wMapXAvp6xm21un9W5q5ywN5cGbyf1Po8NimFzSMMI3tCEMwXNBRe+
+	mPGw==
+X-Gm-Message-State: AElRT7Hqd91KDle/mDwXJ0XodxRyCJXTydOt570I4R3DhHNxh6UEgId9
+	OPJ/FotCcr0uD/M8ETi5GNj4Kl/L
+X-Google-Smtp-Source: AG47ELuWVP47waG/QIA7Ih+ONR6a9Qot11DX8kDPhopU8/pY8Hr5BWu7pmD7A3zKzk6f8mxOjTeM+w==
+X-Received: by 10.55.52.7 with SMTP id b7mr43456616qka.332.1521901104878;
+	Sat, 24 Mar 2018 07:18:24 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id g9sm8172549qti.11.2018.03.24.06.59.45
+	by smtp.gmail.com with ESMTPSA id 61sm8067155qtc.49.2018.03.24.07.18.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 24 Mar 2018 06:59:45 -0700 (PDT)
+	Sat, 24 Mar 2018 07:18:23 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Mar 2018 09:59:34 -0400
-Message-Id: <1521899974-8517-1-git-send-email-derek@asterius.io>
+Date: Sat, 24 Mar 2018 10:18:12 -0400
+Message-Id: <1521901093-23282-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cython: update to version 0.28.1
+Subject: [meta-python][PATCH 1/2] python-cryptography-vectors: update to version 2.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Mar 2018 13:59:45 -0000
+X-List-Received-Date: Sat, 24 Mar 2018 14:18:25 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
- .../python/{python-cython_0.28.bb => python-cython_0.28.1.bb}         | 0
- .../python/{python3-cython_0.28.bb => python3-cython_0.28.1.bb}       | 0
+ meta-python/recipes-devtools/python/python-cryptography-vectors.inc   | 4 ++--
+ ...tography-vectors_2.1.4.bb => python-cryptography-vectors_2.2.1.bb} | 0
+ ...ography-vectors_2.1.4.bb => python3-cryptography-vectors_2.2.1.bb} | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.28.bb => python-cython_0.28.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cython_0.28.bb => python3-cython_0.28.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-cryptography-vectors_2.1.4.bb => python-cryptography-vectors_2.2.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_2.1.4.bb => python3-cryptography-vectors_2.2.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index 550d9a3..5a69cd0 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
- PYPI_PACKAGE = "Cython"
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+index 00bb87b..ef1c60b 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
++++ b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+@@ -8,8 +8,8 @@ DEPENDS += " \
+     ${PYTHON_PN}-cryptography \
+ "
  
--SRC_URI[md5sum] = "459a7980c508e61fc37b3245612969ac"
--SRC_URI[sha256sum] = "518f7e22da54109661e483a91a63045203caf9fd78da4a69185a7622f759965f"
-+SRC_URI[md5sum] = "c549effadb52d90bdcb1affc1e5dbb97"
-+SRC_URI[sha256sum] = "152ee5f345012ca3bb7cc71da2d3736ee20f52cd8476e4d49e5e25c5a4102b12"
+-SRC_URI[md5sum] = "ef115b870cc8d8b9f0f4189b512bc170"
+-SRC_URI[sha256sum] = "78c4b4f3f84853ea5d038e2f53d355229dd8119fe9cf949c3e497c85c760a5ca"
++SRC_URI[md5sum] = "b014b0ddfecddfa90eb2651120a31b70"
++SRC_URI[sha256sum] = "be7cf2e4de057f2a5307d9600177014daefd58a96de9cb9f437c26753fd462fe"
  
- inherit pypi
+ PYPI_PACKAGE = "cryptography_vectors"
  
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.bb b/meta-python/recipes-devtools/python/python-cython_0.28.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.4.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_2.2.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython_0.28.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.28.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.28.bb b/meta-python/recipes-devtools/python/python3-cython_0.28.1.bb
+rename from meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.4.bb
+rename to meta-python/recipes-devtools/python/python-cryptography-vectors_2.2.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.1.4.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.2.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.28.bb
-rename to meta-python/recipes-devtools/python/python3-cython_0.28.1.bb
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_2.1.4.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_2.2.1.bb
 -- 
 2.7.4
 
