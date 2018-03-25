@@ -1,51 +1,48 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
-	[209.85.214.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D9C66093C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A5C07803F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 21:58:09 +0000 (UTC)
-Received: by mail-it0-f52.google.com with SMTP id z7-v6so10492119iti.1
+	Sun, 25 Mar 2018 23:05:00 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id f23-v6so10798621plr.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 14:58:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=gRvuFF9EmN/pFzPnShBUvZeA4ltyuVi99/RUPespOYc=;
-	b=eX38HdNwvISz9V4pt+LsNeAut96zIxLGfm0PxzRQjnexBHluVWwCIlU3G40MHt/dxj
-	ubNV/rUO9Js5PJi23OSWvW8ueSfvYzVaTxfi6DT6JcdmO+/aYHjCrN77FB+vmmTNTmL9
-	R+dt1PbjHKW9JBO2ySVEPqcnf2v8/FllHqt6WXpbCwSCBnXqrbbGAs8nTboZYUHqgUet
-	7+0Ivd36J01pCo3WrZutAjyVV0jRgzE6LaNq8dXWDied5bNoR4GQvYClh56GFugN3Rty
-	qA6Fll49RcOya7yZrLz3ADyuV4FDlqA7Lzat5ZOg12xOYPVNcij1SGiIMt7sa0CUaHaX
-	A5pQ==
+	Sun, 25 Mar 2018 16:05:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=TfAUy5SpYs/4upLdGCMMAkImnZTA7FH7T9vFkBsh/ek=;
+	b=lCPg49LoWp/iTIEIcbAkF1+AyZCMfLCi3cZI4EvcsJ7klqizTAhZn650uwmSHTi25T
+	3SEp++QWcHop/6TkDUCa19Qg6bAzLx6jgH7PysbC6EN7j/JJ8nCVEl0eqicVXWQ8k8FI
+	h4Q8yDfS0xXbtmMqB2ZT2ZWlwHL1MtcjAv7yKJaEirUO8QfZvlg5IITf4/wsGtfxh6iS
+	i2CaXi2dCng+Wz5YYJ8R+ZVJX0HrnT34tNZiyuA5+Hebfa5cZ9/Rpmr0RGeUb3gzb9Fy
+	LyrHrE6R380tBev/vyM1laXvxgepx9KtVzW4pHdLUh+7+4DoSUvEXcAuoS/FtZhjae8t
+	z21A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=gRvuFF9EmN/pFzPnShBUvZeA4ltyuVi99/RUPespOYc=;
-	b=t1Pzp3MI/De0nnKq38qunnfazCN5CoKyUgK36PrihUywmzz5M414UUP1vNBUIasNfW
-	yZwy4AYR9FcocTAQV/dX6u77Foi2dOvnW4F5kHbsrak8sK5Wg8u8F9gkcXLJdMWWZ0RT
-	Mr7O4IfAp1o/8jJ4ujwvgVuFF+ajiZkfNiiilTZTZef2wEKKktosJPs6Pn4CifeJonvd
-	qufX0jboCL/y5wNYfZ8tKaGaG2Ygtz2tdgbU87PULuz0yF+IvpEX5k/6LbTZexrdosuc
-	xti3H5bIuT4riEq6v1BUQxznfIJgkBPJNM2uMv/E7JsqinRSwoNYJJvYvl2d+WYd9Gjy
-	Pl9g==
-X-Gm-Message-State: AElRT7H3TDKcB2DtyDrjgZj+DsSrftT/a8UZl1ETnJKW7Uqd3mliuJc4
-	fQ5tjZ+ahp+w1bAPD1v9gBYRMHFtN03HS3uwS7RNhw==
-X-Google-Smtp-Source: AG47ELtH0fdOroIUX3p4QlhnCh3WASn/Z4U1NErkd4AAzf0oEhfgY+bAWrUnGC8h85p+9ZyqD74eBWf/vzGP4QqaBZ4=
-X-Received: by 2002:a24:f685:: with SMTP id
-	u127-v6mr20049662ith.131.1522015091329; 
-	Sun, 25 Mar 2018 14:58:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.30.9 with HTTP; Sun, 25 Mar 2018 14:57:51 -0700 (PDT)
-In-Reply-To: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
-References: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Sun, 25 Mar 2018 22:57:51 +0100
-Message-ID: <CAJTo0Lb8zOtBb72hdhL4BzfTPss4JM00-WZOiOnqk5_tRUJyOw@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] X11 proto changes
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=TfAUy5SpYs/4upLdGCMMAkImnZTA7FH7T9vFkBsh/ek=;
+	b=agplookNpF9YtaftpC2e41+WzsbEmZObmaFjxToPXTkgSLz90JY+swglI/MQ5qyzKz
+	Fvd3lpy6qFIiA+a/StNb8IqbtDHmNvTCWgasm75fzKDzkkFsrDyUj6NyjJS6MU3Cm6Oa
+	1YY8JFbc3cZCD4ciBm90twCcZOg3fQr0pMOwJXiYv6GXAE9hrMv0UxIRi2XAErQPCh7Z
+	tliBBG3lWMb63fNFQeQ8fnLknm4DuWqeCRt5jBOtEhhUylM2v52a/b5blJNHAuCEJM5g
+	TfwP3jfgqL1ah/DhCgarvjg6Jp6j9EgutiqZgeAHqQUDqU+RpFpJjqUSOVrZKl636jXH
+	6NfA==
+X-Gm-Message-State: AElRT7GhiKqoOl548bLbJQ1QVwvdQqTXCBqlMzASgrdYzbqxW6YSdvJu
+	VRhNILTZ76PEJPK8dDnRlcarqA==
+X-Google-Smtp-Source: AG47ELuD5T2+/TAQaVOQ/OtGWBT1Vd+SJ/nB72C40eZPGv/5HovYEUy19HT1INQQMBTW3qdUzyTDfQ==
+X-Received: by 2002:a17:902:122:: with SMTP id
+	31-v6mr39051431plb.280.1522019101519; 
+	Sun, 25 Mar 2018 16:05:01 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
+	by smtp.gmail.com with ESMTPSA id
+	y15sm9174945pfb.37.2018.03.25.16.05.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 25 Mar 2018 16:05:00 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 25 Mar 2018 16:04:51 -0700
+Message-Id: <20180325230452.40908-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.16.2
+Subject: [meta-qt5][PATCH 1/2] qtwebkit: Fix build on armv7ve (rpi)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,21 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Mar 2018 21:58:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 25 Mar 2018 23:05:00 -0000
 
-On 24 March 2018 at 19:07, akuster808 <akuster808@gmail.com> wrote:
-> It appears Xorg is deprecating most of it's proto header repos for a new
-> all-in-1 repo xorgproto. This will most likely affect down stream
-> layers. The question I have, is do we want this big churn to happen for
-> Sumo or wait for 2.6 ?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-qt/qt5/qtwebkit_git.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-Pretty late for Sumo and if the worst case thing happens and they
-delete the repos (which would be unusual) then we can just point the
-SRC_URI at the yoctoproject mirror site.
+diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+index b23d4d6..0f5cbbc 100644
+--- a/recipes-qt/qt5/qtwebkit_git.bb
++++ b/recipes-qt/qt5/qtwebkit_git.bb
+@@ -18,6 +18,19 @@ DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt gperf-
+ ARM_INSTRUCTION_SET_armv4 = "arm"
+ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
++# https://bugzilla.yoctoproject.org/show_bug.cgi?id=9474
++# https://bugs.webkit.org/show_bug.cgi?id=159880
++# JSC JIT can build on ARMv7 with -marm, but doesn't work on runtime.
++# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2 (-mthumb).
++ARM_INSTRUCTION_SET_armv7a = "thumb"
++ARM_INSTRUCTION_SET_armv7r = "thumb"
++ARM_INSTRUCTION_SET_armv7ve = "thumb"
++
++# qemu: uncaught target signal 11 (Segmentation fault) - core dumped
++# Segmentation fault
++GI_DATA_ENABLED_armv7a = "False"
++GI_DATA_ENABLED_armv7ve = "False"
++
+ # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
+ # 5.10.meta-qt5.1
+ SRC_URI += "\
+-- 
+2.16.2
 
-Moving forward in master I guess a xorgprotos recipe which PROVIDES
-that bundle should be seamless.
-
-Ross
 
