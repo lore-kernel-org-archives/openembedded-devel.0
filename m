@@ -1,48 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A5C07803F
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 80A4478596
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 23:05:00 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id f23-v6so10798621plr.10
+	Sun, 25 Mar 2018 23:05:01 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id l27so6808603pfk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 16:05:02 -0700 (PDT)
+	Sun, 25 Mar 2018 16:05:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=TfAUy5SpYs/4upLdGCMMAkImnZTA7FH7T9vFkBsh/ek=;
-	b=lCPg49LoWp/iTIEIcbAkF1+AyZCMfLCi3cZI4EvcsJ7klqizTAhZn650uwmSHTi25T
-	3SEp++QWcHop/6TkDUCa19Qg6bAzLx6jgH7PysbC6EN7j/JJ8nCVEl0eqicVXWQ8k8FI
-	h4Q8yDfS0xXbtmMqB2ZT2ZWlwHL1MtcjAv7yKJaEirUO8QfZvlg5IITf4/wsGtfxh6iS
-	i2CaXi2dCng+Wz5YYJ8R+ZVJX0HrnT34tNZiyuA5+Hebfa5cZ9/Rpmr0RGeUb3gzb9Fy
-	LyrHrE6R380tBev/vyM1laXvxgepx9KtVzW4pHdLUh+7+4DoSUvEXcAuoS/FtZhjae8t
-	z21A==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=HLd9J4KxM/J5/cvn6oT6HZSLGna8TQzahi5yLBxqyCA=;
+	b=VZERDVQvBGVWiU6QFiAyh/rDMCwvAVFXXC38/q//c4DQARc3povKcPft3HZ6sbr+gn
+	yDUUuDKbI+jYMD3gZdMNKz4aitj+CKKSPtcnogA4UNxX8L9xYxqIGMY9K7MXJkfy7QV+
+	wo7k5TZvn1ufuCKHtQVBW6Ig3H8q8WAj/4Np0aVWecebGu0ILjnvIgmoIB8FfoPmoYiI
+	n3ja+v/7q/JI0fEmUlIfinDdg2FRyyJhSdHywwF8KPHVP1XpQmXDr5JxzI8mj2g+QgT4
+	iy3RfFX6PAA3+WXjQH++B/98wIU5CI4wi/5b8+ELvSna1b9gc3r/g47J7BRQCPtanc+N
+	bXww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TfAUy5SpYs/4upLdGCMMAkImnZTA7FH7T9vFkBsh/ek=;
-	b=agplookNpF9YtaftpC2e41+WzsbEmZObmaFjxToPXTkgSLz90JY+swglI/MQ5qyzKz
-	Fvd3lpy6qFIiA+a/StNb8IqbtDHmNvTCWgasm75fzKDzkkFsrDyUj6NyjJS6MU3Cm6Oa
-	1YY8JFbc3cZCD4ciBm90twCcZOg3fQr0pMOwJXiYv6GXAE9hrMv0UxIRi2XAErQPCh7Z
-	tliBBG3lWMb63fNFQeQ8fnLknm4DuWqeCRt5jBOtEhhUylM2v52a/b5blJNHAuCEJM5g
-	TfwP3jfgqL1ah/DhCgarvjg6Jp6j9EgutiqZgeAHqQUDqU+RpFpJjqUSOVrZKl636jXH
-	6NfA==
-X-Gm-Message-State: AElRT7GhiKqoOl548bLbJQ1QVwvdQqTXCBqlMzASgrdYzbqxW6YSdvJu
-	VRhNILTZ76PEJPK8dDnRlcarqA==
-X-Google-Smtp-Source: AG47ELuD5T2+/TAQaVOQ/OtGWBT1Vd+SJ/nB72C40eZPGv/5HovYEUy19HT1INQQMBTW3qdUzyTDfQ==
-X-Received: by 2002:a17:902:122:: with SMTP id
-	31-v6mr39051431plb.280.1522019101519; 
-	Sun, 25 Mar 2018 16:05:01 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=HLd9J4KxM/J5/cvn6oT6HZSLGna8TQzahi5yLBxqyCA=;
+	b=ohI9hdkgi5Kv/8SNUz6md9CVX0OqSMZE6gNmE+MBQCceBuHy6OrwRZ6sllcl+rKK/c
+	TpdZ3X/loWhkPE3Lf4GQLSzVjEQTae5yHPllX9EPCsq7FCoVrTlSDdCqIzdRfyIcuw9T
+	xqQpp9PiV/RPZXLAIOYcB03DiMXodWNRkpbEx7S0X6VeFWBB8qj9C+V1ut1vnn7NBiJ/
+	Qzh3NHO7xVN1AY4PeI6Pp3z5IM3MCnrpKPi0MoLGViiVmqGAyVx/aorv6H3I7pnwLmiH
+	dys3OU//wG+t2PU6FDJPtqpBPAdI+2kMkgqtwrGu/23SOg213yg08mmllRkC9LCHF8la
+	uHXA==
+X-Gm-Message-State: AElRT7EtiH34OL1dtLJeuT59d//KIbWaaC+1UhvPgYj+lmp2F/5381x9
+	qJt4YvZofeMk8ZSFYRt7qUmNEg==
+X-Google-Smtp-Source: AG47ELtqgh08NQP0jlD8KVcVwVtojUPG72ao1ZveFVXkbEguQgGMDzjRSiXcnok5WPsjt23pAOJ0vg==
+X-Received: by 10.98.89.23 with SMTP id n23mr22304684pfb.211.1522019103200;
+	Sun, 25 Mar 2018 16:05:03 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	y15sm9174945pfb.37.2018.03.25.16.05.00
+	y15sm9174945pfb.37.2018.03.25.16.05.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Mar 2018 16:05:00 -0700 (PDT)
+	Sun, 25 Mar 2018 16:05:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Mar 2018 16:04:51 -0700
-Message-Id: <20180325230452.40908-1-raj.khem@gmail.com>
+Date: Sun, 25 Mar 2018 16:04:52 -0700
+Message-Id: <20180325230452.40908-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.16.2
-Subject: [meta-qt5][PATCH 1/2] qtwebkit: Fix build on armv7ve (rpi)
+In-Reply-To: <20180325230452.40908-1-raj.khem@gmail.com>
+References: <20180325230452.40908-1-raj.khem@gmail.com>
+Subject: [meta-qt5][PATCH 2/2] qtwebkit: Update to latest on 5.9 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,37 +57,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Mar 2018 23:05:00 -0000
+X-List-Received-Date: Sun, 25 Mar 2018 23:05:02 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-qt/qt5/qtwebkit_git.bb | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ recipes-qt/qt5/qtwebkit_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index b23d4d6..0f5cbbc 100644
+index 0f5cbbc..eb73170 100644
 --- a/recipes-qt/qt5/qtwebkit_git.bb
 +++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -18,6 +18,19 @@ DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt gperf-
- ARM_INSTRUCTION_SET_armv4 = "arm"
- ARM_INSTRUCTION_SET_armv5 = "arm"
+@@ -102,4 +102,4 @@ export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby
  
-+# https://bugzilla.yoctoproject.org/show_bug.cgi?id=9474
-+# https://bugs.webkit.org/show_bug.cgi?id=159880
-+# JSC JIT can build on ARMv7 with -marm, but doesn't work on runtime.
-+# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2 (-mthumb).
-+ARM_INSTRUCTION_SET_armv7a = "thumb"
-+ARM_INSTRUCTION_SET_armv7r = "thumb"
-+ARM_INSTRUCTION_SET_armv7ve = "thumb"
-+
-+# qemu: uncaught target signal 11 (Segmentation fault) - core dumped
-+# Segmentation fault
-+GI_DATA_ENABLED_armv7a = "False"
-+GI_DATA_ENABLED_armv7ve = "False"
-+
- # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
- # 5.10.meta-qt5.1
- SRC_URI += "\
+ QT_MODULE_BRANCH = "5.9"
+ 
+-SRCREV = "97c4a80a1282c8c3eaa343011286b76fd4838c5f"
++SRCREV = "bd0657f98aff85b9f06d85a8cf4da6a27f61a56e"
 -- 
 2.16.2
 
