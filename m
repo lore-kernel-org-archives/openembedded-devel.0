@@ -1,37 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B458784DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 13:32:24 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id b198so17508152qkg.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 06:32:26 -0700 (PDT)
+Return-Path: <twoerner@gmail.com>
+Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BA4E6FEFA;
+	Sun, 25 Mar 2018 15:23:40 +0000 (UTC)
+Received: by mail-lf0-f49.google.com with SMTP id l4-v6so20279387lfg.12;
+	Sun, 25 Mar 2018 08:23:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=tNDQo6SJ5vDvCnWqKHSmQrFNHC5gQtnijhQ9nDLjCeo=;
+	b=l1kSupmxiLkUDvqJBElFvFk4DSp20EYx0rEBYkhNhBu4d9hZsoPS8UCZs9CZ3H+1TH
+	LtAoUYRYBCgWtMiOGl1SUSq96fQoKBe/fzeCnbje4SiXNWVOZFtRK+iM5SPeUlchLWYP
+	4SQrh1NVjZ9g0vuxB37/NDJQiVBf5mipr+wKaqWakYz7eJFbKIDXbUPdmWp1TQTGKtef
+	4Kk9VnUk740KWDpQj/qx6mWKhrdxmMxNsi9Z21h4wLMrFUcI+hEHg6T6ruqGck3LUi8r
+	DSMechvVuZau0DOVXCEdw0UfYn9LUu0aB8nYvxtCRxr/Mekqtqisj2pdKIsPrXcBxQFw
+	T9sQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6nay6RMG2IzIMio7MN6lYu5fVMN4SvtXFyB+6sIYltY=;
-	b=D0v44GA86felmb14y6xsbNYzbXX4sghve09kkOfbpPuUOevfMUHxQkrCmSFU6KyQ9B
-	ehcp0SZmZfAm7OmjHmxtXWKoPAjIyZI30sChgK2+rBgWKWXlriNsdML1ZnLjlS+OuRp9
-	lS7c/EdOBnARiWeyXqEKyJ2ICLondUzYNrCiKvlTVn5Cv9Bx9gC9Rke4Cz1XEZeYpoMu
-	g/l/tor4kelSpc7A1O0LyVR9hBngAz1TGZQuzC5tSI9BSQFF1LEVaYk0DIi+zhn9hfjH
-	XBr66ee13lmYJRs0iPb1mGCipecK9j3JRrwyatHqeyrmTTcjfnFaW9e6w9zl8phP3B2D
-	9e5g==
-X-Gm-Message-State: AElRT7F7B9GyY8KjToFXk9hQD01tds0bCz7ZuMUsyk+Uemmm/fHFnN/q
-	pHCiNsSVQXXuKGZ7GTpDf2GoKQfI
-X-Google-Smtp-Source: AG47ELvjEcagfvIVlIK+hFHHCdzgU7awNz/y7qnyIMYzCnBBcXG3rVLv0v37lOzW9zOVKsEYYMpfFg==
-X-Received: by 10.55.209.79 with SMTP id s76mr51365819qki.89.1521984745809;
-	Sun, 25 Mar 2018 06:32:25 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id 61sm9608243qtc.49.2018.03.25.06.32.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 25 Mar 2018 06:32:25 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Mar 2018 09:32:14 -0400
-Message-Id: <1521984734-24914-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pymisp: update to version 2.4.89
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=tNDQo6SJ5vDvCnWqKHSmQrFNHC5gQtnijhQ9nDLjCeo=;
+	b=MTuOKQ4EMpDpzEyTf3Ax322axzHBqM/oIBkda3H0g+Ek9vGhPrMCNjczn+5o1azkkV
+	17xK+FPYGI/ZZXuil/wgCmbureU5c493I5d6O8G/ypEYj7QDas1x4u4keUOXTjtKT9NT
+	f+Pu4LImqllSnX5NXJH7yb4XmCGc9ZJV5iv1JU2OL0iHaAi+NUM8z6OANX9MVFmI7NC0
+	27vwQTV7yof07eZGfPPxaom6DnNa5rXwiqFretd+8q+Oba95mLdyX2RUTIkJUGUR4T0d
+	bPIGqmCkWDjq//QuS0YiCBIN+tJ5KUzG7vt3znfeWNhVx+N7WWn5kSENUxB0frP5SzNt
+	ihtQ==
+X-Gm-Message-State: AElRT7GSGrp+Jx8G4TrinRUnZ/NVOqlnmc6T9U577zSK4xNGvas20RPw
+	iUyHo2sp/4AyDDCRGsFW5xIRwXpLajTr7NMWgU8=
+X-Google-Smtp-Source: AG47ELv9zzlLlriEG5KTW9iHvYLYkQtrAx3SFYVDA5oaYgfj3JU33dfeVK96gIgmsb0+nQuxhXjMXNcvdtFCOVpcYfk=
+X-Received: by 10.46.16.85 with SMTP id j82mr21958431lje.139.1521991421047;
+	Sun, 25 Mar 2018 08:23:41 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a19:d80f:0:0:0:0:0 with HTTP; Sun, 25 Mar 2018 08:23:40
+	-0700 (PDT)
+In-Reply-To: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
+References: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Sun, 25 Mar 2018 11:23:40 -0400
+Message-ID: <CAHUNapSXZk0Ocmc9xeG2NAcVioF=5xjpzSxMXVxa9hAcGDKLZA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] X11 proto changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +56,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Mar 2018 13:32:25 -0000
+X-List-Received-Date: Sun, 25 Mar 2018 15:23:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-pymisp.inc                 | 4 ++--
- .../python/{python-pymisp_2.4.87.1.bb => python-pymisp_2.4.89.bb}     | 0
- .../python/{python3-pymisp_2.4.87.1.bb => python3-pymisp_2.4.89.bb}   | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymisp_2.4.87.1.bb => python-pymisp_2.4.89.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.87.1.bb => python3-pymisp_2.4.89.bb} (100%)
-
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index 6c7ceb8..7765cc5 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
- 
--SRC_URI[md5sum] = "5003442bffbb15c227decbe2a1fd2d66"
--SRC_URI[sha256sum] = "44af4fa5ba092a9bee413cedf4bf9453827fd2185b6a609a5388af8b72b6abd6"
-+SRC_URI[md5sum] = "d4fee2abb2d7468010b7fe9ebc68b0cb"
-+SRC_URI[sha256sum] = "304fbd8862dfde27d767c093de87fec42fc63c70d8393643d1a3b4f765aae78f"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-dateutil \
-diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.87.1.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.89.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pymisp_2.4.87.1.bb
-rename to meta-python/recipes-devtools/python/python-pymisp_2.4.89.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.87.1.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.89.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.87.1.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.89.bb
--- 
-2.7.4
-
+Have the Xorg developers provided any sort of timeline for this switch?
 
