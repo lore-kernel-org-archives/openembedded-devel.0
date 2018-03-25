@@ -1,54 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f41.google.com (mail-pl0-f41.google.com
-	[209.85.160.41])
-	by mail.openembedded.org (Postfix) with ESMTP id B5F667865E;
-	Sun, 25 Mar 2018 16:08:40 +0000 (UTC)
-Received: by mail-pl0-f41.google.com with SMTP id f5-v6so10404418plj.13;
-	Sun, 25 Mar 2018 09:08:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=1nKr74DgGfsLpFPbi3XHkAJG8RWSu5Jl0P8wUXw1Vkk=;
-	b=ef+Nx/DpLqxOVCeYgeVfSsn4oiXT1Xts13138MRhIZgH+oRPjWgulCflkYERZzgKKi
-	yj5wHehKh6RhZ2+k72QaYgo/3jW180uSf1jbtG4vpkTTSjXg/ZKPFaQNZrPXeDT/ChRV
-	KY4phfnuR1A23yJZCX7d3oJE2SpSI+mAajCTRW1n/nYqQNAyvjrxm38IDN2QEZS6WoHy
-	QNURlDj+9IRbv6IrEdRFhC/QA9McxjvoxmHITwBHtvzakxDBKpWbhvthUgdExIQrMZc5
-	JJ9ddxVIy18JgYwT3FF4PtREzJxU8yUbeQauurmtwD8p/TsSTOhaNbwtW4YqVY7oBAlw
-	bIcg==
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
+	[209.85.214.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D9C66093C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Mar 2018 21:58:09 +0000 (UTC)
+Received: by mail-it0-f52.google.com with SMTP id z7-v6so10492119iti.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Mar 2018 14:58:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=gRvuFF9EmN/pFzPnShBUvZeA4ltyuVi99/RUPespOYc=;
+	b=eX38HdNwvISz9V4pt+LsNeAut96zIxLGfm0PxzRQjnexBHluVWwCIlU3G40MHt/dxj
+	ubNV/rUO9Js5PJi23OSWvW8ueSfvYzVaTxfi6DT6JcdmO+/aYHjCrN77FB+vmmTNTmL9
+	R+dt1PbjHKW9JBO2ySVEPqcnf2v8/FllHqt6WXpbCwSCBnXqrbbGAs8nTboZYUHqgUet
+	7+0Ivd36J01pCo3WrZutAjyVV0jRgzE6LaNq8dXWDied5bNoR4GQvYClh56GFugN3Rty
+	qA6Fll49RcOya7yZrLz3ADyuV4FDlqA7Lzat5ZOg12xOYPVNcij1SGiIMt7sa0CUaHaX
+	A5pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=1nKr74DgGfsLpFPbi3XHkAJG8RWSu5Jl0P8wUXw1Vkk=;
-	b=ROt3QcoryFmwUOCKwuU6/NyIjwuiCbmsBIM+1JISfS8n3Af3UbjY766ze5YGsZRfqS
-	JJvf/N0Pq3dDTIyEGOEhCtYX6Z625B8tdbS6S9IVwyVYsehV3v+PAPkClAZ9IyczZDcf
-	GE2FHA1ck0NOuA9x0hHEHox4+rSIW/OE2Nst8cbRj7DtAVSWuiKTggIlGGR4ALELRsHw
-	c+VsMEi1PFbt+B6X1vvnSmGmohwoQwAysyg+rWK4YGj+ZLwJzvZpf/RKlkhwg4HOfUiq
-	XD0TyxMVsugBScleUgUsNvKNbCFx2RGs5bx2ThU3M204vzx989c+J56pZfeEBw5bvY93
-	8QzA==
-X-Gm-Message-State: AElRT7E3REbs2vGIE0B1YcCH0Fpn/5ngPnOTXqDVQpfvdJ9ditjcXH11
-	cg+Rkz9iEoZRgz1kXkahnw6h4A==
-X-Google-Smtp-Source: AG47ELu7oDQnP6WqHDJQkhPrJDNFm4XM4Smw96gVIHVBeiDvQ2oEnaUs9QBBHm/h3jAcV3MZ1mE2AQ==
-X-Received: by 2002:a17:902:2c83:: with SMTP id
-	n3-v6mr26039996plb.140.1521994121560; 
-	Sun, 25 Mar 2018 09:08:41 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1184:2db3:d824:9df5:a117?
-	([2601:202:4000:1184:2db3:d824:9df5:a117])
-	by smtp.gmail.com with ESMTPSA id
-	i127sm27481383pfc.136.2018.03.25.09.08.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Mar 2018 09:08:40 -0700 (PDT)
-To: Trevor Woerner <twoerner@gmail.com>
-References: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
-	<CAHUNapSXZk0Ocmc9xeG2NAcVioF=5xjpzSxMXVxa9hAcGDKLZA@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <d6f1a3fc-f65f-8ca2-f9f5-576f5d01df48@gmail.com>
-Date: Sun, 25 Mar 2018 09:08:38 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=gRvuFF9EmN/pFzPnShBUvZeA4ltyuVi99/RUPespOYc=;
+	b=t1Pzp3MI/De0nnKq38qunnfazCN5CoKyUgK36PrihUywmzz5M414UUP1vNBUIasNfW
+	yZwy4AYR9FcocTAQV/dX6u77Foi2dOvnW4F5kHbsrak8sK5Wg8u8F9gkcXLJdMWWZ0RT
+	Mr7O4IfAp1o/8jJ4ujwvgVuFF+ajiZkfNiiilTZTZef2wEKKktosJPs6Pn4CifeJonvd
+	qufX0jboCL/y5wNYfZ8tKaGaG2Ygtz2tdgbU87PULuz0yF+IvpEX5k/6LbTZexrdosuc
+	xti3H5bIuT4riEq6v1BUQxznfIJgkBPJNM2uMv/E7JsqinRSwoNYJJvYvl2d+WYd9Gjy
+	Pl9g==
+X-Gm-Message-State: AElRT7H3TDKcB2DtyDrjgZj+DsSrftT/a8UZl1ETnJKW7Uqd3mliuJc4
+	fQ5tjZ+ahp+w1bAPD1v9gBYRMHFtN03HS3uwS7RNhw==
+X-Google-Smtp-Source: AG47ELtH0fdOroIUX3p4QlhnCh3WASn/Z4U1NErkd4AAzf0oEhfgY+bAWrUnGC8h85p+9ZyqD74eBWf/vzGP4QqaBZ4=
+X-Received: by 2002:a24:f685:: with SMTP id
+	u127-v6mr20049662ith.131.1522015091329; 
+	Sun, 25 Mar 2018 14:58:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAHUNapSXZk0Ocmc9xeG2NAcVioF=5xjpzSxMXVxa9hAcGDKLZA@mail.gmail.com>
+Received: by 10.107.30.9 with HTTP; Sun, 25 Mar 2018 14:57:51 -0700 (PDT)
+In-Reply-To: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
+References: <9a608e4c-0752-eeb2-306c-f8804c584be2@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Sun, 25 Mar 2018 22:57:51 +0100
+Message-ID: <CAJTo0Lb8zOtBb72hdhL4BzfTPss4JM00-WZOiOnqk5_tRUJyOw@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
@@ -65,21 +58,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Mar 2018 16:08:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Sun, 25 Mar 2018 21:58:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Trevor,
+On 24 March 2018 at 19:07, akuster808 <akuster808@gmail.com> wrote:
+> It appears Xorg is deprecating most of it's proto header repos for a new
+> all-in-1 repo xorgproto. This will most likely affect down stream
+> layers. The question I have, is do we want this big churn to happen for
+> Sumo or wait for 2.6 ?
 
+Pretty late for Sumo and if the worst case thing happens and they
+delete the repos (which would be unusual) then we can just point the
+SRC_URI at the yoctoproject mirror site.
 
-On 03/25/2018 08:23 AM, Trevor Woerner wrote:
-> Have the Xorg developers provided any sort of timeline for this switch?
+Moving forward in master I guess a xorgprotos recipe which PROVIDES
+that bundle should be seamless.
 
-https://lists.x.org/archives/xorg-announce/2018-February/002835.html
-
-As of 3/1/2018 the last commit in all the proto headers indicate they
-are deprecated.
-
-- armin
+Ross
 
