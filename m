@@ -1,48 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f47.google.com (mail-pl0-f47.google.com
-	[209.85.160.47])
-	by mail.openembedded.org (Postfix) with ESMTP id DA87B78439
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B4531784CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Mar 2018 05:02:17 +0000 (UTC)
-Received: by mail-pl0-f47.google.com with SMTP id f5-v6so11257071plj.13
+	Mon, 26 Mar 2018 06:50:49 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id e17so3955498ywa.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Mar 2018 22:02:19 -0700 (PDT)
+	Sun, 25 Mar 2018 23:50:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=IqpT1KnLMEknZFJZYJSo7dkQX5koJX/+BgQ/NCORJRc=;
-	b=i5d5sylRc+smUKJxj1+1uuHqTUNQTRuL7HaMyroDHqabJ1rNgfH2CPZl/zyQJ0W0Pz
-	1dOT6/N857Romd9N9vaCZP2D/VyNmZKtFg2THYs6+A1ONUmNr2491alXqYnbx2sLTpSt
-	O+092p1zEAIissCSHsvt2H+kNalPTjQ611QRMzYy8iUeOSpfHQeDiABzaCHbGvxKRW0J
-	IEWm90tyh4d4+k7fmMfZDGYrU/9mI8SnzbFPRT+b8kUqI+1/yQDV6g2oTFZvjxy6DxWV
-	K1oYMU1OrfGSNAEznQD1K50Ff2kua64BdsHUzwVSi6dwK2yzTQT9DIUOTnXO0B6xi+dX
-	wLEw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=tsw6xaUR+lR2V6D5KNR7A5HGV/qp2AR9YlgGGEwDifM=;
+	b=NsBoWzC+pRFYrWOPI2f8BSTzIne1TQ0OkZEDL/E+/y7EqLIdoCyJn3R3A2S/1cRZKI
+	7AX7m3WYVP9btd3tb7ljTAaYfGjogCUK59K8koyoDknaIp9fqFd0oE2hwWZb1hgz2rKw
+	kgzxlwMGTakPck5c/Oi7S/9HqSN68yyt969fkdv62h4Y/sEFZsco09gSDnFNJ+26Zv0m
+	8fi9pI/fPAidBtVG0euyYTEcbL0fXJ+WvAzLHAX+P8CaJFs0zXcdGakoFcuGAdIwrNw6
+	cn/hcr+1Y1m1gsamXopGUdxS5pIye5JXSgbThlQOIh51LBGVE6I0DItCzrKGnewo3RZu
+	PBew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=IqpT1KnLMEknZFJZYJSo7dkQX5koJX/+BgQ/NCORJRc=;
-	b=m9eZCr8Z8A106z9CsvgR9wnygL8CkxtxYG9acAoFbHLsqVzUR5zJin+GXhNOiV5kPU
-	VjYaewBiyEAxLnF6uGlBBbu+7azIW6JUbtA104hXQjm4fljEqUtY3DUksWQK/Yv6B1un
-	QDSMLw6f4i3PE6I7m8ghajiD6Nl3BR21E4RDFp08bg+qJQ79Qcu/kuu0tQAG77Xb7Kbq
-	3mD4mYLMKf5WdMWtdXt8s9vFMdpCyHZybfuomnV0ihGUOVBWBHWTheoRCCgmqHL/Px0o
-	CREPLKzXwX112MsoPn7mS+oWuZuZE8pC3R/npTp9rQSnVhFw4SHvcQLRzI3RajVS/asw
-	5syw==
-X-Gm-Message-State: AElRT7FIHb/erh2qE9BE4kEP7K2fc7xEb5C2DST/yTFvrKfVKwZs/U1V
-	7TR+t6UOnT2pZWOyAB2oo9nNkw==
-X-Google-Smtp-Source: AG47ELuWLchSr2fD8b7gYU6CKDPLnqiu9FN+DPrDd+QLBVQqZSRQtXeVLe2blsa63laIA4d0aEPafQ==
-X-Received: by 2002:a17:902:a60d:: with SMTP id
-	u13-v6mr20506410plq.161.1522040538019; 
-	Sun, 25 Mar 2018 22:02:18 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
-	by smtp.gmail.com with ESMTPSA id
-	p14sm24254813pgu.44.2018.03.25.22.02.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 25 Mar 2018 22:02:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Mar 2018 22:02:10 -0700
-Message-Id: <20180326050210.43570-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.16.2
-Subject: [meta-oe][PATCH] tslib: Upgrade to 1.15 release
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=tsw6xaUR+lR2V6D5KNR7A5HGV/qp2AR9YlgGGEwDifM=;
+	b=nv4ge0MsGddCKpet0va4WqmQlCem4Igi/fwwu0O7D931CftfcV79R4nFAJxYNe0fvn
+	dJaSZQjHmHw+0AHhuh1/hJm7MKZWZN9GEapVs8crFEsF93ZSLy13yvQ3O7b3mqDl/JCk
+	IMpJubM9faPU7IKu9kl88c64n8TYDbG1g8HjXZ2oWpCd9K70ekkNDJ3zj4QScVwGnOBw
+	VB3Vs8lO5hkGS6GODnY4tr40fdY8qkrcDTrgYhyTGbJ7L567+b78xNEWiPOq8anUL/mV
+	ZzaOictCJboKoeBpm5p6Fcqohc+IwGwG5oJrTGq0vMeB/+6D84NsSuoq1l4lqFyA3UtK
+	Z+JA==
+X-Gm-Message-State: AElRT7F0EUBPEeUG7dKk4udAnD1jaaFZloYlt7daDZXBRUXVxpkiqAfc
+	HyesdWvtDANx77sQOpPqTUOKZA6/+1Sb9z4/REA=
+X-Google-Smtp-Source: AG47ELtmEORb8TByPwKj6JqxisuhAlhd1oYogTYqDKV/sexYTl3+rcmMrFOHq4bBORfV2v3gZ/TmZLocf4Z43ChahEQ=
+X-Received: by 10.13.211.195 with SMTP id v186mr22635906ywd.163.1522047050776; 
+	Sun, 25 Mar 2018 23:50:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Sun, 25 Mar 2018 23:50:50
+	-0700 (PDT)
+In-Reply-To: <20180325230452.40908-1-raj.khem@gmail.com>
+References: <20180325230452.40908-1-raj.khem@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 26 Mar 2018 08:50:50 +0200
+Message-ID: <CALbNGRTRsNOgr9AZD+cWeoUmfHKetXgQuGGd0r-yb_h_FU9RJA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 1/2] qtwebkit: Fix build on armv7ve (rpi)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,72 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Mar 2018 05:02:17 -0000
+X-List-Received-Date: Mon, 26 Mar 2018 06:50:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-License changed from LGPL-2.0 to LGPL-2.1
-see
+On Mon, Mar 26, 2018 at 1:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes-qt/qt5/qtwebkit_git.bb | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
+> diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+> index b23d4d6..0f5cbbc 100644
+> --- a/recipes-qt/qt5/qtwebkit_git.bb
+> +++ b/recipes-qt/qt5/qtwebkit_git.bb
+> @@ -18,6 +18,19 @@ DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt gperf-
+>  ARM_INSTRUCTION_SET_armv4 = "arm"
+>  ARM_INSTRUCTION_SET_armv5 = "arm"
+>
+> +# https://bugzilla.yoctoproject.org/show_bug.cgi?id=9474
+> +# https://bugs.webkit.org/show_bug.cgi?id=159880
+> +# JSC JIT can build on ARMv7 with -marm, but doesn't work on runtime.
+> +# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2 (-mthumb).
+> +ARM_INSTRUCTION_SET_armv7a = "thumb"
+> +ARM_INSTRUCTION_SET_armv7r = "thumb"
+> +ARM_INSTRUCTION_SET_armv7ve = "thumb"
+> +
+> +# qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+> +# Segmentation fault
+> +GI_DATA_ENABLED_armv7a = "False"
+> +GI_DATA_ENABLED_armv7ve = "False"
+> +
+>  # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
+>  # 5.10.meta-qt5.1
+>  SRC_URI += "\
+> --
+> 2.16.2
+>
+Hmm strange - my builds for Rpi are fine. Are you sure that this is
+not caused by musl in particular gi part?
 
-https://github.com/kergoth/tslib/commit/2c15c34f2720d4bc2f73d85b02fa355542fea5bf#diff-7116ef0705885343c9e1b2171a06be0e
-
-Package additional test tools into test package
-
-This version works well on arm64 systems
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../tslib/{tslib_1.1.bb => tslib_1.15.bb}                 | 15 +++++++++------
- 1 file changed, 9 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-graphics/tslib/{tslib_1.1.bb => tslib_1.15.bb} (77%)
-
-diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.1.bb b/meta-oe/recipes-graphics/tslib/tslib_1.15.bb
-similarity index 77%
-rename from meta-oe/recipes-graphics/tslib/tslib_1.1.bb
-rename to meta-oe/recipes-graphics/tslib/tslib_1.15.bb
-index e7c48ff6c..e87b411a8 100644
---- a/meta-oe/recipes-graphics/tslib/tslib_1.1.bb
-+++ b/meta-oe/recipes-graphics/tslib/tslib_1.15.bb
-@@ -8,15 +8,14 @@ HOMEPAGE = "http://tslib.org/"
- AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
- SECTION = "base"
- LICENSE = "LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fc178bcd425090939a8b634d1d6a9594"
- 
- SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.xz;downloadfilename=tslib-${PV}.tar.xz \
-            file://ts.conf \
-            file://tslib.sh \
- "
--
--SRC_URI[md5sum] = "14771f8607b341bb4b297819d37e837d"
--SRC_URI[sha256sum] = "fe35e5f710ea933b118f710e2ce4403ac076fe69926b570333867d4de082a51c"
-+SRC_URI[md5sum] = "9ff36788c9ab76a10b58422227b9629e"
-+SRC_URI[sha256sum] = "7ce48807cab655076d71a1ceef3ed0ab8a25df98074981d4a8fd1477ee5f710c"
- 
- UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
- 
-@@ -38,10 +37,11 @@ do_install_append() {
- #RDEPENDS_tslib-conf_weird-machine = "detect-stylus"
- RPROVIDES_tslib-conf = "libts-0.0-conf"
- 
--PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate"
-+PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate tslib-uinput"
- DEBIAN_NOAUTONAME_tslib-conf = "1"
- DEBIAN_NOAUTONAME_tslib-tests = "1"
- DEBIAN_NOAUTONAME_tslib-calibrate = "1"
-+DEBIAN_NOAUTONAME_tslib-uinput = "1"
- 
- RDEPENDS_${PN} = "tslib-conf"
- RRECOMMENDS_${PN} = "pointercal"
-@@ -50,4 +50,7 @@ FILES_${PN}-dev += "${libdir}/ts/*.la"
- FILES_tslib-conf = "${sysconfdir}/ts.conf ${sysconfdir}/profile.d/tslib.sh ${datadir}/tslib"
- FILES_${PN} = "${libdir}/*.so.* ${libdir}/ts/*.so*"
- FILES_tslib-calibrate += "${bindir}/ts_calibrate"
--FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_test"
-+FILES_tslib-uinput += "${bindir}/ts_uinput"
-+
-+FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_print_mt \
-+                     ${bindir}/ts_test ${bindir}/ts_test_mt ${bindir}/ts_verify ${bindir}/ts_finddev"
--- 
-2.16.2
-
+Andreas
 
