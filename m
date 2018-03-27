@@ -1,24 +1,33 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id 1818678654
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DEDFC600E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2018 01:45:00 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	26 Mar 2018 18:45:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,366,1517904000"; d="scan'208";a="38362783"
-Received: from chiron.jf.intel.com ([10.7.159.63])
-	by orsmga003.jf.intel.com with ESMTP; 26 Mar 2018 18:45:01 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Mar 2018 18:44:52 -0700
-Message-Id: <20180327014452.37297-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.14.3
+	Tue, 27 Mar 2018 02:59:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w2R2xCiZ001598
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Mar 2018 19:59:13 -0700
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.201]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0361.001;
+	Mon, 26 Mar 2018 19:59:11 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] haveged: update to 1.9.2
+Thread-Index: AQHTwmoUxSU5u/aqs0eZJIlSCeQr6KPjaf1g
+Date: Tue, 27 Mar 2018 02:59:10 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA0158699EA4@ALA-MBD.corp.ad.wrs.com>
+References: <20180323054110.748-1-jackie.huang@windriver.com>
+In-Reply-To: <20180323054110.748-1-jackie.huang@windriver.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.162]
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH] libtest-harness-perl: upgrade v3.39 -> v3.42; inherit ptest-perl
+Subject: Re: [meta-oe][PATCH] haveged: update to 1.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,98 +40,193 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2018 01:45:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Mar 2018 02:59:13 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* Remove tests which require "-T" (taint) command line option
-* Remove tests which are inappropriate for on-target testing
-* Install "prove" to /usr/local/bin to avoid conflict with perl-misc
+I found an issue when build in parallel, so please ignore this, I will fix =
+the issue and re-send soon.
 
-Upstream release notes:
-3.42    19-03-2018
-        - Enable rulesfile.t to run in core
+Thanks,
+jackie
 
-3.41    27-02-2018
-        - Released 3.40_01 without code modifications
-
-3.40_01 23-07-2017
-        - Return handle for pipes and sockets #58 (Erik Huelsmann)
-        - TAP v13 plan allows trailing whitespace (Steffen Schwigon)
-        - prove: add a --statefile=<path> option to customize the .prove file
-          (Ævar Arnfjörð Bjarmason)
-        - Avoid non-deterministic source handling, make a SourceHandler tie an
-          error. (Michael Schwern, Leon Timmermans)
-        - Fix and simplify MSWin32 colorization (Roy Ivy III)
-        - Fix file source handler to accept single extensions option (Tomoki Aonuma)
-        - Spelling fixes (Brian Wightman)
-
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- ...s-perl_3.39.bb => libtest-harness-perl_3.42.bb} | 35 ++++++++++++++++++++--
- 1 file changed, 32 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/libtest/{libtest-harness-perl_3.39.bb => libtest-harness-perl_3.42.bb} (81%)
-
-diff --git a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.39.bb b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb
-similarity index 81%
-rename from meta-perl/recipes-perl/libtest/libtest-harness-perl_3.39.bb
-rename to meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb
-index 35054c7586..c9ba594803 100644
---- a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.39.bb
-+++ b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.42.bb
-@@ -26,14 +26,14 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=b08db4360eec119e875dddd7cb8a5ddd"
- 
- SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
--SRC_URI[md5sum] = "7877298e3b717734095ecb8e918b043e"
--SRC_URI[sha256sum] = "69bd44c81c6e1d2db18e298ecf631852608893ddfddb332a7d55285bbfc51132"
-+SRC_URI[md5sum] = "c794906473f88d6b74194e2d56f16bd6"
-+SRC_URI[sha256sum] = "0fd90d4efea82d6e262e6933759e85d27cbcfa4091b14bf4042ae20bab528e53"
- 
- UPSTREAM_CHECK_REGEX = "Test\-Harness\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
- 
- S = "${WORKDIR}/Test-Harness-${PV}"
- 
--inherit cpan
-+inherit cpan ptest-perl
- 
- RDEPENDS_${PN} += "\
-     perl-module-benchmark \
-@@ -88,4 +88,33 @@ RPROVIDES_${PN} += "libapp-prove-perl \
-                     libtap-parser-yamlish-writer-perl \
-                     "
- 
-+do_install_prepend() {
-+	# these tests are inappropriate on target
-+	rm -rf ${B}/t/000-load.t
-+	rm -rf ${B}/t/state.t
-+	# these tests require "-T" (taint) option on command line
-+	rm -rf ${B}/t/aggregator.t
-+	rm -rf ${B}/t/bailout.t
-+	rm -rf ${B}/t/base.t
-+	rm -rf ${B}/t/callbacks.t
-+	rm -rf ${B}/t/errors.t
-+	rm -rf ${B}/t/nested.t
-+	rm -rf ${B}/t/object.t
-+	rm -rf ${B}/t/premature-bailout.t
-+	rm -rf ${B}/t/results.t
-+	rm -rf ${B}/t/streams.t
-+	rm -rf ${B}/t/yamlish-output.t
-+	rm -rf ${B}/t/compat/version.t
-+}
-+
-+do_install_append() {
-+	install -d ${D}/usr/local/bin
-+	# do not clobber perl-misc /usr/bin/prove
-+	install -m 0755 ${B}/bin/prove ${D}/usr/local/bin/
-+	rm -rf ${D}${bindir}/prove
-+	rm -rf ${D}${bindir}
-+}
-+
-+FILES_${PN} += "/usr/local/bin/prove"
-+
- BBCLASSEXTEND = "native"
--- 
-2.14.3
-
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-bounces@lists.openembedded.org]
+> On Behalf Of jackie.huang@windriver.com
+> Sent: Friday, March 23, 2018 13:41
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH] haveged: update to 1.9.2
+>=20
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> * Drop the patch remove-systemd-unit-503.patch and init script
+>   haveged.sysvinit, and use PACKAGECONFIG to set the correct
+>   sevice file or init script for systemd or sysvinit.
+>=20
+> * Add SuccessExitStatus to fix the failure when the service
+>   is stopped.
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../haveged/haveged/haveged.sysvinit               | 35 ----------------=
+------
+>  .../haveged/haveged/remove-systemd-unit-503.patch  | 20 -------------
+>  .../haveged/{haveged_1.9.1.bb =3D> haveged_1.9.2.bb} | 21 +++++++------
+>  3 files changed, 10 insertions(+), 66 deletions(-)
+>  delete mode 100755 meta-oe/recipes-extended/haveged/haveged/haveged.sysv=
+init
+>  delete mode 100644 meta-oe/recipes-extended/haveged/haveged/remove-syste=
+md-unit-503.patch
+>  rename meta-oe/recipes-extended/haveged/{haveged_1.9.1.bb =3D> haveged_1=
+.9.2.bb} (61%)
+>=20
+> diff --git a/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit b/=
+meta-oe/recipes-
+> extended/haveged/haveged/haveged.sysvinit
+> deleted file mode 100755
+> index 98b8857e7..000000000
+> --- a/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
+> +++ /dev/null
+> @@ -1,35 +0,0 @@
+> -#!/bin/sh
+> -
+> -PATH=3D/bin:/usr/bin:/sbin:/usr/sbin
+> -
+> -pidfile=3D/var/run/haveged.pid
+> -
+> -# source function library
+> -. /etc/init.d/functions
+> -
+> -case "$1" in
+> -    start)
+> -    echo -n "Starting havege entropy daemon... "
+> -    start-stop-daemon --start --quiet --pidfile $pidfile --name haveged =
+--startas haveged --  -w 1024 -v 0 && success || failure
+> -    echo
+> -    ;;
+> -    stop)
+> -    echo -n "Stopping havege entropy daemon... "
+> -    start-stop-daemon --stop --quiet --pidfile $pidfile --name haveged
+> -    success
+> -    echo
+> -    ;;
+> -    restart)
+> -    $0 stop
+> -    sleep 1
+> -    $0 start
+> -    ;;
+> -    status)
+> -    status haveged
+> -    ;;
+> -    *)
+> -    echo "Usage: /etc/init.d/haveged {start|stop|restart|status}"
+> -    exit 1
+> -esac
+> -
+> -exit 0
+> diff --git a/meta-oe/recipes-extended/haveged/haveged/remove-systemd-unit=
+-503.patch b/meta-oe/recipes-
+> extended/haveged/haveged/remove-systemd-unit-503.patch
+> deleted file mode 100644
+> index df27bcb09..000000000
+> --- a/meta-oe/recipes-extended/haveged/haveged/remove-systemd-unit-503.pa=
+tch
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> ---- a/init.d/Makefile.am	2014-01-02 18:55:53.000000000 +0100
+> -+++ b/init.d/Makefile.am	2014-08-11 10:59:40.000000000 +0200
+> -@@ -34,11 +34,11 @@
+> - 	$(do_subst) < $(srcdir)/$(src_tmpl) > haveged.service;
+> -
+> - install-data-hook:
+> --if ENABLE_SYSTEMD_LOOKUP
+> --	install -p -m644 haveged.service `pkg-config --variable=3Dsystemdsyste=
+munitdir systemd`/haveged.service;
+> --else
+> --	install -p -m644 haveged.service ($unit_dir)/haveged.service;
+> --endif
+> --	systemctl enable haveged.service;
+> -+#if ENABLE_SYSTEMD_LOOKUP
+> -+#	install -p -m644 haveged.service `pkg-config --variable=3Dsystemdsyst=
+emunitdir systemd`/haveged.service;
+> -+#else
+> -+#	install -p -m644 haveged.service ($unit_dir)/haveged.service;
+> -+#endif
+> -+#	systemctl enable haveged.service;
+> -
+> - endif
+> diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb b/meta-oe/=
+recipes-extended/haveged/haveged_1.9.2.bb
+> similarity index 61%
+> rename from meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
+> rename to meta-oe/recipes-extended/haveged/haveged_1.9.2.bb
+> index 419c85f51..d0e9fdaa7 100644
+> --- a/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
+> +++ b/meta-oe/recipes-extended/haveged/haveged_1.9.2.bb
+> @@ -5,23 +5,22 @@ HOMEPAGE =3D "http://www.issihosts.com/haveged/index.ht=
+ml"
+>  LICENSE =3D "GPLv3"
+>  LIC_FILES_CHKSUM=3D"file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae50=
+4"
+>=20
+> -SRC_URI =3D "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz \
+> -    file://remove-systemd-unit-503.patch \
+> -    file://haveged.sysvinit \
+> -"
+> +SRC_URI =3D "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz"
+>=20
+> -SRC_URI[md5sum] =3D "015ff58cd10607db0e0de60aeca2f5f8"
+> -SRC_URI[sha256sum] =3D "9c2363ed9542a6784ff08e247182137e71f2ddb79e8e6c1a=
+c4ad50d21ced3715"
+> +SRC_URI[md5sum] =3D "fb1d8b3dcbb9d06b30eccd8aa500fd31"
+> +SRC_URI[sha256sum] =3D "f77d9adbdf421b61601fa29faa9ce3b479d910f73c66b9e3=
+64ba8642ccbfbe70"
+>=20
+>  inherit autotools update-rc.d systemd
+>=20
+>  EXTRA_OECONF =3D "\
+> -    --enable-init=3Dservice.redhat \
+>      --enable-nistest=3Dyes \
+>      --enable-olt=3Dyes \
+>      --enable-threads=3Dno \
+>  "
+>=20
+> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
+}"
+> +PACKAGECONFIG[systemd] =3D "--enable-init=3Dservice.redhat --enable-init=
+dir=3D${systemd_system_unitdir}, --enable-init=3Dsysv.redhat,
+> systemd"
+> +
+>  INITSCRIPT_PACKAGES =3D "${PN}"
+>  INITSCRIPT_NAME =3D "haveged"
+>  INITSCRIPT_PARAMS_${PN} =3D "defaults 9"
+> @@ -30,10 +29,10 @@ SYSTEMD_PACKAGES =3D "${PN}"
+>  SYSTEMD_SERVICE_${PN} =3D "haveged.service"
+>=20
+>  do_install_append() {
+> -    install -D -m 755 ${WORKDIR}/haveged.sysvinit ${D}${sysconfdir}/init=
+.d/haveged
+> -
+> -    mkdir -p ${D}${systemd_unitdir}/system
+> -    install -p -m644 ${B}/init.d/haveged.service ${D}${systemd_unitdir}/=
+system
+> +    # The exit status is 143 when the service is stopped
+> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false=
+', d)}; then
+> +        sed -i '/ExecStart/a SuccessExitStatus=3D143' ${D}${systemd_syst=
+em_unitdir}/haveged.service
+> +    fi
+>  }
+>=20
+>  MIPS_INSTRUCTION_SET =3D "mips"
+> --
+> 2.11.0
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
