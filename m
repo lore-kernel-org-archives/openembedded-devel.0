@@ -1,50 +1,51 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
-	[209.85.213.193])
-	by mail.openembedded.org (Postfix) with ESMTP id AC6487841B
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 69A4578591
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 11:25:00 +0000 (UTC)
-Received: by mail-yb0-f193.google.com with SMTP id x72-v6so650237ybe.8
+	Wed, 28 Mar 2018 15:14:00 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id z73so2602553wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 04:25:02 -0700 (PDT)
+	Wed, 28 Mar 2018 08:14:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=bwC73/KmJzQiN2f3x7B+LopzCAjcifjOH5Y57XYm9us=;
-	b=I8nmENqPXi52zIjxlrXc9uFwZ24f/QjzJ2q6xtIIo41S6RZjpVTxzX4cJm8qaBz+iW
-	kiJnLeCaTL0LsZ9Bb/5TMEzXwOSnTHwRahQj7eilLa9urd6RVvZaJKUG2XzFW9jFrAP7
-	68O/BQ6ayfELesmdrRUODfNB7y+pUT+B4E8qpJm4XgNzoxoQ4v+ZJbkIh825298/y0ZY
-	y549Y+GLwPpJKfospL0YksUFUsItUS/hsEjWzDLsvwSrDh3aQmVB3roJgQHcsJXqqP+J
-	+tgBRpKuHeZMh0Uv7JPZnq8+8E81HcfaHA610Jyyy0BNMrolKmlXpct//QPBzQUX5zDJ
-	JH8A==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BPEbIotelcrP0LB8JSdSrcFDaGta0uA6AWuS2tGKMzw=;
+	b=isBYpbQLVdPNcW6JMVhUJG1FD48mxASi/BgR4Tc7Gx3YLDy+r6+Txow133uU1+r0Za
+	HiYlkMmkyTHrYLgQUV/ytqaRWxqiZtBi7N9/vFsmmGLmSklbOo0O7MKIBMp1CM0MN5S7
+	X+UResHdmaoLMS1ETC6jogbbEGXFB5EwhWFQNt1tfTouFkMpzWRom5ahBpdMo5sNH62T
+	0XFiFCSnqhAo+02tYKKTj2+Hc/m4tasz7P6Xw4CsJhNnAn0uTSS/a+WVHtlsVFKGYWo5
+	6TpW9q+bJ5JNh8bNbHnlRmGgKSxzNzo3NtQ/U/DmF4pc478rdxXrTrNjjl5zACU3ontT
+	FzkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=bwC73/KmJzQiN2f3x7B+LopzCAjcifjOH5Y57XYm9us=;
-	b=J6pU716JpBbQFeVbjAQgNiK+etvdKHd0pzJCnUxZklgAjZ3Bc0fKLk2ZRFg0U99Xpa
-	byquZEb1MfTxkV+/LMcavlkOOykXjT9lCOrvcQ2Jkrl6GOJ7ekuOuEch5A7/326rPlpl
-	YvZGUrNIsJ/elr3Ah1eofbfUji70xnKDjRy/qR0fzplWVBGjDanprEF5wRgyeK1h9QOJ
-	dGK5plWBAyim1mTY4e+VkMaN8sYsFmjzAIY15nQahgKbT5XCMmtl1GmLLHx3/G5bta9c
-	DgX/Dn7EMTrj9FT81SqykMDhJO9LtEg2T3jR8o+Gf5ZVpTmNw5wF3jdqhNcelao0w+Rv
-	h+OA==
-X-Gm-Message-State: AElRT7FEIxwxXWA4o+Ss4/sk5rOdG6/CJDC5pfuWAJ+L9VGEyDYW6aBk
-	wyRlggP78cfVjOZyaeoLzlt94B/86KbrTvK0wrc=
-X-Google-Smtp-Source: AIpwx4+t1L8GBPi6ipQiyh5LD7E8Etywkrthg8JxC7aCvlc56hC3AgLJtsrK7UuVfUhpj2ToziEJCxUPStNPzt236cs=
-X-Received: by 2002:a25:d0c6:: with SMTP id
-	h189-v6mr1788408ybg.185.1522236301687; 
-	Wed, 28 Mar 2018 04:25:01 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BPEbIotelcrP0LB8JSdSrcFDaGta0uA6AWuS2tGKMzw=;
+	b=YZb2IKfxdyHf4SD8SIjQW9q74zdwb0ga1/hVN6C89zkvJqMtlhBMEyrZov49zxwGkN
+	kUzuyrZABUuoTpcZCps08mdOEpK07T1eWTESaSe98kXrmqQynFUM6QeulWAAVaN59KfO
+	tICHPWRN/UtdDREYcxNJ+VtsGoup8UCHrBW0i8UEjlgkrTEUA1+GCp5+hMqeqsPIyGHS
+	Nkpty/357LyUEwla3hU738lbrG5V9X3wxOJH3Gk7ndVnkjHOgsO7se/6OSV7H/8TnInm
+	9WPaR0E4BkpxgyzXJpFIRFrOk8FGgtXCydGD3Wd/pN7mn1dD/XBslfxDSoNHmzOvPAhs
+	sqrg==
+X-Gm-Message-State: AElRT7G6mI0djXOoA2nShB6V/F7F+5yspEHK6O6FOJoln7TcfoQ+dsoo
+	PK+uggMlI6PyWrhzXXJ57o0LBQ==
+X-Google-Smtp-Source: AIpwx4//iwKn649PVrOoeQeIw8INRYIX2qS01FEyUqKCme4hB6TETuCi3bxGck9WX1EmGL+ZGLfMig==
+X-Received: by 10.223.185.73 with SMTP id b9mr3312554wrg.229.1522250040986;
+	Wed, 28 Mar 2018 08:14:00 -0700 (PDT)
+Received: from localhost.localdomain (p50971113.dip0.t-ipconnect.de.
+	[80.151.17.19]) by smtp.gmail.com with ESMTPSA id
+	n49sm5986665wrn.90.2018.03.28.08.14.00
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 28 Mar 2018 08:14:00 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 28 Mar 2018 17:13:29 +0200
+Message-Id: <20180328151331.20660-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Wed, 28 Mar 2018 04:25:01
-	-0700 (PDT)
-In-Reply-To: <1522039298-25092-1-git-send-email-Qi.Chen@windriver.com>
-References: <1522039298-25092-1-git-send-email-Qi.Chen@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 28 Mar 2018 13:25:01 +0200
-Message-ID: <CALbNGRQFMg0B5MoE2_wezcdGUh3Z6e96UKnvO5+0f+QDMeHy9w@mail.gmail.com>
-To: Chen Qi <Qi.Chen@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] cyrus-sasl: fix systemd related setting
+Subject: [PATCH 1/3] libsdl-ttf: refresh automake_foreign.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,42 +58,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2018 11:25:00 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Mar 2018 15:14:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Mar 26, 2018 at 6:41 AM,  <Qi.Chen@windriver.com> wrote:
-> From: Chen Qi <Qi.Chen@windriver.com>
->
-> The service file belongs to ${PN}-bin instead of ${PN}, fix things
-> accordingly.
->
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> ---
->  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26=
-.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-> index 64d1a76d6..6dbff87dd 100644
-> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-> @@ -75,8 +75,8 @@ do_install_append() {
->  USERADD_PACKAGES =3D "${PN}-bin"
->  USERADD_PARAM_${PN}-bin =3D "--system --home=3D/var/spool/mail -g mail c=
-yrus"
->
-> -SYSTEMD_PACKAGES =3D "${PN}"
-> -SYSTEMD_SERVICE_${PN} =3D "saslauthd.service"
-> +SYSTEMD_PACKAGES =3D "${PN}-bin"
-> +SYSTEMD_SERVICE_${PN}-bin =3D "saslauthd.service"
->  SYSTEMD_AUTO_ENABLE =3D "disable"
->
->  SRC_URI[md5sum] =3D "a7f4e5e559a0e37b3ffc438c9456e425"
-> --
-> 2.11.0
->
-Was about to send similar.
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../libsdl-ttf/files/automake_foreign.patch          | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-Acked-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+diff --git a/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch b/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch
+index 2d5bd6d91..c2e41f93e 100644
+--- a/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch
++++ b/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch
+@@ -1,9 +1,17 @@
+-Index: SDL2_ttf-2.0.14/Makefile.am
+-===================================================================
+---- SDL2_ttf-2.0.14.orig/Makefile.am
+-+++ SDL2_ttf-2.0.14/Makefile.am
+-@@ -1,6 +1,8 @@
+- # Makefile.am for the SDL truetype font loading library and viewer
++From fbd50a815483eb2edeb6cb8e52a94d1987a762b3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 9 May 2017 00:57:10 -0700
++
++---
++ Makefile.am | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/Makefile.am b/Makefile.am
++index 8166d91..8e05e49 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -2,6 +2,8 @@
++ 
+  lib_LTLIBRARIES = libSDL2_ttf.la
+  
+ +AUTOMAKE_OPTIONS = foreign
+-- 
+2.14.3
+
 
