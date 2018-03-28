@@ -1,53 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D26A785A1
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f48.google.com (mail-pl0-f48.google.com
+	[209.85.160.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 5165D71A6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 15:14:02 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id l49so2609109wrl.4
+	Wed, 28 Mar 2018 15:33:01 +0000 (UTC)
+Received: by mail-pl0-f48.google.com with SMTP id b7-v6so1791517plr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 08:14:04 -0700 (PDT)
+	Wed, 28 Mar 2018 08:33:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=65dC98a1osz6QUYUTQui2LHuOh1Qeb5y1kk/ZG+8i+4=;
-	b=NMt58nbJQF88ItWbtTCNSAQ/XXtOx/FvmzZ2hSHq95dMsyHDY1JnO8dUcnTFrlCnHG
-	OWuQUi4imH6SG7svXFzhqYSaYGMmEDJ1JMg6xMLCE8uqODtdxufTNENgeGA+0RZOMJ8b
-	62ki2CHodGsyG66Tz58m+UiyNr1q01ftTTaCKpO2AxtmqVr0GUJe4eBF50vpHSj7jiAF
-	7iCOb/oDEe5FKNuHs4Q87JcQcP6jiBOxpj57yQBS4a1Rst8mcwwmbxgxsZRlngNcKTaK
-	mjFJkWnO8pmeQkjEHzeI7g681Ir7PwVcIjj5HVoWwBeokuONAc+nG4G+yethxXoV2mco
-	9Shw==
+	h=from:to:subject:date:message-id;
+	bh=HPWiezOOWGCspGTEA25IIT3efZBpydTTaubymdFzb28=;
+	b=EeUeVLIKHcLbReHTu3W6KyGAfsYJtrXKnEntddWjRBtLcNHjJhpAbD/6Gq3B+80c1z
+	YaLvW44LAYMGJbpGXVx/FTpYl2hLV7nyKSA2nYg1ML+odsAeCc4CywAPpwAN7Uk25381
+	UoGOtBmNPUXC/S8cyeogdyiJo9ORfY2/ymU7dwM/6Q9l1mayntNADW5jM7zWfw3DVv7u
+	upxRuvXbpXuALOmq7DGlFPlwV/BoHPyg1He4oSLdLWlGZga2VvxvuRPxCeXWDyNJNG6K
+	/mtSN/YmCrPb1/X+lrTnQncvmH3I44XDZQKj7SLJPYrjJkRs8v8XTkWpr0i5DHDP9aXI
+	VVYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=65dC98a1osz6QUYUTQui2LHuOh1Qeb5y1kk/ZG+8i+4=;
-	b=EO3vdgUWpoyT3b5I4t3Fb1jQsx44Sh/tnOhiin1GjLUefvdZZyMIjOJ3k+aN2YNE6V
-	mkuGLcLmfx7UHU/bGqvIW56ZHFIiMMq+1wRr9PoGlUwwWQyrLMm1kf9a21CUNU3LVdRg
-	Gh/WOMYcpvWvBfFfwUc4Jns3FtMLBNAONlUnvvcjmUxKcOqTAZx0VESXCvgZ+/KksiEs
-	Hzukw1MwT+o32pSTnSREg3ZvOk+caMlt4jz3DHQiB6sKrHGq+BW/UbhU6To5XBR3Wp96
-	YFpYmMO9x9075m26XPEJ9xIQ3TM+Wn7+GW+k+Qq+ja+btxc6mAWopGZB4oEliKDZMRDd
-	qF1Q==
-X-Gm-Message-State: AElRT7GvgYoZXXSLYr6KRoejAf36YqtnEMYnl87mpMAPlqgiDEVoH1dk
-	CdvISRHvJf85NTwgXfA8eBjkRQ==
-X-Google-Smtp-Source: AIpwx4/pTe++Aq9Ue+qRRfmJ9SDPbPzZPi37v1u6rrJZpDwEX1BC4lsqlU1aYh79siovunRwsPkvSA==
-X-Received: by 10.223.209.131 with SMTP id h3mr3240081wri.238.1522250043444;
-	Wed, 28 Mar 2018 08:14:03 -0700 (PDT)
-Received: from localhost.localdomain (p50971113.dip0.t-ipconnect.de.
-	[80.151.17.19]) by smtp.gmail.com with ESMTPSA id
-	n49sm5986665wrn.90.2018.03.28.08.14.01
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 28 Mar 2018 08:14:02 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Mar 2018 17:13:31 +0200
-Message-Id: <20180328151331.20660-3-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <20180328151331.20660-1-schnitzeltony@gmail.com>
-References: <20180328151331.20660-1-schnitzeltony@gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] xterm: add update-alternatives for resize to avoid conflict with busybox
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=HPWiezOOWGCspGTEA25IIT3efZBpydTTaubymdFzb28=;
+	b=IECRFTyedcNXgqlYlkdHGEo5xEek7eolFCFDK/nWlz7nEbrbBC58wpATsRXLAp6YTU
+	+hxL/6ABkN5g4Z6LVh1D4/+0DRAMi5SKfIsVuxBX6gtECJMDUJDGSi45xQSjFJGMZG2c
+	ntZI4n+on7CGWHYXs4+UKZ7Vj9t5lcQBnwTgG3ulWqapoIPx82d/f42PvxIPvQa+BCJG
+	xYW0/yiezbMIGFJ+cEAZKR+YBtmINa33HYF8SKUaIw4QPYE0GBQReb8W1f57Mo0WSJ+A
+	rKRWge7J1dZt/aiBYBezciQSSyxpynyEYtal/TEHRfigKFmF154VwsSpbps0TDwdJ8Qc
+	qMpw==
+X-Gm-Message-State: AElRT7Hd6ALz4QkPG2U49H7LWJUED1MArf5Z4CDDasvh2M1N7Y8dR7HA
+	LQXYR4rJ6Qff+XUDdy7aKXc=
+X-Google-Smtp-Source: AIpwx48cD+5qH5iXCQmnuz20ptOALr3DltavJSfxdLgSC6bduBIwRTpWUnFeivKJufq7kEskTZIQdw==
+X-Received: by 2002:a17:902:8206:: with SMTP id
+	x6-v6mr4421006pln.256.1522251182553; 
+	Wed, 28 Mar 2018 08:33:02 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4000:1184:315e:77dc:98f1:ec41])
+	by smtp.gmail.com with ESMTPSA id
+	w5sm9046975pfw.137.2018.03.28.08.33.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 28 Mar 2018 08:33:01 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 28 Mar 2018 08:33:00 -0700
+Message-Id: <1522251180-2803-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-attrs: fix typo in depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,29 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2018 15:14:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 28 Mar 2018 15:33:01 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+ERROR: Nothing RPROVIDES 'python-crypto' (but ../meta-python/recipes-devtools/python/python-attrs_17.4.0.bb RDEPENDS on or otherwise requires it)
+NOTE: Runtime target 'python-crypto' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python-crypto']
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-app/xterm_330.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-python/recipes-devtools/python/python-attrs.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb b/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-index e3bb0fb6e..16f9b7882 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-@@ -27,3 +27,8 @@ do_configure() {
- }
+diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
+index 360f9c6..c29f058 100644
+--- a/meta-python/recipes-devtools/python/python-attrs.inc
++++ b/meta-python/recipes-devtools/python/python-attrs.inc
+@@ -9,6 +9,6 @@ SRC_URI[sha256sum] = "1c7960ccfd6a005cd9f7ba884e6316b5e430a3f1a6c37c5f87d8b43f83
+ inherit pypi
  
- FILES_${PN} += "/usr/lib/X11"
-+
-+# busybox can supply resize too
-+inherit update-alternatives
-+
-+ALTERNATIVE_${PN} = "resize"
+ RDEPENDS_${PN}_class-target += " \
+-    ${PYTHON_PN}-crypto \
++    ${PYTHON_PN}-cryptography \
+     ${PYTHON_PN}-ctypes \
+ "    
 -- 
-2.14.3
+2.7.4
 
 
