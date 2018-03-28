@@ -1,45 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D7E4D62133
+Return-Path: <maxi.jourdan@wanadoo.fr>
+Received: from smtp.smtpout.orange.fr (smtp06.smtpout.orange.fr
+	[80.12.242.128])
+	by mail.openembedded.org (Postfix) with ESMTP id BCFD978560
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 22:56:49 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id j3so1779178pgf.2
+	Wed, 28 Mar 2018 23:16:53 +0000 (UTC)
+Received: from mail-qk0-f170.google.com ([209.85.220.170]) by mwinf5d63 with ME
+	id TbGt1x0023hB8W903bGtAG; Thu, 29 Mar 2018 01:16:54 +0200
+X-ME-Helo: mail-qk0-f170.google.com
+X-ME-Auth: bWF4aS5qb3VyZGFuQHdhbmFkb28uZnI=
+X-ME-Date: Thu, 29 Mar 2018 01:16:54 +0200
+X-ME-IP: 209.85.220.170
+Received: by mail-qk0-f170.google.com with SMTP id o5so4222474qki.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 15:56:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Xtun9g+92ggKFTTAbR4KzPlfeOuHwQ8EClkdY6whdd0=;
-	b=aFK68lGbvA519VUGZSV++EUoQff9h/NKsvfON3f1ftjXalnxfxO+aatzajiSpX3QF2
-	SckvfWCJ9DckIBISCsji1Sne25/forXQaH/gcvdaDU9MUK7Hao1yJrZj2eI6VZ7QMkt9
-	2+DznOQ1oIFsbJLjgJUL/BljIi9X3CZhnqvZU+Xq/rAkGoJO8G2L6Ot3X0B1c/gBN9O8
-	AjmljC8EVEIJaJmzTU3OsDoyxtTf01s0m6mPEVKKpmaeReUHhEvqrb9R/XjT/QOv9eVV
-	/RhV4oDZDXKSI2K0xcuSO/0qpQBr/G41kzA/UDmQylim/atbvbAuSnaImpROKhdxPbGI
-	H+Gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Xtun9g+92ggKFTTAbR4KzPlfeOuHwQ8EClkdY6whdd0=;
-	b=QaMNEv5cStfWZuoMVwqPpbU2CASvInobaWoFtUKKcXZhd/+A23Axwj5Nn0OJl8toH4
-	duMHAol3TFdfw7OJP14VzamBBhtBFEozWh5HZkCyX2hEq7u4L7l/iaqqkYDq9i04RSYn
-	HmcaYDmt82OF9Hy2jVwUT51ehNxGRmSA6wbdNhxBmRkx/eyU6tS2EeanjiirFh1blb6t
-	HtAHFi5zYvzWQJr3nfr++pjx2HBc+ObKY29zygFXisCoygjPy5Z+8UYD0qHwKcY6rafz
-	KuALkzZJoeJ6v1ah5z6ufmwNRrm/QSGl5RAMqGLT6x5JFiEEK4iHe5sTgWOTOwBaB9Hp
-	U1Rg==
-X-Gm-Message-State: AElRT7FebGfA17sfIr0f4PzkIQ6IJf8Up2jftwxO2nq9TdiSp7/9QXda
-	Jj46JDOnB/BthxSs6UWdu5uqjuZSV+OLPjNZQlc=
-X-Google-Smtp-Source: AIpwx49OIGraO8ZJNAyZWhfOQS1kklXKUrJVUtZuo+W2LiWtwfI9DY8fkrhM8aEK1UNHMoiQfIHjsOeNPa3vyESHoN8=
-X-Received: by 2002:a17:902:6e01:: with SMTP id
-	u1-v6mr5547326plk.96.1522277810989; 
-	Wed, 28 Mar 2018 15:56:50 -0700 (PDT)
+	Wed, 28 Mar 2018 16:16:53 -0700 (PDT)
+X-Gm-Message-State: ALQs6tCLT5enT2JPW0knAfvoz9Hc5G47nLhrAkGk76fasNMgI3MQYi3e
+	tFTcU9EG2yxjg92Xr30P/ZjocKGWHbcHTPgYdVs=
+X-Google-Smtp-Source: AIpwx48i0kEdxiSskMfiGpEMNCQNvz054wM8B9eZsF7Y7UrcsC+0m6a1T5zIss3woEM849a/xAOscE2kgnzqH0mqtm4=
+X-Received: by 10.55.162.66 with SMTP id l63mr8146106qke.124.1522279012719;
+	Wed, 28 Mar 2018 16:16:52 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.227.8 with HTTP; Wed, 28 Mar 2018 15:56:20 -0700 (PDT)
-In-Reply-To: <CAHStOZ6KXHrZMVa_iydoDd-N7p_098YqJYo5hBv7Jyxx9NMOYA@mail.gmail.com>
+Received: by 10.200.39.14 with HTTP; Wed, 28 Mar 2018 16:16:52 -0700 (PDT)
+In-Reply-To: <CAMKF1srJz631-vQDLwdfv+FpQbp2iqzZuCEw9DuA0od2dcQBEw@mail.gmail.com>
 References: <CAHStOZ6KXHrZMVa_iydoDd-N7p_098YqJYo5hBv7Jyxx9NMOYA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 28 Mar 2018 15:56:20 -0700
-Message-ID: <CAMKF1srJz631-vQDLwdfv+FpQbp2iqzZuCEw9DuA0od2dcQBEw@mail.gmail.com>
-To: Maxime Jourdan <maxi.jourdan@wanadoo.fr>
+	<CAMKF1srJz631-vQDLwdfv+FpQbp2iqzZuCEw9DuA0od2dcQBEw@mail.gmail.com>
+From: Maxime Jourdan <maxi.jourdan@wanadoo.fr>
+Date: Thu, 29 Mar 2018 01:16:52 +0200
+X-Gmail-Original-Message-ID: <CAHStOZ5fStbZNEC572HUfv7PsJaDy_KD8M6gh5WQDxojMFpTqQ@mail.gmail.com>
+Message-ID: <CAHStOZ5fStbZNEC572HUfv7PsJaDy_KD8M6gh5WQDxojMFpTqQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-clang] [PATCH] nonclangable: Add python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -54,54 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2018 22:56:49 -0000
+X-List-Received-Date: Wed, 28 Mar 2018 23:16:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Maxime
+Hi Khem,
 
-On Wed, Mar 28, 2018 at 3:38 PM, Maxime Jourdan <maxi.jourdan@wanadoo.fr> wrote:
-> While python3 will build "successfully" with clang,
-> it will silently discard a few modules in the process:
->
-> Python build finished successfully!
-> The necessary bits to build these optional modules were not found:
-> _bz2                  _curses_panel         _dbm
-> _gdbm                 _lzma                 _sqlite3
-> _ssl                  nis                   readline
-> zlib
->
-> The lack of these modules will generate empty packages
-> which can later break do_rootfs.
->
+Sure I'll take a look. In the meantime this documents the issue.
 
-while this is fine, I would appreciate if you can delve a bit and see
-why these tests
-would fail with Clang and pass with gcc. It could be simple bugs in
-python itself where
-it assumes compiler == gcc
+Maxime
 
-> Signed-off-by: Maxime Jourdan <maxi.jourdan@wanadoo.fr>
-> ---
->  conf/nonclangable.conf | 1 +
->  1 file changed, 1 insertion(+)
+2018-03-29 0:56 GMT+02:00 Khem Raj <raj.khem@gmail.com>:
+
+> Hi Maxime
 >
-> diff --git a/conf/nonclangable.conf b/conf/nonclangable.conf
-> index 720b653..7d30bc1 100644
-> --- a/conf/nonclangable.conf
-> +++ b/conf/nonclangable.conf
-> @@ -58,6 +58,7 @@ TOOLCHAIN_pn-openjre-8 = "gcc"
->  TOOLCHAIN_pn-perf = "gcc"
->  TOOLCHAIN_pn-piglit = "gcc"
->  TOOLCHAIN_pn-prelink = "gcc"
-> +TOOLCHAIN_pn-python3 = "gcc"
->  # has dpkg source which does not compile
->  TOOLCHAIN_pn-start-stop-daemon = "gcc"
->  TOOLCHAIN_pn-syslinux = "gcc"
-> --
-> 2.16.2
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> On Wed, Mar 28, 2018 at 3:38 PM, Maxime Jourdan <maxi.jourdan@wanadoo.fr>
+> wrote:
+> > While python3 will build "successfully" with clang,
+> > it will silently discard a few modules in the process:
+> >
+> > Python build finished successfully!
+> > The necessary bits to build these optional modules were not found:
+> > _bz2                  _curses_panel         _dbm
+> > _gdbm                 _lzma                 _sqlite3
+> > _ssl                  nis                   readline
+> > zlib
+> >
+> > The lack of these modules will generate empty packages
+> > which can later break do_rootfs.
+> >
+>
+> while this is fine, I would appreciate if you can delve a bit and see
+> why these tests
+> would fail with Clang and pass with gcc. It could be simple bugs in
+> python itself where
+> it assumes compiler == gcc
+>
+> > Signed-off-by: Maxime Jourdan <maxi.jourdan@wanadoo.fr>
+> > ---
+> >  conf/nonclangable.conf | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/conf/nonclangable.conf b/conf/nonclangable.conf
+> > index 720b653..7d30bc1 100644
+> > --- a/conf/nonclangable.conf
+> > +++ b/conf/nonclangable.conf
+> > @@ -58,6 +58,7 @@ TOOLCHAIN_pn-openjre-8 = "gcc"
+> >  TOOLCHAIN_pn-perf = "gcc"
+> >  TOOLCHAIN_pn-piglit = "gcc"
+> >  TOOLCHAIN_pn-prelink = "gcc"
+> > +TOOLCHAIN_pn-python3 = "gcc"
+> >  # has dpkg source which does not compile
+> >  TOOLCHAIN_pn-start-stop-daemon = "gcc"
+> >  TOOLCHAIN_pn-syslinux = "gcc"
+> > --
+> > 2.16.2
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
