@@ -1,48 +1,22 @@
-Return-Path: <carlos.rodriguez@ridgerun.com>
-Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
-	[209.85.220.177])
-	by mail.openembedded.org (Postfix) with ESMTP id BE6DD606D0
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 86278780A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2018 21:53:52 +0000 (UTC)
-Received: by mail-qk0-f177.google.com with SMTP id b198so428600qkg.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Mar 2018 14:53:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=N+hF8piedaENfMkvO98G++ZhNMBYxCv0bZpSC6PcpaY=;
-	b=Uh/+PRu3RB2aM8qfpYlEbepqWgCjhS698KqcdTesWa4xolE6lQcqWXVCqHzbkIdaa9
-	Sj8AH/v/ube3oY5p/lErTgtKX9WSSDNnYTJDytfAOygCVhkwDu7quP+fa84bujGebxgz
-	SKD5qjnEncGPC/B9kiKGcI/pJnxu0ERpk5+yu8DDr4hdQ9uCopnpK56c6cD8T+RGiUAW
-	kpV2ueeEHsDSAaajg7/fhSprnQuNpdvVgBrRvARc3he4/YVH8q/2IHog9i97fAACOspM
-	mXLMxZIBskdL1Fzp3dzRjqGAiW3tcJKxGWYLg3a3ix2FdxCKgu81vctR5n4Jj+lC5Vsv
-	nTDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=N+hF8piedaENfMkvO98G++ZhNMBYxCv0bZpSC6PcpaY=;
-	b=C6fi2zB4penVs5IP8KA1+GZqdji/0jjfgLZ+kF153oTcG0TJvywpub8bvmnWNX3Lui
-	5JyQo3EglkQK4dh+8uxBeaveJDkrNAcc1fbKCZByrpKxfdzAYbGPH58HpAq86hdx3a79
-	Wv+YMYHuCf4392GlPRQ99++mNMEqkWSHvHCUBRnSDjx/XTfsdb1hT+M75ZLilToGIosS
-	hh6o3XDhevUjSf2nHvQH02pkwh1RKtqKdFTz7kVk9AWOb4b5e1VUQ8sej5VEm+ubMS+C
-	0tsrjSKegdFGrK03MH+zfCtn9YM9tTG8tN27rqEsNhIb+TTpgq9ZogyDf3xaxx2ohYEg
-	ZeCw==
-X-Gm-Message-State: AElRT7GPHvMWoGrvNVLHcwdwDYZl7kuP0fyCeQj2AHwMjWbKK2b3lt1z
-	IruylWwzdv26uDNms6fyb9nrAv42v7Cards0v/a2RA==
-X-Google-Smtp-Source: AIpwx4+udSaW6h/a9HT0ScDWsiEHgXudUEDbv0LA2TPJ+6vpbw2nspKLd9JRhWXfuoZr4h+GRoE7vVQkwouML6u11vg=
-X-Received: by 10.55.78.86 with SMTP id c83mr1677199qkb.264.1522187633229;
-	Tue, 27 Mar 2018 14:53:53 -0700 (PDT)
+	Wed, 28 Mar 2018 06:42:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w2S6gD1A024515
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 27 Mar 2018 23:42:13 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 27 Mar 2018 23:42:13 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Mar 2018 02:41:58 -0400
+Message-ID: <1522219318-137024-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Received: by 10.200.41.91 with HTTP; Tue, 27 Mar 2018 14:53:52 -0700 (PDT)
-In-Reply-To: <1519829592-17286-1-git-send-email-carlos.rodriguez@ridgerun.com>
-References: <1519829592-17286-1-git-send-email-carlos.rodriguez@ridgerun.com>
-From: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
-Date: Tue, 27 Mar 2018 15:53:52 -0600
-Message-ID: <CAGzYGe3RrX9EvRzZniVaTs3w5XVUxb_sZKSR+_0VJXyS13Dn5g@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v3] gst-shark: Add Gst-Shark recipe
+Subject: [meta-oe][PATCH] efivar: refresh the patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,85 +29,272 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Mar 2018 21:53:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 28 Mar 2018 06:42:13 -0000
+Content-Type: text/plain
 
-Hi,
+fixes
 
-Do you have any comment or feedback about this patch?
+WARNING: efivar-0.31-r0 do_patch:
+Some of the context lines in patches were ignored. This can lead to
+incorrectly applied patches.
+The context lines in the patches can be updated with devtool:
 
-Thanks,
-- CarlosR
+    devtool modify <recipe>
+    devtool finish --force-patch-refresh <recipe> <layer_path>
 
-On Wed, Feb 28, 2018 at 8:53 AM, Carlos Rodriguez <
-carlos.rodriguez@ridgerun.com> wrote:
+Then the updated patches and the source tree (in devtool's workspace)
+should be reviewed to make sure the patches apply in the correct place
+and don't introduce duplicate lines (which can, and does happen
+when some of the context is ignored). Further information:
+http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
+Details:
+Applying patch allow-multi-definitions-for-native.patch
+patching file Make.rules
+Hunk #1 succeeded at 20 with fuzz 2.
 
-> GstShark is an open-source project from RidgeRun that provides
-> benchmarks and profiling tools for GStreamer 1.7.1 (and above).
-> It includes tracers for generating debug information plus some
-> tools to analyze the debug information. GstShark provides easy
-> to use and useful tracers, paired with analysis tools to enable
-> straightforward optimizations.
->
-> Signed-off-by: Carlos Rodriguez <carlos.rodriguez@ridgerun.com>
-> ---
->  .../gstreamer-1.0/gst-shark_0.2.1.bb               | 38
-> ++++++++++++++++++++++
->  1 file changed, 38 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-
-> shark_0.2.1.bb
->
-> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-
-> shark_0.2.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-
-> shark_0.2.1.bb
-> new file mode 100644
-> index 0000000..8ca165c
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
-> @@ -0,0 +1,38 @@
-> +SUMMARY = "Gst-Shark Tracers"
-> +DESCRIPTION = "Benchmarks and profiling tools for GStreamer"
-> +HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=GstShark"
-> +SECTION = "multimedia"
-> +LICENSE = "GPLv2+"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=e1caa368743492879002ad032445fa97"
-> +
-> +DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base
-> gstreamer1.0-plugins-bad "
-> +
-> +SRCBRANCH ?= "master"
-> +
-> +SRCREV_base = "a60b3996fe3376d42334fc89014e9d6f6af62899"
-> +SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
-> +
-> +SRC_URI = " \
-> +    git://github.com/RidgeRun/gst-shark.git;protocol=https;
-> branch=${SRCBRANCH};name=base \
-> +    git://anongit.freedesktop.org/git/gstreamer/common.git;
-> protocol=https;destsuffix=git/common;name=common; \
-> +    "
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +PACKAGECONFIG_CONFARGS = " \
-> +       --disable-graphviz \
-> +       --enable-gtk-doc=no \
-> +"
-> +
-> +FILES_${PN} += "\
-> +       ${libdir}/gstreamer-1.0/libgstsharktracers.so  \
-> +       ${libdir}/gstreamer-1.0/libgstsharktracers.la \
-> +"
-> +
-> +inherit autotools gettext
-> +
-> +do_configure() {
-> +       ${S}/autogen.sh --noconfigure
-> +       oe_runconf
-> +}
-> --
-> 1.9.1
->
->
+Now at patch allow-multi-definitions-for-native.patch
+Now at patch 0003-efivar-fix-for-cross-compile.patch
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ...dp.h-Add-Wunknown-attributes-when-using-clang.patch | 17 +++++++++--------
+ .../efivar/0001-efivar-fix-for-cross-compile.patch     | 11 ++++-------
+ ...ids-Do-not-use-__bswap_constant_-16-32-macros.patch |  6 ++----
+ .../efivar/0003-efivar-fix-for-cross-compile.patch     | 14 ++++++--------
+ .../efivar/allow-multi-definitions-for-native.patch    | 15 ++++++++++++---
+ .../efivar/fix-compile-failure-with-host-gcc-4.6.patch | 11 ++++++-----
+ meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch  | 18 +++++++++++++-----
+ 7 files changed, 52 insertions(+), 40 deletions(-)
+
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch b/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
+index 1b8815e..b4ce132 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
+@@ -1,4 +1,4 @@
+-From 3d43c5efdb632da5d7387dcadce4e87b83929c64 Mon Sep 17 00:00:00 2001
++From d65c325dd8681edf2ee3332eeb0a547229c7ffb5 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 24 Aug 2017 15:54:47 -0700
+ Subject: [PATCH] efivar-dp.h: Add -Wunknown-attributes when using clang
+@@ -7,15 +7,16 @@ change !dp check to a comparision against NULL to silent clang warning
+ nonnull parameter 'dp' will evaluate to 'true' on first encounter
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+- src/include/efivar/efivar-dp.h | 12 +++++++-----
+- 1 file changed, 7 insertions(+), 5 deletions(-)
++ src/include/efivar/efivar-dp.h | 5 +++++
++ 1 file changed, 5 insertions(+)
+ 
+-Index: git/src/include/efivar/efivar-dp.h
+-===================================================================
+---- git.orig/src/include/efivar/efivar-dp.h
+-+++ git/src/include/efivar/efivar-dp.h
+-@@ -783,9 +783,14 @@ extern int efidp_append_instance(const_e
++diff --git a/src/include/efivar/efivar-dp.h b/src/include/efivar/efivar-dp.h
++index 3a509b7..c140e8d 100644
++--- a/src/include/efivar/efivar-dp.h
+++++ b/src/include/efivar/efivar-dp.h
++@@ -783,9 +783,14 @@ extern int efidp_append_instance(const_efidp dp, const_efidp dpi, efidp *out);
+   * though older or other compilers might just ignore that attribute if they
+   * don't support it.  Ugh.
+   */
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch b/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+index 6f6ca64..251e50c 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-fix-for-cross-compile.patch
+@@ -1,7 +1,7 @@
+-From 9a3c480af653b37e62d1be04d49fe7a60a80168f Mon Sep 17 00:00:00 2001
++From a9115d9e6f0f62d6bb735ce3698858d1f89f8d73 Mon Sep 17 00:00:00 2001
+ From: Kai Kang <kai.kang@windriver.com>
+ Date: Fri, 25 Sep 2015 18:14:31 +0800
+-Subject: [PATCH 1/2] efivar: fix for cross compile
++Subject: [PATCH] efivar: fix for cross compile
+ 
+ It builds and calls elf file makeguids to generate a header file which
+ doesn't work for cross compile. Fix it.
+@@ -16,10 +16,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 5fc7887..1829d22 100644
++index 0c16597..dcc7fc8 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -29,8 +29,8 @@ all : deps $(TARGETS)
++@@ -40,8 +40,8 @@ abicheck : $(patsubst %.so,%.abicheck,$(LIBTARGETS))
+  ./guid-symbols.c : include/efivar/efivar-guids.h
+  ./guids.bin : include/efivar/efivar-guids.h
+  ./names.bin : include/efivar/efivar-guids.h
+@@ -30,6 +30,3 @@ index 5fc7887..1829d22 100644
+  		guid-symbols.c include/efivar/efivar-guids.h
+  
+  makeguids : CPPFLAGS+=-DEFIVAR_BUILD_ENVIRONMENT
+--- 
+-2.4.3
+-
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch b/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
+index 73a7721..2a6eb06 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
+@@ -1,4 +1,4 @@
+-From 98b33d4193998687aa3a78c097f7bd4c393e0c85 Mon Sep 17 00:00:00 2001
++From dd4291265b7b3d7d7ffa1d8adf32781ae25dbfeb Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 15 Jul 2017 00:29:42 -0700
+ Subject: [PATCH] makeguids: Do not use __bswap_constant_{16|32} macros
+@@ -6,6 +6,7 @@ Subject: [PATCH] makeguids: Do not use __bswap_constant_{16|32} macros
+ not available on musl
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  src/makeguids.c | 8 ++++----
+  1 file changed, 4 insertions(+), 4 deletions(-)
+@@ -32,6 +33,3 @@ index da2f5f7..daf821a 100644
+  #endif\n\
+  """);
+  
+--- 
+-2.13.3
+-
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch b/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
+index 3f43f2a..83105fe 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
+@@ -1,4 +1,4 @@
+-From 7ead29ca6bb5e280ae07551cc3521281ecf73682 Mon Sep 17 00:00:00 2001
++From dea4a55714249b2734a36701120fd22c91c64ec2 Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Sat, 7 May 2016 02:06:47 -0400
+ Subject: [PATCH] Makefile: fix efivar.pc not found
+@@ -20,17 +20,18 @@ It fixes efivar.pc not found:
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
+ ---
+  src/Makefile | 4 +++-
+  1 file changed, 3 insertions(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index c7a0ca3..ad9c427 100644
++index dcc7fc8..691aa8a 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -78,7 +78,9 @@ install : all
+- 		ln -fs $(x).$(VERSION) $(DESTDIR)$(libdir)/$(x).$(MAJOR_VERSION);\
+- 		ln -fs $(x).$(VERSION) $(DESTDIR)$(libdir)/$(x); )
++@@ -94,7 +94,9 @@ install : all
++ 		ln -fs $(x).1.$(VERSION) $(DESTDIR)$(libdir)/$(x) ;\
++ 		)
+  	$(INSTALL) -d -m 755 $(DESTDIR)$(PCDIR)
+ -	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(x) $(DESTDIR)$(PCDIR) ;)
+ +	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(TOPDIR)/src/$(x).in $(DESTDIR)$(PCDIR)/$(x) ;\
+@@ -39,6 +40,3 @@ index c7a0ca3..ad9c427 100644
+  	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/efivar
+  	$(foreach x, $(wildcard $(TOPDIR)/src/include/efivar/*.h), $(INSTALL) -m 644 $(x) $(DESTDIR)$(includedir)/efivar/$(notdir $(x));)
+  	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
+--- 
+-2.8.1
+-
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch b/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
+index 87f5555..f88af1f 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
+@@ -1,3 +1,8 @@
++From c801dcb03d42eb533a9bead0b397d7ce4fc5a6fe Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Wed, 10 Aug 2016 17:49:50 +0800
++Subject: [PATCH] allow multi definitions for native
++
+ Upstream-Status: Pending
+ 
+ It fails to create .so file when build efivar-native:
+@@ -8,16 +13,20 @@ It fails to create .so file when build efivar-native:
+ Add link option '-z muldefs' to fix it.
+ 
+ Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
+ ---
++ Make.rules | 1 +
++ 1 file changed, 1 insertion(+)
++
+ diff --git a/Make.rules b/Make.rules
+-index d9c0609..874bce0 100644
++index 88b9aa7..799332f 100644
+ --- a/Make.rules
+ +++ b/Make.rules
+ @@ -20,6 +20,7 @@ include $(TOPDIR)/Make.version
+  	$(CCLD) $(ccldflags) $(CPPFLAGS) $(SOFLAGS) \
+- 	  -Wl,-soname,$@.$(MAJOR_VERSION) \
++ 	  -Wl,-soname,$@.1 \
+  	  -Wl,--version-script=$(MAP) \
+ +	  -Wl,-z,muldefs \
+  	  -o $@ $^ $(LDLIBS)
+  
+- %.o : %.c
++ %.abixml : %.so
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch b/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
+index e3fa2e1..dbc9a57 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
+@@ -1,4 +1,4 @@
+-From 1361225abbaba878960f970df39a4570bbc39553 Mon Sep 17 00:00:00 2001
++From 3edce6a0019bcb90febc1f654b5b2e2bad5c59bd Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Thu, 26 May 2016 21:50:01 -0400
+ Subject: [PATCH] fix compile failure with older host gcc (<=4.6)
+@@ -16,14 +16,15 @@ and directly remove -Wmaybe-uninitialized and -flto.
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++
+ ---
+  gcc.specs | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+-Index: git/gcc.specs
+-===================================================================
+---- git.orig/gcc.specs
+-+++ git/gcc.specs
++diff --git a/gcc.specs b/gcc.specs
++index 45d43d1..f1c6944 100644
++--- a/gcc.specs
+++++ b/gcc.specs
+ @@ -2,13 +2,13 @@
+  + -D_GNU_SOURCE
+  
+diff --git a/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch b/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
+index fc8f8c8..5864ac6 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
++++ b/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
+@@ -1,9 +1,17 @@
+-Taken from void linux
++From 8000b9afc858472912aace985004b44f8eb467e0 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 18 Aug 2017 09:49:49 -0700
++Subject: [PATCH] support musl
+ 
+-Index: git/src/linux.c
+-===================================================================
+---- git.orig/src/linux.c
+-+++ git/src/linux.c
++Upstream-Status: Pending
++---
++ src/linux.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/linux.c b/src/linux.c
++index 34ed479..1304f2b 100644
++--- a/src/linux.c
+++++ b/src/linux.c
+ @@ -40,6 +40,10 @@
+  #include <efivar.h>
+  #include <efiboot.h>
+-- 
+2.8.1
+
 
