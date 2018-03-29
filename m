@@ -1,36 +1,48 @@
-Return-Path: <maxi.jourdan@wanadoo.fr>
-Received: from smtp.smtpout.orange.fr (smtp06.smtpout.orange.fr
-	[80.12.242.128])
-	by mail.openembedded.org (Postfix) with ESMTP id BCFD978560
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 32D11744C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 23:16:53 +0000 (UTC)
-Received: from mail-qk0-f170.google.com ([209.85.220.170]) by mwinf5d63 with ME
-	id TbGt1x0023hB8W903bGtAG; Thu, 29 Mar 2018 01:16:54 +0200
-X-ME-Helo: mail-qk0-f170.google.com
-X-ME-Auth: bWF4aS5qb3VyZGFuQHdhbmFkb28uZnI=
-X-ME-Date: Thu, 29 Mar 2018 01:16:54 +0200
-X-ME-IP: 209.85.220.170
-Received: by mail-qk0-f170.google.com with SMTP id o5so4222474qki.11
+	Thu, 29 Mar 2018 22:03:25 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id d1so6609306wrj.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Mar 2018 16:16:53 -0700 (PDT)
-X-Gm-Message-State: ALQs6tCLT5enT2JPW0knAfvoz9Hc5G47nLhrAkGk76fasNMgI3MQYi3e
-	tFTcU9EG2yxjg92Xr30P/ZjocKGWHbcHTPgYdVs=
-X-Google-Smtp-Source: AIpwx48i0kEdxiSskMfiGpEMNCQNvz054wM8B9eZsF7Y7UrcsC+0m6a1T5zIss3woEM849a/xAOscE2kgnzqH0mqtm4=
-X-Received: by 10.55.162.66 with SMTP id l63mr8146106qke.124.1522279012719;
-	Wed, 28 Mar 2018 16:16:52 -0700 (PDT)
+	Thu, 29 Mar 2018 15:03:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=b1LUppWLM81JNR2Qb5OQBllk+4iarBMFF2mk5uZ5IP4=;
+	b=jYlNCWCpyAeVyzTG+U+VcHX9rsZnp5WjPXELy/GZeFLvUSr3x1HPezGPxoiet7/XRx
+	ri/axhPHi6xMpVDZt1TSmo3+NfVv4Imo/O+pUyRFK6K/rbX08GVeybuxXhRv9SsIXvHC
+	XXBw3rI7nYuNJBSxzkxtpImyUql3p/XrCH57PDqTzcgtDpF9OXxYFmGJNcCbo47DfF+T
+	zWTlqZE00DG0RaxDNvlmQZanHlyeCAcFMDOFrAXQeUKV5UWILNWIjeD5XQVx+e7iW7/z
+	y1EnuFRpQ8uQUaBqyDN8Wu/dfE1ExedLR41Mrh7+Owr+y0OgJRT3hcs+SduS9eaLjtF1
+	C1fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=b1LUppWLM81JNR2Qb5OQBllk+4iarBMFF2mk5uZ5IP4=;
+	b=MA4B1jZklVG+pCGRO+t7mCtnVMu4/TnhB5r2SFoEanURHZ+QR55MQNoq8e3BSXPFED
+	safi932xt1/cvUx7KUImafHE/ook1JyIF5hWMzMNTA17nPNJ8IOPk6hBUysVduUCTUCX
+	SYZmu/pTj4Vq3Jf05NVipMPzrSVAkMa3arEeBjWjDO3c0WqaNYi1BvHwz9/nDLz9jyiM
+	HJNXiapuPt5vOpsTvpXTbRQyFr8xEauBS98VrpHi5+OvMjt1FO4Qd+m+ybhuVWDy7MIv
+	amgTPMmlCEbzn263/wbk5lH3ZWYCyW66kThNtxDLym2JAzjNpnR9ED+1es8gl7EQSLpN
+	g1fA==
+X-Gm-Message-State: AElRT7FaQI6hqFuqkle6Y+McTJD+UFReF4KnHOxB5YKrXvO0HXofR87k
+	qLoKB2UqzFsSIy0M6L9j89s2DtoxQn1yNPqA90/05g==
+X-Google-Smtp-Source: AIpwx49CbYUtBu898uTZQu1t0UFD4Z41Uisu87viMf2jDqDHMTeWTdMbBiFQ05Ukwx2YjqPkqeA96Kk1+msnqOiQ5Tw=
+X-Received: by 10.223.142.13 with SMTP id n13mr7229874wrb.133.1522361006419;
+	Thu, 29 Mar 2018 15:03:26 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.200.39.14 with HTTP; Wed, 28 Mar 2018 16:16:52 -0700 (PDT)
-In-Reply-To: <CAMKF1srJz631-vQDLwdfv+FpQbp2iqzZuCEw9DuA0od2dcQBEw@mail.gmail.com>
-References: <CAHStOZ6KXHrZMVa_iydoDd-N7p_098YqJYo5hBv7Jyxx9NMOYA@mail.gmail.com>
-	<CAMKF1srJz631-vQDLwdfv+FpQbp2iqzZuCEw9DuA0od2dcQBEw@mail.gmail.com>
-From: Maxime Jourdan <maxi.jourdan@wanadoo.fr>
-Date: Thu, 29 Mar 2018 01:16:52 +0200
-X-Gmail-Original-Message-ID: <CAHStOZ5fStbZNEC572HUfv7PsJaDy_KD8M6gh5WQDxojMFpTqQ@mail.gmail.com>
-Message-ID: <CAHStOZ5fStbZNEC572HUfv7PsJaDy_KD8M6gh5WQDxojMFpTqQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Received: by 10.28.126.12 with HTTP; Thu, 29 Mar 2018 15:03:25 -0700 (PDT)
+In-Reply-To: <1522267841-26264-1-git-send-email-mark.asselstine@windriver.com>
+References: <1522267841-26264-1-git-send-email-mark.asselstine@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 30 Mar 2018 00:03:25 +0200
+Message-ID: <CA+chaQdHxcNAbn32E+otS_T_y5KCq-WUGD40ihdkfFkDRABOsg@mail.gmail.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-clang] [PATCH] nonclangable: Add python3
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-jsonpatch: fix do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,64 +55,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Mar 2018 23:16:54 -0000
+X-List-Received-Date: Thu, 29 Mar 2018 22:03:26 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Khem,
+This seems to break python3-jsonpatch which won't find this .patch file,
+because it's in different directory.
 
-Sure I'll take a look. In the meantime this documents the issue.
+On Wed, Mar 28, 2018 at 10:10 PM, Mark Asselstine <
+mark.asselstine@windriver.com> wrote:
 
-Maxime
-
-2018-03-29 0:56 GMT+02:00 Khem Raj <raj.khem@gmail.com>:
-
-> Hi Maxime
+> The following error is seen when do_install is run
 >
-> On Wed, Mar 28, 2018 at 3:38 PM, Maxime Jourdan <maxi.jourdan@wanadoo.fr>
-> wrote:
-> > While python3 will build "successfully" with clang,
-> > it will silently discard a few modules in the process:
-> >
-> > Python build finished successfully!
-> > The necessary bits to build these optional modules were not found:
-> > _bz2                  _curses_panel         _dbm
-> > _gdbm                 _lzma                 _sqlite3
-> > _ssl                  nis                   readline
-> > zlib
-> >
-> > The lack of these modules will generate empty packages
-> > which can later break do_rootfs.
-> >
+> | UnicodeEncodeError: 'ascii' codec can't encode character u'\xf6' in
+> | position 16: ordinal not in range(128) ERROR: python setup.py
+> | install execution failed.
 >
-> while this is fine, I would appreciate if you can delve a bit and see
-> why these tests
-> would fail with Clang and pass with gcc. It could be simple bugs in
-> python itself where
-> it assumes compiler == gcc
+> This is reported in the upstream project as part of pull request #81
+> https://github.com/stefankoegl/python-json-patch/pull/81
 >
-> > Signed-off-by: Maxime Jourdan <maxi.jourdan@wanadoo.fr>
-> > ---
-> >  conf/nonclangable.conf | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/conf/nonclangable.conf b/conf/nonclangable.conf
-> > index 720b653..7d30bc1 100644
-> > --- a/conf/nonclangable.conf
-> > +++ b/conf/nonclangable.conf
-> > @@ -58,6 +58,7 @@ TOOLCHAIN_pn-openjre-8 = "gcc"
-> >  TOOLCHAIN_pn-perf = "gcc"
-> >  TOOLCHAIN_pn-piglit = "gcc"
-> >  TOOLCHAIN_pn-prelink = "gcc"
-> > +TOOLCHAIN_pn-python3 = "gcc"
-> >  # has dpkg source which does not compile
-> >  TOOLCHAIN_pn-start-stop-daemon = "gcc"
-> >  TOOLCHAIN_pn-syslinux = "gcc"
-> > --
-> > 2.16.2
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Since a release is not yet available with the required fix we must
+> apply the fix as a patch.
+>
+> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+> ---
+>  .../recipes-devtools/python/python-jsonpatch.inc   |  4 +++
+>  .../Drop-support-for-EOL-Python-3.3.patch          | 35
+> ++++++++++++++++++++++
+>  2 files changed, 39 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/
+> python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc
+> b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+> index e559fb1..85483df 100644
+> --- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
+> +++ b/meta-python/recipes-devtools/python/python-jsonpatch.inc
+> @@ -8,5 +8,9 @@ inherit pypi
+>  SRC_URI[md5sum] = "0b20d819daf120ed3fef3be608f2ce18"
+>  SRC_URI[sha256sum] = "11f5ffdf543a83047a2f54ac28f8ca
+> ad7f34724cb1ea26b27547fd974f1a2153"
+>
+> +SRC_URI += " \
+> +    file://Drop-support-for-EOL-Python-3.3.patch \
+> +"
+> +
+>  RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer
+> ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
+>
+> diff --git a/meta-python/recipes-devtools/python/python-
+> jsonpatch/Drop-support-for-EOL-Python-3.3.patch b/meta-python/recipes-
+> devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
+> new file mode 100644
+> index 0000000..ccd8e12
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-
+> jsonpatch/Drop-support-for-EOL-Python-3.3.patch
+> @@ -0,0 +1,35 @@
+> +From 71bdeed8b49390ff14fe8f0434fc8a1038d89128 Mon Sep 17 00:00:00 2001
+> +From: Hugo <hugovk@users.noreply.github.com>
+> +Date: Tue, 16 Jan 2018 14:22:33 +0200
+> +Subject: [PATCH 1/4] Drop support for EOL Python 3.3
+> +
+> +Upstream-Status: Backport
+> +
+> +[MA: remove dev only files from patch]
+> +Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+> +
+> +---
+> + setup.py      | 2 +-
+> +
+> +diff --git a/setup.py b/setup.py
+> +index 0776c41..471c433 100644
+> +--- a/setup.py
+> ++++ b/setup.py
+> +@@ -58,7 +58,6 @@ CLASSIFIERS = [
+> +     'Programming Language :: Python :: 2',
+> +     'Programming Language :: Python :: 2.7',
+> +     'Programming Language :: Python :: 3',
+> +-    'Programming Language :: Python :: 3.3',
+> +     'Programming Language :: Python :: 3.4',
+> +     'Programming Language :: Python :: 3.5',
+> +     'Programming Language :: Python :: 3.6',
+> +@@ -81,5 +80,6 @@ setup(name=PACKAGE,
+> +       package_data={'': ['requirements.txt']},
+> +       scripts=['bin/jsondiff', 'bin/jsonpatch'],
+> +       classifiers=CLASSIFIERS,
+> ++      python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
+> +       **OPTIONS
+> + )
+> +--
+> +2.7.4
+> +
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
