@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
 	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 18C0974737
+	by mail.openembedded.org (Postfix) with ESMTP id 82E4974732
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 13:32:33 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id d1so8047294wrj.13
+	Fri, 30 Mar 2018 13:32:34 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id c24so8069454wrc.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 30 Mar 2018 06:32:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=kdkda3YLXHxwARgzSaC9z25Lt6KbCykB79gw9F/IDdY=;
-	b=qMmSOVfmZlggTWKgxggW/ruEH4nHLnyugLkVioMbpVw5Wh9rqIWLBnTz7xCjwW6g3l
-	llf4KFa5c0YAdd38xHq8D4dCMGtjD4tEXbVDvF0I6kNpi2jWi3hQw3rUn2BFoegsnkCX
-	D6aerXfPRhkatAMFOjNrQWJ2mhoQw+xIuqJAcubWflQ2PSfjCgnVmrVHPJa59UB74lMt
-	oij1qNYHrtijbUqLghOhLhP4JubeK7qJDGvy6W+UUugCmNhl0OtkhMTlFOL4HbOhv7c5
-	cv/oiaxD0K+VyC37Jmz4jdLC1keS2XKygo1WO1bhyyZdJgsFhH0nwYTHzWVC1wZaxqil
-	TSmQ==
+	bh=d48NNfJ6UiIatOA7gVPwL3N8BCYIX7JV5LzhYRNkCiA=;
+	b=HJwYK/PZfJgZKtmDlWzlPcrwlZAhgGQb+ZW+1tEhKnVoeaQ1A0GUVyM1NPTrgNTNM+
+	HRAszh9NglU5llql7heL5U/s8Q+0iYt7gO5Aoz4RxfK+yXTzRHOZOh9zHRUtIMhmSuiT
+	J6XnX+40lbbui6oaP7zo6kA/xRLo/xIrz0DcERGrVeuBm4q/oxcNxlFx0RHyumzQngXJ
+	Rd2s07VB4Z/1ii7D2N0ofjc49j8oFQWb7fcd7XoZCmJ/PhgwoGUDVn0vCpdk8F2DHC69
+	J4fQxuOUM/K0YA8KURSFM5BLQF7VZhn8p9bBPhAIcjy7AUUGtvwqbjTn+uPuEThZNilL
+	Ryig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=kdkda3YLXHxwARgzSaC9z25Lt6KbCykB79gw9F/IDdY=;
-	b=S+IacbaLyNPn0glG6nOOCXdg79O4cKDWaDQdnkra8Mb4SK4Gtw8wkzhaU2z+LSrJlu
-	0H8/0GAch41VIXZIN47flQG7EY3uV570PNYmI34PCDT9UnYQMy4vxl9fX10cejCotkkU
-	35HsgughuCvG4zIy/IZPD0G5wHN+Vfb5o9zd40tcSqvlAAI6jEwD+OXPbL6BtDvFIiwY
-	acAHN4QJSdPVTxDjSN6qLzi89d1sJ6lwXBJdbllWM62ftDS536N2Wsv+tldGkkU+Ed4s
-	QTUaB8ruG2HMhD5acnEP8TjsSghQCusfUAmVA84pWybGxpJm/u1wWXdABphXnLVj5m2S
-	VHyQ==
-X-Gm-Message-State: AElRT7F5nUpWGzwgdJG3KMMDiBFxAFPQ1+Mq41gNqLYWNcDdC7JxNgU0
-	1WMnZ9c7KsIcgkVnG2O8FTVvMw==
-X-Google-Smtp-Source: AIpwx4/NEpsCOt32UobVE1uvBRk5g2lfBhjuUgEASxTaWR2dPf6ZLW8uVBofujSQ8xyp/y/z+DOKrA==
-X-Received: by 10.223.196.204 with SMTP id o12mr9650861wrf.121.1522416754280; 
-	Fri, 30 Mar 2018 06:32:34 -0700 (PDT)
+	bh=d48NNfJ6UiIatOA7gVPwL3N8BCYIX7JV5LzhYRNkCiA=;
+	b=WVRRy7ZWhGrNer3dxvLZcSD0fTm2VPwF2SvwpHg2F2sSUbf305ZVzvrwN/KccTgkxq
+	WZghPB1/O8aALf5NOvmDYZfzdEGHwwcpXwYnijyk/jU+wfs9sMSjUGPBhBuY5+Mphfde
+	oGbKK91uCdo0uaHtzhtaiRr3yy7r8c7QWoaf0ViW1Spu/b7yzfV0PgBvYmhxIhjuLnWe
+	qR+yyeR1evy0F+EBMzDd2v/dAGwbs8zYYumquUrBiD5Gm09xYFuHxNZeuPaZZqw8uNqG
+	X2lHxWq5nQKFdmjHSvx2BdIi+2YOz/uLj5xqW8sZri+ZQLy+fQCtwPkHoqkZK9XeGd1t
+	PpmQ==
+X-Gm-Message-State: AElRT7Fh9ZScAmJg1zSI8gmWRVRcGBp8FD4KLh9DHFEYHoU+LT3GWFwU
+	y+wEL5UcvU3XLxNF8ide6TpQ+Q==
+X-Google-Smtp-Source: AIpwx4/IjDqapLoYFHixKgr8c8IwuKFWrxL0oDAyBX3yU8jmr61NJ/gwWHA3G9lMKOdInnQ7UOAg1w==
+X-Received: by 10.223.150.56 with SMTP id b53mr10248003wra.79.1522416755161;
+	Fri, 30 Mar 2018 06:32:35 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC180221E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:8022:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	93sm10468396wrh.46.2018.03.30.06.32.33
+	93sm10468396wrh.46.2018.03.30.06.32.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 30 Mar 2018 06:32:33 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:34 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:31:42 +0200
-Message-Id: <20180330133151.25882-31-schnitzeltony@gmail.com>
+Date: Fri, 30 Mar 2018 15:31:43 +0200
+Message-Id: <20180330133151.25882-32-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180330133151.25882-1-schnitzeltony@gmail.com>
 References: <20180330133151.25882-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 30/39] hunspell: update 1.6.1 -> 1.6.2
+Subject: [PATCH 31/39] libgphoto2: 2.5.14 -> 2.5.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,27 +68,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-support/hunspell/{hunspell_1.6.1.bb => hunspell_1.6.2.bb} | 4 ++--
+ .../gphoto2/{libgphoto2_2.5.14.bb => libgphoto2_2.5.16.bb}            | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/hunspell/{hunspell_1.6.1.bb => hunspell_1.6.2.bb} (75%)
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.14.bb => libgphoto2_2.5.16.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb b/meta-oe/recipes-support/hunspell/hunspell_1.6.2.bb
-similarity index 75%
-rename from meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb
-rename to meta-oe/recipes-support/hunspell/hunspell_1.6.2.bb
-index 125729f2d..5feea8987 100644
---- a/meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.6.2.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.14.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.16.bb
+similarity index 92%
+rename from meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.14.bb
+rename to meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.16.bb
+index d7290fa6f..7a691c611 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.14.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.16.bb
+@@ -16,8 +16,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
+            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
  "
  
- SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
--SRC_URI[md5sum] = "0df1c18c1284f8625af5ae5a8d5c4cef"
--SRC_URI[sha256sum] = "30f593733c50b794016bb03d31fd2a2071e4610c6fa4708e33edad2335102c49"
-+SRC_URI[md5sum] = "1a54504cb470aafa6530bb372a10dc04"
-+SRC_URI[sha256sum] = "3cd9ceb062fe5814f668e4f22b2fa6e3ba0b339b921739541ce180cac4d6f4c4"
+-SRC_URI[libgphoto2.md5sum] = "65acb6cbd2b4f3f46829599f5dabd89c"
+-SRC_URI[libgphoto2.sha256sum] = "d3ce70686fb87d6791b9adcbb6e5693bfbe1cfef9661c23c75eb8a699ec4e274"
++SRC_URI[libgphoto2.md5sum] = "084d220d078d28c0c7a3ba13f4476128"
++SRC_URI[libgphoto2.sha256sum] = "e757416d1623e01a9d0d294b2e790162e434c0964f50d3b7ff1a3424b62a2906"
  
- inherit autotools pkgconfig gettext
+ inherit autotools pkgconfig gettext lib_package
  
 -- 
 2.14.3
