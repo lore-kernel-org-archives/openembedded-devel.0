@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f175.google.com (mail-wr0-f175.google.com
-	[209.85.128.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E3DB47473F
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E28074741
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 13:32:35 +0000 (UTC)
-Received: by mail-wr0-f175.google.com with SMTP id 80so8088184wrb.2
+	Fri, 30 Mar 2018 13:32:36 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id y55so8062719wry.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 06:32:37 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=vjsM1dn3NMUlBOPRoxu3K/eLxOExt59wfSL+fyRr33M=;
-	b=MuB9d33/xVv7dKpWyjBea+Jh2+sU3lT+wXyZdIdgk4T45yQPdFGH3WZcdnTkqVctQ1
-	30qfD9le5tYGHJJsrEPnPNsaQyLH69bnDnuiT+YHD6E73nsUdYW3wFVkKbQupeyFxxLv
-	yY4GyODOWBs140MhQ10/XGP8cvCSWIrDKlRrlX7uFa5FNCXGVO2qMkL1FbNP5ZHIx7lI
-	GAAkLzU5DMBzjfh49mN3p3q/yMq4R8zzEEkPhU75r6lbxB88rXDJpWvdgZ4lWk1QyEMn
-	7He3HkELQB5LJe1U905IR1q8gPOOjeFX+RtnXwW1q1VY5jMnPmqja2bQLavYrVhc1Jjv
-	Dzyg==
+	bh=V9f7ru4tJE+bDsXoYVXkYzeb71dZ+kz3bagORDU0SRc=;
+	b=JJz9eLHGfniHxDlzDT936xxg4DPY3yztVCOee3F0TmEgsuxr4LklUR/xgsFPSzecmb
+	KaVRLZNaiEfqEc/OkOwRBORSdsm4eLNIpY+1jraPKLphG+Y80yIQLWCuQLNzmQEwLspZ
+	0kx7xhtRKNMly+x1M9fRS8H8kBbHCX/sgQg8uQettq2U0kLrLC9whlRXVwapFiVwhZ78
+	odQsvbTyEnKAT8N4rVJclMyMjP2jEwiiE7PB3+QozlfWKNArZKHyJNyBnW3v3Bz5tcQd
+	Oylr4brQzFd/lI+RTAcEu0pqbDtXtyt375eYQIUospQVYxsLCUVmCxTww6eBsb0ku65v
+	Txag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=vjsM1dn3NMUlBOPRoxu3K/eLxOExt59wfSL+fyRr33M=;
-	b=lvULRC6kk52xxrUPLD2dZTuFGbPJS2qwh37+kl7JZUmszc+TcXB8di90iiIRxb+3VK
-	IAGOWiQzLPkXkCQRVSmmr/7U65upd3MlguS9QJ6YDgLAESJmtT++b4e4TBaE/5R5JisW
-	av8lyjghCu2pSxeTKo+XhyqV6AyzPP5rJR3JISgrYpbW6D2ON06ihHjUqzBDvftAQ4Mf
-	CvMnb+V3roh+mcT91XhnGdfxlORfzD0GyAoaFeDsQU+ySftMW2N4vfdmJAFBLpwss2l3
-	nmpfRgG1KVT9/IG1WuU4lmgHrX3iOlp3HS06kToEmvMtgyzRFpWdgf0/lLX3BCiCDu+Q
-	QOcw==
-X-Gm-Message-State: AElRT7Ho752JfVm9Df5XjX8FS+qd9odRe0IjRmYERuJSV2Yq0hHiO+Zw
-	RbTADjmZb89Nrf6TdgvbapBstQ==
-X-Google-Smtp-Source: AIpwx48XGo8s22sETIOP0+1JaeO55n7/g4E3ozY64imcSBE8a7hHOSGg6cispH5I4QI9YvNRazAKcg==
-X-Received: by 10.223.209.198 with SMTP id m6mr10052575wri.267.1522416756057; 
-	Fri, 30 Mar 2018 06:32:36 -0700 (PDT)
+	bh=V9f7ru4tJE+bDsXoYVXkYzeb71dZ+kz3bagORDU0SRc=;
+	b=UPeQvyAornO0R9KNwMxlNLVRL5UAKI8sJw7qstOGl0eIbDshlVv49/Llse/nKrlp5J
+	ujXTqTpj+OLV3l3wtdD2x2PiLapIFibx6lfddmvRkYQUxxHiPc9W/VhlxvHVm29XT/bB
+	jkAsKZRHS3hw78titHmen+plOkRNGc3L+RvCuINO/ydg+PHW5GtIatkYTpAhKbnxkqeo
+	VK9+ee896dxGBKcExj9srsN6blmkmV4CbO2qKLTRPss6chno2W6bFMbX0Vurads6WqE8
+	1RT7sJW0wiTk5pS84BoyLHQBker5K+4+a3z5SV80ekvBY/ts2DgkSONBG22CQkaEaANG
+	abuQ==
+X-Gm-Message-State: AElRT7E9YH5MmL1Z+BXsWhtDkr4NX4UBUh4xeDqTD40iiG6Lv3BVPRtK
+	hXRbcm6KGHxwqPJmOVyPcycRZA==
+X-Google-Smtp-Source: AIpwx4/eLZNNjJtl/kHDxToYrjFF8XfJ7nqzeXpwV0NcAqeV6A91Uam1S7Ftkeub0yYqk7oSGgPXyg==
+X-Received: by 10.223.150.111 with SMTP id c44mr10158467wra.90.1522416757165; 
+	Fri, 30 Mar 2018 06:32:37 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC180221E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:8022:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	93sm10468396wrh.46.2018.03.30.06.32.35
+	93sm10468396wrh.46.2018.03.30.06.32.36
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 30 Mar 2018 06:32:35 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:36 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:31:44 +0200
-Message-Id: <20180330133151.25882-33-schnitzeltony@gmail.com>
+Date: Fri, 30 Mar 2018 15:31:45 +0200
+Message-Id: <20180330133151.25882-34-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180330133151.25882-1-schnitzeltony@gmail.com>
 References: <20180330133151.25882-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 32/39] libass: update 0.13.6 -> 0.14.0
+Subject: [PATCH 33/39] mm-common: update 0.9.10 -> 0.9.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,49 +62,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2018 13:32:36 -0000
+X-List-Received-Date: Fri, 30 Mar 2018 13:32:37 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* Migrate libass.inc into recipe - nothing else uses it
-* Use git repo to avoid github checksum trouble
+remove GNOME_COMPRESS_TYPE="xz - xz is default
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-multimedia/libass/libass_0.13.6.bb                 | 4 ----
- meta-oe/recipes-multimedia/libass/{libass.inc => libass_0.14.0.bb} | 4 +++-
- 2 files changed, 3 insertions(+), 5 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libass/libass_0.13.6.bb
- rename meta-oe/recipes-multimedia/libass/{libass.inc => libass_0.14.0.bb} (86%)
+ meta-oe/recipes-core/mm-common/mm-common_0.9.10.bb | 12 ------------
+ meta-oe/recipes-core/mm-common/mm-common_0.9.11.bb |  9 +++++++++
+ 2 files changed, 9 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.10.bb
+ create mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.11.bb
 
-diff --git a/meta-oe/recipes-multimedia/libass/libass_0.13.6.bb b/meta-oe/recipes-multimedia/libass/libass_0.13.6.bb
+diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.10.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.10.bb
 deleted file mode 100644
-index 40ac0f811..000000000
---- a/meta-oe/recipes-multimedia/libass/libass_0.13.6.bb
+index 899eb8a9b..000000000
+--- a/meta-oe/recipes-core/mm-common/mm-common_0.9.10.bb
 +++ /dev/null
-@@ -1,4 +0,0 @@
--require recipes-multimedia/${BPN}/${BPN}.inc
+@@ -1,12 +0,0 @@
+-inherit gnomebase
 -
--SRC_URI[md5sum] = "daa6cfca437c0776af5f79750cdd9b4e"
--SRC_URI[sha256sum] = "f8a874d104e3e72e2cc057e5a1710c650b10367486845a26e5ff28ed7a912c2d"
-diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass_0.14.0.bb
-similarity index 86%
-rename from meta-oe/recipes-multimedia/libass/libass.inc
-rename to meta-oe/recipes-multimedia/libass/libass_0.14.0.bb
-index 4bc3db062..3454a5c27 100644
---- a/meta-oe/recipes-multimedia/libass/libass.inc
-+++ b/meta-oe/recipes-multimedia/libass/libass_0.14.0.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a42532a0684420bdb15556c3cdd49a75"
- 
- DEPENDS = "enca fontconfig freetype libpng fribidi"
- 
--SRC_URI = "https://github.com/libass/libass/releases/download/${PV}/libass-${PV}.tar.xz"
-+SRC_URI = "git://github.com/libass/libass.git"
-+SRCREV = "73284b676b12b47e17af2ef1b430527299e10c17"
-+S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
+-GNOME_COMPRESS_TYPE="xz"
+-
+-SRC_URI[archive.md5sum] = "49dc47af8c89ce5b3c768306b9a0f922"
+-SRC_URI[archive.sha256sum] = "16c0e2bc196b67fbc145edaecb5dbe5818386504fe5703de27002d77140fa217"
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-
+-BBCLASSEXTEND = "native"
+-
+diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.11.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.11.bb
+new file mode 100644
+index 000000000..591caa75d
+--- /dev/null
++++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.11.bb
+@@ -0,0 +1,9 @@
++inherit gnomebase
++
++SRC_URI[archive.md5sum] = "d6f2a43589480d2315672da0b5839b56"
++SRC_URI[archive.sha256sum] = "20d1e7466ca4c83c92e29f9e8dfcc8e5721fdf1337f53157bed97be3b73b32a8"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++BBCLASSEXTEND = "native"
 -- 
 2.14.3
 
