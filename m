@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E132A74705
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id A4E5F74705
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 13:32:14 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id l201so15652596wmg.0
+	Fri, 30 Mar 2018 13:32:15 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id x82so16785793wmg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 06:32:15 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=r3Ao0jJ7vXeyg+RcGEAHcnUla9ezmp6WAxRgXJsNSBA=;
-	b=hoLC8RC0EUAEnTdpLvJBB7YKK8Fnj6/Kimg5HXulc+OBuuXXL8Rl1kKgFYqKBpwnMo
-	jrkxW1t25dvOtHFgWFQBADINitTfdkQJhaCx1tNz1NcXhXr7babSZxY7YJmjqmEQrczP
-	if1UA6mqNwnCKWVobRarVfy7DLcQcpwodRRXnjMyO+fJkBYDlSdHk0CYVDEFzuJw90ay
-	QWaxfqhV91nQx8VAIHKlCNFYuEkuMllkk8SFewSgAZCBoaPmpXlogx8nkfhhx0hsRIoR
-	suaQeXNplAAr7q38HWh35h7DaloNw1fpukN6eaArLV8E/zAU9bEK+3KCXjhMENO6Iw2+
-	N3Wg==
+	bh=CWkFamm5QCOdcaw3aeaP2jAIPyhqsqu8En2tEXQfn08=;
+	b=TtIhbVDZgh/A+hvAEjgAcXF/XdYCe5kAo6KQeXR8l7FlwcycxWcojyhepMmk/X2pMs
+	2lcva1CLmuHq6kyVlcJRDf6z0/kKeWSoCoBnoFUYzx4ho8me23EDK4sm2mJ03GYS7AVu
+	ox3RQkLoj8nfNpMCkSBUhvvSVzUK5CDtbMwnLItjp6iINexo2Kc09oC5zB0DzYg02w91
+	m3S1AsvsrCBDXWgyZfzjtWhsw11o3vqrgOSk+htRsFjOk4s5AsESzaOqLyouLLLYD6ry
+	lBZfXVUiZK49qQz1/inSjqv9ZjB0G54X++smPldObrmMX47ezFaoaN7eIvi1HmY3vwlD
+	HqFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=r3Ao0jJ7vXeyg+RcGEAHcnUla9ezmp6WAxRgXJsNSBA=;
-	b=XisCZaBlu1HeGWte9HCKeYeFAdB7OqCsIpLqtVxM4yF+K1fHP1TaGvgeGklRYQVCn9
-	WGNDfGuZd3OIbxE8IqnEjxlEOkgSLBDhFMQi2ekmhxU+GWCHkXX4KizxzOn2ky5bGbTV
-	TlZcdlsTpAdEsqcFVES3eSRyKI6/AieTuSEm+DTooiRVhq+RNbDlePlHmpatpMEQ6nA7
-	F0W0yy5ayEhuvO+sj4tOu96+PZsr5YBzmSrLQ8XJPvTOm7/RlYcP5wR1N+RSG0IEgsYE
-	fDTW55ni0cGU+Fw3VBcE6fmp6ZwbpuLchxC9fUmivyelXUlEyLDA+bcglMrRPAme1VsH
-	NoCw==
-X-Gm-Message-State: AElRT7FyjZap3lT+pqnZsdGqU/I4i25OLiD08NNwP2z3i8rfAOAQkY18
-	XoTlfc2BprZAgB+jqVG5nL9TgQ==
-X-Google-Smtp-Source: AIpwx4++n/O8OkmBKhpYn3gSmmtDk3GSjTQ147FP+c6icO5RcMimYCMHjIyruYgLYIqiLrKFvr6bTg==
-X-Received: by 10.28.228.131 with SMTP id b125mr2178155wmh.153.1522416735044; 
-	Fri, 30 Mar 2018 06:32:15 -0700 (PDT)
+	bh=CWkFamm5QCOdcaw3aeaP2jAIPyhqsqu8En2tEXQfn08=;
+	b=O9YcsbyqDMl828MTsU84R7CPfVIVX9rvtGPt+2I0nZMDXmhE4QwnISMXY2BdmlTtaW
+	y7iIVWP8GMdOz0bGTIeIyAdT15b1KZ4rEEaDu7J1MPfYq9WjvBbq20EJq2irygbAeWug
+	9GSiQ97Jum2fdHw1w092KENGsoTF4DxRMmeB9svXP5oq82d6CrSRwdjznT+vF3LsLIAx
+	o/3W/kEgvxX3nod7mSbO7Seclft210o8yzyYVWtE5v8oUoB5YmBJTy6n1hBYO4HAwcGr
+	iwtbzwd01Oqo8jUeXzilZUU90rb78d69vsBm1U1d6WRt9Eq9csXG5Rf8V6DeSjnazeZA
+	iAWw==
+X-Gm-Message-State: AElRT7HIdouyD6FJUDZifIUgAudkE3W4Bec2Js75Ip1xZ6+V6z7EadmE
+	25tUO8rwSFp4KJpfB728B2JYNQ==
+X-Google-Smtp-Source: AIpwx49RLQCCzbFRcXEPJMqc1pmvNLe42KhgEKEQjlTacYWyMse4+0pFFssULOWl/e5ItKK6K0yUlg==
+X-Received: by 10.28.116.13 with SMTP id p13mr2452334wmc.60.1522416736051;
+	Fri, 30 Mar 2018 06:32:16 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC180221E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:8022:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	93sm10468396wrh.46.2018.03.30.06.32.14
+	93sm10468396wrh.46.2018.03.30.06.32.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 30 Mar 2018 06:32:14 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:15 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:31:22 +0200
-Message-Id: <20180330133151.25882-11-schnitzeltony@gmail.com>
+Date: Fri, 30 Mar 2018 15:31:23 +0200
+Message-Id: <20180330133151.25882-12-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180330133151.25882-1-schnitzeltony@gmail.com>
 References: <20180330133151.25882-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/39] mariadb(-native): refresh fix-mysqlclient-r-version.patch
+Subject: [PATCH 11/39] glmark2: refresh Fix-configure-for-sqrt-check.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,89 +61,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2018 13:32:15 -0000
+X-List-Received-Date: Fri, 30 Mar 2018 13:32:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../mysql/mariadb/fix-mysqlclient-r-version.patch   | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ .../files/Fix-configure-for-sqrt-check.patch       | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch b/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-index 7516619eb..a519e4292 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/fix-mysqlclient-r-version.patch
-@@ -25,9 +25,8 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
- 
- ---
-  cmake/install_macros.cmake | 25 +++++++++++++++----------
-- cmake/mysql_version.cmake  |  3 ++-
-- libmysql/CMakeLists.txt    | 36 ++++++++++++++++++++++++++++--------
-- 3 files changed, 45 insertions(+), 19 deletions(-)
-+ libmysql/CMakeLists.txt    | 34 +++++++++++++++++++++++++++-------
-+ 2 files changed, 42 insertions(+), 17 deletions(-)
- 
- diff --git a/cmake/install_macros.cmake b/cmake/install_macros.cmake
- index b8efdf8..a0d0e68 100644
-@@ -39,8 +38,8 @@ index b8efdf8..a0d0e68 100644
-  # 
-  # This program is free software; you can redistribute it and/or modify
-  # it under the terms of the GNU General Public License as published by
--@@ -111,28 +111,33 @@ FUNCTION(INSTALL_SCRIPT)
-- ENDFUNCTION()
-+@@ -167,28 +167,33 @@ ENDFUNCTION()
-+ 
+diff --git a/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch b/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch
+index fde82381d..7de05ee58 100644
+--- a/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch
++++ b/meta-oe/recipes-benchmark/glmark2/files/Fix-configure-for-sqrt-check.patch
+@@ -1,13 +1,21 @@
+-Index: git/wscript
+-===================================================================
+---- git.orig/wscript	2016-07-29 13:15:44.954249796 -0500
+-+++ git/wscript	2016-07-29 15:52:06.196768865 -0500
+-@@ -90,7 +90,7 @@
+-         ctx.check_cxx(lib = lib, uselib_store = uselib)
++From 9fb298c398f88a63d71432be1410d52fae089063 Mon Sep 17 00:00:00 2001
++From: Tom Hochstein <tom.hochstein@nxp.com>
++Date: Mon, 8 Aug 2016 11:39:54 -0500
++
++---
++ wscript | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/wscript b/wscript
++index ca843f4..eb4a26a 100644
++--- a/wscript
+++++ b/wscript
++@@ -84,7 +84,7 @@ def configure(ctx):
++         ctx.check_cc(lib = lib, uselib_store = uselib)
   
-  # Install symbolic link to CMake target. 
- -# the link is created in the same directory as target
-@@ -86,8 +85,8 @@ diff --git a/libmysql/CMakeLists.txt b/libmysql/CMakeLists.txt
- index be5760f..96286ff 100644
- --- a/libmysql/CMakeLists.txt
- +++ b/libmysql/CMakeLists.txt
--@@ -180,6 +180,12 @@ IF(MSVC)
--  INSTALL_DEBUG_TARGET(mysqlclient DESTINATION ${INSTALL_LIBDIR}/debug)
-+@@ -433,6 +433,12 @@ IF(MSVC)
-+  INSTALL_DEBUG_TARGET(clientlib DESTINATION ${INSTALL_LIBDIR}/debug)
-  ENDIF()
-  
- +MACRO(GET_TARGET_NAME target out_name)
-@@ -99,7 +98,7 @@ index be5760f..96286ff 100644
-  IF(UNIX)
-    MACRO(GET_VERSIONED_LIBNAME LIBNAME EXTENSION VERSION OUTNAME)
-      SET(DOT_VERSION ".${VERSION}")
--@@ -192,7 +198,13 @@ IF(UNIX)
-+@@ -445,7 +451,13 @@ IF(UNIX)
-        SET(${OUTNAME} ${LIBNAME}${EXTENSION}${DOT_VERSION})
-      ENDIF() 
-    ENDMACRO()
-@@ -114,7 +113,7 @@ index be5760f..96286ff 100644
-  ENDIF()
-  
-  IF(NOT DISABLE_SHARED)
--@@ -205,10 +217,9 @@ IF(NOT DISABLE_SHARED)
-+@@ -456,10 +468,9 @@ IF(NOT DISABLE_SHARED)
-      # libtool compatability
-      IF(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR APPLE)
-        SET(OS_SHARED_LIB_VERSION "${SHARED_LIB_MAJOR_VERSION}")
-@@ -127,7 +126,7 @@ index be5760f..96286ff 100644
-      ENDIF()
-      # Name of shared library is mysqlclient on Unix
-      SET_TARGET_PROPERTIES(libmysql PROPERTIES 
--@@ -239,8 +250,13 @@ IF(NOT DISABLE_SHARED)
-+@@ -482,8 +493,13 @@ IF(NOT DISABLE_SHARED)
-        "${CMAKE_SHARED_LIBRARY_SUFFIX}"
-        ""
-        linkname)
-@@ -143,7 +142,7 @@ index be5760f..96286ff 100644
-      LIST(REMOVE_DUPLICATES OS_SHARED_LIB_SYMLINKS)
-      FOREACH(ver ${OS_SHARED_LIB_SYMLINKS})
-        GET_VERSIONED_LIBNAME(
--@@ -248,7 +264,11 @@ IF(NOT DISABLE_SHARED)
-+@@ -491,7 +507,11 @@ IF(NOT DISABLE_SHARED)
-          "${CMAKE_SHARED_LIBRARY_SUFFIX}"
-          "${ver}"
-          linkname)
+      # Check required functions
+ -    req_funcs = [('memset', 'string.h', []) ,('sqrt', 'math.h', ['m'])]
+ +    req_funcs = [('memset', 'string.h', [])]
+      for func, header, uselib in req_funcs:
+-         ctx.check_cxx(function_name = func, header_name = header,
++         ctx.check_cc(function_name = func, header_name = header,
+                        uselib = uselib, mandatory = True)
 -- 
 2.14.3
 
