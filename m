@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
 	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 332BE746FA
+	by mail.openembedded.org (Postfix) with ESMTP id BA84F746F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 13:32:11 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id c24so8068642wrc.6
+	Fri, 30 Mar 2018 13:32:12 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id c24so8068678wrc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 06:32:13 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=9LJqDzVaiY5G7h4uYiju+Vamfqee9yg4gz8kH99YS+k=;
-	b=PrtnEtyABiNVm6EVDgSvr4FBixXBfWEj7FR5ElzV14m/nBnb2pugelhDBpTR9oQNPQ
-	tePjEj341u7dMHvYvnMSyN3XyDk0hiI/FoJgYK5/GnWNvfVRjpXsdC4u4xC9vv6mCQMQ
-	BYOsPMiNVcXn9OuAKzmZ7rKWaNKDJ+QXYXcVvEf6eLJ+whWsE7aAUN398syP4bWT5TnR
-	jQjpKtV92TbJNLRchntt3dFnZdGTMzpHl9FWH2XBPBb6r4jJE+/6ibrvQ4uGuwxd7BWu
-	GmPmP1qVjYwpH/4fox6x74hOM0M9P60yXIKb4qiT1VYRu+bqCZI/Xneu2xcN1lflQxBT
-	/eJA==
+	bh=O45DQsE+bUXn78o7YXcPVR70AO7rjenTsTbwP0GYBmY=;
+	b=MLYXObgY2uBcRyGvdmdmBOU/2blk/IQBEra3nN8sFHiZfxZ/jZpVdDPu18YKArZ3/g
+	0/STENmyLtvnK9MotaAi0tVyKnOKbUrARoZP9yIxbadrOzedfkq8En9CPTeUbn04SdG3
+	yO747aRZ8UPo/iOI8WXuyGNlmmzAeh4uWYuMgtnNPpgoiZxV8xMesEd3nu/eDNC4b8oW
+	NIxGaxIi3Jsf2Fy86uvNE0dReDlx9QaHESBMz9VIbkfL3ngcCvCR3FHo2mUnENv30Hz2
+	eQ/tldiHn5R8VSuqRMlviU7CeNfc+0D7y+2lUvUAaU69ZVERccO88rijitEMXlDGr7Ns
+	hD1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=9LJqDzVaiY5G7h4uYiju+Vamfqee9yg4gz8kH99YS+k=;
-	b=YYXy/+GANrVxN59cgEx0DfL0Zl938oBoZujuoypWrhzMN/IOn+nc1hGCjfsiyhvErZ
-	seWCIdo7U3Ro3BYAs7U08ZgHMVtl9eOvAkw/DDI4EULJDMR4UFoWiYGZyXSIWdxGZXVx
-	REQ10icqgeG2eT/G7VqjaHol++KAsFPX0iB4onX9WMg9Alf+Yjt4SfBS3K+44+ZEvrY2
-	rczhIceuyiDgbq14ZWXI6lIKxCNIjVfBcJQ7RaGOyOv6UcxcH1isVGH5KWUC/OXSDvdw
-	BzOg8srSU/raYezD9l0P8U/SddQ4lThZUoqQ0n60BN8qSwYzdEyB8MpMpNWceWl1BA4G
-	EA8g==
-X-Gm-Message-State: AElRT7E0/IN5KBIoGm7l4a8ebZepmtStHH28iMoHXL6B+mGtL7bHSNFn
-	BULAQ6wkD1bYarTyz/hRl1NrAw==
-X-Google-Smtp-Source: AIpwx4+vQoY4jSupFdMPj/5iT19BbYZ5Eb4pe0Wuooo0gyEGq1XCB1VXzBkvgfQL/hE/N/FuJIU/Jw==
-X-Received: by 10.223.150.111 with SMTP id c44mr10157464wra.90.1522416732527; 
-	Fri, 30 Mar 2018 06:32:12 -0700 (PDT)
+	bh=O45DQsE+bUXn78o7YXcPVR70AO7rjenTsTbwP0GYBmY=;
+	b=cXByr5OOna1xeSZbcYtXTkVQTQ05nPgZuwXsNkWAVVnz0eYcKesfr4GCTXHGPIKXfB
+	ZnPvJZjO2JBZqzqKaLWOycMRFHjgsedIyU7bW9doME+OmyREAwulFkrQud12MVLm+kf4
+	CKJPxPN6mBUmNrjharOUvjuGegAeqGTccg8YhgDvFjS0CDBYftz1ph4SNIYmZ/gt68vK
+	RyDjv3h9iV3ZkOhx+2pm2En0ZOC6Z4Np+Q11R5zC7VfJO/uCvu84kHM5OdpdxcjcRSLY
+	HAMlytWaaXZ0d/+6+ZYX/kS6wquvM+C65ZgryNEmfyO4DxGGzBisuW/gRgatNL4nCzxY
+	w8iA==
+X-Gm-Message-State: AElRT7HgIZqHf3bXKEDl+XBbEchrGDtEO7AS+6N6MuyTIv2JNIUbiHJv
+	mj9+MsgFSjHt9Z6YsOYFPDouLw==
+X-Google-Smtp-Source: AIpwx49LFGDiDYFro6nQMFSQ7cOz5MF4l/OKsFOxp5Lzumakwc1lXGTYEhQ3kY4odWSudb58NhNIqQ==
+X-Received: by 10.223.176.7 with SMTP id f7mr9457155wra.257.1522416733341;
+	Fri, 30 Mar 2018 06:32:13 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC180221E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:8022:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	93sm10468396wrh.46.2018.03.30.06.32.11
+	93sm10468396wrh.46.2018.03.30.06.32.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
 	Fri, 30 Mar 2018 06:32:12 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:31:19 +0200
-Message-Id: <20180330133151.25882-8-schnitzeltony@gmail.com>
+Date: Fri, 30 Mar 2018 15:31:20 +0200
+Message-Id: <20180330133151.25882-9-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180330133151.25882-1-schnitzeltony@gmail.com>
 References: <20180330133151.25882-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/39] libxfce4ui: refresh 0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+Subject: [PATCH 08/39] libqmi: refresh 0001-Detect-clang.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,32 +68,30 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch  | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
-index b8c917883..6d107b1b6 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
-@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch
+index 4047ffbf2..7a3429b9d 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch
+@@ -12,6 +12,7 @@ compiler are accepted.
  
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  Upstream-Status: Pending
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +
  ---
-  libxfce4kbd-private/xfce4-keyboard-shortcuts.xml |    4 ++++
-  1 files changed, 4 insertions(+), 0 deletions(-)
-@@ -17,8 +18,8 @@ diff --git a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml b/libxfce4kbd-priv
- index 723a10d..e6502f3 100644
- --- a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
- +++ b/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
--@@ -66,4 +66,8 @@
--       <property name="&lt;Control&gt;F12" type="string" value="workspace_12_key"/>
-+@@ -75,4 +75,8 @@
-+       <property name="&lt;Primary&gt;F12" type="string" value="workspace_12_key"/>
-      </property>
-    </property>
- +  <property name="providers" type="array">
+  m4/compiler-warnings.m4 | 29 +++++++++++++++++++++++++----
+  1 file changed, 25 insertions(+), 4 deletions(-)
+@@ -53,7 +54,7 @@ index de4a8b0..e4ba718 100644
+  		      -Wdeclaration-after-statement -Wstrict-prototypes \
+ @@ -17,22 +37,23 @@ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
+  		      -Wmissing-include-dirs -Waggregate-return \
+- 		      -Wformat-security; do
++ 		      -Wformat-security -Wtype-limits; do
+  		SAVE_CFLAGS="$CFLAGS"
+ -		CFLAGS="$CFLAGS $option"
+ +		CFLAGS="$CFLAGS $option $WERROR"
 -- 
 2.14.3
 
