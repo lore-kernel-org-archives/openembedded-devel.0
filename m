@@ -1,23 +1,23 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EF3F7476A
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id BE6B674798
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 22:39:56 +0000 (UTC)
+	Fri, 30 Mar 2018 22:40:44 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	30 Mar 2018 15:39:58 -0700
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	30 Mar 2018 15:40:45 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,383,1517904000"; d="scan'208";a="212734797"
+X-IronPort-AV: E=Sophos;i="5.48,383,1517904000"; d="scan'208";a="30326228"
 Received: from chiron.jf.intel.com ([10.7.159.63])
-	by orsmga005.jf.intel.com with ESMTP; 30 Mar 2018 15:39:58 -0700
+	by orsmga006.jf.intel.com with ESMTP; 30 Mar 2018 15:40:45 -0700
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:39:54 -0700
-Message-Id: <20180330223954.55841-1-timothy.t.orling@linux.intel.com>
+Date: Fri, 30 Mar 2018 15:40:43 -0700
+Message-Id: <20180330224043.55886-1-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.14.3
-Subject: [PATCH] python3-pytest: fix broken fetch (3.4.1 -> 3.4.2)
+Subject: [meta-python][URGENT][PATCH] python3-pytest: fix broken fetch (3.4.1 -> 3.4.2)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2018 22:39:58 -0000
+X-List-Received-Date: Fri, 30 Mar 2018 22:40:44 -0000
 
 Fixes: 99d18a6bc1a915ef5f07116e0fe684f56825a165
 
