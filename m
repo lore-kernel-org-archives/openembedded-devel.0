@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
-	[209.85.128.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 999DA7473C
+Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id CB6A87475B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 13:32:40 +0000 (UTC)
-Received: by mail-wr0-f182.google.com with SMTP id z73so8076103wrb.0
+	Fri, 30 Mar 2018 13:32:41 +0000 (UTC)
+Received: by mail-wr0-f169.google.com with SMTP id l49so8081098wrl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 06:32:41 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=zgDGcsjbZ75cNVoxSFDlB2xy6ozxcCsWeyfBbRWYj3A=;
-	b=ue47Uhx+stHwhIDtOhCKqcXjqt6huNXXlWkW+l6x6QJ+ma8bLqpcMuBk7P5MAH0INd
-	fn2FlHiPG+ZbJ2dFKKWDq+20Urh18h1oXyhi87uYK4TByuDi/KBFUP1/KBnSOW+2/hHr
-	783hB2oYUZHTuDBmln9Pydpl/QmQh/PVb2k2cpvxPeIfbGc+NnOwBxiDsYhT9ZvRFJm0
-	/n0hRs+EBSUWjlhO8DAJMN0mTt1IXB/xQk3IRhKhmr3fKT2ceyc52zOoZ9oO+i/Ib6X2
-	8fxJq544JOrTqbqYUUk2OTzufrQxY5CWa61Kg1oVSxnautonrXDnaflnxxyO75j/Au8d
-	QFww==
+	bh=0e2WR57AUfHxv1R0K6eB7vRG+eD0WLA+zz5kVrH5zf8=;
+	b=HxQDWOx5bImZp6pRbcj/1juy4dixf8Zt9iwxN3o32bqpbXOc4xCZZO3YsNk+h3VXNv
+	nkRpZv1YREpSGVeRrroj3hZJjNk7Ly6LdIPD6Ew5UCufpZEpEFTcC2UVDULEqbLzuLj+
+	R5f8pEUSqgjRDoZvxPmPKqKHSYiWcBYPmKNYAFy3akJt2YHfZANqElBRx0hZ0HGTe1rQ
+	D7zts4+bH1oAn3Ft51gZqH8mVn8ES520XpZ4KPR8ZmXuNigWXwm/VEdvenKLvQuty4a4
+	DdcokFIDOyIM5JkouY9pJ6RmrHgmNTucLCcPu+e2FbP0OM+gAFqQ3M+obzqHAx/nrdYV
+	WTZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=zgDGcsjbZ75cNVoxSFDlB2xy6ozxcCsWeyfBbRWYj3A=;
-	b=WpZ+com3YeFT3Hghmm/nXlP+fCNBWbrTPvkZPCLDRbf53iV/cznPLtTdU7Tx2PFMBk
-	BhLnRNrCtamI7l6QISl0gAbDZSYGGagknUj4cdVkchtj9sNqpo0/KeXNUOGwVhploU1i
-	x9W3jIaPe/VkmHtgjFGHJO/Xe7j/TKO1bx/me4i5GQWLXxlEvZUrLSh/SusXIKSPEPXU
-	v4RrjBzHaSF+26dIlWWI1JSA0HDxukoBOjz5hTmxu4bAP8Te/EMEZ4Bua+oFwP8Q2HkL
-	25ooG6FZ1MJS0k3TPvPuAp445F4iRCf+47GQ6LHQZqoV+DhWzgT+O00kHPBLoE2K5ynV
-	wt7w==
-X-Gm-Message-State: AElRT7Ff2eJ5/SktqMypHCp7NVdSgGdw+4mU8tfKmZ+SrKf0v4JxfiZv
-	Tu2cGmusGzryioC+vU54s529TA==
-X-Google-Smtp-Source: AIpwx484VZuio4bGuyTq/OTvx4rczHxGBmIx/uh0OtPD0Sti07Pk+tHPeOvkVSryW4l7zajDkN5Zag==
-X-Received: by 10.223.182.13 with SMTP id f13mr9324814wre.262.1522416760744;
-	Fri, 30 Mar 2018 06:32:40 -0700 (PDT)
+	bh=0e2WR57AUfHxv1R0K6eB7vRG+eD0WLA+zz5kVrH5zf8=;
+	b=IUX7AqcgDGS4ZZTL5jqNHPHmG9wwyHjEeuKf8Fxk7RPJ/YWZHKzSRrcDtAMCvYnpOW
+	p0OIEVm2pDWIklEtI8rxNl0nb5iYSWxnK8dEH+ZuKPweTNne264L5raQ5EFxBPtyWZ2u
+	DtuRZy7ikXoKNnT6G1vnKXbMcJLhNjxgUjz1NqKHhQFwCufciiV0b+RPFaS4Il2Zl2mV
+	d7ALw9Z9vp2vHRFlQFAgMyQifb5jyDUj77I1l/sxkMNJbAa0waUKKMpDG5DQIKBBGQ45
+	Yu03hmEFTZOMu/hCQ4TGMDO+pLfUVcIpK/VJ90nE6BAXiJOeNSAOM3H3zEaxuAVTkzZ6
+	n8OA==
+X-Gm-Message-State: AElRT7H5CQ/gnqVzxdj6VAqc6VzVZzlsRyDwVW3cJKK8sXq6WG1sW+XI
+	XMXwDRRV/F2lmhHvg9u1iC/miw==
+X-Google-Smtp-Source: AIpwx49Rhjapd2RaQA/506ttnwFwORfgmnRmMgOAn65wqpJO41d47vPFWe0iqEhim3ePsFrBJz+6Jg==
+X-Received: by 10.223.136.146 with SMTP id f18mr9928469wrf.57.1522416761770;
+	Fri, 30 Mar 2018 06:32:41 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC180221E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:8022:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	93sm10468396wrh.46.2018.03.30.06.32.39
+	93sm10468396wrh.46.2018.03.30.06.32.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 30 Mar 2018 06:32:40 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:41 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:31:49 +0200
-Message-Id: <20180330133151.25882-38-schnitzeltony@gmail.com>
+Date: Fri, 30 Mar 2018 15:31:50 +0200
+Message-Id: <20180330133151.25882-39-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180330133151.25882-1-schnitzeltony@gmail.com>
 References: <20180330133151.25882-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 37/39] libsdl-ttf/libsdl2-ttf: refresh patches
+Subject: [PATCH 38/39] remove slim leftovers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,169 +62,232 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2018 13:32:41 -0000
+X-List-Received-Date: Fri, 30 Mar 2018 13:32:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Different code bases cannot share patches cleanly. So have explict patch folder
-for each version.
-
 Signed-off-by: Andreas MÃ¼ller <schnitzeltony@gmail.com>
 ---
- .../libsdl-ttf/files/automake_foreign.patch        | 13 -----
- .../libsdl-ttf/use.pkg-config.for.freetype2.patch  | 62 ++++++++++++++++++++++
- .../libsdl-ttf/libsdl2-ttf/automake_foreign.patch  | 21 ++++++++
- .../use.pkg-config.for.freetype2.patch             | 13 +++--
- 4 files changed, 92 insertions(+), 17 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch
- create mode 100644 meta-oe/recipes-support/libsdl-ttf/libsdl-ttf/use.pkg-config.for.freetype2.patch
- create mode 100644 meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/automake_foreign.patch
- rename meta-oe/recipes-support/libsdl-ttf/{files => libsdl2-ttf}/use.pkg-config.for.freetype2.patch (83%)
+ meta-oe/recipes-graphics/slim/slim/Makefile.oe     | 64 ------------------
+ meta-oe/recipes-graphics/slim/slim/slim-dynwm      |  8 ---
+ meta-oe/recipes-graphics/slim/slim/slim.pamd       | 19 ------
+ meta-oe/recipes-graphics/slim/slim/slim.service    | 11 ----
+ .../recipes-graphics/slim/slim/update_slim_wmlist  | 76 ----------------------
+ 5 files changed, 178 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/slim/slim/Makefile.oe
+ delete mode 100644 meta-oe/recipes-graphics/slim/slim/slim-dynwm
+ delete mode 100644 meta-oe/recipes-graphics/slim/slim/slim.pamd
+ delete mode 100644 meta-oe/recipes-graphics/slim/slim/slim.service
+ delete mode 100644 meta-oe/recipes-graphics/slim/slim/update_slim_wmlist
 
-diff --git a/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch b/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch
+diff --git a/meta-oe/recipes-graphics/slim/slim/Makefile.oe b/meta-oe/recipes-graphics/slim/slim/Makefile.oe
 deleted file mode 100644
-index 2d5bd6d91..000000000
---- a/meta-oe/recipes-support/libsdl-ttf/files/automake_foreign.patch
+index 2ee69346a..000000000
+--- a/meta-oe/recipes-graphics/slim/slim/Makefile.oe
 +++ /dev/null
-@@ -1,13 +0,0 @@
--Index: SDL2_ttf-2.0.14/Makefile.am
--===================================================================
----- SDL2_ttf-2.0.14.orig/Makefile.am
--+++ SDL2_ttf-2.0.14/Makefile.am
--@@ -1,6 +1,8 @@
-- # Makefile.am for the SDL truetype font loading library and viewer
-- lib_LTLIBRARIES = libSDL2_ttf.la
-- 
--+AUTOMAKE_OPTIONS = foreign
--+
-- libSDL2_ttfincludedir = $(includedir)/SDL2
-- libSDL2_ttfinclude_HEADERS =	\
-- 	SDL_ttf.h
-diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf/use.pkg-config.for.freetype2.patch b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf/use.pkg-config.for.freetype2.patch
-new file mode 100644
-index 000000000..1116c34d0
---- /dev/null
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf/use.pkg-config.for.freetype2.patch
-@@ -0,0 +1,62 @@
-+From 8cf318197eea91bec6057308befbb29426d69014 Mon Sep 17 00:00:00 2001
-+From: Richard Purdie <richard.purdie@linuxfoundation.org>
-+Date: Thu, 22 May 2014 10:59:33 +0100
-+Subject: [PATCH] freetype-config was removed from oe-core in
-+
-+commit 5870bd272b0b077d0826fb900b251884c1c05061
-+
-+    binconfig-disabled: Add class and use
-+
-+---
-+ configure.in | 38 +++++---------------------------------
-+ 1 file changed, 5 insertions(+), 33 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 865075e..d7a5a81 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -90,39 +90,11 @@ case "$host" in
-+ esac
-+ AM_CONDITIONAL(USE_VERSION_RC, test x$use_version_rc = xtrue)
-+ 
-+-dnl Check for the FreeType 2 library
-+-dnl
-+-dnl Get the cflags and libraries from the freetype-config script
-+-dnl
-+-AC_ARG_WITH(freetype-prefix,[  --with-freetype-prefix=PFX   Prefix where FREETYPE is 
-+-installed (optional)],
-+-            freetype_prefix="$withval", freetype_prefix="")
-+-AC_ARG_WITH(freetype-exec-prefix,[  --with-freetype-exec-prefix=PFX Exec prefix 
-+-where FREETYPE is installed (optional)],
-+-            freetype_exec_prefix="$withval", freetype_exec_prefix="")
-+-
-+-if test x$freetype_exec_prefix != x ; then
-+-     freetype_args="$freetype_args --exec-prefix=$freetype_exec_prefix"
-+-     if test x${FREETYPE_CONFIG+set} != xset ; then
-+-        FREETYPE_CONFIG=$freetype_exec_prefix/bin/freetype-config
-+-     fi
-+-fi
-+-if test x$freetype_prefix != x ; then
-+-     freetype_args="$freetype_args --prefix=$freetype_prefix"
-+-     if test x${FREETYPE_CONFIG+set} != xset ; then
-+-        FREETYPE_CONFIG=$freetype_prefix/bin/freetype-config
-+-     fi
-+-fi
-+-AC_PATH_PROG(FREETYPE_CONFIG, freetype-config, no)
-+-no_freetype=""
-+-if test "$FREETYPE_CONFIG" = "no" ; then
-+-    AC_MSG_ERROR([
-+-*** Unable to find FreeType2 library (http://www.freetype.org/)
-+-])
-+-else
-+-    CFLAGS="$CFLAGS `$FREETYPE_CONFIG $freetypeconf_args --cflags`"
-+-    LIBS="$LIBS `$FREETYPE_CONFIG $freetypeconf_args --libs`"
-+-fi
-++PKG_CHECK_MODULES(FREETYPE2, freetype2, 
-++    CFLAGS="$CFLAGS $FREETYPE2_CFLAGS"
-++    LIBS="$LIBS $FREETYPE2_LIBS",
-++    AC_MSG_ERROR([*** Unable to find FreeType2 library (http://www.freetype.org/)])
-++)
-+ 
-+ dnl Check for SDL
-+ SDL_VERSION=1.2.4
-diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/automake_foreign.patch b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/automake_foreign.patch
-new file mode 100644
-index 000000000..871e6e94e
---- /dev/null
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/automake_foreign.patch
-@@ -0,0 +1,21 @@
-+From f9c4ad3a171d676e3818b8f6897f325ccf0b2203 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 9 May 2017 00:57:10 -0700
-+
-+---
-+ Makefile.am | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 8166d91..8e05e49 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -2,6 +2,8 @@
-+ 
-+ lib_LTLIBRARIES = libSDL2_ttf.la
-+ 
-++AUTOMAKE_OPTIONS = foreign
-++
-+ libSDL2_ttfincludedir = $(includedir)/SDL2
-+ libSDL2_ttfinclude_HEADERS =	\
-+ 	SDL_ttf.h
-diff --git a/meta-oe/recipes-support/libsdl-ttf/files/use.pkg-config.for.freetype2.patch b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/use.pkg-config.for.freetype2.patch
-similarity index 83%
-rename from meta-oe/recipes-support/libsdl-ttf/files/use.pkg-config.for.freetype2.patch
-rename to meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/use.pkg-config.for.freetype2.patch
-index 8a11f6649..1dfbec6ed 100644
---- a/meta-oe/recipes-support/libsdl-ttf/files/use.pkg-config.for.freetype2.patch
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf/use.pkg-config.for.freetype2.patch
-@@ -1,13 +1,18 @@
--freetype-config was removed from oe-core in
-+From e6d2c0e130811c15b5f5cc10221fae182cb8609e Mon Sep 17 00:00:00 2001
-+From: Richard Purdie <richard.purdie@linuxfoundation.org>
-+Date: Thu, 22 May 2014 10:59:33 +0100
-+Subject: [PATCH] freetype-config was removed from oe-core in
- 
- commit 5870bd272b0b077d0826fb900b251884c1c05061
--Author: Richard Purdie <richard.purdie@linuxfoundation.org>
--Date:   Thu May 22 10:59:33 2014 +0100
- 
-     binconfig-disabled: Add class and use
- 
-+---
-+ configure.in | 38 +++++---------------------------------
-+ 1 file changed, 5 insertions(+), 33 deletions(-)
-+
- diff --git a/configure.in b/configure.in
--index 408e8d6..5f9e730 100644
-+index 9b36e15..f300cae 100644
- --- a/configure.in
- +++ b/configure.in
- @@ -86,39 +86,11 @@ case "$host" in
+@@ -1,64 +0,0 @@
+-# Makefile for slim - OpenEmbedded
+-#######################################################
+-
+-
+-SLIMLDFLAGS=-lXft -lX11 -lfreetype -lXrender -lfontconfig -lpng12 -lz -lm -lcrypt -lXmu -lpng -ljpeg -lrt -lpthread
+-CUSTOM=-DHAVE_SHADOW
+-
+-USE_PAM=1
+-ifdef USE_PAM
+-SLIMLDFLAGS+= -lpam
+-CUSTOM+= -DUSE_PAM
+-endif
+-
+-#######################################################
+-
+-NAME=slim
+-VERSION=1.3.2
+-
+-DEFINES=-DPACKAGE=\"$(NAME)\" -DVERSION=\"$(VERSION)\" \
+-		-DPKGDATADIR=\"$(PREFIX)/share/slim\" -DSYSCONFDIR=\"$(CFGDIR)\"
+-
+-OBJECTS=jpeg.o png.o main.o image.o numlock.o cfg.o switchuser.o app.o \
+-	panel.o util.o
+-ifdef USE_PAM
+-OBJECTS+=PAM.o
+-endif
+-
+-all: slim
+-
+-slim: $(OBJECTS)
+-	$(CXX) $(OBJECTS) $(LDFLAGS) $(SLIMLDFLAGS) -o $(NAME)
+-
+-.cpp.o:
+-	$(CXX) $(CXXFLAGS) $(DEFINES) $(CUSTOM) -c $< -o $@
+-
+-.c.o:
+-	$(CC) $(CFLAGS) $(DEFINES) $(CUSTOM) -c $< -o $@
+-
+-install: slim install-theme
+-	install -D -m 755 slim $(DESTDIR)$(PREFIX)/bin/slim
+-	install -D -m 644 slim.1 $(DESTDIR)$(MANDIR)/man1/slim.1
+-	test -e $(DESTDIR)$(CFGDIR)/slim.conf || \
+-		install -D -m 644 slim.conf $(DESTDIR)$(CFGDIR)/slim.conf
+-
+-clean:
+-	@rm -f slim *.o
+-
+-dist:
+-	@rm -rf $(NAME)-$(VERSION)
+-	@mkdir $(NAME)-$(VERSION)
+-	@cp -r *.cpp *.h *.c Makefile Makefile.* COPYING ChangeLog INSTALL README TODO \
+-		xinitrc.sample slim.1 THEMES themes slim.conf $(NAME)-$(VERSION)
+-	@rm -rf $(NAME)-$(VERSION)/themes/.svn	$(NAME)-$(VERSION)/themes/default/.svn
+-	@tar cvzf $(NAME)-$(VERSION).tar.gz $(NAME)-$(VERSION)
+-	@rm -rf $(NAME)-$(VERSION)
+-
+-
+-install-theme:
+-	install -D -m 644 themes/default/slim.theme \
+-		 $(DESTDIR)$(PREFIX)/share/slim/themes/default/slim.theme
+-	install -D -m 644 themes/default/panel.png \
+-		 $(DESTDIR)$(PREFIX)/share/slim/themes/default/panel.png
+-	install -D -m 644 themes/default/background.jpg \
+-		 $(DESTDIR)$(PREFIX)/share/slim/themes/default/background.jpg
+diff --git a/meta-oe/recipes-graphics/slim/slim/slim-dynwm b/meta-oe/recipes-graphics/slim/slim/slim-dynwm
+deleted file mode 100644
+index 49c9d47ec..000000000
+--- a/meta-oe/recipes-graphics/slim/slim/slim-dynwm
++++ /dev/null
+@@ -1,8 +0,0 @@
+-#!/bin/sh
+-update_slim_wmlist
+-if [ "x$1" = "x-nodaemon" ]; then
+-  shift
+-  exec slim "$@"
+-else
+-  slim -d "$@"
+-fi
+diff --git a/meta-oe/recipes-graphics/slim/slim/slim.pamd b/meta-oe/recipes-graphics/slim/slim/slim.pamd
+deleted file mode 100644
+index 80c34b1db..000000000
+--- a/meta-oe/recipes-graphics/slim/slim/slim.pamd
++++ /dev/null
+@@ -1,19 +0,0 @@
+-# Begin /etc/pam.d/slim
+-
+-auth       required     pam_shells.so
+-auth       include      common-auth
+-auth       optional     pam_securetty.so
+-auth       optional     pam_gnome_keyring.so
+-
+-account    required     pam_nologin.so
+-account    include      common-account
+-
+-password   include      common-password
+-
+-session    include      common-session
+-session    required     pam_mkhomedir.so skel=/etc/skel/ umask=0022
+-session    optional     pam_lastlog.so nowtmp
+-session    optional     pam_mail.so dir=/var/mail standard
+-session    optional     pam_gnome_keyring.so  auto_start
+-
+-# End /etc/pam.d/slim
+diff --git a/meta-oe/recipes-graphics/slim/slim/slim.service b/meta-oe/recipes-graphics/slim/slim/slim.service
+deleted file mode 100644
+index 341351aad..000000000
+--- a/meta-oe/recipes-graphics/slim/slim/slim.service
++++ /dev/null
+@@ -1,11 +0,0 @@
+-[Unit]
+-Description=SLiM Simple Login Manager
+-Requires=dev-tty7.device
+-After=dev-tty7.device systemd-user-sessions.service
+-
+-[Service]
+-ExecStart=/usr/bin/slim -nodaemon
+-StandardOutput=syslog
+-
+-[Install]
+-WantedBy=graphical.target
+diff --git a/meta-oe/recipes-graphics/slim/slim/update_slim_wmlist b/meta-oe/recipes-graphics/slim/slim/update_slim_wmlist
+deleted file mode 100644
+index 0f116537f..000000000
+--- a/meta-oe/recipes-graphics/slim/slim/update_slim_wmlist
++++ /dev/null
+@@ -1,76 +0,0 @@
+-#!/usr/bin/perl -w
+-#
+-# update_slim_wmlist, based on:
+-# update_wdm_wmlist, (c) 1998 Marcelo Magallón <mmagallo@debian.org>
+-# rewriten to use the x-window-manager alternative
+-# modified to also use the x-session-manager alternative by Arthur Korn
+-# Copyright 2000 Wichert Akkerman <wakkerma@debian.org>
+-# Modified to use the freedesktop.org .desktop like kdm and gdm
+-#
+-# This script will read the list of installed window managers from
+-# the freedesktop .desktop files in <etc>/X11/sessions/:<etc>/dm/Sessions/:
+-# <share>/xsessions/
+-# and update the sessions line in /etc/slim.conf.
+-# BEWARE: It doesn't ask any questions about this. It just does it. It
+-# takes an optional list of window managers.
+-
+-use strict;
+-use File::DesktopEntry;
+-
+-my $wm_list='';
+-my %desktop_files;
+-
+-unless (@ARGV) {
+-    #my @wm_list = ('default');
+-    my @wm_list;
+-    foreach my $dir ('/etc/X11/sessions/','/etc/dm/Sessions/','/usr/share/xsessions/') {
+-	    next unless (opendir DIR, $dir);
+-	    my @files;
+-	    @files = grep { /\.desktop$/ && -r "$dir/$_" } readdir(DIR);
+-	    foreach my $file (@files) {
+-		   push @{$desktop_files{$file}}, "$dir/$file";
+-	    }
+-    }
+-    DESKTOP: foreach my $desktop_file (keys(%desktop_files)) {
+-	    foreach my $file (@{$desktop_files{$desktop_file}}) {
+-		    my $entry = File::DesktopEntry->new_from_file($file);
+-		    next DESKTOP if (defined($entry->get_value('Hidden'))
+-			and $entry->get_value('Hidden') eq 'true');
+-		    if ($entry->get_value('Name') =~ /^gnome$/i) {
+-			    push (@wm_list, 'gnome');
+-		    }
+-		    elsif ($entry->get_value('Name') =~ /^kde$/i) {
+-			    push (@wm_list, 'kde');
+-		    }
+-		    elsif (defined($entry->get_value('Exec'))) {
+-			    push (@wm_list, $entry->get_value('Exec'));
+-		    }
+-		    else { # not found, go to next file
+-			    next;
+-		    }
+-		    # found, proceed to next destop file
+-		    next DESKTOP;
+-	    }
+-    }
+-   $wm_list = join (',', sort @wm_list) . ',custom';
+-} else {
+-    $wm_list = join (',', sort @ARGV);
+-}
+-
+-open (SLIM_CONFIG_FILE, '</etc/slim.conf')
+-    or die "Can't open /etc/slim.conf for reading: $!";
+-open (NEW_SLIM_CONFIG_FILE, '>/etc/slim.conf.new')
+-    or die "Can't open /etc/slim.conf.new for writing: $!";
+-
+-while (<SLIM_CONFIG_FILE>) {
+-    s|^(sessions\s*).*|$1$wm_list|;
+-    print NEW_SLIM_CONFIG_FILE;
+-}
+-
+-close(SLIM_CONFIG_FILE);
+-close(NEW_SLIM_CONFIG_FILE);
+-
+-rename '/etc/slim.conf.new', '/etc/slim.conf'
+-    or die "Can't rename /etc/slim.conf.new: $!";
+-
+-exit 0;
 -- 
 2.14.3
 
