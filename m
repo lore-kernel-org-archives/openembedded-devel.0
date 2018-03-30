@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 431C9746F9
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 332BE746FA
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 30 Mar 2018 13:32:11 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id l49so8080040wrl.4
+Received: by mail-wr0-f194.google.com with SMTP id c24so8068642wrc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Mar 2018 06:32:12 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=JCMWcLIlPfpYujpbBpk2e+G4Rzdpjp/zLksZy/E+4+s=;
-	b=apId7OPjrxz0iVnW+4KvNrzTlJ3lJlLA3/rECdnUpjO+pCfihxLfNB1zoWg3oKPC6Y
-	JvpXhnzxCSGf4mmRZ2UeSndNwIYa+VJG2/nXHq/DhquaMsucbDSs1f7TTa+q9vd0bSmJ
-	+5dmncMRwZ7kufG94yVgc13G3w8fSTit8JWwYgU3/aw3IuffB7KNY3+Olgk4PScnogUv
-	i5OAuMrer5a12ImuLW7vDQHc/L0kZQJvEBWSUPh5Xx6LfuSXZ+r9Wf/kjqhBlg9NySdP
-	oLObFmNBcafvCjjkJLtHp2nUsPJwRHTlKEB6pgm5VyAzCP7t/iQE58vQqNj/cwIS5FAn
-	YGUw==
+	bh=9LJqDzVaiY5G7h4uYiju+Vamfqee9yg4gz8kH99YS+k=;
+	b=PrtnEtyABiNVm6EVDgSvr4FBixXBfWEj7FR5ElzV14m/nBnb2pugelhDBpTR9oQNPQ
+	tePjEj341u7dMHvYvnMSyN3XyDk0hiI/FoJgYK5/GnWNvfVRjpXsdC4u4xC9vv6mCQMQ
+	BYOsPMiNVcXn9OuAKzmZ7rKWaNKDJ+QXYXcVvEf6eLJ+whWsE7aAUN398syP4bWT5TnR
+	jQjpKtV92TbJNLRchntt3dFnZdGTMzpHl9FWH2XBPBb6r4jJE+/6ibrvQ4uGuwxd7BWu
+	GmPmP1qVjYwpH/4fox6x74hOM0M9P60yXIKb4qiT1VYRu+bqCZI/Xneu2xcN1lflQxBT
+	/eJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=JCMWcLIlPfpYujpbBpk2e+G4Rzdpjp/zLksZy/E+4+s=;
-	b=khHf6xlXl1GFwNh9h+R6nvLud2/GrFqQnbdLcO5bK0G9ONQcOk1oT4e6PNKEwDZLNc
-	Yhcd5YNirOA3pOMS+cG+JERHOW9wSdUTX+cFVSWt6rl6vgVMVH6RMSPJade4wjUpd7PA
-	1gShqrWEA629iuPoJ4EGMz5ydhApZs38CaN97ZkeMD6Z+xMcd2B+OXpR+YLai0EmjHCw
-	C+vNiD2E8hjK/orgvucdBC6W/DC+5ZUXWA5zCqjxqs8U0V+vwzupfEWZBfvVWFliZEOn
-	y3ZsHtEnqeMhQTmnh8AH7S5gzZDtFLDuEEFqorrdMQpBfxLPfy5Vw7epipxj4gD7+xKE
-	YXaw==
-X-Gm-Message-State: AElRT7H8Mh5B7/Z1ywP4Z8Tr5CRhxdSyqylWUwdA6+SBYstCL9hYcbee
-	EEONF6HGbt0ai1y2bfTiX3izMQ==
-X-Google-Smtp-Source: AIpwx4/WuELGlQ7bXJfbT/48bwQprppM7rMde6DARVg77O+bznFin/MSBATkPsRpY1TNCYRsEp/iSg==
-X-Received: by 10.223.150.56 with SMTP id b53mr10247054wra.79.1522416731717;
-	Fri, 30 Mar 2018 06:32:11 -0700 (PDT)
+	bh=9LJqDzVaiY5G7h4uYiju+Vamfqee9yg4gz8kH99YS+k=;
+	b=YYXy/+GANrVxN59cgEx0DfL0Zl938oBoZujuoypWrhzMN/IOn+nc1hGCjfsiyhvErZ
+	seWCIdo7U3Ro3BYAs7U08ZgHMVtl9eOvAkw/DDI4EULJDMR4UFoWiYGZyXSIWdxGZXVx
+	REQ10icqgeG2eT/G7VqjaHol++KAsFPX0iB4onX9WMg9Alf+Yjt4SfBS3K+44+ZEvrY2
+	rczhIceuyiDgbq14ZWXI6lIKxCNIjVfBcJQ7RaGOyOv6UcxcH1isVGH5KWUC/OXSDvdw
+	BzOg8srSU/raYezD9l0P8U/SddQ4lThZUoqQ0n60BN8qSwYzdEyB8MpMpNWceWl1BA4G
+	EA8g==
+X-Gm-Message-State: AElRT7E0/IN5KBIoGm7l4a8ebZepmtStHH28iMoHXL6B+mGtL7bHSNFn
+	BULAQ6wkD1bYarTyz/hRl1NrAw==
+X-Google-Smtp-Source: AIpwx4+vQoY4jSupFdMPj/5iT19BbYZ5Eb4pe0Wuooo0gyEGq1XCB1VXzBkvgfQL/hE/N/FuJIU/Jw==
+X-Received: by 10.223.150.111 with SMTP id c44mr10157464wra.90.1522416732527; 
+	Fri, 30 Mar 2018 06:32:12 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC180221E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:8022:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	93sm10468396wrh.46.2018.03.30.06.32.10
+	93sm10468396wrh.46.2018.03.30.06.32.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 30 Mar 2018 06:32:10 -0700 (PDT)
+	Fri, 30 Mar 2018 06:32:12 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Mar 2018 15:31:18 +0200
-Message-Id: <20180330133151.25882-7-schnitzeltony@gmail.com>
+Date: Fri, 30 Mar 2018 15:31:19 +0200
+Message-Id: <20180330133151.25882-8-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180330133151.25882-1-schnitzeltony@gmail.com>
 References: <20180330133151.25882-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 06/39] krb5: refresh 0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+Subject: [PATCH 07/39] libxfce4ui: refresh 0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,50 +62,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Mar 2018 13:32:11 -0000
+X-List-Received-Date: Fri, 30 Mar 2018 13:32:12 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...-aclocal-Add-parameter-to-disable-keyutils-detection.patch | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ .../0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch  | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-index f0c310c5e..cbd5d71fd 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-@@ -1,18 +1,19 @@
--From ecb62f3467f493cc0d679323f05367eebbf0fb67 Mon Sep 17 00:00:00 2001
-+From a9e4057bfda190ad365b503af058b460ab8c7616 Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Tue, 1 Oct 2013 22:22:57 +0200
- Subject: [PATCH] aclocal: Add parameter to disable keyutils detection
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+index b8c917883..6d107b1b6 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
++++ b/meta-xfce/recipes-xfce/libxfce4ui/files/0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch
+@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
  
- Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+ Upstream-Status: Pending
+ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +
  ---
-  aclocal.m4 | 4 ++++
-  1 file changed, 4 insertions(+)
- 
- diff --git a/aclocal.m4 b/aclocal.m4
--index 210c473..83b1f02 100644
-+index d6d1279..80ce604 100644
- --- a/aclocal.m4
- +++ b/aclocal.m4
--@@ -1650,11 +1650,15 @@ fi
-+@@ -1679,12 +1679,16 @@ fi
-  dnl
-  dnl If libkeyutils exists (on Linux) include it and use keyring ccache
-  AC_DEFUN(KRB5_AC_KEYRING_CCACHE,[
-@@ -28,6 +29,4 @@ index 210c473..83b1f02 100644
- +fi
-  ])dnl
-  dnl
---- 
--1.8.3.2
--
-+ dnl If libkeyutils supports persistent keyrings, use them
+  libxfce4kbd-private/xfce4-keyboard-shortcuts.xml |    4 ++++
+  1 files changed, 4 insertions(+), 0 deletions(-)
+@@ -17,8 +18,8 @@ diff --git a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml b/libxfce4kbd-priv
+ index 723a10d..e6502f3 100644
+ --- a/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
+ +++ b/libxfce4kbd-private/xfce4-keyboard-shortcuts.xml
+-@@ -66,4 +66,8 @@
+-       <property name="&lt;Control&gt;F12" type="string" value="workspace_12_key"/>
++@@ -75,4 +75,8 @@
++       <property name="&lt;Primary&gt;F12" type="string" value="workspace_12_key"/>
+      </property>
+    </property>
+ +  <property name="providers" type="array">
 -- 
 2.14.3
 
