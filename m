@@ -1,47 +1,52 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 218CC7471D
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f195.google.com (mail-yb0-f195.google.com
+	[209.85.213.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 78C057453F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Mar 2018 16:14:53 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1522512894; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: In-Reply-To: References: MIME-Version: Sender;
-	bh=v0I25v0Y+knd6QvInHDF1/EW20Sqm8ayGhX3kY2JtHE=;
-	b=Tx6HMoMd/2P9EP+LYN+HppQXNi3i1Sxy5AZgMGY1hKn4TADaX67/cj0c4uHwgHRKSpuOs/Zb
-	p9tg9C2jYDknQf2qciLSDJHRmTlNBOGpcBoMdLfdhyJ2djqyNatpINUehYLX64QIVTZ4yvtd
-	3yFmRMVcXXZxqzl8lldCDbK/ZVw=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mxa.mailgun.org with ESMTP id 5abfb3fe.7f386c666670-smtp-out-n02;
-	Sat, 31 Mar 2018 16:14:54 -0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id v13so13858642iob.6
+	Sat, 31 Mar 2018 16:35:32 +0000 (UTC)
+Received: by mail-yb0-f195.google.com with SMTP id z5-v6so3854517ybo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Mar 2018 09:14:54 -0700 (PDT)
-X-Gm-Message-State: AElRT7GWxh0V4oggqV08dz5ZTCDLXmBYlqLTumMtSOlxBiLrMfepW/0r
-	zjwjNuYfznDfVCISr6CppSP8+R6jKNJmw7IpTc8=
-X-Google-Smtp-Source: AIpwx4+4zPdgABBjXKUYf8at8g2PmlF5l0ljZnNH1bbjNllM16r40iJg3Ba45bZaDW4dq3np9yasClEIAioHLRrWTLw=
-X-Received: by 10.107.136.202 with SMTP id s71mr3088450ioi.45.1522512893836;
-	Sat, 31 Mar 2018 09:14:53 -0700 (PDT)
+	Sat, 31 Mar 2018 09:35:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=8Zuk4VLQSswTYATTN2LcL1l7FKgj9rc01bhJkhbtNWM=;
+	b=crPBZoRppFAUFcA2EPWVLzsgWU1pgGK1mvCndLRtm2A5da6O0m3NmyingpMyrb+OQ1
+	e7kSr4svJMzFm5z8xZ3r9IpIRAftrg1xpnX4QNY+s66VN0s4MsYUoeMXFdkqQexNNLSS
+	8lSQ77NsO+5X128X4jJ8hr23qlEhvcfg65NWVD85vhXFMmm7+0SGirzan72zm+ghUgHP
+	2Kxo8PIQRFAzZ9vcF1b8xYSOt3pk4VxM3Mqge6HEm/0O+3ki6FP8gm2ZNuU1ZfF5gos3
+	UXPYCTFrB+DD7rUY3Q6UhNSfPtpT4tKyn7xCcupn2+Z+Gzae7po75lYlq3D+YfIcpYzS
+	tyKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=8Zuk4VLQSswTYATTN2LcL1l7FKgj9rc01bhJkhbtNWM=;
+	b=DYjiuW6Ei78FKEmV/FcqATd3xiOvTESuOmQepW5AeRWEpSeXGvotLMAbajtuvzM9kY
+	StQYa2CISFyw3yyXy5K6YqaZKH/P9ENmIFVrBq1ghc4SpJsrCvvwX0BJp/b+lKCJErDQ
+	PhBTD+P8um2WRi1GjH/8lxh1KeL9bajVtbSDnBZ6ySHj0jLCpWeTgc9K84RRZChVQz4S
+	I9MqTSp++/yrGqIDj1BDlrY/14/MYVC8s8g3ewMos7/f6RpK6px1OgfZx7P/pGbuOAhl
+	8SCrZuQZxguOmrStE3WGO6QkHRvkfpwyHqRaOkkOqVBP9iBfq8i8LZ8R+bdHkNYDR4sD
+	bWLA==
+X-Gm-Message-State: ALQs6tAkMU0U9c2eTvqII+pUJk88fS0/15/Cz2Wxtvwby0K36bxYdFQ+
+	PwHDllPbPEKShZmySsQqj39Y8IjfEqtMv+mnobc=
+X-Google-Smtp-Source: AIpwx4//YlnnT7PxzxX4qWw7QgJ5FAFIyakwX56sZQbsr3TLi6hZfz8pGElSihqSn/KG3zvJ2/maJRuXibLvvfT2iQg=
+X-Received: by 2002:a25:8c3:: with SMTP id
+	186-v6mr1792170ybi.145.1522514133060; 
+	Sat, 31 Mar 2018 09:35:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPGMVzHX1O+POjqc03E+C7Vu60qXv2e_d0KJkLvqOH2innWBUQ@mail.gmail.com>
-	<CADNbA1qxa_FQz5HbGssBLF_n7FHR+cfhNAj6FMT39+RnbqhVww@mail.gmail.com>
-	<CAPGMVzGKpj8XvpOY8Nrz1gRUw7h5SvoSfymL-Njt66YnRJT3mQ@mail.gmail.com>
-	<CADNbA1otyx72T0CrwX=SgPT1zsgnbAnvqviE_oqE6XFQDA3dfw@mail.gmail.com>
-	<CAPGMVzHsm7vwDTorYj1B-KcQgNqXD47YUP2T_gzYuxXZrmf4Ng@mail.gmail.com>
-In-Reply-To: <CAPGMVzHsm7vwDTorYj1B-KcQgNqXD47YUP2T_gzYuxXZrmf4Ng@mail.gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Sat, 31 Mar 2018 16:14:43 +0000
-X-Gmail-Original-Message-ID: <CADNbA1oVD43tT4KpR9673MhX85pj5iMsdbh1H-mk_c9AkSAiMw@mail.gmail.com>
-Message-ID: <CADNbA1oVD43tT4KpR9673MhX85pj5iMsdbh1H-mk_c9AkSAiMw@mail.gmail.com>
-To: Rajath C S <rajathcs.1996@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: koen@dominion.thruhere.net,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: DEVELOPER QUERY
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP; Sat, 31 Mar 2018 09:35:32
+	-0700 (PDT)
+In-Reply-To: <91c71f28-b996-526e-2de1-fa7df027666c@gmail.com>
+References: <20180330133151.25882-1-schnitzeltony@gmail.com>
+	<20180330133151.25882-18-schnitzeltony@gmail.com>
+	<91c71f28-b996-526e-2de1-fa7df027666c@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 31 Mar 2018 18:35:32 +0200
+Message-ID: <CALbNGRRArdi-jjERvD5y+VHyhE8JF3jtmpYuyp_xGafnu3a9dg@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 17/39] gtkmm3: add initial 3.22.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,118 +59,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2018 16:14:54 -0000
+X-List-Received-Date: Sat, 31 Mar 2018 16:35:32 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Check the man page for resolv.conf
+On Sat, Mar 31, 2018 at 6:02 PM, akuster808 <akuster808@gmail.com> wrote:
+>
+>
+> On 03/30/2018 06:31 AM, Andreas M=C3=BCller wrote:
+>> This is gtk3 version of gtkmm. There are no cnflicts with gtkmm for gtk2=
+.
+>
+> This fails with:
+>
+>  | checking for epoxy >=3D 1.2... no
+>     | configure: error: Package requirements (epoxy >=3D 1.2) were not me=
+t:
+>     |
+>     | No package 'epoxy' found
+>
+> Seen with world build on arm64
+>
+> - armin
+>
+>>
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+>> ---
+>>  meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb | 22 ++++++++++++++++++++++
+>>  1 file changed, 22 insertions(+)
+>>  create mode 100644 meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
+>>
+>> diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb b/meta-oe/recip=
+es-gnome/gtk+/gtkmm3_3.22.2.bb
+>> new file mode 100644
+>> index 000000000..e4bd27e58
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
+>> @@ -0,0 +1,22 @@
+>> +SUMMARY =3D "C++ bindings for the GTK+ toolkit V3"
+>> +HOMEPAGE =3D "http://www.gtkmm.org/"
+>> +SECTION =3D "libs"
+>> +
+>> +LICENSE =3D "LGPLv2.1 & GPLv2"
+>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b364=
+516c \
+>> +                    file://COPYING.tools;md5=3D751419260aa954499f7abaab=
+aa882bbe"
+>> +
+>> +DEPENDS =3D "atkmm pangomm glibmm gtk+3 cairomm"
+>> +
+>> +BPN =3D "gtkmm"
+>> +
+>> +inherit gnomebase distro_features_check
+>> +
+>> +REQUIRED_DISTRO_FEATURES =3D "x11"
+>> +
+>> +SRC_URI[archive.md5sum] =3D "883e9046768b3a5afc8e365988823e77"
+>> +SRC_URI[archive.sha256sum] =3D "91afd98a31519536f5f397c2d79696e3d53143b=
+80b75778521ca7b48cb280090"
+>> +
+>> +EXTRA_OECONF =3D " --disable-documentation "
+>> +
+>> +FILES_${PN}-dev +=3D "${libdir}/*/include ${libdir}/*/proc/m4"
+>
+Ahh - OK
 
-On Sat, Mar 31, 2018, 11:54 AM Rajath C S <rajathcs.1996@gmail.com> wrote:
+Have opengl in my DISTRO features so gtk3 gets libepoxy - will send out V2
 
-> Ok, I don't have right info if DNS is configured or not. How to configure
-> DNS and how to check for its configuration in sato?
->
-> Thanks
->
-> On Sat, 31 Mar 2018, 21:16 Derek Straka, <derek@asterius.io> wrote:
->
->>
->>
->> On Fri, Mar 30, 2018 at 11:03 PM, Rajath C S <rajathcs.1996@gmail.com>
->> wrote:
->>
->>> Hi,
->>>
->>> Thank you for the response.
->>> 1. Yes, I totally understand the vitality of including the maillist id,
->>> but the reason i dint include was that i had previously included it couple
->>> of times for the same query and did not get the response back.Anyway, from
->>> now n i shall include for all.
->>> 2. Sorry about not providing the complete information like, so the
->>> layers included are - meta-oe, openembedded, meta-python, meta-networking
->>> and yocto-bsp, machine is set to qemux86 and image is sato. Thanks for the
->>> input,from next time i shall provide detailed info.
->>> 3. I have tried including connman recipe and ssl but nothing seems to be
->>> working,
->>> 4. The reason i couldn't make it a text based log is that i could'nt
->>> copy the contents from core-image-sato screen.
->>>
->>>
->>> 1. I am able to ping and apt-update is also working fine; which all
->>> suggests that the internet is working fine but when i do pip install i get
->>> the above error
->>>
->>
->> You are running apt from inside the qemu instance?  Again, I ask you to
->> provide specific information about the image and your configuration.  The
->> out of the box sato core image does not provide apt.  I just tried
->> `core-image-sato` with pip added, and it worked just fine to install the
->> `wheel` package once I configured the DNS server.
->>
->>
->>> 2. Though i will try out with minimal once, did you follow any
->>> additional steps to configure network in minimal (did you have to add any
->>> additional layer , recipe)?
->>> 3. Yes, i have not configured DHCP
->>>
->>
->> I asked specifically about your DNS configuration.  Is name resolution
->> working correctly from the qemu instance?
->>
->>
->>>
->>> Regards & Thanks,
->>> Rajath
->>>
->>> Rajath C S,
->>> 9964182112,
->>> Bangalore - 560060
->>>
->>> On Sat, Mar 31, 2018 at 1:16 AM, Derek Straka <derek@asterius.io> wrote:
->>>
->>>> A bit of feedback regarding requests like these:
->>>>
->>>>     1) Please do not email general requests for help directly to
->>>> maintainers without including the mailing list.  When you email people
->>>> directly, the community cannot provide input or benefit from the
->>>> resolution.  Also, it usually ends up in the trash at least for me.
->>>>     2) The request did not provide any meaningful context on your setup
->>>> (meta layers, MACHINE, etc).  Without any context, the probability of
->>>> getting a meaningful response quickly is low
->>>>     3) The request didn't provide any of the debugging you've already
->>>> tried to fix the issue.
->>>>     4) Pictures don't really provide much if any value especially when
->>>> they are blurry.  A text based log is preferred
->>>>
->>>> Using core-image-minimal with pip added to the image (openembedded-core
->>>> and meta-openembedded on master - MACHINE=qemux86-64), I am able to pip
->>>> install wheel just fine:
->>>>
->>>> root@qemux86-64:~# pip install wheel
->>>> Collecting wheel
->>>>   Downloading wheel-0.30.0-py2.py3-none-any.whl (49kB)
->>>>     100% |################################| 51kB 256kB/s
->>>> Installing collected packages: wheel
->>>> Successfully installed wheel-0.30.0
->>>>
->>>> That said, how is your network configured?  My best guess based on the
->>>> sparse information provided is that you don't have a valid DNS server setup.
->>>>
->>>> -Derek
->>>>
->>>> On Fri, Mar 30, 2018 at 3:00 AM, Rajath C S <rajathcs.1996@gmail.com>
->>>> wrote:
->>>>
->>>>> Hi,
->>>>>
->>>>> Can you please help me with what the error in the attachment is about.
->>>>> If I can solve this error and fetch packages using pip then lot of my work
->>>>> can see great progress.
->>>>>
->>>>> Thank You,
->>>>> Rajath C S
->>>>>
->>>>>
->>>>
->>>
->>
+Andreas
 
