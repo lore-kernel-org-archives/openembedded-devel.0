@@ -1,46 +1,103 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id BCE2B72EDE
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B595574731
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Mar 2018 15:46:40 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1522511201; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=a0fgUK9T0Fw74ojVX2VFh7Ujf2t8Qmy/FecRcL2QSuM=;
-	b=BJ5E6qI2ga7zggSclDiXJ/VARCWTzw8/CENVV6TnMzvYlRlJkcGoCubc8EmKbAEDStIf2bKU
-	UTvs8FoRo1LtZvhMduT3SvW+JCloZDO3c5WfmspNPjDDvjQ5ycj4wTnLTFKHwg7bbd+YpyJG
-	QDq7QKGSl+g5X02S9XyrpWCecec=
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-X-Mailgun-Sending-Ip: 104.130.122.4
-Sender: derek@asterius.io
-Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
-	[209.85.214.54])
-	by mxa.mailgun.org with ESMTP id 5abfad61.7fc9b4341670-smtp-out-n02;
-	Sat, 31 Mar 2018 15:46:41 -0000 (UTC)
-Received: by mail-it0-f54.google.com with SMTP id 142-v6so14595649itl.5
+	Sat, 31 Mar 2018 16:02:53 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id u86so7257214pfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Mar 2018 08:46:40 -0700 (PDT)
-X-Gm-Message-State: ALQs6tD+5UCjgIGqd23a5leIqFXK8ElTUbrDI2ApDLPF6eINR127DHvw
-	fdzIiwNKb+JaGd2BjciaLpn5YFo3JhlcM9fiNPM=
-X-Google-Smtp-Source: AIpwx49385o/2TwqrajmP6qv53mMK490cXL616I0Xt17kSZtEo7O7XZZ6YjovNi97ECi4kM4XFnYRPi+/6rA5med5Co=
-X-Received: by 2002:a24:ec8:: with SMTP id 191-v6mr6133567ite.42.1522511200396;
-	Sat, 31 Mar 2018 08:46:40 -0700 (PDT)
+	Sat, 31 Mar 2018 09:02:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=kgIelVbhSpQrdwMWwkf8Nqa+KcmtJhhrbWQlVc3yEk8=;
+	b=BMe8ZcaG+6J1Qidw/Pkdqb9Ncz8lqDhJRmOKTUy2WyMhlLW33Caa4mp+VR3YIELbUo
+	zhxXXAalYkQfyoD93E3TSup3nKSoDhowJkkHhzMy72IuURGdtF3ZaftQIlxctaZA1IBc
+	sEiyej7LUlolZMpPAbbFv3hp8GZJLRlqCgTrpX0WX69PODUq0b/XhAblPld03U0S9Mv7
+	/do4VQIoNfjBA4JV73ExDLo98Ybg+vbteTFuBFbCIg9c4NolRmWW/63a6koGdqWSsHHc
+	C5qWTa4MaMiqp9gWKsQGyDH7SvSqP3lCcBb9Y9gG1mU6oyDIx08PXOYzG7CrveStDpkD
+	F8gA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=kgIelVbhSpQrdwMWwkf8Nqa+KcmtJhhrbWQlVc3yEk8=;
+	b=KSCggLh0R6RRPhJ8U9tU2oFJxjSj82Qe1oe2ylYMXsii0RntEzoHpLv5ydZkymlAbn
+	a17NDCMNErWGcByW6dbW1+TWo2vWR/hC1V2BXhT5eCJ2YBkCZ+4yeMWHYqxc5D9SZWC2
+	v2O2rlEkd7OAXKZYUeJOII/moFLOOPqZurnlYERSaUUy4DMyNPF0jf0v0eV7jSqnmgxi
+	KgRRrZCep8Q3WI5A/rOS8Wmhuk7oeYJJz8QQk3GmjFPkQNK1IgnWrp4PhxiwirtI8c0q
+	GuxSRvAw15PmQOXXZVAAdEzWK75KQCgW27Laj5osr812bgUkQgsP9+YKbpc0cCzfUX0z
+	xskw==
+X-Gm-Message-State: AElRT7EyQC5Vnu2wehmeRS6iypoO5TvhSuPFPoGy8JfFkQ2SE46tr3Ky
+	v5BVeFbTLTHAYbsOPCZEwvYeVg==
+X-Google-Smtp-Source: AIpwx48/S0QxYvlsMAbGBTH8Ktc+ICi7vjIzdF7XnUlygBArRiWvQ/0kzR+zJ/AT0UK7ZtV3PkMq7A==
+X-Received: by 2002:a17:902:d882:: with SMTP id
+	b2-v6mr2038694plz.306.1522512174284; 
+	Sat, 31 Mar 2018 09:02:54 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:7cbf:a2a0:bed1:4628?
+	([2601:202:4000:1184:7cbf:a2a0:bed1:4628])
+	by smtp.gmail.com with ESMTPSA id
+	q62sm23789960pfd.61.2018.03.31.09.02.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 31 Mar 2018 09:02:53 -0700 (PDT)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20180330133151.25882-1-schnitzeltony@gmail.com>
+	<20180330133151.25882-18-schnitzeltony@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; keydata=
+	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
+	8CS2NxU=
+Message-ID: <91c71f28-b996-526e-2de1-fa7df027666c@gmail.com>
+Date: Sat, 31 Mar 2018 09:02:52 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-Received: by 10.107.140.6 with HTTP; Sat, 31 Mar 2018 08:46:39 -0700 (PDT)
-In-Reply-To: <CAPGMVzGKpj8XvpOY8Nrz1gRUw7h5SvoSfymL-Njt66YnRJT3mQ@mail.gmail.com>
-References: <CAPGMVzHX1O+POjqc03E+C7Vu60qXv2e_d0KJkLvqOH2innWBUQ@mail.gmail.com>
-	<CADNbA1qxa_FQz5HbGssBLF_n7FHR+cfhNAj6FMT39+RnbqhVww@mail.gmail.com>
-	<CAPGMVzGKpj8XvpOY8Nrz1gRUw7h5SvoSfymL-Njt66YnRJT3mQ@mail.gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Sat, 31 Mar 2018 11:46:39 -0400
-X-Gmail-Original-Message-ID: <CADNbA1otyx72T0CrwX=SgPT1zsgnbAnvqviE_oqE6XFQDA3dfw@mail.gmail.com>
-Message-ID: <CADNbA1otyx72T0CrwX=SgPT1zsgnbAnvqviE_oqE6XFQDA3dfw@mail.gmail.com>
-To: Rajath C S <rajathcs.1996@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: koen@dominion.thruhere.net,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: DEVELOPER QUERY
+In-Reply-To: <20180330133151.25882-18-schnitzeltony@gmail.com>
+Subject: Re: [PATCH 17/39] gtkmm3: add initial 3.22.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,104 +110,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Mar 2018 15:46:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-
-On Fri, Mar 30, 2018 at 11:03 PM, Rajath C S <rajathcs.1996@gmail.com>
-wrote:
-
-> Hi,
->
-> Thank you for the response.
-> 1. Yes, I totally understand the vitality of including the maillist id,
-> but the reason i dint include was that i had previously included it couple
-> of times for the same query and did not get the response back.Anyway, from
-> now n i shall include for all.
-> 2. Sorry about not providing the complete information like, so the layers
-> included are - meta-oe, openembedded, meta-python, meta-networking and
-> yocto-bsp, machine is set to qemux86 and image is sato. Thanks for the
-> input,from next time i shall provide detailed info.
-> 3. I have tried including connman recipe and ssl but nothing seems to be
-> working,
-> 4. The reason i couldn't make it a text based log is that i could'nt copy
-> the contents from core-image-sato screen.
->
->
-> 1. I am able to ping and apt-update is also working fine; which all
-> suggests that the internet is working fine but when i do pip install i get
-> the above error
->
-
-You are running apt from inside the qemu instance?  Again, I ask you to
-provide specific information about the image and your configuration.  The
-out of the box sato core image does not provide apt.  I just tried
-`core-image-sato` with pip added, and it worked just fine to install the
-`wheel` package once I configured the DNS server.
+X-List-Received-Date: Sat, 31 Mar 2018 16:02:53 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
 
-> 2. Though i will try out with minimal once, did you follow any additional
-> steps to configure network in minimal (did you have to add any additional
-> layer , recipe)?
-> 3. Yes, i have not configured DHCP
->
 
-I asked specifically about your DNS configuration.  Is name resolution
-working correctly from the qemu instance?
+On 03/30/2018 06:31 AM, Andreas Müller wrote:
+> This is gtk3 version of gtkmm. There are no cnflicts with gtkmm for gtk2.
 
+This fails with:
+
+ | checking for epoxy >= 1.2... no
+    | configure: error: Package requirements (epoxy >= 1.2) were not met:
+    |
+    | No package 'epoxy' found
+
+Seen with world build on arm64
+
+- armin
 
 >
-> Regards & Thanks,
-> Rajath
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+>  meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
 >
-> Rajath C S,
-> 9964182112,
-> Bangalore - 560060
->
-> On Sat, Mar 31, 2018 at 1:16 AM, Derek Straka <derek@asterius.io> wrote:
->
->> A bit of feedback regarding requests like these:
->>
->>     1) Please do not email general requests for help directly to
->> maintainers without including the mailing list.  When you email people
->> directly, the community cannot provide input or benefit from the
->> resolution.  Also, it usually ends up in the trash at least for me.
->>     2) The request did not provide any meaningful context on your setup
->> (meta layers, MACHINE, etc).  Without any context, the probability of
->> getting a meaningful response quickly is low
->>     3) The request didn't provide any of the debugging you've already
->> tried to fix the issue.
->>     4) Pictures don't really provide much if any value especially when
->> they are blurry.  A text based log is preferred
->>
->> Using core-image-minimal with pip added to the image (openembedded-core
->> and meta-openembedded on master - MACHINE=qemux86-64), I am able to pip
->> install wheel just fine:
->>
->> root@qemux86-64:~# pip install wheel
->> Collecting wheel
->>   Downloading wheel-0.30.0-py2.py3-none-any.whl (49kB)
->>     100% |################################| 51kB 256kB/s
->> Installing collected packages: wheel
->> Successfully installed wheel-0.30.0
->>
->> That said, how is your network configured?  My best guess based on the
->> sparse information provided is that you don't have a valid DNS server setup.
->>
->> -Derek
->>
->> On Fri, Mar 30, 2018 at 3:00 AM, Rajath C S <rajathcs.1996@gmail.com>
->> wrote:
->>
->>> Hi,
->>>
->>> Can you please help me with what the error in the attachment is about.
->>> If I can solve this error and fetch packages using pip then lot of my work
->>> can see great progress.
->>>
->>> Thank You,
->>> Rajath C S
->>>
->>>
->>
->
+> diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
+> new file mode 100644
+> index 000000000..e4bd27e58
+> --- /dev/null
+> +++ b/meta-oe/recipes-gnome/gtk+/gtkmm3_3.22.2.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "C++ bindings for the GTK+ toolkit V3"
+> +HOMEPAGE = "http://www.gtkmm.org/"
+> +SECTION = "libs"
+> +
+> +LICENSE = "LGPLv2.1 & GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+> +                    file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
+> +
+> +DEPENDS = "atkmm pangomm glibmm gtk+3 cairomm"
+> +
+> +BPN = "gtkmm"
+> +
+> +inherit gnomebase distro_features_check
+> +
+> +REQUIRED_DISTRO_FEATURES = "x11"
+> +
+> +SRC_URI[archive.md5sum] = "883e9046768b3a5afc8e365988823e77"
+> +SRC_URI[archive.sha256sum] = "91afd98a31519536f5f397c2d79696e3d53143b80b75778521ca7b48cb280090"
+> +
+> +EXTRA_OECONF = " --disable-documentation "
+> +
+> +FILES_${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
+
 
