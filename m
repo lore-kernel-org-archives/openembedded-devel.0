@@ -1,23 +1,52 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D99A4745B8
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
+	[209.85.213.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 70207747F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Apr 2018 15:03:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w32F3jhH002884
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  2 Apr 2018 16:53:33 +0000 (UTC)
+Received: by mail-yb0-f193.google.com with SMTP id m185-v6so5215335ybm.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Apr 2018 08:03:45 -0700 (PDT)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Mon, 2 Apr 2018 08:03:44 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Apr 2018 11:03:43 -0400
-Message-ID: <1522681423-28813-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 02 Apr 2018 09:53:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=KQ+1vnfBiRmGx4uj3kIKtyvUxm4SQbHlNbHq740SMZM=;
+	b=N69CJ5A25oNv/+QRMi/IY7WOEcGMrUPe8a2Z3KSllXLW3cU8JMF59lfQrsZNQaSQ59
+	ShCwhnBoGpTz00aE5ze7GrgzYGy4nPPJ76ysIshNp3ag8+q/DLeMPm0mEU+u0r2v7Hke
+	xQkYN0aVdbiOxmcaiUq0FsuFV6ZYx2jKUoFsC0PWnqj3Av/+2Wu5ICZUV9NgaYzFZ1Gt
+	YzlH9+6WfWVu1tRuEMyKVy2l8CHHBcVXWHQ8JAnT2vJxgI1qUJZTpGKdAsZrfIUCVu1n
+	eWkHYTu4eKDzUx6jrA6+2Lk2lA6bEFImgybnkqp4MDka1cAjJiMP1eoqwXmJWFC/GSKm
+	cm1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=KQ+1vnfBiRmGx4uj3kIKtyvUxm4SQbHlNbHq740SMZM=;
+	b=bqQ4ErnTm+GUY8rnlFc1maRoaGjbSDiK+h9U38FK+KcaYd6gFO+Tpi0sA7PjmEnk1O
+	ynPGm8S21FQw2Fo1O9tzDB2X329gd2Abt5uOjtEBeQcxqN3fyuIPn0KTH8WPQHuhH/Ca
+	28IMjTfgnzQySAkCO22VhW1RrtNyOOymlXeT/JiFba5oNohGjRuKPS6pGInr/e/WlxuV
+	5hLYtPhMFp//FSv68KWXH4GW1dtULSP42SpG49LAPqOLM7clhLQJmBRsZMBaOaDyxX0d
+	IRG+UKhAa/Eo4+LDXZeeWCeGVKReYMRjEHQ1fnsHones7851vqhk8s4s/3FkFDNULD7t
+	q1gg==
+X-Gm-Message-State: ALQs6tCTgFrcr9MM0Md2dLG4p2uWJ+aB5//YXuWhd904kSHM0BWxzRVR
+	mR6eEJO4N5+gGVLJiHzDLAh+Vo132vLwgIRvMC8=
+X-Google-Smtp-Source: AIpwx49XZMo+pZiv+AEXgeWMxkUvlifestxUtqU4DRnuFvUD/TLFBBh/73Ofb2sMt5txdYeqGtz1eGU/OBRLpTOoRos=
+X-Received: by 2002:a25:d24a:: with SMTP id
+	j71-v6mr5604294ybg.108.1522688014067; 
+	Mon, 02 Apr 2018 09:53:34 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [V2][meta-python][PATCH] python-jsonpatch: fix do_install failure with py2 build
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP;
+	Mon, 2 Apr 2018 09:53:33 -0700 (PDT)
+In-Reply-To: <b1471fc8-6512-169a-7f9b-e46abe766f7d@gmail.com>
+References: <1522636575-23776-1-git-send-email-akuster808@gmail.com>
+	<CALbNGRSO8ZNb5gad6ZPGOzMmhXcm6XQ7Uv3BjGOoDcp=kZb=Jg@mail.gmail.com>
+	<b1471fc8-6512-169a-7f9b-e46abe766f7d@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 2 Apr 2018 18:53:33 +0200
+Message-ID: <CALbNGRRjaaDQysfOmdYTCo3ssqMwGyiq4Eew9pnJ+0uUPGkk_Q@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] poppler: fix compile errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,88 +59,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2018 15:03:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Apr 2018 16:53:33 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The following error is seen when do_install is run
+On Mon, Apr 2, 2018 at 4:54 PM, akuster808 <akuster808@gmail.com> wrote:
+>
+>
+> On 04/02/2018 04:56 AM, Andreas M=C3=BCller wrote:
+>> On Mon, Apr 2, 2018 at 4:36 AM, Armin Kuster <akuster808@gmail.com> wrot=
+e:
+>>> disable glib  via new PACKGAGECONFIG option
+>>>
+>>> glib.so, not found (try using -rpath or -rpath-link)
+>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetText::noSpell=
+Check() const'
+>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetChoice::desel=
+ectAll()'
+>>> | ./libpoppler-glib.so: undefined reference to `StructElement::getTextS=
+pansInternal(MarkedContentOutputDev&) const'
+>>> | ./libpoppler-glib.so: undefined reference to `PopplerCache::PopplerCa=
+che(int)'
+>>> | ./libpoppler-glib.so: undefined reference to `MemStream::MemStream(ch=
+ar*, long long, long long, Object&&)'
+>>> | ./libpoppler-glib.so: undefined reference to `StructElement::appendSu=
+bTreeText(GooString*, bool) const'
+>>> | ./libpoppler-glib.so: undefined reference to `typeinfo for LinkOCGSta=
+te'
+>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetChoice::noSpe=
+llCheck() const'
+>>> | ./libpoppler-glib.so: undefined reference to `XRef::okToChange(bool)'
+>>> | ./libpoppler-glib.so: undefined reference to `globalParams'
+>>> | ./libpoppler-glib.so: undefined reference to `MarkedContentOutputDev:=
+:MarkedContentOutputDev(int)'
+>>> | ./libpoppler-glib.so: undefined reference to `GfxPath::lineTo(double,=
+ double)'
+>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetButton::getBu=
+ttonType() const'
+>>> | ./libpoppler-glib.so: undefined reference to `GfxPath::close()'
+>>> | ./libpoppler-glib.so: undefined reference to `PDFDoc::getID(GooString=
+*, GooString*)'
+>>> | ./libpoppler-glib.so: undefined reference to `pdfDocEncoding'
+>>> | ./libpoppler-glib.so: undefined reference to `BaseStream::BaseStream(=
+Object&&, long long)'
+>>> | ./libpoppler-glib.so: undefined reference to `GfxGouraudTriangleShadi=
+ng::getTriangle(int, double*, double*, double*, double*, double*, double*, =
+double*, double*, double*)'
+>>>
+>>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>>> ---
+>>>  meta-oe/recipes-support/poppler/poppler_0.62.0.bb | 1 +
+>>>  1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb b/meta-o=
+e/recipes-support/poppler/poppler_0.62.0.bb
+>>> index 6966219..d20751f 100644
+>>> --- a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb
+>>> +++ b/meta-oe/recipes-support/poppler/poppler_0.62.0.bb
+>>> @@ -21,6 +21,7 @@ PACKAGECONFIG[curl] =3D "-DENABLE_LIBCURL=3DON,-DENAB=
+LE_LIBCURL=3DOFF,curl"
+>>>  PACKAGECONFIG[openjpeg] =3D "-DENABLE_LIBOPENJPEG=3Dopenjpeg2,-DENABLE=
+_LIBOPENJPEG=3Dnone,openjpeg"
+>>>  PACKAGECONFIG[qt5] =3D "-DENABLE_QT5=3DON,-DENABLE_QT5=3DOFF,qtbase qt=
+tools-native"
+>>>  PACKAGECONFIG[nss] =3D "-DWITH_NSS3=3DON,-DWITH_NSS3=3DOFF,nss"
+>>> +PACKAGECONFIG[glib] =3D "-DENABLE_GLIB=3DON,-DENABLE_GLIB=3DOFF, glib-=
+2.0"
+>>>
+>>>  # surprise - did not expect this to work :)
+>>>  inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', =
+d)}
+>>> --
+>>> 2.7.4
+>>>
+>> This looks odd to me: poppler depends on cairo and cairo depends on
+>> glib-2.0 - both dependencies are unconditional. So glib-2.0 should be
+>> in poppler's recipe specific sysroot. Seems there is something else
+>> wrong here.
+> Its why I sent out the patch.
+>
+>>
+>> I am a bit afraid that this will break evince which is THE pdf-viewer
+>> we have in our common layers. Are there some public log I can look
+>> into?
+>
+> Please see: http://errors.yoctoproject.org/Errors/Build/57086
+>
+I found
 
-| UnicodeEncodeError: 'ascii' codec can't encode character u'\xf6' in
-| position 16: ordinal not in range(128) ERROR: python setup.py
-| install execution failed.
+| warning: libpoppler.so.73, needed by ./libpoppler-glib.so, not found
+(try using -rpath or -rpath-link)
 
-This is reported in the upstream project as part of pull request #81
-https://github.com/stefankoegl/python-json-patch/pull/81
+Looks like some some race for missing dependencies within poppler's
+build. Will investigate and hope to come back with a solution soon.
 
-Since a release is not yet available with the required fix we must
-apply the fix as a patch.
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
-
-*** V2 ***
-* V1 broke py3 builds and the change isn't needed for
-  py3 so adjust to only apply fix for py2.
-
-
- .../Drop-support-for-EOL-Python-3.3.patch          | 35 ++++++++++++++++++++++
- .../python/python-jsonpatch_1.21.bb                |  4 +++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
-
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch b/meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
-new file mode 100644
-index 0000000..ccd8e12
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
-@@ -0,0 +1,35 @@
-+From 71bdeed8b49390ff14fe8f0434fc8a1038d89128 Mon Sep 17 00:00:00 2001
-+From: Hugo <hugovk@users.noreply.github.com>
-+Date: Tue, 16 Jan 2018 14:22:33 +0200
-+Subject: [PATCH 1/4] Drop support for EOL Python 3.3
-+
-+Upstream-Status: Backport
-+
-+[MA: remove dev only files from patch]
-+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-+
-+---
-+ setup.py      | 2 +-
-+
-+diff --git a/setup.py b/setup.py
-+index 0776c41..471c433 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -58,7 +58,6 @@ CLASSIFIERS = [
-+     'Programming Language :: Python :: 2',
-+     'Programming Language :: Python :: 2.7',
-+     'Programming Language :: Python :: 3',
-+-    'Programming Language :: Python :: 3.3',
-+     'Programming Language :: Python :: 3.4',
-+     'Programming Language :: Python :: 3.5',
-+     'Programming Language :: Python :: 3.6',
-+@@ -81,5 +80,6 @@ setup(name=PACKAGE,
-+       package_data={'': ['requirements.txt']},
-+       scripts=['bin/jsondiff', 'bin/jsonpatch'],
-+       classifiers=CLASSIFIERS,
-++      python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
-+       **OPTIONS
-+ )
-+-- 
-+2.7.4
-+
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb
-index 90cd318..2b253b5 100644
---- a/meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb
-@@ -2,3 +2,7 @@ inherit setuptools
- require python-jsonpatch.inc
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-re"
-+
-+SRC_URI += " \
-+    file://Drop-support-for-EOL-Python-3.3.patch \
-+"
--- 
-2.7.4
-
+Andreas
 
