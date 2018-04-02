@@ -1,51 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BBDA6747A4
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 662C372ED8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Apr 2018 18:06:00 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id 91-v6so5122133pld.3
+	Mon,  2 Apr 2018 19:38:20 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id q66so5347347ywg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Apr 2018 11:06:02 -0700 (PDT)
+	Mon, 02 Apr 2018 12:38:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mZiZH9PexlkTiIRE89138a4supe0fz7+IL3SuQ3w5vk=;
-	b=FbuV9mXoQQzdBa3Byk7FwE9Bm4JOuWcpBJMgpQoO8vBDseEWr54fDsmqlgL9TXvCmv
-	KL7ZsgtsV93Ujuz3BcVhEc84uzMIzFZ5Qh73ZoW4VUeXCWH5YvWYIE3Jt4uqZ13XN9Qy
-	iPM+Q8JBkMFZvHqww8DsFSnvTiDVHLRx3fY1hVaLhdjua2pFpmiLYh+MusahVO2S+rzP
-	q+CFWHXkGKIC5oRkICmnZ8DU3nO+AgtTa+woe1UwW0rdHb17uDkwBavH+0oFlk3KPRtI
-	sVobUdUvxqtQ21gDYYSNDelvoP/mul8EiH7zrKl6lr9T3r2+ubRAO/6WRatIIVup+uMX
-	ez5Q==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=zSyYylfmUXA64fZhh5ZyJsE8+yt6vWXzyBzu9jAaPAU=;
+	b=RKpiZgqEYlEsS4ViQBLWlUvr+5dR1Pfjg53mzco2b7FrmM2ptZo9veGNoJr7fkAw1n
+	RhP0ZkCpK5YZmeUV7l7boPu8x5P0kxB9nGRDE3+WeRQMkJgjE2O6okOpGuKaS2tmA1Xs
+	4oeCieLqS9jLWaTS5ZBfr3XIDs83nwzvCwmurHvIzqNe/dkXPi4MlOBbjGduK6+RR/Dr
+	WiNKCO516/wOCRllUWxMzyJaLMwyT9XrWmvTev9oHaUiLV1hYwUsvZT+bOEFyaTIpdSW
+	Ac97oD27sTt/DbktmsXr9nYqlOxJETrzLN5mTpTt8R0NlzY67Hu3G+IkR2rFRqlB6hH6
+	N39w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=mZiZH9PexlkTiIRE89138a4supe0fz7+IL3SuQ3w5vk=;
-	b=TvZrftf9nVWM2CkF1VtQP0t4cW8oQLDYm7yphX9QCE21JlURH3mN6lDp73Lkxkeq7r
-	K2nM+WK3J5NEOY+rb8z8NOzjyXgzgOimrtShFkHtl8QRX/1gvrFZC3WvGtstxcKnoph9
-	zK+I92JpIeKDefPhTmlezMxvJUegwO8DXAwAVeIdEOTs01JVTjRJT/hHPyf90kszOU9i
-	dz1svUyT2Sy1UuQnwuZ3XqZZwsQ676rrsnBNNnJbBsUXQ0DuuE694MMCyKVsLEpp9DKO
-	gP5ly4XfxH5hd0F/S+pUVu8hZ3OUlFxUph0wkx30MeUfYzMxn8uFvNrPGmQdzp+ng83U
-	UouQ==
-X-Gm-Message-State: AElRT7EWpZacFXI24BORo5On/FHYNwS+JUtATXSfA72RY24SIlu3pHIM
-	33W1hjwOLWdsMLp1nILYGVZWow==
-X-Google-Smtp-Source: AIpwx49GuQ9dWRoBdY5DR1Coj7zPUKnCY1FcShxQ8VSO0Nsgl4DdAx+z3/8npjdPDvDodoMBCf0vEA==
-X-Received: by 2002:a17:902:8f85:: with SMTP id
-	z5-v6mr2377025plo.105.1522692361812; 
-	Mon, 02 Apr 2018 11:06:01 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
-	by smtp.gmail.com with ESMTPSA id
-	e4sm1788778pfa.166.2018.04.02.11.06.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Apr 2018 11:06:00 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Apr 2018 11:05:46 -0700
-Message-Id: <20180402180546.38078-6-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.16.3
-In-Reply-To: <20180402180546.38078-1-raj.khem@gmail.com>
-References: <20180402180546.38078-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 6/6] lowpan-tools: Switch to using github src_uri and fix build with gcc8
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=zSyYylfmUXA64fZhh5ZyJsE8+yt6vWXzyBzu9jAaPAU=;
+	b=ujXHkKo/Tq5mgXiprQqkwnbMm9/CambBJS/JGXY5dazz10fHlr/Douw1yEhk7/1IxG
+	WIomJ1AoMi/1LdYzjfSBcOFvgdiYiEjex/sB5837GBbfy0NFjKKrgk/bI9CC4EmNzN9r
+	jklgr+XzK6S8pGA5Y742Q594cYO8S8tYzYPtT5ScieoHtVSSDsqpGPuKB0zS9zVLw69K
+	XZerRaOYJ9PefS0lcVzxf1g/7Jyl9xH9r7dEcTROhlOS7DwP9fEMcHWGMvMTZ/s5rd8E
+	mOOy6xEjUs130fCnxTCCZy3yMvJtW/IQ2x5JR4BhPH00qYOdawr6TZF6wkKEcz3SRIjk
+	eULA==
+X-Gm-Message-State: ALQs6tCmZryRdL5s9iSW9E+etc/QZrs5b475l2ym9RTImkh6oGD6reDg
+	XOnxHKZsYkd2oMu9BsbbwFLFng4qEy4bJgsUXnxgBA==
+X-Google-Smtp-Source: AIpwx4+7YbUT7Y/QQlRe/g0a0IAIyGBeLILEv0RoDFhGqVtP9U7s6MD2Q7RYchUzRhxMTNLopOqxuy4DbVJ+fOswcMA=
+X-Received: by 10.13.249.197 with SMTP id j188mr6298094ywf.318.1522697900923; 
+	Mon, 02 Apr 2018 12:38:20 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP;
+	Mon, 2 Apr 2018 12:38:20 -0700 (PDT)
+In-Reply-To: <CALbNGRRjaaDQysfOmdYTCo3ssqMwGyiq4Eew9pnJ+0uUPGkk_Q@mail.gmail.com>
+References: <1522636575-23776-1-git-send-email-akuster808@gmail.com>
+	<CALbNGRSO8ZNb5gad6ZPGOzMmhXcm6XQ7Uv3BjGOoDcp=kZb=Jg@mail.gmail.com>
+	<b1471fc8-6512-169a-7f9b-e46abe766f7d@gmail.com>
+	<CALbNGRRjaaDQysfOmdYTCo3ssqMwGyiq4Eew9pnJ+0uUPGkk_Q@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 2 Apr 2018 21:38:20 +0200
+Message-ID: <CALbNGRT+Y9E3PdNc+EA4RoKfe-0-sVzca1vyzLrDHcvxDudxag@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] poppler: fix compile errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,74 +59,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2018 18:06:00 -0000
+X-List-Received-Date: Mon, 02 Apr 2018 19:38:20 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...001-coordinator-Fix-strncpy-range-warning.patch | 30 ++++++++++++++++++++++
- .../lowpan-tools/lowpan-tools_git.bb               |  5 ++--
- 2 files changed, 33 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-coordinator-Fix-strncpy-range-warning.patch
+On Mon, Apr 2, 2018 at 6:53 PM, Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+> On Mon, Apr 2, 2018 at 4:54 PM, akuster808 <akuster808@gmail.com> wrote:
+>>
+>>
+>> On 04/02/2018 04:56 AM, Andreas M=C3=BCller wrote:
+>>> On Mon, Apr 2, 2018 at 4:36 AM, Armin Kuster <akuster808@gmail.com> wro=
+te:
+>>>> disable glib  via new PACKGAGECONFIG option
+>>>>
+>>>> glib.so, not found (try using -rpath or -rpath-link)
+>>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetText::noSpel=
+lCheck() const'
+>>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetChoice::dese=
+lectAll()'
+>>>> | ./libpoppler-glib.so: undefined reference to `StructElement::getText=
+SpansInternal(MarkedContentOutputDev&) const'
+>>>> | ./libpoppler-glib.so: undefined reference to `PopplerCache::PopplerC=
+ache(int)'
+>>>> | ./libpoppler-glib.so: undefined reference to `MemStream::MemStream(c=
+har*, long long, long long, Object&&)'
+>>>> | ./libpoppler-glib.so: undefined reference to `StructElement::appendS=
+ubTreeText(GooString*, bool) const'
+>>>> | ./libpoppler-glib.so: undefined reference to `typeinfo for LinkOCGSt=
+ate'
+>>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetChoice::noSp=
+ellCheck() const'
+>>>> | ./libpoppler-glib.so: undefined reference to `XRef::okToChange(bool)=
+'
+>>>> | ./libpoppler-glib.so: undefined reference to `globalParams'
+>>>> | ./libpoppler-glib.so: undefined reference to `MarkedContentOutputDev=
+::MarkedContentOutputDev(int)'
+>>>> | ./libpoppler-glib.so: undefined reference to `GfxPath::lineTo(double=
+, double)'
+>>>> | ./libpoppler-glib.so: undefined reference to `FormWidgetButton::getB=
+uttonType() const'
+>>>> | ./libpoppler-glib.so: undefined reference to `GfxPath::close()'
+>>>> | ./libpoppler-glib.so: undefined reference to `PDFDoc::getID(GooStrin=
+g*, GooString*)'
+>>>> | ./libpoppler-glib.so: undefined reference to `pdfDocEncoding'
+>>>> | ./libpoppler-glib.so: undefined reference to `BaseStream::BaseStream=
+(Object&&, long long)'
+>>>> | ./libpoppler-glib.so: undefined reference to `GfxGouraudTriangleShad=
+ing::getTriangle(int, double*, double*, double*, double*, double*, double*,=
+ double*, double*, double*)'
+>>>>
+>>>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>>>> ---
+>>>>  meta-oe/recipes-support/poppler/poppler_0.62.0.bb | 1 +
+>>>>  1 file changed, 1 insertion(+)
+>>>>
+>>>> diff --git a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb b/meta-=
+oe/recipes-support/poppler/poppler_0.62.0.bb
+>>>> index 6966219..d20751f 100644
+>>>> --- a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb
+>>>> +++ b/meta-oe/recipes-support/poppler/poppler_0.62.0.bb
+>>>> @@ -21,6 +21,7 @@ PACKAGECONFIG[curl] =3D "-DENABLE_LIBCURL=3DON,-DENA=
+BLE_LIBCURL=3DOFF,curl"
+>>>>  PACKAGECONFIG[openjpeg] =3D "-DENABLE_LIBOPENJPEG=3Dopenjpeg2,-DENABL=
+E_LIBOPENJPEG=3Dnone,openjpeg"
+>>>>  PACKAGECONFIG[qt5] =3D "-DENABLE_QT5=3DON,-DENABLE_QT5=3DOFF,qtbase q=
+ttools-native"
+>>>>  PACKAGECONFIG[nss] =3D "-DWITH_NSS3=3DON,-DWITH_NSS3=3DOFF,nss"
+>>>> +PACKAGECONFIG[glib] =3D "-DENABLE_GLIB=3DON,-DENABLE_GLIB=3DOFF, glib=
+-2.0"
+>>>>
+>>>>  # surprise - did not expect this to work :)
+>>>>  inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '',=
+ d)}
+>>>> --
+>>>> 2.7.4
+>>>>
+>>> This looks odd to me: poppler depends on cairo and cairo depends on
+>>> glib-2.0 - both dependencies are unconditional. So glib-2.0 should be
+>>> in poppler's recipe specific sysroot. Seems there is something else
+>>> wrong here.
+>> Its why I sent out the patch.
+>>
+>>>
+>>> I am a bit afraid that this will break evince which is THE pdf-viewer
+>>> we have in our common layers. Are there some public log I can look
+>>> into?
+>>
+>> Please see: http://errors.yoctoproject.org/Errors/Build/57086
+>>
+> I found
+>
+> | warning: libpoppler.so.73, needed by ./libpoppler-glib.so, not found
+> (try using -rpath or -rpath-link)
+>
+> Looks like some some race for missing dependencies within poppler's
+> build. Will investigate and hope to come back with a solution soon.
+>
+Hi Armin,
 
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-coordinator-Fix-strncpy-range-warning.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-coordinator-Fix-strncpy-range-warning.patch
-new file mode 100644
-index 000000000..493832bb8
---- /dev/null
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-coordinator-Fix-strncpy-range-warning.patch
-@@ -0,0 +1,30 @@
-+From f017353b8f3170ce79e7addc127056c0142f087b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 1 Apr 2018 14:31:05 -0700
-+Subject: [PATCH] coordinator: Fix strncpy range warning
-+
-+Fixes
-+error: 'strncpy' specified bound 4096 equals destination size [-Werror=stringop-truncation]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/coordinator.c | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/coordinator.c b/src/coordinator.c
-+index c139aae..ca49418 100644
-+--- a/src/coordinator.c
-++++ b/src/coordinator.c
-+@@ -296,7 +296,8 @@ int main(int argc, char **argv)
-+ 	if(!lease_file)
-+ 		lease_file = LEASE_FILE;
-+ 
-+-	strncpy(pname, argv[0], PATH_MAX);
-++	strncpy(pname, argv[0], PATH_MAX - 1);
-++	pname[PATH_MAX - 1] = '\0';
-+ 
-+ 	pid_file = getenv("PID_FILE");
-+ 	if (!pid_file)
-+-- 
-+2.16.3
-+
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index be73f8ae4..d0fe59c98 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -8,14 +8,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "flex-native bison-native libnl python"
- 
- PV = "0.3.1+git${SRCPV}"
--SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
-+SRC_URI = "git://github.com/linux-wpan/lowpan-tools \
-            file://no-help2man.patch \
-            file://0001-Fix-build-errors-with-clang.patch \
-            file://0001-addrdb-coord-config-parse.y-add-missing-time.h-inclu.patch \
-            file://0001-src-iz.c-Undef-dprintf-before-redefining.patch \
-            file://0001-Remove-newline-from-format-line.patch \
-+           file://0001-coordinator-Fix-strncpy-range-warning.patch \
-            "
--SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
-+SRCREV = "1c2d8674cc6f4b1166a066e8822e295c105ae7a2"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.16.3
+as usual things are not that easy:
+* My builds are fine - whatever I do - so I cannot debug properly. And
+even worse: CMake scripts of poppler look perfectly fine to me.
+* The patch which I added for poppler is good for us but makes it more
+complicated to ask for help at poppler-project. So I reworked the
+patch to turn into a proper fix and submitted it to poppler [1].
 
+Now I would like to:
+* Add this patch to poppler
+* Update poppler to 0.63.0
+* Wait for autobuilder's result (with these patches applied / undo
+your patch disabling glib-2.0 wrapper)
+
+If autobuilder still fails I can open a bug at poppler and hope
+they're able to help me. If autobuilder passes - we're done with this.
+
+Since I did all this to get our sumo into good shape (oe-core already
+branched): How much time do I have to get recent (and of course fixed)
+poppler into sumo?
+
+[1] https://bugs.freedesktop.org/show_bug.cgi?id=3D105852
+
+Cheers
+
+Andreas
 
