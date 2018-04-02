@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F251747CE
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E26E747D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Apr 2018 18:05:58 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id m22-v6so5118987pls.5
+	Mon,  2 Apr 2018 18:05:59 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id g20-v6so5106738plo.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Apr 2018 11:05:59 -0700 (PDT)
+	Mon, 02 Apr 2018 11:06:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eqxlla0SJBghQm1V9Fws4SdgpaM0mSgs9uypBWlSyyU=;
-	b=fzh1663l41uBpUZe85VFRZtL6V9VlFs2xMyNFeTAR6R1ULSuI/a1BT01pk5Yth3Qzt
-	761R2EcajhOL/DuOUDZh770MXoYpuU3dtYsYQKm0VklLcFfb8bUZ4cx4WSeZVHNWAnkZ
-	T0vMVdh1ELJjilX6LXtp+Bcpfin+5jh2cI+lggM0N5tmVMHXeo3E+2ro3H8WxWuIcvy3
-	6lUHlk8re/SNKpBRSV4vEasHSqIBhAXzHyeml84ebuQ5XP13EWK9hL4xKqATa1Jmek4c
-	dcxxt03rBtAos2DenmSA6eavRZRpW++8roF31OpqOcVouBenBFc8+F5p6BM06Hif6wXa
-	1xFg==
+	bh=z6cF6ZGVsVI+g240z2EPBi3FFSayguessnKZWZ2FjE8=;
+	b=IgUBbIpwZLnNoL6R+YpFRFjEnP2hiM8KAd0ZOYTFhnLbKY7DowMorN7/bniDnYuRJs
+	jz6SlJNaWOL3guNJmgphh/SFxGhd4m7NlZzIzzk8DziiQIlvgReqcxm1LquEVY92LBHC
+	j1lBrIY6S4nBU2DgI5pOaSWdCKSKpLV1MwmamOYx3Cr5GvmDzO/47c1wiD8Zoa859HdM
+	5E5AZAnuReXuCggefwZmxFXDU6WYXMFoMC3m0FaJd6zolugdB56AywROq/N7qIrOC4GC
+	n+H2euv87g9lbvLtlA6dCTO5qugSxee2A6fGuxYfDev2mPez+srjnvY09gqzyiLB+T9q
+	0dJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=eqxlla0SJBghQm1V9Fws4SdgpaM0mSgs9uypBWlSyyU=;
-	b=swZSBMpSTxaF8xGd+0QHUX2Ixkp91NngrD5ACheKQSMfCRqUySLYUZSHYz3uld4DS2
-	JeU6SRQ1abxJovNJwYW9OZKx/UtF3CnHWLWM2/VmTqlf2A55UBA8xrtHIvc+bOOTcRtL
-	E9J5F0oF11fCrxcUKkjhR6Xjwrt4fafO0zblnGZxc0L8K4d/YXDmLpRzEAUlnK4yEmHg
-	BtVM3Tm/N9rDYpDtJqDvySut0TfpalR5SRnYOMpiNLTfmABKrqBqg50zMqgDcNxSZyKj
-	8sJdOKERBKyY8CKN9g9x5Vn2vKxmQ/xt30XjbJ2a8fxhELVeFt+z35Rnb4+sfEcpP13h
-	N3RA==
-X-Gm-Message-State: AElRT7HUtDRxgXNmy8S8k7iHCQJWC5Uco8sw9zwIx9L98TLZCkgnK3iR
-	do5CXHhH0+uO4KwAL+8k2wth5g==
-X-Google-Smtp-Source: AIpwx4/Qo1XdeFjOD3nJQO1FkNED9ybNvnd5TpuhkToCPylUVTyruJv/26p1Jm3xnlgJWmFDqXvpnw==
-X-Received: by 2002:a17:902:2cc1:: with SMTP id
-	n59-v6mr11009641plb.198.1522692359111; 
-	Mon, 02 Apr 2018 11:05:59 -0700 (PDT)
+	bh=z6cF6ZGVsVI+g240z2EPBi3FFSayguessnKZWZ2FjE8=;
+	b=GgPMuL2mAC5s9yq0lyrleq0+IDP5X9fuTFkrdllM+ktMJ36bUZSti9s1vF7jx3sSL1
+	XOfj+tIvTGdhPtpOCgYysu/Z5m16KjcqiqXALST5V60sGW/nDoE+AH8H9Rc278Oi7PRt
+	uAYewn94xS7U8BRkxJO4cPPPy3D/8iNHLTysH78br9Dz0v6fmoIxCH4UcF+t7QotYR26
+	1X/AmqF5AZfm2zYB8ODrsMeBb2VZtcO77kZwElwN5kAppFJr6PTR1Y2S8rB/EFzO/QSJ
+	UMEQtfPhHcf41PoMM2Bfd0r3bKE+gNSLXSTtJpCf/tJl2j6sMoZshMUm+WRmVdYkTrMC
+	dobA==
+X-Gm-Message-State: AElRT7GFfCC5vGuea4MsFlsBBBmmrb4GGGXfuF96HfKtt14Kb4003JPL
+	X5cIWF9CcgzDcKTDGk9A2qlvwA==
+X-Google-Smtp-Source: AIpwx4/DocEdLKLwtjKlkRTFiPjkoa/y5NYe32AhwDhaei85ZIzRCM+GNJh+7m5ACC4YPWCouKpZiw==
+X-Received: by 2002:a17:902:6ac1:: with SMTP id
+	i1-v6mr10585014plt.152.1522692360564; 
+	Mon, 02 Apr 2018 11:06:00 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	e4sm1788778pfa.166.2018.04.02.11.05.57
+	e4sm1788778pfa.166.2018.04.02.11.05.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Apr 2018 11:05:57 -0700 (PDT)
+	Mon, 02 Apr 2018 11:05:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Apr 2018 11:05:44 -0700
-Message-Id: <20180402180546.38078-4-raj.khem@gmail.com>
+Date: Mon,  2 Apr 2018 11:05:45 -0700
+Message-Id: <20180402180546.38078-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.16.3
 In-Reply-To: <20180402180546.38078-1-raj.khem@gmail.com>
 References: <20180402180546.38078-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/6] yp-tools: Upgrade to 4.2.3
+Subject: [meta-oe][PATCH 5/6] msgpack-c: Update to latest and fix build with gcc8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,117 +58,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Apr 2018 18:05:58 -0000
-
-Switch to github for SRC_URI
+X-List-Received-Date: Mon, 02 Apr 2018 18:05:59 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ding_dup.c-Include-string.h-for-strdup-de.patch | 28 --------------------
- ...mp_bindings.c-Include-string.h-for-memset.patch | 30 ----------------------
- .../nis/{yp-tools_4.2.2.bb => yp-tools_4.2.3.bb}   | 11 ++++----
- 3 files changed, 6 insertions(+), 63 deletions(-)
- delete mode 100644 meta-networking/recipes-support/nis/yp-tools/0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch
- delete mode 100644 meta-networking/recipes-support/nis/yp-tools/0002-yp_dump_bindings.c-Include-string.h-for-memset.patch
- rename meta-networking/recipes-support/nis/{yp-tools_4.2.2.bb => yp-tools_4.2.3.bb} (75%)
+ .../0001-Fix-Werror-class-memaccess.patch          | 35 ++++++++++++++++++++++
+ .../recipes-devtools/msgpack/msgpack-c_2.1.5.bb    |  3 +-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Fix-Werror-class-memaccess.patch
 
-diff --git a/meta-networking/recipes-support/nis/yp-tools/0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch b/meta-networking/recipes-support/nis/yp-tools/0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch
-deleted file mode 100644
-index 3d4d4f278..000000000
---- a/meta-networking/recipes-support/nis/yp-tools/0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 420cb6927553bbca5b49b7681cf208e6df6e4d7c Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 8 Sep 2017 08:42:45 -0700
--Subject: [PATCH 1/2] ypbind3_binding_dup.c: Include string.h for strdup
-- declaration
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Submitted
--
-- lib/ypbind3_binding_dup.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/lib/ypbind3_binding_dup.c b/lib/ypbind3_binding_dup.c
--index ce4aadf..8199c0b 100644
----- a/lib/ypbind3_binding_dup.c
--+++ b/lib/ypbind3_binding_dup.c
--@@ -19,6 +19,7 @@
-- 
-- #if defined(HAVE_YPBIND3)
-- 
--+#include <string.h>
-- #include <rpcsvc/yp_prot.h>
-- #include "internal.h"
-- 
---- 
--2.14.1
--
-diff --git a/meta-networking/recipes-support/nis/yp-tools/0002-yp_dump_bindings.c-Include-string.h-for-memset.patch b/meta-networking/recipes-support/nis/yp-tools/0002-yp_dump_bindings.c-Include-string.h-for-memset.patch
-deleted file mode 100644
-index 0562e58af..000000000
---- a/meta-networking/recipes-support/nis/yp-tools/0002-yp_dump_bindings.c-Include-string.h-for-memset.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 03ccabb6264c008430c4b1739351df5a63829f8e Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 8 Sep 2017 08:52:32 -0700
--Subject: [PATCH 2/2] yp_dump_bindings.c: Include string.h for memset
--
--Fixes
--error: implicitly declaring library function 'memset'
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Submitted
--
-- src/yp_dump_binding.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/src/yp_dump_binding.c b/src/yp_dump_binding.c
--index a5ab920..d75e2c2 100644
----- a/src/yp_dump_binding.c
--+++ b/src/yp_dump_binding.c
--@@ -26,6 +26,7 @@
-- #include <libintl.h>
-- #include <locale.h>
-- #include <getopt.h>
--+#include <string.h>
-- #include <sys/stat.h>
-- #include <arpa/inet.h>
-- #include <rpcsvc/ypclnt.h>
---- 
--2.14.1
--
-diff --git a/meta-networking/recipes-support/nis/yp-tools_4.2.2.bb b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
-similarity index 75%
-rename from meta-networking/recipes-support/nis/yp-tools_4.2.2.bb
-rename to meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
-index 9ac973812..4e27e32d4 100644
---- a/meta-networking/recipes-support/nis/yp-tools_4.2.2.bb
-+++ b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
-@@ -11,13 +11,14 @@ ypwhich, yppasswd, domainname, nisdomainname \
- and ypdomainname. \
- "
- 
--SRC_URI = "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
-+# v4.2.3
-+SRCREV = "1bfda29c342a81b97cb1995ffd9e8da5de63e7ab"
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Fix-Werror-class-memaccess.patch b/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Fix-Werror-class-memaccess.patch
+new file mode 100644
+index 000000000..b0d772d93
+--- /dev/null
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Fix-Werror-class-memaccess.patch
+@@ -0,0 +1,35 @@
++From a05d92ae85024d0648f69f95307a1d3e8e51109c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 1 Apr 2018 19:55:38 -0700
++Subject: [PATCH] Fix -Werror=class-memaccess
 +
-+SRC_URI = "git://github.com/thkukuk/yp-tools \
-            file://domainname.service \
--           file://0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch \
--           file://0002-yp_dump_bindings.c-Include-string.h-for-memset.patch \
++Casting to void* make gcc happy since its upset about
++object types and rightly so
++
++Fixes
++
++'void* memcpy(void*, const void*, size_t)' copying an object of non-trivial type 'struct msgpack::v2::object' from an array of 'const msgpack_object' {aka 'const struct msgpack_object'} [-Werror=class-memaccess]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Submitted [https://github.com/msgpack/msgpack-c/pull/659]
++
++ include/msgpack/v1/object.hpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/include/msgpack/v1/object.hpp b/include/msgpack/v1/object.hpp
++index 64da8c53..9721f705 100644
++--- a/include/msgpack/v1/object.hpp
+++++ b/include/msgpack/v1/object.hpp
++@@ -661,7 +661,7 @@ inline object::object(const msgpack_object& o)
++ inline void operator<< (msgpack::object& o, const msgpack_object& v)
++ {
++     // FIXME beter way?
++-    std::memcpy(&o, &v, sizeof(v));
+++    std::memcpy(static_cast<void*>(&o), &v, sizeof(v));
++ }
++ 
++ inline object::operator msgpack_object() const
++-- 
++2.16.3
++
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
+index d9f695669..02c0cd296 100644
+--- a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
+@@ -9,9 +9,10 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
+ 
+ PV .= "+git${SRCPV}"
+ 
+-SRCREV = "7a98138f27f27290e680bf8fbf1f8d1b089bf138"
++SRCREV = "208595b2620cf6260ce3d6d4cf8543f13b206449"
+ 
+ SRC_URI = "git://github.com/msgpack/msgpack-c \
++           file://0001-Fix-Werror-class-memaccess.patch \
             "
--SRC_URI[md5sum] = "fb4a8bffb44ae5d3390351d67f320ef3"
--SRC_URI[sha256sum] = "137f19a986382b275bf4a2b1a69eb26689d6f4ac056ddaa21784d6b80eb98faa"
-+
-+S = "${WORKDIR}/git"
  
- DEPENDS = "libtirpc libnsl2"
- 
+ inherit cmake pkgconfig
 -- 
 2.16.3
 
