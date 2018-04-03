@@ -1,54 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 64F0074B34
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CCF274A6C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2018 23:16:36 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id r82so38605474wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Apr 2018 16:16:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=7fiQpSmNG+D0Fw2wyuJZUjFu4j7ZAK8qPyYFnNobLaM=;
-	b=dbRCI9hpLGJjre8INneFuYGx4F265xKoVxqcW6y8tjNa2Esgh230C/N0uLQiWfIGfV
-	LxGRxCHlkE0uKQwAJs8sVlC7ib7YjrjBWRdTGJ64F/axY0LCPfMiBKjPo+wfaSvzfO6g
-	yXgD0wf2hDwZ/py/5IVTQGp+A79c46bjJRUIKV7fi4GIxO9NtKGbwzyFfpk+TxZISNd3
-	CG47D7j1N90hWckbteYASOLB0UJ8ohymfCxs7xj+1e0d6lbFyM8JgIAUMo/nLnff4DV1
-	COu9SqbQZ2qle/x9ufXUflYNvNUD7OUHmd/q7dR5tF4MXdhaE8HyKspEebT8SxMvNcW7
-	vnsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=7fiQpSmNG+D0Fw2wyuJZUjFu4j7ZAK8qPyYFnNobLaM=;
-	b=M6DxULAApzF6mONlYATQYwcxP5uPVQ3/BfpjqEDBmWMI6+26OS+HY+lQ1UQEB+YzCE
-	LR6AVt09Qqe3YPhqUrqsmugn2FuUYMX6F4lGn4f2GB+Rw72DXzv65eeiNQD956qtac2b
-	G0a1K0UqXz1NaHuBDYazUTGl3yOObLL8BoB0g8/jI1o/BP50EeSRHxZ8VjtLO8LJsQzT
-	tMyYJoWNNfnJXQINyA7oWAJwO7n3cWVZAeyZpkTJmAjx1wfvywR73P6TuL6G4YxhLhwo
-	BbonnHLjJQmCXI0dLqAgLBMU0WkEryktxjNkDSrBiMT5lHvCeFQc3VpKmLBSl54Uf6So
-	C2YA==
-X-Gm-Message-State: ALQs6tBoLf2FMhHxH/ECi4EbJB/cSCYVoR/OPzJQd5Kyal73KLQWhoG1
-	+3gT/B0Owu/bLQm+WmddZD7cMQ==
-X-Google-Smtp-Source: AIpwx48Lw43oqaF6cfI0CzVk0L8C+itiiw8mvfp0ldRQLu5MEUOn+mSEE3yF9jAmY2ZsTCcHEvYO2g==
-X-Received: by 10.28.12.17 with SMTP id 17mr5078942wmm.75.1522797396767;
-	Tue, 03 Apr 2018 16:16:36 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p200300F07BC1FD091E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc1:fd09:1e6f:65ff:fe3e:7f61])
-	by smtp.gmail.com with ESMTPSA id
-	m129sm2682099wma.27.2018.04.03.16.16.35
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 03 Apr 2018 16:16:36 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Apr 2018 01:16:01 +0200
-Message-Id: <20180403231601.5329-3-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <20180403231601.5329-1-schnitzeltony@gmail.com>
-References: <20180403231601.5329-1-schnitzeltony@gmail.com>
+	Tue,  3 Apr 2018 23:19:11 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	03 Apr 2018 16:19:12 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.48,403,1517904000"; d="scan'208";a="188427575"
+Received: from anmitta2-mobl1.gar.corp.intel.com (HELO [10.255.134.23])
+	([10.255.134.23])
+	by orsmga004.jf.intel.com with ESMTP; 03 Apr 2018 16:19:11 -0700
+To: Denys Dmytriyenko <denis@denix.org>,
+	openembedded-devel@lists.openembedded.org
+References: <1522796439-37319-1-git-send-email-denis@denix.org>
+From: Anuj Mittal <anuj.mittal@intel.com>
+Message-ID: <ba82469b-4003-a312-9a47-b034ac18712b@intel.com>
+Date: Wed, 4 Apr 2018 07:19:10 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-Subject: [PATCH 2/2] poppler: update 0.62.0- > 0.63.0
+In-Reply-To: <1522796439-37319-1-git-send-email-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [PATCH] iperf3: refresh local patches to avoid fuzz warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,35 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2018 23:16:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 03 Apr 2018 23:19:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../recipes-support/poppler/{poppler_0.62.0.bb => poppler_0.63.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/poppler/{poppler_0.62.0.bb => poppler_0.63.0.bb} (93%)
+On 04/04/2018 07:00 AM, Denys Dmytriyenko wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+> 
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  ...nclude-stdint.h-for-various-std-c99-int-types.patch | 16 +++++++---------
+>  .../iperf3/0002-Remove-pg-from-profile_CFLAGS.patch    | 12 +++++-------
+>  .../iperf3/iperf3/automake-foreign.patch               | 18 ++++++++++++++----
+>  3 files changed, 26 insertions(+), 20 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+> index ae36208..3db188f 100644
+> --- a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+> +++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+> @@ -1,21 +1,22 @@
+> -From be653711fb92d2430b3ecc546b4e3ad927d19ec5 Mon Sep 17 00:00:00 2001
+> +From b26687cfe958c6be009717a6267da403cb802197 Mon Sep 17 00:00:00 2001
+>  From: Khem Raj <raj.khem@gmail.com>
+>  Date: Fri, 14 Jul 2017 12:59:42 -0700
+> -Subject: [PATCH 1/2] include stdint.h for various std c99 int types
+> +Subject: [PATCH] include stdint.h for various std c99 int types
+>  
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +
+>  ---
+>   src/cjson.h | 2 ++
+>   src/timer.h | 1 +
+>   2 files changed, 3 insertions(+)
+>  
+>  diff --git a/src/cjson.h b/src/cjson.h
+> -index fb8cd3b..69cd272 100644
+> +index fa7cb73..41a41dd 100644
+>  --- a/src/cjson.h
+>  +++ b/src/cjson.h
+> -@@ -23,6 +23,8 @@
+> - #ifndef cJSON__h
+> - #define cJSON__h
+> +@@ -28,6 +28,8 @@
+> + #include <stdint.h>
+> + #endif
+>   
+>  +#include <stdint.h>
+>  +
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb b/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
-similarity index 93%
-rename from meta-oe/recipes-support/poppler/poppler_0.62.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_0.63.0.bb
-index 696621938..143df3f73 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
-@@ -6,8 +6,8 @@ SRC_URI = " \
-     http://poppler.freedesktop.org/${BP}.tar.xz \
-     file://0001-Do-not-overwrite-all-our-build-flags.patch \
- "
--SRC_URI[md5sum] = "42b801f2defaccb6b6cf1bf783ee1552"
--SRC_URI[sha256sum] = "5b9a73dfd4d6f61d165ada1e4f0abd2d420494bf9d0b1c15d0db3f7b83a729c6"
-+SRC_URI[md5sum] = "66a54da4896b1408611699feda5c1821"
-+SRC_URI[sha256sum] = "27cc8addafc791e1a26ce6acc2b490926ea73a4f89196dd8a7742cff7cf8a111"
- 
- DEPENDS = "fontconfig zlib cairo lcms"
- 
--- 
-2.14.3
-
+This patch should probably be removed now since it's now just adding
+stdint.h twice. Upstream has fixed this.
 
