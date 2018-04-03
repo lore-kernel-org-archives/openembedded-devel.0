@@ -1,31 +1,52 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id B609874AA7
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A8E1C74B05
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2018 23:03:25 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9359520BA7;
-	Tue,  3 Apr 2018 23:03:26 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id BZLaHFRNv-NW; Tue,  3 Apr 2018 23:03:26 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 700C720BA5;
-	Tue,  3 Apr 2018 23:03:25 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id F411F1633B1;
-	Tue,  3 Apr 2018 19:03:24 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue,  3 Apr 2018 23:16:34 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id x4so38213008wmh.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Apr 2018 16:16:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=RbmcqmtYpDerB2jHwmdX0f6w9XKIfzzsurNRp3Rb4X8=;
+	b=I6aw47J3c0PrbvVvQX9MNQv4xM9Fn1cDjFCVf8BG2aFPBhEeQX09COQdrO/Eb3MMuo
+	nUussV53fHbtpAFD1PzvHWoaeIfktLsW1zGPPYqvf0qcOrfU55jbreuM2IU5GZasZY3U
+	ofNzy382jQhYrdULg/wNd7SYgdaD/0Mzu1BrFpfwEpgcIphfm2zrSZddRLDaWhU1HF2/
+	brqgMqNpcyrzB0qJay2htTLiaEVddFis7qm9c/dZCSlXehiZBQrYs0l0FGqz5lZkB01p
+	iDcpw664hoxZuAnhCFhrQKW6AWBE7u7N6YDzAXRMXXda5BXCv52egiTPralr9JCLYajC
+	cEqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=RbmcqmtYpDerB2jHwmdX0f6w9XKIfzzsurNRp3Rb4X8=;
+	b=a4zLMf6c2tF592wShMFMtP/uwhvqfpepDrrglB0N76ymIC1PwEnGZ1LFYbIQ3jW5OC
+	tXGk4hPgVbC/8Vvwf3TcSGK7IbUC34cP+6Sl71SobWP0l7Xx2mvj0B7PPg20akXNaI7y
+	aHp8NkYFKRML1CP8U/D7hjMFUbBskR2oQDy1EQpbXRrIkUnQAY1l0rcnA0mnaQfWakHj
+	f4f4pTqtiATYwPpbFLbVPySroKnn/uoWraIjfeGizwyBtsgE00Xn6qEGnQyVoszjAs2R
+	0HxeqIdBVI3GzODGx9vaE3/WptgEtBf9748TTNlg0o5jJKFAzUscApS77rVk4zQn39yr
+	hHLw==
+X-Gm-Message-State: ALQs6tBW/+f8vxjE4UYzW1gLCAr+RGyi6AROB/9KLPziEaR9J2x/Aejt
+	GAQdqL7DeCy93aztS+GKfNwG+g==
+X-Google-Smtp-Source: AIpwx4+x/NARR9ZVWv6Ux+dArrKBcSPLlFLg3Wwj1MmRNSsaF2euX1bNc4raTQVk9lNRMAqzpN+Eww==
+X-Received: by 10.28.17.142 with SMTP id 136mr4917626wmr.38.1522797394882;
+	Tue, 03 Apr 2018 16:16:34 -0700 (PDT)
+Received: from PC192-168-2-116.speedport.ip
+	(p200300F07BC1FD091E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bc1:fd09:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id
+	m129sm2682099wma.27.2018.04.03.16.16.33
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 03 Apr 2018 16:16:34 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Apr 2018 19:03:24 -0400
-Message-Id: <1522796604-38261-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-networking][PATCH] tcpdump: refresh local patches to avoid fuzz warnings
+Date: Wed,  4 Apr 2018 01:15:59 +0200
+Message-Id: <20180403231601.5329-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
+MIME-Version: 1.0
+Subject: [PATCH 0/2] poppler nightmare
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,92 +59,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2018 23:03:26 -0000
+X-List-Received-Date: Tue, 03 Apr 2018 23:16:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+Not convinced that I'll get support at poppler project. Let's see what
+autobuilder says. If it fails, please unroll back to 0.57.0 - I am sure
+that disable glib causes trouble for evince.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- .../recipes-support/tcpdump/tcpdump/add-ptest.patch   | 13 +++++++------
- .../tcpdump/unnecessary-to-check-libpcap.patch        | 19 ++++++++++---------
- 2 files changed, 17 insertions(+), 15 deletions(-)
+Andreas Müller (2):
+  poppler: Rework patch fixing do_configure
+  poppler: update 0.62.0- > 0.63.0
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-index 196cec7..7a02155 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-@@ -1,4 +1,4 @@
--From 7b259580800e259d232229dc89f97058b56e2fe8 Mon Sep 17 00:00:00 2001
-+From 09c310b48f73b62dc6673ce0bdfc638d9ae4bbda Mon Sep 17 00:00:00 2001
- From: "Hongjun.Yang" <hongjun.yang@windriver.com>
- Date: Wed, 22 Oct 2014 10:02:48 +0800
- Subject: [PATCH] Add ptest for tcpdump
-@@ -6,15 +6,16 @@ Subject: [PATCH] Add ptest for tcpdump
- Upstream-Status: Pending
- 
- Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-+
- ---
-  Makefile.in | 10 +++++++++-
-  1 file changed, 9 insertions(+), 1 deletion(-)
- 
--Index: tcpdump-4.9.0/Makefile.in
--===================================================================
----- tcpdump-4.9.0.orig/Makefile.in
--+++ tcpdump-4.9.0/Makefile.in
--@@ -436,9 +436,17 @@ distclean:
-+diff --git a/Makefile.in b/Makefile.in
-+index 0941f0e..3ce40c6 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -437,9 +437,17 @@ distclean:
-  	    tests/failure-outputs.txt
-  	rm -rf autom4te.cache tests/DIFF tests/NEW
-  
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-index d7a3ac2..c70404c 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-@@ -1,4 +1,7 @@
--unnecessary to check libpcap
-+From 66ee5c0d49c3e4a67cd9a691c1313e4a02eafa59 Mon Sep 17 00:00:00 2001
-+From: Roy Li <rongqing.li@windriver.com>
-+Date: Tue, 8 Jul 2014 13:20:47 +0800
-+Subject: [PATCH] unnecessary to check libpcap
- 
- Upstream-Status: Pending
- 
-@@ -11,23 +14,21 @@ In fact, the libpcap has been added into the tcpdump's DEPENDS, not need to
- check if libpcap existed.
- 
- Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+
- ---
-- configure.in |    2 +-
-+ configure.in | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.in b/configure.in
--index 06fade1..9125de7 100644
-+index b2305a5..b3b5dbf 100644
- --- a/configure.in
- +++ b/configure.in
--@@ -567,7 +567,7 @@ AC_SEARCH_LIBS(getrpcbynumber, nsl,
-- dnl AC_CHECK_LIB(z, uncompress)
-- dnl AC_CHECK_HEADERS(zlib.h)
-+@@ -418,7 +418,7 @@ dnl Some platforms may need -lnsl for getrpcbynumber.
-+ AC_SEARCH_LIBS(getrpcbynumber, nsl,
-+     AC_DEFINE(HAVE_GETRPCBYNUMBER, 1, [define if you have getrpcbynumber()]))
-  
- -AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
- +#AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
-  
-  #
-  # Check for these after AC_LBL_LIBPCAP, so we link with the appropriate
---- 
--1.7.9.5
--
+ ...0001-Do-not-overwrite-all-our-build-flags.patch | 36 ++++++++++++----------
+ .../{poppler_0.62.0.bb => poppler_0.63.0.bb}       |  4 +--
+ 2 files changed, 21 insertions(+), 19 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_0.62.0.bb => poppler_0.63.0.bb} (93%)
+
 -- 
-2.7.4
+2.14.3
 
 
