@@ -1,46 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EF38871AB8
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id A879F74B07
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2018 17:59:10 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id o23so17546998wmf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Apr 2018 10:59:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=eK9VVwk0K22uXLddJAhRMVqh7WamDjfuVkFAsk4MHes=;
-	b=rhMl3RznwTqhJce3peI908ts4dTjCfBHP+BN7sodh/+YUcunb338J9Pz+KaawSQ9IC
-	Va+xUw0xXVQbSgdUKdM5lx+iVFSgIx1UBAxdfaHF6mhnzPyp6zpb63d5bNGpA64KJZmr
-	Fqf+drUG4vJ4vkG9NgW2q8fyN35qcH2bB2r1plGUdixo4IzumeZ6HB+91zStcdppCdKa
-	vm5R2zZTu2D4KtogcPPahc3LH12rXtYOeG3SMC54Wpvcqw0fPVDQYUqYXiZB7AT2pldh
-	2Jk7ykMzzDO3NFdGil/1Vz6wD3/e/yGyZbI7qRcQR1yZ6vLFUCOMUBsA0P4vZlVkGPvM
-	OCEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=eK9VVwk0K22uXLddJAhRMVqh7WamDjfuVkFAsk4MHes=;
-	b=SsyaW+AsLQ903OK2MRMfTUU8WH0Ny0uesZiFScSmKrZWIbN8CMU94mWUYp9qp4to4G
-	akheF5E3TBq1GiF8cpNMX6uE7Cb6ud+D16sld8Jpy45cAFr2SnFMSPfT3wdrd2+Zoe8b
-	0pVEIh2b1V5kE7F97betzsF8WsY9NdYUGg3fLyFgUi+HICHqWhka+gbvnoxPwoBgXFN7
-	prkK2cIKGplcFh0X+slMXFUXots62GUnAG1z2NDlg5CfZYXPcIF0xPcJSGQhX/eK112O
-	Cxw1okvJuSsAoTaBadzVDecwDpwX8Lq3QIbBY+3wyHt7EcsGy7f8kQHb5Y7wrXsYKoDH
-	VE8g==
-X-Gm-Message-State: ALQs6tDjpcVLhiPNZXGSAxYTlKoNU+wphI+AP6SVNFULbUUYL4e2kn5F
-	o8d4J2RFSRI41a4g+04fwMrOKQ==
-X-Google-Smtp-Source: AIpwx48kU82hQORjWsrWxQUWZMP7JwpxSMDExvq3uzJYRkR2v3HMTFWLdOl5vGSK4mGvcIj+kJIOSg==
-X-Received: by 10.28.17.142 with SMTP id 136mr4409065wmr.38.1522778351132;
-	Tue, 03 Apr 2018 10:59:11 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	e10sm5026891wrh.38.2018.04.03.10.59.09
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 03 Apr 2018 10:59:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue,  3 Apr 2018 23:00:41 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 43C9220BA7;
+	Tue,  3 Apr 2018 23:00:42 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id rQLkzO_2y8hn; Tue,  3 Apr 2018 23:00:42 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1A1B320BA5;
+	Tue,  3 Apr 2018 23:00:41 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 8086F1633B1;
+	Tue,  3 Apr 2018 19:00:40 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Apr 2018 17:57:09 +0000
-Message-Id: <20180403175709.19166-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
-Subject: [meta-oe][PATCH] rarpd, sblim-sfcb, openct: inherit systemd unconditionally
+Date: Tue,  3 Apr 2018 19:00:39 -0400
+Message-Id: <1522796439-37319-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] iperf3: refresh local patches to avoid fuzz warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,118 +38,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2018 17:59:11 -0000
+X-List-Received-Date: Tue, 03 Apr 2018 23:00:42 -0000
 
-* the inherit was controlled by VIRTUAL-RUNTIME_init_manager and the installation
-  of .service files by DISTRO_FEATURES and systemd was in DISTRO_FEATURES but not
-  in VIRTUAL-RUNTIME_init_manager it was causing QA issues about unpackaged
-  .service files
+From: Denys Dmytriyenko <denys@ti.com>
 
-ERROR: rarpd-ss981107-r0 do_package: QA Issue: rarpd: Files/directories
-were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/rarpd.service
-
-ERROR: sblim-sfcb-1.4.9-r0 do_package: QA Issue: sblim-sfcb:
-Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/sblim-sfcb.service
-
-ERROR: sblim-sfcb-1.4.9-r0 do_package: QA Issue: sblim-sfcb:
-Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/sblim-sfcb.service
-
-* systemd.bbclass will take care of removing /lib/systemd when systemd
-  isn't in DISTRO_FEATURES, so we can remove both conditions
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb        | 8 +++-----
- meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 8 +++-----
- meta-oe/recipes-support/openct/openct_0.6.20.bb         | 8 +++-----
- 3 files changed, 9 insertions(+), 15 deletions(-)
+ ...nclude-stdint.h-for-various-std-c99-int-types.patch | 16 +++++++---------
+ .../iperf3/0002-Remove-pg-from-profile_CFLAGS.patch    | 12 +++++-------
+ .../iperf3/iperf3/automake-foreign.patch               | 18 ++++++++++++++----
+ 3 files changed, 26 insertions(+), 20 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-index 4025b8087e..7c9f2df9db 100644
---- a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-+++ b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-@@ -38,13 +38,11 @@ do_install() {
-     install -m 644 rarpd.8 ${D}${mandir}/man8/rarpd.8
-     install -m 644 ${WORKDIR}/ethers.sample ${D}${sysconfdir}/ethers
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+index ae36208..3db188f 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+@@ -1,21 +1,22 @@
+-From be653711fb92d2430b3ecc546b4e3ad927d19ec5 Mon Sep 17 00:00:00 2001
++From b26687cfe958c6be009717a6267da403cb802197 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 14 Jul 2017 12:59:42 -0700
+-Subject: [PATCH 1/2] include stdint.h for various std c99 int types
++Subject: [PATCH] include stdint.h for various std c99 int types
  
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
--    fi
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
- }
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  src/cjson.h | 2 ++
+  src/timer.h | 1 +
+  2 files changed, 3 insertions(+)
  
--inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
-+inherit systemd
+ diff --git a/src/cjson.h b/src/cjson.h
+-index fb8cd3b..69cd272 100644
++index fa7cb73..41a41dd 100644
+ --- a/src/cjson.h
+ +++ b/src/cjson.h
+-@@ -23,6 +23,8 @@
+- #ifndef cJSON__h
+- #define cJSON__h
++@@ -28,6 +28,8 @@
++ #include <stdint.h>
++ #endif
+  
+ +#include <stdint.h>
+ +
+@@ -34,6 +35,3 @@ index 0f9c5eb..0b195be 100644
+  
+  /* TimerClientData is an opaque value that tags along with a timer.  The
+  ** client can use it for whatever, and it gets passed to the callback when
+--- 
+-2.13.3
+-
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
+index 06eb41a..056e7cc 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
+@@ -1,20 +1,21 @@
+-From 6db0e28f906bc3784019dfb5bb011237a8034fda Mon Sep 17 00:00:00 2001
++From 4ce0f33b25b02b9079d7d9470b6d2d0749255f52 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 14 Jul 2017 13:00:16 -0700
+-Subject: [PATCH 2/2] Remove -pg from profile_CFLAGS
++Subject: [PATCH] Remove -pg from profile_CFLAGS
  
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "rarpd.service"
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index 152ae22902..10ffaaa31b 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -31,7 +31,7 @@ SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
- SRC_URI[sha256sum] = "634a67b2f7ac3b386a79160eb44413d618e33e4e7fc74ae68b0240484af149dd"
+ musl fails to link with missing gcrt1.o
  
- inherit autotools
--inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
-+inherit systemd
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  src/Makefile.am | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
  
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "sblim-sfcb.service"
-@@ -56,10 +56,8 @@ do_install() {
+ diff --git a/src/Makefile.am b/src/Makefile.am
+-index 23b0c72..6268145 100644
++index 11d763d..c394bef 100644
+ --- a/src/Makefile.am
+ +++ b/src/Makefile.am
+-@@ -49,9 +49,9 @@ iperf3_LDFLAGS          = -g
++@@ -52,9 +52,9 @@ iperf3_LDFLAGS          = -g
+  iperf3_profile_SOURCES  = main.c \
+  						  $(libiperf_la_SOURCES)
+  
+@@ -26,6 +27,3 @@ index 23b0c72..6268145 100644
+  
+  # Specify the sources and various flags for the test cases
+  t_timer_SOURCES         = t_timer.c
+--- 
+-2.13.3
+-
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch
+index 06c394e..03f68c9 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch
+@@ -1,12 +1,22 @@
+-Pass the 'foreign' option to automake to enable iperf3 to build.
++From 7135d946ab3da77109dae731ac0e70bff02d3719 Mon Sep 17 00:00:00 2001
++From: Chunrong Guo <b40290@freescale.com>
++Date: Mon, 5 Jan 2015 11:39:45 -0600
++Subject: [PATCH] Pass the 'foreign' option to automake to enable iperf3 to
++ build.
  
-     oe_runmake DESTDIR=${D} install
+ Upstream-Status: Inappropriate [configuration]
  
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
--    fi
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
+ Signed-off-by: Chunrong Guo <b40290@freescale.com>
  
-     install -d ${D}${sysconfdir}/init.d
-     mv ${D}${sysconfdir}/init.d/sfcb ${D}${sysconfdir}/init.d/sblim-sfcb
-diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index c7d7203eda..913290cd97 100644
---- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
-+++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d
- LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
--inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
-+inherit systemd
- SYSTEMD_SERVICE_${PN} += "openct.service "
- SYSTEMD_AUTO_ENABLE = "enable"
- 
-@@ -77,10 +77,8 @@ do_install () {
-     install -Dpm 755 ${WORKDIR}/openct.init ${D}/etc/init.d/openct
-     install -Dpm 644 ${WORKDIR}/openct.sysconfig ${D}/etc/sysconfig/openct
- 
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}/${systemd_unitdir}/system
--        install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
--    fi
-+    install -d ${D}/${systemd_unitdir}/system
-+    install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
- 
-     so=$(find ${D} -name \*.so | sed "s|^${D}||")
-     sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
+---- a/configure.ac	2015-10-19 02:49:30.471867352 -0500
+-+++ b/configure.ac	2015-10-19 02:46:36.207873572 -0500
+-@@ -33,7 +33,7 @@
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index b988322..a554fcf 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -34,7 +34,7 @@ AC_CONFIG_AUX_DIR(config)
+  
+  
+  # Initialize the automake system
 -- 
-2.15.1
+2.7.4
 
 
