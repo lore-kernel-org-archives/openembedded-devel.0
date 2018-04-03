@@ -1,25 +1,25 @@
 Return-Path: <anuj.mittal@intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 19D5D74848
+	by mail.openembedded.org (Postfix) with ESMTP id C0CDA7487F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2018 09:50:39 +0000 (UTC)
+	Tue,  3 Apr 2018 09:50:40 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga001.jf.intel.com ([10.7.209.18])
 	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	03 Apr 2018 02:50:40 -0700
+	03 Apr 2018 02:50:42 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,400,1517904000"; d="scan'208";a="44486613"
+X-IronPort-AV: E=Sophos;i="5.48,400,1517904000"; d="scan'208";a="44486615"
 Received: from anmitta2-mobl1.png.intel.com ([10.221.20.235])
-	by orsmga001.jf.intel.com with ESMTP; 03 Apr 2018 02:50:39 -0700
+	by orsmga001.jf.intel.com with ESMTP; 03 Apr 2018 02:50:40 -0700
 From: Anuj Mittal <anuj.mittal@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Apr 2018 17:50:14 +0800
-Message-Id: <1522749016-17637-4-git-send-email-anuj.mittal@intel.com>
+Date: Tue,  3 Apr 2018 17:50:15 +0800
+Message-Id: <1522749016-17637-5-git-send-email-anuj.mittal@intel.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1522749016-17637-1-git-send-email-anuj.mittal@intel.com>
 References: <1522749016-17637-1-git-send-email-anuj.mittal@intel.com>
-Subject: [meta-oe][PATCH 3/5] php5: upgrade to 5.6.35
+Subject: [meta-oe][PATCH 4/5] php: add opcache extension to PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,240 +32,981 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2018 09:50:39 -0000
+X-List-Received-Date: Tue, 03 Apr 2018 09:50:40 -0000
 
-For changes, see:
-http://php.net/ChangeLog-5.php#5.6.35
+OPcache improves PHP performance by storing precompiled script bytecode
+in shared memory, thereby removing the need for PHP to load and parse
+scripts on each request [1].
 
-Split patches between php5 and php7 to ensure there are no
-fuzz warnings for both the versions.
+Add an option to enable opcache in php. AC_CHECK_FUNC isn't suitable for a
+cross-compile environment, so pass the configure options instead to force
+dlopen detection that is necessary to have extension support enabled.
+
+On a standard phpbench test, I see a performance improvement of > 40%.
+
+[1] http://php.net/manual/en/book.opcache.php
 
 Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 ---
- meta-oe/recipes-devtools/php/php.inc               |  2 -
- .../php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch    | 63 ++++++++++++++++++++++
- .../php/php/php5-pear-makefile.patch               | 26 +++++++++
- .../php/php/php5-phar-makefile.patch               | 46 ++++++++++++++++
- .../php/{php_5.6.33.bb => php_5.6.35.bb}           | 12 +++--
- meta-oe/recipes-devtools/php/php_7.2.4.bb          |  4 ++
- 6 files changed, 148 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/php/php/php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/php5-phar-makefile.patch
- rename meta-oe/recipes-devtools/php/{php_5.6.33.bb => php_5.6.35.bb} (52%)
+ meta-oe/recipes-devtools/php/php.inc               |  14 +-
+ ...-acinclude.m4-don-t-unset-cache-variables.patch |  39 +++
+ .../0001-opcache-config.m4-enable-opcache.patch    | 385 ++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php/configure.patch   |  21 --
+ ...hp5-0001-opcache-config.m4-enable-opcache.patch | 387 +++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_5.6.35.bb         |   1 +
+ meta-oe/recipes-devtools/php/php_7.2.4.bb          |   1 +
+ 7 files changed, 822 insertions(+), 26 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-unset-cache-variables.patch
+ create mode 100644 meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php/configure.patch
+ create mode 100644 meta-oe/recipes-devtools/php/php/php5-0001-opcache-config.m4-enable-opcache.patch
 
 diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index d2af4f6..fbc750d 100644
+index fbc750d..8ba218c 100644
 --- a/meta-oe/recipes-devtools/php/php.inc
 +++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -18,8 +18,6 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
- SRC_URI_append_class-target = " \
-             file://iconv.patch \
-             file://imap-fix-autofoo.patch \
--            file://pear-makefile.patch \
--            file://phar-makefile.patch \
+@@ -21,7 +21,7 @@ SRC_URI_append_class-target = " \
              file://php_exec_native.patch \
              file://php-fpm.conf \
              file://php-fpm-apache.conf \
-diff --git a/meta-oe/recipes-devtools/php/php/php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php/php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+-            file://configure.patch \
++            file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
+             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
+             file://php-fpm.service \
+           "
+@@ -40,7 +40,6 @@ PHP_LIBDIR = "${libdir}/php${PHP_MAJOR_VERSION}"
+ COMMON_EXTRA_OECONF = "--enable-sockets \
+                        --enable-pcntl \
+                        --enable-shared \
+-                       --disable-opcache \
+                        --disable-rpath \
+                        --with-pic \
+                        --libdir=${PHP_LIBDIR} \
+@@ -59,6 +58,9 @@ EXTRA_OECONF = "--enable-mbstring \
+                 ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
+                 ${COMMON_EXTRA_OECONF} \
+ "
++
++CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=yes ac_cv_lib_dl_dlopen=yes"
++
+ EXTRA_OECONF_class-native = " \
+                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
+                 --without-iconv \
+@@ -89,7 +91,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+                        ,--without-imap --without-imap-ssl \
+                        ,uw-imap"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+-
++PACKAGECONFIG[opcache] = ",--disable-opcache"
+ 
+ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+@@ -196,14 +198,14 @@ php_sysroot_preprocess () {
+ 
+ MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp', '', d)}"
+ 
+-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
++PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}-opcache ${PN}"
+ 
+ RDEPENDS_${PN} += "libgcc"
+ RDEPENDS_${PN}-pear = "${PN}"
+ RDEPENDS_${PN}-phar = "${PN}-cli"
+ RDEPENDS_${PN}-cli = "${PN}"
+ RDEPENDS_${PN}-modphp = "${PN} apache2"
+-RDEPENDS_${PN}-dev = "${PN}"
++RDEPENDS_${PN}-opcache = "${PN}"
+ 
+ INITSCRIPT_PACKAGES = "${PN}-fpm"
+ inherit update-rc.d
+@@ -232,6 +234,8 @@ FILES_${PN}-dev = "${includedir}/php ${PHP_LIBDIR}/build ${bindir}/phpize \
+                 ${bindir}/php-config ${PHP_LIBDIR}/php/.depdb \
+                 ${PHP_LIBDIR}/php/.depdblock ${PHP_LIBDIR}/php/.filemap \
+                 ${PHP_LIBDIR}/php/.lock ${PHP_LIBDIR}/php/test"
++FILES_${PN}-staticdev += "${PHP_LIBDIR}/extensions/*/*.a"
++FILES_${PN}-opcache = "${PHP_LIBDIR}/extensions/*/opcache${SOLIBSDEV}"
+ FILES_${PN} = "${PHP_LIBDIR}/php"
+ FILES_${PN} += "${bindir}"
+ 
+diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-unset-cache-variables.patch b/meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-unset-cache-variables.patch
 new file mode 100644
-index 0000000..1d21f8c
+index 0000000..a250cac
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-@@ -0,0 +1,63 @@
-+From 5f49987e88dfcbdb84be6e0c9025432fbd998709 Mon Sep 17 00:00:00 2001
-+From: Roy Li <rongqing.li@windriver.com>
-+Date: Thu, 20 Aug 2015 16:29:35 +0800
-+Subject: [PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
++++ b/meta-oe/recipes-devtools/php/php/0001-acinclude.m4-don-t-unset-cache-variables.patch
+@@ -0,0 +1,39 @@
++From dfebe81f946a83fe2499fc84d4f3dbdc5612276c Mon Sep 17 00:00:00 2001
++From: Anuj Mittal <anuj.mittal@intel.com>
++Date: Tue, 3 Apr 2018 11:35:03 +0800
++Subject: [PATCH] acinclude.m4: don't unset cache variables
 +
-+Upstream-Status: Pending
++Unsetting prevents cache variable from being passed to configure.
 +
-+AC_TRY_RUN is not suitable for cross-compile
++Upstream-Status: Inappropriate [OE-specific]
 +
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+
-+%% original patch: change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-+
-+%% original patch: php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch
++Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 +---
-+ ext/fileinfo/config.m4 | 31 ++++++-------------------------
-+ 1 file changed, 6 insertions(+), 25 deletions(-)
++ acinclude.m4 | 4 ----
++ 1 file changed, 4 deletions(-)
 +
-+diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
-+index 7e98d62..8a8ea0e 100644
-+--- a/ext/fileinfo/config.m4
-++++ b/ext/fileinfo/config.m4
-+@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
-+     libmagic/readcdf.c libmagic/softmagic.c"
++diff --git a/acinclude.m4 b/acinclude.m4
++index f6a55ec..d3346df 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -1890,8 +1890,6 @@ define([phpshift],[ifelse(index([$@],[,]),-1,,[substr([$@],incr(index([$@],[,]))
++ dnl
++ AC_DEFUN([PHP_CHECK_FUNC_LIB],[
++   ifelse($2,,:,[
++-  unset ac_cv_lib_$2[]_$1
++-  unset ac_cv_lib_$2[]___$1
++   unset found
++   AC_CHECK_LIB($2, $1, [found=yes], [
++     AC_CHECK_LIB($2, __$1, [found=yes], [found=no])
++@@ -1923,8 +1921,6 @@ dnl in the default libraries and as a fall back in the specified library.
++ dnl Defines HAVE_func and HAVE_library if found and adds the library to LIBS.
++ dnl
++ AC_DEFUN([PHP_CHECK_FUNC],[
++-  unset ac_cv_func_$1
++-  unset ac_cv_func___$1
++   unset found
++   
++   AC_CHECK_FUNC($1, [found=yes],[ AC_CHECK_FUNC(__$1,[found=yes],[found=no]) ])
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+new file mode 100644
+index 0000000..0d24d34
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/0001-opcache-config.m4-enable-opcache.patch
+@@ -0,0 +1,385 @@
++From b2fb725dc404d471371731b663234e87cb0fca84 Mon Sep 17 00:00:00 2001
++From: Anuj Mittal <anuj.mittal@intel.com>
++Date: Mon, 2 Apr 2018 17:54:52 +0800
++Subject: [PATCH] opcache/config.m4: enable opcache
++
++We can't use AC_TRY_RUN to run programs in a cross compile environment. Set
++the variables directly instead since we know that we'd be running on latest
++enough linux kernel.
++
++Upstream-Status: Inappropriate [Configuration]
++
++Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
++---
++ ext/opcache/config.m4 | 349 ++------------------------------------------------
++ 1 file changed, 8 insertions(+), 341 deletions(-)
++
++diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
++index 7b500f0..10bb99a 100644
++--- a/ext/opcache/config.m4
+++++ b/ext/opcache/config.m4
++@@ -28,353 +28,20 @@ if test "$PHP_OPCACHE" != "no"; then
 + 
-+   AC_MSG_CHECKING([for strcasestr])
++   AC_CHECK_HEADERS([unistd.h sys/uio.h])
++ 
++-  AC_MSG_CHECKING(for sysvipc shared memory support)
 +-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/ipc.h>
++-#include <sys/shm.h>
++-#include <unistd.h>
 +-#include <string.h>
-+-#include <strings.h>
-+-#include <stdlib.h>
+++  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
++ 
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int ipc_id;
++-  char *shm;
++-  struct shmid_ds shmbuf;
+++  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
++ 
++-  ipc_id = shmget(IPC_PRIVATE, 4096, (IPC_CREAT | SHM_R | SHM_W));
++-  if (ipc_id == -1) {
++-    return 1;
++-  }
+++  AC_DEFINE(HAVE_SHM_MMAP_ZERO, 1, [Define if you have mmap("/dev/zero") SHM support])
++ 
++-  shm = shmat(ipc_id, NULL, 0);
++-  if (shm == (void *)-1) {
++-    shmctl(ipc_id, IPC_RMID, NULL);
++-    return 2;
++-  }
 +-
-+-int main(void)
-+-{
-+-        char *s0, *s1, *ret;
++-  if (shmctl(ipc_id, IPC_STAT, &shmbuf) != 0) {
++-    shmdt(shm);
++-    shmctl(ipc_id, IPC_RMID, NULL);
++-    return 3;
++-  }
 +-
-+-        s0 = (char *) malloc(42);
-+-        s1 = (char *) malloc(8);
++-  shmbuf.shm_perm.uid = getuid();
++-  shmbuf.shm_perm.gid = getgid();
++-  shmbuf.shm_perm.mode = 0600;
 +-
-+-        memset(s0, 'X', 42);
-+-        s0[24] = 'Y';
-+-        s0[26] = 'Z';
-+-        s0[41] = '\0';
-+-        memset(s1, 'x', 8);
-+-        s1[0] = 'y';
-+-        s1[2] = 'Z';
-+-        s1[7] = '\0';
++-  if (shmctl(ipc_id, IPC_SET, &shmbuf) != 0) {
++-    shmdt(shm);
++-    shmctl(ipc_id, IPC_RMID, NULL);
++-    return 4;
++-  }
 +-
-+-        ret = strcasestr(s0, s1);
++-  shmctl(ipc_id, IPC_RMID, NULL);
 +-
-+-        return !(NULL != ret);
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
 +-}
-++  AC_TRY_COMPILE([
-++     #include <string.h>
-++     #include <strings.h>
-++     #include <stdlib.h>
-++  ],[
-++     strcasestr(NULL, NULL);
-+   ],[
-+     dnl using the platform implementation
-+     AC_MSG_RESULT(yes)
++-],dnl
++-    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-  AC_MSG_CHECKING(for mmap() using MAP_ANON shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <unistd.h>
++-#include <string.h>
++-
++-#ifndef MAP_ANON
++-# ifdef MAP_ANONYMOUS
++-#  define MAP_ANON MAP_ANONYMOUS
++-# endif
++-#endif
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  char *shm;
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
++-  if (shm == MAP_FAILED) {
++-    return 1;
++-  }
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-  AC_MSG_CHECKING(for mmap() using /dev/zero shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <sys/stat.h>
++-#include <fcntl.h>
++-#include <unistd.h>
++-#include <string.h>
++-
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int fd;
++-  char *shm;
++-
++-  fd = open("/dev/zero", O_RDWR, S_IRUSR | S_IWUSR);
++-  if (fd == -1) {
++-    return 1;
++-  }
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++-  if (shm == MAP_FAILED) {
++-    return 2;
++-  }
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_ZERO, 1, [Define if you have mmap("/dev/zero") SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-  AC_MSG_CHECKING(for mmap() using shm_open() shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <sys/stat.h>
++-#include <fcntl.h>
++-#include <unistd.h>
++-#include <string.h>
++-#include <stdlib.h>
++-#include <stdio.h>
++-
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int fd;
++-  char *shm;
++-  char tmpname[4096];
++-
++-  sprintf(tmpname,"test.shm.%dXXXXXX", getpid());
++-  if (mktemp(tmpname) == NULL) {
++-    return 1;
++-  }
++-  fd = shm_open(tmpname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
++-  if (fd == -1) {
++-    return 2;
++-  }
++-  if (ftruncate(fd, 4096) < 0) {
++-    close(fd);
++-    shm_unlink(tmpname);
++-    return 3;
++-  }
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++-  if (shm == MAP_FAILED) {
++-    return 4;
++-  }
++-  shm_unlink(tmpname);
++-  close(fd);
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
+++  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
++ 
++   AC_MSG_CHECKING(for mmap() using regular file shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <sys/stat.h>
++-#include <fcntl.h>
++-#include <unistd.h>
++-#include <string.h>
++-#include <stdlib.h>
++-#include <stdio.h>
++-
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int fd;
++-  char *shm;
++-  char tmpname[4096];
++-
++-  sprintf(tmpname,"test.shm.%dXXXXXX", getpid());
++-  if (mktemp(tmpname) == NULL) {
++-    return 1;
++-  }
++-  fd = open(tmpname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
++-  if (fd == -1) {
++-    return 2;
++-  }
++-  if (ftruncate(fd, 4096) < 0) {
++-    close(fd);
++-    unlink(tmpname);
++-    return 3;
++-  }
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++-  if (shm == MAP_FAILED) {
++-    return 4;
++-  }
++-  unlink(tmpname);
++-  close(fd);
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-flock_type=unknown
++-AC_MSG_CHECKING("whether flock struct is linux ordered")
++-AC_TRY_RUN([
++-  #include <fcntl.h>
++-  struct flock lock = { 1, 2, 3, 4, 5 };
++-  int main() { 
++-    if(lock.l_type == 1 && lock.l_whence == 2 && lock.l_start == 3 && lock.l_len == 4) {
++-		return 0;
++-    }
++-    return 1;
++-  } 
++-], [
++-	flock_type=linux
++-    AC_DEFINE([HAVE_FLOCK_LINUX], [], [Struct flock is Linux-type])
++-    AC_MSG_RESULT("yes")
++-], AC_MSG_RESULT("no") )
+++  
+++  AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM support])
++ 
++-AC_MSG_CHECKING("whether flock struct is BSD ordered")
++-AC_TRY_RUN([
++-  #include <fcntl.h>
++-  struct flock lock = { 1, 2, 3, 4, 5 };
++-  int main() { 
++-    if(lock.l_start == 1 && lock.l_len == 2 && lock.l_type == 4 && lock.l_whence == 5) {
++-		return 0;
++-    }
++-    return 1;
++-  } 
++-], [
++-	flock_type=bsd
++-    AC_DEFINE([HAVE_FLOCK_BSD], [], [Struct flock is BSD-type]) 
++-    AC_MSG_RESULT("yes")
++-], AC_MSG_RESULT("no") )
+++  flock_type=linux
+++  AC_DEFINE([HAVE_FLOCK_LINUX], [], [Struct flock is Linux-type])
++ 
++ if test "$flock_type" = "unknown"; then
++ 	AC_MSG_ERROR([Don't know how to define struct flock on this system[,] set --enable-opcache=no])
 +-- 
 +2.7.4
 +
-diff --git a/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch b/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch
+diff --git a/meta-oe/recipes-devtools/php/php/configure.patch b/meta-oe/recipes-devtools/php/php/configure.patch
+deleted file mode 100644
+index d9d913f..0000000
+--- a/meta-oe/recipes-devtools/php/php/configure.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+-From 617d01ef2ac2f436cd8e06555b608db56079b851 Mon Sep 17 00:00:00 2001
+-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+-Date: Tue, 17 Jul 2012 11:31:54 +0100
+-
+----
+- configure | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/configure b/configure
+-index 1f1ef32..392fb76 100755
+---- a/configure
+-+++ b/configure
+-@@ -11642,8 +11642,6 @@ $as_echo "#define HAVE_LIBNSL 1" >>confdefs.h
+- 
+- 
+- 
+--  unset ac_cv_func_dlopen
+--  unset ac_cv_func___dlopen
+-   unset found
+- 
+-   ac_fn_c_check_func "$LINENO" "dlopen" "ac_cv_func_dlopen"
+diff --git a/meta-oe/recipes-devtools/php/php/php5-0001-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/php5-0001-opcache-config.m4-enable-opcache.patch
 new file mode 100644
-index 0000000..cff6426
+index 0000000..7be67ea
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch
-@@ -0,0 +1,26 @@
-+From 79725e82d5981fc94eb657f0f46a499dbfc1cc40 Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Wed, 2 Nov 2011 16:54:57 +0100
-+Subject: [PATCH] Upstream-status: Unknown
++++ b/meta-oe/recipes-devtools/php/php/php5-0001-opcache-config.m4-enable-opcache.patch
+@@ -0,0 +1,387 @@
++From fafcfac0933c17e1bf551600080eb0541186caf5 Mon Sep 17 00:00:00 2001
++From: Anuj Mittal <anuj.mittal@intel.com>
++Date: Mon, 2 Apr 2018 17:54:52 +0800
++Subject: [PATCH] opcache/config.m4: enable opcache
 +
-+%% original patch: php5-pear-makefile.patch
++We can't use AC_TRY_RUN to run programs in a cross compile environment. Set
++the variables directly instead since we know that we'd be running on latest
++enough linux kernel.
++
++Upstream-Status: Inappropriate [Configuration]
++
++Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
++
++%% original patch: php5-0001-opcache-config.m4-enable-opcache.patch
 +---
-+ pear/Makefile.frag | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ ext/opcache/config.m4 | 349 ++------------------------------------------------
++ 1 file changed, 8 insertions(+), 341 deletions(-)
 +
-+diff --git a/pear/Makefile.frag b/pear/Makefile.frag
-+index 00bacae..739eeca 100644
-+--- a/pear/Makefile.frag
-++++ b/pear/Makefile.frag
-+@@ -11,7 +11,7 @@ PEAR_PREFIX = -dp a${program_prefix}
-+ PEAR_SUFFIX = -ds a$(program_suffix)
++diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
++index 5a8b86c..6e87fa5 100644
++--- a/ext/opcache/config.m4
+++++ b/ext/opcache/config.m4
++@@ -11,353 +11,20 @@ if test "$PHP_OPCACHE" != "no"; then
++     AC_DEFINE(HAVE_MPROTECT, 1, [Define if you have mprotect() function])
++   ])
 + 
-+ install-pear-installer: $(SAPI_CLI_PATH)
-+-	@$(top_builddir)/sapi/cli/php $(PEAR_INSTALL_FLAGS) pear/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)" ${PEAR_PREFIX} ${PEAR_SUFFIX}
-++	@$(PHP_NATIVE_DIR)/php $(PEAR_INSTALL_FLAGS) $(builddir)/install-pear-nozlib.phar -d "$(peardir)" -b "$(bindir)" ${PEAR_PREFIX} ${PEAR_SUFFIX}
++-  AC_MSG_CHECKING(for sysvipc shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/ipc.h>
++-#include <sys/shm.h>
++-#include <unistd.h>
++-#include <string.h>
+++  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
 + 
-+ install-pear:
-+ 	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int ipc_id;
++-  char *shm;
++-  struct shmid_ds shmbuf;
+++  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
++ 
++-  ipc_id = shmget(IPC_PRIVATE, 4096, (IPC_CREAT | SHM_R | SHM_W));
++-  if (ipc_id == -1) {
++-    return 1;
++-  }
+++  AC_DEFINE(HAVE_SHM_MMAP_ZERO, 1, [Define if you have mmap("/dev/zero") SHM support])
++ 
++-  shm = shmat(ipc_id, NULL, 0);
++-  if (shm == (void *)-1) {
++-    shmctl(ipc_id, IPC_RMID, NULL);
++-    return 2;
++-  }
++-
++-  if (shmctl(ipc_id, IPC_STAT, &shmbuf) != 0) {
++-    shmdt(shm);
++-    shmctl(ipc_id, IPC_RMID, NULL);
++-    return 3;
++-  }
++-
++-  shmbuf.shm_perm.uid = getuid();
++-  shmbuf.shm_perm.gid = getgid();
++-  shmbuf.shm_perm.mode = 0600;
++-
++-  if (shmctl(ipc_id, IPC_SET, &shmbuf) != 0) {
++-    shmdt(shm);
++-    shmctl(ipc_id, IPC_RMID, NULL);
++-    return 4;
++-  }
++-
++-  shmctl(ipc_id, IPC_RMID, NULL);
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-  AC_MSG_CHECKING(for mmap() using MAP_ANON shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <unistd.h>
++-#include <string.h>
++-
++-#ifndef MAP_ANON
++-# ifdef MAP_ANONYMOUS
++-#  define MAP_ANON MAP_ANONYMOUS
++-# endif
++-#endif
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  char *shm;
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
++-  if (shm == MAP_FAILED) {
++-    return 1;
++-  }
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-  AC_MSG_CHECKING(for mmap() using /dev/zero shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <sys/stat.h>
++-#include <fcntl.h>
++-#include <unistd.h>
++-#include <string.h>
++-
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int fd;
++-  char *shm;
++-
++-  fd = open("/dev/zero", O_RDWR, S_IRUSR | S_IWUSR);
++-  if (fd == -1) {
++-    return 1;
++-  }
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++-  if (shm == MAP_FAILED) {
++-    return 2;
++-  }
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_ZERO, 1, [Define if you have mmap("/dev/zero") SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-  AC_MSG_CHECKING(for mmap() using shm_open() shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <sys/stat.h>
++-#include <fcntl.h>
++-#include <unistd.h>
++-#include <string.h>
++-#include <stdlib.h>
++-#include <stdio.h>
++-
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int fd;
++-  char *shm;
++-  char tmpname[4096];
++-
++-  sprintf(tmpname,"test.shm.%dXXXXXX", getpid());
++-  if (mktemp(tmpname) == NULL) {
++-    return 1;
++-  }
++-  fd = shm_open(tmpname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
++-  if (fd == -1) {
++-    return 2;
++-  }
++-  if (ftruncate(fd, 4096) < 0) {
++-    close(fd);
++-    shm_unlink(tmpname);
++-    return 3;
++-  }
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++-  if (shm == MAP_FAILED) {
++-    return 4;
++-  }
++-  shm_unlink(tmpname);
++-  close(fd);
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
+++  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
++ 
++   AC_MSG_CHECKING(for mmap() using regular file shared memory support)
++-  AC_TRY_RUN([
++-#include <sys/types.h>
++-#include <sys/wait.h>
++-#include <sys/mman.h>
++-#include <sys/stat.h>
++-#include <fcntl.h>
++-#include <unistd.h>
++-#include <string.h>
++-#include <stdlib.h>
++-#include <stdio.h>
++-
++-#ifndef MAP_FAILED
++-# define MAP_FAILED ((void*)-1)
++-#endif
++-
++-int main() {
++-  pid_t pid;
++-  int status;
++-  int fd;
++-  char *shm;
++-  char tmpname[4096];
++-
++-  sprintf(tmpname,"test.shm.%dXXXXXX", getpid());
++-  if (mktemp(tmpname) == NULL) {
++-    return 1;
++-  }
++-  fd = open(tmpname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
++-  if (fd == -1) {
++-    return 2;
++-  }
++-  if (ftruncate(fd, 4096) < 0) {
++-    close(fd);
++-    unlink(tmpname);
++-    return 3;
++-  }
++-
++-  shm = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++-  if (shm == MAP_FAILED) {
++-    return 4;
++-  }
++-  unlink(tmpname);
++-  close(fd);
++-
++-  strcpy(shm, "hello");
++-
++-  pid = fork();
++-  if (pid < 0) {
++-    return 5;
++-  } else if (pid == 0) {
++-    strcpy(shm, "bye");
++-    return 6;
++-  }
++-  if (wait(&status) != pid) {
++-    return 7;
++-  }
++-  if (!WIFEXITED(status) || WEXITSTATUS(status) != 6) {
++-    return 8;
++-  }
++-  if (strcmp(shm, "bye") != 0) {
++-    return 9;
++-  }
++-  return 0;
++-}
++-],dnl
++-    AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM support])
++-    msg=yes,msg=no,msg=no)
++-  AC_MSG_RESULT([$msg])
++-
++-flock_type=unknown
++-AC_MSG_CHECKING("whether flock struct is linux ordered")
++-AC_TRY_RUN([
++-  #include <fcntl.h>
++-  struct flock lock = { 1, 2, 3, 4, 5 };
++-  int main() { 
++-    if(lock.l_type == 1 && lock.l_whence == 2 && lock.l_start == 3 && lock.l_len == 4) {
++-		return 0;
++-    }
++-    return 1;
++-  } 
++-], [
++-	flock_type=linux
++-    AC_DEFINE([HAVE_FLOCK_LINUX], [], [Struct flock is Linux-type])
++-    AC_MSG_RESULT("yes")
++-], AC_MSG_RESULT("no") )
+++  
+++  AC_DEFINE(HAVE_SHM_MMAP_FILE, 1, [Define if you have mmap() SHM support])
++ 
++-AC_MSG_CHECKING("whether flock struct is BSD ordered")
++-AC_TRY_RUN([
++-  #include <fcntl.h>
++-  struct flock lock = { 1, 2, 3, 4, 5 };
++-  int main() { 
++-    if(lock.l_start == 1 && lock.l_len == 2 && lock.l_type == 4 && lock.l_whence == 5) {
++-		return 0;
++-    }
++-    return 1;
++-  } 
++-], [
++-	flock_type=bsd
++-    AC_DEFINE([HAVE_FLOCK_BSD], [], [Struct flock is BSD-type]) 
++-    AC_MSG_RESULT("yes")
++-], AC_MSG_RESULT("no") )
+++  flock_type=linux
+++  AC_DEFINE([HAVE_FLOCK_LINUX], [], [Struct flock is Linux-type])
++ 
++ if test "$flock_type" = "unknown"; then
++ 	AC_MSG_ERROR([Don't know how to define struct flock on this system[,] set --enable-opcache=no])
 +-- 
 +2.7.4
 +
-diff --git a/meta-oe/recipes-devtools/php/php/php5-phar-makefile.patch b/meta-oe/recipes-devtools/php/php/php5-phar-makefile.patch
-new file mode 100644
-index 0000000..4e1efd4
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/php5-phar-makefile.patch
-@@ -0,0 +1,46 @@
-+From 3ea626a8d081f56b01004b7992534d4e6b81a9cc Mon Sep 17 00:00:00 2001
-+From: Koen Kooi <koen@dominion.thruhere.net>
-+Date: Wed, 2 Nov 2011 16:54:57 +0100
-+Subject: [PATCH] Fix phar packaging
-+
-+Inherited from OE-Classic, with some additions to fix host paths leaking
-+into the target package.
-+
-+Upstream-Status: Inappropriate [config]
-+
-+%% original patch: php5-phar-makefile.patch
-+---
-+ ext/phar/Makefile.frag | 17 +++--------------
-+ 1 file changed, 3 insertions(+), 14 deletions(-)
-+
-+diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
-+index b8b1b42..1005b2d 100644
-+--- a/ext/phar/Makefile.frag
-++++ b/ext/phar/Makefile.frag
-+@@ -5,20 +5,9 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
-+ 
-+ PHP_PHARCMD_SETTINGS = -d 'open_basedir=' -d 'output_buffering=0' -d 'memory_limit=-1' -d phar.readonly=0 -d 'safe_mode=0'
-+ PHP_PHARCMD_EXECUTABLE = ` \
-+-	if test -x "$(top_builddir)/$(SAPI_CLI_PATH)"; then \
-+-		$(top_srcdir)/build/shtool echo -n -- "$(top_builddir)/$(SAPI_CLI_PATH) -n"; \
-+-		if test "x$(PHP_MODULES)" != "x"; then \
-+-		$(top_srcdir)/build/shtool echo -n -- " -d extension_dir=$(top_builddir)/modules"; \
-+-		for i in bz2 zlib phar; do \
-+-			if test -f "$(top_builddir)/modules/$$i.la"; then \
-+-				. $(top_builddir)/modules/$$i.la; $(top_srcdir)/build/shtool echo -n -- " -d extension=$$dlname"; \
-+-			fi; \
-+-		done; \
-+-		fi; \
-+-	else \
-+-		$(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABLE)"; \
-+-	fi;`
-+-PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
-++		$(top_srcdir)/build/shtool echo -n -- "$(PHP_EXECUTABLE)"; `
-++
-++PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
-+ 
-+ $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
-+ 	-@test -d $(builddir)/phar || mkdir $(builddir)/phar
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-devtools/php/php_5.6.33.bb b/meta-oe/recipes-devtools/php/php_5.6.35.bb
-similarity index 52%
-rename from meta-oe/recipes-devtools/php/php_5.6.33.bb
-rename to meta-oe/recipes-devtools/php/php_5.6.35.bb
-index 9c78918..5ccbfa1 100644
---- a/meta-oe/recipes-devtools/php/php_5.6.33.bb
+diff --git a/meta-oe/recipes-devtools/php/php_5.6.35.bb b/meta-oe/recipes-devtools/php/php_5.6.35.bb
+index 5ccbfa1..c17c0d6 100644
+--- a/meta-oe/recipes-devtools/php/php_5.6.35.bb
 +++ b/meta-oe/recipes-devtools/php/php_5.6.35.bb
-@@ -2,14 +2,20 @@ require php.inc
+@@ -12,6 +12,7 @@ SRC_URI += "file://php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+ SRC_URI_append_class-target = " \
+                                 file://php5-pear-makefile.patch \
+                                 file://php5-phar-makefile.patch \
++                                file://php5-0001-opcache-config.m4-enable-opcache.patch \
+                                 "
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
- 
--SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-+SRC_URI += "file://php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-             file://pthread-check-threads-m4.patch \
-             file://0001-Add-lpthread-to-link.patch \
-             file://acinclude-xml2-config.patch \
-             file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
-             "
--SRC_URI[md5sum] = "1ba84d9881521065f6398e665786f9e2"
--SRC_URI[sha256sum] = "07f696a9761dcd839e2045c95c3a4d2ffb52c54417477cca9d30a14975b831cc"
-+
-+SRC_URI_append_class-target = " \
-+                                file://php5-pear-makefile.patch \
-+                                file://php5-phar-makefile.patch \
-+                                "
-+
-+SRC_URI[md5sum] = "905ae5f586351f3ca29d044c9484d475"
-+SRC_URI[sha256sum] = "ee78a7e9ca21d8ea394d037c55effff477a49dbae31c7753c547036f5bd73b92"
- 
- DEPENDS += "libmcrypt"
- EXTRA_OECONF += "--with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
+ SRC_URI[md5sum] = "905ae5f586351f3ca29d044c9484d475"
 diff --git a/meta-oe/recipes-devtools/php/php_7.2.4.bb b/meta-oe/recipes-devtools/php/php_7.2.4.bb
-index e00e1b5..1a9c8ff 100644
+index 1a9c8ff..04d9b16 100644
 --- a/meta-oe/recipes-devtools/php/php_7.2.4.bb
 +++ b/meta-oe/recipes-devtools/php/php_7.2.4.bb
-@@ -6,6 +6,10 @@ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-             file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
-             file://0001-main-php_ini.c-build-empty-php_load_zend_extension_c.patch \
-            "
-+SRC_URI_append_class-target = " \
-+                                file://pear-makefile.patch \
-+                                file://phar-makefile.patch \
-+                                "
+@@ -9,6 +9,7 @@ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+ SRC_URI_append_class-target = " \
+                                 file://pear-makefile.patch \
+                                 file://phar-makefile.patch \
++                                file://0001-opcache-config.m4-enable-opcache.patch \
+                                 "
  
  SRC_URI[md5sum] = "864c64ffd2f1686b035ef8ce6a6d8478"
- SRC_URI[sha256sum] = "11658a0d764dc94023b9fb60d4b5eb75d438ad17981efe70abb0d0d09a447ef3"
 -- 
 2.7.4
 
