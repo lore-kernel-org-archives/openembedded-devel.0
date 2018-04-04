@@ -1,51 +1,52 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
 	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 863A074A78
+	by mail.openembedded.org (Postfix) with ESMTP id A9CFE607DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Apr 2018 23:25:13 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id x4-v6so11269013pln.7
+	Wed,  4 Apr 2018 01:32:31 +0000 (UTC)
+Received: by mail-pl0-f67.google.com with SMTP id c21-v6so8098658plz.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Apr 2018 16:25:14 -0700 (PDT)
+	Tue, 03 Apr 2018 18:32:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=kvmBfJrVgC8Q3lTy5WiQdYWLSIfc3+1XCffyo58Jenc=;
-	b=tChcTQkcTCXgADouhrhmFay+GiGXrRBp6jwovhSwkLu2WQ5hjc4ms0USGTzOcsCrda
-	7hjI37fl8aX5D1vGYy1t8o24+Nemr9gp2JYv/+XKhGzGW+xn7WyqndVMKZscuqrmWF+b
-	GFI/SLTufSQ+PXp/qxMIptiChu1zSUMTnbuJxWNphU/W0FbYESkwQ8pn/bNKfNLOjFlk
-	90+9dSsml2WcDOUoot5oSwij0KTp9NCOl4a+6FRhbi1aqWSnWVnWYdWC+ZhPSH6sUjf2
-	k9RQA5eEMUtLfrY1Q4iw14ZwOe/xBZJS00cXy6n/RIdxmyKAhDPlaHP7gOg259HQCMSQ
-	KxTA==
+	bh=qovPillsXi4D73/KfoHQQBk2+uaEjQIVJveGMvpqX9k=;
+	b=GTLjccm9Ypjn7yFQkG8/8jJoK4GoXcEOQ8QpAPzf3I0APWwqGYUY8NFtAdYd8HdKk0
+	WOMbLUaFcZzvlYgTR4vEagGcqczZshXdP7pspsgMlKBFZ3hsn7rJwgN6rnUGBQy6xnSf
+	7FLrqIttW95bf6vOTrNp70PwdP7G37qbmPNGGkB7FMZOaIb33LRoaFBE2R3koMObGrSb
+	FWflVEL4aJa8rMwZJBcZ8rYQUg/zukdLQDKesGeZvvqvXbPHyT5NDnlOP2qPLy4Px2qh
+	efEoz/oCHoQ6vnjTt7rLLpakmu7rCRsoqCh/AQjG4+5K2SU6fYpoOc4LMyXyNkJNywVv
+	6++g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=kvmBfJrVgC8Q3lTy5WiQdYWLSIfc3+1XCffyo58Jenc=;
-	b=JV3bqWyXXuilBVBfV/0Mo8jLLNYZzg9MSUSKdkbJyFxwLe4Oymq/ZMLeALHwXjay/e
-	tEOpHbSXzwD7hqKJoXKyU/73SUKcYEYLh4llbvufT24weKPnfhjPTcioAlVWoMTbKBcW
-	xNtU2u73vOEiiuO+WlFJdGiGBr5OF84FdfedFFL+K71CIHJbeP52TjG+swXnnluY+n1y
-	WNupLg4edM5J6cINmddYQzPTJdR7p1h5KFqMahIb8o9/rByCCsQFGhoRdWnUMHUUQzx5
-	wz6wkFBNQjXeJbhuvU9WhqT6m1kWhHCkcj3iblSwZqCVQxHESyEOkDH9swSW7eCXugL0
-	p9iQ==
-X-Gm-Message-State: AElRT7FVKJscqRHfvxIVZyD2eYi2rC133N67+YnaogJQPbBAQ9c4Xn7M
-	EVnlYOR9KHWPYvEBLZHAXFg=
-X-Google-Smtp-Source: AIpwx4+PqJOUNyoSUu69zEAd69HbyuHw09UVfmMNbWGbPUvvlf9IKUSHMDaeLKsChimqbAgQpAnXPQ==
-X-Received: by 10.99.115.69 with SMTP id d5mr10410279pgn.289.1522797914547;
-	Tue, 03 Apr 2018 16:25:14 -0700 (PDT)
+	bh=qovPillsXi4D73/KfoHQQBk2+uaEjQIVJveGMvpqX9k=;
+	b=HF/8J1Qc7rMYXPv3m24/eL8Zwwf8GMZBtjlmjhWcJnp81eLKM9BIfRiRRxfPargl0b
+	KZjYTp8echalAPiWsOfCiX4WsdlNKXdy+jW8+yeuaYJ0I1Smmft1yL+MR0qIWrbR6o+K
+	5n7afgD5+I/9aH0oHJ5mYyRgcSn+0j7+DZpjGVp/OD4O8dma5VI4Q5Ac7jTSWdDoRRFV
+	jTo9dB6GPGpzrp8o8PuIKnc0L4e7JKygIK/DXbHhx+CC/V98KA0v8YIVNY7zf901WaSD
+	2mH3w2cefViLojNdPAUG+UT8Xf7mKRqveJijgNOca+s423xwuI8EwCVTOvGTZ1c0uGLD
+	NsDA==
+X-Gm-Message-State: AElRT7ENLnS8hcy7M1B7vU6JqVZ+Vp7G2JvMjKknbOxv9HAvo8UPqpg0
+	MN1CTa3DaJ59QSywGQ8L1Ev0xQ==
+X-Google-Smtp-Source: AIpwx4/un+3vLeQur9pshLYXO1iyldKiG+THMuIJ5kp11SgZyl4QCgUteAx4qboNylYk3qETb7lRrg==
+X-Received: by 10.98.93.149 with SMTP id n21mr12392732pfj.222.1522805552193;
+	Tue, 03 Apr 2018 18:32:32 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1184:a4f3:7c10:9123:63ea?
 	([2601:202:4000:1184:a4f3:7c10:9123:63ea])
-	by smtp.gmail.com with ESMTPSA id r11sm8453421pfg.0.2018.04.03.16.25.13
+	by smtp.gmail.com with ESMTPSA id
+	133sm6946888pfy.113.2018.04.03.18.32.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 03 Apr 2018 16:25:14 -0700 (PDT)
-To: Denys Dmytriyenko <denis@denix.org>,
+	Tue, 03 Apr 2018 18:32:31 -0700 (PDT)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-References: <1522796604-38261-1-git-send-email-denis@denix.org>
+References: <20180403231601.5329-1-schnitzeltony@gmail.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; keydata=
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
 	Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
 	mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
@@ -88,14 +89,13 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <f74a3d7c-ba09-8aa6-9ec1-d55022e6ecb3@gmail.com>
-Date: Tue, 3 Apr 2018 16:25:12 -0700
+Message-ID: <1a96ea45-d89b-a5f8-ff6c-23abcbb96303@gmail.com>
+Date: Tue, 3 Apr 2018 18:32:29 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.7.0
 MIME-Version: 1.0
-In-Reply-To: <1522796604-38261-1-git-send-email-denis@denix.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-networking][PATCH] tcpdump: refresh local patches to avoid fuzz warnings
+In-Reply-To: <20180403231601.5329-1-schnitzeltony@gmail.com>
+Subject: Re: [PATCH 0/2] poppler nightmare
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,99 +108,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Apr 2018 23:25:13 -0000
+X-List-Received-Date: Wed, 04 Apr 2018 01:32:31 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
+Andreas,
 
 
-On 04/03/2018 04:03 PM, Denys Dmytriyenko wrote:
-> From: Denys Dmytriyenko <denys@ti.com>
->
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
-at fix like this is in master-next already.
+
+On 04/03/2018 04:15 PM, Andreas Müller wrote:
+> Not convinced that I'll get support at poppler project. Let's see what
+> autobuilder says. If it fails, please unroll back to 0.57.0 - I am sure
+> that disable glib causes trouble for evince.
+
+this didn't make it into the current world build. I built it @ home a
+getting the same errors:
+
+|
+/build/build_artifacts/master/tmp-glibc/work/core2-64-oe-linux/poppler/0.63.0-r0/recipe-sysroot-native/usr/bin/x86_64-oe-linux/../../libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/7.3.0/ld:
+warning: libpoppler.so.74, needed by ./libpoppler-glib.so, not found
+(try using -rpath or -rpath-link)
 
 - armin
->  .../recipes-support/tcpdump/tcpdump/add-ptest.patch   | 13 +++++++------
->  .../tcpdump/unnecessary-to-check-libpcap.patch        | 19 ++++++++++---------
->  2 files changed, 17 insertions(+), 15 deletions(-)
+
 >
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-> index 196cec7..7a02155 100644
-> --- a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-> @@ -1,4 +1,4 @@
-> -From 7b259580800e259d232229dc89f97058b56e2fe8 Mon Sep 17 00:00:00 2001
-> +From 09c310b48f73b62dc6673ce0bdfc638d9ae4bbda Mon Sep 17 00:00:00 2001
->  From: "Hongjun.Yang" <hongjun.yang@windriver.com>
->  Date: Wed, 22 Oct 2014 10:02:48 +0800
->  Subject: [PATCH] Add ptest for tcpdump
-> @@ -6,15 +6,16 @@ Subject: [PATCH] Add ptest for tcpdump
->  Upstream-Status: Pending
->  
->  Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-> +
->  ---
->   Makefile.in | 10 +++++++++-
->   1 file changed, 9 insertions(+), 1 deletion(-)
->  
-> -Index: tcpdump-4.9.0/Makefile.in
-> -===================================================================
-> ---- tcpdump-4.9.0.orig/Makefile.in
-> -+++ tcpdump-4.9.0/Makefile.in
-> -@@ -436,9 +436,17 @@ distclean:
-> +diff --git a/Makefile.in b/Makefile.in
-> +index 0941f0e..3ce40c6 100644
-> +--- a/Makefile.in
-> ++++ b/Makefile.in
-> +@@ -437,9 +437,17 @@ distclean:
->   	    tests/failure-outputs.txt
->   	rm -rf autom4te.cache tests/DIFF tests/NEW
->   
-> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-> index d7a3ac2..c70404c 100644
-> --- a/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-> @@ -1,4 +1,7 @@
-> -unnecessary to check libpcap
-> +From 66ee5c0d49c3e4a67cd9a691c1313e4a02eafa59 Mon Sep 17 00:00:00 2001
-> +From: Roy Li <rongqing.li@windriver.com>
-> +Date: Tue, 8 Jul 2014 13:20:47 +0800
-> +Subject: [PATCH] unnecessary to check libpcap
->  
->  Upstream-Status: Pending
->  
-> @@ -11,23 +14,21 @@ In fact, the libpcap has been added into the tcpdump's DEPENDS, not need to
->  check if libpcap existed.
->  
->  Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +
->  ---
-> - configure.in |    2 +-
-> + configure.in | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->  
->  diff --git a/configure.in b/configure.in
-> -index 06fade1..9125de7 100644
-> +index b2305a5..b3b5dbf 100644
->  --- a/configure.in
->  +++ b/configure.in
-> -@@ -567,7 +567,7 @@ AC_SEARCH_LIBS(getrpcbynumber, nsl,
-> - dnl AC_CHECK_LIB(z, uncompress)
-> - dnl AC_CHECK_HEADERS(zlib.h)
-> +@@ -418,7 +418,7 @@ dnl Some platforms may need -lnsl for getrpcbynumber.
-> + AC_SEARCH_LIBS(getrpcbynumber, nsl,
-> +     AC_DEFINE(HAVE_GETRPCBYNUMBER, 1, [define if you have getrpcbynumber()]))
->   
->  -AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
->  +#AC_LBL_LIBPCAP(V_PCAPDEP, V_INCLS)
->   
->   #
->   # Check for these after AC_LBL_LIBPCAP, so we link with the appropriate
-> --- 
-> -1.7.9.5
-> -
+> Andreas Müller (2):
+>   poppler: Rework patch fixing do_configure
+>   poppler: update 0.62.0- > 0.63.0
+>
+>  ...0001-Do-not-overwrite-all-our-build-flags.patch | 36 ++++++++++++----------
+>  .../{poppler_0.62.0.bb => poppler_0.63.0.bb}       |  4 +--
+>  2 files changed, 21 insertions(+), 19 deletions(-)
+>  rename meta-oe/recipes-support/poppler/{poppler_0.62.0.bb => poppler_0.63.0.bb} (93%)
+>
 
 
