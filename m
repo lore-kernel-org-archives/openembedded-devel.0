@@ -1,50 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0254B72EE5
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f194.google.com (mail-yb0-f194.google.com
+	[209.85.213.194])
+	by mail.openembedded.org (Postfix) with ESMTP id BF66174DC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Apr 2018 21:05:53 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id s24-v6so15876997plq.6
+	Wed,  4 Apr 2018 21:26:49 +0000 (UTC)
+Received: by mail-yb0-f194.google.com with SMTP id e5-v6so6857695ybq.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2018 14:05:55 -0700 (PDT)
+	Wed, 04 Apr 2018 14:26:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=9E0oyS+jKH+RwF3rGczPXrG/CHJL9khxkVXFyaW0F/I=;
-	b=e3oHx5532g4GIA7MvxWWe0ZJzDlHNoM7pf9JAEuNtWYjeT/SjbfBzmDMmwoFxVYAsg
-	siYYJyVZ+gH5k4yYWcVxFZQ7iLK4y71+dyM0koxnfQRzmjTmkbtBnE1Op8Wsjy5g0G1D
-	aNgKZC0ma+pgrLDicgvVGFRxo7p/+uh5V5MXwB9JoEGq7ZR7L/kWFHIDPTUjc3BAKBLS
-	vTLIumvLA9V3/bUHet1PvoNwbAdR+8O9P2hoa9KUcrCSQjwrE3unvs1fxZ6SPLaKcVhE
-	1Z//WTiLmRJjO6NNK2DUiZmapYw2OQlCgYxt7q/9WQUHfnP9/8a0nAH8ZPVUqCRq/w2d
-	vPYQ==
+	bh=9MR7k6ild46RC8AlNryGVzGYB/PlNl0gyBGdlWlvbp8=;
+	b=hWs+78Nj7qyH41FvGkX5XAEIQ5wyrVL2hMbgbqIdSNNGZR4Mrug/DT2n8IlPLL6P4r
+	Pu9NakqGkKCinsdm4zxF53MIMOAemQXEbgonG5YZD3fgQGej2COEeqcMF9Vx2VxDCjd8
+	mQd5wE2OB+noJPR5TRoKK2xP7+YqjXov8oZE6xghefwYE1ql51ZIvpjY3RwmzKXFh7cL
+	Ptk+690+FMFhQqKDQiumHRKiH+5CTGz87x5nB0U68v62aaMXWNYUPabanIG9pPk7A3Wv
+	WUyOxeU4FmmNhVNe2l8Sw8PGOXsXBQ30C3+d/YcZIJ3kfM2VGGoVil2okIP5pt9TQNFu
+	bmyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=9E0oyS+jKH+RwF3rGczPXrG/CHJL9khxkVXFyaW0F/I=;
-	b=rlIu2U90eQJvjvMjdm5xgCGJSpAQ4I8/NW86rYwnK0p20BN2cybphI1hGs1L3SqmvV
-	OKu6r7gcnnVt3GuKUaODsXGWK5sYiVx20zo3U7//V0usrDxXU7vhTbct5ZkpXdHiqJpp
-	DIZ8Fsc5yg+6MMg1WWWY0uFUyX19DcmMFTOJuWFaMsa+N9GwBV7ByRNOO02OAIouDeWK
-	lP7hyuPTXk096M7ypJfMamlARJqI2IDc4ckYgnMC01WeTTwrc8271EJspOTVpm6f36U8
-	ossC8aOD7LS/0m1+GrAXEoXTfFGMzwJazOZA2N6IdWW5T79ANKpSrR9L5Pa0KrEPH2dy
-	4ksw==
-X-Gm-Message-State: AElRT7Ep7aNWqvZAhoUswzXsMQwYbBXKFJVLqHrJaP6UFDeuLyr9JDNi
-	ow0QVOUfKLJdSalC/FMwU/QmcIGIp0zco5kZnzM=
-X-Google-Smtp-Source: AIpwx4+YtNHCQl7NCWq5DdmgMYqyBLRkCra3xtwLg5SDXBXF0dCrYmzv3GWvUdYPE7+J1h46LMtDiXedCcXx7ethtXo=
-X-Received: by 2002:a17:902:244:: with SMTP id
-	62-v6mr11323518plc.125.1522875954539; 
-	Wed, 04 Apr 2018 14:05:54 -0700 (PDT)
+	bh=9MR7k6ild46RC8AlNryGVzGYB/PlNl0gyBGdlWlvbp8=;
+	b=ZIgRlzBAmU1wuXMiUifocaMBw70Azrgzl4ZlJgA94vIZIRAnRhi+oHNHyNBi2FG16K
+	uxuGeSEv0XJ7s0wN3YNmvRnDnDB8Twx8G04rPncZQNky9qRv74AVzsklQVscKBtIhAcs
+	vANEjz4tUnhnLVC2xumnjJexCxR9mCOBGbyvWcgd5kch6Ru4n5JZaqzpBFxp8mzzWUIj
+	ZR3Num5738I/tVQwdx5oOnB9vaiEOBMiz/oNk6v4PAzEEngB2U0eudk+GWWQpMaeU+gc
+	m5natheUyYEIA4kWpryxjbNTgodQ0aHHjIv2/5da31ex5J/oLJ8Mej++SdumNeiALL+U
+	eCzg==
+X-Gm-Message-State: ALQs6tBr9cRL/tPfhn2fPocbXqvsuzMaUoEMDZPDm+M6uIS44WJ13KnT
+	7SCfmk7aSO8asjqbi7m1jLTshcKOoOcKVi0/PgI=
+X-Google-Smtp-Source: AIpwx48GxUAZXQCh9hHZX+IzwVvP0s56yeQHW/VFklqE9JZ5BAdUAYDEpfGKKiirxPmLoqNr1DaqoQO+j+RTSl1uEhI=
+X-Received: by 2002:a5b:bd0:: with SMTP id
+	c16-v6mr4468018ybr.224.1522877210031; 
+	Wed, 04 Apr 2018 14:26:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.236.165.21 with HTTP; Wed, 4 Apr 2018 14:05:24 -0700 (PDT)
-In-Reply-To: <CALbNGRTnVNgT0By0afjm09z72zD0wJcH=uGrxTkY1gtjgDBC4Q@mail.gmail.com>
+Received: by 2002:a25:d105:0:0:0:0:0 with HTTP;
+	Wed, 4 Apr 2018 14:26:49 -0700 (PDT)
+In-Reply-To: <CAMKF1sovNddJc9-mbbfjTryenq2W3NUgNumtj56EKyxDSXKzKg@mail.gmail.com>
 References: <20180404191013.38136-1-raj.khem@gmail.com>
 	<20180404191013.38136-2-raj.khem@gmail.com>
 	<CALbNGRQ+hFGBqvt0VNLLHeVBjFk7M3sZgiybiVwQBr3kqduviw@mail.gmail.com>
 	<CALbNGRTnVNgT0By0afjm09z72zD0wJcH=uGrxTkY1gtjgDBC4Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Apr 2018 14:05:24 -0700
-Message-ID: <CAMKF1sovNddJc9-mbbfjTryenq2W3NUgNumtj56EKyxDSXKzKg@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+	<CAMKF1sovNddJc9-mbbfjTryenq2W3NUgNumtj56EKyxDSXKzKg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 4 Apr 2018 23:26:49 +0200
+Message-ID: <CALbNGRRu2DXsWQXntne6OzT3otujYa+WGb0j++au0R_kXJNktA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5][PATCH V2 2/2] qtwebkit: Fix build on armv7ve (rpi)
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -59,76 +61,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2018 21:05:54 -0000
+X-List-Received-Date: Wed, 04 Apr 2018 21:26:50 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 4, 2018 at 1:45 PM, Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
-> On Wed, Apr 4, 2018 at 10:25 PM, Andreas M=C3=BCller <schnitzeltony@gmail=
-.com> wrote:
->> On Wed, Apr 4, 2018 at 9:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> ---
->>> v1 -> v2:
->>> - Drop disabling GI
+On Wed, Apr 4, 2018 at 11:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Apr 4, 2018 at 1:45 PM, Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+>> On Wed, Apr 4, 2018 at 10:25 PM, Andreas M=C3=BCller <schnitzeltony@gmai=
+l.com> wrote:
+>>> On Wed, Apr 4, 2018 at 9:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>> ---
+>>>> v1 -> v2:
+>>>> - Drop disabling GI
+>>>>
+>>>>  recipes-qt/qt5/qtwebkit_git.bb | 8 ++++++++
+>>>>  1 file changed, 8 insertions(+)
+>>>>
+>>>> diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_=
+git.bb
+>>>> index e8c0868..c8e8328 100644
+>>>> --- a/recipes-qt/qt5/qtwebkit_git.bb
+>>>> +++ b/recipes-qt/qt5/qtwebkit_git.bb
+>>>> @@ -18,6 +18,14 @@ DEPENDS +=3D "qtbase qtdeclarative icu ruby-native =
+sqlite3 glib-2.0 libxslt gperf-
+>>>>  ARM_INSTRUCTION_SET_armv4 =3D "arm"
+>>>>  ARM_INSTRUCTION_SET_armv5 =3D "arm"
+>>>>
+>>>> +# https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D9474
+>>>> +# https://bugs.webkit.org/show_bug.cgi?id=3D159880
+>>>> +# JSC JIT can build on ARMv7 with -marm, but doesn't work on runtime.
+>>>> +# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2 (-mt=
+humb).
+>>>> +ARM_INSTRUCTION_SET_armv7a =3D "thumb"
+>>>> +ARM_INSTRUCTION_SET_armv7r =3D "thumb"
+>>>> +ARM_INSTRUCTION_SET_armv7ve =3D "thumb"
+>>>> +
+>>>>  # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
+>>>>  # 5.10.meta-qt5.1
+>>>>  SRC_URI +=3D "\
+>>>> --
+>>>> 2.16.3
+>>>>
+>>> I've checked the links you are referring: Both
 >>>
->>>  recipes-qt/qt5/qtwebkit_git.bb | 8 ++++++++
->>>  1 file changed, 8 insertions(+)
+>>> * are related to webkit and from 2016
+>>> * deal with runtime errors not build errors as referred in patch descri=
+ption.
 >>>
->>> diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_g=
-it.bb
->>> index e8c0868..c8e8328 100644
->>> --- a/recipes-qt/qt5/qtwebkit_git.bb
->>> +++ b/recipes-qt/qt5/qtwebkit_git.bb
->>> @@ -18,6 +18,14 @@ DEPENDS +=3D "qtbase qtdeclarative icu ruby-native s=
-qlite3 glib-2.0 libxslt gperf-
->>>  ARM_INSTRUCTION_SET_armv4 =3D "arm"
->>>  ARM_INSTRUCTION_SET_armv5 =3D "arm"
+>>> So what do you want to fix exactly?
 >>>
->>> +# https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D9474
->>> +# https://bugs.webkit.org/show_bug.cgi?id=3D159880
->>> +# JSC JIT can build on ARMv7 with -marm, but doesn't work on runtime.
->>> +# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2 (-mth=
-umb).
->>> +ARM_INSTRUCTION_SET_armv7a =3D "thumb"
->>> +ARM_INSTRUCTION_SET_armv7r =3D "thumb"
->>> +ARM_INSTRUCTION_SET_armv7ve =3D "thumb"
->>> +
->>>  # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
->>>  # 5.10.meta-qt5.1
->>>  SRC_URI +=3D "\
->>> --
->>> 2.16.3
->>>
->> I've checked the links you are referring: Both
+>> I have looked into this further and found that I stumbled for same
 >>
->> * are related to webkit and from 2016
->> * deal with runtime errors not build errors as referred in patch descrip=
-tion.
+>> commit 511a3764506ce6bbdc5e9441a8f4e9d862ea1102
+>> Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> Date:   Mon Jan 4 11:04:16 2016 +0100
 >>
->> So what do you want to fix exactly?
+>>     qtscript/qtwebkit: disable thumb for armv4 and armv5 only to fix
+>> segfault on armv7
 >>
-> I have looked into this further and found that I stumbled for same
+>> Curently recipe has
+>>
+>> ARM_INSTRUCTION_SET_armv4 =3D "arm"
+>> ARM_INSTRUCTION_SET_armv5 =3D "arm"
+>>
+>> Isn't thumb default any more?
+>>
 >
-> commit 511a3764506ce6bbdc5e9441a8f4e9d862ea1102
-> Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> Date:   Mon Jan 4 11:04:16 2016 +0100
+> Thumb-1 doesn't really work since it shows up with register allocation
+> errors with gcc.
+> thumb2 is fine for armv6+
 >
->     qtscript/qtwebkit: disable thumb for armv4 and armv5 only to fix
-> segfault on armv7
->
-> Curently recipe has
->
-> ARM_INSTRUCTION_SET_armv4 =3D "arm"
-> ARM_INSTRUCTION_SET_armv5 =3D "arm"
->
-> Isn't thumb default any more?
->
+Sorry for causing confusion - what I meant: Isn't thumb2 default for
+armv7 anymore (particularly RasPI > 1).  If thumb2 is still default
+for armv7 there is no need to add it explicitly here. It does not do
+any harm but it is not necessary.
 
-Thumb-1 doesn't really work since it shows up with register allocation
-errors with gcc.
-thumb2 is fine for armv6+
-
-> Andreas
+Andreas
 
