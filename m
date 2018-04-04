@@ -1,51 +1,26 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f170.google.com (mail-yb0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 528F672EE2
+Return-Path: <Bruce.Ashfield@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9673974502
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Apr 2018 11:27:27 +0000 (UTC)
-Received: by mail-yb0-f170.google.com with SMTP id p126-v6so2365645ybg.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2018 04:27:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Ow8K9ynXCqeXsBa2xvcxy9s1V3Cq4fp4dU7Sy8uqufk=;
-	b=UAc0t5jwuv4o8c9LBzSv5SViK/USOukkOV9IHPUXUP50NvCDGj3yrfDzPZED1XfMdk
-	8Euo2oAYvrkKD6I8C8A4BwpTeFAQMnR7Sk2udRtaPTU7u/A4/a8LKwPagBV4RaAGEaiD
-	+38pNedGglns7MEOS4DrEG4lgGVmwj6BppMmGK5fBKDXO8ZCp/uANBxfqrFaaQEpCRrc
-	zNJZmqRtFEOsHd5+jPCGDnp8VehPkxvWa9ZUPvPaM6O3I2kiK1/8DVEGZTZMLsS0Vs1e
-	psWrE5KyrUIlaSLwLk/ZbgKuXgahnuUL/6c2bQEzicq/7MjJpTaj1rQIKP9O5nDRe6+8
-	TV/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Ow8K9ynXCqeXsBa2xvcxy9s1V3Cq4fp4dU7Sy8uqufk=;
-	b=uKLjOUj2HGgfLnIa9u3Hf53Dkb3yvmiQoGG9VsI7HrVox/0K4y2v03KZOhjVpDdWeb
-	hAL73A9Hg+LGh5DIwXQoY4EM8sdr10cXXsvAIZvzgdu947aIdRNA9EWae+16MGsZoDcn
-	igEz2gOSqDhQPgiH8rUhxGwczgBLK1EGEoY7sqKf49u7VL5LhnECnCMRV6kxJI+BvoEL
-	xVNARCUM1GHXBk+HRqFdWBmpL4cJJydpfln6zjhwVS0894oGb1PRU1S/S2+CixodAR3H
-	diQ0XFj8HUIluhM79UZBz5n8zVh7olARAQ69NM2rNNwX5sQ0ntLbh6eAWhF+4DUNGkWL
-	sqKw==
-X-Gm-Message-State: ALQs6tBY1KQv2ab4xY5Y7s13LQG+HqZiwNng8W53wao1n+5Nd9xcYeMx
-	EacAp+VEm8Tm7KH+5mo+jqO/TVFBa0/WUY98Q60=
-X-Google-Smtp-Source: AIpwx4+mkr0JnpPOc7FrN/Vs7NyZHuYACxZIxdBAQNTEgHjERIC8nHODTRqdM6NKCx0tXz6frWcxWf9PkFi3ZNzenM4=
-X-Received: by 2002:a5b:885:: with SMTP id e5-v6mr9867253ybq.180.1522841248638;
-	Wed, 04 Apr 2018 04:27:28 -0700 (PDT)
+	Wed,  4 Apr 2018 12:23:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w34CN1Al029976
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 4 Apr 2018 05:23:01 -0700 (PDT)
+Received: from server.local (128.224.21.146) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 4 Apr 2018 05:23:00 -0700
+To: Fathi Boudra <fathi.boudra@linaro.org>
+References: <CAGNsrLDgC_CMnjyQ-4cytQoOqks94qnDg_6Jx3uK=9rb6Lru1Q@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
+Message-ID: <41b908df-1627-dfd3-70aa-c8d77ed5470c@windriver.com>
+Date: Wed, 4 Apr 2018 08:23:00 -0400
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.6.0
 MIME-Version: 1.0
-Received: by 2002:a25:d105:0:0:0:0:0 with HTTP;
-	Wed, 4 Apr 2018 04:27:28 -0700 (PDT)
-In-Reply-To: <CA+n--H9LKuLH4frCgjVtz6yUrwZ83HOEsc4ob0gxzVY1Sy7=yw@mail.gmail.com>
-References: <20180403231601.5329-1-schnitzeltony@gmail.com>
-	<1a96ea45-d89b-a5f8-ff6c-23abcbb96303@gmail.com>
-	<CALbNGRTMzpTUAYsjv-EuJAB7aGd=TiJ83-GFGreG09TsxyHZiQ@mail.gmail.com>
-	<CA+n--H9LKuLH4frCgjVtz6yUrwZ83HOEsc4ob0gxzVY1Sy7=yw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 4 Apr 2018 13:27:28 +0200
-Message-ID: <CALbNGRR5md+Wed1Myh2VmeGKgxr+SK0sTiwsqHJu971dRsJVQg@mail.gmail.com>
-To: Bill Randle <bill.randle@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 0/2] poppler nightmare
+In-Reply-To: <CAGNsrLDgC_CMnjyQ-4cytQoOqks94qnDg_6Jx3uK=9rb6Lru1Q@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-virtualization] runc update ftbfs on arm64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2018 11:27:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 04 Apr 2018 12:23:01 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Wed, Apr 4, 2018 at 6:51 AM, Bill Randle <bill.randle@gmail.com> wrote:
-> I recently tried to cross build the current version of poppler for an
-> embedded ARM system. This was not under the Yocto/OE build
-> environment, but I never could get quite the right cmake config file
-> to get the thing to build. Since I just needed it for the pdftoraster
-> cups filter, I punted and built ghostscript instead. cmake may be fine
-> for native builds, but at least in this case, it was a pain to use for
-> cross-compilation.
->
->     -Bill
->
-Currently I see two issues:
+On 2018-04-04 5:18 AM, Fathi Boudra wrote:
+> Hi Bruce,
+> 
+> This commit https://git.yoctoproject.org/cgit/cgit.cgi/meta-virtualization/commit/?id=e3d960f4fcd91a84067fbbd6293ce271e74a7740
+> 
+> caused  a build failure on arm64:
+> https://ci.linaro.org/job/96boards-reference-platform-openembedded-master/579/DISTRO=rpb,MACHINE=dragonboard-410c,label=docker-stretch-amd64/consoleText
+> 
+> Log data follows:
+> | DEBUG: Executing shell function do_compile
+> | NOTE: make -j 8 BUILDTAGS= static
+> | CGO_ENABLED=1 go build  -tags " netgo cgo static_build"
+> -installsuffix netgo -ldflags "-w -extldflags -static -X
+> main.gitCommit="4fc53a81fb7c994640722ac585fa9ca548971871-dirty" -X
+> main.version=1.0.0-rc5 " -o runc .
+> | # runtime/cgo
+> | aarch64-linaro-linux-gcc: error: unrecognized command line option '-m64'
+> | Makefile:42: recipe for target 'static' failed
+> | make: *** [static] Error 2
+> | ERROR: oe_runmake failed
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located at
+> /srv/oe/build/tmp-rpb-glibc/work/aarch64-linaro-linux/runc-docker/1.0.0-rc5+gitAUTOINC+4fc53a81fb-r0/temp/log.do_compile.1196)
+> 
+> Just a heads up. I still need to take a closer look.
 
-1. Resetting al compiler flags was never a good idea for cross
-compiling. I've sent dozens of patches like this to many projects but
-at poppler I had to learn my marketing/skills/patience were not good
-enough [1]
-2. on some environments (I can build 0.63.0 perfectly fine - but...)
-linking poppler-glib does not find libpoppler.
+Thanks for the head ups.
 
-Maybe some CMake experts around willing to help out?
+I'll have a look as well. Let me know if you have it solved
+and I'll stop poking at it.
 
-[1] https://bugs.freedesktop.org/show_bug.cgi?id=105852
+Bruce
 
-Regards
+> 
+> Cheers,
+> 
 
-Andreas
 
