@@ -1,50 +1,103 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E52E74C47
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f49.google.com (mail-pl0-f49.google.com
+	[209.85.160.49])
+	by mail.openembedded.org (Postfix) with ESMTP id F224C74CF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Apr 2018 19:10:24 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id u11-v6so15439134plq.1
+	Wed,  4 Apr 2018 19:23:40 +0000 (UTC)
+Received: by mail-pl0-f49.google.com with SMTP id k6-v6so10360712pls.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2018 12:10:26 -0700 (PDT)
+	Wed, 04 Apr 2018 12:23:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=OUDnim/VJ8VKq79gnuyrVrdCjoAk2MdNMSjBhZAj77c=;
-	b=JLuUE0MLwAlBnoVQNYuCMJy7yKXAYbt/RGVNoaGn20Ihb1y4C+wJlkZHZPIEZyTCYM
-	G9DVa36e/ML3ChQ8TRIYLOZyweng4AJfxs+1X8DkYeHHkqRp5ptPQ06NXcpbL57xCAdu
-	sO49oTkQxdhIrygBLoldRT4f+34bFl5nusjfhyROljTgSLe+GjL1REiUvR1FpmJ3T3c9
-	xVL7yvuODqmCwe5rJMmyxTdwoI5KZu/4kdbp/TGvjxuJbiC13a522ul6N5WXiPxKR77l
-	jlGufgCp5Vgu3hKzZ2SSquUCW36Y+6KUOUgASId+5LR2ZufQXFDxERlLRq+/JooDqwF3
-	DpLQ==
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=OSN7FcWuRTWEq6k3rc4BaxDG+kjVqBh5AktFz79nlfM=;
+	b=IB5DYVXWvAho6qahdgETJKxGNHYrONaxOaNXl88DDJk7AqtzVtP2Eww2EU1hmOmxCt
+	HzcUbZFJiv/HlztlCMXsQ2a3mgB9HI+h+0oK9ATKd2fTzDY6RGA2OV78Z9dXGQsbPjlh
+	h4S6ku2fgd+XA56MHoCPTeiNdVySOYOZWZpKsHLxJQU8Q/Q4jFki6KwE2eV5CJAEes9S
+	SD2uV4W+/lEiJTPNGSwuYkvKwLOUBDL/QLOpAa02yF2rkTTBDwx6ulOC6xJiLT2EtjqX
+	YpZ46IfvZiGfHfKWYv5m4d0sK6xnCrSpZ6BT+UKqDbHy/67s5cpSQXeAmpxPwsp5Q/+8
+	a+bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=OUDnim/VJ8VKq79gnuyrVrdCjoAk2MdNMSjBhZAj77c=;
-	b=ts3E5v8TQ/BM4kJtiGlmKzVUmCoPqsd3jbtO+ZJyCM1gXygTGPAOomQJd9qONpAIln
-	y+cPIvBtXYXSnGdWNVJGs/XThZyqa0SNCtCbdYd43trVE92FVJ+lFGX0wvQMkceGAmSW
-	lUEy5qWlHmThdxvMCBQZEmXtRGM+eD1IM4DCznB/7AsC28mQvUdqL/1nQ+AWzqZmFBw3
-	rHpcP67s5+5g73S5npLg1+Y31rcUlua31ENsFgB6sthleQM+8LA8qFVwcl9s6JRyRzHh
-	ONPh7MBYWaU1NOhZSEjcKU87X4Pp/fMyRGQcwMeFJjuRUijeFFYMxhn53m1UQpIfK7Ev
-	stQQ==
-X-Gm-Message-State: AElRT7Gt04yGdroNw/dAAWTTRGwuruevCqXt0hJbUQ10Z01HrZmp/BsA
-	TC0h6vZshDwvurhswWOyjyitXg==
-X-Google-Smtp-Source: AIpwx4+VFumT5SGtINfePZ5VYco/vAZFvQYYfbXy75vpn90L2fuzptBc6WFPXpRauuchNgtQ6nwq8g==
-X-Received: by 10.99.97.143 with SMTP id v137mr12552941pgb.175.1522869025740; 
-	Wed, 04 Apr 2018 12:10:25 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8880:466c:6245:cbff:fe64:591])
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=OSN7FcWuRTWEq6k3rc4BaxDG+kjVqBh5AktFz79nlfM=;
+	b=YtViWn++jYLnT9uAzPXGUJMpcvYnRmhyjUZfRKv+Tu0sqaefkskgB4Xrf01PnK9Hut
+	9iyYLjEA9UV7FEbRHc4veZnVebLuTurw50SnbLSxC4XDNAHvRyjNuP53YRKTpuhFMoNy
+	cSVXT27SizR8qNnOwaoaMJ6GCwlDT36Vm742yDU2UuhKM88BU9EPwdkApNtgIsJYmpq4
+	Anu4r/g3CXa6+S9jM5Peo/E6KIVpGNtwehMZVfiByL/xKA9pivSwyPqxpJP22XuZb8pA
+	o38cUj3V5WpSt6M6EehmyN25OAuHXIMKVNwkwHaEEAup6UYrUKyW6hAqvD7bsieTfIpf
+	bzVA==
+X-Gm-Message-State: AElRT7H+yu5fwCrwZpX3yQ+sSEekqG4RErLTX29dp1k+ZJzyI5Einzlz
+	jSdgg7pkA9NPRsTQi6IAYZto3A==
+X-Google-Smtp-Source: AIpwx4/xfd2jfOnS2pWoXKGukszt0ZyhRz/wU4bfuPGrdoKXtplnxWhVG/VDQRfio14wOCzDYY5kRA==
+X-Received: by 2002:a17:902:bc41:: with SMTP id
+	t1-v6mr19641341plz.56.1522869821544; 
+	Wed, 04 Apr 2018 12:23:41 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:a4f3:7c10:9123:63ea?
+	([2601:202:4000:1184:a4f3:7c10:9123:63ea])
 	by smtp.gmail.com with ESMTPSA id
-	g9sm10325912pgo.22.2018.04.04.12.10.24
+	p1sm10865343pgr.67.2018.04.04.12.23.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Apr 2018 12:10:25 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Apr 2018 12:10:13 -0700
-Message-Id: <20180404191013.38136-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.16.3
-In-Reply-To: <20180404191013.38136-1-raj.khem@gmail.com>
-References: <20180404191013.38136-1-raj.khem@gmail.com>
-Subject: [meta-qt5][PATCH V2 2/2] qtwebkit: Fix build on armv7ve (rpi)
+	Wed, 04 Apr 2018 12:23:40 -0700 (PDT)
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1522850964-2056-1-git-send-email-akuster808@gmail.com>
+	<2dbfe46b-f90e-9f4e-d8eb-e93f969fb45e@linux.intel.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <03145566-01b3-e823-d652-902c8735b357@gmail.com>
+Date: Wed, 4 Apr 2018 12:23:39 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
+MIME-Version: 1.0
+In-Reply-To: <2dbfe46b-f90e-9f4e-d8eb-e93f969fb45e@linux.intel.com>
+Subject: Re: [meta-networking][PATCH] wireshark: update to 2.4.6 and add upstream check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +110,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2018 19:10:25 -0000
+X-List-Received-Date: Wed, 04 Apr 2018 19:23:41 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v1 -> v2:
-- Drop disabling GI
 
- recipes-qt/qt5/qtwebkit_git.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
 
-diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index e8c0868..c8e8328 100644
---- a/recipes-qt/qt5/qtwebkit_git.bb
-+++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -18,6 +18,14 @@ DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt gperf-
- ARM_INSTRUCTION_SET_armv4 = "arm"
- ARM_INSTRUCTION_SET_armv5 = "arm"
- 
-+# https://bugzilla.yoctoproject.org/show_bug.cgi?id=9474
-+# https://bugs.webkit.org/show_bug.cgi?id=159880
-+# JSC JIT can build on ARMv7 with -marm, but doesn't work on runtime.
-+# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2 (-mthumb).
-+ARM_INSTRUCTION_SET_armv7a = "thumb"
-+ARM_INSTRUCTION_SET_armv7r = "thumb"
-+ARM_INSTRUCTION_SET_armv7ve = "thumb"
-+
- # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
- # 5.10.meta-qt5.1
- SRC_URI += "\
--- 
-2.16.3
+On 04/04/2018 09:28 AM, Alexander Kanavin wrote:
+> On 04/04/2018 05:09 PM, Armin Kuster wrote:
+>
+>> +UPSTREAM_CHECK_REGEX = "wireshark-(?P<pver>2\.4(\.\d+)+)\.tar\.xz"
+>
+> Why restrict the version to only 2.4.x ?
+2.5.1 is beta.. I don't want to update to it.
+
+> (also including .xz at the end may not be a good idea if upstream
+> decides to use a different compressor)
+thanks input.
+
+- armin
+>
+> Alex
 
 
