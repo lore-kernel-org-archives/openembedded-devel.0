@@ -1,55 +1,31 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f196.google.com (mail-yb0-f196.google.com
-	[209.85.213.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F125746DC
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BA7862133
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Apr 2018 21:55:49 +0000 (UTC)
-Received: by mail-yb0-f196.google.com with SMTP id g197-v6so5248089ybf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Apr 2018 14:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=K5U7pdzg/uj2N2h/b0RdTxFJ59bX/e0UjjlRFJF15U4=;
-	b=tNjVpv8yVEKFPoABsEcWLLOQRIROKSH4TxWbRPkgxhq6DtkdrUPhCFEinYWRfDJmhf
-	cGV3KSqs0We6KFm61KDSsKxANqPld+uIp+EcwkoYr5m+Yoj+BoovCUX8Aag97zXkwERA
-	ueCoW9HfrLC51iFydosqXR4vSBaPF+BCJq25f5IU0wXQQx3vSzGxP8kh+qmkFQ4HK/8P
-	OWbv9lvx18S1Kb6/MVkQqCmSrG5amt0su8inrE3yA/qhFLZL5lOAWgo//DlaDGe63SSM
-	P0aIr6sPd8zveTFfSo0HWdxu6BKQ2tDPke7DQMCbov5tFxno+6BuMqnlI3LTISh55KSN
-	8Czg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=K5U7pdzg/uj2N2h/b0RdTxFJ59bX/e0UjjlRFJF15U4=;
-	b=LllguhVIa3fWukFPlLkRVu4B0M4aqaGc7iwpvgBhV7s2AJUPR7RPvBUeBUb/8zqohf
-	G4ZtkcDHXJB9Fb7OtiwA0dvkW1FIDJB/EmEtMV+1JK6oJOU7XGxqhiv1oVCAM0XKb4FJ
-	cUBicBflYIezx8sf6uSSKhSoammlj3NIT5WC+s2IP9MgNFy7O+qgWFjqWAborGPTuvHQ
-	KNgWqTV0NS4Dd1kP+OznZl5IJa3yhNxr4+mjP9DB1o7BU9Rcjv159A1WqiAiXnMO4fNs
-	IgYg0OhTkyRLfRaYQ0j126EC1ssvXxygcAKvaXs7EA4omhU0At30HdaaQm9pNlLhtBrT
-	Bg2w==
-X-Gm-Message-State: ALQs6tBEHCgJnZ0p4rtEvjXkYIGVE6zZs17yhh2zS7rY4FmRN6AiPPT0
-	EXgL7dntIlzrilZUN1sKR4NJvfH7E7RCY8V8ZFM=
-X-Google-Smtp-Source: AIpwx4/y8jtQL9T79uWtKvVKDmb040UhhuyZBZDepFL7WF/jbOKnAdSuOkk7pb4K1/uk+5GMiNku8sElS/VhrmJW1aA=
-X-Received: by 10.129.48.3 with SMTP id w3mr3064846yww.247.1522878950125; Wed,
-	04 Apr 2018 14:55:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a25:d105:0:0:0:0:0 with HTTP;
-	Wed, 4 Apr 2018 14:55:49 -0700 (PDT)
-In-Reply-To: <CAMKF1soNi0qCc_DiOC-8_oa8TNZo-ssfKw47wPaYesjOAi-Kqw@mail.gmail.com>
-References: <20180404191013.38136-1-raj.khem@gmail.com>
-	<20180404191013.38136-2-raj.khem@gmail.com>
-	<CALbNGRQ+hFGBqvt0VNLLHeVBjFk7M3sZgiybiVwQBr3kqduviw@mail.gmail.com>
-	<CALbNGRTnVNgT0By0afjm09z72zD0wJcH=uGrxTkY1gtjgDBC4Q@mail.gmail.com>
-	<CAMKF1sovNddJc9-mbbfjTryenq2W3NUgNumtj56EKyxDSXKzKg@mail.gmail.com>
-	<CALbNGRRu2DXsWQXntne6OzT3otujYa+WGb0j++au0R_kXJNktA@mail.gmail.com>
-	<CAMKF1soNi0qCc_DiOC-8_oa8TNZo-ssfKw47wPaYesjOAi-Kqw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 4 Apr 2018 23:55:49 +0200
-Message-ID: <CALbNGRTKERBe3VEqgPh6C+h_VqWhwzQu-rOrcvQoDU5pJR3+4Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH V2 2/2] qtwebkit: Fix build on armv7ve (rpi)
+	Wed,  4 Apr 2018 23:54:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 001F120B70;
+	Wed,  4 Apr 2018 23:54:14 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id zOpnzL_Dkypf; Wed,  4 Apr 2018 23:54:13 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CB0162014F;
+	Wed,  4 Apr 2018 23:54:12 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 5473A1633B6;
+	Wed,  4 Apr 2018 19:54:12 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Apr 2018 19:54:10 -0400
+Message-Id: <1522886051-4482-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH 1/2] iperf3: drop patch to include stdint.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,99 +38,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2018 21:55:49 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Apr 2018 23:54:13 -0000
 
-On Wed, Apr 4, 2018 at 11:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Wed, Apr 4, 2018 at 2:26 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om>
-> wrote:
->>
->> On Wed, Apr 4, 2018 at 11:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> > On Wed, Apr 4, 2018 at 1:45 PM, Andreas M=C3=BCller <schnitzeltony@gma=
-il.com>
->> > wrote:
->> >> On Wed, Apr 4, 2018 at 10:25 PM, Andreas M=C3=BCller
->> >> <schnitzeltony@gmail.com> wrote:
->> >>> On Wed, Apr 4, 2018 at 9:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> >>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >>>> ---
->> >>>> v1 -> v2:
->> >>>> - Drop disabling GI
->> >>>>
->> >>>>  recipes-qt/qt5/qtwebkit_git.bb | 8 ++++++++
->> >>>>  1 file changed, 8 insertions(+)
->> >>>>
->> >>>> diff --git a/recipes-qt/qt5/qtwebkit_git.bb
->> >>>> b/recipes-qt/qt5/qtwebkit_git.bb
->> >>>> index e8c0868..c8e8328 100644
->> >>>> --- a/recipes-qt/qt5/qtwebkit_git.bb
->> >>>> +++ b/recipes-qt/qt5/qtwebkit_git.bb
->> >>>> @@ -18,6 +18,14 @@ DEPENDS +=3D "qtbase qtdeclarative icu ruby-nati=
-ve
->> >>>> sqlite3 glib-2.0 libxslt gperf-
->> >>>>  ARM_INSTRUCTION_SET_armv4 =3D "arm"
->> >>>>  ARM_INSTRUCTION_SET_armv5 =3D "arm"
->> >>>>
->> >>>> +# https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D9474
->> >>>> +# https://bugs.webkit.org/show_bug.cgi?id=3D159880
->> >>>> +# JSC JIT can build on ARMv7 with -marm, but doesn't work on
->> >>>> runtime.
->> >>>> +# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2
->> >>>> (-mthumb).
->> >>>> +ARM_INSTRUCTION_SET_armv7a =3D "thumb"
->> >>>> +ARM_INSTRUCTION_SET_armv7r =3D "thumb"
->> >>>> +ARM_INSTRUCTION_SET_armv7ve =3D "thumb"
->> >>>> +
->> >>>>  # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.10
->> >>>>  # 5.10.meta-qt5.1
->> >>>>  SRC_URI +=3D "\
->> >>>> --
->> >>>> 2.16.3
->> >>>>
->> >>> I've checked the links you are referring: Both
->> >>>
->> >>> * are related to webkit and from 2016
->> >>> * deal with runtime errors not build errors as referred in patch
->> >>> description.
->> >>>
->> >>> So what do you want to fix exactly?
->> >>>
->> >> I have looked into this further and found that I stumbled for same
->> >>
->> >> commit 511a3764506ce6bbdc5e9441a8f4e9d862ea1102
->> >> Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> >> Date:   Mon Jan 4 11:04:16 2016 +0100
->> >>
->> >>     qtscript/qtwebkit: disable thumb for armv4 and armv5 only to fix
->> >> segfault on armv7
->> >>
->> >> Curently recipe has
->> >>
->> >> ARM_INSTRUCTION_SET_armv4 =3D "arm"
->> >> ARM_INSTRUCTION_SET_armv5 =3D "arm"
->> >>
->> >> Isn't thumb default any more?
->> >>
->> >
->> > Thumb-1 doesn't really work since it shows up with register allocation
->> > errors with gcc.
->> > thumb2 is fine for armv6+
->> >
->> Sorry for causing confusion - what I meant: Isn't thumb2 default for
->> armv7 anymore (particularly RasPI > 1).  If thumb2 is still default
->> for armv7 there is no need to add it explicitly here. It does not do
->> any harm but it is not necessary.
->
->
->
-> Distros are free to choose ISA so we really can not rely on the fact when
-> default tune was to use thumb 2 moreover it=E2=80=99s not default
->>
-Got it - but with a bit more love on patch description I wouldn't have
-wasted your time:)
+From: Denys Dmytriyenko <denys@ti.com>
 
-Andreas
+Fixed upstream:
+https://github.com/esnet/iperf/commit/a8ee9c650b3efe4453a69ceebe4d71c3cb4bcadf
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...de-stdint.h-for-various-std-c99-int-types.patch | 39 ----------------------
+ meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb     |  1 -
+ 2 files changed, 40 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
+deleted file mode 100644
+index ae36208..0000000
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-stdint.h-for-various-std-c99-int-types.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From be653711fb92d2430b3ecc546b4e3ad927d19ec5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 14 Jul 2017 12:59:42 -0700
+-Subject: [PATCH 1/2] include stdint.h for various std c99 int types
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/cjson.h | 2 ++
+- src/timer.h | 1 +
+- 2 files changed, 3 insertions(+)
+-
+-diff --git a/src/cjson.h b/src/cjson.h
+-index fb8cd3b..69cd272 100644
+---- a/src/cjson.h
+-+++ b/src/cjson.h
+-@@ -23,6 +23,8 @@
+- #ifndef cJSON__h
+- #define cJSON__h
+- 
+-+#include <stdint.h>
+-+
+- #ifdef __cplusplus
+- extern "C"
+- {
+-diff --git a/src/timer.h b/src/timer.h
+-index 0f9c5eb..0b195be 100644
+---- a/src/timer.h
+-+++ b/src/timer.h
+-@@ -31,6 +31,7 @@
+- #define __TIMER_H
+- 
+- #include <sys/time.h>
+-+#include <stdint.h>
+- 
+- /* TimerClientData is an opaque value that tags along with a timer.  The
+- ** client can use it for whatever, and it gets passed to the callback when
+--- 
+-2.13.3
+-
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
+index 4d1b0c4..2ed0811 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
+@@ -15,7 +15,6 @@ DEPENDS = "openssl"
+ 
+ SRC_URI = "git://github.com/esnet/iperf.git \
+            file://automake-foreign.patch \
+-           file://0001-include-stdint.h-for-various-std-c99-int-types.patch \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
+            "
+ 
+-- 
+2.7.4
+
 
