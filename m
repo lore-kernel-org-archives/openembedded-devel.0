@@ -1,33 +1,55 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A84460800
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CA1F1745C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Apr 2018 23:54:13 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 043C720BB5;
-	Wed,  4 Apr 2018 23:54:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id M10k6S_m0fnF; Wed,  4 Apr 2018 23:54:13 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CDF8020B22;
-	Wed,  4 Apr 2018 23:54:12 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 61BC51633B7;
-	Wed,  4 Apr 2018 19:54:12 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Apr 2018 19:54:11 -0400
-Message-Id: <1522886051-4482-2-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1522886051-4482-1-git-send-email-denis@denix.org>
-References: <1522886051-4482-1-git-send-email-denis@denix.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH v2 2/2] iperf3: refresh local patches to avoid fuzz warnings
+	Thu,  5 Apr 2018 07:04:20 +0000 (UTC)
+Received: by mail-wr0-f179.google.com with SMTP id d1so26546103wrj.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Apr 2018 00:04:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=tnzOBsP3ZLKRNcVDThUsfj7gEv5hgFvN+G5RDdqMH+w=;
+	b=BNSs9i6mm3ZMwu1QWOutaN5DwkHu2YRc8y9+Bw44QM0yEG3K/DcqgvxYr7ebWpFlHv
+	P4yOHij1eeuF9Kjj3NCCIZkhLDhUpj9Rj4dCWFnooNzHz0H9v/Qsw/CjsJIMTLPm7VzU
+	Qn2Dmw2tPSeIo6awSE606/Chy0pZl1BygOX8JnI/MmnFqqn2exHj3qgqq8rAWHx0008P
+	qdyJoL3yV/y7o5BEm/fn8qTPaa0M7Qh/zIjMkxZOIM5ZDtt+UbYk9E1bYnkwAxiqqGG6
+	QES1CIk6OLhUAzMdHixZIfmUo1FP+UA8p40n12w2EuLVXfKxy2D2DOeeczeDFh/YwfKz
+	cm1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=tnzOBsP3ZLKRNcVDThUsfj7gEv5hgFvN+G5RDdqMH+w=;
+	b=jGZoF+gUlSy1xT7wBL+Aw+blNCIGsCzmuU8oLxJgpfC7ZhJUDuKGHXq7zG7Y8QtLx8
+	fgNcrUTjTY1APUQkJj/RJaeUYFicc6Bq4lwsqHRqLqDvtRAEfjm9UFK1zl9RVLSspxx+
+	2FALO2RNKEuJs39vmmjYz2wW1XONDexRkrLrkHfRTyHVNi4zJ9GGFQ76CfjbB7mW6tyV
+	yrgr+CaWYkeGW4gFevYuA/2ViRK2mfxmFl35Z/5pmIqDpIU8ecx4x1k31Cz9S2SXlCKr
+	zUUWNodl42EtWphKwBdKnLqZL6pvAYxox6HUO4cU+7NFPHAtE2IeeKLLzndwDMI7Q/vH
+	0TQA==
+X-Gm-Message-State: AElRT7HZl9WBt0fS8MNnmg+D+JCrzkCPQe+SBysyC0BkdouYLMqkvroC
+	h43SVYE2qvfjFhrXb8J29Vn7qPPaODGWMciyyXo=
+X-Google-Smtp-Source: AIpwx4+KXGloVOrh/TzUxKn6eU0/uP2fWDqGY+XiIthGu4SZm9erfirn9VrAAY9/ioNaJnv2gjRkacfP2ASnouDK5EA=
+X-Received: by 10.223.149.70 with SMTP id 64mr14578949wrs.223.1522911861070;
+	Thu, 05 Apr 2018 00:04:21 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.126.12 with HTTP; Thu, 5 Apr 2018 00:04:20 -0700 (PDT)
+In-Reply-To: <CALbNGRTKERBe3VEqgPh6C+h_VqWhwzQu-rOrcvQoDU5pJR3+4Q@mail.gmail.com>
+References: <20180404191013.38136-1-raj.khem@gmail.com>
+	<20180404191013.38136-2-raj.khem@gmail.com>
+	<CALbNGRQ+hFGBqvt0VNLLHeVBjFk7M3sZgiybiVwQBr3kqduviw@mail.gmail.com>
+	<CALbNGRTnVNgT0By0afjm09z72zD0wJcH=uGrxTkY1gtjgDBC4Q@mail.gmail.com>
+	<CAMKF1sovNddJc9-mbbfjTryenq2W3NUgNumtj56EKyxDSXKzKg@mail.gmail.com>
+	<CALbNGRRu2DXsWQXntne6OzT3otujYa+WGb0j++au0R_kXJNktA@mail.gmail.com>
+	<CAMKF1soNi0qCc_DiOC-8_oa8TNZo-ssfKw47wPaYesjOAi-Kqw@mail.gmail.com>
+	<CALbNGRTKERBe3VEqgPh6C+h_VqWhwzQu-rOrcvQoDU5pJR3+4Q@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 5 Apr 2018 09:04:20 +0200
+Message-ID: <CA+chaQfSNwNGy63TSKPZNwjOsfcjESswAjSdw7HHFAf9kuzXUg@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH V2 2/2] qtwebkit: Fix build on armv7ve (rpi)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,87 +62,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Apr 2018 23:54:13 -0000
+X-List-Received-Date: Thu, 05 Apr 2018 07:04:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+ARM_INSTRUCTION_SET isn't set to thumb in default config, so even with
+thumb in TUNE_FEATURES it's not actually used anywhere in default config.
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
-v2 - dropped one of the patches as it was accepted upstream
+On Wed, Apr 4, 2018 at 11:55 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om>
+wrote:
 
- .../iperf3/0002-Remove-pg-from-profile_CFLAGS.patch    | 12 +++++-------
- .../iperf3/iperf3/automake-foreign.patch               | 18 ++++++++++++++----
- 2 files changed, 19 insertions(+), 11 deletions(-)
-
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
-index 06eb41a..f012a02 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3/0002-Remove-pg-from-profile_CFLAGS.patch
-@@ -1,20 +1,21 @@
--From 6db0e28f906bc3784019dfb5bb011237a8034fda Mon Sep 17 00:00:00 2001
-+From c36a330f1cbbc1687b396c29a4164e9691d639ea Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 14 Jul 2017 13:00:16 -0700
--Subject: [PATCH 2/2] Remove -pg from profile_CFLAGS
-+Subject: [PATCH] Remove -pg from profile_CFLAGS
- 
- musl fails to link with missing gcrt1.o
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/Makefile.am | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/src/Makefile.am b/src/Makefile.am
--index 23b0c72..6268145 100644
-+index 11d763d..c394bef 100644
- --- a/src/Makefile.am
- +++ b/src/Makefile.am
--@@ -49,9 +49,9 @@ iperf3_LDFLAGS          = -g
-+@@ -52,9 +52,9 @@ iperf3_LDFLAGS          = -g
-  iperf3_profile_SOURCES  = main.c \
-  						  $(libiperf_la_SOURCES)
-  
-@@ -26,6 +27,3 @@ index 23b0c72..6268145 100644
-  
-  # Specify the sources and various flags for the test cases
-  t_timer_SOURCES         = t_timer.c
---- 
--2.13.3
--
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch b/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch
-index 06c394e..b99440a 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3/automake-foreign.patch
-@@ -1,12 +1,22 @@
--Pass the 'foreign' option to automake to enable iperf3 to build.
-+From 3dd9f84b42aa468cfb5e62f3fe64e018761d8dde Mon Sep 17 00:00:00 2001
-+From: Chunrong Guo <b40290@freescale.com>
-+Date: Mon, 5 Jan 2015 11:39:45 -0600
-+Subject: [PATCH] Pass the 'foreign' option to automake to enable iperf3 to
-+ build.
- 
- Upstream-Status: Inappropriate [configuration]
- 
- Signed-off-by: Chunrong Guo <b40290@freescale.com>
- 
----- a/configure.ac	2015-10-19 02:49:30.471867352 -0500
--+++ b/configure.ac	2015-10-19 02:46:36.207873572 -0500
--@@ -33,7 +33,7 @@
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index b988322..a554fcf 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -34,7 +34,7 @@ AC_CONFIG_AUX_DIR(config)
-  
-  
-  # Initialize the automake system
--- 
-2.7.4
-
+> On Wed, Apr 4, 2018 at 11:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > On Wed, Apr 4, 2018 at 2:26 PM Andreas M=C3=BCller <schnitzeltony@gmail=
+.com>
+> > wrote:
+> >>
+> >> On Wed, Apr 4, 2018 at 11:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> >> > On Wed, Apr 4, 2018 at 1:45 PM, Andreas M=C3=BCller <
+> schnitzeltony@gmail.com>
+> >> > wrote:
+> >> >> On Wed, Apr 4, 2018 at 10:25 PM, Andreas M=C3=BCller
+> >> >> <schnitzeltony@gmail.com> wrote:
+> >> >>> On Wed, Apr 4, 2018 at 9:10 PM, Khem Raj <raj.khem@gmail.com>
+> wrote:
+> >> >>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> >>>> ---
+> >> >>>> v1 -> v2:
+> >> >>>> - Drop disabling GI
+> >> >>>>
+> >> >>>>  recipes-qt/qt5/qtwebkit_git.bb | 8 ++++++++
+> >> >>>>  1 file changed, 8 insertions(+)
+> >> >>>>
+> >> >>>> diff --git a/recipes-qt/qt5/qtwebkit_git.bb
+> >> >>>> b/recipes-qt/qt5/qtwebkit_git.bb
+> >> >>>> index e8c0868..c8e8328 100644
+> >> >>>> --- a/recipes-qt/qt5/qtwebkit_git.bb
+> >> >>>> +++ b/recipes-qt/qt5/qtwebkit_git.bb
+> >> >>>> @@ -18,6 +18,14 @@ DEPENDS +=3D "qtbase qtdeclarative icu ruby-na=
+tive
+> >> >>>> sqlite3 glib-2.0 libxslt gperf-
+> >> >>>>  ARM_INSTRUCTION_SET_armv4 =3D "arm"
+> >> >>>>  ARM_INSTRUCTION_SET_armv5 =3D "arm"
+> >> >>>>
+> >> >>>> +# https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D9474
+> >> >>>> +# https://bugs.webkit.org/show_bug.cgi?id=3D159880
+> >> >>>> +# JSC JIT can build on ARMv7 with -marm, but doesn't work on
+> >> >>>> runtime.
+> >> >>>> +# Upstream only tests regularly the JSC JIT on ARMv7 with Thumb2
+> >> >>>> (-mthumb).
+> >> >>>> +ARM_INSTRUCTION_SET_armv7a =3D "thumb"
+> >> >>>> +ARM_INSTRUCTION_SET_armv7r =3D "thumb"
+> >> >>>> +ARM_INSTRUCTION_SET_armv7ve =3D "thumb"
+> >> >>>> +
+> >> >>>>  # Patches from https://github.com/meta-qt5/qtwebkit/commits/b5.1=
+0
+> >> >>>>  # 5.10.meta-qt5.1
+> >> >>>>  SRC_URI +=3D "\
+> >> >>>> --
+> >> >>>> 2.16.3
+> >> >>>>
+> >> >>> I've checked the links you are referring: Both
+> >> >>>
+> >> >>> * are related to webkit and from 2016
+> >> >>> * deal with runtime errors not build errors as referred in patch
+> >> >>> description.
+> >> >>>
+> >> >>> So what do you want to fix exactly?
+> >> >>>
+> >> >> I have looked into this further and found that I stumbled for same
+> >> >>
+> >> >> commit 511a3764506ce6bbdc5e9441a8f4e9d862ea1102
+> >> >> Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> >> >> Date:   Mon Jan 4 11:04:16 2016 +0100
+> >> >>
+> >> >>     qtscript/qtwebkit: disable thumb for armv4 and armv5 only to fi=
+x
+> >> >> segfault on armv7
+> >> >>
+> >> >> Curently recipe has
+> >> >>
+> >> >> ARM_INSTRUCTION_SET_armv4 =3D "arm"
+> >> >> ARM_INSTRUCTION_SET_armv5 =3D "arm"
+> >> >>
+> >> >> Isn't thumb default any more?
+> >> >>
+> >> >
+> >> > Thumb-1 doesn't really work since it shows up with register allocati=
+on
+> >> > errors with gcc.
+> >> > thumb2 is fine for armv6+
+> >> >
+> >> Sorry for causing confusion - what I meant: Isn't thumb2 default for
+> >> armv7 anymore (particularly RasPI > 1).  If thumb2 is still default
+> >> for armv7 there is no need to add it explicitly here. It does not do
+> >> any harm but it is not necessary.
+> >
+> >
+> >
+> > Distros are free to choose ISA so we really can not rely on the fact wh=
+en
+> > default tune was to use thumb 2 moreover it=E2=80=99s not default
+> >>
+> Got it - but with a bit more love on patch description I wouldn't have
+> wasted your time:)
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
