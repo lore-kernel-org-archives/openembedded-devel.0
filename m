@@ -1,37 +1,38 @@
-Return-Path: <mcfrisk@kapsi.fi>
-Received: from mail.kapsi.fi (mail.kapsi.fi [91.232.154.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C95475418
+Return-Path: <johannes.pointner@br-automation.com>
+Received: from mail2.br-automation.com (mail.br-automation.com [213.33.116.60])
+	by mail.openembedded.org (Postfix) with ESMTP id 67331753A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Apr 2018 13:15:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=kapsi.fi;
-	s=20161220; 
-	h=Subject:References:In-Reply-To:Message-Id:Date:Cc:To:From;
-	bh=LVbHWO+ckJLV79w72cJWyU5Zuz1ouuizez7HIHzIqA0=; 
-	b=m86CDQnxOzTiG08d6k7DD/QBnxrdMyUwifaMe+duzY7w7dtuOT0jXgsFpYJbPdDuB41aS7GmIL3kuPRlWMeaQ6Rci9YVO+odtF+PdZXN8kpmNj1WeDN8U80pJtdNK4lGhpWIBubt3UtJkY0ae4/0D6XkcPh2iFZIb/lH/YBIytxncskUdAE0svoO0TWU134U4FffEDVYvpXTkLoSDtrSG+fyyouAZvL0jxq1lVsWijsorjOtP8gepJpoi0jxQjx2i6ErBHEZj/yOlHMflxBUNgI3mXbEioBrM0Rv3ah6CmiB7lvRFc7wVZ7Xs1AqxcrS+ykTUG3S4K5A6C8nrgINow==;
-Received: from [91.232.154.11] (helo=lakka.kapsi.fi)
-	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-	(Exim 4.84_2) (envelope-from <mcfrisk@kapsi.fi>)
-	id 1f4Qxn-0007Sr-OD; Fri, 06 Apr 2018 15:59:32 +0300
-Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.84_2)
-	(envelope-from <mcfrisk@lakka.kapsi.fi>)
-	id 1f4Qxc-0005Nc-Bm; Fri, 06 Apr 2018 15:59:20 +0300
-From: Mikko Rapeli <mikko.rapeli@bmw.de>
+	Fri,  6 Apr 2018 13:33:33 +0000 (UTC)
+X-AuditID: c0a80110-253ff70000000e83-f0-5ac7772ed3b7
+Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
+	by mail2.br-automation.com () with SMTP id CD.DA.03715.E2777CA5;
+	Fri,  6 Apr 2018 15:33:34 +0200 (CEST)
+MIME-Version: 1.0
+From: Johannes Pointner <johannes.pointner@br-automation.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Apr 2018 15:59:03 +0300
-Message-Id: <1523019543-18710-2-git-send-email-mikko.rapeli@bmw.de>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1523019543-18710-1-git-send-email-mikko.rapeli@bmw.de>
-References: <1523019543-18710-1-git-send-email-mikko.rapeli@bmw.de>
-X-SA-Exim-Connect-IP: 91.232.154.11
-X-SA-Exim-Mail-From: mcfrisk@kapsi.fi
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on mail
-X-Spam-Level: **
-X-Spam-Status: No, score=2.6 required=5.0 tests=BAYES_50,
-	HEADER_FROM_DIFFERENT_DOMAINS,RDNS_NONE,SPF_NEUTRAL autolearn=no
-	autolearn_force=no version=3.4.0
-X-SA-Exim-Version: 4.2.1 (built Mon, 26 Dec 2011 16:24:06 +0000)
-X-SA-Exim-Scanned: Yes (on mail.kapsi.fi)
-Subject: [PATCH 2/2] lmbench: fix Upstream-Status metadata typos in patch
+Date: Fri, 6 Apr 2018 15:31:48 +0200
+Message-Id: <20180406133148.16279-1-johannes.pointner@br-automation.com>
+X-Mailer: git-send-email 2.16.3
+X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 06/04/2018 15:33:36,
+	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 06/04/2018 15:33:36,
+	Serialize complete at 06/04/2018 15:33:36,
+	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
+	9.0.1FP5|November 22, 2015) at 06.04.2018 15:33:33
+X-TNEFEvaluated: 1
+X-Disclaimed: 63135
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgluLIzCtJLcpLzFFi42I5sILRRlev/HiUwakVihYXDy9ldmD0OLdx
+	BWMAYxSXTUpqTmZZapG+XQJXxszdJ5kL+sQqJv+bzdjAuFa4i5GTQ0LARGJh53mWLkYuDiGB
+	zYwSsyc/ZAdJ8AoISpyc+YQFxGYTsJU4MuErmC0ioCvx8cNcRhCbWcBa4v3yBawgtjCQ/WjF
+	OzYQm0VAReLopAtAcziA5nhItHZwQ5RrSyxb+JoZYq+8xN7WlWwgeyUEOpglvjRsYoJICEmc
+	XnwWqkhYYsGEc8wTGPlmITlpFpJZCxiZVjGK5yZm5hjpJRXpJpaW5OcmlmTm5+kl5+duYoSE
+	j8AOxt1vtA8xCnAwKvHwChQdjxJiTSwrrsw9xCjBwawkwrv7z7EoId6UxMqq1KL8+KLSnNTi
+	Q4zSHCxK4rxWUbujhATSE0tSs1NTC1KLYLJMHJxSDYx5S6avNTWXDqyTD8zcsuL+tx3L2Rxv
+	XNSSr+M9ZhUnLOk/4UH2dd/uFRY7Vt0+UfLsqeq23YVb22UeMYhOuHvr0MLTkb3lM45EL2lJ
+	ahF7tkfbfrGTV8v9W4JJLx9UX35z/LB68ZtdjpndCgc19kxZ4sN0/CjXfEfntRIzlJh3bFwQ
+	7OW/p0RLiaU4I9FQi7moOBEAofu8zBsCAAA=
+Subject: [meta-networking][PATCH] mbedtls: upgrade to 2.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +45,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2018 13:15:40 -0000
+X-List-Received-Date: Fri, 06 Apr 2018 13:33:34 -0000
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+This also includes a switch to Apache license, because it's the primary lic=
+ense
+for the project according to their homepage.
+
+* Detail release note:
+  - https://tls.mbed.org/tech-updates/releases/mbedtls-2.8.0-2.7.2-and-2.1.=
+11-released
+
+Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
 ---
- .../lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{mbedtls=5F1.3.17.bb =3D> mbedtls=5F2.8.0.bb}        | 27 ++++++++++++=
++---------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls=5F1.3.17.bb =
+=3D> mbedtls=5F2.8.0.bb} (62%)
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch
-index 3351ce8..fa3d64d 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/use-base_libdir-instead-of-hardcoded-lib.patch
-@@ -3,7 +3,7 @@ From: Ting Liu <b28495@freescale.com>
- Date: Fri, 22 Nov 2013 15:20:08 +0800
- Subject: [PATCH] use base_libdir instead of hardcoded /lib
- 
--Upsteam Status: Inappropriate [configuration]
-+Upstream-Status: Inappropriate [configuration]
- 
- Signed-off-by: Ting Liu <b28495@freescale.com>
- ---
--- 
-1.9.1
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F1.3.17.=
+bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.8.0.bb
+similarity index 62%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls=5F1.3.17.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.8.0.bb
+index fcfec6907..736cce1b0 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F1.3.17.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.8.0.bb
+@@ -15,23 +15,28 @@ understand what the code does. It features:            =
+              \
+    platform abstraction and threading                                \
+ "
+=20
+-HOMEPAGE =3D "https://polarssl.org"
+-BUGTRACKER =3D "https://github.com/polarssl/polarssl/issues"
++HOMEPAGE =3D "https://tls.mbed.org/"
+=20
+-LICENSE =3D "GPLv2"
+-LIC=5FFILES=5FCHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa8=
+82bbe"
++LICENSE =3D "Apache-2.0"
++LIC=5FFILES=5FCHKSUM =3D "file://LICENSE;md5=3D302d50a6369f5f22efdb674db90=
+8167a"
+=20
+ SECTION =3D "libdevel"
+=20
+-SRC=5FURI =3D "https://tls.mbed.org/download/mbedtls-${PV}-gpl.tgz"
++SRC=5FURI =3D "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
+=20
+-SRC=5FURI[md5sum] =3D "a6ed92fc377ef60f7c24d42b900e0dad"
+-SRC=5FURI[sha256sum] =3D "f5beb43e850283915e3e0f8d37495eade3bfb5beedfb61e7=
+b8da70d4c68edb82"
++SRC=5FURI[md5sum] =3D "2d4b0e2cb844efde1e73d3bcd9731fef"
++SRC=5FURI[sha256sum] =3D "ab8b62b995781bcf22e87a265ed06267f87c3041198e996b=
+44441223d19fa9c3"
++
++inherit cmake
++
++PACKAGECONFIG ??=3D "shared-libs programs"
++PACKAGECONFIG[shared-libs] =3D "-DUSE=5FSHARED=5FMBEDTLS=5FLIBRARY=3DON,-U=
+SE=5FSHARED=5FMBEDTLS=5FLIBRARY=3DOFF"
++PACKAGECONFIG[programs] =3D "-DENABLE=5FPROGRAMS=3DON,-DENABLE=5FPROGRAMS=
+=3DOFF"
++
++EXTRA=5FOECMAKE =3D "-DENABLE=5FTESTING=3DOFF -DLIB=5FINSTALL=5FDIR:STRING=
+=3D${libdir}"
+=20
+-DEPENDS =3D "openssl"
+-RDEPENDS=5F${PN} +=3D "libcrypto"
+ PROVIDES +=3D "polarssl"
+ RPROVIDES=5F${PN} =3D "polarssl"
+-EXTRA=5FOECMAKE =3D "-DUSE=5FSHARED=5FPOLARSSL=5FLIBRARY=3Don -DLIB=5FINST=
+ALL=5FDIR=3D${baselib}"
+=20
+-inherit cmake
++PACKAGES =3D+ "${PN}-programs"
++FILES=5F${PN}-programs =3D "${bindir}/"
+--=20
+2.16.3
+
 
 
