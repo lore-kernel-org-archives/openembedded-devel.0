@@ -1,28 +1,40 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 81A8A747AE
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id C96A675158
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Apr 2018 08:33:08 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	06 Apr 2018 01:33:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,414,1517904000"; d="scan'208";a="214393007"
-Received: from linux.intel.com ([10.54.29.200])
-	by orsmga005.jf.intel.com with ESMTP; 06 Apr 2018 01:33:09 -0700
-Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
-	[10.237.72.84])
-	by linux.intel.com (Postfix) with ESMTP id 8CF965803C6
+	Fri,  6 Apr 2018 10:07:52 +0000 (UTC)
+Received: by mail-qt0-f180.google.com with SMTP id d50so545709qtc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Apr 2018 01:33:07 -0700 (PDT)
-From: "Maxin B. John" <maxin.john@intel.com>
+	Fri, 06 Apr 2018 03:07:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=SupRdxLrnlrE6zbErhwUbUhqIAd7BVG02wljQ0hzPlk=;
+	b=j9a0xVUM2d8XTXHCMTtq4F3YS6SzUw7yeRXLLcmSzN7/xgSgmD6/TKoI3FziN2vNlD
+	55vNHy61jY9YIwgdIDdOI/2TE8tmuW/x++CXGP5eToYxvnBfSXhhmnSkqHkYczrK8p+n
+	D9f+LlaPNkQ8UQlykg5BWskhhmpM3rRZen3IC57jny+Hml13974G5K/Aznn6ulqUafoH
+	ZMi6iJ0RiOyf4FvlQ3jmzECCvVmQ3HU7h34yPu491sHYIaov8fFy5a8BIKinAQHqvPJv
+	eK8F+5kFp/Nw1wwQEjwvgrCMsJwb9tKggfThfEJQdhvA38nf7wf+xUXg+M8nK877kHFN
+	djnw==
+X-Gm-Message-State: ALQs6tDrBt9Jy5MUBXdXdSfQ1g3RGTZtXSKVurrPWBtfsBWDeDCuKs+S
+	K9o6VTTo9P2t9P1Eg73QTHNz7MQz
+X-Google-Smtp-Source: AIpwx4//vGk/eegZHn3qytiSQW2yi7S/p+GH5Fur4QU0kD3YTVkWSIIOowCbBsVPOqMs8xN/iq772w==
+X-Received: by 10.200.0.158 with SMTP id c30mr38827680qtg.336.1523009273216;
+	Fri, 06 Apr 2018 03:07:53 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id k43sm8026410qtc.5.2018.04.06.03.07.50
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Apr 2018 03:07:51 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Apr 2018 11:33:27 +0300
-Message-Id: <1523003607-9699-1-git-send-email-maxin.john@intel.com>
-X-Mailer: git-send-email 2.4.0
-Subject: [PATCH] ell: upgrade to version 0.4
+Date: Fri,  6 Apr 2018 11:07:49 +0100
+Message-Id: <20180406100749.30058-1-git@andred.net>
+X-Mailer: git-send-email 2.16.2
+MIME-Version: 1.0
+Subject: [meta-python][PATCH] python-pybluez: add python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,85 +47,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2018 08:33:08 -0000
+X-List-Received-Date: Fri, 06 Apr 2018 10:07:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-1. Upgrade to version 0.4 and rename from _git to exact version _0.4
-2. Fix build issues with musl libc
+From: André Draszik <andre.draszik@jci.com>
 
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+This was missing so far.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- .../ell/0001-ell-fix-build-with-musl-libc.patch    | 39 ++++++++++++++++++++++
- .../recipes-core/ell/{ell_git.bb => ell_0.4.bb}    |  6 ++--
- 2 files changed, 43 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
- rename meta-oe/recipes-core/ell/{ell_git.bb => ell_0.4.bb} (64%)
+ .../recipes-devtools/python/python-pybluez.inc        | 17 +++++++++++++++++
+ .../recipes-devtools/python/python-pybluez_0.22.bb    | 19 ++-----------------
+ .../recipes-devtools/python/python3-pybluez_0.22.bb   |  2 ++
+ 3 files changed, 21 insertions(+), 17 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pybluez.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
 
-diff --git a/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch b/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
+diff --git a/meta-python/recipes-devtools/python/python-pybluez.inc b/meta-python/recipes-devtools/python/python-pybluez.inc
 new file mode 100644
-index 0000000..a172a93
+index 000000000..ed72716b6
 --- /dev/null
-+++ b/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
-@@ -0,0 +1,39 @@
-+From 4f8c68757b05d12392cd1a8aed174cb8e56f80e3 Mon Sep 17 00:00:00 2001
-+From: "Maxin B. John" <maxin.john@intel.com>
-+Date: Thu, 5 Apr 2018 17:19:44 +0300
-+Subject: [PATCH] ell: fix build with musl libc
++++ b/meta-python/recipes-devtools/python/python-pybluez.inc
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Bluetooth Python extension module"
++HOMEPAGE = "http://karulis.github.io/pybluez/"
++SECTION = "devel/python"
 +
-+musl libc doesn't implement TEMP_FAILURE_RETRY. Use the
-+TEMP_FAILURE_RETRY from glibc to fix build.
++RDEPENDS_${PN} = "bluez5"
++DEPENDS = "bluez5"
 +
-+Upstream-Status: Submitted [https://lists.01.org/pipermail/ell/2018-April/001209.html]
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
 +
-+Signed-off-by: Maxin B. John <maxin.john@intel.com>
-+---
-+ ell/dbus.h | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
++inherit pypi
 +
-+diff --git a/ell/dbus.h b/ell/dbus.h
-+index a7c08d2..3ff5e0f 100644
-+--- a/ell/dbus.h
-++++ b/ell/dbus.h
-+@@ -28,6 +28,16 @@
-+ #include <stddef.h>
-+ #include <stdarg.h>
-+ 
-++/* taken from glibc unistd.h for musl support */
-++#ifndef TEMP_FAILURE_RETRY
-++#define TEMP_FAILURE_RETRY(expression)             \
-++  (__extension__                                   \
-++    ({ long int __result;                          \
-++       do __result = (long int) (expression);      \
-++       while (__result == -1L && errno == EINTR);  \
-++       __result; }))
-++#endif
-++
-+ #ifdef __cplusplus
-+ extern "C" {
-+ #endif
-+-- 
-+2.4.0
++SRC_URI = "https://pypi.python.org/packages/c1/98/3149481d508bee174335be6725880f00d297afebe75c15e917af8f6fe169/PyBluez-0.22.zip"
++SRC_URI[md5sum] = "49dab9d5a8f0b798c8125c7f649be3cd"
++SRC_URI[sha256sum] = "4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d"
 +
-diff --git a/meta-oe/recipes-core/ell/ell_git.bb b/meta-oe/recipes-core/ell/ell_0.4.bb
-similarity index 64%
-rename from meta-oe/recipes-core/ell/ell_git.bb
-rename to meta-oe/recipes-core/ell/ell_0.4.bb
-index 4354974..1524bd6 100644
---- a/meta-oe/recipes-core/ell/ell_git.bb
-+++ b/meta-oe/recipes-core/ell/ell_0.4.bb
-@@ -7,8 +7,10 @@ SECTION = "libs"
- inherit autotools pkgconfig
- 
- S = "${WORKDIR}/git"
--SRCREV = "8192131685be0f27d6f51b14b78ef93fa7f3c692"
--SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
-+SRCREV = "b4aea06fabb2af1af01f861f8f394c75950b6d47"
-+SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git \
-+           file://0001-ell-fix-build-with-musl-libc.patch \
-+          "
- 
- do_configure_prepend () {
-     mkdir ${S}/build-aux
++S = "${WORKDIR}/PyBluez-${PV}"
+diff --git a/meta-python/recipes-devtools/python/python-pybluez_0.22.bb b/meta-python/recipes-devtools/python/python-pybluez_0.22.bb
+index eab9c5420..3158f4b64 100644
+--- a/meta-python/recipes-devtools/python/python-pybluez_0.22.bb
++++ b/meta-python/recipes-devtools/python/python-pybluez_0.22.bb
+@@ -1,17 +1,2 @@
+-DESCRIPTION = "Bluetooth Python extension module"
+-HOMEPAGE = "http://karulis.github.io/pybluez/"
+-SECTION = "devel/python"
+-
+-RDEPENDS_${PN} = "bluez5"
+-DEPENDS = "bluez5"
+-
+-LICENSE = "GPL-2.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
+-
+-inherit pypi setuptools
+-
+-SRC_URI = "https://pypi.python.org/packages/c1/98/3149481d508bee174335be6725880f00d297afebe75c15e917af8f6fe169/PyBluez-0.22.zip"
+-SRC_URI[md5sum] = "49dab9d5a8f0b798c8125c7f649be3cd"
+-SRC_URI[sha256sum] = "4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d"
+-
+-S = "${WORKDIR}/PyBluez-${PV}"
++require python-pybluez.inc
++inherit setuptools
+diff --git a/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb b/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
+new file mode 100644
+index 000000000..9712a7608
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pybluez_0.22.bb
+@@ -0,0 +1,2 @@
++require python-pybluez.inc
++inherit setuptools3
 -- 
-2.4.0
+2.16.2
 
 
