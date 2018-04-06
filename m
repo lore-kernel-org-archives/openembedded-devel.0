@@ -1,38 +1,106 @@
-Return-Path: <johannes.pointner@br-automation.com>
-Received: from mail2.br-automation.com (mail.br-automation.com [213.33.116.60])
-	by mail.openembedded.org (Postfix) with ESMTP id 67331753A4
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 28F5175400
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Apr 2018 13:33:33 +0000 (UTC)
-X-AuditID: c0a80110-253ff70000000e83-f0-5ac7772ed3b7
-Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
-	by mail2.br-automation.com () with SMTP id CD.DA.03715.E2777CA5;
-	Fri,  6 Apr 2018 15:33:34 +0200 (CEST)
+	Fri,  6 Apr 2018 14:59:34 +0000 (UTC)
+Received: by mail-pf0-f180.google.com with SMTP id g14so924951pfh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Apr 2018 07:59:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=2BF9EPq/38Byal+9L0ewkcLxJzeqPosO2ODlKk4rq3U=;
+	b=FfJyBgyxyaTsifzIZKpeQIv/jcdefY546hBksArjUDRmW1pf5mpY/mZnJsZs6zDI5Y
+	bDmX20QCD2pdX1MYHT5032ahPPiohUHJ+iMrKSWS/VuDaaFyczQ3kgWXaZ2/mQhzW8h8
+	07I0DCqyRTGzxeCRf1fMxX9u3t2XYsVqTJyQJhzvXUV7hY7Am4OSYPwViQKeROe7a0Wk
+	XSSJjoBaSnOcht6wVPO1V3tK6izZPxrv3+l/y+1X4Kuhy81mTE2OxYyuauNJEaCW3wvR
+	H6ysgU2cr3NPLg0eo9w19UuZ+TvUqAQb1/Vw9r6C9HT7nVk+CJXeU5gUiFmLM2oDajVK
+	aMjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=2BF9EPq/38Byal+9L0ewkcLxJzeqPosO2ODlKk4rq3U=;
+	b=LoVWeeGAunXZHacZlowZcBZH6lHigQG6J7xRLRz2MpLnjlg3zW2na5fl3IJ3C82aBD
+	AFmgP9zDHxyn+zPkby1PlwboqqdeuchIAuNiDoqkfJstrsjNnhN0LViwvwaSHzEvYJ4z
+	Zv487LWJSS/4bW39guvGzrgUvkgVguZLyFERSfBpRCsoPn4Ri+ZoPNYSrZ+/oMVyHKyN
+	AVobo7Zk4LHtuMgtsAnUZYrx7Wnaii0md4yjwfWCYITVoZeHi6Sx0pT6CaxjLGZL11x5
+	2+Hrypug3tagZWVKa5gqF6hL1vWL7TzxDGaPYQ9a5s9oajiOAkFEwScZGulftGJvtYdR
+	6kyg==
+X-Gm-Message-State: ALQs6tCapuwdOhgXbFi1oU5myhi1zv2HSLz7QXGkH+Rgul90bwq9pbBp
+	uC/PdO9yf/HV96/oIIz7gBYqhA==
+X-Google-Smtp-Source: AIpwx4+qV2xvWlKmmEaSL8TfH7+SZq92XvqvbWH/wEgYB0QtdDfKXJG177JSFYSCFk8O36K4azpEcw==
+X-Received: by 10.98.156.91 with SMTP id f88mr5812182pfe.128.1523026775551;
+	Fri, 06 Apr 2018 07:59:35 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:b0a5:8e4b:7c5e:fa8f?
+	([2601:202:4000:1184:b0a5:8e4b:7c5e:fa8f])
+	by smtp.gmail.com with ESMTPSA id
+	b73sm18400272pga.62.2018.04.06.07.59.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Apr 2018 07:59:34 -0700 (PDT)
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>,
+	Anuj Mittal <anuj.mittal@intel.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1522850964-2056-1-git-send-email-akuster808@gmail.com>
+	<2dbfe46b-f90e-9f4e-d8eb-e93f969fb45e@linux.intel.com>
+	<03145566-01b3-e823-d652-902c8735b357@gmail.com>
+	<19620545-fffc-8c6d-9300-b958ca28b5dd@intel.com>
+	<35823800-fc80-14ce-7ad7-1aa73eaa5f0f@linux.intel.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <fe4115dc-335f-351d-8b99-b21fcc6294ea@gmail.com>
+Date: Fri, 6 Apr 2018 07:59:33 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-From: Johannes Pointner <johannes.pointner@br-automation.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 6 Apr 2018 15:31:48 +0200
-Message-Id: <20180406133148.16279-1-johannes.pointner@br-automation.com>
-X-Mailer: git-send-email 2.16.3
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 06/04/2018 15:33:36,
-	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 06/04/2018 15:33:36,
-	Serialize complete at 06/04/2018 15:33:36,
-	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
-	9.0.1FP5|November 22, 2015) at 06.04.2018 15:33:33
-X-TNEFEvaluated: 1
-X-Disclaimed: 63135
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgluLIzCtJLcpLzFFi42I5sILRRlev/HiUwakVihYXDy9ldmD0OLdx
-	BWMAYxSXTUpqTmZZapG+XQJXxszdJ5kL+sQqJv+bzdjAuFa4i5GTQ0LARGJh53mWLkYuDiGB
-	zYwSsyc/ZAdJ8AoISpyc+YQFxGYTsJU4MuErmC0ioCvx8cNcRhCbWcBa4v3yBawgtjCQ/WjF
-	OzYQm0VAReLopAtAcziA5nhItHZwQ5RrSyxb+JoZYq+8xN7WlWwgeyUEOpglvjRsYoJICEmc
-	XnwWqkhYYsGEc8wTGPlmITlpFpJZCxiZVjGK5yZm5hjpJRXpJpaW5OcmlmTm5+kl5+duYoSE
-	j8AOxt1vtA8xCnAwKvHwChQdjxJiTSwrrsw9xCjBwawkwrv7z7EoId6UxMqq1KL8+KLSnNTi
-	Q4zSHCxK4rxWUbujhATSE0tSs1NTC1KLYLJMHJxSDYx5S6avNTWXDqyTD8zcsuL+tx3L2Rxv
-	XNSSr+M9ZhUnLOk/4UH2dd/uFRY7Vt0+UfLsqeq23YVb22UeMYhOuHvr0MLTkb3lM45EL2lJ
-	ahF7tkfbfrGTV8v9W4JJLx9UX35z/LB68ZtdjpndCgc19kxZ4sN0/CjXfEfntRIzlJh3bFwQ
-	7OW/p0RLiaU4I9FQi7moOBEAofu8zBsCAAA=
-Subject: [meta-networking][PATCH] mbedtls: upgrade to 2.8.0
+In-Reply-To: <35823800-fc80-14ce-7ad7-1aa73eaa5f0f@linux.intel.com>
+Subject: Re: [meta-networking][PATCH] wireshark: update to 2.4.6 and add upstream check
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,84 +113,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Apr 2018 13:33:34 -0000
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Apr 2018 14:59:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-This also includes a switch to Apache license, because it's the primary lic=
-ense
-for the project according to their homepage.
 
-* Detail release note:
-  - https://tls.mbed.org/tech-updates/releases/mbedtls-2.8.0-2.7.2-and-2.1.=
-11-released
 
-Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
----
- .../{mbedtls=5F1.3.17.bb =3D> mbedtls=5F2.8.0.bb}        | 27 ++++++++++++=
-+---------
- 1 file changed, 16 insertions(+), 11 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls=5F1.3.17.bb =
-=3D> mbedtls=5F2.8.0.bb} (62%)
+On 04/06/2018 12:49 AM, Alexander Kanavin wrote:
+> On 04/06/2018 07:48 AM, Anuj Mittal wrote:
+>>>>> +UPSTREAM_CHECK_REGEX = "wireshark-(?P<pver>2\.4(\.\d+)+)\.tar\.xz"
+>>>>
+>>>> Why restrict the version to only 2.4.x ?
+>>> 2.5.1 is beta.. I don't want to update to it.
+>>
+>> It follows the odd/even versioning with odd being the development
+>> releases.
+>>
+>> https://wiki.wireshark.org/Development/ReleaseNumbers
+>>
+>> Perhaps you can use a regex similar to upstream-version-is-even so this
+>> is future-proof?
+>
+> Yes, I think you can simply inherit upstream-version-is-even directly.
+Oh, cool. I will have to check it out.
+Thanks.
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F1.3.17.=
-bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.8.0.bb
-similarity index 62%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls=5F1.3.17.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.8.0.bb
-index fcfec6907..736cce1b0 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F1.3.17.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.8.0.bb
-@@ -15,23 +15,28 @@ understand what the code does. It features:            =
-              \
-    platform abstraction and threading                                \
- "
-=20
--HOMEPAGE =3D "https://polarssl.org"
--BUGTRACKER =3D "https://github.com/polarssl/polarssl/issues"
-+HOMEPAGE =3D "https://tls.mbed.org/"
-=20
--LICENSE =3D "GPLv2"
--LIC=5FFILES=5FCHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa8=
-82bbe"
-+LICENSE =3D "Apache-2.0"
-+LIC=5FFILES=5FCHKSUM =3D "file://LICENSE;md5=3D302d50a6369f5f22efdb674db90=
-8167a"
-=20
- SECTION =3D "libdevel"
-=20
--SRC=5FURI =3D "https://tls.mbed.org/download/mbedtls-${PV}-gpl.tgz"
-+SRC=5FURI =3D "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
-=20
--SRC=5FURI[md5sum] =3D "a6ed92fc377ef60f7c24d42b900e0dad"
--SRC=5FURI[sha256sum] =3D "f5beb43e850283915e3e0f8d37495eade3bfb5beedfb61e7=
-b8da70d4c68edb82"
-+SRC=5FURI[md5sum] =3D "2d4b0e2cb844efde1e73d3bcd9731fef"
-+SRC=5FURI[sha256sum] =3D "ab8b62b995781bcf22e87a265ed06267f87c3041198e996b=
-44441223d19fa9c3"
-+
-+inherit cmake
-+
-+PACKAGECONFIG ??=3D "shared-libs programs"
-+PACKAGECONFIG[shared-libs] =3D "-DUSE=5FSHARED=5FMBEDTLS=5FLIBRARY=3DON,-U=
-SE=5FSHARED=5FMBEDTLS=5FLIBRARY=3DOFF"
-+PACKAGECONFIG[programs] =3D "-DENABLE=5FPROGRAMS=3DON,-DENABLE=5FPROGRAMS=
-=3DOFF"
-+
-+EXTRA=5FOECMAKE =3D "-DENABLE=5FTESTING=3DOFF -DLIB=5FINSTALL=5FDIR:STRING=
-=3D${libdir}"
-=20
--DEPENDS =3D "openssl"
--RDEPENDS=5F${PN} +=3D "libcrypto"
- PROVIDES +=3D "polarssl"
- RPROVIDES=5F${PN} =3D "polarssl"
--EXTRA=5FOECMAKE =3D "-DUSE=5FSHARED=5FPOLARSSL=5FLIBRARY=3Don -DLIB=5FINST=
-ALL=5FDIR=3D${baselib}"
-=20
--inherit cmake
-+PACKAGES =3D+ "${PN}-programs"
-+FILES=5F${PN}-programs =3D "${bindir}/"
---=20
-2.16.3
-
+- armin
+>
+> Alex
 
 
