@@ -1,52 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A03EB7550C
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 46C967553B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Apr 2018 06:58:57 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id u86so3726565pfd.2
+	Sun,  8 Apr 2018 06:58:58 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id bj1-v6so3199182plb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Apr 2018 23:58:59 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=R1efOz/eSR9nZR/JmpKMaZwHEQw8FNgMIml4uPo3JYs=;
-	b=b7oSPxRpf42EjRV6DxxCDhcylZNGxg9kJW+rOMc3KpbJ+5rk+DtYbEXTBSDWvVzEt2
-	PpGAClBUcZSLlR0hSJ7clT0DTQJHWyaSAO87SI5HEUc2uRLDUoWGaPJ0OY3fFnNp7Jnc
-	WiTpu0lyTOmKfzBtj57D9Q/awYJbRK+o/E6OnIp565RS45m8dM5DUbLDtnGndTjLAXq3
-	4rIs6N6YtzRts7gwr8OXF9XY1nKZ9OB61jLsBTpMXutIqbZeD0MmCcYWEZDc7PnDUXF8
-	ufPv4omagZFEh2DtG2NmpTgFu77elJ0p1GSMwPxVd9/NVuezTACn/aV8IBysGq1lvf/W
-	o37w==
+	bh=dKa6v20vFAb/FKSgL4VIZH8WytI7bId3rmK3D4cqOJs=;
+	b=QVQCoIDJbFESSUpJM0Nrxo2S5pfGFEnyJLLtVHgCfLIyy7ztszOTf3PmcCQu9WsuLj
+	Uutl1hJlpqWYxBtz86HLg07iYlaLj9tlmT4O+dtArN63UyeKDfXCpUvDzk+kSsj7DjFk
+	zr7EnJeOMudfALaiQu2xXsPxzhNeBXvg6jFjR5urNd6yWrzCLlruI2ScsObtd5UlgbNj
+	A83dtQDMYUbWA8chWgiD0MkTgK/32WBYAogZhutYE6J/UeEc7HlFSgj+fY+I720HHTrU
+	1Vk7d6WJNoHEbdKePpa56ItTg4mmHJzNUvj5z6IRS2iQpL30rz1FJg/VuCbkqOonb1G+
+	shmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=R1efOz/eSR9nZR/JmpKMaZwHEQw8FNgMIml4uPo3JYs=;
-	b=oLitytFrkVvEjv3i1ovfanjuombSb2ampBmUaIx1Cb8VseEcdfYXBBUvTpFsGjwlHU
-	0Ky43jK0golCp7RaC1wMtEwJ0ztVdJAL9DAeazHOqpiI/VZaSTmgmqOo+60QvyOONQeo
-	/juzMGt/z+DjlKM5yy2408YnXaR/53GFhhUNKxIteLpPdvwy2EnpqE2TGcXmLkv0xAEO
-	cr0zbjmKL/wBQzcBmDNk4jGJ4zGlXCFTGBh+d0ch9n2OE12r6YmLBZaT1iqhhByggmvq
-	gSnVg4/VO8XBm/1c3qsgwJMeGrzYR3EKO+4lNc75VAXqLy1D6ZmvMNkeFg2MdUFOLuzE
-	hmMQ==
-X-Gm-Message-State: ALQs6tA/TgKmG4tN5q1LYZr15yogHwKDDGMAQcG5DHOoXgUIh4rbVyCV
-	XvmcbNv86W9s52TrbsIUvp9Emw==
-X-Google-Smtp-Source: AIpwx487wi3IChVkS88RX7qs/QYSKsAvfURfN8FXmTkSHkiMRYPubDdLHSHzzj7wGPNPRvCCPZPkXA==
-X-Received: by 10.99.101.66 with SMTP id z63mr12057637pgb.383.1523170738987;
-	Sat, 07 Apr 2018 23:58:58 -0700 (PDT)
+	bh=dKa6v20vFAb/FKSgL4VIZH8WytI7bId3rmK3D4cqOJs=;
+	b=CoIZfR09cvZEQdP5Ql7vXWam3RQIfqLJdDOIR7stJAC0c3xdWeiWugtr9MBZIYhcvZ
+	/rPtiqDc5VgRE0PBKIkj1c4SG9TpLgoSqI5npbfKh/ctHdjaNj+ajgeNwC717QRBznnz
+	1CRt1AJABr82SS1TzQxvTmFvJ8Zxcz7rx+IDIpIbj7tL9au9Lk6eNd1EOFPG2XbjNLIE
+	de4w2eZBW3BcgS6flFlFlmmq0nep3tTR9INWYSaQHZmXQuh9iw4hcHH2fwW2Z1f9HyxN
+	55LMCdSfrgmOmvggaPbSmjTakBQbsoWPYiP2vokmxiGC9vKWd2Z2Be8EqlhQLp8iHNHh
+	sPvg==
+X-Gm-Message-State: ALQs6tCBYqdBOD4jC20WG5dKlZwrH+gQ85nMV++9YpmbXBPd7riHr5uo
+	Sb9rQxwC1NxvzcN27Aa+t7zRNw==
+X-Google-Smtp-Source: AIpwx4+9bd9w8fO6JXrGV/IpRnGz2wGwZ9Se6/D57rDF0UP29NSsYXmMqDLLBrGriSN76C58Ud4DlA==
+X-Received: by 2002:a17:902:5a4:: with SMTP id
+	f33-v6mr20807670plf.278.1523170740348; 
+	Sat, 07 Apr 2018 23:59:00 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:932:e5ef:c5a4:fdbd])
 	by smtp.gmail.com with ESMTPSA id
-	c186sm20506137pfb.40.2018.04.07.23.58.58
+	c186sm20506137pfb.40.2018.04.07.23.58.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Apr 2018 23:58:58 -0700 (PDT)
+	Sat, 07 Apr 2018 23:58:59 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Apr 2018 23:58:19 -0700
-Message-Id: <1523170729-26321-7-git-send-email-akuster808@gmail.com>
+Date: Sat,  7 Apr 2018 23:58:20 -0700
+Message-Id: <1523170729-26321-8-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
 References: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 07/37] uim: refresh patches
+Subject: [meta-oe][PATCH 08/37] obexd: refreah patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +60,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2018 06:58:57 -0000
+X-List-Received-Date: Sun, 08 Apr 2018 06:58:59 -0000
 
 WARNING:
 Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
@@ -75,93 +76,55 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-checking file scm/Makefile.am
-Hunk #1 succeeded at 119 with fuzz 2 (offset 61 lines).
+patching file plugins/mas.c
+Hunk #1 succeeded at 30 with fuzz 2 (offset 1 line).
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../uim/uim/0001-Add-support-for-aarch64.patch       |  6 ++----
- .../uim/uim/0001-fix-bug-for-cross-compile.patch     |  6 ++----
- .../recipes-support/uim/uim/uim-module-manager.patch | 20 +++++++++++++++-----
- 3 files changed, 19 insertions(+), 13 deletions(-)
+ .../obex/obexd/ssize_t_definition.patch            | 24 ++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch b/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch
-index 4b12494..391b0e6 100644
---- a/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch
-+++ b/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch
-@@ -1,9 +1,10 @@
--From 24fd52cc45f7b5ff45afe072f5fbe66485df8c8e Mon Sep 17 00:00:00 2001
-+From 82f44f53b9a9766c2ec816f237506beb953eb332 Mon Sep 17 00:00:00 2001
- From: Andreas Schwab <schwab@suse.de>
- Date: Wed, 29 Oct 2014 14:18:28 +0100
- Subject: [PATCH] Add support for aarch64
+diff --git a/meta-gnome/recipes-connectivity/obex/obexd/ssize_t_definition.patch b/meta-gnome/recipes-connectivity/obex/obexd/ssize_t_definition.patch
+index 2009dcd..570cb9e 100644
+--- a/meta-gnome/recipes-connectivity/obex/obexd/ssize_t_definition.patch
++++ b/meta-gnome/recipes-connectivity/obex/obexd/ssize_t_definition.patch
+@@ -1,4 +1,7 @@
+-include unistd.h to get ssize_t definitions
++From fb5056fea9559b3ec3bb61967a112b6c793b700d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 8 Jan 2013 21:33:34 -0800
++Subject: [PATCH] include unistd.h to get ssize_t definitions
  
- * include/private/gcconfig.h: Add support for aarch64.
-+
- ---
-  sigscheme/libgcroots/include/private/gcconfig.h | 37 +++++++++++++++++++++++++
-  1 file changed, 37 insertions(+)
-@@ -77,6 +78,3 @@ index 4d42b03..0f13db6 100644
-  # ifdef ARM32
-  #   define CPP_WORDSZ 32
-  #   define MACH_TYPE "ARM32"
---- 
--2.13.2
--
-diff --git a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-index df82b07..0c8f02d 100644
---- a/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-+++ b/meta-oe/recipes-support/uim/uim/0001-fix-bug-for-cross-compile.patch
-@@ -1,9 +1,10 @@
--From 2918196ba782dfa4401bdca917ad4de1910505e0 Mon Sep 17 00:00:00 2001
-+From 08b5e51224ed95b1e76e99873b5f9f59840b0a74 Mon Sep 17 00:00:00 2001
- From: Lei Maohui <leimaohui@cn.fujitsu.com>
- Date: Fri, 21 Aug 2015 15:58:42 +0900
- Subject: [PATCH] fix bug for cross compile
+ Fixes errors like
  
- Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-+
- ---
-  configure.ac | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
-@@ -23,6 +24,3 @@ index 9be879c..9249bfd 100644
-      AC_CHECK_LIB(curses, tgetent, LIBEDIT_LIBS="-lcurses",
-          [AC_CHECK_LIB(ncurses, tgetent, LIBEDIT_LIBS="-lncurses",
-              AC_MSG_WARN("libedit needs libcurses or libncurses. disabled...")
---- 
--1.8.4.2
--
-diff --git a/meta-oe/recipes-support/uim/uim/uim-module-manager.patch b/meta-oe/recipes-support/uim/uim/uim-module-manager.patch
-index 8569bf3..3078af0 100644
---- a/meta-oe/recipes-support/uim/uim/uim-module-manager.patch
-+++ b/meta-oe/recipes-support/uim/uim/uim-module-manager.patch
-@@ -1,11 +1,21 @@
----- uim-1.1.0/scm/Makefile.am~	2006-06-09 10:46:12.000000000 +0900
--+++ uim-1.1.0/scm/Makefile.am	2006-06-19 23:00:15.620000000 +0900
--@@ -58,7 +58,7 @@
--   module_names += "scim"
-+From d61495d3fb039842b82df44184c67eb3c1256136 Mon Sep 17 00:00:00 2001
-+From: Bian Naimeng <biannm@cn.fujitsu.com>
-+Date: Fri, 26 Jun 2015 12:57:48 +0900
+@@ -18,15 +21,20 @@ Fixes errors like
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Index: obexd-0.44/plugins/mas.c
+-===================================================================
+---- obexd-0.44.orig/plugins/mas.c	2012-01-11 14:53:53.000000000 -0800
+-+++ obexd-0.44/plugins/mas.c	2013-01-08 12:51:12.681882174 -0800
+-@@ -29,6 +29,7 @@
 +
 +---
-+ scm/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ plugins/mas.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/scm/Makefile.am b/scm/Makefile.am
-+index 14d9393..e8a1083 100644
-+--- a/scm/Makefile.am
-++++ b/scm/Makefile.am
-+@@ -119,7 +119,7 @@ if EXPAT
-+   module_names += "yahoo-jp"
-  endif
++diff --git a/plugins/mas.c b/plugins/mas.c
++index 1b18059..b519507 100644
++--- a/plugins/mas.c
+++++ b/plugins/mas.c
++@@ -30,6 +30,7 @@
+  #include <glib.h>
+  #include <fcntl.h>
+  #include <inttypes.h>
+ +#include <unistd.h>
   
- -UIM_MODULE_MANAGER = $(top_builddir)/uim/uim-module-manager
- +UIM_MODULE_MANAGER = uim-module-manager
-  UIM_MODULE_MANAGER_ENV = \
-+         LIBUIM_SYSTEM_SCM_FILES=$(abs_top_srcdir)/sigscheme/lib \
-          LIBUIM_SCM_FILES=$(abs_srcdir) \
--         LIBUIM_PLUGIN_LIB_DIR=$(abs_top_builddir)/uim/.libs
+- #include "obexd.h"
+- #include "plugin.h"
++ #include <gobex/gobex.h>
++ #include <gobex/gobex-apparam.h>
 -- 
 2.7.4
 
