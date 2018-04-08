@@ -1,53 +1,54 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id AD38B75500
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A278875524
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Apr 2018 06:58:52 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id s10-v6so3208694plp.0
+	Sun,  8 Apr 2018 06:58:53 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id a2so3719595pff.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Apr 2018 23:58:53 -0700 (PDT)
+	Sat, 07 Apr 2018 23:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=DdCvpyUiXHKI7QJT9U5nHKTuydLtSpNR6zyGqMJr1vE=;
-	b=G6uqkinE/21h3UF0zHgSUSk5rjltc5KIsQHCxuUIDDJ4XfcMUHXExsjEINDLfu36aJ
-	2l/TD6+ewYN9C5xlYQNovEzRDBpXOoBkLZ9KuxQZw2fX+zhN380sHOdqybv6JCtcwW0F
-	GDe05tVnZ95Oi0LJZhZ2pqI2/1aaI6sZJPW+84Saq+LW3xjZaGy6IfFV70puEZmMTQqv
-	RHRzwldY1B4htSP1Oi8YQRDgBGf1hJtKipp8gFyAY3aBG+PBT1qbzsnHYwK6cvxaE3C8
-	8HOgrv6uWP3Kpt3fWWluif3bp0cbI8Y6StiD5tHp2CPqlDczH7NbMZv4TeJPoahqlbAg
-	QDjw==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=+qzOTGtw71Hc8LeVSR0yC90zgWMeJQqpuKyqGO+MIRQ=;
+	b=ZNdREKJaKD4fYnPZVpTdvZUoSc0Ljv6sYM7bWS9JTWWar80aLJ4IyLNgkENqDLyYsQ
+	lvihk9ycRFzdoR/VpJ8HA+qe0VCHHM1bPFc5BlatmSU7ROSxd6CrNptDIKaXLhA3hgqP
+	B/hMfNRptQ6gB2JGhH4pB4Mp/B6rsae4oD9OC30D5d6emQXw/qP714BFKPnghnvhGQgZ
+	XvoO/UYZKH7Xahel5n7kNwCd6CkfJY4gWvDEFhzghoExTDNG3mWbj7slh1LvgsF6SsM5
+	SxWNshzRKgZ7nRdJ2xmu3W+Zpl37Q+SNs/mBd06XJNIt3WIbHhtxWQZdRIyxDRWfEMAB
+	c5+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=DdCvpyUiXHKI7QJT9U5nHKTuydLtSpNR6zyGqMJr1vE=;
-	b=iQhxqjd5avWcoyvgAwlZGCGSbp1/l+SkpUAzpHA5J5bKDeglC1LlCnSs/DbDexBzmg
-	/5qKd/MYGdA4y4txPqImd0iHc8pSojiYx/9ttlftOcQT9ipDKFD6xC4aJBIhyG1z0SSq
-	6wFSKI2aDhaTo3tXNH7+LToYHioT+JqUZj18Iv+sIpdvy3rLvifJP/qTYCLgYDz2jKac
-	egJDE4ZVQ99bPTlrnE4kmZgwq4jBHq96jZP140bw66IDxf/ahdte20miDosxcLKSbwEt
-	ld+fPTs8lySiBWbH3YEHyBbJmhCAyaKEX5104CDc1VvTWzZowOGpqloOsGq6DL6a8d/1
-	W2xw==
-X-Gm-Message-State: ALQs6tBo7z1iW4lxqhcZ3AFYyQDPhQN/l7yf0edNdV4ivqoFNDLC2s9J
-	tMxTuueJfJ3kLYYrD5KvS3A=
-X-Google-Smtp-Source: AIpwx4+0m2DSuYpWFLv80W3V/U7l/bYzcJqymswRwLqp/CNWabSrQ89o9P+nLio2vAMQ3HYFVi73JQ==
-X-Received: by 2002:a17:902:7e08:: with SMTP id
-	b8-v6mr3859927plm.386.1523170733592; 
-	Sat, 07 Apr 2018 23:58:53 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=+qzOTGtw71Hc8LeVSR0yC90zgWMeJQqpuKyqGO+MIRQ=;
+	b=fT15DV5VA70QAZF6+TSRdRkYRz2DaYdN9lmyMzkhQMr+/S6G8Ro2Ls5EBOUp+K9pi1
+	CXKZGUKZKqUqzw6nO2HJWLza6bjdMU5m6UEjlkSCNo0WnLIrTgYzi5ISeGMfP+9ZoQ9+
+	DFWmwHI3fHtmfGF6M31gi8mLDJesSx1j14LJL8J94b9YShLn22ju67HFgFDgcgrjaxTz
+	iiEklXJB9AIMzXpcwFR2PedJyGHyrThfOP7i9Vr3+50wLQXp2Qs/+3xsijA7Bn8ES2ji
+	iY2mI6d6YX6YshRXI7sR8/SzwllcAtIkQmZYsBAcXpjrkhFxep4u0nbw2j/6CaQMUH26
+	3xbA==
+X-Gm-Message-State: AElRT7EfVUR1hJHx4LLfOZTaEofHb4gRjV+5aUN/py7Y1r+dhtICpdA0
+	yVOlwdrNzkI+dw8RTO8xK1g=
+X-Google-Smtp-Source: AIpwx48OPcL0CQ20nPdh/+Ml/gxddQZMks9/whjMxffqaCO7RIAaJgULf5ohw2lUlV9C9EJnNYHevA==
+X-Received: by 10.101.100.212 with SMTP id t20mr22474341pgv.112.1523170734745; 
+	Sat, 07 Apr 2018 23:58:54 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:932:e5ef:c5a4:fdbd])
 	by smtp.gmail.com with ESMTPSA id
-	c186sm20506137pfb.40.2018.04.07.23.58.52
+	c186sm20506137pfb.40.2018.04.07.23.58.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Apr 2018 23:58:53 -0700 (PDT)
+	Sat, 07 Apr 2018 23:58:54 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Apr 2018 23:58:14 -0700
-Message-Id: <1523170729-26321-2-git-send-email-akuster808@gmail.com>
+Date: Sat,  7 Apr 2018 23:58:15 -0700
+Message-Id: <1523170729-26321-3-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
 References: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 02/37] smstools3: refresh patches
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 03/37] stress-ng: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,7 +61,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2018 06:58:52 -0000
+X-List-Received-Date: Sun, 08 Apr 2018 06:58:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 WARNING:
 Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
@@ -76,104 +79,144 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-checking file scripts/sms3
-Hunk #1 succeeded at 24 with fuzz 2.
-
-plus more
+patching file stress-fcntl.c
+Hunk #1 succeeded at 415 with fuzz 2 (offset 2 lines).
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../smstools3/smstools3/scripts_no_bash.patch      | 35 +++++++++++++++++-----
- .../smstools3/smstools3/sms_binpath.patch          | 18 +++++++----
- 2 files changed, 40 insertions(+), 13 deletions(-)
+ .../0001-Several-changes-to-fix-musl-build.patch   | 24 ++++++++++------------
+ .../0002-stress-fcntl-fix-build-for-musl.patch     | 14 ++++++-------
+ 2 files changed, 17 insertions(+), 21 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch
-index f7529d8..49b4d1d 100644
---- a/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch
-@@ -1,29 +1,48 @@
----- smstools3.orig/scripts/sendsms	2006-02-04 11:52:06.000000000 -0800
--+++ smstools3/scripts/sendsms	2017-12-30 15:40:28.009169106 -0800
-+From 85602c3e531d39e89dc8cee0c4a592f85006a064 Mon Sep 17 00:00:00 2001
-+From: Bill Randle <bill.randle@gmail.com>
-+Date: Sun, 31 Dec 2017 09:08:23 -0800
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+index f90e704..d604f86 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+@@ -1,4 +1,4 @@
+-From d50203b233cb8820bf83b6651c2a8487e0db1fcf Mon Sep 17 00:00:00 2001
++From 784dcd09d3f266e271d007f4fd257e85036872ca Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
+ Date: Tue, 17 Oct 2017 10:13:20 -0500
+ Subject: [PATCH] Several changes to fix musl build
+@@ -21,6 +21,7 @@ Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
+ Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+ 
+ Upstream-status: Pending
 +
-+---
-+ scripts/sendsms     | 2 +-
-+ scripts/sms2html    | 2 +-
-+ scripts/sms2unicode | 2 +-
-+ scripts/unicode2sms | 2 +-
-+ 4 files changed, 4 insertions(+), 4 deletions(-)
+ ---
+  cache.c            |  4 ++++
+  stress-madvise.c   |  1 +
+@@ -28,13 +29,13 @@ Upstream-status: Pending
+  stress-pty.c       | 18 ------------------
+  stress-resources.c |  1 -
+  stress-stackmmap.c |  2 +-
+- 8 files changed, 9 insertions(+), 23 deletions(-)
++ 6 files changed, 7 insertions(+), 21 deletions(-)
+ 
+ diff --git a/cache.c b/cache.c
+-index e01fad0..27870ee 100644
++index fbf7674..936c1ff 100644
+ --- a/cache.c
+ +++ b/cache.c
+-@@ -27,6 +27,10 @@ typedef struct {
++@@ -28,6 +28,10 @@ typedef struct {
+  
+  #include <glob.h>
+  
+@@ -46,10 +47,10 @@ index e01fad0..27870ee 100644
+  #define SYS_CPU_PREFIX               "/sys/devices/system/cpu"
+  #define GLOB_PATTERN SYS_CPU_PREFIX  "/cpu[0-9]*"
+ diff --git a/stress-madvise.c b/stress-madvise.c
+-index 43ea454..2e1f8ee 100644
++index 9e71e11..ddf8d2d 100644
+ --- a/stress-madvise.c
+ +++ b/stress-madvise.c
+-@@ -141,6 +141,7 @@ static int stress_random_advise(const args_t *args)
++@@ -147,6 +147,7 @@ static int stress_random_advise(const args_t *args)
+  #if defined(MADV_SOFT_OFFLINE)
+  	if (advise == MADV_SOFT_OFFLINE) {
+  		static int soft_offline_count;
+@@ -58,7 +59,7 @@ index 43ea454..2e1f8ee 100644
+  		/* ..and minimize number of soft offline pages */
+  		if ((soft_offline_count >= NUM_SOFT_OFFLINE_MAX) ||
+ diff --git a/stress-malloc.c b/stress-malloc.c
+-index 8dbe5cc..f505f32 100644
++index a46b8c6..427827a 100644
+ --- a/stress-malloc.c
+ +++ b/stress-malloc.c
+ @@ -99,7 +99,7 @@ int stress_malloc(const args_t *args)
+@@ -71,7 +72,7 @@ index 8dbe5cc..f505f32 100644
+  		(void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
+  #endif
+ diff --git a/stress-pty.c b/stress-pty.c
+-index 8c3edf8..518f118 100644
++index 1bd1fbd..b1fe573 100644
+ --- a/stress-pty.c
+ +++ b/stress-pty.c
+ @@ -26,7 +26,6 @@
+@@ -114,7 +115,7 @@ index 8c3edf8..518f118 100644
+  			if (ioctl(ptys[i].slave, TIOCGLCKTRMIOS, &ios) < 0)
+  				pr_fail_err("ioctl TIOCGLCKTRMIOS on slave pty");
+ diff --git a/stress-resources.c b/stress-resources.c
+-index 182e176..880433d 100644
++index 958c99a..af79abd 100644
+ --- a/stress-resources.c
+ +++ b/stress-resources.c
+ @@ -31,7 +31,6 @@
+@@ -126,7 +127,7 @@ index 182e176..880433d 100644
+  #endif
+  #if defined(HAVE_LIB_PTHREAD) && defined(__linux__)
+ diff --git a/stress-stackmmap.c b/stress-stackmmap.c
+-index e1378e2..00d1268 100644
++index 9c83a69..2984f09 100644
+ --- a/stress-stackmmap.c
+ +++ b/stress-stackmmap.c
+ @@ -24,7 +24,7 @@
+@@ -138,6 +139,3 @@ index e1378e2..00d1268 100644
+  
+  #include <ucontext.h>
+  
+--- 
+-2.11.0
+-
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+index 8263401..ed3287e 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+@@ -1,4 +1,4 @@
+-From 7be4680930e2867cefd5c8fe27a4ae81a4ae2628 Mon Sep 17 00:00:00 2001
++From faadbc147394cea9278bc2494f33e3521d88e742 Mon Sep 17 00:00:00 2001
+ From: Tim Orling <timothy.t.orling@linux.intel.com>
+ Date: Tue, 9 Jan 2018 18:38:45 -0800
+ Subject: [PATCH] stress-fcntl: fix build for musl
+@@ -6,22 +6,20 @@ Subject: [PATCH] stress-fcntl: fix build for musl
+ Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+ 
+ Upstream-status: Pending
 +
-+diff --git a/scripts/sendsms b/scripts/sendsms
-+index 512026d..bb56856 100755
-+--- a/scripts/sendsms
-++++ b/scripts/sendsms
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  # This script send a text sms at the command line by creating
-  # a sms file in the outgoing queue.
-  
----- smstools3.orig/scripts/sms2html	2006-02-04 11:52:06.000000000 -0800
--+++ smstools3/scripts/sms2html	2017-12-30 15:39:17.496694390 -0800
-+diff --git a/scripts/sms2html b/scripts/sms2html
-+index ff253e3..946185e 100755
-+--- a/scripts/sms2html
-++++ b/scripts/sms2html
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-  # This script converts a received sms file into a html file. 
-  
----- smstools3.orig/scripts/sms2unicode	2006-02-04 11:52:06.000000000 -0800
--+++ smstools3/scripts/sms2unicode	2017-12-30 15:33:14.477250179 -0800
-+diff --git a/scripts/sms2unicode b/scripts/sms2unicode
-+index 46e2756..2826dc1 100755
-+--- a/scripts/sms2unicode
-++++ b/scripts/sms2unicode
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-  
-  # This script converts a received sms file into a pure unicode text file.
-  
----- smstools3/scripts/unicode2sms	2006-02-04 11:52:06.000000000 -0800
--+++ smstools3/scripts/unicode2sms.new	2017-12-30 15:33:56.918536044 -0800
-+diff --git a/scripts/unicode2sms b/scripts/unicode2sms
-+index 2ae86dc..3fccf0d 100755
-+--- a/scripts/unicode2sms
-++++ b/scripts/unicode2sms
- @@ -1,4 +1,4 @@
- -#!/bin/bash
- +#!/bin/sh
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch
-index 6220446..e1d79d3 100644
---- a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch
-@@ -1,8 +1,16 @@
--Index: smstools3/scripts/sms3
--===================================================================
----- smstools3.orig/scripts/sms3	2010-05-04 11:21:44.000000000 +0200
--+++ smstools3/scripts/sms3	2015-02-22 20:05:51.615074469 +0100
--@@ -24,11 +24,11 @@
-+From 9a4a872dca78ca9cb6bdc228be61f5a4c2d68b1f Mon Sep 17 00:00:00 2001
-+From: Kai Ulrich <kaiu@gmx.de>
-+Date: Wed, 18 Mar 2015 11:20:53 +0100
-+
-+---
-+ scripts/sms3 | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/scripts/sms3 b/scripts/sms3
-+index 6b990bf..09c063b 100755
-+--- a/scripts/sms3
-++++ b/scripts/sms3
-+@@ -24,9 +24,9 @@ INFOFILE="/var/run/smsd.working"
-  # Logfile can also be defined in here:
-  LOGFILE="/var/log/smsd.log"
-  
+ ---
+  stress-fcntl.c | 1 +
+  1 file changed, 1 insertion(+)
+ 
+ diff --git a/stress-fcntl.c b/stress-fcntl.c
+-index b7eade2..9fa5c38 100644
++index 2ea867b..e91b345 100644
+ --- a/stress-fcntl.c
+ +++ b/stress-fcntl.c
+-@@ -413,6 +413,7 @@ ofd_lock_abort:	{ /* Nowt */ }
+- 
+- #if defined(F_GET_FILE_RW_HINT) && defined(F_SET_FILE_RW_HINT)
++@@ -415,6 +415,7 @@ ofd_lock_abort:	{ /* Nowt */ }
++ #if (defined(F_GET_FILE_RW_HINT) && defined(F_SET_FILE_RW_HINT)) | \
++     (defined(F_GET_RW_HINT) && defined(F_SET_RW_HINT))
+  	{
+ +		int ret;
+  		size_t i;
+  		unsigned long hint;
+  		static const unsigned long hints[] = {
+--- 
+-2.14.3
+-
 -- 
 2.7.4
 
