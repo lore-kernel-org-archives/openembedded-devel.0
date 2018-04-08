@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 150807558F
+	by mail.openembedded.org (Postfix) with ESMTP id E8225745AB
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun,  8 Apr 2018 06:59:22 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id j2so3719243pff.10
+Received: by mail-pf0-f194.google.com with SMTP id p15so3712407pff.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Apr 2018 23:59:23 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=oSCmKW/vFleZzpH2nlUZS38GdheAxIRhrnAPSmbkbm0=;
-	b=nAzROXbzNioen6UxtVxYF0rHqTwfQRAZebRW1PrBUrgKFwoWpgKTsCz/EWATwMJ1uo
-	KFPgEZaLwfzatj/SINiW/Dsn67ZuNqNZspOUiGSiZ7EkADlW/XA4HAMfVFk/p7JefqMm
-	+i/Lw10CI6pvmisffgHGp49lgJlVsajXitQr+X7lUGV48q9tduqZQtOocr0B3Yo0tbeC
-	vPEnLXuQnc+dgjxJCsJiVarGRilEGVYHe/RqE/sIc/gyD3iRrKgIXbPE0cGep+FmlpRd
-	H3efluUCLl+BYCq/vFlOIfhpDEW9ZVMVtZSiKzba3NcI7t22EviikWbDPmv6j7b1yshU
-	Lg0g==
+	bh=2QPUUgTe33YNdzsaPqacEtp/3obkOb/7k5WETtw3NsA=;
+	b=ujOaHMN0zJOW1qawg00+vp7Zl0fdLgg/Zb+kTwebLuXRtNih2ZaiUteG7itXJrpcwm
+	RxbB6DUBwusj+ugrv72dj5uJ+flVHDsV4MhdEA4V9uig4bpkmlRn2/L7f4mS9fG2Bjlb
+	adz2WSBqvsbO7rik0bsNjrorExlVpRJhi6L8z8+xkc641++BYwYbQ71vUUN/HS0vf4hA
+	d3IRykz/vF+/aUajOTNuwDNsssRVM6bibyWXBsslbLyzImN92I67FkUk37UX4+KSALx1
+	h336jzQj4wH1LlMxSvzC+7BvMYPG06YdV53qVSyOi8teWLitPCidSNKRErVLzYNjNukR
+	L89A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=oSCmKW/vFleZzpH2nlUZS38GdheAxIRhrnAPSmbkbm0=;
-	b=DR8hEFdpcJlwXhXKSqcGDa+8NvVQngN8xWDx9VBz3K4LyA8m3x775xrH/JD1Rkw718
-	nfpKOXvTub5rWLCD87bUfIb6tb+5yUiAU7hQSO7AJqW7VcJ6lBDupHfuclDsum3Fuctu
-	8D+3CxBzcz+4KELZMWJiHlEgZlno1YotCQ54M/TTpUkrtI2CiLW0smVv0Cgc1ctCQFA6
-	Dqx3gh2WUFCmLEBhOdZtdgYysNENVHV29NtCNwg3UFDF+YYOnZ8a0Q3NOo/DKL6BKm5y
-	hA6ijosgrz0dp0L+lvbrFvSlaqxOGWyHRr5oDxeGWxvGGFjX4MQdmGurPQzKQehbPFze
-	v/PQ==
-X-Gm-Message-State: ALQs6tB7pofoEaI7lDKOH3ycq48KHrIR/UfciYsxersm0ZvW+7k0HFEd
-	7emdUF9PrPQCuaVJYUw8Iq4=
-X-Google-Smtp-Source: AIpwx49clDNkoRvgt22eMP4M1IjZCkCVauYyXA4O7cttJK6BPkSYswlgGN912x9jJRUd/Cfy7j3Tkw==
-X-Received: by 10.167.134.1 with SMTP id p1mr9473212pfn.77.1523170763234;
-	Sat, 07 Apr 2018 23:59:23 -0700 (PDT)
+	bh=2QPUUgTe33YNdzsaPqacEtp/3obkOb/7k5WETtw3NsA=;
+	b=ezbzvWns+UYO/2rxZ+PlZJbKmLNGfn+1StV0cZgufPQY5HOnD2dQ+4v2l/77VTtk0/
+	bBjk84AUEucsardPleSEFsQiLDf7aHKpGgUKcJBvlDyS9r2bVY/WTRJjQSSmFBtZRqWB
+	0c7+W9sQPWu/ZaIlNQUPrYJkUGvvAPTL4wSLJbT17HcZn7UtXFedhKCAKxmRXcoW9GA4
+	v2RmwsYXBLlzc4g941e5RziDG5mPVsRrQUtWq+HA1dZ1+JtXuvXX6CPC/MJGbumgxbsb
+	WwGG6GIkC/YKRF53DCJMOynPcbp4yJ+PbrgGn4k3pfWb+13Cz4Wwu88/v3wGwg1yuKfx
+	tSoQ==
+X-Gm-Message-State: AElRT7EyBjpE+EHKA/KnfWfvmONIhrEz6ouVTk4jGJ3uHqDfIu33i8HZ
+	nqVAzCNfDD/0Y7dlNYGZldw=
+X-Google-Smtp-Source: AIpwx4+3js0xTJJWgh1lJUC8vdLsw5WXRMKtR1teJlP/Nsom7YXf23SjrHG4VhIMboJ7SrYpP1ctNA==
+X-Received: by 10.98.17.85 with SMTP id z82mr25447594pfi.206.1523170764082;
+	Sat, 07 Apr 2018 23:59:24 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:932:e5ef:c5a4:fdbd])
 	by smtp.gmail.com with ESMTPSA id
-	c186sm20506137pfb.40.2018.04.07.23.59.22
+	c186sm20506137pfb.40.2018.04.07.23.59.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Apr 2018 23:59:22 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:23 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Apr 2018 23:58:43 -0700
-Message-Id: <1523170729-26321-31-git-send-email-akuster808@gmail.com>
+Date: Sat,  7 Apr 2018 23:58:44 -0700
+Message-Id: <1523170729-26321-32-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
 References: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 31/37] libnetfilter-cthelper: refresh patches
+Subject: [meta-oe][PATCH 32/37] anthy: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,9 +59,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2018 06:59:22 -0000
+X-List-Received-Date: Sun, 08 Apr 2018 06:59:23 -0000
 
-WARNING: libnetfilter-cthelper-1.0.0-r0 do_patch:
+WARNING: anthy-9100h-r0 do_patch:
 Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
 The context lines in the patches can be updated with devtool:
 
@@ -75,195 +75,109 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-Applying patch libnetfilter-cthelper-visibility-hidden.patch
-patching file doxygen.cfg.in
-patching file src/internal.h
-patching file src/libnetfilter_cthelper.c
-Hunk #2 succeeded at 118 with fuzz 2.
-
-Now at patch libnetfilter-cthelper-visibility-hidden.patch
+Applying patch not_build_elc.patch
+patching file src-util/Makefile.am
+Hunk #1 succeeded at 8 with fuzz 2 (offset 2 lines).
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../libnetfilter-cthelper-visibility-hidden.patch  | 55 ++++++++++------------
- 1 file changed, 26 insertions(+), 29 deletions(-)
+ .../anthy/anthy/native-helpers.patch               | 38 +++++++++++++---------
+ .../anthy/anthy/not_build_elc.patch                | 11 ++++---
+ 2 files changed, 29 insertions(+), 20 deletions(-)
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch b/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch
-index 9377f57..e717d5b 100644
---- a/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch
-+++ b/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch
-@@ -20,10 +20,10 @@ Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
-  src/libnetfilter_cthelper.c | 83 ++++++++++++++++++---------------------------
-  3 files changed, 36 insertions(+), 54 deletions(-)
+diff --git a/meta-oe/recipes-support/anthy/anthy/native-helpers.patch b/meta-oe/recipes-support/anthy/anthy/native-helpers.patch
+index 291b66b..47ce007 100644
+--- a/meta-oe/recipes-support/anthy/anthy/native-helpers.patch
++++ b/meta-oe/recipes-support/anthy/anthy/native-helpers.patch
+@@ -3,20 +3,24 @@ author: pH5
+ comment: Stage the native anthy helpers mkfiledic, mkdepgraph, mkworddic, 
+ comment: calctrans and proccorpus.
  
--diff --git a/doxygen.cfg.in b/doxygen.cfg.in
--index cac9b05..190b7cd 100644
----- a/doxygen.cfg.in
--+++ b/doxygen.cfg.in
-+Index: libnetfilter_cthelper-1.0.0/doxygen.cfg.in
+---- anthy-7811/mkanthydic/Makefile.am~	2006-05-13 18:28:35.000000000 +0900
+-+++ anthy-7811/mkanthydic/Makefile.am	2006-06-18 10:56:25.770000000 +0900
+-@@ -3,7 +3,7 @@
++Index: anthy-9100h/mkanthydic/Makefile.am
 +===================================================================
-+--- libnetfilter_cthelper-1.0.0.orig/doxygen.cfg.in
-++++ libnetfilter_cthelper-1.0.0/doxygen.cfg.in
- @@ -72,7 +72,7 @@ RECURSIVE              = YES
-  EXCLUDE                = 
-  EXCLUDE_SYMLINKS       = NO
-@@ -33,10 +33,10 @@ index cac9b05..190b7cd 100644
-  EXAMPLE_PATH           = 
-  EXAMPLE_PATTERNS       = 
-  EXAMPLE_RECURSIVE      = NO
--diff --git a/src/internal.h b/src/internal.h
--index 3a88d1a..5d78171 100644
----- a/src/internal.h
--+++ b/src/internal.h
-+Index: libnetfilter_cthelper-1.0.0/src/internal.h
++--- anthy-9100h.orig/mkanthydic/Makefile.am
+++++ anthy-9100h/mkanthydic/Makefile.am
++@@ -3,7 +3,7 @@ noinst_SCRIPTS =
+  CLEANFILES = anthy.dic
+- INCLUDES = -I$(top_srcdir)/include -DSRCDIR=\"$(srcdir)\"
++ INCLUDES = -I$(top_srcdir)/ -DSRCDIR=\"$(srcdir)\"
+  
+ -noinst_PROGRAMS = mkfiledic
+ +bin_PROGRAMS = mkfiledic
+  mkfiledic_SOURCES = mkfiledic.c
+  mkfiledic_LDADD = ../src-diclib/libdiclib.la
+  
+---- anthy-7811/depgraph/Makefile.am~	2006-06-02 00:20:54.000000000 +0900
+-+++ anthy-7811/depgraph/Makefile.am	2006-06-18 10:57:19.420000000 +0900
+-@@ -9,7 +9,7 @@
++Index: anthy-9100h/depgraph/Makefile.am
 +===================================================================
-+--- libnetfilter_cthelper-1.0.0.orig/src/internal.h
-++++ libnetfilter_cthelper-1.0.0/src/internal.h
- @@ -3,10 +3,9 @@
++--- anthy-9100h.orig/depgraph/Makefile.am
+++++ anthy-9100h/depgraph/Makefile.am
++@@ -9,7 +9,7 @@ CLEANFILES = anthy.dep
+  EXTRA_DIST = indepword.txt $(DEPWORDS)
   
-  #include "config.h"
-@@ -50,10 +50,10 @@ index 3a88d1a..5d78171 100644
-  #endif
+  # Generate the dictionary
+@@ -25,10 +29,12 @@ comment: calctrans and proccorpus.
+  mkdepgraph_SOURCES = mkdepgraph.c
+  mkdepgraph_LDADD =  ../src-main/libanthy.la ../src-worddic/libanthydic.la
   
-  #endif
--diff --git a/src/libnetfilter_cthelper.c b/src/libnetfilter_cthelper.c
--index f8f58e6..af543a1 100644
----- a/src/libnetfilter_cthelper.c
--+++ b/src/libnetfilter_cthelper.c
-+Index: libnetfilter_cthelper-1.0.0/src/libnetfilter_cthelper.c
+---- anthy-7811/mkworddic/Makefile.am~	2006-05-13 18:29:07.000000000 +0900
+-+++ anthy-7811/mkworddic/Makefile.am	2006-06-18 11:21:56.300000000 +0900
+-@@ -16,7 +16,8 @@
+-  udict dict.args.in
++Index: anthy-9100h/mkworddic/Makefile.am
 +===================================================================
-+--- libnetfilter_cthelper-1.0.0.orig/src/libnetfilter_cthelper.c
-++++ libnetfilter_cthelper-1.0.0/src/libnetfilter_cthelper.c
- @@ -99,17 +99,16 @@ struct nfct_helper {
-   * In case of success, this function returns a valid pointer, otherwise NULL
-   * s returned and errno is appropriately set.
-@@ -74,9 +74,9 @@ index f8f58e6..af543a1 100644
-  {
-  	int i;
++--- anthy-9100h.orig/mkworddic/Makefile.am
+++++ anthy-9100h/mkworddic/Makefile.am
++@@ -26,7 +26,8 @@ DIC_FILES = @top_srcdir@/alt-cannadic/gc
++ 	    @top_srcdir@/mkworddic/udict
   
--@@ -119,7 +118,6 @@ void nfct_helper_free(struct nfct_helper *h)
-+@@ -119,7 +118,6 @@ void nfct_helper_free(struct nfct_helper
-+ 			free(h->expect_policy[i]);
-  	}
-- 	free(h);
-  }
- -EXPORT_SYMBOL(nfct_helper_free);
-  
-@@ -115,7 +115,7 @@ index f8f58e6..af543a1 100644
-  nfct_helper_policy_attr_set(struct nfct_helper_policy *p,
-  			    enum nfct_helper_policy_attr_type type,
-  			    const void *data)
--@@ -170,7 +166,6 @@ nfct_helper_policy_attr_set(struct nfct_helper_policy *p,
-+@@ -170,7 +166,6 @@ nfct_helper_policy_attr_set(struct nfct_
-  		break;
-  	}
-  }
-@@ -123,7 +123,7 @@ index f8f58e6..af543a1 100644
-  
-  /**
-   * nfct_helper_attr_set_str - set one attribute the helper object
--@@ -178,23 +173,21 @@ EXPORT_SYMBOL(nfct_helper_policy_attr_set);
-+@@ -178,23 +173,21 @@ EXPORT_SYMBOL(nfct_helper_policy_attr_se
-   * \param type attribute type you want to set
-   * \param name string that will be used to set this attribute
-   */
-@@ -149,7 +149,7 @@ index f8f58e6..af543a1 100644
-  
-  /**
-   * nfct_helper_attr_set - set one attribute of the helper object
--@@ -202,7 +195,7 @@ EXPORT_SYMBOL(nfct_helper_policy_attr_set_u32);
-+@@ -202,7 +195,7 @@ EXPORT_SYMBOL(nfct_helper_policy_attr_se
-   * \param type attribute type you want to set
-   * \param data pointer to data that will be used to set this attribute
-   */
-@@ -158,7 +158,7 @@ index f8f58e6..af543a1 100644
-  nfct_helper_attr_set(struct nfct_helper *h,
-  		     enum nfct_helper_attr_type type, const void *data)
-  {
--@@ -250,7 +243,6 @@ nfct_helper_attr_set(struct nfct_helper *h,
-+@@ -250,7 +243,6 @@ nfct_helper_attr_set(struct nfct_helper
-  		break;
-  	}
-  }
-@@ -216,7 +216,7 @@ index f8f58e6..af543a1 100644
-  nfct_helper_attr_unset(struct nfct_helper *nfct_helper, enum nfct_helper_attr_type type)
-  {
-  	switch(type) {
--@@ -307,7 +295,6 @@ nfct_helper_attr_unset(struct nfct_helper *nfct_helper, enum nfct_helper_attr_ty
-+@@ -307,7 +295,6 @@ nfct_helper_attr_unset(struct nfct_helpe
-  		break;
-  	}
-  }
-@@ -236,7 +236,7 @@ index f8f58e6..af543a1 100644
-  {
-  	const void *ret = NULL;
-  
--@@ -358,7 +346,6 @@ const void *nfct_helper_attr_get(struct nfct_helper *helper,
-+@@ -358,7 +346,6 @@ const void *nfct_helper_attr_get(struct
-  	}
-  	return ret;
-  }
-@@ -321,7 +321,7 @@ index f8f58e6..af543a1 100644
-  {
-  	int ret;
-  
--@@ -454,7 +441,6 @@ int nfct_helper_snprintf(char *buf, size_t size,
-+@@ -454,7 +441,6 @@ int nfct_helper_snprintf(char *buf, size
-  
-  	return ret;
-  }
-@@ -338,7 +338,7 @@ index f8f58e6..af543a1 100644
-  nfct_helper_nlmsg_build_hdr(char *buf, uint8_t cmd,
-  			    uint16_t flags, uint32_t seq)
-  {
--@@ -509,7 +495,6 @@ nfct_helper_nlmsg_build_hdr(char *buf, uint8_t cmd,
-+@@ -509,7 +495,6 @@ nfct_helper_nlmsg_build_hdr(char *buf, u
-  
-  	return nlh;
-  }
-@@ -346,7 +346,7 @@ index f8f58e6..af543a1 100644
-  
-  static void
-  nfct_helper_nlmsg_build_policy(struct nlmsghdr *nlh,
--@@ -530,7 +515,7 @@ nfct_helper_nlmsg_build_policy(struct nlmsghdr *nlh,
-+@@ -530,7 +515,7 @@ nfct_helper_nlmsg_build_policy(struct nl
-   * \param nlh: netlink message that you want to use to add the payload.
-   * \param nfct_helper: pointer to a helper object
-   */
-@@ -355,7 +355,7 @@ index f8f58e6..af543a1 100644
-  nfct_helper_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfct_helper *h)
-  {
-  	struct nlattr *nest;
--@@ -593,7 +578,6 @@ nfct_helper_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfct_helper *h)
-+@@ -593,7 +578,6 @@ nfct_helper_nlmsg_build_payload(struct n
-  	if (h->bitset & (1 << NFCTH_ATTR_STATUS))
-  		mnl_attr_put_u32(nlh, NFCTH_STATUS, ntohl(h->status));
-  }
-@@ -363,7 +363,7 @@ index f8f58e6..af543a1 100644
-  
-  static int
-  nfct_helper_nlmsg_parse_tuple_cb(const struct nlattr *attr, void *data)
--@@ -795,7 +779,7 @@ nfct_helper_nlmsg_parse_attr_cb(const struct nlattr *attr, void *data)
-+@@ -795,7 +779,7 @@ nfct_helper_nlmsg_parse_attr_cb(const st
-   * This function returns -1 in case that some mandatory attributes are
-   * missing. On sucess, it returns 0.
-   */
-@@ -372,7 +372,7 @@ index f8f58e6..af543a1 100644
-  nfct_helper_nlmsg_parse_payload(const struct nlmsghdr *nlh,
-  				struct nfct_helper *h)
-  {
--@@ -832,7 +816,6 @@ nfct_helper_nlmsg_parse_payload(const struct nlmsghdr *nlh,
-+@@ -832,7 +816,6 @@ nfct_helper_nlmsg_parse_payload(const st
-  	}
-  	return 0;
-  }
-@@ -380,6 +380,3 @@ index f8f58e6..af543a1 100644
-  
-  /**
-   * @}
---- 
--cgit v1.1
+  # Generate the dictionary
+ -noinst_PROGRAMS = mkworddic
+@@ -36,10 +42,12 @@ comment: calctrans and proccorpus.
+ +bin_PROGRAMS = mkworddic
+  mkworddic_SOURCES = mkdic.c writewords.c mkudic.c calcfreq.c mkdic.h
+  mkworddic_LDADD = ../src-worddic/libanthydic.la
 -
+---- anthy-9100e.orig/calctrans/Makefile.am	2008-05-08 15:04:13.000000000 +0200
+-+++ anthy-9100e/calctrans/Makefile.am	2008-05-08 15:04:24.000000000 +0200
+-@@ -3,7 +3,7 @@
++ 
++Index: anthy-9100h/calctrans/Makefile.am
++===================================================================
++--- anthy-9100h.orig/calctrans/Makefile.am
+++++ anthy-9100h/calctrans/Makefile.am
++@@ -3,7 +3,7 @@ EXTRA_DIST =\
+   corpus.3.txt corpus.4.txt corpus.5.txt\
+   corpus_info weak_words
+  
+diff --git a/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch b/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
+index bf748f3..1c5c494 100644
+--- a/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
++++ b/meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
+@@ -1,12 +1,13 @@
+ upstream: not applicable
+ source: stolen from debian
+ 
+-diff -Naur anthy-7811/src-util.orig/Makefile.am anthy-7811/src-util/Makefile.am
+---- anthy-7811/src-util.orig/Makefile.am	2006-06-18 10:47:55.790000000 +0900
+-+++ anthy-7811/src-util/Makefile.am	2006-06-18 10:48:23.860000000 +0900
+-@@ -6,7 +6,8 @@
++Index: anthy-9100h/src-util/Makefile.am
++===================================================================
++--- anthy-9100h.orig/src-util/Makefile.am
+++++ anthy-9100h/src-util/Makefile.am
++@@ -8,7 +8,8 @@ ELISP_FILES = anthy.el anthy-dic.el anth
+   anthy-isearch.el anthy-azik.el anthy-kyuri.el
+- EXTRA_DIST = $(ELISP_FILES) typetab dic-tool-usage.txt rcsize.rb
++ EXTRA_DIST = $(ELISP_FILES) typetab dic-tool-usage.txt anthy.i
+  bin_PROGRAMS = anthy-dic-tool anthy-agent anthy-morphological-analyzer
+ -ELCFILES = anthy.elc anthy-dic.elc anthy-azik.elc anthy-conf.elc anthy-isearch.elc anthy-kyuri.elc leim-list.elc
+ +#ELCFILES = anthy.elc anthy-dic.elc anthy-azik.elc anthy-conf.elc anthy-isearch.elc anthy-kyuri.elc leim-list.elc
 -- 
 2.7.4
 
