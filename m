@@ -1,50 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EB5FC7423E
+Return-Path: <robert.joslyn@redrectangle.org>
+X-Greylist: delayed 4981 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 08 Apr 2018 20:32:34 UTC
+Received: from slow1-d.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 91E027470E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Apr 2018 20:14:34 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id l49so6671854wrl.4
+	Sun,  8 Apr 2018 20:32:33 +0000 (UTC)
+Received: from relay7-d.mail.gandi.net (unknown [217.70.183.200])
+	by slow1-d.mail.gandi.net (Postfix) with ESMTP id CF2163A0145
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Apr 2018 13:14:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dlDQ004J+bX5KxPgrn7HJJQ0LVRwI5NibFPBooL0e5k=;
-	b=GudQ4OtvGiamuhTBBOI85AjsfXPPL6hr16K2EUkaPY+4sqXO0yy0Ex5g6ployxF07Y
-	Bi7NyHXOsMf00vK/2u+2Eu2inssExStQrLSsqAtafwfyFAJfLAWsFnZYahExBOOz9vWI
-	gRzwN/JjEx9zMhk+aQ1UlVfXmcNbX8cDF85LieVomZiTCPIow6YE72GZVgNlY3z7kZV5
-	HX0Jm5ZGr9BaXYoB6+IHG/RzzpAk85RqhSj12oFAm3Ozbg1qXTP/pmhsck5oQQs0zkS4
-	05arpdLczj0y28uxOWugklwBFyKN6tLeNR8L9AZTTIpsUUZc7XdpbszN66l1O+xP1Lhs
-	AHXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=dlDQ004J+bX5KxPgrn7HJJQ0LVRwI5NibFPBooL0e5k=;
-	b=FEclQCUsflozQJbLenVgj060QlkOYsiEYZpmUtiYFZfjAe1nJI9C/y72MD2k3zFb8E
-	dJ07bL8NEvYgNNNwT4UvHScLTBs1t5FVP7AVQYupVOGMKaKiqBh1ZX4P1lhbtqXTgoiP
-	jJmXJqAhJkH/AsHp4R2RFdSWtSvMJ+LWBtiFr9ZlGARWwzqGq6i47LXqyCH6rFybLUan
-	15z8U/l/ncqaToihU9/YBemOogMCsW2R9jv9JL1T9gJlZH6xC+uUTF83AuQimNzokIKd
-	E5nIzLjo7MzRQ7J6PGReL8Zz3ERB1sMXVd+D5KSqqU8FKpcDPlJ+0pfl+dFYsn2uQbvl
-	dMdA==
-X-Gm-Message-State: AElRT7GBz2hs/7/Dhyz7UpFS/9PZo6L9x0ept+nm1sn1D2iQ/ilyBYwG
-	7Q0bEHyHq49TSEc3NTDfTxLwPQ==
-X-Google-Smtp-Source: AIpwx4/go1vlrzohoCyB8bZ9KaXVfS1+C3kRcp7OBqWo4eBF90mwAgR/k7JEl1VU0/PyOEAMduDXQQ==
-X-Received: by 10.223.195.142 with SMTP id p14mr26127480wrf.32.1523218475423; 
-	Sun, 08 Apr 2018 13:14:35 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	e8sm39728797wmf.15.2018.04.08.13.14.34
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 08 Apr 2018 13:14:34 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Sun,  8 Apr 2018 20:25:35 +0200 (CEST)
+X-Originating-IP: 50.37.95.246
+Received: from xps13.localdomain (unknown [50.37.95.246])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay7-d.mail.gandi.net (Postfix) with ESMTPSA id 268B820003;
+	Sun,  8 Apr 2018 20:25:33 +0200 (CEST)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Apr 2018 20:14:40 +0000
-Message-Id: <20180408201440.31986-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.15.1
-In-Reply-To: <20180408201440.31986-1-Martin.Jansa@gmail.com>
-References: <20180408201440.31986-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] android-tools: use fixed SRCREVs instead of tag name
+Date: Sun,  8 Apr 2018 11:25:06 -0700
+Message-Id: <20180408182506.24114-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.16.1
+Subject: [meta-oe][PATCH] htop: Update to 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,53 +32,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2018 20:14:35 -0000
+X-List-Received-Date: Sun, 08 Apr 2018 20:32:35 -0000
 
-* so that bitbake doesn't need to use git ls-remote during parsing to resolve tag name into SRCREV
+Add PACKAGECONFIG options and update formatting to better conform to the
+style guide.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- .../android-tools/android-tools_5.1.1.r37.bb           | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ .../htop/files/0001-Use-pkg-config.patch           | 35 +++++++++-------------
+ meta-oe/recipes-support/htop/htop_2.0.2.bb         | 25 ----------------
+ meta-oe/recipes-support/htop/htop_2.1.0.bb         | 35 ++++++++++++++++++++++
+ 3 files changed, 49 insertions(+), 46 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/htop/htop_2.0.2.bb
+ create mode 100644 meta-oe/recipes-support/htop/htop_2.1.0.bb
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-index 5d8f8a8435..780ecaa11a 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = " \
- "
- DEPENDS = "libbsd libpcre openssl zlib libcap"
+diff --git a/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch b/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
+index ff5cd4923..fc0d86e33 100644
+--- a/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
++++ b/meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
+@@ -1,36 +1,32 @@
+-From 7ebcbf17ad9483c7109e4a83b66966bc02f09bd4 Mon Sep 17 00:00:00 2001
+-From: Paul Barker <pbarker@toganlabs.com>
+-Date: Sun, 5 Nov 2017 20:10:10 +0000
+-Subject: [PATCH] Use pkg-config
+-
+ We need to use pkg-config to find the ncurses library instead of the
+ ncurses*-config applications.
  
--ANDROID_TAG = "android-5.1.1_r37"
- ANDROID_MIRROR = "android.googlesource.com"
- CORE_REPO = "${ANDROID_MIRROR}/platform/system/core"
- EXTRAS_REPO = "${ANDROID_MIRROR}/platform/system/extras"
-@@ -17,12 +16,19 @@ LIBHARDWARE_REPO = "${ANDROID_MIRROR}/platform/hardware/libhardware"
- LIBSELINUX_REPO = "${ANDROID_MIRROR}/platform/external/libselinux"
- BUILD_REPO = "${ANDROID_MIRROR}/platform/build"
- 
-+# matches with android-5.1.1_r37
-+SRCREV_core = "2314b110bdebdbfd2d94c502282f9e57c849897e"
-+SRCREV_extras = "3ecbe8d841df96127d7855661293e5ab6ba6c205"
-+SRCREV_libhardware = "be55eb1f4d840c82ffaf7c47460df17ff5bc4d9b"
-+SRCREV_libselinux = "07e9e1339ad1ba608acfba9dce2d0f474b252feb"
-+SRCREV_build = "16e987def3d7d8f7d30805eb95cef69e52a87dbc"
+ Signed-off-by: Paul Barker <pbarker@toganlabs.com>
++Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 +
- SRC_URI = " \
--    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core;tag=${ANDROID_TAG} \
--    git://${EXTRAS_REPO};name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras;tag=${ANDROID_TAG} \
--    git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware;tag=${ANDROID_TAG} \
--    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux;tag=${ANDROID_TAG} \
--    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build;tag=${ANDROID_TAG} \
-+    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core \
-+    git://${EXTRAS_REPO};name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras \
-+    git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware \
-+    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux \
-+    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build \
-     file://remove-selinux-android.patch \
-     file://use-capability.patch \
-     file://use-local-socket.patch \
+ Upstream-status: Inappropriate
+     (`ncurses*-config` can be used outside of OpenEmbedded)
+----
+- configure.ac | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 7e0edd1..c5a8365 100644
++index 559dc4d..77aea22 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -185,9 +185,9 @@ m4_define([HTOP_CHECK_LIB],
++@@ -185,10 +185,10 @@ m4_define([HTOP_CHECK_LIB],
+  
+  AC_ARG_ENABLE(unicode, [AS_HELP_STRING([--enable-unicode], [enable Unicode support])], ,enable_unicode="yes")
+  if test "x$enable_unicode" = xyes; then
+ -   HTOP_CHECK_SCRIPT([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw6-config",
+--    HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw5-config",
+--     HTOP_CHECK_SCRIPT([ncurses], [addnwstr], [HAVE_LIBNCURSESW], "ncurses5-config",
++-    HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw6-config",
++-     HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "ncursesw5-config",
++-      HTOP_CHECK_SCRIPT([ncurses], [addnwstr], [HAVE_LIBNCURSESW], "ncurses5-config",
+ +   HTOP_CHECK_SCRIPT([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw6",
+-+    HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw5",
+-+     HTOP_CHECK_SCRIPT([ncurses], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncurses5",
+-       HTOP_CHECK_LIB([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW],
+-        HTOP_CHECK_LIB([ncursesw], [addnwstr], [HAVE_LIBNCURSESW],
+-         HTOP_CHECK_LIB([ncurses], [addnwstr], [HAVE_LIBNCURSESW],
+-@@ -200,8 +200,8 @@ if test "x$enable_unicode" = xyes; then
+++    HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw6",
+++     HTOP_CHECK_SCRIPT([ncursesw], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncursesw5",
+++      HTOP_CHECK_SCRIPT([ncurses], [addnwstr], [HAVE_LIBNCURSESW], "pkg-config ncurses5",
++        HTOP_CHECK_LIB([ncursesw6], [addnwstr], [HAVE_LIBNCURSESW],
++         HTOP_CHECK_LIB([ncursesw], [addnwstr], [HAVE_LIBNCURSESW],
++          HTOP_CHECK_LIB([ncurses], [addnwstr], [HAVE_LIBNCURSESW],
++@@ -201,8 +201,8 @@ if test "x$enable_unicode" = xyes; then
+           [AC_CHECK_HEADERS([ncurses/curses.h],[:],
+              [AC_CHECK_HEADERS([ncurses.h],[:],[missing_headers="$missing_headers $ac_header"])])])])
+  else
+@@ -41,6 +37,3 @@ index 7e0edd1..c5a8365 100644
+       HTOP_CHECK_LIB([ncurses6],  [refresh], [HAVE_LIBNCURSES],
+        HTOP_CHECK_LIB([ncurses],  [refresh], [HAVE_LIBNCURSES],
+        missing_libraries="$missing_libraries libncurses"
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-support/htop/htop_2.0.2.bb b/meta-oe/recipes-support/htop/htop_2.0.2.bb
+deleted file mode 100644
+index 395b83ff6..000000000
+--- a/meta-oe/recipes-support/htop/htop_2.0.2.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-SUMMARY = "htop process monitor"
+-HOMEPAGE = "http://htop.sf.net"
+-SECTION = "console/utils"
+-LICENSE = "GPLv2"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+-
+-DEPENDS = "ncurses"
+-RDEPENDS_${PN} = "ncurses-terminfo"
+-
+-SRC_URI = " \
+-    http://hisham.hm/htop/releases/${PV}/htop-${PV}.tar.gz \
+-    file://0001-Use-pkg-config.patch \
+-    "
+-
+-SRC_URI[md5sum] = "7d354d904bad591a931ad57e99fea84a"
+-SRC_URI[sha256sum] = "179be9dccb80cee0c5e1a1f58c8f72ce7b2328ede30fb71dcdf336539be2f487"
+-
+-LDFLAGS_append_libc-uclibc = " -lubacktrace"
+-
+-do_configure_prepend () {
+-    rm -rf ${S}/config.h
+-}
+-
+-inherit autotools
+diff --git a/meta-oe/recipes-support/htop/htop_2.1.0.bb b/meta-oe/recipes-support/htop/htop_2.1.0.bb
+new file mode 100644
+index 000000000..5ff2fcfbf
+--- /dev/null
++++ b/meta-oe/recipes-support/htop/htop_2.1.0.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Interactive process viewer"
++HOMEPAGE = "http://hisham.hm/htop"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
++
++DEPENDS = "ncurses"
++
++SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
++           file://0001-Use-pkg-config.patch"
++SRC_URt[md5sum] = "f262b66ad6c194782f4d3a80627e84c8"
++SRC_URI[sha256sum] = "3260be990d26e25b6b49fc9d96dbc935ad46e61083c0b7f6df413e513bf80748"
++
++inherit autotools pkgconfig
++
++PACKAGECONFIG ??= "proc \
++                   cgroup \
++                   taskstats \
++                   unicode \
++                   linux-affinity \
++                   delayacct"
++PACKAGECONFIG[proc] = "--enable-proc,--disable-proc"
++PACKAGECONFIG[openvz] = "--enable-openvz,--disable-openvz"
++PACKAGECONFIG[cgroup] = "--enable-cgroup,--disable-cgroup"
++PACKAGECONFIG[vserver] = "--enable-vserver,--disable-vserver"
++PACKAGECONFIG[taskstats] = "--enable-taskstats,--disable-taskstats"
++PACKAGECONFIG[unicode] = "--enable-unicode,--disable-unicode"
++PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinity"
++PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc"
++PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
++PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
++
++do_configure_prepend () {
++    rm -rf ${S}/config.h
++}
 -- 
-2.15.1
+2.16.1
 
 
