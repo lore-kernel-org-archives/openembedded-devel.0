@@ -1,54 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7739B745AB
+Received: from mail-pf0-f178.google.com (mail-pf0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D592745AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Apr 2018 06:59:19 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id g14so3721447pfh.3
+	Sun,  8 Apr 2018 06:59:20 +0000 (UTC)
+Received: by mail-pf0-f178.google.com with SMTP id y66so3722021pfi.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Apr 2018 23:59:20 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=ZHKOwbBTvGm54+NXp1iNP05qQt6mwQQlINb1tsMFMcY=;
-	b=l4UUIKr4R+DChwt+ZQb0+nAosJ+xiseAgtJkkzLKyfN7EE+0AaBPMIz7K45XAyLb+M
-	USNCcp+OqoJmwp38BQjq49uJ1y4vZfVKT2Ej7AvIHbRqOdJuSLbyE1F1dHRe2IC3v8Zj
-	/CDCSWq1AHeQN1CwxnPwHmjKy9DiGa5j9f8sd21x7RNW+41PD7PYYpwynllfEXTwu4F4
-	2zQXhGZ59HkbBK+++HJpfUcMQsQaDQ3LO3AbF4BzNIuhpiHS9w+Z1+SqbOzHATtEKORH
-	ipu32AGRyc1ImL6Yiz27x0XH8MTYZa7EzXh8lq3vJDY++lWdO+4I0vARWQ6PvYdIGZW2
-	KzOg==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=sjY2KBExkF+aJxAxfKBNEM7HOwUO/XuabGnRuxyH+AM=;
+	b=FaIcC+Rld5JyfNQJMKgyhQ2na0Csr+VrT8NWtlD49hqgYr/XR5bGdJ60OhNbjalbGE
+	JaHEyIV9AFErsWohQuqwUUfC8SN+xJC3Dhnx8Wr5g82JX64U+k88/9ILUqhrKEK+sxuy
+	yHzjKJE7KfS6FHqD++fm3KumhtONWLDgz0LK4Fv1qT4dyj7kVJX/9SkI2d2DbzsLTEpR
+	zdKzmRB2wBL0c/TtU8hRT7ZVS8lEXVs/iGjjbQKonaBH7RSFuorTvK7wpKx052Il7yBg
+	6A4BVRaCC8cNjVLymI5+99KCyA5G1kAZaXNDijDS0sOau2/IxRiVZ906RH1kTyGC//JA
+	fz3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=ZHKOwbBTvGm54+NXp1iNP05qQt6mwQQlINb1tsMFMcY=;
-	b=Et79WPdi7crFquyrpWoPr1dc4LMw2xJw6xoPgPiNicW/eX0LC9ZWDxc2N8Cv+WmTs6
-	LeqbsFlRWmn4i6FRa2MRmSNIPxEwS71LMdC+KZkV+UyXdPwYi6nFqSoG2J1IKvnXS/Uu
-	yP8j3Ac1bmZ6Q+dvZPMl2UfoSxh9RrCFI42qcxG323uQHECyj0jGj9Q7lOqCYbyeFuaE
-	IzXaXGK1uHRzo5lYuQCTf8GSLSWejOXEXgEtX3i7ziRM1lAEKZoc0RkjYpp5dW54pQmi
-	9TnlG602nqp0XMn2AAOX1/UHaN+03+J5FtnMPcFqFDnEzThv2SwSKohna2jp74gApoI6
-	X1Vg==
-X-Gm-Message-State: AElRT7ECYCS1FgW/2C4xPYlz/gxqmYVdf30G0UwxWG5EtbDqk7nrfA6O
-	YlpyKCPz+IAgp9ZUVWKyHEfRqA==
-X-Google-Smtp-Source: AIpwx48+O1/j29o3v8j3OcV46wBS6Bf9RbDrgXNV74kjPnKY28CKeqMCPhP14umaTVr591LZ7khmMw==
-X-Received: by 10.98.58.75 with SMTP id h72mr25261320pfa.209.1523170760252;
-	Sat, 07 Apr 2018 23:59:20 -0700 (PDT)
+	:references;
+	bh=sjY2KBExkF+aJxAxfKBNEM7HOwUO/XuabGnRuxyH+AM=;
+	b=rbi4gVt5T8+xblga0T96v5M34OrzSWZKTMzYzhaVxExZnl2A696GsWfWbvQHRpTmiw
+	sCF1YqwrV/S8dRSajpkUg0/Xo9gkEr66jLUjwW5UFuZ3hYP8w7k5WS+fJBG5DYNzry2C
+	Uy+n06NokN8G6ttq4sSY7M18Ti1L+4GXMOvkQCKNk7CkhvddDwy3KEu2a4MPuKcfbqJu
+	h4RNsCeyb3XZqPz6QKFlXP4/R5hHn6BEpm3gL/z7Fy1Lh9mNG/i3DVbmGcB20fNJ27uR
+	TPpQl77G04sBgXmSOCITbln499xNjhHxG9ew6w//UXORZ/tUfKBxgY6+7feQGQAqXbCL
+	iOww==
+X-Gm-Message-State: AElRT7HvLdHRdetapE0odaT1FAIW6cw1wU3cBy0kh+j5EFslZZXEGh0l
+	2gzCRarEA+snps5iTh3oJI0=
+X-Google-Smtp-Source: AIpwx48O//UfLIaHy3JeaH92CKC2p7y7qfK+CavrjoTj3urqPIh3EYw2Is3P5dcx9pTu2qcvuuXRPQ==
+X-Received: by 10.98.138.154 with SMTP id o26mr25315976pfk.82.1523170761334;
+	Sat, 07 Apr 2018 23:59:21 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:932:e5ef:c5a4:fdbd])
 	by smtp.gmail.com with ESMTPSA id
-	c186sm20506137pfb.40.2018.04.07.23.59.18
+	c186sm20506137pfb.40.2018.04.07.23.59.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Apr 2018 23:59:19 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:20 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Apr 2018 23:58:40 -0700
-Message-Id: <1523170729-26321-28-git-send-email-akuster808@gmail.com>
+Date: Sat,  7 Apr 2018 23:58:41 -0700
+Message-Id: <1523170729-26321-29-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
 References: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 28/37] webmin: refresh patches
+Subject: [meta-oe][PATCH 29/37] nginx: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,11 +59,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Apr 2018 06:59:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 08 Apr 2018 06:59:20 -0000
 
-WARNING: webmin-1.850-r0 do_patch:
+WARNING: nginx-1.12.2-r0 do_patch:
 Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
 The context lines in the patches can be updated with devtool:
 
@@ -79,203 +75,167 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-Applying patch nfs-export.patch
-patching file exports/save_export.cgi
-Hunk #1 succeeded at 50 (offset 10 lines).
-Hunk #2 succeeded at 87 with fuzz 2 (offset 17 lines).
+Applying patch nginx-cross.patch
+patching file auto/feature
+patching file auto/options
+Hunk #1 succeeded at 386 (offset 33 lines).
+Hunk #2 succeeded at 580 (offset 35 lines).
+Hunk #3 succeeded at 599 (offset 22 lines).
+patching file auto/types/sizeof
+patching file auto/unix
+Hunk #1 succeeded at 587 (offset 194 lines).
+Hunk #2 succeeded at 604 with fuzz 1 (offset 188 lines).
+Hunk #3 succeeded at 620 with fuzz 2 (offset 188 lines).
 
-Now at patch nfs-export.patch
+Now at patch nginx-cross.patch
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../webmin/files/disable-version-check.patch       | 11 +++++-----
- .../webmin/files/exports-lib.pl.patch              | 13 +++++------
- .../webmin/files/init-exclude.patch                | 25 ++++++++++------------
- .../webmin/files/net-generic.patch                 | 12 +++++++----
- .../recipes-webadmin/webmin/files/nfs-export.patch | 20 ++++++++---------
- 5 files changed, 39 insertions(+), 42 deletions(-)
+ .../recipes-httpd/nginx/files/nginx-cross.patch    | 56 ++++++++++++----------
+ 1 file changed, 30 insertions(+), 26 deletions(-)
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch b/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch
-index 1ca1480..9aad894 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/disable-version-check.patch
-@@ -7,11 +7,11 @@ Upstream-status: Inappropriate
+diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx-cross.patch b/meta-webserver/recipes-httpd/nginx/files/nginx-cross.patch
+index 5e96644..0a18bcd 100644
+--- a/meta-webserver/recipes-httpd/nginx/files/nginx-cross.patch
++++ b/meta-webserver/recipes-httpd/nginx/files/nginx-cross.patch
+@@ -3,10 +3,11 @@ We do not have capability to run binaries when cross compiling
+ Upstream-Status: Pending
  
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
  
--diff --git a/webmin/webmin-lib.pl b/webmin/webmin-lib.pl
--index 57a37f7..838b944 100755
----- a/webmin/webmin-lib.pl
--+++ b/webmin/webmin-lib.pl
--@@ -1086,28 +1086,28 @@
-+Index: webmin-1.850/webmin/webmin-lib.pl
+-diff -uraN nginx-1.0.11.orig/auto/feature nginx-1.0.11/auto/feature
+---- nginx-1.0.11.orig/auto/feature	2011-05-11 06:50:19.000000000 -0500
+-+++ nginx-1.0.11/auto/feature	2011-12-27 13:56:42.323370040 -0600
+-@@ -49,12 +49,20 @@
++Index: nginx-1.12.2/auto/feature
 +===================================================================
-+--- webmin-1.850.orig/webmin/webmin-lib.pl
-++++ webmin-1.850/webmin/webmin-lib.pl
-+@@ -1112,28 +1112,28 @@ my %miniserv;
-  &load_theme_library();	# So that UI functions work
++--- nginx-1.12.2.orig/auto/feature
+++++ nginx-1.12.2/auto/feature
++@@ -49,12 +49,20 @@ eval "/bin/sh -c \"$ngx_test\" >> $NGX_A
   
-  # Need OS upgrade
-@@ -62,4 +62,3 @@ index 57a37f7..838b944 100755
+  if [ -x $NGX_AUTOTEST ]; then
   
-  # Password close to expiry
-  my $warn_days = $config{'warn_days'};
--
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/exports-lib.pl.patch b/meta-webserver/recipes-webadmin/webmin/files/exports-lib.pl.patch
-index 177d8a3..d5dfed5 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/exports-lib.pl.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/exports-lib.pl.patch
-@@ -14,11 +14,11 @@ Signed-off-by: Kevin Strasser <kevin.strasser@linux.intel.com>
-  exports/exports-lib.pl |    2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/exports/exports-lib.pl b/exports/exports-lib.pl
--index 22891c0..1c67494 100755
----- a/exports/exports-lib.pl
--+++ b/exports/exports-lib.pl
--@@ -273,7 +273,7 @@ return !&has_command("rpc.nfsd") && !&has_command("nfsd") &&
-+Index: webmin-1.850/exports/exports-lib.pl
-+===================================================================
-+--- webmin-1.850.orig/exports/exports-lib.pl
-++++ webmin-1.850/exports/exports-lib.pl
-+@@ -301,7 +301,7 @@ return !&has_command("rpc.nfsd") && !&ha
-  sub restart_mountd
-  {
-  # Try exportfs -r first
-@@ -27,6 +27,3 @@ index 22891c0..1c67494 100755
-  	my $out = &backquote_logged("$config{'apply_cmd'} 2>&1 </dev/null");
-  	if (!$? && $out !~ /invalid|error|failed/i) {
-  		# Looks like it worked!
---- 
--1.7.9.5
--
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-index 5563227..4212917 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/init-exclude.patch
-@@ -11,11 +11,11 @@
-  init/init-lib.pl |  5 +++--
-  2 files changed, 17 insertions(+), 15 deletions(-)
- 
--diff --git a/init/index.cgi b/init/index.cgi
--index d48b793..30dafd4 100755
----- a/init/index.cgi
--+++ b/init/index.cgi
--@@ -45,19 +45,20 @@ elsif ($init_mode eq "init" && $access{'bootup'}) {
-+Index: webmin-1.850/init/index.cgi
-+===================================================================
-+--- webmin-1.850.orig/init/index.cgi
-++++ webmin-1.850/init/index.cgi
-+@@ -45,19 +45,20 @@ elsif ($init_mode eq "init" && $access{'
-  					     : "$config{'init_dir'}/$ac[0]");
-  		}
-  	@runlevels = &list_runlevels();
-@@ -49,11 +49,11 @@ index d48b793..30dafd4 100755
+@@ -29,7 +30,7 @@ diff -uraN nginx-1.0.11.orig/auto/feature nginx-1.0.11/auto/feature
+                  ngx_found=yes
   
-  	# For each action, look at /etc/rc*.d/* files to see if it is 
-  	# started at boot
--diff --git a/init/init-lib.pl b/init/init-lib.pl
--index ead21ed..b41794b 100755
----- a/init/init-lib.pl
--+++ b/init/init-lib.pl
--@@ -119,8 +119,9 @@ List boot time action names from init.d, such as httpd and cron.
-+Index: webmin-1.850/init/init-lib.pl
+                  if test -n "$ngx_feature_name"; then
+-@@ -68,17 +75,27 @@
++@@ -68,17 +76,27 @@ if [ -x $NGX_AUTOTEST ]; then
+  
+          value)
+              # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+@@ -61,7 +62,7 @@ diff -uraN nginx-1.0.11.orig/auto/feature nginx-1.0.11/auto/feature
+              else
+                  echo " found but is not working"
+              fi
+-@@ -86,7 +105,7 @@
++@@ -86,7 +104,7 @@ END
+  
+          bug)
+              # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+@@ -70,10 +71,11 @@ diff -uraN nginx-1.0.11.orig/auto/feature nginx-1.0.11/auto/feature
+                  echo " not found"
+  
+              else
+-diff -uraN nginx-1.0.11.orig/auto/options nginx-1.0.11/auto/options
+---- nginx-1.0.11.orig/auto/options	2011-12-14 07:34:16.000000000 -0600
+-+++ nginx-1.0.11/auto/options	2011-12-27 13:56:42.323370040 -0600
+-@@ -353,6 +353,18 @@
++Index: nginx-1.12.2/auto/options
 +===================================================================
-+--- webmin-1.850.orig/init/init-lib.pl
-++++ webmin-1.850/init/init-lib.pl
-+@@ -124,8 +124,9 @@ List boot time action names from init.d,
-  =cut
-  sub list_actions
-  {
-@@ -64,7 +64,7 @@ index ead21ed..b41794b 100755
-  opendir(DIR, $dir);
-  foreach $f (sort { lc($a) cmp lc($b) } readdir(DIR)) {
-  	if ($f eq "." || $f eq ".." || $f =~ /\.bak$/ || $f eq "functions" ||
--@@ -128,7 +129,7 @@ foreach $f (sort { lc($a) cmp lc($b) } readdir(DIR)) {
-+@@ -133,7 +134,7 @@ foreach $f (sort { lc($a) cmp lc($b) } r
-  	    -d "$dir/$f" || $f =~ /\.swp$/ || $f eq "skeleton" ||
-  	    $f =~ /\.lock$/ || $f =~ /\.dpkg-(old|dist)$/ ||
-  	    $f =~ /^\.depend\./ || $f eq '.legacy-bootordering' ||
-@@ -73,6 +73,3 @@ index ead21ed..b41794b 100755
-  	if (@stbuf = stat("$dir/$f")) {
-  		push(@rv, "$f $stbuf[1]");
-  		}
----
--2.0.0
--
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-index 7d20aff..5549392 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/net-generic.patch
-@@ -3,9 +3,11 @@
- # Upstream-status: Not appropriate [config]
- #
- # Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----- webmin-1.570.orig/net/module.info
--+++ webmin-1.570/net/module.info
--@@ -11,7 +11,7 @@ desc_ko_KR.UTF-8=ÎÑ§Ìä∏ÏõåÌÅ¨ Íµ¨ÏÑ±
-+Index: webmin-1.850/net/module.info
++--- nginx-1.12.2.orig/auto/options
+++++ nginx-1.12.2/auto/options
++@@ -386,6 +386,18 @@ $0: warning: the \"--with-sha1-asm\" opt
+          --test-build-epoll)              NGX_TEST_BUILD_EPOLL=YES   ;;
+          --test-build-solaris-sendfilev)  NGX_TEST_BUILD_SOLARIS_SENDFILEV=YES ;;
+  
+@@ -92,7 +94,7 @@ diff -uraN nginx-1.0.11.orig/auto/options nginx-1.0.11/auto/options
+          *)
+              echo "$0: error: invalid option \"$option\""
+              exit 1
+-@@ -533,6 +445,17 @@
++@@ -568,6 +580,17 @@ cat << END
+  
+    --with-debug                       enable debug logging
+  
+@@ -110,7 +112,7 @@ diff -uraN nginx-1.0.11.orig/auto/options nginx-1.0.11/auto/options
+  END
+  
+      exit 1
+-@@ -554,6 +577,8 @@
++@@ -576,6 +599,8 @@ fi
+  
+  if [ ".$NGX_PLATFORM" = ".win32" ]; then
+      NGX_WINE=$WINE
+@@ -119,10 +121,11 @@ diff -uraN nginx-1.0.11.orig/auto/options nginx-1.0.11/auto/options
+  fi
+  
+  
+-diff -uraN nginx-1.0.11.orig/auto/types/sizeof nginx-1.0.11/auto/types/sizeof
+---- nginx-1.0.11.orig/auto/types/sizeof	2006-06-28 11:00:26.000000000 -0500
+-+++ nginx-1.0.11/auto/types/sizeof	2011-12-27 13:56:42.323370040 -0600
+-@@ -12,9 +12,12 @@
++Index: nginx-1.12.2/auto/types/sizeof
 +===================================================================
-+--- webmin-1.850.orig/net/module.info
-++++ webmin-1.850/net/module.info
-+@@ -14,7 +14,7 @@ desc_ko_KR.UTF-8=ÎÑ§Ìä∏ÏõåÌÅ¨ Íµ¨ÏÑ±
-  name=Networking
-  desc_tr=A Yap˝land˝rmas˝
-  desc_de=Netzwerkkonfiguration
-@@ -14,8 +16,10 @@
-  desc_sk=Konfigur·cia siete
-  desc_zh_CN=Õ¯¬Á≈‰÷√
-  risk=low medium high
-+Index: webmin-1.850/net/generic-linux-lib.pl
++--- nginx-1.12.2.orig/auto/types/sizeof
+++++ nginx-1.12.2/auto/types/sizeof
++@@ -12,9 +12,12 @@ checking for $ngx_type size
+  
+  END
+  
+@@ -137,7 +140,7 @@ diff -uraN nginx-1.0.11.orig/auto/types/sizeof nginx-1.0.11/auto/types/sizeof
+  
+  #include <sys/types.h>
+  #include <sys/time.h>
+-@@ -33,15 +36,16 @@
++@@ -33,15 +36,16 @@ int main(void) {
+  END
+  
+  
+@@ -160,10 +163,11 @@ diff -uraN nginx-1.0.11.orig/auto/types/sizeof nginx-1.0.11/auto/types/sizeof
+  fi
+  
+  
+-diff -uraN nginx-1.0.11.orig/auto/unix nginx-1.0.11/auto/unix
+---- nginx-1.0.11.orig/auto/unix	2011-12-14 07:34:16.000000000 -0600
+-+++ nginx-1.0.11/auto/unix	2011-12-27 13:56:42.327370060 -0600
+-@@ -393,13 +393,13 @@
++Index: nginx-1.12.2/auto/unix
 +===================================================================
- --- /dev/null
--+++ webmin-1.570/net/generic-linux-lib.pl
-++++ webmin-1.850/net/generic-linux-lib.pl
- @@ -0,0 +1,2 @@
- +do 'linux-lib.pl';
- +
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/nfs-export.patch b/meta-webserver/recipes-webadmin/webmin/files/nfs-export.patch
-index c17e3b2..426d637 100644
---- a/meta-webserver/recipes-webadmin/webmin/files/nfs-export.patch
-+++ b/meta-webserver/recipes-webadmin/webmin/files/nfs-export.patch
-@@ -12,11 +12,11 @@ Upstream-Status: Pending
- 
- Signed-off-by: Yu Ke <ke.yu@intel.com>
- 
--diff --git a/exports/save_export.cgi b/exports/save_export.cgi
--index 3bc2f97..3e60298 100755
----- a/exports/save_export.cgi
--+++ b/exports/save_export.cgi
--@@ -40,7 +40,7 @@ else {
-+Index: webmin-1.850/exports/save_export.cgi
-+===================================================================
-+--- webmin-1.850.orig/exports/save_export.cgi
-++++ webmin-1.850/exports/save_export.cgi
-+@@ -50,7 +50,7 @@ else {
-  			&error(&text('save_enetmask', $in{'netmask'}));
-  		$exp{'host'} = $in{'network'}."/".$in{'netmask'};
-  		}
-@@ -25,9 +25,9 @@ index 3bc2f97..3e60298 100755
-  	else {
-  		$in{'host'} =~ /\*/ || &to_ipaddress($in{'host'}) ||
-  			&error(&text('save_ehost', $in{'host'}));
--@@ -70,6 +70,11 @@ else {
++--- nginx-1.12.2.orig/auto/unix
+++++ nginx-1.12.2/auto/unix
++@@ -587,13 +587,13 @@ ngx_feature_libs=
+  
+  # C types
+  
+@@ -181,8 +185,8 @@ diff -uraN nginx-1.0.11.orig/auto/unix nginx-1.0.11/auto/unix
+  ngx_param=NGX_PTR_SIZE; ngx_value=$ngx_size; . auto/types/value
+  
+  
+-@@ -416,7 +416,7 @@
 - 
-- 	delete($opts{'no_subtree_check'}); delete($opts{'subtree_check'});
-+@@ -87,6 +87,11 @@ else {
-+ 	delete($opts{'no_subtree_check'});
-+ 	delete($opts{'subtree_check'});
-  	$opts{'no_subtree_check'} = "" if ($in{'no_subtree_check'});
- +	if ($in{'no_subtree_check'}) {
- +		$opts{'no_subtree_check'} = "";
-@@ -35,5 +35,5 @@ index 3bc2f97..3e60298 100755
- +		$opts{'subtree_check'} = "";
- +	}
++@@ -604,7 +604,7 @@ NGX_INCLUDE_AUTO_CONFIG_H="#include \"ng
++ ngx_type="uint32_t"; ngx_types="u_int32_t"; . auto/types/typedef
+  ngx_type="uint64_t"; ngx_types="u_int64_t"; . auto/types/typedef
   
-- 	delete($opts{'nohide'}); delete($opts{'hide'});
-- 	$opts{'nohide'} = "" if ($in{'nohide'});
-+ 	delete($opts{'nohide'});
-+ 	delete($opts{'hide'});
+ -ngx_type="sig_atomic_t"; ngx_types="int"; . auto/types/typedef
+@@ -190,9 +194,9 @@ diff -uraN nginx-1.0.11.orig/auto/unix nginx-1.0.11/auto/unix
+  . auto/types/sizeof
+  ngx_param=NGX_SIG_ATOMIC_T_SIZE; ngx_value=$ngx_size; . auto/types/value
+  
+-@@ -432,15 +432,15 @@
++@@ -620,15 +620,15 @@ ngx_type="rlim_t"; ngx_types="int"; . au
+  
+- . auto/endianess
++ . auto/endianness
+  
+ -ngx_type="size_t"; . auto/types/sizeof
+ +ngx_type="size_t"; ngx_param="SIZE_T"; . auto/types/sizeof
+@@ -208,4 +212,4 @@ diff -uraN nginx-1.0.11.orig/auto/unix nginx-1.0.11/auto/unix
+ +ngx_type="time_t"; ngx_param="TIME_T"; . auto/types/sizeof
+  ngx_param=NGX_TIME_T_SIZE; ngx_value=$ngx_size; . auto/types/value
+  ngx_param=NGX_TIME_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
+- 
++ ngx_param=NGX_MAX_TIME_T_VALUE; ngx_value=$ngx_max_value; . auto/types/value
 -- 
 2.7.4
 
