@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f48.google.com (mail-pl0-f48.google.com
-	[209.85.160.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 37ADE75585
+Received: from mail-pl0-f50.google.com (mail-pl0-f50.google.com
+	[209.85.160.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 6802E75574
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Apr 2018 06:59:10 +0000 (UTC)
-Received: by mail-pl0-f48.google.com with SMTP id 59-v6so3201004plc.13
+	Sun,  8 Apr 2018 06:59:12 +0000 (UTC)
+Received: by mail-pl0-f50.google.com with SMTP id y12-v6so3103237plt.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Apr 2018 23:59:11 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=pdjHP0qaZjMRP8+FOVGX3bxqUSoaKLhtZPWoIm4uxK4=;
-	b=hW3GLBxRTOoFWJoep4JAw/9zljcDYV5UfLqAQeAOaWDUm9iENwBYcySRjNt5K9GAr+
-	/ZDbz+G4+l8WmX4InOk3DdKaJeM4Q8BKIg55Fh/GxxG8bEymn1TB+DhP94ay5xWlCYfZ
-	kaaBVfuaQQlg6fH8xN0GGJjw7yg3auLMNXJ4v+HLui2QEWRrt6bXBp1fmplSQoAjTCE2
-	VJvwZ6FXWObgJfV/oVXH6MlOs3Ea7utLj9/F2YlP0OuI8azkA5XF96GKLvZP0MSt0b2/
-	doA3rZ+i2KWFQdcMYqFc5ZesGvAfYnhJuYbxpcKau0wSWVIxZ69XjzQSt7HpJNy9wKfw
-	RmPw==
+	bh=9+EBS/6u14EI9iq0SZzbFIhVcCMXky9/6xdeQGoFGHY=;
+	b=Ioo357GyDtX7N6sjoZTmUuTRdyZ9ivJG/BdZxnUH60jOLc4IHsW+S7KKTMMjbOm1Gs
+	UZVHnmg6kCU3i9uzplGoLj8ebT4Fzu2tEkYJwFMtscoZwAbNEZjhI/7mywJ8Wj4Gsy4C
+	OYLcT1sSJgKbgaUL3olR4AmWwPlggDCKu6nZm3FtIOCCZksnqYmM9z4923ks3LQGqoFN
+	HGV4ZUA4H7Ig2iyPMbqxdgU3BOpADT+hQlkAqYnyd/rVY27ybxnPd00weh2c/Ey/zMIi
+	trTN3Fmb+OZtHWCEsk/su9bmA4Hpj67Jw/7Lsa/lyEbGKfDTWOb4ATwQsDLjh0ZY6JyF
+	4SZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=pdjHP0qaZjMRP8+FOVGX3bxqUSoaKLhtZPWoIm4uxK4=;
-	b=DCFi4WjUV1m4JNzzrntPAdko+RXF2S/Ka1UT9mzFghubC8Xta4bCbx2+ne7JR+Djgg
-	l4NixR6HD+YgJIXmEKLjxIunXrJmhuYfIdD2aWGO8CnJzEiPS9LQx/Sd+p7maKb1Yywy
-	o3dFTXQtWiIDtWeNTEQQd94jGrWHMUjytvylfncEg89s1EwDe8q5KEjhMkZAhQp4QrV1
-	QZxOWur6UxcBQ528BxTJqTT5+xO4MwWoUWVyF9yu9Q3h2eI6A0jCu6UlN6fSPtGclMNm
-	3bC+uH/uWimcV5WglOvz3fWZf8nOotmasgFf4cCYWnv3+wIGNMjilno1YB/C7Z5vTYDe
-	UKjg==
-X-Gm-Message-State: AElRT7EKFWNzeeBJDaMtzGMPgabIKSKBg+dlLzvggO4wWyLz3iT2pUeR
-	cESPV9gJudG9fuwKXc5Ok/Y1dg==
-X-Google-Smtp-Source: AIpwx48VZmK/nh6YwIuSPfBiunqD1Vq1Y0wbXnsNvU0kY+DCXfpw39vz2xU9AbLvFZvDbZ3GOGg7vQ==
-X-Received: by 2002:a17:902:6b45:: with SMTP id
-	g5-v6mr33124079plt.171.1523170751438; 
-	Sat, 07 Apr 2018 23:59:11 -0700 (PDT)
+	bh=9+EBS/6u14EI9iq0SZzbFIhVcCMXky9/6xdeQGoFGHY=;
+	b=PFbAAf0C+9MMlteHQbOF8K+A2uaqay2ETzYZxbIF2bDBrrHrb525i/MAD1qL811/1J
+	Zta/nbutrW9//FPykXsfKwFBSn8yTbNv2Ctzf3E1i9Jcl3xxHge38jtL2wi8+KNaFHeZ
+	8sVgom85Mz6XX2lGtPolIBDCEDOT9nYhVl1+j7W1xch8cYlhE1V6TBbm9BGa/XBe2QHT
+	XGeOX/1dzUDWQUeUMFFehjpki0STvMf9zj30/+XP/VAMJrGmnDfQmQmVvjOIb93Md/eb
+	2VX4qD+yRIHDCWfuwFtfHvDfGavDGQa1K03UoRHC521TCnAerIpoRcc4pGH+kpZkRxQU
+	AQvQ==
+X-Gm-Message-State: AElRT7E1ePIGCoxFoD9bD7IoP1KF1bAP5jk5S1tGC8gD82BD0VYsTs2l
+	RR4Pokh8Vel75XIRr8XCM+pULA==
+X-Google-Smtp-Source: AIpwx48duHE52JnDz0dgkKBSt7CK3b+Irrj7kbOALeyz/pQTFVTeuRriahLxJhgRS+7krCG29J056A==
+X-Received: by 2002:a17:902:be12:: with SMTP id
+	r18-v6mr31541582pls.173.1523170753307; 
+	Sat, 07 Apr 2018 23:59:13 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:932:e5ef:c5a4:fdbd])
 	by smtp.gmail.com with ESMTPSA id
-	c186sm20506137pfb.40.2018.04.07.23.59.10
+	c186sm20506137pfb.40.2018.04.07.23.59.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Apr 2018 23:59:10 -0700 (PDT)
+	Sat, 07 Apr 2018 23:59:12 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Apr 2018 23:58:31 -0700
-Message-Id: <1523170729-26321-19-git-send-email-akuster808@gmail.com>
+Date: Sat,  7 Apr 2018 23:58:33 -0700
+Message-Id: <1523170729-26321-21-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
 References: <1523170729-26321-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 19/37] pyton-pygpme: refresh patches
+Subject: [meta-oe][PATCH 21/37] t1lib: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,97 +76,358 @@ when some of the context is ignored). Further information:
 http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
 https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 Details:
-checking file tests/test_import.py
-Hunk #4 succeeded at 122 with fuzz 1.
+checking file Makefile.in
+Hunk #1 succeeded at 18 with fuzz 1.
+Hunk #2 succeeded at 150 (offset -1 lines).
+checking file examples/Makefile.in
+checking file lib/Makefile.in
+checking file lib/t1lib/Makefile.in
+checking file lib/type1/Makefile.in
+checking file type1afm/Makefile.in
+checking file xglyph/Makefile.in
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../python-pygpgme/0001-reflect-2.1-reporting-for-key-imports.patch | 6 ++++--
- .../python/python-pygpgme/0002-passphrase_cb-is-deprecated.patch    | 6 ++++--
- .../0003-handle-generic-error-when-no-passphrase-callback-pre.patch | 6 ++++--
- 3 files changed, 12 insertions(+), 6 deletions(-)
+ .../t1lib/t1lib-5.1.2/configure.patch              | 79 +++++++++++++---------
+ .../t1lib/t1lib-5.1.2/format_security.patch        | 43 ++++++++----
+ .../t1lib/t1lib-5.1.2/libtool.patch                | 60 +++++++++++-----
+ 3 files changed, 120 insertions(+), 62 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pygpgme/0001-reflect-2.1-reporting-for-key-imports.patch b/meta-python/recipes-devtools/python/python-pygpgme/0001-reflect-2.1-reporting-for-key-imports.patch
-index f587037..1f31cb8 100644
---- a/meta-python/recipes-devtools/python/python-pygpgme/0001-reflect-2.1-reporting-for-key-imports.patch
-+++ b/meta-python/recipes-devtools/python/python-pygpgme/0001-reflect-2.1-reporting-for-key-imports.patch
-@@ -1,7 +1,7 @@
--From 1c1812def711803382cc28caea1f35fb7ef774b0 Mon Sep 17 00:00:00 2001
-+From ed44474c11f577c1644910964a917a4cf701bb0f Mon Sep 17 00:00:00 2001
- From: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
- Date: Tue, 26 Jan 2016 14:24:26 -0500
--Subject: [PATCH 1/5] reflect 2.1 reporting for key imports
-+Subject: [PATCH] reflect 2.1 reporting for key imports
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
+index 8b98707..976e038 100644
+--- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
++++ b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/configure.patch
+@@ -1,11 +1,21 @@
++From 81c1ba940415595584a837ab1078c64855072f0c Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Mon, 21 Nov 2011 12:00:54 +0100
++Subject: [PATCH] t1lib: add 5.1.2
  
- GnuPG 2.1 changes how it reports key imports.  These changes should
- make the pygpgme test suite compatible with GnuPG 2.1.
-@@ -12,6 +12,7 @@ https://lists.gnupg.org/pipermail/gnupg-devel/2016-January/030718.html
- Upstream-Status: Backport
+ #
+ # Patch managed by http://www.holgerschurig.de/patcher.html
+ #
  
- Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
+---- t1lib-5.0.2/configure.in~configure.patch
+-+++ t1lib-5.0.2/configure.in
+-@@ -75,9 +75,9 @@
++---
++ configure.in | 95 ++++++++++++++++++++++++------------------------------------
++ 1 file changed, 38 insertions(+), 57 deletions(-)
 +
- ---
-  tests/test_import.py | 22 +++++++++++-----------
-  1 file changed, 11 insertions(+), 11 deletions(-)
-@@ -86,3 +87,4 @@ index 10eb816..597eb47 100644
- +                          None, gpgme.IMPORT_NEW | gpgme.IMPORT_SECRET))
-          self.assertEqual(result.imports[3],
-                           ('93C2240D6B8AA10AB28F701D2CF46B7FC97E6B0F',
-+                           None, gpgme.IMPORT_NEW))
-diff --git a/meta-python/recipes-devtools/python/python-pygpgme/0002-passphrase_cb-is-deprecated.patch b/meta-python/recipes-devtools/python/python-pygpgme/0002-passphrase_cb-is-deprecated.patch
-index ccd941f..c18cf3f 100644
---- a/meta-python/recipes-devtools/python/python-pygpgme/0002-passphrase_cb-is-deprecated.patch
-+++ b/meta-python/recipes-devtools/python/python-pygpgme/0002-passphrase_cb-is-deprecated.patch
-@@ -1,7 +1,7 @@
--From dc75482af095d667a4a92655c4e7eb312e80c42d Mon Sep 17 00:00:00 2001
-+From ba0dc8273e4f83bcd2d43baa5910aae34b93048c Mon Sep 17 00:00:00 2001
- From: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
- Date: Mon, 1 Feb 2016 19:25:12 -0500
--Subject: [PATCH 2/5] passphrase_cb is deprecated
-+Subject: [PATCH] passphrase_cb is deprecated
- 
- https://bugs.gnupg.org/gnupg/issue767 indicates that
- gpgme_set_passphrase_cb is a deprecated corner of the API and that
-@@ -19,6 +19,7 @@ test suite to be able to make those tests.
- Upstream-Status: Backport
- 
- Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
++diff --git a/configure.in b/configure.in
++index eade4c0..e649ea9 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -74,9 +74,9 @@ T1LIB_PATCHLEVEL=builtin(eval, MACRO_T1LIB_LT_REVISION)
+  T1LIB_VERSIONSTRING=\"MACRO_T1LIB_IDENTIFIER\"
+  
+  
+@@ -18,7 +28,7 @@
+  
+  dnl We want these before the checks, so the checks can modify their values.
+  test -z "$LDLIBS" && LDLIBS=-lm   AC_SUBST(LDLIBS)
+-@@ -161,6 +161,7 @@
++@@ -162,6 +162,7 @@ fi
+  
+  dnl **** Check for underscore on external symbols ****
+  
+@@ -26,21 +36,12 @@
+  AC_CACHE_CHECK("whether external symbols need an underscore prefix",
+                 ac_cv_c_extern_prefix,
+  [saved_libs=$LIBS
+-@@ -178,68 +179,48 @@
++@@ -179,68 +180,48 @@ then
+    AC_DEFINE(NEED_UNDERSCORE_PREFIX)
+  fi
+  
+ -dnl **** Check which ANSI integer type is 16 bit 
+-+dnl **** Check which ANSI integer type is 16 bit
+-+T1_AA_TYPE16=""
+-+for type in short int; do
+-+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x2"; then
+-+		T1_AA_TYPE16="-DT1_AA_TYPE16=$type"
+-+		T1_INT16="$type"
+-+		break
+-+	fi
+-+done
+- 
++-
+ -AC_CACHE_CHECK( "which ANSI integer type is 16 bit", ac_16bit_type,
+ -		AC_TRY_RUN([
+ -int main(void) {
+@@ -58,21 +59,23 @@
+ -else
+ -  T1_AA_TYPE16="-DT1_AA_TYPE16=int"
+ -  T1_INT16="int"
+++dnl **** Check which ANSI integer type is 16 bit
+++T1_AA_TYPE16=""
+++for type in short int; do
+++	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x2"; then
+++		T1_AA_TYPE16="-DT1_AA_TYPE16=$type"
+++		T1_INT16="$type"
+++		break
+++	fi
+++done
+++
+ +if test x"$T1_AA_TYPE16" = "x"; then
+ +	AC_MSG_ERROR("Unable to determine which integer type is 16 bit.")
+  fi
+  
+ -
+  dnl **** Check which ANSI integer type is 32 bit 
+-+T1_AA_TYPE32=""
+-+for type in int long; do
+-+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x4"; then
+-+		T1_AA_TYPE32="-DT1_AA_TYPE32=$type"
+-+		T1_INT32="$type"
+-+		break
+-+	fi
+-+done
+- 
++-
+ -AC_CACHE_CHECK( "which ANSI integer type is 32 bit", ac_32bit_type,
+ -		AC_TRY_RUN([
+ -int main(void) {
+@@ -90,21 +93,22 @@
+ -else
+ -  T1_AA_TYPE32="-DT1_AA_TYPE32=long"
+ -  T1_INT32="long"
+++T1_AA_TYPE32=""
+++for type in int long; do
+++	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x4"; then
+++		T1_AA_TYPE32="-DT1_AA_TYPE32=$type"
+++		T1_INT32="$type"
+++		break
+++	fi
+++done
+++
+ +if test x"$T1_AA_TYPE32" = "x"; then
+ +	AC_MSG_ERROR("Unable to determine which integer type is 32 bit.")
+  fi
+  
+ -
+  dnl **** Check which ANSI integer type is 64 bit 
+-+T1_AA_TYPE64=""
+-+for type in long long_long; do
+-+	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x8"; then
+-+		AC_MSG_WARN("$type is 64 bit")
+-+		T1_AA_TYPE64="-DT1_AA_TYPE64=\"`echo $type|tr '_' ' '`\""
+-+		break
+-+	fi
+-+done
+- 
++-
+ -AC_CACHE_CHECK( "which ANSI integer type is 64 bit", ac_64bit_type,
+ -		AC_TRY_RUN([
+ -int main(void) {
+@@ -118,6 +122,15 @@
+ -  T1_AA_TYPE64="-DT1_AA_TYPE64=long"
+ -else
+ -  T1_AA_TYPE64=
+++T1_AA_TYPE64=""
+++for type in long long_long; do
+++	if test x"`eval echo \\$ac_cv_sizeof_$type`" = "x8"; then
+++		AC_MSG_WARN("$type is 64 bit")
+++		T1_AA_TYPE64="-DT1_AA_TYPE64=\"`echo $type|tr '_' ' '`\""
+++		break
+++	fi
+++done
+++
+ +if test x"$T1_AA_TYPE64" = "x"; then
+ +	AC_MSG_ERROR("Unable to determine which integer type is 64 bit.")
+  fi
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
+index 8b4ce40..bc2476b 100644
+--- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
++++ b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/format_security.patch
+@@ -1,3 +1,8 @@
++From cea83003de3ffebde92becd1e599fe3b28f0a7c4 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 6 Mar 2017 23:13:36 -0800
++Subject: [PATCH] t1lib: Fix printf format string errors
 +
- ---
-  tests/util.py | 8 +++++++-
-  1 file changed, 7 insertions(+), 1 deletion(-)
-@@ -48,3 +49,4 @@ index cd803c2..86892ca 100644
- +
-          # import requested keys into the keyring
-          ctx = gpgme.Context()
-+         for key in self.import_keys:
-diff --git a/meta-python/recipes-devtools/python/python-pygpgme/0003-handle-generic-error-when-no-passphrase-callback-pre.patch b/meta-python/recipes-devtools/python/python-pygpgme/0003-handle-generic-error-when-no-passphrase-callback-pre.patch
-index 462f442..6acb68b 100644
---- a/meta-python/recipes-devtools/python/python-pygpgme/0003-handle-generic-error-when-no-passphrase-callback-pre.patch
-+++ b/meta-python/recipes-devtools/python/python-pygpgme/0003-handle-generic-error-when-no-passphrase-callback-pre.patch
-@@ -1,7 +1,7 @@
--From 024fe219582143017b2f02bc924c0ed107b63619 Mon Sep 17 00:00:00 2001
-+From 579b5930e15de8855bf63b3c20b6c3aaf894c3eb Mon Sep 17 00:00:00 2001
- From: Daniel Kahn Gillmor <dkg@fifthhorseman.net>
- Date: Mon, 1 Feb 2016 19:27:59 -0500
--Subject: [PATCH 3/5] handle generic error when no passphrase callback present
-+Subject: [PATCH] handle generic error when no passphrase callback present
+ Fix printf formats to use format qualifiers
+ fixes
  
- apparently gpg 2.1 returns ERR_GENERAL right now if the pinentry was
- in loopback mode and no passphrase callback was supplied.  Earlier
-@@ -10,6 +10,7 @@ versions supplied ERR_BAD_PASSPHRASE.
- Upstream-Status: Backport
+@@ -6,20 +11,17 @@ error: format string is not a string literal (potentially insecure) [-Werror,-Wf
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ Upstream-Status: Pending
  
- Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
+---- a/lib/type1/objects.c
+-+++ b/lib/type1/objects.c
+-@@ -957,7 +957,7 @@
+-  
+-        sprintf(typemsg, "Wrong object type in %s; expected %s, found %s.\n",
+-                   name, TypeFmt(expect), TypeFmt(obj->type));
+--       IfTrace0(TRUE,typemsg);
+-+       IfTrace1(TRUE, "%s", typemsg);
+-  
+-        ObjectPostMortem(obj);
+-  
++---
++ lib/t1lib/t1subset.c | 2 +-
++ lib/type1/objects.c  | 2 +-
++ lib/type1/objects.h  | 2 +-
++ 3 files changed, 3 insertions(+), 3 deletions(-)
 +
- ---
-  tests/test_passphrase.py | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-@@ -26,3 +27,4 @@ index 0a235e9..35b3c59 100644
- +            self.assertEqual(exc.args[1], gpgme.ERR_GENERAL)
-          else:
-              self.fail('gpgme.GpgmeError not raised')
-+ 
++diff --git a/lib/t1lib/t1subset.c b/lib/t1lib/t1subset.c
++index da427b2..e76974f 100644
+ --- a/lib/t1lib/t1subset.c
+ +++ b/lib/t1lib/t1subset.c
+-@@ -759,7 +759,7 @@
++@@ -759,7 +759,7 @@ char *T1_SubsetFont( int FontID,
+  	     tr_len);
+      T1_PrintLog( "T1_SubsetFont()", err_warn_msg_buf,
+  		 T1LOG_DEBUG);
+@@ -28,9 +30,24 @@ Upstream-Status: Pending
+    }
+    
+    /* compute size of output file */
++diff --git a/lib/type1/objects.c b/lib/type1/objects.c
++index c413a0f..f828e6a 100644
++--- a/lib/type1/objects.c
+++++ b/lib/type1/objects.c
++@@ -957,7 +957,7 @@ struct xobject *TypeErr(name, obj, expect, ret) /* non-ANSI avoids overly strict
++  
++        sprintf(typemsg, "Wrong object type in %s; expected %s, found %s.\n",
++                   name, TypeFmt(expect), TypeFmt(obj->type));
++-       IfTrace0(TRUE,typemsg);
+++       IfTrace1(TRUE, "%s", typemsg);
++  
++        ObjectPostMortem(obj);
++  
++diff --git a/lib/type1/objects.h b/lib/type1/objects.h
++index 13cbae7..3a1d337 100644
+ --- a/lib/type1/objects.h
+ +++ b/lib/type1/objects.h
+-@@ -214,7 +214,7 @@
++@@ -214,7 +214,7 @@ struct xobject {
+  /*SHARED*/
+  /* NDW: personally, I want to see status and error messages! */
+  #define IfTrace0(condition,model)                                 \
+diff --git a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
+index e050025..da54f87 100644
+--- a/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
++++ b/meta-oe/recipes-extended/t1lib/t1lib-5.1.2/libtool.patch
+@@ -1,12 +1,28 @@
++From bab41f5e1fc1fc809da1371e6a0222e0eb21e5f0 Mon Sep 17 00:00:00 2001
++From: Koen Kooi <koen@dominion.thruhere.net>
++Date: Mon, 21 Nov 2011 12:00:54 +0100
++Subject: [PATCH] t1lib: add 5.1.2
+ 
+ #
+ # Patch managed by http://www.holgerschurig.de/patcher.html
+ #
+ 
+---- t1lib-5.0.2/Makefile.in~libtool
+-+++ t1lib-5.0.2/Makefile.in
++---
++ Makefile.in           | 5 +++--
++ examples/Makefile.in  | 5 +++--
++ lib/Makefile.in       | 6 ++++--
++ lib/t1lib/Makefile.in | 6 ++++--
++ lib/type1/Makefile.in | 6 ++++--
++ type1afm/Makefile.in  | 6 ++++--
++ xglyph/Makefile.in    | 6 ++++--
++ 7 files changed, 26 insertions(+), 14 deletions(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 29c3468..396c020 100644
++--- a/Makefile.in
+++++ b/Makefile.in
+ @@ -18,7 +18,8 @@
+- # Last modified:       2001-04-01
++ # Last modified:       2005-05-01
+  #
+  
+ -SHELL     = /bin/sh
+@@ -15,7 +31,7 @@
+  CC        = @CC@
+  CPP       = @CPP@
+  CFLAGS    = @CFLAGS@
+-@@ -150,7 +151,7 @@
++@@ -149,7 +150,7 @@ distclean: clean
+  	$(RM) examples/Makefile
+  	$(RM) xglyph/Makefile
+  	$(RM) doc/Makefile
+@@ -24,8 +40,10 @@
+  
+  
+  # The following two targets are for building and cleaning the python-
+---- t1lib-5.0.2/examples/Makefile.in~libtool
+-+++ t1lib-5.0.2/examples/Makefile.in
++diff --git a/examples/Makefile.in b/examples/Makefile.in
++index b301db5..7a6a514 100644
++--- a/examples/Makefile.in
+++++ b/examples/Makefile.in
+ @@ -14,9 +14,10 @@
+  # Last modified:       2001-04-01
+  #
+@@ -39,8 +57,10 @@
+  CC        = @CC@
+  CPP       = @CPP@
+  CFLAGS    = @CFLAGS@
+---- t1lib-5.0.2/lib/Makefile.in~libtool
+-+++ t1lib-5.0.2/lib/Makefile.in
++diff --git a/lib/Makefile.in b/lib/Makefile.in
++index 89e5e86..6e0f960 100644
++--- a/lib/Makefile.in
+++++ b/lib/Makefile.in
+ @@ -15,8 +15,10 @@
+  #
+  # Contributions by H.Kakugawa to use libtool!
+@@ -54,8 +74,10 @@
+  CC        = @CC@
+  CPP       = @CPP@
+  CFLAGS    = @CFLAGS@
+---- t1lib-5.0.2/lib/t1lib/Makefile.in~libtool
+-+++ t1lib-5.0.2/lib/t1lib/Makefile.in
++diff --git a/lib/t1lib/Makefile.in b/lib/t1lib/Makefile.in
++index a6c2478..32434b3 100644
++--- a/lib/t1lib/Makefile.in
+++++ b/lib/t1lib/Makefile.in
+ @@ -14,8 +14,10 @@
+  #
+  # Modified by H.Kakugawa to use libtool
+@@ -69,8 +91,10 @@
+  CC        = @CC@
+  CPP       = @CPP@
+  CFLAGS    = @CFLAGS@
+---- t1lib-5.0.2/lib/type1/Makefile.in~libtool
+-+++ t1lib-5.0.2/lib/type1/Makefile.in
++diff --git a/lib/type1/Makefile.in b/lib/type1/Makefile.in
++index 241f124..42efa94 100644
++--- a/lib/type1/Makefile.in
+++++ b/lib/type1/Makefile.in
+ @@ -14,8 +14,10 @@
+  #
+  # Modified by H.Kakugawa to use libtool
+@@ -84,8 +108,10 @@
+  CC        = @CC@
+  CPP       = @CPP@
+  CFLAGS    = @CFLAGS@
+---- t1lib-5.0.2/type1afm/Makefile.in~libtool
+-+++ t1lib-5.0.2/type1afm/Makefile.in
++diff --git a/type1afm/Makefile.in b/type1afm/Makefile.in
++index 61611e1..9b51406 100644
++--- a/type1afm/Makefile.in
+++++ b/type1afm/Makefile.in
+ @@ -15,8 +15,10 @@
+  #
+  # Modified by H.Kakugawa to use libtool
+@@ -99,8 +125,10 @@
+  CC        = @CC@
+  CPP       = @CPP@
+  CFLAGS    = @CFLAGS@
+---- t1lib-5.0.2/xglyph/Makefile.in~libtool
+-+++ t1lib-5.0.2/xglyph/Makefile.in
++diff --git a/xglyph/Makefile.in b/xglyph/Makefile.in
++index 8da9b63..741334c 100644
++--- a/xglyph/Makefile.in
+++++ b/xglyph/Makefile.in
+ @@ -15,8 +15,10 @@
+  #
+  # Modified by H.Kakugawa to use libtool
 -- 
 2.7.4
 
