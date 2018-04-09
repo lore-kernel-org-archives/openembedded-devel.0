@@ -1,50 +1,43 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 105B771985;
-	Mon,  9 Apr 2018 08:53:43 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id x9-v6so6855301oig.7;
-	Mon, 09 Apr 2018 01:53:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zD7CXblGxomFV0rMgg7DRXjwVkWGiS1Rt2l7hMy/qx8=;
-	b=TdEoprjDE5lLFV687bqdMdG+n9Ud2T2vEhnG6i09gJeOJmxVaC1rDJ0WfhuQQac7St
-	OO9SpwQCf5n9KBqlkp87lulM/RDnZhcKaG6Ed8Pb4e+LyZcdVx21+kmHz2L0dTu0P+tr
-	Biw8cDM+3lCqHDDrpHqq05bYHnuz8fawdPlr+Z6RLTWEBFyakvGHkn9BYPZWgreD9opE
-	gTHxlFxniEnU/WizyUqOPZeZnDZ3QyG3yIQTv/vJAtmoJ8pIreRR/wfUdIQwWjS8OBrr
-	oNhiX2TqcF9JfIslf3CgjBHdQS9mTIpLiwbEGpmUTiYe4VjIeOvKfMvtMaKqQPLx8/GQ
-	Y9Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zD7CXblGxomFV0rMgg7DRXjwVkWGiS1Rt2l7hMy/qx8=;
-	b=S8JJuQM4LJ1n88cn0tNbPI8o+AdMkHqxYdobxw7mqTPlJq75uiBe1LiPhnpmSS3z+L
-	IH1EG978wvGa7mBuO/+6cvAe2z25xsomwtTzNMybSN1bT8BZfsxmoqGtKTcRNJ6EDzjo
-	q0QQP6UOhq/ylcSFxMC16y2SniWdGuyGoLSsBaZjjsj6WHMKV+f1bHAbobbXo5U51XBs
-	vfHOwBCbEciNeBQ9HF8GDrKUwCRI8yCM8/DJWaR/pXEMRbGR3DHbzoUdQfZemrxmSis/
-	kY1PvdIeGlWcE4o7st8L35yDCe6xmNej6nnVceMheJ71iKz7DnI4xlqoiRZ588by9qrI
-	1JUw==
-X-Gm-Message-State: AElRT7G1Tby5aP+HjODBkU6kgpHwPLOLht1xNyiviUPgHhgOzjbWoVoY
-	rXEl1dBW0Q48vAIOuKcWsgsfOZwp1b1HkMKezPc=
-X-Google-Smtp-Source: AIpwx4/1OQs1G5jDSCXOmcfwWzJaqC5K5u1l8OcS7R2vP7m+VxRGj4pjeZccE+GGxyFreu75B6LZMnOw9YBvbKmjQus=
-X-Received: by 2002:aca:6254:: with SMTP id
-	w81-v6mr20024549oib.251.1523264024566; 
-	Mon, 09 Apr 2018 01:53:44 -0700 (PDT)
+Return-Path: <Marek.Szczypta@assaabloy.com>
+X-Greylist: delayed 3487 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 09 Apr 2018 09:21:28 UTC
+Received: from cluster-a.mailcontrol.com (cluster-a.mailcontrol.com
+	[85.115.52.190])
+	by mail.openembedded.org (Postfix) with ESMTP id 017F774808
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Apr 2018 09:21:28 +0000 (UTC)
+Received: from SMTP.ASSAABLOY.NET (smtp.assaabloy.net [141.81.165.41])
+	by rly04a.srv.mailcontrol.com (MailControl) with ESMTPS id
+	w398Mlaw010219
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 9 Apr 2018 09:23:20 +0100
+Received: from DEDUSSEX0006.ad.global (10.230.40.75) by DEDUSSEX0009.ad.global
+	(10.230.103.38) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1034.26;
+	Mon, 9 Apr 2018 10:22:56 +0200
+Received: from DEMEESEX0001.ad.global (10.230.40.15) by DEDUSSEX0006.ad.global
+	(10.230.40.75) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_RSA_WITH_AES_256_GCM_SHA384) id 15.1.1034.26; Mon, 9 Apr 2018
+	10:22:50 +0200
+Received: from DEMEESEX0001.ad.global ([fe80::d88d:7914:e19c:6b4e]) by
+	DEMEESEX0001.ad.global ([fe80::d88d:7914:e19c:6b4e%18]) with mapi id
+	15.01.1034.026; Mon, 9 Apr 2018 10:22:50 +0200
+From: "Szczypta, Marek" <Marek.Szczypta@assaabloy.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: opnejdk from meta-java for aarm64 ?
+Thread-Index: AdPP2+VrHd+zdzB7Qo2OqaLunvImiw==
+Date: Mon, 9 Apr 2018 08:22:50 +0000
+Message-ID: <a6679828db8c4b3c8e43e4d4ad842bea@assaabloy.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.230.48.241]
 MIME-Version: 1.0
-Received: by 10.201.25.81 with HTTP; Mon, 9 Apr 2018 01:53:43 -0700 (PDT)
-In-Reply-To: <CALbNGRT1-EoonDVYHXgUGc07E=sHn_6ictMJTGcrGB62DsUB5w@mail.gmail.com>
-References: <152236802127.22760.4484042389285225479@git.openembedded.org>
-	<20180330000021.9214B232BA2@git.openembedded.org>
-	<CALbNGRT1-EoonDVYHXgUGc07E=sHn_6ictMJTGcrGB62DsUB5w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 9 Apr 2018 10:53:43 +0200
-Message-ID: <CALbNGRTZjS7NH-apRc2uuXJAiK9=HBi3W9P1yoc5S7U6pX8_3w@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	=?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] [meta-openembedded] 01/90: poppler: update 0.57.0 -> 0.62.0
+X-Scanned-By: MailControl 44278.2009 (www.mailcontrol.com) on 10.65.0.114
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: opnejdk from meta-java for aarm64 ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,35 +50,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2018 08:53:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Apr 2018 09:21:29 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon, Apr 9, 2018 at 10:50 AM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> On Fri, Mar 30, 2018 at 2:00 AM,  <git@git.openembedded.org> wrote:
->> This is an automated email from the git hooks/post-receive script.
->>
->> armin_kuster pushed a commit to branch master-next
->> in repository meta-openembedded.
->>
->> commit 2a8a5b5cd0258657e145f65f54c3145e42116f7c
->> Author: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->> AuthorDate: Sun Mar 18 20:08:33 2018 +0100
->>
->>     poppler: update 0.57.0 -> 0.62.0
->>
->>     * poppler moved from autotools to cmake
->>     * qt4 backend was removed
->>     * build tested with all and none in packageconfig
->>
->>     Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->>     Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
-> Oops - it failed on autobuilder and I suggested to keep 0.57.0. Think
-> it is some race when using a high number in PARALLEL_MAKE. Now that it
-> was applied I have get it reproduced and fixed...
-This is master-next notification but it landed in master either...
->
-> Andreas
+SGkgLA0KDQpJIHRyaWVkIHRvIGNvbXBpbGUgdGhlIG9wZW5qZGsgZnJvbSBtZXRhLWphdmEgbGF5
+ZXIgZm9yIO+7v2Fhcm02NCAgLiBUaGUgbWFzdGVyIGJyYW5jaCBjbGFpbXMgdGhhdCBpcyBzaG91
+bGQgd29yayBmb3IgdTE2MWIxNSAuIEJ1dCBhZnRlciBJIHNldCB1cCB0aGUgYnVpbGQgaXQgdHJp
+ZXMgdG8gYnVpbGQgdTE2MmIxMiBmb3Igd2hpY2ggaXQgZmFpbCBhcyB0aGVyZSBpcyBubyBzdXBw
+b3J0IGZvciBhYXJtNjQgLiBEbyB5b3Uga25vdyBpZiB0aGlzIGlzIHdvcmtpbmcgPyBvciBob3cg
+dG8gc2V0IHVwIGl0IHVwIGNvcnJlY3RseSBzbyBJIGNhbiB1c2UgdGhlIHUxNjFiMTUgPyBJIGZv
+dW5kIHRoZXJlIGlzIDE2MmIxMi5iYiBmaWxlIGJ1dCBubyAxNjFiMTUgb25seSBvcGVuamRrLThf
+MTZ4Ynl5LmJiID8NCg==
 
