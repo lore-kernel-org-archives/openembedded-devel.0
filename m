@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id F139574941
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EF04674A45
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Apr 2018 22:03:14 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id u189so22081496wmd.1
+	Mon,  9 Apr 2018 22:03:15 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id y55so11035040wry.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Apr 2018 15:03:15 -0700 (PDT)
+	Mon, 09 Apr 2018 15:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=HhHT8EhjAe9FSTcCtjm2WXXg8gB1xTAw8PRfC2RIgLs=;
-	b=k11QkzcD7k2tQ8sDH+qPZ+wQ+4mltgVD7i/ceyn3YFY+ZyTyp07TqdinqFCkDw0bfi
-	wA1bJZkME8X/pOJgvi/fFzXrT3xUyz3b4oHFYEPilNJP2NDaTDx+YL+zC64eHkSdcoVK
-	Us3hEgZLAO9kLu3OY0RtOCxHQutoi0KdqV1ZMQ1Ph8K7edc/rmE0/hy5hLxyqUZzBGa5
-	lE1AN+cZOxdg6Yw5ucfqAP2ENxIZ45VNGSJBtIe3M7mB5/ynUI50871kWVeAzNPE57bw
-	KKozGo6eHzWNa4PktVCMS6ui/bOqEXr+eN8qNAUUxB9VahNBoMk1j7sXQYD+IDp64yV6
-	87XA==
+	bh=7fiQpSmNG+D0Fw2wyuJZUjFu4j7ZAK8qPyYFnNobLaM=;
+	b=ks0blGYQjDUYZScSpNhnpfSTR+gMy2lhTb/ToC472JP3NSE0IwyqgH942Em3zBIeGh
+	52LOM3WnD1rxn8ht2RuyS3dvpokPio0hn45xsxv64z9828i5szuN0Pi2Od7T3DuWm+IE
+	GV074b4IeVFkW8XmTFTCf1gXGXrDh3nU+9ic5OP1mHchsCTE/bx7FTiUCuoqF2txIxXM
+	It6f9tspKtdPTWcZW8nO0LmI69oaYmQhnsxTwMW8CloW5yQUXvThefLAq7xtG46x4S3Y
+	hCwwox1KB3d8L16mW3I42H13FlO9k60wl0PHGmDjybYtJVwZPjrOb8pnRftt5A8N3I+N
+	TPXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=HhHT8EhjAe9FSTcCtjm2WXXg8gB1xTAw8PRfC2RIgLs=;
-	b=K9lLDgmRO0rfV8ehBYDpu4flRfMG5J7tULxFVJtSHKQ7lvOstUSIRbSuVPTjDouNvm
-	ZEoGNnOB86rMe/zZBhdwd8Y7eVuK/+QaB7nvzAHHieZHBOeG29IOKDIstEcdT8NiVxqZ
-	meaY+AZcGNpPBft4L9CXe7AG+6dT8iozRD94B2aAQ9zqoCFaSyjTSJbf7YmED+CbThEY
-	v8l72PCyfAocRKaybmqZ3YUufS6JIKSDCKr/olH5/sKCEYzmDa8NNeEqQgCV+dKHEeoc
-	qnAkR3ZJMta7qFa7jibQ9NGW5Ia5Jj79GS65sCoGRyIBZSI46ws8CEEWLNZd+xFZyd8d
-	hEZA==
-X-Gm-Message-State: ALQs6tD1g1XIVL2+jWTu8eTBKmAhOv0y8+CZffg+4k+ZFUi2LsbBZuyR
-	jyoC82OcLYNGwdT0WJdcTySAcg==
-X-Google-Smtp-Source: AIpwx4+Xm6x/hRa4Q7UJtGQmr4r5v59gDK/xZIQ1k5MI7Vho7LSrpMDwV2nwyUvb4Fy3yrA5wNx0vQ==
-X-Received: by 10.28.99.84 with SMTP id x81mr7469wmb.8.1523311394999;
-	Mon, 09 Apr 2018 15:03:14 -0700 (PDT)
+	bh=7fiQpSmNG+D0Fw2wyuJZUjFu4j7ZAK8qPyYFnNobLaM=;
+	b=m7f5el0mLjXJAMSpg1aUKVliJ4Smq5700VisLhnHeWFGKXgnaMygLmwWGE7yZok7ot
+	+fqbm4H6MCidIoYr/6I5FpP5vxOhJTNKsuC42wgKfueADZ/ZFV/AZJuM9ZgNg7RTeHAJ
+	QT14NkV0CFfBqNTiSBBmyZo5ayXZhZDsjnrrQfXXzz3r+geal/JTgi2xkagZ1sIKvZiF
+	Zr0ZB4pbvR3qoKHIx44Ob93GQ50+6LMhBQ6gZpMQRXes0MiHc92MO9s6QUxpviSBiatT
+	+VNgiGNjOdibnuWbCv9MCIIIq1fdk6S7XKYPAj9PLxr2sEJoSwVQ2R4lrRfcO6+JvW2I
+	PqbQ==
+X-Gm-Message-State: AElRT7E4CUAVD66qhY8l2GXDWOlPyr/lBS0MTXnJMCk54tzS3x2XSof2
+	Oy+Dxj0uE+HnrRDVahqokSLWBg==
+X-Google-Smtp-Source: AIpwx48tNelJHCsVg/M0MtHq41BFCGQByubmxMR9uuZ9jLfvJ5On+QZYVE5gQJe73eFssDajSgypgQ==
+X-Received: by 10.223.220.70 with SMTP id m6mr26191551wrj.244.1523311396011;
+	Mon, 09 Apr 2018 15:03:16 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC14F231E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:4f23:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	g185sm650954wmf.40.2018.04.09.15.03.13
+	g185sm650954wmf.40.2018.04.09.15.03.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 09 Apr 2018 15:03:14 -0700 (PDT)
+	Mon, 09 Apr 2018 15:03:15 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Apr 2018 00:02:42 +0200
-Message-Id: <20180409220249.11796-3-schnitzeltony@gmail.com>
+Date: Tue, 10 Apr 2018 00:02:43 +0200
+Message-Id: <20180409220249.11796-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180409220249.11796-1-schnitzeltony@gmail.com>
 References: <20180409220249.11796-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/9] poppler: Rework patch fixing do_configure
+Subject: [PATCH 3/9] poppler: update 0.62.0- > 0.63.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,69 +62,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2018 22:03:15 -0000
+X-List-Received-Date: Mon, 09 Apr 2018 22:03:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Turn the patch from a workaround into a proper fix. It was submitted to poppler
-bugzilla.
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...0001-Do-not-overwrite-all-our-build-flags.patch | 36 ++++++++++++----------
- 1 file changed, 19 insertions(+), 17 deletions(-)
+ .../recipes-support/poppler/{poppler_0.62.0.bb => poppler_0.63.0.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_0.62.0.bb => poppler_0.63.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch b/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
-index 5b66a8a9c..18f508519 100644
---- a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
-+++ b/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
-@@ -10,27 +10,29 @@ Upstream-Status: Inappropriate [embedded specific]
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb b/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/poppler/poppler_0.62.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.63.0.bb
+index 696621938..143df3f73 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.62.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
+@@ -6,8 +6,8 @@ SRC_URI = " \
+     http://poppler.freedesktop.org/${BP}.tar.xz \
+     file://0001-Do-not-overwrite-all-our-build-flags.patch \
+ "
+-SRC_URI[md5sum] = "42b801f2defaccb6b6cf1bf783ee1552"
+-SRC_URI[sha256sum] = "5b9a73dfd4d6f61d165ada1e4f0abd2d420494bf9d0b1c15d0db3f7b83a729c6"
++SRC_URI[md5sum] = "66a54da4896b1408611699feda5c1821"
++SRC_URI[sha256sum] = "27cc8addafc791e1a26ce6acc2b490926ea73a4f89196dd8a7742cff7cf8a111"
  
- Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
- ---
-- cmake/modules/PopplerMacros.cmake | 2 ++
-- 1 file changed, 2 insertions(+)
-+ cmake/modules/PopplerMacros.cmake | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ DEPENDS = "fontconfig zlib cairo lcms"
  
- diff --git a/cmake/modules/PopplerMacros.cmake b/cmake/modules/PopplerMacros.cmake
--index ccb2790..f29481e 100644
-+index ccb2790..0f392cb 100644
- --- a/cmake/modules/PopplerMacros.cmake
- +++ b/cmake/modules/PopplerMacros.cmake
--@@ -98,6 +98,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
--   set(CMAKE_BUILD_TYPE RelWithDebInfo)
-- endif(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-- 
--+if(false)
-- if(CMAKE_COMPILER_IS_GNUCXX)
--   # set the default compile warnings
--   set(_warn "-Wall -Wextra -Wpedantic")
--@@ -159,4 +160,5 @@ if(CMAKE_C_COMPILER MATCHES "icc")
--   set(CMAKE_C_FLAGS_DEBUG            "-O2 -g -Ob0 -noalign ${_save_cflags}")
--   set(CMAKE_C_FLAGS_DEBUGFULL        "-g -Ob0 -noalign ${_save_cflags}")
-- endif(CMAKE_C_COMPILER MATCHES "icc")
--+endif(false)
-+@@ -125,14 +125,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
-+   set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
-  
-+   set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
-+-  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -fno-common -D_DEFAULT_SOURCE")
-++  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -fno-common -D_DEFAULT_SOURCE ${_save_cxxflags}")
-+   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${_save_cxxflags}")
-+   set(CMAKE_CXX_FLAGS_RELEASE        "-O2 -DNDEBUG ${_save_cxxflags}")
-+   set(CMAKE_CXX_FLAGS_DEBUG          "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline ${_save_cxxflags}")
-+   set(CMAKE_CXX_FLAGS_DEBUGFULL      "-g3 -fno-inline ${_save_cxxflags}")
-+   set(CMAKE_CXX_FLAGS_PROFILE        "-g3 -fno-inline -ftest-coverage -fprofile-arcs ${_save_cxxflags}")
-+   set(_save_cflags "${CMAKE_C_FLAGS}")
-+-  set(CMAKE_C_FLAGS                  "-std=c99 -D_DEFAULT_SOURCE")
-++  set(CMAKE_C_FLAGS                  "-std=c99 -D_DEFAULT_SOURCE ${_save_cflags}")
-+   set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
-+   set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
-+   set(CMAKE_C_FLAGS_DEBUG            "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline ${_save_cflags}")
- -- 
- 2.14.3
--
 -- 
 2.14.3
 
