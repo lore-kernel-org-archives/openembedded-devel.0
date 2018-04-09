@@ -1,23 +1,57 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6795C74B60
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4628E747C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Apr 2018 03:34:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w393Y42q024528
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  9 Apr 2018 04:58:40 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id t20-v6so1599650ply.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 8 Apr 2018 20:34:05 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Sun, 8 Apr 2018 20:34:04 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 9 Apr 2018 11:30:50 +0800
-Message-ID: <20180409033050.27114-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	Sun, 08 Apr 2018 21:58:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=wdXDTB5pDLXlFLqpkkA7//Td7/9UEF5kuNo/vriPC2M=;
+	b=U8RRxLhoWlpM/a7OH3jt7EgVBSEJexI/s6b0bSCFMF3rjgxrw/mEi+n6s4UhG0TjD7
+	Znzxl3O36UhjrLd/WlipRVqwpTbB842dr+VqyPVN26FwPZ/1bkcgFYglEgGdZ1/3RnRz
+	PWC4Jc33speY1hFQJ4N/JmecH4PnlY9YwjWRjMrDutOsUIhbl/vTyIvbXxIx8UN67jYL
+	kMqluIJR/7Yc81t/BliS5Ih2zUgmFpoNIIUDHwzPkRw/cwb2dT6hU6qBw9UvTNPFEk2f
+	m3JYShdrc21Fx3un9UAaLpnsWuzxyzWt6qqWiFRelH4yVrDaoekfCK06mIpOg6Fh6+DF
+	MemA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=wdXDTB5pDLXlFLqpkkA7//Td7/9UEF5kuNo/vriPC2M=;
+	b=hcXVtRhXuK98i+Z4O6D/L/9Rjl8Vk2tH8Qjala/mylhlonqR8JkwALkthow3IWBCS7
+	23CSrDEsGT7QRiuXxEXX200Wh1Fm2G7v37elLKJk+RuIYiRjDCiWjVxeGmps1xdEyuhL
+	Gof9jtjbgAdS25eb65ayA64ZbuLetVdUY2Mb2zRY7ZkXjg+k6/6Hyzm+ZxZu9WiF2Rr3
+	4alDIjXsaaiw37Zusx74WBp4kIvbdcarclGqQXYwBi/pwEs8UpqiZ61KXkUbHvOUzsne
+	WylSwciuILUKVgvJZKo94Mwn2AV7cbUt/pHhGi6jIte14VaYxbw4C8n99TugUTX2N7zB
+	PH9Q==
+X-Gm-Message-State: AElRT7Hm6I7vrcO5rYl+ewPrIR2ZZmM6o4qlw+KTQWrU/wIGGwNQ5tTh
+	MvBuyS17Id2hnHKpgbQLM+jyHpRJ
+X-Google-Smtp-Source: AIpwx49jGyn6nc2GXTpYrAcUCs4L1Yo1rnlr+VoI6bijZWxfw4uoCUUsAzkj5zREOLWjfp8DLxHIuQ==
+X-Received: by 2002:a17:902:69ce:: with SMTP id
+	m14-v6mr37755227pln.358.1523249920838; 
+	Sun, 08 Apr 2018 21:58:40 -0700 (PDT)
+Received: from hermes.local ([2601:646:8880:466c:f9f1:e8db:97b9:48ce])
+	by smtp.gmail.com with ESMTPSA id
+	i186sm30998201pfg.53.2018.04.08.21.58.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 08 Apr 2018 21:58:39 -0700 (PDT)
+To: Anuj Mittal <anuj.mittal@intel.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1523241307-30325-1-git-send-email-anuj.mittal@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <16c891b2-b8ec-cd15-4914-7952fed9e7f0@gmail.com>
+Date: Sun, 8 Apr 2018 21:58:38 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] quagga: update to 1.2.4
+In-Reply-To: <1523241307-30325-1-git-send-email-anuj.mittal@intel.com>
+Subject: Re: [PATCH] libsrtp: allow creation of empty package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,43 +64,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2018 03:34:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Apr 2018 04:58:40 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
 
-Update to 1.2.4 to fix significant BGP security issues:
 
-* https://www.quagga.net/security/Quagga-2018-0543.txt(CVE-2018-5378)
-* https://www.quagga.net/security/Quagga-2018-1114.txt(CVE-2018-5379)
-* https://www.quagga.net/security/Quagga-2018-1550.txt(CVE-2018-5380)
-* https://www.quagga.net/security/Quagga-2018-1975.txt(CVE-2018-5381)
+On 4/8/18 7:35 PM, Anuj Mittal wrote:
+> Package PN is not created otherwise and results in errors like
+> 
+>   | Problem: conflicting requests
+>   |  - nothing provides libsrtp = 1.5.2-r0 needed by libsrtp-dev-1.5.2-r0.i586
+> 
+> when PN-staticdev is to be installed that RDEPENDS on it.
+> 
+> Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+> ---
+>   meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+> index 8abaa12..0104d04 100644
+> --- a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+> +++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+> @@ -18,3 +18,5 @@ do_install[postfuncs] += " rm_unused_bindir "
+>   rm_unused_bindir() {
+>       rmdir ${D}/${bindir}
+>   }
+> +
+> +ALLOW_EMPTY_${PN} = "1"
+> 
 
-Detail release notes:
-http://savannah.nongnu.org/forum/forum.php?forum_id=9099
-http://savannah.nongnu.org/forum/forum.php?forum_id=9095
+You wont need this change if you remove this dependency from dev packages
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../recipes-protocols/quagga/{quagga_1.2.2.bb => quagga_1.2.4.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-protocols/quagga/{quagga_1.2.2.bb => quagga_1.2.4.bb} (12%)
-
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb b/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
-similarity index 12%
-rename from meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
-rename to meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
-index 653f46b36..a7697a1ae 100644
---- a/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
-+++ b/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
-@@ -1,4 +1,4 @@
- require quagga.inc
- 
--SRC_URI[md5sum] = "e84be2938c26c0c872792090f1a6a866"
--SRC_URI[sha256sum] = "522e22f2beee64e3f0c2cde3d0155f3b8103f4f6fc8abef92cb40bc3a4cc2931"
-+SRC_URI[md5sum] = "eced21b054d71c9e1b7c6ac43286a166"
-+SRC_URI[sha256sum] = "e364c082c3309910e1eb7b068bf39ee298e2f2f3f31a6431a5c115193bd653d3"
--- 
-2.11.0
+RDEPENDS_${PN}-dev = ""
+RDEPENDS_${PN}-staticdev = ""
 
 
