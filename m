@@ -1,23 +1,23 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 97DD760107
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6795C74B60
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Apr 2018 02:35:11 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	08 Apr 2018 19:35:11 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.48,426,1517904000"; d="scan'208";a="45254020"
-Received: from anmitta2-mobl1.png.intel.com ([10.221.16.247])
-	by fmsmga001.fm.intel.com with ESMTP; 08 Apr 2018 19:35:10 -0700
-From: Anuj Mittal <anuj.mittal@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Apr 2018 10:35:07 +0800
-Message-Id: <1523241307-30325-1-git-send-email-anuj.mittal@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] libsrtp: allow creation of empty package
+	Mon,  9 Apr 2018 03:34:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w393Y42q024528
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 8 Apr 2018 20:34:05 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Sun, 8 Apr 2018 20:34:04 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 9 Apr 2018 11:30:50 +0800
+Message-ID: <20180409033050.27114-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] quagga: update to 1.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,31 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2018 02:35:11 -0000
+X-List-Received-Date: Mon, 09 Apr 2018 03:34:04 -0000
+Content-Type: text/plain
 
-Package PN is not created otherwise and results in errors like
+From: Jackie Huang <jackie.huang@windriver.com>
 
- | Problem: conflicting requests
- |  - nothing provides libsrtp = 1.5.2-r0 needed by libsrtp-dev-1.5.2-r0.i586
+Update to 1.2.4 to fix significant BGP security issues:
 
-when PN-staticdev is to be installed that RDEPENDS on it.
+* https://www.quagga.net/security/Quagga-2018-0543.txt(CVE-2018-5378)
+* https://www.quagga.net/security/Quagga-2018-1114.txt(CVE-2018-5379)
+* https://www.quagga.net/security/Quagga-2018-1550.txt(CVE-2018-5380)
+* https://www.quagga.net/security/Quagga-2018-1975.txt(CVE-2018-5381)
 
-Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+Detail release notes:
+http://savannah.nongnu.org/forum/forum.php?forum_id=9099
+http://savannah.nongnu.org/forum/forum.php?forum_id=9095
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-protocols/quagga/{quagga_1.2.2.bb => quagga_1.2.4.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-protocols/quagga/{quagga_1.2.2.bb => quagga_1.2.4.bb} (12%)
 
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-index 8abaa12..0104d04 100644
---- a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-@@ -18,3 +18,5 @@ do_install[postfuncs] += " rm_unused_bindir "
- rm_unused_bindir() {
-     rmdir ${D}/${bindir}
- }
-+
-+ALLOW_EMPTY_${PN} = "1"
+diff --git a/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb b/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
+similarity index 12%
+rename from meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
+rename to meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
+index 653f46b36..a7697a1ae 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
++++ b/meta-networking/recipes-protocols/quagga/quagga_1.2.4.bb
+@@ -1,4 +1,4 @@
+ require quagga.inc
+ 
+-SRC_URI[md5sum] = "e84be2938c26c0c872792090f1a6a866"
+-SRC_URI[sha256sum] = "522e22f2beee64e3f0c2cde3d0155f3b8103f4f6fc8abef92cb40bc3a4cc2931"
++SRC_URI[md5sum] = "eced21b054d71c9e1b7c6ac43286a166"
++SRC_URI[sha256sum] = "e364c082c3309910e1eb7b068bf39ee298e2f2f3f31a6431a5c115193bd653d3"
 -- 
-2.7.4
+2.11.0
 
 
