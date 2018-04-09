@@ -1,52 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 841FF7451A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Apr 2018 00:25:31 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id c188so7527360qkg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Apr 2018 17:25:32 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f48.google.com (mail-pl0-f48.google.com
+	[209.85.160.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 6991575047;
+	Mon,  9 Apr 2018 00:52:30 +0000 (UTC)
+Received: by mail-pl0-f48.google.com with SMTP id t20-v6so1259570ply.9;
+	Sun, 08 Apr 2018 17:52:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=N/NUg/itAUAdAdEyi63BhUsAuV/QM1vp2ukIZ5O3cpQ=;
-	b=DCTEcUO2MV2MAWdp3DJCEav7eTCJ033fXXeJZJRsG3pEMwkU7LR1KAKZxE6sMfZNQ2
-	vMhGWINioFANpFdEoEz98f2lVWDF7e+i3/+JUI06Y5Dr36Ln/TNUT/Cb8d5+MePbEE/X
-	oSNmUiAK0e1Ccc2tVnoeo925TBtYdohJ7jfk1x4CmwKVPvWk+Y8CnLFBmJwFZQO73jHv
-	nSrnQ9MvNe7TZ4+6ivUOZMqlqXnhkQq6L7SkATfS8asJ2KU/PO3fruJ4WX4g+SVKlOpo
-	N796Lx3lalSufczhv2ZX0m87phP7vD7eYZjbieoqHld//9aeUMhOfWT22UE8FM7gFXXW
-	v9+w==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=jvyAow1LfIyTHTiHZLh7weZttMEcyf5okHwsy2K7Wa0=;
+	b=RZw11qTNU4t2ZQAUQuKQp19TpdFLs0895D6dFEqWekPwJb6kD+7FJYxOBbclsKZqbp
+	FSajn7zHkjygoL1XMve03icpOlVeoX/BZmdl6sHCmZsLGNJ5GVsz9FvP5sVdFWwPgsdq
+	5iJWO7LhmlIVg7fIV2ugNaPmfnLK5cq5VdKozpwqgSNRqNQimvmEysBjWc8iadLnfhIw
+	1d2bSM5NQMIUFEGlhGqTmyR9MaVufupfaERBTzHYH3rWSo+b3NCX2luyC3jYdf0E0YjM
+	4YEkGj4R/d35f8znCCu/x7DzBXVO8Fz2668VeqYmPlhekYLQVlXIpablDt7HChhrnsCL
+	p3sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=N/NUg/itAUAdAdEyi63BhUsAuV/QM1vp2ukIZ5O3cpQ=;
-	b=ECtvWgPxJ2U8YasDhssfclmPAer3uBEsDjr/MmhgzLU8F497fs31NELBcBIzT2ucx/
-	WN0BMFlI5X5uBpUf2xRrhIXHhhN7EiYsEEOUC+RhcFR7P9uBV+vtoscaV8AFuP76+ePf
-	vN5ueY2x2hQ4GXhILb1s7zdwSwf3iVaT+/ShYddi1TevuCa704M6JgdPo/t1KFlVMDpI
-	ea53FCbETyWrv4kvqbCmKKHmR11HvhLyGLKL5f3uX+UD/nch7DJ1mmcV+9z+Pz1T0Bd+
-	t2t8vrOJ0EK7AH4iOa+NdoZfQ+pZ5gXZpm5RIdyR6i4bbRPgvt+QCc5mC27yUymuEFcH
-	dM3A==
-X-Gm-Message-State: ALQs6tCYifyoYguskFUN44n7ZpuX7SUL4mtjrnJrTz2KcRSjFjOvnhZ+
-	xfTr3T+uQXJryn6QS0y0/woJIA==
-X-Google-Smtp-Source: AIpwx4/Oxjt7RGqggm1oX9TRmlXFR+fFBznPO4onwi8SJrgYlYj0JfkYasb6HKrfMZo7nu8zhN7+uQ==
-X-Received: by 10.55.171.6 with SMTP id u6mr44842952qke.331.1523233532137;
-	Sun, 08 Apr 2018 17:25:32 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4000:1184:6097:a43d:5d02:3a1c])
-	by smtp.gmail.com with ESMTPSA id
-	b125sm12601480qkd.62.2018.04.08.17.25.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 08 Apr 2018 17:25:31 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Sun,  8 Apr 2018 17:25:29 -0700
-Message-Id: <1523233529-31839-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=jvyAow1LfIyTHTiHZLh7weZttMEcyf5okHwsy2K7Wa0=;
+	b=FnynLJGiPfttbIapLvTY3pbCcDoxchHR05Ho5Igg8F7DlodMnok/lSsc2z6p3UCfYk
+	QbZpT1AwG6gdVCs55w1PSLfCUUdjHLq1NyCNiz6YkHa0WAOSsuUhj3DdNEymgeIU/VaP
+	a7LSBy5SuAehJxOuCVNLEv22PTUFioenOlURxWq3BBQclmv/O4uwJFn/aRI4JSdPAjWA
+	PicMUdiXHCrrjZpAgCCDNXToIlHkFEgF3KJ/+G7D3NUFE72YyzlHbKnXUXYhyNk7nYct
+	WVdTUU3G7DzCtpZz5GBoa1PSvl4t99PaYJvbC81g7R6jTUo6DywfkIDBrvKCviA7aAY2
+	HtIw==
+X-Gm-Message-State: AElRT7E+GSK3caixQQaqp/jtoLMi/s1BgEpxVBSpbEproEkzTVoEOesY
+	9meA+4TM1Kodl1LPzcHVYBBylPH7Ydd6+7c9Rg4=
+X-Google-Smtp-Source: AIpwx48caPoAZxsTgHtcFAyoYMAMvG+J7QUbWkkGVlry6Qo+YnxftpJ60ShB0xz3itCA0IYe/dJkieJaOpV6Fgr0rJY=
+X-Received: by 2002:a17:902:244:: with SMTP id
+	62-v6mr27950529plc.125.1523235151849; 
+	Sun, 08 Apr 2018 17:52:31 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH]] update layer maintainers
+References: <152313690992.11940.6799878390820377002@git.openembedded.org>
+	<20180407213510.474412329D5@git.openembedded.org>
+	<CA+chaQeNd3F9oXBYFsj4YaxfJ+k3uvXDcdcHy-AP32MWaHT8aQ@mail.gmail.com>
+In-Reply-To: <CA+chaQeNd3F9oXBYFsj4YaxfJ+k3uvXDcdcHy-AP32MWaHT8aQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 09 Apr 2018 00:52:20 +0000
+Message-ID: <CAMKF1sqJx2er+dqsuESsw_ooxh59pvx5547JyFseBdK0Fjycvw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] 02/02: nativesdk-glibc: Split glibc and libcrypt to use libxcrypt instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,149 +56,790 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2018 00:25:32 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Apr 2018 00:52:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-filesystems/README | 35 +----------------------------------
- meta-gnome/README       |  3 +--
- meta-initramfs/README   |  3 +--
- meta-multimedia/README  |  6 ++----
- meta-oe/README          |  3 +--
- meta-python/README      |  3 +--
- meta-xfce/README        |  2 +-
- 7 files changed, 8 insertions(+), 47 deletions(-)
+On Sun, Apr 8, 2018 at 10:00 AM Martin Jansa <martin.jansa@gmail.com> wrote=
+:
 
-diff --git a/meta-filesystems/README b/meta-filesystems/README
-index d2716f8..97d0e94 100644
---- a/meta-filesystems/README
-+++ b/meta-filesystems/README
-@@ -27,40 +27,7 @@ Please submit any patches against the filesystems layer to the
- OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
- with '[meta-filesystems]' in the subject.
- 
--Maintainers List:
--  physfs      Andreas Müller <schnitzeltony@googlemail.com>
--
--  fuse        Koen Kooi <koen@dominion.thruhere.net>
--              Philip Balister <philip@balister.org>
--              hongxu jia <hongxu.jia@windriver.com>
--
--  ifuse       Sander van Grieken <sander@outrightsolutions.nl>
--              Koen Kooi <koen@dominion.thruhere.net>
--
--  sshfs-fuse  Philip Balister <philip@balister.org>
--              Koen Kooi <koen@dominion.thruhere.net>
--
--  owfs        Otavio Salvador <otavio@ossystems.com.br>
--              Koen Kooi <koen@dominion.thruhere.net>
--              hongxu jia <hongxu.jia@windriver.com>
--
--  ntfs-3g-ntfsprogs  Otavio Salvador <otavio@ossystems.com.br>
--                     hongxu jia <hongxu.jia@windriver.com>
--
--  cramfs      Koen Kooi <koen@dominion.thruhere.net>
--
--  smbnetfs    Sander van Grieken <sander@outrightsolutions.nl>
--              Koen Kooi <koen@dominion.thruhere.net>
--
--  fuse-exfat  hongxu jia <hongxu.jia@windriver.com>
--
--  exfat-utils hongxu jia <hongxu.jia@windriver.com>
--
--  f2fs-tools  Martin Jansa <Martin.Jansa@gmail.com>
--              Koen Kooi <koen@dominion.thruhere.net>
--
--  xfsprogs    Koen Kooi <koen@dominion.thruhere.net>
--              hongxu jia <hongxu.jia@windriver.com>
-+Layer maintainer: Armin Kuster <akuster808@gmail.com>
- 
- When sending single patches, please use something like:
- 
-diff --git a/meta-gnome/README b/meta-gnome/README
-index 482f457..2a682e7 100644
---- a/meta-gnome/README
-+++ b/meta-gnome/README
-@@ -35,5 +35,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnom
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
- 
--Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
--
-+Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-diff --git a/meta-initramfs/README b/meta-initramfs/README
-index e24acf9..7185383 100644
---- a/meta-initramfs/README
-+++ b/meta-initramfs/README
-@@ -25,8 +25,7 @@ with '[meta-initramfs]' in the subject.
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
- 
--Layer maintainers: Andrea Adami <andrea.adami@gmail.com>
--                   Paul Eggleton <paul.eggleton@linux.intel.com>
-+Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
- 
- 
- License
-diff --git a/meta-multimedia/README b/meta-multimedia/README
-index cbdc1b5..20f4fb8 100644
---- a/meta-multimedia/README
-+++ b/meta-multimedia/README
-@@ -5,7 +5,7 @@ branch: master
- revision: HEAD
- 
- URI: git://github.com/openembedded/meta-oe.git
--layers: meta-oe, meta-ruby
-+layers: meta-oe
- branch: master
- revision: HEAD
- 
-@@ -16,6 +16,4 @@ When sending single patches, please use something like:
- 
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
- 
--Main layer maintainers: Koen Kooi <koen@dominion.thruhere.net>
--                        Martin Jansa <martin.jansa@gmail.com>
--
-+Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-diff --git a/meta-oe/README b/meta-oe/README
-index 6ad87c5..7cde0a2 100644
---- a/meta-oe/README
-+++ b/meta-oe/README
-@@ -11,5 +11,4 @@ When sending single patches, please use something like:
- 
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
- 
--Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
--                       Martin Jansa <martin.jansa@gmail.com>
-+Main layer maintainer: Armin Kuster <akuster808@gmail.com>
-diff --git a/meta-python/README b/meta-python/README
-index 905d5ee..0566e49 100644
---- a/meta-python/README
-+++ b/meta-python/README
-@@ -47,8 +47,7 @@ When sending single patches, please use something like:
- Maintenance
- -------------------------
- 
--Maintainers:
-+Layer Maintainers:
-         Tim "moto-timo" Orling <TicoTimo@gmail.com>
--        Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
-         Derek Straka <derek@asterius.io>
- 
-diff --git a/meta-xfce/README b/meta-xfce/README
-index 33ef509..7431e8b 100644
---- a/meta-xfce/README
-+++ b/meta-xfce/README
-@@ -19,4 +19,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
- 
--Interim layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-+Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
--- 
-2.7.4
+> On Ubuntu 14.04 this fails with:
+>
+> ../git/gen-des-tables.c: In function =E2=80=98write_table_u8=E2=80=99:
+> ../git/gen-des-tables.c:307:3: error: =E2=80=98for=E2=80=99 loop initial =
+declarations are
+> only allowed in C99 mode
+>    for (size_t i =3D 0; i < m; i++)
+>    ^
+>
 
+You can patch this to move declaration just above loop if that helps we
+should apply such a patch for compatibility sake but I wonder if there are
+more c99 assumptions at work here
+
+It=E2=80=99s probably to keep this limited to use of old distros only and m=
+ay be
+make no changes in layer proper
+
+>
+> I'll try to add explicit -std=3Dgnu99 to support building on such older h=
+ost
+> distributions with older gcc.
+>
+> On Sat, Apr 7, 2018 at 11:35 PM, <git@git.openembedded.org> wrote:
+>
+> > This is an automated email from the git hooks/post-receive script.
+> >
+> > rpurdie pushed a commit to branch master
+> > in repository openembedded-core.
+> >
+> > commit c1573cb7faeb296fe7077a60d02443d5ed5bded0
+> > Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+> > AuthorDate: Fri Apr 6 14:53:53 2018 +0200
+> >
+> >     nativesdk-glibc: Split glibc and libcrypt to use libxcrypt instead
+> >
+> >     Fedora28[1] has decided to go ahead and use libxcrypt to replace
+> > libcrypt from glibc
+> >     despite the change not having merged into glibc upstream yet. This
+> > breaks the use of
+> >     uninative in OE on fedora28 since binaries there are now using new
+> > symbols only found
+> >     in libxcrypt. libxcrypt is meant to be backwards compatible with
+> > libcrypt but not the
+> >     reverse.
+> >
+> >     Since this will impact OE in the next release cycle, this changes
+> > nativesdk only
+> >     to use this new model and adds libxcrypt to work in that case. This
+> > allows us to
+> >     build a uninative which is compatible with fedora28 and previous
+> other
+> > OSes.
+> >
+> >     In order to work, recipes will now need to depend on virtual/crypt
+> > where they use
+> >     libcrypt since its now a separate library and we can't depend on it
+> > from glibc to
+> >     preseve backwards compatibility since glibc needs to build first. F=
+or
+> > now, only the
+> >     problematic nativesdk recipes have been fixed up. For target use, t=
+he
+> > default
+> >     provider remains glibc for now. Assuming this change is merged into
+> > upstream glibc,
+> >     we will need to roll this change out for the target but we will do
+> > this in the next
+> >     release cycle when we can better deal with the resulting bugs.
+> >
+> >     [1] https://fedoraproject.org/wiki/Changes/Replace_glibc_
+> > libcrypt_with_libxcrypt
+> >
+> >     Original patch from Charles-Antoine Couret <charles-antoine.couret@
+> > essensium.com>,
+> >     tweaked by RP to add virtual provides, SkipRecipe for libxcrypt and
+> > other minor
+> >     tweaks.
+> >
+> >     Signed-off-by: Charles-Antoine Couret <charles-antoine.couret@
+> > essensium.com>
+> >     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> > ---
+> >  meta/conf/bitbake.conf                             |   1 +
+> >  meta/recipes-core/glibc/glibc.inc                  |   5 +-
+> >  .../glibc/0031-nativesdk-deprecate-libcrypt.patch  | 419
+> > +++++++++++++++++++++
+> >  meta/recipes-core/glibc/glibc_2.27.bb              |   1 +
+> >  meta/recipes-core/glibc/site_config/headers        |   1 -
+> >  meta/recipes-core/libxcrypt/libxcrypt_4.0.0.bb     |  31 ++
+> >  meta/recipes-core/meta/uninative-tarball.bb        |   1 +
+> >  meta/recipes-core/musl/musl_git.bb                 |   2 +-
+> >  meta/recipes-core/util-linux/util-linux.inc        |   2 +-
+> >  meta/recipes-devtools/perl/perl_5.24.1.bb          |   2 +-
+> >  meta/recipes-extended/shadow/shadow.inc            |   3 +-
+> >  11 files changed, 461 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
+> > index 93f57f3..60590e2 100644
+> > --- a/meta/conf/bitbake.conf
+> > +++ b/meta/conf/bitbake.conf
+> > @@ -187,6 +187,7 @@ ASSUME_PROVIDED =3D "\
+> >      tar-native \
+> >      virtual/libintl-native \
+> >      virtual/libiconv-native \
+> > +    virtual/crypt-native \
+> >      texinfo-native \
+> >      bash-native \
+> >      sed-native \
+> > diff --git a/meta/recipes-core/glibc/glibc.inc b/meta/recipes-core/glib=
+c/
+> > glibc.inc
+> > index 361a6fd..9e02ffd 100644
+> > --- a/meta/recipes-core/glibc/glibc.inc
+> > +++ b/meta/recipes-core/glibc/glibc.inc
+> > @@ -35,7 +35,10 @@ siteconfig_do_siteconfig_gencache_prepend =3D " \
+> >  DEPENDS =3D "virtual/${TARGET_PREFIX}gcc-initial libgcc-initial
+> > linux-libc-headers virtual/${TARGET_PREFIX}libc-initial"
+> >  # nptl needs libgcc but dlopens it, so our shlibs code doesn't detect
+> this
+> >  #RDEPENDS_${PN} +=3D "${@['','libgcc']['nptl' in '${GLIBC_ADDONS}']}"
+> > -PROVIDES =3D "virtual/libc virtual/${TARGET_PREFIX}libc-for-gcc"
+> > +
+> > +CRYPTPROVIDES =3D "virtual/crypt"
+> > +CRYPTPROVIDES_class-nativesdk =3D ""
+> > +PROVIDES =3D "virtual/libc virtual/${TARGET_PREFIX}libc-for-gcc
+> > ${CRYPTPROVIDES}"
+> >  PROVIDES +=3D "virtual/libintl virtual/libiconv"
+> >  inherit autotools texinfo distro_features_check systemd
+> >
+> > diff --git
+> a/meta/recipes-core/glibc/glibc/0031-nativesdk-deprecate-libcrypt.patch
+> > b/meta/recipes-core/glibc/glibc/0031-nativesdk-deprecate-libcrypt.patch
+> > new file mode 100644
+> > index 0000000..a9132ed
+> > --- /dev/null
+> > +++ b/meta/recipes-core/glibc/glibc/0031-nativesdk-
+> > deprecate-libcrypt.patch
+> > @@ -0,0 +1,419 @@
+> > +Background information:
+> > +
+> > +https://sourceware.org/ml/libc-alpha/2017-08/msg01257.html
+> > +https://fedoraproject.org/wiki/Changes/Replace_glibc_
+> > libcrypt_with_libxcrypt
+> > +
+> > +Upstream-Status: Submitted [libc-alpha@sourceware.org]
+> > +Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> > +
+> > +From: Zack Weinberg <zackw@panix.com>
+> > +Subject: [PATCH] Deprecate libcrypt and don't build it by default
+> > +
+> > +Back in June, Bj=C3=B6rn Esser proposed to add OpenBSD-compatible bcry=
+pt
+> > +support to our implementation of crypt(3), and Zack Weinberg replied
+> > +that it might actually make more sense to _remove_ libcrypt from
+> > +glibc, freeing up libcrypt.so.1 and crypt.h to be provided by a
+> > +separate project that could move faster.  (For instance, libxcrypt:
+> > +https://github.com/besser82/libxcrypt)
+> > +
+> > +This patch disables build and installation of libcrypt by default.  It
+> > +can be re-enabled with --enable-obsolete-crypt to configure.  Unlike
+> > +libnsl, we do *not* install a runtime shared library; that's left to
+> > +the replacement.  (Unlike the SunRPC situation, I think we can
+> > +probably drop this code altogether in a release or two.)
+> > +
+> > +The function prototypes for crypt and encrypt are removed from
+> > +unistd.h, and the function prototype for setkey is removed from
+> > +stdlib.h; they do *not* come back with --enable-obsolete-crypt.  This
+> > +means glibc no longer provides the POSIX CRYPT option, and the macro
+> > +_XOPEN_CRYPT is also removed from unistd.h to indicate that.
+> > +(_SC_XOPEN_CRYPT is still defined, but sysconf(_SC_XOPEN_CRYPT) will
+> > +return -1 at runtime.)  These functions are also unconditionally
+> > +removed from conform/data/{stdlib,unistd}.h-data.
+> > +
+> > +       * posix/unistd.h (_XOPEN_CRYPT, crypt, encrypt): Don't declare.
+> > +       * stdlib/stdlib.h (setkey): Don't declare.
+> > +
+> > +       * configure.ac (--enable-obsolete-crypt): New configure option.
+> > +       * configure: Regenerate.
+> > +       * config.make.in (build-obsolete-crypt): New makefile variable.
+> > +       * crypt/Banner: Delete file.
+> > +       * crypt/Makefile: Don't build anything unless
+> > +       $(build-obsolete-crypt) is 'yes'.
+> > +       * sysdeps/sparc/sparc32/sparcv9/multiarch/Makefile: Only add
+> > things
+> > +       to libcrypt-sysdep_routines when $(build-obsolete-crypt) is
+> 'yes'.
+> > +       * sysdeps/sparc/sparc64/multiarch/Makefile: Likewise.
+> > +       * sysdeps/unix/sysv/linux/arm/Makefile: Likewise.
+> > +
+> > +       * conform/Makefile: Only include libcrypt.a in linknamespace
+> tests
+> > +       when $(build-obsolete-crypt) is 'yes'.
+> > +       * conform/data/stdlib.h-data (setkey): Don't expect.
+> > +       * conform/data/unistd.h-data (crypt, encrypt): Don't expect.
+> > +       * elf/Makefile: Only perform various tests of
+> > libcrypt.so/libcrypt.a
+> > +       when $(build-obsolete-crypt) is 'yes'.
+> > +       * elf/tst-linkall-static.c: Don't include crypt.h when USE_CRYP=
+T
+> > +       is false.
+> > +---
+> > + NEWS                                             | 18
+> ++++++++++++++++++
+> > + config.make.in                                   |  1 +
+> > + configure                                        | 13 +++++++++++++
+> > + configure.ac                                     |  8 ++++++++
+> > + conform/Makefile                                 | 14 ++++++++++----
+> > + conform/data/stdlib.h-data                       |  3 ---
+> > + conform/data/unistd.h-data                       |  6 ------
+> > + crypt/Makefile                                   |  5 +++++
+> > + elf/Makefile                                     | 16 ++++++++++++---=
+-
+> > + elf/tst-linkall-static.c                         |  2 ++
+> > + posix/unistd.h                                   | 16 ---------------=
+-
+> > + stdlib/stdlib.h                                  |  6 ------
+> > + sysdeps/sparc/sparc32/sparcv9/multiarch/Makefile |  2 ++
+> > + sysdeps/sparc/sparc64/multiarch/Makefile         |  2 ++
+> > + sysdeps/unix/sysv/linux/arm/Makefile             |  2 ++
+> > + 15 files changed, 75 insertions(+), 39 deletions(-)
+> > +
+> > +diff --git a/config.make.in b/config.make.in
+> > +index 9e5e24b2c6..8fe610d04d 100644
+> > +--- a/config.make.in
+> > ++++ b/config.make.in
+> > +@@ -82,6 +82,7 @@ mach-interface-list =3D @mach_interface_list@
+> > +
+> > + experimental-malloc =3D @experimental_malloc@
+> > +
+> > ++build-obsolete-crypt =3D @build_obsolete_crypt@
+> > + nss-crypt =3D @libc_cv_nss_crypt@
+> > + static-nss-crypt =3D @libc_cv_static_nss_crypt@
+> > +
+> > +diff --git a/configure b/configure
+> > +index 7a8bd3f817..46f6bd7f86 100755
+> > +--- a/configure
+> > ++++ b/configure
+> > +@@ -672,6 +672,7 @@ base_machine
+> > + have_tunables
+> > + build_pt_chown
+> > + build_nscd
+> > ++build_obsolete_crypt
+> > + build_obsolete_nsl
+> > + link_obsolete_rpc
+> > + libc_cv_static_nss_crypt
+> > +@@ -782,6 +783,7 @@ enable_experimental_malloc
+> > + enable_nss_crypt
+> > + enable_obsolete_rpc
+> > + enable_obsolete_nsl
+> > ++enable_obsolete_crypt
+> > + enable_systemtap
+> > + enable_build_nscd
+> > + enable_nscd
+> > +@@ -1453,6 +1455,7 @@ Optional Features:
+> > +                           link-time usage
+> > +   --enable-obsolete-nsl   build and install the obsolete libnsl libra=
+ry
+> > and
+> > +                           depending NSS modules
+> > ++  --enable-obsolete-crypt build and install the obsolete libcrypt
+> library
+> > +   --enable-systemtap      enable systemtap static probe points
+> > [default=3Dno]
+> > +   --disable-build-nscd    disable building and installing the nscd
+> daemon
+> > +   --disable-nscd          library functions will not contact the nscd
+> > daemon
+> > +@@ -3632,6 +3635,16 @@ if test "$build_obsolete_nsl" =3D yes; then
+> > +
+> > + fi
+> > +
+> > ++# Check whether --enable-obsolete-crypt was given.
+> > ++if test "${enable_obsolete_crypt+set}" =3D set; then :
+> > ++  enableval=3D$enable_obsolete_crypt; build_obsolete_crypt=3D$enablev=
+al
+> > ++else
+> > ++  build_obsolete_crypt=3Dno
+> > ++fi
+> > ++
+> > ++
+> > ++
+> > ++
+> > + # Check whether --enable-systemtap was given.
+> > + if test "${enable_systemtap+set}" =3D set; then :
+> > +   enableval=3D$enable_systemtap; systemtap=3D$enableval
+> > +diff --git a/configure.ac b/configure.ac
+> > +index ca1282a6b3..0142353740 100644
+> > +--- a/configure.ac
+> > ++++ b/configure.ac
+> > +@@ -378,6 +378,14 @@ if test "$build_obsolete_nsl" =3D yes; then
+> > +   AC_DEFINE(LINK_OBSOLETE_NSL)
+> > + fi
+> > +
+> > ++AC_ARG_ENABLE([obsolete-crypt],
+> > ++              AC_HELP_STRING([--enable-obsolete-crypt],
+> > ++                             [build and install the obsolete libcrypt
+> > library]),
+> > ++              [build_obsolete_crypt=3D$enableval],
+> > ++              [build_obsolete_crypt=3Dno])
+> > ++AC_SUBST(build_obsolete_crypt)
+> > ++
+> > ++
+> > + AC_ARG_ENABLE([systemtap],
+> > +               [AS_HELP_STRING([--enable-systemtap],
+> > +              [enable systemtap static probe points @<:@default=3Dno@
+> > :>@])],
+> > +diff --git a/conform/Makefile b/conform/Makefile
+> > +index 864fdeca21..5ef474fb24 100644
+> > +--- a/conform/Makefile
+> > ++++ b/conform/Makefile
+> > +@@ -193,22 +193,28 @@ linknamespace-libs-thr =3D
+> $(linknamespace-libs-isoc)
+> > \
+> > +                        $(common-objpfx)rt/librt.a
+> > $(static-thread-library)
+> > + linknamespace-libs-posix =3D $(linknamespace-libs-thr) \
+> > +                          $(common-objpfx)dlfcn/libdl.a
+> > +-linknamespace-libs-xsi =3D $(linknamespace-libs-posix) \
+> > +-                       $(common-objpfx)crypt/libcrypt.a
+> > ++linknamespace-libs-xsi =3D $(linknamespace-libs-posix)
+> > + linknamespace-libs-ISO =3D $(linknamespace-libs-isoc)
+> > + linknamespace-libs-ISO99 =3D $(linknamespace-libs-isoc)
+> > + linknamespace-libs-ISO11 =3D $(linknamespace-libs-isoc)
+> > +-linknamespace-libs-XPG4 =3D $(linknamespace-libs-isoc) \
+> > +-                        $(common-objpfx)crypt/libcrypt.a
+> > ++linknamespace-libs-XPG4 =3D $(linknamespace-libs-isoc)
+> > + linknamespace-libs-XPG42 =3D $(linknamespace-libs-XPG4)
+> > + linknamespace-libs-POSIX =3D $(linknamespace-libs-thr)
+> > + linknamespace-libs-UNIX98 =3D $(linknamespace-libs-xsi)
+> > + linknamespace-libs-XOPEN2K =3D $(linknamespace-libs-xsi)
+> > + linknamespace-libs-POSIX2008 =3D $(linknamespace-libs-posix)
+> > + linknamespace-libs-XOPEN2K8 =3D $(linknamespace-libs-xsi)
+> > ++
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > ++linknamespace-libs-xsi +=3D $(common-objpfx)crypt/libcrypt.a
+> > ++linknamespace-libs-XPG4 +=3D $(common-objpfx)crypt/libcrypt.a
+> > ++endif
+> > ++
+> > + linknamespace-libs =3D $(foreach std,$(conformtest-standards),\
+> > +                                  $(linknamespace-libs-$(std)))
+> > +
+> > ++
+> > ++
+> > + $(linknamespace-symlist-stdlibs-tests): $(objpfx)symlist-stdlibs-%: \
+> > +                                       $(linknamespace-libs)
+> > +       LC_ALL=3DC $(READELF) -W -s $(linknamespace-libs-$*) > $@; \
+> > +diff --git a/conform/data/stdlib.h-data b/conform/data/stdlib.h-data
+> > +index d8fcccc2fb..6913828196 100644
+> > +--- a/conform/data/stdlib.h-data
+> > ++++ b/conform/data/stdlib.h-data
+> > +@@ -149,9 +149,6 @@ function {unsigned short int*} seed48 (unsigned
+> short
+> > int[3])
+> > + #if !defined ISO && !defined ISO99 && !defined ISO11 && !defined POSI=
+X
+> > && !defined XPG4 && !defined XPG42 && !defined UNIX98
+> > + function int setenv (const char*, const char*, int)
+> > + #endif
+> > +-#if !defined ISO && !defined ISO99 && !defined ISO11 && !defined POSI=
+X
+> > && !defined POSIX2008
+> > +-function void setkey (const char*)
+> > +-#endif
+> > + #if !defined ISO && !defined ISO99 && !defined ISO11 && !defined XPG4
+> &&
+> > !defined POSIX && !defined POSIX2008
+> > + function {char*} setstate (char*)
+> > + #endif
+> > +diff --git a/conform/data/unistd.h-data b/conform/data/unistd.h-data
+> > +index ddf4f25132..aa070528e8 100644
+> > +--- a/conform/data/unistd.h-data
+> > ++++ b/conform/data/unistd.h-data
+> > +@@ -437,9 +437,6 @@ function int chroot (const char*)
+> > + function int chown (const char*, uid_t, gid_t)
+> > + function int close (int)
+> > + function size_t confstr (int, char*, size_t)
+> > +-#if !defined POSIX && !defined POSIX2008
+> > +-function {char*} crypt (const char*, const char*)
+> > +-#endif
+> > + #if defined XPG4 || defined XPG42 || defined UNIX98
+> > + function {char*} ctermid (char*)
+> > + function {char*} cuserid (char*)
+> > +@@ -449,9 +446,6 @@ allow cuserid
+> > + #endif
+> > + function int dup (int)
+> > + function int dup2 (int, int)
+> > +-#if !defined POSIX && !defined POSIX2008
+> > +-function void encrypt (char[64], int)
+> > +-#endif
+> > + function int execl (const char*, const char*, ...)
+> > + function int execle (const char*, const char*, ...)
+> > + function int execlp (const char*, const char*, ...)
+> > +diff --git a/crypt/Makefile b/crypt/Makefile
+> > +index 303800df73..024ec2c6ab 100644
+> > +--- a/crypt/Makefile
+> > ++++ b/crypt/Makefile
+> > +@@ -22,6 +22,8 @@ subdir       :=3D crypt
+> > +
+> > + include ../Makeconfig
+> > +
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > ++
+> > + headers :=3D crypt.h
+> > +
+> > + extra-libs :=3D libcrypt
+> > +@@ -52,9 +54,11 @@ tests +=3D md5test sha256test sha512test
+> > + # machine over a minute.
+> > + xtests =3D md5test-giant
+> > + endif
+> > ++endif
+> > +
+> > + include ../Rules
+> > +
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > + ifneq ($(nss-crypt),yes)
+> > + md5-routines :=3D md5 $(filter md5%,$(libcrypt-sysdep_routines))
+> > + sha256-routines :=3D sha256 $(filter sha256%,$(libcrypt-sysdep_routin=
+es))
+> > +@@ -71,3 +75,4 @@ $(addprefix $(objpfx),$(tests)): $(objpfx)libcrypt.s=
+o
+> > + else
+> > + $(addprefix $(objpfx),$(tests)): $(objpfx)libcrypt.a
+> > + endif
+> > ++endif
+> > +diff --git a/elf/Makefile b/elf/Makefile
+> > +index 2a432d8bee..366f7b80ec 100644
+> > +--- a/elf/Makefile
+> > ++++ b/elf/Makefile
+> > +@@ -385,15 +385,19 @@ $(objpfx)tst-_dl_addr_inside_object:
+> > $(objpfx)dl-addr-obj.os
+> > + CFLAGS-tst-_dl_addr_inside_object.c +=3D $(PIE-ccflag)
+> > + endif
+> > +
+> > +-# By default tst-linkall-static should try to use crypt routines to
+> test
+> > +-# static libcrypt use.
+> > +-CFLAGS-tst-linkall-static.c +=3D -DUSE_CRYPT=3D1
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > ++# If the libcrypt library is being built, tst-linkall-static should
+> > ++# try to use crypt routines to test static libcrypt use.
+> > ++CFLAGS-tst-linkall-static.c =3D -DUSE_CRYPT=3D1
+> > + # However, if we are using NSS crypto and we don't have a static
+> > + # library, then we exclude the use of crypt functions in the test.
+> > + # We similarly exclude libcrypt.a from the static link (see below).
+> > + ifeq (yesno,$(nss-crypt)$(static-nss-crypt))
+> > + CFLAGS-tst-linkall-static.c +=3D -UUSE_CRYPT -DUSE_CRYPT=3D0
+> > + endif
+> > ++else
+> > ++CFLAGS-tst-linkall-static.c =3D -DUSE_CRYPT=3D0
+> > ++endif
+> > +
+> > + include ../Rules
+> > +
+> > +@@ -1113,8 +1117,10 @@ localplt-built-dso :=3D $(addprefix
+> > $(common-objpfx),\
+> > +                                 rt/librt.so \
+> > +                                 dlfcn/libdl.so \
+> > +                                 resolv/libresolv.so \
+> > +-                                crypt/libcrypt.so \
+> > +                      )
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > ++localplt-built-dso +=3D $(addprefix $(common-objpfx), crypt/libcrypt.=
+so)
+> > ++endif
+> > + ifeq ($(build-mathvec),yes)
+> > + localplt-built-dso +=3D $(addprefix $(common-objpfx), mathvec/libmvec=
+.so)
+> > + endif
+> > +@@ -1395,6 +1401,7 @@ $(objpfx)tst-linkall-static: \
+> > +   $(common-objpfx)resolv/libanl.a \
+> > +   $(static-thread-library)
+> > +
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > + # If we are using NSS crypto and we have the ability to link statical=
+ly
+> > + # then we include libcrypt.a, otherwise we leave out libcrypt.a and
+> > + # link as much as we can into the tst-linkall-static test.  This
+> assumes
+> > +@@ -1410,6 +1417,7 @@ ifeq (no,$(nss-crypt))
+> > + $(objpfx)tst-linkall-static: \
+> > +   $(common-objpfx)crypt/libcrypt.a
+> > + endif
+> > ++endif
+> > +
+> > + # The application depends on the DSO, and the DSO loads the plugin.
+> > + # The plugin also depends on the DSO. This creates the circular
+> > +diff --git a/elf/tst-linkall-static.c b/elf/tst-linkall-static.c
+> > +index e8df38f74e..0ffae7c723 100644
+> > +--- a/elf/tst-linkall-static.c
+> > ++++ b/elf/tst-linkall-static.c
+> > +@@ -18,7 +18,9 @@
+> > +
+> > + #include <math.h>
+> > + #include <pthread.h>
+> > ++#if USE_CRYPT
+> > + #include <crypt.h>
+> > ++#endif
+> > + #include <resolv.h>
+> > + #include <dlfcn.h>
+> > + #include <utmp.h>
+> > +diff --git a/posix/unistd.h b/posix/unistd.h
+> > +index 4d149f9945..e75ce4d4ec 100644
+> > +--- a/posix/unistd.h
+> > ++++ b/posix/unistd.h
+> > +@@ -107,9 +107,6 @@ __BEGIN_DECLS
+> > + /* The X/Open Unix extensions are available.  */
+> > + #define _XOPEN_UNIX   1
+> > +
+> > +-/* Encryption is present.  */
+> > +-#define       _XOPEN_CRYPT    1
+> > +-
+> > + /* The enhanced internationalization capabilities according to XPG4.2
+> > +    are present.  */
+> > + #define       _XOPEN_ENH_I18N 1
+> > +@@ -1118,20 +1115,7 @@ ssize_t copy_file_range (int __infd, __off64_t
+> > *__pinoff,
+> > + extern int fdatasync (int __fildes);
+> > + #endif /* Use POSIX199309 */
+> > +
+> > +-
+> > +-/* XPG4.2 specifies that prototypes for the encryption functions must
+> > +-   be defined here.  */
+> > + #ifdef        __USE_XOPEN
+> > +-/* Encrypt at most 8 characters from KEY using salt to perturb DES.  =
+*/
+> > +-extern char *crypt (const char *__key, const char *__salt)
+> > +-     __THROW __nonnull ((1, 2));
+> > +-
+> > +-/* Encrypt data in BLOCK in place if EDFLAG is zero; otherwise decryp=
+t
+> > +-   block in place.  */
+> > +-extern void encrypt (char *__glibc_block, int __edflag)
+> > +-     __THROW __nonnull ((1));
+> > +-
+> > +-
+> > + /* Swab pairs bytes in the first N bytes of the area pointed to by
+> > +    FROM and copy the result to TO.  The value of TO must not be in th=
+e
+> > +    range [FROM - N + 1, FROM - 1].  If N is odd the first byte in FRO=
+M
+> > +diff --git a/stdlib/stdlib.h b/stdlib/stdlib.h
+> > +index 6b1ead31e0..8e23e93557 100644
+> > +--- a/stdlib/stdlib.h
+> > ++++ b/stdlib/stdlib.h
+> > +@@ -958,12 +958,6 @@ extern int getsubopt (char **__restrict __optionp=
+,
+> > + #endif
+> > +
+> > +
+> > +-#ifdef __USE_XOPEN
+> > +-/* Setup DES tables according KEY.  */
+> > +-extern void setkey (const char *__key) __THROW __nonnull ((1));
+> > +-#endif
+> > +-
+> > +-
+> > + /* X/Open pseudo terminal handling.  */
+> > +
+> > + #ifdef __USE_XOPEN2KXSI
+> > +diff --git a/sysdeps/sparc/sparc32/sparcv9/multiarch/Makefile
+> > b/sysdeps/sparc/sparc32/sparcv9/multiarch/Makefile
+> > +index a6d08f3a00..d8b8297fb0 100644
+> > +--- a/sysdeps/sparc/sparc32/sparcv9/multiarch/Makefile
+> > ++++ b/sysdeps/sparc/sparc32/sparcv9/multiarch/Makefile
+> > +@@ -1,6 +1,8 @@
+> > + ifeq ($(subdir),crypt)
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > + libcrypt-sysdep_routines +=3D md5-crop sha256-crop sha512-crop
+> > + endif
+> > ++endif
+> > +
+> > + ifeq ($(subdir),locale)
+> > + localedef-aux +=3D md5-crop
+> > +diff --git a/sysdeps/sparc/sparc64/multiarch/Makefile
+> > b/sysdeps/sparc/sparc64/multiarch/Makefile
+> > +index eaf758e7aa..0198f9886f 100644
+> > +--- a/sysdeps/sparc/sparc64/multiarch/Makefile
+> > ++++ b/sysdeps/sparc/sparc64/multiarch/Makefile
+> > +@@ -1,6 +1,8 @@
+> > + ifeq ($(subdir),crypt)
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > + libcrypt-sysdep_routines +=3D md5-crop sha256-crop sha512-crop
+> > + endif
+> > ++endif
+> > +
+> > + ifeq ($(subdir),locale)
+> > + localedef-aux +=3D md5-crop
+> > +diff --git a/sysdeps/unix/sysv/linux/arm/Makefile
+> > b/sysdeps/unix/sysv/linux/arm/Makefile
+> > +index 4adc35de04..6cab4f3a31 100644
+> > +--- a/sysdeps/unix/sysv/linux/arm/Makefile
+> > ++++ b/sysdeps/unix/sysv/linux/arm/Makefile
+> > +@@ -19,8 +19,10 @@ endif
+> > + # Add a syscall function to each library that needs one.
+> > +
+> > + ifeq ($(subdir),crypt)
+> > ++ifeq ($(build-obsolete-crypt),yes)
+> > + libcrypt-sysdep_routines +=3D libc-do-syscall
+> > + endif
+> > ++endif
+> > +
+> > + ifeq ($(subdir),rt)
+> > + librt-sysdep_routines +=3D libc-do-syscall
+> > +--
+> > +2.16.0
+> > +
+> > diff --git a/meta/recipes-core/glibc/glibc_2.27.bb
+> > b/meta/recipes-core/glibc/glibc_2.27.bb
+> > index 772351a..c814798 100644
+> > --- a/meta/recipes-core/glibc/glibc_2.27.bb
+> > +++ b/meta/recipes-core/glibc/glibc_2.27.bb
+> > @@ -54,6 +54,7 @@ NATIVESDKFIXES_class-nativesdk =3D "\
+> >
+>  file://0003-nativesdk-glibc-Raise-the-size-of-arrays-containing-.patch
+> > \
+> >
+>  file://0004-nativesdk-glibc-Allow-64-bit-atomics-for-x86.patch
+> > \
+> >             file://relocate-locales.patch \
+> > +           file://0031-nativesdk-deprecate-libcrypt.patch \
+> >  "
+> >
+> >  S =3D "${WORKDIR}/git"
+> > diff --git a/meta/recipes-core/glibc/site_config/headers
+> > b/meta/recipes-core/glibc/site_config/headers
+> > index 609ab53..69fedea 100644
+> > --- a/meta/recipes-core/glibc/site_config/headers
+> > +++ b/meta/recipes-core/glibc/site_config/headers
+> > @@ -9,7 +9,6 @@ asm/page.h
+> >  asm/types.h
+> >  assert.h
+> >  byteswap.h
+> > -crypt.h
+> >  ctype.h
+> >  dirent.h
+> >  dlfcn.h
+> > diff --git a/meta/recipes-core/libxcrypt/libxcrypt_4.0.0.bb
+> > b/meta/recipes-core/libxcrypt/libxcrypt_4.0.0.bb
+> > new file mode 100644
+> > index 0000000..b1982c1
+> > --- /dev/null
+> > +++ b/meta/recipes-core/libxcrypt/libxcrypt_4.0.0.bb
+> > @@ -0,0 +1,31 @@
+> > +SUMMARY =3D "Extended cryptographic library (from glibc)"
+> > +DESCRIPTION =3D "Forked code from glibc libary to extract only crypto
+> part."
+> > +HOMEPAGE =3D "https://github.com/besser82/libxcrypt"
+> > +SECTION =3D "libs"
+> > +LICENSE =3D "LGPLv2.1"
+> > +LIC_FILES_CHKSUM ?=3D
+> "file://LICENSING;md5=3Dd1cc18f512ded3bd6000f3729f31be08
+> > \
+> > +      file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b364516c \
+> > +"
+> > +
+> > +inherit autotools
+> > +
+> > +SRCREV ?=3D "215b32aa4e0b255c3356a96bd6d257661bad73ca"
+> > +SRCBRANCH ?=3D "master"
+> > +
+> > +SRC_URI =3D "git://github.com/besser82/libxcrypt.git;branch=3D${SRCBRA=
+NCH}
+> <http://github.com/besser82/libxcrypt.git;branch=3D$%7BSRCBRANCH%7D>"
+> > +
+> > +PROVIDES =3D "virtual/crypt"
+> > +
+> > +FILES_${PN} =3D "${libdir}/libcrypt*.so.* ${libdir}/libcrypt-*.so
+> > ${libdir}/libowcrypt*.so.* ${libdir}/libowcrypt-*.so"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +BUILD_CPPFLAGS =3D "-I${STAGING_INCDIR_NATIVE}"
+> > +TARGET_CPPFLAGS =3D "-I${STAGING_DIR_TARGET}${includedir}"
+> > +
+> > +python () {
+> > +    if not bb.data.inherits_class('nativesdk', d):
+> > +        raise bb.parse.SkipRecipe("Recipe only applies in nativesdk ca=
+se
+> > for now")
+> > +}
+> > +
+> > +BBCLASSEXTEND =3D "nativesdk"
+> > diff --git a/meta/recipes-core/meta/uninative-tarball.bb
+> > b/meta/recipes-core/meta/uninative-tarball.bb
+> > index 5fabf7f..38c3a31 100644
+> > --- a/meta/recipes-core/meta/uninative-tarball.bb
+> > +++ b/meta/recipes-core/meta/uninative-tarball.bb
+> > @@ -13,6 +13,7 @@ TOOLCHAIN_HOST_TASK =3D "\
+> >      nativesdk-glibc-gconv-utf-16 \
+> >      nativesdk-glibc-gconv-cp1252 \
+> >      nativesdk-patchelf \
+> > +    nativesdk-libxcrypt \
+> >      "
+> >
+> >  INHIBIT_DEFAULT_DEPS =3D "1"
+> > diff --git a/meta/recipes-core/musl/musl_git.bb
+> b/meta/recipes-core/musl/
+> > musl_git.bb
+> > index 8906ac6..9f8c512 100644
+> > --- a/meta/recipes-core/musl/musl_git.bb
+> > +++ b/meta/recipes-core/musl/musl_git.bb
+> > @@ -15,7 +15,7 @@ SRC_URI =3D "git://git.musl-libc.org/musl \
+> >
+> >  S =3D "${WORKDIR}/git"
+> >
+> > -PROVIDES +=3D "virtual/libc virtual/${TARGET_PREFIX}libc-for-gcc
+> > virtual/libiconv virtual/libintl"
+> > +PROVIDES +=3D "virtual/libc virtual/${TARGET_PREFIX}libc-for-gcc
+> > virtual/libiconv virtual/libintl virtual/crypt"
+> >
+> >  DEPENDS =3D "virtual/${TARGET_PREFIX}binutils \
+> >             virtual/${TARGET_PREFIX}gcc-initial \
+> > diff --git a/meta/recipes-core/util-linux/util-linux.inc
+> > b/meta/recipes-core/util-linux/util-linux.inc
+> > index 5e40b20..157416d 100644
+> > --- a/meta/recipes-core/util-linux/util-linux.inc
+> > +++ b/meta/recipes-core/util-linux/util-linux.inc
+> > @@ -20,7 +20,7 @@ LIC_FILES_CHKSUM =3D "file://README.licensing;md5=3D
+> > 1715f5ee3e01203ca1e1e0b9ee65918c
+> >
+> >  #gtk-doc is not enabled as it requires xmlto which requires util-linux
+> >  inherit autotools gettext pkgconfig systemd update-alternatives
+> > python3-dir bash-completion ptest
+> > -DEPENDS =3D "zlib ncurses"
+> > +DEPENDS =3D "zlib ncurses virtual/crypt"
+> >  DEPENDS_append_class-native =3D " lzo-native"
+> >  DEPENDS_append_class-nativesdk =3D " lzo-native"
+> >
+> > diff --git a/meta/recipes-devtools/perl/perl_5.24.1.bb
+> > b/meta/recipes-devtools/perl/perl_5.24.1.bb
+> > index 66ccd7f..222dd88 100644
+> > --- a/meta/recipes-devtools/perl/perl_5.24.1.bb
+> > +++ b/meta/recipes-devtools/perl/perl_5.24.1.bb
+> > @@ -1,7 +1,7 @@
+> >  require perl.inc
+> >
+> >  # We need gnugrep (for -I)
+> > -DEPENDS =3D "db grep-native gdbm zlib"
+> > +DEPENDS =3D "db grep-native gdbm zlib virtual/crypt"
+> >
+> >  # Pick up patches from debian
+> >  # http://ftp.de.debian.org/debian/pool/main/p/perl/perl_
+> > 5.22.0-1.debian.tar.xz
+> > diff --git a/meta/recipes-extended/shadow/shadow.inc
+> > b/meta/recipes-extended/shadow/shadow.inc
+> > index 48a3be8..673207f 100644
+> > --- a/meta/recipes-extended/shadow/shadow.inc
+> > +++ b/meta/recipes-extended/shadow/shadow.inc
+> > @@ -6,8 +6,7 @@ LICENSE =3D "BSD | Artistic-1.0"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Ded80ff1c2b40843cf5768e5229c=
+f16e5
+> \
+> >                      file://src/passwd.c;beginline=3D8;endline=3D30;md5=
+=3D
+> > d83888ea14ae61951982d77125947661"
+> >
+> > -DEPENDS_class-native =3D ""
+> > -DEPENDS_class-nativesdk =3D ""
+> > +DEPENDS =3D "virtual/crypt"
+> >
+> >  SRC_URI =3D "http://pkg-shadow.alioth.debian.org/releases/${BPN}-${
+> > PV}.tar.xz \
+> >             file://shadow-4.1.3-dots-in-usernames.patch \
+> >
+> > --
+> > To stop receiving notification emails like this one, please contact
+> > the administrator of this repository.
+> > --
+> > _______________________________________________
+> > Openembedded-commits mailing list
+> > Openembedded-commits@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
