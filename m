@@ -1,20 +1,50 @@
-Return-Path: <daniel@zonque.org>
-X-Greylist: delayed 607 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 Apr 2018 10:53:38 UTC
-Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B52272EF7
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-oi0-f44.google.com (mail-oi0-f44.google.com
+	[209.85.218.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B97974781
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 10:53:38 +0000 (UTC)
-Received: from localhost.localdomain (mue-88-130-49-171.dsl.tropolys.de
-	[88.130.49.171])
-	by mail.bugwerft.de (Postfix) with ESMTPSA id CCC75286B4C;
-	Tue, 10 Apr 2018 10:41:44 +0000 (UTC)
-From: Daniel Mack <daniel@zonque.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Apr 2018 12:43:26 +0200
-Message-Id: <20180410104326.6432-1-daniel@zonque.org>
-X-Mailer: git-send-email 2.14.3
-Subject: [meta-qt5][PATCH] qt5: bump libconnman-qt5 to 1.2.7
+	Tue, 10 Apr 2018 13:25:20 +0000 (UTC)
+Received: by mail-oi0-f44.google.com with SMTP id 126-v6so11123275oig.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2018 06:25:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=HGTLihTyZVHnN31PJCDjwCsvq+4FmokPcfbwV1ycSsM=;
+	b=b2jF1rRWLd7CEWDVMyKVNTLYgTFW7iJZtBhAOmTJAczSB2Xs7Oo7pphaFhu6oZXt9L
+	VEXueNJGNziKki4kJvvQs1CvOZWSaUMClYuGiCj8QB663CwUYJsJpjidkXu/wUjzXGQ8
+	GH2jCh/nZQtMJjqrou1nArxpmc13pCxbaFwPyPvGDjHoKmDEZZTOJCt5AhK2Ix0HgW5h
+	FdOp7GxSaPNH+YQGYw5nQhnOoM8DODyZ/E2yHQ7dJmzvUWHmQsE679y9piBUbt31e0B0
+	3i0/wRWZgXD/thsgYOsDA1gc92vIo7YTZW8TBoOZsc2ikyC6cOXGXEddVFkr6t0Ij0aK
+	lnig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=HGTLihTyZVHnN31PJCDjwCsvq+4FmokPcfbwV1ycSsM=;
+	b=SQXlb9pYH97BOmEzkow5wxX/EsozqkO1sOzlRoY6/yv6M6Hja+Xngr40D0Fgvd26KX
+	KkWQntJJxROhxK3W32JfEv4KQMZrm07K685nPOhHOCK5kYj99Fsn/CYuxibmW6xl2foW
+	78iK9670gH26+Lj6brdg+QC56cqzxaLXpfR4N7awwlnwNlzyOnVfMFR7y4qRuikzzCbH
+	FvIB4Uk84f1EIoztPtXXiSbmEdUTN47Qm4goT0dWeoUSyGVWAItIXumYok8BAGKJv9ld
+	S6xH6XjkblwY1O35moN/Gh5jNpPropQGs0qB3Dsss5xiJBCslbPX8pK3myocOGVEN5qi
+	1uMg==
+X-Gm-Message-State: ALQs6tBAps9X6iS7bKezYuWlKfGvp8jXtyNcorIX7yku7fY6zn2PLZmJ
+	4UqNm5mfSllWw/u3mtjV9tmfRrpI7WXnqbOMuN8=
+X-Google-Smtp-Source: AIpwx4+ze32uDOERrz/hK9Qa3EjsRjUM+kGnWMVGwIFZDa6G1FuNwoRyGZawqvijaC5ZKbJV1JSLCxY9w81XC/O5wyw=
+X-Received: by 2002:aca:b443:: with SMTP id
+	d64-v6mr292598oif.104.1523366721561; 
+	Tue, 10 Apr 2018 06:25:21 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.201.25.81 with HTTP; Tue, 10 Apr 2018 06:25:20 -0700 (PDT)
+In-Reply-To: <3a6ed034-db91-c9e1-5a90-b5dc7e820814@gmail.com>
+References: <20180409220249.11796-1-schnitzeltony@gmail.com>
+	<3a6ed034-db91-c9e1-5a90-b5dc7e820814@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 10 Apr 2018 15:25:20 +0200
+Message-ID: <CALbNGRSsa7LvFqwUj_5zCPVLKahnQ2PbXc4VFtoSS-7SziBgXQ@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 0/9] Fixes and updates for sumo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,30 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2018 10:53:38 -0000
+X-List-Received-Date: Tue, 10 Apr 2018 13:25:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Daniel Mack <daniel@zonque.org>
----
- recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Tue, Apr 10, 2018 at 12:39 AM, akuster808 <akuster808@gmail.com> wrote:
+>
+>
+> On 04/09/2018 03:02 PM, Andreas M=C3=BCller wrote:
+>> History:
+>>
+>> 1. networkmanager: fix gobject-introspection/musl and cleanup: This was =
+sent
+>>    already but not applied yet. Now I know why: It introduced a parse er=
+ror
+>>    for PACKAGECONFIG. I removed this 'fix' - the recipe was perfectly fi=
+ne. I did
+>>    not notice this error because one of my layers overrided PACKAGECONFI=
+G for
+>>    networkmanager.
+>> 2. poppler: Rework patch fixing do_configure: resend
+>> 3. poppler: update 0.62.0- > 0.63.0: resend
+>> 4. poppler: fix build for TARGET_FPU =3D "soft": Fix for qemuarm build e=
+rror on
+>>    autobuilder
+>> 5. New - more meta-gnome cleanup
+>> 6.-
+>> 9. New - build- and run-tested on Raspi3
+>
+> Thanks. I will pull in for the next planed build.
+>
+Hi Armin,
 
-diff --git a/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb b/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb
-index ecd295c..368510d 100644
---- a/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb
-+++ b/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "https://git.merproject.org/mer-core/libconnman-qt"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
- DEPENDS += "qtbase qtdeclarative"
--PV = "1.2.4+git${SRCPV}"
-+PV = "1.2.7+git${SRCPV}"
- 
--SRCREV = "9d98e12ed60ae4fa9da62485cb8a82129ed1a464"
-+SRCREV = "ad7fef1c35a3e897913965f73b879a14d65043dd"
- SRC_URI = "git://git.merproject.org/mer-core/libconnman-qt.git;protocol=https \
-     file://0001-Don-t-use-MeeGo-as-prefix-in-order-to-make-this-a-co.patch \
- "
--- 
-2.14.3
+can you please update stagging/master-next then - last update upstream
+is 3 weeks old. For me that would help to see what the autobuilder
+builds currently (and if patches are not applied look into further)
 
+Regards
+
+Andreas
 
