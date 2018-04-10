@@ -1,52 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 02CC174A25;
-	Mon,  9 Apr 2018 23:08:38 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id u86so6650420pfd.2;
-	Mon, 09 Apr 2018 16:08:39 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 1146774933
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2018 00:22:38 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id v5-v6so6212211plo.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Apr 2018 17:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0DVsYZqWFXwIxPYP5g8PdCb7KCThiuGJcPLPP/wFLmk=;
-	b=vT7F7GSvzoQNKQA/y2m+jUWt73XQjUN01R/gmW3B6tEXlTho98ySS3Z6sEQG4PSynm
-	RUkpO7xivqRsoWZ7KnwNIq7LnH2aMvYxrefXS+9WNUhRETxv+eIDqSH9kKCn1BR7Jmqz
-	xZ51YRHx3aw9H5QkMWy98JfouvMuIHT8KZNc6/FiMvWZRxaZNIkmzc+bEfnHH9ujvr8Z
-	NDNkEkFpxW5z/kdSBS1kzTe+EuPXpmUT79zsMHFgtX8kM+vwRVUMep0qkGtByGqzs/rk
-	D39qErmEr71ZWmuiB1nCCkh9TuJvheJVGVR+fsOJHQaSMVLMLHcM9en59bc6WN0sBf4K
-	Ft2Q==
+	h=from:to:subject:date:message-id;
+	bh=8VHIEZnne842pRmC0TLH12O35qT+dopV6TaDSIZi/24=;
+	b=ipzdKQm9jYZtu70BtrbDuAPGcAR014mzA/bxEhWgE6UCfub6nsC28EFS7ncUAZHGVO
+	v/eAka5/xudmKoC5oBIS0VoP1haBjFaXagGGMhd/kbPFIzp5TjEHXSKd1/a4ToowyYqe
+	7ZM69WA//WKBILlTTtFyW4mcp5RfhZZ6+8EfRI+iN/aWgIDX3dbM3xMwptxfoFc5Hwzl
+	d/UFXyBJSZTw8bMk4nvI6qO9xd1i4LrEETLcpKqt9jXk+306QgpndP6L0kWq6NyorAU/
+	QN2Q/dvmKEUlkselFEKoMiGumXydxyMzNxK4F+ySNDKkC2Wzky7TPwQHQZ5qoD4QVqPd
+	8eNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0DVsYZqWFXwIxPYP5g8PdCb7KCThiuGJcPLPP/wFLmk=;
-	b=TBPGS9/VqYitmgQSBoYejObu0B6AWBl4sZebr5arER6AYRMNPLeABTOnFCtTnEAY7d
-	aqi5wQM1xC0TEfZ+o2BC4cI5Uan45yUYHbmxPp+1jSybVFYqmaXyc5SChoB1O2+TntT+
-	J+ecLlMQ0KuDy6x+Go/TrgYWU3Wq7kl6jFZLdTt72R9P2H0iWbyUl9Y/JVt77LqoSdAC
-	bD/JIHXeaZ44QY32Iv10kZ4ZP5x8Q99gSSK62qxfYfXjNWdfMz5eGziiJZ9u0x2VZOQ/
-	We5GUxlrX+j6MPxTmHljcpNN7infa2xuIT6qaXup7+zklQ9LRGz7h0kgqLf9s5nPgNiF
-	RsaA==
-X-Gm-Message-State: AElRT7FvSK32hVOh0Qb78z0U0cPmfrKppUY5RAWeCfXPH6MKA6/sLaQw
-	DMc0R4RFmEKYvIsU9F9p77RthWQ+2egxhbilzF4=
-X-Google-Smtp-Source: AIpwx49SBCU7T7sBALOv7AGBQciOuHVqcGFyzEg5gnfaA5yYV7YY5w4K99ct8GObhAnAcEyE2HZIODRTnqFU8ACNiH8=
-X-Received: by 10.99.96.147 with SMTP id u141mr26683104pgb.227.1523315318915; 
-	Mon, 09 Apr 2018 16:08:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <152313690992.11940.6799878390820377002@git.openembedded.org>
-	<20180407213510.474412329D5@git.openembedded.org>
-	<CA+chaQeNd3F9oXBYFsj4YaxfJ+k3uvXDcdcHy-AP32MWaHT8aQ@mail.gmail.com>
-	<CAMKF1sqJx2er+dqsuESsw_ooxh59pvx5547JyFseBdK0Fjycvw@mail.gmail.com>
-	<CAJ86T=U4f6OXG88uHqwg4URov+icap8B0ZFWOw_2uWoAx6oHqQ@mail.gmail.com>
-	<f36e699e-2d1e-821d-5641-4d9552c66d7e@gmail.com>
-	<CAJ86T=UOqT=F5OJr_GXVpkTdeVCjZiG6NjzA8b0D-2hc9QbsTQ@mail.gmail.com>
-In-Reply-To: <CAJ86T=UOqT=F5OJr_GXVpkTdeVCjZiG6NjzA8b0D-2hc9QbsTQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 09 Apr 2018 23:08:28 +0000
-Message-ID: <CAMKF1srFNCyuRDpSxqtvoU4DUQ+uHmyyVMuG1NAcLTTJADuabg@mail.gmail.com>
-To: Andre McCurdy <armccurdy@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] [openembedded-core] 02/02: nativesdk-glibc: Split glibc and libcrypt to use libxcrypt instead
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=8VHIEZnne842pRmC0TLH12O35qT+dopV6TaDSIZi/24=;
+	b=uLqp170k1xO98osOLZwajkFA7++qAZiJ0EukpgH7WMYYpjGAemX2lMDYkjjgDC3Box
+	DHtKUo6eBoyywJV7ADwWj+4zcduZLTUctCCVos41Zh1oFra6dFvfd+7e7lEdE4TbohUt
+	khMKHNHH7jTyOUc9yZYlNUZSEyHOfKfNFoRO/Av/aIuVieUPjg+vAYZO7g+2ia7pl+w/
+	2evEFQJ1NV5xdvGjcLy7cI9SACLwamt9Rx6F6BYuMeZeHLQ9gwdIeceu64a8Eq7WpGc0
+	W9N6D0djoDG3NrNi7mhMYdWUk0CE4lmh/GGzevjOFKUGN985+KNlwUD3OsXmFLmlnSlt
+	egrQ==
+X-Gm-Message-State: AElRT7H8tsSqaoXo60jMFK4ONW/LzQk3Zsgop4R6cQlsk7mEV3tLNv0S
+	0kDQ8/T8rw7gDewxGpeWiL7qKw==
+X-Google-Smtp-Source: AIpwx48lYXsXy4Gq7P27eO0dZS5IgRiZuXSNvEtW7wXYbmSCcQld12TnaRYz9ddoCsG/a+Mbo9DRpA==
+X-Received: by 2002:a17:902:a60d:: with SMTP id
+	u13-v6mr40945766plq.305.1523319759643; 
+	Mon, 09 Apr 2018 17:22:39 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4000:1184:6097:a43d:5d02:3a1c])
+	by smtp.gmail.com with ESMTPSA id
+	a5sm2562046pfl.159.2018.04.09.17.22.37
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 09 Apr 2018 17:22:38 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Mon,  9 Apr 2018 17:22:27 -0700
+Message-Id: <1523319756-8431-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 01/10] dbus-broker: include only if systemd is DISTO_FEATURE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,50 +57,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Apr 2018 23:08:38 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 Apr 2018 00:22:39 -0000
 
-On Mon, Apr 9, 2018 at 3:45 PM Andre McCurdy <armccurdy@gmail.com> wrote:
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-core/dbus/dbus-broker_git.bb | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-> On Mon, Apr 9, 2018 at 3:31 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > On 4/9/18 3:23 PM, Andre McCurdy wrote:
-> >> On Sun, Apr 8, 2018 at 5:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >>> On Sun, Apr 8, 2018 at 10:00 AM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> >>>
-> >>>> On Ubuntu 14.04 this fails with:
-> >>>>
-> >>>> ../git/gen-des-tables.c: In function =E2=80=98write_table_u8=E2=80=
-=99:
-> >>>> ../git/gen-des-tables.c:307:3: error: =E2=80=98for=E2=80=99 loop ini=
-tial declarations
-> are
-> >>>> only allowed in C99 mode
-> >>>>    for (size_t i =3D 0; i < m; i++)
-> >>>>    ^
-> >>>
-> >>> You can patch this to move declaration just above loop if that helps =
-we
-> >>> should apply such a patch for compatibility sake but I wonder if ther=
-e
-> are
-> >>> more c99 assumptions at work here
-> >>
-> >> It looks like the upstream intention is to be buildable with c99 + GNU
-> >> extensions, so explicitly setting -std=3Dgnu99 seems reasonable.
-> >
-> > see this statement worries me from same document you quote below.
-> >
-> > A few C2011 features are used; the intention is not to use any of them
-> > without a fallback, but we do not currently test this.
->
-> If you don't trust the untested fallbacks, then how about explicitly
-> setting -std=3Dgnu11 ?
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_git.bb b/meta-oe/recipes-core/dbus/dbus-broker_git.bb
+index 51dfe8c..b62bccf 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_git.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_git.bb
+@@ -6,7 +6,7 @@ SECTION = "base"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
+ 
+-DEPENDS = "dbus glib-2.0 expat systemd"
++DEPENDS = "dbus glib-2.0 expat"
+ 
+ PV = "9+git${SRCPV}"
+ SRCREV = "ccd06b284892182af569e69046262331150e3536"
+@@ -17,13 +17,16 @@ SRC_URI += "file://0002-Correct-including-directory-for-conf.patch"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit meson pkgconfig systemd
++inherit meson pkgconfig systemd distro_features_check
++
++REQUIRED_DISTRO_FEATURES = "systemd"
+ 
+ SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+ 
+ FILES_${PN} += "${systemd_system_unitdir}"
+ FILES_${PN} += "${systemd_user_unitdir}"
+ 
+-RDEPENDS_${PN} = "dbus systemd"
++RDEPENDS_${PN} = "dbus"
+ 
+ BBCLASSEXTEND = "native"
++
+-- 
+2.7.4
 
-
-That=E2=80=99s probably better
-
->
->
 
