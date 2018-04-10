@@ -1,48 +1,52 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D1B2174737
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 05F79746A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 22:59:16 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id s12so14320669wrc.8
+	Tue, 10 Apr 2018 23:54:49 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id l27so20674pfk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 15:59:17 -0700 (PDT)
+	Tue, 10 Apr 2018 16:54:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=xB4rrLddh7DBp/EqxetbIhJkWN/CJmMaiarNgGPWd74=;
-	b=RKDyVAYe1aSZQ0liVg1nYHWgmqjpwBiIAtgeMLJ1Iw11MGsLvmYWLeYxxGDx+OWaMG
-	j5ICu0gZfZxcAYHrY4LVHhYlG9N7O6Kkfdkm8CV98kVeOM4zLQM4+E2Fzwa7uqu4pVQc
-	pFk2FAZZJ49IupKtXEgfPCyovpX9nPFOl86LpAoG5SGT5fX40tqxYLPv2fhzaRTzow8c
-	4BkVHdidoYkFJ5W7Od6EXmgcwiI/W1G7oMc8r5v3E4O+6+K0/0M0LmSlzIaxO2Idxo50
-	xlA88NkompXwX1mQnu3Z6em0LqBbxBX2XZfoQSLH5JJnjP0t+ZRDazsyuKOX2h3/ncqr
-	xRYw==
+	bh=EQyOq/3p+aJYdbZhb+Xx6IABQWFFO3QHfqHrKHGEWSM=;
+	b=CwvrDh36jQrYnXJlcHZvRa3dOGRFFSZOIWtB6g0Vyjon7mJtIjCJcJNk4eiwfkf2Ue
+	1ko2yBZRMa6heoho1i1mA8RIKTjkJvsXYAkQhtdKDTBEnwuPEUtXW5ZvKq5MnlgElNRY
+	VsunlnGJ124juHQsp9GU6tk3uQ2IcfwsmtqBoI8rvFU7D1rdrQaMrJuG9ZbYuzpNLlr2
+	HvdawYW/deenNkn/7NE1UmgHU37UOJcjhh9Ixaa5voxrou30W605ZRm1NZ2rOUZCkpR5
+	hT/yTaoeDThCCwGDQNluvx+p+I51PvaAyPG4ai5XCUumAmXzJjynlOQR+GabKtAfNg8S
+	LfFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xB4rrLddh7DBp/EqxetbIhJkWN/CJmMaiarNgGPWd74=;
-	b=CzEKU5fbMZvKXyEeZWEtG2WVmIqhZMl3DECOmPG8qVxPSnmvvDd0VD14uR8ufXgydX
-	aW+q45se+g6VbVqQQ1/HaUhH9hjvXDSHMf/2TNkZKVmylemL4EcMSxEL5igOr+4r5tB4
-	aIYCkVNvDf5N5v74X1WCV5893gUBg/fQC+7M6LfATDTBVR8UJ+oif+4LTOW2Qd6hw8je
-	zty6DRya8hNyN09LVZzTa0LENGidMlB27ER+MRxWZGXrTTbfpa6O7pLW0SAVXVz0z6Wx
-	wds8lxtwXZ7/MNEMYDLFDtCIrm3vpYwl/VI5rsBC6PHep0gMOGaJXwIL8Uv2JOsNwMF/
-	CMfg==
-X-Gm-Message-State: ALQs6tBUVc7UF/I5+jXzjEjrGdbkc8/MIq+MKL88N0qrwnfCagavEfrV
-	/fsExIzmceURqY/0jkXwuOstGQ==
-X-Google-Smtp-Source: AIpwx4/adsuYmb3SWkJjAv5AMFbAiZgZ21kkR5nNySPeGQoAKcETnEfm6/29vhZRZFyp8bIj3Wfpbw==
-X-Received: by 10.223.139.4 with SMTP id n4mr1350153wra.112.1523401157074;
-	Tue, 10 Apr 2018 15:59:17 -0700 (PDT)
-Received: from localhost.localdomain
-	(host167-216-dynamic.251-95-r.retail.telecomitalia.it.
-	[95.251.216.167]) by smtp.gmail.com with ESMTPSA id
-	y191sm146932wme.14.2018.04.10.15.59.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Apr 2018 15:59:16 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Apr 2018 00:59:12 +0200
-Message-Id: <1523401152-29650-1-git-send-email-andrea.adami@gmail.com>
+	bh=EQyOq/3p+aJYdbZhb+Xx6IABQWFFO3QHfqHrKHGEWSM=;
+	b=a+n546/2sltsfIOB0+XFvuhgXqZU745/zt/LGnJDYEW5BVMNG5/HHXKmRd4XLCZgw0
+	eI66oo7yd7PTO0mIiBd8rS6zC1nm/dZkmVv+qLXdOvnm6Ikce4EEwDwRqt05tHpcFSZw
+	4wFzJWvy4XLCzaOwnAcDjx6WOA109PSIjoBPRBarQ99l+fQYN7gUp17p28wMPzEc2d9S
+	RZMie2hiyECfNbS/CbZ47pe80tJRixmFfrXa+mSFlsw0dF/sIOA11QjVjEhws0BCJNHh
+	L0g1c4xSeZPXNcg7+G316/lVTBjHTLBVoyhBUmiznBxGFyIdn5Ay9NFg4uUdna/Qncsd
+	XKbQ==
+X-Gm-Message-State: ALQs6tDHjX0+YH3bKcSeic+qH0XQ3kjqYuhxipDUZyXw2n6vYP+ZPXUr
+	3uFkqSlYLr6KFLxFDKDzn+o=
+X-Google-Smtp-Source: AIpwx4+BAPMzs9yi7LbcPLPuai8ctvnM3BLaHztZ0RheJG/0edisayg7cpNZWFVdKGgp25n8s3XcSQ==
+X-Received: by 10.99.96.147 with SMTP id u141mr1722934pgb.227.1523404491009;
+	Tue, 10 Apr 2018 16:54:51 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s ([2601:202:4000:1184:c5e:530c:2676:1226])
+	by smtp.gmail.com with ESMTPSA id
+	t65sm7479492pfe.174.2018.04.10.16.54.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 10 Apr 2018 16:54:50 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
+Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
+	Tue, 10 Apr 2018 16:54:48 -0700
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Apr 2018 16:54:46 -0700
+Message-Id: <1523404486-21187-1-git-send-email-akuster@mvista.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-handheld][PATCH] zaurusd: relax Autoconf macro to allow tslib >= 1.0
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: [meta-networking][PATCH] ntp: update to 4.2.8.p11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,68 +59,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2018 22:59:17 -0000
+X-List-Received-Date: Tue, 10 Apr 2018 23:54:50 -0000
 
-Fix build after 72ef78e tslib: Upgrade to 1.15 release
+This release addresses five security issues in ntpd:
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  LOW/MEDIUM: Sec 3012 / CVE-2016-1549 / VU#961909: Sybil vulnerability: ephemeral association attack
+  INFO/MEDIUM: Sec 3412 / CVE-2018-7182 / VU#961909: ctl_getitem(): buffer read overrun leads to undefined behavior and information leak
+  LOW: Sec 3415 / CVE-2018-7170 / VU#961909: Multiple authenticated ephemeral associations
+  LOW: Sec 3453 / CVE-2018-7184 / VU#961909: Interleaved symmetric mode cannot recover from bad state
+  LOW/MEDIUM: Sec 3454 / CVE-2018-7185 / VU#961909: Unauthenticated packet can reset authenticated interleaved association
+
+one security issue in ntpq:
+  MEDIUM: Sec 3414 / CVE-2018-7183 / VU#961909: ntpq:decodearr() can write beyond its buffer limit
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- .../zaurusd/zaurusd/allow-newer-tslib.patch        | 31 ++++++++++++++++++++++
- recipes-bsp/zaurusd/zaurusd_git.bb                 |  3 ++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 recipes-bsp/zaurusd/zaurusd/allow-newer-tslib.patch
+ .../recipes-support/ntp/{ntp_4.2.8p10.bb => ntp_4.2.8p11.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p10.bb => ntp_4.2.8p11.bb} (97%)
 
-diff --git a/recipes-bsp/zaurusd/zaurusd/allow-newer-tslib.patch b/recipes-bsp/zaurusd/zaurusd/allow-newer-tslib.patch
-new file mode 100644
-index 0000000..8269148
---- /dev/null
-+++ b/recipes-bsp/zaurusd/zaurusd/allow-newer-tslib.patch
-@@ -0,0 +1,31 @@
-+From 368e025220842db13e8b5d95bfe12877d752a7c8 Mon Sep 17 00:00:00 2001
-+From: Andrea Adami <andrea.adami@gmail.com>
-+Date: Wed, 11 Apr 2018 00:14:49 +0200
-+Subject: [PATCH] zaurusd: relax Autoconf macro to allow tslib >= 1.0
-+
-+Fix build after 72ef78e tslib: Upgrade to 1.15 release
-+
-+| checking for "tslib-1.0"... no
-+| configure: error: TSKeys requires tslib.
-+
-+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 36f858c..b207dcf 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -45,7 +45,7 @@ if test "x$HAVE_TSKEYS" != "x"; then
-+ 	#
-+         # Checks for tslib
-+ 	#
-+-	PKG_CHECK_MODULES(TSLIB, "tslib-1.0", :, AC_MSG_ERROR([TSKeys requires tslib.]))
-++	PKG_CHECK_MODULES(TSLIB, [tslib >= 1.0], :, AC_MSG_ERROR([TSKeys requires tslib.]))
-+ 	AC_SUBST(TSLIB_CFLAGS)
-+ 	AC_SUBST(TSLIB_LIBS)
-+ fi
-+-- 
-+2.7.4
-+
-diff --git a/recipes-bsp/zaurusd/zaurusd_git.bb b/recipes-bsp/zaurusd/zaurusd_git.bb
-index 8a49fdc..d69805b 100644
---- a/recipes-bsp/zaurusd/zaurusd_git.bb
-+++ b/recipes-bsp/zaurusd/zaurusd_git.bb
-@@ -23,7 +23,8 @@ SRC_URI = "git://git.yoctoproject.org/${BPN} \
-            file://01-check-toggle-landscape \
-            file://01-check-toggle-portait \
-            file://use-ts-symlink-instead-of-hardcoding.diff \
--           file://0001-zaurusd-add-support-for-collie.patch"
-+           file://0001-zaurusd-add-support-for-collie.patch \
-+           file://allow-newer-tslib.patch"
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
+similarity index 97%
+rename from meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
+rename to meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
+index 6db165a..c698fa0 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
+@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://ntpd.list \
+ "
  
+-SRC_URI[md5sum] = "745384ed0dedb3f66b33fe84d66466f9"
+-SRC_URI[sha256sum] = "ddd2366e64219b9efa0f7438e06800d0db394ac5c88e13c17b70d0dcdf99b99f"
++SRC_URI[md5sum] = "00950ca2855579541896513e78295361"
++SRC_URI[sha256sum] = "f14a39f753688252d683ff907035ffff106ba8d3db21309b742e09b5c3cd278e"
  
- S = "${WORKDIR}/git"
+ inherit autotools update-rc.d useradd systemd pkgconfig
+ 
 -- 
 2.7.4
 
