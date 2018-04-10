@@ -1,47 +1,48 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id AFD1E7493D
+Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
+	[209.85.128.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 10EA27482B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 21:01:11 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id x82so16128wmg.1
+	Tue, 10 Apr 2018 21:02:12 +0000 (UTC)
+Received: by mail-wr0-f182.google.com with SMTP id d1so14105057wrj.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 14:01:12 -0700 (PDT)
+	Tue, 10 Apr 2018 14:02:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=ePpmbPF6nImdc8jg3YB5g2qE6FzMwzoKqx9AZTPBqlc=;
-	b=aXl2wAQ+WLF77JV6pyjDEtf8RH786ET/kKgFy0uKiiq+yD03OLBs5ZSy2d+5/7S/bl
-	DR7p2+3XG0pHQnOZGTKZb3hJsDks7l7eClXN+BUzMWbX9CFquVHC/IUPlCD2bC9fqeLk
-	2R5yI2aHLBWEjdMQ3kxhV6Jui1niDo3g9GN93FBkTJfcnW56KXrYSXf+baZPJw8lUXCC
-	Y1MbpJhnXWT09yPuI+LMQgLElEBVh9vftyhRm6Q84hGso+QloRvwAwoGI3P5seJtOTMr
-	Rp3ZA05W7zey8vgGzjJwkUR340Dcq/6OhTXmIJNrojSaqnOTr39Yjt0uF4EWZkaxQlOp
-	V0xQ==
+	bh=jyYWDCS1ahgyQP9qU9PnpHjtNqw8V1MoxPCWXEpWkqY=;
+	b=hgPxCTTExc/MI+Pc0TlVGlI3H0DGBov/VS5gyeyXrrVqoU8NliRl9K0qgMwrfXdmVb
+	3lObqYcwoWjKgPxMmf7jYbvJn7b9oqu3EFBRdOxC+tj8ye2qakU4jNLlZRJGx7+oziLI
+	Ez+uOjPr22DXiC3c4r1DkxEaRlAepOEeZarBHigkeS8VAmjKX0OjW09Fb9imuK1H9ShJ
+	Rr+JV+3b6dn/TfklZS7N2nbnkBI8kVNOgO1Px04UaJ32CwHbsJJ2ULZ1sN/FiefsDpCN
+	M4nOrz4mRcUxTZpIOz/yAHHHcjw+2YGm75TOylC113ed19uH61vL/if1HC8KqqMT7vly
+	K2eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ePpmbPF6nImdc8jg3YB5g2qE6FzMwzoKqx9AZTPBqlc=;
-	b=jYJ8uApX43RI1XgiTNV/uym9aZ0AgT/+SPJSQ7QBL33LLAE8n09Q/HOFHWY8JjKnTI
-	HEVWh/cFAycpcLuGeA76kRTEtIbp9CZEFUOj2LaUNRaLnFLDHGOwE4hUymcm5utlKnO+
-	l6i/Vk4vIlWW2J04UN8ub3fwQDkWJfh849SItyFIh+kZYImpBqXK2p8LB5V5MEq8Deir
-	3VZSW5knYmsAZtQp8pFDyukFWHBKABAH9SaXEfo5dVZ7WD9utVidVTaFqgltddk8VuOe
-	KEeA65uBOQq1P0BmlCU9cPKtQpYdLE0eWVhV3tmaG9p7BCL0w+yu75f0wjj33l5AM8BY
-	4frg==
-X-Gm-Message-State: ALQs6tDqsR4MoGlVMp/PPXT93o9wPJf2VZGsqfiRDSAQalnwl5g+Z9Lb
-	nzShVbmsSYtddSflkb20oW6uhQ==
-X-Google-Smtp-Source: AIpwx49f8+fDwnPNCGwUKRGF0awvVR4yFyML3RBytzQACp5PXuhUueY/79n72YODwFPg7QKhSS1HNg==
-X-Received: by 10.28.126.69 with SMTP id z66mr667577wmc.56.1523394071511;
-	Tue, 10 Apr 2018 14:01:11 -0700 (PDT)
+	bh=jyYWDCS1ahgyQP9qU9PnpHjtNqw8V1MoxPCWXEpWkqY=;
+	b=f5BS6ha42GUIzr7KD9gvjOo3znjKfFPQaqgQHCNbnLcWhQrFwUPl8XV0mMkxA+V+jX
+	cdObpOPpQvH4vpnGfU6RfSwuTSGPZgdr2FQQpR52rzOW2EClPT334Ho4x9UApGxdQY3n
+	IpkTSeQZR1P8qP5b2WEC1SLpeq5gQZV23IV7uCPoRFmgDxGL4hrpSMoSqMYB0CLK65BJ
+	MYLjM5kdMOidiPFjoE3vV0anEtZ6ilx+K/fYXF1kdX/LS5ReCerGPmDnjsIaLN5dlLhV
+	3EDyDuStHgZX7k525WkF2ffgbwtchz48qAUBYaPcPOoOiTsdQwA8rLF8JQWi2ee9yTOF
+	TOWg==
+X-Gm-Message-State: ALQs6tBDbOnGOQtubPsoOyk4Z5/LBnaWTEsmVM6KtBgezU0S7T/J1K9p
+	VULIFAxRLJ3wMfun6iRY0kAYZH7p
+X-Google-Smtp-Source: AIpwx4++auuriL2SFH1tu5vnBQUaL+RE55ekn3MT6NuSuRzZuqKeOhSF14HhdNMTVZbXprH2m/AAog==
+X-Received: by 10.223.196.212 with SMTP id o20mr1419170wrf.144.1523394133088; 
+	Tue, 10 Apr 2018 14:02:13 -0700 (PDT)
 Received: from localhost.localdomain
 	(host167-216-dynamic.251-95-r.retail.telecomitalia.it.
-	[95.251.216.167]) by smtp.gmail.com with ESMTPSA id
-	b38sm4305968wrg.81.2018.04.10.14.01.10
+	[95.251.216.167])
+	by smtp.gmail.com with ESMTPSA id j3sm4580380wra.19.2018.04.10.14.02.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Apr 2018 14:01:10 -0700 (PDT)
+	Tue, 10 Apr 2018 14:02:12 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Apr 2018 23:01:05 +0200
-Message-Id: <1523394065-15465-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue, 10 Apr 2018 23:02:09 +0200
+Message-Id: <1523394129-15539-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-handheld][PATCH] zaurusd: refresh patches (using devtool)
+Subject: [meta-initramfs][PATCH] klibc-2.0.4: refresh patches (using devtool)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,1404 +55,674 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2018 21:01:12 -0000
+X-List-Received-Date: Tue, 10 Apr 2018 21:02:13 -0000
 
 Silence warnings about ingnored context.
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../0001-zaurusd-add-support-for-collie.patch      |  16 +-
- recipes-bsp/zaurusd/zaurusd/add-poodle.patch       |  14 +-
- .../zaurusd/zaurusd/alsa-6000x-default.state.patch | 166 +++++++++++----------
- .../zaurusd/zaurusd/alsa-cxx00-default.state.patch |  61 ++++----
- .../zaurusd/zaurusd/avoid-rotated-server.patch     | 106 +++++++------
- .../zaurusd/zaurusd/disable-alsa-handling.patch    |  16 +-
- recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch    |  10 +-
- .../use-ts-symlink-instead-of-hardcoding.diff      | 111 ++++++++++----
- 8 files changed, 300 insertions(+), 200 deletions(-)
+ ...ine-in_-structs-for-non-glibc-system-libs.patch |  60 ++++----
+ ...c-Add-path-to-compiler-headers-via-isyste.patch |  12 +-
+ ...c-Use-print-libgcc-file-name-instead-of-p.patch |  10 +-
+ .../klibc-2.0.4/0001-always-use-bfd-linker.patch   |   8 +-
+ ...arm-Do-not-set-a-fallback-march-and-mtune.patch |  10 +-
+ ...0001-dash-Specify-format-string-in-fmtstr.patch |   8 +-
+ .../0001-include-linux-sysinfo.h-directly.patch    |   8 +-
+ .../klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch |   8 +-
+ .../klibc/klibc-2.0.4/armv4-fix-v4bx.patch         |  17 ++-
+ .../klibc/klibc-2.0.4/klcc-consider-sysroot.patch  |   8 ++
+ .../klibc/klibc-2.0.4/klibc-config-eabi.patch      |  18 ++-
+ .../klibc/klibc-2.0.4/klibc-linux-libc-dev.patch   |  23 ++--
+ .../klibc/klibc-2.0.4/staging.patch                | 151 +++++++++++----------
+ 13 files changed, 185 insertions(+), 156 deletions(-)
 
-diff --git a/recipes-bsp/zaurusd/zaurusd/0001-zaurusd-add-support-for-collie.patch b/recipes-bsp/zaurusd/zaurusd/0001-zaurusd-add-support-for-collie.patch
-index 36ded13..0d242f5 100644
---- a/recipes-bsp/zaurusd/zaurusd/0001-zaurusd-add-support-for-collie.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/0001-zaurusd-add-support-for-collie.patch
-@@ -1,17 +1,17 @@
--From 85b94bed1feab70bc529a59fb80c26da825b9abe Mon Sep 17 00:00:00 2001
-+From 668a7bc50ca8f36df5a0eae73a5fa251aada9cc4 Mon Sep 17 00:00:00 2001
- From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
- Date: Fri, 5 Aug 2011 16:00:10 +0400
- Subject: [PATCH] zaurusd: add support for collie
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Define-in_-structs-for-non-glibc-system-libs.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Define-in_-structs-for-non-glibc-system-libs.patch
+index 8d1ec69..e7a0cce 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Define-in_-structs-for-non-glibc-system-libs.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Define-in_-structs-for-non-glibc-system-libs.patch
+@@ -1,4 +1,4 @@
+-From f414dea1316a48aba3e8e293201ebd51652d3ef4 Mon Sep 17 00:00:00 2001
++From 57e3a60b23891905733bfea7a1cb78c2377cc524 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sun, 9 Jul 2017 15:17:29 -0700
+ Subject: [PATCH] Define in_* structs for non-glibc system libs
+@@ -10,14 +10,38 @@ glibc in mind, and does not provide adequate guards for musl
+ to infer that these structs should be defined in linux/in.h
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+- usr/include/netinet/in.h | 33 +++++++++++++++++++++++++++++++++
+- 1 file changed, 33 insertions(+)
++ usr/include/net/if.h     | 11 +++++++++++
++ usr/include/netinet/in.h | 36 ++++++++++++++++++++++++++++++++++++
++ 2 files changed, 47 insertions(+)
+ 
+-Index: git/usr/include/netinet/in.h
+-===================================================================
+---- git.orig/usr/include/netinet/in.h
+-+++ git/usr/include/netinet/in.h
++diff --git a/usr/include/net/if.h b/usr/include/net/if.h
++index 116a176..6246b12 100644
++--- a/usr/include/net/if.h
+++++ b/usr/include/net/if.h
++@@ -1,6 +1,17 @@
++ #ifndef _NET_IF_H
++ #define _NET_IF_H
++ 
+++#ifndef __GLIBC__
+++#include <linux/libc-compat.h>
+++#undef __UAPI_DEF_IF_IFREQ
+++#define __UAPI_DEF_IF_IFREQ            1
+++#undef __UAPI_DEF_IF_IFNAMSIZ
+++#define __UAPI_DEF_IF_IFNAMSIZ         1
+++#undef __UAPI_DEF_IF_IFMAP
+++#define __UAPI_DEF_IF_IFMAP            1
+++#undef __UAPI_DEF_IF_NET_DEVICE_FLAGS
+++#define __UAPI_DEF_IF_NET_DEVICE_FLAGS 1
+++#endif
++ #include <sys/socket.h>
++ #include <sys/types.h>
++ #include <linux/if.h>
++diff --git a/usr/include/netinet/in.h b/usr/include/netinet/in.h
++index 2952bb2..0c95bc9 100644
++--- a/usr/include/netinet/in.h
+++++ b/usr/include/netinet/in.h
+ @@ -5,6 +5,42 @@
+  #ifndef _NETINET_IN_H
+  #define _NETINET_IN_H
+@@ -61,25 +85,3 @@ Index: git/usr/include/netinet/in.h
+  #include <klibc/extern.h>
+  #include <stdint.h>
+  #include <endian.h>		/* Must be included *before* <linux/in.h> */
+-Index: git/usr/include/net/if.h
+-===================================================================
+---- git.orig/usr/include/net/if.h
+-+++ git/usr/include/net/if.h
+-@@ -1,6 +1,17 @@
+- #ifndef _NET_IF_H
+- #define _NET_IF_H
+- 
+-+#ifndef __GLIBC__
+-+#include <linux/libc-compat.h>
+-+#undef __UAPI_DEF_IF_IFREQ
+-+#define __UAPI_DEF_IF_IFREQ            1
+-+#undef __UAPI_DEF_IF_IFNAMSIZ
+-+#define __UAPI_DEF_IF_IFNAMSIZ         1
+-+#undef __UAPI_DEF_IF_IFMAP
+-+#define __UAPI_DEF_IF_IFMAP            1
+-+#undef __UAPI_DEF_IF_NET_DEVICE_FLAGS
+-+#define __UAPI_DEF_IF_NET_DEVICE_FLAGS 1
+-+#endif
+- #include <sys/socket.h>
+- #include <sys/types.h>
+- #include <linux/if.h>
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
+index 7cd4c0e..181dcfb 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
+@@ -1,4 +1,4 @@
+-From 10fb440795a7796140bd657ee028847ec7c34447 Mon Sep 17 00:00:00 2001
++From 4b4147b76518d31a88fb2c58cdbf2236e159a25c Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 8 Sep 2017 23:10:54 -0700
+ Subject: [PATCH] Kbuild.klibc: Add path to compiler headers via -isystem
+@@ -7,12 +7,13 @@ We need to include this path so it can find compiler headers e.g.
+ stdarg.h which is called from wrapper stdarg.h using include_next
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+- scripts/Kbuild.klibc | 5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
++ scripts/Kbuild.klibc | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/scripts/Kbuild.klibc b/scripts/Kbuild.klibc
+-index f500d535..1d5cdc43 100644
++index 101f86f..1d5cdc4 100644
+ --- a/scripts/Kbuild.klibc
+ +++ b/scripts/Kbuild.klibc
+ @@ -105,7 +105,8 @@ KLIBCOBJCOPY     := $(OBJCOPY)
+@@ -25,6 +26,3 @@ index f500d535..1d5cdc43 100644
+  		    -I$(KLIBCINC)/arch/$(KLIBCARCHDIR)	\
+                      -I$(KLIBCINC)/bits$(KLIBCBITSIZE)	\
+  		    -I$(KLIBCOBJ)/../include		\
+--- 
+-2.14.1
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch
+index 41cc142..1ba05a8 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch
+@@ -1,19 +1,20 @@
+-From f66edde8a704131d98e8783ea8d4c848e8119b20 Mon Sep 17 00:00:00 2001
++From b6185401fc3daa7fa8ba2b84db3e4da3b94a9867 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Wed, 26 Jul 2017 16:13:16 -0700
+-Subject: [PATCH 1/3] Kbuild.klibc: Use -print-libgcc-file-name instead of
++Subject: [PATCH] Kbuild.klibc: Use -print-libgcc-file-name instead of
+  --print-libgcc
+ 
+ -print-libgcc-file-name works with clang and gcc unlike --print-libgcc
+ which is gcc specific
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  scripts/Kbuild.klibc | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/scripts/Kbuild.klibc b/scripts/Kbuild.klibc
+-index f500d535..101f86f5 100644
++index f500d53..101f86f 100644
+ --- a/scripts/Kbuild.klibc
+ +++ b/scripts/Kbuild.klibc
+ @@ -128,7 +128,7 @@ KLIBCCFLAGS      += $(KLIBCCPPFLAGS) $(KLIBCREQFLAGS) $(KLIBCARCHREQFLAGS)  \
+@@ -25,6 +26,3 @@ index f500d535..101f86f5 100644
+  KLIBCLIBGCC	 ?= $(KLIBCLIBGCC_DEF)
+  KLIBCCRT0        := $(KLIBCOBJ)/arch/$(KLIBCARCHDIR)/crt0.o
+  KLIBCLIBC        := $(KLIBCOBJ)/libc.a
+--- 
+-2.13.3
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-always-use-bfd-linker.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-always-use-bfd-linker.patch
+index 41a6b9e..de04d69 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-always-use-bfd-linker.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-always-use-bfd-linker.patch
+@@ -1,4 +1,4 @@
+-From 9ea19bd9636806a73bcf29cfcee40a268f91eb4c Mon Sep 17 00:00:00 2001
++From 63ab5102d6ef362a597941e62470bf19e6f1652b Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 11 Jul 2017 08:09:52 -0700
+ Subject: [PATCH] always use bfd linker
+@@ -8,12 +8,13 @@ therefore explicitly asking for bfd linker would fix the
+ linking issues on such distros
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index dc10fc5d..40647be4 100644
++index dc10fc5..40647be 100644
+ --- a/Makefile
+ +++ b/Makefile
+ @@ -20,7 +20,7 @@ include $(srctree)/scripts/Kbuild.include
+@@ -25,6 +26,3 @@ index dc10fc5d..40647be4 100644
+  export AR	:= $(KLIBCROSS)ar
+  export RANLIB	:= $(KLIBCROSS)ranlib
+  export STRIP	:= $(KLIBCROSS)strip
+--- 
+-2.13.2
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+index 9c0ea63..fcf4f89 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+@@ -1,4 +1,4 @@
+-From a46a144ac883898d9cedf7a0b13aec6d10116125 Mon Sep 17 00:00:00 2001
++From ebd2b0e414c98467156b961abb470b5d07f37ea8 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 29 Sep 2017 23:11:53 -0700
+ Subject: [PATCH] arm: Do not set a fallback march and mtune
+@@ -9,14 +9,13 @@ need to compute values for CPU_ARCH and CPU_TUNE
+ which is a bit harder in OE
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
 -Upstream-Status: Pending
  
- Note: alsa mixer support is disabled, as collie doesn't support sound (yet).
++---
+  usr/klibc/arch/arm/MCONFIG | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
- Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-+
- ---
-- config/mach-config/mach-collie-functions |    4 ++++
-- config/mach-config/mach-collie-vars.in   |    3 +++
-- configure.ac                             |    1 +
-- 3 files changed, 8 insertions(+), 0 deletions(-)
-+ config/mach-config/mach-collie-functions | 4 ++++
-+ config/mach-config/mach-collie-vars.in   | 3 +++
-+ configure.ac                             | 1 +
-+ 3 files changed, 8 insertions(+)
-  create mode 100644 config/mach-config/mach-collie-functions
-  create mode 100644 config/mach-config/mach-collie-vars.in
- 
-@@ -35,7 +35,7 @@ index 0000000..ec1bfb8
- +
- +ALSA_MIXER_INIT=@appconfdir@/alsa/5500-default.state
- diff --git a/configure.ac b/configure.ac
--index 78ea2ae..5160fab 100644
-+index 36f858c..8ee281b 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -65,6 +65,7 @@ AC_CONFIG_FILES([
-@@ -46,5 +46,3 @@ index 78ea2ae..5160fab 100644
-    config/mach-config/mach-corgi-vars
-    config/mach-config/mach-husky-vars
-    config/mach-config/mach-poodle-vars
----
--1.7.2.5
-diff --git a/recipes-bsp/zaurusd/zaurusd/add-poodle.patch b/recipes-bsp/zaurusd/zaurusd/add-poodle.patch
-index 3793faf..6698aeb 100644
---- a/recipes-bsp/zaurusd/zaurusd/add-poodle.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/add-poodle.patch
-@@ -1,5 +1,15 @@
----- zaurusd/config/mach-config/mach-poodle-vars.in	(revision 418)
--+++ zaurusd/config/mach-config/mach-poodle-vars.in	(working copy)
-+From 9edcb004b09cef8e01598482935fc6ba2a6beb81 Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 24 Jul 2011 19:12:32 +0100
-+
-+---
-+ config/mach-config/mach-poodle-vars.in | 8 +++++++-
-+ 1 file changed, 7 insertions(+), 1 deletion(-)
-+
-+diff --git a/config/mach-config/mach-poodle-vars.in b/config/mach-config/mach-poodle-vars.in
-+index 949460a..cbb1478 100644
-+--- a/config/mach-config/mach-poodle-vars.in
-++++ b/config/mach-config/mach-poodle-vars.in
- @@ -1,3 +1,9 @@
-  MACHINE=poodle
-  
-diff --git a/recipes-bsp/zaurusd/zaurusd/alsa-6000x-default.state.patch b/recipes-bsp/zaurusd/zaurusd/alsa-6000x-default.state.patch
-index 29c98f7..0409100 100644
---- a/recipes-bsp/zaurusd/zaurusd/alsa-6000x-default.state.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/alsa-6000x-default.state.patch
-@@ -1,6 +1,16 @@
----- zaurusd/config/alsa/6000x-default.state	2009-04-25 22:57:30.000000000 +0100
--+++ zaurusd/config/alsa/6000x-default.state	2009-05-14 10:41:29.000000000 +0100
--@@ -6,8 +6,8 @@
-+From dfd71335507681ec984195265ed5866e677d9bb6 Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 24 Jul 2011 19:12:32 +0100
-+
-+---
-+ config/alsa/6000x-default.state | 192 +++++++++++++++++++++-------------------
-+ 1 file changed, 101 insertions(+), 91 deletions(-)
-+
-+diff --git a/config/alsa/6000x-default.state b/config/alsa/6000x-default.state
-+index d2bf5e2..c38265d 100644
-+--- a/config/alsa/6000x-default.state
-++++ b/config/alsa/6000x-default.state
-+@@ -6,8 +6,8 @@ state.Tosa {
-  		comment.range '0 - 31'
-  		iface MIXER
-  		name 'Speaker Playback Volume'
-@@ -11,7 +21,7 @@
-  	}
-  	control.2 {
-  		comment.access 'read write'
--@@ -24,8 +24,8 @@
-+@@ -24,8 +24,8 @@ state.Tosa {
-  		comment.range '0 - 31'
-  		iface MIXER
-  		name 'Headphone Playback Volume'
-@@ -22,7 +32,7 @@
-  	}
-  	control.4 {
-  		comment.access 'read write'
--@@ -37,13 +37,23 @@
-+@@ -37,13 +37,23 @@ state.Tosa {
-  	}
-  	control.5 {
-  		comment.access 'read write'
-@@ -47,7 +57,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -51,7 +61,7 @@
-+@@ -51,7 +61,7 @@ state.Tosa {
-  		name 'Speaker Playback Invert Switch'
-  		value true
-  	}
-@@ -56,7 +66,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -59,7 +69,7 @@
-+@@ -59,7 +69,7 @@ state.Tosa {
-  		name 'Headphone Playback ZC Switch'
-  		value true
-  	}
-@@ -65,7 +75,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -67,7 +77,7 @@
-+@@ -67,7 +77,7 @@ state.Tosa {
-  		name 'Mono Playback ZC Switch'
-  		value false
-  	}
-@@ -74,7 +84,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -76,7 +86,7 @@
-+@@ -76,7 +86,7 @@ state.Tosa {
-  		name 'Mono Playback Volume'
-  		value 0
-  	}
-@@ -83,7 +93,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -85,16 +95,16 @@
-+@@ -85,16 +95,16 @@ state.Tosa {
-  		name 'ALC Target Volume'
-  		value 11
-  	}
-@@ -103,7 +113,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -103,7 +113,7 @@
-+@@ -103,7 +113,7 @@ state.Tosa {
-  		name 'ALC Decay Time'
-  		value 3
-  	}
-@@ -112,7 +122,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -112,7 +122,7 @@
-+@@ -112,7 +122,7 @@ state.Tosa {
-  		name 'ALC Attack Time'
-  		value 2
-  	}
-@@ -121,7 +131,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -124,7 +134,7 @@
-+@@ -124,7 +134,7 @@ state.Tosa {
-  		name 'ALC Function'
-  		value None
-  	}
-@@ -130,7 +140,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -133,16 +143,16 @@
-+@@ -133,16 +143,16 @@ state.Tosa {
-  		name 'ALC Max Volume'
-  		value 7
-  	}
-@@ -150,7 +160,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -150,7 +160,7 @@
-+@@ -150,7 +160,7 @@ state.Tosa {
-  		name 'ALC ZC Switch'
-  		value false
-  	}
-@@ -159,7 +169,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -158,7 +168,7 @@
-+@@ -158,7 +168,7 @@ state.Tosa {
-  		name 'ALC NG Switch'
-  		value false
-  	}
-@@ -168,7 +178,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -168,7 +178,7 @@
-+@@ -168,7 +178,7 @@ state.Tosa {
-  		name 'ALC NG Type'
-  		value 'Constant Gain'
-  	}
-@@ -177,7 +187,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -177,16 +187,16 @@
-+@@ -177,16 +187,16 @@ state.Tosa {
-  		name 'ALC NG Threshold'
-  		value 31
-  	}
-@@ -197,7 +207,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -195,7 +205,7 @@
-+@@ -195,7 +205,7 @@ state.Tosa {
-  		name 'ALC Headphone Volume'
-  		value 5
-  	}
-@@ -206,7 +216,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -203,7 +213,7 @@
-+@@ -203,7 +213,7 @@ state.Tosa {
-  		name 'Out3 Switch'
-  		value false
-  	}
-@@ -215,7 +225,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -211,7 +221,7 @@
-+@@ -211,7 +221,7 @@ state.Tosa {
-  		name 'Out3 ZC Switch'
-  		value true
-  	}
-@@ -224,7 +234,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -220,7 +230,7 @@
-+@@ -220,7 +230,7 @@ state.Tosa {
-  		name 'Out3 Volume'
-  		value 0
-  	}
-@@ -233,7 +243,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -229,7 +239,7 @@
-+@@ -229,7 +239,7 @@ state.Tosa {
-  		name 'PCBeep Bypass Headphone Volume'
-  		value 0
-  	}
-@@ -242,7 +252,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -238,7 +248,7 @@
-+@@ -238,7 +248,7 @@ state.Tosa {
-  		name 'PCBeep Bypass Speaker Volume'
-  		value 0
-  	}
-@@ -251,7 +261,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -247,16 +257,16 @@
-+@@ -247,16 +257,16 @@ state.Tosa {
-  		name 'PCBeep Bypass Phone Volume'
-  		value 0
-  	}
-@@ -271,7 +281,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -265,7 +275,7 @@
-+@@ -265,7 +275,7 @@ state.Tosa {
-  		name 'Aux Playback Speaker Volume'
-  		value 0
-  	}
-@@ -280,7 +290,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -274,7 +284,7 @@
-+@@ -274,7 +284,7 @@ state.Tosa {
-  		name 'Aux Playback Phone Volume'
-  		value 0
-  	}
-@@ -289,7 +299,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -283,7 +293,7 @@
-+@@ -283,7 +293,7 @@ state.Tosa {
-  		name 'Phone Volume'
-  		value 0
-  	}
-@@ -298,7 +308,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 2
--@@ -293,7 +303,7 @@
-+@@ -293,7 +303,7 @@ state.Tosa {
-  		value.0 23
-  		value.1 23
-  	}
-@@ -307,7 +317,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -301,7 +311,7 @@
-+@@ -301,7 +311,7 @@ state.Tosa {
-  		name 'Capture 20dB Boost Switch'
-  		value true
-  	}
-@@ -316,7 +326,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -309,7 +319,7 @@
-+@@ -309,7 +319,7 @@ state.Tosa {
-  		name 'Capture to Phone 20dB Boost Switch'
-  		value true
-  	}
-@@ -325,7 +335,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -317,7 +327,7 @@
-+@@ -317,7 +327,7 @@ state.Tosa {
-  		name '3D Upper Cut-off Switch'
-  		value false
-  	}
-@@ -334,7 +344,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -325,7 +335,7 @@
-+@@ -325,7 +335,7 @@ state.Tosa {
-  		name '3D Lower Cut-off Switch'
-  		value false
-  	}
-@@ -343,7 +353,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -334,7 +344,7 @@
-+@@ -334,7 +344,7 @@ state.Tosa {
-  		name '3D Playback Volume'
-  		value 0
-  	}
-@@ -352,7 +362,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -344,7 +354,7 @@
-+@@ -344,7 +354,7 @@ state.Tosa {
-  		name 'Bass Control'
-  		value 'Adaptive Boost'
-  	}
-@@ -361,7 +371,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -352,7 +362,7 @@
-+@@ -352,7 +362,7 @@ state.Tosa {
-  		name 'Bass Cut-off Switch'
-  		value true
-  	}
-@@ -370,7 +380,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -360,7 +370,7 @@
-+@@ -360,7 +370,7 @@ state.Tosa {
-  		name 'Tone Cut-off Switch'
-  		value false
-  	}
-@@ -379,7 +389,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -368,7 +378,7 @@
-+@@ -368,7 +378,7 @@ state.Tosa {
-  		name 'Playback Attenuate (-6dB) Switch'
-  		value false
-  	}
-@@ -388,7 +398,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -377,7 +387,7 @@
-+@@ -377,7 +387,7 @@ state.Tosa {
-  		name 'Bass Volume'
-  		value 8
-  	}
-@@ -397,7 +407,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -386,7 +396,7 @@
-+@@ -386,7 +396,7 @@ state.Tosa {
-  		name 'Treble Volume'
-  		value 5
-  	}
-@@ -406,7 +416,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -394,7 +404,7 @@
-+@@ -394,7 +404,7 @@ state.Tosa {
-  		name 'Capture ADC Switch'
-  		value false
-  	}
-@@ -415,7 +425,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 2
--@@ -405,17 +415,17 @@
-+@@ -405,17 +415,17 @@ state.Tosa {
-  		value.0 '+0.75dB Steps'
-  		value.1 '+0.75dB Steps'
-  	}
-@@ -437,7 +447,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -423,7 +433,7 @@
-+@@ -423,7 +433,7 @@ state.Tosa {
-  		name 'Capture ZC Switch'
-  		value false
-  	}
-@@ -446,7 +456,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -432,7 +442,7 @@
-+@@ -432,7 +442,7 @@ state.Tosa {
-  		name 'Mic 1 Volume'
-  		value 23
-  	}
-@@ -455,7 +465,7 @@
-  		comment.access 'read write'
-  		comment.type INTEGER
-  		comment.count 1
--@@ -441,7 +451,7 @@
-+@@ -441,7 +451,7 @@ state.Tosa {
-  		name 'Mic 2 Volume'
-  		value 23
-  	}
-@@ -464,7 +474,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -449,7 +459,7 @@
-+@@ -449,7 +459,7 @@ state.Tosa {
-  		name 'Mic 20dB Boost Switch'
-  		value false
-  	}
-@@ -473,7 +483,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -457,7 +467,7 @@
-+@@ -457,7 +467,7 @@ state.Tosa {
-  		name 'Speaker Mixer PCBeep Bypass Swi'
-  		value false
-  	}
-@@ -482,7 +492,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -465,7 +475,7 @@
-+@@ -465,7 +475,7 @@ state.Tosa {
-  		name 'Speaker Mixer Aux Playback Swit'
-  		value false
-  	}
-@@ -491,7 +501,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -473,7 +483,7 @@
-+@@ -473,7 +483,7 @@ state.Tosa {
-  		name 'Speaker Mixer Phone Bypass Swit'
-  		value false
-  	}
-@@ -500,7 +510,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -481,7 +491,7 @@
-+@@ -481,7 +491,7 @@ state.Tosa {
-  		name 'Speaker Mixer Line Bypass Switc'
-  		value false
-  	}
-@@ -509,7 +519,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -489,7 +499,7 @@
-+@@ -489,7 +499,7 @@ state.Tosa {
-  		name 'Speaker Mixer PCM Playback Swit'
-  		value true
-  	}
-@@ -518,7 +528,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -497,7 +507,7 @@
-+@@ -497,7 +507,7 @@ state.Tosa {
-  		name 'Phone Mixer PCBeep Bypass Switc'
-  		value false
-  	}
-@@ -527,7 +537,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -505,7 +515,7 @@
-+@@ -505,7 +515,7 @@ state.Tosa {
-  		name 'Phone Mixer Aux Playback Switch'
-  		value false
-  	}
-@@ -536,7 +546,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -513,7 +523,7 @@
-+@@ -513,7 +523,7 @@ state.Tosa {
-  		name 'Phone Mixer Line Bypass Switch'
-  		value false
-  	}
-@@ -545,7 +555,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -521,7 +531,7 @@
-+@@ -521,7 +531,7 @@ state.Tosa {
-  		name 'Phone Mixer PCM Playback Switch'
-  		value false
-  	}
-@@ -554,7 +564,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -529,7 +539,7 @@
-+@@ -529,7 +539,7 @@ state.Tosa {
-  		name 'Phone Mixer Mic 1 Sidetone Swit'
-  		value false
-  	}
-@@ -563,7 +573,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -537,7 +547,7 @@
-+@@ -537,7 +547,7 @@ state.Tosa {
-  		name 'Phone Mixer Mic 2 Sidetone Swit'
-  		value false
-  	}
-@@ -572,7 +582,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -545,7 +555,7 @@
-+@@ -545,7 +555,7 @@ state.Tosa {
-  		name 'Right HP Mixer PCBeep Bypass Sw'
-  		value false
-  	}
-@@ -581,7 +591,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -553,7 +563,7 @@
-+@@ -553,7 +563,7 @@ state.Tosa {
-  		name 'Right HP Mixer Aux Playback Swi'
-  		value false
-  	}
-@@ -590,7 +600,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -561,7 +571,7 @@
-+@@ -561,7 +571,7 @@ state.Tosa {
-  		name 'Right HP Mixer Phone Bypass Swi'
-  		value false
-  	}
-@@ -599,7 +609,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -569,7 +579,7 @@
-+@@ -569,7 +579,7 @@ state.Tosa {
-  		name 'Right HP Mixer Line Bypass Swit'
-  		value false
-  	}
-@@ -608,7 +618,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -577,7 +587,7 @@
-+@@ -577,7 +587,7 @@ state.Tosa {
-  		name 'Right HP Mixer PCM Playback Swi'
-  		value true
-  	}
-@@ -617,7 +627,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -585,7 +595,7 @@
-+@@ -585,7 +595,7 @@ state.Tosa {
-  		name 'Right HP Mixer Mic Sidetone Swi'
-  		value false
-  	}
-@@ -626,7 +636,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -593,7 +603,7 @@
-+@@ -593,7 +603,7 @@ state.Tosa {
-  		name 'Left HP Mixer PCBeep Bypass Swi'
-  		value false
-  	}
-@@ -635,7 +645,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -601,7 +611,7 @@
-+@@ -601,7 +611,7 @@ state.Tosa {
-  		name 'Left HP Mixer Aux Playback Swit'
-  		value false
-  	}
-@@ -644,7 +654,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -609,7 +619,7 @@
-+@@ -609,7 +619,7 @@ state.Tosa {
-  		name 'Left HP Mixer Phone Bypass Swit'
-  		value false
-  	}
-@@ -653,7 +663,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -617,7 +627,7 @@
-+@@ -617,7 +627,7 @@ state.Tosa {
-  		name 'Left HP Mixer Line Bypass Switc'
-  		value false
-  	}
-@@ -662,7 +672,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -625,7 +635,7 @@
-+@@ -625,7 +635,7 @@ state.Tosa {
-  		name 'Left HP Mixer PCM Playback Swit'
-  		value true
-  	}
-@@ -671,7 +681,7 @@
-  		comment.access 'read write'
-  		comment.type BOOLEAN
-  		comment.count 1
--@@ -633,7 +643,7 @@
-+@@ -633,7 +643,7 @@ state.Tosa {
-  		name 'Left HP Mixer Mic Sidetone Swit'
-  		value false
-  	}
-@@ -680,7 +690,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -641,9 +651,9 @@
-+@@ -641,9 +651,9 @@ state.Tosa {
-  		comment.item.1 Line
-  		iface MIXER
-  		name 'Differential Source'
-@@ -692,7 +702,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -653,9 +663,9 @@
-+@@ -653,9 +663,9 @@ state.Tosa {
-  		comment.item.3 Stereo
-  		iface MIXER
-  		name 'Mic Select Source'
-@@ -704,7 +714,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -671,7 +681,7 @@
-+@@ -671,7 +681,7 @@ state.Tosa {
-  		name 'Right Capture Select'
-  		value Mic
-  	}
-@@ -713,7 +723,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -687,7 +697,7 @@
-+@@ -687,7 +697,7 @@ state.Tosa {
-  		name 'Left Capture Select'
-  		value Mic
-  	}
-@@ -722,7 +732,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -699,7 +709,7 @@
-+@@ -699,7 +709,7 @@ state.Tosa {
-  		name 'Capture Phone Mux'
-  		value Mute
-  	}
-@@ -731,7 +741,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -709,7 +719,7 @@
-+@@ -709,7 +719,7 @@ state.Tosa {
-  		name 'Speaker Mux'
-  		value 'Speaker Mix'
-  	}
-@@ -740,7 +750,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -721,7 +731,7 @@
-+@@ -721,7 +731,7 @@ state.Tosa {
-  		name 'Out3 Mux'
-  		value Left
-  	}
-@@ -749,7 +759,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -733,7 +743,7 @@
-+@@ -733,7 +743,7 @@ state.Tosa {
-  		name 'ALC Sidetone Mux'
-  		value Stereo
-  	}
-@@ -758,7 +768,7 @@
-  		comment.access 'read write'
-  		comment.type ENUMERATED
-  		comment.count 1
--@@ -746,7 +756,7 @@
-+@@ -746,7 +756,7 @@ state.Tosa {
-  		name 'Jack Function'
-  		value Off
-  	}
-diff --git a/recipes-bsp/zaurusd/zaurusd/alsa-cxx00-default.state.patch b/recipes-bsp/zaurusd/zaurusd/alsa-cxx00-default.state.patch
-index d65ed4a..56f2018 100644
---- a/recipes-bsp/zaurusd/zaurusd/alsa-cxx00-default.state.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/alsa-cxx00-default.state.patch
-@@ -1,4 +1,9 @@
--NOTE: Patch slightly modified from original; unmodified comments from 
-+From 335105e985d0935afce84c215eb12baed1f7006d Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 24 Jul 2011 19:12:32 +0100
-+Subject: [PATCH] initial commit of meta-handheld
-+
-+NOTE: Patch slightly modified from original; unmodified comments from
- original patch copied below.
- =============================================================================
- http://bugs.openembedded.net/show_bug.cgi?id=2617
-@@ -16,9 +21,15 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-   * Enabled Zero Cross volume changes.
- - Do not alter incorrect mixer levels by zaurus-mixer-callback.
- 
----- zaurusd/config/alsa/cxx00-default.state	2009-04-25 22:57:30.000000000 +0100
--+++ zaurusd/config/alsa/cxx00-default.state	2009-05-14 10:41:29.000000000 +0100
--@@ -6,8 +6,8 @@
-+---
-+ config/alsa/cxx00-default.state | 66 ++++++++++++++++++++---------------------
-+ 1 file changed, 33 insertions(+), 33 deletions(-)
-+
-+diff --git a/config/alsa/cxx00-default.state b/config/alsa/cxx00-default.state
-+index d218543..d1bacfb 100644
-+--- a/config/alsa/cxx00-default.state
-++++ b/config/alsa/cxx00-default.state
-+@@ -6,8 +6,8 @@ state.Spitz {
-  		comment.range '0 - 63'
-  		iface MIXER
-  		name 'Capture Volume'
-@@ -29,7 +40,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.2 {
-  		comment.access 'read write'
--@@ -15,8 +15,8 @@
-+@@ -15,8 +15,8 @@ state.Spitz {
-  		comment.count 2
-  		iface MIXER
-  		name 'Capture ZC Switch'
-@@ -40,7 +51,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.3 {
-  		comment.access 'read write'
--@@ -24,8 +24,8 @@
-+@@ -24,8 +24,8 @@ state.Spitz {
-  		comment.count 2
-  		iface MIXER
-  		name 'Capture Switch'
-@@ -51,7 +62,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.4 {
-  		comment.access 'read write'
--@@ -33,8 +33,8 @@
-+@@ -33,8 +33,8 @@ state.Spitz {
-  		comment.count 2
-  		iface MIXER
-  		name 'Headphone Playback ZC Switch'
-@@ -62,7 +73,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.5 {
-  		comment.access 'read write'
--@@ -42,8 +42,8 @@
-+@@ -42,8 +42,8 @@ state.Spitz {
-  		comment.count 2
-  		iface MIXER
-  		name 'Speaker Playback ZC Switch'
-@@ -73,7 +84,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.6 {
-  		comment.access 'read write'
--@@ -92,8 +92,8 @@
-+@@ -92,8 +92,8 @@ state.Spitz {
-  		comment.range '0 - 255'
-  		iface MIXER
-  		name 'PCM Volume'
-@@ -84,7 +95,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.11 {
-  		comment.access 'read write'
--@@ -131,7 +131,7 @@
-+@@ -131,7 +131,7 @@ state.Spitz {
-  		comment.range '0 - 15'
-  		iface MIXER
-  		name 'Treble Volume'
-@@ -93,7 +104,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.15 {
-  		comment.access 'read write'
--@@ -188,7 +188,7 @@
-+@@ -188,7 +188,7 @@ state.Spitz {
-  		comment.item.1 Playback
-  		iface MIXER
-  		name '3D Mode'
-@@ -102,7 +113,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.21 {
-  		comment.access 'read write'
--@@ -226,7 +226,7 @@
-+@@ -226,7 +226,7 @@ state.Spitz {
-  		comment.count 1
-  		iface MIXER
-  		name 'ALC Capture ZC Switch'
-@@ -111,7 +122,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.25 {
-  		comment.access 'read write'
--@@ -235,7 +235,7 @@
-+@@ -235,7 +235,7 @@ state.Spitz {
-  		comment.range '0 - 15'
-  		iface MIXER
-  		name 'ALC Capture Hold Time'
-@@ -120,7 +131,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.26 {
-  		comment.access 'read write'
--@@ -244,7 +244,7 @@
-+@@ -244,7 +244,7 @@ state.Spitz {
-  		comment.range '0 - 15'
-  		iface MIXER
-  		name 'ALC Capture Decay Time'
-@@ -129,7 +140,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.27 {
-  		comment.access 'read write'
--@@ -253,7 +253,7 @@
-+@@ -253,7 +253,7 @@ state.Spitz {
-  		comment.range '0 - 15'
-  		iface MIXER
-  		name 'ALC Capture Attack Time'
-@@ -138,7 +149,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.28 {
-  		comment.access 'read write'
--@@ -306,7 +306,7 @@
-+@@ -306,7 +306,7 @@ state.Spitz {
-  		comment.count 1
-  		iface MIXER
-  		name 'ZC Timeout Switch'
-@@ -147,7 +158,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.34 {
-  		comment.access 'read write'
--@@ -331,8 +331,8 @@
-+@@ -331,8 +331,8 @@ state.Spitz {
-  		comment.range '0 - 3'
-  		iface MIXER
-  		name 'Mic Boost'
-@@ -158,7 +169,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.37 {
-  		comment.access 'read write'
--@@ -341,8 +341,8 @@
-+@@ -341,8 +341,8 @@ state.Spitz {
-  		comment.range '0 - 7'
-  		iface MIXER
-  		name 'Bypass Left Playback Volume'
-@@ -169,7 +180,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.38 {
-  		comment.access 'read write'
--@@ -361,8 +361,8 @@
-+@@ -361,8 +361,8 @@ state.Spitz {
-  		comment.range '0 - 7'
-  		iface MIXER
-  		name 'Bypass Mono Playback Volume'
-@@ -180,7 +191,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.40 {
-  		comment.access 'read write'
--@@ -379,8 +379,8 @@
-+@@ -379,8 +379,8 @@ state.Spitz {
-  		comment.range '0 - 127'
-  		iface MIXER
-  		name 'Headphone Playback Volume'
-@@ -191,7 +202,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.42 {
-  		comment.access 'read write'
--@@ -389,8 +389,8 @@
-+@@ -389,8 +389,8 @@ state.Spitz {
-  		comment.range '0 - 127'
-  		iface MIXER
-  		name 'Speaker Playback Volume'
-@@ -202,7 +213,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.43 {
-  		comment.access 'read write'
--@@ -399,7 +399,7 @@
-+@@ -399,7 +399,7 @@ state.Spitz {
-  		comment.range '0 - 127'
-  		iface MIXER
-  		name 'Mono Playback Volume'
-@@ -211,7 +222,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.44 {
-  		comment.access 'read write'
--@@ -411,7 +411,7 @@
-+@@ -411,7 +411,7 @@ state.Spitz {
-  		comment.item.3 'Digital Mono'
-  		iface MIXER
-  		name 'Right ADC Mux'
-@@ -220,7 +231,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.45 {
-  		comment.access 'read write'
--@@ -423,7 +423,7 @@
-+@@ -423,7 +423,7 @@ state.Spitz {
-  		comment.item.3 'Digital Mono'
-  		iface MIXER
-  		name 'Left ADC Mux'
-@@ -229,7 +240,7 @@ http://bugs.openembedded.net/show_bug.cgi?id=2617
-  	}
-  	control.46 {
-  		comment.access 'read write'
--@@ -471,7 +471,7 @@
-+@@ -471,7 +471,7 @@ state.Spitz {
-  		comment.item.4 Differential
-  		iface MIXER
-  		name 'Left Line Mux'
-diff --git a/recipes-bsp/zaurusd/zaurusd/avoid-rotated-server.patch b/recipes-bsp/zaurusd/zaurusd/avoid-rotated-server.patch
-index 8d72401..fdb6f2b 100644
---- a/recipes-bsp/zaurusd/zaurusd/avoid-rotated-server.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/avoid-rotated-server.patch
-@@ -1,8 +1,24 @@
--Index: zaurusd/config/mach-config/mach-akita-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-akita-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-akita-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -7,4 +7,7 @@
-+From bef06331c6454c7d7815930e19fdcb2c3409fbe3 Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 24 Jul 2011 19:12:32 +0100
-+
-+---
-+ config/mach-config/mach-akita-vars.in     | 5 ++++-
-+ config/mach-config/mach-borzoi-vars.in    | 5 ++++-
-+ config/mach-config/mach-corgi-vars.in     | 5 ++++-
-+ config/mach-config/mach-htcuniversal-vars | 3 +++
-+ config/mach-config/mach-husky-vars.in     | 5 ++++-
-+ config/mach-config/mach-poodle-vars.in    | 5 ++++-
-+ config/mach-config/mach-shepherd-vars.in  | 5 ++++-
-+ config/mach-config/mach-spitz-vars.in     | 5 ++++-
-+ config/mach-config/mach-tosa-vars.in      | 5 ++++-
-+ 9 files changed, 35 insertions(+), 8 deletions(-)
-+
-+diff --git a/config/mach-config/mach-akita-vars.in b/config/mach-config/mach-akita-vars.in
-+index d5b831f..c4cb671 100644
-+--- a/config/mach-config/mach-akita-vars.in
-++++ b/config/mach-config/mach-akita-vars.in
-+@@ -7,4 +7,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
-  TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -12,11 +28,11 @@ Index: zaurusd/config/mach-config/mach-akita-vars.in
- +
- +export XRANDR_LANDSCAPE=right
- +export XRANDR_PORTRAIT=normal
--Index: zaurusd/config/mach-config/mach-borzoi-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-borzoi-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-borzoi-vars.in	2009-06-22 20:51:00.000000000 +0000
--@@ -7,4 +7,7 @@
-+diff --git a/config/mach-config/mach-borzoi-vars.in b/config/mach-config/mach-borzoi-vars.in
-+index 0d0a8ca..55cba7f 100644
-+--- a/config/mach-config/mach-borzoi-vars.in
-++++ b/config/mach-config/mach-borzoi-vars.in
-+@@ -7,4 +7,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
-  TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -26,11 +42,11 @@ Index: zaurusd/config/mach-config/mach-borzoi-vars.in
- +
- +export XRANDR_LANDSCAPE=right
- +export XRANDR_PORTRAIT=normal
--Index: zaurusd/config/mach-config/mach-corgi-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-corgi-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-corgi-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -7,4 +7,7 @@
-+diff --git a/config/mach-config/mach-corgi-vars.in b/config/mach-config/mach-corgi-vars.in
-+index 54fceaa..548ada2 100644
-+--- a/config/mach-config/mach-corgi-vars.in
-++++ b/config/mach-config/mach-corgi-vars.in
-+@@ -7,4 +7,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
-  TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -40,22 +56,22 @@ Index: zaurusd/config/mach-config/mach-corgi-vars.in
- +
- +export XRANDR_LANDSCAPE=normal
- +export XRANDR_PORTRAIT=left
--Index: zaurusd/config/mach-config/mach-htcuniversal-vars
--===================================================================
----- zaurusd.orig/config/mach-config/mach-htcuniversal-vars	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-htcuniversal-vars	2009-06-22 20:49:01.000000000 +0000
--@@ -2,3 +2,6 @@
-+diff --git a/config/mach-config/mach-htcuniversal-vars b/config/mach-config/mach-htcuniversal-vars
-+index 490c020..7c2c6da 100644
-+--- a/config/mach-config/mach-htcuniversal-vars
-++++ b/config/mach-config/mach-htcuniversal-vars
-+@@ -2,3 +2,6 @@ MACHINE=htcuniversal
-  
-  export SWITCH_EVENT_ZHINGE=1
-  SWITCH_EVENT_DEVICE=/dev/input/event3
- +
- +export XRANDR_LANDSCAPE=normal
- +export XRANDR_PORTRAIT=left
--Index: zaurusd/config/mach-config/mach-husky-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-husky-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-husky-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -7,4 +7,7 @@
-+diff --git a/config/mach-config/mach-husky-vars.in b/config/mach-config/mach-husky-vars.in
-+index 64e1238..b6e4ab8 100644
-+--- a/config/mach-config/mach-husky-vars.in
-++++ b/config/mach-config/mach-husky-vars.in
-+@@ -7,4 +7,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
-  TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -65,11 +81,11 @@ Index: zaurusd/config/mach-config/mach-husky-vars.in
- +
- +export XRANDR_LANDSCAPE=normal
- +export XRANDR_PORTRAIT=left
--Index: zaurusd/config/mach-config/mach-poodle-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-poodle-vars.in	2009-06-22 20:49:01.000000000 +0000
--+++ zaurusd/config/mach-config/mach-poodle-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -6,4 +6,7 @@
-+diff --git a/config/mach-config/mach-poodle-vars.in b/config/mach-config/mach-poodle-vars.in
-+index cbb1478..71af6d7 100644
-+--- a/config/mach-config/mach-poodle-vars.in
-++++ b/config/mach-config/mach-poodle-vars.in
-+@@ -6,4 +6,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
-  #TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -79,11 +95,11 @@ Index: zaurusd/config/mach-config/mach-poodle-vars.in
- +
- +export XRANDR_LANDSCAPE=normal
- +export XRANDR_PORTRAIT=left
--Index: zaurusd/config/mach-config/mach-shepherd-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-shepherd-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-shepherd-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -7,4 +7,7 @@
-+diff --git a/config/mach-config/mach-shepherd-vars.in b/config/mach-config/mach-shepherd-vars.in
-+index 1d3987e..c77eb56 100644
-+--- a/config/mach-config/mach-shepherd-vars.in
-++++ b/config/mach-config/mach-shepherd-vars.in
-+@@ -7,4 +7,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
-  TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -93,11 +109,11 @@ Index: zaurusd/config/mach-config/mach-shepherd-vars.in
- +
- +export XRANDR_LANDSCAPE=normal
- +export XRANDR_PORTRAIT=left
--Index: zaurusd/config/mach-config/mach-spitz-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-spitz-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-spitz-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -7,4 +7,7 @@
-+diff --git a/config/mach-config/mach-spitz-vars.in b/config/mach-config/mach-spitz-vars.in
-+index 0d0a8ca..55cba7f 100644
-+--- a/config/mach-config/mach-spitz-vars.in
-++++ b/config/mach-config/mach-spitz-vars.in
-+@@ -7,4 +7,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
-  TSKEYS_DEVICE=/dev/input/event1
-  
-@@ -107,11 +123,11 @@ Index: zaurusd/config/mach-config/mach-spitz-vars.in
- +
- +export XRANDR_LANDSCAPE=right
- +export XRANDR_PORTRAIT=normal
--Index: zaurusd/config/mach-config/mach-tosa-vars.in
--===================================================================
----- zaurusd.orig/config/mach-config/mach-tosa-vars.in	2009-03-07 11:04:43.000000000 +0000
--+++ zaurusd/config/mach-config/mach-tosa-vars.in	2009-06-22 20:51:47.000000000 +0000
--@@ -6,4 +6,7 @@
-+diff --git a/config/mach-config/mach-tosa-vars.in b/config/mach-config/mach-tosa-vars.in
-+index 7f52bb2..97f0e93 100644
-+--- a/config/mach-config/mach-tosa-vars.in
-++++ b/config/mach-config/mach-tosa-vars.in
-+@@ -6,4 +6,7 @@ SWITCH_EVENT_DEVICE=/dev/input/event0
-  #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
-  #TSKEYS_DEVICE=/dev/input/event1
-  
-diff --git a/recipes-bsp/zaurusd/zaurusd/disable-alsa-handling.patch b/recipes-bsp/zaurusd/zaurusd/disable-alsa-handling.patch
-index 8f1879d..839b42e 100644
---- a/recipes-bsp/zaurusd/zaurusd/disable-alsa-handling.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/disable-alsa-handling.patch
-@@ -1,6 +1,16 @@
----- zaurusd/config/config.in.orig	2007-05-21 21:58:14.000000000 +0000
--+++ zaurusd/config/config.in	2007-05-21 22:10:26.000000000 +0000
--@@ -11,11 +11,5 @@
-+From 7675d11d0adc31ac7b5ad643d72b9ac724b94bdc Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 24 Jul 2011 19:12:32 +0100
-+
-+---
-+ config/config.in | 8 +-------
-+ 1 file changed, 1 insertion(+), 7 deletions(-)
-+
-+diff --git a/config/config.in b/config/config.in
-+index 166f3a9..cf0daa4 100755
-+--- a/config/config.in
-++++ b/config/config.in
-+@@ -11,11 +11,5 @@ fi
-  . @appconfdir@/mach-config-vars
-  . @appconfdir@/mach-config-funcs
-  
-diff --git a/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch b/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch
-index 9eed68f..9a592c0 100644
---- a/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch
-+++ b/recipes-bsp/zaurusd/zaurusd/scripts_pidof.patch
+ diff --git a/usr/klibc/arch/arm/MCONFIG b/usr/klibc/arch/arm/MCONFIG
+-index 53bc1dc3..857e2f2d 100644
++index 303c6ac..48d2685 100644
+ --- a/usr/klibc/arch/arm/MCONFIG
+ +++ b/usr/klibc/arch/arm/MCONFIG
+ @@ -10,7 +10,7 @@
+@@ -28,6 +27,3 @@ index 53bc1dc3..857e2f2d 100644
+  KLIBCBITSIZE  = 32
+  KLIBCREQFLAGS += -fno-exceptions
+  KLIBCSTRIPFLAGS += -R .ARM.exidx
+--- 
+-2.14.2
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-dash-Specify-format-string-in-fmtstr.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-dash-Specify-format-string-in-fmtstr.patch
+index ae8c1f1..46a2398 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-dash-Specify-format-string-in-fmtstr.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-dash-Specify-format-string-in-fmtstr.patch
 @@ -1,4 +1,4 @@
--From f271fa43ec63ed5650296a393403318ab0e553d4 Mon Sep 17 00:00:00 2001
-+From 571d1a134665c80d01a2a3cc2db576662b68243d Mon Sep 17 00:00:00 2001
- From: Paul Eggleton <paul.eggleton@linux.intel.com>
- Date: Sun, 5 Aug 2012 01:41:16 +0100
- Subject: [PATCH] scripts/zaurusd: use pidof instead of mangling output of ps
-@@ -8,9 +8,10 @@ busybox provides working pidof if sysvinit doesn't, so use that.
- Upstream-Status: Pending
+-From 2fff607fd0b5550e5072a6fffcbb01c29d5207d2 Mon Sep 17 00:00:00 2001
++From 8beffe501c1ac5b35d62004735c4157c74183901 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sun, 9 Jul 2017 13:51:25 -0700
+ Subject: [PATCH] dash: Specify format string in fmtstr()
+@@ -9,12 +9,13 @@ usr/dash/jobs.c:429:3: error: format not a string literal and no format argument
+    col = fmtstr(s, 32, strsignal(st));
  
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
  ---
-- scripts/zaurusd.in |    5 +----
-- 1 files changed, 1 insertions(+), 4 deletions(-)
-+ scripts/zaurusd.in | 5 +----
-+ 1 file changed, 1 insertion(+), 4 deletions(-)
+  usr/dash/jobs.c | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
- diff --git a/scripts/zaurusd.in b/scripts/zaurusd.in
- index ad896aa..acb5158 100755
-@@ -28,6 +29,3 @@ index ad896aa..acb5158 100755
-          [ "$pid" != "" ] && kill $pid
-  }
+ diff --git a/usr/dash/jobs.c b/usr/dash/jobs.c
+-index 009bbfee..299bcacc 100644
++index 009bbfe..299bcac 100644
+ --- a/usr/dash/jobs.c
+ +++ b/usr/dash/jobs.c
+ @@ -426,7 +426,7 @@ sprint_status(char *s, int status, int sigonly)
+@@ -26,6 +27,3 @@ index 009bbfee..299bcacc 100644
+  #ifdef WCOREDUMP
+  		if (WCOREDUMP(status)) {
+  			col += fmtstr(s + col, 16, " (core dumped)");
+--- 
+-2.13.2
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-include-linux-sysinfo.h-directly.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-include-linux-sysinfo.h-directly.patch
+index 1b033ac..04c97fc 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-include-linux-sysinfo.h-directly.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-include-linux-sysinfo.h-directly.patch
+@@ -1,4 +1,4 @@
+-From ab060a57b41f989665ade20e813bbcb67f91f1f2 Mon Sep 17 00:00:00 2001
++From d966d52d1e569cbc2293d841285e2b8941f28c61 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sun, 9 Jul 2017 15:56:28 -0700
+ Subject: [PATCH] include linux/sysinfo.h directly
+@@ -10,12 +10,13 @@ but until its done in right place, change the local header
+ override to avoid this assumption
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  usr/include/sys/sysinfo.h | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/usr/include/sys/sysinfo.h b/usr/include/sys/sysinfo.h
+-index dba68dc6..d145c0b1 100644
++index dba68dc..d145c0b 100644
+ --- a/usr/include/sys/sysinfo.h
+ +++ b/usr/include/sys/sysinfo.h
+ @@ -5,7 +5,7 @@
+@@ -27,6 +28,3 @@ index dba68dc6..d145c0b1 100644
+  
+  extern int sysinfo(struct sysinfo *info);
   
 --- 
--1.7.1
+-2.13.2
 -
-diff --git a/recipes-bsp/zaurusd/zaurusd/use-ts-symlink-instead-of-hardcoding.diff b/recipes-bsp/zaurusd/zaurusd/use-ts-symlink-instead-of-hardcoding.diff
-index 9c418ec..5cb81ed 100644
---- a/recipes-bsp/zaurusd/zaurusd/use-ts-symlink-instead-of-hardcoding.diff
-+++ b/recipes-bsp/zaurusd/zaurusd/use-ts-symlink-instead-of-hardcoding.diff
-@@ -1,6 +1,23 @@
----- /tmp/mach-akita-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-akita-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -5,6 +5,6 @@
-+From ba8caa82de5e947469f74477b0c41feb8a0824ef Mon Sep 17 00:00:00 2001
-+From: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Date: Sun, 24 Jul 2011 19:12:32 +0100
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch
+index 9791412..3bc081d 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch
+@@ -1,15 +1,16 @@
+-From b4e120f5edf06e6df138b1804a8b5180584cea6b Mon Sep 17 00:00:00 2001
++From cf97079009ba48d10e52052b2eab7461ea4dd09b Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 10 Jul 2017 20:42:50 -0700
+ Subject: [PATCH] mkfifo: Implement mkfifo
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  usr/utils/mkfifo.c | 5 +++++
+  1 file changed, 5 insertions(+)
+ 
+ diff --git a/usr/utils/mkfifo.c b/usr/utils/mkfifo.c
+-index 5a758b2a..f1f577e6 100644
++index 5a758b2..f1f577e 100644
+ --- a/usr/utils/mkfifo.c
+ +++ b/usr/utils/mkfifo.c
+ @@ -26,6 +26,11 @@ static int make_fifo(char *dir)
+@@ -24,6 +25,3 @@ index 5a758b2a..f1f577e6 100644
+  int main(int argc, char *argv[])
+  {
+  	int c, ret = 0;
+--- 
+-2.13.2
+-
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
+index 6bb384b..e842353 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
+@@ -1,11 +1,22 @@
++From d2fb484d995221277cce7abddcd7dfa0e8bceec3 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Fri, 11 Jan 2013 17:26:40 +0000
++Subject: [PATCH] klibc_2.0.2: apply FIX_V4BX patch for armv4 targets only
++
+ Status: not applicable upstream, in OE/Yocto we use $(FIX_V4BX)
+ which is "" in case of armv5 or thumbs.
+ 
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ 
+---- a/usr/klibc/arch/arm/MCONFIG	2013-01-09 01:12:02.000000000 +0100
+-+++ b/usr/klibc/arch/arm/MCONFIG	2013-01-08 23:45:59.000000000 +0100
+-@@ -29,6 +29,7 @@
++---
++ usr/klibc/arch/arm/MCONFIG | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/usr/klibc/arch/arm/MCONFIG b/usr/klibc/arch/arm/MCONFIG
++index 53bc1dc..303c6ac 100644
++--- a/usr/klibc/arch/arm/MCONFIG
+++++ b/usr/klibc/arch/arm/MCONFIG
++@@ -29,6 +29,7 @@ else
+  KLIBCSHAREDFLAGS = -Ttext 0x01800200
+  ifeq ($(CONFIG_AEABI),y)
+  KLIBCREQFLAGS += -mabi=aapcs-linux -mno-thumb-interwork
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+index 9bc4835..5f47d3f 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+@@ -1,3 +1,11 @@
++From 0cb26cf2d25d36c1fdcc4f1635e4329436ed866a Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Fri, 19 Sep 2014 23:09:29 +0200
 +
 +---
-+ config/mach-config/mach-akita-vars.in    | 3 +--
-+ config/mach-config/mach-borzoi-vars.in   | 3 +--
-+ config/mach-config/mach-corgi-vars.in    | 3 +--
-+ config/mach-config/mach-husky-vars.in    | 3 +--
-+ config/mach-config/mach-poodle-vars.in   | 3 +--
-+ config/mach-config/mach-shepherd-vars.in | 3 +--
-+ config/mach-config/mach-spitz-vars.in    | 3 +--
-+ config/mach-config/mach-tosa-vars.in     | 3 +--
-+ 8 files changed, 8 insertions(+), 16 deletions(-)
++ klcc/klcc.in | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/config/mach-config/mach-akita-vars.in b/config/mach-config/mach-akita-vars.in
-+index c4cb671..dffc694 100644
-+--- a/config/mach-config/mach-akita-vars.in
-++++ b/config/mach-config/mach-akita-vars.in
-+@@ -5,9 +5,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
+ diff --git a/klcc/klcc.in b/klcc/klcc.in
+ index 43d0984..61e9385 100644
+ --- a/klcc/klcc.in
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
+index 316c80a..f28cd54 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-config-eabi.patch
+@@ -1,12 +1,22 @@
++From 1118cc971917abe19ddb029aa80417f6fd6bb343 Mon Sep 17 00:00:00 2001
++From: Thomas Kunze <thommycheck@gmx.de>
++Date: Sat, 6 Aug 2011 05:30:14 +0000
++Subject: [PATCH] klibc: initial commit of version 1.5.24
++
+ Patch was imported from the OpenEmbedded git server
+ (git://git.openembedded.org/openembedded)
+ as of commit id b6764cf32ec93547531130dca364fb95e1c495f4
+ Signed-off-by: Thomas Kunze <thommycheck@gmx.de>
+ 
+-diff -Nur klibc-1.5/defconfig klibc-1.5p/defconfig
+---- klibc-1.5/defconfig	2007-03-04 02:52:10.000000000 +0100
+-+++ klibc-1.5p/defconfig	2008-02-08 19:24:22.337127756 +0100
+-@@ -5,4 +5,4 @@
++---
++ defconfig | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/defconfig b/defconfig
++index 04b98e9..0cb23d0 100644
++--- a/defconfig
+++++ b/defconfig
++@@ -6,4 +6,4 @@ CONFIG_KLIBC_ZLIB=y
+  CONFIG_REGPARM=y
+  # ARM options
+  # CONFIG_KLIBC_THUMB is not set
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch
+index 2043064..a5563b7 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klibc-linux-libc-dev.patch
+@@ -1,15 +1,22 @@
++From 1be2bc41f915922102a3ba671b54c2df6f0052e6 Mon Sep 17 00:00:00 2001
++From: Ben Hutchings <ben@decadent.org.uk>
++Date: Sun, 14 Mar 2010 18:41:56 +0000
++Subject: [PATCH] klibc_1.5.26: now build against linux-libc-headers
++
+ commit 43adf69062254fb4f8d4d11fb5fe36a60ae25d5a
+-Author: Ben Hutchings <ben@decadent.org.uk>
+-Date:   Sun Mar 14 18:41:56 2010 +0000
+ 
+     Taken from debian "Fix klibc Debian specific build trouble"
+     Adapted for klibc_2.0.2
+ 
+-Index: klibc-2.0~rc2/scripts/Kbuild.install
+-===================================================================
+---- klibc-2.0~rc2.orig/scripts/Kbuild.install	2012-02-11 18:50:21.000000000 +0000
+-+++ klibc-2.0~rc2/scripts/Kbuild.install	2012-02-11 19:04:52.000000000 +0000
+-@@ -95,7 +95,9 @@
++---
++ scripts/Kbuild.install | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/scripts/Kbuild.install b/scripts/Kbuild.install
++index 8af5697..d32a8a5 100644
++--- a/scripts/Kbuild.install
+++++ b/scripts/Kbuild.install
++@@ -95,7 +95,9 @@ header:
+  	$(Q)mkdir -p $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
+  	$(Q)mkdir -p $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)lib
+  	$(Q)mkdir -p $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)bin
+@@ -18,5 +25,5 @@ Index: klibc-2.0~rc2/scripts/Kbuild.install
+ +		ln -sf $${x} $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/ || exit; \
+ +	done
+  	$(Q)cp -rf usr/include/. $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/.
+- 	$(Q)chmod -R a+rX $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
++ 	$(Q)chmod -R a+rX,go-w $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
+  	$(Q)$(install-data) $(srctree)/klcc/klcc.1 $(INSTALLROOT)$(mandir)/man1/$(KCROSS)klcc.1
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
+index c01c712..5c7a662 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/staging.patch
+@@ -1,3 +1,8 @@
++From 1892079b827cf8f8316305b6d6e0985db82441a2 Mon Sep 17 00:00:00 2001
++From: Thomas Kunze <thommycheck@gmx.de>
++Date: Sat, 6 Aug 2011 05:30:14 +0000
++Subject: [PATCH] klibc: initial commit of version 1.5.24
++
+ Patch was imported from the OpenEmbedded git server
+ (git://git.openembedded.org/openembedded)
+ as of commit id eefb99a313bbcc8f34c8b32bf0c5aa2dd2580735
+@@ -6,11 +11,25 @@ Signed-off-by: Thomas Kunze <thommycheck@gmx.de>
+ Minor edits following upstream changes
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ 
+-Index: klibc-1.5.24/scripts/Kbuild.install
+-===================================================================
+---- a/scripts/Kbuild.install	2011-07-27 15:50:53.000000000 +0200
+-+++ b/scripts/Kbuild.install	2011-08-01 00:03:03.000000000 +0200
+-@@ -88,13 +88,10 @@
++---
++ scripts/Kbuild.install    | 4 ----
++ usr/dash/Kbuild           | 2 --
++ usr/gzip/Kbuild           | 2 --
++ usr/kinit/Kbuild          | 2 --
++ usr/kinit/fstype/Kbuild   | 2 --
++ usr/kinit/ipconfig/Kbuild | 2 --
++ usr/kinit/nfsmount/Kbuild | 2 --
++ usr/kinit/resume/Kbuild   | 2 --
++ usr/kinit/run-init/Kbuild | 2 --
++ usr/klibc/Kbuild          | 2 --
++ usr/utils/Kbuild          | 2 --
++ 11 files changed, 24 deletions(-)
++
++diff --git a/scripts/Kbuild.install b/scripts/Kbuild.install
++index d32a8a5..fda699d 100644
++--- a/scripts/Kbuild.install
+++++ b/scripts/Kbuild.install
++@@ -88,19 +88,15 @@ else
+  header:
+  	$(Q)echo "  INSTALL headers + man pages to $(INSTALLROOT)$(INSTALLDIR)"
+  	$(Q)mkdir -p $(INSTALLROOT)$(bindir)
+@@ -24,119 +43,107 @@ Index: klibc-1.5.24/scripts/Kbuild.install
+  	$(Q)for x in ../../../include/asm ../../../include/asm-generic ../../../include/linux ../../../include/mtd; do \
+  		ln -sf $${x} $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/ || exit; \
+  	done
+-@@ -103,7 +100,6 @@
+- 	done
+  	$(Q)cp -rf usr/include/. $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/.
+  	$(Q)chmod -R a+rX,go-w $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
+ -	$(Q)$(install-data) $(srctree)/klcc/klcc.1 $(INSTALLROOT)$(mandir)/man1/$(KCROSS)klcc.1
+  	$(Q)$(install-bin) $(objtree)/klcc/$(KCROSS)klcc $(INSTALLROOT)$(bindir)
   
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
-@@ -8,10 +25,14 @@
- +TSKEYS_DEVICE=/dev/input/touchscreen0
+  footer: header
+-
+-Index: klibc-1.5.24/usr/dash/Kbuild
+-===================================================================
+---- a/usr/dash/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/dash/Kbuild	2011-08-01 00:07:56.000000000 +0200
+-@@ -92,5 +92,3 @@
++diff --git a/usr/dash/Kbuild b/usr/dash/Kbuild
++index 3a98c1f..1a6920a 100644
++--- a/usr/dash/Kbuild
+++++ b/usr/dash/Kbuild
++@@ -92,5 +92,3 @@ $(obj)/syntax.c: $(obj)/mksyntax
+  $(obj)/syntax.h: $(obj)/syntax.c
+  	$(Q):
   
-  ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
--\ No newline at end of file
----- /tmp/mach-borzoi-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-borzoi-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -5,6 +5,6 @@
-+-
-+ export XRANDR_LANDSCAPE=right
-+ export XRANDR_PORTRAIT=normal
-+diff --git a/config/mach-config/mach-borzoi-vars.in b/config/mach-config/mach-borzoi-vars.in
-+index 55cba7f..d27bf2f 100644
-+--- a/config/mach-config/mach-borzoi-vars.in
-++++ b/config/mach-config/mach-borzoi-vars.in
-+@@ -5,9 +5,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
+ -# Targets to install
+ -install-y := sh.shared
+-
+-Index: klibc-1.5.24/usr/gzip/Kbuild
+-===================================================================
+---- a/usr/gzip/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/gzip/Kbuild	2011-08-01 00:06:39.000000000 +0200
+-@@ -21,5 +21,3 @@
++diff --git a/usr/gzip/Kbuild b/usr/gzip/Kbuild
++index 9bbf0a4..c497d02 100644
++--- a/usr/gzip/Kbuild
+++++ b/usr/gzip/Kbuild
++@@ -21,5 +21,3 @@ $(obj)/gunzip $(obj)/zcat: $(obj)/gzip
+  # Cleaning
+  targets := gzip gzip.g gunzip zcat
   
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
-@@ -19,10 +40,14 @@
- +TSKEYS_DEVICE=/dev/input/touchscreen0
+ -# Targets to install
+ -install-y := gzip gunzip zcat
+-
+-Index: klibc-1.5.24/usr/kinit/fstype/Kbuild
+-===================================================================
+---- a/usr/kinit/fstype/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/kinit/fstype/Kbuild	2011-08-01 00:09:12.000000000 +0200
+-@@ -21,5 +21,3 @@
++diff --git a/usr/kinit/Kbuild b/usr/kinit/Kbuild
++index 5320127..f7fdccd 100644
++--- a/usr/kinit/Kbuild
+++++ b/usr/kinit/Kbuild
++@@ -33,5 +33,3 @@ targets += kinit kinit.g kinit.shared kinit.shared.g
++ subdir- := fstype ipconfig nfsmount resume run-init
++ 
++ 
++-# install binary
++-install-y := kinit kinit.shared
++diff --git a/usr/kinit/fstype/Kbuild b/usr/kinit/fstype/Kbuild
++index 9b20db1..367611d 100644
++--- a/usr/kinit/fstype/Kbuild
+++++ b/usr/kinit/fstype/Kbuild
++@@ -21,5 +21,3 @@ shared/fstype-y := $(objs)
+  # Cleaning
+  clean-dirs := static shared
   
-  ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
--\ No newline at end of file
----- /tmp/mach-corgi-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-corgi-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -5,6 +5,6 @@
-+-
-+ export XRANDR_LANDSCAPE=right
-+ export XRANDR_PORTRAIT=normal
-+diff --git a/config/mach-config/mach-corgi-vars.in b/config/mach-config/mach-corgi-vars.in
-+index 548ada2..fac5a0a 100644
-+--- a/config/mach-config/mach-corgi-vars.in
-++++ b/config/mach-config/mach-corgi-vars.in
-+@@ -5,9 +5,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
+ -# install binary
+ -install-y := $(shared-y)
+-
+-Index: klibc-1.5.24/usr/kinit/ipconfig/Kbuild
+-===================================================================
+---- a/usr/kinit/ipconfig/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/kinit/ipconfig/Kbuild	2011-08-01 00:10:52.000000000 +0200
+-@@ -27,5 +27,3 @@
++diff --git a/usr/kinit/ipconfig/Kbuild b/usr/kinit/ipconfig/Kbuild
++index 7f8d181..eb1d472 100644
++--- a/usr/kinit/ipconfig/Kbuild
+++++ b/usr/kinit/ipconfig/Kbuild
++@@ -27,5 +27,3 @@ shared/ipconfig-y := $(objs)
+  # Cleaning
+  clean-dirs := static shared
   
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
-@@ -30,10 +55,14 @@
- +TSKEYS_DEVICE=/dev/input/touchscreen0
+ -# install binary
+ -install-y := $(shared-y)
+-
+-Index: klibc-1.5.24/usr/kinit/Kbuild
+-===================================================================
+---- a/usr/kinit/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/kinit/Kbuild	2011-08-01 00:20:18.000000000 +0200
+-@@ -33,5 +33,3 @@
+- subdir- := fstype ipconfig nfsmount resume run-init
+- 
+- 
+--# install binary
+--install-y := kinit kinit.shared
+-
+-Index: klibc-1.5.24/usr/kinit/nfsmount/Kbuild
+-===================================================================
+---- a/usr/kinit/nfsmount/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/kinit/nfsmount/Kbuild	2011-08-01 00:12:52.000000000 +0200
+-@@ -23,5 +23,3 @@
++diff --git a/usr/kinit/nfsmount/Kbuild b/usr/kinit/nfsmount/Kbuild
++index 461e6f3..ba31708 100644
++--- a/usr/kinit/nfsmount/Kbuild
+++++ b/usr/kinit/nfsmount/Kbuild
++@@ -23,5 +23,3 @@ dummypmap-y := dummypmap_test.o
   
-  ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
--\ No newline at end of file
----- /tmp/mach-husky-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-husky-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -5,6 +5,6 @@
-+-
-+ export XRANDR_LANDSCAPE=normal
-+ export XRANDR_PORTRAIT=left
-+diff --git a/config/mach-config/mach-husky-vars.in b/config/mach-config/mach-husky-vars.in
-+index b6e4ab8..ef7c09e 100644
-+--- a/config/mach-config/mach-husky-vars.in
-++++ b/config/mach-config/mach-husky-vars.in
-+@@ -5,9 +5,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
+  clean-dirs := static shared
   
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
-@@ -41,10 +70,14 @@
- +TSKEYS_DEVICE=/dev/input/touchscreen0
+ -# Install binary
+ -install-y := $(shared-y)
+-
+-Index: klibc-1.5.24/usr/kinit/resume/Kbuild
+-===================================================================
+---- a/usr/kinit/resume/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/kinit/resume/Kbuild	2011-08-01 00:13:51.000000000 +0200
+-@@ -26,5 +26,3 @@
++diff --git a/usr/kinit/resume/Kbuild b/usr/kinit/resume/Kbuild
++index 034195d..c1342e1 100644
++--- a/usr/kinit/resume/Kbuild
+++++ b/usr/kinit/resume/Kbuild
++@@ -26,5 +26,3 @@ shared/resume-lib := ../lib.a
+  # Cleaning
+  clean-dirs := static shared
   
-  ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
--\ No newline at end of file
----- /tmp/mach-poodle-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-poodle-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -4,6 +4,6 @@
-+-
-+ export XRANDR_LANDSCAPE=normal
-+ export XRANDR_PORTRAIT=left
-+diff --git a/config/mach-config/mach-poodle-vars.in b/config/mach-config/mach-poodle-vars.in
-+index 71af6d7..fc3e2c7 100644
-+--- a/config/mach-config/mach-poodle-vars.in
-++++ b/config/mach-config/mach-poodle-vars.in
-+@@ -4,9 +4,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
+ -# install binary
+ -install-y := $(shared-y)
+-
+-Index: klibc-1.5.24/usr/kinit/run-init/Kbuild
+-===================================================================
+---- a/usr/kinit/run-init/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/kinit/run-init/Kbuild	2011-08-01 00:14:41.000000000 +0200
+-@@ -25,5 +25,3 @@
++diff --git a/usr/kinit/run-init/Kbuild b/usr/kinit/run-init/Kbuild
++index f7832b7..c153b0a 100644
++--- a/usr/kinit/run-init/Kbuild
+++++ b/usr/kinit/run-init/Kbuild
++@@ -30,5 +30,3 @@ shared/run-init-lib := ../lib.a
+  # Cleaning
+  clean-dirs := static shared
   
-  #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
-@@ -52,10 +85,14 @@
- +#TSKEYS_DEVICE=/dev/input/touchscreen0
+ -# install binary
+ -install-y := $(shared-y)
+-
+-Index: klibc-1.5.24/usr/klibc/Kbuild
+-===================================================================
+---- a/usr/klibc/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/klibc/Kbuild	2011-08-01 00:18:11.000000000 +0200
+-@@ -177,5 +177,3 @@
++diff --git a/usr/klibc/Kbuild b/usr/klibc/Kbuild
++index eba6add..98caf2e 100644
++--- a/usr/klibc/Kbuild
+++++ b/usr/klibc/Kbuild
++@@ -185,5 +185,3 @@ install-rule:
+  	          $(INSTALLROOT)$(INSTALLDIR)/$(KLIBCCROSS)lib))
+  	$(Q)$(install-lib) $(obj)/klibc-$(SOLIBHASH).so \
+  	                      $(INSTALLROOT)$(INSTALLDIR)/$(KLIBCCROSS)lib
+ -	$(Q)$(install-lib) $(obj)/klibc-$(SOLIBHASH).so \
+ -	                      $(INSTALLROOT)$(SHLIBDIR)
+-
+-Index: klibc-1.5.24/usr/utils/Kbuild
+-===================================================================
+---- a/usr/utils/Kbuild	2011-07-27 15:50:53.000000000 +0200
+-+++ b/usr/utils/Kbuild	2011-08-01 00:19:13.000000000 +0200
+-@@ -72,5 +72,3 @@
++diff --git a/usr/utils/Kbuild b/usr/utils/Kbuild
++index 05aa794..67d9486 100644
++--- a/usr/utils/Kbuild
+++++ b/usr/utils/Kbuild
++@@ -72,5 +72,3 @@ $(obj)/shared/reboot $(obj)/shared/poweroff: $(obj)/shared/halt
+  # Clean deletes the static and shared dir
+  clean-dirs := static shared
   
-  ALSA_MIXER_INIT=@appconfdir@/alsa/poodle-default.state
--\ No newline at end of file
----- /tmp/mach-shepherd-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-shepherd-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -5,6 +5,6 @@
-+-
-+ export XRANDR_LANDSCAPE=normal
-+ export XRANDR_PORTRAIT=left
-+diff --git a/config/mach-config/mach-shepherd-vars.in b/config/mach-config/mach-shepherd-vars.in
-+index c77eb56..90f5ab3 100644
-+--- a/config/mach-config/mach-shepherd-vars.in
-++++ b/config/mach-config/mach-shepherd-vars.in
-+@@ -5,9 +5,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
-  
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-c7x0.conf
-@@ -63,10 +100,14 @@
- +TSKEYS_DEVICE=/dev/input/touchscreen0
-  
-  ALSA_MIXER_INIT=@appconfdir@/alsa/c7x0-default.state
--\ No newline at end of file
----- /tmp/mach-spitz-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-spitz-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -5,6 +5,6 @@
-+-
-+ export XRANDR_LANDSCAPE=normal
-+ export XRANDR_PORTRAIT=left
-+diff --git a/config/mach-config/mach-spitz-vars.in b/config/mach-config/mach-spitz-vars.in
-+index 55cba7f..d27bf2f 100644
-+--- a/config/mach-config/mach-spitz-vars.in
-++++ b/config/mach-config/mach-spitz-vars.in
-+@@ -5,9 +5,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
-  
-  TSKEYS_CONF=@appconfdir@/tskeys/zaurus-cxx00.conf
-@@ -74,10 +115,14 @@
- +TSKEYS_DEVICE=/dev/input/touchscreen0
-  
-  ALSA_MIXER_INIT=@appconfdir@/alsa/cxx00-default.state
--\ No newline at end of file
----- /tmp/mach-tosa-vars.in	2009-04-28 16:39:58.000000000 +0200
--+++ zaurusd/config/mach-config/mach-tosa-vars.in	2009-04-28 16:40:06.000000000 +0200
--@@ -4,6 +4,6 @@
-+-
-+ export XRANDR_LANDSCAPE=right
-+ export XRANDR_PORTRAIT=normal
-+diff --git a/config/mach-config/mach-tosa-vars.in b/config/mach-config/mach-tosa-vars.in
-+index 97f0e93..97f75b9 100644
-+--- a/config/mach-config/mach-tosa-vars.in
-++++ b/config/mach-config/mach-tosa-vars.in
-+@@ -4,9 +4,8 @@ export SWITCH_EVENT_ZMIXER=1
-  SWITCH_EVENT_DEVICE=/dev/input/event0
-  
-  #TSKEYS_CONF=@appconfdir@/tskeys/zaurus-clamshell.conf
-@@ -85,4 +130,6 @@
- +#TSKEYS_DEVICE=/dev/input/touchscreen0
-  
-  ALSA_MIXER_INIT=@appconfdir@/alsa/6000x-default.state
--\ No newline at end of file
-+-
-+ export XRANDR_LANDSCAPE=normal
-+ export XRANDR_PORTRAIT=left
 -- 
 2.7.4
 
