@@ -1,51 +1,52 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EBF4474861
+Return-Path: <christophe.priouzeau@st.com>
+X-Greylist: delayed 3641 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 10 Apr 2018 15:23:37 UTC
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+	[91.207.212.93])
+	by mail.openembedded.org (Postfix) with ESMTP id E9F9074827
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 15:02:33 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id f63-v6so11448541oic.4
+	Tue, 10 Apr 2018 15:23:37 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+	by mx08-.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id w3AEEGGp007647
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 08:02:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=T89npmFMTaTYdH3XB/cKx0042gc8NUW0drE/Rdsm57g=;
-	b=bnSsVONgAD4yzYyp7Ks38UXFDbA11NnpidV1szkQk2dN2ZDTkmN5T8ot9W768UX7te
-	ODUmp4xi6auQddmnXl7YVg6n0q6zkcuuCCtC/s1Ae29QHzmeVGoDAYcMTVFTBi+RLfsZ
-	F/z9xCsGS4Vo3cqL6OtbYN8B2R2a7pwES+38oAwB3SvCBNRmt3Nnq+dqhz8Z8vnMv7o9
-	iFfMLsW3CPWNog2D1FfIyVgLzK+0OG1lGHtZG3Ph+KEKxvS2ZPvXFO/T9hJibD1CzY0P
-	RGhu5uaJavp2IjeDezsXsfptEniAHeRUztFDxi/gPuFskJFcPRLYQM0vUc4dvLQ8XMbc
-	T+7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=T89npmFMTaTYdH3XB/cKx0042gc8NUW0drE/Rdsm57g=;
-	b=WJSdBhByY7ILAET8I5HrxL2gcR3X+Ej7gNLmfzyGDhaqC3LLtza1qj+M28cYM/aniH
-	1Zaup908bs2k2k6fFk04JuA6vcPZ4/xrrF5Y+/JShaTrs5ugoHZethSoAVmrXvfWKmuY
-	SyrpMVy5zEkgE9H3r/7mxyl8KM40r4AgROmRUfEThfwAY/1D8ellZv9S84yOBrj+eviw
-	8ye/Qz/19OkpwMJWFcfTl3W3IsR6+DtCnY778UEOhmlIX4sHPNc6XVzXfPQ6fiHV79GF
-	/tXnnQKQV9TyMyW2q8VEQNWi09iAXlvAM+AWTpcZiSBxJBUSUfd4TMp8XB2dLwUrLIoH
-	uRXQ==
-X-Gm-Message-State: ALQs6tCloNRRyMJdNqQD4peAXAAkN2Dqaep3GNXFZagMcgzYtuEHC9Z2
-	NbPk1VAWd/Ut/wVmi45TdlTPgAoDuNWaF0iYKC0=
-X-Google-Smtp-Source: AIpwx4+qfbM/MduP4ncYUOSNzEfrBNAtUcn0ubIWneZQUDqKdPuLzUznpgH3UBGCGaOgv1AaizEKEqtfKvrscJOISOQ=
-X-Received: by 2002:aca:af0e:: with SMTP id
-	y14-v6mr535769oie.224.1523372553311; 
-	Tue, 10 Apr 2018 08:02:33 -0700 (PDT)
+	Tue, 10 Apr 2018 16:22:57 +0200
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+	by mx08-00178001.pphosted.com with ESMTP id 2h8cecw121-1
+	(version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2018 16:22:57 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 910593D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2018 14:22:56 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+	by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5F770132F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Apr 2018 14:22:56 +0000 (GMT)
+Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE3.st.com
+	(10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
+	Tue, 10 Apr 2018 16:22:55 +0200
+Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
+	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
+	15.00.1347.000; Tue, 10 Apr 2018 16:22:55 +0200
+From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCH] minicoredumper: relocate admin-binaries to sbin
+Thread-Index: AQHT0NdqQyoSYFxIrU6qKcppDmn+yw==
+Date: Tue, 10 Apr 2018 14:22:55 +0000
+Message-ID: <1523370174-24440-1-git-send-email-christophe.priouzeau@st.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
-Received: by 10.201.25.81 with HTTP; Tue, 10 Apr 2018 08:02:32 -0700 (PDT)
-In-Reply-To: <4bc04e65-e5c8-7a7a-5731-72afd624b0c3@gmail.com>
-References: <20180409220249.11796-1-schnitzeltony@gmail.com>
-	<20180409220249.11796-2-schnitzeltony@gmail.com>
-	<4bc04e65-e5c8-7a7a-5731-72afd624b0c3@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 10 Apr 2018 17:02:32 +0200
-Message-ID: <CALbNGRTJF5vpgvoY71ag7kcF-+-qSvsgw8JaRU-GnOMokpUHsg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/9] networkmanager: fix gobject-introspection/musl and cleanup
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-04-10_05:, , signatures=0
+Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+Subject: [meta-oe][PATCH] minicoredumper: relocate admin-binaries to sbin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,21 +59,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2018 15:02:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 10 Apr 2018 15:23:38 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 10, 2018 at 4:53 PM, akuster808 <akuster808@gmail.com> wrote:
->
->
-> On 04/09/2018 03:02 PM, Andreas M=C3=BCller wrote:
->> This adresses the comments for recent patch which updated nm to 1.10.6 a=
-nd is a
->> follow-up for [1].
->
-> There is a form of this  already in my stagging/master-next. Should it
-> be removed and replaced by this one?
-Please replace - with the first version I introduced a parse error!
+Sine the commit "relocate admin-binaries to sbin" on minicoredumper,
+minicoredumper binaries are installed on /usr/sbin directory instead
+of /usr/bin.
+src/minicoredumper/Makefile.am: sbin_PROGRAMS =3D minicoredumper
 
-Andreas
+
+Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
+---
+ meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init    | 2 +-
+ meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.ini=
+t b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+index 90ef7fa..9c96e31 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
++++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+@@ -22,7 +22,7 @@
+=20
+ case "$1" in
+     start)
+-        echo "|/usr/bin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/k=
+ernel/core_pattern
++        echo "|/usr/sbin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/=
+kernel/core_pattern
+         ;;
+     stop)
+         echo "core" > /proc/sys/kernel/core_pattern
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.ser=
+vice b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+index 851b54c..45d098f 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
++++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+@@ -4,7 +4,7 @@ Description=3DEnable minicoredumper.
+ [Service]
+ Type=3Doneshot
+ RemainAfterExit=3Dyes
+-ExecStart=3D/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%g %%=
+s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
++ExecStart=3D/bin/sh -c '/bin/echo "|/usr/sbin/minicoredumper %%p %%u %%g %=
+%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
+ ExecStop=3D/bin/sh -c '/bin/echo "core" > /proc/sys/kernel/core_pattern'
+=20
+ [Install]
+--=20
+2.7.4
 
