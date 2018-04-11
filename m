@@ -1,24 +1,25 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id 787276067D
+Return-Path: <krzk@kernel.org>
+X-Greylist: delayed 476 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 11 Apr 2018 09:59:54 UTC
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B7AB2745AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2018 08:06:22 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.84_2)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1f6Ajj-0001WQ-LL for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Apr 2018 10:04:11 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 11 Apr 2018 09:59:54 +0000 (UTC)
+Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 5B5AA21737;
+	Wed, 11 Apr 2018 09:51:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B5AA21737
+Authentication-Results: mail.kernel.org;
+	dmarc=none (p=none dis=none) header.from=kernel.org
+Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=krzk@kernel.org
+From: Krzysztof Kozlowski <krzk@kernel.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 11 Apr 2018 10:06:15 +0200
-Message-ID: <pakfhl$siq$1@blaine.gmane.org>
-References: <1523374768-657-1-git-send-email-christophe.priouzeau@st.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@blaine.gmane.org
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
-	Gecko/20100101 Thunderbird/52.6.0
-In-Reply-To: <1523374768-657-1-git-send-email-christophe.priouzeau@st.com>
-Subject: Re: [meta-oe][PATCH v2] minicoredumper: relocate admin-binaries to sbin
+Date: Wed, 11 Apr 2018 11:51:41 +0200
+Message-Id: <1523440301-20150-1-git-send-email-krzk@kernel.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python3-websockets: Add new recipe for v4.0.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,59 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2018 08:06:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: nl
+X-List-Received-Date: Wed, 11 Apr 2018 09:59:54 -0000
 
-Op 10-04-18 om 17:39 schreef Christophe PRIOUZEAU:
-> Change path of minicoredumper on init/service script to /usr/sbin.
-> 
-> Since the commit "relocate admin-binaries to sbin" on minicoredumper,
-> minicoredumper binaries are installed on /usr/sbin directory instead
-> of /usr/bin.
-> src/minicoredumper/Makefile.am: sbin_PROGRAMS = minicoredumper
-> 
-> Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
-> ---
->  meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init    | 2 +-
->  meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
-> index 90ef7fa..9c96e31 100644
-> --- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
-> +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
-> @@ -22,7 +22,7 @@
->  
->  case "$1" in
->      start)
-> -        echo "|/usr/bin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
-> +        echo "|/usr/sbin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
->          ;;
->      stop)
->          echo "core" > /proc/sys/kernel/core_pattern
-> diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
-> index 851b54c..45d098f 100644
-> --- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
-> +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
-> @@ -4,7 +4,7 @@ Description=Enable minicoredumper.
->  [Service]
->  Type=oneshot
->  RemainAfterExit=yes
-> -ExecStart=/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
-> +ExecStart=/bin/sh -c '/bin/echo "|/usr/sbin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
->  ExecStop=/bin/sh -c '/bin/echo "core" > /proc/sys/kernel/core_pattern'
->  
->  [Install]
+Add recipe for python3-websockets v4.0.1.  Strictly speaking the package
+does not require asyncio but instead builds on top of it and it is
+essential for any work.
 
+Make this recipe a native one to allow usage for example in image tests
+as a websocket client talking to a device under test.
 
-You're trading one hardcoded entry for another, a bettter way would be to do something like
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+---
+ .../recipes-devtools/python/python3-websockets_4.0.1.bb  | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
 
-do_install_append() {
-	sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g <files>
-}
-
-That would fix the situation for DISTROs where $prefix = "".
+diff --git a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb b/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+new file mode 100644
+index 000000000000..414129c59d2f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "An implementation of the WebSocket Protocol (RFC 6455)"
++HOMEPAGE = "https://github.com/aaugustin/websockets"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5070256738c06d2e59adbec1f4057dac"
++
++inherit pypi setuptools3
++
++SRC_URI[md5sum] = "9e8c6b3c70def4146d75fbb0f52bdfc7"
++SRC_URI[sha256sum] = "da4d4fbe059b0453e726d6d993760065d69b823a27efc3040402a6fcfe6a1ed9"
++
++BBCLASSEXTEND = "native nativesdk"
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-asyncio \
++"
+-- 
+2.7.4
 
 
