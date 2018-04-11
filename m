@@ -1,52 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 05F79746A8
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 787276067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 23:54:49 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id l27so20674pfk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Apr 2018 16:54:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=EQyOq/3p+aJYdbZhb+Xx6IABQWFFO3QHfqHrKHGEWSM=;
-	b=CwvrDh36jQrYnXJlcHZvRa3dOGRFFSZOIWtB6g0Vyjon7mJtIjCJcJNk4eiwfkf2Ue
-	1ko2yBZRMa6heoho1i1mA8RIKTjkJvsXYAkQhtdKDTBEnwuPEUtXW5ZvKq5MnlgElNRY
-	VsunlnGJ124juHQsp9GU6tk3uQ2IcfwsmtqBoI8rvFU7D1rdrQaMrJuG9ZbYuzpNLlr2
-	HvdawYW/deenNkn/7NE1UmgHU37UOJcjhh9Ixaa5voxrou30W605ZRm1NZ2rOUZCkpR5
-	hT/yTaoeDThCCwGDQNluvx+p+I51PvaAyPG4ai5XCUumAmXzJjynlOQR+GabKtAfNg8S
-	LfFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EQyOq/3p+aJYdbZhb+Xx6IABQWFFO3QHfqHrKHGEWSM=;
-	b=a+n546/2sltsfIOB0+XFvuhgXqZU745/zt/LGnJDYEW5BVMNG5/HHXKmRd4XLCZgw0
-	eI66oo7yd7PTO0mIiBd8rS6zC1nm/dZkmVv+qLXdOvnm6Ikce4EEwDwRqt05tHpcFSZw
-	4wFzJWvy4XLCzaOwnAcDjx6WOA109PSIjoBPRBarQ99l+fQYN7gUp17p28wMPzEc2d9S
-	RZMie2hiyECfNbS/CbZ47pe80tJRixmFfrXa+mSFlsw0dF/sIOA11QjVjEhws0BCJNHh
-	L0g1c4xSeZPXNcg7+G316/lVTBjHTLBVoyhBUmiznBxGFyIdn5Ay9NFg4uUdna/Qncsd
-	XKbQ==
-X-Gm-Message-State: ALQs6tDHjX0+YH3bKcSeic+qH0XQ3kjqYuhxipDUZyXw2n6vYP+ZPXUr
-	3uFkqSlYLr6KFLxFDKDzn+o=
-X-Google-Smtp-Source: AIpwx4+BAPMzs9yi7LbcPLPuai8ctvnM3BLaHztZ0RheJG/0edisayg7cpNZWFVdKGgp25n8s3XcSQ==
-X-Received: by 10.99.96.147 with SMTP id u141mr1722934pgb.227.1523404491009;
-	Tue, 10 Apr 2018 16:54:51 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s ([2601:202:4000:1184:c5e:530c:2676:1226])
-	by smtp.gmail.com with ESMTPSA id
-	t65sm7479492pfe.174.2018.04.10.16.54.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Apr 2018 16:54:50 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
-Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
-	Tue, 10 Apr 2018 16:54:48 -0700
-To: akuster808@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Apr 2018 16:54:46 -0700
-Message-Id: <1523404486-21187-1-git-send-email-akuster@mvista.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][PATCH] ntp: update to 4.2.8.p11
+	Wed, 11 Apr 2018 08:06:22 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1f6Ajj-0001WQ-LL for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Apr 2018 10:04:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 11 Apr 2018 10:06:15 +0200
+Message-ID: <pakfhl$siq$1@blaine.gmane.org>
+References: <1523374768-657-1-git-send-email-christophe.priouzeau@st.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.6.0
+In-Reply-To: <1523374768-657-1-git-send-email-christophe.priouzeau@st.com>
+Subject: Re: [meta-oe][PATCH v2] minicoredumper: relocate admin-binaries to sbin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,44 +31,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Apr 2018 23:54:50 -0000
+X-List-Received-Date: Wed, 11 Apr 2018 08:06:22 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: nl
 
-This release addresses five security issues in ntpd:
+Op 10-04-18 om 17:39 schreef Christophe PRIOUZEAU:
+> Change path of minicoredumper on init/service script to /usr/sbin.
+> 
+> Since the commit "relocate admin-binaries to sbin" on minicoredumper,
+> minicoredumper binaries are installed on /usr/sbin directory instead
+> of /usr/bin.
+> src/minicoredumper/Makefile.am: sbin_PROGRAMS = minicoredumper
+> 
+> Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
+> ---
+>  meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init    | 2 +-
+>  meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+> index 90ef7fa..9c96e31 100644
+> --- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+> +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+> @@ -22,7 +22,7 @@
+>  
+>  case "$1" in
+>      start)
+> -        echo "|/usr/bin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
+> +        echo "|/usr/sbin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
+>          ;;
+>      stop)
+>          echo "core" > /proc/sys/kernel/core_pattern
+> diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+> index 851b54c..45d098f 100644
+> --- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+> +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+> @@ -4,7 +4,7 @@ Description=Enable minicoredumper.
+>  [Service]
+>  Type=oneshot
+>  RemainAfterExit=yes
+> -ExecStart=/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
+> +ExecStart=/bin/sh -c '/bin/echo "|/usr/sbin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
+>  ExecStop=/bin/sh -c '/bin/echo "core" > /proc/sys/kernel/core_pattern'
+>  
+>  [Install]
 
-  LOW/MEDIUM: Sec 3012 / CVE-2016-1549 / VU#961909: Sybil vulnerability: ephemeral association attack
-  INFO/MEDIUM: Sec 3412 / CVE-2018-7182 / VU#961909: ctl_getitem(): buffer read overrun leads to undefined behavior and information leak
-  LOW: Sec 3415 / CVE-2018-7170 / VU#961909: Multiple authenticated ephemeral associations
-  LOW: Sec 3453 / CVE-2018-7184 / VU#961909: Interleaved symmetric mode cannot recover from bad state
-  LOW/MEDIUM: Sec 3454 / CVE-2018-7185 / VU#961909: Unauthenticated packet can reset authenticated interleaved association
 
-one security issue in ntpq:
-  MEDIUM: Sec 3414 / CVE-2018-7183 / VU#961909: ntpq:decodearr() can write beyond its buffer limit
+You're trading one hardcoded entry for another, a bettter way would be to do something like
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- .../recipes-support/ntp/{ntp_4.2.8p10.bb => ntp_4.2.8p11.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p10.bb => ntp_4.2.8p11.bb} (97%)
+do_install_append() {
+	sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g <files>
+}
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
-similarity index 97%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
-index 6db165a..c698fa0 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "745384ed0dedb3f66b33fe84d66466f9"
--SRC_URI[sha256sum] = "ddd2366e64219b9efa0f7438e06800d0db394ac5c88e13c17b70d0dcdf99b99f"
-+SRC_URI[md5sum] = "00950ca2855579541896513e78295361"
-+SRC_URI[sha256sum] = "f14a39f753688252d683ff907035ffff106ba8d3db21309b742e09b5c3cd278e"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
--- 
-2.7.4
+That would fix the situation for DISTROs where $prefix = "".
 
 
