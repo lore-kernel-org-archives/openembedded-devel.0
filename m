@@ -1,106 +1,98 @@
 Return-Path: <niko.mauno@vaisala.com>
 Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0083.outbound.protection.outlook.com [104.47.2.83])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F0DE745DE
+	(mail-db5eur01on0088.outbound.protection.outlook.com [104.47.2.88])
+	by mail.openembedded.org (Postfix) with ESMTP id B64FB746DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2018 11:24:40 +0000 (UTC)
+	Wed, 11 Apr 2018 12:20:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
 	s=selector1; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version; 
-	bh=1lEq/PpHpD5RZG9HyjebsZBRi9TTsuRoOgYuvnFggNs=;
-	b=FpAPTHgXfZQESv1ReA3P+wFUSuEFiWyLoiSMlCARWqsyF55kfwzZ023M8CwBevWowiUV/TKf+2VdBEHXqppwqgIjUOUC49EkQQylEOketnc98s3rlSh72nSApfSKSnVzKvi3s9uSCdkGjdvA7vSdoAwLGLFp5dnQNmyEfkTzV2g=
+	bh=02W/vwEteOexI+QSHjfRCbDoLB6RG2juhsmu2A2lzlo=;
+	b=tUPd23s3eDIIf1rIoAeVttCSSIKBRTQJF89nIkh3A9fJrUubl6NJgLvAl6M6uwSq9f7gHUB1yBettHAIfjCS0AZMlam33mrO74isHLf4pfGOAAEB/nxQ0vQ5AL4KzhWd5DWD/KWYjyMVOV1N7DmOP/sHCiU2U7JTphbCkt6PO9Q=
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=niko.mauno@vaisala.com; 
-Received: from [172.24.64.128] (193.143.230.131) by
-	AM5PR0601MB2532.eurprd06.prod.outlook.com (2603:10a6:203:42::18) with
+Received: from ThinkStation.vaisala.com (193.143.230.131) by
+	AM5PR0601MB2529.eurprd06.prod.outlook.com (2603:10a6:203:42::15) with
 	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.675.9;
-	Wed, 11 Apr 2018 09:51:00 +0000
-To: Khem Raj <raj.khem@gmail.com>
-References: <20180409160652.4835-1-niko.mauno@vaisala.com>
-	<fc468dd4-19fe-c91f-1c57-8dec70ff5701@gmail.com>
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.675.10;
+	Wed, 11 Apr 2018 09:46:59 +0000
 From: Niko Mauno <niko.mauno@vaisala.com>
-Message-ID: <10355333-c489-1f50-5919-597b88ca1582@vaisala.com>
-Date: Wed, 11 Apr 2018 12:50:57 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Apr 2018 12:44:48 +0300
+Message-Id: <20180411094448.15363-1-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <fc468dd4-19fe-c91f-1c57-8dec70ff5701@gmail.com>
 X-Originating-IP: [193.143.230.131]
-X-ClientProxiedBy: VI1PR0501CA0013.eurprd05.prod.outlook.com
-	(2603:10a6:800:92::23) To AM5PR0601MB2532.eurprd06.prod.outlook.com
-	(2603:10a6:203:42::18)
+X-ClientProxiedBy: VI1PR0501CA0003.eurprd05.prod.outlook.com
+	(2603:10a6:800:92::13) To AM5PR0601MB2529.eurprd06.prod.outlook.com
+	(2603:10a6:203:42::15)
 X-MS-PublicTrafficType: Email
 X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
 	RULEID:(7020095)(4652020)(5600026)(4534165)(4627221)(201703031133081)(201702281549075)(2017052603328)(7153060)(7193020);
-	SRVR:AM5PR0601MB2532; 
-X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2532;
-	3:lDKl+xEDDiqWWIJwN8hH5kGJHGCiLFzFLHMcVsWC1rf8zzwGaaOzzn7ikQh7ApjlbdMlIZwU38g0nB5LgYQva8/SLjZRMPzo1mmaWqZWxS0jqzAXqrxSBBVF7T1+NeXT8oL6tnoosu3lz9nYhhifcaIg6R8pcAcxaqbs+iF5JC29X7a7CoHs6HEh/DalMNW01xOV5+fQG2L0ijcKijdLUY1fdgo3UMD4Uo4DdDCnQvFUT962olnGXjHNSFK3Jl6c;
-	25:ddfFXQ1UkAiZcD1RiqSgFrGQoiv9VavEtYiN9Jhf3NCmMJ13NkIc6gssQbBfxX+Hntd5hIAXNBgkmpZnoCfzdnYm7K08wm14V+dkVSAtXhe6MhKJh3WvVgWsVjv0JDq3cDF3O2V+uIO4RjEBfSEJ2NhXHCqG4Vz1Vp0nKGKVGqWM4QC1A5RYTYdBIiAJrRoUlVHxJy4ojTNYKPFSQ9zPpToZuUbzGGjYtgtQwOL1IQGwT6lSN8WaAFJWtGViTfjI1I6sGxGmA/lMDso7yi0AmSRJ/VP+tFviLzOK6WebiY5yK76HeW2euymMmdD8igb/KveIy/8fPpjl42p5NO1PXQ==;
-	31:V6j2vbSeaxetE5z9WQcUfFCrqFDjQ6dj7MVtS8owjHdUDcU6Iv1YW1hMArv16dug9rKQTdzWVqNdJOvfd3rTh98n3woGNGFQHINZK1LZpoe1l9YzQjOYA30+octNDSAtJ3g86bsEyR2uRR4N9pGnZ7Tlo71WWFpvUGDdMNG/c+HqjrycdQfi8iM1V/buclPQ/Y6fqvAuWMw3IVaRxa4IJWcZylNk1nlDuCRx5yI830s=
-X-MS-TrafficTypeDiagnostic: AM5PR0601MB2532:
+	SRVR:AM5PR0601MB2529; 
+X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2529;
+	3:TRyJ8TXShmjBY6QkVFgc6EobNXos+F31WM+Mc8FmAeRxPcx/z6Paj4SmRgg1+zHI6gkfjz6MlGcDSrO1q1pyCpTr3RlKyPAt37+vK/RdO2jK9QWSY2v9hxXRu7oF1sh/xKrnUwCENOXiu4sYUu429KcbN9MZDGDehgh5OlbG483d6pC8wquVG6ezw4qGXHJcMCHFm/d+cizPnO+v/WsfC+FxzRh3gnOvS10W+hglkx8mkvu+a3v1eD6LOW9QJDGY;
+	25:i7k71JuEvBgF7dL5WbF3GnoMHdUp08f2dF57F126RBH2fjeTROW50tKZmYRDly7XJGB/dJhkq/vcJKZu18w8EpUo6rR26Bd1f2ngdChhqXVeaaQbvd0l9W2yGJuufwoT3hiq3NdTB8EZLrnqRlnm7ZY9CwOhmSthyX+fNJWIjxFWV+PphlUZ6SRvY6sB+TrU1EJ2CuLOYUTXkVb1F/jRyalCyVfBhgYto8nZ93kNqMoZiP5ofgDN7zz8Sdnjnt3uR7IBFIVYdlrpMh3SK/0fOsZw92BcPEAhIDssFW6OdSTkkM0uE+e2dRNGW7SV0sGPOv2NMK8TdE6CRpHBbJHQBA==;
+	31:6M+J/OS9dwjD2/KvTDts6p+L/3eeC+wanLwYPNGPp1LbsAJ90L86DV69U57rLlOlN32nW413y4tqWjPCRIJsqtagCMfWRS794mzO85IQtTfRmLrm+7CnXVY1UZPBx24G7m8kQjcsFH7W7ZJSi/GTzjOKKW2HJYLgq8QUOvrMfDnIeDPeKFr5g2iGwkeCPqM7V4Qza6EkdutC1Sl4v2N86FGemspSEvlY27a7Z3PRhzA=
+X-MS-TrafficTypeDiagnostic: AM5PR0601MB2529:
 X-Tenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2532;
-	20:jcPsMyFE3c5ZnavPHeGfuI6Ks7DZYFpBdsAqMO6pP9kzW/qVrv9ICjML76yyN1B9qp1dOEiFUbzh+kzgqybej5nJ4s1SSErclAzl8n6Bll6sgoEh1SjVhv+5OkOoKut8+Azf76oGsRQqGnQuSZ9gyxCyRFYpEW2Jqgtu2MoXxuQ=;
-	4:o8byil0i7aOg6b46QWOik8dHZFrh85E6wKy7GfI7U2Ks45YPn6jQewrME2Qwn+H9N/8okuC3ryMTvJsdWIwIl3ZggKv0q1+lDjSsSw4u2oKyvkbHzJkQQRiknebEh+o/KqWFni8BmKkdx7n3mhRl2iUuRwPrPBHhhULjo1dEgYS0w3+jm3BalJWTdmkWvQs7gbzkWWkq/871upcsiFcOgEbhcl1MX/7ChN149mOgfedtlo8JzPWUKmTH+TTSgvFkboQMUGseeY6ZjJir60Hpcg==
-X-Microsoft-Antispam-PRVS: <AM5PR0601MB25320707BE00D68EB77DD40481BD0@AM5PR0601MB2532.eurprd06.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:;
+X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2529;
+	20:5m437WPTgXSbqg/Y79mtNUAwvzw4RctDMOtXzDRH50lFoaoNpDH9BX5c/UHJ1jpVEaDQb0AF5DHIOt6CBndLDruD3r6MXpS//oW751zYID7aJZR11hb/ljiZ7jgrt0I9tKMonqVuWVe0HkQ3Z4oQvaAknd7cstJYRANeilcuKlE=;
+	4:einAQ92UusD8KXJg4jcrzPnTCZbjsJkR4MKgaqMnYhbAQzBSJ9BhBntj/J4ntnDxCYoQXWb1KxJhgwDZt9bDcAOFQly16vJAcMSsrqJsd0FLthh7Yr+JTdX+S/n+kX2uRoBTtS4cTXsZV49EmnamOq86ktRpirsRcjDzv90KOfi1EPsWWIFXeT/mZ1GuGYwG/1qDWo2g84dyY//jfzMpt5VK+DFXoDuEQlRnGQOFVt2cIDBRX40OGumxQwqndt74Z3SXG+wp7uenEb7CRP8EpXdN1gAj9y1YmQaT0IHHs96pUD8XSmR+KEcv5PmnLX5bgKWNzAR0GYeVmZscxDVerZKyupUN3+abWjXAFFqeuFw=
+X-Microsoft-Antispam-PRVS: <AM5PR0601MB2529323373D8AD5CE4C3E5B281BD0@AM5PR0601MB2529.eurprd06.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:(166708455590820)(15185016700835);
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(6040522)(2401047)(8121501046)(5005006)(3002001)(10201501046)(3231221)(944501327)(52105095)(93006095)(93001095)(6041310)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123564045)(20161123560045)(20161123558120)(20161123562045)(6072148)(201708071742011);
-	SRVR:AM5PR0601MB2532; BCL:0; PCL:0; RULEID:;
-	SRVR:AM5PR0601MB2532; 
+	RULEID:(6040522)(2401047)(5005006)(8121501046)(93006095)(93001095)(3231221)(944501327)(52105095)(3002001)(10201501046)(6041310)(20161123560045)(20161123562045)(20161123558120)(20161123564045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(6072148)(201708071742011);
+	SRVR:AM5PR0601MB2529; BCL:0; PCL:0; RULEID:;
+	SRVR:AM5PR0601MB2529; 
 X-Forefront-PRVS: 0639027A9E
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(6049001)(346002)(396003)(39850400004)(39380400002)(376002)(366004)(199004)(189003)(105586002)(106356001)(230700001)(31686004)(11346002)(2906002)(25786009)(446003)(6116002)(478600001)(476003)(3846002)(956004)(2616005)(50466002)(97736004)(486006)(305945005)(58126008)(8936002)(4326008)(53546011)(386003)(68736007)(5660300001)(6246003)(52116002)(66066001)(81156014)(47776003)(76176011)(23756003)(65956001)(316002)(65806001)(8676002)(81166006)(64126003)(16576012)(7736002)(31696002)(36756003)(16526019)(186003)(39060400002)(77096007)(6916009)(86362001)(6486002)(26005)(6666003)(53936002)(65826007)(229853002)(67846002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:AM5PR0601MB2532;
-	H:[172.24.64.128]; FPR:; SPF:None; LANG:en; PTR:InfoNoRecords;
-	A:1; MX:1; 
+	SFS:(10009020)(346002)(39850400004)(366004)(396003)(39380400002)(376002)(189003)(199004)(97736004)(305945005)(36756003)(486006)(66066001)(47776003)(53936002)(6486002)(478600001)(6666003)(6916009)(16526019)(186003)(6306002)(69596002)(1857600001)(53376002)(7736002)(105586002)(2906002)(68736007)(6116002)(476003)(107886003)(1076002)(2616005)(956004)(53416004)(3846002)(86362001)(5660300001)(48376002)(316002)(25786009)(26005)(16586007)(50466002)(2361001)(7696005)(51416003)(81156014)(81166006)(8676002)(8936002)(52116002)(2351001)(59450400001)(386003)(50226002)(106356001)(4326008);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:AM5PR0601MB2529;
+	H:ThinkStation.vaisala.com; FPR:; SPF:None; LANG:en;
+	PTR:InfoNoRecords; MX:1; A:1; 
 Received-SPF: None (protection.outlook.com: vaisala.com does not designate
 	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?iso-8859-15?Q?1; AM5PR0601MB2532;
-	23:4mV365kk+zHabC+4DNyzU/8X8NxUUslApaXm?=
-	=?iso-8859-15?Q?hvlDiamrUP6hy+RADqlRGSMtiOPr2gKuYPBqJVQkwQl0YS7PGPxDq9ovy?=
-	=?iso-8859-15?Q?bev7K9zc+ZEFY70IVtJ2HLf3NyPiUWyjmh8WpCCgiVvFEMOzBKbm23s6g?=
-	=?iso-8859-15?Q?+6iWW8uUAREHHvyu2d9NHh7SAh9j9FO19WL5v1xH3RelKRZiV6ss0OWJ4?=
-	=?iso-8859-15?Q?Iq2C48MWpIQxt2NRQRG6xf9o8Zf6Xe5qJmhh+eUVYOtvS+2446PNG2BuD?=
-	=?iso-8859-15?Q?r9dSNxGG2bhxfDTMzV0Tcdq+Pka8Ndr0vHLoF1DGtvLq6cVhy6HQCbgxJ?=
-	=?iso-8859-15?Q?TAzwoXuvKKWdzfMvYwSRfkf0N9K402AiNTt099Sv5upbaV06dD149G5Ml?=
-	=?iso-8859-15?Q?0th1DyMc3UKvhuJXZFZNErXK3BREmPf0UzIchXvWlKu4+sfafRmiXzUTd?=
-	=?iso-8859-15?Q?6X5OVz2C7NEUHqrR9AWWnXfD0TNgYVcp11u7rX0KLTwZ7mU9Q/Y2ywGoz?=
-	=?iso-8859-15?Q?4gWB+ICN3lDH6/dEP9M/EyPS4rAf4HJ0Sl4A60YC8UFZkDPfXhZ/kGMH+?=
-	=?iso-8859-15?Q?GyS4OMmeiqeLbVDx5svxkkP99EsZ4CYWJGPX5wCTgJuhTch7WZfvA6yn7?=
-	=?iso-8859-15?Q?e6dEIn4/S99cgHk2kojcFE714s3qXWaSs9ZWjvrFBaUbJUDmKPtgYdE8X?=
-	=?iso-8859-15?Q?QG4QdaMqrjAlzcYe/RtMOdZQJwvFd/dObpVWUDmCuFyRb4p8+dN5cX9Mo?=
-	=?iso-8859-15?Q?51XqgOX4YGHJJdvSZCW1v4nAD4URp5IA7Vxh9St0Fuc8E1NO1Eb6NS1tw?=
-	=?iso-8859-15?Q?x6Z2v7k2lRpqC7GdQeoGPQJig0zVVTHYWIvutDulVGPOY/Eu8Cueymenj?=
-	=?iso-8859-15?Q?MCy8lz+u/TiccX9qJ9tHSXzgRJ8enyL0VXrH3CfJbZwyiY0rUk+gVg/4M?=
-	=?iso-8859-15?Q?svtqb3NeW2W+L/VsYyZ8qpqvNWvPgp9SXU1mp4NJF+DXd38DZvrbMA+R/?=
-	=?iso-8859-15?Q?45GrIzklHoTrMNZ9BGnm8V4HW0PKJ/qPnhekvW0tDd1UfQ5XIp/alSBRM?=
-	=?iso-8859-15?Q?7plRVWlAbE6ETrFTXQL2A/NEn1nQUhQ1v4EZ9dbIRkm1+Voy4qYoohVOF?=
-	=?iso-8859-15?Q?VxqY1CxD/sWDUxmdG9ihdntvZihAJ9sZtRTsgHqJuwgy1VWHTQfetWVMH?=
-	=?iso-8859-15?Q?98XJVveZl2zKNEytG+od+WVh9CGQhGVV/jji67BkubhIAsbZWlFrRFJ7b?=
-	=?iso-8859-15?Q?4YuExtBReSftPu8KY5XKIhdeE94BJM3pfIbLlZ/3u/eG4lpkwFHmDnZnc?=
-	=?iso-8859-15?Q?xQt4zWFgV8RyLERwY3PURXBmMLaTGfNHAVMeL4Cs9Jax9EZHvw+B9Th4l?=
-	=?iso-8859-15?Q?PkV7lTjmX+jwzN7vvtMTt1CQaVa0lRso8BwP6mprsOLKzfML+6vC/WFNq?=
-	=?iso-8859-15?Q?91ow2IGpzmnLcFEiuB0wotAjpi6XIGcb93wmcFRNoxgUHw8HcykIueDKZ?=
-	=?iso-8859-15?Q?EmVkXKCmQ/82WxxFOs2C5iSI4g=3D=3D?=
-X-Microsoft-Antispam-Message-Info: Q0o5IniE8Wa2h/0Cw6GFM7P7aACEEqi2dtpQI7J0O6qALwjcZFrVSfmIoH6ejbCjyQppmAJbn83fcbYLbt9+zQi6rRMiXKCITdvW+i+3AvBzr/uL9/xS0RjQ4V6/lsauxkAUxymDS6uEekAzwg/4kUu8S+29rcuMAuTWSLXhAtNu3zqZuBi6DiYGk467DZgj
-X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2532;
-	6:nZuYPnvkMQDjc+5Em7IFmHgcSjosdnhdm+Bic5d70ok8xvEFTDEWqELjkK7YXTNBDxTfCC3bzCRRCohijozK4/BfnD3d9T1XTHtDqbMahaKog11kwHKA27sXItxK8FvfyrCStjxb6rTiQ6lNfy7zCqsUxBYnBEciQiLha1ilow7GEWa1XPUJNtuKB/w861PNiD2PWFyQAgSa1TJyb57C7ER/IenozuVV/Z4pefHIOworYkMgb0sQVnG7l3yt6CcSiRC1BbMjgTHg6Fwb58qesbblge+OSb6D+Fdngo4wuJko0UxHlN0CPIupQGYh9f6/ntYfkKAvV03f0asJ7VL695ABugYLTJRdtsafof95SMVwpdrEKCIBEYbYNwT8AAfxJYP8h5C8Y764reDGrCKDY1RywdaIWTvOo9+s+rD2u0AVo8YyuRFsAHkXN1vAGxTlNCEKStRx2F3/xEHT8tJRvw==;
-	5:fCDP4qzP2+4KPclmO/P7LGic5HCpfPu8W3kB/M+x84H8VSv0eGoJIOV4KuweEy0hHYaI9YhupLdBIuCOo7+B9fDwkNLJO+NulloWPqDT4UlsrP1VmiL7m5I4kzQxOp2sA6XFWac6IawuB4SccaL4kr9USL+u1xfL4tYgQe7v6M0=;
-	24:Iyya4cAd8wge1MYG40VnTs7FQPivCFcVbd1wbnC2LAzRFeJ1LY1mUJaukuPLjnIq927jFqO5zUPqu9EZqRUxQito0N6fRljJAtCTtsaUJ/Q=
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; AM5PR0601MB2529;
+	23:05CEZx/YGSJJU59YD7JiC1+5SYPKifNbcf7qHGD?=
+	=?us-ascii?Q?Dx8pCCLt6cXk5N265viZYPmC6/dxG8BDBxDWIAcsjCb2FYO1S8n4MM6OEabj?=
+	=?us-ascii?Q?+rCtowAJapoOjGg9ePDngNFPsluYNEYo9p+oWWcnKPEtEuUdzRtXC9t9Yjum?=
+	=?us-ascii?Q?KRRMhXTNfXGu9+Bvr9LHbYI7SctVGbIW67lXZxoQc/LIEXPm6TWOqiey18Li?=
+	=?us-ascii?Q?ooaDAJ5FvthNptmvr+skfQyQhjz+75t+boUecgSwEroduIQqSV8EaOwMbUYD?=
+	=?us-ascii?Q?9XcieSch8SxIJqsOlPaHpdFzf15P5Ccbu5/mNqFwxzC7/cjPY3W52XGTmFo4?=
+	=?us-ascii?Q?+U63zOV2UzW93wYLUcyZr5EltE1tY58HUtPNluzfDqKLx9q3yGyRUrf9pmfv?=
+	=?us-ascii?Q?mrVB9uCF+sPr7/i5UplCe0+s4nUapr1tugiNR/Q0HJ0NVt/PMVs9yilHib/R?=
+	=?us-ascii?Q?U/RtD7pDCEp2X4Ak//EF+GeDuM2fOSoRnoz0Zt3BK+rO2oBFY0vfoOHhhG8r?=
+	=?us-ascii?Q?UsbFI18jcJUG9m+Ewcrr9XhNk67NZLNB2UkXcf3I6YuxJkf3pP0KM4RhZQlX?=
+	=?us-ascii?Q?YcPACbWN90+yLK2UlkLGsnmhyR3/gaUd+W7+UkC4z9Dj1LZf66yy6/JiOLZ3?=
+	=?us-ascii?Q?eCmTG7kSFbTeo15qI26q8HhtiuxOTAvtS1bSQkkM2C1Mjw2kvG6T1jcRQ8dL?=
+	=?us-ascii?Q?piJtnP3OinkEo6sHzKifyxjNLrSrF0H7V2VedOBgSsbuz33Efxt+xAnXx9gi?=
+	=?us-ascii?Q?xaR1Rr4b9q/hfNieFZzPkjAXFvTnVQ6R3eQoxlfbRKBdXJk7lu3K6w7jH8WW?=
+	=?us-ascii?Q?XmLNL9A6Or1F0fCL7pAydlZq0WQ06zaTWONsPvu4TuIPqZqmlpilVF7SJ9dX?=
+	=?us-ascii?Q?2OPaCzQwJwsevBKQD7LWp5+gIDGDxZ29eAi+ANiV4aPPitI2qeQO1/LrIkVb?=
+	=?us-ascii?Q?S8oP+mz3SJGxArXZhPa7abYo3hdNRNjfsYtscvFgZpdHptKOoqzmn14wVjrf?=
+	=?us-ascii?Q?Pzes/qBFH9Sc8TV00NSG/VNlDzGWOYhn6O2ZMV/DyfhCJ0ujWSgrVuzVYX9S?=
+	=?us-ascii?Q?WsiNJJMNqcDibi4LbIY22xuvHn5sZzjJsP8qNqT4RbKJ5nA/QEc+5OU4rHGM?=
+	=?us-ascii?Q?tSiHRsUPCUJKSl82oqlw/8wRnpi1SHv27j70aUuXwQxPnpH3i3VI0kQeUA+6?=
+	=?us-ascii?Q?yNNGk3Fn5y5GuvZTjlAi7/td780yJNtIQvusc+xfYICzkHdIWJsmoyXPCX6W?=
+	=?us-ascii?Q?cQTfscOdhDd4HVkizo6LceIow/BYLly3wg//KnynwKchY1ANwwFOf+LOGL4W?=
+	=?us-ascii?Q?/9WXGjRAwPr8o53AlQhWch4c=3D?=
+X-Microsoft-Antispam-Message-Info: FCkdV9CUnai0bMEXdRV4xw8CxqznMjWl4Y/hnMtKUOXALV6S1D0k0Aq4tprJRvtww4863DjxLVZIDCdbuPH3FaBpt30+qP4YPEWmF+jtZsqgnYMJGbuq0c8a2M1Q2tIlFdujfTpgMu/vtWTYqOuv51MahG0YCxeFifAfKOkhPvUDqfD09+wI038c19kcA8Id
+X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2529;
+	6:SEkGN0Ps8pX8X8/hZVR1ZJ2P6Bk9Llsvb41CzD3sTmBcLMyOjXBnYJKH1tRsTVGJmCoVd3bw0lwBirQpNglYg+NoaIzXhpO+xcOdCbzL+SP5koRvZBI3IB3vRz1UyCZxlppksC6e59pN2nldxJfylFq3+BakXSpU6ze6fFDH+RGq9muqbkVKjqCM13/xCwpeR82lYl1XsNCs43ModB3TLF62eFHNDOf/5hrSly88QkLbDFL6Jvs3Y2u3e+9M5+7iewUPhPJNyG00aiBBJ1J7iE8dI18iSo5684SG0+TcBAudg17Wx8Gd7itciryVScgwrmPItJzzg8spPUdXQ2qM7fodh832CmJnETqk1fQvAjeA+4RxRzDjGFYNkX65kRA2VMxbo9CM+i0zwouINPJMaj8ZV6loSo8F5cRO1LNnD4dp2EiKS7UjgbT+GaG8V4J/zlkMmql/CHQrj3JlrLvfFg==;
+	5:Y70cKjpQwzSk2QmVTsP5CM6RQpthHVtvYUVGjniPiNQYB8J0kuyoWzA5pRQ11NA3xbjg03AjVYEZj+0I1j6BjXbKnlHZhndQ0ixQpsrWSJUzxPilIV5SK5Rptr0KRbLzHrd5PmQ/MiqUjrAJwkF5xuJusF5/zeiqMIsMAoMhdLU=;
+	24:riCHpXFtH32cH8cZIBqqPd5nCXgeEUD4nYNNJC+hZ0ktyZttNLcu3BIqNDmgFzSnZoHztIriC6t4xxs9HypAWV4p8bqkm/mAebUA2jTOpLA=
 SpamDiagnosticOutput: 1:99
 SpamDiagnosticMetadata: NSPM
-X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2532;
-	7:8d5BtSlsLiM1tmS1PE1RpIw5v/GDiYyHHpWxyDZZoUQ+o3uZC+g1mZYIuDq6LMTcfzx4740ouv1qk1TUqlGTjm3eMjwtgtK3qlriCl/Duo1cK2pSb378O/kXYFNmbNDEg+aEWfLHu3BSsEX3jWNXTI1LuGVwVegSx0ejgQsfI8xvx4vHCzK6a0+GKIEYvDaR1cm1HWgNOMp2/aoSGMnVzxZ2qYAdpKXv5N59rJ5ysiS6jRlVjiYemghQm0Ip2K5E
-X-MS-Office365-Filtering-Correlation-Id: cadf1a7e-0651-4d13-949b-08d59f91bb43
+X-Microsoft-Exchange-Diagnostics: 1; AM5PR0601MB2529;
+	7:ZqoP6cbH6rgLrZIXxcjwa55Bzet40PVNKSuVPyJc2SA3rbhJYZSDnxW7DmIVbGP9OXkTXU7znB9P8bMoi5Bg7JJgNsXnLd6aiqNttijTsGLcda3NP583A4JF9itZEGNzLAcY/QLZWBgdFBq6DknDGs/vEZTbRl2BbJQ8fz83A48LlaaWbpyoMZk4wtqnoLYJd322atEqSL9layVSGhxyvr7Cj9c0hfPzvKynqC/va/7lwygszEjwRA2c+Oyj2zKF
+X-MS-Office365-Filtering-Correlation-Id: 6819eeeb-8561-4f91-f186-08d59f912bf8
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2018 09:51:00.0979 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cadf1a7e-0651-4d13-949b-08d59f91bb43
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2018 09:46:59.6946 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6819eeeb-8561-4f91-f186-08d59f912bf8
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0601MB2532
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] tslib: Align recipe content to better match v1.15
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0601MB2529
+Subject: [meta-oe][PATCHv2] tslib: Align recipe content to better match v1.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -113,19 +105,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2018 11:24:41 -0000
-Content-Type: text/plain; charset=iso-8859-15; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Apr 2018 12:20:46 -0000
+Content-Type: text/plain
 
-On 04/10/2018 01:22 AM, Khem Raj wrote:
-> On 4/9/18 9:06 AM, Niko Mauno wrote:
->>   - dropped EXTRA_OECONF altogether as it contained just obsoleted or
->>     implied configure options
-> 
-> Perhaps a set of packageconfigs would be desired. It may not be
-> reflecting exact set as seen here but whatever knobs currently are
-> available.
+Respective changes to recipe:
+ - updated AUTHOR field to match current author in tslib/AUTHORS file
+ - updated LICENSE field to 'LGPLv2+ & GPLv2+' to reflect licenses in
+   v1.15 (LGPLv2+ for shared library parts, GPLv2+ for command line
+   utility parts)
+ - updated LIC_FILES_CHECKSUM to contain COPYING files for both license
+   families
+ - Replaced EXTRA_OECONF with PACKAGECONFIG that is aligned to current
+   configure defaults, with exception that "Tatung Webpad support" was
+   disabled (as it was enabled by default for some reason despite being
+   seemingly specific to a single manufacturer/product).
+ - removed commented-out detect-stylus lines (a detect-stylus recipe
+   was apparently available in OE-Classic)
 
-Submitted v2 which introduces also PACKAGECONFIG
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+---
+ meta-oe/recipes-graphics/tslib/tslib_1.15.bb | 40 +++++++++++++++++++++++-----
+ 1 file changed, 33 insertions(+), 7 deletions(-)
+
+diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.15.bb b/meta-oe/recipes-graphics/tslib/tslib_1.15.bb
+index e87b411a8..7ae941a3c 100644
+--- a/meta-oe/recipes-graphics/tslib/tslib_1.15.bb
++++ b/meta-oe/recipes-graphics/tslib/tslib_1.15.bb
+@@ -5,10 +5,13 @@ Tslib is generally used on embedded devices to provide a common user \
+ space interface to touchscreen functionality."
+ HOMEPAGE = "http://tslib.org/"
+ 
+-AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
++AUTHOR = "Martin Kepplinger <martink@posteo.de>"
+ SECTION = "base"
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=fc178bcd425090939a8b634d1d6a9594"
++LICENSE = "LGPLv2+ & GPLv2+"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=fc178bcd425090939a8b634d1d6a9594 \
++    file://tests/COPYING;md5=a23a74b3f4caf9616230789d94217acb \
++"
+ 
+ SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.xz;downloadfilename=tslib-${PV}.tar.xz \
+            file://ts.conf \
+@@ -21,7 +24,33 @@ UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
+ 
+ inherit autotools pkgconfig
+ 
+-EXTRA_OECONF = "--enable-shared --disable-h3600 --enable-input --disable-corgi --disable-collie --disable-mk712 --disable-arctic2 --disable-ucb1x00"
++PACKAGECONFIG ??= "debounce dejitter iir linear median pthres skip lowpass invert variance input touchkit waveshare"
++PACKAGECONFIG[debounce] = "--enable-debounce,--disable-debounce"
++PACKAGECONFIG[dejitter] = "--enable-dejitter,--disable-dejitter"
++PACKAGECONFIG[iir] = "--enable-iir,--disable-iir"
++PACKAGECONFIG[linear] = "--enable-linear,--disable-linear"
++PACKAGECONFIG[median] = "--enable-median,--disable-median"
++PACKAGECONFIG[pthres] = "--enable-pthres,--disable-pthres"
++PACKAGECONFIG[skip] = "--enable-skip,--disable-skip"
++PACKAGECONFIG[lowpass] = "--enable-lowpass,--disable-lowpass"
++PACKAGECONFIG[invert] = "--enable-invert,--disable-invert"
++PACKAGECONFIG[variance] = "--enable-variance,--disable-variance"
++PACKAGECONFIG[input] = "--enable-input,--disable-input"
++PACKAGECONFIG[tatung] = "--enable-tatung,--disable-tatung"
++PACKAGECONFIG[touchkit] = "--enable-touchkit,--disable-touchkit"
++PACKAGECONFIG[waveshare] = "--enable-waveshare,--disable-waveshare"
++PACKAGECONFIG[ucb1x00] = "--enable-ucb1x00,--disable-ucb1x00"
++PACKAGECONFIG[mk712] = "--enable-mk712,--disable-mk712"
++PACKAGECONFIG[h3600] = "--enable-h3600,--disable-h3600"
++PACKAGECONFIG[dmc] = "--enable-dmc,--disable-dmc"
++PACKAGECONFIG[linear-h2200] = "--enable-linear-h2200,--disable-linear-h2200"
++PACKAGECONFIG[corgi] = "--enable-corgi,--disable-corgi"
++PACKAGECONFIG[collie] = "--enable-collie,--disable-collie"
++PACKAGECONFIG[arctic2] = "--enable-arctic2,--disable-arctic2"
++PACKAGECONFIG[dmc_dus3000] = "--enable-dmc_dus3000,--disable-dmc_dus3000"
++PACKAGECONFIG[cy8mrln-palmpre] = "--enable-cy8mrln-palmpre,--disable-cy8mrln-palmpre"
++PACKAGECONFIG[galax] = "--enable-galax,--disable-galax"
++PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
+ 
+ do_install_prepend() {
+     install -m 0644 ${WORKDIR}/ts.conf ${S}/etc/ts.conf
+@@ -32,9 +61,6 @@ do_install_append() {
+     install -m 0755 ${WORKDIR}/tslib.sh ${D}${sysconfdir}/profile.d/
+ }
+ 
+-# People should consider using udev's /dev/input/touchscreen0 symlink
+-# instead of detect-stylus
+-#RDEPENDS_tslib-conf_weird-machine = "detect-stylus"
+ RPROVIDES_tslib-conf = "libts-0.0-conf"
+ 
+ PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate tslib-uinput"
+-- 
+2.11.0
+
 
