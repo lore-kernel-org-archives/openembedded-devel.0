@@ -1,47 +1,44 @@
-Return-Path: <jan.vermaete@gmail.com>
-Received: from mail-ot0-f170.google.com (mail-ot0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A2027453D
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id ACBB574517
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 15:09:35 +0000 (UTC)
-Received: by mail-ot0-f170.google.com with SMTP id o9-v6so6384910otj.5
+	Thu, 12 Apr 2018 15:24:29 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1523546670; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=ltocDuuxe3O/v4u3dNXwOannZcsX0iTuVe3xFeH8OY4=;
+	b=PdNVR85Air4sy7kkKilnObi0RYBmCQne06/7SiYz+Cxt/H0qknLUlmlVwJuquM4DPVf6Rg+X
+	Co11OL9GkEQ9wWW4sOBK08/VoX3Z37V37kubnuAQXAYh7u/zNyWMhS76dzuuu+YDWXLQ+Dbh
+	5IfKCaT5xug0B0E1pdaazEgGw6o=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
+	[209.85.214.51])
+	by mxa.mailgun.org with ESMTP id 5acf7a2d.7f72d4759b30-smtp-out-n02;
+	Thu, 12 Apr 2018 15:24:29 -0000 (UTC)
+Received: by mail-it0-f51.google.com with SMTP id u62-v6so7511213ita.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 08:09:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=e3N6omlLWkqZhItWA1pOLjkvS0FCgBZjxJ+N/Xdapa8=;
-	b=cSgCdInsls8I2K9wwQsG/ar/okOzNYljLTPa9diwa7mh0mnnDefsejsVshS5hploGR
-	TKwWNG/7lyW71Cw8Af7SkdEuc1IQ6u9TgnhesvwQlQfS/cv+jWuNyeIyi5hflf2fAaAr
-	o85eRfvRUxDLJFmdSMrmEvM6Mu/MYoBzmYouldkcQsHeNOz8QsRziF8iuReKfvbDa6ua
-	2yXk9QzpyRV6GcWR/XBd6PKJHklmOaK1Hz7qHb/b4mWpy7mldhA/ObMQU0YxbCMtkPPh
-	GTA1facCh15LXHsY4CvK9iOhwx7eq6uT8LQRTP4wVqDPCsXOgX63YYYuU1LQXEL65Z/U
-	uAxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=e3N6omlLWkqZhItWA1pOLjkvS0FCgBZjxJ+N/Xdapa8=;
-	b=p21mRruiS3mPKo1opZv72+e2GetBe0sto9PwYsZdECQy6JTWJAVam9SgtX+fftCgc0
-	tvDxtDsC4rH0IrPPYx/99PAGWqREu94lfwCYyborfBf7yaje14v1an3a7aPLLDbyZGST
-	pdOtMd4R5j3yTUlmYs5cn0ADAwNRJsL+Yg/tuysQXdUbHB9ny/pftR7Ts/hOv5LKO4rG
-	1Yd5Fp0rd3MD72oxZbdYVE1bP+LBXJHSsPgVbiyBODCY176nkchoagL0rZfXYeTIYmyN
-	bmuI1x3wpsl5cexh5KEEypLgJJ/s4c9ZhY05wtaWgkh4oKgRl4RHKueCvlZUXdw94d2A
-	Hu2w==
-X-Gm-Message-State: ALQs6tCuoulGmGfu6CxF+nB4YuejWNjwJEowOEOF6nDItHjCqAWkzD5r
-	ClwYMP6swaCYxsm+YPZne+VdAEzuXlaYwfczPO0=
-X-Google-Smtp-Source: AIpwx499gGFVqxWyzu2QSmyIjnkiuuRnSatu9QaMx3olaKiq1IBypfEPXdbZGTcQTV5ntwwC36Ow5l3UWtpJ47hSE20=
-X-Received: by 2002:a9d:2763:: with SMTP id
-	r90-v6mr997441ota.226.1523545776965; 
-	Thu, 12 Apr 2018 08:09:36 -0700 (PDT)
+	Thu, 12 Apr 2018 08:24:29 -0700 (PDT)
+X-Gm-Message-State: ALQs6tBJqwYJfWgPmDwXw2q2y/mc+w2eOT80XuWudsqoRjJ22UWb7tWR
+	f9lRfO7gb+DfSAoJLUAax9qnJsUi/j/76tsaJd0=
+X-Google-Smtp-Source: AIpwx4+moEbNV6cUnXUKOINDne6sHVdhuEdRkbyTuW+ObgMnmOf8O0rkfz00CvTurqQ7ulYi699u8IKjhrLp75y9H2s=
+X-Received: by 2002:a24:7cc:: with SMTP id
+	f195-v6mr1617848itf.46.1523546669089; 
+	Thu, 12 Apr 2018 08:24:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.74.18.147 with HTTP; Thu, 12 Apr 2018 08:09:16 -0700 (PDT)
-In-Reply-To: <CADNbA1qZLO+GbkVcedsqrVV7_-ggr-xsijZ4hZomnmmTAAPPeA@mail.gmail.com>
+Received: by 10.107.140.6 with HTTP; Thu, 12 Apr 2018 08:24:28 -0700 (PDT)
+In-Reply-To: <CABF_=yjBxXZQUYgfHhr94_Kkkxnrs4UV8CJBRe30N3wRp-+eaw@mail.gmail.com>
 References: <CABF_=yiRrqZTGPkMEQNvm5f=LsUQTPKtbqrCrKHjBfbWuv29zQ@mail.gmail.com>
 	<CADNbA1qZLO+GbkVcedsqrVV7_-ggr-xsijZ4hZomnmmTAAPPeA@mail.gmail.com>
-From: jan vermaete <jan.vermaete@gmail.com>
-Date: Thu, 12 Apr 2018 17:09:16 +0200
-Message-ID: <CABF_=yjBxXZQUYgfHhr94_Kkkxnrs4UV8CJBRe30N3wRp-+eaw@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
+	<CABF_=yjBxXZQUYgfHhr94_Kkkxnrs4UV8CJBRe30N3wRp-+eaw@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Thu, 12 Apr 2018 11:24:28 -0400
+X-Gmail-Original-Message-ID: <CADNbA1rcENxDEY4-i7=bsPVS4nYU092rdo=OGjYcbbwyF3pcpw@mail.gmail.com>
+Message-ID: <CADNbA1rcENxDEY4-i7=bsPVS4nYU092rdo=OGjYcbbwyF3pcpw@mail.gmail.com>
+To: jan vermaete <jan.vermaete@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-python][PATCH] python-attrs: Adjust the RDEPENDS to include crypt rather than cryptography
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -56,65 +53,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2018 15:09:36 -0000
+X-List-Received-Date: Thu, 12 Apr 2018 15:24:29 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-my mistake...
-Thanks for the info
+No worries.  Does this resolve the original github issue you created?
 
-On Thu, Apr 12, 2018 at 4:12 PM, Derek Straka <derek@asterius.io> wrote:
-> There is a usage of hashlib (provided by ${PYTHON_PN}-crypt) in _make.py.
->
-> derek@sparta:/tmp$ dpkg -c
-> upstream/build/tmp/deploy/ipk/core2-64/python-crypt_2.7.14-r1_core2-64.ipk
-> drwxrwxrwx root/root         0 2018-03-24 09:28 ./
-> drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/
-> drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/
-> drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/python2.7/
-> -rw-r--r-- root/root      7842 2018-03-24 09:28
-> ./usr/lib/python2.7/hashlib.py
-> -rw-r--r-- root/root      6891 2018-03-24 09:28
-> ./usr/lib/python2.7/hashlib.pyc
-> drwxr-xr-x root/root         0 2018-03-24 09:28
-> ./usr/lib/python2.7/lib-dynload/
-> -rwxr-xr-x root/root     25184 2018-03-24 09:28
-> ./usr/lib/python2.7/lib-dynload/_hashlib.so
-> -rwxr-xr-x root/root      6520 2018-03-24 09:28
-> ./usr/lib/python2.7/lib-dynload/crypt.so
-> -rw-r--r-- root/root       358 2018-03-24 09:28 ./usr/lib/python2.7/md5.py
-> -rw-r--r-- root/root       376 2018-03-24 09:28 ./usr/lib/python2.7/md5.pyc
-> -rw-r--r-- root/root       393 2018-03-24 09:28 ./usr/lib/python2.7/sha.py
-> -rw-r--r-- root/root       419 2018-03-24 09:28 ./usr/lib/python2.7/sha.pyc
->
-> derek@sparta:/tmp$ grep -r hashlib attrs/
-> attrs/src/attr/_make.py:import hashlib
-> attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
-> attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
-> attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
->
-> On Thu, Apr 12, 2018 at 9:33 AM, jan vermaete <jan.vermaete@gmail.com>
-> wrote:
->>
->> I'm afraid this patch just revert the file to the previous state.
->> As far as I can see, there is no need at all to have something of
->> crypto nor crypotgraphy needed for this python package.
->>
->> --
->> Jan Vermaete
->> "For every complex problem there is an answer that is clear, simple,
->> and wrong." - H.L. Mencken
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+On Thu, Apr 12, 2018 at 11:09 AM, jan vermaete <jan.vermaete@gmail.com>
+wrote:
 
-
-
--- 
-Jan Vermaete
-"For every complex problem there is an answer that is clear, simple,
-and wrong." - H.L. Mencken
+> my mistake...
+> Thanks for the info
+>
+> On Thu, Apr 12, 2018 at 4:12 PM, Derek Straka <derek@asterius.io> wrote:
+> > There is a usage of hashlib (provided by ${PYTHON_PN}-crypt) in _make.py.
+> >
+> > derek@sparta:/tmp$ dpkg -c
+> > upstream/build/tmp/deploy/ipk/core2-64/python-crypt_2.7.14-
+> r1_core2-64.ipk
+> > drwxrwxrwx root/root         0 2018-03-24 09:28 ./
+> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/
+> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/
+> > drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/python2.7/
+> > -rw-r--r-- root/root      7842 2018-03-24 09:28
+> > ./usr/lib/python2.7/hashlib.py
+> > -rw-r--r-- root/root      6891 2018-03-24 09:28
+> > ./usr/lib/python2.7/hashlib.pyc
+> > drwxr-xr-x root/root         0 2018-03-24 09:28
+> > ./usr/lib/python2.7/lib-dynload/
+> > -rwxr-xr-x root/root     25184 2018-03-24 09:28
+> > ./usr/lib/python2.7/lib-dynload/_hashlib.so
+> > -rwxr-xr-x root/root      6520 2018-03-24 09:28
+> > ./usr/lib/python2.7/lib-dynload/crypt.so
+> > -rw-r--r-- root/root       358 2018-03-24 09:28
+> ./usr/lib/python2.7/md5.py
+> > -rw-r--r-- root/root       376 2018-03-24 09:28
+> ./usr/lib/python2.7/md5.pyc
+> > -rw-r--r-- root/root       393 2018-03-24 09:28
+> ./usr/lib/python2.7/sha.py
+> > -rw-r--r-- root/root       419 2018-03-24 09:28
+> ./usr/lib/python2.7/sha.pyc
+> >
+> > derek@sparta:/tmp$ grep -r hashlib attrs/
+> > attrs/src/attr/_make.py:import hashlib
+> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+> > attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+> >
+> > On Thu, Apr 12, 2018 at 9:33 AM, jan vermaete <jan.vermaete@gmail.com>
+> > wrote:
+> >>
+> >> I'm afraid this patch just revert the file to the previous state.
+> >> As far as I can see, there is no need at all to have something of
+> >> crypto nor crypotgraphy needed for this python package.
+> >>
+> >> --
+> >> Jan Vermaete
+> >> "For every complex problem there is an answer that is clear, simple,
+> >> and wrong." - H.L. Mencken
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+>
+>
+>
+> --
+> Jan Vermaete
+> "For every complex problem there is an answer that is clear, simple,
+> and wrong." - H.L. Mencken
+>
 
