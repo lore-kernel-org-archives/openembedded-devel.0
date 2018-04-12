@@ -1,46 +1,24 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 92D7D7449A
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 78D0B71B2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 07:23:48 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id u189so9258779wmd.1
+	Thu, 12 Apr 2018 07:54:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w3C7sMsh008444
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 00:23:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=5UbRhHcobRIy+NIlUSCYppmqzflIgcVLyYcUatVizhE=;
-	b=uCs/dgO1q8oM9L8MCiZMvRDPFso0CdLQzBtdWwN74vT5vYQ1GHgJq/Z/uB2AIEYSlF
-	ziHeECFK++TSVuk2p8XniFyoWeF952nWEQlNnK0G5wDnWdlupCVlCgS4PZIY3wV+XGBd
-	4FLNhhEbYnrkiYVJiwXHMbin7o+0XYO1sFe1n/Qm75b/DtvrKf32yUv7A2PUKunk2Cii
-	rOhasYzAPkdBuEkH/kYmgBjoDdRB7zyYETCespaEFTGFAw4YmiFZhEUIszCii7S8apXf
-	Xzl5TZkwrtZXWa95HpUsV/pw8t/sJ2lPM+1yz+iUfCDUxfb3vZQ9JM2UFtDC7z9FHhvh
-	8q5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=5UbRhHcobRIy+NIlUSCYppmqzflIgcVLyYcUatVizhE=;
-	b=BZUdZPH92vywhCW1vIerAUxjP5aCLk7Gd0xzO0eROE7sP/NN2nx2KbNULb1V61f1rB
-	wxL6ZhjKJK2Az7LPxqWdeC1aT/75xEL4AvLoVqmJtCz/XkVTVxpLKKLDiqQZlHdLVLMK
-	Vc0a+5EwZDOIRAX99D5ggW5dIEHUUhsm5Hvskw0zKmNMsB0i7/XVQdRh6h7cKZgzT6RE
-	Lkj+JuPW+XWXafAH7I+jN0Laa9hXb+CWIO2Ep7ghQsVB6m2reZb0uMB9+Ok6fhxTzlT8
-	/KmEC6cyI/hDBPP3b9CRvhChwr7GCcm/IJYS0wdPEr8bQJ0QZjahD5i8cQmmc7YIw19q
-	g3iQ==
-X-Gm-Message-State: ALQs6tDTuptXKIG0qbiNkM/uDpKTF+/fOdFu7yYb/+jhIr0Ukd/BknXi
-	AvN5qNB38m+G0k3xuH/6G7Hoknz1tlr3u/g+atM=
-X-Google-Smtp-Source: AIpwx488zdELcDKgMeHNazGe+wd/kSgXEENjrF9yUN3u3KWeqQekW7Bgq6ltbvrijp1Dihyqy3rZZ7M9zy9vZPgbkt0=
-X-Received: by 10.80.195.6 with SMTP id a6mr13975613edb.178.1523517829111;
-	Thu, 12 Apr 2018 00:23:49 -0700 (PDT)
+	Thu, 12 Apr 2018 00:54:23 -0700 (PDT)
+Received: from localhost (128.224.163.220) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Thu, 12 Apr 2018 00:54:22 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Apr 2018 15:54:20 +0800
+Message-ID: <1523519660-30226-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.80.157.197 with HTTP; Thu, 12 Apr 2018 00:23:48 -0700 (PDT)
-In-Reply-To: <34fa43b4-67f5-5de1-effb-0caa473061d6@gmail.com>
-References: <34fa43b4-67f5-5de1-effb-0caa473061d6@gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Thu, 12 Apr 2018 09:23:48 +0200
-Message-ID: <CAAQYJAsmkFk3n7R3=wfLXv7KjKXsbSVy8wqKJzMXN_wQMvazMA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: State of the world, 2018-03-19
+X-Originating-IP: [128.224.163.220]
+Subject: [meta-filesystems][PATCH] aufs-util: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,41 +31,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2018 07:23:48 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 12 Apr 2018 07:54:24 -0000
+Content-Type: text/plain
 
-cut...
+Refresh patches to fix do_patch warning.
 
-> === qemuarm64 (7) ===
->     * meta-openembedded/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb:do_compile
->     * meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb:do_configure
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../aufs-util/0001-libau-Define-STRIP-weakly.patch      | 10 ++++------
+ ...til-add-tool-concept-to-Makefile-for-cross-com.patch | 17 +++++++++--------
+ .../aufs-util/aufs-util-don-t-strip-executables.patch   | 14 +++++++-------
+ 3 files changed, 20 insertions(+), 21 deletions(-)
 
-I have update the recipe to 2.0.16 as in oe-core to get aarch64 support
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
+index 9efea80..6732dc4 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
+@@ -1,4 +1,4 @@
+-From bb8801fb21ac8d73e3b1a11a8555aaf822182a51 Mon Sep 17 00:00:00 2001
++From daf04dc9ca1f2e4c65ec338ab439e0a792e1a8ac Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 5 Sep 2017 10:36:52 -0700
+ Subject: [PATCH] libau: Define STRIP weakly
+@@ -6,10 +6,11 @@ Subject: [PATCH] libau: Define STRIP weakly
+ STRIP can be set on environment to use cross version of strip utility
+ hardcoding to strip is not working in cross environment
+ 
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+ Upstream-Status: Submitted
+ 
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++---
+  libau/Makefile | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+@@ -34,6 +35,3 @@ index 81520ac..c25eef2 100644
+  #	readelf --syms --use-dynamic libau.so
+  
+  install_ulib: File = ${LibSo}.${LibSoMajor}.${LibSoMinor}
+--- 
+-2.14.1
+-
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch b/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch
+index 5c35586..c832696 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch
+@@ -1,3 +1,6 @@
++From 13a60c631d7cf6c7e1926473d8069795c0def9b6 Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Thu, 19 Jun 2014 15:09:56 +0100
+ Subject: [PATCH] aufs-util: add tool concept to Makefile for cross compiling
+  purpose
+ 
+@@ -7,23 +10,21 @@ Add a tools target to Makefile to allow for this.
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++
+ ---
+- Makefile |    2 +-
++ Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 2f905ad..49c3cd5 100644
++index dbbe43d..aff969e 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -85,7 +85,7 @@ aufs.5: aufs.in.5 c2tmac
++@@ -152,7 +152,7 @@ aufs.5: aufs.in.5 c2tmac
+  	chmod a-w $@
+  
+  c2sh c2tmac ver: CC = ${HOSTCC}
+ -.INTERMEDIATE: c2sh c2tmac ver
+ +tools: c2sh c2tmac ver
+  
+- Install = install -o root -g root -p
+- install_sbin: File = auibusy auplink mount.aufs umount.aufs
+--- 
+-1.7.9.5
+-
++ install_sbin: File = auibusy aumvdown auplink mount.aufs umount.aufs
++ ifeq (${Glibc},no)
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-don-t-strip-executables.patch b/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-don-t-strip-executables.patch
+index fe2a6a5..b40822c 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-don-t-strip-executables.patch
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/aufs-util-don-t-strip-executables.patch
+@@ -1,4 +1,4 @@
+-From 244863eca77fcaa1187884836c3e28d6b6d1504a Mon Sep 17 00:00:00 2001
++From 9d5e7eff4ae906f1ea6e6527080fded0b595fbd4 Mon Sep 17 00:00:00 2001
+ From: Bruce Ashfield <bruce.ashfield@windriver.com>
+ Date: Tue, 9 Apr 2013 18:50:34 -0700
+ Subject: [PATCH] aufs-util: don't strip executables
+@@ -14,16 +14,19 @@ as follows:
+ 
+ To prevent this, we remove -s from LDFLAGS.
+ 
++Upstream-Status: Inappropriate [oe specific]
++
+ Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
++
+ ---
+- Makefile |    2 +-
++ Makefile | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 2f905ad..e0c6dcd 100644
++index 54f8d97..dbbe43d 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -56,7 +56,7 @@ all: ver_test ${Man} ${Bin} ${Etc}
++@@ -118,7 +118,7 @@ clean:
+  ver_test: ver
+  	./ver
+  
+@@ -32,6 +35,3 @@ index 2f905ad..e0c6dcd 100644
+  ${Bin}: LDLIBS = -L. -lautil
+  ${BinObj}: %.o: %.c ${LibUtilHdr} ${LibUtil}
+  
+--- 
+-1.7.10.4
+-
+-- 
+2.7.4
 
-https://github.com/LinuxPDA/meta-openembedded/commit/33f38283b5f811df4fea0876e35d5ff08fa000a7
-
-Almost done, now build fails because net headers...
-    warning: implicit declaration of function 'if_nameindex'; did you
-mean 'ifr_ifindex'?
-
-Khem, should we add these missing bits to klibc?
-
-
->     * meta-openembedded/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb:do_compile
->     * openembedded-core/meta/recipes-devtools/glide/glide_0.13.1.bb:do_package_qa
->     * openembedded-core/meta/recipes-devtools/go/go_1.10.bb:do_package_qa
->     * openembedded-core/meta/recipes-devtools/go/go-dep_0.4.1.bb:do_package_qa
->     * openembedded-core/meta/recipes-kernel/kexec/kexec-tools_2.0.16.bb:do_compile
-
-About this, we have seen the issue are the security_flags in world build:
-
--fstack-protector-strong  -D_FORTIFY_SOURCE=2
--Wformat -Wformat-security -Werror=format-security
-
-I'll work on this after having fixed the former...
-
-Cheers
-Andrea
->
-...cut
 
