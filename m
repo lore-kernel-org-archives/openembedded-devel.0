@@ -1,49 +1,46 @@
-Return-Path: <diego.rondini@kynetics.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 58FCC746C6
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 92D7D7449A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2018 15:55:18 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id g8so5198420wmd.2
+	Thu, 12 Apr 2018 07:23:48 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id u189so9258779wmd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Apr 2018 08:55:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=6mnSrN5+KY5PV5spGOMqxNc4KfHsIv1MBLA7oDN2/3c=;
-	b=ApFXBicfE5ON8BkZkTDih33y+u4jwNDgbsErCOc0zU/hKL3xw/l/5rNyVEalBU4ore
-	3/ntg0uS32D3JirRW0dVYyHYUFRiOhYz7KKY8vEY7B/bsmC/DuGoa2PcBSdSzJ9MJMgg
-	duHMmbhnPXVck0/twTP7gK50uqmB3VQbqOOerH3/rkHG8cZcrugngRJBC1BUGYDTBs3N
-	76QhOVuJMBqCg56LQ6nNoUonX/Y92fAlnb69ykNo1mR3jUT8RyErn1DucCJZM9prXG4X
-	H3LpYbLrDnw2dzCuhgK+Ptz8tAuGjaOAsMH2DVvIqvfC4wwb6w5PIHtFHuAsbRDWDkpf
-	lfqg==
+	Thu, 12 Apr 2018 00:23:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=5UbRhHcobRIy+NIlUSCYppmqzflIgcVLyYcUatVizhE=;
+	b=uCs/dgO1q8oM9L8MCiZMvRDPFso0CdLQzBtdWwN74vT5vYQ1GHgJq/Z/uB2AIEYSlF
+	ziHeECFK++TSVuk2p8XniFyoWeF952nWEQlNnK0G5wDnWdlupCVlCgS4PZIY3wV+XGBd
+	4FLNhhEbYnrkiYVJiwXHMbin7o+0XYO1sFe1n/Qm75b/DtvrKf32yUv7A2PUKunk2Cii
+	rOhasYzAPkdBuEkH/kYmgBjoDdRB7zyYETCespaEFTGFAw4YmiFZhEUIszCii7S8apXf
+	Xzl5TZkwrtZXWa95HpUsV/pw8t/sJ2lPM+1yz+iUfCDUxfb3vZQ9JM2UFtDC7z9FHhvh
+	8q5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6mnSrN5+KY5PV5spGOMqxNc4KfHsIv1MBLA7oDN2/3c=;
-	b=jBVFFUhIwYRVls038z6O0ov9mfH+sdHkvWLszqoYLB8hwSHTARNt17wntB9tXOhsJi
-	dvYwaR4HfsMqdQd80r8jGi6GYYxSDZlELpBAVP6QAr1BCnZlDmfY6q059FwoGEevUQps
-	7z2qdVL/4EI4qv8FtvRVuwpH1Td4XeOoNxw7tltO8cOCduIYFBjReu8FY1eAtKyiY0Xx
-	OjX1iXl+IKDsjboFZ97MxL9S7oxtS/dsXbgSX4DolFqdUJxuYQthVsNqkg6dKj9MXVxC
-	l14MoMRJWDdJBvfI7MQ0e6wPl6LmTCA+upIkd+LxRGmo8cjq+ErJJEoF8BRVGSBpmEi+
-	gSVg==
-X-Gm-Message-State: ALQs6tAgA5/iTS66HGul0AN5kxgbbtn4jvVkOG4Nd599gWlIxW7lVH00
-	cHOQaUp3FFdAlTbABQXDzeHuFNdV
-X-Google-Smtp-Source: AIpwx49EKPnGfjAkwT7srQxohNj4QlaOGgkWH5KlkJHcW8rRpybSXg8CTvKtR6PYNk3TlhIWAPhH4A==
-X-Received: by 10.80.224.200 with SMTP id j8mr8225700edl.198.1523462118563;
-	Wed, 11 Apr 2018 08:55:18 -0700 (PDT)
-Received: from ip-172-31-7-228.eu-west-1.compute.internal
-	(ec2-34-240-242-134.eu-west-1.compute.amazonaws.com.
-	[34.240.242.134])
-	by smtp.gmail.com with ESMTPSA id q6sm904459edh.48.2018.04.11.08.55.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 11 Apr 2018 08:55:17 -0700 (PDT)
-From: Diego Rondini <diego.rondini@kynetics.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Apr 2018 15:54:27 +0000
-Message-Id: <1523462067-7259-1-git-send-email-diego.rondini@kynetics.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Diego Rondini <diego.rondini@kynetics.com>
-Subject: [meta-oe][PATCH] sip: update recipe to 4.19.8
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=5UbRhHcobRIy+NIlUSCYppmqzflIgcVLyYcUatVizhE=;
+	b=BZUdZPH92vywhCW1vIerAUxjP5aCLk7Gd0xzO0eROE7sP/NN2nx2KbNULb1V61f1rB
+	wxL6ZhjKJK2Az7LPxqWdeC1aT/75xEL4AvLoVqmJtCz/XkVTVxpLKKLDiqQZlHdLVLMK
+	Vc0a+5EwZDOIRAX99D5ggW5dIEHUUhsm5Hvskw0zKmNMsB0i7/XVQdRh6h7cKZgzT6RE
+	Lkj+JuPW+XWXafAH7I+jN0Laa9hXb+CWIO2Ep7ghQsVB6m2reZb0uMB9+Ok6fhxTzlT8
+	/KmEC6cyI/hDBPP3b9CRvhChwr7GCcm/IJYS0wdPEr8bQJ0QZjahD5i8cQmmc7YIw19q
+	g3iQ==
+X-Gm-Message-State: ALQs6tDTuptXKIG0qbiNkM/uDpKTF+/fOdFu7yYb/+jhIr0Ukd/BknXi
+	AvN5qNB38m+G0k3xuH/6G7Hoknz1tlr3u/g+atM=
+X-Google-Smtp-Source: AIpwx488zdELcDKgMeHNazGe+wd/kSgXEENjrF9yUN3u3KWeqQekW7Bgq6ltbvrijp1Dihyqy3rZZ7M9zy9vZPgbkt0=
+X-Received: by 10.80.195.6 with SMTP id a6mr13975613edb.178.1523517829111;
+	Thu, 12 Apr 2018 00:23:49 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.157.197 with HTTP; Thu, 12 Apr 2018 00:23:48 -0700 (PDT)
+In-Reply-To: <34fa43b4-67f5-5de1-effb-0caa473061d6@gmail.com>
+References: <34fa43b4-67f5-5de1-effb-0caa473061d6@gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+Date: Thu, 12 Apr 2018 09:23:48 +0200
+Message-ID: <CAAQYJAsmkFk3n7R3=wfLXv7KjKXsbSVy8wqKJzMXN_wQMvazMA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: State of the world, 2018-03-19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,35 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Apr 2018 15:55:19 -0000
+X-List-Received-Date: Thu, 12 Apr 2018 07:23:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update sip to latest version to allow update of PyQt.
+cut...
 
-Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
----
- meta-oe/recipes-devtools/sip/{sip_4.19.2.bb => sip_4.19.8.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/sip/{sip_4.19.2.bb => sip_4.19.8.bb} (92%)
+> === qemuarm64 (7) ===
+>     * meta-openembedded/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb:do_compile
+>     * meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb:do_configure
 
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.2.bb b/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/sip/sip_4.19.2.bb
-rename to meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-index 1d837c5..ea944b3 100644
---- a/meta-oe/recipes-devtools/sip/sip_4.19.2.bb
-+++ b/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-@@ -9,8 +9,8 @@ inherit python-dir
- DEPENDS = "python"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
--SRC_URI[md5sum] = "4f48e212890ebe584e8d804cfbcfc61e"
--SRC_URI[sha256sum] = "432b4aad25254e6997913e33b1ca3cf5fd21d5729a50a3ce2edccbea82c80533"
-+SRC_URI[md5sum] = "0625fb20347d4ff1b5da551539be0727"
-+SRC_URI[sha256sum] = "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
- 
- BBCLASSEXTEND = "native"
- 
--- 
-2.7.4
+I have update the recipe to 2.0.16 as in oe-core to get aarch64 support
 
+https://github.com/LinuxPDA/meta-openembedded/commit/33f38283b5f811df4fea0876e35d5ff08fa000a7
+
+Almost done, now build fails because net headers...
+    warning: implicit declaration of function 'if_nameindex'; did you
+mean 'ifr_ifindex'?
+
+Khem, should we add these missing bits to klibc?
+
+
+>     * meta-openembedded/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb:do_compile
+>     * openembedded-core/meta/recipes-devtools/glide/glide_0.13.1.bb:do_package_qa
+>     * openembedded-core/meta/recipes-devtools/go/go_1.10.bb:do_package_qa
+>     * openembedded-core/meta/recipes-devtools/go/go-dep_0.4.1.bb:do_package_qa
+>     * openembedded-core/meta/recipes-kernel/kexec/kexec-tools_2.0.16.bb:do_compile
+
+About this, we have seen the issue are the security_flags in world build:
+
+-fstack-protector-strong  -D_FORTIFY_SOURCE=2
+-Wformat -Wformat-security -Werror=format-security
+
+I'll work on this after having fixed the former...
+
+Cheers
+Andrea
+>
+...cut
 
