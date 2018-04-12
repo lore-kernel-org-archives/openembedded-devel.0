@@ -1,24 +1,43 @@
-Return-Path: <daniel@zonque.org>
-Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 022657469A
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id D435074706
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 14:12:15 +0000 (UTC)
-Received: from [IPv6:2001:16b8:462d:7300:a212:e281:6e27:17b]
-	(200116b8462d7300a212e2816e27017b.dip.versatel-1u1.de
-	[IPv6:2001:16b8:462d:7300:a212:e281:6e27:17b])
-	by mail.bugwerft.de (Postfix) with ESMTPSA id 93BD7287782;
-	Thu, 12 Apr 2018 14:10:26 +0000 (UTC)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20180412133558.9655-1-Martin.Jansa@gmail.com>
-From: Daniel Mack <daniel@zonque.org>
-Message-ID: <7f04089b-7479-2575-6d91-8887118d19f8@zonque.org>
-Date: Thu, 12 Apr 2018 16:12:15 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
+	Thu, 12 Apr 2018 14:12:46 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1523542367; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=SdWLIwT1lQ+vUjaqF8WO8KJZbAnguZ6jL5XW0hkERD4=;
+	b=fAXjNUs7v57nNVSlslFSrAr9DiNSpce3lbTXRpDOXwb0sQnT0Vq47v76izKixQEZuI0XKTIZ
+	20zYYb43oAKQsNRz1EHXz3Z3IuVwVyCUnpDqxnoMVQ32seHhIEDn7TGxsZn320NN0g+k1rY5
+	rNDTsz1G1iBXF1yVhA7wPLRQMPM=
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+X-Mailgun-Sending-Ip: 104.130.122.4
+Sender: derek@asterius.io
+Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
+	[209.85.223.174])
+	by mxa.mailgun.org with ESMTP id 5acf695e.7fcf9f313370-smtp-out-n02;
+	Thu, 12 Apr 2018 14:12:46 -0000 (UTC)
+Received: by mail-io0-f174.google.com with SMTP id b20so6469132iof.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Apr 2018 07:12:46 -0700 (PDT)
+X-Gm-Message-State: ALQs6tA7RFdtVXD+s1aFOv4WSPlwA0GR2qvNJHlQ5qXgVI+KxlOCvCQ6
+	binN5iUEhWYc23kIaVfihw2/eYbXbfKtV0kWejA=
+X-Google-Smtp-Source: AIpwx49EXyqVt33u7j85fY1mV24cbu15YZNoytEdfMYO034ZChFlUV7GfKSh9gN0fuaJlmZXQNmybgrExaEvCkE1ieA=
+X-Received: by 10.107.198.136 with SMTP id w130mr9040659iof.131.1523542366140; 
+	Thu, 12 Apr 2018 07:12:46 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180412133558.9655-1-Martin.Jansa@gmail.com>
-Subject: Re: [meta-qt5][rocko][WIP][PATCH] qt5: upgrade to 5.9.5
+Received: by 10.107.140.6 with HTTP; Thu, 12 Apr 2018 07:12:45 -0700 (PDT)
+In-Reply-To: <CABF_=yiRrqZTGPkMEQNvm5f=LsUQTPKtbqrCrKHjBfbWuv29zQ@mail.gmail.com>
+References: <CABF_=yiRrqZTGPkMEQNvm5f=LsUQTPKtbqrCrKHjBfbWuv29zQ@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Thu, 12 Apr 2018 10:12:45 -0400
+X-Gmail-Original-Message-ID: <CADNbA1qZLO+GbkVcedsqrVV7_-ggr-xsijZ4hZomnmmTAAPPeA@mail.gmail.com>
+Message-ID: <CADNbA1qZLO+GbkVcedsqrVV7_-ggr-xsijZ4hZomnmmTAAPPeA@mail.gmail.com>
+To: jan vermaete <jan.vermaete@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-attrs: Adjust the RDEPENDS to include crypt rather than cryptography
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,80 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2018 14:12:16 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Apr 2018 14:12:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Thursday, April 12, 2018 03:35 PM, Martin Jansa wrote:
-> * use latest revision from 5.9, because 5.9.5 tag is only on 5.9.5
->   branch which might get removed in future I was told
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+There is a usage of hashlib (provided by ${PYTHON_PN}-crypt) in _make.py.
 
-I'm getting the following errors with this patch:
+derek@sparta:/tmp$ dpkg -c
+upstream/build/tmp/deploy/ipk/core2-64/python-crypt_2.7.14-r1_core2-64.ipk
+drwxrwxrwx root/root         0 2018-03-24 09:28 ./
+drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/
+drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/
+drwxr-xr-x root/root         0 2018-03-24 09:28 ./usr/lib/python2.7/
+-rw-r--r-- root/root      7842 2018-03-24 09:28
+./usr/lib/python2.7/hashlib.py
+-rw-r--r-- root/root      6891 2018-03-24 09:28
+./usr/lib/python2.7/hashlib.pyc
+drwxr-xr-x root/root         0 2018-03-24 09:28
+./usr/lib/python2.7/lib-dynload/
+-rwxr-xr-x root/root     25184 2018-03-24 09:28
+./usr/lib/python2.7/lib-dynload/_hashlib.so
+-rwxr-xr-x root/root      6520 2018-03-24 09:28
+./usr/lib/python2.7/lib-dynload/crypt.so
+-rw-r--r-- root/root       358 2018-03-24 09:28 ./usr/lib/python2.7/md5.py
+-rw-r--r-- root/root       376 2018-03-24 09:28 ./usr/lib/python2.7/md5.pyc
+-rw-r--r-- root/root       393 2018-03-24 09:28 ./usr/lib/python2.7/sha.py
+-rw-r--r-- root/root       419 2018-03-24 09:28 ./usr/lib/python2.7/sha.pyc
 
-WARNING: qtxmlpatterns-5.9.4+gitAUTOINC+3444bfc803-r0 do_fetch: Failed
-to fetch URL
-git://github.com/qt/qtxmlpatterns.git;name=qtxmlpatterns;branch=5.9;nobranch=1;protocol=git,
-attempting MIRRORS if available
-ERROR: qtxmlpatterns-5.9.4+gitAUTOINC+3444bfc803-r0 do_fetch: Fetcher
-failure: Unable to find revision
-3444bfc8039c5090b02fd7f98abe8064a73019d7 in branch 5.9 even from upstream
-ERROR: qtxmlpatterns-5.9.4+gitAUTOINC+3444bfc803-r0 do_fetch: Fetcher
-failure for URL:
-'git://github.com/qt/qtxmlpatterns.git;name=qtxmlpatterns;branch=5.9;nobranch=1;protocol=git'.
-Unable to fetch URL from any source.
-ERROR: qtxmlpatterns-5.9.4+gitAUTOINC+3444bfc803-r0 do_fetch: Function
-failed: base_do_fetch
-ERROR: Logfile of failure stored in:
-/home/daniel/src/nepos/poky/build/tmp-glibc/work/aarch64-nepos-linux/qtxmlpatterns/5.9.4+gitAUTOINC+3444bfc803-r0/temp/log.do_fetch.3513
-ERROR: Task
-(/home/daniel/src/nepos/poky/build/conf/../../../meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_fetch)
-failed with exit code '1'
-WARNING: qtbase-native-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Failed
-to fetch URL
-git://github.com/qt/qtbase.git;name=qtbase;branch=5.9;nobranch=1;protocol=git,
-attempting MIRRORS if available
-ERROR: qtbase-native-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Fetcher
-failure: Unable to find revision
-f2095f2c66d0dae8525879f6c14165ace650e7f1 in branch 5.9 even from upstream
-ERROR: qtbase-native-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Fetcher
-failure for URL:
-'git://github.com/qt/qtbase.git;name=qtbase;branch=5.9;nobranch=1;protocol=git'.
-Unable to fetch URL from any source.
-ERROR: qtbase-native-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Function
-failed: base_do_fetch
-ERROR: Logfile of failure stored in:
-/home/daniel/src/nepos/poky/build/tmp-glibc/work/x86_64-linux/qtbase-native/5.9.4+gitAUTOINC+f2095f2c66-r0/temp/log.do_fetch.3509
-ERROR: Task
-(/home/daniel/src/nepos/poky/build/conf/../../../meta-qt5/recipes-qt/qt5/qtbase-native_git.bb:do_fetch)
-failed with exit code '1'
-WARNING: qtbase-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Failed to fetch
-URL
-git://github.com/qt/qtbase.git;name=qtbase;branch=5.9;nobranch=1;protocol=git,
-attempting MIRRORS if available
-ERROR: qtbase-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Fetcher failure:
-Unable to find revision f2095f2c66d0dae8525879f6c14165ace650e7f1 in
-branch 5.9 even from upstream
-ERROR: qtbase-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Fetcher failure
-for URL:
-'git://github.com/qt/qtbase.git;name=qtbase;branch=5.9;nobranch=1;protocol=git'.
-Unable to fetch URL from any source.
-ERROR: qtbase-5.9.4+gitAUTOINC+f2095f2c66-r0 do_fetch: Function failed:
-base_do_fetch
-ERROR: Logfile of failure stored in:
-/home/daniel/src/nepos/poky/build/tmp-glibc/work/aarch64-nepos-linux/qtbase/5.9.4+gitAUTOINC+f2095f2c66-r0/temp/log.do_fetch.3511
-ERROR: Task
-(/home/daniel/src/nepos/poky/build/conf/../../../meta-qt5/recipes-qt/qt5/qtbase_git.bb:do_fetch)
-failed with exit code '1'
+derek@sparta:/tmp$ grep -r hashlib attrs/
+attrs/src/attr/_make.py:import hashlib
+attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
+attrs/src/attr/_make.py:    sha1 = hashlib.sha1()
 
+On Thu, Apr 12, 2018 at 9:33 AM, jan vermaete <jan.vermaete@gmail.com>
+wrote:
 
-
-Also, I guess you also need to bump the version number in
-recipes-qt/qt5/qt5-git.inc, right?
-
-
-Thanks,
-Daniel
+> I'm afraid this patch just revert the file to the previous state.
+> As far as I can see, there is no need at all to have something of
+> crypto nor crypotgraphy needed for this python package.
+>
+> --
+> Jan Vermaete
+> "For every complex problem there is an answer that is clear, simple,
+> and wrong." - H.L. Mencken
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
