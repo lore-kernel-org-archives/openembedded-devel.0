@@ -1,47 +1,24 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id ED2A6746F9
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F50C70100
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 09:23:38 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id x82so8385630wmg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Apr 2018 02:23:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=6rmEwfmsUxzdRzCZXPPuGTYU6Gr1nroznU5k2fwJdZU=;
-	b=ugdZ1Vwx7yLafVahUqwZ//kldjSl6a+SDpYgJPPD0hWCrbvhZ6TVferJDUcieYP5ZY
-	0txwiCqcn1glA7iE1pDVTYT+iOlpcK0qswo8PlpoZ5redhEIrGDsfhhJKqiyhcQwZLO1
-	iyXT9g+Tsnpj+9wZwn7p0nCJTKd7n7FnfKIvDw+1OAx0qWFT1Vt0Kw6EnIhlm/XsUmaz
-	V328N6g9isx8qkY9xw27VcMOxos5mOUVzIkT5L06DidI5UUVu6lXm1oXmWo6+hOhz9pE
-	Oh7I4xC/Iv2T3wrJk1QJw6ayUica7ApmknP8y9rBK/lBvX/vkfit0fDxeksXug79btzD
-	0jlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=6rmEwfmsUxzdRzCZXPPuGTYU6Gr1nroznU5k2fwJdZU=;
-	b=D+FmhCYiRPAOWIHsefr1FOEqk7Cw6omAsUZlAZqJa6BG5UxkTLkHoHSal4pV8/qtNa
-	mw16yFFDg8WZUExQhEpdKhN2Y5QR02KGBEuP6rLAN9xh4YDCqDo05Rab92u0YJKe99H+
-	YrCEFULeYA8Y3rRhGhM8TMRQFx0+3VRX1DMloZ1G8dQJeNLwNUcp8PazjKe5sdfXr6yy
-	/F2u+5kVsUlXnAvYqOVZ+i/bE5/HmN8HdW0zyvzmciNrtnKCp2rrdUmXPqmoWRfcCXzQ
-	7LGbllC7rf5p+0vA7D3fvGOV1UAOK8zMZOHVMquGqY+eKXWLyZEOaW87LHh3sGY7wwoG
-	9dAg==
-X-Gm-Message-State: ALQs6tC0JPEbtsn5k6R7CMr8HvbgYvL29tVNaBBV0S3kHR6XPVUHXiNy
-	xOhM+eT3opBWiBgu1RC5Mi07sd7kbmlbYg8Ihug=
-X-Google-Smtp-Source: AIpwx4+bYidsAw8OJXr2XkDRpwKd+m4YruayzTiz0lBTjvgnq5rrYJoifdk1vqfVoLEVw5zFKo7kXHlNM/MqqA8kbAw=
-X-Received: by 10.80.184.34 with SMTP id j31mr14365068ede.103.1523525019398;
-	Thu, 12 Apr 2018 02:23:39 -0700 (PDT)
+	Thu, 12 Apr 2018 09:45:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w3C9jeTH011420
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 12 Apr 2018 02:45:40 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 12 Apr 2018 02:45:39 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <schnitzeltony@gmail.com>, <akuster808@gmail.com>
+Date: Thu, 12 Apr 2018 05:45:21 -0400
+Message-ID: <1523526321-18343-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Received: by 10.80.157.197 with HTTP; Thu, 12 Apr 2018 02:23:39 -0700 (PDT)
-In-Reply-To: <pan70h$v8k$1@blaine.gmane.org>
-References: <1523394065-15465-1-git-send-email-andrea.adami@gmail.com>
-	<pan70h$v8k$1@blaine.gmane.org>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Thu, 12 Apr 2018 11:23:39 +0200
-Message-ID: <CAAQYJAtv_KyDE5YLCVB3n18E9MgkokQ78sAwy0KmTemAd+m7WA@mail.gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-handheld][PATCH] zaurusd: refresh patches (using devtool)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH][meta-gnome] add metacity back
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,44 +31,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Apr 2018 09:23:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 12 Apr 2018 09:45:41 -0000
+Content-Type: text/plain
 
-On Thu, Apr 12, 2018 at 10:59 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> Op 10-04-18 om 23:01 schreef Andrea Adami:
->> Silence warnings about ingnored context.
->>
->> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
->
->
->> --- a/recipes-bsp/zaurusd/zaurusd/0001-zaurusd-add-support-for-collie.patch
->> +++ b/recipes-bsp/zaurusd/zaurusd/0001-zaurusd-add-support-for-collie.patch
->> @@ -1,17 +1,17 @@
->> -From 85b94bed1feab70bc529a59fb80c26da825b9abe Mon Sep 17 00:00:00 2001
->> +From 668a7bc50ca8f36df5a0eae73a5fa251aada9cc4 Mon Sep 17 00:00:00 2001
->>  From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
->>  Date: Fri, 5 Aug 2011 16:00:10 +0400
->>  Subject: [PATCH] zaurusd: add support for collie
->> -Upstream-Status: Pending
-> Was that change intended?
+It is required by meta-anaconda which is a graphic target
+installer program anaconda that based on gnome.
 
-No, not really.
-Let say I have spotted it and planned to read the devtool code...
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-anaconda
 
-I think it is tolerable in this context, because unfortunately not all
-patches have Upstream-Status.
-(I am wondering if there is still Upstream for zaurusd...)
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../metacity/0001-ui-Define-_GNU_SOURCE.patch      | 27 +++++++++++++++++
+ .../metacity/remove-yelp-help-rules-var.patch      | 28 +++++++++++++++++
+ .../recipes-gnome/metacity/metacity_2.34.13.bb     | 35 ++++++++++++++++++++++
+ 3 files changed, 90 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/0001-ui-Define-_GNU_SOURCE.patch
+ create mode 100644 meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch
+ create mode 100644 meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
 
-So I have left the result unchanged., planning to update the
-Upstream-Status soon.
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity/0001-ui-Define-_GNU_SOURCE.patch b/meta-gnome/recipes-gnome/metacity/metacity/0001-ui-Define-_GNU_SOURCE.patch
+new file mode 100644
+index 0000000..539d756
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/metacity/metacity/0001-ui-Define-_GNU_SOURCE.patch
+@@ -0,0 +1,27 @@
++From e7fd072f0df968f342878b77098e97ff07ed28d7 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 14 Jul 2017 10:26:31 -0700
++Subject: [PATCH] ui: Define _GNU_SOURCE
++
++it becomes portable across musl and glibc
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/ui/theme.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/ui/theme.c b/src/ui/theme.c
++index 84b57a0..c7eafc8 100644
++--- a/src/ui/theme.c
+++++ b/src/ui/theme.c
++@@ -60,6 +60,7 @@
++ #include <gtk/gtk.h>
++ #include <string.h>
++ #include <stdlib.h>
+++#define _GNU_SOURCE
++ #define __USE_XOPEN
++ #include <math.h>
++ 
++-- 
++2.13.3
++
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch b/meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch
+new file mode 100644
+index 0000000..1970e9a
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/metacity/metacity/remove-yelp-help-rules-var.patch
+@@ -0,0 +1,28 @@
++Remove unused variable (YELP_HELP_RULES)
++
++Upstream-Status: Pending
++Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
++
++Index: metacity-2.34.13/doc/creating_themes/Makefile.am
++===================================================================
++--- metacity-2.34.13.orig/doc/creating_themes/Makefile.am
+++++ metacity-2.34.13/doc/creating_themes/Makefile.am
++@@ -1,6 +1,5 @@
++ ### This part of Makefile.am can be customized by you.
++ 
++-@YELP_HELP_RULES@
++ 
++ # The name of the directory in /usr/share/gnome/help/, 
++ # and the name of the main .xml file:
++Index: metacity-2.34.13/doc/creating_themes/Makefile.in
++===================================================================
++--- metacity-2.34.13.orig/doc/creating_themes/Makefile.in
+++++ metacity-2.34.13/doc/creating_themes/Makefile.in
++@@ -455,7 +455,6 @@ uninstall-am:
++ 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am
++ 
++ 
++-@YELP_HELP_RULES@
++ 
++ # Tell versions [3.59,3.63) of GNU make to not export all variables.
++ # Otherwise a system limit (for SysV at least) may be exceeded.
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+new file mode 100644
+index 0000000..370de70
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+@@ -0,0 +1,35 @@
++SECTION = "x11/wm"
++SUMMARY = "Metacity is the boring window manager for the adult in you"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++                    file://src/include/main.h;endline=24;md5=c2242df552c880280315989bab626b90"
++
++DEPENDS = "gsettings-desktop-schemas startup-notification gtk+ gconf gdk-pixbuf-native libcanberra gnome-doc-utils libgtop intltool-native"
++PR = "r1"
++
++inherit gnomebase update-alternatives distro_features_check
++# depends on startup-notification which depends on virtual/libx11
++REQUIRED_DISTRO_FEATURES = "x11"
++
++GNOME_COMPRESS_TYPE = "xz"
++
++SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
++           file://remove-yelp-help-rules-var.patch \
++           file://0001-ui-Define-_GNU_SOURCE.patch \
++           "
++SRC_URI[archive.md5sum] = "6d89b71672d4fa49fc87f83d610d0ef6"
++SRC_URI[archive.sha256sum] = "8cf4dbf0da0a6f36357ce7db7f829ec685908a7792453c662fb8184572b91075"
++
++ALTERNATIVE_${PN} = "x-window-manager"
++ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/metacity"
++ALTERNATIVE_PRIORITY = "10"
++
++EXTRA_OECONF += "--disable-xinerama"
++
++do_configure_prepend() {
++    sed -i -e 's:$ZENITY:$NOZENITY:g' -e 's:-Werror::g' ${S}/configure.in
++}
++
++FILES_${PN} += "${datadir}/themes ${datadir}/gnome-control-center ${datadir}/gnome"
++RDEPENDS_${PN} += "gsettings-desktop-schemas"
++
+-- 
+2.8.1
 
-Cheers
-Andrea
-
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
