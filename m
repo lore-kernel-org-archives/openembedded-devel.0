@@ -1,26 +1,23 @@
-Return-Path: <daniel@zonque.org>
-Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 665407459B
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FB6471BA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Apr 2018 08:47:04 +0000 (UTC)
-Received: from [IPv6:2001:16b8:46d6:c000:2748:4d8c:cfb:6e3d]
-	(200116b846d6c00027484d8c0cfb6e3d.dip.versatel-1u1.de
-	[IPv6:2001:16b8:46d6:c000:2748:4d8c:cfb:6e3d])
-	by mail.bugwerft.de (Postfix) with ESMTPSA id 49109287A73;
-	Fri, 13 Apr 2018 08:45:14 +0000 (UTC)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20180412190931.4057-1-daniel@zonque.org>
-	<CA+chaQeW=C8ZAhUSyNBH8r1ptnotA_o3Chj-ysNUxVSGH3sXcg@mail.gmail.com>
-	<CA+chaQfSC_iBD6osNhz1zmOZiuxFEpVBFjtn-AHNmeDwn3-6XQ@mail.gmail.com>
-From: Daniel Mack <daniel@zonque.org>
-Message-ID: <e3b7d598-e033-b698-0a4b-1b961e69c12b@zonque.org>
-Date: Fri, 13 Apr 2018 10:47:03 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.6.0
+	Fri, 13 Apr 2018 08:58:01 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w3D8w2OW015457
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 13 Apr 2018 01:58:02 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 13 Apr 2018 01:58:01 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <akuster808@gmail.com>
+Date: Fri, 13 Apr 2018 04:57:43 -0400
+Message-ID: <1523609863-13079-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfSC_iBD6osNhz1zmOZiuxFEpVBFjtn-AHNmeDwn3-6XQ@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] Remove license files that were dropped in 5.9.5
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH][meta-networking] networkmanager: enable gobject introspection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,29 +30,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2018 08:47:04 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 Apr 2018 08:58:02 -0000
+Content-Type: text/plain
 
-On Thursday, April 12, 2018 11:21 PM, Martin Jansa wrote:
-> Included in rocko-next and jansa/rocko branches now, thanks.
+While networkmanager upgraded to 1.10.6, it disable
+gi which caused network-manager-applet build faulure
+...
+Couldn't find include 'NM-1.0.gir'
+...
 
-qtdeclarative needs a bump as well ...
+Since the networkmanager inherit gobject-introspection,
+we should support it.
 
-diff --git a/recipes-qt/qt5/qtdeclarative_git.bb
-b/recipes-qt/qt5/qtdeclarative_git.bb
-index 827745d..0f1a30f 100644
---- a/recipes-qt/qt5/qtdeclarative_git.bb
-+++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -30,6 +30,6 @@ do_install_append_class-nativesdk() {
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../0008-support-gi-work-on-cross-compiling.patch  | 78 ++++++++++++++++++++++
+ .../networkmanager/networkmanager_1.10.6.bb        |  4 +-
+ 2 files changed, 80 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0008-support-gi-work-on-cross-compiling.patch
 
- EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG',
-'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
-
--SRCREV = "317908e72a6ea0b4ca179690539cb352bbf60832"
-+SRCREV = "dfbe91853737ff8ab548925bbd40fc9183a6e05d"
-
- BBCLASSEXTEND =+ "native nativesdk"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0008-support-gi-work-on-cross-compiling.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0008-support-gi-work-on-cross-compiling.patch
+new file mode 100644
+index 0000000..6012614
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0008-support-gi-work-on-cross-compiling.patch
+@@ -0,0 +1,78 @@
++From 22d424fc33c8d1f56081abe8df24ec30789e901d Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Fri, 13 Apr 2018 15:59:35 +0800
++Subject: [PATCH] support gi work on cross compiling
++
++For cross compiling:
++
++1. It is incorrect to detect gi at do_configure (build time).
++
++2. Do not use gi to generate doc at do_compile (build time),
++   tweak the macro BUILD_DOCS
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ Makefile.am  | 6 +++---
++ configure.ac | 9 ---------
++ 2 files changed, 3 insertions(+), 12 deletions(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 639921d..03db561 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -958,7 +958,7 @@ libnm/libnm.typelib: libnm/libnm.gir
++ INTROSPECTION_GIRS += libnm/NM-1.0.gir
++ endif
++ 
++-if HAVE_INTROSPECTION
+++if BUILD_DOCS
++ 
++ libnm_noinst_data = \
++ 	libnm/nm-property-docs.xml \
++@@ -3317,7 +3317,7 @@ $(clients_common_libnmc_base_la_OBJECTS): $(libnm_core_lib_h_pub_mkenums)
++ $(clients_common_libnmc_base_la_OBJECTS): clients/common/.dirstamp
++ 
++ clients_common_settings_doc_c = clients/common/settings-docs.c
++-if HAVE_INTROSPECTION
+++if BUILD_DOCS
++ $(clients_common_settings_doc_c): clients/common/settings-docs.xsl libnm/nm-property-docs.xml clients/common/.dirstamp
++ 	$(AM_V_GEN) $(XSLTPROC) --output $@ $< $(word 2,$^)
++ DISTCLEANFILES += $(clients_common_settings_doc_c)
++@@ -4361,7 +4361,7 @@ man_nm_settings_xml = \
++ 	man/nm-settings-keyfile.xml \
++ 	man/nm-settings-ifcfg-rh.xml
++ 
++-if HAVE_INTROSPECTION
+++if BUILD_DOCS
++ 
++ man/nm-setting%.xml: man/nm-setting%.xsl libnm/nm-setting%-docs.xml
++ 	$(AM_V_GEN) $(XSLTPROC) --output $@ $(xsltproc_flags) $^
++diff --git a/configure.ac b/configure.ac
++index c9d3e56..252608e 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -1286,19 +1286,10 @@ GTK_DOC_CHECK(1.0)
++ # check if we can build setting property documentation
++ build_docs=no
++ if test -n "$INTROSPECTION_MAKEFILE"; then
++-	# If g-i is installed we know we have python, but we might not have pygobject
++-	if ! "$PYTHON" -c 'from gi.repository import GObject' >& /dev/null; then
++-		AC_MSG_ERROR(["--enable-introspection aims to build the settings documentation. This requires GObject introspection for python (pygobject)])
++-	fi
++-
++ 	AC_PATH_PROG(PERL, perl)
++ 	if test -z "$PERL"; then
++ 		AC_MSG_ERROR([--enable-introspection requires perl])
++ 	fi
++-	AC_PATH_PROG(XSLTPROC, xsltproc)
++-	if test -z "$XSLTPROC"; then
++-		AC_MSG_ERROR([--enable-introspection requires xsltproc])
++-	fi
++ 
++ 	have_introspection=yes
++ 	if test "$enable_gtk_doc" = "yes"; then
++-- 
++1.8.3.1
++
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+index 6538e7b..660ce0a 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+@@ -34,6 +34,7 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManag
+            file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+            file://0006-check-for-strndupa-before-using-it.patch \
+            file://0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
++           file://0008-support-gi-work-on-cross-compiling.patch \
+            "
+ SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
+ SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
+@@ -44,7 +45,6 @@ EXTRA_OECONF = " \
+     --disable-ifcfg-rh \
+     --disable-ifnet \
+     --disable-ifcfg-suse \
+-    --disable-introspection \
+     --disable-more-warnings \
+     --with-iptables=${sbindir}/iptables \
+     --with-tests \
+@@ -52,7 +52,7 @@ EXTRA_OECONF = " \
+ "
+ 
+ do_compile_prepend() {
+-        export GIR_EXTRA_LIBS_PATH="${B}/libnm-util/.libs"
++        export GIR_EXTRA_LIBS_PATH="${B}/libnm-util/.libs:${B}/libnm-glib/.libs/:${B}/libnm/.libs"
+ }
+ 
+ PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
+-- 
+2.8.1
 
 
