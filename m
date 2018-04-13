@@ -1,28 +1,27 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B294F6AC00
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 424CB74577
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Apr 2018 09:25:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w3D9Pp0b013866
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 13 Apr 2018 02:25:51 -0700
-Received: from [128.224.163.159] (128.224.163.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 13 Apr 2018 02:25:50 -0700
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <1523609863-13079-1-git-send-email-hongxu.jia@windriver.com>
-	<CALbNGRRf+Dx67AvU-YO_6g2bre94pXtrMJOWqMiqU391TBwrkw@mail.gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <baabb5b1-be95-d8f4-2683-3c83fd0debb5@windriver.com>
-Date: Fri, 13 Apr 2018 17:25:49 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.7.0
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRRf+Dx67AvU-YO_6g2bre94pXtrMJOWqMiqU391TBwrkw@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-networking] networkmanager: enable gobject introspection
+	Fri, 13 Apr 2018 11:11:31 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1f6wZw-0007Yy-MJ for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Apr 2018 13:09:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 13 Apr 2018 13:11:20 +0200
+Message-ID: <paq34l$o0b$1@blaine.gmane.org>
+References: <CALbNGRT5ZWGZ=YCaSgpmryCzQFPKxDFYLCbOgSP3T1L9gJ0L3g@mail.gmail.com>
+	<1523588270-121531-1-git-send-email-hongxu.jia@windriver.com>
+	<papp8c$n9j$1@blaine.gmane.org>
+	<f6d6ee40-e3f2-d105-738b-2369bb26323a@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.6.0
+In-Reply-To: <f6d6ee40-e3f2-d105-738b-2369bb26323a@windriver.com>
+Subject: Re: [PATCH V2][meta-gnome] metacity: add back and change upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,28 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2018 09:25:51 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 13 Apr 2018 11:11:32 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Content-Language: nl
 
-On 2018年04月13日 17:18, Andreas Müller wrote:
-> On Fri, Apr 13, 2018 at 10:57 AM, Hongxu Jia <hongxu.jia@windriver.com> wrote:
->> While networkmanager upgraded to 1.10.6, it disable
->> gi which caused network-manager-applet build faulure
->> ...
->> Couldn't find include 'NM-1.0.gir'
->> ...
-> AFAIK it should be in autobuilder queue already [1]
->
-> [1] https://patchwork.openembedded.org/patch/150027/
+Op 13-04-18 om 11:08 schreef Hongxu Jia:
+> On 2018年04月13日 16:22, Koen Kooi wrote:
+>> Op 13-04-18 om 04:57 schreef Hongxu Jia:
+>>
+>>> +
+>>> diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+>>> +PR = "r1"
+>> Please drop the PR=r1 line, since the recipe gets readded there shouldn't be an issue for package feeds.
+>>
+> 
+> I do not drop it on purpose, if the oe developer do not
+> 
+> update the repo frequently, the missing RP caused confusing?
 
-Yes, thanks for pointing it out
-
-//Hongxu
-
->
-> Andreas
-
+I don't think it is too confusing, if someone really needs it a bbappend is easy enough to write and drop into their DISTRO layer.
 
 
