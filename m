@@ -1,51 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
-	[209.85.128.181])
-	by mail.openembedded.org (Postfix) with ESMTP id DB1FA74667
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 57A9D7198A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Apr 2018 09:05:53 +0000 (UTC)
-Received: by mail-wr0-f181.google.com with SMTP id s18so7583351wrg.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Apr 2018 02:05:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=zg4BakQOsqlmaxONM+sP7195706rbE9XDlqBMTLSy6Y=;
-	b=QMrrkCu46D07t3rdsHaIWJaZYHY4QslVSwaMo1aK/vyFA4PninEx+PBeEY7xh0EDGT
-	M95wr5yAx+6wh3BTmP6+Zq1Do1BRTVFmO4e0gDd5DDaOIAjynxm9IpUPPIoKlYgJGyS6
-	+UI3eudzJyIsh7SHgpn7Xowh6Zjwutk8Usc2lxiSPFvNPXntaUN0hedE3vckLlAFDzWC
-	Tk7l/kPTpgauUIzovc5YCWAAjrSmD9gWJ5PZTxHA/JSz+LG2/HRD3I0t7oyM6ZlPWDsr
-	nDwbqUoV61DddVuQZLWp8Md6+z7zR9A6Ty8YEjwpUzNUk2xXH7Xyz2lAaUJQcRoh1s8S
-	He3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=zg4BakQOsqlmaxONM+sP7195706rbE9XDlqBMTLSy6Y=;
-	b=BiZqv4AUuI8YqIvOsdqjDoYQmDhE1/HutjzgtuiYawC9RGkneqiNJSfaWSTZpRJDpD
-	EnJGlRUVRhWmRWmBckhbKye9Xi/GbdAUWed1NrXOr12kWrJkMtNyM0S8elBJ7rbOdUXD
-	T0qKKB1xj8LKdxh3VwYS8K5iEAC/8wdT0E50GRavJBoy+z/PCXtPh5TfvbAyELpak9g5
-	NBddflB3j23Lcmj7R9gMoFBob9VGwWVFchib0wP+3Il9+ABzB5ZLCjEQcPwIPe25GJXq
-	zlIJFngnHL1pHOasybWc3td2+vutwhcIv/bf+ckgP9lwWdXlyCT6F61eF2q7KKru6Sbt
-	dnQQ==
-X-Gm-Message-State: ALQs6tBI+fjg1CX/BMbGM9H/beE2KJWDLeyKjgcvLGcqVxT0Mn1dje1K
-	diNuwZL+Y0Yjtz7YMFL/EFZ0Xk1TR6KGBowOh6M=
-X-Google-Smtp-Source: AIpwx4+fT4CdsyNv9YtW3mhNE0wK/CWXM38eymYXQ1rjHE9uiL6hZPv29ra1aCiJ3GH6Hb2kRyKJj20nay+4b8YQw8Q=
-X-Received: by 10.223.163.155 with SMTP id l27mr199571wrb.133.1523610354139;
-	Fri, 13 Apr 2018 02:05:54 -0700 (PDT)
+	Fri, 13 Apr 2018 09:08:31 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w3D98Tmi013593
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 13 Apr 2018 02:08:30 -0700
+Received: from [128.224.163.159] (128.224.163.159) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 13 Apr 2018 02:08:29 -0700
+To: Koen Kooi <koen@dominion.thruhere.net>,
+	<openembedded-devel@lists.openembedded.org>
+References: <CALbNGRT5ZWGZ=YCaSgpmryCzQFPKxDFYLCbOgSP3T1L9gJ0L3g@mail.gmail.com>
+	<1523588270-121531-1-git-send-email-hongxu.jia@windriver.com>
+	<papp8c$n9j$1@blaine.gmane.org>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <f6d6ee40-e3f2-d105-738b-2369bb26323a@windriver.com>
+Date: Fri, 13 Apr 2018 17:08:28 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-Received: by 10.28.126.12 with HTTP; Fri, 13 Apr 2018 02:05:53 -0700 (PDT)
-In-Reply-To: <e3b7d598-e033-b698-0a4b-1b961e69c12b@zonque.org>
-References: <20180412190931.4057-1-daniel@zonque.org>
-	<CA+chaQeW=C8ZAhUSyNBH8r1ptnotA_o3Chj-ysNUxVSGH3sXcg@mail.gmail.com>
-	<CA+chaQfSC_iBD6osNhz1zmOZiuxFEpVBFjtn-AHNmeDwn3-6XQ@mail.gmail.com>
-	<e3b7d598-e033-b698-0a4b-1b961e69c12b@zonque.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 13 Apr 2018 11:05:53 +0200
-Message-ID: <CA+chaQc-9kYgz6y-0=L3YCo+TTAytDEHhsdgYHncCBnvzyzVMw@mail.gmail.com>
-To: Daniel Mack <daniel@zonque.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] Remove license files that were dropped in 5.9.5
+In-Reply-To: <papp8c$n9j$1@blaine.gmane.org>
+Subject: Re: [PATCH V2][meta-gnome] metacity: add back and change upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,33 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Apr 2018 09:05:54 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 13 Apr 2018 09:08:31 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Thanks, f23d1d54a06b0f3473e17300c3a1c495bcc25fdc added in rocko-next and
-jansa/rocko
+On 2018年04月13日 16:22, Koen Kooi wrote:
+> Op 13-04-18 om 04:57 schreef Hongxu Jia:
+>
+>> +
+>> diff --git a/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb b/meta-gnome/recipes-gnome/metacity/metacity_2.34.13.bb
+>> +PR = "r1"
+> Please drop the PR=r1 line, since the recipe gets readded there shouldn't be an issue for package feeds.
+>
 
-On Fri, Apr 13, 2018 at 10:47 AM, Daniel Mack <daniel@zonque.org> wrote:
+I do not drop it on purpose, if the oe developer do not
 
-> On Thursday, April 12, 2018 11:21 PM, Martin Jansa wrote:
-> > Included in rocko-next and jansa/rocko branches now, thanks.
->
-> qtdeclarative needs a bump as well ...
->
-> diff --git a/recipes-qt/qt5/qtdeclarative_git.bb
-> b/recipes-qt/qt5/qtdeclarative_git.bb
-> index 827745d..0f1a30f 100644
-> --- a/recipes-qt/qt5/qtdeclarative_git.bb
-> +++ b/recipes-qt/qt5/qtdeclarative_git.bb
-> @@ -30,6 +30,6 @@ do_install_append_class-nativesdk() {
->
->  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG',
-> 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
->
-> -SRCREV = "317908e72a6ea0b4ca179690539cb352bbf60832"
-> +SRCREV = "dfbe91853737ff8ab548925bbd40fc9183a6e05d"
->
->  BBCLASSEXTEND =+ "native nativesdk"
->
->
+update the repo frequently, the missing RP caused confusing?
+
+
+//Hongxu
+
+
+
+
 
