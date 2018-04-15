@@ -1,48 +1,32 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BA9860290
+Return-Path: <menschel-d@posteo.de>
+Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 47F7D7454E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Apr 2018 00:36:09 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id p10so2238859pgn.1
+	Sun, 15 Apr 2018 07:53:15 +0000 (UTC)
+Received: from submission (posteo.de [89.146.220.130]) 
+	by mout01.posteo.de (Postfix) with ESMTPS id 1EC6821027
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Apr 2018 17:36:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=nQwFzTOH5lLVwT7g7WnLgEFAHYm6wB2h4R6Lmje/QxA=;
-	b=YC0e2xtic80GbR+7Ta1oZt3Eh77q0t+Pcu/v+ejxPNqxVwlg6PaJsl7PZueIt0Az2z
-	jQkOEPRt+WnrCH009aw1DdWlIwD3VEqI5Hmpkjq0S44ANa2RYlqly1suNosgTNIzSegv
-	heClTtKOMXKS+DMyHFJD42AHLaTrBlhLhzfnj1QTRz1/a5XprBP7Q60aUwFUfpvU5HWe
-	Ya7rzi9/wbpZCpBx0F0uHlnmkIB1baZxE3EQxJhsWtBbWc+MfHQNlXXZhCEePXAKJH1x
-	/5GLNHUZYem/4ZMzhAqzxEtCQIA5jwYsNRD4YqgBpC+HYDVIez5Z7gBZzV1hwnDuu/lz
-	r80w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=nQwFzTOH5lLVwT7g7WnLgEFAHYm6wB2h4R6Lmje/QxA=;
-	b=MsmGlI6QsEFqjuDiVRe2FeFazv2UXGvJbWGE9yjcR8tUgs8ddxbVJEu18DRxlbbHGe
-	3HP3qTW/rlyMq3/AvI3YMcVRWtFSzFIvkMCRhfuJr964M2c9oxPzxkkbBV0jufkLciQf
-	0NOrl3W5x9yV/x1zpphVK//dc1ZXRjdqHWsXwG2C3A2+SpYaqXTdmqomqZFJByLiRarL
-	2BIPCOA1gGYUJyZeGKDTesVpjlZCKC+LmVVSf0+4j6CO6Vm4WSDaYnMwx++Q45L+Tq6i
-	x/vKmuObHJ9h41j9961sv4D209MR72CbvrbPu+A+54/hPzg65F3LsvZSlNW36CkCk7bg
-	H1+A==
-X-Gm-Message-State: ALQs6tB1dljN95SR3CcNLxWL3N2ADkGpy/Nds74BcJPefuDUgTBwmZyJ
-	G+vkNHq/7ikEA/HpDGytlxeRfg==
-X-Google-Smtp-Source: AIpwx48X4KqVybtr1JxPebfqQQWb1TbHPU3iWB/KT4aAs90qr1eW2ANvV+hew0YXo25sSc8dSV1g7w==
-X-Received: by 10.101.68.205 with SMTP id g13mr8231155pgs.387.1523752571011;
-	Sat, 14 Apr 2018 17:36:11 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4000:1184:19e4:d7e5:ee20:78ac])
-	by smtp.gmail.com with ESMTPSA id
-	x25sm3944785pfn.124.2018.04.14.17.36.09
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 14 Apr 2018 17:36:10 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Sat, 14 Apr 2018 17:36:08 -0700
-Message-Id: <1523752568-32122-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][v2][PATCH] drbd: BLACKLIST recipe
+	Sun, 15 Apr 2018 09:45:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.de; s=2017;
+	t=1523778356; bh=vYa8EzGoj7lbHKG662l6di3/C57lY8aCqrZfTGEJPn4=;
+	h=From:To:Cc:Subject:Date:From;
+	b=mH3Bs5DlQab6kXrIcFRpxmkaDWL/5Pj8cvd6sgRydIpABzXOIe+fKQyyn6xVYqZsf
+	immK6FdEqhqbgUjA0OSZ4A8w9si4+XJr7BpHFsl8Nw1cJgOaykFgcV/StcWBbcHSX2
+	RJASkOs1DwUFniRQc2bmmUx8mhWBnLuch1gevqSPwQgDRMYonb3Aq6T5ZbBHflmEWs
+	QvJeIUq0mXe4GpdJy1A2a6Qi8tGsW8klj8qhxuz5Pv/Vq6jWq/iN5KRb/m0KWkQyFs
+	tTwKhDc1rojOc0J/1Bx5b/HXZEBZ5do1pTS3EqMbAyrCvd2t4ujPeZ/YOI0gzPbIVs
+	zf7jM7fYuiWFQ==
+Received: from customer (localhost [127.0.0.1])
+	by submission (posteo.de) with ESMTPSA id 40P3Tv67Rzz9rxN;
+	Sun, 15 Apr 2018 09:45:55 +0200 (CEST)
+From: Dennis Menschel <menschel-d@posteo.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Apr 2018 09:44:34 +0200
+Message-Id: <20180415074434.2896-2-menschel-d@posteo.de>
+X-Mailer: git-send-email 2.14.1
+In-Reply-To: <20180415074434.2896-1-menschel-d@posteo.de>
+References: <20180415074434.2896-1-menschel-d@posteo.de>
+Subject: [meta-qt5][PATCH 2/2] .gitattributes: mark *.inc as Bitbake files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,36 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Apr 2018 00:36:10 -0000
+X-List-Received-Date: Sun, 15 Apr 2018 07:53:16 -0000
 
-[v2]
-Wrong version sent to list. forgot to refresh
+As the file extension *.inc is quite ambiguous, Github's linguist [1]
+tends to classify such files not as Bitbake include files, but something
+entirely different.
 
-fails do to new kernel headers.
+This commit overrides the default behavior of linguist to classify these
+files correctly.
 
-| ../drbd/9.0.8-1-r0/drbd-9.0.8-1/drbd/drbd_receiver.c:1479:7: error: 'struct bio' has no member named 'bi_bdev'; did you mean 'bi_iter'?
-|   bio->bi_bdev = device->ldev->backing_bdev;
-|        ^~~~~~~
-|        bi_iter
-| .../drbd/9.0.8-1-r0/drbd-9.0.8-1/drbd/drbd_receiver.c:1484:17: error: assignment from incompatible pointer type [-Werror=incompatible-pointer-types]
-|   bio->bi_end_io = drbd_peer_request_endio;
+[1] https://github.com/github/linguist
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Dennis Menschel <menschel-d@posteo.de>
 ---
- meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb | 2 ++
+ .gitattributes | 2 ++
  1 file changed, 2 insertions(+)
+ create mode 100644 .gitattributes
 
-diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb
-index e943f24..fa4d10b 100644
---- a/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd_9.0.8-1.bb
-@@ -20,3 +20,5 @@ EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
- do_install () {
-     oe_runmake install DESTDIR="${D}"
- }
-+
-+PNBLACKLIST[drbd] = "implicit declaration of function 'setup_timer'; 4.15 head file issue?" 
+diff --git a/.gitattributes b/.gitattributes
+new file mode 100644
+index 0000000..cb2381c
+--- /dev/null
++++ b/.gitattributes
+@@ -0,0 +1,2 @@
++# linguist overrides
++recipes-*/**/*.inc linguist-language=BitBake
 -- 
-2.7.4
+2.14.1
 
 
