@@ -1,20 +1,18 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id E50957450D
+	by mail.openembedded.org (Postfix) with ESMTP id 3EA9074512
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Apr 2018 13:22:45 +0000 (UTC)
+	Sun, 15 Apr 2018 14:15:49 +0000 (UTC)
 Received: from localhost.localdomain (62-178-50-190.cable.dynamic.surfer.at
-	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id D33EBC05C0
+	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id 464AE3F3E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Apr 2018 15:22:44 +0200 (CEST)
+	Sun, 15 Apr 2018 16:15:50 +0200 (CEST)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Apr 2018 15:22:16 +0200
-Message-Id: <20180415132216.22419-1-dv@pseudoterminal.org>
+Date: Sun, 15 Apr 2018 16:15:25 +0200
+Message-Id: <20180415141526.13306-1-dv@pseudoterminal.org>
 X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20180415094234.19735-1-dv@pseudoterminal.org>
-References: <20180415094234.19735-1-dv@pseudoterminal.org>
-Subject: [meta-multimedia][PATCH v2] openh264: add recipe
+Subject: [meta-multimedia][PATCH] libde265: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,65 +25,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Apr 2018 13:22:47 -0000
+X-List-Received-Date: Sun, 15 Apr 2018 14:15:50 -0000
 
-OpenH264 is a codec library which supports H.264 encoding and decoding.
-It is suitable for use in real time applications such as WebRTC.
+libde265 is an open source implementation of the h.265 video codec.
 
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- .../recipes-multimedia/openh264/openh264_1.7.0.bb  | 42 ++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+ .../recipes-multimedia/libde265/libde265_1.0.2.bb    | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb
 new file mode 100644
-index 000000000..a7aaab362
+index 000000000..cd075ffe1
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "OpenH264 is a codec library which supports H.264 encoding and \
-+decoding. It is suitable for use in real time applications such as WebRTC."
-+HOMEPAGE = "http://www.openh264.org/"
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "libde265 is an open source implementation of the h.265 \
++video codec. It is written from scratch and has a plain C API to enable a \
++simple integration into other software."
++HOMEPAGE = "http://www.libde265.org/"
 +SECTION = "libs/multimedia"
 +
-+DEPENDS = "${@oe.utils.conditional('TARGET_ARCH', 'i386', 'nasm-native', \
-+              oe.utils.conditional('TARGET_ARCH', 'x86_64', 'nasm-native', \
-+             '', d), d)}"
-+
-+LICENSE = "BSD-2-Clause"
++LICENSE = "LGPLv3"
 +LICENSE_FLAGS = "commercial"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
++LIC_FILES_CHKSUM = "file://COPYING;md5=852f345c1c52c9160f9a7c36bb997546"
 +
-+SRC_URI = "https://github.com/cisco/openh264/archive/v${PV}.tar.gz"
-+SRC_URI[md5sum] = "93da4e76cfda7ede8fd2df51b0021efd"
-+SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f6895738653f"
++SRC_URI = "https://github.com/strukturag/libde265/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "93520b378df25f3a94e962f2b54872cc"
++SRC_URI[sha256sum] = "eaa0348839c2935dd90647d72c6dd4a043e36361cb3c33d2b04df10fbcebd3cb"
 +
-+COMPATIBLE_MACHINE_armv7a = "(.*)"
-+COMPATIBLE_MACHINE_aarch64 = "(.*)"
-+COMPATIBLE_MACHINE_i386 = "(.*)"
-+COMPATIBLE_MACHINE_x86-64 = "(.*)"
-+COMPATIBLE_MACHINE_mips = "(.*)"
-+COMPATIBLE_MACHINE_mips64 = "(.*)"
++EXTRA_OECONF = "--disable-sherlock265 --disable-dec265"
 +
-+EXTRA_OEMAKE_armv7a = "ARCH=arm"
-+EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
-+EXTRA_OEMAKE_i386 = "ARCH=i386"
-+EXTRA_OEMAKE_x86-64 = "ARCH=x86_64"
-+EXTRA_OEMAKE_mips = "ARCH=mips"
-+EXTRA_OEMAKE_mips64 = "ARCH=mips64"
++inherit autotools-brokensep pkgconfig
 +
-+do_configure() {
-+    :
-+}
-+
-+do_compile() {
-+    oe_runmake
-+}
-+
-+do_install() {
-+    oe_runmake install DESTDIR=${D} PREFIX=${prefix}
-+}
++PACKAGES =+ "${PN}-tools"
++FILES_${PN}-tools = "${bindir}/*"
 -- 
 2.14.1
 
