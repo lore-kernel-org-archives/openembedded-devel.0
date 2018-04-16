@@ -1,51 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E31FE60685
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 894BA744BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2018 06:01:46 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id c7-v6so9422496plr.5
+	Mon, 16 Apr 2018 06:45:15 +0000 (UTC)
+Received: from mail-wr0-f176.google.com (mail-wr0-f176.google.com
+	[209.85.128.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 3C1EA21789
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Apr 2018 23:01:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ii+X4CLztkCKPWfrNndcJ1P3lbLuQl78uXhzay1GKeg=;
-	b=pVQM3Q0y8yktOHIxVExsdcmJ5bCqT5onpMza6GT9W852UTHeiyaz6dav5nVI+t1EsF
-	j2sgmrmjCallS1+/HvXofAc2FtupT41ih1/6NupAWVPEn8GIsYotBvQQtCmSyaXp9k5c
-	2ctGc5qe1icAELuNu47QY5ZTzCm7mvCP0erQFlG2owZ9wxzmAXI/eDoXLZPYvV6yw9FR
-	g9eVfqREO+vSGMiZSQg+MF2tES2Wf8DnNSjVkONcbpiN/1p5r7JuBnb0xqWy5AP1jQuS
-	WjYalm9iaUgBZb/OvTcXdKYsyx4PRIpdhw7vzt4guqL1v69JW7xYJgbzTDmxiRbE73Ze
-	hlEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ii+X4CLztkCKPWfrNndcJ1P3lbLuQl78uXhzay1GKeg=;
-	b=oonbWRZlS8ajjIqinmyI/Q5+PAwxVpGCnQbuuOv6b0tjQAz45qqkX6weaah2wuIkyB
-	Uv8fyCgSrGZetVUb9vcoB7UzQdrYCqYriCNQCcnfgwZxw8eYlkN2+WHmxGIFyquieQw8
-	0Wyq27NCmxoz017c3V0hdBUTy416LPtShCoHgnwlk5mwQvQ0BqyKHW5KgMkfE0BRz9S+
-	KbQELpsd/OozTSeyz+2qImDbCu7onsUJ/6o2pzyCZAjC+k6U4cwqRRX3mHr07MtrzdA9
-	bBa6aZ6oTh5LQkE/SQM1XQiBE5w+oBI0yEimTaSM52uuG8qm3TbfHU+1WSY8p8Na1r3s
-	2ufg==
-X-Gm-Message-State: ALQs6tC+ZhioJMd1p8jspbjoz16mHclWaz0N8cP7y3sZw1Udtae/K1vi
-	ubay4558HGk6+GfJ0HfMjj9GTA==
-X-Google-Smtp-Source: AIpwx4/lfXZ2ZwiYe50aTe1IWmPMilvXmruHKqV222HpXH0OuU9on5lo002nHCrWeJueTmw+Sm+7PQ==
-X-Received: by 2002:a17:902:128c:: with SMTP id
-	g12-v6mr13855695pla.98.1523858507899; 
-	Sun, 15 Apr 2018 23:01:47 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8880:466c::487b])
-	by smtp.gmail.com with ESMTPSA id
-	75sm22412103pfx.71.2018.04.15.23.01.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Apr 2018 23:01:46 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Apr 2018 23:01:34 -0700
-Message-Id: <20180416060134.26291-6-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <20180416060134.26291-1-raj.khem@gmail.com>
-References: <20180416060134.26291-1-raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH 6/6] xdebug: Add missing dep on re2c-native
+	Mon, 16 Apr 2018 06:45:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C1EA21789
+Authentication-Results: mail.kernel.org;
+	dmarc=none (p=none dis=none) header.from=kernel.org
+Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=krzk@kernel.org
+Received: by mail-wr0-f176.google.com with SMTP id l49so22628989wrl.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Apr 2018 23:45:16 -0700 (PDT)
+X-Gm-Message-State: ALQs6tDcF3tXx1MgklQ7YbcINyNIFeavWdgbhN91Cg7yqMIpbDHp7yx/
+	BfJQQQA/hlDVjvdahb2/oy5zNngNtCMNdJadWQ4=
+X-Google-Smtp-Source: AIpwx48x7iHpdlx7XJypt7y7beaTvSYUG784AHXq7ixDNZtrk9zZxQeLRRdDpZSxYieF8yfv1HY7EZGxAHqaH83deV8=
+X-Received: by 10.223.195.132 with SMTP id p4mr9350777wrf.279.1523861114657;
+	Sun, 15 Apr 2018 23:45:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.199.7 with HTTP; Sun, 15 Apr 2018 23:45:14 -0700 (PDT)
+In-Reply-To: <b9684482-6999-45c7-1ece-ebc247abffd1@gmail.com>
+References: <1523440301-20150-1-git-send-email-krzk@kernel.org>
+	<b9684482-6999-45c7-1ece-ebc247abffd1@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Mon, 16 Apr 2018 08:45:14 +0200
+X-Gmail-Original-Message-ID: <CAJKOXPc8fYzjdfg30H4O==AYb09PdAA4jrPKBYn_fW+g73vdRQ@mail.gmail.com>
+Message-ID: <CAJKOXPc8fYzjdfg30H4O==AYb09PdAA4jrPKBYn_fW+g73vdRQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Paul Barrette <paul.barrette@windriver.com>,
+	openembedded-devel@lists.openembedded.org, pascal.bach@nextrem.ch
+Subject: Re: [meta-python][PATCH] python3-websockets: Add new recipe for v4.0.1 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +47,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2018 06:01:47 -0000
+X-List-Received-Date: Mon, 16 Apr 2018 06:45:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Sat, Apr 14, 2018 at 2:01 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+> On 4/11/18 2:51 AM, Krzysztof Kozlowski wrote:
+>>
+>> Add recipe for python3-websockets v4.0.1.  Strictly speaking the package
+>> does not require asyncio but instead builds on top of it and it is
+>> essential for any work.
+>>
+>> Make this recipe a native one to allow usage for example in image tests
+>> as a websocket client talking to a device under test.
+>>
+>> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+>> ---
+>>   .../recipes-devtools/python/python3-websockets_4.0.1.bb  | 16
+>> ++++++++++++++++
+>>   1 file changed, 16 insertions(+)
+>>   create mode 100644
+>> meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+>>
+>> diff --git
+>> a/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+>> b/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+>> new file mode 100644
+>> index 000000000000..414129c59d2f
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-websockets_4.0.1.bb
+>> @@ -0,0 +1,16 @@
+>> +SUMMARY = "An implementation of the WebSocket Protocol (RFC 6455)"
+>> +HOMEPAGE = "https://github.com/aaugustin/websockets"
+>> +
+>> +LICENSE = "BSD-3-Clause"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5070256738c06d2e59adbec1f4057dac"
+>> +
+>> +inherit pypi setuptools3
+>> +
+>> +SRC_URI[md5sum] = "9e8c6b3c70def4146d75fbb0f52bdfc7"
+>> +SRC_URI[sha256sum] =
+>> "da4d4fbe059b0453e726d6d993760065d69b823a27efc3040402a6fcfe6a1ed9"
+>> +
+>> +BBCLASSEXTEND = "native nativesdk"
+>> +
+>> +RDEPENDS_${PN} = "\
+>> +    ${PYTHON_PN}-asyncio \
+>> +"
+>>
+>
+> There are recipes in other layers whose maintainers should be CCed as well
+> so they know its moving to a more common layer.
+>
+> https://github.com/Wind-River/meta-device-cloud/blob/master/recipes-devtools/python/python3-websockets_3.3.bb
+>
+> https://github.com/bachp/meta-homeassistant/blob/master/recipes-devtools/python/python3-websockets_3.2.bb
 
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb
-index 2b8943d22..6516988d7 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Debugging and profiling extension for PHP"
- LICENSE = "Xdebug"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
- 
--DEPENDS = "php"
-+DEPENDS = "php re2c-native"
- 
- SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
- 
--- 
-2.17.0
+Sure, let me CC them here (+Cc Paul Barrette and Pascal Bach) unless
+there is a need for resend?
 
+Best regards,
+Krzysztof
 
