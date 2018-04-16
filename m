@@ -1,51 +1,40 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 126F472EF7
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id AC5B474502
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2018 08:29:38 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id f63-v6so13737667oic.4
+	Mon, 16 Apr 2018 08:30:39 +0000 (UTC)
+Received: by mail-qk0-f177.google.com with SMTP id s70so399010qks.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2018 01:29:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=CFoVbuX+fzPuCVtXuwbal2v3vjRS+D4o3YbpTwa6xNk=;
-	b=B9ETxpSFT7mQ+YDdcGt0AXt6Y5rJt7XWo0xQ7TtJ520BVPT2BHKXTVwYsTgGxZpwZK
-	ud2dJFe3feeRxxLjYSCJciTLnsolUnb16vXg84Cb8E090qn30jxYNIMs/kNNMCi9J3sM
-	pmz9fgFjatmS59YW8ALHSWovRXguCDcFyU3iUeeTrpzfn7Wl7XhJXaWvO6Mw+nZ+fMi9
-	PSl2tp4vf1cvaRRCHXh9UYNkodBxpCmL0v1/xnNd1sD7lvMmfzwQBQtDKY1g58W3SOZc
-	QPiqXidTJcmq1xMgX7xfZyRdGz8c6ipkz4i8v1buCysjK+CEVlmrAhjm0LMKH3pPwvuN
-	v6OA==
+	Mon, 16 Apr 2018 01:30:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=CFoVbuX+fzPuCVtXuwbal2v3vjRS+D4o3YbpTwa6xNk=;
-	b=iI8N4HuImPSFO7Hip6mkpShiF6c/t9TvOK6P/21pBe/KECHBUN6Y8chMj6Sz/4WUze
-	1T/GPAJkzZq6TUcsgEgBSr2cCoBGcw18zJou/pzPuIuQp6qTdEOhBhv5we7XgK6VTdUC
-	e66p9RIupcM0SAHsb4bqaJwkp5gDi2O1gjjhtA9CiCZGu0CH5Y+rihYGoaSv3+1Jz39I
-	ZNv8dFn3UfpYWsTOjl1giqr/8Chk2ITAcK/oX+IiD3DXFIzwd4MAo6kIH5gRb9Hf1s0a
-	RRTeukS0icwWLrVBq5wpIvaIyKHCow19eoBFoTh2wOKoS16DsxYhkVDQ0fHyTk4lJaYn
-	nnuw==
-X-Gm-Message-State: ALQs6tDAQrVsp401UXm8A3Jf0pjMXuAbIvQS5s9I5GuYNMs93n0Ac1pz
-	G+FVRh7JrEFbqwliTLIkBTwemE7FzH2qPmlCpx8=
-X-Google-Smtp-Source: AIpwx4/tkWoN/AS6Xb1Nywbx0s5EuzIzdQe+CXeKQxcskhQ/q+QN5fILo1PUziUnXKPco6qCP9mvnSBUJNvZRnCZ2ak=
-X-Received: by 2002:aca:1902:: with SMTP id l2-v6mr696648oii.285.1523867379850;
-	Mon, 16 Apr 2018 01:29:39 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=zzJxaSB2kcz5sFYIqda8Ve72PK1lbMPrVoqrkIUKqv0=;
+	b=ib17z3jfXnljQp1ixdGb1RO/9y/mBtHTqovKncsT4VuBLY0+3YNrPf+ObBZ4q8oKDK
+	FnWyxWrE9nBy7IZvjUonKJ8RJdWS1W2/e7/b8M8epVo4CyXbd9BCZ/jmDgaMJY1S7TyY
+	EVXMJ2ISIXn8yGuElJl3b8DXc7eCm7vJa0yw+9zYBXjy4hkNuRrNl/jlqcMaojaUuFsH
+	I1HJgkKSTjrnjGfM+hQ70w4OogT7xDWNMGDpg0dFzyCng2p8/18n3VA/kBcaRd+V63Ht
+	bjnL4gBozK5mpjcSZseP2Wf5ThdSXA0/nBiqwlissrXCYl6H7fQc3qBMHtmD2q4Hrhm5
+	Js7g==
+X-Gm-Message-State: ALQs6tDQLU4BXvZ2tp63RzV0Qr6/yNlLEV+AOguVQ6oiEM1xTk2zwsiJ
+	AgpyTfFf6RyCw3yQox8vINP3F4+C
+X-Google-Smtp-Source: AIpwx49NIUYl8Y5flldqWgn56i8vyXqJu99opM4Fwr0yffYnY092YVjN88MX6lCg6sR6QEp7KHjvRA==
+X-Received: by 10.55.139.197 with SMTP id n188mr15861356qkd.212.1523867440356; 
+	Mon, 16 Apr 2018 01:30:40 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id 36sm3033415qtz.8.2018.04.16.01.30.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 16 Apr 2018 01:30:39 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Apr 2018 09:30:37 +0100
+Message-Id: <20180416083037.12784-1-git@andred.net>
+X-Mailer: git-send-email 2.16.2
 MIME-Version: 1.0
-Received: by 10.201.25.81 with HTTP; Mon, 16 Apr 2018 01:29:38 -0700 (PDT)
-In-Reply-To: <CALbNGRTJF5vpgvoY71ag7kcF-+-qSvsgw8JaRU-GnOMokpUHsg@mail.gmail.com>
-References: <20180409220249.11796-1-schnitzeltony@gmail.com>
-	<20180409220249.11796-2-schnitzeltony@gmail.com>
-	<4bc04e65-e5c8-7a7a-5731-72afd624b0c3@gmail.com>
-	<CALbNGRTJF5vpgvoY71ag7kcF-+-qSvsgw8JaRU-GnOMokpUHsg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 16 Apr 2018 10:29:38 +0200
-Message-ID: <CALbNGRR2HkpSaXymOXGqxde=_+ni4pm6mD_NAU15KYuD75bzbA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/9] networkmanager: fix gobject-introspection/musl and cleanup
+Subject: [meta-python][PATCH] python-pybluez: add missing RDEPENDS (fcntl)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2018 08:29:39 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Apr 2018 08:30:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Apr 10, 2018 at 5:02 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> On Tue, Apr 10, 2018 at 4:53 PM, akuster808 <akuster808@gmail.com> wrote:
->>
->>
->> On 04/09/2018 03:02 PM, Andreas M=C3=BCller wrote:
->>> This adresses the comments for recent patch which updated nm to 1.10.6 =
-and is a
->>> follow-up for [1].
->>
->> There is a form of this  already in my stagging/master-next. Should it
->> be removed and replaced by this one?
-> Please replace - with the first version I introduced a parse error!
->
-> Andreas
-Hi Armin,
+From: André Draszik <andre.draszik@jci.com>
 
-Just checked master-next: There is still V1
-(30b50a479c496e722d8ca590e60d3b34bcda2d67) of this patch which causes
-parse errors. Your follow-up
-(45cd132ff9d64902eb0152b5a3ee4c1a1c9504f5) patch fixes parsing but
-breaks the logic.
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ meta-python/recipes-devtools/python/python-pybluez.inc | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Sorry that I have to say this: Our collaboration is far from working:
-I wrote this several times that V1 breaks parsing / you asked in in
-this thread which patch to take but still I see you have taken the
-wrong version.
+diff --git a/meta-python/recipes-devtools/python/python-pybluez.inc b/meta-python/recipes-devtools/python/python-pybluez.inc
+index ed72716b6..399fe579f 100644
+--- a/meta-python/recipes-devtools/python/python-pybluez.inc
++++ b/meta-python/recipes-devtools/python/python-pybluez.inc
+@@ -2,7 +2,6 @@ DESCRIPTION = "Bluetooth Python extension module"
+ HOMEPAGE = "http://karulis.github.io/pybluez/"
+ SECTION = "devel/python"
+ 
+-RDEPENDS_${PN} = "bluez5"
+ DEPENDS = "bluez5"
+ 
+ LICENSE = "GPL-2.0"
+@@ -15,3 +14,8 @@ SRC_URI[md5sum] = "49dab9d5a8f0b798c8125c7f649be3cd"
+ SRC_URI[sha256sum] = "4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d"
+ 
+ S = "${WORKDIR}/PyBluez-${PV}"
++
++RDEPENDS_${PN} += "\
++    bluez5 \
++    ${PYTHON_PN}-fcntl \
++"
+-- 
+2.16.2
 
-Don't misunderstand me: I don't want to criticise your work because I
-know you very busy and take care of many issues - there is lots more
-than checking my patches :)
-
-Current situation causes extra efforts for both of us so what can we
-do to improve the situation?
-
-For networkmanager: I had to learn that musl is not fixed. Although I
-don't plan to use musl I suggest to send V3 with fixed musl because I
-really want to get this closed.
-
-Andreas
 
