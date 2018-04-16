@@ -1,30 +1,23 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FC16744CA
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D3E9060574
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2018 02:24:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="38894541"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Apr 2018 10:24:16 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id A0D904D0EFF5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Apr 2018 10:24:16 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Mon, 16 Apr 2018 10:24:17 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Apr 2018 19:23:59 +0800
-Message-ID: <1523877839-28714-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 16 Apr 2018 02:29:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w3G2T9QV008549
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 15 Apr 2018 19:29:09 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Sun, 15 Apr 2018 19:29:08 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <akuster808@gmail.com>
+Date: Sun, 15 Apr 2018 22:28:48 -0400
+Message-ID: <1523845728-111656-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-yoursite-MailScanner-ID: A0D904D0EFF5.AB048
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] xwud: 1.0.4 -> 1.0.5
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] php 7.2.4: fix do_compile failure on qemumips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +30,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Apr 2018 02:24:16 -0000
+X-List-Received-Date: Mon, 16 Apr 2018 02:29:09 -0000
 Content-Type: text/plain
 
-Upgrade xwud from 1.0.4 to 1.0.5.
+It caused by a new variable is declared after the label
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+There is a build failure on mips:
+...
+|sljitNativeMIPS_common.c: In function 'sljit_has_cpu_feature':
+|sljitNativeMIPS_common.c:506:3: error: a label can only be part
+of a statement and a declaration is not a statement
+|   sljit_sw fir;
+|   ^~~~~~~~
+...
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-graphics/xorg-app/{xwud_1.0.4.bb => xwud_1.0.5.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xwud_1.0.4.bb => xwud_1.0.5.bb} (73%)
+ ...aused-by-a-new-variable-is-declared-after.patch | 45 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_7.2.4.bb          |  1 +
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/0001-fix-error-caused-by-a-new-variable-is-declared-after.patch
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xwud_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/xwud_1.0.5.bb
-similarity index 73%
-rename from meta-oe/recipes-graphics/xorg-app/xwud_1.0.4.bb
-rename to meta-oe/recipes-graphics/xorg-app/xwud_1.0.5.bb
-index 33bd7f0..7cb550d 100644
---- a/meta-oe/recipes-graphics/xorg-app/xwud_1.0.4.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xwud_1.0.5.bb
-@@ -8,5 +8,5 @@ SECTION = "x11/app"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=31e8892c80b7a0c1c5f37c8e8ae6d794"
- 
--SRC_URI[md5sum] = "3025b152b4f13fdffd0c46d0be587be6"
--SRC_URI[sha256sum] = "d6b3a09ccfe750868e26bd2384900ab5ff0d434f7f40cd272a50eda8aaa1f8bd"
-+SRC_URI[md5sum] = "79972093bb0766fcd0223b2bd6d11932"
-+SRC_URI[sha256sum] = "99997051f8a892313f22edf41dab45864e86e7062ee9012d5dbb6a40fc6b10a9"
+diff --git a/meta-oe/recipes-devtools/php/php/0001-fix-error-caused-by-a-new-variable-is-declared-after.patch b/meta-oe/recipes-devtools/php/php/0001-fix-error-caused-by-a-new-variable-is-declared-after.patch
+new file mode 100644
+index 0000000..6ab101b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/0001-fix-error-caused-by-a-new-variable-is-declared-after.patch
+@@ -0,0 +1,45 @@
++From 0d88d735887c6f2fa00a743c27124c7a52006a41 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Sun, 15 Apr 2018 19:17:27 -0700
++Subject: [PATCH] fix error caused by a new variable is declared after the
++ label
++
++There is a build failure on mips:
++...
++|sljitNativeMIPS_common.c: In function 'sljit_has_cpu_feature':
++|sljitNativeMIPS_common.c:506:3: error: a label can only be part
++of a statement and a declaration is not a statement
++|   sljit_sw fir;
++|   ^~~~~~~~
++...
++
++Upstream-Status: Pending
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ ext/pcre/pcrelib/sljit/sljitNativeMIPS_common.c | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/ext/pcre/pcrelib/sljit/sljitNativeMIPS_common.c b/ext/pcre/pcrelib/sljit/sljitNativeMIPS_common.c
++index ee207fe..adfd342 100644
++--- a/ext/pcre/pcrelib/sljit/sljitNativeMIPS_common.c
+++++ b/ext/pcre/pcrelib/sljit/sljitNativeMIPS_common.c
++@@ -498,12 +498,14 @@ SLJIT_API_FUNC_ATTRIBUTE void* sljit_generate_code(struct sljit_compiler *compil
++ 
++ SLJIT_API_FUNC_ATTRIBUTE sljit_s32 sljit_has_cpu_feature(sljit_s32 feature_type)
++ {
+++#if defined(__GNUC__)
+++	sljit_sw fir;
+++#endif
++ 	switch (feature_type) {
++ 	case SLJIT_HAS_FPU:
++ #ifdef SLJIT_IS_FPU_AVAILABLE
++ 		return SLJIT_IS_FPU_AVAILABLE;
++ #elif defined(__GNUC__)
++-		sljit_sw fir;
++ 		asm ("cfc1 %0, $0" : "=r"(fir));
++ 		return (fir >> 22) & 0x1;
++ #else
++-- 
++2.10.2
++
+diff --git a/meta-oe/recipes-devtools/php/php_7.2.4.bb b/meta-oe/recipes-devtools/php/php_7.2.4.bb
+index 04d9b16..2fd1e66 100644
+--- a/meta-oe/recipes-devtools/php/php_7.2.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.2.4.bb
+@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=67e369bc8d1f2e641236b8002039a6a2"
+ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+             file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
+             file://0001-main-php_ini.c-build-empty-php_load_zend_extension_c.patch \
++            file://0001-fix-error-caused-by-a-new-variable-is-declared-after.patch \
+            "
+ SRC_URI_append_class-target = " \
+                                 file://pear-makefile.patch \
 -- 
-2.7.4
-
-
+2.8.1
 
 
