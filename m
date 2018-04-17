@@ -1,52 +1,52 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 212FB7452B
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 29FA574556
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2018 14:20:28 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id o15so5045999wro.11
+	Tue, 17 Apr 2018 14:20:29 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id v60so32162836wrc.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2018 07:20:30 -0700 (PDT)
+	Tue, 17 Apr 2018 07:20:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=AeZpsXM+XQhgsTwnI/omQvtWNxU4uTK/qJjdgqtmKfQ=;
-	b=YkdKerqzoEYmp+KR2kzzM5vGEp27xaLpMlxsiNblgVF4X4GwvTIorQAu42NamL3zEh
-	tRhMeERWPjuvsxBkHyR5RQwg24EKES3GD7qm4U6TFM73tReQkUsW4+dI+D9QZMKSOnQQ
-	GWAzsRsJ8wTJH7/lKaHsLm3rDeYVROmUWLQ8BWpTZx65hCh+GoJmW/JxLKCjw6iKMGEX
-	eAlf43o41Dy48feM5oq7CuW2ksJvBc3NqAcATUUUWXzKC+IjsGkicbzUkq5qc4HTQ/tg
-	WJoNJhUGbBZ8qrs4XcBs4FmdcxDQZ1mR4/+CfQLKyzcLWTHv+Cmcy5lg4J81yh73nl4V
-	E+7g==
+	bh=enwre4rFDgPgg7MYhhfINi77r3dX2WUkneraWVPUecI=;
+	b=dAt0UB+oNXpxbDb4fg+nuZ3XK0S7Yz3jsRWf9s8xPFrTHo2isoEDlEIf6dQxuBHRbd
+	CGFIlWQQChe05svG1J3syRVFFBnKV9hPqng+N8ShoFKDEwzclKLulRFojgJFD57blto/
+	AkOt3b/C1bIyqwHw9LN3HB/uSzfV7xgqrIqy3wgzyt98ZOaOYAQycz/CbiLjCWolusFP
+	c6B6el9kRUIQSFutVaxCCQPM//xHOH/UgGRGs8YVGszIuse7CCeaR5ygrEl8s6yjTiOE
+	u1eBlOhNgwv1kzvSHBNq3kr3IqYoNqwNHwKZsFePFpB9QGG2c43rHMQT5024ddREF6du
+	WBmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=AeZpsXM+XQhgsTwnI/omQvtWNxU4uTK/qJjdgqtmKfQ=;
-	b=sJ6bekzcJP9lR1FscrXnaHCI5gP/gcu/RPdaUIChf4JuFQbsFjwPzfjP4yR3fxUBn4
-	J9Y3pF0ItiKaNnWir8p2vRDS8zKcd+LDjlcxN3ACs9j4B83nnwzEs4qh7KBEa9xDhENc
-	ICjibdhTC7LmsuqfXk71mlzKo9w9krU1DCQwOj2lbKKmJE6r6Yd9a3J802Nb2l7fC5Mh
-	KMs0F3eBy+kBhZ6dfa4srXXDg+A0jT7d5kx08BsyI6Wh7cEvSu1sPjtyYmdEjmDunUb9
-	IkzfNpT1gGOR6VP0bdvjrW+MTITWLxDHvMgqvcRKhEjWrYNEGvEDUEb+ImW3PFJ7RDBO
-	7foA==
-X-Gm-Message-State: ALQs6tCaEjorNa02zLs/sEWLNwAjeh2P7KUglESC+5HU0CrrK6l1brcO
-	Fy5Uito5zIX0HSiuI7350jpLr3/PA/g=
-X-Google-Smtp-Source: AIpwx48+rq1v1ilxiQrzFt6PA9L7qaviVGTgFvvQKceCuAFfigBdDol5hyAUTtD3N+MCAmsEqljf1A==
-X-Received: by 10.223.133.209 with SMTP id 17mr1894461wru.143.1523974829528;
-	Tue, 17 Apr 2018 07:20:29 -0700 (PDT)
+	bh=enwre4rFDgPgg7MYhhfINi77r3dX2WUkneraWVPUecI=;
+	b=PbszcLI9zSl3fNt3fTAPDAZgvt3rP2Gu+RxKQGxBfkCvAwg5czXYeC/hlnqsWWDj9d
+	oVi8yzvDqRyf7BrNMWedwmHAbi57E94XmltPWx3MllIglcil6uKwRJKrEiK13qAZQYOk
+	lj/nPIveHXXhR9dYMjr/c2XGiqO0TfjxXgsQPie/sVxXmHqVIGgJYHdz59g99YXD+3JL
+	LgWInzx1IqC1WT5odU5axSKor2JPmuWbR5j8tzuZ3cN9d7lubEya4lSSH0xVmGJT6QxL
+	qcfD+GZCpTYWE+a18uLZRQuvpptv4PwaQCESkQllUeNtOqYTfiOhr7D73aJSrAzCZ+k3
+	ezhg==
+X-Gm-Message-State: ALQs6tDQJqypAsFgqyT6AqsmRwlEFdj1Oxv4LiP1fASsyl5Vl5jcFc6B
+	JMupHP/xMq5ONsGGgCIqKYoOig==
+X-Google-Smtp-Source: AIpwx49TEGtqYtmai9B+CJA6HjAMXINExlRJfNbUs2OFuS1Wm4nGSuiaCbK9Uv0qFF5Vo3/ygNHaBA==
+X-Received: by 10.28.18.199 with SMTP id 190mr1277562wms.50.1523974830670;
+	Tue, 17 Apr 2018 07:20:30 -0700 (PDT)
 Received: from brgl-bgdev.lan (LFbn-1-7086-217.w90-116.abo.wanadoo.fr.
 	[90.116.254.217]) by smtp.gmail.com with ESMTPSA id
-	f132sm6455563wmf.13.2018.04.17.07.20.28
+	f132sm6455563wmf.13.2018.04.17.07.20.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Apr 2018 07:20:28 -0700 (PDT)
+	Tue, 17 Apr 2018 07:20:30 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Armin Kuster <akuster808@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Apr 2018 16:20:19 +0200
-Message-Id: <20180417142020.30100-4-brgl@bgdev.pl>
+Date: Tue, 17 Apr 2018 16:20:20 +0200
+Message-Id: <20180417142020.30100-5-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180417142020.30100-1-brgl@bgdev.pl>
 References: <20180417142020.30100-1-brgl@bgdev.pl>
-Subject: [meta-oe][PATCH v2 3/4] libgpiod: bump version to v0.3.3
+Subject: [meta-oe][PATCH v2 4/4] libgpiod: add support for v1.x series
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,38 +59,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2018 14:20:29 -0000
+X-List-Received-Date: Tue, 17 Apr 2018 14:20:30 -0000
 
-This is a bug fix release of the v0.3.x series.
+Add a recipe for libgpiod v1.0.1. It can live next to the one for v0.3.3.
 
 Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 ---
- meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb | 4 ----
- meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb | 4 ++++
- 2 files changed, 4 insertions(+), 4 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+ meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb
-deleted file mode 100644
-index ea785ad0c..000000000
---- a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.2.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require libgpiod.inc
--
--SRC_URI[md5sum] = "9c1966bea7dffd59bd099a8b2930e2ea"
--SRC_URI[sha256sum] = "50c7862428ca90b58672e2475aea66d33a6fc86c6bab1928c0660f3aedf44a37"
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb
 new file mode 100644
-index 000000000..09fb65a08
+index 000000000..51499fd72
 --- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb
 @@ -0,0 +1,4 @@
 +require libgpiod.inc
 +
-+SRC_URI[md5sum] = "2aa1e1a80c3c919ae142ab9a55fb59ca"
-+SRC_URI[sha256sum] = "b773e557af1a497f786825462a776b7bf90168e67ee0a5bc5d2473a5674dc38c"
++SRC_URI[md5sum] = "2ca0c3eb17d69e367b6f6a109ca86e41"
++SRC_URI[sha256sum] = "972924195367f5fb045c023d65340c4b7dfc8764499516be446553865208dedc"
 -- 
 2.17.0
 
