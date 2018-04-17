@@ -1,23 +1,47 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1398E71DEE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BECB97453C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2018 07:19:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w3H7Jxiv024932
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 17 Apr 2018 00:19:59 -0700 (PDT)
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Tue, 17 Apr 2018 00:19:58 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <akuster808@gmail.com>
-Date: Tue, 17 Apr 2018 15:27:27 +0800
-Message-ID: <1523950047-18434-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH] xfce4-notifyd: fix parallel build issue
+	Tue, 17 Apr 2018 07:25:42 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id y66so11748425pfi.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Apr 2018 00:25:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=0onQ+wFVZuwoTUoagNY97kfyauSx+5l4WZ235C4sOVo=;
+	b=HnxAcX2QbJrfl+pEge3zSuVJq/C/6xHtYZJL5Mi2voH+n3Ci4cZ7VDhTd/+up2d28c
+	hX/R01yVLzwwaXYO5L2GhvvY7QW3pIdClXXNRIH6Gv68iDL9l2jD3cxa3DOMF2QGnfMv
+	2G9mD74aTV7wgltNXMJqdkAXwPD8fiKVszKoRkl5TzGYYbm/yreCny8Wl66twzm3U4l9
+	U4GTUkR0ix8HyPWpSkaVx+0SztNfe6BpeUd+yAeXGY3LqFPhF5nfVmEg9FpkMbcvswHP
+	dZXWWKLCQfGUmFzfshmpbFmR0Hvijh4svmiKaPd4UVdMOVRiY1MccitHOaYTleYYitJr
+	uvWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0onQ+wFVZuwoTUoagNY97kfyauSx+5l4WZ235C4sOVo=;
+	b=Mvr5CYOVpufdbeqOrPpo8crkPl2D6Eq6KMx0VzWlbFYmTrWQA9Fi6LBgHP/6W8Sht9
+	9ozNgi52GdEna+IVV8HxAZbq01YnORtDKJ4RU9CjB1Wx6tQyMDoJ/EeOj2esN3aLPS7P
+	lnnsFkrhyhKIQupFdUCX4tI5+UYoKIIBqEWvflGIzAVioU4KYO2FKr41g18OANYOUKk2
+	w2nPzibFEk8vol4HJImzRD5rUORlH/k+IOXWt/RqB8bKvDW3Jh+JJbucrAf0jWutfMKB
+	bGdKtcEiTeKKExx4xFHJI8xzXpZsG5jmwaLSS86qondWP1GK9p+c0pNSIo9gztsUzx9g
+	XViQ==
+X-Gm-Message-State: ALQs6tD2EbyT1lC8ZL/3b85R2ffwhXHKalMM3ryQxr5rCJb+JtzUU2k6
+	CTC2L6dTXNEyM5aOAWwCIMQ/Og==
+X-Google-Smtp-Source: AIpwx4+fakVI1fM0bK9WR+XPwJRr/k4r2db+wcD0qXLBsL+b3uXjLiMv6jOdt1yTv7/S5xrZ515WNQ==
+X-Received: by 10.101.88.11 with SMTP id g11mr869460pgr.201.1523949943637;
+	Tue, 17 Apr 2018 00:25:43 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8880:466c::487b])
+	by smtp.gmail.com with ESMTPSA id
+	t25sm22832313pfh.184.2018.04.17.00.25.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 17 Apr 2018 00:25:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Apr 2018 00:25:34 -0700
+Message-Id: <20180417072535.18114-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-networking][PATCH 1/2] memcached: Upgrade to 1.5.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,39 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2018 07:19:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 Apr 2018 07:25:42 -0000
 
-While do an out-of-tree build, if xfce4-notifyd-config is not created
-in time, there is a compile failure:
-...
-|LC_ALL=C intltool-merge -d -u -c ./po/.intltool-merge-cache
-../xfce4-notifyd-0.4.0/po ../xfce4-notifyd-0.4.0/xfce4-notifyd-config/
-xfce4-notifyd-config.desktop.in xfce4-notifyd-config/xfce4-notifyd-config.desktop
-|Died at intltool-merge line 1184.
-...
-
-Ensure xfce4-notifyd-config subdirectory exists fixes the issue.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../memcached/{memcached_1.5.0.bb => memcached_1.5.7.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/memcached/{memcached_1.5.0.bb => memcached_1.5.7.bb} (92%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
-index 54e702e..15ec51b 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.2.bb
-@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "f6f28af47fdfb41db84bd003f0d76f5f4abf2137d1e27e9d378f063bb8
- EXTRA_OECONF = "--disable-dbus-start-daemon"
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.5.0.bb b/meta-networking/recipes-support/memcached/memcached_1.5.7.bb
+similarity index 92%
+rename from meta-networking/recipes-support/memcached/memcached_1.5.0.bb
+rename to meta-networking/recipes-support/memcached/memcached_1.5.7.bb
+index fd3d171f0..0703e7c59 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.5.0.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.5.7.bb
+@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
+ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
+            file://memcached-add-hugetlbfs-check.patch \
+            "
+-SRC_URI[md5sum] = "81326513f60d7ba482f8131975cd55ae"
+-SRC_URI[sha256sum] = "c001f812024bb461b5e4d7d0506daab63dff9614eea26f46536c3b7e1e601c32"
++SRC_URI[md5sum] = "07feaa900181c66753f9b060f40f24aa"
++SRC_URI[sha256sum] = "5bb706a8fc7ae7461a6788eaddd85e4a4e84e952d3a80c21926342c2838f4e46"
  
- do_compile_prepend() {
--    mkdir -p xfce4-notifyd
-+    mkdir -p xfce4-notifyd xfce4-notifyd-config
- }
- 
- FILES_${PN} += " \
+ # set the same COMPATIBLE_HOST as libhugetlbfs
+ COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
 -- 
-2.7.4
+2.17.0
 
 
