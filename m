@@ -1,29 +1,49 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C01FB71AB8
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B752974547
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Apr 2018 12:51:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w3HCppox029663
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 17 Apr 2018 05:51:51 -0700 (PDT)
-Received: from [128.224.163.159] (128.224.163.159) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Tue, 17 Apr 2018 05:51:51 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1523955884-38040-1-git-send-email-hongxu.jia@windriver.com>
-	<1523956656-12896-1-git-send-email-hongxu.jia@windriver.com>
-	<CA+chaQdtV1S4oq-NVt86NG2J20t51XhUpt-2C1OZJLOH86unrw@mail.gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <f0efc6ff-3236-ec25-27bf-64495955d7e1@windriver.com>
-Date: Tue, 17 Apr 2018 20:51:49 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.7.0
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQdtV1S4oq-NVt86NG2J20t51XhUpt-2C1OZJLOH86unrw@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH V2] qtbase: add disable option to opengl PACKAGECONFIG
+	Tue, 17 Apr 2018 14:20:25 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id u4so4653097wrg.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Apr 2018 07:20:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=03S7H4fkjI4+eGd7oxgJCuDgJdTyRHINsWgJihe2W5A=;
+	b=KZ4aLPYqfXqkx9oMaQQfabgtBsombWeP0EnVE0QRgpCZSH9r88ab8yAnmBOWOMv2K+
+	JUF7Jp9uvApF+VWTPXanBaMXHBZ6ykXmcklg/jLqgzk7bBrUuFwGBr2oN/OGd0sjLMbv
+	GKCqLbNIyLXylzY1acEjqXDoLuble/ljAwVjc1ssfQP+v+Wp86UwUAThh5xofaIgCn5K
+	dANbLrdCy0Fd2c4R9WbI6sm2FToPKaNpbRY4STeTafeX1aWxRrM3BjVkO+4RN6Ed7U5J
+	XjXUswLn3feG8URUDsNX4Rgo42M5+ocijVTSJXBwDlZ2Gh/rI4ypNhsXApA6/gnSOSTD
+	DSUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=03S7H4fkjI4+eGd7oxgJCuDgJdTyRHINsWgJihe2W5A=;
+	b=idyfvlKeJKBUnlnc6rwCTAkxmjlWTd7F3s1w6cRWz8loj2H/z6lLZM9V8QfUoerJOL
+	5XAIHEylLNb/Obb8nRA0wYnLsreJzCCt7I/kKYFuaihsfYsBgDKlWGRRcWGiZpDz6K0o
+	j3lE6nfklt+nJ6F4StioknnxDolsfMFnsSqZAIr7MDH7KX18k+xOnreyrqU1JpsjsXkT
+	mbQfwF4CmPOP+P2qQIr7r2wc0yFi+Ja/J2dMl2WsVqmQ36yOvhyHo16Itud3JQ/KpLew
+	6s20vfjSt4Yx7mYEd1jlpiBfsJicS3uQ+gJriZc6r/B5BDqyRl0OtjyIqUbBbG/aHUuX
+	D8Kw==
+X-Gm-Message-State: ALQs6tCEB8+IJGIQ6tKzj8OMz76bKE17s5W1jNBwfgPsPKNxKuwc1/cQ
+	BVA6Rz1juztNXcNGrrwzWPifeA==
+X-Google-Smtp-Source: AIpwx49dZgIuQIP6GJifhlHa6QGlaTztLY0VYDM1HzfBuWJmcnADGAGDOz00fkECFLBRdytZ58R3uQ==
+X-Received: by 10.28.236.19 with SMTP id k19mr1213050wmh.11.1523974825965;
+	Tue, 17 Apr 2018 07:20:25 -0700 (PDT)
+Received: from brgl-bgdev.lan (LFbn-1-7086-217.w90-116.abo.wanadoo.fr.
+	[90.116.254.217]) by smtp.gmail.com with ESMTPSA id
+	f132sm6455563wmf.13.2018.04.17.07.20.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 17 Apr 2018 07:20:25 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Apr 2018 16:20:16 +0200
+Message-Id: <20180417142020.30100-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-oe][PATCH v2 0/4] libgpiod: support for v1.0 series
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,63 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Apr 2018 12:51:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 17 Apr 2018 14:20:25 -0000
 
-On 2018年04月17日 18:39, Martin Jansa wrote:
-> How does this work with gles2 PACKAGECONFIG?
->
-> It was intentionally like this to implement tri-state options 
-> (desktop, es2, no).
->
+I recently released a new major version of libgpiod in which the
+initial API was heavily reworked. Since it's no longer compatible
+with v0.3.3 but I know there are users of the latter and I also
+intend on supporting it for some time, I thought we should have both
+versions in recipes-support.
 
-Yes, you are right
+This series adds a new recipe for libgpiod v1.0.1 that can live next to
+v0.3.3.
 
-//Hongxu
+v1 -> v2:
+- there was no reply to the previous series, and new v0.3.x and v1.0.x
+  versions have been released during that time, so v2 bumps the versions
 
-> On Tue, Apr 17, 2018 at 11:17 AM, Hongxu Jia <hongxu.jia@windriver.com 
-> <mailto:hongxu.jia@windriver.com>> wrote:
->
->     The qtbase detect oepngl by default and report error if not found,
->     add disable option while explicitly disable it.
->
->     Remove useless no-opengl PACKAGECONFIG
->
->     Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com
->     <mailto:hongxu.jia@windriver.com>>
->     ---
->      recipes-qt/qt5/qtbase_git.bb <http://qtbase_git.bb> | 3 +--
->      1 file changed, 1 insertion(+), 2 deletions(-)
->
->     diff --git a/recipes-qt/qt5/qtbase_git.bb <http://qtbase_git.bb>
->     b/recipes-qt/qt5/qtbase_git.bb <http://qtbase_git.bb>
->     index 5c4fe4f..ca056af 100644
->     --- a/recipes-qt/qt5/qtbase_git.bb <http://qtbase_git.bb>
->     +++ b/recipes-qt/qt5/qtbase_git.bb <http://qtbase_git.bb>
->     @@ -111,9 +111,8 @@ PACKAGECONFIG[ico] = "-ico,-no-ico"
->      PACKAGECONFIG[zlib] = "-system-zlib,-qt-zlib,zlib"
->      PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
->      PACKAGECONFIG[eglfs] = "-eglfs,-no-eglfs,drm"
->     -PACKAGECONFIG[gl] = "-opengl desktop,,virtual/libgl"
->     +PACKAGECONFIG[gl] = "-opengl desktop,-no-opengl,virtual/libgl"
->      PACKAGECONFIG[gles2] = "-opengl es2,,virtual/libgles2 virtual/egl"
->     -PACKAGECONFIG[no-opengl] = "-no-opengl"
->      PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
->      PACKAGECONFIG[cups] = "-cups,-no-cups,cups"
->      PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
->     -- 
->     2.7.4
->
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
+Bartosz Golaszewski (4):
+  libgpiod: include the version in the recipe filename
+  libgpiod: split recipe into .inc and .bb files
+  libgpiod: bump version to v0.3.3
+  libgpiod: add support for v1.x series
+
+ .../recipes-support/libgpiod/{libgpiod.bb => libgpiod.inc}   | 5 -----
+ meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb           | 4 ++++
+ meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb           | 4 ++++
+ 3 files changed, 8 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod.bb => libgpiod.inc} (80%)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.3.3.bb
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_1.0.1.bb
+
+-- 
+2.17.0
 
 
