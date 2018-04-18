@@ -1,49 +1,49 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-ot0-f196.google.com (mail-ot0-f196.google.com
-	[74.125.82.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9892C60291
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0422571AC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 10:43:11 +0000 (UTC)
-Received: by mail-ot0-f196.google.com with SMTP id d9-v6so1358514oth.10
+	Wed, 18 Apr 2018 11:33:58 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id s18-v6so3866165wrg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 03:43:12 -0700 (PDT)
+	Wed, 18 Apr 2018 04:34:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=fn3/Ouhy7xifeva6/GMYLT7isOEVUrqjXpoY8vrL0w4=;
-	b=KfKAIpiRqT3NnCdMqTy7JiuO7Z2Bp9rNwT/XCbxA0ZWrNM0kBzerKaH9unbMsR2rif
-	EXEakEpxujCaZ1poJKW0S2YlfXEEKhBTBTx7Fh04PIAH64JcxYSCj1oZElN5SD7CMMZP
-	18YUUQUiD86uCT3ZaaRUIVeIyfnrcQd1cUIFQp9gKtHYBWvMIBY5S3on+SKhY/Eay/5a
-	WVcCJE8qcpu4nJVAhRxNEYO5HHnyOHRpsSdChGOc8QdG2jtsE3ebXAa44rKlzrt8iuP9
-	XqvYgJMn+wvA2zH+Bf39X94Vjkryeu5pvKx5Y/A3V5WC5AoCGNjtjfXPUHpEzwEhBX4p
-	olNw==
+	:cc; bh=LS6UeNZKIYV2fYSLW3PHor+on4SOket5adiATpp5Rio=;
+	b=ptq4sz/+ztE4TIfOgcsm7g4CqOkW3TYuldILFk0Ii+dkEdK+x91B6UMYMkcl6ulVex
+	rlhD5QXQ+W80PyWKrPLHOuPaY+0SybwRP8683Al9gJ2CESVdwj99086cSNyS7PjdR81u
+	3+JUQP1cq03OAmJqZnEL/galCH8B+TBcDwda+6Qyvdo7WIzej/ODzUNC/KhxNhAJTLdN
+	0Ji6MccQDQTX357YPDYWodgQGZKS9tGFAVQkXX7obJguBc7zKeiy3G9uwl4SxnQIFiiZ
+	jVbVdCtOG4BSnnSpUPDqBz8gFcbeBGhrg0vsM5nl2EIQxsOwtQjC2hWsUfqZxbLC0qXu
+	iNJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=fn3/Ouhy7xifeva6/GMYLT7isOEVUrqjXpoY8vrL0w4=;
-	b=IpxZAZKwrpRDJXrbm4OAiCu6Q/15JnFb7sYNd0AEff+rkzx/LcwJQgdrYQRNXaeHbt
-	HdWj2Q0jIl9Uq8vrJ4/wwXBQ9zhISeaY3qsVAFmjwF3PdiZmdK1TdqzzWz1jgwES+OY3
-	0DQzcRjuSluG2gkwePcKrxa1WhchcTsx/FvAyTddqmcgzQMo5pI1QNzdh+Zuwg95UwUa
-	uFKM/Fiu0IK4Qj00ifaTUn+iSGSu6Hx3SSza8/yEyZzT/dbRJtV8IcXAaDJKkzclkCr5
-	4EYJkyuL2sf5MYUsSkKaDUWQTsSLty8RrBVEVzfSse6hB9ddOL9JAxHJ3L8hiBkUlg5t
-	RYuQ==
-X-Gm-Message-State: ALQs6tAajlAwBnJooXEvCy8wZyUfV3iGTVRXQF9IOf652M96NPiC62gr
-	jNfVcxfH1RnT3o7a0ODRpYIjYmeBcAlBnF6FPASxTQ==
-X-Google-Smtp-Source: AIpwx48WW4cvs+Zij3VYejoUinaiRWdvvJueJz850tOCL/Rc7GwaofHJxgrovOl2+GbWWJ6M6v2WAiFwjO/FxM+73Gk=
-X-Received: by 2002:a9d:1066:: with SMTP id
-	o35-v6mr776486oto.299.1524048192260; 
-	Wed, 18 Apr 2018 03:43:12 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=LS6UeNZKIYV2fYSLW3PHor+on4SOket5adiATpp5Rio=;
+	b=dqX/zRkdIAJ8Nxr2pDlQL8hR7CHajQLAt9TpQdEDpT0DLwf5TG9zP1SBcKv3A2G4Hl
+	mPKhhDvapxs+s4jXlKK826dOP5v9IkHCL7CsNBbXkhVzlDTOs9emecOWJnoYXdsnV9/C
+	rzOfkKGSspkXaEyiSuSvQItEKtuJ5bCyC/5DgBHXPv9LmPFsqGgimoM7L1xcLRhoY7IP
+	FnOvaDEZgH9+L8pAj0Fj0TycDC/yb4P2xJx1lvYfs2r+dKKWyAL2WBlwX6YvIcNfF3WZ
+	EpMqAke0uAri6cT5huBTHUIktfHyIFHEjpY0Y0LjiDolloeUZaaY1AJZdicQvaJWa/yD
+	unrQ==
+X-Gm-Message-State: ALQs6tCWAbDeXsjV8G/q0j+d4v/Emf5svf2XGflNO01NhzkdCAQ6u6aI
+	E/bOw2Vya7atsTOFCXZavvACdEW7cWUYzlKx8dM=
+X-Google-Smtp-Source: AIpwx49D7fMfnFhriPIKbQYQLIDtHTN5tYQ35uqpwe5njB3fpZS8py60C9+6Td9r2cRWKiOlnIIXhBZ6UHoeFhxTZI8=
+X-Received: by 2002:adf:db0a:: with SMTP id
+	s10-v6mr1376178wri.241.1524051239508; 
+	Wed, 18 Apr 2018 04:33:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.201.25.81 with HTTP; Wed, 18 Apr 2018 03:43:11 -0700 (PDT)
-In-Reply-To: <1524042429-22741-1-git-send-email-hongxu.jia@windriver.com>
-References: <1524042429-22741-1-git-send-email-hongxu.jia@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 18 Apr 2018 12:43:11 +0200
-Message-ID: <CALbNGRSieZUg5Hvbnccxxvw6f=dTzYe6DWDO8QTSftN7DPCZrg@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-screenshooter: fix parallel build issue
+Received: by 10.28.126.12 with HTTP; Wed, 18 Apr 2018 04:33:58 -0700 (PDT)
+In-Reply-To: <1523886232-12585-1-git-send-email-christian.thaler@tes-dst.com>
+References: <1523886232-12585-1-git-send-email-christian.thaler@tes-dst.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 18 Apr 2018 13:33:58 +0200
+Message-ID: <CA+chaQfuZ0xcExSg_X+9oNX_zFddgNHt=B7T6_bu_j=mU=yaAw@mail.gmail.com>
+To: c-thaler <christian.thaler@tes-dst.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] nativesdk-qtbase: fix environment.d dir permission
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,58 +56,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2018 10:43:11 -0000
+X-List-Received-Date: Wed, 18 Apr 2018 11:33:59 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 18, 2018 at 11:07 AM, Hongxu Jia <hongxu.jia@windriver.com> wro=
-te:
-> While do an out-of-tree build, if dir panel-plugin is not created
-> in time, there is a compile failure:
-> ...
-> | intltool-merge  -d -u -c ./po/.intltool-merge-cache ../xfce4-screenshoo=
-ter-1.9.1/po
-> ../xfce4-screenshooter-1.9.1/panel-plugin/screenshooter.desktop.in
-> panel-plugin/screenshooter.desktop
-> | Died at intltool-merge line 1184, <PO_FILE> line 22700.
-> ...
-> Ensure panel-plugin subdirectory exists fixes the issue.
+Missing Signed-off-by and I might take alternative fix for this:
+https://patchwork.openembedded.org/patch/150133/
+
+On Mon, Apr 16, 2018 at 3:43 PM, c-thaler <christian.thaler@tes-dst.com>
+wrote:
+
+> Fixed an issue with the nativesdk-cmake package, which sets the permission
+> of
+> /opt/.../environment.d to rwxr-xr-x.
+> nativesdk-qtbase set the permission to rwxrwxr-x, leading to a conflict:
 >
-> The fix refers the following commit:
-> ...
-> commit 754754b53bbf4c72d7855e9209f1ccecce5cd8dd
-> Author: Catalin Enache <catalin.enache@windriver.com>
-> Date:   Thu Nov 9 11:12:29 2017 +0800
+> Error: Transaction check error:
+>   file /opt/poky/2.4.2/sysroots/x86_64-pokysdk-linux/environment-setup.d
+>   conflicts between attempted installs of
+>   nativesdk-cmake-3.8.2-r0.x86_64_nativesdk and
+>   nativesdk-qtbase-tools-5.9.4+git0+0d9208cecb-r0.x86_64_nativesdk
 >
->     xfce4-screenshooter: create src dir before build
-> ...
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> Recipe nativesdk-qtbase will now set the permission to rwxr-xr-x.
 > ---
->  meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb =
-| 2 +-
+>  recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshoot=
-er_1.9.1.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshoote=
-r_1.9.1.bb
-> index e449dce..6702d73 100644
-> --- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.=
-1.bb
-> +++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.=
-1.bb
-> @@ -12,7 +12,7 @@ SRC_URI[sha256sum] =3D "e62b31d9cf06a7414a26400c2ebe7a2=
-ae7c2b22aa60f997f25145ea9eb
->
->  do_compile_prepend() {
->      mkdir -p lib
-> -    mkdir -p src
-> +    mkdir -p src panel-plugin
+> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/
+> nativesdk-qtbase_git.bb
+> index 5b20b0a..a678b19 100644
+> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
+> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+> @@ -171,7 +171,7 @@ do_install() {
 >  }
 >
->  FILES_${PN} +=3D " \
+>  fakeroot do_generate_qt_environment_file() {
+> -    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
+> +    install -d -m 755 ${D}${SDKPATHNATIVE}/environment-setup.d/
+>      script=${D}${SDKPATHNATIVE}/environment-setup.d/qt5.sh
+>
+>      echo 'export PATH=${OE_QMAKE_PATH_HOST_BINS}:$PATH' > $script
 > --
 > 2.7.4
 >
-Acked-by: Andreas M=C3=BCller <schnitzeltony@google.com>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
