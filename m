@@ -1,55 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f41.google.com (mail-pg0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 602847454B
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CC717451A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 07:53:22 +0000 (UTC)
-Received: by mail-pg0-f41.google.com with SMTP id b5so474242pgv.5
+	Wed, 18 Apr 2018 08:00:28 +0000 (UTC)
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 61BDE20853
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 00:53:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=gpw8T/iYijlcVRyQT703YaONi1hjMOhP0UcnOgnfiME=;
-	b=fmO7UYtdNI3EqJ7HPwjeeFxnDVtjOUsuvdJu2SIk9GRqkt2UKnsGsQMKz1RWtUeZaY
-	nRbgQHmH4mr2rgdz+/GYHmrr8tpxRZ7yhl3cKos/pszj0vtuld+rqtjRQlCq8W4qpKxJ
-	eWf2vNq5OFTFSpdxxDtvfnQSRZnoFd8eLDzKA2ZTV/58kguWiZpmTc1Fu95wLTHUqxTS
-	UPa85cdKUgGeK2LKFUvT0D9WWQLT3Elz75IXZ0Q7SWsQTelNyoCkuusqNcVPyVs0IMxi
-	pNX4YVckO1mAJ8lFAnLCPVN54rRoXINEJ9hUa7QJpfoHuCRXut1LNCqadb+j7bWrmNPD
-	sJCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=gpw8T/iYijlcVRyQT703YaONi1hjMOhP0UcnOgnfiME=;
-	b=AHrYxPZMfui7460nFRUayTb9W2TNA6S3RnyA/Z33dxE24SxM86k8VRjboIv+eY0EeC
-	dT8qODz65Jq/+6C111Qo8ILgvIAlAvPz5n27W6zxq918hnUyeUWO1qIk9cDfjY27eNrk
-	pwR8UbRbAqWyzWVPNuSSVYYvFfsUL4g3wu08I1i/qH7s24e4JdDd9zI7ksWc8HjTUNR2
-	WfS+MMgVldw3JNOmJkleWhCntCJ7l8gWLIsjr5e3sqk5lvv5hhFthEapsfXVuVIb50uR
-	qiLHzxcQMVCqaYlLM4lkZQu/XigyMwyKo6tP6A/qTldNSV6jEH3kuZSyg9xgsxzb+AXl
-	lSXg==
-X-Gm-Message-State: ALQs6tARq3JJS0zLZb2BzVboqZXrc305MvL/n9LLtyB+zLYPe4JdQv6u
-	YWCGPPCeQf1TVnLcUfxcz2sSjA6e
-X-Google-Smtp-Source: AIpwx4/I+JL8JkA6pK2DqVwALuYxxCwUZ/gUTPsu/n9Jn/X+3R6EuL1bx86w7j2z6f+S61SXpS0h4A==
-X-Received: by 10.101.97.72 with SMTP id o8mr938813pgv.120.1524038003148;
-	Wed, 18 Apr 2018 00:53:23 -0700 (PDT)
-Received: from hermes.local ([2601:646:8880:466c:68e6:e447:164c:d4e7])
-	by smtp.gmail.com with ESMTPSA id
-	z15sm1414213pgr.55.2018.04.18.00.53.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Apr 2018 00:53:22 -0700 (PDT)
-To: Pascal Bach <pascal.bach@siemens.com>,
-	openembedded-devel@lists.openembedded.org
-References: <88609bfc-f9db-8487-a3bf-523687b2b307@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <72e5eafd-02c9-13cd-0fb6-85802df01b7c@gmail.com>
-Date: Wed, 18 Apr 2018 00:53:21 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
-	Gecko/20100101 Thunderbird/60.0
+	Wed, 18 Apr 2018 08:00:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61BDE20853
+Authentication-Results: mail.kernel.org;
+	dmarc=none (p=none dis=none) header.from=kernel.org
+Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=krzk@kernel.org
+Received: by mail-wr0-f172.google.com with SMTP id u4-v6so2104582wrg.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Apr 2018 01:00:29 -0700 (PDT)
+X-Gm-Message-State: ALQs6tDwCegcqEgvCtI6IIm9mZP2OPdiDILAs7r5Ip7Klcm4PU6vRoaW
+	BHjfwPsDx4c1pGwGctr68yd/uC6lWPca9VwWlT8=
+X-Google-Smtp-Source: AIpwx4+fff5SnjgDNy/2cSji9J/mQHBAvFVrpqmZuM6TTiGWHIrxKsxnUY2KaBoi5xH3+Iw1UeAvrt2hLpTwUEwHn8k=
+X-Received: by 10.28.145.134 with SMTP id t128mr964567wmd.72.1524038427882;
+	Wed, 18 Apr 2018 01:00:27 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <88609bfc-f9db-8487-a3bf-523687b2b307@siemens.com>
-Subject: Re: [meta-openwrt] systemd units for OpenWRT components
+Received: by 10.223.199.7 with HTTP; Wed, 18 Apr 2018 01:00:27 -0700 (PDT)
+In-Reply-To: <efd852d7-daec-1d1e-8743-ae43d03d2560@gmail.com>
+References: <1523967357-4158-1-git-send-email-krzk@kernel.org>
+	<efd852d7-daec-1d1e-8743-ae43d03d2560@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Wed, 18 Apr 2018 10:00:27 +0200
+X-Gmail-Original-Message-ID: <CAJKOXPd0TQWkODYTsFKLVx5tNMt710ZBT_56KOQNXeB5vh_SWw@mail.gmail.com>
+Message-ID: <CAJKOXPd0TQWkODYTsFKLVx5tNMt710ZBT_56KOQNXeB5vh_SWw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][rocko][PATCH] civetweb: Add new recipe for v1.10 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,27 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2018 07:53:22 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Apr 2018 08:00:28 -0000
+Content-Type: text/plain; charset="UTF-8"
 
+On Wed, Apr 18, 2018 at 9:40 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+> On 4/17/18 5:15 AM, Krzysztof Kozlowski wrote:
+>>
+>> Add recipe for CivetWeb: easy to use, powerful, C/C++ embeddable web
+>> server with optional CGI, SSL and Lua support, under MIT license.
+>>
+>> CivetWeb provides C and C++ libraries and a standalone server binary.
+>>
+>> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+>> ---
+>>   .../recipes-connectivity/civetweb/civetweb_1.10.bb | 34
+>> ++++++++++++++++++++++
+>>   1 file changed, 34 insertions(+)
+>>   create mode 100644
+>> meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
+>>
+>> diff --git
+>> a/meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
+>> b/meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
+>> new file mode 100644
+>> index 000000000000..35af45680818
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
+>> @@ -0,0 +1,34 @@
+>> +SUMMARY = "Civetweb embedded web server"
+>> +HOMEPAGE = "https://github.com/civetweb/civetweb"
+>> +
+>> +LICENSE = "MIT"
+>> +LIC_FILES_CHKSUM =
+>> "file://LICENSE.md;md5=da079d81be91ff1d1ca56dcd751f897f"
+>> +
+>> +SRC_URI = " \
+>> +    git://github.com/civetweb/civetweb.git;tag=v${PV} \
+>
+>
+> its better to use SHA version corresponding to this tag, tags result in
+> fetcher n/w access and builds might fail when n/w access is disabled,
+> secondly tags are floating types and can be moved.
 
+Right, thanks for feedback. I'll send v2.
 
-On 4/17/18 11:51 PM, Pascal Bach wrote:
-> Dear meta-openwrt maintainers
-> 
-> I'm currently trying to use several OpenWRT components as standalone services.
-> During this process I added some Systemd units for them.
-
-Thats perfectly alright, just ensure that they are covered under systemd 
-DISTRO_FEATURE
-
-> 
-> Is this something that would be accepted in the meta-openwrt layer?
-> If not I would have to put this into a separate layer which seems to increase the maintenance effort.
-> 
-> Regards
-> Pascal
-> 
+BR,
+Krzysztof
 
