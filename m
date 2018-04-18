@@ -1,23 +1,36 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C519744C1
+Return-Path: <christian.thaler@tes-dst.com>
+Received: from mail.tes-dst.com (mail.tes-dst.com [212.6.170.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 32B8260102
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 12:26:06 +0000 (UTC)
-Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 31ED02175C;
-	Wed, 18 Apr 2018 12:26:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 31ED02175C
-Authentication-Results: mail.kernel.org;
-	dmarc=none (p=none dis=none) header.from=kernel.org
-Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=krzk@kernel.org
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Apr 2018 14:25:59 +0200
-Message-Id: <1524054359-14419-1-git-send-email-krzk@kernel.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][rocko][PATCH v2] civetweb: Add new recipe for v1.10 version
+	Wed, 18 Apr 2018 12:40:34 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tes-dst.com (Postfix) with ESMTP id 28857523C55;
+	Wed, 18 Apr 2018 14:40:35 +0200 (CEST)
+Received: from mail.tes-dst.com ([127.0.0.1])
+	by localhost (mail.tes-dst.com [127.0.0.1]) (amavisd-new, port 10032)
+	with ESMTP id u6YV92qQfZsN; Wed, 18 Apr 2018 14:40:34 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.tes-dst.com (Postfix) with ESMTP id 14696523C66;
+	Wed, 18 Apr 2018 14:40:34 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mail.tes-dst.com
+Received: from mail.tes-dst.com ([127.0.0.1])
+	by localhost (mail.tes-dst.com [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id QiB1IqLVwuEa; Wed, 18 Apr 2018 14:40:34 +0200 (CEST)
+Received: from [172.20.10.111] (unknown [172.20.10.111])
+	by mail.tes-dst.com (Postfix) with ESMTPSA id E636A523C55;
+	Wed, 18 Apr 2018 14:40:33 +0200 (CEST)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1523886232-12585-1-git-send-email-christian.thaler@tes-dst.com>
+	<CA+chaQfuZ0xcExSg_X+9oNX_zFddgNHt=B7T6_bu_j=mU=yaAw@mail.gmail.com>
+From: Christian Thaler <christian.thaler@tes-dst.com>
+Message-ID: <f6e48272-b3c3-4e2c-c16c-40bd5ce2dc65@tes-dst.com>
+Date: Wed, 18 Apr 2018 14:40:33 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQfuZ0xcExSg_X+9oNX_zFddgNHt=B7T6_bu_j=mU=yaAw@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] nativesdk-qtbase: fix environment.d dir permission
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,130 +43,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2018 12:26:07 -0000
+X-List-Received-Date: Wed, 18 Apr 2018 12:40:35 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: de-DE
+Content-Transfer-Encoding: quoted-printable
 
-Add recipe for CivetWeb: easy to use, powerful, C/C++ embeddable web
-server with optional CGI, SSL and Lua support, under MIT license.
-
-CivetWeb provides C and C++ libraries and a standalone server binary.
-
-Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-
+Thanks for the advice. I have signed-off the DCO now.
 ---
+Fixed an issue with the nativesdk-cmake package, which sets the=20
+permission of
+/opt/.../environment.d to rwxr-xr-x.
+nativesdk-qtbase set the permission to rwxrwxr-x, leading to a conflict:
 
-Changes since v1:
-1. Use SRCREC as suggested by Khem Raj.
-2. Drop nativesdk class.
-3. Fix native build with patch.
-4. Explicitly disable SSL (does not build at v1.10).
-5. Disable ASAN (not applicable for native builds).
+Error: Transaction check error:
+ =C2=A0 file /opt/poky/2.4.2/sysroots/x86_64-pokysdk-linux/environment-se=
+tup.d
+ =C2=A0 conflicts between attempted installs of
+ =C2=A0 nativesdk-cmake-3.8.2-r0.x86_64_nativesdk and
+ =C2=A0 nativesdk-qtbase-tools-5.9.4+git0+0d9208cecb-r0.x86_64_nativesdk
+
+Recipe nativesdk-qtbase will now set the permission to rwxr-xr-x.
+
+Signed-off-by: Christian Thaler <christian.thaler@tes-dst.com>
 ---
- ...ssing-librt-and-libm-during-native-compil.patch | 42 ++++++++++++++++++++
- .../recipes-connectivity/civetweb/civetweb_1.10.bb | 45 ++++++++++++++++++++++
- 2 files changed, 87 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
+ =C2=A0recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
+ =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
-new file mode 100644
-index 000000000000..23479561f85f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
-@@ -0,0 +1,42 @@
-+From cd93e2c538cecb3192fd24c0fbd6e834d0c47eec Mon Sep 17 00:00:00 2001
-+From: Krzysztof Kozlowski <krzk@kernel.org>
-+Date: Wed, 18 Apr 2018 14:11:52 +0200
-+Subject: [PATCH] Test: Fix missing librt and libm during native compilation
-+
-+civetweb looks for librt and libm in weird places and for native build
-+this fails:
-+
-+    | ../third_party/lib/libcheck.a(check.c.o): In function `tcase_create':
-+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:145: undefined reference to `floor'
-+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:148: undefined reference to `floor'
-+
-+These are needed dependencies so try regular system linkage in such
-+case.
-+
-+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-+---
-+ test/CMakeLists.txt | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-+index f34b2e0e4ce4..05d25702178c 100644
-+--- a/test/CMakeLists.txt
-++++ b/test/CMakeLists.txt
-+@@ -60,10 +60,14 @@ endif()
-+ find_package(LibM)
-+ if (LIBM_FOUND)
-+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBM::LIBM")
-++else()
-++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lm")
-+ endif()
-+ find_package(LibRt)
-+ if (LIBRT_FOUND)
-+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBRT::LIBRT")
-++else()
-++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lrt")
-+ endif()
-+ 
-+ # Build the C unit tests
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
-new file mode 100644
-index 000000000000..dce32d6d0312
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.10.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "Civetweb embedded web server"
-+HOMEPAGE = "https://github.com/civetweb/civetweb"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=da079d81be91ff1d1ca56dcd751f897f"
-+
-+SRCREV = "0f1b43536d97d9311c73b658b86a9d44be9e5e82"
-+SRC_URI = "git://github.com/civetweb/civetweb.git"
-+SRC_URI_append_class-native = " \
-+    file://0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch \
-+"
-+S = "${WORKDIR}/git"
-+
-+# civetweb supports building with make or cmake (although cmake lacks few features)
-+inherit cmake
-+
-+# Disable Lua and Duktape because they do not compile from CMake (as of v1.8, v1.9 and v1.10).
-+# Disable ASAN as it is included only in Debug build.
-+# As of v1.10, SSL does not work. Bring it back with v1.11.
-+EXTRA_OECMAKE = " \
-+    -DBUILD_SHARED_LIBS=ON \
-+    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-+    -DCIVETWEB_ENABLE_LUA=OFF \
-+    -DCIVETWEB_ENABLE_ASAN=OFF \
-+    -DCIVETWEB_ENABLE_SSL=OFF \
-+"
-+EXTRA_OECMAKE_class-native = " \
-+    -DBUILD_SHARED_LIBS=ON \
-+    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-+    -DCIVETWEB_ENABLE_LUA=OFF \
-+    -DCIVETWEB_ENABLE_ASAN=OFF \
-+    -DCIVETWEB_ENABLE_SSL=OFF \
-+"
-+
-+PACKAGECONFIG ??= "caching cgi cpp debug ipv6 server websockets"
-+PACKAGECONFIG[caching] = "-DCIVETWEB_DISABLE_CACHING=OFF,-DCIVETWEB_DISABLE_CACHING=ON,"
-+PACKAGECONFIG[cgi] = "-DCIVETWEB_DISABLE_CGI=OFF,-DCIVETWEB_DISABLE_CGI=ON,"
-+PACKAGECONFIG[cpp] = "-DCIVETWEB_ENABLE_CXX=ON,-DCIVETWEB_ENABLE_CXX=OFF,"
-+PACKAGECONFIG[debug] = "-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=ON,-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=OFF,"
-+PACKAGECONFIG[ipv6] = "-DCIVETWEB_ENABLE_IPV6=ON,-DCIVETWEB_ENABLE_IPV6=OFF,"
-+PACKAGECONFIG[server] = "-DCIVETWEB_INSTALL_EXECUTABLE=ON,-DCIVETWEB_INSTALL_EXECUTABLE=OFF,"
-+# PACKAGECONFIG[ssl] = "-DCIVETWEB_ENABLE_SSL=ON -DCIVETWEB_SSL_OPENSSL_API_1_1=ON -DCIVETWEB_ENABLE_SSL_DYNAMIC_LOADING=OFF,-DCIVETWEB_ENABLE_SSL=OFF,openssl"
-+PACKAGECONFIG[websockets] = "-DCIVETWEB_ENABLE_WEBSOCKETS=ON,-DCIVETWEB_ENABLE_WEBSOCKETS=OFF,"
-+
-+BBCLASSEXTEND = "native"
--- 
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb=20
+b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index 5b20b0a..a678b19 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -171,7 +171,7 @@ do_install() {
+ =C2=A0}
+
+ =C2=A0fakeroot do_generate_qt_environment_file() {
+-=C2=A0=C2=A0=C2=A0 mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
++=C2=A0=C2=A0=C2=A0 install -d -m 755 ${D}${SDKPATHNATIVE}/environment-se=
+tup.d/
+ =C2=A0=C2=A0=C2=A0=C2=A0 script=3D${D}${SDKPATHNATIVE}/environment-setup=
+.d/qt5.sh
+
+ =C2=A0=C2=A0=C2=A0=C2=A0 echo 'export PATH=3D${OE_QMAKE_PATH_HOST_BINS}:=
+$PATH' > $script
+--=20
 2.7.4
+
+-------- Original Message --------
+*Subject: *Re: [oe] [meta-qt5][PATCH] nativesdk-qtbase: fix=20
+environment.d dir permission
+*From: *Martin Jansa <martin.jansa@gmail.com>
+*To: *c-thaler <christian.thaler@tes-dst.com>
+*Cc: *openembedded-devel <openembedded-devel@lists.openembedded.org>,=20
+Dennis Menschel <menschel-d@posteo.de>
+*Date: *18.04.2018 13:33
+> Missing=C2=A0Signed-off-by and I might take alternative fix for this:
+> https://patchwork.openembedded.org/patch/150133/
+>
+> On Mon, Apr 16, 2018 at 3:43 PM, c-thaler=20
+> <christian.thaler@tes-dst.com <mailto:christian.thaler@tes-dst.com>>=20
+> wrote:
+>
+>     Fixed an issue with the nativesdk-cmake package, which sets the
+>     permission of
+>     /opt/.../environment.d to rwxr-xr-x.
+>     nativesdk-qtbase set the permission to rwxrwxr-x, leading to a
+>     conflict:
+>
+>     Error: Transaction check error:
+>     =C2=A0 file
+>     /opt/poky/2.4.2/sysroots/x86_64-pokysdk-linux/environment-setup.d
+>     =C2=A0 conflicts between attempted installs of
+>     =C2=A0 nativesdk-cmake-3.8.2-r0.x86_64_nativesdk and
+>     =C2=A0 nativesdk-qtbase-tools-5.9.4+git0+0d9208cecb-r0.x86_64_nativ=
+esdk
+>
+>     Recipe nativesdk-qtbase will now set the permission to rwxr-xr-x.
+>     ---
+>     =C2=A0recipes-qt/qt5/nativesdk-qtbase_git.bb
+>     <http://nativesdk-qtbase_git.bb> | 2 +-
+>     =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>
+>     diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb
+>     <http://nativesdk-qtbase_git.bb>
+>     b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+>     <http://nativesdk-qtbase_git.bb>
+>     index 5b20b0a..a678b19 100644
+>     --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
+>     <http://nativesdk-qtbase_git.bb>
+>     +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+>     <http://nativesdk-qtbase_git.bb>
+>     @@ -171,7 +171,7 @@ do_install() {
+>     =C2=A0}
+>
+>     =C2=A0fakeroot do_generate_qt_environment_file() {
+>     -=C2=A0 =C2=A0 mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
+>     +=C2=A0 =C2=A0 install -d -m 755 ${D}${SDKPATHNATIVE}/environment-s=
+etup.d/
+>     =C2=A0 =C2=A0 =C2=A0script=3D${D}${SDKPATHNATIVE}/environment-setup=
+.d/qt5.sh
+>
+>     =C2=A0 =C2=A0 =C2=A0echo 'export PATH=3D${OE_QMAKE_PATH_HOST_BINS}:=
+$PATH' > $script
+>     --=20
+>     2.7.4
+>
+>     --=20
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>
+>
+>
+> _______________________________________________________________________=
+_
+> This e-mail has been scanned for all viruses by Claranet. The
+> service is powered by MessageLabs. For more information on a proactive
+> anti-virus service working around the clock, around the globe, visit:
+> http://www.claranet.co.uk
+> _______________________________________________________________________=
+_
+
+--=20
+Christian Thaler
+E-mail: christian.thaler@tes-dst.com
+Frankenstrasse 3, D-20097 Hamburg
+Phone +49 (0)40-411611-60
+
+TES Electronic Solutions GmbH
+Sitz: Stuttgart, Registergericht: Amtsgericht Stuttgart HRB 20239,
+Gesch=C3=A4ftsf=C3=BChrung: J=C3=BCrgen Zeller
+
+Wichtig!!
+Diese E-Mail kann Betriebs- und Gesch=C3=A4ftsgeheimnisse oder sonstige
+vertrauliche Informationen enthalten. Sollten Sie diese E-Mail irrt=C3=BC=
+mlich
+erhalten haben, ist Ihnen eine Kenntnisnahme des Inhalts, eine
+Vervielf=C3=A4ltigung oder Weitergabe der E-Mail ausdr=C3=BCcklich unters=
+agt. Bitte
+benachrichtigen Sie uns und vernichten Sie die E-Mail. Der Absender hat a=
+lle
+erdenklichen Vorsichtsma=C3=9Fnahmen getroffen, dass die Anlagen dieser E=
+-Mail
+frei von Computerviren o.=C3=A4. sind. Gleichwohl schlie=C3=9Fen wir die =
+Haftung f=C3=BCr
+jeden Schaden aus, der durch Computerviren o.=C3=A4. verursacht wurde, so=
+weit wir
+nicht vors=C3=A4tzlich oder grob fahrl=C3=A4ssig gehandelt haben. Wir rat=
+en Ihnen,
+dass Sie in jedem Fall Ihre eigene Virenpr=C3=BCfung vornehmen, bevor Sie=
+ die
+Anlagen =C3=B6ffnen.
+Vielen Dank.
+
+Important!!
+The information contained in this email message may be confidential
+information. If you are not the intended recipient, any use, interference
+with, disclosure or copying of this material is unauthorized and prohibit=
+ed.
+Please inform us immediately and destroy the email. We have taken every
+reasonable precaution to ensure that any attachment to this eMail has bee=
+n
+swept for viruses. However, we cannot accept liability for any damage
+sustained as a result of software viruses and would advice that you carry
+out your own virus checks before opening any attachment.
+Thank you for your cooperation.
 
 
