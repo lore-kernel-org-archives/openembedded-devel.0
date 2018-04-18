@@ -1,49 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0422571AC1
+Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
+	[209.85.128.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DB0974525
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 11:33:58 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id s18-v6so3866165wrg.9
+	Wed, 18 Apr 2018 11:50:12 +0000 (UTC)
+Received: by mail-wr0-f177.google.com with SMTP id f14-v6so4006956wre.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 04:34:00 -0700 (PDT)
+	Wed, 18 Apr 2018 04:50:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=LS6UeNZKIYV2fYSLW3PHor+on4SOket5adiATpp5Rio=;
-	b=ptq4sz/+ztE4TIfOgcsm7g4CqOkW3TYuldILFk0Ii+dkEdK+x91B6UMYMkcl6ulVex
-	rlhD5QXQ+W80PyWKrPLHOuPaY+0SybwRP8683Al9gJ2CESVdwj99086cSNyS7PjdR81u
-	3+JUQP1cq03OAmJqZnEL/galCH8B+TBcDwda+6Qyvdo7WIzej/ODzUNC/KhxNhAJTLdN
-	0Ji6MccQDQTX357YPDYWodgQGZKS9tGFAVQkXX7obJguBc7zKeiy3G9uwl4SxnQIFiiZ
-	jVbVdCtOG4BSnnSpUPDqBz8gFcbeBGhrg0vsM5nl2EIQxsOwtQjC2hWsUfqZxbLC0qXu
-	iNJQ==
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=zd39wML+c+OlBapZ1enM+ZWlY2Fh2+s3caVsZgHzyiI=;
+	b=d5OuUluHSFDrv85/Ch+k0DOZTCI3SMjLMb830I8/fXiDoEOv34tV6m9wlSdau4BS/B
+	JEdmVZj53vP6RcYQk2Z/e01XiXNEIO4QcNUqt3ww6Q7WhYuJoKKj8Yuaw7eOGG23IlVb
+	P9WPD3wr3v8Qs7z0A0aVL+h9rued02o1YLAB4hdcnnjX1TJYS6YhplbiFNxaaKO72ubn
+	N8c4KJiTg9oXkeQPISfLAiPDw3s1qcBSXZKVHA9hw4h35opUIrXNBZZA0P3w/kPRGSnx
+	sOJHYSur3ZuxfxfNCKAvPFPtJGuHRjgirUbEmOmHLiApwGYmYZNjOjpi4vS8MjuJ9Vn3
+	u0ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=LS6UeNZKIYV2fYSLW3PHor+on4SOket5adiATpp5Rio=;
-	b=dqX/zRkdIAJ8Nxr2pDlQL8hR7CHajQLAt9TpQdEDpT0DLwf5TG9zP1SBcKv3A2G4Hl
-	mPKhhDvapxs+s4jXlKK826dOP5v9IkHCL7CsNBbXkhVzlDTOs9emecOWJnoYXdsnV9/C
-	rzOfkKGSspkXaEyiSuSvQItEKtuJ5bCyC/5DgBHXPv9LmPFsqGgimoM7L1xcLRhoY7IP
-	FnOvaDEZgH9+L8pAj0Fj0TycDC/yb4P2xJx1lvYfs2r+dKKWyAL2WBlwX6YvIcNfF3WZ
-	EpMqAke0uAri6cT5huBTHUIktfHyIFHEjpY0Y0LjiDolloeUZaaY1AJZdicQvaJWa/yD
-	unrQ==
-X-Gm-Message-State: ALQs6tCWAbDeXsjV8G/q0j+d4v/Emf5svf2XGflNO01NhzkdCAQ6u6aI
-	E/bOw2Vya7atsTOFCXZavvACdEW7cWUYzlKx8dM=
-X-Google-Smtp-Source: AIpwx49D7fMfnFhriPIKbQYQLIDtHTN5tYQ35uqpwe5njB3fpZS8py60C9+6Td9r2cRWKiOlnIIXhBZ6UHoeFhxTZI8=
-X-Received: by 2002:adf:db0a:: with SMTP id
-	s10-v6mr1376178wri.241.1524051239508; 
-	Wed, 18 Apr 2018 04:33:59 -0700 (PDT)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=zd39wML+c+OlBapZ1enM+ZWlY2Fh2+s3caVsZgHzyiI=;
+	b=HXeaEHi2S7jeMFCtWktM2qdnDCaSYsg3a2zsA/GdLdlpskxj7ertA5g8kPkedE42tM
+	K3l1eELJK5654W80q12RBntZy+W5muCduw6hQpV1N03DBKlhwLLmQm/dseEPa1WQ1vhR
+	ni69zUW6R3Ln/akIDNq6EhgdgtUXdrSGbGhh+NDXg+XX9j+3rW6e+2CkPcyS+Vv7jG4n
+	+gfQleWxPkpS47c+n3DSvBFj5KwGEVjg+LBE97saCAB5jW0BiDasORzcqB1vbXaig+Ce
+	fCLSyeR/rV8tVtur+6p8zxNkrqgPkl4n7EzvPPLRp17IcCbID/87QfWmnLUTI5SYJiq8
+	HX3A==
+X-Gm-Message-State: ALQs6tAyBXX6d4O1u4IPHaYCJ1x9/+l9pXm6dQCNai8w1uhzyO3ATJA6
+	/5ZeDc6YjvDqbN50whDR3IkCebP6dirRisSXbVsjcA==
+X-Google-Smtp-Source: AIpwx4+g8TNIsnvJtfkNeGiPyHHi+Q5sqPnjKUm7I/0vtO4offHsJBtKQNZFrTS8ee1UdrQDikhTGhJoOdmP/4K02nQ=
+X-Received: by 2002:adf:8bc7:: with SMTP id
+	w7-v6mr1506620wra.230.1524052212892; 
+	Wed, 18 Apr 2018 04:50:12 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.126.12 with HTTP; Wed, 18 Apr 2018 04:33:58 -0700 (PDT)
-In-Reply-To: <1523886232-12585-1-git-send-email-christian.thaler@tes-dst.com>
-References: <1523886232-12585-1-git-send-email-christian.thaler@tes-dst.com>
+Received: by 10.28.126.12 with HTTP; Wed, 18 Apr 2018 04:50:12 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 18 Apr 2018 13:33:58 +0200
-Message-ID: <CA+chaQfuZ0xcExSg_X+9oNX_zFddgNHt=B7T6_bu_j=mU=yaAw@mail.gmail.com>
-To: c-thaler <christian.thaler@tes-dst.com>
+Date: Wed, 18 Apr 2018 13:50:12 +0200
+Message-ID: <CA+chaQcOqEibGRtm+eSNmJJXcj+f88s89PHXTV9az9b35VW2Mw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] nativesdk-qtbase: fix environment.d dir permission
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Most meta-qt5 patches on ML marked as Not Applicable on patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,52 +53,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2018 11:33:59 -0000
+X-List-Received-Date: Wed, 18 Apr 2018 11:50:12 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Missing Signed-off-by and I might take alternative fix for this:
-https://patchwork.openembedded.org/patch/150133/
+Hi,
 
-On Mon, Apr 16, 2018 at 3:43 PM, c-thaler <christian.thaler@tes-dst.com>
-wrote:
+who/What is marking them as such?
 
-> Fixed an issue with the nativesdk-cmake package, which sets the permission
-> of
-> /opt/.../environment.d to rwxr-xr-x.
-> nativesdk-qtbase set the permission to rwxrwxr-x, leading to a conflict:
->
-> Error: Transaction check error:
->   file /opt/poky/2.4.2/sysroots/x86_64-pokysdk-linux/environment-setup.d
->   conflicts between attempted installs of
->   nativesdk-cmake-3.8.2-r0.x86_64_nativesdk and
->   nativesdk-qtbase-tools-5.9.4+git0+0d9208cecb-r0.x86_64_nativesdk
->
-> Recipe nativesdk-qtbase will now set the permission to rwxr-xr-x.
-> ---
->  recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/
-> nativesdk-qtbase_git.bb
-> index 5b20b0a..a678b19 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> @@ -171,7 +171,7 @@ do_install() {
->  }
->
->  fakeroot do_generate_qt_environment_file() {
-> -    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
-> +    install -d -m 755 ${D}${SDKPATHNATIVE}/environment-setup.d/
->      script=${D}${SDKPATHNATIVE}/environment-setup.d/qt5.sh
->
->      echo 'export PATH=${OE_QMAKE_PATH_HOST_BINS}:$PATH' > $script
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Makes quite difficult to find out what's there for me to take into
+meta-qt5/master-next
+
+https://patchwork.openembedded.org/project/oe/patches/?submitter=&state=*&q=qt5&archive=both&delegate=
+
+I've used the mark the patches for other layers (other then meta-oe layers
+except meta-networking) only as archived while adding them to corresponding
+bundle as described here:
+
+https://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_same_oe_project_on_patchwork
+
+Was this work flow changed? If yes, then how and is it described somewhere?
+
+Otavio: I think it's time we start using separate ML and gerrit for
+meta-qt5, do you still have the public gerrit instance somewhere we can
+use? I don't want to deal with patchwork anymore.
+
+Regards,
 
