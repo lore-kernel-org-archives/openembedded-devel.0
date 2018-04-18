@@ -1,36 +1,23 @@
-Return-Path: <christian.thaler@tes-dst.com>
-Received: from mail.tes-dst.com (mail.tes-dst.com [212.6.170.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 32B8260102
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 54C9A72EF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Apr 2018 12:40:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tes-dst.com (Postfix) with ESMTP id 28857523C55;
-	Wed, 18 Apr 2018 14:40:35 +0200 (CEST)
-Received: from mail.tes-dst.com ([127.0.0.1])
-	by localhost (mail.tes-dst.com [127.0.0.1]) (amavisd-new, port 10032)
-	with ESMTP id u6YV92qQfZsN; Wed, 18 Apr 2018 14:40:34 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.tes-dst.com (Postfix) with ESMTP id 14696523C66;
-	Wed, 18 Apr 2018 14:40:34 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mail.tes-dst.com
-Received: from mail.tes-dst.com ([127.0.0.1])
-	by localhost (mail.tes-dst.com [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id QiB1IqLVwuEa; Wed, 18 Apr 2018 14:40:34 +0200 (CEST)
-Received: from [172.20.10.111] (unknown [172.20.10.111])
-	by mail.tes-dst.com (Postfix) with ESMTPSA id E636A523C55;
-	Wed, 18 Apr 2018 14:40:33 +0200 (CEST)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1523886232-12585-1-git-send-email-christian.thaler@tes-dst.com>
-	<CA+chaQfuZ0xcExSg_X+9oNX_zFddgNHt=B7T6_bu_j=mU=yaAw@mail.gmail.com>
-From: Christian Thaler <christian.thaler@tes-dst.com>
-Message-ID: <f6e48272-b3c3-4e2c-c16c-40bd5ce2dc65@tes-dst.com>
-Date: Wed, 18 Apr 2018 14:40:33 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.7.0
+	Wed, 18 Apr 2018 17:37:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w3IHbgSB000766
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Apr 2018 10:37:43 -0700 (PDT)
+Received: from yow-cube2.wrs.com (128.224.56.99) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 18 Apr 2018 10:37:42 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 Apr 2018 13:37:40 -0400
+Message-ID: <1524073060-9727-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfuZ0xcExSg_X+9oNX_zFddgNHt=B7T6_bu_j=mU=yaAw@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] nativesdk-qtbase: fix environment.d dir permission
+Subject: [meta-java][PATCH] Fix occasional build failures related to do_removebinaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,173 +30,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Apr 2018 12:40:35 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: de-DE
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Apr 2018 17:37:42 -0000
+Content-Type: text/plain
 
-Thanks for the advice. I have signed-off the DCO now.
+Similar to commit a265b31ec7d0 [ant-native: Fix random build failure]
+we are seeing a very occasional build failure resulting in
+
+    "do_removebinaries) failed with exit code '1'"
+
+This is a result of do_removebinaries() running in parallel with other
+tasks scheduled between do_unpack() and do_patch(). We shouldn't be
+doing anything to disrupt do_removebinaries() so we simply ensure the
+tasks are more strictly ordered to prevent any interference.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
-Fixed an issue with the nativesdk-cmake package, which sets the=20
-permission of
-/opt/.../environment.d to rwxr-xr-x.
-nativesdk-qtbase set the permission to rwxrwxr-x, leading to a conflict:
+ recipes-core/jakarta-commons/jakarta-commons.inc        | 2 +-
+ recipes-core/servlet-api/jsp2.0_5.5.26.bb               | 2 +-
+ recipes-core/servlet-api/servlet2.3_4.1.37.bb           | 2 +-
+ recipes-core/servlet-api/servlet2.4_5.5.26.bb           | 2 +-
+ recipes-core/xerces-j/xerces-j_2.11.0.bb                | 2 +-
+ recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-Error: Transaction check error:
- =C2=A0 file /opt/poky/2.4.2/sysroots/x86_64-pokysdk-linux/environment-se=
-tup.d
- =C2=A0 conflicts between attempted installs of
- =C2=A0 nativesdk-cmake-3.8.2-r0.x86_64_nativesdk and
- =C2=A0 nativesdk-qtbase-tools-5.9.4+git0+0d9208cecb-r0.x86_64_nativesdk
-
-Recipe nativesdk-qtbase will now set the permission to rwxr-xr-x.
-
-Signed-off-by: Christian Thaler <christian.thaler@tes-dst.com>
----
- =C2=A0recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
- =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb=20
-b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 5b20b0a..a678b19 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -171,7 +171,7 @@ do_install() {
- =C2=A0}
-
- =C2=A0fakeroot do_generate_qt_environment_file() {
--=C2=A0=C2=A0=C2=A0 mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
-+=C2=A0=C2=A0=C2=A0 install -d -m 755 ${D}${SDKPATHNATIVE}/environment-se=
-tup.d/
- =C2=A0=C2=A0=C2=A0=C2=A0 script=3D${D}${SDKPATHNATIVE}/environment-setup=
-.d/qt5.sh
-
- =C2=A0=C2=A0=C2=A0=C2=A0 echo 'export PATH=3D${OE_QMAKE_PATH_HOST_BINS}:=
-$PATH' > $script
---=20
+diff --git a/recipes-core/jakarta-commons/jakarta-commons.inc b/recipes-core/jakarta-commons/jakarta-commons.inc
+index 5a22f1e..b21246f 100644
+--- a/recipes-core/jakarta-commons/jakarta-commons.inc
++++ b/recipes-core/jakarta-commons/jakarta-commons.inc
+@@ -31,7 +31,7 @@ do_unpackpost() {
+     fi
+ }
+ 
+-addtask unpackpost after do_unpack before do_patch
++addtask unpackpost after do_removebinaries before do_patch
+ # Compile step is very similar for Jakarta commons packages
+ do_compile() {
+     mkdir -p build
+diff --git a/recipes-core/servlet-api/jsp2.0_5.5.26.bb b/recipes-core/servlet-api/jsp2.0_5.5.26.bb
+index 98e3468..6192322 100644
+--- a/recipes-core/servlet-api/jsp2.0_5.5.26.bb
++++ b/recipes-core/servlet-api/jsp2.0_5.5.26.bb
+@@ -23,7 +23,7 @@ do_unpackpost() {
+   sed -i -e "s|@implementation.version@|${IMPL_REVISION}|" src/etc/manifest
+ }
+ 
+-addtask unpackpost after do_unpack before do_patch
++addtask unpackpost after do_removebinaries before do_patch
+ 
+ do_compile() {
+   mkdir -p build
+diff --git a/recipes-core/servlet-api/servlet2.3_4.1.37.bb b/recipes-core/servlet-api/servlet2.3_4.1.37.bb
+index 1fa12f8..890a0dc 100644
+--- a/recipes-core/servlet-api/servlet2.3_4.1.37.bb
++++ b/recipes-core/servlet-api/servlet2.3_4.1.37.bb
+@@ -23,7 +23,7 @@ do_unpackpost() {
+   sed -i -e "s|@implementation.version@|${IMPL_REVISION}|" src/etc/manifest
+ }
+ 
+-addtask unpackpost after do_unpack before do_patch
++addtask unpackpost after do_removebinaries before do_patch
+ 
+ do_compile() {
+   mkdir -p build
+diff --git a/recipes-core/servlet-api/servlet2.4_5.5.26.bb b/recipes-core/servlet-api/servlet2.4_5.5.26.bb
+index f9259aa..ef09501 100644
+--- a/recipes-core/servlet-api/servlet2.4_5.5.26.bb
++++ b/recipes-core/servlet-api/servlet2.4_5.5.26.bb
+@@ -22,7 +22,7 @@ do_unpackpost() {
+   sed -i -e "s|2.3.@implementation.version@|2.4.${IMPL_REVISION}|" src/etc/manifest
+ }
+ 
+-addtask unpackpost after do_unpack before do_patch
++addtask unpackpost after do_removebinaries before do_patch
+ 
+ do_compile() {
+   mkdir -p build
+diff --git a/recipes-core/xerces-j/xerces-j_2.11.0.bb b/recipes-core/xerces-j/xerces-j_2.11.0.bb
+index 98ef32f..62b3625 100644
+--- a/recipes-core/xerces-j/xerces-j_2.11.0.bb
++++ b/recipes-core/xerces-j/xerces-j_2.11.0.bb
+@@ -32,7 +32,7 @@ do_unpackpost() {
+            -e "s|@impl.version@|${PV}|" {} \;
+ }
+ 
+-addtask unpackpost after do_unpack before do_patch
++addtask unpackpost after do_removebinaries before do_patch
+ 
+ JARFILENAME = "xercesImpl.jar"
+ ALTJARFILENAMES = ""
+diff --git a/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb b/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
+index 42ce703..ff684c9 100644
+--- a/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
++++ b/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
+@@ -19,7 +19,7 @@ do_unpackpost() {
+            -e "s|@impl.version@|1.2|" {} \;
+ }
+ 
+-addtask unpackpost after do_unpack before do_patch
++addtask unpackpost after do_removebinaries before do_patch
+ 
+ JARFILENAME = "resolver.jar"
+ ALTJARFILENAMES = ""
+-- 
 2.7.4
-
--------- Original Message --------
-*Subject: *Re: [oe] [meta-qt5][PATCH] nativesdk-qtbase: fix=20
-environment.d dir permission
-*From: *Martin Jansa <martin.jansa@gmail.com>
-*To: *c-thaler <christian.thaler@tes-dst.com>
-*Cc: *openembedded-devel <openembedded-devel@lists.openembedded.org>,=20
-Dennis Menschel <menschel-d@posteo.de>
-*Date: *18.04.2018 13:33
-> Missing=C2=A0Signed-off-by and I might take alternative fix for this:
-> https://patchwork.openembedded.org/patch/150133/
->
-> On Mon, Apr 16, 2018 at 3:43 PM, c-thaler=20
-> <christian.thaler@tes-dst.com <mailto:christian.thaler@tes-dst.com>>=20
-> wrote:
->
->     Fixed an issue with the nativesdk-cmake package, which sets the
->     permission of
->     /opt/.../environment.d to rwxr-xr-x.
->     nativesdk-qtbase set the permission to rwxrwxr-x, leading to a
->     conflict:
->
->     Error: Transaction check error:
->     =C2=A0 file
->     /opt/poky/2.4.2/sysroots/x86_64-pokysdk-linux/environment-setup.d
->     =C2=A0 conflicts between attempted installs of
->     =C2=A0 nativesdk-cmake-3.8.2-r0.x86_64_nativesdk and
->     =C2=A0 nativesdk-qtbase-tools-5.9.4+git0+0d9208cecb-r0.x86_64_nativ=
-esdk
->
->     Recipe nativesdk-qtbase will now set the permission to rwxr-xr-x.
->     ---
->     =C2=A0recipes-qt/qt5/nativesdk-qtbase_git.bb
->     <http://nativesdk-qtbase_git.bb> | 2 +-
->     =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
->
->     diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb
->     <http://nativesdk-qtbase_git.bb>
->     b/recipes-qt/qt5/nativesdk-qtbase_git.bb
->     <http://nativesdk-qtbase_git.bb>
->     index 5b20b0a..a678b19 100644
->     --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
->     <http://nativesdk-qtbase_git.bb>
->     +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
->     <http://nativesdk-qtbase_git.bb>
->     @@ -171,7 +171,7 @@ do_install() {
->     =C2=A0}
->
->     =C2=A0fakeroot do_generate_qt_environment_file() {
->     -=C2=A0 =C2=A0 mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
->     +=C2=A0 =C2=A0 install -d -m 755 ${D}${SDKPATHNATIVE}/environment-s=
-etup.d/
->     =C2=A0 =C2=A0 =C2=A0script=3D${D}${SDKPATHNATIVE}/environment-setup=
-.d/qt5.sh
->
->     =C2=A0 =C2=A0 =C2=A0echo 'export PATH=3D${OE_QMAKE_PATH_HOST_BINS}:=
-$PATH' > $script
->     --=20
->     2.7.4
->
->     --=20
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
->
-> _______________________________________________________________________=
-_
-> This e-mail has been scanned for all viruses by Claranet. The
-> service is powered by MessageLabs. For more information on a proactive
-> anti-virus service working around the clock, around the globe, visit:
-> http://www.claranet.co.uk
-> _______________________________________________________________________=
-_
-
---=20
-Christian Thaler
-E-mail: christian.thaler@tes-dst.com
-Frankenstrasse 3, D-20097 Hamburg
-Phone +49 (0)40-411611-60
-
-TES Electronic Solutions GmbH
-Sitz: Stuttgart, Registergericht: Amtsgericht Stuttgart HRB 20239,
-Gesch=C3=A4ftsf=C3=BChrung: J=C3=BCrgen Zeller
-
-Wichtig!!
-Diese E-Mail kann Betriebs- und Gesch=C3=A4ftsgeheimnisse oder sonstige
-vertrauliche Informationen enthalten. Sollten Sie diese E-Mail irrt=C3=BC=
-mlich
-erhalten haben, ist Ihnen eine Kenntnisnahme des Inhalts, eine
-Vervielf=C3=A4ltigung oder Weitergabe der E-Mail ausdr=C3=BCcklich unters=
-agt. Bitte
-benachrichtigen Sie uns und vernichten Sie die E-Mail. Der Absender hat a=
-lle
-erdenklichen Vorsichtsma=C3=9Fnahmen getroffen, dass die Anlagen dieser E=
--Mail
-frei von Computerviren o.=C3=A4. sind. Gleichwohl schlie=C3=9Fen wir die =
-Haftung f=C3=BCr
-jeden Schaden aus, der durch Computerviren o.=C3=A4. verursacht wurde, so=
-weit wir
-nicht vors=C3=A4tzlich oder grob fahrl=C3=A4ssig gehandelt haben. Wir rat=
-en Ihnen,
-dass Sie in jedem Fall Ihre eigene Virenpr=C3=BCfung vornehmen, bevor Sie=
- die
-Anlagen =C3=B6ffnen.
-Vielen Dank.
-
-Important!!
-The information contained in this email message may be confidential
-information. If you are not the intended recipient, any use, interference
-with, disclosure or copying of this material is unauthorized and prohibit=
-ed.
-Please inform us immediately and destroy the email. We have taken every
-reasonable precaution to ensure that any attachment to this eMail has bee=
-n
-swept for viruses. However, we cannot accept liability for any damage
-sustained as a result of software viruses and would advice that you carry
-out your own virus checks before opening any attachment.
-Thank you for your cooperation.
 
 
