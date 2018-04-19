@@ -1,51 +1,53 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-ot0-f182.google.com (mail-ot0-f182.google.com
-	[74.125.82.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 37BC074601
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 99C68745F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2018 16:45:34 +0000 (UTC)
-Received: by mail-ot0-f182.google.com with SMTP id v64-v6so6543618otb.13
+	Thu, 19 Apr 2018 17:12:12 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id u4-v6so15996409wrg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Apr 2018 09:45:36 -0700 (PDT)
+	Thu, 19 Apr 2018 10:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=9/4HJMTWWHXTf8h+1wXAsCL3SGd6fl1Eo7V57y3HQXo=;
-	b=K68fLZUPxZseMp9/XqIhRoR4xMUCCaIoGmAVVCGvJcp0LtsBGMP64psQpVvA8JLDNH
-	+2fQCe4j84oSWFlAf/da0vckHGTuWYqGtuKzU3/Vy2S+h9uGJ1+sEh1flOQzznirDTSe
-	x7kdNs5IwJj7+xPj3TfV/Wwgyf1UXsJDaGqlASfcCpulx9mJ1dCBQRtQzGs6lLY1PGGB
-	WQgzG8/jCmBMVjlW0yQOWEWX55x7RdgaNWodoIjWW1Zoe1eJcblPJ2rRigwQk9sA2vhB
-	jZYbDUMYpd7ZmD2Wo5sr8H3ERsIcRlDmNeqvV5rJaogq5t+gIx5Kv1m0noaACqVCkGio
-	ehpA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=oeAZTSd5/EeGsG+mJ+B/K4AreNe/5tJzWhKKnKH5/C0=;
+	b=KnQYDn052G4JqXZBGq3CReHRp+w+WI5SRHpMwAu6A+S1SCEb1x81HYgdSd3FxaxgC0
+	4ljPdHpWCFpOuEXmwHedwAGRUngxB8SRAtA8db0uOn28dvwKjGQPE0e+7sAhWubDB+wf
+	A1CWSlTXcdopD4h9GW1/bx1IY0nTYa+P4tqZ0mkbHj80+ClZSA4Ak8trv8UBC1KXp+17
+	fd6sTvIjqGJ3/ycBifeOx7+KNDfT4Ci51I5oiPKNBpIdgEtkqU9gm8TcircZVCpapCWE
+	EdwL9Ad+eyu3A8OFKxOSj0qBwIH7Y2DeTf1UGlewlTTKuTj6t8+QM3vnnXDimV6Qhf/+
+	CRtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=9/4HJMTWWHXTf8h+1wXAsCL3SGd6fl1Eo7V57y3HQXo=;
-	b=T8AWbq1kMcNwj+UPR2yQ1iW3uAm0mBoWsOyHf6t8FhmH+0uFFgD7u1KMdB/ITFMi1U
-	yI5Eq1dCY5VKzRHAG3vHrIJGWtUOp97JYDwHxulJvl1k8F+b1Dm6iBqdmgYmxxn08EE4
-	m4b+xvqed23n9BN5zEgNl9y3Sv/VNy077WAi2rHg3V4cPv59Zoc4PREmi7zaIuJupTi0
-	RaGlcjP/M/BbIV9PS4MZvL2lU1wo6jBMNoj7xxE8rOgVojZ9cI8018cOtBKH/rLaBqiE
-	W/ijua3Bvi2Z5iPe/BCryW8wkg4hzC4J6YAgwdt12aE0ZlFxD/I4Yv2rVct/v0Ka75f2
-	iiXQ==
-X-Gm-Message-State: ALQs6tDOgPspktyTW9EPJJ2bCpv7Jli5AP1zCxlvfg1QrPweRPNr9QfQ
-	K6by7fBQMoCmP6IckqdLUerqkMvo42KG0qkPTt8=
-X-Google-Smtp-Source: AIpwx499To+D2NU3QPB08g0feyKMGrJj/hvm+XvCL0IdKMQ4eJWAIh/TlFrAQetZWvsrHOkurfx2D6y0WH70slE0tjo=
-X-Received: by 2002:a9d:1066:: with SMTP id
-	o35-v6mr4127686oto.299.1524156335938; 
-	Thu, 19 Apr 2018 09:45:35 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.201.25.81 with HTTP; Thu, 19 Apr 2018 09:45:35 -0700 (PDT)
-In-Reply-To: <CAATN8PXQ5ftKQCF8ZmWxdb92sst0AAZ3QMK7HMS4WRtqP9gv8w@mail.gmail.com>
-References: <20180419141737.21053-1-costamagnagianfranco@yahoo.it>
-	<20180419141737.21053-2-costamagnagianfranco@yahoo.it>
-	<CALbNGRT17R_aw7NGTGo7_n6dY5ULsppkoE=OKfTJxC+vDESweg@mail.gmail.com>
-	<CAATN8PXQ5ftKQCF8ZmWxdb92sst0AAZ3QMK7HMS4WRtqP9gv8w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 19 Apr 2018 18:45:35 +0200
-Message-ID: <CALbNGRTnEb=D9X+Fc8i4m5AC6xW-uKEQD1Q6aDLY8X_4PfAMQA@mail.gmail.com>
-To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] cpprest: add new recipe based on Debian packaging
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=oeAZTSd5/EeGsG+mJ+B/K4AreNe/5tJzWhKKnKH5/C0=;
+	b=UgfBuQCEfkENT7QJm0JBp4I7jlmsQabkB6cN5MzyvUA4G9hDaXfOZF6DINBqfm1IpG
+	4nrRbV/iHB9g/s1GYzsCDx/wdvRKQMEj+wDSR7G7JB6vt/AAjpLnl986xoCpD+Mn3ngn
+	+gCorNrx4Is7G1wsyZf4a+o7uM96XfIzO+f5F9DcWRcVCGt0+o+BGCbCWqgG6VLfor4/
+	n3J8NEKhL1/G1Vs5+XsEj48XndbzHdrWystM+pOPCb0+8qA6R5JWS6+1rPJXVBZuMfaB
+	cSj3nWhnBTwv1Qqh0clZ8PA3Wkg4aiqkI/ANBbt5xSJCMWv4xW8sYo8dhtSMF8FoKA66
+	mYFQ==
+X-Gm-Message-State: ALQs6tBEOM2T0kBpy5V5iCiRGLJr5/quN58cYUI5Mit1TmNL8F2W0ZS7
+	UC904eeNOGngr4PL1suj2nSTDJS+
+X-Google-Smtp-Source: AIpwx48ZMc+/49Mg/GqbXipVnG9UfyzxQK2AXj8i9iKkOXM3hMh/Fz264FBC5UbfXDQo+IotxnrmEw==
+X-Received: by 10.28.107.151 with SMTP id a23mr5100126wmi.14.1524157932854;
+	Thu, 19 Apr 2018 10:12:12 -0700 (PDT)
+Received: from localhost.localdomain ([37.180.10.76])
+	by smtp.gmail.com with ESMTPSA id 11sm5456040wmr.16.2018.04.19.10.12.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 19 Apr 2018 10:12:12 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Apr 2018 19:12:07 +0200
+Message-Id: <20180419171207.5020-2-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.14.1
+In-Reply-To: <20180419171207.5020-1-costamagnagianfranco@yahoo.it>
+References: <20180419171207.5020-1-costamagnagianfranco@yahoo.it>
+Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
+	Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH 2/2] cpprest: add new recipe based on Debian packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,21 +60,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Apr 2018 16:45:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 19 Apr 2018 17:12:12 -0000
 
-On Thu, Apr 19, 2018 at 5:44 PM, Gianfranco Costamagna
-<costamagna.gianfranco@gmail.com> wrote:
-> Hello,
->
-> I prefer whenever possible to fix upstream defaults instead of downstream
-> patching.
-> My goal is to drop this patch on next upstream release, rather than
-> hardcoding a path in the bb file.
->
-> https://github.com/Microsoft/cpprestsdk/pull/737
-Agreed - did not know that. The best place for this would be in
-Upstream-Status - that is missing.
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+Co-developed-by: Cristiano Prato <cristiano.prato@cnhind.com>
+---
+ .../cpprest/cpprest-2.10.2/fix-cmake-install.patch      | 17 +++++++++++++++++
+ meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb       | 17 +++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
+ create mode 100644 meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb
 
-Andreas
+diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
+new file mode 100644
+index 000000000..0feafef5b
+--- /dev/null
++++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
+@@ -0,0 +1,17 @@
++Description: install cmake files into /usr/lib/cmake/cpprestsdk
++Author: Gianfranco Costamagna <locutusofborg@debian.org>
++Upstream-Status: https://github.com/Microsoft/cpprestsdk/pull/737
++Forwarded: https://github.com/Microsoft/cpprestsdk/pull/737
++Last-Update: 2018-04-19
++
++--- cpprest-2.10.2.orig/CMakeLists.txt
+++++ cpprest-2.10.2/CMakeLists.txt
++@@ -18,7 +18,7 @@ enable_testing()
++ set(WERROR ON CACHE BOOL "Treat Warnings as Errors.")
++ set(CPPREST_EXCLUDE_WEBSOCKETS OFF CACHE BOOL "Exclude websockets functionality.")
++ set(CPPREST_EXCLUDE_COMPRESSION OFF CACHE BOOL "Exclude compression functionality.")
++-set(CPPREST_EXPORT_DIR lib/cpprestsdk CACHE STRING "Directory to install CMake config files.")
+++set(CPPREST_EXPORT_DIR lib/cmake/cpprestsdk CACHE STRING "Directory to install CMake config files.")
++ set(CPPREST_INSTALL_HEADERS ON CACHE BOOL "Install header files.")
++ set(CPPREST_INSTALL ON CACHE BOOL "Add install commands.")
++ 
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb
+new file mode 100644
+index 000000000..2ba6fc66c
+--- /dev/null
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design."
++SECTION = "libs/network"
++HOMEPAGE = "https://github.com/Microsoft/cpprestsdk/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${S}/../license.txt;md5=a2e15b954769218ff912468eecd6a02f"
++DEPENDS = "openssl websocketpp zlib boost"
++
++SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master"
++
++SRC_URI += "file://fix-cmake-install.patch"
++
++# tag 2.10.2
++SRCREV= "fea848e2a77563cf2a6f28f8eab396fd6e787fbf"
++
++S = "${WORKDIR}/git/Release"
++
++inherit cmake
+-- 
+2.14.1
+
 
