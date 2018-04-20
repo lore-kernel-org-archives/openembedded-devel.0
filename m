@@ -1,50 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
-	[209.85.128.169])
-	by mail.openembedded.org (Postfix) with ESMTP id EED09745AA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 10:36:38 +0000 (UTC)
-Received: by mail-wr0-f169.google.com with SMTP id o15-v6so21674877wro.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 03:36:40 -0700 (PDT)
+Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
+	[209.85.128.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C42C745F1;
+	Fri, 20 Apr 2018 12:03:23 +0000 (UTC)
+Received: by mail-wr0-f182.google.com with SMTP id m26-v6so4478354wrb.3;
+	Fri, 20 Apr 2018 05:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=L8epDS5rFTNjUIecKIxeDvlcs7etvlgx6HfrYbTLuUM=;
-	b=VhKOg0fHIvPzO/9HLfBcCP8DAtQd3isKY31X1msn03Pg4PMj8qlIcscKfwSXspB1Ps
-	/B9utNhzyTDyTejH2T7DVIZnZ9QnvuU34Km82VjusUnaGTXB8MEa/+IQL4cyWs0dr2H1
-	uACshBfZfA3RZwBj6i+LuB8BZGMKRTkbozRUvJsHK7ypWrdMK86sJ6QZlvwu9cDAHPwi
-	146wOgv7udET1R6X4B8ybvPoBIBZRZl+z7TsrGmrP0liSRNnEyfz9gEjdAvTrOcDd0kq
-	kNHz4WjeW7gZr1yakG1WRQZ8+3vRQI+a7A9akc5ZaPqNgKb7JmgQjXGqFWyXTNhn8oFZ
-	8jUw==
+	:cc; bh=rIRHX65qb0L/FnSJ8R04WTv5IqGB8aREvIDmyGSNGvM=;
+	b=TYLREVImUp8T7yDha5wnCb++xAr6ze+gMdmTc8WUN3U2ttPGt69+0ZAuFHfOnQSu+h
+	V1E1OXJnER1cslfWef7mFqUuy/6LFggA/AM0tiVNiNOvYDL4jy5vzHVPYRl4VOrUNS1y
+	1BQle4qFRWX49ouj7E5HEoHZDTchNi0W91smEMqecuAiJQOHA19hzJeZmsbIPw4F8JOe
+	fJkAHCPDiajrrlNhrWUKCSP6Cbe/JNE8ejfNe+F0qXYu2E6LosenQeezGKB6F6GKTjK2
+	vzHBUKKZYFtScwiBe08yY5U3OGHvc8ghXkew5sK7VPKHW3XUjumGnSI2Tfydqc+m1CWI
+	C3iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=L8epDS5rFTNjUIecKIxeDvlcs7etvlgx6HfrYbTLuUM=;
-	b=qTuDTSTBkp/Ro0ZlW6cDHJMKmB0Bis6LsmJwp5JSqzpRskhCZ5VKzjrLwirFg/qH6q
-	5TEsWdGbf3Q6i4ULQx45K7Mj+UwkFJHa+0oRMO45ADAzWyfTPAVR2p/iNDS/mm+ecL/C
-	99AI0+U+X0CTC+QMrMOvhod1ExFrR9g6XtUmoZj24iiyRcNMTD4VVrlRxhoeSqnfbffy
-	kqipF/mOQyFN5qs2dqrWlLL4TDyJiOHfWhOqkfRSNIl6LuKH5Fpd8o3hat8UwOjFRTQS
-	AaX2Vtq9U3UEyqEl8bFiWOrw9GEy+OVOdWg5vLI+y4r+n8y1oEN6lMdpS/cT0gppSwRT
-	PQMA==
-X-Gm-Message-State: ALQs6tCwHacwrbXFipFRNf4kcs7P+DHRS6m9PIpN6hjZn5ngU6ZYm2eZ
-	zU04yHCV02H31pa62zsZEFMjDutJ+dOosp2PTwg=
-X-Google-Smtp-Source: AIpwx4/LuF03/YajTNEHF+TZ/JtVTRKZwusrz2VblJtD8LsxMoz+tvtX3bsxMLwj6FRrjJn8cP4bZRb7/ueqEwtQ154=
-X-Received: by 2002:adf:bd03:: with SMTP id
-	j3-v6mr7163176wrh.138.1524220599392; 
-	Fri, 20 Apr 2018 03:36:39 -0700 (PDT)
+	bh=rIRHX65qb0L/FnSJ8R04WTv5IqGB8aREvIDmyGSNGvM=;
+	b=qth7MkYRezwoOmyTxP9z2kCw7b42cUTpXxDPAC8j9LcA5/r1RIo+eNLqtd1p+qtjpJ
+	gj3s7gCDsWx/xI/EMODGemMOA2RaIlsXeWqEhKU6uRa+84pCEl0jMMSZd7Jy4JzNen2H
+	DLdQH7VLA4iYTZx5IEYsh/em09sJVwbl5UmAZ0zH6Zr0/ZLTNsxYAfbHFSBaMsB2/kJo
+	EwjSdFniCKHEdoB3HFE4JofjX7d1CyVcdvujn0je/Iydr4JDIqj3KWKhxO1mRJxFZVAY
+	Q3H5eEXIMFd+1BCgt3mc8cOEpZSP0z6cC16yQEVUY1zh60Y/l1yK6bZvq1j24e+rrmE5
+	jg9A==
+X-Gm-Message-State: ALQs6tBjfXUv63N7gmHgCmtqmyk40Q4/iELVvMAggvzBQ3g0/MvRpTqa
+	pmGIq3BPAt2A3CocA7m6kTfV8cOJPFvH9Jv0CPSZsQ==
+X-Google-Smtp-Source: AIpwx4/BuVHjj03HL5DyRaWG4B101WpEUmPofMkVMPGHR4UeHx4WjwMRdFkMbSRilAdLare/icChnPURz/GF13AJI0Q=
+X-Received: by 10.28.15.15 with SMTP id 15mr1809094wmp.60.1524225803420; Fri,
+	20 Apr 2018 05:03:23 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.133.207 with HTTP; Fri, 20 Apr 2018 03:36:38 -0700 (PDT)
-In-Reply-To: <7888fc9d-2546-8de2-8df7-2aa62015d0de@digi.com>
-References: <20180419130701.1713-1-adam.trhon@tbs-biometrics.com>
-	<7888fc9d-2546-8de2-8df7-2aa62015d0de@digi.com>
+Received: by 10.28.133.207 with HTTP; Fri, 20 Apr 2018 05:03:22 -0700 (PDT)
+In-Reply-To: <20180419134508.AA894232AEA@git.openembedded.org>
+References: <152414550828.29269.11674339610003737461@git.openembedded.org>
+	<20180419134508.AA894232AEA@git.openembedded.org>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 20 Apr 2018 12:36:38 +0200
-Message-ID: <CA+chaQe_szESH15nCLM2c8-aAGSXoBb9iscqbyit9A1-A6eZBA@mail.gmail.com>
-To: Javier Viguera <javier.viguera@digi.com>
+Date: Fri, 20 Apr 2018 14:03:22 +0200
+Message-ID: <CA+chaQeDsfMhA8BEDdLDVVTWONf0+3hkyPTLa+hGU0P+_i8NLA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Ola x Nilsson <ola.x.nilsson@axis.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qttranslations: annihilate qttranslations-qtconfig
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] 05/06: package.bbclass: Include dbgsrc for static libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,45 +55,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2018 10:36:39 -0000
+X-List-Received-Date: Fri, 20 Apr 2018 12:03:23 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Different version of this fix is now in master and rocko-next.
+I haven't dig around this much, but some of my builds are now failing with:
 
-On Fri, Apr 20, 2018 at 12:21 PM, Javier Viguera <javier.viguera@digi.com>
-wrote:
+ERROR: libsdl2-webos-2.0.4-86-r22 do_package: dwarfsrcfiles failed with
+exit code 1 (cmd was 'dwarfsrcfiles' 'libsdl2-webos/2.0.4-86-r22/
+package/usr/lib/libSDL2main.a'):
+dwarfsrcfiles: libsdl2-webos/2.0.4-86-r22/package/usr/lib/libSDL2main.a:
+not a valid ELF file
+ERROR: libsdl2-webos-2.0.4-86-r22 do_package: Function failed:
+split_and_strip_files
 
-> On 19/04/18 15:07, Adam Trhon wrote:
+It's different version of libsdl2 than what's in oe-core now and the recipe
+for it might be a bit broken.
+
+$ file package/usr/lib/libSDL2main.a
+package/usr/lib/libSDL2main.a: current ar archive
+
+$ recipe-sysroot-native/usr/bin/dwarfsrcfiles package/usr/lib/libSDL2main.a
+dwarfsrcfiles: package/usr/lib/libSDL2main.a: not a valid ELF file
+
+$ ar x ../package/usr/lib/libSDL2main.a
+
+contains only:
+SDL_dummy_main.lo
+
+Should we try a bit harder to check if the .a contains static library? In
+the meantime I'll check what's going on in libsdl2-webos build and if the
+same happens in oe-core libsdl2.
+
+Regards,
+
+On Thu, Apr 19, 2018 at 3:45 PM, <git@git.openembedded.org> wrote:
+
+> This is an automated email from the git hooks/post-receive script.
 >
->> In Qt 5.9.5 there is no qtconfig translation (see commit a6b3446cb023
->> in qttranslations upstream). But packagegroup-qt5-toolchain-target
->> RDEPENDS on qttranslations-qtconfg, which breaks SDK populating.
->>
->> Fix this issue by annihilating qttranslations-qtconfig from meta-qt5.
->>
+> rpurdie pushed a commit to branch master
+> in repository openembedded-core.
 >
-> +1
+> commit eefa5ba35663fabe1f3f8cf7f1ff126d51240613
+> Author: Ola x Nilsson <ola.x.nilsson@axis.com>
+> AuthorDate: Thu Apr 19 13:17:30 2018 +0200
 >
-> This is needed also in Rocko after the update to version 5.9.5.
+>     package.bbclass: Include dbgsrc for static libs
 >
-> Currently Rocko fails to build a QT5 based SDK with:
+>     The debugsource must be added from the package providing the static
+>     lib, because any package using that lib does not have access to the
+>     source code.
 >
-> Error:
->  Problem: conflicting requests
->   - nothing provides qttranslations-qtconfig needed by
-> packagegroup-qt5-toolchain-target-1.0-r0.0.noarch
+>     Fixes [YOCTO #12558]
 >
-> Cherry-picking this patch fixes the broken build.
+>     Signed-off-by: Ola x Nilsson <olani@axis.com>
+>     Signed-off-by: Ross Burton <ross.burton@intel.com>
+> ---
+>  meta/classes/package.bbclass | 44 ++++++++++++++++++++++++++++++
+> ++------------
+>  1 file changed, 32 insertions(+), 12 deletions(-)
+>
+> diff --git a/meta/classes/package.bbclass b/meta/classes/package.bbclass
+> index 7978307..fff7ceb 100644
+> --- a/meta/classes/package.bbclass
+> +++ b/meta/classes/package.bbclass
+> @@ -344,6 +344,20 @@ def parse_debugsources_from_dwarfs
+> rcfiles_output(dwarfsrcfiles_output):
+>
+>      return debugfiles.keys()
+>
+> +def append_source_info(file, sourcefile, d):
+> +    cmd = "'dwarfsrcfiles' '%s'" % (file)
+> +    (retval, output) = oe.utils.getstatusoutput(cmd)
+> +    # 255 means a specific file wasn't fully parsed to get the debug file
+> list, which is not a fatal failure
+> +    if retval != 0 and retval != 255:
+> +        bb.fatal("dwarfsrcfiles failed with exit code %s (cmd was %s)%s"
+> % (retval, cmd, ":\n%s" % output if output else ""))
+> +
+> +    debugsources = parse_debugsources_from_dwarfsrcfiles_output(output)
+> +    # filenames are null-separated - this is an artefact of the previous
+> use
+> +    # of rpm's debugedit, which was writing them out that way, and the
+> code elsewhere
+> +    # is still assuming that.
+> +    debuglistoutput = '\0'.join(debugsources) + '\0'
+> +    open(sourcefile, 'a').write(debuglistoutput)
+> +
+>
+>  def splitdebuginfo(file, debugfile, debugsrcdir, sourcefile, d):
+>      # Function to split a single file into two components, one is the
+> stripped
+> @@ -369,18 +383,7 @@ def splitdebuginfo(file, debugfile, debugsrcdir,
+> sourcefile, d):
+>
+>      # We need to extract the debug src information here...
+>      if debugsrcdir:
+> -        cmd = "'dwarfsrcfiles' '%s'" % (file)
+> -        (retval, output) = oe.utils.getstatusoutput(cmd)
+> -        # 255 means a specific file wasn't fully parsed to get the debug
+> file list, which is not a fatal failure
+> -        if retval != 0 and retval != 255:
+> -            bb.fatal("dwarfsrcfiles failed with exit code %s (cmd was
+> %s)%s" % (retval, cmd, ":\n%s" % output if output else ""))
+> -
+> -        debugsources = parse_debugsources_from_dwarfs
+> rcfiles_output(output)
+> -        # filenames are null-separated - this is an artefact of the
+> previous use
+> -        # of rpm's debugedit, which was writing them out that way, and
+> the code elsewhere
+> -        # is still assuming that.
+> -        debuglistoutput = '\0'.join(debugsources) + '\0'
+> -        open(sourcefile, 'a').write(debuglistoutput)
+> +        append_source_info(file, sourcefile, d)
+>
+>      bb.utils.mkdirhier(os.path.dirname(debugfile))
+>
+> @@ -936,6 +939,15 @@ python split_and_strip_files () {
+>                  type |= 8
+>          return type
+>
+> +    def isStaticLib(path):
+> +        if path.endswith('.a') and not os.path.islink(path):
+> +            with open(path, 'rb') as fh:
+> +                # The magic must include the first slash to avoid
+> +                # matching golang static libraries
+> +                magic = b'!<arch>\x0a/'
+> +                start = fh.read(len(magic))
+> +                return start == magic
+> +        return False
+>
+>      #
+>      # First lets figure out all of the files we may have to process ...
+> do this only once!
+> @@ -943,6 +955,7 @@ python split_and_strip_files () {
+>      elffiles = {}
+>      symlinks = {}
+>      kernmods = []
+> +    staticlibs = []
+>      inodes = {}
+>      libdir = os.path.abspath(dvar + os.sep + d.getVar("libdir"))
+>      baselibdir = os.path.abspath(dvar + os.sep + d.getVar("base_libdir"))
+> @@ -955,6 +968,9 @@ python split_and_strip_files () {
+>                  if file.endswith(".ko") and file.find("/lib/modules/") !=
+> -1:
+>                      kernmods.append(file)
+>                      continue
+> +                if isStaticLib(file):
+> +                    staticlibs.append(file)
+> +                    continue
+>
+>                  # Skip debug files
+>                  if debugappend and file.endswith(debugappend):
+> @@ -1033,6 +1049,10 @@ python split_and_strip_files () {
+>              # Only store off the hard link reference if we successfully
+> split!
+>              splitdebuginfo(file, fpath, debugsrcdir, sourcefile, d)
+>
+> +        if debugsrcdir:
+> +            for file in staticlibs:
+> +                append_source_info(file, sourcefile, d)
+> +
+>          # Hardlink our debug symbols to the other hardlink copies
+>          for ref in inodes:
+>              if len(inodes[ref]) == 1:
 >
 > --
-> Regards,
->
-> Javier Viguera
->
+> To stop receiving notification emails like this one, please contact
+> the administrator of this repository.
 > --
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 >
 
