@@ -1,45 +1,53 @@
-Return-Path: <prvs=364843e53b=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id AA558745CB
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B06474637
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 13:36:29 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w3KDUVo2008951 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 08:36:30 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2hds2t190x-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 08:36:30 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com
-	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w3KDaTnF022152
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Fri, 20 Apr 2018 14:09:52 +0000 (UTC)
+Received: by mail-io0-f171.google.com with SMTP id d24-v6so843902iob.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 08:36:29 -0500
-Received: from us-aus-exch7.ni.corp.natinst.com (130.164.68.17) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 20 Apr 2018 08:36:29 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch7.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 20 Apr 2018 08:36:29 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 20 Apr 2018 08:36:28 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Apr 2018 16:36:23 +0300
-Message-ID: <20180420133623.15471-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.17.0
+	Fri, 20 Apr 2018 07:09:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/9WIsrsLPXwiVwsx2DBTOxnxlIsZQjrzadrZXO369so=;
+	b=IkMCBeHq0nB4cEab+ATVHT9lsEa1nMIxJCywvMqJ4iAiuvF7Gn0gYAW8Ok+5Fvi5Yr
+	lheyN+3zpxTyEHN2mQKzLsGa3100B/47ZIOcd8ny57A4aJHf2Ciniu0k3zRdRUGBDCHa
+	zHSaEul7NK67zx6oj7nDIpnk0c7z1Id1kgjOEHDmndn3ahhvVsI9zbIxEDfUJS3lk0K/
+	e93AaOgKyAxll5gocnZbNWUW23/yyUJDYY4mZxXFKOPmjqMkoSmSp7z9G4CEGbefOgRM
+	Z1VYoaHdzEbjQYa9ITlvxLoHZQNLFMhbIRysXW4iIAulIWG/Ay8YP58rK9pAiiv6dlf4
+	055w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=/9WIsrsLPXwiVwsx2DBTOxnxlIsZQjrzadrZXO369so=;
+	b=WGUl+S1nUsgXIY67kiCytFuJ4qQZC9+qxqqWzKUaZPYKGCzRZ7mxJWJl466GTwvXVV
+	eXvzgjboVCDhjBlNclEKtYjcLrEW+tCXAlNjpDBig7kiCexmK9Lx8AS8fDp/Zn8CQ/DT
+	hXhLnrE8/eVwj6hAszI22IHcWnft2IwzqVNYm4ANv0PU6LkOv90h4u8oxxDAjoskAdHF
+	f6x0zslLyO6aTLaw0Z5j4fE3UyN6o4vhzb0Xco/WpQp0zkkcgzupSdQS4HoOT+GaKegk
+	hwouruDNEdrQVTCdj35EehiwvL+VGMJrl/mJ9KEGmlEv2C0KrXtCWoUCuHjmjAPaCrJd
+	sOAg==
+X-Gm-Message-State: ALQs6tAfgrr/Y27dzljoLR+qIbthKRyFm8yvIiPJeg/dXeGQYwXuwu3Z
+	vzYfr1ORXh7azthHoJ9IUhg0Y3uS1zQTFefAro2Bdg==
+X-Google-Smtp-Source: AB8JxZo/BL0DhT3t+VArGOP++039d5AHAmbnYyJEZMT0S9IhmA4LbKIHWf9b55JMuY9PDvvU9NU48izeASLCwW5bDpg=
+X-Received: by 2002:a6b:a08f:: with SMTP id
+	j137-v6mr11420089ioe.23.1524233393235; 
+	Fri, 20 Apr 2018 07:09:53 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-04-20_06:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH] python-pyiface: upgrade to 0.0.5
+Received: by 10.107.29.203 with HTTP; Fri, 20 Apr 2018 07:09:32 -0700 (PDT)
+In-Reply-To: <CA+chaQeDsfMhA8BEDdLDVVTWONf0+3hkyPTLa+hGU0P+_i8NLA@mail.gmail.com>
+References: <152414550828.29269.11674339610003737461@git.openembedded.org>
+	<20180419134508.AA894232AEA@git.openembedded.org>
+	<CA+chaQeDsfMhA8BEDdLDVVTWONf0+3hkyPTLa+hGU0P+_i8NLA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 20 Apr 2018 15:09:32 +0100
+Message-ID: <CAJTo0Lb1-83fmnZbJxAzaiRMVDKB=A4-3xFKeqYn7A6za2fqMQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Ola x Nilsson <ola.x.nilsson@axis.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] 05/06: package.bbclass: Include dbgsrc for static libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,44 +60,188 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2018 13:36:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 20 Apr 2018 14:09:52 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc      | 6 +++---
- .../{python-pyiface_0.0.4.bb => python-pyiface_0.0.5.bb}    | 0
- .../{python3-pyiface_0.0.4.bb => python3-pyiface_0.0.5.bb}  | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.4.bb => python-pyiface_0.0.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.4.bb => python3-pyiface_0.0.5.bb} (100%)
+FWIW, libsdl2 builds fine for me with current sumo branch.
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index 4d0c8dc9e..620b244c6 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -3,9 +3,9 @@ SECTION = "devel/python"
- HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
- LICENSE = "GPLv3+"
- 
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
- 
--SRC_URI[md5sum] = "edcdd71109c4259af8348006a8049c9c"
--SRC_URI[sha256sum] = "dc984de0e1bcf6871ef88b1a92d1fb75717d4f602a60caeb66136093d4a8f62e"
-+SRC_URI[md5sum] = "06c3c71fe51df740dae6a88a13afb5e0"
-+SRC_URI[sha256sum] = "4bb79100cbcf7344a1ccaddc578cd6455da47d8eac6eb1bf903ec32e043af924"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.4.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb
--- 
-2.17.0
+Ross
 
+On 20 April 2018 at 13:03, Martin Jansa <martin.jansa@gmail.com> wrote:
+> I haven't dig around this much, but some of my builds are now failing with:
+>
+> ERROR: libsdl2-webos-2.0.4-86-r22 do_package: dwarfsrcfiles failed with
+> exit code 1 (cmd was 'dwarfsrcfiles' 'libsdl2-webos/2.0.4-86-r22/
+> package/usr/lib/libSDL2main.a'):
+> dwarfsrcfiles: libsdl2-webos/2.0.4-86-r22/package/usr/lib/libSDL2main.a:
+> not a valid ELF file
+> ERROR: libsdl2-webos-2.0.4-86-r22 do_package: Function failed:
+> split_and_strip_files
+>
+> It's different version of libsdl2 than what's in oe-core now and the recipe
+> for it might be a bit broken.
+>
+> $ file package/usr/lib/libSDL2main.a
+> package/usr/lib/libSDL2main.a: current ar archive
+>
+> $ recipe-sysroot-native/usr/bin/dwarfsrcfiles package/usr/lib/libSDL2main.a
+> dwarfsrcfiles: package/usr/lib/libSDL2main.a: not a valid ELF file
+>
+> $ ar x ../package/usr/lib/libSDL2main.a
+>
+> contains only:
+> SDL_dummy_main.lo
+>
+> Should we try a bit harder to check if the .a contains static library? In
+> the meantime I'll check what's going on in libsdl2-webos build and if the
+> same happens in oe-core libsdl2.
+>
+> Regards,
+>
+> On Thu, Apr 19, 2018 at 3:45 PM, <git@git.openembedded.org> wrote:
+>
+>> This is an automated email from the git hooks/post-receive script.
+>>
+>> rpurdie pushed a commit to branch master
+>> in repository openembedded-core.
+>>
+>> commit eefa5ba35663fabe1f3f8cf7f1ff126d51240613
+>> Author: Ola x Nilsson <ola.x.nilsson@axis.com>
+>> AuthorDate: Thu Apr 19 13:17:30 2018 +0200
+>>
+>>     package.bbclass: Include dbgsrc for static libs
+>>
+>>     The debugsource must be added from the package providing the static
+>>     lib, because any package using that lib does not have access to the
+>>     source code.
+>>
+>>     Fixes [YOCTO #12558]
+>>
+>>     Signed-off-by: Ola x Nilsson <olani@axis.com>
+>>     Signed-off-by: Ross Burton <ross.burton@intel.com>
+>> ---
+>>  meta/classes/package.bbclass | 44 ++++++++++++++++++++++++++++++
+>> ++------------
+>>  1 file changed, 32 insertions(+), 12 deletions(-)
+>>
+>> diff --git a/meta/classes/package.bbclass b/meta/classes/package.bbclass
+>> index 7978307..fff7ceb 100644
+>> --- a/meta/classes/package.bbclass
+>> +++ b/meta/classes/package.bbclass
+>> @@ -344,6 +344,20 @@ def parse_debugsources_from_dwarfs
+>> rcfiles_output(dwarfsrcfiles_output):
+>>
+>>      return debugfiles.keys()
+>>
+>> +def append_source_info(file, sourcefile, d):
+>> +    cmd = "'dwarfsrcfiles' '%s'" % (file)
+>> +    (retval, output) = oe.utils.getstatusoutput(cmd)
+>> +    # 255 means a specific file wasn't fully parsed to get the debug file
+>> list, which is not a fatal failure
+>> +    if retval != 0 and retval != 255:
+>> +        bb.fatal("dwarfsrcfiles failed with exit code %s (cmd was %s)%s"
+>> % (retval, cmd, ":\n%s" % output if output else ""))
+>> +
+>> +    debugsources = parse_debugsources_from_dwarfsrcfiles_output(output)
+>> +    # filenames are null-separated - this is an artefact of the previous
+>> use
+>> +    # of rpm's debugedit, which was writing them out that way, and the
+>> code elsewhere
+>> +    # is still assuming that.
+>> +    debuglistoutput = '\0'.join(debugsources) + '\0'
+>> +    open(sourcefile, 'a').write(debuglistoutput)
+>> +
+>>
+>>  def splitdebuginfo(file, debugfile, debugsrcdir, sourcefile, d):
+>>      # Function to split a single file into two components, one is the
+>> stripped
+>> @@ -369,18 +383,7 @@ def splitdebuginfo(file, debugfile, debugsrcdir,
+>> sourcefile, d):
+>>
+>>      # We need to extract the debug src information here...
+>>      if debugsrcdir:
+>> -        cmd = "'dwarfsrcfiles' '%s'" % (file)
+>> -        (retval, output) = oe.utils.getstatusoutput(cmd)
+>> -        # 255 means a specific file wasn't fully parsed to get the debug
+>> file list, which is not a fatal failure
+>> -        if retval != 0 and retval != 255:
+>> -            bb.fatal("dwarfsrcfiles failed with exit code %s (cmd was
+>> %s)%s" % (retval, cmd, ":\n%s" % output if output else ""))
+>> -
+>> -        debugsources = parse_debugsources_from_dwarfs
+>> rcfiles_output(output)
+>> -        # filenames are null-separated - this is an artefact of the
+>> previous use
+>> -        # of rpm's debugedit, which was writing them out that way, and
+>> the code elsewhere
+>> -        # is still assuming that.
+>> -        debuglistoutput = '\0'.join(debugsources) + '\0'
+>> -        open(sourcefile, 'a').write(debuglistoutput)
+>> +        append_source_info(file, sourcefile, d)
+>>
+>>      bb.utils.mkdirhier(os.path.dirname(debugfile))
+>>
+>> @@ -936,6 +939,15 @@ python split_and_strip_files () {
+>>                  type |= 8
+>>          return type
+>>
+>> +    def isStaticLib(path):
+>> +        if path.endswith('.a') and not os.path.islink(path):
+>> +            with open(path, 'rb') as fh:
+>> +                # The magic must include the first slash to avoid
+>> +                # matching golang static libraries
+>> +                magic = b'!<arch>\x0a/'
+>> +                start = fh.read(len(magic))
+>> +                return start == magic
+>> +        return False
+>>
+>>      #
+>>      # First lets figure out all of the files we may have to process ...
+>> do this only once!
+>> @@ -943,6 +955,7 @@ python split_and_strip_files () {
+>>      elffiles = {}
+>>      symlinks = {}
+>>      kernmods = []
+>> +    staticlibs = []
+>>      inodes = {}
+>>      libdir = os.path.abspath(dvar + os.sep + d.getVar("libdir"))
+>>      baselibdir = os.path.abspath(dvar + os.sep + d.getVar("base_libdir"))
+>> @@ -955,6 +968,9 @@ python split_and_strip_files () {
+>>                  if file.endswith(".ko") and file.find("/lib/modules/") !=
+>> -1:
+>>                      kernmods.append(file)
+>>                      continue
+>> +                if isStaticLib(file):
+>> +                    staticlibs.append(file)
+>> +                    continue
+>>
+>>                  # Skip debug files
+>>                  if debugappend and file.endswith(debugappend):
+>> @@ -1033,6 +1049,10 @@ python split_and_strip_files () {
+>>              # Only store off the hard link reference if we successfully
+>> split!
+>>              splitdebuginfo(file, fpath, debugsrcdir, sourcefile, d)
+>>
+>> +        if debugsrcdir:
+>> +            for file in staticlibs:
+>> +                append_source_info(file, sourcefile, d)
+>> +
+>>          # Hardlink our debug symbols to the other hardlink copies
+>>          for ref in inodes:
+>>              if len(inodes[ref]) == 1:
+>>
+>> --
+>> To stop receiving notification emails like this one, please contact
+>> the administrator of this repository.
+>> --
+>> _______________________________________________
+>> Openembedded-commits mailing list
+>> Openembedded-commits@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
