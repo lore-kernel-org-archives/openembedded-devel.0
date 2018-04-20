@@ -1,47 +1,57 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
-	[209.85.128.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 228E0746D8
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 761 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 20 Apr 2018 10:33:50 UTC
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.205])
+	by mail.openembedded.org (Postfix) with ESMTP id E70A77458C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 08:58:07 +0000 (UTC)
-Received: by mail-wr0-f169.google.com with SMTP id o15-v6so20886871wro.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Apr 2018 01:58:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=1SfAQOtr1WaaRiIpb79IhDH/TkzZlYeZKKGhQ9aru6k=;
-	b=WnPwAaN2hpMjx+8zYfir5KHxujMAcvU8BLRGeBWWfCIwuHNIQmmUeJvb/L+OOfqZ9L
-	zkTp9Tfcnp9lHEVt4KYIa5ICAlp5MTJrYVA9PrObyxed/I6KhwSEJL4P8dbv+JZJaeI6
-	fepXihQzb+qdMsrfSghHz1hgyOi9YigyNg6F4YchVyUA8UcpjHW+K+LNWIl/JXuypuLu
-	FNgdK2+bDYYqm/D0BVF3GUA3tNHbmrTufEMwniQ84HJhr43W7/PcO70U2EOnALPB8COG
-	hSC0d8bIGJ43XJsm2Hf4NV6O3wjVuSVYKWyHh3ZVcdSkwybrF6Ta9KHoCdnsPD7RPCfu
-	XuIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=1SfAQOtr1WaaRiIpb79IhDH/TkzZlYeZKKGhQ9aru6k=;
-	b=VpHLNLuG0NaxKNyQbKnPSGuMsX6R/oHnxc5+Zy2kq/Qyc6Tlmc/G6mTQ7BxVJm8UH5
-	iVLUGVhYxT9BH5o/Bp2wled2K3X+vba+5Pw832LxafgOFhQMqHgHdAUVwc4Hws4K5ZBv
-	LvXJ1zv30RJ7QZN+SAlcmls0sC5QtDO4JX7af3bSnY+/Q1CeG1CwCI5KrBXWFdETQeak
-	vsIevp+g/F3F/t3/n0YUQZKFbnx78kmnSL+AEN0/RVzTIA8MXWR9/tSmOx23DaIupjik
-	StwA3aI5gdse2YUhUE9+buqsN35QJ2KQRvK/IPYoDlCWX6XxechasZ7/S3QKcBu3Ox4i
-	YhIw==
-X-Gm-Message-State: ALQs6tDNerc3Tx6xd6VD3HXFkKkoxROQKoEggkwMQoIo4THlmsVB4NzR
-	abGA2I7PLDvOPsM3ba0X2VwdkUr+Jj/22U+IHLU=
-X-Google-Smtp-Source: AIpwx4/m9obn+srU2wvx5Q+W3xUprv1lavx0M+eDdn1VcKCLnQPQhNpJXFCRnEdPYiUS89vlu0wkYL/uh8pVeMsNq/g=
-X-Received: by 10.80.161.165 with SMTP id 34mr6567895edk.273.1524214688333;
-	Fri, 20 Apr 2018 01:58:08 -0700 (PDT)
+	Fri, 20 Apr 2018 10:33:50 +0000 (UTC)
+Received: from [216.82.242.45] (using TLSv1.2 with cipher
+	DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-13.bemta-8.messagelabs.com id 67/17-08494-61FB9DA5;
+	Fri, 20 Apr 2018 10:21:10 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKIsWRWlGSWpSXmKPExsXi5LtOQFd0/80
+	ogw2HjS0a9uZYXDy8lNmByePcxhWMHn+bJjEHMEWxZuYl5VcksGa8bfnGXDCftaLxlHgD406W
+	LkYuDiGBVYwSDXNmM3cxcgI5ixklpq03BbGFBcIljtx9zA5iiwjESFy4t4O1i5EDqMZRon2eH
+	kiYTUBPYvKlJ2CtvALWEg3X37CC2CwCqhJ3f3xhAbFFgcYsuLqFDaJGUOLkzCdgcU4BJ4mG2c
+	fA6pkFLCRmzj/PCGGLS9x6Mp8JwpaX2P52DtRpKhIHl14Gq5EAim/afJZ9AqPALCRjZyEZNQv
+	JqFlIRi1gZFnFqFGcWlSWWqRrZKmXVJSZnlGSm5iZo2toYKGXm1pcnJiempOYVKyXnJ+7iREY
+	xPUMDIw7GH8ciT7EKMnBpCTKe2zyjSghvqT8lMqMxOKM+KLSnNTiQ4wyHBxKErxv9t6MEhIsS
+	k1PrUjLzAHGE0xagoNHSYR3D0iat7ggMbc4Mx0idYpRl+PE+yk9zEIsefl5qVLivB9BigRAij
+	JK8+BGwGL7EqOslDAvIwMDgxBPQWpRbmYJqvwrRnEORiVhXq59QFN4MvNK4Da9AjqCCegIA5U
+	bIEeUJCKkpBoYO6zD7CNsDp29rPt1VuNWrR+3C33fLL7XccDF2vnMnMBWzfov9/R3sJ41uzdz
+	TbpVgJNdbpLoMT1vlTnzNmwKXqsYdv9/dUc1jzDPzvS+M5MPLwmeFVZQstNb1rBW8Gt4wq4JB
+	3S2uXfsXtfPXFi05yP3Gq5NV2qYGKKelbCwLduY9eBAivIvJZbijERDLeai4kQAF4j0degCAA
+	A=
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-5.tower-201.messagelabs.com!1524219669!37018805!1
+X-Originating-IP: [66.77.174.16]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.9.15; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 1626 invoked from network); 20 Apr 2018 10:21:09 -0000
+Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
+	by server-5.tower-201.messagelabs.com with DHE-RSA-AES256-GCM-SHA384
+	encrypted SMTP; 20 Apr 2018 10:21:09 -0000
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Fri, 20 Apr 2018 05:21:09 -0500
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
+	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Fri, 20 Apr 2018 12:21:06 +0200
+To: Adam Trhon <adam.trhon@tbs-biometrics.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20180419130701.1713-1-adam.trhon@tbs-biometrics.com>
+From: Javier Viguera <javier.viguera@digi.com>
+Message-ID: <7888fc9d-2546-8de2-8df7-2aa62015d0de@digi.com>
+Date: Fri, 20 Apr 2018 12:21:00 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.6.0
 MIME-Version: 1.0
-Received: by 10.80.157.197 with HTTP; Fri, 20 Apr 2018 01:58:07 -0700 (PDT)
-In-Reply-To: <07949a94-62c1-6ad2-3cc7-aca3fab033e9@gmail.com>
-References: <07949a94-62c1-6ad2-3cc7-aca3fab033e9@gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Fri, 20 Apr 2018 10:58:07 +0200
-Message-ID: <CAAQYJAvxUyds8-qNhajS8imrRBmnsf4bq4FtYL-RJApBr=9Rcg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: State of the world, Failed tasks 2018-04-11
+In-Reply-To: <20180419130701.1713-1-adam.trhon@tbs-biometrics.com>
+X-Originating-IP: [10.101.2.54]
+Subject: Re: [meta-qt5][PATCH] qttranslations: annihilate qttranslations-qtconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,23 +64,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Apr 2018 08:58:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 20 Apr 2018 10:33:51 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-(cut)
-> === qemuarm64 (8) ===
->     * meta-openembedded/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb:do_compile
->     * meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb:do_configure
+On 19/04/18 15:07, Adam Trhon wrote:
+> In Qt 5.9.5 there is no qtconfig translation (see commit a6b3446cb023
+> in qttranslations upstream). But packagegroup-qt5-toolchain-target
+> RDEPENDS on qttranslations-qtconfg, which breaks SDK populating.
+> 
+> Fix this issue by annihilating qttranslations-qtconfig from meta-qt5.
 
-Hi,
-I am working on the coming 2.0.17 version and the recipe now builds
-for all supported archs.
++1
 
-https://github.com/LinuxPDA/meta-openembedded/tree/master/meta-initramfs/recipes-kernel/kexec
+This is needed also in Rocko after the update to version 5.9.5.
 
-There are still nasty compile warnings to fix, some could lead to
-runtime errors...I uploaded the logs.
-Please review, thanks.
+Currently Rocko fails to build a QT5 based SDK with:
 
-Andrea
+Error:
+  Problem: conflicting requests
+   - nothing provides qttranslations-qtconfig needed by 
+packagegroup-qt5-toolchain-target-1.0-r0.0.noarch
+
+Cherry-picking this patch fixes the broken build.
+
+-- 
+Regards,
+
+Javier Viguera
 
