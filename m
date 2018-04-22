@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EE91871C54
+Received: from mail-qk0-f170.google.com (mail-qk0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 45F2E6B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 15:25:17 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id v2so13632729qkh.10
+	Sun, 22 Apr 2018 15:31:58 +0000 (UTC)
+Received: by mail-qk0-f170.google.com with SMTP id b131so9368033qkg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 08:25:19 -0700 (PDT)
+	Sun, 22 Apr 2018 08:32:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZmXIchM2XBzJ2kQo0cVE12dveL2ebtlz9nvAIlLeSiE=;
-	b=oj0Bsb6247ZbF2iwqRRu2Valw+hIq7FJBZPmnvjTXmYKQvaovaP68HRPQPR8CxCD43
-	7dd7u2zqyonKxQdqmBsOToBj3yah+Je0QgIJ9OUKKUlhSlM3YZtgWtfw+LEiSJqKxryz
-	k4nO+FdItzcJX0iQG80grW8mOGD1gcPBRRavcpfZVIqTYpdBSflLsXwDy3g2ZQiEGQVg
-	fQb1dxCD3mmqosOdEBL4ad93k6r+q6WxsqAaM2fZyV8sgpOQzhU+wB/7TQ7fwI28oFO5
-	oHwLIkoFTy0qixhx03RpJJXtiSWgVFRb4nSX5CXl0zbG/biWnbWUfxZQc/wp4BIXqkBx
-	n4Yw==
-X-Gm-Message-State: ALQs6tA5AtHO01waFhVQ6mTcRu7yGnT5BFzKc4URb0jKLgn7dgSXScCg
-	CwPspqrwGoabzVGV5A7qHdzpI0hW
-X-Google-Smtp-Source: AB8JxZpzm6xMTaNKbf8ZVmHxsYaKSbhRtG2tX2Fb9P2TNc+j7jBdc1IO+HinmGPr8CghTv0tV6tIiQ==
-X-Received: by 10.55.215.84 with SMTP id m81mr18494442qki.278.1524410718091;
-	Sun, 22 Apr 2018 08:25:18 -0700 (PDT)
+	bh=i9kNG/rIWyqlx6jHbImuLc/cz80GB/U1cMEm0PCHAA8=;
+	b=nbV19HYsoJU9qAaYFLxJy8CcArwLY2tgARKGNBTGgUmhwXOq/hkbFRSsXrACoTw1xA
+	ft83Xw2hnaG7jFEaijdJeFRNjC0+Ar4L/9J8YaG0v8/PFVE8goRFQdGaPG6SlhJk6V2/
+	h1zN+OXTIS5dRXeN2RoEorOARVYdr5ATcFqTNgod5C6FxbH3Unrr/iQnVVA8rabr4J1u
+	UHQJZw8y4lzhL+3LvBnMoB/at/HaV9Umoue0ElUai9dRnO4QDyHREFrSViSZQDzYJmJo
+	juA6I82qqRY1N6b5F+yfN0yxn0MAKH3bTRMgUaFkEXboo3pJ4val4XAiBZKGuLl0eMdB
+	3w7A==
+X-Gm-Message-State: ALQs6tCXb60fi9g4i5Qi1ndZCBkUGs/figCbRcbIgVNaJ1A8FC54XsB8
+	dWZCYDPGUfhyoL7WxsQw/NeMY7BH
+X-Google-Smtp-Source: AB8JxZpste9p3JouT54lT7Vs/I0XldKzSggtf336oPhglF1VwLQfZrSSxbmiR+v0fwtwKFpGf28f2Q==
+X-Received: by 10.55.105.195 with SMTP id e186mr18299742qkc.322.1524411119431; 
+	Sun, 22 Apr 2018 08:31:59 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	s16sm8884688qks.78.2018.04.22.08.25.17
+	s39-v6sm9552914qts.43.2018.04.22.08.31.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 22 Apr 2018 08:25:17 -0700 (PDT)
+	Sun, 22 Apr 2018 08:31:58 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Apr 2018 11:25:11 -0400
-Message-Id: <1524410711-4945-1-git-send-email-derek@asterius.io>
+Date: Sun, 22 Apr 2018 11:31:52 -0400
+Message-Id: <1524411112-8028-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cython: update to version 0.28.2
+Subject: [meta-python][PATCH] python-pretend: update to version 1.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Apr 2018 15:25:18 -0000
+X-List-Received-Date: Sun, 22 Apr 2018 15:31:59 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
- .../python/{python-cython_0.28.bb => python-cython_0.28.2.bb}         | 0
- .../python/{python3-cython_0.28.bb => python3-cython_0.28.2.bb}       | 0
+ meta-python/recipes-devtools/python/python-pretend.inc                | 4 ++--
+ .../python/{python-pretend_1.0.8.bb => python-pretend_1.0.9.bb}       | 0
+ .../python/{python3-pretend_1.0.8.bb => python3-pretend_1.0.9.bb}     | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.28.bb => python-cython_0.28.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cython_0.28.bb => python3-cython_0.28.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pretend_1.0.8.bb => python-pretend_1.0.9.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pretend_1.0.8.bb => python3-pretend_1.0.9.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index 550d9a3..5d3b9d5 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
- PYPI_PACKAGE = "Cython"
+diff --git a/meta-python/recipes-devtools/python/python-pretend.inc b/meta-python/recipes-devtools/python/python-pretend.inc
+index 78b6717..b342aef 100644
+--- a/meta-python/recipes-devtools/python/python-pretend.inc
++++ b/meta-python/recipes-devtools/python/python-pretend.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/alex/pretend"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=411780c0b7fa756753e94affeee5bc99"
+ 
+-SRC_URI[md5sum] = "7147050a95c9f494248557b42b58ad79"
+-SRC_URI[sha256sum] = "930f2c1e18503e8f8c403abe2e02166c4a881941745147e712cdd4f49f3fb964"
++SRC_URI[md5sum] = "ad53883ede48aeac7ae584f0de0240e8"
++SRC_URI[sha256sum] = "c90eb810cde8ebb06dafcb8796f9a95228ce796531bc806e794c2f4649aa1b10"
+ 
  BBCLASSEXTEND = "native nativesdk"
- 
--SRC_URI[md5sum] = "459a7980c508e61fc37b3245612969ac"
--SRC_URI[sha256sum] = "518f7e22da54109661e483a91a63045203caf9fd78da4a69185a7622f759965f"
-+SRC_URI[md5sum] = "0e0568d6bed4b09ad01afe0a38805305"
-+SRC_URI[sha256sum] = "634e2f10fc8d026c633cffacb45cd8f4582149fa68e1428124e762dbc566e68a"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.bb b/meta-python/recipes-devtools/python/python-cython_0.28.2.bb
+diff --git a/meta-python/recipes-devtools/python/python-pretend_1.0.8.bb b/meta-python/recipes-devtools/python/python-pretend_1.0.9.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython_0.28.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.28.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.28.bb b/meta-python/recipes-devtools/python/python3-cython_0.28.2.bb
+rename from meta-python/recipes-devtools/python/python-pretend_1.0.8.bb
+rename to meta-python/recipes-devtools/python/python-pretend_1.0.9.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb b/meta-python/recipes-devtools/python/python3-pretend_1.0.9.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.28.bb
-rename to meta-python/recipes-devtools/python/python3-cython_0.28.2.bb
+rename from meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb
+rename to meta-python/recipes-devtools/python/python3-pretend_1.0.9.bb
 -- 
 2.7.4
 
