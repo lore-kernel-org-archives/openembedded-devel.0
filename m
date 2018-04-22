@@ -1,39 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B200B71A6B
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id EE91871C54
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 15:16:50 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id h2-v6so2897551qtp.7
+	Sun, 22 Apr 2018 15:25:17 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id v2so13632729qkh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 08:16:51 -0700 (PDT)
+	Sun, 22 Apr 2018 08:25:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0Koh5yVzaQ3Jfwpbq5QnwOZ50Zaz59oD0Mvmusj4qbI=;
-	b=ZeEiy3prQQUOrRZrVipsbByaltwci4lPrtED5xGTWc+mC94ZPuB4e6bA9oPcWXq3+6
-	dg5fMIMLJOkJgPlcFnvbDtXVo4RlnQco92N8NoiuW7SdD13rzy8KJPZPAA/iMfJLeXub
-	PZ1VYcS0BF28WDxijDl/+Hg40tYEK/NmqAM3G84sXneKqY1/EtZqapmhvZiYa66taX65
-	EvW96LqXr9RyF7QYrJgNtip749XZTdTr9P3GqTNqdKGUaDn1PewWJlqW92WFXh6TLa/j
-	XXD5/pxTJOuRE8J+6pEvnGL7Zx7k3XbDaJeYfzgr5pce5Wi5Xyj/lWuPZgVP2SJo45XW
-	2zZA==
-X-Gm-Message-State: ALQs6tBXxNkqt7sr8zXY107ytsBu3Yz87GwcHi+WUQnjzzXD3e1PLX1e
-	mN7gqk8/MAx0gI1+foAMonMNqEJS
-X-Google-Smtp-Source: AB8JxZrdm2LCwgId6XjP1g9UVB2KbPgoOI5SQtoeFB1qYuv1sTCDIvbkYUTCX4l0vdgJwX2zxV91gQ==
-X-Received: by 2002:ac8:1e0d:: with SMTP id
-	n13-v6mr18996999qtl.404.1524410210967; 
-	Sun, 22 Apr 2018 08:16:50 -0700 (PDT)
+	bh=ZmXIchM2XBzJ2kQo0cVE12dveL2ebtlz9nvAIlLeSiE=;
+	b=oj0Bsb6247ZbF2iwqRRu2Valw+hIq7FJBZPmnvjTXmYKQvaovaP68HRPQPR8CxCD43
+	7dd7u2zqyonKxQdqmBsOToBj3yah+Je0QgIJ9OUKKUlhSlM3YZtgWtfw+LEiSJqKxryz
+	k4nO+FdItzcJX0iQG80grW8mOGD1gcPBRRavcpfZVIqTYpdBSflLsXwDy3g2ZQiEGQVg
+	fQb1dxCD3mmqosOdEBL4ad93k6r+q6WxsqAaM2fZyV8sgpOQzhU+wB/7TQ7fwI28oFO5
+	oHwLIkoFTy0qixhx03RpJJXtiSWgVFRb4nSX5CXl0zbG/biWnbWUfxZQc/wp4BIXqkBx
+	n4Yw==
+X-Gm-Message-State: ALQs6tA5AtHO01waFhVQ6mTcRu7yGnT5BFzKc4URb0jKLgn7dgSXScCg
+	CwPspqrwGoabzVGV5A7qHdzpI0hW
+X-Google-Smtp-Source: AB8JxZpzm6xMTaNKbf8ZVmHxsYaKSbhRtG2tX2Fb9P2TNc+j7jBdc1IO+HinmGPr8CghTv0tV6tIiQ==
+X-Received: by 10.55.215.84 with SMTP id m81mr18494442qki.278.1524410718091;
+	Sun, 22 Apr 2018 08:25:18 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	m66sm8682559qkl.57.2018.04.22.08.16.50
+	s16sm8884688qks.78.2018.04.22.08.25.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 22 Apr 2018 08:16:50 -0700 (PDT)
+	Sun, 22 Apr 2018 08:25:17 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Apr 2018 11:16:41 -0400
-Message-Id: <1524410201-30531-1-git-send-email-derek@asterius.io>
+Date: Sun, 22 Apr 2018 11:25:11 -0400
+Message-Id: <1524410711-4945-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pexpect: update to version 4.5.0
+Subject: [meta-python][PATCH] python-cython: update to version 0.28.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Apr 2018 15:16:50 -0000
+X-List-Received-Date: Sun, 22 Apr 2018 15:25:18 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pexpect.inc                | 4 ++--
- .../python/{python-pexpect_4.4.0.bb => python-pexpect_4.5.0.bb}       | 0
- .../python/{python3-pexpect_4.4.0.bb => python3-pexpect_4.5.0.bb}     | 0
+ meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
+ .../python/{python-cython_0.28.bb => python-cython_0.28.2.bb}         | 0
+ .../python/{python3-cython_0.28.bb => python3-cython_0.28.2.bb}       | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pexpect_4.4.0.bb => python-pexpect_4.5.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pexpect_4.4.0.bb => python3-pexpect_4.5.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-cython_0.28.bb => python-cython_0.28.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.28.bb => python3-cython_0.28.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/meta-python/recipes-devtools/python/python-pexpect.inc
-index d1fac54..fa8ad01 100644
---- a/meta-python/recipes-devtools/python/python-pexpect.inc
-+++ b/meta-python/recipes-devtools/python/python-pexpect.inc
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index 550d9a3..5d3b9d5 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native nativesdk"
  
--SRC_URI[md5sum] = "e9b07f0765df8245ac72201d757baaef"
--SRC_URI[sha256sum] = "67b85a1565968e3d5b5e7c9283caddc90c3947a2625bed1905be27bd5a03e47d"
-+SRC_URI[md5sum] = "913fc0a68a915cdf6ad4250493c94cf7"
-+SRC_URI[sha256sum] = "9f8eb3277716a01faafaba553d629d3d60a1a624c7cf45daa600d2148c30020c"
+-SRC_URI[md5sum] = "459a7980c508e61fc37b3245612969ac"
+-SRC_URI[sha256sum] = "518f7e22da54109661e483a91a63045203caf9fd78da4a69185a7622f759965f"
++SRC_URI[md5sum] = "0e0568d6bed4b09ad01afe0a38805305"
++SRC_URI[sha256sum] = "634e2f10fc8d026c633cffacb45cd8f4582149fa68e1428124e762dbc566e68a"
  
- UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/pexpect"
+ inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-pexpect_4.4.0.bb b/meta-python/recipes-devtools/python/python-pexpect_4.5.0.bb
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.bb b/meta-python/recipes-devtools/python/python-cython_0.28.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pexpect_4.4.0.bb
-rename to meta-python/recipes-devtools/python/python-pexpect_4.5.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pexpect_4.4.0.bb b/meta-python/recipes-devtools/python/python3-pexpect_4.5.0.bb
+rename from meta-python/recipes-devtools/python/python-cython_0.28.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.28.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.28.bb b/meta-python/recipes-devtools/python/python3-cython_0.28.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pexpect_4.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-pexpect_4.5.0.bb
+rename from meta-python/recipes-devtools/python/python3-cython_0.28.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.28.2.bb
 -- 
 2.7.4
 
