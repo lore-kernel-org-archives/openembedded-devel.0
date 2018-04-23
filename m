@@ -1,37 +1,23 @@
-Return-Path: <cshored@thecshore.com>
-X-Greylist: delayed 586 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 23 Apr 2018 04:02:30 UTC
-Received: from mail.thecshore.com (mail.thecshore.com [144.217.14.6])
-	by mail.openembedded.org (Postfix) with ESMTP id 735EE6E688
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Apr 2018 04:02:30 +0000 (UTC)
-Received: from [10.137.0.15] (107-179-160-78.cpe.teksavvy.com [107.179.160.78])
-	by mail.thecshore.com (Postfix) with ESMTPSA id 340822696
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 23:52:45 -0400 (EDT)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.thecshore.com 340822696
-Authentication-Results: mail.thecshore.com;
-	dmarc=none (p=none dis=none) header.from=thecshore.com
-Authentication-Results: mail.thecshore.com;
-	spf=fail smtp.mailfrom=cshored@thecshore.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.thecshore.com 340822696
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thecshore.com;
-	s=default; t=1524455565;
-	bh=SMWH+LWSKFCO39at6vypZCO6go6lQmzfNHJHRM2BJYc=;
-	h=To:From:Subject:Date:From;
-	b=G8umTpeQuFwT9A5Vw1i3OvotANepVV8b8sJ9kA+79NcNNT5nOc55gYa+ev987JNgG
-	k2pd3Zpq+pBUK3phqG7fsrpDcdT8qLPFIHypXGQOIAuXhp6tMMbLKTcVdJJXmqCp2V
-	Mcia6LZFrNrtlS8CJksZeFPJthVd6Z3x5OZ+44Bk=
-X-Virus-Status: Clean
-X-Virus-Scanned: clamav-milter 0.99.4 at mail.thecshore.com
-To: Openembedded-devel@lists.openembedded.org
-From: "Daniel F. Dickinson" <cshored@thecshore.com>
-Message-ID: <87699f95-edc2-c7bf-0e19-5ba2ef68d654@thecshore.com>
-Date: Sun, 22 Apr 2018 23:52:43 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A79296093B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Apr 2018 09:15:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w3N9FF5A024993
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 23 Apr 2018 02:15:15 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Mon, 23 Apr 2018 02:15:14 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <Martin.Jansa@gmail.com>
+Date: Mon, 23 Apr 2018 17:22:49 +0800
+Message-ID: <1524475369-32433-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-xvisor] Working on layer to build Xvisor and guests
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] mariadb: 5.5.57 -> 5.5.59
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +30,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Apr 2018 04:02:30 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-CA
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Apr 2018 09:15:16 -0000
+Content-Type: text/plain
 
-Hi all,
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../mysql/{mariadb-native_5.5.57.bb => mariadb-native_5.5.59.bb}      | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                                 | 4 ++--
+ meta-oe/recipes-dbs/mysql/{mariadb_5.5.57.bb => mariadb_5.5.59.bb}    | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.57.bb => mariadb-native_5.5.59.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.57.bb => mariadb_5.5.59.bb} (100%)
 
-FYI I am currently working on a layer, meta-xvisor, for building Xvisor 
-(https://xhypervisor.com); repo is at 
-git://github.com/cshoredaniel/meta-xvisor.git), and have a few questions:
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.57.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.59.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_5.5.57.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.59.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index a29d441..99e7050 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -19,8 +19,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+            file://0001-disable-ucontext-on-musl.patch \
+           "
+ 
+-SRC_URI[md5sum] = "2d4104aae0b9e5efa8878918bd329cb4"
+-SRC_URI[sha256sum] = "5dbde98d7e4a5a1721b6cbed7898b2549a88866247951cf586057975c6cea641"
++SRC_URI[md5sum] = "3cec4afc06b468687ef576c90148d10d"
++SRC_URI[sha256sum] = "c3269ce20b45b177239fd1e3d6d9428a94131711f12758ebf5f65222278bb110"
+ 
+ S = "${WORKDIR}/mariadb-${PV}"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_5.5.57.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.59.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_5.5.57.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.59.bb
+-- 
+2.7.4
 
-Xvisor is basically an alternate kernel (it's a standalone Type-1 
-hypervisor), but configuration and building along the lines of u-boot / 
-busybox seems to be working, but I need help to properly deal with 
-different architectures and machines as the arch/machine organization 
-isn't exactly the same as linux kernel.
-
-I'm relatively new to OE so I have lots to learn to do complicated 
-things like dealing with openconf (derivative of KConfig) files and 
-architecture mappings and so on in a compact, generic way.
-
-Also it'd be useful to know how to use the new MultiConfig stuff so that 
-I can build multiple guests and the hypervisor itself from the same tree.
-
-Any help would be appreciated!
-
-Regards,
-
-Daniel
 
