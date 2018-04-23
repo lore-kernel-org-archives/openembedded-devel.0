@@ -1,38 +1,37 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id ECA44745D3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 15:50:36 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id s78so13661328qkl.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Apr 2018 08:50:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=mfLeOqyfjGAHU8g7xn6ZB5fWk+24lBiAmOBq4jjphYg=;
-	b=YCzdxdEdQfgxjl37I5KFJMUx4YrbMunj/EI1I/E2B5FuaABVertWeLYGEWhj4wl07u
-	c7ujrWDrzoz+MpfWv2dAsxIaaNXwS0t5CHZ1NQf0VcTkPNphpRo/jjZKe8xkpy2bkngp
-	E3/vfUZrO8XVZOe9gAint8fnDVce++kVMYBeFIk1RM1KihahYWdVuvH1alxblNEiF1HO
-	yjgfEpxoxVD+U2trk3x83S8JgExB3VYNzynDZM9DTYRfEAuBDHkaHtZrhDjcYHB7oXKJ
-	sK+UWJNi47aOghpR7O104O7f4XDBJunnUXHjN4TUHFn6zag4y9WUs2DJrGA0JBggMvV7
-	rTxA==
-X-Gm-Message-State: ALQs6tDctosXhbBVOjO6OGriwfnHG/u7p0paXb6ctMS4Tp/RJhbN+S9J
-	mGbdqEHIxUyWh05ImNinKjRSJcEh
-X-Google-Smtp-Source: AB8JxZoy3UxYYA/JfwZdHAFMTKcprDulCWxP6eGgD0RKvTLRhlM6XGxrVmsDw+EuC3BbNtqR8qbPdQ==
-X-Received: by 10.55.150.131 with SMTP id y125mr19954105qkd.334.1524412237201; 
-	Sun, 22 Apr 2018 08:50:37 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	j7-v6sm8513750qth.32.2018.04.22.08.50.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 22 Apr 2018 08:50:36 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Apr 2018 11:50:28 -0400
-Message-Id: <1524412228-5481-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-jsonpatch: update to version 1.23
+Return-Path: <cshored@thecshore.com>
+X-Greylist: delayed 586 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 23 Apr 2018 04:02:30 UTC
+Received: from mail.thecshore.com (mail.thecshore.com [144.217.14.6])
+	by mail.openembedded.org (Postfix) with ESMTP id 735EE6E688
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Apr 2018 04:02:30 +0000 (UTC)
+Received: from [10.137.0.15] (107-179-160-78.cpe.teksavvy.com [107.179.160.78])
+	by mail.thecshore.com (Postfix) with ESMTPSA id 340822696
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Apr 2018 23:52:45 -0400 (EDT)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.thecshore.com 340822696
+Authentication-Results: mail.thecshore.com;
+	dmarc=none (p=none dis=none) header.from=thecshore.com
+Authentication-Results: mail.thecshore.com;
+	spf=fail smtp.mailfrom=cshored@thecshore.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.thecshore.com 340822696
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thecshore.com;
+	s=default; t=1524455565;
+	bh=SMWH+LWSKFCO39at6vypZCO6go6lQmzfNHJHRM2BJYc=;
+	h=To:From:Subject:Date:From;
+	b=G8umTpeQuFwT9A5Vw1i3OvotANepVV8b8sJ9kA+79NcNNT5nOc55gYa+ev987JNgG
+	k2pd3Zpq+pBUK3phqG7fsrpDcdT8qLPFIHypXGQOIAuXhp6tMMbLKTcVdJJXmqCp2V
+	Mcia6LZFrNrtlS8CJksZeFPJthVd6Z3x5OZ+44Bk=
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.99.4 at mail.thecshore.com
+To: Openembedded-devel@lists.openembedded.org
+From: "Daniel F. Dickinson" <cshored@thecshore.com>
+Message-ID: <87699f95-edc2-c7bf-0e19-5ba2ef68d654@thecshore.com>
+Date: Sun, 22 Apr 2018 23:52:43 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
+MIME-Version: 1.0
+Subject: [meta-xvisor] Working on layer to build Xvisor and guests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,97 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Apr 2018 15:50:37 -0000
+X-List-Received-Date: Mon, 23 Apr 2018 04:02:30 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: 7bit
 
-Remove upstreamed patch Drop-support-for-EOL-Python-3.3.patch
+Hi all,
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-jsonpatch.inc   |  4 +--
- .../Drop-support-for-EOL-Python-3.3.patch          | 35 ----------------------
- ...-jsonpatch_1.21.bb => python-jsonpatch_1.23.bb} |  4 ---
- ...jsonpatch_1.21.bb => python3-jsonpatch_1.23.bb} |  0
- 4 files changed, 2 insertions(+), 41 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
- rename meta-python/recipes-devtools/python/{python-jsonpatch_1.21.bb => python-jsonpatch_1.23.bb} (55%)
- rename meta-python/recipes-devtools/python/{python3-jsonpatch_1.21.bb => python3-jsonpatch_1.23.bb} (100%)
+FYI I am currently working on a layer, meta-xvisor, for building Xvisor 
+(https://xhypervisor.com); repo is at 
+git://github.com/cshoredaniel/meta-xvisor.git), and have a few questions:
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch.inc b/meta-python/recipes-devtools/python/python-jsonpatch.inc
-index e559fb1..409c09a 100644
---- a/meta-python/recipes-devtools/python/python-jsonpatch.inc
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch.inc
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
- 
- inherit pypi
- 
--SRC_URI[md5sum] = "0b20d819daf120ed3fef3be608f2ce18"
--SRC_URI[sha256sum] = "11f5ffdf543a83047a2f54ac28f8caad7f34724cb1ea26b27547fd974f1a2153"
-+SRC_URI[md5sum] = "83c4c9faccb4a2ff8c1db80cbddc590d"
-+SRC_URI[sha256sum] = "49f29cab70e9068db3b1dc6b656cbe2ee4edf7dfe9bf5a0055f17a4b6804a4b9"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-stringold"
- 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch b/meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
-deleted file mode 100644
-index ccd8e12..0000000
---- a/meta-python/recipes-devtools/python/python-jsonpatch/Drop-support-for-EOL-Python-3.3.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 71bdeed8b49390ff14fe8f0434fc8a1038d89128 Mon Sep 17 00:00:00 2001
--From: Hugo <hugovk@users.noreply.github.com>
--Date: Tue, 16 Jan 2018 14:22:33 +0200
--Subject: [PATCH 1/4] Drop support for EOL Python 3.3
--
--Upstream-Status: Backport
--
--[MA: remove dev only files from patch]
--Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
--
-----
-- setup.py      | 2 +-
--
--diff --git a/setup.py b/setup.py
--index 0776c41..471c433 100644
----- a/setup.py
--+++ b/setup.py
--@@ -58,7 +58,6 @@ CLASSIFIERS = [
--     'Programming Language :: Python :: 2',
--     'Programming Language :: Python :: 2.7',
--     'Programming Language :: Python :: 3',
---    'Programming Language :: Python :: 3.3',
--     'Programming Language :: Python :: 3.4',
--     'Programming Language :: Python :: 3.5',
--     'Programming Language :: Python :: 3.6',
--@@ -81,5 +80,6 @@ setup(name=PACKAGE,
--       package_data={'': ['requirements.txt']},
--       scripts=['bin/jsondiff', 'bin/jsonpatch'],
--       classifiers=CLASSIFIERS,
--+      python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
--       **OPTIONS
-- )
---- 
--2.7.4
--
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb
-rename to meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb
-index 2b253b5..90cd318 100644
---- a/meta-python/recipes-devtools/python/python-jsonpatch_1.21.bb
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.23.bb
-@@ -2,7 +2,3 @@ inherit setuptools
- require python-jsonpatch.inc
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-re"
--
--SRC_URI += " \
--    file://Drop-support-for-EOL-Python-3.3.patch \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-jsonpatch_1.21.bb b/meta-python/recipes-devtools/python/python3-jsonpatch_1.23.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-jsonpatch_1.21.bb
-rename to meta-python/recipes-devtools/python/python3-jsonpatch_1.23.bb
--- 
-2.7.4
+Xvisor is basically an alternate kernel (it's a standalone Type-1 
+hypervisor), but configuration and building along the lines of u-boot / 
+busybox seems to be working, but I need help to properly deal with 
+different architectures and machines as the arch/machine organization 
+isn't exactly the same as linux kernel.
 
+I'm relatively new to OE so I have lots to learn to do complicated 
+things like dealing with openconf (derivative of KConfig) files and 
+architecture mappings and so on in a compact, generic way.
+
+Also it'd be useful to know how to use the new MultiConfig stuff so that 
+I can build multiple guests and the hypervisor itself from the same tree.
+
+Any help would be appreciated!
+
+Regards,
+
+Daniel
 
