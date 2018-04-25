@@ -1,52 +1,102 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E26072EB7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 22:05:18 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id 66so9575999wmd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 15:05:20 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BB6187457F;
+	Wed, 25 Apr 2018 22:06:26 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id p12so399802pff.13;
+	Wed, 25 Apr 2018 15:06:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=dXvhV8QCwEgrJg8Y5xKh41EC0xaNk6iiAvJjoItqx1s=;
-	b=RcCUz7CPY7/doJcff/DKNolz1ja/JRun3y+m9WadesyfbHdp7QOJaiVoMcrhc3TtsV
-	gaMjIbq1SMcd14gL7TFOYeGG68cnSKhzajUJuMDCzkAp/qlxOJRsMhMraioDBauxPwK9
-	oHI4Lr/4j3U7jpAQvFH1ehKVegcb630vpG/1PKmXOhmzz0BjmC7ZWIE9+fMsYw0szTyq
-	wnw94cGNkB9+Kqlur1RJuIW42IMiLaYMNj/O9CuZch83SBcWvE7PXhBODCX+W8rsUjl4
-	vSeBDXmNdkXCU+KFw00kh5XKJYQKlwNeHeHoaPlY/F6a6rpbAHP7uDxHD9aodn2QZ4Q+
-	vJzg==
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=yiYYxk22jrUBqFmdFHB65taoNBfBJxluMKXf1003Vgc=;
+	b=t+mJkLSbWPNfPnXss/khndl2Qbji7W7lSR/oD9zi3MdNZhZkw3uQ4t42h7o+S7FOBA
+	rhnsAW1HiwtKyRU10CmLQWY3diW/9DYxIj/PZnUKB+CJlcx35BoqKQGNW2gECIu7ZX08
+	XONdbjkB39ar6ha+kRRNqECiydXqxlKOcGuedmb1EZ5MVeIFtdf6uu0Vmv+iDQrDmYOD
+	89UYLisBL/QkKYPRJVCBGc08MeQGGrRP9DTMdfSII4LvEVREg0ZGlSv46hzTkLEW2sIW
+	WvFAulEbwXe1pdEPZAne47mKxDP6fvOuIen+V7CxqdwPLjxY1hrdlw/6DQDNXbp1EVw2
+	l7Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=dXvhV8QCwEgrJg8Y5xKh41EC0xaNk6iiAvJjoItqx1s=;
-	b=RZE7/6R7qHJ8LQTif+qsd4Gyz3RO8DGrG2XtvnD1z9RW/b+S4qzmQxoMVtzeLEgyhI
-	frllWzVTx9ilck11Q6JKJ9zDx58wtla+VaOe4Vdc9pK/7LuzlPXOqD59Nx80A0CQJHwE
-	yq66Ghecs0/v5BERCzsGLDP9Hb2oKULSwuX3IxkK/WoFL2BF83+8hNCBRFjrSkVyJN4C
-	NRNsYmwuYW09d1QwWGBlmoXURIyIGuA28fnXv6kvRjt8VsSvxFyK+WdTFY5WE15Fd72t
-	fJtvqQ05hovtP3oxUxFOnvdZx0EDvaTsHQ61+FM3exEYPg8jWDp5geI8x2LEDTltwG8H
-	MDDg==
-X-Gm-Message-State: ALQs6tDVdYNqa3X7cQwq34QDtlVhmqAsuC1Cln9Yg59xDpezVCK2Ira5
-	ov7/oFJ2+femBMW5YNNSXD3e/g==
-X-Google-Smtp-Source: AIpwx48LEjxHIQyKv6Qch9dF9B7hNXv1XXsZBnFaW4yCccmCUY+NmIR3UoCdoQyB5A2EYFiyi4tb6w==
-X-Received: by 10.28.131.21 with SMTP id f21mr16699659wmd.78.1524693919065;
-	Wed, 25 Apr 2018 15:05:19 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p200300F07BC06E671E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc0:6e67:1e6f:65ff:fe3e:7f61])
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=yiYYxk22jrUBqFmdFHB65taoNBfBJxluMKXf1003Vgc=;
+	b=F1ozaPMOteIDS6BzIVnoBgjKqspNOnPOsWJJzUQiSJBtb31rC9O8jmITxYXZVpT6zC
+	gY0ow0t/aJhKqteMnqMNt9henKR92MqxvaA+C3YW3MINhi0HhjfaYbZxtCGBOSS0DiR6
+	RSWR58W/BukpTuiiZIeFrMJXW31mVeR2BgpjIAtPrMfY6nTikRjq0g4pBeGAXOf5TQUL
+	PN0lZGIbBbxXJrK8L6qSQElyDEhcUlazgnD8ouZZjjjkziJuJ/Sg2ywqBf67Q9Qa7tFe
+	iBtaU9O8sX5TyBtaHFOW1YvmakiXs8WpCyZACesc4u82Op09eXyjlFdvSRAdg2z4k6NY
+	ErcA==
+X-Gm-Message-State: ALQs6tAUiQvOc05riGWWWwhj/Yz/50etcj08UVO0tZkWMQ4CzCUAto7t
+	Y1kJVCymtumYR9Hzyjdq5D7soA==
+X-Google-Smtp-Source: AIpwx4/G1z5KH6aA7cT7kogWQ0s4zB39d+J0rvOVbJuYNDj6LORAmepy02mSSKUWgRyoSFhiMOTV5w==
+X-Received: by 10.98.70.155 with SMTP id o27mr29336397pfi.124.1524693986915;
+	Wed, 25 Apr 2018 15:06:26 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:952a:dcb5:7c5a:56df?
+	([2601:202:4000:1184:952a:dcb5:7c5a:56df])
 	by smtp.gmail.com with ESMTPSA id
-	j21-v6sm23814198wrb.49.2018.04.25.15.05.18
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 25 Apr 2018 15:05:18 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Apr 2018 00:05:05 +0200
-Message-Id: <20180425220505.12523-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
+	h6sm30332601pfi.35.2018.04.25.15.06.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 25 Apr 2018 15:06:26 -0700 (PDT)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <152468633049.2402.13602360060655069355@git.openembedded.org>
+	<20180425195850.BB9C2232832@git.openembedded.org>
+	<CALbNGRRtjLMg+0O+WJN9O3AEm2uzdWzDemw0v-tNpTPWmWMFfg@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <33236423-aa3f-4aac-9c98-feaafc1e38a3@gmail.com>
+Date: Wed, 25 Apr 2018 15:06:25 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-Subject: [PATCH] networkmanager: fix prevous commits
+In-Reply-To: <CALbNGRRtjLMg+0O+WJN9O3AEm2uzdWzDemw0v-tNpTPWmWMFfg@mail.gmail.com>
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [meta-openembedded] 01/07: networkmanager: fix gobject-introspection/musl and cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,214 +109,821 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2018 22:05:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Apr 2018 22:06:26 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-The wrong patches were applied:
+all yours
 
-commit c5a04600817e0d34dfa151d46073a76b506b4c3d
-Author: Armin Kuster <akuster808@gmail.com>
-Date:   Fri Mar 30 19:56:03 2018 -0700
+- armin
 
-    networkmanager: Fix many typos in DISTRO_FEATURES PACKAGECONFIG decodes
 
-commit 575c14ded56e1e97582a6df0921d19b4da630961
-Author: Andreas Müller <schnitzeltony@gmail.com>
-Date:   Thu Mar 22 18:40:52 2018 +0100
-
-    networkmanager: fix gobject-introspection/musl and cleanup
-
-* musl fixed (tested)
-* PACKAGECONFIG systemd: Logic was broken by c5a046. To avoid
-  further confusion, the expression was put into one line.
-* PACKAGECONFIG wifi: The expression 'bb.utils.filter.. ' was perfectly fine.
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- ...further-conflicts-by-including-net-ethern.patch | 77 ++++++++++++++++++++++
- .../0006-Add-a-strndupa-replacement-for-musl.patch | 47 +++++++++++++
- .../networkmanager/networkmanager_1.10.6.bb        | 14 ++--
- 3 files changed, 134 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch
- create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0006-Add-a-strndupa-replacement-for-musl.patch
-
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch
-new file mode 100644
-index 000000000..752fe4f58
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch
-@@ -0,0 +1,77 @@
-+From b3b4fe35018c98ad176719b2d9ffb867974fc7c3 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Mon, 16 Apr 2018 14:45:44 +0200
-+Subject: [PATCH] musl: avoid further conflicts by including net/ethernet.h
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-+---
-+ src/systemd/src/systemd/sd-dhcp-client.h  | 2 ++
-+ src/systemd/src/systemd/sd-dhcp-lease.h   | 2 ++
-+ src/systemd/src/systemd/sd-dhcp6-client.h | 2 ++
-+ src/systemd/src/systemd/sd-ipv4ll.h       | 2 ++
-+ 4 files changed, 8 insertions(+)
-+
-+diff --git a/src/systemd/src/systemd/sd-dhcp-client.h b/src/systemd/src/systemd/sd-dhcp-client.h
-+index 5e46d8d..18a613f 100644
-+--- a/src/systemd/src/systemd/sd-dhcp-client.h
-++++ b/src/systemd/src/systemd/sd-dhcp-client.h
-+@@ -21,7 +21,9 @@
-+ ***/
-+ 
-+ #include <inttypes.h>
-++#if defined(__GLIBC__)
-+ #include <net/ethernet.h>
-++#endif
-+ #include <netinet/in.h>
-+ #include <sys/types.h>
-+ 
-+diff --git a/src/systemd/src/systemd/sd-dhcp-lease.h b/src/systemd/src/systemd/sd-dhcp-lease.h
-+index 7ab99cc..85acdf2 100644
-+--- a/src/systemd/src/systemd/sd-dhcp-lease.h
-++++ b/src/systemd/src/systemd/sd-dhcp-lease.h
-+@@ -22,7 +22,9 @@
-+ ***/
-+ 
-+ #include <inttypes.h>
-++#if defined(__GLIBC__)
-+ #include <net/ethernet.h>
-++#endif
-+ #include <netinet/in.h>
-+ #include <sys/types.h>
-+ 
-+diff --git a/src/systemd/src/systemd/sd-dhcp6-client.h b/src/systemd/src/systemd/sd-dhcp6-client.h
-+index 7819f0d..35f30ee 100644
-+--- a/src/systemd/src/systemd/sd-dhcp6-client.h
-++++ b/src/systemd/src/systemd/sd-dhcp6-client.h
-+@@ -21,7 +21,9 @@
-+ ***/
-+ 
-+ #include <inttypes.h>
-++#if defined(__GLIBC__)
-+ #include <net/ethernet.h>
-++#endif
-+ #include <sys/types.h>
-+ 
-+ #include "sd-dhcp6-lease.h"
-+diff --git a/src/systemd/src/systemd/sd-ipv4ll.h b/src/systemd/src/systemd/sd-ipv4ll.h
-+index 5ba9208..c90eca6 100644
-+--- a/src/systemd/src/systemd/sd-ipv4ll.h
-++++ b/src/systemd/src/systemd/sd-ipv4ll.h
-+@@ -20,7 +20,9 @@
-+   along with systemd; If not, see <http://www.gnu.org/licenses/>.
-+ ***/
-+ 
-++#if defined(__GLIBC__)
-+ #include <net/ethernet.h>
-++#endif
-+ #include <netinet/in.h>
-+ 
-+ #include "sd-event.h"
-+-- 
-+2.14.3
-+
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0006-Add-a-strndupa-replacement-for-musl.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0006-Add-a-strndupa-replacement-for-musl.patch
-new file mode 100644
-index 000000000..8ed7ee64f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0006-Add-a-strndupa-replacement-for-musl.patch
-@@ -0,0 +1,47 @@
-+From 6db6596e450062601d18b2ae812a4a58d2e03a53 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Mon, 16 Apr 2018 15:07:20 +0200
-+Subject: [PATCH] Add a strndupa replacement for musl
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-+---
-+ src/systemd/src/basic/in-addr-util.c | 1 +
-+ src/systemd/src/basic/string-util.h  | 5 +++++
-+ 2 files changed, 6 insertions(+)
-+
-+diff --git a/src/systemd/src/basic/in-addr-util.c b/src/systemd/src/basic/in-addr-util.c
-+index 2a02d90..a57c360 100644
-+--- a/src/systemd/src/basic/in-addr-util.c
-++++ b/src/systemd/src/basic/in-addr-util.c
-+@@ -30,6 +30,7 @@
-+ #include "in-addr-util.h"
-+ #include "macro.h"
-+ #include "parse-util.h"
-++#include "string-util.h"
-+ #include "util.h"
-+ 
-+ bool in4_addr_is_null(const struct in_addr *a) {
-+diff --git a/src/systemd/src/basic/string-util.h b/src/systemd/src/basic/string-util.h
-+index 4c94b18..a6dc446 100644
-+--- a/src/systemd/src/basic/string-util.h
-++++ b/src/systemd/src/basic/string-util.h
-+@@ -44,6 +44,11 @@
-+ #define strcaseeq(a,b) (strcasecmp((a),(b)) == 0)
-+ #define strncaseeq(a, b, n) (strncasecmp((a), (b), (n)) == 0)
-+ 
-++/* musl does not know strndupa */
-++#if !defined(__GLIBC__)
-++#define strndupa(x,s) strncpy(alloca(strlen(x)+1),x,s)
-++#endif
-++
-+ int strcmp_ptr(const char *a, const char *b) _pure_;
-+ 
-+ static inline bool streq_ptr(const char *a, const char *b) {
-+-- 
-+2.14.3
-+
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-index d90b78268..31fa13241 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-@@ -35,6 +35,8 @@ SRC_URI = " \
-     file://musl/0002-musl-dlopen-configure-ac.patch \
-     file://musl/0003-musl-network-support.patch \
-     file://musl/0004-musl-process-util.patch \
-+    file://musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch \
-+    file://musl/0006-Add-a-strndupa-replacement-for-musl.patch \
- "
- SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
- SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
-@@ -54,17 +56,21 @@ EXTRA_OECONF = " \
- # gobject-introspection related
- GI_DATA_ENABLED_libc-musl = "False"
- 
-+# stolen from https://github.com/voidlinux/void-packages/blob/master/srcpkgs/NetworkManager/template
-+CFLAGS_libc-musl_append = " \
-+    -DHAVE_SECURE_GETENV -Dsecure_getenv=getenv \
-+    -D__USE_POSIX199309 -DRTLD_DEEPBIND=0 \
-+"
-+
- do_compile_prepend() {
-     export GIR_EXTRA_LIBS_PATH="${B}/libnm/.libs:${B}/libnm-glib/.libs:${B}/libnm-util/.libs"
- }
- 
- PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'wifi', 'wifi', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'wifi', d)} \
- "
--
- PACKAGECONFIG[systemd] = " \
-     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
-     --without-systemdsystemunitdir, \
--- 
-2.14.3
+On 04/25/2018 02:28 PM, Andreas Müller wrote:
+> On Wed, Apr 25, 2018 at 9:58 PM,  <git@git.openembedded.org> wrote:
+>> This is an automated email from the git hooks/post-receive script.
+>>
+>> joe_macdonald pushed a commit to branch master
+>> in repository meta-openembedded.
+>>
+>> commit 575c14ded56e1e97582a6df0921d19b4da630961
+>> Author: Andreas Müller <schnitzeltony@gmail.com>
+>> AuthorDate: Thu Mar 22 18:40:52 2018 +0100
+>>
+>>     networkmanager: fix gobject-introspection/musl and cleanup
+>>
+>>     This adresses the comments for recent patch which updated nm to 1.10.6 and is a
+>>     follow-up for [1].
+>>
+>>     * Make gobject-introspection work by skipping creation of gobject-introspection
+>>       specific documentation. This fixes networkmanager-applet regression.
+>>     * Cleanup patches: Remove current musl patches completely and re-use those
+>>       found in void-linux because they do look much cleaner and don't touch glibc
+>>       build. One nice side effect: In the future when nm is updated we can steal
+>>       again and don't need to reenvent here. Usually they are much faster than we
+>>       are (and I know one major contibutor personally from the good old Z80 times..)
+>>     * Fix typo in PACKAGECONFIG
+>>
+>>     [1] https://patchwork.openembedded.org/patch/149244/
+>>
+>>     Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>>     Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>>     Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>> ---
+>>  ...adjust-net-headers-for-musl-compatibility.patch | 86 --------------------
+>>  ...move-net-ethernet.h-seems-to-be-over-spe.patch} |  0
+>>  ...igure.ac-Fix-pkgconfig-sysroot-locations.patch} |  0
+>>  ...et-util.h-Include-linux-sockios.h-on-musl.patch | 30 -------
+>>  .../networkmanager/0003-Define-ETH_ALEN.patch      | 39 ---------
+>>  ...te-settings-settings-property-documentati.patch | 77 ++++++++++++++++++
+>>  ...Define-missing-features-to-cater-for-musl.patch | 92 ----------------------
+>>  .../0006-check-for-strndupa-before-using-it.patch  | 67 ----------------
+>>  .../networkmanager/musl/0001-musl-basic.patch      | 53 +++++++++++++
+>>  .../musl/0002-musl-dlopen-configure-ac.patch       | 35 ++++++++
+>>  .../musl/0003-musl-network-support.patch           | 72 +++++++++++++++++
+>>  .../musl/0004-musl-process-util.patch              | 62 +++++++++++++++
+>>  .../networkmanager/networkmanager_1.10.6.bb        | 33 ++++----
+>>  13 files changed, 317 insertions(+), 329 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-adjust-net-headers-for-musl-compatibility.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-adjust-net-headers-for-musl-compatibility.patch
+>> deleted file mode 100644
+>> index 194e037..0000000
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-adjust-net-headers-for-musl-compatibility.patch
+>> +++ /dev/null
+>> @@ -1,86 +0,0 @@
+>> -From f81abf62c0ae93628df36c27357358523be25fb8 Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Fri, 31 Mar 2017 15:57:05 -0700
+>> -Subject: [PATCH 1/7] adjust net/ headers for musl compatibility
+>> -
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - libnm-core/nm-utils.c          | 13 ++++++++-----
+>> - libnm-core/nm-utils.h          |  5 ++---
+>> - src/platform/wifi/wifi-utils.h |  2 +-
+>> - 3 files changed, 11 insertions(+), 9 deletions(-)
+>> -
+>> -diff --git a/libnm-core/nm-utils.c b/libnm-core/nm-utils.c
+>> -index ebbbfd3..77273df 100644
+>> ---- a/libnm-core/nm-utils.c
+>> -+++ b/libnm-core/nm-utils.c
+>> -@@ -19,14 +19,9 @@
+>> -  * Copyright 2005 - 2017 Red Hat, Inc.
+>> -  */
+>> -
+>> --#include "nm-default.h"
+>> --
+>> --#include "nm-utils.h"
+>> --
+>> - #include <string.h>
+>> - #include <errno.h>
+>> - #include <stdlib.h>
+>> --#include <netinet/ether.h>
+>> - #include <arpa/inet.h>
+>> - #include <uuid/uuid.h>
+>> - #include <libintl.h>
+>> -@@ -34,12 +29,20 @@
+>> - #include <sys/stat.h>
+>> - #include <net/if.h>
+>> - #include <linux/pkt_sched.h>
+>> -+//#include <net/if_arp.h>
+>> -+//#include <net/ethernet.h>
+>> -+#include <netinet/ether.h>
+>> -+
+>> -+#include "nm-default.h"
+>> -+
+>> -+#include "nm-utils.h"
+>> -
+>> - #if WITH_JANSSON
+>> - #include "nm-json.h"
+>> - #include <jansson.h>
+>> - #endif
+>> -
+>> -+
+>> - #include "nm-utils/nm-enum-utils.h"
+>> - #include "nm-utils/nm-hash-utils.h"
+>> - #include "nm-common-macros.h"
+>> -diff --git a/libnm-core/nm-utils.h b/libnm-core/nm-utils.h
+>> -index df9284b..02e24ea 100644
+>> ---- a/libnm-core/nm-utils.h
+>> -+++ b/libnm-core/nm-utils.h
+>> -@@ -27,11 +27,10 @@
+>> -
+>> - #include <glib.h>
+>> -
+>> --#include <netinet/in.h>
+>> --
+>> - /* For ETH_ALEN and INFINIBAND_ALEN */
+>> --#include <linux/if_ether.h>
+>> -+//#include <linux/if_ether.h>
+>> - #include <linux/if_infiniband.h>
+>> -+#include <netinet/in.h>
+>> -
+>> - #include "nm-core-enum-types.h"
+>> - #include "nm-setting-wireless-security.h"
+>> -diff --git a/src/platform/wifi/wifi-utils.h b/src/platform/wifi/wifi-utils.h
+>> -index 705717b..939080f 100644
+>> ---- a/src/platform/wifi/wifi-utils.h
+>> -+++ b/src/platform/wifi/wifi-utils.h
+>> -@@ -22,7 +22,7 @@
+>> - #ifndef __WIFI_UTILS_H__
+>> - #define __WIFI_UTILS_H__
+>> -
+>> --#include <net/ethernet.h>
+>> -+//#include <net/ethernet.h>
+>> -
+>> - #include "nm-dbus-interface.h"
+>> -
+>> ---
+>> -2.14.1
+>> -
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch
+>> similarity index 100%
+>> rename from meta-networking/recipes-connectivity/networkmanager/networkmanager/0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch
+>> rename to meta-networking/recipes-connectivity/networkmanager/networkmanager/0001-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch
+>> similarity index 100%
+>> rename from meta-networking/recipes-connectivity/networkmanager/networkmanager/0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch
+>> rename to meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-socket-util.h-Include-linux-sockios.h-on-musl.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-socket-util.h-Include-linux-sockios.h-on-musl.patch
+>> deleted file mode 100644
+>> index cdcd397..0000000
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-socket-util.h-Include-linux-sockios.h-on-musl.patch
+>> +++ /dev/null
+>> @@ -1,30 +0,0 @@
+>> -From 7f0e0613abe8aa1861946e2cc25397690da7128b Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Fri, 31 Mar 2017 16:05:05 -0700
+>> -Subject: [PATCH 2/7] socket-util.h: Include linux/sockios.h on musl
+>> -
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - src/systemd/src/basic/socket-util.h | 6 ++++++
+>> - 1 file changed, 6 insertions(+)
+>> -
+>> -diff --git a/src/systemd/src/basic/socket-util.h b/src/systemd/src/basic/socket-util.h
+>> -index d7e2d85..2e7f7b6 100644
+>> ---- a/src/systemd/src/basic/socket-util.h
+>> -+++ b/src/systemd/src/basic/socket-util.h
+>> -@@ -30,6 +30,12 @@
+>> - #include <linux/if_infiniband.h>
+>> - #include <linux/if_packet.h>
+>> -
+>> -+#if !defined(__GLIBC__)
+>> -+/* SIOCGSTAMPNS from linux/asm-generic.h
+>> -+ * for src/systemd/src/libsystemd-network/sd-lldp.c */
+>> -+#include <linux/sockios.h>
+>> -+#endif
+>> -+
+>> - #include "macro.h"
+>> - #include "missing.h"
+>> - #include "util.h"
+>> ---
+>> -2.14.1
+>> -
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-Define-ETH_ALEN.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-Define-ETH_ALEN.patch
+>> deleted file mode 100644
+>> index 549e46e..0000000
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-Define-ETH_ALEN.patch
+>> +++ /dev/null
+>> @@ -1,39 +0,0 @@
+>> -From d0951fe7da63d8296a305781d7322ce4d3249415 Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Fri, 31 Mar 2017 16:08:45 -0700
+>> -Subject: [PATCH 3/7] Define ETH_ALEN
+>> -
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - libnm-core/nm-utils.h          | 1 +
+>> - src/platform/wifi/wifi-utils.h | 2 ++
+>> - 2 files changed, 3 insertions(+)
+>> -
+>> -diff --git a/libnm-core/nm-utils.h b/libnm-core/nm-utils.h
+>> -index 02e24ea..5ff279c 100644
+>> ---- a/libnm-core/nm-utils.h
+>> -+++ b/libnm-core/nm-utils.h
+>> -@@ -29,6 +29,7 @@
+>> -
+>> - /* For ETH_ALEN and INFINIBAND_ALEN */
+>> - //#include <linux/if_ether.h>
+>> -+#define ETH_ALEN      6               /* Octets in one ethernet addr   */
+>> - #include <linux/if_infiniband.h>
+>> - #include <netinet/in.h>
+>> -
+>> -diff --git a/src/platform/wifi/wifi-utils.h b/src/platform/wifi/wifi-utils.h
+>> -index 939080f..2274408 100644
+>> ---- a/src/platform/wifi/wifi-utils.h
+>> -+++ b/src/platform/wifi/wifi-utils.h
+>> -@@ -24,6 +24,8 @@
+>> -
+>> - //#include <net/ethernet.h>
+>> -
+>> -+#define ETH_ALEN      6               /* Octets in one ethernet addr   */
+>> -+
+>> - #include "nm-dbus-interface.h"
+>> -
+>> - typedef struct WifiData WifiData;
+>> ---
+>> -2.14.1
+>> -
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-Do-not-create-settings-settings-property-documentati.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-Do-not-create-settings-settings-property-documentati.patch
+>> new file mode 100644
+>> index 0000000..92485f0
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-Do-not-create-settings-settings-property-documentati.patch
+>> @@ -0,0 +1,77 @@
+>> +From 4f000a4a19975d6aba71427e693cd1ed080abda9 Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> +Date: Thu, 22 Mar 2018 11:08:30 +0100
+>> +Subject: [PATCH] Do not create settings settings/property documentation
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=UTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +It was tried to get this work but gi / GirRepository could not be found by
+>> +python. Anyway it is not necessary for us to have the settings/property docs.
+>> +
+>> +Upstream-Status: Inappropriate [OE specific]
+>> +
+>> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> +---
+>> + Makefile.am  | 18 ++----------------
+>> + configure.ac |  4 ----
+>> + 2 files changed, 2 insertions(+), 20 deletions(-)
+>> +
+>> +diff --git a/Makefile.am b/Makefile.am
+>> +index 639921d..314a61d 100644
+>> +--- a/Makefile.am
+>> ++++ b/Makefile.am
+>> +@@ -961,9 +961,7 @@ endif
+>> + if HAVE_INTROSPECTION
+>> +
+>> + libnm_noinst_data = \
+>> +-      libnm/nm-property-docs.xml \
+>> +       libnm/nm-settings-docs-overrides.xml \
+>> +-      libnm/nm-settings-docs.xml \
+>> +       libnm/nm-settings-keyfile-docs.xml \
+>> +       libnm/nm-settings-ifcfg-rh-docs.xml
+>> +
+>> +@@ -3317,23 +3315,11 @@ $(clients_common_libnmc_base_la_OBJECTS): $(libnm_core_lib_h_pub_mkenums)
+>> + $(clients_common_libnmc_base_la_OBJECTS): clients/common/.dirstamp
+>> +
+>> + clients_common_settings_doc_c = clients/common/settings-docs.c
+>> +-if HAVE_INTROSPECTION
+>> +-$(clients_common_settings_doc_c): clients/common/settings-docs.xsl libnm/nm-property-docs.xml clients/common/.dirstamp
+>> +-      $(AM_V_GEN) $(XSLTPROC) --output $@ $< $(word 2,$^)
+>> +-DISTCLEANFILES += $(clients_common_settings_doc_c)
+>> +-check-local-settings-docs: $(clients_common_settings_doc_c)
+>> +-      @if test -z "$$NMTST_NO_CHECK_SETTINGS_DOCS" ; then  \
+>> +-              if ! cmp -s "$(srcdir)/$(clients_common_settings_doc_c).in" "$(builddir)/$(clients_common_settings_doc_c)" ; then \
+>> +-                      echo "The generated file \"$(builddir)/$(clients_common_settings_doc_c)\" differs from the source file \"$(srcdir)/$(clients_common_settings_doc_c).in\". You probably should copy the generated file over to the source file. You can skip this test by setting \$$NMTST_NO_CHECK_SETTINGS_DOCS=yes"; \
+>> +-                      false; \
+>> +-              fi;\
+>> +-      fi
+>> +-check_local += check-local-settings-docs
+>> +-else
+>> ++
+>> + $(clients_common_settings_doc_c): $(clients_common_settings_doc_c).in clients/common/.dirstamp
+>> +       $(AM_V_GEN) cp "$(srcdir)/$(clients_common_settings_doc_c).in" "$(builddir)/$(clients_common_settings_doc_c)"
+>> + check-local-settings-docs:
+>> +-endif
+>> ++
+>> + EXTRA_DIST += \
+>> +       $(clients_common_settings_doc_c) \
+>> +       $(clients_common_settings_doc_c).in
+>> +diff --git a/configure.ac b/configure.ac
+>> +index c9d3e56..407222e 100644
+>> +--- a/configure.ac
+>> ++++ b/configure.ac
+>> +@@ -1286,10 +1286,6 @@ GTK_DOC_CHECK(1.0)
+>> + # check if we can build setting property documentation
+>> + build_docs=no
+>> + if test -n "$INTROSPECTION_MAKEFILE"; then
+>> +-      # If g-i is installed we know we have python, but we might not have pygobject
+>> +-      if ! "$PYTHON" -c 'from gi.repository import GObject' >& /dev/null; then
+>> +-              AC_MSG_ERROR(["--enable-introspection aims to build the settings documentation. This requires GObject introspection for python (pygobject)])
+>> +-      fi
+>> +
+>> +       AC_PATH_PROG(PERL, perl)
+>> +       if test -z "$PERL"; then
+>> +--
+>> +2.14.3
+>> +
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-Define-missing-features-to-cater-for-musl.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-Define-missing-features-to-cater-for-musl.patch
+>> deleted file mode 100644
+>> index b56f6a3..0000000
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0004-Define-missing-features-to-cater-for-musl.patch
+>> +++ /dev/null
+>> @@ -1,92 +0,0 @@
+>> -From c9e0f112a90b6b1ade87a698608dca8d6fbe89cc Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Fri, 31 Mar 2017 16:09:41 -0700
+>> -Subject: [PATCH 4/7] Define missing features to cater for musl
+>> -
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - src/systemd/sd-adapt/nm-sd-adapt.h | 2 +-
+>> - src/systemd/src/basic/parse-util.c | 4 ++++
+>> - src/systemd/src/basic/stdio-util.h | 2 ++
+>> - src/systemd/src/basic/util.h       | 5 +++++
+>> - src/systemd/src/systemd/sd-event.h | 4 ----
+>> - 5 files changed, 12 insertions(+), 5 deletions(-)
+>> -
+>> -diff --git a/src/systemd/sd-adapt/nm-sd-adapt.h b/src/systemd/sd-adapt/nm-sd-adapt.h
+>> -index 0d291e2..d88dd9b 100644
+>> ---- a/src/systemd/sd-adapt/nm-sd-adapt.h
+>> -+++ b/src/systemd/sd-adapt/nm-sd-adapt.h
+>> -@@ -134,7 +134,7 @@ G_STMT_START { \
+>> - #  ifdef HAVE___SECURE_GETENV
+>> - #    define secure_getenv __secure_getenv
+>> - #  else
+>> --#    error neither secure_getenv nor __secure_getenv is available
+>> -+#    define secure_getenv getenv
+>> - #  endif
+>> - #endif
+>> -
+>> -diff --git a/src/systemd/src/basic/parse-util.c b/src/systemd/src/basic/parse-util.c
+>> -index 6d978e9..e74e84b 100644
+>> ---- a/src/systemd/src/basic/parse-util.c
+>> -+++ b/src/systemd/src/basic/parse-util.c
+>> -@@ -21,7 +21,11 @@
+>> -
+>> - #include <errno.h>
+>> - #include <inttypes.h>
+>> -+#ifdef __GLIBC__
+>> -+#include <xlocale.h>
+>> -+#else
+>> - #include <locale.h>
+>> -+#endif
+>> - #include <stdio.h>
+>> - #include <stdlib.h>
+>> - #include <string.h>
+>> -diff --git a/src/systemd/src/basic/stdio-util.h b/src/systemd/src/basic/stdio-util.h
+>> -index bd1144b..c92e935 100644
+>> ---- a/src/systemd/src/basic/stdio-util.h
+>> -+++ b/src/systemd/src/basic/stdio-util.h
+>> -@@ -19,7 +19,9 @@
+>> -   along with systemd; If not, see <http://www.gnu.org/licenses/>.
+>> - ***/
+>> -
+>> -+#ifdef __GLIBC__
+>> - #include <printf.h>
+>> -+#endif
+>> - #include <stdarg.h>
+>> - #include <stdio.h>
+>> - #include <sys/types.h>
+>> -diff --git a/src/systemd/src/basic/util.h b/src/systemd/src/basic/util.h
+>> -index b31dfd1..9b7032c 100644
+>> ---- a/src/systemd/src/basic/util.h
+>> -+++ b/src/systemd/src/basic/util.h
+>> -@@ -46,6 +46,11 @@
+>> - #include "missing.h"
+>> - #include "time-util.h"
+>> -
+>> -+#if !defined(__GLIBC__)
+>> -+typedef int (*__compar_fn_t) (const void*, const void*);
+>> -+typedef __compar_fn_t comparison_fn_t;
+>> -+#endif
+>> -+
+>> - size_t page_size(void) _pure_;
+>> - #define PAGE_ALIGN(l) ALIGN_TO((l), page_size())
+>> -
+>> -diff --git a/src/systemd/src/systemd/sd-event.h b/src/systemd/src/systemd/sd-event.h
+>> -index f8cb895..c7e0004 100644
+>> ---- a/src/systemd/src/systemd/sd-event.h
+>> -+++ b/src/systemd/src/systemd/sd-event.h
+>> -@@ -69,11 +69,7 @@ typedef int (*sd_event_handler_t)(sd_event_source *s, void *userdata);
+>> - typedef int (*sd_event_io_handler_t)(sd_event_source *s, int fd, uint32_t revents, void *userdata);
+>> - typedef int (*sd_event_time_handler_t)(sd_event_source *s, uint64_t usec, void *userdata);
+>> - typedef int (*sd_event_signal_handler_t)(sd_event_source *s, const struct signalfd_siginfo *si, void *userdata);
+>> --#if defined _GNU_SOURCE || _POSIX_C_SOURCE >= 199309L
+>> - typedef int (*sd_event_child_handler_t)(sd_event_source *s, const siginfo_t *si, void *userdata);
+>> --#else
+>> --typedef void* sd_event_child_handler_t;
+>> --#endif
+>> -
+>> - int sd_event_default(sd_event **e);
+>> -
+>> ---
+>> -2.14.1
+>> -
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0006-check-for-strndupa-before-using-it.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0006-check-for-strndupa-before-using-it.patch
+>> deleted file mode 100644
+>> index 6adb84b..0000000
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0006-check-for-strndupa-before-using-it.patch
+>> +++ /dev/null
+>> @@ -1,67 +0,0 @@
+>> -From f24d958fc85f9a43ac13abc85f74c4ae233dc8a4 Mon Sep 17 00:00:00 2001
+>> -From: Khem Raj <raj.khem@gmail.com>
+>> -Date: Fri, 31 Mar 2017 18:37:19 -0700
+>> -Subject: [PATCH 6/7] check for strndupa before using it
+>> -
+>> -musl does not have strndupa
+>> -
+>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ----
+>> - config.h.in                        |  4 ++++
+>> - configure.ac                       |  1 +
+>> - src/systemd/src/basic/alloc-util.h | 12 ++++++++++++
+>> - 3 files changed, 17 insertions(+)
+>> -
+>> -diff --git a/config.h.in b/config.h.in
+>> -index edec211..0799030 100644
+>> ---- a/config.h.in
+>> -+++ b/config.h.in
+>> -@@ -34,6 +34,10 @@
+>> -    */
+>> - #undef HAVE_DCGETTEXT
+>> -
+>> -+/* Define to 1 if you have the declaration of `strndupa', and to 0 if you
+>> -+   don't. */
+>> -+#undef HAVE_DECL_STRNDUPA
+>> -+
+>> - /* Define to 1 if you have the declaration of `explicit_bzero', and to 0 if
+>> -    you don't. */
+>> - #undef HAVE_DECL_EXPLICIT_BZERO
+>> -diff --git a/configure.ac b/configure.ac
+>> -index 8a066ad..51e5eb6 100644
+>> ---- a/configure.ac
+>> -+++ b/configure.ac
+>> -@@ -56,6 +56,7 @@ AC_SUBST(NM_VERSION)
+>> -
+>> - GIT_SHA_RECORD(NM_GIT_SHA)
+>> -
+>> -+AC_CHECK_DECLS([strndupa], [], [], [[#include <string.h>]])
+>> - dnl
+>> - dnl Checks for typedefs, structures, and compiler characteristics.
+>> - dnl
+>> -diff --git a/src/systemd/src/basic/alloc-util.h b/src/systemd/src/basic/alloc-util.h
+>> -index 0a89691..1e95260 100644
+>> ---- a/src/systemd/src/basic/alloc-util.h
+>> -+++ b/src/systemd/src/basic/alloc-util.h
+>> -@@ -25,6 +25,18 @@
+>> - #include <string.h>
+>> -
+>> - #include "macro.h"
+>> -+#include "config.h"
+>> -+
+>> -+#if !HAVE_DECL_STRNDUPA
+>> -+#define strndupa(s, n) \
+>> -+  ({ \
+>> -+    const char *__old = (s); \
+>> -+    size_t __len = strnlen(__old, (n)); \
+>> -+    char *__new = (char *)alloca(__len + 1); \
+>> -+    __new[__len] = '\0'; \
+>> -+    (char *)memcpy(__new, __old, __len); \
+>> -+  })
+>> -+#endif
+>> -
+>> - #define new(t, n) ((t*) malloc_multiply(sizeof(t), (n)))
+>> -
+>> ---
+>> -2.14.1
+>> -
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-musl-basic.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-musl-basic.patch
+>> new file mode 100644
+>> index 0000000..9d208e1
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0001-musl-basic.patch
+>> @@ -0,0 +1,53 @@
+>> +From e92de7409a3e107f90d108a9c5d49bd0418296dd Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> +Date: Thu, 22 Mar 2018 17:54:10 +0100
+>> +Subject: [PATCH 1/4] Usual fix for musl libc
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=UTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Stolen from [1] and prettyfied slightly
+>> +
+>> +[1] https://github.com/voidlinux/void-packages/tree/master/srcpkgs/NetworkManager/patches
+>> +
+>> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> +---
+>> + src/systemd/src/basic/stdio-util.h | 2 ++
+>> + src/systemd/src/basic/util.h       | 5 +++++
+>> + 2 files changed, 7 insertions(+)
+>> +
+>> +diff --git a/src/systemd/src/basic/stdio-util.h b/src/systemd/src/basic/stdio-util.h
+>> +index bd1144b..9eafacb 100644
+>> +--- a/src/systemd/src/basic/stdio-util.h
+>> ++++ b/src/systemd/src/basic/stdio-util.h
+>> +@@ -19,7 +19,9 @@
+>> +   along with systemd; If not, see <http://www.gnu.org/licenses/>.
+>> + ***/
+>> +
+>> ++#if defined(__GLIBC__)
+>> + #include <printf.h>
+>> ++#endif
+>> + #include <stdarg.h>
+>> + #include <stdio.h>
+>> + #include <sys/types.h>
+>> +diff --git a/src/systemd/src/basic/util.h b/src/systemd/src/basic/util.h
+>> +index b31dfd1..9b7032c 100644
+>> +--- a/src/systemd/src/basic/util.h
+>> ++++ b/src/systemd/src/basic/util.h
+>> +@@ -46,6 +46,11 @@
+>> + #include "missing.h"
+>> + #include "time-util.h"
+>> +
+>> ++#if !defined(__GLIBC__)
+>> ++typedef int (*__compar_fn_t) (const void*, const void*);
+>> ++typedef __compar_fn_t comparison_fn_t;
+>> ++#endif
+>> ++
+>> + size_t page_size(void) _pure_;
+>> + #define PAGE_ALIGN(l) ALIGN_TO((l), page_size())
+>> +
+>> +--
+>> +2.14.3
+>> +
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-musl-dlopen-configure-ac.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-musl-dlopen-configure-ac.patch
+>> new file mode 100644
+>> index 0000000..548cccb
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0002-musl-dlopen-configure-ac.patch
+>> @@ -0,0 +1,35 @@
+>> +From 57239fda56b68a8f3e413f7b6af5290ba0d86636 Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> +Date: Thu, 22 Mar 2018 18:18:06 +0100
+>> +Subject: [PATCH 2/4] musl: dlopen is included so LD_LIBS="" instead of
+>> + LD_LIBS="none required"
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=UTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Stolen from [1] and prettyfied slightly
+>> +
+>> +[1] https://github.com/voidlinux/void-packages/tree/master/srcpkgs/NetworkManager/patches
+>> +
+>> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> +---
+>> + configure.ac | 1 +
+>> + 1 file changed, 1 insertion(+)
+>> +
+>> +diff --git a/configure.ac b/configure.ac
+>> +index 487a266..96ae4f7 100644
+>> +--- a/configure.ac
+>> ++++ b/configure.ac
+>> +@@ -305,6 +305,7 @@ dnl
+>> + dnl Checks for libdl - on certain platforms its part of libc
+>> + dnl
+>> + AC_SEARCH_LIBS([dlopen], [dl dld], [], [ac_cv_search_dlopen=])
+>> ++AS_IF([test "$ac_cv_search_dlopen" = "none required"],[ac_cv_search_dlopen=""])
+>> + AC_SUBST([DL_LIBS], "$ac_cv_search_dlopen")
+>> +
+>> + PKG_CHECK_MODULES(GLIB, [gio-unix-2.0 >= 2.37.6 gmodule-2.0],
+>> +--
+>> +2.14.3
+>> +
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-musl-network-support.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-musl-network-support.patch
+>> new file mode 100644
+>> index 0000000..5dd17b6
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-musl-network-support.patch
+>> @@ -0,0 +1,72 @@
+>> +From 714b4731a238653e9c7d885c0dee10677b0a4df3 Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> +Date: Thu, 22 Mar 2018 18:24:07 +0100
+>> +Subject: [PATCH 3/4] musl: network support
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=UTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Stolen from [1] and prettyfied slightly
+>> +
+>> +[1] https://github.com/voidlinux/void-packages/tree/master/srcpkgs/NetworkManager/patches
+>> +
+>> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> +---
+>> + libnm-core/nm-utils.h               | 4 ++++
+>> + src/platform/wifi/wifi-utils.h      | 4 ++++
+>> + src/systemd/src/basic/socket-util.h | 5 +++++
+>> + 3 files changed, 13 insertions(+)
+>> +
+>> +diff --git a/libnm-core/nm-utils.h b/libnm-core/nm-utils.h
+>> +index df9284b..2bcf4b8 100644
+>> +--- a/libnm-core/nm-utils.h
+>> ++++ b/libnm-core/nm-utils.h
+>> +@@ -30,7 +30,11 @@
+>> + #include <netinet/in.h>
+>> +
+>> + /* For ETH_ALEN and INFINIBAND_ALEN */
+>> ++#if defined(__GLIBC__)
+>> + #include <linux/if_ether.h>
+>> ++#else
+>> ++#define ETH_ALEN      6               /* Octets in one ethernet addr   */
+>> ++#endif
+>> + #include <linux/if_infiniband.h>
+>> +
+>> + #include "nm-core-enum-types.h"
+>> +diff --git a/src/platform/wifi/wifi-utils.h b/src/platform/wifi/wifi-utils.h
+>> +index 705717b..da3edc4 100644
+>> +--- a/src/platform/wifi/wifi-utils.h
+>> ++++ b/src/platform/wifi/wifi-utils.h
+>> +@@ -22,7 +22,11 @@
+>> + #ifndef __WIFI_UTILS_H__
+>> + #define __WIFI_UTILS_H__
+>> +
+>> ++#if defined(__GLIBC__)
+>> + #include <net/ethernet.h>
+>> ++#else /* musl libc */
+>> ++#define ETH_ALEN      6               /* Octets in one ethernet addr   */
+>> ++#endif
+>> +
+>> + #include "nm-dbus-interface.h"
+>> +
+>> +diff --git a/src/systemd/src/basic/socket-util.h b/src/systemd/src/basic/socket-util.h
+>> +index d7e2d85..d109c84 100644
+>> +--- a/src/systemd/src/basic/socket-util.h
+>> ++++ b/src/systemd/src/basic/socket-util.h
+>> +@@ -29,6 +29,11 @@
+>> + #include <linux/netlink.h>
+>> + #include <linux/if_infiniband.h>
+>> + #include <linux/if_packet.h>
+>> ++#if !defined(__GLIBC__)
+>> ++/* SIOCGSTAMPNS from linux/asm-generic.h
+>> ++ * for src/systemd/src/libsystemd-network/sd-lldp.c */
+>> ++#include <linux/sockios.h>
+>> ++#endif
+>> +
+>> + #include "macro.h"
+>> + #include "missing.h"
+>> +--
+>> +2.14.3
+>> +
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0004-musl-process-util.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0004-musl-process-util.patch
+>> new file mode 100644
+>> index 0000000..fc55ce8
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0004-musl-process-util.patch
+>> @@ -0,0 +1,62 @@
+>> +From d513c8bfc982dbd976617178b040c512c95710b6 Mon Sep 17 00:00:00 2001
+>> +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+>> +Date: Thu, 22 Mar 2018 18:29:00 +0100
+>> +Subject: [PATCH 4/4] musl: process-util
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=UTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +Upstream-Status: Pending
+>> +
+>> +Stolen from [1] and prettyfied slightly
+>> +
+>> +[1] https://github.com/voidlinux/void-packages/tree/master/srcpkgs/NetworkManager/patches
+>> +
+>> +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>> +---
+>> + src/systemd/src/basic/process-util.c | 9 +++++++++
+>> + 1 file changed, 9 insertions(+)
+>> +
+>> +diff --git a/src/systemd/src/basic/process-util.c b/src/systemd/src/basic/process-util.c
+>> +index 272030d..485f1db 100644
+>> +--- a/src/systemd/src/basic/process-util.c
+>> ++++ b/src/systemd/src/basic/process-util.c
+>> +@@ -36,6 +36,9 @@
+>> + #include <sys/wait.h>
+>> + #include <syslog.h>
+>> + #include <unistd.h>
+>> ++#ifndef __GLIBC__
+>> ++#include <pthread.h>
+>> ++#endif
+>> + #if 0 /* NM_IGNORED */
+>> + #if HAVE_VALGRIND_VALGRIND_H
+>> + #include <valgrind/valgrind.h>
+>> +@@ -1015,11 +1018,13 @@ static void reset_cached_pid(void) {
+>> +         cached_pid = CACHED_PID_UNSET;
+>> + }
+>> +
+>> ++#ifdef __GLIBC__
+>> + /* We use glibc __register_atfork() + __dso_handle directly here, as they are not included in the glibc
+>> +  * headers. __register_atfork() is mostly equivalent to pthread_atfork(), but doesn't require us to link against
+>> +  * libpthread, as it is part of glibc anyway. */
+>> + extern int __register_atfork(void (*prepare) (void), void (*parent) (void), void (*child) (void), void * __dso_handle);
+>> + extern void* __dso_handle __attribute__ ((__weak__));
+>> ++#endif
+>> +
+>> + pid_t getpid_cached(void) {
+>> +         pid_t current_value;
+>> +@@ -1042,7 +1047,11 @@ pid_t getpid_cached(void) {
+>> +
+>> +                 new_pid = getpid();
+>> +
+>> ++#ifdef __GLIBC__
+>> +                 if (__register_atfork(NULL, NULL, reset_cached_pid, __dso_handle) != 0) {
+>> ++#else
+>> ++                if (pthread_atfork(NULL, NULL, reset_cached_pid) != 0) {
+>> ++#endif
+>> +                         /* OOM? Let's try again later */
+>> +                         cached_pid = CACHED_PID_UNSET;
+>> +                         return new_pid;
+>> +--
+>> +2.14.3
+>> +
+>> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+>> index 6538e7b..f201a75 100644
+>> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+>> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+>> @@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
+>>
+>>  DEPENDS = " \
+>>      intltool-native \
+>> +    libxslt-native \
+>>      libnl \
+>>      dbus \
+>>      dbus-glib \
+>> @@ -23,18 +24,18 @@ DEPENDS = " \
+>>      curl \
+>>  "
+>>
+>> -inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
+>> -
+>> -GI_DATA_ENABLED_libc-musl = "False"
+>> -
+>> -SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+>> -           file://0001-adjust-net-headers-for-musl-compatibility.patch \
+>> -           file://0002-socket-util.h-Include-linux-sockios.h-on-musl.patch \
+>> -           file://0003-Define-ETH_ALEN.patch \
+>> -           file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+>> -           file://0006-check-for-strndupa-before-using-it.patch \
+>> -           file://0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
+>> -           "
+>> +inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection gtk-doc
+>> +
+>> +SRC_URI = " \
+>> +    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+>> +    file://0001-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+>> +    file://0002-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
+>> +    file://0003-Do-not-create-settings-settings-property-documentati.patch \
+>> +    file://musl/0001-musl-basic.patch \
+>> +    file://musl/0002-musl-dlopen-configure-ac.patch \
+>> +    file://musl/0003-musl-network-support.patch \
+>> +    file://musl/0004-musl-process-util.patch \
+>> +"
+>>  SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
+>>  SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
+>>
+>> @@ -44,20 +45,22 @@ EXTRA_OECONF = " \
+>>      --disable-ifcfg-rh \
+>>      --disable-ifnet \
+>>      --disable-ifcfg-suse \
+>> -    --disable-introspection \
+>>      --disable-more-warnings \
+>>      --with-iptables=${sbindir}/iptables \
+>>      --with-tests \
+>>      --with-nmtui=yes \
+>>  "
+>>
+>> +# gobject-introspection related
+>> +GI_DATA_ENABLED_libc-musl = "False"
+>> +
+>>  do_compile_prepend() {
+>> -        export GIR_EXTRA_LIBS_PATH="${B}/libnm-util/.libs"
+>> +    export GIR_EXTRA_LIBS_PATH="${B}/libnm/.libs:${B}/libnm-glib/.libs:${B}/libnm-util/.libs"
+>>  }
+>>
+>>  PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
+>>      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
+>> -       bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
+>> +    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
+>>      ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)} \
+>>      ${@bb.utils.filter('DISTRO_FEATURES', 'wifi', d)} \
+>>  "
+>>
+>> --
+>> To stop receiving notification emails like this one, please contact
+>> the administrator of this repository.
+>> --
+> Again and again: The wrong patch - now in master. That introduced
+> parse failures and does NOT fix musl. Are you sure everything is under
+> control?
+>
+> Andreas
 
 
