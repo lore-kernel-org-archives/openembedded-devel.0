@@ -1,51 +1,52 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F51B60272
+	by mail.openembedded.org (Postfix) with ESMTP id 3DA2560272
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 14:13:32 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id b9so13437562pgf.6
+	Wed, 25 Apr 2018 14:13:34 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id j11so13434219pgf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 07:13:33 -0700 (PDT)
+	Wed, 25 Apr 2018 07:13:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=w10cxoA9apieu4fl0ftv/Bea6Dm9uj5kTazVACjsLQk=;
-	b=HT8vfNXoUgggVtnprmvFUitxszz3/p07Fvx4ABz+r5AvJ+N66X/F8Y5u/KU0D5bSvV
-	O9SOcyxqXqjn282dSbtjEJvDaKAUMtGDApVpyVYxnOQR7rp2oK2RKI+ia4MUjx8WKcCL
-	xTb/Pk6C1udSCX/CYokxg7xC8ey0drqMme/dNbTcsKO4ohm64IvF8TXg6IJ9/72cRZ5a
-	TUgWHoEFe3gBRBNCsEyCQpm8ds85j3XAVZJiTEmWWLTRaGng0LtkB3Ko23fXBwtuhLST
-	LBntd9BRClujiOVhQ4xc0Lz+hZe0TSce1dNf8D0Z1mqnVrCMW4JKEGCuFGtazCpj8iCG
-	5kYA==
+	bh=PZsgLvfpdTWdrX/pYhcKJDEpe3vNA6qzwI44TpN67qM=;
+	b=WqJ696TaNIE41Tlt/2ZbkBp7IOB3GK4Tz391D2bGyQhRbXleqAE6XHxEJL+gLn5lo5
+	A7Yq72VHcYEPCybcGo70EISDVd+9EZ9EmBBsqpZ8ZNHLyTNRDaRxMVlT9q3Xrfh9mKWj
+	QA801xWRzBG0OGYA6CiFfZb3affC3k09E9i3cBCeXT+mb3WsMtJ2HLwVYPjwfLfvg5v9
+	4Ix3YsMUfbQ+lvL/1tWpX4iMPztb8dPMcOt3sG8TRP6+v77UGn5iB6lvIwLJdzHA69iK
+	IubNfDkWeSqMZBJ9QnrGqem4m1cTYJOziRxgYRY0lZtuaj+mC+7lQiRKXdmFeKOhQmyy
+	Nq8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=w10cxoA9apieu4fl0ftv/Bea6Dm9uj5kTazVACjsLQk=;
-	b=PmGo67lXS9vwsYMbrJbF14jmOO9pMts5+yojKkAlV5ONveB8QDyYLlnH4SW1c2e+4f
-	7HMquTY2RiR0CpMyDXc0ItR/Wi3uAA5mRIwBFNqkAsNvQaJ3Oe/WSgluCZo6DsJTp4zd
-	4F516po47LECybYUybwV2qzkDXSwLmxBX0pbgjAqO+HikVtRZUjTPA43AzdiIxqlBoGJ
-	h8e3AXu4RtAMcrT28FyWKrmChJN0B94DGQNM6n2ftWI2ciiv1py4pwsUrg35n4CNZ5vH
-	rWpI3zIeomdwIzE+3vqDxZyzwGPDVkNjOAFkca9vfOLydi48qKFZF0iLfpjOWhEkarJe
-	MgUg==
-X-Gm-Message-State: ALQs6tBqA6CL33NQvpACf1hlGoDQTHSE5qFKZjYpmb59dtAvoQ8ZRxfm
-	scDraNKPEdXJ1LH/sh2QmBljWQ==
-X-Google-Smtp-Source: AIpwx4+j6eHjs1+1+ZdVg3cc98lefYQ+JjJ+oz+oaRMqDYmisnYUKzU9Od2WFK+s5ToZ12uW92+ggg==
-X-Received: by 10.98.233.11 with SMTP id j11mr28112832pfh.205.1524665613506;
-	Wed, 25 Apr 2018 07:13:33 -0700 (PDT)
+	bh=PZsgLvfpdTWdrX/pYhcKJDEpe3vNA6qzwI44TpN67qM=;
+	b=iGpG91/M085LbTUbpu1vMFsBSNsByn4z7iVj+UWf6xPFYQBY40YtxCtIRNSYLa5kG3
+	Jyj8jjcb5T3bgiRAwRNnEJhLQJV8lJJv0i8HbwceGeS0+nnxW5fmSrO2kZqYYFtnfKmu
+	7Vp9JR8o/KgiC48WZGGmIqH0umwzvNqBUGrSpLSeST2szP1uxNF6jQ5Lt3p0zjGREF+q
+	bM1BuaRbre5I1hLA0Kj5mGoaSZrPceSy/aDNlyctl8AmlxFftj8+UYDYU19ayV9y3vDF
+	/DGwFCKh3wAZHY21ayq/I0VqB2sGSnL5B8gaZXYfzTbcVc95Szu2ts5MVwt7+QHFF/1F
+	zK7w==
+X-Gm-Message-State: ALQs6tAQeENXtLLsIiaXA+QqQdofwM/OPf0EdLQqkVom3fMdJtWlWwtn
+	ZGFGD+rqHoxZ0ns1lP81wD4=
+X-Google-Smtp-Source: AIpwx48CjpwVWMEf2V5MelgAtP6m0+fDsvX3tCN+CNAFjz7l84uO5UMPO07on77xcNMN8rpayUmAGg==
+X-Received: by 2002:a17:902:6041:: with SMTP id
+	a1-v6mr27681412plt.59.1524665614937; 
+	Wed, 25 Apr 2018 07:13:34 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:952a:dcb5:7c5a:56df])
 	by smtp.gmail.com with ESMTPSA id
-	e4sm35563566pfa.128.2018.04.25.07.13.32
+	e4sm35563566pfa.128.2018.04.25.07.13.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 25 Apr 2018 07:13:32 -0700 (PDT)
+	Wed, 25 Apr 2018 07:13:34 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Apr 2018 07:13:25 -0700
-Message-Id: <1524665609-7709-2-git-send-email-akuster808@gmail.com>
+Date: Wed, 25 Apr 2018 07:13:26 -0700
+Message-Id: <1524665609-7709-3-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1524665609-7709-1-git-send-email-akuster808@gmail.com>
 References: <1524665609-7709-1-git-send-email-akuster808@gmail.com>
-Subject: [PATCH 2/6] libmusicbrainz: refresh patches
+Subject: [PATCH 3/6] libdc1294: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +59,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2018 14:13:32 -0000
+X-List-Received-Date: Wed, 25 Apr 2018 14:13:34 -0000
 
-used quilt.
-
-Details:
-Applying patch allow-libdir-override.patch
-patching file CMakeLists.txt
-Hunk #1 succeeded at 36 with fuzz 1 (offset 10 lines).
-
-Now at patch allow-libdir-override.patch
+Applying patch install_examples.patch
+patching file examples/Makefile.am
+Hunk #1 succeeded at 36 with fuzz 1.
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../musicbrainz/files/allow-libdir-override.patch              | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ .../recipes-multimedia/libdc1394/files/install_examples.patch     | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch b/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
-index d59d12e..db4d6e8 100644
---- a/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
-+++ b/meta-multimedia/recipes-multimedia/musicbrainz/files/allow-libdir-override.patch
-@@ -6,11 +6,11 @@ Upstream-Status: Inappropriate [configuration]
- 
- Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
- 
--Index: libmusicbrainz-3.0.3/CMakeLists.txt
-+Index: git/CMakeLists.txt
+diff --git a/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch b/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch
+index 89133ad..df0c235 100755
+--- a/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch
++++ b/meta-multimedia/recipes-multimedia/libdc1394/files/install_examples.patch
+@@ -1,9 +1,9 @@
+ Index: libdc1394/examples/Makefile.am
  ===================================================================
----- libmusicbrainz-3.0.3.orig/CMakeLists.txt
--+++ libmusicbrainz-3.0.3/CMakeLists.txt
--@@ -26,7 +26,7 @@ FIND_PACKAGE(DiscId)
-+--- git.orig/CMakeLists.txt
-++++ git/CMakeLists.txt
-+@@ -36,7 +36,7 @@ FIND_PACKAGE(LibXml2 REQUIRED)
-  SET(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)")
-  SET(EXEC_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX} CACHE PATH "Installation prefix for executables and object code libraries" FORCE)
-  SET(BIN_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/bin CACHE PATH "Installation prefix for user executables" FORCE)
-@@ -18,4 +18,4 @@ Index: libmusicbrainz-3.0.3/CMakeLists.txt
- +SET(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH  "Installation prefix for object code libraries")
-  SET(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Installation prefix for C header files" FORCE)
+---- libdc1394.orig/examples/Makefile.am	2012-06-30 17:50:46.000000000 -0700
+-+++ libdc1394/examples/Makefile.am	2012-06-30 19:02:13.822646430 -0700
+-@@ -36,8 +36,7 @@
+- AM_LDFLAGS = -framework CoreFoundation -framework Carbon
++--- libdc1394.orig/examples/Makefile.am
+++++ libdc1394/examples/Makefile.am
++@@ -36,8 +36,7 @@ if HAVE_MACOSX
++ AM_LDFLAGS = -framework CoreFoundation $(FRAMEWORK_IOKIT)
+  endif
   
-- CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libmusicbrainz3.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/libmusicbrainz3.pc)
-+ CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libmusicbrainz5.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/libmusicbrainz5.pc)
+ -noinst_PROGRAMS = $(A)
 -- 
 2.7.4
 
