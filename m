@@ -1,50 +1,23 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AB163606A8
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 02:30:51 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id t123-v6so25126400iof.7
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Apr 2018 19:30:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=YN2qH9Q3rfCHwOYV43UchECGIC8S37MEkE9anXdoFWA=;
-	b=HDmwVGY7WeFx88oiDIGQhKNOcd8rw1+CJJaPbd3OJaRre6sSUknKPdj+aXtai903Ln
-	iJ+LgPWUVV8Z8d6MytoKHzPqPD1rPJ9bf4LOPWVZwZU4D6dLEyTIztsgHfuqlPsjtNtY
-	RmHRILCTppmzR/mfszolVSZpSYWSiRIlWuEGS1gw5I5+qaW4QVUQBVHrMKYThOhBg1qu
-	CMLAcCHgsgKUZMtL01g1m7cCmaZVi6fq/BoXDLCymKj4tLM32ohDRVZvlvBb0vp04u/T
-	kAZB9Mw4OrVKPMgLXAD988I1pNBpmFb5DEbEdz8jj4QzQDR8Xb95lyZuHrim56bEjLrG
-	Sjig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=YN2qH9Q3rfCHwOYV43UchECGIC8S37MEkE9anXdoFWA=;
-	b=XlSWD2Gzp8FDAPIZHvTOxtpdHcLz7UJH5q5BBGkOA2zVnwCdOtVP28BCf5bYE34FRR
-	b8tq2ATj2dw2erAbL+dfH1WptNIKAhixf7p9ZmVui/KHUDYlC2KI++qTCuJ3QYEx4Q3h
-	qCnwnBNQlQ0hAULGYGdGp9WZXIjc9PBO4CjoONa8gY6WEiuK2opYjymW9WuXDQ1Ftf80
-	QsEwWjhbVwxrTq4fUbZ9uILMcyvfPOHt+aSsYHmCxh/wCpFLhnves00IPEXy9KuGXyRF
-	N14QNZj/ASFx4HylVR/H4Tu283r2tv+m87T5XxSHmIWPr/trARHCPMn1iYULla8+s5dS
-	btBQ==
-X-Gm-Message-State: ALQs6tAV/dX0nZbCebxXeB4IzkbBV8PEL5KoP0q9sZ+HSbt9K6IZTGt3
-	sPLRE2WfLQBTkc8dJtPxXdj068gf
-X-Google-Smtp-Source: AB8JxZrZdAZ4pcFxdY6tLQWCtuYXuEocqadWnFSZYdPCfu0SYw/l7jmb6zMO1WSbuFCz3C/93WUzZw==
-X-Received: by 2002:a6b:80d5:: with SMTP id
-	k82-v6mr28274196ioi.253.1524623451568; 
-	Tue, 24 Apr 2018 19:30:51 -0700 (PDT)
-Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
-	q67-v6sm6349276ita.11.2018.04.24.19.30.50
-	for <Openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 24 Apr 2018 19:30:50 -0700 (PDT)
-Date: Tue, 24 Apr 2018 22:30:48 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Message-ID: <20180425023048.GA27713@linux-uys3>
-MIME-Version: 1.0
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Subject: meta-bsp
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 351B460234;
+	Wed, 25 Apr 2018 13:48:00 +0000 (UTC)
+Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id C8E82204EF;
+	Wed, 25 Apr 2018 13:48:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C8E82204EF
+Authentication-Results: mail.kernel.org;
+	dmarc=none (p=none dis=none) header.from=kernel.org
+Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=krzk@kernel.org
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Apr 2018 15:47:33 +0200
+Message-Id: <1524664054-21717-1-git-send-email-krzk@kernel.org>
+X-Mailer: git-send-email 2.7.4
+Cc: poky@yoctoproject.org, openembedded-core@lists.openembedded.org
+Subject: [meta-networking][rocko][PATCH 1/2] kernel_wireless_regdb: Add class for embedding regulatory data into the kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,52 +30,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2018 02:30:51 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Apr 2018 13:48:01 -0000
 
-Hi,
+Small embedded systems might:
+1. Want to get rid of daemons as much as possible (therefore be built
+   without CRDA),
+2. Not receive user-space incremental updates but an entire system
+   upgrade (with kernel).
 
-I'm tempted to reply to RP's "2.6 planning proposals and meeting" email thread
-to ask if there could be some support added for common BSP things, but I have
-a feeling it probably won't go down well. Also, I've been trying to get some
-traction on https://bugzilla.yoctoproject.org/show_bug.cgi?id=11881 for a
-while (i.e. since last August), but no dice.
+Add class kernel_wireless_regdb which allows in such cases to embed the
+wireless regulatory database directly in the Linux kernel during build
+process.
 
-Basically, I believe there are a small number of basic, general things that
-many BSP layers could use (or need) and it'd be nice to see them available in
-one place so everyone could use them, instead of having everyone create their
-own, or copy+paste (I'm not sure which of those is worse).
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+---
+ meta-networking/classes/kernel_wireless_regdb.bbclass        | 12 ++++++++++++
+ .../wireless-regdb/wireless-regdb_2016.06.10.bb              |  8 ++++++++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-networking/classes/kernel_wireless_regdb.bbclass
 
-Bug 11881 is an example of one such thing, but others exist.
+diff --git a/meta-networking/classes/kernel_wireless_regdb.bbclass b/meta-networking/classes/kernel_wireless_regdb.bbclass
+new file mode 100644
+index 000000000000..6ae90d2d088c
+--- /dev/null
++++ b/meta-networking/classes/kernel_wireless_regdb.bbclass
+@@ -0,0 +1,12 @@
++# Copies the regulatory plaintext database to kernel sources before compiling.
++# Linux kernel must be compiled with CONFIG_CFG80211_INTERNAL_REGDB to use it.
++
++DEPENDS += "wireless-regdb-native"
++
++SRCTREECOVEREDTASKS += "do_kernel_add_regdb"
++do_kernel_add_regdb() {
++    cp ${STAGING_LIBDIR_NATIVE}/crda/db.txt ${S}/net/wireless/db.txt
++    echo ${S}
++}
++do_kernel_add_regdb[dirs] = "${S}"
++addtask kernel_add_regdb before do_configure after do_patch
+diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
+index 64e9401e7a3c..14bf272f4050 100644
+--- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
++++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
+@@ -17,4 +17,12 @@ do_install() {
+     install -m 0644 sforshee.key.pub.pem ${D}${sysconfdir}/wireless-regdb/pubkeys/sforshee.key.pub.pem
+ }
+ 
++# Native users might want to use source db.txt
++do_install_append_class-native() {
++    install -d -m 0755 ${D}${libdir}/crda
++    install -m 0644 db.txt ${D}${libdir}/crda/db.txt
++}
++
+ RSUGGESTS_${PN} = "crda"
++
++BBCLASSEXTEND = "native"
+-- 
+2.7.4
 
-Many embedded boards will come with repositories somewhere of that board's
-vendor kernel and vendor bootloader. Many BSP layers have recipes to make
-building with these repositories easier. However, we're seeing more and more
-boards getting upstream {kernel|u-boot} support. This means users are
-increasingly having a choice between using the vendor's repositories or
-upstream. But often the choice of bootloader, kernel, and graphics are tied
-together; if you want one, it means using or not using the others in specific
-combinations. Therefore it's not simply a matter of providing two kernel
-recipes and letting the user PREFERRED_PROVIDER_virtual/kernel one or the
-other. So bug 11881 points to a class (written by Otavio) that allows a BSP to
-offer different sets that the user then selects (either by doing nothing and
-selecting the default, or setting a one-liner in a configuration to choose the
-other).
-
-Another example of something that might be useful to various BSP
-layers is a common recipe for the upstream linux kernel itself
-(git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git). Many BSP
-layers provide a vendor recipe and an upstream recipe, but I believe it would
-be better if the upstream recipe were common instead of requiring every BSP
-layer to keep theirs current. Maybe the same is true for linux-next or
-linux-stable?
-
-Also some common mali (or perhaps the upcoming lima) recipes might be nice?
-
-Since it seems unlikely I'll be able to convince openembedded-core to add
-these things, maybe meta-openembedded would be a better home?
-
-Best regards,
-	Trevor
 
