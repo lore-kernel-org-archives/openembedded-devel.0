@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 347B572EED
+	by mail.openembedded.org (Postfix) with ESMTP id DC74272EED
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 14:13:34 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id l27so15335967pfk.12
+	Wed, 25 Apr 2018 14:13:35 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id o76so10631001pfi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 07:13:36 -0700 (PDT)
+	Wed, 25 Apr 2018 07:13:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=HqoeSVwUrKwJTjYeMEhYnI9FDaj6o4WkfY39iKI9aWs=;
-	b=haXXQA8A3etA5Ct8+aj4dKalDQhntWormAZyfpEzY251WGN2m2C9+gRC4Y1MyweWrn
-	JBXCKlKeYqkFKx+8k+WX9RwAY20JThqI3XoAF2hafhbe79Ys790XIIwIPUa1ZxmLrBmL
-	nqm/QxnyiU4/n9kjjOemP5zN9l8dzQJhzitBCXeHO1ADYp0qBMNCq5FCDAbMXynuz0sA
-	OLfyVitLnSp2ppJBKam7mgrgWL7BseZ0AhXkKUK8qkstRojrEuhk6p9p46KwHO+9Dzb7
-	pK2skI3lwVX7Vv9RzT6yv7s8oRp8YeDKWQ7kWoXHho0/zRe+AUuMh5obakIdq9yfAV0L
-	0TRg==
+	bh=3aZiS0L1/mLoCxBfSibDNR3z+UwvYkv7hC4R1zp+S5w=;
+	b=TfDFan8t+FBIU2HVSUAMP/RudoxDCe4NueN02KmEdoa02rZQpwMeP4tqejQja6JPII
+	8Ji/QsqCT+pkRhPBuZ/7k8FIvOx0SXevD0YtsTA19AALjz5j9TmLtyhzPuGKDZQwhYAR
+	uUAOnqjesoat1/JoS4yWqNAdwvmC8AFnLqLs0WQwmkkYYMFdgz980VyakC8P/SujlGiR
+	I78RIY//IksMGrMUpws5h45PqCfxC9dk5Jk12/8T/QJ8l0nP/GcXVr3YqSA8aSnrZrD4
+	cf8UdE1GpoHMs4NDlzbmOmNA3mzOX8LpVr6I/evDkSSHnQrqYcOKpiE0S6f+B5fnIOqS
+	Pt5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=HqoeSVwUrKwJTjYeMEhYnI9FDaj6o4WkfY39iKI9aWs=;
-	b=HywvRE9s6PlaXYvdPNrTRV5uly3B7CqRikGOdJl5FHNCny6fxnZClDkKLF692qz1o0
-	Dmit61ow28mC5fmnqUn1p2ace+mYvX77031Hg8KCYATQkFnzuzrQ7lnupG8ErueZlP7i
-	dMBCEpVKYxwBbrWUev713XNA6+orM8K15eAX3sZIxz66aR4BeiB071a6iNMy9c55QhKp
-	kMNWS1SC+V4Qc083nB0khsUU0q4HycDjXa/IHeAC/VoBXkpkayDNEDTH2E5km/m/TtrM
-	5oB0eH5aF+LxgYT8jMvd5+jhv5A9jHU13k8xtzuiuPj5dPefpkLokwY5GpUFYNesy6T9
-	tVHg==
-X-Gm-Message-State: ALQs6tAHnNH0pCkM/kYS+G5qAxwI/RKGSS2RAYwvhEQqvbQqsJhuG7hm
-	W1mSxAwtnYqo5BE8ukvfGcI=
-X-Google-Smtp-Source: AIpwx49ZaQb8ezAzSMqHKSIgdtv+9LhBek1pfL+zUIwZWcguQ4se1sYpdwzKeIJ4mPhLkPOEo6MuSQ==
-X-Received: by 2002:a17:902:30f:: with SMTP id
-	15-v6mr29489006pld.365.1524665615942; 
-	Wed, 25 Apr 2018 07:13:35 -0700 (PDT)
+	bh=3aZiS0L1/mLoCxBfSibDNR3z+UwvYkv7hC4R1zp+S5w=;
+	b=qMhFdIi4pfTG/1jpOFvmu2ojCL1TA+q3HrqwBStGN9J9rq1JkofiwGCLscvu0V4TaF
+	7gDhgu6yTEfc4JANg6omZD1DOTu17ovL2sFVhdMREuLoBvokwn3FPjFEIOgxCMWrvt+A
+	yffkNKwfy5dzNwt8i2aARSG/NHBvKp6fhi0yIhZOVY7bBdqxmW/3X6Hz4OvUW5PaRgFU
+	4rl3fg65KcrpturgJmTPpByFU1k7bGeiys1ko4aQHKRZyDL2t+aUer6TzI/QOwRmTPaK
+	a8Wafit7xpWQrnx5uVOWuPA5n3gAdAO/KVJKjEe3D39JSnCGOH/wrST17IZxrTOUkfCk
+	zSJg==
+X-Gm-Message-State: ALQs6tD9DfyBRSng2bdGU6muNHcyLHu6ni2VS4gokFq71cjARawTj+ia
+	Or4D7UXSp2tgLEJYoJ7Q2KcpHw==
+X-Google-Smtp-Source: AB8JxZpt38xP81wOPi6TRtsD5gwoZTn3MdVMxdolfYC0HCKSbOWfXF3gK/P5oPSwiWDd3vZqVTGr7A==
+X-Received: by 2002:a17:902:164:: with SMTP id
+	91-v6mr8359346plb.134.1524665617258; 
+	Wed, 25 Apr 2018 07:13:37 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:952a:dcb5:7c5a:56df])
 	by smtp.gmail.com with ESMTPSA id
-	e4sm35563566pfa.128.2018.04.25.07.13.34
+	e4sm35563566pfa.128.2018.04.25.07.13.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 25 Apr 2018 07:13:35 -0700 (PDT)
+	Wed, 25 Apr 2018 07:13:36 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Apr 2018 07:13:27 -0700
-Message-Id: <1524665609-7709-4-git-send-email-akuster808@gmail.com>
+Date: Wed, 25 Apr 2018 07:13:28 -0700
+Message-Id: <1524665609-7709-5-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1524665609-7709-1-git-send-email-akuster808@gmail.com>
 References: <1524665609-7709-1-git-send-email-akuster808@gmail.com>
-Subject: [PATCH 4/6] schroedinger: refresh patch
+Subject: [PATCH 5/6] android-tools: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,44 +60,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2018 14:13:35 -0000
+X-List-Received-Date: Wed, 25 Apr 2018 14:13:36 -0000
 
-Applying patch configure.ac.patch
-patching file configure.ac
-Hunk #1 succeeded at 54 with fuzz 2.
+Applying patch preserve-ownership.patch
+patching file system/extras/ext4_utils/make_ext4fs_main.c
+Hunk #1 succeeded at 47 with fuzz 2 (offset -2 lines).
+Hunk #2 succeeded at 81 (offset -2 lines).
+Hunk #3 succeeded at 144 (offset -2 lines).
+patching file system/extras/ext4_utils/make_ext4fs.c
 
-Now at patch configure.ac.patch
+Now at patch preserve-ownership.patch
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../schroedinger/schroedinger/configure.ac.patch                  | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ .../android-tools/preserve-ownership.patch           | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/configure.ac.patch b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/configure.ac.patch
-index 2ed8d22..838400f 100644
---- a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/configure.ac.patch
-+++ b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger/configure.ac.patch
-@@ -5,10 +5,10 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/preserve-ownership.patch b/meta-oe/recipes-devtools/android-tools/android-tools/preserve-ownership.patch
+index 85af81f..fc350fb 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/preserve-ownership.patch
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/preserve-ownership.patch
+@@ -9,11 +9,13 @@ Upstream-Status: Inappropriate
+  system/extras/ext4_utils/make_ext4fs_main.c |   10 ++++++++--
+  2 files changed, 14 insertions(+), 2 deletions(-)
  
- Upstream-Status: Inappropriate [configuration]
- 
--Index: schroedinger-1.0.9/configure.ac
-+Index: schroedinger-1.0.11/configure.ac
- ===================================================================
----- schroedinger-1.0.9.orig/configure.ac
--+++ schroedinger-1.0.9/configure.ac
-+--- schroedinger-1.0.11.orig/configure.ac
-++++ schroedinger-1.0.11/configure.ac
- @@ -54,7 +54,7 @@ if test "x${HAVE_ORC}" != xyes ; then
-    AC_ERROR([orc-0.4 >= $ORC_VER is required])
-  fi
-@@ -16,5 +16,5 @@ Index: schroedinger-1.0.9/configure.ac
- -ORCC=`$PKG_CONFIG --variable=orcc orc-0.4`
- +ORCC=$STAGING_DIR`$PKG_CONFIG --variable=orcc orc-0.4`
-  AC_SUBST(ORCC)
-+ AM_CONDITIONAL(HAVE_ORCC, test "x$cross_compiling" != xyes)
+---- a/system/extras/ext4_utils/make_ext4fs_main.c
+-+++ b/system/extras/ext4_utils/make_ext4fs_main.c
+-@@ -49,13 +49,15 @@ extern struct fs_info info;
++Index: git/system/extras/ext4_utils/make_ext4fs_main.c
++===================================================================
++--- git.orig/system/extras/ext4_utils/make_ext4fs_main.c
+++++ git/system/extras/ext4_utils/make_ext4fs_main.c
++@@ -47,13 +47,15 @@ struct selabel_handle;
++ extern struct fs_info info;
   
-- AC_ARG_WITH([thread],
+- extern struct selabel_handle* selinux_android_file_context_handle(void);
+  
+ +extern int preserve_owner;
+ +
+@@ -28,7 +30,7 @@ Upstream-Status: Inappropriate
+  	fprintf(stderr, "    <filename> [<directory>]\n");
+  }
+  
+-@@ -81,7 +83,7 @@ int main(int argc, char **argv)
++@@ -79,7 +81,7 @@ int main(int argc, char **argv)
+  	struct selinux_opt seopts[] = { { SELABEL_OPT_PATH, "" } };
+  #endif
+  
+@@ -37,7 +39,7 @@ Upstream-Status: Inappropriate
+  		switch (opt) {
+  		case 'l':
+  			info.len = parse_num(optarg);
+-@@ -144,6 +146,10 @@ int main(int argc, char **argv)
++@@ -142,6 +144,10 @@ int main(int argc, char **argv)
+  			}
+  #endif
+  			break;
+@@ -48,8 +50,10 @@ Upstream-Status: Inappropriate
+  		case 'v':
+  			verbose = 1;
+  			break;
+---- a/system/extras/ext4_utils/make_ext4fs.c
+-+++ b/system/extras/ext4_utils/make_ext4fs.c
++Index: git/system/extras/ext4_utils/make_ext4fs.c
++===================================================================
++--- git.orig/system/extras/ext4_utils/make_ext4fs.c
+++++ git/system/extras/ext4_utils/make_ext4fs.c
+ @@ -67,6 +67,8 @@
+  
+  #endif
 -- 
 2.7.4
 
