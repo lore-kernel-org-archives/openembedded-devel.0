@@ -1,114 +1,47 @@
-Return-Path: <wguay@graphcore.ai>
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0091.outbound.protection.outlook.com [104.47.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id B376774503
+Return-Path: <purushtm1@gmail.com>
+Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id D54D17452C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Apr 2018 15:46:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=graphcore.onmicrosoft.com; s=selector1-graphcore-ai;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=C6jJ0KFOYKFyBba6MKfwY7t0TARzlowoezv5fbdwrHI=;
-	b=cE8iwwKBWBYMS/8xPcTRPAcaEQELHR622JMI/CMbSIvreM5ybd3q+mZSafoif3nEodRNjxBdhI3LCqRi/dDm3vnJs8j3pUy870ia80t1T9fbcVuixkssrHVtmpA4b6BxwTJEcqujN75Opas2DWuI/7hFBN9HNCUzS1M4w6nxojw=
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=wguay@graphcore.ai; 
-Received: from localhost.localdomain (109.247.133.245) by
-	HE1PR01MB1305.eurprd01.prod.exchangelabs.com (2a01:111:e400:5880::26)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.696.15;
-	Wed, 25 Apr 2018 09:12:19 +0000
-To: Khem Raj <raj.khem@gmail.com>
-References: <20180424091305.44842-1-wguay@graphcore.ai>
-	<CAMKF1spJiPWuct+eX2iq+PC=EUmjaPRiH1YFhwgQgC7omSDCZA@mail.gmail.com>
-From: Wei Lin Guay <wguay@graphcore.ai>
-Message-ID: <4ef0940f-34ef-ba7b-1f26-6e92890157c7@graphcore.ai>
-Date: Wed, 25 Apr 2018 11:12:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.7.0
+	Wed, 25 Apr 2018 16:05:56 +0000 (UTC)
+Received: by mail-lf0-f43.google.com with SMTP id u21-v6so24654649lfu.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Apr 2018 09:05:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=9JWuLg2pDrdDr/ONsQ3+PlPmrPjUVvonl1GFG1OShbI=;
+	b=Rd2RZ6As66mhx/BTW5T2f/8DdhhhPYWlHMBUtlCgGcLW/5SJ2IxB4hCajv9dhTMo/S
+	38FOhR+IRzncP2xAVCA/WiZC1y3Ru71aJ3aeFJmd9Veah2enO5Gur4LWGawPvvvtuBlB
+	4Yz6gYVsHbsIld75htGwqb37GXy0ZiaqXuP80u9KHesyKl2q6mxA9ePZPUDNdfsPHkJy
+	0tD0SiWdwvsBfeecDlYjyScB3PU7u3dn/m5qXr6cWCRI/DSd6oPyeWBwrYVOFg1MaDQW
+	LHKVeFw9sszRvmet3GWHT0NHTZoZPp7n5XyVBPH9DhO92BElzTTsCidwEI5u+0S/MO7z
+	za7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=9JWuLg2pDrdDr/ONsQ3+PlPmrPjUVvonl1GFG1OShbI=;
+	b=bikyx8gvheRPda8H8PkPO6ItN3SfuHLQ3oI+JApg+Tn0Rd6CdXmo/7JwzeNd7K1tWX
+	tXnfC6VCRqWleXimJApUzMEkY8McqAfJSDE4X7iioI9woFV2+Bgl+mSLtIowqB1sf27N
+	Yw55GCnKNsFmmcYMg3rkvjBB2iYVeqPszS5diG6nxNXMXTWEDv1K14UHIvxKrKwaWJX3
+	UTzvpL2Hs1+lJqIHDx0RhLY8B9A7+XaHiojLfkINYbt5T+2V7A6ygFG9ehE4wB7cXmLj
+	tf8SLBN0FhCBtHFPBwqCE/Z93cCZe/7RmB458pqzyb0BnNETsNIFbu3g6Kff78czBUUJ
+	xEFA==
+X-Gm-Message-State: ALQs6tAscXYVh/+Y8VrjIANavxNv13X9zUE3mlH4AxcuqDtzOlVEnoix
+	FQ5qADm56aiPigf4bis8oQxxGrb7SrGnQaKQuCU=
+X-Google-Smtp-Source: AB8JxZqcxO1FdHrTsjSW1BeYlmUokOh0lstKWn1HksBV64E3/5Dq2x+H9hrgdP8mklNZdsG9ed10wbBpuyjB7XsRZCk=
+X-Received: by 2002:a19:5386:: with SMTP id
+	h6-v6mr13087557lfl.45.1524672356108; 
+	Wed, 25 Apr 2018 09:05:56 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spJiPWuct+eX2iq+PC=EUmjaPRiH1YFhwgQgC7omSDCZA@mail.gmail.com>
-X-Originating-IP: [109.247.133.245]
-X-ClientProxiedBy: AM5PR04CA0025.eurprd04.prod.outlook.com
-	(2603:10a6:206:1::38) To HE1PR01MB1305.eurprd01.prod.exchangelabs.com
-	(2a01:111:e400:5880::26)
-X-MS-PublicTrafficType: Email
-X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652020)(7021125)(5600026)(4534165)(7022125)(4603075)(4627221)(201702281549075)(7048125)(7024125)(7027125)(7028125)(7023125)(2017052603328)(7153060)(7193020);
-	SRVR:HE1PR01MB1305; 
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR01MB1305;
-	3:lLY3vWgrvQBNViVgghEC4UamhfoJqTVJJY7BK0ZyY+B6jmw3DGwH+AcoBk2PzFGlsK7+3COP/UXXcPA1utkJt+CT/2SwdIcVyWIIXw8Id7ry0dZusU7ZVCUUD4+2iM7XoGUHvqJ+xC85RNJIrGH/DPBiA5BPinhWRj3ZzyNUD86VT6xGXQ0ywBASohzkwCxhidj6Q+DRGl1UE/ZSZuTwABMQI0W/KiL56/nYpDLYz/bqItwuotT9KjNITaF3ZtF8;
-	25:dyzfU9m8FSkfLG/qb+JqttN8xHlKcaK+JUoBDXlryTPla6Fa6gvZY3GqUsWngR54xgsYr+eOS4X6XpKeKTV4e75FM6D4EFo330EeNiZDIEsSXO4k5Erfiq0kAHFMLKZN95Av6XlUaqfLup5qGVKsU+cFWuJaERQB74DiiJacKwvXwL1ZoKONfdqkZZ7vIGnMb/tkieWP6pE4UraH5Mh3ZwXZw4CjG6FehKx6ca/5cYY8mtopZvQfjjvfhrlQbhYA4TfN0RkHIo+TRuq3z60UKhMPv23YI7hvHtYx+/48CommGTwmGSFVWSHEadpxY/ZAvG8XTDjGOQfa2lkv3dDVxQ==;
-	31:S+/plrhORfmHQzE0kkpctzf6VypoPmK2Jfr67furw3ZgEPvz2TS27x5R3NxD5pttZVIXpIJosQC9Y0C+3ThEYNqALHDDSF6NsZa9+V23Um/bjyfgMyDZuLVYUy0b2OcXcTrNDNHKCQize/jJrA0nNH3voAG+dtXl4Or1jFHkq5yD7Zz2oWeYzNC9WjkxzLjaSVdw5Kpp2GxT4IimYj9bBJUEppYz2Q6Isda93LRtQfM=
-X-MS-TrafficTypeDiagnostic: HE1PR01MB1305:
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR01MB1305;
-	20:iYqyjhxCrfu1lLelYu7CPyZ115lzaHE4zm+Ex9QtJT/8IdR0ItgRAWKpkkH17cuzfanElSPNSWhPDu0FfBSRCxdPegevNOQ/eFtcyd1ziCKdQBbljouUGcvwRkGsHFrzvpfe9X36Hkb9ZJ7/iAezs0MtvCcp/2xIL95EmSm9FZ/xqz9eVhls5g//+oKj5L8CEtCq08ruUHdE5YN0Nmuml8r/nwgCczfbyl7Il1o8M0b8fQRmcokTSICxaLS1FpE+aQvp62KeN3ATC8sSUnVfH1fmdDpndd1KVLQWtpuHjmGCI+06d59MOWhULrHbAmeG/NRGHNdY2+bsQMxD/duUYkkCQOg8ss9eNsr1Z29sG9/Ycz6zvt3PBUuPRK0pPFZRJ9IqZBrAo3FKBxhX7FGGg3979NmkVTJQP+AbTRg62yA=;
-	4:U48qvCH/1se4L8Xuy4vj25n+aF9/NWdWdNCLpFS2vkMgHM0dFvfzXFaMNDI8Wzp6lQasWj4zqTbThIcpgl2PV/FNr4eEafPSjbvdH+Ey+FiuFHbCJ8owQQHUI6WwfUP2AGIwRyzFw3rzVsK/4XmZTjgB+UXeymeYDtfKZrpaL5TIA5ZCdbqDUMt+WShUFDSS99knfACXIbmvjez4FB+7B4kt+8v14p4yfBOm2vFKY29pitogZSAxBaM7X42Z6yk6qI8Vx/UVMQ8tn4COHzRA4oE4U8lKmtiMZP5BEsiecCLkVyc5YTavheTVTKTQYgY4Jj52HmYvALoI2Vkfr8Cnq3QlSUDWPM2YxfQMyBuu6Xk=
-X-Microsoft-Antispam-PRVS: <HE1PR01MB130559A2560F2D3A7AAB0FA4D68F0@HE1PR01MB1305.eurprd01.prod.exchangelabs.com>
-X-Exchange-Antispam-Report-Test: UriScan:(166708455590820)(264703809997249);
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(3002001)(3231232)(944501410)(52105095)(93006095)(93001095)(6041310)(20161123564045)(20161123562045)(20161123560045)(2016111802025)(20161123558120)(6072148)(6043046)(201708071742011);
-	SRVR:HE1PR01MB1305; BCL:0; PCL:0; RULEID:; SRVR:HE1PR01MB1305; 
-X-Forefront-PRVS: 06530126A4
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6069001)(376002)(366004)(346002)(396003)(39840400004)(39380400002)(199004)(189003)(2906002)(956004)(52146003)(106356001)(8936002)(31686004)(105586002)(16526019)(478600001)(6486002)(2870700001)(229853002)(6306002)(81156014)(8676002)(81166006)(966005)(6512007)(446003)(26005)(11346002)(3846002)(6666003)(52116002)(68736007)(316002)(2616005)(6916009)(486006)(67846002)(31696002)(2486003)(476003)(186003)(6116002)(23676004)(66066001)(65956001)(74482002)(47776003)(39060400002)(1720100001)(7736002)(25786009)(64126003)(76176011)(53936002)(86362001)(97736004)(6246003)(6506007)(386003)(50466002)(305945005)(58126008)(53546011)(65806001)(5660300001)(65826007)(4326008)(36756003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR01MB1305;
-	H:localhost.localdomain; FPR:; SPF:None; LANG:en;
-	PTR:InfoNoRecords; A:1; MX:1; 
-Received-SPF: None (protection.outlook.com: graphcore.ai does not designate
-	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtIRTFQUjAxTUIxMzA1OzIzOjB2ZzhsNDFWV2xDUmdvSHNlYWRtcXpyK2RK?=
-	=?utf-8?B?emt5MXN1RjRycFV2cGthVGh2akRJOERQODJtMTZiZ3hiUUhjaCtvWFpzbjhu?=
-	=?utf-8?B?VlJ4c3ErMGRvTGVzQTdIOUpuRnJIMXNFVUsvdC9PWDI5eGovSE5yY3R4NWZo?=
-	=?utf-8?B?OWxwT1NpcmgxSUFsT2N4eDFkY251dWtoYkVBNERLdlVxWUliMmNzc1BwZXZW?=
-	=?utf-8?B?Y1pxemN3anFnbFBBUWVaQmtmVm5lcU9CeWYwSkxhcHBnSHNsK05hM0VlVC83?=
-	=?utf-8?B?bHZwKzZyQ2Jtb2J0QldpbGN1RFRoVVFMN01rSWdsMjFkMUFXVmNkcEE4M2lI?=
-	=?utf-8?B?NlFnRiszT2J0eUVhY3A4eG5WcXhGSFBMeTJjbElhRWhoM29SSUpOT1ZIMTBu?=
-	=?utf-8?B?dzJHRDQzeHpkVUVPQk82SUdtcVNDN3NkNnFFdHRlSEUvOWZraEg2WGxMdGJW?=
-	=?utf-8?B?bUxUTmczRjdScSsvem1wbGlZZXAzRC85bEJUcWNvNHhiMUdQRVFjSVhWUStW?=
-	=?utf-8?B?alBoYVNzRFpWbjlFeEsvTjh1MFpZRjRXb1A4bGpOQlk1ZVUwUnVmSzBHdElm?=
-	=?utf-8?B?MHEzRzNQVkFjbUJIYUdHazVNckprYW10dDFYSUJWczdhSmxJVnpJcU0wSEkx?=
-	=?utf-8?B?a3grczF0OTBmRk1HeEFBaXNzYVZwUzFoempTWHJQNjF4KzNVdy8wWittUnJ3?=
-	=?utf-8?B?dWhvTjJlZmxJazQzZDNzYzEra0xNVVljTmZHM0tlYmtqRUdPdTQzcUVrMFFh?=
-	=?utf-8?B?NXhUNmdNTXBGeVIxa1dlWVk2cnBHUTdhdFAxOWkzNHh4blNOaFZ1V1E4dDZz?=
-	=?utf-8?B?N25DUkN2TEgzelV2VEEvdkJsTFBnOXlJWXhBL3Rhemo0SnlTU2ZUbWk5bU4z?=
-	=?utf-8?B?dW5KaENxV0NONmkvYW1ubm9EVHNIei9sbzR1aFJQenhHYjBvVk1mYlZvWEQ0?=
-	=?utf-8?B?MXY5U05vWUZQT0F1UmhZejV0bGw4TStPUkJZYTMrNXA3TUg0ZlQwYTdPbnpN?=
-	=?utf-8?B?M1RuNjdUclgraWMvZndzRG1TM1ZkVEFFYWFyTU94WTc4N1ExR2RLajE3TFhD?=
-	=?utf-8?B?cC8zU0dJUllwV0VGdzlVR2dFTXpyVzlsWkVQSGl2T0ZJL1RCOWVhODJQc0ky?=
-	=?utf-8?B?b1h2YWRhWkV5RHZsTkcyeVhnaDhLME1oQXJ2Tjlvd1k2Vndybko2YzdKUjFk?=
-	=?utf-8?B?My9kcWYxYTRWeW9qY2ZFUEl6QUNtY1FVZjcxOHp4QXJwNGVSbU84VzNvSS9L?=
-	=?utf-8?B?bVd6MVA4b2lFTjREaDREVm5McDhUNmZHWjZoQmFBRkxtVGZ1bzFLUW1LNkJR?=
-	=?utf-8?B?dHNud2dBY1RIclo0UklMR0hSanVVZnhiSVR1QWRSeS9rRkJDZENvc1BMazRw?=
-	=?utf-8?B?NlZtczk1bjFxbHF6SDJ1S1FROTdGK2QxQXozRmdGOXBqZHNqcEcrOTJGSWNY?=
-	=?utf-8?B?ZTZXYnBPK1hKZW5JeHlRYmY3OFNEMUNxamlMdzdLMEkvTkJHNlM5SkhCRDUz?=
-	=?utf-8?B?cGZvMnBnS0oxVWZPQlVHeFp0UDg0VERrbHhyRkR0cXE0YUJCVUVzL0RuT2k3?=
-	=?utf-8?B?aHh0RWM4Zmp1NytTMUMwN1ROSWt5WFViM1E2djI0dWFDUk1QazNFWWQxSU1M?=
-	=?utf-8?B?bTErYjN2WUxkcXpvRHRwL3BPZFd3U1pLNTBGU29PZ3lJVVp3Nm1EMWhjb0VM?=
-	=?utf-8?B?dFpqWjQvN3VzRi9NbWNpeEZWaVdjNmZDNGorMFVSclhVYlJkb1RWMjQ5Nklx?=
-	=?utf-8?B?TlpwOXlYL0lLYVVWeXYrMThOU2hJYXNVdlRGYzkzL3hWa25qVHIvZE0yRjhn?=
-	=?utf-8?B?OXZOT0duSTRtaVpXV2h5NUtXQjZxbTdEK1hLMmtjVHMwRURMbnBIOEdXSEZM?=
-	=?utf-8?B?TDlyRGtIVHNhL05ncFA0QVAyOFVVRFJ5U2h5blFQUkNRdFAwdWtORys3a1pE?=
-	=?utf-8?B?bjg5Z1N3dVVuNFg1dm1ObGtRUjJWVDRtN0ZLVHZodk12OVB4elhoMmxGaEZL?=
-	=?utf-8?B?SmVOWjFyQ1ZkcnFsckl0SHhLaTZ4Q2l1VEFwM1RCT2Z4VnkyYk4zbmVuamJR?=
-	=?utf-8?B?ZDNGUjgyYlNWc2t0S21HMFROaWRKc1RRbGhibW5WWlRKMy9FVXNoR3Q0cmgy?=
-	=?utf-8?B?VkE9PQ==?=
-X-Microsoft-Antispam-Message-Info: KeUOJnvFrx7NgVBaYHuExIwaxHueA32ZqHSoB8IEUdo82SXznG81G5pFAUWZ/NixcrkxT67MmKyWyWYXH/g7EOZbSAZOQufdyYxrCMUlzPY8JFDwaA7MNC1epMQJ4DCaTLZIxBglZTm1yvexRGeX/+806syctQugSaRepv9MqGt0ZjcTElfB+0YsLZeE+g1/
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR01MB1305;
-	6:isorjZhiS2IUJi+79Ll6jW+n/UUMVUBq9csylmLEH6d6gUST2Inbqpsl39nP6K4jXVU2d11Q7VO8UYRm4DAX+rWjf57s9d6nCvr7IKt05sOlSBIs8dKL25SkqEzwRZUYHZ1wbsMn4Shx23dbQ2X/3mZIKaxomBws3DTQn4cp72amUBmR08xVXQ6p2M1UhWoP/iWhMG8td1AlcpvqGhg8mmP03XQ5wMmICN7QdlK56LuRHghtLDKbfX8sHGEL1Bh8sjDodH2o0AxbdcBmarcolgaO7CV3ZUnU/u236AW7ART8yM2PrJqd64kc2SfXvbCDYG/Vz9kjqdATO3gLoGCju7i9t720zdD66BUEyZdETUkTZpDF2Ti1NhT7r2FgBtZWI0c/np5T+aMO9lV3roBdm4iAvW7ZxkLNAFA7OBANOMvuIlogvVZM+kMo15pJ/PYRVzmX0vSW1G5z1aCdyu1E7w==;
-	5:6/xWjlftZcvOi5lia6gqnpUSDpx3+h+hCxlriaQuxkKkmHJzJYY0EYxVK1dwSWuk1AGX9Cpb1eusDBQSc9xtV65XoyEqKusBQLdkgyEshplKNsGt/+xeudnX/vcnmcj3yyjZlo27/LD9nQG2UCipFKvQQgM4Qmi1DiWiY0PTky0=;
-	24:KDhdnyDIH0NdDP5dLD5rC1ynPGpvuNayJJ8YNE+AMQA15OO1ao31IxttgM1hF3k1PmRBQoOzRM3lfDwHWz1M7KyIgdC0yKkc9y9M3HCgJrc=
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR01MB1305;
-	7:AFK+uSPBMhJFcuo2Cj9B+dlPp7n5TsNcs/izcS0x7UfQI8VkiZFlE833RtftkSJGVVaH28D1G7kxK4QScEcrEms9Vdc1EitKSwEVkpkmwAPSJq1UbCKyMFC91W7HcTl+AbpDG2nu8trLZ4Ph09cas/ndZiuJWKAIJejmbJ3aPm4dlkpQPikBSquXPKEAT69y8SP+D3cfJ65Sdsi/y9Fu/65XRUgbvfi+4+dnrI9xvITd9SXftQu/lwDDWF2eneJZ
-X-MS-Office365-Filtering-Correlation-Id: 82b730a9-c3aa-4925-6134-08d5aa8ca5fd
-X-OriginatorOrg: graphcore.ai
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2018 09:12:19.6970 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82b730a9-c3aa-4925-6134-08d5aa8ca5fd
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 02150d85-5b54-47ec-a80d-98af327512f0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR01MB1305
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] rdma-core: add new recipe
+References: <mailman.1376.1524669461.1670.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.1376.1524669461.1670.openembedded-devel@lists.openembedded.org>
+From: Purushotham <purushtm1@gmail.com>
+Date: Wed, 25 Apr 2018 16:05:45 +0000
+Message-ID: <CADwT=Zo_hOb1eDPpFGgBN864ZLbSJ9FG8Vv90reT90QX3hicYQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Openembedded-devel Digest, Vol 141, Issue 95
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -121,82 +54,699 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Apr 2018 15:46:03 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 25 Apr 2018 16:05:57 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Khem Raj,
+On Wed, Apr 25, 2018, 8:47 PM <
+openembedded-devel-request@lists.openembedded.org> wrote:
 
-Thanks for your prompt review/response!
-
-On 04/24/2018 06:46 PM, Khem Raj wrote:
-> On Tue, Apr 24, 2018 at 2:13 AM, Wei Lin Guay <wguay@graphcore.ai> wrote:
->> RDMA core is the userspace components for the Linux Kernel's
->> InfiniBand/RoCE subsystem. This component contains the userspace
->> libraries for libibverbs (and its associated providers libraries),
->> librdmacm and libibumad. Besides, it also provides additional service
->> daemons such as ibacm and srp_daemon.
->>
->> Signed-off-by: Wei Lin Guay <wguay@graphcore.ai>
->> Reviewed-by: Harald Høeg <hhoeg@graphcore.ai>
->> ---
->>   .../recipes-support/rdma-core/rdma-core_17.bb      | 22 ++++++++++++++++++++++
->>   1 file changed, 22 insertions(+)
->>   create mode 100644 meta-networking/recipes-support/rdma-core/rdma-core_17.bb
->>
->> diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_17.bb b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
->> new file mode 100644
->> index 0000000..e45262a
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
->> @@ -0,0 +1,22 @@
->> +SUMMARY = "Userspace support for InfiniBand/RDMA verbs"
->> +DESCRIPTION = "This is the userspace components for the Linux Kernel's drivers Infiniband/RDMA subsystem."
->> +SECTION = "libs"
->> +
->> +DEPENDS = "libnl eudev"
-> is eudev a must ?
-
-It isn't, I will fix in v2.
-
+> Send Openembedded-devel mailing list submissions to
+>         openembedded-devel@lists.openembedded.org
 >
->> +RDEPENDS_${PN} = "bash perl"
->> +
->> +SRC_URI = "git://github.com/linux-rdma/rdma-core.git;protocol=http;rev=v${PV}"
-> Drop rev pointing to a tag. We need a hardcoded SHA
+> To subscribe or unsubscribe via the World Wide Web, visit
+>         http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> or, via email, send a message with subject or body 'help' to
+>         openembedded-devel-request@lists.openembedded.org
 >
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +LICENSE = "BSD"
-> it seems there are GPL-2.0 and MIT in play as well also this seems
-> more like BSD-2-Clause so
-> please make it specific.
-
-Thanks and noted. I will fix both comments above (change the LICENCE and remove the tag) in v2.
-
-Thanks,
-Wei Lin
-
+> You can reach the person managing the list at
+>         openembedded-devel-owner@lists.openembedded.org
 >
->> +LIC_FILES_CHKSUM = "file://COPYING.BSD_MIT;md5=4cef3f976a07850eb6d2e5d1ef945e6b"
->> +
->> +
->> +FILES_SOLIBSDEV = ""
->> +FILES_${PN} += "${libdir}/*"
->> +INSANE_SKIP_${PN} += "dev-so"
->> +
->> +inherit cmake
->> +
->> +OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
->> --
->> 2.9.3
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Openembedded-devel digest..."
+>
+>
+> Today's Topics:
+>
+>    1. [meta-java][PATCH] libecj-bootstrap-native: simplify build
+>       (Andr? Draszik)
+>    2. [meta-java][PATCH] classpath: harmonise -native and
+>       -initial-native recipes (Andr? Draszik)
+>    3. [meta-java][PATCH] docs: add bootstrap-flow.txt (Andr? Draszik)
+>    4. [meta-java][PATCH] openjdk-8: update aarch64 version to
+>       8u162b12 (Andr? Draszik)
+>    5. [meta-java][PATCH] openjdk-8: give downloaded files a more
+>       descriptive name (Andr? Draszik)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Wed, 25 Apr 2018 15:59:49 +0100
+> From: Andr? Draszik <git@andred.net>
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-java][PATCH] libecj-bootstrap-native: simplify
+>         build
+> Message-ID: <20180425145949.8524-1-git@andred.net>
+> Content-Type: text/plain; charset=UTF-8
+>
+> From: Andr? Draszik <andre.draszik@jci.com>
+>
+> Piping 'find' output into multiple files to re-read
+> them seems inelegant and is error prone - just use a
+> pipe with appropriate options instead.
+>
+> This avoids potential problems with funny file names,
+> and now also makes use of BB_NUMBER_THREADS to speed
+> up compilation.
+>
+> This is a better example to copy from now...
+>
+> Signed-off-by: Andr? Draszik <andre.draszik@jci.com>
+> ---
+>  recipes-core/ecj/libecj-bootstrap.inc | 25 +++++++------------------
+>  1 file changed, 7 insertions(+), 18 deletions(-)
+>
+> diff --git a/recipes-core/ecj/libecj-bootstrap.inc
+> b/recipes-core/ecj/libecj-bootstrap.inc
+> index 9350550..04425f4 100644
+> --- a/recipes-core/ecj/libecj-bootstrap.inc
+> +++ b/recipes-core/ecj/libecj-bootstrap.inc
+> @@ -17,13 +17,8 @@ JAR = "ecj-bootstrap-${PV}.jar"
+>
+>  do_unpackpost[dirs] = "${B}"
+>  do_unpackpost() {
+> -  if [ ! -d source ]; then
+> -    mkdir source
+> -  fi
+> -
+> -  if [ ! -d build ]; then
+> -    mkdir build
+> -  fi
+> +  mkdir -p source
+> +  mkdir -p build
+>
+>    # Remove crap.
+>    rm -f about.html build.xml
+> @@ -44,24 +39,18 @@ do_unpackpost() {
+>    cp -R source/org build/
+>
+>    # Remove source code and other stuff.
+> -  find build -name '*.java' -exec rm -f {} \;
+> -  find build -name '*.html' -exec rm -f {} \;
+> +  find build -depth \( -name '*.java' -o -name '*.html' \) -delete
+>  }
+>
+>  addtask unpackpost after do_unpack before do_patch
+>
+>  do_compile() {
+> -  find source -name '*.java' | LC_ALL=C sort > sourcefiles
+> -  split -l 25 sourcefiles ecj-sources.
+> -
+>    # Compiling in place is done because the sources contain
+>    # property files which need to be available at runtime.
+> -  for list in `find . -name 'ecj-sources.*'`; do
+> -      echo "building files in $list ...";
+> -      echo jikes-initial -d build -source 1.4 -sourcepath source `cat
+> $list`;
+> -      jikes-initial \
+> -                               -d build -source 1.4 -sourcepath source
+> `cat $list`;
+> -  done
+> +  find source -name '*.java' -print0 \
+> +    | LC_ALL=C sort -z \
+> +    | xargs -0 -n25 -P ${BB_NUMBER_THREADS} \
+> +        jikes-initial -d build -source 1.4 -sourcepath source
+>
+>    fastjar -c -C build . -f ${JAR}
+>  }
+> --
+> 2.16.2
+>
+>
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Wed, 25 Apr 2018 16:02:58 +0100
+> From: Andr? Draszik <git@andred.net>
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-java][PATCH] classpath: harmonise -native and
+>         -initial-native recipes
+> Message-ID: <20180425150258.8606-1-git@andred.net>
+> Content-Type: text/plain; charset=UTF-8
+>
+> From: Andr? Draszik <andre.draszik@jci.com>
+>
+> removing lots of code-duplication
+>
+> Signed-off-by: Andr? Draszik <andre.draszik@jci.com>
+> ---
+>  .../classpath/classpath-initial-native_0.93.bb     | 54
+> ++++++++++------------
+>  recipes-core/classpath/classpath-native.inc        | 25 +++++-----
+>  recipes-core/classpath/classpath-native_0.99.bb    | 31 ++++++-------
+>  3 files changed, 51 insertions(+), 59 deletions(-)
+>
+> diff --git a/recipes-core/classpath/classpath-initial-native_0.93.bb
+> b/recipes-core/classpath/classpath-initial-native_0.93.bb
+> index 0cfa693..51229ec 100644
+> --- a/recipes-core/classpath/classpath-initial-native_0.93.bb
+> +++ b/recipes-core/classpath/classpath-initial-native_0.93.bb
+> @@ -4,7 +4,6 @@
+>  require classpath-native.inc
+>
+>  DESCRIPTION="Java1.4-compatible GNU Classpath variant that is used as
+> bootclasspath for jikes-native."
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
+>  DEPENDS += "jikes-native"
+>
+>  PR = "${INC_PR}.2"
+> @@ -13,38 +12,35 @@ SRC_URI += " \
+>             file://autotools.patch \
+>             file://miscompilation.patch \
+>            "
+> +SRC_URI[md5sum] = "ffa9e9cac31c5acbf0ea9eff9efa923d"
+> +SRC_URI[sha256sum] =
+> "df2d093612abd23fe67e9409d89bb2a8e79b1664fe2b2da40e1c8ed693e32945"
+>
+> -EXTRA_OECONF = " \
+> -                --with-jikes=jikes \
+> -                --with-fastjar=fastjar \
+> -                --with-glibj \
+> -                --disable-Werror \
+> -                --disable-local-sockets \
+> -                --disable-alsa \
+> -                --disable-gconf-peer \
+> -                --disable-gtk-peer \
+> -                --disable-plugin \
+> -                --disable-dssi \
+> -                --disable-examples \
+> -
+> --with-glibj-dir=${STAGING_DATADIR_NATIVE}/classpath-initial \
+> -
+> --with-native-libdir=${STAGING_LIBDIR_NATIVE}/classpath-initial \
+> -                --includedir=${STAGING_INCDIR_NATIVE}/classpath-initial \
+> -                --with-vm=java \
+> -              "
+> +EXTRA_OECONF += "\
+> +    --with-jikes=jikes \
+> +    --with-fastjar=fastjar \
+> +    --disable-local-sockets \
+> +    --with-glibj-dir=${STAGING_DATADIR_NATIVE}/classpath-initial \
+> +    --with-native-libdir=${STAGING_LIBDIR_NATIVE}/classpath-initial \
+> +    --includedir=${STAGING_INCDIR_NATIVE}/classpath-initial \
+> +    --with-vm=java \
+> +"
+>
+>  # Ensure tools.zip is not installed at same path as classpath-native
+>  EXTRA_OEMAKE += "pkgdatadir=${STAGING_DATADIR_NATIVE}/classpath-initial"
+>
+> -# remove files clashing with classpath-native in sysroot
+>  do_install_append() {
+> -
+> -       for i in gappletviewer gjarsigner gkeytool gjar gnative2ascii
+> gserialver grmiregistry gtnameserv gorbd grmid
+> -       do
+> -               rm ${D}${bindir}/${i}
+> -       done
+> -       rm ${D}${libdir}/logging.properties
+> -       rm ${D}${libdir}/security/classpath.security
+> +    # remove files clashing with classpath-native in sysroot
+> +    rm \
+> +       ${D}${bindir}/gappletviewer \
+> +       ${D}${bindir}/gjarsigner \
+> +       ${D}${bindir}/gkeytool \
+> +       ${D}${bindir}/gjar \
+> +       ${D}${bindir}/gnative2ascii \
+> +       ${D}${bindir}/gserialver \
+> +       ${D}${bindir}/grmiregistry \
+> +       ${D}${bindir}/gtnameserv \
+> +       ${D}${bindir}/gorbd \
+> +       ${D}${bindir}/grmid \
+> +       ${D}${libdir}/logging.properties \
+> +       ${D}${libdir}/security/classpath.security
+>  }
+> -SRC_URI[md5sum] = "ffa9e9cac31c5acbf0ea9eff9efa923d"
+> -SRC_URI[sha256sum] =
+> "df2d093612abd23fe67e9409d89bb2a8e79b1664fe2b2da40e1c8ed693e32945"
+> -
+> diff --git a/recipes-core/classpath/classpath-native.inc
+> b/recipes-core/classpath/classpath-native.inc
+> index 6a56337..b1de458 100644
+> --- a/recipes-core/classpath/classpath-native.inc
+> +++ b/recipes-core/classpath/classpath-native.inc
+> @@ -1,6 +1,7 @@
+>  SUMMARY = "GNU Classpath standard Java libraries - For native
+> Java-dependent programs"
+>  HOMEPAGE = "http://www.gnu.org/software/classpath/"
+>  LICENSE = "GPL-2.0 & SAX-PD"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
+>
+>  DEPENDS = "fastjar-native zip-native"
+>
+> @@ -14,17 +15,13 @@ export JAVA="${STAGING_BINDIR_NATIVE}/java-initial"
+>  export JAVAC="${STAGING_BINDIR_NATIVE}/ecj-initial"
+>  export JAVACFLAGS="-nowarn"
+>
+> -EXTRA_OECONF = " \
+> -                --with-glibj \
+> -                --enable-local-sockets \
+> -                --disable-Werror \
+> -                --disable-alsa \
+> -                --disable-gconf-peer \
+> -                --disable-gtk-peer \
+> -                --disable-plugin \
+> -                --disable-dssi \
+> -                --disable-gjdoc \
+> -                --disable-examples \
+> -                --enable-tools \
+> -                --includedir=${STAGING_INCDIR}/classpath \
+> -               "
+> +EXTRA_OECONF = "\
+> +    --with-glibj \
+> +    --disable-Werror \
+> +    --disable-alsa \
+> +    --disable-gconf-peer \
+> +    --disable-gtk-peer \
+> +    --disable-plugin \
+> +    --disable-dssi \
+> +    --disable-examples \
+> +"
+> diff --git a/recipes-core/classpath/classpath-native_0.99.bb
+> b/recipes-core/classpath/classpath-native_0.99.bb
+> index a97cae0..a1e1e0f 100644
+> --- a/recipes-core/classpath/classpath-native_0.99.bb
+> +++ b/recipes-core/classpath/classpath-native_0.99.bb
+> @@ -1,6 +1,5 @@
+>  require classpath-native.inc
+>
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
+>  DEPENDS += "classpath-initial-native ecj-initial-native
+> virtual/java-initial-native"
+>
+>  PR = "${INC_PR}.0"
+> @@ -12,21 +11,21 @@ SRC_URI += " \
+>              file://miscompilation.patch \
+>              file://toolwrapper-exithook.patch \
+>             "
+> -
+> -# tools using java-initial rather than java sed it out
+> -do_compile_append () {
+> -
+> -       COMMANDS="gappletviewer gjarsigner gkeytool \
+> -                  gjar gnative2ascii gserialver grmiregistry \
+> -                  gtnameserv gorbd grmid grmic gjavah \
+> -                 "
+> -
+> -        for i in ${COMMANDS};
+> -        do
+> -                 sed -i -e "s/java-initial/java/g" tools/${i}
+> -        done
+> -}
+> -
+>  SRC_URI[md5sum] = "0ae1571249172acd82488724a3b8acb4"
+>  SRC_URI[sha256sum] =
+> "f929297f8ae9b613a1a167e231566861893260651d913ad9b6c11933895fecc8"
+>
+> +EXTRA_OECONF += "\
+> +    --enable-local-sockets \
+> +    --disable-gjdoc \
+> +    --enable-tools \
+> +    --includedir=${STAGING_INCDIR}/classpath \
+> +"
+> +
+> +do_compile_append () {
+> +    # tools using java-initial rather than java sed it out
+> +    cd tools
+> +    sed -e "s/java-initial/java/g" \
+> +        -i gappletviewer gjarsigner gkeytool \
+> +           gjar gnative2ascii gserialver grmiregistry \
+> +           gtnameserv gorbd grmid grmic gjavah
+> +}
+> --
+> 2.16.2
+>
+>
+>
+> ------------------------------
+>
+> Message: 3
+> Date: Wed, 25 Apr 2018 16:06:46 +0100
+> From: Andr? Draszik <git@andred.net>
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-java][PATCH] docs: add bootstrap-flow.txt
+> Message-ID: <20180425150646.9032-1-git@andred.net>
+> Content-Type: text/plain; charset=UTF-8
+>
+> From: Andr? Draszik <andre.draszik@jci.com>
+>
+> Summarises the bootstrap of the java envrionment, rather than having
+> to find this described in some wiki page that was copied over from
+> OE-classic and never updated.
+>
+> Signed-off-by: Andr? Draszik <andre.draszik@jci.com>
+> ---
+>  docs/bootstrap-flow.txt | 37 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 37 insertions(+)
+>  create mode 100644 docs/bootstrap-flow.txt
+>
+> diff --git a/docs/bootstrap-flow.txt b/docs/bootstrap-flow.txt
+> new file mode 100644
+> index 0000000..602eab7
+> --- /dev/null
+> +++ b/docs/bootstrap-flow.txt
+> @@ -0,0 +1,37 @@
+> +* first jikes-native is compiled
+> +  * a Java 1.4-capable compiler that does not need a runtime or
+> +    (strictly) a class library to work
+> +* jikes-initial-native is a wrapper around it
+> +
+> +* with this compiler we compile the initial (preliminary)
+> +  runtime (package virtual/java-initial-native)
+> +  * virtual/java-initial-native can be: cacao-initial-native (0.98)
+> +    or jamvm-initial-native (1.4.5)
+> +    * cacao is preferred, as it has a JIT, but doesn't compile
+> +      on all hosts
+> +    * cacao-initial-native and jamvm-initial-native both need
+> +      classpath-initial-native (0.93) and jikes-initial-native
+> +
+> +* now libecj-bootstrap-native is built
+> +  * this needs jikes-initial-native virtual/java-initial-native
+> +* now ecj-initial is built
+> +  * this needs libecj-bootstrap-native and
+> +    virtual/java-initial-native during runtime
+> +  * at that point we have a 1.5-capable compiler (ecj-initial)
+> +    running on a Java 1.4 compatible VM (cacao-inital-native
+> +    or jamvm-initial-native)
+> +
+> +* with this compiler (ecj-initial), we compile the final runtime
+> +  and compiler (virtual/java-native and virtual/javac-native)
+> +  * virtual/java-native can be: cacao-native (1.6.1) or
+> +    jamvm-native (2.0.0~pre)
+> +    * cacao vs jamvm as above
+> +    * cacao-native and jamvm-native both need
+> +      classpath-initial-native (0.93) and classpath-native (0.99)
+> +      and ecj-initial-native and virtual/java-initial-native
+> +  * virtual/javac-native can be: ecj-bootstrap-native
+> +    * ecj-bootstrap-native needs libecj-bootstrap-native
+> +      and virtual/java-native
+> +  * at that point we have a 1.5-capable compiler (ecj-bootstrap-native)
+> +    running on a Java 1.5 compatible VN (cacao-native or
+> +    jamvm-native)
+> --
+> 2.16.2
+>
+>
+>
+> ------------------------------
+>
+> Message: 4
+> Date: Wed, 25 Apr 2018 16:07:24 +0100
+> From: Andr? Draszik <git@andred.net>
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-java][PATCH] openjdk-8: update aarch64 version to
+>         8u162b12
+> Message-ID: <20180425150724.9102-1-git@andred.net>
+> Content-Type: text/plain; charset=UTF-8
+>
+> From: Andr? Draszik <andre.draszik@jci.com>
+>
+> Signed-off-by: Andr? Draszik <andre.draszik@jci.com>
+> ---
+>  recipes-core/openjdk/openjdk-8-release-161b15.inc  | 33
+> ----------------------
+>  .../openjdk/openjdk-8-release-162b12-aarch64.inc   | 33
+> ++++++++++++++++++++++
+>  recipes-core/openjdk/openjdk-8_16xbyy.bb           |  5 ++--
+>  recipes-core/openjdk/openjre-8_16xbyy.bb           |  5 ++--
+>  4 files changed, 39 insertions(+), 37 deletions(-)
+>  delete mode 100644 recipes-core/openjdk/openjdk-8-release-161b15.inc
+>  create mode 100644
+> recipes-core/openjdk/openjdk-8-release-162b12-aarch64.inc
+>
+> diff --git a/recipes-core/openjdk/openjdk-8-release-161b15.inc
+> b/recipes-core/openjdk/openjdk-8-release-161b15.inc
+> deleted file mode 100644
+> index 0a4434c..0000000
+> --- a/recipes-core/openjdk/openjdk-8-release-161b15.inc
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -require openjdk-8-release-16xbyy.inc
+> -
+> -CORBA_CHANGESET_aarch64 = "f73da600c483"
+> -SRC_URI[corba.md5sum] = "bf884b82fcc6de466946fcb87d24ebf3"
+> -SRC_URI[corba.sha256sum] =
+> "ebf73d96185fc05e502088ae89a8d6494c3971dd220458deeff3876f72396b6c"
+> -
+> -HOTSPOT_CHANGESET_aarch64 = "a600839824fa"
+> -SRC_URI[hotspot.md5sum] = "20c88ba26f8f45a2769f4edf32afd593"
+> -SRC_URI[hotspot.sha256sum] =
+> "6d0d1b9c2df3392ad6e21ca3eae39d06b50632a4a419da3d4363248943ea8b97"
+> -
+> -JAXP_CHANGESET_aarch64 = "b1e2af899046"
+> -SRC_URI[jaxp.md5sum] = "219582b26d7de2973b75f4329b53ec7d"
+> -SRC_URI[jaxp.sha256sum] =
+> "907cc4dfb01a3a2a6d74dfa90fa6fcb5b3df55600f41ba44dcdc94b47e85a382"
+> -
+> -JAXWS_CHANGESET_aarch64 = "0002ed323fe5"
+> -SRC_URI[jaxws.md5sum] = "44935b81e3405fcaef675d5d08c2149e"
+> -SRC_URI[jaxws.sha256sum] =
+> "0d1d52f1cf254a643ece1bd6cd8628fae1a4d56e8b59388cc9ad73b3caf151a1"
+> -
+> -JDK_CHANGESET_aarch64 = "c2ba2ed87d18"
+> -SRC_URI[jdk.md5sum] = "f4c0393a157dcb8b90ee7c7d80cbdfbf"
+> -SRC_URI[jdk.sha256sum] =
+> "c84a17451b47242f9d96bf431011607afc3776f285a6ad9a60190fba2d434c49"
+> -
+> -LANGTOOLS_CHANGESET_aarch64 = "cdb217c578cb"
+> -SRC_URI[langtools.md5sum] = "608cf07781259d916d1663d6a5ced26d"
+> -SRC_URI[langtools.sha256sum] =
+> "ad28e75bfaba1b64fdd02ea316db3ba3cba68007f90c5fa2be2418ce8bc0074d"
+> -
+> -NASHORN_CHANGESET_aarch64 = "505d0eb2fafe"
+> -SRC_URI[nashorn.md5sum] = "be981a6c55f9e602ff129fed65505a8c"
+> -SRC_URI[nashorn.sha256sum] =
+> "14419ccd773e1db83b600d05aca3cbac9f24be77abda9a132d12305d8821d6d7"
+> -
+> -OPENJDK_CHANGESET_aarch64 = "917454da25c1"
+> -SRC_URI[openjdk.md5sum] = "1e4b3eca032742b7448731f9b8fcb426"
+> -SRC_URI[openjdk.sha256sum] =
+> "1e17e2d8384a7b808a89b982e7c09c4feb8598b7a66b93697bfb8759c1005974"
+> diff --git a/recipes-core/openjdk/openjdk-8-release-162b12-aarch64.inc
+> b/recipes-core/openjdk/openjdk-8-release-162b12-aarch64.inc
+> new file mode 100644
+> index 0000000..ed3e957
+> --- /dev/null
+> +++ b/recipes-core/openjdk/openjdk-8-release-162b12-aarch64.inc
+> @@ -0,0 +1,33 @@
+> +require openjdk-8-release-16xbyy.inc
+> +
+> +CORBA_CHANGESET_aarch64 = "2c6daa746022"
+> +SRC_URI[corba.md5sum] = "2ca2413f1e6eaeb49b1c138c5cafcb30"
+> +SRC_URI[corba.sha256sum] =
+> "3ffcd358e45b4af5a62d9ac1c8abea2e33a9d25b34096084bc77349d846cf4f4"
+> +
+> +HOTSPOT_CHANGESET_aarch64 = "b08b1e9e2963"
+> +SRC_URI[hotspot.md5sum] = "bb632eba37ad0f54e0535c1e0ae3440c"
+> +SRC_URI[hotspot.sha256sum] =
+> "fcf8369ff8871dbee81de7a15432b625dd2c6dcfe43d2dd5194d9273de0fdbfc"
+> +
+> +JAXP_CHANGESET_aarch64 = "413640f7312d"
+> +SRC_URI[jaxp.md5sum] = "3232a514db9b7ed2ffbc9ebd69acb4fd"
+> +SRC_URI[jaxp.sha256sum] =
+> "05ed49cea8559bcbd2ef285c8cfcb0b2026aefb1178ec531f9c72e3918c97a9c"
+> +
+> +JAXWS_CHANGESET_aarch64 = "8b27752a1bbe"
+> +SRC_URI[jaxws.md5sum] = "6688b2d40a0c1d5edff1f5594b6ac7a0"
+> +SRC_URI[jaxws.sha256sum] =
+> "c818df20d14411af78654cb53cd7f87b1c5b42ed0158775869571a42f75f3c84"
+> +
+> +JDK_CHANGESET_aarch64 = "9944f808c91d"
+> +SRC_URI[jdk.md5sum] = "77b1caebd3d9b89af6ee8d57958334f8"
+> +SRC_URI[jdk.sha256sum] =
+> "d401a0611c90b52d08424d427cb43e81234dda46645a02d90531dbcbb9976b80"
+> +
+> +LANGTOOLS_CHANGESET_aarch64 = "7b393a96b373"
+> +SRC_URI[langtools.md5sum] = "11e7742f439070bfd697866ad6d1a535"
+> +SRC_URI[langtools.sha256sum] =
+> "bf85f6e224c4634a9f07eae7dd61786b68803bbf95b0cd022553c80abf457967"
+> +
+> +NASHORN_CHANGESET_aarch64 = "31efd519fdb3"
+> +SRC_URI[nashorn.md5sum] = "47c7267b6e3e3dc30fd18b4d87869c20"
+> +SRC_URI[nashorn.sha256sum] =
+> "bb8aa4e4d9cf5878dd56528b34002c69d3078adaa4de03e6715d6fd56dbf819d"
+> +
+> +OPENJDK_CHANGESET_aarch64 = "f8e58f4c29ae"
+> +SRC_URI[openjdk.md5sum] = "39cc58bdee52d8997d9674a7b4162935"
+> +SRC_URI[openjdk.sha256sum] =
+> "66fef9d2abfc8a6769fc6ae552891e984921c55312bf06937b2ce619dc97678f"
+> diff --git a/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> b/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> index dd0ed1d..0802078 100644
+> --- a/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> +++ b/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> @@ -1,7 +1,8 @@
+>  PV = "162b12"
+> -PV_aarch64 = "161b15"
+>
+> -require openjdk-8-release-${PV}.inc
+> +INC_FILE_SUFFIX = ""
+> +INC_FILE_SUFFIX_aarch64 = "-aarch64"
+> +require openjdk-8-release-${PV}${INC_FILE_SUFFIX}.inc
+>  require openjdk-8-cross.inc
+>
+>  do_install() {
+> diff --git a/recipes-core/openjdk/openjre-8_16xbyy.bb
+> b/recipes-core/openjdk/openjre-8_16xbyy.bb
+> index e6454ea..ab78339 100644
+> --- a/recipes-core/openjdk/openjre-8_16xbyy.bb
+> +++ b/recipes-core/openjdk/openjre-8_16xbyy.bb
+> @@ -1,7 +1,8 @@
+>  PV = "162b12"
+> -PV_aarch64 = "161b15"
+>
+> -require openjdk-8-release-${PV}.inc
+> +INC_FILE_SUFFIX = ""
+> +INC_FILE_SUFFIX_aarch64 = "-aarch64"
+> +require openjdk-8-release-${PV}${INC_FILE_SUFFIX}.inc
+>  require openjdk-8-cross.inc
+>
+>  do_install() {
+> --
+> 2.16.2
+>
+>
+>
+> ------------------------------
+>
+> Message: 5
+> Date: Wed, 25 Apr 2018 16:17:35 +0100
+> From: Andr? Draszik <git@andred.net>
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-java][PATCH] openjdk-8: give downloaded files a
+>         more    descriptive name
+> Message-ID: <20180425151735.9983-1-git@andred.net>
+> Content-Type: text/plain; charset=UTF-8
+>
+> From: Andr? Draszik <andre.draszik@jci.com>
+>
+> Rather than using the HG (mercurial) changeset IDs directly,
+> add a more descriptive part to the file name. This can help
+> with download cache management.
+>
+> Signed-off-by: Andr? Draszik <andre.draszik@jci.com>
+> ---
+>  recipes-core/openjdk/openjdk-8-common.inc         | 14 ++++++-------
+>  recipes-core/openjdk/openjdk-8-release-16xbyy.inc | 24
+> +++++++++++++++--------
+>  2 files changed, 23 insertions(+), 15 deletions(-)
+>
+> diff --git a/recipes-core/openjdk/openjdk-8-common.inc
+> b/recipes-core/openjdk/openjdk-8-common.inc
+> index d8b38f5..2c68462 100644
+> --- a/recipes-core/openjdk/openjdk-8-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-common.inc
+> @@ -30,13 +30,13 @@ SRC_URI = " \
+>  do_unpack_extract_submodules () {
+>      cd "${S}"
+>      # tar --transform
+> -    tar xjf ${WORKDIR}/${CORBA_FILE} --transform
+> "s,-${CORBA_CHANGESET},,g"
+> -    tar xjf ${WORKDIR}/${HOTSPOT_FILE} --transform
+> "s,-${HOTSPOT_CHANGESET},,g"
+> -    tar xjf ${WORKDIR}/${JAXP_FILE} --transform "s,-${JAXP_CHANGESET},,g"
+> -    tar xjf ${WORKDIR}/${JAXWS_FILE} --transform
+> "s,-${JAXWS_CHANGESET},,g"
+> -    tar xjf ${WORKDIR}/${JDK_FILE} --transform "s,-${JDK_CHANGESET},,g"
+> -    tar xjf ${WORKDIR}/${LANGTOOLS_FILE} --transform
+> "s,-${LANGTOOLS_CHANGESET},,g"
+> -    tar xjf ${WORKDIR}/${NASHORN_FILE} --transform
+> "s,-${NASHORN_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${CORBA_FILE_LOCAL} --transform
+> "s,-${CORBA_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${HOTSPOT_FILE_LOCAL} --transform
+> "s,-${HOTSPOT_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${JAXP_FILE_LOCAL} --transform
+> "s,-${JAXP_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${JAXWS_FILE_LOCAL} --transform
+> "s,-${JAXWS_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${JDK_FILE_LOCAL} --transform
+> "s,-${JDK_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${LANGTOOLS_FILE_LOCAL} --transform
+> "s,-${LANGTOOLS_CHANGESET},,g"
+> +    tar xjf ${WORKDIR}/${NASHORN_FILE_LOCAL} --transform
+> "s,-${NASHORN_CHANGESET},,g"
+>  }
+>
+>  do_unpack_remove_X11_wrappers() {
+> diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> index bd4a349..c1fcda4 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> @@ -64,25 +64,33 @@ OPENJDK_HG_U = "jdk8u"
+>  OPENJDK_HG_URL = "
+> http://hg.openjdk.java.net/${OPENJDK_ARCH_PORT}/${OPENJDK_HG_U}"
+>
+>  OPENJDK_FILE = "${OPENJDK_CHANGESET}.tar.bz2"
+> -OPENJDK_URI = "${OPENJDK_HG_URL}/archive/${OPENJDK_FILE};name=openjdk"
+> +OPENJDK_FILE_LOCAL = "openjdk8-${PV}-jdk8u-${OPENJDK_FILE}"
+> +OPENJDK_URI =
+> "${OPENJDK_HG_URL}/archive/${OPENJDK_FILE};downloadfilename=${OPENJDK_FILE_LOCAL};name=openjdk"
+>
+>  HOTSPOT_FILE = "${HOTSPOT_CHANGESET}.tar.bz2"
+> -HOTSPOT_URI =
+> "${OPENJDK_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=hotspot;unpack=false"
+> +HOTSPOT_FILE_LOCAL = "openjdk8-${PV}-hotspot-${HOTSPOT_FILE}"
+> +HOTSPOT_URI =
+> "${OPENJDK_HG_URL}/hotspot/archive/${HOTSPOT_FILE};downloadfilename=${HOTSPOT_FILE_LOCAL};name=hotspot;unpack=false"
+>
+>  CORBA_FILE = "${CORBA_CHANGESET}.tar.bz2"
+> -CORBA_URI =
+> "${OPENJDK_HG_URL}/corba/archive/${CORBA_FILE};name=corba;unpack=false"
+> +CORBA_FILE_LOCAL = "openjdk8-${PV}-corba-${CORBA_FILE}"
+> +CORBA_URI =
+> "${OPENJDK_HG_URL}/corba/archive/${CORBA_FILE};downloadfilename=${CORBA_FILE_LOCAL};name=corba;unpack=false"
+>
+>  JAXP_FILE = "${JAXP_CHANGESET}.tar.bz2"
+> -JAXP_URI =
+> "${OPENJDK_HG_URL}/jaxp/archive/${JAXP_FILE};name=jaxp;unpack=false"
+> +JAXP_FILE_LOCAL = "openjdk8-${PV}-jaxp-${JAXP_FILE}"
+> +JAXP_URI =
+> "${OPENJDK_HG_URL}/jaxp/archive/${JAXP_FILE};downloadfilename=${JAXP_FILE_LOCAL};name=jaxp;unpack=false"
+>
+>  JAXWS_FILE = "${JAXWS_CHANGESET}.tar.bz2"
+> -JAXWS_URI =
+> "${OPENJDK_HG_URL}/jaxws/archive/${JAXWS_FILE};name=jaxws;unpack=false"
+> +JAXWS_FILE_LOCAL = "openjdk8-${PV}-jaxws-${JAXWS_FILE}"
+> +JAXWS_URI =
+> "${OPENJDK_HG_URL}/jaxws/archive/${JAXWS_FILE};downloadfilename=${JAXWS_FILE_LOCAL};name=jaxws;unpack=false"
+>
+>  JDK_FILE = "${JDK_CHANGESET}.tar.bz2"
+> -JDK_URI =
+> "${OPENJDK_HG_URL}/jdk/archive/${JDK_FILE};name=jdk;unpack=false"
+> +JDK_FILE_LOCAL = "openjdk8-${PV}-jdk-${JDK_FILE}"
+> +JDK_URI =
+> "${OPENJDK_HG_URL}/jdk/archive/${JDK_FILE};downloadfilename=${JDK_FILE_LOCAL};name=jdk;unpack=false"
+>
+>  LANGTOOLS_FILE = "${LANGTOOLS_CHANGESET}.tar.bz2"
+> -LANGTOOLS_URI =
+> "${OPENJDK_HG_URL}/langtools/archive/${LANGTOOLS_FILE};name=langtools;unpack=false"
+> +LANGTOOLS_FILE_LOCAL = "openjdk8-${PV}-langtools-${LANGTOOLS_FILE}"
+> +LANGTOOLS_URI =
+> "${OPENJDK_HG_URL}/langtools/archive/${LANGTOOLS_FILE};downloadfilename=${LANGTOOLS_FILE_LOCAL};name=langtools;unpack=false"
+>
+>  NASHORN_FILE = "${NASHORN_CHANGESET}.tar.bz2"
+> -NASHORN_URI =
+> "${OPENJDK_HG_URL}/nashorn/archive/${NASHORN_FILE};name=nashorn;unpack=false"
+> +NASHORN_FILE_LOCAL = "openjdk8-${PV}-nashorn-${NASHORN_FILE}"
+> +NASHORN_URI =
+> "${OPENJDK_HG_URL}/nashorn/archive/${NASHORN_FILE};downloadfilename=${NASHORN_FILE_LOCAL};name=nashorn;unpack=false"
+> --
+> 2.16.2
+>
+>
+>
+> ------------------------------
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+> End of Openembedded-devel Digest, Vol 141, Issue 95
+> ***************************************************
+>
 
