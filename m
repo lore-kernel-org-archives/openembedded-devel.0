@@ -1,48 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id BF4D271C0F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Apr 2018 16:46:58 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id b5so11275534pgv.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Apr 2018 09:46:59 -0700 (PDT)
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AB163606A8
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Apr 2018 02:30:51 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id t123-v6so25126400iof.7
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Apr 2018 19:30:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=yFcN0RAfYkdVYz/yvXVsAe41GxPDtTSXcj66GTmwr4I=;
-	b=UK7Fr6QMeDb8KA1fMXyO7Yzsc4QhOxAziNcxJltVV2S3y76z6gwXJNqqdEt1r9WFRZ
-	2p3xcXLNLK7lcqBNYHjoAm7JO0sIRqYiqk/qRxP8k5ojjeWvohS6OE9abMg7cKurn1hJ
-	K0bByh1K7A+eMS40e0aWyc5YFGInSyFGQkOwJ0YEdvOG9MKgIfkGka7M5IoRqdkkrJ3w
-	LqNvLHcccW3IWdlYYDGC/wMpvoVW9avu7q5r9j/an4akms8j5z6JRY8jhVyVmy1y+GYm
-	xP8GRra46HiCI6m/DaMvnDy8wnNBpMNaHA3ctzbfsA0XcxmC0L6wJ/+xMSNKuuJdiGB4
-	H0kQ==
+	h=date:from:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=YN2qH9Q3rfCHwOYV43UchECGIC8S37MEkE9anXdoFWA=;
+	b=HDmwVGY7WeFx88oiDIGQhKNOcd8rw1+CJJaPbd3OJaRre6sSUknKPdj+aXtai903Ln
+	iJ+LgPWUVV8Z8d6MytoKHzPqPD1rPJ9bf4LOPWVZwZU4D6dLEyTIztsgHfuqlPsjtNtY
+	RmHRILCTppmzR/mfszolVSZpSYWSiRIlWuEGS1gw5I5+qaW4QVUQBVHrMKYThOhBg1qu
+	CMLAcCHgsgKUZMtL01g1m7cCmaZVi6fq/BoXDLCymKj4tLM32ohDRVZvlvBb0vp04u/T
+	kAZB9Mw4OrVKPMgLXAD988I1pNBpmFb5DEbEdz8jj4QzQDR8Xb95lyZuHrim56bEjLrG
+	Sjig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=yFcN0RAfYkdVYz/yvXVsAe41GxPDtTSXcj66GTmwr4I=;
-	b=r67C700XHwnfhTECPmHpAib5K1EgXiocjwsI3r+VGZVohkBgjwTiVGOZNnVjA63Eop
-	GbT2/TF9oYoUq8v3Ut6A8Nvfajj4YnwyrOApj8sUgf6uSfdbAEHh4xYm05UsoLlAHQe0
-	V59hhAJjVqC6PPLmRs5QMu6gx+KR0hRmVLuwLOzcsITOb1Ez5bNHFRJyMQtnm73UdyfO
-	h4gL6HotXfX3u5K+HwpwKJ1kjxFGlWQg61o/JkdRcSUo+cfXWfrdIu0YAsb0hbkaKvlQ
-	Tb/+i8UxxbwBO0x4e/vXwcwlla+rVs3ieWLTZ9ON5ND+JmgNu5md8a2dchXrPSD7RvEs
-	Upyg==
-X-Gm-Message-State: ALQs6tDI435/awFFZW+t+Vu2hTnKS0UMpmbVJZLk6J7fWFhT76OW+/ZU
-	Cn5KNDrwkK79b7e0AJ3VaBJOR/X2difXqEYi8OY=
-X-Google-Smtp-Source: AIpwx4+MzYqdTSyOg6Wy0/G3LHMEoYW6wTTeq+y5piLBa3nIxp6jsiEOJJt69rlf/IlJEi3GoJO5mbfe2ekySUAbNkU=
-X-Received: by 2002:a17:902:10c:: with SMTP id
-	12-v6mr25824603plb.252.1524588419571; 
-	Tue, 24 Apr 2018 09:46:59 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=YN2qH9Q3rfCHwOYV43UchECGIC8S37MEkE9anXdoFWA=;
+	b=XlSWD2Gzp8FDAPIZHvTOxtpdHcLz7UJH5q5BBGkOA2zVnwCdOtVP28BCf5bYE34FRR
+	b8tq2ATj2dw2erAbL+dfH1WptNIKAhixf7p9ZmVui/KHUDYlC2KI++qTCuJ3QYEx4Q3h
+	qCnwnBNQlQ0hAULGYGdGp9WZXIjc9PBO4CjoONa8gY6WEiuK2opYjymW9WuXDQ1Ftf80
+	QsEwWjhbVwxrTq4fUbZ9uILMcyvfPOHt+aSsYHmCxh/wCpFLhnves00IPEXy9KuGXyRF
+	N14QNZj/ASFx4HylVR/H4Tu283r2tv+m87T5XxSHmIWPr/trARHCPMn1iYULla8+s5dS
+	btBQ==
+X-Gm-Message-State: ALQs6tAV/dX0nZbCebxXeB4IzkbBV8PEL5KoP0q9sZ+HSbt9K6IZTGt3
+	sPLRE2WfLQBTkc8dJtPxXdj068gf
+X-Google-Smtp-Source: AB8JxZrZdAZ4pcFxdY6tLQWCtuYXuEocqadWnFSZYdPCfu0SYw/l7jmb6zMO1WSbuFCz3C/93WUzZw==
+X-Received: by 2002:a6b:80d5:: with SMTP id
+	k82-v6mr28274196ioi.253.1524623451568; 
+	Tue, 24 Apr 2018 19:30:51 -0700 (PDT)
+Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
+	q67-v6sm6349276ita.11.2018.04.24.19.30.50
+	for <Openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 24 Apr 2018 19:30:50 -0700 (PDT)
+Date: Tue, 24 Apr 2018 22:30:48 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: Openembedded-devel@lists.openembedded.org
+Message-ID: <20180425023048.GA27713@linux-uys3>
 MIME-Version: 1.0
-Received: by 10.100.145.72 with HTTP; Tue, 24 Apr 2018 09:46:29 -0700 (PDT)
-In-Reply-To: <20180424091305.44842-1-wguay@graphcore.ai>
-References: <20180424091305.44842-1-wguay@graphcore.ai>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Apr 2018 09:46:29 -0700
-Message-ID: <CAMKF1spJiPWuct+eX2iq+PC=EUmjaPRiH1YFhwgQgC7omSDCZA@mail.gmail.com>
-To: Wei Lin Guay <wguay@graphcore.ai>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] rdma-core: add new recipe
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: meta-bsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,75 +57,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Apr 2018 16:46:58 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Apr 2018 02:30:51 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Tue, Apr 24, 2018 at 2:13 AM, Wei Lin Guay <wguay@graphcore.ai> wrote:
-> RDMA core is the userspace components for the Linux Kernel's
-> InfiniBand/RoCE subsystem. This component contains the userspace
-> libraries for libibverbs (and its associated providers libraries),
-> librdmacm and libibumad. Besides, it also provides additional service
-> daemons such as ibacm and srp_daemon.
->
-> Signed-off-by: Wei Lin Guay <wguay@graphcore.ai>
-> Reviewed-by: Harald H=C3=B8eg <hhoeg@graphcore.ai>
-> ---
->  .../recipes-support/rdma-core/rdma-core_17.bb      | 22 ++++++++++++++++=
-++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-networking/recipes-support/rdma-core/rdma-core_1=
-7.bb
->
-> diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_17.bb b/=
-meta-networking/recipes-support/rdma-core/rdma-core_17.bb
-> new file mode 100644
-> index 0000000..e45262a
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "Userspace support for InfiniBand/RDMA verbs"
-> +DESCRIPTION =3D "This is the userspace components for the Linux Kernel's=
- drivers Infiniband/RDMA subsystem."
-> +SECTION =3D "libs"
-> +
-> +DEPENDS =3D "libnl eudev"
+Hi,
 
-is eudev a must ?
+I'm tempted to reply to RP's "2.6 planning proposals and meeting" email thread
+to ask if there could be some support added for common BSP things, but I have
+a feeling it probably won't go down well. Also, I've been trying to get some
+traction on https://bugzilla.yoctoproject.org/show_bug.cgi?id=11881 for a
+while (i.e. since last August), but no dice.
 
-> +RDEPENDS_${PN} =3D "bash perl"
-> +
-> +SRC_URI =3D "git://github.com/linux-rdma/rdma-core.git;protocol=3Dhttp;r=
-ev=3Dv${PV}"
+Basically, I believe there are a small number of basic, general things that
+many BSP layers could use (or need) and it'd be nice to see them available in
+one place so everyone could use them, instead of having everyone create their
+own, or copy+paste (I'm not sure which of those is worse).
 
-Drop rev pointing to a tag. We need a hardcoded SHA
+Bug 11881 is an example of one such thing, but others exist.
 
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +LICENSE =3D "BSD"
+Many embedded boards will come with repositories somewhere of that board's
+vendor kernel and vendor bootloader. Many BSP layers have recipes to make
+building with these repositories easier. However, we're seeing more and more
+boards getting upstream {kernel|u-boot} support. This means users are
+increasingly having a choice between using the vendor's repositories or
+upstream. But often the choice of bootloader, kernel, and graphics are tied
+together; if you want one, it means using or not using the others in specific
+combinations. Therefore it's not simply a matter of providing two kernel
+recipes and letting the user PREFERRED_PROVIDER_virtual/kernel one or the
+other. So bug 11881 points to a class (written by Otavio) that allows a BSP to
+offer different sets that the user then selects (either by doing nothing and
+selecting the default, or setting a one-liner in a configuration to choose the
+other).
 
-it seems there are GPL-2.0 and MIT in play as well also this seems
-more like BSD-2-Clause so
-please make it specific.
+Another example of something that might be useful to various BSP
+layers is a common recipe for the upstream linux kernel itself
+(git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git). Many BSP
+layers provide a vendor recipe and an upstream recipe, but I believe it would
+be better if the upstream recipe were common instead of requiring every BSP
+layer to keep theirs current. Maybe the same is true for linux-next or
+linux-stable?
 
-> +LIC_FILES_CHKSUM =3D "file://COPYING.BSD_MIT;md5=3D4cef3f976a07850eb6d2e=
-5d1ef945e6b"
-> +
-> +
-> +FILES_SOLIBSDEV =3D ""
-> +FILES_${PN} +=3D "${libdir}/*"
-> +INSANE_SKIP_${PN} +=3D "dev-so"
-> +
-> +inherit cmake
-> +
-> +OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM =3D "BOTH"
-> --
-> 2.9.3
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Also some common mali (or perhaps the upcoming lima) recipes might be nice?
+
+Since it seems unlikely I'll be able to convince openembedded-core to add
+these things, maybe meta-openembedded would be a better home?
+
+Best regards,
+	Trevor
 
