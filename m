@@ -1,49 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C79FE607DE
+Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 358827450B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2018 17:00:12 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id m21so13364891pgv.8
+	Thu, 26 Apr 2018 17:00:13 +0000 (UTC)
+Received: by mail-pf0-f182.google.com with SMTP id p12so2868641pff.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2018 10:00:14 -0700 (PDT)
+	Thu, 26 Apr 2018 10:00:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=+tWefrvTIxpG0o00j+fniiTEEiaZvECanjyQ+4bVTgE=;
-	b=KN6KSk3llLlOKFsfro98WjyPI9Z+Db1cFUymcfWv9YOlmLAzdJDIWtBExPbL1xfvfE
-	eSX0lrSmxcsjVSmsIptqpRpLwFxc/UFDxEEQBJjJbxBTSClZKnKBOQFwEHNz8aNoCUAk
-	NmyDBl0/YJ15Wi/MMGBkY7eatlaUxWPioRaDlUkBLNfrg2ukBp7H93KqDcz4EDncbow3
-	PGFx8qdhIm1WylkJ+CnJG3yQi/BhbOhUW1M0/Bzo8Gb+431AEA0fAPujPJlBxmhvHLcp
-	fk8onf3AlNL4UGgLoxM4R7+qYwqkljyUetJvJKaMPTKqyhNKB4fJpLy1J1QdnVQ6o/tk
-	HoiQ==
+	bh=80tdf14iB0COYHZJrQSEnTzQyyj6QKz5sbfJ/L6QqKE=;
+	b=Q2urpTxVZHjjgkuFTFMpVEzSnBBVIZdEpjzJ5XqDeXQHKv2joJQUR5uqEmbldeoseC
+	vnGHDPHo7KuiHPlyWeAJP2hlmAnuP/mrs6+b8cXWeCzJqU0QzzwHvreZUWRIfw0Gj44M
+	h/v032qKOsbo3TzCZU+k2KtSsDqlxVO9FqKzX0uQ7FSl3016iZ4NLaTi6ia6kdT2jM7D
+	vzNCxw8SDM8s4GO3YEDGDfMmwM0P32j2verS7lRPV+hyseY1CkXBp6RC2m7hM9ZUqL5g
+	Kjt/E1IsAJ6UdmtYc33cvj/+f7PcH0tYMxxz02Gg8p9iAgaBE7Uq8Sm9HskwupSziuXD
+	TGTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=+tWefrvTIxpG0o00j+fniiTEEiaZvECanjyQ+4bVTgE=;
-	b=NcZBmdMs6ytK7DEhlpsR2UMBDlzUbjnrrbZ7HgUdzyvN+/99MAin0bhBVIuIsIZZKE
-	FJ6fl33hUb8I0bNdOBkhQ0GKeFaUrUFPCdpOs9PF5HAxbZkx79H1Sn9A4sQu/DRHRI3/
-	wfzRetcw2xYPcLo7golBdtnspi6GmRVpCzOHXQTVelQ1aol6xOhl1CiADVV6xUx4ayd7
-	L1rAlwcB0SDypklf/A9K4kikn5dcLySw09xMx17w0kvcGIPb9CE1OeT4TiyTZwEzWeTs
-	/PN3qKIqUKPOWdcN0JnCYyL8iemNgDEcHVt/jI6dO0fNnsQbNiWwLtTG1Seuu0aPZ8Ed
-	38Jg==
-X-Gm-Message-State: ALQs6tDteFKv6qbvGsfQnXNeX6x/fZlG/qkjTqy6lxrTgxG9kP7Nzb+D
-	u+eMW6ly/rF1Ih24YINHMo+NBw==
-X-Google-Smtp-Source: AB8JxZoJ9U2J/mmeqmd85XUgmY6wMzC/cfrrHtpHEa2A8XitEPbslBhGfafdlTKNXEUdi/R1Fgk56g==
-X-Received: by 10.167.133.131 with SMTP id w3mr13190333pfn.197.1524762013368; 
-	Thu, 26 Apr 2018 10:00:13 -0700 (PDT)
+	bh=80tdf14iB0COYHZJrQSEnTzQyyj6QKz5sbfJ/L6QqKE=;
+	b=txjJ20YljLbW5Qb0GfJ/b6uPaQMwWk2zJC4xAU+D+uAMLQxjVrsCPrUmCFD4ykW1Ge
+	OvVdeT9OKGGVpkGEbFNVAarikORiPGvnWYLQrBo6OYF5puSzhlS85WRhwXXQ62SPtgpJ
+	/ezbTex1vMRfa3wU4jrPh+C0ygVWPRhZ5PVge6eToBRlybMd4B5rouPCjUWS8uErz17q
+	fM73o5c2AX0CiorY4qx+WNwlEkJuobP3OQ65GW/XhpgUBb9B6GFIa24p8r62/GtYIgJ3
+	SfagYo8ai83L0fP7ClYsfn8NH94CT00geA0GumaKjAvfq0/LbQXEyx0RvB0LYudSykoJ
+	TSuw==
+X-Gm-Message-State: ALQs6tBYvr86PqSVeIwfLM2fGriXb43zdLBCppMTE/LaK5+HbIgtFO+w
+	Cdt18VKWJGcGbSOWiKlkCoT7LA==
+X-Google-Smtp-Source: AIpwx4/kl13ndwfNhWKGnU58Xk8YgZP8ZjkiXhCbore+MHVR0LWgskh6Db4dO/WxuY1PS5SWpIzATw==
+X-Received: by 2002:a17:902:4483:: with SMTP id
+	l3-v6mr35050407pld.282.1524762014502; 
+	Thu, 26 Apr 2018 10:00:14 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8880:466c::ddd5])
 	by smtp.gmail.com with ESMTPSA id
-	w134sm41690845pfd.132.2018.04.26.10.00.12
+	w134sm41690845pfd.132.2018.04.26.10.00.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 26 Apr 2018 10:00:12 -0700 (PDT)
+	Thu, 26 Apr 2018 10:00:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Apr 2018 10:00:03 -0700
-Message-Id: <20180426170004.20602-3-raj.khem@gmail.com>
+Date: Thu, 26 Apr 2018 10:00:04 -0700
+Message-Id: <20180426170004.20602-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180426170004.20602-1-raj.khem@gmail.com>
 References: <20180426170004.20602-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 3/4] lftp: Upgrade to 4.8.3
+Subject: [meta-oe][PATCH 4/4] libyui: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,53 +58,720 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2018 17:00:13 -0000
-
-Drop libidn packageconfig, this is no more an option in configure.ac
-Package the icon files
+X-List-Received-Date: Thu, 26 Apr 2018 17:00:14 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../lftp/{lftp_4.7.7.bb => lftp_4.8.3.bb}                | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
- rename meta-networking/recipes-connectivity/lftp/{lftp_4.7.7.bb => lftp_4.8.3.bb} (81%)
+ .../libyui/0001-Fix-build-with-clang.patch    | 687 ++++++++++++++++++
+ meta-oe/recipes-graphics/libyui/libyui_git.bb |   1 +
+ 2 files changed, 688 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libyui/libyui/0001-Fix-build-with-clang.patch
 
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
-similarity index 81%
-rename from meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
-rename to meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
-index b6b65da73..08d89b8c5 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
-@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
-            file://fix-gcc-6-conflicts-signbit.patch \
-           "
--SRC_URI[md5sum] = "3701e7675baa5619c92622eb141c8301"
--SRC_URI[sha256sum] = "fe441f20a9a317cfb99a8b8e628ba0457df472b6d93964d17374d5b5ebdf9280"
-+SRC_URI[md5sum] = "12b1fcbf13f41e9cdb0903fc670fa1f1"
-+SRC_URI[sha256sum] = "c4159f056afee41866a6c2d639655bc351e6d3486bbe7758eaedb24f6a4239d5"
+diff --git a/meta-oe/recipes-graphics/libyui/libyui/0001-Fix-build-with-clang.patch b/meta-oe/recipes-graphics/libyui/libyui/0001-Fix-build-with-clang.patch
+new file mode 100644
+index 000000000..426901819
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libyui/libyui/0001-Fix-build-with-clang.patch
+@@ -0,0 +1,687 @@
++From 18562671982ad97549bccb444fdbb5905b6e9335 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 24 Apr 2018 15:06:14 -0700
++Subject: [PATCH] Fix build with clang
++
++Fix warnings found with clang
++
++error: class 'YButtonBoxPrivate' was previously declared as a struct [-Werror,-Wmismatched-tags]
++|     friend class YButtonBoxPrivate;
++
++YTimezoneSelector.cc:35:9: error: private field 'dummy' is not used [-Werror,-Wunused-private-field]
++   bool dummy;
++        ^
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Submitted [https://github.com/libyui/libyui/pull/123]
++
++ src/YAlignment.h          | 2 +-
++ src/YBarGraph.h           | 2 +-
++ src/YBusyIndicator.h      | 2 +-
++ src/YButtonBox.h          | 4 ++--
++ src/YCheckBox.h           | 2 +-
++ src/YCheckBoxFrame.h      | 2 +-
++ src/YComboBox.h           | 2 +-
++ src/YCommandLine.h        | 2 +-
++ src/YContextMenu.h        | 2 +-
++ src/YDateField.h          | 2 +-
++ src/YDialog.h             | 2 +-
++ src/YDownloadProgress.h   | 2 +-
++ src/YDumbTab.h            | 2 +-
++ src/YEmpty.h              | 2 +-
++ src/YEventFilter.h        | 2 +-
++ src/YFrame.h              | 2 +-
++ src/YGraph.h              | 2 +-
++ src/YImage.h              | 2 +-
++ src/YInputField.h         | 2 +-
++ src/YIntField.h           | 2 +-
++ src/YLabel.h              | 2 +-
++ src/YLayoutBox.h          | 2 +-
++ src/YLogView.h            | 2 +-
++ src/YMenuButton.h         | 2 +-
++ src/YMultiLineEdit.h      | 2 +-
++ src/YMultiProgressMeter.h | 2 +-
++ src/YMultiSelectionBox.h  | 2 +-
++ src/YPartitionSplitter.h  | 2 +-
++ src/YProgressBar.h        | 2 +-
++ src/YPushButton.h         | 2 +-
++ src/YRadioButton.h        | 2 +-
++ src/YRadioButtonGroup.h   | 2 +-
++ src/YRichText.h           | 2 +-
++ src/YSelectionBox.h       | 2 +-
++ src/YSelectionWidget.h    | 2 +-
++ src/YSimpleInputField.h   | 2 +-
++ src/YSlider.h             | 2 +-
++ src/YSpacing.h            | 2 +-
++ src/YSquash.h             | 2 +-
++ src/YTable.h              | 2 +-
++ src/YTableHeader.h        | 2 +-
++ src/YTimeField.h          | 2 +-
++ src/YTimezoneSelector.cc  | 2 +-
++ src/YTree.h               | 2 +-
++ src/YUILog.h              | 2 +-
++ src/YWidget.h             | 2 +-
++ src/YWizard.h             | 2 +-
++ 47 files changed, 48 insertions(+), 48 deletions(-)
++
++diff --git a/src/YAlignment.h b/src/YAlignment.h
++index d716c77..7276944 100644
++--- a/src/YAlignment.h
+++++ b/src/YAlignment.h
++@@ -28,7 +28,7 @@
++ #include "YSingleChildContainerWidget.h"
++ 
++ 
++-class YAlignmentPrivate;
+++struct YAlignmentPrivate;
++ 
++ /**
++  * Implementation of all the alignment widgets:
++diff --git a/src/YBarGraph.h b/src/YBarGraph.h
++index 29f7f26..d7eaad2 100644
++--- a/src/YBarGraph.h
+++++ b/src/YBarGraph.h
++@@ -29,7 +29,7 @@
++ #include "YColor.h"
++ 
++ 
++-class YBarGraphPrivate;
+++struct YBarGraphPrivate;
++ class YBarGraphSegment;
++ 
++ /**
++diff --git a/src/YBusyIndicator.h b/src/YBusyIndicator.h
++index 9530fa5..75297d8 100644
++--- a/src/YBusyIndicator.h
+++++ b/src/YBusyIndicator.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YBusyIndicatorPrivate;
+++struct YBusyIndicatorPrivate;
++ 
++ 
++ /**
++diff --git a/src/YButtonBox.h b/src/YButtonBox.h
++index 84f8dbb..ca51f57 100644
++--- a/src/YButtonBox.h
+++++ b/src/YButtonBox.h
++@@ -30,7 +30,7 @@
++ #include "YWidget.h"
++ #include "YPushButton.h"
++ 
++-class YButtonBoxPrivate;
+++struct YButtonBoxPrivate;
++ class YPushButton;
++ 
++ 
++@@ -147,7 +147,7 @@ struct YButtonBoxMargins
++  **/
++ class YButtonBox : public YWidget
++ {
++-    friend class YButtonBoxPrivate;
+++    friend struct YButtonBoxPrivate;
++ 
++ protected:
++     /**
++diff --git a/src/YCheckBox.h b/src/YCheckBox.h
++index 793cc77..03f3faa 100644
++--- a/src/YCheckBox.h
+++++ b/src/YCheckBox.h
++@@ -30,7 +30,7 @@
++ #include "YWidget.h"
++ #include "ImplPtr.h"
++ 
++-class YCheckBoxPrivate;
+++struct YCheckBoxPrivate;
++ 
++ enum YCheckBoxState
++ {
++diff --git a/src/YCheckBoxFrame.h b/src/YCheckBoxFrame.h
++index 243f1a0..7017110 100644
++--- a/src/YCheckBoxFrame.h
+++++ b/src/YCheckBoxFrame.h
++@@ -29,7 +29,7 @@
++ #include "YSingleChildContainerWidget.h"
++ #include "ImplPtr.h"
++ 
++-class YCheckBoxFramePrivate;
+++struct YCheckBoxFramePrivate;
++ 
++ 
++ /**
++diff --git a/src/YComboBox.h b/src/YComboBox.h
++index 416359a..ad0e550 100644
++--- a/src/YComboBox.h
+++++ b/src/YComboBox.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YSelectionWidget.h"
++ 
++-class YComboBoxPrivate;
+++struct YComboBoxPrivate;
++ 
++ 
++ /**
++diff --git a/src/YCommandLine.h b/src/YCommandLine.h
++index 70cb4fe..f344a3b 100644
++--- a/src/YCommandLine.h
+++++ b/src/YCommandLine.h
++@@ -28,7 +28,7 @@
++ #include <string>
++ #include "ImplPtr.h"
++ 
++-class YCommandLinePrivate;
+++struct YCommandLinePrivate;
++ 
++ 
++ /**
++diff --git a/src/YContextMenu.h b/src/YContextMenu.h
++index a4acb1c..1253002 100644
++--- a/src/YContextMenu.h
+++++ b/src/YContextMenu.h
++@@ -29,7 +29,7 @@
++ #include "YMenuItem.h"
++ 
++ class YMenuItem;
++-class YContextMenuPrivate;
+++struct YContextMenuPrivate;
++ 
++ 
++ /**
++diff --git a/src/YDateField.h b/src/YDateField.h
++index e5a468d..6164fba 100644
++--- a/src/YDateField.h
+++++ b/src/YDateField.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YSimpleInputField.h"
++ 
++-class YDateFieldPrivate;
+++struct YDateFieldPrivate;
++ 
++ /**
++  * Input field for entering a date.
++diff --git a/src/YDialog.h b/src/YDialog.h
++index 66c25c0..371209b 100644
++--- a/src/YDialog.h
+++++ b/src/YDialog.h
++@@ -32,7 +32,7 @@
++ 
++ class YShortcutManager;
++ class YPushButton;
++-class YDialogPrivate;
+++struct YDialogPrivate;
++ class YEvent;
++ class YEventFilter;
++ 
++diff --git a/src/YDownloadProgress.h b/src/YDownloadProgress.h
++index c47ec4f..fe09a9d 100644
++--- a/src/YDownloadProgress.h
+++++ b/src/YDownloadProgress.h
++@@ -28,7 +28,7 @@
++ #include "YWidget.h"
++ 
++ 
++-class YDownloadProgressPrivate;
+++struct YDownloadProgressPrivate;
++ 
++ /**
++  * DownloadProgress: A progress bar that monitors downloading a file by
++diff --git a/src/YDumbTab.h b/src/YDumbTab.h
++index aec17a3..f8fb250 100644
++--- a/src/YDumbTab.h
+++++ b/src/YDumbTab.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YSelectionWidget.h"
++ 
++-class YDumbTabPrivate;
+++struct YDumbTabPrivate;
++ 
++ /**
++  * DumbTab: A very simple tab widget that can display and switch between a
++diff --git a/src/YEmpty.h b/src/YEmpty.h
++index 9a3cb36..9b88fbc 100644
++--- a/src/YEmpty.h
+++++ b/src/YEmpty.h
++@@ -29,7 +29,7 @@
++ #include "ImplPtr.h"
++ 
++ 
++-class YEmptyPrivate;
+++struct YEmptyPrivate;
++ 
++ /**
++  * A widget with zero size, useful as a placeholder.
++diff --git a/src/YEventFilter.h b/src/YEventFilter.h
++index 3dc1803..74aa62d 100644
++--- a/src/YEventFilter.h
+++++ b/src/YEventFilter.h
++@@ -32,7 +32,7 @@
++ class YEvent;
++ class YDialog;
++ 
++-class YEventFilterPrivate;
+++struct YEventFilterPrivate;
++ 
++ 
++ /**
++diff --git a/src/YFrame.h b/src/YFrame.h
++index 111e8ec..4f8c61e 100644
++--- a/src/YFrame.h
+++++ b/src/YFrame.h
++@@ -29,7 +29,7 @@
++ #include "YSingleChildContainerWidget.h"
++ #include "ImplPtr.h"
++ 
++-class YFramePrivate;
+++struct YFramePrivate;
++ 
++ 
++ /**
++diff --git a/src/YGraph.h b/src/YGraph.h
++index d90d1ae..287d800 100644
++--- a/src/YGraph.h
+++++ b/src/YGraph.h
++@@ -37,7 +37,7 @@
++  * For that reason a lot of functions simply take a void* instead of graph_t*.
++  */
++ 
++-class YGraphPrivate;
+++struct YGraphPrivate;
++ 
++ /**
++  * A graph with nodes and edges, rendered with Graphviz.
++diff --git a/src/YImage.h b/src/YImage.h
++index 17bea21..84eb674 100644
++--- a/src/YImage.h
+++++ b/src/YImage.h
++@@ -29,7 +29,7 @@
++ #include <string>
++ 
++ 
++-class YImagePrivate;
+++struct YImagePrivate;
++ 
++ /**
++  * A picture, possibly animated, loaded from a file.
++diff --git a/src/YInputField.h b/src/YInputField.h
++index 70641ce..fa29b42 100644
++--- a/src/YInputField.h
+++++ b/src/YInputField.h
++@@ -28,7 +28,7 @@
++ #include <string>
++ #include "YWidget.h"
++ 
++-class YInputFieldPrivate;
+++struct YInputFieldPrivate;
++ 
++ 
++ 
++diff --git a/src/YIntField.h b/src/YIntField.h
++index 9da0537..8ad2949 100644
++--- a/src/YIntField.h
+++++ b/src/YIntField.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YIntFieldPrivate;
+++struct YIntFieldPrivate;
++ 
++ 
++ 
++diff --git a/src/YLabel.h b/src/YLabel.h
++index d2fff61..bf06d8b 100644
++--- a/src/YLabel.h
+++++ b/src/YLabel.h
++@@ -30,7 +30,7 @@
++ #include "ImplPtr.h"
++ 
++ 
++-class YLabelPrivate;
+++struct YLabelPrivate;
++ 
++ /**
++  * Implementation of the Label, Heading and OutputField widgets
++diff --git a/src/YLayoutBox.h b/src/YLayoutBox.h
++index e652a45..070eaff 100644
++--- a/src/YLayoutBox.h
+++++ b/src/YLayoutBox.h
++@@ -29,7 +29,7 @@
++ #include "YWidget.h"
++ 
++ 
++-class YLayoutBoxPrivate;
+++struct YLayoutBoxPrivate;
++ 
++ /**
++  * A vertical or horizontal stacking of widgets, implementing HBox and VBox.
++diff --git a/src/YLogView.h b/src/YLogView.h
++index 53fb9ee..5b44229 100644
++--- a/src/YLogView.h
+++++ b/src/YLogView.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YLogViewPrivate;
+++struct YLogViewPrivate;
++ 
++ 
++ /**
++diff --git a/src/YMenuButton.h b/src/YMenuButton.h
++index 205e730..5df7efb 100644
++--- a/src/YMenuButton.h
+++++ b/src/YMenuButton.h
++@@ -29,7 +29,7 @@
++ #include "YMenuItem.h"
++ 
++ class YMenuItem;
++-class YMenuButtonPrivate;
+++struct YMenuButtonPrivate;
++ 
++ 
++ /**
++diff --git a/src/YMultiLineEdit.h b/src/YMultiLineEdit.h
++index c52a6ae..1f792f8 100644
++--- a/src/YMultiLineEdit.h
+++++ b/src/YMultiLineEdit.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YMultiLineEditPrivate;
+++struct YMultiLineEditPrivate;
++ 
++ /**
++  * A multi-line plain-text area
++diff --git a/src/YMultiProgressMeter.h b/src/YMultiProgressMeter.h
++index 57c758d..f6bec91 100644
++--- a/src/YMultiProgressMeter.h
+++++ b/src/YMultiProgressMeter.h
++@@ -28,7 +28,7 @@
++ #include "YWidget.h"
++ #include <vector>
++ 
++-class YMultiProgressMeterPrivate;
+++struct YMultiProgressMeterPrivate;
++ 
++ 
++ /**
++diff --git a/src/YMultiSelectionBox.h b/src/YMultiSelectionBox.h
++index bbe5a20..f3a2947 100644
++--- a/src/YMultiSelectionBox.h
+++++ b/src/YMultiSelectionBox.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YSelectionWidget.h"
++ 
++-class YMultiSelectionBoxPrivate;
+++struct YMultiSelectionBoxPrivate;
++ 
++ 
++ /**
++diff --git a/src/YPartitionSplitter.h b/src/YPartitionSplitter.h
++index 2839bbc..9de1174 100644
++--- a/src/YPartitionSplitter.h
+++++ b/src/YPartitionSplitter.h
++@@ -28,7 +28,7 @@
++ #include "YWidget.h"
++ 
++ 
++-class YPartitionSplitterPrivate;
+++struct YPartitionSplitterPrivate;
++ 
++ 
++ /**
++diff --git a/src/YProgressBar.h b/src/YProgressBar.h
++index 718352f..baab662 100644
++--- a/src/YProgressBar.h
+++++ b/src/YProgressBar.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YProgressBarPrivate;
+++struct YProgressBarPrivate;
++ 
++ 
++ /**
++diff --git a/src/YPushButton.h b/src/YPushButton.h
++index 5b65c98..e288252 100644
++--- a/src/YPushButton.h
+++++ b/src/YPushButton.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YPushButtonPrivate;
+++struct YPushButtonPrivate;
++ 
++ 
++ 
++diff --git a/src/YRadioButton.h b/src/YRadioButton.h
++index 9dc62de..5a7c0dd 100644
++--- a/src/YRadioButton.h
+++++ b/src/YRadioButton.h
++@@ -28,7 +28,7 @@
++ #include "YWidget.h"
++ 
++ class YRadioButtonGroup;
++-class YRadioButtonPrivate;
+++struct YRadioButtonPrivate;
++ 
++ 
++ /**
++diff --git a/src/YRadioButtonGroup.h b/src/YRadioButtonGroup.h
++index 063a52e..671a257 100644
++--- a/src/YRadioButtonGroup.h
+++++ b/src/YRadioButtonGroup.h
++@@ -28,7 +28,7 @@
++ #include "YSingleChildContainerWidget.h"
++ 
++ class YRadioButton;
++-class YRadioButtonGroupPrivate;
+++struct YRadioButtonGroupPrivate;
++ 
++ typedef std::list<YRadioButton *> 		YRadioButtonList;
++ typedef YRadioButtonList::iterator		YRadioButtonListIterator;
++diff --git a/src/YRichText.h b/src/YRichText.h
++index 149bfb3..86b3f80 100644
++--- a/src/YRichText.h
+++++ b/src/YRichText.h
++@@ -30,7 +30,7 @@
++ #include "ImplPtr.h"
++ 
++ 
++-class YRichTextPrivate;
+++struct YRichTextPrivate;
++ 
++ 
++ /**
++diff --git a/src/YSelectionBox.h b/src/YSelectionBox.h
++index 7fc4fb8..9bbf9f3 100644
++--- a/src/YSelectionBox.h
+++++ b/src/YSelectionBox.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YSelectionWidget.h"
++ 
++-class YSelectionBoxPrivate;
+++struct YSelectionBoxPrivate;
++ 
++ 
++ /**
++diff --git a/src/YSelectionWidget.h b/src/YSelectionWidget.h
++index abbdfb4..cf05afd 100644
++--- a/src/YSelectionWidget.h
+++++ b/src/YSelectionWidget.h
++@@ -29,7 +29,7 @@
++ #include "YItem.h"
++ #include "ImplPtr.h"
++ 
++-class YSelectionWidgetPrivate;
+++struct YSelectionWidgetPrivate;
++ 
++ /**
++  * Base class for various kinds of multi-value widgets.
++diff --git a/src/YSimpleInputField.h b/src/YSimpleInputField.h
++index 6d926d4..b93fe6b 100644
++--- a/src/YSimpleInputField.h
+++++ b/src/YSimpleInputField.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YWidget.h"
++ 
++-class YSimpleInputFieldPrivate;
+++struct YSimpleInputFieldPrivate;
++ 
++ 
++ /**
++diff --git a/src/YSlider.h b/src/YSlider.h
++index d29f6b8..4bcd7d3 100644
++--- a/src/YSlider.h
+++++ b/src/YSlider.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YIntField.h"
++ 
++-class YSliderPrivate;
+++struct YSliderPrivate;
++ 
++ 
++ /**
++diff --git a/src/YSpacing.h b/src/YSpacing.h
++index e8aafd3..066cd68 100644
++--- a/src/YSpacing.h
+++++ b/src/YSpacing.h
++@@ -28,7 +28,7 @@
++ #include "YWidget.h"
++ #include "ImplPtr.h"
++ 
++-class YSpacingPrivate;
+++struct YSpacingPrivate;
++ 
++ 
++ /**
++diff --git a/src/YSquash.h b/src/YSquash.h
++index 4bd0fb6..3804cc4 100644
++--- a/src/YSquash.h
+++++ b/src/YSquash.h
++@@ -29,7 +29,7 @@
++ #include "ImplPtr.h"
++ 
++ 
++-class YSquashPrivate;
+++struct YSquashPrivate;
++ 
++ /**
++  * HSquash, VSquash HVSquash: reduce child to its preferred size.
++diff --git a/src/YTable.h b/src/YTable.h
++index 6694f10..469b8ca 100644
++--- a/src/YTable.h
+++++ b/src/YTable.h
++@@ -30,7 +30,7 @@
++ #include "YTableItem.h"
++ #include "YTableHeader.h"
++ 
++-class YTablePrivate;
+++struct YTablePrivate;
++ 
++ 
++ 
++diff --git a/src/YTableHeader.h b/src/YTableHeader.h
++index 70166c2..4ae99b4 100644
++--- a/src/YTableHeader.h
+++++ b/src/YTableHeader.h
++@@ -31,7 +31,7 @@
++ 
++ 
++ 
++-class YTableHeaderPrivate;
+++struct YTableHeaderPrivate;
++ 
++ /**
++  * Helper class for YTable for table column properties:
++diff --git a/src/YTimeField.h b/src/YTimeField.h
++index ab2f9a3..f3a7b94 100644
++--- a/src/YTimeField.h
+++++ b/src/YTimeField.h
++@@ -27,7 +27,7 @@
++ 
++ #include "YSimpleInputField.h"
++ 
++-class YTimeFieldPrivate;
+++struct YTimeFieldPrivate;
++ 
++ 
++ /**
++diff --git a/src/YTimezoneSelector.cc b/src/YTimezoneSelector.cc
++index 9259b64..e2f9b6f 100644
++--- a/src/YTimezoneSelector.cc
+++++ b/src/YTimezoneSelector.cc
++@@ -32,7 +32,7 @@
++ 
++ class YTimezoneSelectorPrivate
++ {
++-   bool dummy;
+++//   bool dummy;
++ };
++ 
++ 
++diff --git a/src/YTree.h b/src/YTree.h
++index 14fa279..70e1364 100644
++--- a/src/YTree.h
+++++ b/src/YTree.h
++@@ -28,7 +28,7 @@
++ #include "YSelectionWidget.h"
++ 
++ class YTreeItem;
++-class YTreePrivate;
+++struct YTreePrivate;
++ 
++ 
++ /**
++diff --git a/src/YUILog.h b/src/YUILog.h
++index 0890bc5..4a927a7 100644
++--- a/src/YUILog.h
+++++ b/src/YUILog.h
++@@ -64,7 +64,7 @@
++ 
++ 
++ 
++-class YUILogPrivate;
+++struct YUILogPrivate;
++ 
++ enum YUILogLevel_t
++ {
++diff --git a/src/YWidget.h b/src/YWidget.h
++index 5b285d0..636a41b 100644
++--- a/src/YWidget.h
+++++ b/src/YWidget.h
++@@ -45,7 +45,7 @@ typedef YChildrenManager<YWidget>	YWidgetChildrenManager;
++ typedef YSingleChildManager<YWidget>	YSingleWidgetChildManager;
++ typedef YChildrenRejector<YWidget>	YWidgetChildrenRejector;
++ 
++-class YWidgetPrivate;
+++struct YWidgetPrivate;
++ 
++ 
++ /**
++diff --git a/src/YWizard.h b/src/YWizard.h
++index 7671cbf..975b597 100644
++--- a/src/YWizard.h
+++++ b/src/YWizard.h
++@@ -28,7 +28,7 @@
++ #include "YWidget.h"
++ 
++ class YMacroRecorder;
++-class YWizardPrivate;
+++struct YWizardPrivate;
++ class YPushButton;
++ class YReplacePoint;
++ 
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_git.bb b/meta-oe/recipes-graphics/libyui/libyui_git.bb
+index e46e365b2..42945288c 100644
+--- a/meta-oe/recipes-graphics/libyui/libyui_git.bb
++++ b/meta-oe/recipes-graphics/libyui/libyui_git.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
  
- inherit autotools gettext pkgconfig
+ SRC_URI = "git://github.com/libyui/libyui.git \
+            file://0001-Fix-GCC-8-warning.patch \
++           file://0001-Fix-build-with-clang.patch \
+            "
  
-@@ -18,8 +18,7 @@ acpaths = "-I ./m4"
- 
- EXTRA_OECONF += "--with-modules"
- 
--PACKAGECONFIG ??= "libidn openssl zlib gnutls readline expat"
--PACKAGECONFIG[libidn] = "--with-libidn, --without-libidn, libidn"
-+PACKAGECONFIG ??= "openssl zlib gnutls readline expat"
- PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl, openssl"
- PACKAGECONFIG[zlib] = "--with-zlib=${STAGING_INCDIR}/.., --without-zlib, zlib"
- PACKAGECONFIG[gnutls] = "--with-gnutls, --without-gnutls, gnutls"
-@@ -29,6 +28,6 @@ PACKAGECONFIG[expat] = "--with-expat=${STAGING_INCDIR}/.. --with-expat-inc=${STA
- do_install_append() {
- 	rm -rf ${D}${libdir}/charset.alias
- }
--
-+FILES_${PN} += "${datadir}/icons/hicolor"
- FILES_${PN}-dbg += "${libdir}/lftp/${PV}/.debug"
- RDEPENDS_${PN} = "perl bash readline"
+ PV = "3.3.3+git"
 -- 
 2.17.0
 
