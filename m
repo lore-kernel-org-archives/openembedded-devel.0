@@ -1,50 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CD1974557
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C79FE607DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2018 17:00:11 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id a14so8365060pfi.1
+	Thu, 26 Apr 2018 17:00:12 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id m21so13364891pgv.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2018 10:00:12 -0700 (PDT)
+	Thu, 26 Apr 2018 10:00:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=amy9ttFPwV+R71G9wf03xERxXyjz9QgutUMzlCARcRU=;
-	b=g/daTZpxALUHRIDO6ZP6vyGgYwUGcAk7Y4N+kJ6kmSfkWcRk4z/hU0eDHdoF9Y6L+r
-	0wtgRNyLtvrNsyISi60zMunJMs0X23moJreGDeujSctHnLMNWmMf6ZNR/4iOokvX6ieh
-	7LULxySrjBQwMtQPFiCzLHGb2ziISJBnbFh3FsDKtT2sS10YPP/XILU5NVJxe7XKTtFs
-	jvtKCYHe21rP7Q1pCURQLkxi96d36+eAOjh7LsBZ/V7mzN06OJaExfwNoOIq+ctItIkt
-	mQPBRGVHYGEV2s3Kw+mPuFRD7XaB8eeoJVampwV3tqroMAoh7TN3AkeJ0Ygucd4EqqdH
-	qR0g==
+	bh=+tWefrvTIxpG0o00j+fniiTEEiaZvECanjyQ+4bVTgE=;
+	b=KN6KSk3llLlOKFsfro98WjyPI9Z+Db1cFUymcfWv9YOlmLAzdJDIWtBExPbL1xfvfE
+	eSX0lrSmxcsjVSmsIptqpRpLwFxc/UFDxEEQBJjJbxBTSClZKnKBOQFwEHNz8aNoCUAk
+	NmyDBl0/YJ15Wi/MMGBkY7eatlaUxWPioRaDlUkBLNfrg2ukBp7H93KqDcz4EDncbow3
+	PGFx8qdhIm1WylkJ+CnJG3yQi/BhbOhUW1M0/Bzo8Gb+431AEA0fAPujPJlBxmhvHLcp
+	fk8onf3AlNL4UGgLoxM4R7+qYwqkljyUetJvJKaMPTKqyhNKB4fJpLy1J1QdnVQ6o/tk
+	HoiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=amy9ttFPwV+R71G9wf03xERxXyjz9QgutUMzlCARcRU=;
-	b=j9B88rzgtosigYMtvH5ToOf6QRkYN7A5QOH3JAPJhsHrIPbcHlNkNc0HpL9feqHg2v
-	Q4KVSrRWmt7E2xMEHzcQIjkTk6HcWPeMy4Nf0zQq/K3qe4JdTs177ui4oQrZld2GY5xq
-	1ICBTndg7LqPyAb1TyTpTbWk8ad4NrjMYPcb7Ls1448C0xwWXNdCuw4Y3suJB1757t5B
-	83tsSAMZx76ILLRQw5xl4Bfw/w9Ka6OzPk2MjIfRZuOcqQYxq06TNngBasE75RP+oDIX
-	IgzAYqDYMwK5rVZYD23Mi+qmr8AU66YCyMKC75pd/6um5C/9+RTCblKNpITUvvD+HB4u
-	9tAg==
-X-Gm-Message-State: ALQs6tBB/8nSNRiMiSN/wC6HSOq/1YBBx0P6bvOAn2ZazwLPc4HpxmsV
-	eR00SS7cw6tY9Q3felXfaal7HQ==
-X-Google-Smtp-Source: AIpwx4+4tsyGsUwqkUOGDdztO/DrfSHfO16T94H9OCkILixCZCdXks35kvfLRPZDgVYaBOcsXxtS3Q==
-X-Received: by 10.99.102.195 with SMTP id a186mr28894365pgc.207.1524762012123; 
-	Thu, 26 Apr 2018 10:00:12 -0700 (PDT)
+	bh=+tWefrvTIxpG0o00j+fniiTEEiaZvECanjyQ+4bVTgE=;
+	b=NcZBmdMs6ytK7DEhlpsR2UMBDlzUbjnrrbZ7HgUdzyvN+/99MAin0bhBVIuIsIZZKE
+	FJ6fl33hUb8I0bNdOBkhQ0GKeFaUrUFPCdpOs9PF5HAxbZkx79H1Sn9A4sQu/DRHRI3/
+	wfzRetcw2xYPcLo7golBdtnspi6GmRVpCzOHXQTVelQ1aol6xOhl1CiADVV6xUx4ayd7
+	L1rAlwcB0SDypklf/A9K4kikn5dcLySw09xMx17w0kvcGIPb9CE1OeT4TiyTZwEzWeTs
+	/PN3qKIqUKPOWdcN0JnCYyL8iemNgDEcHVt/jI6dO0fNnsQbNiWwLtTG1Seuu0aPZ8Ed
+	38Jg==
+X-Gm-Message-State: ALQs6tDteFKv6qbvGsfQnXNeX6x/fZlG/qkjTqy6lxrTgxG9kP7Nzb+D
+	u+eMW6ly/rF1Ih24YINHMo+NBw==
+X-Google-Smtp-Source: AB8JxZoJ9U2J/mmeqmd85XUgmY6wMzC/cfrrHtpHEa2A8XitEPbslBhGfafdlTKNXEUdi/R1Fgk56g==
+X-Received: by 10.167.133.131 with SMTP id w3mr13190333pfn.197.1524762013368; 
+	Thu, 26 Apr 2018 10:00:13 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8880:466c::ddd5])
 	by smtp.gmail.com with ESMTPSA id
-	w134sm41690845pfd.132.2018.04.26.10.00.11
+	w134sm41690845pfd.132.2018.04.26.10.00.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 26 Apr 2018 10:00:11 -0700 (PDT)
+	Thu, 26 Apr 2018 10:00:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Apr 2018 10:00:02 -0700
-Message-Id: <20180426170004.20602-2-raj.khem@gmail.com>
+Date: Thu, 26 Apr 2018 10:00:03 -0700
+Message-Id: <20180426170004.20602-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180426170004.20602-1-raj.khem@gmail.com>
 References: <20180426170004.20602-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/4] p7zip: Fix build with clang
+Subject: [meta-networking][PATCH 3/4] lftp: Upgrade to 4.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,86 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2018 17:00:11 -0000
+X-List-Received-Date: Thu, 26 Apr 2018 17:00:13 -0000
+
+Drop libidn packageconfig, this is no more an option in configure.ac
+Package the icon files
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...Fix-narrowing-errors-Wc-11-narrowing.patch | 48 +++++++++++++++++++
- meta-oe/recipes-extended/p7zip/p7zip_16.02.bb |  6 ++-
- 2 files changed, 52 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
+ .../lftp/{lftp_4.7.7.bb => lftp_4.8.3.bb}                | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-connectivity/lftp/{lftp_4.7.7.bb => lftp_4.8.3.bb} (81%)
 
-diff --git a/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch b/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-new file mode 100644
-index 000000000..ae2751745
---- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/files/0001-Fix-narrowing-errors-Wc-11-narrowing.patch
-@@ -0,0 +1,48 @@
-+From b6b1782af4aa7f9084d32e4144738dc2535c8d6f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 23 Apr 2018 23:07:21 -0700
-+Subject: [PATCH] Fix narrowing errors -Wc++11-narrowing
-+
-+Clang 6.x finds these errors
-+
-+    ../../../../CPP/Windows/ErrorMsg.cpp:24:10: error: case value evaluates to -2147024809, which cannot be narrowed to type 'DWORD' (aka 'unsigned int') [-Wc++11-narrowing]
-+        case E_INVALIDARG          : txt = "E_INVALIDARG"; break ;
-+             ^
-+
-+HRESULT causes the macro to be parsed as a signed long, so we need to force it
-+to be checked as an unsigned long instead.
-+
-+also reported here https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=224930
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CPP/Windows/ErrorMsg.cpp | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/CPP/Windows/ErrorMsg.cpp b/CPP/Windows/ErrorMsg.cpp
-+index 99684ae..78a64ba 100644
-+--- a/CPP/Windows/ErrorMsg.cpp
-++++ b/CPP/Windows/ErrorMsg.cpp
-+@@ -15,13 +15,13 @@ UString MyFormatMessage(DWORD errorCode)
-+ 
-+   switch(errorCode) {
-+     case ERROR_NO_MORE_FILES   : txt = "No more files"; break ;
-+-    case E_NOTIMPL             : txt = "E_NOTIMPL"; break ;
-+-    case E_NOINTERFACE         : txt = "E_NOINTERFACE"; break ;
-+-    case E_ABORT               : txt = "E_ABORT"; break ;
-+-    case E_FAIL                : txt = "E_FAIL"; break ;
-+-    case STG_E_INVALIDFUNCTION : txt = "STG_E_INVALIDFUNCTION"; break ;
-+-    case E_OUTOFMEMORY         : txt = "E_OUTOFMEMORY"; break ;
-+-    case E_INVALIDARG          : txt = "E_INVALIDARG"; break ;
-++    case (DWORD) E_NOTIMPL             : txt = "E_NOTIMPL"; break ;
-++    case (DWORD) E_NOINTERFACE         : txt = "E_NOINTERFACE"; break ;
-++    case (DWORD) E_ABORT               : txt = "E_ABORT"; break ;
-++    case (DWORD) E_FAIL                : txt = "E_FAIL"; break ;
-++    case (DWORD) STG_E_INVALIDFUNCTION : txt = "STG_E_INVALIDFUNCTION"; break ;
-++    case (DWORD) E_OUTOFMEMORY         : txt = "E_OUTOFMEMORY"; break ;
-++    case (DWORD) E_INVALIDARG          : txt = "E_INVALIDARG"; break ;
-+     case ERROR_DIRECTORY          : txt = "Error Directory"; break ;
-+     default:
-+       txt = strerror(errorCode);
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-index edf47f7bc..d986da904 100644
---- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-@@ -6,8 +6,10 @@ LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c
-                     file://DOC/License.txt;md5=879598edf1f54dddb6930d7581357f8b"
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
+similarity index 81%
+rename from meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
+rename to meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
+index b6b65da73..08d89b8c5 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
+@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
+            file://fix-gcc-6-conflicts-signbit.patch \
+           "
+-SRC_URI[md5sum] = "3701e7675baa5619c92622eb141c8301"
+-SRC_URI[sha256sum] = "fe441f20a9a317cfb99a8b8e628ba0457df472b6d93964d17374d5b5ebdf9280"
++SRC_URI[md5sum] = "12b1fcbf13f41e9cdb0903fc670fa1f1"
++SRC_URI[sha256sum] = "c4159f056afee41866a6c2d639655bc351e6d3486bbe7758eaedb24f6a4239d5"
  
- SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
--          file://do_not_override_compiler_and_do_not_strip.patch \
--          file://CVE-2017-17969.patch"
-+           file://do_not_override_compiler_and_do_not_strip.patch \
-+           file://CVE-2017-17969.patch \
-+           file://0001-Fix-narrowing-errors-Wc-11-narrowing.patch \
-+           "
+ inherit autotools gettext pkgconfig
  
- SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
- SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
+@@ -18,8 +18,7 @@ acpaths = "-I ./m4"
+ 
+ EXTRA_OECONF += "--with-modules"
+ 
+-PACKAGECONFIG ??= "libidn openssl zlib gnutls readline expat"
+-PACKAGECONFIG[libidn] = "--with-libidn, --without-libidn, libidn"
++PACKAGECONFIG ??= "openssl zlib gnutls readline expat"
+ PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl, openssl"
+ PACKAGECONFIG[zlib] = "--with-zlib=${STAGING_INCDIR}/.., --without-zlib, zlib"
+ PACKAGECONFIG[gnutls] = "--with-gnutls, --without-gnutls, gnutls"
+@@ -29,6 +28,6 @@ PACKAGECONFIG[expat] = "--with-expat=${STAGING_INCDIR}/.. --with-expat-inc=${STA
+ do_install_append() {
+ 	rm -rf ${D}${libdir}/charset.alias
+ }
+-
++FILES_${PN} += "${datadir}/icons/hicolor"
+ FILES_${PN}-dbg += "${libdir}/lftp/${PV}/.debug"
+ RDEPENDS_${PN} = "perl bash readline"
 -- 
 2.17.0
 
