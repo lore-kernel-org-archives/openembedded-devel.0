@@ -1,49 +1,48 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 82A2C6FF80
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 93876607DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2018 07:47:02 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id p18-v6so36502639wrm.1
+	Thu, 26 Apr 2018 17:00:10 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id f189so9757297pfa.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Apr 2018 00:47:03 -0700 (PDT)
+	Thu, 26 Apr 2018 10:00:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=R5c+z+2XMBKdvQNqS49q2y1sXmduVFZdBbL+M3Ay1pg=;
-	b=OqKfs61+jOBuG9NIc1wBPlHyP7mTBMfgeK3K8G+udDVzNM7WvVV8CxYIjDcRxiIruF
-	fqGGoTQWP7WRW0GZTUepC6Y2eUbO7SB0j/j0WVt38M5yqV46sOU2TQHIm+vf1DwkYkgQ
-	SNWh0OBgS70fPwOQK4znKcR7YxxAwO7jC1KA1e+hUnkjOL7z6I5CxG5GDom0aDyumIaG
-	p3u/nvrdHXTkwwDRWdNqVc8FmCl/pktgKN6mNaZdReZ2+LKyFMydFfqtJ/cANW/5ZbR8
-	PfT/MK+9gHkqlX2GmFN48AilwGV0LIdwg85GRCZDZgM2g6dbBNY7Lyr0x0zH3WtU/ywa
-	Dk9g==
+	bh=Oum4w/FXDOnPNm1I5/ntq2QvydQfcDOE6E0FNOlHmuI=;
+	b=eFdGt3uGa/VzegzCsTDoWFsnLilTWmAOnSztf1Tvy9+dZU51yzNacXXFJXPboErVMv
+	FJdUb46qODOZnax0IXruBAg57NLtYrC6OOb3aaoUU5q8CVveELVFwGZpG0UXj1yZF+Qg
+	KYQY1Mqmr8HZm0XzVco7pgp3SfZgpC1RmWFoBYEuR/MJx0vs7h+tVVJtK22XTmI3IiIj
+	5YAgH+PszeRJJStBoyPTfwHC+MgrClv3I2ViJDoWNDL+bUUsDLdRJeJi2aLsgdSz+XWy
+	m7rKcCNL6MT0M6ys4uvD9Uz7L8q5oYFN9xAu2JdHvcXugVBF9RRmmS8VgVSNsW4bZc4G
+	ITHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=R5c+z+2XMBKdvQNqS49q2y1sXmduVFZdBbL+M3Ay1pg=;
-	b=sB4DnuwWRHO1sh3VPms05xAFZR0JfyElumt7SNHSbWhzTXwJf2BQ/+mNxeqRFzpR2+
-	7i9mKlVgD/E7IAcVdlyLo7b3/zvsGqtlJ7xLWSemJ3ch0kS/nst3pqdl8X7XbYM25bTL
-	B2aAkWBfgPHS2vYkiGGqJVRXw22+vqNcVhpAtLdc+toAWNBQuwXl6WNHlBvYkPxFl/4e
-	j6kuHl7gkqu7pMa1aOx49LPQHLlghvWkSWbvwtK0FASZyxFfJEfl8Cm6UCW67ln5/i0q
-	BA+7vOKS/Ka+TOXMAzCrTjWebNONhryy9yJOeQBhYVDIGKlc9emlMRqEOn4MS4MRzwjf
-	MmPQ==
-X-Gm-Message-State: ALQs6tDEzmOiDQKtvHRWIdI6WkDwE/i95IUXJmiPSM6/9cvrh8Mt5HL0
-	O2X2ZAaCVOOpM9Z+2nfgGPm7P32T
-X-Google-Smtp-Source: AIpwx49DBvM/T8CqZKlCCblrgxsQGaTZ0QnoI+B/1qkc9pZknHVm/C9OD8dJOd6iON1KODML+p0v1w==
-X-Received: by 2002:adf:af65:: with SMTP id
-	z92-v6mr26889058wrc.250.1524728822467; 
-	Thu, 26 Apr 2018 00:47:02 -0700 (PDT)
-Received: from gizero-desktop.tw.it
-	(host193-245-static.58-79-b.business.telecomitalia.it.
-	[79.58.245.193]) by smtp.gmail.com with ESMTPSA id
-	v5sm11715719wmh.19.2018.04.26.00.47.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 26 Apr 2018 00:47:01 -0700 (PDT)
-From: Andrea Galbusera <gizero@gmail.com>
+	bh=Oum4w/FXDOnPNm1I5/ntq2QvydQfcDOE6E0FNOlHmuI=;
+	b=X3z3ypZ6CSKqv038KhUBt4fZSCU8q3jH46Yr9VrlfE+eYc89Z3IWRoaEAVp3vaLlJZ
+	4oOwfQS2MpxZCZURnuSAhpGu9dd3zILy6/g0hv/JizwXDw7mxylxQUP7YG/C7/mtNW1w
+	MB/dM+nyYs14AYP/5OvkY/kQGZTfwqTI5wfBVhm6SeIm0cWqnMpTqb//t6P2rma51cmw
+	5EA9GuJwK5Z4O4xJVmXb/OOAoNx+d3Pjy6WiG0wYpbq2qzjySBoNj0A8Zu4/FGY1Gm9S
+	97+QKko/xszY52s3I/Wh1Dravfq5pXumqyvue7iCUPwe5mlBZeU1nHk+R7FiDUeLCQ87
+	Ve2A==
+X-Gm-Message-State: ALQs6tBi+wq7d177zlHxnEWP4jKbYFeoJUV+5Csf6BCbSIdkAZan+6wD
+	mAcGKHMO+KXseBRJur1bmicAVA==
+X-Google-Smtp-Source: AIpwx4/sx80Q3XsVt0869at0bNYP8rsvLg+8MqXHvB2rqwo6yGjZRk1yOrSj9lYLRbWJN7TGFbK0BA==
+X-Received: by 2002:a17:902:481:: with SMTP id
+	e1-v6mr35160212ple.377.1524762011100; 
+	Thu, 26 Apr 2018 10:00:11 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8880:466c::ddd5])
+	by smtp.gmail.com with ESMTPSA id
+	w134sm41690845pfd.132.2018.04.26.10.00.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 26 Apr 2018 10:00:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Apr 2018 09:46:53 +0200
-Message-Id: <20180426074653.15794-1-gizero@gmail.com>
+Date: Thu, 26 Apr 2018 10:00:01 -0700
+Message-Id: <20180426170004.20602-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
-Subject: [meta-python][PATCH] python-flask-restful: add recipe for 0.3.6 version
+Subject: [meta-oe][PATCH 1/4] ceres-solver: Upgrade to 1.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,58 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Apr 2018 07:47:02 -0000
+X-List-Received-Date: Thu, 26 Apr 2018 17:00:10 -0000
 
-Flask-RESTful is a simple framework for creating REST APIs with Flask
-
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python-flask-restful.inc              | 16 ++++++++++++++++
- .../python/python-flask-restful_0.3.6.bb         |  2 ++
- .../python/python3-flask-restful_0.3.6.bb        |  2 ++
- 3 files changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-flask-restful.inc
- create mode 100644 meta-python/recipes-devtools/python/python-flask-restful_0.3.6.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-flask-restful_0.3.6.bb
+ .../ceres-solver/{ceres-solver_1.13.bb => ceres-solver_1.14.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/ceres-solver/{ceres-solver_1.13.bb => ceres-solver_1.14.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-restful.inc b/meta-python/recipes-devtools/python/python-flask-restful.inc
-new file mode 100644
-index 000000000..0485f85aa
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-restful.inc
-@@ -0,0 +1,16 @@
-+SUMMARY = "Simple framework for creating REST APIs"
-+DESCRIPTION = "\
-+Flask-RESTful is an extension for Flask that adds support for quickly building \
-+REST APIs"
-+HOMEPAGE = "https://github.com/flask-restful/flask-restful"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=685bb55ed99a366bb431995f5eef2783"
-+
-+SRC_URI[md5sum] = "8243ca101185b130d8fa529cbdbdbddd"
-+SRC_URI[sha256sum] = "5795519501347e108c436b693ff9a4d7b373a3ac9069627d64e4001c05dd3407"
-+
-+inherit pypi
-+
-+PYPI_PACKAGE = "Flask-RESTful"
-+
-+RDEPENDS_${PN} = "${PYTHON_PN}-flask"
-diff --git a/meta-python/recipes-devtools/python/python-flask-restful_0.3.6.bb b/meta-python/recipes-devtools/python/python-flask-restful_0.3.6.bb
-new file mode 100644
-index 000000000..1968d1d9d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-restful_0.3.6.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-flask-restful.inc
-diff --git a/meta-python/recipes-devtools/python/python3-flask-restful_0.3.6.bb b/meta-python/recipes-devtools/python/python3-flask-restful_0.3.6.bb
-new file mode 100644
-index 000000000..6bff59a56
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask-restful_0.3.6.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-flask-restful.inc
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+similarity index 91%
+rename from meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+rename to meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+index e883c70d1..29917c8a1 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+@@ -6,7 +6,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
+ 
+ SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
+-SRCREV = "19333b0f55c8462381038e70d42af43b52941128"
++SRCREV = "facb199f3eda902360f9e1d5271372b7e54febe1"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.17.0
 
