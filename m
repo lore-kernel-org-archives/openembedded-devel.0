@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id D2DBA65D48
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 93DFE6E672
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2018 14:08:22 +0000 (UTC)
-Received: by mail-pf0-f174.google.com with SMTP id z9so1580991pfe.6
+	Fri, 27 Apr 2018 21:15:02 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id f15so2340428pfn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Apr 2018 07:08:24 -0700 (PDT)
+	Fri, 27 Apr 2018 14:15:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9KRbDIOKTM4Adg1G0Ja5xDnY5khgW0dsI3xpqa+ajMo=;
-	b=dl3PY9RYrITkLhUS9+9IGSDGvKxKV56x996Si59lHWQsZCjxpfvD5SkZRUx8xbWjlZ
-	IqJbThxF3Ypr7ZhMQZL4xxvu7KeXk9AhJq8cxnZ9RQMa4dchQsSid7uV+zJDq0jengiO
-	qN1aMDeVJBoYa3jwW0GWjSTYpR5C54u9k77hPxfokvz6FW0Kh5s+6Fzd7XYx2m+ELdEW
-	jFvwwD1B5/23lHbn8a3eMOYX5WY7LY2uiOT5hJE4WtlEf2JFx07Zoy1d3Rlk/lRKVhCX
-	P3BvS1K2NWEahSLoYZCqR/OUeyFR7aG4IWE1XypSBLGofxHJBzY3LFt9YJibz1p6mZR+
-	gSlA==
+	h=from:to:cc:subject:date:message-id;
+	bh=Eq7BUvT5nSFdMVki2V0+xf9uTzKst25AllYDaalZ92Y=;
+	b=KXMT/SL3BzxPqrSlGMSO4wqPqRMtz2au41ujN8BX3+QlUgFYDTxxLiX/Mm/7591ocf
+	8Cs6cW2q62TAVEnon39381RxKenma9EF8rMEjDtl+LF7UJLnCMq8L3GfRQGAR66mfUHl
+	YI5deGXXYWyZE4Ujw7NEnyjd/i4em7rdR76m8HfyrODE4XlhrDCrKEFPaMgm6F2KYMfh
+	7FoSm5njeDvpdhcP3WPiWdYawsrV5eDgwlmmcCUGGuQakL6O+6EVpMkPtoFHeFYU1ARe
+	nn1AkOTkHB9B9B620fduHYnF/vl+qrmEYMNwvMFPeoFVyD8VZWUyLS6yM/v7LQVMZqnC
+	ZWTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=9KRbDIOKTM4Adg1G0Ja5xDnY5khgW0dsI3xpqa+ajMo=;
-	b=VCfjLi9y1n+w27fUgDaN4tPOdk2KKCoLBBVSNsRFiTH2qx6eWbhrZTdA0Y7fUSI3Os
-	x9eoX9GeHiP9Pdj3fTEv/5wTxRpBad6zyrDFfrJayTYBKP2JX8g7dSqMcUCC6SNv8QdW
-	y7EpyWRofJcWnRxP5KKffXNarOhWzwBWxhdkzrqTSs/QX3KRd4F4cdoInRlpvolDN8DF
-	Jt1IiLmA+lbozwcbwkOlgi9eAKdZwbUfSukM1fxd9oIvMV6u2C9kX0J9fIXTNID7h92A
-	RzBSWUBGYnzNJOZJbmHQrTsY+R+pzgqsyIxMYXxn/kHv7DHipM2C0Nu+sJAxkdE5DY0m
-	LMjA==
-X-Gm-Message-State: ALQs6tDLyt5AoLjqhzc+tuVcBg3yWQYKFezfUKONCsOHAz9lSrAgRugf
-	3NG926qU0+7SJwY9J4wpuQKcDudfVU+81O6JKPc=
-X-Google-Smtp-Source: AB8JxZogb7+c+OsaiNEsEUMkiUe+ojDe9gS9+zIVebMfUJsjk9DJRvRKvOQwKZSHIqk7NTrwV0Mw0xdRCqigAKGXi1Q=
-X-Received: by 2002:a65:4b4a:: with SMTP id
-	k10-v6mr2303496pgt.227.1524838103585; 
-	Fri, 27 Apr 2018 07:08:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <1524665609-7709-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1524665609-7709-1-git-send-email-akuster808@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Eq7BUvT5nSFdMVki2V0+xf9uTzKst25AllYDaalZ92Y=;
+	b=gehTrkQ9ScfyyXrS0wKV8+RZZ1oJLwY2pITaK03wYCytwhDSV5z3n7cekmNqQuH3dz
+	Be5wUqf6k50FdUTNn6UYAhT1469Ya6OSqETwaACgltE54pVDTdrI4sH7rPudJx9s9p8Q
+	ThpChDA5ATn/MW54lX78ERYBY7VOXnBpSmSF0qLKs3VHztZ6/93ByEr2+gUVe12yxz2p
+	DT0/xP/YX6vr00f9KorFAMsfUcudsr3eDopRSHU53xaSAcl9UV+BKPlh3p0mjH2qjXOc
+	QNdeIl41+3yEqtK+cen89WB4NGnNkLvBBxYEksDOaNgV/kjUoLBwSjpwzOh0rk9kn2t0
+	dXvQ==
+X-Gm-Message-State: ALQs6tAhcNMnG8FpZqlSEzmbwEyQX8N9tOhKSf930Kb5zU0FYHVbJvR9
+	jUxXQndmNF/KW6Ry8n9YWm6YgQ==
+X-Google-Smtp-Source: AB8JxZrApctXj11m6FXY3KawEGwet9ZatcBufGdD6I2No8kwrFJRhUV0qHONQZROYvD/kOehdREfpw==
+X-Received: by 2002:a17:902:60cd:: with SMTP id
+	k13-v6mr3750134pln.44.1524863703179; 
+	Fri, 27 Apr 2018 14:15:03 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8880:466c::ddd5])
+	by smtp.gmail.com with ESMTPSA id
+	o123-v6sm3750304pga.76.2018.04.27.14.15.02
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 27 Apr 2018 14:15:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 27 Apr 2018 14:08:13 +0000
-Message-ID: <CAMKF1so20Yi_L1EjWgWs+vJRkc0he9UyeWtPM7GkjjLOP5aT6g@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/6] iscsitarget: Blacklist compile failed
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Apr 2018 14:14:53 -0700
+Message-Id: <20180427211454.35441-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-networking][PATCH 1/2] lftp: Fix useless-rpaths QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Apr 2018 14:08:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 27 Apr 2018 21:15:02 -0000
 
-LGTM
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Wed, Apr 25, 2018 at 7:13 AM Armin Kuster <akuster808@gmail.com> wrote:
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
+index 08d89b8c5..c6e37277e 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
+@@ -16,7 +16,7 @@ inherit autotools gettext pkgconfig
+ 
+ acpaths = "-I ./m4"
+ 
+-EXTRA_OECONF += "--with-modules"
++EXTRA_OECONF += "--with-modules --disable-rpath"
+ 
+ PACKAGECONFIG ??= "openssl zlib gnutls readline expat"
+ PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl, openssl"
+-- 
+2.17.0
 
-> Kernel header changes are causing this issues. iscsctarget has been
-> dropping by other
-> distros in favor of tgt.
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
->  | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git
-> a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
-> svn502.bb
-> b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
-> svn502.bb
-> index 6593661..5d13591 100644
-> --- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
-> svn502.bb
-> +++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+
-> svn502.bb
-> @@ -60,3 +60,5 @@ FILES_${PN} += "${sbindir} \
->
->  RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
->  RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
-> +
-> +PNBLACKLIST[iscsitarget] = "error: implicit declaration of function
-> 'init_timer'; did you mean 'init_timers'?; 4.15 kernel issues"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
