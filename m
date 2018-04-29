@@ -1,47 +1,47 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-vk0-f51.google.com (mail-vk0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 97CE470057
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id DD69C605BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2018 14:59:40 +0000 (UTC)
-Received: by mail-vk0-f51.google.com with SMTP id 131-v6so3767897vkf.8
+	Sun, 29 Apr 2018 15:22:37 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id z129-v6so537720pgz.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2018 07:59:41 -0700 (PDT)
+	Sun, 29 Apr 2018 08:22:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=DqWdfn4E3cwXayI62+ADnvRaSyHLH6E+Zm5ePxuEFxY=;
-	b=agCNCBGUrdcQandic0GhA9zwMy9XDJXZ7nLTd2HpfHwkFV0pFH45zCvliqcTlhipRA
-	3FN1ooHYurVOLmvwoT2znKAvhOPwwE/PY2CbY0SgjR1sZXyKwv9VVUqvtGodb2oSicDw
-	I9ZXPi3j+HBQJsrnJALVekixVWzeMqIhiZl+3sDhcyVdgf7Ugmjbs9iEQF5As4RDhau8
-	m6w0rPovayiC/wwlqGlWD2ZshN4ecBvU7kQPHDqaLWJ6ZjWnpNB2oVJjQxhk2yVTQtR4
-	bQfICZOG6FYz7Qs5dt0GjvvMv7MSGojwWnPmAOUU2hCnE9TiTMPe0tlwuaqfTYiDXysG
-	1BeA==
+	:cc; bh=Ar73pZcDnt4r1b0THBeVQVd5hUeRH7ZhkpJiiFEW6I0=;
+	b=r72yc74eqBqIvlzkGpX5jQ/CBXI7xk2FB/dxhIJQWKqHSd2cdcoX3t6psgKLoHOdwH
+	7SeAIuyR4Z5+5cyXNFgO8O7+fUF+r/uRwjXUJwYNF2K3UEyv9dnaJKwL9VZLDFg4TC89
+	j2DS5Nl9RuJGc0IoqMK1n0i1vxQu0+Cass5lknn1vGswYfl4sjAhR+BQu14JeG0nn6Qd
+	d76VC3Qe1Z3VO8vTqTcqArBpLW2N10U9bRln61WjXGxoaqKmftT6Sd63JjlGo+AJgpev
+	/f2t4+DvO+oieZw1vNuW8p/T4aC7n9aGD06OCox4rVg6c2hy6RrQF+YqkxZoXhhzkZaL
+	I+UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=DqWdfn4E3cwXayI62+ADnvRaSyHLH6E+Zm5ePxuEFxY=;
-	b=UTWDWhWrty4NEh5zEZ07V7cxSKrXLR4yRYL1/UzqXNX/4K47wfb+L3luq4HHIUEJ4A
-	dMPpuHKOhxuZu9xiBc8vkG+UFdaqRgn8zrHzwjxzaDdNZGVLFGqVGhIsg0eyYFs40G1r
-	VX6kungq6qJXdaJzizrC8rcUHDKdL99Z798ryS7P9WOg69cDOAXG6OdGnTBKkULdyetW
-	oEAx/5BQRX0x7Adxv3ZtJJSWb8/rpI7tT47+p1QxnF+/NuI+jaojfrcybkhbWHM0Xv8z
-	suYisN1J6XBy9j9GhMF6DUnU8nOwBtnnE5an7FDWQNrnFNKI+ZkYajjyhubrAYiK2bjH
-	X9hw==
-X-Gm-Message-State: ALQs6tDdnf5Kk/OQV2NVlSAP4MWDJ4cg7wiU83c02DMhL04uFHuqB9At
-	B9FIPJ9b5MG97ZVfCbEHLgUw2tX7wWg49DWrBJU=
-X-Google-Smtp-Source: AB8JxZorcbj7ZnsskzcZto4lz+qpgpd3sMkZvKFJpJlNLzLLo2M2QjpRPIilCINohY3apx/v1Bkvydhos5mQx9fTdTk=
-X-Received: by 2002:a1f:ae11:: with SMTP id
-	x17-v6mr6290234vke.52.1525013980858; 
-	Sun, 29 Apr 2018 07:59:40 -0700 (PDT)
+	bh=Ar73pZcDnt4r1b0THBeVQVd5hUeRH7ZhkpJiiFEW6I0=;
+	b=TnCIeZw/wG8bWzIsrQ6EePNcM8VmjLZa8qqKFhrXMzZZ4bCx/PAC4Nj9hJA4cgqfZj
+	Oto6gRuv50k+qJLmDoJhGDfRs0Eji/eszDunuNEVbCkrvKaSvIHAFZBcv3nnU381uYyX
+	+uqeyRdRXwTMI7rL7CBbv5qmqh8KeZkkiQDZtJbPPCxONbfA11CLb400qWeXEA4zRJKR
+	ehy0lUH4PJA2ryG8etIdao26WnmbYn0aTwqXW0ojjVSCMrIyAyYkFTZwiMKlqfwVYj9r
+	2He/FbtM/sA4nguOzUHKMFIs9oi0Whl4Z521/AvJ8BFIq0coW00jXrXbv3PhK/FGT+2G
+	loyw==
+X-Gm-Message-State: ALQs6tA0DxAAFPR9RWrBfV1osZczlwBjJEy2DBi8CBH3XIf6frm2PSmd
+	XtInu/LSvz3JhQGc8oum600Jkl9tIruy/drSGL0=
+X-Google-Smtp-Source: AB8JxZqQKzMHh5esUD1kNBFIJRtR0uAlCInl8O74igTVyTFFzVIX1e0yXIaB95bLJBDGkmX6RGCi6s1D3c/tNylnPzc=
+X-Received: by 2002:a65:4b4a:: with SMTP id
+	k10-v6mr7903975pgt.227.1525015358358; 
+	Sun, 29 Apr 2018 08:22:38 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.176.70.130 with HTTP; Sun, 29 Apr 2018 07:59:20 -0700 (PDT)
-In-Reply-To: <CAMKF1spLgyayuJG0LMoEbWNw9=D2zmXE0aiK8p2n-iwV5sxBUg@mail.gmail.com>
+Received: by 10.100.182.141 with HTTP; Sun, 29 Apr 2018 08:22:07 -0700 (PDT)
+In-Reply-To: <CAC+thW0hX39De-zuRBmE30=BSwE0KxN7s9sE4Mb5BViT0f-HLA@mail.gmail.com>
 References: <CAC+thW3RAbh6_2b8_Lzqx-UnE8xzFsW=1z0E9C1KXBukD02ecg@mail.gmail.com>
 	<CAMKF1spLgyayuJG0LMoEbWNw9=D2zmXE0aiK8p2n-iwV5sxBUg@mail.gmail.com>
-From: Andrea Galbusera <gizero@gmail.com>
-Date: Sun, 29 Apr 2018 16:59:20 +0200
-Message-ID: <CAC+thW0hX39De-zuRBmE30=BSwE0KxN7s9sE4Mb5BViT0f-HLA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CAC+thW0hX39De-zuRBmE30=BSwE0KxN7s9sE4Mb5BViT0f-HLA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 29 Apr 2018 08:22:07 -0700
+Message-ID: <CAMKF1spYD5R9QoLaZR+TjHx9AzWkoTbrAwxQXURD5SvfNTAQRw@mail.gmail.com>
+To: Andrea Galbusera <gizero@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-python] README: contradictory indications?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -56,35 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Apr 2018 14:59:40 -0000
+X-List-Received-Date: Sun, 29 Apr 2018 15:22:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Apr 28, 2018 at 10:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Thu, Apr 26, 2018 at 12:10 AM Andrea Galbusera <gizero@gmail.com> wrote:
+On Sun, Apr 29, 2018 at 7:59 AM, Andrea Galbusera <gizero@gmail.com> wrote:
+> On Sat, Apr 28, 2018 at 10:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >>
->> Hi,
+>> On Thu, Apr 26, 2018 at 12:10 AM Andrea Galbusera <gizero@gmail.com> wrote:
+>>>
+>>> Hi,
+>>>
+>>> I see that README in meta-python contains conflicting information
+>>> about layer's dependencies. The introductory paragraph states that
+>>> "modules in this layer need to be independent of openembedded-core and
+>>> meta-openembedded/meta-oe", then a few lines below both of these
+>>> layers are listed within meta-python's dependencies.
+>>>
+>>> To me, looks like the sentence in the introduction does not hold true
+>>> and can be removed. If you can help clarify what the correct
+>>> information is, I can send a patch to fix the documentation bits.
 >>
->> I see that README in meta-python contains conflicting information
->> about layer's dependencies. The introductory paragraph states that
->> "modules in this layer need to be independent of openembedded-core and
->> meta-openembedded/meta-oe", then a few lines below both of these
->> layers are listed within meta-python's dependencies.
 >>
->> To me, looks like the sentence in the introduction does not hold true
->> and can be removed. If you can help clarify what the correct
->> information is, I can send a patch to fix the documentation bits.
+>> Usually it shoudl be just core layer
 >
+> That's not the case, at least out of the box. Without meta-oe in
+> bblayers bitbake complains with:
 >
-> Usually it shoudl be just core layer
+> ERROR: Layer 'meta-python' depends on layer 'openembedded-layer', but
+> this layer is not enabled in your configuration
+>
+> Then, would be ok to drop 'openembedded-layer' from
+> LAYERDEPENDS_meta-python in conf/layer.conf? Parsing-wise it seems of
+> no hurt...
 
-That's not the case, at least out of the box. Without meta-oe in
-bblayers bitbake complains with:
+I think if there is a dependency on meta-oe that could be beyond
+parsing e.g. compiling
+a recipe might assume another recipe from meta-oe during compile,
+ideally packageconfig
+for such features would be ideal. We can validate the dependencies via
+building each recipe
+from meta-python without meta-oe in layermix.
 
-ERROR: Layer 'meta-python' depends on layer 'openembedded-layer', but
-this layer is not enabled in your configuration
-
-Then, would be ok to drop 'openembedded-layer' from
-LAYERDEPENDS_meta-python in conf/layer.conf? Parsing-wise it seems of
-no hurt...
+It would be better to document whats actually happening in code even
+though it is less
+than ideal.
 
