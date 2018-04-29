@@ -1,49 +1,39 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CCD360402
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B97B06075D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2018 16:18:09 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id v15-v6so5933653wrm.10
+	Sun, 29 Apr 2018 16:54:42 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id s2-v6so8400927qti.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2018 09:18:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=0EM3DTMsBs3RkSPTr6DbOtx0FTVg+39la9xbgs24AUU=;
-	b=bVa5Au3N39yGaNlK/ZmeO4n1qaLJBGGrVBZrGYR5kdRnO4Hipyn8h+xEPDkc9sRHEU
-	G2+K+IDtfYjEpSIdm0fmnGI+EVrJ0yL+CsCqmcV9jaiTvat0u/C16RDtQZ1YIqyhZDGk
-	+LbCwxYmeolGyIvmdMUZ50GTQm0OzVuDD3851TuOKNArJGmYMR1HSITveb3DmlAHc1iq
-	gBwPeLP/I3GZcks/fT+lwk+gQlO0E/hMFh26PFwDzvbj9zsCzU1gLMzEh4t82xJjzDIn
-	XR3nRVHQa5v8AhNbKr/DxLn51a9N1G72kSet+cMY8X1G80KaX9Os3nbHuSCzlrBDDWVV
-	vzaQ==
+	Sun, 29 Apr 2018 09:54:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0EM3DTMsBs3RkSPTr6DbOtx0FTVg+39la9xbgs24AUU=;
-	b=N6RLs4Q/ckr32nCQm9w40Z+kw+e0BTgI/Zl2oHITBHyQk4XKP1gKH68jZ9DT70dsdT
-	ttL8hrkL1LgFXiyWCC2FyLmGWHG6u1LEQXCmVwYaROFRmyyBSkYgzXT3yKY8Shz8E0Ky
-	6rWfBzhh1TQEmaHtVZQ3gU0mnK+vZINHCdGAkvvWzLpFcihxMCS71XY2fbUItimW+qBX
-	/30zLoeH2vEHrGBu8gHZpYOeXsM3SO99bMy7VTF1siWdZOQjbWu9VS5hQSpjsJ3SyM+S
-	wQULvMXsRbM6oyVS0vSwiHrLoQsO9nChgHq0nd8YDeXBN/x+Lg3uQsdGAvXdYV2IPNn8
-	aqfQ==
-X-Gm-Message-State: ALQs6tDq29Tndj9P2X9L2Cr8GCDg7/d2WwVw+4i7NEZg1QMlphoj4OL7
-	IHFp/JGxs0yfy6wSUFJ6GuSaTpY8
-X-Google-Smtp-Source: AB8JxZpbvMwoRoQekLJoAmv3vBxsRx5dkJjSDtbHFtGMud8krdobglGkMJ8PgSZZFT9mEdf2p3KhhQ==
-X-Received: by 2002:adf:9814:: with SMTP id
-	v20-v6mr6989048wrb.93.1525018690266; 
-	Sun, 29 Apr 2018 09:18:10 -0700 (PDT)
-Received: from gizero-desktop.tw.it
-	(host193-245-static.58-79-b.business.telecomitalia.it.
-	[79.58.245.193]) by smtp.gmail.com with ESMTPSA id
-	d12-v6sm6050870wrg.2.2018.04.29.09.18.09
+	bh=UEZ2uUBPNm3+TQaPM2LU66SMitQGE2tSeVWqfhHAtsE=;
+	b=cQfTiufBLCz7b3hBmxq4LBSwbyLaPp81WovqM7g2XrLKYTbpf8pV/FCu7sUfgXv+Bd
+	H7LaHtoeDLJm1qpNB8qHGIB9MlCwlFhu/KLYJ4KWq0Uu1QF/ZFoYtW1jlKnin9RsowSZ
+	fy75a5uXTBXjy0DTbVsGy/jtz8KwF67Bfx1rnbWTVggQVK6RMOURBgFcnW84pX3BKTpI
+	Lt37kw6kjgzO2G3LrsSqHoRI4HHFCny9mr7DXEVaFpkDA4oP9bD3yjkOTwv1ZupMfM1s
+	qAgh6bNdXpGpSi9VBpAIG23BsWxdAj/XGRnDXtQGf2KxC6vY6uhjYPYhp4bFVowkCNng
+	cwEQ==
+X-Gm-Message-State: ALQs6tCf27K5QcViZv18y9c2GoRMCk4jv1T7ABpYJMu96eXQ83DiTWMj
+	fI3Nq+WpBa+GkMNeVHW7kUTUvLwX
+X-Google-Smtp-Source: AB8JxZqerEv/4tY0JwCMDcAKh7D9QUv4DWtBT3aKiFRua6OuwvGhu6n1YIXKxV3O5W5GqTEDz5Lo4Q==
+X-Received: by 2002:a0c:d0b2:: with SMTP id
+	z47-v6mr8695709qvg.207.1525020883182; 
+	Sun, 29 Apr 2018 09:54:43 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	k46-v6sm5122820qta.65.2018.04.29.09.54.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 29 Apr 2018 09:18:09 -0700 (PDT)
-From: Andrea Galbusera <gizero@gmail.com>
+	Sun, 29 Apr 2018 09:54:42 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Apr 2018 18:17:49 +0200
-Message-Id: <20180429161749.29535-1-gizero@gmail.com>
-X-Mailer: git-send-email 2.17.0
-Subject: [meta-python][PATCH] meta-python: README: drop outdated/confusing sentence
+Date: Sun, 29 Apr 2018 12:54:24 -0400
+Message-Id: <1525020865-2432-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCH 1/2] nginx: update stable version to 1.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Apr 2018 16:18:10 -0000
+X-List-Received-Date: Sun, 29 Apr 2018 16:54:42 -0000
 
-* declaration of independence from openembedded-core and meta-oe conflicts with
-the current state of the layer, which does indeed depend on both of them for
-building several recipes (as correctly stated a few lines below).
-* anki was removed from meta-oe as well
-* gateone lives in meta-python and is one of those recipes with dependencies in
-meta-oe
+License-Update: Update license file for latest copyright date
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/README | 4 ----
- 1 file changed, 4 deletions(-)
+ meta-webserver/recipes-httpd/nginx/nginx_1.12.2.bb | 6 ------
+ meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb | 6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.12.2.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb
 
-diff --git a/meta-python/README b/meta-python/README
-index 0566e4992..705b035d9 100644
---- a/meta-python/README
-+++ b/meta-python/README
-@@ -5,10 +5,6 @@ Introduction
- -------------------------
- 
- This layer is intended to be the home of python modules for OpenEmbedded.
--Modules in this layer need to be independent of openembedded-core and
--meta-openembedded/meta-oe. Because of this, modules required by 'gateone'
--and 'anki' are not included and remain in:
--        meta-openembedded/meta-oe/recipes-devtools/python.
- 
- Dependencies
- -------------------------
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.12.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.12.2.bb
+deleted file mode 100644
+index 85ad29b..0000000
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.12.2.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require nginx.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
+-
+-SRC_URI[md5sum] = "4d2fc76211435f029271f1cf6d7eeae3"
+-SRC_URI[sha256sum] = "305f379da1d5fb5aefa79e45c829852ca6983c7cd2a79328f8e084a324cf0416"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb
+new file mode 100644
+index 0000000..de22960
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb
+@@ -0,0 +1,6 @@
++require nginx.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
++
++SRC_URI[md5sum] = "2d856aca3dfe1d32e3c9f8c4cac0cc95"
++SRC_URI[sha256sum] = "5d15becbf69aba1fe33f8d416d97edd95ea8919ea9ac519eff9bafebb6022cb5"
 -- 
-2.17.0
+2.7.4
 
 
