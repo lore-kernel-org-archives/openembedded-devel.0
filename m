@@ -1,53 +1,48 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3724971DD2
+Return-Path: <carlos.rodriguez@ridgerun.com>
+Received: from mail-vk0-f54.google.com (mail-vk0-f54.google.com
+	[209.85.213.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7203A65D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2018 18:02:17 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id x12so8936640wmc.0
+	Mon, 30 Apr 2018 21:33:14 +0000 (UTC)
+Received: by mail-vk0-f54.google.com with SMTP id 10-v6so6004973vkh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Apr 2018 11:02:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=W+xlSUrTvLuYwSYts9qwap0J/pEeMoIUTydW7+Zx2vk=;
-	b=hMgSETFPtooe/rmbQEgWJXwOuqXQ3+KbRrEccEsT0xHH55Qv5q0SDreCG9SYRSLjNj
-	XSFBDIXecTUzppCoZgYN++T89kGZecX951V59AOFeanYHlcNNtGTBbOOUfe70ZbxETav
-	zUeKjij7qOZJzDsU8AsGKHC0dDHydMe3r27HQ69aZ3vOVAxwxmwnAwuXXCGgIAprIovd
-	hNqIiyFv2iBcIiyeeX+/Bul7nGeL1WnyRieOCVQ9n/LXjh140nTRpN9UdP1FBRYbMXS0
-	JhNQQAuuLlRi7nysTBsBCFhM+b3OAD8QGY3DKC8j6z+ekk3a+0Zzn2B+J2VzJ89LWiL1
-	eubw==
+	Mon, 30 Apr 2018 14:33:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=VTLyUVICSY693GmFkvFKHd05fVIXxg3D8J/Ot8liGi0=;
+	b=nZ2aD/6PMuA2TopaHWuWIX0z5Warb1avA0LjESd/H0vpd/mF4rdplAacbPQ7hmCgSO
+	yuKjZuJw6aKqhklnDNaTJuzgbeEbfRttEAf9QZmWLfC/AvwpOrfVKvKehggu7he8tYDp
+	kuMgjOPsVeT0JAG4s0EnMU6NbCDAcdPM/xdOjegVTqG2Fsl0Gj3fs1ClS+zsQ0He1q+/
+	SPDKD6PiB6t4F1At2mBpNneomDe/VaAbgC76MbqcwoD4bh5bG1rODq2+bezAJ7KHRPGp
+	43tlF2zz8oURP4rZNk99lThyz8XA7a9Z8vvcig1OurdnntOlmqevOaK3b8D3DHkw2R1n
+	U4Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=W+xlSUrTvLuYwSYts9qwap0J/pEeMoIUTydW7+Zx2vk=;
-	b=N+8fFfylVgZM+MOQpPgvIAZ0BOEEjhdegfr4cBnqqM/Sji7FU17vvDXWWm15Xvhh1+
-	AaWtva2zJxXKlMBYG5YXirxrXbf17d8caxNzW/KJ8NTQetykDBf/6eW4LWREJKV8KT03
-	FNNcvFkU529VoXs/fGLHvZ7vdlcQFIfvoW0f+w11dNZD3+fvnxg5sb+1Rrnh3VFaO/q7
-	qwCFRPc/XgppqBmVFW2TBGyH2IAyIZGigDEPzZ7k2MrIdw5A+Y4R62yF2cd4ftjxQsfG
-	8cSNMqffcNWa+O8AnLFNfX/i3PyGpXEXNjTcZkNqP+Y1NAWtY1KoQCTmdoXb5eAil8vy
-	nd7g==
-X-Gm-Message-State: ALQs6tAqsA47hJlWjgbDy0zvVcXoPd/nSdf1sn1pzflhVV280PMqsYO/
-	6KwoZ90Tx4c6xMRpjr01vgDzTA==
-X-Google-Smtp-Source: AB8JxZrSJF2CbrP2esYLUq3uSTJzADevIOQ2Y39btTthmFpuRyDQx346cZtGjMyReZxSGfKJ303kHw==
-X-Received: by 10.28.3.197 with SMTP id 188mr5379886wmd.43.1525024938219;
-	Sun, 29 Apr 2018 11:02:18 -0700 (PDT)
-Received: from localhost.localdomain ([2.43.123.17])
-	by smtp.gmail.com with ESMTPSA id
-	u196sm5638653wmf.30.2018.04.29.11.02.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 29 Apr 2018 11:02:17 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VTLyUVICSY693GmFkvFKHd05fVIXxg3D8J/Ot8liGi0=;
+	b=nOrAlBY8SWtvBFKpe7S2jIkXzNZs5TOZX7sUbSR2TeAr3kjTBtJzsfqT1R+q0XXK8M
+	LKvlYdFJPN+ZXosbdbXwVkaAUmYt3if6bNMJtghUgLMTG6tsvQcPDgZwLH1Wm5KMKU78
+	mb8X1oecS9M72oFxVWtpDXrgTpAerjNahgJwRl2pshwuZyPWZijytSUHRAPpvzHM4ec2
+	l/StSiu+SxFfGtmInNIllFcSqEW9KvP9nwvpJkPZRKx2+de6DCRszBYdktSZKVvuX2Ip
+	5orwWRMD2azFa/WoiROWeu3Dv+smkYChxzChyLF9EAF/wp3zOWl8kH/oyzP1A34lCTEk
+	V22Q==
+X-Gm-Message-State: ALQs6tCl5Z43FbL/ieCJymD3uQwcxCBgJFkHKjiIUoZuFqawUv0uiA3x
+	Yis+/eS/4Unfu/6TJgG1xVWFz1bX
+X-Google-Smtp-Source: AB8JxZp7s+5OiRXnn+AIH5OhX+ydWnpcf31aDxjKHJpq88k+4XIelJazPkwVm18V8QByHxrZkpwMWA==
+X-Received: by 2002:a1f:a80f:: with SMTP id
+	r15-v6mr11094614vke.186.1525123995540; 
+	Mon, 30 Apr 2018 14:33:15 -0700 (PDT)
+Received: from crodriguez.cr.ridgerun.com ([201.206.221.6])
+	by smtp.gmail.com with ESMTPSA id y15sm1327441ual.1.2018.04.30.14.33.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 30 Apr 2018 14:33:14 -0700 (PDT)
+From: rrcarlosrodriguez <carlos.rodriguez@ridgerun.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Apr 2018 20:02:06 +0200
-Message-Id: <20180429180206.12683-2-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20180429180206.12683-1-costamagnagianfranco@yahoo.it>
-References: <20180429180206.12683-1-costamagnagianfranco@yahoo.it>
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagna.gianfranco@gmail.com>,
-	Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
-Subject: [meta-networking][PATCH 2/2] cpprest: add new recipe based on Debian packaging
+Date: Mon, 30 Apr 2018 15:33:08 -0600
+Message-Id: <1525123988-8184-1-git-send-email-carlos.rodriguez@ridgerun.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH v4] gst-shark: Add Gst-Shark recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,112 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Apr 2018 18:02:18 -0000
+X-List-Received-Date: Mon, 30 Apr 2018 21:33:15 -0000
 
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+GstShark is an open-source project from RidgeRun that provides
+benchmarks and profiling tools for GStreamer 1.7.1 (and above).
+It includes tracers for generating debug information plus some
+tools to analyze the debug information. GstShark provides easy
+to use and useful tracers, paired with analysis tools to enable
+straightforward optimizations.
 
-The patches were imported from the Debian repository
-(https://salsa.debian.org/debian/casablanca) as of commit id 5b58637016a569a5d54714bd151a800028f77532
-
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
-Co-developed-by: Cristiano Prato <cristiano.prato@cnhind.com>
+Signed-off-by: rrcarlosrodriguez <carlos.rodriguez@ridgerun.com>
 ---
- .../cpprest/cpprest-2.10.2/fix-cmake-install.patch | 59 ++++++++++++++++++++++
- .../recipes-support/cpprest/cpprest_2.10.2.bb      | 17 +++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-networking/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
- create mode 100644 meta-networking/recipes-support/cpprest/cpprest_2.10.2.bb
+ .../gstreamer-1.0/gst-shark_0.2.1.bb               | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
 
-diff --git a/meta-networking/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch b/meta-networking/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
 new file mode 100644
-index 000000000..56fd704ad
+index 0000000..5409f32
 --- /dev/null
-+++ b/meta-networking/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
-@@ -0,0 +1,59 @@
-+Description: install cmake files into /usr/lib/cmake/cpprestsdk
-+Author: Gianfranco Costamagna <locutusofborg@debian.org>
-+Upstream-Status: https://github.com/Microsoft/cpprestsdk/pull/737
-+Forwarded: https://github.com/Microsoft/cpprestsdk/pull/737
-+Last-Update: 2018-04-19
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Gst-Shark Tracers"
++DESCRIPTION = "Benchmarks and profiling tools for GStreamer"
++HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=GstShark"
++SECTION = "multimedia"
++LICENSE = "GPLv2+"
 +
-+Index: cpprest/CMakeLists.txt
-+===================================================================
-+--- cpprest.orig/CMakeLists.txt
-++++ cpprest/CMakeLists.txt
-+@@ -18,7 +18,6 @@
-+ set(WERROR ON CACHE BOOL "Treat Warnings as Errors.")
-+ set(CPPREST_EXCLUDE_WEBSOCKETS OFF CACHE BOOL "Exclude websockets functionality.")
-+ set(CPPREST_EXCLUDE_COMPRESSION OFF CACHE BOOL "Exclude compression functionality.")
-+-set(CPPREST_EXPORT_DIR lib/cpprestsdk CACHE STRING "Directory to install CMake config files.")
-+ set(CPPREST_INSTALL_HEADERS ON CACHE BOOL "Install header files.")
-+ set(CPPREST_INSTALL ON CACHE BOOL "Add install commands.")
-+ 
-+@@ -63,6 +62,9 @@
-+ include(cmake/cpprest_find_openssl.cmake)
-+ include(cmake/cpprest_find_websocketpp.cmake)
-+ include(CheckIncludeFiles)
-++if(UNIX)
-++include(GNUInstallDirs)
-++endif(UNIX)
-+ 
-+ find_package(Threads REQUIRED)
-+ if(THREADS_HAVE_PTHREAD_ARG)
-+Index: cpprest/src/CMakeLists.txt
-+===================================================================
-+--- cpprest.orig/src/CMakeLists.txt
-++++ cpprest/src/CMakeLists.txt
-+@@ -250,21 +250,21 @@
-+   install(
-+     TARGETS ${CPPREST_TARGETS}
-+     EXPORT cpprestsdk-targets
-+-    RUNTIME DESTINATION bin
-+-    LIBRARY DESTINATION lib
-+-    ARCHIVE DESTINATION lib
-++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+   )
-+ 
-+   configure_file(../cmake/cpprestsdk-config.in.cmake "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake" @ONLY)
-+ 
-+   install(
-+     FILES "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake"
-+-    DESTINATION ${CPPREST_EXPORT_DIR}
-++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake
-+   )
-+   install(
-+     EXPORT cpprestsdk-targets
-+     FILE cpprestsdk-targets.cmake
-+     NAMESPACE cpprestsdk::
-+-    DESTINATION ${CPPREST_EXPORT_DIR}
-++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake
-+   )
-+ endif()
-diff --git a/meta-networking/recipes-support/cpprest/cpprest_2.10.2.bb b/meta-networking/recipes-support/cpprest/cpprest_2.10.2.bb
-new file mode 100644
-index 000000000..2ba6fc66c
---- /dev/null
-+++ b/meta-networking/recipes-support/cpprest/cpprest_2.10.2.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design."
-+SECTION = "libs/network"
-+HOMEPAGE = "https://github.com/Microsoft/cpprestsdk/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${S}/../license.txt;md5=a2e15b954769218ff912468eecd6a02f"
-+DEPENDS = "openssl websocketpp zlib boost"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e1caa368743492879002ad032445fa97"
 +
-+SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master"
++DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
 +
-+SRC_URI += "file://fix-cmake-install.patch"
++SRCBRANCH ?= "master"
 +
-+# tag 2.10.2
-+SRCREV= "fea848e2a77563cf2a6f28f8eab396fd6e787fbf"
++SRCREV_base = "a60b3996fe3376d42334fc89014e9d6f6af62899"
++SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
 +
-+S = "${WORKDIR}/git/Release"
++SRC_URI = " \
++    git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
++    git://anongit.freedesktop.org/git/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common; \
++    "
 +
-+inherit cmake
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG_CONFARGS = " \
++       --disable-graphviz \
++       --enable-gtk-doc=no \
++"
++
++FILES_${PN} += "\
++       ${libdir}/gstreamer-1.0/libgstsharktracers.so  \
++       ${libdir}/gstreamer-1.0/libgstsharktracers.la \
++"
++
++inherit autotools gettext
++
++do_configure() {
++        ${S}/autogen.sh --noconfigure
++        oe_runconf
++}
 -- 
-2.14.1
+2.7.4
 
 
