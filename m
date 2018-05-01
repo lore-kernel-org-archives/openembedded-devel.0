@@ -1,48 +1,24 @@
-Return-Path: <carlos.rodriguez@ridgerun.com>
-Received: from mail-vk0-f54.google.com (mail-vk0-f54.google.com
-	[209.85.213.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 7203A65D00
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 18DCD745D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Apr 2018 21:33:14 +0000 (UTC)
-Received: by mail-vk0-f54.google.com with SMTP id 10-v6so6004973vkh.5
+	Tue,  1 May 2018 23:15:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w41NFDSK004046
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Apr 2018 14:33:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ridgerun-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=VTLyUVICSY693GmFkvFKHd05fVIXxg3D8J/Ot8liGi0=;
-	b=nZ2aD/6PMuA2TopaHWuWIX0z5Warb1avA0LjESd/H0vpd/mF4rdplAacbPQ7hmCgSO
-	yuKjZuJw6aKqhklnDNaTJuzgbeEbfRttEAf9QZmWLfC/AvwpOrfVKvKehggu7he8tYDp
-	kuMgjOPsVeT0JAG4s0EnMU6NbCDAcdPM/xdOjegVTqG2Fsl0Gj3fs1ClS+zsQ0He1q+/
-	SPDKD6PiB6t4F1At2mBpNneomDe/VaAbgC76MbqcwoD4bh5bG1rODq2+bezAJ7KHRPGp
-	43tlF2zz8oURP4rZNk99lThyz8XA7a9Z8vvcig1OurdnntOlmqevOaK3b8D3DHkw2R1n
-	U4Sg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VTLyUVICSY693GmFkvFKHd05fVIXxg3D8J/Ot8liGi0=;
-	b=nOrAlBY8SWtvBFKpe7S2jIkXzNZs5TOZX7sUbSR2TeAr3kjTBtJzsfqT1R+q0XXK8M
-	LKvlYdFJPN+ZXosbdbXwVkaAUmYt3if6bNMJtghUgLMTG6tsvQcPDgZwLH1Wm5KMKU78
-	mb8X1oecS9M72oFxVWtpDXrgTpAerjNahgJwRl2pshwuZyPWZijytSUHRAPpvzHM4ec2
-	l/StSiu+SxFfGtmInNIllFcSqEW9KvP9nwvpJkPZRKx2+de6DCRszBYdktSZKVvuX2Ip
-	5orwWRMD2azFa/WoiROWeu3Dv+smkYChxzChyLF9EAF/wp3zOWl8kH/oyzP1A34lCTEk
-	V22Q==
-X-Gm-Message-State: ALQs6tCl5Z43FbL/ieCJymD3uQwcxCBgJFkHKjiIUoZuFqawUv0uiA3x
-	Yis+/eS/4Unfu/6TJgG1xVWFz1bX
-X-Google-Smtp-Source: AB8JxZp7s+5OiRXnn+AIH5OhX+ydWnpcf31aDxjKHJpq88k+4XIelJazPkwVm18V8QByHxrZkpwMWA==
-X-Received: by 2002:a1f:a80f:: with SMTP id
-	r15-v6mr11094614vke.186.1525123995540; 
-	Mon, 30 Apr 2018 14:33:15 -0700 (PDT)
-Received: from crodriguez.cr.ridgerun.com ([201.206.221.6])
-	by smtp.gmail.com with ESMTPSA id y15sm1327441ual.1.2018.04.30.14.33.14
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 30 Apr 2018 14:33:14 -0700 (PDT)
-From: rrcarlosrodriguez <carlos.rodriguez@ridgerun.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Apr 2018 15:33:08 -0600
-Message-Id: <1525123988-8184-1-git-send-email-carlos.rodriguez@ridgerun.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH v4] gst-shark: Add Gst-Shark recipe
+	Tue, 1 May 2018 16:15:29 -0700
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 1 May 2018 16:15:03 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 1 May 2018 16:15:03 -0700
+Message-ID: <20180501231503.119778-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/1] phoronix-test-suite: disable systemd services by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,65 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Apr 2018 21:33:15 -0000
+X-List-Received-Date: Tue, 01 May 2018 23:15:39 -0000
+Content-Type: text/plain
 
-GstShark is an open-source project from RidgeRun that provides
-benchmarks and profiling tools for GStreamer 1.7.1 (and above).
-It includes tracers for generating debug information plus some
-tools to analyze the debug information. GstShark provides easy
-to use and useful tracers, paired with analysis tools to enable
-straightforward optimizations.
+Unfortunately, the default behavior for at least the client service is to
+reboot the machine if it encounters problems.  Since it is pretty
+much guaranteed to need target specific configuration info, we
+should not enable the service(s) by default.
 
-Signed-off-by: rrcarlosrodriguez <carlos.rodriguez@ridgerun.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../gstreamer-1.0/gst-shark_0.2.1.bb               | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
+ .../phoronix-test-suite/phoronix-test-suite_7.8.0.bb                 | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
-new file mode 100644
-index 0000000..5409f32
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_0.2.1.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "Gst-Shark Tracers"
-+DESCRIPTION = "Benchmarks and profiling tools for GStreamer"
-+HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=GstShark"
-+SECTION = "multimedia"
-+LICENSE = "GPLv2+"
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
+index b205821..1f90a71 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
+@@ -23,7 +23,12 @@ do_install() {
+     fi
+ }
+ 
++# It is not advisable to enable these services by default since they can cause
++# continual target reboots if they encounter network problems.
++#
++SYSTEMD_AUTO_ENABLE = "disable"
+ SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e1caa368743492879002ad032445fa97"
-+
-+DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
-+
-+SRCBRANCH ?= "master"
-+
-+SRCREV_base = "a60b3996fe3376d42334fc89014e9d6f6af62899"
-+SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
-+
-+SRC_URI = " \
-+    git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
-+    git://anongit.freedesktop.org/git/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common; \
-+    "
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG_CONFARGS = " \
-+       --disable-graphviz \
-+       --enable-gtk-doc=no \
-+"
-+
-+FILES_${PN} += "\
-+       ${libdir}/gstreamer-1.0/libgstsharktracers.so  \
-+       ${libdir}/gstreamer-1.0/libgstsharktracers.la \
-+"
-+
-+inherit autotools gettext
-+
-+do_configure() {
-+        ${S}/autogen.sh --noconfigure
-+        oe_runconf
-+}
+ RDEPENDS_${PN} += "bash python php-cli"
+ 
+ FILES_${PN} += " \
 -- 
 2.7.4
 
