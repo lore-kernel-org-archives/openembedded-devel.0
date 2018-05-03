@@ -1,59 +1,24 @@
-Return-Path: <mcrowe@brightsign.biz>
-X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 03 May 2018 09:58:22 UTC
-Received: from relay.appriver.com (relay101a.appriver.com [207.97.230.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B3627482C
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A24E74966
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 May 2018 09:58:22 +0000 (UTC)
-X-Note: This Email was scanned by AppRiver SecureTide
-X-Note-AR-ScanTimeLocal: 05/03/2018 5:43:21 AM
-X-Note: SecureTide Build: 1/19/2018 4:03:46 PM UTC (2.6.29.0)
-X-Note: Filtered by 10.238.11.161
-X-Note-AR-Scan: None - PIPE
-Received: by relay.appriver.com (CommuniGate Pro PIPE 6.2.1)
-	with PIPE id 372257798; Thu, 03 May 2018 05:43:21 -0400
-Received: from [213.210.30.29] (HELO elite.brightsign)
-	by relay.appriver.com (CommuniGate Pro SMTP 6.2.1)
-	with ESMTPS id 372257780; Thu, 03 May 2018 05:43:17 -0400
-Received: from chuckie.brightsign ([fd44:d8b8:cab5:cb01::19] helo=chuckie)
-	by elite.brightsign with esmtp (Exim 4.89)
-	(envelope-from <mcrowe@brightsign.biz>)
-	id 1fEAlh-0005JC-Te; Thu, 03 May 2018 10:43:17 +0100
-Received: from mac by chuckie with local (Exim 4.89)
-	(envelope-from <mcrowe@brightsign.biz>)
-	id 1fEAlh-00030V-SF; Thu, 03 May 2018 10:43:17 +0100
-From: Mike Crowe <mac@mcrowe.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 May 2018 10:43:08 +0100
-Message-Id: <20180503094308.7549-1-mac@mcrowe.com>
-X-Mailer: git-send-email 2.11.0
+	Thu,  3 May 2018 18:12:42 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w43ICICt031970
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 3 May 2018 11:12:33 -0700
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 3 May 2018 11:12:07 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 3 May 2018 14:11:54 -0400
+Message-ID: <1525371114-30249-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Note: This Email was scanned by AppRiver SecureTide
-X-Note-AR-ScanTimeLocal: 05/03/2018 5:43:17 AM
-X-Note: SecureTide Build: 1/19/2018 4:03:46 PM UTC (2.6.29.0)
-X-Note: Filtered by 10.238.11.161
-X-Policy: brightsign.biz
-X-Primary: brightsign.biz@brightsign.biz
-X-Virus-Scan: V-
-X-Note: ICH-CT/SI:0-0/SG:1 1/1/0001 12:00:00 AM
-X-Note-SnifferID: 0
-X-Note: TCH-CT/SI:0-82/SG:2 5/3/2018 5:42:28 AM
-X-GBUdb-Analysis: 0, 213.210.30.29, Ugly c=0.528638 p=-1 Source White
-X-Signature-Violations: 0-0-0-3606-c
-X-Note-419: 15.6266 ms. Fail:0 Chk:1360 of 1360 total
-X-Note: VSCH-CT/SI: 0-1360/SG:1 5/3/2018 5:42:28 AM
-X-Note: Spam Tests Failed: 
-X-Country-Path: ->->United Kingdom->United States
-X-Note-Sending-IP: 213.210.30.29
-X-Note-Reverse-DNS: elite.brightsigndigital.co.uk
-X-Note-Return-Path: mcrowe@brightsign.biz
-X-Note: User Rule Hits: 
-X-Note: Global Rule Hits: G335 G336 G337 G338 G342 G343 G475 
-X-Note: Encrypt Rule Hits: 
-X-Note: Mail Class: VALID
-Cc: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>,
-	Mike Crowe <mac@mcrowe.com>
-Subject: [meta-java][PATCH] jdepend: Update download hashes
+Subject: [meta-networking][PATCH] networkmanager: fix "installed-vs-shipped" QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,44 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 May 2018 09:58:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 03 May 2018 18:12:43 -0000
+Content-Type: text/plain
 
-When Bitbake downloads jdepend-2.9.1.zip itself and I download
-https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
-the calculated hashes don't match the ones included in the recipe.
+When building we can see the following QA issue:
+  QA Issue: networkmanager: Files/directories were installed but
+    not shipped in any package:
+  [2018-05-02 23:01:40.442528079-07:00]   /usr/lib/NetworkManager
+  [2018-05-02 23:01:40.450990449-07:00]   /usr/lib/NetworkManager/conf.d
+  [2018-05-02 23:01:40.456642738-07:00]   /usr/lib/NetworkManager/VPN
 
-The hashes were last changed in commit
-dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
-that the file being downloaded was published on 20th January, so I can't
-explain why they are wrong.
+The upstream project moved these to $prefix/lib as part of upstream
+commit 74818b155c32 [build: fix $nmlibdir to be
+"/usr/lib/NetworkManager"] and here we adapt the recipe to take this
+change into effect.
 
-Nevertheless, let's update the recipe to use hashes that match the current
-download.
-
-Signed-off-by: Mike Crowe <mac@mcrowe.com>
-Cc: André Draszik <andre.draszik@jci.com>
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
- recipes-core/jdepend/jdepend_2.9.1.bb | 4 ++--
+ .../recipes-connectivity/networkmanager/networkmanager_1.10.6.bb      | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
-index 5f09a8b..a924f1d 100644
---- a/recipes-core/jdepend/jdepend_2.9.1.bb
-+++ b/recipes-core/jdepend/jdepend_2.9.1.bb
-@@ -18,7 +18,7 @@ do_compile() {
-   fastjar cf ${JARFILENAME} -C build .
- }
- 
--SRC_URI[md5sum] = "9b91efe1d770e023893f89f4dde8434e"
--SRC_URI[sha256sum] = "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f278f72e522e7f7c9"
-+SRC_URI[md5sum] = "0cbaf43493cd30838bee261f69e76fe9"
-+SRC_URI[sha256sum] = "b9f34236aaea5ddc070caa29794d2f5ae79bc12e199bec6ebba6c29093a17a9e"
- 
- BBCLASSEXTEND = "native"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+index d90b782..91636ec 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+@@ -100,8 +100,8 @@ FILES_${PN} += " \
+     ${libexecdir} \
+     ${libdir}/pppd/*/nm-pppd-plugin.so \
+     ${libdir}/NetworkManager/*.so \
+-    ${libdir}/NetworkManager/VPN \
+-    ${libdir}/NetworkManager/conf.d \
++    ${prefix}/lib/NetworkManager/VPN \
++    ${prefix}/lib/NetworkManager/conf.d \
+     ${datadir}/polkit-1 \
+     ${datadir}/dbus-1 \
+     ${base_libdir}/udev/* \
 -- 
-2.11.0
-
+2.7.4
 
 
