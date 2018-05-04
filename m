@@ -1,46 +1,29 @@
-Return-Path: <andrew@aj.id.au>
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AEA574AEB
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 6406B60797
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 May 2018 07:09:46 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id CF02E226DD;
-	Fri,  4 May 2018 03:09:47 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-	by compute4.internal (MEProxy); Fri, 04 May 2018 03:09:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=cc
-	:date:from:in-reply-to:message-id:references:subject:to
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=b1oUnctt2r1eCGx+4
-	p7OPFMGcdKNA6k3FafxLUdlMhU=; b=QCqxB/aXfW6PdQsYJT2AtCjn2P6w7qizs
-	ekejaEY3qrRzfTfZ23/kjBCM+ca6BGoSIno3js134hqeRJ2BhMkLkbYbARmFY7GI
-	xhWVeE4974/utDrCeFwCaCQJJfzjcrvQXw4dm3e3HAMdoLjqOFKkWL7cTl99O0LO
-	WwDb3KMaeqASHlnm2RF1nfKPd29qGP2XdUfRVg427jOnFoQ0plaidRV3IlrAWJaI
-	iba7ZP7i3tS9cEKksbux+VDQL6tjAaJPai018Any5VqYGLjWqBghPZF5K+RKeHIg
-	tZTYDnfn+JkQo8N2pFYEyALpRS1rJrPwjOE1OYClSsVMXqSHWO50Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:date:from:in-reply-to:message-id
-	:references:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; bh=b1oUnctt2r1eCGx+4p7OPFMGcdKNA6k3FafxLUdlMhU=; b=J6yxd4Ng
-	bx5bEvGBEjFa93Kl46UA5+N+Af7wm/KVygUDO9LJ2LR6/U+OIPWe7WBfYLLYt2hp
-	GIe2/UzAoiBhb1XTZ1Q0MW8qyM9rCFifOG5VjFokzccuSu5vLg2DdFG6PniGrzIM
-	sHF3cZwXq/H3WLRLHHGK6Ryhg+OMSIBkIFYYVbO6MSWQWnWBi05wyexSvOmGQGyg
-	h11FOuAhvZmMG7l0X96/W1MgogrRbCf/YuthCi8DclX3H9rFWoe59QhbVmayu/8K
-	JkqAUE59beUnwwqEy+hKOVOTQySvhV9YdNKJ8zoi5R3F7kIncFm/ZNJHszrZXr6k
-	5U5aNckJhAP14A==
-X-ME-Sender: <xms:OwfsWrR3xnRMVKjrAhperyEOfAwqeGVPPC8gMcYRCas508QkOkS5LQ>
-Received: from dave.base64.com.au (unknown [203.0.153.9])
-	by mail.messagingengine.com (Postfix) with ESMTPA id DF04610256;
-	Fri,  4 May 2018 03:09:45 -0400 (EDT)
-From: Andrew Jeffery <andrew@aj.id.au>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 May 2018 16:39:16 +0930
-Message-Id: <20180504070916.11024-3-andrew@aj.id.au>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20180504070916.11024-1-andrew@aj.id.au>
+	Fri,  4 May 2018 07:50:19 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	04 May 2018 00:50:20 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,361,1520924400"; d="scan'208";a="38365241"
+Received: from anmitta2-mobl1.png.intel.com (HELO [10.221.17.106])
+	([10.221.17.106])
+	by orsmga007.jf.intel.com with ESMTP; 04 May 2018 00:50:19 -0700
+To: Andrew Jeffery <andrew@aj.id.au>, openembedded-devel@lists.openembedded.org
 References: <20180504070916.11024-1-andrew@aj.id.au>
+From: Anuj Mittal <anuj.mittal@intel.com>
+Message-ID: <ab208a40-d4eb-4807-8f38-824738aff34b@intel.com>
+Date: Fri, 4 May 2018 15:50:17 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
+MIME-Version: 1.0
+In-Reply-To: <20180504070916.11024-1-andrew@aj.id.au>
 Cc: openbmc@lists.ozlabs.org
-Subject: [RESEND][meta-python][PATCH 3/3] meta-python: Make python-pyflame cope with prelinked ELFs
+Subject: Re: [RESEND][meta-python][PATCH 1/3] meta-python: Add python-pyflame recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,165 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2018 07:09:46 -0000
+X-List-Received-Date: Fri, 04 May 2018 07:50:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
----
- ...mbol-Account-for-prelinked-shared-objects.patch | 134 +++++++++++++++++++++
- .../python/python-pyflame_1.6.6.bb                 |   1 +
- 2 files changed, 135 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyflame/0001-symbol-Account-for-prelinked-shared-objects.patch
+On 05/04/2018 03:09 PM, Andrew Jeffery wrote:
+> Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+> ---
+>  meta-python/recipes-devtools/python/python-pyflame.inc      | 9 +++++++++
+>  meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb | 5 +++++
+>  2 files changed, 14 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-pyflame.inc
+>  create mode 100644 meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> 
+> diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/meta-python/recipes-devtools/python/python-pyflame.inc
+> new file mode 100644
+> index 000000000000..37ceab888533
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pyflame.inc
+> @@ -0,0 +1,9 @@
+> +S = "${WORKDIR}/pyflame-${PV}"
+> +
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+> +
+> +DEPENDS = "python"
+> +
+> +inherit pkgconfig autotools
+> +
+> diff --git a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> new file mode 100644
+> index 000000000000..c902e121231b
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> @@ -0,0 +1,5 @@
+> +require python-pyflame.inc
+> +
+> +SRC_URI = "https://github.com/uber/pyflame/archive/v${PV}.tar.gz"
 
-diff --git a/meta-python/recipes-devtools/python/python-pyflame/0001-symbol-Account-for-prelinked-shared-objects.patch b/meta-python/recipes-devtools/python/python-pyflame/0001-symbol-Account-for-prelinked-shared-objects.patch
-new file mode 100644
-index 000000000000..3eefc9cb9830
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyflame/0001-symbol-Account-for-prelinked-shared-objects.patch
-@@ -0,0 +1,134 @@
-+From 007965d341349679607699d005c4af811b2c419a Mon Sep 17 00:00:00 2001
-+From: Andrew Jeffery <andrew@aj.id.au>
-+Date: Fri, 4 May 2018 11:23:53 +0930
-+Subject: [PATCH] symbol: Account for prelinked shared objects
-+
-+Some projects, such as those derived from Yocto, tend to prelink their
-+binaries and libraries to reduce runtime overhead. Currently this trips
-+up pyflame in its symbol address calculations, and leads to ptrace
-+failures due to spurious addresses:
-+
-+   $ pyflame -t python -c "print 'foo'"
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   ...
-+
-+Add support for reading a prelinked base p_vaddr out of the ELF and
-+adjust the PyAddresses values accordingly.
-+
-+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
-+---
-+ src/symbol.cc | 15 +++++++++++++++
-+ src/symbol.h  | 29 ++++++++++++++++++++++++++++-
-+ 2 files changed, 43 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/symbol.cc b/src/symbol.cc
-+index 125174efeeb5..39c3e8132dd1 100644
-+--- a/src/symbol.cc
-++++ b/src/symbol.cc
-+@@ -166,6 +166,17 @@ PyABI ELF::WalkTable(int sym, int str, PyAddresses *addrs) {
-+   return abi;
-+ }
-+ 
-++addr_t ELF::GetBaseAddress() {
-++  int32_t phnum = hdr()->e_phnum;
-++  int32_t i;
-++  for (i = 0; i < phnum && phdr(i)->p_type != PT_LOAD; i++) {
-++  }
-++  if (i == phnum) {
-++    throw FatalException("Failed to find PT_LOAD entry in program headers");
-++  }
-++  return phdr(i)->p_vaddr;
-++}
-++
-+ PyAddresses ELF::GetAddresses(PyABI *abi) {
-+   PyAddresses addrs;
-+   PyABI detected_abi = WalkTable(dynsym_, dynstr_, &addrs);
-+@@ -176,6 +187,10 @@ PyAddresses ELF::GetAddresses(PyABI *abi) {
-+   if (abi != nullptr) {
-+     *abi = detected_abi;
-+   }
-++  // Handle prelinked shared objects
-++  if (hdr()->e_type == ET_DYN) {
-++    return addrs - GetBaseAddress();
-++  }
-+   return addrs;
-+ }
-+ }  // namespace pyflame
-+diff --git a/src/symbol.h b/src/symbol.h
-+index 124853bcc1c1..bb92b9a2604b 100644
-+--- a/src/symbol.h
-++++ b/src/symbol.h
-+@@ -28,15 +28,19 @@
-+ 
-+ #if USE_ELF64
-+ #define ehdr_t Elf64_Ehdr
-++#define phdr_t Elf64_Phdr
-+ #define shdr_t Elf64_Shdr
-+ #define dyn_t Elf64_Dyn
-+ #define sym_t Elf64_Sym
-++#define addr_t Elf64_Addr
-+ #define ARCH_ELFCLASS ELFCLASS64
-+ #else
-+ #define ehdr_t Elf32_Ehdr
-++#define phdr_t Elf32_Phdr
-+ #define shdr_t Elf32_Shdr
-+ #define dyn_t Elf32_Dyn
-+ #define sym_t Elf32_Sym
-++#define addr_t Elf32_Addr
-+ #define ARCH_ELFCLASS ELFCLASS32
-+ #endif
-+ 
-+@@ -67,8 +71,18 @@ struct PyAddresses {
-+         interp_head_hint(0),
-+         pie(false) {}
-+ 
-++  PyAddresses operator-(const unsigned long base) const {
-++    PyAddresses res(*this);
-++    res.tstate_addr = this->tstate_addr == 0 ? 0 : this->tstate_addr - base;
-++    res.interp_head_addr =
-++        this->interp_head_addr == 0 ? 0 : this->interp_head_addr - base;
-++    res.interp_head_fn_addr =
-++        this->interp_head_fn_addr == 0 ? 0 : this->interp_head_fn_addr - base;
-++    return res;
-++  }
-++
-+   PyAddresses operator+(const unsigned long base) const {
-+-    PyAddresses res;
-++    PyAddresses res(*this);
-+     res.tstate_addr = this->tstate_addr == 0 ? 0 : this->tstate_addr + base;
-+     res.interp_head_addr =
-+         this->interp_head_addr == 0 ? 0 : this->interp_head_addr + base;
-+@@ -113,6 +127,9 @@ class ELF {
-+   // ABI.
-+   PyAddresses GetAddresses(PyABI *abi);
-+ 
-++  // Extract the base load address from the Program Header table
-++  addr_t GetBaseAddress();
-++
-+  private:
-+   void *addr_;
-+   size_t length_;
-+@@ -122,6 +139,16 @@ class ELF {
-+     return reinterpret_cast<const ehdr_t *>(addr_);
-+   }
-+ 
-++  inline const phdr_t *phdr(int idx) const {
-++    if (idx < 0) {
-++      std::ostringstream ss;
-++      ss << "Illegal phdr index: " << idx;
-++      throw FatalException(ss.str());
-++    }
-++    return reinterpret_cast<const phdr_t *>(p() + hdr()->e_phoff +
-++                                            idx * hdr()->e_phentsize);
-++  }
-++
-+   inline const shdr_t *shdr(int idx) const {
-+     if (idx < 0) {
-+       std::ostringstream ss;
-+-- 
-+2.14.1
-+
-diff --git a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
-index 2edd708506e3..93c8ddc6d483 100644
---- a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
-+++ b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
-@@ -5,3 +5,4 @@ SRC_URI[md5sum] = "53d5822e5be371303e217a68ea9ea3e5"
- SRC_URI[sha256sum] = "03723509c037a994585e81e4a9c6d8e4fed87b486e23edd8d355a7bcc009bf79"
- 
- SRC_URI += "file://0001-ptrace-Abstract-over-user_regs_struct-name-which-dif.patch"
-+SRC_URI += "file://0001-symbol-Account-for-prelinked-shared-objects.patch"
--- 
-2.14.1
+Archive tarball checksums are known to change. Perhaps you can consider
+using the release tarball instead?
 
+https://github.com/uber/pyflame/releases
 
