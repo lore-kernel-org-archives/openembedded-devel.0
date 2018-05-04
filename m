@@ -1,24 +1,59 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AF2174C3E
+Return-Path: <mcrowe@brightsign.biz>
+Received: from relay.appriver.com (relay101b.appriver.com [207.97.230.15])
+	by mail.openembedded.org (Postfix) with ESMTP id 21EDC74780
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 May 2018 18:35:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w44IZ79J000632
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 May 2018 11:35:23 -0700
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 4 May 2018 11:34:57 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 4 May 2018 14:34:53 -0400
-Message-ID: <1525458893-13527-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri,  4 May 2018 18:37:34 +0000 (UTC)
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note-AR-ScanTimeLocal: 05/04/2018 2:37:33 PM
+X-Note: SecureTide Build: 1/19/2018 4:03:46 PM UTC (2.6.29.0)
+X-Note: Filtered by 10.238.11.162
+X-Note-AR-Scan: None - PIPE
+Received: by relay.appriver.com (CommuniGate Pro PIPE 6.2.1)
+	with PIPE id 375257527; Fri, 04 May 2018 14:37:33 -0400
+Received: from [213.210.30.29] (HELO elite.brightsign)
+	by relay.appriver.com (CommuniGate Pro SMTP 6.2.1)
+	with ESMTPS id 375257439; Fri, 04 May 2018 14:37:29 -0400
+Received: from chuckie.brightsign ([fd44:d8b8:cab5:cb01::19] helo=chuckie)
+	by elite.brightsign with esmtp (Exim 4.89)
+	(envelope-from <mcrowe@brightsign.biz>)
+	id 1fEfaE-000GSe-6i; Fri, 04 May 2018 19:37:30 +0100
+Received: from mac by chuckie with local (Exim 4.89)
+	(envelope-from <mcrowe@brightsign.biz>)
+	id 1fEfaE-0005lk-6A; Fri, 04 May 2018 19:37:30 +0100
+From: Mike Crowe <mac@mcrowe.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 May 2018 19:37:25 +0100
+Message-Id: <20180504183725.22134-1-mac@mcrowe.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH V2] networkmanager: fix "installed-vs-shipped" QA issue
+In-Reply-To: <20180503094308.7549-1-mac@mcrowe.com>
+References: <20180503094308.7549-1-mac@mcrowe.com>
+X-Note: This Email was scanned by AppRiver SecureTide
+X-Note-AR-ScanTimeLocal: 05/04/2018 2:37:29 PM
+X-Note: SecureTide Build: 1/19/2018 4:03:46 PM UTC (2.6.29.0)
+X-Note: Filtered by 10.238.11.162
+X-Policy: brightsign.biz
+X-Primary: brightsign.biz@brightsign.biz
+X-Virus-Scan: V-
+X-Note: ICH-CT/SI:0-0/SG:1 1/1/0001 12:00:00 AM
+X-Note-SnifferID: 0
+X-Note: TCH-CT/SI:0-102/SG:2 5/4/2018 2:37:12 PM
+X-GBUdb-Analysis: 0, 213.210.30.29, Ugly c=0.483445 p=-1 Source Normal
+X-Signature-Violations: 0-0-0-4715-c
+X-Note-419: 15.6615 ms. Fail:0 Chk:1360 of 1360 total
+X-Note: VSCH-CT/SI: 0-1360/SG:1 5/4/2018 2:37:12 PM
+X-Note: Spam Tests Failed: 
+X-Country-Path: ->->United Kingdom->United States
+X-Note-Sending-IP: 213.210.30.29
+X-Note-Reverse-DNS: elite.brightsigndigital.co.uk
+X-Note-Return-Path: mcrowe@brightsign.biz
+X-Note: User Rule Hits: 
+X-Note: Global Rule Hits: G335 G336 G337 G338 G342 G343 G475 
+X-Note: Encrypt Rule Hits: 
+X-Note: Mail Class: VALID
+Cc: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>,
+	Mike Crowe <mac@mcrowe.com>
+Subject: [meta-java][PATCHv2] jdepend: Retrieve source from Git rather than tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,46 +66,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2018 18:35:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 04 May 2018 18:37:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-When building we can see the following QA issue:
-  QA Issue: networkmanager: Files/directories were installed but
-    not shipped in any package:
-  [2018-05-02 23:01:40.442528079-07:00]   /usr/lib/NetworkManager
-  [2018-05-02 23:01:40.450990449-07:00]   /usr/lib/NetworkManager/conf.d
-  [2018-05-02 23:01:40.456642738-07:00]   /usr/lib/NetworkManager/VPN
+When Bitbake downloads jdepend-2.9.1.zip itself and I download
+https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
+the calculated hashes don't match the ones included in the recipe.
 
-The upstream project moved these to $prefix/lib as part of upstream
-commit 74818b155c32 [build: fix $nmlibdir to be
-"/usr/lib/NetworkManager"] and here we adapt the recipe to take this
-change into effect.
+The hashes were last changed in commit
+dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
+that the file being downloaded was published on 20th January, so I can't
+explain why they are wrong.
 
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+It seems that we can't really rely on these tarballs to remain unchanged,
+so let's download the Git hash that corresponds to v2.9.1 instead. This
+should always remain valid.
+
+Cc: André Draszik <andre.draszik@jci.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Mike Crowe <mac@mcrowe.com>
 ---
+ recipes-core/jdepend/jdepend_2.9.1.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-** V2 **
-* Use $nonarch_libdir instead of $prefix/lib
+I'll let whoever wants to merge this decide whether to take v1 with
+the updated hashes or v2 using the Git repository.
 
- .../recipes-connectivity/networkmanager/networkmanager_1.10.6.bb      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-index d90b782..7268ce1 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-@@ -100,8 +100,8 @@ FILES_${PN} += " \
-     ${libexecdir} \
-     ${libdir}/pppd/*/nm-pppd-plugin.so \
-     ${libdir}/NetworkManager/*.so \
--    ${libdir}/NetworkManager/VPN \
--    ${libdir}/NetworkManager/conf.d \
-+    ${nonarch_libdir}/NetworkManager/VPN \
-+    ${nonarch_libdir}/NetworkManager/conf.d \
-     ${datadir}/polkit-1 \
-     ${datadir}/dbus-1 \
-     ${base_libdir}/udev/* \
+diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
+index 5f09a8b..dfbf493 100644
+--- a/recipes-core/jdepend/jdepend_2.9.1.bb
++++ b/recipes-core/jdepend/jdepend_2.9.1.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5777d32a7709d558c2877d4a6616230"
+ 
+ HOMEPAGE = "https://github.com/clarkware/jdepend"
+ 
+-SRC_URI = "https://github.com/clarkware/jdepend/archive/${PV}.zip;downloadfilename=${BP}.zip"
++SRC_URI = "git://github.com/clarkware/jdepend"
++SRCREV = "57980590313a5dbde236a3eb2c8958e9e53e6a10"
++S = "${WORKDIR}/git"
+ 
+ inherit java-library
+ 
+@@ -18,7 +20,4 @@ do_compile() {
+   fastjar cf ${JARFILENAME} -C build .
+ }
+ 
+-SRC_URI[md5sum] = "9b91efe1d770e023893f89f4dde8434e"
+-SRC_URI[sha256sum] = "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f278f72e522e7f7c9"
+-
+ BBCLASSEXTEND = "native"
 -- 
-2.7.4
+2.11.0
+
 
 
