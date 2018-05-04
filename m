@@ -1,50 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 43A7574B7E
+Return-Path: <joe.slater@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 27F55748CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 May 2018 19:35:24 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id g20-v6so9399465pgv.1
+	Fri,  4 May 2018 22:04:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w44M4YJm006448
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 May 2018 12:35:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=1loPFmq0OCwFybRXt6//GeswZuKlzAaIEcOm0PDqHmg=;
-	b=WtTYtepG6mNUjCf4vdebf7thFUU9HubG6HfylKBPYvpNO+qoB8Sq4z6ZQas1NsNfO6
-	mrcMTOxUTnAM2WYMl8KYMj1KH0QWzX6CMTHKcrdPJyv43+g69p8G7fLiJ0GhS7UKYUmJ
-	5pLYjExqv9i6Ud+T56Zk1n81hqWfQeSdQwL66ZAnpVDc0UP/jR/IUSw5U4etwNw9b+bJ
-	SH1i/yyYf0oD87kzzw3dd6t2CRywz5z5LA9229ApmMCnbsxX8txN45fnu/cg9UYCkGdB
-	qhfx6NVO128b9l0/4XNFhEoET53/QQEVtwu60bUWhzHYWsk1cwW/jhgxVqbGrvUcb3/A
-	YxAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=1loPFmq0OCwFybRXt6//GeswZuKlzAaIEcOm0PDqHmg=;
-	b=oLJIuo3+PzFxEoQInJQBZldfjRgElhnBVSH2mRlKvyc4l8ESuiqKoSzkVkLXExHYA3
-	MoT08+NZz8CyPm3Ipigx2PpOGnrUJC+udp8tCHN2Xooyzj4ylimPQkRJU0UGHB2fGfMX
-	drjonM43ZqistI/w13rSluJ8x0QWm8j+1Hcc7kvgVjiQ5II7CCPD2S65jgFcTNsEpCK3
-	JwT0fkRLOOGiSxy/Oku99SddcpTLMyYugo0LsBniS7PT+Rl9mcpQpbf5HS0QISYNZA7c
-	XGRKRQpDESYwlKeHq5QjLHxO6Zw1IwS1qMOUq6yRmIONgnNwMOVARjf8rpkKwVTDle91
-	M29Q==
-X-Gm-Message-State: ALQs6tATjJw6dPEfBoVGTV5a6faR4tx0xjjC3q4a88mvcUzB4JxVJPl5
-	pnj7UfwwqkUwbpOrG7FxqzHnRsaxq7qDyPzeNkQ=
-X-Google-Smtp-Source: AB8JxZrDJ1ZzVw9AAKb7OZ4e+KNL+5UYVzjaqODTq7k7xoyayfXs0Cc7OXbhl/jHwAK5yGvK2rpVT4JEEk28HdMn7NI=
-X-Received: by 2002:a17:902:10c:: with SMTP id
-	12-v6mr29225339plb.252.1525462525202; 
-	Fri, 04 May 2018 12:35:25 -0700 (PDT)
+	Fri, 4 May 2018 15:04:34 -0700 (PDT)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 4 May 2018 15:04:33 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 4 May 2018 15:04:33 -0700
+Message-ID: <20180504220433.47694-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
 MIME-Version: 1.0
-Received: by 10.236.159.145 with HTTP; Fri, 4 May 2018 12:34:54 -0700 (PDT)
-In-Reply-To: <20180504183725.22134-1-mac@mcrowe.com>
-References: <20180503094308.7549-1-mac@mcrowe.com>
-	<20180504183725.22134-1-mac@mcrowe.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 May 2018 12:34:54 -0700
-Message-ID: <CAMKF1srY-2rLP=QX6iZUCC1Lb8a6aOrOk-WDXn8273Kis4_uYQ@mail.gmail.com>
-To: Mike Crowe <mac@mcrowe.com>
-Cc: =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@jci.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCHv2] jdepend: Retrieve source from Git rather than tarball
+Subject: [meta-networking][morty][PATCH 1/1] dnsmasq: backport CVE fixes from dnsmasq 2.78
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,66 +30,669 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2018 19:35:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 May 2018 22:04:34 -0000
+Content-Type: text/plain
 
-On Fri, May 4, 2018 at 11:37 AM, Mike Crowe <mac@mcrowe.com> wrote:
-> When Bitbake downloads jdepend-2.9.1.zip itself and I download
-> https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
-> the calculated hashes don't match the ones included in the recipe.
->
-> The hashes were last changed in commit
-> dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
-> that the file being downloaded was published on 20th January, so I can't
-> explain why they are wrong.
->
-> It seems that we can't really rely on these tarballs to remain unchanged,
-> so let's download the Git hash that corresponds to v2.9.1 instead. This
-> should always remain valid.
->
+From: Zhang Xiao <xiao.zhang@windriver.com>
 
-LGTM.
+CVE-2017-1449{1-6}
 
-> Cc: Andr=C3=A9 Draszik <andre.draszik@jci.com>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Mike Crowe <mac@mcrowe.com>
-> ---
->  recipes-core/jdepend/jdepend_2.9.1.bb | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->
-> I'll let whoever wants to merge this decide whether to take v1 with
-> the updated hashes or v2 using the Git repository.
->
-> diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend=
-/jdepend_2.9.1.bb
-> index 5f09a8b..dfbf493 100644
-> --- a/recipes-core/jdepend/jdepend_2.9.1.bb
-> +++ b/recipes-core/jdepend/jdepend_2.9.1.bb
-> @@ -6,7 +6,9 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df5777d32a7709d=
-558c2877d4a6616230"
->
->  HOMEPAGE =3D "https://github.com/clarkware/jdepend"
->
-> -SRC_URI =3D "https://github.com/clarkware/jdepend/archive/${PV}.zip;down=
-loadfilename=3D${BP}.zip"
-> +SRC_URI =3D "git://github.com/clarkware/jdepend"
-> +SRCREV =3D "57980590313a5dbde236a3eb2c8958e9e53e6a10"
-> +S =3D "${WORKDIR}/git"
->
->  inherit java-library
->
-> @@ -18,7 +20,4 @@ do_compile() {
->    fastjar cf ${JARFILENAME} -C build .
->  }
->
-> -SRC_URI[md5sum] =3D "9b91efe1d770e023893f89f4dde8434e"
-> -SRC_URI[sha256sum] =3D "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f=
-278f72e522e7f7c9"
-> -
->  BBCLASSEXTEND =3D "native"
-> --
-> 2.11.0
->
->
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ .../dnsmasq/dnsmasq-CVE-2017-14491-02.patch        |  75 ++++++
+ .../dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491.patch   | 268 +++++++++++++++++++++
+ .../dnsmasq/dnsmasq/dnsmasq-CVE-2017-14492.patch   |  37 +++
+ .../dnsmasq/dnsmasq/dnsmasq-CVE-2017-14493.patch   |  37 +++
+ .../dnsmasq/dnsmasq/dnsmasq-CVE-2017-14494.patch   |  37 +++
+ .../dnsmasq/dnsmasq/dnsmasq-CVE-2017-14495.patch   |  48 ++++
+ .../dnsmasq/dnsmasq/dnsmasq-CVE-2017-14496.patch   |  73 ++++++
+ .../recipes-support/dnsmasq/dnsmasq_2.76.bb        |   7 +
+ 8 files changed, 582 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491-02.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14492.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14493.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14494.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14495.patch
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14496.patch
+
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491-02.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491-02.patch
+new file mode 100644
+index 0000000..3e73feb
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491-02.patch
+@@ -0,0 +1,75 @@
++From e441ac5247cf8252ac8db08d53862af4065d9586 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Tue, 26 Sep 2017 22:00:11 +0100
++Subject: [PATCH 7/7] Security fix, CVE-2017-14491, DNS heap buffer overflow.
++
++commit 62cb936cb7ad5f219715515ae7d32dd281a5aa1f upstream
++git://thekelleys.org.uk/dnsmasq
++
++Further fix to 0549c73b7ea6b22a3c49beb4d432f185a81efcbc
++Handles case when RR name is not a pointer to the question,
++only occurs for some auth-mode replies, therefore not
++detected by fuzzing (?)
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/rfc1035.c | 27 +++++++++++++++------------
++ 1 file changed, 15 insertions(+), 12 deletions(-)
++
++diff --git a/src/rfc1035.c b/src/rfc1035.c
++index 78410d6..e5628ba 100644
++--- a/src/rfc1035.c
+++++ b/src/rfc1035.c
++@@ -1071,32 +1071,35 @@ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int
++ 
++   va_start(ap, format);   /* make ap point to 1st unamed argument */
++ 
++-  /* nameoffset (1 or 2) + type (2) + class (2) + ttl (4) + 0 (2) */
++-  CHECK_LIMIT(12);
++-
++   if (nameoffset > 0)
++     {
+++      CHECK_LIMIT(2);
++       PUTSHORT(nameoffset | 0xc000, p);
++     }
++   else
++     {
++       char *name = va_arg(ap, char *);
++-      if (name)
++-	p = do_rfc1035_name(p, name, limit);
++-        if (!p)
++-          {
++-            va_end(ap);
++-            goto truncated;
++-          }
++-
+++      if (name && !(p = do_rfc1035_name(p, name, limit)))
+++	{
+++	  va_end(ap);
+++	  goto truncated;
+++	}
+++      
++       if (nameoffset < 0)
++ 	{
+++	  CHECK_LIMIT(2);
++ 	  PUTSHORT(-nameoffset | 0xc000, p);
++ 	}
++       else
++-	*p++ = 0;
+++	{
+++	  CHECK_LIMIT(1);
+++	  *p++ = 0;
+++	}
++     }
++ 
+++  /* type (2) + class (2) + ttl (4) + rdlen (2) */
+++  CHECK_LIMIT(10);
+++  
++   PUTSHORT(type, p);
++   PUTSHORT(class, p);
++   PUTLONG(ttl, p);      /* TTL */
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491.patch
+new file mode 100644
+index 0000000..0598678
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14491.patch
+@@ -0,0 +1,268 @@
++From 8644f7c99c5e2fde6b6872a4ab820d3520f44e24 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Mon, 25 Sep 2017 18:17:11 +0100
++Subject: [PATCH 1/7] Security fix, CVE-2017-14491 DNS heap buffer overflow.
++
++commit 0549c73b7ea6b22a3c49beb4d432f185a81efcbc upstream
++git://thekelleys.org.uk/dnsmasq
++
++Fix heap overflow in DNS code. This is a potentially serious
++security hole. It allows an attacker who can make DNS
++requests to dnsmasq, and who controls the contents of
++a domain, which is thereby queried, to overflow
++(by 2 bytes) a heap buffer and either crash, or
++even take control of, dnsmasq.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/dnsmasq.h |  2 +-
++ src/dnssec.c  |  2 +-
++ src/option.c  |  2 +-
++ src/rfc1035.c | 50 +++++++++++++++++++++++++++++++++++++++++---------
++ src/rfc2131.c |  4 ++--
++ src/rfc3315.c |  4 ++--
++ src/util.c    |  7 ++++++-
++ 7 files changed, 54 insertions(+), 17 deletions(-)
++
++diff --git a/src/dnsmasq.h b/src/dnsmasq.h
++index 1896a64..ed5da36 100644
++--- a/src/dnsmasq.h
+++++ b/src/dnsmasq.h
++@@ -1161,7 +1161,7 @@ u32 rand32(void);
++ u64 rand64(void);
++ int legal_hostname(char *c);
++ char *canonicalise(char *s, int *nomem);
++-unsigned char *do_rfc1035_name(unsigned char *p, char *sval);
+++unsigned char *do_rfc1035_name(unsigned char *p, char *sval, char *limit);
++ void *safe_malloc(size_t size);
++ void safe_pipe(int *fd, int read_noblock);
++ void *whine_malloc(size_t size);
++diff --git a/src/dnssec.c b/src/dnssec.c
++index 3c77c7d..f45c804 100644
++--- a/src/dnssec.c
+++++ b/src/dnssec.c
++@@ -2227,7 +2227,7 @@ size_t dnssec_generate_query(struct dns_header *header, unsigned char *end, char
++ 
++   p = (unsigned char *)(header+1);
++ 	
++-  p = do_rfc1035_name(p, name);
+++  p = do_rfc1035_name(p, name, NULL);
++   *p++ = 0;
++   PUTSHORT(type, p);
++   PUTSHORT(class, p);
++diff --git a/src/option.c b/src/option.c
++index d8c57d6..0e1c326 100644
++--- a/src/option.c
+++++ b/src/option.c
++@@ -1378,7 +1378,7 @@ static int parse_dhcp_opt(char *errstr, char *arg, int flags)
++ 		    }
++ 		  
++ 		  p = newp;
++-		  end = do_rfc1035_name(p + len, dom);
+++		  end = do_rfc1035_name(p + len, dom, NULL);
++ 		  *end++ = 0;
++ 		  len = end - p;
++ 		  free(dom);
++diff --git a/src/rfc1035.c b/src/rfc1035.c
++index 24d08c1..78410d6 100644
++--- a/src/rfc1035.c
+++++ b/src/rfc1035.c
++@@ -1049,6 +1049,7 @@ int check_for_ignored_address(struct dns_header *header, size_t qlen, struct bog
++   return 0;
++ }
++ 
+++
++ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int nameoffset, unsigned char **pp, 
++ 			unsigned long ttl, int *offset, unsigned short type, unsigned short class, char *format, ...)
++ {
++@@ -1058,12 +1059,21 @@ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int
++   unsigned short usval;
++   long lval;
++   char *sval;
+++#define CHECK_LIMIT(size) \
+++  if (limit && p + (size) > (unsigned char*)limit) \
+++    { \
+++      va_end(ap); \
+++      goto truncated; \
+++    }
++ 
++   if (truncp && *truncp)
++     return 0;
++- 
+++
++   va_start(ap, format);   /* make ap point to 1st unamed argument */
++-  
+++
+++  /* nameoffset (1 or 2) + type (2) + class (2) + ttl (4) + 0 (2) */
+++  CHECK_LIMIT(12);
+++
++   if (nameoffset > 0)
++     {
++       PUTSHORT(nameoffset | 0xc000, p);
++@@ -1072,7 +1082,13 @@ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int
++     {
++       char *name = va_arg(ap, char *);
++       if (name)
++-	p = do_rfc1035_name(p, name);
+++	p = do_rfc1035_name(p, name, limit);
+++        if (!p)
+++          {
+++            va_end(ap);
+++            goto truncated;
+++          }
+++
++       if (nameoffset < 0)
++ 	{
++ 	  PUTSHORT(-nameoffset | 0xc000, p);
++@@ -1093,6 +1109,7 @@ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int
++       {
++ #ifdef HAVE_IPV6
++       case '6':
+++        CHECK_LIMIT(IN6ADDRSZ);
++ 	sval = va_arg(ap, char *); 
++ 	memcpy(p, sval, IN6ADDRSZ);
++ 	p += IN6ADDRSZ;
++@@ -1100,36 +1117,47 @@ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int
++ #endif
++ 	
++       case '4':
+++        CHECK_LIMIT(INADDRSZ);
++ 	sval = va_arg(ap, char *); 
++ 	memcpy(p, sval, INADDRSZ);
++ 	p += INADDRSZ;
++ 	break;
++ 	
++       case 'b':
+++        CHECK_LIMIT(1);
++ 	usval = va_arg(ap, int);
++ 	*p++ = usval;
++ 	break;
++ 	
++       case 's':
+++        CHECK_LIMIT(2);
++ 	usval = va_arg(ap, int);
++ 	PUTSHORT(usval, p);
++ 	break;
++ 	
++       case 'l':
+++        CHECK_LIMIT(4);
++ 	lval = va_arg(ap, long);
++ 	PUTLONG(lval, p);
++ 	break;
++ 	
++       case 'd':
++-	/* get domain-name answer arg and store it in RDATA field */
++-	if (offset)
++-	  *offset = p - (unsigned char *)header;
++-	p = do_rfc1035_name(p, va_arg(ap, char *));
++-	*p++ = 0;
+++        /* get domain-name answer arg and store it in RDATA field */
+++        if (offset)
+++          *offset = p - (unsigned char *)header;
+++        p = do_rfc1035_name(p, va_arg(ap, char *), limit);
+++        if (!p)
+++          {
+++            va_end(ap);
+++            goto truncated;
+++          }
+++        CHECK_LIMIT(1);
+++        *p++ = 0;
++ 	break;
++ 	
++       case 't':
++ 	usval = va_arg(ap, int);
+++        CHECK_LIMIT(usval);
++ 	sval = va_arg(ap, char *);
++ 	if (usval != 0)
++ 	  memcpy(p, sval, usval);
++@@ -1141,20 +1169,24 @@ int add_resource_record(struct dns_header *header, char *limit, int *truncp, int
++ 	usval = sval ? strlen(sval) : 0;
++ 	if (usval > 255)
++ 	  usval = 255;
+++        CHECK_LIMIT(usval + 1);
++ 	*p++ = (unsigned char)usval;
++ 	memcpy(p, sval, usval);
++ 	p += usval;
++ 	break;
++       }
++ 
+++#undef CHECK_LIMIT
++   va_end(ap);	/* clean up variable argument pointer */
++   
++   j = p - sav - 2;
++-  PUTSHORT(j, sav);     /* Now, store real RDLength */
+++ /* this has already been checked against limit before */
+++ PUTSHORT(j, sav);     /* Now, store real RDLength */
++   
++   /* check for overflow of buffer */
++   if (limit && ((unsigned char *)limit - p) < 0)
++     {
+++truncated:
++       if (truncp)
++ 	*truncp = 1;
++       return 0;
++diff --git a/src/rfc2131.c b/src/rfc2131.c
++index b7c167e..0dffd36 100644
++--- a/src/rfc2131.c
+++++ b/src/rfc2131.c
++@@ -2419,10 +2419,10 @@ static void do_options(struct dhcp_context *context,
++ 
++ 	      if (fqdn_flags & 0x04)
++ 		{
++-		  p = do_rfc1035_name(p, hostname);
+++		  p = do_rfc1035_name(p, hostname, NULL);
++ 		  if (domain)
++ 		    {
++-		      p = do_rfc1035_name(p, domain);
+++		      p = do_rfc1035_name(p, domain, NULL);
++ 		      *p++ = 0;
++ 		    }
++ 		}
++diff --git a/src/rfc3315.c b/src/rfc3315.c
++index 3f4d69c..73bdee4 100644
++--- a/src/rfc3315.c
+++++ b/src/rfc3315.c
++@@ -1472,10 +1472,10 @@ static struct dhcp_netid *add_options(struct state *state, int do_refresh)
++       if ((p = expand(len + 2)))
++ 	{
++ 	  *(p++) = state->fqdn_flags;
++-	  p = do_rfc1035_name(p, state->hostname);
+++	  p = do_rfc1035_name(p, state->hostname, NULL);
++ 	  if (state->send_domain)
++ 	    {
++-	      p = do_rfc1035_name(p, state->send_domain);
+++	      p = do_rfc1035_name(p, state->send_domain, NULL);
++ 	      *p = 0;
++ 	    }
++ 	}
++diff --git a/src/util.c b/src/util.c
++index 93b24f5..a377e6f 100644
++--- a/src/util.c
+++++ b/src/util.c
++@@ -218,15 +218,20 @@ char *canonicalise(char *in, int *nomem)
++   return ret;
++ }
++ 
++-unsigned char *do_rfc1035_name(unsigned char *p, char *sval)
+++unsigned char *do_rfc1035_name(unsigned char *p, char *sval, char *limit)
++ {
++   int j;
++   
++   while (sval && *sval)
++     {
+++      if (limit && p + 1 > (unsigned char*)limit)
+++        return p;
+++
++       unsigned char *cp = p++;
++       for (j = 0; *sval && (*sval != '.'); sval++, j++)
++ 	{
+++          if (limit && p + 1 > (unsigned char*)limit)
+++            return p;
++ #ifdef HAVE_DNSSEC
++ 	  if (option_bool(OPT_DNSSEC_VALID) && *sval == NAME_ESCAPE)
++ 	    *p++ = (*(++sval))-1;
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14492.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14492.patch
+new file mode 100644
+index 0000000..1994931
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14492.patch
+@@ -0,0 +1,37 @@
++From 6a0e7dbac67a8393e4505e593e5c46544c53eae0 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Mon, 25 Sep 2017 18:47:15 +0100
++Subject: [PATCH 2/7] Security fix, CVE-2017-14492, DHCPv6 RA heap overflow.
++
++commit 24036ea507862c7b7898b68289c8130f85599c10 upstream
++git://thekelleys.org.uk/dnsmasq
++
++Fix heap overflow in IPv6 router advertisement code.
++This is a potentially serious security hole, as a
++crafted RA request can overflow a buffer and crash or
++control dnsmasq. Attacker must be on the local network.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/radv.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/radv.c b/src/radv.c
++index 749b666..d09fe0e 100644
++--- a/src/radv.c
+++++ b/src/radv.c
++@@ -198,6 +198,9 @@ void icmp6_packet(time_t now)
++       /* look for link-layer address option for logging */
++       if (sz >= 16 && packet[8] == ICMP6_OPT_SOURCE_MAC && (packet[9] * 8) + 8 <= sz)
++ 	{
+++	  if ((packet[9] * 8 - 2) * 3 - 1 >= MAXDNAME) {
+++	    return;
+++	  }
++ 	  print_mac(daemon->namebuff, &packet[10], (packet[9] * 8) - 2);
++ 	  mac = daemon->namebuff;
++ 	}
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14493.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14493.patch
+new file mode 100644
+index 0000000..ae99cf4
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14493.patch
+@@ -0,0 +1,37 @@
++From f23f4be3cb72d307806e3d3ca14779f69ac5494c Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Mon, 25 Sep 2017 18:52:50 +0100
++Subject: [PATCH 3/7] Security fix, CVE-2017-14493, DHCPv6 - Stack buffer
++ overflow.
++
++commit 3d4ff1ba8419546490b464418223132529514033 upstream
++git://thekelleys.org.uk/dnsmasq
++
++Fix stack overflow in DHCPv6 code. An attacker who can send
++a DHCPv6 request to dnsmasq can overflow the stack frame and
++crash or control dnsmasq.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/rfc3315.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/rfc3315.c b/src/rfc3315.c
++index 73bdee4..8d18a28 100644
++--- a/src/rfc3315.c
+++++ b/src/rfc3315.c
++@@ -206,6 +206,9 @@ static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz,
++   /* RFC-6939 */
++   if ((opt = opt6_find(opts, end, OPTION6_CLIENT_MAC, 3)))
++     {
+++      if (opt6_len(opt) - 2 > DHCP_CHADDR_MAX) {
+++        return 0;
+++      }
++       state->mac_type = opt6_uint(opt, 0, 2);
++       state->mac_len = opt6_len(opt) - 2;
++       memcpy(&state->mac[0], opt6_ptr(opt, 2), state->mac_len);
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14494.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14494.patch
+new file mode 100644
+index 0000000..a6f0e2a
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14494.patch
+@@ -0,0 +1,37 @@
++From aba3f8df87d104d599920ea44e96191601638961 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Mon, 25 Sep 2017 20:05:11 +0100
++Subject: [PATCH 4/7] Security fix, CVE-2017-14494, Infoleak handling DHCPv6
++ forwarded requests.
++
++commit 33e3f1029c9ec6c63e430ff51063a6301d4b2262 upstream
++git://thekelleys.org.uk/dnsmasq
++
++Fix information leak in DHCPv6. A crafted DHCPv6 packet can
++cause dnsmasq to forward memory from outside the packet
++buffer to a DHCPv6 server when acting as a relay.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/rfc3315.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/rfc3315.c b/src/rfc3315.c
++index 8d18a28..03b3f84 100644
++--- a/src/rfc3315.c
+++++ b/src/rfc3315.c
++@@ -216,6 +216,9 @@ static int dhcp6_maybe_relay(struct state *state, void *inbuff, size_t sz,
++   
++   for (opt = opts; opt; opt = opt6_next(opt, end))
++     {
+++      if (opt6_ptr(opt, 0) + opt6_len(opt) >= end) {
+++        return 0;
+++      }
++       int o = new_opt6(opt6_type(opt));
++       if (opt6_type(opt) == OPTION6_RELAY_MSG)
++ 	{
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14495.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14495.patch
+new file mode 100644
+index 0000000..31014d1
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14495.patch
+@@ -0,0 +1,48 @@
++From e4ae220ee00dcad20a716432badd3210b442ddb4 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Mon, 25 Sep 2017 20:16:50 +0100
++Subject: [PATCH 6/7] Security fix, CVE-2017-14495, OOM in DNS response
++ creation.
++
++commit 51eadb692a5123b9838e5a68ecace3ac579a3a45 upstream
++git://thekelleys.org.uk/dnsmasq
++
++Fix out-of-memory Dos vulnerability. An attacker which can
++send malicious DNS queries to dnsmasq can trigger memory
++allocations in the add_pseudoheader function
++The allocated memory is never freed which leads to a DoS
++through memory exhaustion. dnsmasq is vulnerable only
++if one of the following option is specified:
++--add-mac, --add-cpe-id or --add-subnet.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/edns0.c | 8 +++++++-
++ 1 file changed, 7 insertions(+), 1 deletion(-)
++
++diff --git a/src/edns0.c b/src/edns0.c
++index a2ef0ea..f48c084 100644
++--- a/src/edns0.c
+++++ b/src/edns0.c
++@@ -192,9 +192,15 @@ size_t add_pseudoheader(struct dns_header *header, size_t plen, unsigned char *l
++ 	  !(p = skip_section(p, 
++ 			     ntohs(header->ancount) + ntohs(header->nscount) + ntohs(header->arcount), 
++ 			     header, plen)))
+++      {
+++	free(buff);
++ 	return plen;
+++      }
++       if (p + 11 > limit)
++-       return plen; /* Too big */
+++      {
+++        free(buff);
+++        return plen; /* Too big */
+++      }
++       *p++ = 0; /* empty name */
++       PUTSHORT(T_OPT, p);
++       PUTSHORT(udp_sz, p); /* max packet length, 512 if not given in EDNS0 header */
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14496.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14496.patch
+new file mode 100644
+index 0000000..fc50ef0
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/dnsmasq-CVE-2017-14496.patch
+@@ -0,0 +1,73 @@
++From c25545680679a12d78dd80662ed1bc5d97a38d6d Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Mon, 25 Sep 2017 20:11:58 +0100
++Subject: [PATCH 5/7] Security fix, CVE-2017-14496, Integer underflow in DNS
++ response creation.
++
++commit 897c113fda0886a28a986cc6ba17bb93bd6cb1c7 upstream
++git://thekelleys.org.uk/dnsmasq
++
++Fix DoS in DNS. Invalid boundary checks in the
++add_pseudoheader function allows a memcpy call with negative
++size An attacker which can send malicious DNS queries
++to dnsmasq can trigger a DoS remotely.
++dnsmasq is vulnerable only if one of the following option is
++specified: --add-mac, --add-cpe-id or --add-subnet.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/edns0.c | 13 ++++++++++++-
++ 1 file changed, 12 insertions(+), 1 deletion(-)
++
++diff --git a/src/edns0.c b/src/edns0.c
++index c7a101e..a2ef0ea 100644
++--- a/src/edns0.c
+++++ b/src/edns0.c
++@@ -144,7 +144,7 @@ size_t add_pseudoheader(struct dns_header *header, size_t plen, unsigned char *l
++ 	  GETSHORT(len, p);
++ 	  
++ 	  /* malformed option, delete the whole OPT RR and start again. */
++-	  if (i + len > rdlen)
+++	  if (i + 4 + len > rdlen)
++ 	    {
++ 	      rdlen = 0;
++ 	      is_last = 0;
++@@ -193,6 +193,8 @@ size_t add_pseudoheader(struct dns_header *header, size_t plen, unsigned char *l
++ 			     ntohs(header->ancount) + ntohs(header->nscount) + ntohs(header->arcount), 
++ 			     header, plen)))
++ 	return plen;
+++      if (p + 11 > limit)
+++       return plen; /* Too big */
++       *p++ = 0; /* empty name */
++       PUTSHORT(T_OPT, p);
++       PUTSHORT(udp_sz, p); /* max packet length, 512 if not given in EDNS0 header */
++@@ -204,6 +206,11 @@ size_t add_pseudoheader(struct dns_header *header, size_t plen, unsigned char *l
++       /* Copy back any options */
++       if (buff)
++ 	{
+++          if (p + rdlen > limit)
+++          {
+++            free(buff);
+++            return plen; /* Too big */
+++          }
++ 	  memcpy(p, buff, rdlen);
++ 	  free(buff);
++ 	  p += rdlen;
++@@ -217,8 +224,12 @@ size_t add_pseudoheader(struct dns_header *header, size_t plen, unsigned char *l
++   /* Add new option */
++   if (optno != 0 && replace != 2)
++     {
+++      if (p + 4 > limit)
+++       return plen; /* Too big */
++       PUTSHORT(optno, p);
++       PUTSHORT(optlen, p);
+++      if (p + optlen > limit)
+++       return plen; /* Too big */
++       memcpy(p, opt, optlen);
++       p += optlen;  
++       PUTSHORT(p - datap, lenp);
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+index 41573d9..5b68d98 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+@@ -2,6 +2,13 @@ require dnsmasq.inc
+ 
+ SRC_URI += "\
+     file://lua.patch \
++    file://dnsmasq-CVE-2017-14491.patch \
++    file://dnsmasq-CVE-2017-14492.patch \
++    file://dnsmasq-CVE-2017-14493.patch \
++    file://dnsmasq-CVE-2017-14494.patch \
++    file://dnsmasq-CVE-2017-14496.patch \
++    file://dnsmasq-CVE-2017-14495.patch \
++    file://dnsmasq-CVE-2017-14491-02.patch \
+ "
+ 
+ SRC_URI[dnsmasq-2.76.md5sum] = "6610f8233ca89b15a1bb47c788ffb84f"
+-- 
+2.7.4
+
 
