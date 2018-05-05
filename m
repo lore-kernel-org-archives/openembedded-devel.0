@@ -1,47 +1,44 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B31974D44
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 May 2018 23:09:23 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id k11-v6so15262688pgo.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 May 2018 16:09:25 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id D8DF074DE3;
+	Sat,  5 May 2018 00:27:21 +0000 (UTC)
+Received: by mail-pg0-f46.google.com with SMTP id z4-v6so16453786pgu.13;
+	Fri, 04 May 2018 17:27:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=7dCoASgANJha8SazWwPIgxYHiRmxC14RUJa0xvzaxZQ=;
-	b=YIgTE0AVwW5+bln01Eqdo/ghTbupqUjxie2v456/PAqYDIXScGGkWw968vxgw22hHh
-	tccVzquHbQ5vEX14o3/7OugeoLLHNvjJXkU1+COjZUCCx7lDsuZlGbr7TmGMMHA6D4pf
-	Gm/oi/PynBwmi5OOBzM7WqkVFcMJNWE1n2aPuugAxUo+hWTZOcndqRHDKUvm302iuVk7
-	sZgTjP7abarTFpzqCKPMR/uXrC0yi6YNGLqCEoamltpexiHk/emZihnt9OQKXvEbPc/h
-	jOa5+CMCCRIyJZ3Di/dmFNsWWfOThKAk8R3z6+4b5jYLEyNNNHI7qnT6ifPln0ACTHAM
-	uxGA==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=AxGuZJr3dh3P6b8pRmCoN/4wIDlupj3flo1wcU8AmHs=;
+	b=Nt5K9Dm4OESwcnTHaI8naRDCPXnHMpDoCYx4M4u8q9XKfnBzEEBmH9oIoKknmw4F4W
+	NFPV0navgJeAZGurX4PtEU28rYv2T4fExjskEKeDCVrMTdarQVSJekCXhlrdlVEO6ip/
+	nCAgFi6Sn5ZHf0knF9pNTsXLJa0OMEd0WtEbHZ6+j497Kat8tYlJd/SuXkR/7ETGN4X/
+	os/9yORNaejoDe9r2PDXld99owEIFQMe2KaQ8bEaxLFCGxAGIZ1qKJhiee89jDq58d1L
+	2bU1kluEbFVoS69mXn9HbVlvMa9GM7qo4PLZH7mwPHuYDt3vWj+hfpTNFW8xmiIijOaD
+	RlNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7dCoASgANJha8SazWwPIgxYHiRmxC14RUJa0xvzaxZQ=;
-	b=l0xNWFE7uW6mXTli5C5CftWucwBgYZeb/i8Ivaodrj6VUnAfKZBgf08YOW2OBlXMO8
-	fevapvhn5UopzGjI192TW1wLSCVGVeHnP7uTYLybvVJGeYC3wo9/WZ3BeNyiEQ7BUdYp
-	7EzahP+M1g4qFB4UahVsJa8gSUV9cPwo4FYDeLMnLd5Bqt7VQpZKj0A9QlZmdY2txz8y
-	GLxTlBpsW9tsmQDsC2DYDfcjDe+eCBP7Le6bVqw8Ag/+KOIxzoxvnsm+dJVNbjIAWPnv
-	ZHgzubK1+zk5nKuH/befHPigldPeTMKSzGRf5p9WgkGAO0LUrPdvTdXKqIaOLbZnEvX8
-	N+/g==
-X-Gm-Message-State: ALQs6tAfM6QvI0Cgxp0ZJdAEYiZMwKB56Pxp5T5lQcIeqdsTwogI8UPd
-	pNfWmhCb/Chqdfw8Ut+qsYcmyw==
-X-Google-Smtp-Source: AB8JxZq+VMyPrNRt7bCMXGilDG3sdn2OztG+wgg4hUMNBnxgk3NAI2Je80NP0hcDnLWyyE2sHxsQOA==
-X-Received: by 2002:a17:902:624:: with SMTP id
-	33-v6mr29657562plg.361.1525475364836; 
-	Fri, 04 May 2018 16:09:24 -0700 (PDT)
-Received: from e6520.cablelabs.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id
-	k13sm40465619pfj.186.2018.05.04.16.09.23
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 04 May 2018 16:09:24 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 May 2018 16:09:17 -0700
-Message-Id: <1525475357-8521-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] openobex: explicitly set ASNEEDED from openobex recipe
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=AxGuZJr3dh3P6b8pRmCoN/4wIDlupj3flo1wcU8AmHs=;
+	b=O6kDIFbaZ/QgQKncLetmQDz5173qLPIQvvUvUPvf72OYIQnoIM4MTMuKW4WA2If6mr
+	0GjgnvINUTDUWQgKEg9sN8o3gru3lp6735M2xHQojKM0z5SF9q9XS6CKxwe6oA7a+L2h
+	WZKFNTlxmm4E+zNhEELarNRCd8A4TzFlZk9cGxoKkfybPjA5rPfE3UYtuQEZdZHNBA6J
+	otNQhAr5DK0tiTiezHKH7X7BF6/4YqkOnHt9sQEfOSb2ZIeFK4GIR+WV3b+Lrvj4RTBh
+	/EBFdD2NW8Fjc5OMXMnrDs18Z3wUxrvd9qTBU8kXDcqjpPI3G3Pc92SekVQDTHBuqZug
+	iqDA==
+X-Gm-Message-State: ALQs6tAhVhc83t3lxLBIsC8VtpGSqRvizmtYYbxpkwKWXqkfa9yAlitE
+	P647W9hCP+1FR9zIoCpTlflETM/9eojfejgMKl7PwQ==
+X-Google-Smtp-Source: AB8JxZq42GEUbRqo12L+xP755rSGzUp/UFXgzP2udQ0QR39Pr6JCupkn9V5RfgP82DcsP40EJT3MrFFFDD+bZlz8BEY=
+X-Received: by 2002:a17:902:59ce:: with SMTP id
+	d14-v6mr30353800plj.253.1525480042359; 
+	Fri, 04 May 2018 17:27:22 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.236.159.145 with HTTP; Fri, 4 May 2018 17:26:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 May 2018 17:26:51 -0700
+Message-ID: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+Subject: [RFT] GCC 8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,33 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 May 2018 23:09:24 -0000
+X-List-Received-Date: Sat, 05 May 2018 00:27:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Up to now, an openobex specific over-ride for ASNEEDED has been
-provided by oe-core (from as-needed.inc). If ASNEEDED does need to be
-over-ridden in order to build openobex it's not ideal that the
-over-ride comes from a different layer so define it directly in the
-meta-oe recipe.
+Hi All
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+As you might have noticed that gcc 8.1 was released this week, I am
+calling out for some testing help on testing branch so we can weed out
+issues you might see in your setups. so if you have your
+builders idling over weekend, then you know what they can do this weekend :)
 
-diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-index 2db48f3..1b56685 100644
---- a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-+++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-@@ -25,6 +25,8 @@ EXTRA_OECMAKE += "-DBUILD_DOCUMENTATION=OFF"
- 
- #--enable-apps --enable-syslog
- 
-+ASNEEDED = ""
-+
- do_install_append () {
-     rmdir ${D}${bindir}
- }
--- 
-1.9.1
+Highlighted changes are
 
+https://gcc.gnu.org/gcc-8/changes.html
+
+and porting doc is
+
+https://gcc.gnu.org/gcc-8/porting_to.html
+
+The branch is here
+
+http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-8
+
+Its uptodate on top of current master oe-core
+
+May fourth be with you !!
+
+Cheers!
+
+-Khem
 
