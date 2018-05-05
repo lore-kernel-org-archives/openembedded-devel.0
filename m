@@ -1,51 +1,54 @@
-Return-Path: <paul@betafive.co.uk>
-X-Greylist: delayed 571 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 05 May 2018 07:08:20 UTC
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 357C474C99
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-vk0-f49.google.com (mail-vk0-f49.google.com
+	[209.85.213.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D368745BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 May 2018 07:08:20 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id 1AD9521394
+	Sat,  5 May 2018 15:52:48 +0000 (UTC)
+Received: by mail-vk0-f49.google.com with SMTP id j7-v6so14988012vkc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 May 2018 02:58:49 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-	by compute1.internal (MEProxy); Sat, 05 May 2018 02:58:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betafive.co.uk;
-	h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; bh=1IGrzQxzqISMD0v1URYG7RhgArGRwdTq0ZWvHIWK+FM=; b=gj+bn+va
-	1FSTJGJKHThM1j2qHbbXC2DgLTmDICLffrJTU2sbLPGWGSiycUf7+bP1f/cr5zns
-	aX+rhua7AF6IOroZD2hd75BCRCbOCsLfOJQ0T2WzE4WbEhWP2NxFOoI6uzEyItg2
-	Cqh2lOEyyM6yK0pxEjZ5rboripIa5JCUe+OnI2tztfwI0fHhnCtD+q9b1E8gu7/O
-	Uq8VMYOtZmX+/1mcx8MZff5ImQZXpRkifv/ySjgcF3hlPMkK5vxaQzU69azAxWqy
-	Z0aK6AK6ACtMl3eAs4zqxAEPjKfoUpmCT8YIpigmtMYlVgVb4GE7WKG1cqI52jAj
-	HLoD+jp562K7UQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-transfer-encoding:content-type
-	:date:from:message-id:mime-version:subject:to:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=1IGrzQxzqISMD0v1URYG7RhgArGRw
-	dTq0ZWvHIWK+FM=; b=B5z99/HiKJU2FXr1/9MXq+PY4/2srCoOUcN+fP2UGgsrR
-	jCFiFhiZsn6JBADsU25hQ/L+xiPRoO+XJrbNNq7TB2LV4gZnq7NlyGkAXge7wnki
-	MK06W/FL0sHcGrrABQz0UG+7PPIFTofqmR0AQL7882+xjVTNhNie4m2csku9hqf/
-	2cnSgmVvqLuxHxOlJHFo0ege0lVu9E2wmWVfka/CS0kn+jLXi7VHSPQOBVa9NAi8
-	78LjZ+erxq/T5WJVG9j+Fl376l+UJLuykZboAh1vqS+EZzARhcw78ROx8NjsB0X5
-	s838eiYbZ2EV1wl3AJayksI/boDWJDvNI3HEnnm9A==
-X-ME-Sender: <xms:KFbtWnoACVjctKXoUYPHD5B6dyXfI26pnGgNz6n-JFHRu4oceQ_5Dg>
-Received: from host0.betafive.co.uk (138.32.187.81.in-addr.arpa
-	[81.187.32.138])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 7052A10255
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 May 2018 02:58:48 -0400 (EDT)
-Date: Sat, 5 May 2018 07:58:46 +0100
-From: Paul Barker <paul@betafive.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180505075846.2cc93c8d@host0.betafive.co.uk>
-Organization: Beta Five Ltd
-X-Mailer: Claws Mail 3.14.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
+	Sat, 05 May 2018 08:52:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gherzan-ro.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=paaRRxTYxQb2XgSVDOUdYMiuEDYfQvVysF58Fog1Yik=;
+	b=0NIRrSHCOiVvj89GiyB8ZriqSxBTeBL2NbiBDMNZTP2dPZi4dsffb95ycx/ydv3T7c
+	FNKjZHH0Q/BnlEQdhDgwJ0X6r617vX2ZqeZwKA2Ft9Pty46SlBwVy3kWCS/zj7HIRQKT
+	5Q/f1P9MzRmCdQ4mJBXyllolH589kMMmmaiL0to8RIl9KX0yflr0r3xkYT5FoB/XD/1m
+	l1HIDNBDNu2dZN0AyYqImCCTufgfORuVWhkqrVH19dtsPHtiFimrrhbkjg8uyB4qvqEb
+	ch4XVQ3oRhHfFb0zl2EyktYhf7ChsnFJQuU8mNOT1o51dwFMmE5rrKXTo/bEvLAwu1se
+	gXWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=paaRRxTYxQb2XgSVDOUdYMiuEDYfQvVysF58Fog1Yik=;
+	b=tT7WCd03/jodj7/lobstf+aJvs2TOdAMqAjqvsDyCOGkmS3+LbXVa/UZp9J12om0dF
+	+JJWS7ho6Kz/JoCnzwJGUY9GvTjN7AUGnE3dpzb70DthsTeKZp6vBwU8Hj+7s6jEWPeo
+	wnSII8NVc33LHePJzellIBH86pD5uCPJyqv5BqcrnoaYb5VWnuAZfghl2cILKxh9rA9L
+	+XtaX1lFgyoz1xoCIU2LXgFRVAVXTZxPoLA/YodOYmtqTtQ4OjlvTGhkccR6I6hXS7Nf
+	z43uw7roUTgl920b/qw+zcUIcfE2qfRw9pUYEGNrWAvUf1YucHcOY3DNgw9YcaE7hipo
+	BKvQ==
+X-Gm-Message-State: ALQs6tBjP5qWD4D4abpCNhRWRwN39/+QDLAVmKBuxseJ9qutXycUpsIF
+	SSO2vuXi9Yrdso0yjrc25clmeMJL6LhRS8xdWjKhsYIf
+X-Google-Smtp-Source: AB8JxZosqJt6ktPruoSOdtLsMt83FY8urDt0NpyYvETvtRXGFsRX5ExySrwNEc4ISQGSwwLnMGoCf4Mm8NYOu6IW0u8=
+X-Received: by 2002:a1f:20f:: with SMTP id
+	15-v6mr26706100vkc.143.1525535569555; 
+	Sat, 05 May 2018 08:52:49 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-openembedded] Sumo branch
+Sender: andrei@gherzan.ro
+Received: by 10.176.4.108 with HTTP; Sat, 5 May 2018 08:52:09 -0700 (PDT)
+X-Originating-IP: [90.152.4.98]
+In-Reply-To: <20180505075846.2cc93c8d@host0.betafive.co.uk>
+References: <20180505075846.2cc93c8d@host0.betafive.co.uk>
+From: Andrei Gherzan <andrei@gherzan.com>
+Date: Sat, 5 May 2018 16:52:09 +0100
+X-Google-Sender-Auth: QRD6uKX25xyt_dbFKsVcF5lnyNQ
+Message-ID: <CAK18fxFfdUnqC7OuyFDh14Q0rc=+5VQ3aLqtBbrq6WGV9BwArQ@mail.gmail.com>
+To: Paul Barker <paul@betafive.co.uk>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-openembedded] Sumo branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,17 +61,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 May 2018 07:08:21 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 05 May 2018 15:52:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-In openembedded-core, master has now diverged from sumo and now
-contains some major upgrades. Could we get a sumo branch in
-meta-openembedded to align with sumo on oe-core?
+On Sat, May 5, 2018 at 7:58 AM, Paul Barker <paul@betafive.co.uk> wrote:
 
-Cheers,
+> In openembedded-core, master has now diverged from sumo and now
+> contains some major upgrades. Could we get a sumo branch in
+> meta-openembedded to align with sumo on oe-core?
+>
 
--- 
-Paul Barker
-Beta Five Ltd
+I subscribe to the same request.
+--
+Andrei Gherzan
 
