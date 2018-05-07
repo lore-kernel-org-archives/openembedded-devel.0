@@ -1,49 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 41CB274C4D
+Return-Path: <twoerner@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D7AD746E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 May 2018 20:18:25 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id v15-v6so25919814wrm.10
+	Mon,  7 May 2018 01:39:42 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id c2-v6so34331146qtn.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 May 2018 13:18:27 -0700 (PDT)
+	Sun, 06 May 2018 18:39:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=KlylBwWxph0p6UbM/K0rx9oXeAKCUcVf9/CXgkIVIrw=;
-	b=UqwxLlaK4F1ZYQECSLEth4PFPrm3jQGdasHAQHDiUiQdyAizMJu7lZA4WG657x13Pn
-	YHwPfNMV8sQQpzjEK2ITqR1prZ7OYFfeWA1QvdmV0s1KXuyxymDtBvI5joUrLkPWfFOU
-	m6E17KuQ1k3ltDjxMdZSS7Zj72O5zhPMao8HCvf73V6k5hxNEqb4ELo/k5bFa4rbJoRY
-	jpF8yGwlLwLiFvJaGMNDKc8Bz1TSxBT4WXxZnGyCsoHLi89Hk77CSWHNf2sIAhHRd1MR
-	p5ND3ZkcDGDOHMdCWPLEbJ1+5kKQ4Wk8QpyMLARIx1hmkam0Zrlmio4ddLp5azLCliEA
-	picA==
+	h=from:to:subject:date:message-id;
+	bh=Q05UNcSaxOMyV69ZCYyk30tuXFlOL10zpoleLTxjuzI=;
+	b=SDwdr1tWBGzAS2eyPbkDP/O5tIouAkbwdP1hVi7LC51ocSUDLq3IO95a/HbZGnmfuF
+	iFmey/go0Iw4rwleykZ+5evppATcEzfJEAjLrARphUL/Dib+Y4y3R4i/nyR8+kxEMkwG
+	+HFQSyLqu7EbGe0YeThQv3L7ngHCJRm2DWo93Q9GQTGdkAfN3rtowV4YJ+zpf/iQQsZT
+	eguHv7dfCgZjCBnBcDFjLUd5TooVcD1qnayf6zPBrAeCw3gJt6nV1pPbsd8tEWxiTl3H
+	4FjciuOjnJJ7mNt+e3D+vH2+LjWFWYdgGBRXEOlt1dzd330SM7+hoiY0nQCYtOVaTFLj
+	GmcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=KlylBwWxph0p6UbM/K0rx9oXeAKCUcVf9/CXgkIVIrw=;
-	b=jYi8lIMgcLTXNahL3l/gotFEaMtHj7rw/51wSeXEU1syGdGItd3kcGF2HwyvQWlG3z
-	xgR4TajnbHzMfnGoQMsXKyImizuYpbu9Vt36awyO5SKKO8fIwDYxyREqC5hPrY6OkISN
-	1Q/YHaF6aolPlv0/N06Jtr55IxAPMoKXLpa56F95ME/jLTGVsAIInNN3PFor4tZlFJmB
-	iQWOodY5O3ZUdJX9Fj8nC7Eu5WbI66+vxB+Y45VB5Qli3bhJzHVRAx4Vhfcf17oX6pNv
-	XMaUY38sxQmOcwDBvtBloe8mQJ618uX3ban8Eee+3fX0vIfEGur2F6G9t6Ark9RFvnnq
-	h6Ew==
-X-Gm-Message-State: ALQs6tDZMxS1SaottRIUq5IYeeqh6pAj5P+Gsl5kKP+VEV5qd6Xv4xSo
-	M/jUzbzYbd3sAPhtcYBu+TOZppxg1rTwOgmZ4MA=
-X-Google-Smtp-Source: AB8JxZqYImUgNZC3wN0WDXjdVEnlaLK8BVDanf0EFMEOUoFziCGbVZ4p4zER1kiYmRjMGIK5hNxgc8BV00bRw3GLHzw=
-X-Received: by 2002:adf:ea8a:: with SMTP id
-	s10-v6mr25885315wrm.223.1525637906452; 
-	Sun, 06 May 2018 13:18:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.133.207 with HTTP; Sun, 6 May 2018 13:18:25 -0700 (PDT)
-In-Reply-To: <20180408201440.31986-2-Martin.Jansa@gmail.com>
-References: <20180408201440.31986-1-Martin.Jansa@gmail.com>
-	<20180408201440.31986-2-Martin.Jansa@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 6 May 2018 22:18:25 +0200
-Message-ID: <CA+chaQdAvReuiRsTkW+oLun3quo2tMj2H8a5EY7YaoL+10wg8A@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 2/2] android-tools: use fixed SRCREVs instead of tag name
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=Q05UNcSaxOMyV69ZCYyk30tuXFlOL10zpoleLTxjuzI=;
+	b=j55pMJqvm5qTZTI5lPZW9rYcvPCcezUURFfyu0jzYMvn+KOrNDAl/oLHcqIQX7JW0f
+	wbWsEJvUYrNzwkooB31PGk/tG1XD4POLT6UOB/QUXwhvfELg8R854+w2iKksspzCN0B1
+	JKz4sIuOfGgfT+lDsUn22c8GKQ4PPBRt5BJx0PPoU9owEk4JwXIjOdvp0fFlsCLJeyau
+	c+pJ40f0nHrkApou+7tCqxXxOvszMchQLp4rnqPEHF2exB9+2EHvEgSjzEBdoGnFNOBL
+	LDFPrqziczGPmNnyC1QWVuFFll2hfEk3Jl9AKO18SvcHw0bcODPa/KBm0GqljIXkm5l3
+	c28w==
+X-Gm-Message-State: ALQs6tBSjPzuhgE6IfYyuL1K6uGAXzwbw3WxmF6FWNZXVF2dFgNICUCp
+	OGLNNO1H1ZXsFemTUBGrEYtDaVxS
+X-Google-Smtp-Source: AB8JxZqEhYieXS1WgldVjzSqymN6F3jox7hzuhccC/JEdtrP7ew7xEqz1XwitZIkOoxPBFBBYaJL9A==
+X-Received: by 2002:ac8:2187:: with SMTP id
+	7-v6mr16526187qty.181.1525657183351; 
+	Sun, 06 May 2018 18:39:43 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	t47-v6sm19247110qtc.1.2018.05.06.18.39.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 06 May 2018 18:39:42 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  6 May 2018 21:39:33 -0400
+Message-Id: <20180507013933.16973-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [PATCH] xproto -> xorgproto fixup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,78 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 May 2018 20:18:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 07 May 2018 01:39:43 -0000
 
-ping
+In openembedded-core, commit 460a2b27af8d023b27703b491331c8cbe7aad0ff
+deprectated xproto and xextproto for xorgproto due to changes in the upstream
+Xorg project.
 
-The other android-tools patch was merged now, is there some issue with this
-one?
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-oe/recipes-graphics/xorg-app/xterm_330.bb        | 2 +-
+ meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb | 2 +-
+ meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-On Sun, Apr 8, 2018 at 10:14 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb b/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
+index 16f9b78824..c2feb81070 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
+@@ -1,6 +1,6 @@
+ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+-DEPENDS = "libxaw xproto xextproto libxext libxau libxinerama libxpm ncurses"
++DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
+ 
+ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=f02ab9ebda87b770ecf711dbb3784a33"
+ 
+diff --git a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
+index 7d26d141f3..3e5c31a05d 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
+@@ -3,7 +3,7 @@ require recipes-graphics/xorg-lib/xorg-lib-common.inc
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b0d5bdc98f7ebab3b6c3791d9bf40907"
+ 
+ SUMMARY = "XFIXES Extension"
+-DEPENDS += " xextproto xproto zlib"
++DEPENDS += " xorgproto zlib"
+ PE = "1"
+ PR = "r11"
+ 
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+index 8ba5ac354d..cb1ffcd8cc 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
+@@ -1,6 +1,6 @@
+ require recipes-graphics/xorg-lib/xorg-lib-common.inc
+ SUMMARY = "X Athena Widget Set"
+-DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxau xmlto-native"
++DEPENDS += "xorgproto virtual/libx11 libxext libxt libxmu libxpm libxau xmlto-native"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
+ 
+-- 
+2.17.0.rc2.3.gc2a499e6c
 
-> * so that bitbake doesn't need to use git ls-remote during parsing to
-> resolve tag name into SRCREV
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  .../android-tools/android-tools_5.1.1.r37.bb           | 18
-> ++++++++++++------
->  1 file changed, 12 insertions(+), 6 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.
-> 1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.
-> 1.1.r37.bb
-> index 5d8f8a8435..780ecaa11a 100644
-> --- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-> @@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = " \
->  "
->  DEPENDS = "libbsd libpcre openssl zlib libcap"
->
-> -ANDROID_TAG = "android-5.1.1_r37"
->  ANDROID_MIRROR = "android.googlesource.com"
->  CORE_REPO = "${ANDROID_MIRROR}/platform/system/core"
->  EXTRAS_REPO = "${ANDROID_MIRROR}/platform/system/extras"
-> @@ -17,12 +16,19 @@ LIBHARDWARE_REPO = "${ANDROID_MIRROR}/platform/
-> hardware/libhardware"
->  LIBSELINUX_REPO = "${ANDROID_MIRROR}/platform/external/libselinux"
->  BUILD_REPO = "${ANDROID_MIRROR}/platform/build"
->
-> +# matches with android-5.1.1_r37
-> +SRCREV_core = "2314b110bdebdbfd2d94c502282f9e57c849897e"
-> +SRCREV_extras = "3ecbe8d841df96127d7855661293e5ab6ba6c205"
-> +SRCREV_libhardware = "be55eb1f4d840c82ffaf7c47460df17ff5bc4d9b"
-> +SRCREV_libselinux = "07e9e1339ad1ba608acfba9dce2d0f474b252feb"
-> +SRCREV_build = "16e987def3d7d8f7d30805eb95cef69e52a87dbc"
-> +
->  SRC_URI = " \
-> -    git://${CORE_REPO};name=core;protocol=https;nobranch=1;
-> destsuffix=git/system/core;tag=${ANDROID_TAG} \
-> -    git://${EXTRAS_REPO};name=extras;protocol=https;
-> nobranch=1;destsuffix=git/system/extras;tag=${ANDROID_TAG} \
-> -    git://${LIBHARDWARE_REPO};name=libhardware;protocol=
-> https;nobranch=1;destsuffix=git/hardware/libhardware;tag=${ANDROID_TAG} \
-> -    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;
-> nobranch=1;destsuffix=git/external/libselinux;tag=${ANDROID_TAG} \
-> -    git://${BUILD_REPO};name=build;protocol=https;nobranch=
-> 1;destsuffix=git/build;tag=${ANDROID_TAG} \
-> +    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core
-> \
-> +    git://${EXTRAS_REPO};name=extras;protocol=https;
-> nobranch=1;destsuffix=git/system/extras \
-> +    git://${LIBHARDWARE_REPO};name=libhardware;protocol=
-> https;nobranch=1;destsuffix=git/hardware/libhardware \
-> +    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;
-> nobranch=1;destsuffix=git/external/libselinux \
-> +    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build
-> \
->      file://remove-selinux-android.patch \
->      file://use-capability.patch \
->      file://use-local-socket.patch \
-> --
-> 2.15.1
->
->
 
