@@ -1,49 +1,23 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D7AD746E8
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B7FA1749EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 May 2018 01:39:42 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id c2-v6so34331146qtn.9
+	Tue,  8 May 2018 02:03:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w4823jrm001396
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 May 2018 18:39:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=Q05UNcSaxOMyV69ZCYyk30tuXFlOL10zpoleLTxjuzI=;
-	b=SDwdr1tWBGzAS2eyPbkDP/O5tIouAkbwdP1hVi7LC51ocSUDLq3IO95a/HbZGnmfuF
-	iFmey/go0Iw4rwleykZ+5evppATcEzfJEAjLrARphUL/Dib+Y4y3R4i/nyR8+kxEMkwG
-	+HFQSyLqu7EbGe0YeThQv3L7ngHCJRm2DWo93Q9GQTGdkAfN3rtowV4YJ+zpf/iQQsZT
-	eguHv7dfCgZjCBnBcDFjLUd5TooVcD1qnayf6zPBrAeCw3gJt6nV1pPbsd8tEWxiTl3H
-	4FjciuOjnJJ7mNt+e3D+vH2+LjWFWYdgGBRXEOlt1dzd330SM7+hoiY0nQCYtOVaTFLj
-	GmcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=Q05UNcSaxOMyV69ZCYyk30tuXFlOL10zpoleLTxjuzI=;
-	b=j55pMJqvm5qTZTI5lPZW9rYcvPCcezUURFfyu0jzYMvn+KOrNDAl/oLHcqIQX7JW0f
-	wbWsEJvUYrNzwkooB31PGk/tG1XD4POLT6UOB/QUXwhvfELg8R854+w2iKksspzCN0B1
-	JKz4sIuOfGgfT+lDsUn22c8GKQ4PPBRt5BJx0PPoU9owEk4JwXIjOdvp0fFlsCLJeyau
-	c+pJ40f0nHrkApou+7tCqxXxOvszMchQLp4rnqPEHF2exB9+2EHvEgSjzEBdoGnFNOBL
-	LDFPrqziczGPmNnyC1QWVuFFll2hfEk3Jl9AKO18SvcHw0bcODPa/KBm0GqljIXkm5l3
-	c28w==
-X-Gm-Message-State: ALQs6tBSjPzuhgE6IfYyuL1K6uGAXzwbw3WxmF6FWNZXVF2dFgNICUCp
-	OGLNNO1H1ZXsFemTUBGrEYtDaVxS
-X-Google-Smtp-Source: AB8JxZqEhYieXS1WgldVjzSqymN6F3jox7hzuhccC/JEdtrP7ew7xEqz1XwitZIkOoxPBFBBYaJL9A==
-X-Received: by 2002:ac8:2187:: with SMTP id
-	7-v6mr16526187qty.181.1525657183351; 
-	Sun, 06 May 2018 18:39:43 -0700 (PDT)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id
-	t47-v6sm19247110qtc.1.2018.05.06.18.39.41
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 06 May 2018 18:39:42 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 May 2018 21:39:33 -0400
-Message-Id: <20180507013933.16973-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
-Subject: [PATCH] xproto -> xorgproto fixup
+	Mon, 7 May 2018 19:03:45 -0700 (PDT)
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Mon, 7 May 2018 19:03:44 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 7 May 2018 19:03:44 -0700
+Message-ID: <20180508020344.2791-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.10.2
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] xorg: Replace depreciated *proto depends with xorgproto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,57 +30,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 May 2018 01:39:43 -0000
+X-List-Received-Date: Tue, 08 May 2018 02:03:46 -0000
+Content-Type: text/plain
 
-In openembedded-core, commit 460a2b27af8d023b27703b491331c8cbe7aad0ff
-deprectated xproto and xextproto for xorgproto due to changes in the upstream
-Xorg project.
+The oe-core commit 9d236bd40ef8598c78c1ea807d658467700505e2 has removed *proto,
+we also need to do so in meta-openembedded.
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-graphics/xorg-app/xterm_330.bb        | 2 +-
- meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb | 2 +-
- meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb    | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb          | 4 ++--
+ meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb          | 2 +-
+ meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb b/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-index 16f9b78824..c2feb81070 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_330.bb
-@@ -1,6 +1,6 @@
- require recipes-graphics/xorg-app/xorg-app-common.inc
- SUMMARY = "xterm is the standard terminal emulator for the X Window System"
--DEPENDS = "libxaw xproto xextproto libxext libxau libxinerama libxpm ncurses"
-+DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
+index d409a18..fb81e53 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
+@@ -6,8 +6,8 @@ SUMMARY = "X.Org X server -- ATI Radeon video driver"
  
- LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=f02ab9ebda87b770ecf711dbb3784a33"
+ DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
  
-diff --git a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
-index 7d26d141f3..3e5c31a05d 100644
---- a/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/liblbxutil_1.1.0.bb
-@@ -3,7 +3,7 @@ require recipes-graphics/xorg-lib/xorg-lib-common.inc
- LIC_FILES_CHKSUM = "file://COPYING;md5=b0d5bdc98f7ebab3b6c3791d9bf40907"
+-DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
+-            virtual/libgl xineramaproto libpciaccess"
++DEPENDS += "virtual/libx11 libxvmc drm \
++            virtual/libgl xorgproto libpciaccess"
  
- SUMMARY = "XFIXES Extension"
--DEPENDS += " xextproto xproto zlib"
-+DEPENDS += " xorgproto zlib"
- PE = "1"
- PR = "r11"
+ inherit distro_features_check
+ REQUIRED_DISTRO_FEATURES += "opengl"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
+index cd68059..182e18f 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
+@@ -16,6 +16,6 @@ SRC_URI[md5sum] = "3ee2549247e01de3e7bce52c27483118"
+ SRC_URI[sha256sum] = "b663cd8e6364f7c4e2637b9fcab9861d0e3971518c73b00d213f6545a1289422"
  
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
-index 8ba5ac354d..cb1ffcd8cc 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxaw_1.0.13.bb
-@@ -1,6 +1,6 @@
- require recipes-graphics/xorg-lib/xorg-lib-common.inc
- SUMMARY = "X Athena Widget Set"
--DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxau xmlto-native"
-+DEPENDS += "xorgproto virtual/libx11 libxext libxt libxmu libxpm libxau xmlto-native"
+ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'dri', '', d)}"
+-PACKAGECONFIG[dri] = "--enable-dri,--disable-dri,drm xf86driproto,xserver-xorg-extension-dri"
++PACKAGECONFIG[dri] = "--enable-dri,--disable-dri,drm xorgproto,xserver-xorg-extension-dri"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
+ RDEPENDS_${PN} = "xserver-xorg-module-exa"
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb
+index 96bdf0e..f683f53 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
+ inherit xfce-panel-plugin
+ 
+-DEPENDS += "xfconf xproto libxtst"
++DEPENDS += "xfconf xorgproto libxtst"
+ 
+ SRC_URI[md5sum] = "9169140af7c9d3fddd8a5c9e0efb5a61"
+ SRC_URI[sha256sum] = "cf2b45e327e67cc187dcb99a6ef6d95570463045accd24540e17172f005189b3"
 -- 
-2.17.0.rc2.3.gc2a499e6c
+2.10.2
 
 
