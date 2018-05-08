@@ -1,30 +1,26 @@
 Return-Path: <mkelly@xevo.com>
-X-Greylist: delayed 4669 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 08 May 2018 21:04:07 UTC
 Received: from NAM01-BN3-obe.outbound.protection.outlook.com
-	(mail-bn3nam01on0066.outbound.protection.outlook.com [104.47.33.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 492C474E33
+	(mail-bn3nam01on0054.outbound.protection.outlook.com [104.47.33.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C35D274DDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 May 2018 21:04:07 +0000 (UTC)
+	Tue,  8 May 2018 21:04:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=uievolution.onmicrosoft.com; s=selector1-xevo-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=hOxxJl3FPfOaUmhGu73AwivU7sHGvWB7GxaLOlcJiPE=;
-	b=AchMw4fXLttxnxPCX+/DkZ/RQ2fmaEQVQ+PVXwXvECumlDHHj+f4T0PZ8gZShpdLhXpTG/z7Ziiw0HivzODGZFeZhHXwJwengtoNk76Kl+rgT6XaZYt8Fl67V7c0ec+kb/X/xmhC1rBdh6993+B8vHvLyeXWZgXwriV8TC+7Xmw=
+	bh=C8eaAGh1sHRs1p9jDXahoIABI8X8zFRQsM1uuZO82GE=;
+	b=RT9V6OdBSlFHKo3QfxnwadjicRqNPt9/J0/2Lr90GIcRlvJspqr7AlanYKyUtaQwsC0TgAS/3b1ILUq73FPPjyPtfT/zCvR9NotI3bn9DbwfIIJZUhNilXgzNA9knxNWrsSyQGvYsnQetDkAJB8BJ7gIfAC4GWh4nf1qva75E24=
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=mkelly@xevo.com; 
 Received: from columbia.corp.xevo.com (65.122.179.226) by
 	SN6PR0102MB3424.prod.exchangelabs.com (2603:10b6:805:3::13) with
 	Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.735.17;
-	Tue, 8 May 2018 19:31:58 +0000
+	Tue, 8 May 2018 19:31:55 +0000
 From: Martin Kelly <mkelly@xevo.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 May 2018 12:31:41 -0700
-Message-Id: <20180508193141.14077-3-mkelly@xevo.com>
+Date: Tue,  8 May 2018 12:31:39 -0700
+Message-Id: <20180508193141.14077-1-mkelly@xevo.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20180508193141.14077-1-mkelly@xevo.com>
-References: <20180508193141.14077-1-mkelly@xevo.com>
 MIME-Version: 1.0
 X-Originating-IP: [65.122.179.226]
 X-ClientProxiedBy: DM5PR19CA0019.namprd19.prod.outlook.com
@@ -35,14 +31,14 @@ X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
 	RULEID:(7020095)(4652020)(5600026)(4534165)(4627221)(201703031133081)(201702281549075)(2017052603328)(7153060)(7193020);
 	SRVR:SN6PR0102MB3424; 
 X-Microsoft-Exchange-Diagnostics: 1; SN6PR0102MB3424;
-	3:uAsRYC+eNE9XHG9TOp3WqeSI39DQ9e3diH1mT8lMPLHZ6Pctou2heHwsd5p0ugQcYdYAaW676z/Fj6KsFttFSLbNS/mHE7gG8rYa8A84V4d0MIvsOnk+UjJYFE5l9HY6AB+2QCDaq+/dOrmlwniRJSWrPqV6sioDHd2KoB8K430IN0uRvM7jzaVW6FLsjuvM7GlsvwS62J4jdMHyB7nN7nCayEG7cNjEoQ7QI2DOlEbYGY1+6wwoGvDnmfJzJ15I;
-	25:sqoawGV6x0uOTokbKbAnKI4yV1UpqXx5mFrZUMYGlRiX+J0AAVojudgQ5g12c3nli4MbmzS5JAADRasZwXbDowy/Shef10pHtnTZMzD7xikXRC+fXBRYC6Wga5NZZoYgXW/FIBd9LU3rpp/hF7HbkyY8MSZSoJlfr32jsgCKos9PVIYTPVKdctfAspnINmLtLf93pvazk8V6JnBq4pmuLAfxUKv6ZU44xT8jEbDtDtuP2rUyXrXzc5CAfGIwK42KSWvTluNH8Hm43uMv42gbmB/SIpyrpa8vKVSvF95NmqOc02oYt6DIUS9qQLbnncPcdz3I9GIlVFiOOQatt1tRJg==;
-	31:Spg3OYdK5rN2xF+MxgbCy5PcHfjYKX+EISrHs4yaf9wl2HyEMcRbXm3wBW6rHf1PiDMvki1NW0ZtxXeOmRSVRdkG6TtGzm5xIeSrMbQbpy3tmd1w8lKQjE/f4B04iVYR66o2ttj1QC5Gmpvwd5/bktAqpfS6e6BxrTV10zAqqkumtIH/kDZAlvL+BaSlMI9B+m0xDbOmh2ttm+PsRFaniwK0ljIh+ubcu0swEYm0vvo=
+	3:AWnrNlTNZl3FixhTng6H/I+SJhP03KZn+UqWwRn2N0P9iviugyfeB9L/9ZSS74EPN+Xt1T9lK7g+5huFBpjqVsnpSa3IWezsjuSHV58EiTKgjFLpgVAmif75esYbBZujW/ogo2QeIZQty1B7sr7nECMqZ/EyQOYP+oXIXQ/0NNO2oST1t8gzkHbxq9PLH3pS9w5bEISUfLx3b+ckdcGDqqk5sn51j0vmHww+N8xfQXkV9CyQqMjDkCTsCvsHWuJy;
+	25:Si/LWDhnCdyR/rSoiq99QiUPmYqQgu43+8QC4okt0+fI1ie0U6wNN6jkNgInkrpYBsYlZ0wIPUApYgS1Ipk48j+wda8OtBlgt01G+XXLnJes3ZVar3uYG6pf/2uR2ohYh5V/Xplphex2RAu47rpAB7CTwGm5UMTM+AeUOi/rKH/tLY0hNr4L3tJrlVZouH5ZZxLmPCV97lC6RSQ96xgPFFoybqG0MNlBad4q78xU/kqr8lJdGbsvDu/6dSAmslRs2pIqJWQv2+aSYlVz83B8q4CmAXueCd++MAqJdHiL7BsDOW7bbHVhb1bMkQgY7KDZM7V/OchUitKq1I+j5apexA==;
+	31:brXjLVog/xoWQTBgA8hTSEwJWZj6EAbNg11AnqvWejjcVckubBLamSiiKYtxNNW0eRUS4OiMb1b18QTPPeDXa2OaMPdSISGDt8fCvt2RRu0XnM7ax2M5HxcR19hUbLDhs3BBN9jIDuMZUAGC6i0ejr6/H47GA6IoozCO6LaB2B8/tTifOuxUe+EhaCNaGmjUA7YYvqWuq22ImEhT5vNgTeK10x6J9V6u72CZ/Z+Ceag=
 X-MS-TrafficTypeDiagnostic: SN6PR0102MB3424:
 X-Microsoft-Exchange-Diagnostics: 1; SN6PR0102MB3424;
-	20:AQ7GWPrGr7Fw7PJy28rpSdYyUgXy5mI3d+QbWct49+LpSkZ4yyPesP/t13XpW4BFaHU/+YMmxcHiAV6qEh7PiK7Hv6EepYZC4HPvdAL7STEQt6NIR+wceDT9tHKM2wqrkCV2U+pdlkl05Sugd0eQW8YxXOUESUL5gpGqUSNo390WsMQi1UC/1ZUNc1mk+cYIw//vSpd3mQCZroanhKiZTVDs7dGdfSHAJvGqwLiHgC4897D00EYrdT9uE1rLjKF3txzYHpHxcS/bNWFiHfUeQCX5i7MeOWU6/Ih/k2cfCcYMXvQqwu7n8EthgdaBf8sccubyNAB+xaCAjIQ5ssRptiIR9xfRsGtwCyZiLqSwC2oHTJwAN5HJS0ZsAj1zJXGobtoh1I8ckL5uB7RY+SI7VmXI/SRHTojiQwoslSK31C4apADQG3HGDZvbLjzR7HET2n+Ic/XUtw0m/qq2Bd5395HTXExWguVoKaV456e9EXxtCvNCz1rnptPKS8bE/qqM;
-	4:obsD+VHATwICkPbiV82JkFyctAvdoBoIh+kCxBLvh3qRhEUFe5K/7xG/kFgL+3wiu9CIZvjFgBA30LbJ2vshQ2T4CUqYFlur+p3GfZ1xoaTWOrmb9bxMmYQUablVcsRskUEsl15KlWZP4gtHdOdrNsEhop8VI49ZeVbCvqwq/5UUF6tW8KiOx+zUcperkDVdHsW5MFevelGBOjzLN34pAZHz0WCSBx5q8D/du0pA5x38FZ/tFYtxwN2+/woIcwK5o6Q59RQf08Qu/EMIIUNY7g==
-X-Microsoft-Antispam-PRVS: <SN6PR0102MB342419A327C720049D859232AB9A0@SN6PR0102MB3424.prod.exchangelabs.com>
+	20:uScN5a5/ObHpJmsZxTKjcdTSygqBOXJ1uGOC9l4CD+6NWuzlNO3bo3ETItRI+njl5pspTjsC13LlBwZ7nm/JVtldNOAbMXBVuJh4Pr2N1CRJWdoHhC6qvsWyhTwUIBkLa5ymzeZqXsxCa0XClxdLAsEuc3km/s79AzHm9nBoqn4XT5iAChY6bIV+DFVMbbXIPcO1Weg0XDqDcQtkNLEhVNe39v6LfjmqJCm8talr2CYLIdllmgSeXm6AN9UdOyiBisIPqIapwwt4Z+IKuxT/FL7gE99quLFTunjEe/3um4jG8YhYX+mPcNpQHW03iW0D4i1xf7pKWDixKbM8ZILAo/NCXVfINonQzL5F9YuBuDRHWpdlwe75WMsCpNulWrWLaW2wMCW8pDQxA5hyGwE1LLrp9IHzJyeGweaZooNFDUGoqQentNpBJ+2w9xQ2vKkKZBhhjHzNlE30PCzZOJRn4GBVIlmsup+Dr3m4IKvKMMpg9Rtg/TefgIzAfjWT++ZR;
+	4:cCvZISxA4jNcQgqXWDUhxmmTNyZ/Igj95Y4A2oDhw8CGrBZXPfxeSPjMfE5amvU9yd8tRpJkYGMAEt7uJpgDwTnkwHXYpSan9R+V0++hmBcfn3GhohN9Uy+UKSdxh5HwNhfrR7HZ1+NNhDsSXTNJrkeP3+4lK6M5MmVTxDQTmRFOBj+29bAyzpezZQIua15vZP+8ojktU9rMZm5xmEn+pe5+8E73Zo4cNFo8tI7uw+TqzEwOZj03xgpACC8aB35piZ9lFsCuA30ZzwrzUB7nnw==
+X-Microsoft-Antispam-PRVS: <SN6PR0102MB34248577E73882523F222F45AB9A0@SN6PR0102MB3424.prod.exchangelabs.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-MS-Exchange-SenderADCheck: 1
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
@@ -51,53 +47,53 @@ X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	SRVR:SN6PR0102MB3424; 
 X-Forefront-PRVS: 0666E15D35
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(39380400002)(366004)(346002)(396003)(39840400004)(376002)(199004)(189003)(2906002)(53936002)(47776003)(50466002)(2361001)(7696005)(51416003)(6486002)(52116002)(105586002)(2351001)(107886003)(5660300001)(106356001)(36756003)(76176011)(305945005)(4326008)(6666003)(6916009)(97736004)(446003)(39060400002)(48376002)(316002)(486006)(54906003)(11346002)(16586007)(956004)(2616005)(476003)(1076002)(59450400001)(3846002)(81166006)(1857600001)(6116002)(186003)(8936002)(26005)(86362001)(66066001)(68736007)(8676002)(7736002)(386003)(81156014)(478600001)(16526019)(50226002)(25786009);
+	SFS:(10009020)(39380400002)(366004)(346002)(396003)(39840400004)(376002)(199004)(189003)(2906002)(53936002)(47776003)(50466002)(2361001)(7696005)(51416003)(6486002)(52116002)(105586002)(2351001)(107886003)(5660300001)(106356001)(36756003)(305945005)(4326008)(6666003)(6916009)(97736004)(39060400002)(48376002)(316002)(486006)(54906003)(16586007)(956004)(2616005)(476003)(1076002)(59450400001)(3846002)(81166006)(1857600001)(6116002)(186003)(8936002)(26005)(86362001)(66066001)(575784001)(68736007)(8676002)(7736002)(386003)(81156014)(478600001)(16526019)(50226002)(25786009)(6306002);
 	DIR:OUT; SFP:1101; SCL:1; SRVR:SN6PR0102MB3424;
 	H:columbia.corp.xevo.com; FPR:; SPF:None; LANG:en;
 	PTR:InfoNoRecords; A:1; MX:1; 
 Received-SPF: None (protection.outlook.com: xevo.com does not designate
 	permitted sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; SN6PR0102MB3424;
-	23:Juuosz8qZHrZIwmGBYRxWv5nVv1iFPbtyQ2gX0V?=
-	=?us-ascii?Q?t4kPe1lZ/XjLucnBxt0sFEP3Ps0XyRYQ+xMdriQTh7cCaCirRNoLF+vlhqa2?=
-	=?us-ascii?Q?/eCBfbb29tZEz3ktrH3PVN76IUgjmLIXEX+Z45SgqezGT0lMQSffReybeEMv?=
-	=?us-ascii?Q?XnenxcHjLpQEGT7l72YYd4BOAcrq//nuXe+DEOzll9I2dld8o+62htuXmRRs?=
-	=?us-ascii?Q?TJnega7lUuh6q5LD+Yz00+i5FevF+o52ojGLOTpRJQDYHYHEpNX9ZGUV88w5?=
-	=?us-ascii?Q?2ncek+tE/U5oWjct1CrEdVvYYg0aQPzzNgbSEs+VGjzIJ1BltW319sD4j+cB?=
-	=?us-ascii?Q?N4v/3PEFbGZNIBc6e0ha3ddES0wr/zHvMBWxEKCxQG2gCiCOpOsHi8f9X3su?=
-	=?us-ascii?Q?D3z+TbyiQ4Of1DZkjI0S/7n+chiSja2hCIcJJ7fZtyn1RLWoQK/juwUKAFqN?=
-	=?us-ascii?Q?PeXzVEFsLGKJRQ3PCoH/7LKS/cuOx93jGbIULsb9yWoL3JTj962ka7jK8HGv?=
-	=?us-ascii?Q?+Mk7aHO3XfXEhonc6r//mz4fPL7WEqSBDGcpljNoBpgaKTD0BvWJJ9cqG4kZ?=
-	=?us-ascii?Q?+fAKqdD7IL3+8DGBsUK+6rWnFl09rUOlyYJqhQMDYCDh2x3iEzHNnzaoIqJ9?=
-	=?us-ascii?Q?fnf2tr5h68jfbnR6sw+y659nrZzX+gxbqEuqe0w7hjSzVXiXFQp6sIXcOwKO?=
-	=?us-ascii?Q?JqsGbbyXQwHewFjNie40Yya8PW8F03TABxk+Pa918WeTQGSEF3DGDOoQh6vA?=
-	=?us-ascii?Q?ZnFj5O/XPmcujjmt3Wpl+aukXBwR2aLmHSYYr06NSO2C3KRdzwoe7lnG/Nl4?=
-	=?us-ascii?Q?cb3PFvA2bavfrxP+xWhAmp6FKgOUiUdHk+afCws3mdsMe2A/M5KWrNw8BKO0?=
-	=?us-ascii?Q?Ic4kX672THLjCNOL3ltuGYwSWHYuT6FbIU7lLUNZtqT+W8Vdn4XSD6OPbzug?=
-	=?us-ascii?Q?2V+UAw5T39YnzLszV6Je1/BMmBo7egD0RYY0zL+XJSWixXkUgjm0okG+dfNj?=
-	=?us-ascii?Q?uAO/+LlZqccNpDj57Z8LGuA3OTU/8u7e+a7r5qaQbf0iWBqKe3ikaU7vEenu?=
-	=?us-ascii?Q?q8vSzYSg7aVpKMUdPpNfxQE3rDBtLJiDjxKaR9keOVhBdGsQZxeaj4gitWj5?=
-	=?us-ascii?Q?OxZnUV+pFIZifK2X7F2sY/Tm1REv12w2pfgIr17iN91QFunhpUuhFwfkk05X?=
-	=?us-ascii?Q?hMpj8Q7Lca8PDU4tsPfnZdqcRojJwUIG3cVOPhMBYY6unsAlulIVg/5FEN52?=
-	=?us-ascii?Q?c8VAl7eQTkOILEXUMSmWRiGKn4shvhQCTnj+7bQ02nST4WGs+sNnN3+RD10O?=
-	=?us-ascii?Q?4NOprach95L7PNGZTs9W6s0gQToih3HGNJTDOhF65j5JW?=
-X-Microsoft-Antispam-Message-Info: E23hrMSrNmbPbsE53U1a1xkaNWlV2rJWNlGeWJNU05yFN8j4DgK47Rh4oX4e0PrERK8HstxpUQv145MpbRSkyBlRkRLNVsl3fowBUstMFzs6AyGUg5S3QAdLVompEQu1395ulwvW+cNHelaoiKuxk9BfGUSrtGv+HkfPfbwAUMiR1oYPdQaOZ2kLJxafsdey
+	23:K0oLfk3SHqVqqc5D42s9IuhWh28qlFotdFKbgru?=
+	=?us-ascii?Q?L50KsrhfU7z0WugTsdr5WAbE25me49+8AYhI+7uMhGyqizUgUEzDUYMAHLLs?=
+	=?us-ascii?Q?bNsr0bKxzFRTHw6BJdWCk2BO5QHgG8V1C4KzAhGrbBqRFrmrrdnv9yhVpQlK?=
+	=?us-ascii?Q?Wy5QklC/MOh/BR90rw6WS46lvh0ZrFAJpsrl9lL1vaNOMeDcgn8bv/ptvLAp?=
+	=?us-ascii?Q?kBQJpn81vHwHUpskq0kmyKfa6qjeSiw2l4sApSEMSh2xP07/rLmAuO4kxzRm?=
+	=?us-ascii?Q?Sp1t/dGgnX4B7kefqmtvJ0f0N6B0JGL9XYlJTQrhSYhzlVJlFP2mG3cEAXHH?=
+	=?us-ascii?Q?3CpuvnqyhQsv/TApWerlPCJ6Jm5ViBc0tH+tSqSS4Iav7YZh+VM+s4wRERd2?=
+	=?us-ascii?Q?GTRX9EqBDDMo3gTwRWZ0B2KzEm3hwkwzWiebaFwTnqVNHANLON3uBPPfPCX8?=
+	=?us-ascii?Q?Rl+6x1IsYBJdEDgRNRA80Tyf4DQ6+szPNl6yFkFnCakOTZh8Vf5MmAGCxpo7?=
+	=?us-ascii?Q?cJpbsKU/8WSXtuwh1iKCUiOnJxb3mJMteLRaZpRdwIMTSwPTHL6fHIGNBmoQ?=
+	=?us-ascii?Q?c8oSOWrQWPEb1IS+0lkvm8xJvRfp1izmp6BCXcTU0Mb56w0mjIIi6qTRzbbS?=
+	=?us-ascii?Q?iAeC6gNwk4BLtK9Ii81GX04BT9goQXJxAsFBTBxgZxzN83iWQt1vvbCHGo9q?=
+	=?us-ascii?Q?lu3jTl4qniwaiqNHL7lgZ7mWylkOMyWTXcy/Tr96QRtFm02VV55ochqFEdWY?=
+	=?us-ascii?Q?64oHZozjK1CRl40X1eLnzkAr+gfseRdLpXidlNpbbqxWtNIutElZnmN0aw54?=
+	=?us-ascii?Q?aQEttQHaLe9aEx6s8Z0Z0vDitEZBuN6o7mlm6UppDci3CXiBZbYgH768VHOy?=
+	=?us-ascii?Q?cXJhbO07sJch97Y/mg+thwbAa9gEEw5g/pZCTW0SpYHOKqRN8feXHAStMraw?=
+	=?us-ascii?Q?CpGrwau4DpwclF4ITosouR7KC3CcgbNgxCAYH8KhruvHDudV89cRKOnGDlrR?=
+	=?us-ascii?Q?aFqRoKNed3mmFIeAFZj3VMZc7c0r8TQ6PH1tWoaz5QeP+69ms/qOYHGbPjHt?=
+	=?us-ascii?Q?yoKjs9rE9r3V0KMHu6fgVZM6FF8+PxAOiDJ35OkDCkuvDTka5SHlUEZwdE3Y?=
+	=?us-ascii?Q?NAiGvNb3sqcau5h/pP+l1qdjeZ2YPjBOEHrRB+FcG9G3PtUDcz0DkTLeKAnC?=
+	=?us-ascii?Q?YfdF4d93MsDGG3mTiSNtjcMTNFQZ5gNsWxPzbxmdRmxMgOw/Q4s3iDePIAJa?=
+	=?us-ascii?Q?GxZPhfFqNUT0lv+IKL6wLDM31Ny8PEvqk4liCtTEWUd7AK17Z3Qd8n6qvBqz?=
+	=?us-ascii?Q?UgnggR0rWKsuT0IRPNANS5Pk=3D?=
+X-Microsoft-Antispam-Message-Info: dJ5UdKt2loq+nCLBmW9/KfDBfNUf4BvxQKfGzC4XYYLc6vmYBwmlrsHZ6qBs7rkqbu71qRzY0rpdgXAG5o2uF8AcIAZqEDLPyEk1Z0g8oSLB3TE4PpabS7Gy62Txc0mKlXhkXBo23n9rRwg3yn6iN/EkhpsSBr0Gyn2dwTWWUSS1Vk+XKRTU1FrTIvJHYydg
 X-Microsoft-Exchange-Diagnostics: 1; SN6PR0102MB3424;
-	6:OuK7HbnAfulYbeXbGhSM8T/2fDOVX+8bmdJc0byYCYn5FgNVD3n/migCVgKoSa+w2+81J1JhDqDbSiEUhWCz+49JeIQXIfzZtcuuxiyUuxx2dzBiWlhTYITHOROwXERrAbqsfgKCzgXXVbk/MOZLGhAdQsqFLRGPiH0RtMZNR30f8CCxtFh1JE9yxv0p+dAwLYzxylh9Z3AZT4UzXvTRdzRyFE+RLIOm+DvCT6vPr+xPhdaf5XOv5sVZCSLV2sgm/VaT6c8JHHs7usuzNtFXeMX2pnyeNrmUHmnHrkvGtwEhSaCryGJ5fgLNPGNeUeBBGP77OP7o+bt6dIxOOz6xbXZVyTrkVoZe2Mj8QoNT5ubrVx22UMmwva7uDkZhogTQomjyML3s08V4kpJncgMoSDj85XwFobDCvLFuQT+8xky8nu13zmsm5DzSnM6GXnk9Ft7PjJ4ZjRCGaIPlEXnXOw==;
-	5:YuflVzKKpjAWRrLh1lU6G1l1pEnxgRho3tjbu/obE+0lPWNsUCbp8cMOo6YM0VY4NIQqg2ENS9yFRE12K+KwP3a+Bc+lVWP9s9LMtJ0f9FDV7VM0YX3zBECFUB0HErVhMJbYxmDmxdvdZJfFzcHnNGUsvkHD9qV8WLBhw71E5CM=;
-	24:DJVJYy/qYVRhvGim7jLNC4X0Ma+EDnw44Jt3amsChKNlussW7wMk4CgeU9ECaIU2PA0zVZsDhJUBu1X/PCBNrWqQPoVMegdF2X0H5zGZS3Q=
+	6:y/Y30wugRgrhyUZbB75szB0pxvFOBnJk9jqAG7pMOw5cvRe8TVxynnpmxSF36deR9LKsm2PV7sGWctuf7jnOfi42EYELClsX0ds37U6pRiP8uco1DOdxlQDQoMvxK/e+WgjTNJXG6Fj+XBxpSnF2GQgtPbMLttFEfMVXjSaP8jh1vMljrrBm/uvO8q5OAGH43QW6lQBSWVu87TKDoDYkhFA3PBKlI9fcciSbHoFTjDvVGhndm1h49dvveIH7pnp5T/9mIWEPYr19uslEjm7tJtDnNNZL71Cjje06qAUjSCELBgV57FnenSZKju20CWTnDroUcaL2/MN4PlgSkPDDFg9dJ7Vq7rqh81Fhr21VLtakZvCFKC4EtpMthvD0EGvk5aSvb+CyykR55s6MBrgqoNkmW7y4S+IyuLsCohTeK3xYOBNjjJDEIWrd6ARYr+a7VJ6tGmeoE27Gfoz4/ltSCA==;
+	5:0q2LwdJ1d2Ev1piv99ZswMpMVjeX64gz/F9T5qBs1QJu557IVyZiebARnkM8B9U5iQ49BEpEHXhjX9Xb6vRPtPawVAj70Dfq0pF9vlrfgNwtMHXGFfAXf6SpxH6AyAFtVnwPAArdsestcVU28fAPG/O/QeZonMyhRccWEvaevGY=;
+	24:R1wyUwMoDb+oVLN6cEjfXjURkHK3p8hT/FwUNzICOx/xQfuEJUR9o9TqhQWgZIKJvW86X88mCorTlHY3YWwatfOAr9amUiYUBdKl+ernHng=
 SpamDiagnosticOutput: 1:99
 SpamDiagnosticMetadata: NSPM
 X-Microsoft-Exchange-Diagnostics: 1; SN6PR0102MB3424;
-	7:2AgPeuxvJV+mxTseHuYvlUCS7g3Vl2Q59nU3bdEcIruiNcaTw5YxUY0X6JRiTU00fayXvtoqc++g2C/IiJaWSSxKC4K1DGPLvqHYjQzLfd15ucjZPpzCd3RJIxJgVyLHaOVbMwJ+IHYLx/AK1HOTe0ncNJ9Nehn9WlpAHoGN/Jro9VkewVndmcj9NlqzhfterCdOgcI3d+33aU2gzGEMMIDo2rarU1aotnxdyfwgHvRaXug3lvpvZsnnCjzAj3n7
-X-MS-Office365-Filtering-Correlation-Id: ffea315f-59f3-4a98-4b24-08d5b51a5d8d
+	7:rLC2grLj1upqBjVFxyBH0CncpB5yLrDtOu19LY5XTGw9T2i0tn+uBuUg5fPk/+7o9m7l0g4NsULE/pEE/OwfRQ07JqpnXa57rwuF8XkPSmYisqdnMRycb6cp+o8VlD+G3agf1hjOnYeh0UJv0r2h/v17ms5KpYyofb5KijwQaJ0sXuVlhxOGJjBzU94jt3DVDniXQ3bozBly5SjXIzg5kwc1sbq35dCH4LPuZ4j4j4LWfXp732yMCnB7V+KJFgLC
+X-MS-Office365-Filtering-Correlation-Id: 0b19d087-3f59-48c2-71c4-08d5b51a5bcf
 X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2018 19:31:58.2361 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ffea315f-59f3-4a98-4b24-08d5b51a5d8d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2018 19:31:55.2985 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b19d087-3f59-48c2-71c4-08d5b51a5bcf
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR0102MB3424
-Subject: [meta-oe][PATCH 3/3] modemmanager: fix mbim disable string
+Subject: [meta-oe][PATCH 1/3] libmbim: upgrade to 1.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,30 +106,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2018 21:04:08 -0000
+X-List-Received-Date: Tue, 08 May 2018 21:04:57 -0000
 Content-Type: text/plain
 
-The current string used to disable mbim is "--enable-mbim=no", which is
-producing a warning. It should be "--with-mdim=no", so change it.
+This is needed for the next version of modemmanager.
 
 Signed-off-by: Martin Kelly <mkelly@xevo.com>
 ---
- meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+A similar patch was also sent by Khem Raj; that patch is just as good, but I
+wanted to send this in the same series because the modemmanager upgrade requires
+a libmbim upgrade.
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb
-index 4f9400169..b1a718dbf 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb
-@@ -25,7 +25,7 @@ PACKAGECONFIG ??= "mbim qmi polkit \
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,"
- PACKAGECONFIG[polkit] = "--with-polkit=yes,--with-polkit=no,polkit"
- # Support WWAN modems and devices which speak the Mobile Interface Broadband Model (MBIM) protocol.
--PACKAGECONFIG[mbim] = "--with-mbim,--enable-mbim=no,libmbim"
-+PACKAGECONFIG[mbim] = "--with-mbim,--with-mbim=no,libmbim"
- # Support WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol.
- PACKAGECONFIG[qmi] = "--with-qmi,--without-qmi,libqmi"
- 
+ .../libmbim/{libmbim_1.14.0.bb => libmbim_1.16.0.bb}                  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.14.0.bb => libmbim_1.16.0.bb} (82%)
+
+diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.16.0.bb
+similarity index 82%
+rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
+rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.16.0.bb
+index f89ef9d57..5260c0f14 100644
+--- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
++++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.16.0.bb
+@@ -14,5 +14,5 @@ inherit autotools pkgconfig bash-completion
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+            file://clang.patch \
+ "
+-SRC_URI[md5sum] = "2ed809e65c85353d3ab59e372890e549"
+-SRC_URI[sha256sum] = "ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b"
++SRC_URI[md5sum] = "76ea4d8381989919b1d9b91c818fed80"
++SRC_URI[sha256sum] = "c8ca50beeddd4b43309df5b698917268303bf176cea58fe4fe53d5bf0e93fac2"
 -- 
 2.11.0
 
