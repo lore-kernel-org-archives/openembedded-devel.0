@@ -1,50 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A52B174F9A
+Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D75D774F9A
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed,  9 May 2018 19:00:23 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id p14so14700964pfh.9
+Received: by mail-pg0-f51.google.com with SMTP id z4-v6so23057231pgu.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 12:00:24 -0700 (PDT)
+	Wed, 09 May 2018 12:00:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Nc+gMPi/zvF0tIM1ZkVzDDAy/1QQMLABC8Uc5iQoBLw=;
-	b=oYoMWYBEuDmd3eM5H1FIMLorO5sCO8UY6dtzgyccCZfyswkgeArNIbTYD2AMMM5emB
-	RUaZ9NdZrm7Qg090YQH2A/IgqVs7s8I4zppS1hjjcEKGBgFhHssIDCu0rvhAYa35JEeD
-	QVe32QDzjbSdQCH7CRzdX68z4v0eayptuRaPlzm+zIuZ8+EwkqdG8swPL8QDstOTZyn5
-	uEkPR7CUW9T2G0aOsQrozCvFej26YpYCWNf5sIZ9BNCg+XoklJcvMf1IWGpK+9fiYZo7
-	SiR56m7zpWBOSMic/uL87/RXYl/+ta6tlRBLxs/kG3vRAi9jWEtJJLRX20eS7vFwJVST
-	u26g==
+	bh=FwXZRIqrNjyFlh5aTskhXpzdezfTkdcLWoJCKgBdwBo=;
+	b=rQ3B7SsabtkJZF9yiZ1XeOChNWVJHZc53x0tgNCP/E6zO5tZzClA4lVP3uARBuclSs
+	kOYri2ZNPM47upvNIjWuBFBl0OTYmwzdGI/C++XlN4MuunjU/HRmOOWSQD7yqJSAIJlV
+	4vQhLpPqkMIRRA8Eu6O0boGACe+ZcXDT9ixa4fMDcy/6zaKlI1DcCXNRz0hlBWHif8fN
+	ZG+jsCDk9mZY0B4/xX6cSDLFaXr1y8AYUvZX/HdTRl/X/noZUhPVI3zXDoQaP8jmbnvQ
+	AqF94GMWbcPcZL3yhYM5JQ2eZ9C5acGtquTeiFkgs9CHH2j9M+EeeymFgPFF9/Q0kVrL
+	fchw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Nc+gMPi/zvF0tIM1ZkVzDDAy/1QQMLABC8Uc5iQoBLw=;
-	b=s0Ce+JQ2pdaYx0RUGVQt9F/M3Oi71uCbjlcQM4aPm+BWz3ZlPJNbacGmkXPws20eLO
-	/8ox0JeH0LjFHfYIJKoFNjy4oeqo5R+rbnrSeO5z/VVZ4HzNOY1MkvtNeixxvzNkBauP
-	50w/ycVGrD84Ask6NsvLngyuap5iEGWVQTukv47ykgm54PPDBxlNmAiVkohjil/ftnpF
-	hxM761pZOpdILBii/WF7whi0JbZoUvoiifJdQFkuS2v56ARMZrLV7CbY+qSmkP41Enu+
-	3YrTlO9LLj2+wbWDE4iIEJ76g8FmrWcnZEEijM8Mt0JifTatKO53KMmebTimfabE+kAx
-	i5dA==
-X-Gm-Message-State: ALQs6tAIAxCluo+A1Da+MEYdQoQ0mc+pFaPoxnJ0N6sJfOl3oh+x9+iI
-	Ih46lUACTdANm1x5Ry/yC+DQpA==
-X-Google-Smtp-Source: AB8JxZpeU9NR0hdcQQDRdhwJizrP39TkQyClB4lfQJFy3t6lcdG0Vm8TSdkXpJR+hvjtx5lfJcQVZQ==
-X-Received: by 10.98.156.13 with SMTP id f13mr43511136pfe.15.1525892424093;
-	Wed, 09 May 2018 12:00:24 -0700 (PDT)
+	bh=FwXZRIqrNjyFlh5aTskhXpzdezfTkdcLWoJCKgBdwBo=;
+	b=bzCDfzgrbfdhjpRq+MRbMq8DMKzeGPpPRwS+qHvuwNzxdGBb7jJw3N/85AQOIDUC7V
+	/6wGHW0SPuE7uSQ0W2fr2E+vkZr1qaJ/7p5p4EkADcXdD1o0qFUVGPyF2Plq/QIR7ZvT
+	O8Vxjzwq1mo9qVYZ6MlBd0SbahviJyOj4pO/AA2y1qtOX/TEph2kusVGzGEzEF3BxSCe
+	DLdT0RmlaRGt8NX3Mwc/ctCz+Eft8G/SFchge/OmQEhFWMABJ8DmHe7R4awZtw+cOssL
+	p/q29FBAISQmMw2P1bRz8jeCKMz/RQI/ih33go8w5Lph4M6Qksxxxen5BkObnxT4sY3y
+	uKHA==
+X-Gm-Message-State: ALQs6tCLDXXcYvyWJd5nd0BtcYaRokgGYqe+eEDaw66T6zmGZ1vm0uuw
+	KZeWVP4MRVDcujjSFnOM1qhlUw==
+X-Google-Smtp-Source: AB8JxZqUX+W0Hs9TPEwFl1N9zBJNBtJ6rkVtkMfCidzyWymd+Dyjzen7R+ze/xQqdEUgsB7mlrRwNQ==
+X-Received: by 10.167.129.154 with SMTP id g26mr32487009pfi.210.1525892423191; 
+	Wed, 09 May 2018 12:00:23 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	131sm27732437pfa.128.2018.05.09.12.00.23
+	131sm27732437pfa.128.2018.05.09.12.00.21
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 May 2018 12:00:23 -0700 (PDT)
+	Wed, 09 May 2018 12:00:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 12:00:00 -0700
-Message-Id: <20180509190011.30006-5-raj.khem@gmail.com>
+Date: Wed,  9 May 2018 11:59:59 -0700
+Message-Id: <20180509190011.30006-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180509190011.30006-1-raj.khem@gmail.com>
 References: <20180509190011.30006-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 05/16] openl2tp: Fix build without glibc's rpc/nsl support
+Subject: [meta-oe][PATCH 04/16] openocd: Upgrade to tip of master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,135 +58,364 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 09 May 2018 19:00:23 -0000
 
+Drop upstreamed patches
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-include-rpc-clnt.h-for-resultproc_t.patch | 31 ----------------
- ...-kernel-headers-assumptions-on-glibc.patch | 36 -------------------
- .../openl2tp/openl2tp_1.8.bb                  | 15 +++-----
- 3 files changed, 5 insertions(+), 77 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp/0001-l2tp_api.c-include-rpc-clnt.h-for-resultproc_t.patch
- delete mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp/0004-Adjust-for-linux-kernel-headers-assumptions-on-glibc.patch
+ .../0001-Add-fallthrough-comments.patch       | 155 ------------------
+ ...ound-new-warnings-generated-by-GCC-7.patch |  53 ------
+ ...ing-break-to-fix-fallthrough-warning.patch |  27 ---
+ .../openocd/0004-Fix-overflow-warning.patch   |  30 ----
+ ...-fall-through-comment-to-right-scope.patch |  27 ---
+ .../recipes-devtools/openocd/openocd_git.bb   |   7 +-
+ 6 files changed, 1 insertion(+), 298 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-Add-fallthrough-comments.patch
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0002-Workaround-new-warnings-generated-by-GCC-7.patch
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0003-armv7a-Add-missing-break-to-fix-fallthrough-warning.patch
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0004-Fix-overflow-warning.patch
+ delete mode 100644 meta-oe/recipes-devtools/openocd/openocd/0005-command-Move-the-fall-through-comment-to-right-scope.patch
 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/0001-l2tp_api.c-include-rpc-clnt.h-for-resultproc_t.patch b/meta-networking/recipes-protocols/openl2tp/openl2tp/0001-l2tp_api.c-include-rpc-clnt.h-for-resultproc_t.patch
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-Add-fallthrough-comments.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-Add-fallthrough-comments.patch
 deleted file mode 100644
-index a11a97ebde..0000000000
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp/0001-l2tp_api.c-include-rpc-clnt.h-for-resultproc_t.patch
+index 644146c4da..0000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0001-Add-fallthrough-comments.patch
 +++ /dev/null
-@@ -1,31 +0,0 @@
--From 8f299df4dd1ca857e34859c377a29b183c630961 Mon Sep 17 00:00:00 2001
+@@ -1,155 +0,0 @@
+-From 8f85163b030e7b957648f90cd8fa599fb04d5d65 Mon Sep 17 00:00:00 2001
 -From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 21 Sep 2017 13:05:03 -0700
--Subject: [PATCH] l2tp_api.c: include rpc/clnt.h for 'resultproc_t'
+-Date: Fri, 16 Jun 2017 23:32:49 -0700
+-Subject: [PATCH 1/5] Add fallthrough comments
 -
 -Fixes
 -
--| /mnt/a/oe/build/tmp/work/mips32r2-bec-linux-musl/openl2tp/1.8-r0/recipe-sysroot/usr/include/tirpc/rpc/pmap_clnt.h:81:12: error: unknown type name 'resultproc_t'; did you mean 'rpcproc_t'?                                                 |             resultproc_t);                                                                                                                                                                                                                  |             ^~~~~~~~~~~~
+-src/svf/svf.c:663:7: error: this statement may fall through [-Werror=implicit-fallthrough=]
+-     i = -1;
+-     ~~^~~~
 -
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
 -Upstream-Status: Pending
 -
-- l2tp_api.c | 1 +
-- 1 file changed, 1 insertion(+)
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/flash/mflash.c            | 3 ++-
+- src/flash/nand/mx3.c          | 1 +
+- src/jtag/drivers/ftdi.c       | 1 +
+- src/svf/svf.c                 | 2 ++
+- src/target/arm_adi_v5.c       | 9 +++++++++
+- src/target/arm_disassembler.c | 1 +
+- src/target/target.c           | 1 +
+- 7 files changed, 17 insertions(+), 1 deletion(-)
 -
--diff --git a/l2tp_api.c b/l2tp_api.c
--index f0946fd..f77881c 100644
----- a/l2tp_api.c
--+++ b/l2tp_api.c
--@@ -26,6 +26,7 @@
-- #include <sys/types.h>
-- #include <rpc/types.h>
-- #include <rpc/xdr.h>
--+#include <rpc/clnt.h>
-- #include <rpc/pmap_clnt.h>
-- //#include <netinet/in.h>
+-diff --git a/src/flash/mflash.c b/src/flash/mflash.c
+-index b69995542..3254a3d56 100644
+---- a/src/flash/mflash.c
+-+++ b/src/flash/mflash.c
+-@@ -259,10 +259,11 @@ static int mg_dsk_wait(mg_io_type_wait wait_local, uint32_t time_var)
+- 				case mg_io_wait_rdy:
+- 					if (status & mg_io_rbit_status_ready)
+- 						return ERROR_OK;
+--
+-+					/* fallthru */
+- 				case mg_io_wait_drq:
+- 					if (status & mg_io_rbit_status_data_req)
+- 						return ERROR_OK;
+-+					/* fallthru */
 - 
+- 				default:
+- 					break;
+-diff --git a/src/flash/nand/mx3.c b/src/flash/nand/mx3.c
+-index b61e47535..0a55929ed 100644
+---- a/src/flash/nand/mx3.c
+-+++ b/src/flash/nand/mx3.c
+-@@ -281,6 +281,7 @@ static int imx31_command(struct nand_device *nand, uint8_t command)
+- 			 * offset == one half of page size
+- 			 */
+- 			in_sram_address = MX3_NF_MAIN_BUFFER0 + (nand->page_size >> 1);
+-+			/* fallthru */
+- 		default:
+- 			in_sram_address = MX3_NF_MAIN_BUFFER0;
+- 	}
+-diff --git a/src/jtag/drivers/ftdi.c b/src/jtag/drivers/ftdi.c
+-index 00fe37faf..20f17d810 100644
+---- a/src/jtag/drivers/ftdi.c
+-+++ b/src/jtag/drivers/ftdi.c
+-@@ -855,6 +855,7 @@ COMMAND_HANDLER(ftdi_handle_set_signal_command)
+- 			ftdi_set_signal(sig, *CMD_ARGV[1]);
+- 			break;
+- 		}
+-+		/* fallthru */
+- 	default:
+- 		LOG_ERROR("unknown signal level '%s', use 0, 1 or z", CMD_ARGV[1]);
+- 		return ERROR_COMMAND_SYNTAX_ERROR;
+-diff --git a/src/svf/svf.c b/src/svf/svf.c
+-index e7e815c10..7b261cc72 100644
+---- a/src/svf/svf.c
+-+++ b/src/svf/svf.c
+-@@ -661,11 +661,13 @@ static int svf_read_command_from_file(FILE *fd)
+- 				if (svf_getline(&svf_read_line, &svf_read_line_size, svf_fd) <= 0)
+- 					return ERROR_FAIL;
+- 				i = -1;
+-+				/* fallthru */
+- 			case '\r':
+- 				slash = 0;
+- 				/* Don't save '\r' and '\n' if no data is parsed */
+- 				if (!cmd_pos)
+- 					break;
+-+				/* fallthru */
+- 			default:
+- 				/* The parsing code currently expects a space
+- 				 * before parentheses -- "TDI (123)".  Also a
+-diff --git a/src/target/arm_adi_v5.c b/src/target/arm_adi_v5.c
+-index eafc2ddc0..d444db2b1 100644
+---- a/src/target/arm_adi_v5.c
+-+++ b/src/target/arm_adi_v5.c
+-@@ -346,10 +346,13 @@ static int mem_ap_write(struct adiv5_ap *ap, const uint8_t *buffer, uint32_t siz
+- 			case 4:
+- 				outvalue |= (uint32_t)*buffer++ << 8 * (address++ & 3);
+- 				outvalue |= (uint32_t)*buffer++ << 8 * (address++ & 3);
+-+				/* fallthru */
+- 			case 2:
+- 				outvalue |= (uint32_t)*buffer++ << 8 * (address++ & 3);
+-+				/* fallthru */
+- 			case 1:
+- 				outvalue |= (uint32_t)*buffer++ << 8 * (address++ & 3);
+-+				/* fallthru */
+- 			}
+- 		}
+- 
+-@@ -509,20 +512,26 @@ static int mem_ap_read(struct adiv5_ap *ap, uint8_t *buffer, uint32_t size, uint
+- 			case 4:
+- 				*buffer++ = *read_ptr >> 8 * (3 - (address++ & 3));
+- 				*buffer++ = *read_ptr >> 8 * (3 - (address++ & 3));
+-+				/* fallthru */
+- 			case 2:
+- 				*buffer++ = *read_ptr >> 8 * (3 - (address++ & 3));
+-+				/* fallthru */
+- 			case 1:
+- 				*buffer++ = *read_ptr >> 8 * (3 - (address++ & 3));
+-+				/* fallthru */
+- 			}
+- 		} else {
+- 			switch (this_size) {
+- 			case 4:
+- 				*buffer++ = *read_ptr >> 8 * (address++ & 3);
+- 				*buffer++ = *read_ptr >> 8 * (address++ & 3);
+-+				/* fallthru */
+- 			case 2:
+- 				*buffer++ = *read_ptr >> 8 * (address++ & 3);
+-+				/* fallthru */
+- 			case 1:
+- 				*buffer++ = *read_ptr >> 8 * (address++ & 3);
+-+				/* fallthru */
+- 			}
+- 		}
+- 
+-diff --git a/src/target/arm_disassembler.c b/src/target/arm_disassembler.c
+-index 5277b94d8..2eb21ea33 100644
+---- a/src/target/arm_disassembler.c
+-+++ b/src/target/arm_disassembler.c
+-@@ -3299,6 +3299,7 @@ static int t2ev_data_immed(uint32_t opcode, uint32_t address,
+- 		case 0x10:
+- 		case 0x12:
+- 			is_signed = true;
+-+			/* fallthru */
+- 		case 0x18:
+- 		case 0x1a:
+- 			/* signed/unsigned saturated add */
+-diff --git a/src/target/target.c b/src/target/target.c
+-index e04ecc470..597b4b13d 100644
+---- a/src/target/target.c
+-+++ b/src/target/target.c
+-@@ -3684,6 +3684,7 @@ COMMAND_HANDLER(handle_bp_command)
+- 				addr = 0;
+- 				return handle_bp_command_set(CMD_CTX, addr, asid, length, hw);
+- 			}
+-+			/* fallthru */
+- 
+- 		case 4:
+- 			hw = BKPT_HARD;
 --- 
--2.14.1
+-2.13.1
 -
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/0004-Adjust-for-linux-kernel-headers-assumptions-on-glibc.patch b/meta-networking/recipes-protocols/openl2tp/openl2tp/0004-Adjust-for-linux-kernel-headers-assumptions-on-glibc.patch
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0002-Workaround-new-warnings-generated-by-GCC-7.patch b/meta-oe/recipes-devtools/openocd/openocd/0002-Workaround-new-warnings-generated-by-GCC-7.patch
 deleted file mode 100644
-index 0fcba6546a..0000000000
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp/0004-Adjust-for-linux-kernel-headers-assumptions-on-glibc.patch
+index aa99735f6c..0000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0002-Workaround-new-warnings-generated-by-GCC-7.patch
 +++ /dev/null
-@@ -1,36 +0,0 @@
--From ede4ae8e25f9fb746a6f4e076d0ef029938d2880 Mon Sep 17 00:00:00 2001
+@@ -1,53 +0,0 @@
+-From 8daaa8c27794653d02854c5982669a7638473224 Mon Sep 17 00:00:00 2001
 -From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 28 Mar 2017 11:46:56 -0700
--Subject: [PATCH 4/4] Adjust for linux-kernel headers assumptions on glibc
+-Date: Fri, 16 Jun 2017 23:52:46 -0700
+-Subject: [PATCH 2/5] Workaround new warnings generated by GCC 7
 -
--Fixes build issues e.g.
+-src/flash/nor/xmc4xxx.c: In function 'xmc4xxx_get_info_command':
+-src/flash/nor/xmc4xxx.c:939:43: error: '%d' directive output may be truncated writing between 1 and 10 bytes into a region of size 6 [-Werror=format-truncation=]
+-     snprintf(otp_str, sizeof(otp_str), "- %d\n", i);
+-                                           ^~
+-src/flash/nor/xmc4xxx.c:939:40: note: directive argument in the range [0, 2147483647]
+-     snprintf(otp_str, sizeof(otp_str), "- %d\n", i);
+-                                        ^~~~~~~~
+-src/flash/nor/xmc4xxx.c:939:5: note: 'snprintf' output between 5 and 14 bytes into a destination of size 8
+-     snprintf(otp_str, sizeof(otp_str), "- %d\n", i);
+-     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
--In file included from /mnt/a/build/tmp-musl/work/cortexa7hf-neon-vfpv4-oe-linux-musleabi/openl2tp/1.8-r0/recipe-sysroot/usr/include/linux/if_pppox.h:24:
--/mnt/a/build/tmp-musl/work/cortexa7hf-neon-vfpv4-oe-linux-musleabi/openl2tp/1.8-r0/recipe-sysroot/usr/include/linux/if.h:97:2: error: expected identifier
--        IFF_LOWER_UP                    = 1<<16, /* __volatile__ */
--        ^
+-Upstream-Status: Pending
 -
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- plugins/ppp_unix.c | 5 +++++
-- 1 file changed, 5 insertions(+)
+- src/flash/nor/xmc4xxx.c | 2 +-
+- src/target/arm_adi_v5.c | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
 -
--diff --git a/plugins/ppp_unix.c b/plugins/ppp_unix.c
--index 869066f..5c1e44f 100644
----- a/plugins/ppp_unix.c
--+++ b/plugins/ppp_unix.c
--@@ -21,6 +21,11 @@
--  * Plugin to use the standard UNIX pppd
--  */
+-diff --git a/src/flash/nor/xmc4xxx.c b/src/flash/nor/xmc4xxx.c
+-index 02df46a3f..e6c398ff9 100644
+---- a/src/flash/nor/xmc4xxx.c
+-+++ b/src/flash/nor/xmc4xxx.c
+-@@ -931,7 +931,7 @@ static int xmc4xxx_get_info_command(struct flash_bank *bank, char *buf, int buf_
 - 
--+/* hack to make sure kernel headers understand that libc (musl)
--+ * does define IFF_LOWER_UP et al.
--+ */
--+#define __UAPI_DEF_IF_NET_DEVICE_FLAGS_LOWER_UP_DORMANT_ECHO 0
--+
-- #include <unistd.h>
-- #include <fcntl.h>
-- #include <sys/types.h>
+- 	/* If OTP Write protection is enabled (User 2), list each
+- 	 * sector that has it enabled */
+--	char otp_str[8];
+-+	char otp_str[14];
+- 	if (otp_enabled) {
+- 		strcat(prot_str, "\nOTP Protection is enabled for sectors:\n");
+- 		for (int i = 0; i < bank->num_sectors; i++) {
+-diff --git a/src/target/arm_adi_v5.c b/src/target/arm_adi_v5.c
+-index d444db2b1..d0d95121f 100644
+---- a/src/target/arm_adi_v5.c
+-+++ b/src/target/arm_adi_v5.c
+-@@ -1062,7 +1062,7 @@ static int dap_rom_display(struct command_context *cmd_ctx,
+- 	int retval;
+- 	uint64_t pid;
+- 	uint32_t cid;
+--	char tabs[7] = "";
+-+	char tabs[16] = "";
+- 
+- 	if (depth > 16) {
+- 		command_print(cmd_ctx, "\tTables too deep");
 --- 
--2.12.1
+-2.13.1
 -
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-index 1f6b4ded32..e51a101a0d 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
-                     file://usl/LICENSE;md5=9c1387a3c5213aa40671438af3e00793 \
-                     "
- 
--DEPENDS = "popt flex readline"
-+DEPENDS = "popt flex readline rpcsvc-proto-native"
- 
- SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
-            file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
-@@ -34,12 +34,7 @@ SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
-            file://openl2tpd-enable-tests.patch \
-            file://run-ptest \
-            file://fix_linux_4.15_compile.patch \
--           "
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0003-armv7a-Add-missing-break-to-fix-fallthrough-warning.patch b/meta-oe/recipes-devtools/openocd/openocd/0003-armv7a-Add-missing-break-to-fix-fallthrough-warning.patch
+deleted file mode 100644
+index bcfbfc92b3..0000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0003-armv7a-Add-missing-break-to-fix-fallthrough-warning.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 8e5051e83fedb078170565a24d1f5de6c2ce4428 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 17 Jun 2017 00:01:51 -0700
+-Subject: [PATCH 3/5] armv7a: Add missing break to fix fallthrough warning
 -
--SRC_URI_append_libc-musl = "\
--           file://0004-Adjust-for-linux-kernel-headers-assumptions-on-glibc.patch \
-            file://0002-user-ipv6-structures.patch \
--           file://0001-l2tp_api.c-include-rpc-clnt.h-for-resultproc_t.patch \
-            "
- SRC_URI[md5sum] = "e3d08dedfb9e6a9a1e24f6766f6dadd0"
- SRC_URI[sha256sum] = "1c97704d4b963a87fbc0e741668d4530933991515ae9ab0dffd11b5444f4860f"
-@@ -49,10 +44,10 @@ inherit autotools-brokensep pkgconfig systemd ptest
- SYSTEMD_SERVICE_${PN} = "openl2tpd.service"
- SYSTEMD_AUTO_ENABLE = "disable"
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/target/armv7a.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/src/target/armv7a.c b/src/target/armv7a.c
+-index 6021def4e..bad806b3d 100644
+---- a/src/target/armv7a.c
+-+++ b/src/target/armv7a.c
+-@@ -355,6 +355,7 @@ int armv7a_mmu_translate_va_pa(struct target *target, uint32_t va,
+- 				break;
+- 			case 7:
+- 				LOG_INFO("inner: Write-Back, no Write-Allocate");
+-+				break;
+- 
+- 			default:
+- 				LOG_INFO("inner: %" PRIx32 " ???", INNER);
+--- 
+-2.13.1
+-
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0004-Fix-overflow-warning.patch b/meta-oe/recipes-devtools/openocd/openocd/0004-Fix-overflow-warning.patch
+deleted file mode 100644
+index bfc5627c1d..0000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0004-Fix-overflow-warning.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From d3ca56370a2be7e737d48bd14d474d790a0ab8ac Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 17 Jun 2017 00:04:00 -0700
+-Subject: [PATCH 4/5] Fix overflow warning
+-
+-Remove an empty space which makes it fit into 11 byte string
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/target/nds32_cmd.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/target/nds32_cmd.c b/src/target/nds32_cmd.c
+-index edb4872e4..73355073c 100644
+---- a/src/target/nds32_cmd.c
+-+++ b/src/target/nds32_cmd.c
+-@@ -821,7 +821,7 @@ static int jim_nds32_bulk_read(Jim_Interp *interp, int argc, Jim_Obj * const *ar
+- 	jim_wide i;
+- 	Jim_SetResult(interp, Jim_NewEmptyStringObj(interp));
+- 	for (i = 0; i < count; i++) {
+--		sprintf(data_str, "0x%08" PRIx32 " ", data[i]);
+-+		sprintf(data_str, "0x%08" PRIx32 "", data[i]);
+- 		Jim_AppendStrings(interp, Jim_GetResult(interp), data_str, NULL);
+- 	}
+- 
+--- 
+-2.13.1
+-
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0005-command-Move-the-fall-through-comment-to-right-scope.patch b/meta-oe/recipes-devtools/openocd/openocd/0005-command-Move-the-fall-through-comment-to-right-scope.patch
+deleted file mode 100644
+index 60f75da2c7..0000000000
+--- a/meta-oe/recipes-devtools/openocd/openocd/0005-command-Move-the-fall-through-comment-to-right-scope.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 29dbf92ffdbdda29662b4190a2f8eb09caad8b51 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 17 Jun 2017 00:06:32 -0700
+-Subject: [PATCH 5/5] command: Move the fall through comment to right scope
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/helper/command.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/helper/command.c b/src/helper/command.c
+-index 5deaee859..287c14857 100644
+---- a/src/helper/command.c
+-+++ b/src/helper/command.c
+-@@ -1456,8 +1456,8 @@ COMMAND_HELPER(handle_command_parse_bool, bool *out, const char *label)
+- 				LOG_ERROR("%s: argument '%s' is not valid", CMD_NAME, in);
+- 				return ERROR_COMMAND_SYNTAX_ERROR;
+- 			}
+--			/* fall through */
+- 		}
+-+		/* fall through */
+- 		case 0:
+- 			LOG_INFO("%s is %s", label, *out ? "enabled" : "disabled");
+- 			break;
+--- 
+-2.13.1
+-
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 20bc663f98..67abeede93 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -5,13 +5,8 @@ DEPENDS = "libusb-compat libftdi"
+ RDEPENDS_${PN} = "libusb1"
  
--DEPENDS_append_libc-musl = " libtirpc"
--CPPFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--LDFLAGS_append_libc-musl = " -ltirpc"
-+DEPENDS += "libtirpc"
-+CPPFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+LDFLAGS += "-ltirpc"
+ SRC_URI = "git://repo.or.cz/openocd.git \
+-           file://0001-Add-fallthrough-comments.patch \
+-           file://0002-Workaround-new-warnings-generated-by-GCC-7.patch \
+-           file://0003-armv7a-Add-missing-break-to-fix-fallthrough-warning.patch \
+-           file://0004-Fix-overflow-warning.patch \
+-           file://0005-command-Move-the-fall-through-comment-to-right-scope.patch \
+ "
+-SRCREV = "1025be363e2bf42f1613083223a2322cc3a9bd4c"
++SRCREV = "3737dd69e73816d186ba418d7b833462a8041079"
  
- PARALLEL_MAKE = ""
- EXTRA_OEMAKE = 'CFLAGS="${CFLAGS} -Wno-unused-but-set-variable" CPPFLAGS="${CPPFLAGS}" OPT_CFLAGS="${CFLAGS}"'
+ PV = "0.10+gitr${SRCPV}"
+ S = "${WORKDIR}/git"
 -- 
 2.17.0
 
