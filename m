@@ -1,49 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 59CFA74A0E
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 64B9A74A0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 19:00:28 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id a13-v6so23076903pgu.4
+	Wed,  9 May 2018 19:00:29 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id f189so26070980pfa.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 12:00:29 -0700 (PDT)
+	Wed, 09 May 2018 12:00:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=VjIJorAycRevOWzA66Y/vI2+9ehs7nmDWGYfl58NNtA=;
-	b=BCYFqYOf9uGOyj3U1X602dLWn3e4gLyC1H7EwKUXUvxfUG+IQhehXAVz9RH++t3eGD
-	OeMIKRqy8XPN5W2kMHlwF1iiepiP2AYTau/X7Lu6BoHdr543FwlvmlT5jeZgg0ubedb5
-	esTOFDL7FIPGxrBXSO62JkI5Z/qgrL1TXDvlDAh8sOltbgIOHkCGy8+dO8gmVriZhBKz
-	4vjl/4m4QczU9M2+rqX+hsYkff7vSO2OwYev3PjZqvzm0UCm3LuQa0OCKeECfoiS7XnV
-	iFv+WMycc6njwdzd5mN3jw/q5uX2ao2ofa8nbAdGMeBrxH4fyfZTv3sEjrZLiqrjX9sR
-	qhYA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=35pJOihlTfPbyIwxYCfsmGYuSF93AF6m5ivqDlPhTv4=;
+	b=DzXkU+TDoY+KROyiE24ylXqFarPMeo9f/RFn454ZuOBkHeblcwFNh6I9Ul5RHApmx+
+	/v5gYOZsnuqQK0kiTAjwkMx4/CCS3k5BygUswNP30s0tqY8OCD8K1PMpTcu1304GiFy2
+	HdMe/CQvo4WpzyVva6dq+dCg3H6ElT8QTjlWAdhEVwlMlt5PN+DHFbHOOSYC9efp3gUo
+	HPFQwxDAUopQ1/obOZwMsVgvYEoEhF+3UhAm7ImlPef77kZbEdhyjKuB9Hy5vhYcCPfS
+	yMqHkpTlKz0EYxhE0KyP4mO9C7gfnkw0OzxhsqwK0KwPIyQYeAl0npELq8310SLr+RHf
+	HPoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=VjIJorAycRevOWzA66Y/vI2+9ehs7nmDWGYfl58NNtA=;
-	b=hmLg8JG99FJtW5NyNQcl3ZSnS64InUx8+ZrDWThMO/tBf4Hv2aozYpBdybZfg/r8Uv
-	bYq+lxpUh7Yq41MQXgKVe3yyjtw0APw7XZmSTVgRSNN1g01URciGA9gj5WzLpi/gD9rD
-	PgSPDZ3Gx+uT2Ztmosx1U8L51ts+M1OZJPGyj3kEf8w06UFBzEJyquUDKcoAsMp0sFRv
-	ju9eigSdHfuynKJA1dbSMxsWLFczab5yVXRhc5VQmvSq/h4tf33a3VJTD07bbNMIPZYF
-	oJuaUlH2BZLjyE1cgQXeQ8S8yyycT+BMS9YYf/GmJ8BMOfVgP0LkN7KewbGma2xl7g46
-	Xp5Q==
-X-Gm-Message-State: ALQs6tChqL07JvR/ba2dqI6z8QZbYbVqOUo1QhvkHmtuUgmE+TUVNPW0
-	HsXBMtht1r5Fq0l6lNwEXgDNgA==
-X-Google-Smtp-Source: AB8JxZp+kBB+h2tUz9PWLBN1bqtlRs3Uo0NvJWPSGyURToqgbBXOaLtgwExnsH1X8D3gu6rKK0qYHw==
-X-Received: by 10.98.185.9 with SMTP id z9mr22508551pfe.254.1525892427654;
-	Wed, 09 May 2018 12:00:27 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=35pJOihlTfPbyIwxYCfsmGYuSF93AF6m5ivqDlPhTv4=;
+	b=NfdHFfrKE58IHf2l5VsCqLtb7FRj9fiwg53ixdsT2ersDju95b1Aos/qysse9TbJwT
+	oANqprWTwpDVxXHDamkFBCFPT/NikfZzOqeeNTm/lfXXv3J4ane6ksFNxFTtgm3lVgj8
+	/C5VWGuJsfgRMO+TVZ1W4XyfrlqEwuh7ZRxnYO0JfsOJSqpCVkcsE8rwATYH2Y8XMnwl
+	eypuSLF1/0tH1W8sRmoWqFvUIFvDPsAPFfZEWlVBDQBXkT7Lm8CqF2d6nngOIHvZcoZp
+	otZaPGAYaN0tHqM6HbbmNfThbIwtPSAzfUKWh9XfmdQ0q1ejmLwh/EahSuFgkiJdV0ax
+	dCVA==
+X-Gm-Message-State: ALQs6tDDIwdebKYOoq3pbqdmG9qiIVv70JmNxBj0tVPx8dh7HxqaaPPt
+	ul+zyw0RQlCZx0RNNQlhF+htdw==
+X-Google-Smtp-Source: AB8JxZr3i7RQLiZIjtRysvJ/PoZ5ILdisTAaHHjMWPvArJjGdMcDs3z2+EqLA7puFbkCuMyexWAXjw==
+X-Received: by 10.98.227.15 with SMTP id g15mr45177919pfh.68.1525892430285;
+	Wed, 09 May 2018 12:00:30 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	131sm27732437pfa.128.2018.05.09.12.00.26
+	131sm27732437pfa.128.2018.05.09.12.00.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 May 2018 12:00:26 -0700 (PDT)
+	Wed, 09 May 2018 12:00:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 12:00:03 -0700
-Message-Id: <20180509190011.30006-8-raj.khem@gmail.com>
+Date: Wed,  9 May 2018 12:00:05 -0700
+Message-Id: <20180509190011.30006-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180509190011.30006-1-raj.khem@gmail.com>
 References: <20180509190011.30006-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 08/16] recipes: Link with libtirpc
+MIME-Version: 1.0
+Subject: [meta-gnome][PATCH 10/16] nautilus: Fix build with gdx-pixbuf >= to 2.36.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,137 +59,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 19:00:28 -0000
+X-List-Received-Date: Wed, 09 May 2018 19:00:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-glibc no longer provides rpc implementation
+OE-Core has updates to 2.36.11, so we have to replace
+obsolete API uses
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/snort/snort_2.9.7.5.bb           | 7 +++----
- .../conntrack-tools/conntrack-tools_1.4.4.bb              | 6 ++----
- .../recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb          | 6 +++---
- .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb    | 3 +++
- meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb        | 7 +++----
- meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb | 8 +++-----
- 6 files changed, 17 insertions(+), 20 deletions(-)
+ ...ome-desktop-thumbnail-API-with-new-g.patch | 40 +++++++++++++++++++
+ .../recipes-gnome/nautilus/nautilus_3.18.5.bb | 10 +++--
+ 2 files changed, 47 insertions(+), 3 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus/0001-nautilus-drop-gnome-desktop-thumbnail-API-with-new-g.patch
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-index 2034b85fb5..21e77c5417 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-@@ -4,8 +4,7 @@ SECTION = "net"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
- 
--DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native"
--DEPENDS_append_libc-musl = " libtirpc"
-+DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc"
- 
- SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
-     file://snort.init \
-@@ -48,8 +47,8 @@ PACKAGECONFIG ?= "openssl lzma"
- PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
- PACKAGECONFIG[lzma] = "--with-lzma-includes=${STAGING_INCDIR} --with-lzma-libraries=${STAGING_LIBDIR}, --without-lzma-includes --without-lzma-libraries, xz,"
- 
--CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--LDFLAGS_append_libc-musl = " -ltirpc"
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+LDFLAGS += " -ltirpc"
- 
- do_install_append() {
-     install -d ${D}${sysconfdir}/snort/rules
-diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-index 8b3490d7c2..46168b0ba4 100644
---- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-+++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-@@ -4,11 +4,9 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
- DEPENDS = "libnfnetlink libnetfilter-conntrack libnetfilter-cttimeout \
--           libnetfilter-cthelper libnetfilter-queue bison-native"
-+           libnetfilter-cthelper libnetfilter-queue bison-native libtirpc"
- 
--DEPENDS_append_libc-musl = " libtirpc"
--CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--LDFLAGS_append_libc-musl = " -ltirpc"
-+EXTRA_OECONF += "LIBS=-ltirpc CPPFLAGS=-I${STAGING_INCDIR}/tirpc"
- 
- SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
-     file://conntrack-failover \
-diff --git a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-index 9487fdc2c0..ebe867d776 100644
---- a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-@@ -4,15 +4,15 @@ SECTION = "net"
- LICENSE = "SPL-1.0"
- LIC_FILES_CHKSUM = "file://rpcinfo/rpcinfo.c;beginline=2;endline=3;md5=3e6339e3ce266e1122c5ba293e04bc89"
- 
--DEPENDS_append_libc-musl = " libtirpc"
-+DEPENDS += "libtirpc"
- SRC_URI = "http://sources.openembedded.org/${BPN}-${PV}.tar.gz \
-            file://gcc4.patch \
-            file://0001-rpcgen-Fix-printf-formats.patch \
-            "
- SRC_URI[md5sum] = "67212720482ea1aea9182a98653a9642"
- SRC_URI[sha256sum] = "421d63b414162237a72867061f1bd3e3752a0d962cd5d30b5e933ddad8a14d3b"
--CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--LIBS_append_libc-musl = " -ltirpc"
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+LIBS += "-ltirpc"
- 
- do_configure () {
-     ./configure --prefix=${prefix}
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-index 459e39e593..a7d19182cf 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -18,6 +18,9 @@ SRC_URI[patch8.sha256sum] = "14882dbdda4e37baa84d55b54b46c7e063a20fc9e04d1be1a28
- 
- inherit autotools-brokensep
- 
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+LIBS += "-ltirpc"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus/0001-nautilus-drop-gnome-desktop-thumbnail-API-with-new-g.patch b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-nautilus-drop-gnome-desktop-thumbnail-API-with-new-g.patch
+new file mode 100644
+index 0000000000..f19eb49798
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus/0001-nautilus-drop-gnome-desktop-thumbnail-API-with-new-g.patch
+@@ -0,0 +1,40 @@
++From a4ed38e95cbe07f02028249b8b315565a5ac1e43 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 5 May 2018 22:32:45 -0700
++Subject: [PATCH] nautilus: drop gnome-desktop thumbnail API with new
++ gdk-pixbuf
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
- do_configure () {
-     ./configure --prefix=${prefix}
-     echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
-diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
-index 2ca781bf56..df1a19e7a2 100644
---- a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
-+++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
-@@ -26,10 +26,9 @@ PACKAGECONFIG[libtdb] = "--without-included-tdb,--with-included-tdb,libtdb"
++If gdk-pixbuf >= 2.36.5 is available, its scaling API can do what we
++want, so we don’t need to use the deprecated gnome-desktop one.
++
++Also fixes compile errors seen on master
++nautilus-properties-window.c:5101: undefined reference to `gnome_desktop_thumbnail_scale_down_pixbuf'
++
++Upstream-Status: Backport
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/nautilus-properties-window.c | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/src/nautilus-properties-window.c b/src/nautilus-properties-window.c
++index dea8b0f..fad9bd1 100644
++--- a/src/nautilus-properties-window.c
+++++ b/src/nautilus-properties-window.c
++@@ -5098,10 +5098,11 @@ update_preview_callback (GtkFileChooser *icon_chooser,
++ 			scale = (double)gdk_pixbuf_get_height (pixbuf) /
++ 				gdk_pixbuf_get_width (pixbuf);
++ 
++-			scaled_pixbuf = gnome_desktop_thumbnail_scale_down_pixbuf
+++			scaled_pixbuf = gdk_pixbuf_scale_simple
++ 				(pixbuf,
++ 				 PREVIEW_IMAGE_WIDTH,
++-				 scale * PREVIEW_IMAGE_WIDTH);
+++				 scale * PREVIEW_IMAGE_WIDTH,
+++				 GDK_INTERP_HYPER);
++ 			g_object_unref (pixbuf);
++ 			pixbuf = scaled_pixbuf;
++ 		}
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+index 8fdbf6ac2b..bdb2f3c884 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+@@ -6,14 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=36cf660aea2b8beffba7945f44a7e748 \
+                     file://COPYING.EXTENSIONS;md5=7579d6678402a1868631bf82c93ff0d4 \
+                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
  
- PARALLEL_MAKE = ""
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/3.18/nautilus-${PV}.tar.xz"
++inherit distro_features_check autotools pkgconfig gobject-introspection
++
++MAJ_VER = "${@oe.utils.trim_version("${PV}", 2)}"
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/${MAJ_VER}/nautilus-${PV}.tar.xz \
++           file://0001-nautilus-drop-gnome-desktop-thumbnail-API-with-new-g.patch \
++           "
  
--DEPENDS += "popt libtevent libtalloc libldb"
--DEPENDS_append_libc-musl = " libtirpc"
--CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--LDFLAGS_append_libc-musl = " -ltirpc"
-+DEPENDS += "popt libtevent libtalloc libldb libtirpc"
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+LDFLAGS += "-ltirpc"
+ SRC_URI[md5sum] = "0f578bda5655c0ce204befafca5803d7"
+ SRC_URI[sha256sum] = "60a927c0522b4cced9d8f62baed2ee5e2fd4305be4523eb5bc44805971a6cc15"
  
- # ctdbd_wrapper requires pgrep, hence procps
- RDEPENDS_${PN} += "procps"
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
-index 5ebda19eb4..882d5d5543 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
-@@ -15,11 +15,9 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
- SRC_URI[md5sum] = "d61d1e923a22f9062cc9f47696882666"
- SRC_URI[sha256sum] = "e9483d68a7698d701bc06124fcf6e1b1f16380c2986c7ec0cf4e1475b9d0c218"
+ DEPENDS = "gtk+3 gnome-desktop3 gsettings-desktop-schemas glib-2.0-native intltool-native pango"
  
--DEPENDS = "openssl xz zlib bzip2 libcap icu"
--
--DEPENDS_append_libc-musl = " libtirpc"
--CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
--LDFLAGS_append_libc-musl = " -ltirpc"
-+DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
-+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
-+LDFLAGS += "-ltirpc"
+-inherit distro_features_check autotools pkgconfig gobject-introspection
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- inherit autotools pkgconfig systemd useradd
+ EXTRA_OECONF = " \
+@@ -23,7 +27,7 @@ EXTRA_OECONF = " \
+     --enable-tracker=no \
+     --disable-schemas-compile \
+     --enable-xmp=no \
+-    --enable-libexif=no \ 
++    --enable-libexif=no \
+ "
  
+ FILES_${PN} += "${datadir}/*"
 -- 
 2.17.0
 
