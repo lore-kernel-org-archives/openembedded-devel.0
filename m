@@ -1,51 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E21474A0E
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 59CFA74A0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 19:00:27 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id c11-v6so4836182plr.5
+	Wed,  9 May 2018 19:00:28 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id a13-v6so23076903pgu.4
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 09 May 2018 12:00:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=F6j4LXSFZ6FFgCy4qcZRgY3CvObKNv+G+I5JLx4YHng=;
-	b=ikvQ9Z2vAe86c6n66yVmw8x08oVq4qmahjLmS1zA5lJBSSYp/iMq42F0UFSqKBozh7
-	/DJnccWPBcgxSdgCUv0lW2TqbpNPi5vfEBmsE43m+dZOK7CtZCa/oQjuDr4/tacovo44
-	gV+NTXbzmf/65DCJdRrUyGz12bGJAcBf1BZ5Gw8QtqUtqoKrgNMP7rh9k4+/fkwj1QNT
-	PQRXNa1faxCJEqfNXpTWMJRN0+W3hI9baBCDSsYAUuZpO8eyVJqPeeW+B3K2B3tYblQ1
-	jKqDFgySj8qjlXJmx67IGs078VZ9fJgIOgQyXTp+mBgeZEFUaFurQNOjOxHJ/Is/vJ8X
-	olOQ==
+	bh=VjIJorAycRevOWzA66Y/vI2+9ehs7nmDWGYfl58NNtA=;
+	b=BCYFqYOf9uGOyj3U1X602dLWn3e4gLyC1H7EwKUXUvxfUG+IQhehXAVz9RH++t3eGD
+	OeMIKRqy8XPN5W2kMHlwF1iiepiP2AYTau/X7Lu6BoHdr543FwlvmlT5jeZgg0ubedb5
+	esTOFDL7FIPGxrBXSO62JkI5Z/qgrL1TXDvlDAh8sOltbgIOHkCGy8+dO8gmVriZhBKz
+	4vjl/4m4QczU9M2+rqX+hsYkff7vSO2OwYev3PjZqvzm0UCm3LuQa0OCKeECfoiS7XnV
+	iFv+WMycc6njwdzd5mN3jw/q5uX2ao2ofa8nbAdGMeBrxH4fyfZTv3sEjrZLiqrjX9sR
+	qhYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=F6j4LXSFZ6FFgCy4qcZRgY3CvObKNv+G+I5JLx4YHng=;
-	b=UQussjx5d5EOVjjJ97at3NLqDRNLve1RP52YxqVNkt68PB22GacClz2//ZWWkUAZk1
-	SETtWSPsUrzX4Y5TcVnWqmAqiYU+QMff8sq4weNhOJZVraInqaIu0O37ITMWMzLtIYwZ
-	oxS+ykEBsl2yb2Lr7qPEfVfsiBJwpWMH+x8Krw1YnsZb8v16u8SBQ3y1ViAPAdooiK7T
-	eezfWAwC58UaM6LGknY9KjlYz4w4g5SsCgIaAdz0Hp1PHjLFHQKQPk7ubmrhpbkfAMxg
-	/l+vf2qHYei4aktHEdB8tXjLlGrCm6hdmVkgCxBxM8VZVoNTsvE7MvXkGN0xgwQ4S+he
-	QSSg==
-X-Gm-Message-State: ALQs6tBYL4I+P6LaHBlLZZgMiqxEjIENMvhUZIEVcl4XALnRoHki93dJ
-	MsH+RUdwyDoE+U0zsJ+csBuTvg==
-X-Google-Smtp-Source: AB8JxZprkt4me25J9si0jaisNtezXwynyOFZMhm8m+1UtgcXclVsV+wyt07fzABYxAxDw5mevqm+Wg==
-X-Received: by 2002:a17:902:8:: with SMTP id
-	8-v6mr45706934pla.287.1525892428667; 
-	Wed, 09 May 2018 12:00:28 -0700 (PDT)
+	bh=VjIJorAycRevOWzA66Y/vI2+9ehs7nmDWGYfl58NNtA=;
+	b=hmLg8JG99FJtW5NyNQcl3ZSnS64InUx8+ZrDWThMO/tBf4Hv2aozYpBdybZfg/r8Uv
+	bYq+lxpUh7Yq41MQXgKVe3yyjtw0APw7XZmSTVgRSNN1g01URciGA9gj5WzLpi/gD9rD
+	PgSPDZ3Gx+uT2Ztmosx1U8L51ts+M1OZJPGyj3kEf8w06UFBzEJyquUDKcoAsMp0sFRv
+	ju9eigSdHfuynKJA1dbSMxsWLFczab5yVXRhc5VQmvSq/h4tf33a3VJTD07bbNMIPZYF
+	oJuaUlH2BZLjyE1cgQXeQ8S8yyycT+BMS9YYf/GmJ8BMOfVgP0LkN7KewbGma2xl7g46
+	Xp5Q==
+X-Gm-Message-State: ALQs6tChqL07JvR/ba2dqI6z8QZbYbVqOUo1QhvkHmtuUgmE+TUVNPW0
+	HsXBMtht1r5Fq0l6lNwEXgDNgA==
+X-Google-Smtp-Source: AB8JxZp+kBB+h2tUz9PWLBN1bqtlRs3Uo0NvJWPSGyURToqgbBXOaLtgwExnsH1X8D3gu6rKK0qYHw==
+X-Received: by 10.98.185.9 with SMTP id z9mr22508551pfe.254.1525892427654;
+	Wed, 09 May 2018 12:00:27 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	131sm27732437pfa.128.2018.05.09.12.00.27
+	131sm27732437pfa.128.2018.05.09.12.00.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 May 2018 12:00:27 -0700 (PDT)
+	Wed, 09 May 2018 12:00:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 12:00:04 -0700
-Message-Id: <20180509190011.30006-9-raj.khem@gmail.com>
+Date: Wed,  9 May 2018 12:00:03 -0700
+Message-Id: <20180509190011.30006-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180509190011.30006-1-raj.khem@gmail.com>
 References: <20180509190011.30006-1-raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 09/16] evolution-data-server: Update to 3.26.6 and fix build with icu 61
+Subject: [meta-networking][PATCH 08/16] recipes: Link with libtirpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,99 +56,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 19:00:27 -0000
+X-List-Received-Date: Wed, 09 May 2018 19:00:28 -0000
+
+glibc no longer provides rpc implementation
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...nded-way-to-handle-the-icu-namespace.patch | 46 +++++++++++++++++++
- ...6.3.bb => evolution-data-server_3.26.6.bb} | 17 +++----
- 2 files changed, 55 insertions(+), 8 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
- rename meta-gnome/recipes-gnome/eds/{evolution-data-server_3.26.3.bb => evolution-data-server_3.26.6.bb} (89%)
+ .../recipes-connectivity/snort/snort_2.9.7.5.bb           | 7 +++----
+ .../conntrack-tools/conntrack-tools_1.4.4.bb              | 6 ++----
+ .../recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb          | 6 +++---
+ .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb    | 3 +++
+ meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb        | 7 +++----
+ meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb | 8 +++-----
+ 6 files changed, 17 insertions(+), 20 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch b/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
-new file mode 100644
-index 0000000000..d3b0ac6735
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/eds/evolution-data-server/0004-Use-recommended-way-to-handle-the-icu-namespace.patch
-@@ -0,0 +1,46 @@
-+From 698a0e104dcbe4b630df848fd4af7c59f76cdc37 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 5 May 2018 17:46:52 -0700
-+Subject: [PATCH] Use recommended way to handle the icu namespace
-+
-+Fixes build with icu >= 61
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/libedataserver/e-alphabet-index-private.cpp | 2 ++
-+ src/libedataserver/e-transliterator-private.cpp | 2 ++
-+ 2 files changed, 4 insertions(+)
-+
-+diff --git a/src/libedataserver/e-alphabet-index-private.cpp b/src/libedataserver/e-alphabet-index-private.cpp
-+index d3e44f4..ddffd99 100644
-+--- a/src/libedataserver/e-alphabet-index-private.cpp
-++++ b/src/libedataserver/e-alphabet-index-private.cpp
-+@@ -33,9 +33,11 @@
-+ 
-+ /* ICU headers */
-+ #include <unicode/alphaindex.h>
-++#include <unicode/ustring.h>
-+ 
-+ using icu::AlphabeticIndex;
-+ using icu::Locale;
-++using U_ICU_NAMESPACE::UnicodeString;
-+ 
-+ struct _EAlphabetIndex {
-+ 	AlphabeticIndex *priv;
-+diff --git a/src/libedataserver/e-transliterator-private.cpp b/src/libedataserver/e-transliterator-private.cpp
-+index bb15593..573446f 100644
-+--- a/src/libedataserver/e-transliterator-private.cpp
-++++ b/src/libedataserver/e-transliterator-private.cpp
-+@@ -33,8 +33,10 @@
-+ 
-+ /* ICU headers */
-+ #include <unicode/translit.h>
-++#include <unicode/ustring.h>
-+ 
-+ using icu::Transliterator;
-++using U_ICU_NAMESPACE::UnicodeString;
-+ 
-+ struct _ETransliterator {
-+ 	Transliterator *priv;
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.3.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-similarity index 89%
-rename from meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.3.bb
-rename to meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-index 2303b8f180..db5dca95b9 100644
---- a/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.3.bb
-+++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_3.26.6.bb
-@@ -18,14 +18,15 @@ inherit distro_features_check gnomebase cmake gtk-doc gettext gobject-introspect
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+index 2034b85fb5..21e77c5417 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
+@@ -4,8 +4,7 @@ SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+-DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native"
+-DEPENDS_append_libc-musl = " libtirpc"
++DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc"
  
--SRC_URI += " \
--    file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
--    file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
--    file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
--    file://iconv-detect.h \
--"
--SRC_URI[archive.md5sum] = "568a21a4df4e0ec985c849b38fc66908"
--SRC_URI[archive.sha256sum] = "63b1ae5f76be818862f455bf841b5ebb1ec3e1f4df6d3a16dc2be348b7e0a1c5"
-+SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-+           file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-+           file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-+           file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-+           file://iconv-detect.h \
-+           file://0004-Use-recommended-way-to-handle-the-icu-namespace.patch \
-+           "
-+SRC_URI[archive.md5sum] = "ae7bbf543b2c3ff79af27e0edea5d472"
-+SRC_URI[archive.sha256sum] = "e43aa1847ddc02965f560261ef88d18fb8704eddaa55555bf96b884a33e510ec"
+ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
+     file://snort.init \
+@@ -48,8 +47,8 @@ PACKAGECONFIG ?= "openssl lzma"
+ PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
+ PACKAGECONFIG[lzma] = "--with-lzma-includes=${STAGING_INCDIR} --with-lzma-libraries=${STAGING_LIBDIR}, --without-lzma-includes --without-lzma-libraries, xz,"
  
- LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
- LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
+-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+-LDFLAGS_append_libc-musl = " -ltirpc"
++CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++LDFLAGS += " -ltirpc"
+ 
+ do_install_append() {
+     install -d ${D}${sysconfdir}/snort/rules
+diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
+index 8b3490d7c2..46168b0ba4 100644
+--- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
++++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
+@@ -4,11 +4,9 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+ DEPENDS = "libnfnetlink libnetfilter-conntrack libnetfilter-cttimeout \
+-           libnetfilter-cthelper libnetfilter-queue bison-native"
++           libnetfilter-cthelper libnetfilter-queue bison-native libtirpc"
+ 
+-DEPENDS_append_libc-musl = " libtirpc"
+-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+-LDFLAGS_append_libc-musl = " -ltirpc"
++EXTRA_OECONF += "LIBS=-ltirpc CPPFLAGS=-I${STAGING_INCDIR}/tirpc"
+ 
+ SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
+     file://conntrack-failover \
+diff --git a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
+index 9487fdc2c0..ebe867d776 100644
+--- a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
+@@ -4,15 +4,15 @@ SECTION = "net"
+ LICENSE = "SPL-1.0"
+ LIC_FILES_CHKSUM = "file://rpcinfo/rpcinfo.c;beginline=2;endline=3;md5=3e6339e3ce266e1122c5ba293e04bc89"
+ 
+-DEPENDS_append_libc-musl = " libtirpc"
++DEPENDS += "libtirpc"
+ SRC_URI = "http://sources.openembedded.org/${BPN}-${PV}.tar.gz \
+            file://gcc4.patch \
+            file://0001-rpcgen-Fix-printf-formats.patch \
+            "
+ SRC_URI[md5sum] = "67212720482ea1aea9182a98653a9642"
+ SRC_URI[sha256sum] = "421d63b414162237a72867061f1bd3e3752a0d962cd5d30b5e933ddad8a14d3b"
+-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+-LIBS_append_libc-musl = " -ltirpc"
++CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++LIBS += "-ltirpc"
+ 
+ do_configure () {
+     ./configure --prefix=${prefix}
+diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+index 459e39e593..a7d19182cf 100644
+--- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+@@ -18,6 +18,9 @@ SRC_URI[patch8.sha256sum] = "14882dbdda4e37baa84d55b54b46c7e063a20fc9e04d1be1a28
+ 
+ inherit autotools-brokensep
+ 
++CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++LIBS += "-ltirpc"
++
+ do_configure () {
+     ./configure --prefix=${prefix}
+     echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
+diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
+index 2ca781bf56..df1a19e7a2 100644
+--- a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
++++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
+@@ -26,10 +26,9 @@ PACKAGECONFIG[libtdb] = "--without-included-tdb,--with-included-tdb,libtdb"
+ 
+ PARALLEL_MAKE = ""
+ 
+-DEPENDS += "popt libtevent libtalloc libldb"
+-DEPENDS_append_libc-musl = " libtirpc"
+-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+-LDFLAGS_append_libc-musl = " -ltirpc"
++DEPENDS += "popt libtevent libtalloc libldb libtirpc"
++CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++LDFLAGS += "-ltirpc"
+ 
+ # ctdbd_wrapper requires pgrep, hence procps
+ RDEPENDS_${PN} += "procps"
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
+index 5ebda19eb4..882d5d5543 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.33.bb
+@@ -15,11 +15,9 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
+ SRC_URI[md5sum] = "d61d1e923a22f9062cc9f47696882666"
+ SRC_URI[sha256sum] = "e9483d68a7698d701bc06124fcf6e1b1f16380c2986c7ec0cf4e1475b9d0c218"
+ 
+-DEPENDS = "openssl xz zlib bzip2 libcap icu"
+-
+-DEPENDS_append_libc-musl = " libtirpc"
+-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+-LDFLAGS_append_libc-musl = " -ltirpc"
++DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
++CFLAGS += "-I${STAGING_INCDIR}/tirpc"
++LDFLAGS += "-ltirpc"
+ 
+ inherit autotools pkgconfig systemd useradd
+ 
 -- 
 2.17.0
 
