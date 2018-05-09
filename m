@@ -1,51 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A60574FB8
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AEE874FD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 19:00:35 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id f7-v6so4844220plr.4
+	Wed,  9 May 2018 19:17:14 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id c5-v6so17687715itj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 12:00:36 -0700 (PDT)
+	Wed, 09 May 2018 12:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wS3qkfCy1NP5HxlVnDrBgL72zcQJ5GkP8YHUjP0C5zw=;
-	b=ZZ3cFk4EBDD2ttpKPFamgf5GFmKrxFT8nuyqmxbETXqXD0BXTfQG4Xrhb2mINbHKvi
-	Id96902o68qtlW/JUbuDhddiMeeTuu08znsoZ/jzFlAcx/5gayXTyapfrxSv5TKTaHVQ
-	/U61L2R/wnU9VbSRaANeUd4vzEL52dwyrms4kfngkEvxbA5W8Vv8c2j4JJgUdzVOOUPc
-	2q3uDhMIqd/nazgTpmc/gAVlo3hopZIUtNvjyZDtfQkBglwFuBVN681UONlncyI9iypv
-	d/6KFv+uJRZyciBuAx0IeEYfVg/5uK7XeHYlnN0n4x9CQb++wAsgrcnyFSCoGV9Aqktb
-	chuQ==
+	h=from:to:subject:date:message-id;
+	bh=citZ8TOzsfblUk06CREkLepBgBcvIpH8mkJux0ZnHY8=;
+	b=tZDesW3B2kMTQutMu1fMUcvBeHJfJ5aRpqqVUEBA1dgPcO5jFug0xD0E0kE3WkwzOV
+	k9UbRS3yRqQzChOLmxdKmpfFOFk2mnzsL4HZZpy2+C7fGEYp0GfWYX7sfNHCqrXXgUUH
+	FjRFyMvmRoSGYE0cUkwVQoG7MI0gOleXt3xGP/1I4Ctchsea2zgDOz8C15QU43vJAW3H
+	P73GY6hkBzXjQi7wUdGQ5Io30DlUeeoYAIpPy0WLnU+6WE/WAaMmme3hMLWNgRYDk8kM
+	m+hwmQXleW1ZgN1J8aBYDH+RpEXuKkIDt2wPatOfIEUPKH2snQbRD0WHpaIfEOgDRwMD
+	bIIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=wS3qkfCy1NP5HxlVnDrBgL72zcQJ5GkP8YHUjP0C5zw=;
-	b=hDpoePcLJ/nqpJb/KCmeXYmW3fdf0qLZkJ1k+6bkSmOPuBEfgnQuR2YlNSR0kfAqiV
-	Y5WXuPYdjF3590Oo8TKkYMlPUIS9C035Cv5CEntwVUW2WxZX0mVozpwbAW8Kpsi6y0GJ
-	B4E9ljwYtBAu8JhYoobko6JwA5YMpbq5kN3iB3auUV4C20U4XYkGoWfCxhLnW7DYojK7
-	1BPuxoU9T6YMHp2nyMtJCjxMd83whPqScmwQJdOUnqT23nTXEogzYYGDXN9PlT0ZFB7v
-	dHJK6zAnvszGPc5TtrP9W9uZxIGOph7nRkwitsvrgB0ULBEWMkBk/NE1hRiA7f3tNo+n
-	tNrQ==
-X-Gm-Message-State: ALQs6tA1/Kjnin/Dv3/r/qahr3ePTJjbIwb/DU5Pr2P13rl4ziZm1L9r
-	ISBmJvE2aFgq5qOr8u2l56X7qw==
-X-Google-Smtp-Source: AB8JxZqwQjRR/VEpNr5g2Bqn1jg+g/IByv+GUBDOHcuLhzfDLhWDuSwp94reRc0qtdrCBjte7YkpIA==
-X-Received: by 2002:a17:902:da4:: with SMTP id
-	33-v6mr46351063plv.52.1525892436386; 
-	Wed, 09 May 2018 12:00:36 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=citZ8TOzsfblUk06CREkLepBgBcvIpH8mkJux0ZnHY8=;
+	b=K1MwBNQKwqyOxQnA20hv2tisP7dN/PPotNLb2tZoz3l8ZRye9SjuFkFVSezjGHayjy
+	I56yV1/kyNZB8MSfQguyxCCRbrTfou4kZFh9xIkpgB60CYWK+INZ61gJNsmCD7c2FB+R
+	cmadBirf55N3BhGQey9eHanXjuBzNNnQh9q6PvgSrRAkaU8VJqb0/3owefORUoPU1QZH
+	Zm0l0pioArLdOD/DYXfJ1Ac3FqS7F/QVOoEj6SJ79sxLhWeih4M04HlMS+95PUlZzUpv
+	bPI4VoWiHlrurcsPuV7mih802iDFwxU38v3UoJROcv0NuEt1HChZxbRSlbuVGd6b3x+X
+	IQdQ==
+X-Gm-Message-State: ALKqPweoWoYeUP5SqQNzvHjOQZSqxtj0LfGTH9v/yaO2LxyKqQsgkAJX
+	r9labLac72v6sAO6Oy1VSllao8WK
+X-Google-Smtp-Source: AB8JxZpaC7c9DaBJh7rYFUgz/1x5ZXiBDZdJVf5EMJyrg6RVPkqXDTB3LeiSxHedCyYU9qBMFSgvrQ==
+X-Received: by 2002:a24:cbc6:: with SMTP id
+	u189-v6mr11464008itg.63.1525893435478; 
+	Wed, 09 May 2018 12:17:15 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	131sm27732437pfa.128.2018.05.09.12.00.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 May 2018 12:00:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	g127-v6sm7276222ioa.79.2018.05.09.12.17.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 09 May 2018 12:17:14 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 12:00:11 -0700
-Message-Id: <20180509190011.30006-16-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <20180509190011.30006-1-raj.khem@gmail.com>
-References: <20180509190011.30006-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 16/16] upm: Fix build with gcc8
+Date: Wed,  9 May 2018 15:17:09 -0400
+Message-Id: <20180509191711.5389-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [meta-multimedia][PATCH 1/3] gst-instruments: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,89 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 19:00:35 -0000
+X-List-Received-Date: Wed, 09 May 2018 19:17:15 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Since we know that github archives that are automatically generated have a
+tendency to change their checksums[1], switch to using git clones.
+
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
+
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- .../0001-Replace-strncpy-with-memcpy.patch    | 49 +++++++++++++++++++
- meta-oe/recipes-extended/upm/upm_git.bb       |  3 +-
- 2 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/upm/upm/0001-Replace-strncpy-with-memcpy.patch
+ .../gst-instruments/gst-instruments_0.2.3.bb             | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/upm/upm/0001-Replace-strncpy-with-memcpy.patch b/meta-oe/recipes-extended/upm/upm/0001-Replace-strncpy-with-memcpy.patch
-new file mode 100644
-index 0000000000..4b17087ef8
---- /dev/null
-+++ b/meta-oe/recipes-extended/upm/upm/0001-Replace-strncpy-with-memcpy.patch
-@@ -0,0 +1,49 @@
-+From d314f26e024aaf15bf4ab22ceb98501148d0eac8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 7 May 2018 19:53:33 -0700
-+Subject: [PATCH] Replace strncpy with memcpy
-+
-+gcc8 detects that strncpy is overwiritng the null terminating character
-+the source strings are already initialized to 0 so memcpy would do the same
-+job
-+
-+Fixes
-+rn2903.c:153:5: error: 'strncpy' output may be truncated copying 16 bytes from a string of length 511 [-Werror=stringop-truncation]
-+     strncpy(dev->hardware_eui, dev->resp_data, RN2903_MAX_HEX_EUI64);
-+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/ecezo/ecezo.c   | 2 +-
-+ src/rn2903/rn2903.c | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/ecezo/ecezo.c b/src/ecezo/ecezo.c
-+index 6a195fc1..56c6dab3 100644
-+--- a/src/ecezo/ecezo.c
-++++ b/src/ecezo/ecezo.c
-+@@ -488,7 +488,7 @@ int ecezo_send_command(const ecezo_context dev, char *cmd, char *buffer,
-+     // our write buffer
-+     char writeBuffer[ECEZO_MAX_BUFFER_LEN];
-+ 
-+-    strncpy(writeBuffer, cmd, ECEZO_MAX_BUFFER_LEN);
-++    memcpy(writeBuffer, cmd, ECEZO_MAX_BUFFER_LEN-1);
-+     writeBuffer[ECEZO_MAX_BUFFER_LEN - 1] = 0;
-+ 
-+     int writelen = strlen(writeBuffer);
-+diff --git a/src/rn2903/rn2903.c b/src/rn2903/rn2903.c
-+index f30a33ae..01a011da 100644
-+--- a/src/rn2903/rn2903.c
-++++ b/src/rn2903/rn2903.c
-+@@ -150,7 +150,7 @@ static rn2903_context _rn2903_postinit(rn2903_context dev,
-+         rn2903_close(dev);
-+         return NULL;
-+     }
-+-    strncpy(dev->hardware_eui, dev->resp_data, RN2903_MAX_HEX_EUI64);
-++    memcpy(dev->hardware_eui, dev->resp_data, RN2903_MAX_HEX_EUI64);
-+ 
-+     return dev;
-+ }
-+-- 
-+2.17.0
-+
-diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
-index d742a5e461..478aa0db1d 100644
---- a/meta-oe/recipes-extended/upm/upm_git.bb
-+++ b/meta-oe/recipes-extended/upm/upm_git.bb
-@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
+diff --git a/meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.2.3.bb b/meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.2.3.bb
+index b6cdc4f146..67d39512f9 100644
+--- a/meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.2.3.bb
++++ b/meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.2.3.bb
+@@ -5,12 +5,9 @@ SECTION = "multimedia"
+ LICENSE = "LGPL-3.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e6a600fd5e1d9cbde2d983680233ad02"
  
- DEPENDS = "libjpeg-turbo mraa"
+-SRC_URI = "https://github.com/kirushyk/gst-instruments/archive/${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "14a394dec25642848b17f9999f1b4999"
+-SRC_URI[sha256sum] = "5565658a33ff9596946541304fbdd3b3683dbb82171a0e6ce56f42b64a01e58d"
+-
+-S = "${WORKDIR}/gst-instruments-${PV}"
++S = "${WORKDIR}/git"
++SRCREV = "4ce8092636ee6572148b5fa044080734cf5a6b8d"
++SRC_URI = "git://github.com/kirushyk/gst-instruments.git;protocol=https;"
  
--SRCREV = "cc7fec9ae0228add9011bf1c2cd5e0ca2ba0d4f0"
-+SRCREV = "37642f3b0194f6ddd63f1e6b5d49b8cb689d5c81"
- PV = "1.6.0-git${SRCPV}"
+ FILES_${PN} += "${libdir}/*"
  
- SRC_URI = " \
-     git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
-+    file://0001-Replace-strncpy-with-memcpy.patch \
- "
- 
- S = "${WORKDIR}/git"
 -- 
-2.17.0
+2.17.0.rc2.3.gc2a499e6c
 
 
