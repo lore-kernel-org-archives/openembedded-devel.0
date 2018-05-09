@@ -1,47 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id CECBE748A0
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 29842748C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 19:00:18 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id j20so11768730pff.10
+	Wed,  9 May 2018 19:00:19 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c10so26068781pfi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 12:00:20 -0700 (PDT)
+	Wed, 09 May 2018 12:00:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=XRdMFc4Az9xN68huk1BUX1+iPO7jpIQqtYU/aPaOIZw=;
-	b=vA3+ZfBHYe2Lt39WXA/7YXGXabbQU2fkHN5dQO10mjLZJhW1LScBqix1p3GeGaf9A/
-	UOFfoGdHqS6cReJdgSgW//XJGbASEWC+Hx+4gcvzF5wlj1H8+DMSpO/C6zI95tOlt6kc
-	2PiIdum5FkJHgnbzqiBwDWfOJa3Vr0A5ReTG+f1deho0werO8A4riZuUzJ3tS5wCjR1D
-	lZFRSohHc96WR16B6ruMI+YvWh1RNCu0j3fyZ0Bmvkf66RcI92iQnLPiOE2mBPewZGfy
-	ryaT2oqhi/YQeWDkbm04liDFQ3Z3KYm4J+jyb3L636xlEHpFFjwuss+dvE7O2wrWf2Vl
-	bK/g==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=T4dv+fnazpe5XB+0Z5oIjTRtV83ueBtST78BdCiKZKo=;
+	b=VVYPxgtn6AdMrOqnhKuHfYyRGyNL7STheybtlKvjCsurr0k+ZWygr7y303T5Mlw4L0
+	tPtZd1MjjIUDi+5kI1ymW8FhrHcRUPmAhVxbnkDIyrylly/UvAvot5c5lJijb59hOFVR
+	4D7/A3bqcLgPYke26vWGB31EMVMtdpH3AGewmop8RM4a+9K5+LQ5wC2Gc161uVV3VJuP
+	J3KO+J3t3VBN4NikCw8id6iqCkGlhuSKRK4B/ZWj/henZSX6LNJys8m1ZSZJjUuQMKAS
+	GwnoxWehESUL9480w6+erEVe5wnKeMcACtMxkfM4vpBIdIVB+30SamfI/h1UHHuFutYA
+	PFlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XRdMFc4Az9xN68huk1BUX1+iPO7jpIQqtYU/aPaOIZw=;
-	b=NMdRyd0ria89jg1M4zMb/EbwV5sTwNEjPlz1zBmXsupyWFelhUGKRUDlP8ruOnx2AU
-	GEdbgl+W2ryxTDj+CPByBnuhcln6GGG6K1lsL6lCzv+kLJHNkpx7eV8jRusthZ2MpUE9
-	G0hwSG2pSo+pgX/3sKWH0FsaZwd6EVST9fSJA1aU1BtBcmNe1YazZ4+b5YAPPlBoWzqB
-	Tunko2qH7MEqMDGutqAn3iecyJcwLvGMHJR1sx3nhltB/adsvD4HnZjTZumCoUXYV35s
-	R5Ue8pbJbyoDEPn4Is+c5jGBm1geZZG8BBXJPqavSCTDYNyWZAXCsdBiflpnbXq1xcoF
-	n52g==
-X-Gm-Message-State: ALQs6tBlZUT5Jgnb0Aslb6HlEpmKF86H/ytuZRtvTes575/71hk1t8n3
-	RRnlMpnOy8tVo60LWhKMafQOaQ==
-X-Google-Smtp-Source: AB8JxZqAeg98LvxuacsKE5ep/HX/BtWJxiP0+6q96WwO7qG4MNpWOTL/o+u961hdikozkTcqbFD8Gw==
-X-Received: by 10.167.130.208 with SMTP id f16mr30450953pfn.199.1525892419396; 
-	Wed, 09 May 2018 12:00:19 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=T4dv+fnazpe5XB+0Z5oIjTRtV83ueBtST78BdCiKZKo=;
+	b=rT9mA5PvVzFwWfVOSTWwt/DBcNdYe81bicwQSx9PFHh1KEo0mV/pSZeVg/Uu3LncpO
+	RdYegB8izA3pE2QwBQbNGlf8KJWLKOorCqmKMbZ4KpvLj39lCN28IZvMOUD0JVLT1PIL
+	+gIo1SFH4sq+yFXP5+Ev4/lqED1vfe7ZvDNftfJterslZwRyrRRuVoc7veB1A0Ll/FKa
+	fG1IbKja2qhpa1TuaHWWI6HKswvrqZj/k20tB6w8ol0os6XBYzYdxOUM4smJoac9yKhI
+	id/Arjc9VKHXJdtNC+Sku/kqWd196/Dofq5Lz940a7VnUVO+FLkKB8pVDB+dk60Rs5mb
+	JO2g==
+X-Gm-Message-State: ALQs6tCipUMrTQcd4zT/6mYL4zO6WdyNgX/W+ZYbDM0nX3FEIWKL9hBV
+	pbEc/1qhVjGkpYWenUeJAvne1w==
+X-Google-Smtp-Source: AB8JxZqXfxBu6mlODJCJQQWII0zqCu4544/JfxojAXsJU9ckEd4rxOzvQQRb03PBFlXSdU1e3VErAA==
+X-Received: by 10.98.75.139 with SMTP id d11mr45027582pfj.244.1525892420654;
+	Wed, 09 May 2018 12:00:20 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	131sm27732437pfa.128.2018.05.09.12.00.18
+	131sm27732437pfa.128.2018.05.09.12.00.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 May 2018 12:00:18 -0700 (PDT)
+	Wed, 09 May 2018 12:00:19 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 11:59:56 -0700
-Message-Id: <20180509190011.30006-1-raj.khem@gmail.com>
+Date: Wed,  9 May 2018 11:59:57 -0700
+Message-Id: <20180509190011.30006-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
-Subject: [meta-oe][PATCH 01/16] poppler-data: Upgrade to 0.4.9
+In-Reply-To: <20180509190011.30006-1-raj.khem@gmail.com>
+References: <20180509190011.30006-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 02/16] postgresql: Depend on external libnsl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,32 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 19:00:18 -0000
+X-List-Received-Date: Wed, 09 May 2018 19:00:20 -0000
+
+glibc has dropped libnsl support
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../poppler/{poppler-data_0.4.8.bb => poppler-data_0.4.9.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/poppler/{poppler-data_0.4.8.bb => poppler-data_0.4.9.bb} (90%)
+ meta-oe/recipes-dbs/postgresql/postgresql.inc       | 2 +-
+ meta-oe/recipes-dbs/postgresql/postgresql_9.4.17.bb | 5 -----
+ 2 files changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler-data_0.4.8.bb b/meta-oe/recipes-support/poppler/poppler-data_0.4.9.bb
-similarity index 90%
-rename from meta-oe/recipes-support/poppler/poppler-data_0.4.8.bb
-rename to meta-oe/recipes-support/poppler/poppler-data_0.4.9.bb
-index 343b6db812..b2af097154 100644
---- a/meta-oe/recipes-support/poppler/poppler-data_0.4.8.bb
-+++ b/meta-oe/recipes-support/poppler/poppler-data_0.4.9.bb
-@@ -17,8 +17,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz \
-            ${CMAP_RESOURCES_BASE}/Identity-H;name=idh \
-            ${CMAP_RESOURCES_BASE}/Identity-V;name=idv"
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 812c2aed48..5462332c56 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -19,7 +19,7 @@ DESCRIPTION = "\
+ "
+ HOMEPAGE = "http://www.postgresql.com"
+ LICENSE = "BSD"
+-DEPENDS = "zlib readline tzcode-native"
++DEPENDS = "libnsl2 zlib readline tzcode-native"
  
--SRC_URI[md5sum] = "00f8989c804de84af0ba2ea629949980"
--SRC_URI[sha256sum] = "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
-+SRC_URI[md5sum] = "35cc7beba00aa174631466f06732be40"
-+SRC_URI[sha256sum] = "1f9c7e7de9ecd0db6ab287349e31bf815ca108a5a175cf906a90163bdbe32012"
- SRC_URI[idh.md5sum] = "009c93cf0141ab7bd6acb7eea14306cc"
- SRC_URI[idh.sha256sum] = "ae702c203a82ea124e9b96590f821db6fbf8754e2c4547a9dba0e82f94739e95"
- SRC_URI[idv.md5sum] = "2f32a45d43d001c26eeac6b878855fbf"
+ ARM_INSTRUCTION_SET = "arm"
+ 
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_9.4.17.bb b/meta-oe/recipes-dbs/postgresql/postgresql_9.4.17.bb
+index 061184a6fa..8a01d8604b 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_9.4.17.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_9.4.17.bb
+@@ -5,10 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=6dc95e63aa4d72502ff8193dfe2ddd38"
+ SRC_URI += "\
+     file://not-check-libperl.patch \
+ "
+-
+-do_compile_prepend_libc-musl() {
+-    sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
+-}
+-
+ SRC_URI[md5sum] = "0a08f4078f5e4a54e764f63ad38a6de3"
+ SRC_URI[sha256sum] = "7a320cd335052b840d209dc9688f09965763351c590e3cc7bf577591179fd7c6"
 -- 
 2.17.0
 
