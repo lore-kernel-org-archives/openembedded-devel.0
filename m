@@ -1,52 +1,58 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
-	[209.85.214.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4341E75014
+Return-Path: <robert_joslyn@selinc.com>
+X-Greylist: delayed 1777 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 09 May 2018 21:34:22 UTC
+Received: from valiant.selinc.com (valiant.selinc.com [74.117.214.141])
+	by mail.openembedded.org (Postfix) with ESMTP id 10B4B750BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 21:22:58 +0000 (UTC)
-Received: by mail-it0-f68.google.com with SMTP id y189-v6so674271itb.2
+	Wed,  9 May 2018 21:34:22 +0000 (UTC)
+Received: from pps.filterd (valiant.selinc.com [127.0.0.1])
+	by valiant.selinc.com (8.16.0.22/8.16.0.22) with SMTP id w49L2XqV021979
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 14:22:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=AKEnG4K66NjXdgS+4JehubeISdSdOUaskZSBfVTkVZM=;
-	b=vVnKkqXb1c/WZPKsSOoCECCG/piNlz2hDPgI2HTaLA8GsCw8i7AH/KO4bLWOycGXhm
-	szxN4F4kTsIh2IsVjTpTUfJWmpspxadVfoVuzhnW/eu1lbsNm7tRkyiZ3xM6DWE5aF7G
-	HZn6ZhxpPZxJBhiiXwhx/oGEtz6pNyULzb4sXzAtOwwgi5JcmMNAaxO/JIMwN/Mqj6S6
-	MalXPDaoCbjqRhczrEJFDvLYjOpdHO2CMeJ5pJbyO3Tdzz2GEqogDuO+qGfqM5t+Qvab
-	GZZmz0dhr/PiVu6pGLb1m5PkhdZRrkXE6mZGUjeSazSjSAO3cEjSnpS0zON6QcyZnFmD
-	OWNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=AKEnG4K66NjXdgS+4JehubeISdSdOUaskZSBfVTkVZM=;
-	b=LWem2uSU/dutWjEbSxTEskYlGIXm+1M1cOdIaO/5kN/elLqOHY2MnDHRvRuVPXZeFb
-	7SfufHAu+dm9lKGkR7QxlWQ33qJw9S292q03UazKcHGAGusksITPwe3w+5YrLLUofkwk
-	BNHFcg4U4+XE5aXMZwtxW7d27RGx/8sYitVeZCaFphK8qh17+pBhLqt/xSq8AkkpxY7c
-	ZbwSUcwKgUwLvZuxdiEYsUM27qhv2Sw9RRvJ3PvVGtBDNYvm1b0BVb4paN3U+gDJsWxb
-	Y2/Lq4+UBkCbxaA4d/MCzpKLNWI9PrzNPtRnztrFlQdVUMmr5NVCs/WOrkdXHRoF7+mU
-	fErQ==
-X-Gm-Message-State: ALKqPwdhz+zBcJ6J0bjt/6AgnDCFabjkCjFy72wzM2Rs3D5dXC/Z5X79
-	XnyTYMh3TuyhVSi00lwO9NMVr09h
-X-Google-Smtp-Source: AB8JxZrIV0Mr8GDgbZON79SibFtj5VLM5upS7MGbCOwWF6IsnuGsWph0+AlG4ny/KY2nmUTv0P+iGA==
-X-Received: by 2002:a24:4c55:: with SMTP id
-	a82-v6mr11390951itb.1.1525900978969; 
-	Wed, 09 May 2018 14:22:58 -0700 (PDT)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id
-	c18-v6sm16093181ioa.16.2018.05.09.14.22.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 09 May 2018 14:22:57 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
+	Wed, 9 May 2018 14:04:47 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=selinc.com;
+	h=to : subject :
+	message-id : from : date : content-type : content-transfer-encoding :
+	mime-version; s=SELinc2017;
+	bh=JXh55ldXtVT3gHH5dKMEStghJZHBW3Inoefs7C56HTo=;
+	b=KV0YaGZ65GCrTLkMOZwLdz2wcQCg2bdHvsaSJAKkmTdk9FAXDcwt9pzrJHl/NcREloPp
+	96rw3zvYp8L8u9h7lZnoHvP7E2AkxT9lXFizo/+oDFL1NzQPU77/hju/MiDAIgdzPyNM
+	mzAjEaUDvzvFRLdmbxJQtwhdzrDCDyPVdzY8/Dx/idXdW0u/ZOHQ6wlhW5TIL9bLm+EL
+	8Fh2q+3wnPAemZg2v/2P8ZETBISx94Lr1/59kTxk8+QpJ/KD65ZXd/3IZ+wnn0OKMwWN
+	vWFGbEtBkiBZSx0KgQO58azdDmwd37JuC5xLGnyTg1BNLhoxvsF6hNkKpJbjKwrCWAAA
+	gg== 
+Received: from edison.ad.selinc.com (edison.ad.selinc.com [10.100.0.15])
+	by valiant.selinc.com with ESMTP id 2hsapvfgxj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 May 2018 14:04:47 -0700
+X-MIMETrack: S/MIME Sign by Notes Client on Robert Joslyn/SEL(Release 8.5.3FP4
+	SHF39|May 13, 2013) at 05/09/2018 02:00:36 PM,
+	Serialize by Notes Client on Robert Joslyn/SEL(Release 8.5.3FP4
+	SHF39|May 13, 2013) at 05/09/2018 02:00:36 PM,
+	Serialize complete at 05/09/2018 02:00:36 PM,
+	S/MIME Sign failed at 05/09/2018 02:00:37 PM: The cryptographic key was
+	not found,
+	S/MIME Sign by Notes Client on Robert Joslyn/SEL(Release 8.5.3FP4
+	SHF39|May 13, 2013) at 05/09/2018 02:04:27 PM,
+	Serialize by Notes Client on Robert Joslyn/SEL(Release 8.5.3FP4
+	SHF39|May 13, 2013) at 05/09/2018 02:04:27 PM,
+	Serialize complete at 05/09/2018 02:04:27 PM,
+	S/MIME Sign failed at 05/09/2018 02:04:27 PM: The cryptographic key was
+	not found,
+	Serialize by Router on Edison/SEL(Release 9.0.1FP9 HF139|October 06,
+	2017) at 05/09/2018 02:04:46 PM,
+	Serialize complete at 05/09/2018 02:04:46 PM
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 17:22:46 -0400
-Message-Id: <20180509212246.15272-2-twoerner@gmail.com>
-X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
-In-Reply-To: <20180509212246.15272-1-twoerner@gmail.com>
-References: <20180509212246.15272-1-twoerner@gmail.com>
-Subject: [meta-multimedia][PATCH 2/2] libsrtp: bump 1.5.2 -> 1.6.0
+X-KeepSent: C304E1FF:C64CA001-88258288:006EE4FE;
+ type=4; name=$KeepSent
+X-Mailer: Lotus Notes Release 8.5.3FP4 SHF39 May 13, 2013
+Message-ID: <OFC304E1FF.C64CA001-ON88258288.006EE4FE-88258288.0073C3D0@selinc.com>
+From: robert_joslyn@selinc.com
+Date: Wed, 9 May 2018 14:04:27 -0700
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=8888
+	signatures=668698
+Subject: meson.bbclass broken on rocko
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,42 +65,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 21:22:58 -0000
+X-List-Received-Date: Wed, 09 May 2018 21:34:24 -0000
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: Quoted-printable
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- .../libsrtp/{libsrtp_1.5.2.bb => libsrtp_1.6.0.bb}     | 10 ++--------
- 1 file changed, 2 insertions(+), 8 deletions(-)
- rename meta-multimedia/recipes-support/libsrtp/{libsrtp_1.5.2.bb => libsrtp_1.6.0.bb} (63%)
+I have a build based on poky that makes use of meson.bbclass from meta-oe=20
+that is now broken after a recent update to OE-core. When using the latest=
+=20
+rocko branches from poky and meta-oe, my meson builds end up with the=20
+wrong paths to ld and libc. For example, running ldd on one of my=20
+binaries:
 
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.6.0.bb
-similarity index 63%
-rename from meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-rename to meta-multimedia/recipes-support/libsrtp/libsrtp_1.6.0.bb
-index ee8c68bc1a..d3ab5b71c0 100644
---- a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.6.0.bb
-@@ -6,17 +6,11 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=15bc16b9d2e305974dde47e733883714"
- 
- S = "${WORKDIR}/git"
--SRCREV = "e806a66bad35f4b215b7a825c24ef0ec4cc19569"
--SRC_URI = "git://github.com/cisco/libsrtp.git;protocol=https; \
-+SRCREV = "2b091a4fb21c9b06fc5d4b5763bdaec97542fcd7"
-+SRC_URI = "git://github.com/cisco/libsrtp.git;protocol=https;branch=1_6_x_throttle; \
-            file://0001-Rename-conflicting-variable-mips.patch \
-            "
- 
- inherit autotools
- 
--do_install[postfuncs] += " rm_unused_bindir "
--
--rm_unused_bindir() {
--    rmdir ${D}/${bindir}
--}
--
- ALLOW_EMPTY_${PN} = "1"
--- 
-2.17.0.rc2.3.gc2a499e6c
+linux-vdso.so.1 (0x00007fff4f9ee000)
+libc.so.6 =3D>=20
+/home/robert/yocto/kiosk/poky/build/tmp/sysroots-uninative/x86_64-linux/lib=
+/libc.so.6=20
+(0x00007f1136f8c000)
+/home/robert/yocto/kiosk/poky/build/tmp/sysroots-uninative/x86_64-linux/lib=
+/ld-linux-x86-64.so.2=20
+(0x00007f1137560000)
 
+Those paths going into my home directory are obviously not correct. I=20
+bisected the issue, and commit cead3c4925d39f8adc328007d8a8c1b23cc72842 in=
+=20
+openembedded-core is when the problem starts:=20
+https://urldefense.proofpoint.com/v2/url?u=3Dhttp-3A__cgit.openembedded.org=
+_openembedded-2Dcore_commit_-3Fh-3Drocko-26id-3Dcead3c4925d39f8adc328007d8a=
+8c1b23cc72842&d=3DDwIBAg&c=3DzVFQZQ67ypsA9mYKSCqWmQHiVkCCaN-Gb60_N6TVnLk&r=
+=3DFXexzueMZc3SeYPHXBmsGdHLENOHmHsvnD0cO1_Z0j2tHI6VqrQPNkHBCZO8dAdc&m=3DJSV=
+ZRc5Fq4IsIwtkdFHpTXsgF8aCQ0vP6j_F7dT5tYc&s=3DOutJG7fOSrT6ANwnnyxx12eHu6yepO=
+-b2NWHJeP93x0&e=3D
+
+When using the tip of rocko, I can make the issue go away by removing this=
+=20
+export from meson.bbclass:
+=20
+export LDFLAGS =3D "${BUILD_LDFLAGS}"
+
+I'm not really familiar with how this works, but it looks like the change=20
+to BUILD_LDFLAGS in uninative.bbclass is forcing the binaries to use the=20
+uninative ld, which isn't desired here. I assume meson.bbclass should not=20
+be setting LDFLAGS using ${BUILD_LDFLAGS}.
+
+I can send a patch removing this export, but it feels like all the exports=
+=20
+in meson.bbclass are incorrect. The class has been reworked and moved to=20
+OE-core for sumo, so I can send a patch backporting the entire class if=20
+that is preferred.
+
+Thanks,
+Robert
 
