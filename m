@@ -1,48 +1,49 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-vk0-f45.google.com (mail-vk0-f45.google.com
-	[209.85.213.45])
-	by mail.openembedded.org (Postfix) with ESMTP id A25ED74B52
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
+	[209.85.223.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 04308748DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 13:02:10 +0000 (UTC)
-Received: by mail-vk0-f45.google.com with SMTP id g72-v6so17338410vke.2
+	Wed,  9 May 2018 18:28:50 +0000 (UTC)
+Received: by mail-io0-f193.google.com with SMTP id e12-v6so49220iob.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 06:02:11 -0700 (PDT)
+	Wed, 09 May 2018 11:28:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Se0l6T+Y4MFIKLuEGCmgEUtNywNyDNEtvARgXzhKqE4=;
-	b=Dm/pOZ/VC9fYaXVKg/AyMifW4+Sjo8aoZPDbPoSHAAArjr9Hra9dc27PWnk7fgu29m
-	RFQ4qc5lSQ3NpCx3VGXLbAc42B2IX8Omr+QzKg2rhpktF1+LFkIFsHjBDgepdvMcSEyz
-	XtoGxs/ho3i/sHN6uciYKkDnX/QzMmC3igIp6zzw71N+pakwWWmVbK1qA2P2aroeYo4e
-	NwWNfo1dpG57LMQJpO7hfrCMOg+Z5el3DWT5WM5WsK7h81hYtuk0RGv87o4HPVeZyfFT
-	MD/uArZ1As/THKCkLkYM0kPqf4WU7wZFHPWvPCyvNFhJ3A3VaF4jh4paHs9fGe27CFcD
-	1RkA==
+	h=from:to:subject:date:message-id;
+	bh=9hyqT2khnopkmHFu74//BP6EA4uDAx9WDa3CK48kyIc=;
+	b=uFbbgvMzN6NDS+aoXnobohIhMebsPj7okaQym3C1KEUGorFczrykLT5VJH5ZpCKSsf
+	KWCL35XEVvgOobxviHJjVciXMdBXZEGT0iL0gT93mJSBf5n+Z/qf0LtOesUpVedr1Znv
+	GC1ZLSe+/yuZh6twcl2+DXQjNgVtVt1hrBPDhAECu2wz25QFzdAUJ65YuNK60aJzDirW
+	NSBkVd3hha64bAbA2JIlf0yoIqNtKovyg7jLi+hOEQd2/dOQIlQP33PQC0f5DJ5Oo3a5
+	wAnqoTHPwVbWcnzCg+pUuNQh9XOmy8MkwG8d5/vDK0sP4TdM+IZdfe016jK69UbK0BRe
+	VYfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Se0l6T+Y4MFIKLuEGCmgEUtNywNyDNEtvARgXzhKqE4=;
-	b=lzcnMxKpF9JRWGsCRpZp0oIdC2m2N1adniggZhj5Y8fuoeBZX6PPSNgi8XPWui09s8
-	JrwJYKHD50eYwLBM46qJ46eZDtEgLt7mcFM5QRBdVRGpVj9k4NeL1/CexxgzcWy6FI17
-	mIttKlIj2p5nm3QRHW7q28w/nRobh0ExGdFXfJ7IjPlz3DTAR0jbZCTefg7yS9oHHrLB
-	PuytfRL1SU3bBUDjdNNsrN0ZJj+kyX5kZ2uem2yb7dJPesDAWl2eRy8EAhBjkNY3cKy+
-	TaR34aAkLesA33iog9lrlDFchMIC7bDhVVTAXJ8HD2P7TPf2KPMveTccEqd0NXnY+5sp
-	PbRQ==
-X-Gm-Message-State: ALKqPwdUwzdLp3hNj5i11+fAbPgzCBhgNuWaqwCyBFFNwdUYBPWeoh1a
-	DHUNlWyOd70HCm28Tqg0fN7ltv6UoSbp4aeyfd0=
-X-Google-Smtp-Source: AB8JxZo84JmbPp3icW9loUuWKGdpCgvx7maMXVcdOMRp0BdK8H4fleXnNULWJ2yeZm0ZYKWssTp9EEXLd7Do4Sw0+jc=
-X-Received: by 2002:a1f:ac43:: with SMTP id
-	v64-v6mr11798114vke.182.1525870930440; 
-	Wed, 09 May 2018 06:02:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <1525829867-22734-1-git-send-email-sipke.vriend@gmail.com>
-In-Reply-To: <1525829867-22734-1-git-send-email-sipke.vriend@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 09 May 2018 13:02:00 +0000
-Message-ID: <CANx9H-CnBpsQK4NT9KJrRqDE0wQDvBcvqd-GVwnCo0MMWTA6bA@mail.gmail.com>
-To: Sipke Vriend <sipke.vriend@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python-robotframework: Add runtime dependencies to robot framework
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=9hyqT2khnopkmHFu74//BP6EA4uDAx9WDa3CK48kyIc=;
+	b=WExJH+edfL1P463NacwWyrYmGbTY6gIbZhKjeSNami0VrYdI/W7HuTyZMakHHEzc5D
+	ivrBvA6Q3hrB6YOPMz2VZLGwEOtZ2H7dEBnVqytjxH4rO6G3IV0CuuYkPBxe8IZcMJdm
+	vph8HmC0CKguIEdmLuwsU8HtWtMdc11Ns6sZ0didcbf3oDEukTJKC1tLW0FkAFRBs574
+	bVgrqOQWwItMYBNAfQEg4oRT6ivPpyGRkEwiALBQdLlcbh4IOM+6ULZ7zW6guFIrBG48
+	8ZhKuNhztHoHxKBKkEGuaJMXVdpwfJpRywzbooa0IbTwblRirEAQWA76SrTYzUnkWi4p
+	7ZXw==
+X-Gm-Message-State: ALQs6tBpKT+wQYXzFF6fOApd6ahXA+YMGqOMfzCX7/FAlotmLm7XdrqJ
+	QU3FXzWj0gU0BHt/JaOUWUCuG2qG
+X-Google-Smtp-Source: AB8JxZrBQ+AwYgXluJsp/q4xdjdB1sCtFxPfeZE3G3Ck58CIo3fmHVXvy0nC5REb1Gge4QIp5rmRGw==
+X-Received: by 2002:a6b:83da:: with SMTP id
+	n87-v6mr51508000ioi.268.1525890531109; 
+	Wed, 09 May 2018 11:28:51 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	g16-v6sm5876963ita.0.2018.05.09.11.28.49
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 09 May 2018 11:28:50 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 May 2018 14:28:39 -0400
+Message-Id: <20180509182840.21251-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [meta-initramfs][PATCH 1/2] grubby: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,64 +56,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 13:02:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 09 May 2018 18:28:51 -0000
 
-Please also provide patch for python3-robotframework or indicate it is not
-needed.
-On Tue, May 8, 2018 at 6:38 PM Sipke Vriend <sipke.vriend@gmail.com> wrote:
+Since we know that github archives that are automatically generated have a
+tendency to change their checksums[1], switch to using git clones.
 
-> Add the runtime dependencies robot framework has so they are available on
-> images including it.
->
-> Signed-off-by: Sipke Vriend <sipke.vriend@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python-robotframework.inc | 11
-> +++++++++++
->  .../recipes-devtools/python/python-robotframework_3.0.2.bb    |  4 ++++
->  2 files changed, 15 insertions(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python-robotframework.inc
-> b/meta-python/recipes-devtools/python/python-robotframework.inc
-> index cc20d64..78bbbc6 100644
-> --- a/meta-python/recipes-devtools/python/python-robotframework.inc
-> +++ b/meta-python/recipes-devtools/python/python-robotframework.inc
-> @@ -13,3 +13,14 @@ inherit pypi
->
->  SRC_URI[md5sum] = "ea49a54b9d7e38302712194e85c37eaa"
->  SRC_URI[sha256sum] =
-> "2018f233568227f9af8c366f93e243a157b742f3baf5b649ecc9750ac0ee1ff7"
-> +
-> +RDEPENDS_${PN} += " \
-> +    ${PYTHON_PN}-shell \
-> +    ${PYTHON_PN}-pprint \
-> +    ${PYTHON_PN}-xml \
-> +    ${PYTHON_PN}-difflib \
-> +    ${PYTHON_PN}-threading \
-> +    ${PYTHON_PN}-html \
-> +    ${PYTHON_PN}-docutils \
-> +    ${PYTHON_PN}-ctypes \
-> +"
-> diff --git a/meta-python/recipes-devtools/python/
-> python-robotframework_3.0.2.bb b/meta-python/recipes-devtools/python/
-> python-robotframework_3.0.2.bb
-> index 16eaa78..ff7dedb 100644
-> --- a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-> +++ b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-> @@ -1,2 +1,6 @@
->  inherit setuptools
->  require python-robotframework.inc
-> +
-> +RDEPENDS_${PN} += " \
-> +    ${PYTHON_PN}-zlib \
-> +"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Also, discovered that the sources for this project are no longer at
+github.com/rhinstaller but are located at github.com/rhboot.
+
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
+
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+index 5a998248c8..dc3a70bb52 100644
+--- a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
++++ b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+@@ -4,6 +4,7 @@ about the configuration files for the grub, lilo, elilo (ia64), yaboot (powerpc)
+ zipl (s390) boot loaders. It is primarily designed to be used from scripts which install \
+ new kernels and need to find information about the current boot environment. \
+ "
++HOMEPAGE = "https://github.com/rhboot/grubby"
+ LICENSE = "GPLv2+"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+@@ -11,18 +12,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+ DEPENDS = "popt util-linux"
+ DEPENDS_append_libc-musl = " libexecinfo"
+ 
+-SRC_URI = "https://github.com/rhinstaller/${BPN}/archive/${PV}-1.tar.gz;downloadfilename=${BPN}-${PV}-1.tar.gz \
++S = "${WORKDIR}/git"
++SRCREV = "79c5cfa02c567efdc5bb18cdd584789e2e35aa23"
++SRC_URI = "git://github.com/rhboot/grubby.git;protocol=https; \
+            file://grubby-rename-grub2-editenv-to-grub-editenv.patch \
+            file://run-ptest \
+            file://0001-Add-another-variable-LIBS-to-provides-libraries-from.patch \
+            file://0002-include-paths.h-for-_PATH_MOUNTED.patch \
+            "
+ 
+-SRC_URI[md5sum] = "1005907b275d6d93368d045274537d86"
+-SRC_URI[sha256sum] = "85f1c678484f74c8978e8643451594967defce463a86c35cb1ee56d12767a9df"
+-
+-S = "${WORKDIR}/${BPN}-${PV}-1"
+-
+ RDEPENDS_${PN} += "dracut"
+ 
+ inherit autotools-brokensep ptest
+-- 
+2.17.0.rc2.3.gc2a499e6c
+
 
