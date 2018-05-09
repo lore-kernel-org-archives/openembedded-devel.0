@@ -1,47 +1,48 @@
-Return-Path: <sipke.vriend@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 31C2E74D89
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E82C75160
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 23:12:33 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id m21-v6so89553pgv.8
+	Wed,  9 May 2018 23:34:52 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id x191-v6so147921vke.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 16:12:35 -0700 (PDT)
+	Wed, 09 May 2018 16:34:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=t7CEZxbolX9wVRVzt27kkBabYjIvnLSUq9273A0SdbQ=;
-	b=VE5Qbuzy6fAQodeAEcCX81uNFUFZ83qKhx3ZdACtB+K6trzX5aQZVJVDJBHhnP33l/
-	i1fvMqXu6e7gk11nVxVH+Cjhgdf2TQyARQVbAbcueNmtC5ZfOA/tM3a8+cxYPPQMI+Ws
-	VTstZahdxbsrBOxMAWzwtU3LjoiYoMcLniDuFpywbZrAzxYoD/f2WnIuXBTs6IzX+bFH
-	lLBvSdj0TGZGir1/b+9i0mLGUvkES2JAMmPkTDuIL0eXQ14CSzwp4vUUPnU82XtVg6ip
-	fqN0mEmH8856JCBiBQvrIR0WPzxuyOk3zZC6dXBII1UPw+WKBn3QKIX+EIMB0U7FAvhL
-	MBvA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=x4kZI5tqwPBWi1jl/nIoC47y7ev/1DomBN1X7LTUgoU=;
+	b=MDZpqfaM0k2MJFHkRTXXduIvPNrvyzWk3yPU8wRqTj9tRemvpZPTmtG5YKXDbTklfu
+	88/3o9qaOcKOPk0pjEEKVJSIP/i/h2DSrDEQUl99V/Kr7xCdtma+WzZOGu+3gfNeGP3b
+	RzwNIHcuoySNZhxXPBedDqrFi4gAKxvxBQuYX8XCgtQfUkiBNy6XCT8DC9ZCkb+LR0aN
+	UuPn6VBfumnM8OTyrcBZljawWkd7FUp6LVBNOgFXNbYVPIpagAvcym6JpTQoZh2OkHY1
+	nckuQaaobxBnBOYtSYMxTWu+uiF/abPh5BdxAtLLAzedOAJ+uglAf2xCTena7vGMr5FC
+	kkLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=t7CEZxbolX9wVRVzt27kkBabYjIvnLSUq9273A0SdbQ=;
-	b=ZBduAfV+o+WlqOaS+XL58MR9AHWvOCmfdM3n9Uvxgv7UIBR3yMRmyo81AiMClmu23l
-	yrrxWvPhVPnHkW5GVRIlssV9LwGGMuTsWca5It1iqT49B7sTyLDnccHggAMUZwsE874a
-	CgafFMtVmQ02EuGKRt4ruN6sXqrmyWT90E2VhVN7OIimoDzyFi1FGedKnfbPJAz76AM5
-	YvqcDhaR9JlMvc3IdvvHPA4c1emj2Dp36d9zpkumIBcUUisct9lJTNLtMPuYlIOV9sWN
-	dpG9+2Los7q8r7H9Yqn373MZhOZ/F9qjPGhpFv5QT4/727mQT5fZeRGYRm0lwwMMPK0l
-	klIQ==
-X-Gm-Message-State: ALQs6tCzk6vN9PtavdYATIPN3WLkPMew3hya+DZe0v5jPmx3pUrYFruE
-	XV6NdsS38+kN8UKcPNJCUcrbBA==
-X-Google-Smtp-Source: AB8JxZpEV7TZNOE+augCQ6fCGJpusSoyhy0MMumr2Q1usi4FkYyV+jQpnebihD/DfNHevz8pAEO5pg==
-X-Received: by 2002:a63:a74a:: with SMTP id
-	w10-v6mr10620317pgo.109.1525907555042; 
-	Wed, 09 May 2018 16:12:35 -0700 (PDT)
-Received: from sipke-dt.bne.opengear.com ([59.167.150.161])
-	by smtp.gmail.com with ESMTPSA id
-	w8sm38948562pfk.112.2018.05.09.16.12.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 09 May 2018 16:12:34 -0700 (PDT)
-From: Sipke Vriend <sipke.vriend@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 May 2018 09:12:24 +1000
-Message-Id: <1525907544-4034-1-git-send-email-sipke.vriend@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH v2] python-robotframework: Add runtime dependencies to robot framework
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=x4kZI5tqwPBWi1jl/nIoC47y7ev/1DomBN1X7LTUgoU=;
+	b=KGkLg+MYzTUxFUT1jffN5ToFLg1X2TXvAGqpjIN10g0+RoXOK/Se+vEFgTmEZHOUCv
+	LGQl26tQR/4DWwfu5eQ+d6mhUdFHyNGPHFSqJrE3Bt/DuYaXyTAUv7kNs/hr0PYz8tI2
+	b3S5J3C1IvuBiv6NLY7qvCHbthGYZd7BFfD+zOJobCRvi2N2uIHQ0GUFKKiuOBO50exE
+	0QkP3EVgvQyK05nowj66R3zLrVDSJMP2sn6FKNUOGHy81Os/oKaE891Ip66bh8OYYCi8
+	eASVoDs9UBeDjyBKooNeFYKW2WkXL+pJ+j5J5yJyT5VCyNwd/TyObh8wX95Wm6zcHFyc
+	whmQ==
+X-Gm-Message-State: ALQs6tCs0FZzottYnvLyXMKJqCUmCjMRINX9j2o41C6UEYGuF24vwiSA
+	NjTdMK3LlnTw2aUVuu596y9yMzqtfEnMqS0VCmU=
+X-Google-Smtp-Source: AB8JxZquZ/oo+ymOwQHrt+CsO8+8KybLUzkM1UJe6xeDcc1UnONttop8ioYmygm24qnTntpuCjWQc74gODJ2s13orKA=
+X-Received: by 2002:a1f:b254:: with SMTP id
+	b81-v6mr33168577vkf.20.1525908893490; 
+	Wed, 09 May 2018 16:34:53 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.48.148 with HTTP; Wed, 9 May 2018 16:34:52 -0700 (PDT)
+In-Reply-To: <20180509224633.17514-1-twoerner@gmail.com>
+References: <20180509224633.17514-1-twoerner@gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Wed, 9 May 2018 16:34:52 -0700
+Message-ID: <CAJ86T=WLNNu_dR2-QazLZXoWXcdY0inh1KxyF_EC_LebQJHS9A@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH] openh264: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,53 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 23:12:34 -0000
+X-List-Received-Date: Wed, 09 May 2018 23:34:53 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add the runtime dependencies robot framework has so they are available on
-images including it.
-python-robotframework.inc is included by both python3 and python
-robot framework.
-python3 includes zlib by default so include python-zlib as a runtime
-dependency in the python-robotframework recipe and not in the
-python3-robotframework.
+On Wed, May 9, 2018 at 3:46 PM, Trevor Woerner <twoerner@gmail.com> wrote:
+> Since we know that github archives which are automatically generated have a
+> tendency to change their checksums[1], switch to using a git clone.
+>
+> [1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
+>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  .../recipes-multimedia/openh264/openh264_1.7.0.bb          | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+> index a7aaab3623..de8352336e 100644
+> --- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+> +++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+> @@ -11,9 +11,10 @@ LICENSE = "BSD-2-Clause"
+>  LICENSE_FLAGS = "commercial"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
+>
+> -SRC_URI = "https://github.com/cisco/openh264/archive/v${PV}.tar.gz"
+> -SRC_URI[md5sum] = "93da4e76cfda7ede8fd2df51b0021efd"
+> -SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f6895738653f"
+> +S = "${WORKDIR}/git"
+> +SRCREV = "a180c9d4d6f1a4830ca9eed9d159d54996bd63cb"
+> +OPENHBRANCH = "openh264v1.7"
 
-Signed-off-by: Sipke Vriend <sipke.vriend@gmail.com>
----
- meta-python/recipes-devtools/python/python-robotframework.inc | 11 +++++++++++
- .../recipes-devtools/python/python-robotframework_3.0.2.bb    |  4 ++++
- 2 files changed, 15 insertions(+)
+"openh264" is a combination of "open" and "h264", so using "openh" in
+this variable name looks a little odd?
 
-diff --git a/meta-python/recipes-devtools/python/python-robotframework.inc b/meta-python/recipes-devtools/python/python-robotframework.inc
-index cc20d64..78bbbc6 100644
---- a/meta-python/recipes-devtools/python/python-robotframework.inc
-+++ b/meta-python/recipes-devtools/python/python-robotframework.inc
-@@ -13,3 +13,14 @@ inherit pypi
- 
- SRC_URI[md5sum] = "ea49a54b9d7e38302712194e85c37eaa"
- SRC_URI[sha256sum] = "2018f233568227f9af8c366f93e243a157b742f3baf5b649ecc9750ac0ee1ff7"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-xml \
-+    ${PYTHON_PN}-difflib \
-+    ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-html \
-+    ${PYTHON_PN}-docutils \
-+    ${PYTHON_PN}-ctypes \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-index 16eaa78..ff7dedb 100644
---- a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-@@ -1,2 +1,6 @@
- inherit setuptools
- require python-robotframework.inc
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-zlib \
-+"
--- 
-2.7.4
+Since the variable is local to the recipe, maybe just "BRANCH" would be OK?
 
+> +SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${OPENHBRANCH};"
+>
+>  COMPATIBLE_MACHINE_armv7a = "(.*)"
+>  COMPATIBLE_MACHINE_aarch64 = "(.*)"
+> --
+> 2.17.0.rc2.3.gc2a499e6c
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
