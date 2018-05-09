@@ -1,48 +1,46 @@
 Return-Path: <sipke.vriend@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FDD974BB6
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A94C674E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 01:38:26 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id o76so24812683pfi.5
+	Wed,  9 May 2018 01:39:46 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id m21-v6so21942862pgv.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 May 2018 18:38:28 -0700 (PDT)
+	Tue, 08 May 2018 18:39:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=hGXKGSNXt2Sc6imgjjVlstVmQaZ90GaJq7kNgCMBrws=;
-	b=Zy1NsYb9aNJG1dA6zkf/UuBiEBpV93Ddcd+ixaJb0OJRh0SFReIH0Zyd0XYSDeNZ90
-	z185MEUcFwHyAmTMmHW70rkFYlLe7GUOt+TjHJWN/va+8IakBzOzBwzdyC6hm03uaUje
-	gLlKdiOhjXyVLa6BXIWXc5480ZRqLrivis+xIrorwa9H2RBJultGOuE+kV62CeOpABfs
-	xBylyx2ka5tY+xjdOnLvtCvXG/QBSgZbcFp5T3elNYeUAriaRlcoCU/gh3cV38+CT7ru
-	9I+OzsOCtTeOAebvSmvOvRsmbqvaKoaJYS5z907amYfszX/Q7crL3bTzr2ibuYVkegBk
-	FcNA==
+	bh=W9AVAasm+fpqQWwjx/maunlx1aFn4K0Gsr+xgdBlpiY=;
+	b=FBSShPDdS1pHXLyFno3GGTVr/7a7fjKt+fyjeOkI5ulDOGZ24V2tvbzOqxBDkEPwIO
+	+nmkIQE1FhSnlujwtnhCZVfOpss/LGa/14aPi0ewwMcykSHpJnCcCeHi5e3Wzv/4qvOK
+	Wv01JNwDCO7DlgOiuzLdxe850q0yu8/8cWhUBP200Ljigjsnm+UjvA1TIrhv7ZyZFj2F
+	637bA57hLc9B5us4umLoV6qQmJjD3IPBB6JlW2ftlIZr2Z/RWzgsmAxfksDuNCUvmLbl
+	OsVxV2slS5TXv5L+/ZGlIJV1sIiFSRTul61f2yVHyvpG4Wb+LJiCdMkQGMe6djRrrLiv
+	E/vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hGXKGSNXt2Sc6imgjjVlstVmQaZ90GaJq7kNgCMBrws=;
-	b=dfPRdl1wUWU8pdWQ22pMb6+ZU0kNmPKRoRsyA9vISduIKdI6HY5ZFwd58B0PFSM0nW
-	sdsMuF7YcbbcNFfFiUwvvzE4XtR5cZu9NRyxxDPS6sPoysrUwG2GS6IwMXHjVzIpIDqc
-	no7ZNP538gGV0UHe7w0eZ5dakRAIgpQwehCrqadimmcF2rzHYhdlxeD5IkBstpCIxUDo
-	gNPkHAYiLZj5VuVkIr8A9KOpENkAg8rytYciu7GeB4xgaXVQGuBiQfISnUYgUu7dA6Jz
-	oDGLKIo7gVPbCGfkXMprRgNEVsgTEgcFq9lA1jistpuNEC4MMMXjIl3rcMkchQBPs0nU
-	tEew==
-X-Gm-Message-State: ALQs6tCS2MPO4UXkSTqsg63Hc7+W7YIFZ6hxb+xXHDuyoQvh/38osKnG
-	JjVwYIb69uQaD+c+kU4r155zOA==
-X-Google-Smtp-Source: AB8JxZpTw/3W1yM91OvySZSis5hDeMMdWDbN8uTKO+ObBoMrBmBcFJjrBwpxq/cXGVlqRCM3H55CaQ==
-X-Received: by 2002:a63:79ce:: with SMTP id
-	u197-v6mr35003822pgc.242.1525829907699; 
-	Tue, 08 May 2018 18:38:27 -0700 (PDT)
+	bh=W9AVAasm+fpqQWwjx/maunlx1aFn4K0Gsr+xgdBlpiY=;
+	b=Ekv1m5+7Y5agMz5PDe9SLbwrayiLgpCsIsXoeEQu9Cs71309OCPGMfhN0AJ1d6Sn9p
+	1Wxlog9015C5iiMpxgT/Lej7BJ86Ghh9Udp/LRNWj1IYABMcL2E3ngW0xlIEawtUXUYr
+	9HAie0nbmVJJx273cFXB0jtXuIihK0RsEVXXHmaKJx99Wdd5HNfgDogqgs4khfNtbgQ/
+	vWGZ73QRT/bDGs165vAfwF0soOrFHhfuiUewCQ+FcXFGzh1gO/yDq/Gus1DNUgMPYg54
+	4XJyKkM3vIXLyeJ6UnumJDsBJfsOlER+NGrAqxNGWK/q6OQPDTy5y1pwHPhgj/Q6zEFL
+	P9qw==
+X-Gm-Message-State: ALQs6tAARx/GPauF2t+XWv2zEom9YpQFMEymyen/3xbi2cWoWl6OGQew
+	pVsXm9gb4lNcWYvTiYsKUGQVPw==
+X-Google-Smtp-Source: AB8JxZoypfxSh2jl48byfddj8SnsW+fGbUHPgsg1xYE6yx26dPwobXCWe9KoQ37Eogc/lYun25aFgQ==
+X-Received: by 10.98.246.25 with SMTP id x25mr34199414pfh.106.1525829987420;
+	Tue, 08 May 2018 18:39:47 -0700 (PDT)
 Received: from sipke-dt.bne.opengear.com ([59.167.150.161])
 	by smtp.gmail.com with ESMTPSA id
-	r68sm63094984pfi.174.2018.05.08.18.38.25
+	t80sm57203928pfg.0.2018.05.08.18.39.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 08 May 2018 18:38:27 -0700 (PDT)
+	Tue, 08 May 2018 18:39:46 -0700 (PDT)
 From: Sipke Vriend <sipke.vriend@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 11:37:47 +1000
-Message-Id: <1525829867-22734-1-git-send-email-sipke.vriend@gmail.com>
+Date: Wed,  9 May 2018 11:39:33 +1000
+Message-Id: <1525829973-22804-1-git-send-email-sipke.vriend@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-robotframework: Add runtime dependencies to robot framework
+Subject: [meta-python][PATCH] python-robotframework: Add robot framework serial library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +53,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 01:38:27 -0000
+X-List-Received-Date: Wed, 09 May 2018 01:39:46 -0000
 
-Add the runtime dependencies robot framework has so they are available on
-images including it.
+Add the robotframework serial library which provides the python library
+and associated robot keywords to open and communicate with serial devices.
 
 Signed-off-by: Sipke Vriend <sipke.vriend@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-robotframework.inc | 11 +++++++++++
- .../recipes-devtools/python/python-robotframework_3.0.2.bb    |  4 ++++
- 2 files changed, 15 insertions(+)
+ .../python/python-robotframework-seriallibrary.inc        | 15 +++++++++++++++
+ .../python/python-robotframework-seriallibrary_0.3.1.bb   |  2 ++
+ .../python/python3-robotframework-seriallibrary_0.3.1.bb  |  2 ++
+ 3 files changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-robotframework-seriallibrary.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-robotframework-seriallibrary_0.3.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-robotframework.inc b/meta-python/recipes-devtools/python/python-robotframework.inc
-index cc20d64..78bbbc6 100644
---- a/meta-python/recipes-devtools/python/python-robotframework.inc
-+++ b/meta-python/recipes-devtools/python/python-robotframework.inc
-@@ -13,3 +13,14 @@ inherit pypi
- 
- SRC_URI[md5sum] = "ea49a54b9d7e38302712194e85c37eaa"
- SRC_URI[sha256sum] = "2018f233568227f9af8c366f93e243a157b742f3baf5b649ecc9750ac0ee1ff7"
+diff --git a/meta-python/recipes-devtools/python/python-robotframework-seriallibrary.inc b/meta-python/recipes-devtools/python/python-robotframework-seriallibrary.inc
+new file mode 100644
+index 0000000..9f07b65
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-robotframework-seriallibrary.inc
+@@ -0,0 +1,15 @@
++SUMMARY = "Robot Framework test library for serial connection"
++HOMEPAGE = "https://github.com/whosaysni/robotframework-seriallibrary"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-xml \
-+    ${PYTHON_PN}-difflib \
-+    ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-html \
-+    ${PYTHON_PN}-docutils \
-+    ${PYTHON_PN}-ctypes \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-index 16eaa78..ff7dedb 100644
---- a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
-@@ -1,2 +1,6 @@
- inherit setuptools
- require python-robotframework.inc
++SRC_URI[md5sum] = "b7c9565d54c30df7cd3f3c0e29adffa3"
++SRC_URI[sha256sum] = "256ad60fc0b7df4be44d82c302f5ed8fad4935cda99e4b45942e3c88179d1e19"
 +
++SRC_URI = "https://files.pythonhosted.org/packages/ce/e1/1e337dc84a20b9d92d7b243d16bb9f6fc0084967eca7454228bb546efec7/robotframework-seriallibrary-0.3.1.tar.gz"
 +RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-zlib \
++    ${PYTHON_PN}-pyserial \
++    ${PYTHON_PN}-robotframework \
 +"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-robotframework-seriallibrary_0.3.1.bb b/meta-python/recipes-devtools/python/python-robotframework-seriallibrary_0.3.1.bb
+new file mode 100644
+index 0000000..440f69c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-robotframework-seriallibrary_0.3.1.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require python-robotframework-seriallibrary.inc
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb
+new file mode 100644
+index 0000000..440f69c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require python-robotframework-seriallibrary.inc
 -- 
 2.7.4
 
