@@ -1,52 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
-	[209.85.223.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A4B8774F99
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CECBE748A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 18:28:56 +0000 (UTC)
-Received: by mail-io0-f195.google.com with SMTP id d73-v6so72310iog.3
+	Wed,  9 May 2018 19:00:18 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id j20so11768730pff.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 11:28:57 -0700 (PDT)
+	Wed, 09 May 2018 12:00:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=3FMmlJijkJjB1pwCVjNZqZ/6eAJ1ipFVcvrUxSin89o=;
-	b=uoD7bH0jvOVWZPN4qOx7HIZcW9fkn+H7yHBglJWP/mAJRudnfxLsD9pbTHYx97kfXU
-	aEZDehFcldhjbww8KxWIIUJQmFoXnRIq/cUVTBE1CAkdJTHk3mxgg+7yDUx7GtYIXQzs
-	rw63CjIboWt03N89bD98K/w5R+cYNvaGEnr4mRlmk+tStX4SchK3ayMFZbD9PHIcNmZt
-	+nyxF9mFNTgY7vNCGVb4j2mFK8H83mHML8FR4TFUY/2wkx3oXMHUJfIzEH6RRUL9sVxJ
-	yj78LzLXzweTlN27DwQ+JzKrfhQDZ9rdNg2Slw3Dl7SVtNFUtc8GI9cDOZdkPNPj0PNX
-	XJ5g==
+	h=from:to:cc:subject:date:message-id;
+	bh=XRdMFc4Az9xN68huk1BUX1+iPO7jpIQqtYU/aPaOIZw=;
+	b=vA3+ZfBHYe2Lt39WXA/7YXGXabbQU2fkHN5dQO10mjLZJhW1LScBqix1p3GeGaf9A/
+	UOFfoGdHqS6cReJdgSgW//XJGbASEWC+Hx+4gcvzF5wlj1H8+DMSpO/C6zI95tOlt6kc
+	2PiIdum5FkJHgnbzqiBwDWfOJa3Vr0A5ReTG+f1deho0werO8A4riZuUzJ3tS5wCjR1D
+	lZFRSohHc96WR16B6ruMI+YvWh1RNCu0j3fyZ0Bmvkf66RcI92iQnLPiOE2mBPewZGfy
+	ryaT2oqhi/YQeWDkbm04liDFQ3Z3KYm4J+jyb3L636xlEHpFFjwuss+dvE7O2wrWf2Vl
+	bK/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=3FMmlJijkJjB1pwCVjNZqZ/6eAJ1ipFVcvrUxSin89o=;
-	b=E+/pBlxirHoxl7D4Xel0g9uztRKpEyOGfWjO6DSS0I5KpD6WFU3mDSzTq/AToiQZIv
-	FYlbmH5OQVFazYLK84/vyQpvWR8JybXEKbTd1iFKPUkJVf7M1uQaQTZaXCzr8nxcUmrx
-	nxu2yZ522rnbqYYjS64D5ydYTy9nYr1pQO+Sgo0V8YYMjNs3vMob/AB6ntW/CEIb2ASd
-	no1v5W4YsvlTiggFvB2xhXSYQLseEMOAgArZlg1Rh9hIpdnXp7/GhOxts1GqMNIGWJ9T
-	2UIv8upNKtILThaB/rM2kgmEF2rb7e945wprWwRQ2J5aAMWMjam63t4X1DfDRe7Wxca4
-	gEvg==
-X-Gm-Message-State: ALQs6tBoOCRhTCn8nXPx8fjkJxJ+j5vITCOjJBaKQYoe4oFT462EL34a
-	jONPFCgWGdZ3Eg3nPZknToAYBATW
-X-Google-Smtp-Source: AB8JxZqiQTwVggnR9NMUY/EjLFhva6L000qe26Jrm2UoI959gDQc6WRIfVbl2ldccOUmKuyWS72irg==
-X-Received: by 2002:a6b:6918:: with SMTP id
-	e24-v6mr54576363ioc.242.1525890537059; 
-	Wed, 09 May 2018 11:28:57 -0700 (PDT)
-Received: from linux-uys3.suse ([206.248.190.95])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=XRdMFc4Az9xN68huk1BUX1+iPO7jpIQqtYU/aPaOIZw=;
+	b=NMdRyd0ria89jg1M4zMb/EbwV5sTwNEjPlz1zBmXsupyWFelhUGKRUDlP8ruOnx2AU
+	GEdbgl+W2ryxTDj+CPByBnuhcln6GGG6K1lsL6lCzv+kLJHNkpx7eV8jRusthZ2MpUE9
+	G0hwSG2pSo+pgX/3sKWH0FsaZwd6EVST9fSJA1aU1BtBcmNe1YazZ4+b5YAPPlBoWzqB
+	Tunko2qH7MEqMDGutqAn3iecyJcwLvGMHJR1sx3nhltB/adsvD4HnZjTZumCoUXYV35s
+	R5Ue8pbJbyoDEPn4Is+c5jGBm1geZZG8BBXJPqavSCTDYNyWZAXCsdBiflpnbXq1xcoF
+	n52g==
+X-Gm-Message-State: ALQs6tBlZUT5Jgnb0Aslb6HlEpmKF86H/ytuZRtvTes575/71hk1t8n3
+	RRnlMpnOy8tVo60LWhKMafQOaQ==
+X-Google-Smtp-Source: AB8JxZqAeg98LvxuacsKE5ep/HX/BtWJxiP0+6q96WwO7qG4MNpWOTL/o+u961hdikozkTcqbFD8Gw==
+X-Received: by 10.167.130.208 with SMTP id f16mr30450953pfn.199.1525892419396; 
+	Wed, 09 May 2018 12:00:19 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	g16-v6sm5876963ita.0.2018.05.09.11.28.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 09 May 2018 11:28:56 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
+	131sm27732437pfa.128.2018.05.09.12.00.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 09 May 2018 12:00:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 14:28:40 -0400
-Message-Id: <20180509182840.21251-2-twoerner@gmail.com>
-X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
-In-Reply-To: <20180509182840.21251-1-twoerner@gmail.com>
-References: <20180509182840.21251-1-twoerner@gmail.com>
-Subject: [meta-initramfs][PATCH 2/2] grubby: update to latest
+Date: Wed,  9 May 2018 11:59:56 -0700
+Message-Id: <20180509190011.30006-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-oe][PATCH 01/16] poppler-data: Upgrade to 0.4.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,202 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 18:28:56 -0000
+X-List-Received-Date: Wed, 09 May 2018 19:00:18 -0000
 
-This project doesn't seem to produce regular releases as they once did, the
-last such release (8.40-1) was in 2015 (over 3 years ago at this point).
-Therefore switch to building the latest git commit.
-
-Also, refresh the patches as required (used devtool --force-patch-refresh).
-
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...able-LIBS-to-provides-libraries-from.patch | 14 ++---
- ...rename-grub2-editenv-to-grub-editenv.patch | 59 +++++++++++--------
- .../recipes-devtools/grubby/grubby_git.bb     | 40 +++++++++++++
- 3 files changed, 79 insertions(+), 34 deletions(-)
- create mode 100644 meta-initramfs/recipes-devtools/grubby/grubby_git.bb
+ .../poppler/{poppler-data_0.4.8.bb => poppler-data_0.4.9.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler-data_0.4.8.bb => poppler-data_0.4.9.bb} (90%)
 
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch b/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch
-index 1b1a993a03..dfbe7ba6b4 100644
---- a/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch
-@@ -1,26 +1,24 @@
--From 22afaa21b4b258082be591e54c99e1ba6fbd7748 Mon Sep 17 00:00:00 2001
-+From b7b3caa9b5c8abcd3c371d0683001cd681e104b3 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 15 Jul 2017 10:19:22 -0700
- Subject: [PATCH 1/2] Add another variable LIBS to provides libraries from env
+diff --git a/meta-oe/recipes-support/poppler/poppler-data_0.4.8.bb b/meta-oe/recipes-support/poppler/poppler-data_0.4.9.bb
+similarity index 90%
+rename from meta-oe/recipes-support/poppler/poppler-data_0.4.8.bb
+rename to meta-oe/recipes-support/poppler/poppler-data_0.4.9.bb
+index 343b6db812..b2af097154 100644
+--- a/meta-oe/recipes-support/poppler/poppler-data_0.4.8.bb
++++ b/meta-oe/recipes-support/poppler/poppler-data_0.4.9.bb
+@@ -17,8 +17,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.gz \
+            ${CMAP_RESOURCES_BASE}/Identity-H;name=idh \
+            ${CMAP_RESOURCES_BASE}/Identity-V;name=idv"
  
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  Makefile | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/Makefile b/Makefile
--index ac14404..92a8e73 100644
-+index cc7e823..ae30a07 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -27,7 +27,7 @@ RPM_OPT_FLAGS ?= -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector
-- CFLAGS += $(RPM_OPT_FLAGS) -std=gnu99 -Wall -Werror -Wno-error=unused-function -Wno-unused-function -ggdb
-- LDFLAGS := 
-+@@ -31,7 +31,7 @@ ifneq ($(VERBOSE_TEST),)
-+ 	VERBOSE_TEST="--verbose"
-+ endif
-  
- -grubby_LIBS = -lblkid -lpopt
- +grubby_LIBS = -lblkid -lpopt ${LIBS}
-  
-  all: grubby
-  
---- 
--2.13.3
--
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch b/meta-initramfs/recipes-devtools/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch
-index d936249be8..e693916e1d 100644
---- a/meta-initramfs/recipes-devtools/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch
-@@ -1,4 +1,4 @@
--From 0841706a5b5280e501c8e392c70c466c5fbcf0aa Mon Sep 17 00:00:00 2001
-+From 15f0572f2f456c2c1b700bc790d9ce7a5c13cc74 Mon Sep 17 00:00:00 2001
- From: Jackie Huang <jackie.huang@windriver.com>
- Date: Tue, 4 Aug 2015 23:54:41 -0700
- Subject: [PATCH] rename grub2-editenv to grub-editenv
-@@ -8,38 +8,48 @@ We don't use the name grub2-editenv for grub2.
- Upstream-Status: Inappropriate
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
- ---
-  grubby.c | 4 ++--
-- test.sh  | 6 +++---
-- 2 files changed, 5 insertions(+), 5 deletions(-)
-+ test.sh  | 8 ++++----
-+ 2 files changed, 6 insertions(+), 6 deletions(-)
- 
- diff --git a/grubby.c b/grubby.c
--index d4ebb86..47a1a15 100644
-+index 396041a..3ceae69 100644
- --- a/grubby.c
- +++ b/grubby.c
--@@ -290,7 +290,7 @@ static char *grub2GetEnv(struct configFileInfo *info, char *name)
--     char *s = NULL;
--     char *ret = NULL;
--     char *envFile = info->envFile ? info->envFile : "/boot/grub2/grubenv";
---    int rc = asprintf(&s, "grub2-editenv %s list | grep '^%s='", envFile, name);
--+    int rc = asprintf(&s, "grub-editenv %s list | grep '^%s='", envFile, name);
-+@@ -301,7 +301,7 @@ static char *grub2GetEnv(struct configFileInfo *info, char *name)
-+ 	char *ret = NULL;
-+ 	char *envFile = info->envFile ? info->envFile : "/boot/grub2/grubenv";
-+ 	int rc =
-+-	    asprintf(&s, "grub2-editenv %s list | grep '^%s='", envFile, name);
-++	    asprintf(&s, "grub-editenv %s list | grep '^%s='", envFile, name);
-  
--     if (rc < 0)
-- 	return NULL;
--@@ -361,7 +361,7 @@ static int grub2SetEnv(struct configFileInfo *info, char *name, char *value)
--     if (!value)
-- 	    return -1;
-+ 	if (rc < 0)
-+ 		return NULL;
-+@@ -373,7 +373,7 @@ static int grub2SetEnv(struct configFileInfo *info, char *name, char *value)
-+ 	if (!value)
-+ 		return -1;
-  
---    rc = asprintf(&s, "grub2-editenv %s set '%s=%s'", envFile, name, value);
--+    rc = asprintf(&s, "grub-editenv %s set '%s=%s'", envFile, name, value);
--     free(value);
--     if (rc <0)
-- 	return -1;
-+-	rc = asprintf(&s, "grub2-editenv %s set '%s=%s'", envFile, name, value);
-++	rc = asprintf(&s, "grub-editenv %s set '%s=%s'", envFile, name, value);
-+ 	free(value);
-+ 	if (rc < 0)
-+ 		return -1;
- diff --git a/test.sh b/test.sh
--index 6379698..f738388 100755
-+index 33d24cf..009479c 100755
- --- a/test.sh
- +++ b/test.sh
--@@ -574,7 +574,7 @@ if [ "$testgrub2" == "y" ]; then
-+@@ -573,7 +573,7 @@ if [ "$testgrub2" == "y" ]; then
-+         --remove-kernel=/boot/vmlinuz-2.6.38.2-9.fc15.x86_64 \
-+         --boot-filesystem=/boot/
-+     commandTest "saved_default output" \
-+-        "grub2-editenv test/grub2-support_files/env_temp list" \
-++        "grub-editenv test/grub2-support_files/env_temp list" \
-+         "saved_entry=Linux, with Fedora 2.6.38.8-32.fc15.x86_64"
-+ 
-+     # copy a stanza and add arguments as well, while using --set-index=
-+@@ -627,7 +627,7 @@ if [ "$testgrub2" == "y" ]; then
-          --title='title' --initrd=/boot/new-initrd --boot-filesystem=/boot/ \
-          --copy-default
-      commandTest "saved_default output" \
-@@ -48,7 +58,7 @@ index 6379698..f738388 100755
-          "saved_entry=Linux, with Fedora 2.6.38.8-32.fc15.x86_64"
-  
-      testing="GRUB2 add kernel with default=saved_entry and a terrible title"
--@@ -587,13 +587,13 @@ if [ "$testgrub2" == "y" ]; then
-+@@ -640,13 +640,13 @@ if [ "$testgrub2" == "y" ]; then
-      testing="GRUB2 set default with default=saved_entry and a terrible name"
-      grub2Test grub2.9 add/g2-1.9 --env grubenv.1 --set-default-index=0
-      commandTest "saved_default output" \
-@@ -64,6 +74,3 @@ index 6379698..f738388 100755
-          "saved_entry=title"
-  
-      testing="GRUB2 --default-index with default=saved_entry"
---- 
--2.3.5
--
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_git.bb b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
-new file mode 100644
-index 0000000000..8430b7e102
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby_git.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "A command line tool for updating and displaying info about boot loaders"
-+DESCRIPTION = "grubby is a command line tool for updating and displaying information \
-+about the configuration files for the grub, lilo, elilo (ia64), yaboot (powerpc) and \
-+zipl (s390) boot loaders. It is primarily designed to be used from scripts which install \
-+new kernels and need to find information about the current boot environment. \
-+"
-+HOMEPAGE = "https://github.com/rhboot/grubby"
-+LICENSE = "GPLv2+"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
-+
-+DEPENDS = "popt util-linux"
-+DEPENDS_append_libc-musl = " libexecinfo"
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "a1d2ae93408c3408e672d7eba4550fdf27fb0201"
-+SRC_URI = "git://github.com/rhboot/grubby.git;protocol=https; \
-+           file://grubby-rename-grub2-editenv-to-grub-editenv.patch \
-+           file://run-ptest \
-+           file://0001-Add-another-variable-LIBS-to-provides-libraries-from.patch \
-+           file://0002-include-paths.h-for-_PATH_MOUNTED.patch \
-+           "
-+
-+RDEPENDS_${PN} += "dracut"
-+
-+inherit autotools-brokensep ptest
-+
-+EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}' LIBS='${LIBS}'"
-+
-+LIBS_libc-musl = "-lexecinfo"
-+LIBS ?= ""
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}
-+    cp -r ${S}/test ${S}/test.sh ${D}${PTEST_PATH}
-+    sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
-+}
-+
-+RDEPENDS_${PN}-ptest = "util-linux-getopt bash"
-+
-+COMPATIBLE_HOST = '(x86_64.*|i.86.*)-(linux|freebsd.*)'
+-SRC_URI[md5sum] = "00f8989c804de84af0ba2ea629949980"
+-SRC_URI[sha256sum] = "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
++SRC_URI[md5sum] = "35cc7beba00aa174631466f06732be40"
++SRC_URI[sha256sum] = "1f9c7e7de9ecd0db6ab287349e31bf815ca108a5a175cf906a90163bdbe32012"
+ SRC_URI[idh.md5sum] = "009c93cf0141ab7bd6acb7eea14306cc"
+ SRC_URI[idh.sha256sum] = "ae702c203a82ea124e9b96590f821db6fbf8754e2c4547a9dba0e82f94739e95"
+ SRC_URI[idv.md5sum] = "2f32a45d43d001c26eeac6b878855fbf"
 -- 
-2.17.0.rc2.3.gc2a499e6c
+2.17.0
 
 
