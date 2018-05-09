@@ -1,50 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 1686774FBC
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id DA21474FA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 May 2018 19:00:33 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id o76so26086967pfi.5
+	Wed,  9 May 2018 19:00:34 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id a39-v6so4844744pla.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 12:00:35 -0700 (PDT)
+	Wed, 09 May 2018 12:00:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=oqi7PjCfClwXfxm4BQ/RFmP96NxrZbgHp2RDYU6Tnko=;
-	b=DzQD8g7BLBEW069Xko8FZL4q/Hw2f6vFz8ff3JQerLNRcfO3y1JBxa7zy5ZvK+HnFx
-	Kee/Frhj5XCXb+lH0GN/aS1SuqohiWsHvjnmvNcDtMxhq+nElrSvz4aCa4wSYCGg1YXJ
-	s2Qq1ggu06ORhJpxsxxf4ZEyXSNwiuBR1jfMdOIPYTekHZse/raRojqejJcdMoJIiBxC
-	3rRXC9o08pm7a+bo4ktuDJUmXfUhqzWYkj+UjdaMM4AtKZaYEPWols395HmFEm9SfqVm
-	AZZq+dPYqpKkku6j8xTKyk3rcPl1y2y7UnHUMAZ+qWVjJN4Cl9mKeSRjoWBU9P8Y6q+Q
-	PQ+A==
+	bh=c8R3FUHsXDsYyPFUgisSr1bfLUkSW59V7HRFX9pO8VU=;
+	b=Us6SvaI70snwow1n/Me6Wc8BhDPasDpYbd/iqieGgsXZB2okUfbIhrWLlqZQAKUcY+
+	gTB8LLW18HJBQOkKSChYdEHdPMvc+4R3bsgBRQ9RP+BOWDrEzvb81PEHNiWhZLM/swku
+	j/jUCpGawNAXLCAYxd5CUdoWJYVULzt32jdkfxyAbvAzDg+cOxwDShSG3uvuzmlJwJ3O
+	ZDs2NPqMpKMmcMQW0ptWr35rhgIdaAFkaVoV8pVoBZDikL/uQDtXyLG/5NjRnPy+GF7F
+	dNrh5bsvE9+ToLvFitIIGIeLnN9vCOAN1NpuijXet3kmTRmYhnV5ghFISoG9lDojiGe4
+	AjXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=oqi7PjCfClwXfxm4BQ/RFmP96NxrZbgHp2RDYU6Tnko=;
-	b=o/2bcTfsmAeGF5fOBCpUik+ygVeuQR47fmOYEIsAQZu/OzneRAuQx084x3F9dJC1Zh
-	CcNsrtpNDMwgs97hvgewChlZTnFsHKzdEIN9CmvvFs4UiCKNBMX0TcA99brozpK5WXqL
-	VQGXyA7FCs9QVgB5cEejuINKcF/rk2gzAg8A3kzVAsc6ixjS7xQRb9u02cbsDtAHZZwY
-	rsjUYcJWHI/nqfEqiYw3VJBnpmcPYvPhye3GN1KSBHjpweMk1lHO3+bGcffvjx3Fo0rI
-	uoqZ5I4iIarnQbZUS9mV4P40/K6HMbEwFL6M2QcZhM4LnfJQC5v+TlKANcsy74Z+/HwF
-	eTTw==
-X-Gm-Message-State: ALQs6tCogpH0kxrzGV58CLpf+UF1xts88s+fmSo//WADPTXsrbis8nCt
-	0tuBV3/LyuV7nNB+s2855rCKuw==
-X-Google-Smtp-Source: AB8JxZqfAOzr0h1dUdlcroucUsP+tQGys6hfDo0gIzouskCl6a5B3XQkoOPKna00/8bZw/dFfp5+4A==
-X-Received: by 10.98.71.141 with SMTP id p13mr44787798pfi.164.1525892433888;
-	Wed, 09 May 2018 12:00:33 -0700 (PDT)
+	bh=c8R3FUHsXDsYyPFUgisSr1bfLUkSW59V7HRFX9pO8VU=;
+	b=e4NGLmIfRJSbR8VD0hRm3STNc5aaW8MC2Ok+UUbGT5mnBM7QKrScisit+jxPhSb2DI
+	oKWiLUwhQgdwOC4oGI0yODZMoJksP1CPJzgzfVa591amaYElR7Q2XN9/EyfLN0DrWKKm
+	5pzIIUQUlEciZbgN3TVsMf86/16ViaZ77lgk6DEvXYcFIHl5/rYV6XltVsZaQaSefNOG
+	Ns9JHaxiyNQxHq7Dx2BfKsVD4sppNJ+aUQpWlFKkLR5PbURW/4oO3eiAxOYqtI358I/5
+	NtnV952eOQbMTR718wXjYfXAUVyvhOle7aIgCj4lAuwwQvYC1qnDgBhBLqvUp8Ejjeae
+	269A==
+X-Gm-Message-State: ALQs6tB7jWZxag7QjRc3JKwB+T9n6nXmjz0rutPsdsU7LEcIMtoix8qW
+	I8avkkBLQOc/FfjcowEObPTVTw==
+X-Google-Smtp-Source: AB8JxZqQi5pflMFXmkH4LgbrcPwCi2KoPJ70OVXyV+x4JVQbjpxJaxTQzb+TPTGQdgO623W1ZFfKhw==
+X-Received: by 2002:a17:902:4545:: with SMTP id
+	m63-v6mr47331328pld.268.1525892435537; 
+	Wed, 09 May 2018 12:00:35 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	131sm27732437pfa.128.2018.05.09.12.00.32
+	131sm27732437pfa.128.2018.05.09.12.00.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 May 2018 12:00:33 -0700 (PDT)
+	Wed, 09 May 2018 12:00:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 12:00:08 -0700
-Message-Id: <20180509190011.30006-13-raj.khem@gmail.com>
+Date: Wed,  9 May 2018 12:00:10 -0700
+Message-Id: <20180509190011.30006-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180509190011.30006-1-raj.khem@gmail.com>
 References: <20180509190011.30006-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 13/16] libmbim: Upgrade to 1.16.0
+Subject: [meta-filesystems][PATCH 15/16] physfs: Update to 3.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +58,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 May 2018 19:00:34 -0000
+X-List-Received-Date: Wed, 09 May 2018 19:00:35 -0000
+
+License-Update: copyright years updated along with a note removal about LZMA SDK and LGPL
+see
+https://hg.icculus.org/icculus/physfs/rev/5b31ba402270
+https://hg.icculus.org/icculus/physfs/rev/8f14bdf15b2a
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libmbim/{libmbim_1.14.0.bb => libmbim_1.16.0.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.14.0.bb => libmbim_1.16.0.bb} (82%)
+ .../physfs/{physfs_2.0.3.bb => physfs_3.0.1.bb}             | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-filesystems/recipes-support/physfs/{physfs_2.0.3.bb => physfs_3.0.1.bb} (53%)
 
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.16.0.bb
-similarity index 82%
-rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
-rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.16.0.bb
-index f89ef9d570..5260c0f14e 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.16.0.bb
-@@ -14,5 +14,5 @@ inherit autotools pkgconfig bash-completion
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-            file://clang.patch \
- "
--SRC_URI[md5sum] = "2ed809e65c85353d3ab59e372890e549"
--SRC_URI[sha256sum] = "ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b"
-+SRC_URI[md5sum] = "76ea4d8381989919b1d9b91c818fed80"
-+SRC_URI[sha256sum] = "c8ca50beeddd4b43309df5b698917268303bf176cea58fe4fe53d5bf0e93fac2"
+diff --git a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb b/meta-filesystems/recipes-support/physfs/physfs_3.0.1.bb
+similarity index 53%
+rename from meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
+rename to meta-filesystems/recipes-support/physfs/physfs_3.0.1.bb
+index dc2c106497..cc97dead56 100644
+--- a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
++++ b/meta-filesystems/recipes-support/physfs/physfs_3.0.1.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "PhysicsFS is a library to provide abstract access to various archives"
+ HOMEAPAGE = "http://icculus.org/physfs"
+ LICENSE = "Zlib"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5d94e3eaaa10b00ca803ba35a3e87cde"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2668e2fb051c3e564198e146a9a2d9f0"
+ DEPENDS = "readline zlib"
+ 
+ inherit cmake
+@@ -9,5 +9,5 @@ inherit cmake
+ PE = "1"
+ 
+ SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "c2c727a8a8deb623b521b52d0080f613"
+-SRC_URI[sha256sum] = "ca862097c0fb451f2cacd286194d071289342c107b6fe69079c079883ff66b69"
++SRC_URI[md5sum] = "359f102bcbd62accf84ef32f4863255d"
++SRC_URI[sha256sum] = "b77b9f853168d9636a44f75fca372b363106f52d789d18a2f776397bf117f2f1"
 -- 
 2.17.0
 
