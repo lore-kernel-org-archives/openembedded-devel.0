@@ -1,48 +1,48 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D76B74ED2
+Return-Path: <sipke.vriend@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0FDD974BB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 May 2018 21:40:39 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id f3so21674762uan.9
+	Wed,  9 May 2018 01:38:26 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id o76so24812683pfi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 May 2018 14:40:41 -0700 (PDT)
+	Tue, 08 May 2018 18:38:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=mJypszB99FVggIrdtYdZzCZI1anSiNKCxorQOoRe5eI=;
-	b=TJeflh7Y1gMPlkvFkKU3PgUKf5lQhbLvx9ep/9Y0OWr1qQDCF3nRyr1257gI3sPXg2
-	zq+yYUhJN7r/zb6mAyGVovEMIuVVJr78M3Kks6mNto32nBhuwXABpkvRNIZmZcA1yT75
-	+sJinq7uGXGFuKdDxUA07px/v/kYeG14yo1UrYcN2RGhA9RDluN/wbjaPdQGhClfEvIr
-	YX4qOGBiYtgEJCIbypyN1DQySyCZ7z/q5LM/LSOa5RaTL/tmHkxyGbHbfPJC0S0K44Bn
-	V2IiAXqvbW40ZjLGM8LAfXeNwtCvjBxhS2b2UEZAMWPl1HWyAn9W7+wgwQz9lzf/QivN
-	weXw==
+	h=from:to:cc:subject:date:message-id;
+	bh=hGXKGSNXt2Sc6imgjjVlstVmQaZ90GaJq7kNgCMBrws=;
+	b=Zy1NsYb9aNJG1dA6zkf/UuBiEBpV93Ddcd+ixaJb0OJRh0SFReIH0Zyd0XYSDeNZ90
+	z185MEUcFwHyAmTMmHW70rkFYlLe7GUOt+TjHJWN/va+8IakBzOzBwzdyC6hm03uaUje
+	gLlKdiOhjXyVLa6BXIWXc5480ZRqLrivis+xIrorwa9H2RBJultGOuE+kV62CeOpABfs
+	xBylyx2ka5tY+xjdOnLvtCvXG/QBSgZbcFp5T3elNYeUAriaRlcoCU/gh3cV38+CT7ru
+	9I+OzsOCtTeOAebvSmvOvRsmbqvaKoaJYS5z907amYfszX/Q7crL3bTzr2ibuYVkegBk
+	FcNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=mJypszB99FVggIrdtYdZzCZI1anSiNKCxorQOoRe5eI=;
-	b=XIFiD/S+HAymu8VvTRUZiIutTy0PU4g8A2pcDZ4jfWPLMyL7pHTJuhU34AXWyCB6f0
-	3phklaxNjf+W7TNH0hk8HwEOrt4EkO7os+GAxgvYG5/FyTkgnoGXyl+H6stS/VR5oxmJ
-	u4SmVs2HzfgN04dn6LUneKfnVrLHd0O0dbGgUAJ1ZtFq55wTsks4g6x9yeMRxXDnTfAY
-	vPMqsW8LJ6jPrs0tYmjVmPT+ShyJpMy0ssZQ6w7nljytrvMTA7fzhTKdNM+qvrOjdJCx
-	FdRCTOOcKkv+kJ8bvI7szs34wYHUSuXz3HJz5barj3stnTuS7hTxmCPO5DSgi2b//eJP
-	g+rw==
-X-Gm-Message-State: ALQs6tDU48N4jNjG2KWgx538532JJnRZ2jd/HcEMuwN2qToGY1oGbA1y
-	K/jmlyj+TiEcWPU2A9uOVqbRDJryXK5MiZHun4M=
-X-Google-Smtp-Source: AB8JxZqlbmHfmm3AZYnNJS7Tafm0wh3/lETiB3gSMLrBtr5BVy/j3G/w00Rso212/dQvvpweaYL6ot1EVr/lcCT12B0=
-X-Received: by 10.176.21.103 with SMTP id p36mr36296299uae.81.1525815640817;
-	Tue, 08 May 2018 14:40:40 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.48.148 with HTTP; Tue, 8 May 2018 14:40:40 -0700 (PDT)
-In-Reply-To: <CAAQYJAsPMCY8q3yJq9uPwRgT+b3Feop8E8xXtV955j9RZqm96g@mail.gmail.com>
-References: <1525475357-8521-1-git-send-email-armccurdy@gmail.com>
-	<CAAQYJAsPMCY8q3yJq9uPwRgT+b3Feop8E8xXtV955j9RZqm96g@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 8 May 2018 14:40:40 -0700
-Message-ID: <CAJ86T=VOTqTriX0-Jgng9tCdn4FX0qG1kKCbyd8eX2PW0oV5+g@mail.gmail.com>
-To: Andrea Adami <andrea.adami@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] openobex: explicitly set ASNEEDED from openobex recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=hGXKGSNXt2Sc6imgjjVlstVmQaZ90GaJq7kNgCMBrws=;
+	b=dfPRdl1wUWU8pdWQ22pMb6+ZU0kNmPKRoRsyA9vISduIKdI6HY5ZFwd58B0PFSM0nW
+	sdsMuF7YcbbcNFfFiUwvvzE4XtR5cZu9NRyxxDPS6sPoysrUwG2GS6IwMXHjVzIpIDqc
+	no7ZNP538gGV0UHe7w0eZ5dakRAIgpQwehCrqadimmcF2rzHYhdlxeD5IkBstpCIxUDo
+	gNPkHAYiLZj5VuVkIr8A9KOpENkAg8rytYciu7GeB4xgaXVQGuBiQfISnUYgUu7dA6Jz
+	oDGLKIo7gVPbCGfkXMprRgNEVsgTEgcFq9lA1jistpuNEC4MMMXjIl3rcMkchQBPs0nU
+	tEew==
+X-Gm-Message-State: ALQs6tCS2MPO4UXkSTqsg63Hc7+W7YIFZ6hxb+xXHDuyoQvh/38osKnG
+	JjVwYIb69uQaD+c+kU4r155zOA==
+X-Google-Smtp-Source: AB8JxZpTw/3W1yM91OvySZSis5hDeMMdWDbN8uTKO+ObBoMrBmBcFJjrBwpxq/cXGVlqRCM3H55CaQ==
+X-Received: by 2002:a63:79ce:: with SMTP id
+	u197-v6mr35003822pgc.242.1525829907699; 
+	Tue, 08 May 2018 18:38:27 -0700 (PDT)
+Received: from sipke-dt.bne.opengear.com ([59.167.150.161])
+	by smtp.gmail.com with ESMTPSA id
+	r68sm63094984pfi.174.2018.05.08.18.38.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 08 May 2018 18:38:27 -0700 (PDT)
+From: Sipke Vriend <sipke.vriend@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 May 2018 11:37:47 +1000
+Message-Id: <1525829867-22734-1-git-send-email-sipke.vriend@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-robotframework: Add runtime dependencies to robot framework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,56 +55,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 May 2018 21:40:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 09 May 2018 01:38:27 -0000
 
-On Tue, May 8, 2018 at 2:24 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
-> On Sat, May 5, 2018 at 1:09 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
->> Up to now, an openobex specific over-ride for ASNEEDED has been
->> provided by oe-core (from as-needed.inc). If ASNEEDED does need to be
->> over-ridden in order to build openobex it's not ideal that the
->> over-ride comes from a different layer so define it directly in the
->> meta-oe recipe.
->>
-> Hi,
->
-> don't we have a special include for this purpose?
->  /meta/conf/distro/include/as-needed.inc
-> What want we do? ASNEEDED in the recipe or include the as_needed.inc?
+Add the runtime dependencies robot framework has so they are available on
+images including it.
 
-We want to move the ASNEEDED over-ride from as_needed.inc into the
-recipe. For a short time during the transition the over-ride will be
-applied from both places.
+Signed-off-by: Sipke Vriend <sipke.vriend@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-robotframework.inc | 11 +++++++++++
+ .../recipes-devtools/python/python-robotframework_3.0.2.bb    |  4 ++++
+ 2 files changed, 15 insertions(+)
 
-> For me, patch is ok, all in the recipe (there are just few cases).
->
-> Cheers
-> Andrea
->
->> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
->> ---
->>  meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb | 2 ++
->>  1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
->> index 2db48f3..1b56685 100644
->> --- a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
->> +++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
->> @@ -25,6 +25,8 @@ EXTRA_OECMAKE += "-DBUILD_DOCUMENTATION=OFF"
->>
->>  #--enable-apps --enable-syslog
->>
->> +ASNEEDED = ""
->> +
->>  do_install_append () {
->>      rmdir ${D}${bindir}
->>  }
->> --
->> 1.9.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-python/recipes-devtools/python/python-robotframework.inc b/meta-python/recipes-devtools/python/python-robotframework.inc
+index cc20d64..78bbbc6 100644
+--- a/meta-python/recipes-devtools/python/python-robotframework.inc
++++ b/meta-python/recipes-devtools/python/python-robotframework.inc
+@@ -13,3 +13,14 @@ inherit pypi
+ 
+ SRC_URI[md5sum] = "ea49a54b9d7e38302712194e85c37eaa"
+ SRC_URI[sha256sum] = "2018f233568227f9af8c366f93e243a157b742f3baf5b649ecc9750ac0ee1ff7"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-pprint \
++    ${PYTHON_PN}-xml \
++    ${PYTHON_PN}-difflib \
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-html \
++    ${PYTHON_PN}-docutils \
++    ${PYTHON_PN}-ctypes \
++"
+diff --git a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
+index 16eaa78..ff7dedb 100644
+--- a/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
++++ b/meta-python/recipes-devtools/python/python-robotframework_3.0.2.bb
+@@ -1,2 +1,6 @@
+ inherit setuptools
+ require python-robotframework.inc
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-zlib \
++"
+-- 
+2.7.4
+
 
