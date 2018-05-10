@@ -1,48 +1,49 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f45.google.com (mail-it0-f45.google.com
-	[209.85.214.45])
-	by mail.openembedded.org (Postfix) with ESMTP id ACDE2750EB
+Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
+	[209.85.223.193])
+	by mail.openembedded.org (Postfix) with ESMTP id EA7AB74561
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 03:32:57 +0000 (UTC)
-Received: by mail-it0-f45.google.com with SMTP id 144-v6so1480429iti.5
+	Thu, 10 May 2018 04:22:08 +0000 (UTC)
+Received: by mail-io0-f193.google.com with SMTP id d73-v6so1540218iog.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 May 2018 20:32:58 -0700 (PDT)
+	Wed, 09 May 2018 21:22:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id;
-	bh=Hne7/EmMWGUHecEn0qb2X57hiU7VnjtSat+xaggKGPQ=;
-	b=Ow+XbgAkYf7fQ5lNFpeuHNgbqQ63eokT0/jddpwHpdiWxDHxrq+Aj8ZlIlg3Do4Tyc
-	uG1U/RRyzNsQLgIqJXuN84Jy9M89JD61WqSdhqZ1sDoZvzWgzmlldSbKjyqzz87Pfxph
-	6n9MWuAupRSrXrMHU7Vy/ItDRr7DfU1qYwo2+4TGrN14enynoddYIhlmRzvw5Th4MTpR
-	X4XeuCUYzkyB8pZfIDDIC1jh/sv31Ii5hIlZeSIjNVA63UAjH6sB3SnILZRhQna9W63L
-	2M58RFwd2Pc1IoHVuT7TMDa3WbxGYc80JNBXav80EzpwBGYWr3ChcZbHk7tHwmGehUZg
-	RDbA==
+	bh=DzeqxRcEQkN0EbbEcLhlGlepexEm7luN055YHC/TH2A=;
+	b=CvWDadFnm3QtHtjjZ+yBTrOqSnLsf2+VxgdFz2eyDaJEySLNy7yx18PbcUabGq9+W3
+	+xzjwQST0oXzTNZtAvrwMg7qn46rmP/+xHZwuLyiHGan+itJ05CTFLimd5ki6wD0Xipy
+	aYZPrLIlv4fBskkF7Ot5iDDJFALHX1nk3kyckPfWJylvMMpvH90Yg3hVw95F+YhzBBqw
+	GgESJEkGazLMCJur1YE8kPnFWCJSe7I0Qkqu70Cbbup8w5DunwVZfaF90vZ8SH1LA/FA
+	NK91EopAU2s+hdjtQkaMsCAZD6aSJTnk2sI02YH7fCuFcYH2ksbHdyDRLisLS6IhMwbE
+	DKEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=Hne7/EmMWGUHecEn0qb2X57hiU7VnjtSat+xaggKGPQ=;
-	b=G7iIxVJj1uBShwUgnezH3sYlWvTaR7zdFjPKkeptru0YMsesr8LQBni9/xrJ8R/nwi
-	UzluaD8pUvYovoqDqYP2mdmkDJJTfJIU2ijjTNPQ1ffveIbY5Am6qpHV/rydwIAVT98k
-	Pfuv5DRwahzm1y8Fy4uIOctkh90+h3BSkxmpmXcAV6p3L47rtrv4N0bJNOw2SruajxSn
-	0Gcs3BUBS/Gn1FUxxAygRnSLRJXjI8DBBB0mSDjP0YbowaacKDfFdAMTAe2Toc3VLj4K
-	ugSVN9KW4cLgwayYJl8hYjbTIJ6hMtXN62x9IgVoMF8lk5dOVawxNaU8ZIs8eV/K3CXd
-	JZrA==
-X-Gm-Message-State: ALKqPwc88EA1qV5EDZSFRahvYutwfzVm2LLQcz0CiY6aEmI7Z2BVxhbC
-	o/Gu7qfRmd6PD18yRlqqfNabRqv5
-X-Google-Smtp-Source: AB8JxZrH5Dm6OaI/jY7+MJiauc1GJYBLF2kmvuHL4WPbgF9VKBYA1OpP+rAfNaxsviTD4QRubMv/2Q==
-X-Received: by 2002:a24:6bcb:: with SMTP id v194-v6mr82057itc.66.1525923178068;
-	Wed, 09 May 2018 20:32:58 -0700 (PDT)
+	bh=DzeqxRcEQkN0EbbEcLhlGlepexEm7luN055YHC/TH2A=;
+	b=bVA7uW8c5rSwqu8ydVoEn4Ff2W2yYc/WOnPatWVoZekdAXEZ9vhZXbCUdDmOW7JgT1
+	kyH7sZOrf/VleizP87YqPFj8maAjag0ov/MyxjKlJiswAbnFVetMni8nmJus+26dD5xG
+	yrFMkqYPQTXCz+jClB+gAx3Gr7JoU9LBvBhQitGHaMZ3TKO1EP/uOFgbXzpkZofVD7+I
+	JAj7mjr1Oakd41WgsA/pEqy7TdqDRzK6IY4Jyt9LowC18R0g2mqaNVlF/dAbtbLaDTjQ
+	Q7Dgi98ybxeoScciPnY/4q/ixHR4IOk5WjHvSC55eohKnKufkYpSo2mQb6Lbn0IggIH7
+	bqDA==
+X-Gm-Message-State: ALQs6tAfX0rg/jVbsH30LT9v80a0/ywqsvRSXWoSe/OfGSomoh1AKtzb
+	d5cWYlKl856pT6lgtSwVHfib0w3y
+X-Google-Smtp-Source: AB8JxZqi4IsFvaD5HhG2RQAQO5w2OgW41vVU3u5sr2lmo2QZJ4k/rKcc6XKHV6dbkkASZcGIQJvIAg==
+X-Received: by 2002:a6b:87d2:: with SMTP id
+	r79-v6mr49875494ioi.275.1525926129475; 
+	Wed, 09 May 2018 21:22:09 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	e18-v6sm32177itc.3.2018.05.09.20.32.56
+	c80-v6sm69586itd.7.2018.05.09.21.22.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 09 May 2018 20:32:57 -0700 (PDT)
+	Wed, 09 May 2018 21:22:08 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 May 2018 23:32:52 -0400
-Message-Id: <20180510033252.28834-1-twoerner@gmail.com>
+Date: Thu, 10 May 2018 00:22:04 -0400
+Message-Id: <20180510042205.28212-1-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
-Subject: [meta-networking][PATCH] ipcalc: switch away from github archive
+Subject: [meta-networking][PATCH 1/2] geoip-perl: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2018 03:32:57 -0000
+X-List-Received-Date: Thu, 10 May 2018 04:22:09 -0000
 
 Since we know that github archives which are automatically generated have a
 tendency to change their checksums[1], switch to using a git clone.
@@ -64,31 +65,34 @@ tendency to change their checksums[1], switch to using a git clone.
 
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-networking/recipes-support/ipcalc/ipcalc_0.2.2.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ .../recipes-support/geoip/geoip-perl_1.50.bb          | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/meta-networking/recipes-support/ipcalc/ipcalc_0.2.2.bb b/meta-networking/recipes-support/ipcalc/ipcalc_0.2.2.bb
-index 3e278db688..b45642404c 100644
---- a/meta-networking/recipes-support/ipcalc/ipcalc_0.2.2.bb
-+++ b/meta-networking/recipes-support/ipcalc/ipcalc_0.2.2.bb
-@@ -6,14 +6,13 @@ SECTION = "net"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb b/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+index a8c8bcf580..95147bdad2 100644
+--- a/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
++++ b/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+@@ -9,17 +9,12 @@ SECTION = "libdevel"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b7a36f55e8ba62aadd74e4f0886a405e"
  
+-# Note that we do not want to use the upstream file name locally.
+-#
+-SRC_URI = "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz;downloadfilename=${BPN}-${PV}.tar.gz \
 +S = "${WORKDIR}/git"
-+SRCREV = "8348808a7869ca8f25a5b5deeaa418c2f6d52758"
- SRC_URI = "\
--    https://github.com/nmav/ipcalc/archive/${PV}.tar.gz;downloadfilename=ipcalc-${PV}.tar.gz \
-+    git://github.com/nmav/ipcalc.git;protocol=https; \
-     file://0001-Makefile-pass-extra-linker-flags.patch \
++SRCREV = "47f7d49bd15cfc2e5f8c0f5c4068dc8bb0e10e96"
++SRC_URI = "git://github.com/maxmind/geoip-api-perl.git;protocol=https; \
+     file://run-ptest \
  "
  
--SRC_URI[md5sum] = "343db932a3ad407328920b7430965faf"
--SRC_URI[sha256sum] = "bf1b95eca219e564c85fa4233fe65342963cf3e8a303a7e10b4dd7269c864794"
+-SRC_URI[md5sum] = "2d7f8b1b54e6ba6d9e3fefce52675815"
+-SRC_URI[sha256sum] = "86da0dd67f417a43dc70f15a49bd3619f668970c117b9e7f737b4ab246c240a6"
 -
- export USE_GEOIP = "no"
+-S = "${WORKDIR}/geoip-api-perl-${PV}"
+-
+ DEPENDS += "geoip"
  
- do_install() {
+ inherit cpan ptest
 -- 
 2.17.0.rc2.3.gc2a499e6c
 
