@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B1A8B75299
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 6506D75264
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 16:14:27 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id l1-v6so5377709wmb.2
+	Thu, 10 May 2018 16:14:28 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id n10-v6so5364833wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 09:14:28 -0700 (PDT)
+	Thu, 10 May 2018 09:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=1Vz0ZHKFCMHIgWmVdYzaRUHwbYl48a9+TWMfRZvgFXU=;
-	b=Q0vTLV/n22x/9mh0kp/GEp9bRSF2n5igywBKLmLpYE/KIEsaeINTeDllZ+qk/U+E+R
-	m3+pkme/zkZsugL9jXszBRtXJVFYDyb8YqBSkAeneDStZ3bQCHaHnWViUXG3Lzu5rKsD
-	KdnLaVTAAPrIN0mGHoJIt3lBvB4uCt6EnJrn5+RFq+X88p5HxJXi8jao10I65+wRMhhP
-	/h0Bb5RPvemX58nkiVoMtvzEKp0h5bDZeMFZHEzk1A9foePJcMJptFHjWIU/scjVjz8Y
-	AKnLPL3ti9u+7Y5IyBuu/fk3CA9ElhKBWHrdTgR3pjfjWiGMDUPsLSBSH+Ov/dGbLBh1
-	4vng==
+	bh=evnC4hzVPJF0yiB+pgmUinUUnV3ON6gG/Xu7xwaM+TM=;
+	b=XzP4OFKCxwjMCim5OPaTuQinUq8gqUnBumrhY1T+n0SdLuqXH6IXYIz/NgX5lNzFdi
+	bVlRYYk5PY9nwsxZQ/oQHJb/QOPN4j0IovxLZ5j3EtTycJCHIKHDFnKM84FUsh2aO326
+	Adfn4HpMV9x1nmHE4W5UFx4mIma86yDsdzaEoCrXPZwAuY+2lsRfdRf0EvcZ10we678B
+	Ad/6dfnFrPFjddQ8X51OZMo2lJ7eY6/QCu8Dc0fIdOCH6908n+WLnXyfsRKyHli2FC+7
+	qSo5Eyko+YM6j6YEjFENpIns7fGNTqoiWgtfnB1rE5MYp/jBfo0//oUMnKU6Ex0Yz6+7
+	BrSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=1Vz0ZHKFCMHIgWmVdYzaRUHwbYl48a9+TWMfRZvgFXU=;
-	b=k6ms5VH/Kf+H/fsWrCPV95Iw+XizO+vYfADA8JxYhMGw/5F/f7xnfsnnxsHOQneEq2
-	ZoNn4Bmd1DhyT7DqNE0Fk8cNtnXFUm6MPBt68WvoC0eXZLkKWXDJX2P8UVZSFGZ4C4j5
-	QZKUgGQDsc4auUI1rxzgLbsXXrPpjFFanobIquZDZk+9GcwSmpDIL7+ojpU0bSQCIZEy
-	h7XIKAkv+arnFeICSwIwL1IF/HbRim6gtQQv7C3z7bth9mUO4r0+tBhik6IMsBol1xRH
-	yIcILCgtpLM+NJ28nd4H/owiK9oSsHYo3kjkT7KTfCvGoEpsAkU2iVZRVpJ4zFRHH7Bn
-	Kftg==
-X-Gm-Message-State: ALKqPwcIDY9OKmFfBB/afYSgQo+UuD84R3FJjfPbzY6ZVBYibgyfEjwQ
-	HeEsuHHfAdrYDS1AJ3RJ/66Khg==
-X-Google-Smtp-Source: AB8JxZrRsPm+K4yWS1+T7XuFfCWmZMtpulhpPFlqjk9k5nk9qfpzAIhtSw54EYC5BzYDFNCqQBqGtg==
-X-Received: by 2002:a1c:3f56:: with SMTP id
-	m83-v6mr1780576wma.88.1525968867638; 
-	Thu, 10 May 2018 09:14:27 -0700 (PDT)
+	bh=evnC4hzVPJF0yiB+pgmUinUUnV3ON6gG/Xu7xwaM+TM=;
+	b=VEliQGOIP+97N0GohKPKxTedPAsbAV69IuvPTWuhd4p2i+75HdkAxSxOoF0bN86OHv
+	TumrwTR5tOrPkyMZoVPX8cLL/XahEZyMOgoeb+GFtZSXxWggWN7DoKuyLjRRojgbwOaD
+	pqsqvEZx27b1w3i1uBYSTWZAo4aO4fObK7kpTcCiVGaoH+4EITQX0BpClxMRyBSLHOhA
+	kMuw5Fzy7ZcTmDG2PlDdERaP/78kNDj2Wdg3tQCORSt9NDDqe44z6aW+0FQLHLIVtAfe
+	2JFyWR2YGoV+hFAzVXUTPbRk7sHYEyq5lkaRVyG8/aLII1Z1WZ9n2X8bzxcM5PIOSRiy
+	Mywg==
+X-Gm-Message-State: ALKqPwer3dcXr3kBt3HzUTe6ItbGfSP7GbwSHHqiLYcKRgInfdVGx3WN
+	9TD/4QtofeLxkEBdquRTJSwGfA==
+X-Google-Smtp-Source: AB8JxZrBkZx9B/GlFGSRyjMQmCQhY1W9egrAyk+dpxa3WhcBMcDC+3Hdd0Be6L/IQ0W+SI9M6v6xlQ==
+X-Received: by 2002:a1c:d7d0:: with SMTP id
+	o199-v6mr1590950wmg.61.1525968868708; 
+	Thu, 10 May 2018 09:14:28 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC0732689B6120586BBC15E.dip0.t-ipconnect.de.
 	[2003:f0:7bc0:7326:89b6:1205:86bb:c15e])
 	by smtp.gmail.com with ESMTPSA id
-	f143-v6sm1679595wme.43.2018.05.10.09.14.26
+	f143-v6sm1679595wme.43.2018.05.10.09.14.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 10 May 2018 09:14:26 -0700 (PDT)
+	Thu, 10 May 2018 09:14:28 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 May 2018 18:14:12 +0200
-Message-Id: <20180510161415.12827-5-schnitzeltony@gmail.com>
+Date: Thu, 10 May 2018 18:14:13 +0200
+Message-Id: <20180510161415.12827-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180510161415.12827-1-schnitzeltony@gmail.com>
 References: <20180510161415.12827-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/8] xfce4-whiskermenu-plugin: update 2.1.6 -> 2.1.7
+Subject: [PATCH 6/8] menulibre: update 2.1.5 -> 2.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,33 +62,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2018 16:14:28 -0000
+X-List-Received-Date: Thu, 10 May 2018 16:14:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...-whiskermenu-plugin_2.1.6.bb => xfce4-whiskermenu-plugin_2.1.7.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.1.6.bb => xfce4-whiskermenu-plugin_2.1.7.bb} (66%)
+ .../menulibre/{menulibre_2.1.5.bb => menulibre_2.2.0.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-apps/menulibre/{menulibre_2.1.5.bb => menulibre_2.2.0.bb} (80%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.1.6.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.1.7.bb
-similarity index 66%
-rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.1.6.bb
-rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.1.7.bb
-index 762cff0f6..f0780c701 100644
---- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.1.6.bb
-+++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.1.7.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-xfce/recipes-apps/menulibre/menulibre_2.1.5.bb b/meta-xfce/recipes-apps/menulibre/menulibre_2.2.0.bb
+similarity index 80%
+rename from meta-xfce/recipes-apps/menulibre/menulibre_2.1.5.bb
+rename to meta-xfce/recipes-apps/menulibre/menulibre_2.2.0.bb
+index d1f3471d6..b0e4784fe 100644
+--- a/meta-xfce/recipes-apps/menulibre/menulibre_2.1.5.bb
++++ b/meta-xfce/recipes-apps/menulibre/menulibre_2.2.0.bb
+@@ -13,9 +13,9 @@ inherit distutils3 gtk-icon-cache distro_features_check
  
- inherit xfce-panel-plugin cmake
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[md5sum] = "b2b2bacc8d5f3c3119a0f317b6074276"
--SRC_URI[sha256sum] = "8b2a8ee1445df39a2cda139e353f2e9ec3720a780296dc41b7d4aebde57371fc"
-+SRC_URI[md5sum] = "5cdaaf5799c3f976e8cee81ed24c7fe7"
-+SRC_URI[sha256sum] = "045c48bbe6fba62a46c2752a9eb3533f03bdd29dd23af29208622b79eb045e39"
+-SRC_URI = "https://launchpad.net/menulibre/2.1/${PV}/+download/${PN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "efc7edb49bb0e5fea49e158b40573334"
+-SRC_URI[sha256sum] = "ef05b2722bab2acb7070d6c8ed0e7bd58bd4a4540bf498af9e889944f9da08b5"
++SRC_URI = "https://launchpad.net/menulibre/2.2/${PV}/+download/${PN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "9690848dbf9196c3f7baa574e90378d8"
++SRC_URI[sha256sum] = "546fec87f451c8f5c220d02b1f36dd850f4ce9ab607f8e9711ed8f2009e349fe"
  
- RRECOMMENDS_${PN} += "menulibre"
+ do_compile() {
+ }
 -- 
 2.14.3
 
