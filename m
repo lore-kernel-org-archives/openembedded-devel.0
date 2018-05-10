@@ -1,59 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DD31F75321;
-	Thu, 10 May 2018 19:21:37 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id g20-v6so1378440pgv.1;
-	Thu, 10 May 2018 12:21:38 -0700 (PDT)
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 138EC75340;
+	Thu, 10 May 2018 19:27:49 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id j7-v6so1882524vkc.9;
+	Thu, 10 May 2018 12:27:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=KXMZDc1aQluANBc9wP4ZonRCJ9XcQWt8gMOfPusGENs=;
-	b=BXXb4ouVLNQrvVm3Kh9La4qH1n8aHQtWiMbG0d8SpcanqOlZxLu5wHbMkaB0Fr6DIS
-	P28GC4QGr38C7u9dR1iX1xtwIdf4AgPYTIHVV7flYuuTZfPW3cteC8zWp1RbVusmb/Hr
-	lIr5e6TdeoshEuC9hIzROgZ1I0jYVX2o4bgeh6/O6iQyqdnLaYifccNIOEJpKtQjLrHU
-	XnGceVnpGw/G2nU5KeUwkiOhMrjDV9GHJjYg+2uZi2lFiypQefon8Gk4egftTraqlS56
-	AWEjnhP4Nr26V0KlFzSfMpWNUptK7/1Xt3opL3EufUWqrK8U2crQB24SBRSSLeqNEV8c
-	M7BA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Z/66mg3YppfzYZU15846sDiFkILfA3r6yQMYWwWFWv8=;
+	b=Jmi1Q++C8nizpgYDB5sr+JUnXoh1ifgSpSlLPBEQ22nbp5KlcdxS5MhecTZLA6AaNI
+	hm6kN10SvfVBkvGUVtsjnKi5i1Szh6EUKgsCyNRz867xwgrgorZEVEgwXqY+i5czNXEm
+	BovqQ+PluNQy6XMBjDz73WVt8zH4JtsBOW9lSWRI28q0CA50D4ID46sYJF+Vvl0U9W6I
+	uqi1al4ydAI7EEiO8uCxpJ+9xvHcOAkMFx9whGXKd0ctBwu1mI7QaPV03PKjBhyRMABD
+	uHPfGegpGZwoQO/ZfJfe4QkGFTwv6qic7XZbu7YDYr9P36S/aTl3AazlPwTm/xbUsyRW
+	ADyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=KXMZDc1aQluANBc9wP4ZonRCJ9XcQWt8gMOfPusGENs=;
-	b=KMpF8DgIsxMt5+Q8vle6jitosFPf7mWgeIKknb1mOZLf3J6Ew9kRPTxgeLLgvtdprp
-	rBGCtgDttRwmmTV8sOf0BB2UaGhygJp3RJigblCyLFBHVBm4J4lZEot9QNtGS6aV7LZR
-	cqpmucD1Djc5bqmOfcEtZnw0KPuM7bPPmBY5FMXvE/SOGA9RZvi2vYbty5o203TfxX00
-	bbuAzFPQoyWUfRewekEa87hHIo8GYhXbbS+3R/SiHM3pQ2BT9gbWvANtzUZMujQHDktF
-	t3NxRyTD/na72Ifz9vLMHQ6d/ROmLY9ZGJdM92uuoQ6QH9AFnwrJlA+N/3XMVfYdQ6Xb
-	Jl/g==
-X-Gm-Message-State: ALKqPweF9rF2ohq9rvWiXPlvbpEOxWdQzG3551fDMSEz7/DPcvI0GHD4
-	xnU2/gSOJuy+ywDnwqW46Pk=
-X-Google-Smtp-Source: AB8JxZo/llQJR2CrQJAWZPLj4CV0hBhMAqjunThZ4JDSbY6OOnFvIgomxRKPzDwVFvwX2WskTGxTEQ==
-X-Received: by 2002:a62:a65c:: with SMTP id
-	t89-v6mr2507323pfe.27.1525980098259; 
-	Thu, 10 May 2018 12:21:38 -0700 (PDT)
-Received: from hermes.local ([2601:646:877f:9499:49fa:9382:bcbc:28ae])
-	by smtp.gmail.com with ESMTPSA id
-	y197-v6sm3451776pfg.184.2018.05.10.12.21.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 May 2018 12:21:37 -0700 (PDT)
-To: Zoran Stojsavljevic <zoran.stojsavljevic@gmail.com>
-References: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
-	<CAGAf8LxceSXvK-pgfWYDvYLmcvMMK0D5q==PKG9jeRWs6YEbGA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <9ce7ff3b-c139-6e4e-638c-1a5c864e53ef@gmail.com>
-Date: Thu, 10 May 2018 12:21:36 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
-	Gecko/20100101 Thunderbird/60.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Z/66mg3YppfzYZU15846sDiFkILfA3r6yQMYWwWFWv8=;
+	b=uAq85eGTwOq1UYv7B1U4QKNATHxKCnjMddJx8zhXICi/uprPnZUjhriJhyHvX2Iq28
+	qbWtSpIhV/P2ws9Hbb2Ntvgnj0UvGHf0LfU+HS6MH1P7KuhdHJxPeGM28StlA1GoZl+X
+	f9RuGdHWj3JiN0Gg5aEINb4X9he6qAbPmhbQn/yA4lBCuvgXpCy+WGUDCmJODMmW99T3
+	HIELP0gWST8ROIpRFyp3nt8CzfRdh6W1hjO9+twXVS3Dprxxle/c9lW8b71edcC12wvv
+	giAB5FBOEOTHQEZEP1SKvOFFUo4bn4KAwuhjfoADooLECZBszFwUpARq6Gaeja3l2XW5
+	0tjA==
+X-Gm-Message-State: ALKqPwd5ZAw32lgNEBuKxs2t0G2tmPo5U74aPMRykMClemnYSN23l/sP
+	Oolty1imLJb1pE3GfhFqVuIOPrtfq9gsx3Z+sW0=
+X-Google-Smtp-Source: AB8JxZomKkFJctTXn1BmNjZMtzEB/3G/JrxM+w43I73lKFvHsRfmPson27/My8o5u1gABFqLGq4vFnSN08dlyL4bvvA=
+X-Received: by 2002:a1f:b254:: with SMTP id
+	b81-v6mr1920369vkf.20.1525980470656; 
+	Thu, 10 May 2018 12:27:50 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAGAf8LxceSXvK-pgfWYDvYLmcvMMK0D5q==PKG9jeRWs6YEbGA@mail.gmail.com>
+Received: by 10.176.48.148 with HTTP; Thu, 10 May 2018 12:27:50 -0700 (PDT)
+In-Reply-To: <20180510191145.GA1954@jama>
+References: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
+	<CA+chaQcUU=Dew1cATDBpuA2_f_eh1=DAyEMaDHfVx7kY88rZhg@mail.gmail.com>
+	<8d962430-ac63-5e97-fd32-2c0464c62acb@gmail.com>
+	<20180510191145.GA1954@jama>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Thu, 10 May 2018 12:27:50 -0700
+Message-ID: <CAJ86T=Xz+2neJPBw41_sFxd977xp=zznsgzFdbeHJ-aysJNk+g@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 Cc: Yocto Project <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [RFT] GCC 8.1
+	<openembedded-core@lists.openembedded.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] GCC 8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,57 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2018 19:21:38 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 May 2018 19:27:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
+On Thu, May 10, 2018 at 12:11 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, May 10, 2018 at 11:50:02AM -0700, Khem Raj wrote:
+>> Hi Martin
+>>
+>> Thanks for testing and reporting back
+>>
+>> On 5/9/18 2:38 AM, Martin Jansa wrote:
+>> > My initial tests show couple issues, but usually caused by other changes
+>> > in that branch, not the gcc-8 itself.
+>> >
+>> > 1) strace-4.22 from
+>> > http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/gcc-8&id=af33a8b721cc9caebd3f5226b4c5903f666ab654
+>> > fails to build with ptest enabled (it builds with 4.20 version if I
+>> > revert this change)
+>> > ../../strace-4.22/tests/inject-nf.c: In function 'main':
+>> > ../../strace-4.22/tests/inject-nf.c:86:1: error: r7 cannot be used in
+>> > asm here
+>> >   }
+>> >   ^
+>>
+>> are you targeting thumb1 ? how can I reproduce it ?
+>
+> I'm trying to find out what's different in the builds where it was
+> failing, will provide more info later.
 
+This is probably due to making an inline syscall from Thumb (doesn't a
+matter Thumb1 or Thumb2) with frame pointers enabled.
 
-On 5/5/18 12:31 AM, Zoran Stojsavljevic wrote:
->> May fourth be with you !!
-> 
-> @off topic!
-> 
-> Who is here (and in wider context) Darth Vader? Bourne Kingpin (BK)? ;-)
-
-Well the message was sent on "may 4th" hence it was meant to be a 
-light-hearted encouragement to test the patchset
-
-> 
-> Zoran
-> _______
-> 
-> On Sat, May 5, 2018 at 2:26 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> Hi All
->>
->> As you might have noticed that gcc 8.1 was released this week, I am
->> calling out for some testing help on testing branch so we can weed out
->> issues you might see in your setups. so if you have your
->> builders idling over weekend, then you know what they can do this weekend :)
->>
->> Highlighted changes are
->>
->> https://gcc.gnu.org/gcc-8/changes.html
->>
->> and porting doc is
->>
->> https://gcc.gnu.org/gcc-8/porting_to.html
->>
->> The branch is here
->>
->> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-8
->>
->> Its uptodate on top of current master oe-core
->>
->> May fourth be with you !!
->>
->> Cheers!
->>
->> -Khem
->> --
->> _______________________________________________
->> yocto mailing list
->> yocto@yoctoproject.org
->> https://lists.yoctoproject.org/listinfo/yocto
+Does adding -fomit-frame-pointer to CFLAGS fix it?
 
