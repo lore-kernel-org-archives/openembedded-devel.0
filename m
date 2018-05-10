@@ -1,24 +1,54 @@
-Return-Path: <jason.wessel@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EA5575120
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 3415475264
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 16:10:31 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4AGA7Id028729
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 10 May 2018 16:14:22 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id g21-v6so2555619wrb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 09:10:22 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 10 May 2018 09:09:56 -0700
-From: Jason Wessel <jason.wessel@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 May 2018 09:09:56 -0700
-Message-ID: <20180510160956.85938-1-jason.wessel@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	Thu, 10 May 2018 09:14:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=vRTKl+ZOI9wTS8gl4m1BgMXdfO5Mfkxqdr7E7iniarc=;
+	b=j9ePXB6yvl6sIlJn3LZLUnULKssFGlDj7v5qp2konpXVW3hhWb8POfD/oL7oybLYw+
+	W8MKVcXYkKwAV02P9nNwX555oR4D0NiKgTIoJJ352/unZUoi/Jg6ZsT5CYJWQNpnvtvu
+	6tw1PR32V30KRVt/FL4oYQE5avq76cZFz6jyQ/rI1HhcxncCqv1L4lknncgrL1WL9RNg
+	BY1Jc0zx7T+Ifrv+Y9CMN0McjCBeoQ8sxtENHfFCl32hlQsDD3AeJbbUq1xGvOvoPuMx
+	VoAyQUIWPDUwoC6Iz89z2KzSq/nVOJ97moZZjAlkUJhdM5fleNMAUxt/5NdbGkQ/M74R
+	dPHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=vRTKl+ZOI9wTS8gl4m1BgMXdfO5Mfkxqdr7E7iniarc=;
+	b=tYWVMZ0rxRpjA+lP59pA7yyEjOVhD4lh32Qeo6gSRkyIsGh3y0KLBnKkVuVbYE9+un
+	9qllh43UDwrQ0it/gXNl2TWm4xj1EWCZiHZcye+sH5hYxjGxKvlLsUDTjxFkcMvFu4Iu
+	xhxJHIrBuBo5pNBi3CzZMHd6cn//pBw39xMJ3VNNMVHUTqsRije/ywTwjnfWCq2Rshks
+	ySRYAQI2XHiLIZxmgmN1f7WhKN1hQiHzLZFCFwx626gJzXOKxFi1hdPqty8G2RlqIu4w
+	VCdsWFQx6OdNovseadvKMUSGrt6KR6tge5FYxY5Irsz9ptfpLhADKVPYjACAefrIWjxp
+	+fLw==
+X-Gm-Message-State: ALKqPwcNis+6lGvL5IRIUZIp0Pb2cC1Ge2VQ3Ij5Z1ob53wVj7TgjzAA
+	Z7TQKrQ1+r2juxgJgeSXg2yjhg==
+X-Google-Smtp-Source: AB8JxZoFeuVnHZmP2RE+lPwwcSGIa1T6hVtXnNSicqL2BS+Hk2uXV0SEQTi7n+wE8MO9WvvTBYbXww==
+X-Received: by 2002:adf:8af0:: with SMTP id
+	z45-v6mr1708170wrz.150.1525968863354; 
+	Thu, 10 May 2018 09:14:23 -0700 (PDT)
+Received: from mueller-a-nb-linux.speedport.ip
+	(p200300F07BC0732689B6120586BBC15E.dip0.t-ipconnect.de.
+	[2003:f0:7bc0:7326:89b6:1205:86bb:c15e])
+	by smtp.gmail.com with ESMTPSA id
+	f143-v6sm1679595wme.43.2018.05.10.09.14.22
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 10 May 2018 09:14:22 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 May 2018 18:14:08 +0200
+Message-Id: <20180510161415.12827-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] icetea7, openjdk-8: Fix depenency to xproto -> xorgproto
+Subject: [PATCH 1/8] xfce4-clipman-plugin/DEPENDS: replace deprecated xproto by xorgproto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,59 +61,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2018 16:10:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 May 2018 16:14:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The latest oe-core has changed the X protocol header provider package
-name.
-
-Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- recipes-core/icedtea/icedtea7-native.inc  | 2 +-
- recipes-core/openjdk/openjdk-8-cross.inc  | 2 +-
- recipes-core/openjdk/openjdk-8-native.inc | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index d4cf7ac..2c9fa92 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -12,7 +12,7 @@ DEPENDS = "virtual/javac-native virtual/java-native classpath-native \
-           "
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb
+index 96bdf0e53..f683f5359 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- PACKAGECONFIG ??= ""
--PACKAGECONFIG[x11] = ",--disable-headful,libx11-native xproto-native libxt-native libxext-native libxrender-native"
-+PACKAGECONFIG[x11] = ",--disable-headful,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
+ inherit xfce-panel-plugin
  
- OEMAKE_BUILD_HEADLESS_ONLY = "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'BUILD_HEADLESS_ONLY=1', d)}"
- CFLAGS_append = "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', ' -DHEADLESS=true', d)}"
-diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-index d70c946..46f13fd 100644
---- a/recipes-core/openjdk/openjdk-8-cross.inc
-+++ b/recipes-core/openjdk/openjdk-8-cross.inc
-@@ -21,7 +21,7 @@ PACKAGECONFIG ??= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
-     gif jpeg png zlib \
- "
--PACKAGECONFIG[x11] = "--with-x,,libx11 xproto libxt libxext libxrender libxtst"
-+PACKAGECONFIG[x11] = "--with-x,,libx11 xorgproto libxt libxext libxrender libxtst"
- PACKAGECONFIG[cups] = "--with-cups,,cups"
- PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib"
+-DEPENDS += "xfconf xproto libxtst"
++DEPENDS += "xfconf xorgproto libxtst"
  
-diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-index d674474..b782c32 100644
---- a/recipes-core/openjdk/openjdk-8-native.inc
-+++ b/recipes-core/openjdk/openjdk-8-native.inc
-@@ -10,7 +10,7 @@ DEPENDS = "\
- SRC_URI_append += "file://handle_extra_output.patch"
- 
- PACKAGECONFIG ??= "gif jpeg png zlib"
--PACKAGECONFIG[x11] = "--with-x,,libx11-native xproto-native libxt-native libxext-native libxrender-native"
-+PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
- PACKAGECONFIG[cups] = "--with-cups,,cups"
- PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
- PACKAGECONFIG[gif] = "--with-giflib=system,--with-giflib=bundled,giflib-native"
+ SRC_URI[md5sum] = "9169140af7c9d3fddd8a5c9e0efb5a61"
+ SRC_URI[sha256sum] = "cf2b45e327e67cc187dcb99a6ef6d95570463045accd24540e17172f005189b3"
 -- 
-2.11.0
+2.14.3
 
 
