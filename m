@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6506D75264
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E6B5752A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 16:14:28 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id n10-v6so5364833wmc.1
+	Thu, 10 May 2018 16:14:29 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id x12-v6so28036408wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 09:14:29 -0700 (PDT)
+	Thu, 10 May 2018 09:14:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=evnC4hzVPJF0yiB+pgmUinUUnV3ON6gG/Xu7xwaM+TM=;
-	b=XzP4OFKCxwjMCim5OPaTuQinUq8gqUnBumrhY1T+n0SdLuqXH6IXYIz/NgX5lNzFdi
-	bVlRYYk5PY9nwsxZQ/oQHJb/QOPN4j0IovxLZ5j3EtTycJCHIKHDFnKM84FUsh2aO326
-	Adfn4HpMV9x1nmHE4W5UFx4mIma86yDsdzaEoCrXPZwAuY+2lsRfdRf0EvcZ10we678B
-	Ad/6dfnFrPFjddQ8X51OZMo2lJ7eY6/QCu8Dc0fIdOCH6908n+WLnXyfsRKyHli2FC+7
-	qSo5Eyko+YM6j6YEjFENpIns7fGNTqoiWgtfnB1rE5MYp/jBfo0//oUMnKU6Ex0Yz6+7
-	BrSA==
+	bh=zkdhyjAJWjaXBXatYXjdZAFW2vjAG5UPc68B2s2nM58=;
+	b=Sh7uVUImpKxlnkXb6EXcDyN7T08oG29/f98mHMSN2N/1ZoBjOZuLaQzmZLnnP93Eqs
+	/Q2W8cft2VnLlCfVHKtfSQyiC9+C9AYHrDAgYyQJEwEYbzOdCTBytSlft0ZlwanpdAwY
+	x8lzJJHq9SuiNwWeKeowdVLaLTbyZUdr86HQcJFInnRK3PF7svNcoGbaR5HtiZX+OTve
+	BdmERgoqut6YtPnVEjISQKlMyIRKy+GguOlwptE0wadtry5bCprWvEdJQCtb4ew9suzi
+	nb2Y6UKtTBQNr2tM8hWzGkkxl8bFTzeI1mi0TzapYTwDEFgRxARM6Ku2QPjI7Zk13UGX
+	gvqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=evnC4hzVPJF0yiB+pgmUinUUnV3ON6gG/Xu7xwaM+TM=;
-	b=VEliQGOIP+97N0GohKPKxTedPAsbAV69IuvPTWuhd4p2i+75HdkAxSxOoF0bN86OHv
-	TumrwTR5tOrPkyMZoVPX8cLL/XahEZyMOgoeb+GFtZSXxWggWN7DoKuyLjRRojgbwOaD
-	pqsqvEZx27b1w3i1uBYSTWZAo4aO4fObK7kpTcCiVGaoH+4EITQX0BpClxMRyBSLHOhA
-	kMuw5Fzy7ZcTmDG2PlDdERaP/78kNDj2Wdg3tQCORSt9NDDqe44z6aW+0FQLHLIVtAfe
-	2JFyWR2YGoV+hFAzVXUTPbRk7sHYEyq5lkaRVyG8/aLII1Z1WZ9n2X8bzxcM5PIOSRiy
-	Mywg==
-X-Gm-Message-State: ALKqPwer3dcXr3kBt3HzUTe6ItbGfSP7GbwSHHqiLYcKRgInfdVGx3WN
-	9TD/4QtofeLxkEBdquRTJSwGfA==
-X-Google-Smtp-Source: AB8JxZrBkZx9B/GlFGSRyjMQmCQhY1W9egrAyk+dpxa3WhcBMcDC+3Hdd0Be6L/IQ0W+SI9M6v6xlQ==
-X-Received: by 2002:a1c:d7d0:: with SMTP id
-	o199-v6mr1590950wmg.61.1525968868708; 
-	Thu, 10 May 2018 09:14:28 -0700 (PDT)
+	bh=zkdhyjAJWjaXBXatYXjdZAFW2vjAG5UPc68B2s2nM58=;
+	b=M7e++KyuRUQUWWAcOukxvnwW/DfeFiYulVX9/CEU2AaYz4sic98pujb0i5xxYhLbbG
+	h915f0sfAPW5OaUUJEXqKDo8bAAd9HhPGtnPnXPrG0lddGUuv1U26gKxSO8Aiy8+c4aR
+	GtoqEtdDy7T2Rt12p/OrVghJkstqKax1g84Dhfgh5wURgfuEwXS0zjeRmu659BlwdOGy
+	KLQu/4A9QVG4qemeC4SCSCxvAqBU8Ehf04ZMDVLR2U4vOjTMgizpFjRqjAFCZlQErZTZ
+	9nIZUrkRClxge3lv8f6KSFEFrB47N9M+ggEi+tcpP+DCggxt+kzRIBygnDv/in5NaqQ/
+	UEVQ==
+X-Gm-Message-State: ALKqPwdWNO0rWiXotc7aTNKAyCaZn0EFPIYlTcjL1B9yIYzpeSsvRJkO
+	i6dWFS8Hs+QlOdq833UOmu8gCA==
+X-Google-Smtp-Source: AB8JxZrtnI2asi43ig7wqQaSAhgUl2lcjLsaT7W3IGFaLB/+kCPR5bRDmoPfb2ycOFfyoDhzmVcjNw==
+X-Received: by 2002:a1c:1c55:: with SMTP id
+	c82-v6mr1725636wmc.69.1525968869798; 
+	Thu, 10 May 2018 09:14:29 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC0732689B6120586BBC15E.dip0.t-ipconnect.de.
 	[2003:f0:7bc0:7326:89b6:1205:86bb:c15e])
 	by smtp.gmail.com with ESMTPSA id
-	f143-v6sm1679595wme.43.2018.05.10.09.14.27
+	f143-v6sm1679595wme.43.2018.05.10.09.14.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 10 May 2018 09:14:28 -0700 (PDT)
+	Thu, 10 May 2018 09:14:29 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 May 2018 18:14:13 +0200
-Message-Id: <20180510161415.12827-6-schnitzeltony@gmail.com>
+Date: Thu, 10 May 2018 18:14:14 +0200
+Message-Id: <20180510161415.12827-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180510161415.12827-1-schnitzeltony@gmail.com>
 References: <20180510161415.12827-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/8] menulibre: update 2.1.5 -> 2.2.0
+Subject: [PATCH 7/8] xfce4-pulseaudio-plugin: update 0.4.0 -> 0.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,30 +68,28 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../menulibre/{menulibre_2.1.5.bb => menulibre_2.2.0.bb}            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-apps/menulibre/{menulibre_2.1.5.bb => menulibre_2.2.0.bb} (80%)
+ ...e4-pulseaudio-plugin_0.4.0.bb => xfce4-pulseaudio-plugin_0.4.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.4.0.bb => xfce4-pulseaudio-plugin_0.4.1.bb} (73%)
 
-diff --git a/meta-xfce/recipes-apps/menulibre/menulibre_2.1.5.bb b/meta-xfce/recipes-apps/menulibre/menulibre_2.2.0.bb
-similarity index 80%
-rename from meta-xfce/recipes-apps/menulibre/menulibre_2.1.5.bb
-rename to meta-xfce/recipes-apps/menulibre/menulibre_2.2.0.bb
-index d1f3471d6..b0e4784fe 100644
---- a/meta-xfce/recipes-apps/menulibre/menulibre_2.1.5.bb
-+++ b/meta-xfce/recipes-apps/menulibre/menulibre_2.2.0.bb
-@@ -13,9 +13,9 @@ inherit distutils3 gtk-icon-cache distro_features_check
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.0.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.1.bb
+similarity index 73%
+rename from meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.0.bb
+rename to meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.1.bb
+index f5417a1a1..b42370764 100644
+--- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.0.bb
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.1.bb
+@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ DEPENDS += "pulseaudio"
  
--SRC_URI = "https://launchpad.net/menulibre/2.1/${PV}/+download/${PN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "efc7edb49bb0e5fea49e158b40573334"
--SRC_URI[sha256sum] = "ef05b2722bab2acb7070d6c8ed0e7bd58bd4a4540bf498af9e889944f9da08b5"
-+SRC_URI = "https://launchpad.net/menulibre/2.2/${PV}/+download/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "9690848dbf9196c3f7baa574e90378d8"
-+SRC_URI[sha256sum] = "546fec87f451c8f5c220d02b1f36dd850f4ce9ab607f8e9711ed8f2009e349fe"
+-SRC_URI[md5sum] = "12f3dd97e02c604e2023b5baf30d4a6c"
+-SRC_URI[sha256sum] = "aef9ad68a0b604a6aeca4c08146f3eb42bedb4fe1c8b65b82679cec0e2fc1cb3"
++SRC_URI[md5sum] = "7df7280c19c2c8b8c5bc4f4f2136d1dd"
++SRC_URI[sha256sum] = "6ca88314dbac3e24c0e1bfc593fad6edb66319766be62e8256c81b0314f049f0"
  
- do_compile() {
- }
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
 -- 
 2.14.3
 
