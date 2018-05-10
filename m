@@ -1,47 +1,50 @@
-Return-Path: <andrew@aj.id.au>
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 61A2974FAC
+Return-Path: <diego.rondini@kynetics.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 146DC751F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 06:38:29 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id 99CEB21C3A;
-	Thu, 10 May 2018 02:38:30 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-	by compute4.internal (MEProxy); Thu, 10 May 2018 02:38:30 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=cc
-	:date:from:in-reply-to:message-id:references:subject:to
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=4fs2tW9Zux+gvy1Nh
-	hzpRO1smQmti5nOIIbNXlIaCvA=; b=AbekQJag8bcWa1wYxGv9BUo0hy+iajVy8
-	byLqr13/tN2rIs+HpPEa+Rld0zXmiePoE0gZpWxuBgKkLW5lN8QlnFAGZM5sqQEq
-	YCtz0pzr9giwrdPEz2o/LaipfdRQvc0MIcT34Ek6EzkaTVDwa/atvY8uY7glwD4o
-	h+UQuae8aUtJj/ptSpQWaeBwrR1P8hHvrwaIyywRspdK97x6bqZCd+Wk5RhiHg3l
-	jZUhrLRyjjvDea8gG47A4nij11iENEHUz/ujk2e9UawT9Xvea7G6CsNOf1WTTjCC
-	LuPlveKvWrrzNzt6uflbwdYvrG/B+9HtKYh++xH7LaQ51f02U517g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:date:from:in-reply-to:message-id
-	:references:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; bh=4fs2tW9Zux+gvy1NhhzpRO1smQmti5nOIIbNXlIaCvA=; b=HJwZf0O+
-	Cl6Rfx78Zl4ue45TS3Gq22lWe43DxcLAwUIyNOjGlbZaCmwHkYIGpIItzUAi+nJU
-	MFJI1LMeRwzDUW80EMy0+RWza6Djs7YFmAXSgGJSu0+QOOQRvk3GVUz2Y+xUnh5o
-	SzG+8nqs92nFVTapS0cdRE0iD6k+PrMkgPutXOeH7+sWvVRi4+AKJHCEYyZucf2U
-	IA01irBPkEjdji6qsMj8UFZDyx+3zgq2ucyUzA8wgVjbATwwPfEIuxfdHdiJ/20c
-	Q4x246ESGTjIJf2fiapbWQiHt06cJpOm6+L6Vjv+Z/Qkd2znBUAfd8h2ICBLbrMa
-	cS+2FyTsPZsVdw==
-X-ME-Sender: <xms:5ujzWu5rOj_Plo-epD_mNTLaN_Caa6B2gqGJIR1uE_lBkM4hBCt8tw>
-Received: from dave.aj.id.au (ppp118-210-26-60.bras1.adl4.internode.on.net
-	[118.210.26.60])
-	by mail.messagingengine.com (Postfix) with ESMTPA id AABBA10253;
-	Thu, 10 May 2018 02:38:28 -0400 (EDT)
-From: Andrew Jeffery <andrew@aj.id.au>
+	Thu, 10 May 2018 08:36:23 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id f8-v6so2862277wmc.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 May 2018 01:36:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=jmLSpPib7pdgkntD3aqjvh1b9qZBj+SK30tUzdV+rS0=;
+	b=Hb++erjYvj12e48WB88lXd1U2ssgKloZuh8ZtQtpO7HRysbjgbfaaAHcbiVBVvP/1P
+	n5QvUheMglm5ZA5PMm18qIZ70kifzrmvqVDeRi+uinnrNr3GwdurJXvOhSJcam2XudqJ
+	hODQCL0KdDMJ+dqiD1E2dMWQP02hxmih7PaNk7463Wsa/fpMfl/TeyCbyey5CFIp9jPc
+	xW4AtrFTso5fgLqCJvrUjiSWcfZoNE18N6tn3mPJpqIA8uy5UM7BxCtT8jxWVQTV6pLB
+	BtVl2kaqQsMbh2ZgC3ckyOtV/gw2gTE7uQD6u5HjJMOFUHYa0np4picGma46E75Sd0q2
+	yKvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jmLSpPib7pdgkntD3aqjvh1b9qZBj+SK30tUzdV+rS0=;
+	b=IfGzG5puR9/7OLR+yQMe5FWzkGFxiYLAGR0P7WltrFTj9sssBGIdgMJrKuGC2g3vEG
+	Fy2ge/VAtPfbmWHiVjQIOzhmUVy8+e8MmEwROMhTgsCWFOsO/i6YDSTbDNzy5H3SeOiv
+	UfUuLybzrMAT9+XNEVlo6pLxiuJLdF5L1n408xEmxArRrgIiHnf2aW35W9T2A6zRvxdz
+	u/5DOt4QCadNMT51HAKptRWacXx+LKNLj+rB8Z4XYDE2dKr3pTIABwRHLunY9e9L25s3
+	KgUsNEnopOfXkCg4Ew7b82ocAwQcZXKNFxVw9QanL/iPjdKoyXoV3HOk1qBXmvLEjSAj
+	LrfA==
+X-Gm-Message-State: ALKqPwdAJ9VBELw2WyDL19r3AyymUhU7kkUUqBvf3l2/8HuT18G3RHyP
+	CfvH5vur1T16++lFTCNji1G4NKMR
+X-Google-Smtp-Source: AB8JxZpC4cXVNcgEwd8qzeEcXIbftLMaPkscYomImC9US1MuPusUfisFyxEU9bIxUQ+hCVinvkLRaQ==
+X-Received: by 2002:a50:8833:: with SMTP id
+	b48-v6mr1126762edb.274.1525941384177; 
+	Thu, 10 May 2018 01:36:24 -0700 (PDT)
+Received: from ip-172-31-7-228.eu-west-1.compute.internal
+	(ec2-54-194-24-197.eu-west-1.compute.amazonaws.com. [54.194.24.197])
+	by smtp.gmail.com with ESMTPSA id
+	c24-v6sm427174ede.3.2018.05.10.01.36.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 10 May 2018 01:36:23 -0700 (PDT)
+From: Diego Rondini <diego.rondini@kynetics.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 May 2018 16:07:18 +0930
-Message-Id: <20180510063718.16913-3-andrew@aj.id.au>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20180510063718.16913-1-andrew@aj.id.au>
-References: <20180510063718.16913-1-andrew@aj.id.au>
-Cc: openbmc@lists.ozlabs.org
-Subject: [meta-python][PATCH v2 3/3] meta-python: Make python-pyflame cope with prelinked ELFs
+Date: Thu, 10 May 2018 08:36:06 +0000
+Message-Id: <1525941366-2432-1-git-send-email-diego.rondini@kynetics.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Diego Rondini <diego.rondini@kynetics.com>
+Subject: [meta-qt5][PATCH] python-pyqt5: update recipe to 5.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,165 +57,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 May 2018 06:38:29 -0000
+X-List-Received-Date: Thu, 10 May 2018 08:36:25 -0000
 
-Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+Update recipe to version 5.10.1, removing upstreamed patches in the process.
+
+Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
 ---
- ...mbol-Account-for-prelinked-shared-objects.patch | 134 +++++++++++++++++++++
- .../python/python-pyflame_1.6.6.bb                 |   1 +
- 2 files changed, 135 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyflame-1.6.6/0001-symbol-Account-for-prelinked-shared-objects.patch
+ ...sip-fix-build-with-accessibility-disabled.patch | 35 ----------------------
+ recipes-python/pyqt5/files/fix-sm.patch            | 17 -----------
+ ...ython-pyqt5_5.8.2.bb => python-pyqt5_5.10.1.bb} |  8 ++---
+ 3 files changed, 3 insertions(+), 57 deletions(-)
+ delete mode 100644 recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch
+ delete mode 100644 recipes-python/pyqt5/files/fix-sm.patch
+ rename recipes-python/pyqt5/{python-pyqt5_5.8.2.bb => python-pyqt5_5.10.1.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyflame-1.6.6/0001-symbol-Account-for-prelinked-shared-objects.patch b/meta-python/recipes-devtools/python/python-pyflame-1.6.6/0001-symbol-Account-for-prelinked-shared-objects.patch
-new file mode 100644
-index 000000000000..3eefc9cb9830
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyflame-1.6.6/0001-symbol-Account-for-prelinked-shared-objects.patch
-@@ -0,0 +1,134 @@
-+From 007965d341349679607699d005c4af811b2c419a Mon Sep 17 00:00:00 2001
-+From: Andrew Jeffery <andrew@aj.id.au>
-+Date: Fri, 4 May 2018 11:23:53 +0930
-+Subject: [PATCH] symbol: Account for prelinked shared objects
-+
-+Some projects, such as those derived from Yocto, tend to prelink their
-+binaries and libraries to reduce runtime overhead. Currently this trips
-+up pyflame in its symbol address calculations, and leads to ptrace
-+failures due to spurious addresses:
-+
-+   $ pyflame -t python -c "print 'foo'"
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   Unexpected ptrace(2) exception: Failed to PTRACE_PEEKDATA (pid 1482, addr 0x9f9b1d70): Input/output error
-+   ...
-+
-+Add support for reading a prelinked base p_vaddr out of the ELF and
-+adjust the PyAddresses values accordingly.
-+
-+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
-+---
-+ src/symbol.cc | 15 +++++++++++++++
-+ src/symbol.h  | 29 ++++++++++++++++++++++++++++-
-+ 2 files changed, 43 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/symbol.cc b/src/symbol.cc
-+index 125174efeeb5..39c3e8132dd1 100644
-+--- a/src/symbol.cc
-++++ b/src/symbol.cc
-+@@ -166,6 +166,17 @@ PyABI ELF::WalkTable(int sym, int str, PyAddresses *addrs) {
-+   return abi;
-+ }
-+ 
-++addr_t ELF::GetBaseAddress() {
-++  int32_t phnum = hdr()->e_phnum;
-++  int32_t i;
-++  for (i = 0; i < phnum && phdr(i)->p_type != PT_LOAD; i++) {
-++  }
-++  if (i == phnum) {
-++    throw FatalException("Failed to find PT_LOAD entry in program headers");
-++  }
-++  return phdr(i)->p_vaddr;
-++}
-++
-+ PyAddresses ELF::GetAddresses(PyABI *abi) {
-+   PyAddresses addrs;
-+   PyABI detected_abi = WalkTable(dynsym_, dynstr_, &addrs);
-+@@ -176,6 +187,10 @@ PyAddresses ELF::GetAddresses(PyABI *abi) {
-+   if (abi != nullptr) {
-+     *abi = detected_abi;
-+   }
-++  // Handle prelinked shared objects
-++  if (hdr()->e_type == ET_DYN) {
-++    return addrs - GetBaseAddress();
-++  }
-+   return addrs;
-+ }
-+ }  // namespace pyflame
-+diff --git a/src/symbol.h b/src/symbol.h
-+index 124853bcc1c1..bb92b9a2604b 100644
-+--- a/src/symbol.h
-++++ b/src/symbol.h
-+@@ -28,15 +28,19 @@
-+ 
-+ #if USE_ELF64
-+ #define ehdr_t Elf64_Ehdr
-++#define phdr_t Elf64_Phdr
-+ #define shdr_t Elf64_Shdr
-+ #define dyn_t Elf64_Dyn
-+ #define sym_t Elf64_Sym
-++#define addr_t Elf64_Addr
-+ #define ARCH_ELFCLASS ELFCLASS64
-+ #else
-+ #define ehdr_t Elf32_Ehdr
-++#define phdr_t Elf32_Phdr
-+ #define shdr_t Elf32_Shdr
-+ #define dyn_t Elf32_Dyn
-+ #define sym_t Elf32_Sym
-++#define addr_t Elf32_Addr
-+ #define ARCH_ELFCLASS ELFCLASS32
-+ #endif
-+ 
-+@@ -67,8 +71,18 @@ struct PyAddresses {
-+         interp_head_hint(0),
-+         pie(false) {}
-+ 
-++  PyAddresses operator-(const unsigned long base) const {
-++    PyAddresses res(*this);
-++    res.tstate_addr = this->tstate_addr == 0 ? 0 : this->tstate_addr - base;
-++    res.interp_head_addr =
-++        this->interp_head_addr == 0 ? 0 : this->interp_head_addr - base;
-++    res.interp_head_fn_addr =
-++        this->interp_head_fn_addr == 0 ? 0 : this->interp_head_fn_addr - base;
-++    return res;
-++  }
-++
-+   PyAddresses operator+(const unsigned long base) const {
-+-    PyAddresses res;
-++    PyAddresses res(*this);
-+     res.tstate_addr = this->tstate_addr == 0 ? 0 : this->tstate_addr + base;
-+     res.interp_head_addr =
-+         this->interp_head_addr == 0 ? 0 : this->interp_head_addr + base;
-+@@ -113,6 +127,9 @@ class ELF {
-+   // ABI.
-+   PyAddresses GetAddresses(PyABI *abi);
-+ 
-++  // Extract the base load address from the Program Header table
-++  addr_t GetBaseAddress();
-++
-+  private:
-+   void *addr_;
-+   size_t length_;
-+@@ -122,6 +139,16 @@ class ELF {
-+     return reinterpret_cast<const ehdr_t *>(addr_);
-+   }
-+ 
-++  inline const phdr_t *phdr(int idx) const {
-++    if (idx < 0) {
-++      std::ostringstream ss;
-++      ss << "Illegal phdr index: " << idx;
-++      throw FatalException(ss.str());
-++    }
-++    return reinterpret_cast<const phdr_t *>(p() + hdr()->e_phoff +
-++                                            idx * hdr()->e_phentsize);
-++  }
-++
-+   inline const shdr_t *shdr(int idx) const {
-+     if (idx < 0) {
-+       std::ostringstream ss;
-+-- 
-+2.14.1
-+
-diff --git a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
-index 7a6d3b09962f..abf3ed7fee71 100644
---- a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
-+++ b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
-@@ -1,3 +1,4 @@
- require python-pyflame.inc
+diff --git a/recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch b/recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch
+deleted file mode 100644
+index 7e1c7bf..0000000
+--- a/recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 8a2f852417414e19d060da66cd7c5cba76e43c7d Mon Sep 17 00:00:00 2001
+-From: Diego Rondini <diego.rondini@kynetics.com>
+-Date: Wed, 19 Jul 2017 14:17:51 +0200
+-Subject: [PATCH] qtabbar.sip: fix build with accessibility disabled
+-
+-Upstream-Status: Submitted
+-
+-Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
+----
+- sip/QtWidgets/qtabbar.sip | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/sip/QtWidgets/qtabbar.sip b/sip/QtWidgets/qtabbar.sip
+-index ffe2d3b..80ad816 100644
+---- a/sip/QtWidgets/qtabbar.sip
+-+++ b/sip/QtWidgets/qtabbar.sip
+-@@ -166,11 +166,15 @@ protected:
+- 
+- public:
+- %If (Qt_5_8_0 -)
+-+%If (PyQt_Accessibility)
+-     QString accessibleTabName(int index) const;
+- %End
+-+%End
+- %If (Qt_5_8_0 -)
+-+%If (PyQt_Accessibility)
+-     void setAccessibleTabName(int index, const QString &name);
+- %End
+-+%End
+- 
+- private:
+-     QTabBar(const QTabBar &);
+--- 
+-2.7.4
+-
+diff --git a/recipes-python/pyqt5/files/fix-sm.patch b/recipes-python/pyqt5/files/fix-sm.patch
+deleted file mode 100644
+index f2936a2..0000000
+--- a/recipes-python/pyqt5/files/fix-sm.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+---- PyQt5_gpl-5.8.2/sip/QtGui/qguiapplication.sip.orig	2017-05-13 13:28:42.523392315 -0400
+-+++ PyQt5_gpl-5.8.2/sip/QtGui/qguiapplication.sip	2017-05-13 13:30:08.081207211 -0400
+-@@ -270,12 +270,14 @@
+- %End
+- 
+- public:
+-+%If (PyQt_SessionManager)
+- %If (Qt_5_6_0 -)
+-     static bool isFallbackSessionManagementEnabled();
+- %End
+- %If (Qt_5_6_0 -)
+-     static void setFallbackSessionManagementEnabled(bool);
+- %End
+-+%End
+- 
+- signals:
+- %If (Qt_5_6_0 -)
+diff --git a/recipes-python/pyqt5/python-pyqt5_5.8.2.bb b/recipes-python/pyqt5/python-pyqt5_5.10.1.bb
+similarity index 88%
+rename from recipes-python/pyqt5/python-pyqt5_5.8.2.bb
+rename to recipes-python/pyqt5/python-pyqt5_5.10.1.bb
+index fdfa120..9a0f849 100644
+--- a/recipes-python/pyqt5/python-pyqt5_5.8.2.bb
++++ b/recipes-python/pyqt5/python-pyqt5_5.10.1.bb
+@@ -10,11 +10,9 @@ DEPENDS = "sip sip-native qtbase python"
  
- SRC_URI += "file://0001-ptrace-Abstract-over-user_regs_struct-name-which-dif.patch"
-+SRC_URI += "file://0001-symbol-Account-for-prelinked-shared-objects.patch"
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/pyqt/PyQt5_gpl-${PV}.tar.gz \
+-    file://fix-sm.patch \
+-    file://0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch \
+ "
+-SRC_URI[md5sum] = "c3048e9d242f3e72fd393630da1d971a"
+-SRC_URI[sha256sum] = "ebd70515b30bbd6098fee29e6271a6696b1183c5530ee30e6ba9aaab195536e8"
++SRC_URI[md5sum] = "be36c2abaffc9daa8b993f1ca982968f"
++SRC_URI[sha256sum] = "9932e971e825ece4ea08f84ad95017837fa8f3f29c6b0496985fa1093661e9ef"
+ 
+ S = "${WORKDIR}/PyQt5_gpl-${PV}"
+ 
+@@ -63,7 +61,7 @@ do_install() {
+     oe_runmake install
+ }
+ 
+-RDEPENDS_${PN} = "python-core python-sip"
++RDEPENDS_${PN} = "python-core python-sip qtbase"
+ 
+ FILES_${PN} += "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/PyQt5/"
+ FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*/.debug/"
 -- 
-2.14.1
+2.7.4
 
 
