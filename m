@@ -1,47 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A693577E8C;
-	Fri, 11 May 2018 17:45:07 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id p9-v6so2720891pgc.9;
-	Fri, 11 May 2018 10:45:08 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 59B4E783FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2018 19:21:51 +0000 (UTC)
+Received: by mail-wr0-f179.google.com with SMTP id p4-v6so6348051wrh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2018 12:21:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Vja+I6QGUQ9jB1TNKnYfannnSfkj7L4pTEvjtCQSmkQ=;
-	b=pGhvLSHtJa5xufi0HWenAP3tQh7bqUc/kBqPb5AtxWgj8Z9ELrx7LQMZoSgcjex0bV
-	lPqYHqRy3elsLIOSzA8n4hJ7s5jh0+K3tqAJGid4pvEVXV7zBH+oFBqf9CiIZh/f36zY
-	HtDtnPrgdgdd2f/XxSAmpeC+BTXtwoHHLB/a07YSVEWAANZ7Zpm78Y1NvH4l9CkFO+gV
-	1q74G0sKG7+q5UeljkBm7i6Qbkk04v1K1DhTrN92Bo7BAkOau7TBanJ82ZTgfJW1LtsA
-	uMzPP5pHKPWjRelAEy8xOyZanuILcolv1Ty085LqxGV1RIuraFImFm/0SEOlgiY/qwZ0
-	DMig==
+	h=from:to:cc:subject:date:message-id;
+	bh=zhP1FWX+5liB3mhRPUDKH5Kz+4i/tWQztUxiqfB3PTg=;
+	b=B3cPmuiFU57gfgL+pZNVpWGOb2wJEJAhDX3lY9Bx/Z7kqd07yFQPuIa0gUY+pMmwxr
+	DZhVqsRdMEkCGIWS7jD769x12YvS9TA4sHvGht/NB/bQcymOe7nEsZsb4KwM43EDtUvZ
+	Awo0eyD2yExjX1Os3JOSdvhjY/W2wiUF++W1rPPPUIbOT4A+nn2tO7OCWlwgw4mMou0y
+	L3F/rfO/w2m5DjcVtWbyMJK+nLz2oOLsGqi0fBHT8L0gMLOf2qwU7PLZzNEJ5Y0ropU6
+	RqAlcXxNg1mXv2EdSKxEvwGzm7ZFUBwAkEsjGuIPC3bg6Udt+/EO4kGn7Qs1QJMRUVsc
+	3LGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Vja+I6QGUQ9jB1TNKnYfannnSfkj7L4pTEvjtCQSmkQ=;
-	b=sMcQZDKYVfh41KI1qhrngnDZuzQfeahHzFTSiW75OyxP5IXx1vB+WqgJCsrFEGlilL
-	lNQ6JVhf8Ps3+lgCHs0uGxXe1e1adQy0RmFZMbWY6OVflyOOYKH+y8to8NIThxxOI9GH
-	Yp9Q6/yZxkV9+KuHHasxn+WeuZmUjh6WJgaS235y57TYTJLz3R2D41CjSElJsVq/e7oQ
-	lUDrgoTiyw/ot7Nnq8lSK7rlQW/MvfD5JNFa+sWt356mif8YoV2xxVurukjxAmHSXvk+
-	OJ+xYP4Dbe+0Lep2/yigTysD2jT9DUaDD1FYS8qCHDdCxCZojcOy7hmxFteu4O02bLMd
-	dX6A==
-X-Gm-Message-State: ALKqPwfpROnmqbMT2D8W18WkX+W6C6Ze6iGpU5KpLQcAls1bf6P4shH3
-	9+RQN93D4LAZkoXVNXX8Xm2NsThli4Xsu81RTcg=
-X-Google-Smtp-Source: AB8JxZpqCIt80FcDNHrbfLdRwF0eC8KdJG4hx6G3aejzBHOs2Li+qEX2n1eVgWcvVs732fOl2AM+aT8hA3mGJDu5VhA=
-X-Received: by 2002:a65:58c2:: with SMTP id e2-v6mr10095pgu.204.1526060708050; 
-	Fri, 11 May 2018 10:45:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.236.139.145 with HTTP; Fri, 11 May 2018 10:44:37 -0700 (PDT)
-In-Reply-To: <CA+chaQf=rcC_tU+vJs+Ccas86OiV8zZ901sxnAvqA=AVPyqLGw@mail.gmail.com>
-References: <152585929079.27246.16259308060481767272@git.openembedded.org>
-	<20180509094811.2F73823742D@git.openembedded.org>
-	<CA+chaQf=rcC_tU+vJs+Ccas86OiV8zZ901sxnAvqA=AVPyqLGw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 11 May 2018 10:44:37 -0700
-Message-ID: <CAMKF1spEW+dY4R+YObdtLr+NXK=D8MHK1gBjeBWD1hD-wBrTZA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] [openembedded-core] 03/19: gcc-runtime: Disable gcc version of libssp
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=zhP1FWX+5liB3mhRPUDKH5Kz+4i/tWQztUxiqfB3PTg=;
+	b=lsdxqNBLe+1866QJTOLefUeu0VjupTEF0eoha2MDO53tN6GzcHyBCL+gIgDb+Cb+ur
+	nmNDojRc3NYe3IWOh454fch+ASAwRCgnqJKZGw+Im8QF3Tp3pzaLo/vW5EWZ4SHHTqke
+	LqBJz5KHbq2wwJ7QKVjba8Of0b/piJL2M6hqSa1uHKHGmWia/vaX1x7bKtr3ItSs7kyg
+	no/uGoB9ZNbRR/yfEzgGmfPHQ5RtQ4iGesoW1ZCKyNr11Xj8yRKe5rISi605l7k0DZyQ
+	xLVHZv0zl4O7VeyTx4DH0ih7+2cOjRmUHBAOpuD4gi4C5+dDOc1cqfMam4haLS0VTJ3m
+	VjgQ==
+X-Gm-Message-State: ALKqPweZDektG8KNzoF+HnOu9yxZwyhLNOLsk/rbM8G12BFyUwqmIsb6
+	6FiXkWxOn5rjyg+xAAdlKoPeHw==
+X-Google-Smtp-Source: AB8JxZpnHucENq7nQrt5n+JxMGquExDG1qb2VoORNAvJ2Sok18KxQOQf+XurJUgW3mbnMvRPy+j0vA==
+X-Received: by 2002:adf:9aea:: with SMTP id a97-v6mr215613wrc.21.1526066511207;
+	Fri, 11 May 2018 12:21:51 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	u69-v6sm2038386wma.37.2018.05.11.12.21.49
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 11 May 2018 12:21:50 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 May 2018 19:21:37 +0000
+Message-Id: <20180511192145.7811-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-networking][PATCH 1/9] spice: import from meta-cloud-services
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,369 +54,500 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 17:45:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 11 May 2018 19:21:51 -0000
 
-On Fri, May 11, 2018 at 3:23 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Should perl-ptest runtime depend on libssp with these changes applied?
->
+* http://git.yoctoproject.org/cgit/cgit.cgi/meta-cloud-services/commit/recipes-support/spice/spice_git.bb?id=19f0c979abbc72a300c0b1cb92f9328f96728f5a
+* will be used by qemu-native to provide a way for headless servers
+  to export accelerated (virglrenderer) graphics to remove clients
 
-it should not. We use ssp impl directly from glibc/musl now. libssp
-should be removed from rdeps.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...n-printf-to-keep-compatibility-betwe.patch |  72 +++++++++++++
+ ...x-BITMAP_FMT_IS_RGB-defined-but-not-.patch |  29 +++++
+ .../files/Fix-build-issues-with-gcc-7.patch   |  59 +++++++++++
+ ...d-allow-separated-src-and-build-dirs.patch |  62 +++++++++++
+ ...d-subdir-objects-to-AM_INIT_AUTOMAKE.patch |  29 +++++
+ .../spice/files/spice-fix-CVE-2013-4282.patch | 100 ++++++++++++++++++
+ .../recipes-support/spice/spice_git.bb        |  76 +++++++++++++
+ 7 files changed, 427 insertions(+)
+ create mode 100644 meta-networking/recipes-support/spice/files/0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch
+ create mode 100644 meta-networking/recipes-support/spice/files/0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch
+ create mode 100644 meta-networking/recipes-support/spice/files/Fix-build-issues-with-gcc-7.patch
+ create mode 100644 meta-networking/recipes-support/spice/files/build-allow-separated-src-and-build-dirs.patch
+ create mode 100644 meta-networking/recipes-support/spice/files/configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch
+ create mode 100644 meta-networking/recipes-support/spice/files/spice-fix-CVE-2013-4282.patch
+ create mode 100644 meta-networking/recipes-support/spice/spice_git.bb
 
-> Or should there be something like VIRTUAL-RUNTIME_libssp in e.g.
-> meta/conf/distro/include/tclibc-glibc.inc to replace RUNTIMELIBSSP:
-> meta/recipes-devtools/gcc/gcc-runtime.inc:RUNTIMELIBSSP ?= ""
-> meta/recipes-devtools/gcc/gcc-runtime.inc:RUNTIMELIBSSP_mingw32 ?= "libssp"
->
-> and to be used from perl-ptest?
-> meta/recipes-devtools/perl/perl-ptest.inc:RDEPENDS_${PN}-ptest +=
-> "${PN}-modules ${PN}-doc ${PN}-misc sed libssp"
->
-> I've noticed this in do_rootfs failure:
->
->  * Solver encountered 1 problem(s):
->  * Problem 1/1:
->  *   - nothing provides libssp needed by perl-ptest-5.24.1-r0.3.raspberrypi3
->
->
->
-> On Wed, May 9, 2018 at 11:48 AM <git@git.openembedded.org> wrote:
->>
->> This is an automated email from the git hooks/post-receive script.
->>
->> rpurdie pushed a commit to branch master
->> in repository openembedded-core.
->>
->> commit 6c14f99936f8c8c9b9d9f40a6b0c69675ea9a566
->> Author: Khem Raj <raj.khem@gmail.com>
->> AuthorDate: Fri Apr 13 22:39:07 2018 -0700
->>
->>     gcc-runtime: Disable gcc version of libssp
->>
->>     libssp is implemented fully in glibc as well as in musl
->>     so we really do not need the gcc version of this library
->>     except may be for mingw, where we keep it enabled anyway
->>     gcc in OE is built with the knowledge that C library
->>     already provides libssp implementation, we should therefore
->>     not need the gcc implementation of same.
->>
->>     libssp_nonshared piece is a detail which is needed when gcc
->>     is the compiler, in glibc this is part of libc_nonshared.a
->>     already and libc_nonshared.a is linked always when linking
->>     with -lc becuase libc.so in glibc is actually a linker script
->>
->>     GROUP ( /usr/lib/libc.so.6 /usr/lib/libc_nonshared.a  AS_NEEDED (
->> /usr/lib/ld-linux-x86-64.so.2 ) )
->>
->>     which automatically links in the needed runtime bits, this however
->>     is not the case for musl, where core SSP APIs are implemented in full
->>     but compiler specific runtime isn't, for this we add a new package
->>     called libssp_nonshared which generate the needed runtime stub
->>     and gcc is already carrying patch to link to libssp_nonshared.a
->>     on musl
->>
->>     This should fix a long standing problem where static PIE executable
->>     were not buildable with OE since it was conflicting SSP implementation
->>     one from C library and the other one from gcc and we end up with
->>     duplicate symbol errors during linking.
->>
->>     Backport a patch from trunk which enhances enable|disable-libssp
->>     to not only disable building libssp but also not emit the gcc
->>     specs to use it for subsequent linking when stack-protector options
->>     are used on compiler cmdline
->>
->>     Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta/recipes-devtools/gcc/gcc-7.3.inc              |   7 +-
->>  ...049-gcc-override-TARGET_LIBC_PROVIDES_SSP.patch | 204
->> +++++++++++++++++++++
->>  meta/recipes-devtools/gcc/gcc-runtime.inc          |   4 +-
->>  3 files changed, 212 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta/recipes-devtools/gcc/gcc-7.3.inc
->> b/meta/recipes-devtools/gcc/gcc-7.3.inc
->> index d968c32..0586182 100644
->> --- a/meta/recipes-devtools/gcc/gcc-7.3.inc
->> +++ b/meta/recipes-devtools/gcc/gcc-7.3.inc
->> @@ -72,6 +72,7 @@ SRC_URI = "\
->>
->> file://0045-Link-libgcc-using-LDFLAGS-not-just-SHLIB_LDFLAGS.patch \
->>             file://0047-sync-gcc-stddef.h-with-musl.patch \
->>             file://0048-gcc-Enable-static-PIE.patch \
->> +           file://0049-gcc-override-TARGET_LIBC_PROVIDES_SSP.patch \
->>             file://fix-segmentation-fault-precompiled-hdr.patch \
->>             file://no-sse-fix-test-case-failures.patch \
->>             ${BACKPORTS} \
->> @@ -93,10 +94,12 @@ FORTRAN = ""
->>  JAVA = ""
->>
->>  LTO = "--enable-lto"
->> +SSP ?= "--disable-libssp"
->> +SSP_mingw32 = "--enable-libssp"
->>
->>  EXTRA_OECONF_BASE = "\
->>      ${LTO} \
->> -    --enable-libssp \
->> +    ${SSP} \
->>      --enable-libitm \
->>      --disable-bootstrap \
->>      --disable-libmudflap \
->> @@ -120,7 +123,7 @@ EXTRA_OECONF_INITIAL = "\
->>      --disable-plugin \
->>      --enable-decimal-float=no \
->>      --without-isl \
->> -    gcc_cv_libc_provides_ssp=yes \
->> +    --disable-libssp \
->>  "
->>
->>  EXTRA_OECONF_PATHS = "\
->> diff --git
->> a/meta/recipes-devtools/gcc/gcc-7.3/0049-gcc-override-TARGET_LIBC_PROVIDES_SSP.patch
->> b/meta/recipes-devtools/gcc/gcc-7.3/0049-gcc-override-TARGET_LIBC_PROVIDES_SSP.patch
->> new file mode 100644
->> index 0000000..7c53c95
->> --- /dev/null
->> +++
->> b/meta/recipes-devtools/gcc/gcc-7.3/0049-gcc-override-TARGET_LIBC_PROVIDES_SSP.patch
->> @@ -0,0 +1,204 @@
->> +From 9815bd97561c778ee0bc0c17f245e88e66570111 Mon Sep 17 00:00:00 2001
->> +From: sandra <sandra@138bc75d-0d04-0410-961f-82ee72b054a4>
->> +Date: Wed, 1 Nov 2017 02:14:19 +0000
->> +Subject: [PATCH] 2017-10-31  Sandra Loosemore  <sandra@codesourcery.com>
->> +
->> +       gcc/
->> +       * configure.ac (--enable-libssp): New.
->> +       (gcc_cv_libc_provides_ssp): Check for explicit setting before
->> +       trying to determine target-specific default.  Adjust indentation.
->> +       * configure: Regenerated.
->> +       * doc/install.texi (Configuration): Expand --disable-libssp
->> +       documentation.
->> +
->> +
->> +git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@254288
->> 138bc75d-0d04-0410-961f-82ee72b054a4
->> +---
->> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> +Upstream-Status: Backport [https://patchwork.ozlabs.org/patch/823049/]
->> +
->> + gcc/ChangeLog        |  9 +++++++++
->> + gcc/configure        | 26 +++++++++++++++++++++++---
->> + gcc/configure.ac     | 24 ++++++++++++++++++++----
->> + gcc/doc/install.texi |  3 ++-
->> + 4 files changed, 54 insertions(+), 8 deletions(-)
->> +
->> +Index: gcc-7.3.0/gcc/configure.ac
->> +===================================================================
->> +--- gcc-7.3.0.orig/gcc/configure.ac
->> ++++ gcc-7.3.0/gcc/configure.ac
->> +@@ -5719,10 +5719,25 @@ if test x$gcc_cv_solaris_crts = xyes; th
->> +           [Define if the system-provided CRTs are present on Solaris.])
->> + fi
->> +
->> ++AC_ARG_ENABLE(libssp,
->> ++[AS_HELP_STRING([--enable-libssp], [enable linking against libssp])],
->> ++[case "${enableval}" in
->> ++  yes|no)
->> ++    ;;
->> ++  *)
->> ++    AC_MSG_ERROR([unknown libssp setting $enableval])
->> ++    ;;
->> ++esac], [])
->> ++
->> + # Test for stack protector support in target C library.
->> + AC_CACHE_CHECK(__stack_chk_fail in target C library,
->> +-      gcc_cv_libc_provides_ssp,
->> +-      [gcc_cv_libc_provides_ssp=no
->> ++  gcc_cv_libc_provides_ssp,
->> ++  [gcc_cv_libc_provides_ssp=no
->> ++  if test "x$enable_libssp" = "xno"; then
->> ++    gcc_cv_libc_provides_ssp=yes
->> ++  elif test "x$enable_libssp" = "xyes"; then
->> ++    gcc_cv_libc_provides_ssp=no
->> ++  else
->> +     case "$target" in
->> +        *-*-musl*)
->> +        # All versions of musl provide stack protector
->> +@@ -5759,8 +5774,9 @@ AC_CACHE_CHECK(__stack_chk_fail in targe
->> +        AC_CHECK_FUNC(__stack_chk_fail,[gcc_cv_libc_provides_ssp=yes],
->> +            [echo "no __stack_chk_fail on this target"])
->> +         ;;
->> +-  *) gcc_cv_libc_provides_ssp=no ;;
->> +-    esac])
->> ++       *) gcc_cv_libc_provides_ssp=no ;;
->> ++    esac
->> ++  fi])
->> +
->> + if test x$gcc_cv_libc_provides_ssp = xyes; then
->> +   AC_DEFINE(TARGET_LIBC_PROVIDES_SSP, 1,
->> +Index: gcc-7.3.0/gcc/doc/install.texi
->> +===================================================================
->> +--- gcc-7.3.0.orig/gcc/doc/install.texi
->> ++++ gcc-7.3.0/gcc/doc/install.texi
->> +@@ -1658,7 +1658,8 @@ not be built.
->> +
->> + @item --disable-libssp
->> + Specify that the run-time libraries for stack smashing protection
->> +-should not be built.
->> ++should not be built or linked against.  On many targets library support
->> ++is provided by the C library instead.
->> +
->> + @item --disable-libquadmath
->> + Specify that the GCC quad-precision math library should not be built.
->> +Index: gcc-7.3.0/gcc/configure
->> +===================================================================
->> +--- gcc-7.3.0.orig/gcc/configure
->> ++++ gcc-7.3.0/gcc/configure
->> +@@ -940,6 +940,7 @@ enable_fix_cortex_a53_843419
->> + with_glibc_version
->> + enable_gnu_unique_object
->> + enable_linker_build_id
->> ++enable_libssp
->> + enable_default_ssp
->> + with_long_double_128
->> + with_gc
->> +@@ -1679,6 +1680,7 @@ Optional Features:
->> +                           extension on glibc systems
->> +   --enable-linker-build-id
->> +                           compiler will always pass --build-id to linker
->> ++  --enable-libssp         enable linking against libssp
->> +   --enable-default-ssp    enable Stack Smashing Protection as default
->> +   --enable-maintainer-mode
->> +                           enable make rules and dependencies not useful
->> (and
->> +@@ -18450,7 +18452,7 @@ else
->> +   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
->> +   lt_status=$lt_dlunknown
->> +   cat > conftest.$ac_ext <<_LT_EOF
->> +-#line 18436 "configure"
->> ++#line 18455 "configure"
->> + #include "confdefs.h"
->> +
->> + #if HAVE_DLFCN_H
->> +@@ -18556,7 +18558,7 @@ else
->> +   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
->> +   lt_status=$lt_dlunknown
->> +   cat > conftest.$ac_ext <<_LT_EOF
->> +-#line 18542 "configure"
->> ++#line 18561 "configure"
->> + #include "confdefs.h"
->> +
->> + #if HAVE_DLFCN_H
->> +@@ -25234,6 +25236,7 @@ $as_echo "#define HAVE_AS_SPARC5_VIS4 1"
->> +
->> + fi
->> +
->> ++
->> +     { $as_echo "$as_me:${as_lineno-$LINENO}: checking assembler for
->> SPARC6 instructions" >&5
->> + $as_echo_n "checking assembler for SPARC6 instructions... " >&6; }
->> + if test "${gcc_cv_as_sparc_sparc6+set}" = set; then :
->> +@@ -25270,6 +25273,7 @@ $as_echo "#define HAVE_AS_SPARC6 1" >>co
->> +
->> + fi
->> +
->> ++
->> +     { $as_echo "$as_me:${as_lineno-$LINENO}: checking assembler for LEON
->> instructions" >&5
->> + $as_echo_n "checking assembler for LEON instructions... " >&6; }
->> + if test "${gcc_cv_as_sparc_leon+set}" = set; then :
->> +@@ -28947,6 +28951,18 @@ $as_echo "#define HAVE_SOLARIS_CRTS 1" >
->> +
->> + fi
->> +
->> ++# Check whether --enable-libssp was given.
->> ++if test "${enable_libssp+set}" = set; then :
->> ++  enableval=$enable_libssp; case "${enableval}" in
->> ++  yes|no)
->> ++    ;;
->> ++  *)
->> ++    as_fn_error "unknown libssp setting $enableval" "$LINENO" 5
->> ++    ;;
->> ++esac
->> ++fi
->> ++
->> ++
->> + # Test for stack protector support in target C library.
->> + { $as_echo "$as_me:${as_lineno-$LINENO}: checking __stack_chk_fail in
->> target C library" >&5
->> + $as_echo_n "checking __stack_chk_fail in target C library... " >&6; }
->> +@@ -28954,6 +28970,11 @@ if test "${gcc_cv_libc_provides_ssp+set}
->> +   $as_echo_n "(cached) " >&6
->> + else
->> +   gcc_cv_libc_provides_ssp=no
->> ++  if test "x$enable_libssp" = "xno"; then
->> ++    gcc_cv_libc_provides_ssp=yes
->> ++  elif test "x$enable_libssp" = "xyes"; then
->> ++    gcc_cv_libc_provides_ssp=no
->> ++  else
->> +     case "$target" in
->> +        *-*-musl*)
->> +        # All versions of musl provide stack protector
->> +@@ -29001,8 +29022,9 @@ else
->> + fi
->> +
->> +         ;;
->> +-  *) gcc_cv_libc_provides_ssp=no ;;
->> ++       *) gcc_cv_libc_provides_ssp=no ;;
->> +     esac
->> ++  fi
->> + fi
->> + { $as_echo "$as_me:${as_lineno-$LINENO}: result:
->> $gcc_cv_libc_provides_ssp" >&5
->> + $as_echo "$gcc_cv_libc_provides_ssp" >&6; }
->> +@@ -29037,18 +29059,15 @@ fi
->> +
->> +
->> + # Test for <sys/sdt.h> on the target.
->> +-
->> +-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking sys/sdt.h in the
->> target C library" >&5
->> +-$as_echo_n "checking sys/sdt.h in the target C library... " >&6; }
->> +-have_sys_sdt_h=no
->> ++#GCC_TARGET_TEMPLATE([HAVE_SYS_SDT_H])
->> ++#AC_MSG_CHECKING(sys/sdt.h in the target C library)
->> ++#have_sys_sdt_h=no
->> + #if test -f $target_header_dir/sys/sdt.h; then
->> + #  have_sys_sdt_h=yes
->> +-#
->> +-#$as_echo "#define HAVE_SYS_SDT_H 1" >>confdefs.h
->> +-#
->> ++#  AC_DEFINE(HAVE_SYS_SDT_H, 1,
->> ++#            [Define if your target C library provides sys/sdt.h])
->> + #fi
->> +-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $have_sys_sdt_h" >&5
->> +-$as_echo "$have_sys_sdt_h" >&6; }
->> ++#AC_MSG_RESULT($have_sys_sdt_h)
->> +
->> + # Check if TFmode long double should be used by default or not.
->> + # Some glibc targets used DFmode long double, but with glibc 2.4
->> diff --git a/meta/recipes-devtools/gcc/gcc-runtime.inc
->> b/meta/recipes-devtools/gcc/gcc-runtime.inc
->> index 7629fa5..72b8081 100644
->> --- a/meta/recipes-devtools/gcc/gcc-runtime.inc
->> +++ b/meta/recipes-devtools/gcc/gcc-runtime.inc
->> @@ -22,8 +22,10 @@ RUNTIMELIBITM_nios2 = ""
->>  RUNTIMELIBITM_microblaze = ""
->>  RUNTIMELIBITM_riscv32 = ""
->>  RUNTIMELIBITM_riscv64 = ""
->> +RUNTIMELIBSSP ?= ""
->> +RUNTIMELIBSSP_mingw32 ?= "libssp"
->>
->> -RUNTIMETARGET = "libssp libstdc++-v3 libgomp libatomic ${RUNTIMELIBITM} \
->> +RUNTIMETARGET = "${RUNTIMELIBSSP} libstdc++-v3 libgomp libatomic
->> ${RUNTIMELIBITM} \
->>      ${@bb.utils.contains_any('FORTRAN', [',fortran',',f77'],
->> 'libquadmath', '', d)} \
->>  "
->>  RUNTIMETARGET_append_x86 = " libmpx"
->>
->> --
->> To stop receiving notification emails like this one, please contact
->> the administrator of this repository.
->> --
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+diff --git a/meta-networking/recipes-support/spice/files/0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch b/meta-networking/recipes-support/spice/files/0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch
+new file mode 100644
+index 0000000000..18fa8fade8
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/files/0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch
+@@ -0,0 +1,72 @@
++From 3cb746329ea4846bd9c65e0198e69423379b6f62 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?=EC=86=8C=EB=B3=91=EC=B2=A0?= <byungchul.so@samsung.com>
++Date: Thu, 24 Apr 2014 12:26:32 +0000
++Subject: [PATCH] Use PRI macros in printf to keep compatibility between
++ 32/64bit system
++
++gcc's some integer type definitions are different between 32/64bit system.
++This causes platform dependency problem with printf function. However,
++we can avoid this problem by using PRI macros that supports platform
++independent printf.
++---
++ server/mjpeg_encoder.c | 7 ++++---
++ server/red_worker.c    | 4 ++--
++ 2 files changed, 6 insertions(+), 5 deletions(-)
++
++diff --git a/server/mjpeg_encoder.c b/server/mjpeg_encoder.c
++index aea4964..f465d88 100644
++--- a/server/mjpeg_encoder.c
+++++ b/server/mjpeg_encoder.c
++@@ -23,6 +23,7 @@
++ #include "mjpeg_encoder.h"
++ #include <jerror.h>
++ #include <jpeglib.h>
+++#include <inttypes.h>
++ 
++ #define MJPEG_MAX_FPS 25
++ #define MJPEG_MIN_FPS 1
++@@ -66,7 +67,7 @@ static const int mjpeg_quality_samples[MJPEG_QUALITY_SAMPLE_NUM] = {20, 30, 40,
++  * are not necessarily related to mis-estimation of the bit rate, and we would
++  * like to wait till the stream stabilizes.
++  */
++-#define MJPEG_WARMUP_TIME 3000L // 3 sec
+++#define MJPEG_WARMUP_TIME 3000LL // 3 sec
++ 
++ enum {
++     MJPEG_QUALITY_EVAL_TYPE_SET,
++@@ -638,7 +639,7 @@ static void mjpeg_encoder_adjust_params_to_bit_rate(MJpegEncoder *encoder)
++ 
++     spice_debug("cur-fps=%u new-fps=%u (new/old=%.2f) |"
++                 "bit-rate=%.2f (Mbps) latency=%u (ms) quality=%d |"
++-                " new-size-avg %lu , base-size %lu, (new/old=%.2f) ",
+++                " new-size-avg %"PRIu64" , base-size %"PRIu64", (new/old=%.2f) ",
++                 rate_control->fps, new_fps, ((double)new_fps)/rate_control->fps,
++                 ((double)rate_control->byte_rate*8)/1024/1024,
++                 latency,
++@@ -703,7 +704,7 @@ static void mjpeg_encoder_adjust_fps(MJpegEncoder *encoder, uint64_t now)
++ 
++         avg_fps = ((double)rate_control->adjusted_fps_num_frames*1000) /
++                   adjusted_fps_time_passed;
++-        spice_debug("#frames-adjust=%lu #adjust-time=%lu avg-fps=%.2f",
+++        spice_debug("#frames-adjust=%"PRIu64" #adjust-time=%"PRIu64" avg-fps=%.2f",
++                     rate_control->adjusted_fps_num_frames, adjusted_fps_time_passed, avg_fps);
++         spice_debug("defined=%u old-adjusted=%.2f", rate_control->fps, rate_control->adjusted_fps);
++         fps_ratio = avg_fps / rate_control->fps;
++diff --git a/server/red_worker.c b/server/red_worker.c
++index 619f7bc..1871e13 100644
++--- a/server/red_worker.c
+++++ b/server/red_worker.c
++@@ -2594,8 +2594,8 @@ static void red_print_stream_stats(DisplayChannelClient *dcc, StreamAgent *agent
++         mjpeg_encoder_get_stats(agent->mjpeg_encoder, &encoder_stats);
++     }
++ 
++-    spice_debug("stream=%ld dim=(%dx%d) #in-frames=%lu #in-avg-fps=%.2f #out-frames=%lu "
++-                "out/in=%.2f #drops=%lu (#pipe=%lu #fps=%lu) out-avg-fps=%.2f "
+++    spice_debug("stream=%"PRIdPTR" dim=(%dx%d) #in-frames=%"PRIu64" #in-avg-fps=%.2f #out-frames=%"PRIu64" "
+++                "out/in=%.2f #drops=%"PRIu64" (#pipe=%"PRIu64" #fps=%"PRIu64") out-avg-fps=%.2f "
++                 "passed-mm-time(sec)=%.2f size-total(MB)=%.2f size-per-sec(Mbps)=%.2f "
++                 "size-per-frame(KBpf)=%.2f avg-quality=%.2f "
++                 "start-bit-rate(Mbps)=%.2f end-bit-rate(Mbps)=%.2f",
++-- 
++2.10.2
++
+diff --git a/meta-networking/recipes-support/spice/files/0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch b/meta-networking/recipes-support/spice/files/0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch
+new file mode 100644
+index 0000000000..ccae5f50f2
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/files/0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch
+@@ -0,0 +1,29 @@
++From 85838d4c9f2322aedb99b38fffd7da95a494d8ed Mon Sep 17 00:00:00 2001
++From: He Zhe <zhe.he@windriver.com>
++Date: Thu, 29 Jun 2017 08:26:35 +0000
++Subject: [PATCH] red_parse_qxl: Fix BITMAP_FMT_IS_RGB defined but not used
++
++| ../../git/server/red_parse_qxl.c:367:18: error: 'BITMAP_FMT_IS_RGB'
++defined but not used [-Werror=unused-const-variable=]
++|  static const int BITMAP_FMT_IS_RGB[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
++
++Signed-off-by: He Zhe <zhe.he@windriver.com>
++---
++ server/red_parse_qxl.c | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/server/red_parse_qxl.c b/server/red_parse_qxl.c
++index 6c0b0658..cfc2da95 100644
++--- a/server/red_parse_qxl.c
+++++ b/server/red_parse_qxl.c
++@@ -364,7 +364,6 @@ static int bitmap_consistent(SpiceBitmap *bitmap)
++ 
++ // This is based on SPICE_BITMAP_FMT_*, copied from server/red_worker.c
++ // to avoid a possible unoptimization from making it non static.
++-static const int BITMAP_FMT_IS_RGB[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
++ 
++ static SpiceImage *red_get_image(RedMemSlotInfo *slots, int group_id,
++                                  QXLPHYSICAL addr, uint32_t flags, int is_mask)
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-support/spice/files/Fix-build-issues-with-gcc-7.patch b/meta-networking/recipes-support/spice/files/Fix-build-issues-with-gcc-7.patch
+new file mode 100644
+index 0000000000..7fcafdc7ef
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/files/Fix-build-issues-with-gcc-7.patch
+@@ -0,0 +1,59 @@
++From 9f001b6818ac4baa1df010ccf4200ca56bfb11b2 Mon Sep 17 00:00:00 2001
++From: Mark Asselstine <mark.asselstine@windriver.com>
++Date: Wed, 23 Aug 2017 13:47:29 -0400
++Subject: [PATCH] Fix build issues with gcc 7
++
++gcc 7 checks for when a switch statement doesn't break between
++cases. When a break is not found you will see
++
++| ../../git/server/reds.c: In function 'vdi_port_read_one_msg_from_device':
++| ../../git/server/reds.c:797:31: error: this statement may fall through [-Werror=implicit-fallthrough=]
++|              state->read_state = VDI_PORT_READ_STATE_GET_BUFF;
++|              ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++| ../../git/server/reds.c:798:9: note: here
++|          case VDI_PORT_READ_STATE_GET_BUFF: {
++|          ^~~~
++
++The 'fallthrough' comment will let gcc know this is done on purpose.
++
++Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
++---
++ server/inputs_channel.c | 1 +
++ server/reds.c           | 2 ++
++ 2 files changed, 3 insertions(+)
++
++diff --git a/server/inputs_channel.c b/server/inputs_channel.c
++index 931dac1..534ab66 100644
++--- a/server/inputs_channel.c
+++++ b/server/inputs_channel.c
++@@ -321,6 +321,7 @@ static int inputs_channel_handle_parsed(RedChannelClient *rcc, uint32_t size, ui
++             activate_modifiers_watch();
++         }
++     }
+++        /* fallthrough */
++     case SPICE_MSGC_INPUTS_KEY_UP: {
++         SpiceMsgcKeyDown *key_down = (SpiceMsgcKeyDown *)buf;
++         for (i = 0; i < 4; i++) {
++diff --git a/server/reds.c b/server/reds.c
++index 30d0652..8c80eb6 100644
++--- a/server/reds.c
+++++ b/server/reds.c
++@@ -795,6 +795,7 @@ static SpiceCharDeviceMsgToClient *vdi_port_read_one_msg_from_device(SpiceCharDe
++             }
++             state->message_recive_len = state->vdi_chunk_header.size;
++             state->read_state = VDI_PORT_READ_STATE_GET_BUFF;
+++            /* fallthrough */
++         case VDI_PORT_READ_STATE_GET_BUFF: {
++             if (!(state->current_read_buf = vdi_port_read_buf_get())) {
++                 return NULL;
++@@ -806,6 +807,7 @@ static SpiceCharDeviceMsgToClient *vdi_port_read_one_msg_from_device(SpiceCharDe
++             state->message_recive_len -= state->recive_len;
++             state->read_state = VDI_PORT_READ_STATE_READ_DATA;
++         }
+++            /* fallthrough */
++         case VDI_PORT_READ_STATE_READ_DATA:
++             n = sif->read(vdagent, state->recive_pos, state->recive_len);
++             if (!n) {
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/spice/files/build-allow-separated-src-and-build-dirs.patch b/meta-networking/recipes-support/spice/files/build-allow-separated-src-and-build-dirs.patch
+new file mode 100644
+index 0000000000..9cbbff9b64
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/files/build-allow-separated-src-and-build-dirs.patch
+@@ -0,0 +1,62 @@
++From 7d0d0ff080b159e647ebb26c337cb75314d64b52 Mon Sep 17 00:00:00 2001
++From: Mark Asselstine <mark.asselstine@windriver.com>
++Date: Thu, 1 May 2014 12:09:16 -0400
++Subject: [PATCH] build: allow separated src and build dirs
++
++We need to expland the list of include dirs to include the build dir since
++generated files will be created there instead of in the src dir.
++
++We also don't want to force using $srcdir for generated files as this will
++allow them to be created in the build dir. We account for the slight
++deviation in the generated files with expanded include paths.
++
++Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
++---
++ configure.ac | 2 +-
++ spice-common/common/Makefile.am | 14 +++++++-------
++ 2 file changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index edda8e9..9151fcb 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -165,7 +165,7 @@ dnl =========================================================================
++ dnl Check deps
++ 
++ AC_CONFIG_SUBDIRS([spice-common])
++-COMMON_CFLAGS='-I ${top_srcdir}/spice-common/ -I ${top_srcdir}/spice-common/spice-protocol/'
+++COMMON_CFLAGS='-I ${top_srcdir}/spice-common/ -I ${top_srcdir}/spice-common/common/ -I ${top_srcdir}/spice-common/spice-protocol/ -I ${top_builddir}/spice-common/'
++ AC_SUBST(COMMON_CFLAGS)
++ 
++ AC_CHECK_LIBM
++diff --git a/spice-common/common/Makefile.am b/spice-common/common/Makefile.am
++index 45568c6..4c65ac4 100644
++--- a/spice-common/common/Makefile.am
+++++ b/spice-common/common/Makefile.am
++@@ -2,16 +2,16 @@ NULL =
++ 
++ # Avoid need for python(pyparsing) by end users
++ CLIENT_MARSHALLERS =					\
++-	$(srcdir)/generated_client_demarshallers.c	\
++-	$(srcdir)/generated_client_demarshallers1.c	\
++-	$(srcdir)/generated_client_marshallers.c	\
++-	$(srcdir)/generated_client_marshallers1.c	\
+++	generated_client_demarshallers.c	\
+++	generated_client_demarshallers1.c	\
+++	generated_client_marshallers.c	\
+++	generated_client_marshallers1.c	\
++ 	$(NULL)
++ 
++ SERVER_MARSHALLERS =					\
++-	$(srcdir)/generated_server_demarshallers.c	\
++-	$(srcdir)/generated_server_marshallers.c	\
++-	$(srcdir)/generated_server_marshallers.h	\
+++	generated_server_demarshallers.c	\
+++	generated_server_marshallers.c	\
+++	generated_server_marshallers.h	\
++ 	$(NULL)
++ 
++ BUILT_SOURCES = $(CLIENT_MARSHALLERS) $(SERVER_MARSHALLERS) $(top_srcdir)/spice-protocol/spice/enums.h
++-- 
++1.8.3.2
++
+diff --git a/meta-networking/recipes-support/spice/files/configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch b/meta-networking/recipes-support/spice/files/configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch
+new file mode 100644
+index 0000000000..323ef52f8b
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/files/configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch
+@@ -0,0 +1,29 @@
++From 36efb79076420975f7fa7aa0b03a1fc282291b05 Mon Sep 17 00:00:00 2001
++From: Mark Asselstine <mark.asselstine@windriver.com>
++Date: Tue, 25 Mar 2014 15:23:25 -0400
++Subject: [PATCH] configure.ac: add subdir-objects to AM_INIT_AUTOMAKE
++
++Without this you will get subdir-objects error which will cause
++autoreconf to complete successfully.
++
++Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
++---
++ spice-common/configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/spice-common/configure.ac b/spice-common/configure.ac
++index b5cb960..78f1360 100644
++--- a/spice-common/configure.ac
+++++ b/spice-common/configure.ac
++@@ -13,7 +13,7 @@ AC_CONFIG_AUX_DIR([build-aux])
++ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
++ 
++ # Checks for programs
++-AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign -Wall -Werror])
+++AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign subdir-objects -Wall -Werror])
++ AM_MAINTAINER_MODE
++ AM_SILENT_RULES([yes])
++ LT_INIT
++-- 
++1.8.3.2
++
+diff --git a/meta-networking/recipes-support/spice/files/spice-fix-CVE-2013-4282.patch b/meta-networking/recipes-support/spice/files/spice-fix-CVE-2013-4282.patch
+new file mode 100644
+index 0000000000..1a00a85185
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/files/spice-fix-CVE-2013-4282.patch
+@@ -0,0 +1,100 @@
++Fix buffer overflow when decrypting client SPICE ticket
++
++commit 8af619009660b24e0b41ad26b30289eea288fcc2     upstream
++
++reds_handle_ticket uses a fixed size 'password' buffer for the decrypted
++password whose size is SPICE_MAX_PASSWORD_LENGTH. However,
++RSA_private_decrypt which we call for the decryption expects the
++destination buffer to be at least RSA_size(link->tiTicketing.rsa)
++bytes long. On my spice-server build, SPICE_MAX_PASSWORD_LENGTH
++is 60 while RSA_size() is 128, so we end up overflowing 'password'
++when using long passwords (this was reproduced using the string:
++'fullscreen=1proxy=#enter proxy here; e.g spice_proxy = http://[proxy]:[port]'
++as a password).
++
++When the overflow occurs, QEMU dies with:
++*** stack smashing detected ***: qemu-system-x86_64 terminated
++
++This commit ensures we use a corectly sized 'password' buffer,
++and that it's correctly nul-terminated so that we can use strcmp
++instead of strncmp. To keep using strncmp, we'd need to figure out
++which one of 'password' and 'taTicket.password' is the smaller buffer,
++and use that size.
++
++This fixes rhbz#999839
++diff --git a/server/reds.c b/server/reds.c
++index 30d0652..6f262b0 100644
++--- a/server/reds.c
+++++ b/server/reds.c
++@@ -1931,39 +1931,59 @@ static void reds_handle_link(RedLinkInfo *link)
++ static void reds_handle_ticket(void *opaque)
++ {
++     RedLinkInfo *link = (RedLinkInfo *)opaque;
++-    char password[SPICE_MAX_PASSWORD_LENGTH];
+++    char *password;
++     time_t ltime;
+++    int password_size;
++ 
++     //todo: use monotonic time
++     time(&ltime);
++-    RSA_private_decrypt(link->tiTicketing.rsa_size,
++-                        link->tiTicketing.encrypted_ticket.encrypted_data,
++-                        (unsigned char *)password, link->tiTicketing.rsa, RSA_PKCS1_OAEP_PADDING);
+++    if (RSA_size(link->tiTicketing.rsa) < SPICE_MAX_PASSWORD_LENGTH) {
+++        spice_warning("RSA modulus size is smaller than SPICE_MAX_PASSWORD_LENGTH (%d < %d), "
+++                      "SPICE ticket sent from client may be truncated",
+++                      RSA_size(link->tiTicketing.rsa), SPICE_MAX_PASSWORD_LENGTH);
+++    }
+++
+++    password = g_malloc0(RSA_size(link->tiTicketing.rsa) + 1);
+++    password_size = RSA_private_decrypt(link->tiTicketing.rsa_size,
+++                                        link->tiTicketing.encrypted_ticket.encrypted_data,
+++                                        (unsigned char *)password,
+++                                        link->tiTicketing.rsa,
+++                                        RSA_PKCS1_OAEP_PADDING);
+++    if (password_size == -1) {
+++        spice_warning("failed to decrypt RSA encrypted password: %s",
+++                      ERR_error_string(ERR_get_error(), NULL));
+++        goto error;
+++    }
+++    password[password_size] = '\0';
++ 
++     if (ticketing_enabled && !link->skip_auth) {
++         int expired =  taTicket.expiration_time < ltime;
++ 
++         if (strlen(taTicket.password) == 0) {
++-            reds_send_link_result(link, SPICE_LINK_ERR_PERMISSION_DENIED);
++             spice_warning("Ticketing is enabled, but no password is set. "
++-                        "please set a ticket first");
++-            reds_link_free(link);
++-            return;
+++                          "please set a ticket first");
+++            goto error;
++         }
++ 
++-        if (expired || strncmp(password, taTicket.password, SPICE_MAX_PASSWORD_LENGTH) != 0) {
+++        if (expired || strcmp(password, taTicket.password) != 0) {
++             if (expired) {
++                 spice_warning("Ticket has expired");
++             } else {
++                 spice_warning("Invalid password");
++             }
++-            reds_send_link_result(link, SPICE_LINK_ERR_PERMISSION_DENIED);
++-            reds_link_free(link);
++-            return;
+++            goto error;
++         }
++     }
++ 
++     reds_handle_link(link);
+++    goto end;
+++
+++error:
+++    reds_send_link_result(link, SPICE_LINK_ERR_PERMISSION_DENIED);
+++    reds_link_free(link);
+++
+++end:
+++    g_free(password);
++ }
++ 
++ static inline void async_read_clear_handlers(AsyncRead *obj)
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+new file mode 100644
+index 0000000000..04e7a25d70
+--- /dev/null
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -0,0 +1,76 @@
++#
++# Copyright (C) 2013 Wind River Systems, Inc.
++#
++
++SUMMARY = "Simple Protocol for Independent Computing Environments"
++DESCRIPTION = "SPICE (the Simple Protocol for Independent Computing \
++Environments) is a remote-display system built for virtual \
++environments which allows users to view a computing 'desktop' \ 
++environment - not only on its computer-server machine, but also from \
++anywhere on the Internet and using a wide variety of machine \
++architectures."
++
++LICENSE = "BSD & LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++PR = "r0"
++PV = "0.12.4"
++
++# Actual versions based on the checkouts below
++# spice = "0.12.4"
++# common = "0.12.6"
++# protocol = "0.12.6"
++SRCREV_spice = "b270fb010a3ddb432dfe6b15e4bdffa6ac086cd0"
++SRCREV_spice-common = "fe93908238196bd632287fc9875e6f2e11105d04"
++SRCREV_spice-protocol = "784407f248e7f99d2bfcc9368f9acd1efb2b9617"
++
++SRCREV_FORMAT = "spice_spice-common_spice-protocol"
++
++SRC_URI = "git://anongit.freedesktop.org/spice/spice;name=spice \
++           git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common \
++           git://anongit.freedesktop.org/spice/spice-protocol;destsuffix=git/spice-common/spice-protocol;name=spice-protocol \
++          "
++
++SRC_URI += " \
++        file://spice-fix-CVE-2013-4282.patch \
++        file://configure.ac-add-subdir-objects-to-AM_INIT_AUTOMAKE.patch \
++        file://build-allow-separated-src-and-build-dirs.patch \
++        file://0001-red_parse_qxl-Fix-BITMAP_FMT_IS_RGB-defined-but-not-.patch \
++        file://0001-Use-PRI-macros-in-printf-to-keep-compatibility-betwe.patch \
++        file://Fix-build-issues-with-gcc-7.patch \
++        "
++
++S = "${WORKDIR}/git"
++
++inherit autotools gettext pythonnative python-dir pkgconfig
++
++DEPENDS += "python-native celt051 python-pyparsing jpeg pixman alsa-lib glib-2.0"
++
++export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
++export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
++
++PACKAGECONFIG ?= "sasl"
++
++PACKAGECONFIG[smartcard] = "--enable-smartcard,--disable-smartcard,libcacard,"
++PACKAGECONFIG[sasl] = "--with-sasl,--without-sasl,cyrus-sasl,"
++PACKAGECONFIG[client] = "--enable-client,--disable-client,,"
++PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
++PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
++PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
++
++PACKAGES =+ "${PN}-protocol"
++LICENSE_${PN}-protocol = "BSD"
++FILES_${PN}-protocol += "${includedir}/spice-1"
++FILES_${PN}-protocol += "${datadir}/pkgconfig"
++
++do_configure_prepend() {
++	mkdir -p ${S}/spice-common/spice-protocol/m4
++}
++
++do_install_append() {
++	cd ${B}/spice-common/spice-protocol
++	oe_runmake DESTDIR="${D}" install
++	cd -
++}
++
++COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+-- 
+2.17.0
+
 
