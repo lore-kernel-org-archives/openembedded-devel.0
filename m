@@ -1,47 +1,54 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 31F1978464
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 86BB377F90
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 19:22:17 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id a8-v6so4204671wmg.5
+	Fri, 11 May 2018 21:27:17 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id p18-v6so6591769wrm.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 12:22:18 -0700 (PDT)
+	Fri, 11 May 2018 14:27:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=pI+zqYpI4H7FHOvjpgcLyPLfUqmNiOOvn7ON5XHE9pw=;
-	b=eNaQ8CgB8PffHc0WwOL7A0Mw86dPoIrOen9XBkTiVm3SCbYu39vhnfVsMnsHBiXUpK
-	g44vuIOdzV4/wNHGclcNdiJAxE6wyd/daEUBMD8Qz1nz0tRi155buKJ7uoRdaZondivE
-	tPeW7LU+iKOrRtTgUBAKsYm/uYyRIZPnZFFcJ+QAsaeziIB2hh8baKRn8kO8ILSm/KXA
-	jC56u+/F3kl3g3gmcTuPqkT09MeYijTBYPz3RH8Jvl5T8uQIjORyrnNa/1rrEZsIjyWF
-	AVkXQinglmNBOL7lHbehjjt7dSlQF7Qr2rnJ20aJKFb3zxe2mpLJatUgXWlQcph55u9n
-	6PNQ==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=i3oFZL84vwN7+YRLnjYRSH8jPjYrUg6uhgfzSLgmiWs=;
+	b=CKEK7bq4C1NQDdYl4S2V3/PTiretRqJJunuJRFA9CosEpraV3fNsYFKJZSL5Cyl6tv
+	rsgR/Yx1Jlo8mt0gl9XrDcbvCQx1RaOhs3bJquzqyP32ns1X6uIdMmu+FvhUS4YrcezP
+	7Ii/rFAwwGA9Tajf2RKK2N2wbgYRoReSFB94//qSgHpsvPhfdQBR6EiIAvClOr1k5uTF
+	2fhFDSipPMiQkXjvwzYDOzpbrptY6OTzhafJS7/9cDGqUcP0fcsT9Hwa9AJ2AMvNWwcO
+	odbjZS2LWQcEmFxVoUbbbsBK6rwNMevy9GLV1neNtpB7mbQH7FAkjryhOwFk0fSuWLsG
+	MrFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pI+zqYpI4H7FHOvjpgcLyPLfUqmNiOOvn7ON5XHE9pw=;
-	b=cVMydG0ravIMnWLXTyTqJvEv8LF2TuE0yGMBb8wFzLhqdIoFzkay74lIQzsjuPWbRg
-	D9mkHwIwfoWhsZ/urbvwzA+slt8lX8sD6fzGftQxORnXbohcc/M2etD/P8qGDwqNtN1l
-	TCTgnFE2eGci8kqbWHlNEC5A+pcJfWmvIotVtR8+qEUhaFINlX2/RQi93AWsSWexhDhn
-	tWxxadE7ZRc7ORQryhjPq7QCUDJlZwqzhCI3bXDGWKBSaXKhhdbbDXufpwbjVs2MRAUZ
-	qQDWGZLSAvv7tYo4aBnxoHZdleho9jLN5Kwna01+PsEFmxmEaeEZ9gayvKgHZqZj1YFQ
-	flHw==
-X-Gm-Message-State: ALKqPwe81E9UpCUmVlCY2dKFM+akQdg2ZSLTo13l5YrLbmiSq95Luz2j
-	j8e4HycH4M1OqHfR8sFkXpAoYQ==
-X-Google-Smtp-Source: AB8JxZqGJmCoNmEsR9yYJ9AGmsRMkXqJXUMOdvBPHaIUulWLtNvymdsI3DOvw4P0uovYN2ByQReSWA==
-X-Received: by 2002:a1c:b595:: with SMTP id
-	e143-v6mr2562344wmf.66.1526066537964; 
-	Fri, 11 May 2018 12:22:17 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=i3oFZL84vwN7+YRLnjYRSH8jPjYrUg6uhgfzSLgmiWs=;
+	b=gGnJN4mQ4zVIcgL0uMRt65P/h2Us79HKJ1iygHyIotcY4FQRSjELXKUxPn8HUFQtam
+	ha6u31WfhyCihGnX7e0waJk3aOvx9TZv6tL75IURUh0hPCM9N80KsU8pzxhtG5LyzmQp
+	DwMcmOuWnCsLhhK6QKwzJ6RpNl6pG420V7L98Af9IO6c/QqpD/+02Szo1uEr/dONRXIZ
+	ECwJ3Jg0huEZcl98pwRKJgsxXUkHvxFQx7An5VjCJYH6kLSged26zTgaT1TbqWRgdVp/
+	7Ci+2EAnKxlGfHyLFX1BVhhoa9+sc7f2PnTRHDuyDuXcjKak4hywOtvOx2VNgFSNbRmG
+	nyaw==
+X-Gm-Message-State: ALKqPwe3wydW1uhCmYWhmYKBMZWrykqGAaeWQmzNXY2+Pk2bg/lmXMRg
+	+ovOhtMgZTJvFagiMWkq52clNA==
+X-Google-Smtp-Source: AB8JxZovI7U5WvrwjWJA8EK1DjBz5+Fg+sjOjtQfnDu2FyS0bzKdgKgjd0VPMhBnUc2JVVQjp88oqA==
+X-Received: by 2002:adf:8703:: with SMTP id a3-v6mr460564wra.178.1526074037813;
+	Fri, 11 May 2018 14:27:17 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	a14-v6sm6722446wra.84.2018.05.11.12.22.17
+	x16-v6sm2173392wmc.2.2018.05.11.14.27.16
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 11 May 2018 12:22:17 -0700 (PDT)
+	Fri, 11 May 2018 14:27:16 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 11 May 2018 23:27:20 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 May 2018 19:22:19 +0000
-Message-Id: <20180511192219.7915-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.0
-Subject: [meta-oe][PATCH] libopus: add native and nativesdk
+Message-ID: <20180511212720.GB2141@jama>
+References: <20180511192145.7811-1-Martin.Jansa@gmail.com>
+	<20180511192145.7811-8-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20180511192145.7811-8-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.9.5 (2018-04-13)
+Subject: Re: [meta-networking][PATCH 8/9] spice: fix nativesdk build with security-flags included
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,26 +61,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 19:22:17 -0000
+X-List-Received-Date: Fri, 11 May 2018 21:27:17 -0000
+X-Groupsio-MsgNum: 72141
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="RASg3xLB4tUQ4RcS"
+Content-Disposition: inline
 
-* can be used by spice
+--RASg3xLB4tUQ4RcS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On Fri, May 11, 2018 at 07:21:44PM +0000, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-index a24f5e30b6..dd6789dc01 100644
---- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-+++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-@@ -50,3 +50,5 @@ python () {
- #| {standard input}:773: Error: selected processor does not support Thumb mode `smull fp,r3,r5,r8'
- #| make[2]: *** [celt/celt.lo] Error 1
- ARM_INSTRUCTION_SET = "arm"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.17.0
+this isn't working (and isn't needed) with latest glibc changes from:
+http://lists.openembedded.org/pipermail/openembedded-core/2018-May/150436.h=
+tml
+
+please drop this one from the series
 
 
+Instead of this I had to add:
+# git/server/event-loop.c:146:42: error: cast between incompatible function=
+ types from 'gboolean (*)(GIOChannel *, GIOCondition,  void *)' {aka 'int (=
+*)(struct _GIOChannel *, enum <anonymous>,  void *)'} to 'gboolean (*)(void=
+ *)' {aka 'int (*)(void *)'} [-Werror=3Dcast-function-type]
+EXTRA_OECONF_append_class-nativesdk =3D " --disable-werror"
+
+as temporary work around to test nativesdk-spice with gcc-8.1.
+
+> ---
+>  meta-networking/recipes-support/spice/spice_git.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-ne=
+tworking/recipes-support/spice/spice_git.bb
+> index 1b65d6fd72..257159f374 100644
+> --- a/meta-networking/recipes-support/spice/spice_git.bb
+> +++ b/meta-networking/recipes-support/spice/spice_git.bb
+> @@ -35,6 +35,10 @@ inherit autotools gettext pythonnative python-dir pkgc=
+onfig
+>  DEPENDS +=3D "spice-protocol jpeg pixman alsa-lib glib-2.0 python-pypars=
+ing-native python-six-native glib-2.0-native"
+>  DEPENDS_append_class-nativesdk =3D "nativesdk-openssl"
+> =20
+> +# Otherwise nativesdk-spice fails like this:
+> +# http://errors.yoctoproject.org/Errors/Details/164866/
+> +LDFLAGS_append_class-nativesdk =3D " -lssp"
+> +
+>  export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python-native/python"
+>  export PYTHONPATH=3D"${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-p=
+ackages"
+> =20
+> --=20
+> 2.17.0
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--RASg3xLB4tUQ4RcS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWvYKtwAKCRA3VSO3ZXaA
+HJr5AKCpfXmoHilD/oiNr7MqUl8x2exyqQCfVgj6IV8cA6JzzLogdZQuGquFOGw=
+=Q3uQ
+-----END PGP SIGNATURE-----
+
+--RASg3xLB4tUQ4RcS--
