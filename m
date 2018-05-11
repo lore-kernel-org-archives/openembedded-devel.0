@@ -1,50 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 99DF37841B
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 3367478448
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 19:21:58 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id p18-v6so6338223wrm.1
+	Fri, 11 May 2018 19:21:59 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id j5-v6so5027467wme.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 12:22:00 -0700 (PDT)
+	Fri, 11 May 2018 12:22:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=hq/0AMrVKMQWhhpf6RXi7dmlxrb4FMr9x+X/MvxRtmY=;
-	b=hWfakF8kzKdsNUVyrtLjGGXcUX9es/Wnl3OFZZH+8f/knrJkYMyswXoWy/4z0pyWMv
-	uUq73FjCsRn7ynW52QxRsKMrUMyjCDCv5ySaxTRmj1m34p03BOyAiTCdF6bzdEbw35OI
-	xMZT5pCmnLPGhhrvczuGNfTeFoVlUAsplaNcK6Sl7vvjDx2UNPfE507U1qPi/g0RHpL0
-	gFfglMV7R5Ny3hMUlCrOf9KwCt1s3JAPSjxRj7+DwyAnO+t9syohiWcxqK/mghc+AdHM
-	qi/oIUh/Hs+4mYSLdjF8LBj46Hs063PpvQy4AXpU8naIjJ+GYfN8ayR7RoxpK+sxZGzl
-	prjQ==
+	bh=UEbIWgJjBuJahL80PklKh/9tUqlZMu16xCecD3Vmf3I=;
+	b=XN4rdw5OfwVpEaJlQv/u9qJBKpYu69QdohhxogOIokdvdSJRlsMuI6q3AsCajQMwCP
+	f2RclhQAZDQOB7wzZOzEDsoiYH2F07ko3/9PmlDdxj48eu8xml72KXgH91l9GY+VtH0t
+	tXRIX4Cn1BqwCdTGesjFM6NeKYQAjNzUdIPLdU4mbgEpzCIqZFZPC6xilTTe+GZ+h4Zn
+	lHw0OjyZGsSWQ0Wgl2QGqBiR0kWleqP8CWuXpbGtH2RYpfcK5qI4oo6/SJrEuiL+iySQ
+	TG9VvDJn9vAMRJJHqkrAMS7iySn+KfaLk9zu8hf7MIRy5/TvH2Gj2SYDOy9AwRDF5DWf
+	o5Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=hq/0AMrVKMQWhhpf6RXi7dmlxrb4FMr9x+X/MvxRtmY=;
-	b=jfihojzigvq7b3sjYcN8X5r8h60gOy1MjiPIOWytOwYmW3Oglt8PFIj7Eq4tFpawfs
-	xLceIYe/A7bbO43IGFpQ5zAPRoyVCZucdE6PEhRGBZUISLOhBIAn41Hxdbo/mKR0OIez
-	rTcmE5N1uOMKDUOOKVIvb+JUhTYGYI0maPg+HpqridhtDWP7HUgxwpRJ8vzHYkxUd8NZ
-	iOl0FWQO3ddBIZTVBxibxjB3VI3LgIjR6uF1gmszsqIU2oCefke5paO+6c7SsCB33CPV
-	P8447m08ZssMg9E6/1+Vj3zuhcUIXD1Vyqe0NfTVw6IpE4asja1ZVZrWjJKuQer5DlLb
-	iR3A==
-X-Gm-Message-State: ALKqPwcBBkw38+pPtPJUiGjbGzomQNBQnweQiX4wk3QzXxWXydsBwxEf
-	6poAHcGWheTDlI9p+adeqVHN0w==
-X-Google-Smtp-Source: AB8JxZrJ8w5+N9e4DrpmRbfWINq7aOTJLi8PQJFruNHPkfWojMRT7lsW/EZOPByemfKmrdqWP7R7Kw==
-X-Received: by 2002:adf:be83:: with SMTP id i3-v6mr202740wrh.166.1526066519175;
-	Fri, 11 May 2018 12:21:59 -0700 (PDT)
+	bh=UEbIWgJjBuJahL80PklKh/9tUqlZMu16xCecD3Vmf3I=;
+	b=MVkl4eprfSTGlYFu+r6TqYZ6BwlN3tiH405tcrOnTUecDGu1wu16Ob+aXz7iKhSrgm
+	/imgjtIAAXhNTExpSznTnuDSwiIxWOd77/GGIIfasQ6AkQbhnazB+nX8Py78bfG6viBO
+	zlXleb9k1GYE+MMNDQ/inh2eo6DXkswiBq7iFv7Dsmf1l6xsgzrHAkBPfok+UkUTNhsp
+	MOphICOluT62BfrWYZ4L2/fOUuOg0hn+n3AEtWbXmTzD+FSg12p9kgPXMRUZuNmoAevo
+	ZW1Ce6iFKSVdZvnt8OUpNBy77/UZ12u8L7B8ezYzfffEqD9OfI0QQPsBn1oYroh5yug7
+	ZR0g==
+X-Gm-Message-State: ALKqPwe9gmbrCekYLZfssVXsVaGAicjFVBiYTlWNPJ72BS5OT/9iWOoI
+	oNdTZNC6m4yuKF4YhQIH7j4vHA==
+X-Google-Smtp-Source: AB8JxZoLW1heEsL6qlX5UHYE19dhLOXJHM/EFJwaV6jvv1+8l/zrL8cnbzw4Bo9fh69/10x8qq//8Q==
+X-Received: by 2002:a1c:1f47:: with SMTP id f68-v6mr2486640wmf.4.1526066520418;
+	Fri, 11 May 2018 12:22:00 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	44-v6sm6608368wrv.47.2018.05.11.12.21.58
+	69-v6sm3772013wmi.29.2018.05.11.12.21.59
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 11 May 2018 12:21:58 -0700 (PDT)
+	Fri, 11 May 2018 12:21:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 May 2018 19:21:43 +0000
-Message-Id: <20180511192145.7811-7-Martin.Jansa@gmail.com>
+Date: Fri, 11 May 2018 19:21:44 +0000
+Message-Id: <20180511192145.7811-8-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180511192145.7811-1-Martin.Jansa@gmail.com>
 References: <20180511192145.7811-1-Martin.Jansa@gmail.com>
-Subject: [meta-networking][PATCH 7/9] celt051: make ogg support optional
+Subject: [meta-networking][PATCH 8/9] spice: fix nativesdk build with security-flags included
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,102 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 19:21:58 -0000
-
-* drop PR
-* add +git to PV
-* and support for native and nativesdk needed for spice
-* the old PACKAGECONFIG didn't work, because both options aren't
-  recognized as shown by do_configure warning:
-  configure: WARNING: unrecognized options: --without-ogg, --disable-oggtest
-* XIPH_PATH_OGG macro is provided by libogg so we cannot call it without
-  the libogg dependency, so replace it with explicit --enable-tools
+X-List-Received-Date: Fri, 11 May 2018 19:22:00 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...igure.ac-make-tools-support-optional.patch | 39 +++++++++++++++++++
- .../recipes-support/celt051/celt051_git.bb    | 16 ++++----
- 2 files changed, 48 insertions(+), 7 deletions(-)
- create mode 100644 meta-networking/recipes-support/celt051/celt051/0001-configure.ac-make-tools-support-optional.patch
+ meta-networking/recipes-support/spice/spice_git.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-networking/recipes-support/celt051/celt051/0001-configure.ac-make-tools-support-optional.patch b/meta-networking/recipes-support/celt051/celt051/0001-configure.ac-make-tools-support-optional.patch
-new file mode 100644
-index 0000000000..b0809ee947
---- /dev/null
-+++ b/meta-networking/recipes-support/celt051/celt051/0001-configure.ac-make-tools-support-optional.patch
-@@ -0,0 +1,39 @@
-+From 86df4200c9c33d999df0e8cc3c9771f17a297ec4 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Wed, 13 Sep 2017 15:01:54 +0200
-+Subject: [PATCH] configure.ac: make tools support optional
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 1b65d6fd72..257159f374 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -35,6 +35,10 @@ inherit autotools gettext pythonnative python-dir pkgconfig
+ DEPENDS += "spice-protocol jpeg pixman alsa-lib glib-2.0 python-pyparsing-native python-six-native glib-2.0-native"
+ DEPENDS_append_class-nativesdk = "nativesdk-openssl"
+ 
++# Otherwise nativesdk-spice fails like this:
++# http://errors.yoctoproject.org/Errors/Details/164866/
++LDFLAGS_append_class-nativesdk = " -lssp"
 +
-+* add --enable-tools option
-+* XIPH_PATH_OGG macro is provided by libogg so we cannot call
-+  it without the libogg dependency
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ configure.ac | 8 +++++++-
-+ 1 file changed, 7 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index d4b1a3f..7d6b2dc 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -68,8 +68,14 @@ AC_MSG_RESULT($has_alloca)
-+ 
-+ AC_CHECK_HEADERS(sys/soundcard.h sys/audioio.h)
-+ 
-+-XIPH_PATH_OGG([tools="tools"], [tools=""])
-++AC_ARG_ENABLE(tools, [  --enable-tools          Compile ogg tools],
-++[if test "$enableval" = yes; then
-++  [tools="tools"]
-++else
-++  [tools=""]
-++fi],
-+ AC_SUBST(tools)
-++)
-+ 
-+ AC_CHECK_LIB(m, sin)
-+ 
-+-- 
-+2.14.1
-+
-diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
-index ee3882148e..850704f5af 100644
---- a/meta-networking/recipes-support/celt051/celt051_git.bb
-+++ b/meta-networking/recipes-support/celt051/celt051_git.bb
-@@ -12,19 +12,21 @@ like Speex, GSM, or G.729."
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=375f60ab360d17f0172737036ff155b2"
+ export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
+ export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
  
--PV = "0.5.1.3"
--PR = "r0"
-+PV = "0.5.1.3+git${SRCPV}"
- 
- SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
- 
--SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https"
-+SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
-+    file://0001-configure.ac-make-tools-support-optional.patch \
-+"
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS += "libogg"
--
- inherit pkgconfig autotools-brokensep
- 
--PACKAGECONFIG = ""
-+PACKAGECONFIG_class-native = ""
-+PACKAGECONFIG ??= ""
-+
-+PACKAGECONFIG[ogg] = "--enable-tools,--disable-tools,libogg,"
- 
--PACKAGECONFIG[ogg] = "--with-ogg --enable-oggtest,--without-ogg --disable-oggtest,,"
-+BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.0
 
