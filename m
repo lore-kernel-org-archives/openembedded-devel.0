@@ -1,54 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 86BB377F90
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 21:27:17 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id p18-v6so6591769wrm.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 14:27:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=i3oFZL84vwN7+YRLnjYRSH8jPjYrUg6uhgfzSLgmiWs=;
-	b=CKEK7bq4C1NQDdYl4S2V3/PTiretRqJJunuJRFA9CosEpraV3fNsYFKJZSL5Cyl6tv
-	rsgR/Yx1Jlo8mt0gl9XrDcbvCQx1RaOhs3bJquzqyP32ns1X6uIdMmu+FvhUS4YrcezP
-	7Ii/rFAwwGA9Tajf2RKK2N2wbgYRoReSFB94//qSgHpsvPhfdQBR6EiIAvClOr1k5uTF
-	2fhFDSipPMiQkXjvwzYDOzpbrptY6OTzhafJS7/9cDGqUcP0fcsT9Hwa9AJ2AMvNWwcO
-	odbjZS2LWQcEmFxVoUbbbsBK6rwNMevy9GLV1neNtpB7mbQH7FAkjryhOwFk0fSuWLsG
-	MrFA==
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5650178694
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2018 22:05:54 +0000 (UTC)
+Received: by mail-io0-f180.google.com with SMTP id d11-v6so8660884iof.11
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2018 15:05:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=NQ8upV8cGF79w/d0nbtM29X0/KnalBlvOOk8wKNKDsY=;
+	b=ZnUarcWSkLwr/rkPanTZ3X1kwuOhb/xDgvkgy+dZoSdBaiBgH0EdDpGKiKYbhF7QvM
+	ftpt3H0e3SXKaS2ILGlC+1uL4ZUgan5nLE6/JeEsQjzrq343TEuIuosz5M/9oii+Ua8M
+	AJwXceJdbXl2liwROyqEA45e8UmMv4A+UMPvKmRE67YrAlDpjMJ/DBu4NHC4W+bpQygd
+	2mRymP96m1M1fmG3Nk3hZbmUx5fEM1mL1CLWpJaOLFqqIj5BnUb5PoHXK1HiJVRJtYzn
+	u3ZP15FPQ6jnR8ozlr0LaUFJFcErd+R+g6cY702HO8nR8a2iPYZthx0QlIoZNNkr0hS1
+	aJVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=i3oFZL84vwN7+YRLnjYRSH8jPjYrUg6uhgfzSLgmiWs=;
-	b=gGnJN4mQ4zVIcgL0uMRt65P/h2Us79HKJ1iygHyIotcY4FQRSjELXKUxPn8HUFQtam
-	ha6u31WfhyCihGnX7e0waJk3aOvx9TZv6tL75IURUh0hPCM9N80KsU8pzxhtG5LyzmQp
-	DwMcmOuWnCsLhhK6QKwzJ6RpNl6pG420V7L98Af9IO6c/QqpD/+02Szo1uEr/dONRXIZ
-	ECwJ3Jg0huEZcl98pwRKJgsxXUkHvxFQx7An5VjCJYH6kLSged26zTgaT1TbqWRgdVp/
-	7Ci+2EAnKxlGfHyLFX1BVhhoa9+sc7f2PnTRHDuyDuXcjKak4hywOtvOx2VNgFSNbRmG
-	nyaw==
-X-Gm-Message-State: ALKqPwe3wydW1uhCmYWhmYKBMZWrykqGAaeWQmzNXY2+Pk2bg/lmXMRg
-	+ovOhtMgZTJvFagiMWkq52clNA==
-X-Google-Smtp-Source: AB8JxZovI7U5WvrwjWJA8EK1DjBz5+Fg+sjOjtQfnDu2FyS0bzKdgKgjd0VPMhBnUc2JVVQjp88oqA==
-X-Received: by 2002:adf:8703:: with SMTP id a3-v6mr460564wra.178.1526074037813;
-	Fri, 11 May 2018 14:27:17 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	x16-v6sm2173392wmc.2.2018.05.11.14.27.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 11 May 2018 14:27:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 11 May 2018 23:27:20 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180511212720.GB2141@jama>
-References: <20180511192145.7811-1-Martin.Jansa@gmail.com>
-	<20180511192145.7811-8-Martin.Jansa@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=NQ8upV8cGF79w/d0nbtM29X0/KnalBlvOOk8wKNKDsY=;
+	b=WMmB7H+eh0MopAw8hRDSPZ+z2Czig0GeflxC2A1k9hzlbmWNWh7eonWBT0Rsw51ZMI
+	DIH16apI4bhsZ9pnOvA58/LINzqdU/GcfBwI/GOhbyvGR8Ujw1wobSVENLt2a/kvtQ1Y
+	yAC2EN/sURQRQZh559kiUTft57P4um7qQBwPvo4O4PkglHy9X7s6lAN4QnXKiLOVsKCe
+	ugVoLds9Xfbb+mMszRnyFK9Pv0cNyh6T3n0QdyPwcLwVHq0/pm+jzrirjEw8SRSQWNqD
+	nehf8wPO/S7yodyNPMMMeJYkfRm2vSbgStB/ciTjhlSLPl3e3jgF2Od0UR0Kd7eDmBXK
+	7WEw==
+X-Gm-Message-State: ALKqPwevau8r0nG0q5Jdia/92wXKwx0O14WTcHTNRDKQC0Pt5DNehH1a
+	70B0kKL1TCQcbmrk0jHAPZVOIpmFuY+r9JHeXBZpbQ==
+X-Google-Smtp-Source: AB8JxZp/oll2DIGo0AVw2YCAuajt7MtWM3Uxck9LBFMmXAU/qTHFUExli6M5ZD0u4tC1PeBjXUch6tte3c8iLM6alik=
+X-Received: by 2002:a6b:248e:: with SMTP id
+	k136-v6mr187199iok.270.1526076355316; 
+	Fri, 11 May 2018 15:05:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180511192145.7811-8-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.9.5 (2018-04-13)
-Subject: Re: [meta-networking][PATCH 8/9] spice: fix nativesdk build with security-flags included
+Received: by 10.107.239.11 with HTTP; Fri, 11 May 2018 15:05:34 -0700 (PDT)
+In-Reply-To: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
+References: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 11 May 2018 23:05:34 +0100
+Message-ID: <CAJTo0LYmyzY67JC=72OMRBRH=8juBSnAVaYUKB6ENZ9koqPqTA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] GCC 8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,75 +59,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 21:27:17 -0000
-X-Groupsio-MsgNum: 72141
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RASg3xLB4tUQ4RcS"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 May 2018 22:05:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---RASg3xLB4tUQ4RcS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I threw the branch at the Yocto Project autobuilder today, produced a
+number of failures:
 
-On Fri, May 11, 2018 at 07:21:44PM +0000, Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+http://errors.yoctoproject.org/Errors/Latest//?filter=b23dba19607412c8cc7d267d95354d65f5631088&type=commit
 
-this isn't working (and isn't needed) with latest glibc changes from:
-http://lists.openembedded.org/pipermail/openembedded-core/2018-May/150436.h=
-tml
+Ross
 
-please drop this one from the series
+On 5 May 2018 at 01:26, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi All
+>
+> As you might have noticed that gcc 8.1 was released this week, I am
+> calling out for some testing help on testing branch so we can weed out
+> issues you might see in your setups. so if you have your
+> builders idling over weekend, then you know what they can do this weekend :)
+>
+> Highlighted changes are
+>
+> https://gcc.gnu.org/gcc-8/changes.html
+>
+> and porting doc is
+>
+> https://gcc.gnu.org/gcc-8/porting_to.html
+>
+> The branch is here
+>
+> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-8
+>
+> Its uptodate on top of current master oe-core
+>
+> May fourth be with you !!
+>
+> Cheers!
+>
+> -Khem
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
-
-Instead of this I had to add:
-# git/server/event-loop.c:146:42: error: cast between incompatible function=
- types from 'gboolean (*)(GIOChannel *, GIOCondition,  void *)' {aka 'int (=
-*)(struct _GIOChannel *, enum <anonymous>,  void *)'} to 'gboolean (*)(void=
- *)' {aka 'int (*)(void *)'} [-Werror=3Dcast-function-type]
-EXTRA_OECONF_append_class-nativesdk =3D " --disable-werror"
-
-as temporary work around to test nativesdk-spice with gcc-8.1.
-
-> ---
->  meta-networking/recipes-support/spice/spice_git.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-ne=
-tworking/recipes-support/spice/spice_git.bb
-> index 1b65d6fd72..257159f374 100644
-> --- a/meta-networking/recipes-support/spice/spice_git.bb
-> +++ b/meta-networking/recipes-support/spice/spice_git.bb
-> @@ -35,6 +35,10 @@ inherit autotools gettext pythonnative python-dir pkgc=
-onfig
->  DEPENDS +=3D "spice-protocol jpeg pixman alsa-lib glib-2.0 python-pypars=
-ing-native python-six-native glib-2.0-native"
->  DEPENDS_append_class-nativesdk =3D "nativesdk-openssl"
-> =20
-> +# Otherwise nativesdk-spice fails like this:
-> +# http://errors.yoctoproject.org/Errors/Details/164866/
-> +LDFLAGS_append_class-nativesdk =3D " -lssp"
-> +
->  export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python-native/python"
->  export PYTHONPATH=3D"${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-p=
-ackages"
-> =20
-> --=20
-> 2.17.0
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---RASg3xLB4tUQ4RcS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWvYKtwAKCRA3VSO3ZXaA
-HJr5AKCpfXmoHilD/oiNr7MqUl8x2exyqQCfVgj6IV8cA6JzzLogdZQuGquFOGw=
-=Q3uQ
------END PGP SIGNATURE-----
-
---RASg3xLB4tUQ4RcS--
