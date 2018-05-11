@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B047752AD
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 69F927553C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 06:51:58 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id f189-v6so2266176pfa.7
+	Fri, 11 May 2018 07:01:44 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id a13-v6so2049324pgu.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 May 2018 23:52:00 -0700 (PDT)
+	Fri, 11 May 2018 00:01:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=4dRHdTosdstJ4WBCyI6ceZ8FAHud/cJA6CUsS3leVRM=;
-	b=IuGpAGuXH9H/q6XJRnkFe+gTGkdao2X0lzI7gFIHdzd9Bn1vceoHgnxL9vZS26SBtp
-	dQ2IrA2x8mpKqeRssQHFKVqJk0PaOS4sK36cVaxREmmOcYEpK1RIDWuQC7lp3NpKk+Ps
-	Zlgzux4YuJkYuT4u9spDOHRZXbcu2gFV/BYyTEpp0Usrhu8TEgIS14o/cmlLs0bRpglk
-	5HyR4HDpd9UgHHOPK9rIMYU3XlI9Oz39YCCPqwX1Xmi9NyKCJIE0yzoIo3eR05iQ+siJ
-	GnIJq9GVVXguKD413XVY/VmKFgS4H0YuZQProV+DqJ4N0G0PAnPD3zqOcE2sY96eP7Aa
-	z88g==
+	bh=3XsifDIGhf5ILQr4ZZ68utZSlVs8RP7dSdgnRqdNMBA=;
+	b=rYCAmMlHywd5xtyVlxHFRRb+pxG11i8sy+1nfNnLctKZeK+aSRAN9rcD6WiZ+d63Ri
+	wUAtAQXGUNdJdOhPhHrIq/sGatxwyL2B90LiTSmuZH2GGY6tRcpTBlDM4K5clLv9we3K
+	9neema18coXJlNXvaTB9WQjAlXICex8DDX5mhwdTMr5fmPTEiIiXoztcUtmgp/gBMab8
+	Eny4W1B2mQ+AjwatKMFnQIGItAzejYg7nhO9/WetbciTzZYIIFsOmtRrzwDYWnWzR+wi
+	5Od5FwKK+buXvOwuE4TCftjot8Qt/cP42BmR2410wFtJ8Eun80SbAOsCvPIKv/Vmir3h
+	S9ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=4dRHdTosdstJ4WBCyI6ceZ8FAHud/cJA6CUsS3leVRM=;
-	b=a161ZdWUNK+h/5nRyFxHGqgjYffkSMkUkTrmtptb0Zhx8GT8uuMnpD93Mq/M+fFlA7
-	lRuirI/qyoHzDHl5z355NMWADlgccw5m5baH2nIvTDG25gl4utzOr1tP/HRsgKXHUtYz
-	krnSeW/ZvkJtYhLXnEG2dNOs+gSn/uvreLtb2Wp3LdBKCy6MkAjLoMzjWcR8FpLGrKiO
-	Q7/DXL38T5deQydvfx+zwBkIc//Lrfcx0Lw7l+BLYtTlgw81SAhl4pP7I7oiKd4MA9XY
-	MB+5BcicUxznFHE5QcasR5Mlf2MvkaCypsV3eSmKo+Yzc6Jol+qdedb58IyKc+IEZUXo
-	82Rw==
-X-Gm-Message-State: ALKqPwe9wRHa4U+Zf1jTSfQA20cva3ULRMVFephtps/VPWBXZlWHXRRj
-	5VRg6TtuOJnu4097ghUeXflqhw==
-X-Google-Smtp-Source: AB8JxZpidLnr7v31J7d0JdyujDvgjypJm5a8y8tpwg4aOpjZfZXtByYuLrYl4lpC8ankCFnzlPtIzw==
-X-Received: by 2002:a63:6aca:: with SMTP id
-	f193-v6mr3535056pgc.244.1526021519710; 
-	Thu, 10 May 2018 23:51:59 -0700 (PDT)
+	bh=3XsifDIGhf5ILQr4ZZ68utZSlVs8RP7dSdgnRqdNMBA=;
+	b=qvxxRS8C68WVC747X5kDOKd6vsdPXtB+r+1I/KS75Xa5EPLaqV//NEa2EWOZnwSnuS
+	ca0BMn/dTaIzymTFFK0n4Wd7mSpFjM86Zq1QpHnPxi7kBumNq+nMhbhjNfTOWPwHUNUn
+	2KNkSnzwGzWYmRRVdf0lKHkFiSOf2fdZW0uuzR8NEIrRtW2xXA0B+EXYaNxBbRtF+ttg
+	80o1QMQckJ4uOWN7/N2PV++HYNmqGZaR2UpQZVmPyL/CEgQnltH8kMPQHxqZSMyVHQ98
+	O9zDIEHolf6tDB0JfFciMAt/vNTEvXH+32lTxcviFcBXbFqsljnzgCKHh7BbdM5dNvye
+	ky/Q==
+X-Gm-Message-State: ALKqPweEd8FgyKRykZ06Tb7x+gMLphPe1KjpCkqSuquafq7PKpXFnqHp
+	O/o9CfgEzonFn1sVImyeg71zRg==
+X-Google-Smtp-Source: AB8JxZrKQ77ZD3mpsP6U/8DSzYUjRJow1+0aNi6KbjNUbY9dYSjCumUJFvq0BO9kRSCypTFiiR7q9Q==
+X-Received: by 2002:a63:6ac6:: with SMTP id
+	f189-v6mr3556256pgc.308.1526022105829; 
+	Fri, 11 May 2018 00:01:45 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	w12-v6sm6648503pfi.158.2018.05.10.23.51.58
+	w1-v6sm3741016pgp.3.2018.05.11.00.01.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 May 2018 23:51:59 -0700 (PDT)
+	Fri, 11 May 2018 00:01:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 May 2018 23:51:53 -0700
-Message-Id: <20180511065153.39324-1-raj.khem@gmail.com>
+Date: Fri, 11 May 2018 00:01:42 -0700
+Message-Id: <20180511070142.38794-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
-Subject: [meta-oe][PATCH] poppler: Update to 0.64
+Subject: [meta-oe][PATCH V2] poppler: Update to 0.64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,15 +54,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 06:51:59 -0000
+X-List-Received-Date: Fri, 11 May 2018 07:01:45 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+Changes since v1:
+    - Fix build with security flags
+
  ...txt-Add-libpoppler-to-link-along-wit.patch | 29 +++++++++++++++++++
- .../{poppler_0.63.0.bb => poppler_0.64.0.bb}  | 20 +++++++------
- 2 files changed, 40 insertions(+), 9 deletions(-)
+ .../{poppler_0.63.0.bb => poppler_0.64.0.bb}  | 18 +++++++-----
+ 2 files changed, 39 insertions(+), 8 deletions(-)
  create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
- rename meta-oe/recipes-support/poppler/{poppler_0.63.0.bb => poppler_0.64.0.bb} (74%)
+ rename meta-oe/recipes-support/poppler/{poppler_0.63.0.bb => poppler_0.64.0.bb} (76%)
 
 diff --git a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
 new file mode 100644
@@ -101,10 +103,10 @@ index 0000000000..7ed795ef7b
 +   list(APPEND _abs_introspection_files
 +     ${CMAKE_CURRENT_BINARY_DIR}/poppler-enums.c
 diff --git a/meta-oe/recipes-support/poppler/poppler_0.63.0.bb b/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
-similarity index 74%
+similarity index 76%
 rename from meta-oe/recipes-support/poppler/poppler_0.63.0.bb
 rename to meta-oe/recipes-support/poppler/poppler_0.64.0.bb
-index 8acb356287..01f0df109d 100644
+index 8acb356287..1e87ae6e6c 100644
 --- a/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
 +++ b/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
 @@ -2,15 +2,15 @@ SUMMARY = "Poppler is a PDF rendering library based on the xpdf-3.0 code base"
@@ -131,12 +133,8 @@ index 8acb356287..01f0df109d 100644
  
  inherit cmake pkgconfig gobject-introspection
  
-@@ -26,12 +26,14 @@ PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
- # surprise - did not expect this to work :)
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
- 
--SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
-+#SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+@@ -29,9 +29,11 @@ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
  
  EXTRA_OECMAKE += " \
 +    -DENABLE_CMS=lcms2 \
