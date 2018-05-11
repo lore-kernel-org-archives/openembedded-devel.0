@@ -1,64 +1,40 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
-	[209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 69D1175416;
-	Fri, 11 May 2018 01:21:04 +0000 (UTC)
-Received: by mail-vk0-f47.google.com with SMTP id x66-v6so2337982vka.11;
-	Thu, 10 May 2018 18:21:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/+QHbk5qi5sWQpIhC+E4PS5XURcIWHJWkg6AmI5rWbw=;
-	b=XCtfojZOl/xPk89SlqX3f4W7u2T3+uxkviMuefWAlO6R5RAPAgutd1IhNWC76/WllQ
-	0//nAqwrjp8BgxcwlTlbz6DwZhv8zQGohE/s8HThqeEm4UF+emLFtxJ4l7PUdnY4aqnK
-	/PuAGN3AP9+vwjldSO37obbxVdr861L3ntGlmAE/GnSxd47OkULf/fBqdI0nFgU3sIoC
-	cOsi94+9JuzF1wqd25aqJ+154H9IfpGRO1T+46FgTdrhf7yEaatbmQbhYuf/kJUTRbNB
-	Z/hZVyK973VBzbcw1UdoTi1AiVBhp+gCb6RhYeqpIcZYBt6MwUFMnShwCInjZtgLva8L
-	970g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/+QHbk5qi5sWQpIhC+E4PS5XURcIWHJWkg6AmI5rWbw=;
-	b=ZQeVXwiFvUgdM9X+VLKEjbz8FJTc/hFIXaPhRKPJlRFizlHZJZ4QP/eobjbBy4VG5m
-	q7B16BlksFVIebMq/8cHCC/67yTd2HUb0BSVx9+JyeC0x4FJ+wv7lgjnWuUfcBbkcgdZ
-	xmf01B0GybSMB9CCxFcj3atn5w7W/fl5le8p23qevOyBFOFh3fvC22V+GRtxgwO4mEql
-	y1qdrKVSvevML8K96IyCj09Edk2ayWibg7akjOkn6MewbybqmobBzQQtagFxChx5pSMp
-	cxKTDoePiT+cnu3cqUNk+sT6spowQSnjXKiiu0fXiOqM9ZOIkj+XM5z8xNtJpF7XSirB
-	mvBQ==
-X-Gm-Message-State: ALKqPwci44OpjXiVikKNgemyQ7y9/UwbIYhelsczkyicOjGVl1iQxqRc
-	0Ckf7EGRb7nrefkqqluc5PoS3v6xw65xoDxzhag=
-X-Google-Smtp-Source: AB8JxZoVutMhCr4IwSNgfQ4qHADr1OdPBkDSSgGQ5Dzew83bFC3av7WQAYDUmb8Kxe90usbwY5LrsSbH0rW1z722Zr0=
-X-Received: by 2002:a1f:a7c7:: with SMTP id
-	q190-v6mr2563728vke.5.1526001665119; 
-	Thu, 10 May 2018 18:21:05 -0700 (PDT)
+Return-Path: <cshored@thecshore.com>
+Received: from mail.thecshore.com (mail.thecshore.com [144.217.14.6])
+	by mail.openembedded.org (Postfix) with ESMTP id EF6E57522C
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 May 2018 02:51:05 +0000 (UTC)
+Received: from [10.137.0.15] (107-179-160-78.cpe.teksavvy.com [107.179.160.78])
+	by mail.thecshore.com (Postfix) with ESMTPSA id D08D02657;
+	Thu, 10 May 2018 22:51:05 -0400 (EDT)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.thecshore.com D08D02657
+Authentication-Results: mail.thecshore.com;
+	dmarc=none (p=none dis=none) header.from=thecshore.com
+Authentication-Results: mail.thecshore.com;
+	spf=fail smtp.mailfrom=cshored@thecshore.com
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.thecshore.com D08D02657
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thecshore.com;
+	s=default; t=1526007066;
+	bh=ulhA/TRUPIDO7GwOlZiNFrWfLv6T7iZJ4MGjkJA9Gpw=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+	b=gm8gg5bxGoEkrJtc0hUm1eiUNE0pzpIOPKfeFdgQ6kkbW6uAhyVB4lV2pBgeaChrM
+	sEeiEfofYAL/TAEsiEhfWRzXz80hexB6R/Lc5Ta2AX+QzQk7l3t1xtvdIdkBthlCHb
+	fALZAKCV9fZBqU0p3vquhW/tt+z6fzhApNNsReSg=
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.99.4 at mail.thecshore.com
+To: Khem Raj <raj.khem@gmail.com>, Parthiban Nallathambi <pn@denx.de>,
+	openembedded-devel@lists.openembedded.org
+References: <20180318164919.5142-1-pn@denx.de>
+	<20180318164919.5142-2-pn@denx.de>
+	<99fe4319-0f92-1544-599e-354633ae78aa@gmail.com>
+From: "Daniel F. Dickinson" <cshored@thecshore.com>
+Message-ID: <32080680-ba12-c608-5f29-9376be84a8ea@thecshore.com>
+Date: Thu, 10 May 2018 22:51:04 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
 MIME-Version: 1.0
-Received: by 10.176.48.148 with HTTP; Thu, 10 May 2018 18:21:04 -0700 (PDT)
-In-Reply-To: <CAMKF1sr1ic2iJLaZsPXGUAhkfb-RJoo6tA1cvCW6Bq3jjCsZrA@mail.gmail.com>
-References: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
-	<CA+chaQcUU=Dew1cATDBpuA2_f_eh1=DAyEMaDHfVx7kY88rZhg@mail.gmail.com>
-	<8d962430-ac63-5e97-fd32-2c0464c62acb@gmail.com>
-	<20180510191145.GA1954@jama>
-	<CAJ86T=Xz+2neJPBw41_sFxd977xp=zznsgzFdbeHJ-aysJNk+g@mail.gmail.com>
-	<20180510214325.GC1954@jama> <20180510220735.GD1954@jama>
-	<CAJ86T=UpZ0+HTqre2Z4eAPM9LY_eH1EUO=e1v0sz7FPe4+8aRw@mail.gmail.com>
-	<CA+chaQcTPwJy+dL6GvBKJTcZuiVUiztVqEDXmSwZ==b53m_mcQ@mail.gmail.com>
-	<CAJ86T=XkBkKhK6mwqxnFA1CkaV5swjGKsdNv_7E9fgFa=qhdCw@mail.gmail.com>
-	<20180510225017.GE1954@jama>
-	<CAJ86T=UfXtgtaWQyJbrhW40MJFW9YAArB3CshMxy5e5f9Cg_=Q@mail.gmail.com>
-	<CAMKF1soAQYfL+gwsEmt6bZv_42pO_F5Gsb0CxUrdWueaja50hg@mail.gmail.com>
-	<CAJ86T=UOog5f1TFbRZxnpvvUcAddRMUsv2nnOQwWWWvdTGb7VA@mail.gmail.com>
-	<CAMKF1sqmg-7kRbPfH_HEiyBv5vmqj4Sy=bCKqbxdQ5qG+_+5rA@mail.gmail.com>
-	<CAJ86T=WQd-1MWa7H1Zt28i2NPV5f6VOKvaE0LTP+PkKQtdFNKA@mail.gmail.com>
-	<CAMKF1sr1ic2iJLaZsPXGUAhkfb-RJoo6tA1cvCW6Bq3jjCsZrA@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Thu, 10 May 2018 18:21:04 -0700
-Message-ID: <CAJ86T=UXCjj-djDmz+GtXj3Suo_oQV4=xssvRwEnTrhNYT7RJQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	openembedded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] GCC 8.1
+In-Reply-To: <99fe4319-0f92-1544-599e-354633ae78aa@gmail.com>
+Cc: barathiraja@gmail.com
+Subject: Re: [meta-openwrt][PATCH] [hostapd]: Update patch based on 2.6 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,67 +47,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 01:21:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 11 May 2018 02:51:06 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-CA
+Content-Transfer-Encoding: 8bit
 
-On Thu, May 10, 2018 at 6:16 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Thu, May 10, 2018 at 6:11 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
->> On Thu, May 10, 2018 at 6:06 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> On Thu, May 10, 2018 at 6:00 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
->>>> On Thu, May 10, 2018 at 5:55 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>>>> On Thu, May 10, 2018 at 4:11 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
->>>>>> On Thu, May 10, 2018 at 3:50 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>>>>>> On Thu, May 10, 2018 at 03:40:53PM -0700, Andre McCurdy wrote:
->>>>>>>> On Thu, May 10, 2018 at 3:38 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>>>>>>> > see
->>>>>>>> > http://lists.openembedded.org/pipermail/openembedded-core/2018-May/150654.html
->>>>>>>>
->>>>>>>> Removing -fno-omit-frame-pointer isn't the same as adding
->>>>>>>> -fomit-frame-pointer. Frame pointers may get enabled depending on the
->>>>>>>> optimisation level etc (ie not only by -fno-omit-frame-pointer).
->>>>>>>
->>>>>>> Should I send v2 adding -fomit-frame-pointer instead of removing
->>>>>>> -fno-omit-frame-pointer?
->>>>>>>
->>>>>>> The v1 fixes the issue for me with default config + DEBUG_BUILD.
->>>>>>
->>>>>> The v1 patch isn't wrong, it's just incomplete (the problem could come
->>>>>> back if someone changes optimisation level or switches gcc to clang,
->>>>>> etc).
->>>>>>
->>>>>> My choice would be a v2 patch which adds -fomit-frame-pointer to
->>>>>> CFLAGS unconditionally for all ARM builds when Thumb is enabled. That
->>>>>> should fix the problem for all optimisation levels etc and avoids
->>>>>> building the main strace binary differently depending on whether or
->>>>>> not ptest is enabled.
->>>>>
->>>>> explicitly adding this option is a poor choice especially for debug
->>>>> builds where we should
->>>>> let the -On level decide and not explicitly ask for either
->>>>> enable/disable frame-pointers
->>>>> that will also make it compiler proof.
->>>>
->>>> Of course, we should let the compiler decide whenever it's possible to do so.
->>>>
->>>> Unfortunately there are cases like this one where frame pointers clash
->>>> with inline assembler and we need to over-rule the compiler's choice.
->>>
->>> Here we are adding -fno-omit-frame-pointer via global opt flags that
->>> is the issue
->>> where we have fallouts from default O options I agree we should teach
->>> this to build
->>> system and help the compiler
+On 2018-03-19 12:50 AM, Khem Raj wrote:
+> 
+> 
+> On 3/18/18 9:49 AM, Parthiban Nallathambi wrote:
+>> Update the existing patch to work for hostapd 2.6
+>> (which is the current version of openembedded-core
+>> rocko branch).
 >>
->> Since there's NO situation where enabling frame pointers is going to
->> work for this code + ARM + Thumb, I don't see the advantage of leaving
->> anything up to chance. Just explicitly disabling frame pointers is the
->> safest and cleanest option.
->
-> In that case what we are saying is that strace has wrong assumptions
-> I would think its best to change strace build system to demand this
-> option override instead of injecting it externally.
+>> "netifd.sh" is no more part of hostapd source, so
+>> removing it from do_install section of tweak
+>>
+> 
+> thanks looks ok.
+> 
 
-There are many possible / better fixes if we want to patch the strace
-sources or Makefiles. I'm not sure if Martin was signing up for that
-though :-)
+Sorry I just noticed this.  hostapd.sh comes from the OpenWrt repo not 
+the hostapd repo, and is required for netifd, so this will break AP mode 
+for meta-openwrt.
+
+I think P.N. was confused because most recipes don't use multiple repos.
+
+Regards,
+
+Daniel
+
+
+>> Signed-off-by: Parthiban Nallathambi <pn@denx.de>
+>> ---
+>>   recipes-tweaks/hostapd/hostapd/300-noscan.patch | 42 
+>> ++++++++++++-------------
+>>   recipes-tweaks/hostapd/hostapd_%.bbappend       |  2 --
+>>   2 files changed, 21 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/recipes-tweaks/hostapd/hostapd/300-noscan.patch 
+>> b/recipes-tweaks/hostapd/hostapd/300-noscan.patch
+>> index e89cb9d..e9f8ee1 100644
+>> --- a/recipes-tweaks/hostapd/hostapd/300-noscan.patch
+>> +++ b/recipes-tweaks/hostapd/hostapd/300-noscan.patch
+>> @@ -1,7 +1,7 @@
+>> -diff -ruN hostapd-2.5.orig/hostapd/config_file.c 
+>> hostapd-2.5/hostapd/config_file.c
+>> ---- hostapd-2.5.orig/hostapd/config_file.c    2017-02-15 
+>> 16:20:07.102232803 -0700
+>> -+++ hostapd-2.5/hostapd/config_file.c    2017-02-15 
+>> 16:20:35.132232593 -0700
+>> -@@ -2795,6 +2795,10 @@
+>> +diff -ruN hostapd-2.6/hostapd/config_file.c 
+>> hostapd-2.6.orig/hostapd/config_file.c
+>> +--- hostapd-2.6/hostapd/config_file.c    2016-10-02 
+>> 20:51:11.000000000 +0200
+>> ++++ hostapd-2.6.orig/hostapd/config_file.c    2018-03-17 
+>> 23:05:11.032723997 +0100
+>> +@@ -2863,6 +2863,10 @@
+>>            }
+>>    #endif /* CONFIG_IEEE80211W */
+>>    #ifdef CONFIG_IEEE80211N
+>> @@ -12,10 +12,10 @@ diff -ruN hostapd-2.5.orig/hostapd/config_file.c 
+>> hostapd-2.5/hostapd/config_file
+>>        } else if (os_strcmp(buf, "ieee80211n") == 0) {
+>>            conf->ieee80211n = atoi(pos);
+>>        } else if (os_strcmp(buf, "ht_capab") == 0) {
+>> -diff -ruN hostapd-2.5.orig/src/ap/ap_config.h 
+>> hostapd-2.5/src/ap/ap_config.h
+>> ---- hostapd-2.5.orig/src/ap/ap_config.h    2017-02-15 
+>> 16:20:07.105566137 -0700
+>> -+++ hostapd-2.5/src/ap/ap_config.h    2017-02-15 16:20:35.135565927 
+>> -0700
+>> -@@ -626,6 +626,8 @@
+>> +diff -ruN hostapd-2.6/src/ap/ap_config.h 
+>> hostapd-2.6.orig/src/ap/ap_config.h
+>> +--- hostapd-2.6/src/ap/ap_config.h    2016-10-02 20:51:11.000000000 
+>> +0200
+>> ++++ hostapd-2.6.orig/src/ap/ap_config.h    2018-03-17 
+>> 23:04:30.697722861 +0100
+>> +@@ -664,6 +664,8 @@
+>>        int ht_op_mode_fixed;
+>>        u16 ht_capab;
+>> @@ -24,22 +24,22 @@ diff -ruN hostapd-2.5.orig/src/ap/ap_config.h 
+>> hostapd-2.5/src/ap/ap_config.h
+>>        int ieee80211n;
+>>        int secondary_channel;
+>>        int no_pri_sec_switch;
+>> -diff -ruN hostapd-2.5.orig/src/ap/hw_features.c 
+>> hostapd-2.5/src/ap/hw_features.c
+>> ---- hostapd-2.5.orig/src/ap/hw_features.c    2017-02-15 
+>> 16:20:07.105566137 -0700
+>> -+++ hostapd-2.5/src/ap/hw_features.c    2017-02-15 16:22:03.158898602 
+>> -0700
+>> -@@ -472,7 +472,7 @@
+>> -     struct wpa_driver_scan_params params;
+>> -     int ret;
+>> +diff -ruN hostapd-2.6/src/ap/hw_features.c 
+>> hostapd-2.6.orig/src/ap/hw_features.c
+>> +--- hostapd-2.6/src/ap/hw_features.c    2016-10-02 20:51:11.000000000 
+>> +0200
+>> ++++ hostapd-2.6.orig/src/ap/hw_features.c    2018-03-17 
+>> 23:05:54.273725214 +0100
+>> +@@ -226,7 +226,7 @@
+>> + {
+>> +     int pri_chan, sec_chan;
+>>   -    if (!iface->conf->secondary_channel)
+>>   +    if (!iface->conf->secondary_channel || iface->conf->noscan)
+>> -         return 0; /* HT40 not used */
+>> +         return 1; /* HT40 not used */
+>> -     hostapd_set_state(iface, HAPD_IFACE_HT_SCAN);
+>> -diff -ruN hostapd-2.5.orig/src/ap/ieee802_11_ht.c 
+>> hostapd-2.5/src/ap/ieee802_11_ht.c
+>> ---- hostapd-2.5.orig/src/ap/ieee802_11_ht.c    2017-02-15 
+>> 16:20:07.105566137 -0700
+>> -+++ hostapd-2.5/src/ap/ieee802_11_ht.c    2017-02-15 
+>> 16:20:35.135565927 -0700
+>> -@@ -221,6 +221,9 @@
+>> +     pri_chan = iface->conf->channel;
+>> +diff -ruN hostapd-2.6/src/ap/ieee802_11_ht.c 
+>> hostapd-2.6.orig/src/ap/ieee802_11_ht.c
+>> +--- hostapd-2.6/src/ap/ieee802_11_ht.c    2016-10-02 
+>> 20:51:11.000000000 +0200
+>> ++++ hostapd-2.6.orig/src/ap/ieee802_11_ht.c    2018-03-17 
+>> 23:08:20.303729325 +0100
+>> +@@ -244,6 +244,9 @@
+>>        if (!(iface->conf->ht_capab & HT_CAP_INFO_SUPP_CHANNEL_WIDTH_SET))
+>>            return;
+>> @@ -49,7 +49,7 @@ diff -ruN hostapd-2.5.orig/src/ap/ieee802_11_ht.c 
+>> hostapd-2.5/src/ap/ieee802_11_
+>>        if (len < IEEE80211_HDRLEN + 2 + sizeof(*bc_ie))
+>>            return;
+>> -@@ -345,6 +348,9 @@
+>> +@@ -368,6 +371,9 @@
+>>        if (iface->current_mode->mode != HOSTAPD_MODE_IEEE80211G)
+>>            return;
+>> diff --git a/recipes-tweaks/hostapd/hostapd_%.bbappend 
+>> b/recipes-tweaks/hostapd/hostapd_%.bbappend
+>> index be45723..3b2f646 100644
+>> --- a/recipes-tweaks/hostapd/hostapd_%.bbappend
+>> +++ b/recipes-tweaks/hostapd/hostapd_%.bbappend
+>> @@ -15,8 +15,6 @@ do_install_append() {
+>>       install -d ${D}${base_libdir}/netifd/wireless
+>>       install -d ${D}${base_libdir}/wifi
+>> -    install -m 0755 
+>> ${WORKDIR}/git/openwrt/package/network/services/hostapd/files/netifd.sh ${D}${base_libdir}/netifd/hostapd.sh 
+>>
+>> -
+>>       install -m 0755 
+>> ${WORKDIR}/git/openwrt/package/kernel/mac80211/files/lib/wifi/mac80211.sh 
+>> ${D}${base_libdir}/wifi/mac80211.sh
+>>       install -m 0755 
+>> ${WORKDIR}/git/openwrt/package/kernel/mac80211/files/lib/netifd/wireless/mac80211.sh 
+>> ${D}${base_libdir}/netifd/wireless/mac80211.sh
+>>   }
+>>
+
 
