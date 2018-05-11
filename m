@@ -1,40 +1,48 @@
-Return-Path: <cshored@thecshore.com>
-Received: from mail.thecshore.com (mail.thecshore.com [144.217.14.6])
-	by mail.openembedded.org (Postfix) with ESMTP id EF6E57522C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B047752AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 May 2018 02:51:05 +0000 (UTC)
-Received: from [10.137.0.15] (107-179-160-78.cpe.teksavvy.com [107.179.160.78])
-	by mail.thecshore.com (Postfix) with ESMTPSA id D08D02657;
-	Thu, 10 May 2018 22:51:05 -0400 (EDT)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.thecshore.com D08D02657
-Authentication-Results: mail.thecshore.com;
-	dmarc=none (p=none dis=none) header.from=thecshore.com
-Authentication-Results: mail.thecshore.com;
-	spf=fail smtp.mailfrom=cshored@thecshore.com
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.thecshore.com D08D02657
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thecshore.com;
-	s=default; t=1526007066;
-	bh=ulhA/TRUPIDO7GwOlZiNFrWfLv6T7iZJ4MGjkJA9Gpw=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=gm8gg5bxGoEkrJtc0hUm1eiUNE0pzpIOPKfeFdgQ6kkbW6uAhyVB4lV2pBgeaChrM
-	sEeiEfofYAL/TAEsiEhfWRzXz80hexB6R/Lc5Ta2AX+QzQk7l3t1xtvdIdkBthlCHb
-	fALZAKCV9fZBqU0p3vquhW/tt+z6fzhApNNsReSg=
-X-Virus-Status: Clean
-X-Virus-Scanned: clamav-milter 0.99.4 at mail.thecshore.com
-To: Khem Raj <raj.khem@gmail.com>, Parthiban Nallathambi <pn@denx.de>,
-	openembedded-devel@lists.openembedded.org
-References: <20180318164919.5142-1-pn@denx.de>
-	<20180318164919.5142-2-pn@denx.de>
-	<99fe4319-0f92-1544-599e-354633ae78aa@gmail.com>
-From: "Daniel F. Dickinson" <cshored@thecshore.com>
-Message-ID: <32080680-ba12-c608-5f29-9376be84a8ea@thecshore.com>
-Date: Thu, 10 May 2018 22:51:04 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
-MIME-Version: 1.0
-In-Reply-To: <99fe4319-0f92-1544-599e-354633ae78aa@gmail.com>
-Cc: barathiraja@gmail.com
-Subject: Re: [meta-openwrt][PATCH] [hostapd]: Update patch based on 2.6 version
+	Fri, 11 May 2018 06:51:58 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id f189-v6so2266176pfa.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 May 2018 23:52:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=4dRHdTosdstJ4WBCyI6ceZ8FAHud/cJA6CUsS3leVRM=;
+	b=IuGpAGuXH9H/q6XJRnkFe+gTGkdao2X0lzI7gFIHdzd9Bn1vceoHgnxL9vZS26SBtp
+	dQ2IrA2x8mpKqeRssQHFKVqJk0PaOS4sK36cVaxREmmOcYEpK1RIDWuQC7lp3NpKk+Ps
+	Zlgzux4YuJkYuT4u9spDOHRZXbcu2gFV/BYyTEpp0Usrhu8TEgIS14o/cmlLs0bRpglk
+	5HyR4HDpd9UgHHOPK9rIMYU3XlI9Oz39YCCPqwX1Xmi9NyKCJIE0yzoIo3eR05iQ+siJ
+	GnIJq9GVVXguKD413XVY/VmKFgS4H0YuZQProV+DqJ4N0G0PAnPD3zqOcE2sY96eP7Aa
+	z88g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=4dRHdTosdstJ4WBCyI6ceZ8FAHud/cJA6CUsS3leVRM=;
+	b=a161ZdWUNK+h/5nRyFxHGqgjYffkSMkUkTrmtptb0Zhx8GT8uuMnpD93Mq/M+fFlA7
+	lRuirI/qyoHzDHl5z355NMWADlgccw5m5baH2nIvTDG25gl4utzOr1tP/HRsgKXHUtYz
+	krnSeW/ZvkJtYhLXnEG2dNOs+gSn/uvreLtb2Wp3LdBKCy6MkAjLoMzjWcR8FpLGrKiO
+	Q7/DXL38T5deQydvfx+zwBkIc//Lrfcx0Lw7l+BLYtTlgw81SAhl4pP7I7oiKd4MA9XY
+	MB+5BcicUxznFHE5QcasR5Mlf2MvkaCypsV3eSmKo+Yzc6Jol+qdedb58IyKc+IEZUXo
+	82Rw==
+X-Gm-Message-State: ALKqPwe9wRHa4U+Zf1jTSfQA20cva3ULRMVFephtps/VPWBXZlWHXRRj
+	5VRg6TtuOJnu4097ghUeXflqhw==
+X-Google-Smtp-Source: AB8JxZpidLnr7v31J7d0JdyujDvgjypJm5a8y8tpwg4aOpjZfZXtByYuLrYl4lpC8ankCFnzlPtIzw==
+X-Received: by 2002:a63:6aca:: with SMTP id
+	f193-v6mr3535056pgc.244.1526021519710; 
+	Thu, 10 May 2018 23:51:59 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	by smtp.gmail.com with ESMTPSA id
+	w12-v6sm6648503pfi.158.2018.05.10.23.51.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 May 2018 23:51:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 May 2018 23:51:53 -0700
+Message-Id: <20180511065153.39324-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-oe][PATCH] poppler: Update to 0.64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,160 +55,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 May 2018 02:51:06 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-CA
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 May 2018 06:51:59 -0000
 
-On 2018-03-19 12:50 AM, Khem Raj wrote:
-> 
-> 
-> On 3/18/18 9:49 AM, Parthiban Nallathambi wrote:
->> Update the existing patch to work for hostapd 2.6
->> (which is the current version of openembedded-core
->> rocko branch).
->>
->> "netifd.sh" is no more part of hostapd source, so
->> removing it from do_install section of tweak
->>
-> 
-> thanks looks ok.
-> 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...txt-Add-libpoppler-to-link-along-wit.patch | 29 +++++++++++++++++++
+ .../{poppler_0.63.0.bb => poppler_0.64.0.bb}  | 20 +++++++------
+ 2 files changed, 40 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+ rename meta-oe/recipes-support/poppler/{poppler_0.63.0.bb => poppler_0.64.0.bb} (74%)
 
-Sorry I just noticed this.  hostapd.sh comes from the OpenWrt repo not 
-the hostapd repo, and is required for netifd, so this will break AP mode 
-for meta-openwrt.
-
-I think P.N. was confused because most recipes don't use multiple repos.
-
-Regards,
-
-Daniel
-
-
->> Signed-off-by: Parthiban Nallathambi <pn@denx.de>
->> ---
->>   recipes-tweaks/hostapd/hostapd/300-noscan.patch | 42 
->> ++++++++++++-------------
->>   recipes-tweaks/hostapd/hostapd_%.bbappend       |  2 --
->>   2 files changed, 21 insertions(+), 23 deletions(-)
->>
->> diff --git a/recipes-tweaks/hostapd/hostapd/300-noscan.patch 
->> b/recipes-tweaks/hostapd/hostapd/300-noscan.patch
->> index e89cb9d..e9f8ee1 100644
->> --- a/recipes-tweaks/hostapd/hostapd/300-noscan.patch
->> +++ b/recipes-tweaks/hostapd/hostapd/300-noscan.patch
->> @@ -1,7 +1,7 @@
->> -diff -ruN hostapd-2.5.orig/hostapd/config_file.c 
->> hostapd-2.5/hostapd/config_file.c
->> ---- hostapd-2.5.orig/hostapd/config_file.c    2017-02-15 
->> 16:20:07.102232803 -0700
->> -+++ hostapd-2.5/hostapd/config_file.c    2017-02-15 
->> 16:20:35.132232593 -0700
->> -@@ -2795,6 +2795,10 @@
->> +diff -ruN hostapd-2.6/hostapd/config_file.c 
->> hostapd-2.6.orig/hostapd/config_file.c
->> +--- hostapd-2.6/hostapd/config_file.c    2016-10-02 
->> 20:51:11.000000000 +0200
->> ++++ hostapd-2.6.orig/hostapd/config_file.c    2018-03-17 
->> 23:05:11.032723997 +0100
->> +@@ -2863,6 +2863,10 @@
->>            }
->>    #endif /* CONFIG_IEEE80211W */
->>    #ifdef CONFIG_IEEE80211N
->> @@ -12,10 +12,10 @@ diff -ruN hostapd-2.5.orig/hostapd/config_file.c 
->> hostapd-2.5/hostapd/config_file
->>        } else if (os_strcmp(buf, "ieee80211n") == 0) {
->>            conf->ieee80211n = atoi(pos);
->>        } else if (os_strcmp(buf, "ht_capab") == 0) {
->> -diff -ruN hostapd-2.5.orig/src/ap/ap_config.h 
->> hostapd-2.5/src/ap/ap_config.h
->> ---- hostapd-2.5.orig/src/ap/ap_config.h    2017-02-15 
->> 16:20:07.105566137 -0700
->> -+++ hostapd-2.5/src/ap/ap_config.h    2017-02-15 16:20:35.135565927 
->> -0700
->> -@@ -626,6 +626,8 @@
->> +diff -ruN hostapd-2.6/src/ap/ap_config.h 
->> hostapd-2.6.orig/src/ap/ap_config.h
->> +--- hostapd-2.6/src/ap/ap_config.h    2016-10-02 20:51:11.000000000 
->> +0200
->> ++++ hostapd-2.6.orig/src/ap/ap_config.h    2018-03-17 
->> 23:04:30.697722861 +0100
->> +@@ -664,6 +664,8 @@
->>        int ht_op_mode_fixed;
->>        u16 ht_capab;
->> @@ -24,22 +24,22 @@ diff -ruN hostapd-2.5.orig/src/ap/ap_config.h 
->> hostapd-2.5/src/ap/ap_config.h
->>        int ieee80211n;
->>        int secondary_channel;
->>        int no_pri_sec_switch;
->> -diff -ruN hostapd-2.5.orig/src/ap/hw_features.c 
->> hostapd-2.5/src/ap/hw_features.c
->> ---- hostapd-2.5.orig/src/ap/hw_features.c    2017-02-15 
->> 16:20:07.105566137 -0700
->> -+++ hostapd-2.5/src/ap/hw_features.c    2017-02-15 16:22:03.158898602 
->> -0700
->> -@@ -472,7 +472,7 @@
->> -     struct wpa_driver_scan_params params;
->> -     int ret;
->> +diff -ruN hostapd-2.6/src/ap/hw_features.c 
->> hostapd-2.6.orig/src/ap/hw_features.c
->> +--- hostapd-2.6/src/ap/hw_features.c    2016-10-02 20:51:11.000000000 
->> +0200
->> ++++ hostapd-2.6.orig/src/ap/hw_features.c    2018-03-17 
->> 23:05:54.273725214 +0100
->> +@@ -226,7 +226,7 @@
->> + {
->> +     int pri_chan, sec_chan;
->>   -    if (!iface->conf->secondary_channel)
->>   +    if (!iface->conf->secondary_channel || iface->conf->noscan)
->> -         return 0; /* HT40 not used */
->> +         return 1; /* HT40 not used */
->> -     hostapd_set_state(iface, HAPD_IFACE_HT_SCAN);
->> -diff -ruN hostapd-2.5.orig/src/ap/ieee802_11_ht.c 
->> hostapd-2.5/src/ap/ieee802_11_ht.c
->> ---- hostapd-2.5.orig/src/ap/ieee802_11_ht.c    2017-02-15 
->> 16:20:07.105566137 -0700
->> -+++ hostapd-2.5/src/ap/ieee802_11_ht.c    2017-02-15 
->> 16:20:35.135565927 -0700
->> -@@ -221,6 +221,9 @@
->> +     pri_chan = iface->conf->channel;
->> +diff -ruN hostapd-2.6/src/ap/ieee802_11_ht.c 
->> hostapd-2.6.orig/src/ap/ieee802_11_ht.c
->> +--- hostapd-2.6/src/ap/ieee802_11_ht.c    2016-10-02 
->> 20:51:11.000000000 +0200
->> ++++ hostapd-2.6.orig/src/ap/ieee802_11_ht.c    2018-03-17 
->> 23:08:20.303729325 +0100
->> +@@ -244,6 +244,9 @@
->>        if (!(iface->conf->ht_capab & HT_CAP_INFO_SUPP_CHANNEL_WIDTH_SET))
->>            return;
->> @@ -49,7 +49,7 @@ diff -ruN hostapd-2.5.orig/src/ap/ieee802_11_ht.c 
->> hostapd-2.5/src/ap/ieee802_11_
->>        if (len < IEEE80211_HDRLEN + 2 + sizeof(*bc_ie))
->>            return;
->> -@@ -345,6 +348,9 @@
->> +@@ -368,6 +371,9 @@
->>        if (iface->current_mode->mode != HOSTAPD_MODE_IEEE80211G)
->>            return;
->> diff --git a/recipes-tweaks/hostapd/hostapd_%.bbappend 
->> b/recipes-tweaks/hostapd/hostapd_%.bbappend
->> index be45723..3b2f646 100644
->> --- a/recipes-tweaks/hostapd/hostapd_%.bbappend
->> +++ b/recipes-tweaks/hostapd/hostapd_%.bbappend
->> @@ -15,8 +15,6 @@ do_install_append() {
->>       install -d ${D}${base_libdir}/netifd/wireless
->>       install -d ${D}${base_libdir}/wifi
->> -    install -m 0755 
->> ${WORKDIR}/git/openwrt/package/network/services/hostapd/files/netifd.sh ${D}${base_libdir}/netifd/hostapd.sh 
->>
->> -
->>       install -m 0755 
->> ${WORKDIR}/git/openwrt/package/kernel/mac80211/files/lib/wifi/mac80211.sh 
->> ${D}${base_libdir}/wifi/mac80211.sh
->>       install -m 0755 
->> ${WORKDIR}/git/openwrt/package/kernel/mac80211/files/lib/netifd/wireless/mac80211.sh 
->> ${D}${base_libdir}/netifd/wireless/mac80211.sh
->>   }
->>
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+new file mode 100644
+index 0000000000..7ed795ef7b
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+@@ -0,0 +1,29 @@
++From d488de23b75b2f3e235f1c184b2253d1402b4c0f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 10 May 2018 23:47:56 -0700
++Subject: [PATCH] glib/CMakeLists.txt: Add libpoppler to link along with
++ poppler-glib
++
++This is required since poppler-glib uses symbols from poppler and
++we use --as-needed
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ glib/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
++index 33c6608..87e1b44 100644
++--- a/glib/CMakeLists.txt
+++++ b/glib/CMakeLists.txt
++@@ -127,7 +127,7 @@ if (HAVE_INTROSPECTION AND BUILD_SHARED_LIBS)
++   get_directory_property(_tmp_includes INCLUDE_DIRECTORIES)
++   _list_prefix(_includes _tmp_includes "-I")
++   set(Poppler_0_18_gir_CFLAGS ${_includes} -L${CMAKE_BINARY_DIR})
++-  set(Poppler_0_18_gir_LIBS poppler-glib)
+++  set(Poppler_0_18_gir_LIBS poppler-glib poppler)
++   _list_prefix(_abs_introspection_files introspection_files "${CMAKE_CURRENT_SOURCE_DIR}/")
++   list(APPEND _abs_introspection_files
++     ${CMAKE_CURRENT_BINARY_DIR}/poppler-enums.c
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.63.0.bb b/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
+similarity index 74%
+rename from meta-oe/recipes-support/poppler/poppler_0.63.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.64.0.bb
+index 8acb356287..01f0df109d 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
+@@ -2,15 +2,15 @@ SUMMARY = "Poppler is a PDF rendering library based on the xpdf-3.0 code base"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI = " \
+-    http://poppler.freedesktop.org/${BP}.tar.xz \
+-    file://0001-Do-not-overwrite-all-our-build-flags.patch \
+-    file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
+-"
+-SRC_URI[md5sum] = "66a54da4896b1408611699feda5c1821"
+-SRC_URI[sha256sum] = "27cc8addafc791e1a26ce6acc2b490926ea73a4f89196dd8a7742cff7cf8a111"
++SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
++           file://0001-Do-not-overwrite-all-our-build-flags.patch \
++           file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
++           file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
++           "
++SRC_URI[md5sum] = "f7f687ebb60004f8ad61994575018044"
++SRC_URI[sha256sum] = "b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1"
+ 
+-DEPENDS = "fontconfig zlib cairo lcms"
++DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ 
+ inherit cmake pkgconfig gobject-introspection
+ 
+@@ -26,12 +26,14 @@ PACKAGECONFIG[nss] = "-DWITH_NSS3=ON,-DWITH_NSS3=OFF,nss"
+ # surprise - did not expect this to work :)
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ 
+-SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
++#SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+ 
+ EXTRA_OECMAKE += " \
++    -DENABLE_CMS=lcms2 \
+     -DENABLE_XPDF_HEADERS=ON \
+     -DBUILD_GTK_TESTS=OFF \
+     -DENABLE_ZLIB=ON \
++    -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='${STAGING_INCDIR}' \
+ "
+ 
+ do_configure_append() {
+-- 
+2.17.0
 
 
