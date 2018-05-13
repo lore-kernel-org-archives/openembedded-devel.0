@@ -1,46 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 799BB789A4
+Return-Path: <robert.joslyn@redrectangle.org>
+Received: from slow1-d.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 2591A789E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 May 2018 14:56:51 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id j5-v6so7903988wme.5
+	Sun, 13 May 2018 02:10:16 +0000 (UTC)
+Received: from relay6-d.mail.gandi.net (unknown [217.70.183.198])
+	by slow1-d.mail.gandi.net (Postfix) with ESMTP id EC9B03A5289
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 May 2018 07:56:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=lAtvXsIsdg4RApEwUp/VX9EuNoR1YwDzJXOUWyEb4yQ=;
-	b=YXBEKO//DjTvDiM8YYlzHVkxXE/7XInox1+mNVBHvMqK0TwBrNkLviwGvX7+wpexLM
-	0Slw0OLrwalys51U0FizN1THKgvM8NNpLYtA9YKjdOzhvxd8IRqkcvsIKO/rjw3IvOmv
-	O2ytyT1p0VTFzk2Ubh9rrdpUvZx39zNvnbRdYkduYZHI70Bt8HkFAjrvtuSHVS6P2VGI
-	5tFbQcgkE21aQgeumDRZ+zGIivtetiQTfMNSpGdNN87Wh5inmacZHSjo7D3ykQEKhwXg
-	Q+0kvRO6VOACeCCE4r5LEIEHlAQGY5DWroAfWcY8yQSpG60bmL1hDUkcYtHLlcCkECOi
-	p5/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lAtvXsIsdg4RApEwUp/VX9EuNoR1YwDzJXOUWyEb4yQ=;
-	b=Hy4B7Da1DMTqErxNDLx4W6NoRHiTTkgpKxFxo2gCxV5qFHqLqf8CZrHVQXuaH0Z0Yx
-	snimQztlEAKyK/ovdYYZBAsiaLzFQpWWuMrj9ASwtrQro/H9Vq6Hkmjc6QfQjpCScula
-	WEsVhk8wwDmosf0bgX7v1ML5WRlqCTH0bI9uBRokHkGbBP0tuTzRv0/dXlj1dEHxxtYH
-	LsM761QX94vqRIUkAp2BzgYNoXiEE3B7baLPDV9ZL6Kltj8MiZ8P8CteV2OKiIJTofjf
-	D3gpbUHaYzZ70Ul6zlIegOLktcNoZlZaAlVDEC8QmtePbuRANg3VIQS9bXchi70mwyHw
-	QMoA==
-X-Gm-Message-State: ALKqPwehanxP1nKGo4gV8zU4hjSyaeR+1umxR8UGpxAfH6kJGBkoDL5J
-	3evkaV+XIi0rB5hWEC61njZB7w==
-X-Google-Smtp-Source: AB8JxZoseVEfNcj2Hrd/FliN277D1YumU1WVoY4Vny+jWIC2/hYkxX3um/xF12VaYsBop6Mm8NcPVQ==
-X-Received: by 2002:a1c:d809:: with SMTP id p9-v6mr1506395wmg.6.1526137011711; 
-	Sat, 12 May 2018 07:56:51 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	o138-v6sm4035666wmg.10.2018.05.12.07.56.50
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 12 May 2018 07:56:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Sun, 13 May 2018 03:59:07 +0200 (CEST)
+X-Originating-IP: 64.126.143.1
+Received: from localhost.localdomain (w143001.wireless.fsr.net [64.126.143.1])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id 1A951C0002;
+	Sun, 13 May 2018 03:59:06 +0200 (CEST)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 May 2018 14:56:52 +0000
-Message-Id: <20180512145652.27265-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.0
-Subject: [meta-qt5][PATCH] gstreamer1.0-plugins-{good, bad}: move the qt5 PACKAGECONFIG from bad to good bbappend
+Date: Sat, 12 May 2018 18:58:42 -0700
+Message-Id: <20180513015842.4284-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.16.1
+X-Spam-Level: 
+Subject: [meta-oe][rocko][PATCH] meson.bbclass: Backport rework from OE-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,23 +31,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 May 2018 14:56:51 -0000
+X-List-Received-Date: Sun, 13 May 2018 02:10:17 -0000
 
-* the plugin was moved in gstreamer 1.14 and now this bbappend was causing:
-  http://errors.yoctoproject.org/Errors/Details/178525/
-  ERROR: QA Issue: gstreamer1.0-plugins-bad: configure was passed unrecognised options: --disable-qt [unknown-configure-option]
+Starting from commit cead3c4925d39f8adc328007d8a8c1b23cc72842 in
+OE-core, uninative forces the use of the uninative ld in BUILD_LDFLAGS.
+This causes target binaries built with this class to use the uninative
+ld at runtime, which doesn't exist on the target.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Since this class has been migrated to OE-core for future releases,
+backport the entire class to fix this issue and others.
+
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- ...lugins-bad_%.bbappend => gstreamer1.0-plugins-good_%.bbappend} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename recipes-multimedia/gstreamer/{gstreamer1.0-plugins-bad_%.bbappend => gstreamer1.0-plugins-good_%.bbappend} (100%)
+ meta-oe/classes/meson.bbclass | 74 ++++++++++++++++++++++++++++---------------
+ 1 file changed, 49 insertions(+), 25 deletions(-)
 
-diff --git a/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend b/recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_%.bbappend
-similarity index 100%
-rename from recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend
-rename to recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_%.bbappend
+diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
+index a09bc240d..2d7ee4fff 100644
+--- a/meta-oe/classes/meson.bbclass
++++ b/meta-oe/classes/meson.bbclass
+@@ -9,21 +9,11 @@ do_configure[cleandirs] = "${B}"
+ # Where the meson.build build configuration is
+ MESON_SOURCEPATH = "${S}"
+ 
+-# These variables in the environment override the *native* tools, not the cross.
+-export CPPFLAGS = "${BUILD_CPPFLAGS}"
+-export CC = "${BUILD_CC}"
+-export CFLAGS = "${BUILD_CFLAGS}"
+-export CXX = "${BUILD_CXX}"
+-export CXXFLAGS = "${BUILD_CXXFLAGS}"
+-export LD = "${BUILD_LD}"
+-export LDFLAGS = "${BUILD_LDFLAGS}"
+-export AR = "${BUILD_AR}"
+-export PKG_CONFIG = "pkg-config-native"
+-
+ def noprefix(var, d):
+-    return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
++    return d.getVar(var).replace(d.getVar('prefix') + '/', '', 1)
+ 
+ MESONOPTS = " --prefix ${prefix} \
++              --buildtype plain \
+               --bindir ${@noprefix('bindir', d)} \
+               --sbindir ${@noprefix('sbindir', d)} \
+               --datadir ${@noprefix('datadir', d)} \
+@@ -36,40 +26,46 @@ MESONOPTS = " --prefix ${prefix} \
+               --localstatedir ${localstatedir} \
+               --sharedstatedir ${sharedstatedir}"
+ 
+-MESON_C_ARGS = "${TARGET_CC_ARCH}${TOOLCHAIN_OPTIONS}"
+-MESON_LINK_ARGS = "${MESON_C_ARGS} ${LDFLAGS}"
++MESON_TOOLCHAIN_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
++MESON_C_ARGS = "${MESON_TOOLCHAIN_ARGS} ${CFLAGS}"
++MESON_CPP_ARGS = "${MESON_TOOLCHAIN_ARGS} ${CXXFLAGS}"
++MESON_LINK_ARGS = "${MESON_TOOLCHAIN_ARGS} ${LDFLAGS}"
+ 
+-MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'little', d)}"
+-MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
++# both are required but not used by meson
++MESON_HOST_ENDIAN = "bogus-endian"
++MESON_TARGET_ENDIAN = "bogus-endian"
+ 
+ EXTRA_OEMESON += "${PACKAGECONFIG_CONFARGS}"
+ 
+ MESON_CROSS_FILE = ""
+ MESON_CROSS_FILE_class-target = "--cross-file ${WORKDIR}/meson.cross"
++MESON_CROSS_FILE_class-nativesdk = "--cross-file ${WORKDIR}/meson.cross"
+ 
+ def meson_array(var, d):
+-    return "', '".join(d.getVar(var, True).split()).join(("'", "'"))
++    return "', '".join(d.getVar(var).split()).join(("'", "'"))
+ 
+ addtask write_config before do_configure
+-do_write_config[vardeps] += "MESON_C_ARGS TOOLCHAIN_OPTIONS"
++do_write_config[vardeps] += "MESON_C_ARGS MESON_CPP_ARGS MESON_LINK_ARGS CC CXX LD AR NM STRIP READELF"
+ do_write_config() {
+     # This needs to be Py to split the args into single-element lists
+     cat >${WORKDIR}/meson.cross <<EOF
+ [binaries]
+-c = '${HOST_PREFIX}gcc'
+-cpp = '${HOST_PREFIX}g++'
+-ar = '${HOST_PREFIX}ar'
+-ld = '${HOST_PREFIX}ld'
+-strip = '${HOST_PREFIX}strip'
+-readelf = '${HOST_PREFIX}readelf'
++c = [${@meson_array('CC', d)}]
++cpp = [${@meson_array('CXX', d)}]
++ar = [${@meson_array('AR', d)}]
++nm = [${@meson_array('NM', d)}]
++ld = [${@meson_array('LD', d)}]
++strip = [${@meson_array('STRIP', d)}]
++readelf = [${@meson_array('READELF', d)}]
+ pkgconfig = 'pkg-config'
+ 
+ [properties]
+ needs_exe_wrapper = true
+ c_args = [${@meson_array('MESON_C_ARGS', d)}]
+ c_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
+-cpp_args = [${@meson_array('MESON_C_ARGS', d)}]
++cpp_args = [${@meson_array('MESON_CPP_ARGS', d)}]
+ cpp_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
++gtkdoc_exe_wrapper = '${B}/gtkdoc-qemuwrapper'
+ 
+ [host_machine]
+ system = '${HOST_OS}'
+@@ -94,6 +90,34 @@ meson_do_configure() {
+     fi
+ }
+ 
++meson_do_configure_prepend_class-target() {
++    # Set these so that meson uses the native tools for its build sanity tests,
++    # which require executables to be runnable. The cross file will still
++    # override these for the target build. Note that we do *not* set CFLAGS,
++    # LDFLAGS, etc. as they will be slurped in by meson and applied to the
++    # target build, causing errors.
++    export CC="${BUILD_CC}"
++    export CXX="${BUILD_CXX}"
++    export LD="${BUILD_LD}"
++    export AR="${BUILD_AR}"
++}
++
++meson_do_configure_prepend_class-nativesdk() {
++    # Set these so that meson uses the native tools for its build sanity tests,
++    # which require executables to be runnable. The cross file will still
++    # override these for the nativesdk build. Note that we do *not* set CFLAGS,
++    # LDFLAGS, etc. as they will be slurped in by meson and applied to the
++    # nativesdk build, causing errors.
++    export CC="${BUILD_CC}"
++    export CXX="${BUILD_CXX}"
++    export LD="${BUILD_LD}"
++    export AR="${BUILD_AR}"
++}
++
++meson_do_configure_prepend_class-native() {
++    export PKG_CONFIG="pkg-config-native"
++}
++
+ do_compile[progress] = "outof:^\[(\d+)/(\d+)\]\s+"
+ meson_do_compile() {
+     ninja ${PARALLEL_MAKE}
 -- 
-2.17.0
+2.16.1
 
 
