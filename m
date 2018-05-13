@@ -1,52 +1,47 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
-	[209.85.128.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 15C497542F
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id C1BAB754FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 May 2018 22:16:38 +0000 (UTC)
-Received: by mail-wr0-f182.google.com with SMTP id p5-v6so10290840wre.12
+	Sun, 13 May 2018 22:17:36 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id n10-v6so11720746wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 May 2018 15:16:40 -0700 (PDT)
+	Sun, 13 May 2018 15:17:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=6LtsBkYTrZqQ0UZRJfEU6UhzNiNQLRm/trXT9Q8+F/Y=;
-	b=XtwnSQVFiMjFQD8yJG1giPcR9Oi3q+pf4Ln6PM+bZ3q3ljyT4plFf3YBsBCZ7PG0PG
-	o0u4PbFmame/bWhBukanoT4O4RvpuomwkkytwqQUbxQlh4AzkhBTs995/S0BbgUBeT5M
-	2ZpWW4wIr3Th/YLbsn/ClxVNHr2ZA1fh3gWHuNQHKn++d0645LbfrxQJQxZlSPcJbvIC
-	pk278PRzyN0HwPzVDwl3xnf9JCp3Cn/MKqDqD9mysRwc3OYrfaGxWmExcCKx0S6uKUSH
-	1lh4mGdatOTp0n6tDqwJ103LI4Ewvw6lJZTro51lInmfaLONwHFrPOeKZf9wB8ssuZNO
-	Wgtg==
+	h=from:to:cc:subject:date:message-id;
+	bh=V95sInDPLJSE3afqyHCxJLvBZwSQdgsa4yDJIQYXfEg=;
+	b=UeiTxYDyekKMdHyj5B2XduSext2r23yr1sTg4Lwg7SZJfQXTmsNrcE5Vd5HLnkf+ID
+	76Tcl8InO90xZlw4fRosBvIdedghmTcD8TcVHM+vThtitKcllF/FsinFN2rqtOGoUuPC
+	kvXhDhEQhnxmNLUmNLI/FGsR2FE1LxRsjhMxYNIJaApCURVIfPBt9hxEumeBc7nuZLxC
+	WE/4VOadmNozLu/1l695PuciK5tQjXEqtDhekIHbSMz0watpo2O8wTboCg0mgElMC4GI
+	F+2q+RJ/x7z9s7DceCzIwmi4bzaJ83TkCqJB11qMckkAsfdNwulH+6D+mv7ibRCcU7cd
+	1Kng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=6LtsBkYTrZqQ0UZRJfEU6UhzNiNQLRm/trXT9Q8+F/Y=;
-	b=FU/TwMFC6T0Vs5pLjNslzzN3Z7RQF5sQ4U/nIx6P7I/S9dsSKsHqT8b6631YpDA5ML
-	7m8CB5Lv+3fT+MecOofY8tYF1/Ll4enlJvhPLy2dAyjrd5cpnMwWrMSs2KhW07kJKkrh
-	ctwGzLMRXuWcwl4GaPOowXdocOhF0ZQslAYww5E50euipS5D/ulA1NMMwwAebOz12PgS
-	xOhQfNkWdWhhvSTDTlWfZ5rIY9MiOzKJPlJUmQIZBc39rmHfMNZm92nSBfYfMXptjrFL
-	ewvAE0iIHtGMIWO2v+PItR+T6WRvHS5BwDQCsv5qJf7ugfRp7IvV3kszQxu6AhGMaW12
-	k1mQ==
-X-Gm-Message-State: ALKqPwcXJRLSGaEjWfyx2tIINu7fnnqtFoPvQnK9KxXJMB/SGm9SaoUz
-	WmWhw+ZouEObRHEFhOBykSDvRw==
-X-Google-Smtp-Source: AB8JxZo3s/VGSRabxLF2fBZyDw8lX+qtDyQ1SqWz2biTZRPNN4CS6RRpTphU5wo82EerPb6XI7TzWw==
-X-Received: by 2002:adf:e147:: with SMTP id
-	f7-v6mr4855559wri.271.1526249798024; 
-	Sun, 13 May 2018 15:16:38 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=V95sInDPLJSE3afqyHCxJLvBZwSQdgsa4yDJIQYXfEg=;
+	b=ZBnevTii7xJqXxqzbVDiQf1Fdh7TrsMeBD4nuLGlcBd7PbNTLMnVDvLYCRNFhyoLXv
+	n1JZe5Tjw/MVNgBYKjI4UpV7Tg4lqg05zctcPny42Dfc+fZam4PbVUXxG1XqdpNVj876
+	tiLKlbSKvm4dGzTOQ+TdVos2BHYQe81+KfJIx8Usc10fpuN2L4cWKHtM6rR5FzsR/S8v
+	WPKvHsCv1sX2sxaX1uR8S41YvnFcSo/nV7j10Oxj0/iKb5A5T3WRUMo0HTYbnBgwzTYm
+	CuZAQMp3GZ+duyTvesSMymaxC19eNF6MhM5zg389K3sK+oP4sUhBXNfOqngkynx2Bs6a
+	uZGQ==
+X-Gm-Message-State: ALKqPwfCgZkfpXIgTGgya+FKN/xTJfPWyxzjOUw0SzX06R92Tfx04tXU
+	TucRbyPdSfJR3QWwiWyUhnWwtA==
+X-Google-Smtp-Source: AB8JxZqoJtiZCd9nhVfHA601Xg1lavEW3VBUkW+6F4kqjaBj1e+kvS29qOOpvGMIpTC1k1UfgIeHpA==
+X-Received: by 2002:a1c:f52:: with SMTP id 79-v6mr3855619wmp.24.1526249855819; 
+	Sun, 13 May 2018 15:17:35 -0700 (PDT)
 Received: from localhost.localdomain
 	(host10-248-dynamic.0-87-r.retail.telecomitalia.it. [87.0.248.10])
 	by smtp.gmail.com with ESMTPSA id
-	a185-v6sm7889409wmf.30.2018.05.13.15.16.36
+	k28-v6sm11555609wrk.46.2018.05.13.15.17.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 13 May 2018 15:16:37 -0700 (PDT)
+	Sun, 13 May 2018 15:17:35 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 May 2018 00:16:31 +0200
-Message-Id: <1526249791-5375-1-git-send-email-andrea.adami@gmail.com>
+Date: Mon, 14 May 2018 00:17:30 +0200
+Message-Id: <1526249850-5448-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-initramfs][PATCH] ubi-utils-klibc: update from v. 1.5.2 to 2.0.2
+Subject: [meta-initramfs][PATCH] kexec-tools-klibc: upgrade from v. 2.0.2 to 2.0.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,1329 +54,2051 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 May 2018 22:16:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 13 May 2018 22:17:37 -0000
 
-Update to new version and drop accepted patches.
+This version does support aarch64.
+Ad klibc-specific patchset and track the git repository
+to get the (many) fixes for the warnings.
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../0001-Makefile-build-ubi-utils-only.patch       |  87 ------
- .../0002-common.mk-for-klibc-CC-is-klcc.patch      |  27 --
- ...bubi.c-add-klibc-specific-fixes-for-ioctl.patch |  76 -----
- ...patibility-to-dietlibc-klibc-musl-libc-af.patch |  88 ------
- ...-more-workarounds-for-klibc-compatibility.patch |  52 ----
- ...rser-remove-unused-function-needing-float.patch |  85 ------
- ...ls-common.c-convert-to-integer-arithmetic.patch |  64 ----
- ...ubiformat.c-convert-to-integer-arithmetic.patch |  44 ---
- ...arnings-about-implicit-non-const-casting-.patch |  48 ---
- ...mple-getline-implementation-to-libmissing.patch | 187 ++++++++++++
- ...doing-preprocessor-magic-just-output-off_.patch | 326 +++++++++++++++++++++
- .../0003-Makefile.am-only-build-ubi-utils.patch    |  34 +++
- ...s-common.h-no-features.h-for-klibc-builds.patch |  38 +++
- ...ils-klibc_1.5.2.bb => ubi-utils-klibc_2.0.2.bb} |  26 +-
- 14 files changed, 598 insertions(+), 584 deletions(-)
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch
- delete mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-Add-simple-getline-implementation-to-libmissing.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003-Makefile.am-only-build-ubi-utils.patch
- create mode 100644 meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0004-mtd-utils-common.h-no-features.h-for-klibc-builds.patch
- rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc_1.5.2.bb => ubi-utils-klibc_2.0.2.bb} (64%)
+ .../kexec-tools-klibc-2.0.2/arm_crashdump.patch    |  12 --
+ .../kexec-tools-klibc-2.0.2/cflags_static.patch    |  11 --
+ .../fix-out-of-tree-build.patch                    |  54 --------
+ .../kexec-tools-klibc-2.0.2/ifdown_errno.patch     |  11 --
+ .../kexec-tools-klibc-2.0.2/kexec-elf-rel.patch    |  61 ---------
+ .../kexec-tools-klibc-2.0.2/kexec-syscall.patch    |  44 ------
+ .../kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch     |  18 ---
+ .../kexec-tools-klibc-2.0.2/purgatory_flags.patch  |  21 ---
+ .../kexec-tools-klibc-2.0.2/purgatory_string.patch |   9 --
+ .../kexec/kexec-tools-klibc-2.0.2/sha256.patch     |  13 --
+ .../sysconf_nrprocessors.patch                     |  13 --
+ .../kexec-tools-klibc-2.0.2/x86_basename.patch     |  14 --
+ .../kexec-tools-klibc-2.0.2/x86_kexec_test.patch   |  13 --
+ .../kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch |  21 ---
+ .../kexec-tools-klibc-2.0.2/x86_vfscanf.patch      |  27 ----
+ .../0001-force-static-build.patch                  |  25 ++++
+ ...e-order-of-headers-to-fix-build-for-musl.patch} |  17 ++-
+ .../0003-kexec-elf-rel-use-our-elf.h.patch         |  92 +++++++++++++
+ ...4-kexec-elf-exec.c-replace-with-our-err.h.patch |  30 ++++
+ ...lf.c-work-around-for-sysconf-_SC_NPROCESS.patch | 134 ++++++++++++++++++
+ ...all.h-work-around-missing-syscall-wrapper.patch |  49 +++++++
+ .../0007-kexec.c-add-guard-around-ENOTSUP.patch    |  37 +++++
+ .../0008-kexec.c-replace-mising-BLKGETSIZE64.patch |  32 +++++
+ ...mcore-dmesg.c-work-around-missing-imaxdiv.patch |  57 ++++++++
+ .../0010-fs2dt.c-work-around-missing-getline.patch |  47 +++++++
+ .../0011-purgatory-Makefile-adapt-to-klcc.patch    |  43 ++++++
+ ...tory-string.c-avoid-inclusion-of-string.h.patch |  31 +++++
+ ...3-sha256.h-avoid-inclusion-of-sys-types.h.patch |  36 +++++
+ .../0014-add-if_nameindex-from-musl.patch          | 152 +++++++++++++++++++++
+ .../0015-vmcore-dmesg-fix-warning.patch            |  29 ++++
+ .../arm64-crashdump-arm64.c-fix-warning.patch      |  34 +++++
+ ..._kexec-image-header.h-add-missing-le64toh.patch |  40 ++++++
+ ...4_purgatory-Makefile-remove-unknown-flags.patch |  51 +++++++
+ .../kexec/kexec-tools-klibc/arm_crashdump.patch    |  31 +++++
+ ...c-purgatory-Makefile-remove-unknown-flags.patch |  34 +++++
+ ...4-purgatory-Makefile-remove-unknown-flags.patch |  33 +++++
+ .../kexec/kexec-tools-klibc/x86_basename.patch     |  30 ++++
+ .../kexec/kexec-tools-klibc/x86_kexec_test.patch   |  30 ++++
+ .../kexec/kexec-tools-klibc/x86_sys_io.patch       |  36 +++++
+ .../kexec/kexec-tools-klibc/x86_vfscanf.patch      |  43 ++++++
+ .../kexec/kexec-tools-klibc_2.0.2.bb               |  69 ----------
+ .../recipes-kernel/kexec/kexec-tools-klibc_git.bb  |  92 +++++++++++++
+ 42 files changed, 1256 insertions(+), 420 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/arm_crashdump.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/cflags_static.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/fix-out-of-tree-build.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ifdown_errno.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-elf-rel.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-syscall.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_flags.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_string.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sha256.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sysconf_nrprocessors.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_basename.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_kexec_test.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0001-force-static-build.patch
+ rename meta-initramfs/recipes-kernel/kexec/{kexec-tools-klibc-2.0.2/0001-Adjust-the-order-of-headers-to-fix-build-for-musl.patch => kexec-tools-klibc/0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch} (64%)
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0003-kexec-elf-rel-use-our-elf.h.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0004-kexec-elf-exec.c-replace-with-our-err.h.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0005-crashdump-elf.c-work-around-for-sysconf-_SC_NPROCESS.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0007-kexec.c-add-guard-around-ENOTSUP.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0008-kexec.c-replace-mising-BLKGETSIZE64.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0009-vmcore-dmesg.c-work-around-missing-imaxdiv.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0010-fs2dt.c-work-around-missing-getline.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0012-purgatory-string.c-avoid-inclusion-of-string.h.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0013-sha256.h-avoid-inclusion-of-sys-types.h.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0014-add-if_nameindex-from-musl.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0015-vmcore-dmesg-fix-warning.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64-crashdump-arm64.c-fix-warning.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_kexec-image-header.h-add-missing-le64toh.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm_crashdump.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/powerpc-purgatory-Makefile-remove-unknown-flags.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86-64-purgatory-Makefile-remove-unknown-flags.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_basename.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_sys_io.patch
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_vfscanf.patch
+ delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/arm_crashdump.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/arm_crashdump.patch
 deleted file mode 100644
-index 6ac2cca..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0001-Makefile-build-ubi-utils-only.patch
+index 0ff61e5..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/arm_crashdump.patch
 +++ /dev/null
-@@ -1,87 +0,0 @@
--From 1c989e4c36d0bf76ab444f984bc73b98eeacd03f Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sun, 29 Jun 2014 00:32:29 +0200
--Subject: [PATCH 1/9] Makefile: build ubi-utils only
--
--We build all the static ubi-utils but actually only ubiattach is needed in
--a minimalistic initramfs for the mount of ubi volumes.
--
--More fixes are needed in order to build the full mtd-utils.
--The first issue is:
--
--| mkfs.jffs2.c:64:20: fatal error: libgen.h: No such file or directory
--|  #include <libgen.h>
--
--Removing the include then the second error is:
--
--| mkfs.jffs2.c:1570:22: error: '_SC_PAGESIZE' undeclared
--| (first use in this function)
--|   page_size = sysconf(_SC_PAGESIZE);
--
--Upstream-Status: Inappropriate [embedded specific]
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- Makefile | 26 ++------------------------
-- 1 file changed, 2 insertions(+), 24 deletions(-)
--
--diff --git a/Makefile b/Makefile
--index 3ce8587..8b79f71 100644
----- a/Makefile
--+++ b/Makefile
--@@ -16,28 +16,11 @@ endif
-- 
-- TESTS = tests
-- 
---MTD_BINS = \
---	ftl_format flash_erase nanddump doc_loadbios \
---	ftl_check mkfs.jffs2 flash_lock flash_unlock \
---	flash_otp_info flash_otp_dump flash_otp_lock flash_otp_write \
---	mtd_debug flashcp nandwrite nandtest mtdpart \
---	jffs2dump \
---	nftldump nftl_format docfdisk \
---	rfddump rfdformat \
---	serve_image recv_image \
---	sumtool jffs2reader
-- UBI_BINS = \
-- 	ubiupdatevol ubimkvol ubirmvol ubicrc32 ubinfo ubiattach \
-- 	ubidetach ubinize ubiformat ubirename mtdinfo ubirsvol ubiblock
-- 
---BINS = $(MTD_BINS)
---BINS += mkfs.ubifs/mkfs.ubifs
---BINS += $(addprefix ubi-utils/,$(UBI_BINS))
---SCRIPTS = flash_eraseall
---
---TARGETS = $(BINS)
---TARGETS += lib/libmtd.a
---TARGETS += ubi-utils/libubi.a
--+BINS = $(addprefix ubi-utils/,$(UBI_BINS))
-- 
-- OBJDEPS = $(BUILDDIR)/include/version.h
-- 
--@@ -61,12 +44,9 @@ endif
-- 	rm -f $(BUILDDIR)/include/version.h
-- 	$(MAKE) -C $(TESTS) clean
-- 
---install:: $(addprefix $(BUILDDIR)/,${BINS}) ${SCRIPTS}
--+install:: $(addprefix $(BUILDDIR)/,${BINS})
-- 	mkdir -p ${DESTDIR}/${SBINDIR}
-- 	install -m 0755 $^ ${DESTDIR}/${SBINDIR}/
---	mkdir -p ${DESTDIR}/${MANDIR}/man1
---	install -m 0644 mkfs.jffs2.1 ${DESTDIR}/${MANDIR}/man1/
---	-gzip -9f ${DESTDIR}/${MANDIR}/man1/*.1
-- 
-- tests::
-- 	$(MAKE) -C $(TESTS)
--@@ -91,8 +71,6 @@ LDLIBS_mkfs.jffs2  = -lz $(LZOLDLIBS)
-- LDFLAGS_jffs2reader = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
-- LDLIBS_jffs2reader  = -lz $(LZOLDLIBS)
-- 
---$(foreach v,$(MTD_BINS),$(eval $(call mkdep,,$(v))))
---
-- #
-- # Common libmtd
-- #
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch
-deleted file mode 100644
-index c23d11f..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0002-common.mk-for-klibc-CC-is-klcc.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--From 89c76bbe82a2029a25b0654eb0a1d0b22d6e6877 Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sun, 29 Jun 2014 00:37:28 +0200
--Subject: [PATCH 2/9] common.mk: for klibc $(CC) is klcc
--
--Do not hardcode: assign the value to the variable if it is not already defined.
--
--Upstream-Status: Submitted
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- common.mk | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/common.mk b/common.mk
--index ba87377..126d11a 100644
----- a/common.mk
--+++ b/common.mk
--@@ -1,4 +1,4 @@
---CC := $(CROSS)gcc
--+CC ?= $(CROSS)gcc
-- AR := $(CROSS)ar
-- RANLIB := $(CROSS)ranlib
-- 
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch
-deleted file mode 100644
-index 9ad4a5b..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch
-+++ /dev/null
-@@ -1,76 +0,0 @@
--From fecbb7056d621a30f7106e67f5fe209763571b70 Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sun, 29 Jun 2014 00:40:15 +0200
--Subject: [PATCH 3/9] libubi.c: add klibc specific fixes for ioctl
--
--First issue is that ioctl() in klibc doesn't expect a constant as arg3.
--Second issue is that arg3 in klibc ioctl() implementation is not optional.
--
--Fixes:
--
--| ubi-utils/libubi.c: In function 'do_attach':
--| ubi-utils/libubi.c:698:8: warning: passing argument 3 of 'ioctl' discards
--| 'const' qualifier from pointer target type
--|   ret = ioctl(fd, UBI_IOCATT, r);
--|         ^
--| In file included from ubi-utils/libubi.c:32:0:
--| .../lib/klibc/include/sys/ioctl.h:15:14: note: expected 'void *' but argument
--| is of type 'const struct ubi_attach_req *'
--|  __extern int ioctl(int, int, void *);
--|               ^
--
--| ubi-utils/libubi.c: In function 'ubi_vol_block_create':
--| ubi-utils/libubi.c:1118:9: error: too few arguments to function 'ioctl'
--|   return ioctl(fd, UBI_IOCVOLCRBLK);
--|          ^
--| In file included from ubi-utils/libubi.c:32:0:
--| .../lib/klibc/include/sys/ioctl.h:15:14: note: declared here
--|  __extern int ioctl(int, int, void *);
--|               ^
--| ubi-utils/libubi.c: In function 'ubi_vol_block_remove':
--| ubi-utils/libubi.c:1123:9: error: too few arguments to function 'ioctl'
--|   return ioctl(fd, UBI_IOCVOLRMBLK);
--|          ^
--| In file included from ubi-utils/libubi.c:32:0:
--| .../usr/lib/klibc/include/sys/ioctl.h:15:14: note: declared here
--|  __extern int ioctl(int, int, void *);
--|               ^
--
--Upstream-Status: Accepted
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- ubi-utils/libubi.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/ubi-utils/libubi.c b/ubi-utils/libubi.c
--index 97c0434..2b49833 100644
----- a/ubi-utils/libubi.c
--+++ b/ubi-utils/libubi.c
--@@ -687,7 +687,7 @@ void libubi_close(libubi_t desc)
--  * success and %-1 in case of failure. @r->ubi_num contains newly created UBI
--  * device number.
+@@ -1,12 +0,0 @@
+---- a/kexec/arch/arm/crashdump-arm.c
+-+++ b/kexec/arch/arm/crashdump-arm.c
+-@@ -20,7 +20,7 @@
+-  * along with this program; if not, write to the Free Software
+-  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 -  */
---static int do_attach(const char *node, const struct ubi_attach_req *r)
--+static int do_attach(const char *node, struct ubi_attach_req *r)
-- {
-- 	int fd, ret;
-- 
--@@ -1115,12 +1115,12 @@ int ubi_rsvol(libubi_t desc, const char *node, int vol_id, long long bytes)
-- 
-- int ubi_vol_block_create(int fd)
-- {
---	return ioctl(fd, UBI_IOCVOLCRBLK);
--+	return ioctl(fd, UBI_IOCVOLCRBLK, NULL);
-- }
-- 
-- int ubi_vol_block_remove(int fd)
-- {
---	return ioctl(fd, UBI_IOCVOLRMBLK);
--+	return ioctl(fd, UBI_IOCVOLRMBLK, NULL);
-- }
-- 
-- int ubi_update_start(libubi_t desc, int fd, long long bytes)
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch
-deleted file mode 100644
-index 2f31fb4..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch
-+++ /dev/null
-@@ -1,88 +0,0 @@
--From b668cb75cb7e72ff92055209130d4cd4b3cacbdb Mon Sep 17 00:00:00 2001
--From: Thorsten Glaser <tg@mirbsd.org>
--Date: Fri, 20 Jun 2014 10:56:27 +0000
--Subject: [PATCH 4/9] Restore compatibility to dietlibc, klibc, musl libc after
-- commit 4f1b108
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Each C library has their own way to define off_t, and the <features.h>
--header is nonstandard and specific to the GNU libc and those that clone
--it (uClibc). Fefe’s dietlibc uses different flags, and klibc always uses
--a 64-bit off_t (like the BSDs); musl libc cannot be recognised using cpp
--instructions, so we assume 64 bit there (and on unknown C libraries) and
--leave it to the user to submit a follow-up fix if we guess wrong. I also
--added a static assertion to verify the 64 bit guess is correct.
--
--It would be really better using a configure script for this instead.
--
--Fixes:
--|   CC      lib/libmtd.o
--| In file included from ubi-utils/ubiutils-common.c:35:0:
--| ./include/common.h:29:22: fatal error: features.h: No such file or directory
--|  #include <features.h>
--|                       ^
--| compilation terminated.
--
--Upstream-Status: Submitted
--
--Signed-off-by: Thorsten Glaser <tg@mirbsd.org>
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- include/common.h | 24 ++++++++++++++++++++++++
-- 1 file changed, 24 insertions(+)
--
--diff --git a/include/common.h b/include/common.h
--index fb0ca83..5a20964 100644
----- a/include/common.h
--+++ b/include/common.h
--@@ -26,7 +26,9 @@
-- #include <string.h>
-- #include <fcntl.h>
+--#include <elf.h>
+-+#include "../../../include/elf.h"
 - #include <errno.h>
--+#if defined(__GLIBC__) || defined(__UCLIBC__)
-- #include <features.h>
--+#endif
-- #include <inttypes.h>
-- #include "version.h"
-- 
--@@ -67,6 +69,21 @@ extern "C" {
-- #endif
-- 
-- /* define a print format specifier for off_t */
--+#if defined(__KLIBC__)
--+/* always 64 bit on klibc */
--+#define PRIxoff_t PRIx64
--+#define PRIdoff_t PRId64
--+#elif defined(__dietlibc__)
--+/* depends on compiler flags on dietlibc */
--+#if defined(_FILE_OFFSET_BITS) && (_FILE_OFFSET_BITS == 64)
--+#define PRIxoff_t PRIx64
--+#define PRIdoff_t PRId64
--+#else
--+#define PRIxoff_t "l"PRIx32
--+#define PRIdoff_t "l"PRId32
--+#endif
--+#elif defined(__GLIBC__) || defined(__UCLIBC__)
--+/* depends on compiler flags on glibc and uClibc */
-- #ifdef __USE_FILE_OFFSET64
-- #define PRIxoff_t PRIx64
-- #define PRIdoff_t PRId64
--@@ -74,6 +91,13 @@ extern "C" {
-- #define PRIxoff_t "l"PRIx32
-- #define PRIdoff_t "l"PRId32
-- #endif
--+#else
--+/* unknown libc or musl */
--+#define PRIxoff_t PRIx64
--+#define PRIdoff_t PRId64
--+/* verify our guess of 64 bit is correct */
--+static char __PRIxoff_t_static_assert[sizeof(off_t) == 8 ? 1 : -1];
--+#endif
-- 
-- /* Verbose messages */
-- #define bareverbose(verbose, fmt, ...) do {                        \
---- 
--2.7.4
+- #include <stdio.h>
+- #include <stdlib.h>
 -
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/cflags_static.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/cflags_static.patch
 deleted file mode 100644
-index 8309a72..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0005-common.h-more-workarounds-for-klibc-compatibility.patch
+index 35100a3..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/cflags_static.patch
 +++ /dev/null
-@@ -1,52 +0,0 @@
--From 5d4a66b502003ef385dab31a17012246407e7364 Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sun, 29 Jun 2014 00:44:03 +0200
--Subject: [PATCH 5/9] common.h: more workarounds for klibc compatibility
--
--Patch is addressing two issues:
--* First,  Klibc doesn't have rpmatch().
--* Second, Klibc lacks getline()
--
--Fixes:
--|   LD      ubi-utils/ubiformat
--| .../git/ubi-utils/ubiformat.o: In function `prompt':
--| .../git/./include/common.h:157: undefined reference to `getline'
--| .../git/./include/common.h:164: undefined reference to `rpmatch'
--| .../git/./include/common.h:157: undefined reference to `getline'
--| .../git/./include/common.h:164: undefined reference to `rpmatch'
--
--Upstream-Status: Submitted
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- include/common.h | 8 +++++---
-- 1 file changed, 5 insertions(+), 3 deletions(-)
--
--diff --git a/include/common.h b/include/common.h
--index 5a20964..2f51e1c 100644
----- a/include/common.h
--+++ b/include/common.h
--@@ -161,15 +161,17 @@ static inline int __rpmatch(const char *resp)
--  */
-- static inline bool prompt(const char *msg, bool def)
-- {
---	char *line = NULL;
---	size_t len;
--+	char *line;
-- 	bool ret = def;
-- 
--+	const int sizeof_line = 2;
--+	line = malloc(sizeof_line);
--+
-- 	do {
-- 		normsg_cont("%s (%c/%c) ", msg, def ? 'Y' : 'y', def ? 'n' : 'N');
-- 		fflush(stdout);
-- 
---		while (getline(&line, &len, stdin) == -1) {
--+		while (fgets(line, sizeof_line, stdin) == NULL) {
-- 			printf("failed to read prompt; assuming '%s'\n",
-- 				def ? "yes" : "no");
-- 			break;
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch
+@@ -1,11 +0,0 @@
+---- a/Makefile.in
+-+++ b/Makefile.in
+-@@ -46,7 +46,7 @@
+- # where necessary.
+- CPPFLAGS	= @CPPFLAGS@ -I$(srcdir)/include -I$(srcdir)/util_lib/include \
+-			-Iinclude/
+--CFLAGS		= @CFLAGS@ -fno-strict-aliasing -Wall -Wstrict-prototypes
+-+CFLAGS		= @CFLAGS@ -static -fno-strict-aliasing -Wall -Wstrict-prototypes
+- PURGATORY_EXTRA_CFLAGS = @PURGATORY_EXTRA_CFLAGS@
+- ASFLAGS		= @ASFLAGS@
+- LDFLAGS		= @LDFLAGS@
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/fix-out-of-tree-build.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/fix-out-of-tree-build.patch
 deleted file mode 100644
-index d046f95..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0006-libiniparser-remove-unused-function-needing-float.patch
+index ccbb24d..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/fix-out-of-tree-build.patch
 +++ /dev/null
-@@ -1,85 +0,0 @@
--From 2af30e9b2988111e45ed6ea6af55e49ec7cb1cb1 Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sun, 29 Jun 2014 00:44:57 +0200
--Subject: [PATCH 6/9] libiniparser: remove unused function needing float
+@@ -1,54 +0,0 @@
+-From 37737527725e465833be649101c4a6f8352c5d5e Mon Sep 17 00:00:00 2001
+-From: Tyler Hall <tylerwhall@gmail.com>
+-Date: Tue, 7 Feb 2012 18:50:05 -0500
+-Subject: Fix out-of-tree build
 -
--Fixes:
--|   LD      ubi-utils/ubiformat
--| .../git/ubi-utils/libiniparser.a(libiniparser.o): In function
--| `  LD      ubi-utils/ubirename
--| iniparser_getdouble':
--| .../git/ubi-utils/libiniparser.c:336: undefined reference to `atof'
+-Use automatic variables for prerequisites when copying man pages and
+-include a makefile relative to $(srcdir).
 -
--Grep doesn't reveal any occurrence of iniparser_getdouble(), using atof() so
--remove it: floating-point is not supported in klibc
+-Backported to 2.0.2-klibc
 -
--Upstream-Status: Accepted
+-Signed-off-by: Tyler Hall <tylerwhall@gmail.com>
+-Signed-off-by: Simon Horman <horms@verge.net.au>
 -
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- ubi-utils/include/libiniparser.h | 15 ---------------
-- ubi-utils/libiniparser.c         | 22 ----------------------
-- 2 files changed, 37 deletions(-)
--
--diff --git a/ubi-utils/include/libiniparser.h b/ubi-utils/include/libiniparser.h
--index be3c667..abd77aa 100644
----- a/ubi-utils/include/libiniparser.h
--+++ b/ubi-utils/include/libiniparser.h
--@@ -158,21 +158,6 @@ int iniparser_getint(dictionary * d, const char * key, int notfound);
+-diff --git a/kdump/Makefile b/kdump/Makefile
+-index 1e2b72c..5dfa928 100644
+---- a/kdump/Makefile
+-+++ b/kdump/Makefile
+-@@ -22,7 +22,7 @@ $(KDUMP): $(KDUMP_OBJS)
 - 
-- /*-------------------------------------------------------------------------*/
-- /**
---  @brief    Get the string associated to a key, convert to a double
---  @param    d Dictionary to search
---  @param    key Key string to look for
---  @param    notfound Value to return in case of error
---  @return   double
---
---  This function queries a dictionary for a key. A key as read from an
---  ini file is given as "section:key". If the key cannot be found,
---  the notfound value is returned.
--- */
---/*--------------------------------------------------------------------------*/
---double iniparser_getdouble(dictionary * d, char * key, double notfound);
---
---/*-------------------------------------------------------------------------*/
---/**
--   @brief    Get the string associated to a key, convert to a boolean
--   @param    d Dictionary to search
--   @param    key Key string to look for
--diff --git a/ubi-utils/libiniparser.c b/ubi-utils/libiniparser.c
--index 898f57f..ba70c08 100644
----- a/ubi-utils/libiniparser.c
--+++ b/ubi-utils/libiniparser.c
--@@ -316,28 +316,6 @@ int iniparser_getint(dictionary * d, const char * key, int notfound)
+- $(KDUMP_MANPAGE): kdump/kdump.8
+- 	$(MKDIR) -p     $(MANDIR)/man8
+--	cp kdump/kdump.8 $(KDUMP_MANPAGE)
+-+	cp $^ $(KDUMP_MANPAGE)
+- echo::
+- 	@echo "KDUMP_SRCS $(KDUMP_SRCS)"
+- 	@echo "KDUMP_DEPS $(KDUMP_DEPS)"
+-diff --git a/kexec/Makefile b/kexec/Makefile
+-index 2137cab..8c815b5 100644
+---- a/kexec/Makefile
+-+++ b/kexec/Makefile
+-@@ -82,7 +82,7 @@ $(KEXEC): CPPFLAGS+=-I$(srcdir)/kexec/arch/$(ARCH)/include
 - 
-- /*-------------------------------------------------------------------------*/
-- /**
---  @brief    Get the string associated to a key, convert to a double
---  @param    d Dictionary to search
---  @param    key Key string to look for
---  @param    notfound Value to return in case of error
---  @return   double
---
---  This function queries a dictionary for a key. A key as read from an
---  ini file is given as "section:key". If the key cannot be found,
---  the notfound value is returned.
--- */
---/*--------------------------------------------------------------------------*/
---double iniparser_getdouble(dictionary * d, char * key, double notfound)
---{
---    char    *   str ;
---
---    str = iniparser_getstring(d, key, INI_INVALID_KEY);
---    if (str==INI_INVALID_KEY) return notfound ;
---    return atof(str);
---}
---
---/*-------------------------------------------------------------------------*/
---/**
--   @brief    Get the string associated to a key, convert to a boolean
--   @param    d Dictionary to search
--   @param    key Key string to look for
---- 
--2.7.4
+- $(KEXEC_MANPAGE): kexec/kexec.8
+- 	@$(MKDIR) -p     $(MANDIR)/man8
+--	cp kexec/kexec.8 $(KEXEC_MANPAGE)
+-+	cp $^ $(KEXEC_MANPAGE)
+- echo::
+- 	@echo "KEXEC_SRCS $(KEXEC_SRCS)"
+- 	@echo "KEXEC_DEPS $(KEXEC_DEPS)"
+-diff --git a/kexec/arch/ppc/Makefile b/kexec/arch/ppc/Makefile
+-index 3dba7cf..41242a5 100644
+---- a/kexec/arch/ppc/Makefile
+-+++ b/kexec/arch/ppc/Makefile
+-@@ -1,7 +1,7 @@
+- #
+- # kexec ppc (linux booting linux)
+- #
+--include kexec/arch/ppc/libfdt/Makefile.libfdt
+-+include $(srcdir)/kexec/arch/ppc/libfdt/Makefile.libfdt
+- 
+- ppc_KEXEC_SRCS =  kexec/arch/ppc/kexec-ppc.c
+- ppc_KEXEC_SRCS += kexec/arch/ppc/kexec-elf-ppc.c
 -
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch
+-
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ifdown_errno.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ifdown_errno.patch
 deleted file mode 100644
-index 36b012f..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch
+index 7f8cddd..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ifdown_errno.patch
 +++ /dev/null
-@@ -1,64 +0,0 @@
--From 41e7c76b0853bf5241b38b8167dfd57c27fef1eb Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sun, 28 Jan 2018 21:47:59 +0100
--Subject: [PATCH 7/9] mtd-utils: common.c: convert to integer arithmetic
--
--We use floating point just to print out KiB, MiB, GiB.
--Avoid that to be klibc friendly.
--
--Fixes compilation for aarch64 against klibc:
--
--error: '-mgeneral-regs-only' is incompatible with floating-point argument
--|    printf("%s%.1f GiB", p, (double)bytes / (1024 * 1024 * 1024));
--etc.
--
--Note:
--* In the KiB case, we could apparently multiply by 100 before dividing
--  without risking overflow. This code simply avoids multiplications.
--
--Upstream-Status: Submitted
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- ubi-utils/ubiutils-common.c | 18 ++++++++++++------
-- 1 file changed, 12 insertions(+), 6 deletions(-)
--
--diff --git a/ubi-utils/ubiutils-common.c b/ubi-utils/ubiutils-common.c
--index 6609a6b..0ded2a4 100644
----- a/ubi-utils/ubiutils-common.c
--+++ b/ubi-utils/ubiutils-common.c
--@@ -107,6 +107,9 @@ long long ubiutils_get_bytes(const char *str)
-- void ubiutils_print_bytes(long long bytes, int bracket)
-- {
-- 	const char *p;
--+	int GiB = 1024 * 1024 * 1024;
--+	int MiB = 1024 * 1024;
--+	int KiB = 1024;
+@@ -1,11 +0,0 @@
+---- a/kexec/ifdown.c
+-+++ b/kexec/ifdown.c
+-@@ -14,7 +14,7 @@
+- #include <sys/ioctl.h>
+- #include <sys/socket.h>
+- #include <sys/time.h>
+--#include <sys/errno.h>
+-+#include <errno.h>
 - 
-- 	if (bracket)
-- 		p = " (";
--@@ -115,12 +118,15 @@ void ubiutils_print_bytes(long long bytes, int bracket)
-- 
-- 	printf("%lld bytes", bytes);
-- 
---	if (bytes > 1024 * 1024 * 1024)
---		printf("%s%.1f GiB", p, (double)bytes / (1024 * 1024 * 1024));
---	else if (bytes > 1024 * 1024)
---		printf("%s%.1f MiB", p, (double)bytes / (1024 * 1024));
---	else if (bytes > 1024 && bytes != 0)
---		printf("%s%.1f KiB", p, (double)bytes / 1024);
--+	if (bytes > GiB)
--+		printf("%s%lld.%lld GiB", p,
--+		       bytes / GiB, bytes % GiB / (GiB / 10));
--+	else if (bytes > MiB)
--+		printf("%s%lld.%lld MiB", p,
--+		       bytes / MiB, bytes % MiB / (MiB / 10));
--+	else if (bytes > KiB && bytes != 0)
--+		printf("%s%lld.%lld KiB", p,
--+		       bytes / KiB, bytes % KiB / (KiB / 10));
-- 	else
-- 		return;
-- 
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch
+- #include <net/if.h>
+- #include <netinet/in.h>
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-elf-rel.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-elf-rel.patch
 deleted file mode 100644
-index 5bd0574..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch
+index c666afc..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-elf-rel.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+---- a/kexec/kexec-elf-rel.c
+-+++ b/kexec/kexec-elf-rel.c
+-@@ -4,7 +4,7 @@
+- #include <stdio.h>
+- #include <errno.h>
+- #include <stdlib.h>
+--#include "elf.h"
+-+#include "../include/elf.h"
+- #include <boot/elf_boot.h>
+- #include "kexec.h"
+- #include "kexec-elf.h"
+-
+---- a/kexec/arch/arm/kexec-elf-rel-arm.c
+-+++ b/kexec/arch/arm/kexec-elf-rel-arm.c
+-@@ -1,5 +1,5 @@
+- #include <stdio.h>
+--#include <elf.h>
+-+#include "../../../include/elf.h"
+- #include "../../kexec.h"
+- #include "../../kexec-elf.h"
+- 
+-
+---- a/kexec/arch/i386/kexec-elf-rel-x86.c
+-+++ b/kexec/arch/i386/kexec-elf-rel-x86.c
+-@@ -1,5 +1,5 @@
+- #include <stdio.h>
+--#include <elf.h>
+-+#include "../../../include/elf.h"
+- #include "../../kexec.h"
+- #include "../../kexec-elf.h"
+- 
+-
+---- a/kexec/arch/ppc/kexec-elf-rel-ppc.c
+-+++ b/kexec/arch/ppc/kexec-elf-rel-ppc.c
+-@@ -1,5 +1,5 @@
+- #include <stdio.h>
+--#include <elf.h>
+-+#include "../../../include/elf.h"
+- #include "../../kexec.h"
+- #include "../../kexec-elf.h"
+- 
+-
+---- a/kexec/arch/ppc64/kexec-elf-rel-ppc64.c
+-+++ b/kexec/arch/ppc64/kexec-elf-rel-ppc64.c
+-@@ -1,5 +1,5 @@
+- #include <stdio.h>
+--#include <elf.h>
+-+#include "../../../include/elf.h"
+- #include <string.h>
+- #include "../../kexec.h"
+- #include "../../kexec-elf.h"
+-
+---- a/kexec/arch/x86_64/kexec-elf-rel-x86_64.c
+-+++ b/kexec/arch/x86_64/kexec-elf-rel-x86_64.c
+-@@ -1,5 +1,5 @@
+- #include <stdio.h>
+--#include <elf.h>
+-+#include "../../../include/elf.h"
+- #include "../../kexec.h"
+- #include "../../kexec-elf.h"
+- 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-syscall.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-syscall.patch
+deleted file mode 100644
+index 081de1b..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/kexec-syscall.patch
 +++ /dev/null
 @@ -1,44 +0,0 @@
--From e6f1a85c0a3df24fe3ca9a520dc697105e75a80c Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sat, 27 Jan 2018 09:39:26 +0100
--Subject: [PATCH 8/9] ubi-utils: ubiformat.c: convert to integer arithmetic
+---- a/kexec/kexec-syscall.h
+-+++ b/kexec/kexec-syscall.h
+-@@ -2,7 +2,7 @@
+- #define KEXEC_SYSCALL_H
+- 
+- #define __LIBRARY__
+--#include <syscall.h>
+-+/*#include <syscall.h>*/
+- #include <sys/syscall.h>
+- #include <unistd.h>
+- 
+-@@ -23,6 +23,7 @@
+- #define LINUX_REBOOT_CMD_KEXEC		0x45584543
+- 
+- #ifndef __NR_kexec_load
+-+/*
+- #ifdef __i386__
+- #define __NR_kexec_load		283
+- #endif
+-@@ -61,19 +62,21 @@
+- #ifndef __NR_kexec_load
+- #error Unknown processor architecture.  Needs a kexec_load syscall number.
+- #endif
+-+*/
+- #endif /*ifndef __NR_kexec_load*/
+- 
+- struct kexec_segment;
+--
+-+/*
+- static inline long kexec_load(void *entry, unsigned long nr_segments,
+- 			struct kexec_segment *segments, unsigned long flags)
+- {
+- 	return (long) syscall(__NR_kexec_load, entry, nr_segments, segments, flags);
+- }
+--
+-+*/
+- static inline long kexec_reboot(void)
+- {
+--	return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_KEXEC, 0);
+-+	//return (long) syscall(__NR_reboot, LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_KEXEC, 0);
+-+	return __reboot(LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_KEXEC, 0);
+- }
+- 
+- 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch
+deleted file mode 100644
+index 56cdfb0..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/ppc__lshrdi3.patch
++++ /dev/null
+@@ -1,18 +0,0 @@
+---- a/purgatory/arch/ppc/crt.S
+-+++ b/purgatory/arch/ppc/crt.S
+-@@ -249,6 +249,7 @@
+-  *
+-  */
+- 
+-+/* already defined in misc.S
+- _GLOBAL(__lshrdi3)
+- 	subfic	6,5,32
+- 	srw	4,4,5	# LSW = count > 31 ? 0 : LSW >> count
+-@@ -259,5 +260,7 @@
+- 	srw	3,3,5	# MSW = MSW >> count
+- 	or	4,4,7	# LSW |= t2
+- 	blr
+-+*/
+-+
+- #endif
+- #endif
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_flags.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_flags.patch
+deleted file mode 100644
+index 41fc116..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_flags.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+---- a/purgatory/Makefile
+-+++ b/purgatory/Makefile
+-@@ -47,7 +47,7 @@
+- $(PURGATORY): CC=$(TARGET_CC)
+- $(PURGATORY): CFLAGS+=$(PURGATORY_EXTRA_CFLAGS) \
+-		      $($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
+--		      -Os -fno-builtin -ffreestanding
+-+		      -Os -fno-builtin -ffreestanding -nostdinc
+- 
+- $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
+-			-I$(srcdir)/purgatory/include \
+-@@ -61,7 +61,8 @@
+- 
+- $(PURGATORY): $(PURGATORY_OBJS)
+-	$(MKDIR) -p $(@D)
+--	$(CC) $(LDFLAGS) -o $@ $^
+-+#	$(CC) $(LDFLAGS) -o $@ $^
+-+	$(LD) $(LDFLAGS) -o $@ $^
+- 
+- #	$(LD) $(LDFLAGS) $(EXTRA_LDFLAGS) --no-undefined -e purgatory_start -r -o $@ $(PURGATORY_OBJS) $(UTIL_LIB)
 -
--Do not cast percent to double, it is just used as upper limit.
--Avoid floating point to fix compilation for aarch64 against klibc:
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_string.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_string.patch
+deleted file mode 100644
+index 5710561..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/purgatory_string.patch
++++ /dev/null
+@@ -1,9 +0,0 @@
+---- a/purgatory/string.c
+-+++ b/purgatory/string.c
+-@@ -1,5 +1,5 @@
+- #include <stddef.h>
+--#include <string.h>
+-+/* #include <string.h> */
+- 
+- size_t strnlen(const char *s, size_t max)
+- {
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sha256.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sha256.patch
+deleted file mode 100644
+index 85bf7aa..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sha256.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+---- a/util_lib/include/sha256.h
+-+++ b/util_lib/include/sha256.h
+-@@ -1,7 +1,8 @@
+- #ifndef SHA256_H
+- #define SHA256_H
+- 
+--#include <sys/types.h>
+-+//#include <sys/types.h>
+-+#include <stddef.h>
+- #include <stdint.h>
+- 
+- typedef struct
 -
--error: '-mgeneral-regs-only' is incompatible with floating-point code
--|    int percent = ((double)si->ok_cnt)/si->good_cnt * 100;
--|        ^~~~~~~
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sysconf_nrprocessors.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sysconf_nrprocessors.patch
+deleted file mode 100644
+index 04a97e6..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/sysconf_nrprocessors.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+---- a/kexec/crashdump-elf.c
+-+++ b/kexec/crashdump-elf.c
+-@@ -47,7 +47,8 @@
+-	if (xen_present())
+-		nr_cpus = xen_get_nr_phys_cpus();
+-	else
+--		nr_cpus = sysconf(_SC_NPROCESSORS_CONF);
+-+		/*nr_cpus = sysconf(_SC_NPROCESSORS_CONF);*/
+-+		nr_cpus = 1;
+- 
+-	if (nr_cpus < 0) {
+-		return -1;
 -
--Notes:
--* The checks in the code above this line ensure that si->good_cnt is not 0.
--
--* The code assumes  si->good_cnt * 100  will not overflow, then we can use
--  (si->ok_cnt * 100) safely because the former is bigger.
--
--* The truncated result does not affect the logic:
--  i.e. a value of 49.9 is truncated to 49 and is still <50.
--
--Upstream-Status: Submitted
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- ubi-utils/ubiformat.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/ubi-utils/ubiformat.c b/ubi-utils/ubiformat.c
--index 21409ca..d93164a 100644
----- a/ubi-utils/ubiformat.c
--+++ b/ubi-utils/ubiformat.c
--@@ -843,7 +843,7 @@ int main(int argc, char * const argv[])
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_basename.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_basename.patch
+deleted file mode 100644
+index 77a1c01..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_basename.patch
++++ /dev/null
+@@ -1,14 +0,0 @@
+---- a/kexec/arch/i386/x86-linux-setup.c
+-+++ b/kexec/arch/i386/x86-linux-setup.c
+-@@ -280,9 +280,9 @@ static int add_edd_entry(struct x86_linu
+-	memset(edd_info, 0, sizeof(struct edd_info));
+- 
+- 	/* extract the device number */
+--	if (sscanf(basename(sysfs_name), "int13_dev%hhx", &devnum) != 1) {
+-+	if (sscanf(strrchr(sysfs_name,'/') + 1, "int13_dev%hhx", &devnum) != 1) {
+- 		fprintf(stderr, "Invalid format of int13_dev dir "
+--				"entry: %s\n", basename(sysfs_name));
+-+				"entry: %s\n", strrchr(sysfs_name,'/') + 1);
+- 		return -1;
 - 	}
 - 
-- 	if (!args.override_ec && si->empty_cnt < si->good_cnt) {
---		int percent = ((double)si->ok_cnt)/si->good_cnt * 100;
--+		int percent = (si->ok_cnt * 100) / si->good_cnt;
-- 
-- 		/*
-- 		 * Make sure the majority of eraseblocks have valid
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_kexec_test.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_kexec_test.patch
 deleted file mode 100644
-index 658246a..0000000
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-1.5.2/0009-Eliminate-warnings-about-implicit-non-const-casting-.patch
+index 9500bd6..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_kexec_test.patch
 +++ /dev/null
-@@ -1,48 +0,0 @@
--From 2229f3b9fd4bad47794c28e558ad273173cea73d Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Sat, 27 Jan 2018 09:52:46 +0100
--Subject: [PATCH 9/9] Eliminate warnings about implicit non-const casting in
-- libmtd
--
--The mtd_get_dev_info1 function reads (among other things) name and type
--string into coresponding struct mtd_dev_info fields.
--
--The struct mtd_dev_info has the string fields marked const, requiring
--them to be cast to non-const version during initialization.
--
--This cast was previously omitted from the dev_read_data calls,
--triggering warnings during compilation.
--
--Signed-off-by: David Oberhollenzer <david.oberhollenzer@sigma-star.at>
--Signed-off-by: Richard Weinberger <richard@nod.at>
--
--Upstream-Status: Backport
--
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-----
-- lib/libmtd.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/lib/libmtd.c b/lib/libmtd.c
--index 60b4782..5f0bcbc 100644
----- a/lib/libmtd.c
--+++ b/lib/libmtd.c
--@@ -746,13 +746,13 @@ int mtd_get_dev_info1(libmtd_t desc, int mtd_num, struct mtd_dev_info *mtd)
-- 	if (dev_get_major(lib, mtd_num, &mtd->major, &mtd->minor))
-- 		return -1;
+@@ -1,13 +0,0 @@
+---- a/Makefile.in
+-+++ b/Makefile.in
+-@@ -106,8 +106,8 @@
 - 
---	ret = dev_read_data(lib->mtd_name, mtd_num, &mtd->name,
--+	ret = dev_read_data(lib->mtd_name, mtd_num, (char *)&mtd->name,
-- 			    MTD_NAME_MAX + 1);
-- 	if (ret < 0)
-- 		return -1;
-- 	((char *)mtd->name)[ret - 1] = '\0';
+- MAN_PAGES:= kexec/kexec.8
+- MAN_PAGES+= kdump/kdump.8
+--BINARIES_i386:=  $(SBINDIR)/kexec $(PKGLIBDIR)/kexec_test
+--BINARIES_x86_64:=$(SBINDIR)/kexec $(PKGLIBDIR)/kexec_test
+-+BINARIES_i386:=  $(SBINDIR)/kexec
+-+BINARIES_x86_64:=$(SBINDIR)/kexec
+- BINARIES:=$(SBINDIR)/kexec $(SBINDIR)/kdump $(BINARIES_$(ARCH))
 - 
---	ret = dev_read_data(lib->mtd_type, mtd_num, &mtd->type_str,
--+	ret = dev_read_data(lib->mtd_type, mtd_num, (char *)&mtd->type_str,
-- 			    MTD_TYPE_MAX + 1);
-- 	if (ret < 0)
-- 		return -1;
---- 
--2.7.4
+- TARGETS:=$(BINARIES) $(MAN_PAGES)
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch
+deleted file mode 100644
+index a497c9a..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_sys_io.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+---- a/purgatory/arch/i386/pic.c
+-+++ b/purgatory/arch/i386/pic.c
+-@@ -16,7 +16,7 @@
+-  * along with this program; if not, write to the Free Software
+-  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+-  */
+--#include <sys/io.h>
+-+#include "include/arch/io.h"
+- #include <purgatory.h>
+- #include "purgatory-x86.h"
+- 
 -
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-Add-simple-getline-implementation-to-libmissing.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-Add-simple-getline-implementation-to-libmissing.patch
+---- a/purgatory/arch/i386/vga.c
+-+++ b/purgatory/arch/i386/vga.c
+-@@ -1,4 +1,4 @@
+--#include <sys/io.h>
+-+#include "include/arch/io.h"
+- #include <purgatory.h>
+- #include "purgatory-x86.h"
+- 
+-
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
+deleted file mode 100644
+index cad6951..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/x86_vfscanf.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+---- a/kexec/arch/i386/x86-linux-setup.c
+-+++ b/kexec/arch/i386/x86-linux-setup.c
+-@@ -176,6 +176,8 @@ static int file_scanf(const char *dir, c
+- 	FILE *fp;
+- 	int retno;
+- 	char filename[PATH_MAX];
+-+	long line_size = MAX_LINE;
+-+	char *line;
+- 
+- 	snprintf(filename, PATH_MAX, "%s/%s", dir, file);
+- 	filename[PATH_MAX-1] = 0;
+-@@ -186,7 +188,14 @@ static int file_scanf(const char *dir, c
+- 	}
+- 
+- 	va_start(argptr, scanf_line);
+--	retno = vfscanf(fp, scanf_line, argptr);
+-+
+-+	line = xmalloc(sizeof(line) * line_size);
+-+	while(fgets(line, sizeof(line), fp) != NULL ) {
+-+		line_size += MAX_LINE;
+-+		line = xrealloc(line,line_size);
+-+	}
+-+	retno = vsscanf(line, scanf_line, argptr);
+-+
+- 	va_end(argptr);
+- 
+- 	fclose(fp);
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0001-force-static-build.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0001-force-static-build.patch
 new file mode 100644
-index 0000000..d4c6d87
+index 0000000..4744e7a
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0001-Add-simple-getline-implementation-to-libmissing.patch
-@@ -0,0 +1,187 @@
-+From 10c289454dad34632d767694aecb508dae5073bf Mon Sep 17 00:00:00 2001
-+From: David Oberhollenzer <david.oberhollenzer@sigma-star.at>
-+Date: Thu, 1 Feb 2018 12:16:18 +0100
-+Subject: [PATCH 1/4] Add simple getline() implementation to libmissing
-+
-+Some C libraries, like klibc don't implement getline(). This patch
-+adds a simple stub implementation to libmissing that does an fgets
-+into a stack allocated buffer and returns the result.
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: David Oberhollenzer <david.oberhollenzer@sigma-star.at>
-+---
-+ configure.ac              |  1 +
-+ include/common.h          |  1 +
-+ include/libmissing.h      |  7 +++++++
-+ jffsX-utils/Makemodule.am |  2 +-
-+ lib/Makemodule.am         |  3 ++-
-+ lib/getline.c             | 36 ++++++++++++++++++++++++++++++++++++
-+ misc-utils/Makemodule.am  |  2 ++
-+ ubi-utils/Makemodule.am   |  2 +-
-+ ubifs-utils/Makemodule.am |  1 +
-+ 9 files changed, 52 insertions(+), 3 deletions(-)
-+ create mode 100644 lib/getline.c
-+
-+diff --git a/configure.ac b/configure.ac
-+index 83d754f..5af0115 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -191,6 +191,7 @@ if test "x$need_cmocka" = "xyes"; then
-+ fi
-+ 
-+ AC_CHECK_HEADERS([execinfo.h])
-++AC_CHECK_FUNCS([getline])
-+ 
-+ ##### produce summary on dependencies #####
-+ 
-+diff --git a/include/common.h b/include/common.h
-+index 2ce5d22..f8f72ea 100644
-+--- a/include/common.h
-++++ b/include/common.h
-+@@ -32,6 +32,7 @@
-+ #include <sys/sysmacros.h>
-+ 
-+ #include "config.h"
-++#include "libmissing.h"
-+ 
-+ #ifndef PROGRAM_NAME
-+ # error "You must define PROGRAM_NAME before including this header"
-+diff --git a/include/libmissing.h b/include/libmissing.h
-+index 0196033..09dbce1 100644
-+--- a/include/libmissing.h
-++++ b/include/libmissing.h
-+@@ -7,11 +7,18 @@
-+ #include <execinfo.h>
-+ #endif
-+ 
-++#include <sys/types.h>
-++#include <stdio.h>
-++
-+ #ifndef HAVE_EXECINFO_H
-+ int backtrace(void **buffer, int size);
-+ char **backtrace_symbols(void *const *buffer, int size);
-+ void backtrace_symbols_fd(void *const *buffer, int size, int fd);
-+ #endif
-+ 
-++#ifndef HAVE_GETLINE
-++ssize_t getline(char **lineptr, size_t *n, FILE *stream);
-++#endif
-++
-+ #endif /* LIBMISSING_H */
-+ 
-+diff --git a/jffsX-utils/Makemodule.am b/jffsX-utils/Makemodule.am
-+index fb181de..9d7a5d9 100644
-+--- a/jffsX-utils/Makemodule.am
-++++ b/jffsX-utils/Makemodule.am
-+@@ -17,7 +17,7 @@ jffs2dump_SOURCES = jffsX-utils/jffs2dump.c
-+ jffs2dump_LDADD = libmtd.a $(ZLIB_LIBS) $(LZO_LIBS)
-+ 
-+ sumtool_SOURCES = jffsX-utils/sumtool.c
-+-sumtool_LDADD = libmtd.a
-++sumtool_LDADD = libmtd.a libmissing.a
-+ 
-+ JFFSX_BINS = \
-+ 	mkfs.jffs2 jffs2dump jffs2reader sumtool
-+diff --git a/lib/Makemodule.am b/lib/Makemodule.am
-+index 5bee5b6..645632a 100644
-+--- a/lib/Makemodule.am
-++++ b/lib/Makemodule.am
-+@@ -7,7 +7,8 @@ libmtd_a_SOURCES = \
-+ 	lib/libmtd_int.h
-+ 
-+ libmissing_a_SOURCES = \
-+-	lib/execinfo.c
-++	lib/execinfo.c \
-++	lib/getline.c
-+ 
-+ libubi_a_SOURCES = \
-+ 	lib/libubi.c \
-+diff --git a/lib/getline.c b/lib/getline.c
-+new file mode 100644
-+index 0000000..c575bf7
-+--- /dev/null
-++++ b/lib/getline.c
-+@@ -0,0 +1,36 @@
-++#include <stdlib.h>
-++#include <string.h>
-++
-++#include "libmissing.h"
-++
-++#ifndef HAVE_GETLINE
-++ssize_t getline(char **lineptr, size_t *n, FILE *stream)
-++{
-++	char buffer[256], *new;
-++	size_t count;
-++
-++	if (!(*lineptr))
-++		*n = 0;
-++
-++	if (!fgets(buffer, sizeof(buffer), stream)) {
-++		if (!feof(stream))
-++			return -1;
-++
-++		buffer[0] = '\0';
-++	}
-++
-++	count = strlen(buffer) + 1;
-++
-++	if (*n < count) {
-++		new = realloc(*lineptr, count);
-++		if (!new)
-++			return -1;
-++		*lineptr = new;
-++		*n = count;
-++	}
-++
-++	memcpy(*lineptr, buffer, count);
-++	return count;
-++}
-++#endif
-++
-+diff --git a/misc-utils/Makemodule.am b/misc-utils/Makemodule.am
-+index ce1c385..bfc5342 100644
-+--- a/misc-utils/Makemodule.am
-++++ b/misc-utils/Makemodule.am
-+@@ -1,4 +1,5 @@
-+ ftl_format_SOURCES = misc-utils/ftl_format.c
-++ftl_format_LDADD = libmissing.a
-+ 
-+ doc_loadbios_SOURCES = misc-utils/doc_loadbios.c
-+ 
-+@@ -25,6 +26,7 @@ flash_otp_info_SOURCES = misc-utils/flash_otp_info.c
-+ flash_otp_dump_SOURCES = misc-utils/flash_otp_dump.c
-+ 
-+ flash_otp_lock_SOURCES = misc-utils/flash_otp_lock.c
-++flash_otp_lock_LDADD = libmissing.a
-+ 
-+ flash_otp_write_SOURCES = misc-utils/flash_otp_write.c
-+ 
-+diff --git a/ubi-utils/Makemodule.am b/ubi-utils/Makemodule.am
-+index 215eac2..7b447c7 100644
-+--- a/ubi-utils/Makemodule.am
-++++ b/ubi-utils/Makemodule.am
-+@@ -23,7 +23,7 @@ ubinize_SOURCES = ubi-utils/ubinize.c
-+ ubinize_LDADD = libubi.a libubigen.a libmtd.a libiniparser.a
-+ 
-+ ubiformat_SOURCES = ubi-utils/ubiformat.c
-+-ubiformat_LDADD = libubi.a libubigen.a libmtd.a libscan.a
-++ubiformat_LDADD = libubi.a libubigen.a libmtd.a libscan.a libmissing.a
-+ 
-+ ubirename_SOURCES = ubi-utils/ubirename.c
-+ ubirename_LDADD = libmtd.a libubi.a
-+diff --git a/ubifs-utils/Makemodule.am b/ubifs-utils/Makemodule.am
-+index 5862afb..787beb9 100644
-+--- a/ubifs-utils/Makemodule.am
-++++ b/ubifs-utils/Makemodule.am
-+@@ -17,6 +17,7 @@ mkfs_ubifs_SOURCES = \
-+ 	ubifs-utils/mkfs.ubifs/hashtable/hashtable_itr.c \
-+ 	ubifs-utils/mkfs.ubifs/devtable.c
-+ mkfs_ubifs_LDADD = libmtd.a libubi.a $(ZLIB_LIBS) $(LZO_LIBS) $(UUID_LIBS) -lm
-++mkfs_ubifs_LDADD += libmissing.a
-+ mkfs_ubifs_CPPFLAGS = $(AM_CPPFLAGS) $(ZLIB_CFLAGS) $(LZO_CFLAGS) $(UUID_CFLAGS) \
-+ 	-I$(top_srcdir)/ubi-utils/include -I$(top_srcdir)/ubifs-utils/mkfs.ubifs/
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch
-new file mode 100644
-index 0000000..bb675a7
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch
-@@ -0,0 +1,326 @@
-+From 01c98d5d5d044d9a125abcdbb2f3d771966365b0 Mon Sep 17 00:00:00 2001
-+From: mirabilos <m@mirbsd.org>
-+Date: Thu, 1 Feb 2018 15:34:07 +0100
-+Subject: [PATCH 2/4] Instead of doing preprocessor magic, just output off_t as
-+ long long
-+
-+Fix warnings abot PRIdoff_t in libmtd.c, in mtd_read (and mtd_write):
-+
-+In file included from ../git/lib/libmtd.c:40:0:
-+../git/lib/libmtd.c: In function 'mtd_read':
-+../git/include/common.h:110:18: warning: format '%ld' expects argument of
-+ type 'long int', but argument 5 has type 'off_t {aka long long int}'
-+ [-Wformat=]
-+
-+../git/include/common.h:120:2: note: in expansion of macro 'errmsg'
-+  errmsg(fmt, ##__VA_ARGS__);                                         \
-+  ^~~~~~
-+../git/lib/libmtd.c:1082:10: note: in expansion of macro 'sys_errmsg'
-+   return sys_errmsg("cannot seek mtd%d to offset %"PRIdoff_t,
-+          ^~~~~~~~~~
-+
-+/usr/lib/klibc/include/inttypes.h:28:17: note: format string is defined here
-+ #define PRId32 "d"
-+
-+Upstream-Status: Submitted
-+
-+Signed-off-by: Thorsten Glaser <tg@mirbsd.org>
-+---
-+ include/common.h                    | 18 ------------------
-+ jffsX-utils/mkfs.jffs2.c            | 20 ++++++++++----------
-+ lib/libmtd.c                        |  8 ++++----
-+ misc-utils/flash_erase.c            |  6 +++---
-+ misc-utils/flash_otp_write.c        |  2 +-
-+ misc-utils/ftl_check.c              |  2 +-
-+ misc-utils/mtd_debug.c              |  4 ++--
-+ misc-utils/serve_image.c            |  4 ++--
-+ tests/fs-tests/integrity/integck.c  |  4 ++--
-+ tests/mtd-tests/nandpagetest.c      |  4 ++--
-+ tests/ubi-tests/integ.c             |  6 +++---
-+ ubifs-utils/mkfs.ubifs/mkfs.ubifs.c |  6 +++---
-+ 12 files changed, 33 insertions(+), 51 deletions(-)
-+
-+diff --git a/include/common.h b/include/common.h
-+index f8f72ea..642c212 100644
-+--- a/include/common.h
-++++ b/include/common.h
-+@@ -70,24 +70,6 @@ extern "C" {
-+ #define O_CLOEXEC 0
-+ #endif
-+ 
-+-/* define a print format specifier for off_t */
-+-#if (SIZEOF_OFF_T >= 8)
-+-#define PRIxoff_t PRIx64
-+-#define PRIdoff_t PRId64
-+-#else
-+-#define PRIxoff_t "l"PRIx32
-+-#define PRIdoff_t "l"PRId32
-+-#endif
-+-
-+-/* define a print format specifier for loff_t */
-+-#if (SIZEOF_LOFF_T >= 8)
-+-#define PRIxloff_t PRIx64
-+-#define PRIdloff_t PRId64
-+-#else
-+-#define PRIxloff_t "l"PRIx32
-+-#define PRIdloff_t "l"PRId32
-+-#endif
-+-
-+ /* Verbose messages */
-+ #define bareverbose(verbose, fmt, ...) do {                        \
-+ 	if (verbose)                                               \
-+diff --git a/jffsX-utils/mkfs.jffs2.c b/jffsX-utils/mkfs.jffs2.c
-+index 9aa6c39..0661786 100644
-+--- a/jffsX-utils/mkfs.jffs2.c
-++++ b/jffsX-utils/mkfs.jffs2.c
-+@@ -1237,8 +1237,8 @@ static void recursive_populate_directory(struct filesystem_entry *dir)
-+ 		} else switch (e->sb.st_mode & S_IFMT) {
-+ 			case S_IFDIR:
-+ 				if (verbose) {
-+-					printf("\td %04o %9" PRIdoff_t "             %5d:%-3d %s\n",
-+-							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
-++					printf("\td %04o %9lld             %5d:%-3d %s\n",
-++							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
-+ 							(int) (e->sb.st_uid), (int) (e->sb.st_gid),
-+ 							e->name);
-+ 				}
-+@@ -1247,8 +1247,8 @@ static void recursive_populate_directory(struct filesystem_entry *dir)
-+ 				break;
-+ 			case S_IFSOCK:
-+ 				if (verbose) {
-+-					printf("\ts %04o %9" PRIdoff_t "             %5d:%-3d %s\n",
-+-							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
-++					printf("\ts %04o %9lld             %5d:%-3d %s\n",
-++							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
-+ 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name);
-+ 				}
-+ 				write_pipe(e);
-+@@ -1256,8 +1256,8 @@ static void recursive_populate_directory(struct filesystem_entry *dir)
-+ 				break;
-+ 			case S_IFIFO:
-+ 				if (verbose) {
-+-					printf("\tp %04o %9" PRIdoff_t "             %5d:%-3d %s\n",
-+-							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
-++					printf("\tp %04o %9lld             %5d:%-3d %s\n",
-++							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
-+ 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name);
-+ 				}
-+ 				write_pipe(e);
-+@@ -1285,8 +1285,8 @@ static void recursive_populate_directory(struct filesystem_entry *dir)
-+ 				break;
-+ 			case S_IFLNK:
-+ 				if (verbose) {
-+-					printf("\tl %04o %9" PRIdoff_t "             %5d:%-3d %s -> %s\n",
-+-							e->sb.st_mode & ~S_IFMT, e->sb.st_size,
-++					printf("\tl %04o %9lld             %5d:%-3d %s -> %s\n",
-++							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size,
-+ 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name,
-+ 							e->link);
-+ 				}
-+@@ -1297,8 +1297,8 @@ static void recursive_populate_directory(struct filesystem_entry *dir)
-+ 				wrote = write_regular_file(e);
-+ 				write_xattr_entry(e);
-+ 				if (verbose) {
-+-					printf("\tf %04o %9" PRIdoff_t " (%9u) %5d:%-3d %s\n",
-+-							e->sb.st_mode & ~S_IFMT, e->sb.st_size, wrote,
-++					printf("\tf %04o %9lld (%9u) %5d:%-3d %s\n",
-++							e->sb.st_mode & ~S_IFMT, (long long)e->sb.st_size, wrote,
-+ 							(int) e->sb.st_uid, (int) e->sb.st_gid, e->name);
-+ 				}
-+ 				break;
-+diff --git a/lib/libmtd.c b/lib/libmtd.c
-+index 86c89ae..f375381 100644
-+--- a/lib/libmtd.c
-++++ b/lib/libmtd.c
-+@@ -1079,8 +1079,8 @@ int mtd_read(const struct mtd_dev_info *mtd, int fd, int eb, int offs,
-+ 	/* Seek to the beginning of the eraseblock */
-+ 	seek = (off_t)eb * mtd->eb_size + offs;
-+ 	if (lseek(fd, seek, SEEK_SET) != seek)
-+-		return sys_errmsg("cannot seek mtd%d to offset %"PRIdoff_t,
-+-				  mtd->mtd_num, seek);
-++		return sys_errmsg("cannot seek mtd%d to offset %lld",
-++				  mtd->mtd_num, (long long)seek);
-+ 
-+ 	while (rd < len) {
-+ 		ret = read(fd, buf + rd, len - rd);
-+@@ -1188,8 +1188,8 @@ int mtd_write(libmtd_t desc, const struct mtd_dev_info *mtd, int fd, int eb,
-+ 	if (data) {
-+ 		/* Seek to the beginning of the eraseblock */
-+ 		if (lseek(fd, seek, SEEK_SET) != seek)
-+-			return sys_errmsg("cannot seek mtd%d to offset %"PRIdoff_t,
-+-					mtd->mtd_num, seek);
-++			return sys_errmsg("cannot seek mtd%d to offset %lld",
-++					mtd->mtd_num, (long long)seek);
-+ 		ret = write(fd, data, len);
-+ 		if (ret != len)
-+ 			return sys_errmsg("cannot write %d bytes to mtd%d "
-+diff --git a/misc-utils/flash_erase.c b/misc-utils/flash_erase.c
-+index 0c9449f..ec4b2e1 100644
-+--- a/misc-utils/flash_erase.c
-++++ b/misc-utils/flash_erase.c
-+@@ -53,8 +53,8 @@ int target_endian = __BYTE_ORDER;
-+ static void show_progress(struct mtd_dev_info *mtd, off_t start, int eb,
-+ 			  int eb_start, int eb_cnt)
-+ {
-+-	bareverbose(!quiet, "\rErasing %d Kibyte @ %"PRIxoff_t" -- %2i %% complete ",
-+-		mtd->eb_size / 1024, start, ((eb - eb_start) * 100) / eb_cnt);
-++	bareverbose(!quiet, "\rErasing %d Kibyte @ %llx -- %2i %% complete ",
-++		mtd->eb_size / 1024, (unsigned long long)start, ((eb - eb_start) * 100) / eb_cnt);
-+ 	fflush(stdout);
-+ }
-+ 
-+@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
-+ 		if (!noskipbad) {
-+ 			int ret = mtd_is_bad(&mtd, fd, eb);
-+ 			if (ret > 0) {
-+-				verbose(!quiet, "Skipping bad block at %08"PRIxoff_t, offset);
-++				verbose(!quiet, "Skipping bad block at %08llx", (unsigned long long)offset);
-+ 				continue;
-+ 			} else if (ret < 0) {
-+ 				if (errno == EOPNOTSUPP) {
-+diff --git a/misc-utils/flash_otp_write.c b/misc-utils/flash_otp_write.c
-+index b02d0b0..04c96c6 100644
-+--- a/misc-utils/flash_otp_write.c
-++++ b/misc-utils/flash_otp_write.c
-+@@ -76,7 +76,7 @@ int main(int argc,char *argv[])
-+ 		return errno;
-+ 	}
-+ 
-+-	printf("Writing OTP user data on %s at offset 0x%"PRIxoff_t"\n", argv[2], offset);
-++	printf("Writing OTP user data on %s at offset 0x%llx\n", argv[2], (unsigned long long)offset);
-+ 
-+ 	if (mtd_type_is_nand_user(&mtdInfo))
-+ 		len = mtdInfo.writesize;
-+diff --git a/misc-utils/ftl_check.c b/misc-utils/ftl_check.c
-+index a853cf4..e854922 100644
-+--- a/misc-utils/ftl_check.c
-++++ b/misc-utils/ftl_check.c
-+@@ -131,7 +131,7 @@ static void check_partition(int fd)
-+ 			perror("read failed");
-+ 			break;
-+ 		}
-+-		printf("\nErase unit %"PRIdoff_t":\n", i);
-++		printf("\nErase unit %lld:\n", (long long)i);
-+ 		if ((hdr2.FormattedSize != hdr.FormattedSize) ||
-+ 				(hdr2.NumEraseUnits != hdr.NumEraseUnits) ||
-+ 				(hdr2.SerialNumber != hdr.SerialNumber))
-+diff --git a/misc-utils/mtd_debug.c b/misc-utils/mtd_debug.c
-+index ac37e23..d65ad36 100644
-+--- a/misc-utils/mtd_debug.c
-++++ b/misc-utils/mtd_debug.c
-+@@ -160,7 +160,7 @@ retry:
-+ 	if (buf != NULL)
-+ 		free(buf);
-+ 	close(outfd);
-+-	printf("Copied %zu bytes from address 0x%.8"PRIxoff_t" in flash to %s\n", len, offset, filename);
-++	printf("Copied %zu bytes from address 0x%.8llx in flash to %s\n", len, (unsigned long long)offset, filename);
-+ 	return 0;
-+ 
-+ err2:
-+@@ -225,7 +225,7 @@ retry:
-+ 	if (buf != NULL)
-+ 		free(buf);
-+ 	fclose(fp);
-+-	printf("Copied %d bytes from %s to address 0x%.8"PRIxoff_t" in flash\n", len, filename, offset);
-++	printf("Copied %d bytes from %s to address 0x%.8llx in flash\n", len, filename, (unsigned long long)offset);
-+ 	return 0;
-+ }
-+ 
-+diff --git a/misc-utils/serve_image.c b/misc-utils/serve_image.c
-+index f2475d6..6c8c8fb 100644
-+--- a/misc-utils/serve_image.c
-++++ b/misc-utils/serve_image.c
-+@@ -129,8 +129,8 @@ int main(int argc, char **argv)
-+ 	}
-+ 
-+ 	if (st.st_size % erasesize) {
-+-		fprintf(stderr, "Image size %" PRIdoff_t " bytes is not a multiple of erasesize %d bytes\n",
-+-				st.st_size, erasesize);
-++		fprintf(stderr, "Image size %lld bytes is not a multiple of erasesize %d bytes\n",
-++				(long long)st.st_size, erasesize);
-+ 		exit(1);
-+ 	}
-+ 	image = mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, rfd, 0);
-+diff --git a/tests/fs-tests/integrity/integck.c b/tests/fs-tests/integrity/integck.c
-+index 84753d6..0a7f142 100644
-+--- a/tests/fs-tests/integrity/integck.c
-++++ b/tests/fs-tests/integrity/integck.c
-+@@ -897,8 +897,8 @@ static ssize_t file_write_data(struct file_info *file, int fd, off_t offset,
-+ 	remains = size;
-+ 	actual = 0;
-+ 	written = IO_BUFFER_SIZE;
-+-	v("write %zd bytes, offset %"PRIdoff_t", file %s",
-+-	  size, offset, get_file_name(file));
-++	v("write %zd bytes, offset %lld, file %s",
-++	  size, (long long)offset, get_file_name(file));
-+ 	while (remains) {
-+ 		/* Fill up buffer with random data */
-+ 		if (written < IO_BUFFER_SIZE) {
-+diff --git a/tests/mtd-tests/nandpagetest.c b/tests/mtd-tests/nandpagetest.c
-+index c6812df..465e548 100644
-+--- a/tests/mtd-tests/nandpagetest.c
-++++ b/tests/mtd-tests/nandpagetest.c
-+@@ -232,8 +232,8 @@ static int verify_eraseblock(int ebnum)
-+ 			return err;
-+ 
-+ 		if (lseek(fd, addr, SEEK_SET) != addr) {
-+-			fprintf(stderr, "cannot seek mtd%d to offset %"PRIdloff_t,
-+-	 				mtd.mtd_num, addr);
-++			fprintf(stderr, "cannot seek mtd%d to offset %lld",
-++	 				mtd.mtd_num, (long long)addr);
-+ 			return -1;
-+ 		}
-+ 
-+diff --git a/tests/ubi-tests/integ.c b/tests/ubi-tests/integ.c
-+index 26c2ce5..1cd0649 100644
-+--- a/tests/ubi-tests/integ.c
-++++ b/tests/ubi-tests/integ.c
-+@@ -243,7 +243,7 @@ static void check_erase_block(struct erase_block_info *erase_block, int fd)
-+ 			while (size)
-+ 				if (read_buffer[--size] != 0xff) {
-+ 					fprintf(stderr, "block no. = %d\n" , erase_block->block_number);
-+-					fprintf(stderr, "offset = %"PRIdoff_t"\n" , gap_start);
-++					fprintf(stderr, "offset = %lld\n" , (long long)gap_start);
-+ 					fprintf(stderr, "size = %ld\n" , (long) bytes_read);
-+ 					error_exit("verify 0xff failed");
-+ 				}
-+@@ -254,7 +254,7 @@ static void check_erase_block(struct erase_block_info *erase_block, int fd)
-+ 		errno = 0;
-+ 		bytes_read = read(fd, read_buffer, w->size);
-+ 		if (bytes_read != w->size) {
-+-			fprintf(stderr, "offset = %"PRIdoff_t"\n" , w->offset);
-++			fprintf(stderr, "offset = %lld\n" , (long long)w->offset);
-+ 			fprintf(stderr, "size = %ld\n" , (long) w->size);
-+ 			fprintf(stderr, "bytes_read = %ld\n" , (long) bytes_read);
-+ 			error_exit("read failed");
-+@@ -279,7 +279,7 @@ static void check_erase_block(struct erase_block_info *erase_block, int fd)
-+ 		while (size)
-+ 			if (read_buffer[--size] != 0xff) {
-+ 				fprintf(stderr, "block no. = %d\n" , erase_block->block_number);
-+-				fprintf(stderr, "offset = %"PRIdoff_t"\n" , gap_start);
-++				fprintf(stderr, "offset = %lld\n" , (long long)gap_start);
-+ 				fprintf(stderr, "size = %ld\n" , (long) bytes_read);
-+ 				error_exit("verify 0xff failed!");
-+ 			}
-+diff --git a/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c b/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
-+index c916f48..f0237ab 100644
-+--- a/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
-++++ b/ubifs-utils/mkfs.ubifs/mkfs.ubifs.c
-+@@ -772,11 +772,11 @@ int write_leb(int lnum, int len, void *buf)
-+ 			return sys_err_msg("ubi_leb_change_start failed");
-+ 
-+ 	if (lseek(out_fd, pos, SEEK_SET) != pos)
-+-		return sys_err_msg("lseek failed seeking %"PRIdoff_t, pos);
-++		return sys_err_msg("lseek failed seeking %lld", (long long)pos);
-+ 
-+ 	if (write(out_fd, buf, c->leb_size) != c->leb_size)
-+-		return sys_err_msg("write failed writing %d bytes at pos %"PRIdoff_t,
-+-				   c->leb_size, pos);
-++		return sys_err_msg("write failed writing %d bytes at pos %lld",
-++				   c->leb_size, (long long)pos);
-+ 
-+ 	return 0;
-+ }
-+-- 
-+2.7.4
-+
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003-Makefile.am-only-build-ubi-utils.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003-Makefile.am-only-build-ubi-utils.patch
-new file mode 100644
-index 0000000..08c53d1
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0003-Makefile.am-only-build-ubi-utils.patch
-@@ -0,0 +1,34 @@
-+From 139d93bc405272a3261d57be26da842e737fe4d0 Mon Sep 17 00:00:00 2001
-+From: Andrea Adami <andrea.adami@gmail.com>
-+Date: Sun, 28 Jan 2018 23:10:34 +0100
-+Subject: [PATCH 3/4] Makefile.am: only build ubi-utils
-+
-+We only target the ubi-utils, static, small.
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0001-force-static-build.patch
+@@ -0,0 +1,25 @@
++From d6af515cfcc8185f423860f80ff28719975b701f Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:00 +0200
++Subject: [PATCH] force static build
 +
 +Upstream-Status: Inappropriate [embedded specific]
-+
 +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-+---
-+ Makefile.am | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/Makefile.am b/Makefile.am
-+index 5a6e77c..98715dd 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -34,9 +34,9 @@ EXTRA_DIST += $(GLOBAL_HEADER) $(GLOBAL_EXTRA)
++---
++ Makefile.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 54c206f..79188d8 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -47,7 +47,7 @@ TARGET_CFLAGS	= @TARGET_CFLAGS@
++ # where necessary.
++ CPPFLAGS	= @CPPFLAGS@ -I$(srcdir)/include -I$(srcdir)/util_lib/include \
++ 			-Iinclude/ $($(ARCH)_CPPFLAGS)
++-CFLAGS		= @CFLAGS@ -fno-strict-aliasing -Wall -Wstrict-prototypes
+++CFLAGS		= @CFLAGS@ -static -fno-strict-aliasing -Wall -Wstrict-prototypes
++ PURGATORY_EXTRA_CFLAGS = @PURGATORY_EXTRA_CFLAGS@
++ ASFLAGS		= @ASFLAGS@ $($(ARCH)_ASFLAGS)
++ LDFLAGS		= @LDFLAGS@
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/0001-Adjust-the-order-of-headers-to-fix-build-for-musl.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch
+similarity index 64%
+rename from meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/0001-Adjust-the-order-of-headers-to-fix-build-for-musl.patch
+rename to meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch
+index a7600b3..1d96a2b 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc-2.0.2/0001-Adjust-the-order-of-headers-to-fix-build-for-musl.patch
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch
+@@ -1,30 +1,29 @@
+-From 86b962e7c0de43b20b6210d059e4855ce87078bc Mon Sep 17 00:00:00 2001
++From 0976d2d5be1ed44c2324b609c7d16c1e93181c4b Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 13 Jul 2017 16:20:08 -0700
+ Subject: [PATCH] Adjust the order of headers to fix build for musl
+ 
+ Fixes
+-kexec/ifdown.c:33:16: error: storage size of 'ifc' isn't known
++ kexec/ifdown.c:33:16: error: storage size of 'ifc' isn't known
+ 
++Upstream-Status: Inappropriate [embedded specific]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  kexec/ifdown.c | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/kexec/ifdown.c b/kexec/ifdown.c
+-index 2215798..e13f777 100644
++index 9679ad7..82c6141 100644
+ --- a/kexec/ifdown.c
+ +++ b/kexec/ifdown.c
+ @@ -16,8 +16,8 @@ char *v_ifdown = "@(#)ifdown.c  1.11  02-Jun-1998  miquels@cistron.nl";
++ #include <sys/socket.h>
+  #include <sys/time.h>
+- #include <errno.h>
+  
+ -#include <net/if.h>
+  #include <netinet/in.h>
+ +#include <net/if.h>
+  
+- #define MAX_IFS	64
+- 
+--- 
+-2.13.2
+-
++ /*
++  *  First, we find all shaper devices and down them. Then we
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0003-kexec-elf-rel-use-our-elf.h.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0003-kexec-elf-rel-use-our-elf.h.patch
+new file mode 100644
+index 0000000..ae9e7bb
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0003-kexec-elf-rel-use-our-elf.h.patch
+@@ -0,0 +1,92 @@
++From 7f91875d65778154709e4fa0ccb23f3b2a98b0dc Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:00 +0200
++Subject: [PATCH] kexec-elf-rel: use our elf.h
++
++Fix:
++
++ kexec-elf-rel.c: In function 'elf_rel_load':
++ kexec-elf-rel.c:386:39: error: 'STT_NOTYPE' undeclared
++
++and similar.
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/arch/arm/kexec-elf-rel-arm.c       | 2 +-
++ kexec/arch/i386/kexec-elf-rel-x86.c      | 2 +-
++ kexec/arch/ppc/kexec-elf-rel-ppc.c       | 2 +-
++ kexec/arch/ppc64/kexec-elf-rel-ppc64.c   | 2 +-
++ kexec/arch/x86_64/kexec-elf-rel-x86_64.c | 2 +-
++ kexec/kexec-elf-rel.c                    | 2 +-
++ 6 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/kexec/arch/arm/kexec-elf-rel-arm.c b/kexec/arch/arm/kexec-elf-rel-arm.c
++index a939cf4..2551dc0 100644
++--- a/kexec/arch/arm/kexec-elf-rel-arm.c
+++++ b/kexec/arch/arm/kexec-elf-rel-arm.c
++@@ -1,5 +1,5 @@
++ #include <stdio.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include "../../kexec.h"
++ #include "../../kexec-elf.h"
 + 
-+ include lib/Makemodule.am
-+ include ubi-utils/Makemodule.am
-+-include misc-utils/Makemodule.am
-+-include nand-utils/Makemodule.am
-+-include nor-utils/Makemodule.am
-++#include misc-utils/Makemodule.am
-++#include nand-utils/Makemodule.am
-++#include nor-utils/Makemodule.am
++diff --git a/kexec/arch/i386/kexec-elf-rel-x86.c b/kexec/arch/i386/kexec-elf-rel-x86.c
++index 55a214e..e7583d1 100644
++--- a/kexec/arch/i386/kexec-elf-rel-x86.c
+++++ b/kexec/arch/i386/kexec-elf-rel-x86.c
++@@ -1,5 +1,5 @@
++ #include <stdio.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include "../../kexec.h"
++ #include "../../kexec-elf.h"
 + 
-+ if BUILD_UBIFS
-+ include ubifs-utils/Makemodule.am
++diff --git a/kexec/arch/ppc/kexec-elf-rel-ppc.c b/kexec/arch/ppc/kexec-elf-rel-ppc.c
++index 1acbd86..a60c66c 100644
++--- a/kexec/arch/ppc/kexec-elf-rel-ppc.c
+++++ b/kexec/arch/ppc/kexec-elf-rel-ppc.c
++@@ -1,5 +1,5 @@
++ #include <stdio.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include "../../kexec.h"
++ #include "../../kexec-elf.h"
++ 
++diff --git a/kexec/arch/ppc64/kexec-elf-rel-ppc64.c b/kexec/arch/ppc64/kexec-elf-rel-ppc64.c
++index 5f8e3f2..765bf6e 100644
++--- a/kexec/arch/ppc64/kexec-elf-rel-ppc64.c
+++++ b/kexec/arch/ppc64/kexec-elf-rel-ppc64.c
++@@ -1,5 +1,5 @@
++ #include <stdio.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include <string.h>
++ #include "../../kexec.h"
++ #include "../../kexec-elf.h"
++diff --git a/kexec/arch/x86_64/kexec-elf-rel-x86_64.c b/kexec/arch/x86_64/kexec-elf-rel-x86_64.c
++index 7fdde73..cd5d729 100644
++--- a/kexec/arch/x86_64/kexec-elf-rel-x86_64.c
+++++ b/kexec/arch/x86_64/kexec-elf-rel-x86_64.c
++@@ -1,5 +1,5 @@
++ #include <stdio.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include "../../kexec.h"
++ #include "../../kexec-elf.h"
++ 
++diff --git a/kexec/kexec-elf-rel.c b/kexec/kexec-elf-rel.c
++index 9a6e63d..a856636 100644
++--- a/kexec/kexec-elf-rel.c
+++++ b/kexec/kexec-elf-rel.c
++@@ -4,7 +4,7 @@
++ #include <stdio.h>
++ #include <errno.h>
++ #include <stdlib.h>
++-#include "elf.h"
+++#include "../include/elf.h"
++ #include <boot/elf_boot.h>
++ #include "kexec.h"
++ #include "kexec-elf.h"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0004-kexec-elf-exec.c-replace-with-our-err.h.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0004-kexec-elf-exec.c-replace-with-our-err.h.patch
+new file mode 100644
+index 0000000..1080e8b
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0004-kexec-elf-exec.c-replace-with-our-err.h.patch
+@@ -0,0 +1,30 @@
++From 8b9da93ac9a4ea79ae953f80f6fe6e4f080341f2 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Tue, 17 Apr 2018 10:57:23 +0200
++Subject: [PATCH] kexec-elf-exec.c: replace with our elf.h
++
++Fix
++
++ kexec-elf-exec.c: In function 'elf_exec_load':
++ error: 'EM_AARCH64' undeclared
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/kexec-elf-exec.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/kexec/kexec-elf-exec.c b/kexec/kexec-elf-exec.c
++index a9329ac..0dd0700 100644
++--- a/kexec/kexec-elf-exec.c
+++++ b/kexec/kexec-elf-exec.c
++@@ -4,7 +4,7 @@
++ #include <stdio.h>
++ #include <errno.h>
++ #include <stdlib.h>
++-#include "elf.h"
+++#include "../include/elf.h"
++ #include <boot/elf_boot.h>
++ #include "kexec.h"
++ #include "kexec-elf.h"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0005-crashdump-elf.c-work-around-for-sysconf-_SC_NPROCESS.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0005-crashdump-elf.c-work-around-for-sysconf-_SC_NPROCESS.patch
+new file mode 100644
+index 0000000..4f7506d
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0005-crashdump-elf.c-work-around-for-sysconf-_SC_NPROCESS.patch
+@@ -0,0 +1,134 @@
++From 1cfee75d9662c3382bb7cb8f1c952333837598ae Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Wed, 18 Apr 2018 02:21:30 +0200
++Subject: [PATCH] crashdump-elf.c: work around for _SC_NPROCESSORS_CONF
++
++klibc sysconf lacks this so the implementation
++of Linus Torvalds was taken (simplified):
++
++https://sourceware.org/ml/libc-alpha/2011-06/msg00079.html
++
++Have fun reding the thread!
++
++Fix
++
++ crashdump-elf.c:117:21: error: '_SC_NPROCESSORS_CONF' undeclared
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/crashdump-elf.c | 92 +++++++++++++++++++++++++++++++++++++++++++++++++++
++ 1 file changed, 92 insertions(+)
++
++diff --git a/kexec/crashdump-elf.c b/kexec/crashdump-elf.c
++index b8bb686..7e6767c 100644
++--- a/kexec/crashdump-elf.c
+++++ b/kexec/crashdump-elf.c
++@@ -25,6 +25,94 @@ do {									\
++ } while(0)
++ #endif
++ 
+++#ifdef __KLIBC__
+++#ifndef KLIBC_SYSFS_CPU_H
+++#define KLIBC_SYSFS_CPU_H
+++
+++
+++static int __get_sysfs_cpus(const char *path);
+++int __get_nprocs (void);
+++int __get_nprocs_conf (void);
+++
+++
+++
+++static int __get_sysfs_cpus(const char *path)
+++{
+++	FILE *file;
+++	int nr_cpus = 0;
+++	int prev = -1;
+++	char *p;
+++	char line[10];
+++
+++
+++	file = fopen(path, "r");
+++	if (!file)
+++		return -1;
+++	for (;;) {
+++		char sep;
+++		int cpu;
+++		int n;
+++
+++		/* int n = fscanf(file, "%u%c", &cpu, &sep); */
+++		p = fgets(line, sizeof(line), file);
+++		if (p == NULL)
+++			return -1;
+++		else
+++			n = sscanf(line, "%u%c", &cpu, &sep);
+++
+++		if (n <= 0)
+++			break;
+++
+++		/* EOF == EOLN */
+++		if (n == 1)
+++			sep = '\n';
+++
+++		/* Was the previous CPU a range? */
+++		if (prev >= 0) {
+++			nr_cpus += cpu - prev + 1;
+++			prev = -1;
+++		} else if (sep == '-')
+++			prev = cpu;
+++		else
+++		nr_cpus++;
+++
+++		if (sep == '\n')
+++			break;
+++	}
+++	fclose(file);
+++	return nr_cpus;
+++}
+++
+++int __get_nprocs ()
+++{
+++	long ret;
+++	static int cached = -1;
+++
+++	ret = cached;
+++	if (ret < 0)
+++	{
+++		ret = __get_sysfs_cpus("/sys/devices/system/cpu/online");
+++		cached = ret;
+++	}
+++	return ret;
+++}
+++
+++int __get_nprocs_conf ()
+++{
+++	long ret;
+++	static int cached = -1;
+++
+++	ret = cached;
+++	if (ret < 0)
+++	{
+++		ret = __get_sysfs_cpus("/sys/devices/system/cpu/possible");
+++		cached = ret;
+++	}
+++	return ret;
+++}
+++#endif
+++#endif
+++
++ /* Prepares the crash memory headers and stores in supplied buffer. */
++ int FUNC(struct kexec_info *info,
++ 	 struct crash_elf_info *elf_info,
++@@ -46,7 +134,11 @@ int FUNC(struct kexec_info *info,
++ 	if (xen_present())
++ 		nr_cpus = xen_get_nr_phys_cpus();
++ 	else
+++#ifndef __KLIBC__
++ 		nr_cpus = sysconf(_SC_NPROCESSORS_CONF);
+++#else
+++		nr_cpus = __get_nprocs_conf();
+++#endif
++ 
++ 	if (nr_cpus < 0) {
++ 		return -1;
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch
+new file mode 100644
+index 0000000..4a8968b
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch
+@@ -0,0 +1,49 @@
++From e6aa1f18dc44dc71be3ceada2a96383d22454399 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Thu, 19 Apr 2018 00:25:01 +0200
++Subject: [PATCH] kexec-syscall.h: work around missing syscall() wrapper
++
++Fix
++
++ kexec-syscall.h: In function 'kexec_load':
++ kexec-syscall.h:80:16: warning: implicit declaration of function 'syscall'
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/kexec-syscall.h | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/kexec/kexec-syscall.h b/kexec/kexec-syscall.h
++index 33638c2..6b633e4 100644
++--- a/kexec/kexec-syscall.h
+++++ b/kexec/kexec-syscall.h
++@@ -77,7 +77,11 @@ struct kexec_segment;
++ static inline long kexec_load(void *entry, unsigned long nr_segments,
++ 			struct kexec_segment *segments, unsigned long flags)
++ {
+++#ifndef __KLIBC__
++ 	return (long) syscall(__NR_kexec_load, entry, nr_segments, segments, flags);
+++#else
+++	return (long) kexec_load(entry, nr_segments, segments, flags);
+++#endif
++ }
++ 
++ static inline int is_kexec_file_load_implemented(void) {
++@@ -90,8 +94,12 @@ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
++ 			unsigned long cmdline_len, const char *cmdline_ptr,
++ 			unsigned long flags)
++ {
+++#ifndef __KLIBC__
++ 	return (long) syscall(__NR_kexec_file_load, kernel_fd, initrd_fd,
++ 				cmdline_len, cmdline_ptr, flags);
+++#else
+++	return -1;
+++#endif
++ }
++ 
++ #define KEXEC_ON_CRASH		0x00000001
 +-- 
 +2.7.4
 +
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0004-mtd-utils-common.h-no-features.h-for-klibc-builds.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0004-mtd-utils-common.h-no-features.h-for-klibc-builds.patch
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0007-kexec.c-add-guard-around-ENOTSUP.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0007-kexec.c-add-guard-around-ENOTSUP.patch
 new file mode 100644
-index 0000000..5da05fa
+index 0000000..3d44683
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc-2.0.2/0004-mtd-utils-common.h-no-features.h-for-klibc-builds.patch
-@@ -0,0 +1,38 @@
-+From ae1cf6d0eb1833e46549328a4473222c259723d7 Mon Sep 17 00:00:00 2001
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0007-kexec.c-add-guard-around-ENOTSUP.patch
+@@ -0,0 +1,37 @@
++From e6bd7a1bcfbd3e54efc81fbd7d60d915f9af0632 Mon Sep 17 00:00:00 2001
 +From: Andrea Adami <andrea.adami@gmail.com>
-+Date: Thu, 1 Feb 2018 00:25:00 +0100
-+Subject: [PATCH 4/4] mtd-utils: common.h: no features.h for klibc builds
++Date: Tue, 17 Apr 2018 11:35:14 +0200
++Subject: [PATCH] kexec.c: add guard around ENOTSUP
 +
-+Add guard around features.h to fix missing include (here first error):
++Fix
 +
-+ ../git/include/common.h:29:10:
-+ fatal error: features.h: No such file or directory
-+  #include <features.h>
-+           ^~~~~~~~~~~~
-+ compilation terminated
++ kexec.c: In function 'main':
++ kexec.c:1515:11: error: 'ENOTSUP' undeclared
 +
-+Upstream-Status: Submitted
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/kexec.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/kexec/kexec.c b/kexec/kexec.c
++index 313d9fe..b5a8a1e 100644
++--- a/kexec/kexec.c
+++++ b/kexec/kexec.c
++@@ -1501,6 +1501,7 @@ int main(int argc, char *argv[])
++ 					 */
++ 				case -EINVAL:
++ 				case -ENOEXEC:
+++#ifndef __KLIBC__
++ 					 /*
++ 					  * ENOTSUP can be unsupported image
++ 					  * type or unsupported PE signature
++@@ -1513,6 +1514,7 @@ int main(int argc, char *argv[])
++ 					  * kernel bug
++ 					  */
++ 				case -ENOTSUP:
+++#endif
++ 					do_kexec_file_syscall = 0;
++ 					break;
++ 			}
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0008-kexec.c-replace-mising-BLKGETSIZE64.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0008-kexec.c-replace-mising-BLKGETSIZE64.patch
+new file mode 100644
+index 0000000..cfc51cf
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0008-kexec.c-replace-mising-BLKGETSIZE64.patch
+@@ -0,0 +1,32 @@
++From 12c7b09c3152f2b3475d081691a26bd1a5633256 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Tue, 17 Apr 2018 11:38:42 +0200
++Subject: [PATCH] kexec.c: replace missing BLKGETSIZE64
++
++Fix
++
++ kexec.c: In function 'slurp_file_generic':
++ kexec.c:564:19: error: 'BLKGETSIZE64' undeclared
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/kexec.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/kexec/kexec.c b/kexec/kexec.c
++index b5a8a1e..7842f8b 100644
++--- a/kexec/kexec.c
+++++ b/kexec/kexec.c
++@@ -54,6 +54,10 @@
++ #define KEXEC_LOADED_PATH "/sys/kernel/kexec_loaded"
++ #define KEXEC_CRASH_LOADED_PATH "/sys/kernel/kexec_crash_loaded"
++ 
+++#ifndef BLKGETSIZE64
+++#define BLKGETSIZE64	_IOR(0x12,114,size_t)
+++#endif
+++
++ unsigned long long mem_min = 0;
++ unsigned long long mem_max = ULONG_MAX;
++ static unsigned long kexec_flags = 0;
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0009-vmcore-dmesg.c-work-around-missing-imaxdiv.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0009-vmcore-dmesg.c-work-around-missing-imaxdiv.patch
+new file mode 100644
+index 0000000..df980b1
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0009-vmcore-dmesg.c-work-around-missing-imaxdiv.patch
+@@ -0,0 +1,57 @@
++From ad598a71ffff6f86462211f252ac0c7b5de53869 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Tue, 17 Apr 2018 13:14:12 +0200
++Subject: [PATCH] vmcore-dmesg.c: work around missing imaxdiv()
++
++Convert to integer arithmetic for klibc.
++
++Fix
++
++ vmcore-dmesg.c: In function 'dump_dmesg_structured':
++ vmcore-dmesg.c:578:2: error: unknown type name 'imaxdiv_t'
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ vmcore-dmesg/vmcore-dmesg.c | 13 ++++++++++++-
++ 1 file changed, 12 insertions(+), 1 deletion(-)
++
++diff --git a/vmcore-dmesg/vmcore-dmesg.c b/vmcore-dmesg/vmcore-dmesg.c
++index e340ef4..1b27b71 100644
++--- a/vmcore-dmesg/vmcore-dmesg.c
+++++ b/vmcore-dmesg/vmcore-dmesg.c
++@@ -575,8 +575,11 @@ static void dump_dmesg_structured(int fd)
++ 	ssize_t ret;
++ 	char *msg;
++ 	uint16_t text_len;
+++#ifndef __KLIBC__
++ 	imaxdiv_t imaxdiv_sec, imaxdiv_usec;
++-
+++#else
+++	int64_t imaxdiv_sec, imaxdiv_usec;
+++#endif
++ 	if (!log_buf_vaddr) {
++ 		fprintf(stderr, "Missing the log_buf symbol\n");
++ 		exit(60);
++@@ -645,12 +648,20 @@ static void dump_dmesg_structured(int fd)
++ 			exit(65);
++ 		}
++ 		ts_nsec = struct_val_u64(buf, log_offset_ts_nsec);
+++#ifndef __KLIBC__
++ 		imaxdiv_sec = imaxdiv(ts_nsec, 1000000000);
++ 		imaxdiv_usec = imaxdiv(imaxdiv_sec.rem, 1000);
++ 
++ 		len += sprintf(out_buf + len, "[%5llu.%06llu] ",
++ 			(long long unsigned int)imaxdiv_sec.quot,
++ 			(long long unsigned int)imaxdiv_usec.quot);
+++#else
+++		imaxdiv_sec = ts_nsec / 1000000000;
+++		imaxdiv_usec = (ts_nsec % 1000000000) / 1000;
+++		len += sprintf(out_buf + len, "[%5llu.%06llu] ",
+++			(long long unsigned int)imaxdiv_sec,
+++			(long long unsigned int)imaxdiv_usec);
+++#endif
++ 
++ 		/* escape non-printable characters */
++ 		text_len = struct_val_u16(buf, log_offset_text_len);
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0010-fs2dt.c-work-around-missing-getline.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0010-fs2dt.c-work-around-missing-getline.patch
+new file mode 100644
+index 0000000..cff1485
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0010-fs2dt.c-work-around-missing-getline.patch
+@@ -0,0 +1,47 @@
++From edefda702d906d472ee7a675f6b506d5cfca7ac8 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Tue, 17 Apr 2018 13:48:25 +0200
++Subject: [PATCH] fs2dt.c: work around missing getline()
++
++This simple case can be rewrtten with fgets()
++
++Fix
++
++ fs2dt.c: In function 'dt_copy_old_root_param':
++ fs2dt.c:541:6: warning: implicit declaration of function 'getline'
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/fs2dt.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/kexec/fs2dt.c b/kexec/fs2dt.c
++index 07a5e2f..d635636 100644
++--- a/kexec/fs2dt.c
+++++ b/kexec/fs2dt.c
++@@ -531,6 +531,9 @@ static void dt_copy_old_root_param(void)
++ 	char *last_cmdline = NULL;
++ 	char *p, *old_param;
++ 	size_t len = 0;
+++#ifdef __KLIBC__
+++	char buf[512];
+++#endif
++ 
++ 	strcpy(filename, pathname);
++ 	strcat(filename, "bootargs");
++@@ -538,8 +541,13 @@ static void dt_copy_old_root_param(void)
++ 	if (!fp)
++ 		return;
++ 
+++#ifndef __KLIBC__
++ 	if (getline(&last_cmdline, &len, fp) == -1)
++ 		die("unable to read %s\n", filename);
+++#else
+++	last_cmdline = fgets(buf, 200, fp);
+++	last_cmdline[strlen(last_cmdline) - 1] = '\0';
+++#endif
++ 
++ 	p = strstr(last_cmdline, "root=");
++ 	if (p) {
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch
+new file mode 100644
+index 0000000..0ae2be7
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0011-purgatory-Makefile-adapt-to-klcc.patch
+@@ -0,0 +1,43 @@
++From fa3844ce6ce95f2db142b6c77f077b3e704d4f6f Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Tue, 17 Apr 2018 19:12:14 +0200
++Subject: [PATCH] purgatory Makefile: adapt to klcc
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ purgatory/Makefile | 9 +++++----
++ 1 file changed, 5 insertions(+), 4 deletions(-)
++
++diff --git a/purgatory/Makefile b/purgatory/Makefile
++index 49ce80a..da36075 100644
++--- a/purgatory/Makefile
+++++ b/purgatory/Makefile
++@@ -47,7 +47,7 @@ purgatory/sha256.o: $(srcdir)/util_lib/sha256.c
++ $(PURGATORY): CC=$(TARGET_CC)
++ $(PURGATORY): CFLAGS+=$(PURGATORY_EXTRA_CFLAGS) \
++ 		      $($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
++-		      -Os -fno-builtin -ffreestanding \
+++		      -Os -fno-builtin -ffreestanding -nostdinc \
++ 		      -fno-zero-initialized-in-bss \
++ 		      -fno-PIC -fno-PIE -fno-stack-protector
++ 
++@@ -59,13 +59,14 @@ $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
++ 			-Iinclude \
++ 			-I$(shell $(CC) -print-file-name=include)
++ $(PURGATORY): LDFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS)\
++-			-Wl,--no-undefined -nostartfiles -nostdlib \
+++			--no-undefined -nostartfiles -nostdlib \
++ 			-nodefaultlibs -e purgatory_start -r \
++-			-Wl,-Map=$(PURGATORY_MAP)
+++			-Map=$(PURGATORY_MAP)
++ 
++ $(PURGATORY): $(PURGATORY_OBJS)
++ 	$(MKDIR) -p $(@D)
++-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@.sym $^
+++#	$(CC) $(CFLAGS) -o $@.sym $^
+++	$(LD) $(LDFLAGS) -o $@.sym $^
++ #	$(LD) $(LDFLAGS) $(EXTRA_LDFLAGS) --no-undefined -e purgatory_start -r -o $@ $(PURGATORY_OBJS) $(UTIL_LIB)
++ 	$(STRIP) --strip-debug -o $@ $@.sym
++ 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0012-purgatory-string.c-avoid-inclusion-of-string.h.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0012-purgatory-string.c-avoid-inclusion-of-string.h.patch
+new file mode 100644
+index 0000000..20934da
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0012-purgatory-string.c-avoid-inclusion-of-string.h.patch
+@@ -0,0 +1,31 @@
++From 2d2ad16f9328a7cbb3f5b8479ae93eb923a0727f Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Thu, 19 Apr 2018 00:28:14 +0200
++Subject: [PATCH] purgatory/string.c: avoid inclusion of string.h
++
++Fix
++
++ purgatory/string.c:39:5: error: conflicting types for 'memcmp'
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ purgatory/string.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/purgatory/string.c b/purgatory/string.c
++index f06c460..c5e978a 100644
++--- a/purgatory/string.c
+++++ b/purgatory/string.c
++@@ -1,5 +1,7 @@
++ #include <stddef.h>
+++#ifndef __KLIBC__
++ #include <string.h>
+++#endif
++ 
++ size_t strnlen(const char *s, size_t max)
++ {
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0013-sha256.h-avoid-inclusion-of-sys-types.h.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0013-sha256.h-avoid-inclusion-of-sys-types.h.patch
+new file mode 100644
+index 0000000..5d1664f
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0013-sha256.h-avoid-inclusion-of-sys-types.h.patch
+@@ -0,0 +1,36 @@
++From ec6000b9f287e62cb0746e26cfa4372c7ea528f4 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Thu, 19 Apr 2018 23:26:43 +0200
++Subject: [PATCH] sha256.h: avoid inclusion of sys/types.h
++
++Fix
++
++ purgatory/printf.c:2:10: fatal error: limits.h:
++ No such file or directory
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ util_lib/include/sha256.h | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/util_lib/include/sha256.h b/util_lib/include/sha256.h
++index 467fb22..40fd3ed 100644
++--- a/util_lib/include/sha256.h
+++++ b/util_lib/include/sha256.h
++@@ -1,7 +1,11 @@
++ #ifndef SHA256_H
++ #define SHA256_H
++ 
+++#ifndef __KLIBC__
++ #include <sys/types.h>
+++#else
+++#include <stddef.h>
+++#endif
++ #include <stdint.h>
++ 
++ typedef struct
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0014-add-if_nameindex-from-musl.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0014-add-if_nameindex-from-musl.patch
+new file mode 100644
+index 0000000..ad21266
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0014-add-if_nameindex-from-musl.patch
+@@ -0,0 +1,152 @@
++From b15e9610b4ab52c381e712241d50dea96d50d873 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Wed, 2 May 2018 23:14:19 +0200
++Subject: [PATCH 14/14] add if_nameindex from musl
++
++Taken from musl, minimal changes.
++klibc lacks struct and func
++
++Fix
++
++ ifdown.o: In function `ifdown':
++ ifdown.c (.text+0x30): undefined reference to `if_nameindex'
++
++While there add klibc-specific guard and include sys/types.h
++to fix :
++
++ /kexec/if_nameindex.c:2:
++ /usr/lib/klibc/include/linux/types.h:22:0:
++ warning: "__bitwise" redefined
++ #define __bitwise __bitwise__
 +
 +Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 +---
-+ include/common.h | 3 +++
++ kexec/Makefile       |  2 +-
++ kexec/if_nameindex.c | 64 ++++++++++++++++++++++++++++++++++++++++++++++++++++
++ kexec/if_nameindex.h | 15 ++++++++++++
++ kexec/ifdown.c       |  3 +++
++ 4 files changed, 83 insertions(+), 1 deletion(-)
++ create mode 100644 kexec/if_nameindex.c
++ create mode 100644 kexec/if_nameindex.h
++
++diff --git a/kexec/Makefile b/kexec/Makefile
++index 4db84d8..fb7520b 100644
++--- a/kexec/Makefile
+++++ b/kexec/Makefile
++@@ -11,7 +11,7 @@ KEXEC_SRCS = $(KEXEC_SRCS_base)
++ KEXEC_GENERATED_SRCS =
++ 
++ KEXEC_SRCS_base += kexec/kexec.c
++-KEXEC_SRCS_base += kexec/ifdown.c
+++KEXEC_SRCS_base += kexec/if_nameindex kexec/ifdown.c
++ KEXEC_SRCS_base += kexec/kexec-elf.c
++ KEXEC_SRCS_base += kexec/kexec-elf-exec.c
++ KEXEC_SRCS_base += kexec/kexec-elf-core.c
++diff --git a/kexec/if_nameindex.c b/kexec/if_nameindex.c
++new file mode 100644
++index 0000000..e586e41
++--- /dev/null
+++++ b/kexec/if_nameindex.c
++@@ -0,0 +1,64 @@
+++#define _GNU_SOURCE
+++#ifdef __KLIBC__
+++#include <sys/types.h>
+++#endif
+++#include <netinet/in.h>
+++#include <net/if.h>
+++#include <stdlib.h>
+++#include <sys/socket.h>
+++#include <sys/ioctl.h>
+++#include <errno.h>
+++#include <sys/syscall.h>
+++#include <stdio.h>
+++#ifdef __KLIBC__
+++#include "if_nameindex.h"
+++#endif
+++
+++static void *do_nameindex(int s, size_t n)
+++{
+++	size_t i, len, k;
+++	struct ifconf conf;
+++	struct if_nameindex *idx;
+++
+++	idx = malloc(n * (sizeof(struct if_nameindex)+sizeof(struct ifreq)));
+++	if (!idx) return 0;
+++
+++	conf.ifc_buf = (void *)&idx[n];
+++	conf.ifc_len = len = n * sizeof(struct ifreq);
+++	if (ioctl(s, SIOCGIFCONF, &conf) < 0) {
+++		free(idx);
+++		return 0;
+++	}
+++	if (conf.ifc_len == len) {
+++		free(idx);
+++		return (void *)-1;
+++	}
+++
+++	n = conf.ifc_len / sizeof(struct ifreq);
+++	for (i=k=0; i<n; i++) {
+++		if (ioctl(s, SIOCGIFINDEX, &conf.ifc_req[i]) < 0) {
+++			k++;
+++			continue;
+++		}
+++		idx[i-k].if_index = conf.ifc_req[i].ifr_ifindex;
+++		idx[i-k].if_name = conf.ifc_req[i].ifr_name;
+++	}
+++	idx[i-k].if_name = 0;
+++	idx[i-k].if_index = 0;
+++
+++	return idx;
+++}
+++
+++struct if_nameindex *if_nameindex()
+++{
+++	size_t n;
+++	void *p = 0;
+++	int s = socket(AF_UNIX, SOCK_DGRAM, 0);
+++	if (s>=0) {
+++		for (n=0; (p=do_nameindex(s, n)) == (void *)-1; n++);
+++/*		__syscall(SYS_close, s); */
+++		close(s);
+++	}
+++	errno = ENOBUFS;
+++	return p;
+++}
++diff --git a/kexec/if_nameindex.h b/kexec/if_nameindex.h
++new file mode 100644
++index 0000000..1725fbd
++--- /dev/null
+++++ b/kexec/if_nameindex.h
++@@ -0,0 +1,15 @@
+++#ifndef _NET_IF__NAMEINDEX_H
+++#define _NET_IF_NAMEINDEX_H
+++
+++struct if_nameindex
+++{
+++    unsigned int if_index;
+++    char *if_name;
+++};
+++
+++unsigned int if_nametoindex (const char *);
+++char *if_indextoname (unsigned int, char *);
+++struct if_nameindex *if_nameindex (void);
+++void if_freenameindex (struct if_nameindex *);
+++
+++#endif
++diff --git a/kexec/ifdown.c b/kexec/ifdown.c
++index 82c6141..cc3ca9f 100644
++--- a/kexec/ifdown.c
+++++ b/kexec/ifdown.c
++@@ -18,6 +18,9 @@ char *v_ifdown = "@(#)ifdown.c  1.11  02-Jun-1998  miquels@cistron.nl";
++ 
++ #include <netinet/in.h>
++ #include <net/if.h>
+++#ifdef __KLIBC__
+++#include "if_nameindex.h"
+++#endif
++ 
++ /*
++  *  First, we find all shaper devices and down them. Then we
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0015-vmcore-dmesg-fix-warning.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0015-vmcore-dmesg-fix-warning.patch
+new file mode 100644
+index 0000000..0b88b94
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0015-vmcore-dmesg-fix-warning.patch
+@@ -0,0 +1,29 @@
++From 3294266c6a875c5009065c1ae5d0b86200c4147c Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sun, 29 Apr 2018 00:52:31 +0200
++Subject: [PATCH 6/6] vmcore-dmesg: fix warning
++
++ # define __bitwise
++
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ vmcore-dmesg/vmcore-dmesg.c | 3 +++
 + 1 file changed, 3 insertions(+)
 +
-+diff --git a/include/common.h b/include/common.h
-+index 642c212..f7c71fe 100644
-+--- a/include/common.h
-++++ b/include/common.h
-+@@ -26,7 +26,10 @@
-+ #include <string.h>
-+ #include <fcntl.h>
-+ #include <errno.h>
-++#if defined(__KLIBC__)
-++#else
-+ #include <features.h>
++diff --git a/vmcore-dmesg/vmcore-dmesg.c b/vmcore-dmesg/vmcore-dmesg.c
++index e340ef4..91e4789 100644
++--- a/vmcore-dmesg/vmcore-dmesg.c
+++++ b/vmcore-dmesg/vmcore-dmesg.c
++@@ -2,6 +2,9 @@
++ #define _GNU_SOURCE
++ #define _LARGEFILE_SOURCE 1
++ #define _FILE_OFFSET_BITS 64
+++#ifdef __KLIBC__
+++#include <sys/types.h>
 ++#endif
-+ #include <inttypes.h>
-+ #include <unistd.h>
-+ #include <sys/sysmacros.h>
++ #include <endian.h>
++ #include <byteswap.h>
++ #include <stdio.h>
 +-- 
 +2.7.4
 +
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
-similarity index 64%
-rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
-rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
-index abb0d4b..85bc372 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_2.0.2.bb
-@@ -7,30 +7,30 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
- 
--inherit klibc
-+inherit autotools pkgconfig klibc
- 
--SRCREV = "aea36417067dade75192bafa03af70b6eb2677b1"
-+SRCREV = "bc63d36e39f389c8c17f6a8e9db47f2acc884659"
- SRC_URI = "git://git.infradead.org/mtd-utils.git \
--             file://0001-Makefile-build-ubi-utils-only.patch \
--             file://0002-common.mk-for-klibc-CC-is-klcc.patch \
--             file://0003-libubi.c-add-klibc-specific-fixes-for-ioctl.patch \
--             file://0004-Restore-compatibility-to-dietlibc-klibc-musl-libc-af.patch \
--             file://0005-common.h-more-workarounds-for-klibc-compatibility.patch \
--             file://0006-libiniparser-remove-unused-function-needing-float.patch \
--             file://0007-mtd-utils-common.c-convert-to-integer-arithmetic.patch \
--             file://0008-ubi-utils-ubiformat.c-convert-to-integer-arithmetic.patch \
--             file://0009-Eliminate-warnings-about-implicit-non-const-casting-.patch \
-+             file://0001-Add-simple-getline-implementation-to-libmissing.patch \
-+             file://0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch \
-+             file://0003-Makefile.am-only-build-ubi-utils.patch \
-+             file://0004-mtd-utils-common.h-no-features.h-for-klibc-builds.patch \
-              "
- 
- S = "${WORKDIR}/git/"
- 
--EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
-+EXTRA_OECONF += "--disable-tests --without-jffs --without-ubifs"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64-crashdump-arm64.c-fix-warning.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64-crashdump-arm64.c-fix-warning.patch
+new file mode 100644
+index 0000000..24be4dd
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64-crashdump-arm64.c-fix-warning.patch
+@@ -0,0 +1,34 @@
++From 6f69f489a442b3a192e4c08748ee8c4d31c75dae Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Sun, 29 Apr 2018 00:46:16 +0200
++Subject: [PATCH 5/6] arm64: crashdump-arm64.c: fix warning
 +
-+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'xattr', d)}"
-+PACKAGECONFIG[xattr] = ",,acl,"
++                 from ../git/kexec/kexec.h:6,
++                 from ../git/kexec/arch/arm64/crashdump-arm64.c:18:
++/tmp/build/tmp-musl/work/aarch64-oe-linux-musl/kexec-tools-klibc/0.6+gitAUTOINC+
++0481e9ed61-r0/recipe-sysroot/usr/lib/klibc/include/klibc/compiler.h:144:0: warni
++ng: "__bitwise" redefined
++ # define __bitwise
 +
-+EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} ${@bb.utils.contains('PACKAGECONFIG', 'xattr', '', '-DWITHOUT_XATTR', d)} -I${S}/include' 'BUILDDIR=${S}'"
- 
- do_install () {
- 	oe_runmake install DESTDIR=${D} SBINDIR=${sbindir} MANDIR=${mandir} INCLUDEDIR=${includedir}
- }
- 
--PACKAGES = "ubi-utils-klibc-dbg"
-+PACKAGES = "ubi-utils-klibc-dbg ubi-utils-klibc-doc"
- 
- PACKAGES =+ "mtdinfo-klibc ubiattach-klibc ubiblock-klibc ubicrc32-klibc ubidetach-klibc \
-              ubiformat-klibc ubimkvol-klibc ubinfo-klibc ubinize-klibc ubirename-klibc \
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ kexec/arch/arm64/crashdump-arm64.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/kexec/arch/arm64/crashdump-arm64.c b/kexec/arch/arm64/crashdump-arm64.c
++index 4fd7aa8..890d88f 100644
++--- a/kexec/arch/arm64/crashdump-arm64.c
+++++ b/kexec/arch/arm64/crashdump-arm64.c
++@@ -13,6 +13,9 @@
++ #define _GNU_SOURCE
++ 
++ #include <errno.h>
+++#ifdef __KLIBC__
+++#include <sys/types.h>
+++#endif
++ #include <linux/elf.h>
++ 
++ #include "kexec.h"
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_kexec-image-header.h-add-missing-le64toh.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_kexec-image-header.h-add-missing-le64toh.patch
+new file mode 100644
+index 0000000..7decbac
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_kexec-image-header.h-add-missing-le64toh.patch
+@@ -0,0 +1,40 @@
++From af7d06a753a4c377b7ffe587da67a6ba56048bea Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Thu, 19 Apr 2018 10:47:17 +0200
++Subject: [PATCH 2/2] kexec/arm64: image-header.h: add macro for le64toh
++
++Fix
++
++ kexec-arm64.c:(.text+0x370): undefined reference to `le64toh'
++ kexec-arm64.c:(.text+0x380): undefined reference to `le64toh'
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/arch/arm64/image-header.h | 9 +++++++++
++ 1 file changed, 9 insertions(+)
++
++diff --git a/kexec/arch/arm64/image-header.h b/kexec/arch/arm64/image-header.h
++index 158d411..10ed2d6 100644
++--- a/kexec/arch/arm64/image-header.h
+++++ b/kexec/arch/arm64/image-header.h
++@@ -8,6 +8,15 @@
++ #include <endian.h>
++ #include <stdint.h>
++ 
+++#ifdef __KLIBC__
+++#if __BYTE_ORDER == __LITTLE_ENDIAN
+++#define le64toh(x) (x)
+++#endif
+++#if __BYTE_ORDER == __BIG_ENDIAN
+++#define le64toh(x) __bswap_64(x)
+++#endif
+++#endif
+++
++ /**
++  * struct arm64_image_header - arm64 kernel image header.
++  *
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch
+new file mode 100644
+index 0000000..f87f433
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch
+@@ -0,0 +1,51 @@
++From 1ceca8645dbe2780e1b8993c80de772993fe3053 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Thu, 19 Apr 2018 10:43:34 +0200
++Subject: [PATCH 1/2] purgatory/arm64: Makefile: remove unknown flags for arm64
++
++Fix
++
++ | aarch64-oe-linux-musl-ld: unrecognised emulation mode: cmodel=large
++ | Supported emulations: aarch64linux aarch64elf aarch64elf32
++   aarch64elf32b aarch64elfb armelf armelfb aarch64linuxb aarch64linux32
++  aarch64linux32b armelfb_linux_eabi armelf_linux_eabi
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ purgatory/arch/arm64/Makefile | 20 ++++++++++----------
++ 1 file changed, 10 insertions(+), 10 deletions(-)
++
++diff --git a/purgatory/arch/arm64/Makefile b/purgatory/arch/arm64/Makefile
++index 636abea..ddc9461 100644
++--- a/purgatory/arch/arm64/Makefile
+++++ b/purgatory/arch/arm64/Makefile
++@@ -1,13 +1,13 @@
++ 
++-arm64_PURGATORY_EXTRA_CFLAGS = \
++-	-mcmodel=large \
++-	-fno-PIC \
++-	-fno-stack-protector \
++-	-fno-asynchronous-unwind-tables \
++-	-Wundef \
++-	-Werror-implicit-function-declaration \
++-	-Wdeclaration-after-statement \
++-	-Werror=implicit-int \
++-	-Werror=strict-prototypes
+++#arm64_PURGATORY_EXTRA_CFLAGS = \
+++#	-mcmodel=large \
+++#	-fno-PIC \
+++#	-fno-stack-protector \
+++#	-fno-asynchronous-unwind-tables \
+++#	-Wundef \
+++#	-Werror-implicit-function-declaration \
+++#	-Wdeclaration-after-statement \
+++#	-Werror=implicit-int \
+++#	-Werror=strict-prototypes
++ 
++ arm64_PURGATORY_SRCS += \
++ 	purgatory/arch/arm64/entry.S \
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm_crashdump.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm_crashdump.patch
+new file mode 100644
+index 0000000..9596263
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm_crashdump.patch
+@@ -0,0 +1,31 @@
++From 6dae4752a53973c152b3e91e8a4ca74a486dae8b Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:00 +0200
++Subject: [PATCH] use our elf.h header
++
++Fix
++
++ kexec/arch/arm/crashdump-arm.c:70:13: error: 'EM_ARM' undeclared here
++ (not in a function); did you mean 'EM_860'?
++    .machine = EM_ARM,
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/arch/arm/crashdump-arm.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/kexec/arch/arm/crashdump-arm.c b/kexec/arch/arm/crashdump-arm.c
++index daa4788..2530b29 100644
++--- a/kexec/arch/arm/crashdump-arm.c
+++++ b/kexec/arch/arm/crashdump-arm.c
++@@ -21,7 +21,7 @@
++  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++  */
++ #include <limits.h>
++-#include <elf.h>
+++#include "../../../include/elf.h"
++ #include <errno.h>
++ #include <stdio.h>
++ #include <stdlib.h>
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/powerpc-purgatory-Makefile-remove-unknown-flags.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/powerpc-purgatory-Makefile-remove-unknown-flags.patch
+new file mode 100644
+index 0000000..c3b2071
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/powerpc-purgatory-Makefile-remove-unknown-flags.patch
+@@ -0,0 +1,34 @@
++From 709dfe457c07aa0275f3da14634cbce5cf1029dc Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Thu, 19 Apr 2018 19:26:53 +0200
++Subject: [PATCH 3/3] powerpc/purgatory: Makefile: remove unknown flags for
++ powerpc
++
++Fix
++
++ powerpc-oe-linux-musl-ld: unrecognised emulation mode: soft-float
++ Supported emulations: elf32ppclinux elf32ppc elf32ppcsim elf32lppclinux
++                       elf32lppc elf32lppcsim elf64ppc elf64lppc
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++---
++ purgatory/arch/ppc/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/purgatory/arch/ppc/Makefile b/purgatory/arch/ppc/Makefile
++index c85c58a..cd44a16 100644
++--- a/purgatory/arch/ppc/Makefile
+++++ b/purgatory/arch/ppc/Makefile
++@@ -7,7 +7,7 @@ ppc_PURGATORY_SRCS += purgatory/arch/ppc/misc.S
++ ppc_PURGATORY_SRCS += purgatory/arch/ppc/purgatory-ppc.c
++ ppc_PURGATORY_SRCS += purgatory/arch/ppc/console-ppc.c
++ 
++-ppc_PURGATORY_EXTRA_CFLAGS += -msoft-float
+++#ppc_PURGATORY_EXTRA_CFLAGS += -msoft-float
++ 
++ dist += purgatory/arch/ppc/Makefile $(ppc_PURGATORY_SRCS)		\
++ 	purgatory/arch/ppc/purgatory-ppc.h purgatory/arch/ppc/ppc_asm.h
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86-64-purgatory-Makefile-remove-unknown-flags.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86-64-purgatory-Makefile-remove-unknown-flags.patch
+new file mode 100644
+index 0000000..f1db757
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86-64-purgatory-Makefile-remove-unknown-flags.patch
+@@ -0,0 +1,33 @@
++From 9453599fd833794fb5d87cab2622de286144ed54 Mon Sep 17 00:00:00 2001
++From: Andrea Adami <andrea.adami@gmail.com>
++Date: Wed, 18 Apr 2018 22:30:17 +0200
++Subject: [PATCH 6/6] purgatory: Makefile: remove unknown flags
++
++Fix
++
++ x86_64-oe-linux-musl-ld: unrecognised emulation mode: cmodel=large
++ Supported emulations: elf_x86_64 elf32_x86_64 elf_i386 elf_iamcu
++                       i386linux elf_l1om elf_k1om
++ ../kexec-tools-2.0.17-rc1/purgatory/Makefile:67:
++ recipe for target 'purgatory/purgatory.ro' failed
++
++Upstream-Status: Inappropriate [embedded specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ purgatory/arch/x86_64/Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/purgatory/arch/x86_64/Makefile b/purgatory/arch/x86_64/Makefile
++index 7300937..38f0bf3 100644
++--- a/purgatory/arch/x86_64/Makefile
+++++ b/purgatory/arch/x86_64/Makefile
++@@ -23,4 +23,4 @@ x86_64_PURGATORY_SRCS += purgatory/arch/i386/console-x86.c
++ x86_64_PURGATORY_SRCS += purgatory/arch/i386/vga.c
++ x86_64_PURGATORY_SRCS += purgatory/arch/i386/pic.c
++ 
++-x86_64_PURGATORY_EXTRA_CFLAGS = -mcmodel=large
+++#x86_64_PURGATORY_EXTRA_CFLAGS = -mcmodel=large
++-- 
++2.7.4
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_basename.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_basename.patch
+new file mode 100644
+index 0000000..0d0ed23
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_basename.patch
+@@ -0,0 +1,30 @@
++From 5f47c30759684cea9a7a409646686c1a358b78ac Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:05 +0200
++Subject: [PATCH] replace basename() with sscanf()
++
++klibc lacks basename()
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/arch/i386/x86-linux-setup.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/kexec/arch/i386/x86-linux-setup.c b/kexec/arch/i386/x86-linux-setup.c
++index 6c7d260..7850083 100644
++--- a/kexec/arch/i386/x86-linux-setup.c
+++++ b/kexec/arch/i386/x86-linux-setup.c
++@@ -304,9 +304,9 @@ static int add_edd_entry(struct x86_linux_param_header *real_mode,
++ 	memset(edd_info, 0, sizeof(struct edd_info));
++ 
++ 	/* extract the device number */
++-	if (sscanf(basename(sysfs_name), "int13_dev%hhx", &devnum) != 1) {
+++	if (sscanf(strrchr(sysfs_name,'/') + 1, "int13_dev%hhx", &devnum) != 1) {
++ 		fprintf(stderr, "Invalid format of int13_dev dir "
++-				"entry: %s\n", basename(sysfs_name));
+++				"entry: %s\n", strrchr(sysfs_name,'/') + 1);
++ 		return -1;
++ 	}
++ 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch
+new file mode 100644
+index 0000000..b7d7c10
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch
+@@ -0,0 +1,30 @@
++From 9de68ec5af8db2eff352f12da28145fe5e96244d Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:05 +0200
++Subject: [PATCH] do not build test
++
++The purpose of this recipe is to build the smallest
++binaries. kexek klibc-static for armv5 is around 86 KiB
++
++Upstream-Status: Inappropriate [embedded specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ Makefile.in | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 79188d8..953c141 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -178,8 +178,8 @@ PSRCS:=$(foreach s, $(SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
++ PGSRCS:=$(foreach s, $(GENERATED_SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
++ 
++ MAN_PAGES:=$(KEXEC_MANPAGE) $(KDUMP_MANPAGE) $(VMCORE_DMESG_MANPAGE)
++-BINARIES_i386:=$(KEXEC_TEST)
++-BINARIES_x86_64:=$(KEXEC_TEST)
+++BINARIES_i386:=$(SBINDIR)/kexec
+++BINARIES_x86_64:=$(SBINDIR)/kexec
++ BINARIES:=$(KEXEC) $(KDUMP) $(VMCORE_DMESG) $(BINARIES_$(ARCH))
++ 
++ TARGETS:=$(BINARIES) $(MAN_PAGES)
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_sys_io.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_sys_io.patch
+new file mode 100644
+index 0000000..493f298
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_sys_io.patch
+@@ -0,0 +1,36 @@
++From a992ee014efacdc98d5658be9930dcab0eaadfd7 Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:04 +0200
++Subject: [PATCH] i386: replace with our io.h
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ purgatory/arch/i386/pic.c | 2 +-
++ purgatory/arch/i386/vga.c | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/purgatory/arch/i386/pic.c b/purgatory/arch/i386/pic.c
++index c23c459..c5f7046 100644
++--- a/purgatory/arch/i386/pic.c
+++++ b/purgatory/arch/i386/pic.c
++@@ -16,7 +16,7 @@
++  * along with this program; if not, write to the Free Software
++  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++  */
++-#include <sys/io.h>
+++#include "include/arch/io.h"
++ #include <purgatory.h>
++ #include "purgatory-x86.h"
++ 
++diff --git a/purgatory/arch/i386/vga.c b/purgatory/arch/i386/vga.c
++index e65976c..d079d96 100644
++--- a/purgatory/arch/i386/vga.c
+++++ b/purgatory/arch/i386/vga.c
++@@ -1,4 +1,4 @@
++-#include <sys/io.h>
+++#include "include/arch/io.h"
++ #include <purgatory.h>
++ #include "purgatory-x86.h"
++ 
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_vfscanf.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_vfscanf.patch
+new file mode 100644
+index 0000000..2f0ad2e
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_vfscanf.patch
+@@ -0,0 +1,43 @@
++From 423c3f6f41fe04f4512e2a97a130f072d53dd4cf Mon Sep 17 00:00:00 2001
++From: OpenEmbedded <oe.patch@oe>
++Date: Wed, 11 Apr 2018 22:51:05 +0200
++Subject: [PATCH] x86-linux-setup.c: replace vfscanf() with vsscanf()
++
++klibc lacks vfscanf()
++
++Upstream-Status: Inappropriate [klibc specific]
++Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
++
++---
++ kexec/arch/i386/x86-linux-setup.c | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/kexec/arch/i386/x86-linux-setup.c b/kexec/arch/i386/x86-linux-setup.c
++index 7850083..e190356 100644
++--- a/kexec/arch/i386/x86-linux-setup.c
+++++ b/kexec/arch/i386/x86-linux-setup.c
++@@ -200,6 +200,8 @@ static int file_scanf(const char *dir, const char *file, const char *scanf_line,
++ 	FILE *fp;
++ 	int retno;
++ 	char filename[PATH_MAX];
+++	long line_size = MAX_LINE;
+++	char *line;
++ 
++ 	snprintf(filename, PATH_MAX, "%s/%s", dir, file);
++ 	filename[PATH_MAX-1] = 0;
++@@ -210,7 +212,14 @@ static int file_scanf(const char *dir, const char *file, const char *scanf_line,
++ 	}
++ 
++ 	va_start(argptr, scanf_line);
++-	retno = vfscanf(fp, scanf_line, argptr);
+++
+++	line = xmalloc(sizeof(line) * line_size);
+++	while(fgets(line, sizeof(line), fp) != NULL ) {
+++		line_size += MAX_LINE;
+++		line = xrealloc(line,line_size);
+++	}
+++	retno = vsscanf(line, scanf_line, argptr);
+++
++ 	va_end(argptr);
++ 
++ 	fclose(fp);
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
+deleted file mode 100644
+index 2e27033..0000000
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
++++ /dev/null
+@@ -1,69 +0,0 @@
+-# the binaries are statically linked against klibc
+-SUMMARY = "Kexec tools, statically compiled against klibc"
+-AUTHOR = "Eric Biederman"
+-HOMEPAGE = "http://kernel.org/pub/linux/utils/kernel/kexec/"
+-SECTION = "kernel/userland"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a \
+-                    file://kexec/kexec.c;beginline=1;endline=20;md5=af10f6ae4a8715965e648aa687ad3e09"
+-DEPENDS = "zlib xz"
+-
+-PR = "r1"
+-
+-inherit klibc autotools
+-
+-FILESPATH =. "${FILE_DIRNAME}/kexec-tools-${PV}:"
+-
+-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/kexec/kexec-tools-${PV}.tar.gz"
+-
+-SRC_URI += " \
+-            file://kexec-elf-rel.patch \
+-            file://kexec-syscall.patch \
+-            file://cflags_static.patch  \
+-            file://ifdown_errno.patch  \
+-            file://purgatory_flags.patch \
+-            file://purgatory_string.patch \
+-            file://sha256.patch \
+-            file://sysconf_nrprocessors.patch \
+-            file://fix-out-of-tree-build.patch \
+-            file://0001-Adjust-the-order-of-headers-to-fix-build-for-musl.patch \
+-            "
+-
+-SRC_URI[md5sum] = "92eff93b097475b7767f8c98df84408a"
+-SRC_URI[sha256sum] = "09e180ff36dee087182cdc939ba6c6917b6adbb5fc12d589f31fd3659b6471f2"
+-
+-SRC_URI_append_arm = " file://arm_crashdump.patch"
+-SRC_URI_append_powerpc = " file://ppc__lshrdi3.patch"
+-SRC_URI_append_x86 = " file://x86_sys_io.patch file://x86_basename.patch file://x86_vfscanf.patch file://x86_kexec_test.patch"
+-SRC_URI_append_x86-64 = " file://x86_sys_io.patch file://x86_basename.patch file://x86_vfscanf.patch file://x86_kexec_test.patch"
+-
+-S = "${WORKDIR}/kexec-tools-${PV}"
+-
+-EXTRA_OECONF += "--without-zlib --without-lzma --without-xen"
+-
+-CFLAGS += "-I${STAGING_DIR_HOST}${libdir}/klibc/include -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
+-CFLAGS_x86-64 += "-I${STAGING_DIR_HOST}${libdir}/klibc/include -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
+-
+-do_compile_prepend() {
+-    # Remove the prepackaged config.h from the source tree as it overrides
+-    # the same file generated by configure and placed in the build tree
+-    rm -f ${S}/include/config.h
+-
+-    # Remove the '*.d' file to make sure the recompile is OK
+-    for dep in `find ${B} -type f -name '*.d'`; do
+-        dep_no_d="`echo $dep | sed 's#.d$##'`"
+-        # Remove file.d when there is a file.o
+-        if [ -f "$dep_no_d.o" ]; then
+-            rm -f $dep
+-        fi
+-    done
+-}
+-
+-PACKAGES =+ "kexec-klibc kdump-klibc"
+-
+-FILES_kexec-klibc = "${sbindir}/kexec"
+-FILES_kdump-klibc = "${sbindir}/kdump"
+-
+-INSANE_SKIP_${PN} = "arch"
+-
+-COMPATIBLE_HOST = '(x86_64.*|i.86.*|arm.*|aarch64.*|powerpc.*|mips.*)-(linux|freebsd.*)'
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+new file mode 100644
+index 0000000..14edec2
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -0,0 +1,92 @@
++# the binaries are statically linked against klibc
++SUMMARY = "Kexec tools, statically compiled against klibc"
++AUTHOR = "Eric Biederman"
++HOMEPAGE = "http://kernel.org/pub/linux/utils/kernel/kexec/"
++SECTION = "kernel/userland"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a \
++                    file://kexec/kexec.c;beginline=1;endline=20;md5=af10f6ae4a8715965e648aa687ad3e09"
++PV = "2.0.17+git${SRCPV}"
++
++DEPENDS = "zlib xz"
++
++inherit klibc autotools
++
++SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
++SRCREV = "0481e9ed61ef80b3d851bb96b0c70a3d4a112c8b"
++
++BUILD_PATCHES = "file://0001-force-static-build.patch \
++                 file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch"
++
++KLIBC_PATCHES += " \
++            file://0003-kexec-elf-rel-use-our-elf.h.patch \
++            file://0004-kexec-elf-exec.c-replace-with-our-err.h.patch \
++            file://0005-crashdump-elf.c-work-around-for-sysconf-_SC_NPROCESS.patch \
++            file://0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch \
++            file://0007-kexec.c-add-guard-around-ENOTSUP.patch \
++            file://0008-kexec.c-replace-mising-BLKGETSIZE64.patch \
++            file://0009-vmcore-dmesg.c-work-around-missing-imaxdiv.patch \
++            file://0010-fs2dt.c-work-around-missing-getline.patch \
++            file://0011-purgatory-Makefile-adapt-to-klcc.patch \
++            file://0012-purgatory-string.c-avoid-inclusion-of-string.h.patch \
++            file://0013-sha256.h-avoid-inclusion-of-sys-types.h.patch \
++            file://0014-add-if_nameindex-from-musl.patch \
++            file://0015-vmcore-dmesg-fix-warning.patch"
++
++WARNING_FIXES = ""
++
++SRC_URI += "${BUILD_PATCHES} ${KLIBC_PATCHES} ${WARNING_FIXES}"
++
++SRC_URI_append_arm = " file://arm_crashdump.patch"
++
++SRC_URI_append_x86 = " file://x86_sys_io.patch file://x86_basename.patch \
++                       file://x86_vfscanf.patch file://x86_kexec_test.patch"
++
++SRC_URI_append_x86-64 = " file://x86_sys_io.patch file://x86_basename.patch \
++                          file://x86_vfscanf.patch file://x86_kexec_test.patch \
++                          file://x86-64-purgatory-Makefile-remove-unknown-flags.patch"
++
++SRC_URI_append_aarch64 = " file://arm64_purgatory-Makefile-remove-unknown-flags.patch \
++                           file://arm64_kexec-image-header.h-add-missing-le64toh.patch \
++                           file://arm64-crashdump-arm64.c-fix-warning.patch"
++
++SRC_URI_append_powerpc = " file://powerpc-purgatory-Makefile-remove-unknown-flags.patch"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OECONF += "--without-zlib --without-lzma --without-xen"
++
++# fix purgatory/printf.c:2:10: fatal error: limits.h: No such file or directory
++# fix include/limits.h:42:10: fatal error: bitsize/limits.h: No such file or directory
++COMMON_CFLAGS += "-I${STAGING_DIR_HOST}${libdir}/klibc/include -I${S}/purgatory/include"
++CFLAGS_x86_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
++CFLAGS_x86-64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
++CFLAGS_arm_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
++CFLAGS_aarch64_append = "${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
++CFLAGS_mips_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
++CFLAGS_mips64_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
++CFLAGS_powerpc_append = " ${COMMON_CFLAGS} -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
++
++do_compile_prepend() {
++    # Remove the prepackaged config.h from the source tree as it overrides
++    # the same file generated by configure and placed in the build tree
++    rm -f ${S}/include/config.h
++
++    # Remove the '*.d' file to make sure the recompile is OK
++    for dep in `find ${B} -type f -name '*.d'`; do
++        dep_no_d="`echo $dep | sed 's#.d$##'`"
++        # Remove file.d when there is a file.o
++        if [ -f "$dep_no_d.o" ]; then
++            rm -f $dep
++        fi
++    done
++}
++
++PACKAGES =+ "kexec-klibc kdump-klibc"
++
++FILES_kexec-klibc = "${sbindir}/kexec"
++FILES_kdump-klibc = "${sbindir}/kdump"
++
++INSANE_SKIP_${PN} = "arch"
++
++COMPATIBLE_HOST = '(x86_64.*|i.86.*|arm.*|aarch64.*|powerpc.*|mips.*)-(linux|freebsd.*)'
 -- 
 2.7.4
 
