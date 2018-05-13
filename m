@@ -1,48 +1,21 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
-	[209.85.214.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 84DC078ADC
+Return-Path: <robert.joslyn@redrectangle.org>
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
+	[217.70.183.197])
+	by mail.openembedded.org (Postfix) with ESMTP id 2953E789BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 May 2018 12:45:55 +0000 (UTC)
-Received: by mail-it0-f65.google.com with SMTP id c3-v6so7498636itj.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 May 2018 05:45:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=ocZyOZ6tav79huJgHfk2nLBSlpNHRzT0oGyfCWVEG78=;
-	b=cvrwFFm7ElgXLXpRQ52YGGHtOKpLxMvIY+JsXp9jbNtTnM0aEQhdktK4eTFZRxA+8f
-	KCZIOXX5/waDSNGXkb3+kEAJ1DgPTc8OR/OVr+CI71zhUFdacUUMwvsLAfq3vAk1ockq
-	5X1xV9n0B8o34B/H+VpchHftzIp/t+xs5joZllpF+W1ByFfQHuuMp6c2ak455QfgS//E
-	GjjGeVx1Mn9AacH8fhybKMIAbmec9TwgZbF4PGf5m3XZSHdZ8P84lLLrhPpVvzrt/RAz
-	cQVo2gkWsl3WuQFw62tv+07cIwNbm4F59ZNWFsJUt5QWwg8bmmii1UAavwIhpQU0E1T7
-	uYDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=ocZyOZ6tav79huJgHfk2nLBSlpNHRzT0oGyfCWVEG78=;
-	b=SIwIjiLxFJP9mNPGwo5hK1eV6lyNaeNP8vNIHDUNX8NibFcTSoMuQQOlFBfgkfbOl9
-	/8QioCYsaP4j4TMp0jnxCM3aAOpOGWgIC3do6yC0/wbGrjqtGPKat5QbfUDQOwy0xUWU
-	DfqAy3H7XnB30tVXFRSD6pFFtaex4cUO+SQktpp6dZvbSBXNgIhHAU9gvzO1HkFO5Cug
-	X2e8y0FZLgJxE6W9ZWq2gcDE176iCrRIVIaVCOdRP4FBCOJmXvUiwngSOjOr9Wu2RkN2
-	sFMpiQaM2bniE6vSx8Y5YoWCMl9c/qwm9kjPyDcPhzmZ6MxUO8k3EIxTNDsI8d/w0yUx
-	vEqw==
-X-Gm-Message-State: ALKqPwdajAGXKzLyZc0aUoXEWlPHD2OqFyjjs2ulXsEKQF6EcolEf+TZ
-	HLLEJ7AUZb6mviktEomY4El1PCKo
-X-Google-Smtp-Source: AB8JxZrG8c6wNlK9je9gI6ouqscc3duDE6B/b07ypBVT0nk92rNcLRyggCgr3kdGqiGT336PwVk19Q==
-X-Received: by 2002:a24:af04:: with SMTP id t4-v6mr5447794ite.11.1526215555999;
-	Sun, 13 May 2018 05:45:55 -0700 (PDT)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id
-	24-v6sm3521821iol.13.2018.05.13.05.45.54
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 13 May 2018 05:45:54 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
+	Sun, 13 May 2018 15:56:20 +0000 (UTC)
+X-Originating-IP: 50.37.92.54
+Received: from xps13.localdomain (50-37-92-54.mscw.id.frontiernet.net
+	[50.37.92.54]) (Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay5-d.mail.gandi.net (Postfix) with ESMTPSA id B09C31C0008;
+	Sun, 13 May 2018 17:56:20 +0200 (CEST)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 May 2018 08:45:52 -0400
-Message-Id: <20180513124552.4932-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
-Subject: [meta-oe][PATCH] python-cpuset: switch away from github archive
+Date: Sun, 13 May 2018 08:56:03 -0700
+Message-Id: <20180513155603.27888-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.16.1
+X-Spam-Level: 
+Subject: [meta-networking][PATCH] chrony: Update to version 3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +28,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 May 2018 12:45:55 -0000
+X-List-Received-Date: Sun, 13 May 2018 15:56:21 -0000
 
-Since we know that github archives which are automatically generated have a
-tendency to change their checksums[1], switch to using a git clone.
-
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
-
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- .../recipes-devtools/python/python-cpuset_1.5.7.bb    | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
+ .../recipes-support/chrony/chrony/arm_eabi.patch        | 17 +++++++++++++----
+ .../chrony/{chrony_3.2.bb => chrony_3.3.bb}             |  4 ++--
+ 2 files changed, 15 insertions(+), 6 deletions(-)
+ rename meta-networking/recipes-support/chrony/{chrony_3.2.bb => chrony_3.3.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-index 8f6532c531..156e52a3a5 100644
---- a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-+++ b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-@@ -3,14 +3,9 @@ SECTION = "devel/python"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+index 92a2dbd93..9f943cdce 100644
+--- a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
++++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+@@ -1,4 +1,7 @@
+-    chrony: fix build failure for arma9
++From 9ca48a6fef1da1bb0dd67ab94256c7e240da1834 Mon Sep 17 00:00:00 2001
++From: Joe Slater <jslater@windriver.com>
++Date: Thu, 9 Mar 2017 10:58:06 -0800
++Subject: [PATCH]     chrony: fix build failure for arma9
  
--SRCNAME = "cpuset"
--
--SRC_URI = "https://github.com/lpechacek/${SRCNAME}/archive/v${PV}.tar.gz"
--
--SRC_URI[md5sum] = "6ad79b26ba03f559604d74513cc34392"
--SRC_URI[sha256sum] = "32334e164415ed5aec83c5ffc3dc01c418406eb02d96d881fdfd495587ff0c01"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
-+S = "${WORKDIR}/git"
-+SRCREV = "ae629aa1dc959342745ad97406adddf63bb6dbdd"
-+SRC_URI = "git://github.com/lpechacek/cpuset.git;protocol=https;"
+     Eliminate references to syscalls not available
+     for ARM_EABI.  Also add a dependency on libseccomp
+@@ -16,9 +19,15 @@
  
- inherit distutils
+     Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+ 
++---
++ sys_linux.c | 19 +++++++++++++------
++ 1 file changed, 13 insertions(+), 6 deletions(-)
++
++diff --git a/sys_linux.c b/sys_linux.c
++index f4b532d..d05fa24 100644
+ --- a/sys_linux.c
+ +++ b/sys_linux.c
+-@@ -465,14 +465,14 @@ SYS_Linux_EnableSystemCallFilter(int lev
++@@ -482,14 +482,14 @@ SYS_Linux_EnableSystemCallFilter(int level)
+    const int syscalls[] = {
+      /* Clock */
+      SCMP_SYS(adjtimex), SCMP_SYS(clock_gettime), SCMP_SYS(gettimeofday),
+@@ -36,8 +45,8 @@
+      SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
+      /* Filesystem */
+      SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
+-@@ -483,14 +483,21 @@
+-     SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname),
++@@ -500,14 +500,21 @@ SYS_Linux_EnableSystemCallFilter(int level)
++     SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname), SCMP_SYS(getsockopt),
+      SCMP_SYS(recvfrom), SCMP_SYS(recvmmsg), SCMP_SYS(recvmsg),
+      SCMP_SYS(sendmmsg), SCMP_SYS(sendmsg), SCMP_SYS(sendto),
+ -    /* TODO: check socketcall arguments */
+diff --git a/meta-networking/recipes-support/chrony/chrony_3.2.bb b/meta-networking/recipes-support/chrony/chrony_3.3.bb
+similarity index 97%
+rename from meta-networking/recipes-support/chrony/chrony_3.2.bb
+rename to meta-networking/recipes-support/chrony/chrony_3.3.bb
+index 8b90a354e..2586370fa 100644
+--- a/meta-networking/recipes-support/chrony/chrony_3.2.bb
++++ b/meta-networking/recipes-support/chrony/chrony_3.3.bb
+@@ -35,8 +35,8 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
+     file://chronyd \
+     file://arm_eabi.patch \
+ "
+-SRC_URI[md5sum] = "f4c4eb0dc92f35ee4bb7d3dcd8029ecb"
+-SRC_URI[sha256sum] = "329f6718dd8c3ece3eee78be1f4821cbbeb62608e7d23f25da293cfa433c4116"
++SRC_URI[md5sum] = "81ab62cf5d60b4b3fa8cd2c1b267ffd9"
++SRC_URI[sha256sum] = "0d1fb2d5875032f2d5a86f3770374c87ee4c941916f64171e81f7684f2a73128"
+ 
+ DEPENDS = "pps-tools"
  
 -- 
-2.17.0.rc2.3.gc2a499e6c
+2.16.1
 
 
