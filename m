@@ -1,56 +1,48 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 401 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 14 May 2018 19:56:27 UTC
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id C133A75264
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 541DC78763
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 May 2018 19:56:27 +0000 (UTC)
-Received: (qmail 7622 invoked by uid 1003); 14 May 2018 19:49:51 -0000
-Received: from unknown (HELO ?192.168.11.100?)
-	(philip@opensdr.com@73.152.143.112)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	14 May 2018 19:49:51 -0000
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>
-From: Philip Balister <philip@balister.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-Message-ID: <711b0a86-14e8-6250-e49b-82cfc4d33018@balister.org>
-Date: Mon, 14 May 2018 15:49:47 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
-MIME-Version: 1.0
-Subject: OpenEmbedded Developer Meeting in Edinburgh Oct 21, 2018 (before ELCE)
+	Mon, 14 May 2018 21:59:58 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id g21-v6so13847705wrb.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 May 2018 15:00:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=fliZqGvRhT37hkPUWE4yXSuKFu+pZegGe8TxemwEpWU=;
+	b=pmQvglxCXTB4+nzWldSihH+QZ1mWvk3AE9XVIoGH9KoGKuQazUgWvjNfRLRH6//k1z
+	ciDr9LgANjAzozf8K0bCXfXGNQOFCWIFgMQO0ZDi7NnwXB7MpjsgVIoAP96oDtOozd+8
+	twFQfBgpVbmIEg+ay93iG+Ilq/p3zEHpoeL86q+Z2KmP0DXyFuYPXlGaWGtvxow8iCSr
+	74U7fifqDwHL67Zrjg+wsPhv2iZbcVaYJiiJa/2c67jPSpcBI6XiEjGK4jEVfpyjYt3K
+	VVwl4lElaEDSpVnOEWOov9gVeaDLhkJpsnuy4iK+YKdoeVJB33aW48mMTJklFdQHZAMp
+	3odw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fliZqGvRhT37hkPUWE4yXSuKFu+pZegGe8TxemwEpWU=;
+	b=psSrtinQQUuQ24DSEFQfVCbfauOy9763GrwL1x7jgVdx99X/+X/h4F7sPs2FWXIrTF
+	7FuRVjVwmGNe9X7Myl7RMp0NzTcxonu2zkDIZHFqPJAzmbzoM/kBLk5MS2gAIGcxM22Y
+	3yRpVVuzLSKrSfI13hc+m9q9AN0y9920flpczMA8rK4oGOGJoZvMn+oObEDW8z0Fgfir
+	KdSKAjr7VhogPwNZ5JgOYw7e3JYmrY55j3xy51RvFy2M08e/ZmQnQSsS+gZiIo1Hoo+j
+	B79EP7Z2imBAaBV9/x+UyTQXDuqvUTIFktEXw6KZxms8BuJQnlBf666uHCTcy8UTIAkO
+	OQgA==
+X-Gm-Message-State: ALKqPwcdq9Rw94sFAVQyc9Ps97HsEZH2iB7VnprZEINMwOL7JfG2K1uu
+	jZKhIlfHsmE/2mdYrhAd0TvBjg==
+X-Google-Smtp-Source: AB8JxZqK8UanpcHja1+zVZSoVgtEhayz3LqIcOFD9bi3f3jYqGjnNP22U01t/aUl5FYK54YHjsTWVw==
+X-Received: by 2002:adf:ac4f:: with SMTP id v73-v6mr8029167wrc.5.1526335199587;
+	Mon, 14 May 2018 14:59:59 -0700 (PDT)
+Received: from localhost.localdomain
+	(host10-248-dynamic.0-87-r.retail.telecomitalia.it. [87.0.248.10])
+	by smtp.gmail.com with ESMTPSA id
+	v192-v6sm10135242wme.45.2018.05.14.14.59.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 14 May 2018 14:59:58 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 May 2018 23:59:52 +0200
+Message-Id: <1526335192-10242-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-handheld][PATCH] linux-kexecboot_4.4: remove superseded 3200-mtd.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,23 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 May 2018 19:56:28 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 14 May 2018 21:59:59 -0000
 
-Once again we will have a developer meeting in Edinburgh the Sunday
-before ELCE.
+The real partitioning is detected by the kernel mtd
+parser sharpslpart. No confusion between 300, 3100
+and 3200 mtdparts anymore.
 
-Please go to https://www.openembedded.org/wiki/OEDEM_2018 and add
-yourself if you are attending and ideas for topics.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../linux/linux-kexecboot-4.4/spitz/3200-mtd.patch          | 13 -------------
+ recipes-kernel/linux/linux-kexecboot_4.4.bb                 |  3 ---
+ 2 files changed, 16 deletions(-)
+ delete mode 100644 recipes-kernel/linux/linux-kexecboot-4.4/spitz/3200-mtd.patch
 
-Although it is called a developer meeting, we invite members of the
-larger community to attend. The core developers are always interested in
-hearing how OpenEmbedded is used, and what we can do to make it better
-for building the embedded devices of the future.
+diff --git a/recipes-kernel/linux/linux-kexecboot-4.4/spitz/3200-mtd.patch b/recipes-kernel/linux/linux-kexecboot-4.4/spitz/3200-mtd.patch
+deleted file mode 100644
+index 4b2a968..0000000
+--- a/recipes-kernel/linux/linux-kexecboot-4.4/spitz/3200-mtd.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-diff --git a/arch/arm/mach-pxa/spitz.c b/arch/arm/mach-pxa/spitz.c
+-index 953a919..14e7736 100644
+---- a/arch/arm/mach-pxa/spitz.c
+-+++ b/arch/arm/mach-pxa/spitz.c
+-@@ -802,7 +802,7 @@ static void __init spitz_nand_init(void)
+- 		spitz_nand_bbt.len = 1;
+- 		spitz_nand_pdata.ecc_layout = &akita_oobinfo;
+- 	} else if (machine_is_borzoi()) {
+--		spitz_nand_partitions[1].size = 32 * 1024 * 1024;
+-+		spitz_nand_partitions[1].size = 43 * 1024 * 1024;
+- 		spitz_nand_bbt.len = 1;
+- 		spitz_nand_pdata.ecc_layout = &akita_oobinfo;
+- 	}
+diff --git a/recipes-kernel/linux/linux-kexecboot_4.4.bb b/recipes-kernel/linux/linux-kexecboot_4.4.bb
+index cb3f544..576eea0 100644
+--- a/recipes-kernel/linux/linux-kexecboot_4.4.bb
++++ b/recipes-kernel/linux/linux-kexecboot_4.4.bb
+@@ -7,9 +7,6 @@ COMPATIBLE_MACHINE = "|akita|c7x0|collie|poodle|spitz|tosa"
+ 
+ LOCOMO_PATCHES += "file://locomo/0091-locomokbd.c-invert-KEY_ENTER-and-KEY_KPENTER.patch"
+ 
+-# only for SL-C3200 (terrier)
+-# SRC_URI_append_spitz += "file://3200-mtd.patch"
+-
+ # Zaurus machines need kernel size-check.
+ KERNEL_IMAGE_MAXSIZE_akita = "1264"
+ KERNEL_IMAGE_MAXSIZE_c7x0 = "1264"
+-- 
+2.7.4
 
-Thanks,
-
-Philip
 
