@@ -1,104 +1,102 @@
-Return-Path: <wguay@graphcore.ai>
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0139.outbound.protection.outlook.com [104.47.2.139])
-	by mail.openembedded.org (Postfix) with ESMTP id ED54274F6E
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 662DB74863
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2018 12:44:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=graphcore.onmicrosoft.com; s=selector1-graphcore-ai;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=qaWR1tNqKJDeav+nBRXlTf9XoPmMUPvk0bMxdnKah0E=;
-	b=g0qUaeAbLwP8/0UxUMf2gY8Ip1c74EtIFbBTU3KWkng+wmbXZ5KMRMvUXvxySVauBJEWD7P/3CrLc0sht2fIOR6SpOugNzeigUMS32ee4J6eddsZBQvpZLwykpNXbqws2ufaBfaE5/tAluYZBTBiajChutg/J+o87zQJjOjJanE=
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=wguay@graphcore.ai; 
-Received: from hansa.oslo.skala.ai (95.130.220.238) by
-	VI1PR01MB1311.eurprd01.prod.exchangelabs.com (2a01:111:e400:5182::28)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.755.16;
-	Tue, 15 May 2018 12:44:31 +0000
-From: Wei Lin Guay <wguay@graphcore.ai>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 May 2018 14:44:17 +0200
-Message-Id: <20180515124417.788-1-wguay@graphcore.ai>
-X-Mailer: git-send-email 2.9.3
+	Tue, 15 May 2018 14:45:19 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id 30-v6so178769pld.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 May 2018 07:45:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=R2InSZxXHPUTOWgwnBwi+rIGmEPYdiddlVR3QFZ7Yiw=;
+	b=V8xQFlE+wtvkLZtw39Hz68v0dZLzQ6PlTShfJsC+gO45IK2snKtULtuDgVxxVcgXgL
+	6S3ZZGVMETupIWgDom/GXO4jupxHpDYNnVT8V8sR7uQh3zkjFD7bhuvnq16/euC1w08t
+	gH37fd3eftH18tJNToHXm7vEK4spmYShx51+ENPu/mW02p7Z6St+r4OowRrOW3PGCEbI
+	2ThxIJ10qK7lvgwpufphRWEEook7LSzq3LibMU4Jc+NdXUEtGnk2YB2FjWCdvnmMtoc0
+	OaG2d+Iqg7HzN5r05eGrQBfRnlJu8eGqslaqQ8HTAQCpIyOHZCVjPHeXJChkNNjeob8K
+	nFjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=R2InSZxXHPUTOWgwnBwi+rIGmEPYdiddlVR3QFZ7Yiw=;
+	b=Z88XWCwaZb0FXzswPKI0kP5oah020oAz3Q92uG6ni1gw4/mcGXV6H0LO7NHvBerw2d
+	GW0D3MZgTw/uJRbflc3Y0r1ZOP7e55wsxoDoxk5UbT71G67jMyRJDFQJ7ZxHCF0bJz8X
+	BEHQb0MVzZdyQgPjYMKdDDtGFIjQOHReHBxGI2NIVL00r7gqXjsp+pr6jXDeUPdXvTL1
+	PbM+oNUxJp1CBbj4TZdp7BSAKN+qv86cqYeyOxfMsIiwwtbDVmv5R3WQnMP2eXbG2gV2
+	w1i9zicJkh2y9ztD5mWExOnzQgjiO3OvesqbW4N7APb+ObfDhz1e4ySkrYwPvnZd5YAl
+	7Arw==
+X-Gm-Message-State: ALKqPwcthCHiPi5sIr6yJ7gTndgpklrqWR9mr3QrWyDKcYhUZtzJkqcd
+	B5+lKPtVe0ZUG6rqXl844EbZbQ==
+X-Google-Smtp-Source: AB8JxZpHj6Qf4Ks7jRtTPb/9/6w1iT4bB06fVw7yuUgi0knwE2pctcNSJvI8Sg6ePz9KHWekDqCwJQ==
+X-Received: by 2002:a17:902:6bc1:: with SMTP id
+	m1-v6mr14755813plt.91.1526395520777; 
+	Tue, 15 May 2018 07:45:20 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:f52d:5b1:98c8:9439?
+	([2601:202:4000:1184:f52d:5b1:98c8:9439])
+	by smtp.gmail.com with ESMTPSA id
+	h65-v6sm486975pfj.54.2018.05.15.07.45.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 15 May 2018 07:45:20 -0700 (PDT)
+To: Trevor Woerner <twoerner@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20180510004908.26947-1-twoerner@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <2d40764a-ff2e-06c1-898b-1f4f99fbda29@gmail.com>
+Date: Tue, 15 May 2018 07:45:18 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-X-Originating-IP: [95.130.220.238]
-X-ClientProxiedBy: HE1PR05CA0147.eurprd05.prod.outlook.com
-	(2603:10a6:7:28::34) To VI1PR01MB1311.eurprd01.prod.exchangelabs.com
-	(2a01:111:e400:5182::28)
-X-MS-PublicTrafficType: Email
-X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652020)(7021125)(5600026)(4534165)(7022125)(4603075)(4627221)(201702281549075)(7048125)(7024125)(7027125)(7028125)(7023125)(2017052603328)(7153060)(7193020);
-	SRVR:VI1PR01MB1311; 
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
-	3:1YDaI3P/wnIjCxKca47lEyHki+BLH/KltsqaxgDhOVGH4osg053lNVqr4K74SxNMZnL7KgX2A/7ZeJgauOyNIuJxg9kSej8gdvRAoJ4uPLaEDjUmoxwEgpzjwrY7dVywKZfgichl4TCf9kVxkXvqTa3EAaKkrDtu7QBhEt58DUpLbdlUg8W8afRR/avKwzB/qlCC2YS8SS5HMbR5VeL+XqqP7mbLZsMB7L/C9Rg8YPIAG3th7WQMdNAKa69wPGfF;
-	25:YGGPZ4VqTUmclbNXUY5Mhr1HFPmTV76UO7jBN7bN1oydbwsqsHUDlHSwVUFqO3O1K5HlNFlyv8s/Bkzjp+azGSArmEbWcwLqUdVsSrhyzgyowXUYD45XaP9/nB7HMyKxShkfLVkpQM1IRf6MQwxLJD1Pp/pZKKpMujVNUcfRVCSuBKMtq1VOye2r26WvSo/o3lYjJxbSqdSQ5BnrADdELXiSO/hIaP4F1TJMt8Fm6RAqPKXf4QefQbV3fIbYQpGlaIuK1W92fJ121d+YomTbUjwUqXpJerldt7V6UhVVnT69ug/UM93CJc4aZBgUQaShnNEr185JIYyjmCNQjBdEOzm2phnCom7FONYAflNMVk4=;
-	31:alM4suDGAGBZxP0nBxvWvZF9tUO0JLMN3MVvopE8ZPI8Z6+kqRwDyVbNj9YybgFqYNd0I3pBksCmusahNLm8fIDxzNGA6UVUk50sDVYmMFIjVEtBIewiOAoyPqC4w1Co4sQN++Z0UUIeKvlLM7eQwOgIVRRvzLCwX48EmoIBTt6Gtf7dBOYXcK3qGxe6myLnIpwdLPvZzLhegkgtmZV/m/3pxEyxfR8IhUuEe5zwPN4=
-X-MS-TrafficTypeDiagnostic: VI1PR01MB1311:
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
-	20:bgYbsR1s521w6Ya2tch33xYLJhyMbdqD6Yvk28OZPD1DmjKvlWjfaFTXvw8Wz8ypescVWZipEqPKn+oHJvN7qbfF65e8Szh6sQlEvtlI7cOf3100wiGjRpnJGTdw6O99L2CtWnkcsu6LShhcBVHNsN/THZAumwdKUTeeZMM8pZSJTGR5MtEMbdT3CJRkKILBbgpS+lionX0K4FFa1uxSkXtdKieBoCKSz0f3XF9ttvnRqzW6l5xaOVjNpOeXcXk+qcaMaSo2fx3nkduN+5C7sSMRbw+dnqhizqikWYcuuc7sqpA6suHfxtr8Cjc1umhihT2ys7sML8mBAQGc2rw7uVUXXZlC7zVAuupgn9AN327lkXub6Ig/sM73N4/qZe2nENGr2kG16C+CPs7Rpzdp4egextp9CFUNy3sFqempiTQ=;
-	4:kMnTMhyhTJ91SSMxHuwjQmdS4xvQvyi7bdQxELfp7R5KBJUeJ79MaU2EVKgxlW1xxKdi0UTefk1wlJkh2i66zQ/6ed/y8S3vNWsPXOkVyRqfPQX1wxBI6p0e6GG+S+OtF8JnTQQtHWg/VRsPMYehmA/rFOh8bPvkpkYVc2eCV8tYmSLawImoL+KDihvcQEoZjaSs2WWMc/+yrxOA8VeTz6Lz/y+Ab6RwWOyV+PRapzoon4gf4jJtghSI3PsnJ+Bz0ZVQaHbkdS5PETD31c+MxQqT6BD+ym5OMC3wgxIe2nH66ugOxJFk9GFsNnxCdTTv
-X-Microsoft-Antispam-PRVS: <VI1PR01MB13118A21F7C413887CD228CED6930@VI1PR01MB1311.eurprd01.prod.exchangelabs.com>
-X-Exchange-Antispam-Report-Test: UriScan:(166708455590820);
-X-MS-Exchange-SenderADCheck: 1
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(93006095)(93001095)(3231254)(944501410)(52105095)(3002001)(149027)(150027)(6041310)(20161123560045)(20161123562045)(20161123564045)(2016111802025)(20161123558120)(6043046)(6072148)(201708071742011);
-	SRVR:VI1PR01MB1311; BCL:0; PCL:0; RULEID:; SRVR:VI1PR01MB1311; 
-X-Forefront-PRVS: 0673F5BE31
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(39840400004)(396003)(39380400002)(366004)(346002)(376002)(199004)(189003)(6512007)(5660300001)(107886003)(6306002)(3846002)(6116002)(2870700001)(106356001)(81166006)(50226002)(486006)(478600001)(52116002)(8936002)(8676002)(2361001)(81156014)(97736004)(105586002)(47776003)(25786009)(53936002)(6506007)(68736007)(66066001)(2616005)(1076002)(386003)(476003)(956004)(7736002)(4326008)(23676004)(26005)(2351001)(186003)(966005)(316002)(50466002)(2906002)(305945005)(6486002)(6916009)(16526019)(6666003)(575784001)(86362001)(36756003)(74482002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:VI1PR01MB1311;
-	H:hansa.oslo.skala.ai; FPR:; SPF:None; LANG:en;
-	PTR:InfoNoRecords; A:1; MX:1; 
-Received-SPF: None (protection.outlook.com: graphcore.ai does not designate
-	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtWSTFQUjAxTUIxMzExOzIzOmhJVCtUNzN0clBveUtaQVEzQWN1NXg3TE5z?=
-	=?utf-8?B?OU1ETnU1aVRMMXV6bHBZYVRjSk10NnN1K1J0YlJPM3kvWGhuaFY4SlFhTU9U?=
-	=?utf-8?B?YXBheWhPcG5GZVlHYXdSdmQ3WXUxRUIwSWdFL1FYblBHK2plb0hlQVdXS1V6?=
-	=?utf-8?B?YTRkSzVmdEFLUHlReFphM3BudUF6K3RxWkNGaWR4bkJvMzhVNkx5SW04Ri9N?=
-	=?utf-8?B?ekZ6eFhZMWZYbXdUSmp1enc5cXJCNCs1M21kSjVBQVVzZ3RON1NZNkNVQnRn?=
-	=?utf-8?B?WFh3K2FreDIyclZYWkwrYWlFVGlVcHhZem1kMklZU1pINHo1aHBDQncyTEMy?=
-	=?utf-8?B?SDRFeSt0SHJLcDIrdW1wendjanZMclAzYVUzUlRVL0dkNzRhVVpVTzI2WWNm?=
-	=?utf-8?B?SFErek9UM2pzOTVEUHo0VkxldXh5ZFNxTEJkeUFJZXBjT3NyK0VCdEthMk1s?=
-	=?utf-8?B?aUNXVHMvOWxyNHU3Z3FXVTJuQWpXb2doeVgveUNSMUozbllpazYrMzhsemht?=
-	=?utf-8?B?bThBaEljdGxVSEtSU2dXU0dzc09CR1E1dEJ5UEszNEsyeXNnSHRNMXphcUxM?=
-	=?utf-8?B?UzF1dFY0cXI0Z05WcnFZT21tVzMxeURTWW5lWWhzTmVUSVJVUjhubURFK2Fs?=
-	=?utf-8?B?eWtWWktMdUJ4WXVsakhBR3RHRFFPVUNsWmt4UTl4djhLRXhaUnVVRkRubU1K?=
-	=?utf-8?B?MnNiUjJGT3Y0My9mQWN2TVZ4cjBKclJuK09hK1dVRlkxMElmTXc5SFVLbmhQ?=
-	=?utf-8?B?bE9xamJzeEUxNkNmOXQycm05YjlNQkFSZ0xtMVU3R3R0b0ovS2JmRzB1NTBI?=
-	=?utf-8?B?MUNhZUdDbDc4VkRHNlNTMDM2aG1RazFOWlRhWTI2M2dFTUxMUkRRcmtKek5t?=
-	=?utf-8?B?UG9SOGRGcW9ocDZoaEg0WjlNV1QzNFZSTDdwRGg2T2htVmlHZG1IUlhQQUEy?=
-	=?utf-8?B?VFY0UjVNRmJ6RU1PVEpFUWpRNGFDdjFQQU1TS1pvdEpibXR5TkRYSk1JcXFO?=
-	=?utf-8?B?SmZkNFR1TS9pVFlCMWJVUEtJcU1mcVI2bFlsM2sxMlkxUjM5WHg0QmJmc1py?=
-	=?utf-8?B?dVFUdklkZ3N4Z1dOb3ljOFRZQTNNYlc2TytYM0pIQVYrVTNCNlp6OGlzSkR3?=
-	=?utf-8?B?VWkwWXVwdm0zVzJwQ2FRTE9QVFBmLzg1MUdrTVBwL0tEeGhpdUt6NklUT3RS?=
-	=?utf-8?B?MDRXT2pHdU5Obk1hYStzOGcvQ0xsL2V4cnRlVnRGTnJPczArZGNNaCtoV01v?=
-	=?utf-8?B?WXU4d1VlZURaTHN2ckpZVzM0NTFFbmhndy9kSVRTZUs5SEhwbWlHRk51S29l?=
-	=?utf-8?B?dEYzdUdvdlBwQThOQ2pXSlFuVVkrMGZsTi9WbmEyVHFrVGx3MDFmdURCVkpO?=
-	=?utf-8?B?T09yR0psZDljbHNoN1Q5RHdTbzV0M0UxaGhnTmVrbGNjUTF4KzBHeWVUU0d1?=
-	=?utf-8?B?M3dBYjFGQTJtbGJCeTdrN0U4WGFRNDBLZ2R4cklGTmUrR0JocktMaVRUbjUx?=
-	=?utf-8?B?eVB4eVFYd2F6K1hhcG92ckhIaHAwY1ZVc3ZaaDdZWXBPUk1YdmFQalc4VS9L?=
-	=?utf-8?B?S0N0c2JFWHNHWEc4RzJvMkVHVm4weldmTzZodG4yNGpaQXV0KzJhSzIvd0k4?=
-	=?utf-8?B?OFhEbXlQSENsZEpUcmhFQXp1cU9WUU1NU0dzRFJTcTFiRmp1RXAwZUw0TE1n?=
-	=?utf-8?Q?Gy+c2HkXQa5OqL2bNuSz8oIu5itfNjJbt1r8Z+y?=
-X-Microsoft-Antispam-Message-Info: L0a4Tg3aEQ6tyZPCiS+VsJQvgS7Lw63GIA1p+kyOd9NoLNwoM1Lt4E0ufL0Cv9Z5jSW5ZQDW2ylz4g7mlMEdO0GbNPpva2jl9JYyyEHQJHKpaRHcEeBWTstfF5jNrou+RfPzS6EvoC2EbcQtfGYsJSFOqm27YpIrAAx0dLMWqGgQasgdwGMorX4Uj/IgIEVB
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
-	6:xezopPmdmalRxdqxQL8HxyJmpTzwdDJ8mPiHHAeAI36h+ZrfkO94JBJPJLWlEzSy3y3QUjTAu3dwPILDe72lN6ZpnrT48GOptP6dXA2m7IR1ZMngFDPE9tqMz86EEB0mETJyLXqQF4S+Q0LcESx6fSD5ZtKNvGMDoApaPqUKqnCtj9CaMKGK8c5RJimceMeZBOisklaLs1SGUAaosvFUEyhCYgan4FTAbknsLQaWZHJxLzNvIeqjtRZ2NRkJabwQ2r+KnIHmJzR5nwmBOclzZCTFTsEoobCTJwVZrgCC82jDy8radNV60xFG+HAMnj7RuXkiqRieKR6/THiDSGtc9nVyvuInV6aQ1gwFja7sC7L+JEGwLMR7oca1UEkgEILWR2bdCjCz5dN+phzmCNH6jhKRKkS7DMDGFyW+bmMyPPoidufOTGvpUtxjZgGbR1tsddP+dVf5R5QGQXoJBTGWVQ==;
-	5:eeEU4IcZZPJbVkMNd6fuK9j1dCQb+r8AwioUVRGVv8oytGeIcso9pUlheDJmYA+cT48htrIlIrs1/CctGxZ4bx3E2Egl2tCluud9v2bWjrmHMrslFAkTnJFTV8kjON8m/oRNUnVsFahBYRxDjIuPmm0kqWDvKRCIe6Du6+7w18o=;
-	24:6/oZZN2FpBmJULxHdjNnM21qsXn1979iTEhy99v3XXBzVlnWuMIsyRaULdGI4Di3XyL8JIvS7okS9izVJyE7aYsAJ6zZkQLOmCTNKgrusAU=
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
-	7:fzbDz9wxzy/fYRFNC3VF+wy5tZ37SpbosS9Zp1EiL9fGvrR7hAOz6lXZKIc46Nhe6GGD1hKChE2XzUEe3gDhvX89hs172Yeafk7YlLIEaa6/onOgHY5fvF4cVDCCDEDsoj+Ip65XrY/45cmJcGzB3l5W4Q7qKJw+B4NVucyFB6r5F2h++KN6//JvZH88gH9sDXwXN8F6s09e2aOhYXOYTURNGmEYhHDfArlsSGGnsV3ykLNtACrhDA9vTbt3Z3m0
-X-MS-Office365-Filtering-Correlation-Id: 177d1837-f524-4549-5fe6-08d5ba619ae5
-X-OriginatorOrg: graphcore.ai
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2018 12:44:31.3766 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 177d1837-f524-4549-5fe6-08d5ba619ae5
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 02150d85-5b54-47ec-a80d-98af327512f0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR01MB1311
-Cc: Wei Lin Guay <wguay@graphcore.ai>
-Subject: [meta-networking][PATCH v2] rdma-core: add new recipe
+In-Reply-To: <20180510004908.26947-1-twoerner@gmail.com>
+Subject: Re: [meta-multimedia][PATCH v2] openh264: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,57 +109,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2018 12:44:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 May 2018 14:45:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-RDMA core is the userspace components for the Linux Kernel's
-InfiniBand/RoCE subsystem. This component contains the userspace
-libraries for libibverbs (and its associated providers libraries),
-librdmacm and libibumad. Besides, it also provides additional service
-daemons such as ibacm and srp_daemon.
 
-Signed-off-by: Wei Lin Guay <wguay@graphcore.ai>
-Reviewed-by: Harald Høeg <hhoeg@graphcore.ai>
----
-v1->v2: include review comments from Khem Raj to remove eudev from
-depends and specify the License correctly.
----
- .../recipes-support/rdma-core/rdma-core_17.bb      | 24 ++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-networking/recipes-support/rdma-core/rdma-core_17.bb
 
-diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_17.bb b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
-new file mode 100644
-index 0000000..5d03299
---- /dev/null
-+++ b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "Userspace support for InfiniBand/RDMA verbs"
-+DESCRIPTION = "This is the userspace components for the Linux Kernel's drivers Infiniband/RDMA subsystem."
-+SECTION = "libs"
-+
-+DEPENDS = "libnl"
-+RDEPENDS_${PN} = "bash perl"
-+
-+SRC_URI = "git://github.com/linux-rdma/rdma-core.git;protocol=http"
-+SRCREV ="5ce12bd51ebb0a4db35dea382b1ebdc701bab224"
-+S = "${WORKDIR}/git"
-+
-+#Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
-+LICENSE = "BSD-2-Clause | GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING.BSD_FB;md5=0ec18bae1a9df92c8d6ae01f94a289ae \
-+		   file://COPYING.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+
-+FILES_SOLIBSDEV = ""
-+FILES_${PN} += "${libdir}/*"
-+INSANE_SKIP_${PN} += "dev-so"
-+
-+inherit cmake
-+
-+OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
--- 
-2.9.3
+On 05/09/2018 05:49 PM, Trevor Woerner wrote:
+> Since we know that github archives which are automatically generated have a
+> tendency to change their checksums[1], switch to using a git clone.
+>
+> [1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
+>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>
+> Changes since v1:
+>  - replace the frankenstein local variable name OPENHBRANCH with simply BRANCH
+>    to hold the name of the branch to use
+This fails to build: please see
+http://errors.yoctoproject.org/Errors/Details/178572/
+
+>
+> ---
+>  .../recipes-multimedia/openh264/openh264_1.7.0.bb          | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+> index a7aaab3623..40bd493e6d 100644
+> --- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+> +++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+> @@ -11,9 +11,10 @@ LICENSE = "BSD-2-Clause"
+>  LICENSE_FLAGS = "commercial"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
+>  
+> -SRC_URI = "https://github.com/cisco/openh264/archive/v${PV}.tar.gz"
+> -SRC_URI[md5sum] = "93da4e76cfda7ede8fd2df51b0021efd"
+> -SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f6895738653f"
+> +S = "${WORKDIR}/git"
+> +SRCREV = "a180c9d4d6f1a4830ca9eed9d159d54996bd63cb"
+> +BRANCH = "openh264v1.7"
+> +SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH};"
+>  
+>  COMPATIBLE_MACHINE_armv7a = "(.*)"
+>  COMPATIBLE_MACHINE_aarch64 = "(.*)"
 
 
