@@ -1,55 +1,104 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C03D74EAD
+Return-Path: <wguay@graphcore.ai>
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+	(mail-db5eur01on0139.outbound.protection.outlook.com [104.47.2.139])
+	by mail.openembedded.org (Postfix) with ESMTP id ED54274F6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2018 10:27:32 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id h5-v6so15418898wrm.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 May 2018 03:27:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=qPqhEmeLyq2dI3lBZuwKN8b+QRzrUj+g1Oa4iv/3ZYk=;
-	b=q57Rtrniwj3Z7exc6Y16/nQayfrQsG5Wc1bdPpBlo+Ag9xZjnrg4DaPGEjjEnAn01T
-	9KyzUtbwUbujDuWKGzGza/tUdckY5ThtyICdU9MPfDp/K3zswb8Vl+nGFHtifCelQhB7
-	EqYMQfFkJ+jldYF3IcYiFWm0nC3s4fzkE/W2htwd2SvktTJeKo1FoF6ZX3BTgZSkFzUT
-	epsasEgQbwgXokDdzlt/AdBtdLib5M/1AacAaIUupSojMaisDvS+reLUbuZSv6rJc5Ej
-	Vj5Psd/LD6SFBxDSNX/UtAipiW5TdRehGKcuLZZ3QH80S3GAXQvr41QYUi1M/VwSA3g1
-	gk6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=qPqhEmeLyq2dI3lBZuwKN8b+QRzrUj+g1Oa4iv/3ZYk=;
-	b=dDZOIPVjaU7pYpP6Hp11wrE7d6RYyaW4HkKDXcej8is2YfC54I5DRObViAhriJy+9K
-	/TtizB0Swu+pWd8PAtAGYKFD+adPWTSiwp/96OfU096o85Jm3uDjmVMW7j3OnqhpHmSY
-	eT7iOLP7tBC8Xcbb3cmwrtz3Y8fdMvCc2Wrg4ySduwvuOCNUsLFSNRcp1jzgIH4tIM7L
-	pz2Jc2Xu0ZJ4utsARCv9gGDrwAkNevTffcIVg2NR5XiXKjuke34l2HUQadro2TLbeiqg
-	IfIABj7iUujU/lRf6NPEFzAwR/vRbW911Tk/wgMxZAmsbXONsrv+4bSnVWN4Cwkfh1Le
-	Ecqw==
-X-Gm-Message-State: ALKqPwecejijDa5G6HnlJgx0P6recNsG/xrJStBf8DgYoG3oZ1v8uVui
-	2WkQDTOm7mryu3PPBKsWFgM=
-X-Google-Smtp-Source: AB8JxZr8Bb831xCDeQfUI3NdZ8RPCcxvONRo6/8Aie8iJJaO74NI5BofulDieL0/ct7QexN1hbeoxg==
-X-Received: by 2002:adf:ae59:: with SMTP id
-	u25-v6mr9918562wrd.157.1526380053018; 
-	Tue, 15 May 2018 03:27:33 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	z192-v6sm25728wmc.10.2018.05.15.03.27.31
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 15 May 2018 03:27:32 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 15 May 2018 12:27:33 +0200
-To: Hong Liu <hongl.fnst@cn.fujitsu.com>
-Message-ID: <20180515102733.GA1892@jama>
-References: <20180515101519.5413-1-hongl.fnst@cn.fujitsu.com>
-	<20180515101519.5413-2-hongl.fnst@cn.fujitsu.com>
+	Tue, 15 May 2018 12:44:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=graphcore.onmicrosoft.com; s=selector1-graphcore-ai;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=qaWR1tNqKJDeav+nBRXlTf9XoPmMUPvk0bMxdnKah0E=;
+	b=g0qUaeAbLwP8/0UxUMf2gY8Ip1c74EtIFbBTU3KWkng+wmbXZ5KMRMvUXvxySVauBJEWD7P/3CrLc0sht2fIOR6SpOugNzeigUMS32ee4J6eddsZBQvpZLwykpNXbqws2ufaBfaE5/tAluYZBTBiajChutg/J+o87zQJjOjJanE=
+Authentication-Results: spf=none (sender IP is )
+	smtp.mailfrom=wguay@graphcore.ai; 
+Received: from hansa.oslo.skala.ai (95.130.220.238) by
+	VI1PR01MB1311.eurprd01.prod.exchangelabs.com (2a01:111:e400:5182::28)
+	with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.755.16;
+	Tue, 15 May 2018 12:44:31 +0000
+From: Wei Lin Guay <wguay@graphcore.ai>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 May 2018 14:44:17 +0200
+Message-Id: <20180515124417.788-1-wguay@graphcore.ai>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-In-Reply-To: <20180515101519.5413-2-hongl.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.9.5 (2018-04-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] openwsman: 2.6.3 -> 2.6.4
+X-Originating-IP: [95.130.220.238]
+X-ClientProxiedBy: HE1PR05CA0147.eurprd05.prod.outlook.com
+	(2603:10a6:7:28::34) To VI1PR01MB1311.eurprd01.prod.exchangelabs.com
+	(2a01:111:e400:5182::28)
+X-MS-PublicTrafficType: Email
+X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(7020095)(4652020)(7021125)(5600026)(4534165)(7022125)(4603075)(4627221)(201702281549075)(7048125)(7024125)(7027125)(7028125)(7023125)(2017052603328)(7153060)(7193020);
+	SRVR:VI1PR01MB1311; 
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
+	3:1YDaI3P/wnIjCxKca47lEyHki+BLH/KltsqaxgDhOVGH4osg053lNVqr4K74SxNMZnL7KgX2A/7ZeJgauOyNIuJxg9kSej8gdvRAoJ4uPLaEDjUmoxwEgpzjwrY7dVywKZfgichl4TCf9kVxkXvqTa3EAaKkrDtu7QBhEt58DUpLbdlUg8W8afRR/avKwzB/qlCC2YS8SS5HMbR5VeL+XqqP7mbLZsMB7L/C9Rg8YPIAG3th7WQMdNAKa69wPGfF;
+	25:YGGPZ4VqTUmclbNXUY5Mhr1HFPmTV76UO7jBN7bN1oydbwsqsHUDlHSwVUFqO3O1K5HlNFlyv8s/Bkzjp+azGSArmEbWcwLqUdVsSrhyzgyowXUYD45XaP9/nB7HMyKxShkfLVkpQM1IRf6MQwxLJD1Pp/pZKKpMujVNUcfRVCSuBKMtq1VOye2r26WvSo/o3lYjJxbSqdSQ5BnrADdELXiSO/hIaP4F1TJMt8Fm6RAqPKXf4QefQbV3fIbYQpGlaIuK1W92fJ121d+YomTbUjwUqXpJerldt7V6UhVVnT69ug/UM93CJc4aZBgUQaShnNEr185JIYyjmCNQjBdEOzm2phnCom7FONYAflNMVk4=;
+	31:alM4suDGAGBZxP0nBxvWvZF9tUO0JLMN3MVvopE8ZPI8Z6+kqRwDyVbNj9YybgFqYNd0I3pBksCmusahNLm8fIDxzNGA6UVUk50sDVYmMFIjVEtBIewiOAoyPqC4w1Co4sQN++Z0UUIeKvlLM7eQwOgIVRRvzLCwX48EmoIBTt6Gtf7dBOYXcK3qGxe6myLnIpwdLPvZzLhegkgtmZV/m/3pxEyxfR8IhUuEe5zwPN4=
+X-MS-TrafficTypeDiagnostic: VI1PR01MB1311:
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
+	20:bgYbsR1s521w6Ya2tch33xYLJhyMbdqD6Yvk28OZPD1DmjKvlWjfaFTXvw8Wz8ypescVWZipEqPKn+oHJvN7qbfF65e8Szh6sQlEvtlI7cOf3100wiGjRpnJGTdw6O99L2CtWnkcsu6LShhcBVHNsN/THZAumwdKUTeeZMM8pZSJTGR5MtEMbdT3CJRkKILBbgpS+lionX0K4FFa1uxSkXtdKieBoCKSz0f3XF9ttvnRqzW6l5xaOVjNpOeXcXk+qcaMaSo2fx3nkduN+5C7sSMRbw+dnqhizqikWYcuuc7sqpA6suHfxtr8Cjc1umhihT2ys7sML8mBAQGc2rw7uVUXXZlC7zVAuupgn9AN327lkXub6Ig/sM73N4/qZe2nENGr2kG16C+CPs7Rpzdp4egextp9CFUNy3sFqempiTQ=;
+	4:kMnTMhyhTJ91SSMxHuwjQmdS4xvQvyi7bdQxELfp7R5KBJUeJ79MaU2EVKgxlW1xxKdi0UTefk1wlJkh2i66zQ/6ed/y8S3vNWsPXOkVyRqfPQX1wxBI6p0e6GG+S+OtF8JnTQQtHWg/VRsPMYehmA/rFOh8bPvkpkYVc2eCV8tYmSLawImoL+KDihvcQEoZjaSs2WWMc/+yrxOA8VeTz6Lz/y+Ab6RwWOyV+PRapzoon4gf4jJtghSI3PsnJ+Bz0ZVQaHbkdS5PETD31c+MxQqT6BD+ym5OMC3wgxIe2nH66ugOxJFk9GFsNnxCdTTv
+X-Microsoft-Antispam-PRVS: <VI1PR01MB13118A21F7C413887CD228CED6930@VI1PR01MB1311.eurprd01.prod.exchangelabs.com>
+X-Exchange-Antispam-Report-Test: UriScan:(166708455590820);
+X-MS-Exchange-SenderADCheck: 1
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(93006095)(93001095)(3231254)(944501410)(52105095)(3002001)(149027)(150027)(6041310)(20161123560045)(20161123562045)(20161123564045)(2016111802025)(20161123558120)(6043046)(6072148)(201708071742011);
+	SRVR:VI1PR01MB1311; BCL:0; PCL:0; RULEID:; SRVR:VI1PR01MB1311; 
+X-Forefront-PRVS: 0673F5BE31
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(39840400004)(396003)(39380400002)(366004)(346002)(376002)(199004)(189003)(6512007)(5660300001)(107886003)(6306002)(3846002)(6116002)(2870700001)(106356001)(81166006)(50226002)(486006)(478600001)(52116002)(8936002)(8676002)(2361001)(81156014)(97736004)(105586002)(47776003)(25786009)(53936002)(6506007)(68736007)(66066001)(2616005)(1076002)(386003)(476003)(956004)(7736002)(4326008)(23676004)(26005)(2351001)(186003)(966005)(316002)(50466002)(2906002)(305945005)(6486002)(6916009)(16526019)(6666003)(575784001)(86362001)(36756003)(74482002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:VI1PR01MB1311;
+	H:hansa.oslo.skala.ai; FPR:; SPF:None; LANG:en;
+	PTR:InfoNoRecords; A:1; MX:1; 
+Received-SPF: None (protection.outlook.com: graphcore.ai does not designate
+	permitted sender hosts)
+X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtWSTFQUjAxTUIxMzExOzIzOmhJVCtUNzN0clBveUtaQVEzQWN1NXg3TE5z?=
+	=?utf-8?B?OU1ETnU1aVRMMXV6bHBZYVRjSk10NnN1K1J0YlJPM3kvWGhuaFY4SlFhTU9U?=
+	=?utf-8?B?YXBheWhPcG5GZVlHYXdSdmQ3WXUxRUIwSWdFL1FYblBHK2plb0hlQVdXS1V6?=
+	=?utf-8?B?YTRkSzVmdEFLUHlReFphM3BudUF6K3RxWkNGaWR4bkJvMzhVNkx5SW04Ri9N?=
+	=?utf-8?B?ekZ6eFhZMWZYbXdUSmp1enc5cXJCNCs1M21kSjVBQVVzZ3RON1NZNkNVQnRn?=
+	=?utf-8?B?WFh3K2FreDIyclZYWkwrYWlFVGlVcHhZem1kMklZU1pINHo1aHBDQncyTEMy?=
+	=?utf-8?B?SDRFeSt0SHJLcDIrdW1wendjanZMclAzYVUzUlRVL0dkNzRhVVpVTzI2WWNm?=
+	=?utf-8?B?SFErek9UM2pzOTVEUHo0VkxldXh5ZFNxTEJkeUFJZXBjT3NyK0VCdEthMk1s?=
+	=?utf-8?B?aUNXVHMvOWxyNHU3Z3FXVTJuQWpXb2doeVgveUNSMUozbllpazYrMzhsemht?=
+	=?utf-8?B?bThBaEljdGxVSEtSU2dXU0dzc09CR1E1dEJ5UEszNEsyeXNnSHRNMXphcUxM?=
+	=?utf-8?B?UzF1dFY0cXI0Z05WcnFZT21tVzMxeURTWW5lWWhzTmVUSVJVUjhubURFK2Fs?=
+	=?utf-8?B?eWtWWktMdUJ4WXVsakhBR3RHRFFPVUNsWmt4UTl4djhLRXhaUnVVRkRubU1K?=
+	=?utf-8?B?MnNiUjJGT3Y0My9mQWN2TVZ4cjBKclJuK09hK1dVRlkxMElmTXc5SFVLbmhQ?=
+	=?utf-8?B?bE9xamJzeEUxNkNmOXQycm05YjlNQkFSZ0xtMVU3R3R0b0ovS2JmRzB1NTBI?=
+	=?utf-8?B?MUNhZUdDbDc4VkRHNlNTMDM2aG1RazFOWlRhWTI2M2dFTUxMUkRRcmtKek5t?=
+	=?utf-8?B?UG9SOGRGcW9ocDZoaEg0WjlNV1QzNFZSTDdwRGg2T2htVmlHZG1IUlhQQUEy?=
+	=?utf-8?B?VFY0UjVNRmJ6RU1PVEpFUWpRNGFDdjFQQU1TS1pvdEpibXR5TkRYSk1JcXFO?=
+	=?utf-8?B?SmZkNFR1TS9pVFlCMWJVUEtJcU1mcVI2bFlsM2sxMlkxUjM5WHg0QmJmc1py?=
+	=?utf-8?B?dVFUdklkZ3N4Z1dOb3ljOFRZQTNNYlc2TytYM0pIQVYrVTNCNlp6OGlzSkR3?=
+	=?utf-8?B?VWkwWXVwdm0zVzJwQ2FRTE9QVFBmLzg1MUdrTVBwL0tEeGhpdUt6NklUT3RS?=
+	=?utf-8?B?MDRXT2pHdU5Obk1hYStzOGcvQ0xsL2V4cnRlVnRGTnJPczArZGNNaCtoV01v?=
+	=?utf-8?B?WXU4d1VlZURaTHN2ckpZVzM0NTFFbmhndy9kSVRTZUs5SEhwbWlHRk51S29l?=
+	=?utf-8?B?dEYzdUdvdlBwQThOQ2pXSlFuVVkrMGZsTi9WbmEyVHFrVGx3MDFmdURCVkpO?=
+	=?utf-8?B?T09yR0psZDljbHNoN1Q5RHdTbzV0M0UxaGhnTmVrbGNjUTF4KzBHeWVUU0d1?=
+	=?utf-8?B?M3dBYjFGQTJtbGJCeTdrN0U4WGFRNDBLZ2R4cklGTmUrR0JocktMaVRUbjUx?=
+	=?utf-8?B?eVB4eVFYd2F6K1hhcG92ckhIaHAwY1ZVc3ZaaDdZWXBPUk1YdmFQalc4VS9L?=
+	=?utf-8?B?S0N0c2JFWHNHWEc4RzJvMkVHVm4weldmTzZodG4yNGpaQXV0KzJhSzIvd0k4?=
+	=?utf-8?B?OFhEbXlQSENsZEpUcmhFQXp1cU9WUU1NU0dzRFJTcTFiRmp1RXAwZUw0TE1n?=
+	=?utf-8?Q?Gy+c2HkXQa5OqL2bNuSz8oIu5itfNjJbt1r8Z+y?=
+X-Microsoft-Antispam-Message-Info: L0a4Tg3aEQ6tyZPCiS+VsJQvgS7Lw63GIA1p+kyOd9NoLNwoM1Lt4E0ufL0Cv9Z5jSW5ZQDW2ylz4g7mlMEdO0GbNPpva2jl9JYyyEHQJHKpaRHcEeBWTstfF5jNrou+RfPzS6EvoC2EbcQtfGYsJSFOqm27YpIrAAx0dLMWqGgQasgdwGMorX4Uj/IgIEVB
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
+	6:xezopPmdmalRxdqxQL8HxyJmpTzwdDJ8mPiHHAeAI36h+ZrfkO94JBJPJLWlEzSy3y3QUjTAu3dwPILDe72lN6ZpnrT48GOptP6dXA2m7IR1ZMngFDPE9tqMz86EEB0mETJyLXqQF4S+Q0LcESx6fSD5ZtKNvGMDoApaPqUKqnCtj9CaMKGK8c5RJimceMeZBOisklaLs1SGUAaosvFUEyhCYgan4FTAbknsLQaWZHJxLzNvIeqjtRZ2NRkJabwQ2r+KnIHmJzR5nwmBOclzZCTFTsEoobCTJwVZrgCC82jDy8radNV60xFG+HAMnj7RuXkiqRieKR6/THiDSGtc9nVyvuInV6aQ1gwFja7sC7L+JEGwLMR7oca1UEkgEILWR2bdCjCz5dN+phzmCNH6jhKRKkS7DMDGFyW+bmMyPPoidufOTGvpUtxjZgGbR1tsddP+dVf5R5QGQXoJBTGWVQ==;
+	5:eeEU4IcZZPJbVkMNd6fuK9j1dCQb+r8AwioUVRGVv8oytGeIcso9pUlheDJmYA+cT48htrIlIrs1/CctGxZ4bx3E2Egl2tCluud9v2bWjrmHMrslFAkTnJFTV8kjON8m/oRNUnVsFahBYRxDjIuPmm0kqWDvKRCIe6Du6+7w18o=;
+	24:6/oZZN2FpBmJULxHdjNnM21qsXn1979iTEhy99v3XXBzVlnWuMIsyRaULdGI4Di3XyL8JIvS7okS9izVJyE7aYsAJ6zZkQLOmCTNKgrusAU=
+SpamDiagnosticOutput: 1:99
+SpamDiagnosticMetadata: NSPM
+X-Microsoft-Exchange-Diagnostics: 1; VI1PR01MB1311;
+	7:fzbDz9wxzy/fYRFNC3VF+wy5tZ37SpbosS9Zp1EiL9fGvrR7hAOz6lXZKIc46Nhe6GGD1hKChE2XzUEe3gDhvX89hs172Yeafk7YlLIEaa6/onOgHY5fvF4cVDCCDEDsoj+Ip65XrY/45cmJcGzB3l5W4Q7qKJw+B4NVucyFB6r5F2h++KN6//JvZH88gH9sDXwXN8F6s09e2aOhYXOYTURNGmEYhHDfArlsSGGnsV3ykLNtACrhDA9vTbt3Z3m0
+X-MS-Office365-Filtering-Correlation-Id: 177d1837-f524-4549-5fe6-08d5ba619ae5
+X-OriginatorOrg: graphcore.ai
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 May 2018 12:44:31.3766 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 177d1837-f524-4549-5fe6-08d5ba619ae5
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 02150d85-5b54-47ec-a80d-98af327512f0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR01MB1311
+Cc: Wei Lin Guay <wguay@graphcore.ai>
+Subject: [meta-networking][PATCH v2] rdma-core: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,72 +111,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 May 2018 10:27:32 -0000
-X-Groupsio-MsgNum: 72174
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pWyiEgJYm5f9v55/"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 15 May 2018 12:44:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---pWyiEgJYm5f9v55/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+RDMA core is the userspace components for the Linux Kernel's
+InfiniBand/RoCE subsystem. This component contains the userspace
+libraries for libibverbs (and its associated providers libraries),
+librdmacm and libibumad. Besides, it also provides additional service
+daemons such as ibacm and srp_daemon.
 
-On Tue, May 15, 2018 at 06:15:19PM +0800, Hong Liu wrote:
-> Upgrade openwsman from 2.6.3 to 2.6.4
->=20
-> Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
-> ---
->  .../openwsman/{openwsman_2.6.3.bb =3D> openwsman_2.6.4.bb}              =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-extended/openwsman/{openwsman_2.6.3.bb =3D> openw=
-sman_2.6.4.bb} (97%)
->=20
-> diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb b/meta=
--oe/recipes-extended/openwsman/openwsman_2.6.4.bb
-> similarity index 97%
-> rename from meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
-> rename to meta-oe/recipes-extended/openwsman/openwsman_2.6.4.bb
-> index f618f02..f46a3bd 100644
-> --- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
-> +++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.4.bb
-> @@ -15,8 +15,8 @@ DEPENDS =3D "curl libxml2 openssl libpam"
->  inherit distro_features_check
->  REQUIRED_DISTRO_FEATURES =3D "pam"
-> =20
-> -SRCREV =3D "feb7ec9b004fcaea0dbe65ce8a1a79cc29dd994c"
-> -PV =3D "2.6.3"
-> +SRCREV =3D "4aff7eaf5df948b6ed74cf4f8dd721a397bfb759"
-> +PV =3D "2.6.4"
+Signed-off-by: Wei Lin Guay <wguay@graphcore.ai>
+Reviewed-by: Harald Høeg <hhoeg@graphcore.ai>
+---
+v1->v2: include review comments from Khem Raj to remove eudev from
+depends and specify the License correctly.
+---
+ .../recipes-support/rdma-core/rdma-core_17.bb      | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-networking/recipes-support/rdma-core/rdma-core_17.bb
 
-This PV is already set from the filename of the recipe.
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_17.bb b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
+new file mode 100644
+index 0000000..5d03299
+--- /dev/null
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_17.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Userspace support for InfiniBand/RDMA verbs"
++DESCRIPTION = "This is the userspace components for the Linux Kernel's drivers Infiniband/RDMA subsystem."
++SECTION = "libs"
++
++DEPENDS = "libnl"
++RDEPENDS_${PN} = "bash perl"
++
++SRC_URI = "git://github.com/linux-rdma/rdma-core.git;protocol=http"
++SRCREV ="5ce12bd51ebb0a4db35dea382b1ebdc701bab224"
++S = "${WORKDIR}/git"
++
++#Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
++LICENSE = "BSD-2-Clause | GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING.BSD_FB;md5=0ec18bae1a9df92c8d6ae01f94a289ae \
++		   file://COPYING.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++
++FILES_SOLIBSDEV = ""
++FILES_${PN} += "${libdir}/*"
++INSANE_SKIP_${PN} += "dev-so"
++
++inherit cmake
++
++OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
+-- 
+2.9.3
 
->  SRC_URI =3D "git://github.com/Openwsman/openwsman.git \
->             file://libssl-is-required-if-eventint-supported.patch \
-> --=20
-> 2.7.4
->=20
->=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---pWyiEgJYm5f9v55/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWvq2FAAKCRA3VSO3ZXaA
-HD1UAJ9B+BGmWiUcW2iH4ommSJ1xTAqS5QCgjTRn9SiP7WlNSMjLhAtqZPRlElo=
-=NBZ2
------END PGP SIGNATURE-----
-
---pWyiEgJYm5f9v55/--
