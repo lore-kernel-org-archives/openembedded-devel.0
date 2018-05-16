@@ -1,51 +1,49 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 447C26079F
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 54ECF62134
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 19:55:40 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id v15-v6so3062647wrm.10
+	Wed, 16 May 2018 20:55:17 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id j186-v6so5568080ita.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 12:55:42 -0700 (PDT)
+	Wed, 16 May 2018 13:55:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Zs5saMbcoz5qOiewafL/T3ccD6JAWid0GPr7RUcxRm4=;
-	b=KH4pjIocbzYLQSRqte+pOF+MbirThTJzpOqWoKfC5rpfBHk6gzBRZjArhf+PBBd6xe
-	iyiz0PqcaXx4TZIAOzzRslqDfj9go3A4grOmNi4SOqVGdGeogJc1HfhZBU4FwOgE/oLF
-	uHoZAd1JKCYEobZB5A0PUgnfjTePsHxwEVBbmkpuXl6Fygk269iv3xyyCT4qNK+bTO46
-	XqbvckR2VCfo5/tpTkZHr82MiAdLsWy0lhgbHzaX2cVHGt6LmT+U84COy3qA7LZnMbsI
-	b+VfrLBSelsZGDIlfk9idm7b55Q6LH6BFAnEPR1swecl5dwybh4mG6Q0/ez0iT+ECNLo
-	dCQA==
+	h=from:to:subject:date:message-id;
+	bh=JyV4lPJCYu4dSBHRwVQgZ5WGJdDowVZxxljC93N6+oc=;
+	b=SUjvbRN40O1GqbdEOK49XQ54yaUaytcr7/LFtWKePklBEw2SxZfQq7dQ3bESrvfLpB
+	Enm5S+s8QvVX2OeGbaW18tVEWNx5vYeUH/uWEYg+MVIU7Okic6eMJl8/wMt20WEvIYad
+	k3tWbTbvPAwye8YMBHB4hG/bnNSo5iE3hznwnwm9umgoYHQI6LIXAnNhQ5c+A3cKjcG6
+	/zq+LLDsqYDi4zQu8mAC4LsuKcSpN+iX/Q6ix+QKLHv0AT5GNbYwlVYP27jYkZ3VuQsF
+	seds3kkPBQ6730gLGSMIEHHM5ic+gW1z2Zy34/7A4+q5GYhw6YQF/pkjrNMNDdhH7tSR
+	JdUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Zs5saMbcoz5qOiewafL/T3ccD6JAWid0GPr7RUcxRm4=;
-	b=qu9or/iH8xMdcCz9Op/+Iy7ZSmQliQgyhMA7Hq/Yd9UeyzQuSxzjs8Pk27NvXSoxS5
-	gYDiixMgrEkmKot+l+Ze35y13SsZlQkUIl+i5orMGwcjI+ue+KD0t18bqv+gst8rstpB
-	JAQYvZzEUKBgZKkUPaWCnnvfrI594NPI2LI0Zw/hct9VjG8Frqc2f8gYxXbvKkNYQ4kC
-	O7RZpOcWzUPs0knDgD862BfmpIUtW/Yp8/CdqL2GzWNK1LQ7zxBbS78nGUfUBu4ecN6v
-	xp89/latnMnoO1HU7AzgGbTU58KBVdVdXTVpnxd8CYbqQzpwGZP1a/Mlp6KJe45N+C9P
-	bAzQ==
-X-Gm-Message-State: ALKqPweLd+2WX+l/HfjtW8SZhwZeHgJgXqDMUR1fYYBFgSUUCpACxCeQ
-	DQQFUzyKKQjVvxaab0g6ekPXxPjhYozwgcOtas8=
-X-Google-Smtp-Source: AB8JxZrGvBLa9uCK1dsmJBpvx/0r9qWlkB5gEVQ8OcVdPJbOrNY+LKI39C73FKB1CUj+zUHNIJyju9YwzHirj8NLdlU=
-X-Received: by 2002:a19:d153:: with SMTP id
-	i80-v6mr15293393lfg.16.1526500541355; 
-	Wed, 16 May 2018 12:55:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a19:17a1:0:0:0:0:0 with HTTP; Wed, 16 May 2018 12:55:40
-	-0700 (PDT)
-In-Reply-To: <8f704304-6617-740c-6caa-6758f6b70241@gmail.com>
-References: <20180516171948.18406-1-twoerner@gmail.com>
-	<8f704304-6617-740c-6caa-6758f6b70241@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=JyV4lPJCYu4dSBHRwVQgZ5WGJdDowVZxxljC93N6+oc=;
+	b=ucGIrCeXhLnc0JPFuig13m1/24Bs66scgfJnsU3PEKxM3ivU0puiFDcZaN1DI+t2Rk
+	lL+vtbE+CvuPxLmRY51Wmw2KRvQCEN3YGXeX+Wxs1jzUovu3it9qQPSLnKbIr++sawGW
+	9YsowmtYF55CLcMqFQyQxcpsJ76sFntQ1LDbl5ZOP3IaE+Nh6QAKdtATAo6likPpEa7X
+	xDJXpwvMJjNotXox2HNihaRjEBHFr7rJ9Yrt4UobivGPxv8YQlE508T03osvRTWRlByu
+	JIOcJWFsywTgTRzNJDTZNVXQGuwi0zucuNSpRf5i+iSXZQh089pFpoMFAIeKPE8g2NHk
+	g5Ng==
+X-Gm-Message-State: ALKqPwcwrQVZHR4au6AglqV57ASZOxdxL9NfrNel/0cV6ZU/HXwjj/6r
+	kLyaHCfYOiDvS2876Yx9RQPUUaje
+X-Google-Smtp-Source: AB8JxZr35IIQ+Jh2fRqcmpVfVESQeyUblNlnNEV3tk3H5SlEAZgDkIfC4ODv2JAmsu8G9xmOPyMlBg==
+X-Received: by 2002:a6b:a89b:: with SMTP id
+	e27-v6mr2769304ioj.180.1526504118502; 
+	Wed, 16 May 2018 13:55:18 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	z9-v6sm2005944itf.8.2018.05.16.13.55.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 16 May 2018 13:55:17 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
-Date: Wed, 16 May 2018 15:55:40 -0400
-Message-ID: <CAHUNapQZt=WHBRuxF1SZCP51e83BKAjCJz_G8_bTvtELonSzHw@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] grpc: switch away from github archive
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 May 2018 16:55:14 -0400
+Message-Id: <20180516205514.11301-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [meta-networking][master-next][PATCH v2] grpc: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,37 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 19:55:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 16 May 2018 20:55:18 -0000
 
-On Wed, May 16, 2018 at 3:37 PM, akuster808 <akuster808@gmail.com> wrote:
+Since we know that github archives which are automatically generated have a
+tendency to change their checksums[1], switch to using a git clone.
 
->
->
-> On 05/16/2018 10:19 AM, Trevor Woerner wrote:
-> > Since we know that github archives which are automatically generated
-> have a
-> > tendency to change their checksums[1], switch to using a git clone.
-> >
-> > [1] http://lists.openembedded.org/pipermail/openembedded-devel/
-> 2017-September/114916.html
->
-> This recipe is in the middle of moving to meta-networking ie in
-> master-next not yet merged to master.
->
-> either the meta-networking maintainer will integrate or maybe a rebase
-> on master-next would be helpful??
->
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
 
-Sure, I can send a v2 rebased on master-next.
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+changes since v1:
+- rebase on master-next
+---
+ meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Now that you've started a build test of master, maybe the rest of this
-janitorial cleanup should be done relative to master-next?
+diff --git a/meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb b/meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
+index 0883ec176b..a0c943d114 100644
+--- a/meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
++++ b/meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
+@@ -10,13 +10,13 @@ DEPENDS_append_class-target = " gtest grpc-native "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRC_URI = "https://github.com/grpc/grpc/archive/v${PV}.tar.gz \
++S = "${WORKDIR}/git"
++SRCREV = "db68cb3652cc7697647e9934b5316d98a6ba04d1"
++BRANCH = "v1.8.x"
++SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH} \
+            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
+            file://0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch \
+            "
+-SRC_URI[md5sum] = "b565fa6787e42f4969395870c2ad436e"
+-SRC_URI[sha256sum] = "df9168da760fd2ee970c74c9d1b63377e0024be248deaa844e784d0df47599de"
+-
+ SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
+ 
+ inherit cmake
+-- 
+2.17.0.rc2.3.gc2a499e6c
 
-
->
-> thanks for the patch.
->
-
-no problem! :-D
 
