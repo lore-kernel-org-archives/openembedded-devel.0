@@ -1,22 +1,30 @@
-Return-Path: <prvs=667765fcb=Richard.Leitner@skidata.com>
-X-Greylist: delayed 602 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 16 May 2018 08:00:28 UTC
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D9A36079F
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id DEB896E5FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 08:00:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,404,1520895600"; 
-   d="scan'208";a="1443432"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 May 2018 09:50:11 +0200
-Message-ID: <20180516075011.27429-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.11.0
+	Wed, 16 May 2018 09:05:31 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	16 May 2018 02:05:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,390,1520924400"; d="scan'208";a="55664775"
+Received: from unknown (HELO [10.255.138.168]) ([10.255.138.168])
+	by fmsmga001.fm.intel.com with ESMTP; 16 May 2018 02:05:31 -0700
+To: Trevor Woerner <twoerner@gmail.com>, akuster808 <akuster808@gmail.com>
+References: <20180510004908.26947-1-twoerner@gmail.com>
+	<2d40764a-ff2e-06c1-898b-1f4f99fbda29@gmail.com>
+	<CAHUNapT0E0S-7Dv51hcfkYbr0kBCq8RHTrkhucJzHtmkTfdDzg@mail.gmail.com>
+From: Anuj Mittal <anuj.mittal@intel.com>
+Message-ID: <b629ed74-5025-a418-ff68-8b8904fa90af@intel.com>
+Date: Wed, 16 May 2018 17:05:30 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-oe][PATCH] stm32flash: add recipe
+In-Reply-To: <CAHUNapT0E0S-7Dv51hcfkYbr0kBCq8RHTrkhucJzHtmkTfdDzg@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH v2] openh264: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,41 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 08:00:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 May 2018 09:05:32 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Add recipe for version 0.5 of stm32flash, an open source flash program for
-STM32 using the ST serial bootloader.
+On 05/16/2018 02:31 PM, Trevor Woerner wrote:
+> The existing recipe has provisions for i386. If I understand correctly,
+> qemux86 is i586 (?), and meta-intel's intel-core2-32 is i686 (?). Do I
+> duplicate the i386 provisions for i586 and i686? Is there an easier way to
+> specify all 32-bit IA systems? 
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
+Does it work if you use _x86 instead of _i386?
 
-diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-new file mode 100644
-index 000000000..d401981ff
---- /dev/null
-+++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Open source flash program for STM32 using the ST serial bootloader"
-+HOMEPAGE = "https://sourceforge.net/projects/stm32flash/"
-+BUGTRACKER = "https://sourceforge.net/p/stm32flash/tickets/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+inherit autotools-brokensep
-+
-+S = "${WORKDIR}/${PN}"
-+
-+SRC_URI = "https://prdownloads.sourceforge.net/stm32flash/stm32flash-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "40f673502949f3bb655d2bcc539d7b6a"
-+SRC_URI[sha256sum] = "97aa9422ef02e82f7da9039329e21a437decf972cb3919ad817f70ac9a49e306"
-+
-+FILES_${PN} = "/usr/local/bin/stm32flash"
--- 
-2.11.0
-
+Thanks,
+Anuj
 
