@@ -1,54 +1,25 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f46.google.com (mail-it0-f46.google.com
-	[209.85.214.46])
-	by mail.openembedded.org (Postfix) with ESMTP id DBA80745CB
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id A641C7487D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 10:56:31 +0000 (UTC)
-Received: by mail-it0-f46.google.com with SMTP id q4-v6so677381ite.3
+	Wed, 16 May 2018 11:53:01 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id w4GBr25W014155
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 03:56:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=ORcaut04GFrDG2AslEGZ8hSJfw6bw7GDK89YEhBFDcI=;
-	b=nHaXfROkA8WDhoCftrR8z/hCi/aI8euapNU5j+UqQH110YXY1HkD6uirfoio4z/I8P
-	eRt3hc0eb7xY6DJ+RBKYiEeo+hTg9GV4UCS8+o5txFv6VwFVeQlPMwZmX4DwNClT7O9L
-	IPsJ+EILXVtpDZTvd1FFpPHK0RTQmissV5sjndsKe9jMWZsgWYhxxk13MiRwK5/Zd/a5
-	EZe+qcE8aGIq6DprXR/m7FrXNXKEbnNVykwtWVwvb4jH0Isw+moa7T5LX26R0haLX3SV
-	LXljr22fKnRgcEhmJjl1FrSdoO/9GBy9H5hIkyMlfZCBBi5e48YcczxCzIMXv3ujYpmH
-	PNQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=ORcaut04GFrDG2AslEGZ8hSJfw6bw7GDK89YEhBFDcI=;
-	b=R8Cv2Q4WSWz5IADmn28KBsdNxiXI04LAC2INTWJVF+TkUB1m2xnB3qE8mRhQEja6l6
-	lheWeFDbJEJT0I41dcCAQaTfvdNQVmVvwL+NMqnPSG63fs6+hZylsn9XgMyLDxv0cBYp
-	T1Pp3ddQE2Yhtub0jv41FajYTmVcLDPd9lCkSMByFgJSLqpZ4NLDQLE/O5ujioG0Z8Ai
-	oNpz5RtTiExQoGh5JRSCrepdPfDxThXbZBfOIMF4pxWd+A00cilZzW0J3fcnVUt5Q42u
-	0a5xxLUewYFMyLeQ7vTpMMCEYkNhFFnvYVsL8Sojx0LB76Y7GGxPVzo2cigAIqybkGSa
-	PjRw==
-X-Gm-Message-State: ALKqPwdrSMDCfXoF5r6oVfM/Yl4ekK8NeHMEMQawpntBfYnAYXzyqfLe
-	fThPL/tA7j5usYyHg2mPb4tLdpWnkndaY76vXCYiRQ==
-X-Google-Smtp-Source: AB8JxZqGeWMxKDFhgIPvb3LHIg6lZd6B28KZ/rwae3jYq0m/wXVcRLdFUyZSuEHx0ykGglL3WoZsvmNiYUZcyfpnCts=
-X-Received: by 2002:a24:496:: with SMTP id 144-v6mr303262itb.131.1526468192644;
-	Wed, 16 May 2018 03:56:32 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.239.11 with HTTP; Wed, 16 May 2018 03:56:12 -0700 (PDT)
-In-Reply-To: <CAJTo0LbXJrAgEnS53LDjxtnGrwNxgLog_KOxUaoXa+4vb5d1xA@mail.gmail.com>
-References: <20180503094308.7549-1-mac@mcrowe.com>
-	<20180504183725.22134-1-mac@mcrowe.com>
-	<CAJTo0LZ2G_4cMxoAQm2AWgRnkeP5VXRURH9c82qaBpA0bop59A@mail.gmail.com>
-	<1526464403.32156.13.camel@andred.net>
-	<CAJTo0LbXJrAgEnS53LDjxtnGrwNxgLog_KOxUaoXa+4vb5d1xA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 16 May 2018 11:56:12 +0100
-Message-ID: <CAJTo0LYVJAoPvTrcjzurDqSCFuJrHO4V2i21cUdD=WUQc5Ymrg@mail.gmail.com>
-To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Mike Crowe <mac@mcrowe.com>
-Subject: Re: [meta-java][PATCHv2] jdepend: Retrieve source from Git rather than tarball
+	Wed, 16 May 2018 13:53:02 +0200
+Received: from dev.vm6.ccp.siemens.com ([167.87.137.240])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id w4GBr0l6019045;
+	Wed, 16 May 2018 13:53:01 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 1561310F2E20;
+	Wed, 16 May 2018 13:52:59 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 May 2018 13:52:02 +0200
+Message-Id: <20180516115202.7504-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH v3] poco: update to 1.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,21 +32,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 10:56:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 May 2018 11:53:03 -0000
 
-On 16 May 2018 at 11:52, Burton, Ross <ross.burton@intel.com> wrote:
-> On 16 May 2018 at 10:53, Andr=C3=A9 Draszik <git@andred.net> wrote:
->> Would it be useful to add a check to patchreview.py (or elsewhere?) to
->> reject patches that contain references to github archive URLs in the rec=
-ipe?
->
-> patchtest.  Yes, it would!
+Enable the new Encodings and Redis packages by default.
 
-Bug files: https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D12752
+Splitting into sub packages now uses PACKAGES_DYNAMIC instead of the
+custom logic used before.
 
-If anyone wants to explore patchtest, this is a good starting point.
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ .../poco/{poco_1.8.0.1.bb => poco_1.9.0.bb}        | 42 +++++++++-------------
+ 1 file changed, 17 insertions(+), 25 deletions(-)
+ rename meta-oe/recipes-support/poco/{poco_1.8.0.1.bb => poco_1.9.0.bb} (79%)
 
-Ross
+diff --git a/meta-oe/recipes-support/poco/poco_1.8.0.1.bb b/meta-oe/recipes-support/poco/poco_1.9.0.bb
+similarity index 79%
+rename from meta-oe/recipes-support/poco/poco_1.8.0.1.bb
+rename to meta-oe/recipes-support/poco/poco_1.9.0.bb
+index 160b4d391..1016caef7 100644
+--- a/meta-oe/recipes-support/poco/poco_1.8.0.1.bb
++++ b/meta-oe/recipes-support/poco/poco_1.9.0.bb
+@@ -12,7 +12,7 @@ inherit cmake ptest
+ 
+ BBCLASSEXTEND = "native"
+ 
+-SRCREV = "af527ab21fca5ab2659285408aec9920ed7c7b17"
++SRCREV = "94966785a8f9ad0191dffd075ebd67826e6e4b6d"
+ SRC_URI = " \
+     git://github.com/pocoproject/poco.git \
+     file://run-ptest \
+@@ -33,7 +33,7 @@ EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
+ # By default the most commonly used poco components are built
+ # Foundation is built anyway and doesn't need to be listed explicitly
+ # these don't have dependencies outside oe-core
+-PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip"
++PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip Encodings Redis"
+ 
+ PACKAGECONFIG[XML] = "-DENABLE_XML=ON -DEXPAT_LIBRARY:STRING=expat,-DENABLE_XML=OFF,expat"
+ PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
+@@ -46,6 +46,8 @@ PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DO
+ PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
+ PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON -DSQLITE3_LIBRARY:STRING=sqlite3,-DENABLE_DATA_SQLITE=OFF,sqlite3"
+ PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
++PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-DENABLE_ENCODINGS=OFF"
++PACKAGECONFIG[Redis] = "-DENABLE_REDIS=ON,-DENABLE_REDIS=OFF"
+ 
+ # Additional components not build by default,
+ # they might have dependencies not included in oe-core
+@@ -58,40 +60,30 @@ PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-DENABLE_PAGECOMPILER=OF
+ PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
+ PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
+ 
+-# Make a package for each library
+-PACKAGES = "${PN}-dbg ${POCO_PACKAGES}"
+-python __anonymous () {
++python populate_packages_prepend () {
++    poco_libdir = d.expand('${libdir}')
++    pn = d.getVar("PN")
+     packages = []
+     testrunners = []
+-    components = d.getVar("PACKAGECONFIG").split()
+-    components.append("Foundation")
+-    for lib in components:
+-        pkg = ("poco-%s" % lib.lower()).replace("_","")
++
++    def hook(f, pkg, file_regex, output_pattern, modulename):
+         packages.append(pkg)
+-        if not d.getVar("FILES_%s" % pkg):
+-            d.setVar("FILES_%s" % pkg, "${libdir}/libPoco%s.so.*" % lib)
+-        testrunners.append("%s" % lib)
++        testrunners.append(modulename)
++
++    do_split_packages(d, poco_libdir, '^libPoco(.*)\.so\..*$',
++                    'poco-%s', 'Poco %s component', extra_depends='', prepend=True, hook=hook)
+ 
+-    d.setVar("POCO_PACKAGES", " ".join(packages))
++    d.setVar("RRECOMMENDS_%s" % pn, " ".join(packages))
+     d.setVar("POCO_TESTRUNNERS", "\n".join(testrunners))
+ }
+ 
++PACKAGES_DYNAMIC = "poco-.*"
++
+ # "poco" is a metapackage which pulls in all Poco components
+-PACKAGES += "${PN}"
+-RRECOMMENDS_${PN} += "${POCO_PACKAGES}"
+-RRECOMMENDS_${PN}_class-native = ""
+ ALLOW_EMPTY_${PN} = "1"
+ 
+-# -dev last to pick up the remaining stuff
+-PACKAGES += "${PN}-dev ${PN}-staticdev"
+-FILES_${PN}-dev = "${includedir} ${libdir}/libPoco*.so ${libdir}/cmake"
+-FILES_${PN}-staticdev = "${libdir}/libPoco*.a"
+-
+-# ptest support
+-FILES_${PN}-dbg += "${PTEST_PATH}/bin/.debug"
+-
+ # cppunit is only built if tests are enabled
+-PACKAGES += "${PN}-cppunit"
++PACKAGES =+ "${PN}-cppunit"
+ FILES_${PN}-cppunit += "${libdir}/libCppUnit.so*"
+ ALLOW_EMPTY_${PN}-cppunit = "1"
+ 
+-- 
+2.11.0
+
 
