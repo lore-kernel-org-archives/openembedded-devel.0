@@ -1,49 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
-	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C65B74845
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
+	[209.85.214.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A50317485B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 17:11:10 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id c11-v6so796740plr.5
+	Wed, 16 May 2018 17:19:51 +0000 (UTC)
+Received: by mail-it0-f65.google.com with SMTP id y189-v6so3844561itb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 10:11:12 -0700 (PDT)
+	Wed, 16 May 2018 10:19:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=W6hozn3DdXVFqpagMNziAODbWOPBiKPti0Bz9BRRRe0=;
-	b=NfEUcgIhqKFPJGkwP416J5i1YEaO0IV5XKY+TsYj84YUwpKOLpaih1gB/nJ7giXwjH
-	N3IHTHa+TraKQLr9L5MrmOa1CsU1S5gHmbNMUmM62EahtdY4upw+88ax+leMjSWoDTN0
-	U+xshsP0Cl4A7M8XgrIWzGIBxVkKADuDH6V8R7j8+98NSWjmYquKSE+Usakek+L8LpWF
-	FpfDJLnoGTR5f/XTHYI26i2qVzeXaAHszkULkpW5RfbKpwibqeh0A7N/JOxBB9IrbLbb
-	UlWVwOKc8MiwMwY3AkJ5EmiNi6zoTTAAI5V6+Wh3R5f5AgMwwxdIzj+bR/L40PG5h0KG
-	yHdA==
+	h=from:to:subject:date:message-id;
+	bh=gJx460EFdOKmbnFtwKKJLNIiTCB8FzdfnAeJZd5XSSE=;
+	b=Inq3uu8SwO7Xha0mPL4iI1A9JC1v1Hgw9YQKG3hgNausCLQmVvapDypQfw99EVXdZC
+	cQnleV54SZre4iyuv5D/VCylOwOlAq1iokiVJlDCsTC1rdSL0WeGRdxmmSsvunCUH0pl
+	OszqKRxym/pogCsIwcIS2nEY7ZH/qTk8gvg+7ncIfboEhBX3HMFdgY2lNWtKfUM3Dpj1
+	yRMolbdIcw7RvzraqmeZtUHsBFmBHI/Frnxv5M+dq34LfMBRG0TLyDxPpfPyL/89w3TX
+	Ygo65kPDDDdEnvu1K6gNGFA5b3UzOCYChtYXq26gHBFofiQYhoGgCzOV7kOIvR/Z1NaV
+	bSng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=W6hozn3DdXVFqpagMNziAODbWOPBiKPti0Bz9BRRRe0=;
-	b=oEwunv02YdfKaIqwMA5165BWfvPHaygBAekADA3CUwLghtsYoPmGCsF471m8p3Almz
-	vgWqTjvxwtDK4tbBTB412JG/JWY7vjQeMgLpq7O4qK+jjyExeH3P+z2DAe7DYOBTakQI
-	w5oI4RUSl3GD70NzMtFzn8sl9dQE6RWpCJo+KiCGnariHXSeXzyINyyCh0OEf5hdTIxY
-	OO2cIfpM7NBlLHDN7Fs55/YGVMhGVlY9OqM9ZxjOwFEGfq+7nfF2kGA9e9bXjRW0Ge8m
-	b2VmKFFOpEjgCS7oe7Mhy7pyWWQnmuwTudrfhaZxTD6VuDt+h5J5y249J3qROOTFC/2j
-	vDFA==
-X-Gm-Message-State: ALKqPwevB69JzKQUkMKPvJiR3eEyx1C+8HNvonzYONn9dMqrOUTk7VeE
-	fgzEBmoktgT9c7Gt6rnQb/Wah1ZUGY1/oZtU2dI=
-X-Google-Smtp-Source: AB8JxZosL2gaWAztOBVL43p9u8JcFtDCNxp4EJfCQlfTxxdR/mAkOaqaxwWyKPiP3L6rJPEZsOPbwX2sbVh7JQefrGk=
-X-Received: by 2002:a17:902:10c:: with SMTP id
-	12-v6mr1766796plb.252.1526490671536; 
-	Wed, 16 May 2018 10:11:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Wed, 16 May 2018 10:10:41
-	-0700 (PDT)
-In-Reply-To: <20180516170632.15614-1-twoerner@gmail.com>
-References: <20180516170632.15614-1-twoerner@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 May 2018 10:10:41 -0700
-Message-ID: <CAMKF1sqAWHSmiphAcc6GvgmJaOybVVVSOB0HG_9GrU=gGmSVkw@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v2 1/2] openh264: fix build for 32-bit intel arch
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=gJx460EFdOKmbnFtwKKJLNIiTCB8FzdfnAeJZd5XSSE=;
+	b=YTuHFMKTVHG3uSGFMr+Qmo3FubZFw4kTuD9b5Jaf3RIQ0VxJsreSe894A0JSi+FJoi
+	SXsV9JRXdNfBg8oKBJ/e7gAwQyymmTlMWhRoeZMtWiEDpw50kzkImc0N/kBmf8C+/uUQ
+	B7Y3fW0R5y2FS4GAYTKwR7bKYubHcvMN1p7tSC2arOJTubvyWtrVNs5JnLDJv4VLZLVc
+	U5DSPuq4AnrwxjaP7UELWO1xZfSmxiHyu1NDy+2O+/RtAzvDEbwSwUMLwyhmfRmKjJHz
+	QacODbae0oiNH06Iasq815lEBLTrK8qp0TvJm9jULlED7db1BXIYmB9wfAEz7qYRLRiN
+	yA8Q==
+X-Gm-Message-State: ALKqPweRqLQQC49d+YIrktC8oJHVpVI94+EXmG8ZAV6+CIv6lTeFMyjs
+	TgdGsyP3XHeVBX2YNIXvGsUF1wKi
+X-Google-Smtp-Source: AB8JxZpzGbH68LDY1G1KbxAhh3c1HJW7WeU0834TQH7lOlnKjpHCxPc5/H+Txke+d1zM/eXuKXWzKA==
+X-Received: by 2002:a24:db8b:: with SMTP id
+	c133-v6mr2101266itg.8.1526491192117; 
+	Wed, 16 May 2018 10:19:52 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	n137-v6sm493014itn.1.2018.05.16.10.19.50
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 16 May 2018 10:19:51 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 May 2018 13:19:48 -0400
+Message-Id: <20180516171948.18406-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [meta-oe][PATCH] grpc: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,62 +56,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 17:11:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 16 May 2018 17:19:51 -0000
 
-On Wed, May 16, 2018 at 10:06 AM, Trevor Woerner <twoerner@gmail.com> wrote:
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
->  .../recipes-multimedia/openh264/openh264_1.7.0.bb        | 9 ++++-----
->  1 file changed, 4 insertions(+), 5 deletions(-)
->
-> diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
-> index a7aaab3623..d77de2876b 100644
-> --- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
-> +++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
-> @@ -3,9 +3,8 @@ decoding. It is suitable for use in real time applications such as WebRTC."
->  HOMEPAGE = "http://www.openh264.org/"
->  SECTION = "libs/multimedia"
->
-> -DEPENDS = "${@oe.utils.conditional('TARGET_ARCH', 'i386', 'nasm-native', \
-> -              oe.utils.conditional('TARGET_ARCH', 'x86_64', 'nasm-native', \
-> -             '', d), d)}"
-> +DEPENDS_x86 += "nasm-native"
-> +DEPENDS_x86-64 += "nasm-native"
->
+Since we know that github archives which are automatically generated have a
+tendency to change their checksums[1], switch to using a git clone.
 
-if using overrides, perhaps using _append instead of += is better.
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
 
->  LICENSE = "BSD-2-Clause"
->  LICENSE_FLAGS = "commercial"
-> @@ -17,14 +16,14 @@ SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f68957
->
->  COMPATIBLE_MACHINE_armv7a = "(.*)"
->  COMPATIBLE_MACHINE_aarch64 = "(.*)"
-> -COMPATIBLE_MACHINE_i386 = "(.*)"
-> +COMPATIBLE_MACHINE_x86 = "(.*)"
->  COMPATIBLE_MACHINE_x86-64 = "(.*)"
->  COMPATIBLE_MACHINE_mips = "(.*)"
->  COMPATIBLE_MACHINE_mips64 = "(.*)"
->
->  EXTRA_OEMAKE_armv7a = "ARCH=arm"
->  EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
-> -EXTRA_OEMAKE_i386 = "ARCH=i386"
-> +EXTRA_OEMAKE_x86 = "ARCH=i386"
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-can you take another look if there are other options eg. i686 ?
-if in literal sense it means i386 then we should not be using it
-for newer i*86 arches.
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb b/meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb
+index 0883ec176b..a0c943d114 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb
+@@ -10,13 +10,13 @@ DEPENDS_append_class-target = " gtest grpc-native "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRC_URI = "https://github.com/grpc/grpc/archive/v${PV}.tar.gz \
++S = "${WORKDIR}/git"
++SRCREV = "db68cb3652cc7697647e9934b5316d98a6ba04d1"
++BRANCH = "v1.8.x"
++SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH} \
+            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
+            file://0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch \
+            "
+-SRC_URI[md5sum] = "b565fa6787e42f4969395870c2ad436e"
+-SRC_URI[sha256sum] = "df9168da760fd2ee970c74c9d1b63377e0024be248deaa844e784d0df47599de"
+-
+ SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
+ 
+ inherit cmake
+-- 
+2.17.0.rc2.3.gc2a499e6c
 
->  EXTRA_OEMAKE_x86-64 = "ARCH=x86_64"
->  EXTRA_OEMAKE_mips = "ARCH=mips"
->  EXTRA_OEMAKE_mips64 = "ARCH=mips64"
-> --
-> 2.17.0.rc2.3.gc2a499e6c
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
