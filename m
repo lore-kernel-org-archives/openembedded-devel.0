@@ -1,54 +1,49 @@
 Return-Path: <twoerner@gmail.com>
 Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
 	[209.85.214.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A183E74853
+	by mail.openembedded.org (Postfix) with ESMTP id 19946603FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 17:40:33 +0000 (UTC)
-Received: by mail-it0-f68.google.com with SMTP id n202-v6so4022415ita.1
+	Wed, 16 May 2018 18:09:51 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id q4-v6so4328319ite.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 10:40:35 -0700 (PDT)
+	Wed, 16 May 2018 11:09:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=ymmxzt+8H9cx1jzOWhzSon3HH5oGNnVXAKYiVOzBwfg=;
-	b=qzonJk4sMTVcy6MHZvkm1Nat1G1IA/8IYXi7SERPMpicUY3CUdh+/IYsuJPTrAZJeN
-	INBSPfTyrStLC9bwI+YlRcBk4mzWApOW6MXBbPEPFiM2iawdfkDtmP91HpQqJdj+r2Rc
-	5Sx+gQyGj0XLKspC/yk15adCVOcaV4tOkrvgTDrDopoM0jXubrMpVsK4x9ud3GLeQV5O
-	gGMaNjfqrqYgyhxuFDtGCKuUruVc/2qKDhJN1+LtRu1z94fkkICRVvNmjxGj0ksfJ0WO
-	AFaeOeqZJQjYH/60/Trq4UUOH5o9a2KBOPkfFHWu9XgIaXhvh8mxmzxik5NgLmQnJMIW
-	9TXQ==
+	h=from:to:subject:date:message-id;
+	bh=K3uPh4lJJ+Gif0QlBr3T92KaRKvpcJqG7vhqqlp3eWs=;
+	b=tatxj6jlGb9VZPNDCVkyYVmw7InmQyXpdAtsFHVPfn1gMRQLRTIJ3yoEycOLw1lvC3
+	2p5Bpqakn8Ep8GkUXhEJ6f53QzDhia0TQiC0vt+EBtxYKCJF/C5K9tZp287sLjVgT2Xd
+	TGJAxZkBhKJFFQrMyA4166A/sahIza5Irxd5iMThYTUa2CGhfoo1OCaTqiOx4q4cLs2Q
+	RMMDQBFZdwLMCWRdayJpNjn0euyKpAoAJh8c3vjQMuS9R4p+jfIWjIew15vNvPFVUpU+
+	2pag9ut8jy9l2Rorgp7x99iMn8p0gTtBHIC4MDxVWzMh6J5sbFkhAEqCOr3GHCquku+6
+	eEQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ymmxzt+8H9cx1jzOWhzSon3HH5oGNnVXAKYiVOzBwfg=;
-	b=e6l8IVoSKhqB9+RJjwJcr+BUGIkjyufFphpC9n3tFtkJi6DJ+0gJuN9tJTCJX3NYdb
-	ckWRvtIShmLF8RV/ECVdOvHxKDNnkosYOtq5ybYQQ7b2mgzcQito67qjFSVVtOK267lV
-	tsfKRriAOSh1p2yJC1y4/38SAKXFXDX799r2s2n2Gq06H6sdJUlj3ORLjdmSN6cHO4H6
-	UZ6mFUjdQCHgCSDkjWY+4ASceh4uqHquhB2vv2AtK3/CT8Ii7LgYoSC8uViZR5+L4oAR
-	SHoWQd0bEy93w/4UDF1cMsiiLTKUL5muLOaRRM3xWfU0t3L6E9jBI3+Uxr3Hm/8/N4/k
-	GtsA==
-X-Gm-Message-State: ALKqPwcJkENCuo1Dl+88clzP0UHidQWQ4cKg7KI7F4ZEIZW4K2svCcUF
-	/kemTsFM5yU1EGCgHdvXvUHvPqPW
-X-Google-Smtp-Source: AB8JxZos6crgpMOloFOOXpsCA74GB/kKWNb7R7QSfsY/WPzAd69SE4MTutAtxfgMtiQjGTfHyXuDFQ==
-X-Received: by 2002:a6b:b5c:: with SMTP id v89-v6mr2376476ioi.28.1526492434699;
-	Wed, 16 May 2018 10:40:34 -0700 (PDT)
-Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
-	i76-v6sm1775402ita.33.2018.05.16.10.40.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 16 May 2018 10:40:33 -0700 (PDT)
-Date: Wed, 16 May 2018 13:40:31 -0400
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=K3uPh4lJJ+Gif0QlBr3T92KaRKvpcJqG7vhqqlp3eWs=;
+	b=EzKdBKZ8NjVeEW0D7DBByKk0bdYZBpNEt+92dmCbRTxpd0ay5cPSLXK148pVuH6+tX
+	ZgPnMncBX/Gl/hrwsArRbM8ay5f3SB7djEPC5Ir70wVQ2uISw0JCz5nPjKXjOOOaYeqX
+	nCYH/xgo3QKNgMPpd3Q8Poqsf2Dr+GK0oZ8DFp81gcABXcrIltnUgDmhZ5bLFag/No24
+	ZaWcITi5vx40zQMZCUTpZKlJEWpkG0751VMHKZZXzqrhJofp7EFpQFYHQeK+8kUjO9v8
+	E0JbJ/mY8NNyGzVylTwoedNNfviY7mdsRpIDt9RaOE4LZWiV3bt+DoG2zXUr8CqN9owm
+	ZAlQ==
+X-Gm-Message-State: ALKqPwe+nyb8x91jSdkVDC8nAMu8qPnLrgQNRrGOHdO8m/CigllkcHGL
+	g8Je9VC3/ZecclfvjmVpIySpFZ8b
+X-Google-Smtp-Source: AB8JxZpzK7n64TD/7Hl7hqeoe1EvLqh8Ot5ZUcObOuHb0G9vqg1I0UvKXAeSIXXyxJi4iuQO5EM3WA==
+X-Received: by 2002:a24:ad2c:: with SMTP id
+	c44-v6mr2096197itf.107.1526494192661; 
+	Wed, 16 May 2018 11:09:52 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	y14-v6sm1571003ioc.52.2018.05.16.11.09.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 16 May 2018 11:09:51 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20180516174031.GA19844@linux-uys3>
-References: <20180516170632.15614-1-twoerner@gmail.com>
-	<CAMKF1sqAWHSmiphAcc6GvgmJaOybVVVSOB0HG_9GrU=gGmSVkw@mail.gmail.com>
-	<CAHUNapSxvc4LhyfuR-VNeAaApxv0ujRddwavFCdpH59LLb+0qA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAHUNapSxvc4LhyfuR-VNeAaApxv0ujRddwavFCdpH59LLb+0qA@mail.gmail.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v2 1/2] openh264: fix build for 32-bit intel arch
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 May 2018 14:09:43 -0400
+Message-Id: <20180516180944.29303-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [meta-multimedia][PATCH v4 1/2] openh264: fix build for 32-bit intel arch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,27 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 17:40:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 May 2018 18:09:52 -0000
 
-On Wed 2018-05-16 @ 01:32:53 PM, Trevor Woerner wrote:
-> > >  EXTRA_OEMAKE_armv7a = "ARCH=arm"
-> > >  EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
-> > > -EXTRA_OEMAKE_i386 = "ARCH=i386"
-> > > +EXTRA_OEMAKE_x86 = "ARCH=i386"
-> >
-> > can you take another look if there are other options eg. i686 ?
-> > if in literal sense it means i386 then we should not be using it
-> > for newer i*86 arches.
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+changes since v3:
+- v3 does not exist, the previous v2 was supposed to be v3
 
-According to the README
-(https://github.com/cisco/openh264/blob/openh264v1.7/README.md#for-all-platforms)
-specifying "ARCH=i386" is this project's generic way of saying "32-bit x86
-builds" (which is why the recipe needs to "translate" between x86 and i386).
+changes since v2:
+- switch += to _append
 
-I'll send an updated v4 (this was actually supposed to be v3, oops!) with the
-+= replaced with an _appends.
+changes since v1:
+- v1 does not exist for this patch, but as patch 2 of 2 for updating SRC_URI
+  away from automatically-generated github archives
+---
+ .../recipes-multimedia/openh264/openh264_1.7.0.bb        | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-thanks for reviewing! :-)
+diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+index a7aaab3623..bf56ea1d84 100644
+--- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
++++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+@@ -3,9 +3,8 @@ decoding. It is suitable for use in real time applications such as WebRTC."
+ HOMEPAGE = "http://www.openh264.org/"
+ SECTION = "libs/multimedia"
+ 
+-DEPENDS = "${@oe.utils.conditional('TARGET_ARCH', 'i386', 'nasm-native', \
+-              oe.utils.conditional('TARGET_ARCH', 'x86_64', 'nasm-native', \
+-             '', d), d)}"
++DEPENDS_append_x86 = " nasm-native"
++DEPENDS_append_x86-64 = " nasm-native"
+ 
+ LICENSE = "BSD-2-Clause"
+ LICENSE_FLAGS = "commercial"
+@@ -17,14 +16,14 @@ SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f68957
+ 
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
+ COMPATIBLE_MACHINE_aarch64 = "(.*)"
+-COMPATIBLE_MACHINE_i386 = "(.*)"
++COMPATIBLE_MACHINE_x86 = "(.*)"
+ COMPATIBLE_MACHINE_x86-64 = "(.*)"
+ COMPATIBLE_MACHINE_mips = "(.*)"
+ COMPATIBLE_MACHINE_mips64 = "(.*)"
+ 
+ EXTRA_OEMAKE_armv7a = "ARCH=arm"
+ EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
+-EXTRA_OEMAKE_i386 = "ARCH=i386"
++EXTRA_OEMAKE_x86 = "ARCH=i386"
+ EXTRA_OEMAKE_x86-64 = "ARCH=x86_64"
+ EXTRA_OEMAKE_mips = "ARCH=mips"
+ EXTRA_OEMAKE_mips64 = "ARCH=mips64"
+-- 
+2.17.0.rc2.3.gc2a499e6c
+
 
