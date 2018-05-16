@@ -1,53 +1,49 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id C61CF74849
+Received: from mail-it0-f50.google.com (mail-it0-f50.google.com
+	[209.85.214.50])
+	by mail.openembedded.org (Postfix) with ESMTP id D07866FF80
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 16:47:50 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id w202-v6so5643305lff.12
+	Wed, 16 May 2018 17:06:35 +0000 (UTC)
+Received: by mail-it0-f50.google.com with SMTP id n202-v6so3750007ita.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 09:47:51 -0700 (PDT)
+	Wed, 16 May 2018 10:06:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=2QrnUnKYoxBMuCrDoWJkMscl3cljksewAvq3IOim4Zw=;
-	b=uHELwcs/fPt4BoiIJS4u2UEFBWS/aaaHMG0HbfqnisEIgjlx+BpERU3AbHCFb4kUko
-	42kixHDX6APEksXzsb9+vpygc/+KZhidc4G3T63JORnp/1LBI32n06BRZZ8HnKsbB0SK
-	evbvcJoRk9cNOJyg7DO9hxGVA0dwKc9e/6XUQ4jyvLnLiAF/x9BJE7pKu73gpV2rWmgV
-	zME+aFJOeqVU9dMq5OaHYUJrSDOluIq9iQrbUhSgqx58f3ydxojdfOxt7Lh1ourKAljB
-	u4ls4iEQQaoKspnzC30YTLgDvCCY9chdnVeCcRXcvKUftSPnG/rVRbB0JDwgLczu87D3
-	VCTQ==
+	h=from:to:subject:date:message-id;
+	bh=SsgwY4+GKRuI5zqrqDMwC0Yj1vBKbF+mm9vi6mTxZgo=;
+	b=NsjvPIDAEjbbTKDk4HkntpwHbqbasIP6Wk5wp3hj3wEMcfj3JI9d1JMeg+TfIjTOmj
+	IM5YGf5mtQMWJAA0ZWIgGH+B4IUBrcLpHmriKf4bPpAbxT0VoPQMd1CeKrncXE94B5Rw
+	Q+tnKBr5FmU0eStj9R1Om2asPkzZ8ynetjWwLUgNm41jG6FCzETsuQY+EqWvrhbWkHrS
+	PxBu86bMGa2QO2VpCCWQJbNlKdlf8wPN6nF+5d2A8N1qlBvmzsMfqQTnE+I/X+I7gm6g
+	c33jDe9WjnJttFBwtDcPrpni49fzGK9ZdYxp/kJeD/vAALmJfaUgIyAKvC2n+WzPPK5F
+	fiFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=2QrnUnKYoxBMuCrDoWJkMscl3cljksewAvq3IOim4Zw=;
-	b=Rymvy57/FrVXjMeQxekDzylKwfmVXhj67jbRQIMJBeXFOD5pdemzabXlg+6JG+h4Wl
-	tt8TXA+8BlCKkqWUPj9X4VpudRVXOfYGjajA+/VJjJSkXwsM6+cIPYEyC/YzsPZtzpJE
-	/RlaQOgdc3PdPzPtP0yQAV/CNnYw9twneF2fQNncG3EdlV14jT3aAnyKPc18q3W0lJzO
-	IxMvnWnbpOg87PWb/C0kHg/pWGTAhzKtnE2OZRHKHHuolEOw5Q9v9BtxNfhYYpEuW89h
-	b7TLoJXFG0UcI8aTBquTY1Q0OWNeVd/blNnTs33Wyd/xPEtPAWvWSC7gWiLsGHZ0ibDT
-	yvZA==
-X-Gm-Message-State: ALKqPwee/ac6opwW05peZS9ecYpTgzOH6zT1PC6ndBkvuvOc94iK9/mS
-	0USOtvV8IXK5OryTLZca3ogcU4TZdji9GYkdkpQ=
-X-Google-Smtp-Source: AB8JxZoRXQq6hHQJit71+RfphB9eS5XhvSAHR+w6NFIqdgxAK3f8sa83DFk5V8RntZad+4DXFn9m8W/GoDJTqaxh4Lc=
-X-Received: by 2002:a19:a70f:: with SMTP id
-	q15-v6mr5143056lfe.39.1526489271156; 
-	Wed, 16 May 2018 09:47:51 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a19:17a1:0:0:0:0:0 with HTTP; Wed, 16 May 2018 09:47:50
-	-0700 (PDT)
-In-Reply-To: <b629ed74-5025-a418-ff68-8b8904fa90af@intel.com>
-References: <20180510004908.26947-1-twoerner@gmail.com>
-	<2d40764a-ff2e-06c1-898b-1f4f99fbda29@gmail.com>
-	<CAHUNapT0E0S-7Dv51hcfkYbr0kBCq8RHTrkhucJzHtmkTfdDzg@mail.gmail.com>
-	<b629ed74-5025-a418-ff68-8b8904fa90af@intel.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=SsgwY4+GKRuI5zqrqDMwC0Yj1vBKbF+mm9vi6mTxZgo=;
+	b=l8XT5QMB8YH8q9T7Ob1Qm1ezkqt7O7fB9ip7h+4rL1bvbBA902WEzT2IxtBsOq3hx2
+	8FXuGl1887fAe4HtwJKYyUn3gGej7mc2XUqSNk+4nCq0PeRmNieSJGLMNi0Tu/NjjbXj
+	KbRFsR9GGanzYE5k14qKuaSbdXb9egae3JF/FsZtJ2DNnltaIozaE9vwgxcALCgclOFV
+	w9ISAk51HBqHCushXb1gQnYp2IuAh3V7EOw7wCHfGOW00ym4Q96PiknFN+1924ieqBKu
+	tl3kRo8J4x9cOQ706CzJdl7qtSnPbTQO8BUDhBdD0PuA49HngKP02UfbjE2MpZvPMGqG
+	1kOQ==
+X-Gm-Message-State: ALKqPwdV/kCkQg5aGTG6+SgNeGwPrngmyXMYgKUoV07ykts1PMDFsoXz
+	Oq7blXCdb9IFgUJtV7qA0Yc7hS71
+X-Google-Smtp-Source: AB8JxZqeSPfAmN5zot38hSXe9qD3WIY/fqiduK15r5A0G52egjENhhhAKAlef9+Ltj7UD7to5F/xdg==
+X-Received: by 2002:a24:2c0f:: with SMTP id
+	i15-v6mr1864316iti.24.1526490396123; 
+	Wed, 16 May 2018 10:06:36 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	r67-v6sm1573330iod.27.2018.05.16.10.06.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 16 May 2018 10:06:35 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
-Date: Wed, 16 May 2018 12:47:50 -0400
-Message-ID: <CAHUNapQPQRJ6z7y85Yena7OPCdvjj4uW0-5yOCdfcj9Mam3gJA@mail.gmail.com>
-To: Anuj Mittal <anuj.mittal@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v2] openh264: switch away from github archive
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 May 2018 13:06:31 -0400
+Message-Id: <20180516170632.15614-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
+Subject: [meta-multimedia][PATCH v2 1/2] openh264: fix build for 32-bit intel arch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,22 +56,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 16:47:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 16 May 2018 17:06:35 -0000
 
-Hi Anuj,
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ .../recipes-multimedia/openh264/openh264_1.7.0.bb        | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-On Wed, May 16, 2018 at 5:05 AM, Anuj Mittal <anuj.mittal@intel.com> wrote:
+diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+index a7aaab3623..d77de2876b 100644
+--- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
++++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
+@@ -3,9 +3,8 @@ decoding. It is suitable for use in real time applications such as WebRTC."
+ HOMEPAGE = "http://www.openh264.org/"
+ SECTION = "libs/multimedia"
+ 
+-DEPENDS = "${@oe.utils.conditional('TARGET_ARCH', 'i386', 'nasm-native', \
+-              oe.utils.conditional('TARGET_ARCH', 'x86_64', 'nasm-native', \
+-             '', d), d)}"
++DEPENDS_x86 += "nasm-native"
++DEPENDS_x86-64 += "nasm-native"
+ 
+ LICENSE = "BSD-2-Clause"
+ LICENSE_FLAGS = "commercial"
+@@ -17,14 +16,14 @@ SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f68957
+ 
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
+ COMPATIBLE_MACHINE_aarch64 = "(.*)"
+-COMPATIBLE_MACHINE_i386 = "(.*)"
++COMPATIBLE_MACHINE_x86 = "(.*)"
+ COMPATIBLE_MACHINE_x86-64 = "(.*)"
+ COMPATIBLE_MACHINE_mips = "(.*)"
+ COMPATIBLE_MACHINE_mips64 = "(.*)"
+ 
+ EXTRA_OEMAKE_armv7a = "ARCH=arm"
+ EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
+-EXTRA_OEMAKE_i386 = "ARCH=i386"
++EXTRA_OEMAKE_x86 = "ARCH=i386"
+ EXTRA_OEMAKE_x86-64 = "ARCH=x86_64"
+ EXTRA_OEMAKE_mips = "ARCH=mips"
+ EXTRA_OEMAKE_mips64 = "ARCH=mips64"
+-- 
+2.17.0.rc2.3.gc2a499e6c
 
-> On 05/16/2018 02:31 PM, Trevor Woerner wrote:
-> > The existing recipe has provisions for i386. If I understand correctly,
-> > qemux86 is i586 (?), and meta-intel's intel-core2-32 is i686 (?). Do I
-> > duplicate the i386 provisions for i586 and i686? Is there an easier way
-> to
-> > specify all 32-bit IA systems?
->
-> Does it work if you use _x86 instead of _i386?
->
-
-Yes, that seems to help, thanks!
 
