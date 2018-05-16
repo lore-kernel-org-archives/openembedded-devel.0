@@ -1,25 +1,24 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id A641C7487D
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FEFF748AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 11:53:01 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id w4GBr25W014155
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Wed, 16 May 2018 14:35:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4GEY3Rh030685
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 13:53:02 +0200
-Received: from dev.vm6.ccp.siemens.com ([167.87.137.240])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id w4GBr0l6019045;
-	Wed, 16 May 2018 13:53:01 +0200
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 1561310F2E20;
-	Wed, 16 May 2018 13:52:59 +0200 (CEST)
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 May 2018 13:52:02 +0200
-Message-Id: <20180516115202.7504-1-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH v3] poco: update to 1.9.0
+	Wed, 16 May 2018 07:34:59 -0700
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 16 May 2018 07:34:22 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 May 2018 10:34:14 -0400
+Message-ID: <1526481254-11166-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [meta-gnome][PATCH] gnome-keyring: fix 'installed but not shipped' QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,108 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 11:53:03 -0000
+X-List-Received-Date: Wed, 16 May 2018 14:35:09 -0000
+Content-Type: text/plain
 
-Enable the new Encodings and Redis packages by default.
+Building the 'gnome-keyring' recipe with "installed-vs-shipped"
+included in ERROR_QA will result in:
 
-Splitting into sub packages now uses PACKAGES_DYNAMIC instead of the
-custom logic used before.
+    ERROR: gnome-keyring-3.20.0-r0 do_package: QA Issue: gnome-keyring: \
+      Files/directories were installed but not shipped in any package:
+      /usr/lib64/pkcs11/gnome-keyring-pkcs11.la
+      /lib64/security/pam_gnome_keyring.la
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+From various documents the .la files should not be packaged in either
+the main recipe package or the -dev package unless required. So
+inherit 'remove-libtool' to have all the .la files cleaned up as they
+don't appear to be necessary.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
- .../poco/{poco_1.8.0.1.bb => poco_1.9.0.bb}        | 42 +++++++++-------------
- 1 file changed, 17 insertions(+), 25 deletions(-)
- rename meta-oe/recipes-support/poco/{poco_1.8.0.1.bb => poco_1.9.0.bb} (79%)
+ meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/poco/poco_1.8.0.1.bb b/meta-oe/recipes-support/poco/poco_1.9.0.bb
-similarity index 79%
-rename from meta-oe/recipes-support/poco/poco_1.8.0.1.bb
-rename to meta-oe/recipes-support/poco/poco_1.9.0.bb
-index 160b4d391..1016caef7 100644
---- a/meta-oe/recipes-support/poco/poco_1.8.0.1.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.9.0.bb
-@@ -12,7 +12,7 @@ inherit cmake ptest
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
+index adf2ff9..5564062 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_3.20.0.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+ "
  
- BBCLASSEXTEND = "native"
+-inherit distro_features_check gnomebase
++inherit distro_features_check gnomebase remove-libtool
  
--SRCREV = "af527ab21fca5ab2659285408aec9920ed7c7b17"
-+SRCREV = "94966785a8f9ad0191dffd075ebd67826e6e4b6d"
- SRC_URI = " \
-     git://github.com/pocoproject/poco.git \
-     file://run-ptest \
-@@ -33,7 +33,7 @@ EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
- # By default the most commonly used poco components are built
- # Foundation is built anyway and doesn't need to be listed explicitly
- # these don't have dependencies outside oe-core
--PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip"
-+PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip Encodings Redis"
- 
- PACKAGECONFIG[XML] = "-DENABLE_XML=ON -DEXPAT_LIBRARY:STRING=expat,-DENABLE_XML=OFF,expat"
- PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
-@@ -46,6 +46,8 @@ PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DO
- PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
- PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON -DSQLITE3_LIBRARY:STRING=sqlite3,-DENABLE_DATA_SQLITE=OFF,sqlite3"
- PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
-+PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-DENABLE_ENCODINGS=OFF"
-+PACKAGECONFIG[Redis] = "-DENABLE_REDIS=ON,-DENABLE_REDIS=OFF"
- 
- # Additional components not build by default,
- # they might have dependencies not included in oe-core
-@@ -58,40 +60,30 @@ PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-DENABLE_PAGECOMPILER=OF
- PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
- PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
- 
--# Make a package for each library
--PACKAGES = "${PN}-dbg ${POCO_PACKAGES}"
--python __anonymous () {
-+python populate_packages_prepend () {
-+    poco_libdir = d.expand('${libdir}')
-+    pn = d.getVar("PN")
-     packages = []
-     testrunners = []
--    components = d.getVar("PACKAGECONFIG").split()
--    components.append("Foundation")
--    for lib in components:
--        pkg = ("poco-%s" % lib.lower()).replace("_","")
-+
-+    def hook(f, pkg, file_regex, output_pattern, modulename):
-         packages.append(pkg)
--        if not d.getVar("FILES_%s" % pkg):
--            d.setVar("FILES_%s" % pkg, "${libdir}/libPoco%s.so.*" % lib)
--        testrunners.append("%s" % lib)
-+        testrunners.append(modulename)
-+
-+    do_split_packages(d, poco_libdir, '^libPoco(.*)\.so\..*$',
-+                    'poco-%s', 'Poco %s component', extra_depends='', prepend=True, hook=hook)
- 
--    d.setVar("POCO_PACKAGES", " ".join(packages))
-+    d.setVar("RRECOMMENDS_%s" % pn, " ".join(packages))
-     d.setVar("POCO_TESTRUNNERS", "\n".join(testrunners))
- }
- 
-+PACKAGES_DYNAMIC = "poco-.*"
-+
- # "poco" is a metapackage which pulls in all Poco components
--PACKAGES += "${PN}"
--RRECOMMENDS_${PN} += "${POCO_PACKAGES}"
--RRECOMMENDS_${PN}_class-native = ""
- ALLOW_EMPTY_${PN} = "1"
- 
--# -dev last to pick up the remaining stuff
--PACKAGES += "${PN}-dev ${PN}-staticdev"
--FILES_${PN}-dev = "${includedir} ${libdir}/libPoco*.so ${libdir}/cmake"
--FILES_${PN}-staticdev = "${libdir}/libPoco*.a"
--
--# ptest support
--FILES_${PN}-dbg += "${PTEST_PATH}/bin/.debug"
--
- # cppunit is only built if tests are enabled
--PACKAGES += "${PN}-cppunit"
-+PACKAGES =+ "${PN}-cppunit"
- FILES_${PN}-cppunit += "${libdir}/libCppUnit.so*"
- ALLOW_EMPTY_${PN}-cppunit = "1"
- 
+ DEPENDS = " \
+     intltool-native \
 -- 
-2.11.0
+2.7.4
 
 
