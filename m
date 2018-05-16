@@ -1,49 +1,52 @@
 Return-Path: <twoerner@gmail.com>
 Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
 	[209.85.214.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 19946603FE
+	by mail.openembedded.org (Postfix) with ESMTP id 913CE603FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 18:09:51 +0000 (UTC)
-Received: by mail-it0-f68.google.com with SMTP id q4-v6so4328319ite.3
+	Wed, 16 May 2018 18:09:53 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id e20-v6so4351402itc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 May 2018 11:09:53 -0700 (PDT)
+	Wed, 16 May 2018 11:09:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=K3uPh4lJJ+Gif0QlBr3T92KaRKvpcJqG7vhqqlp3eWs=;
-	b=tatxj6jlGb9VZPNDCVkyYVmw7InmQyXpdAtsFHVPfn1gMRQLRTIJ3yoEycOLw1lvC3
-	2p5Bpqakn8Ep8GkUXhEJ6f53QzDhia0TQiC0vt+EBtxYKCJF/C5K9tZp287sLjVgT2Xd
-	TGJAxZkBhKJFFQrMyA4166A/sahIza5Irxd5iMThYTUa2CGhfoo1OCaTqiOx4q4cLs2Q
-	RMMDQBFZdwLMCWRdayJpNjn0euyKpAoAJh8c3vjQMuS9R4p+jfIWjIew15vNvPFVUpU+
-	2pag9ut8jy9l2Rorgp7x99iMn8p0gTtBHIC4MDxVWzMh6J5sbFkhAEqCOr3GHCquku+6
-	eEQw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=tpg7DwaxwYzaA4mcC7T8FYfTRdBdp5Q7jCN1YGkpH9g=;
+	b=c8zBHY0Cn5RxSPojWA9PE7PmaVdma1cExYuWOxs8ODK1uljqiknvLDzxJx6DYYdZwK
+	JYEfxvJay+5mGuT3X1J7gXeRJfKeiXcl6+ibagLSHFIm0o3S6enhiLhhqNhWpgNxtdsg
+	ugqcg/1dr0pa1zh+SJtxvTBil8/r8rq2XCEUzsVLapoBMuvq54Vp0C0wwf6KNyifW9ea
+	h7AgVGL4xDpGNMSpjI6nBe3OMOfKJwOKGMc6+bUEYSLwiDNC2nI+CCUzJWGsodq937Fv
+	jwOBbOZddkHS4gYbYYiKQ5mBmyYZc4oKfJnarqnUg1lBDmDJI1ywYy7ZVqV1zbIA4WHI
+	JBdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=K3uPh4lJJ+Gif0QlBr3T92KaRKvpcJqG7vhqqlp3eWs=;
-	b=EzKdBKZ8NjVeEW0D7DBByKk0bdYZBpNEt+92dmCbRTxpd0ay5cPSLXK148pVuH6+tX
-	ZgPnMncBX/Gl/hrwsArRbM8ay5f3SB7djEPC5Ir70wVQ2uISw0JCz5nPjKXjOOOaYeqX
-	nCYH/xgo3QKNgMPpd3Q8Poqsf2Dr+GK0oZ8DFp81gcABXcrIltnUgDmhZ5bLFag/No24
-	ZaWcITi5vx40zQMZCUTpZKlJEWpkG0751VMHKZZXzqrhJofp7EFpQFYHQeK+8kUjO9v8
-	E0JbJ/mY8NNyGzVylTwoedNNfviY7mdsRpIDt9RaOE4LZWiV3bt+DoG2zXUr8CqN9owm
-	ZAlQ==
-X-Gm-Message-State: ALKqPwe+nyb8x91jSdkVDC8nAMu8qPnLrgQNRrGOHdO8m/CigllkcHGL
-	g8Je9VC3/ZecclfvjmVpIySpFZ8b
-X-Google-Smtp-Source: AB8JxZpzK7n64TD/7Hl7hqeoe1EvLqh8Ot5ZUcObOuHb0G9vqg1I0UvKXAeSIXXyxJi4iuQO5EM3WA==
-X-Received: by 2002:a24:ad2c:: with SMTP id
-	c44-v6mr2096197itf.107.1526494192661; 
-	Wed, 16 May 2018 11:09:52 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=tpg7DwaxwYzaA4mcC7T8FYfTRdBdp5Q7jCN1YGkpH9g=;
+	b=ELnwVhAnPKvraMBdwyCz0BPmpqKVD3C7oJ9AUK4BmVfewVn72gm3KOzSiiMTUpXA/a
+	Em25KrjMmJj/FpLq4on7f6N1DDRkBeJnSeDackWFplM3ahXAREawMMXof0IBjS32QNKV
+	EbEZnBWU+4+6cqxLJ2IFcz6B4XR1d9oS7ztw8Wkns1tuIw7pRqLIpk29mhRa2UUe9mkw
+	puUKaCooZCX13TQPgHfCjHTi5+V1m6R67DhdIB+vf8WeC+eIqriICWtq9MM2xXi3wpia
+	BX6CWEtcuyjVBD0POHV6+kJlhpmPFke6vtBDVXo3tRXzxhdE5rQCMj0S00Zfok2OdJut
+	4+dQ==
+X-Gm-Message-State: ALKqPwcFIrYv/+okulqewGLrF8MI0xUmUh01Pt3biWm5QqTyjoqxqqUQ
+	MhztR0Svtl6JCOqHQnYOFsAbaQxw
+X-Google-Smtp-Source: AB8JxZobpFlRU7MmwucD36HqCmSOndamzqRfvvgTclw6QJBaUs4IqBCwlRi0hNSgWctB3qt6YQwv5g==
+X-Received: by 2002:a24:c146:: with SMTP id
+	e67-v6mr2141646itg.70.1526494194449; 
+	Wed, 16 May 2018 11:09:54 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	y14-v6sm1571003ioc.52.2018.05.16.11.09.51
+	y14-v6sm1571003ioc.52.2018.05.16.11.09.52
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 16 May 2018 11:09:51 -0700 (PDT)
+	Wed, 16 May 2018 11:09:53 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 May 2018 14:09:43 -0400
-Message-Id: <20180516180944.29303-1-twoerner@gmail.com>
+Date: Wed, 16 May 2018 14:09:44 -0400
+Message-Id: <20180516180944.29303-2-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.rc2.3.gc2a499e6c
-Subject: [meta-multimedia][PATCH v4 1/2] openh264: fix build for 32-bit intel arch
+In-Reply-To: <20180516180944.29303-1-twoerner@gmail.com>
+References: <20180516180944.29303-1-twoerner@gmail.com>
+Subject: [meta-multimedia][PATCH v4 2/2] openh264: switch away from github archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,56 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 18:09:52 -0000
+X-List-Received-Date: Wed, 16 May 2018 18:09:53 -0000
+
+Since we know that github archives which are automatically generated have a
+tendency to change their checksums[1], switch to using a git clone.
+
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
 
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
-changes since v3:
-- v3 does not exist, the previous v2 was supposed to be v3
-
-changes since v2:
-- switch += to _append
+changes since v3/v2:
+- v3 does not exist, but 2 x v2s do
+- no change
 
 changes since v1:
-- v1 does not exist for this patch, but as patch 2 of 2 for updating SRC_URI
-  away from automatically-generated github archives
+- replace the frankenstein variable name "OPENHBRANCH" with the
+  more sensible "BRANCH"
 ---
- .../recipes-multimedia/openh264/openh264_1.7.0.bb        | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ .../recipes-multimedia/openh264/openh264_1.7.0.bb          | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
-index a7aaab3623..bf56ea1d84 100644
+index bf56ea1d84..c044cf33dc 100644
 --- a/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
 +++ b/meta-multimedia/recipes-multimedia/openh264/openh264_1.7.0.bb
-@@ -3,9 +3,8 @@ decoding. It is suitable for use in real time applications such as WebRTC."
- HOMEPAGE = "http://www.openh264.org/"
- SECTION = "libs/multimedia"
- 
--DEPENDS = "${@oe.utils.conditional('TARGET_ARCH', 'i386', 'nasm-native', \
--              oe.utils.conditional('TARGET_ARCH', 'x86_64', 'nasm-native', \
--             '', d), d)}"
-+DEPENDS_append_x86 = " nasm-native"
-+DEPENDS_append_x86-64 = " nasm-native"
- 
- LICENSE = "BSD-2-Clause"
+@@ -10,9 +10,10 @@ LICENSE = "BSD-2-Clause"
  LICENSE_FLAGS = "commercial"
-@@ -17,14 +16,14 @@ SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f68957
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
+ 
+-SRC_URI = "https://github.com/cisco/openh264/archive/v${PV}.tar.gz"
+-SRC_URI[md5sum] = "93da4e76cfda7ede8fd2df51b0021efd"
+-SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f6895738653f"
++S = "${WORKDIR}/git"
++SRCREV = "a180c9d4d6f1a4830ca9eed9d159d54996bd63cb"
++BRANCH = "openh264v1.7"
++SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH};"
  
  COMPATIBLE_MACHINE_armv7a = "(.*)"
  COMPATIBLE_MACHINE_aarch64 = "(.*)"
--COMPATIBLE_MACHINE_i386 = "(.*)"
-+COMPATIBLE_MACHINE_x86 = "(.*)"
- COMPATIBLE_MACHINE_x86-64 = "(.*)"
- COMPATIBLE_MACHINE_mips = "(.*)"
- COMPATIBLE_MACHINE_mips64 = "(.*)"
- 
- EXTRA_OEMAKE_armv7a = "ARCH=arm"
- EXTRA_OEMAKE_aarch64 = "ARCH=arm64"
--EXTRA_OEMAKE_i386 = "ARCH=i386"
-+EXTRA_OEMAKE_x86 = "ARCH=i386"
- EXTRA_OEMAKE_x86-64 = "ARCH=x86_64"
- EXTRA_OEMAKE_mips = "ARCH=mips"
- EXTRA_OEMAKE_mips64 = "ARCH=mips64"
 -- 
 2.17.0.rc2.3.gc2a499e6c
 
