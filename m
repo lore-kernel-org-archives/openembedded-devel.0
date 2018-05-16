@@ -1,27 +1,54 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 032B372EA8;
-	Wed, 16 May 2018 10:05:39 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	16 May 2018 03:05:41 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.49,390,1520924400"; d="scan'208";a="55683065"
-Received: from unknown (HELO [10.255.138.168]) ([10.255.138.168])
-	by fmsmga001.fm.intel.com with ESMTP; 16 May 2018 03:05:39 -0700
-To: openembedded-devel-bounces@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-References: <20180516075011.27429-1-richard.leitner@skidata.com>
-From: Anuj Mittal <anuj.mittal@intel.com>
-Message-ID: <74e44962-1190-8aea-3ad2-a57eb89e752a@intel.com>
-Date: Wed, 16 May 2018 18:05:39 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.7.0
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
+	[209.85.214.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E8FD6745BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 May 2018 10:53:01 +0000 (UTC)
+Received: by mail-it0-f54.google.com with SMTP id p3-v6so680339itc.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 May 2018 03:53:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=PhXOsqD9xDMYkTicFTmTJ2yvMZf9c47PCfjzphh0jaM=;
+	b=rSofICew1CgKOvp0R5hS7CdhCJGrqhJWiroxHcpWkD+/wKnAIK4iWdqVyroK7dL+J8
+	CWlJOTmjNp86xcRirQ8we+jH1aBHGjnAuQdqqp9z5znLiT6O+Iv8VOtfx+u12M8R50Tp
+	1RkZ9iPcm+KqtkzzdvibuUSLi3Vef5yN80GjkQEuLBURitBkSOV+fuu9zIC8y/0+CtUe
+	kv8O9fwBTVWReT3JAov6KfeftUbLvx6EnWvuSFW71V7782QP7kEa/Q5/tTN40olTzjGF
+	UF3hJEwAuSJHd6F7SFPt7bPiMq6OYkF7ZnpoZI7eZm+waXDSJSey9gCEf3KJPymmxfgh
+	cBWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=PhXOsqD9xDMYkTicFTmTJ2yvMZf9c47PCfjzphh0jaM=;
+	b=Qn1TYxmA2iMo+5zVnmXvxM8/ocWaUvMguq/Ukjxevhe2U3xxm7Ej6WSutnq1J9UDR9
+	kJZHBKmg0BDQ64nfdoIXNOqw4rBLwYFnK2tQ8lsTtcyrsbRpQuniMKcDA7LGmYqgu0iP
+	txT7JhXZ8LopncRKDWEEAwTolMVcJOYDFN7nIxs0hPJ4fwxo+EmOKgSCdfA+bFczyfPQ
+	TA521Lo95bgagIDTDy3Sl8HnExm4HZ11Rk5BTLcL4hxJT8iOKdnTz41Ng8ohHMbg3bgW
+	2/D2IGL2FBqDoqPjAkcFTGMLtphRfxqxlB4fn1CA1BLKElfrXmNXehQnLRMJx6jlpGX3
+	AA/A==
+X-Gm-Message-State: ALKqPwejGrd6aBHSCLo5bw+YlPi0K9E5KSJiEEVNjqUke2dPEJ6ug85W
+	XDvCFtjDbPWrVLUO+Ru05DO2cCZiPiuXk51MHUI+/g==
+X-Google-Smtp-Source: AB8JxZo5qqJWA994hQGttN/Rldmsj/A1VwB6O/SpG5U3QnlRrAIZxJ8WN4an2b9c1Ig9OlGI4Ltf3r/y99y1CWTGS6Q=
+X-Received: by 2002:a24:d2c4:: with SMTP id
+	z187-v6mr364422itf.60.1526467982605; 
+	Wed, 16 May 2018 03:53:02 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180516075011.27429-1-richard.leitner@skidata.com>
-Subject: Re: [meta-oe][PATCH] stm32flash: add recipe
+Received: by 10.107.239.11 with HTTP; Wed, 16 May 2018 03:52:42 -0700 (PDT)
+In-Reply-To: <1526464403.32156.13.camel@andred.net>
+References: <20180503094308.7549-1-mac@mcrowe.com>
+	<20180504183725.22134-1-mac@mcrowe.com>
+	<CAJTo0LZ2G_4cMxoAQm2AWgRnkeP5VXRURH9c82qaBpA0bop59A@mail.gmail.com>
+	<1526464403.32156.13.camel@andred.net>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 16 May 2018 11:52:42 +0100
+Message-ID: <CAJTo0LbXJrAgEnS53LDjxtnGrwNxgLog_KOxUaoXa+4vb5d1xA@mail.gmail.com>
+To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Mike Crowe <mac@mcrowe.com>
+Subject: Re: [meta-java][PATCHv2] jdepend: Retrieve source from Git rather than tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,42 +61,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 May 2018 10:05:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 May 2018 10:53:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 05/16/2018 03:50 PM,
-openembedded-devel-bounces@lists.openembedded.org wrote:
-> Add recipe for version 0.5 of stm32flash, an open source flash program for
-> STM32 using the ST serial bootloader.
-> 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
->  meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-> 
-> diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-> new file mode 100644
-> index 000000000..d401981ff
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "Open source flash program for STM32 using the ST serial bootloader"
-> +HOMEPAGE = "https://sourceforge.net/projects/stm32flash/"
-> +BUGTRACKER = "https://sourceforge.net/p/stm32flash/tickets/"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +inherit autotools-brokensep
-> +
-> +S = "${WORKDIR}/${PN}"
+On 16 May 2018 at 10:53, Andr=C3=A9 Draszik <git@andred.net> wrote:
+> Would it be useful to add a check to patchreview.py (or elsewhere?) to
+> reject patches that contain references to github archive URLs in the reci=
+pe?
 
-It should be BPN instead of PN, otherwise this will break with multilib.
+patchtest.  Yes, it would!
 
-> +
-> +SRC_URI = "https://prdownloads.sourceforge.net/stm32flash/stm32flash-${PV}.tar.gz"
-
-This can be https://prdownloads.sourceforge.net/${BPN}/${BP}.tar.gz
+Ross
 
