@@ -1,58 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B2ED2748A0;
-	Thu, 17 May 2018 10:46:41 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id v15-v6so5159668wrm.10;
-	Thu, 17 May 2018 03:46:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=W3vWPWxfyESEg8JDgocLOvz1juLivHHUvwhdBqNGWOY=;
-	b=KT65E3y/CcMES6pGIHJ9e+5VYga8T6WXIFmRLwT/zF5TehRSio5r/e69qPmebeeKd+
-	wXg6XGvdd1mcamfPtMDxLV+RPzHl51xX0gYGoYnDjJol98XzaLQKdsjtfqHoPq39wxTz
-	nj/xlR39qcLIwboHzK1vsrk863T2BNzX8Y37AyYNmxfHgDUMmiq/cumCzAOKyw8MFGU+
-	hP//dTt7OJsqdyZ420VwlgOxxnXxks+JDvRKz5j3CfJURfl2kIS7e5lO5hI105eD01MW
-	vyS9AVQPYMNAA0Hm+NnLa/Vbc9NK041iTUZiSvf+PPHvvw8J9AinGpKmBhSHx2ehrGUE
-	zxvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=W3vWPWxfyESEg8JDgocLOvz1juLivHHUvwhdBqNGWOY=;
-	b=QSNAg9DV73dKnLd6skqJvyOO2c4yLHpzEQyQJMojhJy0o6pl5gBnnLJvZJkuuFlMnp
-	ykZeYyDotJ7vf8aNgHi9iguRkw5XZA9LnyJR1CBcTy4Q5D748aSb1iaVsmNFPl3LaBop
-	0LtBa9lFKyJQ+V+M2+Rb8Jgf9sLpEApjbN10KE6a6THqPObyTlQTGQTS/4cD9v0nPcZm
-	i23VjKMSBehWQGv4jeGZnbtojuNmM9721A6YcuHsUPeSQjpdAHVLcSj99fgDKIDi8fgf
-	pbk3qUGqOo6yggpB5i6BIxvKwHod7Z5/C+T/funiX62rSULICh/k3EIIq2CdkwxfbbWz
-	MMWg==
-X-Gm-Message-State: ALKqPwdov+fN9cunWBWsw1O3xFZFxu7L5Gth9RVK0dX5JPBnIIhYKDCs
-	r8jTtJfklNV8hH/4ZaKRwqo=
-X-Google-Smtp-Source: AB8JxZoMK1aLsZ9vTLQA24UrKOLP86pycz+plHhfLm4AzVfsIroM2mI/+aLEXdK39VO15+qCs0RrcQ==
-X-Received: by 2002:adf:a294:: with SMTP id
-	s20-v6mr3625471wra.114.1526554002270; 
-	Thu, 17 May 2018 03:46:42 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	k126-v6sm6491701wmg.6.2018.05.17.03.46.40
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 17 May 2018 03:46:41 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 17 May 2018 12:46:40 +0200
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20180517104640.GA1398@jama>
-References: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
-	<CA+chaQcUU=Dew1cATDBpuA2_f_eh1=DAyEMaDHfVx7kY88rZhg@mail.gmail.com>
-	<8d962430-ac63-5e97-fd32-2c0464c62acb@gmail.com>
-	<20180510191145.GA1954@jama>
-MIME-Version: 1.0
-In-Reply-To: <20180510191145.GA1954@jama>
-User-Agent: Mutt/1.9.5 (2018-04-13)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] GCC 8.1
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 01EC2744DA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 May 2018 11:47:08 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	17 May 2018 04:47:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,410,1520924400"; d="scan'208";a="40668017"
+Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
+	by fmsmga008.fm.intel.com with ESMTP; 17 May 2018 04:47:09 -0700
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 May 2018 14:39:41 +0300
+Message-Id: <20180517113941.24361-1-alexander.kanavin@linux.intel.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [PATCH] gnome-desktop3: add a recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,158 +30,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2018 10:46:43 -0000
-X-Groupsio-MsgNum: 72210
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4Ckj6UjgE2iN1+kY"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 May 2018 11:47:09 -0000
 
---4Ckj6UjgE2iN1+kY
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+---
+ ...ibseccomp-sycall-filtering-mechanism.patch | 45 ++++++++++++++
+ ...humbnail-don-t-assume-time_t-is-long.patch | 61 +++++++++++++++++++
+ .../gnome-desktop/gnome-desktop3_3.28.1.bb    | 28 +++++++++
+ 3 files changed, 134 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-Disable-libseccomp-sycall-filtering-mechanism.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.28.1.bb
 
-On Thu, May 10, 2018 at 09:11:45PM +0200, Martin Jansa wrote:
-> > > 5) nativesdk-libxcrypt fails to build (not sure which change caused=
-=20
-> > > this, it build OK with sumo since the=A0-std=3Dgnu99 addition.
-> > > ../git/crypt-sunmd5.c:189:13: error: 'snprintf' output may be truncat=
-ed=20
-> > > before the last format character [-Werror=3Dformat-truncation=3D]
-> > >  =A0 =A0 =A0 =A0 =A0 =A0 =A0"$" CRYPT_ALGNAME "," ROUNDS "%u$%s$",
-> > >  =A0 =A0 =A0 =A0 =A0 =A0 =A0^~~
-> > >=20
-> >=20
-> > something new, I will look into reproducing this.
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-Disable-libseccomp-sycall-filtering-mechanism.patch b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-Disable-libseccomp-sycall-filtering-mechanism.patch
+new file mode 100644
+index 000000000..aa11e8a62
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-Disable-libseccomp-sycall-filtering-mechanism.patch
+@@ -0,0 +1,45 @@
++From 96753d85d8b53dd8f87b8f444892efffdbfab388 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Thu, 5 Oct 2017 14:54:17 +0300
++Subject: [PATCH] Disable libseccomp (sycall filtering mechanism)
++
++Upstream forgot to make it optional, and it is not currently used in Yocto
++
++Upstream-Status: Inappropriate [oe-core specific]
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++
++---
++ configure.ac | 20 --------------------
++ 1 file changed, 20 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 118d04f..47c8894 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -151,26 +151,6 @@ fi
++ 
++ SECCOMP_PKG=""
++ enable_seccomp="no"
++-dnl Check for bubblewrap compatible platform
++-case $host_os in
++-  linux*)
++-    case $host_cpu in
++-      alpha|ia64|m68k|sh4|sparc64)
++-        enable_seccomp="no (not available on this architecture)"
++-        AC_MSG_WARN("seccomp not available on this architecture")
++-        ;;
++-      *)
++-        PKG_CHECK_MODULES(LIBSECCOMP, [libseccomp])
++-        SECCOMP_PKG="libseccomp"
++-        AC_DEFINE([ENABLE_SECCOMP], [1], [Define if using seccomp])
++-        enable_seccomp="yes"
++-        ;;
++-    esac
++-    AC_DEFINE_UNQUOTED(_GNU_SOURCE, 1, [Define to include GNU extensions])
++-    AC_DEFINE_UNQUOTED(HAVE_BWRAP, 1, [Define to 1 if Bubblewrap support is available])
++-    AC_DEFINE_UNQUOTED(INSTALL_PREFIX, "$prefix", [Path to library install prefix])
++-    ;;
++-esac
++ 
++ dnl pkg-config dependency checks
++ 
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch
+new file mode 100644
+index 000000000..fcc152fde
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch
+@@ -0,0 +1,61 @@
++From 9048939b76b3bd10783adb79ed0aaf6cd13895cc Mon Sep 17 00:00:00 2001
++From: Christopher Larson <chris_larson@mentor.com>
++Date: Tue, 13 Dec 2016 20:39:51 -0700
++Subject: [PATCH 1/2] gnome-desktop-thumbnail: don't convert time_t to long
++
++Explicitly use strftime+strptime rather than snprintf+atol. This fixes the
++build for X32, where long's size doesn't match that of time_t.
++
++Upstream-Status: Pending
++Signed-off-by: Christopher Larson <chris_larson@mentor.com>
++
++
++Modify patch described above to eliminate replacement of
++
++g_snprintf (mtime_str, 21, "%" G_GINT64_FORMAT, (gint64) mtime)
++
++which is not necessary.  Retain replacement of atol().
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++---
++ libgnome-desktop/gnome-desktop-thumbnail.c | 16 ++++++++++++++--
++ 1 file changed, 14 insertions(+), 2 deletions(-)
++
++diff --git a/libgnome-desktop/gnome-desktop-thumbnail.c b/libgnome-desktop/gnome-desktop-thumbnail.c
++index e56c3d7..5d96bf3 100644
++--- a/libgnome-desktop/gnome-desktop-thumbnail.c
+++++ b/libgnome-desktop/gnome-desktop-thumbnail.c
++@@ -120,6 +120,8 @@
++  * Since: 2.2
++  */
++ 
+++#define _XOPEN_SOURCE
+++
++ #include <config.h>
++ 
++ #include <glib.h>
++@@ -1319,6 +1326,7 @@ gnome_desktop_thumbnail_is_valid (GdkPixbuf          *pixbuf,
++ {
++   const char *thumb_uri, *thumb_mtime_str;
++   time_t thumb_mtime;
+++  struct tm tmp_mtime;
++ 
++   thumb_uri = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::URI");
++   if (g_strcmp0 (uri, thumb_uri) != 0)
++@@ -1327,7 +1335,11 @@ gnome_desktop_thumbnail_is_valid (GdkPixbuf          *pixbuf,
++   thumb_mtime_str = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::MTime");
++   if (!thumb_mtime_str)
++     return FALSE;
++-  thumb_mtime = atol (thumb_mtime_str);
+++  if (!strptime (thumb_mtime_str, "%s", &tmp_mtime))
+++    return FALSE;
+++  thumb_mtime = mktime (&tmp_mtime);
+++  if (!thumb_mtime)
+++    return FALSE;
++   if (mtime != thumb_mtime)
++     return FALSE;
++ 
++-- 
++2.14.1
++
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.28.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.28.1.bb
+new file mode 100644
+index 000000000..39b3491fd
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.28.1.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "GNOME library for reading .desktop files"
++SECTION = "x11/gnome"
++LICENSE = "GPLv2 & LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
++
++BPN = "gnome-desktop"
++
++inherit gnome pkgconfig upstream-version-is-even gobject-introspection
++SRC_URI[archive.md5sum] = "bcbf906d94eb08060c60a7364384d678"
++SRC_URI[archive.sha256sum] = "78a397a2be47586e6dc075d6a7fc5659aae3d10713d76994ce1b46086e7ecb9a"
++
++SRC_URI += " \
++           file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
++           file://0001-Disable-libseccomp-sycall-filtering-mechanism.patch \
++           "
++
++DEPENDS += "intltool-native gsettings-desktop-schemas gconf virtual/libx11 gtk+3 glib-2.0 startup-notification xkeyboard-config iso-codes udev"
++
++inherit distro_features_check gtk-doc
++REQUIRED_DISTRO_FEATURES = "x11"
++
++EXTRA_OECONF = "--disable-desktop-docs"
++
++PACKAGES =+ "libgnome-desktop3"
++FILES_libgnome-desktop3 = "${libdir}/lib*${SOLIBS} ${datadir}/libgnome-desktop*/pnp.ids ${datadir}/gnome/*xml"
++
++RRECOMMENDS_libgnome-desktop3 += "gsettings-desktop-schemas"
+-- 
+2.17.0
 
-The fix from you worked for me, thanks!
 
-> > > I didn't get very far in testing, because our old kernel fails to bui=
-ld=20
-> > > with gcc8 and there are some other issues caused by other master=20
-> > > changes. But it doesn't look too bad (in my small test, lets see what=
-=20
-> > > bitbake world will show), thanks a lot for new gcc.
-> > >=20
-> >=20
-> > yes, older kernel needs fixes, especially to disable new warnings.
-> > the mips/ppc fixes that I put out there might be helpful to cook up=20
-> > fixes for older kernels if running into same issues.
->=20
-> In this case it fails with Error: .err encountered for many drivers. It's=
- not the same case as in:
-> http://lists.infradead.org/pipermail/linux-arm-kernel/2015-February/32561=
-5.html
-> nor arm version of this change, both are already applied in our
-> 4.4.3 based kernel.
->=20
-> I've tried to reproduce with vanilla 4.4.143 and it doesn't fail like thi=
-s, vanilla 4.4.3 doesn't
-> fail, so it's caused by one of our 10000 commits on top of 4.4.3 or the c=
-onfig, need to dig a bit more.
-
-Just FYI if someone needs similar fix, backporting this:
-https://patchwork.kernel.org/patch/9170055/
-
-fixed the issue for me, now I have successful kernel build.
-
-The failing code was always in put_user calls, e.g. kernel/exit.s was showi=
-ng:
-@ 1581 "kernel-source/kernel/exit.c" 1
-        .ifnc r0,r0; .ifnc r0r0,fpr11; .ifnc r0r0,r11fp; .ifnc r0r0,ipr12; =
-=2Eifnc r0r0,r12ip; .err; .endif; .endif; .endif; .endif; .endif
-        .ifnc r5,r2; .ifnc r5r2,fpr11; .ifnc r5r2,r11fp; .ifnc r5r2,ipr12; =
-=2Eifnc r5r2,r12ip; .err; .endif; .endif; .endif; .endif; .endif
-        .ifnc r1,r1; .ifnc r1r1,fpr11; .ifnc r1r1,r11fp; .ifnc r1r1,ipr12; =
-=2Eifnc r1r1,r12ip; .err; .endif; .endif; .endif; .endif; .endif
-        bl      __put_user_4
-@ 0 "" 2
-
-with the error triggered on the middle line.
-/tmp/ccHq8ugv.s: Assembler messages:
-/tmp/ccHq8ugv.s:1179: Error: .err encountered
-/tmp/ccHq8ugv.s:1331: Error: .err encountered
-/tmp/ccHq8ugv.s:4617: Error: .err encountered
-/tmp/ccHq8ugv.s:6222: Error: .err encountered
-/tmp/ccHq8ugv.s:8705: Error: .err encountered
-/tmp/ccHq8ugv.s:14486: Error: .err encountered
-/tmp/ccHq8ugv.s:14646: Error: .err encountered
-/tmp/ccHq8ugv.s:14806: Error: .err encountered
-/tmp/ccHq8ugv.s:14966: Error: .err encountered
-/tmp/ccHq8ugv.s:15126: Error: .err encountered
-/tmp/ccHq8ugv.s:15286: Error: .err encountered
-
-That leaves only few issues in our internal components and strange failure =
-with perf which fails to include various header files:
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-1:28: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-2:26: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-3:25: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-5:41: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-1:28: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-2:26: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-3:25: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-5:41: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-1:28: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-2:26: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-3:25: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-5:41: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-1:28: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-2:26: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-3:25: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/../../../include/linux/list.h:=
-5:41: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/util/include/asm/byteorder.h:2:10: fatal er=
-ror: ../../../../include/uapi/linux/swab.h: No such file or directory
-perf/1.0-r9/perf-1.0/tools/perf/arch/arm/include/../../../../include/asm-ge=
-neric/bitops/fls.h:1:56: error: #include nested too deeply
-perf/1.0-r9/perf-1.0/tools/perf/arch/arm/include/../../../../include/asm-ge=
-neric/bitops/fls.h:1:56: error: #include nested too deeply
-=2E..
-
-Cheers,
-
---4Ckj6UjgE2iN1+kY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWv1djAAKCRA3VSO3ZXaA
-HGYZAJ9wYUnDMxjzPAuNppzIyDGYIJEYvACfbBUhdCp6EBpv1+EUczxS8PFLMis=
-=EVOp
------END PGP SIGNATURE-----
-
---4Ckj6UjgE2iN1+kY--
