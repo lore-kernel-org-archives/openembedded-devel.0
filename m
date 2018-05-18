@@ -1,52 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
-	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FCAA74DB1
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A924745F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 21:05:37 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id az12-v6so5252422plb.8
+	Fri, 18 May 2018 21:08:25 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id c41-v6so5246454plj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 14:05:39 -0700 (PDT)
+	Fri, 18 May 2018 14:08:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Oo2aBxdXZkUC3trmeXpK0Lp0deI1AXgtBEzcLqVAV00=;
-	b=NNvR/JK9VotWnQjE9ODSxJlBXLsIfVHJn84ryLsodFqfGHwfpO/2Y1uufaiFBN2yZe
-	fR4s8wl3yDHs7IUxdd3nFu2/jhREmlyOd8vziNZPFXuRo+/C6FHmzj9tIqpyKjGD2q/+
-	nl88GDuLh7B3dZ4Te9I/OpOh2iU9htTFENoZrxuTFBhrKKvMSA27pC4QCZdWEf54prAj
-	RwA1744CHVFZDZsRlUhqx3/LwyxIZledL0txpxyJAAdMzsN7KKLH3aitIklJSwULYF5X
-	wHM/6mS5Az2820pPa/n/exTK4ZTgmDWIfh0NgI96S1AI8869HQRUC76UEZuCh5gJqOS9
-	9g4Q==
+	:cc; bh=htB9yBRSvhairHq8g4ADiqdx6AUyukqBdJVeZDzu/DI=;
+	b=PTrORAR6xeWkYEmrhvP1o5+QjoQmen6fwiKlVokQfzExuEQ+M+RQ03VBCoRInL9XWp
+	z8Ny4HHfNRiTnCY1SMw5tUn1LBHI1/ZAp3jt6yk5FVvY+Vk16dhmHAFvKikeIf71WZ/9
+	G1qqRYeBHC0kv397ffQNk2pWGO5RSTGlSrzFhB3dRryDSNYBI8q4FtMUYudx8r5VnZPJ
+	sFJTMyROc+usnPt4lssW0rlRw61EPw5bvT09CHnAuG/gT3v3UTvXfpgs5e7BmSn/TVUj
+	U0Kd0yoau5KMkUQggD9e5/vMgKQg8x4NQnFkeuqhBBx/j8jAd0FvQ7qOQTTZlI3nKO60
+	BPkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Oo2aBxdXZkUC3trmeXpK0Lp0deI1AXgtBEzcLqVAV00=;
-	b=hLcru6Bo4CF3We/wnm4Azgdne1liMai6dj3pHvwk6r/MiSxOsAFIZl9VW6ErhEieGc
-	Kc1iNzNQT2dYBxqdeyTYuY9CGBtnN3ahawWR+mtAdXtadBo1Ka6Wc8h1RV25Nb5Nfo2o
-	RupqCcByvlim/Xg281aOAJGSkv1IJW3u7SRqJVDwLBe8swZzRhYMP455GIbJ7xhwkDeQ
-	iFv8bnxwvEZ8B6oLAW8I332FxX+jRnhXo9kB12+Xgsn+N5K1saX5dpc49FT5U3/f3Wxa
-	BIhG6Pj9/r8fCfYJXyi2VI6BLs6KE1ySomxql8u9dap0C0K511CIMLB3YEleZFxFYU64
-	ZA+g==
-X-Gm-Message-State: ALKqPwetVmFjuZogj5cEmEadRhOFVzPwX2gYjaEMbYieipWQ+K3IDzSI
-	iXE5w8NPK5WzASzjR/IvAfYZ7mE7qk+DisMkgJk=
-X-Google-Smtp-Source: AB8JxZooJRp63VOVOG3kJHJBVzANeWbt3da2DVHJMdvhSdS0C7DgFGaUoBJaKNZnMpy99k/vF30jO5+9P7mwHGgN57E=
-X-Received: by 2002:a17:902:10c:: with SMTP id
-	12-v6mr11102843plb.252.1526677538869; 
-	Fri, 18 May 2018 14:05:38 -0700 (PDT)
+	bh=htB9yBRSvhairHq8g4ADiqdx6AUyukqBdJVeZDzu/DI=;
+	b=LlchYcy7ojMJET1fOqax23wi1S9ndzJZnqa4Cub8dPWDgpfYZdvyDcEyseLg4aCkDI
+	gw8dULBEwksToMgcKKs1jyt35BsU6tXC7J/0AB1mMfxYjYluJoyT32RZ06xJOuzzL0re
+	mT1E8iWFUr2SqF5sFSpsvbss269y4aBozR6blc7h1Lu2vxZxQQb+4vN5dpIvSwZaUptV
+	4xaXw4iHiAdUdPTVDxLx1dmT/lKX5B70Y5N/OKXF8NHgjdB2jLsoXfBsgs+BZtcDjueN
+	lDaTpVUwCfRzNhiP2FQ/Yfki72yW27bgFRPyFKSvjUTjAWquc3VVVr509HMWzgnOdIb2
+	Nh4A==
+X-Gm-Message-State: ALKqPweUdTHlRfaa3WFM8U/bOSYLs8I+ANtm1uWEiUSJasA5puKHkmAT
+	F2Y30e1sVr0VeDV/F6PKe69NWs6X6vxeoyUEgPs=
+X-Google-Smtp-Source: AB8JxZoeQ6cU+2jqi17DffVHzQnSFTcMxFlQ7deaDwJNRJLboqSeUfT/fqEXcb5pV/lhF3m+sHr/SSQ6tnTWequUR8c=
+X-Received: by 2002:a17:902:28ab:: with SMTP id
+	f40-v6mr11132538plb.208.1526677302446; 
+	Fri, 18 May 2018 14:01:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Fri, 18 May 2018 14:05:08
+Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Fri, 18 May 2018 14:01:12
 	-0700 (PDT)
-In-Reply-To: <de72c540487e4c0298a8fcad894a00d4@XBOX02.axis.com>
-References: <20180518200554.30205-1-raj.khem@gmail.com>
-	<20180518200554.30205-2-raj.khem@gmail.com>
-	<de72c540487e4c0298a8fcad894a00d4@XBOX02.axis.com>
+In-Reply-To: <CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
+References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
+	<4f227bea-48ae-8126-8326-7b51b4bbc5d1@gmail.com>
+	<CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 May 2018 14:05:08 -0700
-Message-ID: <CAMKF1srUEUz+5d7vNCQgv8J1DXXBbT44intPH1QLPE2AHZ69VQ@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] stm32flash: Fix packaging errors
+Date: Fri, 18 May 2018 14:01:12 -0700
+Message-ID: <CAMKF1sraQqZvTL3imQecXjwx5xQpS6EiiBmKp8+B0cb9Y7KSmw@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 01/17] libwebsockets: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,42 +58,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 21:05:38 -0000
+X-List-Received-Date: Fri, 18 May 2018 21:08:26 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, May 18, 2018 at 1:43 PM, Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Khem Raj
->> Sent: den 18 maj 2018 22:06
->> To: openembedded-devel@lists.openembedded.org
->> Subject: [oe] [meta-oe][PATCH] stm32flash: Fix packaging errors
+On Fri, May 18, 2018 at 12:07 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
+> On Thu, May 17, 2018 at 6:56 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> Hi Andre
 >>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 12 ++++++------
->>  1 file changed, 6 insertions(+), 6 deletions(-)
->>
->> diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
->> index d401981ff9..59bd1b60e1 100644
->> --- a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
->> +++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
->> @@ -1,16 +1,16 @@
->>  SUMMARY = "Open source flash program for STM32 using the ST serial bootloader"
->>  HOMEPAGE = "https://sourceforge.net/projects/stm32flash/"
->>  BUGTRACKER = "https://sourceforge.net/p/stm32flash/tickets/"
->> -LICENSE = "GPLv2"
->> +LICENSE = "GPL-2.0+"
->>  LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->>
->> -inherit autotools-brokensep
->> -
->>  S = "${WORKDIR}/${PN}"
+>> This series is fine, except that it has some formatting changes mixed with
+>> cmake related changes. It would be preferable to have them as separate
+>> pulls. I reckon that both types of changes are good.
 >
-> I missed it in my comments, but Anuj had already pointed it out,
-> That ${PN} above should be changed to ${BPN}.
+> The formatting cleanups are all minor and probably not worth
+> submitting on their own.
+>
 
-right, I will do that in v2
+OK thats fine, drop then in v2
+
+>> On 5/17/18 6:30 PM, Andre McCurdy wrote:
+>>>
+>>> The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
+>>> ${datadir}/cmake end up in the dev package, so recipes no longer need
+>>> to provide custom packaging rules to handles these files.
+>>>
+>>>
+>>> http://git.openembedded.org/openembedded-core/commit/?id=d91dc4666683a96e9d03cbbd21b8a546f9069c93
+>>>
+>>> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+>>> ---
+>>>   meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb | 1 -
+>>>   1 file changed, 1 deletion(-)
+>>>
+>>> diff --git
+>>> a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+>>> b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+>>> index 9354799..6b9c545 100644
+>>> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+>>> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+>>> @@ -24,5 +24,4 @@ PACKAGECONFIG[testapps] =
+>>> "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,
+>>>     PACKAGES =+ "${PN}-testapps"
+>>>   -FILES_${PN}-dev += "${libdir}/cmake"
+>>>   FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
+>>>
+>>
 
