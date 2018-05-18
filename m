@@ -1,51 +1,51 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-pl0-f41.google.com (mail-pl0-f41.google.com
-	[209.85.160.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E350474B8C
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E4C7B74BA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 01:31:11 +0000 (UTC)
-Received: by mail-pl0-f41.google.com with SMTP id c41-v6so3583178plj.10
+	Fri, 18 May 2018 01:31:13 +0000 (UTC)
+Received: by mail-pf0-f177.google.com with SMTP id v63-v6so2928366pfk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 18:31:13 -0700 (PDT)
+	Thu, 17 May 2018 18:31:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=pxxhzwCgHLY4O6y8PEPfvIJViL83I3iMG9W9i6IUbco=;
-	b=RzgFnJAp5pmXsK28o3CEwgtw26DEV6kgCMsnoeELboyQL78jeAsKU81e7KNCx8P8Tu
-	97YSt/S3PRAaCTlFYobBoJfXPjt9bDDZCFUh181QAXBgJ3EiOkAWKVfQsTrfBDBxq66T
-	Omb1LFHXoM1r1Kh/Rv0QoXdcOe1g5FZDjK1EyvCNxplHctvEL8Hc5aLqZRsxP1l1RUY+
-	UIHI/NbQhysPu+ws8347l3iOvl0yqwspqytjyymkmxNit2EYAZIIjCmnyUBBC++GOtz/
-	KFQCzOYy9Jrk3qEp8MukX9uEz0QLAbEfvvJdEyYJ9fAOWEvHESexRO690XzagFdw7bpx
-	rHeQ==
+	bh=3eJRkhMAqM+Ih90W2xn/8ZiejjYnENm9/sxL7m3eeUY=;
+	b=DnK24gJHAd+g2txMVzpieQLhtf+trou1Ur5li0YTN1VHGrmRymHvaPIv5xPy/VO8R0
+	wzn7SdMVbGS3zubAi0ls85+2hhsc8lM+PIJ6vGQf69DtjYXvTsTMUTI0YJtJ9zKInnBQ
+	LvN5y9+8eZb3TsjDKefyI7L+dCbV9XK9lFstn7eeuGw2kcBXlhAP1BeG54RBBl8cL0RS
+	jI26NU3vKW/safBCVTtnd8R1DHSR4qE1rNkrA93fBrPLnxwYwt6qXu0bAgwcgJehWI0z
+	3vrjfCEUdvQI2ha3DJqBSxYPUMZXat8zNGuy5SqVajQXk5vgGriJlWslyrX4i+JGG0u0
+	t84Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=pxxhzwCgHLY4O6y8PEPfvIJViL83I3iMG9W9i6IUbco=;
-	b=seSyrJZ+P6rHqUDwrEVYEQeY+gRdm47yjP7zHUmWcMpgRrTeuuOLkCO2pTllBrzw/r
-	WLZmdT4212m8s6j9SiH0q9tLS9m3dZRalEvAwPpH/IyuxdHZhl4UbHWn69LbO/JgNl1f
-	9DyIbH/cGrnP+4VRCG0qkd8kaKs0P6TCsZR1TbumW+3qaxqFMsO7m9vzOXZgPB5Tx8V4
-	ciD4XHFGnRPh5FuNKNJxZfOK7WG6G04JoPahebI4YPxKDfuq8xeyqLzkpwvOOB3FiE8b
-	xYi+5a1XMzsBwy6JbglDLe0l3C6LbVNtXAat6QqLgbtUznYIQ2rChXsf83Ul3mZLAEoH
-	QnyA==
-X-Gm-Message-State: ALKqPwfSlQ15sKbRTA+FhQw4EnjZfGOn78uL64uIajELWbR4qaO8+WXx
-	yaq6PXU+oFw1MfZq7312Dcbtrg==
-X-Google-Smtp-Source: AB8JxZrkQVOlNQoPG1gU+sdkNVE9TgrWmDNF/Z7xk5D0LFny3+Wbfr+P/WhfqNy1Jj1zj2zOK1tLlg==
-X-Received: by 2002:a17:902:848b:: with SMTP id
-	c11-v6mr7453000plo.132.1526607072908; 
-	Thu, 17 May 2018 18:31:12 -0700 (PDT)
+	bh=3eJRkhMAqM+Ih90W2xn/8ZiejjYnENm9/sxL7m3eeUY=;
+	b=mDeGefEtOZ4jT7ehbWdEFtkrH5BUPAcorJN9x2stc3DTFAQbLOC8VvEJodtnP1hrZF
+	wbJwk+UIJnjdihPLp8pLFGP4imYjewhmdkTgG6yG6YcirukWLslcysHKY4ey0EW9MGqw
+	n0hZO1udYjMv5QuSVhYBiSMq5fqFEgc3aGWFJjb72UB86bMMmRw5mvMDpImB2O0xkAJy
+	oHVJ8dfMmyYQONk10TBmJ8qYdAwz+r36/AIJ0DZsVEiRdi9xxo3xYm+ZObi2xlVEENcO
+	95Pzc0LYx9lIQuwiV/Dq/YFcDLJoBDMKCPS5ZNmDs+FJGEEUEripfOg/a0IE1pHHs/PG
+	mlfw==
+X-Gm-Message-State: ALKqPweIhfJUW/fuZ+KRd5P1HX2MA/tUlBAY2ZPvZlAO4bhtfgPTi2vY
+	ObjoJJIfIcIWTMne2f7ZM9X8bg==
+X-Google-Smtp-Source: AB8JxZomlOf5YPToqLS9wJoNGIxqCYnRjvmCnju1QJ4Av4Qi4gIX1jOImOEedka/nxwdajIJRHSMpA==
+X-Received: by 2002:a62:99d7:: with SMTP id
+	t84-v6mr7348620pfk.252.1526607074733; 
+	Thu, 17 May 2018 18:31:14 -0700 (PDT)
 Received: from localhost.localdomain ([4.16.80.121])
 	by smtp.gmail.com with ESMTPSA id
-	n25-v6sm9428562pgd.5.2018.05.17.18.31.12
+	n25-v6sm9428562pgd.5.2018.05.17.18.31.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 17 May 2018 18:31:12 -0700 (PDT)
+	Thu, 17 May 2018 18:31:14 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 May 2018 18:30:36 -0700
-Message-Id: <1526607046-8081-7-git-send-email-armccurdy@gmail.com>
+Date: Thu, 17 May 2018 18:30:37 -0700
+Message-Id: <1526607046-8081-8-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
 References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 07/17] librcf: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][PATCH 08/17] msgpack-c: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 01:31:12 -0000
+X-List-Received-Date: Fri, 18 May 2018 01:31:14 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need
@@ -68,21 +68,23 @@ to provide custom packaging rules to handles these files.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-index 267c0e7..dcd47a4 100644
---- a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-+++ b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-@@ -47,7 +47,6 @@ PACKAGECONFIG[demos] = "-DLIBRCF_BUILD_DEMOS=ON,-DLIBRCF_BUILD_DEMOS=OFF,"
- PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'demos', '${PN}-demos', '', d)}"
+diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
+index 02c0cd2..5077ade 100644
+--- a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
++++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
+@@ -15,8 +15,6 @@ SRC_URI = "git://github.com/msgpack/msgpack-c \
+            file://0001-Fix-Werror-class-memaccess.patch \
+            "
  
- FILES_${PN}-demos = "${bindir}/*"
--FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibRcf.cmake"
+-inherit cmake pkgconfig
+-
+ S = "${WORKDIR}/git"
  
- BBCLASSEXTEND = "nativesdk"
- 
+-FILES_${PN}-dev += "${libdir}/cmake/msgpack/*.cmake"
++inherit cmake pkgconfig
 -- 
 1.9.1
 
