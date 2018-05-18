@@ -1,51 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A924745F0
+Received: from mail-pl0-f51.google.com (mail-pl0-f51.google.com
+	[209.85.160.51])
+	by mail.openembedded.org (Postfix) with ESMTP id A2E88748A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 21:08:25 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id c41-v6so5246454plj.10
+	Fri, 18 May 2018 21:09:16 +0000 (UTC)
+Received: by mail-pl0-f51.google.com with SMTP id ay10-v6so5269869plb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 14:08:26 -0700 (PDT)
+	Fri, 18 May 2018 14:09:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=htB9yBRSvhairHq8g4ADiqdx6AUyukqBdJVeZDzu/DI=;
-	b=PTrORAR6xeWkYEmrhvP1o5+QjoQmen6fwiKlVokQfzExuEQ+M+RQ03VBCoRInL9XWp
-	z8Ny4HHfNRiTnCY1SMw5tUn1LBHI1/ZAp3jt6yk5FVvY+Vk16dhmHAFvKikeIf71WZ/9
-	G1qqRYeBHC0kv397ffQNk2pWGO5RSTGlSrzFhB3dRryDSNYBI8q4FtMUYudx8r5VnZPJ
-	sFJTMyROc+usnPt4lssW0rlRw61EPw5bvT09CHnAuG/gT3v3UTvXfpgs5e7BmSn/TVUj
-	U0Kd0yoau5KMkUQggD9e5/vMgKQg8x4NQnFkeuqhBBx/j8jAd0FvQ7qOQTTZlI3nKO60
-	BPkg==
+	h=from:to:cc:subject:date:message-id;
+	bh=LxAYchsA80HoaMGRIzzMO1IKN4cKhnJW3sObJk2dfvk=;
+	b=kYiva5QSaNEV9atJVL0aVbNOKffML0/bSgxkm2AvEclIvK9YtsiAZIDBuudsbWksBl
+	CFBBeIxJOWBh+8D8+HkuWblJsUZaBbrHm0vt8vq3yT91R8WeijWyN7VgeGh8K4wAfLy7
+	8DIZhxeYIYABQy7Gcyb+2u2p5vvhndNth5Yuh5JC1kfBNT8daugHsUjIHBw4IABUYeBt
+	zhgrJFijhkTJIm+CeTHvzvE2S7BoD4Rp5C1PADJqR4WFM6x8/RNTR6TO1Iq7t4aiVbA8
+	BUIFGEP/lKaJDjZe/cxd1zQZR0Qfv5lw/eZpjco8UDW/bpnyJnFrjz8vsRbtv8hyEPw+
+	CJbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=htB9yBRSvhairHq8g4ADiqdx6AUyukqBdJVeZDzu/DI=;
-	b=LlchYcy7ojMJET1fOqax23wi1S9ndzJZnqa4Cub8dPWDgpfYZdvyDcEyseLg4aCkDI
-	gw8dULBEwksToMgcKKs1jyt35BsU6tXC7J/0AB1mMfxYjYluJoyT32RZ06xJOuzzL0re
-	mT1E8iWFUr2SqF5sFSpsvbss269y4aBozR6blc7h1Lu2vxZxQQb+4vN5dpIvSwZaUptV
-	4xaXw4iHiAdUdPTVDxLx1dmT/lKX5B70Y5N/OKXF8NHgjdB2jLsoXfBsgs+BZtcDjueN
-	lDaTpVUwCfRzNhiP2FQ/Yfki72yW27bgFRPyFKSvjUTjAWquc3VVVr509HMWzgnOdIb2
-	Nh4A==
-X-Gm-Message-State: ALKqPweUdTHlRfaa3WFM8U/bOSYLs8I+ANtm1uWEiUSJasA5puKHkmAT
-	F2Y30e1sVr0VeDV/F6PKe69NWs6X6vxeoyUEgPs=
-X-Google-Smtp-Source: AB8JxZoeQ6cU+2jqi17DffVHzQnSFTcMxFlQ7deaDwJNRJLboqSeUfT/fqEXcb5pV/lhF3m+sHr/SSQ6tnTWequUR8c=
-X-Received: by 2002:a17:902:28ab:: with SMTP id
-	f40-v6mr11132538plb.208.1526677302446; 
-	Fri, 18 May 2018 14:01:42 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Fri, 18 May 2018 14:01:12
-	-0700 (PDT)
-In-Reply-To: <CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
-References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-	<4f227bea-48ae-8126-8326-7b51b4bbc5d1@gmail.com>
-	<CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LxAYchsA80HoaMGRIzzMO1IKN4cKhnJW3sObJk2dfvk=;
+	b=RrCpntTWEzupE9x4qnA9b1L7G6WJa9/owZICIWJZ0MfLDHZMx3SF3fylKHgguyHlTN
+	jRvTAzbNS8yfk2Nu3bdd41tFVoxqXot5TrZnTuCC58lEPu3flus4U9UojHmmU4HuDCuJ
+	afFIm1ceo1CGe7+X2M62+BrzVgOI7OUHCh6sPOvNGKpfsK3tc+jPmiuWgdUrxwhneIBe
+	mse4ffmQTsbF3XC4l5SwL1+2QUWQ9Pf45y3ZiM5/Fs2/EDaaCgMsh7bHJVAZ+LVA3Bb9
+	ROajnc1QjR51pb0/DA2SMY2ZQJiDmbpXrOvPa4rGBnP0wnp3XUyMxwxagu5n721QoPc9
+	ASiA==
+X-Gm-Message-State: ALKqPwcrFtu8C8BKn6gY4Vo+ywQ46NyzZNSvwDRl2IpZoekTbT0+8WOQ
+	qkNOov6F2ZZk2tP0SRyGVQ1tVw==
+X-Google-Smtp-Source: AB8JxZr1Vkg7Df3OF3uplIlRaW9n4sxsXPOshllcO/dWmtekuotynU6Z9hIyfqfBhclhjWXd37AJHA==
+X-Received: by 2002:a17:902:8218:: with SMTP id
+	x24-v6mr11007619pln.57.1526677757303; 
+	Fri, 18 May 2018 14:09:17 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	by smtp.gmail.com with ESMTPSA id
+	v16-v6sm24091121pfk.164.2018.05.18.14.09.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 May 2018 14:09:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 May 2018 14:01:12 -0700
-Message-ID: <CAMKF1sraQqZvTL3imQecXjwx5xQpS6EiiBmKp8+B0cb9Y7KSmw@mail.gmail.com>
-To: Andre McCurdy <armccurdy@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 01/17] libwebsockets: rely on cmake.bbclass to put cmake package files in dev package
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 May 2018 14:09:15 -0700
+Message-Id: <20180518210915.37448-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-oe][PATCH V2] stm32flash: Fix packaging errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 21:08:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 18 May 2018 21:09:16 -0000
 
-On Fri, May 18, 2018 at 12:07 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> On Thu, May 17, 2018 at 6:56 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> Hi Andre
->>
->> This series is fine, except that it has some formatting changes mixed with
->> cmake related changes. It would be preferable to have them as separate
->> pulls. I reckon that both types of changes are good.
->
-> The formatting cleanups are all minor and probably not worth
-> submitting on their own.
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2:
+- Use BPN instead of PN in S
 
-OK thats fine, drop then in v2
+ meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
->> On 5/17/18 6:30 PM, Andre McCurdy wrote:
->>>
->>> The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
->>> ${datadir}/cmake end up in the dev package, so recipes no longer need
->>> to provide custom packaging rules to handles these files.
->>>
->>>
->>> http://git.openembedded.org/openembedded-core/commit/?id=d91dc4666683a96e9d03cbbd21b8a546f9069c93
->>>
->>> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
->>> ---
->>>   meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb | 1 -
->>>   1 file changed, 1 deletion(-)
->>>
->>> diff --git
->>> a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
->>> b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
->>> index 9354799..6b9c545 100644
->>> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
->>> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
->>> @@ -24,5 +24,4 @@ PACKAGECONFIG[testapps] =
->>> "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,
->>>     PACKAGES =+ "${PN}-testapps"
->>>   -FILES_${PN}-dev += "${libdir}/cmake"
->>>   FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
->>>
->>
+diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
+index d401981ff9..854df06cb7 100644
+--- a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
++++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
+@@ -1,16 +1,16 @@
+ SUMMARY = "Open source flash program for STM32 using the ST serial bootloader"
+ HOMEPAGE = "https://sourceforge.net/projects/stm32flash/"
+ BUGTRACKER = "https://sourceforge.net/p/stm32flash/tickets/"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-inherit autotools-brokensep
++S = "${WORKDIR}/${BPN}"
+ 
+-S = "${WORKDIR}/${PN}"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+ 
+-SRC_URI = "https://prdownloads.sourceforge.net/stm32flash/stm32flash-${PV}.tar.gz"
++do_install() {
++	oe_runmake install DESTDIR=${D} PREFIX=${prefix}
++}
+ 
+ SRC_URI[md5sum] = "40f673502949f3bb655d2bcc539d7b6a"
+ SRC_URI[sha256sum] = "97aa9422ef02e82f7da9039329e21a437decf972cb3919ad817f70ac9a49e306"
+-
+-FILES_${PN} = "/usr/local/bin/stm32flash"
+-- 
+2.17.0
+
 
