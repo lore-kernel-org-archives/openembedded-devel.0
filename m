@@ -1,51 +1,53 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-pl0-f50.google.com (mail-pl0-f50.google.com
-	[209.85.160.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B76F71A88
+Received: from mail-pl0-f52.google.com (mail-pl0-f52.google.com
+	[209.85.160.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 299A374AFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 01:31:04 +0000 (UTC)
-Received: by mail-pl0-f50.google.com with SMTP id ay10-v6so3597797plb.1
+	Fri, 18 May 2018 01:31:06 +0000 (UTC)
+Received: by mail-pl0-f52.google.com with SMTP id az12-v6so3587753plb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 18:31:06 -0700 (PDT)
+	Thu, 17 May 2018 18:31:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=qXAYJB5zOXsCsxeiOBfQtW7lycFCd/6c6tMlZWwTfSQ=;
-	b=Muxv9jX8rgGbKrHJt5X84VZPagpSfaeWQqli3pCkn+rL5sl/KpGWqcC/nvS6qsbavB
-	X+8bn0+qpyijcoJKHDjmPLxgzXZtG/TY6n79ONcCOvWf/JsjQXKSyREYlg9eWcTr+vs4
-	ERq8oxXcLB+2Imn23NozUmKOysKjkpmD9ptS3ymAuAC0+a8NjyHWCoF1usML4e+iJ9q5
-	YJ1du5GBpyif0djruR4V0MuNeuFuZ4qWuCqW7H3x0AmgvaV8eg+2PkbJtr3TuGmeuxEA
-	a1P9DlaZ9DbJVFmqTiFlki563SG/9dZXi3+f0spJQkSpTLb4v+ZaeUbpADAU5GR0NR0S
-	YI9w==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=S1dOXcyZjHHThelTR1fcG+nvVpqwqOZ+i8GD3aDJPDk=;
+	b=la4tyUw6DjmriqRNJITq5TUbzHnsbl8Q1eVJUMq630DXXDMOY0MNDsZl3uReUQbMz8
+	JXU03c5FuctP5hW04Vjj7hUgyOwXS9GWx8zn+ZbLIYv+wPhzT/v2yiT5XHYT6XuwDgv7
+	UGhMDLTpxrSsBJbjlkh2W7mnar3gqq6QVCD+14tE/aIgW8f2vyAf08OXtILZvbV+iQcJ
+	J0ZvT/uYl3+3NvVhnmwKj13OBIQPOsWATCa7wrfQsd7gCgdz1bBAork7LahFQxOU+fWd
+	6TIo5eSxHvqQasSPSCV1L3uxChZQNBW874heNbqkemmJu1Jgq6D/1eY25NTVAbIXFaMu
+	ZgBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=qXAYJB5zOXsCsxeiOBfQtW7lycFCd/6c6tMlZWwTfSQ=;
-	b=P/W50q3m+ZZyVYWfBTpBgipuplVCwR+P0mSvHP9bJjnz6jWlWlJRRRjEU0xvnMsVmQ
-	hXQuFGuO5KLU0wLBk5l/OrBRFnf6FjZ+ge1dYtqY85gmq0MDOmWMWpvFSHtI2rV881Ve
-	gwSHu+cUKqkEqgu5gqGeQ/8DCe+4CHB2RXAk4+H5sN+HBhpkAbHRYpKyEB/HLPqOLDEZ
-	rZvjbqGe9oPZxOyaIUB4uXr/B2Z00O+T7xEKoIuud8x4pUaxTaBxQzC2YakscHbZpMJ3
-	lyQ2ANJG30P+fnPGpJMg2lS5BfGOAtqHcH73Afeio1A+jBKe6/P/7INvGRIJwj8I064d
-	ByqA==
-X-Gm-Message-State: ALKqPwdee7IZPmlyWqt7qxQS+ng+3YqjW7m8dGAsH+Vvkk3Y9CQ2r+ic
-	i5skbsUFOWo8TDZdO3ORVjrW/g==
-X-Google-Smtp-Source: AB8JxZopRS0SY7Kig0CQrsrit/JR4Y+jYEKdMopUzNlIWzJU15jOK7eH7DTgP93Es/FDnvW5Apk28g==
-X-Received: by 2002:a17:902:6687:: with SMTP id
-	e7-v6mr7640342plk.242.1526607065936; 
-	Thu, 17 May 2018 18:31:05 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=S1dOXcyZjHHThelTR1fcG+nvVpqwqOZ+i8GD3aDJPDk=;
+	b=F7Nv91YkOnDl9ZXTwKSHi5rejeolDXA+d3cQthYRQqyE0jy7Mkh0qkCR9ZOpvj/Ran
+	B0Uuh9eA7S7Gh0dnIoRt6LH+7iNPsoJIpRV1zPNXOKSjPu9BAHSAx8MzGhK1RJU23uZV
+	5Y7Eey+YMTG7jLm0k30Vr1T5Ppcdwqbej0sl1vxVEQLu+mQTwL9qSzJf3TUQhg+AKwII
+	tUnaldlTIQmoMlHkhH7cIPldlfVz8w1JH+kr9ppfyo1rNpnmvjpwUJXvkMv24f9/jw/8
+	nXVcapz/vZKwmZfB5u7KGyoJyPFIdx9jpnUwbO4wV/XWDRzWzuhhy73/A0cXdT+xXsT8
+	oxnw==
+X-Gm-Message-State: ALKqPwdvoTzauvfZkaxzVUEX3G1N8STvS3RK+Sp5Var4hg6oOOT+33mv
+	YwJsSFke0ZS0osYEIjednssGDA==
+X-Google-Smtp-Source: AB8JxZoyLExlq5u+TRoliRZV6iMS46SUsL+XwLAVBrmZaUW2NAXpv+2iEqon0rn0no1aBFFktLQYCg==
+X-Received: by 2002:a17:902:5e3:: with SMTP id
+	f90-v6mr7574776plf.175.1526607067832; 
+	Thu, 17 May 2018 18:31:07 -0700 (PDT)
 Received: from localhost.localdomain ([4.16.80.121])
 	by smtp.gmail.com with ESMTPSA id
-	n25-v6sm9428562pgd.5.2018.05.17.18.31.04
+	n25-v6sm9428562pgd.5.2018.05.17.18.31.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 17 May 2018 18:31:05 -0700 (PDT)
+	Thu, 17 May 2018 18:31:07 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 May 2018 18:30:32 -0700
-Message-Id: <1526607046-8081-3-git-send-email-armccurdy@gmail.com>
+Date: Thu, 17 May 2018 18:30:33 -0700
+Message-Id: <1526607046-8081-4-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
 References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 03/17] rocksdb: rely on cmake.bbclass to put cmake package files in dev package
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 04/17] capnproto: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,7 +60,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 01:31:05 -0000
+X-List-Received-Date: Fri, 18 May 2018 01:31:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need
@@ -68,19 +72,43 @@ to provide custom packaging rules to handles these files.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 1e6cbae..16fc180 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -28,5 +28,3 @@ EXTRA_OECMAKE = "\
-     -DWITH_TESTS=OFF \
-     -DWITH_TOOLS=OFF \
- "
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+index ffbe73f..b448a11 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+@@ -2,25 +2,23 @@ SUMMARY = "Cap'n Proto serialization/RPC system"
+ DESCRIPTION = "Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. "
+ HOMEPAGE = "https://github.com/sandstorm-io/capnproto"
+ SECTION = "console/tools"
 -
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=0a5b5b742baf10cc1c158579eba7fb1d"
+ 
+ SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
+ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
+ 
+-EXTRA_OECMAKE += "\
+-    -DBUILD_TESTING=OFF \
+-"
++S = "${WORKDIR}/git/c++"
+ 
+ inherit cmake
+ 
+-S = "${WORKDIR}/git/c++"
++EXTRA_OECMAKE += "\
++    -DBUILD_TESTING=OFF \
++"
+ 
+ PACKAGE_BEFORE_PN = "${PN}-compiler"
+ RDEPENDS_${PN}-dev += "${PN}-compiler"
+ 
 -FILES_${PN}-dev += "${libdir}/cmake"
+ FILES_${PN}-compiler = "${bindir}"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 1.9.1
 
