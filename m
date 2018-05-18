@@ -1,58 +1,59 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E8FB74C0D
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 49EDA74D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 02:18:04 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id w4-v6so2624232pgq.8
+	Fri, 18 May 2018 04:44:06 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id u6-v6so3838399pls.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 19:18:05 -0700 (PDT)
+	Thu, 17 May 2018 21:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:organization:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=slBKT6ScVnSBxn/PINz3+4Wht6DMtgaLdGlmYMA4TfA=;
-	b=rxLH8tsb9Jf2LvCURJaIwkkXG6KgVy+XFn++A+QcSA1n0LzPHLSK2LRF5mtKIFUYRA
-	UG9PlSw4Emo/fbZKB8TyOl1i0g1S5gdOcFsIi7lPXUhpI9eks0xL6W12HjC1xT0gpXaG
-	TGz+ZeK045nhEISdHymr+e7Jc0ZXLI+Iy00Wo6gD3tM22uXwiAsp3jXXVinfuW8O8eo5
-	R4VsLcnZfXaNsWb4f4d+DeMI/CeDLjYzJIRuCqxfK2J5sjpX4JJnTXg2UTnTOuZCmgCu
-	VcyRUMMgAyn+4j7GGe4xqayqBoMLN3cJcH5n679zpRAgdGHDQxQagPfhnYUkNHzhkWpH
-	wuPA==
+	bh=8Ek0M4Lrn7wJDYusJHVkGezBuMKFcRFzXyL099nTymY=;
+	b=cHEwej1bhCEkF4Bwu1TzASIF3bV3ZavanBkYa76e+6GVBvEwSnditzCYfQnu2RNbdz
+	vl0pIGAndPDeMg1VQ1Bh1ZYpqonuI8JGdMowOba9W0bVlwulUkG0sG5ugIro7GQsuFl/
+	3rgyjfBurA4Peg4ce0ve69TwJq3kmWQWZAB0fwp3YSBjMjaQnA0JdzuE7K7KCv7PCerj
+	NHuhL9bQAVmo60gkFoGYadzoOjoGIr775ms+eem6E4QAvrgOhhmoaPJtwM2dTTYPkg9w
+	6Mqh920e0NF5EjY+UNXKvUQquWuR/jQoh33EmEG24TwLQvwj2okDgPj2GmFhMkhfQ9rl
+	aqyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-language:content-transfer-encoding;
-	bh=slBKT6ScVnSBxn/PINz3+4Wht6DMtgaLdGlmYMA4TfA=;
-	b=igboYB0pbCavscVV+QIqvE1gZg2VELfPLvd25ksv1Zs3SN2f81j9z1jx6lMOnAwadg
-	pPsXe9BLSHxOh+UHJCm6CTFzwTani7+JLNHiFF01SkJQZp16fKP27JQCvLBnlXbreB3b
-	Kjf0NhegP7e2AlAEWxhGENFOWXk6t5nizHh46n3VHFQFD5i2xh0TXMmbAn28M+4GLr4I
-	4MQQpVM8YdCoUF7anbrZZVNeM0w6r6tQ2ASufTEDIEuX3KN6kQUP4DioshVmm8j+JImB
-	VHM3vkrnxPg4Jkj32q7mctK34WtwlU5C2cGAIrQiamf+bcmaT/tdpXqlOBHl/JXPs5uJ
-	+nvQ==
-X-Gm-Message-State: ALKqPwdF2uQq7qCfrEsi0iTL6aSU9HUBZVFOFO56a9J6/5bME0SZlmDZ
-	oMu25s2QmzcC3QiDVndqxFUca+GR
-X-Google-Smtp-Source: AB8JxZr6fAY5DfAtwH2GXIX7NQNQF02KuXcJXCL3YlBp/2fLUbed7tNt/x7zu9ulCSC4F6gN2VpG5Q==
-X-Received: by 2002:a63:a60a:: with SMTP id
-	t10-v6mr5870586pge.351.1526609884901; 
-	Thu, 17 May 2018 19:18:04 -0700 (PDT)
-Received: from hermes.local ([2601:646:877f:9499:50cf:a971:a3cb:56ce])
+	bh=8Ek0M4Lrn7wJDYusJHVkGezBuMKFcRFzXyL099nTymY=;
+	b=NVRL9og7b0XEpp7iWBGcNeT/1yN7/ScljWZms2DNZcusWP/ILHcaAZDZRdpRGDnZ99
+	oMn7BbSFualAqgObGuK3Z+P3L+Z4U55/TTDNYRmEc0WNQR9itAVl8BDkj7IsSjrv4BW3
+	2NXaYLVVCERn8yzFjPGEXD73dzbrAbFkN+7DQE8JwWA1MhAW38UhE0wNRrGrhiloEOcl
+	G5O7/EYG3nVW6RCQxWJXYRy5fzYrNtLW62M8bOxq2VvLmYoLIq9KXmBEz/QWxIiuPnS6
+	ckMYATW+XlCca7FV7zR8cxbFhTy7R/sNXdrow1CZtqgjgRZdR7p9nM/cq9qUOIZc1Kur
+	bEpQ==
+X-Gm-Message-State: ALKqPwcNASTpiThKH/ZPrFadIYPFkL7bK9mwabKJ+wxnvwU0sM26mV+C
+	4ZJtdiCg3qX7+UcLp0wktAvFMmZi
+X-Google-Smtp-Source: AB8JxZoQFzaH3f0gFzfND+NbFu6FPirGKcfsNSob4pHJ9nmgfs9K0AgI1/+PAalvin0oUvCB5uHE7Q==
+X-Received: by 2002:a17:902:4603:: with SMTP id
+	o3-v6mr8206171pld.49.1526618647495; 
+	Thu, 17 May 2018 21:44:07 -0700 (PDT)
+Received: from hermes.local ([2601:646:877f:9499:14d:1a81:a65f:63a5])
 	by smtp.gmail.com with ESMTPSA id
-	z25-v6sm12196126pfi.171.2018.05.17.19.18.03
+	q68-v6sm11107676pfb.182.2018.05.17.21.44.06
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 May 2018 19:18:03 -0700 (PDT)
-To: Anuj Mittal <anuj.mittal@intel.com>,
-	Pierre-Jean TEXIER <texier.pj2@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1526407511-29723-1-git-send-email-texier.pj2@gmail.com>
-	<1cb75da3-dd0b-ad66-69fe-9f4b521a4c9d@intel.com>
+	Thu, 17 May 2018 21:44:06 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <20180512030758.31409-1-raj.khem@gmail.com>
+	<20180512030758.31409-5-raj.khem@gmail.com>
+	<8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <b6457a0a-e299-eec8-7b88-4a16aba1d869@gmail.com>
-Date: Thu, 17 May 2018 19:18:03 -0700
+Message-ID: <b55b0545-7867-a168-a853-903313da12de@gmail.com>
+Date: Thu, 17 May 2018 21:44:06 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
 	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <1cb75da3-dd0b-ad66-69fe-9f4b521a4c9d@intel.com>
-Subject: Re: [meta-oe][PATCH] minicoredumper: fixes for sysvinit and systemd
+In-Reply-To: <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
+Subject: Re: [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when compiling host binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,63 +66,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 02:18:04 -0000
+X-List-Received-Date: Fri, 18 May 2018 04:44:07 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
+Hi Carlos
 
+Thanks for your review
 
-On 5/15/18 3:53 PM, Anuj Mittal wrote:
-> On 05/16/2018 02:05 AM, Pierre-Jean TEXIER wrote:
->> The sysv initscript and systemd service assumes minicoredumper is
->> installed in /usr/bin/. In our case minicoredumper is installed in
->> /usr/sbin/ by default. Therefore, fix this path.
+On 5/17/18 9:38 PM, Carlos Alberto Lopez Perez wrote:
+> On 12/05/18 05:07, Khem Raj wrote:
+>> BUILD_LDFLAGS add --dynamic-linker to point to uninative but
+>> some binaries in luajit are for 32bit build host, so even if
+>> your host has the needed runtime, it will fail to execute because
+>> uninative ldso doesn't know about multilib
 >>
->> Signed-off-by: Pierre-Jean TEXIER <texier.pj2@gmail.com>
+>> we get cyptic errors like
+>>
+>> | make[1]: execvp: host/minilua: Accessing a corrupted shared library
+>> | make[1]: *** [Makefile:610: host/buildvm_arch.h] Error 127
+>>
+>> Switch to using git for SRC_URI, master is pointing to latest
+>> 2.0 stable, it gets us all the patches done since last 2.0.5 relases
+>> in 2017
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >> ---
->>   meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init    | 2 +-
->>   meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service | 2 +-
->>   2 files changed, 2 insertions(+), 2 deletions(-)
+>>   meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 9 ++++-----
+>>   1 file changed, 4 insertions(+), 5 deletions(-)
 >>
->> diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
->> index 90ef7fa..9c96e31 100644
->> --- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
->> +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
->> @@ -22,7 +22,7 @@
->>   
->>   case "$1" in
->>       start)
->> -        echo "|/usr/bin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
->> +        echo "|/usr/sbin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
->>           ;;
->>       stop)
->>           echo "core" > /proc/sys/kernel/core_pattern
->> diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
->> index 851b54c..45d098f 100644
->> --- a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
->> +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
->> @@ -4,7 +4,7 @@ Description=Enable minicoredumper.
->>   [Service]
->>   Type=oneshot
->>   RemainAfterExit=yes
->> -ExecStart=/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
->> +ExecStart=/bin/sh -c '/bin/echo "|/usr/sbin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
->>   ExecStop=/bin/sh -c '/bin/echo "core" > /proc/sys/kernel/core_pattern'
 > 
-> There was a comment that /usr/sbin shouldn't be used on an exact same
-> patch submitted last month. Please take a look at that suggestion.
+> I think HOST_LDFLAGS should remain for the native class.
 > 
-> https://patchwork.openembedded.org/patch/150063/
+> Otherwise building luajit-native might fail.
+> 
+> I suggest adding something like this:
+> 
+> EXTRA_OEMAKE_remove_class-target = "'HOST_LDFLAGS=${BUILD_LDFLAGS}'"
 > 
 
-there is updated v3 for that patch here 
-https://patchwork.openembedded.org/patch/150821/
-
-I would suggest to build upon that change on missing pieces if any. I 
-have staged the v3 for now.
-
-> Thanks,
-> Anuj
-> 
+This would be a general case where we have bbclassextend for native
+luajit is a special case however, where the needed build time tools
+are built along the target build, thats why this fix.  The change you
+you proposed might not work in this case.
 
