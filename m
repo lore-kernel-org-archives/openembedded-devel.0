@@ -1,35 +1,53 @@
-Return-Path: <clopez@igalia.com>
-X-Greylist: delayed 2136 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 18 May 2018 05:14:16 UTC
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 30C927198F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 05:14:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; 
-	h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject;
-	bh=gi2ZbTiSSizm14ow8pSaMMuG16ZWfJaWMTn+b/Y474E=; 
-	b=fQS+W5mUDwZeGuNSYi4tNdr5k8SeAKG8EMxHOfFB1Wna8HS6draXrH+wpGekpUNMcJWyP7VuMlzC0O7ofvnN3xW7MbGvzGP+PtzKUx1o2seKvOsdhWHXPx22FS2sWjRnKlrnH+dHvsqRwjWpLZBU6dnN7p1KuKHt+aJFBv8DLkGzBVaYwrFhWCmhjtIfeucjr36CCqQ0d6256iHDZueveWUpB3Yppo5wYvFnaVrpdsF5AsItjR7yBjEd62EwOUDj/uA0Cv0dP4Hum6F3N9bCP1yF/EDHZTooNJf49tgKTc7y1cyqSfe/UjVQCIXnqwedPLyHaoTml/Ph6ex2cWC8nA==;
-Received: from 1.14.117.91.dynamic.reverse-mundo-r.com ([91.117.14.1]
-	helo=[192.168.0.23]) by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1fJXA8-0004NO-Ud; Fri, 18 May 2018 06:38:41 +0200
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20180512030758.31409-1-raj.khem@gmail.com>
-	<20180512030758.31409-5-raj.khem@gmail.com>
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
-Openpgp: id=B5D2B50BC48EC7F1EE90D9AB965089CE6B95F882;
-	url=http://key.neutrino.es
-Organization: Igalia S.L.
-Mail-Followup-To: Khem Raj <raj.khem@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
-Date: Fri, 18 May 2018 06:38:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 68DBD747A5;
+	Fri, 18 May 2018 05:55:19 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id i5-v6so3939967plt.2;
+	Thu, 17 May 2018 22:55:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=E9eB6YniNXrdIsXZ7/XGjBVKU4Wp+sNG3UQcTMO7PRY=;
+	b=HXJ0xghH82RZ9XWQYi38g9AIsxJ3+WfMaHUGVyNiIV8aUQGi73Ko6r+xcRG3Ng+HHj
+	0uOex7Z8Wu1DnIuVNX2Q3a/MNMnM0HhUOEW7gdc1WyLysKWVnnEhjYeDDwJIlJ5emsbX
+	t+QPzcr+mqDfbTtk3cisufGB+UOMLF89zDSRLClMqqNBQUkX8bzfK3RGMsTemKGozXXs
+	kN16t45kFeNncYbDFZdBy2/COVMKcAHhnXltIt+dqWt2WboE5Dgb1fzI9Ug1jrTaavR+
+	3Ys871bh9hB72HoxE+s9lhfuEmpr10P77oVeClvBDaFcBu7Fd9E3/AjDkILNMkVX+opX
+	vpwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=E9eB6YniNXrdIsXZ7/XGjBVKU4Wp+sNG3UQcTMO7PRY=;
+	b=eADE9u1TJKrUDF+M5JpPYM8p6/n/nXcBORhlVpSyFaFXajzsFNgkMi9OJj3zyqL6Tz
+	ke013bKcuMZIQp42vLwkVrCavujusXXkbRTFqUCYa0Bq1ucVSg7Yd7WQfzqBMKC0vvlL
+	RnCTuV3sjGF9rJUJ9lE6Tnk4/wQvrB4x02coCSkifzulp+YSak9lAWNuohcXXO7ERb53
+	iFqxwif6uVbQYZo3/GK4eoQleH2b+9ssQ1E/4+QIRxoyutfZY6IKlzB9mFFBBfRP2NUx
+	qnfpGlqrUep6R86efPdUZMCUTy+T9Qo25KL4EScSazDZoEQEiN5393Sd6/6qQ6h21rCv
+	p6kQ==
+X-Gm-Message-State: ALKqPwdWs59QY71xFojlOmxEgIjsNxolVdb5HAzNU0uo3myt+jBAC1+j
+	iQdshiW27b2Ky/Xv8lz0IZl4RAOsxg6aYV0MEKo=
+X-Google-Smtp-Source: AB8JxZot2IIOo2OpS8cZOnbLNGY3UJod5J7V/gs+i1DbpdBl+5zg7zARXCfZHcWJ+Li6Hn0rL0HuP2ENk3PjOF8Ebzg=
+X-Received: by 2002:a17:902:14d:: with SMTP id
+	71-v6mr8098398plb.275.1526622921112; 
+	Thu, 17 May 2018 22:55:21 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180512030758.31409-5-raj.khem@gmail.com>
-Subject: Re: [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when compiling host binaries
+Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Thu, 17 May 2018 22:54:50
+	-0700 (PDT)
+In-Reply-To: <20180517104640.GA1398@jama>
+References: <CAMKF1spa1bbrUjQWbhdUw3C4Cxu99fU=Be3sEm+SYFNq_oxEKw@mail.gmail.com>
+	<CA+chaQcUU=Dew1cATDBpuA2_f_eh1=DAyEMaDHfVx7kY88rZhg@mail.gmail.com>
+	<8d962430-ac63-5e97-fd32-2c0464c62acb@gmail.com>
+	<20180510191145.GA1954@jama> <20180517104640.GA1398@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 17 May 2018 22:54:50 -0700
+Message-ID: <CAMKF1soKXsC6_FG2g116KusAf=rBMDoi0mdfjdKtYKeASS+Whw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] GCC 8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,82 +60,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 05:14:17 -0000
-X-Groupsio-MsgNum: 72246
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature";
-	boundary="6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz"
+X-List-Received-Date: Fri, 18 May 2018 05:55:20 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz
-Content-Type: multipart/mixed; boundary="ggAlw2eKb89PGofqMj05dmjLIWHdW5eFj";
- protected-headers="v1"
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Message-ID: <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
-Subject: Re: [oe] [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when
- compiling host binaries
-References: <20180512030758.31409-1-raj.khem@gmail.com>
- <20180512030758.31409-5-raj.khem@gmail.com>
-In-Reply-To: <20180512030758.31409-5-raj.khem@gmail.com>
+On Thu, May 17, 2018 at 3:46 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Thu, May 10, 2018 at 09:11:45PM +0200, Martin Jansa wrote:
+>> > > 5) nativesdk-libxcrypt fails to build (not sure which change caused
+>> > > this, it build OK with sumo since the -std=gnu99 addition.
+>> > > ../git/crypt-sunmd5.c:189:13: error: 'snprintf' output may be truncated
+>> > > before the last format character [-Werror=format-truncation=]
+>> > >               "$" CRYPT_ALGNAME "," ROUNDS "%u$%s$",
+>> > >               ^~~
+>> > >
+>> >
+>> > something new, I will look into reproducing this.
+>
+> The fix from you worked for me, thanks!
 
---ggAlw2eKb89PGofqMj05dmjLIWHdW5eFj
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: quoted-printable
+There is a followup here which now doesnt need local patch
 
-On 12/05/18 05:07, Khem Raj wrote:
-> BUILD_LDFLAGS add --dynamic-linker to point to uninative but
-> some binaries in luajit are for 32bit build host, so even if
-> your host has the needed runtime, it will fail to execute because
-> uninative ldso doesn't know about multilib
->=20
-> we get cyptic errors like
->=20
-> | make[1]: execvp: host/minilua: Accessing a corrupted shared library
-> | make[1]: *** [Makefile:610: host/buildvm_arch.h] Error 127
->=20
-> Switch to using git for SRC_URI, master is pointing to latest
-> 2.0 stable, it gets us all the patches done since last 2.0.5 relases
-> in 2017
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 9 ++++-----
->  1 file changed, 4 insertions(+), 5 deletions(-)
->=20
+http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/master&id=0924a69244892097f60adbf6c7f576375bea7870
 
-I think HOST_LDFLAGS should remain for the native class.
+> Just FYI if someone needs similar fix, backporting this:
+> https://patchwork.kernel.org/patch/9170055/
+>
+> fixed the issue for me, now I have successful kernel build.
+>
+> The failing code was always in put_user calls, e.g. kernel/exit.s was showing:
+> @ 1581 "kernel-source/kernel/exit.c" 1
+>         .ifnc r0,r0; .ifnc r0r0,fpr11; .ifnc r0r0,r11fp; .ifnc r0r0,ipr12; .ifnc r0r0,r12ip; .err; .endif; .endif; .endif; .endif; .endif
+>         .ifnc r5,r2; .ifnc r5r2,fpr11; .ifnc r5r2,r11fp; .ifnc r5r2,ipr12; .ifnc r5r2,r12ip; .err; .endif; .endif; .endif; .endif; .endif
+>         .ifnc r1,r1; .ifnc r1r1,fpr11; .ifnc r1r1,r11fp; .ifnc r1r1,ipr12; .ifnc r1r1,r12ip; .err; .endif; .endif; .endif; .endif; .endif
+>         bl      __put_user_4
+> @ 0 "" 2
+>
+> with the error triggered on the middle line.
+> /tmp/ccHq8ugv.s: Assembler messages:
+> /tmp/ccHq8ugv.s:1179: Error: .err encountered
+> /tmp/ccHq8ugv.s:1331: Error: .err encountered
+> /tmp/ccHq8ugv.s:4617: Error: .err encountered
+> /tmp/ccHq8ugv.s:6222: Error: .err encountered
+> /tmp/ccHq8ugv.s:8705: Error: .err encountered
+> /tmp/ccHq8ugv.s:14486: Error: .err encountered
+> /tmp/ccHq8ugv.s:14646: Error: .err encountered
+> /tmp/ccHq8ugv.s:14806: Error: .err encountered
+> /tmp/ccHq8ugv.s:14966: Error: .err encountered
+> /tmp/ccHq8ugv.s:15126: Error: .err encountered
+> /tmp/ccHq8ugv.s:15286: Error: .err encountered
+>
+> That leaves only few issues in our internal components and strange failure with perf which fails to include various header files:
 
-Otherwise building luajit-native might fail.
-
-I suggest adding something like this:
-
-EXTRA_OEMAKE_remove_class-target =3D "'HOST_LDFLAGS=3D${BUILD_LDFLAGS}'"
+perf is building file for qemux86 on o-core
+I wonder if this is an issue related to your
+kernel version.
 
 
---ggAlw2eKb89PGofqMj05dmjLIWHdW5eFj--
+>
+> Cheers,
 
---6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: You can fetch my GnuPG key from http://key.neutrino.es
-
-iQIzBAEBCgAdFiEEtdK1C8SOx/HukNmrllCJzmuV+IIFAlr+WMcACgkQllCJzmuV
-+IL7BA//ckkIeD8Zk856ptzoDDa1vPldCF8Gfmq6h2zDsrMPsbGJQJyJKEM1clqT
-mpr+wX5+oWYSKMFLsAbUk/gZ8S2q9MYYvx3219grKpbgnsgddA/d1WOTS4Xi9pXW
-TKXU9UbEf7MtIumBPQAEBxaaQfvNdoOquYcqEwmjSiBG27MPAtPwFSF7QY10T+C1
-tA16HtbDEk0CYWwakx+xQfq0H0WyTNUMHlfrgpN5lqU6jgc/5UwxLb7CGHctwW9h
-w5gjlQ+mKrj5cqfrB0gd5W00OtkvN26Sq4riZcepURjWH6oCGzQeO2NnTcdGzScL
-WUeSAAhZxFkWirKyio8HfexKaJp1+7EOgh76Z1RgKCrdVeYppIkLASq4P5DQwuhp
-G2UQSfPspdc0+qkIu5KLIJNeLR6k1zj42im4robdkNEAsfEOcs0+W3lqm29+C1vL
-b6vSvmQcJFvaHUGx7qrpoKoboRbJkV4MqDyIuRpBPGXir9qB4FekaO2UPZ8JoMMl
-JrbFkBmsJuyIhwWrLI7Zf1lWeH9mbwAKTN4cJt6hoWg3QrNCCAuA2viGh6V7wPvX
-LaJ/DSTGV34/iSPIUTeODmsmKoX0XvtJK3ToZLqWrZMpHoiFGWYh+92K0xxpZQnJ
-1dVPobvdReJIVYN+jBELGjvjm9xKtrP9fh7TXoYzmwXBJr24/7c=
-=8b0w
------END PGP SIGNATURE-----
-
---6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz--
