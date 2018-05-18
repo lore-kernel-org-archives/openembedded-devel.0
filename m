@@ -1,21 +1,25 @@
-Return-Path: <prvs=669850acc=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id DC6D674BBC
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 65BBD7457D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 08:10:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,413,1520895600"; 
-   d="scan'208";a="1449443"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 May 2018 10:10:11 +0200
-Message-ID: <20180518081011.15815-1-richard.leitner@skidata.com>
+	Fri, 18 May 2018 11:11:30 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id w4IBBUZN013266
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 May 2018 13:11:30 +0200
+Received: from dev.vm6.ccp.siemens.com ([167.87.18.192])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id w4IBBU8q030577;
+	Fri, 18 May 2018 13:11:30 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id D321F10D4969;
+	Fri, 18 May 2018 13:11:29 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 May 2018 13:11:17 +0200
+Message-Id: <20180518111117.12241-1-pascal.bach@siemens.com>
 X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: dev@g0hl1n.net
-Subject: [meta-oe][PATCH] libmicrohttpd: update to version 0.9.59
+Subject: [meta-oe][PATCH] rocksdb: update to 5.13.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,32 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 08:10:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 May 2018 11:11:30 -0000
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- .../{libmicrohttpd_0.9.55.bb => libmicrohttpd_0.9.59.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.55.bb => libmicrohttpd_0.9.59.bb} (86%)
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.55.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb
-similarity index 86%
-rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.55.bb
-rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb
-index 0930a277b..adbf831dd 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.55.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.59.bb
-@@ -6,8 +6,8 @@ SECTION = "net"
- DEPENDS = "libgcrypt gnutls file"
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 1e6cbae38..727488d1e 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
  
- SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "1c20f84a8b9cf692dd50b558b3571a3a"
--SRC_URI[sha256sum] = "0c1cab8dc9f2588bd3076a28f77a7f8de9560cbf2d80e53f9a8696ada80ed0f8"
-+SRC_URI[md5sum] = "8ab5123535549195aff19e91b4e49f48"
-+SRC_URI[sha256sum] = "9b9ccd7d0b11b0e179f1f58dc2caa3e0c62c8609e1e1dc7dcaadf941b67d923c"
+-SRCREV = "8969445642039566214d650cc6614849e7dd5e17"
+-SRCBRANCH = "5.12.fb"
+-PV = "5.12.2"
++SRCREV = "c60df9d9e7629fe208a9b848293a5599f83d5e77"
++SRCBRANCH = "5.13.fb"
++PV = "5.13.1"
  
- inherit autotools lib_package pkgconfig gettext
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH}"
  
 -- 
 2.11.0
