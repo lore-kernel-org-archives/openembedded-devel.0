@@ -1,50 +1,51 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-pg0-f41.google.com (mail-pg0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id A710474B71
+Received: from mail-pl0-f48.google.com (mail-pl0-f48.google.com
+	[209.85.160.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 6032F74B3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 01:31:18 +0000 (UTC)
-Received: by mail-pg0-f41.google.com with SMTP id a13-v6so2582321pgu.4
+	Fri, 18 May 2018 01:31:20 +0000 (UTC)
+Received: by mail-pl0-f48.google.com with SMTP id c19-v6so3593737pls.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 18:31:20 -0700 (PDT)
+	Thu, 17 May 2018 18:31:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=BgKXE2zG4PPVRg7vHUdJRi0n1dki3651lL9vfe7p9pM=;
-	b=Sx8/H1CfcdPtPmS4giBJsfkqOg9sbSSngLTHQqo/610uzsw0TW6CJMvQq19RXkzHvV
-	w7D/IyyxQ49j5S1ZQc8H5LCoLYQ+95mzpnhh1v4R+G4YnK2905+Dlt0w1r2My/h0gGKd
-	3URQWesE6pziJq/HToZg5zGhjOA5aluu20zi1nUcJhkZkyiE3YSkudAdfhzT5RBvZL+I
-	s9d/2RIg8ktliUt9MOjel8rZBoUqzrJU7XDRYQfc69y4C9nbVrrSDDJNBxu+EBdUMrbu
-	bjLcciDXkgdgoxC2ddLjkNTRGBmANQbW3c9U9sNkYuQnLoOdPbVp1u9oa+g2b8gq5X5g
-	BFww==
+	bh=+hCU9+dA2n94pynYptwEx800h6u0rjzI544f3l75788=;
+	b=G9BmkH0mkioHSCApHpU9f2NE5w2ONnkaz0AysEBhOHd2+oTmrduuRSMP49HokVVESv
+	2e8G9MTv1xulYz8QPLhFbeGHiwfl1IieGb+4EPyinFQjZecJh/bdjrq98Gpr0KfZl14N
+	UBu4GuybpiO+KvveDgfv5POMJU87r3zA5pC/L5OIKVWuVIc4DPyHrs5AoPojVvD8VZXk
+	FBf1qyi3CKRk4sy9hRrxZFRL9O1Bt3y+jlWmH7UAYklwbCc8hdFUwgH4CqEtJ39lenJt
+	7ML7rVK9QRJkxYVS0hcIZ2sSb7lMvM7sQ4Pyk4UowPFSPBJOpwY+I+gkrW0HuC3I5btF
+	HcRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=BgKXE2zG4PPVRg7vHUdJRi0n1dki3651lL9vfe7p9pM=;
-	b=BVGxXJfU6o5pxocAIfjtk4OuHuGvsid50psqR6tw2MTqUHcxrZgJkKGbtXgIKqFLmp
-	WqUR3slbOI5n11bmUWMuYZbgjp5lX4hGrM7fCg0v8VEeFu2lo9P/apzXUKTrM/HidhzB
-	KyAYEutF4v+ikn2L3Cv72ysJGk5NMM0ln2P2ZTKP24UZhXL9n35wze+rW4Tn1e0g+nU3
-	egCWbB5FAWzj/cIviwBPFiZbZLOeEMX1dK+XPdqnVynCpzbBDsC0fn5MSaToA8FlO6lL
-	34Ee9UlbjMdYc7YIBV8EAaV7T91Zhs0mb6W336RekyXWywSeZRpMYZ6BPq4freI9zrAt
-	+95Q==
-X-Gm-Message-State: ALKqPwf4LgMeMHkdA2+sqeaQDPpQU18YTsS9qa4jcjKsjYapcypyAFlc
-	S8p1WevLRG/iPW11AEh2qPShmw==
-X-Google-Smtp-Source: AB8JxZo3sJ6i4zgtbVik1iM1kR3vz/R7qAqcpnrMCRkvUPzpNAyFjiI0rRYT0H+cdi9A9UQfmyynxw==
-X-Received: by 2002:a62:8ac1:: with SMTP id
-	o62-v6mr7340908pfk.141.1526607079512; 
-	Thu, 17 May 2018 18:31:19 -0700 (PDT)
+	bh=+hCU9+dA2n94pynYptwEx800h6u0rjzI544f3l75788=;
+	b=uH1dbuRx7qghaELeP+7hjGWBmSmMASPeL85EdAhD0j61aWD4yukG6OWtaDC1fgydt8
+	qepUlPX8La4+CLxIRvfxwY4Gm0hbmA6WuKFvxnNTezvqlozHanQbV83glbTqB4NDpNzG
+	PKNwceaIcpXDNwVVneGnWcS8wVbh/uTsm6kM9cq0KiD003KS1b/aBoQofRLPp6367Xsr
+	gHeEXM0OWvmIrPiAW+T1AVmnSuHiLxMY+Qr4kIa5+5XJFOgv9AbNccnuSady01+U7NuC
+	2Ie+AShHFiTInWp7q+IZqT/gkEXo6iA1+oWjlMM1vbmmlNtLaSv5ulqN92P50LvftMOf
+	Xnyw==
+X-Gm-Message-State: ALKqPwcO9KoDFcjSO9kVbPI8bEJ56sf5lVfr2g8gTRyN8g6OPP3cbvUI
+	q5Ot/Dp5NqPfOwF1wLk+HGTajg==
+X-Google-Smtp-Source: AB8JxZpmRpeqh1g+3LP2gRfEuO8SbnhbfyA0xfCISBRrngV2UMdPSeope7uvYwR9waZz/PqG3OXsiQ==
+X-Received: by 2002:a17:902:28a7:: with SMTP id
+	f36-v6mr7419262plb.155.1526607081337; 
+	Thu, 17 May 2018 18:31:21 -0700 (PDT)
 Received: from localhost.localdomain ([4.16.80.121])
 	by smtp.gmail.com with ESMTPSA id
-	n25-v6sm9428562pgd.5.2018.05.17.18.31.18
+	n25-v6sm9428562pgd.5.2018.05.17.18.31.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 17 May 2018 18:31:19 -0700 (PDT)
+	Thu, 17 May 2018 18:31:20 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 May 2018 18:30:40 -0700
-Message-Id: <1526607046-8081-11-git-send-email-armccurdy@gmail.com>
+Date: Thu, 17 May 2018 18:30:41 -0700
+Message-Id: <1526607046-8081-12-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
 References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 11/17] openjpeg: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][PATCH 12/17] ceres-solver: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 01:31:18 -0000
+X-List-Received-Date: Fri, 18 May 2018 01:31:20 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need
@@ -67,36 +68,36 @@ to provide custom packaging rules to handles these files.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb | 7 ++-----
+ meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb | 7 ++-----
  1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
-index 4ef1c40..22b75d9 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
-@@ -1,9 +1,10 @@
- DESCRIPTION = "OpenJPEG library is an open-source JPEG 2000 codec"
- HOMEPAGE = "http://www.openjpeg.org"
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+index 29917c8..ad7c8f2 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+@@ -1,20 +1,17 @@
+ DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
+ AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
+ HOMEPAGE = "http://ceres-solver.org/"
 -
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
  
-+DEPENDS = "libpng tiff lcms zlib"
++DEPENDS = "libeigen glog"
 +
- SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
-            file://0001-bmp_read_info_header-reject-bmp-files-with-biBitCoun.patch \
-           "
-@@ -12,10 +13,6 @@ SRC_URI[sha256sum] = "6fddbce5a618e910e03ad00d66e7fcd09cc6ee307ce69932666d54c73b
+ SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
+ SRCREV = "facb199f3eda902360f9e1d5271372b7e54febe1"
  
+ S = "${WORKDIR}/git"
+ 
+-DEPENDS = "libeigen glog"
+-
  inherit cmake
  
--DEPENDS = "libpng tiff lcms zlib"
+ # Only a static library and headers are created
+ ALLOW_EMPTY_${PN} = "1"
 -
- # standard path for *.cmake
- EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_PACKAGE_DIR=${baselib}/cmake \
-                   -DOPENJPEG_INSTALL_LIB_DIR:PATH=${libdir}"
--
--FILES_${PN}-dev += "${libdir}/cmake/*.cmake"
+-FILES_${PN}-dev += "${libdir}/cmake/*"
 -- 
 1.9.1
 
