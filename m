@@ -1,58 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 49EDA74D00
+Return-Path: <clopez@igalia.com>
+X-Greylist: delayed 2136 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 18 May 2018 05:14:16 UTC
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id 30C927198F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 04:44:06 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id u6-v6so3838399pls.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 21:44:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=8Ek0M4Lrn7wJDYusJHVkGezBuMKFcRFzXyL099nTymY=;
-	b=cHEwej1bhCEkF4Bwu1TzASIF3bV3ZavanBkYa76e+6GVBvEwSnditzCYfQnu2RNbdz
-	vl0pIGAndPDeMg1VQ1Bh1ZYpqonuI8JGdMowOba9W0bVlwulUkG0sG5ugIro7GQsuFl/
-	3rgyjfBurA4Peg4ce0ve69TwJq3kmWQWZAB0fwp3YSBjMjaQnA0JdzuE7K7KCv7PCerj
-	NHuhL9bQAVmo60gkFoGYadzoOjoGIr775ms+eem6E4QAvrgOhhmoaPJtwM2dTTYPkg9w
-	6Mqh920e0NF5EjY+UNXKvUQquWuR/jQoh33EmEG24TwLQvwj2okDgPj2GmFhMkhfQ9rl
-	aqyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=8Ek0M4Lrn7wJDYusJHVkGezBuMKFcRFzXyL099nTymY=;
-	b=NVRL9og7b0XEpp7iWBGcNeT/1yN7/ScljWZms2DNZcusWP/ILHcaAZDZRdpRGDnZ99
-	oMn7BbSFualAqgObGuK3Z+P3L+Z4U55/TTDNYRmEc0WNQR9itAVl8BDkj7IsSjrv4BW3
-	2NXaYLVVCERn8yzFjPGEXD73dzbrAbFkN+7DQE8JwWA1MhAW38UhE0wNRrGrhiloEOcl
-	G5O7/EYG3nVW6RCQxWJXYRy5fzYrNtLW62M8bOxq2VvLmYoLIq9KXmBEz/QWxIiuPnS6
-	ckMYATW+XlCca7FV7zR8cxbFhTy7R/sNXdrow1CZtqgjgRZdR7p9nM/cq9qUOIZc1Kur
-	bEpQ==
-X-Gm-Message-State: ALKqPwcNASTpiThKH/ZPrFadIYPFkL7bK9mwabKJ+wxnvwU0sM26mV+C
-	4ZJtdiCg3qX7+UcLp0wktAvFMmZi
-X-Google-Smtp-Source: AB8JxZoQFzaH3f0gFzfND+NbFu6FPirGKcfsNSob4pHJ9nmgfs9K0AgI1/+PAalvin0oUvCB5uHE7Q==
-X-Received: by 2002:a17:902:4603:: with SMTP id
-	o3-v6mr8206171pld.49.1526618647495; 
-	Thu, 17 May 2018 21:44:07 -0700 (PDT)
-Received: from hermes.local ([2601:646:877f:9499:14d:1a81:a65f:63a5])
-	by smtp.gmail.com with ESMTPSA id
-	q68-v6sm11107676pfb.182.2018.05.17.21.44.06
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 May 2018 21:44:06 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
+	Fri, 18 May 2018 05:14:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; 
+	h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject;
+	bh=gi2ZbTiSSizm14ow8pSaMMuG16ZWfJaWMTn+b/Y474E=; 
+	b=fQS+W5mUDwZeGuNSYi4tNdr5k8SeAKG8EMxHOfFB1Wna8HS6draXrH+wpGekpUNMcJWyP7VuMlzC0O7ofvnN3xW7MbGvzGP+PtzKUx1o2seKvOsdhWHXPx22FS2sWjRnKlrnH+dHvsqRwjWpLZBU6dnN7p1KuKHt+aJFBv8DLkGzBVaYwrFhWCmhjtIfeucjr36CCqQ0d6256iHDZueveWUpB3Yppo5wYvFnaVrpdsF5AsItjR7yBjEd62EwOUDj/uA0Cv0dP4Hum6F3N9bCP1yF/EDHZTooNJf49tgKTc7y1cyqSfe/UjVQCIXnqwedPLyHaoTml/Ph6ex2cWC8nA==;
+Received: from 1.14.117.91.dynamic.reverse-mundo-r.com ([91.117.14.1]
+	helo=[192.168.0.23]) by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1fJXA8-0004NO-Ud; Fri, 18 May 2018 06:38:41 +0200
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20180512030758.31409-1-raj.khem@gmail.com>
 	<20180512030758.31409-5-raj.khem@gmail.com>
-	<8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <b55b0545-7867-a168-a853-903313da12de@gmail.com>
-Date: Thu, 17 May 2018 21:44:06 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
-	Gecko/20100101 Thunderbird/60.0
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
+Openpgp: id=B5D2B50BC48EC7F1EE90D9AB965089CE6B95F882;
+	url=http://key.neutrino.es
+Organization: Igalia S.L.
+Mail-Followup-To: Khem Raj <raj.khem@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
+Date: Fri, 18 May 2018 06:38:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
 MIME-Version: 1.0
-In-Reply-To: <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
+In-Reply-To: <20180512030758.31409-5-raj.khem@gmail.com>
 Subject: Re: [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when compiling host binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -66,48 +42,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 04:44:07 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 May 2018 05:14:17 -0000
+X-Groupsio-MsgNum: 72246
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature";
+	boundary="6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz"
 
-Hi Carlos
+--6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz
+Content-Type: multipart/mixed; boundary="ggAlw2eKb89PGofqMj05dmjLIWHdW5eFj";
+ protected-headers="v1"
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Message-ID: <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
+Subject: Re: [oe] [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when
+ compiling host binaries
+References: <20180512030758.31409-1-raj.khem@gmail.com>
+ <20180512030758.31409-5-raj.khem@gmail.com>
+In-Reply-To: <20180512030758.31409-5-raj.khem@gmail.com>
 
-Thanks for your review
+--ggAlw2eKb89PGofqMj05dmjLIWHdW5eFj
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: quoted-printable
 
-On 5/17/18 9:38 PM, Carlos Alberto Lopez Perez wrote:
-> On 12/05/18 05:07, Khem Raj wrote:
->> BUILD_LDFLAGS add --dynamic-linker to point to uninative but
->> some binaries in luajit are for 32bit build host, so even if
->> your host has the needed runtime, it will fail to execute because
->> uninative ldso doesn't know about multilib
->>
->> we get cyptic errors like
->>
->> | make[1]: execvp: host/minilua: Accessing a corrupted shared library
->> | make[1]: *** [Makefile:610: host/buildvm_arch.h] Error 127
->>
->> Switch to using git for SRC_URI, master is pointing to latest
->> 2.0 stable, it gets us all the patches done since last 2.0.5 relases
->> in 2017
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>   meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 9 ++++-----
->>   1 file changed, 4 insertions(+), 5 deletions(-)
->>
-> 
-> I think HOST_LDFLAGS should remain for the native class.
-> 
-> Otherwise building luajit-native might fail.
-> 
-> I suggest adding something like this:
-> 
-> EXTRA_OEMAKE_remove_class-target = "'HOST_LDFLAGS=${BUILD_LDFLAGS}'"
-> 
+On 12/05/18 05:07, Khem Raj wrote:
+> BUILD_LDFLAGS add --dynamic-linker to point to uninative but
+> some binaries in luajit are for 32bit build host, so even if
+> your host has the needed runtime, it will fail to execute because
+> uninative ldso doesn't know about multilib
+>=20
+> we get cyptic errors like
+>=20
+> | make[1]: execvp: host/minilua: Accessing a corrupted shared library
+> | make[1]: *** [Makefile:610: host/buildvm_arch.h] Error 127
+>=20
+> Switch to using git for SRC_URI, master is pointing to latest
+> 2.0 stable, it gets us all the patches done since last 2.0.5 relases
+> in 2017
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 9 ++++-----
+>  1 file changed, 4 insertions(+), 5 deletions(-)
+>=20
 
-This would be a general case where we have bbclassextend for native
-luajit is a special case however, where the needed build time tools
-are built along the target build, thats why this fix.  The change you
-you proposed might not work in this case.
+I think HOST_LDFLAGS should remain for the native class.
 
+Otherwise building luajit-native might fail.
+
+I suggest adding something like this:
+
+EXTRA_OEMAKE_remove_class-target =3D "'HOST_LDFLAGS=3D${BUILD_LDFLAGS}'"
+
+
+--ggAlw2eKb89PGofqMj05dmjLIWHdW5eFj--
+
+--6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Comment: You can fetch my GnuPG key from http://key.neutrino.es
+
+iQIzBAEBCgAdFiEEtdK1C8SOx/HukNmrllCJzmuV+IIFAlr+WMcACgkQllCJzmuV
++IL7BA//ckkIeD8Zk856ptzoDDa1vPldCF8Gfmq6h2zDsrMPsbGJQJyJKEM1clqT
+mpr+wX5+oWYSKMFLsAbUk/gZ8S2q9MYYvx3219grKpbgnsgddA/d1WOTS4Xi9pXW
+TKXU9UbEf7MtIumBPQAEBxaaQfvNdoOquYcqEwmjSiBG27MPAtPwFSF7QY10T+C1
+tA16HtbDEk0CYWwakx+xQfq0H0WyTNUMHlfrgpN5lqU6jgc/5UwxLb7CGHctwW9h
+w5gjlQ+mKrj5cqfrB0gd5W00OtkvN26Sq4riZcepURjWH6oCGzQeO2NnTcdGzScL
+WUeSAAhZxFkWirKyio8HfexKaJp1+7EOgh76Z1RgKCrdVeYppIkLASq4P5DQwuhp
+G2UQSfPspdc0+qkIu5KLIJNeLR6k1zj42im4robdkNEAsfEOcs0+W3lqm29+C1vL
+b6vSvmQcJFvaHUGx7qrpoKoboRbJkV4MqDyIuRpBPGXir9qB4FekaO2UPZ8JoMMl
+JrbFkBmsJuyIhwWrLI7Zf1lWeH9mbwAKTN4cJt6hoWg3QrNCCAuA2viGh6V7wPvX
+LaJ/DSTGV34/iSPIUTeODmsmKoX0XvtJK3ToZLqWrZMpHoiFGWYh+92K0xxpZQnJ
+1dVPobvdReJIVYN+jBELGjvjm9xKtrP9fh7TXoYzmwXBJr24/7c=
+=8b0w
+-----END PGP SIGNATURE-----
+
+--6yxoFVuyKwrXtIinaY55MK57N2XjRa9Xz--
