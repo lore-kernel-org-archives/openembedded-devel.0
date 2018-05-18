@@ -1,48 +1,54 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f51.google.com (mail-pl0-f51.google.com
-	[209.85.160.51])
-	by mail.openembedded.org (Postfix) with ESMTP id A2E88748A4
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 13CDB7501A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 21:09:16 +0000 (UTC)
-Received: by mail-pl0-f51.google.com with SMTP id ay10-v6so5269869plb.1
+	Fri, 18 May 2018 21:42:38 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id 94-v6so10523346wrf.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 14:09:17 -0700 (PDT)
+	Fri, 18 May 2018 14:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=LxAYchsA80HoaMGRIzzMO1IKN4cKhnJW3sObJk2dfvk=;
-	b=kYiva5QSaNEV9atJVL0aVbNOKffML0/bSgxkm2AvEclIvK9YtsiAZIDBuudsbWksBl
-	CFBBeIxJOWBh+8D8+HkuWblJsUZaBbrHm0vt8vq3yT91R8WeijWyN7VgeGh8K4wAfLy7
-	8DIZhxeYIYABQy7Gcyb+2u2p5vvhndNth5Yuh5JC1kfBNT8daugHsUjIHBw4IABUYeBt
-	zhgrJFijhkTJIm+CeTHvzvE2S7BoD4Rp5C1PADJqR4WFM6x8/RNTR6TO1Iq7t4aiVbA8
-	BUIFGEP/lKaJDjZe/cxd1zQZR0Qfv5lw/eZpjco8UDW/bpnyJnFrjz8vsRbtv8hyEPw+
-	CJbw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=w2NrCHfUUuRMkcDsf0wOm72kvjv5hgyDD7ALA4PNvqM=;
+	b=fbe46sxK3zHusuejPfVgD+TSYIhvywO+mS9YYSZV+KujSaijhxD9rUDT3VhydFwmXE
+	sR8gffvS+LCdPaZ7q+9p0kdDqW3elvwWvZ1XneIOty2e2b19C5isdwl9apP9Xj2YYF6R
+	tvNkF1YzPPaLmuKhhmGn7Qgd4yOVDzdjHDheHUhyc0n4MatMynqxMg1rpFj6ZWT3Ux95
+	hSguCmCwYHJJZx8ykFtnR6jH04XH+RL+I/wwyq7A8YjUcuB7HZ9ikJ6ZDFPJ8YzCuVl+
+	5aWD/uirYdpme7IiHSNmtWxyqnlMFeYdNM8s0fVf5fAo8P41N9nhDCGcNRLiIQVWJ+QO
+	Hbgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LxAYchsA80HoaMGRIzzMO1IKN4cKhnJW3sObJk2dfvk=;
-	b=RrCpntTWEzupE9x4qnA9b1L7G6WJa9/owZICIWJZ0MfLDHZMx3SF3fylKHgguyHlTN
-	jRvTAzbNS8yfk2Nu3bdd41tFVoxqXot5TrZnTuCC58lEPu3flus4U9UojHmmU4HuDCuJ
-	afFIm1ceo1CGe7+X2M62+BrzVgOI7OUHCh6sPOvNGKpfsK3tc+jPmiuWgdUrxwhneIBe
-	mse4ffmQTsbF3XC4l5SwL1+2QUWQ9Pf45y3ZiM5/Fs2/EDaaCgMsh7bHJVAZ+LVA3Bb9
-	ROajnc1QjR51pb0/DA2SMY2ZQJiDmbpXrOvPa4rGBnP0wnp3XUyMxwxagu5n721QoPc9
-	ASiA==
-X-Gm-Message-State: ALKqPwcrFtu8C8BKn6gY4Vo+ywQ46NyzZNSvwDRl2IpZoekTbT0+8WOQ
-	qkNOov6F2ZZk2tP0SRyGVQ1tVw==
-X-Google-Smtp-Source: AB8JxZr1Vkg7Df3OF3uplIlRaW9n4sxsXPOshllcO/dWmtekuotynU6Z9hIyfqfBhclhjWXd37AJHA==
-X-Received: by 2002:a17:902:8218:: with SMTP id
-	x24-v6mr11007619pln.57.1526677757303; 
-	Fri, 18 May 2018 14:09:17 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=w2NrCHfUUuRMkcDsf0wOm72kvjv5hgyDD7ALA4PNvqM=;
+	b=JCtx87dhVYJ7s3VCMzlLRkJo5Hla+9A+C0PrR5r+hDECOKL59FaEOk7yldc+L9HBo7
+	HsCTJIUW/Uf0W11ZxAhjpkQMWGL3Do1f3BZmzVt1OrcJGwYvScjTce3MCuos1zDGb+fA
+	caKweCUKlG8nCtLUZvJPs5UKzTyxQ4Z0JPU+xRC+hPfcPjOPu+8XQPGsqWRkDk4avBfP
+	sNiN+UBDcKzMAcCduJts+7OwZ6u/wvf60ke0Y0bRQiLP2o2RjZJpGh+moZSz7ykC+/JW
+	l4/SBkEvuYwaxCWPq3Q9oel6NpL7Gphh9HVOeUqtVIUemnNck3ogWvbLf/RrCwbIL8e9
+	TeSQ==
+X-Gm-Message-State: ALKqPwcskT7NgC8HzEU5Su7P3H16BvxNok8Ckmv0o/hBXaT3S8Yeb9op
+	FFU3nuNW7buH1UzNrzZV2h53Ig==
+X-Google-Smtp-Source: AB8JxZrGygm1MiSktLfbKilEsPxKMYCQT5ohJzo2EQaUUlT2eW3Q08t08S6UVUc/lEQeUNAbe46Gpg==
+X-Received: by 2002:adf:90cd:: with SMTP id
+	i71-v6mr8954126wri.136.1526679758867; 
+	Fri, 18 May 2018 14:42:38 -0700 (PDT)
+Received: from PC192-168-2-116.speedport.ip
+	(p200300F07BC0BF121E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bc0:bf12:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	v16-v6sm24091121pfk.164.2018.05.18.14.09.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 May 2018 14:09:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	141-v6sm12705644wmf.35.2018.05.18.14.42.37
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 18 May 2018 14:42:38 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 May 2018 14:09:15 -0700
-Message-Id: <20180518210915.37448-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.0
-Subject: [meta-oe][PATCH V2] stm32flash: Fix packaging errors
+Date: Fri, 18 May 2018 23:42:28 +0200
+Message-Id: <20180518214228.25819-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.14.3
+MIME-Version: 1.0
+Subject: [PATCH] evince: update 3.28.1 -> 3.28.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,44 +61,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 21:09:16 -0000
+X-List-Received-Date: Fri, 18 May 2018 21:42:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Remove PR this time.
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
-v2:
-- Use BPN instead of PN in S
+ .../recipes-gnome/evince/{evince_3.28.1.bb => evince_3.28.2.bb}      | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/evince/{evince_3.28.1.bb => evince_3.28.2.bb} (93%)
 
- meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-index d401981ff9..854df06cb7 100644
---- a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-+++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-@@ -1,16 +1,16 @@
- SUMMARY = "Open source flash program for STM32 using the ST serial bootloader"
- HOMEPAGE = "https://sourceforge.net/projects/stm32flash/"
- BUGTRACKER = "https://sourceforge.net/p/stm32flash/tickets/"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.1.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/evince/evince_3.28.1.bb
+rename to meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+index ce73620b0..c5b548432 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.28.1.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.28.2.bb
+@@ -3,7 +3,6 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
+ SECTION = "x11/office"
+ DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
+-PR = "r5"
  
--inherit autotools-brokensep
-+S = "${WORKDIR}/${BPN}"
+ inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
  
--S = "${WORKDIR}/${PN}"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+@@ -13,8 +12,8 @@ SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}
+            file://0001-help-remove-YELP-macro.patch \
+            file://0001-Add-format-attribute-to-_synctex_malloc.patch \
+            "
+-SRC_URI[archive.md5sum] = "27107b60ecc78b698e7902906f16ce82"
+-SRC_URI[archive.sha256sum] = "caaa3100548b704068efb33f592b53accaf2154090ca68933d841f318d3c4d9e"
++SRC_URI[archive.md5sum] = "66aa1766eaaa37536e48def11a0e67a3"
++SRC_URI[archive.sha256sum] = "0955d22d85c9f6d322b6cbb464f1cc4c352db619017ec95dad4cc5c3440f73e1"
  
--SRC_URI = "https://prdownloads.sourceforge.net/stm32flash/stm32flash-${PV}.tar.gz"
-+do_install() {
-+	oe_runmake install DESTDIR=${D} PREFIX=${prefix}
-+}
+ EXTRA_OECONF = "--enable-thumbnailer"
  
- SRC_URI[md5sum] = "40f673502949f3bb655d2bcc539d7b6a"
- SRC_URI[sha256sum] = "97aa9422ef02e82f7da9039329e21a437decf972cb3919ad817f70ac9a49e306"
--
--FILES_${PN} = "/usr/local/bin/stm32flash"
 -- 
-2.17.0
+2.14.3
 
 
