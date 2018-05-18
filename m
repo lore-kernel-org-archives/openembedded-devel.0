@@ -1,51 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 87BD175049
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A521D7501E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 20:05:56 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id u6-v6so5179830pls.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 13:05:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Xp7nIUmF1j+Y8oEeGMllvloJsTZgvQB8HWhotUxVHuQ=;
-	b=r1gvUPoXfnXSItKn//v+W7fN+PZB9Bs2Z22eDVukgGrKNsl1suzRQpTke5u+bgHQq/
-	dZwr7jlHk2zwF/mqKyBMtr9rc7RlvMxzDjmPE1+IxI3qf/TVy3J5azriId87R7Rpl0dA
-	HXk2k7rOzwNfzCuQuBqHIAaPH9ApqNns9VjWcdmfFdCcsKPz7U7btiVI3W7GwkHsb1IU
-	R+Zr1vi6mvHRKun0fpxP3DUySytOqjhvbbsJS/r4NExUGHyXHOx+fpACzZGs6m+LiXF6
-	zYtFWUOcDdoGTWdMlq4hRCr6zkB7cVSThxRZ85UmaMnnQW0Gc0oMCbCDbdruZ9P8f+NC
-	0xow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Xp7nIUmF1j+Y8oEeGMllvloJsTZgvQB8HWhotUxVHuQ=;
-	b=Hkar/6eNMg8wHps6B+FenM561AO7uUH96GGr6VRSV/c2keAyg6O0XAbYCE0IccjHnw
-	eddzTwvDvdzanL0ZkmXRtF3n/DgkMB9iYTV7TUqQitAp7T9JffEzHvA0vCXzeQ2Cd20w
-	+YYyAR2uL8Nie4gDZGWzUYaZHDF/a7X14j4mmlgZozC+unip2qn4VwXzXwZKGnOLs4p7
-	n9rH5xg6Xpa0qe+Yj4tOLa8yig4eZSgDTDDikXs/hK8+So75iAyb9hOTzbVG1HGZBSwz
-	S9+eeazsy0YZxHUD7wOFCW1On3hN1I0SNPoKoV026vtOtuvH5bSaBP/+Dp19jV60juSf
-	pR0Q==
-X-Gm-Message-State: ALKqPwfuTEUhcNGYtsmLL0ZPweBSYFrfwOg7bJ6s9UU+q4Q+U1zA+Jo2
-	NtnyAOYeterNsHtnzOWpL+W2oQ==
-X-Google-Smtp-Source: AB8JxZopFNBV+YE63DEfWOS0hvM1lJeDyPoUuS/t9HQ7eROz/jskbc5eeDjDv2fefxl+fFiH2/6e2Q==
-X-Received: by 2002:a17:902:bb92:: with SMTP id
-	m18-v6mr10926168pls.46.1526673957358; 
-	Fri, 18 May 2018 13:05:57 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
-	by smtp.gmail.com with ESMTPSA id
-	q19-v6sm77888pgv.78.2018.05.18.13.05.56
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 May 2018 13:05:56 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 May 2018 13:05:54 -0700
-Message-Id: <20180518200554.30205-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <20180518200554.30205-1-raj.khem@gmail.com>
+	Fri, 18 May 2018 20:43:39 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 8D2FE184E7;
+	Fri, 18 May 2018 22:43:39 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id 1YvI3PQvmUxt; Fri, 18 May 2018 22:43:38 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 9F4BE184CD;
+	Fri, 18 May 2018 22:43:38 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7D0901E080;
+	Fri, 18 May 2018 22:43:38 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 710B91E07E;
+	Fri, 18 May 2018 22:43:38 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP;
+	Fri, 18 May 2018 22:43:38 +0200 (CEST)
+Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
+	by thoth.se.axis.com (Postfix) with ESMTP id 6453917A8;
+	Fri, 18 May 2018 22:43:38 +0200 (CEST)
+Received: from xbox11.axis.com (10.0.5.25) by XBOX03.axis.com (10.0.5.17) with
+	Microsoft SMTP Server (TLS) id 15.0.1365.1;
+	Fri, 18 May 2018 22:43:38 +0200
+Received: from XBOX02.axis.com (10.0.5.16) by xbox11.axis.com (10.0.5.25) with
+	Microsoft SMTP Server (TLS) id 15.0.1365.1;
+	Fri, 18 May 2018 22:43:38 +0200
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1365.000; Fri, 18 May 2018 22:43:38 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] stm32flash: Fix packaging errors
+Thread-Index: AQHT7uO3BitDHsYf/0yNs4By40l5e6Q18skQ
+Date: Fri, 18 May 2018 20:43:38 +0000
+Message-ID: <de72c540487e4c0298a8fcad894a00d4@XBOX02.axis.com>
 References: <20180518200554.30205-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] stm32flash: Fix packaging errors
+	<20180518200554.30205-2-raj.khem@gmail.com>
+In-Reply-To: <20180518200554.30205-2-raj.khem@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+Subject: Re: [meta-oe][PATCH] stm32flash: Fix packaging errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,41 +65,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 20:05:56 -0000
+X-List-Received-Date: Fri, 18 May 2018 20:43:40 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Khem Raj
+> Sent: den 18 maj 2018 22:06
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH] stm32flash: Fix packaging errors
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-=
+oe/recipes-support/stm32flash/stm32flash_0.5.bb
+> index d401981ff9..59bd1b60e1 100644
+> --- a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
+> +++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
+> @@ -1,16 +1,16 @@
+>  SUMMARY =3D "Open source flash program for STM32 using the ST serial boo=
+tloader"
+>  HOMEPAGE =3D "https://sourceforge.net/projects/stm32flash/"
+>  BUGTRACKER =3D "https://sourceforge.net/p/stm32flash/tickets/"
+> -LICENSE =3D "GPLv2"
+> +LICENSE =3D "GPL-2.0+"
+>  LIC_FILES_CHKSUM =3D "file://gpl-2.0.txt;md5=3Db234ee4d69f5fce4486a80fda=
+f4a4263"
+>=20
+> -inherit autotools-brokensep
+> -
+>  S =3D "${WORKDIR}/${PN}"
 
-diff --git a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-index d401981ff9..59bd1b60e1 100644
---- a/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-+++ b/meta-oe/recipes-support/stm32flash/stm32flash_0.5.bb
-@@ -1,16 +1,16 @@
- SUMMARY = "Open source flash program for STM32 using the ST serial bootloader"
- HOMEPAGE = "https://sourceforge.net/projects/stm32flash/"
- BUGTRACKER = "https://sourceforge.net/p/stm32flash/tickets/"
--LICENSE = "GPLv2"
-+LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--inherit autotools-brokensep
--
- S = "${WORKDIR}/${PN}"
- 
--SRC_URI = "https://prdownloads.sourceforge.net/stm32flash/stm32flash-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
-+
-+do_install() {
-+	oe_runmake install DESTDIR=${D} PREFIX=${prefix}
-+}
- 
- SRC_URI[md5sum] = "40f673502949f3bb655d2bcc539d7b6a"
- SRC_URI[sha256sum] = "97aa9422ef02e82f7da9039329e21a437decf972cb3919ad817f70ac9a49e306"
--
--FILES_${PN} = "/usr/local/bin/stm32flash"
--- 
-2.17.0
+I missed it in my comments, but Anuj had already pointed it out,=20
+That ${PN} above should be changed to ${BPN}.
+
+> -SRC_URI =3D "https://prdownloads.sourceforge.net/stm32flash/stm32flash-$=
+{PV}.tar.gz"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+> +
+> +do_install() {
+> +	oe_runmake install DESTDIR=3D${D} PREFIX=3D${prefix}
+> +}
+>=20
+>  SRC_URI[md5sum] =3D "40f673502949f3bb655d2bcc539d7b6a"
+>  SRC_URI[sha256sum] =3D "97aa9422ef02e82f7da9039329e21a437decf972cb3919ad=
+817f70ac9a49e306"
+> -
+> -FILES_${PN} =3D "/usr/local/bin/stm32flash"
+> --
+> 2.17.0
+
+//Peter
 
 
