@@ -1,50 +1,58 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A5AF74A27
+Received: from mail-pl0-f47.google.com (mail-pl0-f47.google.com
+	[209.85.160.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 72EA174803
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 23:21:15 +0000 (UTC)
-Received: by mail-pg0-f47.google.com with SMTP id p9-v6so2460302pgc.9
+	Fri, 18 May 2018 01:17:31 +0000 (UTC)
+Received: by mail-pl0-f47.google.com with SMTP id c11-v6so3577455plr.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 16:21:17 -0700 (PDT)
+	Thu, 17 May 2018 18:17:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=bw5A+J7ojd+CROFvBoVY94U7zwfyKV60zjNtxkiC0yU=;
-	b=YRZi/o/i9OGTdSRUCR6dV+5fWeilmDk1l7ZppbrHu1KJ7uX225RiT7HJd9PVvxNjqe
-	UFugj6B+8xMB/zhk1OsUV4UjxnLXK10uoYvRls4bgyKkp3ZxY6vd1XoF1Sk7ulmXAgll
-	GZHzsDNCHvYmCHRScx5GyJ9J+ZSTfp+M7Y6G4iU8nBpevUYKY5Qc59sQnNhoOXueGq8T
-	EAff7flUKAgfvBJp/MM9YVP6LGAs7OLNBLud8vq6/Mi/eHPpz/E09YrlI2+w1JLjQ5LM
-	x69bpQXK5xFa/dGOHCxT6x3Ml35jUxfqo7VEV+CGOyiCOB7R0f8vNumOxGF9Ae9L/P7e
-	KPOA==
+	h=to:references:subject:cc:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=z9QJixRL4D2idh/gwHI9NTRcndqqkrUfJCJt/U/7kNc=;
+	b=eGvn5p3+Fuj6RM0T4CvjcMwFBzxKrqB7IKamIVOTSHpKWboIz88EVZ3rhVdU3p/5px
+	tMBipCrG20oJ58niG1RXcmXwJiZxiFVwfojdR/1sYiNjF8xaNwpn/kGlKjHsiKspN0Kx
+	eDhbcPscha0I/AwEFG01GjosHyzzlqz8pGIPROpUAG5hznO7EQxpHKfFdJaCz4Fovo2Q
+	xw6SvaTTrZ6K8WgY6FbXEQOqW/WLTdJCAvfu2KD8qI6a8xjsBIfPuvbyRvk4KWVDKlXv
+	tCT5VS6TvNYK+0HYhjVPFPZlXPgmRoufK63+4JNr2wZp4rnNiHTvQiqJq6DeV12ryap+
+	114Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=bw5A+J7ojd+CROFvBoVY94U7zwfyKV60zjNtxkiC0yU=;
-	b=JFgM9ANd1eH6KtMHriF3R/K3nYSs8byDS+S8QthWF+JMwHpRydk9ZEYsfV4OXK14mT
-	2KF2ISl4e5CKk/+UxeKFsUGZANviPH8H23ShHNNZBaL0c5k6DTJNvOJTcRFOxbqMmXUR
-	+/vtw1xEIeSFgRM4ihk7Uc55OHomzFYRq/X7fmrwGpwlWmfcM3GUv9C4be4ePXTJh8kw
-	vTyXxlr/VvWD5NvfjjMlHsUj5X+XpvRx7ZWuBR1WXDh2PjskBx3+fzWqktHAQWnP/01Z
-	eRD2YheLBbcPeYMYW1KvzyDhvPrCYZDqwqUCOTO7uuCqmsB0ofGJqA6/fUYMlKCQ97Ql
-	0t4Q==
-X-Gm-Message-State: ALKqPwc+a64dGE/NeEdhR4VZGPwwEaVibHcovURaUXGEw3z+7XANIu3i
-	fGLH/iohLZCFW26RTMua6z6FQA==
-X-Google-Smtp-Source: AB8JxZofXmMpSyd4dbbCzTc16d3zQOZ7JqRxazZngZuXV5SIl8fRTDW9n+NE69ejtRAhQ9wYFsbJhg==
-X-Received: by 2002:a62:ae13:: with SMTP id
-	q19-v6mr6916483pff.155.1526599276605; 
-	Thu, 17 May 2018 16:21:16 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	h=x-gm-message-state:to:references:subject:cc:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=z9QJixRL4D2idh/gwHI9NTRcndqqkrUfJCJt/U/7kNc=;
+	b=EuDY2TYdvL9lsG0X5+nFjRWsIh77zkqmsdBzS/+kOmYCMdMjqKlr6/Q/9ifwCGrl1w
+	Uc4yC5U8Fr0g1Gy4E4N4IZ1Np6hkQ3Hj5RDBSJnSbTbqdUWF6kneKOmscshQkOd+pC/a
+	52miGTcOT9JT7scO9MeLtemvcAdPJw6C0qQr+Q+orBhisEEWcTD9wj3ZF/kvlruMwHg/
+	nWBw7AwMbHy/fxnVm8O4Otuv5OCWsbOT6UWUH/Oi49pDxsDcicarP9jTazfD5Wiero1u
+	As8lfhV7PL5b4VfrBQzVzXon/HMEGRZy5t+uvBAIQhsAa4YjTuETjVNG5gmKEC/R9liM
+	qKsw==
+X-Gm-Message-State: ALKqPwfYQ/UN93xYdmtTWC1ElMJFv7lvFLBfsB0t9QHgE7QjL7HcP9+N
+	Jtgn7yvoDQfh6kTcMq6OF8mfLbZa
+X-Google-Smtp-Source: AB8JxZpCXVOkYyleIsPTQqP8uKFlLwjFOuPEQwvD01paeLaxU/TmZBvdJP14EAW0nvT259XAUMn9Bw==
+X-Received: by 2002:a17:902:780a:: with SMTP id
+	p10-v6mr7391370pll.281.1526606252066; 
+	Thu, 17 May 2018 18:17:32 -0700 (PDT)
+Received: from hermes.local ([2601:646:877f:9499:50cf:a971:a3cb:56ce])
 	by smtp.gmail.com with ESMTPSA id
-	u70-v6sm13828212pfk.121.2018.05.17.16.21.15
+	h8-v6sm7769417pgq.56.2018.05.17.18.17.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 May 2018 16:21:16 -0700 (PDT)
+	Thu, 17 May 2018 18:17:31 -0700 (PDT)
+To: dmitri.vorobiev@movial.com
+References: <CAE3k13d8N02kfR+VmpXRZPywTdU1Rm6vaRhB-gb29G4Hqbo-kw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 May 2018 16:21:10 -0700
-Message-Id: <20180517232110.22663-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <20180517232110.22663-1-raj.khem@gmail.com>
-References: <20180517232110.22663-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/5] libvdpau: Rename dep dri2proto -> xorgproto
+Organization: HIMVIS LLC
+Message-ID: <49c90165-022b-38b9-fec7-79c492777951@gmail.com>
+Date: Thu, 17 May 2018 18:17:30 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
+MIME-Version: 1.0
+In-Reply-To: <CAE3k13d8N02kfR+VmpXRZPywTdU1Rm6vaRhB-gb29G4Hqbo-kw@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] usb-modeswitch: Upgrade to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +65,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 May 2018 23:21:16 -0000
+X-List-Received-Date: Fri, 18 May 2018 01:17:31 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-graphics/vdpau/libvdpau_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Dmitri
 
-diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
-index 31bcce066f..b79a562c8e 100644
---- a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
-+++ b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
-@@ -3,7 +3,7 @@ SUMMARY = "Video Decode and Presentation API for UNIX"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
- 
--DEPENDS = "virtual/libx11 libxext dri2proto"
-+DEPENDS = "virtual/libx11 libxext xorgproto"
- 
- PV = "1.1.1+git${SRCPV}"
- 
--- 
-2.17.0
+Can you rebase this change on top of current master and resend ?
 
+Thanks
+-Khem
 
