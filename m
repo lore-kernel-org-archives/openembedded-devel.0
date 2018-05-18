@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 717CD6079F
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D825E744D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 14:08:45 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id f189-v6so3827723pfa.7
+	Fri, 18 May 2018 14:28:03 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id o76-v6so3849248pfi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 07:08:46 -0700 (PDT)
+	Fri, 18 May 2018 07:28:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=UXC4PK0CZk4YzBsZhrxBVa7g6EbRlo7u+9uu7sJR6zI=;
-	b=QhJeFrJYo8s5iL/9b7Y28/tI2xHypFstUeWqamuTev4CWSq58X7bDEH215xU02/KE/
-	+pj9nJo1XukGxKwYFVDO7jOfkCywxdJS6uaUFtjuWAoTc61m8XQZUXK1reFFRu3MB9Rh
-	6TRAKojwtJpceWu89MUFN3cgO+cHLEZEyBs1t0VFc3wt5oxQBsf0MD2KsC8zJHfZ/pTb
-	x2QMn3rcC8SoQCDNn94MVKDc0heFhcBPVsvAIfNyyw+XV7v5XInD2lPhW+7Z8Z1xZrmC
-	O3EK4+UkzlyRm4yB0q1uDyv+mSUW5r8yf+LmzAT959FRS4soafRDDkP+658dXwoNOupI
-	ADBw==
+	:cc; bh=NPgZCE45yGjwF69Dt0S/qp7GQc6QRtE5F3lQY9eEXlA=;
+	b=EzLCRfY6cwzdzQcnSg0/Pd6vqO79qoVTihyzllImSK/VanpQEeVi/0hTGEblXuHhYD
+	apqFCya/PTSXg1cwg/xUQKDfWHSZnVexK76yycHdLUeaXn/CR+o9iRPp0Gowx6+pFlI2
+	T9PKjmQzyhEshTidEBXoGxoc579V0BxmxErJnaeq42N3MYk0pHNPm3a0Lm6fQAnht5fj
+	g1zhpY3SC73bQ8SzasP3EDOerHFJrwVrMiL17w2t7TfU0ODoJO7BtIcgJW15aC5fq8sY
+	uwmM7UWdj0uKoT1atQX5F7VkTYbVoAK9R7AXqgHRnET1779Lu80lEfX9e3efpTj2stVY
+	3JjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=UXC4PK0CZk4YzBsZhrxBVa7g6EbRlo7u+9uu7sJR6zI=;
-	b=L7Cicrn3dQhU0i38KOy6JMhRitidj4ffmG89ZWhN21gqqn0facP3GoFCU/KPaWlMMb
-	CB4lNKl24/vLE/fSrJe3nZjZeMur2YvutOZ3EXc67vq8aedDA7Uj2UAje3GardmdxXxZ
-	UBq0euF+Onq7FRXkeAZpgTF+pqT0sLOWxt2S2GaJogc57PR2DUBO3WDYETXe2zyQnsmj
-	9hhnY7S1tu5gs769PpdeMFdhOL9n0KoNTaLC9BYZLITwXs3qj9rCiRCOU4fgBzlWGkxA
-	I+TgDh1PAsvCdKceK/NGwh+FLW/+wJzGm07UbBra+FzsrxNPZZeQHWxTTcRB8mrB62GR
-	pR5Q==
-X-Gm-Message-State: ALKqPweHcdpE/MXBRu2fHe4l9Rxy2rJhiao5VNJg8SFPa5abUHhLAqFZ
-	bawLVBrNjPCfSZI5zYaF5DgcBh+4BXW0PhbVmB0=
-X-Google-Smtp-Source: AB8JxZoUGPdb4A+MecsiJsuclgSzyqbQnmocrTow3iMxZONYMtzfNLSCphOV7COcHss3g8wtXaVF+LAoF6eou4ifB3k=
-X-Received: by 2002:a62:3c10:: with SMTP id j16-v6mr9599349pfa.7.1526652526106;
-	Fri, 18 May 2018 07:08:46 -0700 (PDT)
+	bh=NPgZCE45yGjwF69Dt0S/qp7GQc6QRtE5F3lQY9eEXlA=;
+	b=oigbDhDcf7RHeF0WyJbLj0NLgU8r9zRqkCurPCBJ+XWckC9rjLFHBp84dhtJgrrL+c
+	MGVIsSVyRxv47Eir29uCobHlUxVZX5/MIECnEEaX/rzdfon4SspZOK7EKjClizaH0A8b
+	szOJ3I1I7n+rwaxUWEoV30Js3DJs3p/MyvNQO1rwssbJ3pNqZzi2MKNq0DlABDShmLGT
+	rxeaobHcnP52wLG4hrwLtklctLDTLmFnh7NXZg82ABiSPi8muiG7DaDVgPi2djniylGE
+	PGM59xrSymikZ8YpWbqii1Jpr2+QPjHgSn0h3V9n+I+1VdJJL/VCki6b1EXQPNt1CUJy
+	Vnvw==
+X-Gm-Message-State: ALKqPwczVsT35La3blKYMPYjeSEoSe5JnU02WHLlsqKuTVhT4whZQGBh
+	FD5UHCVcmEcTY3Fd66XOqQsxEVAiVK1l4Y3UbXg=
+X-Google-Smtp-Source: AB8JxZqRfzqWdKhZkbaJQNAmnoUnSIl1C3r6QYSed+3UukvIbQKUfpWDnWVndshRM3jVO8SmD7haIqSiDvQ7xrXU9+c=
+X-Received: by 2002:a63:7b10:: with SMTP id
+	w16-v6mr3881961pgc.55.1526653684367; 
+	Fri, 18 May 2018 07:28:04 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Fri, 18 May 2018 07:08:15
+Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Fri, 18 May 2018 07:27:33
 	-0700 (PDT)
-In-Reply-To: <20180518072308.GA1715@jama>
-References: <20180517232110.22663-1-raj.khem@gmail.com>
-	<20180518072308.GA1715@jama>
+In-Reply-To: <20180518111117.12241-1-pascal.bach@siemens.com>
+References: <20180518111117.12241-1-pascal.bach@siemens.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 May 2018 07:08:15 -0700
-Message-ID: <CAMKF1soqMdfMd1iqyDzds958_t1WanZA5xWXJcfsD9_JtCkpKQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 18 May 2018 07:27:33 -0700
+Message-ID: <CAMKF1sof=d7U7L4Z9X+9rWr-6iXN5FS4AORvPyX1SG1r0hZ-WA@mail.gmail.com>
+To: Pascal Bach <pascal.bach@siemens.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH 1/5] evince: Reset PR to 0
+Subject: Re: [meta-oe][PATCH] rocksdb: update to 5.13.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,44 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 14:08:45 -0000
+X-List-Received-Date: Fri, 18 May 2018 14:28:04 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, May 18, 2018 at 12:23 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, May 17, 2018 at 04:21:06PM -0700, Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta-gnome/recipes-gnome/evince/evince_3.28.1.bb | 1 -
->>  1 file changed, 1 deletion(-)
->>
->> diff --git a/meta-gnome/recipes-gnome/evince/evince_3.28.1.bb b/meta-gnome/recipes-gnome/evince/evince_3.28.1.bb
->> index ce73620b09..97fe769c5d 100644
->> --- a/meta-gnome/recipes-gnome/evince/evince_3.28.1.bb
->> +++ b/meta-gnome/recipes-gnome/evince/evince_3.28.1.bb
->> @@ -3,7 +3,6 @@ LICENSE = "GPLv2"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
->>  SECTION = "x11/office"
->>  DEPENDS = "gtk+3 libsecret ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
->> -PR = "r5"
->
-> Why, it makes the version going backwards without any good reason to do
-> that.
->
+Can you rebase/squash on top of
 
-it should be merged into original patch from Andreas.
+https://patchwork.openembedded.org/patch/150734/
 
->>
->>  inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
->>
->> --
->> 2.17.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On Fri, May 18, 2018 at 4:11 AM, Pascal Bach <pascal.bach@siemens.com> wrote:
+> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+> ---
+>  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> index 1e6cbae38..727488d1e 100644
+> --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+> @@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+>                      file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>                      file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+>
+> -SRCREV = "8969445642039566214d650cc6614849e7dd5e17"
+> -SRCBRANCH = "5.12.fb"
+> -PV = "5.12.2"
+> +SRCREV = "c60df9d9e7629fe208a9b848293a5599f83d5e77"
+> +SRCBRANCH = "5.13.fb"
+> +PV = "5.13.1"
+>
+>  SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH}"
 >
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
