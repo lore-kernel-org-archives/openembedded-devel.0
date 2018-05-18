@@ -1,49 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D825E744D2
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-ot0-f179.google.com (mail-ot0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 114EA745ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 14:28:03 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id o76-v6so3849248pfi.5
+	Fri, 18 May 2018 16:57:38 +0000 (UTC)
+Received: by mail-ot0-f179.google.com with SMTP id h8-v6so9884159otb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 07:28:05 -0700 (PDT)
+	Fri, 18 May 2018 09:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=NPgZCE45yGjwF69Dt0S/qp7GQc6QRtE5F3lQY9eEXlA=;
-	b=EzLCRfY6cwzdzQcnSg0/Pd6vqO79qoVTihyzllImSK/VanpQEeVi/0hTGEblXuHhYD
-	apqFCya/PTSXg1cwg/xUQKDfWHSZnVexK76yycHdLUeaXn/CR+o9iRPp0Gowx6+pFlI2
-	T9PKjmQzyhEshTidEBXoGxoc579V0BxmxErJnaeq42N3MYk0pHNPm3a0Lm6fQAnht5fj
-	g1zhpY3SC73bQ8SzasP3EDOerHFJrwVrMiL17w2t7TfU0ODoJO7BtIcgJW15aC5fq8sY
-	uwmM7UWdj0uKoT1atQX5F7VkTYbVoAK9R7AXqgHRnET1779Lu80lEfX9e3efpTj2stVY
-	3JjA==
+	:content-transfer-encoding;
+	bh=uHX3SrFLVfFhp9ZRyISRBo52YYe1cebINS4TgedIehY=;
+	b=oLMNMPdmVa3qraXHXqGfqALFuKpTN67fcmHSy+w+WD5Un4TaD71OOss3ZsW91zXExu
+	Gwe4pN0SMu3PK0Qpaah87P4LY0oHEDe9ksB2pWT9hV6EVTelW+ii56EjaVhr5JCfCycP
+	mEVcMNGD/pzy76E/EO6UCYT3xjnpNNNFYF62/B6C+fI1AWdfbWfbnZ4E6TDx1Dvjdx26
+	tdmcwa+b+YsfcqFCtBLo3p2YcWRTEIyULxN24EtmDYVkBGqxra2uqhV6RzazPObr7kb0
+	JLkWp2hpv6NDMogek2LIi30KaO8nE9XEpRkfTpEMNWVUSzGdY8JMFFBtQc7Qit2c9PHP
+	4MvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=NPgZCE45yGjwF69Dt0S/qp7GQc6QRtE5F3lQY9eEXlA=;
-	b=oigbDhDcf7RHeF0WyJbLj0NLgU8r9zRqkCurPCBJ+XWckC9rjLFHBp84dhtJgrrL+c
-	MGVIsSVyRxv47Eir29uCobHlUxVZX5/MIECnEEaX/rzdfon4SspZOK7EKjClizaH0A8b
-	szOJ3I1I7n+rwaxUWEoV30Js3DJs3p/MyvNQO1rwssbJ3pNqZzi2MKNq0DlABDShmLGT
-	rxeaobHcnP52wLG4hrwLtklctLDTLmFnh7NXZg82ABiSPi8muiG7DaDVgPi2djniylGE
-	PGM59xrSymikZ8YpWbqii1Jpr2+QPjHgSn0h3V9n+I+1VdJJL/VCki6b1EXQPNt1CUJy
-	Vnvw==
-X-Gm-Message-State: ALKqPwczVsT35La3blKYMPYjeSEoSe5JnU02WHLlsqKuTVhT4whZQGBh
-	FD5UHCVcmEcTY3Fd66XOqQsxEVAiVK1l4Y3UbXg=
-X-Google-Smtp-Source: AB8JxZqRfzqWdKhZkbaJQNAmnoUnSIl1C3r6QYSed+3UukvIbQKUfpWDnWVndshRM3jVO8SmD7haIqSiDvQ7xrXU9+c=
-X-Received: by 2002:a63:7b10:: with SMTP id
-	w16-v6mr3881961pgc.55.1526653684367; 
-	Fri, 18 May 2018 07:28:04 -0700 (PDT)
+	:message-id:subject:to:content-transfer-encoding;
+	bh=uHX3SrFLVfFhp9ZRyISRBo52YYe1cebINS4TgedIehY=;
+	b=CGQiuKgfG5sjzriRYL1T7GMbajekbygyxNNUH5jXtkh0V9AQ6u7SR1xppwODhP+kxe
+	+70n/iCAnQnS+QEEbe9mscnG8BRbjsRIncWwsWIk8yP4y62DgowoHXRN7FLjpE/kNjll
+	qpcpWbZOH5BSv21QZbtKGCF4FyaEWvoy491wQfVvL0tWhc1GGJscN6X7MmVBLDGI/40G
+	ZEcPdxljoo+o/ZFWC1lkwG5lMNl8rpuKfsbL6pspaa00tt6tkPP+o5Rcqyxn1zMlR+Y2
+	J5LyWveBdbfi7YfSwQ/gNUdVoMzCLMhd43jV3FBY/vc/M/30KCHp+BXZ8qFrGsA9uZXX
+	69lQ==
+X-Gm-Message-State: ALKqPwcgIEm4Yae320MtEY30PH0HB9EasmJ2/UWjDsaanU5q/vRNGz89
+	kgxem4IufysVXHldRZ3p6yH2ZPVYOgBTX2d1PfE=
+X-Google-Smtp-Source: AB8JxZqBbjUcRMiJK13Yp1VWedhya+W37/wLA5qXWXbiOGExwyPU7jFuMIpg8AYf9PaCXb80a0wITB2eV3HYEShFHY8=
+X-Received: by 2002:a9d:3df4:: with SMTP id
+	l107-v6mr6630381otc.73.1526662659235; 
+	Fri, 18 May 2018 09:57:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Fri, 18 May 2018 07:27:33
-	-0700 (PDT)
-In-Reply-To: <20180518111117.12241-1-pascal.bach@siemens.com>
-References: <20180518111117.12241-1-pascal.bach@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 May 2018 07:27:33 -0700
-Message-ID: <CAMKF1sof=d7U7L4Z9X+9rWr-6iXN5FS4AORvPyX1SG1r0hZ-WA@mail.gmail.com>
-To: Pascal Bach <pascal.bach@siemens.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] rocksdb: update to 5.13.1
+Received: by 10.201.73.11 with HTTP; Fri, 18 May 2018 09:57:38 -0700 (PDT)
+In-Reply-To: <20180510161415.12827-1-schnitzeltony@gmail.com>
+References: <20180510161415.12827-1-schnitzeltony@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 18 May 2018 18:57:38 +0200
+Message-ID: <CALbNGRQgMSRXq-G4XZT_eY3_+Ab_zrH8bk7KjwgGGAt6RuHZHQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/8] xfce4-clipman-plugin/DEPENDS: replace deprecated xproto by xorgproto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,42 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 14:28:04 -0000
+X-List-Received-Date: Fri, 18 May 2018 16:57:39 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Can you rebase/squash on top of
-
-https://patchwork.openembedded.org/patch/150734/
-
-On Fri, May 18, 2018 at 4:11 AM, Pascal Bach <pascal.bach@siemens.com> wrote:
-> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+On Thu, May 10, 2018 at 6:14 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > ---
->  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.bb | =
+2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> index 1e6cbae38..727488d1e 100644
-> --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> @@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
->                      file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
->                      file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+> diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin=
+_1.4.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.=
+4.2.bb
+> index 96bdf0e53..f683f5359 100644
+> --- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.=
+bb
+> +++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.2.=
+bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954=
+499f7abaabaa882bbe"
 >
-> -SRCREV = "8969445642039566214d650cc6614849e7dd5e17"
-> -SRCBRANCH = "5.12.fb"
-> -PV = "5.12.2"
-> +SRCREV = "c60df9d9e7629fe208a9b848293a5599f83d5e77"
-> +SRCBRANCH = "5.13.fb"
-> +PV = "5.13.1"
+>  inherit xfce-panel-plugin
 >
->  SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH}"
+> -DEPENDS +=3D "xfconf xproto libxtst"
+> +DEPENDS +=3D "xfconf xorgproto libxtst"
 >
+>  SRC_URI[md5sum] =3D "9169140af7c9d3fddd8a5c9e0efb5a61"
+>  SRC_URI[sha256sum] =3D "cf2b45e327e67cc187dcb99a6ef6d95570463045accd2454=
+0e17172f005189b3"
 > --
-> 2.11.0
+> 2.14.3
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Something wrong with this - or did it slip through?
+
+Andreas
 
