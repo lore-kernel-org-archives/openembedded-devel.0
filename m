@@ -1,51 +1,50 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-pl0-f50.google.com (mail-pl0-f50.google.com
-	[209.85.160.50])
-	by mail.openembedded.org (Postfix) with ESMTP id E7DE474C18
+Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CA25174C18
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 May 2018 01:31:21 +0000 (UTC)
-Received: by mail-pl0-f50.google.com with SMTP id e6-v6so3580534plt.11
+	Fri, 18 May 2018 01:31:23 +0000 (UTC)
+Received: by mail-pf0-f179.google.com with SMTP id c10-v6so2923076pfi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 May 2018 18:31:23 -0700 (PDT)
+	Thu, 17 May 2018 18:31:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SopqI7tZUlhRko8PlSVpdnhjG5OZv9HjOEYw4VVfcYk=;
-	b=X9Dw8wM8wa2GsBrgEZB1yL+If5tJRU0fXQtk8TvDluntDjoWyE1hmicfo0BDakmQxk
-	2Ky0FxmaKSSi1v5UbQJjov0oh1TToZ2G4oQOv0QbuAALEkeCw9LLLJZskoziOktIBv6N
-	GE8iL/i9Mr+q7oaj1WAfmJDPzZimP+uugrnjhY82rl4f/15UlTIm/rWEfYbMdtV7SKKZ
-	XA6r9L47i7onr+/cKGhltba1YJ1YTezWviUs/piWA2YfDttgSLsfsoa4D6fD0VUTCM49
-	PqjRIzMOAcMc9Z3aKhojmCZNEu4a97fH0oA+Tqj79gF9bjkdcbQ4yRcagInuw4BB0pbj
-	utzg==
+	bh=ySzCviZFLGlfu98cUfef0GD6RopOM4y19ZKZi+/7bXU=;
+	b=QdnpLYC/tHQMS/d8u8hKQZOwwgfDdr6W+xfRoRnvrH9tHxvK0BIcc6yZZ5xtvNYJOY
+	YL20hgCgsjfyWLKd/UBDWKcCzM+NWwwQKanzzUVntKcr/RJKmthR86Ej7FjVF0LEjs9M
+	lGTFPQFxk8hCPvhX4OmdVs74UozpHzaJd/wdL/kaPJVAlFuMMpJmoSlGHEj7JTfsrots
+	KYD8yAv+ZpI1jtKylsH4YU2tNLrOHQsKYZ6zXaUaCOd8MK6xwIPXa/TYBR0utoYIIpBV
+	Iv5DZ/FN62MUDEkeCaAEpwtrLzJqTQJ2wLnhAtSY+pYES//ld4quC3PQoGZ6yyCEDo8Q
+	7/yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=SopqI7tZUlhRko8PlSVpdnhjG5OZv9HjOEYw4VVfcYk=;
-	b=CN9wtuuC8e/pdfCV0Tt8zds9pqsQIMyz7E1cgtvknlLpZ/a7yPzlh0ETw/SHFmak+p
-	NKzVToy8k+x110qBAygCbceUZUtpwR6WXU74AY+w+VHeyuloCdGmmQsyKrZgSCD24hJL
-	tWvj72uM8ja/Pvkd6p9nJpQid7elHtXsumUr+35VCVYzXZ+Qmi1WovHPfKANfjkGLEDE
-	L0B2qpIcXp9/Vf/c4QzJBkPTuZBuxLyZuUbDIPzG9cOQ4O2TlU+Cg0rhXfmcoVwMTbSM
-	b+ZjbHGKIi84VbJEij8DlsKL/9BQOGnKT/r1IAO7cM4DVl4DrzXkHq7hcX3zojb7SAKx
-	l4LA==
-X-Gm-Message-State: ALKqPwepDM2sV12NTIYvxZjvFh2H7d5pkHhfor9X8S+Eru4dSrnfklVd
-	sctKdEZmsEdjcb+z2mwErjGoIA==
-X-Google-Smtp-Source: AB8JxZqybNhuJWOlQXajzxvH0JieptcWBG8wVzBB4fgHluKQlregUUy+JrTOxsoyZ7omyuaUb+p6Ig==
-X-Received: by 2002:a17:902:6505:: with SMTP id
-	b5-v6mr7416777plk.147.1526607082907; 
-	Thu, 17 May 2018 18:31:22 -0700 (PDT)
+	bh=ySzCviZFLGlfu98cUfef0GD6RopOM4y19ZKZi+/7bXU=;
+	b=MO+wRICbvXhFssZh72sAG4JD5gXFHkhGc5s3MGsn3kwQxwfV6xlx3rGIv7odyL6qc0
+	FzoBuC/bjtS7aJHmtEaE3gZWtQtnkD21Y/NSi9BQ6jrlNLYWFt43xhFvj0zcWRhn4x9G
+	Jl+4JJ56p7cNMJQvY/U+3mVd0bOW316TEecSCEKr1jg1Vb0iTd0SmdjDoqrlR5oK2rP0
+	3MztTukibMU+kwAFQrsA01HDmb0Ed1wCYSU6CAvF6wAkuXiWzkLf+wnfiu2reHcp2zyb
+	7Au27nTqcYlNS3gnNyn6CQ/quLc4JNLrJd0XXr3G1Ei5AfpPjbLi6DmE5Jf5LNdTSRHK
+	EMag==
+X-Gm-Message-State: ALKqPweYRFrwv0GL5wCpw3jG7G7cWEvhGgAVRhZ+6+rh0GdrWttAQlOG
+	GmPbY2QuD2b2mEgdVkNBpUPhEg==
+X-Google-Smtp-Source: AB8JxZqGwFnOhTliwKGzZDSAazoZYQEnh7kfOCrGPDf0YwVEp+Ii8KkweOIt/rjtQ8DqhaxRfLL/qw==
+X-Received: by 2002:a62:b204:: with SMTP id x4-v6mr7288573pfe.21.1526607084505;
+	Thu, 17 May 2018 18:31:24 -0700 (PDT)
 Received: from localhost.localdomain ([4.16.80.121])
 	by smtp.gmail.com with ESMTPSA id
-	n25-v6sm9428562pgd.5.2018.05.17.18.31.22
+	n25-v6sm9428562pgd.5.2018.05.17.18.31.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 17 May 2018 18:31:22 -0700 (PDT)
+	Thu, 17 May 2018 18:31:23 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 May 2018 18:30:42 -0700
-Message-Id: <1526607046-8081-13-git-send-email-armccurdy@gmail.com>
+Date: Thu, 17 May 2018 18:30:43 -0700
+Message-Id: <1526607046-8081-14-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
 References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 13/17] gflags: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][PATCH 14/17] libftdi: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,7 +57,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 May 2018 01:31:22 -0000
+X-List-Received-Date: Fri, 18 May 2018 01:31:24 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need
@@ -68,30 +67,37 @@ to provide custom packaging rules to handles these files.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 4 ----
- 1 file changed, 4 deletions(-)
+ meta-oe/recipes-support/libftdi/libftdi_1.4.bb | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-index 28b652a..834a9f9 100644
---- a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-+++ b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-@@ -1,7 +1,5 @@
- DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+index 6bea165..d28b7a3 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+@@ -3,7 +3,6 @@ FT232BM/245BM, FT2232C/D and FT232/245R using libusb,\
+ including the popular bitbang mode."
+ HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
+ SECTION = "libs"
 -
- HOMEPAGE = "https://github.com/gflags/gflags"
+ LICENSE = "LGPLv2.1 & GPLv2"
+ LIC_FILES_CHKSUM= "\
+     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
+@@ -19,13 +18,11 @@ SRC_URI[sha256sum] = "ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681c
+ 
+ S = "${WORKDIR}/${BPN}1-${PV}"
+ 
++inherit cmake binconfig pkgconfig
++
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on -DFTDIPP=on,-DFTDI_BUILD_CPP=off -DFTDIPP=off,boost"
+ 
+-inherit cmake binconfig pkgconfig
 -
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
- 
-@@ -10,8 +8,6 @@ SRCREV = "f8a0efe03aa69b3336d8e228b37d4ccb17324b88"
- 
- S = "${WORKDIR}/git"
+ EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
  
 -FILES_${PN}-dev += "${libdir}/cmake"
 -
- inherit cmake
- 
- EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF -DLIB_INSTALL_DIR=${baselib}"
+ BBCLASSEXTEND = "native"
 -- 
 1.9.1
 
