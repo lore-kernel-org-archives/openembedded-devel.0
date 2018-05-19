@@ -1,57 +1,55 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CF91745D1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f54.google.com (mail-pg0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 4193074D87
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 May 2018 19:35:48 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id h197-v6so18576688lfg.11
+	Sat, 19 May 2018 19:44:06 +0000 (UTC)
+Received: by mail-pg0-f54.google.com with SMTP id e1-v6so4680877pga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 May 2018 12:35:49 -0700 (PDT)
+	Sat, 19 May 2018 12:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=dKyXtOAYZa9pyzmvGXCb/idYKn2yQNodMUKo99v7I4c=;
-	b=hh1kK5+0RvRQ+yD1QU5ELHkjAfRbkMjcvfkuCHrR/3FqRsPuUynDwr80iOQVFV+TE3
-	0Vcn9nzYagZx5RMtMxgx+pHSyWPRYON6T+MmNBlSne2n+jOuwn7JLOyK1Pju2C/GEszA
-	eBdidKXH6jUADqSotKK756QO+CNcKDZV+KpZ116zYrG/ckQbPMJd2rxBB4XKudOCzpTm
-	dg/nQ9ZpkrjXy2P2ZFyA6lkx2Wp+pV81Rnumgw1VQDBMenbcDq3lD9kdRLKukSswemwu
-	BsIXCsrZCKmk1UKIqSNM7qk3daz8vJ8kLdqyk4By/fF/xZvgDBijPkaHi74m+4M6V/F5
-	lmrg==
+	h=to:references:subject:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=ZGJPS1/dqYXtCUelTZOIOwr+fTB4ufKFQb1egH8zd74=;
+	b=MMi7jgxxQ/SEN7dW8AMVe2KoYl3H0+I2TOoWnAsqh7g8EWBDfCOxd35rkaNYtHJAuv
+	AsD9SWt2t4tZX9g1n4T4lJzUPKMTGTwWWDYOHlr7uRTBs3Jea0VULeWK/zbxLmwDz88g
+	KwCew9Joyeb3ZWr6UlLEi+EYFuE1R55YspY5AvUV8Hanc941bwckngunO3dmmxebUsLV
+	rSTVLF3/s6nM+Ns9e4COD9FmgAz3S8VISpB9d0a6xpX6cipTUS+gtBA1/wvvMfY7HO1k
+	7+2UMD9RfqPUW8s+OF6EHuWpk9sMdRnOgXP8RvOETe7k6ZwDr2Muf+5bD9a6/l1n12MU
+	SQvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=dKyXtOAYZa9pyzmvGXCb/idYKn2yQNodMUKo99v7I4c=;
-	b=WpNL2zvpIgY6+wZ90aUncEEnYcTgGtD8BFRuI24L6twfsSx75H+4Q79yCEOsscctOm
-	mEao3ZsvqCqzGO8OzOYMJO7BmN4wPBHRYpsP/BS9GtUblqGaT1n6jsqN3ME+pXJGd/Hm
-	lTmS+hq8bdDcxivc25f+MBg/F6OJeRLwox0GSZHS+rsQ8/KYl830yGvwt4coRHxWCoYO
-	kxqLa1T0BJTt0s73SAfkjYrEOZVjz2xodir3Rkapw82gCWAcuLEBSWIHINhxVtBfdYZS
-	kOz/q3EQo/b/3ljTXkGtsh4U0nw+PGtJHCURolEuLvtyrGm1bacHgUxP7A4DUmLUvrLG
-	D6xQ==
-X-Gm-Message-State: ALKqPwfxxkiyWnfLW1y7P/CiTCZGpHRh2Pghh/gtodNHHOe7XpefzqGd
-	vxNHd0W1aGaenHOTqU0aTUycDgBEiL3kKIfW3Kk=
-X-Google-Smtp-Source: AB8JxZp2zgmfnDo/4OB63fQKkgAkWyXpRUxQJqSRwZCbUeH2/ZdSHWvEaUOqgi8Y7+d4s2G6ANSXR+/cD/pwGSKWh3Q=
-X-Received: by 2002:a2e:594e:: with SMTP id
-	n75-v6mr8301461ljb.139.1526758548638; 
-	Sat, 19 May 2018 12:35:48 -0700 (PDT)
+	h=x-gm-message-state:to:references:subject:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=ZGJPS1/dqYXtCUelTZOIOwr+fTB4ufKFQb1egH8zd74=;
+	b=W1EmCtDrn5E8MlIz+Sysn3OKbNg/9foB7Qn6EjKW911Xbn9fc39EP+CfKFuZH/tOZC
+	bR09ahAKtqT3S3CUOtiY/j3dTV4KLc8mFHN1topxD7mTK9Jj68dy9A2DgbdTRntDE64A
+	pA87ghVLJE9FgozKeDD8kc1/0P4/+O8sQp+B1I5shRKK84mNOSC7PJWfzVTcz7L/dpqC
+	kI48/+wxxRENd8oBgp5y1UpjCTa19rL6hO45R6f7QOgGUMCpXC+zthFDBFr3t3A4RXAn
+	K+4Q73edy5GnilUWfy4GvyAhNEm2/TiA+vEsBCijzDevGgNZHoIlooxdQ2QgiHMZOYxe
+	I3pA==
+X-Gm-Message-State: ALKqPwflrcqDg8JVwkq7z0rVytdb10QI7etpx52eB7uSWUlAsvpEAJhO
+	KeHNKFzu5DYB0RALlUQ42pEUu0O/
+X-Google-Smtp-Source: AB8JxZpm1sHQXY5ouUXlINucvwnVvuOq+p6jtkIswrZTUR7VAgYd1awJ0Ngj+cqWdAUuLONkmImkEA==
+X-Received: by 2002:a62:d605:: with SMTP id r5-v6mr14400150pfg.8.1526759047656;
+	Sat, 19 May 2018 12:44:07 -0700 (PDT)
+Received: from hermes.local ([2601:646:877f:9499:a178:f00:e4c0:10c5])
+	by smtp.gmail.com with ESMTPSA id
+	o10-v6sm13632679pgp.30.2018.05.19.12.44.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 May 2018 12:44:06 -0700 (PDT)
+To: schnitzeltony@gmail.com,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <20180518214228.25819-1-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <fb3745f4-8a86-4e92-3790-b4a7ef5e4f4a@gmail.com>
+Date: Sat, 19 May 2018 12:44:05 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-Received: by 2002:a19:cb48:0:0:0:0:0 with HTTP; Sat, 19 May 2018 12:35:47
-	-0700 (PDT)
-In-Reply-To: <c7fbbf37e1ff4631a0aa3b45c07544a9@XBOX02.axis.com>
-References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-	<4f227bea-48ae-8126-8326-7b51b4bbc5d1@gmail.com>
-	<CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
-	<CAMKF1sraQqZvTL3imQecXjwx5xQpS6EiiBmKp8+B0cb9Y7KSmw@mail.gmail.com>
-	<CAJ86T=Xxw__E-+8Zf0PZnOAe1SeMB2ayMZZu-Gb=19ckh8=TtQ@mail.gmail.com>
-	<CAHUNapQ0Ywt2-xtp0==FozFhsPSnbBTEDReckkE1TVaxdtCn3g@mail.gmail.com>
-	<3f41b911-4fde-1ed1-76f7-650dab5dbb20@gmail.com>
-	<c7fbbf37e1ff4631a0aa3b45c07544a9@XBOX02.axis.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Sat, 19 May 2018 15:35:47 -0400
-Message-ID: <CAHUNapR44Bg55=N60PC1-qKKMjag4eVD7a_YoO3b-CDrJm5XOg@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 01/17] libwebsockets: rely on cmake.bbclass to put cmake package files in dev package
+In-Reply-To: <20180518214228.25819-1-schnitzeltony@gmail.com>
+Subject: [PATCH] evince: update 3.28.1 -> 3.28.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,26 +62,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 May 2018 19:35:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 19 May 2018 19:44:07 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Sat, May 19, 2018 at 7:59 AM, Peter Kjellerstedt <
-peter.kjellerstedt@axis.com> wrote:
+Hi Andreas
 
-> If you do, I think you should spin the patches for the clean ups as well.
-> At least I agree with (most) of them, and on a whole they definitely
-> improve the recipes.
->
-> And I also agree with Andre, that in general it is too much trouble to
-> generate clean up patches in their own, which is why it might be better
-> to allow some clean ups together with actual changes. Otherwise they will
-> not happen, which in the long run deteriorate the overall state of the
-> recipes.
->
+I am seeing an error building with clang
 
-I'm happy to slowly go through the recipes and make formatting changes.
-What is the accepted canonical order of variables and segments in a recipe
-file? Oh, and did we agree on tabs, or spaces?
+| ../../../evince-3.28.2/cut-n-paste/unarr/common/unarr.c:106:22: error: 
+format string is not a string literal [-Werror,-Wformat-nonliteral]
+|     vfprintf(stderr, msg, args);
+|                      ^~~
+| 1 error generated.
 
-/me ducks...
 
