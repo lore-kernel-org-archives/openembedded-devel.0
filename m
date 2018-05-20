@@ -1,50 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f44.google.com (mail-pg0-f44.google.com [74.125.83.44])
-	by mail.openembedded.org (Postfix) with ESMTP id E625A6010B
+Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
+	[209.85.160.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EB516010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 22:35:22 +0000 (UTC)
-Received: by mail-pg0-f44.google.com with SMTP id e21-v6so601567pgv.0
+	Sun, 20 May 2018 22:35:23 +0000 (UTC)
+Received: by mail-pl0-f46.google.com with SMTP id c19-v6so7624178pls.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 15:35:24 -0700 (PDT)
+	Sun, 20 May 2018 15:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IQZFQWnmVcDLcOIR//F8G86CjPuhCMf5EA94N4+zBFM=;
-	b=oj7Gsf0hbFjzUZo+a8k+MvmaF6V5AkgNY30Iupg9sHef7IYRNEnUBV3s47kFAtVK46
-	gB8K7Odl80hLZ/4mLrAZ6S6+F8TXSxscCDjP+QQFQDiJ4/Q48Jd28f8x2qWg6QYjHcOG
-	AV2YldiTArC9FyFvaK94+FfJksJqW7iAAvFqM1shAJ1v8HKxA+zjqGlskAQ+UF1AzKjY
-	9CXMkgYXGhkoYI56uFJ8uAVbSJPT5epbPwvurHBl+/spO88EIGHc8TEfZbpWzK07ABy2
-	rn1Wk5CxDxfyVEI9300bfEoQEDfyPDIzw0IKWby0NgUyl5M64OaOUQp8SnxkjhhXleLh
-	OOcA==
+	bh=sG9YYB8HerHudjrNLCaU/cyIGUh8OW4+kL48BDXqopc=;
+	b=hGhzVWsEBIxhQilRbtX5Xtx1pSHDuo9JMh67VwuWavYMv51l1CpueEMe2zdMF70eka
+	XBeRI4ZPxzJdFc+CtGdYH/21+Dd7fAGJHt1PYDuy3H5Y5IPCVjP8dwi04LJGInErkEa4
+	a9cQOWokZDBCe/NDpaS35uIYvAIFayqc/TXhYjfTq6/nSV0vW+K4v0hUMJM3K86W9PMg
+	1jSXusxe47IAQ04Ptu0yhxOce3TcPzc7R5HD9LvA+t6SxDEOPhkn/1k9y2Kht4RYsqoD
+	V0sZBtm/iih5xdiP3RAZ1IIoZMe+0kmk32lQm9/+0re6AEl4sYheVA/nWqFNOfH3zEjd
+	YSsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=IQZFQWnmVcDLcOIR//F8G86CjPuhCMf5EA94N4+zBFM=;
-	b=fd4kuVHrMeJ2QG4XNLriN2vVlByeVIyOywbt/Kr4oK4qFx9O+JR0rVp22SAEgp9yHy
-	bBbkNbOwxW3xj6GMOpePVrfs/ZThZ0WsnV7x5DsdhUxyec7LhJKfNUpjH4x5xiPsDD4L
-	/+32Zq3kkWtOFFnbrDGQBlYzfGSUvAYQrW5p+7PXPEvsC7AAk0lxKvI5r9+gEpODM6/K
-	4ZBCmraKvYDdvyB4uuH9BHPir/FQt06fm60GQj1UafXDCXcgzlEdJtptedkRLjkpoQC0
-	qbcw+6xxbl3UBp/aLcZsXOiceWIfTlaP2dvUkpOxqDxEcaHAKSCQRq1dBTEIzY+RFDl4
-	lt3w==
-X-Gm-Message-State: ALKqPwd17HlTwW728rJidzGJfo3voDXvfcVs4ZyeIPPLHZtlaC/CTdxg
-	C4fSNVXZXPTkPBe3X37JpVbVig==
-X-Google-Smtp-Source: AB8JxZpSvfJicW+KAGkZRJClLJxrz1ihDWUdx4rhNEnpU8DEvDf3ClGlMjUfQo9Vfn8dlK3tj4bzRQ==
-X-Received: by 2002:a62:4a50:: with SMTP id
-	x77-v6mr17734803pfa.142.1526855723469; 
-	Sun, 20 May 2018 15:35:23 -0700 (PDT)
+	bh=sG9YYB8HerHudjrNLCaU/cyIGUh8OW4+kL48BDXqopc=;
+	b=WtIIdwjrlEVq7ZpI5g5wxiUdK16/jtuSUPh8p6TlUvSQP5eGVsRJPC9WVMnWsS6uaM
+	C3b8iuCcdbGY0zYwAwylXQgbFiz/7orExTeRkBBZqklBc3zdZ9oTWfCdLm/fK1OYJtnQ
+	KgPrb5X0ynL/NeGHzxTMi+0rsjk8caU/3BIryWBuKohOpGlxwVAeprovqLFVTNQfxohF
+	t75o7oY6kpsvelSpM/mQLe3jkPkOp3GcP1dMy55/IlLWgjdzLkdQl3GqSEH3rHlnFv+G
+	vaRibCSu1w297nNsk+tEjmB8JlGcvOVpzlBybGopLPL755qacHUQS/v1fhdGhQBHU3Gv
+	9EFA==
+X-Gm-Message-State: ALKqPwdC2GXr9z47Z8e0/fy7syBQ2cS35FvXt2VnPkk70BZx8ao6Sxvi
+	Urbcz4RJzF65FXJeyRzSIdFXqw==
+X-Google-Smtp-Source: AB8JxZqrQntikXWgcvJw+3RR05MnmaU/9cQEtWkk5XbJHPPKrlXEnLbMzeilKl8J9GqMrtbOvLnaiQ==
+X-Received: by 2002:a17:902:b60c:: with SMTP id
+	b12-v6mr18614110pls.44.1526855724785; 
+	Sun, 20 May 2018 15:35:24 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	203-v6sm21887763pfz.131.2018.05.20.15.35.22
+	203-v6sm21887763pfz.131.2018.05.20.15.35.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 May 2018 15:35:22 -0700 (PDT)
+	Sun, 20 May 2018 15:35:23 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2018 15:35:16 -0700
-Message-Id: <20180520223517.9869-5-raj.khem@gmail.com>
+Date: Sun, 20 May 2018 15:35:17 -0700
+Message-Id: <20180520223517.9869-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180520223517.9869-1-raj.khem@gmail.com>
 References: <20180520223517.9869-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 5/6] nano: Upgrade 2.9.3 -> 2.9.7
+Subject: [meta-oe][PATCH 6/6] mariadb: Upgrade to 5.5.60
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,42 +58,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2018 22:35:23 -0000
-
-Fix build with musl
+X-List-Received-Date: Sun, 20 May 2018 22:35:24 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/nano/nano_2.9.3.bb | 4 ----
- meta-oe/recipes-support/nano/nano_2.9.7.bb | 8 ++++++++
- 2 files changed, 8 insertions(+), 4 deletions(-)
- delete mode 100644 meta-oe/recipes-support/nano/nano_2.9.3.bb
- create mode 100644 meta-oe/recipes-support/nano/nano_2.9.7.bb
+ .../{mariadb-native_5.5.59.bb => mariadb-native_5.5.60.bb}   | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                        | 5 ++---
+ .../mysql/{mariadb_5.5.59.bb => mariadb_5.5.60.bb}           | 0
+ 3 files changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.59.bb => mariadb-native_5.5.60.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.59.bb => mariadb_5.5.60.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/nano/nano_2.9.3.bb b/meta-oe/recipes-support/nano/nano_2.9.3.bb
-deleted file mode 100644
-index afb0cf2e73..0000000000
---- a/meta-oe/recipes-support/nano/nano_2.9.3.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--include nano.inc
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.59.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.60.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_5.5.59.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.60.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 99e7050945..8e0e252421 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -18,9 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+            file://change-cc-to-cc-version.patch \
+            file://0001-disable-ucontext-on-musl.patch \
+           "
 -
--SRC_URI[md5sum] = "6dd37f010d6a985bf0e5f8ed091ff919"
--SRC_URI[sha256sum] = "7783bcfd4b2d5dc0bf64d4bd07b1a19e7ba3c91da881a4249772a36b972d4012"
-diff --git a/meta-oe/recipes-support/nano/nano_2.9.7.bb b/meta-oe/recipes-support/nano/nano_2.9.7.bb
-new file mode 100644
-index 0000000000..419e5406ba
---- /dev/null
-+++ b/meta-oe/recipes-support/nano/nano_2.9.7.bb
-@@ -0,0 +1,8 @@
-+include nano.inc
-+
-+do_install_append_libc-musl () {
-+	rm -rf ${D}${libdir}/charset.alias
-+	rmdir ${D}${libdir}
-+}
-+SRC_URI[md5sum] = "e0c6d76c93932f6c41c40842952495f7"
-+SRC_URI[sha256sum] = "b64ab017305b1777e97b5b9b07b31db8aeebfc3e8719f61e8da1cf3866d344bd"
+-SRC_URI[md5sum] = "3cec4afc06b468687ef576c90148d10d"
+-SRC_URI[sha256sum] = "c3269ce20b45b177239fd1e3d6d9428a94131711f12758ebf5f65222278bb110"
++SRC_URI[md5sum] = "afbadcf2980ad5aa205084dd401f1b7f"
++SRC_URI[sha256sum] = "4d3d444555416028ce39d3fb4cdc9cf6a658fcd4b0d2d0c45a73f9bf01d07929"
+ 
+ S = "${WORKDIR}/mariadb-${PV}"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_5.5.59.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.60.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_5.5.59.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.60.bb
 -- 
 2.17.0
 
