@@ -1,37 +1,53 @@
-Return-Path: <clopez@igalia.com>
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id A672C74856
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
+	[209.85.160.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C89FF745D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 19:02:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; 
-	h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject;
-	bh=gkDUzlSw5UrjUcr+nUbLw04A/U0eSylipDYvrcbqrC0=; 
-	b=KF0CSIgxgJn6A4Up37xV1By3yWz34p1JZjngVlVyTy38SXA6hX0ce+ebTxsidsnW6DRJ/orLIbmqDhTxUGf+5KU5z8IItkhj5zIzdfoPC/VfY0X9Vee0urkTdtVcM95y8naiWez0keG0vTik89C4B2XXq5PEAi+/Vgyy/vZa/mEy+tcfPyao+bJs2QALgQaBUK1yi9GeKtwKCJjnFjupp921ovxLULIvC86FvUh3CgmJByJs3+CrW1jV/HnJUtY08Z+nAYKjvDzMMTHmIAu8qDLxogaBjJ14o/e/XKivmKMfoyUFc9qam3euUUO4ZVOP1298RnQjMeIih0bskHj7iw==;
-Received: from 1.14.117.91.dynamic.reverse-mundo-r.com ([91.117.14.1]
-	helo=[192.168.0.23]) by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1fKTbE-0006XH-KN for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 21:02:32 +0200
+	Sun, 20 May 2018 21:24:18 +0000 (UTC)
+Received: by mail-pl0-f65.google.com with SMTP id u6-v6so7565394pls.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 May 2018 14:24:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=DH/GpaAQmbaBMy9/CvGfJj5yT+RwO5nSxtVnQgJY3Gs=;
+	b=gL+AN1ONajBaQ0YTGdK6cPsm/xkhJ+GK0gJacjgnndyOrwE/sBARIlsw/WmGTKtTg9
+	NIghOqbzNVtlud5fXARElGrJ+ojv0Mpzm7fokhZxWmGdmKC/b0vLOnuRezS50Sx5pkZz
+	N7WuTjqmbcctkYt8KCFWwnbN2hh1poHxBOK64/DdfGKaDITHN0I9gj8x0h2k6jC+rqlR
+	HaFpIAbRSWLV7VpQiJD0KT9GzsnqZM2q186rVGPi9eUxBHWbPFPnUeZC1ZMQOZG2ENeC
+	4tqpSuqBtGLtkfT0+/ckxKSWdqQx2ZOYkA3SVsXL8dOR+7kembBTUaF78nvIqV9HZG9X
+	Dwww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=DH/GpaAQmbaBMy9/CvGfJj5yT+RwO5nSxtVnQgJY3Gs=;
+	b=qOJjDB8Vt9QMvi7hGNsP6uMazUKGXKVUfPEahf+4VNQAZYIa6qWN9+6KfHURPV0zQE
+	clcc3FrTuPgJ0L9fSTRF5pHMAbH3sida+zFt4zIQZuuhf8GLLYfBYb1mqQKdWAGcwWY8
+	Zzzr3QWdUXaWDkC50ebQm4Y2Vt+LeaXwnQkmHVVzQB+l2n+bxuYRi10h3sm1kjhrWf6l
+	Any2xJAnDDUPjlELPnadTJTclI8tbrKkp8SQx374Cu3DYHmWBj0Ktg3kLBsUpqahkpcL
+	eY3Yxc8tFhQksjzOju7L9mMC1Yu+aB16HvktNS33gQJWovMqxGZ+p49mHHB4YZ+kkAqs
+	5+zQ==
+X-Gm-Message-State: ALKqPwdLo94PUC+2nXPGMUupjMaGzbk2CQtUc8zCuYA2Hzi8yXPc8xaE
+	dEEf16xJhphYU5Ltb+pMRjzfJw==
+X-Google-Smtp-Source: AB8JxZo3Lj9Zv2//Yr+U2+ptCo+0awOtNRqSQxGCPhFrP95ABZQMWmR/0LChcW/zh5Jiyy5vYaAtug==
+X-Received: by 2002:a17:902:b68f:: with SMTP id
+	c15-v6mr17857520pls.201.1526851459540; 
+	Sun, 20 May 2018 14:24:19 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4000:1184:292e:9ff2:c3a4:d8d5])
+	by smtp.gmail.com with ESMTPSA id
+	s2-v6sm21711754pfb.127.2018.05.20.14.24.18
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 20 May 2018 14:24:19 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20180512030758.31409-1-raj.khem@gmail.com>
-	<20180512030758.31409-5-raj.khem@gmail.com>
-	<8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
-	<b55b0545-7867-a168-a853-903313da12de@gmail.com>
-	<5e41dd1d-0a05-39a4-888c-948be3cc8714@igalia.com>
-	<CAJ86T=VXbwsL=2gUqin0-2jdBB1tbbxgwP7+76AToZdO16Jtiw@mail.gmail.com>
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
-Openpgp: id=B5D2B50BC48EC7F1EE90D9AB965089CE6B95F882;
-	url=http://key.neutrino.es
-Organization: Igalia S.L.
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-Message-ID: <2d676743-0f4f-a079-96b0-c352546ed892@igalia.com>
-Date: Sun, 20 May 2018 21:02:22 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
-MIME-Version: 1.0
-In-Reply-To: <CAJ86T=VXbwsL=2gUqin0-2jdBB1tbbxgwP7+76AToZdO16Jtiw@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when compiling host binaries
+Date: Sun, 20 May 2018 14:24:16 -0700
+Message-Id: <1526851456-17624-2-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1526851456-17624-1-git-send-email-akuster808@gmail.com>
+References: <1526851456-17624-1-git-send-email-akuster808@gmail.com>
+Subject: [meta-oe][PATCH 2/2] boinc: refresh patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,125 +60,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2018 19:02:34 -0000
-X-Groupsio-MsgNum: 72281
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature";
-	boundary="OVd3vbu1HE742Jz3m0LMoW5PLu7NpgP1e"
+X-List-Received-Date: Sun, 20 May 2018 21:24:18 -0000
 
---OVd3vbu1HE742Jz3m0LMoW5PLu7NpgP1e
-Content-Type: multipart/mixed; boundary="GBPmDgXrvxk7uYCMyuUurTCUC5WBLkwaW";
- protected-headers="v1"
-From: Carlos Alberto Lopez Perez <clopez@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <2d676743-0f4f-a079-96b0-c352546ed892@igalia.com>
-Subject: Re: [oe] [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when
- compiling host binaries
-References: <20180512030758.31409-1-raj.khem@gmail.com>
- <20180512030758.31409-5-raj.khem@gmail.com>
- <8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
- <b55b0545-7867-a168-a853-903313da12de@gmail.com>
- <5e41dd1d-0a05-39a4-888c-948be3cc8714@igalia.com>
- <CAJ86T=VXbwsL=2gUqin0-2jdBB1tbbxgwP7+76AToZdO16Jtiw@mail.gmail.com>
-In-Reply-To: <CAJ86T=VXbwsL=2gUqin0-2jdBB1tbbxgwP7+76AToZdO16Jtiw@mail.gmail.com>
+used quilt refresh patch
 
---GBPmDgXrvxk7uYCMyuUurTCUC5WBLkwaW
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../boinc/boinc-client/boinc-AM_CONDITIONAL.patch            | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-On 18/05/18 20:46, Andre McCurdy wrote:
-> On Fri, May 18, 2018 at 6:27 AM, Carlos Alberto Lopez Perez
-> <clopez@igalia.com> wrote:
->> On 18/05/18 06:44, Khem Raj wrote:
->>>> I suggest adding something like this:
->>>>
->>>> EXTRA_OEMAKE_remove_class-target =3D "'HOST_LDFLAGS=3D${BUILD_LDFLAG=
-S}'"
->>>>
->=20
-> This idea looks right, but be aware that ${BUILD_LDFLAGS} will be
-> expanded before being processed by _remove. Therefore any individual
-> string within ${BUILD_LDFLAGS} will be removed from the final value of
-> EXTRA_OEMAKE, even if it occurs somewhere other than in the value of
-> HOST_LDFLAGS. For example:
->=20
->   BUILD_CFLAGS =3D "one two three"
->   BUILD_LDFLAGS =3D "one two three"
->=20
->   FOO =3D " \
->     'HOST_CFLAGS=3D${BUILD_CFLAGS}' \
->     'HOST_LDFLAGS=3D${BUILD_LDFLAGS}' \
->   "
->=20
->   FOO_remove_class-target =3D "'HOST_LDFLAGS=3D${BUILD_LDFLAGS}'"
->=20
->   $ bitbake recipe -e | grep ^FOO=3D
->=20
->   FOO=3D"'HOST_CFLAGS=3Done three'"
->=20
-> Notice how "two" has been removed from the final value of HOST_CFLAGS
-> set within FOO.
->=20
-
-Interesting.. didn't knew this.
-
-Is there any way to tell _remove to only remove a string if it matches
-as a whole instead of removing the individual words separated by spaces?
-I tried escaping the quotes but didn't worked :?
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
+index 7becb94..ab8042f 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
++++ b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
+@@ -3,17 +3,19 @@ Add configure check for gtk2+ and objc++
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ Upstream-Status: Pending
+ 
+---- A/configure.ac
+-+++ B/configure.ac
+-@@ -39,6 +39,7 @@ AC_PROG_CC
+- AC_PROG_CXX
++Index: boinc-client_release-7.6-7.6.33/configure.ac
++===================================================================
++--- boinc-client_release-7.6-7.6.33.orig/configure.ac
+++++ boinc-client_release-7.6-7.6.33/configure.ac
++@@ -64,6 +64,7 @@ m4_ifdef([AC_PROG_OBJCXX],[AC_PROG_OBJCX
++ dnl ------
+  AC_PROG_F77
+  AC_PROG_CPP
+ +AC_PROG_OBJCXX
+  AC_PROG_MAKE_SET
+  SAH_LINKS
+  AC_LANG_PUSH(C)
+-@@ -744,6 +745,8 @@ AM_CONDITIONAL(ENABLE_LIBRARIES, [test "
++@@ -1081,6 +1082,8 @@ AM_CONDITIONAL(ENABLE_BOINCCRYPT, [test
+  AM_CONDITIONAL(INSTALL_HEADERS, [test "${enable_install_headers}" = yes])
+  AM_CONDITIONAL(HAVE_CUDA_LIB, [test "${enable_client}" = yes -a -f ./coprocs/CUDA/posix/${boinc_platform}/libcudart.so])
+  
+-- 
+2.7.4
 
 
-> In this case, if you want to have a HOST_LDFLAGS=3D'...' only for nativ=
-e
-> builds, it's better to use _append_class-native as required.
->=20
-> In general, it's usually a bug (or at least bad form) to use _remove
-> in a recipe. It's usually reserved for custom changes in a .bbappend
-> etc.
->=20
-
-Indeed. And it seems this is what caused the issue with the native class
-for me.
-
-Just removing the 'HOST_LDFLAGS=3D${BUILD_LDFLAGS}' entry directly in the=
-
-luajit recipe (without a bbappend) like the original patch from Khem Raj
-proposed works fine.
-
-I just checked that doing that way I can't reproduce the breakage of the
-native class. So please commit this original patch from Khem Raj.
-It is the right fix.
-
-Thanks
-
-
-
-
-
-
---GBPmDgXrvxk7uYCMyuUurTCUC5WBLkwaW--
-
---OVd3vbu1HE742Jz3m0LMoW5PLu7NpgP1e
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: You can fetch my GnuPG key from http://key.neutrino.es
-
-iQIzBAEBCgAdFiEEtdK1C8SOx/HukNmrllCJzmuV+IIFAlsBxj4ACgkQllCJzmuV
-+IJR9A/+O0wIyYhV6NTbK8qK/Fkr6MJXNfTb+eNetHUiAWVpwjJDcQcVmLl+tZo2
-tAOGr/+M6Tb7DwkM/BUFu/VLtdVokBzSVL9TlT0UgRJJnlmdSZIPyZGberxwQeNP
-ad3wOoJvunEEnaadwwsJNpV4ad4WCJEuwJsb5A2Gau7eOE27keKeE7Yt+7qJe1bG
-EbV6yWzSXMRtRf2mbDEka/UCkxCzEDSbCkE3S0VUXG6wua5xkOUBuyZf7Vo8IsBA
-4Fal8jo8aXwCLqf23SZub5fW9v1BSa7e3lh/GiMzYLZJ0yKPZdrpkcVAimJ7RRoZ
-h3471aIV9X900u2P0n53hpAM9qgA+6ULFmjg9QMMoIyJ979zesmcPqIpaA1GD+XL
-mu/oTJAIEBT4Dye51b+ppTSjFG4xB5M39Esc4Hi2VupQkbmd4RUTiyD7TsnwW3PQ
-uS2KvuGbe5fgZttynTQLEBteWFGgesOwMgg3uKBf6k72rSrMjnOtnjvp0SFsgv2K
-FhL1CAMQw5ORTTLQ7KVoJiGMVNIDS87OYsRwD3Bh6shUeWqLL8z/ImokwPkQS4c3
-VGTnla6hiSJiyX+sOQn+fuHVxW3AmHOKEn3nzLvs8PPtn+3SVYLHYYSFBJakzW6x
-hKlCC8eNZ/dm5z3KpFpGR/VhoWK5O9qkAnufAyIhHzSn0fH//48=
-=qN8j
------END PGP SIGNATURE-----
-
---OVd3vbu1HE742Jz3m0LMoW5PLu7NpgP1e--
