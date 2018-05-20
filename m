@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id DBC7774CB9
+Received: from mail-pl0-f43.google.com (mail-pl0-f43.google.com
+	[209.85.160.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B74FE747E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 22:27:57 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id p14-v6so6119703pfh.9
+	Sun, 20 May 2018 22:35:17 +0000 (UTC)
+Received: by mail-pl0-f43.google.com with SMTP id w19-v6so7626200plq.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 15:27:58 -0700 (PDT)
+	Sun, 20 May 2018 15:35:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ozrL1WV4+LxWza6bC8zzXk6nHhJCpLLEnkx7PGRlqyk=;
-	b=bJQqNsVIOYo0yyqTuWD1AHb99bz+/ArQ+7jNAUYhqHrQNUpk/k5w5dtmn3dHAPqi/V
-	JmTLvVl0rB/t+FwudnqUh9SJnUWN8Iugn/Wps7Q7DqVBMaEPQ6RgIkdUsAA1mfTcqmbt
-	JIZIUjqERpo73kMsnxt8ne4wLloE8JYO2HFB2veh9g5ZgkB3dpATbwJSktye/ytcKm4w
-	PqaqBXMfUwGP2R9LianbECWkBMgOlgYF5wq0d7ihsSsw637dPHIM3k1FHEnaQVEPOwNH
-	QzP0Uk2g+9pSFWRblGxvBQCZXDwHYJXSfFXjo8elPajZ6RI/6TQ/dxlcc66OzUVFnvv1
-	7+Qw==
+	h=from:to:cc:subject:date:message-id;
+	bh=5cz1M1D+HVne1M8wlQgQmuLIvD8MMaWES49iSDycPTI=;
+	b=Fk76wZkR45w0p97AZXyOA9lBeb9sA8rfYN3PeTytf+qk7ntvC6vvLoW4jffYeGut2B
+	+o0g+SGuiVYQGFzc3bs/AOmDx4Gjo2o/GNaBOFur43dymgr6O3huxAfCZ4f+uyBrZSHv
+	3xJS3RlMfADpz0VkRoY3IEms4OQyZKI/mK605UqIfUb2ni4dO0PWsuZf+oUbUMNLu4dF
+	SAqWOsNLO6h+y5MMiqGt5jjkbyetsb//CNFP4bJO2v3ULc3Gr7HP5KGa+vKACkZsXi4G
+	eryOJVH5SmQeVHtHvP7mwV80i0d8CV4OSB6LyjoxHtfFhSh/7xYdyv03jLS+z/JptDNd
+	yMkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ozrL1WV4+LxWza6bC8zzXk6nHhJCpLLEnkx7PGRlqyk=;
-	b=L48ab273g4d9rKbQoe1iQ2VJZazANo9KK5aYgDBXmJCnijUDCodLtowfIRRNqIbjwz
-	wVIcFemBkKBDi+Gl1Qcul3n2D9iVINlI0qZ+OqQqTMJFOqQEkVZhVhz5WmuWAzLnKlA5
-	52KaQfLds8RJ022L/6KoBw6nVK1GH3fT3pth5fudwtt+o4PJz2+lS0HF8jVaNjDvO9Us
-	+hu17S/nhepftQRJ+htxvZFoXzWKj8FNKvnVhL3czeJHQiVzOFAFcdcKdiONkAbQmV5U
-	xGVrgHk6Ue/Wv1/3UR0XW/svDQzC9KjDY8jo4qmQ4ALe7Q2eJ7lSSJCjfi847bjr8fPV
-	si8A==
-X-Gm-Message-State: ALKqPwdg4v+g8i6phzKlwZVjHoGM1oQ597g+sGKAniD3C839AySNQvQ6
-	6mQ+/RyLZgi36DRS5MvFMyDrqXXjXXzcXZfhzyc=
-X-Google-Smtp-Source: AB8JxZoB/w6YH8JOAg3i59ti/9RNbWMlICs/0sZnSqOnhv/TMwf2+HW1AYAAtNpA9AOV9i2xLtyjaQsmVWZbwxMkQ5c=
-X-Received: by 2002:a62:5b02:: with SMTP id
-	p2-v6mr17580359pfb.96.1526855278526; 
-	Sun, 20 May 2018 15:27:58 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Sun, 20 May 2018 15:27:28
-	-0700 (PDT)
-In-Reply-To: <20180520024130.11222-1-twoerner@gmail.com>
-References: <20180520024130.11222-1-twoerner@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5cz1M1D+HVne1M8wlQgQmuLIvD8MMaWES49iSDycPTI=;
+	b=hRKUF/duJLDv1uR9Dlm/KX1fZr23D8jSLnhvNGR15wmtTPcRPp1SvX0oeKI8uDXSiw
+	tUwFp9Q2dLbQRpSnWp3Flebep+Y1E2mYSqFJd100DBeRB8ruuoqqVmSHd58A6ssVZ3RL
+	VZ2AXaXziwCue7QGZXOw9rDqf+kkHvsg8EqN7lW6ZiwzT/wDSHLk2HiDUZJTirtkODN8
+	dJ7F4ESQ7ywiIl6/OaGmq3KHxNrMXxvDfztKWk9UoRkoN1gVNg7J2EC1Z+2ebgdecTuT
+	futnJ0Ka87yBYQD3Rk4s9LFhwW3zJUXW/Gp2yk2ujjVJgNZRaYTBXmsRfYReJZpxX+Ex
+	OLPA==
+X-Gm-Message-State: ALKqPwfbTXkk1rL0eiP4nanEOX8FbXudasix+PBs4Nc8A+vR1LuwL+Zh
+	ZxFtitg3JDwQ2kJhv/XNAtlvUg==
+X-Google-Smtp-Source: AB8JxZqv7HPC6Lso0oVNN/7oFVJWA/k7/rW4CpmNaGnpJQbotuzJi3ENU9BUEW84yPmTHJJM0OgT2g==
+X-Received: by 2002:a17:902:8a81:: with SMTP id
+	p1-v6mr18447351plo.33.1526855718304; 
+	Sun, 20 May 2018 15:35:18 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	by smtp.gmail.com with ESMTPSA id
+	203-v6sm21887763pfz.131.2018.05.20.15.35.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 20 May 2018 15:35:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 20 May 2018 15:27:28 -0700
-Message-ID: <CAMKF1srEN6W4xNtmLevLG6hzpdJ60AnvEP31e+y3LBh8j0+UXQ@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][master-next][PATCH] rely on cmake.bbclass to put cmake package files in dev package
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 20 May 2018 15:35:12 -0700
+Message-Id: <20180520223517.9869-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-gnome][PATCH 1/6] network-manager-applet: Package gir-1.0 files into devel package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,24 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2018 22:27:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 20 May 2018 22:35:17 -0000
 
-Hi Trevor
+Fixes QA errors e.g.
 
-On Sat, May 19, 2018 at 7:41 PM, Trevor Woerner <twoerner@gmail.com> wrote:
+ERROR: network-manager-applet-1.8.10-r0 do_package: QA Issue: network-manager-applet: Files/directories were installed but not shipped in any package:
+  /usr/share/gir-1.0
 
-> --- a/meta-oe/recipes-support/fftw/fftw_3.3.7.bb
-> +++ b/meta-oe/recipes-support/fftw/fftw_3.3.7.bb
-> @@ -74,7 +74,6 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
->  FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
->  FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
->
-> -FILES_${PN}-dev += "${libdir}/cmake"
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../network-manager-applet/network-manager-applet_1.8.10.bb   | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-fftw can be built using both autotools and cmake, for OE we use autotools
-therefore it does not inherit cmake, so please reinstate this change
-in next version of patch.
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
+index dc2b964be5..ccfe38d010 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
+@@ -43,3 +43,7 @@ FILES_${PN} += " \
+     ${datadir}/libnm-gtk/wifi.ui \
+     ${datadir}/libnma/wifi.ui \
+ "
++
++FILES_${PN}-dev += " \
++    ${datadir}/gir-1.0 \
++"
+-- 
+2.17.0
 
->  RDEPENDS_${PN}-dev = "libfftw libfftwl libfftwf"
 
