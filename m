@@ -1,50 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f52.google.com (mail-pg0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 4115674D49
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DD5C6025E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 22:35:18 +0000 (UTC)
-Received: by mail-pg0-f52.google.com with SMTP id p9-v6so5500564pgc.9
+	Sun, 20 May 2018 22:35:19 +0000 (UTC)
+Received: by mail-pf0-f177.google.com with SMTP id e9-v6so6136063pfi.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 15:35:20 -0700 (PDT)
+	Sun, 20 May 2018 15:35:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=WYltArjLyoGFiZD/t8oLFtpWGSzjQ9R86qe3q8S9zj8=;
-	b=uN3rO7+xVutSzK2AYYDy9wdaUUFNIiu9kNn+Aa3t06sAMtTTYrY1eMJswYE1wPPSdz
-	DQFW5ZgflI/AeDSKVn7GPCKrB+8yMeg1hCe1QfeYu4w1VhxcmpjcFKgt1AT5RtaPJUsd
-	7Xzs3WAQBoGc+7ifJ4F5OVyoAGqF/+MAMNBY6r0A+qx3Dafc7jZ+Btg4Yx3Lw9z/b+rt
-	66GmdrB6suIcyMNPE37iWaptbOYcfgAN3bLVPNrA6J+OlGZu8I05Nx5F3z0Y5QsQYv3R
-	aCnlASWT9Lp/9viEl5NpxJgJ6F1DOClxTlSOMDasKSuwjnhPDffcU/rcETXxLYIWQCPA
-	5rGw==
+	bh=+sh595q2pHy5ZYnP5OEIDd0tz+ddeuXT5CZnUORz92c=;
+	b=egFtAzEm5sXUw5Eim45wPgXIviZ3P/Fj2N51X/YRrWhYM9MUYLe+rAIEj/ld1mFkRS
+	HJ60uoqQ95ibza8ZKpTCB4bJdGOMNP07E6pQmYJCgWF/Hdjflwd3cgjqJqzEaVKflD5j
+	HjhWCHTgORX0elBX9cevrXVZK7k4fNXFZIclSD3ApuYrm7AsrFKNJbCKvLnNPSkSu4VL
+	jTi/g9RWsV3HvpDXbxkJ9ik7BYnbbRWDK6ZYDQZfGMMq8EPdYFK7slGT32+ldHqWVIOp
+	zyRc+vKl1kEr3/TozUAPJfHyj418Csq3MzOek9ABqRkyb6N8ubO1K4YnBituaZ2Ydnb8
+	ebng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=WYltArjLyoGFiZD/t8oLFtpWGSzjQ9R86qe3q8S9zj8=;
-	b=H6ALXe4Qk5sCVJxkCvBkYLj4KYvzYbWKgsKB4VA6f1QL9cTNv+5B7QG9ptS3DIz04r
-	Gz0qP3Lxp8GzVW+K4GuO2/oUxZK//tJt8WgW/0jKpJMl4zPUZkhyzqLP9hHTENrwp8C0
-	Xv3y3B4+7f03Y+edtNXX8j1VPS9Fu7MtUVOd67FTOSMWf/05Y+fqLP7lXVRBlPBSEM9I
-	1Qxch6pHegDV9SSTh4lpw9VNJKm1GFhvbrBP675F9QVdM9WWH6RRdBMjTvk23iAFOL7G
-	kwygGZ1LOIt9W/pSWrm6kLwh4uBS8Tph0mwAIcfFNMyxKKEkNPumU60b1FR3h4m9iwWe
-	NL4A==
-X-Gm-Message-State: ALKqPwcKImLw0KHpFLElkV/FkaNeRtByaWLHJXFqHNtVOPSJ1jPRVjr3
-	JpbcJGWoiXhV+JOyD9UxJ8sg5g==
-X-Google-Smtp-Source: AB8JxZroDfj4PzAHzpzaB2Ehq/Q8L7efW9OPBYPsCrF7cku2vGM8e07d067wIiQy00eOsWJ7jybzKQ==
-X-Received: by 2002:a62:5050:: with SMTP id
-	e77-v6mr17934541pfb.16.1526855719637; 
-	Sun, 20 May 2018 15:35:19 -0700 (PDT)
+	bh=+sh595q2pHy5ZYnP5OEIDd0tz+ddeuXT5CZnUORz92c=;
+	b=U42cg2FgsGI7DGjEXXJYZK2Cll37Kek+WA0EAs28V0IF/MlxM/kT5RNIQPrhbS+Hhn
+	Y9taCJJO4ZUcR3E8nK3OURvc3hU3ruaTYdjAi5LjxG75JxIgKu88lQ1VnYfFe/RBGrGr
+	hOcCi6e/ZJHuL5k+2TgA//3Z/eZauMwWYmwGdL/V0UhWJrjfJF+fK4rmr96N6EiWEDEA
+	5VEHrwPNOHWXhZKLriGWOxMZzGvSW6LF4VHA4ZnrfC+G1LU4B2F3Y/w895o7wlZu+CYt
+	NOnwcAZqAf2r28vz5TNA9lN52GQByICyYGK+DinbbepX6ETdOVeU3KKQbMU2mifZhmck
+	MgoA==
+X-Gm-Message-State: ALKqPwcj6l3bAaiDsV4UvuZJ46bvo8orVok/+MT3qrHX1ry59NllwHL+
+	JZg9j7j7Sc4EKWY7Nh5UqodPxw==
+X-Google-Smtp-Source: AB8JxZp2C2BGpGEhC2qFyElyiibxRxwf/K7Bq9FRhQeOcl6udXDT7mrQJemHiy4AkRJ/vBqT6lRBfQ==
+X-Received: by 2002:a62:d352:: with SMTP id
+	q79-v6mr17957414pfg.45.1526855720910; 
+	Sun, 20 May 2018 15:35:20 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	203-v6sm21887763pfz.131.2018.05.20.15.35.18
+	203-v6sm21887763pfz.131.2018.05.20.15.35.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 May 2018 15:35:18 -0700 (PDT)
+	Sun, 20 May 2018 15:35:19 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2018 15:35:13 -0700
-Message-Id: <20180520223517.9869-2-raj.khem@gmail.com>
+Date: Sun, 20 May 2018 15:35:14 -0700
+Message-Id: <20180520223517.9869-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20180520223517.9869-1-raj.khem@gmail.com>
 References: <20180520223517.9869-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/6] xf86-video-nouveau: Remove obsolete deps
+Subject: [meta-oe][PATCH 3/6] poppler: Fix build on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,30 +58,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2018 22:35:19 -0000
-
-All protos are now in xorgproto
+X-List-Received-Date: Sun, 20 May 2018 22:35:20 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.15.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../poppler/poppler/basename-include.patch    | 20 +++++++++++++++++++
+ .../recipes-support/poppler/poppler_0.64.0.bb |  1 +
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/basename-include.patch
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.15.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.15.bb
-index 2746821cd2..2b1b87c4d0 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.15.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.15.bb
-@@ -6,8 +6,8 @@ SUMMARY = "X.Org X server -- nouveau video driver"
- 
- DESCRIPTION = "Open-source X.org graphics driver for NVIDIA graphics"
- 
--DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
--            virtual/libgl xineramaproto libpciaccess"
-+DEPENDS += "virtual/libx11 libxvmc drm xorgproto \
-+            virtual/libgl libpciaccess"
- RDEPENDS_${PN} += "xserver-xorg-module-exa"
- 
- inherit distro_features_check
+diff --git a/meta-oe/recipes-support/poppler/poppler/basename-include.patch b/meta-oe/recipes-support/poppler/poppler/basename-include.patch
+new file mode 100644
+index 0000000000..528528ae7c
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/basename-include.patch
+@@ -0,0 +1,20 @@
++Minic GNU basename() API for non-glibc library e.g. musl
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: poppler-0.64.0/utils/pdfsig.cc
++===================================================================
++--- poppler-0.64.0.orig/utils/pdfsig.cc
+++++ poppler-0.64.0/utils/pdfsig.cc
++@@ -35,6 +35,10 @@
++ #include "Win32Console.h"
++ #include "numberofcharacters.h"
++ 
+++#if !defined(__GLIBC__)
+++#define basename(src) (strrchr(src,'/') ? strrchr(src,'/')+1 : src)
+++#endif
+++
++ static const char * getReadableSigState(SignatureValidationStatus sig_vs)
++ {
++   switch(sig_vs) {
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.64.0.bb b/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
+index 1e87ae6e6c..b90f3fa359 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.64.0.bb
+@@ -6,6 +6,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
+            file://0001-Do-not-overwrite-all-our-build-flags.patch \
+            file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
+            file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
++           file://basename-include.patch \
+            "
+ SRC_URI[md5sum] = "f7f687ebb60004f8ad61994575018044"
+ SRC_URI[sha256sum] = "b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1"
 -- 
 2.17.0
 
