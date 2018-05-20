@@ -1,51 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
-	[209.85.160.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EB516010B
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
+	[209.85.218.41])
+	by mail.openembedded.org (Postfix) with ESMTP id D21AE74DCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 22:35:23 +0000 (UTC)
-Received: by mail-pl0-f46.google.com with SMTP id c19-v6so7624178pls.6
+	Sun, 20 May 2018 22:46:21 +0000 (UTC)
+Received: by mail-oi0-f41.google.com with SMTP id p62-v6so11482733oie.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 15:35:25 -0700 (PDT)
+	Sun, 20 May 2018 15:46:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=sG9YYB8HerHudjrNLCaU/cyIGUh8OW4+kL48BDXqopc=;
-	b=hGhzVWsEBIxhQilRbtX5Xtx1pSHDuo9JMh67VwuWavYMv51l1CpueEMe2zdMF70eka
-	XBeRI4ZPxzJdFc+CtGdYH/21+Dd7fAGJHt1PYDuy3H5Y5IPCVjP8dwi04LJGInErkEa4
-	a9cQOWokZDBCe/NDpaS35uIYvAIFayqc/TXhYjfTq6/nSV0vW+K4v0hUMJM3K86W9PMg
-	1jSXusxe47IAQ04Ptu0yhxOce3TcPzc7R5HD9LvA+t6SxDEOPhkn/1k9y2Kht4RYsqoD
-	V0sZBtm/iih5xdiP3RAZ1IIoZMe+0kmk32lQm9/+0re6AEl4sYheVA/nWqFNOfH3zEjd
-	YSsA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ZQFwHRrsCb9YRtlGfM57fiHzJJzKlw9sXRP8/7ei+fU=;
+	b=aqqYPKlnz8Fo5gk4CO9lilkMCTNmc1Y37gZ41KWgHMi9ue99sB3qdNzeRKtOXSMKG7
+	4bDPwZmnAkj+3yQWXbxcuheFJfC9KP4b72aQrG7S9xewr1dD1dQBPq/p89jAvf9Bjf8N
+	5M0n+tsKn2fMWglF/AUBwjQrBPVMK8XOuPITFKJh7t2kJCMyk3YSSlCThmv9ASaZ5pBp
+	appjpbBGu0WkvEhNkFKN6u3XJiE1VtL8L4Mf9ySQ0q3ngm/t+h74fZZLODJ1dxjpUQwf
+	zhyLZKOOzeRG61cePIUXU0c5R01c9ZATRUHo3a7dAEBQN82Yzg9hNFipeBd2ky8P15GG
+	tl0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=sG9YYB8HerHudjrNLCaU/cyIGUh8OW4+kL48BDXqopc=;
-	b=WtIIdwjrlEVq7ZpI5g5wxiUdK16/jtuSUPh8p6TlUvSQP5eGVsRJPC9WVMnWsS6uaM
-	C3b8iuCcdbGY0zYwAwylXQgbFiz/7orExTeRkBBZqklBc3zdZ9oTWfCdLm/fK1OYJtnQ
-	KgPrb5X0ynL/NeGHzxTMi+0rsjk8caU/3BIryWBuKohOpGlxwVAeprovqLFVTNQfxohF
-	t75o7oY6kpsvelSpM/mQLe3jkPkOp3GcP1dMy55/IlLWgjdzLkdQl3GqSEH3rHlnFv+G
-	vaRibCSu1w297nNsk+tEjmB8JlGcvOVpzlBybGopLPL755qacHUQS/v1fhdGhQBHU3Gv
-	9EFA==
-X-Gm-Message-State: ALKqPwdC2GXr9z47Z8e0/fy7syBQ2cS35FvXt2VnPkk70BZx8ao6Sxvi
-	Urbcz4RJzF65FXJeyRzSIdFXqw==
-X-Google-Smtp-Source: AB8JxZqrQntikXWgcvJw+3RR05MnmaU/9cQEtWkk5XbJHPPKrlXEnLbMzeilKl8J9GqMrtbOvLnaiQ==
-X-Received: by 2002:a17:902:b60c:: with SMTP id
-	b12-v6mr18614110pls.44.1526855724785; 
-	Sun, 20 May 2018 15:35:24 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
-	by smtp.gmail.com with ESMTPSA id
-	203-v6sm21887763pfz.131.2018.05.20.15.35.23
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 20 May 2018 15:35:23 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 May 2018 15:35:17 -0700
-Message-Id: <20180520223517.9869-6-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ZQFwHRrsCb9YRtlGfM57fiHzJJzKlw9sXRP8/7ei+fU=;
+	b=an96qZEMuy7rI8AcnqFUN1qD8IqJQ55OXlbxJcszF09zDsW+Gpmwl97ZJgWX4UtHw/
+	R5U18L3lSs1Gz6bEoRzffrfzaHEBL8Hd596UzL0JC9WVxipMBlmNlhNvf+ZeihmqKY8N
+	ZQCPpilPgKOUA1Vkbi/X3eWIi4wu5H7CENTWro9puuoCu9GS3OLb2qeFEa8HgqhAnNBe
+	b9up1+VNPexhOmlfvFh4hV1oAdyOqSw0v7ihFAwj1GCHZGxIEQAfKHNljTG86o3a6a4O
+	QupfE1+HyatO6O5Cq5i28Yh0sE1XeO/jGBUBq9fq/rzZLXLRLnwbv2GFVFZ60/SCzgK0
+	hPLQ==
+X-Gm-Message-State: ALKqPwf/z62Jwlt/+SD0IkHwaO2wRh53umTYkh2mzIR7DnFj9opBQvB2
+	+KBan3BuhLYtiTz/IydxPYy/8y3a8ML1CcevyJ8=
+X-Google-Smtp-Source: AB8JxZohrin460RNS7zqK8cHvBVZfRU5dJHbaDqvAf0SMGS6Gz1pbizrxFAoqPNdBbEIvVxwbzoN6tucSyVPWWBgz2g=
+X-Received: by 2002:aca:2ec3:: with SMTP id
+	u186-v6mr10844253oiu.104.1526856382600; 
+	Sun, 20 May 2018 15:46:22 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.201.73.11 with HTTP; Sun, 20 May 2018 15:46:21 -0700 (PDT)
 In-Reply-To: <20180520223517.9869-1-raj.khem@gmail.com>
 References: <20180520223517.9869-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 6/6] mariadb: Upgrade to 5.5.60
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 21 May 2018 00:46:21 +0200
+Message-ID: <CALbNGRRMj8LqXaw+=DzkBMQoKgprxp5u8OdLrePgPxS9_x_dxg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-gnome][PATCH 1/6] network-manager-applet: Package gir-1.0 files into devel package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,42 +55,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 May 2018 22:35:24 -0000
+X-List-Received-Date: Sun, 20 May 2018 22:46:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../{mariadb-native_5.5.59.bb => mariadb-native_5.5.60.bb}   | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                        | 5 ++---
- .../mysql/{mariadb_5.5.59.bb => mariadb_5.5.60.bb}           | 0
- 3 files changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_5.5.59.bb => mariadb-native_5.5.60.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_5.5.59.bb => mariadb_5.5.60.bb} (100%)
+On Mon, May 21, 2018 at 12:35 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Fixes QA errors e.g.
+>
+> ERROR: network-manager-applet-1.8.10-r0 do_package: QA Issue: network-manager-applet: Files/directories were installed but not shipped in any package:
+>   /usr/share/gir-1.0
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../network-manager-applet/network-manager-applet_1.8.10.bb   | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
+> index dc2b964be5..ccfe38d010 100644
+> --- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
+> +++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
+> @@ -43,3 +43,7 @@ FILES_${PN} += " \
+>      ${datadir}/libnm-gtk/wifi.ui \
+>      ${datadir}/libnma/wifi.ui \
+>  "
+> +
+> +FILES_${PN}-dev += " \
+> +    ${datadir}/gir-1.0 \
+> +"
+> --
+> 2.17.0
+>
+On sumo I do not see this QA error and gir-files are packed properly
+to network-manager-applet-dev.
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.59.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_5.5.60.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_5.5.59.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_5.5.60.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 99e7050945..8e0e252421 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -18,9 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
-            file://change-cc-to-cc-version.patch \
-            file://0001-disable-ucontext-on-musl.patch \
-           "
--
--SRC_URI[md5sum] = "3cec4afc06b468687ef576c90148d10d"
--SRC_URI[sha256sum] = "c3269ce20b45b177239fd1e3d6d9428a94131711f12758ebf5f65222278bb110"
-+SRC_URI[md5sum] = "afbadcf2980ad5aa205084dd401f1b7f"
-+SRC_URI[sha256sum] = "4d3d444555416028ce39d3fb4cdc9cf6a658fcd4b0d2d0c45a73f9bf01d07929"
- 
- S = "${WORKDIR}/mariadb-${PV}"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_5.5.59.bb b/meta-oe/recipes-dbs/mysql/mariadb_5.5.60.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_5.5.59.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_5.5.60.bb
--- 
-2.17.0
+Sure that this is a correct fix? What changed in oe-core?
 
+Andreas
 
