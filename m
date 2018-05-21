@@ -1,58 +1,47 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2296874E88
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D238746F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2018 18:10:58 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id d4-v6so10495565ual.10
+	Mon, 21 May 2018 20:45:34 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id j4-v6so27501972wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2018 11:11:00 -0700 (PDT)
+	Mon, 21 May 2018 13:45:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=I8t3AA9HkYj3cELW9zlfSjicFlk7OCbwsY1GuqVK3Rg=;
-	b=kzbAjXI6WqkO2aY/HJKlpyVw8bWIyPOg/EoPU1cEBvmziyO0T0k25aLYS1uuxEcBT7
-	rYu2q4XwplFKyi2b1ZpKwvqCLqMhu9L5bZ2UJTq9vHL4cwue2EJwL2JvjYilKzVTWBUp
-	HJh3nuCP8zPie5ufKXEjbhgixV/dkPbNOhUsWLP+IdZfShHTiITmX54IuUOht3bPvx8/
-	zxuKTQ1QUXNwXXjOJ9CbxRa3s0yuMqEnT/t7ZwCkeYX1PgcroxvTfDDTLv70b0ju90IG
-	N9751zCOdt+mztBcyH7UYxEy/vWBLD4458T3lpU0uL7FEgkij4HY6KFw3/yYu5ZHwc39
-	ctlw==
+	h=from:to:cc:subject:date:message-id;
+	bh=YxNs8hS0LVaHyNejgnC7m9Ectripv9MBW49i9yjIBvw=;
+	b=phGINE0ZI4A+khk0Uxt6PHneH7mXTtq8PrG7X6aeRhAEbrEWgT5mfyNjZDQLV+hMid
+	AEyZD8XewI84BYRku8RJw1F49kl3JmYhoJ2CoVHEH5LtLljsQRUNocoYoeqECsr/0mBM
+	ACMxsh6tK4qKt2JP+WzPXGd/k+XnfA36LB1YJ36hM1r5iOEewvehACValOrjuMJR6HBr
+	++wyZAXzuTReiPbxlsi9Rao0IAJO7BhcJ7zASzX5bhGqGsH6LQqHlu36h6rGzOlfaper
+	TzdIn4GRsYaiTr/i6AtsYUfB4ajW36O56QoMyjZ1qzX+eKccSnJhTorGX3MsA9S6o57C
+	Upew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=I8t3AA9HkYj3cELW9zlfSjicFlk7OCbwsY1GuqVK3Rg=;
-	b=L+ET7crWtXsZJde6TVhEd9Rkj9+XgoRQiNh9QprzCLpkcVaWFPLiO7ym6LAzuMtXMQ
-	kL8KjPOnoemNHHrIkRa1kPfpFiv6wgceZmEjSu61+jE4ZBje4n2leLHSEuuycbbfJMKx
-	v2lKxw3TIUMcZBjmtExSrHPtRc++hrMDxITNCIDXwfhofDflbsev1b/F7ZupOhZwgHRb
-	Z6YTgVLhDy75Mk/V5h/YLYDqkhIBVbX/gPHJpeAWvs+5V3Zt1lKrDU1Cg9LH79JtREZY
-	Q5KJeLVDhgeLQc4sCEzVViajr7IWsxbVPIMsh/SP5mEc1K53H6rvoqVEKyRCgimcjTkt
-	tE0w==
-X-Gm-Message-State: ALKqPwdoTOROuI7hXq3H6lLOMoMCTvknKqd3go6bIiZxd1P0ISWbXCri
-	0GOk1qMfMHhrZnN7eBgBR/LOmrCUWc9RgTgc8oo=
-X-Google-Smtp-Source: AB8JxZpP3HBfwov1xQjulYH1s/WVSkaMs98AVwAHZ3OJLpfLa9Qql6O6RYvusYGAEPNH1ENmnjirxuL54NV083c0iOc=
-X-Received: by 2002:ab0:1567:: with SMTP id
-	p36-v6mr15503458uae.81.1526926259738; 
-	Mon, 21 May 2018 11:10:59 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ab0:3094:0:0:0:0:0 with HTTP; Mon, 21 May 2018 11:10:59
-	-0700 (PDT)
-In-Reply-To: <CAHUNapR44Bg55=N60PC1-qKKMjag4eVD7a_YoO3b-CDrJm5XOg@mail.gmail.com>
-References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-	<4f227bea-48ae-8126-8326-7b51b4bbc5d1@gmail.com>
-	<CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
-	<CAMKF1sraQqZvTL3imQecXjwx5xQpS6EiiBmKp8+B0cb9Y7KSmw@mail.gmail.com>
-	<CAJ86T=Xxw__E-+8Zf0PZnOAe1SeMB2ayMZZu-Gb=19ckh8=TtQ@mail.gmail.com>
-	<CAHUNapQ0Ywt2-xtp0==FozFhsPSnbBTEDReckkE1TVaxdtCn3g@mail.gmail.com>
-	<3f41b911-4fde-1ed1-76f7-650dab5dbb20@gmail.com>
-	<c7fbbf37e1ff4631a0aa3b45c07544a9@XBOX02.axis.com>
-	<CAHUNapR44Bg55=N60PC1-qKKMjag4eVD7a_YoO3b-CDrJm5XOg@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Mon, 21 May 2018 11:10:59 -0700
-Message-ID: <CAJ86T=U5THX1tOFnTzBwr1sMoRvLqFiwqNbn0HT==fv5o9Mo-A@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 01/17] libwebsockets: rely on cmake.bbclass to put cmake package files in dev package
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=YxNs8hS0LVaHyNejgnC7m9Ectripv9MBW49i9yjIBvw=;
+	b=GQEI+nG33NH5qnsuaQiLMkz5Ul5ReHW5cV75mCqpkmb7Zf022ZYI6axjqu7y2lYcmF
+	anYZwtOWWb/btXC3rvrOrJ6Tr4P5WpIKiEWlEK5FMqAXMSNgqJMh5ynfQ4RcFDGvyHX2
+	B6Rh7mnb4EBpwt6PvwjQQtu6RT+MByr9/benJgS+Q28fg4jQIeS0+lId08gYV/epoRxB
+	ucKVjQ+hfCTmYdxeDekdWVxi3UYJIJEk6N4Jbg4NP26mQ0iYeEH7LgQm5JDoGf2kyyvb
+	27aXAiowQj9vM5Oz9S7PWYrDmpza+bUHwfKg/JC1R+AyOhfAncvE4EwwzIpvtEpzQsde
+	NWqA==
+X-Gm-Message-State: ALKqPwdFF3usBwp7Eiv3wcyO5ZwVmjP4fJU+w0CqKeG0YXB4wxc/O/GQ
+	mkxD33hBJnU1ZpDfToYpCuMAqg==
+X-Google-Smtp-Source: AB8JxZqhyfiT+BfOsvxMw4rxFwum7yPBjwuwpthmz+WSXMjsdKj8G9BU3526nJhHkPMvWaU/IdQV5w==
+X-Received: by 2002:a50:98a5:: with SMTP id
+	j34-v6mr25209690edb.212.1526935535307; 
+	Mon, 21 May 2018 13:45:35 -0700 (PDT)
+Received: from localhost.localdomain (c-93-184-18-27.customer.ggaweb.ch.
+	[93.184.18.27]) by smtp.gmail.com with ESMTPSA id
+	w9-v6sm7887929edb.38.2018.05.21.13.45.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 21 May 2018 13:45:34 -0700 (PDT)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 May 2018 22:44:31 +0200
+Message-Id: <20180521204431.114782-1-adrian.freihofer@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-webserver][PATCH] fcgi: Update to 2.4.1+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,46 +54,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2018 18:10:59 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 21 May 2018 20:45:35 -0000
 
-On Sat, May 19, 2018 at 12:35 PM, Trevor Woerner <twoerner@gmail.com> wrote:
-> On Sat, May 19, 2018 at 7:59 AM, Peter Kjellerstedt
-> <peter.kjellerstedt@axis.com> wrote:
->>
->> If you do, I think you should spin the patches for the clean ups as well.
->> At least I agree with (most) of them, and on a whole they definitely
->> improve the recipes.
->>
->> And I also agree with Andre, that in general it is too much trouble to
->> generate clean up patches in their own, which is why it might be better
->> to allow some clean ups together with actual changes. Otherwise they will
->> not happen, which in the long run deteriorate the overall state of the
->> recipes.
->
-> I'm happy to slowly go through the recipes and make formatting changes. What
-> is the accepted canonical order of variables and segments in a recipe file?
+Update to latest from upstream. This adds pkg-config support.
+Fix_EOF_not_declared_issue.patch is obsolete, fix is upstream.
 
-The OE style guide states that it should be considered the canonical
-reference (rather than for example contrib/oe-stylize.py):
+Signed-off-by: Adrian Freihofer <adrian.freihofer@gmail.com>
+---
+ .../fcgi/fcgi/Fix_EOF_not_declared_issue.patch          | 17 -----------------
+ .../fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch     |  4 ++--
+ .../recipes-support/fcgi/{fcgi_2.4.0.bb => fcgi_git.bb} | 10 ++++++----
+ 3 files changed, 8 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-webserver/recipes-support/fcgi/fcgi/Fix_EOF_not_declared_issue.patch
+ rename meta-webserver/recipes-support/fcgi/{fcgi_2.4.0.bb => fcgi_git.bb} (56%)
 
-  http://www.openembedded.org/wiki/Styleguide
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi/Fix_EOF_not_declared_issue.patch b/meta-webserver/recipes-support/fcgi/fcgi/Fix_EOF_not_declared_issue.patch
+deleted file mode 100644
+index 51ddeaac2..000000000
+--- a/meta-webserver/recipes-support/fcgi/fcgi/Fix_EOF_not_declared_issue.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+-Upstream-Status: Pending
+-
+-Fix EOF not declared issue, following is the error log.
+-fcgio.cpp:70:72: error: 'EOF' was not declared in this scope
+-              if (FCGX_PutStr(pbase(), plen, this->fcgx) != plen) return EOF;
+-
+-Signed-off-by: Yang Haibo <b40869@freescale.com>
+---- fcgi-ori/libfcgi/fcgio.cpp 2014-07-28 18:01:00.000000000 +0800
+-+++ fcgi-2.4.0/libfcgi/fcgio.cpp       2014-07-28 18:01:22.000000000 +0800
+-@@ -22,6 +22,7 @@
+- #define DLLAPI  __declspec(dllexport)
+- #endif
+-
+-+#include <stdio.h>
+- #include <limits.h>
+- #include "fcgio.h"
+-
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch b/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
+index eca694adc..eec9dd7ce 100644
+--- a/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
++++ b/meta-webserver/recipes-support/fcgi/fcgi/add_foreign_to_AM_INIT_AUTOMAKE.patch
+@@ -10,8 +10,8 @@ Signed-off-by: Yang Haibo <b40869@freescale.com>
+  dnl     to configure the system for the local environment.
+  
+ -AC_INIT
+--AM_INIT_AUTOMAKE(fcgi, 2.4.0)
+-+AC_INIT([fcgi], [2.4.0])
++-AM_INIT_AUTOMAKE(fcgi, 2.4.1-SNAP-0910052249)
+++AC_INIT([fcgi], [2.4.1-SNAP-0910052249])
+ +AM_INIT_AUTOMAKE([foreign])
+  
+  AM_CONFIG_HEADER(fcgi_config.h)
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
+similarity index 56%
+rename from meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
+rename to meta-webserver/recipes-support/fcgi/fcgi_git.bb
+index 48c594483..a17e70f09 100644
+--- a/meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb
++++ b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
+@@ -3,12 +3,14 @@ HOMEPAGE = "http://www.fastcgi.com"
+ LICENSE = "OML"
+ LIC_FILES_CHKSUM = "file://LICENSE.TERMS;md5=e3aacac3a647af6e7e31f181cda0a06a"
+ 
+-SRC_URI = "http://fossies.org/linux/www/old/${BP}.tar.gz \
+-           file://Fix_EOF_not_declared_issue.patch \
++SRCREV = "68100b5b8cb26f04b784778ed19ccef4fe389f57"
++PV = "2.4.1+git${SRCPV}"
++
++SRC_URI = "git://github.com/FastCGI-Archives/fcgi2.git;protocol=https \
+            file://add_foreign_to_AM_INIT_AUTOMAKE.patch \
+ "
+-SRC_URI[md5sum] = "d15060a813b91383a9f3c66faf84867e"
+-SRC_URI[sha256sum] = "66fc45c6b36a21bf2fbbb68e90f780cc21a9da1fffbae75e76d2b4402d3f05b9"
++
++S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+-- 
+2.14.1
 
-If you stick to non-controversial changes such as ordering of
-variables then I think it's a pretty good set of guidelines.
-
-It hasn't been updated to give ordering for PACKAGECONFIG or
-BBCLASSEXTEND but the conventions for those (based on recipes in
-oe-core) seem to be:
-
- - PACKAGECONFIG lines go between "inherit ..." and EXTRA_OECONF
- - BBCLASSEXTEND goes at the end of the recipe
-
-> Oh, and did we agree on tabs, or spaces?
-
-No, probably never will :-)
-
-Best approach would be to not mess with indent - unless you find a
-line indented with spaces between two lines indented with tabs (or
-vice versa).
 
