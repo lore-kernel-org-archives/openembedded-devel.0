@@ -1,51 +1,23 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 62559747F4
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id DE31B74D78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2018 01:16:48 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id r2-v6so21506884lff.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 May 2018 18:16:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=4F9uxdtcuJUk42nli03k+QCxmLQ5NdHgn78ZaO5uch0=;
-	b=dPOEAmfiugB/FWN/WpbLQjuCzbuwaQ901Xz5lk4v6vI+4xUnWd7sGkb9prXaTsbgUG
-	g0jABGutNRwYCIF4LT10WAaV/42XCUswAM133dLkmzmIB51QKB6edDUm6En4JsoYkkaz
-	A+LGCTgOuqvSba6i1W1bEHMPrEj/Fv1E0RywZ3SC6Rt+QZD+khy6mWMmpEqS5f+faSLF
-	1ux/yLELKTkjB2v/FTwmR1xotu7l6+w8IzL368+gPcrNEcdO1bc4fFs1r1MCfCPWh/ZQ
-	wrCNr85oAod1DAGPBWjjv2L0LakuItwYvPddFzZtwwIQiqPBvyLeqRlTKoTbvnwgrBwX
-	FwxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=4F9uxdtcuJUk42nli03k+QCxmLQ5NdHgn78ZaO5uch0=;
-	b=Aufzc9gP+g9IwUSjyeaCM0B49/lCbNNF0Wt3Nor51VIP96Thz0qveooCfXZ9N55NzT
-	BMii6I9g2Kz9iUN8w8Qt6HoGNdggpZYAr+//LMAEszXmZg6wWRaQp5VYmBUL+v4o3e2E
-	Xk2TED5zZQ/oEjrwuxL1AWWBKniQyahtLbg2NAYko7jz7SVJZJniIDL3rEF9w0qa+uf0
-	BGLEmbjgokdih0xkN0ojqrybYuHEzdM0SYdg1HjBH58Ym3YSyMUr9Okl0XShal2sxF/Z
-	IwiGnYKIBkhPK5klkzodO3lzy3HrVL3QQrMJUatUvbrKpKDp/FNIrtMjnQJm4hDMGQTC
-	4A0A==
-X-Gm-Message-State: ALKqPwd4goloOhQ/QddmitYCp1oQ+a3gNmhqwS8OdY54MCjN6dgGXY6U
-	Bbp6Gn3DUhNiu+Vi/bph8v/JXoOMh46Ogw7ENvk=
-X-Google-Smtp-Source: AB8JxZq2ELmWRxNOewyFST3TVtufTg31chH7pBl2QEVTGU6jCLWuyqM9QERCt637NHBIraFE4JVsur+HWMne/cV+/+k=
-X-Received: by 2002:a19:a70f:: with SMTP id
-	q15-v6mr15590933lfe.39.1526865409534; 
-	Sun, 20 May 2018 18:16:49 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a19:cb48:0:0:0:0:0 with HTTP; Sun, 20 May 2018 18:16:48
-	-0700 (PDT)
-In-Reply-To: <CAMKF1srEN6W4xNtmLevLG6hzpdJ60AnvEP31e+y3LBh8j0+UXQ@mail.gmail.com>
-References: <20180520024130.11222-1-twoerner@gmail.com>
-	<CAMKF1srEN6W4xNtmLevLG6hzpdJ60AnvEP31e+y3LBh8j0+UXQ@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Sun, 20 May 2018 21:16:48 -0400
-Message-ID: <CAHUNapTM5xUinC=M=zhuCYSu-Ev3KPVavskWON=sqhOFO=4W2A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][master-next][PATCH] rely on cmake.bbclass to put cmake package files in dev package
+	Mon, 21 May 2018 09:37:40 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	21 May 2018 02:37:42 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,426,1520924400"; d="scan'208";a="48430453"
+Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
+	by fmsmga002.fm.intel.com with ESMTP; 21 May 2018 02:37:41 -0700
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 21 May 2018 12:37:43 +0300
+Message-Id: <20180521093743.41053-1-alexander.kanavin@linux.intel.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [PATCH] networkmanager: remove wireless-tools dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,29 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2018 01:16:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 21 May 2018 09:37:41 -0000
 
-On Sun, May 20, 2018 at 6:27 PM, Khem Raj <raj.khem@gmail.com> wrote:
+NM hasn't used this for many years, and wireless-tools are being
+removed from oe-core, having been obsolete for about that long as well.
 
-> Hi Trevor
->
-> On Sat, May 19, 2018 at 7:41 PM, Trevor Woerner <twoerner@gmail.com>
-> wrote:
->
-> > --- a/meta-oe/recipes-support/fftw/fftw_3.3.7.bb
-> > +++ b/meta-oe/recipes-support/fftw/fftw_3.3.7.bb
-> > @@ -74,7 +74,6 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
-> >  FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
-> >  FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
-> >
-> > -FILES_${PN}-dev += "${libdir}/cmake"
->
-> fftw can be built using both autotools and cmake, for OE we use autotools
-> therefore it does not inherit cmake, so please reinstate this change
-> in next version of patch.
->
+Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+---
+ .../networkmanager/networkmanager_1.10.6.bb                     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+index 31fa13241..6891ef4fc 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
+@@ -86,7 +86,7 @@ PACKAGECONFIG[dhclient] = "--with-dhclient=${base_sbindir}/dhclient,,,dhcp-clien
+ PACKAGECONFIG[dnsmasq] = "--with-dnsmasq=${bindir}/dnsmasq"
+ PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
+ PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls"
+-PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-supplicant wireless-tools"
++PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,,wpa-supplicant"
+ PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
+ PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
+ PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+-- 
+2.17.0
 
-No problem; thanks for the review!
 
