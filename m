@@ -1,26 +1,20 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 4222C605C2
+Return-Path: <prvs=673fc8d93=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 381E874787
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 10:37:31 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id w4MAbVo1018268
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 12:37:31 +0200
-Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
-	[139.16.77.81])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id w4MAbV8t021950;
-	Tue, 22 May 2018 12:37:31 +0200
-Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
-	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id CA08B10D8B80;
-	Tue, 22 May 2018 12:37:30 +0200 (CEST)
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 May 2018 12:37:21 +0200
-Message-Id: <20180522103721.23689-1-pascal.bach@siemens.com>
+	Tue, 22 May 2018 11:11:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,430,1520895600"; d="scan'208";a="10423449"
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 May 2018 13:10:47 +0200
+Message-ID: <20180522111047.26685-1-richard.leitner@skidata.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH v2] rocksdb: update to 5.13.1
+MIME-Version: 1.0
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: dev@g0hl1n.net
+Subject: [meta-oe][PATCH] pam-plugin-ldapdb: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,32 +27,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2018 10:37:32 -0000
+X-List-Received-Date: Tue, 22 May 2018 11:11:06 -0000
+Content-Type: text/plain
 
-The GCC 8 patch is still needed as the changes are not yet included in 5.13.x
+Add recipe for version 1.3 of pam-plugin-ldapdb, a PAM module for
+directly binding a user DN to an LDAP server.
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-extended/pam/pam-plugin-ldapdb_1.3.bb  | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 9a2f9dd1c..fb3758af3 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
- 
--SRCREV = "8969445642039566214d650cc6614849e7dd5e17"
--SRCBRANCH = "5.12.fb"
--PV = "5.12.2"
-+SRCREV = "c60df9d9e7629fe208a9b848293a5599f83d5e77"
-+SRCBRANCH = "5.13.fb"
-+PV = "5.13.1"
- 
- SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-            file://0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch \
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
+new file mode 100644
+index 000000000..a68d1999f
+--- /dev/null
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "PAM searchless LDAP authentication module"
++HOMEPAGE = "https://github.com/rmbreak/pam_ldapdb"
++BUGTRACKER = "https://github.com/rmbreak/pam_ldapdb/issues"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=41ab94182d94be9bb35e2a8b933f1e7d"
++
++DEPENDS += "libpam openldap"
++
++inherit distro_features_check
++REQUIRED_DISTRO_FEATURES = "pam"
++
++SRC_URI = "https://github.com/rmbreak/pam_ldapdb/archive/v${PV}.tar.gz"
++SRC_URI[md5sum] = "2dd4f1370fcfe995ee0ad09611109b87"
++SRC_URI[sha256sum] = "8ed92b36523556bb5d9bf3eb33a1035e46041d4be767c8d62136930c0ca0e45b"
++
++S = "${WORKDIR}/pam_ldapdb-${PV}"
++
++do_install () {
++    oe_runmake install DESTDIR=${D} PAMDIR=${base_libdir}/security
++}
++
++FILES_${PN} = "${base_libdir}/security/pam_ldapdb.so"
 -- 
 2.11.0
 
