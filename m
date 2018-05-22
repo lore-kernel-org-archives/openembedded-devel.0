@@ -1,19 +1,26 @@
-Return-Path: <sjl@vctlabs.com>
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id 4211A748DD
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 46270744B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 07:23:12 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 6730E28042E; Tue, 22 May 2018 00:27:12 -0700 (PDT)
-Date: Tue, 22 May 2018 00:27:12 -0700
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+	Tue, 22 May 2018 10:13:08 +0000 (UTC)
+Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 8E75920875;
+	Tue, 22 May 2018 10:13:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1526983990;
+	bh=so9njxQSXtFJK5lBoqW+vASpT20ZSWdjm4x72QmAuak=;
+	h=From:To:Cc:Subject:Date:From;
+	b=goCLHWyE7H6QPLuqq92kV8Ms1BBrX6li8weuo/ZTi6QnjWupawm9kHLoAJM0pQMzu
+	qAXy1fhckwhLVMCQdX8dl7ZngCGCfnGGdswodMS2jAneqz2m7Xz7TD8b+RmlEGHnhm
+	+/9mOGI3LHSccluO7m8nFPLF6hZrQVQb8CYkwVUQ=
+From: Krzysztof Kozlowski <krzk@kernel.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180522072712.GE31886@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-oe] [PATCH V2] libev: correct source path
+Date: Tue, 22 May 2018 12:12:54 +0200
+Message-Id: <1526983974-9620-1-git-send-email-krzk@kernel.org>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][rocko][PATCH] broadcom-bt-firmware: Add new recipe for Broadcom Bluetooth firmwares
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,34 +33,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2018 07:23:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 May 2018 10:13:09 -0000
 
-Let S default to "${WORKDIR}/${BPN}-${PV}" rather than replacing PN
-with BPN, since source always unpacks to the same place including when
-building for multilib (or native, though that's not enabled here)
-in which case PN != BPN
+Several Broadcom Bluetooth USB dongles require firmware to be loaded.
+This recipe provides the firmware for BCM20702, BCM20703, BCM43142,
+BCM4335, BCM4350, BCM4356 and BCM4371 based devices.
 
-Signed-off-by: S.Lockwood-Childs <sjl@vctlabs.com>
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+
 ---
- meta-oe/recipes-connectivity/libev/libev_4.24.bb | 2 --
- 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
-index 5e0f3a5..a5838d3 100644
---- a/meta-oe/recipes-connectivity/libev/libev_4.24.bb
-+++ b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
-@@ -9,8 +9,6 @@ SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
- SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
- SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
- 
--S = "${WORKDIR}/${PN}-${PV}"
--
- inherit autotools
- 
- EXTRA_OECONF += "--with-pic"
+The patch is also available here:
+https://github.com/krzk/meta-openembedded/commits/broadcom-bt
+---
+ .../broadcom-bt-firmware_git.bb                    | 76 ++++++++++++++++++++++
+ 1 file changed, 76 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
+
+diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
+new file mode 100644
+index 000000000000..8c474ecdc472
+--- /dev/null
++++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
+@@ -0,0 +1,76 @@
++# Copyright (C) 2018 Krzysztof Kozlowski <krzk@kernel.org>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "Broadcom Bluetooth firmware files"
++DESCRIPTION = "Firmware for Broadcom Bluetooth devices. Note that in case of BT+WiFi devices, separate WiFi firmware might be needed."
++HOMEPAGE = "https://github.com/winterheart/broadcom-bt-firmware"
++
++LICENSE = "Firmware-Broadcom-WIDCOMM"
++NO_GENERIC_LICENSE[Firmware-Broadcom-WIDCOMM] = "LICENSE.broadcom_bcm20702"
++
++LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f8a48b619d"
++SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git"
++SRCREV = "c0bd928b8ae5754b6077c99afe6ef5c949a58f32"
++PE = "1"
++PV = "0.0+git${SRCPV}"
++
++S = "${WORKDIR}/git"
++
++inherit allarch
++
++CLEANBROKEN = "1"
++
++do_compile() {
++    :
++}
++
++do_install() {
++    install -d ${D}${nonarch_base_libdir}/firmware/brcm/
++    cp brcm/*.hcd ${D}${nonarch_base_libdir}/firmware/brcm/
++
++    # For license package:
++    install -m 0644 LICENSE.broadcom_bcm20702 ${D}${nonarch_base_libdir}/firmware/brcm/
++
++    # For main package:
++    install -m 0644 DEVICES.md ${D}${nonarch_base_libdir}/firmware/brcm/
++}
++
++PACKAGES =+ " \
++    ${PN}-bcm20702a1 \
++    ${PN}-bcm20702b0 \
++    ${PN}-bcm20703a1 \
++    ${PN}-bcm43142a0 \
++    ${PN}-bcm4335c0 \
++    ${PN}-bcm4350c5 \
++    ${PN}-bcm4356a2 \
++    ${PN}-bcm4371c2 \
++    ${PN}-license \
++"
++
++RDEPENDS_${PN}-bcm20702a1 = "${PN}-license"
++RDEPENDS_${PN}-bcm20702b0 = "${PN}-license"
++RDEPENDS_${PN}-bcm20703a1 = "${PN}-license"
++RDEPENDS_${PN}-bcm43142a0 = "${PN}-license"
++RDEPENDS_${PN}-bcm4335c0 = "${PN}-license"
++RDEPENDS_${PN}-bcm4350c5 = "${PN}-license"
++RDEPENDS_${PN}-bcm4356a2 = "${PN}-license"
++RDEPENDS_${PN}-bcm4371c2 = "${PN}-license"
++
++FILES_${PN}-bcm20702a1 = "${nonarch_base_libdir}/firmware/brcm/BCM20702A1*hcd"
++FILES_${PN}-bcm20702b0 = "${nonarch_base_libdir}/firmware/brcm/BCM20702B0*hcd"
++FILES_${PN}-bcm20703a1 = "${nonarch_base_libdir}/firmware/brcm/BCM20703A1*hcd"
++FILES_${PN}-bcm43142a0 = "${nonarch_base_libdir}/firmware/brcm/BCM43142A0*hcd"
++FILES_${PN}-bcm4335c0 = "${nonarch_base_libdir}/firmware/brcm/BCM4335C0*hcd"
++FILES_${PN}-bcm4350c5 = "${nonarch_base_libdir}/firmware/brcm/BCM4350C5*hcd"
++FILES_${PN}-bcm4356a2 = "${nonarch_base_libdir}/firmware/brcm/BCM4356A2*hcd"
++FILES_${PN}-bcm4371c2 = "${nonarch_base_libdir}/firmware/brcm/BCM4371C2*hcd"
++FILES_${PN}-license += "${nonarch_base_libdir}/firmware/brcm/LICENSE.broadcom_bcm20702"
++
++FILES_${PN} += "${nonarch_base_libdir}/firmware/brcm/*"
++RDEPENDS_${PN} += "${PN}-license"
++
++# Make broadcom-bt-firmware depend on all of the split-out packages.
++python populate_packages_prepend () {
++    firmware_pkgs = oe.utils.packages_filter_out_system(d)
++    d.appendVar('RDEPENDS_broadcom-bt-firmware', ' ' + ' '.join(firmware_pkgs))
++}
 -- 
-1.9.4
+2.7.4
 
 
