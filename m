@@ -1,52 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E7C974884
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EE80E7489C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 01:04:13 +0000 (UTC)
-Received: by mail-pg0-f50.google.com with SMTP id a3-v6so2152309pgt.13
+	Tue, 22 May 2018 02:31:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4M2U1rE017771
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2018 18:04:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=P45c/do8lMHltMIlp6vSL12XgNdmDhty0VSVwGs+O9w=;
-	b=iavpuVd1e8eSpVAdEwNdYfA8eoUsYl69a3u3FN7QsNCnv/el+IHTAyjzd5m8nBk7zn
-	Ymnr1mphDrcTM0mA+3oM39j26HQ6xeBLgTeyjcqi7UUYNbT/4TgJWwI7BiJJH45Ty194
-	V7j/kTL1Tr0Q1SiWLMo/RtLZ61MY4LnKTZ277pdzU8T7XGPumlLz/RZAApWv9Ipre16L
-	H6YqRbntk2H4kWQenWkIfIDxo5GsyD9nVZFzr+X2b5N6h6CQgx+4hbVYInOIZZi6HyuL
-	DhuesZMZsssXXRyzMhNRytcqy7EDefQ0uMAoQqgO0dlk6LVTyihvyP6qPCB7HHQicOaf
-	qIXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=P45c/do8lMHltMIlp6vSL12XgNdmDhty0VSVwGs+O9w=;
-	b=jtVKdjCiQjtP4DKiBmAUGI65HwRQia6MRlqQB6/4XL7ATsUjQJfImPJWt3wSYFq14/
-	nhTHfskE2eXETj4f/lBDiSn5c7+cXnsKUWxcMdKBAQsy/MgIm3qD99gbtQmtYZj8xcKJ
-	MmbExwZGdLWqS8jUQTgc4CKTjzseVGe4nSdCOXVTTkWMRE8O3nbQXMgOaT2ueBOcVgah
-	X+LkLtNXpPRGVnZQUN2MD/rLoHF+6oqH4884sMWH1Is6uksxwLRhUQvI3JAm0PUTQImC
-	+Xo/k+seFaIATHOAvsVfAuXFQx91d09E39tiXB6ytUDLE6rUANAcs78kRIcZiXGNGRPF
-	EFyg==
-X-Gm-Message-State: ALKqPwfrftXJAUAyAu/UNPCfvalGlAOUmyCbVhGecsmkz4g5WO1gcrfz
-	mnZyPwS1CVw+ubTCCDE1ONt9QRKGj2flbEN1CwQ=
-X-Google-Smtp-Source: AB8JxZpBzvptA/2jgmORDSZU3NaORLHF2PFoCK8oYALq1YEuscpAm2520uDsGrn/dITzURuildKxcbVKQ6WRFfF/FdE=
-X-Received: by 2002:a65:6510:: with SMTP id
-	x16-v6mr17685862pgv.204.1526951054569; 
-	Mon, 21 May 2018 18:04:14 -0700 (PDT)
+	Mon, 21 May 2018 19:30:57 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.361.1; Mon, 21 May 2018 19:30:06 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 May 2018 09:59:22 +0800
+Message-ID: <20180522015922.21057-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-References: <20180518075009.4612-1-richard.leitner@skidata.com>
-	<50ba6ce942eb43fd86ae092df8e891ad@XBOX02.axis.com>
-	<79e4dbc5-15ff-4284-5364-4f625c7f6d72@skidata.com>
-	<79bdc07b-5a51-a298-2e08-f7394464276d@skidata.com>
-In-Reply-To: <79bdc07b-5a51-a298-2e08-f7394464276d@skidata.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 21 May 2018 21:04:04 -0400
-Message-ID: <CAMKF1spDY=KGC5UZWESKd5esdHZzFMrr=fJA67KBnOs_ZHxxRA@mail.gmail.com>
-To: Richard Leitner <richard.leitner@skidata.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Subject: Re: [meta-oe][PATCH v2] stm32flash: add recipe
+Subject: [meta-networking][PATCH] postgresql: remove *_config from SSTATE_SCAN_FILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,42 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2018 01:04:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 22 May 2018 02:31:07 -0000
+Content-Type: text/plain
 
-On Mon, May 21, 2018 at 5:21 PM Richard Leitner <richard.leitner@skidata.com>
-wrote:
+From: Kai Kang <kai.kang@windriver.com>
 
-> Hi again Peter,
->
-> On 05/21/2018 11:07 PM, Richard Leitner wrote:
-> > Hi,
-> >
-> > On 05/18/2018 07:20 PM, Peter Kjellerstedt wrote:
-> >> We have had our own recipe for stm32flash for a few years, so I
-> >> have a couple of comments to improve this recipe.
->
-> ...
->
-> >
-> > Thank you for your feedback. I'm fine with all of these changes and will
-> > send a v3 asap!
-> >
->
-> I just saw that my v2 patch was already merged to master... So do you
-> want to send a patch with your improvements yourself? IMHO in the end
-> you should be listed as the author of them ;-)
->
+It fails to run command pg_config with segment fault. The root cause is
+function sstate_hardcode_path takes elf file pg_config as a configure
+file and edits it with 'sed'.
 
-No worries I have staged the needed changes
+And then file pg_config is corrupt:
+$ readelf -a package/usr/bin/pg_config >/dev/null
+readelf: Error: Unable to read in 0x700 bytes of section headers
+readelf: Error: Section headers are not available!
 
->
-> regards;Richard.L
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+There is not other '*_config' file installed by postgresql except
+pg_config, so remove '*_config' from SSTATE_SCAN_FILES for postgresql.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-dbs/postgresql/postgresql.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 5462332c5..1301060ee 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -202,6 +202,7 @@ do_install_append() {
+ }
+ 
+ SSTATE_SCAN_FILES += "Makefile.global"
++SSTATE_SCAN_FILES_remove = "*_config"
+ 
+ PACKAGES =+ "${PN}-client ${PN}-server-dev ${PN}-timezone \
+     libecpg-compat-dbg libecpg-compat libecpg-compat-dev \
+-- 
+2.14.1
+
 
