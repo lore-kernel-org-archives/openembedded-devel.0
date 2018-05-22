@@ -1,54 +1,49 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 745B37480F
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 23AF874853
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2018 22:33:57 +0000 (UTC)
-Received: by mail-ua0-f195.google.com with SMTP id f22-v6so10996384uam.1
+	Tue, 22 May 2018 00:55:50 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id 131-v6so9874218vkf.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 May 2018 15:33:58 -0700 (PDT)
+	Mon, 21 May 2018 17:55:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ZNENq4SBpQsWaUR4Fq5q3y9vfU5jL9/50y9XNW5yNRo=;
-	b=uNpI7+L+XJmn0SqwShlb9BLUPcx/xbslDVNKzhLoKNkn6h9xbhzRhtR7V47Dg7JPEX
-	BkoddsCE3FhrzE1zs1BHw0Q2BnVz85FeAUD/5M2HF7oW2ljhQkHFiIwVOuKA00dB7swg
-	fo8XCf3nBgN1AZ7oFAUASStt+kZC24jCxLbWn2jdzKfqsJ5w0yjM916TGDshfFW6NZla
-	GngJZcM7UZNhpGWKoGfl8wy1OyEuyV4KrqQcirkfu555zVdq6HkLq0CnJWr3m8oOl0Ow
-	3SkzOmxW8RB0jR7L+P75yKrai+5PbgdGtF5g9luovhLWa1Y4uaPPBcM0ARmiyREXyxxf
-	FziA==
+	bh=1sp+Kn2gm9gAPPo/wAIPcy1+mJiv0xz4te58w1f3HO0=;
+	b=fkVYgJS8MnFYMTYu9uPFJLQ+k66F8HOpFLrwMPHZMDk7nKRYiFYJsZLy82zR6jNwla
+	yQGEitvQWVlReuBJnd4qbksgUl8BRLF6UWfavtpOe/D1vRF5kPhvov8TRF+M94hyILjS
+	5nStN1w66VHohDgCntvGqwjo1uYEOtcc82u7E/fAo48wYvNLjuy1fggg61sySnOoh/Sn
+	YaOD8zOsZ+1Oe9tU6l7/joZQkEwROI8STHYxJkUKJt+VRusfj+s2HEbWNjLPlli5pbUH
+	7fNz+uHACFxL3hTkydTojiruhv6+S8/ODZQji93TnQzbA9SPw/t2KiWfWUI8oHRCCzDn
+	gP1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=ZNENq4SBpQsWaUR4Fq5q3y9vfU5jL9/50y9XNW5yNRo=;
-	b=L7pZNkWMqsATSL85f++4VYbT2jHGmDbM/ZldSwH0f7+FyxjkSUo0vzLzLm2T115D4Y
-	wnas3BZRhyP/XLVRGcQUCiDO17qeKnW/lhDvycAY693+xm2p6BVFNJ95gQIYDQwpwNCB
-	To2bFLscOb9fEM9Du9R2kJH5mQYgJX4yO+GWMXgS6yGWQeylBqEHnn0x2GDc4hVp6LI0
-	UAOKEzAZUh6zGAQsNE3Wcwjo+N021BcbxsBZLoKHLUuHbXM4C0XxCneMDiz7gv4oZ6lO
-	QH6oKXWk9/jT/2qSrlAfFaOxbPR/bWOdo4aN8U9eVMV7Wyacr0BwY0Na3AGY3jmtfKn7
-	n72Q==
-X-Gm-Message-State: ALKqPwceJU4m1pGHm+c0VDxydiqGmcUFCcd4CAPrPnSyBCuaKmx2vqkr
-	vEyg2/bhHIXP32kZq0uNquxsGF9TFvxQ1zZwTOI=
-X-Google-Smtp-Source: AB8JxZpmmGlGgpnXKcfPzsfEG7YE25HHxoq+PlfzUHYchI94ixAzbAiaJLtIRsVAUirI5Gi+D44MUkFiY+EnbgjVQW0=
-X-Received: by 2002:a9f:336c:: with SMTP id
-	a44-v6mr16285143uac.38.1526942038068; 
-	Mon, 21 May 2018 15:33:58 -0700 (PDT)
+	bh=1sp+Kn2gm9gAPPo/wAIPcy1+mJiv0xz4te58w1f3HO0=;
+	b=GOpjp+Xonx/veXIKfmWNC9MctsAx0IY14mbH30DOkI0HR3DcQFhNgR7wdZE3rc+kR/
+	ru1RWBh0AlXgdtYWUlZq8d0Oc4jBghGtQeMl8Fph2i27nwz3chYH+hoYQCCMWdei970D
+	o57WyTmvRTFrGjXdvqR1AJVLAmffa/Jez/HT/pXGhZE15hdmxfeNYGleMYcHXpPQYhpC
+	rHTW9KI7E9JiSZTJfMPJDx5PpRHyo+exDwLktv6IOXE6czBN93BZXoGS8z7xsbwsj6UM
+	Tax9iWfL6b1yWUdRcxWilFRLioGC3AcOqWdRn2xERKI19pnElAk62+AzBdzIU9NjArQ7
+	FU4Q==
+X-Gm-Message-State: ALKqPwcxRNHj2x+6It4lMA4wsLK6/U1+j8GJqys6Z2gtCyBwr/W7RrFB
+	VqRMAUlv9xSVu51m+f9ds7oN4DI4vgrbV7htXKE=
+X-Google-Smtp-Source: AB8JxZoPN5CGzYICtzXD8CwPP8NFzx+dlTO49lXvxWMsWPlf7SCanuVurrzL1+eVYylrAmJ7mpAxqQ2Z9oCvhKmOR1k=
+X-Received: by 2002:a1f:3451:: with SMTP id
+	b78-v6mr14595853vka.2.1526950551659; 
+	Mon, 21 May 2018 17:55:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:ab0:3094:0:0:0:0:0 with HTTP; Mon, 21 May 2018 15:33:57
+Received: by 2002:ab0:3094:0:0:0:0:0 with HTTP; Mon, 21 May 2018 17:55:51
 	-0700 (PDT)
-In-Reply-To: <2d676743-0f4f-a079-96b0-c352546ed892@igalia.com>
-References: <20180512030758.31409-1-raj.khem@gmail.com>
-	<20180512030758.31409-5-raj.khem@gmail.com>
-	<8c2ae33c-fbde-11de-6fd7-d220c0b55d57@igalia.com>
-	<b55b0545-7867-a168-a853-903313da12de@gmail.com>
-	<5e41dd1d-0a05-39a4-888c-948be3cc8714@igalia.com>
-	<CAJ86T=VXbwsL=2gUqin0-2jdBB1tbbxgwP7+76AToZdO16Jtiw@mail.gmail.com>
-	<2d676743-0f4f-a079-96b0-c352546ed892@igalia.com>
+In-Reply-To: <20180520022931.GY31886@vctlabs.com>
+References: <20180520022931.GY31886@vctlabs.com>
 From: Andre McCurdy <armccurdy@gmail.com>
-Date: Mon, 21 May 2018 15:33:57 -0700
-Message-ID: <CAJ86T=UvTG5f-OjpG-X_k15wqGMSk1RoAh+3=nZFvt69ZJnWQg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 5/8] luajit: Dont use BUILD_LDFLAGS when compiling host binaries
+Date: Mon, 21 May 2018 17:55:51 -0700
+Message-ID: <CAJ86T=XmTQhg1_TKSnMLrLFQMGz4hYzjGaheFA0XUZ=BRPbj7w@mail.gmail.com>
+To: "S. Lockwood-Childs" <sjl@vctlabs.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] [PATCH] libev: correct source path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,47 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 May 2018 22:33:57 -0000
+X-List-Received-Date: Tue, 22 May 2018 00:55:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sun, May 20, 2018 at 12:02 PM, Carlos Alberto Lopez Perez
-<clopez@igalia.com> wrote:
-> On 18/05/18 20:46, Andre McCurdy wrote:
->> On Fri, May 18, 2018 at 6:27 AM, Carlos Alberto Lopez Perez
->> <clopez@igalia.com> wrote:
->>> On 18/05/18 06:44, Khem Raj wrote:
->>>>> I suggest adding something like this:
->>>>>
->>>>> EXTRA_OEMAKE_remove_class-target = "'HOST_LDFLAGS=${BUILD_LDFLAGS}'"
->>
->> This idea looks right, but be aware that ${BUILD_LDFLAGS} will be
->> expanded before being processed by _remove. Therefore any individual
->> string within ${BUILD_LDFLAGS} will be removed from the final value of
->> EXTRA_OEMAKE, even if it occurs somewhere other than in the value of
->> HOST_LDFLAGS. For example:
->>
->>   BUILD_CFLAGS = "one two three"
->>   BUILD_LDFLAGS = "one two three"
->>
->>   FOO = " \
->>     'HOST_CFLAGS=${BUILD_CFLAGS}' \
->>     'HOST_LDFLAGS=${BUILD_LDFLAGS}' \
->>   "
->>
->>   FOO_remove_class-target = "'HOST_LDFLAGS=${BUILD_LDFLAGS}'"
->>
->>   $ bitbake recipe -e | grep ^FOO=
->>
->>   FOO="'HOST_CFLAGS=one three'"
->>
->> Notice how "two" has been removed from the final value of HOST_CFLAGS
->> set within FOO.
+On Sat, May 19, 2018 at 7:29 PM, S. Lockwood-Childs <sjl@vctlabs.com> wrote:
+> Replace PN with BPN, since source unpacks to the same place
+> regardless of building for multilib (or native, though that's
+> not enabled here) where PN != BPN
 >
-> Interesting.. didn't knew this.
+> Signed-off-by: S.Lockwood-Childs <sjl@vctlabs.com>
+> ---
+>  meta-oe/recipes-connectivity/libev/libev_4.24.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Is there any way to tell _remove to only remove a string if it matches
-> as a whole instead of removing the individual words separated by spaces?
-> I tried escaping the quotes but didn't worked :?
+> diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+> index 5e0f3a5..399fdd9 100644
+> --- a/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+> +++ b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+> @@ -9,7 +9,7 @@ SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
+>  SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
+>  SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
+>
+> -S = "${WORKDIR}/${PN}-${PV}"
+> +S = "${WORKDIR}/${BPN}-${PV}"
 
-I don't think there's a way to do that.
+That's the default (set from bitbake.conf) so you can drop this line entirely.
+
+>  inherit autotools
+>
+> --
+> 1.9.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
