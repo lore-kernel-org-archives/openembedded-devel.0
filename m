@@ -1,20 +1,49 @@
-Return-Path: <prvs=673fc8d93=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id CCD4E74A13
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 22:11:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,430,1520895600"; d="scan'208";a="10436789"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 May 2018 00:11:29 +0200
-Message-ID: <20180522221129.9021-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.11.0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f42.google.com (mail-pl0-f42.google.com
+	[209.85.160.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B3B274777;
+	Tue, 22 May 2018 22:38:07 +0000 (UTC)
+Received: by mail-pl0-f42.google.com with SMTP id c41-v6so11732407plj.10;
+	Tue, 22 May 2018 15:38:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=mJ+DML3NnIEetDhESQmGNpLWLE5kbEpJaF8i3jNPDWQ=;
+	b=RBAOecMVp6gkbNRcAjabQey1P9bEMYbQbVys9zeoJq8vj3hVXoiAuk8Ryx4ve6yKIX
+	LsJkwaOyvmAJMzX98Pcec1guWQnuRz14WVYIQHc5hLGV60P0C+fN0jvu2Rt4xabqThMN
+	T3N0lmh9E5iOV4qZN8b9gdwtH5t96S0tKMY2JgRrN8Mh5rzPSnaKNblltgQeErAlDDzS
+	oIQgWYWJRUrVuHNTU44NL8Utq0fsK9jYvU+ZAMhvYDwTMiDU4gwYGZXt+PmKYifb7q+t
+	OcLYczyA2oCDdd0At0TpJmrxyy1hJ3i4Wz1krhVQpto5CBZVNn8KDcDUhusrOcc5mt0f
+	oP7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=mJ+DML3NnIEetDhESQmGNpLWLE5kbEpJaF8i3jNPDWQ=;
+	b=kTtO2Fm3A1FX0dxzIPUxTKcdRoaW4uiIm0F/p4cvFXG4inJzTlymljpveC2bzzNBsx
+	+ODuX+4KWTTshpH5DO9PSOy/N/KqdXWVmmHRNnzbvLESsq+G5jXNav49gtRR/oHIKkgV
+	GzfMvxm7IXBg4AgFmO/jK1lIyrUDjHRBclQgLzq17aWhi+vxg+b7FSAqo8Sjl08f+CfF
+	voLMPtY83fsjrbx+I2rMIvLjH6l4OjlwWnW2BVG1dnc25OkCX80ZjjYZ45M/1W2netL6
+	O/Nl5J0LTSV7cCP0sZHWLF+p1D8DitHYujGbw5oDgwCcd0A13e2Ap86/MyyID7YQeMve
+	mw5Q==
+X-Gm-Message-State: ALKqPweY4PvEvRmfIezuNB6tqJsbfAzpZojRlpdz5QH+BhdYd5H3XWP2
+	Bk8r2mWxtKgwUfmHh73lLTt0ObcoLZjLRPe30bU=
+X-Google-Smtp-Source: AB8JxZpiJvZWkGt1qUd8qZ/cIXOm/bJDTJykLOCWpbA9nZIlEuBWV6eaSKNtGcahVh2691n2+aDgyslMnJxCEI1M4DY=
+X-Received: by 2002:a17:902:59ce:: with SMTP id
+	d14-v6mr326238plj.253.1527028688210; 
+	Tue, 22 May 2018 15:38:08 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: dev@g0hl1n.net
-Subject: [meta-oe][PATCH v2] uhubctl: add recipe
+Received: by 2002:a17:90a:8b91:0:0:0:0 with HTTP; Tue, 22 May 2018 15:37:37
+	-0700 (PDT)
+In-Reply-To: <fc0d7e3b-9d0c-7ea3-1caf-ad3099f40099@gmail.com>
+References: <fc0d7e3b-9d0c-7ea3-1caf-ad3099f40099@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 May 2018 18:37:37 -0400
+Message-ID: <CAMKF1so9=sE=QGD=Y7YysgTUxxUjvcvDJCHtQ5saVJY9Pn44XQ@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] meta-openembedded maintainer ship change.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,52 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2018 22:11:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 22 May 2018 22:38:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add recipe for uhubctl v2.0.0, an utility to control USB power per-port
-on "smart" USB hubs.
+Thanks Armin, I am hoping to keep working with you on various stable
+releases in active maintenance.
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
-Changes v2:
-  + applied suggestions by Khem Raj:
-    - replace version fix patch with sed line
-    - remove redundant ${S} assignment
-    - remove redundant FILES assignmet
----
- meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
 
-diff --git a/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb b/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
-new file mode 100644
-index 000000000..6306ddb55
---- /dev/null
-+++ b/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "USB hub per-port power control"
-+HOMEPAGE = "https://github.com/mvp/uhubctl"
-+BUGTRACKER = "https://github.com/mvp/uhubctl/issues"
-+DEPENDS = "libusb1"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "https://github.com/mvp/${PN}/archive/v${PV}.tar.gz"
-+SRC_URI[md5sum] = "5c711911d766d76813333c3812277574"
-+SRC_URI[sha256sum] = "4c31278b2c03e5be5a696c3088bc86cf2557a70e00f697799c163aba18e3c40e"
-+
-+# uhubctl gets its program version from "git describe". As we use the source
-+# archive do reduce download size replace the call with our hardcoded version.
-+do_configure_append() {
-+    sed -i "s/^\(GIT_VERSION :=\).*$/\1 ${PV}/g" ${S}/Makefile
-+}
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D}
-+}
--- 
-2.11.0
 
+On Tue, May 22, 2018 at 11:40 AM, akuster808 <akuster808@gmail.com> wrote:
+> Hello all,
+>
+> After much thought, I have decided to step away from being the
+> meta-openembedded maintainer, patch wrangler and builder.  Khem Raj has
+> kindly stepped up to continue these activities. Maintaining this was
+> consuming too much of my free time and I need to focus on other things
+> in the community.
+>
+> Thanks for the opportunity to have served you.
+>
+> Kind regards,
+>
+> Armin
+>
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
