@@ -1,20 +1,40 @@
-Return-Path: <prvs=673fc8d93=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 381E874787
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id AF87B72EA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 11:11:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,430,1520895600"; d="scan'208";a="10423449"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 May 2018 13:10:47 +0200
-Message-ID: <20180522111047.26685-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.11.0
+	Tue, 22 May 2018 11:46:14 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id j5-v6so32688775wme.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 May 2018 04:46:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=/H1/X41QuSPDzNQSp7ij9ByUk/Mr9n5/a90TCpVEm1A=;
+	b=UWk/ZMvniwqXh4tmXJRwjIgX9AcVhIe6Zk82rqsx/l+jTtCzOHPNgE9vzTqzvYeD+9
+	2utiMm7OvVzZDdvkThuzBQZZcvA0m1b9ayrH7XCddF/ID1KAZMhAVjNtWtdhc3O8FNv2
+	vQ8AXES5GS60Bf1DLjhgnwx/8Y2ANpfacpTQO/xGSqFGJwvCIdkgzpCQhdkWW+ZVbMVg
+	Y3yEcnX7IxDwpI3q6wZCRzIJ1ARVar/bmMIxfcjRB99xXO6xxmpwIQU0BFoz/gklyECe
+	7GPA4wn7EdBD7+i2JVS2iAKAtWb/z7eayb//GYIm3ZJe5aZZVP87rO/qETrXmwhyJon1
+	F72w==
+X-Gm-Message-State: ALKqPwdqfzb8DlrkN23WuMY3IYvpNWMY3jQ38CkJGNfZdDQo6z38uoVq
+	43LJS0fwuBCbm7rxUjY7WBniwBIc
+X-Google-Smtp-Source: AB8JxZoUlb7Nmew3oW66iEoNfRl6kyjqBg5BRdTdOwfZMiREc8irlGpszM4iqbHnLbCnEVg2ULRsgA==
+X-Received: by 2002:a50:8005:: with SMTP id 5-v6mr1901486eda.130.1526989574718;
+	Tue, 22 May 2018 04:46:14 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	m25-v6sm8636950edf.76.2018.05.22.04.46.13
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 22 May 2018 04:46:13 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 May 2018 12:46:13 +0100
+Message-Id: <20180522114613.4915-1-git@andred.net>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: dev@g0hl1n.net
-Subject: [meta-oe][PATCH] pam-plugin-ldapdb: add recipe
+Subject: [meta-oe][PATCH] krb5: DEPENDS on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,48 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2018 11:11:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 22 May 2018 11:46:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Add recipe for version 1.3 of pam-plugin-ldapdb, a PAM module for
-directly binding a user DN to an LDAP server.
+From: André Draszik <andre.draszik@jci.com>
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+bison-native is required for the build:
+
+| yacc  getdate.y
+| make[2]: yacc: Command not found
+| make[2]: *** [<builtin>: getdate.c] Error 127
+
+In most cases, this dependency comes indirectly via toolchain
+dependencies, specifically binutils-cross, which pulls
+bison-native.
+
+Different setups, such as with external toolchains, or an
+upcoming change to OE-core for avoiding exactly this
+unnoticed dependency expose this problem, since the correct
+dependency is not marked explicitly.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- .../recipes-extended/pam/pam-plugin-ldapdb_1.3.bb  | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
+ meta-oe/recipes-connectivity/krb5/krb5_1.16.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
-new file mode 100644
-index 000000000..a68d1999f
---- /dev/null
-+++ b/meta-oe/recipes-extended/pam/pam-plugin-ldapdb_1.3.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "PAM searchless LDAP authentication module"
-+HOMEPAGE = "https://github.com/rmbreak/pam_ldapdb"
-+BUGTRACKER = "https://github.com/rmbreak/pam_ldapdb/issues"
-+SECTION = "libs"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=41ab94182d94be9bb35e2a8b933f1e7d"
-+
-+DEPENDS += "libpam openldap"
-+
-+inherit distro_features_check
-+REQUIRED_DISTRO_FEATURES = "pam"
-+
-+SRC_URI = "https://github.com/rmbreak/pam_ldapdb/archive/v${PV}.tar.gz"
-+SRC_URI[md5sum] = "2dd4f1370fcfe995ee0ad09611109b87"
-+SRC_URI[sha256sum] = "8ed92b36523556bb5d9bf3eb33a1035e46041d4be767c8d62136930c0ca0e45b"
-+
-+S = "${WORKDIR}/pam_ldapdb-${PV}"
-+
-+do_install () {
-+    oe_runmake install DESTDIR=${D} PAMDIR=${base_libdir}/security
-+}
-+
-+FILES_${PN} = "${base_libdir}/security/pam_ldapdb.so"
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
+index f95240f54..6eedd2a22 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
+@@ -15,7 +15,7 @@ HOMEPAGE = "http://web.mit.edu/Kerberos/"
+ SECTION = "console/network"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=59b8da652f07186b44782a8454574f30"
+-DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native openssl"
++DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
+ 
+ inherit autotools-brokensep binconfig perlnative systemd update-rc.d
+ 
 -- 
-2.11.0
+2.17.0
 
 
