@@ -1,40 +1,21 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id AF87B72EA2
+Return-Path: <prvs=673fc8d93=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id DE433746F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 11:46:14 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id j5-v6so32688775wme.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 May 2018 04:46:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=/H1/X41QuSPDzNQSp7ij9ByUk/Mr9n5/a90TCpVEm1A=;
-	b=UWk/ZMvniwqXh4tmXJRwjIgX9AcVhIe6Zk82rqsx/l+jTtCzOHPNgE9vzTqzvYeD+9
-	2utiMm7OvVzZDdvkThuzBQZZcvA0m1b9ayrH7XCddF/ID1KAZMhAVjNtWtdhc3O8FNv2
-	vQ8AXES5GS60Bf1DLjhgnwx/8Y2ANpfacpTQO/xGSqFGJwvCIdkgzpCQhdkWW+ZVbMVg
-	Y3yEcnX7IxDwpI3q6wZCRzIJ1ARVar/bmMIxfcjRB99xXO6xxmpwIQU0BFoz/gklyECe
-	7GPA4wn7EdBD7+i2JVS2iAKAtWb/z7eayb//GYIm3ZJe5aZZVP87rO/qETrXmwhyJon1
-	F72w==
-X-Gm-Message-State: ALKqPwdqfzb8DlrkN23WuMY3IYvpNWMY3jQ38CkJGNfZdDQo6z38uoVq
-	43LJS0fwuBCbm7rxUjY7WBniwBIc
-X-Google-Smtp-Source: AB8JxZoUlb7Nmew3oW66iEoNfRl6kyjqBg5BRdTdOwfZMiREc8irlGpszM4iqbHnLbCnEVg2ULRsgA==
-X-Received: by 2002:a50:8005:: with SMTP id 5-v6mr1901486eda.130.1526989574718;
-	Tue, 22 May 2018 04:46:14 -0700 (PDT)
-Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	m25-v6sm8636950edf.76.2018.05.22.04.46.13
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 22 May 2018 04:46:13 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 May 2018 12:46:13 +0100
-Message-Id: <20180522114613.4915-1-git@andred.net>
-X-Mailer: git-send-email 2.17.0
+	Tue, 22 May 2018 12:25:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,430,1520895600"; 
+   d="scan'208";a="1454936"
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 May 2018 14:25:00 +0200
+Message-ID: <20180522122500.4092-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] krb5: DEPENDS on bison-native
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: dev@g0hl1n.net
+Subject: [meta-oe][PATCH] uhubctl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,46 +28,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 May 2018 11:46:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 22 May 2018 12:25:30 -0000
+Content-Type: text/plain
 
-From: André Draszik <andre.draszik@jci.com>
+Add recipe for uhubctl v2.0.0, an utility to control USB power per-port
+on "smart" USB hubs.
 
-bison-native is required for the build:
-
-| yacc  getdate.y
-| make[2]: yacc: Command not found
-| make[2]: *** [<builtin>: getdate.c] Error 127
-
-In most cases, this dependency comes indirectly via toolchain
-dependencies, specifically binutils-cross, which pulls
-bison-native.
-
-Different setups, such as with external toolchains, or an
-upcoming change to OE-core for avoiding exactly this
-unnoticed dependency expose this problem, since the correct
-dependency is not marked explicitly.
-
-Signed-off-by: André Draszik <andre.draszik@jci.com>
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 ---
- meta-oe/recipes-connectivity/krb5/krb5_1.16.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...001-Makefile-set-program-version-to-2.0.0.patch | 34 ++++++++++++++++++++++
+ meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb   | 22 ++++++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-support/uhubctl/files/0001-Makefile-set-program-version-to-2.0.0.patch
+ create mode 100644 meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
-index f95240f54..6eedd2a22 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.16.bb
-@@ -15,7 +15,7 @@ HOMEPAGE = "http://web.mit.edu/Kerberos/"
- SECTION = "console/network"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=59b8da652f07186b44782a8454574f30"
--DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native openssl"
-+DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
- 
- inherit autotools-brokensep binconfig perlnative systemd update-rc.d
- 
+diff --git a/meta-oe/recipes-support/uhubctl/files/0001-Makefile-set-program-version-to-2.0.0.patch b/meta-oe/recipes-support/uhubctl/files/0001-Makefile-set-program-version-to-2.0.0.patch
+new file mode 100644
+index 000000000..e9e06bc71
+--- /dev/null
++++ b/meta-oe/recipes-support/uhubctl/files/0001-Makefile-set-program-version-to-2.0.0.patch
+@@ -0,0 +1,34 @@
++From 4f241d2f407e834c30db4047cfb6863cd5f14ea6 Mon Sep 17 00:00:00 2001
++From: Richard Leitner <richard.leitner@skidata.com>
++Date: Tue, 22 May 2018 13:42:20 +0200
++Subject: [PATCH] Makefile: set program version to 2.0.0
++
++Remove the dynamic PROGRAM_VERSION gathering via "git describe" an
++replace it with the hardcoded value "2.0.0".
++
++This is needed because "git describe" fails with an error when executed
++in a non-git directory as it will occur when uhubctl source is not
++downloaded via "git clone". But for example as an source archive.
++
++Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ Makefile | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 7074cbf..c80fa17 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -14,8 +14,7 @@ RM		:= rm -rf
++ CC ?= gcc
++ CFLAGS ?= -g -O0
++ CFLAGS += -Wall -Wextra -std=c99 -pedantic
++-GIT_VERSION := $(shell git describe --abbrev=4 --dirty --always --tags)
++-CFLAGS += -DPROGRAM_VERSION=\"$(GIT_VERSION)\"
+++CFLAGS += -DPROGRAM_VERSION=\"2.0.0\"
++ 
++ ifeq ($(UNAME_S),Linux)
++ 	LDFLAGS += -Wl,-z,relro -lusb-1.0
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb b/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
+new file mode 100644
+index 000000000..80fc92332
+--- /dev/null
++++ b/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "USB hub per-port power control"
++HOMEPAGE = "https://github.com/mvp/uhubctl"
++BUGTRACKER = "https://github.com/mvp/uhubctl/issues"
++DEPENDS = "libusb1"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "\
++    https://github.com/mvp/${PN}/archive/v${PV}.tar.gz \
++    file://0001-Makefile-set-program-version-to-2.0.0.patch \
++    "
++SRC_URI[md5sum] = "5c711911d766d76813333c3812277574"
++SRC_URI[sha256sum] = "4c31278b2c03e5be5a696c3088bc86cf2557a70e00f697799c163aba18e3c40e"
++
++S = "${WORKDIR}/${PN}-${PV}"
++
++do_install () {
++    oe_runmake install DESTDIR=${D}
++}
++
++FILES_${PN} = "${sbindir}/uhubctl"
 -- 
-2.17.0
+2.11.0
 
 
