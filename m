@@ -1,13 +1,13 @@
 Return-Path: <prvs=674cef394=Richard.Leitner@skidata.com>
 Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 003A57458B
+	by mail.openembedded.org (Postfix) with ESMTP id 29FFB748EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 May 2018 08:03:25 +0000 (UTC)
+	Wed, 23 May 2018 08:05:05 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.49,432,1520895600"; 
-   d="scan'208";a="1457112"
-To: Andre McCurdy <armccurdy@gmail.com>
+   d="scan'208";a="1457115"
+To: Khem Raj <raj.khem@gmail.com>
 References: <20180522111047.26685-1-richard.leitner@skidata.com>
-	<CAJ86T=V_p1Lr7W-L-3s2dUntjkHmoJr4emiRnFpywZaqK8yApA@mail.gmail.com>
+	<CAMKF1srVqRkd86gANga1KQCJEtRi0vcnzTkzZztj-iDYuZAEuw@mail.gmail.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,12 +53,12 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <7d427b4a-7c43-9cd8-1ca6-30591f5d6b4f@skidata.com>
-Date: Wed, 23 May 2018 10:03:24 +0200
+Message-ID: <aaa9b91c-e5ca-0f07-5a07-f323f7d31157@skidata.com>
+Date: Wed, 23 May 2018 10:05:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAJ86T=V_p1Lr7W-L-3s2dUntjkHmoJr4emiRnFpywZaqK8yApA@mail.gmail.com>
+In-Reply-To: <CAMKF1srVqRkd86gANga1KQCJEtRi0vcnzTkzZztj-iDYuZAEuw@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
@@ -77,16 +77,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 May 2018 08:03:26 -0000
+X-List-Received-Date: Wed, 23 May 2018 08:05:06 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Hi Andre,
-thank you for your feedback. Please find my comments below.
 
-On 05/23/2018 02:51 AM, Andre McCurdy wrote:
-> On Tue, May 22, 2018 at 4:10 AM, Richard Leitner
+
+On 05/22/2018 08:09 PM, Khem Raj wrote:
+> On Tue, May 22, 2018 at 7:10 AM, Richard Leitner
 > <richard.leitner@skidata.com> wrote:
 >> Add recipe for version 1.3 of pam-plugin-ldapdb, a PAM module for
 >> directly binding a user DN to an LDAP server.
@@ -111,37 +110,11 @@ On 05/23/2018 02:51 AM, Andre McCurdy wrote:
 >> +LIC_FILES_CHKSUM = "file://LICENSE;md5=41ab94182d94be9bb35e2a8b933f1e7d"
 >> +
 >> +DEPENDS += "libpam openldap"
-> 
-> The usual convention is to assign to DEPENDS with = rather than +=
-
-Ok. Thanks for that hint. I'll change that in v2.
-
-> 
+>> +
 >> +inherit distro_features_check
 >> +REQUIRED_DISTRO_FEATURES = "pam"
 >> +
 >> +SRC_URI = "https://github.com/rmbreak/pam_ldapdb/archive/v${PV}.tar.gz"
-> 
-> To give the local file a meaningful file name, you can have bitbake
-> rename it as part of the download process by adding
-> ";downloadfilename=${BP}.tar.gz" to the end of SRC_URI.
-
-Thank you. That makes sense. I'll add it in v2.
-
-> 
-> Note however that there have recently been a series of patches merged
-> to meta-oe which updated recipes to build from git clones rather than
-> github tar file archives, so you may want to consider doing that in
-> this recipe too.
-
-Why should we change to git clones instead of archives? What's the advantage?
-
-IMHO it only causes more traffic and uses more disk space.
-Furthermore if we rely on tags these may be changed without our notice...
-And if they are unsigned (like here) we also don't know if something got modified unintentionally...
-Or should we use revision hashes?
-
-> 
 >> +SRC_URI[md5sum] = "2dd4f1370fcfe995ee0ad09611109b87"
 >> +SRC_URI[sha256sum] = "8ed92b36523556bb5d9bf3eb33a1035e46041d4be767c8d62136930c0ca0e45b"
 >> +
@@ -150,14 +123,16 @@ Or should we use revision hashes?
 >> +do_install () {
 >> +    oe_runmake install DESTDIR=${D} PAMDIR=${base_libdir}/security
 >> +}
+> 
+> Perhaps using EXTRA_OEMAKE += " PAMDIR=${base_libdir}/security"
+> would mean do dont need to define custom do_install()
+
+nope. sadly not. Without the custom do_install nothing gets installed and therefore
+we get no package...
+
+> 
 >> +
 >> +FILES_${PN} = "${base_libdir}/security/pam_ldapdb.so"
-> 
-> It's conventional to add to the default packaging rules rather than
-> over-ride them, ie use += here rather than =
-> 
-
-Ok. Thanks.
 
 regards;Richard.L
 
