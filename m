@@ -1,52 +1,54 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
-	[209.85.214.54])
-	by mail.openembedded.org (Postfix) with ESMTP id C5A5C74C0D
+Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
+	[209.85.214.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 678CD74BC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 18:27:25 +0000 (UTC)
-Received: by mail-it0-f54.google.com with SMTP id 70-v6so3656380ity.2
+	Thu, 24 May 2018 18:27:27 +0000 (UTC)
+Received: by mail-it0-f43.google.com with SMTP id d10-v6so3636242itj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 11:27:26 -0700 (PDT)
+	Thu, 24 May 2018 11:27:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=5euffXzgCamUFUOmosY1jIR4Mc0cm9bC9aI0HBE+UyE=;
-	b=BCN3ZaF7LxqRqZw4o/bIUYpYYlBS6D50xAZpPq0B3dX/AVm6+eKKWpcllPuFOJk/JJ
-	CznnNmwc+DMMZMu7gc61YLEmMCJQOhi3YgbsDKQ2GMWhW7EFvUX2iKK3iYgYZrAgWouR
-	WHntVZh9ddV8ua9GDeffLP7aDhxz2GR1cmOCLKq9Tju8UCVoI7gpt+Vtoq8GSTZY5SlX
-	jIdFmX4tmdB80SI3/3MNoDEXRgX2pEjxf08B3lIzDeyVuQHGHW22/ZvRak1DTetWcBDY
-	HY5ujaKyvY4yvteRZG9E6vsVBG3G2ES4PR1Z6m0dvM6W67axYxAPe5WYjkiEenTinRYc
-	+Vvw==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=A5sFskgm7w8IuAsLxSjmyPVgSN1LEoxRfmaQ/HNqZpc=;
+	b=q/Nj0NSBO9Mz4iQFzuzVVKDOZ7YCILZzrObjmCQAiLtfXPxDMx1VCToXVcsAQhOJBO
+	BxHLyfuAGpiRdXqcJe7dZXWaMkcXHo8PNa43S8/vC0HskKF3I99OjsjW5tZ5sBhgcgDO
+	1BHdyxs+wPK7I8BBIN2ZFFHSQUZDPJTd8ZggftvEcULXpY+EGgDpRHNyAxKVfevIrOOj
+	i3xvlBf8YwxKnkJ1ZJmYHVaV0T5f1Ua9x7+jZeNgmxf43L/Ls2vQirj8sEwb3f5MdAKJ
+	PgfELIjzVSTkDqRL6EFPxXSrwfR/L0+M9eBN7dYRkggNcVF4u5ihohZVxXkXR8/4KPLU
+	zPXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=5euffXzgCamUFUOmosY1jIR4Mc0cm9bC9aI0HBE+UyE=;
-	b=CzZxs2+ZfdtjsqyS4AHDSCnoPQJHnETCD23AxJvfGmQ0dE7ARK7kksW2dk/RRp3bWx
-	c4lqs1gXxQGh7xw5kkVrYJV34Oh0tNAreHipiaB9/4qa2SqWRxvMu5a7C4OqnUUHJL8S
-	3X49i3oPv3gvZ5Zgq5MGrR+jswHZn3fbWdBzmwaU7WkAaj/SVLsqMOstUyLtUonAiss1
-	fCDr6m+crC1QYKXmlxO+wpoyZMvPQPFYHCcO8h/xqKx5xPCG8Gr1rqWzys3+ejvtdznt
-	v96SjQQZZ53efonG+d7roL3H01XKPwhKcvf3BpXVnViyCceYOmzuANARb5k5cYnWLU+9
-	l1FA==
-X-Gm-Message-State: ALKqPwfFhUnh9snL1kCi5GHvmB80Orerrg5ZjG0R7+DbSuoZYRt1sWuD
-	0mvbqukaiLbazUGwPaUMFu5+rqnK
-X-Google-Smtp-Source: AB8JxZr2c2AaDgBP3z4z94kC5XWBtURS4XO4af8TCYm8L9Zn6QiQi0Sj+kQwtv8NxcfiukW4jkgGSw==
-X-Received: by 2002:a24:4d93:: with SMTP id
-	l141-v6mr10257968itb.111.1527186446317; 
-	Thu, 24 May 2018 11:27:26 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=A5sFskgm7w8IuAsLxSjmyPVgSN1LEoxRfmaQ/HNqZpc=;
+	b=TDn/TnbzdXNuWjgxsCPCqY623uI6KeVojsP5KfA8NMNy44CjftmcD+IOFjD1VkgsmT
+	no7L6OXVnNOo9s5pK6tX2pL1x75qxJ7EsjnS9MufcsHvFKph/hKWmLic0CB1O7WIVk9l
+	fRl3IZj1rj9IInnUmmygwBAM2rbu3uGOfpDCEUIKkQwQaty4BK8kE7a/qWRpIEucEgSr
+	1+Ldw2DylFRK6uwIpiLnYUGymXmnZfIAYFZwaYSP5RFbcC0UJ5C9GlazqSCoFjiGhcIC
+	8gKULZH+40PfuQA4z4N9nxuKqmv0+Tvs3FtOT47KpxJjRPrWtKQLWW+duK5Mo9G2ZUZV
+	Y7mw==
+X-Gm-Message-State: ALKqPwc3RftREAq0/4LFlB+d7AO5TPFSgWk/ACwAPMLyCGbBcoYPrYvO
+	QLBxl9AxqmE7AucKMRlTHmFzAfgC
+X-Google-Smtp-Source: AB8JxZoo5LXO7z0bYc3jYq5DdGadpw521oC0EoG8LHAyHoLOOBu43x3u1eWyB09ysw2/Nxdmspc7rw==
+X-Received: by 2002:a24:cc83:: with SMTP id
+	x125-v6mr10720770itf.120.1527186447971; 
+	Thu, 24 May 2018 11:27:27 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	o1-v6sm2746196ite.37.2018.05.24.11.27.24
+	o1-v6sm2746196ite.37.2018.05.24.11.27.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 11:27:25 -0700 (PDT)
+	Thu, 24 May 2018 11:27:26 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 14:26:57 -0400
-Message-Id: <20180524182659.19986-10-twoerner@gmail.com>
+Date: Thu, 24 May 2018 14:26:58 -0400
+Message-Id: <20180524182659.19986-11-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524182659.19986-1-twoerner@gmail.com>
 References: <20180524182659.19986-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH 09/11] json-spirit: variable cleanup
+MIME-Version: 1.0
+Subject: [meta-oe][master-next][PATCH 10/11] capnproto: variable cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +61,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 18:27:26 -0000
+X-List-Received-Date: Thu, 24 May 2018 18:27:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 Reorder recipe variables according to:
 
@@ -68,31 +72,44 @@ Reorder recipe variables according to:
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-devtools/capnproto/capnproto_0.6.1.bb   | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
-index 3c1d8a9959..d6e42c81d5 100644
---- a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
-+++ b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
-@@ -9,6 +9,8 @@ PRIORITY = "optional"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=278ef6183dec4aae1524fccc4b0113c9"
- 
-+DEPENDS = "boost"
-+
- SRC_URI = "file://json_spirit_v${PV}.zip \
-            file://0001-Adjust-the-cmake-files.patch \
-            file://0001-Link-to-libatomic.patch \
-@@ -16,8 +18,6 @@ SRC_URI = "file://json_spirit_v${PV}.zip \
- 
- S = "${WORKDIR}/json_spirit_v${PV}"
- 
--DEPENDS = "boost"
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+index dfe19947c0..6ca3613db3 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+@@ -2,24 +2,23 @@ SUMMARY = "Cap'n Proto serialization/RPC system"
+ DESCRIPTION = "Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. "
+ HOMEPAGE = "https://github.com/sandstorm-io/capnproto"
+ SECTION = "console/tools"
 -
- inherit cmake
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=0a5b5b742baf10cc1c158579eba7fb1d"
  
- BBCLASSEXTEND = "nativesdk"
+-SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
+ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
++SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
++
++S = "${WORKDIR}/git/c++"
++
++inherit cmake
+ 
+ EXTRA_OECMAKE += "\
+     -DBUILD_TESTING=OFF \
+ "
+ 
+-inherit cmake
+-
+-S = "${WORKDIR}/git/c++"
++FILES_${PN}-compiler = "${bindir}"
+ 
+ PACKAGE_BEFORE_PN = "${PN}-compiler"
+ RDEPENDS_${PN}-dev += "${PN}-compiler"
+ 
+-FILES_${PN}-compiler = "${bindir}"
+-
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.0.582.gccdcbd54c
 
