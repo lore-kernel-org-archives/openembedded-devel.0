@@ -1,63 +1,49 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A44BE74AB8
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 2306674BB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 17:30:16 +0000 (UTC)
-Received: by mail-io0-f169.google.com with SMTP id 200-v6so2209968ioz.6
+	Thu, 24 May 2018 18:27:11 +0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id j186-v6so3633395ita.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 10:30:17 -0700 (PDT)
+	Thu, 24 May 2018 11:27:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=fDz5vf18LAtNIM3hIxZ0M3vpepnqzemA5MPoul5TjyM=;
-	b=OTzu0V+8QBff5OV+MVuaZDUMZzZ8y234kqkObG4npDuJy2pNiEiNXpJVvbrEcvcZBg
-	Esje4cd/2VYghJAy4m9WeKLnrQnM8y/SI/F3oiNOoeJnha7PXXkMcB5h8dA6BYDdhxaQ
-	T/5rXe+goR85ELPoPBVrAsVNOoXQdwnQI+HmvrqKU/VUOLNgV4ZSpFe6U1v1fUoVzcg7
-	PMBMu2mVNxXudDhv7Dun+/+dYhSCAIk0lcZ1pyOiJ+XXQXUk1NqZnVb85emyWN8lSWxw
-	mWU8fto4MJtuLL1dLzcX/8yik6AE1tOTsnVTE1rCpzJ8agmROfdYEN6rUW1bQ6ZjcpNa
-	m6eg==
+	h=from:to:subject:date:message-id;
+	bh=uZNaZcxj8ROjQJlW/jKIJCB4MCIa9KXidU1MY3baigM=;
+	b=ipdBAxmNqqhJGcPYoEnKf+QirJoXv6yt3AlWfD77WC3pzLAJfmntM+gZaWKWmYP6TN
+	DPOJDRSm0kFTqqfbbozm0oufXmqijtsRDr2CHn6CldF0S4Y4TOfR/XRODbXHvJxA5VDb
+	Ub1MPCW28iC6D+Lgf+8403OeB8qgH9tILEceY60+M046+v8E4eLRlCfsHKyPeOaOiHXG
+	400BYnXtu9xyWEIGPEfgVfmTRT7tnzDrplvCG1JU+PL2Nybq20e5H/HJ0kVn076X26Zi
+	pydvakr+mzsQpvl/nMwU08dZFOVKvqZLjwYvjmYEEni3+7Z4JtakuD78Nm2Yl7hPwwGU
+	NFDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=fDz5vf18LAtNIM3hIxZ0M3vpepnqzemA5MPoul5TjyM=;
-	b=LtVRm7k4EQmYEWE//Qxc+Gp9EKXmby98WkRDg0LYqKQWqTUSytq7ur0ndwFtNJD3XP
-	EfA/DM04m/tD1pKS7iFbK58zzHNWy80/QOPOQFankxneyf/jdkPWhDcFOgbhHGWUWUl5
-	jHWQ6ChFjCw5iV45I1Hb0jjEEnOBjwM/BdTHoPyrb0mF3VZQkgYzMLdDK/6/BzqVZOCX
-	pIR0QbZL2HpMUkEds4uWFl8J6YuZqOpziV8sLjoKxfiqsL22ekspwMSgxXemLf02LIDy
-	k2OyTxDEKsB/8lOL/S7JC9dmSpFzP3sRE3cIMAXYn2S48kCK4NbCnPGjeiv1K16fnSVf
-	E8Sw==
-X-Gm-Message-State: ALKqPwfLsDQPWocZq1dPdQUsGcN9LjnItVoNugJNfxC++ezlGamSFO3W
-	fbJcEkrckE1RJDSM5JuAB4k=
-X-Google-Smtp-Source: AB8JxZrjYp97QCHJDv6CkFLfDZ84CfMtYslTRA+GM4Us1NLRPvQZ7mLuEaantj+2u6/mFMT8jhPALg==
-X-Received: by 2002:a6b:7013:: with SMTP id
-	l19-v6mr7377242ioc.269.1527183017353; 
-	Thu, 24 May 2018 10:30:17 -0700 (PDT)
-Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
-	t123-v6sm2532550itb.20.2018.05.24.10.30.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 May 2018 10:30:16 -0700 (PDT)
-Date: Thu, 24 May 2018 13:30:14 -0400
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=uZNaZcxj8ROjQJlW/jKIJCB4MCIa9KXidU1MY3baigM=;
+	b=CF6AqrRtPMO7tdVkSjubqjXAS4l4xqCauFaOrRi02qCIxhoJf3KzD6qXPXmkE7m6IW
+	WuuL8zt52vJ+pC33dTmrJRIL0ZZ0X4iNIWgsd5ZkxnTbzouBdtRd53RHnVJkYhp4xRHf
+	5SalMJTFjcUwzyxwLn+TKpdUWRm+d3BCi1nrPX8FrV57Ck4fn/pD/RLkyb3FDt49XS6c
+	7e3RN2WFoXsm8ppCKTe7VUfkchTVu39glew8m8LAB9Bje+fMQiOdPxr9yjtuDs9rVnlw
+	fqusSNwpxI0X+nA72BOKSHS/EaVRyDwcNzQPOyDKQ0Fka9rk8Pn7yCeV015CjqqoptcL
+	scmA==
+X-Gm-Message-State: ALKqPwdBhbrJEl2Tfy7odOLUxcTd2odGM5f/nLSSjGmhoTwGxp6l7woo
+	hKVT/F7B0aB2yFUY2vxPm8fU0khE
+X-Google-Smtp-Source: AB8JxZpWa6pTEGFYpftZfa+6qidubDp8Y2V3Fe22B5m0JDqonkwh6zpPVWU5bf9xiiu7IS4e8MUywQ==
+X-Received: by 2002:a24:94c9:: with SMTP id
+	j192-v6mr10389760ite.153.1527186432646; 
+	Thu, 24 May 2018 11:27:12 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	o1-v6sm2746196ite.37.2018.05.24.11.27.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 24 May 2018 11:27:11 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
-To: Andre McCurdy <armccurdy@gmail.com>
-Message-ID: <20180524173013.GA30624@linux-uys3>
-References: <1526607046-8081-1-git-send-email-armccurdy@gmail.com>
-	<4f227bea-48ae-8126-8326-7b51b4bbc5d1@gmail.com>
-	<CAJ86T=Uey--sM3RS85duoaMc0EQi-+q8C0KPCj5xgBC0nMB0fA@mail.gmail.com>
-	<CAMKF1sraQqZvTL3imQecXjwx5xQpS6EiiBmKp8+B0cb9Y7KSmw@mail.gmail.com>
-	<CAJ86T=Xxw__E-+8Zf0PZnOAe1SeMB2ayMZZu-Gb=19ckh8=TtQ@mail.gmail.com>
-	<CAHUNapQ0Ywt2-xtp0==FozFhsPSnbBTEDReckkE1TVaxdtCn3g@mail.gmail.com>
-	<3f41b911-4fde-1ed1-76f7-650dab5dbb20@gmail.com>
-	<c7fbbf37e1ff4631a0aa3b45c07544a9@XBOX02.axis.com>
-	<CAHUNapR44Bg55=N60PC1-qKKMjag4eVD7a_YoO3b-CDrJm5XOg@mail.gmail.com>
-	<CAJ86T=U5THX1tOFnTzBwr1sMoRvLqFiwqNbn0HT==fv5o9Mo-A@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJ86T=U5THX1tOFnTzBwr1sMoRvLqFiwqNbn0HT==fv5o9Mo-A@mail.gmail.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 01/17] libwebsockets: rely on cmake.bbclass to put cmake package files in dev package
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 24 May 2018 14:26:48 -0400
+Message-Id: <20180524182659.19986-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
+Subject: [meta-oe][master-next][PATCH 00/11] reorder variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,19 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 17:30:16 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 May 2018 18:27:12 -0000
 
-On Mon 2018-05-21 @ 11:10:59 AM, Andre McCurdy wrote:
-> It hasn't been updated to give ordering for PACKAGECONFIG or
-> BBCLASSEXTEND but the conventions for those (based on recipes in
-> oe-core) seem to be:
-> 
->  - PACKAGECONFIG lines go between "inherit ..." and EXTRA_OECONF
->  - BBCLASSEXTEND goes at the end of the recipe
+When Andre McCurdy originally submitted the "rely on cmake.bbclass..."
+patches, he intermixed some formatting changes as well. A clean version of the
+"rely on cmake.bbclass..." patches have already been sent, this patchset adds
+in the formatting changes as well.
 
-Done.
+NOTE: there are slightly more formatting changes in this patchset than in
+Andre's original. These formatting changes are restricted to variable
+ordering as per: https://www.openembedded.org/wiki/Styleguide
 
-Thanks for the pointers/tips :-)
+Trevor Woerner (11):
+  poco: variable cleanup
+  libssh: variable cleanup
+  libftdi: variable cleanup
+  gflags: variable cleanup
+  ceres-solver: variable cleanup
+  openjpeg: variable cleanup
+  glm: variable cleanup
+  msgpack-c: variable cleanup
+  json-spirit: variable cleanup
+  capnproto: variable cleanup
+  openobex: variable cleanup
+
+ .../obex/openobex_1.7.2.bb                    | 13 +++---
+ .../capnproto/capnproto_0.6.1.bb              | 13 +++---
+ .../json-spirit/json-spirit_4.08.bb           |  4 +-
+ .../msgpack/msgpack-c_2.1.5.bb                |  7 ++-
+ meta-oe/recipes-graphics/glm/glm_0.9.9-a2.bb  |  3 +-
+ .../openjpeg/openjpeg_2.2.0.bb                |  5 +--
+ .../ceres-solver/ceres-solver_1.14.bb         |  5 +--
+ .../recipes-support/gflags/gflags_2.2.0.bb    |  3 +-
+ .../recipes-support/libftdi/libftdi_1.4.bb    |  6 +--
+ .../recipes-support/libssh/libssh_0.7.3.bb    | 16 +++----
+ meta-oe/recipes-support/poco/poco_1.9.0.bb    | 44 +++++++++----------
+ 11 files changed, 54 insertions(+), 65 deletions(-)
+
+-- 
+2.17.0.582.gccdcbd54c
+
 
