@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f46.google.com (mail-it0-f46.google.com
-	[209.85.214.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 94D4074C06
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C5E874C06
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 18:27:16 +0000 (UTC)
-Received: by mail-it0-f46.google.com with SMTP id e20-v6so3653307itc.1
+	Thu, 24 May 2018 18:27:17 +0000 (UTC)
+Received: by mail-io0-f179.google.com with SMTP id 200-v6so2416344ioz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 11:27:17 -0700 (PDT)
+	Thu, 24 May 2018 11:27:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=ZanyU0Ovr7FlZ7r8Vipx1pD+KwZ22Q+yQ5V481YCtK4=;
-	b=EPp4DXZtkY3K6pkQjTWkBSAokNsWWTCUgi1T4+MLsVupM8o04xNYUmxlI+K6fn/u2w
-	dSX9QfbdBnlKuQZkXxYNhNQfwMjxegyMbsFNuzwnmmctEJfrLw0BtoofxqLMeoNAA7D/
-	YcNgf3wxB5vfcjCRfks0SP64gI7f4mooeaARkP90KIciDRigRNnIpdCRGO9/TezBeo+0
-	z3E2mAd3RL3oh69gKMtJuD011n014HJTNXYoPk/oif80+pTALPoYo3+y/FReFPIglm6p
-	JwvvrhyCvxPSRCHsXGVzNWzPLXATBAlWyRoqSWeAEOg45zX4CphrEaNO6qrO1KrWoDU7
-	CAgA==
+	bh=opIB+8aZcSL5braGOuZdh8Hk+Xxyrs87HjXDFrd9aZ8=;
+	b=rYQrERXZ5ckx2W9O5bPnrqwxQYt/O9VFI58VF9NXXYeuJ9pwDGK813vkHCQMxLcFFD
+	hT8ByCg+/9QP6vvSWKhFlRyT/H6Z1EnJrpPCkMMOcV4VgupfVJz1xGpoxuIoxKPu3E/1
+	6ZWYAfEXi7j+Qoef90CnvDZAi6vgDZF/lx1P0+zl74isIXbE01Vk6WQicc8XaDuMQa7C
+	JmbYTAS/O6QpaNzlLnyaoS+uDbCYUhSgjXEObFRHxwFtJyTxdI6vVQZa8uxScTby1uae
+	HVVoYg1kbl6hR8AnAZjaovtlGZLqVGQ7XW9P5ggAofR/QE1OEUvTFMKA7be8cydqCe1N
+	qMcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=ZanyU0Ovr7FlZ7r8Vipx1pD+KwZ22Q+yQ5V481YCtK4=;
-	b=NbIZtwgt2cdz6Zfy0zyEC2+r4JktEzkTJ6LASXv7V0zpfaJPcYlV7kIfPnu2HdxHCA
-	ihhc5MoH96ZiywFzUYbMzcdKDijfGQ4SK/smHukkNGXtbArEp/c4qvuSBJoDNg1z9i9V
-	JPXVAN/1spiVE/Qt3nTBYd22JlAhuHBfMmssQovnZjTAD9GQgOVZe43XjTGBdefpRg32
-	43q9UrGjOkLITYFmxQKJclBm0P61GLhzGd1BsqjSvVj3VWditHoQRK+jnkqb71tL29Za
-	DX1E4bc/ouOylM1vd3PO68I7wNef5ZNGtzvq2xSj/9daehFArtefJX1RS/RzSfy3sORM
-	fa2Q==
-X-Gm-Message-State: ALKqPwfJ8TBkW0GW4UIvFcHS2Fb7PTgHHhmm9sgB5YvCM1ZGGsetvbYK
-	wxgfzG+oqDlwv28p/cvLCVSblyeS
-X-Google-Smtp-Source: AB8JxZrgFmp9p0Izgsh0WzOZauAMZYNg1zMZk/og54Z5lIQBHs1DTI11zTJzoFcpLWsPWcA/HWlcDg==
-X-Received: by 2002:a24:694b:: with SMTP id
-	e72-v6mr10907926itc.38.1527186437067; 
-	Thu, 24 May 2018 11:27:17 -0700 (PDT)
+	bh=opIB+8aZcSL5braGOuZdh8Hk+Xxyrs87HjXDFrd9aZ8=;
+	b=YoyaeI8j8Eachyzqhhjha2qQ/x9dpJTysbro1IJmsrS5t1kCE40J9JlxiwIfbeCfPD
+	F58iJVFeJnpT7lligBhYZMC0ET2oaPBy4ituYuPgU3g17TjPuw750bGbXes6/18I4p8I
+	sP/Bdlf122lzeIQyloXKSv4PdXZ1btNICmj8dvMH/+2LLR7AY3OkNcHW7Boj4adwIfPM
+	BJ+wgPEMqEci7c9RxQn4UfpA7AQgE8weyr5KbTmlVATRpEWs26AeYxfO/SdXk6sg87uP
+	Dg73ix/oflo7Dy5HOLqvj1VW5myu2bXD3YIYfte84XsUZzGiH9wY5xN3jl+YYZtvW9kc
+	SblA==
+X-Gm-Message-State: ALKqPwffi4l7tZloEv9vhY88OlyPt8olvY01ZZ4qTBxZIiivAp3xTTk7
+	L0nwoubzIXIRqzmyhdcHM0FrK0bO
+X-Google-Smtp-Source: ADUXVKIExXAyvtDi4uSHO7LNJb7IpQuzomXvRnc7lmeL5PmNvgsbeiNg7VEwbgYY6AORTs61HnYNMQ==
+X-Received: by 2002:a6b:c410:: with SMTP id
+	y16-v6mr6590190ioa.213.1527186438574; 
+	Thu, 24 May 2018 11:27:18 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	o1-v6sm2746196ite.37.2018.05.24.11.27.15
+	o1-v6sm2746196ite.37.2018.05.24.11.27.17
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 11:27:16 -0700 (PDT)
+	Thu, 24 May 2018 11:27:17 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 14:26:51 -0400
-Message-Id: <20180524182659.19986-4-twoerner@gmail.com>
+Date: Thu, 24 May 2018 14:26:52 -0400
+Message-Id: <20180524182659.19986-5-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524182659.19986-1-twoerner@gmail.com>
 References: <20180524182659.19986-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH 03/11] libftdi: variable cleanup
+Subject: [meta-oe][master-next][PATCH 04/11] gflags: variable cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 18:27:16 -0000
+X-List-Received-Date: Thu, 24 May 2018 18:27:18 -0000
 
 Reorder recipe variables according to:
 
@@ -68,39 +68,27 @@ Reorder recipe variables according to:
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-support/libftdi/libftdi_1.4.bb | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-index a1576b5617..98c5995a5f 100644
---- a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-+++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-@@ -3,7 +3,6 @@ FT232BM/245BM, FT2232C/D and FT232/245R using libusb,\
- including the popular bitbang mode."
- HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
+index b186326e9b..1571333323 100644
+--- a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
++++ b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
+@@ -1,7 +1,5 @@
+ DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
 -
- LICENSE = "LGPLv2.1 & GPLv2"
- LIC_FILES_CHKSUM= "\
-     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
-@@ -13,17 +12,16 @@ LIC_FILES_CHKSUM= "\
- DEPENDS = "libusb1"
- 
- SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
+ HOMEPAGE = "https://github.com/gflags/gflags"
 -
- SRC_URI[md5sum] = "0c09fb2bb19a57c839fa6845c6c780a2"
- SRC_URI[sha256sum] = "ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
  
- S = "${WORKDIR}/${BPN}1-${PV}"
+@@ -16,6 +14,7 @@ EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF -DLIB_INSTAL
  
-+inherit cmake binconfig pkgconfig
+ PACKAGES =+ "${PN}-bash-completion"
+ FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
 +
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on -DFTDIPP=on,-DFTDI_BUILD_CPP=off -DFTDIPP=off,boost"
- 
--inherit cmake binconfig pkgconfig
--
- EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+ RDEPENDS_${PN}-bash-completion = "bash bash-completion"
  
  BBCLASSEXTEND = "native"
 -- 
