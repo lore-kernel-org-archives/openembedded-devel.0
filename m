@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
-	[209.85.214.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F6F974BE2
+Received: from mail-it0-f46.google.com (mail-it0-f46.google.com
+	[209.85.214.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 94D4074C06
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 18:27:14 +0000 (UTC)
-Received: by mail-it0-f68.google.com with SMTP id 70-v6so3655658ity.2
+	Thu, 24 May 2018 18:27:16 +0000 (UTC)
+Received: by mail-it0-f46.google.com with SMTP id e20-v6so3653307itc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 11:27:16 -0700 (PDT)
+	Thu, 24 May 2018 11:27:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=69usCY1mW5FapYJ8BhwNKNHVECBc1qdS4Msn4ifKtQs=;
-	b=nPuZfEIRGGl9r/YR62VeMUqtA5QGemXQkzEsAUXrByVPGV4Iq4saNNeScFNmTmLAB0
-	mAh7hmqjOmn7GcelpOQnLwCA7qMT0pMZWGSUf+8fsKbzzkz8GMLesCZt97snxswBwh3z
-	/fgItU0ZrJHvLMa6/p2vWnR6xtdzXJkIpymRrwKLoFnArK2ED6SEUD7uRiLpN8P5PFYU
-	w8nojAh9apPFqMfexfNup23MlWBl4Rczv/yr2KP7Gz8ffhIRDNxywSl6inMlA2aK317z
-	a6P75ztRH8RA4+1NH9lz3jpgRFR82xlb6Hv0yDir0GKnexwBgJznVXTPar3Mrk2IyZLP
-	5ovw==
+	bh=ZanyU0Ovr7FlZ7r8Vipx1pD+KwZ22Q+yQ5V481YCtK4=;
+	b=EPp4DXZtkY3K6pkQjTWkBSAokNsWWTCUgi1T4+MLsVupM8o04xNYUmxlI+K6fn/u2w
+	dSX9QfbdBnlKuQZkXxYNhNQfwMjxegyMbsFNuzwnmmctEJfrLw0BtoofxqLMeoNAA7D/
+	YcNgf3wxB5vfcjCRfks0SP64gI7f4mooeaARkP90KIciDRigRNnIpdCRGO9/TezBeo+0
+	z3E2mAd3RL3oh69gKMtJuD011n014HJTNXYoPk/oif80+pTALPoYo3+y/FReFPIglm6p
+	JwvvrhyCvxPSRCHsXGVzNWzPLXATBAlWyRoqSWeAEOg45zX4CphrEaNO6qrO1KrWoDU7
+	CAgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=69usCY1mW5FapYJ8BhwNKNHVECBc1qdS4Msn4ifKtQs=;
-	b=fZGnVAoF2/pWmhng5tgX60FSywd9C2Aylu4r1JsRs6I2C4ADBxTPgELZLLYKFZTvBX
-	4ZkIcNSVhMALzIJCLw53aTnWHSX+jGFoPOSEzioniJFv+Kb4V4JX6zKoDeiGDyNCUd55
-	ueT1UHGlXdVNe7UClJziTXhmcbZn4sgQN3fmh78k8NsX8EUmGcksze8g6Kky5gClvq1p
-	tKS3NJQrTOTePr++CnDOlJRrobjgMi8bMWyHfewIMe3Cvkott9Uajx0MNc+VtqV3LJPc
-	6Q3rkO1rH8a6TIcKVYASMvjFvKkiYgdcEsLUVhjGEbLOC8geQlJTPyiMOF2cfq0oAkLo
-	cyaQ==
-X-Gm-Message-State: ALKqPwdWbD5ysegjO4nq4ktXNnOCzDQ6kwOFOHXbCg6MwMAsS4cbOiX1
-	SbQO7Wtoq5WZNjB92QolrPmyW/f2
-X-Google-Smtp-Source: AB8JxZqvLDMSoELsFnbqS/ZA/FD7SIkeu0SynqKYpsfqIERMQ4jvYlTmwNve28WhRxYRB0Oi5KvX3A==
-X-Received: by 2002:a24:f102:: with SMTP id
-	c2-v6mr9889811iti.121.1527186435648; 
-	Thu, 24 May 2018 11:27:15 -0700 (PDT)
+	bh=ZanyU0Ovr7FlZ7r8Vipx1pD+KwZ22Q+yQ5V481YCtK4=;
+	b=NbIZtwgt2cdz6Zfy0zyEC2+r4JktEzkTJ6LASXv7V0zpfaJPcYlV7kIfPnu2HdxHCA
+	ihhc5MoH96ZiywFzUYbMzcdKDijfGQ4SK/smHukkNGXtbArEp/c4qvuSBJoDNg1z9i9V
+	JPXVAN/1spiVE/Qt3nTBYd22JlAhuHBfMmssQovnZjTAD9GQgOVZe43XjTGBdefpRg32
+	43q9UrGjOkLITYFmxQKJclBm0P61GLhzGd1BsqjSvVj3VWditHoQRK+jnkqb71tL29Za
+	DX1E4bc/ouOylM1vd3PO68I7wNef5ZNGtzvq2xSj/9daehFArtefJX1RS/RzSfy3sORM
+	fa2Q==
+X-Gm-Message-State: ALKqPwfJ8TBkW0GW4UIvFcHS2Fb7PTgHHhmm9sgB5YvCM1ZGGsetvbYK
+	wxgfzG+oqDlwv28p/cvLCVSblyeS
+X-Google-Smtp-Source: AB8JxZrgFmp9p0Izgsh0WzOZauAMZYNg1zMZk/og54Z5lIQBHs1DTI11zTJzoFcpLWsPWcA/HWlcDg==
+X-Received: by 2002:a24:694b:: with SMTP id
+	e72-v6mr10907926itc.38.1527186437067; 
+	Thu, 24 May 2018 11:27:17 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	o1-v6sm2746196ite.37.2018.05.24.11.27.14
+	o1-v6sm2746196ite.37.2018.05.24.11.27.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 11:27:14 -0700 (PDT)
+	Thu, 24 May 2018 11:27:16 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 14:26:50 -0400
-Message-Id: <20180524182659.19986-3-twoerner@gmail.com>
+Date: Thu, 24 May 2018 14:26:51 -0400
+Message-Id: <20180524182659.19986-4-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524182659.19986-1-twoerner@gmail.com>
 References: <20180524182659.19986-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH 02/11] libssh: variable cleanup
+Subject: [meta-oe][master-next][PATCH 03/11] libftdi: variable cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 18:27:15 -0000
+X-List-Received-Date: Thu, 24 May 2018 18:27:16 -0000
 
 Reorder recipe variables according to:
 
@@ -68,50 +68,41 @@ Reorder recipe variables according to:
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-support/libssh/libssh_0.7.3.bb | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ meta-oe/recipes-support/libftdi/libftdi_1.4.bb | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb b/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
-index e5ea2b8bfa..6064969ae0 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
-@@ -1,16 +1,21 @@
- SUMMARY = "Multiplatform C library implementing the SSHv2 and SSHv1 protocol"
- HOMEPAGE = "http://www.libssh.org"
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+index a1576b5617..98c5995a5f 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+@@ -3,7 +3,6 @@ FT232BM/245BM, FT2232C/D and FT232/245R using libusb,\
+ including the popular bitbang mode."
+ HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
  SECTION = "libs"
 -
--DEPENDS = "zlib openssl libgcrypt"
--
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
+ LICENSE = "LGPLv2.1 & GPLv2"
+ LIC_FILES_CHKSUM= "\
+     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
+@@ -13,17 +12,16 @@ LIC_FILES_CHKSUM= "\
+ DEPENDS = "libusb1"
  
-+DEPENDS = "zlib openssl libgcrypt"
-+
- SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-7"
- SRCREV = "cdf7690e038230623cbbf6b024ece62f41efa98d"
-+
- S = "${WORKDIR}/git"
- 
-+inherit cmake
-+
-+PACKAGECONFIG ??=""
-+PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
-+
- EXTRA_OECMAKE = " \
-     -DWITH_GCRYPT=1 \
-     -DWITH_PCAP=1 \
-@@ -19,11 +24,6 @@ EXTRA_OECMAKE = " \
-     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
-     "
- 
--PACKAGECONFIG ??=""
--PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
+ SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
 -
--inherit cmake
+ SRC_URI[md5sum] = "0c09fb2bb19a57c839fa6845c6c780a2"
+ SRC_URI[sha256sum] = "ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74"
+ 
+ S = "${WORKDIR}/${BPN}1-${PV}"
+ 
++inherit cmake binconfig pkgconfig
++
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on -DFTDIPP=on,-DFTDI_BUILD_CPP=off -DFTDIPP=off,boost"
+ 
+-inherit cmake binconfig pkgconfig
 -
- do_configure_prepend () {
-     # Disable building of examples
-     sed -i -e '/add_subdirectory(examples)/s/^/#DONOTWANT/' ${S}/CMakeLists.txt \
+ EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+ 
+ BBCLASSEXTEND = "native"
 -- 
 2.17.0.582.gccdcbd54c
 
