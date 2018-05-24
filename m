@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
-	[209.85.214.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 779C6749F0
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 92A8B74B06
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 14:39:31 +0000 (UTC)
-Received: by mail-it0-f52.google.com with SMTP id 70-v6so2670638ity.2
+	Thu, 24 May 2018 14:39:33 +0000 (UTC)
+Received: by mail-io0-f171.google.com with SMTP id z5-v6so82205iob.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 07:39:33 -0700 (PDT)
+	Thu, 24 May 2018 07:39:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=MNO3ZMOpWEEUumxAim5wthZwk2q8iV46Caofe0bMzak=;
-	b=vgUP0BQtWyMFSxVHCS0IXE4nHAOgMN/9VyqCLfhn9Nhn4uOzy3z3d6CiUpkTK3Nkas
-	I0AOzlvNECsJSGkQD+A80r2OrPx7BDP50lMpt6U2ku0xd3cme7XorEXWOuwQLKltP7N9
-	Jh1yqU15u9NG3J8mKyeq+rbO44hsJDdBhGKkciQBLbJuNSWGEENo/sXzXYG1GqUyBz4r
-	THHMPfoerw/eyWsVj2KeYSKZRAMYjkHEzTiv/la0qmmMzncdVes5CpNw/3TJwv8UBZJv
-	dVkDUpsr5/5KXVjioiebwWHBaEvhKvVpDDtMpXfJmei/tjZPD45w0tGPTApkp1aOMxfA
-	h/Xg==
+	bh=cRNe3WoQiNA7OmI0rzb5zzRuPXLHxDHk9n9IvLoqKo0=;
+	b=QCcfWFP/CivW9ljjfzmHde2Z5PKY6aC9fVm5QyPz678lZ5Q1KZVnk7f5jRIALpa8g1
+	b7kCl4q8nbA8Wer0rLBkzVoaUlwI75jL0VmuAHsvrxFnswi5aDB67HQ9J4eAJGtSvHw8
+	XTq0rj1x72goqNgIpFy34ApqQjmA/rogOg8MjJ9Ec8QpeTFipkJXG+5sRhn4AFtOg3r0
+	5e5n4qyBJ99l01ZZWDkWX38it5E+pdUGE0OHh6lfuKlinnjH9XAq0k1i+iBeIuEVN6vm
+	N89vlfvf/hm/qX8lZvTBnT4zUWwisLWC2DenXK8Z/hhW5aRpbLOQAkLSk35knCKapT/L
+	rooA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=MNO3ZMOpWEEUumxAim5wthZwk2q8iV46Caofe0bMzak=;
-	b=Nx2MvLt59bd8ecB3eg9tHxZWpaEG6yK1ym0Txzt2lkyqpwk5nRssFadO5OvIo1OkBx
-	hydQi7Qc83fY07up0V0uyKAvQTaHYT81NtNVrO18wiIga0GJ59y6/4oVTczAXOxwKi6h
-	ZjJqWkbb7plkgDvbQDmTsSvcDZQtczbJLdEIo2+YXebtWv7trX2/4v3nnA1ZS0yAdLtn
-	bAc3PWL/SCXGf+fNbEydhkk8z2zgrlvoySss7xuU1J/0w0ATv2WSu1vLBdBScY+BhY/b
-	3+zE5LpiTZLkBCSQw+6gODEje9tjV0gtNkbxQHImkF2EdlgcPtSohtf97fy8eRKtCnvj
-	jogw==
-X-Gm-Message-State: ALKqPwf/rrOTVFQvXLzHkMdz30s789YkzoqSXgeJ1/4MDKvkPdbBWVQS
-	VxCkeAsCC63cvcAVSRz3su56EUN5
-X-Google-Smtp-Source: AB8JxZpFIGAexJz7jGpWaST85NBIdUmkndXnOJ+RB+fgkNMeIMAwC69XFwoNYPFcecVg6ip+zDatiw==
-X-Received: by 2002:a24:584d:: with SMTP id
-	f74-v6mr8718435itb.99.1527172772383; 
-	Thu, 24 May 2018 07:39:32 -0700 (PDT)
+	bh=cRNe3WoQiNA7OmI0rzb5zzRuPXLHxDHk9n9IvLoqKo0=;
+	b=JaN9WhNuHl3dAxCg7a7jP6eF4COmJ218Td3PPU3wGeQoyAGhigu8NLIr8IcHTQwg5h
+	qEXw3aNX1uytIJpa7jzOQmM/5U9XA3VJenoTOOtfMPoX8NQWRJB2sUHkYIo4WrEX+vSi
+	mUylIn2Id4GDxmWe/ZtVdbkH/CfWlFGB12fK63Dc+EN7rkIP/2wmLxrp7p7dZxWk3H8g
+	l2ODmO4TllRkt8z3rDUrhCRGcU1UuxiKDrcNq+Hp1tFFLV247wnqwCqkMYxcgW2UI2C8
+	KX47Q4hGD6ihkcNARGgcGeVavAwOqXClCgNuR2iQhm5zQyGYjdloFvsuJ99hdFy2ZwgW
+	S1Gw==
+X-Gm-Message-State: ALKqPwfx0D66KUzhKqrXFbfu1zEtE9dEypdu8FO/zqmYrwfp5zs1WZTE
+	QCftzqg6gmAAP8rahJzT3McIV3Ka
+X-Google-Smtp-Source: AB8JxZrnt/TfSiqG+/KNo6wQDJr6y7g+VnTehVBW2+YgUVuUDDMcO2kfnQEAhyJs/qGlJO0RYM0ibw==
+X-Received: by 2002:a6b:a6d3:: with SMTP id
+	p202-v6mr6455640ioe.144.1527172773940; 
+	Thu, 24 May 2018 07:39:33 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	a43-v6sm2435261itj.11.2018.05.24.07.39.30
+	a43-v6sm2435261itj.11.2018.05.24.07.39.32
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 07:39:31 -0700 (PDT)
+	Thu, 24 May 2018 07:39:32 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 10:38:53 -0400
-Message-Id: <20180524143854.24096-17-twoerner@gmail.com>
+Date: Thu, 24 May 2018 10:38:54 -0400
+Message-Id: <20180524143854.24096-18-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524143854.24096-1-twoerner@gmail.com>
 References: <20180524143854.24096-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH v3 16/17] opencv: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][master-next][PATCH v3 17/17] libeigen: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 14:39:31 -0000
+X-List-Received-Date: Thu, 24 May 2018 14:39:33 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need to
@@ -70,22 +70,22 @@ provide custom packaging rules to handles these files.
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_3.3.bb | 2 +-
+ meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-index ca62de7c8f..1cadbdb533 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-@@ -167,7 +167,7 @@ PACKAGES_DYNAMIC += "^libopencv-.*"
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+index bc3b32e384..2ffaea63ad 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+@@ -13,7 +13,7 @@ S = "${WORKDIR}/eigen-eigen-5a0156e40feb"
+ inherit cmake
  
- FILES_${PN} = ""
- FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
--FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake"
-+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
- FILES_${PN}-staticdev += "${datadir}/OpenCV/3rdparty/lib/*.a"
- FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
- FILES_${PN}-java = "${datadir}/OpenCV/java"
+ FILES_${PN} = "${includedir} ${libdir}"
+-FILES_${PN}-dev = "${datadir}/eigen3/cmake ${datadir}/cmake/Modules ${datadir}/pkgconfig"
++FILES_${PN}-dev = "${datadir}/pkgconfig"
+ 
+ # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+ RDEPENDS_${PN}-dev = ""
 -- 
 2.17.0.582.gccdcbd54c
 
