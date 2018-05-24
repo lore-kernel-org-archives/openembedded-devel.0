@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
-	[209.85.214.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 4588D749F0
+Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
+	[209.85.214.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CDCF74BA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 14:39:28 +0000 (UTC)
-Received: by mail-it0-f51.google.com with SMTP id j186-v6so2646943ita.5
+	Thu, 24 May 2018 14:39:29 +0000 (UTC)
+Received: by mail-it0-f54.google.com with SMTP id 144-v6so2640587iti.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 07:39:29 -0700 (PDT)
+	Thu, 24 May 2018 07:39:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=jQBqjUm241lliZBAhtj01jNo8xTmy3hYWpJ8bINiDNA=;
-	b=LC2WA396djE2Yg+OtpOQa6jVdEeTV9d8a0+8QZJv1lF4IhDWYYVxI+eagSZIF9okee
-	L2pbavgqjZibkyrEHR77Ur53JN7j9fOotuPf19D7mZp99KJmRCFBtvrVHoEZ5aHV3at3
-	d24CChuNByUKm7EeZY2vw7ql6jnZwBu8roZMARHQdrfS9IEb0k2noq9iUuHMhcHPPdAn
-	hWtcq6cTwvme0flSM9yDVYKqgvALoyi/1DMnFbx9pcvjmbfHjjOMiSZmITxjn5HoMdGQ
-	GAG7gXP32QInADzY3I0XjNGNy7wVnn1ASyr0Dl6jHbJHHPx4TKbq6Os6GW8IbEODJEWc
-	Oubw==
+	bh=uFEpXgUzpNXPteyMsOGmbhaIr6XNwL8JCMH39ZlVxP0=;
+	b=MJMefrdEG+LMq5ZxY2lISsWfqmGSx7/rUISEWSvn9eSTF1DIQiIwVQ30QZH4LJF//7
+	Ty5BDpcMVVipHC47qk4axR+9m6L83J7CmJL/w+q6EqNsRUJUU+0PefbT6kpBcxEyJB2n
+	zYcFOex6Z8ZTQ6lmKWuBWeDk4E8yYDl/QwFotimDai5KkG9AC8XtGATPU+t7whbh/EIy
+	hJ8HhX2DCRSJNrMTiV8eMWZoLsBRXu6xW0TL4ono46Cm2evvASTpf9sbdrSWYgJ47cP7
+	a7XlCaYuWaAvZkRwAZUGFcjWdeyj0MD7jce6Co8y4HKuZyC9ni/2lP6fHz7gpmJgt9Cr
+	IQHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=jQBqjUm241lliZBAhtj01jNo8xTmy3hYWpJ8bINiDNA=;
-	b=o0RXnrDHXLmA7U7OB0A6gSu8GLfM+SbmnjYcflxAFYed3+XQnw3bzJE5Of7PiaqKue
-	HAR1hvFzw1zLWJ8ixmjxzFFK++ZCP6LVOD9N/Dy74QbVYAjAtiRc5HGNcwwYHq/PLW03
-	IhrlqsnkfkwJa1RN71RiESpJ+yw2HlgO98PSygfrlxXxawZSfQzI5kSScfydQ/2m7Usc
-	d7sd2umlm1SVy8Z/YiK/4vM4L6GLFYdHuUhPPIkijwoDxCdyVMiEjIn1AKTHhGtY4nZ9
-	gMygbijfy+nAEYX/3mDT3XGX3BdKwqeGr3jm93o/QAfBxds6zhen1QfxfY1t6E5e66rN
-	XEBQ==
-X-Gm-Message-State: ALKqPwcc6kBe4OGMSSsezciiWk1ptVSZY+hxL4foUmINa8eEeAUmjRHQ
-	U2cI6r97xH9KcILLf7Hm24vGHZ1h
-X-Google-Smtp-Source: AB8JxZo/w9Pirdb+6ejQUACF82UFaqZjG0h3ifyrzevH0R/60CWL++1Lq+89R3wJ84rgvfcC06LleQ==
-X-Received: by 2002:a24:7b45:: with SMTP id
-	q66-v6mr8794927itc.133.1527172768988; 
-	Thu, 24 May 2018 07:39:28 -0700 (PDT)
+	bh=uFEpXgUzpNXPteyMsOGmbhaIr6XNwL8JCMH39ZlVxP0=;
+	b=n/4hgAFM5/LJkGczJOauG65BMlP+WDOc43YJhZJgkWt7nN1nRCrsjuxuk8bSdoRI0X
+	RsA/w/tmoc7l/nYJZWPQZyVlLVWbvXgnAGizXLSPeIxAEMYTskxH6N9faqXpGfv5LbxW
+	F87gjZLVwt8/Yxh++D/+A1HhjV3OGidIi5+n7MCFMcQOrjHZioeYYKCwzE06dTiSJJXL
+	kyWzXYv1BIy2H2OPiWAWOTX5AM7rad5Bm7aqboD7Y04VyzyiZQ53O622gD4xwQiJRTfy
+	MDCUOJHD18ICPpsJNg8H5Uu4iKNQ/skTjN1zPgKM98PkvDBdmF6UbUWpFbVE2d+BWivK
+	bbCQ==
+X-Gm-Message-State: ALKqPwfUSzyN3zydo5BHTe0nkzeIsG7cZG5XouKZKfs4D6Kn3Dg5fEHO
+	JsXfBUBDC31UtS5Qi9+H0FjzHgdw
+X-Google-Smtp-Source: ADUXVKKb0oCro6+pt9ZsMB1lGzUhlMBh1Paz5D4+jwYhqS/PuMAqB6QAyy5NBzpYUVYXpZkCR2ITpQ==
+X-Received: by 2002:a24:fdca:: with SMTP id
+	m193-v6mr9499645ith.77.1527172770812; 
+	Thu, 24 May 2018 07:39:30 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	a43-v6sm2435261itj.11.2018.05.24.07.39.27
+	a43-v6sm2435261itj.11.2018.05.24.07.39.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 07:39:27 -0700 (PDT)
+	Thu, 24 May 2018 07:39:29 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 10:38:51 -0400
-Message-Id: <20180524143854.24096-15-twoerner@gmail.com>
+Date: Thu, 24 May 2018 10:38:52 -0400
+Message-Id: <20180524143854.24096-16-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524143854.24096-1-twoerner@gmail.com>
 References: <20180524143854.24096-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH v3 14/17] libtinyxml2: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][master-next][PATCH v3 15/17] libwebsockets: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 14:39:28 -0000
+X-List-Received-Date: Thu, 24 May 2018 14:39:30 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need to
@@ -70,20 +70,19 @@ provide custom packaging rules to handles these files.
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb | 2 --
- 1 file changed, 2 deletions(-)
+ .../recipes-connectivity/libwebsockets/libwebsockets_3.0.0.bb    | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
-index 8b5ab44fdd..c763a6c2b3 100644
---- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
-+++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
-@@ -12,6 +12,4 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.0.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.0.0.bb
+index ea262f855b..f38414862a 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.0.0.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_3.0.0.bb
+@@ -23,5 +23,4 @@ PACKAGECONFIG[testapps] = "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,
  
- inherit cmake
+ PACKAGES =+ "${PN}-testapps"
  
--FILES_${PN}-dev += "${libdir}/cmake/"
--
- BBCLASSEXTEND = "native"
+-FILES_${PN}-dev += "${libdir}/cmake"
+ FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
 -- 
 2.17.0.582.gccdcbd54c
 
