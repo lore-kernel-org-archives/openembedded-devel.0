@@ -1,52 +1,23 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D11FD745D8
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C1D8748EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 13:43:56 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id e12-v6so2326795iob.8
+	Thu, 24 May 2018 13:55:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w4ODtFrN022456
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 06:43:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=q47hVIZp5IACnzLCTZtXigerK875DLkSvoI4DIfiKMM=;
-	b=f+/EZrXJHHRZoxRU9IK44HCqS2C+i73grFjrT812gZLgpn0TQiQnsraOd0ggd2qHCw
-	A6CNg4MmEI1PDRdV1Xr8dXmwQbwBcx2S9jh0zeyU2d9jY/JaqsatHQ1hFpS7ZcopoJjO
-	Lx9orun9xWza5a6yrndAPW5ggc3u5gt3lbkc4eJogo9OO1GW3TOK0C9Tx1DAsgBngCFs
-	PHhDnSciDFEDGOz4AEfQUsomDScqwvK+ZjuBNNdtMCU0rU5OeWmH0Ux3i0cHMxCON1Ve
-	yNp0FzO5Y5aUXM+6W0+dx4ZHaxTLQvm6pUBS8Gi5LyKNbkiAnUZWoKRYstMtc5MuDG7U
-	nXxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=q47hVIZp5IACnzLCTZtXigerK875DLkSvoI4DIfiKMM=;
-	b=EGIVj1HtcgB8Qpcqw2Dzmmc9hR2LbAhY3CXbumcvS6i3Dce6nDg/GzGclRcWoq9NsX
-	2UQ1AWQwwjVMz49F/pzrDTxht1msvZbYZ+Xzc2BhILQLCPl5niWngoryfsXQFO/CzuWQ
-	xK26mh30/Rh6nJC83nse8MihEMVVSEoDYJkwCfcxseUysmm4wBJfPP5d8vcXvmN1dKIS
-	S1cMX4JYWPFZmKw8bFcC2VF6r1t/I+KoY/m1TGhzX2FG27vZACTgz1Jo2dPjj4xU8Ram
-	sZXXRWzrBsUxe6gokV8aOdQtNRejnH3P22/iYS9VHitO7JdwTg6g/o+Lf834FxrXhGdX
-	ksgw==
-X-Gm-Message-State: ALKqPwdri/88PvHfw5JzZ4pFEPlkrYoMTVyWfIq2wlCroJPyd1CIqxwy
-	Cc4tMXuQqkl430DBdDUe9knYikNG
-X-Google-Smtp-Source: AB8JxZo0ptLnISt50Gwagfl/vqlRaE0BZDEah8LH8rVJBMIiSgnSuwPrBqOWWFkq7ydwG2yOKygn7Q==
-X-Received: by 2002:a6b:9403:: with SMTP id
-	w3-v6mr6424408iod.189.1527169437062; 
-	Thu, 24 May 2018 06:43:57 -0700 (PDT)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id
-	r9-v6sm10999984ioa.49.2018.05.24.06.43.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 06:43:55 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 09:43:37 -0400
-Message-Id: <20180524134337.31572-3-twoerner@gmail.com>
-X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
-In-Reply-To: <20180524134337.31572-1-twoerner@gmail.com>
-References: <20180524134337.31572-1-twoerner@gmail.com>
-Subject: [meta-networking][master-next][PATCH v3 2/2] c-ares: rely on cmake.bbclass to put cmake package files in dev package
+	Thu, 24 May 2018 06:55:16 -0700 (PDT)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 24 May 2018 06:55:09 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 May 2018 06:55:09 -0700
+Message-ID: <20180524135509.22244-1-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2] turbostat: add the recipe of turbostat to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,33 +30,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 13:43:56 -0000
+X-List-Received-Date: Thu, 24 May 2018 13:55:15 -0000
+Content-Type: text/plain
 
-The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
-${datadir}/cmake end up in the dev package, so recipes no longer need to
-provide custom packaging rules to handles these files.
+It is an efficient and necessary tool to reflect the status of X86
+processors. Turbostat reports processor topology, frequency, idle
+power-state statistics, temperature and power on X86 processors.
 
-	http://git.openembedded.org/openembedded-core/commit/?id=d91dc4666683a96e9d03cbbd21b8a546f9069c93
-
-Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
- meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb | 1 -
- 1 file changed, 1 deletion(-)
+ recipes-kernel/turbostat/turbostat_3.4.bb | 58 +++++++++++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+ create mode 100644 recipes-kernel/turbostat/turbostat_3.4.bb
 
-diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-index 70e497f5f0..defbeaa623 100644
---- a/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-+++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-@@ -18,7 +18,6 @@ inherit cmake pkgconfig
- 
- PACKAGES =+ "${PN}-utils"
- 
--FILES_${PN}-dev += "${libdir}/cmake"
- FILES_${PN}-utils = "${bindir}"
- 
- BBCLASSEXTEND = "native"
+diff --git a/recipes-kernel/turbostat/turbostat_3.4.bb b/recipes-kernel/turbostat/turbostat_3.4.bb
+new file mode 100644
+index 0000000..13c53aa
+--- /dev/null
++++ b/recipes-kernel/turbostat/turbostat_3.4.bb
+@@ -0,0 +1,58 @@
++#
++# Copyright (C) 2013 Wind River Systems, Inc.
++#
++# This program is free software; you can redistribute it and/or modify
++# it under the terms of the GNU General Public License version 2 as
++# published by the Free Software Foundation.
++#
++SUMMARY = "Frequency and Idle power monitoring tools for Linux"
++
++DESCRIPTION = "The turbostat tool allows you to determine the actual \
++processor frequency and idle power saving state residency on supported \
++processors."
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++
++COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
++COMPATIBLE_HOST_libc-musl = "null"
++
++DEPENDS = "virtual/kernel"
++
++do_fetch[noexec] = "1"
++do_unpack[noexec] = "1"
++do_patch[noexec] = "1"
++
++# This looks in S, so we better make sure there's
++# something in the directory.
++#
++do_populate_lic[depends] = "${PN}:do_configure"
++
++
++EXTRA_OEMAKE = '\
++                CC="${CC}" \
++		'CFLAGS=-Wall -I${STAGING_KERNEL_DIR}/arch/x86/include/uapi ${LDFLAGS}' \
++               '
++
++# If we build under STAGING_KERNEL_DIR, source will not be put
++# into the dbg rpm.  STAGING_KERNEL_DIR will exist by the time
++# do_configure() is invoked so we can safely copy from it.
++#
++do_configure_prepend() {
++	mkdir -p ${S}
++	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
++	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
++	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
++	cp -r ${STAGING_KERNEL_DIR}/COPYING ${S}
++}
++
++do_compile() {
++	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
++	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
++	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
++	oe_runmake STAGING_KERNEL_DIR=${STAGING_KERNEL_DIR}
++}
++
++do_install() {
++	oe_runmake DESTDIR="${D}" install
++}
 -- 
-2.17.0.582.gccdcbd54c
+2.11.0
 
 
