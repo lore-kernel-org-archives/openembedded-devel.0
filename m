@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id EB76A74AF8
+Received: from mail-it0-f44.google.com (mail-it0-f44.google.com
+	[209.85.214.44])
+	by mail.openembedded.org (Postfix) with ESMTP id BD528749F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 14:39:18 +0000 (UTC)
-Received: by mail-io0-f174.google.com with SMTP id p124-v6so2590178iod.1
+	Thu, 24 May 2018 14:39:20 +0000 (UTC)
+Received: by mail-it0-f44.google.com with SMTP id e20-v6so2672084itc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 07:39:20 -0700 (PDT)
+	Thu, 24 May 2018 07:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=okVOp1EXs3ymK902+WoJaU5TZRza2CqjcE+Vh+g6GCE=;
-	b=Cfq/daqxqmQRSI2kZoESaVlOU9zcla+6UtfvJKwqxu1s/rvTkk6IT8VERWJ2WvmIOX
-	mYHSJFggJH6008wdveSk3s/lDqUs3RP9lxEBh4OVrJDr1C8h3X083+FCAtKu0o/ytP0/
-	/KqVB/AY7/nkMCxO3RnagQUZOQN36JqHYFbUs3pGp1VZID8HcsvOQ+pfueC0YFVupFg9
-	vebMJi+iixi0IxZQBhoVc23WO3WjVwflyrn5vI4xlxukNgeA47S9aolsX0+Jw6m2TSFi
-	G2M1S2giFlb3TNJEF+Y170Tb5XehFDmSGz9qSmwjjhU3ToYxJmCm9QoDKUzctxkIF5eL
-	E21w==
+	bh=QtGL2ePvUosk1yeBhl3HsUHhRANpZqAoRcMFab4DYBs=;
+	b=m6Kt/9iJnFHx8OLR7PUwDBB2HF4on3yd+WoqepUmHmCXJyq6t2+WqoNYcyNQXyrqmb
+	z1ZM/eL4CmiqmBsVhqo2h/yzqtvbolMiiGdZ7fqIpYgqIQMgWGSCpcJLgMYOuL1rHF8I
+	IB/Np3XmWsR4mozQoYBl5NeX0mS0ty/NZY5XXiRe13kTT6Uesbp1ZSHib4LGeSDpxlsS
+	Fde1xZ+2wL9uk8KeWWQZQJvkB1yZwLN3z7Gg4R/2Niy222TCkFDb7t1ul076FVtp0Uio
+	oj/0psCza5LvdRtZlxYUqFTphMnbez+ivzLB7AskfRTAfsHZ8khZOYJZgDbzWyZJlW2f
+	nUYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=okVOp1EXs3ymK902+WoJaU5TZRza2CqjcE+Vh+g6GCE=;
-	b=cu3DLl/X4bwmzkVtwR4QFEJkiUKX7oPqv2DH5vfTWPeSRancqZU0p5R6c8d4VAMvTg
-	r4YYrtDTqHls2TxDkKaKafFQzEBchu8uDDqxqsrqui9Ot1d6Xy9FH6hwxZCQrLS7P2Gv
-	4y2hF08dDsjTq2eF/Zcwo9p8YBaw1RG715EyiqilX1sDxtNa/TijfHcdaorI5Sw2ZdRW
-	GDHhYkUx1gwJTJ5gpp+V1Vp5HMhf/B3eHk7aYEiGFCnx8VtJ5ZHikJv6CBF57z8SOlGG
-	e35nftOT9KwUyGh6/xEsJR3V6xRUuuLVn4Gdi2DQcSakzNPr8fUn8uixQXmNfRLWrQK7
-	t+tw==
-X-Gm-Message-State: ALKqPwf2NOStVXTCnj5047PmN/Q9XIWsdjlNAxId0HVyG0PG3dcrmfO/
-	c96vslh2FOgQCXHRAqZo7B0r9W56
-X-Google-Smtp-Source: ADUXVKJmebebmccz2/dWvJ82KkpBKiZnfsaB684Zcv9ENZxn9XE3tuf5PW070H5Hm+DDYDrFTo2pig==
-X-Received: by 2002:a6b:6707:: with SMTP id
-	b7-v6mr1724985ioc.132.1527172759466; 
-	Thu, 24 May 2018 07:39:19 -0700 (PDT)
+	bh=QtGL2ePvUosk1yeBhl3HsUHhRANpZqAoRcMFab4DYBs=;
+	b=qtlZL1Wio0+yuY5jNoZ3gjcEjQ0BI3w+UYaZPAZzqApgNXmVLRaaN7ibvbq/dMQGvg
+	hMJMMCUnQlQ4/yD01903by6pXB4usYAYiwrHGlXANVCXKd8xGN3FS95K/a3sXmCil55o
+	WDbX1h+beqrSTvAiX3bh6mpDzQQ3ApfyYGCGsRkA4PolYr2RXw0UMIcjyFCN0ZTVKKL0
+	PCpfLfk9+gI6DvpIU4WkLKgoKwo973Sv2gRz3xj7UkTTGjlud423/Qa5NBxCRGOsCTUa
+	aVK2ibV7NCLsmvCmwENiPl7P1AfZo3d3Z5/csTBV9mK9ZofABFWpurli37rgW3ac7rgp
+	pVDw==
+X-Gm-Message-State: ALKqPwfuoh4Nnm/cTUpVCRs0GVdSOXehwlofWezF9bGngVoTNL6T1OsA
+	AFwjT9NW+IrToq7a5h1R70NYOs8n
+X-Google-Smtp-Source: AB8JxZqc4WhudDGtMKhv9DKDpBu5voO00aLG3DfMs8z3qH4tPkj1fiaaC0wMsj7b8tfpMFCLyI5XWw==
+X-Received: by 2002:a24:70d0:: with SMTP id
+	f199-v6mr6684910itc.2.1527172761005; 
+	Thu, 24 May 2018 07:39:21 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	a43-v6sm2435261itj.11.2018.05.24.07.39.17
+	a43-v6sm2435261itj.11.2018.05.24.07.39.19
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 07:39:18 -0700 (PDT)
+	Thu, 24 May 2018 07:39:19 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 10:38:45 -0400
-Message-Id: <20180524143854.24096-9-twoerner@gmail.com>
+Date: Thu, 24 May 2018 10:38:46 -0400
+Message-Id: <20180524143854.24096-10-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524143854.24096-1-twoerner@gmail.com>
 References: <20180524143854.24096-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH v3 08/17] glm: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][master-next][PATCH v3 09/17] openjpeg: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 14:39:19 -0000
+X-List-Received-Date: Thu, 24 May 2018 14:39:20 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need to
@@ -70,21 +70,19 @@ provide custom packaging rules to handles these files.
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-graphics/glm/glm_0.9.9-a2.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/glm/glm_0.9.9-a2.bb b/meta-oe/recipes-graphics/glm/glm_0.9.9-a2.bb
-index 4e2ee23787..dc0081d031 100644
---- a/meta-oe/recipes-graphics/glm/glm_0.9.9-a2.bb
-+++ b/meta-oe/recipes-graphics/glm/glm_0.9.9-a2.bb
-@@ -22,7 +22,6 @@ inherit cmake
- 
- EXTRA_OECMAKE = "-DGLM_ENABLE_EXPERIMENTAL=ON"
- 
--FILES_${PN}-dev += "${libdir}/cmake"
- RDEPENDS_${PN}-dev = ""
- 
- BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
+index 4ef1c408fd..f749d62342 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
+@@ -17,5 +17,3 @@ DEPENDS = "libpng tiff lcms zlib"
+ # standard path for *.cmake
+ EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_PACKAGE_DIR=${baselib}/cmake \
+                   -DOPENJPEG_INSTALL_LIB_DIR:PATH=${libdir}"
+-
+-FILES_${PN}-dev += "${libdir}/cmake/*.cmake"
 -- 
 2.17.0.582.gccdcbd54c
 
