@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f42.google.com (mail-it0-f42.google.com
-	[209.85.214.42])
-	by mail.openembedded.org (Postfix) with ESMTP id CDCD174C4A
+Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
+	[209.85.214.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C5A5C74C0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 18:27:23 +0000 (UTC)
-Received: by mail-it0-f42.google.com with SMTP id j186-v6so3634192ita.5
+	Thu, 24 May 2018 18:27:25 +0000 (UTC)
+Received: by mail-it0-f54.google.com with SMTP id 70-v6so3656380ity.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 11:27:25 -0700 (PDT)
+	Thu, 24 May 2018 11:27:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=AbnIhW3Cm0n6jHtTEOpgJjMpix1+f2zOLLyk1ArFCbc=;
-	b=CHIwkEwaO6i63eAluQbjX4VzRLvq0MXYvX4dnxaXn/nR8n3gn0V7ZG7TBOCgmWOJoj
-	tBNeJ8CGhAMdkP3dnFefLOgpN3xeXtbduNN6rP7opbGy2QKrPD6ekvo3t8ZUVEpb+0SZ
-	RVzsLEr6pb2Kps2qxqbISdxN0epLMj+TQHHmnoR8n7mWV236PyWKNIzyRwtgRDddcCCU
-	nkVb8QZ8g33gG/6XANe79YqulZaQouO1fnf/b0ONe831WDwMISvgX+LCclXUAswj5Zy+
-	w9jp/1acI2qVfpSACxMzCa2D7SgAI46ctZfHcOxjhCmzRKcXi1LaDOF2jnZsFBWLySem
-	2Qfw==
+	bh=5euffXzgCamUFUOmosY1jIR4Mc0cm9bC9aI0HBE+UyE=;
+	b=BCN3ZaF7LxqRqZw4o/bIUYpYYlBS6D50xAZpPq0B3dX/AVm6+eKKWpcllPuFOJk/JJ
+	CznnNmwc+DMMZMu7gc61YLEmMCJQOhi3YgbsDKQ2GMWhW7EFvUX2iKK3iYgYZrAgWouR
+	WHntVZh9ddV8ua9GDeffLP7aDhxz2GR1cmOCLKq9Tju8UCVoI7gpt+Vtoq8GSTZY5SlX
+	jIdFmX4tmdB80SI3/3MNoDEXRgX2pEjxf08B3lIzDeyVuQHGHW22/ZvRak1DTetWcBDY
+	HY5ujaKyvY4yvteRZG9E6vsVBG3G2ES4PR1Z6m0dvM6W67axYxAPe5WYjkiEenTinRYc
+	+Vvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=AbnIhW3Cm0n6jHtTEOpgJjMpix1+f2zOLLyk1ArFCbc=;
-	b=ooIgt3Rh6atEKhgAyZm/jnqHiB7qJHKB3uugUF4pnkY+IiBKDEx54aub/97fYQxieJ
-	GCMY8l9Zomk47exqDWNs5sNiV0khoVtwTLvrmvPBZWRHhG75YWRteOFYy5vCdfHio0RS
-	WBDgOkhkrpyK8SpxYspJtlwy672IpXe/5cxAik7GSuw9GXNZvw+Ls6yzN0vFPIue05NZ
-	baYBEbbZ/01ykQj0fAwIjxmmRT5B1pj/bglC51U3kzHSx892StE8I9TjEopPYmLoHb7q
-	nB20all15z/otcvIZIecewgsaM1HOUAMnrTpZrRL5rjxqAPoaExPSAd6A0sN92W/BFAQ
-	CZ9g==
-X-Gm-Message-State: ALKqPwcfYHOdSgwB7cmFtjiuFVhT8AjVhDb5svFjF6yu42ST+NLs8Z7+
-	FdUKd+rPFT02I2MtTqX9eufsD4kw
-X-Google-Smtp-Source: AB8JxZr759wqzI/ZV8imYFjTfTUAaZUMzYQbmoQQvKCB/Tu5xAIcp7Re5KO1/Tqf6huVl7XawWDLBQ==
-X-Received: by 2002:a24:f987:: with SMTP id
-	l129-v6mr1210912ith.148.1527186444759; 
-	Thu, 24 May 2018 11:27:24 -0700 (PDT)
+	bh=5euffXzgCamUFUOmosY1jIR4Mc0cm9bC9aI0HBE+UyE=;
+	b=CzZxs2+ZfdtjsqyS4AHDSCnoPQJHnETCD23AxJvfGmQ0dE7ARK7kksW2dk/RRp3bWx
+	c4lqs1gXxQGh7xw5kkVrYJV34Oh0tNAreHipiaB9/4qa2SqWRxvMu5a7C4OqnUUHJL8S
+	3X49i3oPv3gvZ5Zgq5MGrR+jswHZn3fbWdBzmwaU7WkAaj/SVLsqMOstUyLtUonAiss1
+	fCDr6m+crC1QYKXmlxO+wpoyZMvPQPFYHCcO8h/xqKx5xPCG8Gr1rqWzys3+ejvtdznt
+	v96SjQQZZ53efonG+d7roL3H01XKPwhKcvf3BpXVnViyCceYOmzuANARb5k5cYnWLU+9
+	l1FA==
+X-Gm-Message-State: ALKqPwfFhUnh9snL1kCi5GHvmB80Orerrg5ZjG0R7+DbSuoZYRt1sWuD
+	0mvbqukaiLbazUGwPaUMFu5+rqnK
+X-Google-Smtp-Source: AB8JxZr2c2AaDgBP3z4z94kC5XWBtURS4XO4af8TCYm8L9Zn6QiQi0Sj+kQwtv8NxcfiukW4jkgGSw==
+X-Received: by 2002:a24:4d93:: with SMTP id
+	l141-v6mr10257968itb.111.1527186446317; 
+	Thu, 24 May 2018 11:27:26 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	o1-v6sm2746196ite.37.2018.05.24.11.27.23
+	o1-v6sm2746196ite.37.2018.05.24.11.27.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 11:27:23 -0700 (PDT)
+	Thu, 24 May 2018 11:27:25 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 14:26:56 -0400
-Message-Id: <20180524182659.19986-9-twoerner@gmail.com>
+Date: Thu, 24 May 2018 14:26:57 -0400
+Message-Id: <20180524182659.19986-10-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524182659.19986-1-twoerner@gmail.com>
 References: <20180524182659.19986-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH 08/11] msgpack-c: variable cleanup
+Subject: [meta-oe][master-next][PATCH 09/11] json-spirit: variable cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 18:27:24 -0000
+X-List-Received-Date: Thu, 24 May 2018 18:27:26 -0000
 
 Reorder recipe variables according to:
 
@@ -68,29 +68,31 @@ Reorder recipe variables according to:
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-index 3ae4c1f879..690a7f444b 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-@@ -9,12 +9,11 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
+diff --git a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+index 3c1d8a9959..d6e42c81d5 100644
+--- a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
++++ b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+@@ -9,6 +9,8 @@ PRIORITY = "optional"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=278ef6183dec4aae1524fccc4b0113c9"
  
- PV .= "+git${SRCPV}"
- 
--SRCREV = "208595b2620cf6260ce3d6d4cf8543f13b206449"
--
- SRC_URI = "git://github.com/msgpack/msgpack-c \
-            file://0001-Fix-Werror-class-memaccess.patch \
-            "
--
--inherit cmake pkgconfig
-+SRCREV = "208595b2620cf6260ce3d6d4cf8543f13b206449"
- 
- S = "${WORKDIR}/git"
++DEPENDS = "boost"
 +
-+inherit cmake pkgconfig
+ SRC_URI = "file://json_spirit_v${PV}.zip \
+            file://0001-Adjust-the-cmake-files.patch \
+            file://0001-Link-to-libatomic.patch \
+@@ -16,8 +18,6 @@ SRC_URI = "file://json_spirit_v${PV}.zip \
+ 
+ S = "${WORKDIR}/json_spirit_v${PV}"
+ 
+-DEPENDS = "boost"
+-
+ inherit cmake
+ 
+ BBCLASSEXTEND = "nativesdk"
 -- 
 2.17.0.582.gccdcbd54c
 
