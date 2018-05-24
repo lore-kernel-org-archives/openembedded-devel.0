@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f44.google.com (mail-it0-f44.google.com
-	[209.85.214.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 0332474A03
+Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
+	[209.85.214.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 45C7A74AF8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 14:39:24 +0000 (UTC)
-Received: by mail-it0-f44.google.com with SMTP id q72-v6so2673202itc.0
+	Thu, 24 May 2018 14:39:26 +0000 (UTC)
+Received: by mail-it0-f52.google.com with SMTP id y189-v6so2659100itb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 07:39:26 -0700 (PDT)
+	Thu, 24 May 2018 07:39:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=X02+I2Nkr/qPAccvEflJvtNBHEZmxWBozvH8ucM0nFQ=;
-	b=OARzA3CjNQ6vZP+QPhIcC0+jdzONwGRUTvOKdA4B3VxuFnIOBjPBp9+uc5gn3ajiVC
-	KuIbw2QtMmZ68tRrMppmzgLFtPrllbFFnG+HgYFB570IqZ+Sh8kdMjGOhHuvXg/8DW0a
-	PKvA0F0VnWxThKf5t+WPUjn+fszA6H+cUioqSn2MIEhEg5aBbT/35TodWVoVG6jUgRNS
-	GoJdogcqHbvvDAT+uR4Rwusf7zgRQYtix0RmCCmo9Lf/1BcrNypQgfkml80UysMFNQYd
-	bMQ8xendppCua1kmO7QGnQI84oacYt5wVAV2EmtLwNnOBpIZKjlrknz4yU4Mfe/vXBCp
-	81Ww==
+	bh=2XMsB6fINYsa3BjVGu6sS8BMPxiWGHh0ymjY+chXY5o=;
+	b=PbSSohFTl61d2EMgbeDaq61wY99tX5q3U8qIiS9sNBVNKfF8OL+O7vlm7a47Bmcl9D
+	qPEGs1Pf81Xf+7ikGNf1DsxzSCRVRHs7217TK0ooX6DC4RRV1ip8fOPG3irBrFAp3p7v
+	rsq+55Bwyd8mB8YqLExSvJvdaTEEsYz8LYcUx8Z/gtXostlBz5kmvPOHUXEpJ99bwLrX
+	IC3vnuOYzrvAO8bTpgxsGtubSbBURUaW5Vc8XsuRCkOWMHQiDVZPghLWMUDwdbNGRJWR
+	L1M5m7ZV3qDlf68ObU7klOAMbKyyJsgWV/rxc0ZcYUBpOE2dYkttZmKBtZGVPESA6FJo
+	pBEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=X02+I2Nkr/qPAccvEflJvtNBHEZmxWBozvH8ucM0nFQ=;
-	b=Kl4x/F8JQmfPQdk0JOlWoSgqNt4Wx5pOWCKrbQAjFUgwlRnBadp7YP7TAdGh4RZ/oa
-	F2LL+Z7eijiGkTkafTEciGowrEWDXHKHQSjmb6tkc0fQKASqMNcgcqBO5U9LC04m52K/
-	zQ2bGdm/Bv3lEHpNdJOE36u6X+JX5BO/SKxm86/FrqQ739Ew2ez826KSgu8RVYQSz/zq
-	82jvT6/sc5YJ/3OydA2f/c/rQNkb/DC/Npk8S3MfWIN1lLjROzH6gDhjmHLmmck8kNab
-	klTrBRwl+0hx13u/2cP4nAajtw8n9p0EnFnIMLy2OSZA4hMyPgM8CIkgAId0Vn1OFsHW
-	Z1QA==
-X-Gm-Message-State: ALKqPwddltuwEPRY9cz/r+Aes1GA/HEjQAWj8UBWr/KEHfG3dYk8/2VM
-	/LL+hNyH2bsXLU2LucIXSCFxE5Ac
-X-Google-Smtp-Source: AB8JxZoRsAxVX7aEy2siL5ipxs78SBU6QPeUNESeA0Fr2qXw2HIRupyFUoUzFj0jjiZXQ9URHVxC7Q==
-X-Received: by 2002:a24:3254:: with SMTP id
-	j81-v6mr10320227ita.117.1527172765717; 
-	Thu, 24 May 2018 07:39:25 -0700 (PDT)
+	bh=2XMsB6fINYsa3BjVGu6sS8BMPxiWGHh0ymjY+chXY5o=;
+	b=aA9KuP+oLlnM3p1+KQZDRYSenQB7RTi4nP/hndLwmjEuawAV1+A0iuHaMJ0dIczg9d
+	6kgECW/T4oyc2XO6B/LX1W73UeAe9s+0ot9Y0lY9liIiZ4z/xlrS/YDVP7kCRO0nLIi+
+	d2stscTS/dPx45C5oYKU3Z4NBncdOz5+C1Pvgy5U1X9mgQNEWXBzYDHmBHSaQBai7g3S
+	8MBpIh4cGInfL4P+jBKRthnH1rSt3tuQme3wMO+hYEwEf7UJetNeEYd0QykdVGZkL//n
+	Zf/GOQe6WrsKFemqi4pZdI4B5tBF9QjBn7Z4QYl5sc6H/aeW1EHmezu68+90+1K2PjQm
+	7fYg==
+X-Gm-Message-State: ALKqPwdfuA15O0WWvBVGXJ2pbWtSdQBVmnEVBtpOVvIWsPCst0a2itRx
+	+Vw4I0Et8qbKeYxMKuLXLavHWr+l
+X-Google-Smtp-Source: AB8JxZqQp5ndOMLkk7td4IBWKv0tSlx2Yb9GY8GQ2bZ80SwaqyVyHKJ+3m9AgLo1hA1asqpjlNkkBQ==
+X-Received: by 2002:a24:a64d:: with SMTP id
+	r13-v6mr9262503iti.124.1527172767248; 
+	Thu, 24 May 2018 07:39:27 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	a43-v6sm2435261itj.11.2018.05.24.07.39.24
+	a43-v6sm2435261itj.11.2018.05.24.07.39.25
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 07:39:24 -0700 (PDT)
+	Thu, 24 May 2018 07:39:26 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 10:38:49 -0400
-Message-Id: <20180524143854.24096-13-twoerner@gmail.com>
+Date: Thu, 24 May 2018 10:38:50 -0400
+Message-Id: <20180524143854.24096-14-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524143854.24096-1-twoerner@gmail.com>
 References: <20180524143854.24096-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH v3 12/17] libftdi: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][master-next][PATCH v3 13/17] libssh: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 14:39:25 -0000
+X-List-Received-Date: Thu, 24 May 2018 14:39:26 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need to
@@ -70,20 +70,19 @@ provide custom packaging rules to handles these files.
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-support/libftdi/libftdi_1.4.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-oe/recipes-support/libssh/libssh_0.7.3.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-index 6bea16582f..a1576b5617 100644
---- a/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-+++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-@@ -26,6 +26,4 @@ inherit cmake binconfig pkgconfig
- 
- EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb b/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
+index 79e7dc5998..e5ea2b8bfa 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.7.3.bb
+@@ -30,5 +30,4 @@ do_configure_prepend () {
+         || bbfatal "Failed to disable examples"
+ }
  
 -FILES_${PN}-dev += "${libdir}/cmake"
--
- BBCLASSEXTEND = "native"
+ TOOLCHAIN = "gcc"
 -- 
 2.17.0.582.gccdcbd54c
 
