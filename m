@@ -1,52 +1,52 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f47.google.com (mail-it0-f47.google.com
-	[209.85.214.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8583574A0C
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 528CB74AD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 14:39:15 +0000 (UTC)
-Received: by mail-it0-f47.google.com with SMTP id z6-v6so2651345iti.4
+	Thu, 24 May 2018 14:39:17 +0000 (UTC)
+Received: by mail-io0-f179.google.com with SMTP id f21-v6so2544730iob.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 07:39:16 -0700 (PDT)
+	Thu, 24 May 2018 07:39:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=SJXs+GST6+SOU9MgEqGopDFwf7M5lDra2VBZJPTKb9o=;
-	b=hraNKRJ3/vFxAntVlDf/QAX488ciophXdWT7YHxngO+OaUhhjeqfLLQI4FeQMLa6Jy
-	/qUkI3kOWotZ5H6eLUlYyhnqOP8AP8Dx+EoGfFeAT2FyBJCk2Tabk8g/IyVYMhDGI7w6
-	DQ+ndm/DZXRJDHbd2IGb7nUeX4u+ID9aKyfA0BLAY1ifUK5OoCKF7LGlByxGLOLr34/M
-	mAdVm8FyTI4muZEV/QDBJoEGQ2gdGfkOGzjeV/Lf4Dw3XxTBxcV+IH4lkal55XFMuUcl
-	4m+d84uKxnZuPhdp9dCrIRTRN4+bLQctIRjwNWzOpqtbgDwjb3SImK7jvopFx2G7U17W
-	yqMw==
+	bh=iGQaRRVhXntOi3i6Pk3NrKp1WjhkAGr5eWIBj0qqb94=;
+	b=ad+z3qQwWCjEbB8kzeQpSWzfkS5R9+bMw5ImOAWt6UqSnVgQ2/YE3JeA/7HmrAu5bU
+	gs1c1hd1vuuZuvk+lCwRUicePMt5/Oz5N5b4sBdFP8PZOqglb4huSG/7mrtGe8GI9ccM
+	X7STLACIhR7HebQVuhtnBI4owlHGREBz7i1P1zv+Ko13cOYXv1kSNq10Qo5ZhXJ1Y/Lb
+	08oLsw11lV50GKZAdN820qwhHH+8nHpaslVMY6PSfFbyjgxDnx0o0O95kjSVFGwiH5uw
+	/ZScR/Z0pnYx9g2LQNwe09Iduq0Uxkejmn+/k04vdM5xSwRaPzwmkULkTTpMtg66r8Rg
+	y1eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=SJXs+GST6+SOU9MgEqGopDFwf7M5lDra2VBZJPTKb9o=;
-	b=oRu7nM9nVSBH4weAOwXpyW8zNmwSs1/N6uhpvBRPHTuwHY2ZLzEL+44VVuF9xzZ6LO
-	5qHoezzc8HvWnXrB/dRuhkZbMZPpvUhSd9CR9d1GogLEjcKFXKRGbyh2YmwkkrqiinCm
-	bYQvORfTaOeAPx01Mk5efsCBcg7QlO4ezyjfzmzWGX2/0NQn7RxjIEFFRwYau//rreLy
-	OhjSwYUxtDQYwLEusMWBn5G3E5FX48bRuTpEOLrQxrsJ+MdCNBXzKlJckYGyAL1PAuVs
-	q8d7liLYE8/g5CSiJDHIytuqLSsMjnHMVWEqdwkWJZ6ok29WX6Z41ier0GDwZzXJE3Ec
-	2ejA==
-X-Gm-Message-State: ALKqPwcOiRFlSRVoLLLLPhCu6JCutP2r3fsKbXI0Vb+QPVqMkh6TmSmZ
-	nP1rOzNq2tH2AZwRRxsZmATm4Ig0
-X-Google-Smtp-Source: AB8JxZoSZr8LTuWp8h0tLvVfyWwfOHZTVGrSi+Ss8IR5+2rqu6onlJj8rXoejz08Qhv3Zo7FfroMQA==
-X-Received: by 2002:a24:51d5:: with SMTP id
-	s204-v6mr9455340ita.151.1527172755827; 
-	Thu, 24 May 2018 07:39:15 -0700 (PDT)
+	bh=iGQaRRVhXntOi3i6Pk3NrKp1WjhkAGr5eWIBj0qqb94=;
+	b=GBG7NgcT1CKPCy3MJ8W30llG5h0LLt5vAhTvAeeKfgprYPnpM0Vi/H1i2MlcHiYNlt
+	VviWWZ0TLDvLi0VH6g7kDfwmA4pS6nj9U6Nnip02DesloQFWTilWuzc2GYEFulENWIRl
+	+bUcpZkpUTkiO4nDOKXerJ83F3SGiBNzkDCJMajJYYJ+ubWJuImyTxspJBtTR60lHxZo
+	lzTM9Mx2sQcTIpohshoag6ip6cLxKh9f3MIg6Mbw0YNtiIx1q87fU4U5ctPwJA0tnR1b
+	Urk8+4jGb9GCYh5pTeL5I4y1XPCSO77onBk0m1Zis/5m7GbKCWBOFE8icQBO+nszfKEz
+	cCmQ==
+X-Gm-Message-State: ALKqPwdzK50TnMmu7XFvq5B6YJiUuP0LPiutdtVAvOvBIo/5n78M7JDo
+	NBOeSAe+8MuLPlN2966SK54AsWIr
+X-Google-Smtp-Source: ADUXVKIYWePt3ZmFkvJSmGW7vDyUkqJcwJh/cRr/3cp0TkKCTDBn0pFfgTqOzMPY585HuwtanaRoww==
+X-Received: by 2002:a6b:3c3:: with SMTP id
+	e64-v6mr1334407ioi.297.1527172757892; 
+	Thu, 24 May 2018 07:39:17 -0700 (PDT)
 Received: from linux-uys3.suse ([206.248.190.95])
 	by smtp.gmail.com with ESMTPSA id
-	a43-v6sm2435261itj.11.2018.05.24.07.39.14
+	a43-v6sm2435261itj.11.2018.05.24.07.39.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 07:39:14 -0700 (PDT)
+	Thu, 24 May 2018 07:39:16 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 10:38:43 -0400
-Message-Id: <20180524143854.24096-7-twoerner@gmail.com>
+Date: Thu, 24 May 2018 10:38:44 -0400
+Message-Id: <20180524143854.24096-8-twoerner@gmail.com>
 X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
 In-Reply-To: <20180524143854.24096-1-twoerner@gmail.com>
 References: <20180524143854.24096-1-twoerner@gmail.com>
-Subject: [meta-oe][master-next][PATCH v3 06/17] msgpack_c: rely on cmake.bbclass to put cmake package files in dev package
+Subject: [meta-oe][master-next][PATCH v3 07/17] rapidjson: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 14:39:15 -0000
+X-List-Received-Date: Thu, 24 May 2018 14:39:17 -0000
 
 The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
 ${datadir}/cmake end up in the dev package, so recipes no longer need to
@@ -70,19 +70,21 @@ provide custom packaging rules to handles these files.
 Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-index 02c0cd2964..3ae4c1f879 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-@@ -18,5 +18,3 @@ SRC_URI = "git://github.com/msgpack/msgpack-c \
- inherit cmake pkgconfig
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index 8ab35d224b..069385d5b0 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -20,7 +20,6 @@ EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJ
  
- S = "${WORKDIR}/git"
--
--FILES_${PN}-dev += "${libdir}/cmake/msgpack/*.cmake"
+ # RapidJSON is a header-only C++ library, so the main package will be empty.
+ 
+-FILES_${PN}-dev += "${libdir}/cmake"
+ RDEPENDS_${PN}-dev = ""
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.0.582.gccdcbd54c
 
