@@ -1,23 +1,23 @@
-Return-Path: <Yi.Zhao@windriver.com>
+Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E692874803
+	by mail.openembedded.org (Postfix) with ESMTP id 972DC74573
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 06:27:42 +0000 (UTC)
+	Thu, 24 May 2018 07:29:55 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w4O6Rgos016100
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w4O7Tp58018669
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 23 May 2018 23:27:42 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Wed, 23 May 2018 23:27:41 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <schnitzeltony@googlemail.com>
-Date: Thu, 24 May 2018 14:27:39 +0800
-Message-ID: <1527143259-6532-1-git-send-email-yi.zhao@windriver.com>
+	Thu, 24 May 2018 00:29:51 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 24 May 2018 00:29:50 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <akuster808@gmail.com>
+Date: Thu, 24 May 2018 15:39:11 +0800
+Message-ID: <1527147551-32644-1-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-multimedia][PATCH] meta-multimedia: update LAYERDEPENDS
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] metacity: fix version number typo 3.38.0 -> 3.28.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,29 +30,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 06:27:43 -0000
+X-List-Received-Date: Thu, 24 May 2018 07:29:55 -0000
 Content-Type: text/plain
 
-Add meta-oe as LAYERDEPENDS to fix ParseError:
-meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb:13:
-Could not inherit file classes/dos2unix.bbclass
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-multimedia/conf/layer.conf | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-gnome/metacity/{metacity_3.38.0.bb => metacity_3.28.0.bb}     | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-gnome/recipes-gnome/metacity/{metacity_3.38.0.bb => metacity_3.28.0.bb} (100%)
 
-diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
-index cfedf2f..24d7a6d 100644
---- a/meta-multimedia/conf/layer.conf
-+++ b/meta-multimedia/conf/layer.conf
-@@ -28,5 +28,6 @@ BBFILE_PRIORITY_multimedia-layer = "6"
- LAYERVERSION_multimedia-layer = "1"
- 
- LAYERDEPENDS_multimedia-layer = "core"
-+LAYERDEPENDS_multimedia-layer += "openembedded-layer"
- 
- LAYERSERIES_COMPAT_multimedia-layer = "sumo"
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.38.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
+similarity index 100%
+rename from meta-gnome/recipes-gnome/metacity/metacity_3.38.0.bb
+rename to meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
 -- 
 2.7.4
 
