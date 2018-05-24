@@ -1,40 +1,48 @@
-Return-Path: <hainsvdbosch@ziggo.nl>
-X-Greylist: delayed 1473 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 24 May 2018 12:40:10 UTC
-Received: from smtpq3.mnd.mail.iss.as9143.net (smtpq3.mnd.mail.iss.as9143.net
-	[212.54.34.166])
-	by mail.openembedded.org (Postfix) with ESMTP id E1D7A6FFC8
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 97F29745D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 12:40:10 +0000 (UTC)
-Received: from [212.54.34.114] (helo=smtp6.mnd.mail.iss.as9143.net)
-	by smtpq3.mnd.mail.iss.as9143.net with esmtp (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>) id 1fLp9e-0007FF-AW
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 May 2018 14:15:38 +0200
-Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
-	helo=localhost.localdomain)
-	by smtp6.mnd.mail.iss.as9143.net with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>)
-	id 1fLp9e-0000WW-84; Thu, 24 May 2018 14:15:38 +0200
-From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
+	Thu, 24 May 2018 13:43:52 +0000 (UTC)
+Received: by mail-io0-f174.google.com with SMTP id a10-v6so2324868ioc.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 May 2018 06:43:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=6ZGS57gUdAql0jSqYPLsD5YAJ/WREdZCm8qvGKeK2uU=;
+	b=ZywqgHrOWOIpBwEJooZuUDaEYXvFhMhmWo88364iXTqHXQ5tHibNiO3A3ccxZsiL3p
+	jgU1z/CtYR0GpBU/q9ACaiLXMhMwanYDRw3cblFpNlEddytJUVmHyQ31NArRvSNjaz96
+	3MdR2YjeaMeRktMCcH5SqbpmfvWcyvK9LxnKCwUlDiqCkZj19o2ggfAwCH2MYMODiyx9
+	WJChLi8b8Eojz39MKrcUVCrwDIyXhvzbE/RNd9mgrGDHXZSVrncxmIZxk+c6yhXAdFUW
+	RVvVusF2vrdN/I1DsR+EczgJ8JIa/6BIaDoRBtEJAZH/UV5osEfEG0b+ZFLKoJMxxvB8
+	nCEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=6ZGS57gUdAql0jSqYPLsD5YAJ/WREdZCm8qvGKeK2uU=;
+	b=nxg24pbBA5u8XEDS4QqoFuKVXsibd/sE+PasSX/x8WaDPtRuDR/5Yy4hIc/Kl2uwrK
+	Q5mijN0Af2VHPMAi21RPXbLhwNIUy4RNkexrbxlXb0kOmQmKdiP9ou5YRsj2gnSbT6oT
+	6t343CYuaQmEUC5Wh2fHXRgD6b2wKBt+TQgajubi3SVcor9r24ifSSVuMOwdOw41tdcq
+	0iYnilRSSjXCHTSOFGd919SRvtQ61yw2zGUYQKUU/qerQdUjzCZ6hCLdnPzPut457FHo
+	OvwtvhTP7b/qiTKepJK/m4GVcZ2TmGoPtd/trCYx7YeHWfCIfIHCYWWtwFZ85uU4TvUR
+	Eklg==
+X-Gm-Message-State: ALKqPwedTDlYIwnT/+zafjUbs9oYYvqZHjbuGEAaFIkAC2/gLibN4Xu9
+	TeKr+X7wzsTWAnSVQ4upLpUbdeJi
+X-Google-Smtp-Source: AB8JxZpvDZtkqmd0knpg+TsO0zaND6RKsIKg4aRVzK8ulD0P8aNaDlVgi0dXcDEPomIIfmiAH3rA+g==
+X-Received: by 2002:a6b:5f14:: with SMTP id t20-v6mr802925iob.0.1527169433687; 
+	Thu, 24 May 2018 06:43:53 -0700 (PDT)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id
+	r9-v6sm10999984ioa.49.2018.05.24.06.43.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 24 May 2018 06:43:52 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 14:15:23 +0200
-Message-Id: <20180524121523.6956-1-hainsvdbosch@ziggo.nl>
-X-Mailer: git-send-email 2.17.0
-X-SourceIP: 82.73.120.193
-X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
-X-Ziggo-spambar: /
-X-Ziggo-spamscore: 0.0
-X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=HPnt6Llv c=1 sm=1 tr=0
-	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
-	a=VUJBJC2UJ8kA:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8
-	a=l2TacDBqCxP8-rTlfSMA:9 a=ZPHkQOs1zdIA:10
-	a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 none
-X-Ziggo-Spam-Status: No
-X-Spam-Status: No
-X-Spam-Flag: No
-Subject: [meta-oe][PATCH] libtevent: refresh patch
+Date: Thu, 24 May 2018 09:43:35 -0400
+Message-Id: <20180524134337.31572-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
+Subject: [meta-networking][master-next][PATCH v3 0/2] rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,70 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 12:40:11 -0000
+X-List-Received-Date: Thu, 24 May 2018 13:43:53 -0000
 
-WARNING: libtevent-0.9.36-r0 do_patch:
-Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
-The context lines in the patches can be updated with devtool:
+v3:
+- break patches back up into individual patches for each recipe
+- avoid including fftw
 
-    devtool modify <recipe>
-    devtool finish --force-patch-refresh <recipe> <layer_path>
+v2:
+- re-spin Andre's patches to only include this change (i.e. rely on
+  cmake.bbclass) without any formatting changes
+- combine all such patches together into 2 patches
+  (one for meta-oe, one for meta-networking)
 
-Then the updated patches and the source tree (in devtool's workspace)
-should be reviewed to make sure the patches apply in the correct place
-and don't introduce duplicate lines (which can, and does happen
-when some of the context is ignored). Further information:
-http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
-Details:
-Applying patch avoid-attr-unless-wanted.patch
-patching file lib/replace/wscript
-Hunk #1 succeeded at 793 with fuzz 2 (offset 175 lines).
-Hunk #2 succeeded at 806 with fuzz 2 (offset 178 lines).
+v1:
+- Andre's original patchset
 
-Now at patch avoid-attr-unless-wanted.patch
+Trevor Woerner (2):
+  grpc: rely on cmake.bbclass to put cmake package files in dev package
+  c-ares: rely on cmake.bbclass to put cmake package files in dev
+    package
 
-Signed-off-by: Hains van den Bosch <hainsvdbosch@ziggo.nl>
----
- .../libtevent/avoid-attr-unless-wanted.patch   | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb     | 2 --
+ meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb | 1 -
+ 2 files changed, 3 deletions(-)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch b/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch
-index 2fc55239c..35890335a 100644
---- a/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch
-+++ b/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch
-@@ -1,20 +1,22 @@
----- a/lib/replace/wscript	2015-11-18 15:40:19.000000000 +0100
--+++ b/lib/replace/wscript	2015-11-18 15:48:09.000000000 +0100
--@@ -618,8 +618,6 @@
-+diff --git a/lib/replace/wscript b/lib/replace/wscript
-+index 079761d..07e0104 100644
-+--- a/lib/replace/wscript
-++++ b/lib/replace/wscript
-+@@ -793,8 +793,6 @@ def build(bld):
-      if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE += ' inet_aton.c'
-      if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE += ' inet_ntop.c'
-      if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE += ' inet_pton.c'
- -    if not bld.CONFIG_SET('HAVE_GETXATTR') or bld.CONFIG_SET('XATTR_ADDITIONAL_OPTIONS'):
- -                                                 REPLACE_SOURCE += ' xattr.c'
-  
--     bld.SAMBA_LIBRARY('replace',
--                       source=REPLACE_SOURCE,
--@@ -630,7 +628,7 @@
-+     if not bld.CONFIG_SET('HAVE_CLOSEFROM'):
-+         REPLACE_SOURCE += ' closefrom.c'
-+@@ -808,7 +806,7 @@ def build(bld):
-                        # at the moment:
-                        # hide_symbols=bld.BUILTIN_LIBRARY('replace'),
-                        private_library=True,
- -                      deps='crypt dl nsl socket rt attr' + extra_libs)
- +                      deps='crypt dl nsl socket rt ' + extra_libs)
-  
--     bld.SAMBA_SUBSYSTEM('replace-test',
--                       source='''test/testsuite.c test/strptime.c
-+     replace_test_cflags="-Wno-format-zero-length"
-+     if bld.CONFIG_SET('HAVE_WNO_FORMAT_TRUNCATION'):
 -- 
-2.17.0
+2.17.0.582.gccdcbd54c
 
 
