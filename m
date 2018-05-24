@@ -1,26 +1,40 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id C9AD87457D
+Return-Path: <hainsvdbosch@ziggo.nl>
+X-Greylist: delayed 1473 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 24 May 2018 12:40:10 UTC
+Received: from smtpq3.mnd.mail.iss.as9143.net (smtpq3.mnd.mail.iss.as9143.net
+	[212.54.34.166])
+	by mail.openembedded.org (Postfix) with ESMTP id E1D7A6FFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 09:03:42 +0000 (UTC)
-Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id CF58920847;
-	Thu, 24 May 2018 09:03:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1527152623;
-	bh=c9/9fTa14FvZ6NecUtZb6QD0JHJ5rZAaTmxgaRcnOKU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=YESutM6/6hog/FQ9ZDdM6Gk24ew/XHQtmdIp2Z/d4LF2Q71uOWB7rMtVkqdJoWGuv
-	nhWzn4o5MvPKKY6g6Q0aFuLoQ0ENInJUjgKbwlgWXFEQegn/C7YZroWiRBbDka+rmD
-	AV5jb37/wXupcx9mNfw2YeZLav6Trxn49q6CqSoc=
-From: Krzysztof Kozlowski <krzk@kernel.org>
+	Thu, 24 May 2018 12:40:10 +0000 (UTC)
+Received: from [212.54.34.114] (helo=smtp6.mnd.mail.iss.as9143.net)
+	by smtpq3.mnd.mail.iss.as9143.net with esmtp (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>) id 1fLp9e-0007FF-AW
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 May 2018 14:15:38 +0200
+Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
+	helo=localhost.localdomain)
+	by smtp6.mnd.mail.iss.as9143.net with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>)
+	id 1fLp9e-0000WW-84; Thu, 24 May 2018 14:15:38 +0200
+From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 11:03:31 +0200
-Message-Id: <1527152611-13882-1-git-send-email-krzk@kernel.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][rocko][PATCH v3] civetweb: Add new recipe with git-based version
+Date: Thu, 24 May 2018 14:15:23 +0200
+Message-Id: <20180524121523.6956-1-hainsvdbosch@ziggo.nl>
+X-Mailer: git-send-email 2.17.0
+X-SourceIP: 82.73.120.193
+X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
+X-Ziggo-spambar: /
+X-Ziggo-spamscore: 0.0
+X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=HPnt6Llv c=1 sm=1 tr=0
+	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
+	a=VUJBJC2UJ8kA:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8
+	a=l2TacDBqCxP8-rTlfSMA:9 a=ZPHkQOs1zdIA:10
+	a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 none
+X-Ziggo-Spam-Status: No
+X-Spam-Status: No
+X-Spam-Flag: No
+Subject: [meta-oe][PATCH] libtevent: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,136 +47,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 09:03:42 -0000
+X-List-Received-Date: Thu, 24 May 2018 12:40:11 -0000
 
-Add recipe for CivetWeb: easy to use, powerful, C/C++ embeddable web
-server with optional CGI, SSL and Lua support, under MIT license.
+WARNING: libtevent-0.9.36-r0 do_patch:
+Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
+The context lines in the patches can be updated with devtool:
 
-CivetWeb provides C and C++ libraries and a standalone server binary.
+    devtool modify <recipe>
+    devtool finish --force-patch-refresh <recipe> <layer_path>
 
-Choose specific post-v1.10 git revision b8148afe8fa4 which has a fixed
-SSL support (depending on OpenSSL v1.0.2).
+Then the updated patches and the source tree (in devtool's workspace)
+should be reviewed to make sure the patches apply in the correct place
+and don't introduce duplicate lines (which can, and does happen
+when some of the context is ignored). Further information:
+http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
+Details:
+Applying patch avoid-attr-unless-wanted.patch
+patching file lib/replace/wscript
+Hunk #1 succeeded at 793 with fuzz 2 (offset 175 lines).
+Hunk #2 succeeded at 806 with fuzz 2 (offset 178 lines).
 
-Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+Now at patch avoid-attr-unless-wanted.patch
 
+Signed-off-by: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 ---
+ .../libtevent/avoid-attr-unless-wanted.patch   | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-Changes since v2:
-1. Bump to post-v1.10 git revision.
-2. Add ssl package config.
-3. Drop cgi, cpp and debug from default package config.
-
-Changes since v1:
-1. Use SRCREC as suggested by Khem Raj.
-2. Drop nativesdk class.
-3. Fix native build with patch.
-4. Explicitly disable SSL (does not build at v1.10).
-5. Disable ASAN (not applicable for native builds).
----
- ...ssing-librt-and-libm-during-native-compil.patch | 42 +++++++++++++++++++++
- .../recipes-connectivity/civetweb/civetweb_git.bb  | 43 ++++++++++++++++++++++
- 2 files changed, 85 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
-new file mode 100644
-index 000000000000..401cf39ad8df
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
-@@ -0,0 +1,42 @@
-+From cd93e2c538cecb3192fd24c0fbd6e834d0c47eec Mon Sep 17 00:00:00 2001
-+From: Krzysztof Kozlowski <krzk@kernel.org>
-+Date: Wed, 18 Apr 2018 14:11:52 +0200
-+Subject: [PATCH] Unittest: Fix missing librt and libm during native compilation
-+
-+civetweb looks for librt and libm in weird places and for native build
-+this fails:
-+
-+    | ../third_party/lib/libcheck.a(check.c.o): In function `tcase_create':
-+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:145: undefined reference to `floor'
-+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:148: undefined reference to `floor'
-+
-+These are needed dependencies so try regular system linkage in such
-+case.
-+
-+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-+---
-+ unittest/CMakeLists.txt | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/unittest/CMakeLists.txt b/unittest/CMakeLists.txt
-+index f34b2e0e4ce4..05d25702178c 100644
-+--- a/unittest/CMakeLists.txt
-++++ b/unittest/CMakeLists.txt
-+@@ -60,10 +60,14 @@ endif()
-+ find_package(LibM)
-+ if (LIBM_FOUND)
-+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBM::LIBM")
-++else()
-++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lm")
-+ endif()
-+ find_package(LibRt)
-+ if (LIBRT_FOUND)
-+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBRT::LIBRT")
-++else()
-++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lrt")
-+ endif()
-+ 
-+ # Build the C unit tests
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-new file mode 100644
-index 000000000000..ffe7282b73c9
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-@@ -0,0 +1,43 @@
-+SUMMARY = "Civetweb embedded web server"
-+HOMEPAGE = "https://github.com/civetweb/civetweb"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=6f28fdcba0dda735eed62bac6a397562"
-+
-+SRCREV = "b8148afe8fa44c64f75e69655c4fdc9095565568"
-+PV = "1.10+git${SRCPV}"
-+SRC_URI = "git://github.com/civetweb/civetweb.git"
-+SRC_URI_append_class-native = " \
-+    file://0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch \
-+"
-+S = "${WORKDIR}/git"
-+
-+# civetweb supports building with make or cmake (although cmake lacks few features)
-+inherit cmake
-+
-+# Disable Lua and Duktape because they do not compile from CMake (as of v1.8, v1.9 and v1.10).
-+# Disable ASAN as it is included only in Debug build.
-+EXTRA_OECMAKE = " \
-+    -DBUILD_SHARED_LIBS=ON \
-+    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-+    -DCIVETWEB_ENABLE_LUA=OFF \
-+    -DCIVETWEB_ENABLE_ASAN=OFF \
-+"
-+EXTRA_OECMAKE_class-native = " \
-+    -DBUILD_SHARED_LIBS=ON \
-+    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-+    -DCIVETWEB_ENABLE_LUA=OFF \
-+    -DCIVETWEB_ENABLE_ASAN=OFF \
-+"
-+
-+PACKAGECONFIG ??= "caching ipv6 server ssl websockets"
-+PACKAGECONFIG[caching] = "-DCIVETWEB_DISABLE_CACHING=OFF,-DCIVETWEB_DISABLE_CACHING=ON,"
-+PACKAGECONFIG[cgi] = "-DCIVETWEB_DISABLE_CGI=OFF,-DCIVETWEB_DISABLE_CGI=ON,"
-+PACKAGECONFIG[cpp] = "-DCIVETWEB_ENABLE_CXX=ON,-DCIVETWEB_ENABLE_CXX=OFF,"
-+PACKAGECONFIG[debug] = "-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=ON,-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=OFF,"
-+PACKAGECONFIG[ipv6] = "-DCIVETWEB_ENABLE_IPV6=ON,-DCIVETWEB_ENABLE_IPV6=OFF,"
-+PACKAGECONFIG[server] = "-DCIVETWEB_INSTALL_EXECUTABLE=ON,-DCIVETWEB_INSTALL_EXECUTABLE=OFF,"
-+PACKAGECONFIG[ssl] = "-DCIVETWEB_ENABLE_SSL=ON -DCIVETWEB_SSL_OPENSSL_API_1_1=OFF -DCIVETWEB_ENABLE_SSL_DYNAMIC_LOADING=OFF,-DCIVETWEB_ENABLE_SSL=OFF,openssl (=1.0.2%),"
-+PACKAGECONFIG[websockets] = "-DCIVETWEB_ENABLE_WEBSOCKETS=ON,-DCIVETWEB_ENABLE_WEBSOCKETS=OFF,"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch b/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch
+index 2fc55239c..35890335a 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch
++++ b/meta-networking/recipes-support/libtevent/libtevent/avoid-attr-unless-wanted.patch
+@@ -1,20 +1,22 @@
+---- a/lib/replace/wscript	2015-11-18 15:40:19.000000000 +0100
+-+++ b/lib/replace/wscript	2015-11-18 15:48:09.000000000 +0100
+-@@ -618,8 +618,6 @@
++diff --git a/lib/replace/wscript b/lib/replace/wscript
++index 079761d..07e0104 100644
++--- a/lib/replace/wscript
+++++ b/lib/replace/wscript
++@@ -793,8 +793,6 @@ def build(bld):
+      if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE += ' inet_aton.c'
+      if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE += ' inet_ntop.c'
+      if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE += ' inet_pton.c'
+ -    if not bld.CONFIG_SET('HAVE_GETXATTR') or bld.CONFIG_SET('XATTR_ADDITIONAL_OPTIONS'):
+ -                                                 REPLACE_SOURCE += ' xattr.c'
+  
+-     bld.SAMBA_LIBRARY('replace',
+-                       source=REPLACE_SOURCE,
+-@@ -630,7 +628,7 @@
++     if not bld.CONFIG_SET('HAVE_CLOSEFROM'):
++         REPLACE_SOURCE += ' closefrom.c'
++@@ -808,7 +806,7 @@ def build(bld):
+                        # at the moment:
+                        # hide_symbols=bld.BUILTIN_LIBRARY('replace'),
+                        private_library=True,
+ -                      deps='crypt dl nsl socket rt attr' + extra_libs)
+ +                      deps='crypt dl nsl socket rt ' + extra_libs)
+  
+-     bld.SAMBA_SUBSYSTEM('replace-test',
+-                       source='''test/testsuite.c test/strptime.c
++     replace_test_cflags="-Wno-format-zero-length"
++     if bld.CONFIG_SET('HAVE_WNO_FORMAT_TRUNCATION'):
 -- 
-2.7.4
+2.17.0
 
 
