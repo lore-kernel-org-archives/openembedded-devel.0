@@ -1,26 +1,28 @@
 Return-Path: <krzk@kernel.org>
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id D8DF574903
+	by mail.openembedded.org (Postfix) with ESMTP id 6C62C74903
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 07:22:35 +0000 (UTC)
+	Fri, 25 May 2018 07:22:36 +0000 (UTC)
 Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 1AFC820849;
-	Fri, 25 May 2018 07:22:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 3177020882;
+	Fri, 25 May 2018 07:22:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1527232956;
-	bh=zWApQid9eelgwvdaRfR6Vp9gG4Gw9qrHHIm23XTTKy4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=RwfcTNB+qD21T6zH5RdqJzP0uD5dF5zsBSyRRTJOLDhvsSZiQJsSE7H4KBsSZSMkT
-	RGEbRWaHifJ895kLBYTWFA2HkCUQjjF2iZRs5H5hPJ58q5qKTb8+7i31KPs6GfJnum
-	P1/utmwrc5xpIju7kDch1p68Kf4AvbKznFtj6GWk=
+	s=default; t=1527232957;
+	bh=TnqXEDSANu/XAcA+RFYEGNzymJnOisStqNA3WEuv3+E=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=PbqddBoHBFwaCATuxAmzQ8kXp/aeG2bgIt+yhiB2wNwirTTSUbnXYCB6m3ypvhjRn
+	4sqGD03WkNIkqrXCsIIg+hcvifBPTE2F4e9nwXd92lu9soU9fDYnXue7Yby2y2lztP
+	990z7MW3uVJTUfXFHEknmB+geTnSgnSAttqXqNBU=
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 May 2018 09:22:24 +0200
-Message-Id: <1527232945-25853-1-git-send-email-krzk@kernel.org>
+Date: Fri, 25 May 2018 09:22:25 +0200
+Message-Id: <1527232945-25853-2-git-send-email-krzk@kernel.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATC v3 1/2] kernel_wireless_regdb: Add class for embedding regulatory data into the kernel
+In-Reply-To: <1527232945-25853-1-git-send-email-krzk@kernel.org>
+References: <1527232945-25853-1-git-send-email-krzk@kernel.org>
+Subject: [meta-networking][PATC v3 2/2] wireless-regdb: Bump version to latest upstream 2018.05.09
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,68 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 07:22:35 -0000
+X-List-Received-Date: Fri, 25 May 2018 07:22:36 -0000
 
-Small embedded systems might:
-1. Want to get rid of daemons as much as possible (therefore be built
-   without CRDA),
-2. Not receive user-space incremental updates but an entire system
-   upgrade (with kernel).
-
-Add class kernel_wireless_regdb which allows in such cases to embed the
-wireless regulatory database directly in the Linux kernel during build
-process.
+Bump the wireless-regdb recipe to use newest wireless regulatory
+database.
 
 Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 
 ---
 
 Changes since v2:
-1. Rebase on sumo.
-2. Fix task order - run do_kernel_add_regdb task after do_configure.
+1. Bump from 2017.12.23 to 2018.05.09.
 
 Changes since v1:
-1. Remove debugging echo.
+1. None.
 ---
- meta-networking/classes/kernel_wireless_regdb.bbclass         | 11 +++++++++++
- .../wireless-regdb/wireless-regdb_2016.06.10.bb               |  8 ++++++++
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-networking/classes/kernel_wireless_regdb.bbclass
+ .../{wireless-regdb_2016.06.10.bb => wireless-regdb_2018.05.09.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/wireless-regdb/{wireless-regdb_2016.06.10.bb => wireless-regdb_2018.05.09.bb} (85%)
 
-diff --git a/meta-networking/classes/kernel_wireless_regdb.bbclass b/meta-networking/classes/kernel_wireless_regdb.bbclass
-new file mode 100644
-index 000000000000..a1eb4c532667
---- /dev/null
-+++ b/meta-networking/classes/kernel_wireless_regdb.bbclass
-@@ -0,0 +1,11 @@
-+# Copies the regulatory plaintext database to kernel sources before compiling.
-+# Linux kernel must be compiled with CONFIG_CFG80211_INTERNAL_REGDB to use it.
-+
-+DEPENDS += "wireless-regdb-native"
-+
-+SRCTREECOVEREDTASKS += "do_kernel_add_regdb"
-+do_kernel_add_regdb() {
-+    cp ${STAGING_LIBDIR_NATIVE}/crda/db.txt ${S}/net/wireless/db.txt
-+}
-+do_kernel_add_regdb[dirs] = "${S}"
-+addtask kernel_add_regdb before do_build after do_configure
-diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
-index 64e9401e7a3c..14bf272f4050 100644
+diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.09.bb
+similarity index 85%
+rename from meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
+rename to meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.09.bb
+index 14bf272f4050..1c7d2bd1ae48 100644
 --- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
-+++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2016.06.10.bb
-@@ -17,4 +17,12 @@ do_install() {
-     install -m 0644 sforshee.key.pub.pem ${D}${sysconfdir}/wireless-regdb/pubkeys/sforshee.key.pub.pem
- }
++++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.09.bb
+@@ -5,8 +5,8 @@ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
  
-+# Native users might want to use source db.txt
-+do_install_append_class-native() {
-+    install -d -m 0755 ${D}${libdir}/crda
-+    install -m 0644 db.txt ${D}${libdir}/crda/db.txt
-+}
-+
- RSUGGESTS_${PN} = "crda"
-+
-+BBCLASSEXTEND = "native"
+ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "d282cce92b6e692e8673e2bd97adf33b"
+-SRC_URI[sha256sum] = "cfedf1c3521b3c8f32602f25ed796e96e687c3441a00e7c050fedf7fd4f1b8b7"
++SRC_URI[md5sum] = "4bada6171bf89a2926bddcaebde448b5"
++SRC_URI[sha256sum] = "ed5706eab62a0985ecfaf1a6055fd402882d4c7ffee0b473f39291142aba6435"
+ 
+ inherit bin_package
+ 
 -- 
 2.7.4
 
