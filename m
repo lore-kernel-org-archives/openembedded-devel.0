@@ -1,25 +1,50 @@
-Return-Path: <Noor_Ahsan@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id AE025748EE
+Return-Path: <twoerner@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 0105B748CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 12:37:27 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtps (TLSv1:ECDHE-RSA-AES256-SHA:256)
-	id 1fMBJo-0002ex-I9 from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 May 2018 04:55:36 -0700
-Received: from svr-pkl-eng-06.pkl.mentorg.com (147.34.91.1) by
-	svr-orw-fem-04.mgc.mentorg.com (147.34.97.41) with Microsoft SMTP
-	Server id 14.3.224.2; Fri, 25 May 2018 04:55:36 -0700
-From: Noor Ahsan <noor_ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 May 2018 16:55:32 +0500
-Message-ID: <1527249332-31097-2-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1527249332-31097-1-git-send-email-noor_ahsan@mentor.com>
-References: <1527249332-31097-1-git-send-email-noor_ahsan@mentor.com>
+	Fri, 25 May 2018 15:01:23 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id t11-v6so15275428wmt.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 May 2018 08:01:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=zMAFkB/WbaGl2zgty4oJT7teSZ4SiKfNlrNzkuhLlrM=;
+	b=iIiEvF1rTQ0yT2QdRzQOh5OrhgjHf/dzIsc0Z8cq5syahOwawbF+1edVPQiDhO8ycQ
+	Sq+nH87IRGykghc/krgHKeAIvbD82EXubRTcPUX5zm50zEADMZ0y4i2VZFG7CX7J3/J7
+	kKoIVicyFAyMLudU9qSAaeTuCBsrrhBP45HXeDgCfUz6nVbIzXciGdIHBEN4Wlf9zYch
+	4pOEAgzcmWJVH7Ubc3BQsBbMFn58khVOqLpzWqdTuIUWM3e2PZcXAC9/SfM5kVmUY8sW
+	EyvckdXp1hKTNQpL9zOOYZirJ6I4KjLV5+k4wONJ3ncACQIJGxqXCNDBO50xhU/ZeIaJ
+	5Uow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=zMAFkB/WbaGl2zgty4oJT7teSZ4SiKfNlrNzkuhLlrM=;
+	b=gBq8Y1HqbN1bab16ntJeK9nfbFwpZQ+TWhAkhKRkbXdKWOlGZ95oOAmMtM+cbBEI/s
+	EOEAKgYWHIw8Ggv0+jWmXcL0frTl4KUNBRYn8MiYXVr05CjtOPQZ8f5DzTOeRjDaWRSN
+	T3wWwSKyHObwYU0NlMKoS1esk4c7WTySMxjllkKmjdT2GXbwBv4IzdPDXy9geRb0CsdE
+	VOw92zDXz/K3YEjLenMpw2nlNdKLE6fFW3zjYui5exBf7FrtEGcgLVaPVga6joj27dEM
+	MAVZ6AV/1txFjCAB7cyx9/r4lcvs842l4PJx/Q237eGBFJcmPfL0lOelmV2PxDaSt+9f
+	A3ug==
+X-Gm-Message-State: ALKqPwcs5nDfm2/Z0nq+pYQ5Edz6aJe2oqT8Xjy0eyfAYdBzGuv/0qlj
+	TKXZcAhjIddFNo3u8xp3N8HZm5nCmHMG7zAlTUs=
+X-Google-Smtp-Source: ADUXVKL6owmfr77reYOqmjvDfrpbZ73xTqcYggN+igadkZMQJjPChlcJTgKI+u7nInH7SVnze5nKbQGgUdXmWJKzutI=
+X-Received: by 2002:a2e:8350:: with SMTP id
+	l16-v6mr2015618ljh.28.1527260484598; 
+	Fri, 25 May 2018 08:01:24 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] radvd: Fix missing yacc error.
+Received: by 2002:a19:cb07:0:0:0:0:0 with HTTP; Fri, 25 May 2018 08:01:23
+	-0700 (PDT)
+In-Reply-To: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
+References: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Fri, 25 May 2018 11:01:23 -0400
+Message-ID: <CAHUNapQmwC_7vdAt_LRVLZ4kq32XUyqeHnfQrH0ZNZzh=S9FHQ@mail.gmail.com>
+To: Dylan Bartlett <dylan.bartlett@metixmedical.co.uk>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] Do_install_append() with qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +57,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 12:37:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 25 May 2018 15:01:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* Following error apprear in do configure. Fix it by adding bison-native in DEPENDS.
-  ../radvd-2.17/ylwrap: line 176: yacc: command not found
+Maybe IMAGE_POSTPROCESS_COMMAND might help?
+https://www.yoctoproject.org/docs/2.5/ref-manual/ref-manual.html#var-IMAGE_POSTPROCESS_COMMAND
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- meta-networking/recipes-daemons/radvd/radvd.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
-index bff693c..06d16a4 100644
---- a/meta-networking/recipes-daemons/radvd/radvd.inc
-+++ b/meta-networking/recipes-daemons/radvd/radvd.inc
-@@ -8,7 +8,7 @@ addresses and some other parameters. They also can \
- choose a default router based on these advertisements."
- HOMEPAGE = "http://www.litech.org/radvd/"
- SECTION = "net"
--DEPENDS = "flex-native libdaemon"
-+DEPENDS = "flex-native bison-native libdaemon "
- 
- # License is BSD-Style (with advertising clause) but also has an additional 0th clause
- LICENSE = "radvd"
--- 
-2.7.4
-
+There's an example of using it in:
+https://github.com/resin-os/meta-resin/blob/master/meta-resin-common/recipes-core/images/resin-image.bb
 
