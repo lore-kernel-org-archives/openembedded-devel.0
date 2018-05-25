@@ -1,26 +1,25 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 771DE74DFE
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DCAFB74DFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 07:56:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4P7trpd000553
+	Fri, 25 May 2018 07:57:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w4P7v5X9024217
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 25 May 2018 00:56:08 -0700
+	Fri, 25 May 2018 00:57:05 -0700 (PDT)
 Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Fri, 25 May 2018 00:55:42 -0700
+	Fri, 25 May 2018 00:57:04 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Fri, 25 May 2018 15:54:46 +0800
-Message-ID: <1527234893-8733-6-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 25 May 2018 15:54:50 +0800
+Message-ID: <1527234893-8733-10-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1527234893-8733-1-git-send-email-yi.zhao@windriver.com>
 References: <1527234893-8733-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH 05/12] netkit-telnet: add UPSTREAM_CHECK_URI
+Subject: [meta-networking][PATCH 09/12] vblade: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,28 +32,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 07:56:32 -0000
+X-List-Received-Date: Fri, 25 May 2018 07:57:05 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-daemons/vblade/vblade_22.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 807b566..28ef36b 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -13,6 +13,9 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
-            file://0001-telnet-telnetd-Fix-print-format-strings.patch \
-            "
+diff --git a/meta-networking/recipes-daemons/vblade/vblade_22.bb b/meta-networking/recipes-daemons/vblade/vblade_22.bb
+index d7b1dfa..a51a8c3 100644
+--- a/meta-networking/recipes-daemons/vblade/vblade_22.bb
++++ b/meta-networking/recipes-daemons/vblade/vblade_22.bb
+@@ -16,6 +16,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BP}.tar.gz \
+ SRC_URI[md5sum] = "510d98ba0f231284a5fbe2da11cb2d6e"
+ SRC_URI[sha256sum] = "a990378f273f10eb431e42954a871aed52714035bbab28c54cef600c458356bb"
  
-+UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
-+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.orig\.tar"
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
 +
- EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
-     MANMODE=644 MANDIR=${mandir}"
+ inherit autotools-brokensep update-rc.d systemd
  
+ do_install() {
 -- 
 2.7.4
 
