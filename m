@@ -1,49 +1,49 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C69C74891
+Return-Path: <dylan.bartlett@metixmedical.co.uk>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 7989F600BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 15:22:16 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id t11-v6so15451897wmt.0
+	Fri, 25 May 2018 17:10:47 +0000 (UTC)
+Received: by mail-io0-f177.google.com with SMTP id p124-v6so7182891iod.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 08:22:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=QbZoW+PbAg7bSMG6lSp2tWR9/PkMUi/qDjgYGSfvH4U=;
-	b=G9s5+xvRkvxpldl15FaSMmgmi/RQJgtY8y37gr7oxyiDI3ogPZjhjNK7ZFJSEDTXZe
-	+z+VOCME8oFMcq1ZPnvqGXLfviDRiUoJ04DPctVHKSVGJDUDc/uQsJCqVYjhz6nEY9vk
-	dR+d5jq3K6UI9G1/iowcSAp4cTQKf0iZN3Q6GrORg2zyyoMDv1cRq8wjdJNQ8h2X2TvU
-	AZaAjQ2dTvljt2qYQp97Xr9aGPBafseo/DEif/hzhlYs/O+cfrD+XPkJHJ/GkeqeKTUX
-	+tVxKIX+gJYmWu5KFR6dUkFr3XrnMGSCfdBTLVi/M0YYdKbYcVr+X8Cf9u9w1JxAA6je
-	Pr2Q==
+	Fri, 25 May 2018 10:10:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=metixmedical-co-uk.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=AO9LcKQot/s09tbrH89SQQX3aoWWDlu25ZazaveWO9Y=;
+	b=y4bPKAfPlzhJstkFYuC2D+DinSNmvl2HmjAe5/lQcX2p3M4SJv0a4wlRV4lFTLh/UV
+	jo3SVxfifeU44HHJnEV2VLcVV2xDbON4XKYTa2VCS/AZ3+Oamo0qFsUGcwWp2qD6NIIx
+	4kkn6eIK9CJaKwB4IlM78v0/ZnBriKnwLCfQBrw8guPK81qd4cHdMiSq0MTxfALT0Ug6
+	z0SbXCuWO4DMiclIlT+SUtW2YpToq19i+H3LwcSQzhL3Dxr/L5BCG5Q2rc34zYw18xH3
+	b+yhZah3m+nbp3QahIosGE0VjDIIGVEVVt8wLN22LGD1PVaj9ARvdV8DWlsbbTn38gL7
+	c5Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to;
-	bh=QbZoW+PbAg7bSMG6lSp2tWR9/PkMUi/qDjgYGSfvH4U=;
-	b=AKFSyVWn0WTQo/0w/+Uo69ug63c4MNji4AF9N81yyFxf8PEGIamHLXNZT9lnap847f
-	BfljROBFPTJcJUvspuOi+ovm+iuRia8i+BiVfBr/daVA0MScf28fzr24unV3UWoao2oz
-	9SERBXWNWX2I9PySjgVccJ8hb3FXNkaUtbgbPEpR788zg57UqjtCtv2XEr5ylPA3qICW
-	XmrA6D6/7YiBXFVHrCtqhBW2gO5VYWzCVjhrR8mVEzIxQm6VIxZYeKxYVEmvDVXt6T61
-	2Cqjf1Te7OZCalDVJoceM77Pm7Vn+480/1hEvUytfBxfSzPkBreRoquAxT319++d4ycJ
-	P/Kw==
-X-Gm-Message-State: ALKqPwdzz67ISUTP80x3KkfeD8VJTfi6vOO9PkdUIAp9/QOpP8UpQj+C
-	7zTjHCgHyJuaaMWWfx2ErCJ+64FvuXKXlMIFtEJ+Ixmn
-X-Google-Smtp-Source: ADUXVKJ12wRxTx4tMkk82qxBuu1Gi4VLTPgHQ4bpbyzuRhe84oZ3p97XFksrD5PPIqYM8gxkJsRKvQC8KOEiydlwW8A=
-X-Received: by 2002:a2e:4411:: with SMTP id
-	r17-v6mr1991717lja.139.1527261737403; 
-	Fri, 25 May 2018 08:22:17 -0700 (PDT)
+	bh=AO9LcKQot/s09tbrH89SQQX3aoWWDlu25ZazaveWO9Y=;
+	b=Zg6l20JuAelJqmhKIBl5/IZE0Q0GewejFOAw1ohN89i/uIG7YytgwJbsBPTxjLHgli
+	iHM2rc26SVotC9rbs7BhPhmJo4BfQ+6Vs4+tHqU5EHy3yhME3T7lG2JO4U4BUuBEj+RD
+	aL4e2DatE+6yaTJyiIx658ObqCQ2ZqdubP0v0ZPJgqyULiTKGmF/Hrd6bsa5rxk0OxOX
+	QPiXvOWo/4Y2v2ML9XgeEcSSFQdMaLPRU4sOBxiaU+zMRXlRL+PPzVWFJlcgpIlwxNDf
+	xn07coGY9SxHnN408QS6UZMnxXi9IcU81sjAnE3/7qqWcnTCi8FGWVGzsyhZnH/wXGs8
+	pXGg==
+X-Gm-Message-State: ALKqPwd021S8/oNkD5ukfwdb9c6S0QsT1Tuo2GzqiTeFGpmr05r73tOc
+	MntgU+w45qVzuJ18e8b9itnKjuHjLfgugVetiS/XAJLC
+X-Google-Smtp-Source: ADUXVKJ/SLFlVgbFOBwXRR+LlZKrdcx35mdYaI2w/g+qzYy+cyPPcQC2SMFWC8gKefoCceX6c4wadxQFqjcnZ8NxMZc=
+X-Received: by 2002:a6b:9f4c:: with SMTP id
+	i73-v6mr2731024ioe.258.1527268247942; 
+	Fri, 25 May 2018 10:10:47 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a19:cb07:0:0:0:0:0 with HTTP; Fri, 25 May 2018 08:22:16
-	-0700 (PDT)
-In-Reply-To: <20180524143854.24096-18-twoerner@gmail.com>
-References: <20180524143854.24096-1-twoerner@gmail.com>
-	<20180524143854.24096-18-twoerner@gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Fri, 25 May 2018 11:22:16 -0400
-Message-ID: <CAHUNapRj1Sadwo8BAujAuPn3Egs85vshAgz4dGW8f_4dzd0Atw@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
+In-Reply-To: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
+From: Dylan Bartlett <dylan.bartlett@metixmedical.co.uk>
+Date: Fri, 25 May 2018 18:10:38 +0100
+Message-ID: <CAFuZ8QDVwomMXPuMq7AA_DRKkhovS0a2q9wS9B0Nj50CqDRxSQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][master-next][PATCH v3 17/17] libeigen: rely on cmake.bbclass to put cmake package files in dev package
+Subject: Re: [meta-qt5] Do_install_append() with qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,13 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 15:22:17 -0000
+X-List-Received-Date: Fri, 25 May 2018 17:10:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-As Anuj pointed out with patch 16/17 of this series (opencv: rely on
-cmake.bbclass...), so too is this patch wrong and shouldn't be applied.
-Sorry!
+Sorry all, ignore this. Do_install_append works, from what I can only call
+a formatting issue in my recipe seems to have stopped the _append from
+running.
 
-Looking closer at this recipe (on an unrelated issue) do we really want the
-include files being part of FILES_${PN}?
+Fixing some of the formatting in my _append function seems to have started
+things working.
+
+My next issue seems to be that my application is building in a debug
+configuration and the linker is producing a pretty large binary (~150MB).
+But I haven't exhausted myself on that issue yet.
+
+Thanks for taking the time to reply even though this is my own fault,
+Dylan
+On Fri, 25 May 2018 at 10:31 Dylan Bartlett <
+dylan.bartlett@metixmedical.co.uk> wrote:
+
+> Hello all,
+>
+> I hope you'll be able to help clear some things up for me.
+>
+> I have created a recipe to build and install a Qt Application I've been
+> developing, so far everything has been working great and the program gets
+> compiled, installed and packaged.
+>
+> However there is one additional install step I need to complete, which is
+> creating a symbolic link to my binary in /opt to /usr/bin/b2qt. I want to
+> do this so that the Boot2Qt appcontroller starts my application on boot.
+>
+> There are two ways I thought I could do this.
+> 1. Use do_install_append() in the recipe to create the symbolic link.
+> However qmake5.bbclass does not export the do_install function. Modifying
+> the .bbclass with EXPORT_FUNCTIONS do_install breaks everything so I think
+> that this is the wrong way to go about it.
+>
+> 2. Use target.extra in the qmake .pro file to add the extra commands.
+> This one I had a bit more success with, I added my commands to
+> target.extra and built the recipe.
+> In this case do_install appeared to run properly. I could see my symbolic
+> link in the image directory however the binary that was complied no longer
+> appears in the image directory. So I've fixed one thing and broke another.
+>
+> At this point I've reached the end of what I think I can try, I'm sure I'm
+> missing something simple since extra install steps are a common task. Can
+> someone tell me what the canonically correct way that I should be doing
+> this is?
+>
+> I've attached my recipe and a segment of my .pro if that helps.
+>
+> Best Regards,
+> Dylan Bartlett
+>
 
