@@ -1,51 +1,49 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C89F71A84
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C69C74891
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 15:08:25 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id f8-v6so15515186wmc.4
+	Fri, 25 May 2018 15:22:16 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id t11-v6so15451897wmt.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 08:08:26 -0700 (PDT)
+	Fri, 25 May 2018 08:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=5Q+VVHSvBgBn+wVDVcTvzRfbfmagfumH4OKLEMgzWes=;
-	b=Itf4LDkbhFEqnlBpYxLVCLx9L428ianIq/MoD70U4Qn4uek8BSaCaROcBBxl6ElXtK
-	guOnN1Q1nXA9MZO9E5bsTayzukNABEdB43OBy1zo91aqPyhXKc4uPcKEXjLIFgSYwQ/u
-	9d49FHLdkWaM2UX+AcbSVJvgh7rEntHC/l5vAjdMnue2kxxAgr63Lc8lO0A5S18ilsO9
-	/UOwI3HziHQJJyLZihaSu31FClc8hSlueVsffEtQmD4kOOu8jej74v4ICuWb0zsEYUWE
-	+2NA6TvMEowhzXiQbg30ZddYGVQ0Zj8elKNwmMgtuwd3NcOzqiGKsg85Bt822vY7jMjC
-	1m7Q==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=QbZoW+PbAg7bSMG6lSp2tWR9/PkMUi/qDjgYGSfvH4U=;
+	b=G9s5+xvRkvxpldl15FaSMmgmi/RQJgtY8y37gr7oxyiDI3ogPZjhjNK7ZFJSEDTXZe
+	+z+VOCME8oFMcq1ZPnvqGXLfviDRiUoJ04DPctVHKSVGJDUDc/uQsJCqVYjhz6nEY9vk
+	dR+d5jq3K6UI9G1/iowcSAp4cTQKf0iZN3Q6GrORg2zyyoMDv1cRq8wjdJNQ8h2X2TvU
+	AZaAjQ2dTvljt2qYQp97Xr9aGPBafseo/DEif/hzhlYs/O+cfrD+XPkJHJ/GkeqeKTUX
+	+tVxKIX+gJYmWu5KFR6dUkFr3XrnMGSCfdBTLVi/M0YYdKbYcVr+X8Cf9u9w1JxAA6je
+	Pr2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=5Q+VVHSvBgBn+wVDVcTvzRfbfmagfumH4OKLEMgzWes=;
-	b=DIM7ZKKlFSiKWSb4NOvw2UT7Qee2KlV0oKsQS0UEtxygbfI2tsZPIxe+sz3vXAdEsz
-	KLTQOTD7N2tLi/9CexVvxAoyLFIIhKoIFCclHF3xcRuKQ+86masobl2XeXPXZ8a+A864
-	TXZ5eC5VX7J9UsX6fxXaZGr04GzTHtc4otXNBatFa163QvIGbQrSviOe1fZb4G1F+sSd
-	d7PIjgzyuGHRrePFdKBC6hXs52TPJo5yhdPmXkXJ9zYkPFtIZF8O1OI1SXYD95KRAN0N
-	sjgXGU22oPgRrmsyBdJs9+n7u33+G6FkS4YBSa3zrnouFyP9t58EaazW4LuXBY5zUvu8
-	ExaQ==
-X-Gm-Message-State: ALKqPweSPT+WU1L/rZExHqfnzfV9HDScPQ1xWraQTQHVjFyxzQQmJzRG
-	oZKgA5rZwX08c/uHbuBg81iFF1UKzR/iZ9dvSmA=
-X-Google-Smtp-Source: AB8JxZodMB5+Hb3N4nFcxdzT8ao00icukZEtAYL/LAw2L8q49NW7GEhWCWDCwHVYgejU8qcmWk3QPKoA6mpUKNZ7Tk0=
-X-Received: by 2002:a2e:9248:: with SMTP id
-	v8-v6mr2014780ljg.133.1527260905898; 
-	Fri, 25 May 2018 08:08:25 -0700 (PDT)
+	:message-id:subject:to;
+	bh=QbZoW+PbAg7bSMG6lSp2tWR9/PkMUi/qDjgYGSfvH4U=;
+	b=AKFSyVWn0WTQo/0w/+Uo69ug63c4MNji4AF9N81yyFxf8PEGIamHLXNZT9lnap847f
+	BfljROBFPTJcJUvspuOi+ovm+iuRia8i+BiVfBr/daVA0MScf28fzr24unV3UWoao2oz
+	9SERBXWNWX2I9PySjgVccJ8hb3FXNkaUtbgbPEpR788zg57UqjtCtv2XEr5ylPA3qICW
+	XmrA6D6/7YiBXFVHrCtqhBW2gO5VYWzCVjhrR8mVEzIxQm6VIxZYeKxYVEmvDVXt6T61
+	2Cqjf1Te7OZCalDVJoceM77Pm7Vn+480/1hEvUytfBxfSzPkBreRoquAxT319++d4ycJ
+	P/Kw==
+X-Gm-Message-State: ALKqPwdzz67ISUTP80x3KkfeD8VJTfi6vOO9PkdUIAp9/QOpP8UpQj+C
+	7zTjHCgHyJuaaMWWfx2ErCJ+64FvuXKXlMIFtEJ+Ixmn
+X-Google-Smtp-Source: ADUXVKJ12wRxTx4tMkk82qxBuu1Gi4VLTPgHQ4bpbyzuRhe84oZ3p97XFksrD5PPIqYM8gxkJsRKvQC8KOEiydlwW8A=
+X-Received: by 2002:a2e:4411:: with SMTP id
+	r17-v6mr1991717lja.139.1527261737403; 
+	Fri, 25 May 2018 08:22:17 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a19:cb07:0:0:0:0:0 with HTTP; Fri, 25 May 2018 08:08:25
+Received: by 2002:a19:cb07:0:0:0:0:0 with HTTP; Fri, 25 May 2018 08:22:16
 	-0700 (PDT)
-In-Reply-To: <d91e91a8-9196-b2b2-83d3-fcc69a58e3a4@intel.com>
+In-Reply-To: <20180524143854.24096-18-twoerner@gmail.com>
 References: <20180524143854.24096-1-twoerner@gmail.com>
-	<20180524143854.24096-17-twoerner@gmail.com>
-	<d91e91a8-9196-b2b2-83d3-fcc69a58e3a4@intel.com>
+	<20180524143854.24096-18-twoerner@gmail.com>
 From: Trevor Woerner <twoerner@gmail.com>
-Date: Fri, 25 May 2018 11:08:25 -0400
-Message-ID: <CAHUNapT-m4v38C3RQqapxtchu_5wkg-zK3sGxc2B=QGHrtoDXw@mail.gmail.com>
-To: Anuj Mittal <anuj.mittal@intel.com>
+Date: Fri, 25 May 2018 11:22:16 -0400
+Message-ID: <CAHUNapRj1Sadwo8BAujAuPn3Egs85vshAgz4dGW8f_4dzd0Atw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][master-next][PATCH v3 16/17] opencv: rely on cmake.bbclass to put cmake package files in dev package
+Subject: Re: [meta-oe][master-next][PATCH v3 17/17] libeigen: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,42 +56,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 15:08:25 -0000
+X-List-Received-Date: Fri, 25 May 2018 15:22:17 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, May 24, 2018 at 11:19 PM, Anuj Mittal <anuj.mittal@intel.com> wrote:
+As Anuj pointed out with patch 16/17 of this series (opencv: rely on
+cmake.bbclass...), so too is this patch wrong and shouldn't be applied.
+Sorry!
 
-> On 05/24/2018 10:38 PM, Trevor Woerner wrote:
-> > The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
-> > ${datadir}/cmake end up in the dev package, so recipes no longer need to
-> > provide custom packaging rules to handles these files.
-> >
-> >       http://git.openembedded.org/openembedded-core/commit/?id=
-> d91dc4666683a96e9d03cbbd21b8a546f9069c93
-> >
-> > Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
-> > Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/opencv/opencv_3.3.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> > index ca62de7c8f..1cadbdb533 100644
-> > --- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> > +++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> > @@ -167,7 +167,7 @@ PACKAGES_DYNAMIC += "^libopencv-.*"
-> >
-> >  FILES_${PN} = ""
-> >  FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/*
-> ${datadir}/OpenCV/samples/bin/.debug/*"
-> > -FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig
-> ${datadir}/OpenCV/*.cmake"
->
-> ${datadir}/OpenCV/*.cmake won't be handled by the bbclass and if you
-> remove this change, *.cmake files in OpenCV directory will go to
-> ${PN}-apps which is probably not the intention here.
->
-
-Good catch, thank you!
+Looking closer at this recipe (on an unrelated issue) do we really want the
+include files being part of FILES_${PN}?
 
