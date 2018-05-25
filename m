@@ -1,49 +1,51 @@
-Return-Path: <dylan.bartlett@metixmedical.co.uk>
-Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 7989F600BB
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4333974CFB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 17:10:47 +0000 (UTC)
-Received: by mail-io0-f177.google.com with SMTP id p124-v6so7182891iod.1
+	Fri, 25 May 2018 19:58:26 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id m144-v6so3823654vke.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 10:10:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=metixmedical-co-uk.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=AO9LcKQot/s09tbrH89SQQX3aoWWDlu25ZazaveWO9Y=;
-	b=y4bPKAfPlzhJstkFYuC2D+DinSNmvl2HmjAe5/lQcX2p3M4SJv0a4wlRV4lFTLh/UV
-	jo3SVxfifeU44HHJnEV2VLcVV2xDbON4XKYTa2VCS/AZ3+Oamo0qFsUGcwWp2qD6NIIx
-	4kkn6eIK9CJaKwB4IlM78v0/ZnBriKnwLCfQBrw8guPK81qd4cHdMiSq0MTxfALT0Ug6
-	z0SbXCuWO4DMiclIlT+SUtW2YpToq19i+H3LwcSQzhL3Dxr/L5BCG5Q2rc34zYw18xH3
-	b+yhZah3m+nbp3QahIosGE0VjDIIGVEVVt8wLN22LGD1PVaj9ARvdV8DWlsbbTn38gL7
-	c5Jw==
+	Fri, 25 May 2018 12:58:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=PV2GZhPA/R8TeQBR+n4gjW/HfFQ3HMVLG4vj1oyyVbk=;
+	b=IO6cR5NExJz9WtZSQUxpZvOjE0MzvFaGK73RemXfaLRIPk9+lHdXRiIT9hVdC/1geM
+	Pe4i0phjar6i3wT8/XbbirglZUiJaI+H/kCQQG1cX2RdUsbRhqWfMXCEV59JPcI5MTgF
+	xFDWFOcT7spLLpi9dN/vttSRcSUvd/9+BvD2ClHafmA5rTessw24kSiRAbgJn0grJbOn
+	dsaBjrawdGHlayZkkhNIts2ytN/EHvQjPAVplTBMSXIGG8Iz87luWXO2Jw3VX1/Kj4bU
+	EM5pk9LUPVzpxKVGHTTVrqtgmcWXUXVpGPVRySpqZOaka8NvEDVjJeMypsc9FBbZF8vi
+	rpDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=AO9LcKQot/s09tbrH89SQQX3aoWWDlu25ZazaveWO9Y=;
-	b=Zg6l20JuAelJqmhKIBl5/IZE0Q0GewejFOAw1ohN89i/uIG7YytgwJbsBPTxjLHgli
-	iHM2rc26SVotC9rbs7BhPhmJo4BfQ+6Vs4+tHqU5EHy3yhME3T7lG2JO4U4BUuBEj+RD
-	aL4e2DatE+6yaTJyiIx658ObqCQ2ZqdubP0v0ZPJgqyULiTKGmF/Hrd6bsa5rxk0OxOX
-	QPiXvOWo/4Y2v2ML9XgeEcSSFQdMaLPRU4sOBxiaU+zMRXlRL+PPzVWFJlcgpIlwxNDf
-	xn07coGY9SxHnN408QS6UZMnxXi9IcU81sjAnE3/7qqWcnTCi8FGWVGzsyhZnH/wXGs8
-	pXGg==
-X-Gm-Message-State: ALKqPwd021S8/oNkD5ukfwdb9c6S0QsT1Tuo2GzqiTeFGpmr05r73tOc
-	MntgU+w45qVzuJ18e8b9itnKjuHjLfgugVetiS/XAJLC
-X-Google-Smtp-Source: ADUXVKJ/SLFlVgbFOBwXRR+LlZKrdcx35mdYaI2w/g+qzYy+cyPPcQC2SMFWC8gKefoCceX6c4wadxQFqjcnZ8NxMZc=
-X-Received: by 2002:a6b:9f4c:: with SMTP id
-	i73-v6mr2731024ioe.258.1527268247942; 
-	Fri, 25 May 2018 10:10:47 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=PV2GZhPA/R8TeQBR+n4gjW/HfFQ3HMVLG4vj1oyyVbk=;
+	b=JDfYUXEPOJfBVib7kU0qeYVnMeoamHcgY2g11cDwcqL+JQP1D7255H4rOhtK6eSwIQ
+	PXAuyrHBw529kxy1VFa2xvfBpPLWyeHQGXS4IfDVIY8nmNOv4+q+EDJ+fmgOWlERREtO
+	O58tTksury5rg1/CWrHXvql3+hO7C3O/BDVl24QPEZT2+vwHuzhpYp8zPkb+gEB/TsDW
+	nEVHoUitmE176WdIbFOBqxbI9Kry9Au1wNpiIYtjgKhcPK6PweCBrRk//LU73T+xr3jg
+	Hb76GkV6hLi1wNlD/S2s6omxzy2GbPe80tYwiSTMlzVDiVMHsLyWVjFQdZCNasMYNcrr
+	DV1A==
+X-Gm-Message-State: ALKqPwd/crKg3HrCQt15Fvw5+Y7l3F3WvXhbOqExeNWb7EAqLVaSOVvC
+	2k3q3O2AWojOt/IwMWyTUMEcW5YDZtO0ILhPTQc=
+X-Google-Smtp-Source: ADUXVKL04VJK/N4YV88XvN4wSss96+6n+hN4arpz+aMpzQNYsfkWDQOKpFeq+L0HEHHWo+UJ+j92tF6d8/FQMO+SZU4=
+X-Received: by 2002:a1f:9e17:: with SMTP id
+	h23-v6mr2362659vke.24.1527278307882; 
+	Fri, 25 May 2018 12:58:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
-In-Reply-To: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
-From: Dylan Bartlett <dylan.bartlett@metixmedical.co.uk>
-Date: Fri, 25 May 2018 18:10:38 +0100
-Message-ID: <CAFuZ8QDVwomMXPuMq7AA_DRKkhovS0a2q9wS9B0Nj50CqDRxSQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5] Do_install_append() with qmake
+Received: by 2002:ab0:3094:0:0:0:0:0 with HTTP; Fri, 25 May 2018 12:58:27
+	-0700 (PDT)
+In-Reply-To: <CAHUNapRj1Sadwo8BAujAuPn3Egs85vshAgz4dGW8f_4dzd0Atw@mail.gmail.com>
+References: <20180524143854.24096-1-twoerner@gmail.com>
+	<20180524143854.24096-18-twoerner@gmail.com>
+	<CAHUNapRj1Sadwo8BAujAuPn3Egs85vshAgz4dGW8f_4dzd0Atw@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Fri, 25 May 2018 12:58:27 -0700
+Message-ID: <CAJ86T=XbNpLWxCYmOoTRLyvYGZcwD+7tBeg-xi33p1SDZDzEAw@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][master-next][PATCH v3 17/17] libeigen: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,58 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 17:10:47 -0000
+X-List-Received-Date: Fri, 25 May 2018 19:58:27 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Sorry all, ignore this. Do_install_append works, from what I can only call
-a formatting issue in my recipe seems to have stopped the _append from
-running.
+On Fri, May 25, 2018 at 8:22 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+> As Anuj pointed out with patch 16/17 of this series (opencv: rely on
+> cmake.bbclass...), so too is this patch wrong and shouldn't be applied.
+> Sorry!
+>
+> Looking closer at this recipe (on an unrelated issue) do we really want the
+> include files being part of FILES_${PN}?
 
-Fixing some of the formatting in my _append function seems to have started
-things working.
+No, we don't. It looks like it's been done that way as a workaround
+for the libeigen build not creating anything which would normally go
+in the main package. Setting:
 
-My next issue seems to be that my application is building in a debug
-configuration and the linker is producing a pretty large binary (~150MB).
-But I haven't exhausted myself on that issue yet.
+  ALLOW_EMPTY_${PN} = "1"
 
-Thanks for taking the time to reply even though this is my own fault,
-Dylan
-On Fri, 25 May 2018 at 10:31 Dylan Bartlett <
-dylan.bartlett@metixmedical.co.uk> wrote:
+together with careful review of the packaging rules and probably
+removing the RDEPENDS and RRECOMMENDS over-rides may be a better
+solution.
 
-> Hello all,
->
-> I hope you'll be able to help clear some things up for me.
->
-> I have created a recipe to build and install a Qt Application I've been
-> developing, so far everything has been working great and the program gets
-> compiled, installed and packaged.
->
-> However there is one additional install step I need to complete, which is
-> creating a symbolic link to my binary in /opt to /usr/bin/b2qt. I want to
-> do this so that the Boot2Qt appcontroller starts my application on boot.
->
-> There are two ways I thought I could do this.
-> 1. Use do_install_append() in the recipe to create the symbolic link.
-> However qmake5.bbclass does not export the do_install function. Modifying
-> the .bbclass with EXPORT_FUNCTIONS do_install breaks everything so I think
-> that this is the wrong way to go about it.
->
-> 2. Use target.extra in the qmake .pro file to add the extra commands.
-> This one I had a bit more success with, I added my commands to
-> target.extra and built the recipe.
-> In this case do_install appeared to run properly. I could see my symbolic
-> link in the image directory however the binary that was complied no longer
-> appears in the image directory. So I've fixed one thing and broke another.
->
-> At this point I've reached the end of what I think I can try, I'm sure I'm
-> missing something simple since extra install steps are a common task. Can
-> someone tell me what the canonically correct way that I should be doing
-> this is?
->
-> I've attached my recipe and a segment of my .pro if that helps.
->
-> Best Regards,
-> Dylan Bartlett
->
+You should also carefully check that things work as expected when
+libeigen is added to an SDK. That's a corner case which tests
+dependencies between runtime and -dev packages which isn't tested
+during a normal build (for what it's worth, creating an empty runtime
+package by using ALLOW_EMPTY_${PN} = "1" has always been the easiest
+solution whenever I've looked into this kind of issue in the past and
+it "just works" for the SDK case).
 
