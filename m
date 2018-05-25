@@ -1,52 +1,30 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f47.google.com (mail-it0-f47.google.com
-	[209.85.214.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 5619374BE2
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 92C9074E40
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 18:45:40 +0000 (UTC)
-Received: by mail-it0-f47.google.com with SMTP id p3-v6so3708677itc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 May 2018 11:45:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=wUD0frScwG5QPyUwzBJKhn+TOUqUyjzE3nc/ZsApYnA=;
-	b=sYd9/ie94fvRqIU2YJ85HwWuQomF2omEwM/bbJTkfgn2VFd+fPd0kkLlvrf6APtjiI
-	0vZfIn/7FAjdvrxVg/usrVXSZKtGtjG4wcwuIrfLbXDgzQdyqFCIb9X1klCW6OzYsGlt
-	tRTpr5BeO/h+fgJ3y9fk3Afgm0csQVFMQo91pLoZDi3gaMRfR6PiW4iqgGXij21p0FYP
-	QMxN4ebXLp/rbf0XZjCbCY29dyUZI0w8JNorPgto1QAagiR5z6oBCzIBOWD89+i/LdwN
-	3U+IYAvE5E+4dhSBEGz7Prz5WbWuaEQR5BUKHludBlc1nhaaJlFc1FI7Va7prG05FJQJ
-	PrlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=wUD0frScwG5QPyUwzBJKhn+TOUqUyjzE3nc/ZsApYnA=;
-	b=NZ+4MQLR0o/5UWfwOVWn+iqRVJxwUCwg3uvGJFO3CX5i+CdUstebAU/YrTbhbtqh0E
-	BcBttQvoTS1gOaKp8IcrI53MYXeunq6wEss0gSXOUfx+cDAnDhNNJXXGmHlP8FB8U3BK
-	tnnP/xOIwf62hvSZM4UdNFWbc43fnXYbsXiKcBry6sCSLQy6OI7nsOD6rz6W7gkJJPhW
-	DPyxmc/a7VPoyY/Hfzu+yRUil3QsXWeqbKtIZNMpTk/zYNS5J4o/zM5R1Vyx0ZTdYuDB
-	gZldIVPFU6ca0CHcV+zVKyenDs4vpu3aJ57z4CIcHTMiX50SeZOHD05Q5D3926yYsL3v
-	hQNQ==
-X-Gm-Message-State: ALKqPwdGbaxolO5g5UFqmgxBHusTW4VxR99SU/Jdsn/xXAns9UJJcZZy
-	rjVcReGks73+HXFcNQ9iMd7KSRJE
-X-Google-Smtp-Source: AB8JxZqh0aRMset02z+DRQikfMItjopE8xNqwRPsdGCsZ752n0hAgQ5Zf1VkMHatWzA3c24k17KrnA==
-X-Received: by 2002:a24:97cf:: with SMTP id
-	k198-v6mr6457687ite.105.1527187541746; 
-	Thu, 24 May 2018 11:45:41 -0700 (PDT)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id
-	o184-v6sm2797190itb.24.2018.05.24.11.45.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 24 May 2018 11:45:40 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 May 2018 14:45:31 -0400
-Message-Id: <20180524184531.12459-2-twoerner@gmail.com>
-X-Mailer: git-send-email 2.17.0.582.gccdcbd54c
-In-Reply-To: <20180524184531.12459-1-twoerner@gmail.com>
-References: <20180524184531.12459-1-twoerner@gmail.com>
-Subject: [meta-networking][master-next][PATCH 2/2] c-ares: variable cleanup
+	Fri, 25 May 2018 03:19:38 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	24 May 2018 20:19:39 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,438,1520924400"; d="scan'208";a="231513014"
+Received: from anmitta2-mobl1.png.intel.com (HELO [10.221.23.24])
+	([10.221.23.24])
+	by fmsmga005.fm.intel.com with ESMTP; 24 May 2018 20:19:38 -0700
+To: Trevor Woerner <twoerner@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20180524143854.24096-1-twoerner@gmail.com>
+	<20180524143854.24096-17-twoerner@gmail.com>
+From: Anuj Mittal <anuj.mittal@intel.com>
+Message-ID: <d91e91a8-9196-b2b2-83d3-fcc69a58e3a4@intel.com>
+Date: Fri, 25 May 2018 11:19:37 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
+MIME-Version: 1.0
+In-Reply-To: <20180524143854.24096-17-twoerner@gmail.com>
+Subject: Re: [meta-oe][master-next][PATCH v3 16/17] opencv: rely on cmake.bbclass to put cmake package files in dev package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,38 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 May 2018 18:45:41 -0000
+X-List-Received-Date: Fri, 25 May 2018 03:19:38 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Reorder recipe variables according to:
+On 05/24/2018 10:38 PM, Trevor Woerner wrote:
+> The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
+> ${datadir}/cmake end up in the dev package, so recipes no longer need to
+> provide custom packaging rules to handles these files.
+> 
+> 	http://git.openembedded.org/openembedded-core/commit/?id=d91dc4666683a96e9d03cbbd21b8a546f9069c93
+> 
+> Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_3.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb b/meta-oe/recipes-support/opencv/opencv_3.3.bb
+> index ca62de7c8f..1cadbdb533 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
+> @@ -167,7 +167,7 @@ PACKAGES_DYNAMIC += "^libopencv-.*"
+>  
+>  FILES_${PN} = ""
+>  FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
+> -FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake"
 
-	https://www.openembedded.org/wiki/Styleguide
-
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-index defbeaa623..934c8454d5 100644
---- a/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-+++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-@@ -4,13 +4,14 @@ HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
- SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
--SRCREV = "3be1924221e1326df520f8498d704a5c4c8d0cce"
-+
- PV = "1.13.0+gitr${SRCPV}"
- 
- SRC_URI = "\
-     git://github.com/c-ares/c-ares.git \
-     file://cmake-install-libcares.pc.patch \
- "
-+SRCREV = "3be1924221e1326df520f8498d704a5c4c8d0cce"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.0.582.gccdcbd54c
-
+${datadir}/OpenCV/*.cmake won't be handled by the bbclass and if you
+remove this change, *.cmake files in OpenCV directory will go to
+${PN}-apps which is probably not the intention here.
 
