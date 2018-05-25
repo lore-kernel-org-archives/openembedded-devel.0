@@ -1,30 +1,42 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 92C9074E40
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id D9EC374D75
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 03:19:38 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	24 May 2018 20:19:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.49,438,1520924400"; d="scan'208";a="231513014"
-Received: from anmitta2-mobl1.png.intel.com (HELO [10.221.23.24])
-	([10.221.23.24])
-	by fmsmga005.fm.intel.com with ESMTP; 24 May 2018 20:19:38 -0700
-To: Trevor Woerner <twoerner@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20180524143854.24096-1-twoerner@gmail.com>
-	<20180524143854.24096-17-twoerner@gmail.com>
-From: Anuj Mittal <anuj.mittal@intel.com>
-Message-ID: <d91e91a8-9196-b2b2-83d3-fcc69a58e3a4@intel.com>
-Date: Fri, 25 May 2018 11:19:37 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.7.0
+	Fri, 25 May 2018 07:01:39 +0000 (UTC)
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 7071D20881
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 May 2018 07:01:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1527231700;
+	bh=S9DyRTcHAOCJO1dAdaGD9tuAT2agRWFhBW8qSyTdmfI=;
+	h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
+	b=kB1CbMdDp22tQeweE8KSRTCv5BVOz7ZYdKaJ25PYdOV9WMNCNluReXzGlG4TeLB6s
+	QiwTSQZI/gX6PNucYd2rbxGhSxLr/PTFR1tu9DklvIZsHP2adx81NhyH6CkLeEI9JJ
+	dMiUgKeFa9Kk1bpEPLOG/v5gflAkIP6GYJwnCvoY=
+Received: by mail-wm0-f43.google.com with SMTP id n10-v6so11628505wmc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 May 2018 00:01:40 -0700 (PDT)
+X-Gm-Message-State: ALKqPwfGlMMv3IiqiGEK3mdwnEuXtjRe+7IPVD+tvfH8nGUcNWfGZWIC
+	dRjLVvKlkuC5BYR9nNTm/FP0o/MpNAvp7bAGTWs=
+X-Google-Smtp-Source: ADUXVKKv8ONH4nDUgk1mXsVwCHfKUl1ojY4Im/nnnrRj5FQSL0K8YtIS0RKjbgeQ/rDCWkXnHqu990FXcU0M2iQ4sEs=
+X-Received: by 2002:a1c:d50a:: with SMTP id m10-v6mr838506wmg.72.1527231698977;
+	Fri, 25 May 2018 00:01:38 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180524143854.24096-17-twoerner@gmail.com>
-Subject: Re: [meta-oe][master-next][PATCH v3 16/17] opencv: rely on cmake.bbclass to put cmake package files in dev package
+Received: by 2002:adf:c552:0:0:0:0:0 with HTTP; Fri, 25 May 2018 00:01:38
+	-0700 (PDT)
+In-Reply-To: <b4b95eef-f72e-9ee4-3fdb-09b5e5ff71c1@gmail.com>
+References: <1527152611-13882-1-git-send-email-krzk@kernel.org>
+	<b4b95eef-f72e-9ee4-3fdb-09b5e5ff71c1@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Fri, 25 May 2018 09:01:38 +0200
+X-Gmail-Original-Message-ID: <CAJKOXPdCE2m_PuiZ6U7VTc8D_d5VCWtbm55JQ+WBAKzuPb1srA@mail.gmail.com>
+Message-ID: <CAJKOXPdCE2m_PuiZ6U7VTc8D_d5VCWtbm55JQ+WBAKzuPb1srA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][rocko][PATCH v3] civetweb: Add new recipe with git-based version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 03:19:38 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 May 2018 07:01:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 05/24/2018 10:38 PM, Trevor Woerner wrote:
-> The cmake.bbclass in oe-core now ensures that ${libdir}/cmake and
-> ${datadir}/cmake end up in the dev package, so recipes no longer need to
-> provide custom packaging rules to handles these files.
-> 
-> 	http://git.openembedded.org/openembedded-core/commit/?id=d91dc4666683a96e9d03cbbd21b8a546f9069c93
-> 
-> Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
->  meta-oe/recipes-support/opencv/opencv_3.3.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> index ca62de7c8f..1cadbdb533 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-> @@ -167,7 +167,7 @@ PACKAGES_DYNAMIC += "^libopencv-.*"
->  
->  FILES_${PN} = ""
->  FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
-> -FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake"
+On Thu, May 24, 2018 at 4:24 PM, akuster808 <akuster808@gmail.com> wrote:
+>
+>
+> On 05/24/2018 02:03 AM, Krzysztof Kozlowski wrote:
+>> Add recipe for CivetWeb: easy to use, powerful, C/C++ embeddable web
+>> server with optional CGI, SSL and Lua support, under MIT license.
+>>
+>> CivetWeb provides C and C++ libraries and a standalone server binary.
+>>
+>> Choose specific post-v1.10 git revision b8148afe8fa4 which has a fixed
+>> SSL support (depending on OpenSSL v1.0.2).
+>>
+>> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+>
+> Adding new packages to a stable branch is not allowed.  Also I don't see
+> it in master.
 
-${datadir}/OpenCV/*.cmake won't be handled by the bbclass and if you
-remove this change, *.cmake files in OpenCV directory will go to
-${PN}-apps which is probably not the intention here.
+Thanks, I'll rebase and resend.
+
+Best regards,
+Krzysztof
 
