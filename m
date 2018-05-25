@@ -1,25 +1,26 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B6C674E23
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DD0074DFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 07:57:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w4P7vAL0010082
+	Fri, 25 May 2018 07:57:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4P7ucth000559
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 25 May 2018 00:57:10 -0700 (PDT)
+	Fri, 25 May 2018 00:56:54 -0700
 Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Fri, 25 May 2018 00:57:09 -0700
+	Fri, 25 May 2018 00:56:27 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Fri, 25 May 2018 15:54:51 +0800
-Message-ID: <1527234893-8733-11-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 25 May 2018 15:54:49 +0800
+Message-ID: <1527234893-8733-9-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1527234893-8733-1-git-send-email-yi.zhao@windriver.com>
 References: <1527234893-8733-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH 10/12] autofs: add UPSTREAM_CHECK_URI
+Subject: [meta-networking][PATCH 08/12] vsftpd: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,27 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 07:57:08 -0000
+X-List-Received-Date: Fri, 25 May 2018 07:57:13 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
-index 68c64fd..e279995 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
-@@ -31,6 +31,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
- SRC_URI[md5sum] = "28cf88f99eff553a8500659ba5d45a76"
- SRC_URI[sha256sum] = "0d57e4138c2ec8058ca92164d035546f68ce4af93acb893369993d67c7056a10"
+diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
+index 7a20356..80b0117 100644
+--- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
++++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
+@@ -24,6 +24,9 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
+            file://0001-sysdeputil.c-Fix-with-musl-which-does-not-have-utmpx.patch \
+            "
  
-+UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
++UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/v/vsftpd/"
++UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.orig\.tar"
 +
- INITSCRIPT_NAME = "autofs"
- INITSCRIPT_PARAMS = "defaults"
- 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
+                         file://COPYRIGHT;md5=04251b2eb0f298dae376d92454f6f72e \
+                         file://LICENSE;md5=654df2042d44b8cac8a5654fc5be63eb"
 -- 
 2.7.4
 
