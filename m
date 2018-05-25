@@ -1,26 +1,46 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 6682474DB1
+Return-Path: <dylan.bartlett@metixmedical.co.uk>
+Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
+	[209.85.214.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 6151F6FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 May 2018 08:24:37 +0000 (UTC)
-Received: from PC-kkoz.proceq.com (unknown [213.160.61.66])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 6522820857;
-	Fri, 25 May 2018 08:24:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1527236679;
-	bh=T/paroTvW2FkkOkaUz2KC79V1QhT4KrLmeMOx4I5raw=;
-	h=From:To:Cc:Subject:Date:From;
-	b=IUohgKoSjEWJqu+TEpSWYjYafdh+Q/vF+Cjk52oEeVXEWQv/OuukVxtGfxJwe6ugq
-	P0B938vo8dk43IQmSYREJFj1WyUU8SGNPDOvlnk5se6HfOwYZCP9PJwldWgfLOT+Xj
-	UUtWagfLpCCkikvh9nWrLrxt5BZgphmNuJVbiNWo=
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 May 2018 10:24:32 +0200
-Message-Id: <1527236672-31805-1-git-send-email-krzk@kernel.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH v4] civetweb: Add new recipe with git-based version
+	Fri, 25 May 2018 09:31:10 +0000 (UTC)
+Received: by mail-it0-f53.google.com with SMTP id e20-v6so6059982itc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 May 2018 02:31:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=metixmedical-co-uk.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=4RFZXf/89JmDDFW5lE7A2qfH5H5PHBJH4LoLv0wN4Ec=;
+	b=sjtgbtg8kwy6MrB2GCnEDKl53zjXBD24R9FZ1qh8vzDN2um3ml8qm3fgVw2mic0rRX
+	DvA8bkW1UIbqiVY2herzqfW9ITntTrkRfkNSXuvN1RBj9VvO5sf4dB0dePo5rYIQgk4c
+	bq4WIKxsrJkOCV0ghd8kEKDZMSBdlZcAljNONm7hd6ZqZcQq6eA2Ov0ve9/TrgixHgVS
+	kadnk0iuGt97Rkdz947yJHSpb83SSI7Vqa3JnfuM/51eB6eQJfvphFdn7wGAcB7ZTNax
+	+pnlT6t8IL/S8EVQO2XB5AW35twx3lmiLYhA8vD1UBVNWEkuao83+7jaMgO6VtpdIuFw
+	qJ2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=4RFZXf/89JmDDFW5lE7A2qfH5H5PHBJH4LoLv0wN4Ec=;
+	b=CZToQUElGc/wLiTRXT1HTwgynyqCQ2tS+sGdYnLYgnT3oyzPqqwutRZ0BWTt7/mpay
+	SVgTXwN2i7Fll1+zQb4JtnfBsik0BU7gfIE0++UGHGGcZmXFVGgzsOIENhnNosXBcuNe
+	h1UjWJlD2WrMJz2YNIlK6mbEImot76aQVKtluVfK+cBG8XjfLbPONKgb9Byqsee7kmgY
+	uNfwN80fUvbl5NLqxc1jurG9IrxDY6XHYB5IBnTLkVJKsTNZj8nhUjMg+5ck1L+X6dgS
+	vwac3TnU0Xrrv99whpob792qtQTswCQlE86wuwA33Avp2u0B4wcOfoz4hlnz0XyZ6N8O
+	ArNw==
+X-Gm-Message-State: ALKqPwd0vRg9hASELUBBoox5sAD33xfAKAjak4IPXT5jcJ/MUmo4Vylv
+	+IP7h++W8SS5rja6ZeoS/lh+Uqa6sgkLwreDzW5JS+Wy
+X-Google-Smtp-Source: ADUXVKLU6D900JRd7m/g9N0DphobMxhvm+Ya4tOFmmQejLKRxi8L77m7lgCDscse8XuIZcUiqw1nqVtIWUXF459P+7A=
+X-Received: by 2002:a24:414c:: with SMTP id
+	x73-v6mr1201645ita.96.1527240671811; 
+	Fri, 25 May 2018 02:31:11 -0700 (PDT)
+MIME-Version: 1.0
+From: Dylan Bartlett <dylan.bartlett@metixmedical.co.uk>
+Date: Fri, 25 May 2018 10:31:02 +0100
+Message-ID: <CAFuZ8QBXvZ57MKzbwEkQ40mnYXMGLi4PaTM1TR=SKqJarQwuVQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5] Do_install_append() with qmake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,144 +53,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 May 2018 08:24:38 -0000
+X-List-Received-Date: Fri, 25 May 2018 09:31:11 -0000
+X-Groupsio-MsgNum: 72427
+Content-Type: multipart/mixed; boundary="000000000000bb2dd7056d046d7d"
 
-Add recipe for CivetWeb: easy to use, powerful, C/C++ embeddable web
-server with optional CGI, SSL and Lua support, under MIT license.
+--000000000000bb2dd7056d046d7d
+Content-Type: text/plain; charset="UTF-8"
 
-CivetWeb provides C and C++ libraries and a standalone server binary.
+Hello all,
 
-Choose specific post-v1.10 git revision b8148afe8fa4 which has a fixed
-SSL support (depending on OpenSSL v1.0.2).
+I hope you'll be able to help clear some things up for me.
 
-Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+I have created a recipe to build and install a Qt Application I've been
+developing, so far everything has been working great and the program gets
+compiled, installed and packaged.
 
----
+However there is one additional install step I need to complete, which is
+creating a symbolic link to my binary in /opt to /usr/bin/b2qt. I want to
+do this so that the Boot2Qt appcontroller starts my application on boot.
 
-Changes since v3:
-1. Rebase on sumo branch.
-2. Use Makefile generator for CMake (ninja does not build).
+There are two ways I thought I could do this.
+1. Use do_install_append() in the recipe to create the symbolic link.
+However qmake5.bbclass does not export the do_install function. Modifying
+the .bbclass with EXPORT_FUNCTIONS do_install breaks everything so I think
+that this is the wrong way to go about it.
 
-Changes since v2:
-1. Bump to post-v1.10 git revision.
-2. Add ssl package config.
-3. Drop cgi, cpp and debug from default package config.
+2. Use target.extra in the qmake .pro file to add the extra commands.
+This one I had a bit more success with, I added my commands to target.extra
+and built the recipe.
+In this case do_install appeared to run properly. I could see my symbolic
+link in the image directory however the binary that was complied no longer
+appears in the image directory. So I've fixed one thing and broke another.
 
-Changes since v1:
-1. Use SRCREC as suggested by Khem Raj.
-2. Drop nativesdk class.
-3. Fix native build with patch.
-4. Explicitly disable SSL (does not build at v1.10).
-5. Disable ASAN (not applicable for native builds).
----
- ...ssing-librt-and-libm-during-native-compil.patch | 42 +++++++++++++++++++
- .../recipes-connectivity/civetweb/civetweb_git.bb  | 47 ++++++++++++++++++++++
- 2 files changed, 89 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
+At this point I've reached the end of what I think I can try, I'm sure I'm
+missing something simple since extra install steps are a common task. Can
+someone tell me what the canonically correct way that I should be doing
+this is?
 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
-new file mode 100644
-index 000000000000..401cf39ad8df
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb/0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch
-@@ -0,0 +1,42 @@
-+From cd93e2c538cecb3192fd24c0fbd6e834d0c47eec Mon Sep 17 00:00:00 2001
-+From: Krzysztof Kozlowski <krzk@kernel.org>
-+Date: Wed, 18 Apr 2018 14:11:52 +0200
-+Subject: [PATCH] Unittest: Fix missing librt and libm during native compilation
-+
-+civetweb looks for librt and libm in weird places and for native build
-+this fails:
-+
-+    | ../third_party/lib/libcheck.a(check.c.o): In function `tcase_create':
-+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:145: undefined reference to `floor'
-+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:148: undefined reference to `floor'
-+
-+These are needed dependencies so try regular system linkage in such
-+case.
-+
-+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-+---
-+ unittest/CMakeLists.txt | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/unittest/CMakeLists.txt b/unittest/CMakeLists.txt
-+index f34b2e0e4ce4..05d25702178c 100644
-+--- a/unittest/CMakeLists.txt
-++++ b/unittest/CMakeLists.txt
-+@@ -60,10 +60,14 @@ endif()
-+ find_package(LibM)
-+ if (LIBM_FOUND)
-+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBM::LIBM")
-++else()
-++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lm")
-+ endif()
-+ find_package(LibRt)
-+ if (LIBRT_FOUND)
-+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBRT::LIBRT")
-++else()
-++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lrt")
-+ endif()
-+ 
-+ # Build the C unit tests
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-new file mode 100644
-index 000000000000..45d6ec8864b4
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
-@@ -0,0 +1,47 @@
-+SUMMARY = "Civetweb embedded web server"
-+HOMEPAGE = "https://github.com/civetweb/civetweb"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=6f28fdcba0dda735eed62bac6a397562"
-+
-+SRCREV = "b8148afe8fa44c64f75e69655c4fdc9095565568"
-+PV = "1.10+git${SRCPV}"
-+SRC_URI = "git://github.com/civetweb/civetweb.git"
-+SRC_URI_append_class-native = " \
-+    file://0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch \
-+"
-+S = "${WORKDIR}/git"
-+
-+# civetweb supports building with make or cmake (although cmake lacks few features)
-+inherit cmake
-+
-+# Disable Lua and Duktape because they do not compile from CMake (as of v1.8, v1.9 and v1.10).
-+# Disable ASAN as it is included only in Debug build.
-+EXTRA_OECMAKE = " \
-+    -DBUILD_SHARED_LIBS=ON \
-+    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-+    -DCIVETWEB_ENABLE_LUA=OFF \
-+    -DCIVETWEB_ENABLE_ASAN=OFF \
-+"
-+EXTRA_OECMAKE_class-native = " \
-+    -DBUILD_SHARED_LIBS=ON \
-+    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-+    -DCIVETWEB_ENABLE_LUA=OFF \
-+    -DCIVETWEB_ENABLE_ASAN=OFF \
-+"
-+
-+# Building with ninja fails on missing third_party/lib/libcheck.a (which
-+# should come from external CMake project)
-+OECMAKE_GENERATOR = "Unix Makefiles"
-+
-+PACKAGECONFIG ??= "caching ipv6 server ssl websockets"
-+PACKAGECONFIG[caching] = "-DCIVETWEB_DISABLE_CACHING=OFF,-DCIVETWEB_DISABLE_CACHING=ON,"
-+PACKAGECONFIG[cgi] = "-DCIVETWEB_DISABLE_CGI=OFF,-DCIVETWEB_DISABLE_CGI=ON,"
-+PACKAGECONFIG[cpp] = "-DCIVETWEB_ENABLE_CXX=ON,-DCIVETWEB_ENABLE_CXX=OFF,"
-+PACKAGECONFIG[debug] = "-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=ON,-DCIVETWEB_ENABLE_MEMORY_DEBUGGING=OFF,"
-+PACKAGECONFIG[ipv6] = "-DCIVETWEB_ENABLE_IPV6=ON,-DCIVETWEB_ENABLE_IPV6=OFF,"
-+PACKAGECONFIG[server] = "-DCIVETWEB_INSTALL_EXECUTABLE=ON,-DCIVETWEB_INSTALL_EXECUTABLE=OFF,"
-+PACKAGECONFIG[ssl] = "-DCIVETWEB_ENABLE_SSL=ON -DCIVETWEB_SSL_OPENSSL_API_1_1=OFF -DCIVETWEB_ENABLE_SSL_DYNAMIC_LOADING=OFF,-DCIVETWEB_ENABLE_SSL=OFF,openssl (=1.0.2%),"
-+PACKAGECONFIG[websockets] = "-DCIVETWEB_ENABLE_WEBSOCKETS=ON,-DCIVETWEB_ENABLE_WEBSOCKETS=OFF,"
-+
-+BBCLASSEXTEND = "native"
--- 
-2.7.4
+I've attached my recipe and a segment of my .pro if that helps.
 
+Best Regards,
+Dylan Bartlett
 
+--000000000000bb2dd7056d046d7d
+Content-Type: text/plain; charset="US-ASCII"; name="project.pro.txt"
+Content-Disposition: attachment; filename="project.pro.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <16396a303c77caf71da1>
+X-Attachment-Id: 16396a303c77caf71da1
+
+I0RlZmluZSB3aGVyZSBmaWxlcyBzaG91bGQgYmUgaW5zdGFsbGVkLiBDcmVhdGUgYjJxdCBzeW1s
+aW5rIHRvIGxhdW5jaCBvbiBib290Lg0KdGFyZ2V0LnBhdGggPSAvb3B0LyQke1RBUkdFVH0vYmlu
+DQojdGFyZ2V0LmV4dHJhID0gbWtkaXIgLXAgIiQoSU5TVEFMTF9ST09UKS91c3IvYmluLyIgJiYg
+bG4gLXNmciAvb3B0LyQke1RBUkdFVH0vYmluLyQke1RBUkdFVH0gIiQoSU5TVEFMTF9ST09UKS91
+c3IvYmluL2IycXQiDQpJTlNUQUxMUyAgICs9IHRhcmdldA==
+
+--000000000000bb2dd7056d046d7d
+Content-Type: text/plain; charset="US-ASCII"; name="stoke_git.bb.txt"
+Content-Disposition: attachment; filename="stoke_git.bb.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <16396a30c4d4f9125f52>
+X-Attachment-Id: 16396a30c4d4f9125f52
+
+IyBSZWNpcGUgY3JlYXRlZCBieSByZWNpcGV0b29sCiMgVGhpcyBpcyB0aGUgYmFzaXMgb2YgYSBy
+ZWNpcGUgYW5kIG1heSBuZWVkIGZ1cnRoZXIgZWRpdGluZyBpbiBvcmRlciB0byBiZSBmdWxseSBm
+dW5jdGlvbmFsLgojIChGZWVsIGZyZWUgdG8gcmVtb3ZlIHRoZXNlIGNvbW1lbnRzIHdoZW4gZWRp
+dGluZy4pCgojIFdBUk5JTkc6IHRoZSBmb2xsb3dpbmcgTElDRU5TRSBhbmQgTElDX0ZJTEVTX0NI
+S1NVTSB2YWx1ZXMgYXJlIGJlc3QgZ3Vlc3NlcyAtIGl0IGlzCiMgeW91ciByZXNwb25zaWJpbGl0
+eSB0byB2ZXJpZnkgdGhhdCB0aGUgdmFsdWVzIGFyZSBjb21wbGV0ZSBhbmQgY29ycmVjdC4KIwoj
+IFRoZSBmb2xsb3dpbmcgbGljZW5zZSBmaWxlcyB3ZXJlIG5vdCBhYmxlIHRvIGJlIGlkZW50aWZp
+ZWQgYW5kIGFyZQojIHJlcHJlc2VudGVkIGFzICJVbmtub3duIiBiZWxvdywgeW91IHdpbGwgbmVl
+ZCB0byBjaGVjayB0aGVtIHlvdXJzZWxmOgojICAgZGVwZW5kZW5jaWVzL1F0QXdlc29tZS9MSUNF
+TlNFLm1kCiMKTElDRU5TRSA9ICJQcm9wcmlldGFyeSIKTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxl
+Oi8vTElDRU5TRTttZDU9Y2ZkYTY4M2JlYzk1MDgyYTEyYzMyNTY4ZWYwOWQxNDQiCgpTUkNfVVJJ
+ID0gImdpdDovL2dpdEBnaXRsYWIuY29tL3JlZGFjdGVkLmdpdDtwcm90b2NvbD1zc2g7YnJhbmNo
+PW1hc3Rlci1zaW11bGF0aW9uLXlvY3RvbW9kcyIKCiMgTW9kaWZ5IHRoZXNlIGFzIGRlc2lyZWQK
+UFYgPSAiMS4wK2dpdCR7U1JDUFZ9IgpTUkNSRVYgPSAiZWRhMDAzODIyZjdiZjA4Njg0ODIwOTc5
+MDJlNGMwZWNjYzIxMzgwMyIKClMgPSAiJHtXT1JLRElSfS9naXQiCkQgPSAiJHtXT1JLRElSfS9p
+bWFnZXMiCmluaGVyaXQgcW1ha2U1CgpGSUxFU18ke1BOfSArPSAiL29wdC9tZXRpeC13Zy11aS9i
+aW4vbWV0aXgtd2ctdWkgXCIKCiNUaGlzIGRvZXNuJ3Qgd29yayB3aXRoIHFtYWtlCiNkb19pbnN0
+YWxsX2FwcGVuZCgpIHsKIwlsbiAtc2ZyIC9vcHQvJCR7VEFSR0VUfS9iaW4vJCR7VEFSR0VUfSAi
+JHtEfS91c3IvYmluL2IycXQiCiN9
+
+--000000000000bb2dd7056d046d7d--
