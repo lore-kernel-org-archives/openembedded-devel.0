@@ -1,54 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
-	[209.85.218.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B949875580
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id BE2A874A35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 21:29:05 +0000 (UTC)
-Received: by mail-oi0-f67.google.com with SMTP id d5-v6so6651084oib.5
+	Thu,  7 Jun 2018 02:35:25 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="40820671"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jun 2018 10:35:24 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 5B9574B41E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2018 14:29:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=5vzdhkZ8SqI0fiu7P17txlcCPanqTiGeW0j3COD7tOU=;
-	b=LMTOH95kD89OxEIVXg0lXKWwsC/bYJLzRG4gJ25kljXot44/6t2NDW//viDjqqTJ5w
-	czZ/bVysPgd1GzX273ZmbDHE1QK0ONxNFtNOZXUZqoKuGG4FO85k7yD2mJTFNObRxPHl
-	8St0Ub4iUo35Ox52+azKvoMK8ZMNKyePat+B5SsWrKANix0nW8/ATBoYbM7jr6iPB7Zx
-	WYXCweb5blSaJzbxOUCgG3XnGvOAFrEnjmTmjMpJhxQ4NJpBM9syIkAyNi/IoS4k8Del
-	khaADT0xvC4gQC/Jm74bwiuWBormcfLShMW1u3/gmsNgoZC1JL81Qr5fWfoD/LjNv91Q
-	vkag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=5vzdhkZ8SqI0fiu7P17txlcCPanqTiGeW0j3COD7tOU=;
-	b=sTAbl8vKL7exD9P4Qne0cK7F3J7QZnzYyO5xKQ/YNb5XUMA7KtDM+05X7Eh/Nx2go2
-	4roVe8Ucym175EoPyV8xIpqiu7xhLFVil3DbVmA8RXPr0zW+OLoi7W46y8VvVUCuj8AD
-	XVfxfcxpNZwysuzHX3g6jFGWdxpdlyqY8OfM6SaiO0oQ34ipv7s+TODg5HQ3JP8eOe/r
-	Fvu/pf4lHQrRmQbiEuOIfx3vN2ONxnqfus5G2X/YcbtaDdS072Aj4FfSSHabeCe0WLSW
-	8vBzdnM5ywEzOVet8oAVX7nlxUabt0boP7KikuuK/VplrZt4TqZ0lBJ9qhtFNtGdDQCW
-	y7Bw==
-X-Gm-Message-State: APt69E1HNuUQwHU5LEO+ceQ3gCn7eUZyhVGUblsrPxXfSWjl+RUio+uX
-	Mj/jKnVwecuHkw3AQmB9n9+nhm6SAN0K9OHVnxU=
-X-Google-Smtp-Source: ADUXVKKY3pAb8w/6asFSm7lnR22ez6HqCBWyxHib9abHjlzNW34H4mS3lt6/qj4NQWqxcHPgkMuG8WG8UpLHQk8dKJ4=
-X-Received: by 2002:aca:55c6:: with SMTP id
-	j189-v6mr2491677oib.53.1528320546776; 
-	Wed, 06 Jun 2018 14:29:06 -0700 (PDT)
+	Thu,  7 Jun 2018 10:35:21 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.27) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.399.0; Thu, 7 Jun 2018 10:35:22 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 27 May 2018 14:38:49 -0700
+Message-ID: <1527457129-5874-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP;
-	Wed, 6 Jun 2018 14:29:06 -0700 (PDT)
-In-Reply-To: <CA+chaQdCMFngAwgV2+5XY6RWf1qUTHzDpdJgFAjpyFe0RL62Eg@mail.gmail.com>
-References: <20180604223911.14561-1-schnitzeltony@gmail.com>
-	<CALbNGRSg8kYPO6x_jgXtK9Gi1gQDX7v4KbpTWVaWAQCEc=NXSg@mail.gmail.com>
-	<CA+chaQcz=Ckh2=zSUBi969N-v7dJG-K2F1OXLxtnG8JLUahXYQ@mail.gmail.com>
-	<CAMKF1so+ux5C6v3x_uBqiF1PjrjuYBtT7ViayqMez-oS6SbwLA@mail.gmail.com>
-	<CALbNGRRt+-YK_T60D-Cz-NfEbDZTRLy7bUCVgkqCyftGkshM9w@mail.gmail.com>
-	<CA+chaQdCMFngAwgV2+5XY6RWf1qUTHzDpdJgFAjpyFe0RL62Eg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 6 Jun 2018 23:29:06 +0200
-Message-ID: <CALbNGRQxWvxbwc0UMwe7D1W9XhmWh3vHgb2exC2y6xNd3SE57Q@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtwebkit: do not skip build - use cmake as build system
+X-Originating-IP: [10.167.225.27]
+X-yoursite-MailScanner-ID: 5B9574B41E79.AD433
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] engine-pkcs11: has been merged to libp11, so deleted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,16 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 21:29:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 07 Jun 2018 02:35:26 -0000
+Content-Type: text/plain
 
-On Wed, Jun 6, 2018 at 8:18 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> It's not in oe-core master yet, there is branch from Khem I was using to
-> start the testing with gcc8.
->
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-8
->
-OK - gcc8 - off to new challenges
+Reference to https://github.com/OpenSC/engine_pkcs11,there is no need to maitain this recipe.
 
-Andreas
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../engine-pkcs11/engine-pkcs11_0.2.2.bb           | 31 ----------------------
+ 1 file changed, 31 deletions(-)
+ delete mode 100644 meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb
+
+diff --git a/meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb b/meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb
+deleted file mode 100644
+index bc79f35..0000000
+--- a/meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb
++++ /dev/null
+@@ -1,31 +0,0 @@
+-SUMMARY = "A PKCS"
+-DESCRIPTION = "\
+-Engine_pkcs11 is an implementation of an engine for OpenSSL. It can be \
+-loaded using code, config file or command line and will pass any function \
+-call by openssl to a PKCS cards and software for using smart cards in PKCS"
+-HOMEPAGE = "https://github.com/OpenSC/engine_pkcs11"
+-SECTION = "Development/Libraries"
+-LICENSE = "LGPLv2.1+"
+-LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;beginline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
+-DEPENDS = "openssl libp11"
+-
+-SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
+-SRCREV = "132fcf2c8b319f9f4b2ebdc8dcb54ff496dc0519"
+-
+-S = "${WORKDIR}/git"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF = "\
+-    --disable-static \
+-    --libdir ${libdir}/engines \
+-"
+-
+-do_install_append () {
+-    rm -f ${D}${libdir}/engines/libpkcs11.la
+-}
+-
+-FILES_${PN} += "${libdir}/engines/libpkcs11${SOLIBSDEV}"
+-FILES_${PN}-dbg += "${libdir}/engines/.debug/"
+-
+-RDEPENDS_${PN} += "openssl libp11 opensc"
+-- 
+1.9.1
+
+
+
 
