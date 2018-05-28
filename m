@@ -1,30 +1,30 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BE2A874A35
+	by mail.openembedded.org (Postfix) with ESMTP id D0EF774601
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 02:35:25 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="40820671"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Jun 2018 10:35:24 +0800
+	Thu,  7 Jun 2018 05:30:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="40826255"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jun 2018 13:30:52 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5B9574B41E79
+	by cn.fujitsu.com (Postfix) with ESMTP id 6FD564818464
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 10:35:21 +0800 (CST)
+	Thu,  7 Jun 2018 13:30:46 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.27) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.399.0; Thu, 7 Jun 2018 10:35:22 +0800
+	Server (TLS) id 14.3.399.0; Thu, 7 Jun 2018 13:30:47 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 27 May 2018 14:38:49 -0700
-Message-ID: <1527457129-5874-1-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Sun, 27 May 2018 17:34:16 -0700
+Message-ID: <1527467656-6513-1-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.27]
-X-yoursite-MailScanner-ID: 5B9574B41E79.AD433
+X-yoursite-MailScanner-ID: 6FD564818464.ACBFA
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] engine-pkcs11: has been merged to libp11, so deleted.
+Subject: [meta-python][PATCH] python-pytest: Fix conflict error as following:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,54 +37,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 02:35:26 -0000
+X-List-Received-Date: Thu, 07 Jun 2018 05:30:55 -0000
 Content-Type: text/plain
 
-Reference to https://github.com/OpenSC/engine_pkcs11,there is no need to maitain this recipe.
+  file /usr/bin/py.test conflicts between attempted installs of python3-pytest-3.4.2-r0 and python-pytest-3.4.2-r0
+  file /usr/bin/pytest conflicts between attempted installs of python3-pytest-3.4.2-r0 and python-pytest-3.4.2-r0
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../engine-pkcs11/engine-pkcs11_0.2.2.bb           | 31 ----------------------
- 1 file changed, 31 deletions(-)
- delete mode 100644 meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb
+ meta-python/recipes-devtools/python/python-pytest.inc       | 10 ++++++++++
+ meta-python/recipes-devtools/python/python-pytest_3.4.2.bb  |  1 +
+ meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb |  2 ++
+ 3 files changed, 13 insertions(+)
 
-diff --git a/meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb b/meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb
-deleted file mode 100644
-index bc79f35..0000000
---- a/meta-oe/recipes-crypto/engine-pkcs11/engine-pkcs11_0.2.2.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--SUMMARY = "A PKCS"
--DESCRIPTION = "\
--Engine_pkcs11 is an implementation of an engine for OpenSSL. It can be \
--loaded using code, config file or command line and will pass any function \
--call by openssl to a PKCS cards and software for using smart cards in PKCS"
--HOMEPAGE = "https://github.com/OpenSC/engine_pkcs11"
--SECTION = "Development/Libraries"
--LICENSE = "LGPLv2.1+"
--LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;beginline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
--DEPENDS = "openssl libp11"
--
--SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
--SRCREV = "132fcf2c8b319f9f4b2ebdc8dcb54ff496dc0519"
--
--S = "${WORKDIR}/git"
--
--inherit autotools pkgconfig
--
--EXTRA_OECONF = "\
--    --disable-static \
--    --libdir ${libdir}/engines \
--"
--
--do_install_append () {
--    rm -f ${D}${libdir}/engines/libpkcs11.la
--}
--
--FILES_${PN} += "${libdir}/engines/libpkcs11${SOLIBSDEV}"
--FILES_${PN}-dbg += "${libdir}/engines/.debug/"
--
--RDEPENDS_${PN} += "openssl libp11 opensc"
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index 4feb9a0..4c32dfb 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -9,6 +9,8 @@ SRC_URI[sha256sum] = "117bad36c1a787e1a8a659df35de53ba05f9f3398fb9e4ac17e80ad590
+ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
+                    file://pytest_version_fix.patch "
+ 
++inherit update-alternatives
++
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-attrs \
+     ${PYTHON_PN}-debugger \
+@@ -22,4 +24,12 @@ RDEPENDS_${PN}_class-target += " \
+ 
+ FILESEXTRAPATHS_prepend := "${THISDIR}/python-pytest:"
+ 
++ALTERNATIVE_${PN} += "py.test pytest"
++
++NATIVE_LINK_NAME[pytest] = "${bindir}/pytest"
++ALTERNATIVE_TARGET[pytest] = "${bindir}/pytest"
++
++ALTERNATIVE_LINK_NAME[py.test] = "${bindir}/py.test"
++ALTERNATIVE_TARGET[py.test] = "${bindir}/py.test"
++
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pytest_3.4.2.bb b/meta-python/recipes-devtools/python/python-pytest_3.4.2.bb
+index 201ab05..39e50ac 100644
+--- a/meta-python/recipes-devtools/python/python-pytest_3.4.2.bb
++++ b/meta-python/recipes-devtools/python/python-pytest_3.4.2.bb
+@@ -6,3 +6,4 @@ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-compiler \
+     ${PYTHON_PN}-funcsigs \
+ "
++ALTERNATIVE_PRIORITY = "10"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb b/meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb
+index 466cfa8..eba6632 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb
+@@ -1,2 +1,4 @@
+ inherit pypi setuptools3
+ require python-pytest.inc
++
++ALTERNATIVE_PRIORITY = "100"
 -- 
 1.9.1
 
