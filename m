@@ -1,30 +1,44 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 84A9C603FE
+Return-Path: <f.forstmayr@gmail.com>
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 162846FFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 03:20:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="40513390"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 May 2018 11:20:29 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id D687A4B40413
+	Tue, 29 May 2018 06:27:39 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id w7-v6so11466776wrn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 11:20:21 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.27) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.399.0; Tue, 29 May 2018 11:20:21 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 19 May 2018 11:11:12 -0700
-Message-ID: <1526753472-30951-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 28 May 2018 23:27:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Z50VyT9X1LyXRpgb7vcW2lQbaPOanIXLu3bZAmC/mUo=;
+	b=EBN0RUMO79s1Kk/EVxio3Xprg195T17VjwkymSkMrxBV9eei0AgFTUJoXz5PJRT7cT
+	GYwdBAhVZPf2lkRCfrd9K0aq14zMUzlhnZCQ7PCiKW+qTVb9JvIefAKf24mAxYlcbwg8
+	W43jfNEEi2SVoXRZhnZjtb4miQHOwaxniHphHFOJciWpaj8DjUWto3EfSLAo079meJZf
+	YrmHYi7MhuA5ByUNDLhIq8IAyJQLI6Y0prSv7kduuDplNBuzjjtb4peHD8fg4lrxTsQY
+	/ZRNC9ZK7qqZ59OIRqK5aH1oSnKXmt3RcmXLUZvwQ7eD5nh3w+rk4b9KAXhzKIszz7yF
+	uTLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Z50VyT9X1LyXRpgb7vcW2lQbaPOanIXLu3bZAmC/mUo=;
+	b=Gc0gm//fu6RbjO3n48Cc1AtlcGOHmgbjZ1/+Pgf8B9iN37f4FOPTl2je/i35+/hZTy
+	j8Cirp2t825kMe/xmTqQIZrT3sANx30DJobhm74xpqDhxv6t5IMNBxalFT8t/Pn5c0R5
+	DaypSe4XFoIcSylhKXDHyli/tNab+KVsqal/6I6aIiABPKBSHWN+Uo/pRUWj6cmw0gEP
+	bo03+NvFDVOfr21O9H1SEFeYeEZUCWcBp3O8D4eUUTX1tp3nzGkFJcuTQ9z4HmzVdred
+	TlnD6+vwGmruQMYv9N7VZ8LMsodpARYne2etbYWl4ll2jLSSkqsNK1uauDrjPjwyRYkQ
+	F7zQ==
+X-Gm-Message-State: ALKqPwfiIa9YX44LCBCy+0xzrsbgz1AiyEN0z4Qgw9wPU2kOQsiZnETG
+	oyNZ+8QsTtFhD2d+GcWYG11ZJ77vCLVqtpyx/fEPNw==
+X-Google-Smtp-Source: ADUXVKLiI1ltE/GhHN+BuIDA0o0GpCliJbsCBXoNZTxFpWhIqg+JIsVik4Dt6CYjtklEy1DUBH2lQzxeB7fb8+Pjdqk=
+X-Received: by 2002:a19:178d:: with SMTP id 13-v6mr8385740lfx.22.1527575260207;
+	Mon, 28 May 2018 23:27:40 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.27]
-X-yoursite-MailScanner-ID: D687A4B40413.AC8C7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] tiptop: Add aarch64 into COMPATIBLE_HOST.
+Received: by 2002:a19:f509:0:0:0:0:0 with HTTP; Mon, 28 May 2018 23:27:39
+	-0700 (PDT)
+From: Franz Forstmayr <f.forstmayr@gmail.com>
+Date: Tue, 29 May 2018 08:27:39 +0200
+Message-ID: <CAGKTrWL29mq4rugJ0zn4oN7__jqJDTii=XcEoZgmj8YvRF0E8Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python] Added python modules periphery and Flask-Sijax
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,30 +51,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2018 03:20:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 29 May 2018 06:27:40 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
----
- meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi,
+I created a pull request on Github where i added recipes for python
+modules periphery and Flask-Sijax.
+https://github.com/openembedded/meta-openembedded/pull/80
 
-diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb b/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb
-index 0a00a36..4289c68 100644
---- a/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb
-+++ b/meta-oe/recipes-extended/tiptop/tiptop_2.3.1.bb
-@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "51c4449c95bba34f16b429729c2f58431490665d8093efaa8643b2e1d1
- 
- inherit autotools-brokensep
- EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
--COMPATIBLE_HOST = "(i.86|x86_64|arm|powerpc).*-linux"
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|powerpc|aarch64).*-linux"
- 
- do_configure_prepend () {
-     # Two bugs in configure.ac when cross-compiling.
--- 
-1.9.1
+Can someone check, if everything is ok?
 
-
-
+Thank you
+Franz
 
