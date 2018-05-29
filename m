@@ -1,11 +1,14 @@
 Return-Path: <prvs=680f2ba00=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 85945745BD
+	by mail.openembedded.org (Postfix) with ESMTP id BCED1746AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 09:21:53 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,455,1520895600"; d="scan'208";a="10548339"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180522221129.9021-1-richard.leitner@skidata.com>
+	Tue, 29 May 2018 09:24:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,455,1520895600"; d="scan'208";a="10548439"
+To: Richard Leitner <richard.leitner@skidata.com>, Martin Jansa
+	<martin.jansa@gmail.com>
+References: <20180523084140.7967-1-richard.leitner@skidata.com>
+	<CA+chaQd_tuEhVz5s073uNLHJTX2foWK0g-cNs-9VQ1BE-kE1DA@mail.gmail.com>
+	<1d769637-5375-5a5d-5055-2c43b021dd64@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -51,17 +54,18 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <16ab12ea-a75d-9cd2-e605-4e4cd9896993@skidata.com>
-Date: Tue, 29 May 2018 11:21:56 +0200
+Message-ID: <c79ac033-5a48-9826-3009-669f77d5b9ce@skidata.com>
+Date: Tue, 29 May 2018 11:24:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180522221129.9021-1-richard.leitner@skidata.com>
+In-Reply-To: <1d769637-5375-5a5d-5055-2c43b021dd64@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Cc: dev@g0hl1n.net
-Subject: Re: [meta-oe][PATCH v2] uhubctl: add recipe
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	dev@g0hl1n.net
+Subject: Re: [meta-oe][PATCH v2] pam-plugin-ldapdb: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,57 +78,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2018 09:21:54 -0000
+X-List-Received-Date: Tue, 29 May 2018 09:24:04 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Ping
+Any updates/suggestions on how I should proceed with this patch?
 
-On 05/23/2018 12:11 AM, Richard Leitner wrote:
-> Add recipe for uhubctl v2.0.0, an utility to control USB power per-port
-> on "smart" USB hubs.
+On 05/23/2018 11:03 AM, Richard Leitner wrote:
 > 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
-> Changes v2:
->   + applied suggestions by Khem Raj:
->     - replace version fix patch with sed line
->     - remove redundant ${S} assignment
->     - remove redundant FILES assignmet
-> ---
->  meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
->  create mode 100644 meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
+> On 05/23/2018 10:54 AM, Martin Jansa wrote:
+>> Don't use github archives which are regenerated from time to time with different checksums (read older discussions for more details).
 > 
-> diff --git a/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb b/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
-> new file mode 100644
-> index 000000000..6306ddb55
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/uhubctl/uhubctl_2.0.0.bb
-> @@ -0,0 +1,21 @@
-> +SUMMARY = "USB hub per-port power control"
-> +HOMEPAGE = "https://github.com/mvp/uhubctl"
-> +BUGTRACKER = "https://github.com/mvp/uhubctl/issues"
-> +DEPENDS = "libusb1"
-> +
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +SRC_URI = "https://github.com/mvp/${PN}/archive/v${PV}.tar.gz"
-> +SRC_URI[md5sum] = "5c711911d766d76813333c3812277574"
-> +SRC_URI[sha256sum] = "4c31278b2c03e5be5a696c3088bc86cf2557a70e00f697799c163aba18e3c40e"
-> +
-> +# uhubctl gets its program version from "git describe". As we use the source
-> +# archive do reduce download size replace the call with our hardcoded version.
-> +do_configure_append() {
-> +    sed -i "s/^\(GIT_VERSION :=\).*$/\1 ${PV}/g" ${S}/Makefile
-> +}
-> +
-> +do_install () {
-> +    oe_runmake install DESTDIR=${D}
-> +}
+> What should we use instead?
+> git clone?
+> My comments on that from the last patch version:
 > 
-
-Any comments/feedback?
+>> Why should we change to git clones instead of archives? What's the advantage?
+> 
+> .. ok that's clear with the "different checksums" statement
+> 
+>> IMHO it only causes more traffic and uses more disk space.
+>> Furthermore if we rely on tags these may be changed without our notice...
+>> And if they are unsigned (like here) we also don't know if something got modified unintentionally...
+>> Or should we use revision hashes?
+> 
+> If these points were already settled please give me a pointer to that discussion.
+> 
+> thanks & regards;Richard.L
+> 
 
