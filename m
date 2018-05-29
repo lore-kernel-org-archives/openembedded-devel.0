@@ -1,33 +1,49 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 50D11601F1
+Return-Path: <kdgoncharov@gmail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E57460272
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 09:57:32 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4T9v8Lp003800
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 29 May 2018 11:25:46 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id 18-v6so33937739wml.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 02:57:24 -0700
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.237]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0361.001;
-	Tue, 29 May 2018 02:56:58 -0700
-From: "Song, Hongzhi" <Hongzhi.Song@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v3] turbostat: add the recipe of
-	turbostat to	meta-oe
-Thread-Index: AQHT9ifG9k2pihaVNka+RRda/OjZbKRGektw
-Date: Tue, 29 May 2018 09:56:57 +0000
-Message-ID: <854398C72EAB594A93CFE8424E9645010FE3C981@ALA-MBD.corp.ad.wrs.com>
-References: <20180528020041.33603-1-hongzhi.song@windriver.com>
-In-Reply-To: <20180528020041.33603-1-hongzhi.song@windriver.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.161]
+	Tue, 29 May 2018 04:25:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:date:from:message-id:subject:to;
+	bh=EKCAuvxh1UyerRGiZOdHdW2f9AeTqyIuYf/WSPyyX+8=;
+	b=V7+XaQLMz8sQmn5UEIpoIdjbzVTQtzJrhd+hku7x4+vlUyIKTbVhj8oRXF7Xj2ax9u
+	alHLtbmVEr2ZVvJYEEWaq0yU50MMi7ExIy8WIkBPAjxtoW+qpU8IKkyHAV6DiEq5mg12
+	lr1qTVnj5usNgsnY4nNRWXlsJCS/Hf6M7NVF5tcoPM/snThDMMRk1Xo17x2AJuYX6TLQ
+	UTWAAis4l3bYIc7qE3ef0xZVdEqgvXEGlqQPvmqO6N4sYk/aEbTt8o9kEnlQtLBb+HMm
+	5rP+roT2lEPCaCTxhq1N5u/Wo+1gCtMpi5/pYUcD4krsFcaIZaLfTdVRZIOHRedKEwir
+	Vymw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:date:from:message-id:subject:to;
+	bh=EKCAuvxh1UyerRGiZOdHdW2f9AeTqyIuYf/WSPyyX+8=;
+	b=azzaI65NF+yXRJRaFQCijAEhaNiwU9uSZuP0If8ks+Q4TOWOxmDLdmCjv+P5Y0z9KV
+	WHVXnvm7s+BzOppR17iCkltfcKP8O7zs9vGHlu7LTgczZnR26cD0L28aHK2VcqH1vBEW
+	ehl+usTvcfB5ZwN6mg5RleRn5vhCBCzmS+nQ7u0MhSQLjN/7KEbgX5U26liwBpGGCz0C
+	d9GR1UjUr3qqVf1wRvQGHpATRYiOOZdlF70WH6AxmXe0S+c5H8YyJlbcibYjNCAV/rac
+	ctRlkjt7JnQg6ioDDdvhSQW4YRbPmxSXssvAC0urI1zLh2lSTDEaYboagaiiJLVieZCT
+	5T4Q==
+X-Gm-Message-State: ALKqPweOXYkWxrk497YsG+xqpo/9MHHRHbFr7EaLEes1VIFFtwrz+rIy
+	hX7X4+5V4fkLaRtwv3vlQvEnnHDj
+X-Google-Smtp-Source: ADUXVKJ4lM15GSgulUjdkeLCYPt6Mv1Igkl+OzZ8r1f1I3GX6rqW6Zg6xzdZqYt71KeIaCnTCCZoVw==
+X-Received: by 2002:a2e:6c10:: with SMTP id
+	h16-v6mr10850583ljc.81.1527593147464; 
+	Tue, 29 May 2018 04:25:47 -0700 (PDT)
+Received: from localhost ([46.101.243.230]) by smtp.gmail.com with ESMTPSA id
+	q25-v6sm6333212ljj.68.2018.05.29.04.25.46
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 29 May 2018 04:25:46 -0700 (PDT)
 MIME-Version: 1.0
-Subject: =?UTF-8?B?562U5aSNOiBbbWV0YS1vZV1bUEFUQ0ggdjNdIHR1cmJvc3RhdDogYWRkIHRoZSByZWNpcGUgb2YgdHVyYm9zdGF0IHRvCW1ldGEtb2U=?=
+Date: Tue, 29 May 2018 11:25:45 +0000
+X-Mailer: RainLoop/1.12.0
+From: kdgoncharov@gmail.com
+Message-ID: <422140a5a5f8db29ddc6a78f8de60a73@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5] QtWebEngine SEGV_MAPERR when opening web view on Raspberry Pi 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,68 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2018 09:57:33 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 29 May 2018 11:25:47 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-cGluZw0KLy8gSG9uZ3poaQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Xw0Kt6K8/sjLOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnIFtvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSC0
-+rHtIEhvbmd6aGkuU29uZyBbaG9uZ3poaS5zb25nQHdpbmRyaXZlci5jb21dDQq3osvNyrG85Dog
-MjAxOMTqNdTCMjjI1SAxMDowMA0KytW8/sjLOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZw0K1vfM4jogW29lXSBbbWV0YS1vZV1bUEFUQ0ggdjNdIHR1cmJvc3RhdDog
-YWRkIHRoZSByZWNpcGUgb2YgdHVyYm9zdGF0IHRvICBtZXRhLW9lDQoNCkl0IGlzIGFuIGVmZmlj
-aWVudCBhbmQgbmVjZXNzYXJ5IHRvb2wgdG8gcmVmbGVjdCB0aGUgc3RhdHVzIG9mIFg4Ng0KcHJv
-Y2Vzc29ycy4gVHVyYm9zdGF0IHJlcG9ydHMgcHJvY2Vzc29yIHRvcG9sb2d5LCBmcmVxdWVuY3ks
-IGlkbGUNCnBvd2VyLXN0YXRlIHN0YXRpc3RpY3MsIHRlbXBlcmF0dXJlIGFuZCBwb3dlciBvbiBY
-ODYgcHJvY2Vzc29ycy4NCg0KU2lnbmVkLW9mZi1ieTogSG9uZ3poaS5Tb25nIDxob25nemhpLnNv
-bmdAd2luZHJpdmVyLmNvbT4NCi0tLQ0KIG1ldGEtb2UvcmVjaXBlcy1rZXJuZWwvdHVyYm9zdGF0
-L3R1cmJvc3RhdF8zLjQuYmIgfCA1OCArKysrKysrKysrKysrKysrKysrKysrKw0KIDEgZmlsZSBj
-aGFuZ2VkLCA1OCBpbnNlcnRpb25zKCspDQogY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVj
-aXBlcy1rZXJuZWwvdHVyYm9zdGF0L3R1cmJvc3RhdF8zLjQuYmINCg0KZGlmZiAtLWdpdCBhL21l
-dGEtb2UvcmVjaXBlcy1rZXJuZWwvdHVyYm9zdGF0L3R1cmJvc3RhdF8zLjQuYmIgYi9tZXRhLW9l
-L3JlY2lwZXMta2VybmVsL3R1cmJvc3RhdC90dXJib3N0YXRfMy40LmJiDQpuZXcgZmlsZSBtb2Rl
-IDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwLi4zNTU5NDE3OTQNCi0tLSAvZGV2L251bGwNCisrKyBi
-L21ldGEtb2UvcmVjaXBlcy1rZXJuZWwvdHVyYm9zdGF0L3R1cmJvc3RhdF8zLjQuYmINCkBAIC0w
-LDAgKzEsNTggQEANCisjDQorIyBDb3B5cmlnaHQgKEMpIDIwMTMgV2luZCBSaXZlciBTeXN0ZW1z
-LCBJbmMuDQorIw0KKyMgVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4gcmVk
-aXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkNCisjIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUg
-R05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgdmVyc2lvbiAyIGFzDQorIyBwdWJsaXNoZWQgYnkg
-dGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbi4NCisjDQorU1VNTUFSWSA9ICJGcmVxdWVuY3kg
-YW5kIElkbGUgcG93ZXIgbW9uaXRvcmluZyB0b29scyBmb3IgTGludXgiDQorDQorREVTQ1JJUFRJ
-T04gPSAiVGhlIHR1cmJvc3RhdCB0b29sIGFsbG93cyB5b3UgdG8gZGV0ZXJtaW5lIHRoZSBhY3R1
-YWwgXA0KK3Byb2Nlc3NvciBmcmVxdWVuY3kgYW5kIGlkbGUgcG93ZXIgc2F2aW5nIHN0YXRlIHJl
-c2lkZW5jeSBvbiBzdXBwb3J0ZWQgXA0KK3Byb2Nlc3NvcnMuIg0KKw0KK0xJQ0VOU0UgPSAiR1BM
-djIiDQorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9ZDc4MTBmYWI3NDg3
-ZmIwYWFkMzI3Yjc2ZjFiZTdjZDciDQorDQorQ09NUEFUSUJMRV9IT1NUID0gJyh4ODZfNjQuKnxp
-Ljg2LiopLWxpbnV4Jw0KK0NPTVBBVElCTEVfSE9TVF9saWJjLW11c2wgPSAibnVsbCINCisNCitE
-RVBFTkRTID0gInZpcnR1YWwva2VybmVsIg0KKw0KK2RvX2ZldGNoW25vZXhlY10gPSAiMSINCitk
-b191bnBhY2tbbm9leGVjXSA9ICIxIg0KK2RvX3BhdGNoW25vZXhlY10gPSAiMSINCisNCisjIFRo
-aXMgbG9va3MgaW4gUywgc28gd2UgYmV0dGVyIG1ha2Ugc3VyZSB0aGVyZSdzDQorIyBzb21ldGhp
-bmcgaW4gdGhlIGRpcmVjdG9yeS4NCisjDQorZG9fcG9wdWxhdGVfbGljW2RlcGVuZHNdID0gIiR7
-UE59OmRvX2NvbmZpZ3VyZSINCisNCisNCitFWFRSQV9PRU1BS0UgPSAnXA0KKyAgICAgICAgICAg
-ICAgICBDQz0iJHtDQ30iIFwNCisgICAgICAgICAgICAgICAnQ0ZMQUdTPS1XYWxsIC1JJHtTVEFH
-SU5HX0tFUk5FTF9ESVJ9L2FyY2gveDg2L2luY2x1ZGUvdWFwaSAke0xERkxBR1N9JyBcDQorICAg
-ICAgICAgICAgICAgJw0KKw0KKyMgSWYgd2UgYnVpbGQgdW5kZXIgU1RBR0lOR19LRVJORUxfRElS
-LCBzb3VyY2Ugd2lsbCBub3QgYmUgcHV0DQorIyBpbnRvIHRoZSBkYmcgcnBtLiAgU1RBR0lOR19L
-RVJORUxfRElSIHdpbGwgZXhpc3QgYnkgdGhlIHRpbWUNCisjIGRvX2NvbmZpZ3VyZSgpIGlzIGlu
-dm9rZWQgc28gd2UgY2FuIHNhZmVseSBjb3B5IGZyb20gaXQuDQorIw0KK2RvX2NvbmZpZ3VyZV9w
-cmVwZW5kKCkgew0KKyAgICAgICBta2RpciAtcCAke1N9DQorICAgICAgIGNwIC1yICR7U1RBR0lO
-R19LRVJORUxfRElSfS9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9tc3ItaW5kZXguaCAke1N9DQorICAg
-ICAgIGNwIC1yICR7U1RBR0lOR19LRVJORUxfRElSfS9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9pbnRl
-bC1mYW1pbHkuaCAke1N9DQorICAgICAgIGNwIC1yICR7U1RBR0lOR19LRVJORUxfRElSfS90b29s
-cy9wb3dlci94ODYvdHVyYm9zdGF0LyogJHtTfQ0KKyAgICAgICBjcCAtciAke1NUQUdJTkdfS0VS
-TkVMX0RJUn0vQ09QWUlORyAke1N9DQorfQ0KKw0KK2RvX2NvbXBpbGUoKSB7DQorICAgICAgIHNl
-ZCAtaSAncyNNU1JIRUFERVIjIm1zci1pbmRleC5oIiMnIHR1cmJvc3RhdC5jDQorICAgICAgIHNl
-ZCAtaSAncyNJTlRFTF9GQU1JTFlfSEVBREVSIyJpbnRlbC1mYW1pbHkuaCIjJyB0dXJib3N0YXQu
-Yw0KKyAgICAgICBzZWQgLWkgJ3MjXCQoQ0MpIFwkKENGTEFHUykgXCQ8IC1vIFwkKEJVSUxEX09V
-VFBVVCkvXCRAI1wkKENDKSBcJChDRkxBR1MpIFwkKExERkxBR1MpIFwkPCAtbyBcJChCVUlMRF9P
-VVRQVVQpL1wkQCMnIE1ha2VmaWxlDQorICAgICAgIG9lX3J1bm1ha2UgU1RBR0lOR19LRVJORUxf
-RElSPSR7U1RBR0lOR19LRVJORUxfRElSfQ0KK30NCisNCitkb19pbnN0YWxsKCkgew0KKyAgICAg
-ICBvZV9ydW5tYWtlIERFU1RESVI9IiR7RH0iIGluc3RhbGwNCit9DQotLQ0KMi4xMS4wDQoNCi0t
-DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVt
-YmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGlu
-Zm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
+Hi=0A=0AI'm using meta-qt5 and meta-raspberrypi layers to build an image =
+for Rapberry Pi 3. The image contains PyQt app running with eglfs plugin.=
+=0AStarting from QT 5.9.4 (commit e1046125d212a016d96944ff907e17d51a5b41a=
+f on rocko branch), QtWebEngine view started to crash with SEGV_MAPERR. T=
+he error also occurs with QT 5.10.1 built from the sumo branch:=0A=0ARece=
+ived signal 11 SEGV_MAPERR 000000000000=0A#0 0x000072a7ab4a <unknown>=0A#=
+1 0x000072a7a9c6 <unknown>=0A#2 0x000071eda2c8 <unknown>=0A#3 0x000072a7a=
+dc2 <unknown>=0A#4 0x000076bb4d30 <unknown>=0A[end of stack trace]=0ACall=
+ing _exit(1). Core file will not be generated.=0A=0AI posted a bug report=
+ on QT tracker with more details about the crash: https://bugreports.qt.i=
+o/browse/QTBUG-68484 (https://bugreports.qt.io/browse/QTBUG-68484)=0ABut =
+maybe something is wrong with my configuration and I have to update it?=
+=0A=0AI'm using core-image-minimal with several modifications. Here is my=
+ qtbase_git.bbappend:=0A=0APACKAGECONFIG_GL =3D "eglfs gles2"=0APACKAGECO=
+NFIG_append =3D " fontconfig=20"
 
