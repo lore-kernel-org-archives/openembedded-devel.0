@@ -1,49 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DD1EC60777
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B5AF860745
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 16:40:34 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id k86-v6so11964667qkh.13
+	Tue, 29 May 2018 16:50:26 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id z75-v6so11996516qkb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 09:40:36 -0700 (PDT)
+	Tue, 29 May 2018 09:50:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=neHFGu0HIvzIEUEVwLT+NBBA3e4wWMGo7HXpfDssAEc=;
-	b=fy2jO8y6mChu8ipqpmpdyUykdPG52AK4QiRDhH/+2R8BBdSjET8tbbJPXn/uLS/lxP
-	WyPGEMivYy853QrQmFuGzmOITLwwkK3p3puogyAXN/CbzICZY7E5HOCNgpZi82plzOn5
-	n2UXWWibanOj40aKxd5Rv3HaG/rZfHZeelF2TQt+sVnzUW8AiblOKN7ZZpN/9o/mmdAd
-	CfQ+qfXSdknyurG4LEMKHEvMYMnpAv64K/A4V8Ck3JrSZ19OkeIcIQdoI/VAFzoQbX9c
-	ptNncgkVluZuCBigsWIu8YZIhI0Qd57tZTCvpz89vHzRp9Oz132oNPEm5IaVCp0I4raR
-	DrBg==
+	:cc:content-transfer-encoding;
+	bh=l+9YoDrAsaz+WPIFZ+UFvV0w1v9TPgiS5J7Tvh59BUg=;
+	b=N1DwH5VdMAw2pmyx2BHTLk3d233YPcy8lA6PeLzetzWPGrVNo8b07/qSJNQ5/kZzHD
+	DGy3WXDuYfepLbpjZo4/yuc5wBA2Qphq6wkiSf+uSofbtcdw9y64TPeCp/c2d1QbTWaP
+	gaB/uFR5GYNsrS59VviKP8BIIHDXfBE1hmGLoekAFVThwBygNdidnpq4rPdQxNzIQf3r
+	VREfrPKFVMvn32P5WwTuz+v4IUeHk3XnDcBL3qAt8zFDLqvgV4jlIOzfjzVf7sdQyMA3
+	0rfqtefgksoMEqt45DzzVofRAXpIH0iRGjKesmYR2Ci/l5VKLfnXHs04a1knM6Sh6h6F
+	v6Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=neHFGu0HIvzIEUEVwLT+NBBA3e4wWMGo7HXpfDssAEc=;
-	b=h8WdLPA9ClQvKnifYDSgyu0hfZKjp+4PBXT8At7ARiaBI2mv4H/gYdASLU26/xrPLa
-	LWF+t1bLMfktKw3spQfk2apRr2QL4ZWdJaRCgvAGZHf+ZYkCEchfjYNkRzZPndTpQGQL
-	vy44BadbsQZ+XWBzJIRxxSMZfY20XB5Ok2Rxm+C1LfZyOWsv3kj6OkD227Yt47wBF6i2
-	CzfZ7uWVocAmn9xImtgRuNFFyYN7Y+8vkrzaPrDszJ1wM81h6qLqKyEF1+jIRfc/fVTp
-	jDw+kozKS/bSVGn2xG8zpqZzlxuiDAS+HHbWDqAlWd4QSTebDqsLy5/rtnSFs5xZR7HF
-	sj4Q==
-X-Gm-Message-State: ALKqPwcmLdOTJBSVv473AVixYjwbs3pibWdyvM0exOvcVUx3ztVhV8/W
-	keNXiXCOx3AfOUYLyJs8pGujE6jfJuDrZMI/eHE=
-X-Google-Smtp-Source: ADUXVKJOinm1DAXNXCOatbsjZMKa03mP22XEw0hmvM/1Icg3c+LwBNhpnLMXrZK8dZCw8hf2PhX0akh0dr7NojqXdmo=
-X-Received: by 2002:a37:3889:: with SMTP id
-	f131-v6mr15035562qka.12.1527612035288; 
-	Tue, 29 May 2018 09:40:35 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=l+9YoDrAsaz+WPIFZ+UFvV0w1v9TPgiS5J7Tvh59BUg=;
+	b=E+AsDMdClAweOyzFyvOCX/Aa6Ve7StpGyWTTL4TKzvTijaL5kxlxmPzaQ3EhJ2p7VB
+	xD1c+LrihIybiH+q33qikCEGpiulg/VqJu+CVR4CE4K8f5z0P8rAhuetGXKLW6ZUlx/2
+	SwSWbt6NLugjbceBLeqLD/eg4GCEHhGbCvIJw3/br/IttVSLjQiXt9QlEKrQ3G1RshkG
+	wdpWL0jjWR2F91UV8LpV8cuyOeu1nxs1RSUtpVTe4+kTcO2ryHYW40fjfnVTwNdpAAjS
+	AdTNLyEkp9yoQ4RYcDS8BHZ43nOxVVIFWdjmyqQXWsznDJSAy+TXm65+gG9uhHTv/+Ip
+	shMg==
+X-Gm-Message-State: ALKqPwellHk4btQ3F9LNN6C25bTbdpEWxzrkg6xJ/8uHhQCzEef/ZW4e
+	hl0TlOQ1n24nXgQ58wbePHuCxg4BPdvKchlv/UA=
+X-Google-Smtp-Source: ADUXVKJuzfSq6X8X74WI7dUO3CPOeirQHRmz/+u8BbumAuK8SpH7PNEWAjT5tridBURS0Wj1wGQgAKIbfXCthyvGmY8=
+X-Received: by 2002:a37:95c6:: with SMTP id
+	x189-v6mr15494658qkd.110.1527612627156; 
+	Tue, 29 May 2018 09:50:27 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a0c:9a0f:0:0:0:0:0 with HTTP; Tue, 29 May 2018 09:40:04
+Received: by 2002:a0c:9a0f:0:0:0:0:0 with HTTP; Tue, 29 May 2018 09:49:56
 	-0700 (PDT)
-In-Reply-To: <1527600941-1521-1-git-send-email-krzk@kernel.org>
-References: <1527600941-1521-1-git-send-email-krzk@kernel.org>
+In-Reply-To: <2230562d-1e75-df96-b56d-108f55bdbe6e@windriver.com>
+References: <1527234893-8733-1-git-send-email-yi.zhao@windriver.com>
+	<1527234893-8733-3-git-send-email-yi.zhao@windriver.com>
+	<2230562d-1e75-df96-b56d-108f55bdbe6e@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 May 2018 09:40:04 -0700
-Message-ID: <CAMKF1sqPhonFVTVhMtmbpiGhySrbYkPjERcoOWWAeroxSaRvcg@mail.gmail.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Tue, 29 May 2018 09:49:56 -0700
+Message-ID: <CAMKF1sp+8BRXdxEaQpfCaEJeyHqKKUv=8Fm1MJDx2TyEr1fO-A@mail.gmail.com>
+To: Yi Zhao <yi.zhao@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] broadcom-bt-firmware: Add new recipe for Broadcom Bluetooth firmwares
+Subject: Re: [meta-networking][PATCH 02/12] geoip-perl: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,119 +59,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2018 16:40:35 -0000
+X-List-Received-Date: Tue, 29 May 2018 16:50:27 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Previous version is now upstreamed. Please send the delta rebased on
-top of the prior version in a v3
+On Tue, May 29, 2018 at 12:09 AM, Yi Zhao <yi.zhao@windriver.com> wrote:
+>
+>
+> =E5=9C=A8 2018=E5=B9=B405=E6=9C=8825=E6=97=A5 15:54, Yi Zhao =E5=86=99=E9=
+=81=93:
+>>
+>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>> ---
+>>   meta-networking/recipes-support/geoip/geoip-perl_1.50.bb | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+>> b/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+>> index a8c8bcf..0a89be5 100644
+>> --- a/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+>> +++ b/meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+>> @@ -18,6 +18,9 @@ SRC_URI =3D
+>> "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz;downlo
+>>   SRC_URI[md5sum] =3D "2d7f8b1b54e6ba6d9e3fefce52675815"
+>>   SRC_URI[sha256sum] =3D
+>> "86da0dd67f417a43dc70f15a49bd3619f668970c117b9e7f737b4ab246c240a6"
+>>   +UPSTREAM_CHECK_URI =3D "https://github.com/maxmind/geoip-api-perl/tag=
+s"
+>> +UPSTREAM_CHECK_GITTAGREGEX =3D "(?P<pver>\d+(\.\d+)+)"
+>
+>
+> The UPSTREAM_CHECK_GITTAGREGEX should be removed. I had sent V2 patch.
 
-On Tue, May 29, 2018 at 6:35 AM, Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> Several Broadcom Bluetooth USB dongles require firmware to be loaded.
-> This recipe provides the firmware for BCM20702, BCM20703, BCM43142,
-> BCM4335, BCM4350, BCM4356 and BCM4371 based devices.
->
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
->
-> ---
->
-> Changes since v1:
-> 1. Rebase on sumo
->
-> The patch is also available here:
-> https://github.com/krzk/meta-openembedded/commits/broadcom-bt-v2
-> ---
->  .../broadcom-bt-firmware_git.bb                    | 76 ++++++++++++++++++++++
->  1 file changed, 76 insertions(+)
->  create mode 100644 meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
->
-> diff --git a/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
-> new file mode 100644
-> index 000000000000..8c474ecdc472
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/broadcom-bt-firmware/broadcom-bt-firmware_git.bb
-> @@ -0,0 +1,76 @@
-> +# Copyright (C) 2018 Krzysztof Kozlowski <krzk@kernel.org>
-> +# Released under the MIT license (see COPYING.MIT for the terms)
-> +
-> +SUMMARY = "Broadcom Bluetooth firmware files"
-> +DESCRIPTION = "Firmware for Broadcom Bluetooth devices. Note that in case of BT+WiFi devices, separate WiFi firmware might be needed."
-> +HOMEPAGE = "https://github.com/winterheart/broadcom-bt-firmware"
-> +
-> +LICENSE = "Firmware-Broadcom-WIDCOMM"
-> +NO_GENERIC_LICENSE[Firmware-Broadcom-WIDCOMM] = "LICENSE.broadcom_bcm20702"
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f8a48b619d"
-> +SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git"
-> +SRCREV = "c0bd928b8ae5754b6077c99afe6ef5c949a58f32"
-> +PE = "1"
-> +PV = "0.0+git${SRCPV}"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit allarch
-> +
-> +CLEANBROKEN = "1"
-> +
-> +do_compile() {
-> +    :
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${nonarch_base_libdir}/firmware/brcm/
-> +    cp brcm/*.hcd ${D}${nonarch_base_libdir}/firmware/brcm/
-> +
-> +    # For license package:
-> +    install -m 0644 LICENSE.broadcom_bcm20702 ${D}${nonarch_base_libdir}/firmware/brcm/
-> +
-> +    # For main package:
-> +    install -m 0644 DEVICES.md ${D}${nonarch_base_libdir}/firmware/brcm/
-> +}
-> +
-> +PACKAGES =+ " \
-> +    ${PN}-bcm20702a1 \
-> +    ${PN}-bcm20702b0 \
-> +    ${PN}-bcm20703a1 \
-> +    ${PN}-bcm43142a0 \
-> +    ${PN}-bcm4335c0 \
-> +    ${PN}-bcm4350c5 \
-> +    ${PN}-bcm4356a2 \
-> +    ${PN}-bcm4371c2 \
-> +    ${PN}-license \
-> +"
-> +
-> +RDEPENDS_${PN}-bcm20702a1 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm20702b0 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm20703a1 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm43142a0 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm4335c0 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm4350c5 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm4356a2 = "${PN}-license"
-> +RDEPENDS_${PN}-bcm4371c2 = "${PN}-license"
-> +
-> +FILES_${PN}-bcm20702a1 = "${nonarch_base_libdir}/firmware/brcm/BCM20702A1*hcd"
-> +FILES_${PN}-bcm20702b0 = "${nonarch_base_libdir}/firmware/brcm/BCM20702B0*hcd"
-> +FILES_${PN}-bcm20703a1 = "${nonarch_base_libdir}/firmware/brcm/BCM20703A1*hcd"
-> +FILES_${PN}-bcm43142a0 = "${nonarch_base_libdir}/firmware/brcm/BCM43142A0*hcd"
-> +FILES_${PN}-bcm4335c0 = "${nonarch_base_libdir}/firmware/brcm/BCM4335C0*hcd"
-> +FILES_${PN}-bcm4350c5 = "${nonarch_base_libdir}/firmware/brcm/BCM4350C5*hcd"
-> +FILES_${PN}-bcm4356a2 = "${nonarch_base_libdir}/firmware/brcm/BCM4356A2*hcd"
-> +FILES_${PN}-bcm4371c2 = "${nonarch_base_libdir}/firmware/brcm/BCM4371C2*hcd"
-> +FILES_${PN}-license += "${nonarch_base_libdir}/firmware/brcm/LICENSE.broadcom_bcm20702"
-> +
-> +FILES_${PN} += "${nonarch_base_libdir}/firmware/brcm/*"
-> +RDEPENDS_${PN} += "${PN}-license"
-> +
-> +# Make broadcom-bt-firmware depend on all of the split-out packages.
-> +python populate_packages_prepend () {
-> +    firmware_pkgs = oe.utils.packages_filter_out_system(d)
-> +    d.appendVar('RDEPENDS_broadcom-bt-firmware', ' ' + ' '.join(firmware_pkgs))
-> +}
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Please rebase it on top of current master and send a v3
 
