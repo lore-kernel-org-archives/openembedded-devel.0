@@ -1,48 +1,49 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C19D574E1A
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id B95B274E29
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 08:34:57 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id f8-v6so46174823wmc.4
+	Wed, 30 May 2018 08:49:39 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id a8-v6so46265803wmg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 01:34:58 -0700 (PDT)
+	Wed, 30 May 2018 01:49:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
 	bh=hB/vye8b5Wg3lt7GTQncAKCK4AEGwqcKMglP+8eiHQw=;
-	b=JymJp0eKL/sUYJQDPRlUraBpPaBH3AMJyeL0W5tkrxz4IltxevWJ9oTHhNZdTj4fOE
-	BaGNQzJ6ajyBfdaAgdli8OtNZ3+QNC2TYit0XD8rvDs1m8FtazLpluQTszKm/Ilq5+Qh
-	ysQ9i74Z0dS9gSFx1sNq8dVm7zrxXnRBy/g1uK84WYi1hY8WXBlvta5NiryZURRcm1Ke
-	WFSo1vDAPUwA28qpIKx1r+fUNLeCvHGx+fDL2mr90ZIR2dav5SOV2YZnGBgOYUKr48Pg
-	ebW6Ghodqefh3h/2XTqFvl5e4v3f9m0YijnvYyniRX5CpflDeD1CraVlvQQ0eSbQXO5v
-	YE8w==
+	b=JAEwlDoI+hvafGOORzJuZD8VvcKleKTL55YkJA+iDyF2ti1+qur9cZZxUwFyr1GrvG
+	1hsJeRC+bPnuFO8QCHx2Hs7rX0X01bgvT+5XFcIbdoIMpIA7MpQXThF3QkRB7CQDSZ/x
+	nySLkwjROB0Yp2allV0MHwUmCPjl4MmDuaBQK6nMJKmIaprDOjEml4VRqp0TBIcYdBX5
+	i1aKQpiuYVU1NadfV1AcpUsAqgCROxCMNNLCW77T9mitsDx53nos2Gv7UzzXhj4i1zqB
+	KKc8ROWoJw7Quq0PnIQDKjtvGJnhOxrtBIyqTF4hCqMkIHlZ3ocn0jKYAEHm8HtrTDx0
+	gpVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=hB/vye8b5Wg3lt7GTQncAKCK4AEGwqcKMglP+8eiHQw=;
-	b=pzm1zBpmaxhzZbL8lch/R6sG3gUeYGAu3+JrSnhzo+KnyKXN8tPZ3O6J3urbu/lBEr
-	ivesHyizeoTvcQpV8yudf1EDRDR/+3A38zGgfMufqQmVI/6iB31d34dN2CTTGy5NGrZF
-	XchM7oj7gsCqoo3U1xN5PpeAQiXU/Ce+6tk3KjJ9wjJuF9YtEzMJki0gabvSoyP/WYFs
-	Yeq7PXG3nBcDOqfPsQvIJ8yukibnNNt3//XKMZjfts7uCzBwSXWd1N5uO6WIcSR6N9xP
-	9T4KkEA3QW0Fdp+V1RZmeOk4YdVFi/5GMgfm/nFRqgXrQBahqWUDZSISUYhCFF1eA5o8
-	97BQ==
-X-Gm-Message-State: ALKqPwd7oXUTbixCH/dU6inARFfDql7aM7V98qTXV9l6iF3ChZgJdR6o
-	U9eih/i8vGU8++oi0kW8bVmIivJW
-X-Google-Smtp-Source: ADUXVKJIkKoios9rtLGsHgMHvrFwnqnODKr/BYiHwUSnQDClxMGD4xZKSkMuuAgzP3e4PmMA+YCEXg==
-X-Received: by 2002:a50:fb19:: with SMTP id
-	d25-v6mr2411343edq.117.1527669297676; 
-	Wed, 30 May 2018 01:34:57 -0700 (PDT)
+	b=NaYmOf1ckx4W2SBdNN4ZclaOkPPZM70pNz1ujnXoUEaNmCdSxHtbGTgUIXv5m9UXiI
+	gxIOq9G7tgaE41jM9rdbqvYtF0O9LpbvPBVjC1gaH+q+jEGC654gX4nr1xda7H7FoBdJ
+	CWpzTh96sWfoqt3suJxS6ETLIY2VZawFMWL/bBYVcG1sxpLiqLR8h/fandUO6X4YHzcp
+	wP03JGl5FDNm9COYwivbsYalIHkuOPVjTmPgsFbNtEWqPbgQPE2svpXYowKte8BkTvKG
+	zsmaLxsVFWpX7NM4zD/CleTrKVQQDdN5dmblvXf6w8duhTawOQNORX4xfF8dE0CQ4+eH
+	vQwg==
+X-Gm-Message-State: ALKqPweXpTSp3y6z1H66A6m3vAwbzgwhpge6loP0fFqy1QZLRwl6BY/h
+	nP7lTAPnwANCxkoJ8iYhZJi6cBuv
+X-Google-Smtp-Source: ADUXVKLoefBWxGaEXz22gpMWTEt+2ENlTAr6/mPLMSnzSTnt+MVfSpZsa5Hu8Y6Fkmx+F5qq0l3+aA==
+X-Received: by 2002:a50:b081:: with SMTP id
+	j1-v6mr2489203edd.215.1527670179859; 
+	Wed, 30 May 2018 01:49:39 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
 	by smtp.gmail.com with ESMTPSA id
-	o25-v6sm18685230edq.62.2018.05.30.01.34.56
+	r15-v6sm18602421edq.40.2018.05.30.01.49.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 May 2018 01:34:56 -0700 (PDT)
+	Wed, 30 May 2018 01:49:38 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 May 2018 10:34:54 +0200
-Message-Id: <20180530083454.18598-1-ricardo.ribalda@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Date: Wed, 30 May 2018 10:49:37 +0200
+Message-Id: <20180530084937.19662-1-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.17.0
-Subject: [PATCH] clang: Fix sigsegv of llvm-config on the target
+Subject: [meta-clang][PATCH] clang: Fix sigsegv of llvm-config on the target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2018 08:34:58 -0000
+X-List-Received-Date: Wed, 30 May 2018 08:49:40 -0000
 
 llvm-config is, by default, broken by the SSTATE_SCAN_CMD. This patch
 removes llvm-config from SSTATE_SCAN_FILES.
