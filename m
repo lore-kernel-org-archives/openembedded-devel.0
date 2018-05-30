@@ -1,47 +1,48 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 8853F6067D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f173.google.com (mail-wr0-f173.google.com
+	[209.85.128.173])
+	by mail.openembedded.org (Postfix) with ESMTP id D12A3600EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 08:51:19 +0000 (UTC)
-Received: by mail-lf0-f52.google.com with SMTP id h9-v6so3035776lfc.13
+	Wed, 30 May 2018 11:31:40 +0000 (UTC)
+Received: by mail-wr0-f173.google.com with SMTP id 94-v6so29150762wrf.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 01:51:20 -0700 (PDT)
+	Wed, 30 May 2018 04:31:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=GdYgR1aZJz7HzWHQF/kz7ULjXpEZiU+TufMyWqSjbi8=;
-	b=EJOQEkv219oouiUcQVJ4QtsU808/IqvOJrTIYzl6wI+ZbPVlpSsvmPCBaBPx8lljZn
-	d6BMNPOLvyAgUOHhs2dGQobYhFZ40hjzB/2JvOFpu4s94QsY98l7/gPiqg2vB9TRXV2O
-	IoTTjFW8ijeDCfyzcJ+wufOuQjzlySglO+/XHA3wa4/Dd13LTb4EAfOw2se2egn7owEu
-	5ISCL8GKeG8CYj/BY1Sw5lJZWr42FmlfDlE8Fv33RA/Fbh40BCAbt7xAyimfab53Hgzu
-	ntKPUfDAl5RyeI6ugYnv/137fiZbDqcGf5nYwH4UCPeHyOr293NKqL/mIo48nQB/ml5j
-	m2hQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=d0qQQ9rxmFrcWxtP+v0GzywQj5v6dBUF6NyzxpR6xUY=;
+	b=FOps/7YsTiCCWzYZ5YwDUJ31io53D9NB142lVGnoPhJj2xOgbPXhiurjqiR0zZexjp
+	9lWikHuVhPaG9A1c5SHsDS3iF3A5xScDUEncAy+S+AUaePmSb11V5oPah40ApW/bKwsG
+	RbYegpOMo0/AtH5EqMZOrf9YYUaZs95RFLaRoU3LbIfq2tyQEEW76mFkMkNROD2hs+FX
+	QffJR4WkiguzP1KtuYALeA8JrdRd6H6IwtQ+vdQclayJdgRTvpdG7b0CZNmvjNb10xcI
+	ZWCiZzS26KOkMj+IvLiWzufEwsIKbkVUm8guHI7+a6xpDLxHgGA4EUDGZ2sfgpCcM+42
+	fieg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=GdYgR1aZJz7HzWHQF/kz7ULjXpEZiU+TufMyWqSjbi8=;
-	b=qvAzEDtnlHladbYl/vJ6ISb4J27ji1DpPnSc8/T/g+kcOkia9gZIhnHOZSADj4cEUb
-	iG2ovBmwObCMfyjC4jfx4tVsOVs+gXSyzXzDyfUSgU6SLx1W8Z++p1XD0CkE1Mz/i7w6
-	JZ57R8h/SvLzbIuwqKKtEGBwPOguRyojkPTjQYBvqwRuflpK71P525CEZYnVF+2jycbg
-	pmiaffcOrJ/dmHnWYY2xwI1ASv2CWl7/7XRBaei4fSTOQu/hixDrCLcDZP3DIv27dW5v
-	aE7TkQw7lJuBWqGzZjQkNzJ6Osvt3BBoCmfmwct2QrE0r7gBVeNt7+TmflRUu2Z/vcUc
-	/vug==
-X-Gm-Message-State: ALKqPwfSZcYpGZPSIFeYsGLUnzTg6mYF1xxizeHSp6A/hm6V1ETmLd9j
-	BYCjsVnnlk0VZWMfXFi2uDU/vlN8NmrlRxFXAEKyfA==
-X-Google-Smtp-Source: ADUXVKLhHptUsXyfRiDBUwp/7iV+9papxnHg7pVxbkMQbXjS1LiEtTaXsSeY+6LtPK0B9RKdnpVRLDCxqMY+txTDcT8=
-X-Received: by 2002:a2e:1dd9:: with SMTP id
-	w86-v6mr1389638lje.110.1527670279481; 
-	Wed, 30 May 2018 01:51:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180530084937.19662-1-ricardo.ribalda@gmail.com>
-In-Reply-To: <20180530084937.19662-1-ricardo.ribalda@gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Wed, 30 May 2018 10:51:02 +0200
-Message-ID: <CAPybu_0xcxOS4n_srFpPfejbFE6Zk5ts=9Rp+xVMrtqrkbzu+A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
-Subject: Re: [meta-clang][PATCH] clang: Fix sigsegv of llvm-config on the target
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=d0qQQ9rxmFrcWxtP+v0GzywQj5v6dBUF6NyzxpR6xUY=;
+	b=R4RSdGlqo+15SWM9hTLRHLypprk07E+abX1W6+S33m3vebF9fE5mdgTgaJ63JT5X7V
+	+QXEz+U6nVqZlVfajofyMXl1JXOcZK+Ox/hWZD6V2UqIJX97T9ukx/mFBzWIma/2TOra
+	jH8aJSyV1B9QBuiaqAbnWYNwujNT8kOOmhrImK4295pXQWa2bGZ/0LtWVFBY6HtWRZnP
+	Gh9+O9HvHCUfdY5ic9mu3gYeIkEyfCiShLKKMAE9vcOtLOPM6ZIN5VByis1zXp+n7iZZ
+	aLpFigDmWrJQKmvoEeC8XozGoIWM7P0HmcF7LydjL2Smw+O95akZhl2FXMdM38YbCTdM
+	835w==
+X-Gm-Message-State: ALKqPwcBLXuhR7RpJjb2kydJjPRJ5omyHkSOlcsRwV7rDRUP2OY47tfV
+	uxCPLY7MibT3j9sorLvFNkAvvQ==
+X-Google-Smtp-Source: ADUXVKLb/qYT31CtZHvUm5OSQs7uTT1eaBxWgaHh0Navrev4oZcfjNKNpnRfwLLhKhgnM7+qYNg02Q==
+X-Received: by 2002:adf:8143:: with SMTP id
+	61-v6mr1733480wrm.192.1527679901216; 
+	Wed, 30 May 2018 04:31:41 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	x130-v6sm25377753wme.24.2018.05.30.04.31.39
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 30 May 2018 04:31:40 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 May 2018 11:31:25 +0000
+Message-Id: <20180530113126.2954-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Subject: [meta-oe][resend][PATCH 1/2] Revert "libxml++: only include when x11 in DISTRO_FEATURES"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,36 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2018 08:51:20 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 30 May 2018 11:31:41 -0000
 
-Sorry for the spam. The SOB is missing this this patch. Shall I resend?
-On Wed, May 30, 2018 at 10:49 AM Ricardo Ribalda Delgado <
-ricardo.ribalda@gmail.com> wrote:
+This reverts commit 44ece3daea4028e72473b6316ba3c7c54d833166.
+---
+ meta-oe/recipes-core/libxml/libxml++_2.40.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> llvm-config is, by default, broken by the SSTATE_SCAN_CMD. This patch
-> removes llvm-config from SSTATE_SCAN_FILES.
-> ---
->   recipes-devtools/clang/clang_git.bb | 3 +++
->   1 file changed, 3 insertions(+)
-
-> diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/
-clang_git.bb
-> index 5730b9b..3e2d2c7 100644
-> --- a/recipes-devtools/clang/clang_git.bb
-> +++ b/recipes-devtools/clang/clang_git.bb
-> @@ -158,3 +158,6 @@ FILES_${PN}-dev += "\
-
->   INSANE_SKIP_${PN} += "already-stripped"
->   INSANE_SKIP_${PN}-dev += "dev-elf"
-> +
-> +#Avoid SSTATE_SCAN_COMMAND running sed over llvm-config.
-> +SSTATE_SCAN_FILES_remove = "*-config"
-> --
-> 2.17.0
-
-
-
+diff --git a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
+index a38315c4d5..c001c184cb 100644
+--- a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
++++ b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
+@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f3
+ 
+ DEPENDS = "libxml2 glibmm"
+ 
+-inherit distro_features_check autotools pkgconfig ptest
++inherit autotools pkgconfig ptest
+ 
+ do_compile_ptest() {
+   oe_runmake -C examples buildtest
 -- 
-Ricardo Ribalda
+2.17.0
+
 
