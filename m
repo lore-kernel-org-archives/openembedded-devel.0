@@ -1,44 +1,23 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 134CA74AD4
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 940EF6006A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 06:12:59 +0000 (UTC)
-Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
-	[209.85.128.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id B538C20899
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 06:13:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1527660781;
-	bh=aLu9t9tFxYP0uibJ4wazArwz0UF2TIeOIm/7FyJMpI0=;
-	h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
-	b=ayb/nSUXkfAhN2SnqaLK3X9nK6MEhIUBPWcJ+v/y0kjVRaLI/cXv93BROGNCqCwAS
-	i717POUuIvVEggGoClARBhTEtzWXuQvD7j71q4KdEFLtayJyMZKTFk7mE5S9KH0XM7
-	ufKuFGyD+LnHTZBwUt57zP6TixJsc6i22/l2zPd4=
-Received: by mail-wr0-f172.google.com with SMTP id l41-v6so28230781wre.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 23:13:00 -0700 (PDT)
-X-Gm-Message-State: ALKqPwcvqhsjiF0eTsJKOkQsMeC/M2nVZhNL7iHhchVSR9e/5sBSVfJR
-	C7DZUPQUqbOy1hBRXwvXDfoNAO0Juf4I6u93PYE=
-X-Google-Smtp-Source: ADUXVKJcYqYAqLLDXaP6uCXBT9W4mzDcSSKuoSrGQaHfi2HkwmUwEp+JzaBWsSfUgZlBoVQBfTGiunlVdxYGbwoFotk=
-X-Received: by 2002:adf:f391:: with SMTP id
-	m17-v6mr862810wro.279.1527660779180; 
-	Tue, 29 May 2018 23:12:59 -0700 (PDT)
+	Wed, 30 May 2018 06:21:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w4U6L3bG003702
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 29 May 2018 23:21:03 -0700 (PDT)
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Tue, 29 May 2018 23:21:02 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
+Date: Wed, 30 May 2018 14:20:52 +0800
+Message-ID: <1527661260-29811-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 2002:adf:9166:0:0:0:0:0 with HTTP; Tue, 29 May 2018 23:12:58
-	-0700 (PDT)
-In-Reply-To: <CAMKF1sqPhonFVTVhMtmbpiGhySrbYkPjERcoOWWAeroxSaRvcg@mail.gmail.com>
-References: <1527600941-1521-1-git-send-email-krzk@kernel.org>
-	<CAMKF1sqPhonFVTVhMtmbpiGhySrbYkPjERcoOWWAeroxSaRvcg@mail.gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Date: Wed, 30 May 2018 08:12:58 +0200
-X-Gmail-Original-Message-ID: <CAJKOXPfDcYauEWwh2biKq6thE3QSF=OC=96k2O1QYyq6V1CWmg@mail.gmail.com>
-Message-ID: <CAJKOXPfDcYauEWwh2biKq6thE3QSF=OC=96k2O1QYyq6V1CWmg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] broadcom-bt-firmware: Add new recipe for Broadcom Bluetooth firmwares
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-networking][PATCH 0/8] add UPSTREAM_CHECK_URI for recipes (Part 2)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,15 +30,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2018 06:13:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 30 May 2018 06:21:04 -0000
+Content-Type: text/plain
 
-On Tue, May 29, 2018 at 6:40 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Previous version is now upstreamed. Please send the delta rebased on
-> top of the prior version in a v3
+Some recipes can not get upstream version with bitbake foo -c checkpkg. Add UPSTREAM_CHECK_URI for these recipes.
 
-I missed that it is already applied, sorry for the noise then.
+Yi Zhao (8):
+  corosync: add UPSTREAM_CHECK_REGEX
+  libdnet: add UPSTREAM_CHECK_GITTAGREGEX
+  netcf: add UPSTREAM_CHECK_GITTAGREGEX
+  strongswan: add UPSTREAM_CHECK_REGEX
+  c-ares: add UPSTREAM_CHECK_GITTAGREGEX
+  cyrus-sasl: add UPSTREAM_CHECK_REGEX
+  drbd-utils: add UPSTREAM_CHECK_URI
+  snort: add UPSTREAM_CHECK_URI
 
-Best regards,
-Krzysztof
+ meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb    | 2 ++
+ meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb     | 3 +++
+ meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 2 ++
+ meta-networking/recipes-extended/corosync/corosync_2.4.3.bb     | 2 ++
+ meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb         | 2 ++
+ meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb        | 2 ++
+ meta-networking/recipes-support/netcf/netcf_0.2.8.bb            | 2 ++
+ meta-networking/recipes-support/strongswan/strongswan_5.6.2.bb  | 2 ++
+ 8 files changed, 17 insertions(+)
+
+-- 
+2.7.4
+
 
