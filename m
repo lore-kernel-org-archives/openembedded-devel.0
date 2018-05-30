@@ -1,49 +1,47 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id B95B274E29
+Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
+	[209.85.215.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 8853F6067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 08:49:39 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id a8-v6so46265803wmg.5
+	Wed, 30 May 2018 08:51:19 +0000 (UTC)
+Received: by mail-lf0-f52.google.com with SMTP id h9-v6so3035776lfc.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 01:49:40 -0700 (PDT)
+	Wed, 30 May 2018 01:51:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=hB/vye8b5Wg3lt7GTQncAKCK4AEGwqcKMglP+8eiHQw=;
-	b=JAEwlDoI+hvafGOORzJuZD8VvcKleKTL55YkJA+iDyF2ti1+qur9cZZxUwFyr1GrvG
-	1hsJeRC+bPnuFO8QCHx2Hs7rX0X01bgvT+5XFcIbdoIMpIA7MpQXThF3QkRB7CQDSZ/x
-	nySLkwjROB0Yp2allV0MHwUmCPjl4MmDuaBQK6nMJKmIaprDOjEml4VRqp0TBIcYdBX5
-	i1aKQpiuYVU1NadfV1AcpUsAqgCROxCMNNLCW77T9mitsDx53nos2Gv7UzzXhj4i1zqB
-	KKc8ROWoJw7Quq0PnIQDKjtvGJnhOxrtBIyqTF4hCqMkIHlZ3ocn0jKYAEHm8HtrTDx0
-	gpVA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=GdYgR1aZJz7HzWHQF/kz7ULjXpEZiU+TufMyWqSjbi8=;
+	b=EJOQEkv219oouiUcQVJ4QtsU808/IqvOJrTIYzl6wI+ZbPVlpSsvmPCBaBPx8lljZn
+	d6BMNPOLvyAgUOHhs2dGQobYhFZ40hjzB/2JvOFpu4s94QsY98l7/gPiqg2vB9TRXV2O
+	IoTTjFW8ijeDCfyzcJ+wufOuQjzlySglO+/XHA3wa4/Dd13LTb4EAfOw2se2egn7owEu
+	5ISCL8GKeG8CYj/BY1Sw5lJZWr42FmlfDlE8Fv33RA/Fbh40BCAbt7xAyimfab53Hgzu
+	ntKPUfDAl5RyeI6ugYnv/137fiZbDqcGf5nYwH4UCPeHyOr293NKqL/mIo48nQB/ml5j
+	m2hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hB/vye8b5Wg3lt7GTQncAKCK4AEGwqcKMglP+8eiHQw=;
-	b=NaYmOf1ckx4W2SBdNN4ZclaOkPPZM70pNz1ujnXoUEaNmCdSxHtbGTgUIXv5m9UXiI
-	gxIOq9G7tgaE41jM9rdbqvYtF0O9LpbvPBVjC1gaH+q+jEGC654gX4nr1xda7H7FoBdJ
-	CWpzTh96sWfoqt3suJxS6ETLIY2VZawFMWL/bBYVcG1sxpLiqLR8h/fandUO6X4YHzcp
-	wP03JGl5FDNm9COYwivbsYalIHkuOPVjTmPgsFbNtEWqPbgQPE2svpXYowKte8BkTvKG
-	zsmaLxsVFWpX7NM4zD/CleTrKVQQDdN5dmblvXf6w8duhTawOQNORX4xfF8dE0CQ4+eH
-	vQwg==
-X-Gm-Message-State: ALKqPweXpTSp3y6z1H66A6m3vAwbzgwhpge6loP0fFqy1QZLRwl6BY/h
-	nP7lTAPnwANCxkoJ8iYhZJi6cBuv
-X-Google-Smtp-Source: ADUXVKLoefBWxGaEXz22gpMWTEt+2ENlTAr6/mPLMSnzSTnt+MVfSpZsa5Hu8Y6Fkmx+F5qq0l3+aA==
-X-Received: by 2002:a50:b081:: with SMTP id
-	j1-v6mr2489203edd.215.1527670179859; 
-	Wed, 30 May 2018 01:49:39 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id
-	r15-v6sm18602421edq.40.2018.05.30.01.49.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 May 2018 01:49:38 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=GdYgR1aZJz7HzWHQF/kz7ULjXpEZiU+TufMyWqSjbi8=;
+	b=qvAzEDtnlHladbYl/vJ6ISb4J27ji1DpPnSc8/T/g+kcOkia9gZIhnHOZSADj4cEUb
+	iG2ovBmwObCMfyjC4jfx4tVsOVs+gXSyzXzDyfUSgU6SLx1W8Z++p1XD0CkE1Mz/i7w6
+	JZ57R8h/SvLzbIuwqKKtEGBwPOguRyojkPTjQYBvqwRuflpK71P525CEZYnVF+2jycbg
+	pmiaffcOrJ/dmHnWYY2xwI1ASv2CWl7/7XRBaei4fSTOQu/hixDrCLcDZP3DIv27dW5v
+	aE7TkQw7lJuBWqGzZjQkNzJ6Osvt3BBoCmfmwct2QrE0r7gBVeNt7+TmflRUu2Z/vcUc
+	/vug==
+X-Gm-Message-State: ALKqPwfSZcYpGZPSIFeYsGLUnzTg6mYF1xxizeHSp6A/hm6V1ETmLd9j
+	BYCjsVnnlk0VZWMfXFi2uDU/vlN8NmrlRxFXAEKyfA==
+X-Google-Smtp-Source: ADUXVKLhHptUsXyfRiDBUwp/7iV+9papxnHg7pVxbkMQbXjS1LiEtTaXsSeY+6LtPK0B9RKdnpVRLDCxqMY+txTDcT8=
+X-Received: by 2002:a2e:1dd9:: with SMTP id
+	w86-v6mr1389638lje.110.1527670279481; 
+	Wed, 30 May 2018 01:51:19 -0700 (PDT)
+MIME-Version: 1.0
+References: <20180530084937.19662-1-ricardo.ribalda@gmail.com>
+In-Reply-To: <20180530084937.19662-1-ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Date: Wed, 30 May 2018 10:49:37 +0200
-Message-Id: <20180530084937.19662-1-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.17.0
-Subject: [meta-clang][PATCH] clang: Fix sigsegv of llvm-config on the target
+Date: Wed, 30 May 2018 10:51:02 +0200
+Message-ID: <CAPybu_0xcxOS4n_srFpPfejbFE6Zk5ts=9Rp+xVMrtqrkbzu+A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Khem Raj <raj.khem@gmail.com>
+Subject: Re: [meta-clang][PATCH] clang: Fix sigsegv of llvm-config on the target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,26 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2018 08:49:40 -0000
+X-List-Received-Date: Wed, 30 May 2018 08:51:20 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-llvm-config is, by default, broken by the SSTATE_SCAN_CMD. This patch
-removes llvm-config from SSTATE_SCAN_FILES.
----
- recipes-devtools/clang/clang_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+Sorry for the spam. The SOB is missing this this patch. Shall I resend?
+On Wed, May 30, 2018 at 10:49 AM Ricardo Ribalda Delgado <
+ricardo.ribalda@gmail.com> wrote:
 
-diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/clang_git.bb
-index 5730b9b..3e2d2c7 100644
---- a/recipes-devtools/clang/clang_git.bb
-+++ b/recipes-devtools/clang/clang_git.bb
-@@ -158,3 +158,6 @@ FILES_${PN}-dev += "\
- 
- INSANE_SKIP_${PN} += "already-stripped"
- INSANE_SKIP_${PN}-dev += "dev-elf"
-+
-+#Avoid SSTATE_SCAN_COMMAND running sed over llvm-config.
-+SSTATE_SCAN_FILES_remove = "*-config"
+> llvm-config is, by default, broken by the SSTATE_SCAN_CMD. This patch
+> removes llvm-config from SSTATE_SCAN_FILES.
+> ---
+>   recipes-devtools/clang/clang_git.bb | 3 +++
+>   1 file changed, 3 insertions(+)
+
+> diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/
+clang_git.bb
+> index 5730b9b..3e2d2c7 100644
+> --- a/recipes-devtools/clang/clang_git.bb
+> +++ b/recipes-devtools/clang/clang_git.bb
+> @@ -158,3 +158,6 @@ FILES_${PN}-dev += "\
+
+>   INSANE_SKIP_${PN} += "already-stripped"
+>   INSANE_SKIP_${PN}-dev += "dev-elf"
+> +
+> +#Avoid SSTATE_SCAN_COMMAND running sed over llvm-config.
+> +SSTATE_SCAN_FILES_remove = "*-config"
+> --
+> 2.17.0
+
+
+
 -- 
-2.17.0
-
+Ricardo Ribalda
 
