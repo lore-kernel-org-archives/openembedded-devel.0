@@ -1,59 +1,29 @@
-Return-Path: <andrew@aj.id.au>
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B4DD74C3E
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 36E3374CFB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 22:29:50 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id CC73421B6D;
-	Tue, 29 May 2018 18:29:51 -0400 (EDT)
-Received: from web6 ([10.202.2.216])
-	by compute4.internal (MEProxy); Tue, 29 May 2018 18:29:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=x+qmqw/ClD48Yypg9wZIIu9suI5+y
-	FG2GJJaB3jdE2Q=; b=Z0tPMMsxlAucLKkNVAh9FZmecwyE2GNZ0CoYxELd987zx
-	ep+0fWLAyTjDES7mWW7stvnqEmjwntcznL6ytONgRNCfm3uTiLvYXIP6PaWjCUWm
-	2PBFtrcczmrQxhpDZoG4gA4/Isyapjge9yVHhoMXLPH0e1tOub9dRRDSmNxfhbRc
-	vPeXi+NQlMRztht46W30bd33Zjd8kVEnQgD/DBBzqqBH5+QFpijpgJhX3Y45Wb9b
-	FzduU7v66XOJZwaFGnv063m5udU2iP0mBPeBFxqV+0iM6ADSrjuCsIeQt8oQzAnV
-	dCMN7+SDtgfB9c/U2a9529qL1r4LC1rj/Oo6PJ8jg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:content-type
-	:date:from:in-reply-to:message-id:mime-version:references
-	:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=x+qmqw
-	/ClD48Yypg9wZIIu9suI5+yFG2GJJaB3jdE2Q=; b=ITMpZxv0WuOcpDUCBA4TyG
-	mvI3vJnXRu4wBCCyIdaKI1SOAn5QJzqxY4cUsavbTTzPogKKmgYy1+z8GRh39mMA
-	Rraho23m+Zau7mOfgPqqV0m9HHArhBicLm39tytewxCufjx4n1P/q4hQAJTb/oes
-	k6t2dWgRTVhFEeNKTqtkmmkSRRiJkaD+QHvsFczCa7f2ppRl4VPDxbUo8YHcpXYb
-	gTsPWzW/J0Ls2o2vUD5f37t5D0WhqSSCxBeTVvYkNBZf5STJje/cDY9w0g/hMVxZ
-	9rPC3bkyEI8ed9GJJ0fYj2R/Tw7Fkp930dQry+6OiLSw7Fud8mTnQOoCOno8KLWQ
-	==
-X-ME-Proxy: <xmx:X9QNWyNCFiSFvgzd5iNtfLQzXXbOahinUyQ4l8g3n36f8KSG-K8OgQ>
-X-ME-Proxy: <xmx:X9QNW3GfWErFi3F-2mNEsv8Cc1HBoD2s2qPoJEcMrXoIFgjgYm5vGQ>
-X-ME-Proxy: <xmx:X9QNW-0Q4-t9WIy35uqqxsaYzwFrw5UC5wRr1kQzAq_BRZtUQvTAew>
-X-ME-Proxy: <xmx:X9QNW2HAhNfneUG60oSaTLh2Ag0B6uAUh5qyMcitD2UlVhue0nI4IQ>
-X-ME-Proxy: <xmx:X9QNW3zWNZtMBrEXQTSwcKJtPraUAsGQVYgGUJIB4aGfAbosyhfO4A>
-X-ME-Proxy: <xmx:X9QNWwLQ6vB2CGyq3E3aUBRlJhIj6WFAaWSAgtK_JPk2TBLwPHLR1w>
-X-ME-Sender: <xms:X9QNWxzuEar7SyNwXF2s_sfxv3DfSf5dwdN9W-p15a2B0TGdNRfE5Q>
-Received: by mailuser.nyi.internal (Postfix, from userid 99)
-	id 8CB4D410C; Tue, 29 May 2018 18:29:51 -0400 (EDT)
-Message-Id: <1527632991.3398719.1389731000.5B812F18@webmail.messagingengine.com>
-From: Andrew Jeffery <andrew@aj.id.au>
+	Wed, 30 May 2018 00:04:43 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w4U04h3e001791
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 29 May 2018 17:04:43 -0700 (PDT)
+Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Tue, 29 May 2018 17:04:42 -0700
 To: Khem Raj <raj.khem@gmail.com>
+References: <1527143259-6532-1-git-send-email-yi.zhao@windriver.com>
+	<CAMKF1spw0KO4_EZ3tmyb-nJ4_akM-7xJR=SKKh7BZ4Vr=KtcVA@mail.gmail.com>
+From: Yi Zhao <yi.zhao@windriver.com>
+Message-ID: <585a0716-9ee3-4dd2-1d26-8de9929da16e@windriver.com>
+Date: Wed, 30 May 2018 08:04:39 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface - ajax-397f98d6
-References: <20180510063718.16913-1-andrew@aj.id.au>
-	<1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
-	<CAMKF1sp+qOKAhA3K1OqLuPBwY3w2xNFkzSnoUsEY9okKxT45ow@mail.gmail.com>
-	<1527631428.3392595.1389703584.53FF3C93@webmail.messagingengine.com>
-	<CAMKF1srL5ovf3FfNsk-S83djSY63gG4UyBmqGohvgEfJsW4qGA@mail.gmail.com>
-In-Reply-To: <CAMKF1srL5ovf3FfNsk-S83djSY63gG4UyBmqGohvgEfJsW4qGA@mail.gmail.com>
-Date: Wed, 30 May 2018 07:59:51 +0930
-Cc: openbmc@lists.ozlabs.org,
+In-Reply-To: <CAMKF1spw0KO4_EZ3tmyb-nJ4_akM-7xJR=SKKh7BZ4Vr=KtcVA@mail.gmail.com>
+X-Originating-IP: [128.224.162.137]
+Cc: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@googlemail.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2 1/3] meta-python: Add python-pyflame recipe
+Subject: Re: [meta-multimedia][PATCH] meta-multimedia: update LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,46 +36,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 May 2018 22:29:51 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Wed, 30 May 2018 00:04:44 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Wed, 30 May 2018, at 07:53, Khem Raj wrote:
-> On Tue, May 29, 2018 at 3:03 PM Andrew Jeffery <andrew@aj.id.au> wrote:
->=20
-> >
-> >
-> > On Wed, 30 May 2018, at 02:34, Khem Raj wrote:
-> > > On Tue, May 29, 2018 at 4:48 AM, Andrew Jeffery <andrew@aj.id.au> wro=
-te:
-> > > > On Thu, 10 May 2018, at 16:07, Andrew Jeffery wrote:
-> > > >> Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
-> > > >
-> > > > Ping - is there anything I need to revise for this patch or the
-> > following two?
-> > > >
-> > >
-> > > There was a review comment for you to adress, see
-> > >
-> > > https://patchwork.openembedded.org/patch/150467/
-> > >
-> > > if you have addressed that please send a v3 for whole series.
-> >
-> > That comment is on v1 of the series. This is v2, and I have reworked the
-> > recipe to simply clone the git repo instead of grab the tarball to avoid
-> > the issue that was pointed out.
-> >
->=20
-> Ok thanks I think the v2 seems to be missing in patchwork that=E2=80=99s =
-the reason
-> it will go missed i wonder if you resend than patchwork will catch it
 
-Someone has archived the patches. Here they are:
 
-https://patchwork.openembedded.org/project/oe/patches/?submitter=3D12303&st=
-ate=3D*&q=3Dv2&archive=3Dboth&delegate=3D
+在 2018年05月30日 00:04, Khem Raj 写道:
+> On Wed, May 23, 2018 at 11:27 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
+>> Add meta-oe as LAYERDEPENDS to fix ParseError:
+>> meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb:13:
+>> Could not inherit file classes/dos2unix.bbclass
+>>
+> If thats the only dependency on meta-oe then
+> Perhaps dos2unix class should be migrated to OE-Core. Can you prepare
+> a patch for that instead ?
+OK. I will do it.
 
-Cheers,
+//Yi
 
-Andrew
+>
+> We should try to make these layers independent of each other as much
+> as we can.
+>
+>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>> ---
+>>   meta-multimedia/conf/layer.conf | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
+>> index cfedf2f..24d7a6d 100644
+>> --- a/meta-multimedia/conf/layer.conf
+>> +++ b/meta-multimedia/conf/layer.conf
+>> @@ -28,5 +28,6 @@ BBFILE_PRIORITY_multimedia-layer = "6"
+>>   LAYERVERSION_multimedia-layer = "1"
+>>
+>>   LAYERDEPENDS_multimedia-layer = "core"
+>> +LAYERDEPENDS_multimedia-layer += "openembedded-layer"
+>>
+>>   LAYERSERIES_COMPAT_multimedia-layer = "sumo"
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
