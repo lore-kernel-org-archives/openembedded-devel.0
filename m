@@ -1,24 +1,45 @@
-Return-Path: <psaavedra@igalia.com>
-X-Greylist: delayed 698 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 30 May 2018 22:03:37 UTC
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 0BA9A748AA
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-ot0-f182.google.com (mail-ot0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 44C4F74DA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 22:03:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Message-Id:Date:Subject:To:From;
-	bh=UZbHbZQy/+7Rn6WopYI8UF2tECjixPAh/R5y0EzULbk=; 
-	b=RwA2rOHexFjNRvlIcrsskDvRyi5ng6hA6DeqGnAzsptE14Yg+7wUxiG5ZRcYWPipSdoVzAbxu75Yfq1LLQ1CbP/6ubczoSRxecPv9Cnxc5fJuz0Z3i1ee2Khl2tozXSibN0iKj+IqnS6REUWe3JHKTLeO7I8I2lMvQlMVuoZkw8NM34did+6ih6RIFz4/Ks/qvU55nUx7Qy6ekWHWo6peE1RgqBToyHW1fCxnGVtGMuVktFP5SsAT066lm76YWBkLo+SuXo5ErFLVBbF93dqsvl4gI2qAYoUgtapZj5SdhNJUuU+c6VcH7w/0iK9sYsWvi02oW9byshy5X+JE6GPcw==;
-Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1fO90g-0007OY-Hb
+	Wed, 30 May 2018 23:32:51 +0000 (UTC)
+Received: by mail-ot0-f182.google.com with SMTP id i5-v6so23232250otf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 23:51:58 +0200
-From: Pablo Saavedra <psaavedra@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 May 2018 23:51:50 +0200
-Message-Id: <20180530215150.94182-1-psaavedra@igalia.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-networking][PATCH] Fixed an install error in Samba with LSB distros
+	Wed, 30 May 2018 16:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=nukj+B6mZJAuwkK5brT2ph9G6zZQyjMbs8rzJygrzjE=;
+	b=FoYukPg4fsPDbWlweG+C+86w2p1mcpdPDo4veEMH6+qAszxc+oR7orWokaLTe6aKsK
+	rU0ELZgPetDHJoN2v0qhb2nG1ZPvyhXofwVAim10D574cajbzrUWI3XS8qLKMsbxWVz7
+	l36Jgyi0BFxiBcmhw/koYg60kR0ScQFUF0NnLJKMv4Fizo7hUwYi7reqARGTLyZVkmdF
+	45O5AnUB/pLsrh34lfVXlMmEll/hrQpSegDRl/y5N5qhYFsK3cEgX66vCW47MCMdYcTN
+	iFwbd1ujTEQf5QPtF+kdT8eIxmnGWVXdDx3CdjJTXkr9Xv0T0IPwPuapnqGVs/8VE8Qe
+	27Vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=nukj+B6mZJAuwkK5brT2ph9G6zZQyjMbs8rzJygrzjE=;
+	b=kEne1pGU/KhlZB78KWGkiXK6zH+thMssTk//fUjuNO6u0OGZVa0NQquR3RALzaXhEt
+	CFxVD1jA5h6vDi7L/cLN2U4NsMWqudvusB472xqSSsepCRMTiHV/EzoQJ87h/NmX7UJ0
+	OswthohoZMp9zWrH/7g+zMQf6uDOkW8uPmQkA3gINwmu0RD8TNmTW+YiA34BGwmIqtSh
+	gXm7f89PsmMBLEcJTQs7HJTLHABOgCy2czWhiXCrI2S7YRu0wZzN3O1EyAKj13PWDmPv
+	3gFsx4QwCXsXrJuuQFwnlBWstioKkMltgxCsBpO2+ezlIfrFOBqQF+Z8vIGfGlOlFix9
+	mJAw==
+X-Gm-Message-State: ALKqPwe0E5+EfabcZpbOfIr4oUaGLEPb35dx6N4pOsfr5bhVtFLVpHYU
+	5weqgZ9CkhZOJ+4ooZfxx6j6Gh7BKDSw9m9UvU7G/A==
+X-Google-Smtp-Source: ADUXVKK08zAQpwT6yw0Qgv+banpmDXWJCjMPBFsxkFMvG2ezL72orRUFWpWec3TywgFc5FCsIr3f9vxW8PUcvTLi5Z8=
+X-Received: by 2002:a9d:3a65:: with SMTP id
+	j92-v6mr3325169otc.352.1527723171754; 
+	Wed, 30 May 2018 16:32:51 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ac9:490b:0:0:0:0:0 with HTTP; Wed, 30 May 2018 16:32:51
+	-0700 (PDT)
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 31 May 2018 01:32:51 +0200
+Message-ID: <CALbNGRTZOo_EaPNuQWB0iV-OVUy-uwKgt-PGwBz3O=ROqMZBxQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Avoid version going backwards for beta versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,68 +52,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2018 22:03:38 -0000
+X-List-Received-Date: Wed, 30 May 2018 23:32:51 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-An error in the Samba installation occurs with distros LSB:
+Hi,
 
-    install: cannot stat 'packaging/LSB/samba.sh': No such
-    file or directory
-    exit 1 from 'install -m 0755 packaging/LSB/samba.sh
+There was a pre-release for fluidsynth-2.0.0.beta and I expect the
+release will be fluidsynth-2.0.0. How would I name the beta recipe to
+avoid version going backwards with 2.0.0?
 
-LSB packaging directory was removed in Samba 4.7:
+I know there was a thread where Martin gave hints how to achieve but I
+can't find it - sigh.
 
-  commit 0a23cde8efea06f81c6d34227b71dab627cc87b9
-  Author: Andreas Schneider <asn@samba.org>
-  Date:   Tue May 9 15:48:09 2017 +0200
+Please help a forgetful old man :)
 
-      packaging: Remove LSB packaging
-
-      This hasn't been touched since 2001.
-
-      Signed-off-by: Andreas Schneider <asn@samba.org>
-      Reviewed-by: David Disseldorp <ddiss@samba.org>
-
-This patch removes the conditional 'if' and uses always
-compatible sysv script.
-
-Signed-off-by: Pablo Saavedra <psaavedra@igalia.com>
----
- .../recipes-connectivity/samba/samba_4.7.6.bb       | 21 ++++++++-------------
- 1 file changed, 8 insertions(+), 13 deletions(-)
-
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb b/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb
-index a8517c541..e711e58d0 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb
-@@ -150,19 +150,14 @@ do_install_append() {
-     install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
-     echo "d ${localstatedir}/log/samba 0755 root root -" \
-         >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
--    if [ "${LSB}" = "lsb" ]; then
--        install -d ${D}${sysconfdir}/init.d
--        install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
--    else
--        install -d ${D}${sysconfdir}/init.d
--        install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
--        sed -e 's,/opt/samba/bin,${sbindir},g' \
--            -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
--            -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
--            -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
--            -e 's,/usr/bin,${base_bindir},g' \
--            -i ${D}${sysconfdir}/init.d/samba
--    fi
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
-+    sed -e 's,/opt/samba/bin,${sbindir},g' \
-+        -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
-+        -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
-+        -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
-+        -e 's,/usr/bin,${base_bindir},g' \
-+        -i ${D}${sysconfdir}/init.d/samba
- 
-     install -d ${D}${sysconfdir}/samba
-     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
--- 
-2.11.0
-
+Andreas
 
