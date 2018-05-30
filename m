@@ -1,48 +1,51 @@
 Return-Path: <f.forstmayr@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id CA2A86006A
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 36C6074BF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 06:21:04 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id t11-v6so45582855wmt.0
+	Wed, 30 May 2018 06:21:05 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id a67-v6so45367750wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 May 2018 23:21:05 -0700 (PDT)
+	Tue, 29 May 2018 23:21:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=6SCLhbz15cC8xbPn2IfEEZaNbuWzh0FJLXjg176ZDcc=;
-	b=WUzEDa/ZIHSUbnjyg/NBX6kmhSkHoes5CVj9BJfLJr9v0RGgP9e0oihexqP2066IdP
-	FG+HORk59hC6p9k6ok3G5tTSW5kN03j+XAaJ9w/eYDKvklhFj0oz9c7mhpypIW0mnXZF
-	1Zc3J93CsrjB/K1PZvbuRjz5EjyJ3Zdy5W7Ma9S2xNyy8nbDixf3AYs4SJwcTMH1eHI/
-	61QqhNSGXWO/Xk5CuJOBOmnTUBsTE5GgbWieLv565KzcNmfSCCQN4nHwTIoA/uTuD0s5
-	RdV8oWIGuGCWV0DPo6ae2JUp5lAq6SQODZARg3BMAhA9kChq+dvjBv7HYXeal5iA7ffW
-	ARTw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=KKqrMk26n359PzHJuld+bhOtLPFGT9WTLTLLhWpbQMM=;
+	b=ZfERSXP97rtqqiJo3GlkjOj7ozRiiA0ehO0smJXUPvAIetxR0Qaglncr8YThzaZzHk
+	hnmxHqf9NUfMALEhJR/ZO9cSUJRjgeZN5NWUakUMMEMj0KIO15kD7Vsg39WX2xmjUPiT
+	x7u56RLN0vM6Ezpvb0MtR7j5pPCtRu483K/ww/m/uME2rIWwA/+D+t9dxI36qxSw7at0
+	tsM2+vCMqgwfhCm92hS2kxckbR9ujjzEZAn+w8izqNuvxhdop0Al+Fu/0rQL8o2nVabU
+	ZhJc9eFOaxQecBFP/gy/Yyg01seG+OJOCWScNG+kJleTkTp34jAgnm66RbdjX4DyfDWF
+	aFWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6SCLhbz15cC8xbPn2IfEEZaNbuWzh0FJLXjg176ZDcc=;
-	b=ES2hMMao8q/SgGM0y7mYs8hUrvMONEy0njGzl8cNvaU245uy0BvsMVzsNTDaXhPpsg
-	bLVaOUfjeZYfrc3k3NxDAD9NIWWOLIMa9BcZoQyhOZMqgZ6OrnyJ9jKOTkJmf3PKfw1/
-	MlgM/rhj9MX2oRjkw2nDDDAgIwKCIepQII+8y5WccqHFqVwiaKnaGF9/2kAvwdVviS55
-	w1KYSXx90KCDrNCCqTsWfPB2fK20xpv+70wiEd30qWCAiz4w6QWBtaKkY0HPRMyOLBmU
-	p2/qs+DqdaHxfOe9MDhDq1vsq5t6gWJnmoq9EAcGoNsgtImEpri+m6XixYZCmMFCBJrg
-	Ebmg==
-X-Gm-Message-State: APt69E2QvbjruFaW1FhNoAf7ao48KXa4J6UmoRm5zEIxKIDaVXMhJO91
-	Lsn9+L//9QTesnpZc4GGt5zUpg==
-X-Google-Smtp-Source: ADUXVKKS7niRW+1vOlE3IGW1IoDPkbcEE5ovwj8sSk0jADK/w4G+vmUGSgHWqV2VC5MR29PsfFNuJg==
-X-Received: by 2002:a1c:8ec1:: with SMTP id
-	q184-v6mr463419wmd.104.1527661264753; 
-	Tue, 29 May 2018 23:21:04 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=KKqrMk26n359PzHJuld+bhOtLPFGT9WTLTLLhWpbQMM=;
+	b=eYtvPVNT4P4wVuqAjpbQiZwW+ZX3o44fLzvDmjXEqFE+NwKTcQyVv8dyOO/nyHOSnK
+	70KFKQQZTIttICkHmLFqUKr6mthNeLJg1MYSBsMdnpAZWWVY4Y12f5nusejSCm05G4Ua
+	BiBUBAy/0Q/OTS5nuRvgWKqg6xrZmg915x7OtFeKQCBv0H5UPBabr/qNizstp9JHunYp
+	ki2dIt988SEEktfHHEj2sYV76/fp8xpwHyN9XcISDLEPU1dsPlyzVsTkOlIQO7VIPf1n
+	Lq3BTeDvlVDSLRmILD2Pfv7Q6bshVFNTedlRpf8qQuwjjidj+zCQNFirSUR4Zkx8JQSC
+	159Q==
+X-Gm-Message-State: ALKqPwd9tyyL8OlmXYuDefnyv2/XEN5Cb3ZvdIXeo+f0oRMgAWANPCL0
+	YiWH+nJ/MPSmNJpC3flI41GSIg==
+X-Google-Smtp-Source: ADUXVKKC4fTQhvgfJnoqqHExlJLJgrUy6dOnpxg+leU21vq+p38zzFnTc+LJ2NYjrDMLvQQTYj8BrA==
+X-Received: by 2002:a1c:9e90:: with SMTP id
+	h138-v6mr450723wme.33.1527661266295; 
+	Tue, 29 May 2018 23:21:06 -0700 (PDT)
 Received: from localhost.localdomain ([212.68.101.163])
 	by smtp.gmail.com with ESMTPSA id
-	x16-v6sm14972595wmc.42.2018.05.29.23.21.03
+	x16-v6sm14972595wmc.42.2018.05.29.23.21.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 29 May 2018 23:21:03 -0700 (PDT)
+	Tue, 29 May 2018 23:21:05 -0700 (PDT)
 From: Franz Forstmayr <f.forstmayr@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 May 2018 07:40:26 +0200
-Message-Id: <20180530054028.24766-1-f.forstmayr@gmail.com>
+Date: Wed, 30 May 2018 07:40:27 +0200
+Message-Id: <20180530054028.24766-2-f.forstmayr@gmail.com>
 X-Mailer: git-send-email 2.17.0
+In-Reply-To: <20180530054028.24766-1-f.forstmayr@gmail.com>
+References: <20180530054028.24766-1-f.forstmayr@gmail.com>
 Cc: Franz Forstmayr <franz.forstmayr@rosenberger.com>
-Subject: [meta-python][PATCH 1/3] Added python-periphery package
+Subject: [meta-python][PATCH 2/3] Added python sijax package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,55 +58,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 May 2018 06:21:05 -0000
+X-List-Received-Date: Wed, 30 May 2018 06:21:06 -0000
 
 From: Franz Forstmayr <franz.forstmayr@rosenberger.com>
 
 ---
-This patch adds the python periphery package. 
- meta-python/recipes-devtools/python/python-periphery.inc   | 7 +++++++
- .../recipes-devtools/python/python-periphery_1.1.1.bb      | 4 ++++
- .../recipes-devtools/python/python3-periphery_1.1.1.bb     | 4 ++++
- 3 files changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-periphery.inc
- create mode 100644 meta-python/recipes-devtools/python/python-periphery_1.1.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb
+This patch adds the python sijax package
+ meta-python/recipes-devtools/python/python-sijax.inc  |  8 ++++++++
+ .../recipes-devtools/python/python-sijax_0.3.2.bb     | 11 +++++++++++
+ .../recipes-devtools/python/python3-sijax_0.3.2.bb    |  4 ++++
+ 3 files changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-sijax.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-sijax_0.3.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-sijax_0.3.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-periphery.inc b/meta-python/recipes-devtools/python/python-periphery.inc
+diff --git a/meta-python/recipes-devtools/python/python-sijax.inc b/meta-python/recipes-devtools/python/python-sijax.inc
 new file mode 100644
-index 000000000..539c3579c
+index 000000000..9e46893d8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-periphery.inc
-@@ -0,0 +1,7 @@
-+DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI, I2C, MMIO, Serial) in Linux."
-+HOMEPAGE = "http://pythonhosted.org/python-periphery/"
-+LICENSE = "MIT"
++++ b/meta-python/recipes-devtools/python/python-sijax.inc
+@@ -0,0 +1,8 @@
++DESCRIPTION = "An easy to use AJAX library for Python based on jQuery.ajax"
++HOMEPAGE = "https://github.com/spantaleev/sijax-python"
++LICENSE = "BSD-3-Clause"
 +
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=063846af82b555d48822cf43dc6db6af"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=16e213d75641a392478df50cf0841903"
 +
-+PYPI_PACKAGE = "python-periphery"
++PYPI_PACKAGE = "Sijax"
++inherit pypi
 \ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python-periphery_1.1.1.bb b/meta-python/recipes-devtools/python/python-periphery_1.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-sijax_0.3.2.bb b/meta-python/recipes-devtools/python/python-sijax_0.3.2.bb
 new file mode 100644
-index 000000000..6ae7fed81
+index 000000000..4226c4235
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-periphery_1.1.1.bb
-@@ -0,0 +1,4 @@
-+inherit pypi setuptools
-+require python-periphery.inc
++++ b/meta-python/recipes-devtools/python/python-sijax_0.3.2.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "An easy to use AJAX library for Python based on jQuery.ajax"
++HOMEPAGE = "https://github.com/spantaleev/sijax-python"
++LICENSE = "BSD-3-Clause"
 +
-+SRC_URI[sha256sum] = "fe8f351934edce72cd919b4eb070878ebff551db5e21aea61e0f446101f0a79f"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=16e213d75641a392478df50cf0841903"
++
++PYPI_PACKAGE = "Sijax"
++inherit setuptools
++require python-sijax.inc
++
++SRC_URI[sha256sum] = "11b062f4a8b2aad95c87e7c09e5daf5a6b0d0f08abf9efe5f91a0075c6be7c0d"
 \ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb b/meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-sijax_0.3.2.bb b/meta-python/recipes-devtools/python/python3-sijax_0.3.2.bb
 new file mode 100644
-index 000000000..ba9a95dbf
+index 000000000..24e683372
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-sijax_0.3.2.bb
 @@ -0,0 +1,4 @@
-+inherit pypi setuptools3
-+require python-periphery.inc
++inherit setuptools3
++require python-sijax.inc
 +
-+SRC_URI[sha256sum] = "fe8f351934edce72cd919b4eb070878ebff551db5e21aea61e0f446101f0a79f"
++SRC_URI[sha256sum] = "11b062f4a8b2aad95c87e7c09e5daf5a6b0d0f08abf9efe5f91a0075c6be7c0d"
 \ No newline at end of file
 -- 
 2.17.0
