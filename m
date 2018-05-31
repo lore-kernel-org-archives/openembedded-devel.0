@@ -1,49 +1,28 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-vk0-f45.google.com (mail-vk0-f45.google.com
-	[209.85.213.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 286516058D
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CA769749F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2018 01:10:13 +0000 (UTC)
-Received: by mail-vk0-f45.google.com with SMTP id g72-v6so12315442vke.2
+	Thu, 31 May 2018 01:15:34 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w4V1F9Ys030304
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 May 2018 18:10:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=jhgqxh5w74E+ldn1QVKBwFgsKqelfnDL8ll8v8BpQVU=;
-	b=Vb08VdvmaYkWuzbqCwePm7joggbNUBs173v94R8fhjgO3tACcwd6NSrnUzqJqZMLhZ
-	L3OdmCd7MotJFnRFWZz/9qMPQf2wLrs9MZGWBSh+6ZzMz1tCCSqhzr5F1cLk4otM4Oux
-	oyKtLFU7Ap0edw9wOjXwzf87gxEPJCuSEqsf48RGAt52Ocyi0Zh5kUB+LWViDKRWqUZo
-	Mc2dr1d2nGrOvgsJRqSYmTtAaYgQAvyjZ7aNh96Vv0UgI3Jjv2NMkQN0qeky4u2AMN/I
-	wx9ofdqm01B3tanrsR3P6mtOQQHqXBbTrqoXAOAcycjfY/5MtJ1ZFPXYLI3d06IPDVQG
-	BxmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=jhgqxh5w74E+ldn1QVKBwFgsKqelfnDL8ll8v8BpQVU=;
-	b=QmJHK5jt4PgUOuVVaZyIA0oiqipSgbAm73Xvo9g2rSFCJqYKadXe+WpkVy509C1Dvj
-	IGjTAtQDcGAjaDjumWz3bnS69dQuwCx5ov1IeJ3QRxqSBlqNC0uiYgTM8BwnnS0m9ozX
-	d/h2Cf6uNkKjyREG4YpK0rEEsSUf5GpUmBnbWf5uCa1qQkSEZVU1MiV4mZi9VbGtfmFo
-	Ztzwz8rMIq64ufZtW5c6BL5Bi+uJrfCMnd72q06jgfiLA1ypAUuZyu9AHx5jdLdz/mGY
-	9dSJ0i7vah33jzCbiulQfzF7sfUvaHRI8p8mlosXN2BakZ0tkBNj+0jT0dSjWmrdreYo
-	XQiA==
-X-Gm-Message-State: ALKqPwfJbIM7T4AToskdtUIe4J2xEhg7CKa1YlHVqqm45KJ4e1KxLo9w
-	x0/MF4MQpZL6ZGRcnVtUyW/UdBormgW6EtP2Eqo=
-X-Google-Smtp-Source: ADUXVKLxvkaHgVdTCPY0i8G8ab6Gpfm3BBhdzRReSIr8nA12b2iKDSQf9lMFIDSALwo6BJI2u7D12oOyuIsqD3UM6Eg=
-X-Received: by 2002:a1f:9615:: with SMTP id
-	y21-v6mr2980468vkd.154.1527729014794; 
-	Wed, 30 May 2018 18:10:14 -0700 (PDT)
+	Wed, 30 May 2018 18:15:24 -0700
+Received: from [128.224.162.161] (128.224.162.161) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Wed, 30 May 2018 18:14:58 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <20180528020041.33603-1-hongzhi.song@windriver.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <50b5ba5a-6d57-56b3-616f-75a17d472dd4@windriver.com>
+Date: Thu, 31 May 2018 09:15:50 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Received: by 2002:ab0:28a:0:0:0:0:0 with HTTP;
-	Wed, 30 May 2018 18:10:14 -0700 (PDT)
-In-Reply-To: <20180530171810.205120-1-joe.slater@windriver.com>
-References: <20180530171810.205120-1-joe.slater@windriver.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Wed, 30 May 2018 18:10:14 -0700
-Message-ID: <CAJ86T=Xkq-YPw_iNjQhfkTG_vPYz6RUDEGfXrm9eECiZjJ91ow@mail.gmail.com>
-To: Joe Slater <joe.slater@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] syslog-ng: fix build without json
+In-Reply-To: <20180528020041.33603-1-hongzhi.song@windriver.com>
+X-Originating-IP: [128.224.162.161]
+Subject: Re: [meta-oe][PATCH v3] turbostat: add the recipe of turbostat to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,47 +35,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2018 01:10:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 31 May 2018 01:15:34 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Wed, May 30, 2018 at 10:18 AM, Joe Slater <joe.slater@windriver.com> wrote:
-> Remove configurations requiring json from target.
+ping
+
+-- Hongzhi
+
+
+On 2018年05月28日 10:00, Hongzhi.Song wrote:
+> It is an efficient and necessary tool to reflect the status of X86
+> processors. Turbostat reports processor topology, frequency, idle
+> power-state statistics, temperature and power on X86 processors.
 >
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 > ---
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 5 +++++
->  1 file changed, 5 insertions(+)
+>   meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb | 58 +++++++++++++++++++++++
+>   1 file changed, 58 insertions(+)
+>   create mode 100644 meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
 >
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index 771cdb1..a5e4e72 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -83,6 +83,11 @@ do_install_append() {
->      install -d ${D}/${localstatedir}/lib/${BPN}
->      # Remove /var/run as it is created on startup
->      rm -rf ${D}${localstatedir}/run
+> diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
+> new file mode 100644
+> index 000000000..355941794
+> --- /dev/null
+> +++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
+> @@ -0,0 +1,58 @@
+> +#
+> +# Copyright (C) 2013 Wind River Systems, Inc.
+> +#
+> +# This program is free software; you can redistribute it and/or modify
+> +# it under the terms of the GNU General Public License version 2 as
+> +# published by the Free Software Foundation.
+> +#
+> +SUMMARY = "Frequency and Idle power monitoring tools for Linux"
 > +
-> +    # If json is not supported, remove certain conf files.
-> +    if ${@oe.utils.conditional('PACKAGECONFIG','json','false','true',d)} ; then
+> +DESCRIPTION = "The turbostat tool allows you to determine the actual \
+> +processor frequency and idle power saving state residency on supported \
+> +processors."
+> +
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+> +
+> +COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+> +COMPATIBLE_HOST_libc-musl = "null"
+> +
+> +DEPENDS = "virtual/kernel"
+> +
+> +do_fetch[noexec] = "1"
+> +do_unpack[noexec] = "1"
+> +do_patch[noexec] = "1"
+> +
+> +# This looks in S, so we better make sure there's
+> +# something in the directory.
+> +#
+> +do_populate_lic[depends] = "${PN}:do_configure"
+> +
+> +
+> +EXTRA_OEMAKE = '\
+> +                CC="${CC}" \
+> +		'CFLAGS=-Wall -I${STAGING_KERNEL_DIR}/arch/x86/include/uapi ${LDFLAGS}' \
+> +               '
+> +
+> +# If we build under STAGING_KERNEL_DIR, source will not be put
+> +# into the dbg rpm.  STAGING_KERNEL_DIR will exist by the time
+> +# do_configure() is invoked so we can safely copy from it.
+> +#
+> +do_configure_prepend() {
+> +	mkdir -p ${S}
+> +	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
+> +	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
+> +	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
+> +	cp -r ${STAGING_KERNEL_DIR}/COPYING ${S}
+> +}
+> +
+> +do_compile() {
+> +	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
+> +	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
+> +	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
+> +	oe_runmake STAGING_KERNEL_DIR=${STAGING_KERNEL_DIR}
+> +}
+> +
+> +do_install() {
+> +	oe_runmake DESTDIR="${D}" install
+> +}
 
-oe.utils.conditional() probably isn't the best way to test whether or
-not PACKAGECONFIG contains a particular value. Maybe try
-bb.utils.contains() instead?
-
-> +        rm -rf ${D}${datadir}/${BPN}/include/scl/{loggly,logmatic,cim,elasticsearch}
-
-This kind of brace expansion is bash specific.
-
-> +    fi
->  }
->
->  FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
