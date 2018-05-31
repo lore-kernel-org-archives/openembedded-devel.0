@@ -1,51 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7865B74F01
+Received: from mail-qt0-f179.google.com (mail-qt0-f179.google.com
+	[209.85.216.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 94140746B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2018 16:49:05 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id d130-v6so12304543qkc.2
+	Thu, 31 May 2018 16:57:27 +0000 (UTC)
+Received: by mail-qt0-f179.google.com with SMTP id y89-v6so3233537qtd.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2018 09:49:06 -0700 (PDT)
+	Thu, 31 May 2018 09:57:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=CqdohSjM9HX5Y9r/aOTpiauKVkv5Yt7bJ0QFCbBh0OY=;
-	b=UfEgGfZWnSdwugYtrzQFBqQns+cfufMWiUk1Puw4XDfFc0nB9I0qAODwDkAq2gkKd0
-	5kCbJ+4T6juv1cfK5kfAAZWPKpoPO/u+xU1TORTxAMuWc0AKB3CLRjEOF0Z6FSvPzO4j
-	H4uHnM2FwgF+p6pwJkf5Pa1/eoLmYzge9Ui5icAr7awlGIVKCmTQZTWqhK+qkwDSueHt
-	fjemvDrz3YxSp9aPNzF5PoS3z4wooTGWr9epldbdHb7V76p6bphDpkcmM8yXmpQEfXmk
-	hIhxL3ZI3QWWWDh9Zx7Z98F67FPhhoZFZSiv/eI1WaoczDKUjKhHBWV2+GdPq5ieBK8a
-	Z6Cg==
+	:cc; bh=9QURzxA/kPpIY1fUCmSosIMbhY1gYTpAuPQnEqjD4sE=;
+	b=uWUqRkm8sp7JT9r0DQ4yhJBsfwT/RbctH6FWLq2Q+GbGGHRqCYLA1DuGaja+sxn10P
+	/6/889KH75vtKXNPgxWlvDvTOqeZlw9j3cq9XnNOfAOWCSn6zfj1gRERE4C38FOpLCnj
+	V/CV/D+NYFSZfMRAyXsh4YewoMuw8GPuEBH6fFKwjnKF28T2X9izfY1JaCmy70P29qS5
+	1YMUAgmCFGFG9AbhR1AD6z7I1Ijh/KeLnzM31J+TqDzwbI+C6ZiJAqLLbQNdclcrOjKK
+	2qFA/pAaVsMGJrE2TRkm3XFJpIGvQqCRwLuiH8N9Nnrg0B8d4R0DKaC60JqfHxszQwRO
+	McOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=CqdohSjM9HX5Y9r/aOTpiauKVkv5Yt7bJ0QFCbBh0OY=;
-	b=mN1QMoh1SyGvd5n0Vo3C+dNnT/mNK3wsaVV5BOtYftZMKZ38Eq4KYwebZg6Bk34yHA
-	2VBtw89MfhI/EK+MA0cYgsd01HThVKGq5+fee4Y0WAtZFUEAE1jGOkSA1aadC9V+dV76
-	+WkN7KoUjyp6TbWEhNWorsy3jxo4Y4b9kte5PojXOPT3TYBCg6QKU4Vyjq9ZisvntRvi
-	AnOa2kJv1af5GfkoROM9nQxEZ0G7tk80GShk5R/6Uhm5+ODLF7CgmFva8Ag0rK6kDyRr
-	ChOA5cQrdfrVLs7NmxbEdat3vopEWWWPqs4q46g9CAYz4DNb21M9B1ou/FsFTA8YIslN
-	y+1g==
-X-Gm-Message-State: APt69E3ENKQ8N/TrP1bvwx8kPljr9T/HR/bbq53ouZxdGbYK4R72/o2P
-	7XBudcpJcXlgW1MEVM6bs9sxsmh/gVHb094btCfYJg==
-X-Google-Smtp-Source: ADUXVKIxJfGWgik6GT2D6O/wosLR7+11wRmZB+A29PgnliHJ7nfkW+I3mNoLJEWmMPPoA/1NV09cQykWjajt+gciBdo=
-X-Received: by 2002:a37:b8c4:: with SMTP id
-	i187-v6mr7024022qkf.412.1527785346080; 
-	Thu, 31 May 2018 09:49:06 -0700 (PDT)
+	bh=9QURzxA/kPpIY1fUCmSosIMbhY1gYTpAuPQnEqjD4sE=;
+	b=DNiuPEQ0sz7A7qYzJY92NcOGH819WWjyb+55FuNumdzDm+MttOkaLUivqpaG5emVD/
+	ZE7Wq+2aCsAQfntVMMG0lHP+8FnilAg09rboUJywpsTj/miP/iEPMV8xmZJnKAg644Y8
+	RJC6s2Env31eJdm73SLQRRrLCIKGapJOPYTIRyHhcsmDYU/+BB8kkNB5Ghz+cjb5phNC
+	NGfRjSdj5LWL1ZwMqHDHwn50Xe36zo7dZ0eY6HbG6uu6jjhnjhXVvcXh1AzB+53WDOi8
+	e/j680Eokbzb6YJ0Ch8CWHnaP6V9XFroHnihbJ74L+I+DkQmhEiMcHGY+2MIRWzpDS5i
+	VoCA==
+X-Gm-Message-State: APt69E2b/NiRlUxkB1xXUibOXRPEu4XsIdmi80tgvf2LY7a4OqhbOykS
+	UtpIRglz1n+lh+7rET1dQSi24DbDfgI1PPMjbmK6ow==
+X-Google-Smtp-Source: ADUXVKK7DKtLfOsILhGkpCkIObDnoPlVcb8OG8NkuQJf9GKrYnWz0uFUONVq9Lh3XAt8ONIq0n9/fYzBQZ6FN8SwpT4=
+X-Received: by 2002:ac8:26ea:: with SMTP id
+	39-v6mr7751720qtp.128.1527785848127; 
+	Thu, 31 May 2018 09:57:28 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a0c:e486:0:0:0:0:0 with HTTP; Thu, 31 May 2018 09:48:35
+Received: by 2002:a0c:e486:0:0:0:0:0 with HTTP; Thu, 31 May 2018 09:56:57
 	-0700 (PDT)
-In-Reply-To: <1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
-References: <20180510063718.16913-1-andrew@aj.id.au>
-	<1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
+In-Reply-To: <20180524182659.19986-10-twoerner@gmail.com>
+References: <20180524182659.19986-1-twoerner@gmail.com>
+	<20180524182659.19986-10-twoerner@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 May 2018 09:48:35 -0700
-Message-ID: <CAMKF1spm=GQQq90gu58BdrNtqPQx_fxnA01ar9Jmr4PbQnmttQ@mail.gmail.com>
-To: Andrew Jeffery <andrew@aj.id.au>
-Cc: openbmc@lists.ozlabs.org,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2 1/3] meta-python: Add python-pyflame recipe
+Date: Thu, 31 May 2018 09:56:57 -0700
+Message-ID: <CAMKF1soPo0SPtmh3MLLeDrxoB5E2YtRf=siNDcsmtOFe0ok4rA@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][master-next][PATCH 09/11] json-spirit: variable cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,93 +57,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2018 16:49:05 -0000
+X-List-Received-Date: Thu, 31 May 2018 16:57:27 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-fails to build on qemumips
+I know this is unrelated however I see a gcc crash on mips
 
-| ../../git/src/ptrace.cc: In function 'user_regs_struct
-pyflame::PtraceGetRegs(pid_t)':
-| ../../git/src/ptrace.cc:125:41: error: return type 'user_regs_struct
-{aka struct user_regs_struct}' is incomplete
-|  user_regs_struct PtraceGetRegs(pid_t pid) {
-|                                          ^
-| ../../git/src/ptrace.cc:125:18: error: ambiguating new declaration
-of 'void pyflame::PtraceGetRegs(pid_t)'
-|  user_regs_struct PtraceGetRegs(pid_t pid) {
-|                   ^~~~~~~~~~~~~
-| In file included from ../../git/src/ptrace.cc:15:0:
-| ../../git/src/./ptrace.h:48:18: note: old declaration
-'user_regs_struct pyflame::PtraceGetRegs(pid_t)'
-|  user_regs_struct PtraceGetRegs(pid_t pid);
-|                   ^~~~~~~~~~~~~
-| ../../git/src/ptrace.cc:126:20: error: aggregate 'user_regs_struct
-regs' has incomplete type and cannot be defined
-|    user_regs_struct regs;
-|                     ^~~~
-| ../../git/src/ptrace.cc: In function 'void
-pyflame::PtraceSetRegs(pid_t, user_regs_struct)':
-| ../../git/src/ptrace.cc:135:48: error: 'regs' has incomplete type
-|  void PtraceSetRegs(pid_t pid, user_regs_struct regs) {
-|                                                 ^~~~
-| In file included from ../../git/src/ptrace.cc:15:0:
-| ../../git/src/./ptrace.h:29:16: note: forward declaration of
-'user_regs_struct {aka struct user_regs_struct}'
-|  typedef struct user_regs_struct user_regs_struct;
-|                 ^~~~~~~~~~~~~~~~
-| make[2]: *** [ptrace.o] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| make[2]: Leaving directory
-`/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/python-pyflame/1.6.6-r0/build/src'
+| /mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/recipe-sysroot-native/usr/bin/mips-bec-linux/mips-bec-linux-g++
+  -I/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/json_spirit_v4.08/json_spirit
+-I/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/recipe-sysroot/usr/include
+-meb -mabi=32 -mhard-float -march=mips32r2 -fstack-protector-strong
+-D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+ --sysroot=/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/recipe-sysroot
+ -O2 -pipe -g -feliminate-unused-debug-types
+-fdebug-prefix-map=/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0=/usr/src/debug/json-spirit/4.08-r0
+-fdebug-prefix-map=/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/recipe-sysroot=
+-fdebug-prefix-map=/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/recipe-sysroot-native=
+ -fvisibility-inlines-hidden  -meb -mabi=32 -mhard-float
+-march=mips32r2 -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
+-Wformat-security -Werror=format-security
+--sysroot=/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/recipe-sysroot
+-MD -MT json_spirit/CMakeFiles/json_spirit_static.dir/json_spirit_reader.cpp.o
+-MF json_spirit/CMakeFiles/json_spirit_static.dir/json_spirit_reader.cpp.o.d
+-o json_spirit/CMakeFiles/json_spirit_static.dir/json_spirit_reader.cpp.o
+-c /mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/json-spirit/4.08-r0/json_spirit_v4.08/json_spirit/json_spirit_reader.cpp
+| {standard input}: Assembler messages:
+| {standard input}:732931: Warning: end of file not at end of a line;
+newline inserted
+| mips-bec-linux-g++: internal compiler error: Killed (program cc1plus)
+| Please submit a full bug report,
+| with preprocessed source if appropriate.
+| See <https://gcc.gnu.org/bugs/> for instructions.
 
-On Tue, May 29, 2018 at 4:48 AM, Andrew Jeffery <andrew@aj.id.au> wrote:
-> On Thu, 10 May 2018, at 16:07, Andrew Jeffery wrote:
->> Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+I wonder if someone else is seeing similar issue ?
+it might be related to system load etc. at the time it was being built but
+interested in seeing if this is common enough trouble
+
+
+On Thu, May 24, 2018 at 11:26 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+> Reorder recipe variables according to:
 >
-> Ping - is there anything I need to revise for this patch or the following two?
+>         https://www.openembedded.org/wiki/Styleguide
 >
-> Cheers,
+> Originally-conceived-by: Andre McCurdy <armccurdy@gmail.com>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Andrew
+> diff --git a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+> index 3c1d8a9959..d6e42c81d5 100644
+> --- a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+> +++ b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
+> @@ -9,6 +9,8 @@ PRIORITY = "optional"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=278ef6183dec4aae1524fccc4b0113c9"
 >
->> ---
->>  meta-python/recipes-devtools/python/python-pyflame.inc      | 12 ++++++++++++
->>  meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb |  1 +
->>  2 files changed, 13 insertions(+)
->>  create mode 100644 meta-python/recipes-devtools/python/python-pyflame.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
->>
->> diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/
->> meta-python/recipes-devtools/python/python-pyflame.inc
->> new file mode 100644
->> index 000000000000..3b84a7e8f8e3
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python-pyflame.inc
->> @@ -0,0 +1,12 @@
->> +SUMMARY = "Pyflame: A Ptracing Profiler For Python"
->> +HOMEPAGE = "https://github.com/uber/pyflame"
->> +SECTION = "devel/python"
->> +LICENSE = "Apache-2.0"
->> +LIC_FILES_CHKSUM = "file://${S}/
->> LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
->> +DEPENDS = "python"
->> +
->> +SRC_URI = "git://github.com/uber/pyflame.git;protocol=https;tag=v${PV}"
->> +S = "${WORKDIR}/git"
->> +
->> +inherit pkgconfig autotools
->> +
->> diff --git a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
->> b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
->> new file mode 100644
->> index 000000000000..96f03305f883
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
->> @@ -0,0 +1 @@
->> +require python-pyflame.inc
->> --
->> 2.14.1
->>
+> +DEPENDS = "boost"
+> +
+>  SRC_URI = "file://json_spirit_v${PV}.zip \
+>             file://0001-Adjust-the-cmake-files.patch \
+>             file://0001-Link-to-libatomic.patch \
+> @@ -16,8 +18,6 @@ SRC_URI = "file://json_spirit_v${PV}.zip \
+>
+>  S = "${WORKDIR}/json_spirit_v${PV}"
+>
+> -DEPENDS = "boost"
+> -
+>  inherit cmake
+>
+>  BBCLASSEXTEND = "nativesdk"
+> --
+> 2.17.0.582.gccdcbd54c
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
