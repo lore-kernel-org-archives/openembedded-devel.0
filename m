@@ -1,77 +1,42 @@
-Return-Path: <MANJUKUM@xilinx.com>
-X-Greylist: delayed 1330 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 31 May 2018 02:01:15 UTC
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
-	(mail-sn1nam02on0050.outbound.protection.outlook.com [104.47.36.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B6E16003C;
-	Thu, 31 May 2018 02:01:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=R9QGyCRkycePH8+ATCd26g3OaiLmFNquxa4vtbBXlCk=;
-	b=pslsCXXwkXzsJSRbtxASSzewdNSLuU0NqVox60jNm47BsdvoVs7D39t1yz1fzq4mxVMXArTrWZMjjwAeM0Hjpij9umEZjkuyMhLuPZP2Pqh2fVZtBbG7reVk8PiL5M9GjKOt9pxyQOgVYc3uhW4HQ8HUiG0Q1Xv5bFD84eKQhiY=
-Received: from DM5PR02MB3863.namprd02.prod.outlook.com (52.132.139.146) by
-	DM5PR02MB2635.namprd02.prod.outlook.com (10.168.196.13) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
-	15.20.797.11; Thu, 31 May 2018 01:24:25 +0000
-Received: from DM5PR02MB3863.namprd02.prod.outlook.com
-	([fe80::a980:cb7c:becd:294]) by DM5PR02MB3863.namprd02.prod.outlook.com
-	([fe80::a980:cb7c:becd:294%5]) with mapi id 15.20.0820.010;
-	Thu, 31 May 2018 01:24:25 +0000
-From: Manjukumar Harthikote Matha <MANJUKUM@xilinx.com>
-To: akuster808 <akuster808@gmail.com>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>, "Patches and discussions about
-	the oe-core layer" <openembedded-core@lists.openembedded.org>
-Thread-Topic: [OE-core] meta-openembedded maintainer ship change.
-Thread-Index: AQHT8eNGBO1ZHlUebEu4X29S3XlotKRJGEnw
-Date: Thu, 31 May 2018 01:24:25 +0000
-Message-ID: <DM5PR02MB38638BEF1BA449483FD4E6C8B9630@DM5PR02MB3863.namprd02.prod.outlook.com>
-References: <fc0d7e3b-9d0c-7ea3-1caf-ad3099f40099@gmail.com>
-In-Reply-To: <fc0d7e3b-9d0c-7ea3-1caf-ad3099f40099@gmail.com>
-Accept-Language: en-US
+Return-Path: <ishitsuka.sc@ncos.nec.co.jp>
+X-Greylist: delayed 588 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 31 May 2018 06:00:00 UTC
+Received: from tyo162.gate.nec.co.jp (tyo162.gate.nec.co.jp [114.179.232.162])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BABF6025E
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 31 May 2018 05:59:59 +0000 (UTC)
+Received: from mailgate02.nec.co.jp ([114.179.233.122])
+	by tyo162.gate.nec.co.jp (8.15.1/8.15.1) with ESMTPS id w4V5oC9I027292
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 31 May 2018 14:50:12 +0900
+Received: from mailsv02.nec.co.jp (mailgate-v.nec.co.jp [10.204.236.94])
+	by mailgate02.nec.co.jp (8.15.1/8.15.1) with ESMTP id w4V5oCd7013538
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 31 May 2018 14:50:12 +0900
+Received: from mail01b.kamome.nec.co.jp (mail01b.kamome.nec.co.jp [10.25.43.2])
+	by mailsv02.nec.co.jp (8.15.1/8.15.1) with ESMTP id w4V5nfIK017648
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 31 May 2018 14:50:12 +0900
+Received: from bpxc99gp.gisp.nec.co.jp ([10.38.151.143] [10.38.151.143]) by
+	mail03.kamome.nec.co.jp with ESMTP id BT-MMP-855083;
+	Thu, 31 May 2018 14:49:22 +0900
+Received: from BPXM17GP.gisp.nec.co.jp ([10.38.151.209]) by
+	BPXC15GP.gisp.nec.co.jp ([10.38.151.143]) with mapi id 14.03.0319.002;
+	Thu, 31 May 2018 14:49:22 +0900
+From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Thread-Topic: [OE-core] [PATCH] telnetd:Fix deadlock on cleanup
+Thread-Index: AdP4opnhel8JbwgyREyagEFM6yE5Jg==
+Date: Thu, 31 May 2018 05:49:21 +0000
+Message-ID: <D3AF589C68C3694A8188BC776DB93B48A2F29163@BPXM17GP.gisp.nec.co.jp>
+Accept-Language: ja-JP, en-US
 X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
 X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=MANJUKUM@xilinx.com; 
-x-originating-ip: [149.199.62.254]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; DM5PR02MB2635;
-	7:e/FsRkr/FRYBsaT/YPWnPYir/BOl6OZKmH2cZxdBxmJ2hBTrAwUIXyISy7cJzgtgUHooaHD6nDM4P9u+yMGfiTdwdql8CNtp8pw9n9qKmL5WFoiRjgTWt4yhU1zHere0o1bIoZiUa8EloL3fhdCia/DHHJ6sffBkBLhtZhPAfL41TYgHyGnOR+DxBVE6W5DPLLvYy0tlV0v9G6+yiKul0zLrgxukbPbUvM9/xkwcHhLRvH4OhhFZ02Fi41vRdLtT;
-	23:tEBsCGwsyEnq2vonnSzPPwglCfDaO7qPhWFubzap+T4DiiEb328zCxVrw5DVjS+dEdc+2hxtP+uqz1XVVdenYHWCLmLuG6P3T+7MO9atei12XqDk3oXlXwhDW4F/+jq6i4SLKtbbDy/5sVDphibhBw==
-x-ms-exchange-antispam-srfa-diagnostics: SOS;
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652020)(5600026)(48565401081)(4534165)(4627221)(201703031133081)(201702281549075)(2017052603328)(7153060)(7193020);
-	SRVR:DM5PR02MB2635; 
-X-MS-TrafficTypeDiagnostic: DM5PR02MB2635:|DM5PR02MB2635:
-x-microsoft-antispam-prvs: <DM5PR02MB2635A8C55061B3D2F11386F6B9630@DM5PR02MB2635.namprd02.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(264703809997249);
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(93006095)(93001095)(10201501046)(3002001)(3231254)(944501410)(52105095)(6055026)(149027)(150027)(6041310)(20161123564045)(20161123562045)(20161123560045)(20161123558120)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(6072148)(201708071742011)(7699016);
-	SRVR:DM5PR02MB2635; BCL:0; PCL:0; RULEID:; SRVR:DM5PR02MB2635; 
-x-forefront-prvs: 06891E23FB
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(39380400002)(39860400002)(366004)(346002)(376002)(396003)(53754006)(51914003)(13464003)(199004)(189003)(476003)(6306002)(53936002)(97736004)(305945005)(5660300001)(7736002)(3660700001)(11346002)(8936002)(6506007)(33656002)(53546011)(446003)(26005)(5250100002)(68736007)(39060400002)(25786009)(55016002)(316002)(81166006)(81156014)(8676002)(110136005)(6246003)(486006)(6436002)(2900100001)(7696005)(9686003)(14454004)(105586002)(106356001)(478600001)(102836004)(229853002)(2906002)(3280700002)(1720100001)(186003)(99286004)(74316002)(76176011)(86362001)(72206003)(6116002)(966005)(66066001)(3846002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DM5PR02MB2635;
-	H:DM5PR02MB3863.namprd02.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: xilinx.com does not designate
-	permitted sender hosts)
-x-microsoft-antispam-message-info: FpMee4x5/XRDgBkiraKgGQPwgQZEkhYBYGltOTz7xXUJdX5B0+3Q+/hZrSzKnJ6Q6/OiupNWdGQUVaYOLsTt2biZbhUOFNTFWI+VmOtHL1TxqyOi4Y9MKH5l2KINXGRlU6FSUidceXXX1rE87owD5XrvBIlskaSDGUTLzA64PjEvvF6p1tSBSiOAuilSeSr6
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+x-originating-ip: [10.27.178.67]
 MIME-Version: 1.0
-X-MS-Office365-Filtering-Correlation-Id: 18793937-17d0-4034-1395-08d5c6953f31
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18793937-17d0-4034-1395-08d5c6953f31
-X-MS-Exchange-CrossTenant-originalarrivaltime: 31 May 2018 01:24:25.4619 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR02MB2635
-X-OriginatorOrg: xilinx.com
-Subject: Re: [OE-core] meta-openembedded maintainer ship change.
+X-TM-AS-MML: disable
+Subject: Re: [OE-core] [PATCH] telnetd:Fix deadlock on cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -84,29 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2018 02:01:16 -0000
-Content-Language: en-US
+X-List-Received-Date: Thu, 31 May 2018 06:00:00 -0000
+Content-Language: ja-JP
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 
-VGhhbmtzIEFybWluIGZvciBhbGwgdGhlIHdvcmsuDQpUaGFua3MgS2hlbQ0KDQotTWFuanUNCg0K
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtY29yZS1i
-b3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gW21haWx0bzpvcGVuZW1iZWRkZWQtY29y
-ZS1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZg0KPiBha3VzdGVy
-ODA4DQo+IFNlbnQ6IFR1ZXNkYXksIE1heSAyMiwgMjAxOCA4OjQxIEFNDQo+IFRvOiBPcGVuRW1i
-ZWRkZWQgRGV2ZWwgTGlzdCA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmc+Ow0KPiBQYXRjaGVzIGFuZCBkaXNjdXNzaW9ucyBhYm91dCB0aGUgb2UtY29yZSBsYXllciA8
-b3BlbmVtYmVkZGVkLQ0KPiBjb3JlQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+IFN1YmplY3Q6
-IFtPRS1jb3JlXSBtZXRhLW9wZW5lbWJlZGRlZCBtYWludGFpbmVyIHNoaXAgY2hhbmdlLg0KPiAN
-Cj4gSGVsbG8gYWxsLA0KPiANCj4gQWZ0ZXIgbXVjaCB0aG91Z2h0LCBJIGhhdmUgZGVjaWRlZCB0
-byBzdGVwIGF3YXkgZnJvbSBiZWluZyB0aGUgbWV0YS0NCj4gb3BlbmVtYmVkZGVkIG1haW50YWlu
-ZXIsIHBhdGNoIHdyYW5nbGVyIGFuZCBidWlsZGVyLsKgIEtoZW0gUmFqIGhhcyBraW5kbHkNCj4g
-c3RlcHBlZCB1cCB0byBjb250aW51ZSB0aGVzZSBhY3Rpdml0aWVzLiBNYWludGFpbmluZyB0aGlz
-IHdhcyBjb25zdW1pbmcgdG9vIG11Y2gNCj4gb2YgbXkgZnJlZSB0aW1lIGFuZCBJIG5lZWQgdG8g
-Zm9jdXMgb24gb3RoZXIgdGhpbmdzIGluIHRoZSBjb21tdW5pdHkuDQo+IA0KPiBUaGFua3MgZm9y
-IHRoZSBvcHBvcnR1bml0eSB0byBoYXZlIHNlcnZlZCB5b3UuDQo+IA0KPiBLaW5kIHJlZ2FyZHMs
-DQo+IA0KPiBBcm1pbg0KPiANCj4gDQo+IC0tDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fDQo+IE9wZW5lbWJlZGRlZC1jb3JlIG1haWxpbmcgbGlzdA0K
-PiBPcGVuZW1iZWRkZWQtY29yZUBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0
-cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWNvcmUNCg==
+PiBQbGVhc2UgY2hlY2sgd2lsbCBsYXRlc3QgbWFzdGVyLCBpZiB5b3UgY2FuIHJlcG9yZHVjZSB0
+aGUgaXNzdWUgd2l0aCBtYXN0ZXIgdGhlbiB3ZSBjYW4gcmV2aXZlIHRoaXMgZGlzY3Vzc2lvbiBv
+biB0aGUgcGF0Y2guDQoNCkkgd2FzIGFibGUgdG8gcmVwcm9kdWNlIHRoaXMgaXNzdWUgb24gcWVt
+dXg4NiB3aXRoIHRoZSBsYXRlc3QgdmVyc2lvbi4NCg0KQnVpbGQgQ29uZmlndXJhdGlvbjoNCkJC
+X1ZFUlNJT04gICAgICAgICAgID0gIjEuMzcuMCINCkJVSUxEX1NZUyAgICAgICAgICAgID0gIng4
+Nl82NC1saW51eCINCk5BVElWRUxTQlNUUklORyAgICAgID0gInVuaXZlcnNhbCINClRBUkdFVF9T
+WVMgICAgICAgICAgID0gImk1ODYtcG9reS1saW51eCINCk1BQ0hJTkUgICAgICAgICAgICAgID0g
+InFlbXV4ODYiDQpESVNUUk8gICAgICAgICAgICAgICA9ICJwb2t5Ig0KRElTVFJPX1ZFUlNJT04g
+ICAgICAgPSAiMi41Ig0KVFVORV9GRUFUVVJFUyAgICAgICAgPSAibTMyIGk1ODYiDQpUQVJHRVRf
+RlBVICAgICAgICAgICA9ICIiDQptZXRhDQptZXRhLXBva3kNCm1ldGEteW9jdG8tYnNwICAgICAg
+ID0gIm1hc3Rlcjo3MTlkMDY4YmRlNTVlZjI5YTM0NjhiYzA3NzlkNGNiMGMxMWU4YzFkIg0KbWV0
+YS1vZQ0KbWV0YS1weXRob24NCm1ldGEtbmV0d29ya2luZyAgICAgID0gIm1hc3RlcjpiYjU3YmFj
+ODQ1ZjNjZDE2MzQ4NjJmYTk4NjhiYzhlMjk0YmE3NGE5Ig0KDQpIb3cgdG8gcmVwcm9kdWNlOg0K
+DQoxLiB0ZWxuZXQgZnJvbSBob3N0KDE5Mi4xNjguNy4xKSB0byBxZW11eDg2KDE5Mi4xNjguNy4y
+KQ0KDQokIGNhdCAuL3RlbG5ldGQuc2gNCiAjIS9iaW4vc2gNCg0KIEhPU1Q9IjE5Mi4xNjguNy4y
+Ig0KIFVTRVI9InJvb3QiDQoNCiB3aGlsZSA6DQogZG8NCiAgIGV4cGVjdCAtYyAiDQogICBzZXQg
+dGltZW91dCAxMA0KICAgc3Bhd24gdGVsbmV0ICRIT1NUDQogICBleHBlY3QgbG9naW46XCAgOyBz
+ZW5kIFwiJFVTRVJcclwiDQogICBleHBlY3QgXCIjIFwiIDsgc2VuZCBcImV4aXRcclwiDQogIj4g
+L2Rldi9udWxsDQogZG9uZQ0KDQokIC4vdGVsbmV0ZC5zaCAmDQokIC4vdGVsbmV0ZC5zaCAmDQoN
+CjIuIENoZWNrIHByb2Nlc3Mgc3RhdHVzIG9uIHFlbXV4ODYNCg0Kcm9vdCAgICAgICAzMjUgICAg
+IDEgIDAgMDQ6NDEgPyAgICAgICAgMDA6MDA6MDEgL3Vzci9zYmluL3hpbmV0ZCAtcGlkZmlsZSAv
+dmFyL3INCnJvb3QgICAgICAzMzI4ICAgMzI1ICAwIDA0OjQzID8gICAgICAgIDAwOjAwOjAwIGlu
+LnRlbG5ldGQ6IDE5Mi4xNjguNy4xDQpyb290ICAgICAgMzMzMCAgMzMyOCAgMCAwNDo0MyA/ICAg
+ICAgICAwMDowMDowMCBbc2hdIDxkZWZ1bmN0Pg0Kcm9vdCAgICAgIDMzNzQgICAzMjUgIDAgMDQ6
+NDMgPyAgICAgICAgMDA6MDA6MDAgaW4udGVsbmV0ZDogMTkyLjE2OC43LjENCnJvb3QgICAgICAz
+Mzc2ICAzMzc0ICAwIDA0OjQzID8gICAgICAgIDAwOjAwOjAwIFtzaF0gPGRlZnVuY3Q+DQpyb290
+ICAgICAgMzQxNyAgIDMwNiAgMCAwNDo0NCB0dHlTMCAgICAwMDowMDowMCBwcyAtZWYNCg0KLT4g
+Rm91bmQgZGVmdW5jdCBzaCBhbmQgaW4udGVsbmV0ZCh3YWl0aW5nIGZ1dGV4KS4gDQoNCnJvb3RA
+cWVtdXg4Njp+IyBzdHJhY2UgLXAgMzMyOA0Kc3RyYWNlOiBQcm9jZXNzIDMzMjggYXR0YWNoZWQN
+CmZ1dGV4KDB4NDUwNTVhMTgsIEZVVEVYX1dBSVRfUFJJVkFURSwgMiwgTlVMTF5Dc3RyYWNlOiBQ
+cm9jZXNzIDMzMjggZGV0YWNoZWQNCiA8ZGV0YWNoZWQgLi4uPg0KDQpyb290QHFlbXV4ODY6fiMg
+c3RyYWNlIC1wIDMzNzQNCnN0cmFjZTogUHJvY2VzcyAzMzc0IGF0dGFjaGVkDQpmdXRleCgweDQ1
+MDU1YTE4LCBGVVRFWF9XQUlUX1BSSVZBVEUsIDIsIE5VTExeQ3N0cmFjZTogUHJvY2VzcyAzMzc0
+IGRldGFjaGVkDQogPGRldGFjaGVkIC4uLj4NCg0KQmVzdCByZWdhcmRzLA0KU2VpaWNoaSBJc2hp
+dHN1a2ENCg==
+
 
