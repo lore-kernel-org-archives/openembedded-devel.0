@@ -1,49 +1,48 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D2DF8601F6
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C94275049
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jun 2018 18:01:11 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id k14-v6so1247734uao.12
+	Fri,  1 Jun 2018 21:07:52 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id c23-v6so4690479plz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jun 2018 11:01:12 -0700 (PDT)
+	Fri, 01 Jun 2018 14:07:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=2Z5QdwAvmEOzXHqdIiMJa52o4DUna0jHHQde8LKxNeU=;
-	b=nVqLiIK6EENbiwLbWcycGHgfeSgyLJI1XrnutNIbcHrhkbDiIHwRUpkNJ76FnLvN+b
-	uBUy3KbTSMhCzxlyIPKGFt71UQy5tzSRYJqdlawQchkH/qZgb22lxJWgTzlfIr+U8EVG
-	H0RpD3AGV9V6QyKpdh3ksUaYwjXNaYtkPkP9+W90m9w33MFjfcjMnqRiHP+uV6EeAU6i
-	yjSHZoLcVGwkgg/85AntiKRFGe0MYsPPkq4umWHVpVGhvlUgX6M1vdtC6FxiX6V+Tx4p
-	BFc8TadRwChgqKPgwqhf+pQT6DIf2SkDO7Y26kQMAnnZc/PpBapehp3NrevNkCeMiglW
-	we1A==
+	h=from:to:cc:subject:date:message-id;
+	bh=dS+ZmPgfW+Ruh4XE3QRTuCtbvw2U5YPOV9y5Bf/vzFI=;
+	b=TLtKJmK3Fyt+18lvWokPztQsTjliPYwBGNg86RoSTeY8l3giCTlcTwRWMJQ6H6mKey
+	UW/nRowGXR9rPEIomLM2gktoYLbWvWyIUSuXqoU3zH/CMA3xWRQNnL1TnsC4O/BYz0/Z
+	V+CYcw7f/786CNy1wjwLVIf8hLFbz3RPvoIqjONalXC+X5wu4cFDDkHI4p/eLGFLOPkw
+	ANY3n4kSbW8YdXLDMr1SMh9uBE64iAzN4ZZkLU1iXOr6YaBP1P3RCehpXF08ohBIcxHH
+	H3P3PLXTgB/Igky8pJKqdJBJNo485i/VCvDcwcCFaqTWuOqKr4ANU1OJRwG5/N94kLTS
+	Cv+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=2Z5QdwAvmEOzXHqdIiMJa52o4DUna0jHHQde8LKxNeU=;
-	b=GVMxuOhvIdD0EUdtq6LsxEpJMtWQAL971lWidCBVI51Zy+GYAuJ5vCIuw0Z7fMcrG/
-	J++qEWCEvrhHp+lGT61ZDHihIbbXbpkllP+/jYmFhCA8kVqygimbWHWWfBUzApkN3sla
-	JOLbXfwCt1Xg9NdDdyO6GZ0R1oN13HhraX2h2uwQ7YuBOAVcBuTmI/BUgwiod8JkNqJL
-	hwpnpB9jW3AagPmKIfLGLUCFUHVvEKUIN+VoEdcEA3bzJrPBzw+uVwCsbjksODOuGkRW
-	BhAn9Sxc5rC+9MFIQojdVH6de6jJWvJyJqUdmShFyYDysQzR4QMG8VFBKq7sHe2hPdGn
-	95aw==
-X-Gm-Message-State: ALKqPweeKrhEcyi6DpRtAPs3aFemL/y08ozCFNMFFqg8OPe9845Bd+5q
-	8cFnzh9BjVIc1eMglhc+MPovWprutRDeygYeBQ5lmw==
-X-Google-Smtp-Source: ADUXVKLkYSfue9cq5oQVYupPkVvm6+s9JDOfNDI/C3edvn/PRWgsINylUgEe2qvm6/7DIndgFDjpeuIVJiinP5jaPBs=
-X-Received: by 2002:ab0:1048:: with SMTP id g8-v6mr7472861uab.52.1527876072119;
-	Fri, 01 Jun 2018 11:01:12 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ab0:28a:0:0:0:0:0 with HTTP;
-	Fri, 1 Jun 2018 11:01:11 -0700 (PDT)
-In-Reply-To: <ab305d19-628d-097f-9905-e1f724abe6ba@gmail.com>
-References: <20180601114158.24298-1-richard.leitner@skidata.com>
-	<ab305d19-628d-097f-9905-e1f724abe6ba@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dS+ZmPgfW+Ruh4XE3QRTuCtbvw2U5YPOV9y5Bf/vzFI=;
+	b=mdav6AyDpwJGfEsc/wt+Io+lFu/zpZ2sz7WYAWP/CVAJo2nrNTJ3VgBAieiRAALc+S
+	3/czYkxsowECp6DOO/vt7UH9Vaiep0OiDJ9HsCAsd7dL708IoQ40iL7RCj2/RM2oRq/0
+	YuPQyKIM3rERD7UI2nDEUFiz1a0elYxbvJUuTIlo0nnnQiubqvW54/55dJII2sCN2eza
+	RFr92YhMhbbTpcA1jQeGBiMel5xv+ZjAveHSCzju7iHvKARpTH3LGEBYcrdve3RXeKCz
+	8bQ/pzXPhF/rucmQ2k38PvTkqDakNMBffqR0DVerf5T5yRRpiYZYJueLkuTTqOx5QDMC
+	blfg==
+X-Gm-Message-State: ALKqPwc69CHjQAWcBgy9/dc+KL9AObrALXcef80syX1PJdqx16yqVqgS
+	4X9QCkHgSYnQrrNuHjjc5PA9+A==
+X-Google-Smtp-Source: ADUXVKLJ3VEDE2+AJC90VqrGupZMDO4A3AZIeceSDx6ruNvIpQLTD2E0H9SUndSgqbUy7L/Nak+0Yw==
+X-Received: by 2002:a17:902:5a4c:: with SMTP id
+	f12-v6mr6979323plm.85.1527887273900; 
+	Fri, 01 Jun 2018 14:07:53 -0700 (PDT)
+Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
+	by smtp.gmail.com with ESMTPSA id
+	l12-v6sm61383253pgr.82.2018.06.01.14.07.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 01 Jun 2018 14:07:53 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
-Date: Fri, 1 Jun 2018 11:01:11 -0700
-Message-ID: <CAJ86T=Ux5-SHTB49_-mUSWFdkEaugnfO=jMSib1o7L17bmV6KA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: dev@g0hl1n.net
-Subject: Re: [meta-oe][PATCH] pam-plugin-ccreds: add recipe
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Jun 2018 14:07:44 -0700
+Message-Id: <1527887264-6751-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] jansson: update 2.9 -> 2.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,252 +55,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2018 18:01:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 01 Jun 2018 21:07:53 -0000
 
-On Fri, Jun 1, 2018 at 10:40 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On 6/1/18 4:41 AM, Richard Leitner wrote:
->> Add version 11 of the pam-plugin-ccreds with the debian patches applied.
->
-> I see QA errors like below
->
-> ERROR: pam-plugin-ccreds-11-r0 do_package_qa: QA Issue: non
-> -dev/-dbg/nativesdk- package contains symlink .so: pam-plugin-ccreds
-> path
-> '/work/core2-64-bec-linux-musl/pam-plugin-ccreds/11-r0/packages-split/pam-plugin-ccreds/lib/security/pam_ccreds.so'
-> [dev-so]
+Version 2.11
+============
 
-According to OE's sanity checks, a .so plug-in should not be a symlink.
+Released 2018-02-09
 
-See the do_install_append() in the libcgroup recipe in oe-core for an
-example of how to fix the issue.
+* New features:
 
->> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
->> ---
->>  ...ke-sure-we-don-t-overflow-the-data-buffer.patch | 29 +++++++
->>  .../0002-add-minimum_uid-option.patch              | 97 ++++++++++++++++++++++
->>  ...TENSION_SO-also-for-linux-gnueabi-targets.patch | 29 +++++++
->>  .../recipes-extended/pam/pam-plugin-ccreds_11.bb   | 27 ++++++
->>  4 files changed, 182 insertions(+)
->>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch
->>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch
->>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch
->>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
->>
->> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch
->> new file mode 100644
->> index 000000000..d7f8f5a96
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch
->> @@ -0,0 +1,29 @@
->> +From 59a95494002ce57ace17d676544101e88a55265d Mon Sep 17 00:00:00 2001
->> +From: Nicolas Boullis <nicolas.boullis@ecp.fr>
->> +Date: Mon, 23 Mar 2009 10:46:44 +0100
->> +Subject: [PATCH 1/3] make sure we don't overflow the data buffer
->> +
->> +This patch was taken from Debian's libpam-ccreds v10-6 source:
->> +     0001-make-sure-we-don-t-overflow-the-data-buffer.patch
->> +
->> +Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
->> +---
->> + cc_db.c | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/cc_db.c b/cc_db.c
->> +index c0e0488..9371c4d 100644
->> +--- a/cc_db.c
->> ++++ b/cc_db.c
->> +@@ -199,7 +199,7 @@ int pam_cc_db_get(void *_db, const char *keyname, size_t keylength,
->> +             return (rc == DB_NOTFOUND) ? PAM_AUTHINFO_UNAVAIL : PAM_SERVICE_ERR;
->> +     }
->> +
->> +-    if (val.size < *size) {
->> ++    if (val.size > *size) {
->> +             return PAM_BUF_ERR;
->> +     }
->> +
->> +--
->> +2.11.0
->> +
->> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch
->> new file mode 100644
->> index 000000000..adc464924
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch
->> @@ -0,0 +1,97 @@
->> +From 21e3ab24836c5087f3531d2d3270242cea857a79 Mon Sep 17 00:00:00 2001
->> +From: =?UTF-8?q?Guido=20G=C3=BCnther?= <agx@sigxcpu.org>
->> +Date: Thu, 13 May 2010 12:36:26 +0200
->> +Subject: [PATCH 2/3] add minimum_uid option
->> +
->> +Closes: #580037
->> +
->> +This patch was taken from Debian's libpam-ccreds v10-6 source:
->> +     0002-add-minimum_uid-option.patch
->> +
->> +Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
->> +---
->> + cc_pam.c | 39 +++++++++++++++++++++++++++++++++++++++
->> + 1 file changed, 39 insertions(+)
->> +
->> +diff --git a/cc_pam.c b/cc_pam.c
->> +index d096117..56776aa 100644
->> +--- a/cc_pam.c
->> ++++ b/cc_pam.c
->> +@@ -20,6 +20,7 @@
->> + #include <errno.h>
->> + #include <limits.h>
->> + #include <syslog.h>
->> ++#include <pwd.h>
->> +
->> + #include "cc_private.h"
->> +
->> +@@ -45,6 +46,30 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh,
->> +                             int flags, int argc, const char **argv);
->> + #endif
->> +
->> ++
->> ++/*
->> ++ * Given the PAM arguments and the user we're authenticating, see if we should
->> ++ * ignore that user because they're root or have a low-numbered UID and we
->> ++ * were configured to ignore such users.  Returns true if we should ignore
->> ++ * them, false otherwise.
->> ++ */
->> ++static int
->> ++_pamcc_should_ignore(const char *username, int minimum_uid)
->> ++{
->> ++    struct passwd *pwd;
->> ++
->> ++    if (minimum_uid > 0) {
->> ++            pwd = getpwnam(username);
->> ++            if (pwd != NULL && pwd->pw_uid < (unsigned long) minimum_uid) {
->> ++                    syslog(LOG_DEBUG, "ignoring low-UID user (%lu < %d)",
->> ++                            (unsigned long) pwd->pw_uid, minimum_uid);
->> ++                    return 1;
->> ++            }
->> ++    }
->> ++    return 0;
->> ++}
->> ++
->> ++
->> + static int _pam_sm_interact(pam_handle_t *pamh,
->> +                         int flags,
->> +                         const char **authtok)
->> +@@ -291,7 +316,9 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh,
->> +     unsigned int sm_flags = 0, sm_action = 0;
->> +     const char *ccredsfile = NULL;
->> +     const char *action = NULL;
->> ++    const char *name = NULL;
->> +     int (*selector)(pam_handle_t *, int, unsigned int, const char *);
->> ++    int minimum_uid = 0;
->> +
->> +     for (i = 0; i < argc; i++) {
->> +             if (strcmp(argv[i], "use_first_pass") == 0)
->> +@@ -300,6 +327,8 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh,
->> +                     sm_flags |= SM_FLAGS_TRY_FIRST_PASS;
->> +             else if (strcmp(argv[i], "service_specific") == 0)
->> +                     sm_flags |= SM_FLAGS_SERVICE_SPECIFIC;
->> ++            else if (strncmp(argv[i], "minimum_uid=", sizeof("minimum_uid=") - 1) == 0)
->> ++                    minimum_uid = atoi(argv[i] + sizeof("minimum_uid=") - 1);
->> +             else if (strncmp(argv[i], "ccredsfile=", sizeof("ccredsfile=") - 1) == 0)
->> +                     ccredsfile = argv[i] + sizeof("ccredsfile=") - 1;
->> +             else if (strncmp(argv[i], "action=", sizeof("action=") - 1) == 0)
->> +@@ -321,6 +350,16 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh,
->> +             syslog(LOG_ERR, "pam_ccreds: invalid action \"%s\"", action);
->> +     }
->> +
->> ++    rc = pam_get_user(pamh, &name, NULL);
->> ++    if (rc != PAM_SUCCESS || name == NULL) {
->> ++            if (rc == PAM_CONV_AGAIN)
->> ++                    return PAM_INCOMPLETE;
->> ++            else
->> ++                    return PAM_SERVICE_ERR;
->> ++    }
->> ++    if (_pamcc_should_ignore(name, minimum_uid))
->> ++            return PAM_USER_UNKNOWN;
->> ++
->> +     switch (sm_action) {
->> +     case SM_ACTION_VALIDATE_CCREDS:
->> +             selector = _pam_sm_validate_cached_credentials;
->> +--
->> +2.11.0
->> +
->> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch
->> new file mode 100644
->> index 000000000..4f203f1a3
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch
->> @@ -0,0 +1,29 @@
->> +From 12d9bb59284bd01a9fcc3b9280698ffc23ef2ddc Mon Sep 17 00:00:00 2001
->> +From: Richard Leitner <richard.leitner@skidata.com>
->> +Date: Fri, 1 Jun 2018 13:24:15 +0200
->> +Subject: [PATCH 3/3] Set EXTENSION_SO also for linux-gnueabi targets
->> +
->> +As EXTENSION_SO gets already set for linux and linux-gnu targets we
->> +should set it also for linux-gnueabi targets.
->> +
->> +Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
->> +---
->> + configure.in | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/configure.in b/configure.in
->> +index 0dbdf79..a434208 100644
->> +--- a/configure.in
->> ++++ b/configure.in
->> +@@ -43,7 +43,7 @@ AC_SUBST(pam_ccreds_so_LD)
->> + AC_SUBST(pam_ccreds_so_LDFLAGS)
->> +
->> + AM_CONDITIONAL(USE_NATIVE_LINKER, test -n "$pam_ccreds_so_LD")
->> +-AM_CONDITIONAL(EXTENSION_SO, test "$target_os" = "linux" -o "$target_os" = "linux-gnu")
->> ++AM_CONDITIONAL(EXTENSION_SO, test "$target_os" = "linux" -o "$target_os" = "linux-gnu" -o "$target_os" = "linux-gnueabi")
->> + AM_CONDITIONAL(EXTENSION_1, test "$TARGET_OS" = "HPUX")
->> +
->> + if test -z "$use_gcrypt"; then
->> +--
->> +2.11.0
->> +
->> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
->> new file mode 100644
->> index 000000000..ded51e3a0
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
->> @@ -0,0 +1,27 @@
->> +SUMMARY = "PAM cached credentials module"
->> +HOMEPAGE = "https://www.padl.com/OSS/pam_ccreds.html"
->> +SECTION = "libs"
->> +LICENSE = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
->> +
->> +DEPENDS = "libpam openssl db"
->> +
->> +inherit distro_features_check
->> +REQUIRED_DISTRO_FEATURES = "pam"
->> +
->> +SRCREV = "376bb189ceb3a113954f1012c45be7ff09e148ba"
->> +
->> +SRC_URI = " \
->> +    git://github.com/PADL/pam_ccreds \
->> +    file://0001-make-sure-we-don-t-overflow-the-data-buffer.patch \
->> +    file://0002-add-minimum_uid-option.patch \
->> +    file://0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch \
->> +"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit autotools
->> +
->> +EXTRA_OECONF += "--libdir=${base_libdir} "
->> +
->> +FILES_${PN} += "${base_libdir}/security/pam*"
->>
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+  - Add `json_pack()` format specifiers s*, o* and O* for values that
+    can be omitted if null (#339).
+
+  - Add `json_error_code()` to retrieve numeric error codes (#365, #380,
+    #381).
+
+  - Enable thread safety for `json_dump()` on all systems.  Enable thread
+    safe `json_decref()` and `json_incref()` for modern compilers (#389).
+
+  - Add `json_sprintf()` and `json_vsprintf()` (#393).
+
+* Bug Fixes:
+
+  - Fix incorrect report of success from `json_dump_file()` when an error
+    is returned by `fclose()` (#359).
+
+  - Make json_equal() const-correct (#344).
+
+  - Fix incomplete stealing of references by `json_pack()` (#374).
+
+* Build:
+
+  - Work around gcc's -Wimplicit-fallthrough.
+
+  - Fix CMake detection of `sys/types.h` header (#375).
+
+  - Fix `jansson.pc` generated by CMake to be more consistent with the one
+    generated using GNU Autotools (#368).
+
+* Other:
+
+  - Miscellaneous documentation fixes (#356, #378, #395).
+
+  - Remove unnecessary reference actions from parsers (#377).
+
+Version 2.10
+============
+
+Released 2017-03-02
+
+* New features:
+
+  - Add JSON_EMBED encoding flag allowing arrays and objects to be encoded
+    into existing streams (#329).
+
+  - Add `json_dumpb()` function for dumping to a pre-allocated buffer (#328).
+
+  - Add `json_dumpfd()` and `json_loadfd()` functions for dumping to streaming
+    file descriptors (#328).
+
+  - Add support for parsing buffers larger than 2GB (#309).
+
+* Build:
+
+  - Fix CMake build when LONG_LONG_INT is defined as "" (#321)
+
+* Other:
+
+  - Internal code cleanup (#311, #314)
+
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ meta-oe/recipes-extended/jansson/{jansson_2.9.bb => jansson_2.11.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/jansson/{jansson_2.9.bb => jansson_2.11.bb} (69%)
+
+diff --git a/meta-oe/recipes-extended/jansson/jansson_2.9.bb b/meta-oe/recipes-extended/jansson/jansson_2.11.bb
+similarity index 69%
+rename from meta-oe/recipes-extended/jansson/jansson_2.9.bb
+rename to meta-oe/recipes-extended/jansson/jansson_2.11.bb
+index 455b374..370fa22 100644
+--- a/meta-oe/recipes-extended/jansson/jansson_2.9.bb
++++ b/meta-oe/recipes-extended/jansson/jansson_2.11.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8b70213ec164c7bd876ec2120ba52f61"
+ 
+ SRC_URI = "http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "84abaefee9502b2f2ff394d758f160c7"
+-SRC_URI[sha256sum] = "0ad0d074ca049a36637e7abef755d40849ad73e926b93914ce294927b97bd2a5"
++SRC_URI[md5sum] = "7af071db9970441e1eaaf25662310e33"
++SRC_URI[sha256sum] = "6e85f42dabe49a7831dbdd6d30dca8a966956b51a9a50ed534b82afc3fa5b2f4"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+1.9.1
+
 
