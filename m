@@ -1,26 +1,57 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id A804C608B7
+Return-Path: <andrew@aj.id.au>
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
+	[66.111.4.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AA31608B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2018 23:13:17 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	31 May 2018 16:13:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.49,464,1520924400"; d="scan'208";a="44374626"
-Received: from mmuhamm2-mobl1.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.249.65.213])
-	by fmsmga008.fm.intel.com with ESMTP; 31 May 2018 16:13:16 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Jun 2018 11:12:42 +1200
-Message-Id: <43e47f1b67764ba909535ba52f21b9a25f3f5cb5.1527808350.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <cover.1527808350.git.paul.eggleton@linux.intel.com>
-References: <cover.1527808350.git.paul.eggleton@linux.intel.com>
-Subject: [meta-networking][PATCH 1/1] mosquitto: upgrade to 1.4.15
+	Fri,  1 Jun 2018 02:36:04 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.nyi.internal (Postfix) with ESMTP id F103B21BF4;
+	Thu, 31 May 2018 22:36:05 -0400 (EDT)
+Received: from web4 ([10.202.2.214])
+	by compute4.internal (MEProxy); Thu, 31 May 2018 22:36:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm2; bh=I/YHS15qq5CM4xtlqZDaMJhbqyRHs
+	kp0Dp5old22Oaw=; b=evJ04CvX5GH+4NN2R3rMUwnp0ZCe303FyCHzPG03qMTaP
+	eAM9cp7fSMt0JObMGaBt240KOJrb1jkNvmBx3EXY1vjXTm5BAPo12isv/weKCfJ4
+	aaI5jj9JXG3JEwh1vWxLT/iEggzLaF8gbnpazNQlYf57hzoG8FFoFdtBR2ER09h0
+	z4rcXaNQ9BO3S+DEPXG5eI+7VpAMNHQDbSJpkrRDGuNTfEtdgzjXwHX2KHPd8gy8
+	M8MH2yVuGDRZ8jRy5B1uNcntZBcpdcQQAVwkp+jCIla3nBmNzB5UspvePwOLnBK5
+	cUsNsOOgQIP4pDU6g5HLEAjtKp8E7AkJ2QLyzh8iQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:content-type
+	:date:from:in-reply-to:message-id:mime-version:references
+	:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=I/YHS1
+	5qq5CM4xtlqZDaMJhbqyRHskp0Dp5old22Oaw=; b=B3uDrNnsb7bEuFrQSPZkcL
+	gE4Eg79EDrd2jmfecvd7CCqWJd8g8rSfvaLPakc6capwLOiFInsBgZdQGJ76906/
+	YkM0XFvzzKpCqetewaq6CGogE9oGzubDaq4GEOv/alYLbRHj3r2KWQtFQ/1r0KLa
+	WiSzlFc/iqz4sVlRwViZz0byKTSardTtFJZvA0VaTTTtp+xThggL7Dgw9uxGE8vc
+	SWExSuxVCwDOg2ebz1BGSGOMbElMlw1Vn0uJv860hf2fq8aEWEBtuUwXhPjjP3oi
+	kJK2XHNOI7hFDCbZCGgxwkMtBODmNa8wu/8E6Y6lmwX+qk5IlpOtiO05XCwZFiDA
+	==
+X-ME-Proxy: <xmx:FbEQW1sKrujHlGfu02vRALdbgjHjs9U58zgad83kIBczfpIZaH_lHA>
+X-ME-Proxy: <xmx:FbEQW6SpbvSNBDbovIHO2qvDXYe1ypaZA-_91Xpcc8i4O9b4w8Oszg>
+X-ME-Proxy: <xmx:FbEQWwHBlFU0vwGqfOSenpyP8SaoXPv0eqOzBT_5t3E8MDTnLEecew>
+X-ME-Proxy: <xmx:FbEQW_f2M952dmNkhNR-FzzfIKDf-sfjBELyiR8H-Kp46clLMNTNkQ>
+X-ME-Proxy: <xmx:FbEQWwrD5_NF1oWlp1vsAVhwVO_UwHae3Nx2MTHgtT2p9b5CUrC3Tg>
+X-ME-Proxy: <xmx:FbEQW40NdSKJldXpaGL2inMp5ORST_GCeINBTqAKiucym5jaKhDNYw>
+X-ME-Sender: <xms:FbEQWyF4W76LP7LyDWzRplN00616k0Iejqa8iV1U57mJW0CnSYCaxA>
+Received: by mailuser.nyi.internal (Postfix, from userid 99)
+	id A6887BA780; Thu, 31 May 2018 22:36:05 -0400 (EDT)
+Message-Id: <1527820565.499695.1392530280.7147CEB3@webmail.messagingengine.com>
+From: Andrew Jeffery <andrew@aj.id.au>
+To: Khem Raj <raj.khem@gmail.com>
+MIME-Version: 1.0
+X-Mailer: MessagingEngine.com Webmail Interface - ajax-397f98d6
+References: <20180510063718.16913-1-andrew@aj.id.au>
+	<1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
+	<CAMKF1spm=GQQq90gu58BdrNtqPQx_fxnA01ar9Jmr4PbQnmttQ@mail.gmail.com>
+In-Reply-To: <CAMKF1spm=GQQq90gu58BdrNtqPQx_fxnA01ar9Jmr4PbQnmttQ@mail.gmail.com>
+Date: Fri, 01 Jun 2018 12:06:05 +0930
+Cc: openbmc@lists.ozlabs.org,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2 1/3] meta-python: Add python-pyflame recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,40 +64,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 May 2018 23:13:17 -0000
+X-List-Received-Date: Fri, 01 Jun 2018 02:36:05 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
 
-Security update - fixes CVE-2017-7651 and CVE-2017-7652, as well as a
-number of other non-security issues.
+Hi Khem,
 
-For more details see the release announcement:
+Thanks for testing.
 
-  https://mosquitto.org/blog/2018/02/security-advisory-cve-2017-7651-cve-2017-7652/
+On Fri, 1 Jun 2018, at 02:18, Khem Raj wrote:
+> fails to build on qemumips
+> 
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../mosquitto/{mosquitto_1.4.14.bb => mosquitto_1.4.15.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.4.14.bb => mosquitto_1.4.15.bb} (95%)
+Do I have to support MIPS for the recipe to be acceptable? Is there some way we can limit the recipe to architectures for which the software is known to work?
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
-similarity index 95%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
-index 13ce3811d..939bad54e 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
-@@ -17,8 +17,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
- "
- 
--SRC_URI[md5sum] = "6b0966e93f118bc71ad7b61600a6c2d3"
--SRC_URI[sha256sum] = "156b1fa731d12baad4b8b22f7b6a8af50ba881fc711b81e9919ec103cf2942d1"
-+SRC_URI[md5sum] = "546cb1ce35cc3f7d23e6d2f1f9a962e7"
-+SRC_URI[sha256sum] = "7d3b3e245a3b4ec94b05678c8199c806359737949f4cfe0bf936184f6ca89a83"
- 
- inherit systemd update-rc.d useradd
- 
--- 
-2.14.3
+Andrew
 
+> | ../../git/src/ptrace.cc: In function 'user_regs_struct
+> pyflame::PtraceGetRegs(pid_t)':
+> | ../../git/src/ptrace.cc:125:41: error: return type 'user_regs_struct
+> {aka struct user_regs_struct}' is incomplete
+> |  user_regs_struct PtraceGetRegs(pid_t pid) {
+> |                                          ^
+> | ../../git/src/ptrace.cc:125:18: error: ambiguating new declaration
+> of 'void pyflame::PtraceGetRegs(pid_t)'
+> |  user_regs_struct PtraceGetRegs(pid_t pid) {
+> |                   ^~~~~~~~~~~~~
+> | In file included from ../../git/src/ptrace.cc:15:0:
+> | ../../git/src/./ptrace.h:48:18: note: old declaration
+> 'user_regs_struct pyflame::PtraceGetRegs(pid_t)'
+> |  user_regs_struct PtraceGetRegs(pid_t pid);
+> |                   ^~~~~~~~~~~~~
+> | ../../git/src/ptrace.cc:126:20: error: aggregate 'user_regs_struct
+> regs' has incomplete type and cannot be defined
+> |    user_regs_struct regs;
+> |                     ^~~~
+> | ../../git/src/ptrace.cc: In function 'void
+> pyflame::PtraceSetRegs(pid_t, user_regs_struct)':
+> | ../../git/src/ptrace.cc:135:48: error: 'regs' has incomplete type
+> |  void PtraceSetRegs(pid_t pid, user_regs_struct regs) {
+> |                                                 ^~~~
+> | In file included from ../../git/src/ptrace.cc:15:0:
+> | ../../git/src/./ptrace.h:29:16: note: forward declaration of
+> 'user_regs_struct {aka struct user_regs_struct}'
+> |  typedef struct user_regs_struct user_regs_struct;
+> |                 ^~~~~~~~~~~~~~~~
+> | make[2]: *** [ptrace.o] Error 1
+> | make[2]: *** Waiting for unfinished jobs....
+> | make[2]: Leaving directory
+> `/mnt/jenkins/workspace/OpenEmbedded/build/tmp/work/mips32r2-bec-linux/
+> python-pyflame/1.6.6-r0/build/src'
+> 
+> On Tue, May 29, 2018 at 4:48 AM, Andrew Jeffery <andrew@aj.id.au> wrote:
+> > On Thu, 10 May 2018, at 16:07, Andrew Jeffery wrote:
+> >> Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+> >
+> > Ping - is there anything I need to revise for this patch or the following two?
+> >
+> > Cheers,
+> >
+> > Andrew
+> >
+> >> ---
+> >>  meta-python/recipes-devtools/python/python-pyflame.inc      | 12 ++++++++++++
+> >>  meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb |  1 +
+> >>  2 files changed, 13 insertions(+)
+> >>  create mode 100644 meta-python/recipes-devtools/python/python-pyflame.inc
+> >>  create mode 100644 meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> >>
+> >> diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/
+> >> meta-python/recipes-devtools/python/python-pyflame.inc
+> >> new file mode 100644
+> >> index 000000000000..3b84a7e8f8e3
+> >> --- /dev/null
+> >> +++ b/meta-python/recipes-devtools/python/python-pyflame.inc
+> >> @@ -0,0 +1,12 @@
+> >> +SUMMARY = "Pyflame: A Ptracing Profiler For Python"
+> >> +HOMEPAGE = "https://github.com/uber/pyflame"
+> >> +SECTION = "devel/python"
+> >> +LICENSE = "Apache-2.0"
+> >> +LIC_FILES_CHKSUM = "file://${S}/
+> >> LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+> >> +DEPENDS = "python"
+> >> +
+> >> +SRC_URI = "git://github.com/uber/pyflame.git;protocol=https;tag=v${PV}"
+> >> +S = "${WORKDIR}/git"
+> >> +
+> >> +inherit pkgconfig autotools
+> >> +
+> >> diff --git a/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> >> b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> >> new file mode 100644
+> >> index 000000000000..96f03305f883
+> >> --- /dev/null
+> >> +++ b/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb
+> >> @@ -0,0 +1 @@
+> >> +require python-pyflame.inc
+> >> --
+> >> 2.14.1
+> >>
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
