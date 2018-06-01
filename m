@@ -1,51 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D8E974F37
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 7003774F83
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jun 2018 04:58:15 +0000 (UTC)
-Received: by mail-pf0-f173.google.com with SMTP id a14-v6so11894524pfi.1
+	Fri,  1 Jun 2018 04:58:16 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id z1-v6so3771472pgv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2018 21:58:16 -0700 (PDT)
+	Thu, 31 May 2018 21:58:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=73N0nP5HHIJiWeFdRlf180oqKMgqociaF7yN5zQb2rM=;
-	b=Li3+8ai+BMg5THhroOBaiHdp1mI8LwILUUfey8TBaTKHhlgFF2xNHCeJt3v10KoL7F
-	99NJ3eY7e08PxgIA1ZR8DoOgFxN+nb1Ij3YNixWwKBgAUPppwU3/GgkE+ETdUw5j4qcH
-	TC0gJSOj4PJrUd10/CMTFwK9yUQGJmrqHb1BqLCq71WnuBL1f21n2XEI2w5aQU/34aTs
-	bZVMWqlKh4DiMmdBo/mHo9Y1hh4PDw3q/4KCp+Y3N1BF+VCZLkXWFVisRCAj24d9RQh9
-	K8cOcs3X/DMaXlTpb6oHVQRrCzu+nK9IWVHRsyp7KfNlFJppFwOduQq5qjgQZAWQmq/v
-	Hd3A==
+	bh=w/5V5ZDQTNffrWZjAUQcjJegvAdjlCHW/EPKzQphJw0=;
+	b=NB2Kua4mYT9NRnpikW6SCoD8Ls0cgQKdWKnVOebBbPWeT1sw0IKThP8GKgoJb3q1Ap
+	xmoL3ASCfSSbsJlHQVchUDoMCUQdsHeAWx1X1RxRvWW/D+x6/ThfmmYzzLgzdmOh1ZXl
+	UytAxgAywTchFPmjMmB7O8KqX6V5XC5JGfJ1ACcdCqdg0bJSwlvUr2yFzqSABDYUTsuG
+	1E7FEveyxMns8mGn+AW250e8//MJKEVR608LPY8Q8GsnS8qnuighZVEFb1lh78yQMTjm
+	oK/mlxmLV3F3XL24kt8ugmPnnyYbFgSi8hdCecXkKpNrHHW5TgTgg/9/dY/6sRE3TNuy
+	NBZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=73N0nP5HHIJiWeFdRlf180oqKMgqociaF7yN5zQb2rM=;
-	b=TfcV8EKDJnUM2YAPwVKopcReYDPAr4eRcYM1o/OCTjo/ZFIMvKyTWZ772V9pl2Dzcp
-	kSGaS3GOoAVHFeqzRbPEJ6WrW8yUcTnEONboNaRCdHLfMyJZCKDvoP5OKcQhRZXypWH5
-	Y20cXcN2zZiFTOiU1s3d1lRLP02JKQLdg2cjo21mJZKM8/9HkQs3eU3iZY/ZKW+RcVeg
-	UYp7vgzRx4EqbNaeYOT47LodqcVArxJQvPZTowvfdEH1AihhADf9rvu0VKut+ypqdcjx
-	5SRphrtkyaZjFn5MVSrWSzEwWHBzOW6Iu5kJxqdE2io25f05qV+h7HRWxNZFYMdZz9sd
-	LnpA==
-X-Gm-Message-State: ALKqPwfeAZ2zXhktWVyw/VIOSJX6bEHRqMj1h0E3mupsOlVzXTQeMVa7
-	coQG38e4ZbPkeQx6gSllBSL52g==
-X-Google-Smtp-Source: ADUXVKL2kRyl8pFgu/+IebJL1Gf548vLOBv4vfZVDnxzJYZDQfDrQNBdagrDZjWqhH1OwArqPyXgtw==
-X-Received: by 2002:a63:aa07:: with SMTP id
-	e7-v6mr7658934pgf.331.1527829095925; 
-	Thu, 31 May 2018 21:58:15 -0700 (PDT)
+	bh=w/5V5ZDQTNffrWZjAUQcjJegvAdjlCHW/EPKzQphJw0=;
+	b=jkuQYq7JNBBbApyFO/WSyF4OVdeXNzn/RFizOxRNZpIheP9oP//SLnjPW39keQRiDO
+	9gi0+5CiV338MEo5FS+fv8e3bETgZFRguZdHHu94ei0SQPyxp5xnTmxBwjoozwTjM3s5
+	/i3U55Wdr37eIqPQJZ3k2lHe7MqXfIs84D9nPn//8i5LnBttD1Crz0XEXbVnrqrMpBOX
+	1cF2DKUYnB7BdDWS7WQu1CTEg800wnAmF+727gQksHrUUjsLyKNmkGfVQNdJvop33k5t
+	jjZbr6Vtwa0eBFYdwsUpuRlCHD8uplMSn2euybWzfcsx5m1ajwP+pb/5UYnTPyPpN+3J
+	GyQg==
+X-Gm-Message-State: ALKqPweCX2RTeG0J8WCM1V3A3nexnDy4s23diN4gFa0tXvrW1RRoPigz
+	NSic1NP0DLHQCDCV6h630o2eFQ==
+X-Google-Smtp-Source: ADUXVKJaRlX36I1GxhQyVulw1NhhyWX5tp3AtpPzW4LzPBFkYBzeY9bYtA9DU37wrmA2tgMlgfXYEQ==
+X-Received: by 2002:a63:bd09:: with SMTP id
+	a9-v6mr7607655pgf.250.1527829097069; 
+	Thu, 31 May 2018 21:58:17 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
 	q68-v6sm67909762pfb.182.2018.05.31.21.58.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 May 2018 21:58:15 -0700 (PDT)
+	Thu, 31 May 2018 21:58:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 May 2018 21:58:14 -0700
-Message-Id: <20180601045815.15819-2-raj.khem@gmail.com>
+Date: Thu, 31 May 2018 21:58:15 -0700
+Message-Id: <20180601045815.15819-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20180601045815.15819-1-raj.khem@gmail.com>
 References: <20180601045815.15819-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/3] lowpan-tools: Fix build with gcc-8
+Subject: [meta-oe][PATCH 3/3] openocd: Upgrade to latest tip of master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,172 +57,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2018 04:58:15 -0000
+X-List-Received-Date: Fri, 01 Jun 2018 04:58:16 -0000
+
+Fix build with new libusb and gcc8
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...tential-string-truncation-in-strncpy.patch | 139 ++++++++++++++++++
- .../lowpan-tools/lowpan-tools_git.bb          |   1 +
- 2 files changed, 140 insertions(+)
- create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-potential-string-truncation-in-strncpy.patch
+ ...2-deprecated-libusb_set_debug-with-l.patch | 39 +++++++++++++++++++
+ .../recipes-devtools/openocd/openocd_git.bb   |  5 ++-
+ 2 files changed, 42 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
 
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-potential-string-truncation-in-strncpy.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-potential-string-truncation-in-strncpy.patch
+diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
 new file mode 100644
-index 0000000000..e621d8f2a8
+index 0000000000..c5b9083dca
 --- /dev/null
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-potential-string-truncation-in-strncpy.patch
-@@ -0,0 +1,139 @@
-+From 58b6d9a2efe101e5b80fd708e6f84c7ca779ce93 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
+@@ -0,0 +1,39 @@
++From b95a996bfb281104b68ec66f32ebb79db519a4a8 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 31 May 2018 20:27:43 -0700
-+Subject: [PATCH] Fix potential string truncation in strncpy()
++Date: Thu, 31 May 2018 21:06:46 -0700
++Subject: [PATCH] Fix libusb-1.0.22 deprecated libusb_set_debug with
++ libusb_set_option
 +
-+GCC 8 complains about the string truncation during copy
++libusb_set_debug is deprecated in libusb >= 1.0.22 therefore replace
++with equivalent libusb_set_option()  API
 +
-+error: 'strncpy' specified bound 16 equals destination size
++see libusb commit for more details
 +
-+Upstream-Status: Inappropriate [depricated component]
++https://github.com/libusb/libusb/commit/539f22e2fd916558d11ab9a66f10f461c5593168
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tests/listen-packet.c | 3 ++-
-+ tests/listen.c        | 3 ++-
-+ tests/test2.c         | 4 ++--
-+ tests/test3.c         | 3 ++-
-+ tests/test4.c         | 3 ++-
-+ tests/test5.c         | 3 ++-
-+ tests/test6.c         | 3 ++-
-+ tests/test7.c         | 3 ++-
-+ 8 files changed, 16 insertions(+), 9 deletions(-)
++Upstream-Status: Submitted [http://openocd.zylin.com/#/c/4540/]
++ src/jtag/drivers/xds110.c | 5 ++++-
++ 1 file changed, 4 insertions(+), 1 deletion(-)
 +
-+diff --git a/tests/listen-packet.c b/tests/listen-packet.c
-+index e40af81..eae0c71 100644
-+--- a/tests/listen-packet.c
-++++ b/tests/listen-packet.c
-+@@ -50,7 +50,8 @@ int main(int argc, char **argv) {
-+ 		return 1;
-+ 	}
++diff --git a/src/jtag/drivers/xds110.c b/src/jtag/drivers/xds110.c
++index 90b699027..9bfe02ea8 100644
++--- a/src/jtag/drivers/xds110.c
+++++ b/src/jtag/drivers/xds110.c
++@@ -367,8 +367,11 @@ static bool usb_connect(void)
 + 
-+-	strncpy(req.ifr_name, iface, IF_NAMESIZE);
-++	strncpy(req.ifr_name, iface, IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFINDEX, &req);
-+ 	if (ret < 0)
-+ 		perror("ioctl: SIOCGIFINDEX");
-+diff --git a/tests/listen.c b/tests/listen.c
-+index 75c320b..5ce1ed9 100644
-+--- a/tests/listen.c
-++++ b/tests/listen.c
-+@@ -47,7 +47,8 @@ int main(int argc, char **argv) {
-+ 		return 1;
-+ 	}
-+ 
-+-	strncpy(req.ifr_name, iface, IFNAMSIZ);
-++	strncpy(req.ifr_name, iface, IFNAMSIZ - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFHWADDR, &req);
-+ 	if (ret < 0)
-+ 		perror("ioctl: SIOCGIFHWADDR");
-+diff --git a/tests/test2.c b/tests/test2.c
-+index 58eb74b..5d02838 100644
-+--- a/tests/test2.c
-++++ b/tests/test2.c
-+@@ -45,8 +45,8 @@ int main(int argc, char **argv) {
-+ 		perror("socket");
-+ 		return 1;
-+ 	}
++ 		/* Set libusb to auto detach kernel and disable debug messages */
++ 		(void)libusb_set_auto_detach_kernel_driver(dev, 1);
+++#if LIBUSB_API_VERSION >= 0x01000106
+++		libusb_set_option(ctx, LIBUSB_OPTION_LOG_LEVEL, LIBUSB_LOG_LEVEL_NONE);
+++#else
++ 		libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_NONE);
 +-
-+-	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE);
-++	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFHWADDR, &req);
-+ 	if (ret < 0)
-+ 		perror("ioctl: SIOCGIFHWADDR");
-+diff --git a/tests/test3.c b/tests/test3.c
-+index fb36627..2f50a5a 100644
-+--- a/tests/test3.c
-++++ b/tests/test3.c
-+@@ -46,7 +46,8 @@ int main(int argc, char **argv) {
-+ 		return 1;
-+ 	}
-+ 
-+-	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE);
-++	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFHWADDR, &req);
-+ 	if (ret < 0)
-+ 		perror("ioctl: SIOCGIFHWADDR");
-+diff --git a/tests/test4.c b/tests/test4.c
-+index 33c274c..8737149 100644
-+--- a/tests/test4.c
-++++ b/tests/test4.c
-+@@ -46,7 +46,8 @@ int main(int argc, char **argv) {
-+ 		return 1;
-+ 	}
-+ 
-+-	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE);
-++	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFHWADDR, &req);
-+ 	if (ret < 0)
-+ 		perror("ioctl: SIOCGIFHWADDR");
-+diff --git a/tests/test5.c b/tests/test5.c
-+index 4439dfa..28db562 100644
-+--- a/tests/test5.c
-++++ b/tests/test5.c
-+@@ -45,7 +45,8 @@ int main(int argc, char **argv) {
-+ 		return 1;
-+ 	}
-+ 
-+-	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE);
-++	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFADDR, &req);
-+ 	if (ret < 0) {
-+ 		perror("ioctl: SIOCGIFADDR");
-+diff --git a/tests/test6.c b/tests/test6.c
-+index e375bfb..ce7de59 100644
-+--- a/tests/test6.c
-++++ b/tests/test6.c
-+@@ -45,7 +45,8 @@ int main(int argc, char **argv) {
-+ 		return 1;
-+ 	}
-+ 
-+-	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE);
-++	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFADDR, &req);
-+ 	if (ret < 0) {
-+ 		perror("ioctl: SIOCGIFADDR");
-+diff --git a/tests/test7.c b/tests/test7.c
-+index e9a5a55..37da22d 100644
-+--- a/tests/test7.c
-++++ b/tests/test7.c
-+@@ -58,7 +58,8 @@ int main(int argc, char **argv) {
-+ 	if (ret)
-+ 		perror("setsockopt");
-+ 
-+-	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE);
-++	strncpy(req.ifr_name, argv[1] ?: "wpan0", IF_NAMESIZE - 1);
-++	req.ifr_name[IF_NAMESIZE - 1] = '\0';
-+ 	ret = ioctl(sd, SIOCGIFHWADDR, &req);
-+ 	if (ret < 0)
-+ 		perror("ioctl: SIOCGIFHWADDR");
+++#endif
++ 		/* Claim the debug interface on the XDS110 */
++ 		result = libusb_claim_interface(dev, INTERFACE_DEBUG);
++ 	} else {
 +-- 
 +2.17.1
 +
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index d0fe59c983..b70c43f156 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/linux-wpan/lowpan-tools \
-            file://0001-src-iz.c-Undef-dprintf-before-redefining.patch \
-            file://0001-Remove-newline-from-format-line.patch \
-            file://0001-coordinator-Fix-strncpy-range-warning.patch \
-+           file://0001-Fix-potential-string-truncation-in-strncpy.patch \
-            "
- SRCREV = "1c2d8674cc6f4b1166a066e8822e295c105ae7a2"
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 67abeede93..84727bf970 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -5,8 +5,9 @@ DEPENDS = "libusb-compat libftdi"
+ RDEPENDS_${PN} = "libusb1"
  
+ SRC_URI = "git://repo.or.cz/openocd.git \
+-"
+-SRCREV = "3737dd69e73816d186ba418d7b833462a8041079"
++           file://0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch \
++          "
++SRCREV = "cdf1e826eb23c29de1019ce64125f644f01b0afe"
+ 
+ PV = "0.10+gitr${SRCPV}"
+ S = "${WORKDIR}/git"
 -- 
 2.17.1
 
