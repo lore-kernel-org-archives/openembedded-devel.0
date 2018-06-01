@@ -1,50 +1,59 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 7003774F83
+Return-Path: <andrew@aj.id.au>
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
+	[66.111.4.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FD9760053
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jun 2018 04:58:16 +0000 (UTC)
-Received: by mail-pg0-f53.google.com with SMTP id z1-v6so3771472pgv.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 May 2018 21:58:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=w/5V5ZDQTNffrWZjAUQcjJegvAdjlCHW/EPKzQphJw0=;
-	b=NB2Kua4mYT9NRnpikW6SCoD8Ls0cgQKdWKnVOebBbPWeT1sw0IKThP8GKgoJb3q1Ap
-	xmoL3ASCfSSbsJlHQVchUDoMCUQdsHeAWx1X1RxRvWW/D+x6/ThfmmYzzLgzdmOh1ZXl
-	UytAxgAywTchFPmjMmB7O8KqX6V5XC5JGfJ1ACcdCqdg0bJSwlvUr2yFzqSABDYUTsuG
-	1E7FEveyxMns8mGn+AW250e8//MJKEVR608LPY8Q8GsnS8qnuighZVEFb1lh78yQMTjm
-	oK/mlxmLV3F3XL24kt8ugmPnnyYbFgSi8hdCecXkKpNrHHW5TgTgg/9/dY/6sRE3TNuy
-	NBZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=w/5V5ZDQTNffrWZjAUQcjJegvAdjlCHW/EPKzQphJw0=;
-	b=jkuQYq7JNBBbApyFO/WSyF4OVdeXNzn/RFizOxRNZpIheP9oP//SLnjPW39keQRiDO
-	9gi0+5CiV338MEo5FS+fv8e3bETgZFRguZdHHu94ei0SQPyxp5xnTmxBwjoozwTjM3s5
-	/i3U55Wdr37eIqPQJZ3k2lHe7MqXfIs84D9nPn//8i5LnBttD1Crz0XEXbVnrqrMpBOX
-	1cF2DKUYnB7BdDWS7WQu1CTEg800wnAmF+727gQksHrUUjsLyKNmkGfVQNdJvop33k5t
-	jjZbr6Vtwa0eBFYdwsUpuRlCHD8uplMSn2euybWzfcsx5m1ajwP+pb/5UYnTPyPpN+3J
-	GyQg==
-X-Gm-Message-State: ALKqPweCX2RTeG0J8WCM1V3A3nexnDy4s23diN4gFa0tXvrW1RRoPigz
-	NSic1NP0DLHQCDCV6h630o2eFQ==
-X-Google-Smtp-Source: ADUXVKJaRlX36I1GxhQyVulw1NhhyWX5tp3AtpPzW4LzPBFkYBzeY9bYtA9DU37wrmA2tgMlgfXYEQ==
-X-Received: by 2002:a63:bd09:: with SMTP id
-	a9-v6mr7607655pgf.250.1527829097069; 
-	Thu, 31 May 2018 21:58:17 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
-	by smtp.gmail.com with ESMTPSA id
-	q68-v6sm67909762pfb.182.2018.05.31.21.58.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 May 2018 21:58:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 May 2018 21:58:15 -0700
-Message-Id: <20180601045815.15819-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20180601045815.15819-1-raj.khem@gmail.com>
-References: <20180601045815.15819-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] openocd: Upgrade to latest tip of master
+	Fri,  1 Jun 2018 05:52:06 +0000 (UTC)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailout.nyi.internal (Postfix) with ESMTP id 4DA6820DF7;
+	Fri,  1 Jun 2018 01:52:07 -0400 (EDT)
+Received: from web4 ([10.202.2.214])
+	by compute4.internal (MEProxy); Fri, 01 Jun 2018 01:52:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-sender
+	:x-me-sender:x-sasl-enc; s=fm2; bh=65pLUBWEPCsojhjEIyCyARknYXaSD
+	0A9hSwDebCphrk=; b=aB40rhBJOESKkdyZq3hCNXMgDGWxtzvf2fSEywiCd4C2C
+	xbLlZx2b4rHi3LHtvgZFlFQEd7varjIQjBtTEmOTwwvfXqZ7uQ22v2Lv0EfltqRa
+	HZrnCRANLXca3uR285QaxT/PZQLiSaFawMaCxIHPSRsPot8Il2feV1NSJfQhIpNN
+	8BC2ZyBijujIvQBO2OPbvc/BB6q6lmkkqT68cGPGfqw7Jf1Vpn4teoexrcG3qnZb
+	ARoa3FAnfgA9NCxRD5Y97QdJj3Op3un9d2vB6mqFTqLAjFBPaTJq8VgoaAyCGodm
+	HjhWWOy7cxcNzluqjDSZqKQ71QCMVcibGxz5mExoQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-transfer-encoding:content-type
+	:date:from:in-reply-to:message-id:mime-version:references
+	:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=65pLUB
+	WEPCsojhjEIyCyARknYXaSD0A9hSwDebCphrk=; b=JVt+fyo7A/eDt+shGqakbk
+	zyODs19OpjQeyXSMkqiOB8FqFTjyUmFrk5+VgwKPd45Oo0gstA0WF6TKmAWOmk2q
+	ZnmkGm5W7G0RWpfQI+JmHMX4v+DTR/Re3AXV8Kq3IEmAmhUdwCSbbaCg2OCqyyXw
+	8kQqgor3ISAo97rQ8CWuLncG0yxIxMSiUvzgD6VQAwKUH/NSVcdDT6TK8WCd7FCi
+	OMwuVCo06R8OQ7cCeGT0eNeBUwFAoi7AuiEOuirc5y+3LxZbYAV7C/JvUkHv7znu
+	hwPN59bA7//BLMz/FwtLGK2FLmiFoaPlJq0TWi+otrlnH3I9gk/K15tI2jqimL4w
+	==
+X-ME-Proxy: <xmx:B98QWwDe1s1i31VwTQtNY0_zTzUFqql7SAd2f3h_G9QfsELfc-F8Wg>
+X-ME-Proxy: <xmx:B98QW9GT2sXUOv8QuwE-xUNjNy5QwT3sRIf2isnP6VEIYiqnrGdvFw>
+X-ME-Proxy: <xmx:B98QWwLEqvpmJ9v6W7vCaO5Yt09B7XqKfm4EOKuiJb1UgNAF5Jfo5Q>
+X-ME-Proxy: <xmx:B98QW5l26EH2r6QxvV_ygTQnDfai1ut5Ig-dBpICHKyID-M-L3sX1w>
+X-ME-Proxy: <xmx:B98QWwRDKjyOsQC3Fassy4w7zNR5uf3_SHDtXy_bI5YBsGBFFuDVOA>
+X-ME-Proxy: <xmx:B98QW0DhaX8WnEYDNHz3zq9bIymlQKaPPJZazC78CFzQ6uZpHa1JMA>
+X-ME-Sender: <xms:B98QW-KVfczsCObOe5z9b7-VA__9w8qiXYpGjzavIGIY4psEX6PNUQ>
+Received: by mailuser.nyi.internal (Postfix, from userid 99)
+	id F319DBA780; Fri,  1 Jun 2018 01:52:06 -0400 (EDT)
+Message-Id: <1527832326.1573871.1392638136.4D3CA167@webmail.messagingengine.com>
+From: Andrew Jeffery <andrew@aj.id.au>
+To: Khem Raj <raj.khem@gmail.com>
+MIME-Version: 1.0
+X-Mailer: MessagingEngine.com Webmail Interface - ajax-397f98d6
+Date: Fri, 01 Jun 2018 15:22:06 +0930
+In-Reply-To: <CAMKF1sr-k=TK-wyUtDJMUT8DK=EcS3A08jCJD-xjOD_Aw-MbQw@mail.gmail.com>
+References: <20180510063718.16913-1-andrew@aj.id.au>
+	<1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
+	<CAMKF1spm=GQQq90gu58BdrNtqPQx_fxnA01ar9Jmr4PbQnmttQ@mail.gmail.com>
+	<1527820565.499695.1392530280.7147CEB3@webmail.messagingengine.com>
+	<CAMKF1sr-k=TK-wyUtDJMUT8DK=EcS3A08jCJD-xjOD_Aw-MbQw@mail.gmail.com>
+Cc: openbmc@lists.ozlabs.org,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2 1/3] meta-python: Add python-pyflame recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,79 +66,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2018 04:58:16 -0000
+X-List-Received-Date: Fri, 01 Jun 2018 05:52:06 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
 
-Fix build with new libusb and gcc8
+On Fri, 1 Jun 2018, at 14:07, Khem Raj wrote:
+> On Thu, May 31, 2018 at 7:36 PM, Andrew Jeffery <andrew@aj.id.au> wrote:
+> > Hi Khem,
+> >
+> > Thanks for testing.
+> >
+> > On Fri, 1 Jun 2018, at 02:18, Khem Raj wrote:
+> >> fails to build on qemumips
+> >>
+> >
+> > Do I have to support MIPS for the recipe to be acceptable? Is there some way we can limit the recipe to architectures for which the software is known to work?
+> 
+> Ideally we tend to support the core architectures and mips is one of
+> them, so unless there is a very basic
+> reason e.g. missing support etc. we tend to fix the problems,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...2-deprecated-libusb_set_debug-with-l.patch | 39 +++++++++++++++++++
- .../recipes-devtools/openocd/openocd_git.bb   |  5 ++-
- 2 files changed, 42 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
+Doesn't the fact that the source doesn't build indicate missing support?
 
-diff --git a/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
-new file mode 100644
-index 0000000000..c5b9083dca
---- /dev/null
-+++ b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
-@@ -0,0 +1,39 @@
-+From b95a996bfb281104b68ec66f32ebb79db519a4a8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 31 May 2018 21:06:46 -0700
-+Subject: [PATCH] Fix libusb-1.0.22 deprecated libusb_set_debug with
-+ libusb_set_option
-+
-+libusb_set_debug is deprecated in libusb >= 1.0.22 therefore replace
-+with equivalent libusb_set_option()  API
-+
-+see libusb commit for more details
-+
-+https://github.com/libusb/libusb/commit/539f22e2fd916558d11ab9a66f10f461c5593168
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Submitted [http://openocd.zylin.com/#/c/4540/]
-+ src/jtag/drivers/xds110.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/jtag/drivers/xds110.c b/src/jtag/drivers/xds110.c
-+index 90b699027..9bfe02ea8 100644
-+--- a/src/jtag/drivers/xds110.c
-++++ b/src/jtag/drivers/xds110.c
-+@@ -367,8 +367,11 @@ static bool usb_connect(void)
-+ 
-+ 		/* Set libusb to auto detach kernel and disable debug messages */
-+ 		(void)libusb_set_auto_detach_kernel_driver(dev, 1);
-++#if LIBUSB_API_VERSION >= 0x01000106
-++		libusb_set_option(ctx, LIBUSB_OPTION_LOG_LEVEL, LIBUSB_LOG_LEVEL_NONE);
-++#else
-+ 		libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_NONE);
-+-
-++#endif
-+ 		/* Claim the debug interface on the XDS110 */
-+ 		result = libusb_claim_interface(dev, INTERFACE_DEBUG);
-+ 	} else {
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-index 67abeede93..84727bf970 100644
---- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-+++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-@@ -5,8 +5,9 @@ DEPENDS = "libusb-compat libftdi"
- RDEPENDS_${PN} = "libusb1"
- 
- SRC_URI = "git://repo.or.cz/openocd.git \
--"
--SRCREV = "3737dd69e73816d186ba418d7b833462a8041079"
-+           file://0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch \
-+          "
-+SRCREV = "cdf1e826eb23c29de1019ce64125f644f01b0afe"
- 
- PV = "0.10+gitr${SRCPV}"
- S = "${WORKDIR}/git"
--- 
-2.17.1
+I don't know what C library you were building against, but glibc for mips doesn't contain a definition for struct user_regs{,_struct} in sysdeps/unix/sysv/linux/mips/sys/user.h. It's a bit nasty, as the header very clearly states that user.h is purely for gdb, but pyflame is making use of it anyway. Patch 2/3 fixes the pyflame source for 32-bit ARM, where the struct has a different name, but at least it's present. I haven't investigated whether we could pull in the appropriate header from the kernel instead of libc, but again because ARM can be made to work with relatively little effort I hadn't bothered.
 
+> so I would suggest to see if it can be fixed preferably
+> if not then we should cite the reason and probably we can add mips to
+> incompatible hosts but that is last resort
+> once a recipe goes in it becomes a maintenance work and I would like
+> to make it as light as possible.
+
+I could go down the path of working this out for mips, but fixing mips falls outside the scope of what I was doing at the time (I'm several yaks deep here), and given the problem is external to pyflame itself I'm not terribly motivated to fix it.
+
+So I feel at this point it's either blacklist mips or we leave the recipe out of tree.
+
+As an alternative to making mips work, can I assist with the associated maintenance hassle in some way?
+
+Cheers,
+
+Andrew
 
