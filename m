@@ -1,59 +1,48 @@
-Return-Path: <andrew@aj.id.au>
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FD9760053
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id DE949745D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jun 2018 05:52:06 +0000 (UTC)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id 4DA6820DF7;
-	Fri,  1 Jun 2018 01:52:07 -0400 (EDT)
-Received: from web4 ([10.202.2.214])
-	by compute4.internal (MEProxy); Fri, 01 Jun 2018 01:52:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aj.id.au; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm2; bh=65pLUBWEPCsojhjEIyCyARknYXaSD
-	0A9hSwDebCphrk=; b=aB40rhBJOESKkdyZq3hCNXMgDGWxtzvf2fSEywiCd4C2C
-	xbLlZx2b4rHi3LHtvgZFlFQEd7varjIQjBtTEmOTwwvfXqZ7uQ22v2Lv0EfltqRa
-	HZrnCRANLXca3uR285QaxT/PZQLiSaFawMaCxIHPSRsPot8Il2feV1NSJfQhIpNN
-	8BC2ZyBijujIvQBO2OPbvc/BB6q6lmkkqT68cGPGfqw7Jf1Vpn4teoexrcG3qnZb
-	ARoa3FAnfgA9NCxRD5Y97QdJj3Op3un9d2vB6mqFTqLAjFBPaTJq8VgoaAyCGodm
-	HjhWWOy7cxcNzluqjDSZqKQ71QCMVcibGxz5mExoQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:content-type
-	:date:from:in-reply-to:message-id:mime-version:references
-	:subject:to:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=65pLUB
-	WEPCsojhjEIyCyARknYXaSD0A9hSwDebCphrk=; b=JVt+fyo7A/eDt+shGqakbk
-	zyODs19OpjQeyXSMkqiOB8FqFTjyUmFrk5+VgwKPd45Oo0gstA0WF6TKmAWOmk2q
-	ZnmkGm5W7G0RWpfQI+JmHMX4v+DTR/Re3AXV8Kq3IEmAmhUdwCSbbaCg2OCqyyXw
-	8kQqgor3ISAo97rQ8CWuLncG0yxIxMSiUvzgD6VQAwKUH/NSVcdDT6TK8WCd7FCi
-	OMwuVCo06R8OQ7cCeGT0eNeBUwFAoi7AuiEOuirc5y+3LxZbYAV7C/JvUkHv7znu
-	hwPN59bA7//BLMz/FwtLGK2FLmiFoaPlJq0TWi+otrlnH3I9gk/K15tI2jqimL4w
-	==
-X-ME-Proxy: <xmx:B98QWwDe1s1i31VwTQtNY0_zTzUFqql7SAd2f3h_G9QfsELfc-F8Wg>
-X-ME-Proxy: <xmx:B98QW9GT2sXUOv8QuwE-xUNjNy5QwT3sRIf2isnP6VEIYiqnrGdvFw>
-X-ME-Proxy: <xmx:B98QWwLEqvpmJ9v6W7vCaO5Yt09B7XqKfm4EOKuiJb1UgNAF5Jfo5Q>
-X-ME-Proxy: <xmx:B98QW5l26EH2r6QxvV_ygTQnDfai1ut5Ig-dBpICHKyID-M-L3sX1w>
-X-ME-Proxy: <xmx:B98QWwRDKjyOsQC3Fassy4w7zNR5uf3_SHDtXy_bI5YBsGBFFuDVOA>
-X-ME-Proxy: <xmx:B98QW0DhaX8WnEYDNHz3zq9bIymlQKaPPJZazC78CFzQ6uZpHa1JMA>
-X-ME-Sender: <xms:B98QW-KVfczsCObOe5z9b7-VA__9w8qiXYpGjzavIGIY4psEX6PNUQ>
-Received: by mailuser.nyi.internal (Postfix, from userid 99)
-	id F319DBA780; Fri,  1 Jun 2018 01:52:06 -0400 (EDT)
-Message-Id: <1527832326.1573871.1392638136.4D3CA167@webmail.messagingengine.com>
-From: Andrew Jeffery <andrew@aj.id.au>
-To: Khem Raj <raj.khem@gmail.com>
-MIME-Version: 1.0
-X-Mailer: MessagingEngine.com Webmail Interface - ajax-397f98d6
-Date: Fri, 01 Jun 2018 15:22:06 +0930
-In-Reply-To: <CAMKF1sr-k=TK-wyUtDJMUT8DK=EcS3A08jCJD-xjOD_Aw-MbQw@mail.gmail.com>
-References: <20180510063718.16913-1-andrew@aj.id.au>
-	<1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
-	<CAMKF1spm=GQQq90gu58BdrNtqPQx_fxnA01ar9Jmr4PbQnmttQ@mail.gmail.com>
-	<1527820565.499695.1392530280.7147CEB3@webmail.messagingengine.com>
-	<CAMKF1sr-k=TK-wyUtDJMUT8DK=EcS3A08jCJD-xjOD_Aw-MbQw@mail.gmail.com>
-Cc: openbmc@lists.ozlabs.org,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2 1/3] meta-python: Add python-pyflame recipe
+	Fri,  1 Jun 2018 10:35:44 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id l1-v6so1819323wmb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Jun 2018 03:35:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=BB+12MH4jZFVeB74ktWv/lVhEW7i54rsyg96iQr5Ns4=;
+	b=VFTEKzLnpjOO/AS2V/q40F/PbXjhSPjuJNvIQ/S1OdN5twL3u7smgPMPJT5qJFcasr
+	bzNTj69espoSdX5dWl6xq/3FxLn3P6liESbjWOyPHyVCqgEFH6ZZpjg59/0p7wdmC/26
+	sY8W6rnHvO+ujo5OxtKCtFXzMTmXaqePGCTk2lOpNfkCI3Aa1kiaPZIPLsu3yDeAzqtk
+	HoHHcYW2sfoR42oQlGfFpt4sa7U8rNxkBZl9BIvO06cneaPXfM0HWYRpWsLyy2s8QJj/
+	tf+Q8rSGWRl68T7skOdK2RWlGNSUlINnDon9oRWNZWuMn+VMXhw9JbktEclnf6uFLgi7
+	jafw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=BB+12MH4jZFVeB74ktWv/lVhEW7i54rsyg96iQr5Ns4=;
+	b=LyMdUjDRJNQG4G/IV9BmODjBwbZu3a/AGILu7X5V6InpaaHwawbeph8vMWDKOBKj9W
+	eidJV+Au8m4XvzCEyohCVdXNfA8hWG1xfla0EhK5CRd+pq9H6XIZxKkSKMBKS8HVOJab
+	D7RGriIPL8svWYGQc9ssz7nQSlad7tilsxFAR2cv+XCK8QpgO8Mbkkv6H1WBUF0FBk9G
+	1tn+h9E8ip73Jk4z3Hj3WjGx3fy8eY8z/Ik9+V8kgn3JYZkZatqCQF5W7zzidfKdpsIX
+	zb9m5fJDp5KqTgTh1M739TvlbVS4ONPz8CdUYYO4ca2BgQR57SR8PG0yW4lSujas/isD
+	l4dQ==
+X-Gm-Message-State: ALKqPwc1YFfWMpwioGxOOSfKFOfL56o+KlIXKQFZmFgnc9gE0hB4VyUV
+	kCDby5vGf9DoIj7HIdFcmHv/7A==
+X-Google-Smtp-Source: ADUXVKJfx0DbXZg/QrZ5u30bVptXDJfoguXc1Unz7aMJBh7zBFwiDzydYv62EgCKIVZjnZK5WroTJg==
+X-Received: by 2002:a50:8307:: with SMTP id
+	7-v6mr11951157edh.263.1527849345113; 
+	Fri, 01 Jun 2018 03:35:45 -0700 (PDT)
+Received: from nick-laptop.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	b56-v6sm23722461edd.85.2018.06.01.03.35.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 01 Jun 2018 03:35:44 -0700 (PDT)
+From: Nicola Lunghi <nick83ola@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Jun 2018 11:35:39 +0100
+Message-Id: <20180601103540.13159-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.17.0
+Cc: Nicola Lunghi <nicola.lunghi@jci.com>
+Subject: [PATCH 1/2] mosquitto: remove example files from installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,43 +55,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2018 05:52:06 -0000
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Fri, 01 Jun 2018 10:35:45 -0000
 
-On Fri, 1 Jun 2018, at 14:07, Khem Raj wrote:
-> On Thu, May 31, 2018 at 7:36 PM, Andrew Jeffery <andrew@aj.id.au> wrote:
-> > Hi Khem,
-> >
-> > Thanks for testing.
-> >
-> > On Fri, 1 Jun 2018, at 02:18, Khem Raj wrote:
-> >> fails to build on qemumips
-> >>
-> >
-> > Do I have to support MIPS for the recipe to be acceptable? Is there some way we can limit the recipe to architectures for which the software is known to work?
-> 
-> Ideally we tend to support the core architectures and mips is one of
-> them, so unless there is a very basic
-> reason e.g. missing support etc. we tend to fix the problems,
+From: Nicola Lunghi <nicola.lunghi@jci.com>
 
-Doesn't the fact that the source doesn't build indicate missing support?
+The mosquitto makefile install a lot of example configuration files
+on the image: remove those
 
-I don't know what C library you were building against, but glibc for mips doesn't contain a definition for struct user_regs{,_struct} in sysdeps/unix/sysv/linux/mips/sys/user.h. It's a bit nasty, as the header very clearly states that user.h is purely for gdb, but pyflame is making use of it anyway. Patch 2/3 fixes the pyflame source for 32-bit ARM, where the struct has a different name, but at least it's present. I haven't investigated whether we could pull in the appropriate header from the kernel instead of libc, but again because ARM can be made to work with relatively little effort I hadn't bothered.
+also move the creation of /etc/mosquitto into the recipe
 
-> so I would suggest to see if it can be fixed preferably
-> if not then we should cite the reason and probably we can add mips to
-> incompatible hosts but that is last resort
-> once a recipe goes in it becomes a maintenance work and I would like
-> to make it as light as possible.
+Signed-off-by: Nicola Lunghi <nicola.lunghi@jci.com>
+---
+ ...move-example-files-from-installation.patch | 36 +++++++++++++++++++
+ .../mosquitto/mosquitto_1.4.14.bb             |  3 ++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/0003-makefile-remove-example-files-from-installation.patch
 
-I could go down the path of working this out for mips, but fixing mips falls outside the scope of what I was doing at the time (I'm several yaks deep here), and given the problem is external to pyflame itself I'm not terribly motivated to fix it.
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/0003-makefile-remove-example-files-from-installation.patch b/meta-networking/recipes-connectivity/mosquitto/files/0003-makefile-remove-example-files-from-installation.patch
+new file mode 100644
+index 0000000000..ebe9044523
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/0003-makefile-remove-example-files-from-installation.patch
+@@ -0,0 +1,36 @@
++From 79627479a30a96ed2326b680eb575306b621eeb9 Mon Sep 17 00:00:00 2001
++From: Nicola Lunghi <nicola.lunghi@jci.com>
++Date: Fri, 1 Jun 2018 11:11:45 +0100
++Subject: [PATCH] Makefile: remove example files from installation
++
++also remove /etc/mosquitto directory
++---
++ Makefile | 9 ---------
++ 1 file changed, 9 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 1fc0805..76f81b1 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -39,18 +39,9 @@ install : mosquitto
++ ifeq ($(WITH_DOCS),yes)
++ 	set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
++ endif
++-	$(INSTALL) -d ${DESTDIR}/etc/mosquitto
++-	$(INSTALL) -m 644 mosquitto.conf ${DESTDIR}/etc/mosquitto/mosquitto.conf.example
++-	$(INSTALL) -m 644 aclfile.example ${DESTDIR}/etc/mosquitto/aclfile.example
++-	$(INSTALL) -m 644 pwfile.example ${DESTDIR}/etc/mosquitto/pwfile.example
++-	$(INSTALL) -m 644 pskfile.example ${DESTDIR}/etc/mosquitto/pskfile.example
++ 
++ uninstall :
++ 	set -e; for d in ${DIRS}; do $(MAKE) -C $${d} uninstall; done
++-	rm -f ${DESTDIR}/etc/mosquitto/mosquitto.conf
++-	rm -f ${DESTDIR}/etc/mosquitto/aclfile.example
++-	rm -f ${DESTDIR}/etc/mosquitto/pwfile.example
++-	rm -f ${DESTDIR}/etc/mosquitto/pskfile.example
++ 
++ dist : reallyclean
++ 	set -e; for d in ${DISTDIRS}; do $(MAKE) -C $${d} dist; done
++-- 
++2.17.0
++
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb
+index 13ce3811d4..ea76c36e61 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.14.bb
+@@ -13,6 +13,7 @@ DEPENDS = "uthash"
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://0001-config.mk-allow-prefix-mandir-localedir-from-environ.patch \
+            file://0002-uthash-remove-in-tree-version.patch \
++           file://0003-makefile-remove-example-files-from-installation.patch \
+            file://mosquitto.service \
+            file://mosquitto.init \
+ "
+@@ -47,6 +48,8 @@ do_install() {
+     install -d ${D}${systemd_unitdir}/system/
+     install -m 0644 ${WORKDIR}/mosquitto.service ${D}${systemd_unitdir}/system/
+ 
++    install -d ${D}${sysconfdir}/mosquitto
++
+     install -d ${D}${sysconfdir}/init.d/
+     install -m 0755 ${WORKDIR}/mosquitto.init ${D}${sysconfdir}/init.d/mosquitto
+     sed -i -e 's,@SBINDIR@,${sbindir},g' \
+-- 
+2.17.0
 
-So I feel at this point it's either blacklist mips or we leave the recipe out of tree.
-
-As an alternative to making mips work, can I assist with the associated maintenance hassle in some way?
-
-Cheers,
-
-Andrew
 
