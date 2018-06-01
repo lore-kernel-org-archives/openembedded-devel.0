@@ -1,51 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AD6171C9B
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FAF874FE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jun 2018 16:57:22 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id n10-v6so15650341plp.0
+	Fri,  1 Jun 2018 17:40:18 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id a13-v6so11567032pgu.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jun 2018 09:57:23 -0700 (PDT)
+	Fri, 01 Jun 2018 10:40:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=ptVoq6CwzHsXSZPOgjB3whvN167RnEkXD3+6CV9QomY=;
-	b=n58RYZ4/TV1rksTqMaDc6IWK33Wo3Nm2S2pQB5YSWah9DPDATi5rwPXn3Iy/tOKmvW
-	60Pn0R/qRq9JVAQb7xfEE1weEzp5SlBnvUMS9QMUHVVS8vTa2z3x94GnkaGqbOwQjfPD
-	j4sG2eCYqni3x6RoboYBWnpNaxes6+DpQU3PHrmxp8lia8sNGH2Le1aEJMeLsL+veLf+
-	wyHyh1+BvxzFng8Pd8Du3OoII2DqgNiPvJzMwSgxVbnjRE22n4FVxgn2AH0CGgzZLIGM
-	MmtN2jh2FlMmk5UeLuGE/904GyoyOLA7GtDlQrgZYUHmUAkkgYMsNVqu/XI1UkdmSYcH
-	x8Pg==
+	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to;
+	bh=LDpMC1Hkjwxib3ZiW0N53gO3a3SyBNCmbjG/G1ypZW0=;
+	b=KxNZUSaOOiL8N+wt2khvcXosMOOipfRL4lfCRhtYm03vbUWSkoNtIO/XtSEYfr+8cM
+	ZrgPsdXtVPFvLb2dsF6HWM8iijtDBDrY5RGT71eE3mbMOnpQ0g3xfRJSY/2iutZKE10A
+	AqHA7V279IFg2tgzmHyL2PQ8sQ9+E96H9E0tInYu4stzry7Dz1VSwROHmuEuPjTj39/T
+	4JWfXPBvf2dOptN3YV17nK4+QQ5hLG0d0STiNqejQA2h6KJXBqZ4zgUxXovTVNjeMeYo
+	Pwl8EHDMZsWyO+gawz2oI+GZXlwgZJjlKUWUdPoydir98aF4Vn6JSSLdCeM7eNryFgf/
+	PW3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=ptVoq6CwzHsXSZPOgjB3whvN167RnEkXD3+6CV9QomY=;
-	b=Rv0H/u3MvTIqToPWDnDuoK2ydPn1Nj3GsFNfCbGtKsRhn+yHdMuUpX07LKFl4mfmgy
-	GBmWkVyk7qbyLk9X30O3aYqdAxRQrO7JLb26BQt+usoudSl8X6b5zEX1KC3n9nLJHmXf
-	T39ZM0pMaDqHP91NHIAvzx1wzwL0OkIsApm/g4lxPdhDxjcAPIgbz6LkC6zZ3T2C4CgJ
-	BcXGm8KbCmq3KtRsNVReZv3VdTAsrbqmvf+rLR/AY+QsbXhxXnEMPOLJASbt2acdPg7l
-	0cWlX9kH4QAsWUgfYK9hwrImdwltW9Xdqr8iwZxXZbehy6MRMsh/N9cjxbbH6vIItpxH
-	NxwQ==
-X-Gm-Message-State: ALKqPwdq+nKXrHLrQGKmV32MgZgJBsGxtbb9y4Ghuuqn+VvUSsjZFBlX
-	W4uy/azc7uoLK2ngZ2+83LJKDzzO
-X-Google-Smtp-Source: ADUXVKK5sHprROsxQIVqYWjy0wH6/bRLsJSuUKEdEE1TzLNbZrYY8FUDnqPW7kCQ3/9+NN1xAHDveA==
-X-Received: by 2002:a17:902:2805:: with SMTP id
-	e5-v6mr12041013plb.55.1527872243024; 
-	Fri, 01 Jun 2018 09:57:23 -0700 (PDT)
-Received: from ?IPv6:2601:646:877f:9499:41f8:6b67:40cb:f15c?
-	([2601:646:877f:9499:41f8:6b67:40cb:f15c])
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to;
+	bh=LDpMC1Hkjwxib3ZiW0N53gO3a3SyBNCmbjG/G1ypZW0=;
+	b=LVyoAlJk8FCWC8ZzSoi9CyOEtjbpa6/343RlDaBMABO4btgrojkMvUrqoqkucvTrtJ
+	x02uQ3o3yDH8TJteR4/smi3EvTSoElvJax2d+/WBswPSxELHpIhYUkHu3esdlrsYYIIJ
+	pAggbugLh20oR29AOvqb3Aa3E6BFZZBJTGpjbHTZKaHTZX0s1Iau2TfBKAaubR4UtYF5
+	72oEEPyTz9pvWJNbS9e+q31KnHOaX9v+d+BmOgdOi59o+wi8k1Hgaj8+zlOeGixEQUqt
+	zg3nL0R6CHmeVHDLgHgxbZV+zdo40c+ifuttPtJUwNs7ejSHVqZMIfcxXUnpEB86NWji
+	/hTA==
+X-Gm-Message-State: ALKqPweMEQBL9g2L4T5dKlUo8O0MWcvvjxxRXQkWbfdsg5uEHwpuYi6K
+	zvCCEgeE3/Xz8HxLevkSRTM93hd8
+X-Google-Smtp-Source: ADUXVKLo/kyDgGXGp/oGQr9HyDGowMeshqb2c7QVhgIm+sPLyTcbMz6OBUoZgIQULnb2TuxDW/4giQ==
+X-Received: by 2002:a65:41c6:: with SMTP id
+	b6-v6mr9683238pgq.372.1527874819649; 
+	Fri, 01 Jun 2018 10:40:19 -0700 (PDT)
+Received: from ?IPv6:2601:646:877f:9499:2ca8:85c9:c335:d6ec?
+	([2601:646:877f:9499:2ca8:85c9:c335:d6ec])
 	by smtp.gmail.com with ESMTPSA id
-	z127-v6sm55228984pgb.31.2018.06.01.09.57.22
+	b74-v6sm40938513pfl.138.2018.06.01.10.40.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Jun 2018 09:57:22 -0700 (PDT)
-To: Armin Kuster <akuster808@gmail.com>,
+	Fri, 01 Jun 2018 10:40:18 -0700 (PDT)
+To: Richard Leitner <richard.leitner@skidata.com>,
 	openembedded-devel@lists.openembedded.org
-References: <1527865814-9027-1-git-send-email-akuster808@gmail.com>
-	<1527865814-9027-2-git-send-email-akuster808@gmail.com>
+References: <20180601114158.24298-1-richard.leitner@skidata.com>
 From: Khem Raj <raj.khem@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
@@ -80,13 +76,14 @@ Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
 	suq7Hnb7vszlFYdbzeqjY81LSyxA0kcpgJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7R
 	XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiwkkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
 	VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
-Message-ID: <580ea7fc-f840-465d-eb3c-fa0520381afe@gmail.com>
-Date: Fri, 1 Jun 2018 09:57:21 -0700
+Message-ID: <ab305d19-628d-097f-9905-e1f724abe6ba@gmail.com>
+Date: Fri, 1 Jun 2018 10:40:13 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
 	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <1527865814-9027-2-git-send-email-akuster808@gmail.com>
-Subject: Re: [meta-oe][PATCH 2/2] nmap: move recipe from meta-security to meta-oe
+In-Reply-To: <20180601114158.24298-1-richard.leitner@skidata.com>
+Cc: dev@g0hl1n.net
+Subject: Re: [meta-oe][PATCH] pam-plugin-ccreds: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -99,192 +96,314 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jun 2018 16:57:22 -0000
+X-List-Received-Date: Fri, 01 Jun 2018 17:40:19 -0000
+X-Groupsio-MsgNum: 72568
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="4m5BmLeh5iefhURpOCZcjC5EZfKe8g45Z"
+
+--4m5BmLeh5iefhURpOCZcjC5EZfKe8g45Z
+Content-Type: multipart/mixed; boundary="N0oXVTn2C3bK5b2ycTYI26NJKCrwQcHQ3";
+ protected-headers="v1"
+From: Khem Raj <raj.khem@gmail.com>
+To: Richard Leitner <richard.leitner@skidata.com>,
+ openembedded-devel@lists.openembedded.org
+Cc: dev@g0hl1n.net
+Message-ID: <ab305d19-628d-097f-9905-e1f724abe6ba@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] pam-plugin-ccreds: add recipe
+References: <20180601114158.24298-1-richard.leitner@skidata.com>
+In-Reply-To: <20180601114158.24298-1-richard.leitner@skidata.com>
+
+--N0oXVTn2C3bK5b2ycTYI26NJKCrwQcHQ3
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 6/1/18 8:10 AM, Armin Kuster wrote:
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+On 6/1/18 4:41 AM, Richard Leitner wrote:
+> Add version 11 of the pam-plugin-ccreds with the debian patches applied=
+=2E
+>=20
+
+I see QA errors like below
+
+ERROR: pam-plugin-ccreds-11-r0 do_package_qa: QA Issue: non
+-dev/-dbg/nativesdk- package contains symlink .so: pam-plugin-ccreds
+path
+'/work/core2-64-bec-linux-musl/pam-plugin-ccreds/11-r0/packages-split/pam=
+-plugin-ccreds/lib/security/pam_ccreds.so'
+[dev-so]
+
+
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 > ---
->  .../nmap-redefine-the-python-library-dir.patch     | 37 +++++++++++++++
->  ...shtool-mkdir-with-coreutils-mkdir-command.patch | 48 +++++++++++++++++++
->  meta-oe/recipes-security/nmap/nmap_7.60.bb         | 54 ++++++++++++++++++++++
->  3 files changed, 139 insertions(+)
->  create mode 100644 meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch
->  create mode 100644 meta-oe/recipes-security/nmap/files/nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch
->  create mode 100644 meta-oe/recipes-security/nmap/nmap_7.60.bb
-> 
-> diff --git a/meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch b/meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch
+>  ...ke-sure-we-don-t-overflow-the-data-buffer.patch | 29 +++++++
+>  .../0002-add-minimum_uid-option.patch              | 97 ++++++++++++++=
+++++++++
+>  ...TENSION_SO-also-for-linux-gnueabi-targets.patch | 29 +++++++
+>  .../recipes-extended/pam/pam-plugin-ccreds_11.bb   | 27 ++++++
+>  4 files changed, 182 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001=
+-make-sure-we-don-t-overflow-the-data-buffer.patch
+>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002=
+-add-minimum_uid-option.patch
+>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003=
+-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch
+>  create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.b=
+b
+>=20
+> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-s=
+ure-we-don-t-overflow-the-data-buffer.patch b/meta-oe/recipes-extended/pa=
+m/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patc=
+h
 > new file mode 100644
-> index 0000000..356b507
+> index 000000000..d7f8f5a96
 > --- /dev/null
-> +++ b/meta-oe/recipes-security/nmap/files/nmap-redefine-the-python-library-dir.patch
-> @@ -0,0 +1,37 @@
-> +[PATCH] redefine the python library install dir
+> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-=
+don-t-overflow-the-data-buffer.patch
+> @@ -0,0 +1,29 @@
+> +From 59a95494002ce57ace17d676544101e88a55265d Mon Sep 17 00:00:00 2001=
+
+> +From: Nicolas Boullis <nicolas.boullis@ecp.fr>
+> +Date: Mon, 23 Mar 2009 10:46:44 +0100
+> +Subject: [PATCH 1/3] make sure we don't overflow the data buffer
 > +
-> +Upstream-Status: Pending
+> +This patch was taken from Debian's libpam-ccreds v10-6 source:
+> +	0001-make-sure-we-don-t-overflow-the-data-buffer.patch
 > +
-> +If install-lib is not defined, it is always /usr/lib/, but it
-> +maybe /usr/lib64 for multilib
-> +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
 > +---
-> + Makefile.in | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> + cc_db.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
 > +
-> +diff --git a/Makefile.in b/Makefile.in
-> +index 1bb062c..cced2fb 100644
-> +--- a/Makefile.in
-> ++++ b/Makefile.in
-> +@@ -311,7 +311,7 @@ build-zenmap: $(ZENMAPDIR)/setup.py $(ZENMAPDIR)/zenmapCore/Version.py
-> + 
-> + install-zenmap: $(ZENMAPDIR)/setup.py
-> + 	$(INSTALL) -d $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
-> +-	cd $(ZENMAPDIR) && $(PYTHON) setup.py --quiet install --prefix "$(prefix)" --force $(if $(DESTDIR),--root "$(DESTDIR)")
-> ++	cd $(ZENMAPDIR) && $(PYTHON) setup.py --quiet install --prefix "$(prefix)" --install-lib="${PYTHON_SITEPACKAGES_DIR}" --force $(if $(DESTDIR),--root "$(DESTDIR)")
-> + 	$(INSTALL) -c -m 644 docs/zenmap.1 $(DESTDIR)$(mandir)/man1/
-> + # Create a symlink from nmapfe to zenmap if nmapfe doesn't exist or is
-> + # already a link.
-> +@@ -328,7 +328,7 @@ build-nping: $(NPINGDIR)/Makefile nbase_build nsock_build netutil_build $(NPINGD
-> + 	@cd $(NPINGDIR) && $(MAKE)
-> + 
-> + install-ndiff:
-> +-	cd $(NDIFFDIR) && $(PYTHON) setup.py install --prefix "$(prefix)" $(if $(DESTDIR),--root "$(DESTDIR)")
-> ++	cd $(NDIFFDIR) && $(PYTHON) setup.py install --prefix "$(prefix)" --install-lib="${PYTHON_SITEPACKAGES_DIR}" $(if $(DESTDIR),--root "$(DESTDIR)")
-> + 
-> + NSE_FILES = scripts/script.db scripts/*.nse
-> + NSE_LIB_LUA_FILES = nselib/*.lua nselib/*.luadoc
-> +-- 
-> +1.9.1
+> +diff --git a/cc_db.c b/cc_db.c
+> +index c0e0488..9371c4d 100644
+> +--- a/cc_db.c
+> ++++ b/cc_db.c
+> +@@ -199,7 +199,7 @@ int pam_cc_db_get(void *_db, const char *keyname, =
+size_t keylength,
+> + 		return (rc =3D=3D DB_NOTFOUND) ? PAM_AUTHINFO_UNAVAIL : PAM_SERVICE=
+_ERR;
+> + 	}
+> +=20
+> +-	if (val.size < *size) {
+> ++	if (val.size > *size) {
+> + 		return PAM_BUF_ERR;
+> + 	}
+> +=20
+> +--=20
+> +2.11.0
 > +
-> diff --git a/meta-oe/recipes-security/nmap/files/nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch b/meta-oe/recipes-security/nmap/files/nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch
+> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-mi=
+nimum_uid-option.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0=
+002-add-minimum_uid-option.patch
 > new file mode 100644
-> index 0000000..cfe043a
+> index 000000000..adc464924
 > --- /dev/null
-> +++ b/meta-oe/recipes-security/nmap/files/nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch
-> @@ -0,0 +1,48 @@
-> +[PATCH] replace "./shtool mkdir" with coreutils mkdir command
+> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_u=
+id-option.patch
+> @@ -0,0 +1,97 @@
+> +From 21e3ab24836c5087f3531d2d3270242cea857a79 Mon Sep 17 00:00:00 2001=
+
+> +From: =3D?UTF-8?q?Guido=3D20G=3DC3=3DBCnther?=3D <agx@sigxcpu.org>
+> +Date: Thu, 13 May 2010 12:36:26 +0200
+> +Subject: [PATCH 2/3] add minimum_uid option
 > +
-> +Upstream-Status: Pending
+> +Closes: #580037
 > +
-> +"./shtool mkdir" is used when mkdir has not -p parameter, but mkdir in today
-> +most release has supportted the -p parameter, not need to use shtool, and it
-> +can not fix the race if two process are running mkdir to create same dir
+> +This patch was taken from Debian's libpam-ccreds v10-6 source:
+> +	0002-add-minimum_uid-option.patch
 > +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
 > +---
-> + ncat/Makefile.in        | 4 ++--
-> + nmap-update/Makefile.in | 2 +-
-> + 2 files changed, 3 insertions(+), 3 deletions(-)
+> + cc_pam.c | 39 +++++++++++++++++++++++++++++++++++++++
+> + 1 file changed, 39 insertions(+)
 > +
-> +diff --git a/ncat/Makefile.in b/ncat/Makefile.in
-> +index cfd306d..2166e08 100644
-> +--- a/ncat/Makefile.in
-> ++++ b/ncat/Makefile.in
-> +@@ -163,11 +163,11 @@ $(NSOCKDIR)/libnsock.a: $(NSOCKDIR)/Makefile
-> + 
-> + install: $(TARGET)
-> + 	@echo Installing Ncat;
-> +-	$(SHTOOL) mkdir -f -p -m 755 $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
-> ++	mkdir -p -m 755 $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
-> + 	$(INSTALL) -c -m 755 ncat $(DESTDIR)$(bindir)/ncat
-> + 	$(STRIP) -x $(DESTDIR)$(bindir)/ncat
-> + 	if [ -n "$(DATAFILES)" ]; then \
-> +-		$(SHTOOL) mkdir -f -p -m 755 $(DESTDIR)$(pkgdatadir); \
-> ++		mkdir -p -m 755 $(DESTDIR)$(pkgdatadir); \
-> + 		$(INSTALL) -c -m 644 $(DATAFILES) $(DESTDIR)$(pkgdatadir)/; \
-> + 	fi
-> + 	$(INSTALL) -c -m 644 docs/$(TARGET).1 $(DESTDIR)$(mandir)/man1/$(TARGET).1
-> +diff --git a/nmap-update/Makefile.in b/nmap-update/Makefile.in
-> +index 89ff928..93f48d8 100644
-> +--- a/nmap-update/Makefile.in
-> ++++ b/nmap-update/Makefile.in
-> +@@ -37,7 +37,7 @@ $(NBASELIB):
-> + 	cd $(NBASEDIR) && $(MAKE)
-> + 
-> + install: nmap-update
-> +-	$(SHTOOL) mkdir -f -p -m 755 $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
-> ++	mkdir -p -m 755 $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1
-> + 	$(INSTALL) -c -m 755 nmap-update $(DESTDIR)$(bindir)
-> + 	$(STRIP) -x $(DESTDIR)$(bindir)/nmap-update
-> + 	$(INSTALL) -c -m 644 ../docs/nmap-update.1 $(DESTDIR)$(mandir)/man1/
-> +-- 
-> +1.9.1
+> +diff --git a/cc_pam.c b/cc_pam.c
+> +index d096117..56776aa 100644
+> +--- a/cc_pam.c
+> ++++ b/cc_pam.c
+> +@@ -20,6 +20,7 @@
+> + #include <errno.h>
+> + #include <limits.h>
+> + #include <syslog.h>
+> ++#include <pwd.h>
+> +=20
+> + #include "cc_private.h"
+> +=20
+> +@@ -45,6 +46,30 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh,=
+
+> + 				int flags, int argc, const char **argv);
+> + #endif
+> +=20
+> ++
+> ++/*
+> ++ * Given the PAM arguments and the user we're authenticating, see if =
+we should
+> ++ * ignore that user because they're root or have a low-numbered UID a=
+nd we
+> ++ * were configured to ignore such users.  Returns true if we should i=
+gnore
+> ++ * them, false otherwise.
+> ++ */
+> ++static int
+> ++_pamcc_should_ignore(const char *username, int minimum_uid)
+> ++{
+> ++	struct passwd *pwd;
+> ++
+> ++	if (minimum_uid > 0) {
+> ++		pwd =3D getpwnam(username);
+> ++		if (pwd !=3D NULL && pwd->pw_uid < (unsigned long) minimum_uid) {
+> ++			syslog(LOG_DEBUG, "ignoring low-UID user (%lu < %d)",
+> ++				(unsigned long) pwd->pw_uid, minimum_uid);
+> ++			return 1;
+> ++		}
+> ++	}
+> ++	return 0;
+> ++}
+> ++
+> ++
+> + static int _pam_sm_interact(pam_handle_t *pamh,
+> + 			    int flags,
+> + 			    const char **authtok)
+> +@@ -291,7 +316,9 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *p=
+amh,
+> + 	unsigned int sm_flags =3D 0, sm_action =3D 0;
+> + 	const char *ccredsfile =3D NULL;
+> + 	const char *action =3D NULL;
+> ++	const char *name =3D NULL;
+> + 	int (*selector)(pam_handle_t *, int, unsigned int, const char *);
+> ++	int minimum_uid =3D 0;
+> +=20
+> + 	for (i =3D 0; i < argc; i++) {
+> + 		if (strcmp(argv[i], "use_first_pass") =3D=3D 0)
+> +@@ -300,6 +327,8 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *p=
+amh,
+> + 			sm_flags |=3D SM_FLAGS_TRY_FIRST_PASS;
+> + 		else if (strcmp(argv[i], "service_specific") =3D=3D 0)
+> + 			sm_flags |=3D SM_FLAGS_SERVICE_SPECIFIC;
+> ++		else if (strncmp(argv[i], "minimum_uid=3D", sizeof("minimum_uid=3D"=
+) - 1) =3D=3D 0)
+> ++			minimum_uid =3D atoi(argv[i] + sizeof("minimum_uid=3D") - 1);
+> + 		else if (strncmp(argv[i], "ccredsfile=3D", sizeof("ccredsfile=3D") =
+- 1) =3D=3D 0)
+> + 			ccredsfile =3D argv[i] + sizeof("ccredsfile=3D") - 1;
+> + 		else if (strncmp(argv[i], "action=3D", sizeof("action=3D") - 1) =3D=
+=3D 0)
+> +@@ -321,6 +350,16 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *=
+pamh,
+> + 		syslog(LOG_ERR, "pam_ccreds: invalid action \"%s\"", action);
+> + 	}
+> +=20
+> ++	rc =3D pam_get_user(pamh, &name, NULL);
+> ++	if (rc !=3D PAM_SUCCESS || name =3D=3D NULL) {
+> ++		if (rc =3D=3D PAM_CONV_AGAIN)
+> ++			return PAM_INCOMPLETE;
+> ++		else
+> ++			return PAM_SERVICE_ERR;
+> ++	}
+> ++	if (_pamcc_should_ignore(name, minimum_uid))
+> ++		return PAM_USER_UNKNOWN;
+> ++
+> + 	switch (sm_action) {
+> + 	case SM_ACTION_VALIDATE_CCREDS:
+> + 		selector =3D _pam_sm_validate_cached_credentials;
+> +--=20
+> +2.11.0
 > +
-> diff --git a/meta-oe/recipes-security/nmap/nmap_7.60.bb b/meta-oe/recipes-security/nmap/nmap_7.60.bb
+> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EX=
+TENSION_SO-also-for-linux-gnueabi-targets.patch b/meta-oe/recipes-extende=
+d/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targ=
+ets.patch
 > new file mode 100644
-> index 0000000..a6616eb
+> index 000000000..4f203f1a3
 > --- /dev/null
-> +++ b/meta-oe/recipes-security/nmap/nmap_7.60.bb
-> @@ -0,0 +1,54 @@
-> +SUMMARY = "network auditing tool"
-> +DESCRIPTION = "Nmap ("Network Mapper") is a free and open source (license) utility for network discovery and security auditing.\nGui support via appending to IMAGE_FEATURES x11-base in local.conf"
-> +SECTION = "security"
-> +LICENSE = "GPL-2.0"
+> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION=
+_SO-also-for-linux-gnueabi-targets.patch
+> @@ -0,0 +1,29 @@
+> +From 12d9bb59284bd01a9fcc3b9280698ffc23ef2ddc Mon Sep 17 00:00:00 2001=
+
+> +From: Richard Leitner <richard.leitner@skidata.com>
+> +Date: Fri, 1 Jun 2018 13:24:15 +0200
+> +Subject: [PATCH 3/3] Set EXTENSION_SO also for linux-gnueabi targets
 > +
-> +LIC_FILES_CHKSUM = "file://COPYING;beginline=7;endline=12;md5=700c690f4ca6b1754f3f1db8645e42d9"
+> +As EXTENSION_SO gets already set for linux and linux-gnu targets we
+> +should set it also for linux-gnueabi targets.
 > +
-> +SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
-> +           file://nmap-redefine-the-python-library-dir.patch \
-> +           file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
+> +Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> +---
+> + configure.in | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/configure.in b/configure.in
+> +index 0dbdf79..a434208 100644
+> +--- a/configure.in
+> ++++ b/configure.in
+> +@@ -43,7 +43,7 @@ AC_SUBST(pam_ccreds_so_LD)
+> + AC_SUBST(pam_ccreds_so_LDFLAGS)
+> +=20
+> + AM_CONDITIONAL(USE_NATIVE_LINKER, test -n "$pam_ccreds_so_LD")
+> +-AM_CONDITIONAL(EXTENSION_SO, test "$target_os" =3D "linux" -o "$targe=
+t_os" =3D "linux-gnu")
+> ++AM_CONDITIONAL(EXTENSION_SO, test "$target_os" =3D "linux" -o "$targe=
+t_os" =3D "linux-gnu" -o "$target_os" =3D "linux-gnueabi")
+> + AM_CONDITIONAL(EXTENSION_1, test "$TARGET_OS" =3D "HPUX")
+> +=20
+> + if test -z "$use_gcrypt"; then
+> +--=20
+> +2.11.0
+> +
+> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb b/met=
+a-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+> new file mode 100644
+> index 000000000..ded51e3a0
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY =3D "PAM cached credentials module"
+> +HOMEPAGE =3D "https://www.padl.com/OSS/pam_ccreds.html"
+> +SECTION =3D "libs"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079b=
+ae19f"
+> +
+> +DEPENDS =3D "libpam openssl db"
+> +
+> +inherit distro_features_check
+> +REQUIRED_DISTRO_FEATURES =3D "pam"
+> +
+> +SRCREV =3D "376bb189ceb3a113954f1012c45be7ff09e148ba"
+> +
+> +SRC_URI =3D " \
+> +    git://github.com/PADL/pam_ccreds \
+> +    file://0001-make-sure-we-don-t-overflow-the-data-buffer.patch \
+> +    file://0002-add-minimum_uid-option.patch \
+> +    file://0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch =
+\
 > +"
 > +
-> +SRC_URI[md5sum] = "4e454266559ddf2c4e2109866c62560c"
-> +SRC_URI[sha256sum] = "a8796ecc4fa6c38aad6139d9515dc8113023a82e9d787e5a5fb5fa1b05516f21"
+> +S =3D "${WORKDIR}/git"
 > +
-> +inherit autotools-brokensep pkgconfig pythonnative distro_features_check
+> +inherit autotools
 > +
-> +PACKAGECONFIG ?= "ncat nping ndiff pcap"
-> +PACKAGECONFIG += " ${@bb.utils.contains('IMAGE_FEATURES', 'x11-base', 'zenmap', '', d)}"
+> +EXTRA_OECONF +=3D "--libdir=3D${base_libdir} "
 > +
-> +PACKAGECONFIG[pcap] = "--with-pcap=linux, --without-pcap, libpcap, libpcap"
-> +PACKAGECONFIG[pcre] = "--with-libpcre=${STAGING_LIBDIR}/.., --with-libpcre=included, libpre"
-> +PACKAGECONFIG[ssl] = "--with-openssl=${STAGING_LIBDIR}/.., --without-openssl, openssl, openssl"
-> +PACKAGECONFIG[ssh2] = "--with-openssh2=${STAGING_LIBDIR}/.., --without-openssh2, libssh2, libssh2"
-> +PACKAGECONFIG[libz] = "--with-libz=${STAGING_LIBDIR}/.., --without-libz, zlib, zlib"
-> +
-> +#disable/enable packages
-> +PACKAGECONFIG[nping] = ",--without-nping,"
-> +PACKAGECONFIG[ncat] = ",--without-ncat,"
-> +PACKAGECONFIG[ndiff] = ",--without-ndiff,python"
-> +PACKAGECONFIG[update] = ",--without-nmap-update,"
-> +
-> +#Add gui
-> +PACKAGECONFIG[zenmap] = "--with-zenmap, --without-zenmap, gtk+ python-core python-codecs python-io python-logging python-unittest python-xml python-netclient python-doctest python-subprocess python-pygtk, python-core python-codecs python-io python-logging python-netclient python-xml python-unittest python-doctest python-subprocess  python-pygtk gtk+"
-> +
-> +EXTRA_OECONF = "--with-libdnet=included --with-liblinear=included --without-subversion --with-liblua=included"
-> +
-> +export PYTHON_SITEPACKAGES_DIR
-> +
-> +do_configure() {
-> +    # strip hard coded python2#
-> +    sed -i -e 's=python2\.*=python=g'  ${S}/configure.ac
-> +    sed -i -e 's=python2\.*=python=g'  ${S}/configure
-
-some distros mean python = python3 btw. So question is if replacing
-python2 with python may cause it to fail build on such distros. Is this
-just needed in runtime python scripts that will execute on target ?
-
-> +    autoconf
-> +    oe_runconf
-> +}
-> +
-> +PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'zenmap', '${PN}-zenmap', '', d)}"
-
-may be there is no need for checking for pkgconfig here.
-
-> +
-> +FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
-> +FILES_${PN}-zenmap = "${@bb.utils.contains("PACKAGECONFIG", "zenmap", "${bindir}/*zenmap ${bindir}/xnmap ${datadir}/applications/*  ${bindir}/nmapfe ${datadir}/zenmap/* ${PYTHON_SITEPACKAGES_DIR}/radialnet/* ${PYTHON_SITEPACKAGES_DIR}/zenmap*", "", d)}"
-> +
-
-could this work without pkgconfig such that when the given packageconfig
-is enabled it automatically packages extra files generated into the new
-package otherwise leaves it empty
-
-> +RDEPENDS_${PN} = "python"
-> +RDEPENDS_${PN}-zenmap = "nmap"
-> 
+> +FILES_${PN} +=3D "${base_libdir}/security/pam*"
+>=20
 
 
+
+--N0oXVTn2C3bK5b2ycTYI26NJKCrwQcHQ3--
+
+--4m5BmLeh5iefhURpOCZcjC5EZfKe8g45Z
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCWxGE/QAKCRC7BTNVkZ0z
+FI/ZAJwLGNfRPwVV4zIwAIkRHussbZAk1wCfXF3KIeKk1p5UmCacyeq/xE/YEqw=
+=+hhO
+-----END PGP SIGNATURE-----
+
+--4m5BmLeh5iefhURpOCZcjC5EZfKe8g45Z--
