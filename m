@@ -1,50 +1,50 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 33C0C750D9
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A5CCF74F99
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Jun 2018 02:12:48 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id x6-v6so2616026wmc.3
+	Sun,  3 Jun 2018 02:27:04 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id l1-v6so8586522wmb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jun 2018 19:12:50 -0700 (PDT)
+	Sat, 02 Jun 2018 19:27:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=ESlt9DcF5tEB/rQRgydmSINj93wRYFr8eflqXexqC/E=;
-	b=OK+2nC+r2mgMm+2Xf5tNHoI8NJKpU5N10tPM315p2d3qkYWt//iZZ4KyT5rfIiu98X
-	1zNtJ0D6sqmAPHs7I5KJfM7AHUKKfCNrjQSdq7sxMWnSr5559IX26192ozfmD/psIQqp
-	wHmLR/pAzswZpqc9lslNNfNtUfBSbTagUcJn/cPvqr60herytWWLa8JaudCz1uvJRk30
-	p+vV8YFq3pvdvDTvLcZ3CPUYXd3s9kp7rgRneFcgt8CNc/+IvSLha+/t01Yvq/+a+sw2
-	vNbw0iq8lXaOBiiwFggx5L92J6W9t7N0W62HXCN2ost7qSuXWWzBJwiUt9oOPY9xqQK8
-	I0RA==
+	bh=P3n0e7a+Xdbo4F3luSgKUkgOfF2fGPlT98fEWUJp56c=;
+	b=OY1Ai9GGCgfh+iJtl0vlp3t4DpNSxA9lqkDEmcY6nbMLjgY/LbzHI6IOKmht/dWQVT
+	6rLW/+JzcWrP2SBE3aSssX40Rg7WU9e8gSvUtSXcl/p7iI4jm/OcpsD2jThNP8Q1g360
+	J+k1du/6SmYAhOxHOKHMsJu4WBDvKKOcvqmB1bjOSKYuCov1WsJPLnPep2SV+UGugK/d
+	i4wJHRQBxXlE0rbrunigPNblKP/HtKCqyY70D20kORlBkrUK2S3UK8/EGBHRZ8YANWSx
+	HpGsnMHVTPMZGL8BOHut9hUs1c6cQao04gST0hVZSk2iBlTJYaYpZApCozIvz5fxR2aG
+	Ofng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ESlt9DcF5tEB/rQRgydmSINj93wRYFr8eflqXexqC/E=;
-	b=C9+XuF0agNV5IbsvHWvw/OToMaIddbjDpUj8q5xdrNouyVCqwNTe0e8tE2yPb8zUbC
-	5FN8Kq7SCCC+j/zOlXMqlWmphgF8ZA25snKvUbBR4uOHWzek5sXvSLgtBClt4of9FwAC
-	s9ZftPJSenzi5EUPm1/1y/4UnIMZsqhDBR6rT7MbqYITNpj+nWF7AAvkfPEMVRWeLxXo
-	t3bDOboOVVFTwSmOg+OI1qzwMqBCIbYjR2HMHgFCEm26rgdw60T7KOpY9L4WooCa3xdO
-	csoRWZ2vj6+p1u3S9iZA9DvF+mrQp98ZDpjL3B35L/KDPSbWdQO0XluHcd48k0P6MYOX
-	Zcxg==
-X-Gm-Message-State: ALKqPwed4BY57kbhHT9omy0PlFbLrud7Vd4ThlmPZntU8cNxZenZX8Mk
-	eJf8THdArNz512vtl8dU/V66dkZH
-X-Google-Smtp-Source: ADUXVKIUnjZHifxLIoUkFUcZ3KOPXuZLxhyTZ49GXzoyFZ3NDYnWmvpbkFAvu+eeEUIDQ6/U9jbL9Q==
-X-Received: by 2002:a50:d41b:: with SMTP id
-	t27-v6mr13372619edh.75.1527991969592; 
-	Sat, 02 Jun 2018 19:12:49 -0700 (PDT)
+	bh=P3n0e7a+Xdbo4F3luSgKUkgOfF2fGPlT98fEWUJp56c=;
+	b=tTXSRRkfjcni5a7azR5kyH4fV6zLYVjVob2aBPm/j0XXRIRq9DinyRpCE0kN+FKjXJ
+	GxkZBjDjwfuuv3Se5c86qstqm59XQGQMlLKjW/svkH1Gi/WIYWBLlhX8ZlIV/hdZtRkI
+	TZHzQ+2331ku5A0kjxOtkoq1nt/0GsL9IhDTlKH98rfBUk+RDFMjMMd5he3OS+V7pSkK
+	YYDyS2pIPezO2C6ymOF7F0ukZgzNrsCKWHLPad9F+2JT/8QHIZ/YnrGcBnNp+f5D2Ott
+	PwqUmbwY9K3AYxaPwG9/OolEMaq8fai9Ei5qK76cCkeiU8yO6SSFaBmFnolO1i0s3TA0
+	T1yA==
+X-Gm-Message-State: ALKqPwcYZgXIbWy79qZoFZsFVvlpM6ZQ5O98oUSOoZ4Z6zk/EFqzvAbE
+	HgcrAdlin/7XUtR+/HTOGeIufgOw
+X-Google-Smtp-Source: ADUXVKLcqaXXnLrkfgaSFZrbvY637ZFFOuE40e9DvJQ+gpfv8L2ydLzHMz5k/l+6wRIASUBDoXfG8w==
+X-Received: by 2002:a50:f4cf:: with SMTP id
+	v15-v6mr18416661edm.162.1527992824951; 
+	Sat, 02 Jun 2018 19:27:04 -0700 (PDT)
 Received: from localhost.localdomain ([2a04:ae08:1403:ff00:489:7961:466d:7cf7])
 	by smtp.gmail.com with ESMTPSA id
-	c46-v6sm12132449edc.34.2018.06.02.19.12.48
+	f13-v6sm676378eds.15.2018.06.02.19.27.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Jun 2018 19:12:48 -0700 (PDT)
+	Sat, 02 Jun 2018 19:27:04 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jun 2018 04:12:43 +0200
-Message-Id: <20180603021243.28733-1-dev@sashko.rv.ua>
+Date: Sun,  3 Jun 2018 04:26:55 +0200
+Message-Id: <20180603022655.1625-1-dev@sashko.rv.ua>
 X-Mailer: git-send-email 2.17.0
 Cc: Oleksandr Kravchuk <dev@sashko.rv.ua>
-Subject: [meta-perl][PATCH] adduser: fix HOMEPAGE
+Subject: [meta-oe][PATCH] htop: upgrade to 2.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,25 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jun 2018 02:12:49 -0000
+X-List-Received-Date: Sun, 03 Jun 2018 02:27:04 -0000
 
 Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
 ---
- meta-perl/recipes-perl/adduser/adduser_3.116.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/htop/{htop_2.1.0.bb => htop_2.2.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/htop/{htop_2.1.0.bb => htop_2.2.0.bb} (89%)
 
-diff --git a/meta-perl/recipes-perl/adduser/adduser_3.116.bb b/meta-perl/recipes-perl/adduser/adduser_3.116.bb
-index 112a5f022..363f5b117 100644
---- a/meta-perl/recipes-perl/adduser/adduser_3.116.bb
-+++ b/meta-perl/recipes-perl/adduser/adduser_3.116.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "a utility to add users/groups to the system"
- DESCRIPTION = "adduser, addgroup - add a user or group to the system"
--HOMEPAGE = "http://alioth.debian.org/projects/adduser/"
-+HOMEPAGE = "https://salsa.debian.org/debian/adduser"
- SECTION = "base/utils"
+diff --git a/meta-oe/recipes-support/htop/htop_2.1.0.bb b/meta-oe/recipes-support/htop/htop_2.2.0.bb
+similarity index 89%
+rename from meta-oe/recipes-support/htop/htop_2.1.0.bb
+rename to meta-oe/recipes-support/htop/htop_2.2.0.bb
+index 33508f984..01c856d12 100644
+--- a/meta-oe/recipes-support/htop/htop_2.1.0.bb
++++ b/meta-oe/recipes-support/htop/htop_2.2.0.bb
+@@ -8,8 +8,8 @@ DEPENDS = "ncurses"
  
- LICENSE = "GPLv2"
+ SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
+            file://0001-Use-pkg-config.patch"
+-SRC_URI[md5sum] = "f262b66ad6c194782f4d3a80627e84c8"
+-SRC_URI[sha256sum] = "3260be990d26e25b6b49fc9d96dbc935ad46e61083c0b7f6df413e513bf80748"
++SRC_URI[md5sum] = "0d816b6beed31edc75babcfbf863ffa8"
++SRC_URI[sha256sum] = "d9d6826f10ce3887950d709b53ee1d8c1849a70fa38e91d5896ad8cbc6ba3c57"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
 2.17.0
 
