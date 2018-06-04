@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 051AE74B83
+Received: from mail-pl0-f50.google.com (mail-pl0-f50.google.com
+	[209.85.160.50])
+	by mail.openembedded.org (Postfix) with ESMTP id E035174D2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 02:39:44 +0000 (UTC)
-Received: by mail-pf0-f181.google.com with SMTP id h12-v6so5257201pfk.11
+	Mon,  4 Jun 2018 02:39:45 +0000 (UTC)
+Received: by mail-pl0-f50.google.com with SMTP id v24-v6so18730448plo.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jun 2018 19:39:46 -0700 (PDT)
+	Sun, 03 Jun 2018 19:39:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=1emZI6hF7hRrTeNzOitNMH+11t54NqvDGxhl+EBHD38=;
-	b=asigujBUX8KKSrVthNEeDnZDRZ2eu6BZeKRXxWOn3N4ciencSSVOTpKqKLuS0ElcWd
-	8p7rcNdJfJYQ1Z7mDZW0NNs/es5tQ8/wgdnI7sy8Y2Akx6hQ4gP60cDRJ8bs4ld/VsTX
-	7zgXo9fnQo/KrCaHqgviQtSzIj1/27AkVAVuAQcy5AJlIcaX/7uxm70pozFROXoJnIAR
-	YSx8xrDewiiXzBgTWcQxIdpff8QvDy1ZPxwjUFSbJH4l6c39PaoroMowR8A3cu7zGsuA
-	2HWxkwyGld0V+z6UHWMraK/mjVAzY5vSXK9lJnPaAWLPxyTbhLQi64VNcRtN4gyVYatJ
-	dMkQ==
+	bh=CkjNCFYzmRvXaJdAUqA8ZGwM2YFdEFQ/GxCuaqixxOw=;
+	b=SthRB5fVi1usky0I1NDwBGsyB5e7W96z6YP2RFpXQHVHV0r0r9cmvXkMhASyDFArnW
+	Ghn7IV/e4qXI6IdUdu41wccjB5/h8whxcte4KJNZEy7hGoT9I8pIKVUdwGIISa3P3uTz
+	+JYdhWBeMpq2NX++WRcZr12VSz9Y+7nnBAKM1MACH7Ub62/hgGJtwtAutX5/NskjERAH
+	Oga9rqtw0oJ9iT+ujGIgp1xFRwAJbA53ZuSO+N/vAtjpPU9bPzYx8t3urstm1eSl0ET3
+	Z8KKpHmmINnj5FxTuxD0qxR4zPf7xgFKSLw8nQHW70XTENwddiyPmgabseSd7W6/GfiW
+	mhUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=1emZI6hF7hRrTeNzOitNMH+11t54NqvDGxhl+EBHD38=;
-	b=k2YIpyIrT8eenJiJbQMam4b3wNROeTVC8KJsuW/zdqL46YOHsUnCdDWjD9iXT95Ycp
-	9ECAkeNVGUUnIfIZ6ND7ixRPyu5HbceVocRk1loq2SZgHMSlJoU4iXfmMFBMDQE6iVYA
-	VxMQ0DgU35nkvEP7IDNRrI8x/YHh7YB0ZKT+oc1+UVJM3EcMdj15xZGiDIHF7C/Wi8Ec
-	umDL6F7UMtxvYMXyRmRuLGPqmdPCHE+/WyXyKJObwODs1fmwQcRghz4/7RgVisFbV/97
-	0AuoImS+tMril9dHu43y7bvnGus+NgEni391l0oq4GNY7NTkSTy5VtDHS7kAvkE1HgSl
-	lWXQ==
-X-Gm-Message-State: ALKqPwcZTJ8ngDVL+6yRjKi6+Cl36IDAHSdpSuBTSwB0Mk5knkWXiokC
-	2EqmpIqR4e7Dfd1CVJaMq960bQ==
-X-Google-Smtp-Source: ADUXVKJg0C3SzseF+/3owHGbpTv2pXpQlFT1hX/iiovtz8OWrTND3+dYhYKLGB/lqGvUPV8g05jDew==
-X-Received: by 2002:a65:5284:: with SMTP id
-	y4-v6mr15456103pgp.297.1528079986281; 
-	Sun, 03 Jun 2018 19:39:46 -0700 (PDT)
+	bh=CkjNCFYzmRvXaJdAUqA8ZGwM2YFdEFQ/GxCuaqixxOw=;
+	b=TyWKVboGh59EJMcEQKXPW3Z8eUuTBNQ54ZRoguk1f26758TmYKpNtJuqyiwQcUUC71
+	+8B5Icf+hrO6jLhO9Cu7bccKPFFrQs8Zbmz4Q3NAdBFtx8IKIaQtV3MfG5J/q/sNutDf
+	SSdcNanOkeX/sdNQRjEWCrtlxB8T7clb//MNhZ9W1KhGsTMI585xFw6NcyeMuQ3kb746
+	0Bvu2vmNRFZNCMTxtTas2ZugQ45E0uJUXOXAR8nLdlZ5AvA6tGR88T6TN7C+WYf/HPPm
+	3BbcWqgK+fED6TBsEOSRnvOgZ7rKKvtnMFVNC+5l0bRKW2TEIgNhmejllSI1OsJrqb3M
+	cnEQ==
+X-Gm-Message-State: ALKqPwcjoFZJyu5TGsXw4ts78CyxK2NtFYwMPzs4pFAcTnnNmYFE8snM
+	60FwV3a8rEsEEWfwOoGki0X33g==
+X-Google-Smtp-Source: ADUXVKLAATekJlGuue9uR85B68kx+hwhVzXztWpf7a6U3Ahy6u0FEmxnEq/WkG4VRfi+etveKCZu5A==
+X-Received: by 2002:a17:902:600a:: with SMTP id
+	r10-v6mr19693054plj.70.1528079987136; 
+	Sun, 03 Jun 2018 19:39:47 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:f1bd:c539:22b:bbf1])
 	by smtp.gmail.com with ESMTPSA id
-	m11-v6sm12069697pfk.42.2018.06.03.19.39.45
+	m11-v6sm12069697pfk.42.2018.06.03.19.39.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 03 Jun 2018 19:39:45 -0700 (PDT)
+	Sun, 03 Jun 2018 19:39:46 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jun 2018 19:39:34 -0700
-Message-Id: <d8ce5a7195f1210912c698a135492df1e073447e.1528079821.git.akuster808@gmail.com>
+Date: Sun,  3 Jun 2018 19:39:35 -0700
+Message-Id: <a370c771887107f424c723c0fcb3c246ffe022a4.1528079821.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1528079821.git.akuster808@gmail.com>
 References: <cover.1528079821.git.akuster808@gmail.com>
-Subject: [PATCH 4/6] wireshark: update to 2.2.10
+Subject: [PATCH 5/6] wireshark: Update to 2.2.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,43 +60,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 02:39:45 -0000
+X-List-Received-Date: Mon, 04 Jun 2018 02:39:46 -0000
 
-The following vulnerabilities have been fixed:
-     * [1]wnpa-sec-2017-42
-       BT ATT dissector crash ([2]Bug 14049) [3]CVE-2017-15192
-     * [4]wnpa-sec-2017-43
-       MBIM dissector crash ([5]Bug 14056) [6]CVE-2017-15193
-     * [7]wnpa-sec-2017-44
-       DMP dissector crash ([8]Bug 14068) [9]CVE-2017-15191
+From: Armin Kuster <akuster@mvista.com>
 
+changed --with-ssh to --with-libssh=DIR
+
+includes:
+
+wnpa-sec-2017-47 : CVE-2017-17084
+    The IWARP_MPA dissector could crash. (Bug 14236)
+
+wnpa-sec-2017-48 : CVE-2017-17083
+    The NetBIOS dissector could crash. (Bug 14249)
+
+wnpa-sec-2017-49 : CVE-2017-17085
+    The CIP Safety dissector could crash. (Bug 14250)
+
+release notes:
+https://www.wireshark.org/docs/relnotes/wireshark-2.2.11.html
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../wireshark/{wireshark_2.2.9.bb => wireshark_2.2.10.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.9.bb => wireshark_2.2.10.bb} (95%)
+ .../wireshark/{wireshark_2.2.10.bb => wireshark_2.2.11.bb}          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.10.bb => wireshark_2.2.11.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-index 82c25ff..5358ba0 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.11.bb
+similarity index 92%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.2.11.bb
+index 5358ba0..5eb372e 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.11.bb
 @@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
  
  PE = "1"
  
--SRC_URI[md5sum] = "7d5e65efd0714bd6248aa5b36c28320d"
--SRC_URI[sha256sum] = "c8b32c0e7d44a277e737c53d9d142ad3fe4265338f25a7fd8c891f58a7633fc2"
-+SRC_URI[md5sum] = "ae3a1a43a6e3687f44a738fd15d78021"
-+SRC_URI[sha256sum] = "8574a5e1fdec7affae640924bd46c1aed1bd866e02632fa5625e1450e4a50707"
+-SRC_URI[md5sum] = "ae3a1a43a6e3687f44a738fd15d78021"
+-SRC_URI[sha256sum] = "8574a5e1fdec7affae640924bd46c1aed1bd866e02632fa5625e1450e4a50707"
++SRC_URI[md5sum] = "a79ba6cda83be2a91bde4110fe194788"
++SRC_URI[sha256sum] = "a9f11621e85d7e1d72259157edd94825e72af3fd72e184b8474459f92ad5fc40"
  
  inherit autotools pkgconfig perlnative
  
+@@ -39,7 +39,7 @@ PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
+ PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
+ PACKAGECONFIG[sbc] = "--with-sbc=yes, --with-sbc=no, sbc"
+ 
+-PACKAGECONFIG[libssh] = "--with-ssh=yes, --with-ssh=no, libssh2"
++PACKAGECONFIG[libssh] = "--with-libssh=${STAGING_LIBDIR}, --with-libssh=no, libssh2"
+ 
+ 
+ # these next two options require addional layers
 -- 
 2.7.4
 
