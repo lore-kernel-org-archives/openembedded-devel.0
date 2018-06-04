@@ -1,49 +1,49 @@
-Return-Path: <ishitsuka.sc@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A4AEF7500D
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id F00FA74A9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Jun 2018 06:43:24 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id a63-v6so928676pfl.1
+	Mon,  4 Jun 2018 02:39:38 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id c9-v6so10953579pgf.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Jun 2018 23:43:26 -0700 (PDT)
+	Sun, 03 Jun 2018 19:39:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=WnxM6xbx03yGY0v9nA+oCo8CWqwajunOdIKoSiXJmGI=;
-	b=BznRaL42HJ5/VzVw2MPGSvtUbourxRbGDpdJryBRFEZHZulYx2OZRaAcMuqA2hdnoG
-	zEVLGrNhGy69b0rxA/qGq6xMJqH4BsY77xSJItG8yQWnDg5WxpF9ecf2BPoHH9xHhK81
-	6ZTszFLyFCznrTagPZi9ROlf9Y4A3QFXEq4XsU5OytmE0PzpDssqjjoLsqg6gx1QIMhO
-	tAE/b99+pPvcKVAf1FJOr2borOrC+cKxE5MuCRn8jTp0E9DmqX/Y8qs2yo0AsYQpBroz
-	1msCnnw83QrWYQLrRuDXacHKzxi8880oO8qEuBVfVshH6nRTr0DPkU7ds+IX2Tt4pAPY
-	A8Fg==
+	h=from:to:subject:date:message-id;
+	bh=JRtwrfIEogMy5vMhgDkwnwK1vB7cAj+Do10c/R3uQbg=;
+	b=QRg+WY2X83hMV10XfbH6BNN4bzLsXx4jjq1Ilwj7/C+jT0fTdKVSPfwVSxXPfuCixa
+	c97gifzTX5dCgH6t9NSUoVPpghqTHBiNrZ3IJyquBxbd3fq7r7jHNjWL4PTzxSNKKsmV
+	SOU0SVP/LDK5baGydD/cS/DhYfDPbA8xAWdtxa79FZPya5frPbcU0ZgX1M+fHgg3jjjz
+	8XAyMbhVTPjoHVki4hguktR+NEr8iMv97WT0qEuZhrFBp2wrBInvdvMkoDpIEKXe6kIV
+	UIyli6fnmQYKhkvGycf5Ji1ng0rJe/URcuIxwzfDshZV+WnNmCSq21SNneAMB+1I4BME
+	Xy/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WnxM6xbx03yGY0v9nA+oCo8CWqwajunOdIKoSiXJmGI=;
-	b=pXwIvRmuXsePrymLlL2hD6d9tSoXdRs1cWfBw+0FH9L69ld2dhpUd2lTx2VAbyRzCO
-	sqGWp+6cYVj8/OnalIoOAVYxxdH8YPA8rMq3LNWlSR+ov+V2CTkznJT/F6LXQDE3EwSu
-	LQBufRHHSYQmFrFpdGuOvFMHFQ7V4o+xDKQLXsg+iuidS3C7y1iP6KRJpbyEwIgrURxK
-	HO6F2qtWXvhS3qheX6S7x8l/9JTZqbzbvJaYh2YtHiA4J8aV3oeaYw7a+VcykQzZxDcE
-	sGY1wIhAJtSan2UY5HRmf5vkuLerRx06qhz88rjI7Q9lyR5/XgNfyPOMWTLJ3LSa6n+s
-	r3gA==
-X-Gm-Message-State: APt69E0QcrpwNR8V0zRdvZ7iOsNrVNLPXoPzV6IOIwY457xB1b3KOXKM
-	6hKpaF6WMhYNb6FOERQXh8aVgLkm
-X-Google-Smtp-Source: ADUXVKJlpMoGJd9idVLfNPxDbYfFXT7fiVsq1mmdjcmemk94rhS3x83IdHC3kwXSfMQkM6chtl+1Qg==
-X-Received: by 2002:a63:700e:: with SMTP id
-	l14-v6mr2952601pgc.206.1528008205497; 
-	Sat, 02 Jun 2018 23:43:25 -0700 (PDT)
-Received: from localhost.localdomain (softbank219174086128.bbtec.net.
-	[219.174.86.128]) by smtp.gmail.com with ESMTPSA id
-	o10-v6sm60964783pgc.80.2018.06.02.23.43.23
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=JRtwrfIEogMy5vMhgDkwnwK1vB7cAj+Do10c/R3uQbg=;
+	b=nUTbSgyBd1JfdOXFtHrLIp7gb9svk+2t1k2UBRVGcGYmTN52xNxZncxsNTJ083tKU2
+	Eht1B52dQvJ1q/YN4HUb2BE03Dw6Obxn3e63sJM0cbieCTmMI06QGtkbcrRTJ9UFWPNU
+	ldxiSedwdBbVrSBh4dOGyZrVj2X8jq+S6XTERixrRQv6hRS2Z6+9ombWi4tKlOiSXPHK
+	iRH6opR4ryeSicTa95iXQN3xEqWP5IkDNMB16qI+8encY+e+sbphaHfat6R3QSfH2xU5
+	GxZtJk3kFymKm9tJp6PYKwD0EdgYmpBCZRkUdtlzqSL/UAd7ty2s4STYlByacZaYoa31
+	A16A==
+X-Gm-Message-State: ALKqPwdtUia0rkoy0bVvWu4hMcLzvn1JXDR8jEZ5VME4svKVXbgvV70q
+	K4e5JyMuP5vKDAoWIVLMLZc=
+X-Google-Smtp-Source: ADUXVKIiBMZe2HJIG3nq4iYzSflxC4PiYo2enRKw/sDd9GB5jxgn2caxlTCFUPuD6o21DCjftGdjfg==
+X-Received: by 2002:a63:64c5:: with SMTP id
+	y188-v6mr16136383pgb.37.1528079980050; 
+	Sun, 03 Jun 2018 19:39:40 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4000:1184:f1bd:c539:22b:bbf1])
+	by smtp.gmail.com with ESMTPSA id
+	m11-v6sm12069697pfk.42.2018.06.03.19.39.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 02 Jun 2018 23:43:24 -0700 (PDT)
-From: Seiichi Ishitsuka <ishitsuka.sc@gmail.com>
-X-Google-Original-From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jun 2018 15:42:50 +0900
-Message-Id: <1528008170-11349-1-git-send-email-ishitsuka.sc@ncos.nec.co.jp>
+	Sun, 03 Jun 2018 19:39:39 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sun,  3 Jun 2018 19:39:30 -0700
+Message-Id: <cover.1528079821.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] telnetd: Fix deadlock on cleanup
+Subject: [PATCH 0/6] pyro pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,151 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jun 2018 06:43:24 -0000
+X-List-Received-Date: Mon, 04 Jun 2018 02:39:39 -0000
 
-The cleanup function in telnetd is called both directly and on SIGCHLD signals.
-This triggered a deadlock in glibc and was reproduced in glibc 2.27 while
-running on a 4.14.30 kernel.
+please consider there change for pyro
 
-Signed-off-by: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
----
- ...01-telnet-telnetd-Fix-deadlock-on-cleanup.patch | 114 +++++++++++++++++++++
- .../netkit-telnet/netkit-telnet_0.17.bb            |   1 +
- 2 files changed, 115 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
+The following changes since commit dfbdd28d206a74bf264c2f7ee0f7b3e5af587796:
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
-new file mode 100644
-index 0000000..945785d
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
-@@ -0,0 +1,114 @@
-+From 06ed6a6bf25a22902846097d6b6c97e070c2c326 Mon Sep 17 00:00:00 2001
-+From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
-+Date: Fri, 1 Jun 2018 14:27:35 +0900
-+Subject: [PATCH] telnetd: Fix deadlock on cleanup
-+
-+The cleanup function in telnetd is called both directly and on SIGCHLD
-+signals. This, unfortunately, triggered a deadlock in eglibc 2.9 while
-+running on a 2.6.31.11 kernel.
-+
-+What we were seeing is hangs like these:
-+
-+  (gdb) bt
-+  #0  0xb7702424 in __kernel_vsyscall ()
-+  #1  0xb7658e61 in __lll_lock_wait_private () from ./lib/libc.so.6
-+  #2  0xb767e7b5 in _L_lock_15 () from ./lib/libc.so.6
-+  #3  0xb767e6e0 in utmpname () from ./lib/libc.so.6
-+  #4  0xb76bcde7 in logout () from ./lib/libutil.so.1
-+  #5  0x0804c827 in cleanup ()
-+  #6  <signal handler called>
-+  #7  0xb7702424 in __kernel_vsyscall ()
-+  #8  0xb7641003 in __fcntl_nocancel () from ./lib/libc.so.6
-+  #9  0xb767e0c3 in getutline_r_file () from ./lib/libc.so.6
-+  #10 0xb767d675 in getutline_r () from ./lib/libc.so.6
-+  #11 0xb76bce42 in logout () from ./lib/libutil.so.1
-+  #12 0x0804c827 in cleanup ()
-+  #13 0x0804a0b5 in telnet ()
-+  #14 0x0804a9c3 in main ()
-+
-+and what has happened here is that the user closes the telnet session
-+via the escape character. This causes telnetd to call cleanup in frame
-+the SIGCHLD signal is delivered while telnetd is executing cleanup.
-+
-+Telnetd then calls the signal handler for SIGCHLD, which is cleanup().
-+Ouch. The actual deadlock is in libc. getutline_r in frame #10 gets the
-+__libc_utmp_lock lock, and utmpname above does the same thing in frame
-+
-+The fix registers the SIGCHLD handler as cleanup_sighandler, and makes
-+cleanup disable the SIGCHLD signal before calling cleanup_sighandler.
-+
-+Signed-off-by: Simon Kagstrom <simon.kagstrom@netinsight.net>
-+
-+The patch was imported from the Ubuntu netkit-telnet package.
-+(https://bugs.launchpad.net/ubuntu/+source/netkit-telnet/+bug/507455)
-+
-+A previous patch declaring attributes of functions, but it is not used
-+in upstream.
-+
-+Signed-off-by: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
-+---
-+ telnetd/ext.h      |  1 +
-+ telnetd/sys_term.c | 17 ++++++++++++++++-
-+ telnetd/telnetd.c  |  2 +-
-+ 3 files changed, 18 insertions(+), 2 deletions(-)
-+
-+diff --git a/telnetd/ext.h b/telnetd/ext.h
-+index b98d6ec..08f9d07 100644
-+--- a/telnetd/ext.h
-++++ b/telnetd/ext.h
-+@@ -97,6 +97,7 @@ void add_slc(int, int, int);
-+ void check_slc(void);
-+ void change_slc(int, int, int);
-+ void cleanup(int);
-++void cleanup_sighandler(int);
-+ void clientstat(int, int, int);
-+ void copy_termbuf(char *, int);
-+ void deferslc(void);
-+diff --git a/telnetd/sys_term.c b/telnetd/sys_term.c
-+index 5b4aa84..c4fb0f7 100644
-+--- a/telnetd/sys_term.c
-++++ b/telnetd/sys_term.c
-+@@ -719,7 +719,7 @@ static void addarg(struct argv_stuff *avs, const char *val) {
-+  * This is the routine to call when we are all through, to
-+  * clean up anything that needs to be cleaned up.
-+  */
-+-void cleanup(int sig) {
-++void cleanup_sighandler(int sig) {
-+     char *p;
-+     (void)sig;
-+ 
-+@@ -742,3 +742,18 @@ void cleanup(int sig) {
-+     shutdown(net, 2);
-+     exit(0);
-+ }
-++
-++void cleanup(int sig) {
-++    sigset_t mask, oldmask;
-++
-++    /* Set up the mask of signals to temporarily block. */
-++    sigemptyset (&mask);
-++    sigaddset (&mask, SIGCHLD);
-++
-++    /* Block SIGCHLD while running cleanup */
-++    sigprocmask (SIG_BLOCK, &mask, &oldmask);
-++
-++    cleanup_sighandler(sig);
-++    /* Technically not needed since cleanup_sighandler exits */
-++    sigprocmask (SIG_UNBLOCK, &mask, NULL);
-++}
-+diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
-+index 9ace838..788919c 100644
-+--- a/telnetd/telnetd.c
-++++ b/telnetd/telnetd.c
-+@@ -833,7 +833,7 @@ void telnet(int f, int p)
-+     signal(SIGTTOU, SIG_IGN);
-+ #endif
-+     
-+-    signal(SIGCHLD, cleanup);
-++    signal(SIGCHLD, cleanup_sighandler);
-+     
-+ #ifdef TIOCNOTTY
-+     {
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 807b566..743cf26 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -11,6 +11,7 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
-            file://telnet-xinetd \
-            file://cross-compile.patch \
-            file://0001-telnet-telnetd-Fix-print-format-strings.patch \
-+           file://0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch \
-            "
- 
- EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
+  sip: update recipe to 4.19.2. (2017-10-16 14:43:15 -0700)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/pyro-next
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/pyro-next
+
+Andre McCurdy (1):
+  dnsmasq: update SRC_URI for versions 2.69 and earlier
+
+Armin Kuster (3):
+  wireshark: update to 2.2.10
+  wireshark: Update to 2.2.11
+  wireshark: Update Package to 2.2.12
+
+Ismo Puustinen (1):
+  opencv: fix runtime dependencies.
+
+Paul Eggleton (1):
+  dnsmasq: upgrade to 2.78
+
+ meta-networking/recipes-support/dnsmasq/dnsmasq.inc   |  4 ++--
+ .../recipes-support/dnsmasq/dnsmasq/lua.patch         | 19 ++++++++++---------
+ .../recipes-support/dnsmasq/dnsmasq_2.76.bb           |  8 --------
+ .../recipes-support/dnsmasq/dnsmasq_2.78.bb           |  8 ++++++++
+ .../{wireshark_2.2.9.bb => wireshark_2.2.12.bb}       |  6 +++---
+ meta-oe/recipes-support/opencv/opencv_3.2.bb          |  2 +-
+ 6 files changed, 24 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.78.bb
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.9.bb => wireshark_2.2.12.bb} (92%)
+
 -- 
 2.7.4
 
