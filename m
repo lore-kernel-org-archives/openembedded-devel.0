@@ -1,49 +1,31 @@
-Return-Path: <jkrishnanjanappa@mvista.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8465260685
+Return-Path: <leon.anavi@konsulko.com>
+Received: from voyager.icnhost.net (ns13.icndns.net [78.142.50.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7589E74A16
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 11:26:14 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id w7-v6so391454pfn.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2018 04:26:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=Sf82Q75OyMsDHYZRXrPIuyL/5PA4ACQnhckvx/nXaQI=;
-	b=NZTUUS1YxjDDzOt4qY25JHk5AFFFyGuhLsKCPm2hAC2Hih77tKs2BdDwizgh9LCc34
-	joDOYCE/5l/tVKmX48GtFGN+V0Gicu4vJCsgXa81YJpS4wPWsmqW9ycCs/e7XCW/TSwT
-	IQsYeJFrOqfsqrDS17bIcXNM2R8Fdi+4vyo/hAQ2UuBrTlo36N3Pl5uABhVoDXSJTfHD
-	9N/ocsvjkTgznYYjeoRFw9HFhwCuwL97E1cDHP/Psmx8IlFHZcppUS0hKclnY6WYYlrt
-	wiBqanPHs2EY3GHMx7qE28SCN5e5Dua7Ct+fKf0bc5FcFvxwzR2UPxzk4TSWqMxdH2mF
-	qPKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Sf82Q75OyMsDHYZRXrPIuyL/5PA4ACQnhckvx/nXaQI=;
-	b=jUdNdwBGe9TRQh3fp8B2jFs1BqC3utpmFewnZHxXEDIiUeiy0FWmvyWxaHyKcjk5/e
-	sCffq/DeseSPTS+wFNZ2Fv/VfQOIEW74ffaSjZ3eIUKfeIbMGL+Pg8k/UssN7XERuDWS
-	S28cO4BPnyf/ejjtVOGdFx5cdIIoMYRHbMy0T0iUsI0n99q2L0WgO6CwO76kxFGL8bJQ
-	qLXYC392D4Wq6vCEjU0WDZUnOS1TSQgwZ3yOurFWFBTaHPaxWkAsdzfdhm/aVFpaMT0X
-	lWp2t3aENl9WFxLsqVcUNTDeXSJ2RipQjATanCaWqe1iUt35k7ni5EO0xEfVcSp1pGo0
-	xqAw==
-X-Gm-Message-State: APt69E3ts3GX+ypyWPlHpAGBOZ81yGOazXEJrcadq0Fi88UkdJNSMZ32
-	tecQZfyWmnKkmPAPvnT4WfxOl1OU
-X-Google-Smtp-Source: ADUXVKK4YPU+gBA/ykyn2Ds89Yy4uIPr0Wpb7T9S2kx0BH59fgNnRa2A398tlJzS99lrbSVrfWLuHg==
-X-Received: by 2002:a62:ba13:: with SMTP id
-	k19-v6mr6398543pff.245.1528111575547; 
-	Mon, 04 Jun 2018 04:26:15 -0700 (PDT)
-Received: from jkrishnanjanappa-desktop.mvista.com ([111.93.218.67])
-	by smtp.gmail.com with ESMTPSA id
-	x17-v6sm4233314pgv.15.2018.06.04.04.26.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 04 Jun 2018 04:26:15 -0700 (PDT)
-From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+	Mon,  4 Jun 2018 16:29:34 +0000 (UTC)
+Received: from lan.nucleusys.com ([92.247.61.126]:51054
+	helo=leon-ThinkPad-T460s.nucleusys.com)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.89_1)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1fPsMP-0007Na-Pu; Mon, 04 Jun 2018 19:29:33 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Jun 2018 16:56:09 +0530
-Message-Id: <1528111569-11006-1-git-send-email-jkrishnanjanappa@mvista.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][morty][PATCH] python-cryptography: Add python-pytz in RDEPENDS to fix ptest failures
+Date: Mon,  4 Jun 2018 19:29:27 +0300
+Message-Id: <20180604162927.22714-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.14.1
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [meta-oe][PATCH] nano: Upgrade 2.9.7 -> 2.9.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +38,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 11:26:14 -0000
+X-List-Received-Date: Mon, 04 Jun 2018 16:29:34 -0000
 
-It fixes below test failure:
--- snip --
-ImportError while importing test module '/usr/lib64/python-cryptography/ptest/tests/test_x509.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-tests/test_x509.py:17: in <module>
-    import pytz
-E   ImportError: No module named pytz
--- snip --
+Upgrade nano to 2.9.8, the latest version as of 2 June 2018:
+https://www.nano-editor.org/dist/v2.9/ChangeLog
 
-Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python-cryptography.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/nano/nano_2.9.7.bb | 8 --------
+ meta-oe/recipes-support/nano/nano_2.9.8.bb | 8 ++++++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/nano/nano_2.9.7.bb
+ create mode 100644 meta-oe/recipes-support/nano/nano_2.9.8.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
-index 4be7907..13d2ba8 100644
---- a/meta-python/recipes-devtools/python/python-cryptography.inc
-+++ b/meta-python/recipes-devtools/python/python-cryptography.inc
-@@ -39,6 +39,7 @@ RDEPENDS_${PN}-ptest += " \
-     ${PYTHON_PN}-iso8601 \
-     ${PYTHON_PN}-pretend \
-     ${PYTHON_PN}-pytest \
-+    ${PYTHON_PN}-pytz \
- "
- 
- inherit ptest
+diff --git a/meta-oe/recipes-support/nano/nano_2.9.7.bb b/meta-oe/recipes-support/nano/nano_2.9.7.bb
+deleted file mode 100644
+index 419e5406b..000000000
+--- a/meta-oe/recipes-support/nano/nano_2.9.7.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-include nano.inc
+-
+-do_install_append_libc-musl () {
+-	rm -rf ${D}${libdir}/charset.alias
+-	rmdir ${D}${libdir}
+-}
+-SRC_URI[md5sum] = "e0c6d76c93932f6c41c40842952495f7"
+-SRC_URI[sha256sum] = "b64ab017305b1777e97b5b9b07b31db8aeebfc3e8719f61e8da1cf3866d344bd"
+diff --git a/meta-oe/recipes-support/nano/nano_2.9.8.bb b/meta-oe/recipes-support/nano/nano_2.9.8.bb
+new file mode 100644
+index 000000000..ac5f0622b
+--- /dev/null
++++ b/meta-oe/recipes-support/nano/nano_2.9.8.bb
+@@ -0,0 +1,8 @@
++include nano.inc
++
++do_install_append_libc-musl () {
++	rm -rf ${D}${libdir}/charset.alias
++	rmdir ${D}${libdir}
++}
++SRC_URI[md5sum] = "31714360342f9baa344e2fa574c144db"
++SRC_URI[sha256sum] = "c2deac31ba4d3fd27a42fafcc47ccf499296cc69a422bbecab63f2933ea85488"
 -- 
-2.7.4
+2.14.1
 
 
