@@ -1,52 +1,37 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
-	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id CAF0774D2F
+Return-Path: <Noor_Ahsan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F180719AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 08:07:37 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id g22-v6so8820947iob.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2018 01:07:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=NAgqpg1wWn3h5jgQj2yHs3WjlfHOh0ml41Eizg7BDuw=;
-	b=Re8oUE9tZ/pxsK5PY0+6hojNE9zfoyqxIXjuMF0+XkCc4XfT1TasUTjfXQXlO75SsF
-	ic2n0E3hUMr+7k92TgxYhw08O1rQ6WhBDoD7U+F4im3OmBmxXclF9Ymx3zAui2l/EaQa
-	i/N4830T/yOjzx4BBIFaIJDsvmTufgFu+cN5XRS5sBjEc5g+s75QdJMQNNOFg4QF6IcK
-	s4vfuWy91l/MK8knkPnWct7PS13VTm/eu0kLvOzxQV6xp21eRUBSKry1tbhU9xxg8Pst
-	+OkIIH9aoLlNwLV9uGZb/2orV/tROO44W+WPQVcorkMSMU5uTc/4jo4e41R+a42Mzuld
-	Q4Aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=NAgqpg1wWn3h5jgQj2yHs3WjlfHOh0ml41Eizg7BDuw=;
-	b=AFaSRxMRuoQ67rBS3nKXFOKxFvgmFEJZcIsuNvsruFTz+aHZiUJkDOKTxqGZvs8/69
-	hxS88IjhV6CfQ/pEKI7XRAzXzOP8PMB0EjVxOEawrHuyFlozhSN8CkNOPE03PASZRIiW
-	xtDn+o1fVZYD5WOwcBXXJak/ggChbZNjzoRR02an0d+Y7nl1H7BHt9c3Uy5LX7IygxJy
-	Ecnd41aflHRcYVCWArmDOboXWXbez4M4SkQqkfchK1Iror5c06rOVfX+TUc2U/FlMbZX
-	gSZJwtBwMY4W4VstXn6h4smCmIvafS7yDstGqV3hjll2/PX8ND27/kRv92A7t7AVrdnv
-	qNTQ==
-X-Gm-Message-State: ALKqPwdxPVgiaJeDlww6t9DzNYtNpQUIRNYujVpt63EaRHweXm74nriL
-	qH4lxP3z2+KiAndC0syTFI1LeANuai41k6j2Fbbk5A==
-X-Google-Smtp-Source: ADUXVKJy+bDGaKi1abzj9Z+F/oG4OeigyJ5dh7uy5AiUW2Y42k23XqXPV3bbFFNk2hHKjolak3vlPsdbZpIFhNypgp4=
-X-Received: by 2002:a6b:2401:: with SMTP id
-	k1-v6mr15819608iok.270.1528099658846; 
-	Mon, 04 Jun 2018 01:07:38 -0700 (PDT)
+	Mon,  4 Jun 2018 08:53:18 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=svr-ies-mbx-01.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-SHA384:256)
+	id 1fPlEs-0005gX-RJ from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 04 Jun 2018 01:53:18 -0700
+Received: from svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1) by
+	svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1) with Microsoft SMTP
+	Server (TLS) id 15.0.1320.4; Mon, 4 Jun 2018 09:53:15 +0100
+Received: from svr-ies-mbx-01.mgc.mentorg.com ([fe80::15aa:fe76:2483:1cce]) by
+	svr-ies-mbx-01.mgc.mentorg.com ([fe80::15aa:fe76:2483:1cce%22]) with
+	mapi id 15.00.1320.000; Mon, 4 Jun 2018 09:53:15 +0100
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH] radvd: Fix missing yacc error.
+Thread-Index: AQHT9CUvzp69w6j1FkWceaFB/6uKTKRP2kQw
+Date: Mon, 4 Jun 2018 08:53:15 +0000
+Message-ID: <3ab64a7c59f14cce82d9c3c07364cf4d@svr-ies-mbx-01.mgc.mentorg.com>
+References: <1527249332-31097-1-git-send-email-noor_ahsan@mentor.com>
+	<1527249332-31097-2-git-send-email-noor_ahsan@mentor.com>
+In-Reply-To: <1527249332-31097-2-git-send-email-noor_ahsan@mentor.com>
+Accept-Language: en-US, en-IE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [137.202.0.87]
 MIME-Version: 1.0
-Received: by 2002:a6b:f614:0:0:0:0:0 with HTTP;
-	Mon, 4 Jun 2018 01:07:18 -0700 (PDT)
-In-Reply-To: <ce457d1a5cd7cc0bbebc6db4afa18011df24e6e7.camel@andred.net>
-References: <CALbNGRTZOo_EaPNuQWB0iV-OVUy-uwKgt-PGwBz3O=ROqMZBxQ@mail.gmail.com>
-	<ce457d1a5cd7cc0bbebc6db4afa18011df24e6e7.camel@andred.net>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 4 Jun 2018 09:07:18 +0100
-Message-ID: <CAJTo0LahkP_3YULXEdZyU0287rEgMDxnvFDJKVFxxZJM=tozww@mail.gmail.com>
-To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Avoid version going backwards for beta versions
+Subject: Re: [meta-networking][PATCH] radvd: Fix missing yacc error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,19 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 08:07:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Jun 2018 08:53:18 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On 31 May 2018 at 11:28, Andr=C3=A9 Draszik <git@andred.net> wrote:
-> In debian based distros, the tilde will always cause sorting to be lower
-> than the version specified before the tilde, so e.g.
->
-> fluidsynth-2.0.0~beta.1
->
-> works as expected, and I *think* this latter approach works in OE, too.
+Hello,
 
-Yes, RPM4/dpkg/opkg all support this syntax, so this does work in OE.
+Any update on this. Kindly apply think on master and Sumo release.
 
-Ross
+Noor
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Ahsan, Noor
+Sent: Friday, May 25, 2018 4:56 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe] [meta-networking][PATCH] radvd: Fix missing yacc error.
+
+* Following error apprear in do configure. Fix it by adding bison-native in=
+ DEPENDS.
+  ../radvd-2.17/ylwrap: line 176: yacc: command not found
+
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ meta-networking/recipes-daemons/radvd/radvd.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-network=
+ing/recipes-daemons/radvd/radvd.inc
+index bff693c..06d16a4 100644
+--- a/meta-networking/recipes-daemons/radvd/radvd.inc
++++ b/meta-networking/recipes-daemons/radvd/radvd.inc
+@@ -8,7 +8,7 @@ addresses and some other parameters. They also can \  choos=
+e a default router based on these advertisements."
+ HOMEPAGE =3D "http://www.litech.org/radvd/"
+ SECTION =3D "net"
+-DEPENDS =3D "flex-native libdaemon"
++DEPENDS =3D "flex-native bison-native libdaemon "
+=20
+ # License is BSD-Style (with advertising clause) but also has an additiona=
+l 0th clause  LICENSE =3D "radvd"
+--
+2.7.4
+
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
