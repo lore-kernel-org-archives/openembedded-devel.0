@@ -1,17 +1,17 @@
 Return-Path: <prvs=6867199e8=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id CD95274F7B
+	by mail.openembedded.org (Postfix) with ESMTP id A18BD74AA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 06:21:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,475,1520895600"; d="scan'208";a="10649092"
+	Mon,  4 Jun 2018 06:24:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,475,1520895600"; d="scan'208";a="10649154"
+From: Richard Leitner <richard.leitner@skidata.com>
 To: Andre McCurdy <armccurdy@gmail.com>, openembeded-devel
 	<openembedded-devel@lists.openembedded.org>
 References: <20180601114158.24298-1-richard.leitner@skidata.com>
 	<ab305d19-628d-097f-9905-e1f724abe6ba@gmail.com>
 	<CAJ86T=Ux5-SHTB49_-mUSWFdkEaugnfO=jMSib1o7L17bmV6KA@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <55c11335-a817-fc7f-9675-7f91b0f6613e@skidata.com>
-Date: Mon, 4 Jun 2018 08:21:51 +0200
+Message-ID: <6bc9b18c-7104-25ee-e7b5-7b04b7fed07f@skidata.com>
+Date: Mon, 4 Jun 2018 08:24:35 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
@@ -20,7 +20,7 @@ X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
 Cc: dev@g0hl1n.net
-Subject: Re: [meta-oe][PATCH] pam-plugin-ccreds: add recipe
+Subject: [meta-oe][PATCH] pam-plugin-ccreds: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 06:21:53 -0000
+X-List-Received-Date: Mon, 04 Jun 2018 06:24:36 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -53,7 +53,7 @@ On 06/01/2018 08:01 PM, Andre McCurdy wrote:
 >> [dev-so]
 
 Thanks for that information.
-Are other targets than "linux-musl" affected?
+Do you know if other targets than "linux-musl" are affected?
 
 > 
 > According to OE's sanity checks, a .so plug-in should not be a symlink.
@@ -61,10 +61,9 @@ Are other targets than "linux-musl" affected?
 > See the do_install_append() in the libcgroup recipe in oe-core for an
 > example of how to fix the issue.
 
-IMHO in this case the better solution is to add the missing targets to
-the following patch... Or does anybody know how to pass a wildcard like
-linux* to AM_CONDITIONAL? Google wasn't very helpful here :-(
-
+IMHO in this case the better solution is to add the missing targets
+to the following patch... Or does anybody know how to pass wildcards to
+string comparisons in AM_CONDITIONAL? Google wasn't very helpful here...
 
 >>> diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-also-for-linux-gnueabi-targets.patch
 >>> new file mode 100644
@@ -100,6 +99,7 @@ linux* to AM_CONDITIONAL? Google wasn't very helpful here :-(
 >>> + if test -z "$use_gcrypt"; then
 >>> +--
 >>> +2.11.0
+>>> +
 
 regards;Richard.L
 
