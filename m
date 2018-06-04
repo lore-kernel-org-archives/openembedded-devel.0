@@ -1,51 +1,53 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 148CE75229
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 725B575231
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 18:13:16 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id d3-v6so7154029qto.1
+	Mon,  4 Jun 2018 19:34:19 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id e67-v6so20748389vke.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2018 11:13:18 -0700 (PDT)
+	Mon, 04 Jun 2018 12:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=KykccVVgTZK9jnDR8XTaYH1D7z657nKNdPy7QQfmPPg=;
-	b=mCidbQBvw72rdxb2jSa1Fvvmjvrrvq13QmrPnlLK5pBaRhuZog5TWneJX8hFzer6aX
-	lDAa8G8kjxkOJCNkw9D7rM9YjInWcKJZ/9UUFN9C5KWldNi+dmMljx84A2Ms6swU4Udo
-	obq3Rb50MRWgLup9CVFG+abalTe3aMyFDz98CA6x8k0kvaYmFEsNj82Taju7//H4EbpA
-	YVA0DrBhH4z2Lb+NA1ntS6RSQWQ0jguSZFeKp16adgmYJ/IAnYp144sUg/o7zwJ8/mb7
-	5fgTY2gJdxo5RdP14SxqOfkjfaZy8DI/1BZcfieNI6g+KMq2t3z4p1+aE+PyZIGswEna
-	ETRw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=QweDtaX2GFacfPV0kK60KN/ys/lQHeIwpY8w0/J+WjI=;
+	b=LQ1ipzDVM6DsEQ5Rizpfk1Io52qNE3N9OUZzI2Echw4ox6BXcLyeW6hgJYKH+R54di
+	3XoRrQHYRZEyEPZf1k9jrbJAeG+7x+YtQNXkNfUVsFLwvMRyNHjdJW/kZCtXhdJ71jG9
+	egcdFRJm6VSSiPb4EuuF10WRMyK1ZDeHX+/CMZXJjorZ6csDgBDcEb1YqOFsyd6/WAVg
+	5AdNCl3S8SDXNJEoWDuo3sjV4j8aRqVhkGHfNRsicAASyD6fHIMdTjzXYB9Nz1RF+DE1
+	CHM5jRzwtP/EygT+bb5xWyGmEP3HykMFMIPTIgE2KmDAKAcTnycUU+AuHodzZZv9/w/E
+	YEdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=KykccVVgTZK9jnDR8XTaYH1D7z657nKNdPy7QQfmPPg=;
-	b=juYyPbAbs1GVuMcu8eMR+qesavH/98trTfzSbzhSbRX6kHpQsBbOlkFI8y7pjiWc4O
-	wKSjSNmVDMtx7jfOac5TyioN+6ZSpOF+YTeSyRmrBNV9JbvWwIQ2QxHoan4HLvtGcx+c
-	TJBV/DR3TW5+Sdj95NnR6g1FiG5vFAvgEsVL3forsWpfBY2/XSmF+ZvlU3sPYAjuDvBq
-	BIz9jMIeLdZKYO+ku1oONwkIODLLkWSC9+IyTnR1p/OksC/XfHFezywtUIidHbFplIdc
-	LL4UjQUMrcFM2a8Jag04zJrb7rF4Xjl7HtONUrRr9d1DbOvt3R7/agx6STSBYepg6fA1
-	NG1g==
-X-Gm-Message-State: APt69E2ypWsR/84efM5JiBkDDYITHm5Q95wvOjHuvQb/smM3LlivgFfV
-	0qPKKkKRbHfXr+a1YCpwqyn7fD/o
-X-Google-Smtp-Source: ADUXVKJZyzZ/XFC1jSDB9FNbBoEz+dTeHNnLkyTwPhrSMk22ct/RrZ1VvT+1HQgR1hKaMEMVrrohmg==
-X-Received: by 2002:aed:3704:: with SMTP id
-	i4-v6mr20978076qtb.234.1528135997427; 
-	Mon, 04 Jun 2018 11:13:17 -0700 (PDT)
-Received: from prague.hsd1.va.comcast.net
-	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
-	by smtp.gmail.com with ESMTPSA id
-	c4-v6sm32565189qtj.49.2018.06.04.11.13.16
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 04 Jun 2018 11:13:16 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Jun 2018 14:13:13 -0400
-Message-Id: <20180604181313.28487-1-philip@balister.org>
-X-Mailer: git-send-email 2.13.6
-Cc: Philip Balister <philip@opensdr.com>
-Subject: [meta-oe][rocko][PATCH] protobuf: Fix fetcher failure for rocko.
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=QweDtaX2GFacfPV0kK60KN/ys/lQHeIwpY8w0/J+WjI=;
+	b=EW0Cz0oGi/mC1lLQMPI987bLDWZI7KnAgAoDs0GM90wx4stLj0AFCrAGaWdjupW8ag
+	WACjEg48WA842t8Q1x6srFgAkipxB0uKjdYE8RHytGAon6cvwv+G38RNa6JN5lsBsL/1
+	FbnCCPfwxtdNN8sYo2CNiIDETFUxd2HH/kdt3B+GNg66gnOH2hfc2kt+R44LnVFPFCrg
+	nSPmaC06jkxl3qPivZxSepp70C1DRTMZLfgLhD9aBw+qvPhStkJ3gAxpFao0/ybfT1EB
+	wP0ibHU1qkGzs4yVKAYXEEreLLX+HLLpQ9FW+SPQZMOTcJyu9m15rRXZ5yxwRKrGBdTh
+	6uqA==
+X-Gm-Message-State: ALKqPwcMF7Iukihjn2OK36kuxKCAiXlqDHnHIk4hFM42PpFggljEZpCU
+	EoSc6x6OkLia1kN/zGirA3uF1RYmQehfHHInA6nxBw==
+X-Google-Smtp-Source: ADUXVKJiL7Z0PRfNXf/4PSEzyIsTbAYPeR+iZ72N6uE75s3G3Mwz6OcWpzsCjZFxipudyraE1qx6BAm2zDuylDEfeNo=
+X-Received: by 2002:a1f:1551:: with SMTP id
+	78-v6mr12652331vkv.174.1528140860284; 
+	Mon, 04 Jun 2018 12:34:20 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ab0:28a:0:0:0:0:0 with HTTP;
+	Mon, 4 Jun 2018 12:34:19 -0700 (PDT)
+In-Reply-To: <6bc9b18c-7104-25ee-e7b5-7b04b7fed07f@skidata.com>
+References: <20180601114158.24298-1-richard.leitner@skidata.com>
+	<ab305d19-628d-097f-9905-e1f724abe6ba@gmail.com>
+	<CAJ86T=Ux5-SHTB49_-mUSWFdkEaugnfO=jMSib1o7L17bmV6KA@mail.gmail.com>
+	<6bc9b18c-7104-25ee-e7b5-7b04b7fed07f@skidata.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Mon, 4 Jun 2018 12:34:19 -0700
+Message-ID: <CAJ86T=XHwDKdgZX2H-4s+e_m6d2WxRJbSr1AhN-MqJhuX6xNsw@mail.gmail.com>
+To: Richard Leitner <richard.leitner@skidata.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	dev@g0hl1n.net
+Subject: Re: [meta-oe][PATCH] pam-plugin-ccreds: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,33 +60,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 18:13:17 -0000
+X-List-Received-Date: Mon, 04 Jun 2018 19:34:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Philip Balister <philip@opensdr.com>
+On Sun, Jun 3, 2018 at 11:24 PM, Richard Leitner
+<richard.leitner@skidata.com> wrote:
+> On 06/01/2018 08:01 PM, Andre McCurdy wrote:
+>> On Fri, Jun 1, 2018 at 10:40 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> On 6/1/18 4:41 AM, Richard Leitner wrote:
+>>>> Add version 11 of the pam-plugin-ccreds with the debian patches applied.
+>>>
+>>> I see QA errors like below
+>>>
+>>> ERROR: pam-plugin-ccreds-11-r0 do_package_qa: QA Issue: non
+>>> -dev/-dbg/nativesdk- package contains symlink .so: pam-plugin-ccreds
+>>> path
+>>> '/work/core2-64-bec-linux-musl/pam-plugin-ccreds/11-r0/packages-split/pam-plugin-ccreds/lib/security/pam_ccreds.so'
+>>> [dev-so]
+>
+> Thanks for that information.
+> Do you know if other targets than "linux-musl" are affected?
+>
+>>
+>> According to OE's sanity checks, a .so plug-in should not be a symlink.
+>>
+>> See the do_install_append() in the libcgroup recipe in oe-core for an
+>> example of how to fix the issue.
+>
+> IMHO in this case the better solution is to add the missing targets
+> to the following patch... Or does anybody know how to pass wildcards to
+> string comparisons in AM_CONDITIONAL? Google wasn't very helpful here...
 
-The 3.4.x branch disappered from the github repo. Remviing the branch
-entry from SRC_URI allows the fetch to succeed. Rocko is the only release
-that has this issue. Sumo and later have 3.5.x.
+Untested, but I guess something like this would work:
 
-Signed-off-by: Philip Balister <philip@opensdr.com>
----
- meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  AM_CONDITIONAL(EXTENSION_SO, case "$target_os" in linux*) true;; *)
+false;; esac)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-index fae7c18a1..fe28f475a 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-@@ -18,7 +18,7 @@ SRCREV = "b04e5cba356212e4e8c66c61bbe0c3a20537c5b9"
- 
- PV = "3.4.1+git${SRCPV}"
- 
--SRC_URI = "git://github.com/google/protobuf.git;branch=3.4.x"
-+SRC_URI = "git://github.com/google/protobuf.git"
- 
- EXTRA_OECONF += " --with-protoc=echo"
- 
--- 
-2.13.6
-
+The approach in your patch also looks OK.
 
