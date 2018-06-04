@@ -1,44 +1,21 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 04A8B71A60
+Return-Path: <prvs=6867199e8=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DB2F71E5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 08:00:06 +0000 (UTC)
-Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
-	[209.85.128.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 027B620891
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 08:00:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1528099208;
-	bh=SakqKoj0/yjccttK4ScY2SDv3PhwFauuGUXbDsiNenU=;
-	h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
-	b=iiVS8JkRMK52rr4Ktypc1I/HNOuRP80ViheYQpXrxAYT7aDBD0DZ2EI+P1wsfkDDz
-	HfO1YlCt0/5CorS8yGFzCeUWrTWLz3o4h/H/pjJ7UjQWERhXw1jV0DZFZbmK9QV6Ej
-	E628Ge+AllOwP1jaH0Opf8x9cfnB4n5ASX954R8M=
-Received: by mail-wr0-f179.google.com with SMTP id y15-v6so42126531wrg.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2018 01:00:07 -0700 (PDT)
-X-Gm-Message-State: ALKqPwf5uWQKlYXOfRBRbxAVl8KB4/EukqomL8sEP6GeIFxhyR3NXl2x
-	t3k6UpSNhHC0wQWONOOsd+TZMSPGPUeWyhovG0Y=
-X-Google-Smtp-Source: ADUXVKIC9JVr5MJaN76aKAdL6HPj0Xk/pxlOJDjSqKejVhYRy6afp2igjGWbc/H+g679aZGo8r4hkC6JlfvmE5/sxcw=
-X-Received: by 2002:adf:9dc9:: with SMTP id
-	q9-v6mr15937532wre.12.1528099206454; 
-	Mon, 04 Jun 2018 01:00:06 -0700 (PDT)
+	Mon,  4 Jun 2018 08:00:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,475,1520895600"; 
+   d="scan'208";a="1477594"
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 4 Jun 2018 10:00:45 +0200
+Message-ID: <20180604080045.1153-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 2002:adf:9166:0:0:0:0:0 with HTTP;
-	Mon, 4 Jun 2018 01:00:05 -0700 (PDT)
-In-Reply-To: <f037c80f-2b51-48a8-9846-1ef1c8217396@gmail.com>
-References: <1527854794-22548-1-git-send-email-krzk@kernel.org>
-	<f037c80f-2b51-48a8-9846-1ef1c8217396@gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Date: Mon, 4 Jun 2018 10:00:05 +0200
-X-Gmail-Original-Message-ID: <CAJKOXPeRZ1XwhXR4pUJ0SXNQWt6gxVgAbKPxPpN0HU=epvVxqw@mail.gmail.com>
-Message-ID: <CAJKOXPeRZ1XwhXR4pUJ0SXNQWt6gxVgAbKPxPpN0HU=epvVxqw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] lshw: Add new recipe with B.02.18 version
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: dev@g0hl1n.net
+Subject: [meta-oe][PATCH v2] pam-plugin-ccreds: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,171 +28,249 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 08:00:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Jun 2018 08:00:46 -0000
+Content-Type: text/plain
 
-On Fri, Jun 1, 2018 at 6:48 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi Krzysztof
->
-> On 6/1/18 5:06 AM, Krzysztof Kozlowski wrote:
->> Add new recipe for lshw B.02.18 version - a small tool to provide
->> detailed information on the hardware configuration of the machine.
->>
->> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
->>
->> ---
->>
->> The recipe is based on existing meta-linaro:
->> https://layers.openembedded.org/layerindex/recipe/5446/
->>
->> with changes:
->> 1. Bump to 02.18,
->> 2. Fix QA issue with GNU_HASH,
->> 3. Minor recipe styling fixes.
->> ---
->>  ...e-supplied-LDFLAGS-to-silence-OE-GNU_HASH.patch | 33 ++++++++++++++++++
->>  .../lshw/files/cross-compile.patch                 | 39 ++++++++++++++++++++++
->>  meta-oe/recipes-devtools/lshw/lshw_02.18.bb        | 37 ++++++++++++++++++++
->>  3 files changed, 109 insertions(+)
->>  create mode 100644 meta-oe/recipes-devtools/lshw/files/0001-Makefile-Use-supplied-LDFLAGS-to-silence-OE-GNU_HASH.patch
->>  create mode 100644 meta-oe/recipes-devtools/lshw/files/cross-compile.patch
->>  create mode 100644 meta-oe/recipes-devtools/lshw/lshw_02.18.bb
->>
->> diff --git a/meta-oe/recipes-devtools/lshw/files/0001-Makefile-Use-supplied-LDFLAGS-to-silence-OE-GNU_HASH.patch b/meta-oe/recipes-devtools/lshw/files/0001-Makefile-Use-supplied-LDFLAGS-to-silence-OE-GNU_HASH.patch
->> new file mode 100644
->> index 000000000000..627619fd137f
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/lshw/files/0001-Makefile-Use-supplied-LDFLAGS-to-silence-OE-GNU_HASH.patch
->> @@ -0,0 +1,33 @@
->> +From 2f69ba75608619ba7fc962b1a0338682b644a406 Mon Sep 17 00:00:00 2001
->> +From: Krzysztof Kozlowski <krzysztof.kozlowski@proceq.com>
->> +Date: Thu, 31 May 2018 16:22:23 +0200
->> +Subject: [PATCH] Makefile: Use supplied LDFLAGS to silence OE GNU_HASH QA
->> + warning
->> +
->> +Fix OpenEmbedded/Yocto QA warning:
->> +
->> +    ERROR: lshw-02.16-r1 do_package_qa: QA Issue: No GNU_HASH in the elf binary: 'build/tmp/work/cortexa5hf-neon-poky-linux-gnueabi/lshw/02.16-r1/packages-split/lshw/usr/sbin/lshw' [ldflags]
->> +    ERROR: lshw-02.16-r1 do_package_qa: QA run found fatal errors. Please consider fixing them.
->> +    ERROR: lshw-02.16-r1 do_package_qa: Function failed: do_package_qa
->> +
->> +Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@proceq.com>
->> +---
->> + src/Makefile | 2 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +diff --git a/src/Makefile b/src/Makefile
->> +index f474ff9d56b3..dd7a2a400be2 100644
->> +--- a/src/Makefile
->> ++++ b/src/Makefile
->> +@@ -25,7 +25,7 @@ CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
->> + ifeq ($(SQLITE), 1)
->> +     CXXFLAGS+= -DSQLITE $(shell pkg-config --cflags sqlite3)
->> + endif
->> +-LDFLAGS=-L./core/ -g
->> ++LDFLAGS+=-L./core/ -g
->> + ifneq ($(shell $(LD) --help 2| grep -- --as-needed), )
->> +     LDFLAGS+= -Wl,--as-needed
->> + endif
->> +--
->> +2.7.4
->> +
->> diff --git a/meta-oe/recipes-devtools/lshw/files/cross-compile.patch b/meta-oe/recipes-devtools/lshw/files/cross-compile.patch
->> new file mode 100644
->> index 000000000000..221b7e538c00
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/lshw/files/cross-compile.patch
->> @@ -0,0 +1,39 @@
->> +---
->> + src/Makefile      |    2 +-
->> + src/core/Makefile |    2 +-
->> + src/gui/Makefile  |    4 ++--
->> + 3 files changed, 4 insertions(+), 4 deletions(-)
->> +
->> +--- a/src/Makefile
->> ++++ b/src/Makefile
->> +@@ -18,7 +18,7 @@ export MANDIR
->> + export DATADIR
->> + export SQLITE
->> +
->> +-CXX?=c++
->> ++CXX?=$(CROSS_COMPILE)c++
->> + INCLUDES=-I./core/
->> + DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
->> + CXXFLAGS=-g -Wall -g $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
->> +--- a/src/core/Makefile
->> ++++ b/src/core/Makefile
->> +@@ -1,6 +1,6 @@
->> + PACKAGENAME?=lshw
->> +
->> +-CXX=c++
->> ++CXX?=$(CROSS_COMPILE)c++
->> + INCLUDES=
->> + DEFINES=-DPREFIX=\"$(PREFIX)\" -DSBINDIR=\"$(SBINDIR)\" -DMANDIR=\"$(MANDIR)\" -DDATADIR=\"$(DATADIR)\"
->> + CXXFLAGS?=-g -Wall $(INCLUDES) $(DEFINES) $(RPM_OPT_FLAGS)
->> +--- a/src/gui/Makefile
->> ++++ b/src/gui/Makefile
->> +@@ -1,7 +1,7 @@
->> + PACKAGENAME?=lshw
->> +
->> +-CXX?=c++
->> +-CC?=cc
->> ++CXX?=$(CROSS_COMPILE)c++
->> ++CC?=$(CROSS_COMPILE)cc
->> + STRIP?=strip
->> + OBJCOPY?=objcopy
->> +
->> diff --git a/meta-oe/recipes-devtools/lshw/lshw_02.18.bb b/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
->> new file mode 100644
->> index 000000000000..aac6707fcea4
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/lshw/lshw_02.18.bb
->> @@ -0,0 +1,37 @@
->> +DESCRIPTION = "A small tool to provide detailed information on the hardware \
->> +configuration of the machine. It can report exact memory configuration, \
->> +firmware version, mainboard configuration, CPU version and speed, cache \
->> +configuration, bus speed, etc. on DMI-capable or EFI systems."
->> +SUMMARY = "Hardware lister"
->> +HOMEPAGE = "http://ezix.org/project/wiki/HardwareLiSter"
->> +SECTION = "console/tools"
->> +
->> +LICENSE = "GPLv2+"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->> +
->> +DEPENDS = " \
->> +    pciutils \
->> +    usbutils \
->> +"
->> +COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
->> +
->> +SRC_URI = " \
->> +    http://ezix.org/software/files/lshw-B.${PV}.tar.gz \
->> +    file://cross-compile.patch \
->> +    file://0001-Makefile-Use-supplied-LDFLAGS-to-silence-OE-GNU_HASH.patch \
->> +"
->> +SRC_URI[md5sum] = "8671c6d94d6324a744b7f21f1bfecfd2"
->> +SRC_URI[sha256sum] = "ae22ef11c934364be4fd2a0a1a7aadf4495a0251ec6979da280d342a89ca3c2f"
->> +
->> +S = "${WORKDIR}/lshw-B.${PV}"
->> +
->> +do_compile() {
->> +    # build core only - don't ship gui
->> +    oe_runmake -C src core
->> +}
->> +
->> +do_install() {
->> +    oe_runmake install DESTDIR=${D}
->> +    # data files provided by dependencies
->> +    rm -rf ${D}/usr/share/lshw
->
-> who should be providing these files ?
-> should these packages be in rrecommends for this to work effectively ?
+Add version 11 of the pam-plugin-ccreds with the debian patches and a
+fix for *.so symlink creation applied.
 
-Thanks for catching this. They were indeed missing in the image. I can
-add all of them as RDEPENDS or maybe as PACKAGECONFIG and then
-customize the install with check for respective dependencies. I think
-I will go with the second as it gives greater flexibility.
+Upstreaming of these patches was requested by following pull-request:
+	https://github.com/PADL/pam_ccreds/pull/1
 
-Best regards,
-Krzysztof
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+Changes v2:
+	+ fix [dev-so] QA Issue
+	+ add note on "upstream status" in commit message
+---
+ ...ke-sure-we-don-t-overflow-the-data-buffer.patch | 29 +++++++
+ .../0002-add-minimum_uid-option.patch              | 97 ++++++++++++++++++++++
+ ...03-Set-EXTENSION_SO-for-all-linux-targets.patch | 40 +++++++++
+ .../recipes-extended/pam/pam-plugin-ccreds_11.bb   | 27 ++++++
+ 4 files changed, 193 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch
+ create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch
+ create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-for-all-linux-targets.patch
+ create mode 100644 meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch
+new file mode 100644
+index 000000000..d7f8f5a96
+--- /dev/null
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0001-make-sure-we-don-t-overflow-the-data-buffer.patch
+@@ -0,0 +1,29 @@
++From 59a95494002ce57ace17d676544101e88a55265d Mon Sep 17 00:00:00 2001
++From: Nicolas Boullis <nicolas.boullis@ecp.fr>
++Date: Mon, 23 Mar 2009 10:46:44 +0100
++Subject: [PATCH 1/3] make sure we don't overflow the data buffer
++
++This patch was taken from Debian's libpam-ccreds v10-6 source:
++	0001-make-sure-we-don-t-overflow-the-data-buffer.patch
++
++Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ cc_db.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/cc_db.c b/cc_db.c
++index c0e0488..9371c4d 100644
++--- a/cc_db.c
+++++ b/cc_db.c
++@@ -199,7 +199,7 @@ int pam_cc_db_get(void *_db, const char *keyname, size_t keylength,
++ 		return (rc == DB_NOTFOUND) ? PAM_AUTHINFO_UNAVAIL : PAM_SERVICE_ERR;
++ 	}
++ 
++-	if (val.size < *size) {
+++	if (val.size > *size) {
++ 		return PAM_BUF_ERR;
++ 	}
++ 
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch
+new file mode 100644
+index 000000000..adc464924
+--- /dev/null
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0002-add-minimum_uid-option.patch
+@@ -0,0 +1,97 @@
++From 21e3ab24836c5087f3531d2d3270242cea857a79 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Guido=20G=C3=BCnther?= <agx@sigxcpu.org>
++Date: Thu, 13 May 2010 12:36:26 +0200
++Subject: [PATCH 2/3] add minimum_uid option
++
++Closes: #580037
++
++This patch was taken from Debian's libpam-ccreds v10-6 source:
++	0002-add-minimum_uid-option.patch
++
++Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ cc_pam.c | 39 +++++++++++++++++++++++++++++++++++++++
++ 1 file changed, 39 insertions(+)
++
++diff --git a/cc_pam.c b/cc_pam.c
++index d096117..56776aa 100644
++--- a/cc_pam.c
+++++ b/cc_pam.c
++@@ -20,6 +20,7 @@
++ #include <errno.h>
++ #include <limits.h>
++ #include <syslog.h>
+++#include <pwd.h>
++ 
++ #include "cc_private.h"
++ 
++@@ -45,6 +46,30 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh,
++ 				int flags, int argc, const char **argv);
++ #endif
++ 
+++
+++/*
+++ * Given the PAM arguments and the user we're authenticating, see if we should
+++ * ignore that user because they're root or have a low-numbered UID and we
+++ * were configured to ignore such users.  Returns true if we should ignore
+++ * them, false otherwise.
+++ */
+++static int
+++_pamcc_should_ignore(const char *username, int minimum_uid)
+++{
+++	struct passwd *pwd;
+++
+++	if (minimum_uid > 0) {
+++		pwd = getpwnam(username);
+++		if (pwd != NULL && pwd->pw_uid < (unsigned long) minimum_uid) {
+++			syslog(LOG_DEBUG, "ignoring low-UID user (%lu < %d)",
+++				(unsigned long) pwd->pw_uid, minimum_uid);
+++			return 1;
+++		}
+++	}
+++	return 0;
+++}
+++
+++
++ static int _pam_sm_interact(pam_handle_t *pamh,
++ 			    int flags,
++ 			    const char **authtok)
++@@ -291,7 +316,9 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh,
++ 	unsigned int sm_flags = 0, sm_action = 0;
++ 	const char *ccredsfile = NULL;
++ 	const char *action = NULL;
+++	const char *name = NULL;
++ 	int (*selector)(pam_handle_t *, int, unsigned int, const char *);
+++	int minimum_uid = 0;
++ 
++ 	for (i = 0; i < argc; i++) {
++ 		if (strcmp(argv[i], "use_first_pass") == 0)
++@@ -300,6 +327,8 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh,
++ 			sm_flags |= SM_FLAGS_TRY_FIRST_PASS;
++ 		else if (strcmp(argv[i], "service_specific") == 0)
++ 			sm_flags |= SM_FLAGS_SERVICE_SPECIFIC;
+++		else if (strncmp(argv[i], "minimum_uid=", sizeof("minimum_uid=") - 1) == 0)
+++			minimum_uid = atoi(argv[i] + sizeof("minimum_uid=") - 1);
++ 		else if (strncmp(argv[i], "ccredsfile=", sizeof("ccredsfile=") - 1) == 0)
++ 			ccredsfile = argv[i] + sizeof("ccredsfile=") - 1;
++ 		else if (strncmp(argv[i], "action=", sizeof("action=") - 1) == 0)
++@@ -321,6 +350,16 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh,
++ 		syslog(LOG_ERR, "pam_ccreds: invalid action \"%s\"", action);
++ 	}
++ 
+++	rc = pam_get_user(pamh, &name, NULL);
+++	if (rc != PAM_SUCCESS || name == NULL) {
+++		if (rc == PAM_CONV_AGAIN)
+++			return PAM_INCOMPLETE;
+++		else
+++			return PAM_SERVICE_ERR;
+++	}
+++	if (_pamcc_should_ignore(name, minimum_uid))
+++		return PAM_USER_UNKNOWN;
+++
++ 	switch (sm_action) {
++ 	case SM_ACTION_VALIDATE_CCREDS:
++ 		selector = _pam_sm_validate_cached_credentials;
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-for-all-linux-targets.patch b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-for-all-linux-targets.patch
+new file mode 100644
+index 000000000..988c37442
+--- /dev/null
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds/0003-Set-EXTENSION_SO-for-all-linux-targets.patch
+@@ -0,0 +1,40 @@
++From 2b137b0364c57505a95cb498660e3b97b557540d Mon Sep 17 00:00:00 2001
++From: Richard Leitner <richard.leitner@skidata.com>
++Date: Fri, 1 Jun 2018 13:24:15 +0200
++Subject: [PATCH 3/3] Set EXTENSION_SO for all linux* targets
++
++As EXTENSION_SO gets already set for linux and linux-gnu targets we
++should set it for all linux* targets. This is done by introducing a new
++"LINUX" value for the "TARGET_OS" helper variable.
++
++Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
++---
++ configure.in | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/configure.in b/configure.in
++index 0dbdf79..3829d9f 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -35,7 +35,8 @@ hpux*) pam_ccreds_so_LD="/bin/ld"
++   TARGET_OS="HPUX" ;;
++ solaris*) pam_ccreds_so_LD="/usr/ccs/bin/ld"
++   pam_ccreds_so_LDFLAGS="-B dynamic -M \$(srcdir)/exports.solaris -G -B group -lc" ;;
++-linux*) pam_ccreds_so_LDFLAGS="-shared -Wl,-Bdynamic -Wl,--version-script,\$(srcdir)/exports.linux" ;;
+++linux*) pam_ccreds_so_LDFLAGS="-shared -Wl,-Bdynamic -Wl,--version-script,\$(srcdir)/exports.linux"
+++  TARGET_OS="LINUX" ;;
++ *) pam_ccreds_so_LDFLAGS="-shared" ;;
++ esac
++ 
++@@ -43,7 +44,7 @@ AC_SUBST(pam_ccreds_so_LD)
++ AC_SUBST(pam_ccreds_so_LDFLAGS)
++ 
++ AM_CONDITIONAL(USE_NATIVE_LINKER, test -n "$pam_ccreds_so_LD")
++-AM_CONDITIONAL(EXTENSION_SO, test "$target_os" = "linux" -o "$target_os" = "linux-gnu")
+++AM_CONDITIONAL(EXTENSION_SO, test "$TARGET_OS" = "LINUX")
++ AM_CONDITIONAL(EXTENSION_1, test "$TARGET_OS" = "HPUX")
++ 
++ if test -z "$use_gcrypt"; then
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+new file mode 100644
+index 000000000..9a21d9045
+--- /dev/null
++++ b/meta-oe/recipes-extended/pam/pam-plugin-ccreds_11.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "PAM cached credentials module"
++HOMEPAGE = "https://www.padl.com/OSS/pam_ccreds.html"
++SECTION = "libs"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++DEPENDS = "libpam openssl db"
++
++inherit distro_features_check
++REQUIRED_DISTRO_FEATURES = "pam"
++
++SRCREV = "376bb189ceb3a113954f1012c45be7ff09e148ba"
++
++SRC_URI = " \
++    git://github.com/PADL/pam_ccreds \
++    file://0001-make-sure-we-don-t-overflow-the-data-buffer.patch \
++    file://0002-add-minimum_uid-option.patch \
++    file://0003-Set-EXTENSION_SO-for-all-linux-targets.patch \
++"
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++EXTRA_OECONF += "--libdir=${base_libdir} "
++
++FILES_${PN} += "${base_libdir}/security/pam*"
+-- 
+2.11.0
+
 
