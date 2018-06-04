@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f52.google.com (mail-pl0-f52.google.com
-	[209.85.160.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 576837472A
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 783F374E86
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 02:49:04 +0000 (UTC)
-Received: by mail-pl0-f52.google.com with SMTP id c23-v6so7445876plz.12
+	Mon,  4 Jun 2018 02:49:05 +0000 (UTC)
+Received: by mail-pf0-f174.google.com with SMTP id a22-v6so2009908pfo.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jun 2018 19:49:05 -0700 (PDT)
+	Sun, 03 Jun 2018 19:49:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Ss84HHj+uUF19+6JPnUtq6LdHC06zZF0wm/eurze/cw=;
-	b=iVBBMAhu6/5qpAH5FaLj6mPXDFNhAMtta+NdUisug6qeoHZVX2QlDSrOLDRCp+Je0B
-	q8FLSEv0RCCvyV3MCOceHp5ffUi6h5vMYNQDsLiz/kvvrpNMedglpmoXhIPo37coC2pO
-	u3ZUyacqXJnPUjEpJ60Iynx4B5vfSVlHY2iC3Zt6kuxLokeq9Obg2cAGeoJqD7RD2NUw
-	eLUQfXMNtw02h2gTWq2bDOPeYZutEJ/nALJb/743oKsFjqt+IyiCDmhahRsppo63VANT
-	VMgkwZfb1bZn6PmqUEwJKdSdHnhh+JRZmd15WAIGfiK+vI68izfkR/FG7ibMv2GPCvcd
-	Bq0A==
+	bh=xDUtyxUKI2eobHEwLimSGCD3izOIttUOIYhcKkSrbBE=;
+	b=lHWzzJmEYUU+fTqoY4C1aI8xtXIeiDnhp0SkN/J9rzy7z4FzA40n0kEHBZlvhe1tW0
+	7yC6bEXvj3XHiF7Kg26FGUCPKgxKnOx2UJTPzyfOwvE6da+I9zbpoGEkrXogWTataCnt
+	pKHhIfISPT4qIl18AbzUVTTxTHnFIBDp1ae6gG2hnT0EU8QgyTI9i6D5EzaW4LdjaNM9
+	QryZyQaeQlw6/Ikox/C4v0o6KeHsgDCIKitnbS8FtbIAE9lM50XZcBAVY8hesCN0tXJv
+	3qg08I52ORcPaX2X8QPpgMY8YcTslAvq3qm/ExshSPwwMSzSuFiACD/NFbYD3fra28T5
+	7kYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=Ss84HHj+uUF19+6JPnUtq6LdHC06zZF0wm/eurze/cw=;
-	b=cyzXdbyL0vdoLwvup0FABWqQRKdjsQQeS0sdI9y8oNU4HvAe88ceitlEGjtoebCNJu
-	x8BlKTcB8d6IEO+r1iyAG9E4VJQvrJQmWPihSnTDDMY2DvdCkwJ3LwuQk0Sf2XjYI9IV
-	+yCqNWYy3q0cmTgHtDoRHcKIIM1PS4b4steuse5mTFk4d9wChwtEAfqjjxU/cDgENG8C
-	BZyRPxKf/tv5kJ/2k8vb3PYA0zSyvP4hVlLy5DBv5avFfj/DCa8ExW7rVV+08Qt1Bdek
-	VGRPniexHanGZ6Z8N0JnNunnWXft0hprcK8RUOdW20zxfjZ705T8uw2rFbGEI51kPPHE
-	lBCg==
-X-Gm-Message-State: ALKqPweIYXySDDSOqf/8771kOtLIVytNUz++62BxPsNyVMuYq0mbSQxX
-	ZxzZ+4ek4lYydNLJELRO8ww/XA==
-X-Google-Smtp-Source: ADUXVKKjh+uThewuxgq/Nj5SgPOzM6FS/riO3mFg42xJ1OdbnIbhHOrUDWdGMoJb+NM3xFEjEzZ/Og==
-X-Received: by 2002:a17:902:d886:: with SMTP id
-	b6-v6mr20166023plz.361.1528080545589; 
-	Sun, 03 Jun 2018 19:49:05 -0700 (PDT)
+	bh=xDUtyxUKI2eobHEwLimSGCD3izOIttUOIYhcKkSrbBE=;
+	b=nxY3ZBC56xUcnnxV3ITf6jLs8JbWSQJ20/cmweRwDBSuZKvubPQwOMnR/nqC/uADL9
+	evZrQfku1X7hUYWuZiCuS14sDVm3pqjTuAMH3aFWbd6BlbSiJrF+fYpgv2xHw+XiaM+5
+	HvKpdjsv/mSyOMLtL/bwYt6shGiTcnqdstPAiSvR7fLKyFQyMZQXRtrJob29GNF5XUc8
+	ckEXiqpiPntTbQbLZZ6LLaTOdNLl4h0uidecYWGE+qAYs09vALDM3qzZAkkxCcf8NGD1
+	FZni5zQ+sxdNW1a7oQaMV0P56kXpJwmpkiDNf/BXk4pErq4kuv947PtNvbKRbKJ2aOXH
+	8m5w==
+X-Gm-Message-State: ALKqPwc7H1ou5iE/UqeI4pBe5r6bk0JX+oRSjoRKs+sLl+Fvko5/HT9O
+	ooJvCIcV1o50xfqbQjXOlUKVzQ==
+X-Google-Smtp-Source: ADUXVKKSliygzph4+hdzKYXRCEfLKStMM9QAoxMIGT5Y14ndwExVOfWuMUhpvydZBI7/PIX2myaQgg==
+X-Received: by 2002:a63:7543:: with SMTP id
+	f3-v6mr15977294pgn.256.1528080546546; 
+	Sun, 03 Jun 2018 19:49:06 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4000:1184:f1bd:c539:22b:bbf1])
 	by smtp.gmail.com with ESMTPSA id
-	o10-v6sm62844021pgc.80.2018.06.03.19.49.04
+	o10-v6sm62844021pgc.80.2018.06.03.19.49.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Sun, 03 Jun 2018 19:49:05 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Jun 2018 19:48:44 -0700
-Message-Id: <7f7fdd5e516946ced60b2e20d5f5ca2ce9a27fee.1528080420.git.akuster808@gmail.com>
+Date: Sun,  3 Jun 2018 19:48:45 -0700
+Message-Id: <d9461528840cfafd04b10af28d73879deb0b9b09.1528080420.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1528080420.git.akuster808@gmail.com>
 References: <cover.1528080420.git.akuster808@gmail.com>
-Subject: [morty 10/15] wireshark: 2.2.7 -> 2.2.8
+Subject: [morty 11/15] wireshark: update to 2.2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 02:49:04 -0000
+X-List-Received-Date: Mon, 04 Jun 2018 02:49:06 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+Change LIC_FILES_CHKSUM from README.linux to COPYING as COPYING contains the license info
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+2.2.9 security fixes:
+    wnpa-sec-2017-38
+    MSDP dissector infinite loop (Bug 13933) CVE-2017-13767
+
+    wnpa-sec-2017-39
+    Profinet I/O buffer overrun (Bug 13847) CVE-2017-13766
+
+    wnpa-sec-2017-41
+    IrCOMM dissector buffer overrun (Bug 13929) CVE-2017-13765
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../wireshark/{wireshark_2.2.7.bb => wireshark_2.2.8.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.7.bb => wireshark_2.2.8.bb} (95%)
+ .../wireshark/{wireshark_2.2.8.bb => wireshark_2.2.9.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.8.bb => wireshark_2.2.9.bb} (93%)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
-index 2f6f7b0..f94324e 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
+similarity index 93%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
+index f94324e..82c25ff 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "wireshark - a popular network protocol analyzer"
+ HOMEPAGE = "http://www.wireshark.org"
+ SECTION = "net"
+ LICENSE = "GPL-2.0"
+-LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
+ 
+ DEPENDS = "pcre expat glib-2.0 glib-2.0-native"
+ 
 @@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
  
  PE = "1"
  
--SRC_URI[md5sum] = "a4d880554c7f925dafef60fa313b580d"
--SRC_URI[sha256sum] = "689ddf62221b152779d8846ab5b2063cc7fd41ec1a9f04eefab09b5d5486dbb5"
-+SRC_URI[md5sum] = "bb81d0ecf3a8ed46bedfaeae6fd318a8"
-+SRC_URI[sha256sum] = "ecf02c148c9ab6e809026ad5743fe9be1739a9840ef6fece6837a7ddfbdf7edc"
+-SRC_URI[md5sum] = "bb81d0ecf3a8ed46bedfaeae6fd318a8"
+-SRC_URI[sha256sum] = "ecf02c148c9ab6e809026ad5743fe9be1739a9840ef6fece6837a7ddfbdf7edc"
++SRC_URI[md5sum] = "7d5e65efd0714bd6248aa5b36c28320d"
++SRC_URI[sha256sum] = "c8b32c0e7d44a277e737c53d9d142ad3fe4265338f25a7fd8c891f58a7633fc2"
  
  inherit autotools pkgconfig perlnative
  
