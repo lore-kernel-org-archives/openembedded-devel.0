@@ -1,48 +1,27 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
-	[209.85.218.67])
-	by mail.openembedded.org (Postfix) with ESMTP id AFEDB6B6EA
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 401E475428
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jun 2018 23:23:14 +0000 (UTC)
-Received: by mail-oi0-f67.google.com with SMTP id c128-v6so345813oig.11
+	Tue,  5 Jun 2018 03:22:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w553MCe1013052
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jun 2018 16:23:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=xQ3t4vKlMhqFNDqgpMFmljaKk+PKx2dRzLriSaGpi7I=;
-	b=lgP/Z4Y64fLAXSBa22a+VDCxLPSz4pLFk62vJRFAvGL8EIqfJepTc+CqTXoXo16DrQ
-	DsN3xRihQG7FKc+TNml7mcGHN7oI5uzeLHnAzUdgoPXSQr60wXZ99xIdPKmYo2hm/4fR
-	dp/m710Ln+ISYvZ6GEgC2z7K76idLbTIB93f93KfvDkXxqjPIw8AobBagzswSW/l9q0d
-	WXdjwRx7Qj2VwxKI4AB3EJHTjWLY0WWW4nbkmUmwC+Z8R8eHXonQeFTCnIBVUd7SpCSj
-	AlDnJUtEsjbdwkGgCX4XLVscm0BhrPHPSPl7yW9iOuANhZNzVAG4s9tK7ZY+nYQ3Ucto
-	98mA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=xQ3t4vKlMhqFNDqgpMFmljaKk+PKx2dRzLriSaGpi7I=;
-	b=lgSZbQHsbZs3z9Mq/crOFjODh7UU/JGLXhSR+qrgkL2U713Nkv54WxE7c6nqzkgn5j
-	R829WnV1JPBO/OQ9vcUMZ0RhJh1CnAhSaBpVo7NEADiRuBBQDQs8i1yr2ouqdZgqGLPP
-	H/F6pKEPThLqOsXnG/Jaz3bs4tC7xYKOx5L1wAVstVvWbtjIyaKqPfFLbi1RKAnRmZ90
-	A0F9s3m+WnJYai3Kv+Il3x5kvrYoOS/4WGG0KrfFfvHZCtJAkMRp1wPmHE1/+IQr/m+c
-	faRcb2m9STIswpSPH0caTCrPzVFUr8Swl8RrDLTMB6Ard5rbf3CHyWSdLDR5qiKpzSmB
-	ULwA==
-X-Gm-Message-State: APt69E36k2T6Z5WLb62U9xf9m9bLC9SSffYJarfBm/QmYJbTcehs456U
-	quF1WptiEtG/JDOYks5IXTFbH8GHPEnm/dnuCo4=
-X-Google-Smtp-Source: ADUXVKImutSPxdf7aXICrg0ZoBg2nHsJwWCGA09qEZceJzC/yKC4bqk0UQ+l87kf2Agw9PrLNpfYZkoxLhJCfX5qvIM=
-X-Received: by 2002:aca:b01:: with SMTP id 1-v6mr5159076oil.285.1528154595337; 
-	Mon, 04 Jun 2018 16:23:15 -0700 (PDT)
+	Mon, 4 Jun 2018 20:22:13 -0700 (PDT)
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 4 Jun 2018 20:22:12 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1526449970-15017-1-git-send-email-changqing.li@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <93dca85f-a81d-8cfe-b8e0-d7be0a6b16fb@windriver.com>
+Date: Tue, 5 Jun 2018 11:22:09 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP;
-	Mon, 4 Jun 2018 16:23:14 -0700 (PDT)
-In-Reply-To: <20180604223911.14561-1-schnitzeltony@gmail.com>
-References: <20180604223911.14561-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 5 Jun 2018 01:23:14 +0200
-Message-ID: <CALbNGRSg8kYPO6x_jgXtK9Gi1gQDX7v4KbpTWVaWAQCEc=NXSg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtwebkit: do not skip build - use cmake as build system
+In-Reply-To: <1526449970-15017-1-git-send-email-changqing.li@windriver.com>
+X-Originating-IP: [128.224.162.228]
+Subject: Re: [PATCH] postfix: Remove useless file makedeps.out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,43 +34,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jun 2018 23:23:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 Jun 2018 03:22:12 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Tue, Jun 5, 2018 at 12:39 AM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> log.do_configure says:
+Ping
+
+On 05/16/2018 01:52 PM, changqing.li@windriver.com wrote:
+> From: Changqing Li <changqing.li@windriver.com>
 >
-> | The WebKit build was disabled for the following reasons:
-> |     * cross-compilation of QtWebKit with qmake is not supported yet
-> |    * Missing cmake from PATH
-> |    * Using cmake version , but at least cmake 2.8.12 is required to bui=
-ld QtWebKit.
+> file /etc/postfix/makedeps.out is useless, remove it.
+> makedeps.out is intermediate file that documents how Postfix was built for your machine.
 >
-> and build was finished without errors (but surprisingly fast). Looking in=
-to
-> qtwebkit, it seems they have changed to cmake build system and Webkit.pro=
- is
-> just a wrapper for preparing and running cmake.
->
-> For the transition the packageconfigs were translated as close as possibl=
-e.
-> 'libxcomposite' and 'libxrender' were merged to 'x11' - there is only one
-> option 'ENABLE_X11_TARGET' available for both.
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->  .../0001-Do-not-skip-build-for-cross-compile.patch | 31 +++++++++++++
->  recipes-qt/qt5/qtwebkit_git.bb                     | 51 ++++++++++------=
-------
->  2 files changed, 54 insertions(+), 28 deletions(-)
->  create mode 100644 recipes-qt/qt5/qtwebkit/0001-Do-not-skip-build-for-cr=
-oss-compile.patch
+>   meta-networking/recipes-daemons/postfix/postfix.inc | 6 ++----
+>   1 file changed, 2 insertions(+), 4 deletions(-)
 >
-Cannot see (yet) what's wrong with this patch but now qtquick1 fails with:
+> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+> index 09447d5..24e8607 100644
+> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+> @@ -207,6 +207,8 @@ do_install () {
+>       chown :postdrop ${D}${sbindir}/postdrop
+>       chmod g+s ${D}${sbindir}/postqueue
+>       chmod g+s ${D}${sbindir}/postdrop
+> +
+> +    rm -rf ${D}/etc/postfix/makedefs.out
+>   }
+>   
+>   do_install_append_class-native() {
+> @@ -214,10 +216,6 @@ do_install_append_class-native() {
+>       ln -sf ../sbin/sendmail.postfix ${D}${bindir}/mailq
+>   }
+>   
+> -do_install_append_class-target() {
+> -    # Remove references to buildmachine paths in target makedefs.out
+> -    sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
+> -}
+>   
+>   ALTERNATIVE_${PN} = "sendmail"
+>   ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
 
-| error: QGraphicsWebView: No such file or directory
+-- 
+BRs
 
-Andreas
+Sandy(Li Changqing)
++861084778653
+
 
