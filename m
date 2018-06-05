@@ -1,55 +1,65 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
-	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B6A0278416
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ot0-f182.google.com (mail-ot0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 08B787843F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jun 2018 15:51:57 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id u124-v6so887243ywg.0
+	Tue,  5 Jun 2018 16:48:22 +0000 (UTC)
+Received: by mail-ot0-f182.google.com with SMTP id a5-v6so3607053otf.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2018 08:51:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=tWDgNFFZeTjU/5yBVgPq89jbOmnwQeWfchD8lLMBm+s=;
-	b=JuGeWt4kRPOlG7bi7eqRvRHrkSPpNCRF4KpEouGOEIFrpOQEPyHaYkVup+TieUR3Tq
-	YPQ25Km9TrTVaoW5Rh+xEZ0230MD5CCZN5MO9h5XPskGvTDva2v2q7GdPXm835ro5l36
-	hh1hgFA7K7QHmSdyvWG5GpRYMpSg8izspaE8LR11eLiiiG+WdGDLEuKytTXVnoQYYn7N
-	VWulXRS4X0i4mFSa4iZEF5hednghX8DJU1rWnjmhcyARzsvPIa5JEnPyAeS5RfDklMya
-	hW4OeGDm1gOEvDlHq/W7gohtd/ahTZ4fKMo9JEoP8CIXTOkI7XUx6Zw1471VEr/tvDvi
-	mOfg==
+	Tue, 05 Jun 2018 09:48:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=AJL3x+0GWO+2LsRPYs6olA8rKVWmtGJo/LbkxEhR6Gw=;
+	b=ol9Mise/XIfsxC7LaNqvJkpMkHESxcHNP5bnnE7x1+dtm2VoLXeyAtZE4fq2QHd2DV
+	61SkFDQ/Ndo7RFem57L6OZ81+nJJj9wlBxSIBwZfDh2JDx0a5+VVsy0HDiPNnDkg6oYi
+	1H7/hvLB7cpdMiv2ttyN+Vx/WNyY/RUY1+NZRB8pqrXanUKE1SOGZb92XlnR4I1LpN/N
+	R7LEofEsO1u9JFMn6ybdwVzFr+UNDrtBGO6sOJP4ocGaVznuK7QvexdfwqHRSCSSdQoU
+	H7ih+XvrXiJTZe3mVjXckVso5wvbIpN3MEDihwPbWfBiIr9SWxIN8bFH4EeVABzMA0w3
+	wp8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
-	:references:from:date:message-id:subject:to:cc;
-	bh=tWDgNFFZeTjU/5yBVgPq89jbOmnwQeWfchD8lLMBm+s=;
-	b=cGApujbmcEuPbhf7NHEOYyV1pxyQnTtF7Kb4p7w2Rn+pTbo6NqK5yYc+nQDh5ii160
-	erTGJnwT83SOiySmILGXR0X93Ac86HlcCmsoyaH4TqmOoNOFv4qnR6xIQlqYHX+4eNr+
-	AMvtYHr1x3idDDycbLd9TwsC1Kde8BSRxZRD34A7Qy0g2s0gAswwVFtnEUF/QnXVKFFB
-	4OKjjVsSx9EWgn9fOY3pz3su+lvlr9PmyCRuRynax7YjtY8JCOh6wuyFOdAMcgknkeHx
-	L/OEK00Tp5MT/Uen3AFGCxW2vqdZJDlV5XeWz/U0XSOZjByJ6gVCKNizvgtw1yCIVT7k
-	g7jg==
-X-Gm-Message-State: ALKqPweK2jMS2jE+Y1bKmUsM4lNe8nqBMo07sl6Mj/th4nfoBidgH+f5
-	EBgva7fVRkWx9gC5PbvGEC+OVdYcf1kuFhU0V6Q=
-X-Google-Smtp-Source: ADUXVKI0yOU0QqBLrWZczTQr03agLdsN5m5FsMn5BIXkDrCurZHi1CQ8+LLxPAfAANrGh7K/MCPFD9wshpKIJs7A/ao=
-X-Received: by 2002:a81:6b41:: with SMTP id
-	g62-v6mr13068101ywc.445.1528213918530; 
-	Tue, 05 Jun 2018 08:51:58 -0700 (PDT)
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=AJL3x+0GWO+2LsRPYs6olA8rKVWmtGJo/LbkxEhR6Gw=;
+	b=FT0uEbzaSsHL8JfeE3c6xvKONjN/ypNRj8MY0ZqNv2GLT/lgJp9n253SpIqNmsLFb5
+	7SV9bt0qwqHuplRPqg5DBMIq9LOYYvTRBSF+Z7mTCCokSrIEDpAHA+Ai2ClQUa4nTShD
+	cAaUhaJ11yXzgWxbmZ7Lr1dcSW1H+TZ+6GsQh14pWWk3U2qee85QOC1CIggz59BIIxXz
+	i+6KB07FJ/ijW0L7wtppzlUTJ3m3neNEPhqIRWIT04yS8uzHnQfdmAz2TXBthcbTifsq
+	L5PGn3UPeGIhWfokOYvkY9X3Sccj1gT2zh7lfMgGVEF9W98galIlPXzd5drjSMm9wFXs
+	sPbA==
+X-Gm-Message-State: ALKqPwdQ7NY3JwfeozYkOokB0PJmlFkxFciitOHtg0vIA5kiCfDuyRoq
+	K9eQ082w7MfeyoO/4Tic6Zwm+mNY
+X-Google-Smtp-Source: ADUXVKLU253HrHk11UlQF5Om3blbqMqSEm647dOkjacXUWRiRM8jpO7JZHBjNGRItpXDfiUdmbFe0A==
+X-Received: by 2002:a9d:94:: with SMTP id
+	w20-v6mr18528702oti.248.1528217303711; 
+	Tue, 05 Jun 2018 09:48:23 -0700 (PDT)
+Received: from mail-oi0-f44.google.com (mail-oi0-f44.google.com.
+	[209.85.218.44]) by smtp.gmail.com with ESMTPSA id
+	a41-v6sm12866601otj.45.2018.06.05.09.48.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 05 Jun 2018 09:48:21 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi0-f44.google.com with SMTP id i205-v6so2722611oib.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Jun 2018 09:48:21 -0700 (PDT)
+X-Received: by 2002:aca:c416:: with SMTP id
+	u22-v6mr11338799oif.288.1528217301050; 
+	Tue, 05 Jun 2018 09:48:21 -0700 (PDT)
 MIME-Version: 1.0
-Reply-To: mark.asselstine@windriver.com
-Sender: asselsm@gmail.com
-Received: by 2002:a25:3dc7:0:0:0:0:0 with HTTP;
-	Tue, 5 Jun 2018 08:51:57 -0700 (PDT)
-In-Reply-To: <CAPuovE+waNG3XcJshTPBiyRDyLN54vbiVf--_hAaKbMVOsqnOA@mail.gmail.com>
+Received: by 2002:a9d:3da5:0:0:0:0:0 with HTTP;
+	Tue, 5 Jun 2018 09:48:20 -0700 (PDT)
+In-Reply-To: <10630413.xVAl2E7OaH@yow-masselst-lx1>
 References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<CAPuovE+waNG3XcJshTPBiyRDyLN54vbiVf--_hAaKbMVOsqnOA@mail.gmail.com>
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Tue, 5 Jun 2018 11:51:57 -0400
-X-Google-Sender-Auth: wRquhZV3fPRf5LzucaNH6v3_dd8
-Message-ID: <CAPuovELJj9ztBhTtTDNr1-jycGhyNp2ddJnmK=3S1jH_g0K9ew@mail.gmail.com>
-To: Henning Heinold <henning@itconsulting-heinold.de>,
-	Maxin John <maxin.john@intel.com>, 
-	Otavio Salvador <otavio@ossystems.com.br>, mario.goulart@bmw-carit.de
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 5 Jun 2018 13:48:20 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKrc36oVL7BWWPyXn5P4oWHAGeeH92K-v-XmWz_=xk2LBg@mail.gmail.com>
+Message-ID: <CAP9ODKrc36oVL7BWWPyXn5P4oWHAGeeH92K-v-XmWz_=xk2LBg@mail.gmail.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	Mario Domenech Goulart <mario@ossystems.com.br>
 Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -63,46 +73,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2018 15:51:58 -0000
+X-List-Received-Date: Tue, 05 Jun 2018 16:48:23 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jun 5, 2018 at 11:18 AM, Mark Asselstine
+On Tue, Jun 5, 2018 at 12:11 PM, Mark Asselstine
 <mark.asselstine@windriver.com> wrote:
-> On Tue, Jun 5, 2018 at 11:11 AM, Mark Asselstine
-> <mark.asselstine@windriver.com> wrote:
->> Several of us have noticed that nothing has been merged to meta-java since
->> mid-April (roughly 8 weeks ago). With about a dozen commits sent to the list
->> and pending merges I thought I might email you, the maintainers, directly to
->> determine if this is expected to continue. Should we be looking to update the
->> maintainers list and/or recruiting new people to restore the vitality of this
->> repo? Have your roles or positions changed making it no longer viable for you
->> to contribute to this repo?
->>
->> Thanks in advance for your responses.
+> Several of us have noticed that nothing has been merged to meta-java since
+> mid-April (roughly 8 weeks ago). With about a dozen commits sent to the list
+> and pending merges I thought I might email you, the maintainers, directly to
+> determine if this is expected to continue. Should we be looking to update the
+> maintainers list and/or recruiting new people to restore the vitality of this
+> repo? Have your roles or positions changed making it no longer viable for you
+> to contribute to this repo?
 >
-> I got this back upon sending this out:
->        ----- The following addresses had permanent fatal errors -----
->     <mario@ossystems.com.br>
->         (reason: 550-5.1.1 The email account that you tried to reach
-> does not exist. Please try)
->
-> So dropping him from the list and guessing that means we are down at
-> least one maintainer.
+> Thanks in advance for your responses.
 
-Adding what I believe is Mario's new address to the TO list.
+I've been busy with multiple things and couldn't focus on it for a
+while. But Maxin was keeping it up to date. Do you have a bundle of
+patches need to take a review / test?
 
-Mark
-
->
-> Mark
->
->>
->> Mark
->>
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
