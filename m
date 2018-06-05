@@ -1,52 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E6D947856A
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 39ADA76094
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jun 2018 17:18:47 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id s9-v6so3254647qtg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jun 2018 10:18:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=9hcfTy2bUzAbFAtOKgLy2kFZaz+dFBmI4CPXDJQKazk=;
-	b=A8tPtEF11MnrpwpPrZ6jXx9ceEqbkt5+itP2Lt1/EXD/SQfkR7Dq/oABE7Sc10U/SF
-	4SQVIibMYBpbaApH//ysTRbt2zUSSgbNLtmSI+ZN8sT8PaOqXylLC6yza/IbuZeMaD1K
-	dbt+fz75X5V7rdY40jK0e/cJceZMrH1c1izgF0rPaso2n787XX49nnDTml6gnn4+8TIW
-	u6opbihMzV9DwYRezRxJCZw2MQ3dlaE0diAzhYTp7F+LX7MIwqxeHn8M3eIrWCq6px/O
-	wrxqV2Wyy9uOiJhOcKdAAIkFaSFFKnK/JNXbQoHElBgslGcRuKxvKLKggUVy21vPuNLZ
-	Ebyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=9hcfTy2bUzAbFAtOKgLy2kFZaz+dFBmI4CPXDJQKazk=;
-	b=fUuHmScRXkmNl8raFJxPZNRTazeGmIW/kst+6mTE8qqjKg+CRMUYhHWsm3zipW1egY
-	J+RYloPk63nbpeM2PLYqLhHivl+wQk2fMx3CX+fKSFSxu4TissHWInNIHuGLTlnSIUka
-	Aw+GADGtmvd4gXAjIdT+9/O76jtET5WlZ6/X3OgkYUqA8iymWcgw8ATdRzk7FkAgoSDF
-	GdMaXJbsM+GM/bX4vwacmWLXhKNs9fIuo1M2CGc5PsMAVmg3zMEEN8u8xMiJQ18YH8+d
-	K5k4rItLsDZw+8hniAk9xCkYUPvNY5KNAq+JD4gOOdKXCfHFFybpSoob3REVqua2eWVJ
-	9DrA==
-X-Gm-Message-State: APt69E1cnGHDeAwS8RR6aiPdTKDirL442sJSnXDtSbmxVzI86rwFj96Y
-	RyzwscXbdvVW0ESUrELuU2xK9+OLfEi4R0CM9dM=
-X-Google-Smtp-Source: ADUXVKJ+/UQR1rqFtNowVNPzgv2wKlf5DYMLU5ilCZgEbVNUCViWMFm/mrA4QZtydsiI0+YrFv65p/Bi3lYZilYjHNc=
-X-Received: by 2002:aed:23e7:: with SMTP id
-	k36-v6mr12434311qtc.20.1528219128706; 
-	Tue, 05 Jun 2018 10:18:48 -0700 (PDT)
+	Tue,  5 Jun 2018 17:45:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w55HjnjT016907
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 5 Jun 2018 10:45:49 -0700 (PDT)
+Received: from yow-masselst-lx1.localnet (128.224.21.92) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.399.0; Tue, 5 Jun 2018 10:45:48 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Date: Tue, 5 Jun 2018 13:45:47 -0400
+Message-ID: <17787842.aWWCSpZ0KC@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <CAP9ODKrc36oVL7BWWPyXn5P4oWHAGeeH92K-v-XmWz_=xk2LBg@mail.gmail.com>
+References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
+	<CAP9ODKrc36oVL7BWWPyXn5P4oWHAGeeH92K-v-XmWz_=xk2LBg@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 2002:a0c:e486:0:0:0:0:0 with HTTP;
-	Tue, 5 Jun 2018 10:18:18 -0700 (PDT)
-In-Reply-To: <3ab64a7c59f14cce82d9c3c07364cf4d@svr-ies-mbx-01.mgc.mentorg.com>
-References: <1527249332-31097-1-git-send-email-noor_ahsan@mentor.com>
-	<1527249332-31097-2-git-send-email-noor_ahsan@mentor.com>
-	<3ab64a7c59f14cce82d9c3c07364cf4d@svr-ies-mbx-01.mgc.mentorg.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 5 Jun 2018 10:18:18 -0700
-Message-ID: <CAMKF1sryaCvMNK7vJR2CzFPn7rPH-K470bj53TT3NsJZ2MmjuA@mail.gmail.com>
-To: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] radvd: Fix missing yacc error.
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,55 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2018 17:18:48 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 05 Jun 2018 17:45:53 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-its in master-next, perhaps keeping an eye at patchwork or master-next
-can be helpful
+On Tuesday, June 5, 2018 12:48:20 PM EDT Otavio Salvador wrote:
+> On Tue, Jun 5, 2018 at 12:11 PM, Mark Asselstine
+> 
+> <mark.asselstine@windriver.com> wrote:
+> > Several of us have noticed that nothing has been merged to meta-java since
+> > mid-April (roughly 8 weeks ago). With about a dozen commits sent to the
+> > list and pending merges I thought I might email you, the maintainers,
+> > directly to determine if this is expected to continue. Should we be
+> > looking to update the maintainers list and/or recruiting new people to
+> > restore the vitality of this repo? Have your roles or positions changed
+> > making it no longer viable for you to contribute to this repo?
+> > 
+> > Thanks in advance for your responses.
+> 
+> I've been busy with multiple things and couldn't focus on it for a
+> while. But Maxin was keeping it up to date. Do you have a bundle of
+> patches need to take a review / test?
 
-On Mon, Jun 4, 2018 at 1:53 AM, Ahsan, Noor <Noor_Ahsan@mentor.com> wrote:
-> Hello,
->
-> Any update on this. Kindly apply think on master and Sumo release.
->
-> Noor
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Ahsan, Noor
-> Sent: Friday, May 25, 2018 4:56 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-networking][PATCH] radvd: Fix missing yacc error.
->
-> * Following error apprear in do configure. Fix it by adding bison-native in DEPENDS.
->   ../radvd-2.17/ylwrap: line 176: yacc: command not found
->
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
-> ---
->  meta-networking/recipes-daemons/radvd/radvd.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
-> index bff693c..06d16a4 100644
-> --- a/meta-networking/recipes-daemons/radvd/radvd.inc
-> +++ b/meta-networking/recipes-daemons/radvd/radvd.inc
-> @@ -8,7 +8,7 @@ addresses and some other parameters. They also can \  choose a default router based on these advertisements."
->  HOMEPAGE = "http://www.litech.org/radvd/"
->  SECTION = "net"
-> -DEPENDS = "flex-native libdaemon"
-> +DEPENDS = "flex-native bison-native libdaemon "
->
->  # License is BSD-Style (with advertising clause) but also has an additional 0th clause  LICENSE = "radvd"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+There wasn't anything in particular, this email was instigated more by the 
+observation that meta-java has been quiet. I do have a commit out for review 
+but it is minor and not a big concern. There is one from Jason Wessel which is 
+more immediate and would be nice to have reviewed and merged.
+
+We should probably prepare something to update Mario's email or remove him 
+from the list of maintainers as well.
+
+Thanks for getting back to me.
+Mark
+
+
+
+
+
 
