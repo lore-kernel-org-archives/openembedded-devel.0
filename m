@@ -1,28 +1,29 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 39ADA76094
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by mail.openembedded.org (Postfix) with ESMTP id B6832786A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jun 2018 17:45:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w55HjnjT016907
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 5 Jun 2018 10:45:49 -0700 (PDT)
-Received: from yow-masselst-lx1.localnet (128.224.21.92) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.399.0; Tue, 5 Jun 2018 10:45:48 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-Date: Tue, 5 Jun 2018 13:45:47 -0400
-Message-ID: <17787842.aWWCSpZ0KC@yow-masselst-lx1>
-Organization: Wind River
-In-Reply-To: <CAP9ODKrc36oVL7BWWPyXn5P4oWHAGeeH92K-v-XmWz_=xk2LBg@mail.gmail.com>
-References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<CAP9ODKrc36oVL7BWWPyXn5P4oWHAGeeH92K-v-XmWz_=xk2LBg@mail.gmail.com>
+	Tue,  5 Jun 2018 23:33:33 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	05 Jun 2018 16:33:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,479,1520924400"; d="scan'208";a="230225761"
+Received: from tuzhen-mobl.ccr.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.249.70.49])
+	by orsmga005.jf.intel.com with ESMTP; 05 Jun 2018 16:33:31 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 06 Jun 2018 11:33:28 +1200
+Message-ID: <5113980.YQSFpsKea5@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+In-Reply-To: <20180605133909.11319-2-nick83ola@gmail.com>
+References: <20180605133909.11319-1-nick83ola@gmail.com>
+	<20180605133909.11319-2-nick83ola@gmail.com>
 MIME-Version: 1.0
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: Re: [meta-java] maintainer status
+Cc: Nicola Lunghi <nicola.lunghi@jci.com>
+Subject: Re: [PATCH 2/2] mosquitto: add mosquitto-examples package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +36,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2018 17:45:53 -0000
+X-List-Received-Date: Tue, 05 Jun 2018 23:33:33 -0000
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
 
-On Tuesday, June 5, 2018 12:48:20 PM EDT Otavio Salvador wrote:
-> On Tue, Jun 5, 2018 at 12:11 PM, Mark Asselstine
+On Wednesday, 6 June 2018 1:39:09 AM NZST Nicola Lunghi wrote:
+> From: Nicola Lunghi <nicola.lunghi@jci.com>
 > 
-> <mark.asselstine@windriver.com> wrote:
-> > Several of us have noticed that nothing has been merged to meta-java since
-> > mid-April (roughly 8 weeks ago). With about a dozen commits sent to the
-> > list and pending merges I thought I might email you, the maintainers,
-> > directly to determine if this is expected to continue. Should we be
-> > looking to update the maintainers list and/or recruiting new people to
-> > restore the vitality of this repo? Have your roles or positions changed
-> > making it no longer viable for you to contribute to this repo?
-> > 
-> > Thanks in advance for your responses.
+> the mosquitto install populate some .example files in
+> /etc/mosquitto. move thise example files in a separate package
 > 
-> I've been busy with multiple things and couldn't focus on it for a
-> while. But Maxin was keeping it up to date. Do you have a bundle of
-> patches need to take a review / test?
+> The PACKAGE_BEFORE_PN is needed because otherwise those examples
+> end in the base mosquitto package
+> 
+> Signed-off-by: Nicola Lunghi <nicola.lunghi@jci.com>
+> ---
+>  .../recipes-connectivity/mosquitto/mosquitto_1.4.15.bb        | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/
+mosquitto_1.4.15.bb b/meta-networking/recipes-connectivity/mosquitto/
+mosquitto_1.4.15.bb
+> index c71f1e467f..8dd2124c41 100644
+> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+> @@ -62,6 +62,8 @@ do_install() {
+>  
+>  PACKAGES += "libmosquitto1 libmosquittopp1 ${PN}-clients"
+>  
+> +PACKAGE_BEFORE_PN = "${PN}-examples"
+> +
+>  FILES_${PN} = "${sbindir}/mosquitto \
+>                 ${bindir}/mosquitto_passwd \
+>                 ${sysconfdir}/mosquitto \
+> @@ -79,6 +81,8 @@ FILES_${PN}-clients = "${bindir}/mosquitto_pub \
+>                         ${bindir}/mosquitto_sub \
+>  "
+>  
+> +FILES_${PN}-examples = "${sysconfdir}/mosquitto/*.example"
+> +
+>  SYSTEMD_SERVICE_${PN} = "mosquitto.service"
+>  
+>  INITSCRIPT_NAME = "mosquitto"
+> 
 
-There wasn't anything in particular, this email was instigated more by the 
-observation that meta-java has been quiet. I do have a commit out for review 
-but it is minor and not a big concern. There is one from Jason Wessel which is 
-more immediate and would be nice to have reviewed and merged.
+Both of these look good to me, FWIW
 
-We should probably prepare something to update Mario's email or remove him 
-from the list of maintainers as well.
+Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-Thanks for getting back to me.
-Mark
+Cheers,
+Paul
 
+-- 
 
-
+Paul Eggleton
+Intel Open Source Technology Centre
 
 
 
