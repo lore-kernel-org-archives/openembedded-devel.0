@@ -1,48 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E0FE770F8
+Return-Path: <ishitsuka.sc@gmail.com>
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BE4C75452
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 08:25:24 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id c9-v6so2663902pgf.5
+	Wed,  6 Jun 2018 09:12:56 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id g20-v6so3435248plq.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2018 01:25:26 -0700 (PDT)
+	Wed, 06 Jun 2018 02:12:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=zjW5MbaivwV5xLbAEwMh4KUByJ+W2dBeFg68/ZA49+4=;
-	b=u326utaxmYR5wn37Wz3Ou+dst5MeI1HxsgjRQYQvyC/dDRvCGfsyFUm8fcC6K73Tpn
-	NqXMWmQc2McH9z8J+t8T+eufKbh0msnIM38cO5Q+M88daUgtuaPIRSvq6f7V04tX1qV+
-	lX6ybmxBqMVfwsF33DF+OV+neMoS1y2D5nY2VihPg9dqLRKaeLFIxILTkbVySeO+JAK/
-	atJP3dZrBwc2vk85c/l1RnOhTlRa3sI42leo5EdHi4UMH2eraoC96SSbuk6rBKvyu6vc
-	zjquKT1EfCs3j6BDzRoVDScRRijYggpISRI+d5lO41KC4oWmZF2rK78uhOW/+GiUXolC
-	8tmA==
+	bh=CR2AjzW00L+M5O9T+lWn8j2C+8pwtnMobExDbuP+rJw=;
+	b=m5ufUyukzLGEu5kSR/uJf/RpbGPEjNtQQKtBmY0Eac9piXeTECl7AjUbByxlQ6YINg
+	PlOGBe8/tcu0lAlHFSKDfocwlBr1XqUL8Kr3wLZmkBwBa8m/fwe9G1ARD4RVT6BHfWH0
+	chu+EaZNjcd3lYmwEdCPpaybO1A+rbGfqlUJr/5LfbNtUaQK/i0C6sjTYrbjS6+rBPko
+	vuPCfpO3/rAP+NgtGoPv9zJfVcgmZHQYC90cDT/I0fJKcanX131CuYW9cnMOy+6MH5QP
+	F4lz287jqsE2n55clRJ5Qv8RwEL/LTHhHH647znS4A/IwmJPUYS5eK+Gnwsz3M7KVfHw
+	kcZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=zjW5MbaivwV5xLbAEwMh4KUByJ+W2dBeFg68/ZA49+4=;
-	b=nV29WGISmcgZ+3DPTg/fcCd0gHPCItzBq83tJ34Dcqfa48x0f0NuUnl2gTK1MT8CQ8
-	ctkv12xxD4V06jSoA8d98eP68ZzChy+8YhdELhkD+gS+gczI6+5Cva3YM7g6fcFBr01K
-	IOP+YGHqzS8LyUr1dinvSPRkCjMR5tyByD8gRY2QU8hLq3N+6RMwEEE6fuyJ1cDNl8e5
-	ia6IrHVgC3bShEeyOR3bPwvO8ZD2ITyVIFOJi5jq1Fig5gfclP8nRomE+7qpPtdkUaSF
-	fvh4BCZlwNrg2NEZFnLEzH+3zYh/r2wKpnzwfursfU2JsO2YHUgnMgEhDkjACh7iMmv7
-	N0vw==
-X-Gm-Message-State: APt69E1rdlxS0qFdAq3KEGhCQCQHXDYTvjz4dbyTU7TdaAiV99lg06za
-	R6IcRcEUonkqus6hg3y8aYOl/g==
-X-Google-Smtp-Source: ADUXVKL0/RbaKikLJEMJLGmhEtlC0CftGBC2W5d0hEXeg/0r02Z0rv2CMe2N8s+y9NdJZZDMywOGpw==
-X-Received: by 2002:a63:9a52:: with SMTP id
-	e18-v6mr1798405pgo.188.1528273525557; 
-	Wed, 06 Jun 2018 01:25:25 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::c68])
-	by smtp.gmail.com with ESMTPSA id
-	e12-v6sm48954433pgs.42.2018.06.06.01.25.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Jun 2018 01:25:25 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Wed,  6 Jun 2018 01:25:26 -0700
-Message-Id: <20180606082526.37862-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] wireshark: Update to 2.6 release
+	bh=CR2AjzW00L+M5O9T+lWn8j2C+8pwtnMobExDbuP+rJw=;
+	b=W3VrAKoP209KKP9g9RGl4XPSOzeq1+0Y5RRMw89hvSP1MhhMW1i7Fpruz7Ab7hr2dT
+	NFPAoa5R2js6YBUuzM7XqXxvyII06g8/ikrYbEmqIAGil4Mj0SYrzl/vfxT8BL051Vxw
+	pFtxiSgtHalJ4g/LdeWDO/NcZj7bbYVjjRhaN+pnhrNYwNOMpGtJnKCFmfYaqjd17otf
+	PA4MW7jVdezmpYwNqcEocH0A7+QR30ZUAGdmZFMLga5savFaDQgklq47bQaPAyw2Kpvp
+	H9Mq2dfT1/rwDFuMeZu/oCw8jHPKYaqZSuwk2GNQ6YapUsvfEA3+3Bu7/rWV860dEd+W
+	ESeQ==
+X-Gm-Message-State: APt69E1J/A/KaBaf6iMSzLg2Vns+797iBzmli3tjRykqo9GoIBUKVO87
+	p49UbmMNLzqE+HgeSPgn8LNxYJ+E
+X-Google-Smtp-Source: ADUXVKJjKIcGG4i8+XJzFvRGZyoU4AZ5qq3ksUHX/YSPol5dJuQrcyWZF8EnJr21fDbmBBkDnRX7jA==
+X-Received: by 2002:a17:902:20e8:: with SMTP id
+	v37-v6mr2377444plg.354.1528276377140; 
+	Wed, 06 Jun 2018 02:12:57 -0700 (PDT)
+Received: from localhost.localdomain (softbank219174086128.bbtec.net.
+	[219.174.86.128]) by smtp.gmail.com with ESMTPSA id
+	p1-v6sm89158161pfp.137.2018.06.06.02.12.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 06 Jun 2018 02:12:56 -0700 (PDT)
+From: Seiichi Ishitsuka <ishitsuka.sc@gmail.com>
+X-Google-Original-From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 Jun 2018 18:12:33 +0900
+Message-Id: <1528276353-6217-1-git-send-email-ishitsuka.sc@ncos.nec.co.jp>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] telnetd: Fix deadlock on cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,247 +56,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 08:25:25 -0000
+X-List-Received-Date: Wed, 06 Jun 2018 09:12:56 -0000
 
-Add a native version to provide certain utilities needed during cross build
-Strip rpaths which cmake seems to be enforcing for no reason
+The cleanup function in telnetd is called both directly and on SIGCHLD signals.
+This triggered a deadlock in glibc and was reproduced in glibc 2.27 while
+running on a 4.14.30 kernel.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
 ---
- .../wireshark/files/libgcrypt.patch           | 53 ------------
- .../wireshark/wireshark_2.4.6.bb              | 73 -----------------
- .../wireshark/wireshark_2.6.1.bb              | 81 +++++++++++++++++++
- 3 files changed, 81 insertions(+), 126 deletions(-)
- delete mode 100644 meta-networking/recipes-support/wireshark/files/libgcrypt.patch
- delete mode 100644 meta-networking/recipes-support/wireshark/wireshark_2.4.6.bb
- create mode 100644 meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
+ ...01-telnet-telnetd-Fix-deadlock-on-cleanup.patch | 114 +++++++++++++++++++++
+ .../netkit-telnet/netkit-telnet_0.17.bb            |   1 +
+ 2 files changed, 115 insertions(+)
+ create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/files/libgcrypt.patch b/meta-networking/recipes-support/wireshark/files/libgcrypt.patch
-deleted file mode 100644
-index 2aa58f73c2..0000000000
---- a/meta-networking/recipes-support/wireshark/files/libgcrypt.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--use OR PKG_CONFIG scheme for libgcrypt
--
--Upstream-Status: Inappropriate OE specific
--
--Signed-off-by: Armin Kuster <akuster808@gmail.com>
--
--Index: wireshark-2.4.4/m4/libgcrypt.m4
--===================================================================
----- wireshark-2.4.4.orig/m4/libgcrypt.m4
--+++ wireshark-2.4.4/m4/libgcrypt.m4
--@@ -27,11 +27,11 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
--      libgcrypt_config_prefix="$withval", libgcrypt_config_prefix="")
--   if test x$libgcrypt_config_prefix != x ; then
--      if test x${LIBGCRYPT_CONFIG+set} != xset ; then
---        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/bin/libgcrypt-config
--+        LIBGCRYPT_CONFIG=$libgcrypt_config_prefix/libgcrypt.pc
--      fi
--   fi
-- 
---  AC_PATH_PROG(LIBGCRYPT_CONFIG, libgcrypt-config, no)
--+  AC_PATH_PROG(LIBGCRYPT_CONFIG, libgcrypt.pc, no)
--   tmp=ifelse([$1], ,1:1.2.0,$1)
--   if echo "$tmp" | grep ':' >/dev/null 2>/dev/null ; then
--      req_libgcrypt_api=`echo "$tmp"     | sed 's/\(.*\):\(.*\)/\1/'`
--@@ -50,7 +50,7 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
--                sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\2/'`
--     req_micro=`echo $min_libgcrypt_version | \
--                sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\)/\3/'`
---    libgcrypt_config_version=`$LIBGCRYPT_CONFIG --version`
--+    libgcrypt_config_version=`$PKG_CONFIG --modversion libgcrypt`
--     major=`echo $libgcrypt_config_version | \
--                sed 's/\([[0-9]]*\)\.\([[0-9]]*\)\.\([[0-9]]*\).*/\1/'`
--     minor=`echo $libgcrypt_config_version | \
--@@ -82,7 +82,7 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
--      # If we have a recent libgcrypt, we should also check that the
--      # API is compatible
--      if test "$req_libgcrypt_api" -gt 0 ; then
---        tmp=`$LIBGCRYPT_CONFIG --api-version 2>/dev/null || echo 0`
--+        tmp=`$PKG_CONFIG --api-version libgcrypt 2>/dev/null || echo 0`
--         if test "$tmp" -gt 0 ; then
--            AC_MSG_CHECKING([LIBGCRYPT API version])
--            if test "$req_libgcrypt_api" -eq "$tmp" ; then
--@@ -95,8 +95,8 @@ AC_DEFUN([AM_PATH_LIBGCRYPT],
--      fi
--   fi
--   if test $ok = yes; then
---    LIBGCRYPT_CFLAGS=`$LIBGCRYPT_CONFIG --cflags`
---    LIBGCRYPT_LIBS=`$LIBGCRYPT_CONFIG --libs`
--+    LIBGCRYPT_CFLAGS=`$PKG_CONFIG --cflags libgcrypt`
--+    LIBGCRYPT_LIBS=`$PKG_CONFIG --libs libgcrypt`
--     ifelse([$2], , :, [$2])
--   else
--     LIBGCRYPT_CFLAGS=""
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.4.6.bb b/meta-networking/recipes-support/wireshark/wireshark_2.4.6.bb
-deleted file mode 100644
-index 3da0a7bafc..0000000000
---- a/meta-networking/recipes-support/wireshark/wireshark_2.4.6.bb
-+++ /dev/null
-@@ -1,73 +0,0 @@
--DESCRIPTION = "wireshark - a popular network protocol analyzer"
--HOMEPAGE = "http://www.wireshark.org"
--SECTION = "net"
--LICENSE = "GPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
--
--DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error"
--
--SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz"
--SRC_URI += "file://libgcrypt.patch"
--
--UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
--
--SRC_URI[md5sum] = "8cfb73e286dd6427ca4405e6e802d13e"
--SRC_URI[sha256sum] = "8e965fd282bc0c09e7c4eba5f08a555d0ccf40a7d1544b939e01b90bc893d5fe"
--
--PE = "1"
--
--inherit autotools pkgconfig perlnative upstream-version-is-even
--
--ARM_INSTRUCTION_SET = "arm"
--
--PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
--PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
--
--PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_DIR_HOST}/usr, --with-libcap=no --enable-pcap-ng-default , libcap"
--PACKAGECONFIG[libpcap] = "--with-pcap=${STAGING_DIR_HOST}/usr --with-pcap-remote, --with-pcap=no --enable-pcap-ng-default  , libpcap"
--PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
--PACKAGECONFIG[libnl] = "--with-libnl=yes, --with-libnl=no, libnl"
--PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
--PACKAGECONFIG[gtk2] = "--with-gtk=2, , gtk+"
--PACKAGECONFIG[gtk3] = "--with-gtk=3, , gtk+3"
--PACKAGECONFIG[graphics] = "--enable-wireshark, --with-gtk=no --disable-wireshark,"
--PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
--PACKAGECONFIG[ssl] = "--with-ssl=yes, --with-ssl=no, openssl"
--PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
--PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
--PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
--PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
--PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
--PACKAGECONFIG[sbc] = "--with-sbc=yes, --with-sbc=no, sbc"
--PACKAGECONFIG[libssh] = "--with-libssh=${STAGING_DIR_HOST}/usr, --with-libssh=no, libssh2"
--PACKAGECONFIG[lz4] = "--with-lz4=${STAGING_DIR_HOST}/usr, --with-lz4=no, lz4"
--
--# these next two options require addional layers
--PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
--
--EXTRA_OECONF += "--with-libgcrypt-prefix=${PKG_CONFIG_DIR} --with-qt=no --enable-tshark --enable-rawshark"
--
--LDFLAGS_append = " -lgpg-error"
--
--# Currently wireshark does not install header files
--do_install_append () {
--
--	install -d ${D}/${includedir}/${BPN}
--	install -d ${D}/${includedir}/${BPN}/epan
--	install -d ${D}/${includedir}/${BPN}/epan/crypt
--	install -d ${D}/${includedir}/${BPN}/epan/dfilter
--	install -d ${D}/${includedir}/${BPN}/epan/dissectors
--	install -d ${D}/${includedir}/${BPN}/epan/ftypes
--	install -d ${D}/${includedir}/${BPN}/epan/wmem
--
--	install config.h ${D}/${includedir}/${BPN}
--	install ${S}/register.h ${D}/${includedir}/${BPN}
--	install -D ${S}/epan/*.h ${D}/${includedir}/${BPN}/epan
--	install -D ${S}/epan/crypt/*.h ${D}/${includedir}/${BPN}/epan/crypt
--	install -D ${S}/epan/dfilter/*.h ${D}/${includedir}/${BPN}/epan/dfilter
--	install -D ${S}/epan/dissectors/*.h ${D}/${includedir}/${BPN}/epan/dissectors
--	install -D ${S}/epan/ftypes/*.h ${D}/${includedir}/${BPN}/epan/ftypes
--	install -D ${S}/epan/wmem/*.h ${D}/${includedir}/${BPN}/epan/wmem
--}
--
--FILES_${PN} += "${datadir}*"
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
 new file mode 100644
-index 0000000000..36a685d090
+index 0000000..945785d
 --- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
-@@ -0,0 +1,81 @@
-+DESCRIPTION = "wireshark - a popular network protocol analyzer"
-+HOMEPAGE = "http://www.wireshark.org"
-+SECTION = "net"
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
++++ b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
+@@ -0,0 +1,114 @@
++From 06ed6a6bf25a22902846097d6b6c97e070c2c326 Mon Sep 17 00:00:00 2001
++From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
++Date: Fri, 1 Jun 2018 14:27:35 +0900
++Subject: [PATCH] telnetd: Fix deadlock on cleanup
 +
-+DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2"
++The cleanup function in telnetd is called both directly and on SIGCHLD
++signals. This, unfortunately, triggered a deadlock in eglibc 2.9 while
++running on a 2.6.31.11 kernel.
 +
-+DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
++What we were seeing is hangs like these:
 +
-+SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz"
-+#SRC_URI += "file://libgcrypt.patch"
++  (gdb) bt
++  #0  0xb7702424 in __kernel_vsyscall ()
++  #1  0xb7658e61 in __lll_lock_wait_private () from ./lib/libc.so.6
++  #2  0xb767e7b5 in _L_lock_15 () from ./lib/libc.so.6
++  #3  0xb767e6e0 in utmpname () from ./lib/libc.so.6
++  #4  0xb76bcde7 in logout () from ./lib/libutil.so.1
++  #5  0x0804c827 in cleanup ()
++  #6  <signal handler called>
++  #7  0xb7702424 in __kernel_vsyscall ()
++  #8  0xb7641003 in __fcntl_nocancel () from ./lib/libc.so.6
++  #9  0xb767e0c3 in getutline_r_file () from ./lib/libc.so.6
++  #10 0xb767d675 in getutline_r () from ./lib/libc.so.6
++  #11 0xb76bce42 in logout () from ./lib/libutil.so.1
++  #12 0x0804c827 in cleanup ()
++  #13 0x0804a0b5 in telnet ()
++  #14 0x0804a9c3 in main ()
 +
-+UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
++and what has happened here is that the user closes the telnet session
++via the escape character. This causes telnetd to call cleanup in frame
++the SIGCHLD signal is delivered while telnetd is executing cleanup.
 +
-+SRC_URI[md5sum] = "b0e9e5fe22e96d9fdfad18f750fa8f55"
-+SRC_URI[sha256sum] = "ab6e5bbc3464c956347b8671ce8397950ad5daff3bf9964c967d495f4ddbcd88"
++Telnetd then calls the signal handler for SIGCHLD, which is cleanup().
++Ouch. The actual deadlock is in libc. getutline_r in frame #10 gets the
++__libc_utmp_lock lock, and utmpname above does the same thing in frame
 +
-+PE = "1"
++The fix registers the SIGCHLD handler as cleanup_sighandler, and makes
++cleanup disable the SIGCHLD signal before calling cleanup_sighandler.
 +
-+inherit cmake pkgconfig pythonnative perlnative upstream-version-is-even
++Signed-off-by: Simon Kagstrom <simon.kagstrom@netinsight.net>
 +
-+ARM_INSTRUCTION_SET = "arm"
++The patch was imported from the Ubuntu netkit-telnet package.
++(https://bugs.launchpad.net/ubuntu/+source/netkit-telnet/+bug/507455)
 +
-+PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
-+PACKAGECONFIG_append_class-target = " ${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk3 graphics ", "", d)}"
++A previous patch declaring attributes of functions, but it is not used
++in upstream.
 +
-+PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
++Signed-off-by: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
++---
++ telnetd/ext.h      |  1 +
++ telnetd/sys_term.c | 17 ++++++++++++++++-
++ telnetd/telnetd.c  |  2 +-
++ 3 files changed, 18 insertions(+), 2 deletions(-)
 +
-+PACKAGECONFIG[libcap] = "-DENABLE_CAP=ON,-DENABLE_CAP=OFF -DENABLE_PCAP_NG_DEFAULT=ON, libcap"
-+PACKAGECONFIG[libpcap] = "-DENABLE_PCAP=ON,-DENABLE_PCAP=OFF -DENABLE_PCAP_NG_DEFAULT=ON , libpcap"
-+PACKAGECONFIG[libsmi] = "-DENABLE_SMI=ON,-DENABLE_SMI=OFF,libsmi"
-+PACKAGECONFIG[libnl] = ",,libnl"
-+PACKAGECONFIG[portaudio] = "-DENABLE_PORTAUDIO=ON,-DENABLE_PORTAUDIO=OFF, portaudio-v19"
-+PACKAGECONFIG[gtk2] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF, gtk+"
-+PACKAGECONFIG[gtk3] = "-DENABLE_GTK3=ON,-DENABLE_GTK3=OFF, gtk+3"
-+PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qtbase"
-+PACKAGECONFIG[graphics] = ",-DENABLE_GTK=OFF,"
-+PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON,-DENABLE_GNUTLS=OFF, gnutls"
-+PACKAGECONFIG[ssl] = ",,openssl"
-+PACKAGECONFIG[krb5] = "-DENABLE_KRB5=ON,-DENABLE_KRB5=OFF, krb5"
-+PACKAGECONFIG[lua] = "-DENABLE_LUA=ON,-DENABLE_LUA=OFF, lua"
-+PACKAGECONFIG[zlib] = "-DENABLE_ZLIB=ON,-DENABLE_ZLIB=OFF, zlib"
-+PACKAGECONFIG[geoip] = ",, geoip"
-+PACKAGECONFIG[plugins] = "-DENABLE_PLUGINS=ON,-DENABLE_PLUGINS=OFF"
-+PACKAGECONFIG[sbc] = "-DENABLE_SBC=ON,-DENABLE_SBC=OFF, sbc"
-+PACKAGECONFIG[libssh] = ",,libssh2"
-+PACKAGECONFIG[lz4] = "-DENABLE_LZ4=ON,-DENABLE_LZ4=OFF, lz4"
++diff --git a/telnetd/ext.h b/telnetd/ext.h
++index b98d6ec..08f9d07 100644
++--- a/telnetd/ext.h
+++++ b/telnetd/ext.h
++@@ -97,6 +97,7 @@ void add_slc(int, int, int);
++ void check_slc(void);
++ void change_slc(int, int, int);
++ void cleanup(int);
+++void cleanup_sighandler(int);
++ void clientstat(int, int, int);
++ void copy_termbuf(char *, int);
++ void deferslc(void);
++diff --git a/telnetd/sys_term.c b/telnetd/sys_term.c
++index 5b4aa84..c4fb0f7 100644
++--- a/telnetd/sys_term.c
+++++ b/telnetd/sys_term.c
++@@ -719,7 +719,7 @@ static void addarg(struct argv_stuff *avs, const char *val) {
++  * This is the routine to call when we are all through, to
++  * clean up anything that needs to be cleaned up.
++  */
++-void cleanup(int sig) {
+++void cleanup_sighandler(int sig) {
++     char *p;
++     (void)sig;
++ 
++@@ -742,3 +742,18 @@ void cleanup(int sig) {
++     shutdown(net, 2);
++     exit(0);
++ }
+++
+++void cleanup(int sig) {
+++    sigset_t mask, oldmask;
+++
+++    /* Set up the mask of signals to temporarily block. */
+++    sigemptyset (&mask);
+++    sigaddset (&mask, SIGCHLD);
+++
+++    /* Block SIGCHLD while running cleanup */
+++    sigprocmask (SIG_BLOCK, &mask, &oldmask);
+++
+++    cleanup_sighandler(sig);
+++    /* Technically not needed since cleanup_sighandler exits */
+++    sigprocmask (SIG_UNBLOCK, &mask, NULL);
+++}
++diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
++index 9ace838..788919c 100644
++--- a/telnetd/telnetd.c
+++++ b/telnetd/telnetd.c
++@@ -833,7 +833,7 @@ void telnet(int f, int p)
++     signal(SIGTTOU, SIG_IGN);
++ #endif
++     
++-    signal(SIGCHLD, cleanup);
+++    signal(SIGCHLD, cleanup_sighandler);
++     
++ #ifdef TIOCNOTTY
++     {
++-- 
++2.7.4
 +
-+# these next two options require addional layers
-+PACKAGECONFIG[c-ares] = "-DENABLE_CARES=ON,-DENABLE_CARES=OFF, c-ares"
-+
-+LDFLAGS_append = " -lgpg-error -lm"
-+
-+EXTRA_OECMAKE += "-DBUILD_wireshark=ON \
-+                  -DENABLE_NETLINK=ON \
-+                  -DBUILD_mmdbresolve=OFF \
-+                  -DBUILD_randpktdump=OFF \
-+                  -DBUILD_androiddump=OFF \
-+                  -DBUILD_dcerpcidl2wrs=OFF \
-+                  -DM_INCLUDE_DIR=${includedir} \
-+                  -DM_LIBRARY=${libdir} \
-+                 "
-+do_install_append_class-native() {
-+	install -d ${D}${bindir}
-+	for f in make-dissectors lemon make-taps
-+	do
-+		install -m 0755 ${B}/run/$f ${D}${bindir}
-+	done
-+}
-+
-+do_install_append_class-target() {
-+	for f in `find ${D}${libdir} ${D}${bindir} -type f -executable`
-+	do
-+		chrpath --delete $f
-+	done
-+}
-+
-+FILES_${PN} += "${datadir}*"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+index 28ef36b..c03b8d9 100644
+--- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+@@ -11,6 +11,7 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
+            file://telnet-xinetd \
+            file://cross-compile.patch \
+            file://0001-telnet-telnetd-Fix-print-format-strings.patch \
++           file://0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch \
+            "
+ 
+ UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
 -- 
-2.17.1
+2.7.4
 
 
