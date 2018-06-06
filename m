@@ -1,49 +1,27 @@
-Return-Path: <ishitsuka.sc@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BE4C75452
+Return-Path: <pascal.bach@siemens.com>
+X-Greylist: delayed 1279 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 06 Jun 2018 09:41:11 UTC
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id B84987479D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 09:12:56 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id g20-v6so3435248plq.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2018 02:12:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=CR2AjzW00L+M5O9T+lWn8j2C+8pwtnMobExDbuP+rJw=;
-	b=m5ufUyukzLGEu5kSR/uJf/RpbGPEjNtQQKtBmY0Eac9piXeTECl7AjUbByxlQ6YINg
-	PlOGBe8/tcu0lAlHFSKDfocwlBr1XqUL8Kr3wLZmkBwBa8m/fwe9G1ARD4RVT6BHfWH0
-	chu+EaZNjcd3lYmwEdCPpaybO1A+rbGfqlUJr/5LfbNtUaQK/i0C6sjTYrbjS6+rBPko
-	vuPCfpO3/rAP+NgtGoPv9zJfVcgmZHQYC90cDT/I0fJKcanX131CuYW9cnMOy+6MH5QP
-	F4lz287jqsE2n55clRJ5Qv8RwEL/LTHhHH647znS4A/IwmJPUYS5eK+Gnwsz3M7KVfHw
-	kcZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=CR2AjzW00L+M5O9T+lWn8j2C+8pwtnMobExDbuP+rJw=;
-	b=W3VrAKoP209KKP9g9RGl4XPSOzeq1+0Y5RRMw89hvSP1MhhMW1i7Fpruz7Ab7hr2dT
-	NFPAoa5R2js6YBUuzM7XqXxvyII06g8/ikrYbEmqIAGil4Mj0SYrzl/vfxT8BL051Vxw
-	pFtxiSgtHalJ4g/LdeWDO/NcZj7bbYVjjRhaN+pnhrNYwNOMpGtJnKCFmfYaqjd17otf
-	PA4MW7jVdezmpYwNqcEocH0A7+QR30ZUAGdmZFMLga5savFaDQgklq47bQaPAyw2Kpvp
-	H9Mq2dfT1/rwDFuMeZu/oCw8jHPKYaqZSuwk2GNQ6YapUsvfEA3+3Bu7/rWV860dEd+W
-	ESeQ==
-X-Gm-Message-State: APt69E1J/A/KaBaf6iMSzLg2Vns+797iBzmli3tjRykqo9GoIBUKVO87
-	p49UbmMNLzqE+HgeSPgn8LNxYJ+E
-X-Google-Smtp-Source: ADUXVKJjKIcGG4i8+XJzFvRGZyoU4AZ5qq3ksUHX/YSPol5dJuQrcyWZF8EnJr21fDbmBBkDnRX7jA==
-X-Received: by 2002:a17:902:20e8:: with SMTP id
-	v37-v6mr2377444plg.354.1528276377140; 
-	Wed, 06 Jun 2018 02:12:57 -0700 (PDT)
-Received: from localhost.localdomain (softbank219174086128.bbtec.net.
-	[219.174.86.128]) by smtp.gmail.com with ESMTPSA id
-	p1-v6sm89158161pfp.137.2018.06.06.02.12.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 06 Jun 2018 02:12:56 -0700 (PDT)
-From: Seiichi Ishitsuka <ishitsuka.sc@gmail.com>
-X-Google-Original-From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
+	Wed,  6 Jun 2018 09:41:11 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id w569Jpvm015703
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Wed, 6 Jun 2018 11:19:52 +0200
+Received: from dev.vm6.ccp.siemens.com ([139.22.39.14])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id w569Jpck004556;
+	Wed, 6 Jun 2018 11:19:51 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 6278E10F2E48;
+	Wed,  6 Jun 2018 11:19:51 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Jun 2018 18:12:33 +0900
-Message-Id: <1528276353-6217-1-git-send-email-ishitsuka.sc@ncos.nec.co.jp>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] telnetd: Fix deadlock on cleanup
+Date: Wed,  6 Jun 2018 11:19:45 +0200
+Message-Id: <20180606091945.24333-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Cc: Pascal Bach <pascal.bach@nextrem.ch>
+Subject: [meta-oe][PATCH] nodejs: 8.9.4 -> 8.11.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,152 +34,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 09:12:56 -0000
+X-List-Received-Date: Wed, 06 Jun 2018 09:41:12 -0000
 
-The cleanup function in telnetd is called both directly and on SIGCHLD signals.
-This triggered a deadlock in glibc and was reproduced in glibc 2.27 while
-running on a 4.14.30 kernel.
+From: Pascal Bach <pascal.bach@nextrem.ch>
 
-Signed-off-by: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
+Node.js > 8.10 also compile with OpenSSL 1.1
+
+License check sum changes because typo fix in LICENSE file.
+No license change.
+
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- ...01-telnet-telnetd-Fix-deadlock-on-cleanup.patch | 114 +++++++++++++++++++++
- .../netkit-telnet/netkit-telnet_0.17.bb            |   1 +
- 2 files changed, 115 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
+ .../recipes-devtools/nodejs/{nodejs_8.9.4.bb => nodejs_8.11.2.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_8.9.4.bb => nodejs_8.11.2.bb} (93%)
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
-new file mode 100644
-index 0000000..945785d
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-telnet/files/0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch
-@@ -0,0 +1,114 @@
-+From 06ed6a6bf25a22902846097d6b6c97e070c2c326 Mon Sep 17 00:00:00 2001
-+From: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
-+Date: Fri, 1 Jun 2018 14:27:35 +0900
-+Subject: [PATCH] telnetd: Fix deadlock on cleanup
-+
-+The cleanup function in telnetd is called both directly and on SIGCHLD
-+signals. This, unfortunately, triggered a deadlock in eglibc 2.9 while
-+running on a 2.6.31.11 kernel.
-+
-+What we were seeing is hangs like these:
-+
-+  (gdb) bt
-+  #0  0xb7702424 in __kernel_vsyscall ()
-+  #1  0xb7658e61 in __lll_lock_wait_private () from ./lib/libc.so.6
-+  #2  0xb767e7b5 in _L_lock_15 () from ./lib/libc.so.6
-+  #3  0xb767e6e0 in utmpname () from ./lib/libc.so.6
-+  #4  0xb76bcde7 in logout () from ./lib/libutil.so.1
-+  #5  0x0804c827 in cleanup ()
-+  #6  <signal handler called>
-+  #7  0xb7702424 in __kernel_vsyscall ()
-+  #8  0xb7641003 in __fcntl_nocancel () from ./lib/libc.so.6
-+  #9  0xb767e0c3 in getutline_r_file () from ./lib/libc.so.6
-+  #10 0xb767d675 in getutline_r () from ./lib/libc.so.6
-+  #11 0xb76bce42 in logout () from ./lib/libutil.so.1
-+  #12 0x0804c827 in cleanup ()
-+  #13 0x0804a0b5 in telnet ()
-+  #14 0x0804a9c3 in main ()
-+
-+and what has happened here is that the user closes the telnet session
-+via the escape character. This causes telnetd to call cleanup in frame
-+the SIGCHLD signal is delivered while telnetd is executing cleanup.
-+
-+Telnetd then calls the signal handler for SIGCHLD, which is cleanup().
-+Ouch. The actual deadlock is in libc. getutline_r in frame #10 gets the
-+__libc_utmp_lock lock, and utmpname above does the same thing in frame
-+
-+The fix registers the SIGCHLD handler as cleanup_sighandler, and makes
-+cleanup disable the SIGCHLD signal before calling cleanup_sighandler.
-+
-+Signed-off-by: Simon Kagstrom <simon.kagstrom@netinsight.net>
-+
-+The patch was imported from the Ubuntu netkit-telnet package.
-+(https://bugs.launchpad.net/ubuntu/+source/netkit-telnet/+bug/507455)
-+
-+A previous patch declaring attributes of functions, but it is not used
-+in upstream.
-+
-+Signed-off-by: Seiichi Ishitsuka <ishitsuka.sc@ncos.nec.co.jp>
-+---
-+ telnetd/ext.h      |  1 +
-+ telnetd/sys_term.c | 17 ++++++++++++++++-
-+ telnetd/telnetd.c  |  2 +-
-+ 3 files changed, 18 insertions(+), 2 deletions(-)
-+
-+diff --git a/telnetd/ext.h b/telnetd/ext.h
-+index b98d6ec..08f9d07 100644
-+--- a/telnetd/ext.h
-++++ b/telnetd/ext.h
-+@@ -97,6 +97,7 @@ void add_slc(int, int, int);
-+ void check_slc(void);
-+ void change_slc(int, int, int);
-+ void cleanup(int);
-++void cleanup_sighandler(int);
-+ void clientstat(int, int, int);
-+ void copy_termbuf(char *, int);
-+ void deferslc(void);
-+diff --git a/telnetd/sys_term.c b/telnetd/sys_term.c
-+index 5b4aa84..c4fb0f7 100644
-+--- a/telnetd/sys_term.c
-++++ b/telnetd/sys_term.c
-+@@ -719,7 +719,7 @@ static void addarg(struct argv_stuff *avs, const char *val) {
-+  * This is the routine to call when we are all through, to
-+  * clean up anything that needs to be cleaned up.
-+  */
-+-void cleanup(int sig) {
-++void cleanup_sighandler(int sig) {
-+     char *p;
-+     (void)sig;
-+ 
-+@@ -742,3 +742,18 @@ void cleanup(int sig) {
-+     shutdown(net, 2);
-+     exit(0);
-+ }
-++
-++void cleanup(int sig) {
-++    sigset_t mask, oldmask;
-++
-++    /* Set up the mask of signals to temporarily block. */
-++    sigemptyset (&mask);
-++    sigaddset (&mask, SIGCHLD);
-++
-++    /* Block SIGCHLD while running cleanup */
-++    sigprocmask (SIG_BLOCK, &mask, &oldmask);
-++
-++    cleanup_sighandler(sig);
-++    /* Technically not needed since cleanup_sighandler exits */
-++    sigprocmask (SIG_UNBLOCK, &mask, NULL);
-++}
-+diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
-+index 9ace838..788919c 100644
-+--- a/telnetd/telnetd.c
-++++ b/telnetd/telnetd.c
-+@@ -833,7 +833,7 @@ void telnet(int f, int p)
-+     signal(SIGTTOU, SIG_IGN);
-+ #endif
-+     
-+-    signal(SIGCHLD, cleanup);
-++    signal(SIGCHLD, cleanup_sighandler);
-+     
-+ #ifdef TIOCNOTTY
-+     {
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index 28ef36b..c03b8d9 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -11,6 +11,7 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
-            file://telnet-xinetd \
-            file://cross-compile.patch \
-            file://0001-telnet-telnetd-Fix-print-format-strings.patch \
-+           file://0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch \
-            "
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.11.2.bb
+similarity index 93%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_8.11.2.bb
+index 8930cd902..4e81b0392 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_8.9.4.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.11.2.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & BSD & Artistic-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=270f7477a1705f7cd3e29d3d4512915d"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=fde91d5c5bbd1e0389623e1ac018d9e8"
  
- UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
+-DEPENDS = "openssl10 zlib"
++DEPENDS = "openssl zlib"
+ 
+ COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
+ COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+ "
+-SRC_URI[md5sum] = "631ed102fe58c13cf63bc92a68cf4759"
+-SRC_URI[sha256sum] = "6cdcde9c9c1ca9f450a0b24eafa229ca759e576daa0fae892ce74d541ecdc86f"
++SRC_URI[md5sum] = "56be405b63b8c6c8ecd98c002fb15e4a"
++SRC_URI[sha256sum] = "539946c0381809576bed07424a35fc1740d52f4bd56305d6278d9e76c88f4979"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
 -- 
-2.7.4
+2.11.0
 
 
