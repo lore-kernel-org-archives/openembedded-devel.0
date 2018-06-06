@@ -1,46 +1,48 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 06 Jun 2018 10:10:57 UTC
-Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id A319D74C63
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A594674BC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 10:10:57 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.84_2)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1fQV8S-0001Rx-DT for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jun 2018 11:53:44 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  6 Jun 2018 10:50:45 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id p11-v6so11011631wmc.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jun 2018 03:50:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=IJPuHatT/9zYWkDmGt4B4SAAeYZYLKMbGMZoOcx5VkI=;
+	b=LL+PL3i1bhXahk/aH4hQjsH1FQcWMFe6vSqKJ7TvMc3Lf67/euufwAkO2Ae0YwcKvl
+	6Liik8bEVdOWFQWJMMsrxNS5BJN3g/ZriJemZR5WyIRy7OSgko1AwuxsdMgzI36jR0T1
+	K7ics4zoJZxgSSRR8g1311j1uaQUyt/W5jBRBx4RzCQ2eUhVptOg34NVgwdE8LazgxSE
+	saQbGED6FJLmY3rM7ruKUADN5/W9DrV61ycA4hW13kbr8vAY4O3G1Ci7leF0Lbh+OEDc
+	6mrPS8SFX8H1OHNjLEmXgDH/38yrkft1NPIcxT534qsyfvgLn9EzOME51KkqTTkW6aYr
+	r4pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IJPuHatT/9zYWkDmGt4B4SAAeYZYLKMbGMZoOcx5VkI=;
+	b=is+Ugu1FXofSGBtbh61SSY1rMJFVJxIRzpbDIS4J2vFzFXtL7LTjr0xtRudmD8D1s4
+	yKbF0ehL+9ogPogFwD8X+CBO4uaukiHXBOyePyJHnPs+OBFjRiDhMQv69Be0Y4ABbzQn
+	bGROnhlNDVJUvg+naryxrpfNdHhUEKlmLbasAm61JAvjyQuJBhWcCCNXMp+zk0dF4col
+	D1fnQ+GtoawthpU/gZeyvCwlYyx4GusmoA2GSXIL09ggdCQbcjfxCsHoYqIIUbFgjJ8V
+	NeE+V3DEcNWoZkArQOHF9g+5dTHmq6QldrRn3wGfaLSXJP/3XBmW3TxGtMMihr2EbdVC
+	/x3Q==
+X-Gm-Message-State: APt69E1m3TUZrbiTWH4jYfY7KcPpwggBjEPCn0X1AOqdH60yurAPa3dK
+	qiukZI68R/Ru9NaiZvYJiRXZhA==
+X-Google-Smtp-Source: ADUXVKLq0Vb3dAfE8cSAeSZtUjO8c4JKIhJzcQyF1oiTW/p4WIL96LBxVJbUvV1iCJETzJbWO0000Q==
+X-Received: by 2002:a50:b3e4:: with SMTP id
+	t33-v6mr3239836edd.14.1528282245954; 
+	Wed, 06 Jun 2018 03:50:45 -0700 (PDT)
+Received: from nick-laptop.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	q22-v6sm3046776edd.69.2018.06.06.03.50.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Jun 2018 03:50:45 -0700 (PDT)
+From: Nicola Lunghi <nick83ola@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 6 Jun 2018 11:55:49 +0200
-Message-ID: <pf8av2$tp5$1@blaine.gmane.org>
-References: <CAKpvFF1BbLmk4yhas7BRcN1e3tX1AcyGbOs0EpNcxE+kBtdX-w@mail.gmail.com>
-	<20180606081240.6178-1-pn@denx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@blaine.gmane.org
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
-	Gecko/20100101 Thunderbird/52.8.0
-Openpgp: preference=signencrypt
-Autocrypt: addr=koen@dominion.thruhere.net; keydata=
-	xsDiBEIE+IMRBAD9QYy9UMeJ4dIYQFTAYXRpzMQxTh1Tn7EeXVgi1A1LQps6g2F2Opg0gkuS
-	pFsAnJWaEYphhIg5CuyDDk1AYH/PUiQp7oma/hlYoLoKe5nuQ3AY8DJnmA81IQmKQQRnE1t8
-	lLja6kzx8RiCybKS19PCAitIzzQXst9ioRoyAE/fZwCgvdgJ52+LLgonoD7/xz50DNBr8YsD
-	/AivFTC9QXeXxlw8fWWwlJXeuUXB+qDWqo4oE516uOk+SpsAzxr0AZxlNyONEjQ3xGW0CO2x
-	s3lvdWuD/r6yGIpJDionAd6SA5GeRATtPJ3F+9JYHKbqESiyDpQCZmN9/8a8zk0mWmg0DjwR
-	7yyOdvslAph0egv4Nd/ki/QqJMJkBADDTIpwtuPnSP8Sk374+e5jxLJJvhycD2WumPOtICTb
-	P9SnMPlc2uW0QyIZnecegqaOVPEMwSOmldX2cqOAewpsOT1WgSnv/rkFcBkNWimJornmno5D
-	NTNDNc9fxu3E4vC/qR9RZf89/13KMWtHQXTqvqPo+5xZ49iAItW+HC8v7M0qS29lbiBLb29p
-	IDxrb2VuQGRvbWluaW9uLmthYmVsLnV0d2VudGUubmw+wl4EExECAB4FAkIE+IMCGwMGCwkI
-	BwMCAxUCAwMWAgECHgECF4AACgkQMkyGM64RGpFGUgCfbw0AIjgkNEvdSbt3z1y89FsEakQA
-	njMQZ6q/tkf2bvmYEG+x9SOeIarIzsBNBEIE+IMQBAD023653MUqxrPwp7RDMi/fHPKcZq+7
-	N1fUhaDfVo3i+f5mgEzJPRRhGQRMncgtB2Hs9DP2HOM9RcoGnjnNRzMpUSMA60xf25MkKjeR
-	6iZWkHIU3ifUfVfFWC6zcSLQ25cFRhWoT9jE2u2czdkpHPBMMpnNqjfgoZA8Uaw3HY2lEwAD
-	BQP/RG8IFRtaRN2DsSrcWHVx/oO1TN7yeYStC0e/MDA89MLznxG6V4fhVdeiPMep3xVZmdTf
-	ASPId6sXPMhHn5aGi8rtmABC26LGO7NTUs+5339HGBPtFstedE+M2cvT/BVg88SeWZkIS1kv
-	3snth9MdAUIqmpyNqVeeKz4t3ZYVVUDCSQQYEQIACQUCQgT4gwIbDAAKCRAyTIYzrhEakZSZ
-	AJ4ou/j26LVAtQAGkX6+vASKMJz/0gCgrAMvT2jpq2Mt0Hr+1ZqbD9N48fE=
-In-Reply-To: <20180606081240.6178-1-pn@denx.de>
-Subject: Re: [PATCH] Adding support for xscreensaver-5.39
+Date: Wed,  6 Jun 2018 11:50:42 +0100
+Message-Id: <20180606105042.3676-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Nicola Lunghi <nicola.lunghi@jci.com>
+Subject: [OE-core][PATCH] Add license file EPL-2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +55,318 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 10:10:58 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: nl
+X-List-Received-Date: Wed, 06 Jun 2018 10:50:46 -0000
 
-Op 06-06-18 om 10:12 schreef Parthiban Nallathambi:
-> - This patch enables the support for xscreensaver 5.39 version
-> - xscreensaver.service created for the system with systemd
-> 
-> Signed-off-by: Parthiban Nallathambi <pn@denx.de>
+From: Nicola Lunghi <nicola.lunghi@jci.com>
 
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xscreensaver/files/xscreensaver.service
-> @@ -0,0 +1,14 @@
-> +[Unit]
-> +Description=Xscreensaver service
-> +PartOf=xserver-nodm.service
-> +After=xserver-nodm.service
-> +
-> +[Service]
-> +ExecStart=/usr/bin/xscreensaver
+it is from:
 
-That's a hardcoded path...
+https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt
 
-> +Environment="DISPLAY=:0"
+And add 'EPL-2.0' to SRC_DISTRIBUTE_LICENSES.
+---
+ meta/conf/licenses.conf            |   2 +-
+ meta/files/common-licenses/EPL-2.0 | 277 +++++++++++++++++++++++++++++
+ 2 files changed, 278 insertions(+), 1 deletion(-)
+ create mode 100644 meta/files/common-licenses/EPL-2.0
 
-> diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-> new file mode 100644
-> index 000000000..6b17f9b09
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-
-> +do_install_append() {
-> +    install -D ${WORKDIR}/xscreensaver.service ${D}${systemd_unitdir}/system/xscreensaver.service
-> +}
-
-...which you'll need to fixup here
+diff --git a/meta/conf/licenses.conf b/meta/conf/licenses.conf
+index 3e2d2589ab..90c486ebed 100644
+--- a/meta/conf/licenses.conf
++++ b/meta/conf/licenses.conf
+@@ -16,7 +16,7 @@ SRC_DISTRIBUTE_LICENSES += "CC-BY-SA-1.0 CC-BY-SA-2.0 CC-BY-SA-2.5 CC-BY-SA-3.0"
+ SRC_DISTRIBUTE_LICENSES += "CDDL-1.0 CECILL-1.0 CECILL-2.0 CECILL-B CECILL-C"
+ SRC_DISTRIBUTE_LICENSES += "ClArtistic CPAL-1.0 CPL-1.0 CUA-OPL-1.0 DSSSL"
+ SRC_DISTRIBUTE_LICENSES += "ECL-1.0 ECL-2.0 eCos-2.0 EDL-1.0 EFL-1.0 EFL-2.0"
+-SRC_DISTRIBUTE_LICENSES += "Elfutils-Exception Entessa EPL-1.0 ErlPL-1.1"
++SRC_DISTRIBUTE_LICENSES += "Elfutils-Exception Entessa EPL-1.0 EPL-2.0 ErlPL-1.1"
+ SRC_DISTRIBUTE_LICENSES += "EUDatagrid EUPL-1.0 EUPL-1.1 Fair Frameworx-1.0"
+ SRC_DISTRIBUTE_LICENSES += "FreeType GFDL-1.1 GFDL-1.2 GFDL-1.3 GPL-1.0"
+ SRC_DISTRIBUTE_LICENSES += "GPL-2.0 GPL-2.0-with-autoconf-exception"
+diff --git a/meta/files/common-licenses/EPL-2.0 b/meta/files/common-licenses/EPL-2.0
+new file mode 100644
+index 0000000000..e48e096345
+--- /dev/null
++++ b/meta/files/common-licenses/EPL-2.0
+@@ -0,0 +1,277 @@
++Eclipse Public License - v 2.0
++
++    THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE
++    PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION
++    OF THE PROGRAM CONSTITUTES RECIPIENT'S ACCEPTANCE OF THIS AGREEMENT.
++
++1. DEFINITIONS
++
++"Contribution" means:
++
++  a) in the case of the initial Contributor, the initial content
++     Distributed under this Agreement, and
++
++  b) in the case of each subsequent Contributor:
++     i) changes to the Program, and
++     ii) additions to the Program;
++  where such changes and/or additions to the Program originate from
++  and are Distributed by that particular Contributor. A Contribution
++  "originates" from a Contributor if it was added to the Program by
++  such Contributor itself or anyone acting on such Contributor's behalf.
++  Contributions do not include changes or additions to the Program that
++  are not Modified Works.
++
++"Contributor" means any person or entity that Distributes the Program.
++
++"Licensed Patents" mean patent claims licensable by a Contributor which
++are necessarily infringed by the use or sale of its Contribution alone
++or when combined with the Program.
++
++"Program" means the Contributions Distributed in accordance with this
++Agreement.
++
++"Recipient" means anyone who receives the Program under this Agreement
++or any Secondary License (as applicable), including Contributors.
++
++"Derivative Works" shall mean any work, whether in Source Code or other
++form, that is based on (or derived from) the Program and for which the
++editorial revisions, annotations, elaborations, or other modifications
++represent, as a whole, an original work of authorship.
++
++"Modified Works" shall mean any work in Source Code or other form that
++results from an addition to, deletion from, or modification of the
++contents of the Program, including, for purposes of clarity any new file
++in Source Code form that contains any contents of the Program. Modified
++Works shall not include works that contain only declarations,
++interfaces, types, classes, structures, or files of the Program solely
++in each case in order to link to, bind by name, or subclass the Program
++or Modified Works thereof.
++
++"Distribute" means the acts of a) distributing or b) making available
++in any manner that enables the transfer of a copy.
++
++"Source Code" means the form of a Program preferred for making
++modifications, including but not limited to software source code,
++documentation source, and configuration files.
++
++"Secondary License" means either the GNU General Public License,
++Version 2.0, or any later versions of that license, including any
++exceptions or additional permissions as identified by the initial
++Contributor.
++
++2. GRANT OF RIGHTS
++
++  a) Subject to the terms of this Agreement, each Contributor hereby
++  grants Recipient a non-exclusive, worldwide, royalty-free copyright
++  license to reproduce, prepare Derivative Works of, publicly display,
++  publicly perform, Distribute and sublicense the Contribution of such
++  Contributor, if any, and such Derivative Works.
++
++  b) Subject to the terms of this Agreement, each Contributor hereby
++  grants Recipient a non-exclusive, worldwide, royalty-free patent
++  license under Licensed Patents to make, use, sell, offer to sell,
++  import and otherwise transfer the Contribution of such Contributor,
++  if any, in Source Code or other form. This patent license shall
++  apply to the combination of the Contribution and the Program if, at
++  the time the Contribution is added by the Contributor, such addition
++  of the Contribution causes such combination to be covered by the
++  Licensed Patents. The patent license shall not apply to any other
++  combinations which include the Contribution. No hardware per se is
++  licensed hereunder.
++
++  c) Recipient understands that although each Contributor grants the
++  licenses to its Contributions set forth herein, no assurances are
++  provided by any Contributor that the Program does not infringe the
++  patent or other intellectual property rights of any other entity.
++  Each Contributor disclaims any liability to Recipient for claims
++  brought by any other entity based on infringement of intellectual
++  property rights or otherwise. As a condition to exercising the
++  rights and licenses granted hereunder, each Recipient hereby
++  assumes sole responsibility to secure any other intellectual
++  property rights needed, if any. For example, if a third party
++  patent license is required to allow Recipient to Distribute the
++  Program, it is Recipient's responsibility to acquire that license
++  before distributing the Program.
++
++  d) Each Contributor represents that to its knowledge it has
++  sufficient copyright rights in its Contribution, if any, to grant
++  the copyright license set forth in this Agreement.
++
++  e) Notwithstanding the terms of any Secondary License, no
++  Contributor makes additional grants to any Recipient (other than
++  those set forth in this Agreement) as a result of such Recipient's
++  receipt of the Program under the terms of a Secondary License
++  (if permitted under the terms of Section 3).
++
++3. REQUIREMENTS
++
++3.1 If a Contributor Distributes the Program in any form, then:
++
++  a) the Program must also be made available as Source Code, in
++  accordance with section 3.2, and the Contributor must accompany
++  the Program with a statement that the Source Code for the Program
++  is available under this Agreement, and informs Recipients how to
++  obtain it in a reasonable manner on or through a medium customarily
++  used for software exchange; and
++
++  b) the Contributor may Distribute the Program under a license
++  different than this Agreement, provided that such license:
++     i) effectively disclaims on behalf of all other Contributors all
++     warranties and conditions, express and implied, including
++     warranties or conditions of title and non-infringement, and
++     implied warranties or conditions of merchantability and fitness
++     for a particular purpose;
++
++     ii) effectively excludes on behalf of all other Contributors all
++     liability for damages, including direct, indirect, special,
++     incidental and consequential damages, such as lost profits;
++
++     iii) does not attempt to limit or alter the recipients' rights
++     in the Source Code under section 3.2; and
++
++     iv) requires any subsequent distribution of the Program by any
++     party to be under a license that satisfies the requirements
++     of this section 3.
++
++3.2 When the Program is Distributed as Source Code:
++
++  a) it must be made available under this Agreement, or if the
++  Program (i) is combined with other material in a separate file or
++  files made available under a Secondary License, and (ii) the initial
++  Contributor attached to the Source Code the notice described in
++  Exhibit A of this Agreement, then the Program may be made available
++  under the terms of such Secondary Licenses, and
++
++  b) a copy of this Agreement must be included with each copy of
++  the Program.
++
++3.3 Contributors may not remove or alter any copyright, patent,
++trademark, attribution notices, disclaimers of warranty, or limitations
++of liability ("notices") contained within the Program from any copy of
++the Program which they Distribute, provided that Contributors may add
++their own appropriate notices.
++
++4. COMMERCIAL DISTRIBUTION
++
++Commercial distributors of software may accept certain responsibilities
++with respect to end users, business partners and the like. While this
++license is intended to facilitate the commercial use of the Program,
++the Contributor who includes the Program in a commercial product
++offering should do so in a manner which does not create potential
++liability for other Contributors. Therefore, if a Contributor includes
++the Program in a commercial product offering, such Contributor
++("Commercial Contributor") hereby agrees to defend and indemnify every
++other Contributor ("Indemnified Contributor") against any losses,
++damages and costs (collectively "Losses") arising from claims, lawsuits
++and other legal actions brought by a third party against the Indemnified
++Contributor to the extent caused by the acts or omissions of such
++Commercial Contributor in connection with its distribution of the Program
++in a commercial product offering. The obligations in this section do not
++apply to any claims or Losses relating to any actual or alleged
++intellectual property infringement. In order to qualify, an Indemnified
++Contributor must: a) promptly notify the Commercial Contributor in
++writing of such claim, and b) allow the Commercial Contributor to control,
++and cooperate with the Commercial Contributor in, the defense and any
++related settlement negotiations. The Indemnified Contributor may
++participate in any such claim at its own expense.
++
++For example, a Contributor might include the Program in a commercial
++product offering, Product X. That Contributor is then a Commercial
++Contributor. If that Commercial Contributor then makes performance
++claims, or offers warranties related to Product X, those performance
++claims and warranties are such Commercial Contributor's responsibility
++alone. Under this section, the Commercial Contributor would have to
++defend claims against the other Contributors related to those performance
++claims and warranties, and if a court requires any other Contributor to
++pay any damages as a result, the Commercial Contributor must pay
++those damages.
++
++5. NO WARRANTY
++
++EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, AND TO THE EXTENT
++PERMITTED BY APPLICABLE LAW, THE PROGRAM IS PROVIDED ON AN "AS IS"
++BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR
++IMPLIED INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF
++TITLE, NON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR
++PURPOSE. Each Recipient is solely responsible for determining the
++appropriateness of using and distributing the Program and assumes all
++risks associated with its exercise of rights under this Agreement,
++including but not limited to the risks and costs of program errors,
++compliance with applicable laws, damage to or loss of data, programs
++or equipment, and unavailability or interruption of operations.
++
++6. DISCLAIMER OF LIABILITY
++
++EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, AND TO THE EXTENT
++PERMITTED BY APPLICABLE LAW, NEITHER RECIPIENT NOR ANY CONTRIBUTORS
++SHALL HAVE ANY LIABILITY FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
++EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING WITHOUT LIMITATION LOST
++PROFITS), HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ARISING IN ANY WAY OUT OF THE USE OR DISTRIBUTION OF THE PROGRAM OR THE
++EXERCISE OF ANY RIGHTS GRANTED HEREUNDER, EVEN IF ADVISED OF THE
++POSSIBILITY OF SUCH DAMAGES.
++
++7. GENERAL
++
++If any provision of this Agreement is invalid or unenforceable under
++applicable law, it shall not affect the validity or enforceability of
++the remainder of the terms of this Agreement, and without further
++action by the parties hereto, such provision shall be reformed to the
++minimum extent necessary to make such provision valid and enforceable.
++
++If Recipient institutes patent litigation against any entity
++(including a cross-claim or counterclaim in a lawsuit) alleging that the
++Program itself (excluding combinations of the Program with other software
++or hardware) infringes such Recipient's patent(s), then such Recipient's
++rights granted under Section 2(b) shall terminate as of the date such
++litigation is filed.
++
++All Recipient's rights under this Agreement shall terminate if it
++fails to comply with any of the material terms or conditions of this
++Agreement and does not cure such failure in a reasonable period of
++time after becoming aware of such noncompliance. If all Recipient's
++rights under this Agreement terminate, Recipient agrees to cease use
++and distribution of the Program as soon as reasonably practicable.
++However, Recipient's obligations under this Agreement and any licenses
++granted by Recipient relating to the Program shall continue and survive.
++
++Everyone is permitted to copy and distribute copies of this Agreement,
++but in order to avoid inconsistency the Agreement is copyrighted and
++may only be modified in the following manner. The Agreement Steward
++reserves the right to publish new versions (including revisions) of
++this Agreement from time to time. No one other than the Agreement
++Steward has the right to modify this Agreement. The Eclipse Foundation
++is the initial Agreement Steward. The Eclipse Foundation may assign the
++responsibility to serve as the Agreement Steward to a suitable separate
++entity. Each new version of the Agreement will be given a distinguishing
++version number. The Program (including Contributions) may always be
++Distributed subject to the version of the Agreement under which it was
++received. In addition, after a new version of the Agreement is published,
++Contributor may elect to Distribute the Program (including its
++Contributions) under the new version.
++
++Except as expressly stated in Sections 2(a) and 2(b) above, Recipient
++receives no rights or licenses to the intellectual property of any
++Contributor under this Agreement, whether expressly, by implication,
++estoppel or otherwise. All rights in the Program not expressly granted
++under this Agreement are reserved. Nothing in this Agreement is intended
++to be enforceable by any entity that is not a Contributor or Recipient.
++No third-party beneficiary rights are created under this Agreement.
++
++Exhibit A - Form of Secondary Licenses Notice
++
++"This Source Code may also be made available under the following
++Secondary Licenses when the conditions for such availability set forth
++in the Eclipse Public License, v. 2.0 are satisfied: {name license(s),
++version(s), and exceptions or additional permissions here}."
++
++  Simply including a copy of this Agreement, including this Exhibit A
++  is not sufficient to license the Source Code under Secondary Licenses.
++
++  If it is not possible or desirable to put the notice in a particular
++  file, then You may include the notice in a location (such as a LICENSE
++  file in a relevant directory) where a recipient would be likely to
++  look for such a notice.
++
++  You may add additional accurate notices of copyright ownership.
+-- 
+2.17.1
 
 
