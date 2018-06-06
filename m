@@ -1,36 +1,52 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 415 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 06 Jun 2018 17:50:47 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 241B0771C6
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-oi0-f43.google.com (mail-oi0-f43.google.com
+	[209.85.218.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A6988755C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 17:50:46 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 65CDD20BD6;
-	Wed,  6 Jun 2018 17:43:53 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id L-iSCGK2KKSS; Wed,  6 Jun 2018 17:43:53 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3F7A42085B;
-	Wed,  6 Jun 2018 17:43:51 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id BD625163492; Wed,  6 Jun 2018 13:43:50 -0400 (EDT)
-Date: Wed, 6 Jun 2018 13:43:50 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Philip Balister <philip@balister.org>
-Message-ID: <20180606174350.GC19965@denix.org>
-References: <20180604181313.28487-1-philip@balister.org>
+	Wed,  6 Jun 2018 18:15:20 +0000 (UTC)
+Received: by mail-oi0-f43.google.com with SMTP id l22-v6so6139152oib.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jun 2018 11:15:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=6ByQddfoXSdsP4NiypZfSMVkGzr80T3MWQKmnNJVDyQ=;
+	b=QnWGTJc2oHQYG7JwkUoRbG5wwgX1BnPO6uphYI95fqhFcaEUif7ctYWReZz/XUsnOB
+	y6suQc4iLrLUHeqVA/ovtML2M1Vk+0yNiOttdwmasnJmr9TwY/AFyKMbywuD/gPHYCnH
+	Pm+Ww39NwrSGJd961tTO2EKaH3993HOZKNhl1O7GGnfuNKNJoQ/G1BLVxAEd9LhvuLpO
+	ZLSCS2jo6jBeXwb10nwt6jUJr6OJhZpvDVll/EIcNxNxWujmQ216v8JZs5VXw97cugsy
+	f8lX8IkX4thxG3m5BjHe8I7qCUo4SUwsrj61LZE1MEuGtM4B1QViWlk3aC8UoY1a6akf
+	0Z2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=6ByQddfoXSdsP4NiypZfSMVkGzr80T3MWQKmnNJVDyQ=;
+	b=rDECT/niS/1nR+yHTmWHzxeCwH11ADABi8U9e6lFA9y/akwren/8QBteeUQo0H3iXm
+	EzQuEuTzAsmTY99nQ3W4gZsvGMOcdJPauC2n8Ics1j3EWnlAw+YidQhk7SYuBvX1Xkfc
+	OD4JuOe0ysKcYfYrd/YzxTdX11Ts71jRqt4piEl2XEpL4sxPFu2PGrFKMc4aSqOf8Nyy
+	GCvSwgMjqmLw1256jzmm5Pmb9cl/bTTblrxY0kxhg7sUw/P3ZrXJhtLgOixogIwuRW2l
+	9k0t38/4CMRBqioWijEINQgSOIPiX/afSI++k5FumRNfUcwAKnxSEoMdvge3YfyegFUG
+	oosw==
+X-Gm-Message-State: APt69E1f/GTfKTnKqjF8aG2jsOYG7hIjqqPAzgJcTMu8lYa67UqZgfkn
+	VvtRnYj8lH01W1fL3c7WdT+5bsH5uIzwvZviLDA=
+X-Google-Smtp-Source: ADUXVKL9Yi07x78by72ijYva6mQExUOCqSYeqFgljYkgJV2fA6oO7evFa01DTynMS6qH7xgv9fHlhQkPdvJ2niQBKi0=
+X-Received: by 2002:aca:df54:: with SMTP id
+	w81-v6mr2421207oig.104.1528308921647; 
+	Wed, 06 Jun 2018 11:15:21 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180604181313.28487-1-philip@balister.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org,
-	Philip Balister <philip@opensdr.com>
-Subject: Re: [meta-oe][rocko][PATCH] protobuf: Fix fetcher failure for rocko.
+Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP;
+	Wed, 6 Jun 2018 11:15:20 -0700 (PDT)
+In-Reply-To: <CAMKF1so+ux5C6v3x_uBqiF1PjrjuYBtT7ViayqMez-oS6SbwLA@mail.gmail.com>
+References: <20180604223911.14561-1-schnitzeltony@gmail.com>
+	<CALbNGRSg8kYPO6x_jgXtK9Gi1gQDX7v4KbpTWVaWAQCEc=NXSg@mail.gmail.com>
+	<CA+chaQcz=Ckh2=zSUBi969N-v7dJG-K2F1OXLxtnG8JLUahXYQ@mail.gmail.com>
+	<CAMKF1so+ux5C6v3x_uBqiF1PjrjuYBtT7ViayqMez-oS6SbwLA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 6 Jun 2018 20:15:20 +0200
+Message-ID: <CALbNGRRt+-YK_T60D-Cz-NfEbDZTRLy7bUCVgkqCyftGkshM9w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtwebkit: do not skip build - use cmake as build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,46 +59,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 17:50:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Jun 2018 18:15:20 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jun 04, 2018 at 02:13:13PM -0400, Philip Balister wrote:
-> From: Philip Balister <philip@opensdr.com>
+On Wed, Jun 6, 2018 at 7:20 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Jun 6, 2018 at 10:13 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> Thanks Andreas for taking care of this, I was planing to look at it later
+>> and then I forgot about it when I wanted to push first 5.11 recipes.
+>>
+>> With gcc8 I see small issue:
+>> http://errors.yoctoproject.org/Errors/Details/179245/
+>>
+>> In fedora they just added -fpermissive in:
+>> https://bugzilla.redhat.com/show_bug.cgi?id=1582954
+>>
+>> Are you interested in fixing it properly? I don't use qtwebkit
+>> anywhere (switched
+>> to qtwebengine long time ago), so I don't mind adding -fpermissive as well.
+Yes - I will check - have still recipes in meta-qt5-extra depending
+on. Maybe I should check which dependency is still necessary or just
+left over. One question: is gcc8 already upstream in oe-core because I
+ran tests with quite recent masters allover.
+>>
+>
+> IMO adding -fpermissive is acceptable for this package, its on a lifeline anyway
+Dead ones live longer :)
 
-Acked-by: Denys Dmytriyenko <denys@ti.com>
-
-Can we get this expedited to rocko, please?
-
-
-> The 3.4.x branch disappered from the github repo. Remviing the branch
-> entry from SRC_URI allows the fetch to succeed. Rocko is the only release
-> that has this issue. Sumo and later have 3.5.x.
-> 
-> Signed-off-by: Philip Balister <philip@opensdr.com>
-> ---
->  meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-> index fae7c18a1..fe28f475a 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-> @@ -18,7 +18,7 @@ SRCREV = "b04e5cba356212e4e8c66c61bbe0c3a20537c5b9"
->  
->  PV = "3.4.1+git${SRCPV}"
->  
-> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.4.x"
-> +SRC_URI = "git://github.com/google/protobuf.git"
->  
->  EXTRA_OECONF += " --with-protoc=echo"
->  
-> -- 
-> 2.13.6
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Andreas
 
