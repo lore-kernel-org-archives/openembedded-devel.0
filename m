@@ -1,34 +1,32 @@
 Return-Path: <pn@denx.de>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 06 Jun 2018 08:12:52 UTC
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
-	by mail.openembedded.org (Postfix) with ESMTP id DD6BA75568
+	by mail.openembedded.org (Postfix) with ESMTP id 4C71275568
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 08:12:52 +0000 (UTC)
+	Wed,  6 Jun 2018 08:13:02 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 4111d155ckz1qxDV;
-	Wed,  6 Jun 2018 10:12:53 +0200 (CEST)
+	by mail-out.m-online.net (Postfix) with ESMTP id 4111Th1V5Yz1qtPc;
+	Wed,  6 Jun 2018 10:06:32 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 4111d14tPPz1qrXT;
-	Wed,  6 Jun 2018 10:12:53 +0200 (CEST)
+	by mail.m-online.net (Postfix) with ESMTP id 4111Th1Crtz1qrXN;
+	Wed,  6 Jun 2018 10:06:32 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
 	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
 	port 10024)
-	with ESMTP id bXrjuDHM52rM; Wed,  6 Jun 2018 10:12:51 +0200 (CEST)
-X-Auth-Info: cCYtqa+0pnGHBYP7bd8qUnrpXzlcqicAO4vyGB7ZBV8=
-Received: from pollux.denx.de (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
-	bits)) (No client certificate requested)
+	with ESMTP id O4aI1eAcDvDV; Wed,  6 Jun 2018 10:06:27 +0200 (CEST)
+X-Auth-Info: ZD3Yaph4tInLshbSPvaO9s+TgCIufaR4cmr2YZajpFc=
+Received: from xpert.denx.de (unknown [62.91.23.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
 	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Wed,  6 Jun 2018 10:12:51 +0200 (CEST)
+	Wed,  6 Jun 2018 10:06:27 +0200 (CEST)
 From: Parthiban Nallathambi <pn@denx.de>
 To: gurrieristefano@gmail.com
-Date: Wed,  6 Jun 2018 10:12:40 +0200
-Message-Id: <20180606081240.6178-1-pn@denx.de>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <CAKpvFF1BbLmk4yhas7BRcN1e3tX1AcyGbOs0EpNcxE+kBtdX-w@mail.gmail.com>
-References: <CAKpvFF1BbLmk4yhas7BRcN1e3tX1AcyGbOs0EpNcxE+kBtdX-w@mail.gmail.com>
+Date: Wed,  6 Jun 2018 10:05:58 +0200
+Message-Id: <20180606080558.3620048-2-pn@denx.de>
+X-Mailer: git-send-email 2.14.4
+In-Reply-To: <20180606080558.3620048-1-pn@denx.de>
+References: <20180606080558.3620048-1-pn@denx.de>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: [PATCH] Adding support for xscreensaver-5.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 08:12:53 -0000
+X-List-Received-Date: Wed, 06 Jun 2018 08:13:02 -0000
 
 - This patch enables the support for xscreensaver 5.39 version
 - xscreensaver.service created for the system with systemd
