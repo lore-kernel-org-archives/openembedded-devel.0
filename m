@@ -1,29 +1,48 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id B6832786A9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f181.google.com (mail-qt0-f181.google.com
+	[209.85.216.181])
+	by mail.openembedded.org (Postfix) with ESMTP id D97A876047
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jun 2018 23:33:33 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Jun 2018 16:33:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.49,479,1520924400"; d="scan'208";a="230225761"
-Received: from tuzhen-mobl.ccr.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.249.70.49])
-	by orsmga005.jf.intel.com with ESMTP; 05 Jun 2018 16:33:31 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 06 Jun 2018 11:33:28 +1200
-Message-ID: <5113980.YQSFpsKea5@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-In-Reply-To: <20180605133909.11319-2-nick83ola@gmail.com>
-References: <20180605133909.11319-1-nick83ola@gmail.com>
-	<20180605133909.11319-2-nick83ola@gmail.com>
+	Wed,  6 Jun 2018 01:05:57 +0000 (UTC)
+Received: by mail-qt0-f181.google.com with SMTP id d3-v6so4700534qto.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Jun 2018 18:05:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=SqOt4jIK6ElBD37tc4g8VesBQRjc5P9Y45yVDxXpSEw=;
+	b=nC32PTrOAByy+yUQhHtZltJu6nfDvT/cnMe1LzChwj4SKPfGGjCi4GpgAng4KnXqB4
+	55ta+utHk70DgdxIvh56riymCZH29SAZ/76qWficLJ8lHX6JCvdmVJnGVTGwFxKoCJVj
+	fEfL4XFb67vpVMVsvQQLjO7CfSyryL76OS3bIzXlfJeY7H+PzEfLbgQ6EalEE5GxgBoC
+	UeNpWbNgxgkXhvCp54ntTENSODKBBhW9yT+cG5NdsaOMac11Ajiy+N2typnXzoeE+RyG
+	fwfaKJ8Mqixfn5tXhfNyGmzYl/IN/UsXlBrEC/EeXs4YCnulcmtcmWKUi4a3g0RHSNUp
+	4UyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=SqOt4jIK6ElBD37tc4g8VesBQRjc5P9Y45yVDxXpSEw=;
+	b=sQQbvz0m3lnU8hE7jXZsymkN5Mp6qyxqQApvTMnL8A1gQv5Uo2hCVFJ/BMUiGs3mVV
+	Z8vyY8rQWecLLH0U77Qt9EBgHF6qAusSSIKdcsr8jY8l6RFL7JMOosmiJhTKTJENmH2n
+	NLb0B5HBoaZ+YsYhH65zGH345gK+UHrF8tU/W6KwYp7iFHAUejKZj76/4ese4GGHx2gw
+	tOlpZSbChuzWcDkBfr28twLAssnIxjwMqO1OlvjXouDX/zKiWX3QZAnw/TcXQSYKE4hg
+	WmFucv7uhfRKrBCQPR4/BEbK96nlZqNTj3dk49IAbn+B4QDSg+ORYWnirVsX7X/27CPj
+	fv4w==
+X-Gm-Message-State: APt69E1p5x//SKm2yE7l0lJVHzYaEmheIpCc4cxYtw/ak74R76umIZgF
+	O9m3W85X11zZvVnmYDYdUh+0RR2ABIhrQwulLRf+oQ==
+X-Google-Smtp-Source: ADUXVKKjYIkpCOe1p32YRbPuta5FItB0rVT0kETv02gibLt/NYgoQuBU+Xj5X0BsQMke2ssknoEl435A5hXJhu0UrdA=
+X-Received: by 2002:ac8:70c9:: with SMTP id g9-v6mr931399qtp.376.1528247158445;
+	Tue, 05 Jun 2018 18:05:58 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Nicola Lunghi <nicola.lunghi@jci.com>
-Subject: Re: [PATCH 2/2] mosquitto: add mosquitto-examples package
+Received: by 2002:a0c:e486:0:0:0:0:0 with HTTP;
+	Tue, 5 Jun 2018 18:05:27 -0700 (PDT)
+In-Reply-To: <20180604162927.22714-1-leon.anavi@konsulko.com>
+References: <20180604162927.22714-1-leon.anavi@konsulko.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 5 Jun 2018 18:05:27 -0700
+Message-ID: <CAMKF1soJL8txTjcknjkKXCUNK6aBJX-BPy0NgTA-0DtYq=b13w@mail.gmail.com>
+To: Leon Anavi <leon.anavi@konsulko.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] nano: Upgrade 2.9.7 -> 2.9.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,61 +55,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jun 2018 23:33:33 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 06 Jun 2018 01:05:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Wednesday, 6 June 2018 1:39:09 AM NZST Nicola Lunghi wrote:
-> From: Nicola Lunghi <nicola.lunghi@jci.com>
-> 
-> the mosquitto install populate some .example files in
-> /etc/mosquitto. move thise example files in a separate package
-> 
-> The PACKAGE_BEFORE_PN is needed because otherwise those examples
-> end in the base mosquitto package
-> 
-> Signed-off-by: Nicola Lunghi <nicola.lunghi@jci.com>
+On Mon, Jun 4, 2018 at 9:29 AM, Leon Anavi <leon.anavi@konsulko.com> wrote:
+> Upgrade nano to 2.9.8, the latest version as of 2 June 2018:
+> https://www.nano-editor.org/dist/v2.9/ChangeLog
+>
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 > ---
->  .../recipes-connectivity/mosquitto/mosquitto_1.4.15.bb        | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/meta-networking/recipes-connectivity/mosquitto/
-mosquitto_1.4.15.bb b/meta-networking/recipes-connectivity/mosquitto/
-mosquitto_1.4.15.bb
-> index c71f1e467f..8dd2124c41 100644
-> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
-> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
-> @@ -62,6 +62,8 @@ do_install() {
->  
->  PACKAGES += "libmosquitto1 libmosquittopp1 ${PN}-clients"
->  
-> +PACKAGE_BEFORE_PN = "${PN}-examples"
+>  meta-oe/recipes-support/nano/nano_2.9.7.bb | 8 --------
+>  meta-oe/recipes-support/nano/nano_2.9.8.bb | 8 ++++++++
+>  2 files changed, 8 insertions(+), 8 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/nano/nano_2.9.7.bb
+>  create mode 100644 meta-oe/recipes-support/nano/nano_2.9.8.bb
+>
+> diff --git a/meta-oe/recipes-support/nano/nano_2.9.7.bb b/meta-oe/recipes-support/nano/nano_2.9.7.bb
+> deleted file mode 100644
+> index 419e5406b..000000000
+> --- a/meta-oe/recipes-support/nano/nano_2.9.7.bb
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -include nano.inc
+> -
+> -do_install_append_libc-musl () {
+> -       rm -rf ${D}${libdir}/charset.alias
+> -       rmdir ${D}${libdir}
+
+This is failing on musl like below
+
+| make[1]: Leaving directory
+'/mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/nano/2.9.8-r0/build'
+| rmdir: failed to remove
+'/mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/nano/2.9.8-r0/image/usr/lib':
+No such file or directory
+| WARNING: /mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/nano/2.9.8-r0/temp/run.do_install.40342:1
+exit 1 from 'rmdir
+/mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/nano/2.9.8-r0/image/usr/lib'
+
+
+I think you might need --ignore-fail-on-non-empty
+option with rmdir
+
+> -}
+> -SRC_URI[md5sum] = "e0c6d76c93932f6c41c40842952495f7"
+> -SRC_URI[sha256sum] = "b64ab017305b1777e97b5b9b07b31db8aeebfc3e8719f61e8da1cf3866d344bd"
+> diff --git a/meta-oe/recipes-support/nano/nano_2.9.8.bb b/meta-oe/recipes-support/nano/nano_2.9.8.bb
+> new file mode 100644
+> index 000000000..ac5f0622b
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/nano/nano_2.9.8.bb
+> @@ -0,0 +1,8 @@
+> +include nano.inc
 > +
->  FILES_${PN} = "${sbindir}/mosquitto \
->                 ${bindir}/mosquitto_passwd \
->                 ${sysconfdir}/mosquitto \
-> @@ -79,6 +81,8 @@ FILES_${PN}-clients = "${bindir}/mosquitto_pub \
->                         ${bindir}/mosquitto_sub \
->  "
->  
-> +FILES_${PN}-examples = "${sysconfdir}/mosquitto/*.example"
-> +
->  SYSTEMD_SERVICE_${PN} = "mosquitto.service"
->  
->  INITSCRIPT_NAME = "mosquitto"
-> 
-
-Both of these look good to me, FWIW
-
-Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
-
+> +do_install_append_libc-musl () {
+> +       rm -rf ${D}${libdir}/charset.alias
+> +       rmdir ${D}${libdir}
+> +}
+> +SRC_URI[md5sum] = "31714360342f9baa344e2fa574c144db"
+> +SRC_URI[sha256sum] = "c2deac31ba4d3fd27a42fafcc47ccf499296cc69a422bbecab63f2933ea85488"
+> --
+> 2.14.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
