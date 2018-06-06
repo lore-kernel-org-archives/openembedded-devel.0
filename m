@@ -1,22 +1,46 @@
-Return-Path: <prvs=688da1830=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id D36FA6212C
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 06 Jun 2018 10:10:57 UTC
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id A319D74C63
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 09:57:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,482,1520895600"; d="scan'208";a="10703410"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180510160956.85938-1-jason.wessel@windriver.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <6bf492f0-0f73-4b58-5eab-70f5213f0963@skidata.com>
-Date: Wed, 6 Jun 2018 11:57:42 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
-MIME-Version: 1.0
-In-Reply-To: <20180510160956.85938-1-jason.wessel@windriver.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] icetea7, openjdk-8: Fix depenency to xproto -> xorgproto
+	Wed,  6 Jun 2018 10:10:57 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1fQV8S-0001Rx-DT for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jun 2018 11:53:44 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 6 Jun 2018 11:55:49 +0200
+Message-ID: <pf8av2$tp5$1@blaine.gmane.org>
+References: <CAKpvFF1BbLmk4yhas7BRcN1e3tX1AcyGbOs0EpNcxE+kBtdX-w@mail.gmail.com>
+	<20180606081240.6178-1-pn@denx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.8.0
+Openpgp: preference=signencrypt
+Autocrypt: addr=koen@dominion.thruhere.net; keydata=
+	xsDiBEIE+IMRBAD9QYy9UMeJ4dIYQFTAYXRpzMQxTh1Tn7EeXVgi1A1LQps6g2F2Opg0gkuS
+	pFsAnJWaEYphhIg5CuyDDk1AYH/PUiQp7oma/hlYoLoKe5nuQ3AY8DJnmA81IQmKQQRnE1t8
+	lLja6kzx8RiCybKS19PCAitIzzQXst9ioRoyAE/fZwCgvdgJ52+LLgonoD7/xz50DNBr8YsD
+	/AivFTC9QXeXxlw8fWWwlJXeuUXB+qDWqo4oE516uOk+SpsAzxr0AZxlNyONEjQ3xGW0CO2x
+	s3lvdWuD/r6yGIpJDionAd6SA5GeRATtPJ3F+9JYHKbqESiyDpQCZmN9/8a8zk0mWmg0DjwR
+	7yyOdvslAph0egv4Nd/ki/QqJMJkBADDTIpwtuPnSP8Sk374+e5jxLJJvhycD2WumPOtICTb
+	P9SnMPlc2uW0QyIZnecegqaOVPEMwSOmldX2cqOAewpsOT1WgSnv/rkFcBkNWimJornmno5D
+	NTNDNc9fxu3E4vC/qR9RZf89/13KMWtHQXTqvqPo+5xZ49iAItW+HC8v7M0qS29lbiBLb29p
+	IDxrb2VuQGRvbWluaW9uLmthYmVsLnV0d2VudGUubmw+wl4EExECAB4FAkIE+IMCGwMGCwkI
+	BwMCAxUCAwMWAgECHgECF4AACgkQMkyGM64RGpFGUgCfbw0AIjgkNEvdSbt3z1y89FsEakQA
+	njMQZ6q/tkf2bvmYEG+x9SOeIarIzsBNBEIE+IMQBAD023653MUqxrPwp7RDMi/fHPKcZq+7
+	N1fUhaDfVo3i+f5mgEzJPRRhGQRMncgtB2Hs9DP2HOM9RcoGnjnNRzMpUSMA60xf25MkKjeR
+	6iZWkHIU3ifUfVfFWC6zcSLQ25cFRhWoT9jE2u2czdkpHPBMMpnNqjfgoZA8Uaw3HY2lEwAD
+	BQP/RG8IFRtaRN2DsSrcWHVx/oO1TN7yeYStC0e/MDA89MLznxG6V4fhVdeiPMep3xVZmdTf
+	ASPId6sXPMhHn5aGi8rtmABC26LGO7NTUs+5339HGBPtFstedE+M2cvT/BVg88SeWZkIS1kv
+	3snth9MdAUIqmpyNqVeeKz4t3ZYVVUDCSQQYEQIACQUCQgT4gwIbDAAKCRAyTIYzrhEakZSZ
+	AJ4ou/j26LVAtQAGkX6+vASKMJz/0gCgrAMvT2jpq2Mt0Hr+1ZqbD9N48fE=
+In-Reply-To: <20180606081240.6178-1-pn@denx.de>
+Subject: Re: [PATCH] Adding support for xscreensaver-5.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,69 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 09:57:43 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
+X-List-Received-Date: Wed, 06 Jun 2018 10:10:58 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
+Content-Language: nl
 
-Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
-and
-Tested-by: Richard Leitner <richard.leitner@skidata.com>
-
-Please take this patch as otherwise the build fails with oe-core's
-current master.
-
-regards;Richard.L
-
-On 05/10/2018 06:09 PM, Jason Wessel wrote:
-> The latest oe-core has changed the X protocol header provider package
-> name.
+Op 06-06-18 om 10:12 schreef Parthiban Nallathambi:
+> - This patch enables the support for xscreensaver 5.39 version
+> - xscreensaver.service created for the system with systemd
 > 
-> Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
-> ---
->  recipes-core/icedtea/icedtea7-native.inc  | 2 +-
->  recipes-core/openjdk/openjdk-8-cross.inc  | 2 +-
->  recipes-core/openjdk/openjdk-8-native.inc | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-> index d4cf7ac..2c9fa92 100644
-> --- a/recipes-core/icedtea/icedtea7-native.inc
-> +++ b/recipes-core/icedtea/icedtea7-native.inc
-> @@ -12,7 +12,7 @@ DEPENDS = "virtual/javac-native virtual/java-native classpath-native \
->            "
->  
->  PACKAGECONFIG ??= ""
-> -PACKAGECONFIG[x11] = ",--disable-headful,libx11-native xproto-native libxt-native libxext-native libxrender-native"
-> +PACKAGECONFIG[x11] = ",--disable-headful,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
->  
->  OEMAKE_BUILD_HEADLESS_ONLY = "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'BUILD_HEADLESS_ONLY=1', d)}"
->  CFLAGS_append = "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', ' -DHEADLESS=true', d)}"
-> diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-> index d70c946..46f13fd 100644
-> --- a/recipes-core/openjdk/openjdk-8-cross.inc
-> +++ b/recipes-core/openjdk/openjdk-8-cross.inc
-> @@ -21,7 +21,7 @@ PACKAGECONFIG ??= " \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
->      gif jpeg png zlib \
->  "
-> -PACKAGECONFIG[x11] = "--with-x,,libx11 xproto libxt libxext libxrender libxtst"
-> +PACKAGECONFIG[x11] = "--with-x,,libx11 xorgproto libxt libxext libxrender libxtst"
->  PACKAGECONFIG[cups] = "--with-cups,,cups"
->  PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib"
->  
-> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-> index d674474..b782c32 100644
-> --- a/recipes-core/openjdk/openjdk-8-native.inc
-> +++ b/recipes-core/openjdk/openjdk-8-native.inc
-> @@ -10,7 +10,7 @@ DEPENDS = "\
->  SRC_URI_append += "file://handle_extra_output.patch"
->  
->  PACKAGECONFIG ??= "gif jpeg png zlib"
-> -PACKAGECONFIG[x11] = "--with-x,,libx11-native xproto-native libxt-native libxext-native libxrender-native"
-> +PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
->  PACKAGECONFIG[cups] = "--with-cups,,cups"
->  PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
->  PACKAGECONFIG[gif] = "--with-giflib=system,--with-giflib=bundled,giflib-native"
-> 
+> Signed-off-by: Parthiban Nallathambi <pn@denx.de>
+
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xscreensaver/files/xscreensaver.service
+> @@ -0,0 +1,14 @@
+> +[Unit]
+> +Description=Xscreensaver service
+> +PartOf=xserver-nodm.service
+> +After=xserver-nodm.service
+> +
+> +[Service]
+> +ExecStart=/usr/bin/xscreensaver
+
+That's a hardcoded path...
+
+> +Environment="DISPLAY=:0"
+
+> diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+> new file mode 100644
+> index 000000000..6b17f9b09
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+
+> +do_install_append() {
+> +    install -D ${WORKDIR}/xscreensaver.service ${D}${systemd_unitdir}/system/xscreensaver.service
+> +}
+
+...which you'll need to fixup here
+
 
