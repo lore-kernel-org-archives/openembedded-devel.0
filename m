@@ -1,48 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 48E1374BBC
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EDCE074BBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jun 2018 17:13:15 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id p11-v6so13422506wmc.4
+	Wed,  6 Jun 2018 17:14:23 +0000 (UTC)
+Received: by mail-qt0-f178.google.com with SMTP id y20-v6so7149681qto.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jun 2018 10:13:16 -0700 (PDT)
+	Wed, 06 Jun 2018 10:14:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ODG35Zkv5JSu6fqm16DwPuXHYaI2QC41z8soNLZ7wJQ=;
-	b=PNHZoF19bc5fudhbOGLr8YviERbZQRL/4aCt9n9Gt9z60Qe5L5tl1H1cVC2ICJTKWs
-	aKyHU4m2oHJlE/YICqs+L0Zpuo1EB+StkrnDqRcosy7PkxH3Ra5VoxaOl8exln2doumF
-	0GFTRxoE3L5AX6Vk5a6GH8AxTggG7z6vogH/Kx0S1yAluh4oC1PPn9qDV34hum5m1inE
-	rnrHXcTlQK4D5zdMh+LP75deNXX4QYGl32aJvhu6C9Yc3TRWq13uOor7WFD9Xqj/vq0Y
-	9OSgy4XmvAMVqywWYpjidj5RmGk3Wb34NPyBL4VNkM+oS4IDsnyY6Qoayq6x5nebfg+f
-	W1nw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=k9U3kJ58/0gbaaigZdfY69b+V7EAEdEOmSKR5mI71QI=;
+	b=mV3xbe+zlzCDeKPF2buSLfzz+ALMnaDz1kBUkWfxrXJ3+BBoC1QFQWwxQrECAyCxtO
+	7yKRcO8KyQzquBvkvLUxnCYgBZuhj4JQBsQNaW0owqbxRJiqNTEz3ccUodUaw1ChEWCv
+	Vg5R4YACSNwGplr1Q1iU4OGbKKPiAqoZmCWDmLFWzc59hLNgFJeaqCc+nZks11Mlij6o
+	7N/HM4O0Z/+nAfKc9dIsZgRjjjay4Yb3kesm93nJrZTYSLNqvzyErOlctbq411NX6Cnv
+	vDWmkr7LfZYlKGKNWSW3SEml6wA1shSfgIfEgp4Ul2rtS+ebFYreKvdU1JuqKWHkmrFW
+	S0xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=ODG35Zkv5JSu6fqm16DwPuXHYaI2QC41z8soNLZ7wJQ=;
-	b=lz9de1R2WaBw1werIC5bB+2bcxZTt9t4xfVr9+RhfH+TB8PVRcUrGg5vWmlEmcgzci
-	q2s2Af35pgjfVfULSi6IgvUJYK+YEazE5muCpl8hzwcQDniB3LV5KAK850jufy1b1XW7
-	q9cE0zJHc/R1tpbFa8k2Dj3PtIO53J/xvyQxspFoACRf/GHlW6Lj0uFHDdA/GuMVMOBa
-	UbuBA596IFdrifDI3h2rX8z9evSAvYn6aXSk1prNjbXujkMD3dmJ/FUKu9tdJV+8ehhr
-	uL6mnPumb/5/9l2UupVT1UzY31AVlkgUeApbzlVqamjZRNPjz2IRWqh65iapf40xcyAf
-	Q0Tg==
-X-Gm-Message-State: APt69E2UYcr3n7Dy8pmvBZAH1VufUlmfn19+xdMzq/4iLfZI72xIlgKP
-	WItHS+s3djn1ATySidKqsHNeYz1/ttXthBobaJs=
-X-Google-Smtp-Source: ADUXVKLTeYu3HBhAEu5xufZh4oA7xVRhVngHriTuzEQ25QcrrbVGu8y38hLvwPD0XhDd0dSgjlEWCKGiYK1SNLX1RFA=
-X-Received: by 2002:a1c:8c55:: with SMTP id
-	o82-v6mr1099470wmd.60.1528305195912; 
-	Wed, 06 Jun 2018 10:13:15 -0700 (PDT)
+	bh=k9U3kJ58/0gbaaigZdfY69b+V7EAEdEOmSKR5mI71QI=;
+	b=ISCJjBvVlvy/2u4tGYjNZu8I9lVyTT4Uy9fSw95Dybo5AAamScFeiXmaPx7lX7KYnn
+	IEHsiAtqxjTrHYOEqrjpHhQ+7J1f48g9qUunqFo/tgLt/wPc08O5SJ19yWUgTL8w/4K9
+	JyGG7z1naKbuDA1l8yFhMUXyMRoYBcfxxe6C2klJ5tTgek3QzNqH/wQzKaJRVaXTGWOh
+	WnEnj9I3FdD1fBWZICqRNo2UHTxMaFQLA//lpN8qlZOrNDlk8tQMJ1TSotehwYwU2jf9
+	65c+cKLQM1gYOZB0aZNl12MDPxG0bOFZI1vnpHBbqXyvCv5H1pEhv+9rCOdqvASmZniF
+	0rtg==
+X-Gm-Message-State: APt69E3uqUTxthfWa2JdpB/I92nnAbnWFoicJs0rctcBU0tHLq+rHqhg
+	QHs9XLrKnSuJSrUJxAfuelW0Kw/B+aJBaNy9eYI=
+X-Google-Smtp-Source: ADUXVKJncm8VxLWQRJ9lQFhaHfn9aP2ugbgLca2tAyhhFJvCiez3euJF2R8JKBH/NcFGviyOaKOEtkFAvFkvObfpJl8=
+X-Received: by 2002:ac8:70c9:: with SMTP id
+	g9-v6mr3694698qtp.376.1528305264711; 
+	Wed, 06 Jun 2018 10:14:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180604223911.14561-1-schnitzeltony@gmail.com>
-	<CALbNGRSg8kYPO6x_jgXtK9Gi1gQDX7v4KbpTWVaWAQCEc=NXSg@mail.gmail.com>
-In-Reply-To: <CALbNGRSg8kYPO6x_jgXtK9Gi1gQDX7v4KbpTWVaWAQCEc=NXSg@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 6 Jun 2018 19:13:04 +0200
-Message-ID: <CA+chaQcz=Ckh2=zSUBi969N-v7dJG-K2F1OXLxtnG8JLUahXYQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtwebkit: do not skip build - use cmake as build system
+Received: by 2002:a0c:e486:0:0:0:0:0 with HTTP;
+	Wed, 6 Jun 2018 10:13:54 -0700 (PDT)
+In-Reply-To: <CAKpvFF1BbLmk4yhas7BRcN1e3tX1AcyGbOs0EpNcxE+kBtdX-w@mail.gmail.com>
+References: <CAKpvFF1BbLmk4yhas7BRcN1e3tX1AcyGbOs0EpNcxE+kBtdX-w@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Jun 2018 10:13:54 -0700
+Message-ID: <CAMKF1spQ5vRByvaOh6XYj7AUzMyPdQGw19=TQTtsFtLCu1BH8A@mail.gmail.com>
+To: Stefano Gurrieri <gurrieristefano@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: xscreensaver yocto recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,65 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jun 2018 17:13:15 -0000
+X-List-Received-Date: Wed, 06 Jun 2018 17:14:24 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Thanks Andreas for taking care of this, I was planing to look at it later
-and then I forgot about it when I wanted to push first 5.11 recipes.
+it seems its using -L/usr/lib which is causing cross compiler to emit
+host target contamination warnings. You probably want to make sure
+that these recipes are
+ported over to work well with new layered model of OE, since they have been
+part of classic OE they might need some love.
 
-With gcc8 I see small issue:
-http://errors.yoctoproject.org/Errors/Details/179245/
-
-In fedora they just added -fpermissive in:
-https://bugzilla.redhat.com/show_bug.cgi?id=3D1582954
-
-Are you interested in fixing it properly? I don't use qtwebkit
-anywhere (switched
-to qtwebengine long time ago), so I don't mind adding -fpermissive as well.
-
-On Tue, Jun 5, 2018 at 1:23 AM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+On Wed, Jun 6, 2018 at 12:02 AM, Stefano Gurrieri
+<gurrieristefano@gmail.com> wrote:
+> Good morning,
 >
-wrote:
-
-> On Tue, Jun 5, 2018 at 12:39 AM, Andreas M=C3=BCller <schnitzeltony@gmail=
-.com>
-> wrote:
-> > log.do_configure says:
-> >
-> > | The WebKit build was disabled for the following reasons:
-> > |     * cross-compilation of QtWebKit with qmake is not supported yet
-> > |    * Missing cmake from PATH
-> > |    * Using cmake version , but at least cmake 2.8.12 is required to
-> build QtWebKit.
-> >
-> > and build was finished without errors (but surprisingly fast). Looking
-> into
-> > qtwebkit, it seems they have changed to cmake build system and
-> Webkit.pro is
-> > just a wrapper for preparing and running cmake.
-> >
-> > For the transition the packageconfigs were translated as close as
-> possible.
-> > 'libxcomposite' and 'libxrender' were merged to 'x11' - there is only o=
-ne
-> > option 'ENABLE_X11_TARGET' available for both.
-> >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > ---
-> >  .../0001-Do-not-skip-build-for-cross-compile.patch | 31 +++++++++++++
-> >  recipes-qt/qt5/qtwebkit_git.bb                     | 51
-> ++++++++++------------
-> >  2 files changed, 54 insertions(+), 28 deletions(-)
-> >  create mode 100644
-> recipes-qt/qt5/qtwebkit/0001-Do-not-skip-build-for-cross-compile.patch
-> >
-> Cannot see (yet) what's wrong with this patch but now qtquick1 fails with=
-:
+> I'd like to using a XScreenSaver program on my Linux embedded console (based
+> on i.MX6 solo) with X11.
 >
-> | error: QGraphicsWebView: No such file or directory
+> I didn't find any recipe under Yocto (currently I'm using Yocto Morty)
+> except this old recipe (2010) in openembedded no more maintained (maybe).
+> Below the link:
+> http://cgit.openembedded.org/openembedded/tree/recipes/xscreensaver?id=44985d56bc556786812a0a02d6219afd31a7381d
 >
-> Andreas
+> So that, I'm trying to use the version 5.07 in my Yocto project, but during
+> the configure I see the error below:
+>
+> ERROR: xscreensaver-5.07-r0 do_configure: This autoconf log indicates
+> errors, it looked at host include and/or library paths while determining
+> system capabilities.
+>
+> In attachment, you can find config.log
+>
+>
+> Someone, could help me?
+> Possibly, does some other similar program exist under Yocto?
+>
+> Thank you.
+> KR
+> Stefano
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
