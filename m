@@ -1,28 +1,73 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B63AE78797
+Return-Path: <prvs=68935beb6=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 00D1A74520
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 14:15:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w57EECTU028629
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 7 Jun 2018 07:14:33 -0700
-Received: from yow-masselst-lx1.localnet (128.224.60.223) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.399.0; Thu, 7 Jun 2018 07:14:07 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: Mario Domenech Goulart <mario@parenteses.org>
-Date: Thu, 7 Jun 2018 10:14:06 -0400
-Message-ID: <2083956.6snNDxpooL@yow-masselst-lx1>
-Organization: Wind River
-In-Reply-To: <871sdiofg8.fsf@parenteses.org>
+	Thu,  7 Jun 2018 14:32:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,486,1520895600"; d="scan'208";a="10732261"
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<2060465.T9NCAC9bbY@yow-masselst-lx1>
-	<871sdiofg8.fsf@parenteses.org>
+	<20180606204244.GA16170@mail.itconsulting-heinold.de>
+	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
+	<20180607132234.GA19704@mail.itconsulting-heinold.de>
+	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
+	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
+Date: Thu, 7 Jun 2018 16:32:36 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	openembedded-devel@lists.openembedded.org
+In-Reply-To: <CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: Mark Asselstine <mark.asselstine@windriver.com>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>
 Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -36,52 +81,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 14:15:37 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 07 Jun 2018 14:32:27 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Thursday, June 7, 2018 10:10:15 AM EDT Mario Domenech Goulart wrote:
-> On Wed, 6 Jun 2018 09:31:27 -0400 Mark Asselstine 
-<mark.asselstine@windriver.com> wrote:
-> > On Wednesday, June 6, 2018 3:38:25 AM EDT Mario Domenech Goulart wrote:
-> >> Hi Mark and all,
-> >> 
-> >> On Tue, 5 Jun 2018 11:11:26 -0400 Mark Asselstine 
-<mark.asselstine@windriver.com> wrote:
-> >> > Several of us have noticed that nothing has been merged to meta-java
-> >> > since
-> >> > mid-April (roughly 8 weeks ago). With about a dozen commits sent to the
-> >> > list and pending merges I thought I might email you, the maintainers,
-> >> > directly to determine if this is expected to continue. Should we be
-> >> > looking to update the maintainers list and/or recruiting new people to
-> >> > restore the vitality of this repo? Have your roles or positions changed
-> >> > making it no longer viable for you to contribute to this repo?
-> >> > 
-> >> > Thanks in advance for your responses.
-> >> 
-> >> I haven't been actively maintaining meta-java.  Unfortunately I don't
-> >> have time to work on it anymore.  Sorry about that.
-> >> 
-> >> Attached is a patch to remove myself from the list of maintainers.
-> > 
-> > Thanks for your time and work while you were a maintainer and good luck in
-> > your new adventure.
+On 06/07/2018 03:56 PM, Otavio Salvador wrote:
+> On Thu, Jun 7, 2018 at 10:53 AM, Richard Leitner
+> <richard.leitner@skidata.com> wrote:
+> ....
+>> As I'm using this layer now for quite a few years I'll be glad to help you with
+>> the maintainership of meta-java. Nonetheless I have to admit that I have no
+>> experience in maintaining an openembedded layer ;-)
+>>
+>> Therefore if you're still interested I'd have some questions regarding the
+>> "strategic" targets, workflows and stuff like that...
 > 
-> Thanks, Mark.  Appreciated.
+> Awesome, new energy!
 > 
-> I must say the credits should go to O.S. Systems too, as they actually
-> supported the work.
-
-Definitely. The orgs that actively encourage and support their employees time 
-for these endevours should always be commended. It is win win win.
-
-Mark
-
+> Sure, go ahead and ask :-D
 > 
-> All the best.
-> Mario
+
+Thanks :-)
+
+So here are some question that currently came to my mind:
+
+ * do you use some kind of patch management software (like patchwork)?
+
+ * are there any "quality gate tests" for patches being applied to master or stable branches?
+
+ * is there something like a build/test robot for patches and/or branches?
+
+ * should we use the master-next branch for staging new patches?
+
+ * is there a reason for not having OpenJDK >8 recipes?
+
+ * if the above is answered with something like "because nobody submitted them": Should we try to follow the current OpenJDK release model (a feature release every six month)?
+
+ * based on what scheduling are the stable branches created? Yocto Project release dates I guess?
+
+ * what kind of patches should be applied/backported to the stable branches?
 
 
+I think that's all for now (but presumably some more question will follow during the next weeks) ;-)
 
-
+regards;Richard.L
 
