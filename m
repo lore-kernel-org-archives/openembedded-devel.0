@@ -1,68 +1,29 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f47.google.com (mail-oi0-f47.google.com
-	[209.85.218.47])
-	by mail.openembedded.org (Postfix) with ESMTP id CCC18787C1
+Return-Path: <mario@parenteses.org>
+Received: from mx1.mailbox.org (mx1.mailbox.org [80.241.60.212])
+	by mail.openembedded.org (Postfix) with ESMTP id 81F086FFA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 13:56:36 +0000 (UTC)
-Received: by mail-oi0-f47.google.com with SMTP id d5-v6so8678712oib.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jun 2018 06:56:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=EfjoByAJUwnE8slx4scua5mFk7UKMS0R1/XuszPf6F8=;
-	b=woarswDJ07kWLkrY83vpbp1ZqJ1uyHdh6n67qo0BzXbOdhotn7pS9rZu8v7UcoN+FF
-	OUTA41+eIXUsw/QXPM0egpR5WgLThGU662TV1TYYMm3hmV2VNlEyKzgmwb0wZQf4IxBi
-	ALdOelNRTJAR4HCH+8uPS7r4hfDV7Qy/T13eMUWGRc1cMGKDuJ+CDaVkobN6AShZc9HU
-	U+jU6u9ij78t13lSUjd8XlLnH3sHUMO/EkNfT9AY+WpINpz9wZnAoZYtI88V5cI+/+2P
-	DyieEaHAvToUDRbANsqD4uWch0tk53R8ftcHeS0Vu/XwLEfj2/EYcntgINEj+lJG9gTo
-	B/ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=EfjoByAJUwnE8slx4scua5mFk7UKMS0R1/XuszPf6F8=;
-	b=cpBFFtoTYIucZs4S20VZkndMIZfFCOvGp8ZO/nX228wQPy27INXPgOV3b0te/4LOib
-	zIptlp0T5+JEDaB9S04FGUBNIuMW6rb+tJmw89cPzLrFxvulqrXFY5m50klNvhBGaJzy
-	+tqcm0gILFIg0Z63RUiVvYos8ytQC8vsbWM8H5zs0ynNMumxOAKKdpkg9vnmVELPiFRT
-	8W9HZ8fd9UA6jOSCHGK1cFntoubL1ZHBQ2cxfGAmZlDM8X4J5BrZ8YxvG6dUobjz2aFr
-	UmbnndA4xuYxKlmazXS79J+L7+CSQ8KfHCq2fZGccy7LYI69GnLPQ4i5Rqbno1lMAuJ1
-	8uig==
-X-Gm-Message-State: APt69E18M4HjaiY1YwVRIZTLAGuODWfVC8N7/Ofq1K+GtAravGv6IOr6
-	RdIi1HiG1RY34AokId7afDP7C87t
-X-Google-Smtp-Source: ADUXVKJpYoftZSkD0/TqTKZwnW+98otLsXBgw/S5MT6xmnufvw/1cqEKVxXgkE90hsDFkUM4c+1KtQ==
-X-Received: by 2002:aca:30a:: with SMTP id 10-v6mr860571oid.280.1528379797283; 
-	Thu, 07 Jun 2018 06:56:37 -0700 (PDT)
-Received: from mail-ot0-f178.google.com (mail-ot0-f178.google.com.
-	[74.125.82.178]) by smtp.gmail.com with ESMTPSA id
-	v141-v6sm13352273oie.34.2018.06.07.06.56.35
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Jun 2018 06:56:36 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ot0-f178.google.com with SMTP id n3-v6so11617445ota.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jun 2018 06:56:35 -0700 (PDT)
-X-Received: by 2002:a9d:627:: with SMTP id 36-v6mr976745otn.168.1528379795402; 
-	Thu, 07 Jun 2018 06:56:35 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a9d:58c5:0:0:0:0:0 with HTTP;
-	Thu, 7 Jun 2018 06:56:34 -0700 (PDT)
-In-Reply-To: <91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
+	Thu,  7 Jun 2018 14:10:19 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [80.241.60.241])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mx1.mailbox.org (Postfix) with ESMTPS id A12FE46478;
+	Thu,  7 Jun 2018 16:10:19 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from smtp2.mailbox.org ([80.241.60.241])
+	by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+	[80.241.56.116]) (amavisd-new, port 10030)
+	with ESMTP id bengHmT2H3Ly; Thu,  7 Jun 2018 16:10:17 +0200 (CEST)
+From: Mario Domenech Goulart <mario@parenteses.org>
+To: Mark Asselstine <mark.asselstine@windriver.com>
 References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<20180606204244.GA16170@mail.itconsulting-heinold.de>
-	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
-	<20180607132234.GA19704@mail.itconsulting-heinold.de>
-	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
-Date: Thu, 7 Jun 2018 10:56:34 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
-Message-ID: <CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
-To: Richard Leitner <richard.leitner@skidata.com>
+	<87d0x4nz4e.fsf@parenteses.org> <2060465.T9NCAC9bbY@yow-masselst-lx1>
+Date: Thu, 07 Jun 2018 16:10:15 +0200
+In-Reply-To: <2060465.T9NCAC9bbY@yow-masselst-lx1> (Mark Asselstine's message
+	of "Wed, 6 Jun 2018 09:31:27 -0400")
+Message-ID: <871sdiofg8.fsf@parenteses.org>
+MIME-Version: 1.0
 Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Mark Asselstine <mark.asselstine@windriver.com>,
-	Mario Domenech Goulart <mario@ossystems.com.br>
+	openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -76,25 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 13:56:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 07 Jun 2018 14:10:19 -0000
+Content-Type: text/plain
 
-On Thu, Jun 7, 2018 at 10:53 AM, Richard Leitner
-<richard.leitner@skidata.com> wrote:
-....
-> As I'm using this layer now for quite a few years I'll be glad to help you with
-> the maintainership of meta-java. Nonetheless I have to admit that I have no
-> experience in maintaining an openembedded layer ;-)
+On Wed, 6 Jun 2018 09:31:27 -0400 Mark Asselstine <mark.asselstine@windriver.com> wrote:
+
+> On Wednesday, June 6, 2018 3:38:25 AM EDT Mario Domenech Goulart wrote:
+>> Hi Mark and all,
+>> 
+>> On Tue, 5 Jun 2018 11:11:26 -0400 Mark Asselstine <mark.asselstine@windriver.com> wrote:
+>> > Several of us have noticed that nothing has been merged to meta-java since
+>> > mid-April (roughly 8 weeks ago). With about a dozen commits sent to the
+>> > list and pending merges I thought I might email you, the maintainers,
+>> > directly to determine if this is expected to continue. Should we be
+>> > looking to update the maintainers list and/or recruiting new people to
+>> > restore the vitality of this repo? Have your roles or positions changed
+>> > making it no longer viable for you to contribute to this repo?
+>> > 
+>> > Thanks in advance for your responses.
+>> 
+>> I haven't been actively maintaining meta-java.  Unfortunately I don't
+>> have time to work on it anymore.  Sorry about that.
+>> 
+>> Attached is a patch to remove myself from the list of maintainers.
 >
-> Therefore if you're still interested I'd have some questions regarding the
-> "strategic" targets, workflows and stuff like that...
+> Thanks for your time and work while you were a maintainer and good luck in 
+> your new adventure.
 
-Awesome, new energy!
+Thanks, Mark.  Appreciated.
 
-Sure, go ahead and ask :-D
+I must say the credits should go to O.S. Systems too, as they actually
+supported the work.
 
+All the best.
+Mario
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+http://parenteses.org/mario
 
