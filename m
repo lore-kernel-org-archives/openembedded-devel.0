@@ -1,38 +1,29 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 33A00785B3
+Return-Path: <andrej.valek@siemens.com>
+X-Greylist: delayed 911 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 07 Jun 2018 13:36:46 UTC
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 1600C7707B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 13:22:42 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 52477679C0B9;
-	Thu,  7 Jun 2018 15:22:43 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id ED298679C0B7;
-	Thu,  7 Jun 2018 15:22:41 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham autolearn_force=no version=3.4.0
-Received: from mail.itconsulting-heinold.de (x4db4fc47.dyn.telefonica.de
-	[77.180.252.71]) by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Thu,  7 Jun 2018 15:22:41 +0200 (CEST)
-Date: Thu, 7 Jun 2018 15:22:34 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <20180607132234.GA19704@mail.itconsulting-heinold.de>
-References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<20180606204244.GA16170@mail.itconsulting-heinold.de>
-	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
-MIME-Version: 1.0
-In-Reply-To: <fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: Re: [meta-java] maintainer status
+	Thu,  7 Jun 2018 13:36:46 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id w57DLanp012258
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 7 Jun 2018 15:21:36 +0200
+Received: from dev.vm6.ccp.siemens.com ([163.242.57.90])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id w57DLa4P021303;
+	Thu, 7 Jun 2018 15:21:36 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 1972498F579;
+	Thu,  7 Jun 2018 15:21:36 +0200 (CEST)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Jun 2018 15:21:07 +0200
+Message-Id: <20180607132109.23396-3-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20180607132109.23396-1-andrej.valek@siemens.com>
+References: <20180607132109.23396-1-andrej.valek@siemens.com>
+Subject: [meta-oe][PATCH 2/3] syslog-ng: update to 3.15.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,44 +36,208 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 13:22:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Jun 2018 13:36:47 -0000
 
-On Thu, Jun 07, 2018 at 07:44:51AM +0200, Richard Leitner wrote:
-> 
-> On 06/06/2018 10:42 PM, Henning Heinold wrote:
-> > On Tue, Jun 05, 2018 at 11:11:26AM -0400, Mark Asselstine wrote:
-> >> Several of us have noticed that nothing has been merged to meta-java since 
-> >> mid-April (roughly 8 weeks ago). With about a dozen commits sent to the list 
-> >> and pending merges I thought I might email you, the maintainers, directly to 
-> >> determine if this is expected to continue. Should we be looking to update the 
-> >> maintainers list and/or recruiting new people to restore the vitality of this 
-> >> repo? Have your roles or positions changed making it no longer viable for you 
-> >> to contribute to this repo?
-> >>
-> >> Thanks in advance for your responses.
-> >>
-> >> Mark
-> > 
-> > Hi Mark,
-> > 
-> > if the situation is that bad, I can take over some reviews, but my time
-> > is limited too and I can not run builds by myself, because of lacking
-> > ressources.
-> 
-> Thank you Henning!
-> 
-> As long as there are not too many patches coming in I can run the builds
-> and do some testing of openjdk 7 & 8 for armhf on hardware and of course
-> qemu if that helps?
-> 
-> regards;Richard.L
+ - Refresh and remove obsolete patches
+ - Version 3.15.1 supports OpenSSL 1.1
 
-Hi,
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+---
+ ...ry-leak-problem-when-HAVE_ENVIRON-defined.patch | 29 -----------------
+ ...c-add-option-enable-thread-tls-to-manage-.patch | 16 ++++-----
+ .../recipes-support/syslog-ng/files/syslog-ng.conf |  2 +-
+ .../syslog-ng.service-the-syslog-ng-service.patch  | 38 +++++++++++++++-------
+ .../recipes-support/syslog-ng/syslog-ng_3.15.1.bb  | 10 ++++++
+ .../recipes-support/syslog-ng/syslog-ng_3.8.1.bb   | 11 -------
+ 6 files changed, 45 insertions(+), 61 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
 
-yes that would help a lot and beside that I would ask you to become a maintainer
-too, if it is possible.
+diff --git a/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch b/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+deleted file mode 100644
+index 5d481f232..000000000
+--- a/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-Fix the memory leak problem when HAVE_ENVIRON is defined
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+----
+-Index: syslog-ng-3.8.1/lib/gprocess.c
+-===================================================================
+---- syslog-ng-3.8.1.orig/lib/gprocess.c
+-+++ syslog-ng-3.8.1/lib/gprocess.c
+-@@ -1432,6 +1432,18 @@ g_process_startup_ok(void)
+- void
+- g_process_finish(void)
+- {
+-+#ifdef HAVE_ENVIRON
+-+  int i = 0;
+-+
+-+  while (environ[i]) {
+-+    g_free(environ[i]);
+-+    ++i;
+-+  }
+-+  if (environ)
+-+    g_free(environ);
+-+  if (process_opts.argv_orig)
+-+    free(process_opts.argv_orig);
+-+#endif
+-   g_process_remove_pidfile();
+- }
+- 
+diff --git a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch b/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+index c172e4e74..4f8a3d077 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+@@ -10,21 +10,21 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  configure.ac | 17 +++++++++++------
+  1 file changed, 11 insertions(+), 6 deletions(-)
+ 
+-Index: syslog-ng-3.8.1/configure.ac
++Index: syslog-ng-3.15.1/configure.ac
+ ===================================================================
+---- syslog-ng-3.8.1.orig/configure.ac
+-+++ syslog-ng-3.8.1/configure.ac
+-@@ -147,6 +147,9 @@ AC_ARG_ENABLE(gprof,
++--- syslog-ng-3.15.1.orig/configure.ac
+++++ syslog-ng-3.15.1/configure.ac
++@@ -190,6 +190,9 @@ AC_ARG_ENABLE(gprof,
+  AC_ARG_ENABLE(memtrace,
+                [  --enable-memtrace   Enable alternative leak debugging code.])
+  
+ +AC_ARG_ENABLE(thread-tls,
+-+              [  --enable-thread-tls        Enable Thread Transport Layer Security support.],,enable_thread_tls="no")
+++              [  --enable-thread-tls        Enable Thread Local Storage support.],,enable_thread_tls="no")
+ +
+  AC_ARG_ENABLE(dynamic-linking,
+                [  --enable-dynamic-linking        Link everything dynamically.],,enable_dynamic_linking="auto")
+  
+-@@ -486,12 +489,14 @@ dnl ************************************
++@@ -591,12 +594,14 @@ dnl ***************************************************************************
+  dnl Is the __thread keyword available?
+  dnl ***************************************************************************
+  
+@@ -33,14 +33,14 @@ Index: syslog-ng-3.8.1/configure.ac
+ -__thread int a;
+ -]],
+ -[a=0;])],
+--[ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Transport Layer Security is supported by the system")])
++-[ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Thread Local Storage is supported by the system")])
+ +if test "x$enable_thread_tls" != "xno"; then
+ +    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+ +    [[#include <pthread.h>
+ +    __thread int a;
+ +    ]],
+ +    [a=0;])],
+-+    [ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Transport Layer Security is supported by the system")])
+++    [ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Thread Local Storage is supported by the system")])
+ +fi
+  
+  dnl ***************************************************************************
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+index 0c6f54355..fb183ee17 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+@@ -1,4 +1,4 @@
+-@version: 3.8
++@version: 3.15
+ #
+ # Syslog-ng configuration file, compatible with default Debian syslogd
+ # installation. Originally written by anonymous (I can't find his name)
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+index 6b30c20c1..dc2ba167a 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+@@ -7,25 +7,39 @@ Subject: [PATCH] syslog-ng.service: the syslog-ng service can not start
+ Upstream-Status: pending
+ 
+ Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++Updated-by: Andrej Valek <andrej.valek@siemens.com>
+ ---
+  contrib/systemd/syslog-ng.service | 5 ++---
+  1 file changed, 2 insertion(+), 3 deletions(-)
+ 
+-diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
+-index fc16f8d..8e09deb 100644
+---- a/contrib/systemd/syslog-ng.service
+-+++ b/contrib/systemd/syslog-ng.service
+-@@ -4,8 +4,8 @@ Description=System Logger Daemon
+- 
+- [Service]
++diff --git a/contrib/systemd/syslog-ng@.service b/contrib/systemd/syslog-ng@.service
++index a28640e..93aec94 100644
++--- a/contrib/systemd/syslog-ng@.service
+++++ b/contrib/systemd/syslog-ng@.service
++@@ -7,8 +7,8 @@ Conflicts=emergency.service emergency.target
+  Type=notify
+--ExecStart=/usr/sbin/syslog-ng -F $SYSLOGNG_OPTS
++ EnvironmentFile=-/etc/default/syslog-ng@%i
++ EnvironmentFile=-/etc/sysconfig/syslog-ng@%i
++-ExecStart=/usr/sbin/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+ -ExecReload=/bin/kill -HUP $MAINPID
+-+ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslogd.pid
+++ExecStart=@SBINDIR@/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+ +ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
+- EnvironmentFile=-/etc/default/syslog-ng
+- EnvironmentFile=-/etc/sysconfig/syslog-ng
+  StandardOutput=journal
++ StandardError=journal
++ Restart=on-failure
++diff --git a/contrib/systemd/syslog-ng@default b/contrib/systemd/syslog-ng@default
++index 02da288..3a8215d 100644
++--- a/contrib/systemd/syslog-ng@default
+++++ b/contrib/systemd/syslog-ng@default
++@@ -1,5 +1,5 @@
++ CONFIG_FILE=/etc/syslog-ng.conf
++-PERSIST_FILE=/var/lib/syslog-ng/syslog-ng.persist
++-CONTROL_FILE=/var/lib/syslog-ng/syslog-ng.ctl
++-PID_FILE=/var/run/syslog-ng.pid
+++PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
+++CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
+++PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
++ OTHER_OPTIONS="--enable-core"
++
+ -- 
+ 1.8.4.2
+-
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+new file mode 100644
+index 000000000..e6a214ced
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+@@ -0,0 +1,10 @@
++require syslog-ng.inc
++
++SRC_URI += " \
++    file://fix-config-libnet.patch \
++    file://fix-invalid-ownership.patch \
++    file://syslog-ng.service-the-syslog-ng-service.patch \
++"
++
++SRC_URI[md5sum] = "da59a65cd5e293ec0fa3d3ecf4984af9"
++SRC_URI[sha256sum] = "a2dabd28674e2b558e4fb92484ad111d77bf7150070aa28556827130b479f9ef"
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
+deleted file mode 100644
+index 91a0e4699..000000000
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require syslog-ng.inc
+-
+-SRC_URI += " \
+-    file://fix-config-libnet.patch \
+-    file://fix-invalid-ownership.patch \
+-    file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
+-    file://syslog-ng.service-the-syslog-ng-service.patch \
+-"
+-
+-SRC_URI[md5sum] = "acf14563cf5ce435db8db35486ce66af"
+-SRC_URI[sha256sum] = "84b081f6e5f98cbc52052e342bcfdc5de5fe0ebe9f5ec32fe9eaec5759224cc5"
+-- 
+2.11.0
 
-Bye Henning
 
