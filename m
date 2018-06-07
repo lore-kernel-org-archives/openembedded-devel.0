@@ -1,26 +1,50 @@
-Return-Path: <Wenlin.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E1F02782EC
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-ot0-f195.google.com (mail-ot0-f195.google.com
+	[74.125.82.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 37E33752EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 09:25:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w579PB34022020
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  7 Jun 2018 09:32:21 +0000 (UTC)
+Received: by mail-ot0-f195.google.com with SMTP id 101-v6so10740675oth.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Jun 2018 02:25:26 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.399.0;
-	Thu, 7 Jun 2018 02:25:01 -0700
-From: Wenlin Kang <wenlin.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Jun 2018 02:24:59 -0700
-Message-ID: <20180607092459.33931-2-wenlin.kang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20180607092459.33931-1-wenlin.kang@windriver.com>
-References: <20180607092459.33931-1-wenlin.kang@windriver.com>
+	Thu, 07 Jun 2018 02:32:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:cc; 
+	bh=lJVk/2iJvGjDAmPHsFQQAqK1ouEOkgea2DofY/Rk6eM=;
+	b=lcC058DY/ySVItQHdDmUU/V+yr/r1P3deD8VesO3a87VFQqNXf+00KViT/f626cRVh
+	HKrabrVVqur3zPbAPWOCVFxYNJ+q1QNYqhoatl7FJDRiK7PNLvcOjOCR3n3fQ3RBvHkg
+	M5bqsezeq2EKfjyKbJMc4dkcOgibwG6eGFhjBn43FmRwi2Fn5T1qw8MT9yoB6dt7wWB+
+	NQhwvh/R/B9nWw0J9dPdf8LE4D8lb45NcPeWZaFNIYSo/R1tW7gM+vQwbZZDRMEnaRy/
+	OYYY44x1Df+BlOy9H5AwCgPMHCrlKC8aC7XY3rM6mBCZiJZh/WmER4tjFuEl1Ph/mdkF
+	a8XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:cc;
+	bh=lJVk/2iJvGjDAmPHsFQQAqK1ouEOkgea2DofY/Rk6eM=;
+	b=rg10NcZsEA6UBjMPuDtxIpiYvNExBlA9VnksrzRN0Lw2Wge2ltMwZpvw54/G3CSGnh
+	BvigJAD5Jykef2sOsJLHEOFxon0HznpiWG4ew9ovC/XgxQSS8D73lOnlHeKXCo8ZuQVy
+	OL9l7XROLjx8qHAwSq5YzciZ1YBpKOEAikosCwreMEH5VAMVPJClcudJI1p/J+xjkcf+
+	pgAPG18Om/bDZJ5YHgop004fyLakGhGSMzGY+8dNkaqOTYXc/iqKuIk1gzg2uKZMIucx
+	yB5X6rItmngInbNOycGgZJWrz20aeHCp3zeE60GkpS4tFvAvmx5cdD53EVID7qRfkhPP
+	dqnA==
+X-Gm-Message-State: APt69E0hnfwsUCwzoBVWS6CLyQcXdWzXGhqulqfftkoZCVY1R0hTClDc
+	JuUMKSLy9cQosfT8MLspYnImNNQ7ayIKHmHHODA=
+X-Google-Smtp-Source: ADUXVKI7wP8D9jLIbSItnaLPk02Mipfe02y2ZWC1cmV1JolhmcKjGv9AkWGqQkHwm4Farm1zzVMX+zlIEMJVpN/6fU8=
+X-Received: by 2002:a9d:4a63:: with SMTP id
+	d32-v6mr634725otj.194.1528363942032; 
+	Thu, 07 Jun 2018 02:32:22 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 2/2] openjdk-8: combine the -dbg package
+Received: by 2002:a9d:5f8d:0:0:0:0:0 with HTTP;
+	Thu, 7 Jun 2018 02:32:01 -0700 (PDT)
+In-Reply-To: <5113980.YQSFpsKea5@peggleto-mobl.ger.corp.intel.com>
+References: <20180605133909.11319-1-nick83ola@gmail.com>
+	<20180605133909.11319-2-nick83ola@gmail.com>
+	<5113980.YQSFpsKea5@peggleto-mobl.ger.corp.intel.com>
+From: nick83ola <nick83ola@gmail.com>
+Date: Thu, 7 Jun 2018 10:32:01 +0100
+Message-ID: <CABPh3UMQ8uhWpxiX-zqQ4XjaMrPfPfBhRKQ=aJW=TjjH-+jULA@mail.gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/2] mosquitto: add mosquitto-examples package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,54 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 09:25:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Jun 2018 09:32:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-One recipe should only have one -dbg package, because OE only picks
-up all .debug file into the last one -dbg package listed in variable
-PACKAGES.
+ping
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
----
- recipes-core/openjdk/openjdk-8_16xbyy.bb | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
-
-diff --git a/recipes-core/openjdk/openjdk-8_16xbyy.bb b/recipes-core/openjdk/openjdk-8_16xbyy.bb
-index dd0ed1d..1d7d794 100644
---- a/recipes-core/openjdk/openjdk-8_16xbyy.bb
-+++ b/recipes-core/openjdk/openjdk-8_16xbyy.bb
-@@ -14,7 +14,6 @@ do_install() {
- }
- 
- PACKAGES_append = " \
--    ${PN}-demo-dbg \
-     ${PN}-demo \
-     ${PN}-source \
- "
-@@ -47,12 +46,6 @@ FILES_${PN}-dbg_append = "\
-     ${JDK_HOME}/jre/lib/${JDK_ARCH}/headless/.debug/ \
-     ${JDK_HOME}/jre/lib/${JDK_ARCH}/xawt/.debug/ \
-     ${JDK_HOME}/jre/lib/${JDK_ARCH}/client/.debug/ \
--"
--
--FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
--RDEPENDS_${PN}-demo = " ${PN} "
--
--FILES_${PN}-demo-dbg = "\
-     ${JDK_HOME}/demo/jvmti/gctest/lib/.debug/ \
-     ${JDK_HOME}/demo/jvmti/heapTracker/lib/.debug/ \
-     ${JDK_HOME}/demo/jvmti/heapViewer/lib/.debug/ \
-@@ -64,6 +57,9 @@ FILES_${PN}-demo-dbg = "\
-     ${JDK_HOME}/demo/jvmti/compiledMethodLoad/lib/.debug/ \
- "
- 
-+FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
-+RDEPENDS_${PN}-demo = " ${PN} "
-+
- FILES_${PN}-doc_append = "\
-     ${JDK_HOME}/man \
-     ${JDK_HOME}/ASSEMBLY_EXCEPTION \
--- 
-2.11.0
-
+On 6 June 2018 at 00:33, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+> On Wednesday, 6 June 2018 1:39:09 AM NZST Nicola Lunghi wrote:
+>> From: Nicola Lunghi <nicola.lunghi@jci.com>
+>>
+>> the mosquitto install populate some .example files in
+>> /etc/mosquitto. move thise example files in a separate package
+>>
+>> The PACKAGE_BEFORE_PN is needed because otherwise those examples
+>> end in the base mosquitto package
+>>
+>> Signed-off-by: Nicola Lunghi <nicola.lunghi@jci.com>
+>> ---
+>>  .../recipes-connectivity/mosquitto/mosquitto_1.4.15.bb        | 4 ++++
+>>  1 file changed, 4 insertions(+)
+>>
+>> diff --git a/meta-networking/recipes-connectivity/mosquitto/
+> mosquitto_1.4.15.bb b/meta-networking/recipes-connectivity/mosquitto/
+> mosquitto_1.4.15.bb
+>> index c71f1e467f..8dd2124c41 100644
+>> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+>> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+>> @@ -62,6 +62,8 @@ do_install() {
+>>
+>>  PACKAGES += "libmosquitto1 libmosquittopp1 ${PN}-clients"
+>>
+>> +PACKAGE_BEFORE_PN = "${PN}-examples"
+>> +
+>>  FILES_${PN} = "${sbindir}/mosquitto \
+>>                 ${bindir}/mosquitto_passwd \
+>>                 ${sysconfdir}/mosquitto \
+>> @@ -79,6 +81,8 @@ FILES_${PN}-clients = "${bindir}/mosquitto_pub \
+>>                         ${bindir}/mosquitto_sub \
+>>  "
+>>
+>> +FILES_${PN}-examples = "${sysconfdir}/mosquitto/*.example"
+>> +
+>>  SYSTEMD_SERVICE_${PN} = "mosquitto.service"
+>>
+>>  INITSCRIPT_NAME = "mosquitto"
+>>
+>
+> Both of these look good to me, FWIW
+>
+> Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>
+> Cheers,
+> Paul
+>
+> --
+>
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
+>
 
