@@ -1,29 +1,28 @@
-Return-Path: <mario@parenteses.org>
-Received: from mx1.mailbox.org (mx1.mailbox.org [80.241.60.212])
-	by mail.openembedded.org (Postfix) with ESMTP id 81F086FFA1
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id BCB29787CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 14:10:19 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [80.241.60.241])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mx1.mailbox.org (Postfix) with ESMTPS id A12FE46478;
-	Thu,  7 Jun 2018 16:10:19 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp2.mailbox.org ([80.241.60.241])
-	by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
-	[80.241.56.116]) (amavisd-new, port 10030)
-	with ESMTP id bengHmT2H3Ly; Thu,  7 Jun 2018 16:10:17 +0200 (CEST)
-From: Mario Domenech Goulart <mario@parenteses.org>
-To: Mark Asselstine <mark.asselstine@windriver.com>
+	Thu,  7 Jun 2018 14:12:00 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w57EBtWg025463
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 7 Jun 2018 07:11:55 -0700 (PDT)
+Received: from yow-masselst-lx1.localnet (128.224.60.223) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.399.0; Thu, 7 Jun 2018 07:11:55 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Date: Thu, 7 Jun 2018 10:11:54 -0400
+Message-ID: <2144445.ZD38EH98DM@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
 References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<87d0x4nz4e.fsf@parenteses.org> <2060465.T9NCAC9bbY@yow-masselst-lx1>
-Date: Thu, 07 Jun 2018 16:10:15 +0200
-In-Reply-To: <2060465.T9NCAC9bbY@yow-masselst-lx1> (Mark Asselstine's message
-	of "Wed, 6 Jun 2018 09:31:27 -0400")
-Message-ID: <871sdiofg8.fsf@parenteses.org>
+	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
+	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
 MIME-Version: 1.0
 Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	openembedded-devel@lists.openembedded.org
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Mario Domenech Goulart <mario@ossystems.com.br>
 Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -37,40 +36,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 14:10:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Jun 2018 14:12:00 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Wed, 6 Jun 2018 09:31:27 -0400 Mark Asselstine <mark.asselstine@windriver.com> wrote:
+On Thursday, June 7, 2018 9:56:34 AM EDT Otavio Salvador wrote:
+> On Thu, Jun 7, 2018 at 10:53 AM, Richard Leitner
+> <richard.leitner@skidata.com> wrote:
+> ....
+> 
+> > As I'm using this layer now for quite a few years I'll be glad to help you
+> > with the maintainership of meta-java. Nonetheless I have to admit that I
+> > have no experience in maintaining an openembedded layer ;-)
+> > 
+> > Therefore if you're still interested I'd have some questions regarding the
+> > "strategic" targets, workflows and stuff like that...
+> 
+> Awesome, new energy!
 
-> On Wednesday, June 6, 2018 3:38:25 AM EDT Mario Domenech Goulart wrote:
->> Hi Mark and all,
->> 
->> On Tue, 5 Jun 2018 11:11:26 -0400 Mark Asselstine <mark.asselstine@windriver.com> wrote:
->> > Several of us have noticed that nothing has been merged to meta-java since
->> > mid-April (roughly 8 weeks ago). With about a dozen commits sent to the
->> > list and pending merges I thought I might email you, the maintainers,
->> > directly to determine if this is expected to continue. Should we be
->> > looking to update the maintainers list and/or recruiting new people to
->> > restore the vitality of this repo? Have your roles or positions changed
->> > making it no longer viable for you to contribute to this repo?
->> > 
->> > Thanks in advance for your responses.
->> 
->> I haven't been actively maintaining meta-java.  Unfortunately I don't
->> have time to work on it anymore.  Sorry about that.
->> 
->> Attached is a patch to remove myself from the list of maintainers.
->
-> Thanks for your time and work while you were a maintainer and good luck in 
-> your new adventure.
++1. This is great news, thanks Richard for all your previous work and commits 
+to meta-java and for putting up your hand to help maintain this layer. This is 
+about the best outcome I could have asked for when I started this thread.
 
-Thanks, Mark.  Appreciated.
+Thanks everyone,
+Mark
 
-I must say the credits should go to O.S. Systems too, as they actually
-supported the work.
+> 
+> Sure, go ahead and ask :-D
 
-All the best.
-Mario
--- 
-http://parenteses.org/mario
+
+
+
 
