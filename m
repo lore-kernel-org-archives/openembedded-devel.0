@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f44.google.com (mail-pl0-f44.google.com
-	[209.85.160.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 88AC2787CA
+Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
+	[209.85.160.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C859978766
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 13:52:28 +0000 (UTC)
-Received: by mail-pl0-f44.google.com with SMTP id i5-v6so6192030plt.2
+	Thu,  7 Jun 2018 13:52:29 +0000 (UTC)
+Received: by mail-pl0-f67.google.com with SMTP id c23-v6so6182430plz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jun 2018 06:52:30 -0700 (PDT)
+	Thu, 07 Jun 2018 06:52:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=PpIdnmViOYFiCIeIIWKnO/l5Y1NlM6cql9nLBBxWUbs=;
-	b=tvJwrVYEnaCvxB3jZQRxmlY7qQNmfB3sbJw5TdsUdbOFbC9NlebaCZFXvAdpCKYViO
-	nZhx3wD7bbxYNfBZ4pLKFGmnCuKyOXokqxZPYEZW957idjQFxkJgsxNwws+n02Xx1qbR
-	ISYdVu6fO8vF/7zXkHEJdaXts+2qdDk+UfmqWdiNKt//E3VF/nmIRCGkF0zuSzdFYRxT
-	PII4I6nW9WY0HY1cXu+di7RkcMWG9tSSC4qvFAkBYFiw0/b82qdZs2K1exznkt/z2ulU
-	1vcWAKXQUzXEpX8nhLsAgugpiY7MxdNDRCS1YJOtA86GOVQKGFP5amLb+x7n8WwHNL7F
-	+0gw==
+	bh=UD9AgQNAminBfty+50T4gvmkRu9nsbD1qjOSs7cYFKU=;
+	b=cf3l3uLVfjkWBJW12foWb7RXkgckvR7NccfeeSkhLs9A4WgWzOVc4TknJsEgr8yYLP
+	leEC/Ebt7t/H0WEN2N9jcTZeqqwdjK3r+rDuLV0wbNIyOL7wxwY97LPtv/6rnGUmws+u
+	EsbTwb8hqQZ9TLkjlUHT1Ed/8fihQgdjtx99+LiHGgKvQ0dgz1QFBWOc+G+JZZCFjWmF
+	G9K1HYbN/95jdtOFoZo7LXi/F0JAu1Xyz+UO7ZPY10by2cjqS7iiaBLgEMHz8X1pH6t9
+	0na8J1FEnRBWZYp/R9rMIPu0/A7QraW+7yPsCmeSuESHmg4mmIHL3qunKLJCib4QJMPU
+	DFzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=PpIdnmViOYFiCIeIIWKnO/l5Y1NlM6cql9nLBBxWUbs=;
-	b=BrYmYY7Dw3YpDuh7+UXv86TkH59zlnMIHTQjiv3cacaPRkkj2nVwXRkrbNyqs/0wZv
-	LJTLs9B87bGpBUftzMOE5nWlB+FUjm9oOnCVCk9CT2vNtNrXAfhoj1PmmDnKkzacTo38
-	rnkCZ2vHK1WYu5iAZNyJBID0nG30OVgjdACyJJco4z5wSN0CIOma51cdCUqZuKrL5pKG
-	KVIyKac1tWgdX+Tt2D09Ne1nm6SRTSUbRZ5u4mnvlzdPLuAtOH+HMIPK/5Puw3fsjCeU
-	qokL4m08uI1oec9abvdqoX5Rrc2vUIgcC+FUgQTG+DD0xoaYJQOGtJhMkHfT3i7BduJs
-	hfSw==
-X-Gm-Message-State: APt69E3xbXfHrjFJWoIcPFYdgvAPJ5K5mrnB1zMh1f9zwhsr17ZEPK9+
-	XOHjwv2rLlUazQnnIvT7DCg=
-X-Google-Smtp-Source: ADUXVKJD+fxmOafKlfZOaoKEem/kGvoDXIdCuPQCcZxSf/cGMUyDuHM+RuAHBwsvJxp6/V1mxmYAVA==
-X-Received: by 2002:a17:902:3381:: with SMTP id
-	b1-v6mr2171140plc.248.1528379549787; 
-	Thu, 07 Jun 2018 06:52:29 -0700 (PDT)
+	bh=UD9AgQNAminBfty+50T4gvmkRu9nsbD1qjOSs7cYFKU=;
+	b=aHtzjdzf90iPI+Nq62oxcnL0UWU7VB02p4BvP7TAVwTdQ6z4UDAf05xTWX8jU8QGnn
+	1nETszDx6iCgZfmrW0MYzFsHMiWrRQeepLN4jwghncXtIvYPSSCvTW3foLbxMVDsTqOb
+	gOq4VPItm+FHvMN7ZUGnzr97MmB2vWP8xB0at2Dg0bRlPIgF530cwgVSHstYxY883rhM
+	OotarSwDFYilgNz7u8pV8aPoHtAIPTXir4+3vK5El7qBJC7LJSQWI+vY9yXE5piRX0Zw
+	FDnD3vU1ndxgnQixWHh7HABlykbovXFzP3yGZY290k8/Aoxx2ds6VMSPaqqaSVx/V+S8
+	4KYQ==
+X-Gm-Message-State: APt69E06U5gDprF/mdi/+BeiqnNjNLXQ0TQI2JHtGTNfBlV+4F4HIPS/
+	WqDekuMOEEu8cojVTxUaQwU=
+X-Google-Smtp-Source: ADUXVKKYO+23LLHk0/c4p62TLQLCHZ7OIcTGP7pO6R2yZtRKlh4G/p2SUtUC9/pdJvd/YUhre0aO7g==
+X-Received: by 2002:a17:902:1ea:: with SMTP id
+	b97-v6mr2193178plb.58.1528379550954; 
+	Thu, 07 Jun 2018 06:52:30 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:143:7168:4d6f:f251])
 	by smtp.gmail.com with ESMTPSA id
-	t21-v6sm18675481pfi.22.2018.06.07.06.52.28
+	t21-v6sm18675481pfi.22.2018.06.07.06.52.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 07 Jun 2018 06:52:29 -0700 (PDT)
+	Thu, 07 Jun 2018 06:52:30 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gamil.com,
 	openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jun 2018 06:52:17 -0700
-Message-Id: <0d626da0d60bc9e9d8824125984b13abe7ede572.1528379391.git.akuster808@gmail.com>
+Date: Thu,  7 Jun 2018 06:52:18 -0700
+Message-Id: <25d7d4bd5775f02f7064f1fa7fe659159aaab305.1528379391.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1528379391.git.akuster808@gmail.com>
 References: <cover.1528379391.git.akuster808@gmail.com>
-Subject: [PATCH 2/4] wireshark: Update Package to 2.2.12
+Subject: [PATCH 3/4] python3-asn1crypto: add support for Python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,43 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 13:52:28 -0000
+X-List-Received-Date: Thu, 07 Jun 2018 13:52:30 -0000
 
-Includes:
-	wnpa-sec-2018-01,  Multiple dissectors could crash. (Bug 14253) CVE-2018-5336
+From: Ricardo Salveti <ricardo@opensourcefoundries.com>
 
-	wnpa-sec-2018-02, The MRDISC dissector could crash. (Bug 14299, Bug 13707) CVE-2017-17997
+python-asn1crypto.inc already available and used by the Python 2
+version.
 
-	wnpa-sec-2018-03, The IxVeriWave file parser could crash. (Bug 14297) CVE-2018-5334
-
-	wnpa-sec-2018-04, The WCP dissector could crash. (Bug 14251) CVE-2018-5335
-
-Full release notes: https://www.wireshark.org/docs/relnotes/wireshark-2.2.12.html
-
+Signed-off-by: Ricardo Salveti <ricardo@opensourcefoundries.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../wireshark/{wireshark_2.2.11.bb => wireshark_2.2.12.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.11.bb => wireshark_2.2.12.bb} (95%)
+ meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.11.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.12.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.11.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.12.bb
-index 5eb372e..6c0b644 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.11.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.12.bb
-@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
- 
- PE = "1"
- 
--SRC_URI[md5sum] = "a79ba6cda83be2a91bde4110fe194788"
--SRC_URI[sha256sum] = "a9f11621e85d7e1d72259157edd94825e72af3fd72e184b8474459f92ad5fc40"
-+SRC_URI[md5sum] = "ebf3d4230d7a13408758cdf037c42d66"
-+SRC_URI[sha256sum] = "3274458d1bb1658a5001465ecb07c7cbfc709571ef36bd062897570d4bab3ebc"
- 
- inherit autotools pkgconfig perlnative
- 
+diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
+new file mode 100644
+index 0000000..30f3404
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-asn1crypto.inc
 -- 
 2.7.4
 
