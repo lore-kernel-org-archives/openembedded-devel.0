@@ -1,74 +1,52 @@
-Return-Path: <prvs=68935beb6=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 00D1A74520
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id EA0877706D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jun 2018 14:32:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,486,1520895600"; d="scan'208";a="10732261"
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<20180606204244.GA16170@mail.itconsulting-heinold.de>
-	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
-	<20180607132234.GA19704@mail.itconsulting-heinold.de>
-	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
-	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
-Date: Thu, 7 Jun 2018 16:32:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Thu,  7 Jun 2018 17:09:47 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id p23-v6so10600995qtn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Jun 2018 10:09:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=XqkB52L6mx2ysowtyr4Mb5fnVsY51e3DXPehIM45U0I=;
+	b=TxRT3uk7GIU3wmrsrXiUzh+OXaH1P3VvCm4t9i8KX/tOXGaLDQzrTRNXivWKvmdECc
+	t/4n/eS3TRQZRCgRYHDtijld3fwOpiRvNBfOYc751uDcMS11THutA7KUOMsil2ZFXNLI
+	Lco7O6dCeKMatB2JohVP8bd3gmg63aupFiMimE7CcMi5+JSUNjeC+usQIYsVDtKEP6HR
+	hnR2Z34L1CErvFQlFgwvr1t1AtlCntAE4V/pcVjFDTFuqEcZg8oPL3w+vVtreoN3b/j+
+	71qZMV/j2B+vV/H6c9fyPhj4h/InzApL5T7KF0Kcf+jifOkkkP71koOlk9nr02beBayb
+	Uaiw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=XqkB52L6mx2ysowtyr4Mb5fnVsY51e3DXPehIM45U0I=;
+	b=KOxZorZWGzB6tZARFtH8YPrsCCwt6WMrKQsV/1ydHVnB3abaL6lqi4M2vSbjtW9kM+
+	D37Z7+2eqbHHJZvTJZYE42WIbeH4I6d8BwyW9HL0VaQCw/SUVXEkGmDDojlF1eT48UST
+	Gt2rDcrXIE3gOhoVCESouOA4DsaS9hIRbgXn56xsfmRxr4jVzVoERO2s621799cPwizc
+	MFbPb/qTtp/Tn851uf/u/30NXLiK4jmlkYZKquWBahjHpiYLKstQT7XH4U5tF+nyNDNI
+	v1VgEeeUP6pwgSUNJnPcKLzd2Ojj+OX4ZgCdy1PBtzgGQfV2h6PrQbjmZKsRf1TwRn3x
+	na8A==
+X-Gm-Message-State: APt69E3RNl1Ire5sbbFjqCWnv+U+ysrVRkxJtULLqq2KHXlyTCdTkK1U
+	OnQInIfcO6Bpq7y3JNAN64M2TpEEA9td7PIgDVo=
+X-Google-Smtp-Source: ADUXVKLusu2Q+bbYGEbX2ZZuIv1A7c+nCUyoLGA9ZzU8Ve4W8fx9rylcpOsu6P3TUIK1IPHB7ZimCPjBlEWIRjtsA8M=
+X-Received: by 2002:ac8:25db:: with SMTP id
+	f27-v6mr2657938qtf.128.1528391388676; 
+	Thu, 07 Jun 2018 10:09:48 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: [meta-java] maintainer status
+Received: by 2002:a0c:e486:0:0:0:0:0 with HTTP;
+	Thu, 7 Jun 2018 10:09:18 -0700 (PDT)
+In-Reply-To: <CABPh3UMQ8uhWpxiX-zqQ4XjaMrPfPfBhRKQ=aJW=TjjH-+jULA@mail.gmail.com>
+References: <20180605133909.11319-1-nick83ola@gmail.com>
+	<20180605133909.11319-2-nick83ola@gmail.com>
+	<5113980.YQSFpsKea5@peggleto-mobl.ger.corp.intel.com>
+	<CABPh3UMQ8uhWpxiX-zqQ4XjaMrPfPfBhRKQ=aJW=TjjH-+jULA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 7 Jun 2018 10:09:18 -0700
+Message-ID: <CAMKF1sppP0MemDjUN=J2RuUKPspRJh6S0BmmQKG4AYZgMQBv8A@mail.gmail.com>
+To: nick83ola <nick83ola@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/2] mosquitto: add mosquitto-examples package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -81,49 +59,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jun 2018 14:32:27 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 07 Jun 2018 17:09:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 06/07/2018 03:56 PM, Otavio Salvador wrote:
-> On Thu, Jun 7, 2018 at 10:53 AM, Richard Leitner
-> <richard.leitner@skidata.com> wrote:
-> ....
->> As I'm using this layer now for quite a few years I'll be glad to help you with
->> the maintainership of meta-java. Nonetheless I have to admit that I have no
->> experience in maintaining an openembedded layer ;-)
+they are in master-next
+
+On Thu, Jun 7, 2018 at 2:32 AM, nick83ola <nick83ola@gmail.com> wrote:
+> ping
+>
+> On 6 June 2018 at 00:33, Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
+>> On Wednesday, 6 June 2018 1:39:09 AM NZST Nicola Lunghi wrote:
+>>> From: Nicola Lunghi <nicola.lunghi@jci.com>
+>>>
+>>> the mosquitto install populate some .example files in
+>>> /etc/mosquitto. move thise example files in a separate package
+>>>
+>>> The PACKAGE_BEFORE_PN is needed because otherwise those examples
+>>> end in the base mosquitto package
+>>>
+>>> Signed-off-by: Nicola Lunghi <nicola.lunghi@jci.com>
+>>> ---
+>>>  .../recipes-connectivity/mosquitto/mosquitto_1.4.15.bb        | 4 ++++
+>>>  1 file changed, 4 insertions(+)
+>>>
+>>> diff --git a/meta-networking/recipes-connectivity/mosquitto/
+>> mosquitto_1.4.15.bb b/meta-networking/recipes-connectivity/mosquitto/
+>> mosquitto_1.4.15.bb
+>>> index c71f1e467f..8dd2124c41 100644
+>>> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+>>> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+>>> @@ -62,6 +62,8 @@ do_install() {
+>>>
+>>>  PACKAGES += "libmosquitto1 libmosquittopp1 ${PN}-clients"
+>>>
+>>> +PACKAGE_BEFORE_PN = "${PN}-examples"
+>>> +
+>>>  FILES_${PN} = "${sbindir}/mosquitto \
+>>>                 ${bindir}/mosquitto_passwd \
+>>>                 ${sysconfdir}/mosquitto \
+>>> @@ -79,6 +81,8 @@ FILES_${PN}-clients = "${bindir}/mosquitto_pub \
+>>>                         ${bindir}/mosquitto_sub \
+>>>  "
+>>>
+>>> +FILES_${PN}-examples = "${sysconfdir}/mosquitto/*.example"
+>>> +
+>>>  SYSTEMD_SERVICE_${PN} = "mosquitto.service"
+>>>
+>>>  INITSCRIPT_NAME = "mosquitto"
+>>>
 >>
->> Therefore if you're still interested I'd have some questions regarding the
->> "strategic" targets, workflows and stuff like that...
-> 
-> Awesome, new energy!
-> 
-> Sure, go ahead and ask :-D
-> 
-
-Thanks :-)
-
-So here are some question that currently came to my mind:
-
- * do you use some kind of patch management software (like patchwork)?
-
- * are there any "quality gate tests" for patches being applied to master or stable branches?
-
- * is there something like a build/test robot for patches and/or branches?
-
- * should we use the master-next branch for staging new patches?
-
- * is there a reason for not having OpenJDK >8 recipes?
-
- * if the above is answered with something like "because nobody submitted them": Should we try to follow the current OpenJDK release model (a feature release every six month)?
-
- * based on what scheduling are the stable branches created? Yocto Project release dates I guess?
-
- * what kind of patches should be applied/backported to the stable branches?
-
-
-I think that's all for now (but presumably some more question will follow during the next weeks) ;-)
-
-regards;Richard.L
+>> Both of these look good to me, FWIW
+>>
+>> Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>>
+>> Cheers,
+>> Paul
+>>
+>> --
+>>
+>> Paul Eggleton
+>> Intel Open Source Technology Centre
+>>
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
