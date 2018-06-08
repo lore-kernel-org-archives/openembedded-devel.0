@@ -1,47 +1,47 @@
-Return-Path: <geomatsi@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 29A2275277
+Return-Path: <george.mccollister@gmail.com>
+Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
+	[209.85.214.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6115A746E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jun 2018 20:22:12 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id u4-v6so21872149lff.3
+	Fri,  8 Jun 2018 22:41:19 +0000 (UTC)
+Received: by mail-it0-f65.google.com with SMTP id 76-v6so4214079itx.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jun 2018 13:22:14 -0700 (PDT)
+	Fri, 08 Jun 2018 15:41:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=VQAy/FczV2cUZgJ71MA3cmQHiByXFy9mrO6tk5ff6Nc=;
-	b=X7+FLSv+l0yaAYg+4yodYe4BXNRtSdHD+KwIu4S3QcYhd0dtxvxd/3MZPtHXTeIYjW
-	kugUqIjiAbP0copFECaC0rK7D7ZXJkKOlfVHrrvKNnnPht/JtPNo9LXSfYBlqIiWFsfx
-	CBwAh7Wyg/foWQ5YUjp1vYjYX6fHfnonOtkrZfGdyFl8CwXREcEASP0UYq42Rv4UWApi
-	aBgWsHEBy938GbBcFlBr2MXuGewW3jt//SmK6VQsFmV3Sl+Sao6eLjdTJgZGyE+dY2Wa
-	URc7yr1i0tRJCGt8DOgVe7iLTrcMaSwpGwfrmy3MzIP30j24OGMAHrehcsITpGQL8K/F
-	AEQg==
+	bh=NOkO+9OYbaC5XVPFeXu80xS/yOVnUbJB6g3EB41viK8=;
+	b=ShjW+J1fngIXAMLu3u0RypGs0vZ/SkR/EJqJDHU4ypkXcPhyQFAKRXcLQonvYbj7wI
+	9iBivpMdB8aN5gnlsChbASnhxMjUPoa8w2dVjoR5+KlQeTy036euZXX9YmLF3lBNyYo0
+	3N2CqkDKKB1TYVrnlj9SI76m3vMpN4+cTj0oRiH3yP7aapsJ+ioCkfhjMh7nO7+c464I
+	nvzkuZCdLG7rAJYkX+fJRG52N7IhPzG3j0wI05DyUMb60rW7XuPuMfczvqc+93947TqY
+	uJ3sAyMNiAi47rDTuf2QsgjxSur0ZJoUAI1/39gbWvRTC5KadF6UpyuMtWylTvyW0pjS
+	uoIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VQAy/FczV2cUZgJ71MA3cmQHiByXFy9mrO6tk5ff6Nc=;
-	b=L9Dm3+9gbvA/QuE3DNuFLaovjPjE3vILtWUKWQQ35qgsNiOJqEVVVd1Qz9GgI0MzFQ
-	z/xGtc2Rr2son7zeK0fpu9fsH68oteP8nOirA+n85+0fCuerG9CBZW4xa5M9lqLW8D4t
-	euZicJ7Ie7+4SfvRB8ZeUhwFFfMyGLaDd5MYOw8mk9fri4SnmmUXAQ766AHuqU9m0nsg
-	6BtKbGf5s978xw1YZbVQNddQkZtGgx6jMDvP7a+4BLbU+rjrMvUe5o8Whpt83zmZ9tD1
-	WU1XQROdAnjkvIe4dVeUGlzOMlCoZtish/rlbxCuDZDX1doG5I6gJzNRo7ZxpWbhrllk
-	NieA==
-X-Gm-Message-State: APt69E23auP8f7EAMTG69GDNbxOqKifGlnUyyPu/nNTtr+V75gi+dyPm
-	Fe2IhzCMgl4w4of1XadjO9yZykIn
-X-Google-Smtp-Source: ADUXVKIeX/Tawpwa6C92RNAYJfUuVC0PIpD7DDIQEEkuJVQ7dJaF676RI8sGB61FZn4kr7hMYKtZQw==
-X-Received: by 2002:a2e:163:: with SMTP id 96-v6mr5745883ljb.8.1528489333402; 
-	Fri, 08 Jun 2018 13:22:13 -0700 (PDT)
-Received: from speedy.hunter (ppp78-37-197-55.pppoe.avangarddsl.ru.
-	[78.37.197.55]) by smtp.gmail.com with ESMTPSA id
-	w23-v6sm5293897lfd.20.2018.06.08.13.22.12
+	bh=NOkO+9OYbaC5XVPFeXu80xS/yOVnUbJB6g3EB41viK8=;
+	b=i2MjIsiBSUpE1UxQlrSZfTClz6uOgpnTCpSbMGRKbkGYPz7Hrk4xAfzKLBKgnt2+gv
+	ubwgLCaZW3tPvJKM5/+3W3GDssaEcebJbzWqemeByDqGYP0E4AxCqvTWGcWfAyrPADs1
+	a1Tos47lvutgcdDUuPCcYbe75l2R4vSrKuISkKfz9Q1ae//vY2nNOK7ZTMNPNCkN6Pc8
+	suusI0L3cZ/VYFU/86cFoBTsomvR2teAiJL2vx+U1eSBGPT+pNRMidc7Dryq2FrZqWzz
+	8LBfZmmxxLSFBo3TZHgq5HI5i5scX6Nrw72YDNyZ4/+t7RWZGG+Wx5SEchJNIYaW6QW+
+	EDnA==
+X-Gm-Message-State: APt69E1vcyw6wKscRGHNvwPgBD/wDu1MKhlr6qSQGzmuQFxLa5y/Zizq
+	Pqbba4TBIVWeI1fpOuE06y+w
+X-Google-Smtp-Source: ADUXVKKylDhZabMCy+GRCbedzsfvBJbjVCabjbGgz/81NG8vBc+sYLo6v2W3jsGV+6mZvPrdm0usqA==
+X-Received: by 2002:a24:7809:: with SMTP id p9-v6mr3304692itc.20.1528497680098;
+	Fri, 08 Jun 2018 15:41:20 -0700 (PDT)
+Received: from threadripper.novatech-llc.local ([216.21.169.52])
+	by smtp.gmail.com with ESMTPSA id
+	16-v6sm1408318itk.17.2018.06.08.15.41.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Jun 2018 13:22:12 -0700 (PDT)
-From: Sergey Matyukevich <geomatsi@gmail.com>
+	Fri, 08 Jun 2018 15:41:19 -0700 (PDT)
+From: George McCollister <george.mccollister@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jun 2018 23:21:17 +0300
-Message-Id: <20180608202117.5816-1-geomatsi@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-maker][rocko][PATCH] octoprint: add python-pillow to RDEPENDS
+Date: Fri,  8 Jun 2018 17:40:53 -0500
+Message-Id: <20180608224053.44345-1-george.mccollister@gmail.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [sumo][meta-oe][PATCH] poppler: fix linking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,29 +54,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2018 20:22:13 -0000
+X-List-Received-Date: Fri, 08 Jun 2018 22:41:19 -0000
 
-Add pillow library to RDEPENDS to enable seamless installation
-of messenging plugins including slack and telegram.
+Add patch from master commit 327292a30089783236bfe482ec43834f9d118327
+to fix linking error.
 
-Signed-off-by: Sergey Matyukevich <geomatsi@gmail.com>
+Signed-off-by: George McCollister <george.mccollister@gmail.com>
 ---
- recipes-webui/octoprint/octoprint_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...ists.txt-Add-libpoppler-to-link-along-wit.patch | 29 ++++++++++++++++++++++
+ meta-oe/recipes-support/poppler/poppler_0.63.0.bb  |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
 
-diff --git a/recipes-webui/octoprint/octoprint_git.bb b/recipes-webui/octoprint/octoprint_git.bb
-index cc56d5b..cdb55db 100644
---- a/recipes-webui/octoprint/octoprint_git.bb
-+++ b/recipes-webui/octoprint/octoprint_git.bb
-@@ -89,6 +89,7 @@ RDEPENDS_${PN} = "python-awesome-slugify \
-                   python-netserver \
-                   python-numpy \
-                   python-pathtools \
-+                  python-pillow \
-                   python-pip \
-                   python-pkginfo \
-                   python-psutil \
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+new file mode 100644
+index 000000000..7ed795ef7
+--- /dev/null
++++ b/meta-oe/recipes-support/poppler/poppler/0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch
+@@ -0,0 +1,29 @@
++From d488de23b75b2f3e235f1c184b2253d1402b4c0f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 10 May 2018 23:47:56 -0700
++Subject: [PATCH] glib/CMakeLists.txt: Add libpoppler to link along with
++ poppler-glib
++
++This is required since poppler-glib uses symbols from poppler and
++we use --as-needed
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ glib/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/glib/CMakeLists.txt b/glib/CMakeLists.txt
++index 33c6608..87e1b44 100644
++--- a/glib/CMakeLists.txt
+++++ b/glib/CMakeLists.txt
++@@ -127,7 +127,7 @@ if (HAVE_INTROSPECTION AND BUILD_SHARED_LIBS)
++   get_directory_property(_tmp_includes INCLUDE_DIRECTORIES)
++   _list_prefix(_includes _tmp_includes "-I")
++   set(Poppler_0_18_gir_CFLAGS ${_includes} -L${CMAKE_BINARY_DIR})
++-  set(Poppler_0_18_gir_LIBS poppler-glib)
+++  set(Poppler_0_18_gir_LIBS poppler-glib poppler)
++   _list_prefix(_abs_introspection_files introspection_files "${CMAKE_CURRENT_SOURCE_DIR}/")
++   list(APPEND _abs_introspection_files
++     ${CMAKE_CURRENT_BINARY_DIR}/poppler-enums.c
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.63.0.bb b/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
+index 8acb35628..997e531d1 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.63.0.bb
+@@ -6,6 +6,7 @@ SRC_URI = " \
+     http://poppler.freedesktop.org/${BP}.tar.xz \
+     file://0001-Do-not-overwrite-all-our-build-flags.patch \
+     file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
++    file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
+ "
+ SRC_URI[md5sum] = "66a54da4896b1408611699feda5c1821"
+ SRC_URI[sha256sum] = "27cc8addafc791e1a26ce6acc2b490926ea73a4f89196dd8a7742cff7cf8a111"
 -- 
-2.17.1
+2.11.0
 
 
