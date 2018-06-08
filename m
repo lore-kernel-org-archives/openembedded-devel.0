@@ -1,50 +1,24 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id CE99E75208
+Return-Path: <sjl@vctlabs.com>
+Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
+	by mail.openembedded.org (Postfix) with ESMTP id 10D047524B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jun 2018 23:06:26 +0000 (UTC)
-Received: by mail-pf0-f170.google.com with SMTP id a22-v6so7321842pfo.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jun 2018 16:06:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=6QuGDV8FP1XkOJNZaLM5dKttyMHdnD+kqWIjs278VQo=;
-	b=LMzA8lZC9NudwvJ3XUrZCs2AUcTK2y0rL1jCfU0WJjWt5EbBmbH1XE7uq3dHKFpDci
-	4YMCkoMD9G3br0Tlyx+netvWpU9u9kXuNQsrfSCVy4C96UF7gnOE4acvKzMPEjddhZD1
-	KiUnpW0t9bjBUt2unPQMludJihKxcpxvolYlheuXvpe7ijkkSLpRe9FzgDiyrUvN75Wr
-	Gog3nq2d6HL/Sh8lMlLX/87T1s1neFmbCi1kfnCkGMfQmmyNi1ScsJqV5oHhh1re25mk
-	V9oMCZURL7kKcQvG09rSK4Boxi0dXafQRPmAnMFTbBw3VbC8p7ygjMwnxL32p9zccgQl
-	5gwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6QuGDV8FP1XkOJNZaLM5dKttyMHdnD+kqWIjs278VQo=;
-	b=nPJ4B40qjBzOSCRZLs3zdAYE7JfnRcXJ6tciEr2PNywKXq3he59TAyvKcwXa8sNuxX
-	YPiNm9cSzihw/3tI3hnOa4SGLJS6jcpp0I7qRxItoIbCR1w9eHbBDBNQx4wcaQvL3H6O
-	Frw04t3RU//p2dyOpSnD35g9/SrOw0SSpv/NS+JUyeCTW4Gz1yod+rlqKfHcgLOfAYT/
-	rjqMo7Mq8ppoXeBfkFhxJBcAMtvL2wZjSG7WFpXJRO5DybWz5n4UkXosIV6O80IYXpOH
-	rDyxQqnp05XXxMpVvKTZQyAezL8HwLtaD57qY3UgixZ9CLHX+McMNqK/IU0RUHMlYnvr
-	TlbQ==
-X-Gm-Message-State: APt69E3fvatKZrxfKZSgTSsEkKMKnDSxTq55XU5JjFkLGy3IqtXpMMSO
-	12U73EoscjCOhqOnLwJHXjiihREW
-X-Google-Smtp-Source: ADUXVKL/MvPVVYvBJdTynPnbuZGkAZNYPbCq2HrJgPUPCtD/Va9fJ07yBhPur0Ri68sS4CS7xeVVrg==
-X-Received: by 2002:a65:4bcd:: with SMTP id
-	p13-v6mr6866817pgr.114.1528499187708; 
-	Fri, 08 Jun 2018 16:06:27 -0700 (PDT)
-Received: from workhorse.mvista.com
-	(99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
-	by smtp.gmail.com with ESMTPSA id
-	m22-v6sm20724095pfg.61.2018.06.08.16.06.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Jun 2018 16:06:26 -0700 (PDT)
-From: Jeremy Puhlman <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jun 2018 16:06:19 -0700
-Message-Id: <1528499179-8589-1-git-send-email-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.6.2
-Subject: [meta-networking][PATCH] spice: Update to git hash to pick up gcc8 fixes.
+	Fri,  8 Jun 2018 23:18:41 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id D56AD280428; Fri,  8 Jun 2018 16:22:40 -0700 (PDT)
+Date: Fri, 8 Jun 2018 16:22:40 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20180608232240.GG31886@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <20180608225036.GF31886@vctlabs.com>
+	<CA+chaQccz9f-D+V3vbYLoEen-ZRA_-0MZZRFAj2Rg4rmghe7pw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQccz9f-D+V3vbYLoEen-ZRA_-0MZZRFAj2Rg4rmghe7pw@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [sumo][meta-qt5][PATCH] qt: upstream git branch 5.10.1 disappeared
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +31,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2018 23:06:26 -0000
+X-List-Received-Date: Fri, 08 Jun 2018 23:18:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
----
- meta-networking/recipes-support/spice/spice_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Yes, agreed that would be nicer... I don't understand the point of '5.10' branch,
+since it doesn't contain *any* of the official v5.10.x release tags! 
 
-diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
-index 35482ca..508bb36 100644
---- a/meta-networking/recipes-support/spice/spice_git.bb
-+++ b/meta-networking/recipes-support/spice/spice_git.bb
-@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- PV = "0.14.0+git${SRCPV}"
- 
--SRCREV_spice = "2a3d5624382ba49c4eb906e69697b92f79d06cf4"
-+SRCREV_spice = "33d9c38554b41dab1390914ef79594b57218b06b"
- SRCREV_spice-common = "4c2d0e977272c5540634d24f485dd64c424f6748"
- 
- SRCREV_FORMAT = "spice_spice-common"
--- 
-2.6.2
-
+On Sat, Jun 09, 2018 at 12:52:57AM +0200, Martin Jansa wrote:
+> It would be much nicer if they exist at least on 5.10 branch instead of
+> 5.11 :/.
+> 
+> Pruning origin
+> URL: git://code.qt.io/qt/qtbase.git
+>  * [pruned] origin/5.10.1
+>  * [pruned] origin/5.9.0
+>  * [pruned] origin/5.9.4
+>  * [pruned] origin/5.9.5
+> 
+> I still don't understand why they delete the branches, the commits are
+> still there, having them reachable from multiple branches doesn't add any
+> significant overhead.
+> 
+> On Sat, Jun 9, 2018 at 12:46 AM S. Lockwood-Childs <sjl@vctlabs.com> wrote:
+> 
+> > The branch called 5.10.1 no longer exists at code.qt.io repos.
+> >
+> > The corresponding v5.10.1 qt tags still exist (at least on those repos
+> > that originally got tagged during the release), and they are available
+> > on the 5.11 branch. Thus we can keep Qt source at 5.10.1 commits, but
+> > use 5.11 branch to check out those specific commits.
+> >
+> > This could be a bit confusing, making it look like 5.11 is the current
+> > default version for recipes, so for now there is a comment in qt5-git.inc
+> > trying to clarify the situation.
+> >
+> > A couple of repos that already were lacking 5.10.1 branch no longer
+> > need to override QT_MODULE_BRANCH, since their chosen commits are
+> > also available on 5.11 branch.
+> >
+> > Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+> > ---
+> >  recipes-qt/qt5/qt5-git.inc   | 3 ++-
+> >  recipes-qt/qt5/qtknx_git.bb  | 2 --
+> >  recipes-qt/qt5/qtmqtt_git.bb | 2 --
+> >  3 files changed, 2 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
+> > index beba913..ae50871 100644
+> > --- a/recipes-qt/qt5/qt5-git.inc
+> > +++ b/recipes-qt/qt5/qt5-git.inc
+> > @@ -2,7 +2,8 @@
+> >  # Copyright (C) 2013-2018 Martin Jansa <martin.jansa@gmail.com>
+> >
+> >  QT_MODULE ?= "${BPN}"
+> > -QT_MODULE_BRANCH ?= "5.10.1"
+> > +# branch named 5.10.1 got deleted upstream, but v5.10.1 tag still exists
+> > on 5.11 branch
+> > +QT_MODULE_BRANCH ?= "5.11"
+> >  QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH}"
+> >
+> >  # each module needs to define valid SRCREV
+> > diff --git a/recipes-qt/qt5/qtknx_git.bb b/recipes-qt/qt5/qtknx_git.bb
+> > index fa981ab..5e01e3c 100644
+> > --- a/recipes-qt/qt5/qtknx_git.bb
+> > +++ b/recipes-qt/qt5/qtknx_git.bb
+> > @@ -9,6 +9,4 @@ LIC_FILES_CHKSUM = " \
+> >
+> >  DEPENDS += "qtbase"
+> >
+> > -QT_MODULE_BRANCH = "5.10"
+> > -
+> >  SRCREV = "29c34e8f072afd01002ed3847d752b4e065f977e"
+> > diff --git a/recipes-qt/qt5/qtmqtt_git.bb b/recipes-qt/qt5/qtmqtt_git.bb
+> > index 90c255d..b705f7c 100644
+> > --- a/recipes-qt/qt5/qtmqtt_git.bb
+> > +++ b/recipes-qt/qt5/qtmqtt_git.bb
+> > @@ -9,6 +9,4 @@ LIC_FILES_CHKSUM = " \
+> >
+> >  DEPENDS += "qtbase"
+> >
+> > -QT_MODULE_BRANCH = "5.10"
+> > -
+> >  SRCREV = "2c3c2a41c55a179332ec2a076856990f36dd5ef9"
+> > --
+> > 1.9.4
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
 
