@@ -1,52 +1,69 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D832071A8D
+Return-Path: <prvs=690673e92=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id E88CF71CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jun 2018 09:31:49 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id z6-v6so6376967wma.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jun 2018 02:31:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=HFk09NG3A5yPOi+0TsCxPAf6zTGHG2vZqL0gO8mJOm0=;
-	b=sF+yCZa7N9PkbiBONPhk8zQNbX3BZg6shrcIxnVhaMUZx6yUMIRD49ASufJh7aau8j
-	UVPBr5pnkuGWI4Ppsg7SOOn+OBapOPcR1MMzOYkYYlCZhWWcA3jyttPE2iOC1l7Ex1mq
-	mHXzOMaNmbFAy4bSRwx9uRlthY3t1dpCMS3ConFX0S+lgcKPDfw9q28asKW53gi62x90
-	e3/1Cuam5Qz1lIrGj2y8vMkYvd7AM0ozOyrzuZag9HrBK4p8Nx0SFmF4ukrK+tKYfB/l
-	z37p99B6Xt2oNdFXGAOLntHCSIl+w8ysztbSzIVbQx+5I9HWapq9oPwrokTYmuE9yTvl
-	o0JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=HFk09NG3A5yPOi+0TsCxPAf6zTGHG2vZqL0gO8mJOm0=;
-	b=okvmgeQicuhuCMLgVWFSg1W3Gn1FugpsFeSudXVwJcgGdAGOcdMxbAJH2lPhwofStE
-	3b+SSaVZGntyfRRR4OVYz3ZG/+zcenOgl/+pLm4OrLqk1d9X7NxeksAYdrkJW/OaZ5XA
-	O0dJSnNMCmUUv1H1l4fYEg5VkARB2h1rMVHplm+MMUI5b23D9sb61NvaFvxlmNXoRqz2
-	YSPW1uNtvIO2uPWSlzR6HJUKyLfj4K0CiXAe8ZTlFX2hQwv6OxJb9HR12N5hjRFaFo+W
-	UdssMTvPrWtc76aSE5xhwy0R29i81JE9YUs+B3YbaH5BAIjNgdu4QX4lpiubFbwtAjXp
-	iA0g==
-X-Gm-Message-State: APt69E1Ua7cNJNAyuGLeeuubexJsRRXYS7ii0rXvdxKbU6HZhD+vsHnO
-	KqH+rsJAUwUbHLHk3O2HXR3hKg==
-X-Google-Smtp-Source: ADUXVKJJdbNx/JPehgf0E2gUTI4LkK79swl6aIwvGh+zjcDpr3Yn/vYmopWeCZ2f2oBhZOQ2LgtG+g==
-X-Received: by 2002:a1c:b50b:: with SMTP id e11-v6mr965187wmf.84.1528450310226;
-	Fri, 08 Jun 2018 02:31:50 -0700 (PDT)
-Received: from mueller-a-nb-linux.zera.local (p50971113.dip0.t-ipconnect.de.
-	[80.151.17.19]) by smtp.gmail.com with ESMTPSA id
-	d5-v6sm13115797wrp.64.2018.06.08.02.31.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 08 Jun 2018 02:31:49 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jun 2018 11:31:41 +0200
-Message-Id: <20180608093141.7337-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.3
-In-Reply-To: <20180608093141.7337-1-schnitzeltony@gmail.com>
-References: <20180608093141.7337-1-schnitzeltony@gmail.com>
+	Fri,  8 Jun 2018 10:06:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.49,490,1520895600"; d="scan'208";a="10748366"
+To: <openembedded-devel@lists.openembedded.org>
+References: <20180607092459.33931-1-wenlin.kang@windriver.com>
+	<20180607092459.33931-2-wenlin.kang@windriver.com>
+	<2dae9a9a-a6e4-1c01-d167-0dc92f9e1bbf@skidata.com>
+	<5ffe90b0-c8ab-dfe4-99c4-d63d53edc8ec@windriver.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <6e0af238-add1-f319-1d56-cf0315814b50@skidata.com>
+Date: Fri, 8 Jun 2018 12:07:04 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 2/2] qttranslations: remove qtquick1 translation package
+In-Reply-To: <5ffe90b0-c8ab-dfe4-99c4-d63d53edc8ec@windriver.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH 2/2] openjdk-8: combine the -dbg package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,53 +76,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2018 09:31:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 08 Jun 2018 10:06:55 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- recipes-qt/qt5/qttranslations_git.bb | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+On 06/08/2018 11:02 AM, Wenlin Kang wrote:
+> On 2018年06月08日 15:39, Richard Leitner wrote:
+>> Hi,
+>> thank you for you patch!
+>>
+>> On 06/07/2018 11:24 AM, Wenlin Kang wrote:
+>>> One recipe should only have one -dbg package, because OE only picks
+>>> up all .debug file into the last one -dbg package listed in variable
+>>> PACKAGES.
+>> Why should one recipe, altough it conains multiple packages have only
+>> one dbg package? Shouldn't the openjdk-8-demo-dbg package contain the
+>> debug information for the openjdk-8-demo package?
+> 
+> This may be OE's policy, if one recipe contain multiple -dbg package , other -dbg packages all will be
+> a empty pacakge, only have one will contain all .debug file,  you can see the source "meta/classes/package.bbclass"
 
-diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
-index 8c4e04a..f87351c 100644
---- a/recipes-qt/qt5/qttranslations_git.bb
-+++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -8,6 +8,13 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase qttools-native"
- 
-+do_install_append() {
-+    # remove qtquick1 translations - qtquick1 is gone
-+    for transfile in `find ${D}/${OE_QMAKE_PATH_TRANSLATIONS} -name qtquick1_*.qm`; do
-+        rm $transfile
-+    done
-+}
-+
- PACKAGES =. " \
-     ${PN}-assistant \
-     ${PN}-designer \
-@@ -22,7 +29,6 @@ PACKAGES =. " \
-     ${PN}-qtwebsockets \
-     ${PN}-qtwebengine \
-     ${PN}-qtxmlpatterns \
--    ${PN}-qtquick1 \
-     ${PN}-qtscript \
-     ${PN}-qtserialport \
-     ${PN}-qtbase \
-@@ -82,10 +88,6 @@ FILES_${PN}-qtxmlpatterns = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtxmlpatterns_*.qm \
- "
- 
--FILES_${PN}-qtquick1 = " \
--    ${OE_QMAKE_PATH_TRANSLATIONS}/qtquick1_*.qm \
--"
--
- FILES_${PN}-qtscript = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtscript_*.qm \
- "
--- 
-2.14.3
+But obviously the demo-dbg package isn't empty because it has its "FILES" defined ;-)
 
+> 
+> 1129 python populate_packages () {
+> 1130     import glob, re
+> 
+> 1156     for pkg in packages.split():
+> 1157         if pkg in package_list:
+> 1158             msg = "%s is listed in PACKAGES multiple times, this leads to packaging errors." % pkg
+> 1159             package_qa_handle_error("packages-list", msg, d)
+> 1160         # If debug-with-srcpkg mode is enabled then the src package will have
+> 1161         # priority over dbg package when assigning the files.
+> 1162         # This allows src package to include source files and remove them from dbg.
+> 1163         elif split_source_package and pkg.endswith("-src"):
+> 1164             package_list.insert(0, pkg)
+> 1165         elif autodebug and pkg.endswith("-dbg") and not split_source_package:    <==============
+> 1166             package_list.insert(0, pkg)
+> 1167         else:
+> 1168             package_list.append(pkg)
+> 1169     d.setVar('PACKAGES', ' '.join(package_list))
+> 1170     pkgdest = d.getVar('PKGDEST')
+> ...
+> 
+> 1177     debug = []
+> 1178     for root, dirs, files in cpath.walk(dvar):
+> 1179         dir = root[len(dvar):]
+> 1180         if not dir:
+> 1181             dir = os.sep
+> 1182         for f in (files + dirs):
+> 1183             path = "." + os.path.join(dir, f)
+> 1184             if "/.debug/" in path or path.endswith("/.debug"):    <==============
+> 1185                 debug.append(path)
+> 1186
+> 
+>>
+>> Nonehteless according to my first quick test the demo-dbg package
+>> contains lots of other debug information too...
+>> So maybe it would be the better way to fix the content of the different
+>> dbg packages rather than removing one?
+> 
+> I also thought this, but  after discussing with the other guys,  the result is a recipe can only have
+> a -dbg package, and this is OE's policy.
+
+Do you have a pointer to this discussion (or if it exists to the according documentation) for us?
+
+Thanks & regards;Richard.L
 
