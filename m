@@ -1,68 +1,57 @@
-Return-Path: <prvs=690673e92=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id A9E07753C1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 23045753C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jun 2018 07:39:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.49,490,1520895600"; 
-   d="scan'208";a="1488552"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180607092459.33931-1-wenlin.kang@windriver.com>
-	<20180607092459.33931-2-wenlin.kang@windriver.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <2dae9a9a-a6e4-1c01-d167-0dc92f9e1bbf@skidata.com>
-Date: Fri, 8 Jun 2018 09:39:38 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Fri,  8 Jun 2018 07:41:36 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id a22-v6so6202989pfo.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Jun 2018 00:41:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=EDg56r0JsKq9fNFJ7kzr1w3VIPH37MFyPVVdnzXWbLU=;
+	b=cVe3cHd9cNUwRabOvZGvlqvFnrLfkM3sDyqzt0dlAmGpBVHTsi3TSt4193x1pfNfMb
+	uWlsxgOVaA2nyv9CHguDDI7MDmUDr8+UI7vGFXNmyBswXggTYVt+8CLewxtLcl3ajrDI
+	Pt+xnBGZDBEW2otdSd0iWsMko0zq0wM6Q6gxNSBGADhjj7jpdxKetFvsODwZOHhXkysj
+	nMOd7y6D0LR7d2Af8LU5JN18jbbN6wbNbwfjnSWFutrLmQW8+UXsoC/V73bjIs+JVCk1
+	xNLAgSvRf6txhwNRhQx7Ymue4GsPzh8kFknMDPwTLbTA6eNV3he5PC2wOEd2CDB4ohuJ
+	lCBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=EDg56r0JsKq9fNFJ7kzr1w3VIPH37MFyPVVdnzXWbLU=;
+	b=GAgmEvcDLNJYAabSjtK9YEojPzeBLiFZJuMEp2y1cPJoLmOtJ98E/X/9oSTCnsQbae
+	5CAEXhF2BGgNNvMTGOMWGy5gwUBI41kjdNG5QiYfVgyoLHCtJC89+Wq57AMRBoCyLNCL
+	VP/2bbvoqqvaAs1Ny7EfO7F1UQ0FRQtUD3dS8GQCr/o3XQGywzQoVD/HbDVpmNKU91Kw
+	ELqPv5TybzDMvHDEms09B8c6OeAYNaMuDrDzHy64ve2Q3O3WHuLj0HrYWcaxLawR9oRl
+	yi78THvlkp5PoG6IDZUY5L/THekcWTV6cIAKRoWMARzXikGVDRg8L+9LRpI8reGK/fWG
+	ahkA==
+X-Gm-Message-State: APt69E3mODUdd2jjqRLKIgXEMSEGg/5YZIG2xkdMRYXXD6qy9SdmvHlW
+	G0QAYR68MGYubrpyl/PhzYe7GCKM
+X-Google-Smtp-Source: ADUXVKLRS9f2sgXqZzorUEi1KqVxves/7lciLO/XQvDoZDTAFtSJ8EVd2wddFZVHGEiBoHyha6t/lA==
+X-Received: by 2002:a65:5d09:: with SMTP id
+	e9-v6mr4332895pgr.150.1528443697819; 
+	Fri, 08 Jun 2018 00:41:37 -0700 (PDT)
+Received: from hermes.local ([2601:646:877f:9499:4576:376:b010:94ac])
+	by smtp.gmail.com with ESMTPSA id
+	u9-v6sm107546426pfi.60.2018.06.08.00.41.36
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 08 Jun 2018 00:41:37 -0700 (PDT)
+To: Dengke Du <dengke.du@windriver.com>, anuj.mittal@intel.com,
+	openembedded-devel@lists.openembedded.org
+References: <1528422567-14811-1-git-send-email-dengke.du@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <6effc8de-1e88-ea90-4f5b-7f44305ef48b@gmail.com>
+Date: Fri, 8 Jun 2018 00:41:35 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <20180607092459.33931-2-wenlin.kang@windriver.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8: combine the -dbg package
+In-Reply-To: <1528422567-14811-1-git-send-email-dengke.du@windriver.com>
+Subject: Re: [meta-intel][PATCH V2] mce-test: add it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,35 +64,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2018 07:39:30 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Fri, 08 Jun 2018 07:41:37 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Hi,
-thank you for you patch!
+Hi Dengke
 
-On 06/07/2018 11:24 AM, Wenlin Kang wrote:
-> One recipe should only have one -dbg package, because OE only picks
-> up all .debug file into the last one -dbg package listed in variable
-> PACKAGES.
+subject seems to indicate its for meta-intel. if so then its sent to 
+wrong ml.
 
-Why should one recipe, altough it conains multiple packages have only
-one dbg package? Shouldn't the openjdk-8-demo-dbg package contain the
-debug information for the openjdk-8-demo package?
-
-Nonehteless according to my first quick test the demo-dbg package
-contains lots of other debug information too...
-So maybe it would be the better way to fix the content of the different
-dbg packages rather than removing one?
-
-But I'm of course open for discussions ;-)
-
-> 
-> Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+On 6/7/18 6:49 PM, Dengke Du wrote:
+> Signed-off-by: Dengke Du <dengke.du@windriver.com>
 > ---
->  recipes-core/openjdk/openjdk-8_16xbyy.bb | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
+>   .../mce-test/files/makefile-remove-ldflags.patch   | 23 +++++++++++
+>   recipes-kernel/mce-test/mce-test_git.bb            | 48 ++++++++++++++++++++++
+>   2 files changed, 71 insertions(+)
+>   create mode 100644 recipes-kernel/mce-test/files/makefile-remove-ldflags.patch
+>   create mode 100644 recipes-kernel/mce-test/mce-test_git.bb
+> 
+> diff --git a/recipes-kernel/mce-test/files/makefile-remove-ldflags.patch b/recipes-kernel/mce-test/files/makefile-remove-ldflags.patch
+> new file mode 100644
+> index 0000000..0ffedd2
+> --- /dev/null
+> +++ b/recipes-kernel/mce-test/files/makefile-remove-ldflags.patch
+> @@ -0,0 +1,23 @@
+> +Remove the default CFLAGS and LDFLAGS in Makefile. Ensure the extra linker flags can be passed.
+> +
+> +Upstream-Status: Inappropriate [embedded specific]
+> +
+> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> +
+> +diff --git a/cases/stress/hwpoison/Makefile b/cases/stress/hwpoison/Makefile
+> +index da1cbd8..dec5b14 100644
+> +--- a/cases/stress/hwpoison/Makefile
+> ++++ b/cases/stress/hwpoison/Makefile
+> +@@ -1,8 +1,8 @@
+> +-CFLAGS := -g -Wall
+> +-LDFLAGS := -g
+> ++#CFLAGS := -g -Wall
+> ++#LDFLAGS := -g
+> +
+> +-export CFLAGS
+> +-export LDFLAGS
+> ++#export CFLAGS
+> ++#export LDFLAGS
+> +
+> + all:
+> + 	mkdir -p bin
+> diff --git a/recipes-kernel/mce-test/mce-test_git.bb b/recipes-kernel/mce-test/mce-test_git.bb
+> new file mode 100644
+> index 0000000..dca26a6
+> --- /dev/null
+> +++ b/recipes-kernel/mce-test/mce-test_git.bb
+> @@ -0,0 +1,48 @@
+> +#
+> +# Copyright (C) 2012 Wind River Systems, Inc.
+> +#
+> +SUMMARY = "MCE test suite"
+> +
+> +DESCRIPTION = "The MCE test suite is a collection of tools and test scripts for \
+> +testing the Linux RAS related features, including CPU/Memory error \
+> +containment and recovery, ACPI/APEI support etc."
+> +
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+> +
+> +PR = "r2"
 
-regards;Richard.L
+Drop PR
+
+> +
+> +SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mce-test.git;protocol=git \
+> +           file://makefile-remove-ldflags.patch \
+> +          "
+> +# Use the commit date of SRCREV in PV.
+> +#
+> +SRCREV = "74bffd8b0aa27051aeaa1983a7b23975ca8d8726"
+> +PE = "1"
+
+We do not need PE its a new recipe.
+
+> +PV = "20171030+git${SRCPV}"
+> +
+> +RDEPENDS_${PN} = "mcelog mce-inject dialog bash"
+> +
+> +COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
+> +
+> +S ="${WORKDIR}/git"
+> +
+> +inherit autotools-brokensep
+> +
+> +do_install_append(){
+> +   install -d ${D}/opt/mce-test
+> +   cp -rf ${S}/* ${D}/opt/mce-test/
+> +}
+> +
+> +FILES_${PN} += "/opt"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/function/hwpoison/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/function/erst-inject/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/function/pfa/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/function/core_recovery/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/stress/hwpoison/bin/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/stress/hwpoison/tools/page-poisoning/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/cases/stress/hwpoison/tools/fs-metadata/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/bin/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/tools/ltp-pan/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/tools/simple_process/.debug"
+> +FILES_${PN}-dbg += "/opt/mce-test/tools/page-types/.debug"
+> 
 
