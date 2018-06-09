@@ -1,24 +1,48 @@
-Return-Path: <sjl@vctlabs.com>
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id 10D047524B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f53.google.com (mail-pl0-f53.google.com
+	[209.85.160.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 036F7751D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jun 2018 23:18:41 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id D56AD280428; Fri,  8 Jun 2018 16:22:40 -0700 (PDT)
-Date: Fri, 8 Jun 2018 16:22:40 -0700
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20180608232240.GG31886@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <20180608225036.GF31886@vctlabs.com>
-	<CA+chaQccz9f-D+V3vbYLoEen-ZRA_-0MZZRFAj2Rg4rmghe7pw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQccz9f-D+V3vbYLoEen-ZRA_-0MZZRFAj2Rg4rmghe7pw@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [sumo][meta-qt5][PATCH] qt: upstream git branch 5.10.1 disappeared
+	Sat,  9 Jun 2018 06:44:14 +0000 (UTC)
+Received: by mail-pl0-f53.google.com with SMTP id c23-v6so9461205plz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Jun 2018 23:44:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=+Bd7RKV6IrhNn0AexGKhf04ncgGOoHqlK0YWxS/uf2Y=;
+	b=UIPNtXhF3MyEl2/V7LRlt7PPefNYDMk2cndp1iYKBTWXVk41hoMixDlqMsad2hZJ91
+	i/Ho1pb2/IJm7FTBzLwgGzMmIME9wrQnB+DOmXnccGEItQ5w2gEyKKOR/uBBMx3JoFCN
+	1Q6acwVtfP3wBMTVrZrhGZKHgaXAyMHpmfmwlQyYx8y3aef23CziCy+ZTu0J19d0wu+W
+	ZJc2/yysE/aB/EbqqYq7dsjYitq3VtfhEuCxYmrG8l2K53WHC2iUsKY807j2VRbML+4/
+	u5RBR7ESWf0xUAQFUn1sD719UUPt4akM7LyXg61bFYz1iOlsgr6wfbM/wzUbUbOIoYuJ
+	zJZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+Bd7RKV6IrhNn0AexGKhf04ncgGOoHqlK0YWxS/uf2Y=;
+	b=QFU9VVQrIWU4JGqEIPO6ZMaJnG29Rz4aOEoOUjYOqAup2epLb9u/jRiSaBqV0VLbi5
+	1rbW2621TtCSEkPJdeiSg4VFKdpLG5v19NzCeN/BDk/W9ylMDglxjS0V5tpcSyINNJJK
+	leRdVUfhURB1QDAch0ltQqUliwOn/xd0F7qdXw9LFuscsMeFYxBfrVcn1x36TKaPuhP7
+	BH2sD8bdnezd6b/37KQcPIUZq3R9P8cg2uoUgggwGwnJyX22EFD1BrWKzdbiFfetJKsi
+	QVq4k2pBxtelUXhu73GBxeeA+LkMox6UOfxNnNIiPd/HoWkIaBsQORsvyxCF4SBPcofW
+	G/lw==
+X-Gm-Message-State: APt69E0Val9oRqnpCIIKEdKrLcoajZ/AGjqI9t7Bx5uqHSqWnKgC8iHd
+	z8VTEvOboOxBb+NAx+sMgHhQ6A==
+X-Google-Smtp-Source: ADUXVKJyvgbyX5rZtYIOd693a9iJCwbVp3ehJcww8Cc3/cj0aonul2t+Y+tg7Z8++P/thm886b1efA==
+X-Received: by 2002:a17:902:8f93:: with SMTP id
+	z19-v6mr9640865plo.166.1528526655778; 
+	Fri, 08 Jun 2018 23:44:15 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::c68])
+	by smtp.gmail.com with ESMTPSA id
+	c67-v6sm26926352pfj.173.2018.06.08.23.44.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 08 Jun 2018 23:44:15 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  8 Jun 2018 23:44:10 -0700
+Message-Id: <20180609064415.10270-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH 1/6] celt051: Fix building testcases
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,96 +55,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jun 2018 23:18:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 09 Jun 2018 06:44:15 -0000
 
-Yes, agreed that would be nicer... I don't understand the point of '5.10' branch,
-since it doesn't contain *any* of the official v5.10.x release tags! 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...tcode.c-into-test-sources-to-provide.patch | 55 +++++++++++++++++++
+ .../recipes-support/celt051/celt051_git.bb    |  5 +-
+ 2 files changed, 58 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch
 
-On Sat, Jun 09, 2018 at 12:52:57AM +0200, Martin Jansa wrote:
-> It would be much nicer if they exist at least on 5.10 branch instead of
-> 5.11 :/.
-> 
-> Pruning origin
-> URL: git://code.qt.io/qt/qtbase.git
->  * [pruned] origin/5.10.1
->  * [pruned] origin/5.9.0
->  * [pruned] origin/5.9.4
->  * [pruned] origin/5.9.5
-> 
-> I still don't understand why they delete the branches, the commits are
-> still there, having them reachable from multiple branches doesn't add any
-> significant overhead.
-> 
-> On Sat, Jun 9, 2018 at 12:46 AM S. Lockwood-Childs <sjl@vctlabs.com> wrote:
-> 
-> > The branch called 5.10.1 no longer exists at code.qt.io repos.
-> >
-> > The corresponding v5.10.1 qt tags still exist (at least on those repos
-> > that originally got tagged during the release), and they are available
-> > on the 5.11 branch. Thus we can keep Qt source at 5.10.1 commits, but
-> > use 5.11 branch to check out those specific commits.
-> >
-> > This could be a bit confusing, making it look like 5.11 is the current
-> > default version for recipes, so for now there is a comment in qt5-git.inc
-> > trying to clarify the situation.
-> >
-> > A couple of repos that already were lacking 5.10.1 branch no longer
-> > need to override QT_MODULE_BRANCH, since their chosen commits are
-> > also available on 5.11 branch.
-> >
-> > Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
-> > ---
-> >  recipes-qt/qt5/qt5-git.inc   | 3 ++-
-> >  recipes-qt/qt5/qtknx_git.bb  | 2 --
-> >  recipes-qt/qt5/qtmqtt_git.bb | 2 --
-> >  3 files changed, 2 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-> > index beba913..ae50871 100644
-> > --- a/recipes-qt/qt5/qt5-git.inc
-> > +++ b/recipes-qt/qt5/qt5-git.inc
-> > @@ -2,7 +2,8 @@
-> >  # Copyright (C) 2013-2018 Martin Jansa <martin.jansa@gmail.com>
-> >
-> >  QT_MODULE ?= "${BPN}"
-> > -QT_MODULE_BRANCH ?= "5.10.1"
-> > +# branch named 5.10.1 got deleted upstream, but v5.10.1 tag still exists
-> > on 5.11 branch
-> > +QT_MODULE_BRANCH ?= "5.11"
-> >  QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH}"
-> >
-> >  # each module needs to define valid SRCREV
-> > diff --git a/recipes-qt/qt5/qtknx_git.bb b/recipes-qt/qt5/qtknx_git.bb
-> > index fa981ab..5e01e3c 100644
-> > --- a/recipes-qt/qt5/qtknx_git.bb
-> > +++ b/recipes-qt/qt5/qtknx_git.bb
-> > @@ -9,6 +9,4 @@ LIC_FILES_CHKSUM = " \
-> >
-> >  DEPENDS += "qtbase"
-> >
-> > -QT_MODULE_BRANCH = "5.10"
-> > -
-> >  SRCREV = "29c34e8f072afd01002ed3847d752b4e065f977e"
-> > diff --git a/recipes-qt/qt5/qtmqtt_git.bb b/recipes-qt/qt5/qtmqtt_git.bb
-> > index 90c255d..b705f7c 100644
-> > --- a/recipes-qt/qt5/qtmqtt_git.bb
-> > +++ b/recipes-qt/qt5/qtmqtt_git.bb
-> > @@ -9,6 +9,4 @@ LIC_FILES_CHKSUM = " \
-> >
-> >  DEPENDS += "qtbase"
-> >
-> > -QT_MODULE_BRANCH = "5.10"
-> > -
-> >  SRCREV = "2c3c2a41c55a179332ec2a076856990f36dd5ef9"
-> > --
-> > 1.9.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+diff --git a/meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch b/meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch
+new file mode 100644
+index 0000000000..cc893f0999
+--- /dev/null
++++ b/meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch
+@@ -0,0 +1,55 @@
++From 61fbdddb660c5944ac23b820754a7c4cf4eee097 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 8 Jun 2018 19:29:03 -0700
++Subject: [PATCH] tests: Include entcode.c into test sources to provide
++ definitions of functions e.g. ec_ilog()
++
++Fixes link errors in tests
++| /usr/src/debug/celt051/0.5.1.3+gitAUTOINC+5555aae843-r0/git/tests/../libcelt/rangedec.c:202: undefined reference to `ec_ilog'
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/cwrs32-test.c  | 1 +
++ tests/ectest.c       | 2 +-
++ tests/laplace-test.c | 1 +
++ 3 files changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/tests/cwrs32-test.c b/tests/cwrs32-test.c
++index 3a95df2..a159ab3 100644
++--- a/tests/cwrs32-test.c
+++++ b/tests/cwrs32-test.c
++@@ -8,6 +8,7 @@
++ #include "rangeenc.c"
++ #include "rangedec.c"
++ #include "cwrs.c"
+++#include "entcode.c"
++ #include <string.h>
++ #define NMAX (10)
++ #define MMAX (9)
++diff --git a/tests/ectest.c b/tests/ectest.c
++index aa35453..94eb9a3 100644
++--- a/tests/ectest.c
+++++ b/tests/ectest.c
++@@ -5,7 +5,7 @@
++ #include <stdlib.h>
++ #include <stdio.h>
++ #include <math.h>
++-#include "entcode.h"
+++#include "entcode.c"
++ #include "entenc.c"
++ #include "entdec.c"
++ #include "rangeenc.c"
++diff --git a/tests/laplace-test.c b/tests/laplace-test.c
++index 3f98ab3..8e1fb4e 100644
++--- a/tests/laplace-test.c
+++++ b/tests/laplace-test.c
++@@ -6,6 +6,7 @@
++ #include <stdlib.h>
++ #include "laplace.c"
++ #include "stack_alloc.h"
+++#include "entcode.c"
++ #include "entenc.c"
++ #include "entdec.c"
++ #include "rangeenc.c"
+diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
+index 850704f5af..116800522a 100644
+--- a/meta-networking/recipes-support/celt051/celt051_git.bb
++++ b/meta-networking/recipes-support/celt051/celt051_git.bb
+@@ -17,8 +17,9 @@ PV = "0.5.1.3+git${SRCPV}"
+ SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
+ 
+ SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
+-    file://0001-configure.ac-make-tools-support-optional.patch \
+-"
++           file://0001-configure.ac-make-tools-support-optional.patch \
++           file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.17.1
+
 
