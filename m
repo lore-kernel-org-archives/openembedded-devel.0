@@ -1,51 +1,51 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E5CD5782E1
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BAE078BCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 01:05:59 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id r125-v6so10065409wmg.2
+	Sun, 10 Jun 2018 01:23:58 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id 69-v6so10099621wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jun 2018 18:06:01 -0700 (PDT)
+	Sat, 09 Jun 2018 18:23:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=g9OjWkUpEmvzceeXhRB8j29Vej/xlR4dvsCHPmA8/1c=;
-	b=kgiNtejc1kS8FwKUHt3sNf5ZnW3CRj8ZNLBjgwgRzIWb+XO2Uy3R3aE7X0FXFczv92
-	GJrnr8a1Q53WKHSbTiSp7+RBiZRP7oxjctA19O2S7rC9a8FNkrfmExKHh8HoqWgvvgn3
-	qyuFpG1+mqPBLWBDupSX/2fCzDQeZxuhOtnk4mNZ+afbk6C+8hyEjpnJtb+Fn0b9RdYZ
-	ZWQxpwbBU94XjisGoftqEN9jdA1QGRzr0ItijY+gqYFWfA3B21R8ycytoPkDWbVaS/C5
-	RBvgJMukWWTpcCHjE0Z3281bAI2tiNfzkXEQnqiKDKC/VJ6V2oSqylaebaVpnAj9QG1P
-	ZWJA==
+	bh=+7MC+Xqenn+fCef/8nBWKBxPfnhwGbSovhZ50Rj8nTI=;
+	b=yOCfZyOKnC+ziKRavIOfWo99/8zvj6DDUXtyS2YL4Q8+6HD73b7ozJnDT0r8Gnq0jR
+	O39voGypseBEBl0MSXLlD2u8PQVNrvqjTmW0OeqCIk2FrujhR26UtuQ8p0MTkdnHb6Qx
+	Lp4tELA/MPP5G3eFWTmO67Alc42Kdc15sX166ufM7uGhiDUPCVMRn68mbZMVihuIE5Vt
+	adMaAfi4WMwbTMZWIGZS2/mC4LGCqTqL7ocPl/osYumOYXU08HL35YoFIKlXKtg6txB4
+	1m5xXMm1ElUxlPl9ozolR878+b7H26EE9v6gO7sOZ0oKTqZfiN/SKfsuF2Xvzyxw9gEF
+	5lFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=g9OjWkUpEmvzceeXhRB8j29Vej/xlR4dvsCHPmA8/1c=;
-	b=uWXzoKZxBXXDvb+8GC+fR9FozT7S/9iHQyhSImE4BQKcmepS57mNqf0DSbSkK4QWFR
-	Xd7l0LsWlRWR1oZ5UB7CJSfaZs4ks2EPnPcC+HOMIp/kRiPy6yMQcXsnp75DsTaOUVoe
-	nqEO3X8Wv+Cf2h/atXaX0tQiQsEA6jwuYJIViV2R5s6ihyxswpjE93QmItQf1R2v57Ya
-	Yptl9A+hhFatn8UOkvW0dSpPExyA0DvCuFtL+A9pdPm1j6eEDw+Xe1chMXzBWT3afHmS
-	VMBcjbctR2hx9rItJoWWTQtIg8SSu8rNyf8sW+b3Wu3qIcCpsbWucXN4GKf6+5l5Os4H
-	sVPg==
-X-Gm-Message-State: APt69E04OeNUJX7/uoRyYE/MvroB5c8y2itALFyyiqTaJp0kucRHv1ww
-	YZcHM1vq2FbLbYng0pt4Mf/M4GBK
-X-Google-Smtp-Source: ADUXVKJ9SaoKp7/xILBYJQhGih1yinH6cceCMuILpYEXPqOO12NuXSp4OlIp1/nwhfA4VIuXu5J3Ww==
-X-Received: by 2002:a50:89d3:: with SMTP id
-	h19-v6mr13078314edh.225.1528592760282; 
-	Sat, 09 Jun 2018 18:06:00 -0700 (PDT)
+	bh=+7MC+Xqenn+fCef/8nBWKBxPfnhwGbSovhZ50Rj8nTI=;
+	b=ZB9mEqW5cL8L+YwEKEh4KXQT4WKLuSCP4z9NicEn7Re8yP8ck4u2ppb8nHzbQzHy2p
+	oDYQZ57crOkJe39VHddyP1h1XspFyELTXhjm1/RblRM/cAmyIdVkm0hY9RWAmN5O27bG
+	tmO3gZa2ewAfEsZg6D9vdVDRvO1EpFItkhSReyxu1kZMjMlGaY4ZyqPiilC6hu3pRoZN
+	zb8Pn+1R7zV83ymRVYR2L+QgIXpgH5YE3rxCkXlTEHKAMabyfutsPCYYPINSS/KHUk/6
+	xn5+zYokuHYkVc4E09a75NeTPU2YSoSrED3aqHytDLhLciW2HzA7cwiP51rVOgGLkS7p
+	L6eg==
+X-Gm-Message-State: APt69E35VHGwXR0ZbTW+g2z9ehr5maqG3qFeWZZoGZK+43/TTILxY3yD
+	XHqc/fWZN/xzfEEe7pbrHG7l0AFB
+X-Google-Smtp-Source: ADUXVKKSRrukxNeNQetvn57Lcui1zr8vi6liHoQsEj4zo7f7r2wbhaeF3NhniKDpkXdMj2+aMTg4YQ==
+X-Received: by 2002:a50:a7a1:: with SMTP id
+	i30-v6mr7534584edc.74.1528593838868; 
+	Sat, 09 Jun 2018 18:23:58 -0700 (PDT)
 Received: from localhost.localdomain
 	([2a04:ae08:1403:ff00:ddc6:6bd0:776b:2bb8])
 	by smtp.gmail.com with ESMTPSA id
-	l13-v6sm5351017edn.74.2018.06.09.18.05.59
+	s2-v6sm19009635edm.13.2018.06.09.18.23.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Jun 2018 18:05:59 -0700 (PDT)
+	Sat, 09 Jun 2018 18:23:58 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 03:05:37 +0200
-Message-Id: <20180610010537.14941-1-dev@sashko.rv.ua>
+Date: Sun, 10 Jun 2018 03:23:54 +0200
+Message-Id: <20180610012354.12172-1-dev@sashko.rv.ua>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <dev@sashko.rv.ua>
-Subject: [meta-oe][PATCH] libconfig: update to 1.7.2
+Subject: [meta-oe][PATCH] mercurial: upgrade to 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,64 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 01:06:00 -0000
-
-Updated the package and SRC_URI, since the project is now maintained at
-github.com/hyperrealm/libconfig.
+X-List-Received-Date: Sun, 10 Jun 2018 01:23:58 -0000
 
 Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
 ---
- .../libconfig/libconfig_1.5.bb                | 14 --------------
- .../libconfig/libconfig_1.7.2.bb              | 19 +++++++++++++++++++
- 2 files changed, 19 insertions(+), 14 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
- create mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
+ .../mercurial/{mercurial_4.4.bb => mercurial_4.6.1.bb}       | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/mercurial/{mercurial_4.4.bb => mercurial_4.6.1.bb} (79%)
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-deleted file mode 100644
-index fb6e50e51..000000000
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "C/C++ Configuration File Library"
--DESCRIPTION = "Library for manipulating structured configuration files"
--HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
--SECTION = "libs"
--
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
--
--SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
--
--inherit autotools-brokensep pkgconfig
--
--SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
--SRC_URI[sha256sum] = "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-new file mode 100644
-index 000000000..eb0a2c3ec
---- /dev/null
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "C/C++ Configuration File Library"
-+DESCRIPTION = "Library for manipulating structured configuration files"
-+HOMEPAGE = "https://hyperrealm.github.io/libconfig/"
-+BUGTRACKER = "https://github.com/hyperrealm/libconfig/issues"
-+SECTION = "libs"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
-+
-+SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz"
-+
-+inherit autotools-brokensep pkgconfig
-+
-+SRC_URI[md5sum] = "6bd98ee3a6e6b9126c82c916d7a9e690"
-+SRC_URI[sha256sum] = "7c3c7a9c73ff3302084386e96f903eb62ce06953bb1666235fac74363a16fad9"
-+
-+FILES_${PN}_append = " \
-+    ${libdir}/cmake \
-+"
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb b/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+similarity index 79%
+rename from meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb
+rename to meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+index 90524974b..7e0df2e66 100644
+--- a/meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb
++++ b/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+@@ -10,8 +10,9 @@ RDEPENDS_${PN} = "python python-modules"
+ inherit python-dir
+ 
+ SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+-SRC_URI[md5sum] = "c1d9fad1b7ed7077b0d4ae82e71154db"
+-SRC_URI[sha256sum] = "234af4a67565c85923b0a1910c704ab44bcf12f69b85532687208776563d87de"
++SRC_URI = "https://www.mercurial-scm.org/release/mercurial-4.6.1.tar.gz'."
++SRC_URI[md5sum] = "f9b2e4a3b5901ef744fa3abe4196e97e"
++SRC_URI[sha256sum] = "89fa8ecbc8aa6e48e98f9803a1683ba91367124295dba2407b28c34ca621108d"
+ 
+ S = "${WORKDIR}/mercurial-${PV}"
+ 
 -- 
 2.17.1
 
