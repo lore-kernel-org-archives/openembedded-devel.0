@@ -1,56 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 116FD77042
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D89976085
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 15:08:47 +0000 (UTC)
-Received: by mail-wr0-f172.google.com with SMTP id d8-v6so17799315wro.4
+	Sun, 10 Jun 2018 15:08:48 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id z6-v6so12697291wma.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 08:08:48 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=RuEMKT5YkSwcbOY+s1s94gz165KH5hR7M6tM/nGBlIA=;
-	b=ixahDaUqBDRovRwW0EUOBMGl81jC/y+h/9GnXHePXDdzHQ6u4hZ1ofhVLsW15gkf+p
-	v/ZSY0NV7mqBN1iyO4d9HUXv6gXyEGm5im2SIxg9SkfiIALYVIWaAptj/UVHK36wzUcJ
-	YLba3yy/1zaNN89Flx9keO44RhDb5ZBhxdtoQHJO+jJzpgvl86V23QM8n3ySrr+uxUa/
-	ps9G9nOj8OPtoX7IYNRWXWz+t7uxfoWxaV/Il7NsYuhrpwuFYf4eFN8jCqXM9y7yQxtt
-	pJxF0nC6C7ERhSpLmjWjugfe53IsT27xgIKC9eHDG+f5GFnjw9EQbAKPMo7tbtX8HO6f
-	MmuQ==
+	bh=8FO+99dw1U0tWjXP9+yokM0MbpJnVYfIZUBjE8zA98g=;
+	b=tl4VN7ZtKuxfWDZSAXJIFVmlLI7Jn//yG5oFdCMIiHKNCQeuKrxDNpSryCAD7Cr+Nq
+	3cR4Kp8b/TlkskL9D1yPmlVAlkociWEIqWV/nn0kqG7ykIkFzhnLxEFgM8G2aND3Y/A/
+	VNUufi/9BaXj6zv/Ua5A3F1B0O8spiMCyc6kIKz9vhIN0Bj6BFSu+a0ui3q7PZPor1nH
+	tbJ/86SBOGb67M85xJvRn+lDaBk9zfkASnHR2FjGOzwlDPBerl88WeaVvWYfa67qF0Uf
+	wb9pG7tusRpZxOK4nLHVQ4X4NOQYZCwwgD9r6lH457BDPHrTFhsMHG1q9k8Ui3v8CgZH
+	6tqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=RuEMKT5YkSwcbOY+s1s94gz165KH5hR7M6tM/nGBlIA=;
-	b=qL7psIslnEeUNK3PXuYSQVyT/bJ3iJ6CEK7em5P9fhzu9ewBm05OZHvPOkSZ+trydR
-	JJlKU4IDX0Hyh5u9W01rUeQfJ+A++J+xMTvUWf5nc1JsmS0T9MGZsG5FAkYEi0cCXZvD
-	U3OcF6/JumTpC4ytSHRcvAGKORovRv6OZVXKLneQJ9T4PVkq+GsTQl4dzENP6T06K5gE
-	duNerT0GSb1VKv8TCkZzKzVsEv7/Wz/dJSfp415II2ZT+AFGfvTbDw3KSHer0ezsi+6V
-	wrKvUm7wqyBIBOkGa+NMSqfl8R4dzGlpPDLm7JS6BYyJobEYatiiNNWCQ4G1eJg+7Vr6
-	JYoQ==
-X-Gm-Message-State: APt69E3bU4L+GKx0I7yqg3RlE3kVu0Jdog/0RieCeQUHD7zXvJBRtwh5
-	oiwmrMuTSJpbqxkPaPojbZhgUw==
-X-Google-Smtp-Source: ADUXVKJIDTWXcxzA8TQb20iHinGI5P2b5RaYU8ALaMRfnR+zX1kMCK3mB32/EfxYc40rvWlAfNpdKw==
-X-Received: by 2002:adf:91e5:: with SMTP id
-	92-v6mr10438037wri.124.1528643327600; 
-	Sun, 10 Jun 2018 08:08:47 -0700 (PDT)
+	bh=8FO+99dw1U0tWjXP9+yokM0MbpJnVYfIZUBjE8zA98g=;
+	b=TLn3IuMKjl8mEtcT0JJ908lplBe7SfNmLCRhkSQSO68sqenMNutEswcK7fbYBrnm9q
+	GaGpoaiyVz7OG/M3GaplP1M+/aGiv8rNtoJdcr5BrniVGfdBQKTdEycTV6IiflTZpZj5
+	qd9M6iSRXKsCWT0uGMfZj4UsO8yqTj5e9actMgHp8zqE2lK4tsAxj4P90dt29kLNw7ME
+	460dWg90B1sk0w+J3fLtiFKP5Uo5TMw6nJgjpvAQ+xGcQYjF3JYbWWDEobuy6IMFjQRo
+	Qo/f3M8H+xhL2sNnwxS30+1E2MeVPWY6xXLTjrVztz35Mvwd1TtqYvCCbXid9sThwuzK
+	L0ug==
+X-Gm-Message-State: APt69E1BUyVwzWSHs3K93DTCk9fO6xqviOpwC0ArebHRS9QcJi0etZ+f
+	PuLNUMN2jHfFqbzf7/+mnXUp9A==
+X-Google-Smtp-Source: ADUXVKKtJZZowKXpzqx44uXElBzZlXAugh/aWoe2KpOGPL3lA7OjMiSuTUsD64Uj7n3inuuSa2tg3Q==
+X-Received: by 2002:a1c:124f:: with SMTP id 76-v6mr6174758wms.29.1528643328703;
+	Sun, 10 Jun 2018 08:08:48 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC13F69C25723999916AF42.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:3f69:c257:2399:9916:af42])
 	by smtp.gmail.com with ESMTPSA id
-	z16-v6sm43360230wro.41.2018.06.10.08.08.46
+	z16-v6sm43360230wro.41.2018.06.10.08.08.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 10 Jun 2018 08:08:46 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:47 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 17:08:07 +0200
-Message-Id: <20180610150821.9536-6-schnitzeltony@gmail.com>
+Date: Sun, 10 Jun 2018 17:08:08 +0200
+Message-Id: <20180610150821.9536-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180610150821.9536-1-schnitzeltony@gmail.com>
 References: <20180610150821.9536-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 05/19] ristretto: fix build after update of xfconf
+Subject: [meta-xfce][PATCH 06/19] xfce4-settings: fix build after update of xfconf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,74 +61,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 15:08:47 -0000
+X-List-Received-Date: Sun, 10 Jun 2018 15:08:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-Fix-build-after-update-of-xfconf.patch    | 40 ++++++++++++++++++++++
- .../recipes-apps/ristretto/ristretto_0.8.2.bb      |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch
+ .../0002-Fix-linking-to-dbus-glib-bug-13633.patch  | 41 ++++++++++++++++++++++
+ .../xfce4-settings/xfce4-settings_git.bb           |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch
 
-diff --git a/meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch b/meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch
+diff --git a/meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch b/meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch
 new file mode 100644
-index 000000000..5cdc8c728
+index 000000000..109b7b145
 --- /dev/null
-+++ b/meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch
-@@ -0,0 +1,40 @@
-+From 2b6bdb860ef53975c7e866f393b61d253c00754d Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Mon, 22 Jan 2018 15:52:09 +0100
-+Subject: [PATCH] Fix build after update of xfconf
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-xfce/recipes-xfce/xfce4-settings/files/0002-Fix-linking-to-dbus-glib-bug-13633.patch
+@@ -0,0 +1,41 @@
++From b6e46e6a84e45f7bd954687be703987825a54c1e Mon Sep 17 00:00:00 2001
++From: Eric Koegel <eric.koegel@gmail.com>
++Date: Sun, 11 Jun 2017 11:38:26 +0300
++Subject: [PATCH] Fix linking to dbus-glib (bug #13633)
 +
-+xfconf stopped using dbus-glib so required flags must be included here
++With xfconf moving to GDBus nothing provides the libs for dbus-glib
++that xfce4-settings requires. This patch adds the libs back in until
++settings can be ported to GDBus.
 +
-+Upstream-Status: Pending
++Signed-off-by: Sean Davis <smd.seandavis@gmail.com>
 +
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++Upstream-Status: Backport
 +---
-+ src/Makefile.am | 2 ++
-+ 1 file changed, 2 insertions(+)
++ xfce4-settings-editor/Makefile.am | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 36a31dc..3dd56bc 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -30,6 +30,7 @@ ristretto_CFLAGS = \
-+ 	$(GIO_UNIX_CFLAGS) \
-+ 	$(LIBEXIF_CFLAGS) \
++diff --git a/xfce4-settings-editor/Makefile.am b/xfce4-settings-editor/Makefile.am
++index 5964366..c2c7c4b 100644
++--- a/xfce4-settings-editor/Makefile.am
+++++ b/xfce4-settings-editor/Makefile.am
++@@ -28,6 +28,7 @@ xfce4_settings_editor_CFLAGS = \
++ 	$(LIBXFCE4UTIL_CFLAGS) \
++ 	$(LIBXFCE4UI_CFLAGS) \
 + 	$(XFCONF_CFLAGS) \
 ++	$(DBUS_GLIB_CFLAGS) \
-+ 	$(EXO_CFLAGS) \
-+ 	$(CAIRO_CFLAGS) \
-+ 	$(LIBXFCE4UTIL_CFLAGS) \
-+@@ -48,6 +49,7 @@ ristretto_LDADD = \
-+ 	$(GIO_UNIX_LIBS) \
-+ 	$(LIBEXIF_LIBS) \
-+ 	$(XFCONF_LIBS) \
-++	$(DBUS_GLIB_LIBS) \
-+ 	$(EXO_LIBS) \
-+ 	$(CAIRO_LIBS) \
++ 	$(PLATFORM_CFLAGS)
++ 
++ xfce4_settings_editor_LDFLAGS = \
++@@ -39,7 +40,8 @@ xfce4_settings_editor_LDADD = \
++ 	$(DBUS_GLIB_LIBS) \
 + 	$(LIBXFCE4UTIL_LIBS) \
++ 	$(LIBXFCE4UI_LIBS) \
++-	$(XFCONF_LIBS)
+++	$(XFCONF_LIBS) \
+++	$(DBUS_GLIB_LIBS)
++ 
++ desktopdir = $(datadir)/applications
++ desktop_in_files = xfce4-settings-editor.desktop.in
 +-- 
 +2.14.3
 +
-diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb
-index c4baa727e..06dd1021d 100644
---- a/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb
-+++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb
-@@ -11,5 +11,6 @@ RRECOMMENDS_${PN} += "tumbler"
- 
- SRC_URI[md5sum] = "a8d8bb6b8fa7f868cfa3ae778630946e"
- SRC_URI[sha256sum] = "f8f3b77ca6fc77ddf8cff1bb52e5c5802c462663f72f324393b3a0360f6901b8"
-+SRC_URI += "file://0001-Fix-build-after-update-of-xfconf.patch"
- 
- FILES_${PN} += "${datadir}/appdata"
+diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+index bf9bd3102..d937653fa 100644
+--- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
++++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb
+@@ -15,6 +15,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = " \
+     git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.3 \
+     file://0001-xsettings.xml-Set-default-themes.patch \
++    file://0002-Fix-linking-to-dbus-glib-bug-13633.patch \
+ "
+ SRCREV = "b701ac8b66b83c17469dd5009da51eeb59eba442"
+ S = "${WORKDIR}/git"
 -- 
 2.14.3
 
