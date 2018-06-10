@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 8084974BE2
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id A30106007A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 15:08:57 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id o13-v6so10475362wmf.4
+	Sun, 10 Jun 2018 15:08:58 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id r15-v6so10493323wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 08:08:58 -0700 (PDT)
+	Sun, 10 Jun 2018 08:09:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=0OwMOYawl/x7bJ06CcE3OIACywZ/sFMRpfGnUvn25L0=;
-	b=UMzkRKgFBoG4pe/KP1U1GJBQvY4fChVTgFYvR4iJw8/Jqxl8ztBtI8NS97Q30jlKY1
-	6uc9LmjWRRa7im9bIkIGTopGNx+G8d1NsZ/YSVBL3jpv6gz+BlKIvQrye5epzg4T8Npv
-	aGoTPLJggNVgb+Itl2eWPOy/2cTouo0cDMk1vmy+BKMsE1wit7JZE/gBrLhfxNa3f3KI
-	zL1lBgBTjrO5ej2vwwqdXmMdNt8Gjg7KXWbf8w9RMmF9EEDismKQyrHNDfgG59TkQpkH
-	BQ2v2YFmefm0N3aHkhyWDToYDSYfpUJ9UIz1aVeY0wBAICSpWMg5detyYoRF3CpLvtzk
-	CDGw==
+	bh=ljxkXDfzsUg46uofNuTv6m8K6cBmaOqgJzD04vWD+gg=;
+	b=sDmn+vxau2Nq6HBIswK7vpb7zSx83HcqTxMbpTf4JYdTwMB+JtizJCIhuTCRjFgHip
+	wqi2mc7gHnei8lcw95N49tYWdMqoXvdfNHOITsfb6RPpa0PXrxxN7krOgAds9ivyZX14
+	9v2Kj96sEvHteJon/bruKYQ2tVFKDW+zPEoum/MNTqzw7f2PRo64YCvx+7kGBdfXX5uK
+	Y4WBbJ37CY647xvPc2TuX6Ac+FLJsvEA4ax2ODc0Nr9iv4D7FUUzcr/POXE1/uM+tOlh
+	Ggow/3MB3Ja4dHfIKFZMosn2sOoof84ZgvdTG3MZ14wZCm7npFxH4Q0aiWeltnfFhLeY
+	s4Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=0OwMOYawl/x7bJ06CcE3OIACywZ/sFMRpfGnUvn25L0=;
-	b=S0tHlkAP20WyYSb6d5JDoP8yZCiTlHgl02J/nXvqDt0C7m/r8+dIqxy3SJhu5JK9vo
-	y0b1qoaxOeQ9DobAC306HzhmD1IAdZx1htVhmKkcmM+iJNvXg63SryM8NEk7yUC20H6F
-	jHIqjrWChqYVsomHXS39gAVEf2vewvLDo1Pi3YGDcnV/qrS5R6ipFlpdepA1rkeN03ZL
-	jDpVuANYyvvTGdAAInD542sL9dYZJcPZS4kQcPnMofv6YCHJV4kIsqX/ATp5BXLsMGln
-	uzq2fGBPTfjWV7NuPHx/lAcUJCOU+3dpDNeEqQUAIPJ2XSn/OQqTizmIGyHS5Ya9pzz6
-	kfKQ==
-X-Gm-Message-State: APt69E2Y4mh5mxMDjfYw0XJG/IedBDQ+QtCJOSZEVGQgOinEsyxxc++H
-	0PLZtCC4+s/OblAQLkQxt4UEYA==
-X-Google-Smtp-Source: ADUXVKLvAJXhlndrhWHTP4xAzL3YV31fJIHEwOGNChOJfivqsZF33vMqJ+mHHiJyI0mm9xIU1MwqIw==
-X-Received: by 2002:a1c:6d02:: with SMTP id i2-v6mr1269009wmc.62.1528643337991;
-	Sun, 10 Jun 2018 08:08:57 -0700 (PDT)
+	bh=ljxkXDfzsUg46uofNuTv6m8K6cBmaOqgJzD04vWD+gg=;
+	b=WnYy5xVdZqsEiv612Q0iRB9hP67eEoPfUbxPE1x3EYceIFx9Gbc8gPpZPnCCrZp2QJ
+	I6QWw9rnw57sZUKvJDdvFEqYHR0z2E7G4LCZxz9bY6U/O+JP0+KpkLdcJqrRXQz83zsD
+	MbKi1hYfswon10VNA6uMKiBA4NqAEw8bTIxSFpYI+yMfmazeKm/rZ5F/6CSf4G8Z3Kbw
+	zEojAlB3ji7rSwlebR/RXZlav5SckLT78pptXvqVK0raomfauAuocQhkJl5CKv7Hoseo
+	Q327y/SLB+F4w6rBsg3toTFDyZaRHeKhRjTfNpTWuecmrZCn5RLHsZDX28oyjJYG/SWd
+	r3TQ==
+X-Gm-Message-State: APt69E1n5/hrf0UN+SH4dYh3IdLS4GyUAnvS8kx8MiCw7QsT9BGPb/mq
+	ak6Hc+VYaJbCKKQnWMrWA0E0VA==
+X-Google-Smtp-Source: ADUXVKLzSRz930Q54qa45KIriBpeOJb+x2FCEHnWDEx6GiHSkrZhmIfpDq31nBfOj/gvlhrzNKRI8Q==
+X-Received: by 2002:a1c:dc41:: with SMTP id
+	t62-v6mr6317944wmg.42.1528643339046; 
+	Sun, 10 Jun 2018 08:08:59 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC13F69C25723999916AF42.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:3f69:c257:2399:9916:af42])
 	by smtp.gmail.com with ESMTPSA id
-	z16-v6sm43360230wro.41.2018.06.10.08.08.57
+	z16-v6sm43360230wro.41.2018.06.10.08.08.58
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 10 Jun 2018 08:08:57 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:58 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 17:08:17 +0200
-Message-Id: <20180610150821.9536-16-schnitzeltony@gmail.com>
+Date: Sun, 10 Jun 2018 17:08:18 +0200
+Message-Id: <20180610150821.9536-17-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180610150821.9536-1-schnitzeltony@gmail.com>
 References: <20180610150821.9536-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 15/19] xfce4-terminal: upgrade 0.8.7.3 -> 0.8.7.4
+Subject: [meta-xfce][PATCH 16/19] xfce4-cpufreq-plugin: upgrade 1.1.3 -> 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,31 +62,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 15:08:57 -0000
+X-List-Received-Date: Sun, 10 Jun 2018 15:08:59 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-terminal_0.8.7.3.bb => xfce4-terminal_0.8.7.4.bb}          | 4 ++--
+ .../{xfce4-cpufreq-plugin_1.1.3.bb => xfce4-cpufreq-plugin_1.2.0.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.7.3.bb => xfce4-terminal_0.8.7.4.bb} (68%)
+ rename meta-xfce/recipes-panel-plugins/cpufreq/{xfce4-cpufreq-plugin_1.1.3.bb => xfce4-cpufreq-plugin_1.2.0.bb} (64%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.3.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.4.bb
-similarity index 68%
-rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.3.bb
-rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.4.bb
-index 7630abc6b..7fc638e47 100644
---- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.3.bb
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.7.4.bb
-@@ -8,5 +8,5 @@ inherit xfce-app
- FILES_${PN} += "${datadir}/xfce4 \
-                 ${datadir}/gnome-control-center"
+diff --git a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.0.bb
+similarity index 64%
+rename from meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.3.bb
+rename to meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.0.bb
+index d45478709..e8ce6b09d 100644
+--- a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.3.bb
++++ b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.0.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1f6f1c0be32491a0c8d2915607a28f36"
  
--SRC_URI[md5sum] = "f014d613438848b452f1f9eecbf7027d"
--SRC_URI[sha256sum] = "dafa155177934fc7dce2d4efb33402f74b1a593a17ff17d2187a6429f599dfd6"
-+SRC_URI[md5sum] = "c861540dd1dd05f56e62382b3851cf66"
-+SRC_URI[sha256sum] = "a88f98af4da72394f2cfbd7f14b0f053ec0a3b58a4f6a577836357c60a6c42ab"
+ inherit xfce-panel-plugin
+ 
+-SRC_URI[md5sum] = "859122da0a8cd991ee2fbeee434bc948"
+-SRC_URI[sha256sum] = "74a162c7e101db0495d5da147aba1f404c33544f04e8c34d7d1d705668102d33"
++SRC_URI[md5sum] = "152c4c5d9fd926081753d289c18a04c3"
++SRC_URI[sha256sum] = "fec60f14ab02b7079798809c11a79b4930abaeb0e4217068a336cb63cb47970a"
 -- 
 2.14.3
 
