@@ -1,56 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 075E67702B
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 116FD77042
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 15:08:45 +0000 (UTC)
-Received: by mail-wr0-f174.google.com with SMTP id v13-v6so17779468wrp.13
+	Sun, 10 Jun 2018 15:08:47 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id d8-v6so17799315wro.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 08:08:47 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=zeZrM5sXgaahawOk+8KJpSiP9m6CTHV55uzCuZpADak=;
-	b=HqQ6PVkSMsKr4gfu6C164FcvSnCqzaEikmgSWrzyM5pQQxNij/lr+Qz/TChAat6vI9
-	OU3KVjKtcburvDGsr9DHXiir9HSfZ48v7G+V1dWUU+Hg1JtEoP6ec5D8tHLFnEJ+omkO
-	qmhzY3QxYxnWVR4JNzIQGAdGSr3j1dGMEumTTUG9PKJXxLgxtF1LoMS3SFSizszpjutd
-	kN+v5dOpfu8j8AvBoFAbcxJT7B/1mGAuE36t4yxUf+QxAyj98k1j2irpvsp/Z6wjXBi1
-	SoOoo/ALRDjdEfHGA35WOWQe51BcKC5whoCVMo0FwBlYMRWY6WUfqYbKb4tgT7u6Mli6
-	YpXw==
+	bh=RuEMKT5YkSwcbOY+s1s94gz165KH5hR7M6tM/nGBlIA=;
+	b=ixahDaUqBDRovRwW0EUOBMGl81jC/y+h/9GnXHePXDdzHQ6u4hZ1ofhVLsW15gkf+p
+	v/ZSY0NV7mqBN1iyO4d9HUXv6gXyEGm5im2SIxg9SkfiIALYVIWaAptj/UVHK36wzUcJ
+	YLba3yy/1zaNN89Flx9keO44RhDb5ZBhxdtoQHJO+jJzpgvl86V23QM8n3ySrr+uxUa/
+	ps9G9nOj8OPtoX7IYNRWXWz+t7uxfoWxaV/Il7NsYuhrpwuFYf4eFN8jCqXM9y7yQxtt
+	pJxF0nC6C7ERhSpLmjWjugfe53IsT27xgIKC9eHDG+f5GFnjw9EQbAKPMo7tbtX8HO6f
+	MmuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=zeZrM5sXgaahawOk+8KJpSiP9m6CTHV55uzCuZpADak=;
-	b=o0InE4ahSZBja3Xc5za9GrJdA/XtQ4pwcm/NXYSgGAl2wedAau9h1lSbog1Wz6h3/3
-	TcQ7HHQasweaKWURzLFQqh9g0zz1OReMeAO3UvB6nwiLyufhnkTrxhx3yu757SpuPfRF
-	7DM2cBs4GT7Bnh1yiVOu3LOOmPDsbDRhIFOjttZGKhSx+uSEkSS7J1xOln7/iigeGJi3
-	N6fTBALjl9iCM3zZ9SqpQowvEXezT37UGb85kr9CnUuqZGuY3BD3e8ktWXvS68JzppUZ
-	02acUp1RjoR3ejZq7yk8QMECRBDOhnTvkjNi3iISJdRBitR+iUn76n4qYwPlhisB3paG
-	HV0w==
-X-Gm-Message-State: APt69E3D7s++tp6zGMp+nLMB1x10QH1zSbNYo1Blf8ewknPhIGB0J1QJ
-	hwZf6FAdKJniWskQqfqpRR38YA==
-X-Google-Smtp-Source: ADUXVKKFtHxYwybz/yAEkREfc0x4fCNhcpumJEDkvPVmT0xrQLnR5DrH4vip3eBCT8dum7v4A9oL2A==
-X-Received: by 2002:adf:9924:: with SMTP id
-	x33-v6mr11065678wrb.29.1528643326212; 
-	Sun, 10 Jun 2018 08:08:46 -0700 (PDT)
+	bh=RuEMKT5YkSwcbOY+s1s94gz165KH5hR7M6tM/nGBlIA=;
+	b=qL7psIslnEeUNK3PXuYSQVyT/bJ3iJ6CEK7em5P9fhzu9ewBm05OZHvPOkSZ+trydR
+	JJlKU4IDX0Hyh5u9W01rUeQfJ+A++J+xMTvUWf5nc1JsmS0T9MGZsG5FAkYEi0cCXZvD
+	U3OcF6/JumTpC4ytSHRcvAGKORovRv6OZVXKLneQJ9T4PVkq+GsTQl4dzENP6T06K5gE
+	duNerT0GSb1VKv8TCkZzKzVsEv7/Wz/dJSfp415II2ZT+AFGfvTbDw3KSHer0ezsi+6V
+	wrKvUm7wqyBIBOkGa+NMSqfl8R4dzGlpPDLm7JS6BYyJobEYatiiNNWCQ4G1eJg+7Vr6
+	JYoQ==
+X-Gm-Message-State: APt69E3bU4L+GKx0I7yqg3RlE3kVu0Jdog/0RieCeQUHD7zXvJBRtwh5
+	oiwmrMuTSJpbqxkPaPojbZhgUw==
+X-Google-Smtp-Source: ADUXVKJIDTWXcxzA8TQb20iHinGI5P2b5RaYU8ALaMRfnR+zX1kMCK3mB32/EfxYc40rvWlAfNpdKw==
+X-Received: by 2002:adf:91e5:: with SMTP id
+	92-v6mr10438037wri.124.1528643327600; 
+	Sun, 10 Jun 2018 08:08:47 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC13F69C25723999916AF42.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:3f69:c257:2399:9916:af42])
 	by smtp.gmail.com with ESMTPSA id
-	z16-v6sm43360230wro.41.2018.06.10.08.08.45
+	z16-v6sm43360230wro.41.2018.06.10.08.08.46
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 10 Jun 2018 08:08:45 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:46 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 17:08:06 +0200
-Message-Id: <20180610150821.9536-5-schnitzeltony@gmail.com>
+Date: Sun, 10 Jun 2018 17:08:07 +0200
+Message-Id: <20180610150821.9536-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180610150821.9536-1-schnitzeltony@gmail.com>
 References: <20180610150821.9536-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 04/19] xfce4-mixer: fix build after update of xfconf
+Subject: [meta-xfce][PATCH 05/19] ristretto: fix build after update of xfconf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,26 +63,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 15:08:46 -0000
+X-List-Received-Date: Sun, 10 Jun 2018 15:08:47 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-Fix-build-after-update-of-xfconf.patch    | 61 ++++++++++++++++++++++
- .../recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb |  5 +-
- 2 files changed, 65 insertions(+), 1 deletion(-)
- create mode 100644 meta-xfce/recipes-apps/xfce4-mixer/files/0001-Fix-build-after-update-of-xfconf.patch
+ .../0001-Fix-build-after-update-of-xfconf.patch    | 40 ++++++++++++++++++++++
+ .../recipes-apps/ristretto/ristretto_0.8.2.bb      |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch
 
-diff --git a/meta-xfce/recipes-apps/xfce4-mixer/files/0001-Fix-build-after-update-of-xfconf.patch b/meta-xfce/recipes-apps/xfce4-mixer/files/0001-Fix-build-after-update-of-xfconf.patch
+diff --git a/meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch b/meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch
 new file mode 100644
-index 000000000..31216c038
+index 000000000..5cdc8c728
 --- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce4-mixer/files/0001-Fix-build-after-update-of-xfconf.patch
-@@ -0,0 +1,61 @@
-+From 6ecaeced291f935a9d41e9bc33411358c95a5e91 Mon Sep 17 00:00:00 2001
++++ b/meta-xfce/recipes-apps/ristretto/files/0001-Fix-build-after-update-of-xfconf.patch
+@@ -0,0 +1,40 @@
++From 2b6bdb860ef53975c7e866f393b61d253c00754d Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Mon, 22 Jan 2018 15:35:08 +0100
++Date: Mon, 22 Jan 2018 15:52:09 +0100
 +Subject: [PATCH] Fix build after update of xfconf
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
@@ -94,69 +94,43 @@ index 000000000..31216c038
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 +---
-+ panel-plugin/Makefile.am | 2 ++
-+ xfce4-mixer/Makefile.am  | 2 ++
-+ 2 files changed, 4 insertions(+)
++ src/Makefile.am | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/panel-plugin/Makefile.am b/panel-plugin/Makefile.am
-+index a494682..b094472 100644
-+--- a/panel-plugin/Makefile.am
-++++ b/panel-plugin/Makefile.am
-+@@ -27,6 +27,7 @@ libmixer_la_CFLAGS =							\
-+ 	$(LIBXFCE4UI_CFLAGS)						\
-+ 	$(LIBXFCE4PANEL_CFLAGS)						\
-+ 	$(XFCONF_CFLAGS)						\
-++	$(DBUS_GLIB_CFLAGS)						\
-+ 	$(GST_PLUGINS_BASE_CFLAGS)					\
-+ 	$(KEYBINDER_CFLAGS)
-+ 
-+@@ -48,6 +49,7 @@ libmixer_la_LIBADD =							\
-+ 	$(LIBXFCE4UI_LIBS)						\
-+ 	$(LIBXFCE4PANEL_LIBS)						\
-+ 	$(XFCONF_LIBS)							\
-++	$(DBUS_GLIB_LIBS)						\
-+ 	$(GST_PLUGINS_BASE_LIBS)					\
-+ 	-lgstaudio-0.10							\
-+ 	-lgstinterfaces-0.10						\
-+diff --git a/xfce4-mixer/Makefile.am b/xfce4-mixer/Makefile.am
-+index 4af69e9..e076fc8 100644
-+--- a/xfce4-mixer/Makefile.am
-++++ b/xfce4-mixer/Makefile.am
-+@@ -32,6 +32,7 @@ xfce4_mixer_CFLAGS = 							\
-+ 	$(UNIQUE_CFLAGS)						\
-+ 	$(LIBXFCE4UTIL_CFLAGS)						\
-+ 	$(LIBXFCE4UI_CFLAGS)						\
-++	$(DBUS_GLIB_CFLAGS)						\
-+ 	$(XFCONF_CFLAGS)						\
-+ 	$(GST_PLUGINS_BASE_CFLAGS)
-+ 
-+@@ -46,6 +47,7 @@ xfce4_mixer_LDFLAGS = 							\
-+ 	$(UNIQUE_LIBS)							\
-+ 	$(LIBXFCE4UTIL_LIBS)						\
-+ 	$(LIBXFCE4UI_LIBS)						\
-++	$(DBUS_GLIB_LIBS)						\
-+ 	$(XFCONF_LIBS)							\
-+ 	$(GST_PLUGINS_BASE_LIBS)					\
-+ 	-lgstaudio-0.10							\
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 36a31dc..3dd56bc 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -30,6 +30,7 @@ ristretto_CFLAGS = \
++ 	$(GIO_UNIX_CFLAGS) \
++ 	$(LIBEXIF_CFLAGS) \
++ 	$(XFCONF_CFLAGS) \
+++	$(DBUS_GLIB_CFLAGS) \
++ 	$(EXO_CFLAGS) \
++ 	$(CAIRO_CFLAGS) \
++ 	$(LIBXFCE4UTIL_CFLAGS) \
++@@ -48,6 +49,7 @@ ristretto_LDADD = \
++ 	$(GIO_UNIX_LIBS) \
++ 	$(LIBEXIF_LIBS) \
++ 	$(XFCONF_LIBS) \
+++	$(DBUS_GLIB_LIBS) \
++ 	$(EXO_LIBS) \
++ 	$(CAIRO_LIBS) \
++ 	$(LIBXFCE4UTIL_LIBS) \
 +-- 
 +2.14.3
 +
-diff --git a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
-index bdbec458b..6c057d884 100644
---- a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
-+++ b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
-@@ -6,7 +6,10 @@ inherit xfce-panel-plugin
+diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb
+index c4baa727e..06dd1021d 100644
+--- a/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb
++++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.8.2.bb
+@@ -11,5 +11,6 @@ RRECOMMENDS_${PN} += "tumbler"
  
- DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf libunique"
+ SRC_URI[md5sum] = "a8d8bb6b8fa7f868cfa3ae778630946e"
+ SRC_URI[sha256sum] = "f8f3b77ca6fc77ddf8cff1bb52e5c5802c462663f72f324393b3a0360f6901b8"
++SRC_URI += "file://0001-Fix-build-after-update-of-xfconf.patch"
  
--SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = " \
-+    http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
-+    file://0001-Fix-build-after-update-of-xfconf.patch \
-+"
- 
- SRC_URI[md5sum] = "1b3753b91224867a3a2dfddda239c28d"
- SRC_URI[sha256sum] = "fb0c1df201ed1130f54f15b914cbe5a59286e994a137acda5609570c57112de2"
+ FILES_${PN} += "${datadir}/appdata"
 -- 
 2.14.3
 
