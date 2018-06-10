@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 87189770CD
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B4BD770FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 15:08:55 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id v16-v6so10506132wmh.5
+	Sun, 10 Jun 2018 15:08:56 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id r15-v6so10493233wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 08:08:56 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=WRj9TgfmMh5lIVCrXGzpMhBSxYoUHyx9nsBVYB/Kt8E=;
-	b=PEyEtBPOlrlzWltid9/1zjqsy6pr+10gqiE/aMVicfT0CCXTaBmzwEJdGCWRZzbD3c
-	9Zzd8KAFrJB2QMNV1g/L9HRih+2obrD/B4iPB07Urcrhs6GLMfk3cxwHZ5S39mwSYbFr
-	lbveGMt8b4O0G6paBNQTi8uq0A3unQzRysjsP5CmPs/NUgiCisgCZdX/5RHmz7FYMpMX
-	JReOiQbZI+XtyBkESW6odip5Rm7u/UF3wXFRc7Y1YNm1lTyGhKeqLIMYMrGWzcjr6ok+
-	+qFN6JvViuXSIubH1FxHeE1QGoJ4a7ssD1bOlcrejnTxBXb+fTdRIuy61/WjKOc2fHNY
-	T/og==
+	bh=cCYp4oj04pk0EymD0VtqztAVVFIR3iW+B5j6Q3peAKg=;
+	b=Qr32XIrKXxQx9JlercD86P0EcCrt+uqJPf1DQLWnCZa27YZk77tNYtegbpIerYfv3P
+	yOQTv33Q2taKLAk/U6Kn4rckTq5vi2oDrt2/c2Ixl4aQ0M6urJtP33Gi6E4M8Ml84wL7
+	HsJBpQB+ejqk+YShYSR0tPjsZO+zDszYjuITaxSNIx7pKe+sK9YsFvVBsRkJ73amm9BY
+	97CeeOzjWI/lZGqnnsPc+t5wNu2+VGvX76p7uPP+4OfB0CcrxWf1IL6V2lQMWWc3mc7G
+	kC8qUdZLBniS9vRjQZTeYlZRh8jxO5xvl895FB39fz8m8Au+36/MAyPHT7hHFB1++cw4
+	RmIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=WRj9TgfmMh5lIVCrXGzpMhBSxYoUHyx9nsBVYB/Kt8E=;
-	b=jRhnTisl8IjX5ah9mss67BaxnhsM2TiF9glrFQpg5q8befd0yLHqMGh74qnSSkWnsS
-	U74GxjREvvLYiSrkgweHpBW1jUgwHDctpw0GW+f1zGAIW4nkeiqm39ja4+eth46qazJW
-	q21iKeDth+bvwnAIwyxEOcLeLv47mkjKO3gvAam9VmHgxsf+esyrL82qgjGnFUBifTDt
-	JfsVkrRnRTRtHyOoUjjodb4lXsLmxbbcgmxzZmnyANHFUakZn61RfMTOPOF4IK4mQcqk
-	GFKbzKitxVfvKN1LuYHs0A8/lz9Pm3HYTRvnnkYFixIF2llxBD2iFnBs9R6WoYLwmqX1
-	IHRg==
-X-Gm-Message-State: APt69E2KVy3tnXW8H3qQ/J6Ot9JXcbSsRCtgLtULdg09aijDm4rtMT/s
-	AnL6K+Z4BWRAVRCBxVkG0MhYFg==
-X-Google-Smtp-Source: ADUXVKJQc9he3QrNUezEh1D1UxgWVRhR35ma0nrqWOayPcchQ+KP/PIlukadVpD35C1W/vE5xiYyfg==
-X-Received: by 2002:a1c:9b04:: with SMTP id d4-v6mr5786163wme.8.1528643335938; 
-	Sun, 10 Jun 2018 08:08:55 -0700 (PDT)
+	bh=cCYp4oj04pk0EymD0VtqztAVVFIR3iW+B5j6Q3peAKg=;
+	b=hIVss9JxMQ3tULKkSQNFGlHAuHupZUUxlrDKW49L9Z7hS+oRX5leSpLvhA7QVwk/8z
+	X1jsQAOUKW2cf7mJ/G1NkJrVoaZSingaFiMDpFwpD6uYzthrDSZiwFKhPRuQaOkJBAK/
+	GyvmMbfHISVwA0QtHZbNQ/xLpz3iph4BuD+EIQ75WFl8q+Rdw5SRZ9vwy/WTkoCTHA81
+	4LNNpuKFuWYvWiW6S/D4wGKCTTzk7xqQcwZPkJQNwQ9/c4gxw3D34FaP92kDNYoh/Cvf
+	tOk7pm7HwkKpc5jZcT5f1IzFIfCc1rQXO/ZCOYLcr4SmPWh8CT6Keywd3ngDjqP7joej
+	Zukg==
+X-Gm-Message-State: APt69E1enlmOqhY7uRlFIqnDoSdvB+v6a1xMOlHz6t++FsCtoHAKYIim
+	zmsauD8CSBxcpBZ9QvQLXzz23A==
+X-Google-Smtp-Source: ADUXVKJgqaxJsx2q6ulhU7IddyVZblnW4N/NQm/LH3Q8xUfjEIfMlGe130N1sUTJ9+UX94qA2HUFow==
+X-Received: by 2002:a1c:1143:: with SMTP id
+	64-v6mr5756449wmr.100.1528643337001; 
+	Sun, 10 Jun 2018 08:08:57 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC13F69C25723999916AF42.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:3f69:c257:2399:9916:af42])
 	by smtp.gmail.com with ESMTPSA id
-	z16-v6sm43360230wro.41.2018.06.10.08.08.54
+	z16-v6sm43360230wro.41.2018.06.10.08.08.55
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 10 Jun 2018 08:08:55 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:56 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 17:08:15 +0200
-Message-Id: <20180610150821.9536-14-schnitzeltony@gmail.com>
+Date: Sun, 10 Jun 2018 17:08:16 +0200
+Message-Id: <20180610150821.9536-15-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180610150821.9536-1-schnitzeltony@gmail.com>
 References: <20180610150821.9536-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 13/19] xfce4-taskmanager: upgrade 1.2.0 -> 1.2.1
+Subject: [meta-xfce][PATCH 14/19] mousepad: upgrade 0.4.0 -> 0.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,31 +62,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 15:08:55 -0000
+X-List-Received-Date: Sun, 10 Jun 2018 15:08:56 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-taskmanager_1.2.0.bb => xfce4-taskmanager_1.2.1.bb}        | 4 ++--
+ .../recipes-apps/mousepad/{mousepad_0.4.0.bb => mousepad_0.4.1.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-taskmanager/{xfce4-taskmanager_1.2.0.bb => xfce4-taskmanager_1.2.1.bb} (61%)
+ rename meta-xfce/recipes-apps/mousepad/{mousepad_0.4.0.bb => mousepad_0.4.1.bb} (81%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.0.bb b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.1.bb
-similarity index 61%
-rename from meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.0.bb
-rename to meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.1.bb
-index f9555852d..8afea1d22 100644
---- a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.0.bb
-+++ b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.1.bb
-@@ -6,5 +6,5 @@ inherit xfce-app
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
+similarity index 81%
+rename from meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
+rename to meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
+index 4ca21a6bc..d122bfe37 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.1.bb
+@@ -10,8 +10,8 @@ DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-na
  
- DEPENDS += "gtk+ cairo libwnck libxmu xfce4-dev-tools-native exo-native"
+ inherit xfce-app gsettings
  
--SRC_URI[md5sum] = "6f30ce3c688454812008281065a6e05c"
--SRC_URI[sha256sum] = "5746d473ad428b13db7c05cfcbc8099fbea13da6be26d3a9359bcb4de971ba69"
-+SRC_URI[md5sum] = "4a2d0b1e8001fb343139a97d57b56eaa"
-+SRC_URI[sha256sum] = "22e523e2ee231713f40a48890d8cbae99320ac1173f7c68502f490318e1e0409"
+-SRC_URI[md5sum] = "f55314c5dda6323883241e6cf01550a7"
+-SRC_URI[sha256sum] = "60114431eac8db6bb6ce18bd38f1630cccb684375b97a445a1b6fd619848d132"
++SRC_URI[md5sum] = "fb85c23bcb096a46aee9ec22b4e4fdf5"
++SRC_URI[sha256sum] = "39a7379b929d964665299c385b2cf705e32e8760698ccc34f91c990bb733518b"
+ 
+ # we have no gtksourceview 3.x around
+ EXTRA_OECONF = "--disable-gtk3"
 -- 
 2.14.3
 
