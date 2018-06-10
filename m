@@ -1,51 +1,51 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9764678B6C
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id E5CD5782E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 00:51:30 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id p11-v6so10041051wmc.4
+	Sun, 10 Jun 2018 01:05:59 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id r125-v6so10065409wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jun 2018 17:51:31 -0700 (PDT)
+	Sat, 09 Jun 2018 18:06:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=m9xLhgeM4z3DydcQ22D25QN4boeBdkAkQWKML8ZUexo=;
-	b=opvTFx4w+jLauH46mr0ZCoT/tnuXvzf5IslWhJtsJd6UoVLHrhusRCxVvlYDcSgSHC
-	NAHg34FSdTwfDlHcHTRz52mgmH3exS7zuYRbpTPQ2t8W0ArEqRpQWInVbUIuYLj+cvLZ
-	9QAPweTfjfm0vL1aTDyA4rNuJCzevUrLXBO2sd6/Jv5+UlpL9RfLqAd81XLi43EMdI5z
-	rK7fS6qcVtVuZ3Q8K8r3fHOyBVnzzCLwJ99AJhhY479tEDrWxJ7VDXYJgiY2i9Q0BupP
-	DWcGMp10kZGHs01AEF/BFT4QxdMw6l8lza/dMDqVFZQCCzvsW+r81XO9QQsGJynyxUwL
-	bXTw==
+	bh=g9OjWkUpEmvzceeXhRB8j29Vej/xlR4dvsCHPmA8/1c=;
+	b=kgiNtejc1kS8FwKUHt3sNf5ZnW3CRj8ZNLBjgwgRzIWb+XO2Uy3R3aE7X0FXFczv92
+	GJrnr8a1Q53WKHSbTiSp7+RBiZRP7oxjctA19O2S7rC9a8FNkrfmExKHh8HoqWgvvgn3
+	qyuFpG1+mqPBLWBDupSX/2fCzDQeZxuhOtnk4mNZ+afbk6C+8hyEjpnJtb+Fn0b9RdYZ
+	ZWQxpwbBU94XjisGoftqEN9jdA1QGRzr0ItijY+gqYFWfA3B21R8ycytoPkDWbVaS/C5
+	RBvgJMukWWTpcCHjE0Z3281bAI2tiNfzkXEQnqiKDKC/VJ6V2oSqylaebaVpnAj9QG1P
+	ZWJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=m9xLhgeM4z3DydcQ22D25QN4boeBdkAkQWKML8ZUexo=;
-	b=sJo97b8lWrZD1LqZl60EFc9pFF2UjMgpy6ev76Ykhtn2l+2CG1rAAY9hSwz7Fn5KbP
-	d22Heb1mbyO7XGsRXXJJX4tJ3OA3+pePzEJmSMbXq/cPPlLolKgNOynYbJKDsN/5Pbd9
-	OPTV6vWMd38wMm0Ct2qEdr65nz8zO9zfcm73Z0Khi9Jk/4X10lwPsZEFOWu7JaaaOHuX
-	DiikZ6eH7RPMsOc4RtS+XC7tcPsFrekULRjLOWhdCZVfGX7qsX4nb23e42QwSPqyGycH
-	ha1r19oKJ8uSSHvyMokCPXICOaHLESZTeISE+6LED3mEeoLd8hDj6HNR5Gqz5MgWpoXH
-	T0zw==
-X-Gm-Message-State: APt69E0q6Gjjp7MMDuorrMy9qcwY+vJ5lpBFSytutkAz2URpg6OU+Xj4
-	qljKUsNLEL6qD5Luj+0XYLmZ+ngT
-X-Google-Smtp-Source: ADUXVKJvBszkxCyJNXLDdA7IjqVGbILePGyUrd94E92bknc0YbERkwJNxL/b1c2OZOMM6ilk1MzA8A==
-X-Received: by 2002:a50:aea8:: with SMTP id
-	e37-v6mr12981590edd.285.1528591891020; 
-	Sat, 09 Jun 2018 17:51:31 -0700 (PDT)
+	bh=g9OjWkUpEmvzceeXhRB8j29Vej/xlR4dvsCHPmA8/1c=;
+	b=uWXzoKZxBXXDvb+8GC+fR9FozT7S/9iHQyhSImE4BQKcmepS57mNqf0DSbSkK4QWFR
+	Xd7l0LsWlRWR1oZ5UB7CJSfaZs4ks2EPnPcC+HOMIp/kRiPy6yMQcXsnp75DsTaOUVoe
+	nqEO3X8Wv+Cf2h/atXaX0tQiQsEA6jwuYJIViV2R5s6ihyxswpjE93QmItQf1R2v57Ya
+	Yptl9A+hhFatn8UOkvW0dSpPExyA0DvCuFtL+A9pdPm1j6eEDw+Xe1chMXzBWT3afHmS
+	VMBcjbctR2hx9rItJoWWTQtIg8SSu8rNyf8sW+b3Wu3qIcCpsbWucXN4GKf6+5l5Os4H
+	sVPg==
+X-Gm-Message-State: APt69E04OeNUJX7/uoRyYE/MvroB5c8y2itALFyyiqTaJp0kucRHv1ww
+	YZcHM1vq2FbLbYng0pt4Mf/M4GBK
+X-Google-Smtp-Source: ADUXVKJ9SaoKp7/xILBYJQhGih1yinH6cceCMuILpYEXPqOO12NuXSp4OlIp1/nwhfA4VIuXu5J3Ww==
+X-Received: by 2002:a50:89d3:: with SMTP id
+	h19-v6mr13078314edh.225.1528592760282; 
+	Sat, 09 Jun 2018 18:06:00 -0700 (PDT)
 Received: from localhost.localdomain
 	([2a04:ae08:1403:ff00:ddc6:6bd0:776b:2bb8])
 	by smtp.gmail.com with ESMTPSA id
-	f25-v6sm20039380edd.87.2018.06.09.17.51.29
+	l13-v6sm5351017edn.74.2018.06.09.18.05.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 09 Jun 2018 17:51:30 -0700 (PDT)
+	Sat, 09 Jun 2018 18:05:59 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 02:51:05 +0200
-Message-Id: <20180610005105.4153-1-dev@sashko.rv.ua>
+Date: Sun, 10 Jun 2018 03:05:37 +0200
+Message-Id: <20180610010537.14941-1-dev@sashko.rv.ua>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <dev@sashko.rv.ua>
-Subject: [meta-oe][PATCH] libsodium: update to 1.0.16
+Subject: [meta-oe][PATCH] libconfig: update to 1.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,21 +58,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 00:51:31 -0000
+X-List-Received-Date: Sun, 10 Jun 2018 01:06:00 -0000
 
-Added link to bug tracker and updated md5sum of LICENSE, which has been
-updated with the copyright year.
+Updated the package and SRC_URI, since the project is now maintained at
+github.com/hyperrealm/libconfig.
 
 Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
 ---
- .../libsodium/{libsodium_1.0.11.bb => libsodium_1.0.16.bb}        | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-crypto/libsodium/{libsodium_1.0.11.bb => libsodium_1.0.16.bb} (100%)
+ .../libconfig/libconfig_1.5.bb                | 14 --------------
+ .../libconfig/libconfig_1.7.2.bb              | 19 +++++++++++++++++++
+ 2 files changed, 19 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+ create mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
 
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.16.bb
-similarity index 100%
-rename from meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
-rename to meta-oe/recipes-crypto/libsodium/libsodium_1.0.16.bb
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+deleted file mode 100644
+index fb6e50e51..000000000
+--- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "C/C++ Configuration File Library"
+-DESCRIPTION = "Library for manipulating structured configuration files"
+-HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
+-SECTION = "libs"
+-
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
+-
+-SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
+-
+-inherit autotools-brokensep pkgconfig
+-
+-SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
+-SRC_URI[sha256sum] = "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
+new file mode 100644
+index 000000000..eb0a2c3ec
+--- /dev/null
++++ b/meta-oe/recipes-extended/libconfig/libconfig_1.7.2.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "C/C++ Configuration File Library"
++DESCRIPTION = "Library for manipulating structured configuration files"
++HOMEPAGE = "https://hyperrealm.github.io/libconfig/"
++BUGTRACKER = "https://github.com/hyperrealm/libconfig/issues"
++SECTION = "libs"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
++
++SRC_URI = "https://hyperrealm.github.io/libconfig/dist/libconfig-${PV}.tar.gz"
++
++inherit autotools-brokensep pkgconfig
++
++SRC_URI[md5sum] = "6bd98ee3a6e6b9126c82c916d7a9e690"
++SRC_URI[sha256sum] = "7c3c7a9c73ff3302084386e96f903eb62ce06953bb1666235fac74363a16fad9"
++
++FILES_${PN}_append = " \
++    ${libdir}/cmake \
++"
 -- 
 2.17.1
 
