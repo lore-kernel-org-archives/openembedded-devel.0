@@ -1,55 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id A30106007A
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F24A7508B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jun 2018 15:08:58 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id r15-v6so10493323wmc.1
+	Sun, 10 Jun 2018 15:08:59 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id n5-v6so11792421wmc.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 10 Jun 2018 08:09:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=ljxkXDfzsUg46uofNuTv6m8K6cBmaOqgJzD04vWD+gg=;
-	b=sDmn+vxau2Nq6HBIswK7vpb7zSx83HcqTxMbpTf4JYdTwMB+JtizJCIhuTCRjFgHip
-	wqi2mc7gHnei8lcw95N49tYWdMqoXvdfNHOITsfb6RPpa0PXrxxN7krOgAds9ivyZX14
-	9v2Kj96sEvHteJon/bruKYQ2tVFKDW+zPEoum/MNTqzw7f2PRo64YCvx+7kGBdfXX5uK
-	Y4WBbJ37CY647xvPc2TuX6Ac+FLJsvEA4ax2ODc0Nr9iv4D7FUUzcr/POXE1/uM+tOlh
-	Ggow/3MB3Ja4dHfIKFZMosn2sOoof84ZgvdTG3MZ14wZCm7npFxH4Q0aiWeltnfFhLeY
-	s4Mw==
+	bh=gFsCsjL+iE26fCX8zlOK+mWW3eSXtBSaUrnKyoywD/w=;
+	b=nEB1e+Pu7HILtVSqLSdbtjpJ1KaIkAYyq0H7HFM2mBKaNRMb8YfaQz9FXARAmUZV2N
+	nqqtllxBmACTa97i0Kra4h4F+GJEsJEPXp7BWZkz5tqeSjZXkz20EGN5mhEuJSolneOe
+	Z3PrOfY4XoIiTHDlgYzPcUFsJgyGjsA/AVDFbyTAKb5VXUNg11ihIkWK+WWXzYj9tQt+
+	xeEFbr1Gig8LIINc3VhQcjoN6qoAxHCMsa7StZHsBg2c3l+sQQTNCMgmy5IqfbjU3qBP
+	95jRfWrRo2nLUibsP4hTXCNxlNUffPjsWeJ8s30QJNt3Ag/EkUGz6B0cEhmTzSy9e6vu
+	m5WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=ljxkXDfzsUg46uofNuTv6m8K6cBmaOqgJzD04vWD+gg=;
-	b=WnYy5xVdZqsEiv612Q0iRB9hP67eEoPfUbxPE1x3EYceIFx9Gbc8gPpZPnCCrZp2QJ
-	I6QWw9rnw57sZUKvJDdvFEqYHR0z2E7G4LCZxz9bY6U/O+JP0+KpkLdcJqrRXQz83zsD
-	MbKi1hYfswon10VNA6uMKiBA4NqAEw8bTIxSFpYI+yMfmazeKm/rZ5F/6CSf4G8Z3Kbw
-	zEojAlB3ji7rSwlebR/RXZlav5SckLT78pptXvqVK0raomfauAuocQhkJl5CKv7Hoseo
-	Q327y/SLB+F4w6rBsg3toTFDyZaRHeKhRjTfNpTWuecmrZCn5RLHsZDX28oyjJYG/SWd
-	r3TQ==
-X-Gm-Message-State: APt69E1n5/hrf0UN+SH4dYh3IdLS4GyUAnvS8kx8MiCw7QsT9BGPb/mq
-	ak6Hc+VYaJbCKKQnWMrWA0E0VA==
-X-Google-Smtp-Source: ADUXVKLzSRz930Q54qa45KIriBpeOJb+x2FCEHnWDEx6GiHSkrZhmIfpDq31nBfOj/gvlhrzNKRI8Q==
-X-Received: by 2002:a1c:dc41:: with SMTP id
-	t62-v6mr6317944wmg.42.1528643339046; 
-	Sun, 10 Jun 2018 08:08:59 -0700 (PDT)
+	bh=gFsCsjL+iE26fCX8zlOK+mWW3eSXtBSaUrnKyoywD/w=;
+	b=Mjyv+x3qScvla/Jkuz/Su7JdcuYhzhgiJkMaRQq4cwY9LxrU1gf6kv5Vag0a5LsPvM
+	HgLOuRWEfPATzUxx1dyaw3HHP9SZ0WamTfNidE2mIswmxa3LdYKAV2jrrgR5x3uNczq1
+	IosNn1uYZ9AA51LOFoSYxruM0s4nk4Na0AZUEg+w4Z6xgirEacJ9V7cc4ERXrn9atLdJ
+	bxT1iT0Amut4qf5H4DFR3OuIDmHaHDI2uYasOaYG/ePHwZTCkDR/XuMXshcgFPVRJ+FW
+	Is4/BruRxCfhGNEw64YlYZ6lyw0RBRj7pBmnvXwlE+PXN5JOzfTVJFcwRGkF+ZmcNf+/
+	tQXw==
+X-Gm-Message-State: APt69E3BCV/MYnVCjN1AwKadnQlaOQiJGR4MOjxikklqN3a5epStAvdz
+	hJIwSngUjNkomA2lIAGh5XUjXQ==
+X-Google-Smtp-Source: ADUXVKIir3vlIHaF2hF54v5ZxImf102rrJzH2TvePKQvfYIMpSQlY2GpTcIjnkK30pRgT9jL5D/22Q==
+X-Received: by 2002:a1c:d905:: with SMTP id q5-v6mr6505299wmg.78.1528643340029;
+	Sun, 10 Jun 2018 08:09:00 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p200300F07BC13F69C25723999916AF42.dip0.t-ipconnect.de.
 	[2003:f0:7bc1:3f69:c257:2399:9916:af42])
 	by smtp.gmail.com with ESMTPSA id
-	z16-v6sm43360230wro.41.2018.06.10.08.08.58
+	z16-v6sm43360230wro.41.2018.06.10.08.08.59
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 10 Jun 2018 08:08:58 -0700 (PDT)
+	Sun, 10 Jun 2018 08:08:59 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jun 2018 17:08:18 +0200
-Message-Id: <20180610150821.9536-17-schnitzeltony@gmail.com>
+Date: Sun, 10 Jun 2018 17:08:19 +0200
+Message-Id: <20180610150821.9536-18-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.3
 In-Reply-To: <20180610150821.9536-1-schnitzeltony@gmail.com>
 References: <20180610150821.9536-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 16/19] xfce4-cpufreq-plugin: upgrade 1.1.3 -> 1.2.0
+Subject: [meta-xfce][PATCH 17/19] packagegroup-xfce-extended: add mousepad
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,31 +61,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jun 2018 15:08:59 -0000
+X-List-Received-Date: Sun, 10 Jun 2018 15:09:00 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-cpufreq-plugin_1.1.3.bb => xfce4-cpufreq-plugin_1.2.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/cpufreq/{xfce4-cpufreq-plugin_1.1.3.bb => xfce4-cpufreq-plugin_1.2.0.bb} (64%)
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.3.bb b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.0.bb
-similarity index 64%
-rename from meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.3.bb
-rename to meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.0.bb
-index d45478709..e8ce6b09d 100644
---- a/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.3.bb
-+++ b/meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.2.0.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1f6f1c0be32491a0c8d2915607a28f36"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "859122da0a8cd991ee2fbeee434bc948"
--SRC_URI[sha256sum] = "74a162c7e101db0495d5da147aba1f404c33544f04e8c34d7d1d705668102d33"
-+SRC_URI[md5sum] = "152c4c5d9fd926081753d289c18a04c3"
-+SRC_URI[sha256sum] = "fec60f14ab02b7079798809c11a79b4930abaeb0e4217068a336cb63cb47970a"
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+index b73c9ee16..2e0f7f5b4 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+@@ -67,4 +67,5 @@ RRECOMMENDS_${PN} = " \
+     ristretto \
+     xfce4-taskmanager \
+     gigolo \
++    mousepad \
+ "
 -- 
 2.14.3
 
