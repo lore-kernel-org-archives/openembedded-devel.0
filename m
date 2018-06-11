@@ -1,36 +1,46 @@
-Return-Path: <mac@mcrowe.com>
-X-Greylist: delayed 451 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 11 Jun 2018 13:18:02 UTC
-Received: from avasout06.plus.net (avasout06.plus.net [212.159.14.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F6BF7898B
+Return-Path: <remi.rerolle@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id B679D78B85
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jun 2018 13:18:01 +0000 (UTC)
-Received: from deneb ([80.229.24.9]) by smtp with ESMTP
-	id SMaXfGWdTWLW2SMaZfjzew; Mon, 11 Jun 2018 14:10:32 +0100
-X-CM-Score: 0.00
-X-CNFS-Analysis: v=2.3 cv=fJUXI6Se c=1 sm=1 tr=0
-	a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
-	a=8nJEP1OIZ-IA:10 a=7mUfYlMuFuIA:10 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8
-	a=aPdgp986AAAA:8 a=pGLkceISAAAA:8 a=QyXUC8HyAAAA:8 a=-An2I_7KAAAA:8
-	a=_fNvUtQRe2PeQbxIaV0A:9 a=wPNLvfGTeEIA:10 a=OEFYv0PBCf8A:10
-	a=9H3Qd4_ONW2Ztcrla5EB:22 a=hjhaEeQbI_L7T3ty1Rvw:22
-	a=Sq34B_EcNBM9_nrAYB9S:22
-Received: from mac by deneb with local (Exim 4.89)
-	(envelope-from <mac@mcrowe.com>)
-	id 1fSMaX-000471-PC; Mon, 11 Jun 2018 14:10:25 +0100
-Date: Mon, 11 Jun 2018 14:10:25 +0100
-From: Mike Crowe <mac@mcrowe.com>
+	Mon, 11 Jun 2018 13:43:45 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id v16-v6so14795837wmh.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jun 2018 06:43:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=37jgSemLfgTTJDwuzetlT2rEST0qoY5pJmeCbGNfNbQ=;
+	b=A6uJ6cE/r7m41YExc/yyTWKPf80ZngtFBqfHEx6QP65QHLd8qChEGMeqRZOiPqznXp
+	3zJ0l2qAXAkfPccyt0Eit1YIUP6dRQFHuNmeK+bB18iXNu4swyE65Z4a2zb4YBSkD4T+
+	oQNEWLRy/w3euDL1laqNp8WyJDbHWAcBfzBUSsM6VwSAyPC61Ewr5atwqRDR4TUksfCz
+	yypt4+2O8dFlLyQ0T3MzGPU1YUJLLYA+3EDFp0n6WGkh5W/Gh3TuTJpnA9k6wLhIY0eF
+	llvaZEgzfXO/uAqXTKqVozg4GuG/LyrTYvrBZQFtGZx3s+Y2Dms9j6QPOrbknsfeFrx1
+	3LLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=37jgSemLfgTTJDwuzetlT2rEST0qoY5pJmeCbGNfNbQ=;
+	b=CRi0ZPCeHg42NEZVkD3bhmJgHySWpW0fv4iPwsquZw9hF8Vx5LVGtYLnlGzVW0EWEN
+	LTAbd+C3kHPN84yXVUoEnJhizP0a3TQmuccmqvd13EkVmrPwB3YdYkS67YG8E32z5fu3
+	CTVaBKvn56h9coiV6g4NaAb9ORC8/f6sAOlY5L10rd+6u6vvkcdl21FTHH+lCwVZ1MUL
+	79bOCa+ntAJGAlGLYMUvBVN5f+GSabWfeloh5zUt48F68vA/EXresW7TUwG1lKDCOUV+
+	aRXRB3YIDDTAxKL4iGivSHjD7say6YzAGfIARitPzGj4rFsRSmH+pNm1uKk4/ceMId0h
+	01AQ==
+X-Gm-Message-State: APt69E3IxhUVUyWPuIi8hUcIyofjm5mNCdNunhc82BAFElgc18mwToD/
+	84D6M6bLKvs0gjPTXoV+vcMpWSGh
+X-Google-Smtp-Source: ADUXVKJGxkw7F1uN675XqrmXFqI05DTtz1LgfjGtAczSP84ru9QxsHMC9dPw/GaaWAJ8S6qJbjHv9w==
+X-Received: by 2002:a1c:6503:: with SMTP id z3-v6mr7737417wmb.11.1528724626093;
+	Mon, 11 Jun 2018 06:43:46 -0700 (PDT)
+Received: from vps58393.ovh.net (vps.neonex.fr. [92.222.2.205])
+	by smtp.gmail.com with ESMTPSA id
+	m16-v6sm28274761wro.91.2018.06.11.06.43.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 11 Jun 2018 06:43:45 -0700 (PDT)
+From: =?UTF-8?q?R=C3=A9mi=20R=C3=A9rolle?= <remi.rerolle@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20180611131025.mcgzbelkqhy4re5h@mcrowe.com>
-References: <CAJTo0LZ2G_4cMxoAQm2AWgRnkeP5VXRURH9c82qaBpA0bop59A@mail.gmail.com>
-	<20180508093631.5196-1-mac@mcrowe.com>
-MIME-Version: 1.0
-In-Reply-To: <20180508093631.5196-1-mac@mcrowe.com>
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-CMAE-Envelope: MS4wfB99nx3/+sVUV9C2mwmjOinKScfyDkrDcvtR2ircDSrCboFln4oUKwKiTGslmpFhqvWlrKl7FmUZ8FtpA7SOqRprXP+K35uWqQk0uqT5iOUpoZBvlNYg
-	ECmiMAa2DEBV5Ah5KjK42AL4ZwIfEYR7SdeSJLPhv6nb3aWyrnnodUUB
-Cc: =?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@jci.com>
-Subject: Re: [meta-java][PATCHv3] jdepend: Retrieve source from Git rather than tarball
+Date: Mon, 11 Jun 2018 15:43:42 +0200
+Message-Id: <1528724622-16649-1-git-send-email-remi.rerolle@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-networking][PATCH] samba: add dynamic packages regexp for auth and pdb modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,73 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2018 13:18:02 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 11 Jun 2018 13:43:46 -0000
 
-The change below doesn't seem to have been merged. Is there anything else
-that I need to do?
+Since those modules are dynamically split into sub-packages, they need
+a regexp added to PACKAGES_DYNAMIC in order for the samba recipe to
+RPROVIDE those packages. Without that, those packages are only known as
+RRECOMMENDS for samba-base, which can be an issue when building an image
+with NO_RECOMMENDATIONS = "1".
+---
+ meta-networking/recipes-connectivity/samba/samba_4.7.6.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thanks.
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb b/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb
+index a8517c5..ee298b3 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.7.6.bb
+@@ -218,6 +218,7 @@ python samba_populate_packages() {
+ }
+ 
+ PACKAGESPLITFUNCS_prepend = "samba_populate_packages "
++PACKAGES_DYNAMIC = "samba-auth-.* samba-pdb-.*"
+ 
+ RDEPENDS_${PN} += "${PN}-base ${PN}-python ${PN}-dsdb-modules"
+ RDEPENDS_${PN}-python += "pytalloc python-tdb"
+-- 
+2.1.4
 
-Mike.
-
-On Tuesday 08 May 2018 at 10:36:31 +0100, Mike Crowe wrote:
-> When Bitbake downloads jdepend-2.9.1.zip itself and I download
-> https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
-> the calculated hashes don't match the ones included in the recipe.
-> 
-> The hashes were last changed in commit
-> dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
-> that the file being downloaded was published on 20th January, so I can't
-> explain why they are wrong. Ross Burton has provided a plausible reason in
-> http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
-> where he also advocates switching to using Git repositories rather than
-> GitHub-generated tarballs.
-> 
-> It seems that we can't really rely on these tarballs to remain unchanged,
-> so let's download the Git hash that corresponds to v2.9.1 instead. This
-> should always remain valid.
-> 
-> Cc: André Draszik <andre.draszik@jci.com>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Cc: Ross Burton <ross.burton@intel.com>
-> Signed-off-by: Mike Crowe <mac@mcrowe.com>
-> ---
->  recipes-core/jdepend/jdepend_2.9.1.bb | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
-> index 5f09a8b..dfbf493 100644
-> --- a/recipes-core/jdepend/jdepend_2.9.1.bb
-> +++ b/recipes-core/jdepend/jdepend_2.9.1.bb
-> @@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5777d32a7709d558c2877d4a6616230"
->  
->  HOMEPAGE = "https://github.com/clarkware/jdepend"
->  
-> -SRC_URI = "https://github.com/clarkware/jdepend/archive/${PV}.zip;downloadfilename=${BP}.zip"
-> +SRC_URI = "git://github.com/clarkware/jdepend"
-> +SRCREV = "57980590313a5dbde236a3eb2c8958e9e53e6a10"
-> +S = "${WORKDIR}/git"
->  
->  inherit java-library
->  
-> @@ -18,7 +20,4 @@ do_compile() {
->    fastjar cf ${JARFILENAME} -C build .
->  }
->  
-> -SRC_URI[md5sum] = "9b91efe1d770e023893f89f4dde8434e"
-> -SRC_URI[sha256sum] = "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f278f72e522e7f7c9"
-> -
->  BBCLASSEXTEND = "native"
-> -- 
-> 2.11.0
-> 
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
