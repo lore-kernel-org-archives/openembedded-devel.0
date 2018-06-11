@@ -1,31 +1,37 @@
-Return-Path: <Wenlin.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F0130789F1
+Return-Path: <maxin.john@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id A099978B30
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jun 2018 06:49:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5B6nXI5029909
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 10 Jun 2018 23:49:33 -0700 (PDT)
-Received: from [128.224.162.186] (128.224.162.186) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Sun, 10 Jun 2018 23:49:32 -0700
-To: Richard Leitner <richard.leitner@skidata.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20180607092459.33931-1-wenlin.kang@windriver.com>
-	<20180607092459.33931-2-wenlin.kang@windriver.com>
-	<2dae9a9a-a6e4-1c01-d167-0dc92f9e1bbf@skidata.com>
-	<5ffe90b0-c8ab-dfe4-99c4-d63d53edc8ec@windriver.com>
-	<6e0af238-add1-f319-1d56-cf0315814b50@skidata.com>
-From: Wenlin Kang <wenlin.kang@windriver.com>
-Message-ID: <82e9866d-29ff-7200-ab4b-1a76d75245f3@windriver.com>
-Date: Mon, 11 Jun 2018 14:49:19 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Mon, 11 Jun 2018 11:38:05 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	11 Jun 2018 04:38:06 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.49,501,1520924400"; d="scan'208";a="62147045"
+Received: from mbabyjoh-desk.ger.corp.intel.com ([10.237.72.84])
+	by fmsmga004.fm.intel.com with ESMTP; 11 Jun 2018 04:38:05 -0700
+Date: Mon, 11 Jun 2018 14:30:35 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
+To: prvs=68935beb6=Richard.Leitner@skidata.com
+Message-ID: <20180611113035.GA17777@mbabyjoh-desk.ger.corp.intel.com>
+References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
+	<20180606204244.GA16170@mail.itconsulting-heinold.de>
+	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
+	<20180607132234.GA19704@mail.itconsulting-heinold.de>
+	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
+	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
+	<d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
 MIME-Version: 1.0
-In-Reply-To: <6e0af238-add1-f319-1d56-cf0315814b50@skidata.com>
-X-Originating-IP: [128.224.162.186]
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8: combine the -dbg package
+In-Reply-To: <d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Mark Asselstine <mark.asselstine@windriver.com>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>
+Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,78 +44,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jun 2018 06:49:34 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 11 Jun 2018 11:38:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 2018年06月08日 18:07, Richard Leitner wrote:
-> On 06/08/2018 11:02 AM, Wenlin Kang wrote:
->> On 2018年06月08日 15:39, Richard Leitner wrote:
->>> Hi,
->>> thank you for you patch!
->>>
->>> On 06/07/2018 11:24 AM, Wenlin Kang wrote:
->>>> One recipe should only have one -dbg package, because OE only picks
->>>> up all .debug file into the last one -dbg package listed in variable
->>>> PACKAGES.
->>> Why should one recipe, altough it conains multiple packages have only
->>> one dbg package? Shouldn't the openjdk-8-demo-dbg package contain the
->>> debug information for the openjdk-8-demo package?
->> This may be OE's policy, if one recipe contain multiple -dbg package , other -dbg packages all will be
->> a empty pacakge, only have one will contain all .debug file,  you can see the source "meta/classes/package.bbclass"
-> But obviously the demo-dbg package isn't empty because it has its "FILES" defined ;-)
+Hi Richard,
 
-Hi Richard
+Sorry for my long silence here in the list ( was away due to a personal loss).
 
-You can check each -dbg directory under packages-split/, will find only 
-one -dbg package has .debug file.
 
+On Thu, Jun 07, 2018 at 04:32:36PM +0200, prvs=68935beb6=Richard.Leitner@skidata.com wrote:
+> On 06/07/2018 03:56 PM, Otavio Salvador wrote:
+> > On Thu, Jun 7, 2018 at 10:53 AM, Richard Leitner
+> > <richard.leitner@skidata.com> wrote:
+> > ....
+> >> As I'm using this layer now for quite a few years I'll be glad to help you with
+> >> the maintainership of meta-java. Nonetheless I have to admit that I have no
+> >> experience in maintaining an openembedded layer ;-)
+> >> Therefore if you're still interested I'd have some questions regarding the
+> >> "strategic" targets, workflows and stuff like that...
+> > 
+> > Awesome, new energy!
+
+Great ! 
+
+> > Sure, go ahead and ask :-D
+> > 
+> 
+> Thanks :-)
+> 
+> So here are some question that currently came to my mind:
+> 
+>  * do you use some kind of patch management software (like patchwork)?
+
+meta-java doesn't use patchwork till now.
+
+>  * are there any "quality gate tests" for patches being applied to master or stable branches?
+
+At the moment, we dont have enough tests in meta-java (It will be good to have more selftests). Moving
+from manual build/testing to a Jenkins based automated one was briefly tested in a personal setup.
+
+>  * is there something like a build/test robot for patches and/or branches?
+Not yet. Tested a travis based setup in github. Testing wasn't successful due to the resource restrictions
+(mainly storage) there.
+
+>  * should we use the master-next branch for staging new patches?
+
+Preferably - yes.
+
+>  * is there a reason for not having OpenJDK >8 recipes?
+
+Nothing that I can remember :)
+
+>  * if the above is answered with something like "because nobody submitted them": Should we try to follow the current OpenJDK release model (a feature release every six month)?
+
++1, That will be nice. 
+
+>  * based on what scheduling are the stable branches created? Yocto Project release dates I guess?
+
+Yes.
+
+>  * what kind of patches should be applied/backported to the stable branches?
+
+Depends. Mostly security based patches and others, based on urgency/demand.
+
+> 
+> I think that's all for now (but presumably some more question will follow during the next weeks) ;-)
 >
->> 1129 python populate_packages () {
->> 1130     import glob, re
->>
->> 1156     for pkg in packages.split():
->> 1157         if pkg in package_list:
->> 1158             msg = "%s is listed in PACKAGES multiple times, this leads to packaging errors." % pkg
->> 1159             package_qa_handle_error("packages-list", msg, d)
->> 1160         # If debug-with-srcpkg mode is enabled then the src package will have
->> 1161         # priority over dbg package when assigning the files.
->> 1162         # This allows src package to include source files and remove them from dbg.
->> 1163         elif split_source_package and pkg.endswith("-src"):
->> 1164             package_list.insert(0, pkg)
->> 1165         elif autodebug and pkg.endswith("-dbg") and not split_source_package:    <==============
->> 1166             package_list.insert(0, pkg)
->> 1167         else:
->> 1168             package_list.append(pkg)
->> 1169     d.setVar('PACKAGES', ' '.join(package_list))
->> 1170     pkgdest = d.getVar('PKGDEST')
->> ...
->>
->> 1177     debug = []
->> 1178     for root, dirs, files in cpath.walk(dvar):
->> 1179         dir = root[len(dvar):]
->> 1180         if not dir:
->> 1181             dir = os.sep
->> 1182         for f in (files + dirs):
->> 1183             path = "." + os.path.join(dir, f)
->> 1184             if "/.debug/" in path or path.endswith("/.debug"):    <==============
->> 1185                 debug.append(path)
->> 1186
->>
->>> Nonehteless according to my first quick test the demo-dbg package
->>> contains lots of other debug information too...
->>> So maybe it would be the better way to fix the content of the different
->>> dbg packages rather than removing one?
->> I also thought this, but  after discussing with the other guys,  the result is a recipe can only have
->> a -dbg package, and this is OE's policy.
-> Do you have a pointer to this discussion (or if it exists to the according documentation) for us?
->
-> Thanks & regards;Richard.L
+> regards;Richard.L
 
-
--- 
-Thanks,
-Wenlin Kang
-
+Best Regards,
+Maxin
 
