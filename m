@@ -1,51 +1,47 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 7097B78AA6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BE9778AA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 18:14:29 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id l15-v6so15866934wmc.1
+	Tue, 12 Jun 2018 18:14:32 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id o13-v6so555797wmf.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 11:14:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	Tue, 12 Jun 2018 11:14:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=omNA0FZvLgT2d7o+S24Q6zW5x6kjbjM0OcwF7xwYk0Y=;
-	b=v1VEs96uv4nJ2VYzhic+uqk8LS2htyDEgbM/nJCzIEWxEl1XF5jzk4GAgD7+5sgDeN
-	0H+42W70vxRMfid4IHzxVd4zGP6HRGCt5Y/5teCyd1KqalenhhmsmnXFNXObFnhN18rX
-	8FPS/tizR7TRQIuiKT6YrkTtnfUVDk60PKoKn/lKR9VS0Lb4z2Ws48J3z3G/A+9nTBrW
-	kABi2skzFQOI4P8JYDPJATvTNKvZjWLZx4fPTNrfsNoxB9oI1bHh6JoQA0rfXMnVujJ4
-	aNTr8vaqwtF0aKfNNY4TqreGhPL5sjo57kN+ZOEaySmFf2+3jG1eNSTCgREXp+6APJXB
-	BwJg==
+	bh=szzz/SvuKoyINrKaL7F4Syk7CYAYR0VsQXlx3JsQb8E=;
+	b=bKwog/WGXx7l8QcwBa4caMj9XSljiBW1lLmClGXvqpjNDS+CyWMzF661fNHkWHOxAy
+	Aj9OIXtY9JARX+iw6vTYkzxCf7cMr6WGXKWva3YxtDQRtjS4o3UxV7QvIcJt+DnmYOWr
+	HnVMUjyWxlAt23qJXqMZBLRLuzYuHqVZJ2Uvy+rl1c8l9eYXlVsL603iedzd3evKCSOh
+	BRZ4H8A6b4vCzYAHEkPRg0TM6ZeUZOWFVBgIg8trVLcy5BMle0KlO1y24RdSw/ALeoqh
+	hOAoGHeRiL4pfgDVVkuhwQ23b3e7rLT2NLmbmmK/ratSbWWLL2SxTckF6vUEuyPk9Z7v
+	7COQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=omNA0FZvLgT2d7o+S24Q6zW5x6kjbjM0OcwF7xwYk0Y=;
-	b=oiRfRxTOZ9cDKwSc420x4w0maaxV2TEVDY38K1ilfkvO3uOyqZztwWaD+foyzTxPxH
-	QKM9jXb98N0Yj56FG3U1mn6GRqKYX6PE/ZIEkk0IiB9L7y16rl+PdpTcZXwyvUp2wZ3B
-	plmekoLp8sbp/9lk1O80ikXdmzHCQGtks4SC+QSR/4zcuyKgJSeH5nMDTmNYPhbp8E3E
-	kQL0K+vGWod8X+jzj4yX/Y9okgL30mbehcOfB7gP7z57NnbJEMLSTLWLjTv2qGK8qrLy
-	NlUSCgaPjEIJNlfXLNiQQbJ+eRa3TNOoc6QhqFM64bBR4JhUdp41XEPjTgeJi7EleUBX
-	TRgg==
-X-Gm-Message-State: APt69E3lhZAqGkBTsNCKZlrpiEJdHflaWKYltmoGU2K8F/ip0oJBZuEy
-	mwrnA6BcB8o3mARc6gWx4Q76cEQA
-X-Google-Smtp-Source: ADUXVKIAalXBh+DP3AB+1bf4x95bfvwDpxvwAFjNDxxVgeRTtwJrE5zL0f50zzT99ZjFJ4Tbrd02Iw==
-X-Received: by 2002:a1c:e80f:: with SMTP id
-	f15-v6mr1034025wmh.137.1528827270040; 
-	Tue, 12 Jun 2018 11:14:30 -0700 (PDT)
-Received: from localhost.localdomain
-	([2a04:ae08:1403:ff00:ddc6:6bd0:776b:2bb8])
-	by smtp.gmail.com with ESMTPSA id
-	y22-v6sm422040edm.95.2018.06.12.11.14.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Jun 2018 11:14:29 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
+	bh=szzz/SvuKoyINrKaL7F4Syk7CYAYR0VsQXlx3JsQb8E=;
+	b=aJlEktbltB/A+i+hevlN2HMhZoRTxgj8ToVzPUpHXck0loOoWMKUeHkUYjd65iwV1w
+	abayQ48+uiM+LBdf1+UmNObw8ViQmYfzOQwubPzE4jNIOmdIZk5JGIl0g4e9yh/Y6SeZ
+	czIqV9ANFpFsJEu8xrbK/YCDcXDP5LEsCA7jWjhptGf7exavGyBwOor9gkpFqf4mPZ2+
+	Y9x2w49AFsrrbtNELjlN3ol8/fE6wMv172vTdmLej2NPdDb698cchehWl/LjVt/sHGgf
+	r7mHNUXIT1hDmKCWf6HZtnFD0FCHt+M2tjD8QHempSbbPwA6aqaSICWSuKWvBP2f8WAY
+	Wexg==
+X-Gm-Message-State: APt69E0nCSBj2VdjvAHCb3QwfuF8IR8Hs00w4t0v92R6jothraCO2AvK
+	RdutxGbb8Q09Xw67tsvuhCGgrg==
+X-Google-Smtp-Source: ADUXVKKYmJME1M6BS2Wpz94rLriL7n3vCbvINSiNgtewLz5sK+R1AmuJq1MLbN6k8WkYF1WGbJy/6w==
+X-Received: by 2002:a1c:6d41:: with SMTP id
+	i62-v6mr1023189wmc.25.1528827272789; 
+	Tue, 12 Jun 2018 11:14:32 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	b190-v6sm1677074wma.24.2018.06.12.11.14.31
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 12 Jun 2018 11:14:31 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jun 2018 20:14:25 +0200
-Message-Id: <20180612181425.17444-1-dev@sashko.rv.ua>
+Date: Tue, 12 Jun 2018 18:14:24 +0000
+Message-Id: <20180612181426.2944-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <dev@sashko.rv.ua>
-Subject: [meta-oe][PATCH v2] mercurial: upgrade to 4.6.1
+Subject: [PATCH][pyro][meta-oe 1/3] fluentbit: backport one patch from 0.12.0 to fix aarch64 build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +54,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 18:14:29 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 18:14:32 -0000
 
-Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
+* rocko and newer already have a version newer than 0.12.0
+  so this change isn't needed there and 0.7.2 in morty doesn't
+  need it as well.
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../mercurial/{mercurial_4.4.bb => mercurial_4.6.1.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/mercurial/{mercurial_4.4.bb => mercurial_4.6.1.bb} (85%)
+ .../fluentbit/fluentbit/aarch64.patch         | 64 +++++++++++++++++++
+ .../fluentbit/fluentbit_0.11.3.bb             |  3 +-
+ 2 files changed, 66 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch
 
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb b/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
-similarity index 85%
-rename from meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb
-rename to meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
-index 90524974b..13710aaea 100644
---- a/meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb
-+++ b/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
-@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "python python-modules"
- inherit python-dir
- 
- SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
--SRC_URI[md5sum] = "c1d9fad1b7ed7077b0d4ae82e71154db"
--SRC_URI[sha256sum] = "234af4a67565c85923b0a1910c704ab44bcf12f69b85532687208776563d87de"
-+SRC_URI[md5sum] = "f9b2e4a3b5901ef744fa3abe4196e97e"
-+SRC_URI[sha256sum] = "89fa8ecbc8aa6e48e98f9803a1683ba91367124295dba2407b28c34ca621108d"
- 
- S = "${WORKDIR}/mercurial-${PV}"
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch
+new file mode 100644
+index 0000000000..071dff1285
+--- /dev/null
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch
+@@ -0,0 +1,64 @@
++From a9af19d2679442b679536b51276334149b0b6655 Mon Sep 17 00:00:00 2001
++From: Eduardo Silva <eduardo@treasure-data.com>
++Date: Wed, 19 Apr 2017 12:35:53 -0600
++Subject: [PATCH] lib: flb_libco: merged changes for aarch64 support (#228)
++
++This patch merge the following changes:
++
++ - 534e405 armv8: on arm64 (aarch64) use sjlj backend
++ - fdcb558 sjlj: include missing settings and adapt API
++ - 9dab058 settings: tweak for Windows build
++
++These changes needs further testing on a armv8 platform.
++
++Upstream-Status: Backport [from 0.12.0 https://github.com/fluent/fluent-bit/commit/a9af19d2679442b679536b51276334149b0b6655]
++
++Signed-off-by: Eduardo Silva <eduardo@treasure-data.com>
++---
++ lib/flb_libco/libco.c | 2 ++
++ lib/flb_libco/sjlj.c  | 5 ++++-
++ 2 files changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/lib/flb_libco/libco.c b/lib/flb_libco/libco.c
++index 13eb2379..2db92e95 100755
++--- a/lib/flb_libco/libco.c
+++++ b/lib/flb_libco/libco.c
++@@ -14,6 +14,8 @@
++     #include "amd64.c"
++   #elif defined(__arm__)
++     #include "arm.c"
+++  #elif defined(__aarch64__)
+++    #include "sjlj.c"
++   #elif defined(_ARCH_PPC)
++     #include "ppc.c"
++   #elif defined(_WIN32)
++diff --git a/lib/flb_libco/sjlj.c b/lib/flb_libco/sjlj.c
++index dfa0aa45..36d110b7 100755
++--- a/lib/flb_libco/sjlj.c
+++++ b/lib/flb_libco/sjlj.c
++@@ -15,6 +15,7 @@
++ #include <stdlib.h>
++ #include <signal.h>
++ #include <setjmp.h>
+++#include "settings.h"
++ 
++ #ifdef __cplusplus
++ extern "C" {
++@@ -41,7 +42,8 @@ cothread_t co_active() {
++   return (cothread_t)co_running;
++ }
++ 
++-cothread_t co_create(unsigned int size, void (*coentry)(void)) {
+++cothread_t co_create(unsigned int size, void (*coentry)(void),
+++                     size_t *out_size) {
++   if(!co_running) co_running = &co_primary;
++ 
++   cothread_struct *thread = (cothread_struct*)malloc(sizeof(cothread_struct));
++@@ -78,6 +80,7 @@ cothread_t co_create(unsigned int size, void (*coentry)(void)) {
++     }
++   }
++ 
+++  *out_size = size;
++   return (cothread_t)thread;
++ }
++ 
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
+index 8d756e6a40..a9433c284a 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
+@@ -5,7 +5,8 @@ BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
+ SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
+            file://0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch \
+            file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
+-           "
++           file://aarch64.patch \
++"
+ SRC_URI[md5sum] = "9383262339412782b80cc49e7ad15609"
+ SRC_URI[sha256sum] = "eb8a85c656fa60682b0bf8dd1ad58d848cd251dab4f35a6777acd552c65b0511"
  
 -- 
 2.17.1
