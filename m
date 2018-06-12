@@ -1,69 +1,50 @@
-Return-Path: <prvs=69472e970=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id F081578F39
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5528778F33
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 14:51:35 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,215,1526335200"; 
-   d="scan'208";a="1495490"
-To: "Maxin B. John" <maxin.john@intel.com>
-References: <20180612143331.2445-1-richard.leitner@skidata.com>
-	<20180612143848.GA39978@mbabyjoh-desk.ger.corp.intel.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <a2ccf761-b1e4-eab3-14d8-3ddacea57a11@skidata.com>
-Date: Tue, 12 Jun 2018 16:51:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
-MIME-Version: 1.0
-In-Reply-To: <20180612143848.GA39978@mbabyjoh-desk.ger.corp.intel.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH 0/4] README: update to reflect current status
+	Tue, 12 Jun 2018 14:53:30 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id f16-v6so24430994wrm.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jun 2018 07:53:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=x1hTkRGQwUV/eyQnyTyc/0JIBZnVfZFtYLg4VKBoOuo=;
+	b=t4hxImGTo7xDBH5EZiu9yvDcGXsAPef8l7FlrpkD8B1DJwFOp6iaS53mGSs+OE7FNS
+	UkkRSWDOc25/JtdY+5qQC2k7k3zOrJg4l1XSci7p3dlYdr2N7l3/d6arJ5bMCj3/7S1t
+	vAbSsWBoxIwTP1ZjmoU2ywcdUHZl6/9FgZC9s/fvrJWuCNhw4W/bptlyPiAsojaE4X54
+	Ex68MSKR3wydmSJKO67UhAsrOXZuqoCQwk1dn/LPOX8OaD/X0bWU4L0pCRS4rjukFymT
+	o+0JzBsvOfvkwvYrGkpIX4pvZxwSIHgDRFdFgzNNm2N6CDuCSimfnXQI8x1Hf4NxoEfY
+	vJpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=x1hTkRGQwUV/eyQnyTyc/0JIBZnVfZFtYLg4VKBoOuo=;
+	b=AGCIyELSY74dCJq27qI6mY2BgBvmlQFzxXBtTjxLME3KRES5cxnpn6Vjmq7InSl4oQ
+	TCWjN+UM2oqAUnaXnWA1tN8K7EOpndmkvbEddAT6uWNyE1ltw4sT5MAZsQUghzRaB4Wh
+	St8MZj1cKsxCVPTsyANzW7tcmhMNLQ6N9G9J5/pJwSCVnHoxx/PLp3JmVeV8h++wDOMv
+	qNOqnqYftq+FnctUu7O1EjqWfb3rvlM7LE64oG1GierGs5M63ZjKgSyOnwYiwwLZS00S
+	3raeuWj8abAAtRM9n1yaIkSt0aZiWZ4So25UD1759eklyxeWStvbsGBZ3IGMvVniUZGq
+	wO/g==
+X-Gm-Message-State: APt69E0SJoPa8zT8iI+Tabs5sGWrrCMdPu/M//GDYNpPQN76ammQysa7
+	2n14D5dIND93BudWb1kDnSAJug==
+X-Google-Smtp-Source: ADUXVKJlnb93Eu2eKtvJ0SUpuHTQq2EITfqusdXnQnZG/XvKYckeHwQ9WdaDSO3hvp3bIUWzRCMy+w==
+X-Received: by 2002:adf:a925:: with SMTP id
+	u34-v6mr629752wrc.248.1528815211130; 
+	Tue, 12 Jun 2018 07:53:31 -0700 (PDT)
+Received: from brgl-bgdev.lan (LFbn-NIC-1-84-58.w2-15.abo.wanadoo.fr.
+	[2.15.173.58]) by smtp.gmail.com with ESMTPSA id
+	d15-v6sm8598555wmb.0.2018.06.12.07.53.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 Jun 2018 07:53:30 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Jun 2018 16:53:23 +0200
+Message-Id: <20180612145323.24136-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.17.0
+Subject: [PATCH] libgpiod: add packageconfig for C++ bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,39 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 14:51:36 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Jun 2018 14:53:30 -0000
 
-Hi Maxin,
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On 06/12/2018 04:38 PM, Maxin B. John wrote:
-> Hi Richard,
-> 
-> On Tue, Jun 12, 2018 at 04:33:27PM +0200, openembedded-devel-bounces@lists.openembedded.org wrote:
->> Update the README file to reflect current maintainers, dependencies and patch
->> formatting/sending guidlines.
->>
->> Mario Domenech Goulart (1):
->>   README: Remove Mario Goulart from the list of maintainers
->>
->> Richard Leitner (3):
->>   README: fix dependent branch names
->>   README: add note on how to send a patch series with cover-letter
->>   README: add maintainer: Richard Leitner
->>
->>  README | 20 ++++++++++++++------
->>  1 file changed, 14 insertions(+), 6 deletions(-)
-> 
-> For some reasons, the "Author" of patches are not clearly set. It shows up like - "openembedded-devel-bounces@lists.openembedded.org",
-> instead of your mail-id.
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
+index 1bda8bc3a..ab0bc980d 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
+@@ -5,6 +5,8 @@ DEPENDS += "autoconf-archive-native"
+ SRC_URI[md5sum] = "80237a047a9d653a14c5d71e5ce9d641"
+ SRC_URI[sha256sum] = "9758466468a7ef3f5e30c182c1303abef6241e665cda4d82a64328a7474838c1"
+ 
++PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
++
+ PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3,python3-core"
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
+ 
+-- 
+2.17.0
 
-Just wrote you an email because of that. It's strange because the
-answer from Otavio to my [PATCH 3/4] parses the "From:" correctly.
-Also my "raw patches" which I passed to "git send-email" seem to be fine...
-
-Do you have any ideas what causes this problem?
-
-regards;Richard.L
 
