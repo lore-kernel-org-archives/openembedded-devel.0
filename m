@@ -1,48 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
-	[209.85.128.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CEC474F37
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7097B78AA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 18:13:46 +0000 (UTC)
-Received: by mail-wr0-f171.google.com with SMTP id f16-v6so25128449wrm.3
+	Tue, 12 Jun 2018 18:14:29 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id l15-v6so15866934wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 11:13:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Tue, 12 Jun 2018 11:14:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=eu3nqsIu5jXJ/PeQg6a3CteL/w1N/EBQ0uZiFb4OK8o=;
-	b=TUvZb+qDJvX/a7RkNkbJvCYKzmAsD2azAmG6tEEmV2NRxP/hV0Dfh+G8Xm3O3U9ESE
-	0H43Twr8ROZoS0QDlq4Jn9JePhbMFwGAEpv68BEGexMemeNDab1vDPDijp1VS80Hx5rS
-	77DgONXkhestwWJKaIIT4dJbr+5fQwqlap5o4lXdVkqWqGfncnlKRq9hyid9mz2IjA86
-	ZJSg1w5tDBqVonOw+YAchK1gKTlQpskPZRqTz3hsz6glQ9fr9zw/gr4h/FElZDH3KDgd
-	Hq9O5hyJcL5LyOc5yq3QYzm159HlNihQoLO/XLm+/MPaDquh+Yl95Y/UeTbYOpap4yMs
-	ob2w==
+	bh=omNA0FZvLgT2d7o+S24Q6zW5x6kjbjM0OcwF7xwYk0Y=;
+	b=v1VEs96uv4nJ2VYzhic+uqk8LS2htyDEgbM/nJCzIEWxEl1XF5jzk4GAgD7+5sgDeN
+	0H+42W70vxRMfid4IHzxVd4zGP6HRGCt5Y/5teCyd1KqalenhhmsmnXFNXObFnhN18rX
+	8FPS/tizR7TRQIuiKT6YrkTtnfUVDk60PKoKn/lKR9VS0Lb4z2Ws48J3z3G/A+9nTBrW
+	kABi2skzFQOI4P8JYDPJATvTNKvZjWLZx4fPTNrfsNoxB9oI1bHh6JoQA0rfXMnVujJ4
+	aNTr8vaqwtF0aKfNNY4TqreGhPL5sjo57kN+ZOEaySmFf2+3jG1eNSTCgREXp+6APJXB
+	BwJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=eu3nqsIu5jXJ/PeQg6a3CteL/w1N/EBQ0uZiFb4OK8o=;
-	b=mlKLGOJofn9YHWNRtOwhUUUbykHf6LI685fWO5d5iGL3UBUPuka1rHGey+JfgvGEUw
-	YPr2W3XnuDjy98W8l2bU06wgk1nIXt2Se97/3Jk59V4U/bC8AVxrGV2e0AuObzkDwcoD
-	NNc6u1eKFvuxTMSm4JQf17NW9vlL4I0Fej/6Kv9ouLrAcRXmwkHApp2n//EApJOpGdlj
-	0RO3qsOjLrYhaIwpqqiXqFGMzzzdjkepfv4GFqYhPdeVTtdsAIW2/FOZRqwIRCLHHlzD
-	mWPbDyWhmfSeVoc8fWn9RYIWmzkoNAQFgkpPjtorTvSw+Iz+4AJsZTGOnNEl+o9UWoay
-	fBGA==
-X-Gm-Message-State: APt69E0bh0yUQXHdM5wS/MdC8mGFZBAVwyJKyYMdNfuGqMYDrgl28wTF
-	KTeuElR5nijGB0UaCnF4kHIHXQ==
-X-Google-Smtp-Source: ADUXVKK9VPcnQhvFUEt+nReAUWYolyAirEe249A7VYv61oF5w7L3XpFcwIOvbCOtNdgFNd26I1Rv+A==
-X-Received: by 2002:adf:af6b:: with SMTP id
-	z98-v6mr1299699wrc.250.1528827226745; 
-	Tue, 12 Jun 2018 11:13:46 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	n17-v6sm348786wrs.96.2018.06.12.11.13.45
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 12 Jun 2018 11:13:45 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	bh=omNA0FZvLgT2d7o+S24Q6zW5x6kjbjM0OcwF7xwYk0Y=;
+	b=oiRfRxTOZ9cDKwSc420x4w0maaxV2TEVDY38K1ilfkvO3uOyqZztwWaD+foyzTxPxH
+	QKM9jXb98N0Yj56FG3U1mn6GRqKYX6PE/ZIEkk0IiB9L7y16rl+PdpTcZXwyvUp2wZ3B
+	plmekoLp8sbp/9lk1O80ikXdmzHCQGtks4SC+QSR/4zcuyKgJSeH5nMDTmNYPhbp8E3E
+	kQL0K+vGWod8X+jzj4yX/Y9okgL30mbehcOfB7gP7z57NnbJEMLSTLWLjTv2qGK8qrLy
+	NlUSCgaPjEIJNlfXLNiQQbJ+eRa3TNOoc6QhqFM64bBR4JhUdp41XEPjTgeJi7EleUBX
+	TRgg==
+X-Gm-Message-State: APt69E3lhZAqGkBTsNCKZlrpiEJdHflaWKYltmoGU2K8F/ip0oJBZuEy
+	mwrnA6BcB8o3mARc6gWx4Q76cEQA
+X-Google-Smtp-Source: ADUXVKIAalXBh+DP3AB+1bf4x95bfvwDpxvwAFjNDxxVgeRTtwJrE5zL0f50zzT99ZjFJ4Tbrd02Iw==
+X-Received: by 2002:a1c:e80f:: with SMTP id
+	f15-v6mr1034025wmh.137.1528827270040; 
+	Tue, 12 Jun 2018 11:14:30 -0700 (PDT)
+Received: from localhost.localdomain
+	([2a04:ae08:1403:ff00:ddc6:6bd0:776b:2bb8])
+	by smtp.gmail.com with ESMTPSA id
+	y22-v6sm422040edm.95.2018.06.12.11.14.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 Jun 2018 11:14:29 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jun 2018 18:13:44 +0000
-Message-Id: <20180612181344.2727-1-Martin.Jansa@gmail.com>
+Date: Tue, 12 Jun 2018 20:14:25 +0200
+Message-Id: <20180612181425.17444-1-dev@sashko.rv.ua>
 X-Mailer: git-send-email 2.17.1
-Subject: [PATCH][rocko][meta-oe] rarpd, sblim-sfcb, openct: inherit systemd unconditionally
+Cc: Oleksandr Kravchuk <dev@sashko.rv.ua>
+Subject: [meta-oe][PATCH v2] mercurial: upgrade to 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,117 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 18:13:46 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 18:14:29 -0000
 
-* the inherit was controlled by VIRTUAL-RUNTIME_init_manager and the installation
-  of .service files by DISTRO_FEATURES and systemd was in DISTRO_FEATURES but not
-  in VIRTUAL-RUNTIME_init_manager it was causing QA issues about unpackaged
-  .service files
-
-ERROR: rarpd-ss981107-r0 do_package: QA Issue: rarpd: Files/directories
-were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/rarpd.service
-
-ERROR: sblim-sfcb-1.4.9-r0 do_package: QA Issue: sblim-sfcb:
-Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/sblim-sfcb.service
-
-ERROR: sblim-sfcb-1.4.9-r0 do_package: QA Issue: sblim-sfcb:
-Files/directories were installed but not shipped in any package:
-  /lib
-  /lib/systemd
-  /lib/systemd/system
-  /lib/systemd/system/sblim-sfcb.service
-
-* systemd.bbclass will take care of removing /lib/systemd when systemd
-  isn't in DISTRO_FEATURES, so we can remove both conditions
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
 ---
- meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb        | 8 +++-----
- meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 8 +++-----
- meta-oe/recipes-support/openct/openct_0.6.20.bb         | 8 +++-----
- 3 files changed, 9 insertions(+), 15 deletions(-)
+ .../mercurial/{mercurial_4.4.bb => mercurial_4.6.1.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/mercurial/{mercurial_4.4.bb => mercurial_4.6.1.bb} (85%)
 
-diff --git a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-index 4025b8087e..7c9f2df9db 100644
---- a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-+++ b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-@@ -38,13 +38,11 @@ do_install() {
-     install -m 644 rarpd.8 ${D}${mandir}/man8/rarpd.8
-     install -m 644 ${WORKDIR}/ethers.sample ${D}${sysconfdir}/ethers
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb b/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+similarity index 85%
+rename from meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb
+rename to meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+index 90524974b..13710aaea 100644
+--- a/meta-oe/recipes-devtools/mercurial/mercurial_4.4.bb
++++ b/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "python python-modules"
+ inherit python-dir
  
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
--    fi
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
- }
+ SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+-SRC_URI[md5sum] = "c1d9fad1b7ed7077b0d4ae82e71154db"
+-SRC_URI[sha256sum] = "234af4a67565c85923b0a1910c704ab44bcf12f69b85532687208776563d87de"
++SRC_URI[md5sum] = "f9b2e4a3b5901ef744fa3abe4196e97e"
++SRC_URI[sha256sum] = "89fa8ecbc8aa6e48e98f9803a1683ba91367124295dba2407b28c34ca621108d"
  
--inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
-+inherit systemd
+ S = "${WORKDIR}/mercurial-${PV}"
  
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "rarpd.service"
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index c6b9f1019b..3db8c14842 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -28,7 +28,7 @@ SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
- SRC_URI[sha256sum] = "634a67b2f7ac3b386a79160eb44413d618e33e4e7fc74ae68b0240484af149dd"
- 
- inherit autotools
--inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
-+inherit systemd
- 
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "sblim-sfcb.service"
-@@ -53,10 +53,8 @@ do_install() {
- 
-     oe_runmake DESTDIR=${D} install
- 
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
--    fi
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
- 
-     install -d ${D}${sysconfdir}/init.d
-     mv ${D}${sysconfdir}/init.d/sfcb ${D}${sysconfdir}/init.d/sblim-sfcb
-diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index c7d7203eda..913290cd97 100644
---- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
-+++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d
- LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
--inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
-+inherit systemd
- SYSTEMD_SERVICE_${PN} += "openct.service "
- SYSTEMD_AUTO_ENABLE = "enable"
- 
-@@ -77,10 +77,8 @@ do_install () {
-     install -Dpm 755 ${WORKDIR}/openct.init ${D}/etc/init.d/openct
-     install -Dpm 644 ${WORKDIR}/openct.sysconfig ${D}/etc/sysconfig/openct
- 
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}/${systemd_unitdir}/system
--        install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
--    fi
-+    install -d ${D}/${systemd_unitdir}/system
-+    install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
- 
-     so=$(find ${D} -name \*.so | sed "s|^${D}||")
-     sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
 -- 
 2.17.1
 
