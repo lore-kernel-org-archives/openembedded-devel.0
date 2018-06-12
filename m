@@ -1,14 +1,12 @@
 Return-Path: <prvs=69472e970=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id D4CEB78A89
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 8080878D0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 08:01:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; 
-   d="scan'208";a="1494119"
-To: Wenlin Kang <wenlin.kang@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20180607092459.33931-1-wenlin.kang@windriver.com>
-	<20180607092459.33931-2-wenlin.kang@windriver.com>
+	Tue, 12 Jun 2018 09:21:14 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; d="scan'208";a="10801181"
+To: <openembedded-devel@lists.openembedded.org>
+References: <CAJTo0LZ2G_4cMxoAQm2AWgRnkeP5VXRURH9c82qaBpA0bop59A@mail.gmail.com>
+	<20180508093631.5196-1-mac@mcrowe.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -54,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <5a5c799e-4542-412f-8225-3f2ada94c8f3@skidata.com>
-Date: Tue, 12 Jun 2018 10:01:56 +0200
+Message-ID: <58d36219-2ef6-ec55-b105-02482768c34b@skidata.com>
+Date: Tue, 12 Jun 2018 11:21:28 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180607092459.33931-2-wenlin.kang@windriver.com>
+In-Reply-To: <20180508093631.5196-1-mac@mcrowe.com>
 X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8: combine the -dbg package
+Subject: Re: [meta-java][PATCHv3] jdepend: Retrieve source from Git rather than tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,69 +74,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 08:01:43 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 09:21:15 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Wenlin,
-as we clarified the "one -dbg package per recipe" thing I have some
-comments on the patch itself.
+Hi,
+although the old checksum matches with the current github archive for me
+please feel free to add:
 
+Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
+and
+Tested-by: Richard Leitner <richard.leitner@skidata.com>
 
-On 06/07/2018 11:24 AM, Wenlin Kang wrote:
-> One recipe should only have one -dbg package, because OE only picks
-> up all .debug file into the last one -dbg package listed in variable
-> PACKAGES.
+regards;Richard.L
 
-May you please include a reference to that statement from "Ross Burton"?
-
+On 05/08/2018 11:36 AM, Mike Crowe wrote:
+> When Bitbake downloads jdepend-2.9.1.zip itself and I download
+> https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
+> the calculated hashes don't match the ones included in the recipe.
 > 
-> Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+> The hashes were last changed in commit
+> dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
+> that the file being downloaded was published on 20th January, so I can't
+> explain why they are wrong. Ross Burton has provided a plausible reason in
+> http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
+> where he also advocates switching to using Git repositories rather than
+> GitHub-generated tarballs.
+> 
+> It seems that we can't really rely on these tarballs to remain unchanged,
+> so let's download the Git hash that corresponds to v2.9.1 instead. This
+> should always remain valid.
+> 
+> Cc: André Draszik <andre.draszik@jci.com>
+> Cc: Khem Raj <raj.khem@gmail.com>
+> Cc: Ross Burton <ross.burton@intel.com>
+> Signed-off-by: Mike Crowe <mac@mcrowe.com>
 > ---
->  recipes-core/openjdk/openjdk-8_16xbyy.bb | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
+>  recipes-core/jdepend/jdepend_2.9.1.bb | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8_16xbyy.bb b/recipes-core/openjdk/openjdk-8_16xbyy.bb
-> index dd0ed1d..1d7d794 100644
-> --- a/recipes-core/openjdk/openjdk-8_16xbyy.bb
-> +++ b/recipes-core/openjdk/openjdk-8_16xbyy.bb
-> @@ -14,7 +14,6 @@ do_install() {
+> diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
+> index 5f09a8b..dfbf493 100644
+> --- a/recipes-core/jdepend/jdepend_2.9.1.bb
+> +++ b/recipes-core/jdepend/jdepend_2.9.1.bb
+> @@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5777d32a7709d558c2877d4a6616230"
+>  
+>  HOMEPAGE = "https://github.com/clarkware/jdepend"
+>  
+> -SRC_URI = "https://github.com/clarkware/jdepend/archive/${PV}.zip;downloadfilename=${BP}.zip"
+> +SRC_URI = "git://github.com/clarkware/jdepend"
+> +SRCREV = "57980590313a5dbde236a3eb2c8958e9e53e6a10"
+> +S = "${WORKDIR}/git"
+>  
+>  inherit java-library
+>  
+> @@ -18,7 +20,4 @@ do_compile() {
+>    fastjar cf ${JARFILENAME} -C build .
 >  }
 >  
->  PACKAGES_append = " \
-> -    ${PN}-demo-dbg \
->      ${PN}-demo \
->      ${PN}-source \
->  "
-> @@ -47,12 +46,6 @@ FILES_${PN}-dbg_append = "\
->      ${JDK_HOME}/jre/lib/${JDK_ARCH}/headless/.debug/ \
->      ${JDK_HOME}/jre/lib/${JDK_ARCH}/xawt/.debug/ \
->      ${JDK_HOME}/jre/lib/${JDK_ARCH}/client/.debug/ \
-> -"
+> -SRC_URI[md5sum] = "9b91efe1d770e023893f89f4dde8434e"
+> -SRC_URI[sha256sum] = "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f278f72e522e7f7c9"
 > -
-> -FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
-> -RDEPENDS_${PN}-demo = " ${PN} "
-> -
-> -FILES_${PN}-demo-dbg = "\
->      ${JDK_HOME}/demo/jvmti/gctest/lib/.debug/ \
->      ${JDK_HOME}/demo/jvmti/heapTracker/lib/.debug/ \
->      ${JDK_HOME}/demo/jvmti/heapViewer/lib/.debug/ \
-> @@ -64,6 +57,9 @@ FILES_${PN}-demo-dbg = "\
->      ${JDK_HOME}/demo/jvmti/compiledMethodLoad/lib/.debug/ \
->  "
-
-AFAIK as all ".debug" are included in the -dbg packages it should
-be fine if you remove the whole FILES_${PN}-dbg_append definition.
-
->  
-> +FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
-> +RDEPENDS_${PN}-demo = " ${PN} "
-> +
->  FILES_${PN}-doc_append = "\
->      ${JDK_HOME}/man \
->      ${JDK_HOME}/ASSEMBLY_EXCEPTION \
-
-
-thanks&regards;Richard.L 
+>  BBCLASSEXTEND = "native"
+> 
 
