@@ -1,50 +1,31 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5528778F33
+Return-Path: <maxin.john@intel.com>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D11378F49
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 14:53:30 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id f16-v6so24430994wrm.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 07:53:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=x1hTkRGQwUV/eyQnyTyc/0JIBZnVfZFtYLg4VKBoOuo=;
-	b=t4hxImGTo7xDBH5EZiu9yvDcGXsAPef8l7FlrpkD8B1DJwFOp6iaS53mGSs+OE7FNS
-	UkkRSWDOc25/JtdY+5qQC2k7k3zOrJg4l1XSci7p3dlYdr2N7l3/d6arJ5bMCj3/7S1t
-	vAbSsWBoxIwTP1ZjmoU2ywcdUHZl6/9FgZC9s/fvrJWuCNhw4W/bptlyPiAsojaE4X54
-	Ex68MSKR3wydmSJKO67UhAsrOXZuqoCQwk1dn/LPOX8OaD/X0bWU4L0pCRS4rjukFymT
-	o+0JzBsvOfvkwvYrGkpIX4pvZxwSIHgDRFdFgzNNm2N6CDuCSimfnXQI8x1Hf4NxoEfY
-	vJpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=x1hTkRGQwUV/eyQnyTyc/0JIBZnVfZFtYLg4VKBoOuo=;
-	b=AGCIyELSY74dCJq27qI6mY2BgBvmlQFzxXBtTjxLME3KRES5cxnpn6Vjmq7InSl4oQ
-	TCWjN+UM2oqAUnaXnWA1tN8K7EOpndmkvbEddAT6uWNyE1ltw4sT5MAZsQUghzRaB4Wh
-	St8MZj1cKsxCVPTsyANzW7tcmhMNLQ6N9G9J5/pJwSCVnHoxx/PLp3JmVeV8h++wDOMv
-	qNOqnqYftq+FnctUu7O1EjqWfb3rvlM7LE64oG1GierGs5M63ZjKgSyOnwYiwwLZS00S
-	3raeuWj8abAAtRM9n1yaIkSt0aZiWZ4So25UD1759eklyxeWStvbsGBZ3IGMvVniUZGq
-	wO/g==
-X-Gm-Message-State: APt69E0SJoPa8zT8iI+Tabs5sGWrrCMdPu/M//GDYNpPQN76ammQysa7
-	2n14D5dIND93BudWb1kDnSAJug==
-X-Google-Smtp-Source: ADUXVKJlnb93Eu2eKtvJ0SUpuHTQq2EITfqusdXnQnZG/XvKYckeHwQ9WdaDSO3hvp3bIUWzRCMy+w==
-X-Received: by 2002:adf:a925:: with SMTP id
-	u34-v6mr629752wrc.248.1528815211130; 
-	Tue, 12 Jun 2018 07:53:31 -0700 (PDT)
-Received: from brgl-bgdev.lan (LFbn-NIC-1-84-58.w2-15.abo.wanadoo.fr.
-	[2.15.173.58]) by smtp.gmail.com with ESMTPSA id
-	d15-v6sm8598555wmb.0.2018.06.12.07.53.30
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Jun 2018 07:53:30 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jun 2018 16:53:23 +0200
-Message-Id: <20180612145323.24136-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.17.0
-Subject: [PATCH] libgpiod: add packageconfig for C++ bindings
+	Tue, 12 Jun 2018 15:10:56 +0000 (UTC)
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	12 Jun 2018 08:10:58 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.51,215,1526367600"; d="scan'208";a="48393642"
+Received: from mbabyjoh-desk.fi.intel.com (HELO
+	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.84])
+	by orsmga007.jf.intel.com with ESMTP; 12 Jun 2018 08:10:56 -0700
+Date: Tue, 12 Jun 2018 18:03:29 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
+To: prvs=69472e970=Richard.Leitner@skidata.com
+Message-ID: <20180612150329.GA40594@mbabyjoh-desk.ger.corp.intel.com>
+References: <20180612143331.2445-1-richard.leitner@skidata.com>
+	<20180612143848.GA39978@mbabyjoh-desk.ger.corp.intel.com>
+	<a2ccf761-b1e4-eab3-14d8-3ddacea57a11@skidata.com>
+MIME-Version: 1.0
+In-Reply-To: <a2ccf761-b1e4-eab3-14d8-3ddacea57a11@skidata.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH 0/4] README: update to reflect current status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +38,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 14:53:30 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 15:10:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
----
- meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Hi Richard,
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-index 1bda8bc3a..ab0bc980d 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-@@ -5,6 +5,8 @@ DEPENDS += "autoconf-archive-native"
- SRC_URI[md5sum] = "80237a047a9d653a14c5d71e5ce9d641"
- SRC_URI[sha256sum] = "9758466468a7ef3f5e30c182c1303abef6241e665cda4d82a64328a7474838c1"
- 
-+PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
-+
- PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3,python3-core"
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3native', '', d)}
- 
--- 
-2.17.0
+On Tue, Jun 12, 2018 at 04:51:49PM +0200, prvs=69472e970=Richard.Leitner@skidata.com wrote:
+> Hi Maxin,
+> 
+> On 06/12/2018 04:38 PM, Maxin B. John wrote:
+> > Hi Richard,
+> > 
+> > On Tue, Jun 12, 2018 at 04:33:27PM +0200, openembedded-devel-bounces@lists.openembedded.org wrote:
+> >> Update the README file to reflect current maintainers, dependencies and patch
+> >> formatting/sending guidlines.
+> >>
+> >> Mario Domenech Goulart (1):
+> >>   README: Remove Mario Goulart from the list of maintainers
+> >>
+> >> Richard Leitner (3):
+> >>   README: fix dependent branch names
+> >>   README: add note on how to send a patch series with cover-letter
+> >>   README: add maintainer: Richard Leitner
+> >>
+> >>  README | 20 ++++++++++++++------
+> >>  1 file changed, 14 insertions(+), 6 deletions(-)
+> > 
+> > For some reasons, the "Author" of patches are not clearly set. It shows up like - "openembedded-devel-bounces@lists.openembedded.org",
+> > instead of your mail-id.
+> 
+> Just wrote you an email because of that. It's strange because the
+> answer from Otavio to my [PATCH 3/4] parses the "From:" correctly.
+> Also my "raw patches" which I passed to "git send-email" seem to be fine...
 
+It seems something is wrong at my side, not yours :( 
+
+> 
+> Do you have any ideas what causes this problem?
+
+Not yet. Probably some messup from the mail client.
+
+> regards;Richard.L
+
+Regards,
+Maxin
 
