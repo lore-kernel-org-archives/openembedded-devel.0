@@ -1,67 +1,27 @@
-Return-Path: <prvs=69472e970=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 8080878D0C
+Return-Path: <andrej.valek@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A4B476017
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 09:21:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; d="scan'208";a="10801181"
-To: <openembedded-devel@lists.openembedded.org>
-References: <CAJTo0LZ2G_4cMxoAQm2AWgRnkeP5VXRURH9c82qaBpA0bop59A@mail.gmail.com>
-	<20180508093631.5196-1-mac@mcrowe.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <58d36219-2ef6-ec55-b105-02482768c34b@skidata.com>
-Date: Tue, 12 Jun 2018 11:21:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
-MIME-Version: 1.0
-In-Reply-To: <20180508093631.5196-1-mac@mcrowe.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCHv3] jdepend: Retrieve source from Git rather than tarball
+	Tue, 12 Jun 2018 10:37:52 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id w5CAbqQ1000827
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jun 2018 12:37:52 +0200
+Received: from dev.vm6.ccp.siemens.com ([163.242.57.90])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id w5CAbqmS016498;
+	Tue, 12 Jun 2018 12:37:52 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id DEB898ED3C5;
+	Tue, 12 Jun 2018 12:37:51 +0200 (CEST)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Jun 2018 12:37:09 +0200
+Message-Id: <20180612103709.25990-1-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20180607132109.23396-3-andrej.valek@siemens.com>
+References: <20180607132109.23396-3-andrej.valek@siemens.com>
+Subject: [meta-oe][PATCH v2] syslog-ng: update to 3.15.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,68 +34,266 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 09:21:15 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 12 Jun 2018 10:37:53 -0000
 
-Hi,
-although the old checksum matches with the current github archive for me
-please feel free to add:
+ - Refresh and remove obsolete patches
+ - Implement SystemD service files handling
+  - splitted service into default
+ - Remove dependency to eventlog
+  - external libevtlog library linking was removed
+ - Version 3.15.1 supports OpenSSL 1.1
 
-Reviewed-by: Richard Leitner <richard.leitner@skidata.com>
-and
-Tested-by: Richard Leitner <richard.leitner@skidata.com>
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+---
+ ...ry-leak-problem-when-HAVE_ENVIRON-defined.patch | 29 -----------------
+ ...c-add-option-enable-thread-tls-to-manage-.patch | 16 ++++-----
+ .../recipes-support/syslog-ng/files/syslog-ng.conf |  2 +-
+ .../syslog-ng.service-the-syslog-ng-service.patch  | 38 +++++++++++++++-------
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    | 21 +++++++-----
+ .../recipes-support/syslog-ng/syslog-ng_3.15.1.bb  | 10 ++++++
+ .../recipes-support/syslog-ng/syslog-ng_3.8.1.bb   | 11 -------
+ 7 files changed, 58 insertions(+), 69 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
 
-regards;Richard.L
+diff --git a/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch b/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+deleted file mode 100644
+index 5d481f232..000000000
+--- a/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-Fix the memory leak problem when HAVE_ENVIRON is defined
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+----
+-Index: syslog-ng-3.8.1/lib/gprocess.c
+-===================================================================
+---- syslog-ng-3.8.1.orig/lib/gprocess.c
+-+++ syslog-ng-3.8.1/lib/gprocess.c
+-@@ -1432,6 +1432,18 @@ g_process_startup_ok(void)
+- void
+- g_process_finish(void)
+- {
+-+#ifdef HAVE_ENVIRON
+-+  int i = 0;
+-+
+-+  while (environ[i]) {
+-+    g_free(environ[i]);
+-+    ++i;
+-+  }
+-+  if (environ)
+-+    g_free(environ);
+-+  if (process_opts.argv_orig)
+-+    free(process_opts.argv_orig);
+-+#endif
+-   g_process_remove_pidfile();
+- }
+- 
+diff --git a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch b/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+index c172e4e74..4f8a3d077 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+@@ -10,21 +10,21 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  configure.ac | 17 +++++++++++------
+  1 file changed, 11 insertions(+), 6 deletions(-)
+ 
+-Index: syslog-ng-3.8.1/configure.ac
++Index: syslog-ng-3.15.1/configure.ac
+ ===================================================================
+---- syslog-ng-3.8.1.orig/configure.ac
+-+++ syslog-ng-3.8.1/configure.ac
+-@@ -147,6 +147,9 @@ AC_ARG_ENABLE(gprof,
++--- syslog-ng-3.15.1.orig/configure.ac
+++++ syslog-ng-3.15.1/configure.ac
++@@ -190,6 +190,9 @@ AC_ARG_ENABLE(gprof,
+  AC_ARG_ENABLE(memtrace,
+                [  --enable-memtrace   Enable alternative leak debugging code.])
+  
+ +AC_ARG_ENABLE(thread-tls,
+-+              [  --enable-thread-tls        Enable Thread Transport Layer Security support.],,enable_thread_tls="no")
+++              [  --enable-thread-tls        Enable Thread Local Storage support.],,enable_thread_tls="no")
+ +
+  AC_ARG_ENABLE(dynamic-linking,
+                [  --enable-dynamic-linking        Link everything dynamically.],,enable_dynamic_linking="auto")
+  
+-@@ -486,12 +489,14 @@ dnl ************************************
++@@ -591,12 +594,14 @@ dnl ***************************************************************************
+  dnl Is the __thread keyword available?
+  dnl ***************************************************************************
+  
+@@ -33,14 +33,14 @@ Index: syslog-ng-3.8.1/configure.ac
+ -__thread int a;
+ -]],
+ -[a=0;])],
+--[ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Transport Layer Security is supported by the system")])
++-[ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Thread Local Storage is supported by the system")])
+ +if test "x$enable_thread_tls" != "xno"; then
+ +    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+ +    [[#include <pthread.h>
+ +    __thread int a;
+ +    ]],
+ +    [a=0;])],
+-+    [ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Transport Layer Security is supported by the system")])
+++    [ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Thread Local Storage is supported by the system")])
+ +fi
+  
+  dnl ***************************************************************************
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+index 0c6f54355..fb183ee17 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+@@ -1,4 +1,4 @@
+-@version: 3.8
++@version: 3.15
+ #
+ # Syslog-ng configuration file, compatible with default Debian syslogd
+ # installation. Originally written by anonymous (I can't find his name)
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+index 6b30c20c1..dc2ba167a 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+@@ -7,25 +7,39 @@ Subject: [PATCH] syslog-ng.service: the syslog-ng service can not start
+ Upstream-Status: pending
+ 
+ Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++Updated-by: Andrej Valek <andrej.valek@siemens.com>
+ ---
+  contrib/systemd/syslog-ng.service | 5 ++---
+  1 file changed, 2 insertion(+), 3 deletions(-)
+ 
+-diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
+-index fc16f8d..8e09deb 100644
+---- a/contrib/systemd/syslog-ng.service
+-+++ b/contrib/systemd/syslog-ng.service
+-@@ -4,8 +4,8 @@ Description=System Logger Daemon
+- 
+- [Service]
++diff --git a/contrib/systemd/syslog-ng@.service b/contrib/systemd/syslog-ng@.service
++index a28640e..93aec94 100644
++--- a/contrib/systemd/syslog-ng@.service
+++++ b/contrib/systemd/syslog-ng@.service
++@@ -7,8 +7,8 @@ Conflicts=emergency.service emergency.target
+  Type=notify
+--ExecStart=/usr/sbin/syslog-ng -F $SYSLOGNG_OPTS
++ EnvironmentFile=-/etc/default/syslog-ng@%i
++ EnvironmentFile=-/etc/sysconfig/syslog-ng@%i
++-ExecStart=/usr/sbin/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+ -ExecReload=/bin/kill -HUP $MAINPID
+-+ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslogd.pid
+++ExecStart=@SBINDIR@/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+ +ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
+- EnvironmentFile=-/etc/default/syslog-ng
+- EnvironmentFile=-/etc/sysconfig/syslog-ng
+  StandardOutput=journal
++ StandardError=journal
++ Restart=on-failure
++diff --git a/contrib/systemd/syslog-ng@default b/contrib/systemd/syslog-ng@default
++index 02da288..3a8215d 100644
++--- a/contrib/systemd/syslog-ng@default
+++++ b/contrib/systemd/syslog-ng@default
++@@ -1,5 +1,5 @@
++ CONFIG_FILE=/etc/syslog-ng.conf
++-PERSIST_FILE=/var/lib/syslog-ng/syslog-ng.persist
++-CONTROL_FILE=/var/lib/syslog-ng/syslog-ng.ctl
++-PID_FILE=/var/run/syslog-ng.pid
+++PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
+++CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
+++PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
++ OTHER_OPTIONS="--enable-core"
++
+ -- 
+ 1.8.4.2
+-
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 771cdb196..d8fd96282 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
+ 
+ # util-linux added to get libuuid
+-DEPENDS = "libpcre flex eventlog glib-2.0 openssl util-linux"
++DEPENDS = "libpcre flex glib-2.0 openssl util-linux"
+ 
+ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
+            file://syslog-ng.conf \
+@@ -67,12 +67,6 @@ do_configure_prepend() {
+ 	cd $olddir
+ }
+ 
+-do_install_prepend() {
+-    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+-    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+-    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+-}
+-
+ do_install_append() {
+     install -d ${D}/${sysconfdir}/${BPN}
+     install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
+@@ -83,6 +77,17 @@ do_install_append() {
+     install -d ${D}/${localstatedir}/lib/${BPN}
+     # Remove /var/run as it is created on startup
+     rm -rf ${D}${localstatedir}/run
++
++    # support for systemd
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}${systemd_unitdir}/system/
++        install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
++        install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${systemd_unitdir}/system/${BPN}@default
++
++        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
++        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
++        sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
++    fi
+ }
+ 
+ FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+@@ -108,7 +113,7 @@ RCONFLICTS_${PN} = "busybox-syslog sysklogd rsyslog"
+ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+ RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "${BPN}.service"
++SYSTEMD_SERVICE_${PN} = "${BPN}@default ${BPN}@.service"
+ 
+ INITSCRIPT_NAME = "syslog"
+ INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+new file mode 100644
+index 000000000..e6a214ced
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+@@ -0,0 +1,10 @@
++require syslog-ng.inc
++
++SRC_URI += " \
++    file://fix-config-libnet.patch \
++    file://fix-invalid-ownership.patch \
++    file://syslog-ng.service-the-syslog-ng-service.patch \
++"
++
++SRC_URI[md5sum] = "da59a65cd5e293ec0fa3d3ecf4984af9"
++SRC_URI[sha256sum] = "a2dabd28674e2b558e4fb92484ad111d77bf7150070aa28556827130b479f9ef"
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
+deleted file mode 100644
+index 91a0e4699..000000000
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require syslog-ng.inc
+-
+-SRC_URI += " \
+-    file://fix-config-libnet.patch \
+-    file://fix-invalid-ownership.patch \
+-    file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
+-    file://syslog-ng.service-the-syslog-ng-service.patch \
+-"
+-
+-SRC_URI[md5sum] = "acf14563cf5ce435db8db35486ce66af"
+-SRC_URI[sha256sum] = "84b081f6e5f98cbc52052e342bcfdc5de5fe0ebe9f5ec32fe9eaec5759224cc5"
+-- 
+2.11.0
 
-On 05/08/2018 11:36 AM, Mike Crowe wrote:
-> When Bitbake downloads jdepend-2.9.1.zip itself and I download
-> https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
-> the calculated hashes don't match the ones included in the recipe.
-> 
-> The hashes were last changed in commit
-> dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
-> that the file being downloaded was published on 20th January, so I can't
-> explain why they are wrong. Ross Burton has provided a plausible reason in
-> http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
-> where he also advocates switching to using Git repositories rather than
-> GitHub-generated tarballs.
-> 
-> It seems that we can't really rely on these tarballs to remain unchanged,
-> so let's download the Git hash that corresponds to v2.9.1 instead. This
-> should always remain valid.
-> 
-> Cc: André Draszik <andre.draszik@jci.com>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Cc: Ross Burton <ross.burton@intel.com>
-> Signed-off-by: Mike Crowe <mac@mcrowe.com>
-> ---
->  recipes-core/jdepend/jdepend_2.9.1.bb | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
-> index 5f09a8b..dfbf493 100644
-> --- a/recipes-core/jdepend/jdepend_2.9.1.bb
-> +++ b/recipes-core/jdepend/jdepend_2.9.1.bb
-> @@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5777d32a7709d558c2877d4a6616230"
->  
->  HOMEPAGE = "https://github.com/clarkware/jdepend"
->  
-> -SRC_URI = "https://github.com/clarkware/jdepend/archive/${PV}.zip;downloadfilename=${BP}.zip"
-> +SRC_URI = "git://github.com/clarkware/jdepend"
-> +SRCREV = "57980590313a5dbde236a3eb2c8958e9e53e6a10"
-> +S = "${WORKDIR}/git"
->  
->  inherit java-library
->  
-> @@ -18,7 +20,4 @@ do_compile() {
->    fastjar cf ${JARFILENAME} -C build .
->  }
->  
-> -SRC_URI[md5sum] = "9b91efe1d770e023893f89f4dde8434e"
-> -SRC_URI[sha256sum] = "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f278f72e522e7f7c9"
-> -
->  BBCLASSEXTEND = "native"
-> 
 
