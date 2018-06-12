@@ -1,50 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id F22BB60806
+Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
+	[209.85.128.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CEC474F37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 18:13:10 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id p11-v6so627449wmc.4
+	Tue, 12 Jun 2018 18:13:46 +0000 (UTC)
+Received: by mail-wr0-f171.google.com with SMTP id f16-v6so25128449wrm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 11:13:12 -0700 (PDT)
+	Tue, 12 Jun 2018 11:13:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=i82wUahaRA28kc156dA1Ow26REyfiRXSyRYA7Z58UnY=;
-	b=lm1OJv8vmY/ESVrD76DHMig1kBds5xC0oyyE6J+0ktBHuPOwrMX4zrCc3TCHKa+Aah
-	i5wS966fFFjcdYghMBHtCIzgciG7owFOb2/LcWlIwkXkcQtXfirAv7yE0fS+CGPcWP6U
-	EZqqEf0wgztB/k/8H+kpJWtMDnHq/VRodWJGkRNvBI6d1p1K1vUtABBvgy7dY/UpCFkO
-	17JWED1x1JEUA3c1gK+FV/nEplIdmO2aehlk3O2EtbvmahfuQZ5xK9uNjSpmQY2ODsVH
-	vWzq4M1BdMed6nJK/fixojHNNg3BWDMdkptcxnQ+nSSux6UEd5pRVqSfYpXT5Xvp2YDX
-	eH0A==
+	h=from:to:cc:subject:date:message-id;
+	bh=eu3nqsIu5jXJ/PeQg6a3CteL/w1N/EBQ0uZiFb4OK8o=;
+	b=TUvZb+qDJvX/a7RkNkbJvCYKzmAsD2azAmG6tEEmV2NRxP/hV0Dfh+G8Xm3O3U9ESE
+	0H43Twr8ROZoS0QDlq4Jn9JePhbMFwGAEpv68BEGexMemeNDab1vDPDijp1VS80Hx5rS
+	77DgONXkhestwWJKaIIT4dJbr+5fQwqlap5o4lXdVkqWqGfncnlKRq9hyid9mz2IjA86
+	ZJSg1w5tDBqVonOw+YAchK1gKTlQpskPZRqTz3hsz6glQ9fr9zw/gr4h/FElZDH3KDgd
+	Hq9O5hyJcL5LyOc5yq3QYzm159HlNihQoLO/XLm+/MPaDquh+Yl95Y/UeTbYOpap4yMs
+	ob2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=i82wUahaRA28kc156dA1Ow26REyfiRXSyRYA7Z58UnY=;
-	b=TP9BKcBKpJrqW0hU2NNGBIBwE4qPJ1syj8G3FabsY/6mC2LGf/vaq/WZQdre487s6r
-	22svTAlyVgjfwitEMNAo4Ola+fUPy2L1cIecBPoXOy0XJJWAyE2s6VvPHELFot0v8104
-	qefC9xidiQdne72xc0VgryZ9kWLGUf2b+excpIvwCcgE0efomJxGKkJnSUZU4EIkO9g3
-	T7K0m0t1drF2gBlLc3eNp88NzLY2VtEzIwAEX/XO020WDyi3QdXNIm9Noz5B5Qk0BcE0
-	E1Wk7TPg7y0cwL674CV5d9obHzpd8UZWw0900REndZtBmuDuKO96mBgw80RLf01NaI62
-	z4qw==
-X-Gm-Message-State: APt69E2Gg/2rl9ZViAIqg4a3rMOzo2LNDFahBJLTXwtT6Y0wS+6TQ429
-	QCxcKTynSzMLL3YS6C8PppHzwg==
-X-Google-Smtp-Source: ADUXVKLBcczsW+Y9nO/RAJ65AmPGlqs0VMm7kYQztowP/ykDk/EeXSB5+RQYjv9JJ3wxFERghyp8gA==
-X-Received: by 2002:a1c:878f:: with SMTP id
-	j137-v6mr1112551wmd.97.1528827191636; 
-	Tue, 12 Jun 2018 11:13:11 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eu3nqsIu5jXJ/PeQg6a3CteL/w1N/EBQ0uZiFb4OK8o=;
+	b=mlKLGOJofn9YHWNRtOwhUUUbykHf6LI685fWO5d5iGL3UBUPuka1rHGey+JfgvGEUw
+	YPr2W3XnuDjy98W8l2bU06wgk1nIXt2Se97/3Jk59V4U/bC8AVxrGV2e0AuObzkDwcoD
+	NNc6u1eKFvuxTMSm4JQf17NW9vlL4I0Fej/6Kv9ouLrAcRXmwkHApp2n//EApJOpGdlj
+	0RO3qsOjLrYhaIwpqqiXqFGMzzzdjkepfv4GFqYhPdeVTtdsAIW2/FOZRqwIRCLHHlzD
+	mWPbDyWhmfSeVoc8fWn9RYIWmzkoNAQFgkpPjtorTvSw+Iz+4AJsZTGOnNEl+o9UWoay
+	fBGA==
+X-Gm-Message-State: APt69E0bh0yUQXHdM5wS/MdC8mGFZBAVwyJKyYMdNfuGqMYDrgl28wTF
+	KTeuElR5nijGB0UaCnF4kHIHXQ==
+X-Google-Smtp-Source: ADUXVKK9VPcnQhvFUEt+nReAUWYolyAirEe249A7VYv61oF5w7L3XpFcwIOvbCOtNdgFNd26I1Rv+A==
+X-Received: by 2002:adf:af6b:: with SMTP id
+	z98-v6mr1299699wrc.250.1528827226745; 
+	Tue, 12 Jun 2018 11:13:46 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	y5-v6sm1058211wrp.51.2018.06.12.11.13.10
+	n17-v6sm348786wrs.96.2018.06.12.11.13.45
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 12 Jun 2018 11:13:10 -0700 (PDT)
+	Tue, 12 Jun 2018 11:13:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jun 2018 18:13:00 +0000
-Message-Id: <20180612181300.2478-2-Martin.Jansa@gmail.com>
+Date: Tue, 12 Jun 2018 18:13:44 +0000
+Message-Id: <20180612181344.2727-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20180612181300.2478-1-Martin.Jansa@gmail.com>
-References: <20180612181300.2478-1-Martin.Jansa@gmail.com>
-Subject: [PATCH][sumo][meta-oe 2/2] android-tools: use fixed SRCREVs instead of tag name
+Subject: [PATCH][rocko][meta-oe] rarpd, sblim-sfcb, openct: inherit systemd unconditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,52 +55,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 18:13:11 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 18:13:46 -0000
 
-* so that bitbake doesn't need to use git ls-remote during parsing to resolve tag name into SRCREV
+* the inherit was controlled by VIRTUAL-RUNTIME_init_manager and the installation
+  of .service files by DISTRO_FEATURES and systemd was in DISTRO_FEATURES but not
+  in VIRTUAL-RUNTIME_init_manager it was causing QA issues about unpackaged
+  .service files
+
+ERROR: rarpd-ss981107-r0 do_package: QA Issue: rarpd: Files/directories
+were installed but not shipped in any package:
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/rarpd.service
+
+ERROR: sblim-sfcb-1.4.9-r0 do_package: QA Issue: sblim-sfcb:
+Files/directories were installed but not shipped in any package:
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/sblim-sfcb.service
+
+ERROR: sblim-sfcb-1.4.9-r0 do_package: QA Issue: sblim-sfcb:
+Files/directories were installed but not shipped in any package:
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/sblim-sfcb.service
+
+* systemd.bbclass will take care of removing /lib/systemd when systemd
+  isn't in DISTRO_FEATURES, so we can remove both conditions
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../android-tools/android-tools_5.1.1.r37.bb   | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb        | 8 +++-----
+ meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 8 +++-----
+ meta-oe/recipes-support/openct/openct_0.6.20.bb         | 8 +++-----
+ 3 files changed, 9 insertions(+), 15 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-index 5d8f8a8435..780ecaa11a 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = " \
- "
- DEPENDS = "libbsd libpcre openssl zlib libcap"
+diff --git a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
+index 4025b8087e..7c9f2df9db 100644
+--- a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
++++ b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
+@@ -38,13 +38,11 @@ do_install() {
+     install -m 644 rarpd.8 ${D}${mandir}/man8/rarpd.8
+     install -m 644 ${WORKDIR}/ethers.sample ${D}${sysconfdir}/ethers
  
--ANDROID_TAG = "android-5.1.1_r37"
- ANDROID_MIRROR = "android.googlesource.com"
- CORE_REPO = "${ANDROID_MIRROR}/platform/system/core"
- EXTRAS_REPO = "${ANDROID_MIRROR}/platform/system/extras"
-@@ -17,12 +16,19 @@ LIBHARDWARE_REPO = "${ANDROID_MIRROR}/platform/hardware/libhardware"
- LIBSELINUX_REPO = "${ANDROID_MIRROR}/platform/external/libselinux"
- BUILD_REPO = "${ANDROID_MIRROR}/platform/build"
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+-        install -d ${D}${systemd_unitdir}/system
+-        install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
+-    fi
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/rarpd.service ${D}${systemd_unitdir}/system/
+ }
  
-+# matches with android-5.1.1_r37
-+SRCREV_core = "2314b110bdebdbfd2d94c502282f9e57c849897e"
-+SRCREV_extras = "3ecbe8d841df96127d7855661293e5ab6ba6c205"
-+SRCREV_libhardware = "be55eb1f4d840c82ffaf7c47460df17ff5bc4d9b"
-+SRCREV_libselinux = "07e9e1339ad1ba608acfba9dce2d0f474b252feb"
-+SRCREV_build = "16e987def3d7d8f7d30805eb95cef69e52a87dbc"
-+
- SRC_URI = " \
--    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core;tag=${ANDROID_TAG} \
--    git://${EXTRAS_REPO};name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras;tag=${ANDROID_TAG} \
--    git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware;tag=${ANDROID_TAG} \
--    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux;tag=${ANDROID_TAG} \
--    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build;tag=${ANDROID_TAG} \
-+    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core \
-+    git://${EXTRAS_REPO};name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras \
-+    git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware \
-+    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux \
-+    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build \
-     file://remove-selinux-android.patch \
-     file://use-capability.patch \
-     file://use-local-socket.patch \
+-inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
++inherit systemd
+ 
+ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE_${PN} = "rarpd.service"
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+index c6b9f1019b..3db8c14842 100644
+--- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+@@ -28,7 +28,7 @@ SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
+ SRC_URI[sha256sum] = "634a67b2f7ac3b386a79160eb44413d618e33e4e7fc74ae68b0240484af149dd"
+ 
+ inherit autotools
+-inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
++inherit systemd
+ 
+ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE_${PN} = "sblim-sfcb.service"
+@@ -53,10 +53,8 @@ do_install() {
+ 
+     oe_runmake DESTDIR=${D} install
+ 
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+-        install -d ${D}${systemd_unitdir}/system
+-        install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
+-    fi
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/sfcb.service ${D}${systemd_unitdir}/system/sblim-sfcb.service
+ 
+     install -d ${D}${sysconfdir}/init.d
+     mv ${D}${sysconfdir}/init.d/sfcb ${D}${sysconfdir}/init.d/sblim-sfcb
+diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+index c7d7203eda..913290cd97 100644
+--- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
++++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d
+ LICENSE = "LGPLv2+"
+ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
+-inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
++inherit systemd
+ SYSTEMD_SERVICE_${PN} += "openct.service "
+ SYSTEMD_AUTO_ENABLE = "enable"
+ 
+@@ -77,10 +77,8 @@ do_install () {
+     install -Dpm 755 ${WORKDIR}/openct.init ${D}/etc/init.d/openct
+     install -Dpm 644 ${WORKDIR}/openct.sysconfig ${D}/etc/sysconfig/openct
+ 
+-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+-        install -d ${D}/${systemd_unitdir}/system
+-        install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
+-    fi
++    install -d ${D}/${systemd_unitdir}/system
++    install -m 644 ${WORKDIR}/openct.service ${D}/${systemd_unitdir}/system
+ 
+     so=$(find ${D} -name \*.so | sed "s|^${D}||")
+     sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
 -- 
 2.17.1
 
