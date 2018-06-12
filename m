@@ -1,20 +1,17 @@
 Return-Path: <prvs=69472e970=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B5F378D5C
+	by mail.openembedded.org (Postfix) with ESMTP id DB12478A2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 07:23:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; d="scan'208";a="10797461"
-To: Henning Heinold <henning@itconsulting-heinold.de>, "Maxin B. John"
-	<maxin.john@intel.com>
-References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<20180606204244.GA16170@mail.itconsulting-heinold.de>
-	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
-	<20180607132234.GA19704@mail.itconsulting-heinold.de>
-	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
-	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
-	<d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
-	<20180611113035.GA17777@mbabyjoh-desk.ger.corp.intel.com>
-	<20180611120847.GB16619@mail.itconsulting-heinold.de>
+	Tue, 12 Jun 2018 07:58:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; d="scan'208";a="10798409"
+To: Robert Yang <liezhi.yang@windriver.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20180607092459.33931-1-wenlin.kang@windriver.com>
+	<20180607092459.33931-2-wenlin.kang@windriver.com>
+	<2dae9a9a-a6e4-1c01-d167-0dc92f9e1bbf@skidata.com>
+	<5ffe90b0-c8ab-dfe4-99c4-d63d53edc8ec@windriver.com>
+	<6e0af238-add1-f319-1d56-cf0315814b50@skidata.com>
+	<16b16d90-2395-0f19-34fd-4013703db914@windriver.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -60,20 +57,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <22daefda-78eb-98bc-b344-ab8f93aa795d@skidata.com>
-Date: Tue, 12 Jun 2018 09:23:55 +0200
+Message-ID: <5c9da0d4-76d7-0d52-5b66-075c4fb0807c@skidata.com>
+Date: Tue, 12 Jun 2018 09:59:00 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180611120847.GB16619@mail.itconsulting-heinold.de>
+In-Reply-To: <16b16d90-2395-0f19-34fd-4013703db914@windriver.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: [meta-java] maintainer status
+Subject: Re: [meta-java][PATCH 2/2] openjdk-8: combine the -dbg package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,33 +79,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 07:23:42 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 07:58:47 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Maxin, Hi Henning,
+Hi,
 
-thank you for your answers!
-
-On 06/11/2018 02:08 PM, Henning Heinold wrote:
-> On Mon, Jun 11, 2018 at 02:30:35PM +0300, Maxin B. John wrote:
->>>
->>> So here are some question that currently came to my mind:
->>>
->>>  * do you use some kind of patch management software (like patchwork)?
->>
->> meta-java doesn't use patchwork till now.
+On 06/11/2018 08:31 AM, Robert Yang wrote:
+> Hi Richard,
 > 
-> Yes, but we are using the normal the oe mailinglist, that is why you can find
-> the patches with the meta-java tag in the current patchwork too.
+> On 06/08/2018 06:07 PM, Richard Leitner wrote:
+>> On 06/08/2018 11:02 AM, Wenlin Kang wrote:
+>>> On 2018年06月08日 15:39, Richard Leitner wrote:
 
-Just saw it. Thanks for that hint.
-So should we use it too?
-IMHO it's a good tool for "not forgetting patches" ;-)
+...
 
-AFAIK I still have an account there, but according to the login it's "inactive".
-May someone "re-activate" it please?
+>>>>
+>>>> Nonehteless according to my first quick test the demo-dbg package
+>>>> contains lots of other debug information too...
+>>>> So maybe it would be the better way to fix the content of the different
+>>>> dbg packages rather than removing one?
+>>>
+>>> I also thought this, but  after discussing with the other guys,  the result is a recipe can only have
+>>> a -dbg package, and this is OE's policy.
+>>
+>> Do you have a pointer to this discussion (or if it exists to the according documentation) for us?
+> 
+> For oe-core's recipes, each recipe only has one dbg package, split dbg packages
+> doesn't make any sense since they usually can't be run independently. Please
+> see oe-core's commit:
+> 
+> commit a3b000643898d7402b9e57c02e8d10e677cc9722
+> Author: Ross Burton <ross.burton@intel.com>
+> Date:   Tue Dec 15 16:32:43 2015 +0000
+> 
+>     meta: more removals of redunant FILES_${PN}-dbg
+> 
+>     In some recipes overly-split -dbg packages were merged into PN-dbg.  Unless
+>     there's a very good reason, recipes should have a single -dev and -dbg package.
+
+Ok. Thank you for that pointer. That's definitely new to me, but I'm of course fine with it!
 
 regards;Richard.L
 
