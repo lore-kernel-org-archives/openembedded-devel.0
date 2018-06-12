@@ -1,17 +1,14 @@
 Return-Path: <prvs=69472e970=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id DB12478A2D
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id D4CEB78A89
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 07:58:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; d="scan'208";a="10798409"
-To: Robert Yang <liezhi.yang@windriver.com>,
+	Tue, 12 Jun 2018 08:01:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,213,1526335200"; 
+   d="scan'208";a="1494119"
+To: Wenlin Kang <wenlin.kang@windriver.com>,
 	<openembedded-devel@lists.openembedded.org>
 References: <20180607092459.33931-1-wenlin.kang@windriver.com>
 	<20180607092459.33931-2-wenlin.kang@windriver.com>
-	<2dae9a9a-a6e4-1c01-d167-0dc92f9e1bbf@skidata.com>
-	<5ffe90b0-c8ab-dfe4-99c4-d63d53edc8ec@windriver.com>
-	<6e0af238-add1-f319-1d56-cf0315814b50@skidata.com>
-	<16b16d90-2395-0f19-34fd-4013703db914@windriver.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -57,12 +54,12 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <5c9da0d4-76d7-0d52-5b66-075c4fb0807c@skidata.com>
-Date: Tue, 12 Jun 2018 09:59:00 +0200
+Message-ID: <5a5c799e-4542-412f-8225-3f2ada94c8f3@skidata.com>
+Date: Tue, 12 Jun 2018 10:01:56 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <16b16d90-2395-0f19-34fd-4013703db914@windriver.com>
+In-Reply-To: <20180607092459.33931-2-wenlin.kang@windriver.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
@@ -79,47 +76,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 07:58:47 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 08:01:43 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi Wenlin,
+as we clarified the "one -dbg package per recipe" thing I have some
+comments on the patch itself.
 
-On 06/11/2018 08:31 AM, Robert Yang wrote:
-> Hi Richard,
+
+On 06/07/2018 11:24 AM, Wenlin Kang wrote:
+> One recipe should only have one -dbg package, because OE only picks
+> up all .debug file into the last one -dbg package listed in variable
+> PACKAGES.
+
+May you please include a reference to that statement from "Ross Burton"?
+
 > 
-> On 06/08/2018 06:07 PM, Richard Leitner wrote:
->> On 06/08/2018 11:02 AM, Wenlin Kang wrote:
->>> On 2018年06月08日 15:39, Richard Leitner wrote:
-
-...
-
->>>>
->>>> Nonehteless according to my first quick test the demo-dbg package
->>>> contains lots of other debug information too...
->>>> So maybe it would be the better way to fix the content of the different
->>>> dbg packages rather than removing one?
->>>
->>> I also thought this, but  after discussing with the other guys,  the result is a recipe can only have
->>> a -dbg package, and this is OE's policy.
->>
->> Do you have a pointer to this discussion (or if it exists to the according documentation) for us?
+> Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+> ---
+>  recipes-core/openjdk/openjdk-8_16xbyy.bb | 10 +++-------
+>  1 file changed, 3 insertions(+), 7 deletions(-)
 > 
-> For oe-core's recipes, each recipe only has one dbg package, split dbg packages
-> doesn't make any sense since they usually can't be run independently. Please
-> see oe-core's commit:
-> 
-> commit a3b000643898d7402b9e57c02e8d10e677cc9722
-> Author: Ross Burton <ross.burton@intel.com>
-> Date:   Tue Dec 15 16:32:43 2015 +0000
-> 
->     meta: more removals of redunant FILES_${PN}-dbg
-> 
->     In some recipes overly-split -dbg packages were merged into PN-dbg.  Unless
->     there's a very good reason, recipes should have a single -dev and -dbg package.
+> diff --git a/recipes-core/openjdk/openjdk-8_16xbyy.bb b/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> index dd0ed1d..1d7d794 100644
+> --- a/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> +++ b/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> @@ -14,7 +14,6 @@ do_install() {
+>  }
+>  
+>  PACKAGES_append = " \
+> -    ${PN}-demo-dbg \
+>      ${PN}-demo \
+>      ${PN}-source \
+>  "
+> @@ -47,12 +46,6 @@ FILES_${PN}-dbg_append = "\
+>      ${JDK_HOME}/jre/lib/${JDK_ARCH}/headless/.debug/ \
+>      ${JDK_HOME}/jre/lib/${JDK_ARCH}/xawt/.debug/ \
+>      ${JDK_HOME}/jre/lib/${JDK_ARCH}/client/.debug/ \
+> -"
+> -
+> -FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
+> -RDEPENDS_${PN}-demo = " ${PN} "
+> -
+> -FILES_${PN}-demo-dbg = "\
+>      ${JDK_HOME}/demo/jvmti/gctest/lib/.debug/ \
+>      ${JDK_HOME}/demo/jvmti/heapTracker/lib/.debug/ \
+>      ${JDK_HOME}/demo/jvmti/heapViewer/lib/.debug/ \
+> @@ -64,6 +57,9 @@ FILES_${PN}-demo-dbg = "\
+>      ${JDK_HOME}/demo/jvmti/compiledMethodLoad/lib/.debug/ \
+>  "
 
-Ok. Thank you for that pointer. That's definitely new to me, but I'm of course fine with it!
+AFAIK as all ".debug" are included in the -dbg packages it should
+be fine if you remove the whole FILES_${PN}-dbg_append definition.
 
-regards;Richard.L
+>  
+> +FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
+> +RDEPENDS_${PN}-demo = " ${PN} "
+> +
+>  FILES_${PN}-doc_append = "\
+>      ${JDK_HOME}/man \
+>      ${JDK_HOME}/ASSEMBLY_EXCEPTION \
+
+
+thanks&regards;Richard.L 
 
