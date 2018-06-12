@@ -1,47 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id A24E360806
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id F22BB60806
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 18:13:07 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id z6-v6so20583722wma.0
+	Tue, 12 Jun 2018 18:13:10 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id p11-v6so627449wmc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 11:13:09 -0700 (PDT)
+	Tue, 12 Jun 2018 11:13:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=iBpL3I4lLEDCq+6Pm4PH5SiIjwe1dWThfK6xiVJZsJE=;
-	b=cksYaja7QP9rtM0CzJZGzTY7sClEd/185rJ2LyoYxKrBmnRv5j9OtkNHjY39LWnQRH
-	XWlCff7nyfAh6REdPc1n4OoomF2BuD1fc+t8uJ1lXI+1cCZBbUWSx/OHtXNqLGQZ0SVn
-	v3aOS/YRi7kIpJu27Q/uThBnLHfIPExBcJbLjQX+z6owrIuAcwrEy5wRDpobLVcT23zY
-	Nkcg3rCOJ6CX2UJ/Nv8PQP1NhzcANb96sUkBUlSE2KGc3HSUHwQt57Xw7yeIjWLBWjhM
-	dcvW6Oz0vgK+qrkQpy2JtmC7AMq+5JlPri3cgtT3kz8I+d/sm0xhYX7BMGZUDM9NwLmq
-	BuVg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=i82wUahaRA28kc156dA1Ow26REyfiRXSyRYA7Z58UnY=;
+	b=lm1OJv8vmY/ESVrD76DHMig1kBds5xC0oyyE6J+0ktBHuPOwrMX4zrCc3TCHKa+Aah
+	i5wS966fFFjcdYghMBHtCIzgciG7owFOb2/LcWlIwkXkcQtXfirAv7yE0fS+CGPcWP6U
+	EZqqEf0wgztB/k/8H+kpJWtMDnHq/VRodWJGkRNvBI6d1p1K1vUtABBvgy7dY/UpCFkO
+	17JWED1x1JEUA3c1gK+FV/nEplIdmO2aehlk3O2EtbvmahfuQZ5xK9uNjSpmQY2ODsVH
+	vWzq4M1BdMed6nJK/fixojHNNg3BWDMdkptcxnQ+nSSux6UEd5pRVqSfYpXT5Xvp2YDX
+	eH0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=iBpL3I4lLEDCq+6Pm4PH5SiIjwe1dWThfK6xiVJZsJE=;
-	b=Ts+paL0R0H5WsMaYBDOU4hXiVmnNE408lftu1T9JVDbHahFl6YjIZ4on25ZhCM2O4n
-	SnhBTzhLgoWYR559AD5w+UmcvuRArEoEk1gOjkcCiXgjXNtn4otcyLv/6EJNKfHfd2OV
-	QxuAA45tvqKA3GDWt59Y/V2bcrX6/zYPORWSwN24ejN5fDkfzSTtmceVj2V4vUdTKJ1W
-	/ICbeMH60TeFR+6rJClFxZBoB+Vxbm4GIoz+iPLkrsT9Tw0fhviDc2Z2RL0rmIFOXsYO
-	q/OlmAh4p81iFAjsEoFGbrYZeohgjZ7QJ3FLioTfLeF27RTjCvTLSmHM4k/K+tx6taTJ
-	/jZQ==
-X-Gm-Message-State: APt69E2Hn5KOqmlHNY1M4yPF0i07JoP7nT1EHWl7mHPxVnCaHQrccXv7
-	Hm/hAlCZp+s1AUxuTMRqujX1kg==
-X-Google-Smtp-Source: ADUXVKLPVYOcX0v+QqOkgXAbUODYkr9fUAkc+FjG7BU6TuIQ4nPEhhbEYhTFS4sbLQDEKpCQIEUDgg==
-X-Received: by 2002:a1c:8590:: with SMTP id
-	h138-v6mr1029123wmd.85.1528827188267; 
-	Tue, 12 Jun 2018 11:13:08 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=i82wUahaRA28kc156dA1Ow26REyfiRXSyRYA7Z58UnY=;
+	b=TP9BKcBKpJrqW0hU2NNGBIBwE4qPJ1syj8G3FabsY/6mC2LGf/vaq/WZQdre487s6r
+	22svTAlyVgjfwitEMNAo4Ola+fUPy2L1cIecBPoXOy0XJJWAyE2s6VvPHELFot0v8104
+	qefC9xidiQdne72xc0VgryZ9kWLGUf2b+excpIvwCcgE0efomJxGKkJnSUZU4EIkO9g3
+	T7K0m0t1drF2gBlLc3eNp88NzLY2VtEzIwAEX/XO020WDyi3QdXNIm9Noz5B5Qk0BcE0
+	E1Wk7TPg7y0cwL674CV5d9obHzpd8UZWw0900REndZtBmuDuKO96mBgw80RLf01NaI62
+	z4qw==
+X-Gm-Message-State: APt69E2Gg/2rl9ZViAIqg4a3rMOzo2LNDFahBJLTXwtT6Y0wS+6TQ429
+	QCxcKTynSzMLL3YS6C8PppHzwg==
+X-Google-Smtp-Source: ADUXVKLBcczsW+Y9nO/RAJ65AmPGlqs0VMm7kYQztowP/ykDk/EeXSB5+RQYjv9JJ3wxFERghyp8gA==
+X-Received: by 2002:a1c:878f:: with SMTP id
+	j137-v6mr1112551wmd.97.1528827191636; 
+	Tue, 12 Jun 2018 11:13:11 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	b74-v6sm1574565wmi.13.2018.06.12.11.13.07
+	y5-v6sm1058211wrp.51.2018.06.12.11.13.10
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 12 Jun 2018 11:13:07 -0700 (PDT)
+	Tue, 12 Jun 2018 11:13:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jun 2018 18:12:59 +0000
-Message-Id: <20180612181300.2478-1-Martin.Jansa@gmail.com>
+Date: Tue, 12 Jun 2018 18:13:00 +0000
+Message-Id: <20180612181300.2478-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [PATCH][sumo][meta-oe 1/2] Revert "libxml++: only include when x11 in DISTRO_FEATURES"
+In-Reply-To: <20180612181300.2478-1-Martin.Jansa@gmail.com>
+References: <20180612181300.2478-1-Martin.Jansa@gmail.com>
+Subject: [PATCH][sumo][meta-oe 2/2] android-tools: use fixed SRCREVs instead of tag name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,26 +57,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 18:13:08 -0000
+X-List-Received-Date: Tue, 12 Jun 2018 18:13:11 -0000
 
-This reverts commit 44ece3daea4028e72473b6316ba3c7c54d833166.
+* so that bitbake doesn't need to use git ls-remote during parsing to resolve tag name into SRCREV
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-core/libxml/libxml++_2.40.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../android-tools/android-tools_5.1.1.r37.bb   | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
-index a38315c4d5..c001c184cb 100644
---- a/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
-+++ b/meta-oe/recipes-core/libxml/libxml++_2.40.1.bb
-@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f3
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index 5d8f8a8435..780ecaa11a 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -9,7 +9,6 @@ LIC_FILES_CHKSUM = " \
+ "
+ DEPENDS = "libbsd libpcre openssl zlib libcap"
  
- DEPENDS = "libxml2 glibmm"
+-ANDROID_TAG = "android-5.1.1_r37"
+ ANDROID_MIRROR = "android.googlesource.com"
+ CORE_REPO = "${ANDROID_MIRROR}/platform/system/core"
+ EXTRAS_REPO = "${ANDROID_MIRROR}/platform/system/extras"
+@@ -17,12 +16,19 @@ LIBHARDWARE_REPO = "${ANDROID_MIRROR}/platform/hardware/libhardware"
+ LIBSELINUX_REPO = "${ANDROID_MIRROR}/platform/external/libselinux"
+ BUILD_REPO = "${ANDROID_MIRROR}/platform/build"
  
--inherit distro_features_check autotools pkgconfig ptest
-+inherit autotools pkgconfig ptest
- 
- do_compile_ptest() {
-   oe_runmake -C examples buildtest
++# matches with android-5.1.1_r37
++SRCREV_core = "2314b110bdebdbfd2d94c502282f9e57c849897e"
++SRCREV_extras = "3ecbe8d841df96127d7855661293e5ab6ba6c205"
++SRCREV_libhardware = "be55eb1f4d840c82ffaf7c47460df17ff5bc4d9b"
++SRCREV_libselinux = "07e9e1339ad1ba608acfba9dce2d0f474b252feb"
++SRCREV_build = "16e987def3d7d8f7d30805eb95cef69e52a87dbc"
++
+ SRC_URI = " \
+-    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core;tag=${ANDROID_TAG} \
+-    git://${EXTRAS_REPO};name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras;tag=${ANDROID_TAG} \
+-    git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware;tag=${ANDROID_TAG} \
+-    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux;tag=${ANDROID_TAG} \
+-    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build;tag=${ANDROID_TAG} \
++    git://${CORE_REPO};name=core;protocol=https;nobranch=1;destsuffix=git/system/core \
++    git://${EXTRAS_REPO};name=extras;protocol=https;nobranch=1;destsuffix=git/system/extras \
++    git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware \
++    git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux \
++    git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build \
+     file://remove-selinux-android.patch \
+     file://use-capability.patch \
+     file://use-local-socket.patch \
 -- 
 2.17.1
 
