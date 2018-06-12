@@ -1,25 +1,57 @@
-Return-Path: <prvs=69472e970=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id EB65271A50
+Return-Path: <mhalstead@linuxfoundation.org>
+Received: from mail-ot0-f194.google.com (mail-ot0-f194.google.com
+	[74.125.82.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 7201278BDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 19:46:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,215,1526335200"; 
-   d="scan'208";a="1496024"
-To: Mike Crowe <mac@mcrowe.com>
-References: <CAJTo0LZ2G_4cMxoAQm2AWgRnkeP5VXRURH9c82qaBpA0bop59A@mail.gmail.com>
-	<20180508093631.5196-1-mac@mcrowe.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <dacfcb32-e98f-7a5c-e9a1-40c4277ecdd9@skidata.com>
-Date: Tue, 12 Jun 2018 21:46:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Tue, 12 Jun 2018 20:59:11 +0000 (UTC)
+Received: by mail-ot0-f194.google.com with SMTP id d19-v6so439620oti.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jun 2018 13:59:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=M3qPIMf712b6sq1TXrj8nUSEMuNB0yOS44yfyWaP2J0=;
+	b=RFTpvxov4OLOIW1R1woYdoo1s6EJCS5Kpo7YpEksJg3J5CBMprQ8euZIBNqE2X+u3X
+	p+Yslat0jVDSGCwdVi2sUm9uRAcTdiMSMUUb26H3rVlRHhr2BT9OY1zY+iDRNucw+/cK
+	CFcTRfSmxrEZVv6H4AbslXgsDBDHNZ9TGT3E8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=M3qPIMf712b6sq1TXrj8nUSEMuNB0yOS44yfyWaP2J0=;
+	b=G2uhsXKB5nEhblUVLep5xJl2oldSmFRxER0P07L1Sdamseh9U5ZAYb3vnDXPIoLGp5
+	6g+iuYwk9lrxHSl45mmi2zdoWHyno+VI+7k3h2KcJ0rZhApmvOmId9F1AjN3HXJtuyDR
+	ppJmFOHOkqw4ycqBs5nGCgkBspkCBZmcVp78ZF4UP83MedjKq9runO0gSRu+QwBc02V2
+	fy770zT5t87phQkEBAmF+txh+dKTg/rMuVECZEKUea4lLTC6hMGyBxZ5dGKI1v5RVLKH
+	aZgqyKTvzqkzgOzc/NWCJ3TQdwtbrNtjCG1ggfUrZnYjVRjg8nuJo3Ggg+jj36mdWkgp
+	MCbQ==
+X-Gm-Message-State: APt69E20afWNbCVPGX0bsNjhJdpanckMyKkguDlP98wG/SnLa5Fb7aXC
+	q8nxMjAbfskGNwJwEM0c0pbEtIIzxssfUGckVSL1elxu
+X-Google-Smtp-Source: ADUXVKKI1DXmqSlpMN6CkCOEhs0QTpigEqvAN6lk9rMPCc1Rpa7rZBMlHhKcI7pGatOkQ/LLIR4CK0ymefpGjQ6IvgM=
+X-Received: by 2002:a9d:2e04:: with SMTP id
+	q4-v6mr1321856otb.302.1528837152250; 
+	Tue, 12 Jun 2018 13:59:12 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180508093631.5196-1-mac@mcrowe.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCHv3] jdepend: Retrieve source from Git rather than tarball
+Received: by 2002:ac9:6410:0:0:0:0:0 with HTTP; Tue, 12 Jun 2018 13:59:11
+	-0700 (PDT)
+In-Reply-To: <22daefda-78eb-98bc-b344-ab8f93aa795d@skidata.com>
+References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
+	<20180606204244.GA16170@mail.itconsulting-heinold.de>
+	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
+	<20180607132234.GA19704@mail.itconsulting-heinold.de>
+	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
+	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
+	<d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
+	<20180611113035.GA17777@mbabyjoh-desk.ger.corp.intel.com>
+	<20180611120847.GB16619@mail.itconsulting-heinold.de>
+	<22daefda-78eb-98bc-b344-ab8f93aa795d@skidata.com>
+From: Michael Halstead <mhalstead@linuxfoundation.org>
+Date: Tue, 12 Jun 2018 13:59:11 -0700
+Message-ID: <CADfgfoY2fJOBt0ayVUfvyt1X079kDk=pc=7pswDmV=uPvuSA_A@mail.gmail.com>
+To: Richard Leitner <richard.leitner@skidata.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,70 +64,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jun 2018 19:46:53 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 12 Jun 2018 20:59:11 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+On Tue, Jun 12, 2018 at 12:23 AM, Richard Leitner <
+richard.leitner@skidata.com> wrote:
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+> Hi Maxin, Hi Henning,
+>
+> thank you for your answers!
+>
+> On 06/11/2018 02:08 PM, Henning Heinold wrote:
+> > On Mon, Jun 11, 2018 at 02:30:35PM +0300, Maxin B. John wrote:
+> >>>
+> >>> So here are some question that currently came to my mind:
+> >>>
+> >>>  * do you use some kind of patch management software (like patchwork)?
+> >>
+> >> meta-java doesn't use patchwork till now.
+> >
+> > Yes, but we are using the normal the oe mailinglist, that is why you can
+> find
+> > the patches with the meta-java tag in the current patchwork too.
+>
+> Just saw it. Thanks for that hint.
+> So should we use it too?
+> IMHO it's a good tool for "not forgetting patches" ;-)
+>
+> AFAIK I still have an account there, but according to the login it's
+> "inactive".
+> May someone "re-activate" it please?
+>
 
-If you have any questions, please let me know.
+I can help with patchwork. I'll e-mail you with a few questions.
 
-regards;Richard.L
-
-On 05/08/2018 11:36 AM, Mike Crowe wrote:
-> When Bitbake downloads jdepend-2.9.1.zip itself and I download
-> https://github.com/clarkware/jdepend/blob/master/dist/jdepend-2.9.1.zip ,
-> the calculated hashes don't match the ones included in the recipe.
-> 
-> The hashes were last changed in commit
-> dd5c43fca8289b8795a9214aee616775e1493109 on 1st March, but GitHub claims
-> that the file being downloaded was published on 20th January, so I can't
-> explain why they are wrong. Ross Burton has provided a plausible reason in
-> http://lists.openembedded.org/pipermail/openembedded-devel/2017-September/114916.html
-> where he also advocates switching to using Git repositories rather than
-> GitHub-generated tarballs.
-> 
-> It seems that we can't really rely on these tarballs to remain unchanged,
-> so let's download the Git hash that corresponds to v2.9.1 instead. This
-> should always remain valid.
-> 
-> Cc: André Draszik <andre.draszik@jci.com>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Cc: Ross Burton <ross.burton@intel.com>
-> Signed-off-by: Mike Crowe <mac@mcrowe.com>
-> ---
->  recipes-core/jdepend/jdepend_2.9.1.bb | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes-core/jdepend/jdepend_2.9.1.bb b/recipes-core/jdepend/jdepend_2.9.1.bb
-> index 5f09a8b..dfbf493 100644
-> --- a/recipes-core/jdepend/jdepend_2.9.1.bb
-> +++ b/recipes-core/jdepend/jdepend_2.9.1.bb
-> @@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f5777d32a7709d558c2877d4a6616230"
->  
->  HOMEPAGE = "https://github.com/clarkware/jdepend"
->  
-> -SRC_URI = "https://github.com/clarkware/jdepend/archive/${PV}.zip;downloadfilename=${BP}.zip"
-> +SRC_URI = "git://github.com/clarkware/jdepend"
-> +SRCREV = "57980590313a5dbde236a3eb2c8958e9e53e6a10"
-> +S = "${WORKDIR}/git"
->  
->  inherit java-library
->  
-> @@ -18,7 +20,4 @@ do_compile() {
->    fastjar cf ${JARFILENAME} -C build .
->  }
->  
-> -SRC_URI[md5sum] = "9b91efe1d770e023893f89f4dde8434e"
-> -SRC_URI[sha256sum] = "536b5082d64e4f4dddd514ce30178f36c7a31b34d969275f278f72e522e7f7c9"
-> -
->  BBCLASSEXTEND = "native"
-> 
+-- 
+Michael Halstead
+SysAdmin
 
