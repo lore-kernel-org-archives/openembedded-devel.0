@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f49.google.com (mail-pl0-f49.google.com
-	[209.85.160.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 023837901A
+Received: from mail-pl0-f46.google.com (mail-pl0-f46.google.com
+	[209.85.160.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E05F7450D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 06:35:11 +0000 (UTC)
-Received: by mail-pl0-f49.google.com with SMTP id a7-v6so931912plp.3
+	Wed, 13 Jun 2018 06:35:13 +0000 (UTC)
+Received: by mail-pl0-f46.google.com with SMTP id f1-v6so926730plt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jun 2018 23:35:13 -0700 (PDT)
+	Tue, 12 Jun 2018 23:35:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YB2Rwz9JtgOOqaHU6Hjxa3VZb/ZLJyUqfsXW6LH5ihc=;
-	b=ihybJSvusM+b9ond11k3tj0wRt+UTibfoHslKKtXFKGvwNYYhx8w98ZGucpNm6PVcn
-	YfDRPBEY7eXm7vtkfpbtoAtnbMO34/77Ymu3PZp8p9o4kbCal4kV9m9lZ8QaVqXMhA5e
-	Y4VfVDBWUxXT63oQRCGuM50P7e+mjekCIg6zjzqAkZ1Jym6TiHcGsMiHGMhxTY/6D8mP
-	Ggp7Bjx+P3oAvVORUCY3C6AWPwHhVwofGIKtNvDkBm0cYuOfgvdGGbVR+FVEGZvaX+Cq
-	2lVJm1lAEH+99XZy4r1afyhA7zC1eC0dBQUXyOQRwVHk1aDW/CVRHm5kuYrWs0QddmfC
-	rOBA==
+	bh=+Bd7RKV6IrhNn0AexGKhf04ncgGOoHqlK0YWxS/uf2Y=;
+	b=U0v465XQg9hH/vM5tf/w1bHrArv6DykhypQN47T07guXoanCIqZVfO+Dh6Yt9ihsqG
+	u3rgQ9l7reb8kRIXrNMQ2habSp1Qv3tfqTHPBeMVDA5hsOofBAUYxCvTwL6rccyzHtIr
+	aGHcPmUbLjzSyAp2MEQ8shtWQbOKZ2rNMpk+PWK+O6kVm4R0T5SKlOmqJJ87EBH3JRYL
+	lFjlN7eqBuFsT8w9TDZLpCmMc7L3vB00sEmduNHGhBB/A/HY8PwXecZPKYbSNjdunRpF
+	bdnE6wlWZRa2oIuN1MN5nVcwutmdrDeG0lvR2TPtJDgpg9xgomy2O/xQYN8MOr9i27Kn
+	3SOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=YB2Rwz9JtgOOqaHU6Hjxa3VZb/ZLJyUqfsXW6LH5ihc=;
-	b=SRCqtgNNLO2woJL0MkiYTKr9uCqCFrtky9vNpf5muEd+atA1qFHYYJkzKoaxgFoBJE
-	+H3ShbaYHQ1xIjl3UCskWY4r9MYfXI02UFg9AXommuRnfIYT8LwuH/0UyxFSIX1AF/bJ
-	nLNORF65hYQc8a6siT3zApLXhRXnwVoOAs9KAPxHVx1W1NMZ0e1OdH42Wlx4Cx6MUtVv
-	N7n5gMRy7YUd7HkJdOMeMDGgSPXOZICfUooHOPHcZCDWsIbX3ySTX2RokmJkqi51YZyO
-	FgYOMA+RVXENcKqo78wZXELnP9Qv8bBiKWeGfg52wmt1q3u+ookqjTx+eNHd5D7y5AJT
-	GnGQ==
-X-Gm-Message-State: APt69E2SznYR5VGLHyK08qfHqMLKJDNV+fdRPwVEctHUT9XfzouWM1EV
-	tFLtanVMUzCdxlBNQu4xNuWGlg==
-X-Google-Smtp-Source: ADUXVKJXjIYKpvJfgV6gNmBOPHT8j+h9R0mHMvyrrm7/JZwv/Suw8P7qM3nbeGY1+3rfotRf2RKAbg==
-X-Received: by 2002:a17:902:5945:: with SMTP id
-	e5-v6mr1995826plj.64.1528871712723; 
-	Tue, 12 Jun 2018 23:35:12 -0700 (PDT)
+	bh=+Bd7RKV6IrhNn0AexGKhf04ncgGOoHqlK0YWxS/uf2Y=;
+	b=i/hKPeyO1jAJitnnciuQHuGaYF2FrBXAnMXWJ7W1rKo6TFoVjuS7gLzuMk9UmEfn5n
+	j5tMv6IYdK3wzmqfeDMgGzvllHIWgGwtfol8lLVrwhvg6DU3wBMJ0MJRrxU/iq2CXhWD
+	HZRwhizsE/xuXxO5ie6d7hxKulzSin2w7qmzd6Lg/VGk39bkkZs8sTFRilSeTTH+GMKB
+	0+kF2J6tEDyRorieJQ0sIemsvngcdhBFs/CYPnEPZ9pbzHvlL3v0cJYF4X0WFVSAl6kA
+	7di87iMl1qwUOG/c4NTUT537wxewc9/18xHRKC0XLRk3pxu2Ew0S8Mb73dvvEgHsfjOo
+	LSJw==
+X-Gm-Message-State: APt69E0e42g5woUEIemhDmmzI/+wV55E/4FyGQc6NZdbirQ3EegVNu7u
+	royyyAS4Hna944S4g3bX0pEeMA==
+X-Google-Smtp-Source: ADUXVKIdc1EGwv6cDAuqKXvRV4hBy25VAL1OLg/ckIyLgG0weJWklvLmlGVYCniOpXhY0SLwarsudQ==
+X-Received: by 2002:a17:902:264:: with SMTP id
+	91-v6mr3668351plc.341.1528871713963; 
+	Tue, 12 Jun 2018 23:35:13 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::c68])
 	by smtp.gmail.com with ESMTPSA id
-	b83-v6sm3525707pfe.159.2018.06.12.23.35.11
+	b83-v6sm3525707pfe.159.2018.06.12.23.35.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 Jun 2018 23:35:12 -0700 (PDT)
+	Tue, 12 Jun 2018 23:35:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jun 2018 23:35:09 -0700
-Message-Id: <20180613063512.1755-2-raj.khem@gmail.com>
+Date: Tue, 12 Jun 2018 23:35:10 -0700
+Message-Id: <20180613063512.1755-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20180613063512.1755-1-raj.khem@gmail.com>
 References: <20180613063512.1755-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH V2 2/5] modemmanager: Fix build with musl provide canonicalize_file_name()
+Subject: [meta-networking][PATCH V2 3/5] celt051: Fix building testcases
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,100 +58,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2018 06:35:12 -0000
+X-List-Received-Date: Wed, 13 Jun 2018 06:35:13 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...eck-for-canonicalize_file_name-befor.patch | 64 +++++++++++++++++++
- .../modemmanager/modemmanager_1.7.991.bb      |  4 +-
- 2 files changed, 67 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
+ ...tcode.c-into-test-sources-to-provide.patch | 55 +++++++++++++++++++
+ .../recipes-support/celt051/celt051_git.bb    |  5 +-
+ 2 files changed, 58 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
+diff --git a/meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch b/meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch
 new file mode 100644
-index 0000000000..256dd2ce0b
+index 0000000000..cc893f0999
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
-@@ -0,0 +1,64 @@
-+From 07f1eda630517816bfa900e811963745a149e57c Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/celt051/celt051/0001-tests-Include-entcode.c-into-test-sources-to-provide.patch
+@@ -0,0 +1,55 @@
++From 61fbdddb660c5944ac23b820754a7c4cf4eee097 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 8 Jun 2018 20:38:30 -0700
-+Subject: [PATCH] Add configure check for canonicalize_file_name() before use
++Date: Fri, 8 Jun 2018 19:29:03 -0700
++Subject: [PATCH] tests: Include entcode.c into test sources to provide
++ definitions of functions e.g. ec_ilog()
 +
-+Define canonicalize_file_name API if not provided by system C library
-+musl e.g. does not provide this API
++Fixes link errors in tests
++| /usr/src/debug/celt051/0.5.1.3+gitAUTOINC+5555aae843-r0/git/tests/../libcelt/rangedec.c:202: undefined reference to `ec_ilog'
++
++Upstream-Status: Pending
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac                                |  2 ++
-+ src/kerneldevice/mm-kernel-device-generic.c | 18 ++++++++++++++++++
-+ 2 files changed, 20 insertions(+)
++ tests/cwrs32-test.c  | 1 +
++ tests/ectest.c       | 2 +-
++ tests/laplace-test.c | 1 +
++ 3 files changed, 3 insertions(+), 1 deletion(-)
 +
-+Index: ModemManager-1.7.991/configure.ac
-+===================================================================
-+--- ModemManager-1.7.991.orig/configure.ac
-++++ ModemManager-1.7.991/configure.ac
-+@@ -72,6 +72,8 @@ AC_SUBST(MM_GLIB_LT_CURRENT)
-+ AC_SUBST(MM_GLIB_LT_REVISION)
-+ AC_SUBST(MM_GLIB_LT_AGE)
-+ 
-++AC_CHECK_FUNCS([canonicalize_file_name])
-++
-+ dnl-----------------------------------------------------------------------------
-+ dnl Documentation
-+ dnl
-+Index: ModemManager-1.7.991/src/kerneldevice/mm-kernel-device-generic.c
-+===================================================================
-+--- ModemManager-1.7.991.orig/src/kerneldevice/mm-kernel-device-generic.c
-++++ ModemManager-1.7.991/src/kerneldevice/mm-kernel-device-generic.c
-+@@ -21,6 +21,7 @@
-+ #define _LIBMM_INSIDE_MM
-+ #include <libmm-glib.h>
-+ 
-++#include "config.h"
-+ #include "mm-kernel-device-generic.h"
-+ #include "mm-kernel-device-generic-rules.h"
-+ #include "mm-log.h"
-+@@ -100,6 +101,24 @@ read_sysfs_property_as_string (const gch
-+     return contents;
-+ }
-+ 
-++#ifndef HAVE_CANONICALIZE_FILE_NAME
-++#include <limits.h>
-++#include <string.h>
-++#include <stdlib.h>
-++#include <stdio.h>
-++static char * canonicalize_file_name(const char *path)
-++{
-++   char buf[PATH_MAX] = { };
-++
-++   snprintf(buf, sizeof(buf) - 1, "%s", path);
-++
-++   if (!realpath(path, buf))
-++       return NULL;
-++
-++   return strdup(buf);
-++}
-++#endif
-++
-+ /*****************************************************************************/
-+ /* Load contents */
-+ 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb
-index b1a718dbfb..26b56d17d0 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.7.991.bb
-@@ -11,7 +11,9 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
++diff --git a/tests/cwrs32-test.c b/tests/cwrs32-test.c
++index 3a95df2..a159ab3 100644
++--- a/tests/cwrs32-test.c
+++++ b/tests/cwrs32-test.c
++@@ -8,6 +8,7 @@
++ #include "rangeenc.c"
++ #include "rangedec.c"
++ #include "cwrs.c"
+++#include "entcode.c"
++ #include <string.h>
++ #define NMAX (10)
++ #define MMAX (9)
++diff --git a/tests/ectest.c b/tests/ectest.c
++index aa35453..94eb9a3 100644
++--- a/tests/ectest.c
+++++ b/tests/ectest.c
++@@ -5,7 +5,7 @@
++ #include <stdlib.h>
++ #include <stdio.h>
++ #include <math.h>
++-#include "entcode.h"
+++#include "entcode.c"
++ #include "entenc.c"
++ #include "entdec.c"
++ #include "rangeenc.c"
++diff --git a/tests/laplace-test.c b/tests/laplace-test.c
++index 3f98ab3..8e1fb4e 100644
++--- a/tests/laplace-test.c
+++++ b/tests/laplace-test.c
++@@ -6,6 +6,7 @@
++ #include <stdlib.h>
++ #include "laplace.c"
++ #include "stack_alloc.h"
+++#include "entcode.c"
++ #include "entenc.c"
++ #include "entdec.c"
++ #include "rangeenc.c"
+diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-networking/recipes-support/celt051/celt051_git.bb
+index 850704f5af..116800522a 100644
+--- a/meta-networking/recipes-support/celt051/celt051_git.bb
++++ b/meta-networking/recipes-support/celt051/celt051_git.bb
+@@ -17,8 +17,9 @@ PV = "0.5.1.3+git${SRCPV}"
+ SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
  
- DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native"
- 
--SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
-+SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
-+           file://0001-Add-configure-check-for-canonicalize_file_name-befor.patch \
+ SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
+-    file://0001-configure.ac-make-tools-support-optional.patch \
+-"
++           file://0001-configure.ac-make-tools-support-optional.patch \
++           file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
 +           "
  
- SRC_URI[md5sum] = "4efe6a240cef212bf8855c95424e7c7f"
- SRC_URI[sha256sum] = "4e366243bd4983f2e6efe35cb901cf5da51939307b5d6299fe622a9fcf411745"
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.17.1
 
