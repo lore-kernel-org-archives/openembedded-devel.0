@@ -1,13 +1,13 @@
 Return-Path: <prvs=695dffe1c=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AE1578BC6
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id AB7F578BC6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 13:41:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,219,1526335200"; 
-   d="scan'208";a="1497673"
+	Wed, 13 Jun 2018 13:42:02 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,219,1526335200"; d="scan'208";a="10829393"
 To: Wenlin Kang <wenlin.kang@windriver.com>,
 	<openembedded-devel@lists.openembedded.org>
 References: <20180613083732.15059-1-wenlin.kang@windriver.com>
+	<20180613083732.15059-2-wenlin.kang@windriver.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <52741fe8-d1fc-cd4b-3142-3ff4545719c5@skidata.com>
-Date: Wed, 13 Jun 2018 15:42:06 +0200
+Message-ID: <9a575aba-b21b-1506-848d-834b0388c8a7@skidata.com>
+Date: Wed, 13 Jun 2018 15:42:17 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180613083732.15059-1-wenlin.kang@windriver.com>
+In-Reply-To: <20180613083732.15059-2-wenlin.kang@windriver.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH V2 1/2] openjdk-8: remove debuglink
+Subject: Re: [meta-java][PATCH V2 2/2] openjdk-8: remove redunant FILES_${PN}-dbg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,7 +75,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2018 13:41:52 -0000
+X-List-Received-Date: Wed, 13 Jun 2018 13:42:03 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -93,45 +93,72 @@ If you have any questions, please let me know.
 regards;Richard.L
 
 On 06/13/2018 10:37 AM, Wenlin Kang wrote:
-> During openjdk-8 compiling, its debug file is xxx.debuginfo, and it will
-> add libjvm.debuginfo as libjvm.so's debuglink section's file name, this
-> name is different with that we will create and add in splitdebuginfo()
-> of package.bbclass, in oe-core, the debug file name is the same with the
-> corresponding executable file or library file, this will make we can't get
-> symbol information when debug libjvm.so in gdb, so we must remove the
-> previous debuglink before add it if it has existed(if a file has contained
-> the debuglink section, it will not be changed when add again).
+> One recipe should only have one -dbg package, because OE only picks
+> up all .debug file into the last one -dbg package listed in variable
+> PACKAGES.
+> 
+> Comments(oe-core's commit a3b000643898d7402b9e57c02e8d10e677cc9722)
+> from Ross Burton as below:
+> "meta: more removals of redunant FILES_${PN}-dbg
+> 
+> In some recipes overly-split -dbg packages were merged into PN-dbg.  Unless
+> there's a very good reason, recipes should have a single -dev and -dbg package.
+> "
 > 
 > Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
 > ---
->  recipes-core/openjdk/openjdk-8-cross.inc | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
+>  recipes-core/openjdk/openjdk-8_16xbyy.bb | 29 -----------------------------
+>  1 file changed, 29 deletions(-)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-> index 46f13fd..03cab11 100644
-> --- a/recipes-core/openjdk/openjdk-8-cross.inc
-> +++ b/recipes-core/openjdk/openjdk-8-cross.inc
-> @@ -105,5 +105,21 @@ EXTRA_OEMAKE_append = '\
->      images \
->  '
+> diff --git a/recipes-core/openjdk/openjdk-8_16xbyy.bb b/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> index dd0ed1d..522d6b5 100644
+> --- a/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> +++ b/recipes-core/openjdk/openjdk-8_16xbyy.bb
+> @@ -14,7 +14,6 @@ do_install() {
+>  }
 >  
-> +python remove_debuglink() {
-> +    dvar = d.getVar('PKGD', True)
-> +    objcopy = d.getVar("OBJCOPY", True)
-> +
-> +    # Remove the previous debuglink if it has existed, because it has a different file name with that we will add.
-> +    if d.getVar('PN', True).find("jre") != -1:
-> +        file = dvar + d.getVar("JRE_HOME", True) + "/lib/" + d.getVar("JDK_ARCH", True) + "/server/libjvm.so"
-> +    else:
-> +        file = dvar + d.getVar("JDK_HOME", True) + "/jre/lib/" + d.getVar("JDK_ARCH", True) + "/server/libjvm.so"
-> +
-> +    cmd = "'%s' --remove-section .gnu_debuglink '%s'" % (objcopy, file)
-> +    oe.utils.getstatusoutput(cmd)
-> +}
-> +
-> +PACKAGE_PREPROCESS_FUNCS += "remove_debuglink"
-> +
->  # There is a symlink to a .so but this one is valid.
->  INSANE_SKIP_${PN} = "dev-so"
+>  PACKAGES_append = " \
+> -    ${PN}-demo-dbg \
+>      ${PN}-demo \
+>      ${PN}-source \
+>  "
+> @@ -33,37 +32,9 @@ FILES_${PN}-dev_append = "\
+>      ${JDK_HOME}/include \
+>  "
+>  
+> -FILES_${PN}-dbg_append = "\
+> -    ${JDK_HOME}/bin/.debug/ \
+> -    ${JDK_HOME}/lib/.debug/ \
+> -    ${JDK_HOME}/lib/${JDK_ARCH}/.debug/ \
+> -    ${JDK_HOME}/lib/${JDK_ARCH}/jli/.debug/ \
+> -    ${JDK_HOME}/jre/bin/.debug/ \
+> -    ${JDK_HOME}/jre/lib/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/jli/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/native_threads/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/server/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/headless/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/xawt/.debug/ \
+> -    ${JDK_HOME}/jre/lib/${JDK_ARCH}/client/.debug/ \
+> -"
+> -
+>  FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
+>  RDEPENDS_${PN}-demo = " ${PN} "
+>  
+> -FILES_${PN}-demo-dbg = "\
+> -    ${JDK_HOME}/demo/jvmti/gctest/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/heapTracker/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/heapViewer/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/hprof/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/minst/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/mtrace/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/versionCheck/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/waiters/lib/.debug/ \
+> -    ${JDK_HOME}/demo/jvmti/compiledMethodLoad/lib/.debug/ \
+> -"
+> -
+>  FILES_${PN}-doc_append = "\
+>      ${JDK_HOME}/man \
+>      ${JDK_HOME}/ASSEMBLY_EXCEPTION \
 > 
 
