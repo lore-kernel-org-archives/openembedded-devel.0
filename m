@@ -1,82 +1,60 @@
-Return-Path: <prvs=695dffe1c=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 91CD2751CC
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5286875546
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 13:43:47 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,219,1526335200"; 
-   d="scan'208";a="1497677"
-To: "Burton, Ross" <ross.burton@intel.com>,
-	<openembedded-devel-bounces@lists.openembedded.org>
-References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
-	<20180606204244.GA16170@mail.itconsulting-heinold.de>
-	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
-	<20180607132234.GA19704@mail.itconsulting-heinold.de>
-	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
-	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
-	<d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
-	<20180611113035.GA17777@mbabyjoh-desk.ger.corp.intel.com>
-	<20180611120847.GB16619@mail.itconsulting-heinold.de>
-	<22daefda-78eb-98bc-b344-ab8f93aa795d@skidata.com>
-	<CADfgfoY2fJOBt0ayVUfvyt1X079kDk=pc=7pswDmV=uPvuSA_A@mail.gmail.com>
-	<32bd0cdd-2148-ff0b-feaa-64a4cbc21e38@skidata.com>
-	<CAJTo0LaxjPJROD8fFt24qKwuSQzM_SM0GTeHc5xfziupdFS96w@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	xsFNBFLopXgBEACzfrB885BYxx/AHUYSin/jJqkDTvBKf22r9Nws0AxuOGSy9WXe87uv7ylF
-	alqn8XobrGbRv91bFdbDZF84Ba3VB6Ac4KLvEomYDCGmDGdAz1AbYB0VRvI38lcZ2NqHDCfI
-	MQkm6qts37mwi/IUZXtuGrq3pkBRMAERAVXAN+07SEPi5FhrhpqFUCn6Suk3VdVfG9JJ+oAQ
-	V+DBQ1rIdTCFjIJBplgp53/2HQWHUjSSZ4tc8ESVyLD486pj/zod+gpikaxQ+84Jsb9AwAmW
-	1xs5ZH1mH44ML10sRQM6AAtCIsazAlRrA+Kktvz4gtYkATvqM3nEJVks74yAgaXNn3KlfOAY
-	lHdjYTsdzTb9l84cqPGjsC120n+Rf7/XIbDc+uA/SDqHwwrfiiOEaqIiIpvm4jzXW68rCITW
-	we1/8ruNx9jWgotO41hz5PbBiSa4oaYmKm/B28psjK/mQSY/ZcvMm3YUu2YdsptoxfAiX9kK
-	yvjEfN8snptJA2rJkhO5LoITcome8INHpxdo16ysnppq14HK/xH/wtTNHmKDZ90BZGMdoujL
-	ZuJXTz0oqJhpocx+mN54xQQJiq4at0SFAbLZABOuplvsJz0syqWEboTtsfyPYjK5BktSjhr1
-	tc9pWukQGWLAfUDV0XTyEUrEijs+tnHGpVbsdlinR/mieEt4JQARAQABzTdSaWNoYXJkIExl
-	aXRuZXIgKFNLSURBVEEpIDxyaWNoYXJkLmxlaXRuZXJAc2tpZGF0YS5jb20+wsF4BBMBAgAi
-	BQJS6KV4AhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRANXM2qyKpn2IDPD/0entKI
-	IpsHqOeBzoN2EO5LCd/hi00hlCdVYwMdzEdJgsevW7ypp7dBXBJUh46M1QDC4lPTgK1SwU2u
-	KwKAmBU0eTD6AIrUB+TB8Tk2CckAiDL6qIzL0dL2AAb/mk2kGdoJRaAwSAjTJzQMbodTTznS
-	K6zxM/KE5BbV8nIS3cGTJ9wOjIhMA/2uw7GbBpHfhqkxQLwnEGaZUmon42qHKX818PWjE6PV
-	pElmhRTV6OVt/zniSSbfwmksvLIXESUQMjQP90I9SYc7PtVuYeejAtNRvk3MHCknFA5CpKAT
-	r74avoRQIvvczI73yTXv9gpJxtSnI3nzHWnflsTGfand6+fZBf7U+GGBVcUQwCSdOTaX+hyR
-	7RJnETgrs0raMeGogk4mwmR7p4MR407mmgoUiOby1LRDexaVAMAP7gbjMAk2rDnwh+TAbg/Y
-	6lbOJ9kdTjqDGBFJ4IZGRSAAXzbTQ45hR2F1UIOOQxqwE2Esr6adyDSV5fQpMj0ThJwPiQwr
-	ps9btjSh08Kj524gMw4jt7PlMj7q8iJkii1vzkUm0C0dI+jvycnya6Bqeuh2lkvS5p1Pwrx0
-	PAQEs/3aPfHlxhCI1JVzltb4wqWlbHCBR+QeaGCDloUhOX3FuoG9K2SZ2tFAAt3b19NQWvY9
-	k5rPj6Q9Yd5tHALTW0KTb+SwizKaXc7BTQRS6KV4ARAA8r+DSu50GbCZnX5PImCpEMQ5AA3g
-	xMy7mQnyZDh8NyUKECVz2lOPpHVdDM6LNoTt2NzZT8XrEY0E+Wp14iIFj/tWoh8A5EetKThz
-	f7yBo8pxpJuqiIdZURnqC8i/8U/1q6a/qo/vi+LdKlp5d8pRpwTTPnr4cmtuBUUELJX7ySDi
-	3Do3Xg8LNcAZInL+xrCSF5SzTB3Ab4f2TweMJCmKGci5007zD6VdwDokWgRxPAHdORbejqO9
-	dRK4DhYHQvesD54gashm2VciP6w4C/y3eWQTBCg+F5mIX7COqzOl73NObvukL/ThatAcEy/S
-	/8oT+WOiQqzBcwb9GW/V0R31P2kbNQ8FXj4Q57VAqC3l/8Q+BrBSPsuJco2pFNPflaPtGS9A
-	6fHqGwCrSIhy9bzcdqWh5yao9SL2h/qXWrbrNaY5kvkMeKvC8hkRpPKFjP+vfhR6uwmP8kbv
-	RJfogXapZZMsJsa3KUi0t9Ys9ZaEZCNvmoEV7YhFfBdqYE5gOlMSpF0LSFMhMgxz7Z43SxCN
-	rIHQXtpWIWECwz+VLOsr0V2CbbjrWvXp+me9Vp1AaFo5od3elEyCl/pabxKLqpZ/nNiRqUba
-	4eNr0pEkuDc+uzST3xRuZiUJnzBrnzo9BgVMn3mx/HqQ580YxWQ04hENdr8ymVZWHQ1KuJ7m
-	2Htz0UcAEQEAAcLBXwQYAQIACQUCUuileAIbDAAKCRANXM2qyKpn2CqOD/9a8RiAsq5G/WHJ
-	eQvMW/oZMpiSjJCqBxmz+S4ibIxYsWAaepykrOMPAiph2KTu9lnI5st/TSkJy9mskIO5FXTN
-	g+kdVyCg23D4PC0ay6EGLyTUuJriuG9twHbl63byF65ukBqRbnQKSOPdXpWRsKlgJOjVG1eA
-	qvZqhqy3OOFk9hmPWtqss1qE8gmr4vmpdDrWbYjjiQvW1UorGoEIiY4P5tlZDoI+ghqvOGBs
-	OF0JJkCdbMa5/vMBp+cjKhdh53nhY8yKSy3y2H5UevEpJKRw7xHnDjHVWny+ZPWZw8rDuIYB
-	pEo6jeZ+tDLDa9/6ozP1yrnxPRzeDs/j7th/T1JzQohxcKCpKONt72WPQdlRYYateAsu76dW
-	kakFtNiPnvI8JQ+R8yabD/vah0qyr9bhQDU3KcmBWLaW7de2XyA1XDIMlvBuCFbReyFQUbqX
-	lFMADKca2ak/vRr7pBfONFqJ4gUW0GGlVFkeKxXfvVJ7u1Wr0T4D1ul2nsDYo9LypwGEh8nV
-	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
-	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <a401d088-14bd-1a10-cecd-92031e60ddac@skidata.com>
-Date: Wed, 13 Jun 2018 15:44:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Wed, 13 Jun 2018 13:45:11 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id z24-v6so1451418pfe.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jun 2018 06:45:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=orYAMKgQjYXEpHhmCfmBaqWTDeg2drjFgBOWWgPDo4g=;
+	b=nmnOWTiMJ4LM5KAxqzbSRIRnMejMLAwqw93EeLi7j3RUs47uBdZDnHTysLB/QwAvP2
+	ZuGpwiFUjSK5BJdCHN7uBHlNnXMZ6ptPMUHypZH9bB+MmMTIhpTcRkVbuJ63lky+nL5r
+	Wh2sqMbkK7OYyvpt7pKK3fW8joMB546jpFADIHMPPSbndrgpGThu9pIHx8nXDfLzeudb
+	IbYerhJPExeumdzRWaYxkg+cnzXshKaCkL9SdKjXsWI5UCurjCnUOEPNVwzGQ7Ehl14/
+	pr/Q3KdNHsBoDR4YABJtu6l3oSQHdR5L5yd68/ZrvbLL0+OnYxaweliaEzV2gTSUji6u
+	rBWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=orYAMKgQjYXEpHhmCfmBaqWTDeg2drjFgBOWWgPDo4g=;
+	b=CmgFWtdhOnQGV+Cz+C08xTJDxiAKiTeAmpMEszYhvmeu5O/hs8FCgsaOFLWIc+6x9w
+	c4AgfNQvoQwz4F4wkuhVotiAQO4TzoN1g+4ZewngQ2P2Qs5T3vWz5l7rAJ3Qk+MZTY6l
+	B9Q2KsfXaur8x3hmE6XzmZSJPrmwRzWE1b9OWjEHdwISd2Ly7D2M8/Fo5KfHEFUDPRFX
+	ynAc6dspwoFyfp+ghYJ5KOXAnTZPSv6am8sGIYxrg/atCgf7t3F61UtOR2COLgV9xash
+	ugWkZlG82+jPKBsZCSok4NV8hdV5vMAv0iXzdK0084FtlP3c9MFcxeT3LlAM0mhTZBb4
+	Lu2w==
+X-Gm-Message-State: APt69E2oOJmUYCGPrcPS+/w/XXSfq1MjBSXQ36wMqCOO/ocUwMXIGg8m
+	ISgin5VXNUd57zd1h1UklK92HzUI
+X-Google-Smtp-Source: ADUXVKJAQVaY776BcTv5xMQzPL18FIXN47+kBZJfH8WKK1Lk/c+ANefQJpeGkdnXoO9MkVriLmG5VQ==
+X-Received: by 2002:a63:82c7:: with SMTP id
+	w190-v6mr4194173pgd.172.1528897511790; 
+	Wed, 13 Jun 2018 06:45:11 -0700 (PDT)
+Received: from hermes.local ([2601:646:877f:9499:f1a2:dcff:aa40:34bf])
+	by smtp.gmail.com with ESMTPSA id
+	j14-v6sm4061513pfn.151.2018.06.13.06.45.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Jun 2018 06:45:11 -0700 (PDT)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+References: <20180613063512.1755-1-raj.khem@gmail.com>
+	<20180613063512.1755-2-raj.khem@gmail.com>
+	<CALbNGRTotmY_EWAc0J-RKR21bxH9VDz2ra5yEe7ZK_yuA_aK5g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <79a667b8-c374-1352-8cf3-9c8c490ecbd6@gmail.com>
+Date: Wed, 13 Jun 2018 06:45:10 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <CAJTo0LaxjPJROD8fFt24qKwuSQzM_SM0GTeHc5xfziupdFS96w@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-java] maintainer status
+In-Reply-To: <CALbNGRTotmY_EWAc0J-RKR21bxH9VDz2ra5yEe7ZK_yuA_aK5g@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH V2 2/5] modemmanager: Fix build with musl provide canonicalize_file_name()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -89,24 +67,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2018 13:43:48 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Wed, 13 Jun 2018 13:45:11 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
+Hi Andreas
 
-On 06/13/2018 12:05 PM, Burton, Ross wrote:
-> On 13 June 2018 at 06:42,
-> <openembedded-devel-bounces@lists.openembedded.org> wrote:
->> Another question just came to my mind:
->> How should I deal with my own patches?
->> Am I "allowed" to apply them myself or should another maintainer do
->> this? If I should do it on my own: How long should they "stay" on the
->> mailinglist before?
+On 6/13/18 1:18 AM, Andreas Müller wrote:
+> On Wed, Jun 13, 2018 at 8:35 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>   ...eck-for-canonicalize_file_name-befor.patch | 64 +++++++++++++++++++
+>>   .../modemmanager/modemmanager_1.7.991.bb      |  4 +-
+>>   2 files changed, 67 insertions(+), 1 deletion(-)
+>>   create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
+>>
+>> diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
+>> new file mode 100644
+>> index 0000000000..256dd2ce0b
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
+>> @@ -0,0 +1,64 @@
+>> +From 07f1eda630517816bfa900e811963745a149e57c Mon Sep 17 00:00:00 2001
+>> +From: Khem Raj <raj.khem@gmail.com>
+>> +Date: Fri, 8 Jun 2018 20:38:30 -0700
+>> +Subject: [PATCH] Add configure check for canonicalize_file_name() before use
+>> +
+>> +Define canonicalize_file_name API if not provided by system C library
+>> +musl e.g. does not provide this API
+>> +
+>> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ^ Don't know what the current status: Do we still insist on Upstream-Status?
 > 
-> If they're trivial I can't see a problem with post-and-push.  For
-> anything that isn't pretty obvious, they should have a bit of time on
-> the list.
+> Why I ask: This solution might have the chance upstream.
+> 
 
-Seems like a fair deal. Thank you!
+Yes I will add Upstream-Status: Pending
+
+> Andreas
+> 
 
