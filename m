@@ -1,49 +1,61 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 39B1078A17
+Return-Path: <ross.burton@intel.com>
+Received: from mail-ot0-f170.google.com (mail-ot0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D010E78F37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 09:55:59 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id w17-v6so1237437pll.9
+	Wed, 13 Jun 2018 10:05:42 +0000 (UTC)
+Received: by mail-ot0-f170.google.com with SMTP id q1-v6so2268191oth.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 02:56:00 -0700 (PDT)
+	Wed, 13 Jun 2018 03:05:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=7qfV+EQKSFiWfqIxyBXKaPdLRr9KA2J+qesJi/4Vbfk=;
-	b=V1RzVmPo/m9N2yyCl+d8tJmJKrN5j7kmtYYKQpxJXkECbN8gp+Vznl6H1nED3y2yAI
-	A/iqQePksMy0Px6GM0q9JpHInueKF81gT5YlrVDtvqryzS175W5vMFjPPwJMfXphm+K+
-	5ClLG3LDCOkEdmj8ziNr0T0RbyuDThRqNm8BsyXuGoXdOj1/Ds8cOIfu49W6WKw9+HcK
-	RMM3X7ZFcxJvk4sgU2QTwy8NBcl0APjX+qRVRQhYtja/EBboAoGytu9jBxgHj0ygzR8t
-	1r7ieOEW3VP5Kmzb2Ks0/XkL83OUCp/iHxYA4/mOUow2ywKC2VU55TmRy+byCf2TGQKz
-	uIJg==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=exArzxyBlWVgc8eksId0tQxAlzL9zp6T0q4mr/SW3D0=;
+	b=AzYCMFTiSEQfzvQpzEcxMqmDtZDxG4wOY35BO/5t641MzYQuf1pu6TjOkZ3BCyVhZW
+	xM1NzF2e/ckUrYIMXbOCR+RcM7JZhO+urY5wQWNBMnOUOlRV/yxIcA/2oLOBElYXfXM3
+	ZY/dfMV35y4jOP7WbHZO03kr3s2EWJnROZ+22DJ7Sgb62F0+5UGMMh5d67m1yuol+lDj
+	eh0crRVT17AT1DgztDkb2KlrML3HUENwK/NP9Z6TXcMEvWv2hxAzm41ScgDuHwZpjgV3
+	ksKBZhUi1Eqe+r+MWwxr76CKYguJ6wNWz/j4VjkOMSfdGRlsi6jc6JAUmMNPP3JQ9fsp
+	uH5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7qfV+EQKSFiWfqIxyBXKaPdLRr9KA2J+qesJi/4Vbfk=;
-	b=nS73iS8ExXlEQDB1iKxAxuZGx1NlbPMBtV1qiO9l5T2oF6bWDfQrYEGRSU8sHs0dd/
-	+z6WeNqJeoGL0g8TvSjIj+Og9fv+xGHae5Uv/IFFKZAdFoIJ3WCMu4v7C6Y+KMv6yJyp
-	eY20vBh+NIL4CSAclw2TeJZsr6UTWR39AbPhNj/jQzy6+iPoU6lphA9M10j4UheVuhBl
-	5+nAoIf74KRvPr/APJmbOFrWhboT7GX8ZtNnII/79+O6J1cfW0FQsKbm/lTMdLiDF3aJ
-	NdLxrvcx+hwGo2HrBOzSEmr6YnYwuhjAxDGXRCyW/xltleEJ6i0ThaaAoLnWwszV8jVw
-	vdJA==
-X-Gm-Message-State: APt69E2awEZswpDIMnrD9iXWCriygh7PSO18zw5yT/TQk7ygI52YbtXV
-	RNTX+t464R2UG2sOHFKx/RKRC+x11ts=
-X-Google-Smtp-Source: ADUXVKLLdxlSS32tQ+8JJH0kVRMQChRdjwbUDF5sjSCBuT5l3RZs3jopBkCKXL651hXYjjHe2trqqQ==
-X-Received: by 2002:a17:902:8a87:: with SMTP id
-	p7-v6mr4375798plo.281.1528883760238; 
-	Wed, 13 Jun 2018 02:56:00 -0700 (PDT)
-Received: from jptest02.mvista.com (64.2.3.196.ptr.us.xo.net. [64.2.3.196])
-	by smtp.gmail.com with ESMTPSA id
-	r74-v6sm4047912pfi.174.2018.06.13.02.55.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Jun 2018 02:55:59 -0700 (PDT)
-From: Jeremy Puhlman <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Jun 2018 02:53:03 -0700
-Message-Id: <20180613095303.7433-1-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.14.1.459.g238e487
-Subject: [meta-networking][PATCH] netkit-telnet: Switch to update-alternatives
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=exArzxyBlWVgc8eksId0tQxAlzL9zp6T0q4mr/SW3D0=;
+	b=hkbpQF8psrAq1D+hPPevryGmNxgHJ1qP8PZMoBR88giUzAwhZ5JRxEax8DS0pt9IE5
+	6MArCAd6LtnqXt4LWGQWNlXEs/jsLCwgVU0GG9hH/GH7gpMTZbGcuXxgvkIntnmmcin6
+	fWIKZd2PKKiPZGkXtfLJJXprwO3gvXcIOW+2mheYaaU5FvnYGIvEL/m/tipeyXlgK7Pi
+	nttUQzO+v7wKM2pr4rmxAVsGGlrAD7AqtRP3srCsucL9kh2lxGlIgoSqWA/i6N7D1FbQ
+	TYkdYCjrmsqTHNtC+kIHJqsXWhqQ7yyihq/lqrIn2JjF+STqgbZsQ2QQlHZiXzygV1KO
+	YuzQ==
+X-Gm-Message-State: APt69E1ScbQJ+A0mxg3Muvl91+ArTsfcX+Xu13q0qXFD35owM7mDdk+H
+	V+Mkb9ep9FOpBpgyXuXNQhizfITMmm2PjQfw0dpCUA==
+X-Google-Smtp-Source: ADUXVKJu7IB5L0XekYXnrSibIZuZelUsxECJZefHbZS7hhXYfupLjLUG9Jh3YwQUx8/WG+3yjPiPLMrpg7GAysnKRmY=
+X-Received: by 2002:a9d:307:: with SMTP id 7-v6mr2845459otv.300.1528884343843; 
+	Wed, 13 Jun 2018 03:05:43 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ac9:434d:0:0:0:0:0 with HTTP; Wed, 13 Jun 2018 03:05:22
+	-0700 (PDT)
+In-Reply-To: <32bd0cdd-2148-ff0b-feaa-64a4cbc21e38@skidata.com>
+References: <10630413.xVAl2E7OaH@yow-masselst-lx1>
+	<20180606204244.GA16170@mail.itconsulting-heinold.de>
+	<fcaab484-d381-92f7-04d7-2a7edca6f903@skidata.com>
+	<20180607132234.GA19704@mail.itconsulting-heinold.de>
+	<91e19a88-1a03-b772-b6be-bf6bf27037c8@skidata.com>
+	<CAP9ODKrFomJ2Rvp5mku81Op-rYCNt-AXm4TVV2-aSg6QSfEoFQ@mail.gmail.com>
+	<d8462836-e655-4bb4-7b03-bce18cb3e24c@skidata.com>
+	<20180611113035.GA17777@mbabyjoh-desk.ger.corp.intel.com>
+	<20180611120847.GB16619@mail.itconsulting-heinold.de>
+	<22daefda-78eb-98bc-b344-ab8f93aa795d@skidata.com>
+	<CADfgfoY2fJOBt0ayVUfvyt1X079kDk=pc=7pswDmV=uPvuSA_A@mail.gmail.com>
+	<32bd0cdd-2148-ff0b-feaa-64a4cbc21e38@skidata.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 13 Jun 2018 11:05:22 +0100
+Message-ID: <CAJTo0LaxjPJROD8fFt24qKwuSQzM_SM0GTeHc5xfziupdFS96w@mail.gmail.com>
+To: openembedded-devel-bounces@lists.openembedded.org
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-java] maintainer status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,38 +68,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2018 09:55:59 -0000
+X-List-Received-Date: Wed, 13 Jun 2018 10:05:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
----
- .../recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb       | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+On 13 June 2018 at 06:42,
+<openembedded-devel-bounces@lists.openembedded.org> wrote:
+> Another question just came to my mind:
+> How should I deal with my own patches?
+> Am I "allowed" to apply them myself or should another maintainer do
+> this? If I should do it on my own: How long should they "stay" on the
+> mailinglist before?
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index c03b8d968..9fe3d6e51 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -50,15 +50,11 @@ do_install () {
-     install -p -m644 ${WORKDIR}/telnet-xinetd ${D}/etc/xinetd.d/telnet
- }
- 
--pkg_postinst_${PN} () {
--#!/bin/sh
--    update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
--}
-+inherit update-alternatives
- 
--pkg_prerm_${PN} () {
--#!/bin/sh
--    update-alternatives --remove telnet telnet.${PN} 100
--}
-+ALTERNATIVE_PRIORITY = "100"
-+ALTERNATIVE_${PN} = "telnet"
-+ALTERNATIVE_LINK_NAME[telnet] = "${bindir}/telnet"
- 
- SRC_URI[md5sum] = "d6beabaaf53fe6e382c42ce3faa05a36"
- SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2bb88e00"
--- 
-2.14.1.459.g238e487
+If they're trivial I can't see a problem with post-and-push.  For
+anything that isn't pretty obvious, they should have a bit of time on
+the list.
 
+Ross
 
