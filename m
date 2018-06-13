@@ -1,60 +1,60 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5286875546
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 245707470F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 13:45:11 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id z24-v6so1451418pfe.7
+	Wed, 13 Jun 2018 13:47:54 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id 15-v6so1318034pge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jun 2018 06:45:12 -0700 (PDT)
+	Wed, 13 Jun 2018 06:47:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:organization:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=orYAMKgQjYXEpHhmCfmBaqWTDeg2drjFgBOWWgPDo4g=;
-	b=nmnOWTiMJ4LM5KAxqzbSRIRnMejMLAwqw93EeLi7j3RUs47uBdZDnHTysLB/QwAvP2
-	ZuGpwiFUjSK5BJdCHN7uBHlNnXMZ6ptPMUHypZH9bB+MmMTIhpTcRkVbuJ63lky+nL5r
-	Wh2sqMbkK7OYyvpt7pKK3fW8joMB546jpFADIHMPPSbndrgpGThu9pIHx8nXDfLzeudb
-	IbYerhJPExeumdzRWaYxkg+cnzXshKaCkL9SdKjXsWI5UCurjCnUOEPNVwzGQ7Ehl14/
-	pr/Q3KdNHsBoDR4YABJtu6l3oSQHdR5L5yd68/ZrvbLL0+OnYxaweliaEzV2gTSUji6u
-	rBWw==
+	bh=z2ScqxhL4buxdzLuKyoqjS+/B/kAPi7AEWSouDfhcGc=;
+	b=SUCCvjn0DTYS+W4gvMn/azFDK6SXmclHh0S3zYtyeEagazCdCTqj3VzqyU1B1cC4OR
+	AL+CReISsUaUWIP3HDhKfNteEEWlat3vfMLe1bwqlgS4f8vJblctWEdOv9+y6YJq05ty
+	H40kFLozCc5LTqCqUYi3q0tnLVvBQXUpEyiLHtuBuG1LRIa0BxVQU3AsH24NZC5xOWEM
+	j4/ik9g4gzhZP27wYgnxu0MIUsMG1kIxFw6hS7vrN57i7qLrRZ9RdQKUC2heJV0125zm
+	d8AcK2dLesnphTZWVeO9j/E0sCtrGc314syQDkI1IRGSpyu4kj1SkrrZHvRJHFXojSwp
+	tjIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-language:content-transfer-encoding;
-	bh=orYAMKgQjYXEpHhmCfmBaqWTDeg2drjFgBOWWgPDo4g=;
-	b=CmgFWtdhOnQGV+Cz+C08xTJDxiAKiTeAmpMEszYhvmeu5O/hs8FCgsaOFLWIc+6x9w
-	c4AgfNQvoQwz4F4wkuhVotiAQO4TzoN1g+4ZewngQ2P2Qs5T3vWz5l7rAJ3Qk+MZTY6l
-	B9Q2KsfXaur8x3hmE6XzmZSJPrmwRzWE1b9OWjEHdwISd2Ly7D2M8/Fo5KfHEFUDPRFX
-	ynAc6dspwoFyfp+ghYJ5KOXAnTZPSv6am8sGIYxrg/atCgf7t3F61UtOR2COLgV9xash
-	ugWkZlG82+jPKBsZCSok4NV8hdV5vMAv0iXzdK0084FtlP3c9MFcxeT3LlAM0mhTZBb4
-	Lu2w==
-X-Gm-Message-State: APt69E2oOJmUYCGPrcPS+/w/XXSfq1MjBSXQ36wMqCOO/ocUwMXIGg8m
-	ISgin5VXNUd57zd1h1UklK92HzUI
-X-Google-Smtp-Source: ADUXVKJAQVaY776BcTv5xMQzPL18FIXN47+kBZJfH8WKK1Lk/c+ANefQJpeGkdnXoO9MkVriLmG5VQ==
-X-Received: by 2002:a63:82c7:: with SMTP id
-	w190-v6mr4194173pgd.172.1528897511790; 
-	Wed, 13 Jun 2018 06:45:11 -0700 (PDT)
+	bh=z2ScqxhL4buxdzLuKyoqjS+/B/kAPi7AEWSouDfhcGc=;
+	b=b8M/KHfMdTSryxu6Rv0L0M/TwUOMxiou6gEqfTrAFImDD6JE//w0St9w4wiZpX4Q7S
+	5DShBmQdPxglbDRX+L4j++QE+si83jvpkUA8+NgqXOKNqdx7Uzx8s7U8ZjuVfw/QakVs
+	5x2Kzg2fDVNpe4PyaGImRtpDdjZUHrLHZsWsUS1iwOfglhFn7jZXNQFmzkbAGVE6XMi+
+	xkd3SHpBqbrws19tPqY9lpunkKsstKRyse4hKjP/PK7Xe65YoRkN8wd92ZtnWdrShn2U
+	6jQ2PvNhJ5niz3lORmNuNIwmo+9GRgPeo0M61pqB5/m9moKxPqSsovVYv+VmdJnax54/
+	258Q==
+X-Gm-Message-State: APt69E0btMxRdj5Fa/0nkHd44T+iphU37K1L1Hopwk72B9rzV+mMPwpG
+	G6CAHpKZJhM2LJgaGLHTgeQHUt/3
+X-Google-Smtp-Source: ADUXVKKOcx2gUd59ZUdD2c+15UjP1RcPg35gxTTRqnONi4EIhWiMc9Hr6KLVIKzqM3+v7S0zHNCcsA==
+X-Received: by 2002:a62:3101:: with SMTP id
+	x1-v6mr4985200pfx.246.1528897674652; 
+	Wed, 13 Jun 2018 06:47:54 -0700 (PDT)
 Received: from hermes.local ([2601:646:877f:9499:f1a2:dcff:aa40:34bf])
 	by smtp.gmail.com with ESMTPSA id
-	j14-v6sm4061513pfn.151.2018.06.13.06.45.10
+	l85-v6sm5350504pfk.79.2018.06.13.06.47.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Jun 2018 06:45:11 -0700 (PDT)
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <20180613063512.1755-1-raj.khem@gmail.com>
-	<20180613063512.1755-2-raj.khem@gmail.com>
-	<CALbNGRTotmY_EWAc0J-RKR21bxH9VDz2ra5yEe7ZK_yuA_aK5g@mail.gmail.com>
+	Wed, 13 Jun 2018 06:47:53 -0700 (PDT)
+To: Andrej Valek <andrej.valek@siemens.com>
+References: <20180607132109.23396-3-andrej.valek@siemens.com>
+	<20180612103709.25990-1-andrej.valek@siemens.com>
+	<CAMKF1so6aoZnh43t7=W8d9+DpjNxr8HE4Dkie4gLpwn+x_dj_A@mail.gmail.com>
+	<6188fb5c-8199-97d4-d997-195285d4c7b5@siemens.com>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <79a667b8-c374-1352-8cf3-9c8c490ecbd6@gmail.com>
-Date: Wed, 13 Jun 2018 06:45:10 -0700
+Message-ID: <f2da9f8c-c43f-409f-98b8-a5dc9ab3d501@gmail.com>
+Date: Wed, 13 Jun 2018 06:47:52 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
 	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRTotmY_EWAc0J-RKR21bxH9VDz2ra5yEe7ZK_yuA_aK5g@mail.gmail.com>
+In-Reply-To: <6188fb5c-8199-97d4-d997-195285d4c7b5@siemens.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH V2 2/5] modemmanager: Fix build with musl provide canonicalize_file_name()
+Subject: Re: [meta-oe][PATCH v2] syslog-ng: update to 3.15.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,44 +67,330 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jun 2018 13:45:11 -0000
+X-List-Received-Date: Wed, 13 Jun 2018 13:47:54 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Hi Andreas
+Hi Andrej
 
-On 6/13/18 1:18 AM, Andreas Müller wrote:
-> On Wed, Jun 13, 2018 at 8:35 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>   ...eck-for-canonicalize_file_name-befor.patch | 64 +++++++++++++++++++
->>   .../modemmanager/modemmanager_1.7.991.bb      |  4 +-
->>   2 files changed, 67 insertions(+), 1 deletion(-)
->>   create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
+On 6/13/18 1:56 AM, Andrej Valek wrote:
+> Hi Khem,
+> 
+> I have tested it on glibc@qemuarm/x86 before posting. After posted this
+> error message, I have setup new build like this:
+> 
+> $ export MACHINE=qemux86-64 TCLIBC=musl
+> $ . oe-init-build-env
+> $ bitbake syslog-ng
+> 
+> It was compiled without any problems. libsecret-storage library was built.
+> 
+> How did you setup our build?
+
+Try to enable ptests as well. this is what I have in local.conf
+DISTRO_FEATURES_append = " largefile opengl ptest multiarch wayland pam "
+
+then try
+
+$ TCLIBC=musl bitbake syslog-ng
+
+> 
+> So, this error looks like that PAGESIZE is represented as constant. What
+> about change type to long? Maybe there is a problem with capitalization.
+> 
+> Regards,
+> Andrej
+> 
+> On 06/12/18 22:59, Khem Raj wrote:
+>> Fails to build with qemux86_64/musl
 >>
->> diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
->> new file mode 100644
->> index 0000000000..256dd2ce0b
->> --- /dev/null
->> +++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager/0001-Add-configure-check-for-canonicalize_file_name-befor.patch
->> @@ -0,0 +1,64 @@
->> +From 07f1eda630517816bfa900e811963745a149e57c Mon Sep 17 00:00:00 2001
->> +From: Khem Raj <raj.khem@gmail.com>
->> +Date: Fri, 8 Jun 2018 20:38:30 -0700
->> +Subject: [PATCH] Add configure check for canonicalize_file_name() before use
->> +
->> +Define canonicalize_file_name API if not provided by system C library
->> +musl e.g. does not provide this API
->> +
->> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ^ Don't know what the current status: Do we still insist on Upstream-Status?
-> 
-> Why I ask: This solution might have the chance upstream.
-> 
-
-Yes I will add Upstream-Status: Pending
-
-> Andreas
-> 
+>> In file included from
+>> /mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/syslog-ng/3.15.1-r0/recipe-sysroot/usr/include/limits.h:8,
+>>                   from
+>> /mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/syslog-ng/3.15.1-r0/recipe-sysroot/usr/lib/glib-2.0/include/glibconfig.h:11,
+>>                   from
+>> /mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/syslog-ng/3.15.1-r0/recipe-sysroot/usr/include/glib-2.0/glib/gtypes.h:32,
+>>                   from
+>> /mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/syslog-ng/3.15.1-r0/recipe-sysroot/usr/include/glib-2.0/glib/galloca.h:32,
+>>                   from
+>> /mnt/a/oe/build/tmp/work/core2-64-bec-linux-musl/syslog-ng/3.15.1-r0/recipe-sysroot/usr/include/glib-2.0/glib.h:30,
+>>                   from ../syslog-ng-3.15.1/lib/compat/glib.h:31,
+>>                   from
+>> ../syslog-ng-3.15.1/lib/secret-storage/nondumpable-allocator.h:27,
+>>                   from
+>> ../syslog-ng-3.15.1/lib/secret-storage/nondumpable-allocator.c:31:
+>> ../syslog-ng-3.15.1/lib/secret-storage/nondumpable-allocator.c: In
+>> function 'nondumpable_buffer_alloc':
+>> ../syslog-ng-3.15.1/lib/secret-storage/nondumpable-allocator.c:107:9:
+>> error: expected identifier or '(' before numeric constant
+>>     gsize PAGESIZE = sysconf(_SC_PAGE_SIZE);
+>>           ^~~~~~~~
+>> On Tue, Jun 12, 2018 at 3:38 AM Andrej Valek <andrej.valek@siemens.com> wrote:
+>>>
+>>>   - Refresh and remove obsolete patches
+>>>   - Implement SystemD service files handling
+>>>    - splitted service into default
+>>>   - Remove dependency to eventlog
+>>>    - external libevtlog library linking was removed
+>>>   - Version 3.15.1 supports OpenSSL 1.1
+>>>
+>>> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+>>> ---
+>>>   ...ry-leak-problem-when-HAVE_ENVIRON-defined.patch | 29 -----------------
+>>>   ...c-add-option-enable-thread-tls-to-manage-.patch | 16 ++++-----
+>>>   .../recipes-support/syslog-ng/files/syslog-ng.conf |  2 +-
+>>>   .../syslog-ng.service-the-syslog-ng-service.patch  | 38 +++++++++++++++-------
+>>>   meta-oe/recipes-support/syslog-ng/syslog-ng.inc    | 21 +++++++-----
+>>>   .../recipes-support/syslog-ng/syslog-ng_3.15.1.bb  | 10 ++++++
+>>>   .../recipes-support/syslog-ng/syslog-ng_3.8.1.bb   | 11 -------
+>>>   7 files changed, 58 insertions(+), 69 deletions(-)
+>>>   delete mode 100644 meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+>>>   create mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+>>>   delete mode 100644 meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
+>>>
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch b/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+>>> deleted file mode 100644
+>>> index 5d481f232..000000000
+>>> --- a/meta-oe/recipes-support/syslog-ng/files/Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch
+>>> +++ /dev/null
+>>> @@ -1,29 +0,0 @@
+>>> -Fix the memory leak problem when HAVE_ENVIRON is defined
+>>> -
+>>> -Upstream-Status: Pending
+>>> -
+>>> -Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+>>> ----
+>>> -Index: syslog-ng-3.8.1/lib/gprocess.c
+>>> -===================================================================
+>>> ---- syslog-ng-3.8.1.orig/lib/gprocess.c
+>>> -+++ syslog-ng-3.8.1/lib/gprocess.c
+>>> -@@ -1432,6 +1432,18 @@ g_process_startup_ok(void)
+>>> - void
+>>> - g_process_finish(void)
+>>> - {
+>>> -+#ifdef HAVE_ENVIRON
+>>> -+  int i = 0;
+>>> -+
+>>> -+  while (environ[i]) {
+>>> -+    g_free(environ[i]);
+>>> -+    ++i;
+>>> -+  }
+>>> -+  if (environ)
+>>> -+    g_free(environ);
+>>> -+  if (process_opts.argv_orig)
+>>> -+    free(process_opts.argv_orig);
+>>> -+#endif
+>>> -   g_process_remove_pidfile();
+>>> - }
+>>> -
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch b/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+>>> index c172e4e74..4f8a3d077 100644
+>>> --- a/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+>>> +++ b/meta-oe/recipes-support/syslog-ng/files/configure.ac-add-option-enable-thread-tls-to-manage-.patch
+>>> @@ -10,21 +10,21 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>>>    configure.ac | 17 +++++++++++------
+>>>    1 file changed, 11 insertions(+), 6 deletions(-)
+>>>
+>>> -Index: syslog-ng-3.8.1/configure.ac
+>>> +Index: syslog-ng-3.15.1/configure.ac
+>>>   ===================================================================
+>>> ---- syslog-ng-3.8.1.orig/configure.ac
+>>> -+++ syslog-ng-3.8.1/configure.ac
+>>> -@@ -147,6 +147,9 @@ AC_ARG_ENABLE(gprof,
+>>> +--- syslog-ng-3.15.1.orig/configure.ac
+>>> ++++ syslog-ng-3.15.1/configure.ac
+>>> +@@ -190,6 +190,9 @@ AC_ARG_ENABLE(gprof,
+>>>    AC_ARG_ENABLE(memtrace,
+>>>                  [  --enable-memtrace   Enable alternative leak debugging code.])
+>>>
+>>>   +AC_ARG_ENABLE(thread-tls,
+>>> -+              [  --enable-thread-tls        Enable Thread Transport Layer Security support.],,enable_thread_tls="no")
+>>> ++              [  --enable-thread-tls        Enable Thread Local Storage support.],,enable_thread_tls="no")
+>>>   +
+>>>    AC_ARG_ENABLE(dynamic-linking,
+>>>                  [  --enable-dynamic-linking        Link everything dynamically.],,enable_dynamic_linking="auto")
+>>>
+>>> -@@ -486,12 +489,14 @@ dnl ************************************
+>>> +@@ -591,12 +594,14 @@ dnl ***************************************************************************
+>>>    dnl Is the __thread keyword available?
+>>>    dnl ***************************************************************************
+>>>
+>>> @@ -33,14 +33,14 @@ Index: syslog-ng-3.8.1/configure.ac
+>>>   -__thread int a;
+>>>   -]],
+>>>   -[a=0;])],
+>>> --[ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Transport Layer Security is supported by the system")])
+>>> +-[ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Thread Local Storage is supported by the system")])
+>>>   +if test "x$enable_thread_tls" != "xno"; then
+>>>   +    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+>>>   +    [[#include <pthread.h>
+>>>   +    __thread int a;
+>>>   +    ]],
+>>>   +    [a=0;])],
+>>> -+    [ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Transport Layer Security is supported by the system")])
+>>> ++    [ac_cv_have_tls=yes; AC_DEFINE_UNQUOTED(HAVE_THREAD_KEYWORD, 1, "Whether Thread Local Storage is supported by the system")])
+>>>   +fi
+>>>
+>>>    dnl ***************************************************************************
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+>>> index 0c6f54355..fb183ee17 100644
+>>> --- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+>>> +++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+>>> @@ -1,4 +1,4 @@
+>>> -@version: 3.8
+>>> +@version: 3.15
+>>>   #
+>>>   # Syslog-ng configuration file, compatible with default Debian syslogd
+>>>   # installation. Originally written by anonymous (I can't find his name)
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+>>> index 6b30c20c1..dc2ba167a 100644
+>>> --- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+>>> +++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+>>> @@ -7,25 +7,39 @@ Subject: [PATCH] syslog-ng.service: the syslog-ng service can not start
+>>>   Upstream-Status: pending
+>>>
+>>>   Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+>>> +Updated-by: Andrej Valek <andrej.valek@siemens.com>
+>>>   ---
+>>>    contrib/systemd/syslog-ng.service | 5 ++---
+>>>    1 file changed, 2 insertion(+), 3 deletions(-)
+>>>
+>>> -diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
+>>> -index fc16f8d..8e09deb 100644
+>>> ---- a/contrib/systemd/syslog-ng.service
+>>> -+++ b/contrib/systemd/syslog-ng.service
+>>> -@@ -4,8 +4,8 @@ Description=System Logger Daemon
+>>> -
+>>> - [Service]
+>>> +diff --git a/contrib/systemd/syslog-ng@.service b/contrib/systemd/syslog-ng@.service
+>>> +index a28640e..93aec94 100644
+>>> +--- a/contrib/systemd/syslog-ng@.service
+>>> ++++ b/contrib/systemd/syslog-ng@.service
+>>> +@@ -7,8 +7,8 @@ Conflicts=emergency.service emergency.target
+>>>    Type=notify
+>>> --ExecStart=/usr/sbin/syslog-ng -F $SYSLOGNG_OPTS
+>>> + EnvironmentFile=-/etc/default/syslog-ng@%i
+>>> + EnvironmentFile=-/etc/sysconfig/syslog-ng@%i
+>>> +-ExecStart=/usr/sbin/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+>>>   -ExecReload=/bin/kill -HUP $MAINPID
+>>> -+ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslogd.pid
+>>> ++ExecStart=@SBINDIR@/syslog-ng -F $OTHER_OPTIONS --cfgfile $CONFIG_FILE --control $CONTROL_FILE --persist-file $PERSIST_FILE --pidfile $PID_FILE
+>>>   +ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
+>>> - EnvironmentFile=-/etc/default/syslog-ng
+>>> - EnvironmentFile=-/etc/sysconfig/syslog-ng
+>>>    StandardOutput=journal
+>>> + StandardError=journal
+>>> + Restart=on-failure
+>>> +diff --git a/contrib/systemd/syslog-ng@default b/contrib/systemd/syslog-ng@default
+>>> +index 02da288..3a8215d 100644
+>>> +--- a/contrib/systemd/syslog-ng@default
+>>> ++++ b/contrib/systemd/syslog-ng@default
+>>> +@@ -1,5 +1,5 @@
+>>> + CONFIG_FILE=/etc/syslog-ng.conf
+>>> +-PERSIST_FILE=/var/lib/syslog-ng/syslog-ng.persist
+>>> +-CONTROL_FILE=/var/lib/syslog-ng/syslog-ng.ctl
+>>> +-PID_FILE=/var/run/syslog-ng.pid
+>>> ++PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
+>>> ++CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
+>>> ++PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
+>>> + OTHER_OPTIONS="--enable-core"
+>>> +
+>>>   --
+>>>   1.8.4.2
+>>> -
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+>>> index 771cdb196..d8fd96282 100644
+>>> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+>>> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+>>> @@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+>>>   LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
+>>>
+>>>   # util-linux added to get libuuid
+>>> -DEPENDS = "libpcre flex eventlog glib-2.0 openssl util-linux"
+>>> +DEPENDS = "libpcre flex glib-2.0 openssl util-linux"
+>>>
+>>>   SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
+>>>              file://syslog-ng.conf \
+>>> @@ -67,12 +67,6 @@ do_configure_prepend() {
+>>>          cd $olddir
+>>>   }
+>>>
+>>> -do_install_prepend() {
+>>> -    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+>>> -    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+>>> -    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+>>> -}
+>>> -
+>>>   do_install_append() {
+>>>       install -d ${D}/${sysconfdir}/${BPN}
+>>>       install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
+>>> @@ -83,6 +77,17 @@ do_install_append() {
+>>>       install -d ${D}/${localstatedir}/lib/${BPN}
+>>>       # Remove /var/run as it is created on startup
+>>>       rm -rf ${D}${localstatedir}/run
+>>> +
+>>> +    # support for systemd
+>>> +    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+>>> +        install -d ${D}${systemd_unitdir}/system/
+>>> +        install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
+>>> +        install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${systemd_unitdir}/system/${BPN}@default
+>>> +
+>>> +        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
+>>> +        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
+>>> +        sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
+>>> +    fi
+>>>   }
+>>>
+>>>   FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+>>> @@ -108,7 +113,7 @@ RCONFLICTS_${PN} = "busybox-syslog sysklogd rsyslog"
+>>>   RPROVIDES_${PN} += "${PN}-systemd"
+>>>   RREPLACES_${PN} += "${PN}-systemd"
+>>>   RCONFLICTS_${PN} += "${PN}-systemd"
+>>> -SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+>>> +SYSTEMD_SERVICE_${PN} = "${BPN}@default ${BPN}@.service"
+>>>
+>>>   INITSCRIPT_NAME = "syslog"
+>>>   INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+>>> new file mode 100644
+>>> index 000000000..e6a214ced
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.15.1.bb
+>>> @@ -0,0 +1,10 @@
+>>> +require syslog-ng.inc
+>>> +
+>>> +SRC_URI += " \
+>>> +    file://fix-config-libnet.patch \
+>>> +    file://fix-invalid-ownership.patch \
+>>> +    file://syslog-ng.service-the-syslog-ng-service.patch \
+>>> +"
+>>> +
+>>> +SRC_URI[md5sum] = "da59a65cd5e293ec0fa3d3ecf4984af9"
+>>> +SRC_URI[sha256sum] = "a2dabd28674e2b558e4fb92484ad111d77bf7150070aa28556827130b479f9ef"
+>>> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
+>>> deleted file mode 100644
+>>> index 91a0e4699..000000000
+>>> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.8.1.bb
+>>> +++ /dev/null
+>>> @@ -1,11 +0,0 @@
+>>> -require syslog-ng.inc
+>>> -
+>>> -SRC_URI += " \
+>>> -    file://fix-config-libnet.patch \
+>>> -    file://fix-invalid-ownership.patch \
+>>> -    file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
+>>> -    file://syslog-ng.service-the-syslog-ng-service.patch \
+>>> -"
+>>> -
+>>> -SRC_URI[md5sum] = "acf14563cf5ce435db8db35486ce66af"
+>>> -SRC_URI[sha256sum] = "84b081f6e5f98cbc52052e342bcfdc5de5fe0ebe9f5ec32fe9eaec5759224cc5"
+>>> --
+>>> 2.11.0
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
