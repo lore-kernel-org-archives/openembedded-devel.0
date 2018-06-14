@@ -1,49 +1,102 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D26F789A1
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 1503675153
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jun 2018 08:03:50 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id v16-v6so8878544wmh.5
+	Thu, 14 Jun 2018 20:36:17 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id q4-v6so3437049pgr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jun 2018 01:03:51 -0700 (PDT)
+	Thu, 14 Jun 2018 13:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KnhULOXnXvLMb8zOkHIl07T91EBoY8xIRAiy/uh0uog=;
-	b=YpiykeY6ngtLQ8Za6N1xs5hLRXBOObqRbbHUrwV4XoIHDAXELymHIPToiGbeYn/TRE
-	XQw4g5bENQC/DKDE2tjG9OJqAV/x3AClQ1PfdbBfNtsFRmBLsjgDWmWf8v923g5Q86on
-	JaJ/4QM36IA3B/UTF/Cg2AIIQ/MhRddHDCBIfT6q8hrfONk1e5Re5QiufCSyafAPR5Vf
-	AxJrKj+3ZjEvBtkYTjlMu54STk7AN5zGZQCT8vjeBlQGULofFmfKt3bEcAbaBDVNiFaK
-	LxidOA32Y4j3nf7ym1X7BJcU5Mu8oOuM0nasliJATiV1Dd3ZPAdKpunAb/4gNYHdhjat
-	7CxQ==
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=zw4nLgC6qNAtnlbauWs3E7f0etqaULNQi1TfrCnejt8=;
+	b=JT4h0SPMY7rnZ8u6Zg+b+FdjczGZOq5UUpQvi0llv0zaUx4wuSGQjzyBl+XZ8uaiq5
+	4WFoMAjnBXx/Ps8bLaj1yxHR2FQnpzwiAEDWSdUeRQe3FjcjZzVUJ58gKGPJXMG14ebF
+	Xy8qfTjegzWrVMarKTF4cue6Rl81M79kwa2lgEQX1qOZ/VNUpfEbBGB45Ix4BpE8CSnN
+	qJdbLyllOMJ/ZqlLlGTYYNHzc3F3dIZ7/28nFm4H7IbHgFvKTkPZXXlnVDOkBQRYcsvQ
+	3D4W/fB2g2k7pYCtIbnM6nWnFO/aVkLBGzqQ5NV5EOXhqVKDM02BDj6FxB/vYeZ+iwpZ
+	pJNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KnhULOXnXvLMb8zOkHIl07T91EBoY8xIRAiy/uh0uog=;
-	b=XvdsbyKfkD97o8HUbErejCb2DLfKWhj2zew5bnRl6Z2F2rRxai/yvw8JmLOp+VAwwD
-	Gx+F13L2jxeMpXHImUYX4a3KARfELNxdH8Y0XS7fYToO9D+h3BUR/zRi/Y/CT3TuSU01
-	uAFSpuLvcmALnG55stQp14x6/czZLMae3HCx2u48X9gZRLM9NZocLiWi97wSWKb8VgPK
-	o50JTl7gb0lJq5LH1PoZNFH9fkj/EFVdb9rSQ62nerlnW2wREpyuG3txXutyHPO9Nm0u
-	dqI2f2RKLajGgS7azMl0c8uWW7u0XFl5BoxYRmBqFX7IeBqP+ylR500771fpUqIedMPf
-	y6Ow==
-X-Gm-Message-State: APt69E0FJUbu/NRBt67AwVznF0ySTB7PtWFH+QtutEP48Tmck/LPDh0h
-	EOKHQJyZwhbERNP4qSyE16hnoA==
-X-Google-Smtp-Source: ADUXVKK+DEew1+A0lE0tj/hDAMoouSZZxBip9IfZf5rmK8n1VNm2r4qli2t8XcWcmYaAzu+0jsqvow==
-X-Received: by 2002:a1c:45db:: with SMTP id l88-v6mr908831wmi.19.1528963429302;
-	Thu, 14 Jun 2018 01:03:49 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	v19-v6sm3712639wmc.9.2018.06.14.01.03.48
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 14 Jun 2018 01:03:48 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jun 2018 08:03:45 +0000
-Message-Id: <20180614080345.4945-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=zw4nLgC6qNAtnlbauWs3E7f0etqaULNQi1TfrCnejt8=;
+	b=LFOzmnHRi0AtQZES7bJ5Aap7KLtg6EWEyR/NRlgpZvV7de4QD6OZ71FPdL3xDClRQv
+	+7QGeulcCTyuQJHcsuf6Cjdjx0ogaEr31rt3RL0TVVdgEiGLxx+ugivN0LGTkWBAumQi
+	qEOjuKg6SMW+mWKdHkkwj7G+xLIu9ynmmb5Y7rSYpcbJKVCClLQJwN6D6Q66XvDB5hN0
+	Pvqdy7Pl87Pu0STz4R5KsNjnYCAs5X0Kpaqmibzu5BV1uOHN7qzDO8+TJnHUg1BkL9mv
+	IiNj9qquZczcGZVBacTA2XaRBZTgLJCPj5ktd0bBLFW665juO7Cm9V90dDMIEKioFp6k
+	Ut9g==
+X-Gm-Message-State: APt69E1p2tMZJJiriliMz9zjkpVUr8gvLxIvX8TyheYcQ2ZYBKwl9qJ4
+	o0VuF384wap7bMlnzYF8qeb0w5tQ
+X-Google-Smtp-Source: ADUXVKKFYR8+hxeyz3maRu4Ut+QFhJUt6mOdLLab+UjD2fHoBBYDCU74X5MGoZJua9i6+9aBNCq0Gw==
+X-Received: by 2002:a63:7b1e:: with SMTP id
+	w30-v6mr3599273pgc.249.1529008578433; 
+	Thu, 14 Jun 2018 13:36:18 -0700 (PDT)
+Received: from [10.43.100.234] (64.2.3.196.ptr.us.xo.net. [64.2.3.196])
+	by smtp.gmail.com with ESMTPSA id
+	v36-v6sm17144377pgn.34.2018.06.14.13.36.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Jun 2018 13:36:17 -0700 (PDT)
+To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1527417740-101974-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<33D4DBCAC5F2D74E96B07F6E7632BF7363AE9AA2@G08CNEXMBPEKD01.g08.fujitsu.local>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
+	Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
+	mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
+	aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
+	mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
+	C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
+	Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
+	7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
+	dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
+	FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABzSFha3VzdGVyODA4
+	IDxha3VzdGVyODA4QGdtYWlsLmNvbT7CwX0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
+	FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
+	vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
+	ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
+	IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
+	g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
+	rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
+	FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
+	wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
+	t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
+	aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
+	oRoyDxDOwU0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
+	Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
+	37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
+	0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
+	IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
+	0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
+	0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
+	ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
+	UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
+	Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAHCwWUEGAEI
+	AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
+	mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
+	ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
+	vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
+	JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
+	EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
+	dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
+	/mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
+	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
+	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
+	8CS2NxU=
+Message-ID: <94432a15-e9c9-97ac-966f-38a9a2a204c9@gmail.com>
+Date: Thu, 14 Jun 2018 13:36:16 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Subject: [PATCH][WIP][rocko][meta-qt5] qt: upgrade to 5.9.6
+In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF7363AE9AA2@G08CNEXMBPEKD01.g08.fujitsu.local>
+Subject: Re: [meta-oe][PATCH] hostapd: fix the bug for PATCHTOOL = "patch"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,1583 +109,2132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jun 2018 08:03:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Jun 2018 20:36:18 -0000
+Content-Type: text/plain; charset=gbk
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-* WIP: waiting for qtdeclarative v5.9.6 tag to be downmerged to 5.9
-  branch
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/nativesdk-qtbase_git.bb           |  6 +++---
- .../qt5/qt3d/0001-Allow-a-tools-only-build.patch |  8 ++++----
- ...Fix-BlenderDNA-for-clang-cross-compiler.patch |  4 ++--
- recipes-qt/qt5/qt3d_git.bb                       |  4 ++--
- recipes-qt/qt5/qt5-git.inc                       |  2 +-
- recipes-qt/qt5/qtbase-native_git.bb              |  6 +++---
- .../qtbase/0001-Add-linux-oe-g-platform.patch    | 16 ++++++++--------
- ...ke-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch |  8 ++++----
- ...allow-to-set-qt.conf-from-the-outside-u.patch |  4 ++--
- ...p-path-length-from-256-to-512-character.patch |  4 ++--
- ...nknown-features-instead-of-erroring-out.patch |  4 ++--
- ...asn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch |  6 +++---
- .../0007-Delete-qlonglong-and-qulonglong.patch   |  4 ++--
- ...-Replace-pthread_yield-with-sched_yield.patch |  6 +++---
- ...dd-OE-specific-specs-for-clang-compiler.patch |  8 ++++----
- ...nvert-conditional-for-defining-QT_SOCKL.patch |  4 ++--
- ...locale-Enable-QT_USE_FENV-only-on-glibc.patch |  4 ++--
- .../qt5/qtbase/0012-Always-build-uic.patch       |  4 ++--
- recipes-qt/qt5/qtbase_git.bb                     |  4 ++--
- recipes-qt/qt5/qtcanvas3d_git.bb                 |  2 +-
- recipes-qt/qt5/qtcharts_git.bb                   |  2 +-
- recipes-qt/qt5/qtconnectivity_git.bb             |  2 +-
- recipes-qt/qt5/qtdatavis3d_git.bb                |  2 +-
- recipes-qt/qt5/qtdeclarative_git.bb              |  2 +-
- recipes-qt/qt5/qtgamepad_git.bb                  |  2 +-
- recipes-qt/qt5/qtgraphicaleffects_git.bb         |  2 +-
- recipes-qt/qt5/qtimageformats_git.bb             |  2 +-
- recipes-qt/qt5/qtlocation_git.bb                 |  2 +-
- ...ultimedia-fix-a-conflicting-declaration.patch | 14 +++++++-------
- recipes-qt/qt5/qtmultimedia_git.bb               |  4 ++--
- ...x-invalid-use-of-incomplete-type-class-.patch |  6 +++---
- recipes-qt/qt5/qtquickcontrols2_git.bb           |  2 +-
- recipes-qt/qt5/qtquickcontrols_git.bb            |  4 ++--
- recipes-qt/qt5/qtremoteobjects_git.bb            |  2 +-
- recipes-qt/qt5/qtscript_git.bb                   |  2 +-
- ...e-external-host-bin-path-for-cmake-file.patch |  2 +-
- recipes-qt/qt5/qtscxml_git.bb                    |  4 ++--
- recipes-qt/qt5/qtsensors_git.bb                  |  2 +-
- recipes-qt/qt5/qtserialbus_git.bb                |  2 +-
- recipes-qt/qt5/qtserialport_git.bb               |  2 +-
- recipes-qt/qt5/qtsvg_git.bb                      |  2 +-
- .../0001-add-noqtwebkit-configuration.patch      |  6 +++---
- ...s-cmake-allow-overriding-the-location-f.patch |  4 ++--
- recipes-qt/qt5/qttools_git.bb                    |  4 ++--
- .../0001-include-sys-time.h-for-timeval.patch    |  2 +-
- recipes-qt/qt5/qtvirtualkeyboard_git.bb          |  4 ++--
- .../0001-fix-build-without-xkbcommon-evdev.patch |  8 ++++----
- recipes-qt/qt5/qtwayland_git.bb                  |  4 ++--
- recipes-qt/qt5/qtwebchannel_git.bb               |  2 +-
- ...ge-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch |  4 ++--
- ...prf-allow-build-for-linux-oe-g-platform.patch |  4 ++--
- ...ickwebengineview_p_p.h-add-include-QCol.patch |  4 ++--
- ...mium-Force-host-toolchain-configuration.patch |  4 ++--
- ...ependency-to-QCoreApplication-translate.patch |  4 ++--
- ...-workaround-for-too-long-.rps-file-name.patch |  4 ++--
- ...0004-Force-host-toolchain-configuration.patch |  6 +++---
- ...-sandbox-Define-TEMP_FAILURE_RETRY-if-n.patch |  4 ++--
- ...-Avoid-mallinfo-APIs-on-non-glibc-linux.patch |  6 +++---
- ...hromium-musl-include-fcntl.h-for-loff_t.patch |  6 +++---
- ...-use-off64_t-instead-of-the-internal-__.patch |  6 +++---
- ...m-musl-linux-glibc-make-the-distinction.patch |  4 ++--
- ...-allocator-Do-not-include-glibc_weak_sy.patch |  4 ++--
- ...-Use-correct-member-name-__si_fields-fr.patch |  4 ++--
- ...omium-musl-Match-syscalls-to-match-musl.patch |  4 ++--
- ...-Define-res_ninit-and-res_nclose-for-no.patch | 14 +++++++-------
- ...omium-musl-Do-not-define-__sbrk-on-musl.patch |  6 +++---
- ...-musl-Adjust-default-pthread-stack-size.patch | 10 +++++-----
- ...-include-asm-generic-ioctl.h-for-TCGETS.patch |  4 ++--
- ...-tcmalloc-Use-off64_t-insread-of-__off6.patch |  6 +++---
- recipes-qt/qt5/qtwebengine_git.bb                |  8 ++++----
- recipes-qt/qt5/qtwebsockets_git.bb               |  2 +-
- recipes-qt/qt5/qtwebview_git.bb                  |  2 +-
- recipes-qt/qt5/qtx11extras_git.bb                |  2 +-
- recipes-qt/qt5/qtxmlpatterns_git.bb              |  2 +-
- 74 files changed, 165 insertions(+), 165 deletions(-)
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 2b8a4d3..0b6b7ce 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -26,7 +26,7 @@ FILESEXTRAPATHS =. "${FILE_DIRNAME}/qtbase:"
- 
- # common for qtbase-native, qtbase-nativesdk and qtbase
- # Patches from https://github.com/meta-qt5/qtbase/commits/b5.9-shared
--# 5.9.meta-qt5-shared.5
-+# 5.9.meta-qt5-shared.6
- SRC_URI += "\
-     file://0001-Add-linux-oe-g-platform.patch \
-     file://0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch \
-@@ -43,7 +43,7 @@ SRC_URI += "\
- 
- # common for qtbase-native and nativesdk-qtbase
- # Patches from https://github.com/meta-qt5/qtbase/commits/b5.9-native
--# 5.9.meta-qt5-native.5
-+# 5.9.meta-qt5-native.6
- SRC_URI += " \
-     file://0012-Always-build-uic.patch \
- "
-@@ -200,4 +200,4 @@ fakeroot do_generate_qt_environment_file() {
- 
- addtask generate_qt_environment_file after do_install before do_package
- 
--SRCREV = "f2095f2c66d0dae8525879f6c14165ace650e7f1"
-+SRCREV = "9c50112304033c631e52f062496f3111f24835a2"
-diff --git a/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch b/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
-index 31598de..cbcf014 100644
---- a/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
-+++ b/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
-@@ -1,4 +1,4 @@
--From f61a6e50fbff57b17c113a70d8c50e460831fe70 Mon Sep 17 00:00:00 2001
-+From 14826486fbde132cdea45837b645b3cfe26630ee Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@theqtcompany.com>
- Date: Wed, 10 Feb 2016 09:02:09 +0200
- Subject: [PATCH] Allow a tools-only build
-@@ -10,7 +10,7 @@ Subject: [PATCH] Allow a tools-only build
-  3 files changed, 8 insertions(+), 3 deletions(-)
- 
- diff --git a/qt3d.pro b/qt3d.pro
--index 2cc347a..81cdeef 100644
-+index 2cc347a1c..81cdeefb0 100644
- --- a/qt3d.pro
- +++ b/qt3d.pro
- @@ -1,4 +1,4 @@
-@@ -29,7 +29,7 @@ index 2cc347a..81cdeef 100644
- +    SUBDIRS = sub_tools
- +}
- diff --git a/src/3rdparty/assimp/assimp_dependency.pri b/src/3rdparty/assimp/assimp_dependency.pri
--index 8ba2d9a..e973d93 100644
-+index 8ba2d9a41..e973d93dd 100644
- --- a/src/3rdparty/assimp/assimp_dependency.pri
- +++ b/src/3rdparty/assimp/assimp_dependency.pri
- @@ -1,5 +1,5 @@
-@@ -40,7 +40,7 @@ index 8ba2d9a..e973d93 100644
-  } else {
-      include(assimp.pri)
- diff --git a/tools/tools.pro b/tools/tools.pro
--index 8e973ae..ad51db5 100644
-+index 8e973aecb..ad51db585 100644
- --- a/tools/tools.pro
- +++ b/tools/tools.pro
- @@ -1,4 +1,4 @@
-diff --git a/recipes-qt/qt5/qt3d/0002-Fix-BlenderDNA-for-clang-cross-compiler.patch b/recipes-qt/qt5/qt3d/0002-Fix-BlenderDNA-for-clang-cross-compiler.patch
-index d6875f3..ef218a1 100644
---- a/recipes-qt/qt5/qt3d/0002-Fix-BlenderDNA-for-clang-cross-compiler.patch
-+++ b/recipes-qt/qt5/qt3d/0002-Fix-BlenderDNA-for-clang-cross-compiler.patch
-@@ -1,4 +1,4 @@
--From 535d2ecd0ccaae5a36d40e9b64ffa2ef32f09cdb Mon Sep 17 00:00:00 2001
-+From 6e528d8c4d82f6e4a1948086ac41230b5f3a773b Mon Sep 17 00:00:00 2001
- From: Kim Kulling <kim.kulling@googlemail.com>
- Date: Mon, 7 Nov 2016 17:19:49 +0100
- Subject: [PATCH] Fix BlenderDNA for clang cross compiler.
-@@ -9,7 +9,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 file changed, 8 insertions(+), 8 deletions(-)
- 
- diff --git a/src/3rdparty/assimp/code/BlenderDNA.cpp b/src/3rdparty/assimp/code/BlenderDNA.cpp
--index 18ec9f2..5b0b209 100644
-+index 18ec9f2b4..5b0b2090f 100644
- --- a/src/3rdparty/assimp/code/BlenderDNA.cpp
- +++ b/src/3rdparty/assimp/code/BlenderDNA.cpp
- @@ -55,10 +55,10 @@ using namespace Assimp::Formatter;
-diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index 19925b3..3eadbb9 100644
---- a/recipes-qt/qt5/qt3d_git.bb
-+++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -12,7 +12,7 @@ DEPENDS += "qtbase"
- DEPENDS_class-target += "qtdeclarative qt3d-native"
- 
- # Patches from https://github.com/meta-qt5/qt3d/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += " \
-     file://0001-Allow-a-tools-only-build.patch \
-     file://0002-Fix-BlenderDNA-for-clang-cross-compiler.patch \
-@@ -37,6 +37,6 @@ do_configure_prepend() {
-          ${S}/src/quick3d/imports/input/importsinput.pro
- }
- 
--SRCREV = "2970ef3dacda02fdf52ac25f3b93694eb06e6f7f"
-+SRCREV = "ea18da8361e8406cf1cb567a407429afcd65552a"
- 
- BBCLASSEXTEND += "native nativesdk"
-diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index d7e3f34..f55a2c0 100644
---- a/recipes-qt/qt5/qt5-git.inc
-+++ b/recipes-qt/qt5/qt5-git.inc
-@@ -14,4 +14,4 @@ CVE_PRODUCT = "qt"
- 
- S = "${WORKDIR}/git"
- 
--PV = "5.9.5+git${SRCPV}"
-+PV = "5.9.6+git${SRCPV}"
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 0115a97..698418d 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -21,7 +21,7 @@ require qt5-git.inc
- 
- # common for qtbase-native, qtbase-nativesdk and qtbase
- # Patches from https://github.com/meta-qt5/qtbase/commits/b5.9-shared
--# 5.9.meta-qt5-shared.5
-+# 5.9.meta-qt5-shared.6
- SRC_URI += "\
-     file://0001-Add-linux-oe-g-platform.patch \
-     file://0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch \
-@@ -38,7 +38,7 @@ SRC_URI += "\
- 
- # common for qtbase-native and nativesdk-qtbase
- # Patches from https://github.com/meta-qt5/qtbase/commits/b5.9-native
--# 5.9.meta-qt5-native.5
-+# 5.9.meta-qt5-native.6
- SRC_URI += " \
-     file://0012-Always-build-uic.patch \
- "
-@@ -125,4 +125,4 @@ do_install() {
-     echo 'set(_qt5_corelib_extra_includes "${_qt5Core_install_prefix}/lib${QT_DIR_NAME}/mkspecs/linux-oe-g++")' > ${D}${libdir}/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake
- }
- 
--SRCREV = "f2095f2c66d0dae8525879f6c14165ace650e7f1"
-+SRCREV = "9c50112304033c631e52f062496f3111f24835a2"
-diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-index e99a0c2..9e815a9 100644
---- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-@@ -1,4 +1,4 @@
--From f289763d524fb4012c95191f1ed9c5c680c33b28 Mon Sep 17 00:00:00 2001
-+From 61220bdf923797b8d13b27c1601894a3743eeb7a Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Mon, 15 Apr 2013 04:29:32 +0200
- Subject: [PATCH] Add linux-oe-g++ platform
-@@ -21,16 +21,16 @@ Change-Id: I0591ed5da0d61d7cf1509d420e6b293582f1863c
- Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
- ---
-  configure                            |  2 +-
-- mkspecs/features/configure.prf       |  4 ++--
-+ mkspecs/features/configure.prf       |  4 +--
-  mkspecs/features/qt_functions.prf    |  2 +-
-- mkspecs/linux-oe-g++/qmake.conf      | 43 ++++++++++++++++++++++++++++++++++++
-+ mkspecs/linux-oe-g++/qmake.conf      | 43 ++++++++++++++++++++++++++++
-  mkspecs/linux-oe-g++/qplatformdefs.h |  1 +
-  5 files changed, 48 insertions(+), 4 deletions(-)
-  create mode 100644 mkspecs/linux-oe-g++/qmake.conf
-  create mode 100644 mkspecs/linux-oe-g++/qplatformdefs.h
- 
- diff --git a/configure b/configure
--index 08b49a8..5876721 100755
-+index 08b49a8d12..5876721743 100755
- --- a/configure
- +++ b/configure
- @@ -712,7 +712,7 @@ fi
-@@ -43,7 +43,7 @@ index 08b49a8..5876721 100755
-  
-  # build qmake
- diff --git a/mkspecs/features/configure.prf b/mkspecs/features/configure.prf
--index 934a18a..0f5b1b6 100644
-+index 934a18a924..0f5b1b6333 100644
- --- a/mkspecs/features/configure.prf
- +++ b/mkspecs/features/configure.prf
- @@ -46,14 +46,14 @@ defineTest(qtCompileTest) {
-@@ -64,7 +64,7 @@ index 934a18a..0f5b1b6 100644
-              msg = "test $$1 succeeded"
-              write_file($$QMAKE_CONFIG_LOG, msg, append)
- diff --git a/mkspecs/features/qt_functions.prf b/mkspecs/features/qt_functions.prf
--index 1903e50..c093dd4 100644
-+index 1903e509c8..c093dd4592 100644
- --- a/mkspecs/features/qt_functions.prf
- +++ b/mkspecs/features/qt_functions.prf
- @@ -69,7 +69,7 @@ defineTest(qtHaveModule) {
-@@ -78,7 +78,7 @@ index 1903e50..c093dd4 100644
-              cmd = perl -w $$system_path($${cmd}.pl)
- diff --git a/mkspecs/linux-oe-g++/qmake.conf b/mkspecs/linux-oe-g++/qmake.conf
- new file mode 100644
--index 0000000..c1837e6
-+index 0000000000..c1837e6d55
- --- /dev/null
- +++ b/mkspecs/linux-oe-g++/qmake.conf
- @@ -0,0 +1,43 @@
-@@ -127,7 +127,7 @@ index 0000000..c1837e6
- +load(qt_config)
- diff --git a/mkspecs/linux-oe-g++/qplatformdefs.h b/mkspecs/linux-oe-g++/qplatformdefs.h
- new file mode 100644
--index 0000000..5d22fb4
-+index 0000000000..5d22fb4101
- --- /dev/null
- +++ b/mkspecs/linux-oe-g++/qplatformdefs.h
- @@ -0,0 +1 @@
-diff --git a/recipes-qt/qt5/qtbase/0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch b/recipes-qt/qt5/qtbase/0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch
-index 5d247d1..f544e10 100644
---- a/recipes-qt/qt5/qtbase/0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch
-+++ b/recipes-qt/qt5/qtbase/0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch
-@@ -1,4 +1,4 @@
--From 3ffab93bd68226b63350a38fdb64b64ab66a808b Mon Sep 17 00:00:00 2001
-+From 709a7e5e70927e07e66e57414c6b4ed67560217e Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Sat, 6 Apr 2013 13:15:07 +0200
- Subject: [PATCH] cmake: Use OE_QMAKE_PATH_EXTERNAL_HOST_BINS
-@@ -19,7 +19,7 @@ Change-Id: Iacaa1c5531cd6dcc094891610c351673db55d7b2
-  3 files changed, 6 insertions(+), 6 deletions(-)
- 
- diff --git a/src/corelib/Qt5CoreConfigExtras.cmake.in b/src/corelib/Qt5CoreConfigExtras.cmake.in
--index 545b9a3..c991a9b 100644
-+index 545b9a3d1e..c991a9ba41 100644
- --- a/src/corelib/Qt5CoreConfigExtras.cmake.in
- +++ b/src/corelib/Qt5CoreConfigExtras.cmake.in
- @@ -5,7 +5,7 @@ if (NOT TARGET Qt5::qmake)
-@@ -50,7 +50,7 @@ index 545b9a3..c991a9b 100644
-      _qt5_Core_check_file_exists(${imported_location})
-  
- diff --git a/src/dbus/Qt5DBusConfigExtras.cmake.in b/src/dbus/Qt5DBusConfigExtras.cmake.in
--index 1d94715..301af8f 100644
-+index 1d947159e2..301af8f1b2 100644
- --- a/src/dbus/Qt5DBusConfigExtras.cmake.in
- +++ b/src/dbus/Qt5DBusConfigExtras.cmake.in
- @@ -5,7 +5,7 @@ if (NOT TARGET Qt5::qdbuscpp2xml)
-@@ -72,7 +72,7 @@ index 1d94715..301af8f 100644
-      _qt5_DBus_check_file_exists(${imported_location})
-  
- diff --git a/src/widgets/Qt5WidgetsConfigExtras.cmake.in b/src/widgets/Qt5WidgetsConfigExtras.cmake.in
--index 99d87e2..5621dc0 100644
-+index 99d87e2e46..5621dc0fae 100644
- --- a/src/widgets/Qt5WidgetsConfigExtras.cmake.in
- +++ b/src/widgets/Qt5WidgetsConfigExtras.cmake.in
- @@ -5,7 +5,7 @@ if (NOT TARGET Qt5::uic)
-diff --git a/recipes-qt/qt5/qtbase/0003-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch b/recipes-qt/qt5/qtbase/0003-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
-index e137b08..7ab90df 100644
---- a/recipes-qt/qt5/qtbase/0003-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
-+++ b/recipes-qt/qt5/qtbase/0003-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
-@@ -1,4 +1,4 @@
--From b3c893e8af76e64d59051401fd86acd24f4d5369 Mon Sep 17 00:00:00 2001
-+From a1cb244c77c988b45b5597b4ffc4398ccb668fd4 Mon Sep 17 00:00:00 2001
- From: Holger Freyther <zecke@selfish.org>
- Date: Wed, 26 Sep 2012 17:22:30 +0200
- Subject: [PATCH] qlibraryinfo: allow to set qt.conf from the outside using the
-@@ -19,7 +19,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 file changed, 4 insertions(+), 1 deletion(-)
- 
- diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
--index b4ba0b5..11d4c00 100644
-+index b4ba0b5b2e..11d4c00f39 100644
- --- a/src/corelib/global/qlibraryinfo.cpp
- +++ b/src/corelib/global/qlibraryinfo.cpp
- @@ -172,7 +172,10 @@ void QLibrarySettings::load()
-diff --git a/recipes-qt/qt5/qtbase/0004-configure-bump-path-length-from-256-to-512-character.patch b/recipes-qt/qt5/qtbase/0004-configure-bump-path-length-from-256-to-512-character.patch
-index 9d1f296..44a20d4 100644
---- a/recipes-qt/qt5/qtbase/0004-configure-bump-path-length-from-256-to-512-character.patch
-+++ b/recipes-qt/qt5/qtbase/0004-configure-bump-path-length-from-256-to-512-character.patch
-@@ -1,4 +1,4 @@
--From 4c827328e3d654b4e179864149cb9edee1a58f53 Mon Sep 17 00:00:00 2001
-+From 0a1329319dcc60f041090abb4625054ed94d6097 Mon Sep 17 00:00:00 2001
- From: Denys Dmytriyenko <denys@ti.com>
- Date: Tue, 25 Aug 2015 10:05:15 -0400
- Subject: [PATCH] configure: bump path length from 256 to 512 characters
-@@ -15,7 +15,7 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-  1 file changed, 3 insertions(+), 3 deletions(-)
- 
- diff --git a/configure.pri b/configure.pri
--index dc703ec..961b41e 100644
-+index dc703ecb14..961b41e3f8 100644
- --- a/configure.pri
- +++ b/configure.pri
- @@ -796,10 +796,10 @@ defineTest(qtConfOutput_preparePaths) {
-diff --git a/recipes-qt/qt5/qtbase/0005-Disable-all-unknown-features-instead-of-erroring-out.patch b/recipes-qt/qt5/qtbase/0005-Disable-all-unknown-features-instead-of-erroring-out.patch
-index 8dade54..746b136 100644
---- a/recipes-qt/qt5/qtbase/0005-Disable-all-unknown-features-instead-of-erroring-out.patch
-+++ b/recipes-qt/qt5/qtbase/0005-Disable-all-unknown-features-instead-of-erroring-out.patch
-@@ -1,4 +1,4 @@
--From 6ca3f881b0d0f6feb824aad35ce85ddb3be2146b Mon Sep 17 00:00:00 2001
-+From 7e7249e3355264733f1dbfbc7dc7d3f85d890951 Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@qt.io>
- Date: Mon, 24 Oct 2016 09:45:18 +0300
- Subject: [PATCH] Disable all unknown features instead of erroring out
-@@ -10,7 +10,7 @@ Change-Id: Ib884fe33cac74439f9592b145937f6b75ced8447
-  1 file changed, 2 insertions(+), 1 deletion(-)
- 
- diff --git a/mkspecs/features/qt_configure.prf b/mkspecs/features/qt_configure.prf
--index d5dcda2..501151d 100644
-+index d5dcda22ac..501151d27f 100644
- --- a/mkspecs/features/qt_configure.prf
- +++ b/mkspecs/features/qt_configure.prf
- @@ -1251,7 +1251,8 @@ defineReplace(qtConfEvaluateSingleExpression) {
-diff --git a/recipes-qt/qt5/qtbase/0006-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch b/recipes-qt/qt5/qtbase/0006-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-index 9aefbf9..bfeedbe 100644
---- a/recipes-qt/qt5/qtbase/0006-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-+++ b/recipes-qt/qt5/qtbase/0006-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-@@ -1,4 +1,4 @@
--From 9c6fc0f0e5f2da02b6b2a21c113f6b29588fc52c Mon Sep 17 00:00:00 2001
-+From d1303277bc34d8ab38082ead9733c25a3ab2a236 Mon Sep 17 00:00:00 2001
- From: Pascal Bach <pascal.bach@siemens.com>
- Date: Wed, 11 May 2016 15:20:41 +0200
- Subject: [PATCH] Pretend Qt5 wasn't found if OE_QMAKE_PATH_EXTERNAL_HOST_BINS
-@@ -30,7 +30,7 @@ Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
-  2 files changed, 10 insertions(+)
- 
- diff --git a/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in b/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in
--index 55c74aa..f9ec328 100644
-+index 55c74aad66..f9ec328c83 100644
- --- a/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in
- +++ b/mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in
- @@ -9,6 +9,11 @@ if (CMAKE_VERSION VERSION_LESS 3.0.0)
-@@ -46,7 +46,7 @@ index 55c74aa..f9ec328 100644
-  !!IF !isEmpty(CMAKE_LIB_DIR_IS_ABSOLUTE)
-  set(_qt5$${CMAKE_MODULE_NAME}_install_prefix \"$$[QT_INSTALL_PREFIX]\")
- diff --git a/src/corelib/Qt5Config.cmake.in b/src/corelib/Qt5Config.cmake.in
--index 75b5348..ed31888 100644
-+index 75b53485b7..ed31888c93 100644
- --- a/src/corelib/Qt5Config.cmake.in
- +++ b/src/corelib/Qt5Config.cmake.in
- @@ -3,6 +3,11 @@ if (CMAKE_VERSION VERSION_LESS 2.8.9)
-diff --git a/recipes-qt/qt5/qtbase/0007-Delete-qlonglong-and-qulonglong.patch b/recipes-qt/qt5/qtbase/0007-Delete-qlonglong-and-qulonglong.patch
-index 3d687c7..8f1bd59 100644
---- a/recipes-qt/qt5/qtbase/0007-Delete-qlonglong-and-qulonglong.patch
-+++ b/recipes-qt/qt5/qtbase/0007-Delete-qlonglong-and-qulonglong.patch
-@@ -1,4 +1,4 @@
--From 70eb95bcde17f4e67b4660caa8183e24ec876102 Mon Sep 17 00:00:00 2001
-+From 98c2a414a359ad8ceba511292ac6962deba78356 Mon Sep 17 00:00:00 2001
- From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
- Date: Wed, 7 Jun 2017 21:00:49 +0900
- Subject: [PATCH] Delete qlonglong and qulonglong
-@@ -9,7 +9,7 @@ Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-  1 file changed, 2 deletions(-)
- 
- diff --git a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
--index 09458bd..59a120e 100644
-+index 09458bd9c3..59a120eb26 100644
- --- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
- +++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
- @@ -5,10 +5,8 @@ SUBDIRS=\
-diff --git a/recipes-qt/qt5/qtbase/0008-Replace-pthread_yield-with-sched_yield.patch b/recipes-qt/qt5/qtbase/0008-Replace-pthread_yield-with-sched_yield.patch
-index 71ab6ff..f2e9d68 100644
---- a/recipes-qt/qt5/qtbase/0008-Replace-pthread_yield-with-sched_yield.patch
-+++ b/recipes-qt/qt5/qtbase/0008-Replace-pthread_yield-with-sched_yield.patch
-@@ -1,4 +1,4 @@
--From 08d705e3a5e16ba75b0ca281400bba0d85f64f77 Mon Sep 17 00:00:00 2001
-+From 83d9a275c09352558e69445cb453020861ae3f6e Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Thu, 27 Jul 2017 08:02:51 -0700
- Subject: [PATCH] Replace pthread_yield with sched_yield
-@@ -14,7 +14,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  2 files changed, 5 insertions(+), 4 deletions(-)
- 
- diff --git a/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp b/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp
--index f9ddd59..2f92db9 100644
-+index f9ddd59aaa..2f92db983d 100644
- --- a/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp
- +++ b/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp
- @@ -34,7 +34,7 @@
-@@ -36,7 +36,7 @@ index f9ddd59..2f92db9 100644
-              QMetaType info(tp);
-              if (!info.isValid()) {
- diff --git a/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp b/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp
--index f64a88c..997218b 100644
-+index f64a88cc05..997218b2b4 100644
- --- a/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp
- +++ b/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp
- @@ -77,6 +77,7 @@
-diff --git a/recipes-qt/qt5/qtbase/0009-Add-OE-specific-specs-for-clang-compiler.patch b/recipes-qt/qt5/qtbase/0009-Add-OE-specific-specs-for-clang-compiler.patch
-index d393352..c3124b4 100644
---- a/recipes-qt/qt5/qtbase/0009-Add-OE-specific-specs-for-clang-compiler.patch
-+++ b/recipes-qt/qt5/qtbase/0009-Add-OE-specific-specs-for-clang-compiler.patch
-@@ -1,11 +1,11 @@
--From 1b576218b875cd10fcbcbd227d0011fc0bb917da Mon Sep 17 00:00:00 2001
-+From eeb0e3cafc02ae185a75f932176339002f6338ba Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 3 Sep 2017 09:11:44 -0700
- Subject: [PATCH] Add OE specific specs for clang compiler
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- mkspecs/linux-oe-clang/qmake.conf      | 43 ++++++++++++++++++++++++++++++++++
-+ mkspecs/linux-oe-clang/qmake.conf      | 43 ++++++++++++++++++++++++++
-  mkspecs/linux-oe-clang/qplatformdefs.h |  1 +
-  2 files changed, 44 insertions(+)
-  create mode 100644 mkspecs/linux-oe-clang/qmake.conf
-@@ -13,7 +13,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
- diff --git a/mkspecs/linux-oe-clang/qmake.conf b/mkspecs/linux-oe-clang/qmake.conf
- new file mode 100644
--index 0000000..ffc9f05
-+index 0000000000..ffc9f051db
- --- /dev/null
- +++ b/mkspecs/linux-oe-clang/qmake.conf
- @@ -0,0 +1,43 @@
-@@ -62,7 +62,7 @@ index 0000000..ffc9f05
- +load(qt_config)
- diff --git a/mkspecs/linux-oe-clang/qplatformdefs.h b/mkspecs/linux-oe-clang/qplatformdefs.h
- new file mode 100644
--index 0000000..880c927
-+index 0000000000..880c927b21
- --- /dev/null
- +++ b/mkspecs/linux-oe-clang/qplatformdefs.h
- @@ -0,0 +1 @@
-diff --git a/recipes-qt/qt5/qtbase/0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch b/recipes-qt/qt5/qtbase/0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch
-index 6e8aa73..9bcb793 100644
---- a/recipes-qt/qt5/qtbase/0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch
-+++ b/recipes-qt/qt5/qtbase/0010-linux-clang-Invert-conditional-for-defining-QT_SOCKL.patch
-@@ -1,4 +1,4 @@
--From c295b6fad2183ff47c8f5c061484713f2fe44583 Mon Sep 17 00:00:00 2001
-+From 1bd6f92d57ff09665241343870ebf6c4882c62e4 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 3 Sep 2017 09:44:48 -0700
- Subject: [PATCH] linux-clang: Invert conditional for defining QT_SOCKLEN_T
-@@ -13,7 +13,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 3 insertions(+), 3 deletions(-)
- 
- diff --git a/mkspecs/linux-clang/qplatformdefs.h b/mkspecs/linux-clang/qplatformdefs.h
--index d29225f..a0cdb57 100644
-+index d29225f12f..a0cdb57343 100644
- --- a/mkspecs/linux-clang/qplatformdefs.h
- +++ b/mkspecs/linux-clang/qplatformdefs.h
- @@ -84,10 +84,10 @@
-diff --git a/recipes-qt/qt5/qtbase/0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch b/recipes-qt/qt5/qtbase/0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch
-index ab124fe..ab52eef 100644
---- a/recipes-qt/qt5/qtbase/0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch
-+++ b/recipes-qt/qt5/qtbase/0011-tst_qlocale-Enable-QT_USE_FENV-only-on-glibc.patch
-@@ -1,4 +1,4 @@
--From 5d00d9490866ee2b3eb88463f45b7d5ea0a8654a Mon Sep 17 00:00:00 2001
-+From e9aabbb5549dd76cbc3a6dc5723bbe56559a9fa7 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 3 Sep 2017 10:11:50 -0700
- Subject: [PATCH] tst_qlocale: Enable QT_USE_FENV only on glibc
-@@ -11,7 +11,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/tests/auto/corelib/tools/qlocale/tst_qlocale.cpp b/tests/auto/corelib/tools/qlocale/tst_qlocale.cpp
--index 10d78b1..a59f358 100644
-+index 10d78b1f2f..a59f358f80 100644
- --- a/tests/auto/corelib/tools/qlocale/tst_qlocale.cpp
- +++ b/tests/auto/corelib/tools/qlocale/tst_qlocale.cpp
- @@ -46,7 +46,7 @@
-diff --git a/recipes-qt/qt5/qtbase/0012-Always-build-uic.patch b/recipes-qt/qt5/qtbase/0012-Always-build-uic.patch
-index 0cb36e1..ab65ce1 100644
---- a/recipes-qt/qt5/qtbase/0012-Always-build-uic.patch
-+++ b/recipes-qt/qt5/qtbase/0012-Always-build-uic.patch
-@@ -1,4 +1,4 @@
--From 7ad9a6e116879730543ae947abef0fe74a5b0dbb Mon Sep 17 00:00:00 2001
-+From a3ec19c34cc14e21a66ee723827219f8c04965da Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Sat, 16 Nov 2013 00:32:30 +0100
- Subject: [PATCH] Always build uic
-@@ -14,7 +14,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/src/src.pro b/src/src.pro
--index 3e32f7e..18b268b 100644
-+index 3e32f7edb0..18b268bf5e 100644
- --- a/src/src.pro
- +++ b/src/src.pro
- @@ -205,7 +205,7 @@ qtConfig(gui) {
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index e03679e..307e407 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = " \
- 
- # common for qtbase-native, qtbase-nativesdk and qtbase
- # Patches from https://github.com/meta-qt5/qtbase/commits/b5.9-shared
--# 5.9.meta-qt5-shared.5
-+# 5.9.meta-qt5-shared.6
- SRC_URI += "\
-     file://0001-Add-linux-oe-g-platform.patch \
-     file://0002-cmake-Use-OE_QMAKE_PATH_EXTERNAL_HOST_BINS.patch \
-@@ -215,4 +215,4 @@ INSANE_SKIP_${PN}-mkspecs += "file-rdeps"
- 
- RRECOMMENDS_${PN}-plugins += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11-locale', '', d)}"
- 
--SRCREV = "f2095f2c66d0dae8525879f6c14165ace650e7f1"
-+SRCREV = "9c50112304033c631e52f062496f3111f24835a2"
-diff --git a/recipes-qt/qt5/qtcanvas3d_git.bb b/recipes-qt/qt5/qtcanvas3d_git.bb
-index bdb46f8..6fa5926 100644
---- a/recipes-qt/qt5/qtcanvas3d_git.bb
-+++ b/recipes-qt/qt5/qtcanvas3d_git.bb
-@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS = "qtdeclarative"
- 
--SRCREV = "5b920d86dbc00f05f5679bcf8fe9ee1ba19b06f7"
-+SRCREV = "569495de338821ad89153b69a59a5364fc96a49a"
-diff --git a/recipes-qt/qt5/qtcharts_git.bb b/recipes-qt/qt5/qtcharts_git.bb
-index 7a6f7a0..3035d5a 100644
---- a/recipes-qt/qt5/qtcharts_git.bb
-+++ b/recipes-qt/qt5/qtcharts_git.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase qtdeclarative qtmultimedia"
- 
--SRCREV = "47e3a4b81832932f1500c61762fb6d47e0fa8cc2"
-+SRCREV = "6acb93f08af0133d3230cd7f9db5f9e0146d7fbf"
- 
- # The same issue as in qtbase:
- # http://errors.yoctoproject.org/Errors/Details/152641/
-diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-index d6f9c06..6995b97 100644
---- a/recipes-qt/qt5/qtconnectivity_git.bb
-+++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -19,4 +19,4 @@ PACKAGECONFIG[bluez] = "-feature-bluez,-no-feature-bluez,${BLUEZ}"
- 
- EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
- 
--SRCREV = "b88b57c56b14c88dce83d7c267b5d52d18fd784a"
-+SRCREV = "513e69bd6aca390d7e6ef28d3527c24dee99ee2b"
-diff --git a/recipes-qt/qt5/qtdatavis3d_git.bb b/recipes-qt/qt5/qtdatavis3d_git.bb
-index aa1daeb..f1dfaa8 100644
---- a/recipes-qt/qt5/qtdatavis3d_git.bb
-+++ b/recipes-qt/qt5/qtdatavis3d_git.bb
-@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase qtdeclarative qtmultimedia qtxmlpatterns"
- 
--SRCREV = "c3c6e604ee1193deb1bbff8e6f26ea2aeefdbe91"
-+SRCREV = "4d2efb91ebbdc08ca70ee63a479367d75d5a6357"
-diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
-index 42fc6c6..8f49d97 100644
---- a/recipes-qt/qt5/qtdeclarative_git.bb
-+++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -30,6 +30,6 @@ do_install_append_class-nativesdk() {
- 
- EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
- 
--SRCREV = "f23d1d54a06b0f3473e17300c3a1c495bcc25fdc"
-+SRCREV = "283a900c4e8518fef33a2c89cb597fbf1e6ad78c"
- 
- BBCLASSEXTEND =+ "native nativesdk"
-diff --git a/recipes-qt/qt5/qtgamepad_git.bb b/recipes-qt/qt5/qtgamepad_git.bb
-index e07cc99..01d97de 100644
---- a/recipes-qt/qt5/qtgamepad_git.bb
-+++ b/recipes-qt/qt5/qtgamepad_git.bb
-@@ -14,4 +14,4 @@ PACKAGECONFIG[sdl2] = "-feature-sdl2,-no-feature-sdl2,libsdl2"
- 
- EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
- 
--SRCREV = "d1054b8e44d17ecbfae3cd455e07d6c379ef099a"
-+SRCREV = "91b692255f5cb7012000694ff46ea0346293baf5"
-diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-index 6df632f..27488ce 100644
---- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
-+++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-@@ -18,4 +18,4 @@ RDEPENDS_${PN}-dev = ""
- # http://errors.yoctoproject.org/Errors/Build/44912/
- LDFLAGS_append_x86 = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
- 
--SRCREV = "c9a0a0f661d5ce789e5ab6743782afa463dd289a"
-+SRCREV = "f61dcaa5e5ef8f5da1b37b25e4bd17469e72ce55"
-diff --git a/recipes-qt/qt5/qtimageformats_git.bb b/recipes-qt/qt5/qtimageformats_git.bb
-index bef03e0..c219098 100644
---- a/recipes-qt/qt5/qtimageformats_git.bb
-+++ b/recipes-qt/qt5/qtimageformats_git.bb
-@@ -26,4 +26,4 @@ PACKAGECONFIG[libwebp] = ",CONFIG+=done_config_libwebp,libwebp"
- 
- EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
--SRCREV = "bcc376e41f1e99a16bcf9c86b0d8112dd2010b52"
-+SRCREV = "e9daef6d8f60015906c1e62e2875b2b6c1494465"
-diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
-index 0af3946..cd24167 100644
---- a/recipes-qt/qt5/qtlocation_git.bb
-+++ b/recipes-qt/qt5/qtlocation_git.bb
-@@ -29,7 +29,7 @@ SRC_URI += " \
-     ${QT_GIT}/qtlocation-mapboxgl.git;name=qtlocation-mapboxgl;branch=upstream/qt-staging;protocol=${QT_GIT_PROTOCOL};destsuffix=git/src/3rdparty/mapbox-gl-native \
- "
- 
--SRCREV_qtlocation = "4f8604bf7a94e64f40f5bb769d2105ca4e2f8e9b"
-+SRCREV_qtlocation = "b0dd210c2dccd7c1c295cc8cba9872fae6dffe54"
- SRCREV_qtlocation-mapboxgl = "8c1be4ec01ef46bf453856531ebf53b48ce3dbe7"
- 
- SRCREV_FORMAT = "qtlocation_qtlocation-mapboxgl"
-diff --git a/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch b/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch
-index 0bcac42..f3d19de 100644
---- a/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch
-+++ b/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch
-@@ -1,4 +1,4 @@
--From bf2fa82b9ee1a9ab38ddbcdd68327bb5aed06c12 Mon Sep 17 00:00:00 2001
-+From ee219bf33cf52c7a7eab7c02823b2e4960392ce0 Mon Sep 17 00:00:00 2001
- From: Wenlin Kang <wenlin.kang@windriver.com>
- Date: Thu, 8 Sep 2016 12:18:13 +0800
- Subject: [PATCH] qtmultimedia: fix a conflicting declaration
-@@ -8,15 +8,15 @@ fix a "conflicting declaration" error.
- 
- Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
- ---
-- src/plugins/videonode/imx6/lgl2.h                  | 46 ++++++++++++++++++++++
-- .../videonode/imx6/qsgvivantevideomaterial.cpp     |  5 ++-
-- src/plugins/videonode/imx6/qsgvivantevideonode.cpp |  5 ++-
-+ src/plugins/videonode/imx6/lgl2.h             | 46 +++++++++++++++++++
-+ .../imx6/qsgvivantevideomaterial.cpp          |  5 +-
-+ .../videonode/imx6/qsgvivantevideonode.cpp    |  5 +-
-  3 files changed, 52 insertions(+), 4 deletions(-)
-  create mode 100644 src/plugins/videonode/imx6/lgl2.h
- 
- diff --git a/src/plugins/videonode/imx6/lgl2.h b/src/plugins/videonode/imx6/lgl2.h
- new file mode 100644
--index 0000000..2423697
-+index 00000000..24236976
- --- /dev/null
- +++ b/src/plugins/videonode/imx6/lgl2.h
- @@ -0,0 +1,46 @@
-@@ -67,7 +67,7 @@ index 0000000..2423697
- +
- +#endif
- diff --git a/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp b/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp
--index 465ccfa..40e7592 100644
-+index 465ccfa7..40e7592b 100644
- --- a/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp
- +++ b/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp
- @@ -37,8 +37,9 @@
-@@ -83,7 +83,7 @@ index 465ccfa..40e7592 100644
-  #include "qsgvivantevideomaterial.h"
-  #include "qsgvivantevideomaterialshader.h"
- diff --git a/src/plugins/videonode/imx6/qsgvivantevideonode.cpp b/src/plugins/videonode/imx6/qsgvivantevideonode.cpp
--index c8d83b4..5b1b8f2 100644
-+index c8d83b4b..5b1b8f24 100644
- --- a/src/plugins/videonode/imx6/qsgvivantevideonode.cpp
- +++ b/src/plugins/videonode/imx6/qsgvivantevideonode.cpp
- @@ -37,8 +37,9 @@
-diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-index 0268c87..b68ec9f 100644
---- a/recipes-qt/qt5/qtmultimedia_git.bb
-+++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -26,7 +26,7 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
- EXTRA_QMAKEVARS_CONFIGURE += "${@bb.utils.contains_any('PACKAGECONFIG', 'gstreamer gstreamer010', '', '-no-gstreamer', d)}"
- 
- # Patches from https://github.com/meta-qt5/qtmultimedia/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += "\
-     file://0001-qtmultimedia-fix-a-conflicting-declaration.patch \
- "
-@@ -35,4 +35,4 @@ SRC_URI += "\
- # http://errors.yoctoproject.org/Errors/Build/44914/
- LDFLAGS_append_x86 = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
- 
--SRCREV = "01fd723848fd6007b03c27edd85d8e9c6b6ce881"
-+SRCREV = "52f5785cfa8193f85859a27caebeb2a10f894f67"
-diff --git a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
-index 42156dc..930bb6d 100644
---- a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
-+++ b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
-@@ -1,4 +1,4 @@
--From 6af3818fd0008327839d27ab58cf2af5fa3bcce6 Mon Sep 17 00:00:00 2001
-+From ad1e13ce8ff07ca8813e6129fb0525b086a6e3a6 Mon Sep 17 00:00:00 2001
- From: Denys Dmytriyenko <denys@ti.com>
- Date: Thu, 31 Mar 2016 19:57:01 -0400
- Subject: [PATCH] texteditor: fix invalid use of incomplete type 'class QDebug'
-@@ -7,11 +7,11 @@ Upstream-Status: Pending
- 
- Signed-off-by: Denys Dmytriyenko <denys@ti.com>
- ---
-- examples/quickcontrols/controls/texteditor/src/documenthandler.cpp | 1 +
-+ .../quickcontrols/controls/texteditor/src/documenthandler.cpp    | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp b/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
--index 69da88f..9039191 100644
-+index 69da88f0..9039191e 100644
- --- a/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
- +++ b/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
- @@ -54,6 +54,7 @@
-diff --git a/recipes-qt/qt5/qtquickcontrols2_git.bb b/recipes-qt/qt5/qtquickcontrols2_git.bb
-index 8c8402e..0d4606d 100644
---- a/recipes-qt/qt5/qtquickcontrols2_git.bb
-+++ b/recipes-qt/qt5/qtquickcontrols2_git.bb
-@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtdeclarative"
- 
--SRCREV = "9a2950600087b0784b06b0521b409fce69960a2d"
-+SRCREV = "c48b314edef0595fbfa16dc62ce38b8d615326c8"
-diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquickcontrols_git.bb
-index c7c491d..4770875 100644
---- a/recipes-qt/qt5/qtquickcontrols_git.bb
-+++ b/recipes-qt/qt5/qtquickcontrols_git.bb
-@@ -20,9 +20,9 @@ FILES_${PN}-qmlplugins += " \
- "
- 
- # Patches from https://github.com/meta-qt5/qtquickcontrols/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += " \
-     file://0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch \
- "
- 
--SRCREV = "75e9561d4fdf8e94c6d556b9a37bdccdaaf80c10"
-+SRCREV = "ca6bba7163850222ea8b71dd7db9c70de56a0d4e"
-diff --git a/recipes-qt/qt5/qtremoteobjects_git.bb b/recipes-qt/qt5/qtremoteobjects_git.bb
-index 8673901..de5eca8 100644
---- a/recipes-qt/qt5/qtremoteobjects_git.bb
-+++ b/recipes-qt/qt5/qtremoteobjects_git.bb
-@@ -12,7 +12,7 @@ require qt5-git.inc
- DEPENDS += "qtbase qtdeclarative qtremoteobjects-native"
- 
- # Patches from https://github.com/meta-qt5/qtremoteobjects/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += " \
-     file://0001-Allow-a-tools-only-build.patch \
- "
-diff --git a/recipes-qt/qt5/qtscript_git.bb b/recipes-qt/qt5/qtscript_git.bb
-index e2d5225..8b8a6ca 100644
---- a/recipes-qt/qt5/qtscript_git.bb
-+++ b/recipes-qt/qt5/qtscript_git.bb
-@@ -30,4 +30,4 @@ DEPENDS += "qtbase"
- # http://errors.yoctoproject.org/Errors/Build/44915/
- LDFLAGS_append_x86 = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
- 
--SRCREV = "945a4b0ad718a3462660a9782d0a78974a0d8cb9"
-+SRCREV = "bc1c3fb95cee0ee525642bd308abbff21572505e"
-diff --git a/recipes-qt/qt5/qtscxml/0001-Use-external-host-bin-path-for-cmake-file.patch b/recipes-qt/qt5/qtscxml/0001-Use-external-host-bin-path-for-cmake-file.patch
-index 36a6d03..1d421c5 100644
---- a/recipes-qt/qt5/qtscxml/0001-Use-external-host-bin-path-for-cmake-file.patch
-+++ b/recipes-qt/qt5/qtscxml/0001-Use-external-host-bin-path-for-cmake-file.patch
-@@ -1,4 +1,4 @@
--From c9886590333dce8a1dd1e198f5449bb841033bc8 Mon Sep 17 00:00:00 2001
-+From be7c238b97f6cb104332d6bb956bf0dbe84c22a5 Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@qt.io>
- Date: Tue, 10 Jan 2017 15:28:26 +0200
- Subject: [PATCH] Use external host bin path for cmake file
-diff --git a/recipes-qt/qt5/qtscxml_git.bb b/recipes-qt/qt5/qtscxml_git.bb
-index 78f4459..7d53905 100644
---- a/recipes-qt/qt5/qtscxml_git.bb
-+++ b/recipes-qt/qt5/qtscxml_git.bb
-@@ -10,10 +10,10 @@ require qt5-git.inc
- 
- DEPENDS += "qtbase qtdeclarative qtxmlpatterns qtscxml-native"
- 
--SRCREV = "e5bfed810cdceedb8b7597d03c9649cddf9a5f3f"
-+SRCREV = "320735f9a43bd07e4c2b8e9019b5706b00475956"
- 
- # Patches from https://github.com/meta-qt5/qtscxml/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += "file://0001-Use-external-host-bin-path-for-cmake-file.patch"
- 
- do_install_append_class-nativesdk() {
-diff --git a/recipes-qt/qt5/qtsensors_git.bb b/recipes-qt/qt5/qtsensors_git.bb
-index 2017e00..8d8597a 100644
---- a/recipes-qt/qt5/qtsensors_git.bb
-+++ b/recipes-qt/qt5/qtsensors_git.bb
-@@ -12,4 +12,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase qtdeclarative"
- 
--SRCREV = "b50891d2d5c8677622eba5f2bb86af7be093c434"
-+SRCREV = "30044c5a4a1be9553c3db7a3669acd07431b2512"
-diff --git a/recipes-qt/qt5/qtserialbus_git.bb b/recipes-qt/qt5/qtserialbus_git.bb
-index 7b86b4e..cee89df 100644
---- a/recipes-qt/qt5/qtserialbus_git.bb
-+++ b/recipes-qt/qt5/qtserialbus_git.bb
-@@ -11,4 +11,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase qtserialport"
- 
--SRCREV = "5165c67091da4438f2d37290f6c5855250d87eb0"
-+SRCREV = "6654d88750cf5431086fe1d3187ec87f52533b18"
-diff --git a/recipes-qt/qt5/qtserialport_git.bb b/recipes-qt/qt5/qtserialport_git.bb
-index 7f3b959..57fa103 100644
---- a/recipes-qt/qt5/qtserialport_git.bb
-+++ b/recipes-qt/qt5/qtserialport_git.bb
-@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase"
- 
--SRCREV = "e40bf5347cb9298cafdb1004366ab436c1493cfe"
-+SRCREV = "0a242c49401571d6a5a294935af02c431cc32143"
-diff --git a/recipes-qt/qt5/qtsvg_git.bb b/recipes-qt/qt5/qtsvg_git.bb
-index 54268bf..fbe928e 100644
---- a/recipes-qt/qt5/qtsvg_git.bb
-+++ b/recipes-qt/qt5/qtsvg_git.bb
-@@ -13,4 +13,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase"
- 
--SRCREV = "24273f154a4e4930d233e6711cbf718887576002"
-+SRCREV = "7a28db8f5bc0149eee67479c1e58d20a7a02be73"
-diff --git a/recipes-qt/qt5/qttools/0001-add-noqtwebkit-configuration.patch b/recipes-qt/qt5/qttools/0001-add-noqtwebkit-configuration.patch
-index f7ada98..84693d7 100644
---- a/recipes-qt/qt5/qttools/0001-add-noqtwebkit-configuration.patch
-+++ b/recipes-qt/qt5/qttools/0001-add-noqtwebkit-configuration.patch
-@@ -1,4 +1,4 @@
--From fcbe797b61e624e5859dabfbe932ace2e8022649 Mon Sep 17 00:00:00 2001
-+From 1b9514a70d0947ff025762afd42b8f1c84b5d067 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
- Date: Wed, 4 Jun 2014 11:28:16 +0200
- Subject: [PATCH] add noqtwebkit configuration
-@@ -16,7 +16,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  2 files changed, 3 insertions(+), 3 deletions(-)
- 
- diff --git a/src/assistant/assistant/assistant.pro b/src/assistant/assistant/assistant.pro
--index 82f5509..ef07ee0 100644
-+index 82f55092..ef07ee03 100644
- --- a/src/assistant/assistant/assistant.pro
- +++ b/src/assistant/assistant/assistant.pro
- @@ -1,4 +1,4 @@
-@@ -35,7 +35,7 @@ index 82f5509..ef07ee0 100644
-      QT += webkitwidgets
-      SOURCES += helpviewer_qwv.cpp
- diff --git a/src/designer/src/plugins/plugins.pro b/src/designer/src/plugins/plugins.pro
--index 500a153..b60fa2d 100644
-+index 500a1534..b60fa2d9 100644
- --- a/src/designer/src/plugins/plugins.pro
- +++ b/src/designer/src/plugins/plugins.pro
- @@ -1,6 +1,6 @@
-diff --git a/recipes-qt/qt5/qttools/0002-linguist-tools-cmake-allow-overriding-the-location-f.patch b/recipes-qt/qt5/qttools/0002-linguist-tools-cmake-allow-overriding-the-location-f.patch
-index 7abc9ea..4496363 100644
---- a/recipes-qt/qt5/qttools/0002-linguist-tools-cmake-allow-overriding-the-location-f.patch
-+++ b/recipes-qt/qt5/qttools/0002-linguist-tools-cmake-allow-overriding-the-location-f.patch
-@@ -1,4 +1,4 @@
--From f7102d4e5c5c1d9e285b6821e18fff7c2dcea9c0 Mon Sep 17 00:00:00 2001
-+From 20d2656c69da63c33e0d15add3726f2c802bca5a Mon Sep 17 00:00:00 2001
- From: Cody P Schafer <dev@codyps.com>
- Date: Thu, 9 Jul 2015 11:28:19 -0400
- Subject: [PATCH] linguist-tools cmake: allow overriding the location for
-@@ -9,7 +9,7 @@ Subject: [PATCH] linguist-tools cmake: allow overriding the location for
-  1 file changed, 3 insertions(+), 12 deletions(-)
- 
- diff --git a/src/linguist/Qt5LinguistToolsConfig.cmake.in b/src/linguist/Qt5LinguistToolsConfig.cmake.in
--index 4318b16..2e3b70f 100644
-+index 4318b16f..2e3b70fa 100644
- --- a/src/linguist/Qt5LinguistToolsConfig.cmake.in
- +++ b/src/linguist/Qt5LinguistToolsConfig.cmake.in
- @@ -26,6 +26,9 @@ get_filename_component(_qt5_linguisttools_install_prefix \"${CMAKE_CURRENT_LIST_
-diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index 3ac5d48..660c085 100644
---- a/recipes-qt/qt5/qttools_git.bb
-+++ b/recipes-qt/qt5/qttools_git.bb
-@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = " \
- DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
- 
- # Patches from https://github.com/meta-qt5/qttools/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += " \
-     file://0001-add-noqtwebkit-configuration.patch \
-     file://0002-linguist-tools-cmake-allow-overriding-the-location-f.patch \
-@@ -29,7 +29,7 @@ PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
- 
- EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
- 
--SRCREV = "0c112f5980a39d370a90c34f8dfb778a6bd6a780"
-+SRCREV = "c9eeabc7a7f83eb5603cedf7336f50e089d025af"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
-diff --git a/recipes-qt/qt5/qtvirtualkeyboard/0001-include-sys-time.h-for-timeval.patch b/recipes-qt/qt5/qtvirtualkeyboard/0001-include-sys-time.h-for-timeval.patch
-index 185bf50..cd1e4b8 100644
---- a/recipes-qt/qt5/qtvirtualkeyboard/0001-include-sys-time.h-for-timeval.patch
-+++ b/recipes-qt/qt5/qtvirtualkeyboard/0001-include-sys-time.h-for-timeval.patch
-@@ -1,4 +1,4 @@
--From c41773c12767dc6735cda8f8ad3d09454366283b Mon Sep 17 00:00:00 2001
-+From 3ed215600a5c43d0e5312389a1acdef1a99d8b2f Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 12 Jul 2017 23:59:52 -0700
- Subject: [PATCH] include sys/time.h for timeval
-diff --git a/recipes-qt/qt5/qtvirtualkeyboard_git.bb b/recipes-qt/qt5/qtvirtualkeyboard_git.bb
-index e5906d6..c769793 100644
---- a/recipes-qt/qt5/qtvirtualkeyboard_git.bb
-+++ b/recipes-qt/qt5/qtvirtualkeyboard_git.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
- "
- 
- # Patches from https://github.com/meta-qt5/qtvirtualkeyboard/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += "file://0001-include-sys-time.h-for-timeval.patch"
- 
- # To enabled Nuance T9 Write support, you need to provide the licensed components
-@@ -53,4 +53,4 @@ FILES_${PN} += "${OE_QMAKE_PATH_DATA}/qtvirtualkeyboard/lipi_toolkit"
- 
- DEPENDS += "qtbase qtdeclarative qtmultimedia qtquickcontrols qtsvg qtxmlpatterns"
- 
--SRCREV = "5c9ce0adf6ef8b28bc6196326f711a9d039738ea"
-+SRCREV = "3fd388fe385ba7941a77e6a27c9b1e0e57f07198"
-diff --git a/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch b/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
-index b2ff754..13f0ce8 100644
---- a/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
-+++ b/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
-@@ -1,4 +1,4 @@
--From c9c02d1a7d48f97bcbf85dca884e65b6ed3ec7c1 Mon Sep 17 00:00:00 2001
-+From 237d370278dd68fbb16308e2fad044cbcba9797a Mon Sep 17 00:00:00 2001
- From: Raphael Freudiger <laser_b@gmx.ch>
- Date: Tue, 10 Jan 2017 15:49:55 +0100
- Subject: [PATCH] fix build without xkbcommon-evdev
-@@ -16,7 +16,7 @@ Signed-off-by: Gordan Marku≈° <gordan.markus@pelagicore.com>
-  3 files changed, 11 insertions(+), 6 deletions(-)
- 
- diff --git a/src/client/client.pro b/src/client/client.pro
--index eae7ad5..0bb7b18 100644
-+index eae7ad52..0bb7b188 100644
- --- a/src/client/client.pro
- +++ b/src/client/client.pro
- @@ -147,3 +147,5 @@ MODULE_PLUGIN_TYPES = \
-@@ -26,7 +26,7 @@ index eae7ad5..0bb7b18 100644
- +
- +LIBS += -lxkbcommon
- diff --git a/src/compositor/compositor.pro b/src/compositor/compositor.pro
--index dc9000d..4eebfd6 100644
-+index dc9000d9..4eebfd64 100644
- --- a/src/compositor/compositor.pro
- +++ b/src/compositor/compositor.pro
- @@ -32,3 +32,5 @@ include ($$PWD/extensions/extensions.pri)
-@@ -36,7 +36,7 @@ index dc9000d..4eebfd6 100644
- +
- +LIBS += -lxkbcommon
- diff --git a/src/compositor/compositor_api/qwaylandkeyboard.cpp b/src/compositor/compositor_api/qwaylandkeyboard.cpp
--index c30f7b1..e6f1a0b 100644
-+index c30f7b18..e6f1a0b3 100644
- --- a/src/compositor/compositor_api/qwaylandkeyboard.cpp
- +++ b/src/compositor/compositor_api/qwaylandkeyboard.cpp
- @@ -349,12 +349,6 @@ void QWaylandKeyboardPrivate::createXKBState(xkb_keymap *keymap)
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index e29bc94..eef7d72 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -37,10 +37,10 @@ PACKAGECONFIG[libhybris-egl-server] = "-feature-libhybris-egl-server,-no-feature
- 
- EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
- 
--SRCREV = "51b84d998b03cb95b6496e85d804e2788fc122d7"
-+SRCREV = "8c5999644c8a98dca74f7339c2c750dd063ae346"
- 
- # Patches from https://github.com/meta-qt5/qtwayland/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- # From https://bugreports.qt.io/browse/QTBUG-57767
- SRC_URI += " \
-     file://0001-fix-build-without-xkbcommon-evdev.patch \
-diff --git a/recipes-qt/qt5/qtwebchannel_git.bb b/recipes-qt/qt5/qtwebchannel_git.bb
-index a3d061a..5af9042 100644
---- a/recipes-qt/qt5/qtwebchannel_git.bb
-+++ b/recipes-qt/qt5/qtwebchannel_git.bb
-@@ -12,4 +12,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtdeclarative qtwebsockets"
- 
--SRCREV = "a9f8d06fe1a7e98f1fa38d8df1627dc66dc92c21"
-+SRCREV = "56a155e68de96a80301ef8b9ad183fcb67e86142"
-diff --git a/recipes-qt/qt5/qtwebengine/0001-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch b/recipes-qt/qt5/qtwebengine/0001-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
-index 90a557f..51eec18 100644
---- a/recipes-qt/qt5/qtwebengine/0001-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
-+++ b/recipes-qt/qt5/qtwebengine/0001-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
-@@ -1,4 +1,4 @@
--From 78a0bfb1026cd1a66e25663266896db6920636b9 Mon Sep 17 00:00:00 2001
-+From b3ef942f47b12546c558d94683719da8d23282f0 Mon Sep 17 00:00:00 2001
- From: Cleiton Bueno <cleitonrbueno@gmail.com>
- Date: Thu, 24 Dec 2015 12:46:58 -0200
- Subject: [PATCH] chromium: Change false to FALSE and 1 to TRUE, FIX
-@@ -11,7 +11,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 file changed, 6 insertions(+), 6 deletions(-)
- 
- diff --git a/chromium/ui/gfx/codec/jpeg_codec.cc b/chromium/ui/gfx/codec/jpeg_codec.cc
--index 6d92637..738d3fd 100644
-+index 6d926378be..738d3fdedf 100644
- --- a/chromium/ui/gfx/codec/jpeg_codec.cc
- +++ b/chromium/ui/gfx/codec/jpeg_codec.cc
- @@ -121,7 +121,7 @@ boolean EmptyOutputBuffer(jpeg_compress_struct* cinfo) {
-diff --git a/recipes-qt/qt5/qtwebengine/0001-functions.prf-allow-build-for-linux-oe-g-platform.patch b/recipes-qt/qt5/qtwebengine/0001-functions.prf-allow-build-for-linux-oe-g-platform.patch
-index aa223e1..27ad346 100644
---- a/recipes-qt/qt5/qtwebengine/0001-functions.prf-allow-build-for-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtwebengine/0001-functions.prf-allow-build-for-linux-oe-g-platform.patch
-@@ -1,4 +1,4 @@
--From 7efbed6af08caf6ce2bedbb8fb653b60c3aaa920 Mon Sep 17 00:00:00 2001
-+From 87b283dd966ef68df24fd4c988b348f53c59e11b Mon Sep 17 00:00:00 2001
- From: Frieder Schrempf <frieder.schrempf@online.de>
- Date: Mon, 1 Dec 2014 14:34:40 +0000
- Subject: [PATCH] functions.prf: allow build for linux-oe-g++ platform
-@@ -12,7 +12,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 file changed, 6 insertions(+)
- 
- diff --git a/mkspecs/features/functions.prf b/mkspecs/features/functions.prf
--index b78d2a1..14dd07e 100644
-+index b78d2a11..14dd07e5 100644
- --- a/mkspecs/features/functions.prf
- +++ b/mkspecs/features/functions.prf
- @@ -21,6 +21,12 @@ defineTest(isPlatformSupported) {
-diff --git a/recipes-qt/qt5/qtwebengine/0002-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch b/recipes-qt/qt5/qtwebengine/0002-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
-index 94fa5a6..0a045b0 100644
---- a/recipes-qt/qt5/qtwebengine/0002-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
-+++ b/recipes-qt/qt5/qtwebengine/0002-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
-@@ -1,4 +1,4 @@
--From fe4d996a8a6fe8e0c6b720ff30fa7bff95df2acb Mon Sep 17 00:00:00 2001
-+From 68b44d6cd3b3653dd70da39e39eb40900207daff Mon Sep 17 00:00:00 2001
- From: Cleiton Bueno <cleitonrbueno@gmail.com>
- Date: Fri, 25 Dec 2015 18:16:05 -0200
- Subject: [PATCH] WebEngine qquickwebengineview_p_p.h add include QColor
-@@ -9,7 +9,7 @@ Signed-off-by: Cleiton Bueno <cleitonrbueno@gmail.com>
-  1 file changed, 2 insertions(+)
- 
- diff --git a/src/webengine/api/qquickwebengineview_p_p.h b/src/webengine/api/qquickwebengineview_p_p.h
--index 19ecf5e..f6f638e 100644
-+index 19ecf5e1..f6f638ee 100644
- --- a/src/webengine/api/qquickwebengineview_p_p.h
- +++ b/src/webengine/api/qquickwebengineview_p_p.h
- @@ -59,6 +59,8 @@
-diff --git a/recipes-qt/qt5/qtwebengine/0002-chromium-Force-host-toolchain-configuration.patch b/recipes-qt/qt5/qtwebengine/0002-chromium-Force-host-toolchain-configuration.patch
-index a2eeee1..eeba5dc 100644
---- a/recipes-qt/qt5/qtwebengine/0002-chromium-Force-host-toolchain-configuration.patch
-+++ b/recipes-qt/qt5/qtwebengine/0002-chromium-Force-host-toolchain-configuration.patch
-@@ -1,4 +1,4 @@
--From 7233c121fedcf73d10499afedd19c5e45ae0e4ec Mon Sep 17 00:00:00 2001
-+From aba02f51bcaef2117aa8b413638af8134b563778 Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@qt.io>
- Date: Wed, 15 Mar 2017 13:53:28 +0200
- Subject: [PATCH] chromium: Force host toolchain configuration
-@@ -14,7 +14,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  1 file changed, 6 insertions(+), 6 deletions(-)
- 
- diff --git a/chromium/tools/gn/bootstrap/bootstrap.py b/chromium/tools/gn/bootstrap/bootstrap.py
--index 43d252b..e583478 100755
-+index 43d252b43e..e58347848e 100755
- --- a/chromium/tools/gn/bootstrap/bootstrap.py
- +++ b/chromium/tools/gn/bootstrap/bootstrap.py
- @@ -298,14 +298,14 @@ def write_gn_ninja(path, root_gen_dir, options):
-diff --git a/recipes-qt/qt5/qtwebengine/0003-Include-dependency-to-QCoreApplication-translate.patch b/recipes-qt/qt5/qtwebengine/0003-Include-dependency-to-QCoreApplication-translate.patch
-index a61161d..c1aa58f 100644
---- a/recipes-qt/qt5/qtwebengine/0003-Include-dependency-to-QCoreApplication-translate.patch
-+++ b/recipes-qt/qt5/qtwebengine/0003-Include-dependency-to-QCoreApplication-translate.patch
-@@ -1,4 +1,4 @@
--From 4e95d44468ed954d68402c585c6df3c6cd6c5638 Mon Sep 17 00:00:00 2001
-+From c665697cce340faab080f45bf8a1e086a5bc7129 Mon Sep 17 00:00:00 2001
- From: Cleiton Bueno <cleitonrbueno@gmail.com>
- Date: Thu, 24 Dec 2015 15:59:51 -0200
- Subject: [PATCH] Include dependency to QCoreApplication::translate()
-@@ -9,7 +9,7 @@ Signed-off-by: Cleiton Bueno <cleitonrbueno@gmail.com>
-  1 file changed, 2 insertions(+)
- 
- diff --git a/src/core/media_capture_devices_dispatcher.h b/src/core/media_capture_devices_dispatcher.h
--index c378c32..1d33d95 100644
-+index c378c327..1d33d956 100644
- --- a/src/core/media_capture_devices_dispatcher.h
- +++ b/src/core/media_capture_devices_dispatcher.h
- @@ -45,6 +45,8 @@
-diff --git a/recipes-qt/qt5/qtwebengine/0003-chromium-workaround-for-too-long-.rps-file-name.patch b/recipes-qt/qt5/qtwebengine/0003-chromium-workaround-for-too-long-.rps-file-name.patch
-index 5d44489..d864a32 100644
---- a/recipes-qt/qt5/qtwebengine/0003-chromium-workaround-for-too-long-.rps-file-name.patch
-+++ b/recipes-qt/qt5/qtwebengine/0003-chromium-workaround-for-too-long-.rps-file-name.patch
-@@ -1,4 +1,4 @@
--From b220fb26cdcc7b3b9d2762c46b8e7604f3120cc3 Mon Sep 17 00:00:00 2001
-+From e026637ca017f185697de536cf232c0f970286cf Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@qt.io>
- Date: Thu, 30 Mar 2017 11:37:24 +0300
- Subject: [PATCH] chromium: workaround for too long .rps file name
-@@ -18,7 +18,7 @@ Change-Id: I73c5e64ae5174412be2a675e35b0b6047f2bf4c1
-  1 file changed, 9 insertions(+)
- 
- diff --git a/chromium/tools/gn/ninja_action_target_writer.cc b/chromium/tools/gn/ninja_action_target_writer.cc
--index a5bc6cd..5cefbfe 100644
-+index a5bc6cd526..5cefbfe77c 100644
- --- a/chromium/tools/gn/ninja_action_target_writer.cc
- +++ b/chromium/tools/gn/ninja_action_target_writer.cc
- @@ -115,9 +115,18 @@ std::string NinjaActionTargetWriter::WriteRuleDefinition() {
-diff --git a/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch b/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch
-index d85f46f..1ca5745 100644
---- a/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch
-+++ b/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch
-@@ -1,4 +1,4 @@
--From dbcfd868d551beb55a9411c26912050ea278ec48 Mon Sep 17 00:00:00 2001
-+From f1f470227778b0f7068ec25e4d5db2aaa0ef4f3e Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@qt.io>
- Date: Wed, 15 Mar 2017 13:53:28 +0200
- Subject: [PATCH] Force host toolchain configuration
-@@ -18,7 +18,7 @@ Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
-  2 files changed, 8 insertions(+), 8 deletions(-)
- 
- diff --git a/src/buildtools/configure_host.pro b/src/buildtools/configure_host.pro
--index f1b3d47..1212372 100644
-+index f1b3d47b..12123729 100644
- --- a/src/buildtools/configure_host.pro
- +++ b/src/buildtools/configure_host.pro
- @@ -4,7 +4,7 @@ TEMPLATE = aux
-@@ -57,7 +57,7 @@ index f1b3d47..1212372 100644
-  "  nm = \"$$which(nm)\" " \
-  "  toolchain_args = { " \
- diff --git a/src/core/config/linux.pri b/src/core/config/linux.pri
--index 831e195..8a28de5 100644
-+index 831e1952..8a28de5d 100644
- --- a/src/core/config/linux.pri
- +++ b/src/core/config/linux.pri
- @@ -98,7 +98,7 @@ contains(QT_ARCH, "mips") {
-diff --git a/recipes-qt/qt5/qtwebengine/0004-chromium-musl-sandbox-Define-TEMP_FAILURE_RETRY-if-n.patch b/recipes-qt/qt5/qtwebengine/0004-chromium-musl-sandbox-Define-TEMP_FAILURE_RETRY-if-n.patch
-index 52d5143..e682b7f 100644
---- a/recipes-qt/qt5/qtwebengine/0004-chromium-musl-sandbox-Define-TEMP_FAILURE_RETRY-if-n.patch
-+++ b/recipes-qt/qt5/qtwebengine/0004-chromium-musl-sandbox-Define-TEMP_FAILURE_RETRY-if-n.patch
-@@ -1,4 +1,4 @@
--From 6d7823f7bd60aa63aa11b4c6ac9d8814122e8396 Mon Sep 17 00:00:00 2001
-+From 48f6dbfb20364f5184d43959cb1a6b65e1a6cba6 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 14:01:12 -0700
- Subject: [PATCH] chromium: musl: sandbox: Define TEMP_FAILURE_RETRY if not
-@@ -12,7 +12,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 9 insertions(+)
- 
- diff --git a/chromium/sandbox/linux/suid/sandbox.c b/chromium/sandbox/linux/suid/sandbox.c
--index b655d1c..3de34e3 100644
-+index b655d1c79c..3de34e36f2 100644
- --- a/chromium/sandbox/linux/suid/sandbox.c
- +++ b/chromium/sandbox/linux/suid/sandbox.c
- @@ -44,6 +44,15 @@ static bool DropRoot();
-diff --git a/recipes-qt/qt5/qtwebengine/0005-chromium-musl-Avoid-mallinfo-APIs-on-non-glibc-linux.patch b/recipes-qt/qt5/qtwebengine/0005-chromium-musl-Avoid-mallinfo-APIs-on-non-glibc-linux.patch
-index f1e633c..fed2bca 100644
---- a/recipes-qt/qt5/qtwebengine/0005-chromium-musl-Avoid-mallinfo-APIs-on-non-glibc-linux.patch
-+++ b/recipes-qt/qt5/qtwebengine/0005-chromium-musl-Avoid-mallinfo-APIs-on-non-glibc-linux.patch
-@@ -1,4 +1,4 @@
--From 5e4ef7189876b1e2578f12824ad7b0405768f517 Mon Sep 17 00:00:00 2001
-+From 4fce1a91096c8a2180f2126e176904b2a1e3275e Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 14:09:06 -0700
- Subject: [PATCH] chromium: musl: Avoid mallinfo() APIs on non-glibc/linux
-@@ -10,7 +10,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  2 files changed, 3 insertions(+), 2 deletions(-)
- 
- diff --git a/chromium/base/trace_event/malloc_dump_provider.cc b/chromium/base/trace_event/malloc_dump_provider.cc
--index 7d0cb57..10be59e 100644
-+index 7d0cb57931..10be59ebad 100644
- --- a/chromium/base/trace_event/malloc_dump_provider.cc
- +++ b/chromium/base/trace_event/malloc_dump_provider.cc
- @@ -210,6 +210,7 @@ MallocDumpProvider::~MallocDumpProvider() {}
-@@ -31,7 +31,7 @@ index 7d0cb57..10be59e 100644
-  }
-  
- diff --git a/chromium/content/child/content_child_helpers.cc b/chromium/content/child/content_child_helpers.cc
--index 7ddeb4d..b8c73b0 100644
-+index 7ddeb4d16a..b8c73b09c5 100644
- --- a/chromium/content/child/content_child_helpers.cc
- +++ b/chromium/content/child/content_child_helpers.cc
- @@ -25,7 +25,7 @@ namespace content {
-diff --git a/recipes-qt/qt5/qtwebengine/0006-chromium-musl-include-fcntl.h-for-loff_t.patch b/recipes-qt/qt5/qtwebengine/0006-chromium-musl-include-fcntl.h-for-loff_t.patch
-index 6f58299..30a213a 100644
---- a/recipes-qt/qt5/qtwebengine/0006-chromium-musl-include-fcntl.h-for-loff_t.patch
-+++ b/recipes-qt/qt5/qtwebengine/0006-chromium-musl-include-fcntl.h-for-loff_t.patch
-@@ -1,15 +1,15 @@
--From d36b3a2fdc5aa94b4dd03bcb509f64e8722fae9d Mon Sep 17 00:00:00 2001
-+From f9d402bd9e966ec05717ea3ef62dcbd2943c72b9 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 14:37:49 -0700
- Subject: [PATCH] chromium: musl: include fcntl.h for loff_t
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h | 1 +
-+ .../tcmalloc/chromium/src/base/linux_syscall_support.h           | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h b/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h
--index b29ec2d..91f77dd 100644
-+index b29ec2d29a..91f77dd88d 100644
- --- a/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h
- +++ b/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h
- @@ -150,6 +150,7 @@ extern "C" {
-diff --git a/recipes-qt/qt5/qtwebengine/0007-chromium-musl-use-off64_t-instead-of-the-internal-__.patch b/recipes-qt/qt5/qtwebengine/0007-chromium-musl-use-off64_t-instead-of-the-internal-__.patch
-index 3b96e06..f72c3a6 100644
---- a/recipes-qt/qt5/qtwebengine/0007-chromium-musl-use-off64_t-instead-of-the-internal-__.patch
-+++ b/recipes-qt/qt5/qtwebengine/0007-chromium-musl-use-off64_t-instead-of-the-internal-__.patch
-@@ -1,4 +1,4 @@
--From 536f4a41ea30faabac84ff5bd62b51238ba1cdc7 Mon Sep 17 00:00:00 2001
-+From 2a143412893405591f67ec0a74356219e088dbcb Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 14:38:37 -0700
- Subject: [PATCH] chromium: musl: use off64_t instead of the internal __off64_t
-@@ -8,11 +8,11 @@ Subject: [PATCH] chromium: musl: use off64_t instead of the internal __off64_t
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- .../third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h | 10 +++++-----
-+ .../tcmalloc/chromium/src/malloc_hook_mmap_linux.h     | 10 +++++-----
-  1 file changed, 5 insertions(+), 5 deletions(-)
- 
- diff --git a/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h b/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h
--index 715c045..edc8cf2 100644
-+index 715c045f66..edc8cf2db7 100644
- --- a/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h
- +++ b/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h
- @@ -77,7 +77,7 @@ typedef off64_t __off64_t;
-diff --git a/recipes-qt/qt5/qtwebengine/0008-chromium-musl-linux-glibc-make-the-distinction.patch b/recipes-qt/qt5/qtwebengine/0008-chromium-musl-linux-glibc-make-the-distinction.patch
-index 77e896d..ed61cc1 100644
---- a/recipes-qt/qt5/qtwebengine/0008-chromium-musl-linux-glibc-make-the-distinction.patch
-+++ b/recipes-qt/qt5/qtwebengine/0008-chromium-musl-linux-glibc-make-the-distinction.patch
-@@ -1,4 +1,4 @@
--From 7336279ff0cca9216a095dcabf8872418372ee42 Mon Sep 17 00:00:00 2001
-+From 00456ee9fa12e815066af7a159e321f274b81e36 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 14:54:38 -0700
- Subject: [PATCH] chromium: musl: linux != glibc, make the distinction
-@@ -9,7 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/chromium/base/allocator/allocator_check.cc b/chromium/base/allocator/allocator_check.cc
--index 5a0564d..8c2dc64 100644
-+index 5a0564d2f3..8c2dc6491d 100644
- --- a/chromium/base/allocator/allocator_check.cc
- +++ b/chromium/base/allocator/allocator_check.cc
- @@ -21,7 +21,7 @@ bool IsAllocatorInitialized() {
-diff --git a/recipes-qt/qt5/qtwebengine/0009-chromium-musl-allocator-Do-not-include-glibc_weak_sy.patch b/recipes-qt/qt5/qtwebengine/0009-chromium-musl-allocator-Do-not-include-glibc_weak_sy.patch
-index 498b04d..cab250a 100644
---- a/recipes-qt/qt5/qtwebengine/0009-chromium-musl-allocator-Do-not-include-glibc_weak_sy.patch
-+++ b/recipes-qt/qt5/qtwebengine/0009-chromium-musl-allocator-Do-not-include-glibc_weak_sy.patch
-@@ -1,4 +1,4 @@
--From 51c5ff669beda6efec97f28bf6c94329e193eafd Mon Sep 17 00:00:00 2001
-+From b5ca1e638adfc1241435cf27279b8e7ec05c18af Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 15:09:02 -0700
- Subject: [PATCH] chromium: musl: allocator: Do not include glibc_weak_symbols
-@@ -10,7 +10,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/chromium/base/allocator/allocator_shim.cc b/chromium/base/allocator/allocator_shim.cc
--index 95480ea..1de3d1a 100644
-+index 95480ea4b6..1de3d1a532 100644
- --- a/chromium/base/allocator/allocator_shim.cc
- +++ b/chromium/base/allocator/allocator_shim.cc
- @@ -266,7 +266,7 @@ void ShimFree(void* address) {
-diff --git a/recipes-qt/qt5/qtwebengine/0010-chromium-musl-Use-correct-member-name-__si_fields-fr.patch b/recipes-qt/qt5/qtwebengine/0010-chromium-musl-Use-correct-member-name-__si_fields-fr.patch
-index 37da85e..7d1d43b 100644
---- a/recipes-qt/qt5/qtwebengine/0010-chromium-musl-Use-correct-member-name-__si_fields-fr.patch
-+++ b/recipes-qt/qt5/qtwebengine/0010-chromium-musl-Use-correct-member-name-__si_fields-fr.patch
-@@ -1,4 +1,4 @@
--From 79ba4e54de16b6ef69ed4561edc694c0f4b77e5c Mon Sep 17 00:00:00 2001
-+From 1b1ebf58dccdc53145a2778193e95987fcf464c9 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 15:12:39 -0700
- Subject: [PATCH] chromium: musl: Use correct member name __si_fields from
-@@ -10,7 +10,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/chromium/sandbox/linux/seccomp-bpf/trap.cc b/chromium/sandbox/linux/seccomp-bpf/trap.cc
--index 003708d..0fef314 100644
-+index 003708d2c8..0fef3148f9 100644
- --- a/chromium/sandbox/linux/seccomp-bpf/trap.cc
- +++ b/chromium/sandbox/linux/seccomp-bpf/trap.cc
- @@ -168,7 +168,7 @@ void Trap::SigSys(int nr, LinuxSigInfo* info, ucontext_t* ctx) {
-diff --git a/recipes-qt/qt5/qtwebengine/0011-chromium-musl-Match-syscalls-to-match-musl.patch b/recipes-qt/qt5/qtwebengine/0011-chromium-musl-Match-syscalls-to-match-musl.patch
-index d713d3a..d80790d 100644
---- a/recipes-qt/qt5/qtwebengine/0011-chromium-musl-Match-syscalls-to-match-musl.patch
-+++ b/recipes-qt/qt5/qtwebengine/0011-chromium-musl-Match-syscalls-to-match-musl.patch
-@@ -1,4 +1,4 @@
--From a8af55b0070d9cd9e80ccc8535437435d7f3960c Mon Sep 17 00:00:00 2001
-+From 23892285ca39c626aa77bca3dbccffe7f7784b91 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 15:24:49 -0700
- Subject: [PATCH] chromium: musl: Match syscalls to match musl
-@@ -9,7 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 16 insertions(+)
- 
- diff --git a/chromium/third_party/lss/linux_syscall_support.h b/chromium/third_party/lss/linux_syscall_support.h
--index 9dbd239..a715de1 100644
-+index 9dbd2391b2..a715de177c 100644
- --- a/chromium/third_party/lss/linux_syscall_support.h
- +++ b/chromium/third_party/lss/linux_syscall_support.h
- @@ -793,6 +793,14 @@ struct kernel_statfs {
-diff --git a/recipes-qt/qt5/qtwebengine/0012-chromium-musl-Define-res_ninit-and-res_nclose-for-no.patch b/recipes-qt/qt5/qtwebengine/0012-chromium-musl-Define-res_ninit-and-res_nclose-for-no.patch
-index 2258a50..0728aaf 100644
---- a/recipes-qt/qt5/qtwebengine/0012-chromium-musl-Define-res_ninit-and-res_nclose-for-no.patch
-+++ b/recipes-qt/qt5/qtwebengine/0012-chromium-musl-Define-res_ninit-and-res_nclose-for-no.patch
-@@ -1,4 +1,4 @@
--From 2268eab4b28c1817a2ecd69c27730f9a46807e93 Mon Sep 17 00:00:00 2001
-+From 9c441f0780c663b3029eedd2a3589418e7c33604 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 15:27:50 -0700
- Subject: [PATCH] chromium: musl: Define res_ninit and res_nclose for non-glibc
-@@ -6,14 +6,14 @@ Subject: [PATCH] chromium: musl: Define res_ninit and res_nclose for non-glibc
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- chromium/net/dns/dns_config_service_posix.cc |  4 ++++
-- chromium/net/dns/dns_reloader.cc             |  4 ++++
-- chromium/net/dns/resolv_compat.h             | 29 ++++++++++++++++++++++++++++
-+ chromium/net/dns/dns_config_service_posix.cc |  4 +++
-+ chromium/net/dns/dns_reloader.cc             |  4 +++
-+ chromium/net/dns/resolv_compat.h             | 29 ++++++++++++++++++++
-  3 files changed, 37 insertions(+)
-  create mode 100644 chromium/net/dns/resolv_compat.h
- 
- diff --git a/chromium/net/dns/dns_config_service_posix.cc b/chromium/net/dns/dns_config_service_posix.cc
--index ba8a369..e9b40d0 100644
-+index ba8a369133..e9b40d07fc 100644
- --- a/chromium/net/dns/dns_config_service_posix.cc
- +++ b/chromium/net/dns/dns_config_service_posix.cc
- @@ -25,6 +25,10 @@
-@@ -28,7 +28,7 @@ index ba8a369..e9b40d0 100644
-  #include "net/dns/dns_config_watcher_mac.h"
-  #endif
- diff --git a/chromium/net/dns/dns_reloader.cc b/chromium/net/dns/dns_reloader.cc
--index 74534e6..2780a77 100644
-+index 74534e6b1b..2780a776e4 100644
- --- a/chromium/net/dns/dns_reloader.cc
- +++ b/chromium/net/dns/dns_reloader.cc
- @@ -9,6 +9,10 @@
-@@ -44,7 +44,7 @@ index 74534e6..2780a77 100644
-  #include "base/macros.h"
- diff --git a/chromium/net/dns/resolv_compat.h b/chromium/net/dns/resolv_compat.h
- new file mode 100644
--index 0000000..4f0e852
-+index 0000000000..4f0e852a19
- --- /dev/null
- +++ b/chromium/net/dns/resolv_compat.h
- @@ -0,0 +1,29 @@
-diff --git a/recipes-qt/qt5/qtwebengine/0013-chromium-musl-Do-not-define-__sbrk-on-musl.patch b/recipes-qt/qt5/qtwebengine/0013-chromium-musl-Do-not-define-__sbrk-on-musl.patch
-index e4df9f6..e175b74 100644
---- a/recipes-qt/qt5/qtwebengine/0013-chromium-musl-Do-not-define-__sbrk-on-musl.patch
-+++ b/recipes-qt/qt5/qtwebengine/0013-chromium-musl-Do-not-define-__sbrk-on-musl.patch
-@@ -1,4 +1,4 @@
--From 8d4ab971e015059b3509dff4e7b7ff0382c2c6fa Mon Sep 17 00:00:00 2001
-+From a6fc99a6328212972836d914d333f3670e3c4726 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 15:39:57 -0700
- Subject: [PATCH] chromium: musl: Do not define __sbrk on musl
-@@ -8,11 +8,11 @@ argument, so we just let it out for now
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h | 2 +-
-+ .../third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h  | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h b/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h
--index edc8cf2..a868b50 100644
-+index edc8cf2db7..a868b50d30 100644
- --- a/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h
- +++ b/chromium/third_party/tcmalloc/chromium/src/malloc_hook_mmap_linux.h
- @@ -233,7 +233,7 @@ extern "C" void* mremap(void* old_addr, size_t old_size, size_t new_size,
-diff --git a/recipes-qt/qt5/qtwebengine/0014-chromium-musl-Adjust-default-pthread-stack-size.patch b/recipes-qt/qt5/qtwebengine/0014-chromium-musl-Adjust-default-pthread-stack-size.patch
-index bec98b0..55739c8 100644
---- a/recipes-qt/qt5/qtwebengine/0014-chromium-musl-Adjust-default-pthread-stack-size.patch
-+++ b/recipes-qt/qt5/qtwebengine/0014-chromium-musl-Adjust-default-pthread-stack-size.patch
-@@ -1,16 +1,16 @@
--From 5a83638e13e6d5b1d8aa401af12dbe29bcea8cda Mon Sep 17 00:00:00 2001
-+From c190fb457fbe9f1c3adedcdadbda581ac5ed2286 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 16:41:23 -0700
- Subject: [PATCH] chromium: musl: Adjust default pthread stack size
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- chromium/base/threading/platform_thread_linux.cc                     | 3 ++-
-- chromium/third_party/WebKit/Source/platform/heap/StackFrameDepth.cpp | 4 ++--
-+ chromium/base/threading/platform_thread_linux.cc              | 3 ++-
-+ .../WebKit/Source/platform/heap/StackFrameDepth.cpp           | 4 ++--
-  2 files changed, 4 insertions(+), 3 deletions(-)
- 
- diff --git a/chromium/base/threading/platform_thread_linux.cc b/chromium/base/threading/platform_thread_linux.cc
--index 92fbda5..c41579d 100644
-+index 92fbda5ee1..c41579d4ed 100644
- --- a/chromium/base/threading/platform_thread_linux.cc
- +++ b/chromium/base/threading/platform_thread_linux.cc
- @@ -175,7 +175,8 @@ void TerminateOnThread() {}
-@@ -24,7 +24,7 @@ index 92fbda5..c41579d 100644
-    // ThreadSanitizer bloats the stack heavily. Evidence has been that the
-    // default stack size isn't enough for some browser tests.
- diff --git a/chromium/third_party/WebKit/Source/platform/heap/StackFrameDepth.cpp b/chromium/third_party/WebKit/Source/platform/heap/StackFrameDepth.cpp
--index 1d164f5..3358deb 100644
-+index 1d164f510a..3358deb256 100644
- --- a/chromium/third_party/WebKit/Source/platform/heap/StackFrameDepth.cpp
- +++ b/chromium/third_party/WebKit/Source/platform/heap/StackFrameDepth.cpp
- @@ -68,7 +68,7 @@ size_t StackFrameDepth::getUnderestimatedStackSize() {
-diff --git a/recipes-qt/qt5/qtwebengine/0015-chromium-musl-include-asm-generic-ioctl.h-for-TCGETS.patch b/recipes-qt/qt5/qtwebengine/0015-chromium-musl-include-asm-generic-ioctl.h-for-TCGETS.patch
-index 13ecb95..be406a7 100644
---- a/recipes-qt/qt5/qtwebengine/0015-chromium-musl-include-asm-generic-ioctl.h-for-TCGETS.patch
-+++ b/recipes-qt/qt5/qtwebengine/0015-chromium-musl-include-asm-generic-ioctl.h-for-TCGETS.patch
-@@ -1,4 +1,4 @@
--From 4394020a7bfbac6fb78cf498f7bdaa9adf153707 Mon Sep 17 00:00:00 2001
-+From c4f2176d88f331d8fc150c4bf598d2f2a5f3a1e1 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 7 Jul 2017 17:15:34 -0700
- Subject: [PATCH] chromium: musl: include asm-generic/ioctl.h for TCGETS2
-@@ -9,7 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+)
- 
- diff --git a/chromium/device/serial/serial_io_handler_posix.cc b/chromium/device/serial/serial_io_handler_posix.cc
--index a2ca2e2..e139cdf 100644
-+index a2ca2e2309..e139cdf9e9 100644
- --- a/chromium/device/serial/serial_io_handler_posix.cc
- +++ b/chromium/device/serial/serial_io_handler_posix.cc
- @@ -6,6 +6,7 @@
-diff --git a/recipes-qt/qt5/qtwebengine/0016-chromium-musl-tcmalloc-Use-off64_t-insread-of-__off6.patch b/recipes-qt/qt5/qtwebengine/0016-chromium-musl-tcmalloc-Use-off64_t-insread-of-__off6.patch
-index d4bdc8b..feaaca3 100644
---- a/recipes-qt/qt5/qtwebengine/0016-chromium-musl-tcmalloc-Use-off64_t-insread-of-__off6.patch
-+++ b/recipes-qt/qt5/qtwebengine/0016-chromium-musl-tcmalloc-Use-off64_t-insread-of-__off6.patch
-@@ -1,15 +1,15 @@
--From 5e2fae4322189dc359c469fed55c7fadbf46418e Mon Sep 17 00:00:00 2001
-+From 69ab8dd347721db368d2dad63987a69c9c4f128e Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 8 Jul 2017 09:08:23 -0700
- Subject: [PATCH] chromium: musl: tcmalloc: Use off64_t insread of __off64_t
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h | 2 +-
-+ .../tcmalloc/chromium/src/base/linux_syscall_support.h          | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h b/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h
--index 91f77dd..bb84a0b 100644
-+index 91f77dd88d..bb84a0b305 100644
- --- a/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h
- +++ b/chromium/third_party/tcmalloc/chromium/src/base/linux_syscall_support.h
- @@ -1929,7 +1929,7 @@ typedef unsigned long int ulong;
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index e8f44c5..656ee30 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -131,7 +131,7 @@ RDEPENDS_${PN}-examples += " \
- QT_MODULE_BRANCH_CHROMIUM = "56-based"
- 
- # Patches from https://github.com/meta-qt5/qtwebengine/commits/b5.9
--# 5.9.meta-qt5.5
-+# 5.9.meta-qt5.6
- SRC_URI += " \
-     ${QT_GIT}/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};protocol=${QT_GIT_PROTOCOL};destsuffix=git/src/3rdparty \
-     file://0001-functions.prf-allow-build-for-linux-oe-g-platform.patch \
-@@ -141,7 +141,7 @@ SRC_URI += " \
- "
- 
- # Patches from https://github.com/meta-qt5/qtwebengine-chromium/commits/56-based
--# 56-based.meta-qt5.5
-+# 56-based.meta-qt5.6
- SRC_URI += " \
-     file://0001-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch;patchdir=src/3rdparty \
-     file://0002-chromium-Force-host-toolchain-configuration.patch;patchdir=src/3rdparty \
-@@ -164,8 +164,8 @@ SRC_URI_append_libc-musl = "\
-     file://0016-chromium-musl-tcmalloc-Use-off64_t-insread-of-__off6.patch;patchdir=src/3rdparty \
- "
- 
--SRCREV_qtwebengine = "7af0066e50aa4c73cadafe2d47bc368a5b0187f6"
--SRCREV_chromium = "4f2e755be232c9083108e55a30876a19b67e25d4"
-+SRCREV_qtwebengine = "cc526afe9c2cdd4502c90b8f9b505812c984ea08"
-+SRCREV_chromium = "e5175271484644d6101ff3901aaabf2bceb06f28"
- SRCREV = "${SRCREV_qtwebengine}"
- 
- SRCREV_FORMAT = "qtwebengine_chromium"
-diff --git a/recipes-qt/qt5/qtwebsockets_git.bb b/recipes-qt/qt5/qtwebsockets_git.bb
-index ebf8a53..ccbe480 100644
---- a/recipes-qt/qt5/qtwebsockets_git.bb
-+++ b/recipes-qt/qt5/qtwebsockets_git.bb
-@@ -11,4 +11,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase qtdeclarative"
- 
--SRCREV = "74ea21a46daa8c8e3c1814ec517e360cb9503a9e"
-+SRCREV = "3dc383a8078d7478a230ca7acac922b373bb9930"
-diff --git a/recipes-qt/qt5/qtwebview_git.bb b/recipes-qt/qt5/qtwebview_git.bb
-index e60cc20..f17b94e 100644
---- a/recipes-qt/qt5/qtwebview_git.bb
-+++ b/recipes-qt/qt5/qtwebview_git.bb
-@@ -19,4 +19,4 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
- COMPATIBLE_MACHINE_armv7ve = "(.*)"
- COMPATIBLE_MACHINE_aarch64 = "(.*)"
- 
--SRCREV = "4acd68bc1c8b97c3764442d95515c10d226e564b"
-+SRCREV = "acc015e1cad69aa1a5224f6a3dcafa79df3a9286"
-diff --git a/recipes-qt/qt5/qtx11extras_git.bb b/recipes-qt/qt5/qtx11extras_git.bb
-index 57f8d85..2057ca8 100644
---- a/recipes-qt/qt5/qtx11extras_git.bb
-+++ b/recipes-qt/qt5/qtx11extras_git.bb
-@@ -13,4 +13,4 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase"
- 
--SRCREV = "4644f175b9abbe770818a77e058f08b888f6e8b7"
-+SRCREV = "b51ac2d46ca54769e242702f87bc6762f9f68ea9"
-diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
-index 7f306f8..1e9c910 100644
---- a/recipes-qt/qt5/qtxmlpatterns_git.bb
-+++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
-@@ -15,6 +15,6 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS += "qtbase"
- 
--SRCREV = "3444bfc8039c5090b02fd7f98abe8064a73019d7"
-+SRCREV = "4dcae15a5a7f848addfb1b6bc2a98a63dc7218b4"
- 
- BBCLASSEXTEND =+ "native nativesdk"
--- 
-2.17.1
+On 06/13/2018 08:47 PM, Zheng, Ruoqin wrote:
+> Hi
+>
+> Will this patch be merged in sumo branch?
+
+Once its in Master, I will pick it up.
+
+- armin
+>
+> Zheng Ruoqin
+>
+>
+> -----Original Message-----
+> From: Zheng, Ruoqin/÷£ »Ù«’ 
+> Sent: Sunday, May 27, 2018 6:42 PM
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Zheng, Ruoqin/÷£ »Ù«’ <zhengrq.fnst@cn.fujitsu.com>
+> Subject: [oe][meta-oe][PATCH] hostapd: fix the bug for PATCHTOOL = "patch"
+>
+> When switch PATCHTOOL to patch, the key-replay-cve-multiple.patch can't
+> be apply with "--dry-run" as follows:
+>
+> checking file src/ap/ieee802_11.c
+> checking file src/ap/wpa_auth.c
+> checking file src/ap/wpa_auth.h
+> checking file src/ap/wpa_auth_ft.c
+> checking file src/ap/wpa_auth_i.h
+> checking file src/common/wpa_common.h
+> checking file src/rsn_supp/wpa.c
+> checking file src/rsn_supp/wpa_i.h
+> checking file src/rsn_supp/wpa.c
+> Hunk #1 FAILED at 709.
+> Hunk #2 FAILED at 757.
+> Hunk #3 succeeded at 840 (offset -12 lines).
+> Hunk #4 FAILED at 868.
+> Hunk #5 FAILED at 900.
+> Hunk #6 FAILED at 924.
+> Hunk #7 succeeded at 1536 (offset -38 lines).
+> Hunk #8 FAILED at 2386.
+> Hunk #9 FAILED at 2920.
+> Hunk #10 succeeded at 2940 (offset -46 lines).
+> Hunk #11 FAILED at 2998.
+> 8 out of 11 hunks FAILED
+> checking file src/rsn_supp/wpa_i.h
+> Hunk #1 FAILED at 32.
+> 1 out of 1 hunk FAILED
+> checking file src/common/wpa_common.h
+> Hunk #1 succeeded at 215 with fuzz 1.
+> checking file src/rsn_supp/wpa.c
+> checking file src/rsn_supp/wpa_i.h
+> checking file src/ap/wpa_auth.c
+> Hunk #1 succeeded at 1898 (offset -3 lines).
+> Hunk #2 succeeded at 2470 (offset -3 lines).
+> checking file src/rsn_supp/tdls.c
+> checking file src/rsn_supp/wpa.c
+> Hunk #1 succeeded at 2378 (offset -62 lines).
+> checking file src/rsn_supp/wpa_ft.c
+> checking file src/rsn_supp/wpa_i.h
+> Hunk #1 succeeded at 123 (offset -5 lines).
+>
+> So split the key-replay-cve-multiple.patch to 7 patches.
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  ...-Avoid-key-reinstallation-in-FT-handshake.patch | 177 ++++
+>  ...nstallation-of-an-already-in-use-group-ke.patch | 253 ++++++
+>  ...ection-of-GTK-IGTK-reinstallation-of-WNM-.patch | 187 ++++
+>  ...04-Prevent-installation-of-an-all-zero-TK.patch |  82 ++
+>  ...Fix-PTK-rekeying-to-generate-a-new-ANonce.patch |  67 ++
+>  .../0006-TDLS-Reject-TPK-TK-reconfiguration.patch  | 135 +++
+>  ...llow-multiple-Reassociation-Response-fram.patch |  85 ++
+>  .../hostapd/hostapd/key-replay-cve-multiple.patch  | 984 ---------------------
+>  .../recipes-connectivity/hostapd/hostapd_2.6.bb    |   8 +-
+>  9 files changed, 993 insertions(+), 985 deletions(-)
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0004-Prevent-installation-of-an-all-zero-TK.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0006-TDLS-Reject-TPK-TK-reconfiguration.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0007-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch
+>  delete mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/key-replay-cve-multiple.patch
+>
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch
+> new file mode 100644
+> index 0000000..5535a3c
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch
+> @@ -0,0 +1,177 @@
+> +From 044ae35c5694c39a4aca2a33502cc3897e88f79e Mon Sep 17 00:00:00 2001
+> +From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> +Date: Fri, 14 Jul 2017 15:15:35 +0200
+> +Subject: [PATCH 1/7] hostapd: Avoid key reinstallation in FT handshake
+> +
+> +Do not reinstall TK to the driver during Reassociation Response frame
+> +processing if the first attempt of setting the TK succeeded. This avoids
+> +issues related to clearing the TX/RX PN that could result in reusing
+> +same PN values for transmitted frames (e.g., due to CCM nonce reuse and
+> +also hitting replay protection on the receiver) and accepting replayed
+> +frames on RX side.
+> +
+> +This issue was introduced by the commit
+> +0e84c25434e6a1f283c7b4e62e483729085b78d2 ('FT: Fix PTK configuration in
+> +authenticator') which allowed wpa_ft_install_ptk() to be called multiple
+> +times with the same PTK. While the second configuration attempt is
+> +needed with some drivers, it must be done only if the first attempt
+> +failed.
+> +
+> +Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/ap/ieee802_11.c  | 16 +++++++++++++---
+> + src/ap/wpa_auth.c    | 11 +++++++++++
+> + src/ap/wpa_auth.h    |  3 ++-
+> + src/ap/wpa_auth_ft.c | 10 ++++++++++
+> + src/ap/wpa_auth_i.h  |  1 +
+> + 5 files changed, 37 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/src/ap/ieee802_11.c b/src/ap/ieee802_11.c
+> +index 4e04169..333035f 100644
+> +--- a/src/ap/ieee802_11.c
+> ++++ b/src/ap/ieee802_11.c
+> +@@ -1841,6 +1841,7 @@ static int add_associated_sta(struct hostapd_data *hapd,
+> + {
+> + 	struct ieee80211_ht_capabilities ht_cap;
+> + 	struct ieee80211_vht_capabilities vht_cap;
+> ++	int set = 1;
+> + 
+> + 	/*
+> + 	 * Remove the STA entry to ensure the STA PS state gets cleared and
+> +@@ -1848,9 +1849,18 @@ static int add_associated_sta(struct hostapd_data *hapd,
+> + 	 * FT-over-the-DS, where a station re-associates back to the same AP but
+> + 	 * skips the authentication flow, or if working with a driver that
+> + 	 * does not support full AP client state.
+> ++	 *
+> ++	 * Skip this if the STA has already completed FT reassociation and the
+> ++	 * TK has been configured since the TX/RX PN must not be reset to 0 for
+> ++	 * the same key.
+> + 	 */
+> +-	if (!sta->added_unassoc)
+> ++	if (!sta->added_unassoc &&
+> ++	    (!(sta->flags & WLAN_STA_AUTHORIZED) ||
+> ++	     !wpa_auth_sta_ft_tk_already_set(sta->wpa_sm))) {
+> + 		hostapd_drv_sta_remove(hapd, sta->addr);
+> ++		wpa_auth_sm_event(sta->wpa_sm, WPA_DRV_STA_REMOVED);
+> ++		set = 0;
+> ++	}
+> + 
+> + #ifdef CONFIG_IEEE80211N
+> + 	if (sta->flags & WLAN_STA_HT)
+> +@@ -1873,11 +1883,11 @@ static int add_associated_sta(struct hostapd_data *hapd,
+> + 			    sta->flags & WLAN_STA_VHT ? &vht_cap : NULL,
+> + 			    sta->flags | WLAN_STA_ASSOC, sta->qosinfo,
+> + 			    sta->vht_opmode, sta->p2p_ie ? 1 : 0,
+> +-			    sta->added_unassoc)) {
+> ++			    set)) {
+> + 		hostapd_logger(hapd, sta->addr,
+> + 			       HOSTAPD_MODULE_IEEE80211, HOSTAPD_LEVEL_NOTICE,
+> + 			       "Could not %s STA to kernel driver",
+> +-			       sta->added_unassoc ? "set" : "add");
+> ++			       set ? "set" : "add");
+> + 
+> + 		if (sta->added_unassoc) {
+> + 			hostapd_drv_sta_remove(hapd, sta->addr);
+> +diff --git a/src/ap/wpa_auth.c b/src/ap/wpa_auth.c
+> +index 3587086..707971d 100644
+> +--- a/src/ap/wpa_auth.c
+> ++++ b/src/ap/wpa_auth.c
+> +@@ -1745,6 +1745,9 @@ int wpa_auth_sm_event(struct wpa_state_machine *sm, enum wpa_event event)
+> + #else /* CONFIG_IEEE80211R */
+> + 		break;
+> + #endif /* CONFIG_IEEE80211R */
+> ++	case WPA_DRV_STA_REMOVED:
+> ++		sm->tk_already_set = FALSE;
+> ++		return 0;
+> + 	}
+> + 
+> + #ifdef CONFIG_IEEE80211R
+> +@@ -3250,6 +3253,14 @@ int wpa_auth_sta_wpa_version(struct wpa_state_machine *sm)
+> + }
+> + 
+> + 
+> ++int wpa_auth_sta_ft_tk_already_set(struct wpa_state_machine *sm)
+> ++{
+> ++	if (!sm || !wpa_key_mgmt_ft(sm->wpa_key_mgmt))
+> ++		return 0;
+> ++	return sm->tk_already_set;
+> ++}
+> ++
+> ++
+> + int wpa_auth_sta_clear_pmksa(struct wpa_state_machine *sm,
+> + 			     struct rsn_pmksa_cache_entry *entry)
+> + {
+> +diff --git a/src/ap/wpa_auth.h b/src/ap/wpa_auth.h
+> +index 0de8d97..97461b0 100644
+> +--- a/src/ap/wpa_auth.h
+> ++++ b/src/ap/wpa_auth.h
+> +@@ -267,7 +267,7 @@ void wpa_receive(struct wpa_authenticator *wpa_auth,
+> + 		 u8 *data, size_t data_len);
+> + enum wpa_event {
+> + 	WPA_AUTH, WPA_ASSOC, WPA_DISASSOC, WPA_DEAUTH, WPA_REAUTH,
+> +-	WPA_REAUTH_EAPOL, WPA_ASSOC_FT
+> ++	WPA_REAUTH_EAPOL, WPA_ASSOC_FT, WPA_DRV_STA_REMOVED
+> + };
+> + void wpa_remove_ptk(struct wpa_state_machine *sm);
+> + int wpa_auth_sm_event(struct wpa_state_machine *sm, enum wpa_event event);
+> +@@ -280,6 +280,7 @@ int wpa_auth_pairwise_set(struct wpa_state_machine *sm);
+> + int wpa_auth_get_pairwise(struct wpa_state_machine *sm);
+> + int wpa_auth_sta_key_mgmt(struct wpa_state_machine *sm);
+> + int wpa_auth_sta_wpa_version(struct wpa_state_machine *sm);
+> ++int wpa_auth_sta_ft_tk_already_set(struct wpa_state_machine *sm);
+> + int wpa_auth_sta_clear_pmksa(struct wpa_state_machine *sm,
+> + 			     struct rsn_pmksa_cache_entry *entry);
+> + struct rsn_pmksa_cache_entry *
+> +diff --git a/src/ap/wpa_auth_ft.c b/src/ap/wpa_auth_ft.c
+> +index 42242a5..e63b99a 100644
+> +--- a/src/ap/wpa_auth_ft.c
+> ++++ b/src/ap/wpa_auth_ft.c
+> +@@ -780,6 +780,14 @@ void wpa_ft_install_ptk(struct wpa_state_machine *sm)
+> + 		return;
+> + 	}
+> + 
+> ++	if (sm->tk_already_set) {
+> ++		/* Must avoid TK reconfiguration to prevent clearing of TX/RX
+> ++		 * PN in the driver */
+> ++		wpa_printf(MSG_DEBUG,
+> ++			   "FT: Do not re-install same PTK to the driver");
+> ++		return;
+> ++	}
+> ++
+> + 	/* FIX: add STA entry to kernel/driver here? The set_key will fail
+> + 	 * most likely without this.. At the moment, STA entry is added only
+> + 	 * after association has been completed. This function will be called
+> +@@ -792,6 +800,7 @@ void wpa_ft_install_ptk(struct wpa_state_machine *sm)
+> + 
+> + 	/* FIX: MLME-SetProtection.Request(TA, Tx_Rx) */
+> + 	sm->pairwise_set = TRUE;
+> ++	sm->tk_already_set = TRUE;
+> + }
+> + 
+> + 
+> +@@ -898,6 +907,7 @@ static int wpa_ft_process_auth_req(struct wpa_state_machine *sm,
+> + 
+> + 	sm->pairwise = pairwise;
+> + 	sm->PTK_valid = TRUE;
+> ++	sm->tk_already_set = FALSE;
+> + 	wpa_ft_install_ptk(sm);
+> + 
+> + 	buflen = 2 + sizeof(struct rsn_mdie) + 2 + sizeof(struct rsn_ftie) +
+> +diff --git a/src/ap/wpa_auth_i.h b/src/ap/wpa_auth_i.h
+> +index 72b7eb3..7fd8f05 100644
+> +--- a/src/ap/wpa_auth_i.h
+> ++++ b/src/ap/wpa_auth_i.h
+> +@@ -65,6 +65,7 @@ struct wpa_state_machine {
+> + 	struct wpa_ptk PTK;
+> + 	Boolean PTK_valid;
+> + 	Boolean pairwise_set;
+> ++	Boolean tk_already_set;
+> + 	int keycount;
+> + 	Boolean Pair;
+> + 	struct wpa_key_replay_counter {
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch
+> new file mode 100644
+> index 0000000..4e57bca
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch
+> @@ -0,0 +1,253 @@
+> +From c623cc973de525f7411dffe438e957ba86ef4733 Mon Sep 17 00:00:00 2001
+> +From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> +Date: Wed, 12 Jul 2017 16:03:24 +0200
+> +Subject: [PATCH 2/7] Prevent reinstallation of an already in-use group key
+> +
+> +Track the current GTK and IGTK that is in use and when receiving a
+> +(possibly retransmitted) Group Message 1 or WNM-Sleep Mode Response, do
+> +not install the given key if it is already in use. This prevents an
+> +attacker from trying to trick the client into resetting or lowering the
+> +sequence counter associated to the group key.
+> +
+> +Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/common/wpa_common.h |  11 +++++
+> + src/rsn_supp/wpa.c      | 116 ++++++++++++++++++++++++++++++------------------
+> + src/rsn_supp/wpa_i.h    |   4 ++
+> + 3 files changed, 87 insertions(+), 44 deletions(-)
+> +
+> +diff --git a/src/common/wpa_common.h b/src/common/wpa_common.h
+> +index af1d0f0..d200285 100644
+> +--- a/src/common/wpa_common.h
+> ++++ b/src/common/wpa_common.h
+> +@@ -217,6 +217,17 @@ struct wpa_ptk {
+> + 	size_t tk_len;
+> + };
+> + 
+> ++struct wpa_gtk {
+> ++	u8 gtk[WPA_GTK_MAX_LEN];
+> ++	size_t gtk_len;
+> ++};
+> ++
+> ++#ifdef CONFIG_IEEE80211W
+> ++struct wpa_igtk {
+> ++	u8 igtk[WPA_IGTK_MAX_LEN];
+> ++	size_t igtk_len;
+> ++};
+> ++#endif /* CONFIG_IEEE80211W */
+> + 
+> + /* WPA IE version 1
+> +  * 00-50-f2:1 (OUI:OUI type)
+> +diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> +index 3c47879..95bd7be 100644
+> +--- a/src/rsn_supp/wpa.c
+> ++++ b/src/rsn_supp/wpa.c
+> +@@ -714,6 +714,15 @@ static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> + 	const u8 *_gtk = gd->gtk;
+> + 	u8 gtk_buf[32];
+> + 
+> ++	/* Detect possible key reinstallation */
+> ++	if (sm->gtk.gtk_len == (size_t) gd->gtk_len &&
+> ++	    os_memcmp(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len) == 0) {
+> ++		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> ++			"WPA: Not reinstalling already in-use GTK to the driver (keyidx=%d tx=%d len=%d)",
+> ++			gd->keyidx, gd->tx, gd->gtk_len);
+> ++		return 0;
+> ++	}
+> ++
+> + 	wpa_hexdump_key(MSG_DEBUG, "WPA: Group Key", gd->gtk, gd->gtk_len);
+> + 	wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> + 		"WPA: Installing GTK to the driver (keyidx=%d tx=%d len=%d)",
+> +@@ -748,6 +757,9 @@ static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> + 	}
+> + 	os_memset(gtk_buf, 0, sizeof(gtk_buf));
+> + 
+> ++	sm->gtk.gtk_len = gd->gtk_len;
+> ++	os_memcpy(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len);
+> ++
+> + 	return 0;
+> + }
+> + 
+> +@@ -854,6 +866,48 @@ static int wpa_supplicant_pairwise_gtk(struct wpa_sm *sm,
+> + }
+> + 
+> + 
+> ++#ifdef CONFIG_IEEE80211W
+> ++static int wpa_supplicant_install_igtk(struct wpa_sm *sm,
+> ++				       const struct wpa_igtk_kde *igtk)
+> ++{
+> ++	size_t len = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> ++	u16 keyidx = WPA_GET_LE16(igtk->keyid);
+> ++
+> ++	/* Detect possible key reinstallation */
+> ++	if (sm->igtk.igtk_len == len &&
+> ++	    os_memcmp(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len) == 0) {
+> ++		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> ++			"WPA: Not reinstalling already in-use IGTK to the driver (keyidx=%d)",
+> ++			keyidx);
+> ++		return  0;
+> ++	}
+> ++
+> ++	wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> ++		"WPA: IGTK keyid %d pn %02x%02x%02x%02x%02x%02x",
+> ++		keyidx, MAC2STR(igtk->pn));
+> ++	wpa_hexdump_key(MSG_DEBUG, "WPA: IGTK", igtk->igtk, len);
+> ++	if (keyidx > 4095) {
+> ++		wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> ++			"WPA: Invalid IGTK KeyID %d", keyidx);
+> ++		return -1;
+> ++	}
+> ++	if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+> ++			   broadcast_ether_addr,
+> ++			   keyidx, 0, igtk->pn, sizeof(igtk->pn),
+> ++			   igtk->igtk, len) < 0) {
+> ++		wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> ++			"WPA: Failed to configure IGTK to the driver");
+> ++		return -1;
+> ++	}
+> ++
+> ++	sm->igtk.igtk_len = len;
+> ++	os_memcpy(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len);
+> ++
+> ++	return 0;
+> ++}
+> ++#endif /* CONFIG_IEEE80211W */
+> ++
+> ++
+> + static int ieee80211w_set_keys(struct wpa_sm *sm,
+> + 			       struct wpa_eapol_ie_parse *ie)
+> + {
+> +@@ -864,30 +918,14 @@ static int ieee80211w_set_keys(struct wpa_sm *sm,
+> + 	if (ie->igtk) {
+> + 		size_t len;
+> + 		const struct wpa_igtk_kde *igtk;
+> +-		u16 keyidx;
+> ++
+> + 		len = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> + 		if (ie->igtk_len != WPA_IGTK_KDE_PREFIX_LEN + len)
+> + 			return -1;
+> ++
+> + 		igtk = (const struct wpa_igtk_kde *) ie->igtk;
+> +-		keyidx = WPA_GET_LE16(igtk->keyid);
+> +-		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG, "WPA: IGTK keyid %d "
+> +-			"pn %02x%02x%02x%02x%02x%02x",
+> +-			keyidx, MAC2STR(igtk->pn));
+> +-		wpa_hexdump_key(MSG_DEBUG, "WPA: IGTK",
+> +-				igtk->igtk, len);
+> +-		if (keyidx > 4095) {
+> +-			wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> +-				"WPA: Invalid IGTK KeyID %d", keyidx);
+> +-			return -1;
+> +-		}
+> +-		if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+> +-				   broadcast_ether_addr,
+> +-				   keyidx, 0, igtk->pn, sizeof(igtk->pn),
+> +-				   igtk->igtk, len) < 0) {
+> +-			wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> +-				"WPA: Failed to configure IGTK to the driver");
+> ++		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> + 			return -1;
+> +-		}
+> + 	}
+> + 
+> + 	return 0;
+> +@@ -2307,7 +2345,7 @@ void wpa_sm_deinit(struct wpa_sm *sm)
+> +  */
+> + void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> + {
+> +-	int clear_ptk = 1;
+> ++	int clear_keys = 1;
+> + 
+> + 	if (sm == NULL)
+> + 		return;
+> +@@ -2333,11 +2371,11 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> + 		/* Prepare for the next transition */
+> + 		wpa_ft_prepare_auth_request(sm, NULL);
+> + 
+> +-		clear_ptk = 0;
+> ++		clear_keys = 0;
+> + 	}
+> + #endif /* CONFIG_IEEE80211R */
+> + 
+> +-	if (clear_ptk) {
+> ++	if (clear_keys) {
+> + 		/*
+> + 		 * IEEE 802.11, 8.4.10: Delete PTK SA on (re)association if
+> + 		 * this is not part of a Fast BSS Transition.
+> +@@ -2347,6 +2385,10 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> + 		os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+> + 		sm->tptk_set = 0;
+> + 		os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> ++		os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> ++#ifdef CONFIG_IEEE80211W
+> ++		os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> ++#endif /* CONFIG_IEEE80211W */
+> + 	}
+> + 
+> + #ifdef CONFIG_TDLS
+> +@@ -2877,6 +2919,10 @@ void wpa_sm_drop_sa(struct wpa_sm *sm)
+> + 	os_memset(sm->pmk, 0, sizeof(sm->pmk));
+> + 	os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+> + 	os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> ++	os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> ++#ifdef CONFIG_IEEE80211W
+> ++	os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> ++#endif /* CONFIG_IEEE80211W */
+> + #ifdef CONFIG_IEEE80211R
+> + 	os_memset(sm->xxkey, 0, sizeof(sm->xxkey));
+> + 	os_memset(sm->pmk_r0, 0, sizeof(sm->pmk_r0));
+> +@@ -2949,29 +2995,11 @@ int wpa_wnmsleep_install_key(struct wpa_sm *sm, u8 subelem_id, u8 *buf)
+> + 		os_memset(&gd, 0, sizeof(gd));
+> + #ifdef CONFIG_IEEE80211W
+> + 	} else if (subelem_id == WNM_SLEEP_SUBELEM_IGTK) {
+> +-		struct wpa_igtk_kde igd;
+> +-		u16 keyidx;
+> +-
+> +-		os_memset(&igd, 0, sizeof(igd));
+> +-		keylen = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> +-		os_memcpy(igd.keyid, buf + 2, 2);
+> +-		os_memcpy(igd.pn, buf + 4, 6);
+> +-
+> +-		keyidx = WPA_GET_LE16(igd.keyid);
+> +-		os_memcpy(igd.igtk, buf + 10, keylen);
+> +-
+> +-		wpa_hexdump_key(MSG_DEBUG, "Install IGTK (WNM SLEEP)",
+> +-				igd.igtk, keylen);
+> +-		if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+> +-				   broadcast_ether_addr,
+> +-				   keyidx, 0, igd.pn, sizeof(igd.pn),
+> +-				   igd.igtk, keylen) < 0) {
+> +-			wpa_printf(MSG_DEBUG, "Failed to install the IGTK in "
+> +-				   "WNM mode");
+> +-			os_memset(&igd, 0, sizeof(igd));
+> ++		const struct wpa_igtk_kde *igtk;
+> ++
+> ++		igtk = (const struct wpa_igtk_kde *) (buf + 2);
+> ++		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> + 			return -1;
+> +-		}
+> +-		os_memset(&igd, 0, sizeof(igd));
+> + #endif /* CONFIG_IEEE80211W */
+> + 	} else {
+> + 		wpa_printf(MSG_DEBUG, "Unknown element id");
+> +diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> +index f653ba6..afc9e37 100644
+> +--- a/src/rsn_supp/wpa_i.h
+> ++++ b/src/rsn_supp/wpa_i.h
+> +@@ -31,6 +31,10 @@ struct wpa_sm {
+> + 	u8 rx_replay_counter[WPA_REPLAY_COUNTER_LEN];
+> + 	int rx_replay_counter_set;
+> + 	u8 request_counter[WPA_REPLAY_COUNTER_LEN];
+> ++	struct wpa_gtk gtk;
+> ++#ifdef CONFIG_IEEE80211W
+> ++	struct wpa_igtk igtk;
+> ++#endif /* CONFIG_IEEE80211W */
+> + 
+> + 	struct eapol_sm *eapol; /* EAPOL state machine from upper level code */
+> + 
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch
+> new file mode 100644
+> index 0000000..e39bbf6
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch
+> @@ -0,0 +1,187 @@
+> +From a6caab8060ab60876e233306f5c586451169eba1 Mon Sep 17 00:00:00 2001
+> +From: Jouni Malinen <j@w1.fi>
+> +Date: Sun, 1 Oct 2017 12:12:24 +0300
+> +Subject: [PATCH 3/7] Extend protection of GTK/IGTK reinstallation of WNM-Sleep
+> + Mode cases
+> +
+> +This extends the protection to track last configured GTK/IGTK value
+> +separately from EAPOL-Key frames and WNM-Sleep Mode frames to cover a
+> +corner case where these two different mechanisms may get used when the
+> +GTK/IGTK has changed and tracking a single value is not sufficient to
+> +detect a possible key reconfiguration.
+> +
+> +Signed-off-by: Jouni Malinen <j@w1.fi>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/rsn_supp/wpa.c   | 53 +++++++++++++++++++++++++++++++++++++---------------
+> + src/rsn_supp/wpa_i.h |  2 ++
+> + 2 files changed, 40 insertions(+), 15 deletions(-)
+> +
+> +diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> +index 95bd7be..7a2c68d 100644
+> +--- a/src/rsn_supp/wpa.c
+> ++++ b/src/rsn_supp/wpa.c
+> +@@ -709,14 +709,17 @@ struct wpa_gtk_data {
+> + 
+> + static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> + 				      const struct wpa_gtk_data *gd,
+> +-				      const u8 *key_rsc)
+> ++				      const u8 *key_rsc, int wnm_sleep)
+> + {
+> + 	const u8 *_gtk = gd->gtk;
+> + 	u8 gtk_buf[32];
+> + 
+> + 	/* Detect possible key reinstallation */
+> +-	if (sm->gtk.gtk_len == (size_t) gd->gtk_len &&
+> +-	    os_memcmp(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len) == 0) {
+> ++	if ((sm->gtk.gtk_len == (size_t) gd->gtk_len &&
+> ++	     os_memcmp(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len) == 0) ||
+> ++	    (sm->gtk_wnm_sleep.gtk_len == (size_t) gd->gtk_len &&
+> ++	     os_memcmp(sm->gtk_wnm_sleep.gtk, gd->gtk,
+> ++		       sm->gtk_wnm_sleep.gtk_len) == 0)) {
+> + 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> + 			"WPA: Not reinstalling already in-use GTK to the driver (keyidx=%d tx=%d len=%d)",
+> + 			gd->keyidx, gd->tx, gd->gtk_len);
+> +@@ -757,8 +760,14 @@ static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> + 	}
+> + 	os_memset(gtk_buf, 0, sizeof(gtk_buf));
+> + 
+> +-	sm->gtk.gtk_len = gd->gtk_len;
+> +-	os_memcpy(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len);
+> ++	if (wnm_sleep) {
+> ++		sm->gtk_wnm_sleep.gtk_len = gd->gtk_len;
+> ++		os_memcpy(sm->gtk_wnm_sleep.gtk, gd->gtk,
+> ++			  sm->gtk_wnm_sleep.gtk_len);
+> ++	} else {
+> ++		sm->gtk.gtk_len = gd->gtk_len;
+> ++		os_memcpy(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len);
+> ++	}
+> + 
+> + 	return 0;
+> + }
+> +@@ -852,7 +861,7 @@ static int wpa_supplicant_pairwise_gtk(struct wpa_sm *sm,
+> + 	    (wpa_supplicant_check_group_cipher(sm, sm->group_cipher,
+> + 					       gtk_len, gtk_len,
+> + 					       &gd.key_rsc_len, &gd.alg) ||
+> +-	     wpa_supplicant_install_gtk(sm, &gd, key_rsc))) {
+> ++	     wpa_supplicant_install_gtk(sm, &gd, key_rsc, 0))) {
+> + 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> + 			"RSN: Failed to install GTK");
+> + 		os_memset(&gd, 0, sizeof(gd));
+> +@@ -868,14 +877,18 @@ static int wpa_supplicant_pairwise_gtk(struct wpa_sm *sm,
+> + 
+> + #ifdef CONFIG_IEEE80211W
+> + static int wpa_supplicant_install_igtk(struct wpa_sm *sm,
+> +-				       const struct wpa_igtk_kde *igtk)
+> ++				       const struct wpa_igtk_kde *igtk,
+> ++				       int wnm_sleep)
+> + {
+> + 	size_t len = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> + 	u16 keyidx = WPA_GET_LE16(igtk->keyid);
+> + 
+> + 	/* Detect possible key reinstallation */
+> +-	if (sm->igtk.igtk_len == len &&
+> +-	    os_memcmp(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len) == 0) {
+> ++	if ((sm->igtk.igtk_len == len &&
+> ++	     os_memcmp(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len) == 0) ||
+> ++	    (sm->igtk_wnm_sleep.igtk_len == len &&
+> ++	     os_memcmp(sm->igtk_wnm_sleep.igtk, igtk->igtk,
+> ++		       sm->igtk_wnm_sleep.igtk_len) == 0)) {
+> + 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> + 			"WPA: Not reinstalling already in-use IGTK to the driver (keyidx=%d)",
+> + 			keyidx);
+> +@@ -900,8 +913,14 @@ static int wpa_supplicant_install_igtk(struct wpa_sm *sm,
+> + 		return -1;
+> + 	}
+> + 
+> +-	sm->igtk.igtk_len = len;
+> +-	os_memcpy(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len);
+> ++	if (wnm_sleep) {
+> ++		sm->igtk_wnm_sleep.igtk_len = len;
+> ++		os_memcpy(sm->igtk_wnm_sleep.igtk, igtk->igtk,
+> ++			  sm->igtk_wnm_sleep.igtk_len);
+> ++	} else {
+> ++		sm->igtk.igtk_len = len;
+> ++		os_memcpy(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len);
+> ++	}
+> + 
+> + 	return 0;
+> + }
+> +@@ -924,7 +943,7 @@ static int ieee80211w_set_keys(struct wpa_sm *sm,
+> + 			return -1;
+> + 
+> + 		igtk = (const struct wpa_igtk_kde *) ie->igtk;
+> +-		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> ++		if (wpa_supplicant_install_igtk(sm, igtk, 0) < 0)
+> + 			return -1;
+> + 	}
+> + 
+> +@@ -1574,7 +1593,7 @@ static void wpa_supplicant_process_1_of_2(struct wpa_sm *sm,
+> + 	if (wpa_supplicant_rsc_relaxation(sm, key->key_rsc))
+> + 		key_rsc = null_rsc;
+> + 
+> +-	if (wpa_supplicant_install_gtk(sm, &gd, key_rsc) ||
+> ++	if (wpa_supplicant_install_gtk(sm, &gd, key_rsc, 0) ||
+> + 	    wpa_supplicant_send_2_of_2(sm, key, ver, key_info) < 0)
+> + 		goto failed;
+> + 	os_memset(&gd, 0, sizeof(gd));
+> +@@ -2386,8 +2405,10 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> + 		sm->tptk_set = 0;
+> + 		os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> + 		os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> ++		os_memset(&sm->gtk_wnm_sleep, 0, sizeof(sm->gtk_wnm_sleep));
+> + #ifdef CONFIG_IEEE80211W
+> + 		os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> ++		os_memset(&sm->igtk_wnm_sleep, 0, sizeof(sm->igtk_wnm_sleep));
+> + #endif /* CONFIG_IEEE80211W */
+> + 	}
+> + 
+> +@@ -2920,8 +2941,10 @@ void wpa_sm_drop_sa(struct wpa_sm *sm)
+> + 	os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+> + 	os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> + 	os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> ++	os_memset(&sm->gtk_wnm_sleep, 0, sizeof(sm->gtk_wnm_sleep));
+> + #ifdef CONFIG_IEEE80211W
+> + 	os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> ++	os_memset(&sm->igtk_wnm_sleep, 0, sizeof(sm->igtk_wnm_sleep));
+> + #endif /* CONFIG_IEEE80211W */
+> + #ifdef CONFIG_IEEE80211R
+> + 	os_memset(sm->xxkey, 0, sizeof(sm->xxkey));
+> +@@ -2986,7 +3009,7 @@ int wpa_wnmsleep_install_key(struct wpa_sm *sm, u8 subelem_id, u8 *buf)
+> + 
+> + 		wpa_hexdump_key(MSG_DEBUG, "Install GTK (WNM SLEEP)",
+> + 				gd.gtk, gd.gtk_len);
+> +-		if (wpa_supplicant_install_gtk(sm, &gd, key_rsc)) {
+> ++		if (wpa_supplicant_install_gtk(sm, &gd, key_rsc, 1)) {
+> + 			os_memset(&gd, 0, sizeof(gd));
+> + 			wpa_printf(MSG_DEBUG, "Failed to install the GTK in "
+> + 				   "WNM mode");
+> +@@ -2998,7 +3021,7 @@ int wpa_wnmsleep_install_key(struct wpa_sm *sm, u8 subelem_id, u8 *buf)
+> + 		const struct wpa_igtk_kde *igtk;
+> + 
+> + 		igtk = (const struct wpa_igtk_kde *) (buf + 2);
+> +-		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> ++		if (wpa_supplicant_install_igtk(sm, igtk, 1) < 0)
+> + 			return -1;
+> + #endif /* CONFIG_IEEE80211W */
+> + 	} else {
+> +diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> +index afc9e37..9a54631 100644
+> +--- a/src/rsn_supp/wpa_i.h
+> ++++ b/src/rsn_supp/wpa_i.h
+> +@@ -32,8 +32,10 @@ struct wpa_sm {
+> + 	int rx_replay_counter_set;
+> + 	u8 request_counter[WPA_REPLAY_COUNTER_LEN];
+> + 	struct wpa_gtk gtk;
+> ++	struct wpa_gtk gtk_wnm_sleep;
+> + #ifdef CONFIG_IEEE80211W
+> + 	struct wpa_igtk igtk;
+> ++	struct wpa_igtk igtk_wnm_sleep;
+> + #endif /* CONFIG_IEEE80211W */
+> + 
+> + 	struct eapol_sm *eapol; /* EAPOL state machine from upper level code */
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0004-Prevent-installation-of-an-all-zero-TK.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0004-Prevent-installation-of-an-all-zero-TK.patch
+> new file mode 100644
+> index 0000000..5103625
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0004-Prevent-installation-of-an-all-zero-TK.patch
+> @@ -0,0 +1,82 @@
+> +From abf941647f2dc33b0b59612f525e1b292331cc9f Mon Sep 17 00:00:00 2001
+> +From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> +Date: Fri, 29 Sep 2017 04:22:51 +0200
+> +Subject: [PATCH 4/7] Prevent installation of an all-zero TK
+> +
+> +Properly track whether a PTK has already been installed to the driver
+> +and the TK part cleared from memory. This prevents an attacker from
+> +trying to trick the client into installing an all-zero TK.
+> +
+> +This fixes the earlier fix in commit
+> +ad00d64e7d8827b3cebd665a0ceb08adabf15e1e ('Fix TK configuration to the
+> +driver in EAPOL-Key 3/4 retry case') which did not take into account
+> +possibility of an extra message 1/4 showing up between retries of
+> +message 3/4.
+> +
+> +Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/common/wpa_common.h | 1 +
+> + src/rsn_supp/wpa.c      | 5 ++---
+> + src/rsn_supp/wpa_i.h    | 1 -
+> + 3 files changed, 3 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/src/common/wpa_common.h b/src/common/wpa_common.h
+> +index d200285..1021ccb 100644
+> +--- a/src/common/wpa_common.h
+> ++++ b/src/common/wpa_common.h
+> +@@ -215,6 +215,7 @@ struct wpa_ptk {
+> + 	size_t kck_len;
+> + 	size_t kek_len;
+> + 	size_t tk_len;
+> ++	int installed; /* 1 if key has already been installed to driver */
+> + };
+> + 
+> + struct wpa_gtk {
+> +diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> +index 7a2c68d..0550a41 100644
+> +--- a/src/rsn_supp/wpa.c
+> ++++ b/src/rsn_supp/wpa.c
+> +@@ -510,7 +510,6 @@ static void wpa_supplicant_process_1_of_4(struct wpa_sm *sm,
+> + 		os_memset(buf, 0, sizeof(buf));
+> + 	}
+> + 	sm->tptk_set = 1;
+> +-	sm->tk_to_set = 1;
+> + 
+> + 	kde = sm->assoc_wpa_ie;
+> + 	kde_len = sm->assoc_wpa_ie_len;
+> +@@ -615,7 +614,7 @@ static int wpa_supplicant_install_ptk(struct wpa_sm *sm,
+> + 	enum wpa_alg alg;
+> + 	const u8 *key_rsc;
+> + 
+> +-	if (!sm->tk_to_set) {
+> ++	if (sm->ptk.installed) {
+> + 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> + 			"WPA: Do not re-install same PTK to the driver");
+> + 		return 0;
+> +@@ -659,7 +658,7 @@ static int wpa_supplicant_install_ptk(struct wpa_sm *sm,
+> + 
+> + 	/* TK is not needed anymore in supplicant */
+> + 	os_memset(sm->ptk.tk, 0, WPA_TK_MAX_LEN);
+> +-	sm->tk_to_set = 0;
+> ++	sm->ptk.installed = 1;
+> + 
+> + 	if (sm->wpa_ptk_rekey) {
+> + 		eloop_cancel_timeout(wpa_sm_rekey_ptk, sm, NULL);
+> +diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> +index 9a54631..41f371f 100644
+> +--- a/src/rsn_supp/wpa_i.h
+> ++++ b/src/rsn_supp/wpa_i.h
+> +@@ -24,7 +24,6 @@ struct wpa_sm {
+> + 	struct wpa_ptk ptk, tptk;
+> + 	int ptk_set, tptk_set;
+> + 	unsigned int msg_3_of_4_ok:1;
+> +-	unsigned int tk_to_set:1;
+> + 	u8 snonce[WPA_NONCE_LEN];
+> + 	u8 anonce[WPA_NONCE_LEN]; /* ANonce from the last 1/4 msg */
+> + 	int renew_snonce;
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch
+> new file mode 100644
+> index 0000000..b0e1df3
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch
+> @@ -0,0 +1,67 @@
+> +From 804b9d72808cddd822e7dcec4d60f40c1aceda82 Mon Sep 17 00:00:00 2001
+> +From: Jouni Malinen <j@w1.fi>
+> +Date: Sun, 1 Oct 2017 12:32:57 +0300
+> +Subject: [PATCH 5/7] Fix PTK rekeying to generate a new ANonce
+> +
+> +The Authenticator state machine path for PTK rekeying ended up bypassing
+> +the AUTHENTICATION2 state where a new ANonce is generated when going
+> +directly to the PTKSTART state since there is no need to try to
+> +determine the PMK again in such a case. This is far from ideal since the
+> +new PTK would depend on a new nonce only from the supplicant.
+> +
+> +Fix this by generating a new ANonce when moving to the PTKSTART state
+> +for the purpose of starting new 4-way handshake to rekey PTK.
+> +
+> +Signed-off-by: Jouni Malinen <j@w1.fi>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/ap/wpa_auth.c | 24 +++++++++++++++++++++---
+> + 1 file changed, 21 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/src/ap/wpa_auth.c b/src/ap/wpa_auth.c
+> +index 707971d..bf10cc1 100644
+> +--- a/src/ap/wpa_auth.c
+> ++++ b/src/ap/wpa_auth.c
+> +@@ -1901,6 +1901,21 @@ SM_STATE(WPA_PTK, AUTHENTICATION2)
+> + }
+> + 
+> + 
+> ++static int wpa_auth_sm_ptk_update(struct wpa_state_machine *sm)
+> ++{
+> ++	if (random_get_bytes(sm->ANonce, WPA_NONCE_LEN)) {
+> ++		wpa_printf(MSG_ERROR,
+> ++			   "WPA: Failed to get random data for ANonce");
+> ++		sm->Disconnect = TRUE;
+> ++		return -1;
+> ++	}
+> ++	wpa_hexdump(MSG_DEBUG, "WPA: Assign new ANonce", sm->ANonce,
+> ++		    WPA_NONCE_LEN);
+> ++	sm->TimeoutCtr = 0;
+> ++	return 0;
+> ++}
+> ++
+> ++
+> + SM_STATE(WPA_PTK, INITPMK)
+> + {
+> + 	u8 msk[2 * PMK_LEN];
+> +@@ -2458,9 +2473,12 @@ SM_STEP(WPA_PTK)
+> + 		SM_ENTER(WPA_PTK, AUTHENTICATION);
+> + 	else if (sm->ReAuthenticationRequest)
+> + 		SM_ENTER(WPA_PTK, AUTHENTICATION2);
+> +-	else if (sm->PTKRequest)
+> +-		SM_ENTER(WPA_PTK, PTKSTART);
+> +-	else switch (sm->wpa_ptk_state) {
+> ++	else if (sm->PTKRequest) {
+> ++		if (wpa_auth_sm_ptk_update(sm) < 0)
+> ++			SM_ENTER(WPA_PTK, DISCONNECTED);
+> ++		else
+> ++			SM_ENTER(WPA_PTK, PTKSTART);
+> ++	} else switch (sm->wpa_ptk_state) {
+> + 	case WPA_PTK_INITIALIZE:
+> + 		break;
+> + 	case WPA_PTK_DISCONNECT:
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0006-TDLS-Reject-TPK-TK-reconfiguration.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0006-TDLS-Reject-TPK-TK-reconfiguration.patch
+> new file mode 100644
+> index 0000000..72c7d51
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0006-TDLS-Reject-TPK-TK-reconfiguration.patch
+> @@ -0,0 +1,135 @@
+> +From 7fd26db2d8147ed662db192c41d7bc15752a601d Mon Sep 17 00:00:00 2001
+> +From: Jouni Malinen <j@w1.fi>
+> +Date: Fri, 22 Sep 2017 11:03:15 +0300
+> +Subject: [PATCH 6/7] TDLS: Reject TPK-TK reconfiguration
+> +
+> +Do not try to reconfigure the same TPK-TK to the driver after it has
+> +been successfully configured. This is an explicit check to avoid issues
+> +related to resetting the TX/RX packet number. There was already a check
+> +for this for TPK M2 (retries of that message are ignored completely), so
+> +that behavior does not get modified.
+> +
+> +For TPK M3, the TPK-TK could have been reconfigured, but that was
+> +followed by immediate teardown of the link due to an issue in updating
+> +the STA entry. Furthermore, for TDLS with any real security (i.e.,
+> +ignoring open/WEP), the TPK message exchange is protected on the AP path
+> +and simple replay attacks are not feasible.
+> +
+> +As an additional corner case, make sure the local nonce gets updated if
+> +the peer uses a very unlikely "random nonce" of all zeros.
+> +
+> +Signed-off-by: Jouni Malinen <j@w1.fi>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/rsn_supp/tdls.c | 38 ++++++++++++++++++++++++++++++++++++--
+> + 1 file changed, 36 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/rsn_supp/tdls.c b/src/rsn_supp/tdls.c
+> +index e424168..9eb9738 100644
+> +--- a/src/rsn_supp/tdls.c
+> ++++ b/src/rsn_supp/tdls.c
+> +@@ -112,6 +112,7 @@ struct wpa_tdls_peer {
+> + 		u8 tk[16]; /* TPK-TK; assuming only CCMP will be used */
+> + 	} tpk;
+> + 	int tpk_set;
+> ++	int tk_set; /* TPK-TK configured to the driver */
+> + 	int tpk_success;
+> + 	int tpk_in_progress;
+> + 
+> +@@ -192,6 +193,20 @@ static int wpa_tdls_set_key(struct wpa_sm *sm, struct wpa_tdls_peer *peer)
+> + 	u8 rsc[6];
+> + 	enum wpa_alg alg;
+> + 
+> ++	if (peer->tk_set) {
+> ++		/*
+> ++		 * This same TPK-TK has already been configured to the driver
+> ++		 * and this new configuration attempt (likely due to an
+> ++		 * unexpected retransmitted frame) would result in clearing
+> ++		 * the TX/RX sequence number which can break security, so must
+> ++		 * not allow that to happen.
+> ++		 */
+> ++		wpa_printf(MSG_INFO, "TDLS: TPK-TK for the peer " MACSTR
+> ++			   " has already been configured to the driver - do not reconfigure",
+> ++			   MAC2STR(peer->addr));
+> ++		return -1;
+> ++	}
+> ++
+> + 	os_memset(rsc, 0, 6);
+> + 
+> + 	switch (peer->cipher) {
+> +@@ -209,12 +224,15 @@ static int wpa_tdls_set_key(struct wpa_sm *sm, struct wpa_tdls_peer *peer)
+> + 		return -1;
+> + 	}
+> + 
+> ++	wpa_printf(MSG_DEBUG, "TDLS: Configure pairwise key for peer " MACSTR,
+> ++		   MAC2STR(peer->addr));
+> + 	if (wpa_sm_set_key(sm, alg, peer->addr, -1, 1,
+> + 			   rsc, sizeof(rsc), peer->tpk.tk, key_len) < 0) {
+> + 		wpa_printf(MSG_WARNING, "TDLS: Failed to set TPK to the "
+> + 			   "driver");
+> + 		return -1;
+> + 	}
+> ++	peer->tk_set = 1;
+> + 	return 0;
+> + }
+> + 
+> +@@ -696,7 +714,7 @@ static void wpa_tdls_peer_clear(struct wpa_sm *sm, struct wpa_tdls_peer *peer)
+> + 	peer->cipher = 0;
+> + 	peer->qos_info = 0;
+> + 	peer->wmm_capable = 0;
+> +-	peer->tpk_set = peer->tpk_success = 0;
+> ++	peer->tk_set = peer->tpk_set = peer->tpk_success = 0;
+> + 	peer->chan_switch_enabled = 0;
+> + 	os_memset(&peer->tpk, 0, sizeof(peer->tpk));
+> + 	os_memset(peer->inonce, 0, WPA_NONCE_LEN);
+> +@@ -1159,6 +1177,7 @@ skip_rsnie:
+> + 		wpa_tdls_peer_free(sm, peer);
+> + 		return -1;
+> + 	}
+> ++	peer->tk_set = 0; /* A new nonce results in a new TK */
+> + 	wpa_hexdump(MSG_DEBUG, "TDLS: Initiator Nonce for TPK handshake",
+> + 		    peer->inonce, WPA_NONCE_LEN);
+> + 	os_memcpy(ftie->Snonce, peer->inonce, WPA_NONCE_LEN);
+> +@@ -1751,6 +1770,19 @@ static int wpa_tdls_addset_peer(struct wpa_sm *sm, struct wpa_tdls_peer *peer,
+> + }
+> + 
+> + 
+> ++static int tdls_nonce_set(const u8 *nonce)
+> ++{
+> ++	int i;
+> ++
+> ++	for (i = 0; i < WPA_NONCE_LEN; i++) {
+> ++		if (nonce[i])
+> ++			return 1;
+> ++	}
+> ++
+> ++	return 0;
+> ++}
+> ++
+> ++
+> + static int wpa_tdls_process_tpk_m1(struct wpa_sm *sm, const u8 *src_addr,
+> + 				   const u8 *buf, size_t len)
+> + {
+> +@@ -2004,7 +2036,8 @@ skip_rsn:
+> + 	peer->rsnie_i_len = kde.rsn_ie_len;
+> + 	peer->cipher = cipher;
+> + 
+> +-	if (os_memcmp(peer->inonce, ftie->Snonce, WPA_NONCE_LEN) != 0) {
+> ++	if (os_memcmp(peer->inonce, ftie->Snonce, WPA_NONCE_LEN) != 0 ||
+> ++	    !tdls_nonce_set(peer->inonce)) {
+> + 		/*
+> + 		 * There is no point in updating the RNonce for every obtained
+> + 		 * TPK M1 frame (e.g., retransmission due to timeout) with the
+> +@@ -2020,6 +2053,7 @@ skip_rsn:
+> + 				"TDLS: Failed to get random data for responder nonce");
+> + 			goto error;
+> + 		}
+> ++		peer->tk_set = 0; /* A new nonce results in a new TK */
+> + 	}
+> + 
+> + #if 0
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0007-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0007-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch
+> new file mode 100644
+> index 0000000..d0978c7
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd/0007-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch
+> @@ -0,0 +1,85 @@
+> +From a42eb67c42f845faf266b0633d52e17f2a82f511 Mon Sep 17 00:00:00 2001
+> +From: Jouni Malinen <j@w1.fi>
+> +Date: Fri, 22 Sep 2017 12:06:37 +0300
+> +Subject: [PATCH 7/7] FT: Do not allow multiple Reassociation Response frames
+> +
+> +The driver is expected to not report a second association event without
+> +the station having explicitly request a new association. As such, this
+> +case should not be reachable. However, since reconfiguring the same
+> +pairwise or group keys to the driver could result in nonce reuse issues,
+> +be extra careful here and do an additional state check to avoid this
+> +even if the local driver ends up somehow accepting an unexpected
+> +Reassociation Response frame.
+> +
+> +Signed-off-by: Jouni Malinen <j@w1.fi>
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + src/rsn_supp/wpa.c    | 3 +++
+> + src/rsn_supp/wpa_ft.c | 8 ++++++++
+> + src/rsn_supp/wpa_i.h  | 1 +
+> + 3 files changed, 12 insertions(+)
+> +
+> +diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> +index 0550a41..2a53c6f 100644
+> +--- a/src/rsn_supp/wpa.c
+> ++++ b/src/rsn_supp/wpa.c
+> +@@ -2440,6 +2440,9 @@ void wpa_sm_notify_disassoc(struct wpa_sm *sm)
+> + #ifdef CONFIG_TDLS
+> + 	wpa_tdls_disassoc(sm);
+> + #endif /* CONFIG_TDLS */
+> ++#ifdef CONFIG_IEEE80211R
+> ++	sm->ft_reassoc_completed = 0;
+> ++#endif /* CONFIG_IEEE80211R */
+> + 
+> + 	/* Keys are not needed in the WPA state machine anymore */
+> + 	wpa_sm_drop_sa(sm);
+> +diff --git a/src/rsn_supp/wpa_ft.c b/src/rsn_supp/wpa_ft.c
+> +index 205793e..d45bb45 100644
+> +--- a/src/rsn_supp/wpa_ft.c
+> ++++ b/src/rsn_supp/wpa_ft.c
+> +@@ -153,6 +153,7 @@ static u8 * wpa_ft_gen_req_ies(struct wpa_sm *sm, size_t *len,
+> + 	u16 capab;
+> + 
+> + 	sm->ft_completed = 0;
+> ++	sm->ft_reassoc_completed = 0;
+> + 
+> + 	buf_len = 2 + sizeof(struct rsn_mdie) + 2 + sizeof(struct rsn_ftie) +
+> + 		2 + sm->r0kh_id_len + ric_ies_len + 100;
+> +@@ -681,6 +682,11 @@ int wpa_ft_validate_reassoc_resp(struct wpa_sm *sm, const u8 *ies,
+> + 		return -1;
+> + 	}
+> + 
+> ++	if (sm->ft_reassoc_completed) {
+> ++		wpa_printf(MSG_DEBUG, "FT: Reassociation has already been completed for this FT protocol instance - ignore unexpected retransmission");
+> ++		return 0;
+> ++	}
+> ++
+> + 	if (wpa_ft_parse_ies(ies, ies_len, &parse) < 0) {
+> + 		wpa_printf(MSG_DEBUG, "FT: Failed to parse IEs");
+> + 		return -1;
+> +@@ -781,6 +787,8 @@ int wpa_ft_validate_reassoc_resp(struct wpa_sm *sm, const u8 *ies,
+> + 		return -1;
+> + 	}
+> + 
+> ++	sm->ft_reassoc_completed = 1;
+> ++
+> + 	if (wpa_ft_process_gtk_subelem(sm, parse.gtk, parse.gtk_len) < 0)
+> + 		return -1;
+> + 
+> +diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> +index 41f371f..56f88dc 100644
+> +--- a/src/rsn_supp/wpa_i.h
+> ++++ b/src/rsn_supp/wpa_i.h
+> +@@ -128,6 +128,7 @@ struct wpa_sm {
+> + 	size_t r0kh_id_len;
+> + 	u8 r1kh_id[FT_R1KH_ID_LEN];
+> + 	int ft_completed;
+> ++	int ft_reassoc_completed;
+> + 	int over_the_ds_in_progress;
+> + 	u8 target_ap[ETH_ALEN]; /* over-the-DS target AP */
+> + 	int set_ptk_after_assoc;
+> +-- 
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/key-replay-cve-multiple.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/key-replay-cve-multiple.patch
+> deleted file mode 100644
+> index 694da8f..0000000
+> --- a/meta-oe/recipes-connectivity/hostapd/hostapd/key-replay-cve-multiple.patch
+> +++ /dev/null
+> @@ -1,984 +0,0 @@
+> -The WPA2 four-way handshake protocol is vulnerable to replay attacks which can
+> -result in unauthenticated clients gaining access to the network.
+> -
+> -Backport a number of patches from upstream to fix this.
+> -
+> -CVE: CVE-2017-13077
+> -CVE: CVE-2017-13078
+> -CVE: CVE-2017-13079
+> -CVE: CVE-2017-13080
+> -CVE: CVE-2017-13081
+> -CVE: CVE-2017-13082
+> -CVE: CVE-2017-13086
+> -CVE: CVE-2017-13087
+> -CVE: CVE-2017-13088
+> -
+> -Upstream-Status: Backport
+> -Signed-off-by: Ross Burton <ross.burton@intel.com>
+> -
+> -From cf4cab804c7afd5c45505528a8d16e46163243a2 Mon Sep 17 00:00:00 2001
+> -From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> -Date: Fri, 14 Jul 2017 15:15:35 +0200
+> -Subject: [PATCH 1/8] hostapd: Avoid key reinstallation in FT handshake
+> -
+> -Do not reinstall TK to the driver during Reassociation Response frame
+> -processing if the first attempt of setting the TK succeeded. This avoids
+> -issues related to clearing the TX/RX PN that could result in reusing
+> -same PN values for transmitted frames (e.g., due to CCM nonce reuse and
+> -also hitting replay protection on the receiver) and accepting replayed
+> -frames on RX side.
+> -
+> -This issue was introduced by the commit
+> -0e84c25434e6a1f283c7b4e62e483729085b78d2 ('FT: Fix PTK configuration in
+> -authenticator') which allowed wpa_ft_install_ptk() to be called multiple
+> -times with the same PTK. While the second configuration attempt is
+> -needed with some drivers, it must be done only if the first attempt
+> -failed.
+> -
+> -Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> ----
+> - src/ap/ieee802_11.c  | 16 +++++++++++++---
+> - src/ap/wpa_auth.c    | 11 +++++++++++
+> - src/ap/wpa_auth.h    |  3 ++-
+> - src/ap/wpa_auth_ft.c | 10 ++++++++++
+> - src/ap/wpa_auth_i.h  |  1 +
+> - 5 files changed, 37 insertions(+), 4 deletions(-)
+> -
+> -diff --git a/src/ap/ieee802_11.c b/src/ap/ieee802_11.c
+> -index 4e04169..333035f 100644
+> ---- a/src/ap/ieee802_11.c
+> -+++ b/src/ap/ieee802_11.c
+> -@@ -1841,6 +1841,7 @@ static int add_associated_sta(struct hostapd_data *hapd,
+> - {
+> - 	struct ieee80211_ht_capabilities ht_cap;
+> - 	struct ieee80211_vht_capabilities vht_cap;
+> -+	int set = 1;
+> - 
+> - 	/*
+> - 	 * Remove the STA entry to ensure the STA PS state gets cleared and
+> -@@ -1848,9 +1849,18 @@ static int add_associated_sta(struct hostapd_data *hapd,
+> - 	 * FT-over-the-DS, where a station re-associates back to the same AP but
+> - 	 * skips the authentication flow, or if working with a driver that
+> - 	 * does not support full AP client state.
+> -+	 *
+> -+	 * Skip this if the STA has already completed FT reassociation and the
+> -+	 * TK has been configured since the TX/RX PN must not be reset to 0 for
+> -+	 * the same key.
+> - 	 */
+> --	if (!sta->added_unassoc)
+> -+	if (!sta->added_unassoc &&
+> -+	    (!(sta->flags & WLAN_STA_AUTHORIZED) ||
+> -+	     !wpa_auth_sta_ft_tk_already_set(sta->wpa_sm))) {
+> - 		hostapd_drv_sta_remove(hapd, sta->addr);
+> -+		wpa_auth_sm_event(sta->wpa_sm, WPA_DRV_STA_REMOVED);
+> -+		set = 0;
+> -+	}
+> - 
+> - #ifdef CONFIG_IEEE80211N
+> - 	if (sta->flags & WLAN_STA_HT)
+> -@@ -1873,11 +1883,11 @@ static int add_associated_sta(struct hostapd_data *hapd,
+> - 			    sta->flags & WLAN_STA_VHT ? &vht_cap : NULL,
+> - 			    sta->flags | WLAN_STA_ASSOC, sta->qosinfo,
+> - 			    sta->vht_opmode, sta->p2p_ie ? 1 : 0,
+> --			    sta->added_unassoc)) {
+> -+			    set)) {
+> - 		hostapd_logger(hapd, sta->addr,
+> - 			       HOSTAPD_MODULE_IEEE80211, HOSTAPD_LEVEL_NOTICE,
+> - 			       "Could not %s STA to kernel driver",
+> --			       sta->added_unassoc ? "set" : "add");
+> -+			       set ? "set" : "add");
+> - 
+> - 		if (sta->added_unassoc) {
+> - 			hostapd_drv_sta_remove(hapd, sta->addr);
+> -diff --git a/src/ap/wpa_auth.c b/src/ap/wpa_auth.c
+> -index 3587086..707971d 100644
+> ---- a/src/ap/wpa_auth.c
+> -+++ b/src/ap/wpa_auth.c
+> -@@ -1745,6 +1745,9 @@ int wpa_auth_sm_event(struct wpa_state_machine *sm, enum wpa_event event)
+> - #else /* CONFIG_IEEE80211R */
+> - 		break;
+> - #endif /* CONFIG_IEEE80211R */
+> -+	case WPA_DRV_STA_REMOVED:
+> -+		sm->tk_already_set = FALSE;
+> -+		return 0;
+> - 	}
+> - 
+> - #ifdef CONFIG_IEEE80211R
+> -@@ -3250,6 +3253,14 @@ int wpa_auth_sta_wpa_version(struct wpa_state_machine *sm)
+> - }
+> - 
+> - 
+> -+int wpa_auth_sta_ft_tk_already_set(struct wpa_state_machine *sm)
+> -+{
+> -+	if (!sm || !wpa_key_mgmt_ft(sm->wpa_key_mgmt))
+> -+		return 0;
+> -+	return sm->tk_already_set;
+> -+}
+> -+
+> -+
+> - int wpa_auth_sta_clear_pmksa(struct wpa_state_machine *sm,
+> - 			     struct rsn_pmksa_cache_entry *entry)
+> - {
+> -diff --git a/src/ap/wpa_auth.h b/src/ap/wpa_auth.h
+> -index 0de8d97..97461b0 100644
+> ---- a/src/ap/wpa_auth.h
+> -+++ b/src/ap/wpa_auth.h
+> -@@ -267,7 +267,7 @@ void wpa_receive(struct wpa_authenticator *wpa_auth,
+> - 		 u8 *data, size_t data_len);
+> - enum wpa_event {
+> - 	WPA_AUTH, WPA_ASSOC, WPA_DISASSOC, WPA_DEAUTH, WPA_REAUTH,
+> --	WPA_REAUTH_EAPOL, WPA_ASSOC_FT
+> -+	WPA_REAUTH_EAPOL, WPA_ASSOC_FT, WPA_DRV_STA_REMOVED
+> - };
+> - void wpa_remove_ptk(struct wpa_state_machine *sm);
+> - int wpa_auth_sm_event(struct wpa_state_machine *sm, enum wpa_event event);
+> -@@ -280,6 +280,7 @@ int wpa_auth_pairwise_set(struct wpa_state_machine *sm);
+> - int wpa_auth_get_pairwise(struct wpa_state_machine *sm);
+> - int wpa_auth_sta_key_mgmt(struct wpa_state_machine *sm);
+> - int wpa_auth_sta_wpa_version(struct wpa_state_machine *sm);
+> -+int wpa_auth_sta_ft_tk_already_set(struct wpa_state_machine *sm);
+> - int wpa_auth_sta_clear_pmksa(struct wpa_state_machine *sm,
+> - 			     struct rsn_pmksa_cache_entry *entry);
+> - struct rsn_pmksa_cache_entry *
+> -diff --git a/src/ap/wpa_auth_ft.c b/src/ap/wpa_auth_ft.c
+> -index 42242a5..e63b99a 100644
+> ---- a/src/ap/wpa_auth_ft.c
+> -+++ b/src/ap/wpa_auth_ft.c
+> -@@ -780,6 +780,14 @@ void wpa_ft_install_ptk(struct wpa_state_machine *sm)
+> - 		return;
+> - 	}
+> - 
+> -+	if (sm->tk_already_set) {
+> -+		/* Must avoid TK reconfiguration to prevent clearing of TX/RX
+> -+		 * PN in the driver */
+> -+		wpa_printf(MSG_DEBUG,
+> -+			   "FT: Do not re-install same PTK to the driver");
+> -+		return;
+> -+	}
+> -+
+> - 	/* FIX: add STA entry to kernel/driver here? The set_key will fail
+> - 	 * most likely without this.. At the moment, STA entry is added only
+> - 	 * after association has been completed. This function will be called
+> -@@ -792,6 +800,7 @@ void wpa_ft_install_ptk(struct wpa_state_machine *sm)
+> - 
+> - 	/* FIX: MLME-SetProtection.Request(TA, Tx_Rx) */
+> - 	sm->pairwise_set = TRUE;
+> -+	sm->tk_already_set = TRUE;
+> - }
+> - 
+> - 
+> -@@ -898,6 +907,7 @@ static int wpa_ft_process_auth_req(struct wpa_state_machine *sm,
+> - 
+> - 	sm->pairwise = pairwise;
+> - 	sm->PTK_valid = TRUE;
+> -+	sm->tk_already_set = FALSE;
+> - 	wpa_ft_install_ptk(sm);
+> - 
+> - 	buflen = 2 + sizeof(struct rsn_mdie) + 2 + sizeof(struct rsn_ftie) +
+> -diff --git a/src/ap/wpa_auth_i.h b/src/ap/wpa_auth_i.h
+> -index 72b7eb3..7fd8f05 100644
+> ---- a/src/ap/wpa_auth_i.h
+> -+++ b/src/ap/wpa_auth_i.h
+> -@@ -65,6 +65,7 @@ struct wpa_state_machine {
+> - 	struct wpa_ptk PTK;
+> - 	Boolean PTK_valid;
+> - 	Boolean pairwise_set;
+> -+	Boolean tk_already_set;
+> - 	int keycount;
+> - 	Boolean Pair;
+> - 	struct wpa_key_replay_counter {
+> --- 
+> -2.7.4
+> -
+> -From 927f891007c402fefd1ff384645b3f07597c3ede Mon Sep 17 00:00:00 2001
+> -From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> -Date: Wed, 12 Jul 2017 16:03:24 +0200
+> -Subject: [PATCH 2/8] Prevent reinstallation of an already in-use group key
+> -
+> -Track the current GTK and IGTK that is in use and when receiving a
+> -(possibly retransmitted) Group Message 1 or WNM-Sleep Mode Response, do
+> -not install the given key if it is already in use. This prevents an
+> -attacker from trying to trick the client into resetting or lowering the
+> -sequence counter associated to the group key.
+> -
+> -Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> ----
+> - src/common/wpa_common.h |  11 +++++
+> - src/rsn_supp/wpa.c      | 116 ++++++++++++++++++++++++++++++------------------
+> - src/rsn_supp/wpa_i.h    |   4 ++
+> - 3 files changed, 87 insertions(+), 44 deletions(-)
+> -
+> -diff --git a/src/common/wpa_common.h b/src/common/wpa_common.h
+> -index af1d0f0..d200285 100644
+> ---- a/src/common/wpa_common.h
+> -+++ b/src/common/wpa_common.h
+> -@@ -217,6 +217,17 @@ struct wpa_ptk {
+> - 	size_t tk_len;
+> - };
+> - 
+> -+struct wpa_gtk {
+> -+	u8 gtk[WPA_GTK_MAX_LEN];
+> -+	size_t gtk_len;
+> -+};
+> -+
+> -+#ifdef CONFIG_IEEE80211W
+> -+struct wpa_igtk {
+> -+	u8 igtk[WPA_IGTK_MAX_LEN];
+> -+	size_t igtk_len;
+> -+};
+> -+#endif /* CONFIG_IEEE80211W */
+> - 
+> - /* WPA IE version 1
+> -  * 00-50-f2:1 (OUI:OUI type)
+> -diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> -index 3c47879..95bd7be 100644
+> ---- a/src/rsn_supp/wpa.c
+> -+++ b/src/rsn_supp/wpa.c
+> -@@ -714,6 +714,15 @@ static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> - 	const u8 *_gtk = gd->gtk;
+> - 	u8 gtk_buf[32];
+> - 
+> -+	/* Detect possible key reinstallation */
+> -+	if (sm->gtk.gtk_len == (size_t) gd->gtk_len &&
+> -+	    os_memcmp(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len) == 0) {
+> -+		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> -+			"WPA: Not reinstalling already in-use GTK to the driver (keyidx=%d tx=%d len=%d)",
+> -+			gd->keyidx, gd->tx, gd->gtk_len);
+> -+		return 0;
+> -+	}
+> -+
+> - 	wpa_hexdump_key(MSG_DEBUG, "WPA: Group Key", gd->gtk, gd->gtk_len);
+> - 	wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> - 		"WPA: Installing GTK to the driver (keyidx=%d tx=%d len=%d)",
+> -@@ -748,6 +757,9 @@ static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> - 	}
+> - 	os_memset(gtk_buf, 0, sizeof(gtk_buf));
+> - 
+> -+	sm->gtk.gtk_len = gd->gtk_len;
+> -+	os_memcpy(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len);
+> -+
+> - 	return 0;
+> - }
+> - 
+> -@@ -854,6 +866,48 @@ static int wpa_supplicant_pairwise_gtk(struct wpa_sm *sm,
+> - }
+> - 
+> - 
+> -+#ifdef CONFIG_IEEE80211W
+> -+static int wpa_supplicant_install_igtk(struct wpa_sm *sm,
+> -+				       const struct wpa_igtk_kde *igtk)
+> -+{
+> -+	size_t len = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> -+	u16 keyidx = WPA_GET_LE16(igtk->keyid);
+> -+
+> -+	/* Detect possible key reinstallation */
+> -+	if (sm->igtk.igtk_len == len &&
+> -+	    os_memcmp(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len) == 0) {
+> -+		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> -+			"WPA: Not reinstalling already in-use IGTK to the driver (keyidx=%d)",
+> -+			keyidx);
+> -+		return  0;
+> -+	}
+> -+
+> -+	wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> -+		"WPA: IGTK keyid %d pn %02x%02x%02x%02x%02x%02x",
+> -+		keyidx, MAC2STR(igtk->pn));
+> -+	wpa_hexdump_key(MSG_DEBUG, "WPA: IGTK", igtk->igtk, len);
+> -+	if (keyidx > 4095) {
+> -+		wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> -+			"WPA: Invalid IGTK KeyID %d", keyidx);
+> -+		return -1;
+> -+	}
+> -+	if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+> -+			   broadcast_ether_addr,
+> -+			   keyidx, 0, igtk->pn, sizeof(igtk->pn),
+> -+			   igtk->igtk, len) < 0) {
+> -+		wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> -+			"WPA: Failed to configure IGTK to the driver");
+> -+		return -1;
+> -+	}
+> -+
+> -+	sm->igtk.igtk_len = len;
+> -+	os_memcpy(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len);
+> -+
+> -+	return 0;
+> -+}
+> -+#endif /* CONFIG_IEEE80211W */
+> -+
+> -+
+> - static int ieee80211w_set_keys(struct wpa_sm *sm,
+> - 			       struct wpa_eapol_ie_parse *ie)
+> - {
+> -@@ -864,30 +918,14 @@ static int ieee80211w_set_keys(struct wpa_sm *sm,
+> - 	if (ie->igtk) {
+> - 		size_t len;
+> - 		const struct wpa_igtk_kde *igtk;
+> --		u16 keyidx;
+> -+
+> - 		len = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> - 		if (ie->igtk_len != WPA_IGTK_KDE_PREFIX_LEN + len)
+> - 			return -1;
+> -+
+> - 		igtk = (const struct wpa_igtk_kde *) ie->igtk;
+> --		keyidx = WPA_GET_LE16(igtk->keyid);
+> --		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG, "WPA: IGTK keyid %d "
+> --			"pn %02x%02x%02x%02x%02x%02x",
+> --			keyidx, MAC2STR(igtk->pn));
+> --		wpa_hexdump_key(MSG_DEBUG, "WPA: IGTK",
+> --				igtk->igtk, len);
+> --		if (keyidx > 4095) {
+> --			wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> --				"WPA: Invalid IGTK KeyID %d", keyidx);
+> --			return -1;
+> --		}
+> --		if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+> --				   broadcast_ether_addr,
+> --				   keyidx, 0, igtk->pn, sizeof(igtk->pn),
+> --				   igtk->igtk, len) < 0) {
+> --			wpa_msg(sm->ctx->msg_ctx, MSG_WARNING,
+> --				"WPA: Failed to configure IGTK to the driver");
+> -+		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> - 			return -1;
+> --		}
+> - 	}
+> - 
+> - 	return 0;
+> -@@ -2307,7 +2345,7 @@ void wpa_sm_deinit(struct wpa_sm *sm)
+> -  */
+> - void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> - {
+> --	int clear_ptk = 1;
+> -+	int clear_keys = 1;
+> - 
+> - 	if (sm == NULL)
+> - 		return;
+> -@@ -2333,11 +2371,11 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> - 		/* Prepare for the next transition */
+> - 		wpa_ft_prepare_auth_request(sm, NULL);
+> - 
+> --		clear_ptk = 0;
+> -+		clear_keys = 0;
+> - 	}
+> - #endif /* CONFIG_IEEE80211R */
+> - 
+> --	if (clear_ptk) {
+> -+	if (clear_keys) {
+> - 		/*
+> - 		 * IEEE 802.11, 8.4.10: Delete PTK SA on (re)association if
+> - 		 * this is not part of a Fast BSS Transition.
+> -@@ -2347,6 +2385,10 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> - 		os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+> - 		sm->tptk_set = 0;
+> - 		os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> -+		os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> -+#ifdef CONFIG_IEEE80211W
+> -+		os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> -+#endif /* CONFIG_IEEE80211W */
+> - 	}
+> - 
+> - #ifdef CONFIG_TDLS
+> -@@ -2877,6 +2919,10 @@ void wpa_sm_drop_sa(struct wpa_sm *sm)
+> - 	os_memset(sm->pmk, 0, sizeof(sm->pmk));
+> - 	os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+> - 	os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> -+	os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> -+#ifdef CONFIG_IEEE80211W
+> -+	os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> -+#endif /* CONFIG_IEEE80211W */
+> - #ifdef CONFIG_IEEE80211R
+> - 	os_memset(sm->xxkey, 0, sizeof(sm->xxkey));
+> - 	os_memset(sm->pmk_r0, 0, sizeof(sm->pmk_r0));
+> -@@ -2949,29 +2995,11 @@ int wpa_wnmsleep_install_key(struct wpa_sm *sm, u8 subelem_id, u8 *buf)
+> - 		os_memset(&gd, 0, sizeof(gd));
+> - #ifdef CONFIG_IEEE80211W
+> - 	} else if (subelem_id == WNM_SLEEP_SUBELEM_IGTK) {
+> --		struct wpa_igtk_kde igd;
+> --		u16 keyidx;
+> --
+> --		os_memset(&igd, 0, sizeof(igd));
+> --		keylen = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> --		os_memcpy(igd.keyid, buf + 2, 2);
+> --		os_memcpy(igd.pn, buf + 4, 6);
+> --
+> --		keyidx = WPA_GET_LE16(igd.keyid);
+> --		os_memcpy(igd.igtk, buf + 10, keylen);
+> --
+> --		wpa_hexdump_key(MSG_DEBUG, "Install IGTK (WNM SLEEP)",
+> --				igd.igtk, keylen);
+> --		if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+> --				   broadcast_ether_addr,
+> --				   keyidx, 0, igd.pn, sizeof(igd.pn),
+> --				   igd.igtk, keylen) < 0) {
+> --			wpa_printf(MSG_DEBUG, "Failed to install the IGTK in "
+> --				   "WNM mode");
+> --			os_memset(&igd, 0, sizeof(igd));
+> -+		const struct wpa_igtk_kde *igtk;
+> -+
+> -+		igtk = (const struct wpa_igtk_kde *) (buf + 2);
+> -+		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> - 			return -1;
+> --		}
+> --		os_memset(&igd, 0, sizeof(igd));
+> - #endif /* CONFIG_IEEE80211W */
+> - 	} else {
+> - 		wpa_printf(MSG_DEBUG, "Unknown element id");
+> -diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> -index f653ba6..afc9e37 100644
+> ---- a/src/rsn_supp/wpa_i.h
+> -+++ b/src/rsn_supp/wpa_i.h
+> -@@ -31,6 +31,10 @@ struct wpa_sm {
+> - 	u8 rx_replay_counter[WPA_REPLAY_COUNTER_LEN];
+> - 	int rx_replay_counter_set;
+> - 	u8 request_counter[WPA_REPLAY_COUNTER_LEN];
+> -+	struct wpa_gtk gtk;
+> -+#ifdef CONFIG_IEEE80211W
+> -+	struct wpa_igtk igtk;
+> -+#endif /* CONFIG_IEEE80211W */
+> - 
+> - 	struct eapol_sm *eapol; /* EAPOL state machine from upper level code */
+> - 
+> --- 
+> -2.7.4
+> -
+> -From 8280294e74846ea342389a0cd17215050fa5afe8 Mon Sep 17 00:00:00 2001
+> -From: Jouni Malinen <j@w1.fi>
+> -Date: Sun, 1 Oct 2017 12:12:24 +0300
+> -Subject: [PATCH 3/8] Extend protection of GTK/IGTK reinstallation of WNM-Sleep
+> - Mode cases
+> -
+> -This extends the protection to track last configured GTK/IGTK value
+> -separately from EAPOL-Key frames and WNM-Sleep Mode frames to cover a
+> -corner case where these two different mechanisms may get used when the
+> -GTK/IGTK has changed and tracking a single value is not sufficient to
+> -detect a possible key reconfiguration.
+> -
+> -Signed-off-by: Jouni Malinen <j@w1.fi>
+> ----
+> - src/rsn_supp/wpa.c   | 53 +++++++++++++++++++++++++++++++++++++---------------
+> - src/rsn_supp/wpa_i.h |  2 ++
+> - 2 files changed, 40 insertions(+), 15 deletions(-)
+> -
+> -diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> -index 95bd7be..7a2c68d 100644
+> ---- a/src/rsn_supp/wpa.c
+> -+++ b/src/rsn_supp/wpa.c
+> -@@ -709,14 +709,17 @@ struct wpa_gtk_data {
+> - 
+> - static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> - 				      const struct wpa_gtk_data *gd,
+> --				      const u8 *key_rsc)
+> -+				      const u8 *key_rsc, int wnm_sleep)
+> - {
+> - 	const u8 *_gtk = gd->gtk;
+> - 	u8 gtk_buf[32];
+> - 
+> - 	/* Detect possible key reinstallation */
+> --	if (sm->gtk.gtk_len == (size_t) gd->gtk_len &&
+> --	    os_memcmp(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len) == 0) {
+> -+	if ((sm->gtk.gtk_len == (size_t) gd->gtk_len &&
+> -+	     os_memcmp(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len) == 0) ||
+> -+	    (sm->gtk_wnm_sleep.gtk_len == (size_t) gd->gtk_len &&
+> -+	     os_memcmp(sm->gtk_wnm_sleep.gtk, gd->gtk,
+> -+		       sm->gtk_wnm_sleep.gtk_len) == 0)) {
+> - 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> - 			"WPA: Not reinstalling already in-use GTK to the driver (keyidx=%d tx=%d len=%d)",
+> - 			gd->keyidx, gd->tx, gd->gtk_len);
+> -@@ -757,8 +760,14 @@ static int wpa_supplicant_install_gtk(struct wpa_sm *sm,
+> - 	}
+> - 	os_memset(gtk_buf, 0, sizeof(gtk_buf));
+> - 
+> --	sm->gtk.gtk_len = gd->gtk_len;
+> --	os_memcpy(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len);
+> -+	if (wnm_sleep) {
+> -+		sm->gtk_wnm_sleep.gtk_len = gd->gtk_len;
+> -+		os_memcpy(sm->gtk_wnm_sleep.gtk, gd->gtk,
+> -+			  sm->gtk_wnm_sleep.gtk_len);
+> -+	} else {
+> -+		sm->gtk.gtk_len = gd->gtk_len;
+> -+		os_memcpy(sm->gtk.gtk, gd->gtk, sm->gtk.gtk_len);
+> -+	}
+> - 
+> - 	return 0;
+> - }
+> -@@ -852,7 +861,7 @@ static int wpa_supplicant_pairwise_gtk(struct wpa_sm *sm,
+> - 	    (wpa_supplicant_check_group_cipher(sm, sm->group_cipher,
+> - 					       gtk_len, gtk_len,
+> - 					       &gd.key_rsc_len, &gd.alg) ||
+> --	     wpa_supplicant_install_gtk(sm, &gd, key_rsc))) {
+> -+	     wpa_supplicant_install_gtk(sm, &gd, key_rsc, 0))) {
+> - 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> - 			"RSN: Failed to install GTK");
+> - 		os_memset(&gd, 0, sizeof(gd));
+> -@@ -868,14 +877,18 @@ static int wpa_supplicant_pairwise_gtk(struct wpa_sm *sm,
+> - 
+> - #ifdef CONFIG_IEEE80211W
+> - static int wpa_supplicant_install_igtk(struct wpa_sm *sm,
+> --				       const struct wpa_igtk_kde *igtk)
+> -+				       const struct wpa_igtk_kde *igtk,
+> -+				       int wnm_sleep)
+> - {
+> - 	size_t len = wpa_cipher_key_len(sm->mgmt_group_cipher);
+> - 	u16 keyidx = WPA_GET_LE16(igtk->keyid);
+> - 
+> - 	/* Detect possible key reinstallation */
+> --	if (sm->igtk.igtk_len == len &&
+> --	    os_memcmp(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len) == 0) {
+> -+	if ((sm->igtk.igtk_len == len &&
+> -+	     os_memcmp(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len) == 0) ||
+> -+	    (sm->igtk_wnm_sleep.igtk_len == len &&
+> -+	     os_memcmp(sm->igtk_wnm_sleep.igtk, igtk->igtk,
+> -+		       sm->igtk_wnm_sleep.igtk_len) == 0)) {
+> - 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> - 			"WPA: Not reinstalling already in-use IGTK to the driver (keyidx=%d)",
+> - 			keyidx);
+> -@@ -900,8 +913,14 @@ static int wpa_supplicant_install_igtk(struct wpa_sm *sm,
+> - 		return -1;
+> - 	}
+> - 
+> --	sm->igtk.igtk_len = len;
+> --	os_memcpy(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len);
+> -+	if (wnm_sleep) {
+> -+		sm->igtk_wnm_sleep.igtk_len = len;
+> -+		os_memcpy(sm->igtk_wnm_sleep.igtk, igtk->igtk,
+> -+			  sm->igtk_wnm_sleep.igtk_len);
+> -+	} else {
+> -+		sm->igtk.igtk_len = len;
+> -+		os_memcpy(sm->igtk.igtk, igtk->igtk, sm->igtk.igtk_len);
+> -+	}
+> - 
+> - 	return 0;
+> - }
+> -@@ -924,7 +943,7 @@ static int ieee80211w_set_keys(struct wpa_sm *sm,
+> - 			return -1;
+> - 
+> - 		igtk = (const struct wpa_igtk_kde *) ie->igtk;
+> --		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> -+		if (wpa_supplicant_install_igtk(sm, igtk, 0) < 0)
+> - 			return -1;
+> - 	}
+> - 
+> -@@ -1574,7 +1593,7 @@ static void wpa_supplicant_process_1_of_2(struct wpa_sm *sm,
+> - 	if (wpa_supplicant_rsc_relaxation(sm, key->key_rsc))
+> - 		key_rsc = null_rsc;
+> - 
+> --	if (wpa_supplicant_install_gtk(sm, &gd, key_rsc) ||
+> -+	if (wpa_supplicant_install_gtk(sm, &gd, key_rsc, 0) ||
+> - 	    wpa_supplicant_send_2_of_2(sm, key, ver, key_info) < 0)
+> - 		goto failed;
+> - 	os_memset(&gd, 0, sizeof(gd));
+> -@@ -2386,8 +2405,10 @@ void wpa_sm_notify_assoc(struct wpa_sm *sm, const u8 *bssid)
+> - 		sm->tptk_set = 0;
+> - 		os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> - 		os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> -+		os_memset(&sm->gtk_wnm_sleep, 0, sizeof(sm->gtk_wnm_sleep));
+> - #ifdef CONFIG_IEEE80211W
+> - 		os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> -+		os_memset(&sm->igtk_wnm_sleep, 0, sizeof(sm->igtk_wnm_sleep));
+> - #endif /* CONFIG_IEEE80211W */
+> - 	}
+> - 
+> -@@ -2920,8 +2941,10 @@ void wpa_sm_drop_sa(struct wpa_sm *sm)
+> - 	os_memset(&sm->ptk, 0, sizeof(sm->ptk));
+> - 	os_memset(&sm->tptk, 0, sizeof(sm->tptk));
+> - 	os_memset(&sm->gtk, 0, sizeof(sm->gtk));
+> -+	os_memset(&sm->gtk_wnm_sleep, 0, sizeof(sm->gtk_wnm_sleep));
+> - #ifdef CONFIG_IEEE80211W
+> - 	os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+> -+	os_memset(&sm->igtk_wnm_sleep, 0, sizeof(sm->igtk_wnm_sleep));
+> - #endif /* CONFIG_IEEE80211W */
+> - #ifdef CONFIG_IEEE80211R
+> - 	os_memset(sm->xxkey, 0, sizeof(sm->xxkey));
+> -@@ -2986,7 +3009,7 @@ int wpa_wnmsleep_install_key(struct wpa_sm *sm, u8 subelem_id, u8 *buf)
+> - 
+> - 		wpa_hexdump_key(MSG_DEBUG, "Install GTK (WNM SLEEP)",
+> - 				gd.gtk, gd.gtk_len);
+> --		if (wpa_supplicant_install_gtk(sm, &gd, key_rsc)) {
+> -+		if (wpa_supplicant_install_gtk(sm, &gd, key_rsc, 1)) {
+> - 			os_memset(&gd, 0, sizeof(gd));
+> - 			wpa_printf(MSG_DEBUG, "Failed to install the GTK in "
+> - 				   "WNM mode");
+> -@@ -2998,7 +3021,7 @@ int wpa_wnmsleep_install_key(struct wpa_sm *sm, u8 subelem_id, u8 *buf)
+> - 		const struct wpa_igtk_kde *igtk;
+> - 
+> - 		igtk = (const struct wpa_igtk_kde *) (buf + 2);
+> --		if (wpa_supplicant_install_igtk(sm, igtk) < 0)
+> -+		if (wpa_supplicant_install_igtk(sm, igtk, 1) < 0)
+> - 			return -1;
+> - #endif /* CONFIG_IEEE80211W */
+> - 	} else {
+> -diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> -index afc9e37..9a54631 100644
+> ---- a/src/rsn_supp/wpa_i.h
+> -+++ b/src/rsn_supp/wpa_i.h
+> -@@ -32,8 +32,10 @@ struct wpa_sm {
+> - 	int rx_replay_counter_set;
+> - 	u8 request_counter[WPA_REPLAY_COUNTER_LEN];
+> - 	struct wpa_gtk gtk;
+> -+	struct wpa_gtk gtk_wnm_sleep;
+> - #ifdef CONFIG_IEEE80211W
+> - 	struct wpa_igtk igtk;
+> -+	struct wpa_igtk igtk_wnm_sleep;
+> - #endif /* CONFIG_IEEE80211W */
+> - 
+> - 	struct eapol_sm *eapol; /* EAPOL state machine from upper level code */
+> --- 
+> -2.7.4
+> -
+> -From 8f82bc94e8697a9d47fa8774dfdaaede1084912c Mon Sep 17 00:00:00 2001
+> -From: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> -Date: Fri, 29 Sep 2017 04:22:51 +0200
+> -Subject: [PATCH 4/8] Prevent installation of an all-zero TK
+> -
+> -Properly track whether a PTK has already been installed to the driver
+> -and the TK part cleared from memory. This prevents an attacker from
+> -trying to trick the client into installing an all-zero TK.
+> -
+> -This fixes the earlier fix in commit
+> -ad00d64e7d8827b3cebd665a0ceb08adabf15e1e ('Fix TK configuration to the
+> -driver in EAPOL-Key 3/4 retry case') which did not take into account
+> -possibility of an extra message 1/4 showing up between retries of
+> -message 3/4.
+> -
+> -Signed-off-by: Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
+> ----
+> - src/common/wpa_common.h | 1 +
+> - src/rsn_supp/wpa.c      | 5 ++---
+> - src/rsn_supp/wpa_i.h    | 1 -
+> - 3 files changed, 3 insertions(+), 4 deletions(-)
+> -
+> -diff --git a/src/common/wpa_common.h b/src/common/wpa_common.h
+> -index d200285..1021ccb 100644
+> ---- a/src/common/wpa_common.h
+> -+++ b/src/common/wpa_common.h
+> -@@ -215,6 +215,7 @@ struct wpa_ptk {
+> - 	size_t kck_len;
+> - 	size_t kek_len;
+> - 	size_t tk_len;
+> -+	int installed; /* 1 if key has already been installed to driver */
+> - };
+> - 
+> - struct wpa_gtk {
+> -diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> -index 7a2c68d..0550a41 100644
+> ---- a/src/rsn_supp/wpa.c
+> -+++ b/src/rsn_supp/wpa.c
+> -@@ -510,7 +510,6 @@ static void wpa_supplicant_process_1_of_4(struct wpa_sm *sm,
+> - 		os_memset(buf, 0, sizeof(buf));
+> - 	}
+> - 	sm->tptk_set = 1;
+> --	sm->tk_to_set = 1;
+> - 
+> - 	kde = sm->assoc_wpa_ie;
+> - 	kde_len = sm->assoc_wpa_ie_len;
+> -@@ -615,7 +614,7 @@ static int wpa_supplicant_install_ptk(struct wpa_sm *sm,
+> - 	enum wpa_alg alg;
+> - 	const u8 *key_rsc;
+> - 
+> --	if (!sm->tk_to_set) {
+> -+	if (sm->ptk.installed) {
+> - 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+> - 			"WPA: Do not re-install same PTK to the driver");
+> - 		return 0;
+> -@@ -659,7 +658,7 @@ static int wpa_supplicant_install_ptk(struct wpa_sm *sm,
+> - 
+> - 	/* TK is not needed anymore in supplicant */
+> - 	os_memset(sm->ptk.tk, 0, WPA_TK_MAX_LEN);
+> --	sm->tk_to_set = 0;
+> -+	sm->ptk.installed = 1;
+> - 
+> - 	if (sm->wpa_ptk_rekey) {
+> - 		eloop_cancel_timeout(wpa_sm_rekey_ptk, sm, NULL);
+> -diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> -index 9a54631..41f371f 100644
+> ---- a/src/rsn_supp/wpa_i.h
+> -+++ b/src/rsn_supp/wpa_i.h
+> -@@ -24,7 +24,6 @@ struct wpa_sm {
+> - 	struct wpa_ptk ptk, tptk;
+> - 	int ptk_set, tptk_set;
+> - 	unsigned int msg_3_of_4_ok:1;
+> --	unsigned int tk_to_set:1;
+> - 	u8 snonce[WPA_NONCE_LEN];
+> - 	u8 anonce[WPA_NONCE_LEN]; /* ANonce from the last 1/4 msg */
+> - 	int renew_snonce;
+> --- 
+> -2.7.4
+> -
+> -From 12fac09b437a1dc8a0f253e265934a8aaf4d2f8b Mon Sep 17 00:00:00 2001
+> -From: Jouni Malinen <j@w1.fi>
+> -Date: Sun, 1 Oct 2017 12:32:57 +0300
+> -Subject: [PATCH 5/8] Fix PTK rekeying to generate a new ANonce
+> -
+> -The Authenticator state machine path for PTK rekeying ended up bypassing
+> -the AUTHENTICATION2 state where a new ANonce is generated when going
+> -directly to the PTKSTART state since there is no need to try to
+> -determine the PMK again in such a case. This is far from ideal since the
+> -new PTK would depend on a new nonce only from the supplicant.
+> -
+> -Fix this by generating a new ANonce when moving to the PTKSTART state
+> -for the purpose of starting new 4-way handshake to rekey PTK.
+> -
+> -Signed-off-by: Jouni Malinen <j@w1.fi>
+> ----
+> - src/ap/wpa_auth.c | 24 +++++++++++++++++++++---
+> - 1 file changed, 21 insertions(+), 3 deletions(-)
+> -
+> -diff --git a/src/ap/wpa_auth.c b/src/ap/wpa_auth.c
+> -index 707971d..bf10cc1 100644
+> ---- a/src/ap/wpa_auth.c
+> -+++ b/src/ap/wpa_auth.c
+> -@@ -1901,6 +1901,21 @@ SM_STATE(WPA_PTK, AUTHENTICATION2)
+> - }
+> - 
+> - 
+> -+static int wpa_auth_sm_ptk_update(struct wpa_state_machine *sm)
+> -+{
+> -+	if (random_get_bytes(sm->ANonce, WPA_NONCE_LEN)) {
+> -+		wpa_printf(MSG_ERROR,
+> -+			   "WPA: Failed to get random data for ANonce");
+> -+		sm->Disconnect = TRUE;
+> -+		return -1;
+> -+	}
+> -+	wpa_hexdump(MSG_DEBUG, "WPA: Assign new ANonce", sm->ANonce,
+> -+		    WPA_NONCE_LEN);
+> -+	sm->TimeoutCtr = 0;
+> -+	return 0;
+> -+}
+> -+
+> -+
+> - SM_STATE(WPA_PTK, INITPMK)
+> - {
+> - 	u8 msk[2 * PMK_LEN];
+> -@@ -2458,9 +2473,12 @@ SM_STEP(WPA_PTK)
+> - 		SM_ENTER(WPA_PTK, AUTHENTICATION);
+> - 	else if (sm->ReAuthenticationRequest)
+> - 		SM_ENTER(WPA_PTK, AUTHENTICATION2);
+> --	else if (sm->PTKRequest)
+> --		SM_ENTER(WPA_PTK, PTKSTART);
+> --	else switch (sm->wpa_ptk_state) {
+> -+	else if (sm->PTKRequest) {
+> -+		if (wpa_auth_sm_ptk_update(sm) < 0)
+> -+			SM_ENTER(WPA_PTK, DISCONNECTED);
+> -+		else
+> -+			SM_ENTER(WPA_PTK, PTKSTART);
+> -+	} else switch (sm->wpa_ptk_state) {
+> - 	case WPA_PTK_INITIALIZE:
+> - 		break;
+> - 	case WPA_PTK_DISCONNECT:
+> --- 
+> -2.7.4
+> -
+> -From 6c4bed4f47d1960ec04981a9d50e5076aea5223d Mon Sep 17 00:00:00 2001
+> -From: Jouni Malinen <j@w1.fi>
+> -Date: Fri, 22 Sep 2017 11:03:15 +0300
+> -Subject: [PATCH 6/8] TDLS: Reject TPK-TK reconfiguration
+> -
+> -Do not try to reconfigure the same TPK-TK to the driver after it has
+> -been successfully configured. This is an explicit check to avoid issues
+> -related to resetting the TX/RX packet number. There was already a check
+> -for this for TPK M2 (retries of that message are ignored completely), so
+> -that behavior does not get modified.
+> -
+> -For TPK M3, the TPK-TK could have been reconfigured, but that was
+> -followed by immediate teardown of the link due to an issue in updating
+> -the STA entry. Furthermore, for TDLS with any real security (i.e.,
+> -ignoring open/WEP), the TPK message exchange is protected on the AP path
+> -and simple replay attacks are not feasible.
+> -
+> -As an additional corner case, make sure the local nonce gets updated if
+> -the peer uses a very unlikely "random nonce" of all zeros.
+> -
+> -Signed-off-by: Jouni Malinen <j@w1.fi>
+> ----
+> - src/rsn_supp/tdls.c | 38 ++++++++++++++++++++++++++++++++++++--
+> - 1 file changed, 36 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/src/rsn_supp/tdls.c b/src/rsn_supp/tdls.c
+> -index e424168..9eb9738 100644
+> ---- a/src/rsn_supp/tdls.c
+> -+++ b/src/rsn_supp/tdls.c
+> -@@ -112,6 +112,7 @@ struct wpa_tdls_peer {
+> - 		u8 tk[16]; /* TPK-TK; assuming only CCMP will be used */
+> - 	} tpk;
+> - 	int tpk_set;
+> -+	int tk_set; /* TPK-TK configured to the driver */
+> - 	int tpk_success;
+> - 	int tpk_in_progress;
+> - 
+> -@@ -192,6 +193,20 @@ static int wpa_tdls_set_key(struct wpa_sm *sm, struct wpa_tdls_peer *peer)
+> - 	u8 rsc[6];
+> - 	enum wpa_alg alg;
+> - 
+> -+	if (peer->tk_set) {
+> -+		/*
+> -+		 * This same TPK-TK has already been configured to the driver
+> -+		 * and this new configuration attempt (likely due to an
+> -+		 * unexpected retransmitted frame) would result in clearing
+> -+		 * the TX/RX sequence number which can break security, so must
+> -+		 * not allow that to happen.
+> -+		 */
+> -+		wpa_printf(MSG_INFO, "TDLS: TPK-TK for the peer " MACSTR
+> -+			   " has already been configured to the driver - do not reconfigure",
+> -+			   MAC2STR(peer->addr));
+> -+		return -1;
+> -+	}
+> -+
+> - 	os_memset(rsc, 0, 6);
+> - 
+> - 	switch (peer->cipher) {
+> -@@ -209,12 +224,15 @@ static int wpa_tdls_set_key(struct wpa_sm *sm, struct wpa_tdls_peer *peer)
+> - 		return -1;
+> - 	}
+> - 
+> -+	wpa_printf(MSG_DEBUG, "TDLS: Configure pairwise key for peer " MACSTR,
+> -+		   MAC2STR(peer->addr));
+> - 	if (wpa_sm_set_key(sm, alg, peer->addr, -1, 1,
+> - 			   rsc, sizeof(rsc), peer->tpk.tk, key_len) < 0) {
+> - 		wpa_printf(MSG_WARNING, "TDLS: Failed to set TPK to the "
+> - 			   "driver");
+> - 		return -1;
+> - 	}
+> -+	peer->tk_set = 1;
+> - 	return 0;
+> - }
+> - 
+> -@@ -696,7 +714,7 @@ static void wpa_tdls_peer_clear(struct wpa_sm *sm, struct wpa_tdls_peer *peer)
+> - 	peer->cipher = 0;
+> - 	peer->qos_info = 0;
+> - 	peer->wmm_capable = 0;
+> --	peer->tpk_set = peer->tpk_success = 0;
+> -+	peer->tk_set = peer->tpk_set = peer->tpk_success = 0;
+> - 	peer->chan_switch_enabled = 0;
+> - 	os_memset(&peer->tpk, 0, sizeof(peer->tpk));
+> - 	os_memset(peer->inonce, 0, WPA_NONCE_LEN);
+> -@@ -1159,6 +1177,7 @@ skip_rsnie:
+> - 		wpa_tdls_peer_free(sm, peer);
+> - 		return -1;
+> - 	}
+> -+	peer->tk_set = 0; /* A new nonce results in a new TK */
+> - 	wpa_hexdump(MSG_DEBUG, "TDLS: Initiator Nonce for TPK handshake",
+> - 		    peer->inonce, WPA_NONCE_LEN);
+> - 	os_memcpy(ftie->Snonce, peer->inonce, WPA_NONCE_LEN);
+> -@@ -1751,6 +1770,19 @@ static int wpa_tdls_addset_peer(struct wpa_sm *sm, struct wpa_tdls_peer *peer,
+> - }
+> - 
+> - 
+> -+static int tdls_nonce_set(const u8 *nonce)
+> -+{
+> -+	int i;
+> -+
+> -+	for (i = 0; i < WPA_NONCE_LEN; i++) {
+> -+		if (nonce[i])
+> -+			return 1;
+> -+	}
+> -+
+> -+	return 0;
+> -+}
+> -+
+> -+
+> - static int wpa_tdls_process_tpk_m1(struct wpa_sm *sm, const u8 *src_addr,
+> - 				   const u8 *buf, size_t len)
+> - {
+> -@@ -2004,7 +2036,8 @@ skip_rsn:
+> - 	peer->rsnie_i_len = kde.rsn_ie_len;
+> - 	peer->cipher = cipher;
+> - 
+> --	if (os_memcmp(peer->inonce, ftie->Snonce, WPA_NONCE_LEN) != 0) {
+> -+	if (os_memcmp(peer->inonce, ftie->Snonce, WPA_NONCE_LEN) != 0 ||
+> -+	    !tdls_nonce_set(peer->inonce)) {
+> - 		/*
+> - 		 * There is no point in updating the RNonce for every obtained
+> - 		 * TPK M1 frame (e.g., retransmission due to timeout) with the
+> -@@ -2020,6 +2053,7 @@ skip_rsn:
+> - 				"TDLS: Failed to get random data for responder nonce");
+> - 			goto error;
+> - 		}
+> -+		peer->tk_set = 0; /* A new nonce results in a new TK */
+> - 	}
+> - 
+> - #if 0
+> --- 
+> -2.7.4
+> -
+> -Note: [PATCH 7/8] only applies to wpa_supplicant
+> -
+> -From b372ab0b7daea719749194dc554b26e6367603f2 Mon Sep 17 00:00:00 2001
+> -From: Jouni Malinen <j@w1.fi>
+> -Date: Fri, 22 Sep 2017 12:06:37 +0300
+> -Subject: [PATCH 8/8] FT: Do not allow multiple Reassociation Response frames
+> -
+> -The driver is expected to not report a second association event without
+> -the station having explicitly request a new association. As such, this
+> -case should not be reachable. However, since reconfiguring the same
+> -pairwise or group keys to the driver could result in nonce reuse issues,
+> -be extra careful here and do an additional state check to avoid this
+> -even if the local driver ends up somehow accepting an unexpected
+> -Reassociation Response frame.
+> -
+> -Signed-off-by: Jouni Malinen <j@w1.fi>
+> ----
+> - src/rsn_supp/wpa.c    | 3 +++
+> - src/rsn_supp/wpa_ft.c | 8 ++++++++
+> - src/rsn_supp/wpa_i.h  | 1 +
+> - 3 files changed, 12 insertions(+)
+> -
+> -diff --git a/src/rsn_supp/wpa.c b/src/rsn_supp/wpa.c
+> -index 0550a41..2a53c6f 100644
+> ---- a/src/rsn_supp/wpa.c
+> -+++ b/src/rsn_supp/wpa.c
+> -@@ -2440,6 +2440,9 @@ void wpa_sm_notify_disassoc(struct wpa_sm *sm)
+> - #ifdef CONFIG_TDLS
+> - 	wpa_tdls_disassoc(sm);
+> - #endif /* CONFIG_TDLS */
+> -+#ifdef CONFIG_IEEE80211R
+> -+	sm->ft_reassoc_completed = 0;
+> -+#endif /* CONFIG_IEEE80211R */
+> - 
+> - 	/* Keys are not needed in the WPA state machine anymore */
+> - 	wpa_sm_drop_sa(sm);
+> -diff --git a/src/rsn_supp/wpa_ft.c b/src/rsn_supp/wpa_ft.c
+> -index 205793e..d45bb45 100644
+> ---- a/src/rsn_supp/wpa_ft.c
+> -+++ b/src/rsn_supp/wpa_ft.c
+> -@@ -153,6 +153,7 @@ static u8 * wpa_ft_gen_req_ies(struct wpa_sm *sm, size_t *len,
+> - 	u16 capab;
+> - 
+> - 	sm->ft_completed = 0;
+> -+	sm->ft_reassoc_completed = 0;
+> - 
+> - 	buf_len = 2 + sizeof(struct rsn_mdie) + 2 + sizeof(struct rsn_ftie) +
+> - 		2 + sm->r0kh_id_len + ric_ies_len + 100;
+> -@@ -681,6 +682,11 @@ int wpa_ft_validate_reassoc_resp(struct wpa_sm *sm, const u8 *ies,
+> - 		return -1;
+> - 	}
+> - 
+> -+	if (sm->ft_reassoc_completed) {
+> -+		wpa_printf(MSG_DEBUG, "FT: Reassociation has already been completed for this FT protocol instance - ignore unexpected retransmission");
+> -+		return 0;
+> -+	}
+> -+
+> - 	if (wpa_ft_parse_ies(ies, ies_len, &parse) < 0) {
+> - 		wpa_printf(MSG_DEBUG, "FT: Failed to parse IEs");
+> - 		return -1;
+> -@@ -781,6 +787,8 @@ int wpa_ft_validate_reassoc_resp(struct wpa_sm *sm, const u8 *ies,
+> - 		return -1;
+> - 	}
+> - 
+> -+	sm->ft_reassoc_completed = 1;
+> -+
+> - 	if (wpa_ft_process_gtk_subelem(sm, parse.gtk, parse.gtk_len) < 0)
+> - 		return -1;
+> - 
+> -diff --git a/src/rsn_supp/wpa_i.h b/src/rsn_supp/wpa_i.h
+> -index 41f371f..56f88dc 100644
+> ---- a/src/rsn_supp/wpa_i.h
+> -+++ b/src/rsn_supp/wpa_i.h
+> -@@ -128,6 +128,7 @@ struct wpa_sm {
+> - 	size_t r0kh_id_len;
+> - 	u8 r1kh_id[FT_R1KH_ID_LEN];
+> - 	int ft_completed;
+> -+	int ft_reassoc_completed;
+> - 	int over_the_ds_in_progress;
+> - 	u8 target_ap[ETH_ALEN]; /* over-the-DS target AP */
+> - 	int set_ptk_after_assoc;
+> --- 
+> -2.7.4
+> diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
+> index 4f81d22..250add8 100644
+> --- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
+> +++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
+> @@ -11,7 +11,13 @@ SRC_URI = " \
+>      file://defconfig \
+>      file://init \
+>      file://hostapd.service \
+> -    file://key-replay-cve-multiple.patch \
+> +    file://0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch \
+> +    file://0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch \
+> +    file://0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch \
+> +    file://0004-Prevent-installation-of-an-all-zero-TK.patch \
+> +    file://0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch \
+> +    file://0006-TDLS-Reject-TPK-TK-reconfiguration.patch \
+> +    file://0007-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch \
+>  "
+>  
+>  SRC_URI[md5sum] = "eaa56dce9bd8f1d195eb62596eab34c7"
 
 
