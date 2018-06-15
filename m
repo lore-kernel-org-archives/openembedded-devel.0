@@ -1,23 +1,68 @@
-Return-Path: <Ovidiu.Panait@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C29037512A
+Return-Path: <prvs=6977bbb5e=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 44B1575599
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 08:22:25 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5F8MQPD017404
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 01:22:26 -0700 (PDT)
-Received: from l1.corp.ad.wrs.com (128.224.124.169) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Fri, 15 Jun 2018 01:22:25 -0700
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Jun 2018 11:22:26 +0300
-Message-ID: <1529050946-24921-1-git-send-email-ovidiu.panait@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 15 Jun 2018 08:45:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,226,1526335200"; d="scan'208";a="10866182"
+References: <20180614224904.21590-1-richard.leitner@skidata.com>
+	<20180614224904.21590-2-richard.leitner@skidata.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <91ee3513-e8d1-b3e7-4872-fefaa87cf35d@skidata.com>
+Date: Fri, 15 Jun 2018 10:45:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] net-snmp: Fix host contamination
+In-Reply-To: <20180614224904.21590-2-richard.leitner@skidata.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH 1/2] openjdk-8: fix build for gcc8.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,49 +75,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2018 08:22:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Jun 2018 08:45:11 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-If "/usr/local/ssl/include" directory exists on the host machine, net-snmp will
-also search the host openssl headers:
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
-build/net-snmp/temp$ grep -i "/usr/local/ssl/include" log.do_compile
-x86_64-wrs-linux-libtool: compile: x86_64-wrs-linux-gcc ... -I/usr/local/ssl/include
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
-Fix this by selecting the proper sysroot headers using
---with-openssl=${STAGING_EXECPREFIXDIR}
+If you have any questions, please let me know.
 
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+regards;Richard.L
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index 5c827bb86..6f6f19ac9 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -66,7 +66,8 @@ EXTRA_OECONF = "--enable-shared \
-                 --with-install-prefix=${D} \
-                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
-                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
--"
-+                --with-openssl=${STAGING_EXECPREFIXDIR} \
-+                "
- 
- # net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp
- EXTRA_OECONF += "--with-mib-modules=smux"
-@@ -121,8 +122,10 @@ do_install_append() {
-     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
-     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
-+           -e "s@${STAGING_DIR_TARGET}@@g" \
-         -i ${D}${bindir}/net-snmp-create-v3-user
-     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
-+           -e "s@${STAGING_DIR_TARGET}@@g" \
-            -e "s@\([^ ]*-fdebug-prefix-map=[^ ]*\)\1*@@g" \
-            -e "s@\([^ ]*--sysroot=[^ ]*\)\1*@@g" \
-            -e "s@\([^ ]*--with-libtool-sysroot=[^ ]*\)\1*@@g" \
--- 
-2.17.1
-
+On 06/15/2018 12:49 AM, Richard Leitner wrote:
+> Currently oe-core/YoctoProject migrated to gcc8.x. This update broke our
+> openjdk-8 and openjre-8 build. This patch avoids this problem by disabling
+> the problematic gcc warnings and errors.
+> 
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> ---
+>  recipes-core/openjdk/openjdk-8-release-16xbyy.inc   |  1 +
+>  .../patches-openjdk-8/hotspot_fix_gcc8x_build.patch | 21 +++++++++++++++++++++
+>  2 files changed, 22 insertions(+)
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> index bd4a349..7ca0997 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
+> @@ -16,6 +16,7 @@ PATCHES_URI = "\
+>      file://0008-jdk-use-correct-include-for-signal.patch \
+>      file://0009-jdk-disable-backtrace-musl-build-fix.patch \
+>      file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
+> +    file://hotspot_fix_gcc8x_build.patch \
+>  "
+>  # some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
+>  # reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch b/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
+> new file mode 100644
+> index 0000000..1a406f2
+> --- /dev/null
+> +++ b/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
+> @@ -0,0 +1,21 @@
+> +From: Richard Leitner <richard.leitner@skidata.com>
+> +Date: Thu, 14 Jun 2018 23:42:11 +0200
+> +Subject: [PATCH] openjdk-8: hotspot: fix gcc8 compilation
+> +
+> +As oe-core/yocto-project master migrated to gcc8.x we need to support this.
+> +Therefore disable following gcc warnings/errors which caused the build to fail:
+> +  + stringop-overflow
+> +  + return-type
+> +---
+> +
+> +--- a/hotspot/make/linux/makefiles/gcc.make
+> ++++ b/hotspot/make/linux/makefiles/gcc.make
+> +@@ -197,7 +197,7 @@
+> + endif
+> + 
+> + # Compiler warnings are treated as errors
+> +-WARNINGS_ARE_ERRORS = -Werror
+> ++WARNINGS_ARE_ERRORS = -Werror -Wno-stringop-overflow -Wno-error=return-type
+> + 
+> + ifeq ($(USE_CLANG), true)
+> +   # However we need to clean the code up before we can unrestrictedly enable this option with Clang
+> 
 
