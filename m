@@ -1,21 +1,22 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 83B06751F0
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D01F474B52
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 04:54:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5F4sTIp026254
+	Fri, 15 Jun 2018 05:12:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w5F5BgvV028367
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 Jun 2018 21:54:29 -0700 (PDT)
+	Thu, 14 Jun 2018 22:11:57 -0700
 Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Thu, 14 Jun 2018 21:54:28 -0700
+	Thu, 14 Jun 2018 22:11:32 -0700
 To: Khem Raj <raj.khem@gmail.com>
 References: <1529036584-91801-1-git-send-email-changqing.li@windriver.com>
 	<CAMKF1sroZXMAyOoNB9Fw89tYied94_1XjmT8WKHiMM=Zn7JWVw@mail.gmail.com>
 From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <625ad4fc-3b78-14da-796a-29e48ca812cd@windriver.com>
-Date: Fri, 15 Jun 2018 12:54:26 +0800
+Message-ID: <1ae4712a-81a9-33e8-9b88-d4af699b13d9@windriver.com>
+Date: Fri, 15 Jun 2018 13:11:29 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
@@ -35,12 +36,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2018 04:54:29 -0000
+X-List-Received-Date: Fri, 15 Jun 2018 05:12:24 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
-OK, I will send later. :-)
+By the way,  I notice that there is no difference between master and 
+master-next  for "meta-oe/recipes-support/syslog-ng"
+
+Can I know why we need a patch based on master-next? Seems the patch 
+will same for master and master-next.
+
+Thanks.
 
 On 06/15/2018 12:48 PM, Khem Raj wrote:
 > Can you rebase and resend it on top of master-next please
