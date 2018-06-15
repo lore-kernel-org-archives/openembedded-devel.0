@@ -1,50 +1,49 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AA31576050
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
+	[209.85.217.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EECA475548
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 05:44:00 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id d22-v6so9628107iof.13
+	Fri, 15 Jun 2018 06:30:11 +0000 (UTC)
+Received: by mail-ua0-f196.google.com with SMTP id c23-v6so5736195uan.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jun 2018 22:44:01 -0700 (PDT)
+	Thu, 14 Jun 2018 23:30:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=oZMlYWr9QUOu/R2bI1UtoQMIYpwVX4CUFDmMDDpe6bo=;
-	b=JN1sCrwQUQeBLqeayS/wWXw3j7oAGl4Tg/kjjUchLquH3PclOdCOpdAemX3vyqiV7J
-	8XiU6olefrTcuOivoO+dRiGULWG9evpDvTD4T47dNrGLoKczHhEKrWMkw0UDynblI9SW
-	FzmDbPlOvCWstf9rgoIHNHE6U7vXoc1OinOECfT0LXONsiA/uXzJsYqaZ7d9zwVormHM
-	2z/8Tj3JFLo1P1CVigK7gD64ZwiEusGe8ab5m1FPvC3wc4S9Ful9NTfR1NKPyA4swr/H
-	zg5lMA55wfPAYfDbODM5lfqObvFBZA6/Fbi8JqAs9TpBJL7+G+pFwG7I87HCRAXH6MXq
-	vlFg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Zj5r3NKSThAvPvPhP8A6TYH/kK6j+l5OkAvroVxmwls=;
+	b=gxz/wf7Cz9IeOch0Edn+rL2vO4m4ceY+IFQJbkxunnQ2HzvtP0I248xMGkHyFnIj7t
+	L2HUjVe9ROeenpHe+XSdXM+/XXXpFb31yaZPvfIoxGYOAPF/RWg2v/TKJRsybxmTofxf
+	h8wY3WLQLYW8JpuKXOCt6rJ4T2OP1ylBGGoh/Gewa0KntrfnmwTmARrumU0IWpnpu1bE
+	Gvnj3o+vxDp2AVeDFupAJxvEsGHz4GTK9/hVbWcv46nmjnDlVLmKP+BiMx5bNhd+ZadO
+	iU4tBflG0ZtKgk5INgEd6wwganxbaK4cy53pZd0HKqxoju06uuoUcvbnwG/1G1Kp0HC0
+	7mNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=oZMlYWr9QUOu/R2bI1UtoQMIYpwVX4CUFDmMDDpe6bo=;
-	b=o4NvCX730Ei3H22RnaLPs7AO952v5C37+28Q3kaXez9gAq9DHv7X3gsp48rDLuqfpp
-	f6vrYlg7LpXa81r4RKt7tkG652Fghn1qkUIy/pnaexPKqw8Qk5y15xVHZoXDPjJlvHMf
-	oI/oIRQYJK22dvJnwxjShjRb/EPb9z9MvjaqszOhj5bjDOomzjNOtQYlpazcr5clpJ0+
-	Fi66a5EZ5qidUUl3WWAJJUnXiJKVr8/doYv8LAVAt6P7QrQlh6A83i0ulNL7KwspYCdG
-	5Fvz62f5mSzTAEsuAgp9y+tf82jj6WG01C/ygatFWklfmINu+o/ccxaUlAX2vOP/BIC1
-	bwHQ==
-X-Gm-Message-State: APt69E09GBZEyZFlXr/hVoq04JIKllQlsc9dlFBF0NpwLbLIbapMMwqF
-	94nneVCqJrEjXOHwomsKy1HWc2XAglGjVvNkr4k=
-X-Google-Smtp-Source: ADUXVKLAxw5eljsqcK92N6eqBx+i6GN0w/xI/zQAL/NQVGPWTvewEZk24pd96yBBnI3X/gzA0yF4yhEDn6DmK0bbbxI=
-X-Received: by 2002:a6b:2401:: with SMTP id k1-v6mr240973iok.270.1529041441424;
-	Thu, 14 Jun 2018 22:44:01 -0700 (PDT)
+	bh=Zj5r3NKSThAvPvPhP8A6TYH/kK6j+l5OkAvroVxmwls=;
+	b=W1FoIzHTOx6ZWvKYjDxP6tqwvZGS+A8Zn0wcLetk/t5YIhik7h/OMpriZ17lZ2c6BV
+	pmYXTSw6AGLm3IKobXKcazuojZ2pV7HHmBRK3n1LB145kmVk7mr7uwwbGeHdhylBGow9
+	wElKxSXNLJi05eFW6jZo2yXB0octLups8nj8Gkcthurto4aGgF7kRf0GnR1JgJQI4sv9
+	J11YdTRHgL6gzAoXviLU8oRF7YxclkBVQrcDkXGLPslZEIDN7FGfEVEvUTGUZnkOF/jh
+	HLybam0QZcjjYxxFLEwGnwPUtvyuWWfq/SWI676V+eLA1xRXznVHkhKketehdJ1ijxPy
+	cmtg==
+X-Gm-Message-State: APt69E07fmrQGfpRl8Il7URxLM9xDmoBmS4dXyK1RcPr2OiEn2AzSHlr
+	gO4SePCHkrslZLwRjVSqYLCYu+/9ONjxaj/+WxI=
+X-Google-Smtp-Source: ADUXVKL3c+dkE5eTJMfE1Z2ihsYMAJe4v/+clu5D20793iV7SGWSfRhsPXqZ1+IquCnSIatMnICr4x00fdDt2Z00J58=
+X-Received: by 2002:ab0:5851:: with SMTP id
+	p17-v6mr235092uac.164.1529044212275; 
+	Thu, 14 Jun 2018 23:30:12 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a6b:8855:0:0:0:0:0 with HTTP; Thu, 14 Jun 2018 22:44:00
-	-0700 (PDT)
-In-Reply-To: <CABXoSoUparq518CmSYB-8g6nemqE46pyU5CBwQHWT6B+QdXNJQ@mail.gmail.com>
-References: <20180529092556.25053-1-samuli.piippo@qt.io>
-	<20180606200506.GA1353@jama>
-	<CABXoSoUparq518CmSYB-8g6nemqE46pyU5CBwQHWT6B+QdXNJQ@mail.gmail.com>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Date: Fri, 15 Jun 2018 08:44:00 +0300
-Message-ID: <CABXoSoUh3HDg4-WB8JYJyn1b8u1nW4vuQeUdzWNe9jowmk-gmw@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qt5: Update to Qt 5.11.0
+References: <1529036584-91801-1-git-send-email-changqing.li@windriver.com>
+	<CAMKF1sroZXMAyOoNB9Fw89tYied94_1XjmT8WKHiMM=Zn7JWVw@mail.gmail.com>
+	<1ae4712a-81a9-33e8-9b88-d4af699b13d9@windriver.com>
+In-Reply-To: <1ae4712a-81a9-33e8-9b88-d4af699b13d9@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 14 Jun 2018 23:29:46 -0700
+Message-ID: <CAMKF1srnMVyP4HKbW3yCYud8tM2pJk7EMCLfY0WV4mv2q-U-eg@mail.gmail.com>
+To: changqing.li@windriver.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] syslog-ng: fix syslog-ng startup problem with systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +56,629 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2018 05:44:00 -0000
+X-List-Received-Date: Fri, 15 Jun 2018 06:30:12 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-There's existing bug report for GCC that matches this problem:
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=82882
-It's been fixed for one case, but not for all.
-
-On 8 June 2018 at 07:21, Samuli Piippo <samuli.piippo@gmail.com> wrote:
-> On 6 June 2018 at 23:05, Martin Jansa <martin.jansa@gmail.com> wrote:
->> On Tue, May 29, 2018 at 12:25:56PM +0300, Samuli Piippo wrote:
->>> Add recipes for Qt OPC UA and Qt WebGL platform plugin.
->>
->> Unfortunately qtremoteobjects is causing gcc 8.1 to segfault
->> during the build:
->> http://errors.yoctoproject.org/Errors/Build/60747/
->> the same with slightly older SRCREV currently in meta-qt5/master:
->> http://errors.yoctoproject.org/Errors/Build/60753/
->>
->> Can you check what in qtremoteobjects is triggering that and report the
->> issue to gcc?
+On Thu, Jun 14, 2018 at 10:12 PM Changqing Li
+<changqing.li@windriver.com> wrote:
 >
-> We'll look into this.
+> By the way,  I notice that there is no difference between master and
+> master-next  for "meta-oe/recipes-support/syslog-ng"
+>
+
+pwclient fails to cherry-pick this patch. and me solving conflicts
+here can be error prone.
+
+> Can I know why we need a patch based on master-next? Seems the patch
+> will same for master and master-next.
+>
+
+since master-next is where the queue for upcoming patches is and sometimes there
+are related patches which should be sequenced. Look at my email sent
+about master-next
+
+
+> Thanks.
+>
+> On 06/15/2018 12:48 PM, Khem Raj wrote:
+> > Can you rebase and resend it on top of master-next please
+> >
+> > On Thu, Jun 14, 2018 at 9:23 PM Changqing Li <changqing.li@windriver.com> wrote:
+> >> There are one error and one fail when run "systemctl status syslog-ng"
+> >>
+> >> Error opening control socket, bind() failed; socket='/var/run/syslog-ng/syslog-ng.ctl', error='No such file or directory (2)'
+> >> Failed to acquire /run/systemd/journal/syslog socket, disabling systemd-syslog source;
+> >>
+> >> 1. To fix the error info:
+> >>     if config with "--with-pidfile-dir=${localstatedir}/run/${BPN}", according to syslog-ng code
+> >>     (define PATH_CONTROL_SOCKET    SYSLOG_NG_PATH_PIDFILEDIR "/syslog-ng.ctl"), path of control socket also
+> >>     will be /var/run/syslog-ng, but after boot, there is no directory syslog-ng under /var/run,  so this
+> >>     will not work for systemd. here change initscript to /var/lib/syslog-ng, and remove --with-pidfile,
+> >>     so that sysVinit and systemd all use /var/lib/syslog-ng,  and also remove pid config in the syslog-ng service
+> >>     patch to align the pid file path. so both systemd and sysvinit can work.
+> >>
+> >> 2. To fix the Failed info:
+> >>     According below content of admin guide of current version of syslog-ng, change source to systemd-journal
+> >>     of syslog-ng.conf for systemd.
+> >>     1) for linux, If the host is running under systemd, syslog-ng OSE reads directly from the systemd journal file using the
+> >> systemd-journal() source.
+> >>     2) If possible, use the more reliable systemd-journal() driver instead.
+> >>     3) The socket activation of systemd is buggy, causing some log messages to get lost during system startup.
+> >>
+> >>     but sysvinit not recognize systemd-journal, so seperate it to 2 conf, and install according to current config.
+> >>
+> >> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> >> ---
+> >>   meta-oe/recipes-support/syslog-ng/files/initscript |   2 +-
+> >>   .../recipes-support/syslog-ng/files/syslog-ng.conf | 155 --------------------
+> >>   .../syslog-ng/files/syslog-ng.conf.systemd         | 157 +++++++++++++++++++++
+> >>   .../syslog-ng/files/syslog-ng.conf.sysvinit        | 155 ++++++++++++++++++++
+> >>   .../syslog-ng.service-the-syslog-ng-service.patch  |   2 +-
+> >>   meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |  10 +-
+> >>   6 files changed, 321 insertions(+), 160 deletions(-)
+> >>   delete mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+> >>   create mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+> >>   create mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+> >>
+> >> diff --git a/meta-oe/recipes-support/syslog-ng/files/initscript b/meta-oe/recipes-support/syslog-ng/files/initscript
+> >> index 910030f..777e73c 100644
+> >> --- a/meta-oe/recipes-support/syslog-ng/files/initscript
+> >> +++ b/meta-oe/recipes-support/syslog-ng/files/initscript
+> >> @@ -11,7 +11,7 @@
+> >>   syslog_ng=/usr/sbin/syslog-ng
+> >>   test -x "$syslog_ng" || exit 0
+> >>
+> >> -PIDFILE=/var/run/syslog-ng/syslog-ng.pid
+> >> +PIDFILE=/var/lib/syslog-ng/syslog-ng.pid
+> >>
+> >>   create_xconsole() {
+> >>     test -e /dev/xconsole || mknod -m 640 /dev/xconsole p
+> >> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+> >> deleted file mode 100644
+> >> index 0c6f543..0000000
+> >> --- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
+> >> +++ /dev/null
+> >> @@ -1,155 +0,0 @@
+> >> -@version: 3.8
+> >> -#
+> >> -# Syslog-ng configuration file, compatible with default Debian syslogd
+> >> -# installation. Originally written by anonymous (I can't find his name)
+> >> -# Revised, and rewrited by me (SZALAY Attila <sasa@debian.org>)
+> >> -
+> >> -# First, set some global options.
+> >> -options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
+> >> -         owner("root"); group("adm"); perm(0640); stats_freq(0);
+> >> -         bad_hostname("^gconfd$");
+> >> -};
+> >> -
+> >> -########################
+> >> -# Sources
+> >> -########################
+> >> -# This is the default behavior of sysklogd package
+> >> -# Logs may come from unix stream, but not from another machine.
+> >> -#
+> >> -source s_src { unix-dgram("/dev/log"); internal();
+> >> -                    file("/proc/kmsg" program_override("kernel"));
+> >> -};
+> >> -
+> >> -# If you wish to get logs from remote machine you should uncomment
+> >> -# this and comment the above source line.
+> >> -#
+> >> -#source s_net { tcp(ip(127.0.0.1) port(1000) authentication(required) encrypt(allow)); };
+> >> -
+> >> -########################
+> >> -# Destinations
+> >> -########################
+> >> -# First some standard logfile
+> >> -#
+> >> -destination d_auth { file("/var/log/auth.log"); };
+> >> -destination d_cron { file("/var/log/cron.log"); };
+> >> -destination d_daemon { file("/var/log/daemon.log"); };
+> >> -destination d_kern { file("/var/log/kern.log"); };
+> >> -destination d_lpr { file("/var/log/lpr.log"); };
+> >> -destination d_mail { file("/var/log/mail.log"); };
+> >> -destination d_syslog { file("/var/log/syslog"); };
+> >> -destination d_user { file("/var/log/user.log"); };
+> >> -destination d_uucp { file("/var/log/uucp.log"); };
+> >> -
+> >> -# This files are the log come from the mail subsystem.
+> >> -#
+> >> -destination d_mailinfo { file("/var/log/mail/mail.info"); };
+> >> -destination d_mailwarn { file("/var/log/mail/mail.warn"); };
+> >> -destination d_mailerr { file("/var/log/mail/mail.err"); };
+> >> -
+> >> -# Logging for INN news system
+> >> -#
+> >> -destination d_newscrit { file("/var/log/news/news.crit"); };
+> >> -destination d_newserr { file("/var/log/news/news.err"); };
+> >> -destination d_newsnotice { file("/var/log/news/news.notice"); };
+> >> -
+> >> -# Some 'catch-all' logfiles.
+> >> -#
+> >> -destination d_debug { file("/var/log/debug"); };
+> >> -destination d_error { file("/var/log/error"); };
+> >> -destination d_messages { file("/var/log/messages"); };
+> >> -
+> >> -# The root's console.
+> >> -#
+> >> -destination d_console { usertty("root"); };
+> >> -
+> >> -# Virtual console.
+> >> -#
+> >> -destination d_console_all { file("/dev/tty10"); };
+> >> -
+> >> -# The named pipe /dev/xconsole is for the nsole' utility.  To use it,
+> >> -# you must invoke nsole' with the -file' option:
+> >> -#
+> >> -#    $ xconsole -file /dev/xconsole [...]
+> >> -#
+> >> -destination d_xconsole { pipe("/dev/xconsole"); };
+> >> -
+> >> -# Send the messages to an other host
+> >> -#
+> >> -#destination d_net { tcp("127.0.0.1" port(1000) authentication(on) encrypt(on) log_fifo_size(1000)); };
+> >> -
+> >> -# Debian only
+> >> -destination d_ppp { file("/var/log/ppp.log"); };
+> >> -
+> >> -########################
+> >> -# Filters
+> >> -########################
+> >> -# Here's come the filter options. With this rules, we can set which
+> >> -# message go where.
+> >> -
+> >> -filter f_dbg { level(debug); };
+> >> -filter f_info { level(info); };
+> >> -filter f_notice { level(notice); };
+> >> -filter f_warn { level(warn); };
+> >> -filter f_err { level(err); };
+> >> -filter f_crit { level(crit .. emerg); };
+> >> -
+> >> -filter f_debug { level(debug) and not facility(auth, authpriv, news, mail); };
+> >> -filter f_error { level(err .. emerg) ; };
+> >> -filter f_messages { level(info,notice,warn) and
+> >> -                    not facility(auth,authpriv,cron,daemon,mail,news); };
+> >> -
+> >> -filter f_auth { facility(auth, authpriv) and not filter(f_debug); };
+> >> -filter f_cron { facility(cron) and not filter(f_debug); };
+> >> -filter f_daemon { facility(daemon) and not filter(f_debug); };
+> >> -filter f_kern { facility(kern) and not filter(f_debug); };
+> >> -filter f_lpr { facility(lpr) and not filter(f_debug); };
+> >> -filter f_local { facility(local0, local1, local3, local4, local5,
+> >> -                        local6, local7) and not filter(f_debug); };
+> >> -filter f_mail { facility(mail) and not filter(f_debug); };
+> >> -filter f_news { facility(news) and not filter(f_debug); };
+> >> -filter f_syslog3 { not facility(auth, authpriv, mail) and not filter(f_debug); };
+> >> -filter f_user { facility(user) and not filter(f_debug); };
+> >> -filter f_uucp { facility(uucp) and not filter(f_debug); };
+> >> -
+> >> -filter f_cnews { level(notice, err, crit) and facility(news); };
+> >> -filter f_cother { level(debug, info, notice, warn) or facility(daemon, mail); };
+> >> -
+> >> -filter f_ppp { facility(local2) and not filter(f_debug); };
+> >> -filter f_console { level(warn .. emerg); };
+> >> -
+> >> -########################
+> >> -# Log paths
+> >> -########################
+> >> -log { source(s_src); filter(f_auth); destination(d_auth); };
+> >> -log { source(s_src); filter(f_cron); destination(d_cron); };
+> >> -log { source(s_src); filter(f_daemon); destination(d_daemon); };
+> >> -log { source(s_src); filter(f_kern); destination(d_kern); };
+> >> -log { source(s_src); filter(f_lpr); destination(d_lpr); };
+> >> -log { source(s_src); filter(f_syslog3); destination(d_syslog); };
+> >> -log { source(s_src); filter(f_user); destination(d_user); };
+> >> -log { source(s_src); filter(f_uucp); destination(d_uucp); };
+> >> -
+> >> -log { source(s_src); filter(f_mail); destination(d_mail); };
+> >> -#log { source(s_src); filter(f_mail); filter(f_info); destination(d_mailinfo); };
+> >> -#log { source(s_src); filter(f_mail); filter(f_warn); destination(d_mailwarn); };
+> >> -#log { source(s_src); filter(f_mail); filter(f_err); destination(d_mailerr); };
+> >> -
+> >> -log { source(s_src); filter(f_news); filter(f_crit); destination(d_newscrit); };
+> >> -log { source(s_src); filter(f_news); filter(f_err); destination(d_newserr); };
+> >> -log { source(s_src); filter(f_news); filter(f_notice); destination(d_newsnotice); };
+> >> -#log { source(s_src); filter(f_cnews); destination(d_console_all); };
+> >> -#log { source(s_src); filter(f_cother); destination(d_console_all); };
+> >> -
+> >> -#log { source(s_src); filter(f_ppp); destination(d_ppp); };
+> >> -
+> >> -log { source(s_src); filter(f_debug); destination(d_debug); };
+> >> -log { source(s_src); filter(f_error); destination(d_error); };
+> >> -log { source(s_src); filter(f_messages); destination(d_messages); };
+> >> -
+> >> -log { source(s_src); filter(f_console); destination(d_console_all);
+> >> -                                   destination(d_xconsole); };
+> >> -log { source(s_src); filter(f_crit); destination(d_console); };
+> >> -
+> >> -# All messages send to a remote site
+> >> -#
+> >> -#log { source(s_src); destination(d_net); };
+> >> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+> >> new file mode 100644
+> >> index 0000000..d21fa1f
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+> >> @@ -0,0 +1,157 @@
+> >> +@version: 3.8
+> >> +#
+> >> +# Syslog-ng configuration file, compatible with default Debian syslogd
+> >> +# installation. Originally written by anonymous (I can't find his name)
+> >> +# Revised, and rewrited by me (SZALAY Attila <sasa@debian.org>)
+> >> +
+> >> +# First, set some global options.
+> >> +options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
+> >> +         owner("root"); group("adm"); perm(0640); stats_freq(0);
+> >> +         bad_hostname("^gconfd$");
+> >> +};
+> >> +
+> >> +########################
+> >> +# Sources
+> >> +########################
+> >> +# This is the default behavior of sysklogd package
+> >> +# Logs may come from unix stream, but not from another machine.
+> >> +#
+> >> +source s_src {
+> >> +  systemd-journal();
+> >> +  file("/proc/kmsg" program-override("kernel"));
+> >> +  internal();
+> >> +};
+> >> +
+> >> +# If you wish to get logs from remote machine you should uncomment
+> >> +# this and comment the above source line.
+> >> +#
+> >> +#source s_net { tcp(ip(127.0.0.1) port(1000) authentication(required) encrypt(allow)); };
+> >> +
+> >> +########################
+> >> +# Destinations
+> >> +########################
+> >> +# First some standard logfile
+> >> +#
+> >> +destination d_auth { file("/var/log/auth.log"); };
+> >> +destination d_cron { file("/var/log/cron.log"); };
+> >> +destination d_daemon { file("/var/log/daemon.log"); };
+> >> +destination d_kern { file("/var/log/kern.log"); };
+> >> +destination d_lpr { file("/var/log/lpr.log"); };
+> >> +destination d_mail { file("/var/log/mail.log"); };
+> >> +destination d_syslog { file("/var/log/syslog"); };
+> >> +destination d_user { file("/var/log/user.log"); };
+> >> +destination d_uucp { file("/var/log/uucp.log"); };
+> >> +
+> >> +# This files are the log come from the mail subsystem.
+> >> +#
+> >> +destination d_mailinfo { file("/var/log/mail/mail.info"); };
+> >> +destination d_mailwarn { file("/var/log/mail/mail.warn"); };
+> >> +destination d_mailerr { file("/var/log/mail/mail.err"); };
+> >> +
+> >> +# Logging for INN news system
+> >> +#
+> >> +destination d_newscrit { file("/var/log/news/news.crit"); };
+> >> +destination d_newserr { file("/var/log/news/news.err"); };
+> >> +destination d_newsnotice { file("/var/log/news/news.notice"); };
+> >> +
+> >> +# Some 'catch-all' logfiles.
+> >> +#
+> >> +destination d_debug { file("/var/log/debug"); };
+> >> +destination d_error { file("/var/log/error"); };
+> >> +destination d_messages { file("/var/log/messages"); };
+> >> +
+> >> +# The root's console.
+> >> +#
+> >> +destination d_console { usertty("root"); };
+> >> +
+> >> +# Virtual console.
+> >> +#
+> >> +destination d_console_all { file("/dev/tty10"); };
+> >> +
+> >> +# The named pipe /dev/xconsole is for the nsole' utility.  To use it,
+> >> +# you must invoke nsole' with the -file' option:
+> >> +#
+> >> +#    $ xconsole -file /dev/xconsole [...]
+> >> +#
+> >> +destination d_xconsole { pipe("/dev/xconsole"); };
+> >> +
+> >> +# Send the messages to an other host
+> >> +#
+> >> +#destination d_net { tcp("127.0.0.1" port(1000) authentication(on) encrypt(on) log_fifo_size(1000)); };
+> >> +
+> >> +# Debian only
+> >> +destination d_ppp { file("/var/log/ppp.log"); };
+> >> +
+> >> +########################
+> >> +# Filters
+> >> +########################
+> >> +# Here's come the filter options. With this rules, we can set which
+> >> +# message go where.
+> >> +
+> >> +filter f_dbg { level(debug); };
+> >> +filter f_info { level(info); };
+> >> +filter f_notice { level(notice); };
+> >> +filter f_warn { level(warn); };
+> >> +filter f_err { level(err); };
+> >> +filter f_crit { level(crit .. emerg); };
+> >> +
+> >> +filter f_debug { level(debug) and not facility(auth, authpriv, news, mail); };
+> >> +filter f_error { level(err .. emerg) ; };
+> >> +filter f_messages { level(info,notice,warn) and
+> >> +                    not facility(auth,authpriv,cron,daemon,mail,news); };
+> >> +
+> >> +filter f_auth { facility(auth, authpriv) and not filter(f_debug); };
+> >> +filter f_cron { facility(cron) and not filter(f_debug); };
+> >> +filter f_daemon { facility(daemon) and not filter(f_debug); };
+> >> +filter f_kern { facility(kern) and not filter(f_debug); };
+> >> +filter f_lpr { facility(lpr) and not filter(f_debug); };
+> >> +filter f_local { facility(local0, local1, local3, local4, local5,
+> >> +                        local6, local7) and not filter(f_debug); };
+> >> +filter f_mail { facility(mail) and not filter(f_debug); };
+> >> +filter f_news { facility(news) and not filter(f_debug); };
+> >> +filter f_syslog3 { not facility(auth, authpriv, mail) and not filter(f_debug); };
+> >> +filter f_user { facility(user) and not filter(f_debug); };
+> >> +filter f_uucp { facility(uucp) and not filter(f_debug); };
+> >> +
+> >> +filter f_cnews { level(notice, err, crit) and facility(news); };
+> >> +filter f_cother { level(debug, info, notice, warn) or facility(daemon, mail); };
+> >> +
+> >> +filter f_ppp { facility(local2) and not filter(f_debug); };
+> >> +filter f_console { level(warn .. emerg); };
+> >> +
+> >> +########################
+> >> +# Log paths
+> >> +########################
+> >> +log { source(s_src); filter(f_auth); destination(d_auth); };
+> >> +log { source(s_src); filter(f_cron); destination(d_cron); };
+> >> +log { source(s_src); filter(f_daemon); destination(d_daemon); };
+> >> +log { source(s_src); filter(f_kern); destination(d_kern); };
+> >> +log { source(s_src); filter(f_lpr); destination(d_lpr); };
+> >> +log { source(s_src); filter(f_syslog3); destination(d_syslog); };
+> >> +log { source(s_src); filter(f_user); destination(d_user); };
+> >> +log { source(s_src); filter(f_uucp); destination(d_uucp); };
+> >> +
+> >> +log { source(s_src); filter(f_mail); destination(d_mail); };
+> >> +#log { source(s_src); filter(f_mail); filter(f_info); destination(d_mailinfo); };
+> >> +#log { source(s_src); filter(f_mail); filter(f_warn); destination(d_mailwarn); };
+> >> +#log { source(s_src); filter(f_mail); filter(f_err); destination(d_mailerr); };
+> >> +
+> >> +log { source(s_src); filter(f_news); filter(f_crit); destination(d_newscrit); };
+> >> +log { source(s_src); filter(f_news); filter(f_err); destination(d_newserr); };
+> >> +log { source(s_src); filter(f_news); filter(f_notice); destination(d_newsnotice); };
+> >> +#log { source(s_src); filter(f_cnews); destination(d_console_all); };
+> >> +#log { source(s_src); filter(f_cother); destination(d_console_all); };
+> >> +
+> >> +#log { source(s_src); filter(f_ppp); destination(d_ppp); };
+> >> +
+> >> +log { source(s_src); filter(f_debug); destination(d_debug); };
+> >> +log { source(s_src); filter(f_error); destination(d_error); };
+> >> +log { source(s_src); filter(f_messages); destination(d_messages); };
+> >> +
+> >> +log { source(s_src); filter(f_console); destination(d_console_all);
+> >> +                                   destination(d_xconsole); };
+> >> +log { source(s_src); filter(f_crit); destination(d_console); };
+> >> +
+> >> +# All messages send to a remote site
+> >> +#
+> >> +#log { source(s_src); destination(d_net); };
+> >> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+> >> new file mode 100644
+> >> index 0000000..4a059d4
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+> >> @@ -0,0 +1,155 @@
+> >> +@version: 3.8
+> >> +#
+> >> +# Syslog-ng configuration file, compatible with default Debian syslogd
+> >> +# installation. Originally written by anonymous (I can't find his name)
+> >> +# Revised, and rewrited by me (SZALAY Attila <sasa@debian.org>)
+> >> +
+> >> +# First, set some global options.
+> >> +options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
+> >> +         owner("root"); group("adm"); perm(0640); stats_freq(0);
+> >> +         bad_hostname("^gconfd$");
+> >> +};
+> >> +
+> >> +########################
+> >> +# Sources
+> >> +########################
+> >> +# This is the default behavior of sysklogd package
+> >> +# Logs may come from unix stream, but not from another machine.
+> >> +#
+> >> +source s_src { unix-dgram("/dev/log"); internal();
+> >> +         file("/proc/kmsg" program_override("kernel"));
+> >> +};
+> >> +
+> >> +# If you wish to get logs from remote machine you should uncomment
+> >> +# this and comment the above source line.
+> >> +#
+> >> +#source s_net { tcp(ip(127.0.0.1) port(1000) authentication(required) encrypt(allow)); };
+> >> +
+> >> +########################
+> >> +# Destinations
+> >> +########################
+> >> +# First some standard logfile
+> >> +#
+> >> +destination d_auth { file("/var/log/auth.log"); };
+> >> +destination d_cron { file("/var/log/cron.log"); };
+> >> +destination d_daemon { file("/var/log/daemon.log"); };
+> >> +destination d_kern { file("/var/log/kern.log"); };
+> >> +destination d_lpr { file("/var/log/lpr.log"); };
+> >> +destination d_mail { file("/var/log/mail.log"); };
+> >> +destination d_syslog { file("/var/log/syslog"); };
+> >> +destination d_user { file("/var/log/user.log"); };
+> >> +destination d_uucp { file("/var/log/uucp.log"); };
+> >> +
+> >> +# This files are the log come from the mail subsystem.
+> >> +#
+> >> +destination d_mailinfo { file("/var/log/mail/mail.info"); };
+> >> +destination d_mailwarn { file("/var/log/mail/mail.warn"); };
+> >> +destination d_mailerr { file("/var/log/mail/mail.err"); };
+> >> +
+> >> +# Logging for INN news system
+> >> +#
+> >> +destination d_newscrit { file("/var/log/news/news.crit"); };
+> >> +destination d_newserr { file("/var/log/news/news.err"); };
+> >> +destination d_newsnotice { file("/var/log/news/news.notice"); };
+> >> +
+> >> +# Some 'catch-all' logfiles.
+> >> +#
+> >> +destination d_debug { file("/var/log/debug"); };
+> >> +destination d_error { file("/var/log/error"); };
+> >> +destination d_messages { file("/var/log/messages"); };
+> >> +
+> >> +# The root's console.
+> >> +#
+> >> +destination d_console { usertty("root"); };
+> >> +
+> >> +# Virtual console.
+> >> +#
+> >> +destination d_console_all { file("/dev/tty10"); };
+> >> +
+> >> +# The named pipe /dev/xconsole is for the nsole' utility.  To use it,
+> >> +# you must invoke nsole' with the -file' option:
+> >> +#
+> >> +#    $ xconsole -file /dev/xconsole [...]
+> >> +#
+> >> +destination d_xconsole { pipe("/dev/xconsole"); };
+> >> +
+> >> +# Send the messages to an other host
+> >> +#
+> >> +#destination d_net { tcp("127.0.0.1" port(1000) authentication(on) encrypt(on) log_fifo_size(1000)); };
+> >> +
+> >> +# Debian only
+> >> +destination d_ppp { file("/var/log/ppp.log"); };
+> >> +
+> >> +########################
+> >> +# Filters
+> >> +########################
+> >> +# Here's come the filter options. With this rules, we can set which
+> >> +# message go where.
+> >> +
+> >> +filter f_dbg { level(debug); };
+> >> +filter f_info { level(info); };
+> >> +filter f_notice { level(notice); };
+> >> +filter f_warn { level(warn); };
+> >> +filter f_err { level(err); };
+> >> +filter f_crit { level(crit .. emerg); };
+> >> +
+> >> +filter f_debug { level(debug) and not facility(auth, authpriv, news, mail); };
+> >> +filter f_error { level(err .. emerg) ; };
+> >> +filter f_messages { level(info,notice,warn) and
+> >> +                    not facility(auth,authpriv,cron,daemon,mail,news); };
+> >> +
+> >> +filter f_auth { facility(auth, authpriv) and not filter(f_debug); };
+> >> +filter f_cron { facility(cron) and not filter(f_debug); };
+> >> +filter f_daemon { facility(daemon) and not filter(f_debug); };
+> >> +filter f_kern { facility(kern) and not filter(f_debug); };
+> >> +filter f_lpr { facility(lpr) and not filter(f_debug); };
+> >> +filter f_local { facility(local0, local1, local3, local4, local5,
+> >> +                        local6, local7) and not filter(f_debug); };
+> >> +filter f_mail { facility(mail) and not filter(f_debug); };
+> >> +filter f_news { facility(news) and not filter(f_debug); };
+> >> +filter f_syslog3 { not facility(auth, authpriv, mail) and not filter(f_debug); };
+> >> +filter f_user { facility(user) and not filter(f_debug); };
+> >> +filter f_uucp { facility(uucp) and not filter(f_debug); };
+> >> +
+> >> +filter f_cnews { level(notice, err, crit) and facility(news); };
+> >> +filter f_cother { level(debug, info, notice, warn) or facility(daemon, mail); };
+> >> +
+> >> +filter f_ppp { facility(local2) and not filter(f_debug); };
+> >> +filter f_console { level(warn .. emerg); };
+> >> +
+> >> +########################
+> >> +# Log paths
+> >> +########################
+> >> +log { source(s_src); filter(f_auth); destination(d_auth); };
+> >> +log { source(s_src); filter(f_cron); destination(d_cron); };
+> >> +log { source(s_src); filter(f_daemon); destination(d_daemon); };
+> >> +log { source(s_src); filter(f_kern); destination(d_kern); };
+> >> +log { source(s_src); filter(f_lpr); destination(d_lpr); };
+> >> +log { source(s_src); filter(f_syslog3); destination(d_syslog); };
+> >> +log { source(s_src); filter(f_user); destination(d_user); };
+> >> +log { source(s_src); filter(f_uucp); destination(d_uucp); };
+> >> +
+> >> +log { source(s_src); filter(f_mail); destination(d_mail); };
+> >> +#log { source(s_src); filter(f_mail); filter(f_info); destination(d_mailinfo); };
+> >> +#log { source(s_src); filter(f_mail); filter(f_warn); destination(d_mailwarn); };
+> >> +#log { source(s_src); filter(f_mail); filter(f_err); destination(d_mailerr); };
+> >> +
+> >> +log { source(s_src); filter(f_news); filter(f_crit); destination(d_newscrit); };
+> >> +log { source(s_src); filter(f_news); filter(f_err); destination(d_newserr); };
+> >> +log { source(s_src); filter(f_news); filter(f_notice); destination(d_newsnotice); };
+> >> +#log { source(s_src); filter(f_cnews); destination(d_console_all); };
+> >> +#log { source(s_src); filter(f_cother); destination(d_console_all); };
+> >> +
+> >> +#log { source(s_src); filter(f_ppp); destination(d_ppp); };
+> >> +
+> >> +log { source(s_src); filter(f_debug); destination(d_debug); };
+> >> +log { source(s_src); filter(f_error); destination(d_error); };
+> >> +log { source(s_src); filter(f_messages); destination(d_messages); };
+> >> +
+> >> +log { source(s_src); filter(f_console); destination(d_console_all);
+> >> +                                   destination(d_xconsole); };
+> >> +log { source(s_src); filter(f_crit); destination(d_console); };
+> >> +
+> >> +# All messages send to a remote site
+> >> +#
+> >> +#log { source(s_src); destination(d_net); };
+> >> diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+> >> index 6b30c20..1a11ea8 100644
+> >> --- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+> >> +++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
+> >> @@ -21,7 +21,7 @@ index fc16f8d..8e09deb 100644
+> >>    Type=notify
+> >>   -ExecStart=/usr/sbin/syslog-ng -F $SYSLOGNG_OPTS
+> >>   -ExecReload=/bin/kill -HUP $MAINPID
+> >> -+ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslogd.pid
+> >> ++ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS
+> >>   +ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
+> >>    EnvironmentFile=-/etc/default/syslog-ng
+> >>    EnvironmentFile=-/etc/sysconfig/syslog-ng
+> >> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> >> index cb7ca31..feb2882 100644
+> >> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> >> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> >> @@ -16,7 +16,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
+> >>   DEPENDS = "libpcre flex eventlog glib-2.0 openssl util-linux"
+> >>
+> >>   SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
+> >> -           file://syslog-ng.conf \
+> >> +           file://syslog-ng.conf.systemd \
+> >> +           file://syslog-ng.conf.sysvinit \
+> >>              file://initscript \
+> >>              file://volatiles.03_syslog-ng \
+> >>              file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
+> >> @@ -38,7 +39,6 @@ EXTRA_OECONF = " \
+> >>       --with-librabbitmq-client=no \
+> >>       --disable-python \
+> >>       --disable-java --disable-java-modules \
+> >> -    --with-pidfile-dir=${localstatedir}/run/${BPN} \
+> >>       ${CONFIG_TLS} \
+> >>   "
+> >>
+> >> @@ -77,7 +77,11 @@ do_install_prepend() {
+> >>
+> >>   do_install_append() {
+> >>       install -d ${D}/${sysconfdir}/${BPN}
+> >> -    install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
+> >> +    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
+> >> +        install ${WORKDIR}/syslog-ng.conf.systemd ${D}${sysconfdir}/${BPN}/${BPN}.conf
+> >> +    else
+> >> +        install ${WORKDIR}/syslog-ng.conf.sysvinit ${D}${sysconfdir}/${BPN}/${BPN}.conf
+> >> +    fi
+> >>       install -d ${D}/${sysconfdir}/init.d
+> >>       install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog
+> >>       install -d ${D}/${sysconfdir}/default/volatiles/
+> >> --
+> >> 2.7.4
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> BRs
+>
+> Sandy(Li Changqing)
+> +861084778653
+>
 
