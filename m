@@ -1,22 +1,37 @@
-Return-Path: <psaavedra@igalia.com>
-Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
-	by mail.openembedded.org (Postfix) with ESMTP id 9341874FF7
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BDD174FA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 09:09:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Message-Id:Date:Subject:To:From;
-	bh=yOvQEpxMSeIfnJbIvIK1jAacnCpL3GW0T6LrKgDL6Jg=; 
-	b=nI+VXhIflBbQQkEPKevBS5AA7AzhM1W4YaFzmKzNnZ+bZD7Lo/MYRPhFjrDwD+DPTG8qbVhYKtvh1d5VkCctFAoyq37U9e3oXVga/5JBQK25hLwBUK58hvhQLXtbSJD2SLAP71ocIzT13RmKvoennVKhIoER+3FdGuRUxjXbYDCFsW7QlVGvSUKy9Y4171Thz0iSh1fWE/WbE3mgsyFSknYYXmjs69OqzLBVWfjpffUtt+occhCwVfJYt+Fj3BdoSYc4yaXoQ2mDfOd28Ll6JisL+E2ocL+4cLBO4pQZ7JECeDTcWBuKioB5LYuHQ1nrul6W0vTkNN6F4K91IM1U+Q==;
-Received: from buildbox.local.igalia.com ([192.168.10.88])
-	by fanzine.igalia.com with esmtp (Exim) id 1fTkjN-0007YY-TT
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 11:09:17 +0200
-From: Pablo Saavedra <psaavedra@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jun 2018 11:08:47 +0200
-Message-Id: <20180615090847.62109-1-psaavedra@igalia.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-cloud-services] [PATCH] Ruby-shadow upgrade to 2.5.0
+	Fri, 15 Jun 2018 09:22:05 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 106392E63D9B;
+	Fri, 15 Jun 2018 11:22:06 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 6E6D72E63D9A;
+	Fri, 15 Jun 2018 11:22:05 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham autolearn_force=no version=3.4.0
+Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA;
+	Fri, 15 Jun 2018 11:22:03 +0200 (CEST)
+Date: Fri, 15 Jun 2018 11:21:57 +0200
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: "Maxin B. John" <maxin.john@intel.com>
+Message-ID: <20180615092149.GA21861@mail.itconsulting-heinold.de>
+References: <3463e929-53ce-df98-355c-11de357fc5ae@skidata.com>
+	<69df7e62-bd10-ba0e-7441-1bb4f76940f3@skidata.com>
+	<20180615085854.GA35551@mbabyjoh-desk.ger.corp.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <20180615085854.GA35551@mbabyjoh-desk.ger.corp.intel.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [yocto] [meta-java][PATCH 3/3] openjdk-8: use ca-certificates-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,43 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2018 09:09:17 -0000
+X-List-Received-Date: Fri, 15 Jun 2018 09:22:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Ruby was upgraded to 2.5.0 in sumo. A upgrade in the ruby-shadow is
-needed to build
+On Fri, Jun 15, 2018 at 11:58:55AM +0300, Maxin B. John wrote:
+> Hi Richard,
+> 
+> On Fri, Jun 15, 2018 at 10:19:06AM +0200, prvs=6977bbb5e=Richard.Leitner@skidata.com wrote:
+> > fyi, as this was posted on yocto@yoctoproject.org
+> > 
+> > @Otavio/Maxin/Henning: is it OK to just force-push to
+> > master-next without this commit? Or should I push a
+> > "revert" commit?
+> 
+> I think it is ok to force-push to the master-next branch 
+> (obviously not ok to force push to other branches).
+> 
+> > regards;Richard.L
+> 
+> Best Regards,
+> Maxin
 
-Upstream changes:
+Hi,
 
-* Updates code source reference
-* Fixes for rubinius and tests
-* Add friendlier method names
-* Start to add some smoke tests
-* Provide info on implementation
+I am fine with push-force in this case too.
 
-Finally, this version of the package is alrady added in Debian Buster
-as well.
----
- recipes-support/ruby-shadow/ruby-shadow_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-support/ruby-shadow/ruby-shadow_git.bb b/recipes-support/ruby-shadow/ruby-shadow_git.bb
-index 75588f3..e7db6d1 100644
---- a/recipes-support/ruby-shadow/ruby-shadow_git.bb
-+++ b/recipes-support/ruby-shadow/ruby-shadow_git.bb
-@@ -3,10 +3,10 @@ HOMEPAGE = "https://github.com/apalmblad/ruby-shadow"
- LICENSE = "PD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=137882914e5269b7268f0fe8e28a3f89"
- 
--PV = "2.4.1"
-+PV = "2.5.0"
- 
- SRC_URI = "git://github.com/apalmblad/ruby-shadow.git"
--SRCREV = "4231a4838fd50022b112838f114ee0586e119605"
-+SRCREV = "d2e822d8a8bda61f0774debbfce363a7347ed893"
- S = "${WORKDIR}/git"
- 
- inherit ruby
--- 
-2.11.0
-
+Bye Henning
 
