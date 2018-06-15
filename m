@@ -1,13 +1,13 @@
 Return-Path: <prvs=6977bbb5e=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 44B1575599
+	by mail.openembedded.org (Postfix) with ESMTP id 36D0274EB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 08:45:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,226,1526335200"; d="scan'208";a="10866182"
-References: <20180614224904.21590-1-richard.leitner@skidata.com>
-	<20180614224904.21590-2-richard.leitner@skidata.com>
+	Fri, 15 Jun 2018 08:45:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,226,1526335200"; d="scan'208";a="10866234"
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
+References: <20180614224904.21590-1-richard.leitner@skidata.com>
+	<20180614224904.21590-3-richard.leitner@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <91ee3513-e8d1-b3e7-4872-fefaa87cf35d@skidata.com>
-Date: Fri, 15 Jun 2018 10:45:20 +0200
+Message-ID: <9b40beb3-ac58-60a6-25fd-e37ededf69de@skidata.com>
+Date: Fri, 15 Jun 2018 10:45:58 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180614224904.21590-2-richard.leitner@skidata.com>
+In-Reply-To: <20180614224904.21590-3-richard.leitner@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 1/2] openjdk-8: fix build for gcc8.x
+Subject: Re: [meta-java][PATCH 2/2] ca-certificates-java: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,7 +75,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2018 08:45:11 -0000
+X-List-Received-Date: Fri, 15 Jun 2018 08:45:42 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -93,55 +93,26 @@ If you have any questions, please let me know.
 regards;Richard.L
 
 On 06/15/2018 12:49 AM, Richard Leitner wrote:
-> Currently oe-core/YoctoProject migrated to gcc8.x. This update broke our
-> openjdk-8 and openjre-8 build. This patch avoids this problem by disabling
-> the problematic gcc warnings and errors.
+> Debian changed the URI of the ca-certificates-java repository, therfore
+> use the new one.
 > 
 > Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 > ---
->  recipes-core/openjdk/openjdk-8-release-16xbyy.inc   |  1 +
->  .../patches-openjdk-8/hotspot_fix_gcc8x_build.patch | 21 +++++++++++++++++++++
->  2 files changed, 22 insertions(+)
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
+>  recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> index bd4a349..7ca0997 100644
-> --- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> +++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> @@ -16,6 +16,7 @@ PATCHES_URI = "\
->      file://0008-jdk-use-correct-include-for-signal.patch \
->      file://0009-jdk-disable-backtrace-musl-build-fix.patch \
->      file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
-> +    file://hotspot_fix_gcc8x_build.patch \
+> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
+> index 0b149d2..35e2c16 100644
+> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
+> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
+> @@ -17,7 +17,7 @@ DEPENDS = "virtual/javac-native fastjar-native"
+>  PACKAGE_WRITE_DEPS += "openjdk-8-native"
+>  
+>  SRC_URI = "\
+> -	git://anonscm.debian.org/pkg-java/ca-certificates-java.git \
+> +	git://salsa.debian.org/java-team/ca-certificates-java.git \
+>  	file://0001-UpdateCertificates-handle-SYSROOT-environment-variab.patch \
+>  	file://${BPN}.hook.in \
 >  "
->  # some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
->  # reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
-> diff --git a/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch b/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
-> new file mode 100644
-> index 0000000..1a406f2
-> --- /dev/null
-> +++ b/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
-> @@ -0,0 +1,21 @@
-> +From: Richard Leitner <richard.leitner@skidata.com>
-> +Date: Thu, 14 Jun 2018 23:42:11 +0200
-> +Subject: [PATCH] openjdk-8: hotspot: fix gcc8 compilation
-> +
-> +As oe-core/yocto-project master migrated to gcc8.x we need to support this.
-> +Therefore disable following gcc warnings/errors which caused the build to fail:
-> +  + stringop-overflow
-> +  + return-type
-> +---
-> +
-> +--- a/hotspot/make/linux/makefiles/gcc.make
-> ++++ b/hotspot/make/linux/makefiles/gcc.make
-> +@@ -197,7 +197,7 @@
-> + endif
-> + 
-> + # Compiler warnings are treated as errors
-> +-WARNINGS_ARE_ERRORS = -Werror
-> ++WARNINGS_ARE_ERRORS = -Werror -Wno-stringop-overflow -Wno-error=return-type
-> + 
-> + ifeq ($(USE_CLANG), true)
-> +   # However we need to clean the code up before we can unrestrictedly enable this option with Clang
 > 
 
