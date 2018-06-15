@@ -1,37 +1,43 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BDD174FA1
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id A95BF74C9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 09:22:05 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 106392E63D9B;
-	Fri, 15 Jun 2018 11:22:06 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 6E6D72E63D9A;
-	Fri, 15 Jun 2018 11:22:05 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham autolearn_force=no version=3.4.0
-Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Fri, 15 Jun 2018 11:22:03 +0200 (CEST)
-Date: Fri, 15 Jun 2018 11:21:57 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: "Maxin B. John" <maxin.john@intel.com>
-Message-ID: <20180615092149.GA21861@mail.itconsulting-heinold.de>
-References: <3463e929-53ce-df98-355c-11de357fc5ae@skidata.com>
-	<69df7e62-bd10-ba0e-7441-1bb4f76940f3@skidata.com>
-	<20180615085854.GA35551@mbabyjoh-desk.ger.corp.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <20180615085854.GA35551@mbabyjoh-desk.ger.corp.intel.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [yocto] [meta-java][PATCH 3/3] openjdk-8: use ca-certificates-java
+	Fri, 15 Jun 2018 10:00:49 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1fTlV8-0005vu-8r for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Jun 2018 11:58:38 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 15 Jun 2018 12:00:43 +0200
+Message-ID: <pg02k7$bi6$1@blaine.gmane.org>
+References: <20180608202117.5816-1-geomatsi@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.8.0
+Openpgp: preference=signencrypt
+Autocrypt: addr=koen@dominion.thruhere.net; keydata=
+	xsDiBEIE+IMRBAD9QYy9UMeJ4dIYQFTAYXRpzMQxTh1Tn7EeXVgi1A1LQps6g2F2Opg0gkuS
+	pFsAnJWaEYphhIg5CuyDDk1AYH/PUiQp7oma/hlYoLoKe5nuQ3AY8DJnmA81IQmKQQRnE1t8
+	lLja6kzx8RiCybKS19PCAitIzzQXst9ioRoyAE/fZwCgvdgJ52+LLgonoD7/xz50DNBr8YsD
+	/AivFTC9QXeXxlw8fWWwlJXeuUXB+qDWqo4oE516uOk+SpsAzxr0AZxlNyONEjQ3xGW0CO2x
+	s3lvdWuD/r6yGIpJDionAd6SA5GeRATtPJ3F+9JYHKbqESiyDpQCZmN9/8a8zk0mWmg0DjwR
+	7yyOdvslAph0egv4Nd/ki/QqJMJkBADDTIpwtuPnSP8Sk374+e5jxLJJvhycD2WumPOtICTb
+	P9SnMPlc2uW0QyIZnecegqaOVPEMwSOmldX2cqOAewpsOT1WgSnv/rkFcBkNWimJornmno5D
+	NTNDNc9fxu3E4vC/qR9RZf89/13KMWtHQXTqvqPo+5xZ49iAItW+HC8v7M0qS29lbiBLb29p
+	IDxrb2VuQGRvbWluaW9uLmthYmVsLnV0d2VudGUubmw+wl4EExECAB4FAkIE+IMCGwMGCwkI
+	BwMCAxUCAwMWAgECHgECF4AACgkQMkyGM64RGpFGUgCfbw0AIjgkNEvdSbt3z1y89FsEakQA
+	njMQZ6q/tkf2bvmYEG+x9SOeIarIzsBNBEIE+IMQBAD023653MUqxrPwp7RDMi/fHPKcZq+7
+	N1fUhaDfVo3i+f5mgEzJPRRhGQRMncgtB2Hs9DP2HOM9RcoGnjnNRzMpUSMA60xf25MkKjeR
+	6iZWkHIU3ifUfVfFWC6zcSLQ25cFRhWoT9jE2u2czdkpHPBMMpnNqjfgoZA8Uaw3HY2lEwAD
+	BQP/RG8IFRtaRN2DsSrcWHVx/oO1TN7yeYStC0e/MDA89MLznxG6V4fhVdeiPMep3xVZmdTf
+	ASPId6sXPMhHn5aGi8rtmABC26LGO7NTUs+5339HGBPtFstedE+M2cvT/BVg88SeWZkIS1kv
+	3snth9MdAUIqmpyNqVeeKz4t3ZYVVUDCSQQYEQIACQUCQgT4gwIbDAAKCRAyTIYzrhEakZSZ
+	AJ4ou/j26LVAtQAGkX6+vASKMJz/0gCgrAMvT2jpq2Mt0Hr+1ZqbD9N48fE=
+In-Reply-To: <20180608202117.5816-1-geomatsi@gmail.com>
+Subject: Re: [meta-maker][rocko][PATCH] octoprint: add python-pillow to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +50,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jun 2018 09:22:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 15 Jun 2018 10:00:49 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: nl
 
-On Fri, Jun 15, 2018 at 11:58:55AM +0300, Maxin B. John wrote:
-> Hi Richard,
+Op 08-06-18 om 22:21 schreef Sergey Matyukevich:
+> Add pillow library to RDEPENDS to enable seamless installation
+> of messenging plugins including slack and telegram.
 > 
-> On Fri, Jun 15, 2018 at 10:19:06AM +0200, prvs=6977bbb5e=Richard.Leitner@skidata.com wrote:
-> > fyi, as this was posted on yocto@yoctoproject.org
-> > 
-> > @Otavio/Maxin/Henning: is it OK to just force-push to
-> > master-next without this commit? Or should I push a
-> > "revert" commit?
-> 
-> I think it is ok to force-push to the master-next branch 
-> (obviously not ok to force push to other branches).
-> 
-> > regards;Richard.L
-> 
-> Best Regards,
-> Maxin
+> Signed-off-by: Sergey Matyukevich <geomatsi@gmail.com>
 
-Hi,
+NAK, RDEPENDS are for things that the resulting packages cannot do without to function, python-pillow is at most an RSUGGESTS. If you need pillow, include it in your image definition.
 
-I am fine with push-force in this case too.
-
-Bye Henning
 
