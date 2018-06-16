@@ -1,23 +1,30 @@
 Return-Path: <jason.wessel@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6805B75172
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E47397520F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jun 2018 13:24:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5GDOY43019981
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jun 2018 06:24:34 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
-	Sat, 16 Jun 2018 06:24:33 -0700
+	Sat, 16 Jun 2018 13:27:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w5GDQVJI008007
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sat, 16 Jun 2018 06:26:46 -0700
+Received: from [172.25.59.212] (172.25.59.212) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
+	Sat, 16 Jun 2018 06:26:20 -0700
+To: "Jeremy A. Puhlman" <jpuhlman@mvista.com>, akuster808
+	<akuster808@gmail.com>, <openembedded-devel@lists.openembedded.org>
+References: <1528499179-8589-1-git-send-email-jpuhlman@mvista.com>
+	<e0d37e88-7135-4bd8-2f0e-3b8faca30b79@gmail.com>
+	<d1f1d05a-7bed-7bf2-9813-52c7f42e33ea@mvista.com>
 From: Jason Wessel <jason.wessel@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 16 Jun 2018 06:24:33 -0700
-Message-ID: <20180616132433.75139-1-jason.wessel@windriver.com>
-X-Mailer: git-send-email 2.17.1
+Message-ID: <1da9d7a8-fbcf-4fb8-71fa-f5a693dbe9a8@windriver.com>
+Date: Sat, 16 Jun 2018 08:26:20 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.7.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] spice: Uprev to fix compile errors from gcc 8.1.0
+In-Reply-To: <d1f1d05a-7bed-7bf2-9813-52c7f42e33ea@mvista.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH] spice: Update to git hash to pick up gcc8 fixes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,69 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jun 2018 13:24:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 16 Jun 2018 13:27:22 -0000
+Content-Language: en-GB
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-The upstream spice already fixed the following problems:
+On 06/09/2018 10:52 AM, Jeremy A. Puhlman wrote:
+>
+> On 6/9/2018 7:39 AM, akuster808 wrote:
+>> On 06/08/2018 04:06 PM, Jeremy Puhlman wrote:
+>>> Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
+>>> ---
+>>>    meta-networking/recipes-support/spice/spice_git.bb | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+>>> index 35482ca..508bb36 100644
+>>> --- a/meta-networking/recipes-support/spice/spice_git.bb
+>>> +++ b/meta-networking/recipes-support/spice/spice_git.bb
+>>> @@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+>>>    
+>>>    PV = "0.14.0+git${SRCPV}"
+>> Is it still at version "0.14.0" ?
+> There does not appear to be another release branch. So its 0.14.0+git
+> additions.
+>
+>>>    
+>>> -SRCREV_spice = "2a3d5624382ba49c4eb906e69697b92f79d06cf4"
+>>> +SRCREV_spice = "33d9c38554b41dab1390914ef79594b57218b06b"
+>>>    SRCREV_spice-common = "4c2d0e977272c5540634d24f485dd64c424f6748"
+>>>    
+>>>    SRCREV_FORMAT = "spice_spice-common"
 
-../../git/server/red-channel.c: In function 'red_channel_receive':
-../../git/server/red-channel.c:307:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
-     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_receive, NULL);
-                                            ^
-../../git/server/red-channel.c: In function 'red_channel_destroy':
-../../git/server/red-channel.c:406:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
-     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_destroy, NULL);
-                                            ^
-../../git/server/red-channel.c: In function 'red_channel_send':
-../../git/server/red-channel.c:412:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
-     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_send, NULL);
-                                            ^
-../../git/server/red-channel.c: In function 'red_channel_push':
-../../git/server/red-channel.c:421:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
-     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_push, NULL);
-                                            ^
-../../git/server/red-channel.c: In function 'red_channel_disconnect':
-../../git/server/red-channel.c:481:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
-     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_disconnect, NULL);
-                                            ^
-../../git/server/char-device.c: In function 'red_char_device_reset':
-../../git/server/char-device.c:838:49: error: cast between incompatible function types from 'void (*)(RedPipeItem *)' {aka 'void (*)(struct RedPipeItem *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
-         g_queue_foreach(dev_client->send_queue, (GFunc)red_pipe_item_unref, NULL);
+It doesn't appear that this fix has been applied to the tree yet.  I have a newer version, which also fixes the upstream changes for libopus, which I just posted to the list "[oe] [meta-networking][PATCH] spice: Uprev to fix compile errors from gcc 8.1.0".
 
---
 
-The new commit also changed opus to compile in by default.  This is
-now added as a PKGCONFIG option.
-
-Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
----
- meta-networking/recipes-support/spice/spice_git.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
-index 35482ca86..e12e7d691 100644
---- a/meta-networking/recipes-support/spice/spice_git.bb
-+++ b/meta-networking/recipes-support/spice/spice_git.bb
-@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- PV = "0.14.0+git${SRCPV}"
- 
--SRCREV_spice = "2a3d5624382ba49c4eb906e69697b92f79d06cf4"
--SRCREV_spice-common = "4c2d0e977272c5540634d24f485dd64c424f6748"
-+SRCREV_spice = "f1050bfc76c9c4146257e087baf74e0b62d7d218"
-+SRCREV_spice-common = "95743f40a2da39e0a19859c305e69e2c99d39e42"
- 
- SRCREV_FORMAT = "spice_spice-common"
- 
-@@ -47,6 +47,7 @@ PACKAGECONFIG[smartcard] = "--enable-smartcard,--disable-smartcard,libcacard,"
- PACKAGECONFIG[sasl] = "--with-sasl,--without-sasl,cyrus-sasl,"
- PACKAGECONFIG[client] = "--enable-client,--disable-client,,"
- PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
-+PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus,"
- PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
- PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
- 
--- 
-2.17.1
+Jason.
 
 
