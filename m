@@ -1,47 +1,46 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A23E6FFD4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
+	[209.85.213.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 10FDB71984
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jun 2018 03:31:11 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id c10-v6so5208031pgu.9
+	Sat, 16 Jun 2018 04:23:50 +0000 (UTC)
+Received: by mail-vk0-f65.google.com with SMTP id s187-v6so6795251vke.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 20:31:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=pSr44skdkICjD6bEIC3dOulHklUcp6ck3qOO0xgOQ40=;
-	b=rJTUGNOVw5t3aUixTJBSPQe0BhMzsS06qLwpurDKRwgh/ttNlJef2EaX/85mokXhUR
-	BHNQKA5LRPVEx6k/wAsfXy0p7Sy4kvwLasLPRy6nJvpSbDTJyXsyimWuxTKi4tMCuMwx
-	zBMm7ALuVwLy24q5m+1KFaSQqS6KNA3sDi4JeE6J2TAssRiMngkHRbbLRaOnBGWWIdXY
-	5eH0rUum47GkXKw7LWXjQp7UlKzo9Ztwl2KbCfWmdXbOuog8pFvXEFYPmqys07xOMTxY
-	Gdd5jgRsYQdJWEBMepZnYN2q6+1YutKwppXJBQUAAan7feOASi7DQhpmZhGEY7iqvc3t
-	xw0Q==
+	Fri, 15 Jun 2018 21:23:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=YJgJYTHvrAcEAKL+1vYWxlkoou5qSiMtr++TWC/4xYA=;
+	b=CNoHWhFzwDngx+jqCuk6R0vxRvxfq9TgUYW/wKooYZDYz1AUZ0CFwQkNsYFs/u4V07
+	+vBuwq5W0jM1LC1aloNiWzW5i4yljEmNh9myImtzuc5W427IHxv19AKJH9ZXkue1LaDv
+	TVSNYT+Y52Chb2SfJtLQgCWtbjOYDu6qH6bgvbPaAc1xHPcdBDXRupXdHRo1ndmgu7Zh
+	3Iiq61lNDDDuNhgw4eXTFGeI6xoK36XEJchM8PLP3au1iV7kjtickT9RuSNBK+S5MO+H
+	rmb+8Yj0nHtiCB6NaZKPR9sCOnn1i3h/aD0dl/RdDIUPMUZ7Tbiups/byCq0I0jZeGw7
+	/UKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pSr44skdkICjD6bEIC3dOulHklUcp6ck3qOO0xgOQ40=;
-	b=PS5aekKh4Xra5wCly52gX2NeynBhrdCNlc8hMVZFHMpdxQQOq1SRx4g59nb87a2qL1
-	lyjfLf9BJs/QzvfFw3WDdqCMWcJGUShEki6pCM8YIlm+JNgHDwLmXAyLDgQp5EpM+uae
-	HV6RsyPUtpctay6RUhcts4UCshaZ1YBA0SnVw52PLBz8KOPNzMLIrCCJzx3Pf4Cfxdpw
-	ulB/gb+ciP8Citkm+YOwJnmqk/Q50tHDjOeMvut8c81u00NDcIq2QafAssrZY+TS/QN1
-	HxZssIal5ZwwGUHdi8bHHN535ArX+FGJaA4VXSHeratjRZv1p5JHcQHlG3HBfDS3UpH8
-	8YyA==
-X-Gm-Message-State: APt69E2jufcITqRZX9Yzk2wfeuxGfZvnYj+rsM19SFZJnoar+pEhkujb
-	USQY+2F3E6ACHZ6fYRkpGYD/oQRYz/w=
-X-Google-Smtp-Source: ADUXVKLKx6PU2e8I0QlURG2PPwdTkb3T84pfYLCII4KjKOjWnhjeSyb8KU/OxQDW5PBwTebnWR7hmA==
-X-Received: by 2002:a62:de03:: with SMTP id h3-v6mr4791725pfg.46.1529119872835;
-	Fri, 15 Jun 2018 20:31:12 -0700 (PDT)
-Received: from jptest02.mvista.com (64.2.3.196.ptr.us.xo.net. [64.2.3.196])
-	by smtp.gmail.com with ESMTPSA id
-	i65-v6sm29498614pfd.17.2018.06.15.20.31.11
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Jun 2018 20:31:11 -0700 (PDT)
-From: Jeremy Puhlman <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jun 2018 20:28:16 -0700
-Message-Id: <1529119696-3508-1-git-send-email-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.6.4
-Subject: [meta-networking][PATCH] stunnel: Use nogroup rather then nobody for group
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=YJgJYTHvrAcEAKL+1vYWxlkoou5qSiMtr++TWC/4xYA=;
+	b=kP/jzp1Y9vddQortE0JHudzsGz/b++iPgcq01SsOe3CFyvI++BDJL9jEWXdhOV+qzy
+	vs726Hv0DgD1+7tbA4c3R0xm6h6bE2l0hSMoOWQgeFgZtMR2J3NOEG7IiCheG/N80j/h
+	yzVd8uMN4C5AslEdd1bqeoCyhnwn0rm808RdxR6WwetV58zfBn8hbgatSIXI7N6VLJUz
+	u3E6zYBWbVKyILxP/UUzV67ZHse+3xEJTCWNZK0EKu5CoIWoooORAgpq9xeVWnqExSHS
+	CQjKeaZp2WpxyK+oNU1yMgXNp+7/D/KW/15439IjZX8WjMonWkB79nf1bM2OnFLMglX5
+	6bEw==
+X-Gm-Message-State: APt69E3fG+NOeVx0gg9JaTMrkLPo7lZWUPrSSdeFt+7nIx/Elia6f5+v
+	Y5f73NjU0iyCFDrBlGioSS9d/C+VjMIQBQn6uTc=
+X-Google-Smtp-Source: ADUXVKIMz1Lx/IAY1ka0KSqtlcSqDebzuTbfQQSx6NQ5CDAmyvNX86Supxevv6Nts8ob+oFtVXpJXg8RVHb2YOTWT6o=
+X-Received: by 2002:a1f:7c4:: with SMTP id 187-v6mr2526773vkh.60.1529123031565;
+	Fri, 15 Jun 2018 21:23:51 -0700 (PDT)
+MIME-Version: 1.0
+References: <1529119696-3508-1-git-send-email-jpuhlman@mvista.com>
+In-Reply-To: <1529119696-3508-1-git-send-email-jpuhlman@mvista.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 15 Jun 2018 21:22:46 -0700
+Message-ID: <CAMKF1spRUMqmBR6V8Yh2v0TM9u6tgWU=jshE_pW-jEDYnY=Uyg@mail.gmail.com>
+To: Jeremy Puhlman <jpuhlman@mvista.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] stunnel: Use nogroup rather then nobody for group
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,29 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jun 2018 03:31:12 -0000
+X-List-Received-Date: Sat, 16 Jun 2018 04:23:51 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-[log_check] warning: group nobody does not exist - using root
+Hi Jeremy
 
-Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
----
- meta-networking/recipes-support/stunnel/stunnel_5.35.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On Fri, Jun 15, 2018 at 8:31 PM Jeremy Puhlman <jpuhlman@mvista.com> wrote:
+>
+> [log_check] warning: group nobody does not exist - using root
+>
 
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
-index ec8478d..427c8dd 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
-@@ -18,6 +18,8 @@ SRC_URI[sha256sum] = "ffa386ae4c825f35f35157c285e7402a6d58779ad8c3822f74a9d355b5
- inherit autotools
- 
- EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
-+# When cross compiling, configure defaults to nobody, but provides no option to change it.
-+EXTRA_OEMAKE += "DEFAULT_GROUP='nogroup'"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)}"
- PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
--- 
-2.6.4
+I do not see this warning in my builds. Could you share steps to reproduce it ?
 
+> Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
+> ---
+>  meta-networking/recipes-support/stunnel/stunnel_5.35.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+> index ec8478d..427c8dd 100644
+> --- a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+> +++ b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+> @@ -18,6 +18,8 @@ SRC_URI[sha256sum] = "ffa386ae4c825f35f35157c285e7402a6d58779ad8c3822f74a9d355b5
+>  inherit autotools
+>
+>  EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
+> +# When cross compiling, configure defaults to nobody, but provides no option to change it.
+> +EXTRA_OEMAKE += "DEFAULT_GROUP='nogroup'"
+>
+>  PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)}"
+>  PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+> --
+> 2.6.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
