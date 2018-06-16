@@ -1,59 +1,23 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-ot0-f194.google.com (mail-ot0-f194.google.com
-	[74.125.82.194])
-	by mail.openembedded.org (Postfix) with ESMTP id BBC9B74D42
+Return-Path: <jason.wessel@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6805B75172
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jun 2018 04:31:36 +0000 (UTC)
-Received: by mail-ot0-f194.google.com with SMTP id l15-v6so13176384oth.6
+	Sat, 16 Jun 2018 13:24:34 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5GDOY43019981
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jun 2018 21:31:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=iedSHKotYluH+pRX+Y5CgCs2oljR0PDF+rs9OH1Uieg=;
-	b=b24Ok5uI4a56lexNyRDWXNmEl32xbzLS+vunkYfjlwLQS9z/TTT0Nk3laYcp8vp0YM
-	QbRSDSzRgCeQY8qpXB8l82SiGmbGeefueABtaW32Nf9xfCK1K27sAzFXbqr88NToEdiB
-	+gojtJl+zOKUWqk8LPVdHz5JBvD8Ll1RTKPcmMQbH0yIGBd++wUPezAnTjuEDRfH1iP5
-	GEaSxWlhbNINUw3O1t+E5dIqwYKhQlES3b2GBpxJA0wAbFY+UQtp5bpVhN6ygMcXZSXc
-	abbmfFEhzJ51n6iMAH3QJZyS84hypLvEJTvZ9jp7oUO+lRTHr72lSQUfM+znbJsP7Hkf
-	H+RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=iedSHKotYluH+pRX+Y5CgCs2oljR0PDF+rs9OH1Uieg=;
-	b=MeNEJH5uOx7GkXkfrFXbgB8iYacsB3G49TgMDGOGDxRQ5ZkrTk/K5tlNk6qEjkQYuB
-	ALg/S+YC0ahbgHewbQFhX7NqSk8cSegL+ynt+FSTqHWi5ojpEZ+C0ElCqU6fzkIxv3N2
-	w/1P6xfzL+d3AyUxG4vic55l97JtHSA5hZOOJxS62DIhpFkbQjazTYtaj8G9HmlxLWYD
-	AjSn4epnQGt+Ckyr5Q2xYYdcPlgNmrbtapamtYBRzturhICpMf3LgyyYCOKMtOT/72hS
-	6Un+/+UyXyM29KsVcKspmlRzjZ5vNmj4m5RQtRq3U4TqUFbb31ldOibc2kt41/T0+AJJ
-	t56w==
-X-Gm-Message-State: APt69E0mvcvDs5FJwvXHXO4mF4FG0qQNHaSPj+wgnQg92cjFpEAXs/3u
-	OOmX16r7ykNN34eqMzE1+bDpczYTxkI=
-X-Google-Smtp-Source: ADUXVKJUBJ2zJPW9/cwvHbPQbPbrj0vAU1ZkUaRlMc0X40VKOPdzRNnSW8hRY7sNX2i4G+TFSiXlxA==
-X-Received: by 2002:a9d:4044:: with SMTP id
-	o4-v6mr2522344oti.283.1529123497285; 
-	Fri, 15 Jun 2018 21:31:37 -0700 (PDT)
-Received: from ?IPv6:2600:1700:4c90:60a0:5566:b07f:3f47:4a0e?
-	([2600:1700:4c90:60a0:5566:b07f:3f47:4a0e])
-	by smtp.gmail.com with ESMTPSA id
-	l17-v6sm6989362ote.76.2018.06.15.21.31.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Jun 2018 21:31:36 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>
-References: <1529119696-3508-1-git-send-email-jpuhlman@mvista.com>
-	<CAMKF1spRUMqmBR6V8Yh2v0TM9u6tgWU=jshE_pW-jEDYnY=Uyg@mail.gmail.com>
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Message-ID: <cbf28da3-78f7-2b04-6603-aeb09c753a1d@mvista.com>
-Date: Fri, 15 Jun 2018 21:31:33 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Sat, 16 Jun 2018 06:24:34 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Sat, 16 Jun 2018 06:24:33 -0700
+From: Jason Wessel <jason.wessel@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 16 Jun 2018 06:24:33 -0700
+Message-ID: <20180616132433.75139-1-jason.wessel@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spRUMqmBR6V8Yh2v0TM9u6tgWU=jshE_pW-jEDYnY=Uyg@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] stunnel: Use nogroup rather then nobody for group
+Subject: [meta-networking][PATCH] spice: Uprev to fix compile errors from gcc 8.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,35 +30,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jun 2018 04:31:36 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Sat, 16 Jun 2018 13:24:34 -0000
+Content-Type: text/plain
 
+The upstream spice already fixed the following problems:
 
+../../git/server/red-channel.c: In function 'red_channel_receive':
+../../git/server/red-channel.c:307:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
+     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_receive, NULL);
+                                            ^
+../../git/server/red-channel.c: In function 'red_channel_destroy':
+../../git/server/red-channel.c:406:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
+     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_destroy, NULL);
+                                            ^
+../../git/server/red-channel.c: In function 'red_channel_send':
+../../git/server/red-channel.c:412:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
+     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_send, NULL);
+                                            ^
+../../git/server/red-channel.c: In function 'red_channel_push':
+../../git/server/red-channel.c:421:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
+     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_push, NULL);
+                                            ^
+../../git/server/red-channel.c: In function 'red_channel_disconnect':
+../../git/server/red-channel.c:481:44: error: cast between incompatible function types from 'void (*)(RedChannelClient *)' {aka 'void (*)(struct RedChannelClient *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
+     g_list_foreach(channel->priv->clients, (GFunc)red_channel_client_disconnect, NULL);
+                                            ^
+../../git/server/char-device.c: In function 'red_char_device_reset':
+../../git/server/char-device.c:838:49: error: cast between incompatible function types from 'void (*)(RedPipeItem *)' {aka 'void (*)(struct RedPipeItem *)'} to 'void (*)(void *, void *)' [-Werror=cast-function-type]
+         g_queue_foreach(dev_client->send_queue, (GFunc)red_pipe_item_unref, NULL);
 
-On 6/15/2018 9:22 PM, Khem Raj wrote:
-> Hi Jeremy
->
-> On Fri, Jun 15, 2018 at 8:31 PM Jeremy Puhlman <jpuhlman@mvista.com> wrote:
->> [log_check] warning: group nobody does not exist - using root
->>
-> I do not see this warning in my builds. Could you share steps to reproduce it ?
+--
 
-I added meta-networking to my on top of poky(with meta-python and 
-meta-oe) and added
-IMAGE_INSTALL_append = " stunnel "
-bitbake core-image-minimal
+The new commit also changed opus to compile in by default.  This is
+now added as a PKGCONFIG option.
 
-I had been getting it in our production builds, but I literally 
-reproduced it this morning with the current master cloned today. If you 
-inspect the configure file and search for the variable you should be 
-able to see the check. On non-cross compiled systems it checks 
-/ect/group for nogroup and uses it if exists. However since we are cross 
-compiling it defaults to group nobody, which is not provided in our system.
+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+---
+ meta-networking/recipes-support/spice/spice_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 35482ca86..e12e7d691 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ PV = "0.14.0+git${SRCPV}"
+ 
+-SRCREV_spice = "2a3d5624382ba49c4eb906e69697b92f79d06cf4"
+-SRCREV_spice-common = "4c2d0e977272c5540634d24f485dd64c424f6748"
++SRCREV_spice = "f1050bfc76c9c4146257e087baf74e0b62d7d218"
++SRCREV_spice-common = "95743f40a2da39e0a19859c305e69e2c99d39e42"
+ 
+ SRCREV_FORMAT = "spice_spice-common"
+ 
+@@ -47,6 +47,7 @@ PACKAGECONFIG[smartcard] = "--enable-smartcard,--disable-smartcard,libcacard,"
+ PACKAGECONFIG[sasl] = "--with-sasl,--without-sasl,cyrus-sasl,"
+ PACKAGECONFIG[client] = "--enable-client,--disable-client,,"
+ PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
++PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus,"
+ PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
+ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
+ 
 -- 
-Jeremy A. Puhlman
-jpuhlman@mvista.com
+2.17.1
 
 
