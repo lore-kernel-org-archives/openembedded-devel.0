@@ -1,52 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D0D05719AF
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-oi0-f66.google.com (mail-oi0-f66.google.com
+	[209.85.218.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C29FE75279
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 20:35:40 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id m21-v6so11603405uan.0
+	Mon, 18 Jun 2018 20:46:18 +0000 (UTC)
+Received: by mail-oi0-f66.google.com with SMTP id c6-v6so16129108oiy.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 13:35:42 -0700 (PDT)
+	Mon, 18 Jun 2018 13:46:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=uGe6/TRKm78LM+lc0MoJeXc0q3IQZcBDIOGiv5TXtGw=;
-	b=LHN8dmE+p8W9KrB4M42LVCzWAC+FmB3y+gbWc/bj6+ewNBQK6NhOUY741zsUeXCO5y
-	eUoMtKQMLRqiAQko1Pliiha+jowCD5/VLXhp8fld7thzTVLMHaKN22r8mH3Wgsy09/Yi
-	nSf4LmyEn0xNbEO3aM6KeEWHZGQcJ7u8Q27jB0xOBEvGffFUBhFHby54PRjOlQhPmxfd
-	NelLlJzk/CgEAGCua5ml2ZIJPxGLMH9rbzIPQUA5sfUoWUr/kw6BAoE3/FMfkyaQ8aR4
-	aheQIkz9AQOQaJ5+ceWQVdHE3GWmH7tXYAXS5d725VFT+Y6AlG0QrHN1ewazY9ksrdpD
-	YSWw==
+	bh=Ys3my5D+4Xocj0W+ms01hus0e3Iub4qE4VespjRTjSg=;
+	b=MARJgslM3SFyeS89Y7luzEOUIwP8UZdT/Kruqw5m9FrRwLfu7WHXBCU6uEL7+3hhxp
+	l0aWUYBFXnk1u3K1WByMR1HVUHnqvghY17xO9JZ2xykpP2wzI/1OoBqZ6e7K/SzXXuxl
+	rhR5DNt30o991aVht5WdmSiuex8lbnotgfO1lUAdGeOlQO4zvIr5r/A+PUJPzzYVCLkX
+	6LwSa68/6AO5+cTxzQV6JRShDYSWkvPXbG2pVcAq0gh7Zwl2cvcnZkzbZOMJuV1KqxVG
+	sRMjHRN89aJ3Or5+5UJvE2j9hIxbhjs5zJ+hq4OsgnKsQVv1o/Tw2VQhSKPkygWHasll
+	fAOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=uGe6/TRKm78LM+lc0MoJeXc0q3IQZcBDIOGiv5TXtGw=;
-	b=dx9OYn0IvhsKsSHpC9jkK9l4E4kY/fAUmGinzWAsI9EgETmQY1wpLTzHo9+3POLz+2
-	3iy2q7A8evQZyH2iMCbGI0rwQQ8sBUgEVL+Y2sOOdRjyoipcFksTjH+265umJ57Y1R9Z
-	MTefjZ2uG0zpUJp3uvvxiARO282KlzWVseaGYVhJt1z5ftN9mf/+045X6AA9DQKnautB
-	T3AGa3YPVF7Klw+kLjNt4exvwILb6yhABmMCWVBTshP21t9zSY++YkZ5NwmuwGwau3Dt
-	udTckvRk2JuieWUUeudMYp2lTjPlWllKyJLidij07Us60m6+F/VErScgv3S7t2u+Ly+B
-	UMvA==
-X-Gm-Message-State: APt69E1VrUPFmxqzSFZfekYWFsUVR+KKISWOw1scNsIMhpKXGNFUfCYo
-	4r54t/aJwuhkHgjee+Uhou4YKOVWSCbWFgYCVmE=
-X-Google-Smtp-Source: ADUXVKK03I77GBcPbLaoOIbsDzXhG8GOCS+nW/mggTY2BGIH3fX4AA6tiPUi/d7qtx7KvlG4qr5+4X7Sy/NPpOeipYw=
-X-Received: by 2002:a9f:3613:: with SMTP id
-	r19-v6mr9151269uad.49.1529354141630; 
-	Mon, 18 Jun 2018 13:35:41 -0700 (PDT)
+	bh=Ys3my5D+4Xocj0W+ms01hus0e3Iub4qE4VespjRTjSg=;
+	b=gfUo5GMm+jc9imnh/zpYjwEVoiMG7IotkC64esSidf6LGMfl10r7+47d9a8/DhOwXh
+	V1jSn4IpJkCgb2bmTtAgz30LpqqYSwZ2IfJOduQmbhk/SAxVT16wT40e8GzsyukEo2Nu
+	t5ajtqHq8IToS2lr6x4PUTP/9GiSJayH9tQ9DyoShgMwW5rV64X4bz4g3ePFjHA6zzDF
+	yG05+qJ+r0+qafQWqw43J+f0e3WuywzB6kDMlQOZJOIHS0kimZexenqrS+eiL5+6zHtX
+	61l5Vm2+sLMItG78RLucpUVTRFZJ0Ja2OxZIFFlOoHdREe7fo4gNpXH8UW7hE6rTkBSt
+	rdEg==
+X-Gm-Message-State: APt69E1E2n9pqyPaxJCdk0f1HGlKe5s9mb4MZAzo7xrbLOrWxxQYdMCm
+	BY8t2mJYxYtBmL1bGEeN1wEYb82kIR4ZC1mEr9M=
+X-Google-Smtp-Source: ADUXVKJqeJchp6hBRtL97/8X+oI9UkHS5oEATdeBW59qWBboLyZfWTyMTcmE3KOQ0+HMvhITh4Gti86Y5X600J685xw=
+X-Received: by 2002:aca:4f51:: with SMTP id
+	d78-v6mr8282385oib.224.1529354779772; 
+	Mon, 18 Jun 2018 13:46:19 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP; Mon, 18 Jun 2018 13:46:18
+	-0700 (PDT)
+In-Reply-To: <1529340661-6337-1-git-send-email-mark.asselstine@windriver.com>
 References: <1529340661-6337-1-git-send-email-mark.asselstine@windriver.com>
-	<CAMKF1sowdJaFO3CH8d7wRtgPKxoc5PEYESQU3w0oHYAVOsq4og@mail.gmail.com>
-	<CAPuovELz+L+8keBVWYCjFnWPSGPoTf5_X_TZpyKuGdf9bea1fg@mail.gmail.com>
-	<CAMKF1sp3Hhh3c3_xLkZ3EJHbS=fhOLk4EY+6BMzSGP+ZPHECNA@mail.gmail.com>
-	<CALbNGRQej6Mf1WA-4FTBom_LJBj1St8Dxe4Cb+JL0CJu1copvw@mail.gmail.com>
-In-Reply-To: <CALbNGRQej6Mf1WA-4FTBom_LJBj1St8Dxe4Cb+JL0CJu1copvw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Jun 2018 13:35:15 -0700
-Message-ID: <CAMKF1soLLQmphemcQZsum-oir_ODemTECrX0GJPRgDiCZTKH8w@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 18 Jun 2018 22:46:18 +0200
+Message-ID: <CALbNGRQ+2HEhR_E6MH9ba5qCoGCWhDR_fPp+MC1D8=Q5C9pn6A@mail.gmail.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-xfce][PATCH] thunar: fix QA issue 'installed-vs-shipped'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -60,62 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 20:35:41 -0000
+X-List-Received-Date: Mon, 18 Jun 2018 20:46:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 18, 2018 at 1:20 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
+On Mon, Jun 18, 2018 at 6:51 PM, Mark Asselstine
+<mark.asselstine@windriver.com> wrote:
+> Since commit eb0fe21c1535 [thunar: upgrade 1.6.15 -> 1.8.0] we see a
+> QA Error/Warning regarding files 'installed-vs-shipped':
 >
-> On Mon, Jun 18, 2018 at 8:39 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > On Mon, Jun 18, 2018 at 11:03 AM Mark Asselstine
-> > <mark.asselstine@windriver.com> wrote:
-> >>
-> >> On Mon, Jun 18, 2018 at 1:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >> > On Mon, Jun 18, 2018 at 9:51 AM Mark Asselstine
-> >> > <mark.asselstine@windriver.com> wrote:
-> >> >>
-> >> >> Since commit eb0fe21c1535 [thunar: upgrade 1.6.15 -> 1.8.0] we see =
-a
-> >> >> QA Error/Warning regarding files 'installed-vs-shipped':
-> >> >>
-> >> >>     ERROR: QA Issue: thunar: Files/directories were installed but n=
-ot
-> >> >>     shipped in any package:
-> >> >>       /usr/lib
-> >> >>       /usr/lib/systemd
-> >> >>       /usr/lib/systemd/user
-> >> >>       /usr/lib/systemd/user/thunar.service
-> >> >>
-> >> >
-> >> > perhaps this should be moved to /lib/systemd/system
-> >>
-> >> Possibly but really I had to go under the assumption that the folks
-> >> that came before me and created the recipe and completed version bumps
-> >> have tested it in its current location (which is a valid location for
-> >> systemd service files by the way). So my intention was to address the
-> >> QA issue and not change the overall behavior of the recipe.
-> >>
-> >
-> > Thats fine.  Let me wait on Andreas to validate this approach.
-> >
-> >> MarkA
-> >>
-> >> >
-> Strange I have build/run tested this patch for master and sumo without
-> issues. Must have missed something. Will check on my other machine
-> tomorrow what went wrong.
-
-it did not happen with my builds either and my QA policies are same as poky=
-.
-so I wonder too
-
+>     ERROR: QA Issue: thunar: Files/directories were installed but not
+>     shipped in any package:
+>       /usr/lib
+>       /usr/lib/systemd
+>       /usr/lib/systemd/user
+>       /usr/lib/systemd/user/thunar.service
 >
-> Whatever the result is: Move seems wrong: All other user units I found
-> on my system are at /usr/lib/systemd/user/
-
-OK, that makes sense to keep it as it is.
-
+> Correct the path to the systemd service file to match what we see in
+> other recipes which include "user" service files.
 >
-> Andreas
+I checked: My patch sets ${libdir}/system. That does not work for
+systems with libdir=3D/usr/lib64
+
+So:
+
+* Sorry for causing trouble
+* Thanks for fixing
+
+Acked-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 
