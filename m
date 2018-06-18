@@ -1,47 +1,55 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
-	[209.85.213.44])
-	by mail.openembedded.org (Postfix) with ESMTP id DC87E75258
+Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
+	[209.85.217.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AAA3475228
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 18:43:02 +0000 (UTC)
-Received: by mail-vk0-f44.google.com with SMTP id o17-v6so10184467vka.2
+	Mon, 18 Jun 2018 18:47:48 +0000 (UTC)
+Received: by mail-ua0-f196.google.com with SMTP id n4-v6so11365091uad.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 11:43:04 -0700 (PDT)
+	Mon, 18 Jun 2018 11:47:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZfOgry+2bubDi546gI9hD3Wcli48E2ONJ9hiae4iODU=;
-	b=ZtPENKm1ADkivqpsxtCR0412mXZHbtGC5FlItCIvUJeEGiPa6qmF/DYz8o04QuV7vn
-	6oe07TzrbZyEz/54IEguwSV4l/jQpsO1xhYNsJAxMuKsDXj21qpwSY5HaDXuSYT0CUQw
-	6HXQAPB0mCP5np/le/iZJn65L+/91sNldVwj6+Lld3yfz6RlLq/4ppH/bowDii4YycTB
-	+gm2dkE8drB90BFotR1s42+7mIsjVa3pxM+vUx7qqanuxXCZbq0hd0VkJUwEfwKbRzpw
-	9qpP4H8B5zvf594PtrEh8LO5r3q4InRcb9/wxOWlJro9PA2iEec9kBsLjLSW2WpxFP3c
-	XvfA==
+	:cc; bh=9iyzVIZ+9IzojdQhM9f3a9/ODcw2wNgWmPEW+DKWonk=;
+	b=scaeEAIR0b9faerHF0bXUps8Ds19MenNtv4AZlLitULeVBDSIT8ALy5+DJu1jgKnGk
+	Dvx5pijBcE9WlqZQ37Wn0qvITVlc2ClxkfA0R0fKS8Y8sbN4MR0hTHk94zxowGPgSQNi
+	20YYMNKjRmjBOd5mkUk7daOK1jyyemKpbTtV2DMuz58GN6J030aCws2KGsBW4biZYEwq
+	/b1xqvWqG139M8x9QE4qN/aueME5mUkJrM/1owApPTwDxxQLErfd5XpZlD7JushtmFI+
+	ntJWaLoOInSROUCU2fj7pnGFJX53k68BgZ+1amwSrVA1B++D0zSEqRuvhXy1XjC2OfU7
+	iWEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ZfOgry+2bubDi546gI9hD3Wcli48E2ONJ9hiae4iODU=;
-	b=naLh6+C9Y+SAAjejH30NY6/ZZhOFEVZCn1Csnbu3h3I2Gb0lIEt7Ciua5cONn57CY9
-	8+UO/JrL9Wl9HN74U6iikKSlV+zdzyzm75tcjTvhXxE9Ba5peb4qdlsztxaJw72CrE5I
-	lull9U3c+6O4wr6of8vzmqb5mEFrF8u0Hy2F7DHMG48dW2ePjvyvh9fKW3KcbSWQHkWn
-	yyGX6XYJfU9vW5EdmdmUWh8TUEIdRp+2lEG6gJCbi9Jw1A78AESe6ieKfwymCbcUSqrG
-	XUBxl6/1wVJdiTOtGRDUx8+CbPD5nemIhr7o76YJjyhKiBfR6CtMXp6kH8BI5eIZi6iV
-	Vi4g==
-X-Gm-Message-State: APt69E3+XAQfb3iAIliKtAXEuC+JQs/QPk8NeEM2ixRindqbve8x3Wva
-	OVAcW8AHIEAifMQTuEHOhQC3HwQSzaSnsA82Ypc=
-X-Google-Smtp-Source: ADUXVKI/WpMPHv/dgF8ryPh6DeBvhtyuNcdi5sqk71azzptC8w0StBip39mLwRwZto619JUKZ3DsuNerz0XIUqNx8yA=
-X-Received: by 2002:a1f:4b86:: with SMTP id
-	y128-v6mr7324071vka.146.1529347383563; 
-	Mon, 18 Jun 2018 11:43:03 -0700 (PDT)
+	bh=9iyzVIZ+9IzojdQhM9f3a9/ODcw2wNgWmPEW+DKWonk=;
+	b=R0BQE7SuUhkAHVSSG9UOB0bHGVlh5pZJH+/05eGl4QmBFabSglPUv4XQNldQnqr5uX
+	iBY1/zyGiZykug8ay1biRsbxv5yJ5FBeWJovEQ05ilCEmi7pHX0sw8xBmaHdPPyKtpW8
+	XxGRB1OYShqReXHcTDqDHBV/yklgJ9iY52jJh5MJ8UWH0HcYrLhX7fkKGh+blP9AePCE
+	PIliY26iRRSy7mrZ2lAzxadY+nTqxSHOLUfYQrhGhdwfoDkA/hCDcbKFpLPmdq/EknbJ
+	YN5MVmCwFwwmjSfXY2+a/egxBfTB7BI1nGbDyVx2IVxPVn/5jPRLyMJgGq8SLXWt/UA3
+	jN6g==
+X-Gm-Message-State: APt69E3gXnH3saLdOMKlESC/kmZF7MIo3cOfo/aU6+PV01+wDGUY1q3L
+	8M+MZ6JeA1zwC2t+OwP5/51yUbjTB46gHK2lt5E=
+X-Google-Smtp-Source: ADUXVKKL/l9y8+ik/q4VEgIWyQo51ww7i3fsX6erxuxfT64rqvnOK9/lPcP6Tg5lXpwjyPO+grKGF3RkioCP1E7Vqe4=
+X-Received: by 2002:ab0:50f0:: with SMTP id
+	d45-v6mr8448384uaa.45.1529347669425; 
+	Mon, 18 Jun 2018 11:47:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180618183651.213080-1-joe.slater@windriver.com>
-In-Reply-To: <20180618183651.213080-1-joe.slater@windriver.com>
+References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
+	<CALbNGRTtOYpc9QWEAttxjgeD4Xog4U_4btnuy_v3m7PW-JKJfw@mail.gmail.com>
+	<1883916.pZAjriCjz1@yow-masselst-lx1>
+	<CAPuovELwUxFTuowgPwN_oBJGMNxxY6XK9QNmgYygyJ6yKdQQgg@mail.gmail.com>
+	<CAPuovE+dZu=VX3n_rU6zRQjXnu=XnPpZpQOwPHu6qb7BhWDKJw@mail.gmail.com>
+	<CAMKF1srMCX6u3TC2Ybi_aj4w7WLDW-AuVVhKptF+kzJz=P=6JQ@mail.gmail.com>
+	<c41dc3e4-7ded-f47c-5120-321dd66e9334@windriver.com>
+	<CAMKF1soijupp06kVYOurZv428nNmEYo8WpkuP04m_oxV2CnGow@mail.gmail.com>
+	<CAPuovEJx-ghUsXH0NFR8Vc1DJL8AyHXJAbL38oqkrtqbQiAOTw@mail.gmail.com>
+In-Reply-To: <CAPuovEJx-ghUsXH0NFR8Vc1DJL8AyHXJAbL38oqkrtqbQiAOTw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Jun 2018 11:42:47 -0700
-Message-ID: <CAMKF1spicQZfrYmkETYCDOq7FAhdy_A9BC-8V+f7QLx0n7fJ-w@mail.gmail.com>
-To: "Slater, Joseph" <joe.slater@windriver.com>
+Date: Mon, 18 Jun 2018 11:47:33 -0700
+Message-ID: <CAMKF1spbkMcboLaBfw0bv_bf_v5_d=qDHB3ag7pCEL1E5Ni3sA@mail.gmail.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH V3 1/1] syslog-ng: fix build without json
+Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +62,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 18:43:03 -0000
+X-List-Received-Date: Mon, 18 Jun 2018 18:47:48 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jun 18, 2018 at 11:37 AM Joe Slater <joe.slater@windriver.com> wrote:
+On Mon, Jun 18, 2018 at 11:09 AM Mark Asselstine
+<mark.asselstine@windriver.com> wrote:
 >
-> Remove configurations requiring json from target.
+> On Mon, Jun 18, 2018 at 1:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Mon, Jun 18, 2018 at 10:54 AM Mark Hatle <mark.hatle@windriver.com> wrote:
+> >>
+> >> On 6/18/18 12:50 PM, Khem Raj wrote:
+> >> > Hi Mark
+> >> >
+> >> > It seems your distro is not inheriting it globally. Here I have
+> >> > INHERIT_DISTRO ?=  "debian devshell sstate license remove-libtool"
+> >>
+> >> So is remove-libtool a recipe or a distro option?
+> >>
+> >> I'm asking because doing this half-way is causing a lot of confusion.
+> >>
+> >> If it's a distro option, then the recipes should work without it being set.  If
+> >> it's a recipe option, then the recipes that need it should use it.
+> >>
+> >> Right now it doesn't seem to be working with these recipes because they don't
+> >> package the .la files UNLESS it's enabled.  So the fix is either to package them
+> >> (by default) or inherit the remove-libtool.
+> >>
+> >
+> > since we make it as part of meta/conf/distro/defaultsetup.conf
+> > its a default policy,  its perfectly fine for a distro to disregard that
+> > however, then you fall into a non-default case. I am willing to accept
+> > per recipe patches but I would recommend to consider it as a distro
+> > feature for your distro.
+> >
 >
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> ---
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 7 +++++++
->  1 file changed, 7 insertions(+)
+> Andreas,
 >
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index a0ae7bd..417e8c6 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -80,6 +80,13 @@ do_install_append() {
->      # Remove /var/run as it is created on startup
->      rm -rf ${D}${localstatedir}/run
->
-> +    # If json is not supported, remove certain conf files.
-> +    if ! ${@bb.utils.contains('PACKAGECONFIG','json','true','false',d)} ; then
-> +        for f in cim elasticsearch ewmm graylog2 loggly logmatic ; do
-> +            rm -rf ${D}${datadir}/${BPN}/include/scl/$f
-> +        done
-> +    fi
-> +
+> Can you revert your "various classes recipes: Remove FILES entries for
+> dbg/dev packages" then? If this is a distro feature then these recipes
+> need to build without the QA issue and without the remove-libtool
+> distro feature being set.
 
-package them into a separate package and let that package rdep on json
-
->      # support for systemd
->      if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
->          install -d ${D}${systemd_unitdir}/system/
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+This is in default features so I would not recommend revert, distros
+not using this feature are in best position to fix it, as I said
+before those patches are acceptable.
 
