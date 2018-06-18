@@ -1,27 +1,52 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BA2AD6FEFE
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-ot0-f196.google.com (mail-ot0-f196.google.com
+	[74.125.82.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 2207D744C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 20:14:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5IKEaMb009251
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 18 Jun 2018 13:14:36 -0700 (PDT)
-Received: from yow-masselst-lx1.localnet (128.224.22.35) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 18 Jun 2018 13:14:35 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@gmail.com>
-Date: Mon, 18 Jun 2018 16:14:34 -0400
-Message-ID: <1897778.l7aI5iDS63@yow-masselst-lx1>
-Organization: Wind River
-In-Reply-To: <CALbNGRQR6OPvXyoTmfXm9Yh5PmADNb=CNamyo7T-PebQ4-nrXA@mail.gmail.com>
-References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
-	<d42b7242-3e89-796d-091a-fa3eb8ddd44d@windriver.com>
-	<CALbNGRQR6OPvXyoTmfXm9Yh5PmADNb=CNamyo7T-PebQ4-nrXA@mail.gmail.com>
+	Mon, 18 Jun 2018 20:20:41 +0000 (UTC)
+Received: by mail-ot0-f196.google.com with SMTP id w13-v6so19987855ote.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jun 2018 13:20:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=03DQu3doYbT3XD/kjRvkG/rXkCQxeq7VoN2CxwCqdUE=;
+	b=DaZmpeYGTBpUEeQM88wwzyZjLVLDhaDpxlTU57l7M6BFXNrZpAXnDVgvHKpU1vOTDS
+	WEi48jBrqOvl67vCpb0h0tr6iM6pqswSogPlO1JHA2L0PnT/Js88EmRMUsIlWWLFuHxz
+	sq16/jXR4eSvAb7At70Q8qrKPyCGhM0CI1HeeCYbNJipoZw20prftevdc/ovQHueWDgo
+	DENp0Y95z66Hh9RRI1T+2FbJ3OhRYz1/ogK38zZ55fx16CCq7E1PHMpfw5cZMe8NU1YD
+	K0eY1h4xciF3E79a3KhRuEZ59La7FEoqVYup8FPz7UMOx4koXovMcHSXfCaAyMmS2I5A
+	yZlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=03DQu3doYbT3XD/kjRvkG/rXkCQxeq7VoN2CxwCqdUE=;
+	b=EGGrcGzJEroGjQipnn78vCVr55U90mSX2O8bYUle2RIN4gFMEtegx9LW2mTAbU/M43
+	VFq4bxjQpliVWuJfcssrquT8ItEXBguXnuGT/vBbyBk1qP8O/bDL+UrEANDEWxbfoqYh
+	qs3bnqboNgMoV/FVcl/M8MyGnhL8nSjg4BUNSpH3YXvK9spNuHQyMr745GwmfMQW6dMo
+	lIsiA//yhCpUc6Y2ogs8YD7h615q5FwsQ0REaR/8uKB6foYs4q96usbImHxhuxlPO3YP
+	ow5HjqsngjIkUyVLcWwRIZllHP7xurMAcxcATIRx0Zjtv6E7jI9HdhNwjBW7CBBWSVQN
+	DDwQ==
+X-Gm-Message-State: APt69E33Rx/0IDDX3aZdu7LFa+Uo8Act7np33G53DM2NpvMEXtiQE0LJ
+	/PMVzkzvIH8wCRUwl3tYI3aGiCB7t+X0I51cShE=
+X-Google-Smtp-Source: ADUXVKJggUN3a4lAR/ErkmpYJQs4LNbnGcbIkx35fMnLZSl5kd+SEdcT3LNmmLLnzv6CWB39hLWx4aft84kALtgj1Qw=
+X-Received: by 2002:a9d:c43:: with SMTP id 61-v6mr9365970otr.352.1529353243020;
+	Mon, 18 Jun 2018 13:20:43 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
+Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP; Mon, 18 Jun 2018 13:20:42
+	-0700 (PDT)
+In-Reply-To: <CAMKF1sp3Hhh3c3_xLkZ3EJHbS=fhOLk4EY+6BMzSGP+ZPHECNA@mail.gmail.com>
+References: <1529340661-6337-1-git-send-email-mark.asselstine@windriver.com>
+	<CAMKF1sowdJaFO3CH8d7wRtgPKxoc5PEYESQU3w0oHYAVOsq4og@mail.gmail.com>
+	<CAPuovELz+L+8keBVWYCjFnWPSGPoTf5_X_TZpyKuGdf9bea1fg@mail.gmail.com>
+	<CAMKF1sp3Hhh3c3_xLkZ3EJHbS=fhOLk4EY+6BMzSGP+ZPHECNA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 18 Jun 2018 22:20:42 +0200
+Message-ID: <CALbNGRQej6Mf1WA-4FTBom_LJBj1St8Dxe4Cb+JL0CJu1copvw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Mark Asselstine <mark.asselstine@windriver.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH] thunar: fix QA issue 'installed-vs-shipped'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,76 +59,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 20:14:35 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 18 Jun 2018 20:20:42 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Monday, June 18, 2018 4:10:12 PM EDT Andreas M=FCller wrote:
-> On Mon, Jun 18, 2018 at 8:55 PM, Mark Hatle <mark.hatle@windriver.com>=20
-wrote:
-> > On 6/18/18 1:47 PM, Khem Raj wrote:
-> >> On Mon, Jun 18, 2018 at 11:09 AM Mark Asselstine
-> >>=20
-> >> <mark.asselstine@windriver.com> wrote:
-> >>> On Mon, Jun 18, 2018 at 1:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >>>> On Mon, Jun 18, 2018 at 10:54 AM Mark Hatle <mark.hatle@windriver.co=
-m>=20
-wrote:
-> >>>>> On 6/18/18 12:50 PM, Khem Raj wrote:
-> >>>>>> Hi Mark
-> >>>>>>=20
-> >>>>>> It seems your distro is not inheriting it globally. Here I have
-> >>>>>> INHERIT_DISTRO ?=3D  "debian devshell sstate license remove-libtoo=
-l"
-> >>>>>=20
-> >>>>> So is remove-libtool a recipe or a distro option?
-> >>>>>=20
-> >>>>> I'm asking because doing this half-way is causing a lot of confusio=
-n.
-> >>>>>=20
-> >>>>> If it's a distro option, then the recipes should work without it be=
-ing
-> >>>>> set.  If it's a recipe option, then the recipes that need it should
-> >>>>> use it.
-> >>>>>=20
-> >>>>> Right now it doesn't seem to be working with these recipes because
-> >>>>> they don't package the .la files UNLESS it's enabled.  So the fix is
-> >>>>> either to package them (by default) or inherit the remove-libtool.
-> >>>>=20
-> >>>> since we make it as part of meta/conf/distro/defaultsetup.conf
-> >>>> its a default policy,  its perfectly fine for a distro to disregard
-> >>>> that
-> >>>> however, then you fall into a non-default case. I am willing to acce=
-pt
-> >>>> per recipe patches but I would recommend to consider it as a distro
-> >>>> feature for your distro.
-> >>>=20
-> >>> Andreas,
-> >>>=20
-> >>> Can you revert your "various classes recipes: Remove FILES entries for
-> >>> dbg/dev packages" then? If this is a distro feature then these recipes
-> >>> need to build without the QA issue and without the remove-libtool
-> >>> distro feature being set.
->=20
-> I prefer not to apply the patch (Or Khem shall I send a revert?). It
-> is not a good idea to break builds for distros not following a
-> recommendation. Anyway the mentioned patch was a cleanup: It is not
-> worth to break things by a minor cleanup.
+On Mon, Jun 18, 2018 at 8:39 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Mon, Jun 18, 2018 at 11:03 AM Mark Asselstine
+> <mark.asselstine@windriver.com> wrote:
+>>
+>> On Mon, Jun 18, 2018 at 1:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> > On Mon, Jun 18, 2018 at 9:51 AM Mark Asselstine
+>> > <mark.asselstine@windriver.com> wrote:
+>> >>
+>> >> Since commit eb0fe21c1535 [thunar: upgrade 1.6.15 -> 1.8.0] we see a
+>> >> QA Error/Warning regarding files 'installed-vs-shipped':
+>> >>
+>> >>     ERROR: QA Issue: thunar: Files/directories were installed but not
+>> >>     shipped in any package:
+>> >>       /usr/lib
+>> >>       /usr/lib/systemd
+>> >>       /usr/lib/systemd/user
+>> >>       /usr/lib/systemd/user/thunar.service
+>> >>
+>> >
+>> > perhaps this should be moved to /lib/systemd/system
+>>
+>> Possibly but really I had to go under the assumption that the folks
+>> that came before me and created the recipe and completed version bumps
+>> have tested it in its current location (which is a valid location for
+>> systemd service files by the way). So my intention was to address the
+>> QA issue and not change the overall behavior of the recipe.
+>>
+>
+> Thats fine.  Let me wait on Andreas to validate this approach.
+>
+>> MarkA
+>>
+>> >
+Strange I have build/run tested this patch for master and sumo without
+issues. Must have missed something. Will check on my other machine
+tomorrow what went wrong.
 
-The patch doesn't just cleanup .la but also some .debug files, so I suppose=
- it=20
-doesn't have to be a full revert. I can put together something which just g=
-ets=20
-things going with a return to including .la files in FILES if people would=
-=20
-prefer that approach.
+Whatever the result is: Move seems wrong: All other user units I found
+on my system are at /usr/lib/systemd/user/
 
-MarkA
-
->=20
-> Andreas
-
-
-
-
+Andreas
 
