@@ -1,61 +1,77 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D0FF751FE
+Return-Path: <MANJUKUM@xilinx.com>
+X-Greylist: delayed 15482 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 18 Jun 2018 19:10:04 UTC
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com
+	(mail-bl2nam02on0084.outbound.protection.outlook.com [104.47.38.84])
+	by mail.openembedded.org (Postfix) with ESMTP id F2BF171BF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 18:55:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5IItwpu008967
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 18 Jun 2018 11:55:58 -0700 (PDT)
-Received: from soho-mhatle-m.local (172.25.36.227) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.399.0;
-	Mon, 18 Jun 2018 11:55:57 -0700
-To: Khem Raj <raj.khem@gmail.com>, Mark Asselstine
-	<mark.asselstine@windriver.com>
-References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
-	<CALbNGRTtOYpc9QWEAttxjgeD4Xog4U_4btnuy_v3m7PW-JKJfw@mail.gmail.com>
-	<1883916.pZAjriCjz1@yow-masselst-lx1>
-	<CAPuovELwUxFTuowgPwN_oBJGMNxxY6XK9QNmgYygyJ6yKdQQgg@mail.gmail.com>
-	<CAPuovE+dZu=VX3n_rU6zRQjXnu=XnPpZpQOwPHu6qb7BhWDKJw@mail.gmail.com>
-	<CAMKF1srMCX6u3TC2Ybi_aj4w7WLDW-AuVVhKptF+kzJz=P=6JQ@mail.gmail.com>
-	<c41dc3e4-7ded-f47c-5120-321dd66e9334@windriver.com>
-	<CAMKF1soijupp06kVYOurZv428nNmEYo8WpkuP04m_oxV2CnGow@mail.gmail.com>
-	<CAPuovEJx-ghUsXH0NFR8Vc1DJL8AyHXJAbL38oqkrtqbQiAOTw@mail.gmail.com>
-	<CAMKF1spbkMcboLaBfw0bv_bf_v5_d=qDHB3ag7pCEL1E5Ni3sA@mail.gmail.com>
-From: Mark Hatle <mark.hatle@windriver.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=mark.hatle@windriver.com; prefer-encrypt=mutual; keydata=
-	xsBNBFYKxFgBCACt/pzutBp6p/xVKTFJjHbM3KpQKCblyot/YP+bpTr51Hrc5xDXBQhoG7TC
-	aIRvRIvbhEevEQK9y04gW3JK/5lobq5ORebolcsHlYBUvpNeIPjupLQwGvz/TPtrLRNGLqDC
-	rvsM6OA2XbQ2bwzxWaSQS3ImE2O2iXOZn9HhThMGeDB4Nff3fgUvXOTDIrgWOn9K2DgLL7Yc
-	zkUIlFdj+Nraksd/7BSk8oH6tjeBVhFqSFvKta9QxWgdr58oPaTYaW/xNqUjlLrbJuMw/MSe
-	xzuYfdfDfm6J8kRjMOnwQ0n8svJElzqAk+d83ow38gpGQ+LkjGgnf8ZFJ4rUJFADroX3ABEB
-	AAHNJU1hcmsgSGF0bGUgPG1hcmsuaGF0bGVAd2luZHJpdmVyLmNvbT7CwHcEEwEIACEFAlYK
-	xFgCGwMFCwkIBwIGFQgJCgsCBBYCAwECHgECF4AACgkQfv796/r0vvlvZAf9Gs+eN320yhRW
-	V/fZCsngKhmOK4v3HrTwFrkSmoD9QHQiE/5IPdNacHwIPwZx07tNBohB8xOeNqCPRYRBwGhA
-	AnxKOPyd0nnm6ZhPzbA57v4x3IGRQr4QzvcBTASJq91l3Ew4lpAslyx5w1DPPqRD7G8ycDKg
-	peKyDwmdkvCunVisSAQI3XIMq2y230biTO98tDPEezg+lg+yTsz9ZT33F5KNuWrpf8VL5fG/
-	mt+kAv7wtsx/KTRbqhH3iFXF6eBSwMjAfTXFlkLfbM9riJGXrWEl9n2S2R3cDHNHug0lb8f4
-	whK370KEO4OwRKIYW/VUBmzk5XZUE9DTlDSV8ycsrs7ATQRWCsRYAQgAwK3FuHCE+HW3YWdH
-	PUjeSn5p//xJ57u8g2rng8zm9zNjmYgpPv5UxozaD9i2jf4mlQLHGGOezhHae8K4Nj70oVcv
-	8AmwcrJa9i9WL1oy/9R3fHMWf/Ctt9VXTO0qlCuq6PDzaUfvsXR61aJIjTKNQTOjCLjY1vXm
-	VSewUgARysmA8WrjTfwGBihMBxAX0+kIjx8nOlam0WvekMBXZ0AbS56oTLRxYao6DI3GeB/N
-	oWPy/5DfuTKaSdM0Pf8al20x9RuNN5/HLMlyDH/k8bIa1xd9aAqW+Feiw5gC107V2E6ULyIy
-	q6em2UrsmIRxrvpHqbNgQKqvTehJ+V/i4g/uOwARAQABwsBfBBgBCAAJBQJWCsRYAhsMAAoJ
-	EH7+/ev69L755XAH/3ZcNhooqd9OBhFkvXm1iWZ8EoC7motWqVn2oEyxoonsg8AD9kFXiN+T
-	dYp7dH99EZu9q4ptj56AXm4uHzOgywL/5/V2TY6twCGAjUGzDjAB5gzoi+JLIBlDiyOip0eL
-	QswIhRk473xy3j8DA4oVamnSPWgyNJ+qsdt37YWDzoDFFvtDoRU7Eb+znfIMDKzlny0XU/8L
-	cW1bNHJlpv/78GPdfP4tjysEd8MuA5jf5o5w4XqcwTqalffEJtQ/s3pbkstEi7qm5uPui5Kt
-	gq6YYLSqcSNe0GWAF9/T+qwyo7burSTxUWCWtMmlXdAQLW9SynLhB3Jbch0nFAh0fCKi6yY=
-Organization: Wind River Systems
-Message-ID: <d42b7242-3e89-796d-091a-fa3eb8ddd44d@windriver.com>
-Date: Mon, 18 Jun 2018 13:55:56 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
-	Gecko/20100101 Thunderbird/52.8.0
+	Mon, 18 Jun 2018 19:10:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=kxrkzCGv2Sr6zLjdHLZTNMpdkIqulR7jBGv1g5HhspQ=;
+	b=37Tj4zYiyqkiC2DEmj2dR0svOptOXzawGk6AApbSQSUK2NJZQIuwXt27gbSBUTUpwpmB5NvMSXPqOP+WPVi5GZobcay5FLPDQi+EAplYRZxK1MT8LLjNISF6653rnIxOmbnqhycbyQfumBVTLwOTMwFPP9hYr37bAadjZjA7k08=
+Received: from DM5PR02MB3863.namprd02.prod.outlook.com (52.132.139.146) by
+	DM5PR02MB2780.namprd02.prod.outlook.com (10.175.86.7) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.863.19; Mon, 18 Jun 2018 14:37:35 +0000
+Received: from DM5PR02MB3863.namprd02.prod.outlook.com
+	([fe80::a980:cb7c:becd:294]) by DM5PR02MB3863.namprd02.prod.outlook.com
+	([fe80::a980:cb7c:becd:294%5]) with mapi id 15.20.0863.016;
+	Mon, 18 Jun 2018 14:37:35 +0000
+From: Manjukumar Harthikote Matha <MANJUKUM@xilinx.com>
+To: Armin Kuster <akuster808@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH 00/39] Sumo-next patch review
+Thread-Index: AQHUBxE2f4QHBCrfd0uM/ClxAr8oSaRmFStg
+Date: Mon, 18 Jun 2018 14:37:35 +0000
+Message-ID: <DM5PR02MB3863CC1D2E4B15CB37B0ADDFB9710@DM5PR02MB3863.namprd02.prod.outlook.com>
+References: <cover.1529330340.git.akuster808@gmail.com>
+In-Reply-To: <cover.1529330340.git.akuster808@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=MANJUKUM@xilinx.com; 
+x-originating-ip: [73.231.161.32]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; DM5PR02MB2780;
+	7:WGdKjphCho41LyjF5pjotEDQ2UPAYeAIZ63dIKi8O8p7Exnnw1nAW8QrHmD/oYisrbLbRz1R79Qmw+Z+Mj7slp/FNBw3PfLUvOk7/ZGinjn56HAsasfPhPRO3tPefOksSgIDoWi8hspT4qn9PN9p3/sZ6OYhTNA5OK0zM19i4C2eGASLlicInhUPtNaWVKFE58qV3oMl7k7v1JIY/Fxaf9TjqUlBlkae0TZp8hDp28MEKsDraH2HS536qPYkrW9I
+x-ms-exchange-antispam-srfa-diagnostics: SOS;
+x-ms-office365-filtering-correlation-id: 9af8c83b-d083-4e32-7188-08d5d529089f
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(7020095)(4652020)(4534165)(4627221)(201703031133081)(201702281549075)(5600026)(711020)(48565401081)(2017052603328)(7153060)(7193020);
+	SRVR:DM5PR02MB2780; 
+x-ms-traffictypediagnostic: DM5PR02MB2780:
+x-microsoft-antispam-prvs: <DM5PR02MB2780E7DFD463595492DB856BB9710@DM5PR02MB2780.namprd02.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(85827821059158)(264703809997249);
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(8121501046)(5005006)(10201501046)(3002001)(93006095)(93001095)(3231254)(944501410)(52105095)(6055026)(149027)(150027)(6041310)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123564045)(20161123562045)(20161123558120)(6072148)(201708071742011)(7699016);
+	SRVR:DM5PR02MB2780; BCL:0; PCL:0; RULEID:; SRVR:DM5PR02MB2780; 
+x-forefront-prvs: 0707248B64
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(366004)(39860400002)(39380400002)(396003)(346002)(376002)(13464003)(199004)(189003)(105586002)(86362001)(66066001)(6306002)(9686003)(97736004)(55016002)(33656002)(2900100001)(5250100002)(3280700002)(2906002)(2501003)(3660700001)(229853002)(6436002)(1720100001)(91966014)(6116002)(3846002)(68736007)(25786009)(7736002)(14454004)(305945005)(5660300001)(74316002)(6246003)(39060400002)(53936002)(11346002)(76176011)(7696005)(102836004)(316002)(59450400001)(476003)(53546011)(6506007)(26005)(110136005)(186003)(446003)(486006)(8676002)(99286004)(478600001)(81156014)(8936002)(966005)(72206003)(81166006)(106356001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:DM5PR02MB2780;
+	H:DM5PR02MB3863.namprd02.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: xilinx.com does not designate
+	permitted sender hosts)
+x-microsoft-antispam-message-info: B62HpjVVw9LLPqhQ5GBOQpvkJHQfhd8Nr6rNZgd4jBqH7fN2wPJCyKYQsvf91qKeD7rb4kC1cIZJKO6UniWw3Uzs65HVPCT4gigOLSui4/ZwP67HRLGXaCuGkDr03ZqMFjQz1PDxHT0Y+PVaac1pEJ1VqA+8uuOt++zlaiz4V0lBmeyFGuCnDNV8M7soo9ZHy9NFq/uyESIbcr4ZkTKGWaUoJ5TN6QeETkNFFWPXYNDAq1WKihT6hQFJCe2SYIjVenbrQG2aixJePTWjhuUAFIbkJYOpfROt6c/orV/acsoIepGu/K3vcHm7DEWzwnCicq8ALQz0qk3zlBYXSpTYPw==
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spbkMcboLaBfw0bv_bf_v5_d=qDHB3ag7pCEL1E5Ni3sA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9af8c83b-d083-4e32-7188-08d5d529089f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jun 2018 14:37:35.6664 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR02MB2780
+Subject: Re: [PATCH 00/39] Sumo-next patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,70 +84,217 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 18:55:58 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Mon, 18 Jun 2018 19:10:05 -0000
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 6/18/18 1:47 PM, Khem Raj wrote:
-> On Mon, Jun 18, 2018 at 11:09 AM Mark Asselstine
-> <mark.asselstine@windriver.com> wrote:
->>
->> On Mon, Jun 18, 2018 at 1:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> On Mon, Jun 18, 2018 at 10:54 AM Mark Hatle <mark.hatle@windriver.com> wrote:
->>>>
->>>> On 6/18/18 12:50 PM, Khem Raj wrote:
->>>>> Hi Mark
->>>>>
->>>>> It seems your distro is not inheriting it globally. Here I have
->>>>> INHERIT_DISTRO ?=  "debian devshell sstate license remove-libtool"
->>>>
->>>> So is remove-libtool a recipe or a distro option?
->>>>
->>>> I'm asking because doing this half-way is causing a lot of confusion.
->>>>
->>>> If it's a distro option, then the recipes should work without it being set.  If
->>>> it's a recipe option, then the recipes that need it should use it.
->>>>
->>>> Right now it doesn't seem to be working with these recipes because they don't
->>>> package the .la files UNLESS it's enabled.  So the fix is either to package them
->>>> (by default) or inherit the remove-libtool.
->>>>
->>>
->>> since we make it as part of meta/conf/distro/defaultsetup.conf
->>> its a default policy,  its perfectly fine for a distro to disregard that
->>> however, then you fall into a non-default case. I am willing to accept
->>> per recipe patches but I would recommend to consider it as a distro
->>> feature for your distro.
->>>
->>
->> Andreas,
->>
->> Can you revert your "various classes recipes: Remove FILES entries for
->> dbg/dev packages" then? If this is a distro feature then these recipes
->> need to build without the QA issue and without the remove-libtool
->> distro feature being set.
-> 
-> This is in default features so I would not recommend revert, distros
-> not using this feature are in best position to fix it, as I said
-> before those patches are acceptable.
-> 
+Hi Armin,
 
-I'm confused.  If you say it's a default option, and if you DON'T use it, then
-you are responsible for fixing this.  I take that as you want patches to fix the
-issue.
 
-The revert will return the original code that packages the .la files (if they
-exist) and is the 'patch'.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Armin Kuster
+> Sent: Monday, June 18, 2018 7:32 AM
+> To: akuster808@gmail.com; openembedded-devel@lists.openembedded.org
+> Subject: [oe] [PATCH 00/39] Sumo-next patch review
+>=20
+>=20
+> These are backports from master for sumo.
+> This is your chance to comment on this series for sumo.
 
-Right now we have a broken situation where it doesn't work, and a ton of
-.bbappends would be needed for a custom distro, and these bbappends would make
-it difficult to pass a Yocto Project compliance test.
 
-(I don't really care either way if someone includes or doesn't .la files in a
-distribution -- just that since it's even an option -- both sides of the option
-should work.  I'm also fine with saying OE only tests one side of the option,
-but that means patches should be accepted for the other side.)
+Can we get this sysvinit patch to backport as well?
+https://patchwork.openembedded.org/patch/150414/
 
---Mark
+Thanks,
+Manju
+
+>=20
+> Cover letter only
+>=20
+> The following changes since commit
+> a19aa29f7fa336cd075b72c496fe1102e6e5422b:
+>=20
+>   python-evdev: Use target header to generate ecodes.c (2018-05-01 18:17:=
+50 -
+> 0700)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib stable/sumo-next
+>   http://cgit.openembedded.org/meta-openembedded-
+> contrib/log/?h=3Dstable/sumo-next
+>=20
+> Andre McCurdy (1):
+>   openobex: explicitly set ASNEEDED from openobex recipe
+>=20
+> Armin Kuster (1):
+>   ntp: update to 4.2.8.p11
+>=20
+> Christophe PRIOUZEAU (1):
+>   minicoredumper: relocate admin-binaries to sbin
+>=20
+> Florian Wickert (1):
+>   Add missing dependency for python-flask packages.
+>=20
+> Hains van den Bosch (1):
+>   libtevent: refresh patch
+>=20
+> Hannu Lounento (1):
+>   vlan: use update-alternatives for vconfig
+>=20
+> Hongxu Jia (2):
+>   krb5: support environment setting on systemd
+>   xfce4-notifyd: fix parallel build issue
+>=20
+> Khem Raj (2):
+>   geany-plugins: Add dependency on fribidi
+>   iperf3: Drop redundant patch
+>=20
+> Mark Asselstine (1):
+>   gnome-keyring: fix 'installed but not shipped' QA issue
+>=20
+> Martin Jansa (2):
+>   Revert "libxml++: only include when x11 in DISTRO_FEATURES"
+>   android-tools: use fixed SRCREVs instead of tag name
+>=20
+> Michael Siebecker (1):
+>   Fix zram module paramter name
+>=20
+> Mikko Rapeli (1):
+>   lmbench: fix Upstream-Status metadata typos in patch
+>=20
+> Noor Ahsan (1):
+>   radvd: Fix missing yacc error.
+>=20
+> Robert Joslyn (1):
+>   htop: Fix typo
+>=20
+> Sipke Vriend (1):
+>   python-robotframework: Add runtime dependencies to robot framework
+>=20
+> Slater, Joseph (1):
+>   phoronix-test-suite: disable systemd services by default
+>=20
+> Trevor Woerner (14):
+>   grubby: switch away from github archive
+>   gst-instruments: switch away from github archive
+>   gst-instruments: recipe cleanup, fix -staticdev
+>   libsrtp: switch away from github archive
+>   libuv: switch away from github archive
+>   libwebsockets: switch away from github archive
+>   python-cpuset: switch away from github archive
+>   openh264: fix build for 32-bit intel arch
+>   openh264: switch away from github archive
+>   tinyalsa: switch away from github archive
+>   wolfssl: switch away from github archive
+>   ipcalc: switch away from github archive
+>   geoip-perl: switch away from github archive
+>   gtest: switch away from github archive
+>=20
+> Yi Zhao (2):
+>   networkmanager: fix QA issue error for multilib
+>   networkmanager-openvpn: fix QA issue error for multilib
+>=20
+> Zheng Ruoqin (2):
+>   hostapd: fix the bug for PATCHTOOL =3D "patch"
+>   xorgxrdp: Fix the License
+>=20
+> leimaohui (1):
+>   python-lockfile: Fix build error as following:
+>=20
+> texierp (1):
+>   minicoredumper: fixes for sysvinit and systemd
+>=20
+>  .../gnome-keyring/gnome-keyring_3.20.0.bb          |   2 +-
+>  .../recipes-devtools/grubby/grubby_8.40.bb         |  10 +-
+>  .../recipes-multimedia/openh264/openh264_1.7.0.bb  |  16 +-
+>  .../recipes-multimedia/tinyalsa/tinyalsa_1.1.1.bb  |   6 +-
+>  .../gst-instruments/gst-instruments_0.2.3.bb       |  12 +-
+>  .../recipes-support/libsrtp/libsrtp_1.5.2.bb       |   6 +-
+>  .../networkmanager/networkmanager-openvpn_1.2.8.bb |   2 +-
+>  .../networkmanager/networkmanager_1.10.6.bb        |   4 +-
+>  .../recipes-connectivity/vlan/vlan_1.9.bb          |   6 +
+>  .../recipes-connectivity/wolfssl/wolfssl_3.12.0.bb |   9 +-
+>  meta-networking/recipes-daemons/radvd/radvd.inc    |   2 +-
+>  .../recipes-support/geoip/geoip-perl_1.50.bb       |  11 +-
+>  .../recipes-support/ipcalc/ipcalc_0.2.2.bb         |   7 +-
+>  .../libtevent/avoid-attr-unless-wanted.patch       |  18 +-
+>  .../ntp/{ntp_4.2.8p10.bb =3D> ntp_4.2.8p11.bb}       |   4 +-
+>  ...de-stdint.h-for-various-std-c99-int-types.patch |  25 -
+>  meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb     |   1 -
+>  .../use-base_libdir-instead-of-hardcoded-lib.patch |   2 +-
+>  .../phoronix-test-suite_7.8.0.bb                   |   5 +
+>  ...-Avoid-key-reinstallation-in-FT-handshake.patch | 177 ++++  ...nstall=
+ation-of-an-
+> already-in-use-group-ke.patch | 253 ++++++  ...ection-of-GTK-IGTK-reinsta=
+llation-
+> of-WNM-.patch | 187 ++++  ...04-Prevent-installation-of-an-all-zero-TK.pa=
+tch |  82
+> ++  ...Fix-PTK-rekeying-to-generate-a-new-ANonce.patch |  67 ++  .../0006=
+-TDLS-
+> Reject-TPK-TK-reconfiguration.patch  | 135 +++  ...llow-multiple-Reassoci=
+ation-
+> Response-fram.patch |  85 ++  .../hostapd/hostapd/key-replay-cve-multiple=
+.patch
+> | 984 ---------------------
+>  .../recipes-connectivity/hostapd/hostapd_2.6.bb    |   8 +-
+>  .../krb5/krb5/etc/default/krb5-admin-server        |   4 +-
+>  .../krb5/krb5/krb5-admin-server.service            |   1 +
+>  .../krb5/krb5/krb5-kdc.service                     |   1 +
+>  meta-oe/recipes-connectivity/krb5/krb5_1.16.bb     |   5 +
+>  meta-oe/recipes-connectivity/libuv/libuv_1.11.0.bb |   8 +-
+>  .../libwebsockets/libwebsockets_2.1.0.bb           |   7 +-
+>  .../recipes-connectivity/obex/openobex_1.7.2.bb    |   2 +
+>  meta-oe/recipes-core/libxml/libxml++_2.40.1.bb     |   2 +-
+>  .../android-tools/android-tools_5.1.1.r37.bb       |  18 +-
+>  .../recipes-devtools/geany/geany-plugins_1.31.bb   |   1 +
+>  .../recipes-devtools/python/python-cpuset_1.5.7.bb |  11 +-
+>  meta-oe/recipes-extended/zram/zram/init            |   2 +-
+>  .../minicoredumper/files/minicoredumper.init       |   2 +-
+>  .../minicoredumper/files/minicoredumper.service    |   2 +-
+>  .../minicoredumper/minicoredumper_2.0.0.bb         |   4 +
+>  meta-oe/recipes-support/htop/htop_2.1.0.bb         |   2 +-
+>  .../recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb    |   2 +-
+>  meta-oe/recipes-test/gtest/gtest_1.8.0.bb          |   9 +-
+>  .../recipes-devtools/python/python-flask.inc       |   2 +-
+>  .../python/python-lockfile_0.12.2.bb               |   6 +
+>  .../python/python-robotframework.inc               |  11 +
+>  .../python/python-robotframework_3.0.2.bb          |   4 +
+>  .../xfce4-notifyd/xfce4-notifyd_0.4.2.bb           |   2 +-
+>  51 files changed, 1123 insertions(+), 1111 deletions(-)  rename meta-
+> networking/recipes-support/ntp/{ntp_4.2.8p10.bb =3D> ntp_4.2.8p11.bb} (97=
+%)
+> delete mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3/0001-include-
+> stdint.h-for-various-std-c99-int-types.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-
+> hostapd-Avoid-key-reinstallation-in-FT-handshake.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0002-
+> Prevent-reinstallation-of-an-already-in-use-group-ke.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0003-
+> Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0004-
+> Prevent-installation-of-an-all-zero-TK.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0005-Fix=
+-
+> PTK-rekeying-to-generate-a-new-ANonce.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0006-TDL=
+S-
+> Reject-TPK-TK-reconfiguration.patch
+>  create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0007-FT-
+> Do-not-allow-multiple-Reassociation-Response-fram.patch
+>  delete mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/key-repl=
+ay-
+> cve-multiple.patch
+>=20
+> --
+> 2.7.4
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
