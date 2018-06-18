@@ -1,50 +1,28 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f66.google.com (mail-oi0-f66.google.com
-	[209.85.218.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C29FE75279
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B5FE7533A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 20:46:18 +0000 (UTC)
-Received: by mail-oi0-f66.google.com with SMTP id c6-v6so16129108oiy.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 13:46:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Ys3my5D+4Xocj0W+ms01hus0e3Iub4qE4VespjRTjSg=;
-	b=MARJgslM3SFyeS89Y7luzEOUIwP8UZdT/Kruqw5m9FrRwLfu7WHXBCU6uEL7+3hhxp
-	l0aWUYBFXnk1u3K1WByMR1HVUHnqvghY17xO9JZ2xykpP2wzI/1OoBqZ6e7K/SzXXuxl
-	rhR5DNt30o991aVht5WdmSiuex8lbnotgfO1lUAdGeOlQO4zvIr5r/A+PUJPzzYVCLkX
-	6LwSa68/6AO5+cTxzQV6JRShDYSWkvPXbG2pVcAq0gh7Zwl2cvcnZkzbZOMJuV1KqxVG
-	sRMjHRN89aJ3Or5+5UJvE2j9hIxbhjs5zJ+hq4OsgnKsQVv1o/Tw2VQhSKPkygWHasll
-	fAOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Ys3my5D+4Xocj0W+ms01hus0e3Iub4qE4VespjRTjSg=;
-	b=gfUo5GMm+jc9imnh/zpYjwEVoiMG7IotkC64esSidf6LGMfl10r7+47d9a8/DhOwXh
-	V1jSn4IpJkCgb2bmTtAgz30LpqqYSwZ2IfJOduQmbhk/SAxVT16wT40e8GzsyukEo2Nu
-	t5ajtqHq8IToS2lr6x4PUTP/9GiSJayH9tQ9DyoShgMwW5rV64X4bz4g3ePFjHA6zzDF
-	yG05+qJ+r0+qafQWqw43J+f0e3WuywzB6kDMlQOZJOIHS0kimZexenqrS+eiL5+6zHtX
-	61l5Vm2+sLMItG78RLucpUVTRFZJ0Ja2OxZIFFlOoHdREe7fo4gNpXH8UW7hE6rTkBSt
-	rdEg==
-X-Gm-Message-State: APt69E1E2n9pqyPaxJCdk0f1HGlKe5s9mb4MZAzo7xrbLOrWxxQYdMCm
-	BY8t2mJYxYtBmL1bGEeN1wEYb82kIR4ZC1mEr9M=
-X-Google-Smtp-Source: ADUXVKJqeJchp6hBRtL97/8X+oI9UkHS5oEATdeBW59qWBboLyZfWTyMTcmE3KOQ0+HMvhITh4Gti86Y5X600J685xw=
-X-Received: by 2002:aca:4f51:: with SMTP id
-	d78-v6mr8282385oib.224.1529354779772; 
-	Mon, 18 Jun 2018 13:46:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP; Mon, 18 Jun 2018 13:46:18
-	-0700 (PDT)
-In-Reply-To: <1529340661-6337-1-git-send-email-mark.asselstine@windriver.com>
-References: <1529340661-6337-1-git-send-email-mark.asselstine@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 18 Jun 2018 22:46:18 +0200
-Message-ID: <CALbNGRQ+2HEhR_E6MH9ba5qCoGCWhDR_fPp+MC1D8=Q5C9pn6A@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>
+	Mon, 18 Jun 2018 21:42:35 +0000 (UTC)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
+	w5ILgX7V008127
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Mon, 18 Jun 2018 22:42:35 +0100
+Message-ID: <1f9bbaf400d215f993042b2fd2b24342aff1b29f.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Mark Asselstine <mark.asselstine@windriver.com>, Andreas
+	=?ISO-8859-1?Q?M=FCller?= <schnitzeltony@gmail.com>
+Date: Mon, 18 Jun 2018 22:42:32 +0100
+In-Reply-To: <1883916.pZAjriCjz1@yow-masselst-lx1>
+References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
+	<CALbNGRTtOYpc9QWEAttxjgeD4Xog4U_4btnuy_v3m7PW-JKJfw@mail.gmail.com>
+	<1883916.pZAjriCjz1@yow-masselst-lx1>
+X-Mailer: Evolution 3.28.1-2 
+Mime-Version: 1.0
+X-Virus-Scanned: clamav-milter 0.99.4 at dan
+X-Virus-Status: Clean
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] thunar: fix QA issue 'installed-vs-shipped'
+Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,32 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 20:46:18 -0000
+X-List-Received-Date: Mon, 18 Jun 2018 21:42:36 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jun 18, 2018 at 6:51 PM, Mark Asselstine
-<mark.asselstine@windriver.com> wrote:
-> Since commit eb0fe21c1535 [thunar: upgrade 1.6.15 -> 1.8.0] we see a
-> QA Error/Warning regarding files 'installed-vs-shipped':
->
->     ERROR: QA Issue: thunar: Files/directories were installed but not
->     shipped in any package:
->       /usr/lib
->       /usr/lib/systemd
->       /usr/lib/systemd/user
->       /usr/lib/systemd/user/thunar.service
->
-> Correct the path to the systemd service file to match what we see in
-> other recipes which include "user" service files.
->
-I checked: My patch sets ${libdir}/system. That does not work for
-systems with libdir=3D/usr/lib64
+On Mon, 2018-06-18 at 13:07 -0400, Mark Asselstine wrote:
+> On Monday, June 18, 2018 12:51:47 PM EDT Andreas Müller wrote:
+> > On Mon, Jun 18, 2018 at 4:45 PM, Mark Asselstine
+> > My builds have remove-libtool enabled so I did not see this QA
+> > warning/error.
+> > 
+> > Isn't remove-libtool enabled by default since pyro/2.3 - so that
+> > this
+> > patch is obsolete (and all the other same kind coming later)?
+> 
+> The documentation still indicates:
+> ---
+> <note>
+>             The <filename>remove-libtool</filename> class is not
+> enabled by
+>             default.
+> </note>
+> ---
+> 
+> So as far as I know this still needs to be handled recipe to recipe
+> by inheriting the remove-libtool class in the affected recipes. I
+> have done  builds without manipulating the generated local.conf which
+> seem to confirm  this but I could be wrong. Add RP who might have
+> some guidance.
 
-So:
+Removing the libtool files became the project default a while ago (Jan
+2017):
 
-* Sorry for causing trouble
-* Thanks for fixing
+meta/conf/distro/defaultsetup.conf:INHERIT_DISTRO ?= "debian devshell sstate license remove-libtool"
 
-Acked-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+so I suspect you're in the minority not using that now.
+
+http://git.yoctoproject.org/cgit.cgi/poky/commit/meta/conf/distro/defaultsetup.conf?id=3e2a47fdfceccd5f8832235b7a2df83076e84a98
+
+Cheers,
+
+Richard
+
+
+
 
