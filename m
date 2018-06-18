@@ -1,51 +1,57 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C72867489C
+Return-Path: <asselsm@gmail.com>
+Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
+	[209.85.213.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F05771CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 22:27:43 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id f79-v6so16349152oib.7
+	Mon, 18 Jun 2018 23:25:51 +0000 (UTC)
+Received: by mail-yb0-f193.google.com with SMTP id v17-v6so6617325ybe.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 15:27:45 -0700 (PDT)
+	Mon, 18 Jun 2018 16:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=lLh+ui20x2WMH8NXEsjrqRFdWa4gkcgDj8q0qStM2Dc=;
-	b=gsTZ006EsIoHXxhEkHaqRdcuLyx4bbrmSVjq4cjpPsHZnpU+rQAX8KahZbSmELK7d6
-	IiB3OuSKbHCCEXtkK60KzhQVJZ3UzZzDpVsdhFomWwOINXXxap/7PmjUAyg62dywQ7t3
-	6RdgDodF3MnuYpjNgjxarosEDpZAhrXuC4PdOcQgjHSfqrSB/x7u8SADKoz6hq0XYMYp
-	JG9Ld4E+Zxe4VdciM6lc1qFAAFG+3nA6Qgwrs5YPXB75U64xCMs1W5tnP38LTSdcKApV
-	+c9DDlk0ef2iMqNVuWVTkZGS6RJYF0SFtQqBbHqchU6JrVwPJQIBDoYP2aauGkbzPvdQ
-	zDvg==
+	h=mime-version:reply-to:sender:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=C3Nihlu8F/MCf+XAOkX9tysvHNhPTWmyT9r2sSBTs5g=;
+	b=ZDkbRgB7dPekpFmY0lRG+dMESXfQN32YHlyIgt7G3XkBrkDNpUJ/c903CCz/VKdmdl
+	EEoonfQYTDZSl2WqGUHE2Cxq2L9bmtSWpwPQApXRAshT4iRS1xhlbr+2il2MU/AbxGfl
+	YXarTS9R2kLhbKWM16cItwzDQaU+xs9HXDHRTeHYXjJCvKXtMXzAK0BChJZZpuL27a+D
+	PDdySiK30I+EuXybTUz5Q7i3CEzRlPDfWoZZZN43BmweVvDzbHEh+gmrolzMQVTrwBZ9
+	S1Xo9DkODeYpy0NDjcU9oUTHIVQoaoahUmNLqCiXeY0N0orMYPOU7E6Avls00Pm/oTEK
+	iwDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=lLh+ui20x2WMH8NXEsjrqRFdWa4gkcgDj8q0qStM2Dc=;
-	b=Fz1wAWZol+K/SSp1+b0foYXRRZ96GrApnaU5oOGwKrzdFMJz49z/r03iWyTkcOH1NM
-	PnbpcpgEbXCyocrZr3J2aAZCZwRYog5cyHXskjRkCG/PvxT02CEF8xwr125mGQpKr3lq
-	u60qVbQ1qFAxlWST+Z3e/1tWUStG4SGK4UFpz0XQXaaRWGc/DF4Uot7q3QPJEs0x2jUD
-	12OlT4k0IBO+dnvTJTrpdpI/zlC17pg5EaQJMmeXrG5V7LnaDe/fKeML7Z2CotA0ATxm
-	UUmUCWuyxpzNrNrXr0qupmPiFLLDFaeD6/GlJ4Cj/w2pbpAgpRCsNG+JLCPzbH/LU039
-	4y7w==
-X-Gm-Message-State: APt69E2ujACtTXQq2ka/RCOamtroJAyc85ABLQ/emkMqwm+XjbkgZGUK
-	kVxC5hO5CPRUXfN6JT+eKytYfn/UxGDvyE21bTc=
-X-Google-Smtp-Source: ADUXVKLkU1zoFW1cCxS8aBSS5nnjgNmcYFTeRW2/qFGP1fSs3HrVgxfeyesTcid0RcGAuKTi4a2K4CxuvMk8xulKpRU=
-X-Received: by 2002:aca:b01:: with SMTP id 1-v6mr8307447oil.285.1529360864760; 
-	Mon, 18 Jun 2018 15:27:44 -0700 (PDT)
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:from:date:message-id:subject:to:cc
+	:content-transfer-encoding;
+	bh=C3Nihlu8F/MCf+XAOkX9tysvHNhPTWmyT9r2sSBTs5g=;
+	b=KTuuzxzHs1SQxbJaV+mIKjZcbqsDjop4o+mvsTdhNnhsI/6zd6IJdprc88ikD2i6Ze
+	1p9pZp2i1fncAbhENrLVKtLnBO05EFdM4CyYXYrCCPzWyVI2faWf9Zl9hPeiqR9lnQS/
+	cFtwoib6H1EEcEzVEdr/ZppC5cQ8X+X1zFuWYkP4vgA3FxIt2oA9EGJlONLEA6yVGJkI
+	OYQknmhrFanhFk7oMpp0kz2YBLqP/IMqIJ8V11+vaXNeQj2+c9F3839TBVCesRyPoyuZ
+	Iqo8ig6Izo+Fw2NSnCEX9uRymz3FwDzbnG8BOVSMesKpFsYdos5sdwMhC15KRGq4IXOw
+	ak7g==
+X-Gm-Message-State: APt69E35fkSLtsy0d4HQ0OBro6KFUVl7kEBdVBizx9ugQGNN02PEFcCY
+	0S/7yRKCo0Vz+6edrQvNteGmNDBGFa6XsjBnpo4=
+X-Google-Smtp-Source: ADUXVKK9b9KHmrjr6ZVwaTyjIH1WG6QZkguDTC+dNyPyxq/UZEQ+tJvJjPrzmBZSSdZau3SydCRzppgH0HtT0KjWA1Y=
+X-Received: by 2002:a25:ce13:: with SMTP id
+	x19-v6mr3803448ybe.18.1529364352301; 
+	Mon, 18 Jun 2018 16:25:52 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:ac9:4916:0:0:0:0:0 with HTTP; Mon, 18 Jun 2018 15:27:43
+Reply-To: mark.asselstine@windriver.com
+Sender: asselsm@gmail.com
+Received: by 2002:a25:bfc9:0:0:0:0:0 with HTTP; Mon, 18 Jun 2018 16:25:51
 	-0700 (PDT)
-In-Reply-To: <1f9bbaf400d215f993042b2fd2b24342aff1b29f.camel@linuxfoundation.org>
+In-Reply-To: <CALbNGRRK=096t=CpWX21Sk8aHTFD7Vtbmt2L1pO-A5CVo-8Rng@mail.gmail.com>
 References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
 	<CALbNGRTtOYpc9QWEAttxjgeD4Xog4U_4btnuy_v3m7PW-JKJfw@mail.gmail.com>
 	<1883916.pZAjriCjz1@yow-masselst-lx1>
 	<1f9bbaf400d215f993042b2fd2b24342aff1b29f.camel@linuxfoundation.org>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 19 Jun 2018 00:27:43 +0200
-Message-ID: <CALbNGRRK=096t=CpWX21Sk8aHTFD7Vtbmt2L1pO-A5CVo-8Rng@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CALbNGRRK=096t=CpWX21Sk8aHTFD7Vtbmt2L1pO-A5CVo-8Rng@mail.gmail.com>
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Mon, 18 Jun 2018 19:25:51 -0400
+X-Google-Sender-Auth: TzVz8lmf7SYiPvEBx0277y96mTo
+Message-ID: <CAPuovEL5c3SF6YkRZMiobfAsyV7XLJzJz_E-oYdOzekmfSt1nw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -59,31 +65,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 22:27:43 -0000
+X-List-Received-Date: Mon, 18 Jun 2018 23:25:51 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 18, 2018 at 11:42 PM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-Off-Topic / FYI for me gmail considered your email spam
+On Mon, Jun 18, 2018 at 6:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+> On Mon, Jun 18, 2018 at 11:42 PM, Richard Purdie
+> <richard.purdie@linuxfoundation.org> wrote:
+> Off-Topic / FYI for me gmail considered your email spam
+>>
+>> Removing the libtool files became the project default a while ago (Jan
+>> 2017):
+>>
+>> meta/conf/distro/defaultsetup.conf:INHERIT_DISTRO ?=3D "debian devshell =
+sstate license remove-libtool"
+>>
+>> so I suspect you're in the minority not using that now.
+> Maybe true. But breaking builds consumes resources on many sides -
+> this thread is a good example
+>>
+>> http://git.yoctoproject.org/cgit.cgi/poky/commit/meta/conf/distro/defaul=
+tsetup.conf?id=3D3e2a47fdfceccd5f8832235b7a2df83076e84a98
+>>
+> The more I think about this:
 >
-> Removing the libtool files became the project default a while ago (Jan
-> 2017):
->
-> meta/conf/distro/defaultsetup.conf:INHERIT_DISTRO ?= "debian devshell sstate license remove-libtool"
->
-> so I suspect you're in the minority not using that now.
-Maybe true. But breaking builds consumes resources on many sides -
-this thread is a good example
->
-> http://git.yoctoproject.org/cgit.cgi/poky/commit/meta/conf/distro/defaultsetup.conf?id=3e2a47fdfceccd5f8832235b7a2df83076e84a98
->
-The more I think about this:
+> * Why is remove-libtool something a distro can override? If causing
+> trouble it can be deactivated recipe-wise.
 
-* Why is remove-libtool something a distro can override? If causing
-trouble it can be deactivated recipe-wise.
-  - or
-* does anybody see a problem with inherit remove-libtool for all xfce
-recipes in xfce.bbclass?
 
-Andreas
+That was my feeling as well as we were having this discussion, without
+digging into the history it felt as if this should have been made core
+functionality and not optional, especially given the opportunity for
+recipes to opt out. At any rate I am about to send a commit to get
+things buildable for when the 'remove-libtool' distro feature is
+absent and as long as it remains optional I suppose all recipes should
+function with and without the feature.
+
+MarkA
+
+>   - or
+> * does anybody see a problem with inherit remove-libtool for all xfce
+> recipes in xfce.bbclass?
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
