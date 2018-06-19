@@ -1,23 +1,31 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F040700F3
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 396F875454
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2018 09:46:59 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5J9kxhF014382
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2018 02:47:00 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Tue, 19 Jun 2018 02:46:59 -0700
-From: Changqing Li <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 19 Jun 2018 17:46:58 +0800
-Message-ID: <1529401618-187590-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [PATCH] [meta-oe] syslog-ng: fix syslog-ng startup problem with systemd
+	Tue, 19 Jun 2018 09:53:17 +0000 (UTC)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
+	w5J9rFwd021746
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Tue, 19 Jun 2018 10:53:17 +0100
+Message-ID: <f34caf7c04fd2b2dd33e9c1c14f53a37bb28080b.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: mark.asselstine@windriver.com, Andreas =?ISO-8859-1?Q?M=FCller?=
+	<schnitzeltony@gmail.com>
+Date: Tue, 19 Jun 2018 10:53:15 +0100
+In-Reply-To: <CAPuovEL5c3SF6YkRZMiobfAsyV7XLJzJz_E-oYdOzekmfSt1nw@mail.gmail.com>
+References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
+	<CALbNGRTtOYpc9QWEAttxjgeD4Xog4U_4btnuy_v3m7PW-JKJfw@mail.gmail.com>
+	<1883916.pZAjriCjz1@yow-masselst-lx1>
+	<1f9bbaf400d215f993042b2fd2b24342aff1b29f.camel@linuxfoundation.org>
+	<CALbNGRRK=096t=CpWX21Sk8aHTFD7Vtbmt2L1pO-A5CVo-8Rng@mail.gmail.com>
+	<CAPuovEL5c3SF6YkRZMiobfAsyV7XLJzJz_E-oYdOzekmfSt1nw@mail.gmail.com>
+X-Mailer: Evolution 3.28.1-2 
+Mime-Version: 1.0
+X-Virus-Scanned: clamav-milter 0.99.4 at dan
+X-Virus-Status: Clean
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,139 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2018 09:46:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 19 Jun 2018 09:53:18 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-1. Fix syslog-ng service cannot startup after upgrade to 3.15.1
+On Mon, 2018-06-18 at 19:25 -0400, Mark Asselstine wrote:
+> On Mon, Jun 18, 2018 at 6:27 PM, Andreas Müller <schnitzeltony@gmail.
+> com> wrote:
+> > On Mon, Jun 18, 2018 at 11:42 PM, Richard Purdie
+> > <richard.purdie@linuxfoundation.org> wrote:
+> > Off-Topic / FYI for me gmail considered your email spam
+> > > 
+> > > Removing the libtool files became the project default a while ago
+> > > (Jan
+> > > 2017):
+> > > 
+> > > meta/conf/distro/defaultsetup.conf:INHERIT_DISTRO ?= "debian
+> > > devshell sstate license remove-libtool"
+> > > 
+> > > so I suspect you're in the minority not using that now.
+> > 
+> > Maybe true. But breaking builds consumes resources on many sides -
+> > this thread is a good example
+> > > 
+> > > http://git.yoctoproject.org/cgit.cgi/poky/commit/meta/conf/distro
+> > > /defaultsetup.conf?id=3e2a47fdfceccd5f8832235b7a2df83076e84a98
+> > > 
+> > 
+> > The more I think about this:
+> > 
+> > * Why is remove-libtool something a distro can override? If causing
+> > trouble it can be deactivated recipe-wise.
+> 
+> 
+> That was my feeling as well as we were having this discussion,
+> without digging into the history it felt as if this should have been
+> made core functionality and not optional, especially given the
+> opportunity for recipes to opt out. At any rate I am about to send a
+> commit to get things buildable for when the 'remove-libtool' distro
+> feature is absent and as long as it remains optional I suppose all
+> recipes should function with and without the feature.
 
-   1) Align path of syslog-ng.conf between syslog-ng@default
-      and do_install in syslog-ng.inc
-   2) create a default instance for syslog-ng
-   3) Install default parameter file to /etc/default according
-      to https://github.com/balabit/syslog-ng/commit
-      /649d1151e79033cc2b81b3353917507266814436
+There are many different features which "distro maintainers" can turn
+on/off which can break the builds. I was always reluctant to add the
+libtool change but we reached the point where it simply no longer made
+sense to keep those files around, they caused more problems than it was
+worth effort for.
 
-2. Fix "Failed to acquire /run/systemd/journal/syslog socket,
-   disabling systemd-syslog source;" accordint to below content
-   from syslog-ng admin guide.
+Its not a setting I'd recommend anyone use now because as you're
+finding, the .la handling metadata is bitrotting. As with many things
+in the project, its "at your own risk and maintenance burden". Its not
+a combination I have any plans to add tests for.
 
-   1) for linux, If the host is running under systemd, syslog-ng
-      OSE reads directly from the systemd journal file using the
-      systemd-journal() source.
-   2) If possible, use the more reliable systemd-journal() driver
-      instead.
-   3) The socket activation of systemd is buggy, causing some log
-      messages to get lost during syst
+The better solution would be to drop all the .la file FILES directives
+and handle .la files in a similar way to the way we handle debug files
+into -dbg packages. If anyone cares at this point.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../{syslog-ng.conf => syslog-ng.conf.systemd}     |  2 +-
- .../{syslog-ng.conf => syslog-ng.conf.sysvinit}    |  0
- .../syslog-ng.service-the-syslog-ng-service.patch  |  3 ++-
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc    | 23 ++++++++++++++--------
- 4 files changed, 18 insertions(+), 10 deletions(-)
- copy meta-oe/recipes-support/syslog-ng/files/{syslog-ng.conf => syslog-ng.conf.systemd} (99%)
- rename meta-oe/recipes-support/syslog-ng/files/{syslog-ng.conf => syslog-ng.conf.sysvinit} (100%)
+Cheers,
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
-similarity index 99%
-copy from meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
-copy to meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
-index fb183ee..9e910ca 100644
---- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
-+++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
-@@ -16,7 +16,7 @@ options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
- # This is the default behavior of sysklogd package
- # Logs may come from unix stream, but not from another machine.
- #
--source s_src { unix-dgram("/dev/log"); internal();
-+source s_src { systemd_journal(); internal();
-        	     file("/proc/kmsg" program_override("kernel"));
- };
- 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
-similarity index 100%
-rename from meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf
-rename to meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
-diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-index dc2ba16..39c3f59 100644
---- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-+++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.service-the-syslog-ng-service.patch
-@@ -32,10 +32,11 @@ index 02da288..3a8215d 100644
- --- a/contrib/systemd/syslog-ng@default
- +++ b/contrib/systemd/syslog-ng@default
- @@ -1,5 +1,5 @@
-- CONFIG_FILE=/etc/syslog-ng.conf
-+-CONFIG_FILE=/etc/syslog-ng.conf
- -PERSIST_FILE=/var/lib/syslog-ng/syslog-ng.persist
- -CONTROL_FILE=/var/lib/syslog-ng/syslog-ng.ctl
- -PID_FILE=/var/run/syslog-ng.pid
-++CONFIG_FILE=/etc/syslog-ng/syslog-ng.conf
- +PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
- +CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
- +PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index cf6a3de..09c2f51 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -16,7 +16,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
- DEPENDS = "libpcre flex glib-2.0 openssl util-linux"
- 
- SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
--           file://syslog-ng.conf \
-+           file://syslog-ng.conf.systemd \
-+           file://syslog-ng.conf.sysvinit \
-            file://initscript \
-            file://volatiles.03_syslog-ng \
-            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
-@@ -71,7 +72,6 @@ do_configure_prepend() {
- 
- do_install_append() {
-     install -d ${D}/${sysconfdir}/${BPN}
--    install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
-     install -d ${D}/${sysconfdir}/init.d
-     install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog
-     install -d ${D}/${sysconfdir}/default/volatiles/
-@@ -82,17 +82,24 @@ do_install_append() {
- 
-     # support for systemd
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install ${WORKDIR}/syslog-ng.conf.systemd ${D}${sysconfdir}/${BPN}/${BPN}.conf
-+
-         install -d ${D}${systemd_unitdir}/system/
-         install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
--        install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${systemd_unitdir}/system/${BPN}@default
-+        install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${sysconfdir}/default/${BPN}@default
-+
-+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
-+        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
-+        sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
- 
--        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
--        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
--        sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
-+        install -d ${D}${systemd_unitdir}/system/multi-user.target.wants
-+        ln -sf ../${BPN}@.service ${D}${systemd_unitdir}/system/multi-user.target.wants/${BPN}@default.service
-+    else
-+        install ${WORKDIR}/syslog-ng.conf.sysvinit ${D}${sysconfdir}/${BPN}/${BPN}.conf
-     fi
- }
- 
--FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
-+FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools ${systemd_unitdir}/system/multi-user.target.wants/*"
- RDEPENDS_${PN} += "gawk ${@bb.utils.contains('PACKAGECONFIG','json','${PN}-jconf','',d)}"
- 
- FILES_${PN}-jconf += " \
-@@ -124,7 +131,7 @@ RCONFLICTS_${PN} = "busybox-syslog sysklogd rsyslog"
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "${BPN}@default ${BPN}@.service"
-+SYSTEMD_SERVICE_${PN} = "${BPN}@.service"
- 
- INITSCRIPT_NAME = "syslog"
- INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."
--- 
-2.7.4
-
+Richard
 
