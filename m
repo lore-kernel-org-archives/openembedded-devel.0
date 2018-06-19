@@ -1,33 +1,48 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BD1374601
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
+	[209.85.160.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DC6D75265
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2018 01:21:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5J1LMVZ011209
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 18 Jun 2018 18:21:23 -0700 (PDT)
-Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Mon, 18 Jun 2018 18:21:21 -0700
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, Khem Raj
-	<raj.khem@gmail.com>
-References: <1529036584-91801-1-git-send-email-changqing.li@windriver.com>
-	<CAMKF1sroZXMAyOoNB9Fw89tYied94_1XjmT8WKHiMM=Zn7JWVw@mail.gmail.com>
-	<1ae4712a-81a9-33e8-9b88-d4af699b13d9@windriver.com>
-	<CAMKF1srnMVyP4HKbW3yCYud8tM2pJk7EMCLfY0WV4mv2q-U-eg@mail.gmail.com>
-	<b2fe5454-1a27-4a3a-f3e8-20675d781b07@windriver.com>
-	<cef6dde2213443c4a43883c93814cbf3@XBOX02.axis.com>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <1d2ece58-7117-94a2-07e1-418bfbaf7265@windriver.com>
-Date: Tue, 19 Jun 2018 09:21:19 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
-MIME-Version: 1.0
-In-Reply-To: <cef6dde2213443c4a43883c93814cbf3@XBOX02.axis.com>
-X-Originating-IP: [128.224.162.228]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] syslog-ng: fix syslog-ng startup problem with systemd
+	Tue, 19 Jun 2018 05:06:38 +0000 (UTC)
+Received: by mail-pl0-f67.google.com with SMTP id k1-v6so10283905plt.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jun 2018 22:06:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=5ohzQ17kOIVZeNRFuXN43gelK6l+tMi3wjY4ap7WF0o=;
+	b=ub3EOAMYIAV4qQ3X416gj51b2HTgVoaivYVv89tpqtgolKjsTtzY8WxPjyE0xcL8l+
+	y00YS2DaxhDCB52N5QWiOUTyVy23Buaeh7UD8KNmkd+rze3QmTAREUQKO/EkZwZ3KLiM
+	fVQNGqUGq0CN8tXjI1OFCMIGtvKC//DSQygTZftC16xlr+0xudZqvqM2CK5GkgZl5ppc
+	t2voUk5KVuqkDrzp6k51J5SjLv613+NStC1JSIgUQnT3zbfiG1L6HhGatzfUrcvRxudj
+	6/+bQAkfo3VlS4hGDixLClWi7/49rl+nhpqxRE12q3j2X+BqddLXHY5wVPOkaz1f1+3D
+	WTiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5ohzQ17kOIVZeNRFuXN43gelK6l+tMi3wjY4ap7WF0o=;
+	b=HwyqYoEsROQmgw1Lxoo4dnmd35C0XoAc+oKxGJCldfqW3Z387n62F3Q9f4S4A2linV
+	xQiiqHixNuQYGHMMuD9CsZE1YKFrx56i4EMl9J2pWLNPa7zUbQ1fu8JEkobZv9L1FGg9
+	gAknTyHG+fKM3MChWX4HagC+qG7v2wh6b/7U1PL4AilIUZHicJ1SyRvQ3AgA6kCNOULp
+	CQQFGnqsVrpzLKqFVhJ+ugdBREc3Ei82jiYTUERHcg1PWKw4euGsmG3FMoz5gZANARcQ
+	QfGNJ6ErDmy8Ai2yPGOjX9+K7+tuvh8hcCQIc71Hbg2CNYGq02zM/aVUSMB5Y3+fw9o0
+	cbwQ==
+X-Gm-Message-State: APt69E1kqMtTImxfreytxyXLcluepiSwk+Lhy3XQ9+NMhDzSBeGbIo54
+	0s8TwtVDfly9tglIJp/3HW+hJQ==
+X-Google-Smtp-Source: ADUXVKKiGpXg2M5ogx3BpFHpVC8vn1uWa6yh7lr6NXjIsQJyirKDe0k0Chr26cUAL8/wGAlHzHHg0A==
+X-Received: by 2002:a17:902:a508:: with SMTP id
+	s8-v6mr17364176plq.223.1529384798845; 
+	Mon, 18 Jun 2018 22:06:38 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::91a0])
+	by smtp.gmail.com with ESMTPSA id
+	e189-v6sm28405430pfc.134.2018.06.18.22.06.37
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 18 Jun 2018 22:06:38 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Jun 2018 22:06:38 -0700
+Message-Id: <20180619050639.4830-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH 1/2] minicoredumper: Update to latest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,117 +55,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2018 01:21:31 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 19 Jun 2018 05:06:38 -0000
 
+Drop upstreamed patch
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-fix-compile-error-on-arch-x32.patch  | 32 -------------------
+ .../minicoredumper/minicoredumper_2.0.0.bb    |  3 +-
+ 2 files changed, 1 insertion(+), 34 deletions(-)
+ delete mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch
 
-On 06/15/2018 06:41 PM, Peter Kjellerstedt wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Changqing Li
->> Sent: den 15 juni 2018 10:08
->> To: Khem Raj <raj.khem@gmail.com>
->> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
->> Subject: Re: [oe] [PATCH] syslog-ng: fix syslog-ng startup problem with
->> systemd
->>
->> On 06/15/2018 02:29 PM, Khem Raj wrote:
->>> On Thu, Jun 14, 2018 at 10:12 PM Changqing Li
->>> <changqing.li@windriver.com> wrote:
->>>> By the way,  I notice that there is no difference between master and
->>>> master-next  for "meta-oe/recipes-support/syslog-ng"
->>>>
->>> pwclient fails to cherry-pick this patch. and me solving conflicts
->>> here can be error prone.
->>>
->>>> Can I know why we need a patch based on master-next? Seems the patch
->>>> will same for master and master-next.
->>>>
->>> since master-next is where the queue for upcoming patches is and
->> sometimes there
->>> are related patches which should be sequenced. Look at my email sent
->>> about master-next
->>        Thanks.  I can see this conflicts commit now.  I use local mirror
->> just now,  so don't see the commit
->>        timely.  Now I got your mean. And I will resend a patch based on
->> master-next later.
->>
->>        //changqing li
->>>> Thanks.
->>>>
->>>> On 06/15/2018 12:48 PM, Khem Raj wrote:
->>>>> Can you rebase and resend it on top of master-next please
->>>>>
->>>>> On Thu, Jun 14, 2018 at 9:23 PM Changqing Li <changqing.li@windriver.com> wrote:
->>>>>> There are one error and one fail when run "systemctl status syslog-ng"
-> A general recommendation for Git commits is to keep the line
-> lengths within 72 characters. I do not know if OE has some
-> actual requirements on this, but I've personally found it to be
-> a good recommendation to make Git logs more readable.
-
-Thanks, I will follow this next time.
-
->
->>>>>> Error opening control socket, bind() failed; socket='/var/run/syslog-ng/syslog-ng.ctl', error='No such file or directory (2)'
->>>>>> Failed to acquire /run/systemd/journal/syslog socket, disabling systemd-syslog source;
->>>>>>
->>>>>> 1. To fix the error info:
->>>>>>       if config with "--with-pidfile-dir=${localstatedir}/run/${BPN}", according to syslog-ng code
->>>>>>       (define PATH_CONTROL_SOCKET    SYSLOG_NG_PATH_PIDFILEDIR "/syslog-ng.ctl"), path of control socket also
->>>>>>       will be /var/run/syslog-ng, but after boot, there is no directory syslog-ng under /var/run,  so this
->>>>>>       will not work for systemd. here change initscript to /var/lib/syslog-ng, and remove --with-pidfile,
->>>>>>       so that sysVinit and systemd all use /var/lib/syslog-ng,  and also remove pid config in the syslog-ng service
->>>>>>       patch to align the pid file path. so both systemd and sysvinit can work.
-> I don't think switching to /var/lib is the right thing to do.
-> /var/run is tmpfs, but /var/lib may be persistent if the rootfs
-> is writable.
->
-> The non-existing directory is easily fixed by adding an ExecStartPre
-> to the service file. We use this local patch to fix the problem:
->
->  From e4860d18a4e2811a5970a5ff8e66af993882172f Mon Sep 17 00:00:00 2001
-> From: Yang Lyu <yangl@axis.com>
-> Date: Mon, 15 May 2017 14:36:20 +0200
-> Subject: [PATCH] syslog-ng: change path for persist file and pid file
->
-> ---
->   contrib/systemd/syslog-ng.service | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
-> index 3e7a881..ecdca28 100644
-> --- a/contrib/systemd/syslog-ng.service
-> +++ b/contrib/systemd/syslog-ng.service
-> @@ -4,7 +4,8 @@ Documentation=man:syslog-ng(8)
->   
->   [Service]
->   Type=notify
-> -ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslogd.pid
-> +ExecStartPre=@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/run/syslog-ng
-> +ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslog-ng/syslogd.pid -R @LOCALSTATEDIR@/run/syslog-ng/syslog-ng.persist
->   ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
->   EnvironmentFile=-/etc/default/syslog-ng
->   EnvironmentFile=-/etc/sysconfig/syslog-ng
-
-Thanks. I will change like this if newly upgrade syslog-ng_3.15.1.bb 
-still need this.
-Also,  for the hard review part, I will make a new patch follow your 
-suggestion.
-
-//changqing
-
-
-
-
-
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch
+deleted file mode 100644
+index 6ba6ad4814..0000000000
+--- a/meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 883f53ee33eaef8aca1288a110857402ad362966 Mon Sep 17 00:00:00 2001
+-From: John Ogness <john.ogness@linutronix.de>
+-Date: Fri, 8 Sep 2017 15:03:03 -0700
+-Subject: [PATCH] fix compile error on arch=x32
+-
+-On the x32 architecture time_t is a "long long int". By
+- typecasting time_t to "long long", this should work correctly
+- for all architectures.
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- src/minicoredumper/corestripper.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
+-index fd39bfb..07dc318 100644
+---- a/src/minicoredumper/corestripper.c
+-+++ b/src/minicoredumper/corestripper.c
+-@@ -1241,7 +1241,7 @@ static int dump_compressed_tar(struct dump_info *di)
+- 	snprintf(hdr.mode, sizeof(hdr.mode), "%07o", 0644);
+- 	snprintf(hdr.uid, sizeof(hdr.uid), "%07o", 0);
+- 	snprintf(hdr.gid, sizeof(hdr.gid), "%07o", 0);
+--	snprintf(hdr.mtime, sizeof(hdr.mtime), "%011lo",
+-+	snprintf(hdr.mtime, sizeof(hdr.mtime), "%011llo",
+- 		 (long long)time(NULL));
+- 	memset(hdr.checksum, ' ', sizeof(hdr.checksum));
+- 	hdr.type = 'S';
+--- 
+-2.14.1
+-
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+index 0d3c66b07a..27348f750c 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+@@ -9,7 +9,7 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
+ 
+ inherit autotools pkgconfig systemd update-rc.d
+ 
+-SRCREV = "cdc1faf1212a51e89b477468876e229223fceb9a"
++SRCREV = "1c0d5960b0bb4bac7566e6afe8bc9705399cc76b"
+ 
+ PR .= "+git${SRCPV}"
+ 
+@@ -17,7 +17,6 @@ SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http
+            file://minicoredumper.service \
+            file://minicoredumper.init \
+            file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
+-           file://0001-fix-compile-error-on-arch-x32.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
 -- 
-BRs
-
-Sandy(Li Changqing)
-+861084778653
+2.17.1
 
 
