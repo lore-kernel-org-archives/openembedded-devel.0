@@ -1,53 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 15B817522A
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BD1374601
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 23:40:40 +0000 (UTC)
-Received: by mail-ua0-f195.google.com with SMTP id c23-v6so11864159uan.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jun 2018 16:40:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=0Xvo6cWRjG8VsAquKQ2/mGM+gyovdEvTJRRyDop5Bpk=;
-	b=rlj6en0lEiFzj/xxc/p0C84uNF3CHo45SScG3mBazbH/cN/IeKFMJXVvfeD17taGOK
-	s3hTIYcuiHkpr+zKGqVY4qGYA6uNIwoSKbTHV884nO3skOqxvF/Zp9U07YcU2GfDv+kv
-	VECoOdv27MxeRQSoMfpE8elz5qq0ClrFkdV4Vw9hwOVek802BPzBLGVqqKZrIra5n6Ai
-	wf0ivOIvaQ9jaxG3QMdkdotQtwthf/xucDdYetaUzKLaMUFAIcTc40TvWAWQRl2ooJQ0
-	vBepdLzJggk4eBcRj70C8WSdiIt4eY12rFHI9+rURS+VW5WTUX2w0IqF38uJxHlhjzie
-	yn/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=0Xvo6cWRjG8VsAquKQ2/mGM+gyovdEvTJRRyDop5Bpk=;
-	b=gBwAJEzCdXDzReQ2bl3nvhHRVtlaf7+et6lD6etSCYUT8E5p5tCW2sL7oEHXth/4Uh
-	FKUZVvjYJgGHvfblUp8VPRBWcNqi2l0vb2JDIOIQ3PbX4cbWV9MIfroIPlalw81P180m
-	9+ziru/+OXZftNwTaXdTA/Puxh8krAILlK+ZwEX01AUxoMorLfu4w8xaKS64Hgx+/F9Q
-	W7puAbKR8T7KVI20Yw6WDE8CG5n+1JQ0zYwNo6YqY4InT8Fzy6l1Fz5AuBOUh3ypQXkU
-	gWMHsM55MzAqPRA/BWlhDGooJKv0HiXpGHlLJRI/6NuLMR87HWYfQC6dOt7AfMScztml
-	OluA==
-X-Gm-Message-State: APt69E23UkTkkUj/+EPOk1NeMay/Jyo09Rg+u8blFeBi6MFtexbG0ktA
-	/nRDA7NYyiz4uX7i2NVOWZ7F/RxrKXr2tyxc6jQ=
-X-Google-Smtp-Source: ADUXVKKrcAeF+O7J1Lr7IX3MT9W9n1G4grwdY2lEoiwOK+PBrSkMcyyTH0tab9dfkqA+bY66Uhwh/Z9HO9FGrEcgcu8=
-X-Received: by 2002:ab0:5851:: with SMTP id
-	p17-v6mr8985186uac.164.1529365241709; 
-	Mon, 18 Jun 2018 16:40:41 -0700 (PDT)
+	Tue, 19 Jun 2018 01:21:31 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5J1LMVZ011209
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 18 Jun 2018 18:21:23 -0700 (PDT)
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 18 Jun 2018 18:21:21 -0700
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, Khem Raj
+	<raj.khem@gmail.com>
+References: <1529036584-91801-1-git-send-email-changqing.li@windriver.com>
+	<CAMKF1sroZXMAyOoNB9Fw89tYied94_1XjmT8WKHiMM=Zn7JWVw@mail.gmail.com>
+	<1ae4712a-81a9-33e8-9b88-d4af699b13d9@windriver.com>
+	<CAMKF1srnMVyP4HKbW3yCYud8tM2pJk7EMCLfY0WV4mv2q-U-eg@mail.gmail.com>
+	<b2fe5454-1a27-4a3a-f3e8-20675d781b07@windriver.com>
+	<cef6dde2213443c4a43883c93814cbf3@XBOX02.axis.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <1d2ece58-7117-94a2-07e1-418bfbaf7265@windriver.com>
+Date: Tue, 19 Jun 2018 09:21:19 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-References: <1529333146-6459-1-git-send-email-mark.asselstine@windriver.com>
-	<CALbNGRTtOYpc9QWEAttxjgeD4Xog4U_4btnuy_v3m7PW-JKJfw@mail.gmail.com>
-	<1883916.pZAjriCjz1@yow-masselst-lx1>
-	<1f9bbaf400d215f993042b2fd2b24342aff1b29f.camel@linuxfoundation.org>
-	<CALbNGRRK=096t=CpWX21Sk8aHTFD7Vtbmt2L1pO-A5CVo-8Rng@mail.gmail.com>
-	<CAPuovEL5c3SF6YkRZMiobfAsyV7XLJzJz_E-oYdOzekmfSt1nw@mail.gmail.com>
-In-Reply-To: <CAPuovEL5c3SF6YkRZMiobfAsyV7XLJzJz_E-oYdOzekmfSt1nw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 18 Jun 2018 16:40:15 -0700
-Message-ID: <CAMKF1sprgFYFRVXwU66cuBekL=raDsV3fF+9C-q5OREcQO2aMg@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>
+In-Reply-To: <cef6dde2213443c4a43883c93814cbf3@XBOX02.axis.com>
+X-Originating-IP: [128.224.162.228]
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-panel: fix QA issue 'installed-vs-shipped'
+Subject: Re: [PATCH] syslog-ng: fix syslog-ng startup problem with systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,77 +40,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jun 2018 23:40:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jun 2018 01:21:31 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Mon, Jun 18, 2018 at 4:26 PM Mark Asselstine
-<mark.asselstine@windriver.com> wrote:
+
+
+On 06/15/2018 06:41 PM, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>> Changqing Li
+>> Sent: den 15 juni 2018 10:08
+>> To: Khem Raj <raj.khem@gmail.com>
+>> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+>> Subject: Re: [oe] [PATCH] syslog-ng: fix syslog-ng startup problem with
+>> systemd
+>>
+>> On 06/15/2018 02:29 PM, Khem Raj wrote:
+>>> On Thu, Jun 14, 2018 at 10:12 PM Changqing Li
+>>> <changqing.li@windriver.com> wrote:
+>>>> By the way,  I notice that there is no difference between master and
+>>>> master-next  for "meta-oe/recipes-support/syslog-ng"
+>>>>
+>>> pwclient fails to cherry-pick this patch. and me solving conflicts
+>>> here can be error prone.
+>>>
+>>>> Can I know why we need a patch based on master-next? Seems the patch
+>>>> will same for master and master-next.
+>>>>
+>>> since master-next is where the queue for upcoming patches is and
+>> sometimes there
+>>> are related patches which should be sequenced. Look at my email sent
+>>> about master-next
+>>        Thanks.  I can see this conflicts commit now.  I use local mirror
+>> just now,  so don't see the commit
+>>        timely.  Now I got your mean. And I will resend a patch based on
+>> master-next later.
+>>
+>>        //changqing li
+>>>> Thanks.
+>>>>
+>>>> On 06/15/2018 12:48 PM, Khem Raj wrote:
+>>>>> Can you rebase and resend it on top of master-next please
+>>>>>
+>>>>> On Thu, Jun 14, 2018 at 9:23 PM Changqing Li <changqing.li@windriver.com> wrote:
+>>>>>> There are one error and one fail when run "systemctl status syslog-ng"
+> A general recommendation for Git commits is to keep the line
+> lengths within 72 characters. I do not know if OE has some
+> actual requirements on this, but I've personally found it to be
+> a good recommendation to make Git logs more readable.
+
+Thanks, I will follow this next time.
+
 >
-> On Mon, Jun 18, 2018 at 6:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail=
-.com> wrote:
-> > On Mon, Jun 18, 2018 at 11:42 PM, Richard Purdie
-> > <richard.purdie@linuxfoundation.org> wrote:
-> > Off-Topic / FYI for me gmail considered your email spam
-> >>
-> >> Removing the libtool files became the project default a while ago (Jan
-> >> 2017):
-> >>
-> >> meta/conf/distro/defaultsetup.conf:INHERIT_DISTRO ?=3D "debian devshel=
-l sstate license remove-libtool"
-> >>
-> >> so I suspect you're in the minority not using that now.
-> > Maybe true. But breaking builds consumes resources on many sides -
-> > this thread is a good example
-> >>
-> >> http://git.yoctoproject.org/cgit.cgi/poky/commit/meta/conf/distro/defa=
-ultsetup.conf?id=3D3e2a47fdfceccd5f8832235b7a2df83076e84a98
-> >>
-> > The more I think about this:
-> >
-> > * Why is remove-libtool something a distro can override? If causing
-> > trouble it can be deactivated recipe-wise.
+>>>>>> Error opening control socket, bind() failed; socket='/var/run/syslog-ng/syslog-ng.ctl', error='No such file or directory (2)'
+>>>>>> Failed to acquire /run/systemd/journal/syslog socket, disabling systemd-syslog source;
+>>>>>>
+>>>>>> 1. To fix the error info:
+>>>>>>       if config with "--with-pidfile-dir=${localstatedir}/run/${BPN}", according to syslog-ng code
+>>>>>>       (define PATH_CONTROL_SOCKET    SYSLOG_NG_PATH_PIDFILEDIR "/syslog-ng.ctl"), path of control socket also
+>>>>>>       will be /var/run/syslog-ng, but after boot, there is no directory syslog-ng under /var/run,  so this
+>>>>>>       will not work for systemd. here change initscript to /var/lib/syslog-ng, and remove --with-pidfile,
+>>>>>>       so that sysVinit and systemd all use /var/lib/syslog-ng,  and also remove pid config in the syslog-ng service
+>>>>>>       patch to align the pid file path. so both systemd and sysvinit can work.
+> I don't think switching to /var/lib is the right thing to do.
+> /var/run is tmpfs, but /var/lib may be persistent if the rootfs
+> is writable.
 >
+> The non-existing directory is easily fixed by adding an ExecStartPre
+> to the service file. We use this local patch to fix the problem:
 >
-> That was my feeling as well as we were having this discussion, without
-> digging into the history it felt as if this should have been made core
-> functionality and not optional, especially given the opportunity for
-> recipes to opt out. At any rate I am about to send a commit to get
-> things buildable for when the 'remove-libtool' distro feature is
-> absent and as long as it remains optional I suppose all recipes should
-> function with and without the feature.
+>  From e4860d18a4e2811a5970a5ff8e66af993882172f Mon Sep 17 00:00:00 2001
+> From: Yang Lyu <yangl@axis.com>
+> Date: Mon, 15 May 2017 14:36:20 +0200
+> Subject: [PATCH] syslog-ng: change path for persist file and pid file
 >
-
-Richard,
-
-initially its good to have it overridable, so give some soak time so a
-weak assignment
-was right thing IMO so the distros could have some time to soak it.
-but may be its
-time to enforce it in oe-core.
-
-
-Mark
-
-I would also also suggest that you switch to using it in your distro,
-as well besides the
-patches which is fine.
-
-> MarkA
+> ---
+>   contrib/systemd/syslog-ng.service | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> >   - or
-> > * does anybody see a problem with inherit remove-libtool for all xfce
-> > recipes in xfce.bbclass?
-> >
-> > Andreas
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> diff --git a/contrib/systemd/syslog-ng.service b/contrib/systemd/syslog-ng.service
+> index 3e7a881..ecdca28 100644
+> --- a/contrib/systemd/syslog-ng.service
+> +++ b/contrib/systemd/syslog-ng.service
+> @@ -4,7 +4,8 @@ Documentation=man:syslog-ng(8)
+>   
+>   [Service]
+>   Type=notify
+> -ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslogd.pid
+> +ExecStartPre=@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/run/syslog-ng
+> +ExecStart=@SBINDIR@/syslog-ng -F $SYSLOGNG_OPTS -p @LOCALSTATEDIR@/run/syslog-ng/syslogd.pid -R @LOCALSTATEDIR@/run/syslog-ng/syslog-ng.persist
+>   ExecReload=@BASEBINDIR@/kill -HUP $MAINPID
+>   EnvironmentFile=-/etc/default/syslog-ng
+>   EnvironmentFile=-/etc/sysconfig/syslog-ng
+
+Thanks. I will change like this if newly upgrade syslog-ng_3.15.1.bb 
+still need this.
+Also,  for the hard review part, I will make a new patch follow your 
+suggestion.
+
+//changqing
+
+
+
+
+
+-- 
+BRs
+
+Sandy(Li Changqing)
++861084778653
+
 
