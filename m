@@ -1,58 +1,20 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B0B0275435
+Return-Path: <prvs=7010ab24f=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id C280175512
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2018 12:08:14 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 3120518523;
-	Tue, 19 Jun 2018 14:08:15 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id q5YG0rRZQ19C; Tue, 19 Jun 2018 14:08:12 +0200 (CEST)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 07F101851D;
-	Tue, 19 Jun 2018 14:08:12 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E70D61E096;
-	Tue, 19 Jun 2018 14:08:11 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id DA1E61E095;
-	Tue, 19 Jun 2018 14:08:11 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder03.se.axis.com (Postfix) with ESMTP;
-	Tue, 19 Jun 2018 14:08:11 +0200 (CEST)
-Received: from XBOX02.axis.com (xbox02.axis.com [10.0.5.16])
-	by seth.se.axis.com (Postfix) with ESMTP id CD074F93;
-	Tue, 19 Jun 2018 14:08:11 +0200 (CEST)
-Received: from xbox11.axis.com (10.0.5.25) by XBOX02.axis.com (10.0.5.16) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Tue, 19 Jun 2018 14:08:11 +0200
-Received: from XBOX02.axis.com (10.0.5.16) by xbox11.axis.com (10.0.5.25) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Tue, 19 Jun 2018 14:08:11 +0200
-Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
-	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
-	15.00.1365.000; Tue, 19 Jun 2018 14:08:11 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Andre McCurdy <armccurdy@gmail.com>, Joe Slater <joe.slater@windriver.com>
-Thread-Topic: [oe] [meta-oe][PATCH V2 1/1] syslog-ng: fix build without json
-Thread-Index: AQHUBNWqcS9tivhhy0iZlqYA+2/3qKRhi/sAgAX1pMA=
-Date: Tue, 19 Jun 2018 12:08:11 +0000
-Message-ID: <c03a98d9d4974d76a56596457df13e59@XBOX02.axis.com>
-References: <20180615182105.727-1-joe.slater@windriver.com>
-	<CAJ86T=XEoACNdVJhYZa24R5pF3cgDtkwKsu+WOF0z-FEb1_eOA@mail.gmail.com>
-In-Reply-To: <CAJ86T=XEoACNdVJhYZa24R5pF3cgDtkwKsu+WOF0z-FEb1_eOA@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	Tue, 19 Jun 2018 13:04:40 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,243,1526335200"; 
+   d="scan'208";a="1507417"
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 19 Jun 2018 15:04:46 +0200
+Message-ID: <20180619130449.6650-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH V2 1/1] syslog-ng: fix build without json
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: [meta-java][PATCH v2] 0/3] Add openjdk oeqa tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,67 +27,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2018 12:08:15 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jun 2018 13:04:41 -0000
+Content-Type: text/plain
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Andre McCurdy
-> Sent: den 15 juni 2018 21:04
-> To: Joe Slater <joe.slater@windriver.com>
-> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-> Subject: Re: [oe] [meta-oe][PATCH V2 1/1] syslog-ng: fix build without
-> json
->=20
-> On Fri, Jun 15, 2018 at 11:21 AM, Joe Slater <joe.slater@windriver.com>
-> wrote:
-> > Remove configurations requiring json from target.
-> >
-> > Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > ---
-> >  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 7 +++++++
-> >  1 file changed, 7 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-
-> oe/recipes-support/syslog-ng/syslog-ng.inc
-> > index cb7ca31..6c5adbd 100644
-> > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > @@ -85,6 +85,13 @@ do_install_append() {
-> >      install -d ${D}/${localstatedir}/lib/${BPN}
-> >      # Remove /var/run as it is created on startup
-> >      rm -rf ${D}${localstatedir}/run
-> > +
-> > +    # If json is not supported, remove certain conf files.
-> > +    if ${@bb.utils.contains('PACKAGECONFIG','json','false','true',d)} =
-; then
->=20
-> Inverting the result of bb.utils.contains() by swapping true and false
-> makes this a little difficult to read. Perhaps this would be clearer:
->=20
->   if ! ${@bb.utils.contains('PACKAGECONFIG','json','true','false',d)} ; t=
-hen
->=20
-> ?
+This patch-series adds tests and images for openjdk and openjre. They will be
+the basis of future quality gates for accepting patches.
 
-Alternatively you can write:
+Changes v2:
+  + Add "Testing" section to README
+  + Adapt dependencies of java jar tests to "java_exists"
 
-    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'json', d)}" ]; then
+Richard Leitner (3):
+  oeqa: runtime: add java & javac testcases
+  images/classes: add open{jdk,jre}-{7,8} test
+  README: add "Testing" section
 
-> > +        for f in loggly logmatic cim elasticsearch ; do
-> > +            rm -rf ${D}${datadir}/${BPN}/include/scl/$f
-> > +        done
-> > +    fi
-> >  }
-> >
-> >  FILES_${PN} +=3D "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/to=
-ols"
-> > --
-> > 2.7.4
+ README                                        |  16 +++++++
+ classes/openjdk-test-image.bbclass            |   5 +++
+ classes/openjre-test-image.bbclass            |   9 ++++
+ lib/oeqa/files/test.jar                       | Bin 0 -> 8164 bytes
+ lib/oeqa/files/test.java                      |   8 ++++
+ lib/oeqa/runtime/cases/java.py                |  60 ++++++++++++++++++++++++++
+ lib/oeqa/runtime/cases/javac.py               |  32 ++++++++++++++
+ recipes-images/images/openjdk-7-test-image.bb |   3 ++
+ recipes-images/images/openjdk-8-test-image.bb |   3 ++
+ recipes-images/images/openjre-7-test-image.bb |   3 ++
+ recipes-images/images/openjre-8-test-image.bb |   3 ++
+ 11 files changed, 142 insertions(+)
+ create mode 100644 classes/openjdk-test-image.bbclass
+ create mode 100644 classes/openjre-test-image.bbclass
+ create mode 100644 lib/oeqa/files/test.jar
+ create mode 100644 lib/oeqa/files/test.java
+ create mode 100644 lib/oeqa/runtime/cases/java.py
+ create mode 100644 lib/oeqa/runtime/cases/javac.py
+ create mode 100644 recipes-images/images/openjdk-7-test-image.bb
+ create mode 100644 recipes-images/images/openjdk-8-test-image.bb
+ create mode 100644 recipes-images/images/openjre-7-test-image.bb
+ create mode 100644 recipes-images/images/openjre-8-test-image.bb
 
-//Peter
+-- 
+2.11.0
 
 
