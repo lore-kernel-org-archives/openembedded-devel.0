@@ -1,14 +1,13 @@
 Return-Path: <prvs=7010ab24f=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 88F2F7554B
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F73F7554B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2018 13:05:00 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,243,1526335200"; 
-   d="scan'208";a="1507419"
+	Tue, 19 Jun 2018 13:05:01 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,243,1526335200"; d="scan'208";a="10922079"
 From: Richard Leitner <richard.leitner@skidata.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 19 Jun 2018 15:04:48 +0200
-Message-ID: <20180619130449.6650-3-richard.leitner@skidata.com>
+Date: Tue, 19 Jun 2018 15:04:49 +0200
+Message-ID: <20180619130449.6650-4-richard.leitner@skidata.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180619130449.6650-1-richard.leitner@skidata.com>
 References: <20180619130449.6650-1-richard.leitner@skidata.com>
@@ -16,7 +15,7 @@ MIME-Version: 1.0
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH v2] 2/3] images/classes: add open{jdk, jre}-{7, 8} test
+Subject: [meta-java][PATCH v2] 3/3] README: add "Testing" section
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,87 +31,41 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 19 Jun 2018 13:05:01 -0000
 Content-Type: text/plain
 
-Add image classes and images for open{jdk,jre}-{7,8} oeqa tests. These
-will be the basis for future "quality gates".
+Add new "Testing" section in README where we describe how meta-java
+tests may be used.
 
 Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 ---
- classes/openjdk-test-image.bbclass            | 5 +++++
- classes/openjre-test-image.bbclass            | 9 +++++++++
- recipes-images/images/openjdk-7-test-image.bb | 3 +++
- recipes-images/images/openjdk-8-test-image.bb | 3 +++
- recipes-images/images/openjre-7-test-image.bb | 3 +++
- recipes-images/images/openjre-8-test-image.bb | 3 +++
- 6 files changed, 26 insertions(+)
- create mode 100644 classes/openjdk-test-image.bbclass
- create mode 100644 classes/openjre-test-image.bbclass
- create mode 100644 recipes-images/images/openjdk-7-test-image.bb
- create mode 100644 recipes-images/images/openjdk-8-test-image.bb
- create mode 100644 recipes-images/images/openjre-7-test-image.bb
- create mode 100644 recipes-images/images/openjre-8-test-image.bb
+ README | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/classes/openjdk-test-image.bbclass b/classes/openjdk-test-image.bbclass
-new file mode 100644
-index 0000000..f6e4fca
---- /dev/null
-+++ b/classes/openjdk-test-image.bbclass
-@@ -0,0 +1,5 @@
-+DESCRIPTION = "An image for OpenJDK testing purposes"
+diff --git a/README b/README
+index b66df64..17a25e7 100644
+--- a/README
++++ b/README
+@@ -57,6 +57,22 @@ Main layer maintainers:
+   Otavio Salvador <otavio@ossystems.com.br>
+   Richard Leitner <richard.leitner@skidata.com>
+ 
++Testing
++-------
 +
-+TEST_SUITES_append = " javac"
++The meta-java layer may be tested using oeqa's runtime image tests. The easiest
++way is to add the following configuration to your local.conf:
 +
-+inherit openjre-test-image
-diff --git a/classes/openjre-test-image.bbclass b/classes/openjre-test-image.bbclass
-new file mode 100644
-index 0000000..77dbd74
---- /dev/null
-+++ b/classes/openjre-test-image.bbclass
-@@ -0,0 +1,9 @@
-+DESCRIPTION = "An image for OpenJRE testing purposes"
++SANITY_TESTED_DISTROS=""
++TEST_IMAGE = "1"
 +
-+IMAGE_FEATURES += "ssh-server-openssh package-management"
++Then you should be able to use the open{jre,jdk}-{7,8}-test-image recipes.
++Furthermore you could also include the tests provided in lib/oeqa/runtime/cases
++into your test image. More information on image testing is available at:
 +
-+IMAGE_INSTALL = "${CORE_IMAGE_BASE_INSTALL}"
++	https://wiki.yoctoproject.org/wiki/Image_tests
 +
-+DEFAULT_TEST_SUITES_pn-${PN} = "ping ssh java"
 +
-+inherit core-image
-diff --git a/recipes-images/images/openjdk-7-test-image.bb b/recipes-images/images/openjdk-7-test-image.bb
-new file mode 100644
-index 0000000..1e6d734
---- /dev/null
-+++ b/recipes-images/images/openjdk-7-test-image.bb
-@@ -0,0 +1,3 @@
-+IMAGE_INSTALL_append = " openjdk-7-jdk "
-+
-+inherit openjdk-test-image
-diff --git a/recipes-images/images/openjdk-8-test-image.bb b/recipes-images/images/openjdk-8-test-image.bb
-new file mode 100644
-index 0000000..d2eb040
---- /dev/null
-+++ b/recipes-images/images/openjdk-8-test-image.bb
-@@ -0,0 +1,3 @@
-+IMAGE_INSTALL_append = " openjdk-8 "
-+
-+inherit openjdk-test-image
-diff --git a/recipes-images/images/openjre-7-test-image.bb b/recipes-images/images/openjre-7-test-image.bb
-new file mode 100644
-index 0000000..2616255
---- /dev/null
-+++ b/recipes-images/images/openjre-7-test-image.bb
-@@ -0,0 +1,3 @@
-+IMAGE_INSTALL_append = " openjdk-7-jre "
-+
-+inherit openjre-test-image
-diff --git a/recipes-images/images/openjre-8-test-image.bb b/recipes-images/images/openjre-8-test-image.bb
-new file mode 100644
-index 0000000..e722ec3
---- /dev/null
-+++ b/recipes-images/images/openjre-8-test-image.bb
-@@ -0,0 +1,3 @@
-+IMAGE_INSTALL_append = " openjre-8 "
-+
-+inherit openjre-test-image
+ Usage instructions
+ ------------------
+ 
 -- 
 2.11.0
 
