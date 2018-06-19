@@ -1,23 +1,23 @@
 Return-Path: <prvs=7010ab24f=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id B2A10753FD
+	by mail.openembedded.org (Postfix) with ESMTP id 17C16745A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jun 2018 07:33:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,242,1526335200"; d="scan'208";a="10914905"
+	Tue, 19 Jun 2018 07:36:07 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,242,1526335200"; d="scan'208";a="10914947"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
-References: <20180425151735.9983-1-git@andred.net>
+References: <20180425145949.8524-1-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <7ec60481-3714-fa6b-1a0f-8c1dfac730fe@skidata.com>
-Date: Tue, 19 Jun 2018 09:33:36 +0200
+Message-ID: <c152d452-5c02-664f-5b06-407c335721fc@skidata.com>
+Date: Tue, 19 Jun 2018 09:36:16 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180425151735.9983-1-git@andred.net>
+In-Reply-To: <20180425145949.8524-1-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] openjdk-8: give downloaded files a more descriptive name
+Subject: Re: [meta-java][PATCH] libecj-bootstrap-native: simplify build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,98 +30,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jun 2018 07:33:28 -0000
+X-List-Received-Date: Tue, 19 Jun 2018 07:36:08 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 
-On 25.04.2018 17:17, André Draszik wrote:
+On 25.04.2018 16:59, André Draszik wrote:
 > From: André Draszik <andre.draszik@jci.com>
 > 
-> Rather than using the HG (mercurial) changeset IDs directly,
-> add a more descriptive part to the file name. This can help
-> with download cache management.
+> Piping 'find' output into multiple files to re-read
+> them seems inelegant and is error prone - just use a
+> pipe with appropriate options instead.
+> 
+> This avoids potential problems with funny file names,
+> and now also makes use of BB_NUMBER_THREADS to speed
+> up compilation.
+> 
+> This is a better example to copy from now...
 > 
 > Signed-off-by: André Draszik <andre.draszik@jci.com>
 
 Tested-by: Richard Leitner <richard.leitner@skidata.com>
 
 > ---
->   recipes-core/openjdk/openjdk-8-common.inc         | 14 ++++++-------
->   recipes-core/openjdk/openjdk-8-release-16xbyy.inc | 24 +++++++++++++++--------
->   2 files changed, 23 insertions(+), 15 deletions(-)
+>   recipes-core/ecj/libecj-bootstrap.inc | 25 +++++++------------------
+>   1 file changed, 7 insertions(+), 18 deletions(-)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-> index d8b38f5..2c68462 100644
-> --- a/recipes-core/openjdk/openjdk-8-common.inc
-> +++ b/recipes-core/openjdk/openjdk-8-common.inc
-> @@ -30,13 +30,13 @@ SRC_URI = " \
->   do_unpack_extract_submodules () {
->       cd "${S}"
->       # tar --transform
-> -    tar xjf ${WORKDIR}/${CORBA_FILE} --transform "s,-${CORBA_CHANGESET},,g"
-> -    tar xjf ${WORKDIR}/${HOTSPOT_FILE} --transform "s,-${HOTSPOT_CHANGESET},,g"
-> -    tar xjf ${WORKDIR}/${JAXP_FILE} --transform "s,-${JAXP_CHANGESET},,g"
-> -    tar xjf ${WORKDIR}/${JAXWS_FILE} --transform "s,-${JAXWS_CHANGESET},,g"
-> -    tar xjf ${WORKDIR}/${JDK_FILE} --transform "s,-${JDK_CHANGESET},,g"
-> -    tar xjf ${WORKDIR}/${LANGTOOLS_FILE} --transform "s,-${LANGTOOLS_CHANGESET},,g"
-> -    tar xjf ${WORKDIR}/${NASHORN_FILE} --transform "s,-${NASHORN_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${CORBA_FILE_LOCAL} --transform "s,-${CORBA_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${HOTSPOT_FILE_LOCAL} --transform "s,-${HOTSPOT_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${JAXP_FILE_LOCAL} --transform "s,-${JAXP_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${JAXWS_FILE_LOCAL} --transform "s,-${JAXWS_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${JDK_FILE_LOCAL} --transform "s,-${JDK_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${LANGTOOLS_FILE_LOCAL} --transform "s,-${LANGTOOLS_CHANGESET},,g"
-> +    tar xjf ${WORKDIR}/${NASHORN_FILE_LOCAL} --transform "s,-${NASHORN_CHANGESET},,g"
+> diff --git a/recipes-core/ecj/libecj-bootstrap.inc b/recipes-core/ecj/libecj-bootstrap.inc
+> index 9350550..04425f4 100644
+> --- a/recipes-core/ecj/libecj-bootstrap.inc
+> +++ b/recipes-core/ecj/libecj-bootstrap.inc
+> @@ -17,13 +17,8 @@ JAR = "ecj-bootstrap-${PV}.jar"
+>   
+>   do_unpackpost[dirs] = "${B}"
+>   do_unpackpost() {
+> -  if [ ! -d source ]; then
+> -    mkdir source
+> -  fi
+> -
+> -  if [ ! -d build ]; then
+> -    mkdir build
+> -  fi
+> +  mkdir -p source
+> +  mkdir -p build
+>   
+>     # Remove crap.
+>     rm -f about.html build.xml
+> @@ -44,24 +39,18 @@ do_unpackpost() {
+>     cp -R source/org build/
+>   
+>     # Remove source code and other stuff.
+> -  find build -name '*.java' -exec rm -f {} \;
+> -  find build -name '*.html' -exec rm -f {} \;
+> +  find build -depth \( -name '*.java' -o -name '*.html' \) -delete
 >   }
 >   
->   do_unpack_remove_X11_wrappers() {
-> diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> index bd4a349..c1fcda4 100644
-> --- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> +++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-> @@ -64,25 +64,33 @@ OPENJDK_HG_U = "jdk8u"
->   OPENJDK_HG_URL = "http://hg.openjdk.java.net/${OPENJDK_ARCH_PORT}/${OPENJDK_HG_U}"
+>   addtask unpackpost after do_unpack before do_patch
 >   
->   OPENJDK_FILE = "${OPENJDK_CHANGESET}.tar.bz2"
-> -OPENJDK_URI = "${OPENJDK_HG_URL}/archive/${OPENJDK_FILE};name=openjdk"
-> +OPENJDK_FILE_LOCAL = "openjdk8-${PV}-jdk8u-${OPENJDK_FILE}"
-> +OPENJDK_URI = "${OPENJDK_HG_URL}/archive/${OPENJDK_FILE};downloadfilename=${OPENJDK_FILE_LOCAL};name=openjdk"
+>   do_compile() {
+> -  find source -name '*.java' | LC_ALL=C sort > sourcefiles
+> -  split -l 25 sourcefiles ecj-sources.
+> -
+>     # Compiling in place is done because the sources contain
+>     # property files which need to be available at runtime.
+> -  for list in `find . -name 'ecj-sources.*'`; do
+> -      echo "building files in $list ...";
+> -      echo jikes-initial -d build -source 1.4 -sourcepath source `cat $list`;
+> -      jikes-initial \
+> -				-d build -source 1.4 -sourcepath source `cat $list`;
+> -  done
+> +  find source -name '*.java' -print0 \
+> +    | LC_ALL=C sort -z \
+> +    | xargs -0 -n25 -P ${BB_NUMBER_THREADS} \
+> +        jikes-initial -d build -source 1.4 -sourcepath source
 >   
->   HOTSPOT_FILE = "${HOTSPOT_CHANGESET}.tar.bz2"
-> -HOTSPOT_URI = "${OPENJDK_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=hotspot;unpack=false"
-> +HOTSPOT_FILE_LOCAL = "openjdk8-${PV}-hotspot-${HOTSPOT_FILE}"
-> +HOTSPOT_URI = "${OPENJDK_HG_URL}/hotspot/archive/${HOTSPOT_FILE};downloadfilename=${HOTSPOT_FILE_LOCAL};name=hotspot;unpack=false"
->   
->   CORBA_FILE = "${CORBA_CHANGESET}.tar.bz2"
-> -CORBA_URI = "${OPENJDK_HG_URL}/corba/archive/${CORBA_FILE};name=corba;unpack=false"
-> +CORBA_FILE_LOCAL = "openjdk8-${PV}-corba-${CORBA_FILE}"
-> +CORBA_URI = "${OPENJDK_HG_URL}/corba/archive/${CORBA_FILE};downloadfilename=${CORBA_FILE_LOCAL};name=corba;unpack=false"
->   
->   JAXP_FILE = "${JAXP_CHANGESET}.tar.bz2"
-> -JAXP_URI = "${OPENJDK_HG_URL}/jaxp/archive/${JAXP_FILE};name=jaxp;unpack=false"
-> +JAXP_FILE_LOCAL = "openjdk8-${PV}-jaxp-${JAXP_FILE}"
-> +JAXP_URI = "${OPENJDK_HG_URL}/jaxp/archive/${JAXP_FILE};downloadfilename=${JAXP_FILE_LOCAL};name=jaxp;unpack=false"
->   
->   JAXWS_FILE = "${JAXWS_CHANGESET}.tar.bz2"
-> -JAXWS_URI = "${OPENJDK_HG_URL}/jaxws/archive/${JAXWS_FILE};name=jaxws;unpack=false"
-> +JAXWS_FILE_LOCAL = "openjdk8-${PV}-jaxws-${JAXWS_FILE}"
-> +JAXWS_URI = "${OPENJDK_HG_URL}/jaxws/archive/${JAXWS_FILE};downloadfilename=${JAXWS_FILE_LOCAL};name=jaxws;unpack=false"
->   
->   JDK_FILE = "${JDK_CHANGESET}.tar.bz2"
-> -JDK_URI = "${OPENJDK_HG_URL}/jdk/archive/${JDK_FILE};name=jdk;unpack=false"
-> +JDK_FILE_LOCAL = "openjdk8-${PV}-jdk-${JDK_FILE}"
-> +JDK_URI = "${OPENJDK_HG_URL}/jdk/archive/${JDK_FILE};downloadfilename=${JDK_FILE_LOCAL};name=jdk;unpack=false"
->   
->   LANGTOOLS_FILE = "${LANGTOOLS_CHANGESET}.tar.bz2"
-> -LANGTOOLS_URI = "${OPENJDK_HG_URL}/langtools/archive/${LANGTOOLS_FILE};name=langtools;unpack=false"
-> +LANGTOOLS_FILE_LOCAL = "openjdk8-${PV}-langtools-${LANGTOOLS_FILE}"
-> +LANGTOOLS_URI = "${OPENJDK_HG_URL}/langtools/archive/${LANGTOOLS_FILE};downloadfilename=${LANGTOOLS_FILE_LOCAL};name=langtools;unpack=false"
->   
->   NASHORN_FILE = "${NASHORN_CHANGESET}.tar.bz2"
-> -NASHORN_URI = "${OPENJDK_HG_URL}/nashorn/archive/${NASHORN_FILE};name=nashorn;unpack=false"
-> +NASHORN_FILE_LOCAL = "openjdk8-${PV}-nashorn-${NASHORN_FILE}"
-> +NASHORN_URI = "${OPENJDK_HG_URL}/nashorn/archive/${NASHORN_FILE};downloadfilename=${NASHORN_FILE_LOCAL};name=nashorn;unpack=false"
+>     fastjar -c -C build . -f ${JAR}
+>   }
 > 
 
