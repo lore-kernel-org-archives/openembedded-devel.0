@@ -1,28 +1,28 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AE1377071
+	by mail.openembedded.org (Postfix) with ESMTP id 9493B770CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2018 07:38:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="41290357"
+	Wed, 20 Jun 2018 07:39:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="41290366"
 Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Jun 2018 15:38:55 +0800
+	by heian.cn.fujitsu.com with ESMTP; 20 Jun 2018 15:39:11 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 289254B41ECF
+	by cn.fujitsu.com (Postfix) with ESMTP id 3FE8E4B41ED0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2018 15:38:53 +0800 (CST)
+	Wed, 20 Jun 2018 15:39:07 +0800 (CST)
 Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
 	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0399.000; Wed, 20 Jun 2018 15:38:54 +0800
+	14.03.0399.000; Wed, 20 Jun 2018 15:39:08 +0800
 From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] samba:Deleted config for lsb,
-	since this part has been deleted from samba upstream.
-Thread-Index: AQHT/Ji7rxu5jH7Lwk+TNigXcIFSJaRo2jVQ
-Date: Wed, 20 Jun 2018 07:38:58 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FD0170F9E99F@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1527370560-622-1-git-send-email-leimaohui@cn.fujitsu.com>
-In-Reply-To: <1527370560-622-1-git-send-email-leimaohui@cn.fujitsu.com>
+Thread-Topic: [oe] [meta-networking][PATCH] opensaf:Modified PACKAGECONFIG
+	to fix the following error:
+Thread-Index: AQHT/Jt5bMv5lXoAdEaC5fD77up6NqRo2kjg
+Date: Wed, 20 Jun 2018 07:39:12 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FD0170F9E9A6@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1527371712-739-1-git-send-email-leimaohui@cn.fujitsu.com>
+In-Reply-To: <1527371712-739-1-git-send-email-leimaohui@cn.fujitsu.com>
 Accept-Language: zh-CN, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -31,11 +31,11 @@ dlp-version: 11.0.300.84
 dlp-reaction: no-action
 x-originating-ip: [10.167.225.27]
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 289254B41ECF.AB0AB
+X-yoursite-MailScanner-ID: 3FE8E4B41ED0.AC044
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
 X-Spam-Status: No
-Subject: Re: [meta-networking][PATCH] samba:Deleted config for lsb, since this part has been deleted from samba upstream.
+Subject: Re: [meta-networking][PATCH] opensaf:Modified PACKAGECONFIG to fix the following error:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,77 +48,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2018 07:38:58 -0000
+X-List-Received-Date: Wed, 20 Jun 2018 07:39:11 -0000
 Content-Language: zh-CN
 Content-Type: text/plain; charset="shift_jis"
 Content-Transfer-Encoding: base64
 
 UGluZw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206
 IExlaSwgTWFvaHVpDQo+IFNlbnQ6IFN1bmRheSwgTWF5IDI3LCAyMDE4IDU6
-MzYgQU0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
+NTUgQU0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
 ZWRkZWQub3JnDQo+IENjOiBMZWksIE1hb2h1aQ0KPiBTdWJqZWN0OiBbb2Vd
-IFttZXRhLW5ldHdvcmtpbmddW1BBVENIXSBzYW1iYTpEZWxldGVkIGNvbmZp
-ZyBmb3IgbHNiLCBzaW5jZSB0aGlzDQo+IHBhcnQgaGFzIGJlZW4gZGVsZXRl
-ZCBmcm9tIHNhbWJhIHVwc3RyZWFtLg0KPiANCj4gU2lnbmVkLW9mZi1ieTog
-TGVpIE1hb2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiAtLS0N
-Cj4gIC4uLi9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9zYW1iYV80Ljcu
-Ni5iYiAgICAgIHwgMjUgKysrKysrKystLS0tLS0tLS0tLS0tLQ0KPiAgMSBm
-aWxlIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0p
-DQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
-Y29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuNy42LmJiIGIvbWV0YS0NCj4g
-bmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9zYW1iYV80
-LjcuNi5iYg0KPiBpbmRleCBhODUxN2M1Li5iNTcwZTRiIDEwMDY0NA0KPiAt
-LS0gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc2Ft
-YmEvc2FtYmFfNC43LjYuYmINCj4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3Jl
-Y2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuNy42LmJiDQo+IEBA
-IC00Niw4ICs0Niw2IEBAIERFUEVORFNfYXBwZW5kX2xpYmMtbXVzbCA9ICIg
-bGlidGlycGMiDQo+ICBDRkxBR1NfYXBwZW5kX2xpYmMtbXVzbCA9ICIgLUkk
-e1NUQUdJTkdfSU5DRElSfS90aXJwYyINCj4gIExERkxBR1NfYXBwZW5kX2xp
-YmMtbXVzbCA9ICIgLWx0aXJwYyINCj4gDQo+IC1MU0IgPSAiIg0KPiAtTFNC
-X2xpbnV4c3RkYmFzZSA9ICJsc2IiDQo+IA0KPiAgSU5JVFNDUklQVF9OQU1F
-ID0gInNhbWJhIg0KPiAgSU5JVFNDUklQVF9QQVJBTVMgPSAic3RhcnQgMjAg
-MyA1IC4gc3RvcCAyMCAwIDEgNiAuIg0KPiBAQCAtNjgsNyArNjYsNiBAQCBQ
-QUNLQUdFQ09ORklHID8/PSAiJHtAYmIudXRpbHMuZmlsdGVyKCdESVNUUk9f
-RkVBVFVSRVMnLA0KPiAnc3lzdGVtZCB6ZXJvY29uZicsIGQpfQ0KPiAgICAg
-ICAgICAgICAgICAgICAgIGFjbCBhZC1kYyBjdXBzIGdudXRscyBsZGFwIG1p
-dGtyYjUgXA0KPiAgIg0KPiANCj4gLVJERVBFTkRTXyR7UE59LWJhc2UgKz0g
-IiR7TFNCfSINCj4gIFJERVBFTkRTXyR7UE59LWN0ZGItdGVzdHMgKz0gImJh
-c2ggdXRpbC1saW51eC1nZXRvcHQiDQo+IA0KPiAgUEFDS0FHRUNPTkZJR1th
-Y2xdID0gIi0td2l0aC1hY2wtc3VwcG9ydCwtLXdpdGhvdXQtYWNsLXN1cHBv
-cnQsYWNsIg0KPiBAQCAtMTUwLDE5ICsxNDcsMTUgQEAgZG9faW5zdGFsbF9h
-cHBlbmQoKSB7DQo+ICAgICAgaW5zdGFsbCAtbTY0NCBwYWNrYWdpbmcvc3lz
-dGVtZC9zYW1iYS5jb25mLnRtcA0KPiAke0R9JHtzeXNjb25mZGlyfS90bXBm
-aWxlcy5kL3NhbWJhLmNvbmYNCj4gICAgICBlY2hvICJkICR7bG9jYWxzdGF0
-ZWRpcn0vbG9nL3NhbWJhIDA3NTUgcm9vdCByb290IC0iIFwNCj4gICAgICAg
-ICAgPj4gJHtEfSR7c3lzY29uZmRpcn0vdG1wZmlsZXMuZC9zYW1iYS5jb25m
-DQo+IC0gICAgaWYgWyAiJHtMU0J9IiA9ICJsc2IiIF07IHRoZW4NCj4gLSAg
-ICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQNCj4g
-LSAgICAgICAgaW5zdGFsbCAtbSAwNzU1IHBhY2thZ2luZy9MU0Ivc2FtYmEu
-c2ggJHtEfSR7c3lzY29uZmRpcn0vaW5pdC5kL3NhbWJhDQo+IC0gICAgZWxz
-ZQ0KPiAtICAgICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L2lu
-aXQuZA0KPiAtICAgICAgICBpbnN0YWxsIC1tIDA3NTUgcGFja2FnaW5nL3N5
-c3Yvc2FtYmEuaW5pdA0KPiAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQvc2Ft
-YmENCj4gLSAgICAgICAgc2VkIC1lICdzLC9vcHQvc2FtYmEvYmluLCR7c2Jp
-bmRpcn0sZycgXA0KPiAtICAgICAgICAgICAgLWUgJ3MsL29wdC9zYW1iYS9z
-bWIuY29uZiwke3N5c2NvbmZkaXJ9L3NhbWJhL3NtYi5jb25mLGcnIFwNCj4g
-LSAgICAgICAgICAgIC1lICdzLC9vcHQvc2FtYmEvbG9nLCR7bG9jYWxzdGF0
-ZWRpcn0vbG9nL3NhbWJhLGcnIFwNCj4gLSAgICAgICAgICAgIC1lICdzLC9l
-dGMvaW5pdC5kL3NhbWJhLnNlcnZlciwke3N5c2NvbmZkaXJ9L2luaXQuZC9z
-YW1iYSxnJyBcDQo+IC0gICAgICAgICAgICAtZSAncywvdXNyL2Jpbiwke2Jh
-c2VfYmluZGlyfSxnJyBcDQo+IC0gICAgICAgICAgICAtaSAke0R9JHtzeXNj
-b25mZGlyfS9pbml0LmQvc2FtYmENCj4gLSAgICBmaQ0KPiArDQo+ICsgICAg
-aW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQNCj4gKyAgICBp
-bnN0YWxsIC1tIDA3NTUgcGFja2FnaW5nL3N5c3Yvc2FtYmEuaW5pdCAke0R9
-JHtzeXNjb25mZGlyfS9pbml0LmQvc2FtYmENCj4gKyAgICBzZWQgLWUgJ3Ms
-L29wdC9zYW1iYS9iaW4sJHtzYmluZGlyfSxnJyBcDQo+ICsgICAgICAgIC1l
-ICdzLC9vcHQvc2FtYmEvc21iLmNvbmYsJHtzeXNjb25mZGlyfS9zYW1iYS9z
-bWIuY29uZixnJyBcDQo+ICsgICAgICAgIC1lICdzLC9vcHQvc2FtYmEvbG9n
-LCR7bG9jYWxzdGF0ZWRpcn0vbG9nL3NhbWJhLGcnIFwNCj4gKyAgICAgICAg
-LWUgJ3MsL2V0Yy9pbml0LmQvc2FtYmEuc2VydmVyLCR7c3lzY29uZmRpcn0v
-aW5pdC5kL3NhbWJhLGcnIFwNCj4gKyAgICAgICAgLWUgJ3MsL3Vzci9iaW4s
-JHtiYXNlX2JpbmRpcn0sZycgXA0KPiArICAgICAgICAtaSAke0R9JHtzeXNj
-b25mZGlyfS9pbml0LmQvc2FtYmENCj4gDQo+ICAgICAgaW5zdGFsbCAtZCAk
-e0R9JHtzeXNjb25mZGlyfS9zYW1iYQ0KPiAgICAgIGVjaG8gIjEyNy4wLjAu
-MSBsb2NhbGhvc3QiID4gJHtEfSR7c3lzY29uZmRpcn0vc2FtYmEvbG1ob3N0
-cw0KPiAtLQ0KPiAxLjkuMQ0KDQoKCg==
+IFttZXRhLW5ldHdvcmtpbmddW1BBVENIXSBvcGVuc2FmOk1vZGlmaWVkIFBB
+Q0tBR0VDT05GSUcgdG8gZml4DQo+IHRoZSBmb2xsb3dpbmcgZXJyb3I6DQo+
+IA0KPiB8IGNvbmZpZ3VyZTogZXJyb3I6IFBhY2thZ2UgcmVxdWlyZW1lbnRz
+IChsaWJ2aXJ0KSB3ZXJlIG5vdCBtZXQ6DQo+IHwNCj4gfCBObyBwYWNrYWdl
+ICdsaWJ2aXJ0JyBmb3VuZA0KPiANCj4gU2lnbmVkLW9mZi1ieTogTGVpIE1h
+b2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiAtLS0NCj4gIG1l
+dGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvb3BlbnNhZi9vcGVuc2Fm
+XzUuMTguMDIuYmIgfCA1ICsrKy0tDQo+ICAxIGZpbGUgY2hhbmdlZCwgMyBp
+bnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdp
+dCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvb3BlbnNhZi9v
+cGVuc2FmXzUuMTguMDIuYmIgYi9tZXRhLQ0KPiBuZXR3b3JraW5nL3JlY2lw
+ZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWZfNS4xOC4wMi5iYg0KPiBpbmRl
+eCA0YjU1NmNlLi5jYTBhZTQyIDEwMDY0NA0KPiAtLS0gYS9tZXRhLW5ldHdv
+cmtpbmcvcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3BlbnNhZl81LjE4LjAy
+LmJiDQo+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMv
+b3BlbnNhZi9vcGVuc2FmXzUuMTguMDIuYmINCj4gQEAgLTM4LDkgKzM4LDEw
+IEBAIFNZU1RFTURfU0VSVklDRV8ke1BOfSArPSAib3BlbnNhZmQuc2Vydmlj
+ZSINCj4gIFNZU1RFTURfQVVUT19FTkFCTEUgPSAiZGlzYWJsZSINCj4gDQo+
+ICBQQUNLQUdFQ09ORklHW3N5c3RlbWRdID0gIiwsc3lzdGVtZCINCj4gLVBB
+Q0tBR0VDT05GSUdbb3BlbmhwaV0gPSAiLS13aXRoLWhwaS1pbnRlcmZhY2U9
+QjAzIC0tZW5hYmxlLWFpcy1wbG0sLG9wZW5ocGkiDQo+ICtQQUNLQUdFQ09O
+RklHW29wZW5ocGldID0gIi0td2l0aC1ocGktaW50ZXJmYWNlPUIwMywsb3Bl
+bmhwaSINCj4gK1BBQ0tBR0VDT05GSUdbcGxtXSA9ICItLWVuYWJsZS1haXMt
+cGxtLC0tZGlzYWJsZS1haXMtcGxtLGxpYnZpcnQgb3BlbmhwaSINCj4gDQo+
+IC1QQUNLQUdFQ09ORklHX2FwcGVuZCA9ICIke0BiYi51dGlscy5jb250YWlu
+cygnRElTVFJPX0ZFQVRVUkVTJywgJ3N5c3RlbWQnLCAnDQo+IHN5c3RlbWQn
+LCAnJywgZCl9Ig0KPiArUEFDS0FHRUNPTkZJRyA/PSAiJHtAYmIudXRpbHMu
+Y29udGFpbnMoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgJw0KPiBz
+eXN0ZW1kJywgJycsIGQpfSINCj4gDQo+ICBQS0dMSUJESVI9IiR7bGliZGly
+fSINCj4gDQo+IC0tDQo+IDEuOS4xDQoNCgoK
 
