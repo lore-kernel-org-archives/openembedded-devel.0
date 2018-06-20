@@ -1,28 +1,41 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AD0176090
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AE1377071
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2018 07:13:08 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5K7D8AI000965
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 20 Jun 2018 00:13:08 -0700 (PDT)
-Received: from [128.224.16.116] (128.224.16.116) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
-	Wed, 20 Jun 2018 00:12:56 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <20180620021342.12415-1-liezhi.yang@windriver.com>
-	<CAMKF1spbat6ZCxLfvo8LTM7B1oHnmwa6=1YzgJ0TyhYFG7mPhA@mail.gmail.com>
-	<98958e20-053c-931c-116f-5702093fa2c1@windriver.com>
-From: Robert Yang <liezhi.yang@windriver.com>
-Message-ID: <e1f03e86-2f48-ce85-cd12-4df467550b55@windriver.com>
-Date: Wed, 20 Jun 2018 15:12:53 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Wed, 20 Jun 2018 07:38:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="41290357"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Jun 2018 15:38:55 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 289254B41ECF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jun 2018 15:38:53 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0399.000; Wed, 20 Jun 2018 15:38:54 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH] samba:Deleted config for lsb,
+	since this part has been deleted from samba upstream.
+Thread-Index: AQHT/Ji7rxu5jH7Lwk+TNigXcIFSJaRo2jVQ
+Date: Wed, 20 Jun 2018 07:38:58 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FD0170F9E99F@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1527370560-622-1-git-send-email-leimaohui@cn.fujitsu.com>
+In-Reply-To: <1527370560-622-1-git-send-email-leimaohui@cn.fujitsu.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.0.300.84
+dlp-reaction: no-action
+x-originating-ip: [10.167.225.27]
 MIME-Version: 1.0
-In-Reply-To: <98958e20-053c-931c-116f-5702093fa2c1@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] gd: Replace strncpy with memccpy to fix -Wstringop-truncation.
+X-yoursite-MailScanner-ID: 289254B41ECF.AB0AB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [meta-networking][PATCH] samba:Deleted config for lsb, since this part has been deleted from samba upstream.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,131 +48,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2018 07:13:08 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 20 Jun 2018 07:38:58 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Hi Khem,
-
-On 06/20/2018 10:34 AM, Robert Yang wrote:
-> 
-> 
-> On 06/20/2018 10:28 AM, Khem Raj wrote:
->> On Tue, Jun 19, 2018 at 7:14 PM Robert Yang <liezhi.yang@windriver.com> wrote:
->>>
->>> Fixed:
->>> git/src/gdft.c:1699:2: error: 'strncpy' output truncated before terminating 
->>> nul copying as many bytes from a string as its length 
->>> [-Werror=stringop-truncation]
->>>
->>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->>> ---
->>>   ...gdft.c-Replace-strncpy-with-memccpy-to-fi.patch | 46 ++++++++++++++++++++++
->>>   meta-oe/recipes-support/gd/gd_2.2.5.bb             |  1 +
->>>   2 files changed, 47 insertions(+)
->>>   create mode 100644 
->>> meta-oe/recipes-support/gd/gd/0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch 
->>>
->>>
->>> diff --git 
->>> a/meta-oe/recipes-support/gd/gd/0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch 
->>> b/meta-oe/recipes-support/gd/gd/0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch 
->>>
->>> new file mode 100644
->>> index 0000000..b175c44
->>> --- /dev/null
->>> +++ 
->>> b/meta-oe/recipes-support/gd/gd/0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch 
->>>
->>> @@ -0,0 +1,46 @@
->>> +From 85c7694a5cf34597909bdd1ca6931b0f99904c2e Mon Sep 17 00:00:00 2001
->>> +From: Robert Yang <liezhi.yang@windriver.com>
->>> +Date: Tue, 19 Jun 2018 00:40:49 -0700
->>> +Subject: [PATCH] annotate.c/gdft.c: Replace strncpy with memccpy to fix
->>> + -Wstringop-truncation.
->>> +
->>> +Fixed:
->>> +git/src/gdft.c:1699:2: error: 'strncpy' output truncated before terminating 
->>> nul copying as many bytes from a string as its length 
->>> [-Werror=stringop-truncation]
->>> +
->>> +Upstream-Status: Pending
->>> +
->>
->> could you also post this patch upstream and start a discussion?
-> 
-> Thanks, I will do it today.
-
-I sent it to upstream and sent a V2:
-
-https://github.com/libgd/libgd/pull/442
-
-// Robert
-
-> 
-> // Robert
-> 
->>
->>
->>> +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->>> +---
->>> + src/annotate.c | 2 +-
->>> + src/gdft.c     | 2 +-
->>> + 2 files changed, 2 insertions(+), 2 deletions(-)
->>> +
->>> +diff --git a/src/annotate.c b/src/annotate.c
->>> +index 00aaf49..17df813 100644
->>> +--- a/src/annotate.c
->>> ++++ b/src/annotate.c
->>> +@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
->>> +                                       fprintf(stderr, "Font maximum length 
->>> is 1024, %d given\n", font_len);
->>> +                                       goto badLine;
->>> +                               }
->>> +-                              strncpy(font, st, font_len);
->>> ++                              memcpy(font, st, font_len);
->>> +                       }
->>> +               } else if(!strcmp(st, "align")) {
->>> +                       char *st = strtok(0, " \t\r\n");
->>> +diff --git a/src/gdft.c b/src/gdft.c
->>> +index 9fa8295..81dbe41 100644
->>> +--- a/src/gdft.c
->>> ++++ b/src/gdft.c
->>> +@@ -1696,7 +1696,7 @@ static char * font_path(char **fontpath, char *name_list)
->>> +               gdFree(path);
->>> +               return "could not alloc full list of fonts";
->>> +       }
->>> +-      strncpy(fontlist, name_list, name_list_len);
->>> ++      memcpy(fontlist, name_list, name_list_len);
->>> +       fontlist[name_list_len] = 0;
->>> +
->>> +       /*
->>> +--
->>> +2.10.2
->>> +
->>> diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb 
->>> b/meta-oe/recipes-support/gd/gd_2.2.5.bb
->>> index 63d9acf..62d0df0 100644
->>> --- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
->>> +++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
->>> @@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = 
->>> "file://COPYING;md5=07384b3aa2e0d39afca0d6c40286f545"
->>>   DEPENDS = "freetype libpng jpeg zlib tiff"
->>>
->>>   SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
->>> +           
->>> file://0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch \
->>>             "
->>>
->>>   SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
->>> -- 
->>> 2.10.2
->>>
->>> -- 
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
+UGluZw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206
+IExlaSwgTWFvaHVpDQo+IFNlbnQ6IFN1bmRheSwgTWF5IDI3LCAyMDE4IDU6
+MzYgQU0NCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
+ZWRkZWQub3JnDQo+IENjOiBMZWksIE1hb2h1aQ0KPiBTdWJqZWN0OiBbb2Vd
+IFttZXRhLW5ldHdvcmtpbmddW1BBVENIXSBzYW1iYTpEZWxldGVkIGNvbmZp
+ZyBmb3IgbHNiLCBzaW5jZSB0aGlzDQo+IHBhcnQgaGFzIGJlZW4gZGVsZXRl
+ZCBmcm9tIHNhbWJhIHVwc3RyZWFtLg0KPiANCj4gU2lnbmVkLW9mZi1ieTog
+TGVpIE1hb2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3UuY29tPg0KPiAtLS0N
+Cj4gIC4uLi9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9zYW1iYV80Ljcu
+Ni5iYiAgICAgIHwgMjUgKysrKysrKystLS0tLS0tLS0tLS0tLQ0KPiAgMSBm
+aWxlIGNoYW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0p
+DQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
+Y29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuNy42LmJiIGIvbWV0YS0NCj4g
+bmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9zYW1iYV80
+LjcuNi5iYg0KPiBpbmRleCBhODUxN2M1Li5iNTcwZTRiIDEwMDY0NA0KPiAt
+LS0gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc2Ft
+YmEvc2FtYmFfNC43LjYuYmINCj4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3Jl
+Y2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuNy42LmJiDQo+IEBA
+IC00Niw4ICs0Niw2IEBAIERFUEVORFNfYXBwZW5kX2xpYmMtbXVzbCA9ICIg
+bGlidGlycGMiDQo+ICBDRkxBR1NfYXBwZW5kX2xpYmMtbXVzbCA9ICIgLUkk
+e1NUQUdJTkdfSU5DRElSfS90aXJwYyINCj4gIExERkxBR1NfYXBwZW5kX2xp
+YmMtbXVzbCA9ICIgLWx0aXJwYyINCj4gDQo+IC1MU0IgPSAiIg0KPiAtTFNC
+X2xpbnV4c3RkYmFzZSA9ICJsc2IiDQo+IA0KPiAgSU5JVFNDUklQVF9OQU1F
+ID0gInNhbWJhIg0KPiAgSU5JVFNDUklQVF9QQVJBTVMgPSAic3RhcnQgMjAg
+MyA1IC4gc3RvcCAyMCAwIDEgNiAuIg0KPiBAQCAtNjgsNyArNjYsNiBAQCBQ
+QUNLQUdFQ09ORklHID8/PSAiJHtAYmIudXRpbHMuZmlsdGVyKCdESVNUUk9f
+RkVBVFVSRVMnLA0KPiAnc3lzdGVtZCB6ZXJvY29uZicsIGQpfQ0KPiAgICAg
+ICAgICAgICAgICAgICAgIGFjbCBhZC1kYyBjdXBzIGdudXRscyBsZGFwIG1p
+dGtyYjUgXA0KPiAgIg0KPiANCj4gLVJERVBFTkRTXyR7UE59LWJhc2UgKz0g
+IiR7TFNCfSINCj4gIFJERVBFTkRTXyR7UE59LWN0ZGItdGVzdHMgKz0gImJh
+c2ggdXRpbC1saW51eC1nZXRvcHQiDQo+IA0KPiAgUEFDS0FHRUNPTkZJR1th
+Y2xdID0gIi0td2l0aC1hY2wtc3VwcG9ydCwtLXdpdGhvdXQtYWNsLXN1cHBv
+cnQsYWNsIg0KPiBAQCAtMTUwLDE5ICsxNDcsMTUgQEAgZG9faW5zdGFsbF9h
+cHBlbmQoKSB7DQo+ICAgICAgaW5zdGFsbCAtbTY0NCBwYWNrYWdpbmcvc3lz
+dGVtZC9zYW1iYS5jb25mLnRtcA0KPiAke0R9JHtzeXNjb25mZGlyfS90bXBm
+aWxlcy5kL3NhbWJhLmNvbmYNCj4gICAgICBlY2hvICJkICR7bG9jYWxzdGF0
+ZWRpcn0vbG9nL3NhbWJhIDA3NTUgcm9vdCByb290IC0iIFwNCj4gICAgICAg
+ICAgPj4gJHtEfSR7c3lzY29uZmRpcn0vdG1wZmlsZXMuZC9zYW1iYS5jb25m
+DQo+IC0gICAgaWYgWyAiJHtMU0J9IiA9ICJsc2IiIF07IHRoZW4NCj4gLSAg
+ICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQNCj4g
+LSAgICAgICAgaW5zdGFsbCAtbSAwNzU1IHBhY2thZ2luZy9MU0Ivc2FtYmEu
+c2ggJHtEfSR7c3lzY29uZmRpcn0vaW5pdC5kL3NhbWJhDQo+IC0gICAgZWxz
+ZQ0KPiAtICAgICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L2lu
+aXQuZA0KPiAtICAgICAgICBpbnN0YWxsIC1tIDA3NTUgcGFja2FnaW5nL3N5
+c3Yvc2FtYmEuaW5pdA0KPiAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQvc2Ft
+YmENCj4gLSAgICAgICAgc2VkIC1lICdzLC9vcHQvc2FtYmEvYmluLCR7c2Jp
+bmRpcn0sZycgXA0KPiAtICAgICAgICAgICAgLWUgJ3MsL29wdC9zYW1iYS9z
+bWIuY29uZiwke3N5c2NvbmZkaXJ9L3NhbWJhL3NtYi5jb25mLGcnIFwNCj4g
+LSAgICAgICAgICAgIC1lICdzLC9vcHQvc2FtYmEvbG9nLCR7bG9jYWxzdGF0
+ZWRpcn0vbG9nL3NhbWJhLGcnIFwNCj4gLSAgICAgICAgICAgIC1lICdzLC9l
+dGMvaW5pdC5kL3NhbWJhLnNlcnZlciwke3N5c2NvbmZkaXJ9L2luaXQuZC9z
+YW1iYSxnJyBcDQo+IC0gICAgICAgICAgICAtZSAncywvdXNyL2Jpbiwke2Jh
+c2VfYmluZGlyfSxnJyBcDQo+IC0gICAgICAgICAgICAtaSAke0R9JHtzeXNj
+b25mZGlyfS9pbml0LmQvc2FtYmENCj4gLSAgICBmaQ0KPiArDQo+ICsgICAg
+aW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9pbml0LmQNCj4gKyAgICBp
+bnN0YWxsIC1tIDA3NTUgcGFja2FnaW5nL3N5c3Yvc2FtYmEuaW5pdCAke0R9
+JHtzeXNjb25mZGlyfS9pbml0LmQvc2FtYmENCj4gKyAgICBzZWQgLWUgJ3Ms
+L29wdC9zYW1iYS9iaW4sJHtzYmluZGlyfSxnJyBcDQo+ICsgICAgICAgIC1l
+ICdzLC9vcHQvc2FtYmEvc21iLmNvbmYsJHtzeXNjb25mZGlyfS9zYW1iYS9z
+bWIuY29uZixnJyBcDQo+ICsgICAgICAgIC1lICdzLC9vcHQvc2FtYmEvbG9n
+LCR7bG9jYWxzdGF0ZWRpcn0vbG9nL3NhbWJhLGcnIFwNCj4gKyAgICAgICAg
+LWUgJ3MsL2V0Yy9pbml0LmQvc2FtYmEuc2VydmVyLCR7c3lzY29uZmRpcn0v
+aW5pdC5kL3NhbWJhLGcnIFwNCj4gKyAgICAgICAgLWUgJ3MsL3Vzci9iaW4s
+JHtiYXNlX2JpbmRpcn0sZycgXA0KPiArICAgICAgICAtaSAke0R9JHtzeXNj
+b25mZGlyfS9pbml0LmQvc2FtYmENCj4gDQo+ICAgICAgaW5zdGFsbCAtZCAk
+e0R9JHtzeXNjb25mZGlyfS9zYW1iYQ0KPiAgICAgIGVjaG8gIjEyNy4wLjAu
+MSBsb2NhbGhvc3QiID4gJHtEfSR7c3lzY29uZmRpcn0vc2FtYmEvbG1ob3N0
+cw0KPiAtLQ0KPiAxLjkuMQ0KDQoKCg==
 
