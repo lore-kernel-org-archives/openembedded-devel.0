@@ -1,34 +1,31 @@
 Return-Path: <denis@denix.org>
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 66A4477D6B
+	by mail.openembedded.org (Postfix) with ESMTP id B9F1678375
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2018 22:34:29 +0000 (UTC)
+	Wed, 20 Jun 2018 23:18:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 297C320BD9;
-	Wed, 20 Jun 2018 22:34:30 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9EE6E20BD9;
+	Wed, 20 Jun 2018 23:18:26 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id HSOj_Z7LKo4c; Wed, 20 Jun 2018 22:34:30 +0000 (UTC)
+	with ESMTP id FOdOPeasTg0m; Wed, 20 Jun 2018 23:18:26 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id EECA9208BA;
-	Wed, 20 Jun 2018 22:34:28 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 75A8E1634BE; Wed, 20 Jun 2018 18:34:28 -0400 (EDT)
-Date: Wed, 20 Jun 2018 18:34:28 -0400
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 74DF12017D;
+	Wed, 20 Jun 2018 23:18:25 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id F39DA1634C3;
+	Wed, 20 Jun 2018 19:18:24 -0400 (EDT)
 From: Denys Dmytriyenko <denis@denix.org>
-To: Andre McCurdy <armccurdy@gmail.com>
-Message-ID: <20180620223428.GP19965@denix.org>
-References: <1529451724-37869-1-git-send-email-denis@denix.org>
-	<CAJ86T=V=DamJN9Z_3bD+hBShoDwGkmA1c-HBR8XaHscmyzLA6Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJ86T=V=DamJN9Z_3bD+hBShoDwGkmA1c-HBR8XaHscmyzLA6Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] devmem2: ensure word is 32-bit, add support for 64-bit double
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Jun 2018 19:18:24 -0400
+Message-Id: <1529536704-42697-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH v2] devmem2: ensure word is 32-bit, add support for 64-bit long
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,134 +38,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2018 22:34:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Jun 2018 23:18:26 -0000
 
-On Tue, Jun 19, 2018 at 05:58:29PM -0700, Andre McCurdy wrote:
-> On Tue, Jun 19, 2018 at 4:42 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > Since sizeof(unsigned long) can be 8-byte on 64-bit architectures, use
-> > uint32_t instead for "word" access to always be 4-byte/32-bit long.
-> >
-> > Also introduce proper "double" 8-byte/64-bit access by using uint64_t.
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  meta-oe/recipes-support/devmem2/devmem2.bb         |  4 +-
-> >  ...sure-word-is-32-bit-and-add-support-for-6.patch | 70 ++++++++++++++++++++++
-> >  2 files changed, 73 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-> >
-> > diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > index c86eb2e..9bd1eb7 100644
-> > --- a/meta-oe/recipes-support/devmem2/devmem2.bb
-> > +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > @@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf9862
-> >  PR = "r7"
-> >
-> >  SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
-> > -           file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
-> > +           file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
-> > +           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch"
-> > +
-> >  S = "${WORKDIR}"
-> >
-> >  CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
-> > diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-> > new file mode 100644
-> > index 0000000..ad8ae67
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-> > @@ -0,0 +1,70 @@
-> > +From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
-> > +From: Denys Dmytriyenko <denys@ti.com>
-> > +Date: Tue, 29 May 2018 16:55:42 -0400
-> > +Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-bit
-> > + double
-> > +
-> > +Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > +---
-> > + devmem2.c | 23 +++++++++++++++++------
-> > + 1 file changed, 17 insertions(+), 6 deletions(-)
-> > +
-> > +diff --git a/devmem2.c b/devmem2.c
-> > +index 5845381..68131b2 100644
-> > +--- a/devmem2.c
-> > ++++ b/devmem2.c
-> > +@@ -39,6 +39,7 @@
-> > +
-> > + #include <stdio.h>
-> > + #include <stdlib.h>
-> > ++#include <stdint.h>
-> > + #include <unistd.h>
-> > + #include <string.h>
-> > + #include <errno.h>
-> > +@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
-> > +       if(argc < 2) {
-> > +               fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-> > +                       "\taddress : memory address to act upon\n"
-> > +-                      "\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
-> > ++                      "\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [d]ouble\n"
-> 
-> The busybox version of devmem (which seems to be the "upstream" for
-> devmem development activity, such as it is) has already picked "l" as
-> the command line option for 64bit values.
+From: Denys Dmytriyenko <denys@ti.com>
 
-Hmm, busybox now does devmem? "who would have thunk it" :)
-Still not upstream though...
-I don't mind changing it to "l" (long?) to match busybox - will send v2.
+Since sizeof(unsigned long) can be 8-byte on 64-bit architectures, use
+uint32_t instead for "word" access to always be 4-byte/32-bit long.
 
+Also introduce proper "long" 8-byte/64-bit access by using uint64_t.
 
-> > +                       "\tdata    : data to be written\n\n",
-> > +                       argv[0]);
-> > +               exit(1);
-> > +@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
-> > +                       read_result = *((unsigned short *) virt_addr);
-> > +                       break;
-> > +               case 'w':
-> > +-                      data_size = sizeof(unsigned long);
-> > ++                      data_size = sizeof(uint32_t);
-> > +                       virt_addr = fixup_addr(virt_addr, data_size);
-> > +-                      read_result = *((unsigned long *) virt_addr);
-> > ++                      read_result = *((uint32_t *) virt_addr);
-> > ++                      break;
-> > ++              case 'd':
-> > ++                      data_size = sizeof(uint64_t);
-> > ++                      virt_addr = fixup_addr(virt_addr, data_size);
-> > ++                      read_result = *((uint64_t *) virt_addr);
-> > +                       break;
-> > +               default:
-> > +                       fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-> > +@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
-> > +                               read_result = *((unsigned short *) virt_addr);
-> > +                               break;
-> > +                       case 'w':
-> > +-                              virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
-> > +-                              *((unsigned long *) virt_addr) = write_val;
-> > +-                              read_result = *((unsigned long *) virt_addr);
-> > ++                              virt_addr = fixup_addr(virt_addr, sizeof(uint32_t));
-> > ++                              *((uint32_t *) virt_addr) = write_val;
-> > ++                              read_result = *((uint32_t *) virt_addr);
-> > ++                              break;
-> > ++                      case 'd':
-> > ++                              virt_addr = fixup_addr(virt_addr, sizeof(uint64_t));
-> > ++                              *((uint64_t *) virt_addr) = write_val;
-> > ++                              read_result = *((uint64_t *) virt_addr);
-> > +                               break;
-> > +               }
-> > +               sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
-> > +--
-> > +2.7.4
-> > +
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+v2 - change 64-bit name from "double" to "long" to match busybox
+
+ meta-oe/recipes-support/devmem2/devmem2.bb         |  4 +-
+ ...sure-word-is-32-bit-and-add-support-for-6.patch | 70 ++++++++++++++++++++++
+ 2 files changed, 73 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
+
+diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
+index c86eb2e..9bd1eb7 100644
+--- a/meta-oe/recipes-support/devmem2/devmem2.bb
++++ b/meta-oe/recipes-support/devmem2/devmem2.bb
+@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf9862
+ PR = "r7"
+ 
+ SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
+-           file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
++           file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
++           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch"
++
+ S = "${WORKDIR}"
+ 
+ CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
+diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
+new file mode 100644
+index 0000000..2a57f29
+--- /dev/null
++++ b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
+@@ -0,0 +1,70 @@
++From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
++From: Denys Dmytriyenko <denys@ti.com>
++Date: Tue, 29 May 2018 16:55:42 -0400
++Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-bit
++ long
++
++Signed-off-by: Denys Dmytriyenko <denys@ti.com>
++---
++ devmem2.c | 23 +++++++++++++++++------
++ 1 file changed, 17 insertions(+), 6 deletions(-)
++
++diff --git a/devmem2.c b/devmem2.c
++index 5845381..68131b2 100644
++--- a/devmem2.c
+++++ b/devmem2.c
++@@ -39,6 +39,7 @@
++ 
++ #include <stdio.h>
++ #include <stdlib.h>
+++#include <stdint.h>
++ #include <unistd.h>
++ #include <string.h>
++ #include <errno.h>
++@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
++ 	if(argc < 2) {
++ 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
++ 			"\taddress : memory address to act upon\n"
++-			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
+++			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [l]ong\n"
++ 			"\tdata    : data to be written\n\n",
++ 			argv[0]);
++ 		exit(1);
++@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
++ 			read_result = *((unsigned short *) virt_addr);
++ 			break;
++ 		case 'w':
++-			data_size = sizeof(unsigned long);
+++			data_size = sizeof(uint32_t);
++ 			virt_addr = fixup_addr(virt_addr, data_size);
++-			read_result = *((unsigned long *) virt_addr);
+++			read_result = *((uint32_t *) virt_addr);
+++			break;
+++		case 'l':
+++			data_size = sizeof(uint64_t);
+++			virt_addr = fixup_addr(virt_addr, data_size);
+++			read_result = *((uint64_t *) virt_addr);
++ 			break;
++ 		default:
++ 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
++@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
++ 				read_result = *((unsigned short *) virt_addr);
++ 				break;
++ 			case 'w':
++-				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
++-				*((unsigned long *) virt_addr) = write_val;
++-				read_result = *((unsigned long *) virt_addr);
+++				virt_addr = fixup_addr(virt_addr, sizeof(uint32_t));
+++				*((uint32_t *) virt_addr) = write_val;
+++				read_result = *((uint32_t *) virt_addr);
+++				break;
+++			case 'l':
+++				virt_addr = fixup_addr(virt_addr, sizeof(uint64_t));
+++				*((uint64_t *) virt_addr) = write_val;
+++				read_result = *((uint64_t *) virt_addr);
++ 				break;
++ 		}
++ 		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
++-- 
++2.7.4
++
+-- 
+2.7.4
+
 
