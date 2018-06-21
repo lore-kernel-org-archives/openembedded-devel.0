@@ -1,31 +1,55 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id B9F1678375
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AFF76FEFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jun 2018 23:18:25 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9EE6E20BD9;
-	Wed, 20 Jun 2018 23:18:26 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id FOdOPeasTg0m; Wed, 20 Jun 2018 23:18:26 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 74DF12017D;
-	Wed, 20 Jun 2018 23:18:25 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id F39DA1634C3;
-	Wed, 20 Jun 2018 19:18:24 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jun 2018 19:18:24 -0400
-Message-Id: <1529536704-42697-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH v2] devmem2: ensure word is 32-bit, add support for 64-bit long
+	Thu, 21 Jun 2018 05:14:50 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id r24-v6so1843191ioh.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jun 2018 22:14:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=vTV44AhnRvEOMoIiPN7S4RXlbbNSUQVUhEWwQJyIFpM=;
+	b=uJTtgSjG4yjVntIPra+uGpOAs8Rj/krcqOpg5m6X32Sxx0fN6vEixnMaHWsH6kq/1P
+	qX+nIIpnaPHmfHK/o+qEmWrTI7FzsWQPtz8DKhPipoqCaWdwlYPDYR1QzReBPHTkHb8a
+	G6LQeDPcR37IJHq9DNusdaA2nc24jPsOOSDUTTsxX7ElmGW9g6OFSVaEc1R2ssCGloVH
+	Iu/zXKUWSI5X5NoCKBAfSsGgUR6zJF8USQTkdlW23YTx3plJj8jWvg9UVQewBfqfQQyA
+	Ku3oUerexwrYDg5E7LD0Bx2srXeGr0IX79KCcPce8nq3quUHCtePW/ltJQNcAYnYMJWC
+	yWsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=vTV44AhnRvEOMoIiPN7S4RXlbbNSUQVUhEWwQJyIFpM=;
+	b=dIUvKOFx7TCRYDpTVyJYm+BiagoDROwsrjS5fLxP3mkmF4uJQeQT9VfxMzvfWnRTk5
+	R8R2P3W1y7yk7AI8KJ8EACDKYc22onbRAKwS4ZUt6UecaFhz0deFcBc3qN0WkeaRRHYo
+	g3dgFbryATwD/WTe6J19sTzzqopxjOZTCS3lRPir0kvtzZB8HZeXJhDiK5ddKUT/U8/G
+	x8BsE9QfsTLbQ/s4Le4D747xn6bCxFOQ3OI/bthUW6ZW7uGFSKJaf9nEZB984VT38W1z
+	W1p4b7a0GM2WjsZFb6FkrcdGgcY6Mr4YScc/W7vy+ZDCXYCNJyz+7WDbrkmZc5Z9TAMx
+	OZ7g==
+X-Gm-Message-State: APt69E3t6hMse/tVrMBWERQEFZTFY7y16O7kL+mDWUZ+taLS0HMLUh9l
+	cRv+Me5r94ypeMRZYrk1qvHQDbxdKLlKSMZSJgc=
+X-Google-Smtp-Source: ADUXVKJZ6W+HtnriiAb83bgUbmonNUjKRTZjTb2W+5Ked8dVruFJt7IlleYIzANeqXKm1mvies5MTAy1Dqy43Koe4mI=
+X-Received: by 2002:a6b:1ad1:: with SMTP id
+	a200-v6mr18269589ioa.139.1529558091452; 
+	Wed, 20 Jun 2018 22:14:51 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a6b:88d0:0:0:0:0:0 with HTTP; Wed, 20 Jun 2018 22:14:50
+	-0700 (PDT)
+In-Reply-To: <20180620121927.GB3257@jama>
+References: <20180529092556.25053-1-samuli.piippo@qt.io>
+	<69a631ae-09ec-a7c0-5965-f5372ef463c7@zonque.org>
+	<CA+chaQfXaWZvyUqWSE-Zq=nSW13Jwt=GVPhXTj0dVbzVGpebww@mail.gmail.com>
+	<d2df5115-8f79-fb79-e761-919fed4cd50f@zonque.org>
+	<20180620112953.GA3257@jama>
+	<CABXoSoU8YpM1XNNDW7r=9vjhNtuJGwsT9Z+BCHvv7pBA=dy7wg@mail.gmail.com>
+	<20180620121927.GB3257@jama>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Date: Thu, 21 Jun 2018 08:14:50 +0300
+Message-ID: <CABXoSoWCCG9CmvyjfCk0BmS2uj3AHVymsBnNjFFk3=g0cA8+ow@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qt5: Update to Qt 5.11.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,116 +62,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jun 2018 23:18:26 -0000
+X-List-Received-Date: Thu, 21 Jun 2018 05:14:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Denys Dmytriyenko <denys@ti.com>
+On 20 June 2018 at 15:19, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Wed, Jun 20, 2018 at 02:57:39PM +0300, Samuli Piippo wrote:
+>> On 20 June 2018 at 14:29, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> > 3) we cannot use nobranch=1, because that breaks AUTOREV
+>>
+>> How does it break AUTOREV?
+>> We are using nobranch=1 when testing non-released Qt versions and
+>> haven't seen issues with it.
+>
+> And are you using AUTOREV? How is it supposed to know which branch to
+> track?
 
-Since sizeof(unsigned long) can be 8-byte on 64-bit architectures, use
-uint32_t instead for "word" access to always be 4-byte/32-bit long.
-
-Also introduce proper "long" 8-byte/64-bit access by using uint64_t.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
-v2 - change 64-bit name from "double" to "long" to match busybox
-
- meta-oe/recipes-support/devmem2/devmem2.bb         |  4 +-
- ...sure-word-is-32-bit-and-add-support-for-6.patch | 70 ++++++++++++++++++++++
- 2 files changed, 73 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-index c86eb2e..9bd1eb7 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf9862
- PR = "r7"
- 
- SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
--           file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
-+           file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
-+           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch"
-+
- S = "${WORKDIR}"
- 
- CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
-diff --git a/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-new file mode 100644
-index 0000000..2a57f29
---- /dev/null
-+++ b/meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
-@@ -0,0 +1,70 @@
-+From 1360a907879dd24041797a3b709d49aeac2ab444 Mon Sep 17 00:00:00 2001
-+From: Denys Dmytriyenko <denys@ti.com>
-+Date: Tue, 29 May 2018 16:55:42 -0400
-+Subject: [PATCH] devmem.c: ensure word is 32-bit and add support for 64-bit
-+ long
-+
-+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-+---
-+ devmem2.c | 23 +++++++++++++++++------
-+ 1 file changed, 17 insertions(+), 6 deletions(-)
-+
-+diff --git a/devmem2.c b/devmem2.c
-+index 5845381..68131b2 100644
-+--- a/devmem2.c
-++++ b/devmem2.c
-+@@ -39,6 +39,7 @@
-+ 
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <stdint.h>
-+ #include <unistd.h>
-+ #include <string.h>
-+ #include <errno.h>
-+@@ -69,7 +70,7 @@ int main(int argc, char **argv) {
-+ 	if(argc < 2) {
-+ 		fprintf(stderr, "\nUsage:\t%s { address } [ type [ data ] ]\n"
-+ 			"\taddress : memory address to act upon\n"
-+-			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord\n"
-++			"\ttype    : access operation type : [b]yte, [h]alfword, [w]ord, [l]ong\n"
-+ 			"\tdata    : data to be written\n\n",
-+ 			argv[0]);
-+ 		exit(1);
-+@@ -103,9 +104,14 @@ int main(int argc, char **argv) {
-+ 			read_result = *((unsigned short *) virt_addr);
-+ 			break;
-+ 		case 'w':
-+-			data_size = sizeof(unsigned long);
-++			data_size = sizeof(uint32_t);
-+ 			virt_addr = fixup_addr(virt_addr, data_size);
-+-			read_result = *((unsigned long *) virt_addr);
-++			read_result = *((uint32_t *) virt_addr);
-++			break;
-++		case 'l':
-++			data_size = sizeof(uint64_t);
-++			virt_addr = fixup_addr(virt_addr, data_size);
-++			read_result = *((uint64_t *) virt_addr);
-+ 			break;
-+ 		default:
-+ 			fprintf(stderr, "Illegal data type '%c'.\n", access_type);
-+@@ -129,9 +135,14 @@ int main(int argc, char **argv) {
-+ 				read_result = *((unsigned short *) virt_addr);
-+ 				break;
-+ 			case 'w':
-+-				virt_addr = fixup_addr(virt_addr, sizeof(unsigned long));
-+-				*((unsigned long *) virt_addr) = write_val;
-+-				read_result = *((unsigned long *) virt_addr);
-++				virt_addr = fixup_addr(virt_addr, sizeof(uint32_t));
-++				*((uint32_t *) virt_addr) = write_val;
-++				read_result = *((uint32_t *) virt_addr);
-++				break;
-++			case 'l':
-++				virt_addr = fixup_addr(virt_addr, sizeof(uint64_t));
-++				*((uint64_t *) virt_addr) = write_val;
-++				read_result = *((uint64_t *) virt_addr);
-+ 				break;
-+ 		}
-+ 		sprintf(fmt_str, "Write at address 0x%%08lX (%%p): 0x%%0%dlX, "
-+-- 
-+2.7.4
-+
--- 
-2.7.4
-
+Had to test this myself and I still don't see problem here.
+As long as there still is "branch=${QT_MODULE_BRANCH}" in the URI,
+nobranch=1 doesn't seem to make difference for AUTOREV.
+It only stops the SHA1 validation, when you do have SHA1 in SRCREV.
 
