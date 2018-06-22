@@ -1,47 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4566C7477C
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DB1E17477C
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 22 Jun 2018 17:55:19 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id c10-v6so3284999pgu.9
+Received: by mail-pl0-f66.google.com with SMTP id s24-v6so3837518plq.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2018 10:55:20 -0700 (PDT)
+	Fri, 22 Jun 2018 10:55:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=kmb/rvdBqtsBQ/5vNte6OEAfJ0nUw1kOJgg9KjELcow=;
-	b=NPiORQQ3g7bhNQQ1Hnzp8ezWCN1GzVJAC5GhsW+0SupXLw/11yQZbMO36qBaIXPOeG
-	XKLs8u43sA85k0z91L6jUhzTbe/65r2AnOgcqC3rc9H1AimJCmJVjyG9i5J7eYT2r0Sy
-	5mzoRtQVwpBh6huNWoiWp+PP1Lgj0ZdqzuxysXNSXQu3cldlWBRtscCWknn//J+DanTC
-	sAyrVa9aHoHaLj2KDLkyCXxOgiCit4x5Mex8SzKJ/xIABYjDpKG4xqpoMk10f0s6o60w
-	XNcAGNYoqPVfwRCJnVCUBwxXcEyC3TkEqdj1iJE291E8q06jS7n56vTQJtWnXWw9Woxl
-	jmIg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=fVoqnR2xOKUd9fMm5JXK0Tw88nGHL+lJRt+SIsWmof8=;
+	b=FNeduMOKv/ufQPZ9ttQxdRSgZBqI9wi8ig9rLo8flfG5uz6Lvsh9VhxiXqlMFq8qCi
+	0h0wJeWQeqpaR/swXHspQ70ZJbscPvuZcoDuOIfZLXcWgL9pPl2i35VKXXjIZynHLYd6
+	fRCpN6/WoIUM/sgRikOd756RIX36hi52zPocrcqXoqrkxyFclWgHdumsT5DGZ+wvsr4j
+	R6L4ItZ2hxxBzH+baIAgXP9E/NjQn6BLuG17rdLRpDGU7mfFIy3ajm3a4mzSWp+wSKUS
+	ji8E4OJ+JTV/mgpo3Ltc2lCjJm7hJ0LidLm5Ci8YQf94lx25SFbQuZ8BG0vfRcuG7qEW
+	ImlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kmb/rvdBqtsBQ/5vNte6OEAfJ0nUw1kOJgg9KjELcow=;
-	b=O+z6NBawg+nCkpW6MhkZNXEBtmFMx75Gfw/Le66VpH2LBWGX87JnApp9VCJ3Ed9dJb
-	QRNTNu3aWT+PzlTVX8tYsZKq91JmVj/dwHVTiLjndKN6nWRxouTrUkRRCBe/iTTSGL1d
-	pIaRwQqG3SbGePpEGrLDAFzt86OsKEDlaL3Ybtmp1mQ4apJLGnCFgFtzUrNw0VhF7DnY
-	Z8NAl8PAhty0eHbA8nJaZUz9h/+BgTuHFgd/HgvY/BauciYgaemONeaPVoiiAPKD1byy
-	tBumMYzm5Wwc+OUWqs9BipdmRvPJBICxSvy45pzn1YCoJi7SBaUOLoYhCy+/nAlLkOVx
-	S5xQ==
-X-Gm-Message-State: APt69E1n/5ZTodiVlMIyPJ6Srs3KTn/9Fv5rUzpuuvjMUVBIyXB8mS8u
-	v+cEgMujHIIx9SIZ7bCfiw5ksA==
-X-Google-Smtp-Source: ADUXVKJbIh8Qo0AsOFt7/8sNg9gsBXtNVDWxLwfZbp4JJ8Qr7MgmISoqbHMMC4Tp1dHQip1eJcw7jA==
-X-Received: by 2002:a63:6092:: with SMTP id
-	u140-v6mr2275258pgb.433.1529690119624; 
-	Fri, 22 Jun 2018 10:55:19 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=fVoqnR2xOKUd9fMm5JXK0Tw88nGHL+lJRt+SIsWmof8=;
+	b=rGe9Ucql4UwHUOFIci9MVoQNTrGpCXab1yqow49lMxWKW9fhfsUhKfjlvXUsRDJefQ
+	K8blapxHgKtaTDIw0TAcbERLrfXsNPX5VWZN6XIp7zZ3Irv614znpFItQZ2Dx3Ka+5Vf
+	Q6kxR9nv7or0orlphSWn158vVYLJup7cBB9l6Nvj11xEbZHWco4K46tmkbY4y2dPA/v9
+	AK0QKlh6jzq5KY3EHSMOlD/a5NcU7S5noW8tIFPiMZLPNx/2TlIJnbUie/rXJqFEf+sr
+	XuYxcovwAftCigiyMowsKvOr/o6mu6ywz5PK05cpt6WZ5Hkpem2APMlV71H7NyhSYp+K
+	ixJw==
+X-Gm-Message-State: APt69E0PGn9A3O78ShO8Q+tCQ1sTQL94KBdpWAEis1i0+GvsEbca+1z+
+	XL7riG6pb6FeO9gRCFkRJlEPqA==
+X-Google-Smtp-Source: ADUXVKK6YYB9dLQ+bFmv73RhXU1rLFDtJVzql+tl6r5HG7fhExkzU0u4CEIF/kDxDISx2ZrF2U7xWA==
+X-Received: by 2002:a17:902:7688:: with SMTP id
+	m8-v6mr2683931pll.54.1529690120375; 
+	Fri, 22 Jun 2018 10:55:20 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::91a0])
 	by smtp.gmail.com with ESMTPSA id
-	n83-v6sm23758992pfi.147.2018.06.22.10.55.18
+	n83-v6sm23758992pfi.147.2018.06.22.10.55.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Fri, 22 Jun 2018 10:55:19 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jun 2018 10:55:17 -0700
-Message-Id: <20180622175521.21628-1-raj.khem@gmail.com>
+Date: Fri, 22 Jun 2018 10:55:18 -0700
+Message-Id: <20180622175521.21628-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
-Subject: [meta-oe][PATCH 1/5] upm: Upgrade to latest and fix build with musl
+In-Reply-To: <20180622175521.21628-1-raj.khem@gmail.com>
+References: <20180622175521.21628-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/5] libhugetlbfs: Fix build on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,85 +58,293 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2018 17:55:19 -0000
+X-List-Received-Date: Fri, 22 Jun 2018 17:55:20 -0000
+
+needs more runtime testing
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...lude-sys-types.h-for-uint-definition.patch | 33 +++++++++++++++++++
- meta-oe/recipes-extended/upm/upm_git.bb       | 11 +++----
- 2 files changed, 38 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-extended/upm/upm/0001-include-sys-types.h-for-uint-definition.patch
+ .../0001-include-stddef.h-for-ptrdiff_t.patch | 25 ++++++++++
+ .../0002-Mark-glibc-specific-code-so.patch    | 39 +++++++++++++++
+ ...sconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch | 49 +++++++++++++++++++
+ ...shm.c-Mark-glibc-specific-changes-so.patch | 30 ++++++++++++
+ .../0005-Include-dirent.h-for-ino_t.patch     | 28 +++++++++++
+ .../0006-include-limits.h-for-PATH_MAX.patch  | 42 ++++++++++++++++
+ .../libhugetlbfs/libhugetlbfs_git.bb          |  6 +++
+ 7 files changed, 219 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+ create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch
 
-diff --git a/meta-oe/recipes-extended/upm/upm/0001-include-sys-types.h-for-uint-definition.patch b/meta-oe/recipes-extended/upm/upm/0001-include-sys-types.h-for-uint-definition.patch
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch
 new file mode 100644
-index 0000000000..a0a47411d7
+index 0000000000..bae90b4edc
 --- /dev/null
-+++ b/meta-oe/recipes-extended/upm/upm/0001-include-sys-types.h-for-uint-definition.patch
-@@ -0,0 +1,33 @@
-+From 48a580bd402cf6a3ee9e42013653219bfeb3caf6 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-include-stddef.h-for-ptrdiff_t.patch
+@@ -0,0 +1,25 @@
++From d3c2187716a0a1f9359a869ca383c129603554d9 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 21 Jun 2018 18:39:16 -0700
-+Subject: [PATCH] include sys/types.h for uint definition
-+
-+uint is defined in sys/types.h, therefore this
-+header needs to be included, it gets exposed with
-+musl where this header is not getting included indirectly
-+as it is happening when building on glibc
-+
-+Fixes build errors on musl e.g.
-+upm/src/kx122/kx122.hpp:456:31: error: 'uint' has not been declared
-+|        void setBufferThreshold(uint samples);
-+|                                ^~~~
++Date: Thu, 21 Jun 2018 19:25:57 -0700
++Subject: [PATCH 1/6] include stddef.h for ptrdiff_t
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+Upstream-Status: Submitted [https://github.com/intel-iot-devkit/upm/pull/656]
-+ src/kx122/kx122.h | 1 +
++ morecore.c | 1 +
 + 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/kx122/kx122.h b/src/kx122/kx122.h
-+index 1622ed50..56e5215e 100644
-+--- a/src/kx122/kx122.h
-++++ b/src/kx122/kx122.h
-+@@ -31,6 +31,7 @@ extern "C"{
-+ #include <assert.h>
-+ #include <unistd.h>
-+ #include <math.h>
-++#include <sys/types.h>
++diff --git a/morecore.c b/morecore.c
++index 62ad252..c5981d2 100644
++--- a/morecore.c
+++++ b/morecore.c
++@@ -19,6 +19,7 @@
 + 
-+ #include <mraa/i2c.h>
-+ #include <mraa/spi.h>
-diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
-index 478aa0db1d..babe5f4893 100644
---- a/meta-oe/recipes-extended/upm/upm_git.bb
-+++ b/meta-oe/recipes-extended/upm/upm_git.bb
-@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
++ #define _GNU_SOURCE
++ 
+++#include <stddef.h>
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <malloc.h>
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch
+new file mode 100644
+index 0000000000..4354d78615
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0002-Mark-glibc-specific-code-so.patch
+@@ -0,0 +1,39 @@
++From b72bf6a81fa879f32a074fe53776fc8291c83b6f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 21 Jun 2018 19:32:59 -0700
++Subject: [PATCH 2/6] Mark glibc specific code so
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ morecore.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/morecore.c b/morecore.c
++index c5981d2..ec9fafa 100644
++--- a/morecore.c
+++++ b/morecore.c
++@@ -347,6 +347,7 @@ void hugetlbfs_setup_morecore(void)
++ 
++ 	INFO("setup_morecore(): heapaddr = 0x%lx\n", heapaddr);
++ 
+++#ifdef __GLIBC__
++ 	heaptop = heapbase = (void *)heapaddr;
++ 	if (__hugetlb_opts.thp_morecore)
++ 		__morecore = &thp_morecore;
++@@ -354,7 +355,6 @@ void hugetlbfs_setup_morecore(void)
++ 		__morecore = &hugetlbfs_morecore;
++ 
++ 	/* Set some allocator options more appropriate for hugepages */
++-
++ 	if (__hugetlb_opts.shrink_ok)
++ 		mallopt(M_TRIM_THRESHOLD, hpage_size / 2);
++ 	else
++@@ -364,4 +364,5 @@ void hugetlbfs_setup_morecore(void)
++ 	 * This doesn't appear to prohibit malloc() from falling back
++ 	 * to mmap() if we run out of hugepages. */
++ 	mallopt(M_MMAP_MAX, 0);
+++#endif
++ }
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+new file mode 100644
+index 0000000000..f6d8a10a9a
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch
+@@ -0,0 +1,49 @@
++From 3d6ab5ea8e23f96ee6fdd915e05acd9a751dd876 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 21 Jun 2018 19:44:26 -0700
++Subject: [PATCH 3/6] alloc.c: Avoid sysconf(_SC_LEVEL2_CACHE_LINESIZE) on
++ linux
++
++musl does not have it
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ alloc.c | 15 ++++++++++++++-
++ 1 file changed, 14 insertions(+), 1 deletion(-)
++
++diff --git a/alloc.c b/alloc.c
++index bce9464..cf7eb40 100644
++--- a/alloc.c
+++++ b/alloc.c
++@@ -245,6 +245,19 @@ void free_huge_pages(void *ptr)
++ 	__free_huge_pages(ptr, 1);
++ }
++ 
+++static size_t get_cacheline_size() {
+++#if defined(__linux__)
+++	FILE * fp = fopen("/sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size", "r");
+++	unsigned int line_size = 0;
+++	if (fp) {
+++		fscanf(fp, "%d", &line_size);
+++		fclose(fp);
+++	}
+++	return line_size;
+++#else
+++	return sysconf(_SC_LEVEL2_CACHE_LINESIZE);
+++#endif
+++}
++ /*
++  * Offset the buffer using bytes wasted due to alignment to avoid using the
++  * same cache lines for the start of every buffer returned by
++@@ -261,7 +274,7 @@ void *cachecolor(void *buf, size_t len, size_t color_bytes)
++ 
++ 	/* Lookup our cacheline size once */
++ 	if (cacheline_size == 0) {
++-		cacheline_size = sysconf(_SC_LEVEL2_CACHE_LINESIZE);
+++		cacheline_size = get_cacheline_size();
++ 		linemod = time(NULL);
++ 	}
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch
+new file mode 100644
+index 0000000000..960e152939
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0004-shm.c-Mark-glibc-specific-changes-so.patch
+@@ -0,0 +1,30 @@
++From 7002dec46dae375e8aa1aa8577a5b274c02fc697 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 21 Jun 2018 19:48:04 -0700
++Subject: [PATCH 4/6] shm.c: Mark glibc specific changes so
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ shm.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/shm.c b/shm.c
++index 1f82cab..9447b63 100644
++--- a/shm.c
+++++ b/shm.c
++@@ -48,10 +48,11 @@
++  * system shmget() may be performed without worry as there is no dynamic
++  * call chain.
++  */
+++#ifdef __GLIBC__
++ extern void *dlsym (void *__restrict __handle, __const char *__restrict __name)
++ 		__attribute__((weak)) __THROW __nonnull ((2));
++ extern char *dlerror (void) __attribute__((weak)) __THROW;
++-
+++#endif
++ 
++ /* call syscall shmget through the generic syscall mechanism */
++ static int syscall_shmget(key_t key, size_t size, int shmflg)
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+new file mode 100644
+index 0000000000..543302b135
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+@@ -0,0 +1,28 @@
++From 87ed1706f426ed27fc4eeca7c3b09a4086c9a2a9 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 21 Jun 2018 19:51:02 -0700
++Subject: [PATCH 5/6] Include dirent.h for ino_t
++
++Fixes
++error: unknown type name 'ino_t'; did you mean 'int'?
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/hugetests.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/tests/hugetests.h b/tests/hugetests.h
++index 8b1d8d9..056042c 100644
++--- a/tests/hugetests.h
+++++ b/tests/hugetests.h
++@@ -22,6 +22,7 @@
++ 
++ #include <errno.h>
++ #include <string.h>
+++#include <dirent.h>
++ 
++ #include "libhugetlbfs_privutils.h"
++ #include "libhugetlbfs_testprobes.h"
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch
+new file mode 100644
+index 0000000000..35dd6e11cc
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0006-include-limits.h-for-PATH_MAX.patch
+@@ -0,0 +1,42 @@
++From 96c012ea31a2d124528f3b6f3b9857b71b059db3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 21 Jun 2018 19:58:53 -0700
++Subject: [PATCH 6/6] include limits.h for PATH_MAX
++
++Fixes
++
++error: 'PATH_MAX' undeclared
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ hugeadm.c                | 1 +
++ tests/gethugepagesizes.c | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/hugeadm.c b/hugeadm.c
++index fe4211d..8db274c 100644
++--- a/hugeadm.c
+++++ b/hugeadm.c
++@@ -33,6 +33,7 @@
++ #include <grp.h>
++ #include <pwd.h>
++ #include <fcntl.h>
+++#include <limits.h>
++ 
++ #include <sys/stat.h>
++ #include <sys/types.h>
++diff --git a/tests/gethugepagesizes.c b/tests/gethugepagesizes.c
++index 9551b38..2645e3f 100644
++--- a/tests/gethugepagesizes.c
+++++ b/tests/gethugepagesizes.c
++@@ -29,6 +29,7 @@
++ #include <fcntl.h>
++ #include <stdarg.h>
++ #include <hugetlbfs.h>
+++#include <limits.h>
++ 
++ #include "hugetests.h"
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index ee1b9d0507..14c909e758 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -19,6 +19,12 @@ SRC_URI = " \
+     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+     file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+     file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
++    file://0001-include-stddef.h-for-ptrdiff_t.patch \
++    file://0002-Mark-glibc-specific-code-so.patch \
++    file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
++    file://0004-shm.c-Mark-glibc-specific-changes-so.patch \
++    file://0005-Include-dirent.h-for-ino_t.patch \
++    file://0006-include-limits.h-for-PATH_MAX.patch \
+ "
  
- DEPENDS = "libjpeg-turbo mraa"
- 
--SRCREV = "37642f3b0194f6ddd63f1e6b5d49b8cb689d5c81"
-+SRCREV = "dc45cd78595c7c24c8a8574c63bb48b5bb99c5aa"
- PV = "1.6.0-git${SRCPV}"
- 
--SRC_URI = " \
--    git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
--    file://0001-Replace-strncpy-with-memcpy.patch \
--"
-+SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
-+           file://0001-Replace-strncpy-with-memcpy.patch \
-+           file://0001-include-sys-types.h-for-uint-definition.patch \
-+           "
- 
- S = "${WORKDIR}/git"
- 
-@@ -22,7 +22,6 @@ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
- 
- inherit distutils3-base cmake
- 
--
- # override this in local.conf to get needed bindings.
- # BINDINGS_pn-upm="python"
- # will result in only the python bindings being built/packaged.
+ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.18.0
 
