@@ -1,66 +1,54 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
-	[209.85.218.67])
-	by mail.openembedded.org (Postfix) with ESMTP id ED7AC751BF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id AB71875549
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2018 20:13:52 +0000 (UTC)
-Received: by mail-oi0-f67.google.com with SMTP id f79-v6so7217601oib.7
+	Fri, 22 Jun 2018 21:12:43 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id b77-v6so4698870vkb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2018 13:13:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=Wh4dpJvBWDnK5ak8fMKycrQ2UV41lxXBrWTTBu5gigU=;
-	b=Qfec1BDOTSZVYtkBtzLmsW4Fkm6Qdu34wBiG/fBpAwiDG8q9QFRg9tcca9ILTOl8ux
-	wz7/PZcarCnWEiVInMjTifjlx8byIQsfODWdgToYXJZLIefuqRfzu0J3pcFoE0oCZirH
-	bx7LR4lcKkmyM1ce6RLDmk9qNoHfIziSwF+qQumj3cqW+4ur/BSBG1QPjRht4AMH9yFm
-	2VVBYETWpGFmry4dV0QcywQH8CjXtBLUAWeWMVOyoUNRAptx7yglnjaZ2f0UGAC/lggM
-	RqMyHRR7NeLLdYU2iBRtqLIcrr70QaQY0cBb4TAzjSUit/EZafu78amqujZ0e5ZeaRKB
-	4GsQ==
+	Fri, 22 Jun 2018 14:12:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=+gnDHFXEG1OauwesNTNMa4pXgfkDngHqaRp91YTfY7U=;
+	b=BssPdsws/VJ04MzVUfEWheD73jo117bEt0xqBHE0fuz/Jb9LjF94R5yq1TWFNABOjZ
+	ZM6EfN8/OPRwE9zTV11lFPMi4jpTZIZW2PTnyWUPk8pVRgk3fHNLriSOWPZ1A6Hq1fgC
+	wQHu4J0w5EtfQ0WcydXcDoE5cJHhiO6h5llPyQNIzI7htjAkUmZjE45rsICfbfqidu78
+	ft5PwhFFDd3FSZg17FiCCf3B8+vkbfWc7/H7yw/C3zHF622rRMt4lczmr/LO2/QkBExu
+	HfwarhRImJyHx/8m+B6rrASOm2hb805YUU3ZTs1ID3iVlg5eXJ3KxFMhVoMyCxMAeNzF
+	a8EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=Wh4dpJvBWDnK5ak8fMKycrQ2UV41lxXBrWTTBu5gigU=;
-	b=cmHSRJxs/8CHgFhxMAOQEHz6xadcCtSYrcPOK2SrT4tDJyZnf6lSWUOZP4Dl5boqbk
-	uhF9NlQiciNr/VkpdpQnoCYgUDhdk/6rAtL3t5vvUfBHUwhW1Kz6eV1U2p6Ta/XDplRx
-	bui7xB053JztTtoZ25YXxSQyKMprgx+s6hezu01Ct3C4gi2gITmG+cqdSAYE/ZiRLRZo
-	8gVS1DCj240xw5pLKbNdUeK5fsHrO6MNJnrALFCGzy17UYXWYxxXOsSFlp+ZyVzV9h+p
-	pZ2eCiTATNuXxHtLXIGeR/L/SasKwP6FL8SIy3xZ4XIc3OAMsHMQTe4ycP9rssO0hLzO
-	nmLQ==
-X-Gm-Message-State: APt69E2Egb1mW0Nvn0GI+Afc304c+xdoxHTtqWKMqKp8c3mirKPJtfqk
-	5MX0QRvbRBXlglsQDIzZ4zjhV6Ao
-X-Google-Smtp-Source: AAOMgpd6WaKgTG/JzIXy3LPoKJLnj0vhgf2d5iA9IaLjzCWiyix1SCFZA/8pGuTJ8g9V726WHvJYMw==
-X-Received: by 2002:a54:4e10:: with SMTP id
-	a16-v6mr1750715oiy.25.1529698433301; 
-	Fri, 22 Jun 2018 13:13:53 -0700 (PDT)
-Received: from mail-oi0-f46.google.com (mail-oi0-f46.google.com.
-	[209.85.218.46]) by smtp.gmail.com with ESMTPSA id
-	a76-v6sm7295611oii.37.2018.06.22.13.13.51
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Jun 2018 13:13:52 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f46.google.com with SMTP id l22-v6so7215318oib.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jun 2018 13:13:51 -0700 (PDT)
-X-Received: by 2002:aca:3016:: with SMTP id
-	w22-v6mr1747310oiw.315.1529698431549; 
-	Fri, 22 Jun 2018 13:13:51 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=+gnDHFXEG1OauwesNTNMa4pXgfkDngHqaRp91YTfY7U=;
+	b=A0m9mBUclpztOS3AucSHtP8qij3UoYK0ZUeNL7xttmEyoEcMdAgWzYgJd+0Bf7UpFB
+	zHheZiSEJV52DVWJaVKFQBYd6DIiI9hZUU/g8r5tJtUAi6luMj824+eZ3Z3d2Qa4HIS0
+	a3j9QWm0ZZ+IEnFzUcaCTFjw5K0/Vf3dawPOGmkSXsOOwCfPorgHh41pPWMsYtdp498f
+	U7tQ2Ngno+Fa3VH5Ev/8RZS7OMe0T4veNgSZVn8Zm6AsvWmKmVGR0pwEUX7ez6RE1c46
+	94ykNsKnqZulUnYYJiAs3UlDYbrd87O6CU7lboAAgvQPFC/DGC60XIn2Fb1NDYU22NO6
+	ne0g==
+X-Gm-Message-State: APt69E0rmoTWJpt/g0h5TL6J6eS9f+VABgjBk4W+6HxAn1P66JwU8ro9
+	7lt4znDzPRMAHeBjRbw4ZTaDJ8eyykGq1cDmVv8=
+X-Google-Smtp-Source: ADUXVKLSIUzqrdtn0ApxsbbpKvSakDs/z3Yma+TEBRA2Aa4l2abOjSCeKmYTFlmumLBRz55OdYO+yNNJ9A2KmGvLcqI=
+X-Received: by 2002:a1f:a285:: with SMTP id
+	l127-v6mr1994300vke.95.1529701964400; 
+	Fri, 22 Jun 2018 14:12:44 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a9d:58c5:0:0:0:0:0 with HTTP; Fri, 22 Jun 2018 13:13:50
-	-0700 (PDT)
-In-Reply-To: <20180622185926.GB1842@jama>
-References: <20180622183246.6608-1-otavio@ossystems.com.br>
-	<20180622185926.GB1842@jama>
-Date: Fri, 22 Jun 2018 17:13:50 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKp7vvs4AvCgy730+A=eOUv4OESBn9rgNm7euFcPfS0K3w@mail.gmail.com>
-Message-ID: <CAP9ODKp7vvs4AvCgy730+A=eOUv4OESBn9rgNm7euFcPfS0K3w@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5 PATCH] README: Rework to start using GitHub for development
+References: <20180510063718.16913-1-andrew@aj.id.au>
+	<1527594494.687641.1388974752.4113AC8F@webmail.messagingengine.com>
+	<CAMKF1spm=GQQq90gu58BdrNtqPQx_fxnA01ar9Jmr4PbQnmttQ@mail.gmail.com>
+	<1527820565.499695.1392530280.7147CEB3@webmail.messagingengine.com>
+	<CAMKF1sr-k=TK-wyUtDJMUT8DK=EcS3A08jCJD-xjOD_Aw-MbQw@mail.gmail.com>
+	<1527832326.1573871.1392638136.4D3CA167@webmail.messagingengine.com>
+In-Reply-To: <1527832326.1573871.1392638136.4D3CA167@webmail.messagingengine.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 22 Jun 2018 14:12:28 -0700
+Message-ID: <CAMKF1soLpEszGdDS=on=kd82k8cDWx68jwCr6+-s9UU9zePv4A@mail.gmail.com>
+To: Andrew Jeffery <andrew@aj.id.au>
+Cc: openbmc@lists.ozlabs.org,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2 1/3] meta-python: Add python-pyflame recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,31 +61,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jun 2018 20:13:53 -0000
+X-List-Received-Date: Fri, 22 Jun 2018 21:12:43 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 22, 2018 at 3:59 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Jun 22, 2018 at 03:32:46PM -0300, Otavio Salvador wrote:
->> This changes the content so we start sending people to GitHub and
->> deprecate the OpenEmbedded-Devel mailing list as the place for patch
->> submission.
->>
->> The content has been reworked so it renders better inside GitHub and
->> provide a more structured content.
+On Thu, May 31, 2018 at 10:52 PM Andrew Jeffery <andrew@aj.id.au> wrote:
 >
-> I'm done with patchwork.
+> On Fri, 1 Jun 2018, at 14:07, Khem Raj wrote:
+> > On Thu, May 31, 2018 at 7:36 PM, Andrew Jeffery <andrew@aj.id.au> wrote=
+:
+> > > Hi Khem,
+> > >
+> > > Thanks for testing.
+> > >
+> > > On Fri, 1 Jun 2018, at 02:18, Khem Raj wrote:
+> > >> fails to build on qemumips
+> > >>
+> > >
+> > > Do I have to support MIPS for the recipe to be acceptable? Is there s=
+ome way we can limit the recipe to architectures for which the software is =
+known to work?
+> >
+> > Ideally we tend to support the core architectures and mips is one of
+> > them, so unless there is a very basic
+> > reason e.g. missing support etc. we tend to fix the problems,
 >
-> If anyone has some pending changes which I haven't merged to master-next
-> last night, then send pings or re-submit them as pull-requests. Pending
-> changes from master-next will be merged to master together with 5.11.1
-> upgrade soon.
+> Doesn't the fact that the source doesn't build indicate missing support?
 >
-> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+> I don't know what C library you were building against, but glibc for mips=
+ doesn't contain a definition for struct user_regs{,_struct} in sysdeps/uni=
+x/sysv/linux/mips/sys/user.h. It's a bit nasty, as the header very clearly =
+states that user.h is purely for gdb, but pyflame is making use of it anywa=
+y. Patch 2/3 fixes the pyflame source for 32-bit ARM, where the struct has =
+a different name, but at least it's present. I haven't investigated whether=
+ we could pull in the appropriate header from the kernel instead of libc, b=
+ut again because ARM can be made to work with relatively little effort I ha=
+dn't bothered.
+>
+> > so I would suggest to see if it can be fixed preferably
+> > if not then we should cite the reason and probably we can add mips to
+> > incompatible hosts but that is last resort
+> > once a recipe goes in it becomes a maintenance work and I would like
+> > to make it as light as possible.
+>
+> I could go down the path of working this out for mips, but fixing mips fa=
+lls outside the scope of what I was doing at the time (I'm several yaks dee=
+p here), and given the problem is external to pyflame itself I'm not terrib=
+ly motivated to fix it.
+>
+> So I feel at this point it's either blacklist mips or we leave the recipe=
+ out of tree.
+>
+> As an alternative to making mips work, can I assist with the associated m=
+aintenance hassle in some way?
+>
 
-+1
+we can add it with exclusions for mips/musl and I think we will have
+similar problems with ppc as well but I do not have test results for
+that
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+you should report this issue upstream and probably add a comment so
+we remember why it was excluded.
+
+> Cheers,
+>
+> Andrew
 
