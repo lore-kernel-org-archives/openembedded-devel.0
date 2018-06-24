@@ -1,52 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DB97774E86
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 21DA274DD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 19:19:39 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id a11-v6so5423757pff.8
+	Sun, 24 Jun 2018 19:19:40 +0000 (UTC)
+Received: by mail-pf0-f176.google.com with SMTP id c22-v6so5433747pfi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 12:19:41 -0700 (PDT)
+	Sun, 24 Jun 2018 12:19:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8yc/lwrq0hj8UcW32C03YGC+JMFpzFtqCtW+gR3A9qY=;
-	b=ompj51KnHWw+C2cChOHCTLnlfJR1U/MVTCZlSkbyVEaYIHyoW9cgIxn/15vPJmtbWK
-	lwAFsQkJ/JL2sScD510rxokPgFZ7Cjo9Wqr2+y9KBN984AgndlyowZm+dRFFP8OcAE+p
-	tqlYygtAn78Oiz5SgdZBKDqvDlzDfe+0BfbnMKGeTUGHlg93RiCrwh7S4R8qJzJtv6FO
-	feyc1UACTbtyvaAmWVBMyrBLzvgiLs0/4DyBC18NEutq30lXZUzSusWi2c04JNEHeGah
-	ftHd84UtTT39lIB2pKvZ826iGDWISkg/xO4IH8t+AAGGQ+K1qyYTwpDLJ7tkgi6pGp7/
-	Mj0Q==
+	bh=ArYWM6Zk7Lzg4L0OjWZ1Tq6wfCT9rE5M4QVfTW1zVQo=;
+	b=lfgLncEzwjKPn0kGZMlZYjrtHzq8QfQsCWps2Q9ZtUStGClaWBL9MaHNKGCGcfeLTb
+	hYtZ2hI6Q+4IX9Req8zN7LJSQzgRn+ueahLlgzGkwmvCW9dreype5Qk/4/hwR/nbVuVs
+	NnQcOoLrsu4pNMYoP7z0xp0A0gwZMtiaW49mgcmy0Uv4ktUK0II6jRKSWmJTWWU2oklf
+	8I5+DUUsesvlCpJYLtm9biI9BXHyxcWLLNFDHFUJkBS0l6Ok2Tv4MIoGVhBU0/Y76bXs
+	dWbmsR3+tRa6R4u+OsqHo4gL7XgZC90oztNCuHEbYs208Em/IrszLqbvProcwhaLuDOt
+	uGjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=8yc/lwrq0hj8UcW32C03YGC+JMFpzFtqCtW+gR3A9qY=;
-	b=MHAX0InSghWYT+g1aZWGNsjJbdz88reoI18c7E6GT/oLCe7hOnTt+1w4GWyLteNI1Q
-	J8DQ0TlUHMazcINB9CWQQm+G6vWMJKh1dTDEg592IbvIfO+B1Atc4q1SSubFgb5cBCdI
-	o07qlkc4sIfiKXQrk9fDxr3SiSx4O5DvY7D+S2okw4nh1u2Mesec/Ytal9w5FAPssWRP
-	AaA6ZcoqDpYoT9baJOWj0ajlHt5OXm76yVN0ipFxy9nkhuzFjaheeCpLxePAZwE8+TKI
-	2sn15Km9iOcgLTafrmGvXRHGTF8RE1W+dtajRK+RZgotU54mB7eL9fZIyxWhvrzldfIp
-	yLTw==
-X-Gm-Message-State: APt69E2x0s9Nk2e53nshYstZDsSQd3yx+wFlf9n5OYL18wdIcnprwukG
-	jDHmw3vr0aYDDVG/77rBJSTymw==
-X-Google-Smtp-Source: ADUXVKItcdXHJxPN+W3N3cFxPuAIxpYg0TFgvKGIsmrVDrnVoFLo1D3EjHRf1kGv9l8uN+Q24cIBGA==
-X-Received: by 2002:a65:63cd:: with SMTP id
-	n13-v6mr3549221pgv.185.1529867980767; 
-	Sun, 24 Jun 2018 12:19:40 -0700 (PDT)
+	bh=ArYWM6Zk7Lzg4L0OjWZ1Tq6wfCT9rE5M4QVfTW1zVQo=;
+	b=VL3grxSHXPV4u74UnsDvP26hQ4cwymdRLjRBEHDskdblFamAVex/qkS10m88Nru7yf
+	QqKg9tK20+FiumpXy9Uaf4mr1DBlCtq50wJb1ZPXaAjf87kOc4zi0fLuWx8leW2MpZ17
+	U3eZrYYoNL9niQTADrc1oiMl7igTIJcMZYIP3SL+K2D78N4ImlEtRugqhC9KqRotQRvW
+	rLmBkQH9jP8zJImt0GMTXVOiNTNeJpsD1J3Q4rZnyHIPEeoUY4kgEqP+ScATeLfS3HI+
+	NwajmPBNGlQrJGaIWY5zI5hf7Pg6KrydTX5wib7bcgO6eKv7rM6/mWxfbsGPN1/kUWE0
+	38RQ==
+X-Gm-Message-State: APt69E3eF5kU8hq+4dOvAlfF1lNd+/7ztGj99xWCyGZJCHPiPFxi7xWE
+	RIFRnQUyilKzc2ZagjMx5KsoSA==
+X-Google-Smtp-Source: ADUXVKK3YpKtfbi8n/iVF59nxKUEhjbjW4VM+0wm41pK7RIXkhsLHovR4trA2DboxaRXTHfW+D8UHQ==
+X-Received: by 2002:a62:c918:: with SMTP id
+	k24-v6mr10139001pfg.160.1529867981791; 
+	Sun, 24 Jun 2018 12:19:41 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::91a0])
 	by smtp.gmail.com with ESMTPSA id
-	m11-v6sm36700461pfj.25.2018.06.24.12.19.39
+	m11-v6sm36700461pfj.25.2018.06.24.12.19.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Jun 2018 12:19:39 -0700 (PDT)
+	Sun, 24 Jun 2018 12:19:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Jun 2018 12:18:36 -0700
-Message-Id: <20180624191845.31082-11-raj.khem@gmail.com>
+Date: Sun, 24 Jun 2018 12:18:37 -0700
+Message-Id: <20180624191845.31082-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180624191845.31082-1-raj.khem@gmail.com>
 References: <20180624191845.31082-1-raj.khem@gmail.com>
-Cc: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-Subject: [meta-python][PATCH 11/20] python-cryptography: 2.1.4 -> 2.2
+Subject: [meta-networking][PATCH 12/20] geoip-perl: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,60 +58,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2018 19:19:40 -0000
+X-List-Received-Date: Sun, 24 Jun 2018 19:19:41 -0000
 
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-Upgrade python-cryptography from 2.1.4 to 2.2.
-
-here is the change in LICENSE file thats resulting in checksums changes
-
--from the same in CPython itself, and is licensed under the terms of the PSF
--License Agreement.
-+from CPython, and is licensed under the terms of the PSF License Agreement.
-
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-cryptography.inc | 6 +++---
- ...hon-cryptography_2.1.4.bb => python-cryptography_2.2.bb} | 0
- ...n3-cryptography_2.1.4.bb => python3-cryptography_2.2.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cryptography_2.1.4.bb => python-cryptography_2.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cryptography_2.1.4.bb => python3-cryptography_2.2.bb} (100%)
+ meta-networking/recipes-support/geoip/geoip-perl_1.51.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
-index 13d2ba800d..cdc8185c92 100644
---- a/meta-python/recipes-devtools/python/python-cryptography.inc
-+++ b/meta-python/recipes-devtools/python/python-cryptography.inc
-@@ -1,7 +1,7 @@
- SUMMARY = "Provides cryptographic recipes and primitives to python developers"
- HOMEPAGE = "https://cryptography.io/"
- LICENSE = "Apache-2.0 | BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d5ede125ed08d4fd14ec44d334bdb388"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=097f805837700cfac572ac274cd38124"
+diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb b/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+index ed5c3a9799..bd37ce5005 100644
+--- a/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
++++ b/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+@@ -9,6 +9,8 @@ SECTION = "libdevel"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e4f3ea6e9b28af88dc0321190a1f8250"
  
- DEPENDS += " \
-     ${PYTHON_PN}-cffi \
-@@ -10,8 +10,8 @@ DEPENDS += " \
-     ${PYTHON_PN}-six \
- "
- 
--SRC_URI[md5sum] = "9f39d4d8f2b05f295fa0ff52475ec4f2"
--SRC_URI[sha256sum] = "e4d967371c5b6b2e67855066471d844c5d52d210c36c28d49a8507b96e2c5291"
-+SRC_URI[md5sum] = "c49c1ee145a900313a216fa2c788208c"
-+SRC_URI[sha256sum] = "f5a0279e362c37e2150a32fe35ec20226e9237b6c9927fce8d53ef8e49e64f48"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-cffi \
-diff --git a/meta-python/recipes-devtools/python/python-cryptography_2.1.4.bb b/meta-python/recipes-devtools/python/python-cryptography_2.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cryptography_2.1.4.bb
-rename to meta-python/recipes-devtools/python/python-cryptography_2.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cryptography_2.1.4.bb
-rename to meta-python/recipes-devtools/python/python3-cryptography_2.2.bb
++UPSTREAM_CHECK_URI = "https://github.com/maxmind/geoip-api-perl/tags"
++
+ S = "${WORKDIR}/git"
+ SRCREV = "4cdfdc38eca237c19c22a8b90490446ce6d970fa"
+ SRC_URI = "git://github.com/maxmind/geoip-api-perl.git;protocol=https; \
 -- 
 2.18.0
 
