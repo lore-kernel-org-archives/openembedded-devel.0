@@ -1,47 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 01BB3751C6
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C0756FFFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 00:31:55 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id x4-v6so5923339vkx.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jun 2018 17:31:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=CY/bPaO6lLNKcyXqpKWUaoc9be7ZabZ380lTsbbezJg=;
-	b=cxtVKzNDFjPULgktC2RVOUgz0cAw3UokHJraDaZ3clM9x1Pv/bJ3n+wg+HxQ/U1wK4
-	mWWt734aBMzFkBQDsYj37Q7YCYjUIUgqFiyVlIvkBTtBQOQ3k+vzL6MRKpAznxomZ3aP
-	vm3+fq1Uq0bNbbKJfD8Owsh4Jv5kiI56YLJCIJrDHLopEZn78QTnlB8RDWOvHpUiupLk
-	vzSKUNyGxa8j2T6Yaxq8Noi8hjtRnhi17K2Ha4jHVZLbSWQeKCrcCwY8JWebfO+FAOry
-	3LmpEkXoefrEoTopu5+9c6egg0veiUcXakSJDUIuM9CX2NZApIP+ErGZudeVu9K8Lgp8
-	eJAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=CY/bPaO6lLNKcyXqpKWUaoc9be7ZabZ380lTsbbezJg=;
-	b=tw+vonXZRbOttDG3zPoxM0BbmUloHXzsp9fzy+kTPbyp2mTjvnjpDdq0Ywn88PIWDY
-	k1moaoH1TCy3slFTHa7AANkoVsqYU7qnfSZnrEyCBnUPdlwI0/60ShKeuwO4Q5pafnHY
-	lAh97X9/7JrGyy40QhBm0V69f1hk0kSSMHZvMHh5tDRZCrq7qbQqjPV1hK2S8Ov8sdz1
-	iCEYnT3YrRkp4okL+/aSyUT2tBDHg8GDwjwNiKi5OvTuqX4UdDaFBEl9Yu2gW3w3vSLA
-	TeowWHhVA1G8OwF0tuTGSau9XACQ1mxV1Xw0arMYWjZvamGV8jXIcTaaLbhfwrZvbj8Y
-	0UEQ==
-X-Gm-Message-State: APt69E3WpwuifFrUzGWMjAn4kYO5gO48I/JDjuq9N3q4x2ZdXVOLFTPb
-	31kZcADo9nxT7DdHDtzQz9NRGbIVsl43tQmJuVQ=
-X-Google-Smtp-Source: ADUXVKJMBNkptBxw8MsuvHbXGiGV7uNGLB4nE9jV1D43fuHF6fi9vrliB9hOeb6b8fITqo3u6GHXMLueWggDYtrRDjs=
-X-Received: by 2002:a1f:1e10:: with SMTP id
-	e16-v6mr4380956vke.176.1529800316475; 
-	Sat, 23 Jun 2018 17:31:56 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180623235626.228940-1-joe.slater@windriver.com>
-In-Reply-To: <20180623235626.228940-1-joe.slater@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 23 Jun 2018 17:31:15 -0700
-Message-ID: <CAMKF1sqObyS4hW4hLGA=TynF+A5TSYZZvRshtMg4wDzfvdz9ng@mail.gmail.com>
-To: "Slater, Joseph" <joe.slater@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH 1/1] metacity: allow for warnings during compilation
+	Sun, 24 Jun 2018 11:49:43 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1fX3UQ-0008AI-I1 for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jun 2018 13:47:30 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 24 Jun 2018 13:49:35 +0200
+Message-ID: <pgo0cb$u52$1@blaine.gmane.org>
+References: <000601d40a1b$3af95300$b0ebf900$@freenet.de>
+	<2ff043cb-2706-4e1e-82f7-54c8347769ca@skidata.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.8.0
+Openpgp: preference=signencrypt
+Autocrypt: addr=koen@dominion.thruhere.net; keydata=
+	xsDiBEIE+IMRBAD9QYy9UMeJ4dIYQFTAYXRpzMQxTh1Tn7EeXVgi1A1LQps6g2F2Opg0gkuS
+	pFsAnJWaEYphhIg5CuyDDk1AYH/PUiQp7oma/hlYoLoKe5nuQ3AY8DJnmA81IQmKQQRnE1t8
+	lLja6kzx8RiCybKS19PCAitIzzQXst9ioRoyAE/fZwCgvdgJ52+LLgonoD7/xz50DNBr8YsD
+	/AivFTC9QXeXxlw8fWWwlJXeuUXB+qDWqo4oE516uOk+SpsAzxr0AZxlNyONEjQ3xGW0CO2x
+	s3lvdWuD/r6yGIpJDionAd6SA5GeRATtPJ3F+9JYHKbqESiyDpQCZmN9/8a8zk0mWmg0DjwR
+	7yyOdvslAph0egv4Nd/ki/QqJMJkBADDTIpwtuPnSP8Sk374+e5jxLJJvhycD2WumPOtICTb
+	P9SnMPlc2uW0QyIZnecegqaOVPEMwSOmldX2cqOAewpsOT1WgSnv/rkFcBkNWimJornmno5D
+	NTNDNc9fxu3E4vC/qR9RZf89/13KMWtHQXTqvqPo+5xZ49iAItW+HC8v7M0qS29lbiBLb29p
+	IDxrb2VuQGRvbWluaW9uLmthYmVsLnV0d2VudGUubmw+wl4EExECAB4FAkIE+IMCGwMGCwkI
+	BwMCAxUCAwMWAgECHgECF4AACgkQMkyGM64RGpFGUgCfbw0AIjgkNEvdSbt3z1y89FsEakQA
+	njMQZ6q/tkf2bvmYEG+x9SOeIarIzsBNBEIE+IMQBAD023653MUqxrPwp7RDMi/fHPKcZq+7
+	N1fUhaDfVo3i+f5mgEzJPRRhGQRMncgtB2Hs9DP2HOM9RcoGnjnNRzMpUSMA60xf25MkKjeR
+	6iZWkHIU3ifUfVfFWC6zcSLQ25cFRhWoT9jE2u2czdkpHPBMMpnNqjfgoZA8Uaw3HY2lEwAD
+	BQP/RG8IFRtaRN2DsSrcWHVx/oO1TN7yeYStC0e/MDA89MLznxG6V4fhVdeiPMep3xVZmdTf
+	ASPId6sXPMhHn5aGi8rtmABC26LGO7NTUs+5339HGBPtFstedE+M2cvT/BVg88SeWZkIS1kv
+	3snth9MdAUIqmpyNqVeeKz4t3ZYVVUDCSQQYEQIACQUCQgT4gwIbDAAKCRAyTIYzrhEakZSZ
+	AJ4ou/j26LVAtQAGkX6+vASKMJz/0gCgrAMvT2jpq2Mt0Hr+1ZqbD9N48fE=
+In-Reply-To: <2ff043cb-2706-4e1e-82f7-54c8347769ca@skidata.com>
+Subject: Re: yocto layer: meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,46 +51,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2018 00:31:56 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 24 Jun 2018 11:49:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: nl
 
-On Sat, Jun 23, 2018 at 4:56 PM Joe Slater <joe.slater@windriver.com> wrote:
->
-> Add a PACKAGECONFIG option which lets us permit warnings during
-> compilation until warnings from new compiler versions are
-> dealt with.
->
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> ---
->  meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
-> index ce97a80..948c2f1 100644
-> --- a/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
-> +++ b/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
-> @@ -23,6 +23,11 @@ SRCREV = "c0d4b2fc0fcd6f2d3c37da935923f9e9ed5eb99f"
->
->  EXTRA_OECONF += "--disable-xinerama"
->
-> +PACKAGECONFIG ?= ""
-> +
+Op 22-06-18 om 21:16 schreef Richard Leitner:
+> Hi,
+> please write problems to the openembedded-devel list so others may help you too.
+> 
+> On 06/22/2018 01:21 PM, Martin Junghans wrote:
+>> Hello,
+>>
+>> I tried to build my own yocto image with the „meta-java“ layer, but it did not work.
+>>
+>> Could you help me to fix the error?
+> 
+> What branches for yocto, meta-oe and meta-java are you using?
 
-since we defaulted to gcc8 in oe-core, perhaps its better to turn it on
-by default.
+When you say 'yocto', you mean OE-core, right?
 
-> +# enable as neccessary until new warnings are dealt with
-> +PACKAGECONFIG[noWerror] = "--disable-Werror,,,"
-> +
->  do_configure_prepend() {
->      cd ${S}
->      aclocal --install || exit 1
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
