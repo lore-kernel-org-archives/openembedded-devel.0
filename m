@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 649F074DCB
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B32FC74DD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 19:19:43 +0000 (UTC)
-Received: by mail-pg0-f49.google.com with SMTP id q14-v6so1324629pgt.13
+	Sun, 24 Jun 2018 19:19:44 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id q14-v6so1324636pgt.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 12:19:44 -0700 (PDT)
+	Sun, 24 Jun 2018 12:19:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=qV74r2zDeG6groc4PbGufSUOozLqYDXfVxTyaK1b69c=;
-	b=JAdxjIPi87JnPHJuZJ2xcN23ZdxDs9mdtyoVvBKKMBDkVOV7eBdpYIz8vQMvVZ22wg
-	YXM9ADr/UDWI37a6uHXdj66lwjKbcLVSUNVNC35RPhA8Uf5yW+LIlZYGXEjEtJ+euWI8
-	UBJ6i8124GaQXqRuaKSjSQTKEZvvA9U9nM/LtAjB7gMBcP2AUwjuL8a8hWME7TQQySkD
-	PeEMoPm+0QCOKuUJb1gmvSTBe3EhTHKc1cmi2l7L2Yq1/u03Bt3czGw0LAFkmm3s82dv
-	28JvdpE/9its3wpoOigAOqqYp/WCGrMMvpo/3Y7V+AnmVVAfH+zUHoNV5lv33NWR7nha
-	cX7w==
+	bh=0EBwlxXebn4DXton6USq6N08EBQXSTjhcs/GjJX++AA=;
+	b=LEF7u2Ob2jbPULUyGZzyqWvsuTHxDU4uIRQ4DHY7SHOU6+PVPPogOepsHd7VzWuQTz
+	7LcaVIKb1YoZ+rc6wacVP9hy5NrgrYCWkrg0z8HrluFnA54vuhd2ZV6zajmJkrmyK2AL
+	Vnh2i0s4/oMtQFi8lUtxdUmBGlUecHpZbT2M9LYVz1sDYGSA3LD9f7Jk3DfOohI8tpAd
+	KqcZFSk7NJflKJP7KYTV9Dp1hL46Eh22OZeV/UuOn6JN7/OunAx81qg0BD0eQdSKumwe
+	AmVvIpbcRpFbaYrYabaGHjtjWr7elOxK4zR/uMC7UXQ3TQp/jV+pQDYAtm31zPNnVfiu
+	xwig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=qV74r2zDeG6groc4PbGufSUOozLqYDXfVxTyaK1b69c=;
-	b=K4FojvIVMHcTo1PrMguOxn7aTvUDYw8xGz9Z++NlK3iKeH8sk2L80gaYML3B8/9KDz
-	FRAuJsNIh8gHEZYI/Hue0HbC+KYw8BRE7l6bkZ3ZfJ3MBnjw3hRxHSSNk2wuR/sHxsEe
-	z7YgjtAudHZ4v5QNctWPJwbJIYQ2+OYfaN61Rv+ySMc+gzRx8O5U2XhOjQ2LYSz+u8hr
-	E6t5QnET1Hzd8G1at8HB8ZaXPOhwdMYsJA1TWk3G7yxbVzz1i+k7ItTvROto9CAlXeH5
-	v/HKEbfQnyGCzFFtlxY4Z85tY/2KzaqObqOhPNhI8b1Qt/Z02j6H78Iwxy2KNJl1syhp
-	oXiw==
-X-Gm-Message-State: APt69E3qwX6gGCJyeP3gpbMzqOH9Pxr4WE1RdcE3ujtbhwHIwRvdfMca
-	DQgBkrisLJYiXpRMnMXuxh7lRw==
-X-Google-Smtp-Source: ADUXVKKGPlntOObbUUbGG+xXlaYaUumJuvfsLHBFCqBw/qEJwqPIhQPcXQLXZuupPnzMmQH8sukxQA==
-X-Received: by 2002:a62:8917:: with SMTP id
-	v23-v6mr10233847pfd.127.1529867983890; 
-	Sun, 24 Jun 2018 12:19:43 -0700 (PDT)
+	bh=0EBwlxXebn4DXton6USq6N08EBQXSTjhcs/GjJX++AA=;
+	b=t5Zmw80wK/smBZ6nb+yzDbfHns1ZP5805fuV4H008j5lQ968cAP/F0/ndgP6kh9NSf
+	esl5UaZhslVyGF24pEfiuFXWRW74jjWLvQ+ylejxfm8vrfx5sn4Bxll0Nxhpfhz93OVl
+	4tpGxxEmWq94/qPEu5uwvO5lF0tTv2ZZCE1eu5bxOquQIOCrk0OrP5fkDakRkh3SJ34d
+	PsVfoC9CUkErHT57momJybdq1Tsa6oqKUTa6MRDoMaHvcg6/dQKYm9JX6yaowLQIP6UF
+	fdLdjcrcc4F963dLBGbWNlhBudcjd7Nfwj/qLN2Km/KHFtE2nZzQaA9xP0D4HgbEdWLz
+	KZZg==
+X-Gm-Message-State: APt69E0Q56Eo3WSOVJY+RtA3oYirOSSuHGsswXmssgcDOSa8eaL8PWmZ
+	RGRFgTfueuBQlYx4Uyjcn1Vx5g==
+X-Google-Smtp-Source: ADUXVKK6+quF10/VKBHQkkAHEy0gWw/junSZUPdklR5sDAplB0kJWZNvFsn2KrXD2615a7ZtDme92w==
+X-Received: by 2002:a65:450c:: with SMTP id
+	n12-v6mr8330720pgq.242.1529867985205; 
+	Sun, 24 Jun 2018 12:19:45 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::91a0])
 	by smtp.gmail.com with ESMTPSA id
-	m11-v6sm36700461pfj.25.2018.06.24.12.19.42
+	m11-v6sm36700461pfj.25.2018.06.24.12.19.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Jun 2018 12:19:43 -0700 (PDT)
+	Sun, 24 Jun 2018 12:19:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Jun 2018 12:18:39 -0700
-Message-Id: <20180624191845.31082-14-raj.khem@gmail.com>
+Date: Sun, 24 Jun 2018 12:18:40 -0700
+Message-Id: <20180624191845.31082-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180624191845.31082-1-raj.khem@gmail.com>
 References: <20180624191845.31082-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 14/20] opensaf: Upgrade to 5.18.04
+Subject: [meta-networking][PATCH 15/20] squid: Fix build with gcc8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,423 +57,594 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2018 19:19:43 -0000
-
-fix strncpy overflow errors seen with gcc8
-refresh patches with devtool
+X-List-Received-Date: Sun, 24 Jun 2018 19:19:45 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ch-std-ifstream-failure-by-reference.patch | 16 ++++-----
- ...0001-Fix-string-overflow-in-snprintf.patch |  3 +-
- ...e-format-overflow-if-supported-by-gc.patch | 34 ++++++++++---------
- ...Pass-linker-specific-options-with-Wl.patch | 10 +++---
- ....cc-Use-sys-wait.h-instead-of-wait.h.patch | 12 +++----
- ...header-limits.h-for-_POSIX_HOST_NAME.patch | 20 +++++------
- .../0002-Fix-format-truncation-errors.patch   | 12 +++----
- ...-check-for-size-before-using-strncpy.patch | 33 ++++++++++++++++++
- ...{opensaf_5.18.02.bb => opensaf_5.18.04.bb} |  5 +--
- 9 files changed, 86 insertions(+), 59 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0008-check-for-size-before-using-strncpy.patch
- rename meta-networking/recipes-daemons/opensaf/{opensaf_5.18.02.bb => opensaf_5.18.04.bb} (93%)
+ ..._edirectory_userip_acl-refactoring-f.patch | 506 ++++++++++++++++++
+ .../0002-smblib-fix-buffer-over-read.patch    |  39 ++
+ .../recipes-daemons/squid/squid_3.5.27.bb     |   3 +
+ 3 files changed, 548 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/0001-Bug-4843-pt1-ext_edirectory_userip_acl-refactoring-f.patch
+ create mode 100644 meta-networking/recipes-daemons/squid/files/0002-smblib-fix-buffer-over-read.patch
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Catch-std-ifstream-failure-by-reference.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Catch-std-ifstream-failure-by-reference.patch
-index 8f8dba0541..30fdb8bf14 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Catch-std-ifstream-failure-by-reference.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Catch-std-ifstream-failure-by-reference.patch
-@@ -1,7 +1,7 @@
--From 77d50b8d92ef1903cbc50d8f39e05fc828696bb9 Mon Sep 17 00:00:00 2001
-+From 38c5343f84799fc5041575f3ec808f7476b6eea3 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 16 Apr 2018 14:33:35 -0700
--Subject: [PATCH 1/2] Catch std::ifstream::failure by reference
-+Subject: [PATCH] Catch std::ifstream::failure by reference
- 
- Fixes
- error: catching polymorphic type 'class std::ios_base::failure' by value
-@@ -10,6 +10,7 @@ error: catching polymorphic type 'class std::ios_base::failure' by value
-                            ^~~~~~~
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/base/conf.cc           | 4 ++--
-  src/dtm/dtmnd/dtm_main.cc  | 2 +-
-@@ -39,10 +40,10 @@ index d5755a1..4820357 100644
-    }
-    str.close();
- diff --git a/src/dtm/dtmnd/dtm_main.cc b/src/dtm/dtmnd/dtm_main.cc
--index 3260a81..a55afac 100644
-+index 585e11e..5cf6ad7 100644
- --- a/src/dtm/dtmnd/dtm_main.cc
- +++ b/src/dtm/dtmnd/dtm_main.cc
--@@ -359,7 +359,7 @@ void UpdateNodeIdFile(DTM_INTERNODE_CB *cb) {
-+@@ -367,7 +367,7 @@ void UpdateNodeIdFile(DTM_INTERNODE_CB *cb) {
-        try {
-          str.open(PKGLOCALSTATEDIR "/node_id", std::ofstream::out);
-          str << std::hex << node_id << std::endl;
-@@ -52,10 +53,10 @@ index 3260a81..a55afac 100644
-        str.close();
-      }
- diff --git a/src/dtm/dtmnd/multicast.cc b/src/dtm/dtmnd/multicast.cc
--index bf67b9c..7232066 100644
-+index cadc002..7c25fea 100644
- --- a/src/dtm/dtmnd/multicast.cc
- +++ b/src/dtm/dtmnd/multicast.cc
--@@ -198,7 +198,7 @@ bool Multicast::GetPeersFromFile(const std::string &path_name) {
-+@@ -199,7 +199,7 @@ bool Multicast::GetPeersFromFile(const std::string &path_name) {
-          }
-        }
-      }
-@@ -64,6 +65,3 @@ index bf67b9c..7232066 100644
-      LOG_ER("Caught std::ifstream::failure when reading file '%s', peers=%zu",
-             path_name.c_str(), static_cast<size_t>(peers_.size()));
-      peers_.clear();
---- 
--2.17.0
--
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Fix-string-overflow-in-snprintf.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Fix-string-overflow-in-snprintf.patch
-index 428e462289..db6796d05d 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Fix-string-overflow-in-snprintf.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Fix-string-overflow-in-snprintf.patch
-@@ -1,4 +1,4 @@
--From 8cf323a2d8e02ca0bd36deb38e613c6edac546ad Mon Sep 17 00:00:00 2001
-+From ae7178a78aba2e5766b70191617113487fd7ad0b Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 16 Apr 2018 18:29:17 -0700
- Subject: [PATCH] Fix string overflow in snprintf
-@@ -13,6 +13,7 @@ t-truncation=]
-             ~~~~~~~~
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/log/logd/lgs_util.cc           | 4 ++--
-  src/rde/rded/rde_amf.cc            | 2 +-
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch
-index effe25c85c..be0a587679 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch
-@@ -1,20 +1,21 @@
--From ab00d6f5793b2d850f975bcb6d5d0aa6d7a9eaa4 Mon Sep 17 00:00:00 2001
-+From c2668f7f2ea82a61115b7cae56ed081b41ff5153 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 22 Apr 2017 12:34:37 -0700
- Subject: [PATCH] configure: Disable format-overflow if supported by gcc
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-- Makefile.am                 |  6 ++--
-- configure.ac                |  2 ++
-- m4/ax_check_compile_flag.m4 | 74 +++++++++++++++++++++++++++++++++++++++++++++
-+ Makefile.am                 |  6 +--
-+ configure.ac                |  2 +
-+ m4/ax_check_compile_flag.m4 | 74 +++++++++++++++++++++++++++++++++++++
-  3 files changed, 79 insertions(+), 3 deletions(-)
-  create mode 100644 m4/ax_check_compile_flag.m4
- 
--Index: opensaf-5.18.02/Makefile.am
--===================================================================
----- opensaf-5.18.02.orig/Makefile.am
--+++ opensaf-5.18.02/Makefile.am
-+diff --git a/Makefile.am b/Makefile.am
-+index b3d6553..5607fc2 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
- @@ -52,10 +52,10 @@ AM_CPPFLAGS = \
-  	-pthread \
-  	-D_GNU_SOURCE -DINTERNAL_VERSION_ID='"@INTERNAL_VERSION_ID@"' \
-@@ -29,11 +30,11 @@ Index: opensaf-5.18.02/Makefile.am
-  
-  if ENABLE_GCOV
-  AM_CFLAGS += --coverage
--Index: opensaf-5.18.02/configure.ac
--===================================================================
----- opensaf-5.18.02.orig/configure.ac
--+++ opensaf-5.18.02/configure.ac
--@@ -593,6 +593,8 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-+diff --git a/configure.ac b/configure.ac
-+index 5b86730..47d1002 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -600,6 +600,8 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-  fi
-  AC_SUBST(OSAF_HARDEN_FLAGS)
-  
-@@ -42,10 +43,11 @@ Index: opensaf-5.18.02/configure.ac
-  #############################################
-  # List the output Makefiles
-  #############################################
--Index: opensaf-5.18.02/m4/ax_check_compile_flag.m4
--===================================================================
-+diff --git a/m4/ax_check_compile_flag.m4 b/m4/ax_check_compile_flag.m4
-+new file mode 100644
-+index 0000000..dcabb92
- --- /dev/null
--+++ opensaf-5.18.02/m4/ax_check_compile_flag.m4
-++++ b/m4/ax_check_compile_flag.m4
- @@ -0,0 +1,74 @@
- +# ===========================================================================
- +#  https://www.gnu.org/software/autoconf-archive/ax_check_compile_flag.html
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch
-index 5756a027b4..e4bbb4c3cd 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch
-@@ -1,4 +1,4 @@
--From 6248b717b4861d16b80235fd8e57d64e4f636428 Mon Sep 17 00:00:00 2001
-+From 979b2b6a1aa574a26e8b736049c4207d568f60f3 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Thu, 13 Apr 2017 17:39:07 -0700
- Subject: [PATCH] configure: Pass linker specific options with -Wl
-@@ -7,15 +7,16 @@ This helps make it pass the options to linker correctly
- and we can use non-gcc compilers
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  configure.ac | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.ac b/configure.ac
--index df4fc58..02771c6 100644
-+index 12a5d5c..5b86730 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -553,7 +553,7 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-+@@ -596,7 +596,7 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-  	if echo "${CFLAGS} ${CXXFLAGS}" | grep -q -- -O0; then
-  		OSAF_HARDEN_FLAGS=""
-  	fi
-@@ -24,6 +25,3 @@ index df4fc58..02771c6 100644
-  fi
-  AC_SUBST(OSAF_HARDEN_FLAGS)
-  
---- 
--2.12.2
--
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch
-index 76c47c6584..e40d2b3198 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch
-@@ -1,4 +1,4 @@
--From 508ea7c0d67243feb1684eaa83569cb687561d64 Mon Sep 17 00:00:00 2001
-+From c21f77d592415f316138c05f581192a1f061e735 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 15 Sep 2017 10:09:03 -0700
- Subject: [PATCH] immpbe_dump.cc: Use sys/wait.h instead of wait.h
-@@ -7,12 +7,13 @@ Fixes
- redirecting incorrect #include <wait.h> to <sys/wait.h>
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/imm/common/immpbe_dump.cc | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/src/imm/common/immpbe_dump.cc b/src/imm/common/immpbe_dump.cc
--index 100222f37..33e47ce3c 100644
-+index e6b3cc5..3956028 100644
- --- a/src/imm/common/immpbe_dump.cc
- +++ b/src/imm/common/immpbe_dump.cc
- @@ -26,12 +26,12 @@
-@@ -27,8 +28,5 @@ index 100222f37..33e47ce3c 100644
-  #include <sys/stat.h>
- +#include <sys/wait.h>
-  #include <libgen.h>
-- 
-- #include <saAis.h>
---- 
--2.14.1
--
-+ #include <set>
-+ #include <vector>
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch
-index 4a2a825f99..e4a3975da6 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch
-@@ -1,4 +1,4 @@
--From 6442b57a855e273aa5a3d93e8596783cea128073 Mon Sep 17 00:00:00 2001
-+From 7fb393c66df33110fef0cbabac7d304f12eb82e4 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 15 Sep 2017 09:39:40 -0700
- Subject: [PATCH] src: Add missing header limits.h for _POSIX_HOST_NAME_MAX
-@@ -7,6 +7,7 @@ Use _GNU_SOURCE instead of libc internal __USE_GNU
- Do not use the deprecated headers under include/sys
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/base/os_defs.h        | 5 +++--
-  src/mds/mds_dt_tcp.c      | 1 -
-@@ -18,7 +19,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  7 files changed, 6 insertions(+), 8 deletions(-)
- 
- diff --git a/src/base/os_defs.h b/src/base/os_defs.h
--index 50a9bf5fc..af6842863 100644
-+index a570c43..3559b19 100644
- --- a/src/base/os_defs.h
- +++ b/src/base/os_defs.h
- @@ -47,17 +47,18 @@
-@@ -43,7 +44,7 @@ index 50a9bf5fc..af6842863 100644
-  #include <pthread.h>
-  
- diff --git a/src/mds/mds_dt_tcp.c b/src/mds/mds_dt_tcp.c
--index 1407eb1ab..a87c22faa 100644
-+index 1407eb1..a87c22f 100644
- --- a/src/mds/mds_dt_tcp.c
- +++ b/src/mds/mds_dt_tcp.c
- @@ -27,7 +27,6 @@
-@@ -55,7 +56,7 @@ index 1407eb1ab..a87c22faa 100644
-  #include <sys/types.h>
-  #include <unistd.h>
- diff --git a/src/mds/mds_dt_tcp_disc.h b/src/mds/mds_dt_tcp_disc.h
--index a6249d73e..574f52681 100644
-+index a6249d7..574f526 100644
- --- a/src/mds/mds_dt_tcp_disc.h
- +++ b/src/mds/mds_dt_tcp_disc.h
- @@ -24,7 +24,7 @@
-@@ -68,7 +69,7 @@ index a6249d73e..574f52681 100644
-  /*  mds_indentifire + mds_version   + msg_type + scope_type + server_type +
-     server_instance_lower + server_instance_upper + sub_ref_val + sub_ref_val  +
- diff --git a/src/mds/mds_dt_tipc.c b/src/mds/mds_dt_tipc.c
--index 37745e7f0..9b3255567 100644
-+index 7714175..a0ed3b6 100644
- --- a/src/mds/mds_dt_tipc.c
- +++ b/src/mds/mds_dt_tipc.c
- @@ -35,7 +35,6 @@
-@@ -80,7 +81,7 @@ index 37745e7f0..9b3255567 100644
-  #include <sys/types.h>
-  #include <unistd.h>
- diff --git a/src/mds/mds_dt_tipc.h b/src/mds/mds_dt_tipc.h
--index e73a11b09..401d208c2 100644
-+index e73a11b..401d208 100644
- --- a/src/mds/mds_dt_tipc.h
- +++ b/src/mds/mds_dt_tipc.h
- @@ -32,7 +32,7 @@
-@@ -93,7 +94,7 @@ index e73a11b09..401d208c2 100644
-  #include <errno.h>
-  #include <fcntl.h>
- diff --git a/src/mds/mds_dt_trans.c b/src/mds/mds_dt_trans.c
--index 6f621e04e..5aacbd33e 100644
-+index 6f621e0..5aacbd3 100644
- --- a/src/mds/mds_dt_trans.c
- +++ b/src/mds/mds_dt_trans.c
- @@ -26,7 +26,6 @@
-@@ -105,7 +106,7 @@ index 6f621e04e..5aacbd33e 100644
-  
-  #define MDS_PROT_TCP 0xA0
- diff --git a/src/ntf/ntfd/NtfLogger.cc b/src/ntf/ntfd/NtfLogger.cc
--index 84014b578..31b1ccc6c 100644
-+index fd17c58..1120008 100644
- --- a/src/ntf/ntfd/NtfLogger.cc
- +++ b/src/ntf/ntfd/NtfLogger.cc
- @@ -20,7 +20,7 @@
-@@ -117,6 +118,3 @@ index 84014b578..31b1ccc6c 100644
-  
-  #include "base/osaf_utility.h"
-  #include <saAis.h>
---- 
--2.14.1
--
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-format-truncation-errors.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-format-truncation-errors.patch
-index 9865a5e1b8..f98e28da9c 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-format-truncation-errors.patch
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0002-Fix-format-truncation-errors.patch
-@@ -1,12 +1,13 @@
--From 4d58d26cbd3622183afc2e8f85c9c81edaf135df Mon Sep 17 00:00:00 2001
-+From c5034fe42df8923bcefc10e163151997d70b6241 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 16 Apr 2018 14:56:47 -0700
--Subject: [PATCH 2/2] Fix format-truncation errors
-+Subject: [PATCH] Fix format-truncation errors
- 
- Fixes errors with gcc8 eg.
- error: '%u' directive output may be truncated writing between 1 and 10 bytes into a region of size between 0 and 254 [-Werror=format-truncation=]
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
- ---
-  src/base/daemon.c  | 4 ++--
-  src/mds/mds_c_db.c | 8 ++++----
-@@ -15,10 +16,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  4 files changed, 9 insertions(+), 9 deletions(-)
- 
- diff --git a/src/base/daemon.c b/src/base/daemon.c
--index 27170d7..da97700 100644
-+index 361dd8d..4001b73 100644
- --- a/src/base/daemon.c
- +++ b/src/base/daemon.c
--@@ -92,11 +92,11 @@ static int __create_pidfile(const char *pidfile)
-+@@ -95,11 +95,11 @@ static int __create_pidfile(const char *pidfile)
-  {
-  	FILE *file = NULL;
-  	int fd, rc = 0;
-@@ -97,6 +98,3 @@ index 012999c..006b722 100644
-    MDS_SEND_PRIORITY_TYPE pri;
-    MDS_CLIENT_MSG_FORMAT_VER
-        msg_fmt_ver; /* message format version specification */
---- 
--2.17.0
--
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0008-check-for-size-before-using-strncpy.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0008-check-for-size-before-using-strncpy.patch
+diff --git a/meta-networking/recipes-daemons/squid/files/0001-Bug-4843-pt1-ext_edirectory_userip_acl-refactoring-f.patch b/meta-networking/recipes-daemons/squid/files/0001-Bug-4843-pt1-ext_edirectory_userip_acl-refactoring-f.patch
 new file mode 100644
-index 0000000000..497bb07d8d
+index 0000000000..001d9e906e
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0008-check-for-size-before-using-strncpy.patch
-@@ -0,0 +1,33 @@
-+From 29510dd81e3a5e96151afdb0702863cbfd640766 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 22 Jun 2018 18:58:59 -0700
-+Subject: [PATCH] check for size before using strncpy
++++ b/meta-networking/recipes-daemons/squid/files/0001-Bug-4843-pt1-ext_edirectory_userip_acl-refactoring-f.patch
+@@ -0,0 +1,506 @@
++From 01a44c96dbd04936e9cb2501745a834a0b09d504 Mon Sep 17 00:00:00 2001
++From: Amos Jeffries <yadij@users.noreply.github.com>
++Date: Sun, 13 May 2018 06:57:41 +0000
++Subject: [PATCH] Bug 4843 pt1: ext_edirectory_userip_acl refactoring for GCC-8
++ (#204)
 +
-+ensures that size is never execeding the string length
-+that execPath can hold
++Proposed changes to this helper to fix strcat / strncat buffer
++overread / overflow issues.
 +
-+Fixes
-+error: '__builtin___strncpy_chk' specified size between 18446744071562067968 and 18446744073709551615 exceeds maximum object size 9223372036854775807 [-Werror=stringop-overflow=]
++The approach takes three parts:
 +
-+Upstream-Status: Pending
++* adds a makeHexString function to replace many for-loops
++  catenating bits of strings together with hex conversion into a
++  second buffer. Replacing with a snprintf() and buffer overflow
++  handling.
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++* a copy of Ip::Address::lookupHostIp to convert the input
++  string into IP address binary format, then generate the hex
++  string using the above new hex function instead of looped
++  sub-string concatenations across several buffers.
++  This removes all the "00" and "0000" strncat() calls and
++  allows far simpler code even with added buffer overflow
++  handling.
++
++* replace multiple string part concatenations with a few simpler
++  calls to snprintf() for all the search_ip buffer constructions.
++  Adding buffer overflow handling as needed for the new calls.
 +---
-+ src/imm/immnd/immnd_proc.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Backport
 +
-+diff --git a/src/imm/immnd/immnd_proc.c b/src/imm/immnd/immnd_proc.c
-+index 015932a..c8f115e 100644
-+--- a/src/imm/immnd/immnd_proc.c
-++++ b/src/imm/immnd/immnd_proc.c
-+@@ -1902,6 +1902,10 @@ static int immnd_forkPbe(IMMND_CB *cb)
-+ 		LOG_ER("Pathname too long: %u max is 1023", newLen);
-+ 		return -1;
-+ 	}
-++	if (execDirLen > 1023 || execDirLen < 0) {
-++		LOG_ER("Execdir name too long: %u max is 1023", execDirLen);
-++		return -1;
-++	}
++ .../ext_edirectory_userip_acl.cc              | 376 ++++++------------
++ 1 file changed, 120 insertions(+), 256 deletions(-)
++
++diff --git a/helpers/external_acl/eDirectory_userip/ext_edirectory_userip_acl.cc b/helpers/external_acl/eDirectory_userip/ext_edirectory_userip_acl.cc
++index 63609e4..ad16bfd 100644
++--- a/helpers/external_acl/eDirectory_userip/ext_edirectory_userip_acl.cc
+++++ b/helpers/external_acl/eDirectory_userip/ext_edirectory_userip_acl.cc
++@@ -67,6 +67,9 @@
++ #ifdef HAVE_LDAP_H
++ #include <ldap.h>
++ #endif
+++#ifdef HAVE_NETDB_H
+++#include <netdb.h>
+++#endif
 + 
-+ 	strncpy(execPath, cb->mProgName, execDirLen);
-+ 	execPath[execDirLen] = 0;
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.18.02.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.18.04.bb
-similarity index 93%
-rename from meta-networking/recipes-daemons/opensaf/opensaf_5.18.02.bb
-rename to meta-networking/recipes-daemons/opensaf/opensaf_5.18.04.bb
-index 0ef13b0485..effe956999 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.18.02.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.18.04.bb
-@@ -27,9 +27,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://0001-Catch-std-ifstream-failure-by-reference.patch \
-            file://0002-Fix-format-truncation-errors.patch \
-            file://0001-Fix-string-overflow-in-snprintf.patch \
-+           file://0008-check-for-size-before-using-strncpy.patch \
++ #ifdef HELPER_INPUT_BUFFER
++ #define EDUI_MAXLEN     HELPER_INPUT_BUFFER
++@@ -714,11 +717,14 @@ BindLDAP(edui_ldap_t *l, char *dn, char *pw, unsigned int t)
++ 
++     /* Copy details - dn and pw CAN be NULL for anonymous and/or TLS */
++     if (dn != NULL) {
+++        if (strlen(dn) >= sizeof(l->dn))
+++            return LDAP_ERR_OOB; /* DN too large */
+++
++         if ((l->basedn[0] != '\0') && (strstr(dn, l->basedn) == NULL)) {
++             /* We got a basedn, but it's not part of dn */
++-            xstrncpy(l->dn, dn, sizeof(l->dn));
++-            strncat(l->dn, ",", 1);
++-            strncat(l->dn, l->basedn, strlen(l->basedn));
+++            const int x = snprintf(l->dn, sizeof(l->dn)-1, "%s,%s", dn, l->basedn);
+++            if (x < 0 || static_cast<size_t>(x) >= sizeof(l->dn))
+++                return LDAP_ERR_OOB; /* DN too large */
++         } else
++             xstrncpy(l->dn, dn, sizeof(l->dn));
++     }
++@@ -778,24 +784,73 @@ BindLDAP(edui_ldap_t *l, char *dn, char *pw, unsigned int t)
++     }
++ }
++ 
+++// XXX: duplicate (partial) of Ip::Address::lookupHostIp
+++/**
+++ * Convert the IP address string representation in src to
+++ * its binary representation.
+++ *
+++ * \return binary representation of the src IP address.
+++ *         Must be free'd using freeaddrinfo().
+++ */
+++static struct addrinfo *
+++makeIpBinary(const char *src)
+++{
+++    struct addrinfo want;
+++    memset(&want, 0, sizeof(want));
+++    want.ai_flags = AI_NUMERICHOST; // prevent actual DNS lookups!
+++
+++    struct addrinfo *dst = nullptr;
+++    if (getaddrinfo(src, nullptr, &want, &dst) != 0) {
+++        // not an IP address
+++        /* free any memory getaddrinfo() dynamically allocated. */
+++        if (dst)
+++            freeaddrinfo(dst);
+++        return nullptr;
+++    }
+++
+++    return dst;
+++}
+++
+++/**
+++ * Convert srcLen bytes from src into HEX and store into dst, which
+++ * has a maximum content size of dstSize including c-string terminator.
+++ * The dst value produced will be a 0-terminated c-string.
+++ *
+++ * \retval   N  length of dst written (excluding c-string terminator)
+++ * \retval -11  (LDAP_ERR_OOB) buffer overflow detected
+++ */
+++static int
+++makeHexString(char *dst, const int dstSize, const char *src, const int srcLen)
+++{
+++    // HEX encoding doubles the amount of bytes/octets copied
+++    if ((srcLen*2) >= dstSize)
+++        return LDAP_ERR_OOB; // cannot copy that many
+++
+++    *dst = 0;
+++
+++    for (int k = 0; k < srcLen; ++k) {
+++        int c = static_cast<int>(src[k]);
+++        if (c < 0)
+++            c = c + 256;
+++        char hexc[4];
+++        const int hlen = snprintf(hexc, sizeof(hexc), "%02X", c);
+++        if (hlen < 0 || static_cast<size_t>(hlen) > sizeof(hexc)) // should be impossible
+++            return LDAP_ERR_OOB;
+++        strcat(dst, hexc);
+++    }
+++    return strlen(dst);
+++}
+++
++ /*
++  * ConvertIP() - <edui_ldap_t> <ip>
++  *
++  * Take an IPv4 address in dot-decimal or IPv6 notation, and convert to 2-digit HEX stored in l->search_ip
++  * This is the networkAddress that we search LDAP for.
++- *
++- * PENDING -- CHANGE OVER TO inet*_pton, but inet6_pton does not provide the correct syntax
++- *
++  */
++ static int
++ ConvertIP(edui_ldap_t *l, char *ip)
++ {
++-    char bufa[EDUI_MAXLEN], bufb[EDUI_MAXLEN], obj[EDUI_MAXLEN];
++-    char hexc[4], *p;
++     void *y, *z;
++-    size_t s;
++-    long x;
++-    int i, j, t, swi;                           /* IPv6 "::" cut over toggle */
++     if (l == NULL) return LDAP_ERR_NULL;
++     if (ip == NULL) return LDAP_ERR_PARAM;
++     if (!(l->status & LDAP_INIT_S)) return LDAP_ERR_INIT;       /* Not initalized */
++@@ -831,183 +886,22 @@ ConvertIP(edui_ldap_t *l, char *ip)
++             l->status |= (LDAP_IPV4_S);
++         z = NULL;
++     }
++-    s = strlen(ip);
++-    *(bufa) = '\0';
++-    *(bufb) = '\0';
++-    *(obj) = '\0';
++-    /* StringSplit() will zero out bufa & obj at each call */
++-    memset(l->search_ip, '\0', sizeof(l->search_ip));
++-    xstrncpy(bufa, ip, sizeof(bufa));                       /* To avoid segfaults, use bufa instead of ip */
++-    swi = 0;
++-    if (l->status & LDAP_IPV6_S) {
++-        /* Search for :: in string */
++-        if ((bufa[0] == ':') && (bufa[1] == ':')) {
++-            /* bufa starts with a ::, so just copy and clear */
++-            xstrncpy(bufb, bufa, sizeof(bufb));
++-            *(bufa) = '\0';
++-            ++swi;                              /* Indicates that there is a bufb */
++-        } else if ((bufa[0] == ':') && (bufa[1] != ':')) {
++-            /* bufa starts with a :, a typo so just fill in a ':', cat and clear */
++-            bufb[0] = ':';
++-            strncat(bufb, bufa, strlen(bufa));
++-            *(bufa) = '\0';
++-            ++swi;                              /* Indicates that there is a bufb */
++-        } else {
++-            p = strstr(bufa, "::");
++-            if (p != NULL) {
++-                /* Found it, break bufa down and split into bufb here */
++-                *(bufb) = '\0';
++-                i = strlen(p);
++-                memcpy(bufb, p, i);
++-                *p = '\0';
++-                bufb[i] = '\0';
++-                ++swi;                              /* Indicates that there is a bufb */
++-            }
++-        }
++-    }
++-    s = strlen(bufa);
++-    if (s < 1)
++-        s = strlen(bufb);
++-    while (s > 0) {
++-        if ((l->status & LDAP_IPV4_S) && (swi == 0)) {
++-            /* Break down IPv4 address  */
++-            t = StringSplit(bufa, '.', obj, sizeof(obj));
++-            if (t > 0) {
++-                errno = 0;
++-                x = strtol(obj, (char **)NULL, 10);
++-                if (((x < 0) || (x > 255)) || ((errno != 0) && (x == 0)) || ((obj[0] != '0') && (x == 0)))
++-                    return LDAP_ERR_OOB;                        /* Out of bounds -- Invalid address */
++-                memset(hexc, '\0', sizeof(hexc));
++-                int hlen = snprintf(hexc, sizeof(hexc), "%02X", (int)x);
++-                strncat(l->search_ip, hexc, hlen);
++-            } else
++-                break;                              /* reached end of octet */
++-        } else if (l->status & LDAP_IPV6_S) {
++-            /* Break down IPv6 address */
++-            if (swi > 1)
++-                t = StringSplit(bufb, ':', obj, sizeof(obj));           /* After "::" */
++-            else
++-                t = StringSplit(bufa, ':', obj, sizeof(obj));           /* Before "::" */
++-            /* Convert octet by size (t) - and fill 0's */
++-            switch (t) {                            /* IPv6 is already in HEX, copy contents */
++-            case 4:
++-                hexc[0] = (char) toupper((int)obj[0]);
++-                i = (int)hexc[0];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[1] = (char) toupper((int)obj[1]);
++-                i = (int)hexc[1];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[2] = '\0';
++-                strncat(l->search_ip, hexc, 2);
++-                hexc[0] = (char) toupper((int)obj[2]);
++-                i = (int)hexc[0];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[1] = (char) toupper((int)obj[3]);
++-                i = (int)hexc[1];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[2] = '\0';
++-                strncat(l->search_ip, hexc, 2);
++-                break;
++-            case 3:
++-                hexc[0] = '0';
++-                hexc[1] = (char) toupper((int)obj[0]);
++-                i = (int)hexc[1];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[2] = '\0';
++-                strncat(l->search_ip, hexc, 2);
++-                hexc[0] = (char) toupper((int)obj[1]);
++-                i = (int)hexc[0];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[1] = (char) toupper((int)obj[2]);
++-                i = (int)hexc[1];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[2] = '\0';
++-                strncat(l->search_ip, hexc, 2);
++-                break;
++-            case 2:
++-                strncat(l->search_ip, "00", 2);
++-                hexc[0] = (char) toupper((int)obj[0]);
++-                i = (int)hexc[0];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[1] = (char) toupper((int)obj[1]);
++-                i = (int)hexc[1];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[2] = '\0';
++-                strncat(l->search_ip, hexc, 2);
++-                break;
++-            case 1:
++-                strncat(l->search_ip, "00", 2);
++-                hexc[0] = '0';
++-                hexc[1] = (char) toupper((int)obj[0]);
++-                i = (int)hexc[1];
++-                if (!isxdigit(i))
++-                    return LDAP_ERR_OOB;                    /* Out of bounds */
++-                hexc[2] = '\0';
++-                strncat(l->search_ip, hexc, 2);
++-                break;
++-            default:
++-                if (t > 4)
++-                    return LDAP_ERR_OOB;
++-                break;
++-            }
++-            /* Code to pad the address with 0's between a '::' */
++-            if ((strlen(bufa) == 0) && (swi == 1)) {
++-                /* We are *AT* the split, pad in some 0000 */
++-                t = strlen(bufb);
++-                /* How many ':' exist in bufb ? */
++-                j = 0;
++-                for (i = 0; i < t; ++i) {
++-                    if (bufb[i] == ':')
++-                        ++j;
++-                }
++-                --j;                                /* Preceding "::" doesn't count */
++-                t = 8 - (strlen(l->search_ip) / 4) - j;         /* Remainder */
++-                if (t > 0) {
++-                    for (i = 0; i < t; ++i)
++-                        strncat(l->search_ip, "0000", 4);
++-                }
++-            }
++-        }
++-        if ((bufa[0] == '\0') && (swi > 0)) {
++-            s = strlen(bufb);
++-            ++swi;
++-        } else
++-            s = strlen(bufa);
++-    }
++-    s = strlen(l->search_ip);
++ 
++-    /* CHECK sizes of address, truncate or pad */
++-    /* if "::" is at end of ip, then pad another block or two */
++-    while ((l->status & LDAP_IPV6_S) && (s < 32)) {
++-        strncat(l->search_ip, "0000", 4);
++-        s = strlen(l->search_ip);
++-    }
++-    if ((l->status & LDAP_IPV6_S) && (s > 32)) {
++-        /* Too long, truncate */
++-        l->search_ip[32] = '\0';
++-        s = strlen(l->search_ip);
++-    }
++-    /* If at end of ip, and its not long enough, then pad another block or two */
++-    while ((l->status & LDAP_IPV4_S) && (s < 8)) {
++-        strncat(l->search_ip, "00", 2);
++-        s = strlen(l->search_ip);
++-    }
++-    if ((l->status & LDAP_IPV4_S) && (s > 8)) {
++-        /* Too long, truncate */
++-        l->search_ip[8] = '\0';
++-        s = strlen(l->search_ip);
+++    size_t s = LDAP_ERR_INVALID;
+++    if (struct addrinfo *dst = makeIpBinary(ip)) {
+++        if (dst->ai_family == AF_INET6) {
+++            struct sockaddr_in6 *sia = reinterpret_cast<struct sockaddr_in6 *>(dst->ai_addr);
+++            const char *ia = reinterpret_cast<const char *>(sia->sin6_addr.s6_addr);
+++            s = makeHexString(l->search_ip, sizeof(l->search_ip), ia, 16); // IPv6 = 16-byte address
+++
+++        } else if (dst->ai_family == AF_INET) {
+++            struct sockaddr_in *sia = reinterpret_cast<struct sockaddr_in *>(dst->ai_addr);
+++            const char *ia = reinterpret_cast<const char *>(&(sia->sin_addr));
+++            s = makeHexString(l->search_ip, sizeof(l->search_ip), ia, 4);  // IPv4 = 4-byte address
+++        } // else leave s with LDAP_ERR_INVALID value
+++        freeaddrinfo(dst);
++     }
++ 
++-    /* Completed, s is length of address in HEX */
++     return s;
++ }
++ 
++@@ -1099,48 +993,42 @@ SearchFilterLDAP(edui_ldap_t *l, char *group)
++     }
++     if (group == NULL) {
++         /* No groupMembership= to add, yay! */
++-        xstrncpy(bufa, "(&", sizeof(bufa));
++-        strncat(bufa, edui_conf.search_filter, strlen(edui_conf.search_filter));
++         /* networkAddress */
++-        snprintf(bufb, sizeof(bufb), "(|(networkAddress=1\\23%s)", bufc);
++         if (l->status & LDAP_IPV4_S) {
++-            int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=8\\23\\00\\00%s)(networkAddress=9\\23\\00\\00%s))", \
++-                              bufc, bufc);
++-            strncat(bufb, bufd, ln);
+++            const int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=8\\23\\00\\00%s)(networkAddress=9\\23\\00\\00%s)", bufc, bufc);
+++            if (ln < 0 || static_cast<size_t>(ln) >= sizeof(bufd))
+++                return LDAP_ERR_OOB;
+++
++         } else if (l->status & LDAP_IPV6_S) {
++-            int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=10\\23\\00\\00%s)(networkAddress=11\\23\\00\\00%s))", \
++-                              bufc, bufc);
++-            strncat(bufb, bufd, ln);
++-        } else
++-            strncat(bufb, ")", 1);
++-        strncat(bufa, bufb, strlen(bufb));
++-        strncat(bufa, ")", 1);
+++            const int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=10\\23\\00\\00%s)(networkAddress=11\\23\\00\\00%s)", bufc, bufc);
+++            if (ln < 0 || static_cast<size_t>(ln) >= sizeof(bufd))
+++                return LDAP_ERR_OOB;
+++        }
+++        const int x = snprintf(bufa, sizeof(bufa), "(&%s(|(networkAddress=1\\23%s)%s))", edui_conf.search_filter, bufc, bufd);
+++        if (x < 0 || static_cast<size_t>(x) >= sizeof(bufa))
+++            return LDAP_ERR_OOB;
+++
++     } else {
++         /* Needs groupMembership= to add... */
++-        xstrncpy(bufa, "(&(&", sizeof(bufa));
++-        strncat(bufa, edui_conf.search_filter, strlen(edui_conf.search_filter));
++         /* groupMembership -- NOTE: Squid *MUST* provide "cn=" from squid.conf */
++-        snprintf(bufg, sizeof(bufg), "(groupMembership=%s", group);
++         if ((l->basedn[0] != '\0') && (strstr(group, l->basedn) == NULL)) {
++-            strncat(bufg, ",", 1);
++-            strncat(bufg, l->basedn, strlen(l->basedn));
+++            const int ln = snprintf(bufg, sizeof(bufg), ",%s", l->basedn);
+++            if (ln < 0 || static_cast<size_t>(ln) >= sizeof(bufd))
+++                return LDAP_ERR_OOB;
++         }
++-        strncat(bufg, ")", 1);
++-        strncat(bufa, bufg, strlen(bufg));
++         /* networkAddress */
++-        snprintf(bufb, sizeof(bufb), "(|(networkAddress=1\\23%s)", bufc);
++         if (l->status & LDAP_IPV4_S) {
++-            int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=8\\23\\00\\00%s)(networkAddress=9\\23\\00\\00%s))", \
++-                              bufc, bufc);
++-            strncat(bufb, bufd, ln);
+++            const int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=8\\23\\00\\00%s)(networkAddress=9\\23\\00\\00%s)", bufc, bufc);
+++            if (ln < 0 || static_cast<size_t>(ln) >= sizeof(bufd))
+++                return LDAP_ERR_OOB;
++         } else if (l->status & LDAP_IPV6_S) {
++-            int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=10\\23\\00\\00%s)(networkAddress=11\\23\\00\\00%s))", \
++-                              bufc, bufc);
++-            strncat(bufb, bufd, ln);
++-        } else
++-            strncat(bufb, ")", 1);
++-        strncat(bufa, bufb, strlen(bufb));
++-        strncat(bufa, "))", 2);
+++            const int ln = snprintf(bufd, sizeof(bufd), "(networkAddress=10\\23\\00\\00%s)(networkAddress=11\\23\\00\\00%s)", bufc, bufc);
+++            if (ln < 0 || static_cast<size_t>(ln) >= sizeof(bufd))
+++                return LDAP_ERR_OOB;
+++        }
+++        const int x = snprintf(bufa, sizeof(bufa), "(&(&%s(groupMembership=%s%s)(|(networkAddress=1\\23%s)%s)))", edui_conf.search_filter, group, bufg, bufc, bufd);
+++        if (x < 0 || static_cast<size_t>(x) >= sizeof(bufa))
+++            return LDAP_ERR_OOB;
++     }
++     s = strlen(bufa);
++     xstrncpy(l->search_filter, bufa, sizeof(l->search_filter));
++@@ -1212,10 +1100,10 @@ static int
++ SearchIPLDAP(edui_ldap_t *l)
++ {
++     ber_len_t i, x;
++-    ber_len_t j, k;
++-    ber_len_t y, z;
++-    int c;
++-    char bufa[EDUI_MAXLEN], bufb[EDUI_MAXLEN], hexc[4];
+++    ber_len_t j;
+++    ber_len_t z;
+++    char bufa[EDUI_MAXLEN];
+++    char bufb[EDUI_MAXLEN];
++     LDAPMessage *ent;
++     if (l == NULL) return LDAP_ERR_NULL;
++     if (l->lp == NULL) return LDAP_ERR_POINTER;
++@@ -1273,19 +1161,11 @@ SearchIPLDAP(edui_ldap_t *l)
++                         /* bufa is the address, just compare it */
++                         if (!(l->status & LDAP_IPV4_S) || (l->status & LDAP_IPV6_S))
++                             break;                          /* Not looking for IPv4 */
++-                        for (k = 0; k < z; ++k) {
++-                            c = (int) bufa[k];
++-                            if (c < 0)
++-                                c = c + 256;
++-                            int hlen = snprintf(hexc, sizeof(hexc), "%02X", c);
++-                            if (k == 0)
++-                                xstrncpy(bufb, hexc, sizeof(bufb));
++-                            else
++-                                strncat(bufb, hexc, hlen);
++-                        }
++-                        y = strlen(bufb);
+++                        const int blen = makeHexString(bufb, sizeof(bufb), bufa, z);
+++                        if (blen < 0)
+++                            return blen;
++                         /* Compare value with IP */
++-                        if (memcmp(l->search_ip, bufb, y) == 0) {
+++                        if (memcmp(l->search_ip, bufb, blen) == 0) {
++                             /* We got a match! - Scan 'ber' for 'cn' values */
++                             z = ldap_count_values_len(ber);
++                             for (j = 0; j < z; ++j) {
++@@ -1308,19 +1188,11 @@ SearchIPLDAP(edui_ldap_t *l)
++                         /* bufa + 2 is the address (skip 2 digit port) */
++                         if (!(l->status & LDAP_IPV4_S) || (l->status & LDAP_IPV6_S))
++                             break;                          /* Not looking for IPv4 */
++-                        for (k = 2; k < z; ++k) {
++-                            c = (int) bufa[k];
++-                            if (c < 0)
++-                                c = c + 256;
++-                            int hlen = snprintf(hexc, sizeof(hexc), "%02X", c);
++-                            if (k == 2)
++-                                xstrncpy(bufb, hexc, sizeof(bufb));
++-                            else
++-                                strncat(bufb, hexc, hlen);
++-                        }
++-                        y = strlen(bufb);
+++                        const int blen = makeHexString(bufb, sizeof(bufb), &bufa[2], z);
+++                        if (blen < 0)
+++                            return blen;
++                         /* Compare value with IP */
++-                        if (memcmp(l->search_ip, bufb, y) == 0) {
+++                        if (memcmp(l->search_ip, bufb, blen) == 0) {
++                             /* We got a match! - Scan 'ber' for 'cn' values */
++                             z = ldap_count_values_len(ber);
++                             for (j = 0; j < z; ++j) {
++@@ -1343,19 +1215,11 @@ SearchIPLDAP(edui_ldap_t *l)
++                         /* bufa + 2 is the address (skip 2 digit port) */
++                         if (!(l->status & LDAP_IPV6_S))
++                             break;                          /* Not looking for IPv6 */
++-                        for (k = 2; k < z; ++k) {
++-                            c = (int) bufa[k];
++-                            if (c < 0)
++-                                c = c + 256;
++-                            int hlen = snprintf(hexc, sizeof(hexc), "%02X", c);
++-                            if (k == 2)
++-                                xstrncpy(bufb, hexc, sizeof(bufb));
++-                            else
++-                                strncat(bufb, hexc, hlen);
++-                        }
++-                        y = strlen(bufb);
+++                        const int blen = makeHexString(bufb, sizeof(bufb), &bufa[2], z);
+++                        if (blen < 0)
+++                            return blen;
++                         /* Compare value with IP */
++-                        if (memcmp(l->search_ip, bufb, y) == 0) {
+++                        if (memcmp(l->search_ip, bufb, blen) == 0) {
++                             /* We got a match! - Scan 'ber' for 'cn' values */
++                             z = ldap_count_values_len(ber);
++                             for (j = 0; j < z; ++j) {
+diff --git a/meta-networking/recipes-daemons/squid/files/0002-smblib-fix-buffer-over-read.patch b/meta-networking/recipes-daemons/squid/files/0002-smblib-fix-buffer-over-read.patch
+new file mode 100644
+index 0000000000..c8f0c47bd1
+--- /dev/null
++++ b/meta-networking/recipes-daemons/squid/files/0002-smblib-fix-buffer-over-read.patch
+@@ -0,0 +1,39 @@
++From a6b1e0fd14311587186e40d09bff5c8c3aada2e4 Mon Sep 17 00:00:00 2001
++From: Amos Jeffries <squid3@treenet.co.nz>
++Date: Sat, 25 Jul 2015 05:53:16 -0700
++Subject: [PATCH] smblib: fix buffer over-read
++
++When parsing SMB LanManager packets with invalid protocol ID and the
++default set of Squid supported protocols. It may access memory outside
++the buffer storing protocol names.
++
++smblib is only used by already deprecated helpers which are deprecated
++due to far more significant NTLM protocol issues. It will also only
++result in packets being rejected later with invalid protocol names. So
++this is a minor bug rather than a vulnerability.
++
++ Detected by Coverity Scan. Issue 1256165
++---
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Backport
++
++ lib/smblib/smblib-util.c | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/lib/smblib/smblib-util.c b/lib/smblib/smblib-util.c
++index 6139ae2..e722cbb 100644
++--- a/lib/smblib/smblib-util.c
+++++ b/lib/smblib/smblib-util.c
++@@ -204,7 +204,11 @@ int SMB_Figure_Protocol(const char *dialects[], int prot_index)
++ {
++     int i;
++ 
++-    if (dialects == SMB_Prots) { /* The jobs is easy, just index into table */
+++    // prot_index may be a value outside the table SMB_Types[]
+++    // which holds data at offsets 0 to 11
+++    int ourType = (prot_index < 0 || prot_index > 11);
+++
+++    if (ourType && dialects == SMB_Prots) { /* The jobs is easy, just index into table */
++ 
++         return(SMB_Types[prot_index]);
++     } else { /* Search through SMB_Prots looking for a match */
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.27.bb b/meta-networking/recipes-daemons/squid/squid_3.5.27.bb
+index 7dae3cd83f..1557c4b2d6 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.5.27.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.27.bb
+@@ -23,6 +23,8 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
+            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
+            file://0001-tools.cc-fixed-unused-result-warning.patch \
++           file://0001-Bug-4843-pt1-ext_edirectory_userip_acl-refactoring-f.patch \
++           file://0002-smblib-fix-buffer-over-read.patch \
             "
--SRC_URI[md5sum] = "42064f5ddbc7f560bfc5ff93ea9eecc7"
--SRC_URI[sha256sum] = "f9e24897f9cfd63bb3115f6275c706de1702d3d9bae2fc423227db72b23c37f0"
-+SRC_URI[md5sum] = "21836e43b13ad33bed9bd0ed391e5a6e"
-+SRC_URI[sha256sum] = "e55dc2645487fb22938e8386b99eef6eb7aff43a246ce3e92488daf6ee46247a"
  
- inherit autotools useradd systemd pkgconfig
+ SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
+@@ -48,6 +50,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('TARGET_ARCH', 'powerpc', 'noatomics', '
+ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+ PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
++PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-checking,"
+ 
+ BASIC_AUTH = "DB SASL LDAP"
  
 -- 
 2.18.0
