@@ -1,49 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 36FA56067C
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E332F74A03
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 16:35:28 +0000 (UTC)
-Received: by mail-vk0-f53.google.com with SMTP id s187-v6so8233434vke.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 09:35:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=LiHk8u7+9vi96zFCpdgCkAUN6HuY6aVFgXpfEALLSg4=;
-	b=esQspEfk415W8Tk6wPAXJWj8pZGPXRsW+1149D4R1spQy6a9EgqEBHQ3nJuiwgkpzF
-	gqbCfc8ASnTB/EeOBpanyA3GNME3oGEPIwLesES64CzR5slVY20px7lsXOiKBirSm9BY
-	b8KNrNfKgh4GEyB9GLXrLpuj9ixvh6AA1+M5f2GhhmTDV0HDlmZ/65TNxRB7mJvUYgTk
-	wntI7wTqak1jIm6Ivwncl0BBNrf63hmdnBOXm3uFapFQkUdqCcJSwYGm03vW36ap+MhN
-	uH/3ONNEsza9ZZo9UXq1ER3Ly3QKRP0JpUTUV6VdNVGs36VFAWouF0JHMHbemdnOdnlI
-	Jm+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=LiHk8u7+9vi96zFCpdgCkAUN6HuY6aVFgXpfEALLSg4=;
-	b=Gy3K7w6cjWXw6fkEmLO6w1dGQ9f1TpwBiTKLRiDjKoU4kvmzRiKObRMwgWiXoOi0Wt
-	G9bM5VzpO0DYzZHYfF1o/8IC0yFegIRaYgX7pK3Nmg5PXK09O74rpUbZEB3I+KuoPNWp
-	2e6F6eBD7EI05Ig+hYVCHnr4vc+0QqBmywOyGVBnGRdelVU43qP529BNVl340J3PIAYB
-	yhFcVUCcy0c5CzngXK/qACaY7Wb/o9eLoHjePpMnIfDyJSccknbNXWRdk5II0/9eYFKH
-	C6GO7ZQg9GnFmzf9ZfMl0/eeUvTSsGzbVc85HKH4mRjK4UePIhIXtAp7jPgLqrEytmUr
-	NeIQ==
-X-Gm-Message-State: APt69E1xd6S940JragJp7z8yLW3UCLeY3UGSfSK+hjliDj3sOc7kpxjp
-	ZcUayZ4j7b6pG+cuTE3FwJ6LG/lgudWAlbHJd5M=
-X-Google-Smtp-Source: ADUXVKLbSzqLGq5EL7Kx70+LevzeIyI+tcKNcgexIcdMESEk9agKWwYfhKhZWckDMCCZnSAzCZ8NDMpGJ9TrIWl5nco=
-X-Received: by 2002:a1f:a285:: with SMTP id
-	l127-v6mr7907022vke.95.1529944528839; 
-	Mon, 25 Jun 2018 09:35:28 -0700 (PDT)
+	Mon, 25 Jun 2018 16:47:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5PGlliR027782
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 25 Jun 2018 09:47:47 -0700 (PDT)
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.237]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0399.000;
+	Mon, 25 Jun 2018 09:47:46 -0700
+From: "Slater, Joseph" <joe.slater@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-gnome][PATCH 1/1] metacity: allow for warnings
+	during compilation
+Thread-Index: AQHUC03MlRkVLXrFHUKHCEgLqKUqFaRvBA+AgAIs9QA=
+Date: Mon, 25 Jun 2018 16:47:46 +0000
+Message-ID: <007BD92917A2324FA403BCF9A464CF84F35015D5@ALA-MBD.corp.ad.wrs.com>
+References: <20180623235626.228940-1-joe.slater@windriver.com>
+	<CAMKF1sqObyS4hW4hLGA=TynF+A5TSYZZvRshtMg4wDzfvdz9ng@mail.gmail.com>
+In-Reply-To: <CAMKF1sqObyS4hW4hLGA=TynF+A5TSYZZvRshtMg4wDzfvdz9ng@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.11.157.215]
 MIME-Version: 1.0
-References: <20180624191845.31082-1-raj.khem@gmail.com>
-	<20180624191845.31082-18-raj.khem@gmail.com>
-	<CAJTo0LZUq3ptRy_TrWdhZFyBw72Jb9wXCbQ2QZPFWj0JEhkFFA@mail.gmail.com>
-In-Reply-To: <CAJTo0LZUq3ptRy_TrWdhZFyBw72Jb9wXCbQ2QZPFWj0JEhkFFA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 25 Jun 2018 09:35:02 -0700
-Message-ID: <CAMKF1sp+VhR+Qo3H+Nw=7UsfDz9Pno9c+0GNj6hhkuburP2pFw@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 18/20] check: add recipe
+Subject: Re: [meta-gnome][PATCH 1/1] metacity: allow for warnings during compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,61 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jun 2018 16:35:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 25 Jun 2018 16:47:47 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon, Jun 25, 2018 at 2:05 AM Burton, Ross <ross.burton@intel.com> wrote:
->
-> Already in oe-core: meta/recipes-support/libcheck/libcheck_0.12.0.bb
->
-
-yes thanks, it seems I points devtool finish to point to wrong layer.
-It will be dropped here.
-
-> Ross
->
-> On 24 June 2018 at 20:18, Khem Raj <raj.khem@gmail.com> wrote:
-> > It is a C unittest framework
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  meta-oe/recipes-test/check/check_git.bb | 21 +++++++++++++++++++++
-> >  1 file changed, 21 insertions(+)
-> >  create mode 100644 meta-oe/recipes-test/check/check_git.bb
-> >
-> > diff --git a/meta-oe/recipes-test/check/check_git.bb b/meta-oe/recipes-test/check/check_git.bb
-> > new file mode 100644
-> > index 0000000000..e7bfece3cf
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-test/check/check_git.bb
-> > @@ -0,0 +1,21 @@
-> > +# Copyright (C) 2018 Khem Raj <raj.khem@gmail.com>
-> > +# Released under the MIT license (see COPYING.MIT for the terms)
-> > +
-> > +DESCRIPTION = "A unit testing framework for C"
-> > +HOMEPAGE = "https://libcheck.github.io/check/"
-> > +LICENSE = "LGPL-2.1"
-> > +LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=2d5025d4aa3495befef8f17206a5b0a1"
-> > +
-> > +PV = "0.12.0+git${SRCPV}"
-> > +
-> > +SRCREV = "285d04b3d461ba68dc39e0f9e847784fb6064bb3"
-> > +
-> > +SRC_URI = "git://github.com/libcheck/check"
-> > +
-> > +S = "${WORKDIR}/git"
-> > +
-> > +inherit cmake
-> > +
-> > +do_install_append() {
-> > +    rm -rf ${D}${exec_prefix}/cmake
-> > +}
-> > --
-> > 2.18.0
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+SSB0aGluayBpdCBpcyBiZXR0ZXIgdG8gaGF2ZSB0byB0YWtlIGFuIGFjdGlvbiB0byBjb3ZlciB1
+cCBhbiBpc3N1ZSByYXRoZXIgdGhhbiBuZWVkDQp0byBkbyBzb21ldGhpbmcgdG8gZXhwb3NlIGl0
+LCBidXQgZWl0aGVyIHdheSBnaXZlcyB5b3UgYSBjaG9pY2UuDQoNCkpvZQ0KDQotLS0tLU9yaWdp
+bmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogS2hlbSBSYWogW21haWx0bzpyYWoua2hlbUBnbWFpbC5j
+b21dIA0KU2VudDogU2F0dXJkYXksIEp1bmUgMjMsIDIwMTggNTozMSBQTQ0KVG86IFNsYXRlciwg
+Sm9zZXBoDQpDYzogb3BlbmVtYmVkZWQtZGV2ZWwNClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLWdu
+b21lXVtQQVRDSCAxLzFdIG1ldGFjaXR5OiBhbGxvdyBmb3Igd2FybmluZ3MgZHVyaW5nIGNvbXBp
+bGF0aW9uDQoNCk9uIFNhdCwgSnVuIDIzLCAyMDE4IGF0IDQ6NTYgUE0gSm9lIFNsYXRlciA8am9l
+LnNsYXRlckB3aW5kcml2ZXIuY29tPiB3cm90ZToNCj4NCj4gQWRkIGEgUEFDS0FHRUNPTkZJRyBv
+cHRpb24gd2hpY2ggbGV0cyB1cyBwZXJtaXQgd2FybmluZ3MgZHVyaW5nDQo+IGNvbXBpbGF0aW9u
+IHVudGlsIHdhcm5pbmdzIGZyb20gbmV3IGNvbXBpbGVyIHZlcnNpb25zIGFyZQ0KPiBkZWFsdCB3
+aXRoLg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBKb2UgU2xhdGVyIDxqb2Uuc2xhdGVyQHdpbmRyaXZl
+ci5jb20+DQo+IC0tLQ0KPiAgbWV0YS1nbm9tZS9yZWNpcGVzLWdub21lL21ldGFjaXR5L21ldGFj
+aXR5XzMuMjguMC5iYiB8IDUgKysrKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMo
+KykNCj4NCj4gZGlmZiAtLWdpdCBhL21ldGEtZ25vbWUvcmVjaXBlcy1nbm9tZS9tZXRhY2l0eS9t
+ZXRhY2l0eV8zLjI4LjAuYmIgYi9tZXRhLWdub21lL3JlY2lwZXMtZ25vbWUvbWV0YWNpdHkvbWV0
+YWNpdHlfMy4yOC4wLmJiDQo+IGluZGV4IGNlOTdhODAuLjk0OGMyZjEgMTAwNjQ0DQo+IC0tLSBh
+L21ldGEtZ25vbWUvcmVjaXBlcy1nbm9tZS9tZXRhY2l0eS9tZXRhY2l0eV8zLjI4LjAuYmINCj4g
+KysrIGIvbWV0YS1nbm9tZS9yZWNpcGVzLWdub21lL21ldGFjaXR5L21ldGFjaXR5XzMuMjguMC5i
+Yg0KPiBAQCAtMjMsNiArMjMsMTEgQEAgU1JDUkVWID0gImMwZDRiMmZjMGZjZDZmMmQzYzM3ZGE5
+MzU5MjNmOWU5ZWQ1ZWI5OWYiDQo+DQo+ICBFWFRSQV9PRUNPTkYgKz0gIi0tZGlzYWJsZS14aW5l
+cmFtYSINCj4NCj4gK1BBQ0tBR0VDT05GSUcgPz0gIiINCj4gKw0KDQpzaW5jZSB3ZSBkZWZhdWx0
+ZWQgdG8gZ2NjOCBpbiBvZS1jb3JlLCBwZXJoYXBzIGl0cyBiZXR0ZXIgdG8gdHVybiBpdCBvbg0K
+YnkgZGVmYXVsdC4NCg0KPiArIyBlbmFibGUgYXMgbmVjY2Vzc2FyeSB1bnRpbCBuZXcgd2Fybmlu
+Z3MgYXJlIGRlYWx0IHdpdGgNCj4gK1BBQ0tBR0VDT05GSUdbbm9XZXJyb3JdID0gIi0tZGlzYWJs
+ZS1XZXJyb3IsLCwiDQo+ICsNCj4gIGRvX2NvbmZpZ3VyZV9wcmVwZW5kKCkgew0KPiAgICAgIGNk
+ICR7U30NCj4gICAgICBhY2xvY2FsIC0taW5zdGFsbCB8fCBleGl0IDENCj4gLS0NCj4gMi43LjQN
+Cj4NCj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2
+ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
 
