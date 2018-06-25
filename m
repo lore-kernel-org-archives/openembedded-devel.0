@@ -1,68 +1,51 @@
-Return-Path: <prvs=7077f78b2=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id A089874A26
+Return-Path: <ross.burton@intel.com>
+Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com
+	[209.85.218.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 188EB65CE9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 06:53:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,269,1526335200"; d="scan'208";a="11011749"
-To: <openembedded-devel@lists.openembedded.org>
-References: <000601d40a1b$3af95300$b0ebf900$@freenet.de>
-	<2ff043cb-2706-4e1e-82f7-54c8347769ca@skidata.com>
-	<pgo0cb$u52$1@blaine.gmane.org>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <04669510-59b3-5df9-39fd-5c6aa7bf6d73@skidata.com>
-Date: Mon, 25 Jun 2018 08:53:12 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Mon, 25 Jun 2018 09:05:26 +0000 (UTC)
+Received: by mail-oi0-f53.google.com with SMTP id e135-v6so4642281oib.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jun 2018 02:05:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/spJv0WsN6EeHPKS8vzBa+xNCk7WUqTQism0en2txOE=;
+	b=e3u13T0JSuB2d0ASgg0Z88g0hzpoqZdjC8aw/r/EKUNGjINHvLnwGyoNwwOlo4glHe
+	7rAzqcNouUkLSJ4l8uJITHhBeoT2BYaXfVR+kThbYm8wgM390YCE8yG7WkdLYNMTUmzt
+	jaCuZvTg6ceVxhtfitlvNjkBCT11wgMz73G/qaC+s/GKIoeRzGCDpvP4S8QRseZbAlDa
+	YTCh3pSnwIsCTYwKuWK+YMivAREKqh5/YQJnelTY1bClba47XCvyBS21h8tbBSm5yuaG
+	q9B0O7JMSPNkJb9NhFADTTGU4OSOdKpMi6GRmdJ/q+W3JZdEUr8zk4YvXOlRX6e1BF7P
+	+vow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=/spJv0WsN6EeHPKS8vzBa+xNCk7WUqTQism0en2txOE=;
+	b=BrNrnsOYBN0SVKz5uxm5SPlX+/ICDDMQ7IdTgwLHRfQf77pcJzcbEYT3j9+p+t6rYk
+	4Bf6+uNXmHzyBgjsz6Wx4j0utAZoUFoc8mDZlppCKSl2/2o6+LHuV2xDaadG0qtE0n8C
+	MYTTfyQxog75QZ121XlCnulJdbJYHymSj0jJWSbRQQgV1eCkAR2v2w8UhzKAojWRIDEu
+	CfP9LdsyVncE+eKOj5hi6Ks2bERtazIkm4JqZY+8NyXryoXe06PK6PUUTZpaTl20GYB/
+	+qe8oWRIfhLiolSPiIBW8zKidKX2weI//WTtdgr0BKMPlrpLNrs3tLwZCpKjS/f1Cru3
+	w2Hw==
+X-Gm-Message-State: APt69E3idgcYlGQ84XUAzISxUyCElfmL/AlJN+CJLF7smDGkiZecFOrm
+	49Aa7jlblgsOoV/iWa/jnweZj5ZL+pD259jq4hlt7w==
+X-Google-Smtp-Source: ADUXVKII6F4QgIP+2j52ViyUOSYhCWaPdwgNl+CeXQWf4cvDZMLAYBSNeJJ6x6WR2orNQLi+tC68uWpsNYwtqSFo0EY=
+X-Received: by 2002:aca:cd4d:: with SMTP id
+	d74-v6mr6903962oig.170.1529917528113; 
+	Mon, 25 Jun 2018 02:05:28 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <pgo0cb$u52$1@blaine.gmane.org>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: yocto layer: meta-java
+Received: by 2002:ac9:434d:0:0:0:0:0 with HTTP; Mon, 25 Jun 2018 02:05:07
+	-0700 (PDT)
+In-Reply-To: <20180624191845.31082-18-raj.khem@gmail.com>
+References: <20180624191845.31082-1-raj.khem@gmail.com>
+	<20180624191845.31082-18-raj.khem@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 25 Jun 2018 10:05:07 +0100
+Message-ID: <CAJTo0LZUq3ptRy_TrWdhZFyBw72Jb9wXCbQ2QZPFWj0JEhkFFA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 18/20] check: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,28 +58,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jun 2018 06:53:02 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 25 Jun 2018 09:05:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 06/24/2018 01:49 PM, Koen Kooi wrote:
-> Op 22-06-18 om 21:16 schreef Richard Leitner:
->> Hi,
->> please write problems to the openembedded-devel list so others may help you too.
->>
->> On 06/22/2018 01:21 PM, Martin Junghans wrote:
->>> Hello,
->>>
->>> I tried to build my own yocto image with the „meta-java“ layer, but it did not work.
->>>
->>> Could you help me to fix the error?
->>
->> What branches for yocto, meta-oe and meta-java are you using?
-> 
-> When you say 'yocto', you mean OE-core, right?
+Already in oe-core: meta/recipes-support/libcheck/libcheck_0.12.0.bb
 
-To be honest... I meant the poky repository, but AFAIK OE-core is synonymous, isn't it?
+Ross
 
-Nonetheless, thanks for the clarification Koen ;-)
+On 24 June 2018 at 20:18, Khem Raj <raj.khem@gmail.com> wrote:
+> It is a C unittest framework
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-test/check/check_git.bb | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-test/check/check_git.bb
+>
+> diff --git a/meta-oe/recipes-test/check/check_git.bb b/meta-oe/recipes-test/check/check_git.bb
+> new file mode 100644
+> index 0000000000..e7bfece3cf
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/check/check_git.bb
+> @@ -0,0 +1,21 @@
+> +# Copyright (C) 2018 Khem Raj <raj.khem@gmail.com>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
+> +
+> +DESCRIPTION = "A unit testing framework for C"
+> +HOMEPAGE = "https://libcheck.github.io/check/"
+> +LICENSE = "LGPL-2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=2d5025d4aa3495befef8f17206a5b0a1"
+> +
+> +PV = "0.12.0+git${SRCPV}"
+> +
+> +SRCREV = "285d04b3d461ba68dc39e0f9e847784fb6064bb3"
+> +
+> +SRC_URI = "git://github.com/libcheck/check"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +do_install_append() {
+> +    rm -rf ${D}${exec_prefix}/cmake
+> +}
+> --
+> 2.18.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
