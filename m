@@ -1,50 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CB7974E1A
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 458BE74CA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 19:19:49 +0000 (UTC)
-Received: by mail-pg0-f51.google.com with SMTP id w8-v6so5089879pgp.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jun 2018 12:19:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=g15aJWUw6F4hZLX54HTkMmzOmJgQ8tkhIF5jsATcDTA=;
-	b=GTnkReQ8TrFk5o6mkmDR6KgpK4xofp2izQW0TTUz89cQcS+W1oEzhJfvkEKB+G3Wgp
-	diaNax2qHtN0mcd5iDV83aXOoUsFTsmXgFcZYKiw4c6/q9kbDwwRrEpqe3OSAigWs+BU
-	ah4JNykyCvVc8UPSkUIJNoRXEbTkLdW691o1QuA/gJhuY6xOgH5ysfvLeqmuxKtYcm2L
-	E4HM++VWZGYsL0gXYQ2FzSKWipwq2WpZMldFThZjkrAlE913zPWQ7y7cO3WyW3DAHErw
-	crAGcm7WukD0uWtoSft7u1hQhnZliJWb5of66UhafSE9aBJgV84bKFbM/ULes5TkN4ej
-	s4hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=g15aJWUw6F4hZLX54HTkMmzOmJgQ8tkhIF5jsATcDTA=;
-	b=nB7bObm96InMgvshl8lfK5yUVogi1bIGLMtPP1+IN9jbDvCSVMK9Ce2dxGG1TucJ3L
-	gGn2GSQ5ZfHzi9HeQ+UyKTuw9y++rEhg/4rfasuSbU8qYAg6W6XC16hDprNSGgfKszkF
-	XQbCg3DlnwuvalQpUxCGXfwNd+yzFqoJn1+/860tvzPWk+SrjuP/gsTABuGwXFO+4uJt
-	iryk4f51/pu1z4kLIkXZLFxcqxmlnfIjlj6LbAD7DI/mPNORZB5iYYL/H0oZMXX42I/F
-	nzFjaV0uk349HTPaRfgRC6SuqmjYfIgu1mBGeUpHrH4N/nsG3d9Y1W5ckEURTf7gCjUX
-	lYwA==
-X-Gm-Message-State: APt69E1fSgSZO2uoeGxjDhVnDwbYqOt6Fk4MqmpoCCJ+tJaUBnslIL/j
-	EoJkcrnDajGTBcNaocJ9yuYXnQ==
-X-Google-Smtp-Source: ADUXVKIVfnGoVKTEJy3JT/zaDX8uRJ0d1T84ydYqdqoak1gKz9qh2WMty0DDBGVMUEvTtJ+p1aETlQ==
-X-Received: by 2002:a63:6e82:: with SMTP id
-	j124-v6mr8355168pgc.349.1529867990473; 
-	Sun, 24 Jun 2018 12:19:50 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::91a0])
-	by smtp.gmail.com with ESMTPSA id
-	m11-v6sm36700461pfj.25.2018.06.24.12.19.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Jun 2018 12:19:49 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Jun 2018 12:18:45 -0700
-Message-Id: <20180624191845.31082-20-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180624191845.31082-1-raj.khem@gmail.com>
+	Mon, 25 Jun 2018 00:14:49 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5P0EmeY024525
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 24 Jun 2018 17:14:48 -0700 (PDT)
+Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Sun, 24 Jun 2018 17:14:47 -0700
+To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
 References: <20180624191845.31082-1-raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 20/20] metacity: allow for warnings during compilation
+	<20180624191845.31082-12-raj.khem@gmail.com>
+From: Yi Zhao <yi.zhao@windriver.com>
+Message-ID: <933a82bf-29f4-8102-165a-3635b224a213@windriver.com>
+Date: Mon, 25 Jun 2018 08:14:44 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
+MIME-Version: 1.0
+In-Reply-To: <20180624191845.31082-12-raj.khem@gmail.com>
+X-Originating-IP: [128.224.162.137]
+Subject: Re: [meta-networking][PATCH 12/20] geoip-perl: add UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jun 2018 19:19:49 -0000
+X-List-Received-Date: Mon, 25 Jun 2018 00:14:50 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-From: "Slater, Joseph" <joe.slater@windriver.com>
+Hi,
 
-Add a PACKAGECONFIG option which lets us permit warnings during
-compilation until warnings from new compiler versions are
-dealt with.
+This patch can be dropped since the recipe switched to use git:// as 
+SRC_URI. bitbake -c checkpkg  can work well now.
 
-enable the packageconfig by default since we default to gcc8
-which produces these warning
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+//Yi
 
-diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
-index ce97a803f1..189f6ec558 100644
---- a/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
-+++ b/meta-gnome/recipes-gnome/metacity/metacity_3.28.0.bb
-@@ -23,6 +23,11 @@ SRCREV = "c0d4b2fc0fcd6f2d3c37da935923f9e9ed5eb99f"
- 
- EXTRA_OECONF += "--disable-xinerama"
- 
-+PACKAGECONFIG ?= ""
-+
-+# enable as neccessary until new warnings are dealt with
-+PACKAGECONFIG[werror] = "--enable-Werror,--disable-Werror,,"
-+
- do_configure_prepend() {
-     cd ${S}
-     aclocal --install || exit 1
--- 
-2.18.0
+在 2018年06月25日 03:18, Khem Raj 写道:
+> From: Yi Zhao <yi.zhao@windriver.com>
+>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>   meta-networking/recipes-support/geoip/geoip-perl_1.51.bb | 2 ++
+>   1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb b/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+> index ed5c3a9799..bd37ce5005 100644
+> --- a/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+> +++ b/meta-networking/recipes-support/geoip/geoip-perl_1.51.bb
+> @@ -9,6 +9,8 @@ SECTION = "libdevel"
+>   LICENSE = "Artistic-1.0 | GPL-1.0+"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=e4f3ea6e9b28af88dc0321190a1f8250"
+>   
+> +UPSTREAM_CHECK_URI = "https://github.com/maxmind/geoip-api-perl/tags"
+> +
+>   S = "${WORKDIR}/git"
+>   SRCREV = "4cdfdc38eca237c19c22a8b90490446ce6d970fa"
+>   SRC_URI = "git://github.com/maxmind/geoip-api-perl.git;protocol=https; \
 
 
