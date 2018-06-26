@@ -1,25 +1,26 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 27BFF7479D
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D917E746F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jun 2018 05:58:30 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5Q5wVt6013294
+	Tue, 26 Jun 2018 05:58:36 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w5Q5wCDk013528
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 22:58:31 -0700 (PDT)
+	Mon, 25 Jun 2018 22:58:27 -0700
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.218) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 25 Jun 2018 22:58:30 -0700
+	14.3.399.0; Mon, 25 Jun 2018 22:58:01 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Jun 2018 14:00:48 +0800
-Message-ID: <1529992863-24711-5-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 26 Jun 2018 14:00:46 +0800
+Message-ID: <1529992863-24711-3-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1529992863-24711-1-git-send-email-Qi.Chen@windriver.com>
 References: <1529992863-24711-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 05/20] python3-ordered-set: upgrade 2.0.2 -> 3.0.0
+Subject: [meta-python][PATCH 03/20] python-dbus: upgrade 1.2.6 -> 1.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,59 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jun 2018 05:58:30 -0000
+X-List-Received-Date: Tue, 26 Jun 2018 05:58:37 -0000
 Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
-The license checksum changes but the license remains the same.
-The change is just about year, 2013 -> 2018.
-
-Add python3-pytest-runner to DEPENDS to solve the following error.
-  | distutils.errors.DistutilsError: Could not find suitable distribution \
-    for Requirement.parse('pytest-runner')
+1. Remove obsolete PACKAGECONFIG.
+2. Explicitly disable building documenation.
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-devtools/python/python3-ordered-set_2.0.2.bb      | 10 ----------
- .../recipes-devtools/python/python3-ordered-set_3.0.0.bb      | 11 +++++++++++
- 2 files changed, 11 insertions(+), 10 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-ordered-set_2.0.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-ordered-set_3.0.0.bb
+ .../python/{python-dbus_1.2.6.bb => python-dbus_1.2.8.bb}      | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-dbus_1.2.6.bb => python-dbus_1.2.8.bb} (72%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_2.0.2.bb b/meta-python/recipes-devtools/python/python3-ordered-set_2.0.2.bb
-deleted file mode 100644
-index be6d4e169..000000000
---- a/meta-python/recipes-devtools/python/python3-ordered-set_2.0.2.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--SUMMARY = "A MutableSet that remembers its order, so that every entry has an index."
--HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=0feb0c85b722f488b87844fb5f81d2dc"
--
--SRC_URI[md5sum] = "7b8d73dc64fd3c783ecb48e050bfcc0d"
--SRC_URI[sha256sum] = "942cad5d7d5b0760d5cbe93dfb385ac2ed402ca1d48c9f4e102d7d5cce3a90eb"
--
--inherit pypi setuptools3
--
-diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_3.0.0.bb b/meta-python/recipes-devtools/python/python3-ordered-set_3.0.0.bb
-new file mode 100644
-index 000000000..b731c28d2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ordered-set_3.0.0.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "A MutableSet that remembers its order, so that every entry has an index."
-+HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e"
-+
-+SRC_URI[md5sum] = "c8f5b99b717618803b914dd9cfe5ef43"
-+SRC_URI[sha256sum] = "a34399fe6aa78358aaa00129d67c65b4aa099adfc023731b1d756c85776a89bb"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS += "python3-pytest-runner-native"
+diff --git a/meta-python/recipes-devtools/python/python-dbus_1.2.6.bb b/meta-python/recipes-devtools/python/python-dbus_1.2.8.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python-dbus_1.2.6.bb
+rename to meta-python/recipes-devtools/python/python-dbus_1.2.8.bb
+index 0f18ccc88..b3f724054 100644
+--- a/meta-python/recipes-devtools/python/python-dbus_1.2.6.bb
++++ b/meta-python/recipes-devtools/python/python-dbus_1.2.8.bb
+@@ -9,15 +9,15 @@ DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
+ SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "1ce1ddf2582060f8f971652ea54cc17e"
+-SRC_URI[sha256sum] = "32f29c17172cdb9cb61c68b1f1a71dfe7351506fc830869029c47449bd04faeb"
++SRC_URI[md5sum] = "7379db774c10904f27e7e2743d90fb43"
++SRC_URI[sha256sum] = "abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f"
+ S = "${WORKDIR}/dbus-python-${PV}"
+ 
+ inherit distutils-base autotools pkgconfig
+ 
+-PACKAGECONFIG ?= ""
+-PACKAGECONFIG[docs] = "--enable-html-docs,--disable-html-docs,python3-docutils-native"
+-PACKAGECONFIG[api-docs] = "--enable-api-docs,--disable-api-docs,python3-docutils-native python3-epydoc-native"
++# documentation needs python-sphinx, which is not in oe-core or meta-python for now
++# change to use PACKAGECONFIG when python-sphinx is added to oe-core or meta-python
++EXTRA_OECONF += "--disable-documentation"
+ 
+ export STAGING_LIBDIR
+ export STAGING_INCDIR
 -- 
 2.11.0
 
