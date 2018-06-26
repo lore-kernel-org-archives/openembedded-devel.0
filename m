@@ -1,25 +1,25 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BA572746F7
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 262557489A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jun 2018 06:00:43 +0000 (UTC)
+	Tue, 26 Jun 2018 06:00:44 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5Q60jnE003126
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5Q60k9j013321
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 23:00:45 -0700 (PDT)
+	Mon, 25 Jun 2018 23:00:46 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.218) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 25 Jun 2018 23:00:44 -0700
+	14.3.399.0; Mon, 25 Jun 2018 23:00:45 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Jun 2018 14:00:59 +0800
-Message-ID: <1529992863-24711-16-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 26 Jun 2018 14:01:00 +0800
+Message-ID: <1529992863-24711-17-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1529992863-24711-1-git-send-email-Qi.Chen@windriver.com>
 References: <1529992863-24711-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 16/20] python3-requests-file: upgrade 1.4.2 -> 1.4.3
+Subject: [meta-python][PATCH 17/20] python3-prctl: upgrade 1.6.1 -> 1.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,35 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jun 2018 06:00:43 -0000
+X-List-Received-Date: Tue, 26 Jun 2018 06:00:45 -0000
 Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- ...{python3-requests-file_1.4.2.bb => python3-requests-file_1.4.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-requests-file_1.4.2.bb => python3-requests-file_1.4.3.bb} (65%)
+ .../python/{python3-prctl_1.6.1.bb => python3-prctl_1.7.bb}         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-prctl_1.6.1.bb => python3-prctl_1.7.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-file_1.4.2.bb b/meta-python/recipes-devtools/python/python3-requests-file_1.4.3.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-requests-file_1.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-requests-file_1.4.3.bb
-index 8652876a4..0407779da 100644
---- a/meta-python/recipes-devtools/python/python3-requests-file_1.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests-file_1.4.3.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/dashea/requests-file"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9cc728d6087e43796227b0a31422de6b"
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb
+rename to meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+index 5de83ce48..54620a066 100644
+--- a/meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.7.bb
+@@ -5,13 +5,13 @@ limitations in C and linux. This module provides a nice non-messy python(ic) \
+ interface."
+ SECTION = "devel/python"
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=5eb2f4bcd60326f83e5deb542372d52f"
++LIC_FILES_CHKSUM = "file://COPYING;md5=23ff9f50449d4bd0e513df16e4d9755f"
  
--SRC_URI[md5sum] = "a907efb75faf0ccbb1857432bf9d8c0f"
--SRC_URI[sha256sum] = "f518e7cfe048e053fd1019dfb891b4c55b871c56c5a31693d733240c80b8f191"
-+SRC_URI[md5sum] = "470711c9b7e0de1057f7b72a58b7ab51"
-+SRC_URI[sha256sum] = "8f04aa6201bacda0567e7ac7f677f1499b0fc76b22140c54bc06edf1ba92e2fa"
+ S = "${WORKDIR}/git"
+ B = "${S}"
  
- inherit pypi setuptools3
+-SRCREV = "1107d0be7bec4b28c85c62c454882d16844c930a"
+-PV = "1.6.1+git${SRCPV}"
++SRCREV = "57cd0a7cad76e8f8792eea22ee5b5d17bae0a90f"
++PV = "1.7+git${SRCPV}"
  
+ SRC_URI = "git://github.com/seveas/python-prctl;branch=master \
+            file://0001-support-cross-complication.patch \
 -- 
 2.11.0
 
