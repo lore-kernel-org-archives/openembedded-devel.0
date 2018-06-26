@@ -1,26 +1,25 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EF8C17477C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E123F74793
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jun 2018 06:00:08 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w5Q5xiNM013718
+	Tue, 26 Jun 2018 06:00:12 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5Q60Egh003047
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 23:00:00 -0700
+	Mon, 25 Jun 2018 23:00:14 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.218) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 25 Jun 2018 22:59:34 -0700
+	14.3.399.0; Mon, 25 Jun 2018 23:00:01 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Jun 2018 14:00:55 +0800
-Message-ID: <1529992863-24711-12-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 26 Jun 2018 14:00:56 +0800
+Message-ID: <1529992863-24711-13-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1529992863-24711-1-git-send-email-Qi.Chen@windriver.com>
 References: <1529992863-24711-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 12/20] python(3)-ndg-httpsclient: upgrade 0.4.4 -> 0.5.0
+Subject: [meta-python][PATCH 13/20] python(3)-pyasn1: upgrade 0.4.2 -> 0.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jun 2018 06:00:09 -0000
+X-List-Received-Date: Tue, 26 Jun 2018 06:00:13 -0000
 Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
+The license checksum changes but the license remains the same.
+The change is only about year, 2017 -> 2018.
+
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-ndg-httpsclient.inc        | 4 ++--
- ...ython-ndg-httpsclient_0.4.4.bb => python-ndg-httpsclient_0.5.0.bb} | 0
- ...hon3-ndg-httpsclient_0.4.4.bb => python3-ndg-httpsclient_0.5.0.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-ndg-httpsclient_0.4.4.bb => python-ndg-httpsclient_0.5.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-ndg-httpsclient_0.4.4.bb => python3-ndg-httpsclient_0.5.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-pyasn1.inc              | 7 ++++---
+ .../python/{python-pyasn1_0.4.2.bb => python-pyasn1_0.4.3.bb}      | 0
+ .../python/{python3-pyasn1_0.4.2.bb => python3-pyasn1_0.4.3.bb}    | 0
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.2.bb => python-pyasn1_0.4.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.2.bb => python3-pyasn1_0.4.3.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
-index d74302398..4e07e4e95 100644
---- a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
-+++ b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://MANIFEST.in;md5=ce22c0cd986d2de3f7073cd6b5523ae0"
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index f3c32e08a..614b6d4ed 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -1,10 +1,11 @@
+ SUMMARY = "Python library implementing ASN.1 types."
+ HOMEPAGE = "http://pyasn1.sourceforge.net/"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=280606d9c18f200e03e0c247ac61475a"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=815ac3f9ca693006349094b358ab3155"
  
--SRC_URI[md5sum] = "a0d349cf9530e331697a6e5ab1f40de6"
--SRC_URI[sha256sum] = "fba4d4798dcac2965874f24afb6631b4326baa4bd02505744d34f690c354856a"
-+SRC_URI[md5sum] = "1c28be0449268359e795b3b5687feeb7"
-+SRC_URI[sha256sum] = "c009f5430790936b3a97eaf9f968516664d97e146ab2bda991f0caadb7cc088b"
+-SRC_URI[md5sum] = "cb5883ddc6a9f405600429f37cf0759c"
+-SRC_URI[sha256sum] = "d258b0a71994f7770599835249cece1caef3c70def868c4915e6e5ca49b67d15"
++
++SRC_URI[sha256sum] = "fb81622d8f3509f0026b0683fe90fea27be7284d3826a5f2edf97f69151ab0fc"
++SRC_URI[md5sum] = "311fff5b2a1303a8cdc334c8867a06f4"
  
- PYPI_PACKAGE = "ndg_httpsclient"
- 
-diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb b/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.5.0.bb
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-codecs \
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.3.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.4.bb
-rename to meta-python/recipes-devtools/python/python-ndg-httpsclient_0.5.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.0.bb
+rename from meta-python/recipes-devtools/python/python-pyasn1_0.4.2.bb
+rename to meta-python/recipes-devtools/python/python-pyasn1_0.4.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.4.2.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.4.3.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.4.bb
-rename to meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.0.bb
+rename from meta-python/recipes-devtools/python/python3-pyasn1_0.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-pyasn1_0.4.3.bb
 -- 
 2.11.0
 
