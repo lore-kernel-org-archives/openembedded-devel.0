@@ -1,32 +1,24 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E332F74A03
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 17F7F6FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jun 2018 16:47:46 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5PGlliR027782
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 25 Jun 2018 09:47:47 -0700 (PDT)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.237]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0399.000;
-	Mon, 25 Jun 2018 09:47:46 -0700
-From: "Slater, Joseph" <joe.slater@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-gnome][PATCH 1/1] metacity: allow for warnings
-	during compilation
-Thread-Index: AQHUC03MlRkVLXrFHUKHCEgLqKUqFaRvBA+AgAIs9QA=
-Date: Mon, 25 Jun 2018 16:47:46 +0000
-Message-ID: <007BD92917A2324FA403BCF9A464CF84F35015D5@ALA-MBD.corp.ad.wrs.com>
-References: <20180623235626.228940-1-joe.slater@windriver.com>
-	<CAMKF1sqObyS4hW4hLGA=TynF+A5TSYZZvRshtMg4wDzfvdz9ng@mail.gmail.com>
-In-Reply-To: <CAMKF1sqObyS4hW4hLGA=TynF+A5TSYZZvRshtMg4wDzfvdz9ng@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.11.157.215]
+	Tue, 26 Jun 2018 01:27:37 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w5Q1Rcx3014498
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jun 2018 18:27:38 -0700 (PDT)
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 25 Jun 2018 18:27:37 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 26 Jun 2018 09:27:35 +0800
+Message-ID: <1529976455-18198-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH 1/1] metacity: allow for warnings during compilation
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-initramfs][PATCH] dracut: upgrade 046 -> 047
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,40 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jun 2018 16:47:47 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 26 Jun 2018 01:27:38 -0000
+Content-Type: text/plain
 
-SSB0aGluayBpdCBpcyBiZXR0ZXIgdG8gaGF2ZSB0byB0YWtlIGFuIGFjdGlvbiB0byBjb3ZlciB1
-cCBhbiBpc3N1ZSByYXRoZXIgdGhhbiBuZWVkDQp0byBkbyBzb21ldGhpbmcgdG8gZXhwb3NlIGl0
-LCBidXQgZWl0aGVyIHdheSBnaXZlcyB5b3UgYSBjaG9pY2UuDQoNCkpvZQ0KDQotLS0tLU9yaWdp
-bmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogS2hlbSBSYWogW21haWx0bzpyYWoua2hlbUBnbWFpbC5j
-b21dIA0KU2VudDogU2F0dXJkYXksIEp1bmUgMjMsIDIwMTggNTozMSBQTQ0KVG86IFNsYXRlciwg
-Sm9zZXBoDQpDYzogb3BlbmVtYmVkZWQtZGV2ZWwNClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLWdu
-b21lXVtQQVRDSCAxLzFdIG1ldGFjaXR5OiBhbGxvdyBmb3Igd2FybmluZ3MgZHVyaW5nIGNvbXBp
-bGF0aW9uDQoNCk9uIFNhdCwgSnVuIDIzLCAyMDE4IGF0IDQ6NTYgUE0gSm9lIFNsYXRlciA8am9l
-LnNsYXRlckB3aW5kcml2ZXIuY29tPiB3cm90ZToNCj4NCj4gQWRkIGEgUEFDS0FHRUNPTkZJRyBv
-cHRpb24gd2hpY2ggbGV0cyB1cyBwZXJtaXQgd2FybmluZ3MgZHVyaW5nDQo+IGNvbXBpbGF0aW9u
-IHVudGlsIHdhcm5pbmdzIGZyb20gbmV3IGNvbXBpbGVyIHZlcnNpb25zIGFyZQ0KPiBkZWFsdCB3
-aXRoLg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBKb2UgU2xhdGVyIDxqb2Uuc2xhdGVyQHdpbmRyaXZl
-ci5jb20+DQo+IC0tLQ0KPiAgbWV0YS1nbm9tZS9yZWNpcGVzLWdub21lL21ldGFjaXR5L21ldGFj
-aXR5XzMuMjguMC5iYiB8IDUgKysrKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMo
-KykNCj4NCj4gZGlmZiAtLWdpdCBhL21ldGEtZ25vbWUvcmVjaXBlcy1nbm9tZS9tZXRhY2l0eS9t
-ZXRhY2l0eV8zLjI4LjAuYmIgYi9tZXRhLWdub21lL3JlY2lwZXMtZ25vbWUvbWV0YWNpdHkvbWV0
-YWNpdHlfMy4yOC4wLmJiDQo+IGluZGV4IGNlOTdhODAuLjk0OGMyZjEgMTAwNjQ0DQo+IC0tLSBh
-L21ldGEtZ25vbWUvcmVjaXBlcy1nbm9tZS9tZXRhY2l0eS9tZXRhY2l0eV8zLjI4LjAuYmINCj4g
-KysrIGIvbWV0YS1nbm9tZS9yZWNpcGVzLWdub21lL21ldGFjaXR5L21ldGFjaXR5XzMuMjguMC5i
-Yg0KPiBAQCAtMjMsNiArMjMsMTEgQEAgU1JDUkVWID0gImMwZDRiMmZjMGZjZDZmMmQzYzM3ZGE5
-MzU5MjNmOWU5ZWQ1ZWI5OWYiDQo+DQo+ICBFWFRSQV9PRUNPTkYgKz0gIi0tZGlzYWJsZS14aW5l
-cmFtYSINCj4NCj4gK1BBQ0tBR0VDT05GSUcgPz0gIiINCj4gKw0KDQpzaW5jZSB3ZSBkZWZhdWx0
-ZWQgdG8gZ2NjOCBpbiBvZS1jb3JlLCBwZXJoYXBzIGl0cyBiZXR0ZXIgdG8gdHVybiBpdCBvbg0K
-YnkgZGVmYXVsdC4NCg0KPiArIyBlbmFibGUgYXMgbmVjY2Vzc2FyeSB1bnRpbCBuZXcgd2Fybmlu
-Z3MgYXJlIGRlYWx0IHdpdGgNCj4gK1BBQ0tBR0VDT05GSUdbbm9XZXJyb3JdID0gIi0tZGlzYWJs
-ZS1XZXJyb3IsLCwiDQo+ICsNCj4gIGRvX2NvbmZpZ3VyZV9wcmVwZW5kKCkgew0KPiAgICAgIGNk
-ICR7U30NCj4gICAgICBhY2xvY2FsIC0taW5zdGFsbCB8fCBleGl0IDENCj4gLS0NCj4gMi43LjQN
-Cj4NCj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2
-ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index ccf9f6a..25c338c 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -6,10 +6,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ PE = "1"
+-PV = "046+git${SRCREV}"
++PV = "047"
+ 
+-# v046 tag
+-SRCREV = "a0799ffb554487a370c2a1adafaedd2021b6dc8c"
++# v047 tag
++SRCREV = "8ae8652edd645555a2eb7ab11b39cbc8b5da2928"
+ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
+            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+            "
+-- 
+2.7.4
+
 
