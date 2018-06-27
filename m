@@ -1,47 +1,49 @@
-Return-Path: <fritjof.jonsson@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2813E74580
+Return-Path: <daniel.diaz@linaro.org>
+Received: from mail-oi0-f54.google.com (mail-oi0-f54.google.com
+	[209.85.218.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C3F56FFED
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 11:45:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 28304182C8
+	Wed, 27 Jun 2018 17:43:58 +0000 (UTC)
+Received: by mail-oi0-f54.google.com with SMTP id f79-v6so2645182oib.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 13:45:51 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id ieH-vm7s7n0q
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 99AAA182FF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 4422C1E066
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 37C5C1E060
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder03.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-Received: from lnxfritjofj.se.axis.com (lnxfritjofj.se.axis.com [10.88.130.23])
-	by seth.se.axis.com (Postfix) with ESMTP id 2ACC4307E;
-	Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-Received: by lnxfritjofj.se.axis.com (Postfix, from userid 12665)
-	id 260F1409C8; Wed, 27 Jun 2018 13:45:50 +0200 (CEST)
-From: Fritjof Jonsson <fritjof.jonsson@axis.com>
+	Wed, 27 Jun 2018 10:44:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fatQDHA+6qs3NGdG0TsWdD4zzjUXmQV9C/5KyxfFYtc=;
+	b=b4Ba+LsoW3TO8ozJ10hd3tAjD07jFn3H5KHMx4DDkImjnqeJzHlDUGuM7//TPhytgx
+	ExykQFBZwbEj/BnImKbznIlgxMhWlGU5mkzwIyUeM5NaLLOO0iU849JYan0LNbsERzZ5
+	vqFnHglqQn1yCi1EWJnKpIhHCprHyY9vqqI6c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fatQDHA+6qs3NGdG0TsWdD4zzjUXmQV9C/5KyxfFYtc=;
+	b=cgvDFgGIo0vyEK2ikXwvFIw7CMYwhroUhOqMZ7YvmYVnnw4CR6ALZS3Fwf7kYw9YVy
+	G/4hJtghSX3eMXobVglGgs051OYFmIRLgN00wM/QNvpsAEDo09TPJ/12Jp84XGuThzub
+	yui7oEzvqRK408xzEKFD+eDitEZIl0/wVeZ973AVIzyixu/8iAVC95FLHmAu8SsD7nhD
+	wuayLTL8GQjTiXP+pwQNdZzxY13QHidh7nLfotXBsQl42Xf1aazDdEGsi5Rsp4Eg9/qS
+	q7EflVJ6rL42LLYSuqpr4mEMtaHd3Tp9gwgY0r1oxywbLCuKfKwFbb66pxRjvDNFDmPd
+	szbQ==
+X-Gm-Message-State: APt69E2klcTzBvlEkDRl43YXhM+oFA4GFzrY6Nf0wKYZbTLaqj0++OTM
+	KZ3pek+QYkaqi3X6S+m6bKBGoSEaMo8=
+X-Google-Smtp-Source: AAOMgpe9/zlhF7AVmkEfedNTOEz9K6wlSXNpy8Yq8uIZzyu4xdIc6pb3XK+BSvpHNfjjdLgMetoXTQ==
+X-Received: by 2002:aca:6b03:: with SMTP id
+	g3-v6mr3545569oic.219.1530121439417; 
+	Wed, 27 Jun 2018 10:43:59 -0700 (PDT)
+Received: from aura.cortijodelrio.net
+	(CableLink-187-161-191-185.PCs.InterCable.net. [187.161.191.185])
+	by smtp.googlemail.com with ESMTPSA id
+	h142-v6sm2848238oic.9.2018.06.27.10.43.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 27 Jun 2018 10:43:58 -0700 (PDT)
+From: =?UTF-8?q?Daniel=20D=C3=ADaz?= <daniel.diaz@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Jun 2018 13:44:55 +0200
-Message-Id: <20180627114455.31496-1-fritjofj@axis.com>
-X-Mailer: git-send-email 2.11.0
-X-TM-AS-GCONF: 00
-Cc: Fritjof Jonsson <fritjofj@axis.com>
-Subject: [meta-oe][PATCH] Add recipe for cereal, a header-only C++11 serialization library.
+Date: Wed, 27 Jun 2018 12:43:51 -0500
+Message-Id: <1530121431-7102-1-git-send-email-daniel.diaz@linaro.org>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2] bpftool: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,38 +56,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jun 2018 11:45:51 -0000
+X-List-Received-Date: Wed, 27 Jun 2018 17:43:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Change-Id: Ia9e454b0b1caf16dd11ac371bda213375955f543
-Signed-off-by: Fritjof Jonsson <fritjofj@axis.com>
+The bpftool allows for inspection and simple manipulation of
+eBPF programs and maps, so common in the kernel selftests.
+
+Signed-off-by: Daniel Díaz <daniel.diaz@linaro.org>
 ---
- meta/recipes-support/libcereal/libcereal_1.2.2.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta/recipes-support/libcereal/libcereal_1.2.2.bb
+v2: Drop superfluous chown
 
-diff --git a/meta/recipes-support/libcereal/libcereal_1.2.2.bb b/meta/recipes-support/libcereal/libcereal_1.2.2.bb
+ meta-oe/recipes-kernel/bpftool/bpftool.bb | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/bpftool/bpftool.bb
+
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
 new file mode 100644
-index 0000000..e733f2f
+index 0000000..fd0653a
 --- /dev/null
-+++ b/meta/recipes-support/libcereal/libcereal_1.2.2.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "A C++11 library for serialization"
-+HOMEPAGE = "https://uscilab.github.io/cereal/"
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "Inspect and manipulate eBPF programs and maps"
++DESCRIPTION = "bpftool is a kernel tool for inspection and simple manipulation \
++of eBPF programs and maps."
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
++DEPENDS = "binutils elfutils"
++PROVIDES = "virtual/bpftool"
 +
-+SECTION = "libs"
++inherit bash-completion kernelsrc kernel-arch
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e612690af2f575dfd02e2e91443cea23"
++do_populate_lic[depends] += "virtual/kernel:do_patch"
 +
-+SRCREV = "51cbda5f30e56c801c07fe3d3aba5d7fb9e6cca4"
-+SRC_URI = "git://github.com/USCiLab/cereal.git"
++EXTRA_OEMAKE = "-C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
 +
-+S = "${WORKDIR}/git"
++do_configure[depends] += "virtual/kernel:do_shared_workdir"
 +
-+inherit cmake
++do_compile() {
++    oe_runmake
++}
 +
-+EXTRA_OECMAKE = "-DJUST_INSTALL_CEREAL=ON"
++do_install() {
++    oe_runmake DESTDIR=${D} install
++}
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++python do_package_prepend() {
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++}
++
++B = "${WORKDIR}/${BPN}-${PV}"
 -- 
-2.11.0
+2.7.4
 
 
