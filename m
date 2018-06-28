@@ -1,46 +1,40 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-X-Greylist: delayed 300 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 28 Jun 2018 13:51:56 UTC
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 7031171C9B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 3721074966
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2018 13:51:56 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1530193917; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=Cdw47r4lbqvmzhUGEPXPVYIexvPkktt5cotFflPsP58=;
-	b=XtCkUflrIrkhoJtHDTlS/V4b1QQ6uT1Lfbgp5WrpIZbqHICGaiLpDiogB4bwdmjM+9mXbW0j
-	IQE1fmUhNwJ1siemYlMLrAophY06KfAYgwiCOKW/Jy9ygzPrDnx4fVWubd0xHeAu+zxKXn/V
-	a8p1ZiePRnPoNcu+vNrtE+swHLQ=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-it0-f47.google.com (mail-it0-f47.google.com
-	[209.85.214.47])
-	by mxa.mailgun.org with ESMTP id 5b34e6d0.7fe7b16f0e70-smtp-out-n03;
-	Thu, 28 Jun 2018 13:46:56 -0000 (UTC)
-Received: by mail-it0-f47.google.com with SMTP id 76-v6so12826753itx.4
+	Thu, 28 Jun 2018 14:05:14 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id z6-v6so4803757qti.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2018 06:46:56 -0700 (PDT)
-X-Gm-Message-State: APt69E1kavr6R8GjBYvGsyxW2FLWyMkoXE/7AqSGB1ncLsHqNVzvihte
-	pnNBm1TF2cRD5wy5kApUinif6xmeok8jR4oclgE=
-X-Google-Smtp-Source: AAOMgpedHOYc20yIJk5HM/BXTRsulgBNhsvOIhFidB1pyQqpgAJJGQQRgJ3f0i3c9yYfUQMDxImFYKiOesgHBu3srjY=
-X-Received: by 2002:a24:6ccb:: with SMTP id
-	w194-v6mr1577613itb.10.1530193615472; 
-	Thu, 28 Jun 2018 06:46:55 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a6b:8c4e:0:0:0:0:0 with HTTP; Thu, 28 Jun 2018 06:46:54
-	-0700 (PDT)
-In-Reply-To: <1530193274-16477-1-git-send-email-derek@asterius.io>
-References: <1530193274-16477-1-git-send-email-derek@asterius.io>
+	Thu, 28 Jun 2018 07:05:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xVPrjUmulspRYjIG8qo0SBiJmQvFeL6uPv90k4HMqek=;
+	b=UAbzEq1mO3hJBDZFLzdahdBbX7LWb7GF+geGAr+10XN4JHfmiIrtBsqZqsGlx+7gct
+	UbH6ND1tjA2PmrkeT1OhHbN1hBTXn7dWcHkiM6EZ6yCfOsONMjXzewvqNi9geq1PDiu3
+	ZoK65YwuWliw9YQl/wdg8fgWCkEGY7RUjsGSibxo/RpByR3XyfRWV+0m3NLV1EvXBJGw
+	jEjUF7PY8bAf4w/MkAG/6eroaFfTETpQ/fYUjjDHKEmedlMFJKUn45ljdeb1nJTzrcks
+	D5XfYO8sFRg/V9anX4fnPo0MYvDKkhLvV6cdpbE9t87/CVTzYsNFfXjh6JO9aNDZFMXR
+	fePw==
+X-Gm-Message-State: APt69E0Ko0g+ygWvAPHMPX9grg35Fu8MprMn6q4piRWsMPAd48WNT9O+
+	EPHMloegPIW1HivxO+RlL/5F5+AD
+X-Google-Smtp-Source: AAOMgpfTIwg4Vco93sVAY0r1B17hRwF2+OxvuA7SBT7lv3G1g9YLYEx2+clfgUi2+RiBggTDEC3n1A==
+X-Received: by 2002:a0c:e5c5:: with SMTP id
+	u5-v6mr9205473qvm.248.1530194714608; 
+	Thu, 28 Jun 2018 07:05:14 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-100-33-240-84.nycmny.fios.verizon.net. [100.33.240.84])
+	by smtp.gmail.com with ESMTPSA id
+	x4-v6sm4120684qti.7.2018.06.28.07.05.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 28 Jun 2018 07:05:13 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
-Date: Thu, 28 Jun 2018 09:46:54 -0400
-X-Gmail-Original-Message-ID: <CADNbA1oRJDSAG1P_f+eTPigN7XkizNjHYF59PXm7uvA05emiRQ@mail.gmail.com>
-Message-ID: <CADNbA1oRJDSAG1P_f+eTPigN7XkizNjHYF59PXm7uvA05emiRQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-urllib3: update to version 1.23
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 Jun 2018 10:05:03 -0400
+Message-Id: <1530194703-27622-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-cython: update to version 0.28.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,56 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2018 13:51:56 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 28 Jun 2018 14:05:14 -0000
 
-This one can be dropped.  Looks like it was already submitted
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
+ .../python/{python-cython_0.28.2.bb => python-cython_0.28.3.bb}       | 0
+ .../python/{python3-cython_0.28.2.bb => python3-cython_0.28.3.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cython_0.28.2.bb => python-cython_0.28.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.28.2.bb => python3-cython_0.28.3.bb} (100%)
 
-On Thu, Jun 28, 2018 at 9:41 AM, Derek Straka <derek@asterius.io> wrote:
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index 5d3b9d5..33873c9 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-SRC_URI[md5sum] = "0e0568d6bed4b09ad01afe0a38805305"
+-SRC_URI[sha256sum] = "634e2f10fc8d026c633cffacb45cd8f4582149fa68e1428124e762dbc566e68a"
++SRC_URI[md5sum] = "586f0eb70ba1fcc34334e9e10c5e68c0"
++SRC_URI[sha256sum] = "1aae6d6e9858888144cea147eb5e677830f45faaff3d305d77378c3cba55f526"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.2.bb b/meta-python/recipes-devtools/python/python-cython_0.28.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cython_0.28.2.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.28.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.28.2.bb b/meta-python/recipes-devtools/python/python3-cython_0.28.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cython_0.28.2.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.28.3.bb
+-- 
+2.7.4
 
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  meta-python/recipes-devtools/python/python-urllib3.inc                |
-> 4 ++--
->  .../python/{python-urllib3_1.22.bb => python-urllib3_1.23.bb}         | 0
->  .../python/{python3-urllib3_1.22.bb => python3-urllib3_1.23.bb}       | 0
->  3 files changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-urllib3_1.22.bb =>
-> python-urllib3_1.23.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-urllib3_1.22.bb =>
-> python3-urllib3_1.23.bb} (100%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc
-> b/meta-python/recipes-devtools/python/python-urllib3.inc
-> index cf79926..288ed8b 100644
-> --- a/meta-python/recipes-devtools/python/python-urllib3.inc
-> +++ b/meta-python/recipes-devtools/python/python-urllib3.inc
-> @@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a0
-> 67"
->
-> -SRC_URI[md5sum] = "0da7bed3fe94bf7dc59ae37885cc72f7"
-> -SRC_URI[sha256sum] = "cc44da8e1145637334317feebd728b
-> d869a35285b93cbb4cca2577da7e62db4f"
-> +SRC_URI[md5sum] = "1ad43e4b5ab7a0794c89dc057e1d7179"
-> +SRC_URI[sha256sum] = "a68ac5e15e76e7e5dd2b8f94007233
-> e01effe3e50e8daddf69acfd81cb686baf"
->
->  RDEPENDS_${PN} += "\
->      ${PYTHON_PN}-certifi \
-> diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.22.bb
-> b/meta-python/recipes-devtools/python/python-urllib3_1.23.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-urllib3_1.22.bb
-> rename to meta-python/recipes-devtools/python/python-urllib3_1.23.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.22.bb
-> b/meta-python/recipes-devtools/python/python3-urllib3_1.23.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-urllib3_1.22.bb
-> rename to meta-python/recipes-devtools/python/python3-urllib3_1.23.bb
-> --
-> 2.7.4
->
->
 
