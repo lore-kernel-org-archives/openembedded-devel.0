@@ -1,51 +1,51 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
-	[209.85.218.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DE56E74D0B
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D025605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2018 18:48:31 +0000 (UTC)
-Received: by mail-oi0-f65.google.com with SMTP id r16-v6so5651210oie.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2018 11:48:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=14Eg7IAol5hOJa4YbI6rIzRLstf4ZkIAryM/u/0xhyQ=;
-	b=Kt+gi14HbUcEuEZF82WbdUJsmK4AzmXmH4hjxLHoPAlFj83EA4Ivy7g/+pggseP/XF
-	NJSH+WovIWo4VT86u9P41P/1Tl/hh6p53RlJRa+VLYRTztJfSeQIOgR1zeJYHVlr3MXb
-	eMbsAXhjd1XjKF+BFMLoyVtEVUX/qoT1J3ofAPPcHVu6Ab3Xx1SJNloR/Bnw6Ak1p4Vo
-	iVPMkMdKI8jSAQaipAMKrpRfwDdMIMJY78FLty+3KQkutataIwwmU1J9TOxhWQIRNgUq
-	A/gvWwxkGyI00jObDOPUeiDpLw/Jb/b0r5N/jLGe8BaTFZaI3rQdqa3NLlg8+tyl/Bo4
-	40TA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=14Eg7IAol5hOJa4YbI6rIzRLstf4ZkIAryM/u/0xhyQ=;
-	b=jxEFqWzYfIv2vB9D99xp1F4ZEB7bSD40Nz4JHjMG5Q3/mctlYrWw/OJCixzVEcnXSD
-	m3WpwQoMUJE5mY9Du0tg/TWFbFGUmdzrEm/3E/g+6p6ddugk7tIm/k9aV97h/5w1Vaj5
-	GnZsNi1vEO5lN+USkZoElnGGMWUO9mw/pY/MITG3mVxt0M3QMbr3bLM0rVtKnJxeZA/a
-	iQ5Dapo25Gt9DyC/+j2ibeumEWBdjKe1VEUywPbofLjWKKFf4MfCidpKEmi/LH+oIoGd
-	3xs9tWMpV2PriLfxccdH6qTvIZ60TFxR0i2KtIHZs91xJOLRVtu7IPuga4m0hwKPXwtM
-	hl8w==
-X-Gm-Message-State: APt69E21Z75wtopP6bYoP2vHZ7XGLFHKyChpcL4pmz88/fXDszuh1IXc
-	JZavjiIj4t8n8W3UJ3uuwxYNyg==
-X-Google-Smtp-Source: AAOMgpf0TmtgG8S3YsLdBK1xUcqjwPGL3iezQZ8vyz4Jhf250JnkxkGrQfMQuVfF//eJ92agnPCBBg==
-X-Received: by 2002:aca:d015:: with SMTP id
-	h21-v6mr6283280oig.142.1530211712782; 
-	Thu, 28 Jun 2018 11:48:32 -0700 (PDT)
-Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id
-	p2-v6sm3495681otl.63.2018.06.28.11.48.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 28 Jun 2018 11:48:32 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Jun 2018 11:48:18 -0700
-Message-Id: <1530211698-23398-2-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1530211698-23398-1-git-send-email-armccurdy@gmail.com>
-References: <1530211698-23398-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 2/2] protobuf-c: misc recipe cleanup
+	Thu, 28 Jun 2018 20:46:58 +0000 (UTC)
+Received: (qmail 6649 invoked by uid 1003); 28 Jun 2018 20:46:59 -0000
+Received: from unknown (HELO ?192.168.0.149?) (philip@opensdr.com@103.70.64.68)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	28 Jun 2018 20:46:54 -0000
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>
+From: Philip Balister <philip@balister.org>
+Openpgp: preference=signencrypt
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+Message-ID: <aa086d52-abe4-6d02-47d4-a58f63f11534@balister.org>
+Date: Fri, 29 Jun 2018 07:46:07 +1100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
+MIME-Version: 1.0
+Subject: OEDEM Sunday, 21 October 2018 in Edinburgh (before ELCE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,49 +58,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jun 2018 18:48:32 -0000
+X-List-Received-Date: Thu, 28 Jun 2018 20:46:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 8bit
 
-Re-order variables to align more closely with the OE style-guide.
+OpenEmbedded is holding a developer meting in Edinburgh before ELCE.
+Anyone with an interest in OpenEmbedded development is welcome to
+attend. The core developers enjoy hearing about the needs and problems
+of the larger community.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+At this we are looking for meeting space and it would be a huge help to
+have a better idea of the headcount. Please add yourself if you intend
+to attend the meeting. (If you drop out later, go ahead and remove yourself)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
-index fe1e6e5..9b69690 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
-@@ -8,15 +8,10 @@ has been split out into the protobuf-c-rpc project."
- HOMEPAGE = "https://github.com/protobuf-c/protobuf-c"
- SECTION = "console/tools"
- LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
- 
- DEPENDS = "protobuf-native protobuf"
- 
--PACKAGE_BEFORE_PN = "${PN}-compiler"
--RDEPENDS_${PN}-compiler = "protobuf-compiler"
--RDEPENDS_${PN}-dev += "${PN}-compiler"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
--
- PV .= "+git${SRCPV}"
- SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
- 
-@@ -26,6 +21,11 @@ S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
-+PACKAGE_BEFORE_PN = "${PN}-compiler"
-+
- FILES_${PN}-compiler = "${bindir}"
- 
-+RDEPENDS_${PN}-compiler = "protobuf-compiler"
-+RDEPENDS_${PN}-dev += "${PN}-compiler"
-+
- BBCLASSEXTEND = "native nativesdk"
--- 
-1.9.1
+The RSVP web page is:
 
+https://www.openembedded.org/wiki/OEDEM_2018
+
+Searching the wiki for OEDEM should get you info from topics discussed
+at past meetings.
+
+If you need to create an account, approval might be delayed a bit as I
+am on vacation ...
+
+Philip
 
