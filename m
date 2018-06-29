@@ -1,40 +1,40 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
-	[209.85.220.180])
-	by mail.openembedded.org (Postfix) with ESMTP id F04396006E
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8133A6006E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 21:01:40 +0000 (UTC)
-Received: by mail-qk0-f180.google.com with SMTP id o2-v6so5688808qkc.13
+	Fri, 29 Jun 2018 21:07:38 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id 92-v6so9079179qta.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 14:01:42 -0700 (PDT)
+	Fri, 29 Jun 2018 14:07:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bXa/ms9LfGoaVrtESukX+XuEfEVi6cAgmcZJ7UMX3V8=;
-	b=VsrMai+Ctb9R4tPu2e25XMBN7UHnc2GXGvfe6JjrKFEiNOlVEWaC7PqeR8x5g7Osjt
-	KXjzB8BV85zlvXiLB0ZZ54I32VXl+pYBUovXhDufnITB8gjqkRPuiyA/b8/92Ia5I89J
-	HsVporIBj1RsYTzY1kTyjTDhzYksaIgRtJrtv2Ei6ZAuh9qbGgn9yjC3Ha/5SEo4dWDD
-	/YaVqLZ0s60QPN+tY01CHDzxT8fgNRKqCKjotheRX40TWfHgv5ewNtB04Ifhy2499yie
-	q6jxnFvzDTyZpKXewJ10hGDY1ZrvxeoExHuP1oH3t6pFl/QHUI9a9T2BwSohTNCad4Uk
-	Xf5g==
-X-Gm-Message-State: APt69E1WiuDTcu0toiDJciQEmuprgueyrNAgF1QISGHWiKvpxJ/E4bZK
-	Bvc777z1zDrATBBwtqjDPSDgEAw3
-X-Google-Smtp-Source: AAOMgpdzgXBKwvxDYNBhEAR+HZVOQ4T9ld6ibX1sbX+4RxxQrkWLGF+wNkUSv1aGXdu82mYjBqE19A==
-X-Received: by 2002:a37:b803:: with SMTP id
-	i3-v6mr14472447qkf.170.1530306101546; 
-	Fri, 29 Jun 2018 14:01:41 -0700 (PDT)
+	bh=ou7vLgu9dYCtNM9uTCYETkP88mtdsALxEbNUQ+7Mbg0=;
+	b=YGdc+vIL+oijlzADOn8JBP4EpJQMEZKY1mWThgcJef40HrHJ2IS1A1l4PzguVLoGyS
+	Mx+3t2Rx5ht0Ug6YnX98PIycq3ylpXufeHpYEQ3wvi0CG/R6QwGppKM3G4SQC/RAW5Id
+	b9vZ4hznsm6dkNj6OuzkmmlxK4piMxMNPfE3OxsIVJv9BLPWEsmmzCa5If7IUTjZuK77
+	CxVPGydFcyhcXypvXfunmFJHINdyKpvfR1ue7G5JrAfw43h7BTPwTyBoq0Mg4a36Dm9S
+	Hx7QrD4UHfzst5cElBmy6miigJ3C73yLoo3DC3c5MwMbukkZsX5ZkPMCUGCjwAxxW90O
+	cRkg==
+X-Gm-Message-State: APt69E1broG5YqI2Oik5uu+DQ6iheOhRqOsLYfVDtgsK42WzHRqTmgMw
+	DBNeXWCDC2DDoASejWlF1ZZgxc6N
+X-Google-Smtp-Source: AAOMgpdeDFSSHbb9qrGjy9x2Oy1F/fGbl6LcTlmQJ5tlZHz3Nk95CEswsGhxBr9AAkR0dd2uX1o+NA==
+X-Received: by 2002:ac8:7158:: with SMTP id
+	h24-v6mr7738851qtp.309.1530306459096; 
+	Fri, 29 Jun 2018 14:07:39 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-100-33-240-84.nycmny.fios.verizon.net. [100.33.240.84])
 	by smtp.gmail.com with ESMTPSA id
-	w46-v6sm8311874qtw.55.2018.06.29.14.01.40
+	b188-v6sm6630784qkf.71.2018.06.29.14.07.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Jun 2018 14:01:40 -0700 (PDT)
+	Fri, 29 Jun 2018 14:07:38 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Jun 2018 17:01:33 -0400
-Message-Id: <1530306093-25258-1-git-send-email-derek@asterius.io>
+Date: Fri, 29 Jun 2018 17:07:25 -0400
+Message-Id: <1530306445-26528-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pymisp: update to version 2.4.92.1
+Subject: [meta-python][PATCH] python-pyperclip: update to version 1.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,40 +47,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2018 21:01:41 -0000
+X-List-Received-Date: Fri, 29 Jun 2018 21:07:38 -0000
+
+License-Update: Update checksum for latest package version file. License terms are unchanged
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pymisp.inc                 | 4 ++--
- .../python/{python-pymisp_2.4.89.bb => python-pymisp_2.4.92.1.bb}     | 0
- .../python/{python3-pymisp_2.4.89.bb => python3-pymisp_2.4.92.1.bb}   | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymisp_2.4.89.bb => python-pymisp_2.4.92.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.89.bb => python3-pymisp_2.4.92.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-pyperclip.inc            | 6 +++---
+ .../python/{python-pyperclip_1.6.0.bb => python-pyperclip_1.6.2.bb} | 0
+ .../{python3-pyperclip_1.6.0.bb => python3-pyperclip_1.6.2.bb}      | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyperclip_1.6.0.bb => python-pyperclip_1.6.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyperclip_1.6.0.bb => python3-pyperclip_1.6.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index 7765cc5..e53797a 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-python/recipes-devtools/python/python-pyperclip.inc b/meta-python/recipes-devtools/python/python-pyperclip.inc
+index e05de67..205038b 100644
+--- a/meta-python/recipes-devtools/python/python-pyperclip.inc
++++ b/meta-python/recipes-devtools/python/python-pyperclip.inc
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "A cross-platform clipboard module for Python. (only handles plain text for now)"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ed92115c8f96b19ec34ed09df586e51"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=4a3129a2c1b8bdc0e2895a1ec0e2dae2"
  
--SRC_URI[md5sum] = "d4fee2abb2d7468010b7fe9ebc68b0cb"
--SRC_URI[sha256sum] = "304fbd8862dfde27d767c093de87fec42fc63c70d8393643d1a3b4f765aae78f"
-+SRC_URI[md5sum] = "7390fe6a8df25170059e32f1988d5447"
-+SRC_URI[sha256sum] = "63a52b97981b0e3c0023e11ce22f097356cdc9ef7c28a3415a17a08fcd7e8984"
+-SRC_URI[md5sum] = "d2f6a3129cd6f2518b52bb0b8deeeda7"
+-SRC_URI[sha256sum] = "ce829433a9af640e08ee89b20f7c62132714bcc5d77df114044d0fccb8c3b3b8"
++SRC_URI[md5sum] = "3680607974f99d6e4411b102358b1884"
++SRC_URI[sha256sum] = "43496f0a1f363a5ecfc4cda5eba6a2a3d5056fe6c7ffb9a99fbb1c5a3c7dea05"
  
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-dateutil \
-diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.89.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.92.1.bb
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pyperclip_1.6.0.bb b/meta-python/recipes-devtools/python/python-pyperclip_1.6.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pymisp_2.4.89.bb
-rename to meta-python/recipes-devtools/python/python-pymisp_2.4.92.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.89.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.92.1.bb
+rename from meta-python/recipes-devtools/python/python-pyperclip_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python-pyperclip_1.6.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyperclip_1.6.0.bb b/meta-python/recipes-devtools/python/python3-pyperclip_1.6.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.89.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.92.1.bb
+rename from meta-python/recipes-devtools/python/python3-pyperclip_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-pyperclip_1.6.2.bb
 -- 
 2.7.4
 
