@@ -1,44 +1,43 @@
-Return-Path: <prvs=67189f18c8=alexandru.vasiu@ni.com>
-X-Greylist: delayed 441 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 29 Jun 2018 10:26:08 UTC
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 840FA60602
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id AEFD974D0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 10:26:08 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w5TAFXxt009125 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 05:18:49 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2jvdqwx1pp-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 05:18:48 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com
-	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w5TAImJ9014707
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Fri, 29 Jun 2018 12:33:13 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id l15-v6so1894563wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 05:18:48 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 29 Jun 2018 05:18:47 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 29 Jun 2018 05:18:47 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 29 Jun 2018 13:17:58 +0300
-Message-ID: <20180629101758.28179-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.18.0
+	Fri, 29 Jun 2018 05:33:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=6xRsFrLTwXR8U6PCBeVefcjm33LaL2pvVCCGl7HK51Y=;
+	b=WU1IgOOczvY96SpJ67hTOQS8RPpfjVWwecul92VFM0JgpqAzsTIoseIIQv1yikY1pP
+	KvA48lVv803LGgeAIyg8tPMVb2v1mFqCStzyISAh0sb60quUXEiWORy0IOReSHmU1cy3
+	p0ylXPMkp54ApdvSooPw0vyFeYjyCZjGnC+Bf0WKjyyiO6GivtYzc3muAd9V++fF54NL
+	be9uhHmbDvTT7FI5cUSHgJHb1DvYLRXKn7vtQg1tlzBD+uhSm2N6TB0kbVTvADX1BfNM
+	C2oJ5dBeA9pUYcfiXojmbEdiUFJqhXO+KI9aCTozT3LODzoZtIef6x/1qljPy1A+m7V0
+	c/eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=6xRsFrLTwXR8U6PCBeVefcjm33LaL2pvVCCGl7HK51Y=;
+	b=RQUVHlOS3m6O2TkVVMi9t0X/Xdom/mGkAtdCnQJyWeq6jjabH9q7+04TtyiUE5IIE4
+	uILZIQxbz+RWKi0pFbiN83hHIO08N/EjUrY2rK+ocNhnZgY0x+vluiAzJcv/WUupSGzG
+	ll8Y49Wa23L5gbjpeNt+k0B1rcTnyH2O4UqplxvWaZY3XJP7Fg1m3nbyByVpjpcywShm
+	BzeSDIOANCYWEcZcQfuMyOZfxXKhC7nTzjl8ItF7qRqc6/3KwAu1hbyFrBJHERqdUBT8
+	wZk0MG4zx1tfbv49Z4mmn7UrpeJCZ5eZAcFEWT7T2IAXXqF7hsHCou4Vb3a28QGLKtM8
+	rS9Q==
+X-Gm-Message-State: APt69E22s1uVIA5vBqGDX/jq1BjgzySfjVxFhTvJlYf6sNt+Mopl2O9K
+	6conBMh+NZbhHigYiHyLXEgjJywKlPumUpE+B60wDw==
+X-Google-Smtp-Source: AAOMgpeTRnfytnkYtInJj+vxUfDrDJlIHAolw3E72uP+cpS1putfbdKRK3OAZj4SpY1q5qXtiUj99WOkoKQVvS04QUA=
+X-Received: by 2002:a1c:a342:: with SMTP id
+	m63-v6mr1594729wme.141.1530275594023; 
+	Fri, 29 Jun 2018 05:33:14 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-06-29_03:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to 0.0.6
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Fri, 29 Jun 2018 14:33:02 +0200
+Message-ID: <CAAfyv37AbvjKMnu=N38KxfJtRLFzAU=0CVFSpi64LpZgG6KTag@mail.gmail.com>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: meta-java openjdk-8 fails to compile for beaglebone
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,44 +50,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2018 10:26:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 29 Jun 2018 12:33:14 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc      | 6 +++---
- .../{python-pyiface_0.0.5.bb => python-pyiface_0.0.6.bb}    | 0
- .../{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.6.bb}  | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.5.bb => python-pyiface_0.0.6.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.6.bb} (100%)
+Hello,
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index 620b244c6..8e464a83f 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -3,9 +3,9 @@ SECTION = "devel/python"
- HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
- LICENSE = "GPLv3+"
- 
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
- 
--SRC_URI[md5sum] = "06c3c71fe51df740dae6a88a13afb5e0"
--SRC_URI[sha256sum] = "4bb79100cbcf7344a1ccaddc578cd6455da47d8eac6eb1bf903ec32e043af924"
-+SRC_URI[md5sum] = "2379d8d4506e6c4d83cf3d4824abce8b"
-+SRC_URI[sha256sum] = "774ea47bb1387e493f6d5d0937b68fa28202c948eccddbd6e4cf2d708dcd86f2"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb
+I'm trying to compile openjdk-8 from actual meta-java master (I'm
+using rocko poky though).
+I basically copy content of openjdk to custom layer and added small
+bbappend with following content:
+
+DEPENDS += "cups libxrender xtst libxt"
+
+as without that when building with X11 configure phase fails. But
+during compilation I get this error:
+
+i/openjdk-8/162b12-r0/build/jdk/gensrc_headers.BUILD_JDK.tmp
+@/home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/classes/_the.BUILD_JDK_batch.tmp
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XRenderPictFormat.java:8:
+error: cannot find symbol
+| public class XRenderPictFormat extends XWrapperBase {
+|                                        ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XRenderDirectFormat.java:8:
+error: cannot find symbol
+| public class XRenderDirectFormat extends XWrapperBase {
+|                                          ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XVisibilityEvent.java:8:
+error: cannot find symbol
+| public class XVisibilityEvent extends XWrapperBase {
+|                                       ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XkbExtensionDeviceNotifyEvent.java:8:
+error: cannot find symbol
+| public class XkbExtensionDeviceNotifyEvent extends XWrapperBase {
+|                                                    ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/AwtGraphicsConfigData.java:8:
+error: cannot find symbol
+| public class AwtGraphicsConfigData extends XWrapperBase {
+|                                            ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XVisualInfo.java:8:
+error: cannot find symbol
+| public class XVisualInfo extends XWrapperBase {
+|                                  ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/awtImageData.java:8:
+error: cannot find symbol
+| public class awtImageData extends XWrapperBase {
+|                                   ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/ColorData.java:8:
+error: cannot find symbol
+| public class ColorData extends XWrapperBase {
+|                                ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XPixmapFormatValues.java:8:
+error: cannot find symbol
+| public class XPixmapFormatValues extends XWrapperBase {
+|                                          ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/ColorEntry.java:8:
+error: cannot find symbol
+| public class ColorEntry extends XWrapperBase {
+|                                 ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XKeymapEvent.java:8:
+error: cannot find symbol
+| public class XKeymapEvent extends XWrapperBase {
+|                                   ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/AwtScreenData.java:8:
+error: cannot find symbol
+| public class AwtScreenData extends XWrapperBase {
+|                                    ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XColormapEvent.java:8:
+error: cannot find symbol
+| public class XColormapEvent extends XWrapperBase {
+|                                     ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XEvent.java:8:
+error: cannot find symbol
+| public class XEvent extends XWrapperBase {
+|                             ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XAnyEvent.java:8:
+error: cannot find symbol
+| public class XAnyEvent extends XWrapperBase {
+|                                ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XKeyEvent.java:8:
+error: cannot find symbol
+| public class XKeyEvent extends XWrapperBase {
+|                                ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XButtonEvent.java:8:
+error: cannot find symbol
+| public class XButtonEvent extends XWrapperBase {
+|                                   ^
+|   symbol: class XWrapperBase
+| /home/marek/projects/yocto/build-test/tmp/work/cortexa8hf-neon-poky-linux-gnueabi/openjdk-8/162b12-r0/build/jdk/gensrc/sun/awt/X11/XMotionEvent.java:8:
+error: cannot find symbol
+
+any ideas what to check, update? Also I plan to post dependency patch
+with X11 missing dependencies. Thanks.
+
+BR,
+
+marek
 -- 
-2.18.0
+as simple and primitive as possible
+-------------------------------------------------
+Marek Belisko - OPEN-NANDRA
+Freelance Developer
 
+Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
+Tel: +421 915 052 184
+skype: marekwhite
+twitter: #opennandra
+web: http://open-nandra.com
 
