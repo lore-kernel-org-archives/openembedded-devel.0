@@ -1,24 +1,25 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B10DC744B1
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 03A05744B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 06:22:25 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w5T6MQCt020435
+	Fri, 29 Jun 2018 06:22:37 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w5T6McnE024102
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jun 2018 23:22:26 -0700
+	Thu, 28 Jun 2018 23:22:39 -0700 (PDT)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Thu, 28 Jun 2018 23:22:18 -0700
+	14.3.399.0; Thu, 28 Jun 2018 23:22:27 -0700
 From: Changqing Li <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 29 Jun 2018 14:22:12 +0800
-Message-ID: <1530253337-32732-1-git-send-email-changqing.li@windriver.com>
+Date: Fri, 29 Jun 2018 14:22:13 +0800
+Message-ID: <1530253337-32732-2-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1530253337-32732-1-git-send-email-changqing.li@windriver.com>
+References: <1530253337-32732-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: SUBJECT:RR
+Subject: [PATCH][meta-oe] php: upgrade 7.2.4 -> 7.2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,123 +32,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2018 06:22:25 -0000
+X-List-Received-Date: Fri, 29 Jun 2018 06:22:38 -0000
 Content-Type: text/plain
-
-From 16cc71f4803c7773cf550fa53097c2aaeaf6a00e Mon Sep 17 00:00:00 2001
-From: Changqing Li <changqing.li@windriver.com>
-Date: Fri, 29 Jun 2018 12:43:28 +0800
-Subject: [PATCH][meta-oe] openldap: upgrade 2.4.45 -> 2.4.46
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-support/openldap/openldap/install-strip.patch  |  3 +++
- meta-oe/recipes-support/openldap/openldap/kill-icu.patch       |  2 +-
- .../openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch      |  2 +-
- .../openldap/openldap/openldap-CVE-2015-3276.patch             |  2 ++
- .../openldap/openldap/openldap-m4-pthread.patch                |  2 ++
- .../openldap/{openldap_2.4.45.bb => openldap_2.4.46.bb}        | 10 ++++------
- 6 files changed, 13 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.45.bb => openldap_2.4.46.bb} (97%)
+ .../php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch    | 2 +-
+ meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch         | 2 +-
+ meta-oe/recipes-devtools/php/php/iconv.patch                         | 2 +-
+ meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch              | 2 +-
+ meta-oe/recipes-devtools/php/php/pear-makefile.patch                 | 2 +-
+ meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch            | 2 +-
+ meta-oe/recipes-devtools/php/php/php_exec_native.patch               | 2 +-
+ meta-oe/recipes-devtools/php/{php_7.2.4.bb => php_7.2.7.bb}          | 5 ++---
+ 8 files changed, 9 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_7.2.4.bb => php_7.2.7.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/install-strip.patch b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-index 2992b70..7c67596 100644
---- a/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-@@ -1,6 +1,9 @@
- # This patch ensures that the install operations which strip
- # programs and libraries (LTINSTALL) work in a cross build
- # environment.
-+
+diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
+index 51a5e43..e7d326d 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
+@@ -4,7 +4,7 @@ Date: Tue, 17 Jun 2014 09:53:00 +0200
+ Subject: [PATCH 3/8] acinclude: use pkgconfig for libxml2 config
+ 
+ Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+-Upstream-Status: pending
 +Upstream-Status: Pending
-+
- --- openldap-2.2.24/.pc/install-strip.patch/build/top.mk	2005-01-20 09:00:55.000000000 -0800
- +++ openldap-2.2.24/build/top.mk	2005-04-16 13:48:20.536710376 -0700
- @@ -116,7 +116,7 @@
-diff --git a/meta-oe/recipes-support/openldap/openldap/kill-icu.patch b/meta-oe/recipes-support/openldap/openldap/kill-icu.patch
-index dcf5411..35e4646 100644
---- a/meta-oe/recipes-support/openldap/openldap/kill-icu.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/kill-icu.patch
-@@ -2,7 +2,7 @@ From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
- 
- slapd depends on ICU if it was built first.
- 
--Upstream-status: inappropiate [embedded specific]
-+Upstream-Status: inappropiate [embedded specific]
  ---
-  configure.in |    8 --------
-  1 file changed, 8 deletions(-)
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-index c7b1552..86d0767 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-@@ -1,6 +1,6 @@
- From http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/net-nds/openldap/files/
- 
+  acinclude.m4 | 63 ++++++++++++++++++++++--------------------------------------
+  1 file changed, 23 insertions(+), 40 deletions(-)
+diff --git a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+index 30811a7..d083166 100644
+--- a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
++++ b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+@@ -1,4 +1,4 @@
 -Upstream-status: Unknown
-+Upstream-status: Pending
- 
- --
- 
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-index de9ca52..25e148e 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-@@ -10,6 +10,8 @@ cipher strings, which might cause a weaker than intended cipher to
- be used and allow remote attackers to have unspecified impact via
- unknown vectors.
- 
 +Upstream-Status: Pending
-+
- Signed-off-by: Li Wang <li.wang@windriver.com>
+ 
+ diff --git a/acinclude.m4 b/acinclude.m4
+ index 4fd452e..206fcbf 100644
+diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recipes-devtools/php/php/iconv.patch
+index b6e3ceb..ecf7d87 100644
+--- a/meta-oe/recipes-devtools/php/php/iconv.patch
++++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+@@ -1,7 +1,7 @@
+ From 17cc5645f3acf943a5a06465d09d0ebcfea987bd Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Wed, 2 Nov 2011 16:54:57 +0100
+-Subject: [PATCH] Upstream-status: Unknown
++Subject: [PATCH] Upstream-Status: Pending
+ 
  ---
-  libraries/libldap/tls_m.c |   27 ++++++++++++++++-----------
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-index b669b72..38c0a5a 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-@@ -1,3 +1,5 @@
-+Upstream-Status: Pending
-+
- --- openldap-2.3.11/build/openldap.m4.orig	2005-11-11 00:11:18.604322590 -0800
- +++ openldap-2.3.11/build/openldap.m4	2005-11-11 00:26:21.621145856 -0800
- @@ -788,7 +788,7 @@ AC_DEFUN([OL_PTHREAD_TEST_FUNCTION],[[
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb b/meta-oe/recipes-support/openldap/openldap_2.4.46.bb
-similarity index 97%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.46.bb
-index 82d6619..0c25506 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.46.bb
-@@ -1,5 +1,3 @@
--# OpenLDAP, a license free (see http://www.OpenLDAP.org/license.html)
--#
- SUMMARY = "OpenLDAP Directory Service"
- DESCRIPTION = "OpenLDAP Software is an open source implementation of the Lightweight Directory Access Protocol."
- HOMEPAGE = "http://www.OpenLDAP.org/license.html"
-@@ -9,9 +7,9 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
- # basically BSD.  opensource.org does not record this license
- # at present (so it is apparently not OSI certified).
- LICENSE = "OpenLDAP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25fd3721960f39128cd15a749fd21139 \
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25b4ead0e45182e7c2914e59ff57009f \
-                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
--"
-+                    "
- SECTION = "libs"
+  acinclude.m4        | 3 ++-
+diff --git a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+index b5fb7d4..16359af 100644
+--- a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
++++ b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+@@ -1,7 +1,7 @@
+ From c084c8349d1780980e232cb28b60a109e3d89438 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Wed, 2 Nov 2011 16:54:57 +0100
+-Subject: [PATCH] Upstream-status: Unknown
++Subject: [PATCH] Upstream-Status: Pending
  
- LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
-@@ -27,8 +25,8 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
-     file://openldap-CVE-2015-3276.patch \
- "
+ ---
+  acinclude.m4       |  2 +-
+diff --git a/meta-oe/recipes-devtools/php/php/pear-makefile.patch b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
+index 4bc1025..fcbf25b 100644
+--- a/meta-oe/recipes-devtools/php/php/pear-makefile.patch
++++ b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
+@@ -1,7 +1,7 @@
+ From edd575a546d56bb5683aff19782b16963d61fd0b Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Wed, 2 Nov 2011 16:54:57 +0100
+-Subject: [PATCH] Upstream-status: Unknown
++Subject: [PATCH] Upstream-Status: Pending
  
--SRC_URI[md5sum] = "00ff8301277cdfd0af728a6927042a13"
--SRC_URI[sha256sum] = "cdd6cffdebcd95161a73305ec13fc7a78e9707b46ca9f84fb897cd5626df3824"
-+SRC_URI[md5sum] = "829016c5a9f45c51adc50073ac6f9fd7"
-+SRC_URI[sha256sum] = "9a90dcb86b99ae790ccab93b7585a31fbcbeec8c94bf0f7ab0ca0a87ea0c4b2d"
+ ---
+  pear/Makefile.frag | 2 +-
+diff --git a/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch b/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch
+index cff6426..9974303 100644
+--- a/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch
++++ b/meta-oe/recipes-devtools/php/php/php5-pear-makefile.patch
+@@ -1,7 +1,7 @@
+ From 79725e82d5981fc94eb657f0f46a499dbfc1cc40 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Wed, 2 Nov 2011 16:54:57 +0100
+-Subject: [PATCH] Upstream-status: Unknown
++Subject: [PATCH] Upstream-Status: Pending
  
- DEPENDS = "util-linux groff-native"
+ %% original patch: php5-pear-makefile.patch
+ ---
+diff --git a/meta-oe/recipes-devtools/php/php/php_exec_native.patch b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+index 6af0dc8..8040900 100644
+--- a/meta-oe/recipes-devtools/php/php/php_exec_native.patch
++++ b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+@@ -1,7 +1,7 @@
+ From d251b5aa3d23803d016ca16818e2e1d2f2b70a02 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Wed, 2 Nov 2011 16:54:57 +0100
+-Subject: [PATCH] Upstream-status: Inappriate
++Subject: [PATCH] Upstream-Status: Inappriate
  
+ ---
+  sapi/cli/config.m4 | 2 +-
+diff --git a/meta-oe/recipes-devtools/php/php_7.2.4.bb b/meta-oe/recipes-devtools/php/php_7.2.7.bb
+similarity index 80%
+rename from meta-oe/recipes-devtools/php/php_7.2.4.bb
+rename to meta-oe/recipes-devtools/php/php_7.2.7.bb
+index 2fd1e66..a256cd7 100644
+--- a/meta-oe/recipes-devtools/php/php_7.2.4.bb
++++ b/meta-oe/recipes-devtools/php/php_7.2.7.bb
+@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=67e369bc8d1f2e641236b8002039a6a2"
+ 
+ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+             file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
+-            file://0001-main-php_ini.c-build-empty-php_load_zend_extension_c.patch \
+             file://0001-fix-error-caused-by-a-new-variable-is-declared-after.patch \
+            "
+ SRC_URI_append_class-target = " \
+@@ -13,8 +12,8 @@ SRC_URI_append_class-target = " \
+                                 file://0001-opcache-config.m4-enable-opcache.patch \
+                                 "
+ 
+-SRC_URI[md5sum] = "864c64ffd2f1686b035ef8ce6a6d8478"
+-SRC_URI[sha256sum] = "11658a0d764dc94023b9fb60d4b5eb75d438ad17981efe70abb0d0d09a447ef3"
++SRC_URI[md5sum] = "4b5698c8c6c2b9cbff3a5706da67bb0f"
++SRC_URI[sha256sum] = "cc81675a96af4dd18d8ffc02f26a36c622abadf86af7ecfea7bcde8d3c96d5a3"
+ 
+ PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
+                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
 -- 
 2.7.4
 
