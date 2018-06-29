@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 57A8D601D4
+Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C3D4751F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 13:45:57 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id r18-v6so5805858ual.13
+	Fri, 29 Jun 2018 13:56:19 +0000 (UTC)
+Received: by mail-vk0-f41.google.com with SMTP id l189-v6so854268vke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 06:45:58 -0700 (PDT)
+	Fri, 29 Jun 2018 06:56:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Z4gvfI4FcnpySoES9Nthl8wBB0mnxP/bbjRs8GO+n4g=;
-	b=REBQpXnBY+Z7t/6JIIw28mjsLoFnGNLXGI9SdKzu18yVlPR8MbfbPVWk3lvm9XYztu
-	1Prk17wl95Ke4Ofx3XrTsNwvdHnjQhNpczx8gPy8u1QuvwxIyTBTnwOyUaEKhk3ahuNd
-	zc/HbEEx4ErVsybmBg2fPQqSwq2dbo1tazn9qO9+Mns4y20/FtW14h7KK3tr3QC1ooIA
-	0P2QtrGqYGL+A3VS5donH3ZRKsZxpj7FanP3lzNWXHsibs/s27jiLR95SDRTGqlQwBd8
-	cJE34A1MS8oJFnGrR6oxD5KF9z4dP4drXUS3GzD286HbGZuY3UI9qt3pCrZRz371Cta7
-	Tjlw==
+	:cc; bh=gP3+vOXNeAiUkZjc/Z8ZyY7+nusmpoPy0eo4i33KxaM=;
+	b=Gwc2nAorlN83V55uPrtcjH64MXEbyrBSOr6iq/2RRMZhgH8em5nxt8tjgcJP45DM7x
+	cXDL6zduCciaqLjiye7B/Ad1jKWitGtUyFOHBhkEfj6vb9va1Ih/97uOVkUvoL/sRpEG
+	Oq9bjav6gJkH+3dWq+mKuR3O6BKfJBymEppC8prJhCHvhK3NQO/iNPX8JJOOsnGPrYXR
+	i5tHhAkLvpYBA0HstNAgkjepAxgjgnxDoeZYGX6TAWk7LGI7BHA8kCxcZvYpExwloTmq
+	2cQy6nckuth97SfrXGSRjUmkpli5mmqI1raU+OMFI0Ay+OH67Tmb2jAd56GaaQoODqFT
+	AUMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Z4gvfI4FcnpySoES9Nthl8wBB0mnxP/bbjRs8GO+n4g=;
-	b=Kg4kdcu0rAIfFibLCJpRM5lfcB9ArHNkZZWUEkbMcSY5g9IxMi2Gh9Y8egxiJ4cWSc
-	6tUA/3vAFkbPC8qw5o6ip3CKMNsR+z6Gq/rKYF+1r6tk35Yp0slsoPG1LwBDSmdt5KRD
-	QouaeDimoxQMGtiizg0e2X9C/EHRUlGPHVedu7i7YPQaRCUzZSuc6nsRTA7iALHN3tF+
-	RS2eYh2KObjO7+xIMTMseJiv30qES+KX2Ga9S5ntNykpi7KOubPoyvA1W/To6C001vq4
-	XVyG8AbjnUNmVElCZN6UtudW31VHPytFv2/we6LZFWVqbxD9Wg8pTZTlPq2J7Bcg9FV9
-	qLag==
-X-Gm-Message-State: APt69E1r1QFK0L4aiF9xbjLfX7+hgAhi41J29KeBh9n8zDyY0BcN7rW4
-	4aFlzC1JC82Z5ritE8GELJ8N3O5SuDFDYvRJo3I=
-X-Google-Smtp-Source: AAOMgpeTDUTkRr+DhwOMMrqvPwReYqLCv/VOISbRkXDZzJ2a4DzYeWpNQ9nG9sGD6Qiizdr3cOPlwMEhL74llKP5oas=
-X-Received: by 2002:a9f:3613:: with SMTP id
-	r19-v6mr9547218uad.49.1530279958125; 
-	Fri, 29 Jun 2018 06:45:58 -0700 (PDT)
+	bh=gP3+vOXNeAiUkZjc/Z8ZyY7+nusmpoPy0eo4i33KxaM=;
+	b=kti5eJL5RXeyvVilHQbgrUc1moNOhO9BVur1YVaD3l+sWwxXo4t7DGwWjLzpN/IMwG
+	r7cBAAB7HzArnWCnRfkUQbGTgTPFqKQBt1fjZ8Y96wTEDLwsXwmECxirsjOC85Vbbn9g
+	InHG/O7ceRTuJtmJhkWD7cMaGd4JWER+S6MfjYunvrDNx1lnmq/Zh5tp3/JpAsWhYC5o
+	q31D/eC5rt1IHtgo9K/AsKN7L9biJZxcOS4EJZKBsds17Yg2cqLXnK2T5QJaXZ/oFED7
+	vCjZURryy3jKHnN8Uk/fo6zbaH8OvyF3bUSHSFS2SXfNQ1REGbXCD5cEMhD2I3XKuyWe
+	n2tA==
+X-Gm-Message-State: APt69E2zJoPWY2gE8+3Lwe/RqziVg+nyY9puVKQ9IXluJG6dIGzh+eAE
+	ltEsf4ufWOM2I5eHjzwpbKuYUguFbkaH8UN6n7k=
+X-Google-Smtp-Source: AAOMgpfF3B2l12ebXFhPCBhkwUTOvj1ZS4QKW+wI0uvyVur5s2Dhyke8rcTkGeiCek3Xnqv5IvnkolmZy7+PtVj0kuo=
+X-Received: by 2002:a1f:7c4:: with SMTP id 187-v6mr8828160vkh.60.1530280580571;
+	Fri, 29 Jun 2018 06:56:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180629101758.28179-1-alexandru.vasiu@ni.com>
-In-Reply-To: <20180629101758.28179-1-alexandru.vasiu@ni.com>
+References: <1530253337-32732-1-git-send-email-changqing.li@windriver.com>
+	<1530253337-32732-4-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1530253337-32732-4-git-send-email-changqing.li@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 29 Jun 2018 06:45:17 -0700
-Message-ID: <CAMKF1sq6Q1p0fpzVzA0U3b-t6N3ieSDme6B5-ZaK0tLBazz8PQ@mail.gmail.com>
-To: Alexandru Vasiu <alexandru.vasiu@ni.com>
+Date: Fri, 29 Jun 2018 06:55:39 -0700
+Message-ID: <CAMKF1soVk5ONjV+BwSPpxmx0472oBL8qyLMZDnMrnbRC0QmuSQ@mail.gmail.com>
+To: changqing.li@windriver.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to 0.0.6
+Subject: Re: [PATCH][meta-oe] rsyslog: upgrade 8.29.0 -> 8.36.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +54,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2018 13:45:57 -0000
+X-List-Received-Date: Fri, 29 Jun 2018 13:56:20 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Jun 29, 2018 at 3:26 AM Alexandru Vasiu <alexandru.vasiu@ni.com> wrote:
+please rebase it on master-next and resend
+On Thu, Jun 28, 2018 at 11:23 PM Changqing Li
+<changqing.li@windriver.com> wrote:
 >
-> Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->  meta-python/recipes-devtools/python/python-pyiface.inc      | 6 +++---
->  .../{python-pyiface_0.0.5.bb => python-pyiface_0.0.6.bb}    | 0
->  .../{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.6.bb}  | 0
->  3 files changed, 3 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-pyiface_0.0.5.bb => python-pyiface_0.0.6.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.6.bb} (100%)
+>  .../{libfastjson_0.99.4.bb => libfastjson_0.99.8.bb}    |  2 +-
+>  .../rsyslog/rsyslog/0001-Include-sys-time-h.patch       | 17 ++++++++++-------
+>  .../rsyslog/use-pkgconfig-to-check-libgcrypt.patch      |  2 +-
+>  .../rsyslog/{rsyslog_8.29.0.bb => rsyslog_8.36.0.bb}    |  6 +++---
+>  4 files changed, 15 insertions(+), 12 deletions(-)
+>  rename meta-oe/recipes-extended/rsyslog/{libfastjson_0.99.4.bb => libfastjson_0.99.8.bb} (85%)
+>  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.29.0.bb => rsyslog_8.36.0.bb} (97%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-> index 620b244c6..8e464a83f 100644
-> --- a/meta-python/recipes-devtools/python/python-pyiface.inc
-> +++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-> @@ -3,9 +3,9 @@ SECTION = "devel/python"
->  HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
->  LICENSE = "GPLv3+"
+> diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.4.bb b/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.8.bb
+> similarity index 85%
+> rename from meta-oe/recipes-extended/rsyslog/libfastjson_0.99.4.bb
+> rename to meta-oe/recipes-extended/rsyslog/libfastjson_0.99.8.bb
+> index 2e23d7e..ea089de 100644
+> --- a/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.4.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.8.bb
+> @@ -8,7 +8,7 @@ DEPENDS = ""
 >
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
+>  SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https"
 >
-what changed here ?
-
-> -SRC_URI[md5sum] = "06c3c71fe51df740dae6a88a13afb5e0"
-> -SRC_URI[sha256sum] = "4bb79100cbcf7344a1ccaddc578cd6455da47d8eac6eb1bf903ec32e043af924"
-> +SRC_URI[md5sum] = "2379d8d4506e6c4d83cf3d4824abce8b"
-> +SRC_URI[sha256sum] = "774ea47bb1387e493f6d5d0937b68fa28202c948eccddbd6e4cf2d708dcd86f2"
+> -SRCREV = "6e057a094cb225c9d80d8d6e6b1f36ca88a942dd"
+> +SRCREV = "4758b1caf69ada911ef79e1d80793fe489b98dff"
 >
->  inherit pypi
-> diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb
-> rename to meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb
-> rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb
+>  S = "${WORKDIR}/git"
+>
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+> index ca88dd3..3c546dd 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+> @@ -1,6 +1,6 @@
+> -From 9739095de6ae5f844354756ae968f5f8864eb3e3 Mon Sep 17 00:00:00 2001
+> +From 7baf35b88d742032a2dc456c396843e17e866f8e Mon Sep 17 00:00:00 2001
+>  From: Ming Liu <peter.x.liu@external.atlascopco.com>
+> -Date: Sun, 26 Feb 2017 14:10:21 +0100
+> +Date: Wed, 27 Jun 2018 14:04:57 +0800
+>  Subject: [PATCH] Include sys/time.h
+>
+>  struct timeval is defined in sys/time.h with a musl libc.
+> @@ -8,13 +8,13 @@ struct timeval is defined in sys/time.h with a musl libc.
+>  Upstream-Status: Inappropriate [musl libc specific]
+>
+>  Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+> -
+> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>  ---
+>   tests/msleep.c | 4 ----
+>   1 file changed, 4 deletions(-)
+>
+>  diff --git a/tests/msleep.c b/tests/msleep.c
+> -index 26a8206..ca818be 100644
+> +index 98dbece..96f6950 100644
+>  --- a/tests/msleep.c
+>  +++ b/tests/msleep.c
+>  @@ -26,11 +26,7 @@
+> @@ -26,6 +26,9 @@ index 26a8206..ca818be 100644
+>  -#else
+>  -#include <time.h>
+>  -#endif
+> -
+> - int main(int argc, char *argv[])
+> - {
+> + #if defined(HAVE_SYS_SELECT_H)
+> + #include <sys/select.h>
+> + #endif
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
+> index 162d239..0352587 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
+> @@ -3,7 +3,7 @@ From: Roy Li <rongqing.li@windriver.com>
+>  Date: Wed, 18 Jun 2014 13:46:52 +0800
+>  Subject: [PATCH] use pkgconfig to check libgcrypt
+>
+> -Upstream-status: Inappropriate [configuration]
+> +Upstream-Status: Inappropriate [configuration]
+>
+>  libgcrypt does no longer provide libgcrypt-config, and provide
+>  *.pc, so we should use pkgconfig to check
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.29.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+> similarity index 97%
+> rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.29.0.bb
+> rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+> index 03f21c6..d65a2be 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.29.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+> @@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
+>   encryption protected syslog relay chains while at the same time being\
+>   very easy to setup for the novice user."
+>
+> -DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging"
+> +DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging curl"
+>  HOMEPAGE = "http://www.rsyslog.com/"
+>  LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
+> @@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
+>      file://0001-Include-sys-time-h.patch \
+>  "
+>
+> -SRC_URI[md5sum] = "3805617f65a4b4bea34606487a5255a0"
+> -SRC_URI[sha256sum] = "220ba30b5afb0f3ddb328613fea7aa3966b01e4d0c52d6de9ab27b0858f19738"
+> +SRC_URI[md5sum] = "6846bb6d37af3ce067988dd2460d3a5d"
+> +SRC_URI[sha256sum] = "8a4b5beb92c6b308c3d14de2364c2788f62ef5d37ca0448144619edfe508ee70"
+>
+>  UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+>  UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 > --
-> 2.18.0
+> 2.7.4
 >
 > --
 > _______________________________________________
