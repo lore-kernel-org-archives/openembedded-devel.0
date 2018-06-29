@@ -1,40 +1,40 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
-	[209.85.216.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BFFD75223
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 8777C7523F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 19:29:57 +0000 (UTC)
-Received: by mail-qt0-f180.google.com with SMTP id s47-v6so8835503qth.7
+	Fri, 29 Jun 2018 19:35:07 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id f1-v6so1839233qti.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jun 2018 12:29:59 -0700 (PDT)
+	Fri, 29 Jun 2018 12:35:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=II4wY4u48RRx/IEXdhtZKUrTiR++iSNiRncm4WtSPOc=;
-	b=f6Fblxrn/8nktimY3MCN1hVjKs62a38T+XoQ7R9dTVnmadj/8MRK97cHWeWJVkiVcU
-	P90Mdwhdi1E+vz5f6EUX3QFqOjTQkReriyx971p1tAEZmRX2l7KJpATXy9Cn04tVWrU/
-	w0j5IcV6eaB+F/roROdPOpHRkdmUDHHtkWxa9CmeMQOYN7xkEI1PYvyTQzL4Dyv0bT+H
-	uknoIHNJ2WWNwzDgHG5AjQCAvHJFUS1TSM8zvjP4NyIKBClzCms2tMymDc8QKEgmXpp0
-	euxBvOPqiC8Hu9nCDOxVZrMTBFACY5s6v0IJGtRS25I6Okc2UOeX6sljNOtsHUFEIY5P
-	8YAg==
-X-Gm-Message-State: APt69E1q+wXkwVPMBbwa0+H/Z01ZRa9FX/2sIij1XlFw4YgX/8MeEM6t
-	nnxcVrPS3sf2kq77AntkT+PGBkO5
-X-Google-Smtp-Source: AAOMgpdx46Xd6mokjcHVHl3MrcpiQ+vmixE9jm7baI0KBJ4mZ94vT4tNzr3Po/miPu8nX+KFBYluqg==
-X-Received: by 2002:aed:3050:: with SMTP id
-	74-v6mr14943163qte.124.1530300598396; 
-	Fri, 29 Jun 2018 12:29:58 -0700 (PDT)
+	bh=ZW3SNI+d7X7P6MOBqFfm5FWdurtWnV9UlW09b8p+O7c=;
+	b=Gklp0t9mB7d2ntDO5U5LxEg+cMjSBDb20Wf/0F+xwtXkjt1CbRxhDfcS5dPh7rVeHf
+	2UmLUk/dik0LTjNV3SKw3p6bdjE5Ju8oRhuruanQYeDSC8XlVb7uVah5nCIvq0IN1XKA
+	3oM5l4CNgXOhsx3kOVqleuJp6E6bgDcVfRW1hjb6gfqhTQV9N4Wms6FgCsxzT9Mg6zM9
+	VW6CqB/FJO2P0ru6B+m6cMXj8sldSRbECucTsyQtby8J9RYKGWtpdjsLRH06GRB89Y+n
+	iXnStv9yQkWFCm/mt5iCXNPv7Za/R7ZA6jgs+T21obu7/56CY4Bmlj/8gHjLd5sVw26E
+	cpng==
+X-Gm-Message-State: APt69E1xdocBhaxq4DgWbPq3vivjA5Gci0cMwS74045K+iaEeUh0Ow8r
+	2b7+bRPtTQDCADVeG3HUy/4tvzdu
+X-Google-Smtp-Source: AAOMgpdIRFF6ixqIm4NUobRktxdinXk7ugy8sCA015fvmSvWGuGBW64orNeyAo2q1wIylzWd0rXE9A==
+X-Received: by 2002:ac8:5393:: with SMTP id
+	x19-v6mr14499543qtp.402.1530300908037; 
+	Fri, 29 Jun 2018 12:35:08 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-100-33-240-84.nycmny.fios.verizon.net. [100.33.240.84])
 	by smtp.gmail.com with ESMTPSA id
-	n21-v6sm8899551qkl.34.2018.06.29.12.29.57
+	l2-v6sm7041749qkb.27.2018.06.29.12.35.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Jun 2018 12:29:57 -0700 (PDT)
+	Fri, 29 Jun 2018 12:35:07 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Jun 2018 15:29:52 -0400
-Message-Id: <1530300592-25245-1-git-send-email-derek@asterius.io>
+Date: Fri, 29 Jun 2018 15:34:59 -0400
+Message-Id: <1530300899-27430-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pybind11: update to version 2.2.3
+Subject: [meta-python][PATCH] python-babel: update to version 2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,37 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jun 2018 19:29:58 -0000
+X-List-Received-Date: Fri, 29 Jun 2018 19:35:07 -0000
+
+License-Update: copyright years updated
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pybind11.inc               | 4 ++--
- .../python/{python-pybind11_2.2.2.bb => python-pybind11_2.2.3.bb}     | 0
- .../python/{python3-pybind11_2.2.2.bb => python3-pybind11_2.2.3.bb}   | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pybind11_2.2.2.bb => python-pybind11_2.2.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pybind11_2.2.2.bb => python3-pybind11_2.2.3.bb} (100%)
+ meta-python/recipes-devtools/python/python-babel.inc                | 6 +++---
+ .../python/{python-babel_2.5.3.bb => python-babel_2.6.0.bb}         | 0
+ .../python/{python3-babel_2.5.3.bb => python3-babel_2.6.0.bb}       | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-babel_2.5.3.bb => python-babel_2.6.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-babel_2.5.3.bb => python3-babel_2.6.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pybind11.inc b/meta-python/recipes-devtools/python/python-pybind11.inc
-index e441dc6..1722875 100644
---- a/meta-python/recipes-devtools/python/python-pybind11.inc
-+++ b/meta-python/recipes-devtools/python/python-pybind11.inc
-@@ -3,5 +3,5 @@ HOMEPAGE = "https://github.com/wjakob/pybind11"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=beb87117af69fd10fbf9fb14c22a2e62"
+diff --git a/meta-python/recipes-devtools/python/python-babel.inc b/meta-python/recipes-devtools/python/python-babel.inc
+index 4dcb255..14b5a9f 100644
+--- a/meta-python/recipes-devtools/python/python-babel.inc
++++ b/meta-python/recipes-devtools/python/python-babel.inc
+@@ -1,10 +1,10 @@
+ DESCRIPTION = "A collection of tools for internationalizing Python applications"
+ HOMEPAGE = "http://babel.edgewall.org/"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e6eeaabc92cfc2d03f53e789324d7292"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=eebdc057dc12abcc2d6c4453628bfcd4"
  
--SRC_URI[md5sum] = "2c651a75a20dabbaa18a8b023ffd54c0"
--SRC_URI[sha256sum] = "cbb036a8aad59a199ad672f98813f85c672642c6a67b4ff3868b1d6abc5fae3e"
-+SRC_URI[md5sum] = "5b9611041e4ea66b2b919239e3bacd65"
-+SRC_URI[sha256sum] = "87ff3ae777d9326349af5272974581270b2a0909b2392dc0cc57eb28ce23bcc3"
-diff --git a/meta-python/recipes-devtools/python/python-pybind11_2.2.2.bb b/meta-python/recipes-devtools/python/python-pybind11_2.2.3.bb
+-SRC_URI[md5sum] = "152a6b17fe4110b95675aceb9af9fab2"
+-SRC_URI[sha256sum] = "8ce4cb6fdd4393edd323227cba3a077bceb2a6ce5201c902c65e730046f41f14"
++SRC_URI[md5sum] = "c384ac03026e8fe6f9b90f55201f1bff"
++SRC_URI[sha256sum] = "8cba50f48c529ca3fa18cf81fa9403be176d374ac4d60738b839122dfaaa3d23"
+ 
+ PYPI_PACKAGE = "Babel"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-babel_2.5.3.bb b/meta-python/recipes-devtools/python/python-babel_2.6.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pybind11_2.2.2.bb
-rename to meta-python/recipes-devtools/python/python-pybind11_2.2.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.2.2.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.2.3.bb
+rename from meta-python/recipes-devtools/python/python-babel_2.5.3.bb
+rename to meta-python/recipes-devtools/python/python-babel_2.6.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-babel_2.5.3.bb b/meta-python/recipes-devtools/python/python3-babel_2.6.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pybind11_2.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-pybind11_2.2.3.bb
+rename from meta-python/recipes-devtools/python/python3-babel_2.5.3.bb
+rename to meta-python/recipes-devtools/python/python3-babel_2.6.0.bb
 -- 
 2.7.4
 
