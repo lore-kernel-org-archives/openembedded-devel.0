@@ -1,43 +1,43 @@
-Return-Path: <leon.anavi@konsulko.com>
-X-Greylist: delayed 3159 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 01 Jul 2018 10:07:05 UTC
-Received: from anavi.org (unknown [91.215.217.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 41F42744C1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Jul 2018 10:07:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org; 
-	s=default;
-	h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version
-	:Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=ucvNw85MJ23pO4zZ564PtymVrQ+C/KvPH8uym0kzr/4=;
-	b=X36Ov6JMj31wv6KzScFOZcEW28
-	dUiupjOn71cbG2nKvca/JUDjU7xUqToZ5+wELyHpLqOHx2h4hgTkpBdIYky3avZ+YF6OebFqg69WG
-	tSXEuqJ7M++/D9zc75Guro43jxDaaEaUpoXILFDzoLBu3m0MSlvyAwyD+l2WL1Bv/UBo=; 
-Received: from [78.130.197.109] (port=58682 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.91)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1fZYR7-0007fv-T6; Sun, 01 Jul 2018 12:14:25 +0300
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Jul 2018 12:13:37 +0300
-Message-Id: <20180701091337.25336-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.14.1
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: [meta-oe][PATCH] vim: update to 8.1.0133
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com
+	[209.85.213.42])
+	by mail.openembedded.org (Postfix) with ESMTP id DCB30744E4
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun,  1 Jul 2018 17:36:39 +0000 (UTC)
+Received: by mail-vk0-f42.google.com with SMTP id s23-v6so5598504vks.7
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 01 Jul 2018 10:36:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=+hn4CjMJNHqjORklobHM1uzLerGJBvqxQ0sU5pjVmTs=;
+	b=p7F4WI7/VIkInFOzL08IzzbWsH0QnOk0CQLjGByVEdi+MWycXWLqQUjIHmOuWLmSlM
+	DOg+QWOrp9KbrF9E6H4QlE8atpVAY40WbCNxcI9ci14LMp5opTNvjxpiFCtu+Mx/d5HF
+	7bAsGK1DzKykhdGPbX5PIbsFrc6LQE+hvVpjxKfDhFKlkzVSruwObD4asJFRPJ5IaHNY
+	4XEpzBwqtufr9/7WGKLg0LDDj+qSdp00GTdDl/wogK6f8EizZOzP0EMnDK4p+VDI/Ib8
+	GxeXtEDYoTjQWRWeLgWkO6hJb3exTcq3NiXAlK5r0wpGFdEaZxNCdfujdfXqEzvss4Ba
+	IUcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=+hn4CjMJNHqjORklobHM1uzLerGJBvqxQ0sU5pjVmTs=;
+	b=aBKknjfP/6jHJZxbwaKhSU+qpaY36jT26jUf31txmOc0a8NklU8v8tvwk71hicwIxu
+	YRTP4DuO4B2HnJmlGX89RJNCKYHUHZ8U1amowGr0Oip+0Fv9omSkMCwtwXcwC3Ip38O0
+	eEIWZ22/ccsyEqyOpcmjzBe5nvuXimNzaAhEs1p8LBUPrsgEPG4PyG46al4YHQSmCM+Q
+	UiJOOCxGYwF2xAOztZaP4LM2fMFhO0W7WzUs9GSzhvcnBN6yG7+dagINuJV5/eDxhSy5
+	p0RWlvskWM/EDbAjlzaP6Sx5J91gWW2LY4EjwPXxj7St2kR80GI+P0r+zjW61gWvar1w
+	Yqfg==
+X-Gm-Message-State: APt69E32d8pHeovsLu0DPGm2QIwTj0wz24ZN1ymiAcORQqQLy29/ctxf
+	0IGEg6t9350K5k+bGJqa3QNXj00BpOFiMgFnyk/ctg==
+X-Google-Smtp-Source: AAOMgpctHE8ODG1GDOtFDPuc5yKVoOGom/UD/rzWfe2G72On49u64MCGstHKOEoX4nte9cwdLa2RqkNaEoTSYopQPxs=
+X-Received: by 2002:a1f:5244:: with SMTP id
+	g65-v6mr13197819vkb.28.1530466600396; 
+	Sun, 01 Jul 2018 10:36:40 -0700 (PDT)
+MIME-Version: 1.0
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 1 Jul 2018 10:36:14 -0700
+Message-ID: <CAMKF1sq6NXUwi_uiL3NbkGrp3o3Vx+YMQnUV6d3=QR1bho1dSg@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of the world, 2018-06-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,169 +50,472 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Jul 2018 10:07:05 -0000
+X-List-Received-Date: Sun, 01 Jul 2018 17:36:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-A few new features have been add and a lot of bugs have been
-fixed in minor release Vim 8.1.
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../recipes-support/vim/files/CVE-2017-17087.patch | 70 ----------------------
- .../vim/files/disable_acl_header_check.patch       | 27 ---------
- .../{vim-tiny_8.0.0983.bb => vim-tiny_8.1.0133.bb} |  0
- .../vim/{vim_8.0.0983.bb => vim_8.1.0133.bb}       |  7 +--
- 4 files changed, 3 insertions(+), 101 deletions(-)
- delete mode 100644 meta-oe/recipes-support/vim/files/CVE-2017-17087.patch
- delete mode 100644 meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
- rename meta-oe/recipes-support/vim/{vim-tiny_8.0.0983.bb => vim-tiny_8.1.0133.bb} (100%)
- rename meta-oe/recipes-support/vim/{vim_8.0.0983.bb => vim_8.1.0133.bb} (93%)
+== Failed tasks 2018-06-30 ==
 
-diff --git a/meta-oe/recipes-support/vim/files/CVE-2017-17087.patch b/meta-oe/recipes-support/vim/files/CVE-2017-17087.patch
-deleted file mode 100644
-index 937b9ba31..000000000
---- a/meta-oe/recipes-support/vim/files/CVE-2017-17087.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
--From 9c11f80339372b7aa2f43153d574f2b5abb79708 Mon Sep 17 00:00:00 2001
--From: Li Zhou <li.zhou@windriver.com>
--Date: Sun, 17 Dec 2017 23:09:35 -0800
--Subject: [PATCH] vim: patch 8.0.1263: others can read the swap file if a user
-- is careless
--
--Problem:    Others can read the swap file if a user is careless with his
--            primary group.
--Solution:   If the group permission allows for reading but the world
--            permissions doesn't, make sure the group is right.
--
--Upstream-Status: Backport
--CVE: CVE-2017-17087
--Signed-off-by: Li Zhou <li.zhou@windriver.com>
-----
-- src/fileio.c  | 24 +++++++++++++++++++++++-
-- src/version.c |  2 ++
-- 2 files changed, 25 insertions(+), 1 deletion(-)
--
--diff --git a/src/fileio.c b/src/fileio.c
--index f54fb8465..2c7740af9 100644
----- a/src/fileio.c
--+++ b/src/fileio.c
--@@ -716,7 +716,29 @@ readfile(
-- 	/* Set swap file protection bits after creating it. */
-- 	if (swap_mode > 0 && curbuf->b_ml.ml_mfp != NULL
-- 			  && curbuf->b_ml.ml_mfp->mf_fname != NULL)
---	    (void)mch_setperm(curbuf->b_ml.ml_mfp->mf_fname, (long)swap_mode);
--+	{
--+	    char_u *swap_fname = curbuf->b_ml.ml_mfp->mf_fname;
--+
--+	    /*
--+	     * If the group-read bit is set but not the world-read bit, then
--+	     * the group must be equal to the group of the original file.  If
--+	     * we can't make that happen then reset the group-read bit.  This
--+	     * avoids making the swap file readable to more users when the
--+	     * primary group of the user is too permissive.
--+	     */
--+	    if ((swap_mode & 044) == 040)
--+	    {
--+		stat_T	swap_st;
--+
--+		if (mch_stat((char *)swap_fname, &swap_st) >= 0
--+			&& st.st_gid != swap_st.st_gid
--+			&& fchown(curbuf->b_ml.ml_mfp->mf_fd, -1, st.st_gid)
--+									 == -1)
--+		    swap_mode &= 0600;
--+	    }
--+
--+	    (void)mch_setperm(swap_fname, (long)swap_mode);
--+	}
-- #endif
--     }
-- 
--diff --git a/src/version.c b/src/version.c
--index a5cb078f0..5c0df475f 100644
----- a/src/version.c
--+++ b/src/version.c
--@@ -770,6 +770,8 @@ static char *(features[]) =
-- static int included_patches[] =
-- {   /* Add new patch number below this line */
-- /**/
--+    1263,
--+/**/
--     983,
-- /**/
--     982,
---- 
--2.11.0
--
-diff --git a/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch b/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
-deleted file mode 100644
-index 65e5f58c6..000000000
---- a/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
-+++ /dev/null
-@@ -1,27 +0,0 @@
--Upstream-Status: pending
--
--Don't check 'sys/acl.h' if acl support disabled for vim/vim-tiny.
--
--Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
--================================================
--diff --git a/src/configure.ac b/src/configure.ac
--index fb965e5..d734064 100644
----- a/src/configure.ac
--+++ b/src/configure.ac
--@@ -2511,7 +2511,7 @@ AC_CHECK_HEADERS(stdarg.h stdint.h stdlib.h string.h \
-- 	sys/systeminfo.h locale.h sys/stream.h termios.h \
-- 	libc.h sys/statfs.h poll.h sys/poll.h pwd.h \
-- 	utime.h sys/param.h libintl.h libgen.h \
---	util/debug.h util/msg18n.h frame.h sys/acl.h \
--+	util/debug.h util/msg18n.h frame.h \
-- 	sys/access.h sys/sysinfo.h wchar.h wctype.h)
-- 
-- dnl sys/ptem.h depends on sys/stream.h on Solaris
--@@ -3112,6 +3112,7 @@ AC_ARG_ENABLE(acl,
-- 	, [enable_acl="yes"])
-- if test "$enable_acl" = "yes"; then
-- AC_MSG_RESULT(no)
--+AC_CHECK_HEADERS(sys/acl.h)
-- AC_CHECK_LIB(posix1e, acl_get_file, [LIBS="$LIBS -lposix1e"],
-- 	AC_CHECK_LIB(acl, acl_get_file, [LIBS="$LIBS -lacl"
-- 		  AC_CHECK_LIB(attr, fgetxattr, LIBS="$LIBS -lattr",,)],,),)
-diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.0.0983.bb b/meta-oe/recipes-support/vim/vim-tiny_8.1.0133.bb
-similarity index 100%
-rename from meta-oe/recipes-support/vim/vim-tiny_8.0.0983.bb
-rename to meta-oe/recipes-support/vim/vim-tiny_8.1.0133.bb
-diff --git a/meta-oe/recipes-support/vim/vim_8.0.0983.bb b/meta-oe/recipes-support/vim/vim_8.1.0133.bb
-similarity index 93%
-rename from meta-oe/recipes-support/vim/vim_8.0.0983.bb
-rename to meta-oe/recipes-support/vim/vim_8.1.0133.bb
-index 44c868c74..f6b0770d6 100644
---- a/meta-oe/recipes-support/vim/vim_8.0.0983.bb
-+++ b/meta-oe/recipes-support/vim/vim_8.1.0133.bb
-@@ -4,14 +4,12 @@ DEPENDS = "ncurses gettext-native"
- # vimdiff doesn't like busybox diff
- RSUGGESTS_${PN} = "diffutils"
- LICENSE = "vim"
--LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=eea32ac1424bba14096736a494ae9045"
-+LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b6eb9d541de3933cc8f48125ae0335fe"
- 
- SRC_URI = "git://github.com/vim/vim.git \
--           file://disable_acl_header_check.patch;patchdir=.. \
-            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
--           file://CVE-2017-17087.patch;patchdir=.. \
- "
--SRCREV = "3f9a1ff141412e9e85f7dff47d02946cb9be9228"
-+SRCREV = "46577b5e5445c4aaa1e7ae1764373d11dae71663"
- 
- S = "${WORKDIR}/git/src"
- 
-@@ -54,6 +52,7 @@ EXTRA_OECONF = " \
-     vim_cv_memmove_handles_overlap=yes \
-     vim_cv_stat_ignores_slash=no \
-     vim_cv_terminfo=yes \
-+    vim_cv_tgetent=zero \
-     vim_cv_tgent=non-zero \
-     vim_cv_toupper_broken=no \
-     vim_cv_tty_group=world \
--- 
-2.14.1
+INFO: jenkins-job.sh-1.8.45 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.report.20180701_072407.log
 
+=== common (1) ===
+    * sources/openembedded-core/meta/recipes-graphics/mesa/mesa_18.1.2.bb:do_compile
+
+=== common-x86 (0) ===
+
+=== qemuarm (3) ===
+    * sources/meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_3.12.0.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-extended/redis/redis_4.0.8.bb:do_compile
+
+=== qemuarm64 (4) ===
+    * sources/meta-openembedded/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.7.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/glide/glide_0.13.1.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/go/go_1.9.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-devtools/go/go-dep_0.4.1.bb:do_package_qa
+
+=== qemux86 (14) ===
+    * sources/meta-openembedded/meta-networking/recipes-connectivity/rdist/rdist_6.1.5.bb:do_package
+    * sources/meta-openembedded/meta-networking/recipes-daemons/opensaf/opensaf_5.18.04.bb:do_compile
+    * sources/meta-openembedded/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb:do_compile
+    * sources/meta-openembedded/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb:do_compile
+    * sources/meta-openembedded/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:do_compile
+    * sources/meta-openembedded/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb:do_configure
+    * sources/meta-openembedded/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/crash/crash_7.2.0.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-multimedia/alsa/alsa-oss_1.0.28.bb:do_compile
+    * sources/meta-openembedded/meta-oe/recipes-test/pm-qa/pm-qa_git.bb:do_compile
+    * sources/openembedded-core/meta/recipes-multimedia/x264/x264_git.bb:do_package_qa
+    * sources/openembedded-core/meta/recipes-support/libunwind/libunwind_1.2.1.bb:do_compile
+
+=== qemux86_64 (1) ===
+    * sources/meta-openembedded/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb:do_package_qa
+
+=== Number of failed tasks (29) ===
+{| class=wikitable
+|-
+|| qemuarm || 4 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm.20180630_155218.log/
+||
+|-
+|| qemuarm64 || 5 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm64.20180630_164546.log/
+||
+|-
+|| qemux86 || 18 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86.20180630_155227.log/
+||
+|-
+|| qemux86_64 || 2 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86-64.20180630_164536.log/
+||
+|}
+
+=== PNBLACKLISTs (0) ===
+
+=== QA issues (41) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||host-user-contaminated
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||unknown-configure-option
+|-
+||1 ||installed-vs-shipped
+|-
+||32 ||version-going-backwards
+|-
+||3 ||build-deps
+|-
+||7 ||textrel
+|}
+
+
+
+=== Incorrect PACKAGE_ARCH or sstate signatures (7) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.signatures.20180630_173905.log/
+    * ERROR: 7 issues were found in these recipes: 96boards-tools
+oprofile packagegroup-core-standalone-sdk-target
+packagegroup-core-tools-debug packagegroup-self-hosted
+
+    * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
+    * ERROR: 1 errors found in
+signatures.qemux86.do_populate_sysroot.sigdata.log
+    * ERROR: 1 errors found in
+signatures.qemux86.do_package_write_ipk.sigdata.log
+    * ERROR: 4 errors found in
+signatures.qemuarm.do_package_write_ipk.sigdata.log
+
+    * ERROR: oprofile different signature for task
+do_configure.sigdata between qemux86copy and qemux86
+    * ERROR: 1 errors found in
+/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1530416345/signatures.qemux86.do_configure.sigdata.log
+    * ERROR: oprofile different signature for task
+do_populate_sysroot.sigdata between qemux86copy and qemux86
+    * ERROR: 1 errors found in
+/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1530416345/signatures.qemux86.do_populate_sysroot.sigdata.log
+    * ERROR: oprofile different signature for task
+do_package_write_ipk.sigdata between qemux86copy and qemux86
+    * ERROR: 1 errors found in
+/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1530416345/signatures.qemux86.do_package_write_ipk.sigdata.log
+    * ERROR: 96boards-tools different signature for task
+do_package_write_ipk.sigdata between qemux86copy and qemuarm
+    * ERROR: packagegroup-core-standalone-sdk-target different
+signature for task do_package_write_ipk.sigdata between qemux86copy
+and qemuarm
+    * ERROR: packagegroup-core-tools-debug different signature for
+task do_package_write_ipk.sigdata between qemux86copy and qemuarm
+    * ERROR: packagegroup-self-hosted different signature for task
+do_package_write_ipk.sigdata between qemux86copy and qemuarm
+    * ERROR: 4 errors found in
+/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1530416345/signatures.qemuarm.do_package_write_ipk.sigdata.log
+    * ERROR: 7 issues were found in these recipes: 96boards-tools
+oprofile packagegroup-core-standalone-sdk-target
+packagegroup-core-tools-debug packagegroup-self-hosted
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-*:
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 7 issue: textrel
+ELF binary '/tmp/work/aarch64-bec-linux/glide/0.13.1-r0/packages-split/glide-ptest/usr/lib/glide/ptest/github.com/Masterminds/glide/godep/strip/strip.test'
+has relocations in .text [textrel]
+ELF binary '/tmp/work/aarch64-bec-linux/go/1.9.6-r0/packages-split/go/usr/lib/go/pkg/tool/linux_arm64/pprof'
+has relocations in .text [textrel]
+glide-0.13.1: ELF binary
+'/tmp/work/i586-bec-linux-musl/glide/0.13.1-r0/packages-split/glide/usr/bin/glide'
+has relocations in .text [textrel]
+go-dep-0.4.1: ELF binary
+'/tmp/work/aarch64-bec-linux/go-dep/0.4.1-r0/packages-split/go-dep-ptest/usr/lib/go-dep/ptest/github.com/golang/dep/cmd/dep/dep.test'
+has relocations in .text [textrel]
+go-dep-0.4.1: ELF binary
+'/tmp/work/i586-bec-linux-musl/go-dep/0.4.1-r0/packages-split/go-dep/usr/bin/dep'
+has relocations in .text [textrel]
+x264-r2854+gitAUTOINC+e9a5903edf: ELF binary
+'/tmp/work/i586-bec-linux-musl/x264/r2854+gitAUTOINC+e9a5903edf-r0/packages-split/x264-bin/usr/bin/x264'
+has relocations in .text [textrel]
+x264-r2854+gitAUTOINC+e9a5903edf: ELF binary
+'/tmp/work/i586-bec-linux-musl/x264/r2854+gitAUTOINC+e9a5903edf-r0/packages-split/x264/usr/lib/libx264.so.152'
+has relocations in .text [textrel]
+
+
+count: 3 issue: build-deps
+hiawatha-10.7: hiawatha rdepends on mbedtls, but it isn't a build
+dependency, missing mbedtls in DEPENDS or PACKAGECONFIG? [build-deps]
+mbedtls-2.9.0: mbedtls-programs rdepends on hiawatha, but it isn't a
+build dependency, missing hiawatha in DEPENDS or PACKAGECONFIG?
+[build-deps]
+mbedtls-2.9.0: mbedtls rdepends on hiawatha, but it isn't a build
+dependency, missing hiawatha in DEPENDS or PACKAGECONFIG? [build-deps]
+
+
+count: 0 issue: file-rdeps
+
+
+count: 32 issue: version-going-backwards
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-dbg went backwards
+which would break package feeds from (0:1.0-r8.11 to 0:1.0-r8.10)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-dev went backwards
+which would break package feeds from (0:1.0-r8.11 to 0:1.0-r8.10)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target-ptest went backwards
+which would break package feeds from (0:1.0-r8.11 to 0:1.0-r8.10)
+[version-going-backwards]
+packagegroup-core-standalone-sdk-target-1.0: Package version for
+package packagegroup-core-standalone-sdk-target went backwards which
+would break package feeds from (0:1.0-r8.11 to 0:1.0-r8.10)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-dbg went backwards which would break
+package feeds from (0:1.0-r3.11 to 0:1.0-r3.10)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-dev went backwards which would break
+package feeds from (0:1.0-r3.11 to 0:1.0-r3.10)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug-ptest went backwards which would break
+package feeds from (0:1.0-r3.11 to 0:1.0-r3.10)
+[version-going-backwards]
+packagegroup-core-tools-debug-1.0: Package version for package
+packagegroup-core-tools-debug went backwards which would break package
+feeds from (0:1.0-r3.11 to 0:1.0-r3.10) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-dbg went backwards which would break package
+feeds from (0:1.0-r13.13 to 0:1.0-r13.12) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-dbg went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-dev went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug-ptest went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-debug went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-dev went backwards which would break package
+feeds from (0:1.0-r13.13 to 0:1.0-r13.12) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-dbg went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-dev went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended-ptest went backwards which would
+break package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-extended went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-dbg went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-dev went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics-ptest went backwards which would
+break package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-graphics went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-dbg went backwards which would
+break package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-dev went backwards which would
+break package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools-ptest went backwards which would
+break package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-host-tools went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-ptest went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-dbg went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-dev went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk-ptest went backwards which would break
+package feeds from (0:1.0-r13.13 to 0:1.0-r13.12)
+[version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted-sdk went backwards which would break package
+feeds from (0:1.0-r13.13 to 0:1.0-r13.12) [version-going-backwards]
+packagegroup-self-hosted-1.0: Package version for package
+packagegroup-self-hosted went backwards which would break package
+feeds from (0:1.0-r13.13 to 0:1.0-r13.12) [version-going-backwards]
+
+
+count: 0 issue: host-user-contaminated
+
+
+count: 1 issue: installed-vs-shipped
+rdist: 1 installed and not shipped files. [installed-vs-shipped]
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/oe-build ~/oe/world/oe-build
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+4937ed3 bitbake-user-manual: Added "number_threads" varflag
+not included in master yet:
+8efa782 fetch2: Use correct check in parameter handling in uri_replace()
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+6f8f984 initrdscripts/init-live.sh: fix mounts w/ spaces fail to move
+to real rootfs
+not included in master yet:
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+4517d1c metacity: allow for warnings during compilation
+not included in master yet:
+d9bb8ad dracut: upgrade 046 -> 047
+0f010cb logcheck: Update the repo link
+8778dc8 ifenslave:Update the repo link
+38d227b Add recipe for cereal, a header-only C++11 serialization library.
+00d5219 bpftool: add new recipe
+d56219b mosquitto: minor recipe cleanups
+8ef250d python(3)-hyperlink: upgrade 17.3.1 -> 18.0.0
+5fc8680 python(3)-protobuf: upgrade 3.5.2 -> 3.6.0
+fc5d2e5 python-dbus: upgrade 1.2.6 -> 1.2.8
+958d240 python(3)-pytest-runner: upgrade 3.0 -> 4.2
+c8cec04 python3-ordered-set: upgrade 2.0.2 -> 3.0.0
+064e5ab python-pip: upgrade 9.0.3 -> 10.0.1
+91fc7e1 python(3)-twisted: upgrade 17.9.0 -> 18.4.0
+65f5e0f python-ipaddress: upgrade 1.0.19 -> 1.0.22
+9facbad python(3)-certifi: upgrade 2018.1.18 -> 2018.4.16
+6383aa7 python(3)-pyopenssl: upgrade 17.5.0 -> 18.0.0
+cb4371f python(3)-urllib3: upgrade 1.22 -> 1.23
+7f7778e python(3)-ndg-httpsclient: upgrade 0.4.4 -> 0.5.0
+720c3af python(3)-pyasn1: upgrade 0.4.2 -> 0.4.3
+2002c44 python(3)-lxml: upgrade 4.2.1 -> 4.2.2
+1a1360d python(3)-automat: upgrade 0.6.0 -> 0.7.0
+b5ac1d0 python3-requests-file: upgrade 1.4.2 -> 1.4.3
+51d413c python3-prctl: upgrade 1.6.1 -> 1.7
+4d7532d python(3)-attrs: upgrade 17.4.0 -> 18.1.0
+becd0a6 python(3)-requests: upgrade 2.18.4 -> 2.19.1
+5a1c7c3 python(3)-idna: upgrade 2.6 -> 2.7
+70ac050 waf-cross-answers: Added file for arm bigendian which for
+aarch64BE multilib.
+590f187 libnih: Fix do_package error when enable mutilib.
+76e5f66 liblogging: upgrade to 1.0.6
+e0a7f73 log4cplus: upgrade to 2.0.1
+79024b5 iceauth: Upgrade to 1.0.8
+b2bd3b0 gperftools: Upgrade to 2.7
+b951fc7 libndp: Upgrade to 1.7
+2041c5b hwdata: Upgrade to 0.312
+bd28761 libedit: Upgrade to 20180525-3.1
+dd2a634 libfastjson: Upgrade to 0.99.8
+6a659ef fltk: Upgrade to 1.3.4-2
+45edb2d dialog: Upgrade to 1.3-20180621
+e43a831 libgphoto2: Upgrade to 2.5.17
+211c8d6 hwloc: Upgrade to 1.11.10
+b6c0c92 glade: Upgrade to 3.22.1
+3e2d529 dbus-broker: Upgrade to latest and fix build on musl
+f6c7adb kea: Upgrade to 1.4.0 release
+175bf73 python-ptyprocess: update to version 0.6.0
+145408a python-cython: update to version 0.28.3
+0a5c61c protobuf: misc recipe cleanup
+3c49eca protobuf-c: misc recipe cleanup
+09eb0ca apache2: Add PACKAGECONFIG zlib option for mod_deflate
+661375e dnsmasq: upgrade 2.78 -> 2.79
+188097b php: upgrade 7.2.4 -> 7.2.7
+54aa4c4 postgresql: upgrade 9.4.17 -> 9.4.18
+6e47ace syslog-ng: upgrade 3.15.1 -> 3.16.1
+318c957 vim/vim-tiny: upgrade 8.0.0983 -> 8.1.0.116
+5933e85 python-pytz: update to version 2018.5
+86553eb python-lxml: update to version 4.2.3
+b2163c1 python-pybind11: update to version 2.2.3
+831fcf6 python-babel: update to version 2.6.0
+28b42e5 python-dateutil: update to version 2.7.3
+09ed17b python-pyjwt: update to version 1.6.4
+4ef58ec python-pyasn1-modules: update to version 0.2.2
+3f0923b python-pyiface: update to version 0.0.6
+a45ebba python-pandas: update to version 0.23.1
+bc30a93 python-cryptography-vectors: update to version 2.2.2
+3ee1d8b python-cryptography: update to version 2.2.2
+7d58e8a python-zopeinterface: update to version 4.5.0
+a5509f6 python-pymongo: update to version 3.7.0
+e8e5947 python-pymisp: update to version 2.4.92.1
+e57d080 python-pyperclip: update to version 1.6.2
+f7e8cd8 python-pexpect: update to version 4.6.0
+6a6e398 python-alembic: update to version 0.9.10
+553ced6 kodi: Upgrade to upcoming kodi v18 'Leia'
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+65c85d3 qt5/qtscript: Fix qtscript cross compile error
+not included in master yet:
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+1cd38d7 Merge pull request #127 from rakuco/m67-87
+not included in master yet:
+~/oe/world/oe-build
 
