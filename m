@@ -1,42 +1,26 @@
-Return-Path: <prvs=6721abd1e0=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id AC0C47876D
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id E40927891D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jul 2018 09:32:47 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w629UgrS026717 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Jul 2018 04:32:48 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2jx5w0vb15-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Jul 2018 04:32:48 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com
-	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w629Wld2006808
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Mon,  2 Jul 2018 13:24:42 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id w62DOgDu013126
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Jul 2018 04:32:47 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 2 Jul 2018 04:32:47 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Mon, 2 Jul 2018 04:32:47 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Jul 2018 12:31:23 +0300
-Message-ID: <20180702093122.31132-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.18.0
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-07-02_01:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH v2] python-pyiface: Upgrade to 0.0.7
+	Mon, 2 Jul 2018 15:24:42 +0200
+Received: from dev.vm6.ccp.siemens.com (MD1FZU9C.ad001.siemens.net
+	[139.16.76.87])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id w62DOgRt013811;
+	Mon, 2 Jul 2018 15:24:42 +0200
+Received: from dev.vm6.ccp.siemens.com (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id 2862510CCDAD;
+	Mon,  2 Jul 2018 15:24:42 +0200 (CEST)
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 Jul 2018 15:24:34 +0200
+Message-Id: <20180702132434.12029-1-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] nodejs: update to 8.11.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,41 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jul 2018 09:32:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 02 Jul 2018 13:24:43 -0000
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+Fixes the following CVEs:
+- CVE-2018-7167
+- CVE-2018-7161
+- CVE-2018-1000168
+
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
- .../{python-pyiface_0.0.5.bb => python-pyiface_0.0.7.bb}      | 0
- .../{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.7.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.5.bb => python-pyiface_0.0.7.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.7.bb} (100%)
+ .../recipes-devtools/nodejs/{nodejs_8.11.2.bb => nodejs_8.11.3.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_8.11.2.bb => nodejs_8.11.3.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index 620b244c6..895a0ae09 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.11.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.11.3.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_8.11.2.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_8.11.3.bb
+index 4e81b0392..4017d9284 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_8.11.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.11.3.bb
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+ "
+-SRC_URI[md5sum] = "56be405b63b8c6c8ecd98c002fb15e4a"
+-SRC_URI[sha256sum] = "539946c0381809576bed07424a35fc1740d52f4bd56305d6278d9e76c88f4979"
++SRC_URI[md5sum] = "6cb0e19089ad13a4ec02640b604d2e0f"
++SRC_URI[sha256sum] = "577c751fdca91c46c60ffd8352e5b465881373bfdde212c17c3a3c1bd2616ee0"
  
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+ S = "${WORKDIR}/node-v${PV}"
  
--SRC_URI[md5sum] = "06c3c71fe51df740dae6a88a13afb5e0"
--SRC_URI[sha256sum] = "4bb79100cbcf7344a1ccaddc578cd6455da47d8eac6eb1bf903ec32e043af924"
-+SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
-+SRC_URI[sha256sum] = "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
 -- 
-2.18.0
+2.11.0
 
 
