@@ -1,23 +1,25 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A11D6FF80
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CA75676008
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jul 2018 02:07:59 +0000 (UTC)
+	Mon,  2 Jul 2018 02:08:00 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w62280Uo013548
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w62282nV027155
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 1 Jul 2018 19:08:00 -0700 (PDT)
+	Sun, 1 Jul 2018 19:08:02 -0700 (PDT)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Sun, 1 Jul 2018 19:08:00 -0700
+	14.3.399.0; Sun, 1 Jul 2018 19:08:01 -0700
 From: Changqing Li <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Jul 2018 10:07:58 +0800
-Message-ID: <1530497279-37667-1-git-send-email-changqing.li@windriver.com>
+Date: Mon, 2 Jul 2018 10:07:59 +0800
+Message-ID: <1530497279-37667-2-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1530497279-37667-1-git-send-email-changqing.li@windriver.com>
+References: <1530497279-37667-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] openldap: upgrade 2.4.45 -> 2.4.46
+Subject: [PATCH] rsyslog: upgrade 8.29.0 -> 8.36.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,113 +37,92 @@ Content-Type: text/plain
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-oe/recipes-support/openldap/openldap/install-strip.patch  |  3 +++
- meta-oe/recipes-support/openldap/openldap/kill-icu.patch       |  2 +-
- .../openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch      |  2 +-
- .../openldap/openldap/openldap-CVE-2015-3276.patch             |  2 ++
- .../openldap/openldap/openldap-m4-pthread.patch                |  2 ++
- .../openldap/{openldap_2.4.45.bb => openldap_2.4.46.bb}        | 10 ++++------
- 6 files changed, 13 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.45.bb => openldap_2.4.46.bb} (97%)
+ .../rsyslog/rsyslog/0001-Include-sys-time-h.patch         | 15 ++++++++-------
+ .../rsyslog/use-pkgconfig-to-check-libgcrypt.patch        |  2 +-
+ .../rsyslog/{rsyslog_8.29.0.bb => rsyslog_8.36.0.bb}      |  6 +++---
+ 3 files changed, 12 insertions(+), 11 deletions(-)
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.29.0.bb => rsyslog_8.36.0.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/install-strip.patch b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-index 2992b70..7c67596 100644
---- a/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/install-strip.patch
-@@ -1,6 +1,9 @@
- # This patch ensures that the install operations which strip
- # programs and libraries (LTINSTALL) work in a cross build
- # environment.
-+
-+Upstream-Status: Pending
-+
- --- openldap-2.2.24/.pc/install-strip.patch/build/top.mk	2005-01-20 09:00:55.000000000 -0800
- +++ openldap-2.2.24/build/top.mk	2005-04-16 13:48:20.536710376 -0700
- @@ -116,7 +116,7 @@
-diff --git a/meta-oe/recipes-support/openldap/openldap/kill-icu.patch b/meta-oe/recipes-support/openldap/openldap/kill-icu.patch
-index dcf5411..35e4646 100644
---- a/meta-oe/recipes-support/openldap/openldap/kill-icu.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/kill-icu.patch
-@@ -2,7 +2,7 @@ From: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
- 
- slapd depends on ICU if it was built first.
- 
--Upstream-status: inappropiate [embedded specific]
-+Upstream-Status: inappropiate [embedded specific]
- ---
-  configure.in |    8 --------
-  1 file changed, 8 deletions(-)
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-index c7b1552..86d0767 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-2.4.28-gnutls-gcrypt.patch
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+index ca88dd3..6ce8b7a 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
 @@ -1,6 +1,6 @@
- From http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/net-nds/openldap/files/
+-From 9739095de6ae5f844354756ae968f5f8864eb3e3 Mon Sep 17 00:00:00 2001
++From 7baf35b88d742032a2dc456c396843e17e866f8e Mon Sep 17 00:00:00 2001
+ From: Ming Liu <peter.x.liu@external.atlascopco.com>
+-Date: Sun, 26 Feb 2017 14:10:21 +0100
++Date: Wed, 27 Jun 2018 14:04:57 +0800
+ Subject: [PATCH] Include sys/time.h
  
--Upstream-status: Unknown
-+Upstream-status: Pending
+ struct timeval is defined in sys/time.h with a musl libc.
+@@ -8,13 +8,13 @@ struct timeval is defined in sys/time.h with a musl libc.
+ Upstream-Status: Inappropriate [musl libc specific]
  
- --
- 
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-index de9ca52..25e148e 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-@@ -10,6 +10,8 @@ cipher strings, which might cause a weaker than intended cipher to
- be used and allow remote attackers to have unspecified impact via
- unknown vectors.
- 
-+Upstream-Status: Pending
-+
- Signed-off-by: Li Wang <li.wang@windriver.com>
+ Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+-
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
  ---
-  libraries/libldap/tls_m.c |   27 ++++++++++++++++-----------
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-index b669b72..38c0a5a 100644
---- a/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-m4-pthread.patch
-@@ -1,3 +1,5 @@
-+Upstream-Status: Pending
-+
- --- openldap-2.3.11/build/openldap.m4.orig	2005-11-11 00:11:18.604322590 -0800
- +++ openldap-2.3.11/build/openldap.m4	2005-11-11 00:26:21.621145856 -0800
- @@ -788,7 +788,7 @@ AC_DEFUN([OL_PTHREAD_TEST_FUNCTION],[[
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb b/meta-oe/recipes-support/openldap/openldap_2.4.46.bb
-similarity index 97%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.46.bb
-index 82d6619..0c25506 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.46.bb
-@@ -1,5 +1,3 @@
--# OpenLDAP, a license free (see http://www.OpenLDAP.org/license.html)
--#
- SUMMARY = "OpenLDAP Directory Service"
- DESCRIPTION = "OpenLDAP Software is an open source implementation of the Lightweight Directory Access Protocol."
- HOMEPAGE = "http://www.OpenLDAP.org/license.html"
-@@ -9,9 +7,9 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
- # basically BSD.  opensource.org does not record this license
- # at present (so it is apparently not OSI certified).
- LICENSE = "OpenLDAP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25fd3721960f39128cd15a749fd21139 \
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25b4ead0e45182e7c2914e59ff57009f \
-                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
--"
-+                    "
- SECTION = "libs"
+  tests/msleep.c | 4 ----
+  1 file changed, 4 deletions(-)
  
- LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
-@@ -27,8 +25,8 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
-     file://openldap-CVE-2015-3276.patch \
+ diff --git a/tests/msleep.c b/tests/msleep.c
+-index 26a8206..ca818be 100644
++index 98dbece..96f6950 100644
+ --- a/tests/msleep.c
+ +++ b/tests/msleep.c
+ @@ -26,11 +26,7 @@
+@@ -26,6 +26,7 @@ index 26a8206..ca818be 100644
+ -#else
+ -#include <time.h>
+ -#endif
+- 
+- int main(int argc, char *argv[])
+- {
++ #if defined(HAVE_SYS_SELECT_H)
++ #include <sys/select.h>
++ #endif
++2.7.4
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
+index 162d239..0352587 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
+@@ -3,7 +3,7 @@ From: Roy Li <rongqing.li@windriver.com>
+ Date: Wed, 18 Jun 2014 13:46:52 +0800
+ Subject: [PATCH] use pkgconfig to check libgcrypt
+ 
+-Upstream-status: Inappropriate [configuration]
++Upstream-Status: Inappropriate [configuration]
+ 
+ libgcrypt does no longer provide libgcrypt-config, and provide
+ *.pc, so we should use pkgconfig to check
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.29.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.29.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+index 03f21c6..d65a2be 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.29.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+@@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
+  encryption protected syslog relay chains while at the same time being\
+  very easy to setup for the novice user."
+ 
+-DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging"
++DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging curl"
+ HOMEPAGE = "http://www.rsyslog.com/"
+ LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
+@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
  "
  
--SRC_URI[md5sum] = "00ff8301277cdfd0af728a6927042a13"
--SRC_URI[sha256sum] = "cdd6cffdebcd95161a73305ec13fc7a78e9707b46ca9f84fb897cd5626df3824"
-+SRC_URI[md5sum] = "829016c5a9f45c51adc50073ac6f9fd7"
-+SRC_URI[sha256sum] = "9a90dcb86b99ae790ccab93b7585a31fbcbeec8c94bf0f7ab0ca0a87ea0c4b2d"
+-SRC_URI[md5sum] = "3805617f65a4b4bea34606487a5255a0"
+-SRC_URI[sha256sum] = "220ba30b5afb0f3ddb328613fea7aa3966b01e4d0c52d6de9ab27b0858f19738"
++SRC_URI[md5sum] = "6846bb6d37af3ce067988dd2460d3a5d"
++SRC_URI[sha256sum] = "8a4b5beb92c6b308c3d14de2364c2788f62ef5d37ca0448144619edfe508ee70"
  
- DEPENDS = "util-linux groff-native"
- 
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.7.4
 
