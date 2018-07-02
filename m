@@ -1,30 +1,32 @@
 Return-Path: <leon.anavi@konsulko.com>
 Received: from anavi.org (unknown [91.215.217.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 16B38786D4
+	by mail.openembedded.org (Postfix) with ESMTP id 0E8D7787AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jul 2018 09:28:38 +0000 (UTC)
+	Mon,  2 Jul 2018 09:28:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org; 
 	s=default;
-	h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version
-	:Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
-	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=yF0/qgqezfQH9UyMLQyJgZpKEdCG8PjNbzm+pRlC80M=;
-	b=IkdnYdfmoE9yWe81pJHduEEaSa
-	zxqofsO2XgwpjKwfM22dcDG6Eci5tD7L3E/TPkY1QG728UQQttBQBI7gpfta2iltIhfZuEFckEkNc
-	s6i/dupmOkYzx37hQm753rcVVCPvdCIc8YBb23VQkbxePKEMZ457OeJZBT85AhDWp4AA=; 
+	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=pO55aIpSQLkWcwMCu50U0MKpfPzipEE3t+p3QAN2sRA=;
+	b=jWmTBvzzJ5mtYmva6+YoUPEokS
+	TPN/xbHOB4O54uViWVEd9PRUpcHoFO+e7uG4dZQa/43Ez9KauTHSgZHwY9c7HcdpBa6u4XZX5eYLJ
+	gKQwaN0B53g9q78vrzX3j7IPOm5Pgp4KFySoOrGnt3D7mvib5U/au7GlExRl/zK6ZeEE=; 
 Received: from [78.130.197.109] (port=33750
 	helo=leon-ThinkPad-T460s.speak.local)
 	by voyager.icnhost.net with esmtpsa
 	(TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.91)
 	(envelope-from <leon.anavi@konsulko.com>)
-	id 1fZv8Q-0006Rk-95; Mon, 02 Jul 2018 12:28:38 +0300
+	id 1fZv8T-0006Rk-GH; Mon, 02 Jul 2018 12:28:41 +0300
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Jul 2018 12:28:05 +0300
-Message-Id: <20180702092806.15752-1-leon.anavi@konsulko.com>
+Date: Mon,  2 Jul 2018 12:28:06 +0300
+Message-Id: <20180702092806.15752-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.14.1
+In-Reply-To: <20180702092806.15752-1-leon.anavi@konsulko.com>
+References: <20180702092806.15752-1-leon.anavi@konsulko.com>
 X-AntiAbuse: This header was added to track abuse,
 	please include it with any abuse report
 X-AntiAbuse: Primary Hostname - voyager.icnhost.net
@@ -36,7 +38,7 @@ X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Subject: [PATCH] vim: update to 8.1.0133
+Subject: [meta-oe][PATCH] vim: update to 8.1.0133
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jul 2018 09:28:39 -0000
+X-List-Received-Date: Mon, 02 Jul 2018 09:28:41 -0000
 
 A few new features have been add and a lot of bugs have been
 fixed in minor release Vim 8.1.
@@ -219,6 +221,6 @@ index 44c868c74..f6b0770d6 100644
      vim_cv_toupper_broken=no \
      vim_cv_tty_group=world \
 -- 
-2.11.0
+2.14.1
 
 
