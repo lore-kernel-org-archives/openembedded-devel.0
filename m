@@ -1,50 +1,42 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E9D878956
+Return-Path: <leon.anavi@konsulko.com>
+Received: from anavi.org (unknown [91.215.217.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B42578936
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jul 2018 14:28:31 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id s12-v6so298243wmc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Jul 2018 07:28:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=PGNcZKGb/2iRT0bx7yD9pqxYk0sN9yCMD1L9yxwvQio=;
-	b=CWmwlsw7jfYSI1TtayEbr1knOAUGEBeSG999ToWNV0+WR71KBRoPJS+ryX6L6urLcL
-	GsDPqNzlZNqkK4jmmjlLhqQbLgRIX6gMYxBKNVW62ZZU8PHcKyKV0xUsZvkSRSGJVC+s
-	WS76OzmlWfYpI8CS7ADs8g7w6figYbJ6xdzv50Ip4sUIPzRA07Jr5wWXOamsqzzJ35YT
-	Yb4Up8qmdSwJJVfiSOi8hhXyo66dhjcIJY33HOmfg54cp8Wp7lHTkqf5BZSnh6UXmM93
-	nJBTSIa+fgUNQryVJif0Oz6r9Sqwh9fesbkR2WhPjwDQeRgoPycnKfHuUBKHNylkhgBh
-	fU2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=PGNcZKGb/2iRT0bx7yD9pqxYk0sN9yCMD1L9yxwvQio=;
-	b=JAoHuKGGoUd92PscePrKeThy+izwpSvWbbJDQphOhCsNx9C3AXodVo1F7isPaOdN52
-	nd6dDIZvdzK3PD7AWL7cXtlAG9+VG1RLv1/f1cGowadghzHft9ueTarTfHjG+xsM/oxV
-	3IXamSJAclNZzO4aA1PQ7ioik+4QT4RhlZ5ux9Ed4A1hHH1ZKTqydxPgXyDIQq2eBdzp
-	mtAYN0bNy8qFJCt5doMpDwyg66g8wq94shGBnk8uDyhUElSHHCnZLd/m8Qt/W0mpA8Of
-	LF/aDNsjpNo9KVeuRBD0Vsu9+QlwOFrxF7F+ubVL1Lk1X9Kac5+WbomgI8uSRh3gtiE3
-	wAag==
-X-Gm-Message-State: APt69E3jIHxmhIzqqT5CAKTOr6E+TsakJCtuecQkBSZWYRnXnK7sc9Tt
-	PVeU2ErEVF7mcz+7YXrXcV0i4crFxl6mZpnZtUIcMQ==
-X-Google-Smtp-Source: AAOMgpcHKxvDkVSC1uSS6Jim5/eGhQT0PdOv3K/7sey5dvrYoiP/UTgzXMQGdn8+FJsXvmhBFX6XYfa3SDissxh3hM0=
-X-Received: by 2002:a1c:c14:: with SMTP id 20-v6mr3729489wmm.117.1530541712630;
-	Mon, 02 Jul 2018 07:28:32 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAAfyv37AbvjKMnu=N38KxfJtRLFzAU=0CVFSpi64LpZgG6KTag@mail.gmail.com>
-	<20180629130543.GA3898@mail.itconsulting-heinold.de>
-	<CAAfyv36RrHUbuVeUFTgHptMF6gosv4KD1=UUJuaLiTX40XCLRQ@mail.gmail.com>
-	<20180629131940.GB3898@mail.itconsulting-heinold.de>
-	<CAAfyv34pLOfmn8xfjDmwtnQe=U6Mpp4OoJC_gCwF1YSuHrgV1g@mail.gmail.com>
-In-Reply-To: <CAAfyv34pLOfmn8xfjDmwtnQe=U6Mpp4OoJC_gCwF1YSuHrgV1g@mail.gmail.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Mon, 2 Jul 2018 16:28:20 +0200
-Message-ID: <CAAfyv37UG69L=nkcpekm09B+4cD7sZOzVo1+5WrRS5YSjc8xoQ@mail.gmail.com>
-To: henning@itconsulting-heinold.de
-Cc: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-java openjdk-8 fails to compile for beaglebone
+	Mon,  2 Jul 2018 16:04:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org; 
+	s=default;
+	h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version
+	:Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=BTC6vS4BtdAUs5DNm6Og9NmgJ3cVVeQFQsQuKO/XIjM=;
+	b=e4ebzXj9KOhHQTAhLw5pwuJHHX
+	KCP4aZruXh8g+kpAkrvWUkUjpN0iT1gcPLO/Ur8OIhkmepHoSep3wliKCt2gatW41xyWBq72cUhBw
+	K6J3uFCWzMP1X/gzS0GPAisiqxF+roYCjIMRtxVIMMYdVpaKZ4EaAt0TfenV1PVOI8d0=; 
+Received: from [78.130.197.109] (port=41646
+	helo=leon-ThinkPad-T460s.speak.local)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.91)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1fa1Jc-0002Ye-1E; Mon, 02 Jul 2018 19:04:36 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 Jul 2018 19:04:22 +0300
+Message-Id: <20180702160423.5965-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.14.1
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [PATCH] paho-mqtt-c: Upgrade to 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,57 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jul 2018 14:28:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 02 Jul 2018 16:04:36 -0000
 
-Hi Henning,
+Upgrade paho.mqtt.c to the latest stable release from April 10.
 
-I tried with sumo but java aborts:
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119164.html
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../paho-mqtt-c/{paho-mqtt-c_1.2.0.bb => paho-mqtt-c_1.2.1.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/paho-mqtt-c/{paho-mqtt-c_1.2.0.bb => paho-mqtt-c_1.2.1.bb} (96%)
 
-On Fri, Jun 29, 2018 at 3:24 PM Belisko Marek <marek.belisko@gmail.com> wrote:
->
-> Hi Henning,
->
-> On Fri, Jun 29, 2018 at 3:19 PM Henning Heinold
-> <henning@itconsulting-heinold.de> wrote:
-> >
-> > On Fri, Jun 29, 2018 at 03:08:53PM +0200, Belisko Marek wrote:
-> > > Hi Henning,
-> > > On Fri, Jun 29, 2018 at 3:06 PM Henning Heinold
-> > > <henning@itconsulting-heinold.de> wrote:
-> > > >
-> > > > On Fri, Jun 29, 2018 at 02:33:02PM +0200, Belisko Marek wrote:
-> > > > > Hello,
-> > > > >
-> > > > > I'm trying to compile openjdk-8 from actual meta-java master (I'm
-> > > > > using rocko poky though).
-> > > >
-> > > > Please try the rocko branch from meta-java and build again.
-> > > On rocko branch it works but I would need latest version of openjdk.
-> > In that case I think you need to backport the version upgrade to the rocko branch or
-> > wait until someone will do it. There some changes in master regarding the xorg-proto headers.
-> Isn't just copy of openjdk-8 folder enough to custom layer from master
-> branch? Seem from your response not so I'll try to look on patches
-> and then update all necessary bits and pieces. Thanks.
-> >
-> > Bye Henning
->
-
-BR,
-
-marek
-
-
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.0.bb b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.1.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.0.bb
+rename to meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.1.bb
+index fec380ce6..a7a9b5a6c 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.0.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.2.1.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
+ 
+ SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http"
+ 
+-SRCREV = "e8d34da24ad807f5e698b327d67591fd4b4bfa7e"
++SRCREV = "09fe0744e02f317b907e96dd5afcc02224ddbb85"
+ 
+ DEPENDS = "openssl"
+ 
 -- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
+2.11.0
 
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
 
