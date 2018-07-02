@@ -1,24 +1,31 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CC254754CA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jul 2018 02:31:27 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w622VSsK017961
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 1 Jul 2018 19:31:28 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Sun, 1 Jul 2018 19:31:07 -0700
-From: Changqing Li <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 Jul 2018 10:31:05 +0800
-Message-ID: <1530498665-132100-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id D40627551C;
+	Mon,  2 Jul 2018 04:02:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8F9BF20BCF;
+	Mon,  2 Jul 2018 04:02:19 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id hD63YGA66ECY; Mon,  2 Jul 2018 04:02:19 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 54A2A20B0C;
+	Mon,  2 Jul 2018 04:02:17 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id B2B2D1634F9; Mon,  2 Jul 2018 00:02:16 -0400 (EDT)
+Date: Mon, 2 Jul 2018 00:02:16 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	openembedded-members@lists.openembedded.org
+Message-ID: <20180702040215.GT19965@denix.org>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] crash: fix do_compile relocation error
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: OpenEmbedded branded T-shirts and Polo shirts!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +38,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jul 2018 02:31:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 02 Jul 2018 04:02:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-error info:
-
-id: relocation error: /lib/x86_64-linux-gnu/libnss_nis.so.2:
-symbol _nsl_default_nss version GLIBC_PRIVATE not defined in
-file libnsl.so.1 with link time reference
-
-Recent glibc change removed libnss-nis module from glibc and
-a new recipe libnss-nis.bb was added. After this change,
-we need to include native libnss_nis in crash. otherwise,
-with "nis" in /etc/nssswitch.conf, we will met above error．
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-oe/recipes-kernel/crash/crash_7.2.0.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.0.bb b/meta-oe/recipes-kernel/crash/crash_7.2.0.bb
-index 440a69d..09fe50d 100644
---- a/meta-oe/recipes-kernel/crash/crash_7.2.0.bb
-+++ b/meta-oe/recipes-kernel/crash/crash_7.2.0.bb
-@@ -11,6 +11,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
- 
- DEPENDS = "zlib readline coreutils-native"
-+DEPENDS_append_libc-glibc = " libnss-nis-native"
- 
- SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
-            http://ftp.gnu.org/gnu/gdb/gdb-7.6.tar.gz;name=gdb;subdir=${BP} \
--- 
-2.7.4
-
+OpenEmbedded branded T-shirts and Polo shirts!
+Show your support!
+https://www.hellotux.com/openembedded
 
