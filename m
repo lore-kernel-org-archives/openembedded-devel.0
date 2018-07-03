@@ -1,27 +1,26 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 705F87874E
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E8337874E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Jul 2018 07:21:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w637Lnis027588
+	Tue,  3 Jul 2018 07:21:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w637LqLx017997
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 3 Jul 2018 00:21:49 -0700
+	Tue, 3 Jul 2018 00:21:52 -0700 (PDT)
 Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Tue, 3 Jul 2018 00:21:48 -0700
+	Tue, 3 Jul 2018 00:21:51 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 3 Jul 2018 15:21:25 +0800
-Message-ID: <1530602486-4522-7-git-send-email-yi.zhao@windriver.com>
+Date: Tue, 3 Jul 2018 15:21:26 +0800
+Message-ID: <1530602486-4522-8-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1530602486-4522-1-git-send-email-yi.zhao@windriver.com>
 References: <1530602486-4522-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH 7/8] NetworkManager: upgrade 1.10.6 -> 1.10.10
+Subject: [meta-networking][PATCH 8/8] networkmanager-openvpn: upgrade 1.2.8 -> 1.2.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,46 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jul 2018 07:21:48 -0000
+X-List-Received-Date: Tue, 03 Jul 2018 07:21:51 -0000
 Content-Type: text/plain
-
-License-Update: update GTK-Doc from 1.27 to 1.28 to generate license.html
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../{networkmanager_1.10.6.bb => networkmanager_1.10.10.bb}      | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.10.6.bb => networkmanager_1.10.10.bb} (92%)
+ ...workmanager-openvpn_1.2.8.bb => networkmanager-openvpn_1.2.10.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.2.8.bb => networkmanager-openvpn_1.2.10.bb} (87%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.10.bb
-similarity index 92%
-rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.10.bb
-index 605d371..682c896 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.6.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.10.10.bb
-@@ -5,7 +5,7 @@ SECTION = "net/misc"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
-                     file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
--                    file://docs/api/html/license.html;md5=77b9e362690c149da196aefe7712db30 \
-+                    file://docs/api/html/license.html;md5=ac20f1edc24f72480a1106871e9fbe9a \
- "
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.8.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.10.bb
+similarity index 87%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.8.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.10.bb
+index 1b604ad..9159fcb 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.8.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.10.bb
+@@ -9,8 +9,9 @@ DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native glib-2.0-native
+ inherit gnomebase useradd gettext systemd
  
- DEPENDS = " \
-@@ -38,8 +38,11 @@ SRC_URI = " \
-     file://musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch \
-     file://musl/0006-Add-a-strndupa-replacement-for-musl.patch \
- "
--SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
--SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
-+SRC_URI[md5sum] = "8c67fc286150ed357b6c833b9e015330"
-+SRC_URI[sha256sum] = "244e29c0d1a57492df9aaf2d8c31e4a1b76bdfa8e862ae106239862e1c78c3ca"
+ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
+-SRC_URI[md5sum] = "9f325be386aa906ff9b0b7c0bdf2a59a"
+-SRC_URI[sha256sum] = "3e0b4007f248d96df4b8eb5d0f937536044af7053debbbf525e67c9bc5d30654"
 +
-+UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/NetworkManager/1.10/"
-+UPSTREAM_CHECK_REGEX = "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar.xz"
++SRC_URI[md5sum] = "f118226ed2bfbacfd64ac4d1e0bd0383"
++SRC_URI[sha256sum] = "ac86a7a539d78df90095676e9183f2d422fb93dbfe4b3afef22f81825d303d61"
  
- S = "${WORKDIR}/NetworkManager-${PV}"
+ S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
  
 -- 
 2.7.4
