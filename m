@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f45.google.com (mail-pl0-f45.google.com
-	[209.85.160.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 5554B78A81
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id EC6AF78AAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Jul 2018 21:13:54 +0000 (UTC)
-Received: by mail-pl0-f45.google.com with SMTP id 31-v6so1600709plc.4
+	Tue,  3 Jul 2018 21:17:16 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id r1-v6so1505457pgp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jul 2018 14:13:55 -0700 (PDT)
+	Tue, 03 Jul 2018 14:17:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to;
-	bh=kpWaP/Zfw2Uway3gwo0tiG/pmfPjMS+bONAqOufJW/U=;
-	b=iF3v84PLBY7hfKs/Ld6Ht5OHv8UVrCcZe/DT6OzxxeJvMhpVDkOwEeQkbf0OYB53Y8
-	XFsD5QGW8xnMs3Cs97NgasW3JMDx4tsU/SGQJSwMHY8NhUrfDC2sgLuWBVvvogRdF/VE
-	aBZt0LJl2jEUD36lURIS4lUncLDG1hEW+XMsWiKW2/YrWIeglTbPNZM3Pnel2LrOvtLb
-	vgZgm3Nf2R1N/m3VTwH8NSQ15K1glIDVXfP1iZB9RA4kCUMk8GRSMsILpoldWjpfWajj
-	uiuc8vItAgFCsY8zYIJamPgz5rxQx0o3zbV3xryQMR1sNXJ5GJ3YGBBXyQIfrqMSQuqw
-	PtvQ==
+	bh=uPW3G3bDITaGzQX2Sv2Z4zcrnAtg/IwqdKQfgYzuVcM=;
+	b=md7MUnH3Ma9fHkNGBjb7cuqSa6ajOq0LKHEwnt+9cmY5/whTHBUpOsEIdWemtzw4Qn
+	1nyZ24XbGZbBd7OD9Ug/tlPHOtwYgarHjanXvQAFCv8YratEHLMgWMhOfk1zu8kFDZDp
+	YBO6A+Cgu0ECq5wQ7dbJ4t7XcSMTI1WX4vidsKf2Ni+Dk/kYUXV6LO+So5AeLpqjbXbN
+	g5paNJCy58UqEDPMG0T6jMAbHod0NSPtmGUQmvhx2Yy+S+g8wBuyO2TSBRwGX02hLOLP
+	tKMtk55snZCBtJAVyXYmdLTAJjGHJt2fZ0gJ3RaRm4hz6Sb8LatTQCV6dmv8biTUWfvf
+	zbrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to;
-	bh=kpWaP/Zfw2Uway3gwo0tiG/pmfPjMS+bONAqOufJW/U=;
-	b=IOWmqD1qk4DEWMrAJL9RF5T4S1+TIp0REKc6z6TZm2jjg4b8+D30HdV+PyIXPFyhJu
-	tzHc0l4P4et5PytnMZauG3GdyA5ofd1lH4gi99/Y8BybIIUWkOE0Cq1dQOkDatMNHhpU
-	C613ukBjVHqBp/flpTnG7+52aOJbtWA8PIHUPYp8IEtrjfXifKhD3QVM0wnkvA65C/pj
-	ogS04h9hsLWgv4X4K60WK8myfZx5Npoq08nOBH48J9bCwcfqvS3WkmgBwAkk3feuX6bW
-	+n7YlBIEpavMAPVdUsdTrPuLZd8Bb151g/DC3FthqAYuU7180jXWOcfAL0TZvEfHlR9g
-	zGqQ==
-X-Gm-Message-State: APt69E19uk+UChiYrWVsCId6Ru0vfGKjdPgURT2BGx4GH1lNwau0q0i3
-	xCp/R3U409k6sw4tPWnJCHO6/CpS
-X-Google-Smtp-Source: ADUXVKLFjjY+CpZdYHJEAQnKka/lp4Pl94scIrHLwD7YUdvf1QWl61G1hejbE/zK/8bh5RxpIVB0gQ==
-X-Received: by 2002:a17:902:822:: with SMTP id
-	31-v6mr31253382plk.172.1530652434953; 
-	Tue, 03 Jul 2018 14:13:54 -0700 (PDT)
+	bh=uPW3G3bDITaGzQX2Sv2Z4zcrnAtg/IwqdKQfgYzuVcM=;
+	b=ixtyRZ3iMm186zzhP08OaWzMv8AvmzuGRugsVkkdZ3WeaBVs6eTbTPizofg1dRVHcj
+	08WTJKA8o0ZLO7xjOFvus6OyUI1ILRo0LhcA9fhFRIDJmjgiWHgTfV+9IUkL4r6u/T2y
+	iFP9eodkkOMZq4u9P5gFGMxNUAU6amDrOyTPqY1y4XIBIwc2ex5uNDLYrcoD4V+qBEhq
+	YAWIATYk5Dbel/YVJr3mUHvMsBNzSld3BemiMnpLEZ5Ecqqg2CFhXs9MyBDpPoQ94uKF
+	N7IQd1pDcXv8aZhixtxVf3f5SrSAScUKQl+ljLV5lCbYQqr4rPbgKNiVwnoDjjkuLlMp
+	Hcfg==
+X-Gm-Message-State: APt69E3fUnnQSCtZz1xJWk6uFsGufP6tK99+/ZV6ah8y4kt0ESlnfDkX
+	NyNKTVvb9HaPA1xu247ef8M4FF81
+X-Google-Smtp-Source: ADUXVKJOpF4IX1mh05Mi30hqQ8LPxnSjkm9REgLdo8UH2Q/N2HwPuOfUhLvRgWMkzefzcoYO53CVcg==
+X-Received: by 2002:a63:9311:: with SMTP id
+	b17-v6mr26990375pge.261.1530652637570; 
+	Tue, 03 Jul 2018 14:17:17 -0700 (PDT)
 Received: from ?IPv6:2601:646:877f:9499:b95e:f0e0:47b8:11a8?
 	([2601:646:877f:9499:b95e:f0e0:47b8:11a8])
 	by smtp.gmail.com with ESMTPSA id
-	o72-v6sm5777764pfk.76.2018.07.03.14.13.53
+	v10-v6sm638824pgo.72.2018.07.03.14.17.16
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 03 Jul 2018 14:13:54 -0700 (PDT)
-To: Yi Zhao <yi.zhao@windriver.com>, openembedded-devel@lists.openembedded.org
-References: <1530602486-4522-1-git-send-email-yi.zhao@windriver.com>
-	<1530602486-4522-6-git-send-email-yi.zhao@windriver.com>
+	Tue, 03 Jul 2018 14:17:17 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <20180703092018.5018-1-ross.burton@intel.com>
+	<20180703092018.5018-3-ross.burton@intel.com>
 From: Khem Raj <raj.khem@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
@@ -77,13 +77,13 @@ Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
 	suq7Hnb7vszlFYdbzeqjY81LSyxA0kcpgJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7R
 	XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiwkkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
 	VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
-Message-ID: <051d14fb-9bb1-e394-c04f-86246860c331@gmail.com>
-Date: Tue, 3 Jul 2018 14:13:42 -0700
+Message-ID: <09682179-6edc-c225-a2c8-2532c4776fd7@gmail.com>
+Date: Tue, 3 Jul 2018 14:17:11 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
 	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <1530602486-4522-6-git-send-email-yi.zhao@windriver.com>
-Subject: Re: [meta-networking][PATCH 6/8] postfix: upgrade 3.2.2 -> 3.2.6
+In-Reply-To: <20180703092018.5018-3-ross.burton@intel.com>
+Subject: Re: [PATCH 3/4] php: actually enable openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,108 +96,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jul 2018 21:13:54 -0000
-X-Groupsio-MsgNum: 73173
+X-List-Received-Date: Tue, 03 Jul 2018 21:17:17 -0000
+X-Groupsio-MsgNum: 73174
 Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="crUQDPNC8T9pysq1bfMUsLXOLT2eyO1u8"
+	boundary="qwQFoEnBaeSmtRtblV8NbcrBkpBlK5M0J"
 
---crUQDPNC8T9pysq1bfMUsLXOLT2eyO1u8
-Content-Type: multipart/mixed; boundary="p5gbOSgb7gNQAM9jmojFTZsWSnOb0WQzf";
+--qwQFoEnBaeSmtRtblV8NbcrBkpBlK5M0J
+Content-Type: multipart/mixed; boundary="a8k4dsP7vdFdfTTQXEbXIJveCLxpoFxiF";
  protected-headers="v1"
 From: Khem Raj <raj.khem@gmail.com>
-To: Yi Zhao <yi.zhao@windriver.com>, openembedded-devel@lists.openembedded.org
-Message-ID: <051d14fb-9bb1-e394-c04f-86246860c331@gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 6/8] postfix: upgrade 3.2.2 -> 3.2.6
-References: <1530602486-4522-1-git-send-email-yi.zhao@windriver.com>
- <1530602486-4522-6-git-send-email-yi.zhao@windriver.com>
-In-Reply-To: <1530602486-4522-6-git-send-email-yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <09682179-6edc-c225-a2c8-2532c4776fd7@gmail.com>
+Subject: Re: [oe] [PATCH 3/4] php: actually enable openssl
+References: <20180703092018.5018-1-ross.burton@intel.com>
+ <20180703092018.5018-3-ross.burton@intel.com>
+In-Reply-To: <20180703092018.5018-3-ross.burton@intel.com>
 
---p5gbOSgb7gNQAM9jmojFTZsWSnOb0WQzf
+--a8k4dsP7vdFdfTTQXEbXIJveCLxpoFxiF
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-On 7/3/18 12:21 AM, Yi Zhao wrote:
-> License-Update: The postfix is distributed with a dual license since
-> 3.2.5: IBM Public License 1.0 and Eclipse Public License 2.0. Recipient=
-s
-> can choose to take the software under the license of their choice. Thos=
-e
-> who are more comfortable with the IPL can continue with that license.
+On 7/3/18 2:20 AM, Ross Burton wrote:
+> The PHP recipe depends on OpenSSL but support is disabled unless you pa=
+ss
+> --with-openssl.
+
+perhaps its better to turn it into a PACKAGECONFIG option while you are
+at it
+
 >=20
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
 > ---
->  meta-networking/recipes-daemons/postfix/postfix.inc                 | =
-4 ++--
->  .../recipes-daemons/postfix/{postfix_3.2.2.bb =3D> postfix_3.2.6.bb}  =
-| 6 ++++--
->  2 files changed, 6 insertions(+), 4 deletions(-)
->  rename meta-networking/recipes-daemons/postfix/{postfix_3.2.2.bb =3D> =
-postfix_3.2.6.bb} (57%)
+>  meta-oe/recipes-devtools/php/php.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta=
--networking/recipes-daemons/postfix/postfix.inc
-> index a504b85..8c56801 100644
-> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
-> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-> @@ -11,8 +11,8 @@ DEPENDS =3D "db icu libpcre libnsl2 openssl postfix-n=
-ative \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', =
-d)} \
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-dev=
+tools/php/php.inc
+> index f262d60d15..258b20e68c 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -57,7 +57,7 @@ EXTRA_OECONF =3D "--enable-mbstring \
+>                  --with-config-file-path=3D${sysconfdir}/php/apache2-ph=
+p${PHP_MAJOR_VERSION} \
+>                  ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '=
+ac_cv_c_bigendian_php=3Dno', 'ac_cv_c_bigendian_php=3Dyes', d)} \
+>                  ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_c=
+v_lib_pam_pam_start=3Dno', d)} \
+> -                ${COMMON_EXTRA_OECONF} \
+> +                ${COMMON_EXTRA_OECONF} --with-openssl \
 >  "
 > =20
-> -LICENSE =3D "IPL-1.0"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D64375f37431336ea1b1b3005fe3=
-fa354"
-> +LICENSE =3D "IPL-1.0 & EPL-2.0"
-
-Perhaps this should be IPL-1.0 | EPL-2.0 ? if it allows the choice of
-license
-
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db181651ad99a7dc4cc8c4ce2f49=
-1ed1a"
-> =20
->  SRC_URI =3D "ftp://ftp.porcupine.org/mirrors/postfix-release/official/=
-postfix-${PV}.tar.gz \
->      file://makedefs.patch \
-> diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb b=
-/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
-> similarity index 57%
-> rename from meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
-> rename to meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
-> index 89af406..1214467 100644
-> --- a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
-> +++ b/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
-> @@ -5,5 +5,7 @@ SRC_URI +=3D "file://0001-Check-for-glibc-before-settin=
-g-CANT_USE_SEND_RECV_MS.pat
->              file://postfix-install.patch \
->              file://icu-config.patch \
->             "
-> -SRC_URI[md5sum] =3D "aea073a9b0bea5bdb590460a270a4aa0"
-> -SRC_URI[sha256sum] =3D "d06849418d119d09366997b2b481bb23f737629769b4e4=
-a52da42fb3ad8b0576"
-> +SRC_URI[md5sum] =3D "d10f1fb551be86f6e48c2908dd8a12ff"
-> +SRC_URI[sha256sum] =3D "1df036380bae7c356bfa8989a87de58033b6aaa09b3baf=
-cfa36c3694dd449039"
-> +
-> +UPSTREAM_CHECK_REGEX =3D "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
+>  CACHED_CONFIGUREVARS +=3D "ac_cv_func_dlopen=3Dyes ac_cv_lib_dl_dlopen=
+=3Dyes"
 >=20
 
 
 
---p5gbOSgb7gNQAM9jmojFTZsWSnOb0WQzf--
+--a8k4dsP7vdFdfTTQXEbXIJveCLxpoFxiF--
 
---crUQDPNC8T9pysq1bfMUsLXOLT2eyO1u8
+--qwQFoEnBaeSmtRtblV8NbcrBkpBlK5M0J
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCWzvnDAAKCRC7BTNVkZ0z
-FIs3AJ4rKS4W4VcFQz+RwUgrkAK94PRGMgCfTV0GiXdYyDgzntEjsO6R0G1sTgY=
-=sRSJ
+iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCWzvn1wAKCRC7BTNVkZ0z
+FL/iAJ0VyF1Pr0lNCy36gDf+t3WQGGJ5EACaAsqlRm5JarFftApr6CyDPTSuwnY=
+=6AxV
 -----END PGP SIGNATURE-----
 
---crUQDPNC8T9pysq1bfMUsLXOLT2eyO1u8--
+--qwQFoEnBaeSmtRtblV8NbcrBkpBlK5M0J--
