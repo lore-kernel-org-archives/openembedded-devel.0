@@ -1,36 +1,48 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CF616011A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 130DD747EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jul 2018 10:45:48 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2AAAD2E63D9B
+	Wed,  4 Jul 2018 13:09:12 +0000 (UTC)
+Received: by mail-ua0-f177.google.com with SMTP id t14-v6so3407459uao.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jul 2018 12:45:49 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 932232E63D9A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jul 2018 12:45:48 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham autolearn_force=no version=3.4.0
-Received: from mail.itconsulting-heinold.de (x4db40c24.dyn.telefonica.de
-	[77.180.12.36]) by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jul 2018 12:45:47 +0200 (CEST)
-Date: Wed, 4 Jul 2018 12:45:40 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20180704104540.GB32590@mail.itconsulting-heinold.de>
-References: <CAAfyv37TooGK_RD21SczZmVYpS+-HdE9Yy5KmcuOG9rV2o2LXQ@mail.gmail.com>
+	Wed, 04 Jul 2018 06:09:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=OvUjbRL5xgrFmIa0ZNJfQCCQmdEaNuK4Otbgi/daloo=;
+	b=AHFFUEP97k6E5q1fiZ6dwQQWT3dfAn7H9GtlRYgojOViI8yVivyhSxTt5BFcDF02hd
+	w7x9zVxt2+6/KhZnhYY2kncskQ3ERYocFjQfFM2lkDZIsyjjWtsiKYSDblF1Kqcg+SS0
+	FwHwHf/0wGAbY1tzKPeapBncRrpnym4VjNaW/fP68NAgEpNwemD+TXPkYsXVhWvkE62s
+	JwX/ZXOmOHE2UUmI4Bc+wpWV/pVj9+hxqdTvsGwzD1zWj2bxpigUoNYrM3zY6FDVtcfA
+	UT7i0j6oEnWWYmSFqWLIMcV3Vg7MOvHzQOB6RqzTIxpO4J506v9z3XUe5k1gDt1Au2gA
+	fFdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=OvUjbRL5xgrFmIa0ZNJfQCCQmdEaNuK4Otbgi/daloo=;
+	b=TJGY9xh4bAQu/Lev9H6cKCWVRdkt92UCWr7VMy68/j8cZ4CfaKFBiBMsM9o/1vGxX3
+	lIT4sSiZb33CbEq9POD9YBgvnJ69G6BIDRoAsN95NZmmNyBLsV3AxDeAEgmvuZuf3QbO
+	LyxM7Vw9Z93ouL9oEQnko8ujtUeVW0yC0qFsKYeMsJDnpKA1umXvZ9JaOmXaFFVI8y8Q
+	GAP/r8pjHqphzC193yhQX2SXx2KH37vhP/zQnsGmJLgUtg8eMs+iIu5s2IsxbwIe/0pP
+	jDuxpfsNSUsdQFYeTSmn3aoKD5t/8+/eBTgDvb7AD/8PLBqamJHud4Biir3SpRnByXaN
+	MqFA==
+X-Gm-Message-State: APt69E33lTfYSwZqLjcQnjokjJ0W6BYekQhNLblm6vQnthcnl1/gZTmf
+	AmA/AM5flZLOzFlg0x5GFMs+DauyhmondRupAxk=
+X-Google-Smtp-Source: AAOMgpfL3FygncUrpPkKyMUOBfXiozCqAgnJp/C70RRSmiBqGXI7TVSeIwFsBYckO36cgr6n27F+soZVVcvTDmckR6Q=
+X-Received: by 2002:ab0:5323:: with SMTP id
+	x32-v6mr1144298uax.139.1530709753697; 
+	Wed, 04 Jul 2018 06:09:13 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAAfyv37TooGK_RD21SczZmVYpS+-HdE9Yy5KmcuOG9rV2o2LXQ@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: meta-java opnjdk-8 sumo coredump on sumo for BBB
+References: <20180703092018.5018-1-ross.burton@intel.com>
+	<20180703092018.5018-2-ross.burton@intel.com>
+In-Reply-To: <20180703092018.5018-2-ross.burton@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Jul 2018 06:08:05 -0700
+Message-ID: <CAMKF1sr_FmVM2m9dgU4xGVpNapzJqhng-pbHEx+RCc22zagQEA@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/4] php: disable non-deterministic valgrind
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,44 +55,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jul 2018 10:45:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Jul 2018 13:09:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jul 02, 2018 at 04:10:06PM +0200, Belisko Marek wrote:
-> Hello,
-> 
-> I'm trying to check openjdk-8 for BBB. I compiled it using meta-java
-> but when run simple java -version I get:
-> 
-> root@beaglebone-yocto:~/demo# java -version
-> #
-> # A fatal error has been detected by the Java Runtime Environment:
-> #
-> #  Internal Error (os_linux_zero.cpp:254), pid=465, tid=0xb67cc460
-> #  fatal error: caught unhandled signal 11
-> #
-> # JRE version:  (8.0_162-b12) (build )
-> # Java VM: OpenJDK Zero VM (25.162-b12 interpreted mode linux-arm )
-> # Failed to write core dump. Core dumps have been disabled. To enable
-> core dumping, try "ulimit -c unlimited" before starting Java again
-> #
-> # An error report file with more information is saved as:
-> # /home/root/demo/hs_err_pid465.log
-> #
-> # If you would like to submit a bug report, please visit:
-> #   http://bugreport.java.com/bugreport/crash.jsp
-> #
-> Aborted
-> root@beaglebone-yocto:~/demo# uname -a
-> Linux beaglebone-yocto 4.15.13-yocto-standard #1 PREEMPT Fri Jun 29
-> 22:51:58 UTC 2018 armv7l GNU/Linux
-> root@beaglebone-yocto:~/demo#
+On Tue, Jul 3, 2018 at 2:42 AM Ross Burton <ross.burton@intel.com> wrote:
+>
+> Valgrind support in PHP looks on the host for Valgrind headers, backport a patch
+> from upstream so that Valgrind support is disabled by default.
+>
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc            |   1 +
+>  meta-oe/recipes-devtools/php/php/valgrind.patch | 115 ++++++++++++++++++++++++
+>  2 files changed, 116 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/php/php/valgrind.patch
+>
 
-Sorry I do not know whats going wrong at which level, but you could maybe
-ask on the openjdk aarch32 mailinglist.
+Fails to apply
 
-http://mail.openjdk.java.net/mailman/listinfo/aarch32-port-dev
+Applying patch valgrind.patch
+patching file NEWS
+Hunk #1 succeeded at 133 with fuzz 2 (offset 131 lines).
+patching file acinclude.m4
+Hunk #1 FAILED at 3249.
+1 out of 1 hunk FAILED -- rejects in file acinclude.m4
+patching file configure.ac
+patch unexpectedly ends in middle of line
+Hunk #1 FAILED at 753.
+1 out of 1 hunk FAILED -- rejects in file configure.ac
+Patch valgrind.patch does not apply (enforce with -f)
 
-Bye Henning
+
+
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+> index 066b97cd26..f262d60d15 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -24,6 +24,7 @@ SRC_URI_append_class-target = " \
+>              file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
+>              file://70_mod_php${PHP_MAJOR_VERSION}.conf \
+>              file://php-fpm.service \
+> +            file://valgrind.patch \
+>            "
+>  S = "${WORKDIR}/php-${PV}"
+>
+> diff --git a/meta-oe/recipes-devtools/php/php/valgrind.patch b/meta-oe/recipes-devtools/php/php/valgrind.patch
+> new file mode 100644
+> index 0000000000..c3e232ba23
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/php/php/valgrind.patch
+> @@ -0,0 +1,115 @@
+> +Upstream-Status: Backport
+> +Signed-off-by: Ross Burton <ross.burton@intel.com>
+> +
+> +From 25ba60b1479eb332a7388732f3ee5467000fbe73 Mon Sep 17 00:00:00 2001
+> +From: Michael Heimpold <mhei@heimpold.de>
+> +Date: Wed, 14 Feb 2018 14:46:17 +0100
+> +Subject: [PATCH] Fixed bug #75722: Rework valgrind detection
+> +
+> +As described in bug report #75722, the configure script (acinclude.m4)
+> +currently searches for the valgrind header file and enables valgrind
+> +support if found.
+> +
+> +When cross-compiling the searched paths are invalid for the target
+> +platform because they belong to the host system. At the moment, there is
+> +no way to tell the build system a dedicated path where to look for the
+> +header file.
+> +
+> +This leads to the issue, that when cross-compiling eg. for ARMv5 platform,
+> +that valgrind header file is detected - e.g. because host system is amd64 -
+> +and support is enabled - but target platform will never support valgrind
+> +(valgrind requires e.g. at least ARMv7).
+> +
+> +This change reworks the detection so that user could manually opt-in
+> +valgrind support and optionally specify a directory where the build system
+> +should look for the header file using the --with-valgrind option.
+> +---
+> + NEWS         |  4 ++++
+> + acinclude.m4 | 20 --------------------
+> + configure.ac | 30 +++++++++++++++++++++++++++++-
+> + 3 files changed, 33 insertions(+), 21 deletions(-)
+> +
+> +diff --git a/NEWS b/NEWS
+> +index 1faf13831ebd..5d65fd083357 100644
+> +--- a/NEWS
+> ++++ b/NEWS
+> +@@ -2,6 +2,10 @@ PHP                                                                        NEWS
+> + |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+> + ?? ??? 2018, PHP 7.2.5
+> +
+> ++- Core:
+> ++  . Fixed bug #75722 (Convert valgrind detection to configure option).
+> ++    (Michael Heimpold)
+> ++
+> + - Mbstring:
+> +   . Fixed bug #75944 (Wrong cp1251 detection). (dmk001)
+> +   . Fixed bug #76113 (mbstring does not build with Oniguruma 6.8.1).
+> +diff --git a/acinclude.m4 b/acinclude.m4
+> +index d42d70853515..eb06cb7e363f 100644
+> +--- a/acinclude.m4
+> ++++ b/acinclude.m4
+> +@@ -3249,23 +3249,3 @@ AC_DEFUN([PHP_CHECK_BUILTIN_SSUBLL_OVERFLOW], [
+> +
+> + dnl Load the AX_CHECK_COMPILE_FLAG macro from the autoconf archive.
+> + m4_include([build/ax_check_compile_flag.m4])
+> +-
+> +-dnl PHP_CHECK_VALGRIND
+> +-AC_DEFUN([PHP_CHECK_VALGRIND], [
+> +-  AC_MSG_CHECKING([for valgrind])
+> +-
+> +-  SEARCH_PATH="/usr/local /usr"
+> +-  SEARCH_FOR="/include/valgrind/valgrind.h"
+> +-  for i in $SEARCH_PATH ; do
+> +-    if test -r $i/$SEARCH_FOR; then
+> +-      VALGRIND_DIR=$i
+> +-    fi
+> +-  done
+> +-
+> +-  if test -z "$VALGRIND_DIR"; then
+> +-    AC_MSG_RESULT([not found])
+> +-  else
+> +-    AC_MSG_RESULT(found in $VALGRIND_DIR)
+> +-    AC_DEFINE(HAVE_VALGRIND, 1, [ ])
+> +-  fi
+> +-])
+> +diff --git a/configure.ac b/configure.ac
+> +index 05f94f08a9c8..c5d9be978bda 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -753,7 +753,35 @@ if test "x$php_crypt_r" = "x1"; then
+> +   PHP_CRYPT_R_STYLE
+> + fi
+> +
+> +-PHP_CHECK_VALGRIND
+> ++dnl Check valgrind support
+> ++PHP_ARG_WITH(valgrind, [whether to enable valgrind support],
+> ++[  --with-valgrind=DIR     Enable valgrind support], yes, no)
+> ++
+> ++if test "$PHP_VALGRIND" != "no"; then
+> ++
+> ++  AC_MSG_CHECKING([for valgrind header])
+> ++
+> ++  if test "$PHP_VALGRIND" = "yes"; then
+> ++    SEARCH_PATH="/usr/local /usr"
+> ++  else
+> ++    SEARCH_PATH="$PHP_VALGRIND"
+> ++  fi
+> ++
+> ++  SEARCH_FOR="/include/valgrind/valgrind.h"
+> ++  for i in $SEARCH_PATH ; do
+> ++    if test -r $i/$SEARCH_FOR; then
+> ++      VALGRIND_DIR=$i
+> ++    fi
+> ++  done
+> ++
+> ++  if test -z "$VALGRIND_DIR"; then
+> ++    AC_MSG_RESULT([not found])
+> ++  else
+> ++    AC_MSG_RESULT(found in $VALGRIND_DIR)
+> ++    AC_DEFINE(HAVE_VALGRIND, 1, [ ])
+> ++  fi
+> ++
+> ++fi
+> +
+> + dnl General settings.
+> + dnl -------------------------------------------------------------------------
+> \ No newline at end of file
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
