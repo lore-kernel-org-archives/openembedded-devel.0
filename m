@@ -1,42 +1,36 @@
-Return-Path: <prvs=67237e28b6=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F5486007A
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CF616011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jul 2018 08:57:42 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w648u8lq028011 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Jul 2018 03:57:43 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2k0dpk1ye0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Jul 2018 03:57:43 -0500
-Received: from us-aus-exch2.ni.corp.natinst.com
-	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w648vgke009784
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Wed,  4 Jul 2018 10:45:48 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2AAAD2E63D9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Jul 2018 03:57:42 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Wed, 4 Jul 2018 03:57:42 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Wed, 4 Jul 2018 03:57:41 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Jul 2018 11:57:02 +0300
-Message-ID: <20180704085702.14811-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.18.0
+	Wed,  4 Jul 2018 12:45:49 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 932232E63D9A
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Jul 2018 12:45:48 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham autolearn_force=no version=3.4.0
+Received: from mail.itconsulting-heinold.de (x4db40c24.dyn.telefonica.de
+	[77.180.12.36]) by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Jul 2018 12:45:47 +0200 (CEST)
+Date: Wed, 4 Jul 2018 12:45:40 +0200
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20180704104540.GB32590@mail.itconsulting-heinold.de>
+References: <CAAfyv37TooGK_RD21SczZmVYpS+-HdE9Yy5KmcuOG9rV2o2LXQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-07-04_02:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH v3] python-pyiface: Upgrade to 0.0.7
+In-Reply-To: <CAAfyv37TooGK_RD21SczZmVYpS+-HdE9Yy5KmcuOG9rV2o2LXQ@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: meta-java opnjdk-8 sumo coredump on sumo for BBB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,41 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jul 2018 08:57:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Jul 2018 10:45:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
- .../{python-pyiface_0.0.6.bb => python-pyiface_0.0.7.bb}      | 0
- .../{python3-pyiface_0.0.6.bb => python3-pyiface_0.0.7.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.6.bb => python-pyiface_0.0.7.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.6.bb => python3-pyiface_0.0.7.bb} (100%)
+On Mon, Jul 02, 2018 at 04:10:06PM +0200, Belisko Marek wrote:
+> Hello,
+> 
+> I'm trying to check openjdk-8 for BBB. I compiled it using meta-java
+> but when run simple java -version I get:
+> 
+> root@beaglebone-yocto:~/demo# java -version
+> #
+> # A fatal error has been detected by the Java Runtime Environment:
+> #
+> #  Internal Error (os_linux_zero.cpp:254), pid=465, tid=0xb67cc460
+> #  fatal error: caught unhandled signal 11
+> #
+> # JRE version:  (8.0_162-b12) (build )
+> # Java VM: OpenJDK Zero VM (25.162-b12 interpreted mode linux-arm )
+> # Failed to write core dump. Core dumps have been disabled. To enable
+> core dumping, try "ulimit -c unlimited" before starting Java again
+> #
+> # An error report file with more information is saved as:
+> # /home/root/demo/hs_err_pid465.log
+> #
+> # If you would like to submit a bug report, please visit:
+> #   http://bugreport.java.com/bugreport/crash.jsp
+> #
+> Aborted
+> root@beaglebone-yocto:~/demo# uname -a
+> Linux beaglebone-yocto 4.15.13-yocto-standard #1 PREEMPT Fri Jun 29
+> 22:51:58 UTC 2018 armv7l GNU/Linux
+> root@beaglebone-yocto:~/demo#
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index 8e464a83f..c341779bf 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
- 
--SRC_URI[md5sum] = "2379d8d4506e6c4d83cf3d4824abce8b"
--SRC_URI[sha256sum] = "774ea47bb1387e493f6d5d0937b68fa28202c948eccddbd6e4cf2d708dcd86f2"
-+SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
-+SRC_URI[sha256sum] = "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
--- 
-2.18.0
+Sorry I do not know whats going wrong at which level, but you could maybe
+ask on the openjdk aarch32 mailinglist.
 
+http://mail.openjdk.java.net/mailman/listinfo/aarch32-port-dev
+
+Bye Henning
 
