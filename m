@@ -1,47 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
-	[209.85.217.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 34D8B74B02
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F46A77D01
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jul 2018 00:33:17 +0000 (UTC)
-Received: by mail-ua0-f174.google.com with SMTP id x18-v6so2389002uaj.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jul 2018 17:33:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=SbTSTxGUa943yXaVYfbs4h+qQ7hW3OeIb8TlDHjRx2k=;
-	b=qLAg0lsW48qjYh/8TrqNSnr2lr3hjM09k2tST6Lfn/8kDtvA5bUaympB3XbCg9XdJB
-	k6qCMpW21xH79chIfToNrmou3cARisXGIXQD5fnwvRpO4Dj8UkYn86z2/vlOyKBzbgy1
-	I0fNCqHWIPVIewkDqNQJH/af2qzIBYa6uHR/nh65UIs2hsN0ksxZFpl2s6mLewzZZy9O
-	88pIBWe19kkaEReQl2JsIw6Df/6tvp1tSL7Hw9AD3PSYDcqfV/WiemelC+F3xPgEMSb1
-	k9OcWC7edare3h57+LVWssMlVB9RCB2F7MYYKRbeZKMnW+rJqQxrFLyTYK4cHZQduURt
-	bMDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=SbTSTxGUa943yXaVYfbs4h+qQ7hW3OeIb8TlDHjRx2k=;
-	b=Iezp6FgpFI/oycqXXNb5W/f241H0jU3tXEj1A85UVCfwi7dpboxIJUrPEfICbg6HoI
-	NOK8LtG/emVrutggfy12AB3UlaJAqf2wpLfSunAFgm8DXAiXvbRIblZigToRjnxrUq3B
-	YPeu/UhzuKpHiNxX+Lg+YKhOIG4Lo3G9LxoQJ+/Rb2W0QjuZ4SSZjDq+wuEnYIWXmtLt
-	6n04ZKPe/FS4rQfReonM+PZ0xqqWivifckdgmBBrX3OSFXzGmZyEkW8N0v9DJSNijnwY
-	te97dsFESmawkNuC7X4pMLWJBdHUnte2bJzDtNTvUGI1IYZw2Wi5mSrBos+a647orU03
-	vpZg==
-X-Gm-Message-State: APt69E3KqVNR8/ZSuXrdhHXVEtXdPhgsFJZQCu6eQ0DxALoBFMuyxk1t
-	UpyycYduXR+BaUlObiNjIJF8hddZ3XIqG9E+klA=
-X-Google-Smtp-Source: AAOMgpcfF4SJHJqhnn5JaSsYURyPDbRmnqUVbXxJ2brCTBDnJefBhflTcsPNeFVmqWiqyZsBPvMW9NeLhml2oi2q750=
-X-Received: by 2002:ab0:7296:: with SMTP id
-	w22-v6mr14604236uao.184.1530664397865; 
-	Tue, 03 Jul 2018 17:33:17 -0700 (PDT)
+	Wed,  4 Jul 2018 01:48:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w641mILX004661
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 3 Jul 2018 18:48:18 -0700 (PDT)
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Tue, 3 Jul 2018 18:48:17 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1530498665-132100-1-git-send-email-changqing.li@windriver.com>
+	<CAMKF1spEavbzFD9JN8UDERdcawBZfjC_MkAwbc_j8d-r=nSCcQ@mail.gmail.com>
+	<53d5e3d6-aaa1-c5ed-d344-de4b908c39c7@windriver.com>
+	<CAMKF1sriX8Ly_RxRX9ROtvj=Rry532zycatu9ZuobZHyU7eFKw@mail.gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <847437e4-8ca1-53f0-9681-70bb9c8606d2@windriver.com>
+Date: Wed, 4 Jul 2018 09:48:12 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-References: <20180702093122.31132-1-alexandru.vasiu@ni.com>
-In-Reply-To: <20180702093122.31132-1-alexandru.vasiu@ni.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 Jul 2018 17:32:25 -0700
-Message-ID: <CAMKF1srKYDa1Jp1vh==MiNMLt6X83=Ui5YAt-sY5bsoFQ0yESg@mail.gmail.com>
-To: Alexandru Vasiu <alexandru.vasiu@ni.com>
+In-Reply-To: <CAMKF1sriX8Ly_RxRX9ROtvj=Rry532zycatu9ZuobZHyU7eFKw@mail.gmail.com>
+X-Originating-IP: [128.224.162.228]
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][meta-python][PATCH v2] python-pyiface: Upgrade to 0.0.7
+Subject: Re: [PATCH][meta-oe] crash: fix do_compile relocation error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jul 2018 00:33:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 04 Jul 2018 01:48:18 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Can you rebase it on top of master-next and resend please
-On Mon, Jul 2, 2018 at 2:32 AM Alexandru Vasiu <alexandru.vasiu@ni.com> wrote:
+
+
+On 07/03/2018 12:42 AM, Khem Raj wrote:
+> On Mon, Jul 2, 2018 at 12:08 AM Changqing Li <changqing.li@windriver.com> wrote:
+>> On 07/02/2018 02:09 PM, Khem Raj wrote:
+>>> On Sun, Jul 1, 2018 at 7:31 PM Changqing Li <changqing.li@windriver.com> wrote:
+>>>> error info:
+>>>>
+>>>> id: relocation error: /lib/x86_64-linux-gnu/libnss_nis.so.2:
+>>>> symbol _nsl_default_nss version GLIBC_PRIVATE not defined in
+>>>> file libnsl.so.1 with link time reference
+>>>>
+>>>> Recent glibc change removed libnss-nis module from glibc and
+>>>> a new recipe libnss-nis.bb was added. After this change,
+>>>> we need to include native libnss_nis in crash. otherwise,
+>>>> with "nis" in /etc/nssswitch.conf, we will met above error．
+>>>>
+>>>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>>> ---
+>>>>    meta-oe/recipes-kernel/crash/crash_7.2.0.bb | 1 +
+>>>>    1 file changed, 1 insertion(+)
+>>>>
+>>>> diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.0.bb b/meta-oe/recipes-kernel/crash/crash_7.2.0.bb
+>>>> index 440a69d..09fe50d 100644
+>>>> --- a/meta-oe/recipes-kernel/crash/crash_7.2.0.bb
+>>>> +++ b/meta-oe/recipes-kernel/crash/crash_7.2.0.bb
+>>>> @@ -11,6 +11,7 @@ LICENSE = "GPLv3"
+>>>>    LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
+>>>>
+>>>>    DEPENDS = "zlib readline coreutils-native"
+>>>> +DEPENDS_append_libc-glibc = " libnss-nis-native"
+>>> A native dependency which is specific to a target libc seems not
+>>> right. It should depend on
+>>> build host libc which in this case is always glibc so please drop the override.
+>> Hi,  according  to below content of recipe libnss-nis,  only for glibc,
+>> we will DEPNDS
+>> libnss-nis-native, so I add this override.
+>>
+>> # We will skip parsing this packagegeoup for non-glibc systems
+>> #
+>> python __anonymous () {
+>>       if d.getVar('TCLIBC') != "glibc":
+>>           raise bb.parse.SkipRecipe("incompatible with %s C library" %
+>>                                      d.getVar('TCLIBC'))
+> may be this can be made to exclude non target recipes.
 >
-> Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
-> ---
->  meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
->  .../{python-pyiface_0.0.5.bb => python-pyiface_0.0.7.bb}      | 0
->  .../{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.7.bb}    | 0
->  3 files changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-pyiface_0.0.5.bb => python-pyiface_0.0.7.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.5.bb => python3-pyiface_0.0.7.bb} (100%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-> index 620b244c6..895a0ae09 100644
-> --- a/meta-python/recipes-devtools/python/python-pyiface.inc
-> +++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-> @@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
->
->  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
->
-> -SRC_URI[md5sum] = "06c3c71fe51df740dae6a88a13afb5e0"
-> -SRC_URI[sha256sum] = "4bb79100cbcf7344a1ccaddc578cd6455da47d8eac6eb1bf903ec32e043af924"
-> +SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
-> +SRC_URI[sha256sum] = "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
->
->  inherit pypi
-> diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-pyiface_0.0.5.bb
-> rename to meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.5.bb
-> rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
-> --
-> 2.18.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+I don't quite get your mean, can you explain more? Thanks.
 
