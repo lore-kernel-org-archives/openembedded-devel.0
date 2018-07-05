@@ -1,26 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7231F78A11
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F71E78A1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jul 2018 06:22:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w656M7Tg006924
+	Thu,  5 Jul 2018 06:54:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w656s9p6031234
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Jul 2018 23:22:07 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Wed, 4 Jul 2018 23:22:06 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Wed, 4 Jul 2018 23:54:09 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
+	Wed, 4 Jul 2018 23:54:08 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Jul 2018 14:22:01 +0800
-Message-ID: <1530771721-20959-2-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1530771721-20959-1-git-send-email-yi.zhao@windriver.com>
-References: <1530771721-20959-1-git-send-email-yi.zhao@windriver.com>
+Date: Wed, 4 Jul 2018 23:54:08 -0700
+Message-ID: <20180705065408.103714-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-filesystems][PATCH 2/2] aufs-util: upgrade 4.4 -> 4.9
+Subject: [meta-oe][PATCH] iozone3: Upgrade to 482
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,93 +31,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2018 06:22:06 -0000
+X-List-Received-Date: Thu, 05 Jul 2018 06:54:08 -0000
 Content-Type: text/plain
 
-Drop 0001-libau-Define-STRIP-weakly.patch since it had been merged
-upstream.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Update LIC_FILES_CHKSUM as the file iozone.c
+used for LIC_FILES_CHKSUM updated
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../aufs-util/0001-libau-Define-STRIP-weakly.patch | 37 ----------------------
- .../recipes-utils/aufs-util/aufs-util_git.bb       | 13 ++++----
- 2 files changed, 6 insertions(+), 44 deletions(-)
- delete mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
+ .../iozone3/{iozone3_465.bb => iozone3_482.bb}              | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-benchmark/iozone3/{iozone3_465.bb => iozone3_482.bb} (95%)
 
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
-deleted file mode 100644
-index 6732dc4..0000000
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From daf04dc9ca1f2e4c65ec338ab439e0a792e1a8ac Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 5 Sep 2017 10:36:52 -0700
--Subject: [PATCH] libau: Define STRIP weakly
--
--STRIP can be set on environment to use cross version of strip utility
--hardcoding to strip is not working in cross environment
--
--Upstream-Status: Submitted
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
-----
-- libau/Makefile | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/libau/Makefile b/libau/Makefile
--index 81520ac..c25eef2 100644
----- a/libau/Makefile
--+++ b/libau/Makefile
--@@ -25,6 +25,7 @@ LibSoHdr = libau.h rdu.h
-- LibSoExport = $(addsuffix .exp, $(basename ${LibSoObj}))
-- LibSoExportErr = $(addsuffix .err, ${LibSoExport})
-- LibSoVerScript = verscript
--+STRIP ?= strip
-- 
-- all: ${LibSo}
-- 
--@@ -77,7 +78,7 @@ ${LibSo}.${LibSoMajor}.${LibSoMinor}: ${LibSoObj}
-- 	${CC} --shared -Wl,-soname,${LibSo}.${LibSoMajor} \
-- 		-Wl,--version-script,${LibSoVerScript} \
-- 		${LDFLAGS} -o $@ $^ ${LDLIBS}
---	strip -R EXP $@
--+	${STRIP} -R EXP $@
-- #	readelf --syms --use-dynamic libau.so
-- 
-- install_ulib: File = ${LibSo}.${LibSoMajor}.${LibSoMinor}
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-index 64eb940..cdee11e 100644
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-@@ -7,19 +7,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
- DEPENDS = "coreutils-native aufs-util-native"
- DEPENDS_class-native = ""
- 
--SRCREV = "89afb1806c3d2eed8db2666ae254b77518ae3ceb"
--SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs4.4 \
--           https://raw.githubusercontent.com/sfjro/aufs4-linux/aufs4.4/include/uapi/linux/aufs_type.h;name=aufs_type \
-+SRCREV = "568636e5c45006b1e6e0c4b704401610a02c0089"
-+SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs4.9 \
-+           https://raw.githubusercontent.com/sfjro/aufs4-linux/aufs4.9/include/uapi/linux/aufs_type.h;name=aufs_type \
-            file://aufs-util-don-t-strip-executables.patch \
-            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
--           file://0001-libau-Define-STRIP-weakly.patch \
+diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
+similarity index 95%
+rename from meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
+rename to meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
+index 191b93425..09306e044 100644
+--- a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
++++ b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
+@@ -4,14 +4,14 @@ AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.or
+ SECTION = "console/tests"
+ LICENSE = "iozone3"
+ LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
+-    file://iozone.c;beginline=260;endline=266;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
++    file://iozone.c;beginline=260;endline=266;md5=0aa488fd139eac078be6eca86e1435e8 \
  "
--SRC_URI[aufs_type.md5sum] = "f7b4a255dcb55fe7b0967f5f59b44f19"
--SRC_URI[aufs_type.sha256sum] = "85bc8e4c1a94a7d526c382e4b047b4256cab8c4a65fc0396291707ad9a327a18"
-+SRC_URI[aufs_type.md5sum] = "b37129ef0703de72a852db7e48bdedc6"
-+SRC_URI[aufs_type.sha256sum] = "7ff6566adb9c7a3b6862cdc85a690ab546f1d0bc81ddd595fd663c0a69031683"
+ SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
+     file://parallelism.patch \
+     file://copyright.txt \
+ "
+-SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
+-SRC_URI[sha256sum] = "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41d811368e55bd4e6a293"
++SRC_URI[md5sum] = "31ca1d3d28bc375c20a2808217cf212c"
++SRC_URI[sha256sum] = "2733feb63c96f77177c68f3d938f2294d5394d8554b2767c45cbe138b2f3ae30"
  
- UPSTREAM_CHECK_COMMITS = "1"
- 
--PV = "4.4+git${SRCPV}"
-+PV = "4.9+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
  
 -- 
-2.7.4
+2.17.1
 
 
