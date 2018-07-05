@@ -1,29 +1,29 @@
 Return-Path: <krzk@kernel.org>
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id ED7C7789E1
+	by mail.openembedded.org (Postfix) with ESMTP id C2DB278A1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jul 2018 18:58:39 +0000 (UTC)
+	Thu,  5 Jul 2018 18:58:40 +0000 (UTC)
 Received: from localhost.localdomain (adsl-84-227-236-43.adslplus.ch
 	[84.227.236.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 806AC2175C;
-	Thu,  5 Jul 2018 18:58:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 934562175C;
+	Thu,  5 Jul 2018 18:58:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1530817121;
-	bh=cf1aLO7SVfqAhcnuINEgRpTAbtJ8Uo8hu5R0ZCr2mfs=;
+	s=default; t=1530817122;
+	bh=jqM2PD20271bc31Jz3LUGAOwwk28wfu4ZJMtdtfXIiA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ClH9muUeUDNu/uIeM9Hg9UJxITck85XWixqjc693osiYcwWXRf4CMavR9drPLWRb+
-	3M2kkl3YRkE93+QMhH59gfr2NKst2zzX67vfxIrP0JWBm+un5aFlg3bVWZPB1av0xx
-	YNUoxZW4dkxESosl5L8yOqqXdf9GIDAuUfxWI1TY=
+	b=KV1Sq0x1drp/9hS8lrNj1dCNTiFwIwpv3dehTi7FMMyc3pw6kzB3uQuervHQOGzE7
+	aNcvRm1S2aLbCXMfwL82yeTtjdQuUKyA1O4lnXxOPN0jYnqpJNyZBxrIAZ7U9AtCqO
+	s5Q1N5pbJ3WrOH0hoVlAEJhug6KZK/y3rnejLKdQ=
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jul 2018 20:58:11 +0200
-Message-Id: <20180705185812.23209-3-krzk@kernel.org>
+Date: Thu,  5 Jul 2018 20:58:12 +0200
+Message-Id: <20180705185812.23209-4-krzk@kernel.org>
 X-Mailer: git-send-email 2.14.1
 In-Reply-To: <20180705185812.23209-1-krzk@kernel.org>
 References: <20180705185812.23209-1-krzk@kernel.org>
-Subject: [meta-networking][PATCH v5 2/3] wireless-regdb: Add wireless-regdb-static package with static regulatory data
+Subject: [meta-networking][PATCH v5 3/3] kernel_wireless_regdb: Add class for embedding regulatory data into older kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,49 +36,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2018 18:58:40 -0000
+X-List-Received-Date: Thu, 05 Jul 2018 18:58:41 -0000
 
-Small embedded systems might:
-1. Want to get rid of daemons as much as possible (therefore be built
-   without CRDA),
-2. Not receive user-space incremental updates but an entire system
-   upgrade (with kernel).
+Linux kernels before v4.15, allowed to be compiled with static
+regulatory database if it was put under net/wireless/db.txt.
 
-Linux kernel since v4.15 allows loading static regulatory data from
-/lib/firmware/regulatory.db.
+Add kernel_wireless_regdb class which allows in such cases to embed the
+wireless regulatory database directly in the Linux kernel during build
+process.
 
-Add additional package to wireless-regdb recipe which provides such
-static data.
+Usage:
+1. The class should be inherited by kernel recipe (e.g. in
+   linux-yocto_%.bbappend).
+2. For Linux kernels up to v4.14, build kernel with CONFIG_EXPERT and
+   CONFIG_CFG80211_INTERNAL_REGDB.
 
 Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 ---
- .../wireless-regdb/wireless-regdb_2018.05.31.bb             | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ .../classes/kernel_wireless_regdb.bbclass            | 20 ++++++++++++++++++++
+ .../wireless-regdb/wireless-regdb_2018.05.31.bb      |  9 +++++++++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-networking/classes/kernel_wireless_regdb.bbclass
 
+diff --git a/meta-networking/classes/kernel_wireless_regdb.bbclass b/meta-networking/classes/kernel_wireless_regdb.bbclass
+new file mode 100644
+index 000000000000..1238172bd4b7
+--- /dev/null
++++ b/meta-networking/classes/kernel_wireless_regdb.bbclass
+@@ -0,0 +1,20 @@
++# Linux kernels before v4.15, allowed to be compiled with static
++# regulatory database if it was put under net/wireless/db.txt.
++#
++# This class copies the regulatory plaintext database to kernel sources before
++# compiling.
++#
++# Usage:
++# 1. The class should be inherited by kernel recipe (e.g. in
++#    linux-yocto_%.bbappend).
++# 2. For Linux kernels up to v4.14, build kernel with CONFIG_EXPERT and
++#    CONFIG_CFG80211_INTERNAL_REGDB.
++
++DEPENDS += "wireless-regdb-native"
++
++SRCTREECOVEREDTASKS += "do_kernel_add_regdb"
++do_kernel_add_regdb() {
++    cp ${STAGING_LIBDIR_NATIVE}/crda/db.txt ${S}/net/wireless/db.txt
++}
++do_kernel_add_regdb[dirs] = "${S}"
++addtask kernel_add_regdb before do_build after do_configure
 diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
-index 8bb866ff1281..2ae9e85427bc 100644
+index 2ae9e85427bc..d1c8d567597b 100644
 --- a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
 +++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2018.05.31.bb
-@@ -15,6 +15,19 @@ do_install() {
-     install -d -m0755 ${D}${sysconfdir}/wireless-regdb/pubkeys
-     install -m 0644 regulatory.bin ${D}${libdir}/crda/regulatory.bin
-     install -m 0644 sforshee.key.pub.pem ${D}${sysconfdir}/wireless-regdb/pubkeys/sforshee.key.pub.pem
-+
-+    install -m 0644 -D regulatory.db ${D}${nonarch_base_libdir}/firmware/regulatory.db
-+    install -m 0644 regulatory.db.p7s ${D}${nonarch_base_libdir}/firmware/regulatory.db.p7s
- }
+@@ -22,6 +22,7 @@ do_install() {
  
-+# Install static regulatory DB in /lib/firmware for kernel to load.
-+# This requires Linux kernel >= v4.15.
-+PACKAGES =+ "${PN}-static"
-+RCONFLICTS_${PN} = "${PN}-static"
-+
-+FILES_${PN}-static = " \
-+    ${nonarch_base_libdir}/firmware/regulatory.db \
-+    ${nonarch_base_libdir}/firmware/regulatory.db.p7s \
-+"
+ # Install static regulatory DB in /lib/firmware for kernel to load.
+ # This requires Linux kernel >= v4.15.
++# For kernel <= v4.14, inherit the kernel_wireless_regdb.bbclass in kernel's recipe.
+ PACKAGES =+ "${PN}-static"
+ RCONFLICTS_${PN} = "${PN}-static"
+ 
+@@ -30,4 +31,12 @@ FILES_${PN}-static = " \
+     ${nonarch_base_libdir}/firmware/regulatory.db.p7s \
+ "
+ 
++# Native users might want to use the source of regulatory DB.
++# This is for example used by Linux kernel <= v4.14 and kernel_wireless_regdb.bbclass.
++do_install_append_class-native() {
++    install -m 0644 -D db.txt ${D}${libdir}/crda/db.txt
++}
 +
  RSUGGESTS_${PN} = "crda"
++
++BBCLASSEXTEND = "native"
 -- 
 2.14.1
 
