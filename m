@@ -1,24 +1,24 @@
-Return-Path: <Mingli.Yu@windriver.com>
+Return-Path: <xiao.zhang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 206EE745F3
+	by mail.openembedded.org (Postfix) with ESMTP id CE07E78A1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jul 2018 08:11:12 +0000 (UTC)
+	Thu,  5 Jul 2018 09:28:49 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w658BD9R000825
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w659Soaa002259
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Jul 2018 01:11:14 -0700
+	Thu, 5 Jul 2018 02:28:50 -0700
 Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Thu, 5 Jul 2018 01:11:13 -0700
-From: <mingli.yu@windriver.com>
+	Thu, 5 Jul 2018 02:28:49 -0700
+From: Zhang Xiao <xiao.zhang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Jul 2018 01:11:13 -0700
-Message-ID: <20180705081113.45222-1-mingli.yu@windriver.com>
+Date: Thu, 5 Jul 2018 02:28:36 -0700
+Message-ID: <20180705092836.120148-1-xiao.zhang@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mcelog: Upgrade to 159
+Subject: [oe-core][recipes-extended][PATCH] diffutils-ptest: add runtime dependency on make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2018 08:11:13 -0000
+X-List-Received-Date: Thu, 05 Jul 2018 09:28:49 -0000
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
-
-Update LIC_FILES_CHKSUM as README.md updated
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
 ---
- .../recipes-support/mcelog/{mcelog_1.49.bb => mcelog_159.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/mcelog/{mcelog_1.49.bb => mcelog_159.bb} (89%)
+ meta/recipes-extended/diffutils/diffutils_3.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_1.49.bb b/meta-oe/recipes-support/mcelog/mcelog_159.bb
-similarity index 89%
-rename from meta-oe/recipes-support/mcelog/mcelog_1.49.bb
-rename to meta-oe/recipes-support/mcelog/mcelog_159.bb
-index 84633a76c..236ad7d00 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_1.49.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_159.bb
-@@ -9,10 +9,10 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;
-     file://run-ptest \
- "
+diff --git a/meta/recipes-extended/diffutils/diffutils_3.6.bb b/meta/recipes-extended/diffutils/diffutils_3.6.bb
+index deadd62c65..8ba897d18f 100644
+--- a/meta/recipes-extended/diffutils/diffutils_3.6.bb
++++ b/meta/recipes-extended/diffutils/diffutils_3.6.bb
+@@ -19,6 +19,8 @@ acpaths = "-I ./m4"
  
--SRCREV = "2cfdf29b2ef98ccd5ed42cdde8bbe437e0d6412f"
-+SRCREV = "2ed5cc0489d20cbffdc6d2e08b1fe49973f0ee34"
+ inherit ptest
  
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://README.md;md5=279840fabb191e6cd9150492d31b0e20"
-+LIC_FILES_CHKSUM = "file://README.md;md5=74bb47b9a68850cb398665cf78b31de6"
- 
- S = "${WORKDIR}/git"
- 
++RDEPENDS_${PN}-ptest += "make"
++
+ do_install_ptest() {
+ 	t=${D}${PTEST_PATH}
+ 	install -D ${S}/build-aux/test-driver $t/build-aux/test-driver
 -- 
 2.17.1
 
