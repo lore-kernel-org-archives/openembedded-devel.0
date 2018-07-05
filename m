@@ -1,24 +1,42 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F71E78A1B
+Return-Path: <prvs=6724770dc5=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id C4A8178925
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jul 2018 06:54:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w656s9p6031234
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  5 Jul 2018 06:57:10 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w656tcpi024728 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 5 Jul 2018 01:57:11 -0500
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2k0dpfmjh1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Jul 2018 01:57:11 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com
+	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w656vB2l003447
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Jul 2018 23:54:09 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Wed, 4 Jul 2018 23:54:08 -0700
-From: <mingli.yu@windriver.com>
+	Thu, 5 Jul 2018 01:57:11 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Thu, 5 Jul 2018 01:57:10 -0500
+Received: from avasiuPC.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Thu, 5 Jul 2018 01:57:10 -0500
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Jul 2018 23:54:08 -0700
-Message-ID: <20180705065408.103714-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+Date: Thu, 5 Jul 2018 09:56:41 +0300
+Message-ID: <20180705065641.2385-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] iozone3: Upgrade to 482
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-07-05_03:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-oe][meta-python][PATCH v5] python-pyiface: Upgrade to 0.0.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,46 +49,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2018 06:54:08 -0000
+X-List-Received-Date: Thu, 05 Jul 2018 06:57:10 -0000
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+License-Update: Changed back to orginal license from version 0.0.5
 
-Update LIC_FILES_CHKSUM as the file iozone.c
-used for LIC_FILES_CHKSUM updated
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
 ---
- .../iozone3/{iozone3_465.bb => iozone3_482.bb}              | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-benchmark/iozone3/{iozone3_465.bb => iozone3_482.bb} (95%)
+ meta-python/recipes-devtools/python/python-pyiface.inc      | 6 +++---
+ .../{python-pyiface_0.0.6.bb => python-pyiface_0.0.7.bb}    | 0
+ .../{python3-pyiface_0.0.6.bb => python3-pyiface_0.0.7.bb}  | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyiface_0.0.6.bb => python-pyiface_0.0.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.6.bb => python3-pyiface_0.0.7.bb} (100%)
 
-diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
-similarity index 95%
-rename from meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-rename to meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
-index 191b93425..09306e044 100644
---- a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-+++ b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
-@@ -4,14 +4,14 @@ AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.or
- SECTION = "console/tests"
- LICENSE = "iozone3"
- LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
--    file://iozone.c;beginline=260;endline=266;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
-+    file://iozone.c;beginline=260;endline=266;md5=0aa488fd139eac078be6eca86e1435e8 \
- "
- SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
-     file://parallelism.patch \
-     file://copyright.txt \
- "
--SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
--SRC_URI[sha256sum] = "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41d811368e55bd4e6a293"
-+SRC_URI[md5sum] = "31ca1d3d28bc375c20a2808217cf212c"
-+SRC_URI[sha256sum] = "2733feb63c96f77177c68f3d938f2294d5394d8554b2767c45cbe138b2f3ae30"
+diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
+index 8e464a83f..895a0ae09 100644
+--- a/meta-python/recipes-devtools/python/python-pyiface.inc
++++ b/meta-python/recipes-devtools/python/python-pyiface.inc
+@@ -3,9 +3,9 @@ SECTION = "devel/python"
+ HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
+ LICENSE = "GPLv3+"
  
- UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
  
+-SRC_URI[md5sum] = "2379d8d4506e6c4d83cf3d4824abce8b"
+-SRC_URI[sha256sum] = "774ea47bb1387e493f6d5d0937b68fa28202c948eccddbd6e4cf2d708dcd86f2"
++SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
++SRC_URI[sha256sum] = "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyiface_0.0.6.bb
+rename to meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.6.bb
+rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
 -- 
-2.17.1
+2.18.0
 
 
