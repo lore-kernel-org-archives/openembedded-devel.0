@@ -1,78 +1,92 @@
-Return-Path: <Jonathan.Haigh@arm.com>
-X-Greylist: delayed 21568 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 05 Jul 2018 21:35:45 UTC
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0070.outbound.protection.outlook.com [104.47.2.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CFA778888
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B46B7754B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jul 2018 21:35:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
-	s=selector1-arm-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=kMnkll4U8lw7YcIbfiNx8TToKjANC3J1AtE2IaCmEP8=;
-	b=aavwIoGCURlA8gBfGTiNvlQgJyH54XiYeaXmt19drrrU5D1YcP48W0rAr5iZmNzfVAOV33Wco/inatqTZP+HvSBugb+EVtShJvo3rR24bkS+82lbiekLSC42eYJPTFez/JFUsacOraGIQwifVAWAo3Fe4qK1eHFV22ZxCM5JlDk=
-Received: from DB5PR08MB0888.eurprd08.prod.outlook.com (10.164.43.30) by
-	DB5PR08MB0789.eurprd08.prod.outlook.com (10.164.42.151) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.930.19; Thu, 5 Jul 2018 11:04:23 +0000
-Received: from DB5PR08MB0888.eurprd08.prod.outlook.com
-	([fe80::d004:d47f:8a18:ac18]) by
-	DB5PR08MB0888.eurprd08.prod.outlook.com
-	([fe80::d004:d47f:8a18:ac18%3]) with mapi id 15.20.0930.016;
-	Thu, 5 Jul 2018 11:04:23 +0000
-From: Jonathan Haigh <Jonathan.Haigh@arm.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "ptsneves@gmail.com"
-	<ptsneves@gmail.com>, "richard.purdie@linuxfoundation.org"
-	<richard.purdie@linuxfoundation.org>
-Thread-Topic: [oe] [oe-core] kernel-devicetree.bbclass: DTBs with path
-	components
-Thread-Index: AQHUFE6Bvh/mLrl/6UCj68aO8kLK7A==
-Date: Thu, 5 Jul 2018 11:04:23 +0000
-Message-ID: <DB5PR08MB0888F933BA080FF3A022792893400@DB5PR08MB0888.eurprd08.prod.outlook.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Jonathan.Haigh@arm.com; 
-x-originating-ip: [217.140.96.140]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; DB5PR08MB0789;
-	7:s9m6B8vKY882C5Tjc+YcMOb9CFNqLRsz0CzK9bAkJ9Xik0kNIhrRYTL7IucgYrj/OXiDrqrpqxZhieY1oLGEqt6dLh+84EIAqgH4VpLvIt2bwVxzynZlhRLcH6vuMXSlVXIII+6wTnBNdVCNuqJEgToALeTstslELDxu9YUEKvBQ9hwEcbrbFujDMUIuJooQLlNec23Ptcr2L2vETAzbVECMZ3SmkUj0hgrGXpvJ2q+q6VhWGrm7t8zdUQ68J979
-x-ms-exchange-antispam-srfa-diagnostics: SOS;
-x-ms-office365-filtering-correlation-id: d17ba043-e414-4105-5d9a-08d5e26710c5
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989117)(5600053)(711020)(48565401081)(4534165)(4627221)(201703031133081)(201702281549075)(8990107)(2017052603328)(7153060)(7193020);
-	SRVR:DB5PR08MB0789; 
-x-ms-traffictypediagnostic: DB5PR08MB0789:
-x-microsoft-antispam-prvs: <DB5PR08MB07891C882B7AEEEBC139791393400@DB5PR08MB0789.eurprd08.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(166708455590820)(223705240517415);
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(8121501046)(5005006)(93006095)(93001095)(10201501046)(3002001)(3231254)(944501410)(52105095)(6055026)(149027)(150027)(6041310)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123560045)(20161123562045)(20161123558120)(20161123564045)(6072148)(201708071742011)(7699016);
-	SRVR:DB5PR08MB0789; BCL:0; PCL:0; RULEID:; SRVR:DB5PR08MB0789; 
-x-forefront-prvs: 0724FCD4CD
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(39860400002)(346002)(136003)(396003)(366004)(376002)(40434004)(199004)(189003)(7736002)(68736007)(316002)(97736004)(53936002)(5660300001)(486006)(26005)(19627405001)(478600001)(7696005)(186003)(106356001)(102836004)(6116002)(105586002)(606006)(33656002)(476003)(39060400002)(3846002)(99286004)(110136005)(6506007)(25786009)(256004)(2501003)(5250100002)(966005)(5024004)(6436002)(14454004)(2906002)(6606003)(14444005)(72206003)(8676002)(81166006)(81156014)(2201001)(66066001)(236005)(8936002)(6306002)(54896002)(86362001)(74316002)(55016002)(9686003)(2900100001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DB5PR08MB0789;
-	H:DB5PR08MB0888.eurprd08.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: arm.com does not designate
-	permitted sender hosts)
-x-microsoft-antispam-message-info: /mwEDt9t0t1Tq8pR0qt5/xKMAMldrsnwyJAZiqOb4c7Ge3ciRcPnUVpOtdY9/bDRFLNhk431gOG/0tGOQBPCWmCEQnh82QHgItMK/hRyOfYP39DVTiYHimlbxAa0RFi8tRhVjONlnu7jVR3SOmCOdTAdvsM3ApyP/xqAuVnxYOwT5efYr74TCtVc81pZ7bNwLDeol3nMCahEy1qtd5F9D1ggNFj1TPOCR0Pq5merrr7KkK6RyNAfpSNT7ciEFMKjPrmqdDHJ5vP3jFPakWY03+Vcx3pRdGlLSwdqYSZwuP/UT8WJYwq9skRvl1ZFRRIfZDk0MRRkJHRVeHkQaBn7las3vX4yXI7LEkTEIZTdlHM=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Thu,  5 Jul 2018 22:41:31 +0000 (UTC)
+Received: by mail-pf0-f175.google.com with SMTP id e10-v6so6635514pfn.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Jul 2018 15:41:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to;
+	bh=Nxq845Xzvt2z4Vaone/tXQlhG3uDYAUhNBYuY+mn0/M=;
+	b=rc7YjiLPYwQVmQmWc3zAoErxsbZTNlXlqJWdraRB5TSaqgBMhJWcog6hzsYCtoagjS
+	zo/UKGPQtReRGRSzPzvnZMrdLwxEa6lX1BM5NrF4QfW+HkGM6fN2IApC5cUptHkMqiTU
+	8aDjuz8bCncVRVpGPUJZxRQvpo2eynwXywRftvjwy8urayAq2hUsFLo98bERviZoUc98
+	uLV+dEJgLdpHG5nFxewPoMK7MWqVtw9DO/8DugX2NhkApxfOg7BqAipMOPVY4JHW90tD
+	3WihOc3MR6k18DPH/UTn5mXJToO0yPISYJQBgKKrbL2TPV/VuO3VTtksn56IQ7yQhXIg
+	WWIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to;
+	bh=Nxq845Xzvt2z4Vaone/tXQlhG3uDYAUhNBYuY+mn0/M=;
+	b=b2asZRiVZzDwCXD0cWaI0EeGMXzKbIjuZHZe8QFpPbi4ahasxxBU0/FU0H6PyI75Vr
+	ZoKFZzsi6BO96NPprfRww9/BXwRFwI5//HKfRUMBJmJqRyhqCwJyZXvle1+J1ocKCwvs
+	7l0yKIroMRJNAEzdjL/+p+tAJVCg1oTibOlGpUxE6ySsSYs1Yf+gOKkdoWSwM+iVFBbJ
+	0oR5vIjGMP1t6MqQJreUmrFGG+LyuhzuQjY51+8gV0EhJtbJchu0jEWkZBji/7plf/Px
+	+zla+gE/6rVf6MicDpMDsjtHDV83luLeVtGVFqPAUhJi+F85L3reGZYcooDi/fkyWd6W
+	FgrA==
+X-Gm-Message-State: APt69E1EnGAd34rwNk6IyltRldpOL09JMZikpa1lcdwIUZWK9AyKV5E4
+	MIDk/JIHkFNPITp8zXOS7b0=
+X-Google-Smtp-Source: AAOMgpccUT8ogTcfWIi5qoBjJYAYhTw0KKzgsPR8639xZnN12BpeMesoSWTUcwXYiQipA5YFnUWoRA==
+X-Received: by 2002:a62:93d4:: with SMTP id
+	r81-v6mr8075961pfk.55.1530830492504; 
+	Thu, 05 Jul 2018 15:41:32 -0700 (PDT)
+Received: from ?IPv6:2601:646:877f:9499:b95e:f0e0:47b8:11a8?
+	([2601:646:877f:9499:b95e:f0e0:47b8:11a8])
+	by smtp.gmail.com with ESMTPSA id
+	z10-v6sm13590657pgc.9.2018.07.05.15.41.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 05 Jul 2018 15:41:31 -0700 (PDT)
+To: Jonathan Haigh <Jonathan.Haigh@arm.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"ptsneves@gmail.com" <ptsneves@gmail.com>,
+	"richard.purdie@linuxfoundation.org" <richard.purdie@linuxfoundation.org>
+References: <DB5PR08MB0888F933BA080FF3A022792893400@DB5PR08MB0888.eurprd08.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
+	xsDiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
+	Zw2ZDXeaQbGU2thctxXTyYf6N1fY6P5Tww6mWKInuGU3yAv8Mg5p+Xd8itwOoVR41DOBkftV
+	miO2G7FtXsnqonB6F43a2yvc+h9OwPRVxAFss5mSmwCglSXPWndN1Ka4M/hzt7g+FmeyEssD
+	/1V/G8lLeAS9gQCNjS7jch+uHMFJuWgHzMXdw99e1ywlIkvXN77NPkW+FLVxKxNAHyWZZ3wO
+	4BQ9/GVR2y0s/rrF1lQSIcfnUmzZrh/Bh0b1wVOSLhl0Vx4MI0/MbdL3xx17JAWy+s67evuK
+	ER4Y8ycTq3gbIGJtVrIJjWPCzWF8BACAA2u52uDmJ2pS8SIhEW0jMK/zYQ5Od9l9fM6BmS6Q
+	jnIlzzcuMvRdZn2IrnuE/YoC8yyzBK3mN+MVc2jWN9rfSg6ml7r14Zjem9Ee0O5Ca7Jg3ZvN
+	6g3vSlrRJqKgsnq3vdatDF+5rd0NJ7ZKUy6x2i1Pavgtv3qaAgPGa1qQdM0dS2hlbSBSYWog
+	PHJhai5raGVtQGdtYWlsLmNvbT7CYAQTEQIAIAUCSpdokQIbAwYLCQgHAwIEFQIIAwQWAgMB
+	Ah4BAheAAAoJELsFM1WRnTMUhOMAoJJleT2hdT7uw9Fyn26+w+/K4i0gAJ9wRt36PqfjNe90
+	4evWolFf5cMmp87DTQRKl2iREBAAjjbVQ55RAouAe0l0nPsKkWdtMuUHwBdLBkpF3rGM/f0u
+	DlPaQzYGLjKT7xDoyRh8x2tFwWvOfiqrZFArxX8e4fsACmJdL0kahTbxC/8SmSWVHXi10JUX
+	2fmZ5ufzlXAnl0ivXkWnrUfLX9DdNwL6DR4DeFK9qBFqtHmK5TQXMu87G+MJwgNJIwCKQX4i
+	I9YJILMuqInVwaxg5/ALdKfE3QPmtadnKb/cuUm4gICdaJeyQfI6qdYLcSuyBWCbAEMM1wmh
+	RAhw5RgzMRRIquZlxPt7lZkXXjals7M6juh87VGRoIJwYoQi97Q1ZHzPBo3AlMPe3haNihkd
+	6D3lwvdB4pmjYG4I6bHCgtEhEss3hHvsBaqV9jV1dMUSs95ZxQtT9qtkOxydHgOlwRX3CG+r
+	584J/s4vWm+iPQtLvDY1u4UFwOLjCOFe709BcLJdPR2GQiOPoyZF7lVY8nu/dtTrAEuiZFk4
+	HD7afUlcr/IKwPWID1V9kRLoDlzdbNuoUy/XfVErK8wcoiGowerEMed4ajNoKxCxBweIkjxq
+	KMt8CKgp30n9UxljglEcgf+/UumwSHxqZcCPVbWXtdhy/hwMk27shOdUvaiynep8OsVGqAzS
+	seL4qZIJ5XzCcyV4KJCmwmdQzt5+ZylcVmeq6R4ob+d8JIDU0ELqdwxwIDiTj0cAAwUP/inN
+	3/r8IFDms4g5xafPrCw31o2jIYahkIfN0WVPWI5K/hFCo2PczPStzDcTsZx7mN2qwpGOe3Lz
+	9/0krZeksrz1ZIHNi5LTasuzXyFJbO05Y+eiHgV1rV7VVEipOrpV1496w112Y/0SZ/FhOfEm
+	EA1TeDejy2sZiTOUW4gyzewbHMpE07d27F2qM2NfMMhKQCcvzr+N0VJmAOeATEivxPUHn+Dp
+	X/NniBWOcWv++wHlxv0Xr63gsRKSt62eFKGjgF50hHD5lM31ziqycc42sbgcqAZ+rYFlb9k0
+	3JcKyq1XdVUSm+xcC2DMSstTI6iqFMGo6FnEO+gyE5VdceajbuZ1GOmJXJUCyYIdGuvCyIoK
+	jTE9lcIYSEEDZQej5xdiGk9eUz0MPmZEUwSR/nLmmwjHDJi0prVvs9xqe5bvS3ddPAqepvZ5
+	UrisgtWD+TDI8ktkt5VLh3XsG9FuXUVAaahOvFMGiZtsioDXTorL4AfMeuA9f+yLwrCVQO3x
+	mH/WA0Tgf/5gYB3t9KoHPjLBNruVOuQbAjubi0pvRAOUcMdBfmPofksK4uWS1zGtPWS7Uu1c
+	suq7Hnb7vszlFYdbzeqjY81LSyxA0kcpgJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7R
+	XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiwkkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
+	VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
+Message-ID: <39ba35a4-462f-75e0-68d8-8d7cbc6937be@gmail.com>
+Date: Thu, 5 Jul 2018 15:41:13 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
 MIME-Version: 1.0
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d17ba043-e414-4105-5d9a-08d5e26710c5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Jul 2018 11:04:23.2500 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR08MB0789
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [oe-core] kernel-devicetree.bbclass: DTBs with path components
+In-Reply-To: <DB5PR08MB0888F933BA080FF3A022792893400@DB5PR08MB0888.eurprd08.prod.outlook.com>
+Subject: Re: [oe-core] kernel-devicetree.bbclass: DTBs with path components
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -85,40 +99,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jul 2018 21:35:46 -0000
-Content-Language: en-GB
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 05 Jul 2018 22:41:31 -0000
+X-Groupsio-MsgNum: 73213
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="Tn68pic8aCUGm8AsUyHInWu2fhYflxUyz"
+
+--Tn68pic8aCUGm8AsUyHInWu2fhYflxUyz
+Content-Type: multipart/mixed; boundary="2qu1UAxpFsFpmHFgcn1KEbRiCYEqBNdLe";
+ protected-headers="v1"
+From: Khem Raj <raj.khem@gmail.com>
+To: Jonathan Haigh <Jonathan.Haigh@arm.com>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+ "ptsneves@gmail.com" <ptsneves@gmail.com>,
+ "richard.purdie@linuxfoundation.org" <richard.purdie@linuxfoundation.org>
+Message-ID: <39ba35a4-462f-75e0-68d8-8d7cbc6937be@gmail.com>
+Subject: Re: [oe] [oe-core] kernel-devicetree.bbclass: DTBs with path
+ components
+References: <DB5PR08MB0888F933BA080FF3A022792893400@DB5PR08MB0888.eurprd08.prod.outlook.com>
+In-Reply-To: <DB5PR08MB0888F933BA080FF3A022792893400@DB5PR08MB0888.eurprd08.prod.outlook.com>
+
+--2qu1UAxpFsFpmHFgcn1KEbRiCYEqBNdLe
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On 7/5/18 4:04 AM, Jonathan Haigh wrote:
+> Hi,
+>=20
+>=20
+> The recent oe-core commit https://github.com/openembedded/openembedded-=
+core/commit/2e7f3b2b9318d1e5395ad58131eafb873f614326 altered the normaliz=
+e_dtb() function to always apply basename to the DTB (or DTS) passed in t=
+o convert a potentially full path to a DTB/DTS into a make target.
+>=20
+>=20
+> If I understand correctly, that's not the correct thing to do because t=
+he make targets can contain directory components - and some of the DTBs i=
+n meta-raspberrypi's KERNEL_DEVICETREE do contain directory components ev=
+en though they're not full paths to the DTBs (e.g. overlays/at86rf233.dtb=
+o from meta-raspberrypi:conf/machine/include/rpi-base.inc).
+>=20
+>=20
+> I think the normalize_dtb() function should just strip leading parts of=
+ DTB/DTSs to make them relative to the 'dts' directory. I have a patch to=
+ make this change that I will post shortly.
+>=20
 
 
-The recent oe-core commit https://github.com/openembedded/openembedded-core=
-/commit/2e7f3b2b9318d1e5395ad58131eafb873f614326 altered the normalize_dtb(=
-) function to always apply basename to the DTB (or DTS) passed in to conver=
-t a potentially full path to a DTB/DTS into a make target.
+it has already been reverted today.
+see
+http://git.openembedded.org/openembedded-core/commit/?id=3D0d725c76c113de=
+c441a7319a6ee997e4ae8c4c88
+
+please update to latest master.
+
+>=20
+> Regards,
+>=20
+>=20
+> Jonathan
+>=20
+> IMPORTANT NOTICE: The contents of this email and any attachments are co=
+nfidential and may also be privileged. If you are not the intended recipi=
+ent, please notify the sender immediately and do not disclose the content=
+s to any other person, use it for any purpose, or store or copy the infor=
+mation in any medium. Thank you.
+>=20
 
 
-If I understand correctly, that's not the correct thing to do because the m=
-ake targets can contain directory components - and some of the DTBs in meta=
--raspberrypi's KERNEL_DEVICETREE do contain directory components even thoug=
-h they're not full paths to the DTBs (e.g. overlays/at86rf233.dtbo from met=
-a-raspberrypi:conf/machine/include/rpi-base.inc).
 
+--2qu1UAxpFsFpmHFgcn1KEbRiCYEqBNdLe--
 
-I think the normalize_dtb() function should just strip leading parts of DTB=
-/DTSs to make them relative to the 'dts' directory. I have a patch to make =
-this change that I will post shortly.
+--Tn68pic8aCUGm8AsUyHInWu2fhYflxUyz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
+iFwEARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCWz6elgAKCRC7BTNVkZ0z
+FORcAJjwmrJ4H0YlJGzU2oWKb420rma0AJ9ymb89VPEFQEjvyehyqq9vERkrCA==
+=xVO6
+-----END PGP SIGNATURE-----
 
-
-Jonathan
-
-IMPORTANT NOTICE: The contents of this email and any attachments are confid=
-ential and may also be privileged. If you are not the intended recipient, p=
-lease notify the sender immediately and do not disclose the contents to any=
- other person, use it for any purpose, or store or copy the information in =
-any medium. Thank you.
-
+--Tn68pic8aCUGm8AsUyHInWu2fhYflxUyz--
