@@ -1,49 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
-	[209.85.217.174])
-	by mail.openembedded.org (Postfix) with ESMTP id A6D9C7553C
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C16C071985
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jul 2018 21:06:22 +0000 (UTC)
-Received: by mail-ua0-f174.google.com with SMTP id x18-v6so8343541uaj.9
+	Fri,  6 Jul 2018 21:22:54 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id 125-v6so7552440vke.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jul 2018 14:06:24 -0700 (PDT)
+	Fri, 06 Jul 2018 14:22:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=4AD14cN61lonuTXyNqv5s1chkPpquikb9Bu1g0631lI=;
-	b=rbN7hBD3SxCggvlwvSd8vB3FcDOcWBn+jFX58X2CMEai98t4V1uIFGddFQzJoxOVTv
-	uZw3oMJcvcYakJivLO3l7XLstmVr+ZR1jZn9ykEl7nsz3/w/qFc7sRbigTwO/iVBzzMg
-	o2djTxRFxFz2KZPoiy1HL8uXuKtlEnSjUZZLQzQU1sJVX372HIsJQhnk9JF57c1XAVF/
-	4ToZNWeRvfduvwTiK4iMMo0Bqf5MOJhGUgqTfBOkUiCqs6lF4r3TXb8M1nGiXF0EqQ1k
-	XpzXhqF71JSmMXlsZQid/q3Yon2+NOqFECO3VH+UURPTdon4ZolgjmevFERa8rAj1MKQ
-	DQXg==
+	:cc; bh=zi3wqlrNoQUgNi9k3tGkgcUOteVl5Vv3ioYP/bgriB4=;
+	b=MO3s7PmomUDN8vVkHGJYzpMHDMCPT0N2uD1Gxn4HIsdQl0q7MV04kduzBRv8Zg6biB
+	rEVzRHOj4ydVn2ckjjvHoBmdOg3L6kpfqfkQlOOfrepCtVZG7hnBELFYIstLHOBuDbNN
+	b7R4rKTfmqQIrMedDIn72LCYC3Tr++kW6ur8UYcmhMkwwqI1qc+iqZBjbGbiCszj9T8s
+	NekaCDXhsojHjHaPfg9KVK/g1cLsu51yKv5wWtaowMUmtxecZLUl5QEUZ/6Qy0ONfNJT
+	3xf+a8CHpkzf+QK9+JjvlkvLfumeAeMCcBs8lHQecyhD7+Mk9jeAZ0+0P1kwAAqXoeD/
+	rLCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=4AD14cN61lonuTXyNqv5s1chkPpquikb9Bu1g0631lI=;
-	b=QucnR2USxRD/gKQ7RykGGNWGZmFUE/7mo1hsJkzlNsMSg2OZfHmQ2hj4Oo254BpGxG
-	5eJFY/fl43/gIWVSkCtKH4PCNgEDwRCRfN+WaqgqLWf1Kug2071awjQqh33lHQ0uRT7d
-	UCnlCZ2ZeuWvfVwLj53dRzizPH/+urnzmIgt1bJjwDbTm8QHCiK1fVS+V5SWoXJr72Tx
-	PIA4NOktS3uX9RXOSmvCPZXX71BYi3XlDvBDdrKSqSncq7W7Sh2xDidVXanmQ1j7BrJz
-	VBC7NQlQff/aSFNzNL/dl4gS7sj0Bdr8tFo1K8tUBbBbzF3NilrWG4U0EX22KJZLV7RZ
-	bVbg==
-X-Gm-Message-State: APt69E3RMCX6ZsSgK9nF2UXJzSBD/2rrkzF9IdPPGfKMXpvzbROLCfIF
-	SSQqJ7cgg7KXJCTDiqzqxa2ond9sQCZbPVxh3B8=
-X-Google-Smtp-Source: AAOMgpeWA/D7EGvew8E8DI1piuqbqDLfjL4bOkMG/AsCgYc71vp7f5MGzhi+aLbrEaAhRxxMjKMrdqwBbAPBwrJBc2I=
-X-Received: by 2002:ab0:11dd:: with SMTP id
-	q29-v6mr7132968uac.191.1530911183384; 
-	Fri, 06 Jul 2018 14:06:23 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=zi3wqlrNoQUgNi9k3tGkgcUOteVl5Vv3ioYP/bgriB4=;
+	b=gQ20lcYgChDzwvrkXqcQgGgbsZihwVnj2ZvbFv7X7eCmrhRQsfSLJaEtE619oA/VZg
+	OYXLnzOl408X92XhbwdBi/IKjrpVhUEtd8eWYsvcBLOPi3pT3diy/c610Z4XxVhu6bZ9
+	UxaYw1CML7ckPOPeYQYmYriuIiMDHIjSz1iodJ8+hwLt0PbtBLH5p/BEQaubuWBMWIXd
+	940fHGuFpSUld/XN2BpDtLy1dsPywl1hmK/SZ85cEU89XvRKGqAFU6A1zcTQz3pWm9r3
+	HXoyrYtBhgTkF6hFUaHWJmycNBEcOpGt9U+A5UIs9M1avjsGyva3FJRff033gOOsXGo8
+	q4JQ==
+X-Gm-Message-State: APt69E2BLaiWiddoV8G5ul/3yvSa7JLlYsfHDzc4FfnEmDE1SQFtW238
+	XPMDOMEnxGUzPa1uQjPndYSHP4Ivp4ycIpXHiUQ=
+X-Google-Smtp-Source: AAOMgpe0kdGNNfC8Vp4k3npHGHD9hDOPyG+2wIsyQRrVZRcKerf5emFncefIGrJTlNbMLfmrF5xg09dxjR7hTTG9Vok=
+X-Received: by 2002:a1f:a2cc:: with SMTP id
+	l195-v6mr1495183vke.95.1530912175342; 
+	Fri, 06 Jul 2018 14:22:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180706084113.95133-1-mingli.yu@windriver.com>
-	<5B3F2C1B.1050005@windriver.com>
-In-Reply-To: <5B3F2C1B.1050005@windriver.com>
+References: <1530868443-19241-1-git-send-email-leon.anavi@konsulko.com>
+In-Reply-To: <1530868443-19241-1-git-send-email-leon.anavi@konsulko.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Jul 2018 14:05:21 -0700
-Message-ID: <CAMKF1sp3L9mBB8O4hzHNT0xbvPXJe_qyn5SJJ3QSFJ9yenR-_A@mail.gmail.com>
-To: Mingli Yu <mingli.yu@windriver.com>
+Date: Fri, 6 Jul 2018 14:21:53 -0700
+Message-ID: <CAMKF1soVBU+OSVc=iUnfNcTR9jnKdA6tnQOg3oefgwgcS_r40Q@mail.gmail.com>
+To: Leon Anavi <leon.anavi@konsulko.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] mcelog: Upgrade to 159
+Subject: Re: [PATCH] vim: update to 8.1.0155
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,93 +54,318 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2018 21:06:22 -0000
+X-List-Received-Date: Fri, 06 Jul 2018 21:22:54 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Please do not include raw diffs in commit log. This will cause pw to confus=
-e.
-On Fri, Jul 6, 2018 at 1:50 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
+On Fri, Jul 6, 2018 at 2:14 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
 >
+> Update vim to the latest version 8.1.0155.
 >
+> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> ---
+>  meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb |  13 ---
+>  meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb  |  13 +++
+>  meta-oe/recipes-support/vim/vim_8.1.0.116.bb      | 113 ----------------------
+>  meta-oe/recipes-support/vim/vim_8.1.0155.bb       | 113 ++++++++++++++++++++++
+>  4 files changed, 126 insertions(+), 126 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
+>  create mode 100644 meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb
+>  delete mode 100644 meta-oe/recipes-support/vim/vim_8.1.0.116.bb
+>  create mode 100644 meta-oe/recipes-support/vim/vim_8.1.0155.bb
 >
-> On 2018=E5=B9=B407=E6=9C=8806=E6=97=A5 16:41, mingli.yu@windriver.com wro=
-te:
-> > From: Mingli Yu <mingli.yu@windriver.com>
-> >
-> > Update LIC_FILES_CHKSUM as license file README.md
-> > updated as below:
-> >
-> > diff a.orig/README.md a/README.md
-> >
-> > < see [mcelog.org](http://www.mcelog.org).
-> > ---
-> >> see [mcelog.org](https://www.mcelog.org).
-> > 56a57,60
-> >>
-> >> By default mcelog reports its version as the git tag. This can be over=
-ridden
-> >> by setting up a .os_release file in the source directory. A build syst=
-em
-> >> could write the OS version to this file to mark the binary.
+
+this patch is ok however I would suggest that you add
+
+[diff]
+        renames = copies
+
+to your ~/.gitconfig this will help git detect renames and make
+patches easier to review.
+
+> diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb b/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
+> deleted file mode 100644
+> index bb8f2b7..0000000
+> --- a/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -require vim_${PV}.bb
+> -
+> -SUMMARY += " (with tiny features)"
+> -
+> -PACKAGECONFIG += "tiny"
+> -
+> -do_install() {
+> -    install -d ${D}/${bindir}
+> -    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
+> -}
+> -
+> -ALTERNATIVE_PRIORITY = "90"
+> -ALTERNATIVE_TARGET = "${bindir}/vim.tiny"
+> diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb b/meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb
+> new file mode 100644
+> index 0000000..bb8f2b7
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb
+> @@ -0,0 +1,13 @@
+> +require vim_${PV}.bb
+> +
+> +SUMMARY += " (with tiny features)"
+> +
+> +PACKAGECONFIG += "tiny"
+> +
+> +do_install() {
+> +    install -d ${D}/${bindir}
+> +    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
+> +}
+
+This could just be made a single liner with
+
+install -D -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
+
+> +
+> +ALTERNATIVE_PRIORITY = "90"
+> +ALTERNATIVE_TARGET = "${bindir}/vim.tiny"
+> diff --git a/meta-oe/recipes-support/vim/vim_8.1.0.116.bb b/meta-oe/recipes-support/vim/vim_8.1.0.116.bb
+> deleted file mode 100644
+> index f669dfe..0000000
+> --- a/meta-oe/recipes-support/vim/vim_8.1.0.116.bb
+> +++ /dev/null
+> @@ -1,113 +0,0 @@
+> -SUMMARY = "Vi IMproved - enhanced vi editor"
+> -SECTION = "console/utils"
+> -DEPENDS = "ncurses gettext-native"
+> -# vimdiff doesn't like busybox diff
+> -RSUGGESTS_${PN} = "diffutils"
+> -LICENSE = "vim"
+> -LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b6eb9d541de3933cc8f48125ae0335fe"
+> -
+> -SRC_URI = "git://github.com/vim/vim.git \
+> -           file://disable_acl_header_check.patch;patchdir=.. \
+> -           file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
+> -"
+> -SRCREV = "a87b72cc316e065d66dcbcf7ec1cde330adef3a3"
+> -
+> -S = "${WORKDIR}/git/src"
+> -
+> -VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
+> -
+> -inherit autotools-brokensep update-alternatives
+> -
+> -CLEANBROKEN = "1"
+> -
+> -# vim configure.in contains functions which got 'dropped' by autotools.bbclass
+> -do_configure () {
+> -    rm -f auto/*
+> -    touch auto/config.mk
+> -    aclocal
+> -    autoconf
+> -    oe_runconf
+> -    touch auto/configure
+> -    touch auto/config.mk auto/config.h
+> -}
+> -
+> -#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
+> -PACKAGECONFIG ??= ""
+> -PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)}"
+> -
+> -PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
+> -PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
+> -PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
+> -PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
+> -PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
+> -PACKAGECONFIG[elfutils] = "--enable-elf-check,,elfutils,"
+> -
+> -EXTRA_OECONF = " \
+> -    --disable-gpm \
+> -    --disable-gtktest \
+> -    --disable-xim \
+> -    --disable-netbeans \
+> -    --with-tlib=ncurses \
+> -    ac_cv_small_wchar_t=no \
+> -    vim_cv_getcwd_broken=no \
+> -    vim_cv_memmove_handles_overlap=yes \
+> -    vim_cv_stat_ignores_slash=no \
+> -    vim_cv_terminfo=yes \
+> -    vim_cv_tgetent=non-zero \
+> -    vim_cv_toupper_broken=no \
+> -    vim_cv_tty_group=world \
+> -    STRIP=/bin/true \
+> -"
+> -
+> -do_install() {
+> -    autotools_do_install
+> -
+> -    # Work around file-rdeps picking up csh, awk, perl or python as a dep
+> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
+> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
+> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
+> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.py
+> -
+> -    # Install example vimrc from runtime files
+> -    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
+> -
+> -    # we use --with-features=big as default
+> -    mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
+> -}
+> -
+> -PARALLEL_MAKEINST = ""
+> -
+> -PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-tools"
+> -FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
+> -FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
+> -FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
+> -FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
+> -FILES_${PN}-data = "${datadir}/${BPN}"
+> -FILES_${PN}-tools = "${datadir}/${BPN}/${VIMDIR}/tools"
+> -FILES_${PN}-common = " \
+> -    ${datadir}/${BPN}/${VIMDIR}/*.vim \
+> -    ${datadir}/${BPN}/${VIMDIR}/autoload \
+> -    ${datadir}/${BPN}/${VIMDIR}/colors \
+> -    ${datadir}/${BPN}/${VIMDIR}/compiler \
+> -    ${datadir}/${BPN}/${VIMDIR}/ftplugin \
+> -    ${datadir}/${BPN}/${VIMDIR}/indent \
+> -    ${datadir}/${BPN}/${VIMDIR}/keymap \
+> -    ${datadir}/${BPN}/${VIMDIR}/lang \
+> -    ${datadir}/${BPN}/${VIMDIR}/macros \
+> -    ${datadir}/${BPN}/${VIMDIR}/plugin \
+> -    ${datadir}/${BPN}/${VIMDIR}/print \
+> -    ${datadir}/${BPN}/${VIMDIR}/spell \
+> -    ${datadir}/icons \
+> -"
+> -
+> -RDEPENDS_${BPN} = "ncurses-terminfo-base"
+> -# Recommend that runtime data is installed along with vim
+> -RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
+> -
+> -ALTERNATIVE_${PN} = "vi vim"
+> -ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
+> -ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+> -ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
+> -ALTERNATIVE_PRIORITY = "100"
+> -
+> -BBCLASSEXTEND = "native"
+> diff --git a/meta-oe/recipes-support/vim/vim_8.1.0155.bb b/meta-oe/recipes-support/vim/vim_8.1.0155.bb
+> new file mode 100644
+> index 0000000..532b50c
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/vim/vim_8.1.0155.bb
+> @@ -0,0 +1,113 @@
+> +SUMMARY = "Vi IMproved - enhanced vi editor"
+> +SECTION = "console/utils"
+> +DEPENDS = "ncurses gettext-native"
+> +# vimdiff doesn't like busybox diff
+> +RSUGGESTS_${PN} = "diffutils"
+> +LICENSE = "vim"
+> +LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b6eb9d541de3933cc8f48125ae0335fe"
+> +
+> +SRC_URI = "git://github.com/vim/vim.git \
+> +           file://disable_acl_header_check.patch;patchdir=.. \
+> +           file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
+> +"
+> +SRCREV = "ae728edc93fe5a2f8c39fa75b1ae9ed71526858c"
+> +
+> +S = "${WORKDIR}/git/src"
+> +
+> +VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
+> +
+> +inherit autotools-brokensep update-alternatives
+> +
+> +CLEANBROKEN = "1"
+> +
+> +# vim configure.in contains functions which got 'dropped' by autotools.bbclass
+> +do_configure () {
+> +    rm -f auto/*
+> +    touch auto/config.mk
+> +    aclocal
+> +    autoconf
+> +    oe_runconf
+> +    touch auto/configure
+> +    touch auto/config.mk auto/config.h
+> +}
+> +
+> +#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
+> +PACKAGECONFIG ??= ""
+> +PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)}"
+> +
+> +PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
+> +PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
+> +PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
+> +PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
+> +PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
+> +PACKAGECONFIG[elfutils] = "--enable-elf-check,,elfutils,"
+> +
+> +EXTRA_OECONF = " \
+> +    --disable-gpm \
+> +    --disable-gtktest \
+> +    --disable-xim \
+> +    --disable-netbeans \
+> +    --with-tlib=ncurses \
+> +    ac_cv_small_wchar_t=no \
+> +    vim_cv_getcwd_broken=no \
+> +    vim_cv_memmove_handles_overlap=yes \
+> +    vim_cv_stat_ignores_slash=no \
+> +    vim_cv_terminfo=yes \
+> +    vim_cv_tgetent=non-zero \
+> +    vim_cv_toupper_broken=no \
+> +    vim_cv_tty_group=world \
+> +    STRIP=/bin/true \
+> +"
+> +
+> +do_install() {
+> +    autotools_do_install
+> +
+> +    # Work around file-rdeps picking up csh, awk, perl or python as a dep
+> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
+> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
+> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
+> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.py
+> +
+> +    # Install example vimrc from runtime files
+> +    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
+> +
+> +    # we use --with-features=big as default
+> +    mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
+> +}
+> +
+> +PARALLEL_MAKEINST = ""
+> +
+> +PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-tools"
+> +FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
+> +FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
+> +FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
+> +FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
+> +FILES_${PN}-data = "${datadir}/${BPN}"
+> +FILES_${PN}-tools = "${datadir}/${BPN}/${VIMDIR}/tools"
+> +FILES_${PN}-common = " \
+> +    ${datadir}/${BPN}/${VIMDIR}/*.vim \
+> +    ${datadir}/${BPN}/${VIMDIR}/autoload \
+> +    ${datadir}/${BPN}/${VIMDIR}/colors \
+> +    ${datadir}/${BPN}/${VIMDIR}/compiler \
+> +    ${datadir}/${BPN}/${VIMDIR}/ftplugin \
+> +    ${datadir}/${BPN}/${VIMDIR}/indent \
+> +    ${datadir}/${BPN}/${VIMDIR}/keymap \
+> +    ${datadir}/${BPN}/${VIMDIR}/lang \
+> +    ${datadir}/${BPN}/${VIMDIR}/macros \
+> +    ${datadir}/${BPN}/${VIMDIR}/plugin \
+> +    ${datadir}/${BPN}/${VIMDIR}/print \
+> +    ${datadir}/${BPN}/${VIMDIR}/spell \
+> +    ${datadir}/icons \
+> +"
+> +
+> +RDEPENDS_${BPN} = "ncurses-terminfo-base"
+> +# Recommend that runtime data is installed along with vim
+> +RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
+> +
+> +ALTERNATIVE_${PN} = "vi vim"
+> +ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
+> +ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+> +ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
+> +ALTERNATIVE_PRIORITY = "100"
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 2.7.4
 >
->
-> The message as below, seems > behaves special in email.
->
->      Update LIC_FILES_CHKSUM as license file README.md
->      updated as below:
->
->      diff a.orig/README.md a/README.md
->
->      < see [mcelog.org](http://www.mcelog.org).
->      ---
->      > see [mcelog.org](https://www.mcelog.org).
->      56a57,60
->      >
->      > By default mcelog reports its version as the git tag. This can be
-> overridden
->      > by setting up a .os_release file in the source directory. A build
-> system
->      > could write the OS version to this file to mark the binary.
->
->      Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->
-> Thanks,
->
-> >
-> > Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> > ---
-> >   .../recipes-support/mcelog/{mcelog_1.49.bb =3D> mcelog_159.bb}  | 4 +=
-+--
-> >   1 file changed, 2 insertions(+), 2 deletions(-)
-> >   rename meta-oe/recipes-support/mcelog/{mcelog_1.49.bb =3D> mcelog_159=
-.bb} (89%)
-> >
-> > diff --git a/meta-oe/recipes-support/mcelog/mcelog_1.49.bb b/meta-oe/re=
-cipes-support/mcelog/mcelog_159.bb
-> > similarity index 89%
-> > rename from meta-oe/recipes-support/mcelog/mcelog_1.49.bb
-> > rename to meta-oe/recipes-support/mcelog/mcelog_159.bb
-> > index 84633a76c..236ad7d00 100644
-> > --- a/meta-oe/recipes-support/mcelog/mcelog_1.49.bb
-> > +++ b/meta-oe/recipes-support/mcelog/mcelog_159.bb
-> > @@ -9,10 +9,10 @@ SRC_URI =3D "git://git.kernel.org/pub/scm/utils/cpu/m=
-ce/mcelog.git;protocol=3Dhttp;
-> >       file://run-ptest \
-> >   "
-> >
-> > -SRCREV =3D "2cfdf29b2ef98ccd5ed42cdde8bbe437e0d6412f"
-> > +SRCREV =3D "2ed5cc0489d20cbffdc6d2e08b1fe49973f0ee34"
-> >
-> >   LICENSE =3D "GPLv2"
-> > -LIC_FILES_CHKSUM =3D "file://README.md;md5=3D279840fabb191e6cd9150492d=
-31b0e20"
-> > +LIC_FILES_CHKSUM =3D "file://README.md;md5=3D74bb47b9a68850cb398665cf7=
-8b31de6"
-> >
-> >   S =3D "${WORKDIR}/git"
-> >
-> >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
