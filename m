@@ -1,50 +1,76 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AAD2875523
+Return-Path: <Jonathan.Haigh@arm.com>
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+	(mail-db5eur01on0060.outbound.protection.outlook.com [104.47.2.60])
+	by mail.openembedded.org (Postfix) with ESMTP id 0598A787ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jul 2018 15:02:22 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id b77-v6so6985545vkb.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jul 2018 08:02:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=21OTwmymQWBZgFmSWZ09+1c0wjGjRHY+WQbK+bZ/K7k=;
-	b=f7YAyy03lbKjm1PkFjSy/zY+TVbxY01fhfZ+x2i01cr51AK9tJ377LYWZi6DnPnaHF
-	E7f66Yaz0q4oaBWbXwP1LVKnG6smsENUFvrZwrPob9gESdsG+qMBmY5hbNtBZMnNJ1Q0
-	awE/NFpPJ14l0wB1ssm/cSW9g/XQiNV8XKHmf4oVJTJE+yshRmWYmiGcH9kfFHFKUVw9
-	ltgX2ltcJcoM8+9Mxvy2LBKnUquPJAG/fiKeWUr2Z/VA9tjmBqOS4ORTxJwSRxaQSsUX
-	jIl/yC1NzkfKNc2kiHFQTpV2DU6r/RK+d/u+K7722v4Xk7/yLo09we1LHD9yXuZtmhll
-	/5+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=21OTwmymQWBZgFmSWZ09+1c0wjGjRHY+WQbK+bZ/K7k=;
-	b=qkHlEBdzhk/p9q5lmBTVDt4rWkyzPwGWxh7fsPTio9DvXgMeZoOxBSpCADvQ1tfwJj
-	+/iR03god/lo6QJfdeXbo0/i0ARTBK8iqyaTsoG435417/BBJrYzgOJGShgzmJeTlmeR
-	y5U7l/FSaO2XAKkJVFotnBzyfXbOEyOBw7I3FHIVB7CBrLWqYAbKyk+tsG6p3zcB58tu
-	xsf4+2sANcVMzcqf0J+bX+hLiqF9ATaxeITXaNhXoUy7cqQGMhshuBAL4iPC9slkFMg1
-	4/I9gLzvzmeRAvnFYVpwgEMpC/12dsrn616cye4hIctazh+XR7ZeIRFdHC4H54jhBrDY
-	jTHg==
-X-Gm-Message-State: APt69E2wQMRF9HfdUvw8L1X71fCaF/j55HTl8qK1jrLCCEXg7uhGbWaV
-	tRNwnDE61DTbNDn9ZIvUBCayWwXrdpzmiJFzR8k=
-X-Google-Smtp-Source: AAOMgpcc4WBAJhhEv3JqkoEPkxPyf+5WW+0lNqv+xeS1WGyohWh7LqqPgh32IS/s03oLqEiEkySAJexsEn4DCaP0NZU=
-X-Received: by 2002:a1f:20d4:: with SMTP id
-	g203-v6mr5994520vkg.176.1530889343374; 
-	Fri, 06 Jul 2018 08:02:23 -0700 (PDT)
+	Fri,  6 Jul 2018 19:02:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+	s=selector1-arm-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=y1iix1BAMmFtIoNbJVESfruWeH+HqqcPns1f1rQ/qh0=;
+	b=cqmQ4mDydtSAtebLgOO9fCb3wRpxhxys6RU2Bz0iskulzDyw0fjUTSJpuogk8KIGwQSIqCxBAtXU2WiDdlREWbzO/wuSP0lzL5f1mgR+Vo+3ZW9U6DGxtwNvsKHR8VDum4lTbO0NVWSQlzE5SwX/SED/xSHu+HwahdsKjEDwZKA=
+Received: from DB5PR08MB0888.eurprd08.prod.outlook.com (10.164.43.30) by
+	DB5PR08MB0982.eurprd08.prod.outlook.com (10.166.13.153) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.930.19; Fri, 6 Jul 2018 10:28:17 +0000
+Received: from DB5PR08MB0888.eurprd08.prod.outlook.com
+	([fe80::d004:d47f:8a18:ac18]) by
+	DB5PR08MB0888.eurprd08.prod.outlook.com
+	([fe80::d004:d47f:8a18:ac18%3]) with mapi id 15.20.0930.016;
+	Fri, 6 Jul 2018 10:28:17 +0000
+From: Jonathan Haigh <Jonathan.Haigh@arm.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [PATCH] kernel-devicetree.bbclass: DTB make targets may contain
+	path components
+Thread-Index: AQHUFFH1NPowGlLtokWoO3sI/rlkxqSB/xp7
+Date: Fri, 6 Jul 2018 10:28:17 +0000
+Message-ID: <DB5PR08MB0888D243F1C828A518CBA90C93470@DB5PR08MB0888.eurprd08.prod.outlook.com>
+References: <9a8e4137ac914b168091b71d755d54281530789529-12623-1-git-send-email-jonathan.haigh@arm.com>
+In-Reply-To: <9a8e4137ac914b168091b71d755d54281530789529-12623-1-git-send-email-jonathan.haigh@arm.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Jonathan.Haigh@arm.com; 
+x-originating-ip: [217.140.96.140]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; DB5PR08MB0982;
+	7:7FqqABiYHM7omjF83OBKRL3II67WeU09ltNrPXiuy8fbI161St6dSLP7zl1vUSZu5je/gpCfJXUrLx/6lGpQpFFH6L6Ys0sN3n3Np3+mYRJgS9cNQA82Iisefvg5OYv09M6kKM5xDfaAeDjXiqW/hL4UW7Wl39s+Eqkn/asH91Pn9urtye3VNl3HJlI9iXFX/q5+5ne09xaVyQz+Oz8crC8yGeZsFtznzBidrHs7aKrdtxkkmEws74PWK5zro89b
+x-ms-exchange-antispam-srfa-diagnostics: SOS;SOR;
+x-ms-office365-filtering-correlation-id: 7f7ac1a3-5dc2-45d9-015d-08d5e32b3053
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(7020095)(4652040)(8989117)(5600053)(711020)(48565401081)(2017052603328)(7153060)(7193020);
+	SRVR:DB5PR08MB0982; 
+x-ms-traffictypediagnostic: DB5PR08MB0982:
+x-microsoft-antispam-prvs: <DB5PR08MB0982E077713325400B2DFADF93470@DB5PR08MB0982.eurprd08.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(180628864354917)(223705240517415);
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(93006095)(93001095)(3231254)(944501410)(52105095)(10201501046)(3002001)(6055026)(149027)(150027)(6041310)(20161123560045)(20161123562045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(20161123564045)(6072148)(201708071742011)(7699016);
+	SRVR:DB5PR08MB0982; BCL:0; PCL:0; RULEID:; SRVR:DB5PR08MB0982; 
+x-forefront-prvs: 0725D9E8D0
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(39860400002)(396003)(366004)(346002)(376002)(136003)(189003)(199004)(40434004)(9686003)(7696005)(6436002)(8676002)(2351001)(55016002)(53936002)(4326008)(105586002)(5660300001)(11346002)(446003)(33656002)(81156014)(486006)(81166006)(8936002)(476003)(72206003)(6506007)(5640700003)(256004)(2906002)(14444005)(6246003)(229853002)(68736007)(76176011)(106356001)(5250100002)(305945005)(2900100001)(7736002)(6116002)(3846002)(5024004)(97736004)(99286004)(102836004)(86362001)(478600001)(66066001)(25786009)(316002)(14454004)(2501003)(74316002)(6916009)(26005);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:DB5PR08MB0982;
+	H:DB5PR08MB0888.eurprd08.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: arm.com does not designate
+	permitted sender hosts)
+x-microsoft-antispam-message-info: J8T4R1KQ7TeZWAw3UTGo0UODl7gpCD7Ml4CDgsnmEUyEO58AUbP8CGj5HtTXhrZlMKlVLNdzwDF5C61jlXvvda9EHRz3mkrgNlUCJUQ0QjQNt3kF7zGDQCbeKza0fZt4Qy5u4LTr7gx+RJgiHgs0f2VoICm2SmoJaQo1A90W2P7iYz7HOYcpKuVD14SplOQN7hDu1Zp1vUKmX7px7B3U0abScL01+ng+QHhbXN5shWEU5atnS9yj8PNpbCspYDLssSRfzz0f32Ht8kwPOqXPmSleEZCIWiTgEcj+s8EpySeNEJ8BeolhTcPglTG91wh1JNjzGeQ2ZcTDd+FnaMtI+9Yut2DYA35vPOdaWlJpORg=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-References: <20180705065408.103714-1-mingli.yu@windriver.com>
-	<CAMKF1spY_iwTDuGjzD7N6cNq+n6W9KhhYYd=vhJCg=uE=aNQyQ@mail.gmail.com>
-	<5B3F34E5.70101@windriver.com>
-In-Reply-To: <5B3F34E5.70101@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Jul 2018 08:01:19 -0700
-Message-ID: <CAMKF1sqa49UG0+Una67_ES6jE-ZphxcqcwHDur80mAcz6oZPUw@mail.gmail.com>
-To: Mingli Yu <mingli.yu@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] iozone3: Upgrade to 482
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7f7ac1a3-5dc2-45d9-015d-08d5e32b3053
+X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Jul 2018 10:28:17.5327 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR08MB0982
+Cc: Jeremy Johnson <Jeremy.Johnson@arm.com>
+Subject: Re: [PATCH] kernel-devicetree.bbclass: DTB make targets may contain path components
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,86 +83,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2018 15:02:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 06 Jul 2018 19:02:36 -0000
+Content-Language: en-GB
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 6, 2018 at 2:27 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
->
->
->
-> On 2018=E5=B9=B407=E6=9C=8806=E6=97=A5 00:00, Khem Raj wrote:
-> > On Wed, Jul 4, 2018 at 11:54 PM <mingli.yu@windriver.com> wrote:
-> >>
-> >> From: Mingli Yu <mingli.yu@windriver.com>
-> >>
-> >> Update LIC_FILES_CHKSUM as the file iozone.c
-> >> used for LIC_FILES_CHKSUM updated
-> >>
-> >
-> > Please describe what has changed that is causing the checksums to
-> > change.
->
-> The source file iozone.c changed has causing the checksum change. I have
-> already mention it in the commit message.
+normalize_dtb() turns DTS and DTB paths into values that can be used as
+make targets. These make targets sometimes contain some directory component=
+s
+so 'basename' is not suitable for turning the paths into make targets -
+we should only strip off leading directory components of the path up to
+and including the 'dts' directory (if it exists). For example:
+* 'overlays/at86rf233.dtbo' should not be changed.
+* 'some/directory/path/dts/overlays/at86rf233.dtbo' should be changed to
+  'overlays/at86rf233.dtbo' rather than just 'at86rf233.dtbo'
 
-Commit message does not say what changed,  We already know something
-has changed thats causing the checksum change but here we usually
-document what changed specifically, purpose is to let users know of
-any
-change in licensing requirements that they need to be aware of
+Signed-off-by: Jonathan Haigh <jonathan.haigh@arm.com>
+---
+ meta/classes/kernel-devicetree.bbclass | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
->
-> Thanks,
->
-> >
-> >> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> >> ---
-> >>   .../iozone3/{iozone3_465.bb =3D> iozone3_482.bb}              | 6 ++=
-+---
-> >>   1 file changed, 3 insertions(+), 3 deletions(-)
-> >>   rename meta-oe/recipes-benchmark/iozone3/{iozone3_465.bb =3D> iozone=
-3_482.bb} (95%)
-> >>
-> >> diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb b/meta-o=
-e/recipes-benchmark/iozone3/iozone3_482.bb
-> >> similarity index 95%
-> >> rename from meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-> >> rename to meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
-> >> index 191b93425..09306e044 100644
-> >> --- a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-> >> +++ b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
-> >> @@ -4,14 +4,14 @@ AUTHOR =3D "Don Capps <don.capps2@verizon.net>, Will=
-iam D. Norcott <wnorcott@us.or
-> >>   SECTION =3D "console/tests"
-> >>   LICENSE =3D "iozone3"
-> >>   LIC_FILES_CHKSUM =3D "file://iozone.c;beginline=3D37;endline=3D48;md=
-5=3D7331260091868dcad0f9edea735b5f4b \
-> >> -    file://iozone.c;beginline=3D260;endline=3D266;md5=3D77f9ee51e45b5=
-7a7e7519c4fa0b4f00b \
-> >> +    file://iozone.c;beginline=3D260;endline=3D266;md5=3D0aa488fd139ea=
-c078be6eca86e1435e8 \
-> >>   "
-> >>   SRC_URI =3D "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
-> >>       file://parallelism.patch \
-> >>       file://copyright.txt \
-> >>   "
-> >> -SRC_URI[md5sum] =3D "c924e5e46fb1cf8145f420e8e57eb954"
-> >> -SRC_URI[sha256sum] =3D "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41=
-d811368e55bd4e6a293"
-> >> +SRC_URI[md5sum] =3D "31ca1d3d28bc375c20a2808217cf212c"
-> >> +SRC_URI[sha256sum] =3D "2733feb63c96f77177c68f3d938f2294d5394d8554b27=
-67c45cbe138b2f3ae30"
-> >>
-> >>   UPSTREAM_CHECK_REGEX =3D "iozone3_(?P<pver>\d+).tar"
-> >>
-> >> --
-> >> 2.17.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+diff --git a/meta/classes/kernel-devicetree.bbclass b/meta/classes/kernel-d=
+evicetree.bbclass
+index 9866d84..0ffa8e9 100644
+--- a/meta/classes/kernel-devicetree.bbclass
++++ b/meta/classes/kernel-devicetree.bbclass
+@@ -12,9 +12,10 @@ KERNEL_DEVICETREE_BUNDLE ?=3D "0"
+ normalize_dtb () {
+         DTB=3D"$1"
+         if echo ${DTB} | grep -q '/dts/'; then
+-               bbwarn "${DTB} contains the full path to the the dts file, =
+but only the dtb name should be used."
++               bbwarn "${DTB} contains the full path to the the dts file, =
+but the path should be relative to the dts directory."
++               DTB=3D`echo "${DTB}" | sed 's,^.*/dts/,,'`
+         fi
+-       DTB=3D`basename ${DTB} | sed 's,\.dts$,.dtb,g'`
++       DTB=3D`echo "${DTB}" | sed 's,\.dts$,.dtb,g'`
+         echo "${DTB}"
+ }
+
+--
+2.7.4
+
+
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
 
