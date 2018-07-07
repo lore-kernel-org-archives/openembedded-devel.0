@@ -1,46 +1,101 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id AFFFF74813
+Return-Path: <akuster808@gmail.com>
+Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
+	[209.85.218.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 89AC475441
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jul 2018 21:27:40 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id 59-v6so8377496uas.5
+	Sat,  7 Jul 2018 01:11:00 +0000 (UTC)
+Received: by mail-oi0-f68.google.com with SMTP id i12-v6so26638632oik.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jul 2018 14:27:42 -0700 (PDT)
+	Fri, 06 Jul 2018 18:11:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=1mvF6gi9ce7k/rY34/sYjnKRTRr/9z8qXJ81PlJY8Wk=;
-	b=Ytxh4IbeoHO9upignUflGxuCGjlJa1N461lgquXCwO2JNlpAXVAkQ2E25ZP+L0ppIc
-	b9qdW6QioUUY+dcGEXrC2B22Nz2I+FqXYv8FRqKQbulyZrPhJpTCI2a18O8VZBhoPMTm
-	v217UssvPiudMSiYqihlPdqehwVdqlA5Hld5xCT2TAsb6RCB39oPmPqkTAYLjfLyt0+v
-	b9nO6y6IJcG1yng3HhKCitq2MB2fhXd0LHCIOfc43axnT29BYZ7r7xH2WQjQ8Yb4UaiR
-	xqzSyuJwUEdK+4/+yrJUY4rY3LP3hYyrYHeWXMlPiLPs48TH+N3Lw9rEFv4zKqO4b0YE
-	6YbQ==
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=e+i7ctiDwDjhEQohZIZwUqanOALSkreYrPl5yl8YRxw=;
+	b=NIEx18nQO8vndOeeeiBo9oXWdhOYmRXwPMuKt7Kxq2Jz+GNDO9t1YT7Usx8Y2rl2Mc
+	fCNcojHEBAYXUGve77icY01MzWpZ/jW5uK0s/mi0Su6GyqucDy/c2anGZ3RdFgV7QF+5
+	zVDjYKyG8Lvf7BOQNbr4DU94+6enIvORfq9v7d7DTK2z73cmKrRWI4fQmJv9hWDvjCNu
+	aek5S3NduEwfKit7NtMkPkPZ1bPhRYhcCsuUG0oUS1/0dWtZvh4B2na36+ISRSjY+FQv
+	Lb/7Cukvs5qyuzdL6adVJ5URfLWTRw21A304NvkUjbqjfMIBXm4TnmncfwkNBMhsBMbB
+	JCTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=1mvF6gi9ce7k/rY34/sYjnKRTRr/9z8qXJ81PlJY8Wk=;
-	b=M3tOMU/n7YuF8FL7uyvbDMI0hwoxJ5BHR17zBo2UH1pBU8hWbJ8X8fmPSDwOiyAflx
-	hnGEKu1ab6ph+3xWGMYYQPSWTpD7sKcSjzUy4UFCJqJvyZcAIWyi/0+5ZrOIzaPMXsTG
-	ml3KNDLQx917T9VFVKXHMQD6Z3f8tp+hVhZzjqIIDWIfyM+VMCsrytg1LXENCcNazo2u
-	OOxD4p6yNsYNCSHq0YC3Y5oaHgro/P6MGHxR9midJQbZqj/+bv+uxdTg+lY80B3r7bmO
-	ZLrQCch8oGqZD4TuxZ56vEXGNr50YG/gQvEEWXLZYuMQ7aBvmMW0g6/Hzd0CtODVPMq6
-	iv1Q==
-X-Gm-Message-State: APt69E2gohLd4QRUvhgqYhQZ3+awASFeXBtEISuWplNdlNQHRS07Q1WR
-	MfkzJg7gKdvO8pdcjztAs8bF/vgtbmSwMFS9W34=
-X-Google-Smtp-Source: AAOMgpccF1HAeVSHLQ9l03bTbaLqXhsCIlZsSVqLRj5zFgpbm6zkIBIeVYAiVSaulLFZro2sLXmOe6HN2tTmUruFvbU=
-X-Received: by 2002:ab0:5323:: with SMTP id
-	x32-v6mr7236282uax.139.1530912460961; 
-	Fri, 06 Jul 2018 14:27:40 -0700 (PDT)
-MIME-Version: 1.0
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=e+i7ctiDwDjhEQohZIZwUqanOALSkreYrPl5yl8YRxw=;
+	b=nd5icvwGb3ZoouxAcI9xu36OtDJ+VnMllz/2W68WG/Zpf52cQU4JNm1kd/vDK93AP0
+	XhkTxgc5KrKxaImMI3u2zyxX2kwGD06bLW2aB+AstrqLNg+OtNZmxgZWG6APDYB2neYi
+	cJPSN6Pql9++AeauK/TXKKXbUKJm8mffeT5/Y/AUblJ22s41O8KSmCW7NnbfPQmo89vK
+	L1bhHMXY3jwcbGO/GW5VhRQwJVy45/6E48oNx3VthTTHTZ7ldG0VmtOy2GBq/YKsDUKb
+	L1JvIUzV9kUI/ofGaWIeJcLxnHKU3mtu/TC10g4JTY0jCqbtsPoajIMWJVUXo/5c7Knd
+	k/Vw==
+X-Gm-Message-State: APt69E1SNIHyOzIJaAEYaPFQATGlglGQ3lACGgXTKnFoucdxeaBdtLn3
+	lgZyrZ79y0MaHBp1wqbGOp0+UA==
+X-Google-Smtp-Source: AAOMgpdzPUhGrlu3KH6v2UhzcV8jUAXa8obz65kDY5C2p3bCNjJUM7W8z2cniATaOyW5WnuY+q65oQ==
+X-Received: by 2002:aca:4ac6:: with SMTP id
+	x189-v6mr14219169oia.211.1530925860907; 
+	Fri, 06 Jul 2018 18:11:00 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:41a9:b69d:a923:c699?
+	([2601:202:4000:1184:41a9:b69d:a923:c699])
+	by smtp.gmail.com with ESMTPSA id
+	e1-v6sm11133887oiy.19.2018.07.06.18.10.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Jul 2018 18:10:59 -0700 (PDT)
+To: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>,
+	openembedded-devel@lists.openembedded.org
 References: <1530898405-20569-1-git-send-email-jkrishnanjanappa@mvista.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <c6e12a2d-318b-9a36-35a9-d1e2d4971632@gmail.com>
+Date: Fri, 6 Jul 2018 18:10:58 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
+MIME-Version: 1.0
 In-Reply-To: <1530898405-20569-1-git-send-email-jkrishnanjanappa@mvista.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Jul 2018 14:26:38 -0700
-Message-ID: <CAMKF1spXpocw-wt=v+w3=p53aoNWtc9=jGo=j+AhW0sDDGGfjw@mail.gmail.com>
-To: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-networking][PATCH][master][sumo] iscsitarget: Remove recipe as it is no longer supported to build with linux kernel >= 4.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -54,12 +109,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jul 2018 21:27:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 07 Jul 2018 01:11:00 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Fri, Jul 6, 2018 at 12:03 PM Jagadeesh Krishnanjanappa
-<jkrishnanjanappa@mvista.com> wrote:
->
+
+
+On 07/06/2018 10:33 AM, Jagadeesh Krishnanjanappa wrote:
 > The upstream iscsitarget source does not have support to build
 > with Linux kernel >= 4.14, as the "struct bio" members has been updated
 > in the linux kernel v4.14 source. Requires major code change in
@@ -68,15 +125,13 @@ On Fri, Jul 6, 2018 at 12:03 PM Jagadeesh Krishnanjanappa
 > The Linux SCSI target framework (tgt) recipe present in meta-openstack
 > layer, can be used as a substitute to iscsitarget recipe and works fine
 > in our testing.
+Why not port the tft to meta-openembeded then ?
+
+I wont remove blacklisted packages from a stable release. It will still
+work on kernels < 4.14  with is still in sumo core.
+
+- armin
 >
-
-I am generally fine with this patch, if someone has interest in this
-feature then  I would suggest to
-migrate the recipe from meta-openstack into meta-oe and we can
-maintain it here otherwise we
-can live without this recipe as well.
-
-
 > Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > ---
 >  ...vent-netlink_ack-now-requires-4-arguments.patch |  40 --
@@ -126,22 +181,22 @@ can live without this recipe as well.
 > -@@ -6,6 +6,7 @@
 > -  * Some functions are based on audit code.
 > -  */
-> -
+> - 
 > -+#include <linux/version.h>
 > - #include <linux/module.h>
 > - #include <net/tcp.h>
 > - #include "iet_u.h"
 > -@@ -29,7 +30,11 @@ static void event_recv_skb(struct sk_buf
-> -               ietd_pid = NETLINK_CB(skb).portid;
-> -               WARN_ON(ietd_pid == 0);
-> -               if (nlh->nlmsg_flags & NLM_F_ACK)
+> - 		ietd_pid = NETLINK_CB(skb).portid;
+> - 		WARN_ON(ietd_pid == 0);
+> - 		if (nlh->nlmsg_flags & NLM_F_ACK)
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
-> -+                      netlink_ack(skb, nlh, 0, NULL);
+> -+			netlink_ack(skb, nlh, 0, NULL);
 > -+#else
-> -                       netlink_ack(skb, nlh, 0);
+> - 			netlink_ack(skb, nlh, 0);
 > -+#endif
-> -               skb_pull(skb, rlen);
-> -       }
+> - 		skb_pull(skb, rlen);
+> - 	}
 > - }
 > diff --git a/meta-networking/recipes-extended/iscsitarget/files/access-sk_v6_daddr-iff-IPV6-defined.patch b/meta-networking/recipes-extended/iscsitarget/files/access-sk_v6_daddr-iff-IPV6-defined.patch
 > deleted file mode 100644
@@ -149,9 +204,9 @@ can live without this recipe as well.
 > --- a/meta-networking/recipes-extended/iscsitarget/files/access-sk_v6_daddr-iff-IPV6-defined.patch
 > +++ /dev/null
 > @@ -1,28 +0,0 @@
-> -The element skc_v6_daddr (in struct sock_common) is defined in
-> -kernel source only when CONFIG_IPV6 is enabled. Hence, access
-> -sk_v6_daddr element (i.e __sk_common.skc_v6_daddr) only when CONFIG_IPV6
+> -The element skc_v6_daddr (in struct sock_common) is defined in 
+> -kernel source only when CONFIG_IPV6 is enabled. Hence, access 
+> -sk_v6_daddr element (i.e __sk_common.skc_v6_daddr) only when CONFIG_IPV6 
 > -is defined; to fix below error in world build:
 > -
 > --- snip --
@@ -162,21 +217,21 @@ can live without this recipe as well.
 > -
 > -Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > -
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2015-12-29 21:57:50.547932217 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2015-12-29 22:47:25.254657627 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c	2015-12-29 21:57:50.547932217 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c	2015-12-29 22:47:25.254657627 -0800
 > -@@ -46,10 +46,12 @@ void conn_info_show(struct seq_file *seq
-> -                       snprintf(buf, sizeof(buf),
-> -                                "%pI4", &inet_sk(sk)->inet_daddr);
-> -                       break;
+> - 			snprintf(buf, sizeof(buf),
+> - 				 "%pI4", &inet_sk(sk)->inet_daddr);
+> - 			break;
 > -+#if defined(CONFIG_IPV6)
-> -               case AF_INET6:
-> -                       snprintf(buf, sizeof(buf), "[%pI6]",
-> -                                &(sk)->sk_v6_daddr);
-> -                       break;
+> - 		case AF_INET6:
+> - 			snprintf(buf, sizeof(buf), "[%pI6]",
+> - 				 &(sk)->sk_v6_daddr);
+> - 			break;
 > -+#endif /* defined(CONFIG_IPV6) */
-> -               default:
-> -                       break;
-> -               }
+> - 		default:
+> - 			break;
+> - 		}
 > diff --git a/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_bio_struct_of_linux_v4.3_and_above.patch b/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_bio_struct_of_linux_v4.3_and_above.patch
 > deleted file mode 100644
 > index bce38ba..0000000
@@ -196,7 +251,7 @@ can live without this recipe as well.
 > -Author: Stefan Bader <stefan.bader@canonical.com>
 > -
 > -The original patch is at http://launchpadlibrarian.net/227478885/iscsitarget_1.4.20.3+svn502-2ubuntu2_1.4.20.3+svn502-2ubuntu3.diff.gz,
-> -those changes were taken using #ifs to allow compilation of iscsitarget
+> -those changes were taken using #ifs to allow compilation of iscsitarget 
 > -package with kernel versions < 4.3.
 > -
 > -Upstream-Status: Submitted [http://launchpadlibrarian.net/227478885/iscsitarget_1.4.20.3+svn502-2ubuntu2_1.4.20.3+svn502-2ubuntu3.diff.gz]
@@ -204,93 +259,93 @@ can live without this recipe as well.
 > -Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > -
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c iscsitarget-1.4.20.3+svn502/kernel/block-io.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c  2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c      2017-01-19 00:46:28.263951115 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c	2017-01-19 00:46:28.263951115 -0800
 > -@@ -29,14 +29,23 @@ struct tio_work {
-> -       struct completion tio_complete;
+> - 	struct completion tio_complete;
 > - };
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
 > -+static void blockio_bio_endio(struct bio *bio)
 > -+#else
 > - static void blockio_bio_endio(struct bio *bio, int error)
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
 > - {
-> -       struct tio_work *tio_work = bio->bi_private;
-> -
+> - 	struct tio_work *tio_work = bio->bi_private;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+      if (bio->bi_error)
-> -+              atomic_set(&tio_work->error, bio->bi_error);
+> -+	if (bio->bi_error)
+> -+		atomic_set(&tio_work->error, bio->bi_error);
 > -+#else
-> -       error = test_bit(BIO_UPTODATE, &bio->bi_flags) ? error : -EIO;
-> -
-> -       if (error)
-> -               atomic_set(&tio_work->error, error);
+> - 	error = test_bit(BIO_UPTODATE, &bio->bi_flags) ? error : -EIO;
+> - 
+> - 	if (error)
+> - 		atomic_set(&tio_work->error, error);
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
-> -
-> -       /* If last bio signal completion */
-> -       if (atomic_dec_and_test(&tio_work->bios_remaining))
+> - 
+> - 	/* If last bio signal completion */
+> - 	if (atomic_dec_and_test(&tio_work->bios_remaining))
 > -@@ -61,14 +70,20 @@ blockio_make_request(struct iet_volume *
-> -       u32 size = tio->size;
-> -       u32 tio_index = 0;
-> -
+> - 	u32 size = tio->size;
+> - 	u32 tio_index = 0;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+      int max_pages = bdev_q ? BIO_MAX_PAGES : 1;
+> -+	int max_pages = bdev_q ? BIO_MAX_PAGES : 1;
 > -+#else
-> -       int max_pages = 1;
+> - 	int max_pages = 1;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
-> -       int err = 0;
-> -
-> -       loff_t ppos = tio->offset;
-> -
+> - 	int err = 0;
+> - 
+> - 	loff_t ppos = tio->offset;
+> - 
 > -+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 3, 0)
-> -       /* Calculate max_pages for bio_alloc (memory saver) */
-> -       if (bdev_q)
-> -               max_pages = bio_get_nr_vecs(bio_data->bdev);
+> - 	/* Calculate max_pages for bio_alloc (memory saver) */
+> - 	if (bdev_q)
+> - 		max_pages = bio_get_nr_vecs(bio_data->bdev);
 > -+#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(4, 3, 0) */
-> -
-> -       tio_work = kzalloc(sizeof (*tio_work), GFP_KERNEL);
-> -       if (!tio_work)
+> - 
+> - 	tio_work = kzalloc(sizeof (*tio_work), GFP_KERNEL);
+> - 	if (!tio_work)
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c iscsitarget-1.4.20.3+svn502/kernel/conn.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2017-01-19 00:39:09.737117778 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2017-01-19 00:52:30.037223901 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c	2017-01-19 00:39:09.737117778 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c	2017-01-19 00:52:30.037223901 -0800
 > -@@ -89,13 +89,21 @@ static void iet_state_change(struct sock
-> -       target->nthread_info.old_state_change(sk);
+> - 	target->nthread_info.old_state_change(sk);
 > - }
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
 > -+static void iet_data_ready(struct sock *sk)
 > -+#else
 > - static void iet_data_ready(struct sock *sk, int len)
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
 > - {
-> -       struct iscsi_conn *conn = sk->sk_user_data;
-> -       struct iscsi_target *target = conn->session->target;
-> -
-> -       nthread_wakeup(target);
+> - 	struct iscsi_conn *conn = sk->sk_user_data;
+> - 	struct iscsi_target *target = conn->session->target;
+> - 
+> - 	nthread_wakeup(target);
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+      target->nthread_info.old_data_ready(sk);
+> -+	target->nthread_info.old_data_ready(sk);
 > -+#else
-> -       target->nthread_info.old_data_ready(sk, len);
+> - 	target->nthread_info.old_data_ready(sk, len);
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
 > - }
-> -
+> - 
 > - /*
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h iscsitarget-1.4.20.3+svn502/kernel/iscsi.h
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h     2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h 2017-01-19 00:48:02.102837260 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h	2017-01-19 00:48:02.102837260 -0800
 > -@@ -81,7 +81,11 @@ struct network_thread_info {
-> -       spinlock_t nthread_lock;
-> -
-> -       void (*old_state_change)(struct sock *);
+> - 	spinlock_t nthread_lock;
+> - 
+> - 	void (*old_state_change)(struct sock *);
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+      void (*old_data_ready)(struct sock *);
+> -+	void (*old_data_ready)(struct sock *);
 > -+#else
-> -       void (*old_data_ready)(struct sock *, int);
+> - 	void (*old_data_ready)(struct sock *, int);
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0) */
-> -       void (*old_write_space)(struct sock *);
+> - 	void (*old_write_space)(struct sock *);
 > - };
-> -
+> - 
 > diff --git a/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_interfaces_of_linux_v4.8_and_above.patch b/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_interfaces_of_linux_v4.8_and_above.patch
 > deleted file mode 100644
 > index e508a5e..0000000
@@ -389,254 +444,254 @@ can live without this recipe as well.
 > -Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > -
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c iscsitarget-1.4.20.3+svn502/kernel/block-io.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c  2017-01-19 20:19:27.400507354 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c      2017-01-19 20:32:22.977988593 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c	2017-01-19 20:19:27.400507354 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c	2017-01-19 20:32:22.977988593 -0800
 > -@@ -104,7 +104,11 @@ blockio_make_request(struct iet_volume *
-> -               /* bi_sector is ALWAYS in units of 512 bytes */
-> -               bio->bi_iter.bi_sector = ppos >> 9;
-> -               bio->bi_bdev = bio_data->bdev;
+> - 		/* bi_sector is ALWAYS in units of 512 bytes */
+> - 		bio->bi_iter.bi_sector = ppos >> 9;
+> - 		bio->bi_bdev = bio_data->bdev;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+              bio->bi_end_io = (bio_end_io_t *) blockio_bio_endio;
+> -+		bio->bi_end_io = (bio_end_io_t *) blockio_bio_endio;
 > -+#else
-> -               bio->bi_end_io = blockio_bio_endio;
+> - 		bio->bi_end_io = blockio_bio_endio;
 > -+#endif
-> -               bio->bi_private = tio_work;
-> -
-> -               if (tio_bio)
+> - 		bio->bi_private = tio_work;
+> - 
+> - 		if (tio_bio)
 > -@@ -139,7 +143,12 @@ blockio_make_request(struct iet_volume *
-> -               tio_bio = tio_bio->bi_next;
-> -               bio->bi_next = NULL;
-> -
+> - 		tio_bio = tio_bio->bi_next;
+> - 		bio->bi_next = NULL;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+              bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
-> -+              submit_bio(bio);
+> -+		bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
+> -+		submit_bio(bio);
 > -+#else
-> -               submit_bio(rw, bio);
+> - 		submit_bio(rw, bio);
 > -+#endif
-> -       }
-> -
-> -       blk_finish_plug(&plug);
+> - 	}
+> - 
+> - 	blk_finish_plug(&plug);
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c iscsitarget-1.4.20.3+svn502/kernel/conn.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2017-01-19 20:19:27.400507354 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2017-01-19 20:32:22.978988614 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c	2017-01-19 20:19:27.400507354 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c	2017-01-19 20:32:22.978988614 -0800
 > -@@ -148,8 +148,14 @@ static void iet_socket_bind(struct iscsi
-> -       target->nthread_info.old_state_change = conn->sock->sk->sk_state_change;
-> -       conn->sock->sk->sk_state_change = iet_state_change;
-> -
+> - 	target->nthread_info.old_state_change = conn->sock->sk->sk_state_change;
+> - 	conn->sock->sk->sk_state_change = iet_state_change;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      target->nthread_info.old_data_ready = (void (*) (struct sock *)) \
-> -+                                              conn->sock->sk->sk_data_ready;
-> -+      conn->sock->sk->sk_data_ready = (void (*) (struct sock *)) iet_data_ready;
+> -+	target->nthread_info.old_data_ready = (void (*) (struct sock *)) \
+> -+						conn->sock->sk->sk_data_ready;
+> -+	conn->sock->sk->sk_data_ready = (void (*) (struct sock *)) iet_data_ready;
 > -+#else
-> -       target->nthread_info.old_data_ready = conn->sock->sk->sk_data_ready;
-> -       conn->sock->sk->sk_data_ready = iet_data_ready;
+> - 	target->nthread_info.old_data_ready = conn->sock->sk->sk_data_ready;
+> - 	conn->sock->sk->sk_data_ready = iet_data_ready;
 > -+#endif
-> -
-> -       target->nthread_info.old_write_space = conn->sock->sk->sk_write_space;
-> -       conn->sock->sk->sk_write_space = iet_write_space;
+> - 
+> - 	target->nthread_info.old_write_space = conn->sock->sk->sk_write_space;
+> - 	conn->sock->sk->sk_write_space = iet_write_space;
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/digest.c iscsitarget-1.4.20.3+svn502/kernel/digest.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/digest.c    2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/digest.c        2017-01-19 20:32:22.978988614 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/digest.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/digest.c	2017-01-19 20:32:22.978988614 -0800
 > -@@ -30,6 +30,9 @@ void digest_alg_available(unsigned int *
 > - int digest_init(struct iscsi_conn *conn)
 > - {
-> -       int err = 0;
+> - 	int err = 0;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      struct crypto_ahash *tfm;
+> -+	struct crypto_ahash *tfm;
 > -+#endif
-> -
-> -       if (!(conn->hdigest_type & DIGEST_ALL))
-> -               conn->hdigest_type = DIGEST_NONE;
+> - 
+> - 	if (!(conn->hdigest_type & DIGEST_ALL))
+> - 		conn->hdigest_type = DIGEST_NONE;
 > -@@ -39,15 +42,40 @@ int digest_init(struct iscsi_conn *conn)
-> -
-> -       if (conn->hdigest_type & DIGEST_CRC32C ||
-> -           conn->ddigest_type & DIGEST_CRC32C) {
+> - 
+> - 	if (conn->hdigest_type & DIGEST_CRC32C ||
+> - 	    conn->ddigest_type & DIGEST_CRC32C) {
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+              tfm = crypto_alloc_ahash("crc32c", 0, CRYPTO_ALG_ASYNC);
-> -+              if (IS_ERR(tfm)) {
-> -+                      tfm = NULL;
+> -+		tfm = crypto_alloc_ahash("crc32c", 0, CRYPTO_ALG_ASYNC);
+> -+		if (IS_ERR(tfm)) {
+> -+			tfm = NULL;
 > -+#else
-> -               conn->rx_hash.tfm = crypto_alloc_hash("crc32c", 0,
-> -                                                     CRYPTO_ALG_ASYNC);
-> -               conn->rx_hash.flags = 0;
-> -               if (IS_ERR(conn->rx_hash.tfm)) {
-> -                       conn->rx_hash.tfm = NULL;
+> - 		conn->rx_hash.tfm = crypto_alloc_hash("crc32c", 0,
+> - 						      CRYPTO_ALG_ASYNC);
+> - 		conn->rx_hash.flags = 0;
+> - 		if (IS_ERR(conn->rx_hash.tfm)) {
+> - 			conn->rx_hash.tfm = NULL;
 > -+#endif
-> -                       err = -ENOMEM;
-> -                       goto out;
-> -               }
+> - 			err = -ENOMEM;
+> - 			goto out;
+> - 		}
 > --
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+              conn->rx_hash = ahash_request_alloc(tfm, GFP_KERNEL);
-> -+              if (!conn->rx_hash) {
-> -+                      pr_err("ahash_request_alloc() failed for conn->rx_hash\n");
-> -+                      crypto_free_ahash(tfm);
-> -+                      err = -ENOMEM;
-> -+                      goto out;
-> -+              }
-> -+              ahash_request_set_callback(conn->rx_hash, 0, NULL, NULL);
-> -+              conn->tx_hash = ahash_request_alloc(tfm, GFP_KERNEL);
-> -+              if(!conn->tx_hash) {
-> -+                      pr_err("ahash_request_alloc() failed for conn->tx_hash\n");
-> -+                      ahash_request_free(conn->rx_hash);
-> -+                      conn->rx_hash = NULL;
-> -+                      crypto_free_ahash(tfm);
-> -+                      err = -ENOMEM;
-> -+                      goto out;
-> -+              }
-> -+              ahash_request_set_callback(conn->tx_hash, 0, NULL, NULL);
+> -+		conn->rx_hash = ahash_request_alloc(tfm, GFP_KERNEL);
+> -+		if (!conn->rx_hash) {
+> -+			pr_err("ahash_request_alloc() failed for conn->rx_hash\n");
+> -+			crypto_free_ahash(tfm);
+> -+			err = -ENOMEM;
+> -+			goto out;
+> -+		}
+> -+		ahash_request_set_callback(conn->rx_hash, 0, NULL, NULL);
+> -+		conn->tx_hash = ahash_request_alloc(tfm, GFP_KERNEL);
+> -+		if(!conn->tx_hash) {
+> -+			pr_err("ahash_request_alloc() failed for conn->tx_hash\n");
+> -+			ahash_request_free(conn->rx_hash);
+> -+			conn->rx_hash = NULL;
+> -+			crypto_free_ahash(tfm);
+> -+			err = -ENOMEM;
+> -+			goto out;
+> -+		}
+> -+		ahash_request_set_callback(conn->tx_hash, 0, NULL, NULL);
 > -+#else
-> -               conn->tx_hash.tfm = crypto_alloc_hash("crc32c", 0,
-> -                                                     CRYPTO_ALG_ASYNC);
-> -               conn->tx_hash.flags = 0;
+> - 		conn->tx_hash.tfm = crypto_alloc_hash("crc32c", 0,
+> - 						      CRYPTO_ALG_ASYNC);
+> - 		conn->tx_hash.flags = 0;
 > -@@ -56,6 +84,7 @@ int digest_init(struct iscsi_conn *conn)
-> -                       err = -ENOMEM;
-> -                       goto out;
-> -               }
+> - 			err = -ENOMEM;
+> - 			goto out;
+> - 		}
 > -+#endif
-> -       }
-> -
+> - 	}
+> - 
 > - out:
 > -@@ -73,10 +102,21 @@ out:
 > -  */
 > - void digest_cleanup(struct iscsi_conn *conn)
 > - {
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      ahash_request_free(conn->tx_hash);
-> -+      if (conn->rx_hash) {
-> -+              struct crypto_ahash *tfm;
-> -+              tfm = crypto_ahash_reqtfm(conn->rx_hash);
-> -+              ahash_request_free(conn->rx_hash);
-> -+              crypto_free_ahash(tfm);
-> -+      }
+> -+	ahash_request_free(conn->tx_hash);
+> -+	if (conn->rx_hash) {
+> -+		struct crypto_ahash *tfm;
+> -+		tfm = crypto_ahash_reqtfm(conn->rx_hash);
+> -+		ahash_request_free(conn->rx_hash);
+> -+		crypto_free_ahash(tfm);
+> -+	}
 > -+
 > -+#else
-> -       if (conn->tx_hash.tfm)
-> -               crypto_free_hash(conn->tx_hash.tfm);
-> -       if (conn->rx_hash.tfm)
-> -               crypto_free_hash(conn->rx_hash.tfm);
+> - 	if (conn->tx_hash.tfm)
+> - 		crypto_free_hash(conn->tx_hash.tfm);
+> - 	if (conn->rx_hash.tfm)
+> - 		crypto_free_hash(conn->rx_hash.tfm);
 > -+#endif
 > - }
-> -
+> - 
 > - /**
 > -@@ -160,8 +200,13 @@ static inline void __dbg_simulate_data_d
-> -       }
+> - 	}
 > - }
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
 > -+static void digest_header(struct ahash_request *hash, struct iscsi_pdu *pdu,
-> -+                        u8 *crc)
+> -+			  u8 *crc)
 > -+#else
 > - static void digest_header(struct hash_desc *hash, struct iscsi_pdu *pdu,
-> -                         u8 *crc)
+> - 			  u8 *crc)
 > -+#endif
 > - {
-> -       struct scatterlist sg[2];
-> -       unsigned int nbytes = sizeof(struct iscsi_hdr);
+> - 	struct scatterlist sg[2];
+> - 	unsigned int nbytes = sizeof(struct iscsi_hdr);
 > -@@ -174,16 +219,27 @@ static void digest_header(struct hash_de
-> -               nbytes += pdu->ahssize;
-> -       }
-> -
+> - 		nbytes += pdu->ahssize;
+> - 	}
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      crypto_ahash_init(hash);
-> -+      ahash_request_set_crypt(hash, sg, crc, nbytes);
-> -+      crypto_ahash_update(hash);
-> -+      crypto_ahash_digest(hash);
+> -+	crypto_ahash_init(hash);
+> -+	ahash_request_set_crypt(hash, sg, crc, nbytes);
+> -+	crypto_ahash_update(hash);
+> -+	crypto_ahash_digest(hash);
 > -+#else
-> -       crypto_hash_init(hash);
-> -       crypto_hash_update(hash, sg, nbytes);
-> -       crypto_hash_final(hash, crc);
+> - 	crypto_hash_init(hash);
+> - 	crypto_hash_update(hash, sg, nbytes);
+> - 	crypto_hash_final(hash, crc);
 > -+#endif
 > - }
-> -
+> - 
 > - int digest_rx_header(struct iscsi_cmnd *cmnd)
 > - {
-> -       u32 crc;
-> -
+> - 	u32 crc;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      digest_header(cmnd->conn->rx_hash, &cmnd->pdu, (u8 *) &crc);
+> -+	digest_header(cmnd->conn->rx_hash, &cmnd->pdu, (u8 *) &crc);
 > -+#else
-> -       digest_header(&cmnd->conn->rx_hash, &cmnd->pdu, (u8 *) &crc);
+> - 	digest_header(&cmnd->conn->rx_hash, &cmnd->pdu, (u8 *) &crc);
 > -+#endif
-> -       if (crc != cmnd->hdigest)
-> -               return -EIO;
-> -
+> - 	if (crc != cmnd->hdigest)
+> - 		return -EIO;
+> - 
 > -@@ -192,11 +248,20 @@ int digest_rx_header(struct iscsi_cmnd *
-> -
+> - 
 > - void digest_tx_header(struct iscsi_cmnd *cmnd)
 > - {
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      digest_header(cmnd->conn->tx_hash, &cmnd->pdu, (u8 *) &cmnd->hdigest);
+> -+	digest_header(cmnd->conn->tx_hash, &cmnd->pdu, (u8 *) &cmnd->hdigest);
 > -+#else
-> -       digest_header(&cmnd->conn->tx_hash, &cmnd->pdu, (u8 *) &cmnd->hdigest);
+> - 	digest_header(&cmnd->conn->tx_hash, &cmnd->pdu, (u8 *) &cmnd->hdigest);
 > -+#endif
 > - }
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
 > -+static void digest_data(struct ahash_request *hash, struct iscsi_cmnd *cmnd,
-> -+                      struct tio *tio, u32 offset, u8 *crc)
+> -+			struct tio *tio, u32 offset, u8 *crc)
 > -+#else
 > - static void digest_data(struct hash_desc *hash, struct iscsi_cmnd *cmnd,
-> -                       struct tio *tio, u32 offset, u8 *crc)
+> - 			struct tio *tio, u32 offset, u8 *crc)
 > -+#endif
 > - {
-> -       struct scatterlist *sg = cmnd->conn->hash_sg;
-> -       u32 size, length, npages;
+> - 	struct scatterlist *sg = cmnd->conn->hash_sg;
+> - 	u32 size, length, npages;
 > -@@ -214,7 +279,11 @@ static void digest_data(struct hash_desc
-> -       BUG_ON(npages > ISCSI_CONN_IOV_MAX);
-> -
-> -       sg_init_table(sg, ARRAY_SIZE(cmnd->conn->hash_sg));
+> - 	BUG_ON(npages > ISCSI_CONN_IOV_MAX);
+> - 
+> - 	sg_init_table(sg, ARRAY_SIZE(cmnd->conn->hash_sg));
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      crypto_ahash_init(hash);
+> -+	crypto_ahash_init(hash);
 > -+#else
-> -       crypto_hash_init(hash);
+> - 	crypto_hash_init(hash);
 > -+#endif
-> -
-> -       for (i = 0; size > 0; i++) {
-> -               length = min_t(u32, PAGE_CACHE_SIZE - offset, size);
+> - 
+> - 	for (i = 0; size > 0; i++) {
+> - 		length = min_t(u32, PAGE_CACHE_SIZE - offset, size);
 > -@@ -225,8 +294,14 @@ static void digest_data(struct hash_desc
-> -
-> -       sg_mark_end(&sg[i - 1]);
-> -
+> - 
+> - 	sg_mark_end(&sg[i - 1]);
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      ahash_request_set_crypt(hash, sg, crc, nbytes);
-> -+      crypto_ahash_update(hash);
-> -+      crypto_ahash_digest(hash);
+> -+	ahash_request_set_crypt(hash, sg, crc, nbytes);
+> -+	crypto_ahash_update(hash);
+> -+	crypto_ahash_digest(hash);
 > -+#else
-> -       crypto_hash_update(hash, sg, nbytes);
-> -       crypto_hash_final(hash, crc);
+> - 	crypto_hash_update(hash, sg, nbytes);
+> - 	crypto_hash_final(hash, crc);
 > -+#endif
 > - }
-> -
+> - 
 > - int digest_rx_data(struct iscsi_cmnd *cmnd)
 > -@@ -251,8 +326,11 @@ int digest_rx_data(struct iscsi_cmnd *cm
-> -               tio = cmnd->tio;
-> -               offset = 0;
-> -       }
+> - 		tio = cmnd->tio;
+> - 		offset = 0;
+> - 	}
 > --
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      digest_data(cmnd->conn->rx_hash, cmnd, tio, offset, (u8 *) &crc);
+> -+	digest_data(cmnd->conn->rx_hash, cmnd, tio, offset, (u8 *) &crc);
 > -+#else
-> -       digest_data(&cmnd->conn->rx_hash, cmnd, tio, offset, (u8 *) &crc);
+> - 	digest_data(&cmnd->conn->rx_hash, cmnd, tio, offset, (u8 *) &crc);
 > -+#endif
-> -
-> -       if (!cmnd->conn->read_overflow &&
-> -           (cmnd_opcode(cmnd) != ISCSI_OP_PDU_REJECT)) {
+> - 
+> - 	if (!cmnd->conn->read_overflow &&
+> - 	    (cmnd_opcode(cmnd) != ISCSI_OP_PDU_REJECT)) {
 > -@@ -269,6 +347,11 @@ void digest_tx_data(struct iscsi_cmnd *c
-> -       struct iscsi_data_out_hdr *req = (struct iscsi_data_out_hdr *)&cmnd->pdu.bhs;
-> -
-> -       assert(tio);
+> - 	struct iscsi_data_out_hdr *req = (struct iscsi_data_out_hdr *)&cmnd->pdu.bhs;
+> - 
+> - 	assert(tio);
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      digest_data(cmnd->conn->tx_hash, cmnd, tio,
-> -+                  be32_to_cpu(req->buffer_offset), (u8 *) &cmnd->ddigest);
+> -+	digest_data(cmnd->conn->tx_hash, cmnd, tio,
+> -+		    be32_to_cpu(req->buffer_offset), (u8 *) &cmnd->ddigest);
 > -+#else
-> -       digest_data(&cmnd->conn->tx_hash, cmnd, tio,
-> -                   be32_to_cpu(req->buffer_offset), (u8 *) &cmnd->ddigest);
+> - 	digest_data(&cmnd->conn->tx_hash, cmnd, tio,
+> - 		    be32_to_cpu(req->buffer_offset), (u8 *) &cmnd->ddigest);
 > -+#endif
 > - }
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h iscsitarget-1.4.20.3+svn502/kernel/iscsi.h
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h     2017-01-19 20:19:27.400507354 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h 2017-01-19 20:32:22.979988634 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h	2017-01-19 20:19:27.400507354 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h	2017-01-19 20:32:22.979988634 -0800
 > -@@ -14,6 +14,7 @@
 > - #include <linux/pagemap.h>
 > - #include <linux/seq_file.h>
@@ -646,132 +701,132 @@ can live without this recipe as well.
 > - #include <linux/scatterlist.h>
 > - #include <net/sock.h>
 > -@@ -275,8 +276,13 @@ struct iscsi_conn {
-> -       u32 write_offset;
-> -       int write_state;
-> -
+> - 	u32 write_offset;
+> - 	int write_state;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      struct ahash_request *rx_hash;
-> -+      struct ahash_request *tx_hash;
+> -+	struct ahash_request *rx_hash;
+> -+	struct ahash_request *tx_hash;
 > -+#else
-> -       struct hash_desc rx_hash;
-> -       struct hash_desc tx_hash;
+> - 	struct hash_desc rx_hash;
+> - 	struct hash_desc tx_hash;
 > -+#endif
-> -       struct scatterlist hash_sg[ISCSI_CONN_IOV_MAX];
+> - 	struct scatterlist hash_sg[ISCSI_CONN_IOV_MAX];
 > - };
-> -
+> - 
 > -@@ -552,4 +558,10 @@ enum cmnd_flags {
-> - #define PRODUCT_ID    "VIRTUAL-DISK"
-> - #define PRODUCT_REV   "0"
-> -
+> - #define PRODUCT_ID	"VIRTUAL-DISK"
+> - #define PRODUCT_REV	"0"
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+#define PAGE_CACHE_SHIFT      PAGE_SHIFT
-> -+#define PAGE_CACHE_SIZE       PAGE_SIZE
-> -+#define PAGE_CACHE_MASK       PAGE_MASK
+> -+#define PAGE_CACHE_SHIFT	PAGE_SHIFT
+> -+#define PAGE_CACHE_SIZE	PAGE_SIZE
+> -+#define PAGE_CACHE_MASK	PAGE_MASK
 > -+#endif
 > -+
-> - #endif        /* __ISCSI_H__ */
+> - #endif	/* __ISCSI_H__ */
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c iscsitarget-1.4.20.3+svn502/kernel/nthread.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c   2017-01-19 20:19:27.276504928 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c       2017-01-19 20:32:22.979988634 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c	2017-01-19 20:19:27.276504928 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c	2017-01-19 20:32:22.979988634 -0800
 > -@@ -155,7 +155,12 @@ static int do_recv(struct iscsi_conn *co
-> -
-> -       oldfs = get_fs();
-> -       set_fs(get_ds());
+> - 
+> - 	oldfs = get_fs();
+> - 	set_fs(get_ds());
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      res = sock_recvmsg(conn->sock, (struct msghdr *) &msg, \
-> -+                              MSG_DONTWAIT | MSG_NOSIGNAL);
+> -+	res = sock_recvmsg(conn->sock, (struct msghdr *) &msg, \
+> -+				MSG_DONTWAIT | MSG_NOSIGNAL);
 > -+#else
-> -       res = sock_recvmsg(conn->sock, &msg, len, MSG_DONTWAIT | MSG_NOSIGNAL);
+> - 	res = sock_recvmsg(conn->sock, &msg, len, MSG_DONTWAIT | MSG_NOSIGNAL);
 > -+#endif
-> -       set_fs(oldfs);
-> -
-> -       if (res <= 0) {
+> - 	set_fs(oldfs);
+> - 
+> - 	if (res <= 0) {
 > -@@ -376,7 +381,11 @@ static int write_data(struct iscsi_conn
-> -                       ;
-> -               oldfs = get_fs();
-> -               set_fs(KERNEL_DS);
+> - 			;
+> - 		oldfs = get_fs();
+> - 		set_fs(KERNEL_DS);
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+              res = vfs_writev(file, (struct iovec __user *) iop, count, &off, 0);
+> -+		res = vfs_writev(file, (struct iovec __user *) iop, count, &off, 0);
 > -+#else
-> -               res = vfs_writev(file, (struct iovec __user *) iop, count, &off);
+> - 		res = vfs_writev(file, (struct iovec __user *) iop, count, &off);
 > -+#endif
-> -               set_fs(oldfs);
-> -               dprintk(D_DATA, "%#Lx:%u: %d(%ld)\n",
-> -                       (unsigned long long) conn->session->sid, conn->cid,
+> - 		set_fs(oldfs);
+> - 		dprintk(D_DATA, "%#Lx:%u: %d(%ld)\n",
+> - 			(unsigned long long) conn->session->sid, conn->cid,
 > -@@ -503,7 +512,11 @@ static int tx_ddigest(struct iscsi_cmnd
-> -       iov.iov_base = (char *) (&cmnd->ddigest) + (sizeof(u32) - rest);
-> -       iov.iov_len = rest;
-> -
+> - 	iov.iov_base = (char *) (&cmnd->ddigest) + (sizeof(u32) - rest);
+> - 	iov.iov_len = rest;
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      res = kernel_sendmsg(cmnd->conn->sock, (struct msghdr *) &msg, &iov, 1, rest);
+> -+	res = kernel_sendmsg(cmnd->conn->sock, (struct msghdr *) &msg, &iov, 1, rest);
 > -+#else
-> -       res = kernel_sendmsg(cmnd->conn->sock, &msg, &iov, 1, rest);
+> - 	res = kernel_sendmsg(cmnd->conn->sock, &msg, &iov, 1, rest);
 > -+#endif
-> -
-> -       if (res > 0) {
-> -               cmnd->conn->write_size -= res;
+> - 
+> - 	if (res > 0) {
+> - 		cmnd->conn->write_size -= res;
 > -@@ -702,7 +715,12 @@ static void close_conn(struct iscsi_conn
-> -
-> -       write_lock_bh(&conn->sock->sk->sk_callback_lock);
-> -       conn->sock->sk->sk_state_change = target->nthread_info.old_state_change;
+> - 
+> - 	write_lock_bh(&conn->sock->sk->sk_callback_lock);
+> - 	conn->sock->sk->sk_state_change = target->nthread_info.old_state_change;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      conn->sock->sk->sk_data_ready = (void (*) (struct sock *)) \
-> -+                                      target->nthread_info.old_data_ready;
+> -+	conn->sock->sk->sk_data_ready = (void (*) (struct sock *)) \
+> -+					target->nthread_info.old_data_ready;
 > -+#else
-> -       conn->sock->sk->sk_data_ready = target->nthread_info.old_data_ready;
+> - 	conn->sock->sk->sk_data_ready = target->nthread_info.old_data_ready;
 > -+#endif
-> -       conn->sock->sk->sk_write_space = target->nthread_info.old_write_space;
-> -       write_unlock_bh(&conn->sock->sk->sk_callback_lock);
-> -
+> - 	conn->sock->sk->sk_write_space = target->nthread_info.old_write_space;
+> - 	write_unlock_bh(&conn->sock->sk->sk_callback_lock);
+> - 
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/volume.c iscsitarget-1.4.20.3+svn502/kernel/volume.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c    2017-01-19 20:19:27.276504928 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2017-01-19 20:32:22.979988634 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c	2017-01-19 20:19:27.276504928 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c	2017-01-19 20:32:22.979988634 -0800
 > -@@ -84,12 +84,25 @@ static int set_scsisn(struct iet_volume
 > - /* Generate a MD5 hash of the target IQN and LUN number */
 > - static void gen_scsiid(struct iet_volume *volume)
 > - {
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      struct ahash_request *hash;
-> -+      struct crypto_ahash *tfm;
+> -+	struct ahash_request *hash;
+> -+	struct crypto_ahash *tfm;
 > -+#else
-> -       struct hash_desc hash;
+> - 	struct hash_desc hash;
 > -+#endif
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      tfm = crypto_alloc_ahash("md5", 0, CRYPTO_ALG_ASYNC);
+> -+	tfm = crypto_alloc_ahash("md5", 0, CRYPTO_ALG_ASYNC);
 > -+#else
-> -       hash.tfm = crypto_alloc_hash("md5", 0, CRYPTO_ALG_ASYNC);
-> -       hash.flags = 0;
+> - 	hash.tfm = crypto_alloc_hash("md5", 0, CRYPTO_ALG_ASYNC);
+> - 	hash.flags = 0;
 > -+#endif
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      if (!IS_ERR(tfm)) {
+> -+	if (!IS_ERR(tfm)) {
 > -+#else
-> -       if (!IS_ERR(hash.tfm)) {
+> - 	if (!IS_ERR(hash.tfm)) {
 > -+#endif
-> -               struct scatterlist sg[2];
-> -               unsigned int nbytes = 0;
-> -
+> - 		struct scatterlist sg[2];
+> - 		unsigned int nbytes = 0;
+> - 
 > -@@ -102,11 +115,19 @@ static void gen_scsiid(struct iet_volume
-> -               sg_set_buf(&sg[1], &volume->lun, sizeof(volume->lun));
-> -               nbytes += sizeof(volume->lun);
-> -
+> - 		sg_set_buf(&sg[1], &volume->lun, sizeof(volume->lun));
+> - 		nbytes += sizeof(volume->lun);
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+              crypto_ahash_init(hash);
-> -+              ahash_request_set_crypt(hash, sg, volume->scsi_id, nbytes);
-> -+              crypto_ahash_update(hash);
-> -+              crypto_ahash_digest(hash);
-> -+              crypto_free_ahash(tfm);
+> -+		crypto_ahash_init(hash);
+> -+		ahash_request_set_crypt(hash, sg, volume->scsi_id, nbytes);
+> -+		crypto_ahash_update(hash);
+> -+		crypto_ahash_digest(hash);
+> -+		crypto_free_ahash(tfm);
 > -+#else
-> -               crypto_hash_init(&hash);
-> -               crypto_hash_update(&hash, sg, nbytes);
-> -               crypto_hash_final(&hash, volume->scsi_id);
-> -
-> -               crypto_free_hash(hash.tfm);
+> - 		crypto_hash_init(&hash);
+> - 		crypto_hash_update(&hash, sg, nbytes);
+> - 		crypto_hash_final(&hash, volume->scsi_id);
+> - 
+> - 		crypto_free_hash(hash.tfm);
 > -+#endif
-> -       } else {
-> -               /* If no MD5 available set ID to TID and LUN */
-> -               memcpy(volume->scsi_id, &volume->target->tid,
+> - 	} else {
+> - 		/* If no MD5 available set ID to TID and LUN */
+> - 		memcpy(volume->scsi_id, &volume->target->tid,
 > diff --git a/meta-networking/recipes-extended/iscsitarget/files/fix-call-trace-of-ahash-API-calling.patch b/meta-networking/recipes-extended/iscsitarget/files/fix-call-trace-of-ahash-API-calling.patch
 > deleted file mode 100644
 > index c996834..0000000
@@ -788,7 +843,7 @@ can live without this recipe as well.
 > -
 > -BUG: unable to handle kernel NULL pointer dereference at 0000000000000020
 > -IP: [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
-> -PGD dd77067 PUD dd7c067 PMD 0
+> -PGD dd77067 PUD dd7c067 PMD 0 
 > -Oops: 0000 [#1] PREEMPT SMP
 > -Modules linked in: iscsi_trgt(O)
 > -CPU: 0 PID: 350 Comm: ietd Tainted: G           O    4.8.12-yocto-standard #1
@@ -816,7 +871,7 @@ can live without this recipe as well.
 > - [<ffffffff8191a45b>] entry_SYSCALL_64_fastpath+0x13/0x8f
 > -Code: 4c 01 e0 0f 82 a2 01 00 00 48 b9 00 00 00 80 ff 77 00 00 48 01
 > -c8 45 31 f6 48 b9 00 00 00 00 00 ea ff ff 89 54 24 68 48 c1 e8 0c <49>
-> -8b 56 20 4c 89 44 24 20 4c 89 f7 48 c1 e0 06 c7 44 24 6c 04
+> -8b 56 20 4c 89 44 24 20 4c 89 f7 48 c1 e0 06 c7 44 24 6c 04 
 > -RIP  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
 > - RSP <ffff88000de8bd90>
 > -CR2: 0000000000000020
@@ -829,40 +884,40 @@ can live without this recipe as well.
 > -
 > -Signed-off-by: Zhe He <zhe.he@windriver.com>
 > -
-> ---- iscsitarget-1.4.20.3+svn502_orig/kernel/volume.c   2017-01-18 08:57:56.752187402 +0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2017-01-18 09:02:44.164195234 +0800
+> ---- iscsitarget-1.4.20.3+svn502_orig/kernel/volume.c	2017-01-18 08:57:56.752187402 +0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c	2017-01-18 09:02:44.164195234 +0800
 > -@@ -93,13 +93,14 @@ static void gen_scsiid(struct iet_volume
-> -
+> - 
 > - #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -       tfm = crypto_alloc_ahash("md5", 0, CRYPTO_ALG_ASYNC);
-> -+      hash = ahash_request_alloc(tfm, GFP_ATOMIC);
+> - 	tfm = crypto_alloc_ahash("md5", 0, CRYPTO_ALG_ASYNC);
+> -+	hash = ahash_request_alloc(tfm, GFP_ATOMIC);
 > - #else
-> -       hash.tfm = crypto_alloc_hash("md5", 0, CRYPTO_ALG_ASYNC);
-> -       hash.flags = 0;
+> - 	hash.tfm = crypto_alloc_hash("md5", 0, CRYPTO_ALG_ASYNC);
+> - 	hash.flags = 0;
 > - #endif
-> -
+> - 
 > - #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> --      if (!IS_ERR(tfm)) {
-> -+      if (tfm && !IS_ERR(tfm)) {
+> --	if (!IS_ERR(tfm)) {
+> -+	if (tfm && !IS_ERR(tfm)) {
 > - #else
-> -       if (!IS_ERR(hash.tfm)) {
+> - 	if (!IS_ERR(hash.tfm)) {
 > - #endif
 > -@@ -116,10 +117,13 @@ static void gen_scsiid(struct iet_volume
-> -               nbytes += sizeof(volume->lun);
-> -
+> - 		nbytes += sizeof(volume->lun);
+> - 
 > - #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> --              crypto_ahash_init(hash);
-> -+              ahash_request_set_callback(hash, 0, NULL, NULL);
-> -               ahash_request_set_crypt(hash, sg, volume->scsi_id, nbytes);
-> --              crypto_ahash_update(hash);
-> -               crypto_ahash_digest(hash);
-> -+              crypto_ahash_init(hash);
-> -+              crypto_ahash_update(hash);
-> -+              crypto_ahash_final(hash);
-> -+              ahash_request_free(hash);
-> -               crypto_free_ahash(tfm);
+> --		crypto_ahash_init(hash);
+> -+		ahash_request_set_callback(hash, 0, NULL, NULL);
+> - 		ahash_request_set_crypt(hash, sg, volume->scsi_id, nbytes);
+> --		crypto_ahash_update(hash);
+> - 		crypto_ahash_digest(hash);
+> -+		crypto_ahash_init(hash);
+> -+		crypto_ahash_update(hash);
+> -+		crypto_ahash_final(hash);
+> -+		ahash_request_free(hash);
+> - 		crypto_free_ahash(tfm);
 > - #else
-> -               crypto_hash_init(&hash);
+> - 		crypto_hash_init(&hash);
 > diff --git a/meta-networking/recipes-extended/iscsitarget/files/fix-errors-observed-with-linux-3.19-and-greater.patch b/meta-networking/recipes-extended/iscsitarget/files/fix-errors-observed-with-linux-3.19-and-greater.patch
 > deleted file mode 100644
 > index 1e6a1d6..0000000
@@ -927,7 +982,7 @@ can live without this recipe as well.
 > -[<ffffffff8195e7a2>] ret_from_fork+0x42/0x70
 > -[<ffffffff810773d0>] ? kthread_worker_fn+0x170/0x170
 > -Code: 5a 10 48 89 7d c8 48 39 f3 48 0f 47 de 48 85 db 0f 84 6f 01 00 00 8b 02 49 89
-> -d4 4c 8b 72 08 4c 8b 7a 18 a8 04 0f 85 a2 00 00 00 <4d> 8b 6f 08 4d 29 f5 49 39 dd 4c 0f 47 eb a8 02 0f 85 5c 01 00
+> -d4 4c 8b 72 08 4c 8b 7a 18 a8 04 0f 85 a2 00 00 00 <4d> 8b 6f 08 4d 29 f5 49 39 dd 4c 0f 47 eb a8 02 0f 85 5c 01 00 
 > -RSP <ffff8800d7f3f728>
 > -CR2: 000000000000024e
 > -------------[ cut here ]------------
@@ -935,7 +990,7 @@ can live without this recipe as well.
 > -
 > -The original patch is at
 > -http://launchpadlibrarian.net/218100509/iscsitarget_1.4.20.3+svn499-0ubuntu2_1.4.20.3+svn499-0ubuntu2.1.diff.gz,
-> -those changes were taken using #ifs, inorder to allow compilation of
+> -those changes were taken using #ifs, inorder to allow compilation of 
 > -iscsitarget package with linux kernels < 3.19.
 > -
 > -Upstream-Status: Submitted [http://launchpadlibrarian.net/218100509/iscsitarget_1.4.20.3+svn499-0ubuntu2_1.4.20.3+svn499-0ubuntu2.1.diff.gz]
@@ -943,259 +998,259 @@ can live without this recipe as well.
 > -Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > -
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c iscsitarget-1.4.20.3+svn502/kernel/conn.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2017-01-18 22:27:02.713167436 -0800
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2017-01-18 23:13:11.909214379 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c	2017-01-18 22:27:02.713167436 -0800
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c	2017-01-18 23:13:11.909214379 -0800
 > -@@ -129,7 +129,11 @@ static void iet_socket_bind(struct iscsi
-> -
-> -       dprintk(D_GENERIC, "%llu\n", (unsigned long long) session->sid);
-> -
+> - 
+> - 	dprintk(D_GENERIC, "%llu\n", (unsigned long long) session->sid);
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      conn->sock = SOCKET_I(file_inode(conn->file));
+> -+	conn->sock = SOCKET_I(file_inode(conn->file));
 > -+#else
-> -       conn->sock = SOCKET_I(conn->file->f_dentry->d_inode);
+> - 	conn->sock = SOCKET_I(conn->file->f_dentry->d_inode);
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -       conn->sock->sk->sk_user_data = conn;
-> -
-> -       write_lock_bh(&conn->sock->sk->sk_callback_lock);
+> - 	conn->sock->sk->sk_user_data = conn;
+> - 
+> - 	write_lock_bh(&conn->sock->sk->sk_callback_lock);
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/file-io.c iscsitarget-1.4.20.3+svn502/kernel/file-io.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/file-io.c   2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/file-io.c       2017-01-18 23:54:38.505717079 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/file-io.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/file-io.c	2017-01-18 23:54:38.505717079 -0800
 > -@@ -69,7 +69,11 @@ static int fileio_make_request(struct ie
 > - static int fileio_sync(struct iet_volume *lu, struct tio *tio)
 > - {
-> -       struct fileio_data *p = lu->private;
+> - 	struct fileio_data *p = lu->private;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      struct inode *inode = file_inode(p->filp);
+> -+	struct inode *inode = file_inode(p->filp);
 > -+#else
-> -       struct inode *inode = p->filp->f_dentry->d_inode;
+> - 	struct inode *inode = p->filp->f_dentry->d_inode;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -       struct address_space *mapping = inode->i_mapping;
-> -       loff_t ppos, count;
-> -       int res;
+> - 	struct address_space *mapping = inode->i_mapping;
+> - 	loff_t ppos, count;
+> - 	int res;
 > -@@ -213,7 +217,11 @@ static int fileio_attach(struct iet_volu
-> -               eprintk("%d\n", err);
-> -               goto out;
-> -       }
+> - 		eprintk("%d\n", err);
+> - 		goto out;
+> - 	}
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      inode = file_inode(p->filp);
+> -+	inode = file_inode(p->filp);
 > -+#else
-> -       inode = p->filp->f_dentry->d_inode;
+> - 	inode = p->filp->f_dentry->d_inode;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -
-> -       if (S_ISREG(inode->i_mode))
-> -               ;
+> - 
+> - 	if (S_ISREG(inode->i_mode))
+> - 		;
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.c iscsitarget-1.4.20.3+svn502/kernel/iscsi.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.c     2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.c 2017-01-18 23:37:36.462970326 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.c	2017-01-18 23:37:36.462970326 -0800
 > -@@ -489,8 +489,12 @@ static void cmnd_skip_pdu(struct iscsi_c
-> -       }
-> -       conn->read_iov[i].iov_base = addr;
-> -       conn->read_iov[i].iov_len = size;
+> - 	}
+> - 	conn->read_iov[i].iov_base = addr;
+> - 	conn->read_iov[i].iov_len = size;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, ++i, conn->read_size);
+> -+	iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, ++i, conn->read_size);
 > -+#else
-> -       conn->read_msg.msg_iov = conn->read_iov;
-> -       conn->read_msg.msg_iovlen = ++i;
+> - 	conn->read_msg.msg_iov = conn->read_iov;
+> - 	conn->read_msg.msg_iovlen = ++i;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
 > - }
-> -
+> - 
 > - static void iscsi_cmnd_reject(struct iscsi_cmnd *req, int reason)
 > -@@ -718,7 +722,9 @@ static int cmnd_recv_pdu(struct iscsi_co
-> -       idx = offset >> PAGE_CACHE_SHIFT;
-> -       offset &= ~PAGE_CACHE_MASK;
-> -
+> - 	idx = offset >> PAGE_CACHE_SHIFT;
+> - 	offset &= ~PAGE_CACHE_MASK;
+> - 
 > -+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0)
-> -       conn->read_msg.msg_iov = conn->read_iov;
-> -+#endif        /* LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0) */
-> -       conn->read_size = size = (size + 3) & -4;
-> -       conn->read_overflow = 0;
-> -
+> - 	conn->read_msg.msg_iov = conn->read_iov;
+> -+#endif	/* LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0) */
+> - 	conn->read_size = size = (size + 3) & -4;
+> - 	conn->read_overflow = 0;
+> - 
 > -@@ -730,16 +736,25 @@ static int cmnd_recv_pdu(struct iscsi_co
-> -               conn->read_iov[i].iov_base =  addr + offset;
-> -               if (offset + size <= PAGE_CACHE_SIZE) {
-> -                       conn->read_iov[i].iov_len = size;
+> - 		conn->read_iov[i].iov_base =  addr + offset;
+> - 		if (offset + size <= PAGE_CACHE_SIZE) {
+> - 			conn->read_iov[i].iov_len = size;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+                      iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, ++i, conn->read_size);
+> -+			iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, ++i, conn->read_size);
 > -+#else
-> -                       conn->read_msg.msg_iovlen = ++i;
+> - 			conn->read_msg.msg_iovlen = ++i;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -                       break;
-> -               }
-> -               conn->read_iov[i].iov_len = PAGE_CACHE_SIZE - offset;
-> -               size -= conn->read_iov[i].iov_len;
-> -               offset = 0;
-> -               if (++i >= ISCSI_CONN_IOV_MAX) {
+> - 			break;
+> - 		}
+> - 		conn->read_iov[i].iov_len = PAGE_CACHE_SIZE - offset;
+> - 		size -= conn->read_iov[i].iov_len;
+> - 		offset = 0;
+> - 		if (++i >= ISCSI_CONN_IOV_MAX) {
 > -+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0)
-> -                       conn->read_msg.msg_iovlen = i;
+> - 			conn->read_msg.msg_iovlen = i;
 > -+#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0) */
-> -                       conn->read_overflow = size;
-> -                       conn->read_size -= size;
+> - 			conn->read_overflow = size;
+> - 			conn->read_size -= size;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+                      iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, i, conn->read_size);
+> -+			iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, i, conn->read_size);
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -                       break;
-> -               }
-> -
+> - 			break;
+> - 		}
+> - 
 > -@@ -918,7 +933,9 @@ static int nop_out_start(struct iscsi_co
-> -
-> -       if ((size = cmnd->pdu.datasize)) {
-> -               size = (size + 3) & -4;
+> - 
+> - 	if ((size = cmnd->pdu.datasize)) {
+> - 		size = (size + 3) & -4;
 > -+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0)
-> -               conn->read_msg.msg_iov = conn->read_iov;
+> - 		conn->read_msg.msg_iov = conn->read_iov;
 > -+#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0) */
-> -               if (cmnd->pdu.bhs.itt != cpu_to_be32(ISCSI_RESERVED_TAG)) {
-> -                       struct tio *tio;
-> -                       int pg_cnt = get_pgcnt(size);
+> - 		if (cmnd->pdu.bhs.itt != cpu_to_be32(ISCSI_RESERVED_TAG)) {
+> - 			struct tio *tio;
+> - 			int pg_cnt = get_pgcnt(size);
 > -@@ -946,7 +963,11 @@ static int nop_out_start(struct iscsi_co
-> -               }
-> -               assert(!size);
-> -               conn->read_overflow = size;
+> - 		}
+> - 		assert(!size);
+> - 		conn->read_overflow = size;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+              iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, i, conn->read_size);
+> -+		iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, i, conn->read_size);
 > -+#else
-> -               conn->read_msg.msg_iovlen = i;
+> - 		conn->read_msg.msg_iovlen = i;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -       }
-> -
+> - 	}
+> - 
 > - out:
 > -@@ -986,7 +1007,11 @@ static void scsi_cmnd_start(struct iscsi
-> -               set_cmnd_lunit(req);
-> -
-> -       switch (req_hdr->scb[0]) {
+> - 		set_cmnd_lunit(req);
+> - 
+> - 	switch (req_hdr->scb[0]) {
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      case SERVICE_ACTION_IN_16:
+> -+	case SERVICE_ACTION_IN_16:
 > -+#else
-> -       case SERVICE_ACTION_IN:
+> - 	case SERVICE_ACTION_IN:
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -               if ((req_hdr->scb[1] & 0x1f) != 0x10)
-> -                       goto error;
-> -       case INQUIRY:
+> - 		if ((req_hdr->scb[1] & 0x1f) != 0x10)
+> - 			goto error;
+> - 	case INQUIRY:
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c iscsitarget-1.4.20.3+svn502/kernel/nthread.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c   2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c       2017-01-18 23:45:03.291033881 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c	2017-01-18 23:45:03.291033881 -0800
 > -@@ -42,9 +42,14 @@ static inline void iscsi_conn_init_read(
-> -       len = (len + 3) & -4; // XXX ???
-> -       conn->read_iov[0].iov_base = data;
-> -       conn->read_iov[0].iov_len = len;
+> - 	len = (len + 3) & -4; // XXX ???
+> - 	conn->read_iov[0].iov_base = data;
+> - 	conn->read_iov[0].iov_len = len;
 > -+#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0)
-> -       conn->read_msg.msg_iov = conn->read_iov;
-> -       conn->read_msg.msg_iovlen = 1;
+> - 	conn->read_msg.msg_iov = conn->read_iov;
+> - 	conn->read_msg.msg_iovlen = 1;
 > -+#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(3, 19, 0) */
-> -       conn->read_size = (len + 3) & -4;
+> - 	conn->read_size = (len + 3) & -4;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, 1, conn->read_size);
+> -+	iov_iter_init(&conn->read_msg.msg_iter, READ, conn->read_iov, 1, conn->read_size);
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
 > - }
-> -
+> - 
 > - static void iscsi_conn_read_ahs(struct iscsi_conn *conn, struct iscsi_cmnd *cmnd)
 > -@@ -83,14 +88,31 @@ static int is_data_available(struct iscs
-> -
+> - 
 > - static void forward_iov(struct msghdr *msg, int len)
 > - {
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      struct iovec *iov;
+> -+	struct iovec *iov;
 > -+
-> -+      while (msg->msg_iter.iov->iov_len <= len) {
-> -+              len -= msg->msg_iter.iov->iov_len;
-> -+              msg->msg_iter.iov++;
-> -+              msg->msg_iter.nr_segs--;
-> -+      }
+> -+	while (msg->msg_iter.iov->iov_len <= len) {
+> -+		len -= msg->msg_iter.iov->iov_len;
+> -+		msg->msg_iter.iov++;
+> -+		msg->msg_iter.nr_segs--;
+> -+	}
 > -+#else
-> -       while (msg->msg_iov->iov_len <= len) {
-> -               len -= msg->msg_iov->iov_len;
-> -               msg->msg_iov++;
-> -               msg->msg_iovlen--;
-> -       }
+> - 	while (msg->msg_iov->iov_len <= len) {
+> - 		len -= msg->msg_iov->iov_len;
+> - 		msg->msg_iov++;
+> - 		msg->msg_iovlen--;
+> - 	}
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      /* XXX: discards const ... */
-> -+      iov = msg->msg_iter.iov;
-> -+      iov->iov_base = (char *) msg->msg_iter.iov->iov_base + len;
-> -+      iov->iov_len -= len;
+> -+	/* XXX: discards const ... */
+> -+	iov = msg->msg_iter.iov;
+> -+	iov->iov_base = (char *) msg->msg_iter.iov->iov_base + len;
+> -+	iov->iov_len -= len;
 > -+#else
-> -       msg->msg_iov->iov_base = (char *) msg->msg_iov->iov_base + len;
-> -       msg->msg_iov->iov_len -= len;
-> -+#endif        /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
+> - 	msg->msg_iov->iov_base = (char *) msg->msg_iov->iov_base + len;
+> - 	msg->msg_iov->iov_len -= len;
+> -+#endif	/* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
 > - }
-> -
+> - 
 > - static int do_recv(struct iscsi_conn *conn, int state)
 > -@@ -98,6 +120,9 @@ static int do_recv(struct iscsi_conn *co
-> -       mm_segment_t oldfs;
-> -       struct msghdr msg;
-> -       struct iovec iov[ISCSI_CONN_IOV_MAX];
+> - 	mm_segment_t oldfs;
+> - 	struct msghdr msg;
+> - 	struct iovec iov[ISCSI_CONN_IOV_MAX];
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      size_t iovlen = ISCSI_CONN_IOV_MAX;
+> -+	size_t iovlen = ISCSI_CONN_IOV_MAX;
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -       int i, len, res;
-> -
-> -       if (!test_bit(CONN_ACTIVE, &conn->state)) {
+> - 	int i, len, res;
+> - 
+> - 	if (!test_bit(CONN_ACTIVE, &conn->state)) {
 > -@@ -110,12 +135,23 @@ static int do_recv(struct iscsi_conn *co
-> -               goto out;
-> -       }
-> -
+> - 		goto out;
+> - 	}
+> - 
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      if (conn->read_msg.msg_iter.nr_segs < iovlen)
-> -+              iovlen = conn->read_msg.msg_iter.nr_segs;
+> -+	if (conn->read_msg.msg_iter.nr_segs < iovlen)
+> -+		iovlen = conn->read_msg.msg_iter.nr_segs;
 > -+
-> -+      for (i = 0, len = 0; i < iovlen; i++) {
-> -+              iov[i] = conn->read_msg.msg_iter.iov[i];
-> -+              len += iov[i].iov_len;
-> -+      }
-> -+      iov_iter_init(&msg.msg_iter, READ, iov, iovlen, len);
+> -+	for (i = 0, len = 0; i < iovlen; i++) {
+> -+		iov[i] = conn->read_msg.msg_iter.iov[i];
+> -+		len += iov[i].iov_len;
+> -+	}
+> -+	iov_iter_init(&msg.msg_iter, READ, iov, iovlen, len);
 > -+#else
-> -       msg.msg_iov = iov;
-> -       msg.msg_iovlen = min_t(size_t, conn->read_msg.msg_iovlen, ISCSI_CONN_IOV_MAX);
-> -       for (i = 0, len = 0; i < msg.msg_iovlen; i++) {
-> -               iov[i] = conn->read_msg.msg_iov[i];
-> -               len += iov[i].iov_len;
-> -       }
+> - 	msg.msg_iov = iov;
+> - 	msg.msg_iovlen = min_t(size_t, conn->read_msg.msg_iovlen, ISCSI_CONN_IOV_MAX);
+> - 	for (i = 0, len = 0; i < msg.msg_iovlen; i++) {
+> - 		iov[i] = conn->read_msg.msg_iov[i];
+> - 		len += iov[i].iov_len;
+> - 	}
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -
-> -       oldfs = get_fs();
-> -       set_fs(get_ds());
+> - 
+> - 	oldfs = get_fs();
+> - 	set_fs(get_ds());
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/target_disk.c iscsitarget-1.4.20.3+svn502/kernel/target_disk.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/target_disk.c       2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/target_disk.c   2017-01-18 23:45:51.451010417 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/target_disk.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/target_disk.c	2017-01-18 23:45:51.451010417 -0800
 > -@@ -606,7 +606,11 @@ static int disk_execute_cmnd(struct iscs
-> -       case REQUEST_SENSE:
-> -               send_data_rsp(cmnd, build_request_sense_response);
-> -               break;
+> - 	case REQUEST_SENSE:
+> - 		send_data_rsp(cmnd, build_request_sense_response);
+> - 		break;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      case SERVICE_ACTION_IN_16:
+> -+	case SERVICE_ACTION_IN_16:
 > -+#else
-> -       case SERVICE_ACTION_IN:
+> - 	case SERVICE_ACTION_IN:
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -               send_data_rsp(cmnd, build_service_action_in_response);
-> -               break;
-> -       case READ_6:
+> - 		send_data_rsp(cmnd, build_service_action_in_response);
+> - 		break;
+> - 	case READ_6:
 > -diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/volume.c iscsitarget-1.4.20.3+svn502/kernel/volume.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c    2014-05-06 13:59:55.000000000 -0700
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2017-01-18 23:47:07.957561600 -0800
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c	2014-05-06 13:59:55.000000000 -0700
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c	2017-01-18 23:47:07.957561600 -0800
 > -@@ -398,7 +398,11 @@ int is_volume_reserved(struct iet_volume
-> -               case READ_CAPACITY:
-> -                       /* allowed commands when reserved */
-> -                       break;
+> - 		case READ_CAPACITY:
+> - 			/* allowed commands when reserved */
+> - 			break;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+              case SERVICE_ACTION_IN_16:
+> -+		case SERVICE_ACTION_IN_16:
 > -+#else
-> -               case SERVICE_ACTION_IN:
+> - 		case SERVICE_ACTION_IN:
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -                       if ((scb[1] & 0x1F) == 0x10)
-> -                               break;
-> -                       /* fall through */
+> - 			if ((scb[1] & 0x1F) == 0x10)
+> - 				break;
+> - 			/* fall through */
 > -@@ -465,7 +469,11 @@ int is_volume_reserved(struct iet_volume
-> -               if (excl_access_ro && !registered)
-> -                       err = -EBUSY;
-> -               break;
+> - 		if (excl_access_ro && !registered)
+> - 			err = -EBUSY;
+> - 		break;
 > -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
-> -+      case SERVICE_ACTION_IN_16:
+> -+	case SERVICE_ACTION_IN_16:
 > -+#else
-> -       case SERVICE_ACTION_IN:
+> - 	case SERVICE_ACTION_IN:
 > -+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0) */
-> -               if ((scb[1] & 0x1F) == 0x10)
-> -                       break;
-> -               /* fall through */
+> - 		if ((scb[1] & 0x1F) == 0x10)
+> - 			break;
+> - 		/* fall through */
 > diff --git a/meta-networking/recipes-extended/iscsitarget/files/use-kernel-makefile-to-get-kernel-version.patch b/meta-networking/recipes-extended/iscsitarget/files/use-kernel-makefile-to-get-kernel-version.patch
 > deleted file mode 100644
 > index 95bd047..0000000
@@ -1226,49 +1281,49 @@ can live without this recipe as well.
 > -/bin/sh: line 0: [: too many arguments
 > --- CUT --
 > -
-> -These messages are due to absence of include/linux/version.h file in
+> -These messages are due to absence of include/linux/version.h file in 
 > -kernel source directory and failed to compute linux kernel version.
-> -So, use kernel source Makefile ( i.e $(KSRC)/Makefile) to find out
+> -So, use kernel source Makefile ( i.e $(KSRC)/Makefile) to find out 
 > -actual kernel version.
 > -
 > -Upstream-Status: Pending
 > -
 > -Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > -
-> ---- iscsitarget-1.4.20.3+svn499_org/Makefile   2014-01-27 00:00:45.000000000 +0530
-> -+++ iscsitarget-1.4.20.3+svn499/Makefile       2015-07-23 10:44:47.013600285 +0530
+> ---- iscsitarget-1.4.20.3+svn499_org/Makefile	2014-01-27 00:00:45.000000000 +0530
+> -+++ iscsitarget-1.4.20.3+svn499/Makefile	2015-07-23 10:44:47.013600285 +0530
 > -@@ -18,27 +18,11 @@ ifeq ($(KSRC),)
 > - endif
-> -
-> -
+> - 
+> - 
 > --ifneq ($(wildcard $(KSRC)/include/generated/utsrelease.h),)
-> --      VERSION_FILE := $(KSRC)/include/generated/utsrelease.h
+> --	VERSION_FILE := $(KSRC)/include/generated/utsrelease.h
 > --else
 > --  ifneq ($(wildcard $(KSRC)/include/linux/utsrelease.h),)
-> --        VERSION_FILE := $(KSRC)/include/linux/utsrelease.h
+> --	  VERSION_FILE := $(KSRC)/include/linux/utsrelease.h
 > --  else
-> --        VERSION_FILE := $(KSRC)/include/linux/version.h
+> --	  VERSION_FILE := $(KSRC)/include/linux/version.h
 > --  endif
 > --endif
 > --
 > --KVER := $(shell $(CC) $(CFLAGS) $(LDFLAGS) -E -dM $(VERSION_FILE) | \
-> --      grep UTS_RELEASE | awk '{ print $$3 }' | sed 's/\"//g')
+> --	grep UTS_RELEASE | awk '{ print $$3 }' | sed 's/\"//g')
 > --
 > - KMOD := /lib/modules/$(KVER)/extra
 > --
 > --KMAJ := $(shell echo $(KVER) | \
-> --      sed -e 's/^\([0-9][0-9]*\)\.[0-9][0-9]*\.[0-9][0-9]*.*/\1/')
+> --	sed -e 's/^\([0-9][0-9]*\)\.[0-9][0-9]*\.[0-9][0-9]*.*/\1/')
 > --KMIN := $(shell echo $(KVER) | \
-> --      sed -e 's/^[0-9][0-9]*\.\([0-9][0-9]*\)\.[0-9][0-9]*.*/\1/')
+> --	sed -e 's/^[0-9][0-9]*\.\([0-9][0-9]*\)\.[0-9][0-9]*.*/\1/')
 > --KREV := $(shell echo $(KVER) | \
-> --      sed -e 's/^[0-9][0-9]*\.[0-9][0-9]*\.\([0-9][0-9]*\).*/\1/')
+> --	sed -e 's/^[0-9][0-9]*\.[0-9][0-9]*\.\([0-9][0-9]*\).*/\1/')
 > -+KMAJ := $(shell cat $(KSRC)/Makefile | grep ^VERSION | gawk -F " " '{ print $$NF }')
 > -+KMIN := $(shell cat $(KSRC)/Makefile | grep ^PATCHLEVEL | gawk -F " " '{ print $$NF }')
 > -+KREV := $(shell cat $(KSRC)/Makefile | grep ^SUBLEVEL | gawk -F " " '{ print $$NF }')
 > -+KVER := ${KMAJ}.${KMIN}.${KREV}
-> -
+> - 
 > - kver_eq = $(shell [ $(KMAJ) -eq $(1) -a $(KMIN) -eq $(2) -a $(KREV) -eq $(3) ] && \
-> -       echo 1 || echo 0)
+> - 	echo 1 || echo 0)
 > diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
 > deleted file mode 100644
 > index 5d13591..0000000
@@ -1339,12 +1394,5 @@ can live without this recipe as well.
 > -RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
 > -
 > -PNBLACKLIST[iscsitarget] = "error: implicit declaration of function 'init_timer'; did you mean 'init_timers'?; 4.15 kernel issues"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
