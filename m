@@ -1,51 +1,57 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A3D07451E
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EF5E71BB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Jul 2018 08:06:51 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id t6-v6so4671865plo.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Jul 2018 01:06:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mfbr8VhcstlKvKMm4IearM1NSR8M2vHf/zvMnIdbh7o=;
-	b=LdGTwKGy9kUXp/5IFDfVH9OWmYUUMhdc0sXnsXNiHiFZ0rhdgqqy/qP4k97RYsfo13
-	MoVw0puPnzCr4z+fTdS1gu1JSRpJ7G5scX1WnDJ92dwGdGWMMKWmmbt43EKD22w+MWoN
-	ZefBQWuNY+F0ewzBGuIaAgqsRGbQOXSEtkQiKyIwhpMUsWmUvah06NDHDtBRrccK7jJP
-	8t5UEnATjcZZy3Wg0hDRy8bvUynLRdrfF+x3YJV42yC8ybP0E/DU0MrD97jwbOW3QVxY
-	Qf1G/9AEJdk2g7us62u7VZro5uJf5FeX8z+bvvpKN8W3U3DTDRyoChEgRLtbt9VM7hcr
-	gpZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=mfbr8VhcstlKvKMm4IearM1NSR8M2vHf/zvMnIdbh7o=;
-	b=brN1noHRtDmepg42sTOzmi6rd9x2xLpzKpli2AtGPPuA6yqhKAB1nb/sp0CDp+UgFl
-	lAwqk8QIyG5hlXuT3/m8CfBb/cQ1DGeNNqNoBLez5TgYaCKrz4KP4vVnAXTiGmb7o8gG
-	A2PxL8wMn0++ABJ7CQ6/ESAuxQcZQettDlXHVdSdAlvfulyaMi0oZh6Hb9VDhr8UpkJG
-	szHXPxPW538e7KrUugpCVCbwd7s/nr3IQOssChyd1g/BGyleAkL+u5RF3dLWsbcYu8oZ
-	u38+A9FU+SfjAiizHd0vvzgI5p2Ql2JdX9MNgbfkXMe/TRg2Zqr6Lc/gCin+64cKVoQU
-	GEBw==
-X-Gm-Message-State: APt69E2oY0pXdXO9BlvzEJ0hwojJBAnET9JONnKJArFNcIvoKSaTYIp/
-	i1nIZQaE0ejM/IilIXELuI5ACw==
-X-Google-Smtp-Source: AAOMgpfWyBopp832GqswXtqOCCrlDf4+Aa/KNbZoA2AnzcY/0+vZ07Gy36CB3ViPGL94dbXluDgDQQ==
-X-Received: by 2002:a17:902:e85:: with SMTP id
-	5-v6mr16268474plx.318.1531037212339; 
-	Sun, 08 Jul 2018 01:06:52 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::2af])
-	by smtp.gmail.com with ESMTPSA id
-	r25-v6sm12166097pge.81.2018.07.08.01.06.51
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 08 Jul 2018 01:06:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Jul 2018 01:06:40 -0700
-Message-Id: <20180708080640.39121-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180708080640.39121-1-raj.khem@gmail.com>
-References: <20180708080640.39121-1-raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-lxml, python3-pandas, python3-protobuf: Set CLEANBROKEN
+	Sun,  8 Jul 2018 23:33:42 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 9AA59183BC;
+	Mon,  9 Jul 2018 01:33:42 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id RvoJx_62riC0; Mon,  9 Jul 2018 01:33:41 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 94032183B1;
+	Mon,  9 Jul 2018 01:33:41 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 8092E1E056;
+	Mon,  9 Jul 2018 01:33:41 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7466E1E054;
+	Mon,  9 Jul 2018 01:33:41 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP;
+	Mon,  9 Jul 2018 01:33:41 +0200 (CEST)
+Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
+	by thoth.se.axis.com (Postfix) with ESMTP id 67E652C9E;
+	Mon,  9 Jul 2018 01:33:41 +0200 (CEST)
+Received: from XBOX02.axis.com (10.0.5.16) by XBOX03.axis.com (10.0.5.17) with
+	Microsoft SMTP Server (TLS) id 15.0.1365.1;
+	Mon, 9 Jul 2018 01:33:41 +0200
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1365.000; Mon, 9 Jul 2018 01:33:41 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Takuma Ueba <ueba.takuma@jp.fujitsu.com>, Khem Raj <raj.khem@gmail.com>,
+	Armin Kuster <akuster808@gmail.com>
+Thread-Topic: [oe] [PATCH] fix license from Apache-2.0 to MIT
+Thread-Index: AQHUFPPjSpcSmcuwrkeqa89Gu+se4qSC1KyAgABMZoCAAtwsYA==
+Date: Sun, 8 Jul 2018 23:33:41 +0000
+Message-ID: <9230c538386e4f648408090dca391674@XBOX02.axis.com>
+References: <20180706062625.7363-1-ueba.takuma@jp.fujitsu.com>
+	<e19a9f68-d15d-0894-492a-0dd2d3f4cee4@gmail.com>
+	<CAMKF1sqE11tW8Kcnjqv0MwMjKfeWVHR5=gEs6vQEJOKgiWCPNA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqE11tW8Kcnjqv0MwMjKfeWVHR5=gEs6vQEJOKgiWCPNA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] fix license from Apache-2.0 to MIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,44 +64,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jul 2018 08:06:51 -0000
+X-List-Received-Date: Sun, 08 Jul 2018 23:33:42 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-The distutils class got a clean via "setup.py clean", but these
-recipes doesn't support this yet so disable clean target during
-configure
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Khem Raj
+> Sent: den 7 juli 2018 07:49
+> To: Armin Kuster <akuster808@gmail.com>
+> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+> Subject: Re: [oe] [PATCH] fix license from Apache-2.0 to MIT
+>=20
+> On Fri, Jul 6, 2018 at 6:16 PM akuster808 <akuster808@gmail.com> wrote:
+> >
+> >
+> >
+> > On 07/05/2018 11:26 PM, Takuma Ueba wrote:
+> > > Signed-off-by: Takuma Ueba <ueba.takuma@jp.fujitsu.com>
+> > > ---
+> > >  meta-python/recipes-devtools/python/python-asn1crypto.inc | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/meta-python/recipes-devtools/python/python-
+> asn1crypto.inc b/meta-python/recipes-devtools/python/python-
+> asn1crypto.inc
+> > > index 5c379956f..660bf09a7 100644
+> > > --- a/meta-python/recipes-devtools/python/python-asn1crypto.inc
+> > > +++ b/meta-python/recipes-devtools/python/python-asn1crypto.inc
+> > > @@ -1,7 +1,7 @@
+> > >  DESCRIPTION =3D "Python binding to the Networking and Cryptography (=
+NaCl) library"
+> > >  HOMEPAGE =3D "https://github.com/pyca/pynacl"
+> > >  SECTION =3D "devel/python"
+> > > -LICENSE =3D "Apache-2.0"
+> > > +LICENSE =3D "MIT"
+> >
+> > Why did the LICENSE change? maybe not that in the commit message. It
+> > helps the stable branch maintainer to decide if this needs to
+> > propagate to other branches.
+> >
+>=20
+> I dont think it changed, the SRC_URI for this is
+>=20
+> https://github.com/wbond/asn1crypto
+>=20
+> I am not sure if homepage is correct for this
+>=20
+> > - armin
+> > >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D52010cd3c7d7bd965b55721ef=
+4d93ec2"
+> > >
+> > >  PYPI_PACKAGE =3D "asn1crypto"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb     | 1 +
- meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb  | 1 +
- meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb | 1 +
- 3 files changed, 3 insertions(+)
+Make sure to prefix the subject with the recipe name before this is merged,=
+=20
+to avoid confusion...
 
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb b/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb
-index ff4bc7faad..b95d7bae71 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb
-@@ -1,2 +1,3 @@
- inherit setuptools3
- require python-lxml.inc
-+CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb b/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb
-index b5dd5e0924..c1e57189cf 100644
---- a/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb
-@@ -1,2 +1,3 @@
- inherit setuptools3
- require python-pandas.inc
-+CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
-index 781d1dc4da..53d5528c4b 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
-@@ -1,2 +1,3 @@
- inherit setuptools3
- require python-protobuf.inc
-+CLEANBROKEN = "1"
--- 
-2.18.0
+//Peter
 
 
