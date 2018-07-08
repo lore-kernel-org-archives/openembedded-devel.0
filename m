@@ -1,24 +1,48 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E32CE7545D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 229CE60123
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Jul 2018 06:04:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6864m4U002309
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sun,  8 Jul 2018 08:06:50 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id f4-v6so477239plb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 7 Jul 2018 23:04:49 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
-	Sat, 7 Jul 2018 23:04:42 -0700
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 8 Jul 2018 02:04:01 -0400
-Message-ID: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
+	Sun, 08 Jul 2018 01:06:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=GK4zqLfqU4sZf+NAnYe+sLZRj56+Yb51/v35PmysK7w=;
+	b=CaY9AGcBwrKpNye0v+V+G20nJX2Z1IlTORT1KL11QBL/r7u1vTfJJ4Nmp13lvfmXB8
+	5M/p/GHUWAxAenlCG9iHxqeO1KnAY+9coPqoGJMTFVW/t9XDLgll6Jzr8YkneU2p+6D9
+	nVmTAdPTOoU9twoNw83bVhS3nw33tm90BBoIEyYBCNvzA8vBR3syVgWOZlomEtPozDMF
+	GbLyLxEcmu2ZWk1mhl9JWZ1Sb9shcA0kg+54bJ8B3oA/fnwSKUV0d5V5CkrgUVp4heMO
+	WKpYzVfUVk8AyQjG9TxjdDaM8lC+9n82sFq/hZp3mGXRygoiXgZ/2rqPbzkEY+n3Uwmr
+	6a6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=GK4zqLfqU4sZf+NAnYe+sLZRj56+Yb51/v35PmysK7w=;
+	b=LID0YKwDnmXUX3xdBJ8qfdwBTjGjY8JxrXBk18dc09CpPdYjiVpr8bZw1kqbB3VAcg
+	14Q62vrzC/nBEHhezt0YsM+JH3PgRROHlNGIEb/6LPAPF8kii7sAPScZ3MIKX/D4zaUU
+	8uZF3BDi69Ie1kOVpUXQ83HgxxN19tHNjZ/WutWiln5tGpeuoIHZbfZm/a9iC95LqEni
+	r7oKbZZzYZ1UoOt5QhP0CWT3IsHHL3y435OiobIIlxCi2Y7DW2pNziH3b8qxPwOyaPJB
+	LhbG2kZ6xdHVfVLVtXCWdp+Ey37+jsCvWfsl4zBEh/NJiGRunDL5jTuX24/s4OlWoB9I
+	AwHQ==
+X-Gm-Message-State: APt69E1Uw+Jj5qsW0aGZsE1K+7CwqT06+jOZu58AEf2X1dlE+flA2S1E
+	1ymZsPXR4qWHrnArozN7yuvmgA==
+X-Google-Smtp-Source: AAOMgpf1pTtXamZ0VQQc48JKd0GLMKYxIJr47Jo1BO24dXFcDM/vOxl83fVpplwBQuf+UUfTUpPdVw==
+X-Received: by 2002:a17:902:b604:: with SMTP id
+	b4-v6mr16186346pls.18.1531037211615; 
+	Sun, 08 Jul 2018 01:06:51 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::2af])
+	by smtp.gmail.com with ESMTPSA id
+	r25-v6sm12166097pge.81.2018.07.08.01.06.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 08 Jul 2018 01:06:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  8 Jul 2018 01:06:39 -0700
+Message-Id: <20180708080640.39121-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-oe][PATCH 1/2] kpatch: Mark it incompatible with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,125 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jul 2018 06:04:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 08 Jul 2018 08:06:51 -0000
 
-The recipe builds the framework for kernel-selftest. Now, it just
-contains two sets of testcase, bpf and vm. We are appending others
-to the recipe.
+it needs binaries from glibc-utils, obviously we dont
+have this with musl, however in future if we can limit
+which binaries are needed from glibc-utils then we might
+be able to provide an alternative dependency when using
+musl, until then disable it
 
-It needs some features which will be written into relevant recipe.
-But now, you should add them to conf/local.conf manually.
-KERNEL_FEATURES_append += "features/bpf/bpf.scc"
-
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
-Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-kernel/kselftest/kernel-selftest.bb    | 94 ++++++++++++++++++++++
- 1 file changed, 94 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+ meta-oe/recipes-kernel/kpatch/kpatch.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
-new file mode 100644
-index 0000000..6f20bd3
---- /dev/null
-+++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
-@@ -0,0 +1,94 @@
-+SUMMARY = "Kernel selftest for Linux"
-+DESCRIPTION = "Kernel selftest for Linux"
-+LICENSE = "GPLv2"
-+
-+# for bpf and vm
-+DEPENDS = " \
-+    elfutils \
-+    libcap \
-+    libcap-ng \
-+    fuse \
-+    util-linux \
-+    rsync-native \
-+"
-+# for vm
-+RDEPENDS_${PN} += "libgcc \
-+                   bash \
-+"
-+
-+do_configure[depends] += "virtual/kernel:do_shared_workdir"
-+
-+inherit linux-kernel-base kernel-arch
-+
-+do_populate_lic[depends] += "virtual/kernel:do_patch"
-+
-+S = "${WORKDIR}/${BP}"
-+
-+# now we just test bpf and vm
-+# we will append other kernel selftest in the future
-+TEST_LIST = "bpf \
-+             vm \
-+"
-+
-+EXTRA_OEMAKE = '\
-+    CROSS_COMPILE=${TARGET_PREFIX} \
-+    ARCH=${ARCH} \
-+    CC="${CC}" \
-+    AR="${AR}" \
-+    LD="${LD}" \
-+'
-+
-+EXTRA_OEMAKE += "\
-+    'DESTDIR=${D}' \
-+"
-+
-+KERNEL_SELFTEST_SRC ?= "Makefile \
-+                        include \
-+                        tools \
-+                        scripts \
-+                        arch \
-+"
-+
-+do_compile() {
-+    for i in ${TEST_LIST}
-+    do
-+        oe_runmake -C ${S}/tools/testing/selftests/${i}
-+    done
-+}
-+
-+do_install() {
-+    for i in ${TEST_LIST}
-+    do
-+        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/opt/kselftest/${i} install
-+    done
-+
-+    chown root:root  -R ${D}/opt/kselftest
-+}
-+
-+do_configure() {
-+    :
-+}
-+
-+do_configure[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
-+python copy_kselftest_source_from_kernel() {
-+    sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
-+    src_dir = d.getVar("STAGING_KERNEL_DIR")
-+    dest_dir = d.getVar("S")
-+    bb.utils.mkdirhier(dest_dir)
-+    for s in sources:
-+        src = oe.path.join(src_dir, s)
-+        dest = oe.path.join(dest_dir, s)
-+        if os.path.isdir(src):
-+            oe.path.copytree(src, dest)
-+        else:
-+            bb.utils.copyfile(src, dest)
-+}
-+
-+remove_clang_related() {
-+	sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+INHIBIT_PACKAGE_DEBUG_SPLIT="1"
-+FILES_${PN} += "/opt/kselftest/"
+diff --git a/meta-oe/recipes-kernel/kpatch/kpatch.inc b/meta-oe/recipes-kernel/kpatch/kpatch.inc
+index e2e9511464..cd819f31f8 100644
+--- a/meta-oe/recipes-kernel/kpatch/kpatch.inc
++++ b/meta-oe/recipes-kernel/kpatch/kpatch.inc
+@@ -30,6 +30,7 @@ PACKAGES =+ "kpatch-build"
+ PROVIDES += "kpatch-build"
+ 
+ COMPATIBLE_HOST = "(x86_64).*-linux"
++COMPATIBLE_HOST_libc-musl = "null"
+ 
+ RDEPENDS_${PN} = "bash binutils"
+ RDEPENDS_kpatch-build = "bash glibc-utils"
 -- 
-2.8.1
+2.18.0
 
 
