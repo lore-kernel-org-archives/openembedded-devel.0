@@ -1,57 +1,32 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A28374C8A
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D40374C1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 06:37:53 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 8D43C18286;
-	Mon,  9 Jul 2018 08:37:53 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id 20DCBjDM6SH4; Mon,  9 Jul 2018 08:37:51 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id A7142182B0;
-	Mon,  9 Jul 2018 08:37:51 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 941FE1A05B;
-	Mon,  9 Jul 2018 08:37:51 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 884021A058;
-	Mon,  9 Jul 2018 08:37:51 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Mon,  9 Jul 2018 08:37:51 +0200 (CEST)
-Received: from XBOX04.axis.com (xbox04.axis.com [10.0.5.18])
-	by thoth.se.axis.com (Postfix) with ESMTP id 7C03C2CDA;
-	Mon,  9 Jul 2018 08:37:51 +0200 (CEST)
-Received: from XBOX02.axis.com (10.0.5.16) by XBOX04.axis.com (10.0.5.18) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Mon, 9 Jul 2018 08:37:51 +0200
-Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
-	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
-	15.00.1365.000; Mon, 9 Jul 2018 08:37:51 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>, "Yu, Mingli" <mingli.yu@windriver.com>
-Thread-Topic: [oe] [meta-oe][PATCH] iozone3: Upgrade to 482
-Thread-Index: AQHUFC1en3hrElszPEm0gBTg7h6/DKSAqMOAgAEjJoCAAF6YgIAD42UAgAAbRwCAAEmHgA==
-Date: Mon, 9 Jul 2018 06:37:51 +0000
-Message-ID: <8f9048e33461462790467523f3b89fdf@XBOX02.axis.com>
+	Mon,  9 Jul 2018 06:42:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w696g3dI022363
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 8 Jul 2018 23:42:03 -0700 (PDT)
+Received: from [128.224.162.173] (128.224.162.173) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Sun, 8 Jul 2018 23:42:03 -0700
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, Khem Raj
+	<raj.khem@gmail.com>
 References: <20180705065408.103714-1-mingli.yu@windriver.com>
 	<CAMKF1spY_iwTDuGjzD7N6cNq+n6W9KhhYYd=vhJCg=uE=aNQyQ@mail.gmail.com>
 	<5B3F34E5.70101@windriver.com>
 	<CAMKF1sqa49UG0+Una67_ES6jE-ZphxcqcwHDur80mAcz6oZPUw@mail.gmail.com>
 	<5B42C73E.6070009@windriver.com>
 	<CAMKF1sp83jHPG+vsPJfRftB3EF0djzNZfM-YZyUUUvbqt_-n5w@mail.gmail.com>
-In-Reply-To: <CAMKF1sp83jHPG+vsPJfRftB3EF0djzNZfM-YZyUUUvbqt_-n5w@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	<8f9048e33461462790467523f3b89fdf@XBOX02.axis.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5B430283.6060202@windriver.com>
+Date: Mon, 9 Jul 2018 14:36:51 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
+In-Reply-To: <8f9048e33461462790467523f3b89fdf@XBOX02.axis.com>
+X-Originating-IP: [128.224.162.173]
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] iozone3: Upgrade to 482
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -66,85 +41,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 06:37:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 09 Jul 2018 06:42:10 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IEtoZW0g
-UmFqDQo+IFNlbnQ6IGRlbiA5IGp1bGkgMjAxOCAwNjowMg0KPiBUbzogWXUsIE1pbmdsaSA8bWlu
-Z2xpLnl1QHdpbmRyaXZlci5jb20+DQo+IENjOiBvcGVuZW1iZWRlZC1kZXZlbCA8b3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+IFN1YmplY3Q6IFJlOiBbb2VdIFtt
-ZXRhLW9lXVtQQVRDSF0gaW96b25lMzogVXBncmFkZSB0byA0ODINCj4gDQo+IE9uIFN1biwgSnVs
-IDgsIDIwMTggYXQgNzoyOSBQTSBZdSwgTWluZ2xpIDxtaW5nbGkueXVAd2luZHJpdmVyLmNvbT4N
-Cj4gd3JvdGU6DQo+ID4gT24gMjAxOOW5tDA35pyIMDbml6UgMjM6MDEsIEtoZW0gUmFqIHdyb3Rl
-Og0KPiA+ID4gT24gRnJpLCBKdWwgNiwgMjAxOCBhdCAyOjI3IEFNIFl1LCBNaW5nbGkgPG1pbmds
-aS55dUB3aW5kcml2ZXIuY29tPg0KPiA+IHdyb3RlOg0KPiA+ID4+IE9uIDIwMTjlubQwN+aciDA2
-5pelIDAwOjAwLCBLaGVtIFJhaiB3cm90ZToNCj4gPiA+Pj4gT24gV2VkLCBKdWwgNCwgMjAxOCBh
-dCAxMTo1NCBQTSA8bWluZ2xpLnl1QHdpbmRyaXZlci5jb20+IHdyb3RlOg0KPiA+ID4+Pj4NCj4g
-PiA+Pj4+IEZyb206IE1pbmdsaSBZdSA8bWluZ2xpLnl1QHdpbmRyaXZlci5jb20+DQo+ID4gPj4+
-Pg0KPiA+ID4+Pj4gVXBkYXRlIExJQ19GSUxFU19DSEtTVU0gYXMgdGhlIGZpbGUgaW96b25lLmMN
-Cj4gPiA+Pj4+IHVzZWQgZm9yIExJQ19GSUxFU19DSEtTVU0gdXBkYXRlZA0KPiA+ID4+Pj4NCj4g
-PiA+Pj4NCj4gPiA+Pj4gUGxlYXNlIGRlc2NyaWJlIHdoYXQgaGFzIGNoYW5nZWQgdGhhdCBpcyBj
-YXVzaW5nIHRoZSBjaGVja3N1bXMgdG8NCj4gPiA+Pj4gY2hhbmdlLg0KPiA+ID4+DQo+ID4gPj4g
-VGhlIHNvdXJjZSBmaWxlIGlvem9uZS5jIGNoYW5nZWQgaGFzIGNhdXNpbmcgdGhlIGNoZWNrc3Vt
-IGNoYW5nZS4NCj4gPiA+PiBJIGhhdmUgYWxyZWFkeSBtZW50aW9uIGl0IGluIHRoZSBjb21taXQg
-bWVzc2FnZS4NCj4gPiA+DQo+ID4gPiBDb21taXQgbWVzc2FnZSBkb2VzIG5vdCBzYXkgd2hhdCBj
-aGFuZ2VkLCAgV2UgYWxyZWFkeSBrbm93DQo+ID4gPiBzb21ldGhpbmcgaGFzIGNoYW5nZWQgdGhh
-dHMgY2F1c2luZyB0aGUgY2hlY2tzdW0gY2hhbmdlIGJ1dCBoZXJlIHdlIA0KPiA+ID4gdXN1YWxs
-eSBkb2N1bWVudCB3aGF0IGNoYW5nZWQgc3BlY2lmaWNhbGx5LCBwdXJwb3NlIGlzIHRvIGxldCB1
-c2VycyANCj4gPiA+IGtub3cgb2YgYW55IGNoYW5nZSBpbiBsaWNlbnNpbmcgcmVxdWlyZW1lbnRz
-IHRoYXQgdGhleSBuZWVkIHRvIGJlIA0KPiA+ID4gYXdhcmUgb2YNCj4gPg0KPiA+IFRoYW5rcyBL
-aGVtIQ0KPiA+DQo+ID4gSSB3aWxsIHRyeSB0byBsaXN0IHRoZSBjaGFuZ2VzIGluIFYyIGJ1dCBh
-Y3R1YWxseSB0aGUgZmlsZSBpb3pvbmUuYw0KPiA+IHVzZWQgZm9yIGNoZWNrc3VtIGlzIHNvdXJj
-ZSBmaWxlLiBJdCBoYXMgc28gbXVjaCBjb2RlIGNoYW5nZXMgdW5saWtlIA0KPiA+IHNvbWUgcGFj
-a2FnZXMgdXNlIENPUFlSSUdIVCBmaWxlIG9yIFJFQURNRS5tZCBmaWxlIGZvciBjaGVja3N1bS4N
-Cj4gDQo+IE9rIHRoYXTigJlzIHByb2JhYmx5IG5vdCBpZGVhbCB0aGVuLiBJdCB3b3VsZCBiZSBi
-ZXR0ZXIgdG8ganVzdCB1c2UgdGhlDQo+IG5lZWRlZCBsaW5lcyBmcm9tIGNoZWNrc3VtDQoNClBs
-ZWFzZSBub3RlIHRoYXQgaXQgaXMgb25seSBsaW5lIDM3LTQ4IGFuZCAyNjAtMjY2IG9mIGlvem9u
-ZS5jIHRoYXQgYXJlIHVzZWQgDQp0byBjYWxjdWxhdGUgdGhlIGNoZWNrc3Vtcy4gSG93ZXZlciwg
-SSBndWVzcyB0aGF0IHRoYXQgZHVlIHRvIHRoZSBmYWN0IHRoZXJlIA0KaXMgc291cmNlIGluIGJl
-dHdlZW4gbGluZSA0OCBhbmQgMjYwLCBzb21lIGxpbmVzIGhhdmUgYmVlbiBhZGRlZC9yZW1vdmVk
-LCBzbyANCnRoYXQgdGhlIGxpbmUgbnVtYmVycyB1c2VkIGluIHRoZSBjaGVja3N1bSBjYWxjdWxh
-dGlvbiBhcmUgbm93IG9mZiAob3IgdGhleSANCndlcmUgb2ZmIGFscmVhZHkgYmVmb3JlKS4gTG9v
-a2luZyBhdCB0aGUgY3VycmVudCBzb3VyY2UsIG15IGd1ZXNzIGlzIHRoYXQgDQpsaW5lcyAyNjAt
-MjY2IHNob3VsZCBiZSBjaGFuZ2VkIHRvIDI2OS0yNzUuDQoNClNvbWVvbmUgc2hvdWxkIHJlYWxs
-eSBhc2sgdXBzdHJlYW0gdG8gaW5jbHVkZSBhIExJQ0VOU0UgZmlsZS4uLi4NCg0KPiA+IFRoYW5r
-cywNCj4gPg0KPiA+ID4NCj4gPiA+Pg0KPiA+ID4+IFRoYW5rcywNCj4gPiA+Pg0KPiA+ID4+Pg0K
-PiA+ID4+Pj4gU2lnbmVkLW9mZi1ieTogTWluZ2xpIFl1IDxtaW5nbGkueXVAd2luZHJpdmVyLmNv
-bT4NCj4gPiA+Pj4+IC0tLQ0KPiA+ID4+Pj4gICAgLi4uL2lvem9uZTMve2lvem9uZTNfNDY1LmJi
-ID0+IGlvem9uZTNfNDgyLmJifSAgICAgICAgICAgICAgfCA2ICsrKy0tLQ0KPiA+ID4+Pj4gICAg
-MSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4gPiA+Pj4+
-ICAgIHJlbmFtZSBtZXRhLW9lL3JlY2lwZXMtYmVuY2htYXJrL2lvem9uZTMve2lvem9uZTNfNDY1
-LmJiID0+IGlvem9uZTNfNDgyLmJifSAoOTUlKQ0KPiA+ID4+Pj4NCj4gPiA+Pj4+IGRpZmYgLS1n
-aXQgYS9tZXRhLW9lL3JlY2lwZXMtYmVuY2htYXJrL2lvem9uZTMvaW96b25lM180NjUuYmIgYi9t
-ZXRhLW9lL3JlY2lwZXMtYmVuY2htYXJrL2lvem9uZTMvaW96b25lM180ODIuYmINCj4gPiA+Pj4+
-IHNpbWlsYXJpdHkgaW5kZXggOTUlDQo+ID4gPj4+PiByZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lw
-ZXMtYmVuY2htYXJrL2lvem9uZTMvaW96b25lM180NjUuYmINCj4gPiA+Pj4+IHJlbmFtZSB0byBt
-ZXRhLW9lL3JlY2lwZXMtYmVuY2htYXJrL2lvem9uZTMvaW96b25lM180ODIuYmINCj4gPiA+Pj4+
-IGluZGV4IDE5MWI5MzQyNS4uMDkzMDZlMDQ0IDEwMDY0NA0KPiA+ID4+Pj4gLS0tIGEvbWV0YS1v
-ZS9yZWNpcGVzLWJlbmNobWFyay9pb3pvbmUzL2lvem9uZTNfNDY1LmJiDQo+ID4gPj4+PiArKysg
-Yi9tZXRhLW9lL3JlY2lwZXMtYmVuY2htYXJrL2lvem9uZTMvaW96b25lM180ODIuYmINCj4gPiA+
-Pj4+IEBAIC00LDE0ICs0LDE0IEBAIEFVVEhPUiA9ICJEb24gQ2FwcHMgPGRvbi5jYXBwczJAdmVy
-aXpvbi5uZXQ+LCBXaWxsaWFtIEQuIE5vcmNvdHQgPHdub3Jjb3R0QHVzLm9yDQo+ID4gPj4+PiAg
-U0VDVElPTiA9ICJjb25zb2xlL3Rlc3RzIg0KPiA+ID4+Pj4gIExJQ0VOU0UgPSAiaW96b25lMyIN
-Cj4gPiA+Pj4+ICBMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9pb3pvbmUuYztiZWdpbmxpbmU9
-Mzc7ZW5kbGluZT00ODttZDU9NzMzMTI2MDA5MTg2OGRjYWQwZjllZGVhNzM1YjVmNGIgXA0KPiA+
-ID4+Pj4gLSAgICBmaWxlOi8vaW96b25lLmM7YmVnaW5saW5lPTI2MDtlbmRsaW5lPTI2NjttZDU9
-NzdmOWVlNTFlNDViNTdhN2U3NTE5YzRmYTBiNGYwMGIgXA0KPiA+ID4+Pj4gKyAgICBmaWxlOi8v
-aW96b25lLmM7YmVnaW5saW5lPTI2MDtlbmRsaW5lPTI2NjttZDU9MGFhNDg4ZmQxMzllYWMwNzhi
-ZTZlY2E4NmUxNDM1ZTggXA0KPiA+ID4+Pj4gICINCj4gPiA+Pj4+ICBTUkNfVVJJID0gImh0dHA6
-Ly93d3cuaW96b25lLm9yZy9zcmMvY3VycmVudC8ke0JQTn1fJHtQVn0udGFyIFwNCj4gPiA+Pj4+
-ICAgICAgZmlsZTovL3BhcmFsbGVsaXNtLnBhdGNoIFwNCj4gPiA+Pj4+ICAgICAgZmlsZTovL2Nv
-cHlyaWdodC50eHQgXA0KPiA+ID4+Pj4gICINCj4gPiA+Pj4+IC1TUkNfVVJJW21kNXN1bV0gPSAi
-YzkyNGU1ZTQ2ZmIxY2Y4MTQ1ZjQyMGU4ZTU3ZWI5NTQiDQo+ID4gPj4+PiAtU1JDX1VSSVtzaGEy
-NTZzdW1dID0gIjJlM2Q3MjkxNmU3ZDczNDBhN2M1MDVmYzBjM2QyODU1M2ZjYzVmZjJkYWY0MWQ4
-MTEzNjhlNTViZDRlNmEyOTMiDQo+ID4gPj4+PiArU1JDX1VSSVttZDVzdW1dID0gIjMxY2ExZDNk
-MjhiYzM3NWMyMGEyODA4MjE3Y2YyMTJjIg0KPiA+ID4+Pj4gK1NSQ19VUklbc2hhMjU2c3VtXSA9
-ICIyNzMzZmViNjNjOTZmNzcxNzdjNjhmM2Q5MzhmMjI5NGQ1Mzk0ZDg1NTRiMjc2N2M0NWNiZTEz
-OGIyZjNhZTMwIg0KPiA+ID4+Pj4gIA0KPiA+ID4+Pj4gIFVQU1RSRUFNX0NIRUNLX1JFR0VYID0g
-Imlvem9uZTNfKD9QPHB2ZXI+XGQrKS50YXIiDQo+ID4gPj4+PiAgDQo+ID4gPj4+PiAtLQ0KPiA+
-ID4+Pj4gMi4xNy4xDQoNCi8vUGV0ZXINCg0K
+
+
+On 2018年07月09日 14:37, Peter Kjellerstedt wrote:
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>> Khem Raj
+>> Sent: den 9 juli 2018 06:02
+>> To: Yu, Mingli <mingli.yu@windriver.com>
+>> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+>> Subject: Re: [oe] [meta-oe][PATCH] iozone3: Upgrade to 482
+>>
+>> On Sun, Jul 8, 2018 at 7:29 PM Yu, Mingli <mingli.yu@windriver.com>
+>> wrote:
+>>> On 2018年07月06日 23:01, Khem Raj wrote:
+>>>> On Fri, Jul 6, 2018 at 2:27 AM Yu, Mingli <mingli.yu@windriver.com>
+>>> wrote:
+>>>>> On 2018年07月06日 00:00, Khem Raj wrote:
+>>>>>> On Wed, Jul 4, 2018 at 11:54 PM <mingli.yu@windriver.com> wrote:
+>>>>>>>
+>>>>>>> From: Mingli Yu <mingli.yu@windriver.com>
+>>>>>>>
+>>>>>>> Update LIC_FILES_CHKSUM as the file iozone.c
+>>>>>>> used for LIC_FILES_CHKSUM updated
+>>>>>>>
+>>>>>>
+>>>>>> Please describe what has changed that is causing the checksums to
+>>>>>> change.
+>>>>>
+>>>>> The source file iozone.c changed has causing the checksum change.
+>>>>> I have already mention it in the commit message.
+>>>>
+>>>> Commit message does not say what changed,  We already know
+>>>> something has changed thats causing the checksum change but here we
+>>>> usually document what changed specifically, purpose is to let users
+>>>> know of any change in licensing requirements that they need to be
+>>>> aware of
+>>>
+>>> Thanks Khem!
+>>>
+>>> I will try to list the changes in V2 but actually the file iozone.c
+>>> used for checksum is source file. It has so much code changes unlike
+>>> some packages use COPYRIGHT file or README.md file for checksum.
+>>
+>> Ok that’s probably not ideal then. It would be better to just use the
+>> needed lines from checksum
+>
+> Please note that it is only line 37-48 and 260-266 of iozone.c that are used
+> to calculate the checksums. However, I guess that that due to the fact there
+> is source in between line 48 and 260, some lines have been added/removed, so
+> that the line numbers used in the checksum calculation are now off (or they
+> were off already before). Looking at the current source, my guess is that
+> lines 260-266 should be changed to 269-275.
+
+>
+> Someone should really ask upstream to include a LICENSE file....
+
+Thanks Peter!
+
+It's better to include a LICENSE file.
+
+But now, how about just use 37-48 lines to calculate the checksum?
+
+Hi Khem,
+What's your opinion?
+
+Thanks,
+
+>
+>>> Thanks,
+>>>
+>>>>
+>>>>>
+>>>>> Thanks,
+>>>>>
+>>>>>>
+>>>>>>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>>>>>>> ---
+>>>>>>>     .../iozone3/{iozone3_465.bb => iozone3_482.bb}              | 6 +++---
+>>>>>>>     1 file changed, 3 insertions(+), 3 deletions(-)
+>>>>>>>     rename meta-oe/recipes-benchmark/iozone3/{iozone3_465.bb => iozone3_482.bb} (95%)
+>>>>>>>
+>>>>>>> diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
+>>>>>>> similarity index 95%
+>>>>>>> rename from meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
+>>>>>>> rename to meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
+>>>>>>> index 191b93425..09306e044 100644
+>>>>>>> --- a/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
+>>>>>>> +++ b/meta-oe/recipes-benchmark/iozone3/iozone3_482.bb
+>>>>>>> @@ -4,14 +4,14 @@ AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.or
+>>>>>>>   SECTION = "console/tests"
+>>>>>>>   LICENSE = "iozone3"
+>>>>>>>   LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
+>>>>>>> -    file://iozone.c;beginline=260;endline=266;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
+>>>>>>> +    file://iozone.c;beginline=260;endline=266;md5=0aa488fd139eac078be6eca86e1435e8 \
+>>>>>>>   "
+>>>>>>>   SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
+>>>>>>>       file://parallelism.patch \
+>>>>>>>       file://copyright.txt \
+>>>>>>>   "
+>>>>>>> -SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
+>>>>>>> -SRC_URI[sha256sum] = "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41d811368e55bd4e6a293"
+>>>>>>> +SRC_URI[md5sum] = "31ca1d3d28bc375c20a2808217cf212c"
+>>>>>>> +SRC_URI[sha256sum] = "2733feb63c96f77177c68f3d938f2294d5394d8554b2767c45cbe138b2f3ae30"
+>>>>>>>
+>>>>>>>   UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
+>>>>>>>
+>>>>>>> --
+>>>>>>> 2.17.1
+>
+> //Peter
+>
 
