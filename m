@@ -1,56 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EBC674E95
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 80CA87489E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 15:29:46 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id t4-v6so10568609vke.9
+	Mon,  9 Jul 2018 16:42:15 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id u21-v6so10033705qku.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 08:29:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=WVKuZ51MJi8mcvOn8IowI169PapendtQL6GB6bXQd7A=;
-	b=Vsi3fnWGvx7rkgnRd18YOkJTYtPDuoxhkbvJHeBJtM7CqToTXJ+gKs2wIokWXRYHPq
-	nDM6ZF2xk9RUdvaniUdOkWtoHYChiGY1/iHSU/bWvCrhAuK/vQIEWxqabbgpd33jXFDA
-	3RH4uxbYv8o7Dy0BccmYdXDDHChm+1HNjfssZjv4qAEVosSGLSkrUwEWNLQq/H4ESZUJ
-	J7zjMCb63bMfojmZ/cUhvh2xbLbdRapy547UmTDSyY6yf+12RTU8LHAc8xSa1wOgByr2
-	Q8YCEe3EK4tY8SuIc8T/BRsVDwiGnu8sHMyTBNg5ecUEZmdCCR4P+GaC2m6lk1p5uK0m
-	KHBg==
+	Mon, 09 Jul 2018 09:42:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=WVKuZ51MJi8mcvOn8IowI169PapendtQL6GB6bXQd7A=;
-	b=Jf6LclmFwXWQeU5bEQaC92IYNWXUzqxgx+NOIGvkWRl7x1DnDYsk2Ba7qXnZatFsSY
-	h0et3yM8bjn9J8+ErJGTJgNZ5NklHTUb1sExGfOEyCyFNrIocCn/Q+C71PKt711ApsiD
-	fHJvVFPbQIosxPS0yKRXI5tpeOa+FXcJCi5w/q7LXftL2x7dOGfr5uEtNQ51/jQV3fyI
-	Hr6NlE0/opmbcuN0GtP/KCbmlCPcQq9Ed0RpPkXypYUb/Vv1aTQ20V3j+RrtGjM4OTZX
-	rEagfA1EnJAiZMk0rIa2cWeT+uUucmiq0wH9gbS7aXpPtZR+1BvXUVefBjkubD/f/2x3
-	rjBg==
-X-Gm-Message-State: APt69E02k8R0azaqcu4cdscvx0Gnj3dPQzMh2wLH5mzS5mzrqqPqqknj
-	jkJDy4Vwo6jz3yZnFep5x+fH4fcowa3Pxf/JXGs=
-X-Google-Smtp-Source: AAOMgpdz1lVGqZym4oJ5am3FJkReyjgqwS8YwawWXrYgAF1mrB9GJU6ahyg/92Twfbv6oyoSP5bUEDWZyWzPUiMiYfw=
-X-Received: by 2002:a1f:4b86:: with SMTP id
-	y128-v6mr11101583vka.146.1531150187202; 
-	Mon, 09 Jul 2018 08:29:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180705065408.103714-1-mingli.yu@windriver.com>
-	<CAMKF1spY_iwTDuGjzD7N6cNq+n6W9KhhYYd=vhJCg=uE=aNQyQ@mail.gmail.com>
-	<5B3F34E5.70101@windriver.com>
-	<CAMKF1sqa49UG0+Una67_ES6jE-ZphxcqcwHDur80mAcz6oZPUw@mail.gmail.com>
-	<5B42C73E.6070009@windriver.com>
-	<CAMKF1sp83jHPG+vsPJfRftB3EF0djzNZfM-YZyUUUvbqt_-n5w@mail.gmail.com>
-	<8f9048e33461462790467523f3b89fdf@XBOX02.axis.com>
-	<5B430283.6060202@windriver.com>
-	<df1945d103d444ada773567805d1c763@XBOX02.axis.com>
-In-Reply-To: <df1945d103d444ada773567805d1c763@XBOX02.axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 9 Jul 2018 08:29:21 -0700
-Message-ID: <CAMKF1sr_XF-dy53jcc44WpzzhZ7+XP4Ka4W4OBSyYp--ZZQBjg@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] iozone3: Upgrade to 482
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=OqBdU5hms1q2gWHI2NGNUbBjS1aPfyzQcCD8zCMF1a0=;
+	b=FHky2E0O51ISbosPr+VpC4hPhQGhDSt4h0crL2Fl8onQvvijjQuuYeszo7Eqz+kfEH
+	vB+oyyEudMdpn/Zz0x8UFsAVO6pFzxU5WLpYKuO1v/Dijgt+BSy8Xp6+Wt3kQ3xZZjyE
+	Ar/qjfXmAcNXAPDfzuwhah5hH/u0V6KMcXJpN+DH7ncPS20WFbOaemQ/rXlPA1BPkXUU
+	GSDMeyaRYz602nUDqmuYVmOgKPsnirYEj0cUqDh++WRt4JQ4kdVYE6ihhYGWvf+p0BCE
+	1gyalzxzr30lMLn2QrpVMJUxk6Z0qdk9Vdpyz1qlS5FxFhoI395I/xBRSYMBWWsxqotx
+	3H2g==
+X-Gm-Message-State: APt69E2yAULlbgo0iaYZ+pSmC+a/woUroUcSm+71qB17AHGowJhxwkGQ
+	Jp8oWPm3ag6o6TaGw7bnam8Qokpy
+X-Google-Smtp-Source: AAOMgpcd0vvNPxiYX2EsrxhhXTqsIHeNjzKnPLK7plxDUIHDfKUtNzfghRwESVBEJsUAncINfXFXMg==
+X-Received: by 2002:a37:16d1:: with SMTP id
+	78-v6mr19119795qkw.271.1531154535977; 
+	Mon, 09 Jul 2018 09:42:15 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.61.164])
+	by smtp.gmail.com with ESMTPSA id
+	c93-v6sm15520130qkh.90.2018.07.09.09.42.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 09 Jul 2018 09:42:14 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  9 Jul 2018 12:42:00 -0400
+Message-Id: <1531154520-8474-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-serpent: update to version 1.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,106 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 15:29:46 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Jul 2018 16:42:15 -0000
 
-On Sun, Jul 8, 2018 at 11:58 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Yu, Mingli
-> > Sent: den 9 juli 2018 08:37
-> > To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>; Khem Raj
-> > <raj.khem@gmail.com>
-> > Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-> > Subject: Re: [oe] [meta-oe][PATCH] iozone3: Upgrade to 482
-> >
-> > On 2018=E5=B9=B407=E6=9C=8809=E6=97=A5 14:37, Peter Kjellerstedt wrote:
-> > >> -----Original Message-----
-> > >> From: openembedded-devel-bounces@lists.openembedded.org
-> > >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
-> > Of
-> > >> Khem Raj
-> > >> Sent: den 9 juli 2018 06:02
-> > >> To: Yu, Mingli <mingli.yu@windriver.com>
-> > >> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-> > >> Subject: Re: [oe] [meta-oe][PATCH] iozone3: Upgrade to 482
-> > >>
-> > >> On Sun, Jul 8, 2018 at 7:29 PM Yu, Mingli <mingli.yu@windriver.com>
-> > >> wrote:
-> > >>> On 2018=E5=B9=B407=E6=9C=8806=E6=97=A5 23:01, Khem Raj wrote:
-> > >>>> On Fri, Jul 6, 2018 at 2:27 AM Yu, Mingli
-> > <mingli.yu@windriver.com>
-> > >>> wrote:
-> > >>>>> On 2018=E5=B9=B407=E6=9C=8806=E6=97=A5 00:00, Khem Raj wrote:
-> > >>>>>> On Wed, Jul 4, 2018 at 11:54 PM <mingli.yu@windriver.com> wrote:
-> > >>>>>>>
-> > >>>>>>> From: Mingli Yu <mingli.yu@windriver.com>
-> > >>>>>>>
-> > >>>>>>> Update LIC_FILES_CHKSUM as the file iozone.c
-> > >>>>>>> used for LIC_FILES_CHKSUM updated
-> > >>>>>>>
-> > >>>>>>
-> > >>>>>> Please describe what has changed that is causing the checksums
-> > to
-> > >>>>>> change.
-> > >>>>>
-> > >>>>> The source file iozone.c changed has causing the checksum change.
-> > >>>>> I have already mention it in the commit message.
-> > >>>>
-> > >>>> Commit message does not say what changed,  We already know
-> > >>>> something has changed thats causing the checksum change but here
-> > we
-> > >>>> usually document what changed specifically, purpose is to let
-> > users
-> > >>>> know of any change in licensing requirements that they need to be
-> > >>>> aware of
-> > >>>
-> > >>> Thanks Khem!
-> > >>>
-> > >>> I will try to list the changes in V2 but actually the file iozone.c
-> > >>> used for checksum is source file. It has so much code changes
-> > unlike
-> > >>> some packages use COPYRIGHT file or README.md file for checksum.
-> > >>
-> > >> Ok that=E2=80=99s probably not ideal then. It would be better to jus=
-t use
-> > the
-> > >> needed lines from checksum
-> > >
-> > > Please note that it is only line 37-48 and 260-266 of iozone.c that
-> > are used
-> > > to calculate the checksums. However, I guess that that due to the
-> > fact there
-> > > is source in between line 48 and 260, some lines have been
-> > added/removed, so
-> > > that the line numbers used in the checksum calculation are now off
-> > (or they
-> > > were off already before). Looking at the current source, my guess is
-> > that
-> > > lines 260-266 should be changed to 269-275.
-> >
-> > >
-> > > Someone should really ask upstream to include a LICENSE file....
-> >
-> > Thanks Peter!
-> >
-> > It's better to include a LICENSE file.
-> >
-> > But now, how about just use 37-48 lines to calculate the checksum?
-> >
-> > Hi Khem,
-> > What's your opinion?
-> >
-> > Thanks,
->
-> The problem is that the license information is really at lines 269-275.
-> And at lines 37-48. Which is a mess...
+License-Update: PKG-INFO updated for the latest release and MIT remains the package license
 
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-serpent.inc              | 6 +++---
+ .../python/{python-serpent_1.24.bb => python-serpent_1.25.bb}       | 0
+ .../python/{python3-serpent_1.24.bb => python3-serpent_1.25.bb}     | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-serpent_1.24.bb => python-serpent_1.25.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-serpent_1.24.bb => python3-serpent_1.25.bb} (100%)
 
-ok. you can have two entries in checksum like we do for multiple license fi=
-les.
+diff --git a/meta-python/recipes-devtools/python/python-serpent.inc b/meta-python/recipes-devtools/python/python-serpent.inc
+index 3f51bc2..2ba6570 100644
+--- a/meta-python/recipes-devtools/python/python-serpent.inc
++++ b/meta-python/recipes-devtools/python/python-serpent.inc
+@@ -1,9 +1,9 @@
+ SUMMARY = "Serialization based on ast.literal_eval"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=acdea68f0e5a89eb6cbfdf54e38c356e"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5a8193ba89f1083617f32d522f6485e9"
+ 
+-SRC_URI[md5sum] = "d0c50f1943ff86d830eb3fe40f6dc1e3"
+-SRC_URI[sha256sum] = "b6855483d95a03b6aee358363684cd38a3a670240da5bc6da4253079cb07b8df"
++SRC_URI[md5sum] = "0f9684622125a527fa4fbe2587738973"
++SRC_URI[sha256sum] = "264a028e059c1b557701ae7c567cdab330dbd228ff924489343efcb39bd828a0"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-serpent_1.24.bb b/meta-python/recipes-devtools/python/python-serpent_1.25.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-serpent_1.24.bb
+rename to meta-python/recipes-devtools/python/python-serpent_1.25.bb
+diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.24.bb b/meta-python/recipes-devtools/python/python3-serpent_1.25.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-serpent_1.24.bb
+rename to meta-python/recipes-devtools/python/python3-serpent_1.25.bb
+-- 
+2.7.4
+
 
