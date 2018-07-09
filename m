@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
 	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AF1160684
+	by mail.openembedded.org (Postfix) with ESMTP id 24EFD75402
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 21:50:02 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id a18-v6so16709163qtj.4
+	Mon,  9 Jul 2018 21:55:05 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id f1-v6so16715311qti.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 14:50:03 -0700 (PDT)
+	Mon, 09 Jul 2018 14:55:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LRdmmW9Oxu5QNHqboh/JcfKuTlOWzvPBgMjavOCqi5I=;
-	b=PIhOTzmaiJmGZ/6N4p+Vd0BxHhT3y7iUl2e0fmZy1Ik7c1y5PvTa0l9ZYIdqxu3tBA
-	7CPOUZuQ7nRX6FT9UCs4wYb+xCaDO2lQzGcSOJmFPmaTM93jZU04tFoT3F7B6EvssfYe
-	r6ix9mTwBsEvlFABf1aAZEiDbLaD9rSSlEL36s6t1e8oeFHfg5GIPOKk7KRKkKnBT1iC
-	OdL2lzFv2/0emha5QRlOVSwnVbLGki9SXScLSLQ89evFXcb4t0YOUDOsWp2r26GarQCS
-	TItIp2uLDxENNVkdoQaiLaeBwaCBVMRyP+j+8IYIZ3YvXTMFn0lDb2QL7GS6vqYXluKi
-	N1hw==
-X-Gm-Message-State: APt69E0CYvsposKrBtLy9AFTIyjT4WgqYcJQC8cnF/O664em4epH2iYR
-	Tbh5AtDPbjKy3Z2/+288HwdwS0aV
-X-Google-Smtp-Source: AAOMgpc/t8QQwmjekyMK7DTSzeGwr8FP8n2BR2sFYnHCj6jMbrAqgpL+pvo/GY7LKTDp9XxlxO+rEA==
-X-Received: by 2002:a0c:f1d4:: with SMTP id
-	u20-v6mr19483586qvl.124.1531173002661; 
-	Mon, 09 Jul 2018 14:50:02 -0700 (PDT)
+	bh=3FdVstPFQhOFxFJlxUb2iiCyo79PWdSadETZMiEKgow=;
+	b=fcLZ90U2cEt3ZE4Bp6YPo0aD+0AtEm5Cp73KrY93rYpbnjUUqgX1MidGR+aCD2+Biq
+	x3vU4q5NE1w9O0YbkXm7eJpVQGI0pzK8bhIC6huISW4txAYZLfmLRqB5UCH7hzJEYyWx
+	Wbqfy+Umo5i127MIIjyzEw/4GmEDzng4ZTDDY+udv/M3OvUBM4z8lRD9KE2JMO5wcXOL
+	Z3wy1arcTx29+Oaftb6u8o+N8Pgke2G9UbpkUBNqYxaWc7ldx2OLHxGXbz2HxplKXQuj
+	qshLiAUv92ooO50ZWzYeLGkkTueNtsmv2Ux8zRi1V8PcsZF5/v13b5X5muzF9tphh6vy
+	Br8w==
+X-Gm-Message-State: APt69E1Y7LUr8OGEY/vN1saztOe84ywxcke7BLb0iGI2yZQoWUl2efUa
+	4xU3Y5m2YS9xNf10ScLiTDPEwxCO
+X-Google-Smtp-Source: AAOMgpfX872oV9tNOxUDrO9f6/xsvFxvihQ39lIyX99V7Izo+qthQGYWLeGcpUfSWU3slCjUq2UaRg==
+X-Received: by 2002:ac8:2f84:: with SMTP id
+	l4-v6mr20735693qta.83.1531173305871; 
+	Mon, 09 Jul 2018 14:55:05 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	w64-v6sm1067743qkd.27.2018.07.09.14.50.01
+	l22-v6sm16137968qkh.72.2018.07.09.14.55.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 Jul 2018 14:50:02 -0700 (PDT)
+	Mon, 09 Jul 2018 14:55:05 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jul 2018 17:49:44 -0400
-Message-Id: <1531172984-16299-1-git-send-email-derek@asterius.io>
+Date: Mon,  9 Jul 2018 17:54:50 -0400
+Message-Id: <1531173290-21739-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-cassandra-driver: update to version 3.14.0
+Subject: [meta-python][PATCH] python-pyyaml: update to version 3.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,34 +46,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 21:50:02 -0000
+X-List-Received-Date: Mon, 09 Jul 2018 21:55:05 -0000
+
+License-Update: Update the copyright year to include 2018
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cassandra-driver.inc       | 4 ++--
- ...-cassandra-driver_3.13.0.bb => python3-cassandra-driver_3.14.0.bb} | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.13.0.bb => python3-cassandra-driver_3.14.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-pyyaml.inc               | 6 +++---
+ .../python/{python-pyyaml_3.12.bb => python-pyyaml_3.13.bb}         | 0
+ .../python/{python3-pyyaml_3.12.bb => python3-pyyaml_3.13.bb}       | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyyaml_3.12.bb => python-pyyaml_3.13.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyyaml_3.12.bb => python3-pyyaml_3.13.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cassandra-driver.inc b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-index 1648d3e..1cc1f4c 100644
---- a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-+++ b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-@@ -8,8 +8,8 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
- SRCNAME = "cassandra-driver"
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml.inc b/meta-python/recipes-devtools/python/python-pyyaml.inc
+index 3fef0ca..afce543 100644
+--- a/meta-python/recipes-devtools/python/python-pyyaml.inc
++++ b/meta-python/recipes-devtools/python/python-pyyaml.inc
+@@ -2,14 +2,14 @@ SUMMARY = "Python support for YAML"
+ HOMEPAGE = "http://www.pyyaml.org"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5591701d32590f9fa94f3bfee820b634"
+ DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
  
--SRC_URI[md5sum] = "5c8b4a3adfc48180e8ec38b8c4e996fd"
--SRC_URI[sha256sum] = "61b670fb2ba95d51d91fa7b589aae3666df494713f5d1ed78bb5c510778d77f0"
-+SRC_URI[md5sum] = "c5bed026bf48c821424c1f6296193908"
-+SRC_URI[sha256sum] = "b65218e2582277f5b77d1436e420db8616f63e3437a9e839cdcd7172d760e861"
+ PYPI_PACKAGE = "PyYAML"
+ inherit pypi
  
- DISTUTILS_BUILD_ARGS += " \
-     --no-libev \
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.13.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
+-SRC_URI[md5sum] = "4c129761b661d181ebf7ff4eb2d79950"
+-SRC_URI[sha256sum] = "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
++SRC_URI[md5sum] = "b78b96636d68ac581c0e2f38158c224f"
++SRC_URI[sha256sum] = "3ef3092145e9b70e3ddd2c7ad59bdd0252a94dfe3949721633e41344de00a6bf"
+ 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-datetime \
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb b/meta-python/recipes-devtools/python/python-pyyaml_3.13.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.13.0.bb
-rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
+rename from meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+rename to meta-python/recipes-devtools/python/python-pyyaml_3.13.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_3.12.bb b/meta-python/recipes-devtools/python/python3-pyyaml_3.13.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyyaml_3.12.bb
+rename to meta-python/recipes-devtools/python/python3-pyyaml_3.13.bb
 -- 
 2.7.4
 
