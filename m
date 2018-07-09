@@ -1,50 +1,81 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7691D75532
+Return-Path: <Jonathan.Haigh@arm.com>
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+	(mail-db5eur01on0084.outbound.protection.outlook.com [104.47.2.84])
+	by mail.openembedded.org (Postfix) with ESMTP id 42B0575048
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2018 07:43:12 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id 59-v6so13371711uas.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2018 00:43:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Em8n/TFVRoKsyg01paaqIgTdDUQd9w+ZRI2IpqolNEU=;
-	b=sUj//AdtTlADKW4y0xWj2XWm1SqV6HJvq4N0cYLu/MGQrBR7kDeZaAbT9sd+z4cnwy
-	ikzqyqIJxSS1ZVnBBjUwRkZ/voKMOVx+NhW41YgnuFdoWlLy7SedUCnHvrOQiU9Syo6D
-	GfLMzmc2qVfUL0Iup072qVTroJcOy2kCa9I0QkIq9TjbbX509u4e1HrwLp5PoggbQmbC
-	a0NA+IhMl7tLFwANX+uOdSox2kHE4aADDuX1qRw3pMkx0L8j13OjzpUGqEeuORSdoMB8
-	fP5b6joxHAmxGk7dE/ALiE/E58ukZEudFBG0HNKrOzoVWF6znH8a+dL1BttSAmcW1aR0
-	wqnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Em8n/TFVRoKsyg01paaqIgTdDUQd9w+ZRI2IpqolNEU=;
-	b=W0BssYcPcXRhO70WTv98VK10Vxitc3ncTnrLWXxgW7nZg6QY1B1CdGhpduF09FguYx
-	+pwC6kuJ9v2UffxGcYVk4AIRKQUsIoQ+1UahKDO4G173pGakykGMhYcmcUFN9+RpUGVX
-	Z0AQaFNBqDxAcuAoBdkgRbb1xgCL6PaQQxpCsYFH7ltdQrz+zMJPuonjJReU1eBV2fbR
-	V17tyvDFX45PSe2lW6FCClsnqgd0ad9Jr8tdHjW6XlrvRi9CLjMWcUBPkJ8C/noNarxo
-	2/euO8pOi6OLFpQwSnIvhYVaL9eAa9FZQxIKG9RAHxr3m+Tlf11oc5pDTNuZGdh6G7MW
-	VUfA==
-X-Gm-Message-State: APt69E3Ro/KEfjZGBJdf5rvRR5w0FT+9Pk9cDC/8eKFhdPiBY7RRgQfT
-	Z7/ai/GmIo5/m6cCXsc2JnBw+j5H0UAqEqd/hBU=
-X-Google-Smtp-Source: AAOMgpd/vIjtNE6o5Saia8Ndf9cWS+jw0Jjgw9o9SeaLlRw0whM0tsrn0vdub7t20/TBL9GGTVdjN78Y8qFYr0edk0M=
-X-Received: by 2002:a9f:33d8:: with SMTP id
-	y24-v6mr3840962uab.164.1531208593202; 
-	Tue, 10 Jul 2018 00:43:13 -0700 (PDT)
+	Tue, 10 Jul 2018 08:16:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com; 
+	s=selector1-arm-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=rzjNNWrQAlygrF0DRbL6SJoe0kf3ecCgUDNHFKBSA1U=;
+	b=hNzcjXjn3z57aD/Y1b4NGMxIffPrcO05TT4D8cSJ2eInewmJA7+pB5+zOq2hgLBiMaiYIgzJSbqhBoBrkWJC83ZsnARITZzeJCphh6yTKtA66YkKqjzwNBMwhXP48ZfNvIsu+r4zF9epoe+1c2dZpTiT2B+XbnIgnsd16NJlyqE=
+Received: from DB5PR08MB0888.eurprd08.prod.outlook.com (10.164.43.30) by
+	DB5PR08MB0568.eurprd08.prod.outlook.com (10.161.246.14) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.930.19; Mon, 9 Jul 2018 09:47:26 +0000
+Received: from DB5PR08MB0888.eurprd08.prod.outlook.com
+	([fe80::d004:d47f:8a18:ac18]) by
+	DB5PR08MB0888.eurprd08.prod.outlook.com
+	([fe80::d004:d47f:8a18:ac18%3]) with mapi id 15.20.0930.022;
+	Mon, 9 Jul 2018 09:47:26 +0000
+From: Jonathan Haigh <Jonathan.Haigh@arm.com>
+To: Khem Raj <raj.khem@gmail.com>, akuster808 <akuster808@gmail.com>
+Thread-Topic: [oe] [PATCH] kernel-devicetree.bbclass: DTB make targets may
+	contain path components
+Thread-Index: AQHUFFH1NPowGlLtokWoO3sI/rlkxqSB/xp7gAC37gCAAD/aAIAAF70AgAOb+JM=
+Date: Mon, 9 Jul 2018 09:47:26 +0000
+Message-ID: <DB5PR08MB08883ADBE0DE087F7350F8BF93440@DB5PR08MB0888.eurprd08.prod.outlook.com>
+References: <9a8e4137ac914b168091b71d755d54281530789529-12623-1-git-send-email-jonathan.haigh@arm.com>
+	<DB5PR08MB0888D243F1C828A518CBA90C93470@DB5PR08MB0888.eurprd08.prod.outlook.com>
+	<CAMKF1soy4zSM3+c=iun_u6OsY4YsP2Sp0NWfB-zatsTdjFUxZg@mail.gmail.com>
+	<b3728620-31d6-455d-7ce3-1d86c9dcf66c@gmail.com>,
+	<CAMKF1sqO9r7rSaymFd34na7LBgGmmwfyqb6xD-N+YHpGVc7PGw@mail.gmail.com>
+In-Reply-To: <CAMKF1sqO9r7rSaymFd34na7LBgGmmwfyqb6xD-N+YHpGVc7PGw@mail.gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=Jonathan.Haigh@arm.com; 
+x-originating-ip: [217.140.96.140]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; DB5PR08MB0568;
+	7:V0lfPxKbq/w24tXC12j+j4QmpmgC3kbSxfbja2bXJ5wiqeoDdBD5nyu51eqY3ttHt4/rScaHLV8RihL+tX/dsPe837pqdXusPuj93tYXgG7bsNuD36qJWDv0B31rOfZFBaHciE/6cic2z6y1xLZXWc7IhpLC/tQGKVLElU1h+3BzkE1LwBS1PN+K2MgCz94Xbm1Xf5ZndO4+tVDeyKBoxiYfSZre3DwZKvZBee3Qxcu+tjJaPtTzcnoEHCUN8JKm
+x-ms-exchange-antispam-srfa-diagnostics: SOS;SOR;
+x-ms-office365-filtering-correlation-id: 3372ff9c-4895-4ae9-62b3-08d5e580fa53
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: UriScan:(223705240517415); BCL:0; PCL:0;
+	RULEID:(7020095)(4652040)(8989117)(5600053)(711020)(48565401081)(4534165)(4627221)(201703031133081)(201702281549075)(8990107)(2017052603328)(7153060)(7193020);
+	SRVR:DB5PR08MB0568; 
+x-ms-traffictypediagnostic: DB5PR08MB0568:
+x-microsoft-antispam-prvs: <DB5PR08MB0568BA2C858B34D14A257F4F93440@DB5PR08MB0568.eurprd08.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:(180628864354917)(223705240517415)(85827821059158)(264703809997249);
+x-ms-exchange-senderadcheck: 1
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(8211001083)(6040522)(2401047)(8121501046)(5005006)(3231311)(944501410)(52105095)(93006095)(93001095)(3002001)(10201501046)(6055026)(149027)(150027)(6041310)(20161123562045)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123558120)(20161123564045)(6072148)(201708071742011)(7699016);
+	SRVR:DB5PR08MB0568; BCL:0; PCL:0; RULEID:; SRVR:DB5PR08MB0568; 
+x-forefront-prvs: 07283408BE
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(39860400002)(136003)(366004)(376002)(346002)(396003)(189003)(199004)(40434004)(81166006)(81156014)(6116002)(55016002)(16297215004)(68736007)(39060400002)(3846002)(33656002)(5250100002)(236005)(2906002)(105586002)(4326008)(99286004)(25786009)(9686003)(8936002)(6506007)(110136005)(54906003)(476003)(53546011)(186003)(102836004)(446003)(53936002)(8676002)(54896002)(6306002)(6246003)(106356001)(11346002)(66066001)(316002)(7736002)(93886005)(966005)(7696005)(26005)(74316002)(575784001)(14444005)(229853002)(5024004)(72206003)(256004)(14454004)(86362001)(478600001)(19627405001)(6606003)(606006)(5660300001)(486006)(6436002)(97736004)(76176011)(2900100001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:DB5PR08MB0568;
+	H:DB5PR08MB0888.eurprd08.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: arm.com does not designate
+	permitted sender hosts)
+x-microsoft-antispam-message-info: l64hCdZi41KNchEvBKCM1GAE9vuoMlS350BK1ufN/FfL9K9VQFdNZ3cI8bHj3ISae1BAocA4jbkEHTThDMlTeNuZVhBD+o82KwYMrvuqr3rjrSvqQZKwhNTNh4J+AdYoDJIuDfdts5VKt8plDtdPNugFEYSi7tfQhTYvFEho++8VTOPnjMSLLiWFj84NY0fjHQMrwtCrcQP3BwHFOcs4bIPEtoSV70aI6+zwlSsx4V2ImOLTvSznUXDb/pY4RBCZ9CTB9uRXHI5c9mxZbAsX0SFV893JyfDUySk28GcxS6J3wyTdiLFgu0syEzf1/zwjRu5t1Ja1Gu6SZdhopdVRr6tnrvQAwCK+UN8biPDhVfg=
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-References: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
-	<CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
-	<3410d266-209f-a545-56e2-62cf57226609@windriver.com>
-In-Reply-To: <3410d266-209f-a545-56e2-62cf57226609@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Jul 2018 01:43:02 -0600
-Message-ID: <CAMKF1sqrrvEWBXiZ24Tb_4rD4FZmVpr9Zo6n_SnbNGHT0BfqRw@mail.gmail.com>
-To: "Hongzhi, Song" <hongzhi.song@windriver.com>
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3372ff9c-4895-4ae9-62b3-08d5e580fa53
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jul 2018 09:47:26.0295 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR08MB0568
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
+Cc: Jeremy Johnson <Jeremy.Johnson@arm.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] kernel-devicetree.bbclass: DTB make targets may contain path components
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,187 +88,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2018 07:43:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 10 Jul 2018 08:16:26 -0000
+Content-Language: en-GB
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Look at the report I sent to oe Devel earlier it should have link to full
-logs
+> This patch is fine however, you should rebase it on top of master as of t=
+oday.
+> secondly, this should be sent to oe-core mailing list since its
+> changing that layer
 
-On Mon, Jul 9, 2018 at 10:51 PM Hongzhi, Song <hongzhi.song@windriver.com>
-wrote:
 
-> Could you attach building arguments, conf/local.conf, log.do_compile for
-> me?
+Ah, okay, I'll do that. Thanks Khem.
+
+________________________________
+From: Khem Raj <raj.khem@gmail.com>
+Sent: 07 July 2018 03:38:48
+To: akuster808
+Cc: Jeremy Johnson; Jonathan Haigh; openembeded-devel
+Subject: Re: [oe] [PATCH] kernel-devicetree.bbclass: DTB make targets may c=
+ontain path components
+
+
+
+On Fri, Jul 6, 2018 at 6:13 PM akuster808 <akuster808@gmail.com<mailto:akus=
+ter808@gmail.com>> wrote:
+
+
+On 07/06/2018 02:25 PM, Khem Raj wrote:
+> On Fri, Jul 6, 2018 at 12:02 PM Jonathan Haigh <Jonathan.Haigh@arm.com<ma=
+ilto:Jonathan.Haigh@arm.com>> wrote:
+>> normalize_dtb() turns DTS and DTB paths into values that can be used as
+>> make targets. These make targets sometimes contain some directory compon=
+ents
+>> so 'basename' is not suitable for turning the paths into make targets -
+>> we should only strip off leading directory components of the path up to
+>> and including the 'dts' directory (if it exists). For example:
+>> * 'overlays/at86rf233.dtbo' should not be changed.
+>> * 'some/directory/path/dts/overlays/at86rf233.dtbo' should be changed to
+>>   'overlays/at86rf233.dtbo' rather than just 'at86rf233.dtbo'
+>>
+>> Signed-off-by: Jonathan Haigh <jonathan.haigh@arm.com<mailto:jonathan.ha=
+igh@arm.com>>
+>> ---
+>>  meta/classes/kernel-devicetree.bbclass | 5 +++--
+>>  1 file changed, 3 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/meta/classes/kernel-devicetree.bbclass b/meta/classes/kerne=
+l-devicetree.bbclass
+>> index 9866d84..0ffa8e9 100644
+>> --- a/meta/classes/kernel-devicetree.bbclass
+>> +++ b/meta/classes/kernel-devicetree.bbclass
+>> @@ -12,9 +12,10 @@ KERNEL_DEVICETREE_BUNDLE ?=3D "0"
+>>  normalize_dtb () {
+>>          DTB=3D"$1"
+>>          if echo ${DTB} | grep -q '/dts/'; then
+>> -               bbwarn "${DTB} contains the full path to the the dts fil=
+e, but only the dtb name should be used."
+>> +               bbwarn "${DTB} contains the full path to the the dts fil=
+e, but the path should be relative to the dts directory."
+>> +               DTB=3D`echo "${DTB}" | sed 's,^.*/dts/,,'`
+>>          fi
+>> -       DTB=3D`basename ${DTB} | sed 's,\.dts$,.dtb,g'`
+>> +       DTB=3D`echo "${DTB}" | sed 's,\.dts$,.dtb,g'`
+> This patch is fine however, you should rebase it on top of master as of t=
+oday.
+> secondly, this should be sent to oe-core mailing list since its
+> changing that layer
+
+this landed in master already. patch was posted earlier this week.
+
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=3D8b9264824689e99=
+fb257901be3c0f91f79f920ef
 >
-> The text you pasted is not enough.
->
-> -- Hongzhi
->
->
-> On 2018=E5=B9=B407=E6=9C=8810=E6=97=A5 12:11, Khem Raj wrote:
-> > This is failing to build here
-> >
-> > | DEBUG: Executing shell function do_compile
-> > | NOTE: make -j 16 CROSS_COMPILE=3Dx86_64-bec-linux- ARCH=3Dx86
-> > CC=3Dx86_64-bec-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3
-> > -mfpmath=3Dsse -fstack-protector-strong  -D_FORTIFY_SOURCE=3D2 -Wformat
-> > -Wformat-security -Werror=3Dformat-security
-> >
-> --sysroot=3D/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest=
-/1.0-r0/recipe-sysroot
-> > AR=3Dx86_64-bec-linux-ar LD=3Dx86_64-bec-linux-ld
-> >
-> --sysroot=3D/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest=
-/1.0-r0/recipe-sysroot
-> >
-> DESTDIR=3D/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1=
-.0-r0/image
-> > -C
-> /mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kern=
-el-selftest-1.0/tools/testing/selftests/bpf
-> > | make: Entering directory
-> >
-> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/ker=
-nel-selftest-1.0/tools/testing/selftests/bpf'
-> > | Makefile:19: *** recipe commences before first target.  Stop.
-> > | make: Leaving directory
-> >
-> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/ker=
-nel-selftest-1.0/tools/testing/selftests/bpf'
-> > | ERROR: oe_runmake failed
-> > On Sat, Jul 7, 2018 at 11:05 PM Hongzhi.Song <hongzhi.song@windriver.co=
-m>
-> wrote:
-> >> The recipe builds the framework for kernel-selftest. Now, it just
-> >> contains two sets of testcase, bpf and vm. We are appending others
-> >> to the recipe.
-> >>
-> >> It needs some features which will be written into relevant recipe.
-> >> But now, you should add them to conf/local.conf manually.
-> >> KERNEL_FEATURES_append +=3D "features/bpf/bpf.scc"
-> >>
-> >> Signed-off-by: Dengke Du <dengke.du@windriver.com>
-> >> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> >> ---
-> >>   .../recipes-kernel/kselftest/kernel-selftest.bb    | 94
-> ++++++++++++++++++++++
-> >>   1 file changed, 94 insertions(+)
-> >>   create mode 100644 meta-oe/recipes-kernel/kselftest/
-> kernel-selftest.bb
-> >>
-> >> diff --git a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
-> b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
-> >> new file mode 100644
-> >> index 0000000..6f20bd3
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
-> >> @@ -0,0 +1,94 @@
-> >> +SUMMARY =3D "Kernel selftest for Linux"
-> >> +DESCRIPTION =3D "Kernel selftest for Linux"
-> >> +LICENSE =3D "GPLv2"
-> >> +
-> >> +# for bpf and vm
-> >> +DEPENDS =3D " \
-> >> +    elfutils \
-> >> +    libcap \
-> >> +    libcap-ng \
-> >> +    fuse \
-> >> +    util-linux \
-> >> +    rsync-native \
-> >> +"
-> >> +# for vm
-> >> +RDEPENDS_${PN} +=3D "libgcc \
-> >> +                   bash \
-> >> +"
-> >> +
-> >> +do_configure[depends] +=3D "virtual/kernel:do_shared_workdir"
-> >> +
-> >> +inherit linux-kernel-base kernel-arch
-> >> +
-> >> +do_populate_lic[depends] +=3D "virtual/kernel:do_patch"
-> >> +
-> >> +S =3D "${WORKDIR}/${BP}"
-> >> +
-> >> +# now we just test bpf and vm
-> >> +# we will append other kernel selftest in the future
-> >> +TEST_LIST =3D "bpf \
-> >> +             vm \
-> >> +"
-> >> +
-> >> +EXTRA_OEMAKE =3D '\
-> >> +    CROSS_COMPILE=3D${TARGET_PREFIX} \
-> >> +    ARCH=3D${ARCH} \
-> >> +    CC=3D"${CC}" \
-> >> +    AR=3D"${AR}" \
-> >> +    LD=3D"${LD}" \
-> >> +'
-> >> +
-> >> +EXTRA_OEMAKE +=3D "\
-> >> +    'DESTDIR=3D${D}' \
-> >> +"
-> >> +
-> >> +KERNEL_SELFTEST_SRC ?=3D "Makefile \
-> >> +                        include \
-> >> +                        tools \
-> >> +                        scripts \
-> >> +                        arch \
-> >> +"
-> >> +
-> >> +do_compile() {
-> >> +    for i in ${TEST_LIST}
-> >> +    do
-> >> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
-> >> +    done
-> >> +}
-> >> +
-> >> +do_install() {
-> >> +    for i in ${TEST_LIST}
-> >> +    do
-> >> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
-> INSTALL_PATH=3D${D}/opt/kselftest/${i} install
-> >> +    done
-> >> +
-> >> +    chown root:root  -R ${D}/opt/kselftest
-> >> +}
-> >> +
-> >> +do_configure() {
-> >> +    :
-> >> +}
-> >> +
-> >> +do_configure[prefuncs] +=3D "copy_kselftest_source_from_kernel
-> remove_clang_related"
-> >> +python copy_kselftest_source_from_kernel() {
-> >> +    sources =3D (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
-> >> +    src_dir =3D d.getVar("STAGING_KERNEL_DIR")
-> >> +    dest_dir =3D d.getVar("S")
-> >> +    bb.utils.mkdirhier(dest_dir)
-> >> +    for s in sources:
-> >> +        src =3D oe.path.join(src_dir, s)
-> >> +        dest =3D oe.path.join(dest_dir, s)
-> >> +        if os.path.isdir(src):
-> >> +            oe.path.copytree(src, dest)
-> >> +        else:
-> >> +            bb.utils.copyfile(src, dest)
-> >> +}
-> >> +
-> >> +remove_clang_related() {
-> >> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d'
-> ${S}/tools/testing/selftests/bpf/Makefile
-> >> +}
-> >> +
-> >> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> >> +
-> >> +INHIBIT_PACKAGE_DEBUG_SPLIT=3D"1"
-> >> +FILES_${PN} +=3D "/opt/kselftest/"
-> >> --
-> >> 2.8.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+
+They are different patches
+
+>>          echo "${DTB}"
+>>  }
+>>
+>> --
+>> 2.7.4
+>>
+>>
+>> IMPORTANT NOTICE: The contents of this email and any attachments are con=
+fidential and may also be privileged. If you are not the intended recipient=
+, please notify the sender immediately and do not disclose the contents to =
+any other person, use it for any purpose, or store or copy the information =
+in any medium. Thank you.
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@list=
+s.openembedded.org>
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
 
