@@ -1,39 +1,42 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 920D175436
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 33CDB7546A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 20:09:52 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id b66-v6so10384841qkj.1
+	Mon,  9 Jul 2018 20:09:53 +0000 (UTC)
+Received: by mail-qk0-f176.google.com with SMTP id u62-v6so10376348qkf.9
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 09 Jul 2018 13:09:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=67NOGmiq3Wg3Sh3P3Zq8CCmDP71iHYyt4VttgJwDGTc=;
-	b=dp8N027mmT8gqojvEk2yGz70KJUHIcsgrMiTe9UnrG0EdkART2VO8QPYlyNWez5oDt
-	euqIyrXeMfL5fEjbZ3iql0HRCMpM7hA2JaFrJvD4O4p/7L1VAQfcm7yI3JmgXuHu1j4W
-	fVHANfJfzSxHi72aOQlT5AGY9SPEl5rAhn9bf1f1oQBjQHV9fGdAPeqUAB1eM+Pph62x
-	aL2q1BOmMIW/oRW1dCTeZSj4imNr3dAapAL/vt/wqw4Bd/Asxw//8iBAyZki0/TQgnVY
-	zTYWxd2GzcXDu4U3WNzM8MPP2Wihtyr10idpZV120pMA3iME2FiTed3oOjsXkyuLXI7m
-	U8CA==
-X-Gm-Message-State: APt69E1cBjLNITLB1GoE5sgr6k463DxLVNapNVdSWRbl27a+soakj28a
-	HwQ2WgWAd6bNow8S9bCYaY5Udi8/
-X-Google-Smtp-Source: AAOMgpeAOd3KT5AOHFdq3P4mcYQS4r0kKU8roRMxsK/ZpcJoWlf2qIOu4L20HfoDRDGQl0DKJyhSbg==
-X-Received: by 2002:a37:1791:: with SMTP id
-	17-v6mr18732963qkx.434.1531166993030; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=rOB8zYPlgIa0WiE/lor9a0NecDaZ48mv2Gxtecv1ES0=;
+	b=VWRMpGZ0NdYkkVmqaPxuQA/Hdpd5CxYh8mD3SS2P3RJIIua69RMxWZ1m0icCDU1K4y
+	7eBHZtgSuLNAKHp0j+1cKNCpuDRk4e5TgMXN7AoYXst6D6zuSPdMVjgS786OFivyiFfL
+	c5ReqAWCRYnKBfiYVhseXOp7OWA/vUJtLWyH8QEHgBMautkNQd7hInBbLwZe30AOQ4EB
+	cjwwUjNgFHoR0JAXGsysk4T/SzO31e0vXOtuqa5S1VRnwZ45bPDqQSlBAt8uuVF4H06d
+	KEL+cStr9U2E0nKIciBuRKAUua/vRmmDsc+Kku+ua42U+1NLIXPadU7HX+wbusZ3AF3z
+	sB/w==
+X-Gm-Message-State: APt69E14sRtrS1+pTQ0kvxVMiRQ1zpm5O68Uz5YWze+4KtLzcZ3HlagE
+	qwKqmIUdS5GEsC4zx85tOepzQlsI
+X-Google-Smtp-Source: AAOMgpfeYqQF4GDFzq9zIYBa49IBA0jGYemKv3j92WabmjTWKUg+x3LtaJ8MaCL2LZcl3FVP23du9w==
+X-Received: by 2002:a37:5a47:: with SMTP id
+	o68-v6mr19797570qkb.226.1531166993798; 
 	Mon, 09 Jul 2018 13:09:53 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	h22-v6sm10017368qkj.84.2018.07.09.13.09.52
+	h22-v6sm10017368qkj.84.2018.07.09.13.09.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 Jul 2018 13:09:52 -0700 (PDT)
+	Mon, 09 Jul 2018 13:09:53 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jul 2018 16:09:45 -0400
-Message-Id: <1531166986-7172-1-git-send-email-derek@asterius.io>
+Date: Mon,  9 Jul 2018 16:09:46 -0400
+Message-Id: <1531166986-7172-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH 1/2] nginx: enable thread pools by default
+In-Reply-To: <1531166986-7172-1-git-send-email-derek@asterius.io>
+References: <1531166986-7172-1-git-send-email-derek@asterius.io>
+Subject: [meta-webserver][PATCH 2/2] nginx: remove the 1.13 recipe in favor of the new dev branch of 1.5.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 20:09:52 -0000
-
-The thread pool feature can be enabled without significant extra binary size.  Thread pools can increase performance by an order of magnitude on some configurations
+X-List-Received-Date: Mon, 09 Jul 2018 20:09:53 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-webserver/recipes-httpd/nginx/nginx.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-webserver/recipes-httpd/nginx/nginx_1.13.12.bb | 10 ----------
+ meta-webserver/recipes-httpd/nginx/nginx_1.15.1.bb  | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.13.12.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.15.1.bb
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index e6ae52a..f1b50bc 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -71,6 +71,7 @@ do_configure () {
-     --http-scgi-temp-path=/run/nginx/scgi_temp \
-     --pid-path=/run/nginx/nginx.pid \
-     --prefix=${prefix} \
-+    --with-threads \
-     --with-http_ssl_module \
-     --with-http_gzip_static_module \
-     ${EXTRA_OECONF} ${PACKAGECONFIG_CONFARGS}
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.13.12.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.13.12.bb
+deleted file mode 100644
+index e629380..0000000
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.13.12.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require nginx.inc
+-
+-# 1.14.x branch is the current stable branch, the recommended default
+-# 1.13.x is the current mainline branches containing all new features
+-DEFAULT_PREFERENCE = "-1"
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
+-
+-SRC_URI[md5sum] = "20871b2cf21a16dbfb83078b4dc2dde0"
+-SRC_URI[sha256sum] = "fb92f5602cdb8d3ab1ad47dbeca151b185d62eedb67d347bbe9d79c1438c85de"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.15.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.15.1.bb
+new file mode 100644
+index 0000000..0f1ba8f
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.15.1.bb
+@@ -0,0 +1,10 @@
++require nginx.inc
++
++# 1.14.x branch is the current stable branch, the recommended default
++# 1.15.x is the current mainline branches containing all new features
++DEFAULT_PREFERENCE = "-1"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
++
++SRC_URI[md5sum] = "2dd5a265c54a76b699443931d80a61b9"
++SRC_URI[sha256sum] = "c7206858d7f832b8ef73a45c9b8f8e436bcb1ee88db2bc85b8e438ecec9d5460"
 -- 
 2.7.4
 
