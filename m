@@ -1,99 +1,56 @@
-Return-Path: <leon.anavi@konsulko.com>
-Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
-	[209.85.160.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 995086006A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
+	[209.85.213.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EBC674E95
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 15:17:22 +0000 (UTC)
-Received: by mail-pl0-f67.google.com with SMTP id z9-v6so6181347plo.1
+	Mon,  9 Jul 2018 15:29:46 +0000 (UTC)
+Received: by mail-vk0-f65.google.com with SMTP id t4-v6so10568609vke.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 08:17:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=UarUfa/jzQ5Ew6l5xiIr+RCBtw1oeP2LUtiK0a3mSow=;
-	b=AdEef/cEGNXfQx34nxJCZZfG7Bf+JoDnjlQ84NG5XC7Ar9R5ejV5CRKpXrQEykzT9A
-	PUzzdNywXxbRvGz+A3PQV7EfFt27/vmxC18z5GYG+h53s6LfKQj762b/zl7i5lrtEGX+
-	o4zzM0+55cKnuQXm2wDPj8JfjEm2rv7mxkWzE=
+	Mon, 09 Jul 2018 08:29:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=WVKuZ51MJi8mcvOn8IowI169PapendtQL6GB6bXQd7A=;
+	b=Vsi3fnWGvx7rkgnRd18YOkJTYtPDuoxhkbvJHeBJtM7CqToTXJ+gKs2wIokWXRYHPq
+	nDM6ZF2xk9RUdvaniUdOkWtoHYChiGY1/iHSU/bWvCrhAuK/vQIEWxqabbgpd33jXFDA
+	3RH4uxbYv8o7Dy0BccmYdXDDHChm+1HNjfssZjv4qAEVosSGLSkrUwEWNLQq/H4ESZUJ
+	J7zjMCb63bMfojmZ/cUhvh2xbLbdRapy547UmTDSyY6yf+12RTU8LHAc8xSa1wOgByr2
+	Q8YCEe3EK4tY8SuIc8T/BRsVDwiGnu8sHMyTBNg5ecUEZmdCCR4P+GaC2m6lk1p5uK0m
+	KHBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=UarUfa/jzQ5Ew6l5xiIr+RCBtw1oeP2LUtiK0a3mSow=;
-	b=co4n9Gc5qATGmB8lo9Qh88JDsbE1thabWxUzn3tlvR81aJ3ZRAyZv0UHI5FY0bleqi
-	Zh82uyqPDmktow4QZH5yP296sKXEiTXL+Azp8pYL7SxPh3HHPA+Z1+KX/93Zm+tAUzUL
-	bNCSlB2FeNOZnRDjXND2Nq8VWM4ZLxC3ezb/rfW2okwkS7kbLppfWiKgep85FUCnT+Nj
-	P+m7zhO8NiqbkJZ/9Iz45BH3hToA7NSGlw0hSmZPCIrxoTWP361PNUIB5q4oHF4vCr+O
-	5InxZ5rSKIH3r6W5iUrbsa77c0HvP3y+r5MnPPcPIlxhSpJ8G1TUl12E/6iRD+T/uSEx
-	4IFg==
-X-Gm-Message-State: APt69E0GDcbdySa2HOem9vjpMyxAQO1ueD+5saaDvwHTf+Kz1ihFEbU5
-	1OB3sxW3n+rfleutYxJnGN/+cbE087o=
-X-Google-Smtp-Source: AAOMgpekgBQMJqSSa4M7gfbek2nJHd+BtHdATk50acbgamPOsB4Ajaqvn6PLgvuXOvUmVDGhsN7xqA==
-X-Received: by 2002:a17:902:bc85:: with SMTP id
-	bb5-v6mr21060808plb.229.1531149443513; 
-	Mon, 09 Jul 2018 08:17:23 -0700 (PDT)
-Received: from [192.168.4.209] ([78.130.197.177])
-	by smtp.gmail.com with ESMTPSA id
-	x13-v6sm4037257pgv.91.2018.07.09.08.17.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 Jul 2018 08:17:22 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>
-References: <1530868443-19241-1-git-send-email-leon.anavi@konsulko.com>
-	<CAMKF1soVBU+OSVc=iUnfNcTR9jnKdA6tnQOg3oefgwgcS_r40Q@mail.gmail.com>
-From: Leon Anavi <leon.anavi@konsulko.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=leon.anavi@konsulko.com; prefer-encrypt=mutual; keydata=
-	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
-	Z14qQ+tQr2c=
-Message-ID: <fdeb4807-a74e-b52b-6c63-f8776d90175e@konsulko.com>
-Date: Mon, 9 Jul 2018 18:17:19 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=WVKuZ51MJi8mcvOn8IowI169PapendtQL6GB6bXQd7A=;
+	b=Jf6LclmFwXWQeU5bEQaC92IYNWXUzqxgx+NOIGvkWRl7x1DnDYsk2Ba7qXnZatFsSY
+	h0et3yM8bjn9J8+ErJGTJgNZ5NklHTUb1sExGfOEyCyFNrIocCn/Q+C71PKt711ApsiD
+	fHJvVFPbQIosxPS0yKRXI5tpeOa+FXcJCi5w/q7LXftL2x7dOGfr5uEtNQ51/jQV3fyI
+	Hr6NlE0/opmbcuN0GtP/KCbmlCPcQq9Ed0RpPkXypYUb/Vv1aTQ20V3j+RrtGjM4OTZX
+	rEagfA1EnJAiZMk0rIa2cWeT+uUucmiq0wH9gbS7aXpPtZR+1BvXUVefBjkubD/f/2x3
+	rjBg==
+X-Gm-Message-State: APt69E02k8R0azaqcu4cdscvx0Gnj3dPQzMh2wLH5mzS5mzrqqPqqknj
+	jkJDy4Vwo6jz3yZnFep5x+fH4fcowa3Pxf/JXGs=
+X-Google-Smtp-Source: AAOMgpdz1lVGqZym4oJ5am3FJkReyjgqwS8YwawWXrYgAF1mrB9GJU6ahyg/92Twfbv6oyoSP5bUEDWZyWzPUiMiYfw=
+X-Received: by 2002:a1f:4b86:: with SMTP id
+	y128-v6mr11101583vka.146.1531150187202; 
+	Mon, 09 Jul 2018 08:29:47 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soVBU+OSVc=iUnfNcTR9jnKdA6tnQOg3oefgwgcS_r40Q@mail.gmail.com>
+References: <20180705065408.103714-1-mingli.yu@windriver.com>
+	<CAMKF1spY_iwTDuGjzD7N6cNq+n6W9KhhYYd=vhJCg=uE=aNQyQ@mail.gmail.com>
+	<5B3F34E5.70101@windriver.com>
+	<CAMKF1sqa49UG0+Una67_ES6jE-ZphxcqcwHDur80mAcz6oZPUw@mail.gmail.com>
+	<5B42C73E.6070009@windriver.com>
+	<CAMKF1sp83jHPG+vsPJfRftB3EF0djzNZfM-YZyUUUvbqt_-n5w@mail.gmail.com>
+	<8f9048e33461462790467523f3b89fdf@XBOX02.axis.com>
+	<5B430283.6060202@windriver.com>
+	<df1945d103d444ada773567805d1c763@XBOX02.axis.com>
+In-Reply-To: <df1945d103d444ada773567805d1c763@XBOX02.axis.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 9 Jul 2018 08:29:21 -0700
+Message-ID: <CAMKF1sr_XF-dy53jcc44WpzzhZ7+XP4Ka4W4OBSyYp--ZZQBjg@mail.gmail.com>
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] vim: update to 8.1.0155
+Subject: Re: [meta-oe][PATCH] iozone3: Upgrade to 482
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,341 +63,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 15:17:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 09 Jul 2018 15:29:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
-
-Thank you for the feedback. I have updated the patch according to your
-recommendations. However, git send-email somehow didn't properly sent
-the prefix of the subject. Sorry about that. Anyway version 3 of my vim
-patch is available at:
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119281.html
-
-Please let me know if you have any additional remarks.
-
-Thanks,
-Leon
-
-
-On 7.07.2018 00:21, Khem Raj wrote:
-> On Fri, Jul 6, 2018 at 2:14 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->> Update vim to the latest version 8.1.0155.
->>
->> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> ---
->>  meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb |  13 ---
->>  meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb  |  13 +++
->>  meta-oe/recipes-support/vim/vim_8.1.0.116.bb      | 113 ----------------------
->>  meta-oe/recipes-support/vim/vim_8.1.0155.bb       | 113 ++++++++++++++++++++++
->>  4 files changed, 126 insertions(+), 126 deletions(-)
->>  delete mode 100644 meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
->>  create mode 100644 meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb
->>  delete mode 100644 meta-oe/recipes-support/vim/vim_8.1.0.116.bb
->>  create mode 100644 meta-oe/recipes-support/vim/vim_8.1.0155.bb
->>
-> this patch is ok however I would suggest that you add
+On Sun, Jul 8, 2018 at 11:58 PM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
 >
-> [diff]
->         renames = copies
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> > Yu, Mingli
+> > Sent: den 9 juli 2018 08:37
+> > To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>; Khem Raj
+> > <raj.khem@gmail.com>
+> > Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+> > Subject: Re: [oe] [meta-oe][PATCH] iozone3: Upgrade to 482
+> >
+> > On 2018=E5=B9=B407=E6=9C=8809=E6=97=A5 14:37, Peter Kjellerstedt wrote:
+> > >> -----Original Message-----
+> > >> From: openembedded-devel-bounces@lists.openembedded.org
+> > >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+> > Of
+> > >> Khem Raj
+> > >> Sent: den 9 juli 2018 06:02
+> > >> To: Yu, Mingli <mingli.yu@windriver.com>
+> > >> Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+> > >> Subject: Re: [oe] [meta-oe][PATCH] iozone3: Upgrade to 482
+> > >>
+> > >> On Sun, Jul 8, 2018 at 7:29 PM Yu, Mingli <mingli.yu@windriver.com>
+> > >> wrote:
+> > >>> On 2018=E5=B9=B407=E6=9C=8806=E6=97=A5 23:01, Khem Raj wrote:
+> > >>>> On Fri, Jul 6, 2018 at 2:27 AM Yu, Mingli
+> > <mingli.yu@windriver.com>
+> > >>> wrote:
+> > >>>>> On 2018=E5=B9=B407=E6=9C=8806=E6=97=A5 00:00, Khem Raj wrote:
+> > >>>>>> On Wed, Jul 4, 2018 at 11:54 PM <mingli.yu@windriver.com> wrote:
+> > >>>>>>>
+> > >>>>>>> From: Mingli Yu <mingli.yu@windriver.com>
+> > >>>>>>>
+> > >>>>>>> Update LIC_FILES_CHKSUM as the file iozone.c
+> > >>>>>>> used for LIC_FILES_CHKSUM updated
+> > >>>>>>>
+> > >>>>>>
+> > >>>>>> Please describe what has changed that is causing the checksums
+> > to
+> > >>>>>> change.
+> > >>>>>
+> > >>>>> The source file iozone.c changed has causing the checksum change.
+> > >>>>> I have already mention it in the commit message.
+> > >>>>
+> > >>>> Commit message does not say what changed,  We already know
+> > >>>> something has changed thats causing the checksum change but here
+> > we
+> > >>>> usually document what changed specifically, purpose is to let
+> > users
+> > >>>> know of any change in licensing requirements that they need to be
+> > >>>> aware of
+> > >>>
+> > >>> Thanks Khem!
+> > >>>
+> > >>> I will try to list the changes in V2 but actually the file iozone.c
+> > >>> used for checksum is source file. It has so much code changes
+> > unlike
+> > >>> some packages use COPYRIGHT file or README.md file for checksum.
+> > >>
+> > >> Ok that=E2=80=99s probably not ideal then. It would be better to jus=
+t use
+> > the
+> > >> needed lines from checksum
+> > >
+> > > Please note that it is only line 37-48 and 260-266 of iozone.c that
+> > are used
+> > > to calculate the checksums. However, I guess that that due to the
+> > fact there
+> > > is source in between line 48 and 260, some lines have been
+> > added/removed, so
+> > > that the line numbers used in the checksum calculation are now off
+> > (or they
+> > > were off already before). Looking at the current source, my guess is
+> > that
+> > > lines 260-266 should be changed to 269-275.
+> >
+> > >
+> > > Someone should really ask upstream to include a LICENSE file....
+> >
+> > Thanks Peter!
+> >
+> > It's better to include a LICENSE file.
+> >
+> > But now, how about just use 37-48 lines to calculate the checksum?
+> >
+> > Hi Khem,
+> > What's your opinion?
+> >
+> > Thanks,
 >
-> to your ~/.gitconfig this will help git detect renames and make
-> patches easier to review.
->
->> diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb b/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
->> deleted file mode 100644
->> index bb8f2b7..0000000
->> --- a/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
->> +++ /dev/null
->> @@ -1,13 +0,0 @@
->> -require vim_${PV}.bb
->> -
->> -SUMMARY += " (with tiny features)"
->> -
->> -PACKAGECONFIG += "tiny"
->> -
->> -do_install() {
->> -    install -d ${D}/${bindir}
->> -    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
->> -}
->> -
->> -ALTERNATIVE_PRIORITY = "90"
->> -ALTERNATIVE_TARGET = "${bindir}/vim.tiny"
->> diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb b/meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb
->> new file mode 100644
->> index 0000000..bb8f2b7
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/vim/vim-tiny_8.1.0155.bb
->> @@ -0,0 +1,13 @@
->> +require vim_${PV}.bb
->> +
->> +SUMMARY += " (with tiny features)"
->> +
->> +PACKAGECONFIG += "tiny"
->> +
->> +do_install() {
->> +    install -d ${D}/${bindir}
->> +    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
->> +}
-> This could just be made a single liner with
->
-> install -D -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
->
->> +
->> +ALTERNATIVE_PRIORITY = "90"
->> +ALTERNATIVE_TARGET = "${bindir}/vim.tiny"
->> diff --git a/meta-oe/recipes-support/vim/vim_8.1.0.116.bb b/meta-oe/recipes-support/vim/vim_8.1.0.116.bb
->> deleted file mode 100644
->> index f669dfe..0000000
->> --- a/meta-oe/recipes-support/vim/vim_8.1.0.116.bb
->> +++ /dev/null
->> @@ -1,113 +0,0 @@
->> -SUMMARY = "Vi IMproved - enhanced vi editor"
->> -SECTION = "console/utils"
->> -DEPENDS = "ncurses gettext-native"
->> -# vimdiff doesn't like busybox diff
->> -RSUGGESTS_${PN} = "diffutils"
->> -LICENSE = "vim"
->> -LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b6eb9d541de3933cc8f48125ae0335fe"
->> -
->> -SRC_URI = "git://github.com/vim/vim.git \
->> -           file://disable_acl_header_check.patch;patchdir=.. \
->> -           file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
->> -"
->> -SRCREV = "a87b72cc316e065d66dcbcf7ec1cde330adef3a3"
->> -
->> -S = "${WORKDIR}/git/src"
->> -
->> -VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
->> -
->> -inherit autotools-brokensep update-alternatives
->> -
->> -CLEANBROKEN = "1"
->> -
->> -# vim configure.in contains functions which got 'dropped' by autotools.bbclass
->> -do_configure () {
->> -    rm -f auto/*
->> -    touch auto/config.mk
->> -    aclocal
->> -    autoconf
->> -    oe_runconf
->> -    touch auto/configure
->> -    touch auto/config.mk auto/config.h
->> -}
->> -
->> -#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
->> -PACKAGECONFIG ??= ""
->> -PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)}"
->> -
->> -PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
->> -PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
->> -PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
->> -PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
->> -PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
->> -PACKAGECONFIG[elfutils] = "--enable-elf-check,,elfutils,"
->> -
->> -EXTRA_OECONF = " \
->> -    --disable-gpm \
->> -    --disable-gtktest \
->> -    --disable-xim \
->> -    --disable-netbeans \
->> -    --with-tlib=ncurses \
->> -    ac_cv_small_wchar_t=no \
->> -    vim_cv_getcwd_broken=no \
->> -    vim_cv_memmove_handles_overlap=yes \
->> -    vim_cv_stat_ignores_slash=no \
->> -    vim_cv_terminfo=yes \
->> -    vim_cv_tgetent=non-zero \
->> -    vim_cv_toupper_broken=no \
->> -    vim_cv_tty_group=world \
->> -    STRIP=/bin/true \
->> -"
->> -
->> -do_install() {
->> -    autotools_do_install
->> -
->> -    # Work around file-rdeps picking up csh, awk, perl or python as a dep
->> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
->> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
->> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
->> -    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.py
->> -
->> -    # Install example vimrc from runtime files
->> -    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
->> -
->> -    # we use --with-features=big as default
->> -    mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
->> -}
->> -
->> -PARALLEL_MAKEINST = ""
->> -
->> -PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-tools"
->> -FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
->> -FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
->> -FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
->> -FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
->> -FILES_${PN}-data = "${datadir}/${BPN}"
->> -FILES_${PN}-tools = "${datadir}/${BPN}/${VIMDIR}/tools"
->> -FILES_${PN}-common = " \
->> -    ${datadir}/${BPN}/${VIMDIR}/*.vim \
->> -    ${datadir}/${BPN}/${VIMDIR}/autoload \
->> -    ${datadir}/${BPN}/${VIMDIR}/colors \
->> -    ${datadir}/${BPN}/${VIMDIR}/compiler \
->> -    ${datadir}/${BPN}/${VIMDIR}/ftplugin \
->> -    ${datadir}/${BPN}/${VIMDIR}/indent \
->> -    ${datadir}/${BPN}/${VIMDIR}/keymap \
->> -    ${datadir}/${BPN}/${VIMDIR}/lang \
->> -    ${datadir}/${BPN}/${VIMDIR}/macros \
->> -    ${datadir}/${BPN}/${VIMDIR}/plugin \
->> -    ${datadir}/${BPN}/${VIMDIR}/print \
->> -    ${datadir}/${BPN}/${VIMDIR}/spell \
->> -    ${datadir}/icons \
->> -"
->> -
->> -RDEPENDS_${BPN} = "ncurses-terminfo-base"
->> -# Recommend that runtime data is installed along with vim
->> -RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
->> -
->> -ALTERNATIVE_${PN} = "vi vim"
->> -ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
->> -ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
->> -ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
->> -ALTERNATIVE_PRIORITY = "100"
->> -
->> -BBCLASSEXTEND = "native"
->> diff --git a/meta-oe/recipes-support/vim/vim_8.1.0155.bb b/meta-oe/recipes-support/vim/vim_8.1.0155.bb
->> new file mode 100644
->> index 0000000..532b50c
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/vim/vim_8.1.0155.bb
->> @@ -0,0 +1,113 @@
->> +SUMMARY = "Vi IMproved - enhanced vi editor"
->> +SECTION = "console/utils"
->> +DEPENDS = "ncurses gettext-native"
->> +# vimdiff doesn't like busybox diff
->> +RSUGGESTS_${PN} = "diffutils"
->> +LICENSE = "vim"
->> +LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b6eb9d541de3933cc8f48125ae0335fe"
->> +
->> +SRC_URI = "git://github.com/vim/vim.git \
->> +           file://disable_acl_header_check.patch;patchdir=.. \
->> +           file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
->> +"
->> +SRCREV = "ae728edc93fe5a2f8c39fa75b1ae9ed71526858c"
->> +
->> +S = "${WORKDIR}/git/src"
->> +
->> +VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
->> +
->> +inherit autotools-brokensep update-alternatives
->> +
->> +CLEANBROKEN = "1"
->> +
->> +# vim configure.in contains functions which got 'dropped' by autotools.bbclass
->> +do_configure () {
->> +    rm -f auto/*
->> +    touch auto/config.mk
->> +    aclocal
->> +    autoconf
->> +    oe_runconf
->> +    touch auto/configure
->> +    touch auto/config.mk auto/config.h
->> +}
->> +
->> +#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
->> +PACKAGECONFIG ??= ""
->> +PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)}"
->> +
->> +PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
->> +PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
->> +PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
->> +PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
->> +PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
->> +PACKAGECONFIG[elfutils] = "--enable-elf-check,,elfutils,"
->> +
->> +EXTRA_OECONF = " \
->> +    --disable-gpm \
->> +    --disable-gtktest \
->> +    --disable-xim \
->> +    --disable-netbeans \
->> +    --with-tlib=ncurses \
->> +    ac_cv_small_wchar_t=no \
->> +    vim_cv_getcwd_broken=no \
->> +    vim_cv_memmove_handles_overlap=yes \
->> +    vim_cv_stat_ignores_slash=no \
->> +    vim_cv_terminfo=yes \
->> +    vim_cv_tgetent=non-zero \
->> +    vim_cv_toupper_broken=no \
->> +    vim_cv_tty_group=world \
->> +    STRIP=/bin/true \
->> +"
->> +
->> +do_install() {
->> +    autotools_do_install
->> +
->> +    # Work around file-rdeps picking up csh, awk, perl or python as a dep
->> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
->> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
->> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
->> +    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.py
->> +
->> +    # Install example vimrc from runtime files
->> +    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
->> +
->> +    # we use --with-features=big as default
->> +    mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
->> +}
->> +
->> +PARALLEL_MAKEINST = ""
->> +
->> +PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-tools"
->> +FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
->> +FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
->> +FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
->> +FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
->> +FILES_${PN}-data = "${datadir}/${BPN}"
->> +FILES_${PN}-tools = "${datadir}/${BPN}/${VIMDIR}/tools"
->> +FILES_${PN}-common = " \
->> +    ${datadir}/${BPN}/${VIMDIR}/*.vim \
->> +    ${datadir}/${BPN}/${VIMDIR}/autoload \
->> +    ${datadir}/${BPN}/${VIMDIR}/colors \
->> +    ${datadir}/${BPN}/${VIMDIR}/compiler \
->> +    ${datadir}/${BPN}/${VIMDIR}/ftplugin \
->> +    ${datadir}/${BPN}/${VIMDIR}/indent \
->> +    ${datadir}/${BPN}/${VIMDIR}/keymap \
->> +    ${datadir}/${BPN}/${VIMDIR}/lang \
->> +    ${datadir}/${BPN}/${VIMDIR}/macros \
->> +    ${datadir}/${BPN}/${VIMDIR}/plugin \
->> +    ${datadir}/${BPN}/${VIMDIR}/print \
->> +    ${datadir}/${BPN}/${VIMDIR}/spell \
->> +    ${datadir}/icons \
->> +"
->> +
->> +RDEPENDS_${BPN} = "ncurses-terminfo-base"
->> +# Recommend that runtime data is installed along with vim
->> +RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
->> +
->> +ALTERNATIVE_${PN} = "vi vim"
->> +ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
->> +ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
->> +ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
->> +ALTERNATIVE_PRIORITY = "100"
->> +
->> +BBCLASSEXTEND = "native"
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> The problem is that the license information is really at lines 269-275.
+> And at lines 37-48. Which is a mess...
 
--- 
-Leon Anavi
-Software Engineer
-konsulko.com
 
+ok. you can have two entries in checksum like we do for multiple license fi=
+les.
 
