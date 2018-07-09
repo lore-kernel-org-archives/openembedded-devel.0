@@ -1,38 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D48A7489E
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 081A574F4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 17:53:47 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id l10-v6so16119968qtj.0
+	Mon,  9 Jul 2018 18:16:15 +0000 (UTC)
+Received: by mail-qk0-f179.google.com with SMTP id o2-v6so10172627qkc.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 10:53:48 -0700 (PDT)
+	Mon, 09 Jul 2018 11:16:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WC25A2wVD9C1DQ23j2CFJlx4FVB3KnRZlB198mcojwM=;
-	b=IPVDNTRgOJILHfq3JRuzGxf2h1u1Yb4U5E9fAPl4mBWCX/Cb/HeYEkukwBI7P9awMs
-	gnezc3HjIq/iMlbx5m/nSqDjr92h3F1bE2Hy/M8FaNY7CRXAMws3ROBGdordAglEuUx1
-	d7Vt++3NHEy0OE7Zbq0pYvQ08hddoE8IXkXw6xm11dfHZ+7UfzNVEhliaZXIU5lkflv0
-	XRQupOgXK04QnYiZ9txSU0aAme7cCzLpkdyXHj/e+x44X0Jxu+scA9ga47XcY8FZj8E0
-	5CsLAcwND3VQI7w/Mur0KK8SSZyyTRLVEQ3V9Nu/VoTP6YMI71VhIJ2XE2MBBuG6I844
-	j5Sg==
-X-Gm-Message-State: AOUpUlG+7QP0SlebuBfkMT4mBdMui4KlqYJZrMTdynjsGd2rGPFRGweY
-	XAnhSxDeW4f/9PWN+OJOofLARYYM
-X-Google-Smtp-Source: AAOMgpffBoYO54F+/a173zmI7G6Pk7eTBimgGS2RB89D6pws1VlVdIyFNqPb3uPEoZYQHAfsxoSN+Q==
-X-Received: by 2002:a0c:80a8:: with SMTP id 37-v6mr2131355qvb.13.1531158827732;
-	Mon, 09 Jul 2018 10:53:47 -0700 (PDT)
+	bh=64Xfr27s6n8STqA04/IUCgNxhR8MRctKenIG1LqmgY4=;
+	b=md9V0eLUuw85aPg/84DYIdqiYdFmzCM1wZghF2uLEEu6zfXLLwV7Pl1ZcyZqauNahl
+	UdVJ4CL3VlVRei3ZJlfGwqMhtz94ev5Z3JWzJFJ1JcKLxaj3jB5UKkMi+GpfImjdRb3d
+	G1REbtbPrYWf5ZSIzeMEyt0VHKG8wZX61xWzy74ofiestOs07C0VxKU4WDKgXnGD9ptu
+	Sp8KaEsbU9J0ew/rsJmdxUvAafy29Wds7x6zeyvPv8DmAdoN0YxB+doUoh6dEv5U4x0u
+	SPzn4fpbxtaw2bIa8Xo8RUqasiQCoUiyhzaQ3n7FIvbmOvurAeR9UzgnyktLxtVwNUsL
+	3lSA==
+X-Gm-Message-State: AOUpUlGcQ/P39k2l3akcqZUSpEWpt9Deu/Kx7PtNzVHpZnr9KPTW9cgU
+	BtgQFIAwEperh/b9RClGUmSBO/VH
+X-Google-Smtp-Source: AAOMgpcIFk7Fc7WqoU2oDDhgq/laNQy+ntHK7iJkUQEFr01xh9bjuURlth4VDjgG3oPyYdHLeWvlBw==
+X-Received: by 2002:a37:b246:: with SMTP id
+	b67-v6mr6283789qkf.284.1531160176557; 
+	Mon, 09 Jul 2018 11:16:16 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	y49-v6sm13447944qty.91.2018.07.09.10.53.46
+	m12-v6sm8571348qkl.54.2018.07.09.11.16.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 Jul 2018 10:53:47 -0700 (PDT)
+	Mon, 09 Jul 2018 11:16:15 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jul 2018 13:53:40 -0400
-Message-Id: <1531158820-11318-1-git-send-email-derek@asterius.io>
+Date: Mon,  9 Jul 2018 14:16:09 -0400
+Message-Id: <1531160169-14761-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-can: update to version 2.2.0
+Subject: [meta-python][PATCH] python-cmd2: update to version 0.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 17:53:47 -0000
+X-List-Received-Date: Mon, 09 Jul 2018 18:16:16 -0000
+
+License-Update: Modify the line number for the license
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-can.inc                    | 4 ++--
- .../python/{python-can_2.1.0.bb => python-can_2.2.0.bb}               | 0
- .../python/{python3-can_2.1.0.bb => python3-can_2.2.0.bb}             | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-can_2.1.0.bb => python-can_2.2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-can_2.1.0.bb => python3-can_2.2.0.bb} (100%)
+ .../python/{python-cmd2_0.8.1.bb => python-cmd2_0.9.2.bb}           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cmd2_0.8.1.bb => python-cmd2_0.9.2.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python-can.inc b/meta-python/recipes-devtools/python/python-can.inc
-index a71c47b..959da83 100644
---- a/meta-python/recipes-devtools/python/python-can.inc
-+++ b/meta-python/recipes-devtools/python/python-can.inc
-@@ -3,8 +3,8 @@ SECTION = "devel/python"
- LICENSE = "LGPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=38138baa100d7259934590850bc0406e"
+diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.8.1.bb b/meta-python/recipes-devtools/python/python-cmd2_0.9.2.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python-cmd2_0.8.1.bb
+rename to meta-python/recipes-devtools/python/python-cmd2_0.9.2.bb
+index 145ab98..74dbaef 100644
+--- a/meta-python/recipes-devtools/python/python-cmd2_0.8.1.bb
++++ b/meta-python/recipes-devtools/python/python-cmd2_0.9.2.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "Extra features for standard library's cmd module"
+ HOMEPAGE = "http://packages.python.org/cmd2/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=51;endline=51;md5=0f13c9cfc75288223cf7edd2f3b985a2"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=52;endline=52;md5=0f13c9cfc75288223cf7edd2f3b985a2"
  
--SRC_URI[md5sum] = "3310f0aa2a8492d0ff614ecf636ec8a8"
--SRC_URI[sha256sum] = "4a5c01dd67feeda35f88e6c12ea14ac8cabd426b9be0cc5f9fd083fe90a9dbfc"
-+SRC_URI[md5sum] = "670cf82f67c6d2bd6516b638f129a196"
-+SRC_URI[sha256sum] = "187fac2fbc807561344a6df99cf7b776c0a10182bf99bb10a5c83af45b57dc11"
+-SRC_URI[md5sum] = "701b916ffac99137bea413205106f993"
+-SRC_URI[sha256sum] = "d09976f9ad2327883c2d07b5acb42e66ad52b17e352873c22041ed124bfe8aba"
++SRC_URI[md5sum] = "bfe0900a2288283a40f0ee7533486a2f"
++SRC_URI[sha256sum] = "e7b6b4b76272a051c943c3c709cd760142af16fbc9218e0ed3c22b28ea38d0a8"
  
- PYPI_PACKAGE="python-can"
+ inherit pypi setuptools
  
-diff --git a/meta-python/recipes-devtools/python/python-can_2.1.0.bb b/meta-python/recipes-devtools/python/python-can_2.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-can_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python-can_2.2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-can_2.1.0.bb b/meta-python/recipes-devtools/python/python3-can_2.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-can_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-can_2.2.0.bb
 -- 
 2.7.4
 
