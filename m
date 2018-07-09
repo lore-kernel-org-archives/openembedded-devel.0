@@ -1,52 +1,41 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-oi0-f44.google.com (mail-oi0-f44.google.com
-	[209.85.218.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B1AE74F9D
+Return-Path: <leon.anavi@konsulko.com>
+Received: from anavi.org (unknown [91.215.217.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 74DE66006A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 10:51:02 +0000 (UTC)
-Received: by mail-oi0-f44.google.com with SMTP id n84-v6so35003999oib.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 03:51:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/jP818rem2Fe9Z+en7ceyhqyYaxFu5Fp6bmPFFVSqSQ=;
-	b=zZDejX4QwpF9aOydc7UjkQfLLhKcMue1sG622hIF3jwFP3zElDsScfldu99ouuEwzL
-	RxqUIAXzEQVdG2S6wM8saChMzg0jDsT0q3ZtoPtTb7o34RfJP9rE5Hst97p0icRW0aFU
-	L107wkrlR+3gDDQEnNzVQ9i4E8QZW04qKQTxTJz5xcR9HmxJ6kg+TBPzYHXYObAyMAL2
-	ZErKvLn7vYHLThvk5+up/3bNLHP127F2098Mx1GXOqh6WELxmmQ27N0C+3pjwUXp7TZ3
-	gkOlaMayKQici3F6LPH8KUUYVnA7aokjAB0LMXe+KI9/pBdTQvY5pWBpVHlyKOOhhG+C
-	fVQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/jP818rem2Fe9Z+en7ceyhqyYaxFu5Fp6bmPFFVSqSQ=;
-	b=XsXOnHdwLj++cMydMuDJtNsCuWdo9hLsvR+EDQZVivL2jeZbzveQmRzN9h0gRN5vAb
-	Fh5RIRQ3klG+GY47mVqFj6c+DQExtEM3HdPlBkDu5m7NHov3saAm4HclhUFPGpOYZbaI
-	sMwJALGTjlEJC/i+GCeVE1zS1wdaK+zDYDCH11KzOY3Yu/Az2YLhMEgqEZWqfkWxwl51
-	cR/ttT2W4fX7VWOQAadMHdieUb8Rw63CeIHXWFrBC5UYg0w+H5T/jET4xYVjLAgPfgUI
-	PoUQW+jBqN6+V0wjBunfDXUJj0aRybjFGuTm6yUU3TPTD6VUd1wX4keGFRVUPjIBCwvF
-	DJLA==
-X-Gm-Message-State: APt69E2+aCEAyYHf8/CQLQlQ09PZfosRMxWYkk0ubeC7Aup2Bhe0PPqW
-	8U+9kyubIHh4nGVXalpS6wmkqLSmtMyEPO71HETMZw==
-X-Google-Smtp-Source: AAOMgpc6juPGGTkuwBbD2mwQjRAe8X38G5az6qsUf5uiEqi+UTmopALxB6neNIp4MXoH2Tz18pmspkrZN8EwIeic2Sg=
-X-Received: by 2002:aca:e185:: with SMTP id
-	y127-v6mr24173556oig.245.1531133463701; 
-	Mon, 09 Jul 2018 03:51:03 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:6845:0:0:0:0:0 with HTTP;
-	Mon, 9 Jul 2018 03:50:43 -0700 (PDT)
-In-Reply-To: <CAJTo0LYmnfFkq6bVsQ47TCwvYgbE6OUnZRQUg5h5hR69tDht-w@mail.gmail.com>
-References: <20180708080640.39121-1-raj.khem@gmail.com>
-	<20180708080640.39121-2-raj.khem@gmail.com>
-	<CAJTo0LYmnfFkq6bVsQ47TCwvYgbE6OUnZRQUg5h5hR69tDht-w@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 9 Jul 2018 11:50:43 +0100
-Message-ID: <CAJTo0Lb=X_W_SXrFdZRgQjdnreGq5qSyTMHC9NQUh-uxBBQ29A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH 2/2] python3-lxml, python3-pandas, python3-protobuf: Set CLEANBROKEN
+	Mon,  9 Jul 2018 15:13:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=anavi.org; 
+	s=default;
+	h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version
+	:Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=asMDJT8X47rMpVdQ34e5enc2nGZFsqpJCmCVn1benIU=;
+	b=XZIYrKiHGw1zRbbTdO2gVqGRYp
+	exvIRyAIGXqtlnDN4zIBAU8XacQbILvgoM9Fw2JxzVTSq9igHUaOYKxud0xRhFn5mteO3ty172aTF
+	NlavIqQnPT2Z3uB+1LLs2X3Ek5ZH4Hv7ZupcqunvD7VHdJj+0S1PzK8Xolsms07SOYeI=; 
+Received: from [78.130.197.177] (port=38946 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.91)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1fcXr1-0004pZ-Dm; Mon, 09 Jul 2018 18:13:31 +0300
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  9 Jul 2018 18:13:19 +0300
+Message-Id: <1531149200-31915-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [PATCH v3] vim: update to 8.1.0172
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 10:51:03 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 09 Jul 2018 15:13:32 -0000
 
-I've just sent a patch for oe-core to improve how it calls clean,
-which fixes lxml.
+Update vim to the latest version 8.1.0172.
 
-Pandas can be fixed by depending on cython, patch sent.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../vim/{vim-tiny_8.1.0.116.bb => vim-tiny_8.1.0172.bb}                | 3 +--
+ meta-oe/recipes-support/vim/{vim_8.1.0.116.bb => vim_8.1.0172.bb}      | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/vim/{vim-tiny_8.1.0.116.bb => vim-tiny_8.1.0172.bb} (67%)
+ rename meta-oe/recipes-support/vim/{vim_8.1.0.116.bb => vim_8.1.0172.bb} (98%)
 
-protobuf is broken, we still need the cleanbroken but I plan to do the
-same for python2 so I've just sent a patch to add it to the inc file.
+diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb b/meta-oe/recipes-support/vim/vim-tiny_8.1.0172.bb
+similarity index 67%
+rename from meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
+rename to meta-oe/recipes-support/vim/vim-tiny_8.1.0172.bb
+index bb8f2b7..84ad659 100644
+--- a/meta-oe/recipes-support/vim/vim-tiny_8.1.0.116.bb
++++ b/meta-oe/recipes-support/vim/vim-tiny_8.1.0172.bb
+@@ -5,8 +5,7 @@ SUMMARY += " (with tiny features)"
+ PACKAGECONFIG += "tiny"
+ 
+ do_install() {
+-    install -d ${D}/${bindir}
+-    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
++    install -D -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
+ }
+ 
+ ALTERNATIVE_PRIORITY = "90"
+diff --git a/meta-oe/recipes-support/vim/vim_8.1.0.116.bb b/meta-oe/recipes-support/vim/vim_8.1.0172.bb
+similarity index 98%
+rename from meta-oe/recipes-support/vim/vim_8.1.0.116.bb
+rename to meta-oe/recipes-support/vim/vim_8.1.0172.bb
+index f669dfe..8e99919 100644
+--- a/meta-oe/recipes-support/vim/vim_8.1.0.116.bb
++++ b/meta-oe/recipes-support/vim/vim_8.1.0172.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/vim/vim.git \
+            file://disable_acl_header_check.patch;patchdir=.. \
+            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
+ "
+-SRCREV = "a87b72cc316e065d66dcbcf7ec1cde330adef3a3"
++SRCREV = "c229e54a69468722ca2449e807e90445b7479659"
+ 
+ S = "${WORKDIR}/git/src"
+ 
+-- 
+2.7.4
 
-Ross
-
-On 9 July 2018 at 10:52, Burton, Ross <ross.burton@intel.com> wrote:
-> The lxml failure can be fixed with a tweak to the class, so I'll run
-> the tweak through all of meta-python to see if it regresses anything
-> else.  Please hold this off until I report back.
->
-> Ross
->
-> On 8 July 2018 at 09:06, Khem Raj <raj.khem@gmail.com> wrote:
->> The distutils class got a clean via "setup.py clean", but these
->> recipes doesn't support this yet so disable clean target during
->> configure
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb     | 1 +
->>  meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb  | 1 +
->>  meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb | 1 +
->>  3 files changed, 3 insertions(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb b/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb
->> index ff4bc7faad..b95d7bae71 100644
->> --- a/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb
->> +++ b/meta-python/recipes-devtools/python/python3-lxml_4.2.3.bb
->> @@ -1,2 +1,3 @@
->>  inherit setuptools3
->>  require python-lxml.inc
->> +CLEANBROKEN = "1"
->> diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb b/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb
->> index b5dd5e0924..c1e57189cf 100644
->> --- a/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb
->> +++ b/meta-python/recipes-devtools/python/python3-pandas_0.23.1.bb
->> @@ -1,2 +1,3 @@
->>  inherit setuptools3
->>  require python-pandas.inc
->> +CLEANBROKEN = "1"
->> diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
->> index 781d1dc4da..53d5528c4b 100644
->> --- a/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
->> +++ b/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
->> @@ -1,2 +1,3 @@
->>  inherit setuptools3
->>  require python-protobuf.inc
->> +CLEANBROKEN = "1"
->> --
->> 2.18.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
