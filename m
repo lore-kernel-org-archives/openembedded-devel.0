@@ -1,39 +1,23 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C3FA75223
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B081F754C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jul 2018 22:16:01 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id e19-v6so2552082qtp.8
+	Tue, 10 Jul 2018 03:20:31 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6A3KU02006071
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 15:16:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=t2HQUqaMCaSH/H7zR2hlzS0sgGNCBrronmnx7ju8MSg=;
-	b=Uam+WWoUrHGGAW6waDmJnJ/AFiXRxHnrEdwNxVJ2rpe046SzP/CEP1ncz5/wLlvGWe
-	DcP6Lqt7LC/iCsxvoxOtf9jMhT/plkQJw4QPmQJCmAUpwDH3UNQMHyB3E7h+ryXl7Qdh
-	wcIHWpuKVVQs4SLq8d7qpLYloUvW9HnlW1/EJuezmFlWg6D0ttLzb8syvWr338erTYTl
-	BygwxxrlgYisd5EfB+Ir0oZMbny/cO9zQO/a7TnROgs6KaqddflWZ2tpOQWFAybGO4VB
-	m8i38Ov5pYj8cDO9Bus686Gtr++0R1qzCX5N4Gu134iqhYrb/C3HSPXAbX21KELTzyFJ
-	zgPw==
-X-Gm-Message-State: APt69E1fEZd8FI/5hW0pV1atKd8kcuuMw+BZAVwCB5iY5FoxVgaR3F2Y
-	5EojYkX4nWYNJzkMbepMrB/rgbWh
-X-Google-Smtp-Source: AAOMgpeW/LSt62EhPhpJEtpv8SzxnC59kniMmcXE8VXcyETlFw0ROM11/aykTT+BQHwzTEDZgC+V0w==
-X-Received: by 2002:a0c:ae71:: with SMTP id
-	z46-v6mr18402979qvc.108.1531174561779; 
-	Mon, 09 Jul 2018 15:16:01 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.61.164])
-	by smtp.gmail.com with ESMTPSA id
-	q22-v6sm8681313qtc.33.2018.07.09.15.16.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 Jul 2018 15:16:01 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jul 2018 18:15:53 -0400
-Message-Id: <1531174553-27187-1-git-send-email-derek@asterius.io>
+	Mon, 9 Jul 2018 20:20:31 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Mon, 9 Jul 2018 20:20:30 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 10 Jul 2018 11:20:25 +0800
+Message-ID: <1531192828-46910-1-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyro4: update to version 4.73
+MIME-Version: 1.0
+Subject: [PATCH][meta-oe] phoronix-test-suite: upgrade 7.8.0 -> 8.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jul 2018 22:16:01 -0000
+X-List-Received-Date: Tue, 10 Jul 2018 03:20:31 -0000
+Content-Type: text/plain
 
-License-Update: Update the license checksum based on whitespace changes
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../python-pyro4/{python-pyro4_4.63.bb => python-pyro4_4.73.bb}     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-connectivity/python-pyro4/{python-pyro4_4.63.bb => python-pyro4_4.73.bb} (55%)
+ .../{phoronix-test-suite_7.8.0.bb => phoronix-test-suite_8.0.1.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-benchmark/phoronix-test-suite/{phoronix-test-suite_7.8.0.bb => phoronix-test-suite_8.0.1.bb} (90%)
 
-diff --git a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.63.bb b/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.73.bb
-similarity index 55%
-rename from meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.63.bb
-rename to meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.73.bb
-index 6f683e3..88f5b18 100644
---- a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.63.bb
-+++ b/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.73.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "Python Remote Objects"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=378acef375e17a3bff03bd0f78c53220"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cd13dafd4eeb0802bb6efea6b4a4bdbc"
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
+similarity index 90%
+rename from meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
+rename to meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
+index 1f90a71..402779e 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SECTION = "console/tests"
  
--SRC_URI[md5sum] = "e1d772b67bf7c6f75fa3174bc95c8839"
--SRC_URI[sha256sum] = "67d2b34156619ba37e92100af95aade8129dd2b7327eb05821d43887451f7d7b"
-+SRC_URI[md5sum] = "0375c061b93411feb86da01e801df888"
-+SRC_URI[sha256sum] = "536b07a097d0619e7ab1effa3747fda177a24168d17a07a93ca9ac30977608f7"
+ SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
+-SRC_URI[md5sum] = "850843bd9252823e7e24bc0849773000"
+-SRC_URI[sha256sum] = "cd6c869841f28e4ac1e8a5e4cda05fafce9a523a6b4f0f3a47805efd30494d88"
++SRC_URI[md5sum] = "3dc3a0e490e909f188379a9e05fd4780"
++SRC_URI[sha256sum] = "6306549109c7254baf31edb385265b19557b5692217d2dfcf96f6fb17de8e842"
  
- PYPI_PACKAGE = "Pyro4"
+ S = "${WORKDIR}/phoronix-test-suite"
  
 -- 
 2.7.4
