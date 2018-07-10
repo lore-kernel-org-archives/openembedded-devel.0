@@ -1,47 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
-	[209.85.217.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E68A6FFED
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C67F6093A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2018 04:21:52 +0000 (UTC)
-Received: by mail-ua0-f177.google.com with SMTP id t14-v6so13133092uao.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jul 2018 21:21:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=/0R4OI89Ncr0uUR25vtpzJmfdfeOynctC+FrkyCPdko=;
-	b=fV/1c2/sejaj5d7f5tMrp9NOc1dB7cRtO/1Db8SHqIcYQ3Yc9zmb0XdDfcTyTf1+CQ
-	+CRrGeB+Gb743YuPT9Zdnu5IKa/chSALZ9LIBZqUWKZ73z+6KqyNTmR6IAmYGDqffctM
-	CA39PmO08xrJbkP5YENf7pAjHUi+OH4dMN0JdlpMzSdHmflZKomFbRKhM+qsvc7GYkVu
-	zcuwpn3S7tGeyFU4oWTiJhQA9gCxMyZS9XPSdQriTgLWblzqVrAbcN5sc5e/MaG9p0v5
-	6oAzw7rXCLwurFAjLcKhUfHyZHron8fSlCvPmbZi7kKEk3YCeoze0Gkwz11hipnLuTLB
-	zlCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=/0R4OI89Ncr0uUR25vtpzJmfdfeOynctC+FrkyCPdko=;
-	b=r5j30xpwJX//9bR3sWDRAMhxHYBs8QK0jE4fsJnzmBEMFR01TW+LAgCW5PUvvkqyLc
-	qfuDbx6XZLbJqkKblzyuV/ECZLYPLSzkZDsnP25gUONbGRsnxeV/bUl1X5YQndcCry84
-	rSYHmysEGfOJwqD7RJ2kQspvFcGHpuoAHPanKUwIK9BvXzxVIDuiiTeUND6MR79oTGhB
-	X0SxfR9zW5z2IHIgbPIJ5nEB42QJYYqqv/GuqhbNRtsiE4umcT0ODk155rKOeSwMjUJw
-	Df6CIBTKGXPeK12HCPYwjfnx7jYz/7dsZoJ+qvEmiPMxaQiNoK3CB/86jcAnMKS12B2K
-	bKGQ==
-X-Gm-Message-State: APt69E0wYzdI9+UhYCWHeg8bvfu8T5Ubi0Y8ngRhH/ppXJk390bBAeTk
-	ZP/cu7+fTQ+li8fyIQzCAU1+QMxEoHqGHviOHX4=
-X-Google-Smtp-Source: AAOMgpdz4yhyGb/2VMM70dDWat5UlFaknHGDgJkT9XTHCwpYzC+Il003sUhLqWtLuhhucHj+Pnnq6uSsvAiYc48vbF4=
-X-Received: by 2002:a9f:33d8:: with SMTP id
-	y24-v6mr3548973uab.164.1531196512925; 
-	Mon, 09 Jul 2018 21:21:52 -0700 (PDT)
+	Tue, 10 Jul 2018 04:51:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6A4pjsE014247
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 9 Jul 2018 21:51:45 -0700 (PDT)
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 9 Jul 2018 21:51:44 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
+	<CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <3410d266-209f-a545-56e2-62cf57226609@windriver.com>
+Date: Tue, 10 Jul 2018 12:52:54 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-References: <1531192828-46910-1-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1531192828-46910-1-git-send-email-changqing.li@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 9 Jul 2018 21:21:27 -0700
-Message-ID: <CAMKF1spqybMSrd2EfTNcsFxkNO0+b3ex0J_Gqy9YuxdtBdQVSA@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
+In-Reply-To: <CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
+X-Originating-IP: [128.224.162.198]
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] phoronix-test-suite: upgrade 7.8.0 -> 8.0.1
+Subject: Re: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,44 +35,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2018 04:21:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 10 Jul 2018 04:51:45 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-A similar patch is already queued up in master-next
-On Mon, Jul 9, 2018 at 8:20 PM <changqing.li@windriver.com> wrote:
+Could you attach building arguments, conf/local.conf, log.do_compile for me?
+
+The text you pasted is not enough.
+
+-- Hongzhi
+
+
+On 2018年07月10日 12:11, Khem Raj wrote:
+> This is failing to build here
 >
-> From: Changqing Li <changqing.li@windriver.com>
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  .../{phoronix-test-suite_7.8.0.bb => phoronix-test-suite_8.0.1.bb}    | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-benchmark/phoronix-test-suite/{phoronix-test-suite_7.8.0.bb => phoronix-test-suite_8.0.1.bb} (90%)
->
-> diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
-> similarity index 90%
-> rename from meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
-> rename to meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
-> index 1f90a71..402779e 100644
-> --- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_7.8.0.bb
-> +++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->  SECTION = "console/tests"
->
->  SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
-> -SRC_URI[md5sum] = "850843bd9252823e7e24bc0849773000"
-> -SRC_URI[sha256sum] = "cd6c869841f28e4ac1e8a5e4cda05fafce9a523a6b4f0f3a47805efd30494d88"
-> +SRC_URI[md5sum] = "3dc3a0e490e909f188379a9e05fd4780"
-> +SRC_URI[sha256sum] = "6306549109c7254baf31edb385265b19557b5692217d2dfcf96f6fb17de8e842"
->
->  S = "${WORKDIR}/phoronix-test-suite"
->
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> | DEBUG: Executing shell function do_compile
+> | NOTE: make -j 16 CROSS_COMPILE=x86_64-bec-linux- ARCH=x86
+> CC=x86_64-bec-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3
+> -mfpmath=sse -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
+> -Wformat-security -Werror=format-security
+> --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
+> AR=x86_64-bec-linux-ar LD=x86_64-bec-linux-ld
+> --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
+>    DESTDIR=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/image
+> -C /mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
+> | make: Entering directory
+> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+> | Makefile:19: *** recipe commences before first target.  Stop.
+> | make: Leaving directory
+> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+> | ERROR: oe_runmake failed
+> On Sat, Jul 7, 2018 at 11:05 PM Hongzhi.Song <hongzhi.song@windriver.com> wrote:
+>> The recipe builds the framework for kernel-selftest. Now, it just
+>> contains two sets of testcase, bpf and vm. We are appending others
+>> to the recipe.
+>>
+>> It needs some features which will be written into relevant recipe.
+>> But now, you should add them to conf/local.conf manually.
+>> KERNEL_FEATURES_append += "features/bpf/bpf.scc"
+>>
+>> Signed-off-by: Dengke Du <dengke.du@windriver.com>
+>> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+>> ---
+>>   .../recipes-kernel/kselftest/kernel-selftest.bb    | 94 ++++++++++++++++++++++
+>>   1 file changed, 94 insertions(+)
+>>   create mode 100644 meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>>
+>> diff --git a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>> new file mode 100644
+>> index 0000000..6f20bd3
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>> @@ -0,0 +1,94 @@
+>> +SUMMARY = "Kernel selftest for Linux"
+>> +DESCRIPTION = "Kernel selftest for Linux"
+>> +LICENSE = "GPLv2"
+>> +
+>> +# for bpf and vm
+>> +DEPENDS = " \
+>> +    elfutils \
+>> +    libcap \
+>> +    libcap-ng \
+>> +    fuse \
+>> +    util-linux \
+>> +    rsync-native \
+>> +"
+>> +# for vm
+>> +RDEPENDS_${PN} += "libgcc \
+>> +                   bash \
+>> +"
+>> +
+>> +do_configure[depends] += "virtual/kernel:do_shared_workdir"
+>> +
+>> +inherit linux-kernel-base kernel-arch
+>> +
+>> +do_populate_lic[depends] += "virtual/kernel:do_patch"
+>> +
+>> +S = "${WORKDIR}/${BP}"
+>> +
+>> +# now we just test bpf and vm
+>> +# we will append other kernel selftest in the future
+>> +TEST_LIST = "bpf \
+>> +             vm \
+>> +"
+>> +
+>> +EXTRA_OEMAKE = '\
+>> +    CROSS_COMPILE=${TARGET_PREFIX} \
+>> +    ARCH=${ARCH} \
+>> +    CC="${CC}" \
+>> +    AR="${AR}" \
+>> +    LD="${LD}" \
+>> +'
+>> +
+>> +EXTRA_OEMAKE += "\
+>> +    'DESTDIR=${D}' \
+>> +"
+>> +
+>> +KERNEL_SELFTEST_SRC ?= "Makefile \
+>> +                        include \
+>> +                        tools \
+>> +                        scripts \
+>> +                        arch \
+>> +"
+>> +
+>> +do_compile() {
+>> +    for i in ${TEST_LIST}
+>> +    do
+>> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
+>> +    done
+>> +}
+>> +
+>> +do_install() {
+>> +    for i in ${TEST_LIST}
+>> +    do
+>> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/opt/kselftest/${i} install
+>> +    done
+>> +
+>> +    chown root:root  -R ${D}/opt/kselftest
+>> +}
+>> +
+>> +do_configure() {
+>> +    :
+>> +}
+>> +
+>> +do_configure[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
+>> +python copy_kselftest_source_from_kernel() {
+>> +    sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
+>> +    src_dir = d.getVar("STAGING_KERNEL_DIR")
+>> +    dest_dir = d.getVar("S")
+>> +    bb.utils.mkdirhier(dest_dir)
+>> +    for s in sources:
+>> +        src = oe.path.join(src_dir, s)
+>> +        dest = oe.path.join(dest_dir, s)
+>> +        if os.path.isdir(src):
+>> +            oe.path.copytree(src, dest)
+>> +        else:
+>> +            bb.utils.copyfile(src, dest)
+>> +}
+>> +
+>> +remove_clang_related() {
+>> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
+>> +}
+>> +
+>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> +
+>> +INHIBIT_PACKAGE_DEBUG_SPLIT="1"
+>> +FILES_${PN} += "/opt/kselftest/"
+>> --
+>> 2.8.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
