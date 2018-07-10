@@ -1,50 +1,50 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id C62EC76036
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 18CB17600A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2018 15:20:15 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id j5-v6so8522323wrr.8
+	Tue, 10 Jul 2018 15:25:44 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id a3-v6so5832457wrt.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2018 08:20:17 -0700 (PDT)
+	Tue, 10 Jul 2018 08:25:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:subject:date:message-id;
-	bh=idLZn1a4UV27xou3D8xRsP7gIGDprX7+4mZpsydb/Bg=;
-	b=EY6BRZVY3NW2t5XxBDnWV7b8zpWrZP9Z2YsTU41Qb3NrpQjpJPIgmIHs1laZHfOSND
-	85+PhIigGuN9O6z84kU2XPDypPZWFFol6YpWNu5iKXFLBebp9FQX0NsCH8HbzZ0DhUZc
-	tQp55PFDjBfWhaHnhQ08tM9owUtqjO/pVC/bJlG2iH4XTm3grjGvvyHhApifYg0TuTdn
-	qitnAKBc8T7QGNzXcLzLYRgv2C0TwGl2zTOHcmqY1fw7udaDsnAy/Il1w2h1P0mMqTpO
-	rwp95mOKxqwNw/2KsRulhkZ88YB4zaJrrEIa07nbC8TjSfAPd7HtoazODbddN+QlUL8n
-	Lsdw==
+	bh=B/xzeg/1+HyE4+5x8ln72x7jA/6rSu+7DV768qcdLl4=;
+	b=bMMX92l+Ku5xskPkXdiqQ6SdJ5YSSm7zOcroyHcBqJkJucqvKhwIg1L6wEgeFUwJyD
+	E5fhcH0iA8o+E1EbNSznxvpjkSZD9VfrmKqjoTusSPUX9XcySF2vEjBbQw3zrpKlGlJN
+	58HKTw2YNf2/BAxs9bD/THE5liZEmnjOZSjU4uq7WFVZpEMYphX3sdSRo787kEj8Q7Pq
+	u1JBNC82hBmWLk1/awRcANs7MJQ8ApzbDn+viEMWOs8FrbTgjPNzZPqbjS2E1nMFOgUq
+	cHmkL/e54rtwyvn5LRQzhw+rJd4PbhIyFfcbNHN0cG53H+LnANDm+5t4sIpi4JeBzne3
+	2vPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=idLZn1a4UV27xou3D8xRsP7gIGDprX7+4mZpsydb/Bg=;
-	b=RR7AleRsXAnZYzqY9zv/Z7Hrg6QcajdoriFwomOdi4q164O3NF3yLU0VZdcldnh/eM
-	EUjmNuV+fca6/q25FSL/eOG56/maSNG0RL4IMAsOZi+ENY3TYsbLS82NVwfo4HaYbjDE
-	jTrAYwDuqWj9IODQ9GO2zHygQf+OLMCeRZDzD6rSACQXm+4qbSqjHJvrwx7DnlyPDktQ
-	29Uxb0KEfJLW+QyA4HNBxwQJearHKLvOeorB4QYptzc64w7kkPyxpQhrHzYulhPY8no4
-	obXIesf/2EgNH7WJk37Tsm/79h+ELl4Wfy9TAweU6wiyHsgkJ99C7nHsgoGZGKayqXd5
-	sYiQ==
-X-Gm-Message-State: APt69E3PLRRjEdyuslxdzaPG7HKGhL6L3xzJmeR5yVfKxtTKK1o8fvQX
-	4gQfOrnmoojO8VRm1REOGGOgt0eS
-X-Google-Smtp-Source: AAOMgpfnIxqNPvHEWvcRbQdoTtifoguStTODhYt3sXI5V0gMDT2Vjv7iB/MhEhgmQiAA1CVypeUSxw==
-X-Received: by 2002:adf:a9f0:: with SMTP id
-	b103-v6mr17472260wrd.271.1531236016203; 
-	Tue, 10 Jul 2018 08:20:16 -0700 (PDT)
+	bh=B/xzeg/1+HyE4+5x8ln72x7jA/6rSu+7DV768qcdLl4=;
+	b=aIZF5pGz8pJsUw0EORz0JbI9F8qDbcM+/ceyskHT02nRK9RgYbE7osQULnV2vanXME
+	7AcmErucXJSnFHeetctdNVZ5P5vnaiPiNcR7EPxLfyDcveOiENI2a+PX1DvbfBLWbtAB
+	2uSnN4iA8aStvf5jpNj3w5qFi3S61W8HHV7EFogCUPOpXhrGzLE64CPwg7AYw3hc6G8+
+	r4C30XSc5ncgDiK4ULOXVmCjI/C/CQkdgQATX0caCldtnSYuHx7fwY0OWrXq4HLyzUw4
+	L+OkgTezdXFVeF+yKLLCZRUJT232ajBqQxXk5qXl+IHJrCYgzLG3w19cdmOpjxrQGwqm
+	SN+A==
+X-Gm-Message-State: AOUpUlF2UMZqJ4OTHTyeVAgJ80mFlMuvI7o4k3sfPpgFRv2z5CnkrH7a
+	ZOhprcWAH91G9s5OQmOz8YzMCWGq
+X-Google-Smtp-Source: AAOMgpfsg56rmKUEnHvNPD4J7q9DWilVKr0U1vY+sMkc2D09fVeFVNY+/N7O38RB3I1XvmNOuLxIWQ==
+X-Received: by 2002:adf:f091:: with SMTP id
+	n17-v6mr6885068wro.49.1531236344629; 
+	Tue, 10 Jul 2018 08:25:44 -0700 (PDT)
 Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
 	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
-	t10-v6sm28857031wre.95.2018.07.10.08.20.14
+	v5-v6sm5296111wru.60.2018.07.10.08.25.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Jul 2018 08:20:15 -0700 (PDT)
+	Tue, 10 Jul 2018 08:25:43 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jul 2018 16:20:12 +0100
-Message-Id: <20180710152012.8950-1-ross.burton@intel.com>
+Date: Tue, 10 Jul 2018 16:25:42 +0100
+Message-Id: <20180710152542.10701-1-ross.burton@intel.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [PATCH][meta-python] python-pbr: add python3-pbr variant
+Subject: [PATCH] php: actually enable openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,68 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2018 15:20:16 -0000
+X-List-Received-Date: Tue, 10 Jul 2018 15:25:44 -0000
+
+The PHP recipe depends on OpenSSL but support is disabled unless you pass
+--with-openssl.  Add a PACKAGECONFIG for openssl and enable it by default.
+
+Also for clarity pass --enable-opcache when the opcache is enabled.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-python/recipes-devtools/python/python-pbr.inc     | 14 ++++++++++++++
- .../recipes-devtools/python/python-pbr_3.1.1.bb        | 18 ++----------------
- .../recipes-devtools/python/python3-pbr_3.1.1.bb       |  2 ++
- 3 files changed, 18 insertions(+), 16 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pbr.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb
+ meta-oe/recipes-devtools/php/php.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pbr.inc b/meta-python/recipes-devtools/python/python-pbr.inc
-new file mode 100644
-index 0000000000..d8847f6502
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pbr.inc
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
-+HOMEPAGE = "https://pypi.python.org/pypi/pbr"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
-+
-+SRC_URI[md5sum] = "4e82c2e07af544c56a5b71c801525b00"
-+SRC_URI[sha256sum] = "05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-pip"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb b/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
-index bdff867f30..8f7f924dab 100644
---- a/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
-@@ -1,16 +1,2 @@
--DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
--HOMEPAGE = "https://pypi.python.org/pypi/pbr"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
--
--SRC_URI[md5sum] = "4e82c2e07af544c56a5b71c801525b00"
--SRC_URI[sha256sum] = "05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1"
--
--inherit pypi setuptools
--
--RDEPENDS_${PN}_class-target += " \
--        python-pip \
--        "
--
--BBCLASSEXTEND = "native"
-+inherit setuptools
-+require python-pbr.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb
-new file mode 100644
-index 0000000000..97e7361b16
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pbr.inc
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index f262d60d15..9ac1dc46f0 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -5,8 +5,7 @@ SECTION = "console/network"
+ LICENSE = "PHP-3.0"
+ 
+ BBCLASSEXTEND = "native"
+-DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
+-           openssl"
++DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
+ DEPENDS_class-native = "zlib-native libxml2-native"
+ 
+ PHP_MAJOR_VERSION = "${@d.getVar('PV', True).split('.')[0]}"
+@@ -68,7 +67,7 @@ EXTRA_OECONF_class-native = " \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ 
+-PACKAGECONFIG ??= "mysql sqlite3 imap opcache \
++PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
+                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
+ "
+ PACKAGECONFIG_class-native = ""
+@@ -92,7 +91,8 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+                        ,--without-imap --without-imap-ssl \
+                        ,uw-imap"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+-PACKAGECONFIG[opcache] = ",--disable-opcache"
++PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
++PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
+ 
+ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
 -- 
 2.11.0
 
