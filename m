@@ -1,22 +1,25 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EE19676099
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EF91C77143
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 06:14:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6B6EjBA029417
+	Wed, 11 Jul 2018 06:14:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6B6EkLn023536
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 10 Jul 2018 23:14:45 -0700 (PDT)
+	Tue, 10 Jul 2018 23:14:47 -0700
 Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.399.0; Tue, 10 Jul 2018 23:14:44 -0700
+	14.3.399.0; Tue, 10 Jul 2018 23:14:46 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Jul 2018 14:24:46 +0800
-Message-ID: <1531290287-82549-1-git-send-email-liezhi.yang@windriver.com>
+Date: Wed, 11 Jul 2018 14:24:47 +0800
+Message-ID: <1531290287-82549-2-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1531290287-82549-1-git-send-email-liezhi.yang@windriver.com>
+References: <1531290287-82549-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] sblim-sfcb: fix sfcbinst2mof_DEPENDENCIES in Makefile.am
+Subject: [meta-networking][PATCH 2/2] ntop: fix so generation in plugins/Makefile.am
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,69 +32,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jul 2018 06:14:45 -0000
+X-List-Received-Date: Wed, 11 Jul 2018 06:14:47 -0000
 Content-Type: text/plain
 
 Fixed build with automake 1.16.1:
-/path/to/i586-poky-linux/8.1.0/ld: cannot find -lsfcBrokerCore
-collect2: error: ld returned 1 exit status
+| i586-poky-linux-gcc: error: netflowPlugin.o: No such file or directory
+| i586-poky-linux-gcc: error: unrecognized command line option '-flat_namespace'; did you mean '-Wnamespaces'?
+| i586-poky-linux-gcc: fatal error: no input files
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch        | 31 ++++++++++++++++++++++
- .../sblim-sfcb/sblim-sfcb_1.4.9.bb                 |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch
+ ...ugins-Makefile.am-fix-for-automake-1.16.1.patch | 74 ++++++++++++++++++++++
+ meta-networking/recipes-support/ntop/ntop_5.0.1.bb |  1 +
+ 2 files changed, 75 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntop/ntop/0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch
+diff --git a/meta-networking/recipes-support/ntop/ntop/0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch b/meta-networking/recipes-support/ntop/ntop/0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch
 new file mode 100644
-index 0000000..7279d84
+index 0000000..d6f7eb5
 --- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch
-@@ -0,0 +1,31 @@
-+From ad6ca4f392bf549239b1ed3b2b372070eb127e7f Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/ntop/ntop/0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch
+@@ -0,0 +1,74 @@
++From d22ddc73f00ed056032a635ee8379305ec83bf81 Mon Sep 17 00:00:00 2001
 +From: Robert Yang <liezhi.yang@windriver.com>
-+Date: Wed, 11 Jul 2018 11:06:04 +0800
-+Subject: [PATCH] Makefile.am: fix sfcbinst2mof_DEPENDENCIES
++Date: Wed, 11 Jul 2018 12:02:50 +0800
++Subject: [PATCH] plugins/Makefile.am: fix for automake 1.16.1
 +
-+Fixed build with automake 1.16.1:
-+/path/to/i586-poky-linux/8.1.0/ld: cannot find -lsfcBrokerCore
-+collect2: error: ld returned 1 exit status
++Fixed:
++| i586-poky-linux-gcc: error: netflowPlugin.o: No such file or directory
++| i586-poky-linux-gcc: error: unrecognized command line option '-flat_namespace'; did you mean '-Wnamespaces'?
++| i586-poky-linux-gcc: fatal error: no input files
 +
-+Upstream-Status: Pending
++The previous code make things complicated, but we don't have to, let libtool do
++most of the things can fix the problem.
++
++Upstream-Status: Pending [ntop is not longer maintained any more, we need consider moving to ntopng]
 +
 +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 +---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
++ plugins/Makefile.am | 34 ++++++----------------------------
++ 1 file changed, 6 insertions(+), 28 deletions(-)
 +
-+diff --git a/Makefile.am b/Makefile.am
-+index 34ac319..47deed7 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -360,6 +360,7 @@ sfcbproc_SOURCES=sfcbproc.c
++diff --git a/plugins/Makefile.am b/plugins/Makefile.am
++index 64492e0..bcd0c10 100644
++--- a/plugins/Makefile.am
+++++ b/plugins/Makefile.am
++@@ -69,40 +69,18 @@ libsflowPlugin_la_CFLAGS = $(AM_CFLAGS)
++ # by default ntop looks for plugins in the plugins/ subdirectory
++ #
 + 
-+ sfcbinst2mof_SOURCES=sfcbinst2mof.c
-+ sfcbinst2mof_LDADD = -lsfcFileRepository -lsfcBrokerCore
-++sfcbinst2mof_DEPENDENCIES = libsfcBrokerCore.la libsfcFileRepository.la
++-
++-.libs/libnetflowPlugin.so@SO_VERSION_PATCH@:
++-	@if test -f libnetflowPlugin_la-netflowPlugin.o; then \
++-	$(CC) @MAKE_SHARED_LIBRARY_PARM@ -o .libs/libnetflowPlugin.so@SO_VERSION_PATCH@ libnetflowPlugin_la-netflowPlugin.o; \
++-	else \
++-	$(CC) @MAKE_SHARED_LIBRARY_PARM@ -o .libs/libnetflowPlugin.so@SO_VERSION_PATCH@ netflowPlugin.o; \
++-	fi
++-
++-netflowPlugin.so$(EXEEXT): .libs/libnetflowPlugin.so@SO_VERSION_PATCH@
++-	@$(LN_S) .libs/libnetflowPlugin.so netflowPlugin.so
+++netflowPlugin.so$(EXEEXT): libnetflowPlugin.la
+++	@$(LN_S) -f .libs/libnetflowPlugin.so netflowPlugin.so
 + 
-+ sfcbtrace_SOURCES=sfcbtrace.c
-+ sfcbtrace_LDADD = -lsfcBrokerCore
++ ###############
++ 
++-.libs/librrdPlugin.so@SO_VERSION_PATCH@:
++-	@if test -f librrdPlugin_la-rrdPlugin.o; then \
++-	$(CC) @MAKE_SHARED_LIBRARY_PARM@ -o .libs/librrdPlugin.so@SO_VERSION_PATCH@ librrdPlugin_la-rrdPlugin.o; \
++-	else \
++-	$(CC) @MAKE_SHARED_LIBRARY_PARM@ -o .libs/librrdPlugin.so@SO_VERSION_PATCH@ rrdPlugin.o; \
++-	fi
++-
++-rrdPlugin.so$(EXEEXT): .libs/librrdPlugin.so@SO_VERSION_PATCH@
++-	@$(LN_S) .libs/librrdPlugin.so rrdPlugin.so
+++rrdPlugin.so$(EXEEXT): librrdPlugin.la
+++	@$(LN_S) -f .libs/librrdPlugin.so rrdPlugin.so
++ 
++ ###############
++ 
++-.libs/libsflowPlugin.so@SO_VERSION_PATCH@:
++-	@if test -f libsflowPlugin_la-sflowPlugin.o; then \
++-	$(CC) @MAKE_SHARED_LIBRARY_PARM@ -o .libs/libsflowPlugin.so@SO_VERSION_PATCH@ libsflowPlugin_la-sflowPlugin.o; \
++-	else \
++-	$(CC) @MAKE_SHARED_LIBRARY_PARM@ -o .libs/libsflowPlugin.so@SO_VERSION_PATCH@ sflowPlugin.o; \
++-	fi
++-
++-sflowPlugin.so$(EXEEXT): .libs/libsflowPlugin.so@SO_VERSION_PATCH@
++-	@$(LN_S) .libs/libsflowPlugin.so sflowPlugin.so
+++sflowPlugin.so$(EXEEXT): libsflowPlugin.la
+++	@$(LN_S) -f .libs/libsflowPlugin.so sflowPlugin.so
++ 
++ ###############
++ 
 +-- 
 +2.7.4
 +
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index 10ffaaa..ffbe7ea 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
-            file://sblim-sfcb-1.4.9-fix-ftbfs.patch \
-            file://0001-include-stdint.h-system-header-for-UINT16_MAX.patch \
-            file://0001-Replace-need-for-error.h-when-it-does-not-exist.patch \
-+           file://sblim-sfcb-1.4.9-fix-sfcbinst2mof.patch \
- "
- 
- SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
+diff --git a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+index 4e0dd1e..2a7a7f2 100644
+--- a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
++++ b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ntop/ntop-${PV}.tar.gz \
+            file://ntop.service \
+            file://use-static-inline.patch \
+            file://0001-nDPI-Include-sys-types.h.patch \
++           file://0001-plugins-Makefile.am-fix-for-automake-1.16.1.patch \
+           "
+ SRC_URI[md5sum] = "01710b6925a8a5ffe1a41b8b512ebd69"
+ SRC_URI[sha256sum] = "7e8e84cb14d2173beaca4d4cb991a14d84a4bef84ec37b2276bc363f45c52ef8"
 -- 
 2.7.4
 
