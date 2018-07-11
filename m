@@ -1,20 +1,32 @@
-Return-Path: <martin@geanix.com>
-X-Greylist: delayed 468 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 Jul 2018 21:00:56 UTC
-Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C64974599
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AAAC276061
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jul 2018 21:00:56 +0000 (UTC)
-Received: from hundeboll.local (unknown [85.184.147.232])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id 81D221C08F8;
-	Tue, 10 Jul 2018 22:53:09 +0200 (CEST)
-From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jul 2018 22:53:02 +0200
-Message-Id: <20180710205302.14034-1-martin@geanix.com>
-X-Mailer: git-send-email 2.18.0
+	Wed, 11 Jul 2018 02:49:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6B2natq018953
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 10 Jul 2018 19:49:36 -0700
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Tue, 10 Jul 2018 19:49:34 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
+	<CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
+	<3410d266-209f-a545-56e2-62cf57226609@windriver.com>
+	<CAMKF1sqrrvEWBXiZ24Tb_4rD4FZmVpr9Zo6n_SnbNGHT0BfqRw@mail.gmail.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <86721d02-c754-193f-489c-fccc02b5ffed@windriver.com>
+Date: Wed, 11 Jul 2018 10:50:43 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] ell: update to 0.6
+In-Reply-To: <CAMKF1sqrrvEWBXiZ24Tb_4rD4FZmVpr9Zo6n_SnbNGHT0BfqRw@mail.gmail.com>
+X-Originating-IP: [128.224.162.198]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,86 +39,202 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jul 2018 21:00:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Jul 2018 02:49:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Removed patch is upstreamed
+Is this the report you sent ?
 
-Signed-off-by: Martin Hundebøll <martin@geanix.com>
----
- .../0001-ell-fix-build-with-musl-libc.patch   | 39 -------------------
- .../ell/{ell_0.4.bb => ell_0.6.bb}            |  6 +--
- 2 files changed, 2 insertions(+), 43 deletions(-)
- delete mode 100644 meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
- rename meta-oe/recipes-core/ell/{ell_0.4.bb => ell_0.6.bb} (64%)
+http://lists.openembedded.org/pipermail/openembedded-devel/2018-July/119308.html
 
-diff --git a/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch b/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
-deleted file mode 100644
-index a172a93ca..000000000
---- a/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 4f8c68757b05d12392cd1a8aed174cb8e56f80e3 Mon Sep 17 00:00:00 2001
--From: "Maxin B. John" <maxin.john@intel.com>
--Date: Thu, 5 Apr 2018 17:19:44 +0300
--Subject: [PATCH] ell: fix build with musl libc
--
--musl libc doesn't implement TEMP_FAILURE_RETRY. Use the
--TEMP_FAILURE_RETRY from glibc to fix build.
--
--Upstream-Status: Submitted [https://lists.01.org/pipermail/ell/2018-April/001209.html]
--
--Signed-off-by: Maxin B. John <maxin.john@intel.com>
-----
-- ell/dbus.h | 10 ++++++++++
-- 1 file changed, 10 insertions(+)
--
--diff --git a/ell/dbus.h b/ell/dbus.h
--index a7c08d2..3ff5e0f 100644
----- a/ell/dbus.h
--+++ b/ell/dbus.h
--@@ -28,6 +28,16 @@
-- #include <stddef.h>
-- #include <stdarg.h>
-- 
--+/* taken from glibc unistd.h for musl support */
--+#ifndef TEMP_FAILURE_RETRY
--+#define TEMP_FAILURE_RETRY(expression)             \
--+  (__extension__                                   \
--+    ({ long int __result;                          \
--+       do __result = (long int) (expression);      \
--+       while (__result == -1L && errno == EINTR);  \
--+       __result; }))
--+#endif
--+
-- #ifdef __cplusplus
-- extern "C" {
-- #endif
---- 
--2.4.0
--
-diff --git a/meta-oe/recipes-core/ell/ell_0.4.bb b/meta-oe/recipes-core/ell/ell_0.6.bb
-similarity index 64%
-rename from meta-oe/recipes-core/ell/ell_0.4.bb
-rename to meta-oe/recipes-core/ell/ell_0.6.bb
-index 1524bd6b9..8e7c88c52 100644
---- a/meta-oe/recipes-core/ell/ell_0.4.bb
-+++ b/meta-oe/recipes-core/ell/ell_0.6.bb
-@@ -7,10 +7,8 @@ SECTION = "libs"
- inherit autotools pkgconfig
- 
- S = "${WORKDIR}/git"
--SRCREV = "b4aea06fabb2af1af01f861f8f394c75950b6d47"
--SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git \
--           file://0001-ell-fix-build-with-musl-libc.patch \
--          "
-+SRCREV = "59ff3160fe55a841e662f8776f0520f2038235f4"
-+SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
- 
- do_configure_prepend () {
-     mkdir ${S}/build-aux
--- 
-2.18.0
+
+Sorry, I don't find accurate link. Could you give me a more clear direction?
+
+
+-- Hongzhi
+
+
+On 2018年07月10日 15:43, Khem Raj wrote:
+> Look at the report I sent to oe Devel earlier it should have link to 
+> full logs
+>
+> On Mon, Jul 9, 2018 at 10:51 PM Hongzhi, Song 
+> <hongzhi.song@windriver.com <mailto:hongzhi.song@windriver.com>> wrote:
+>
+>     Could you attach building arguments, conf/local.conf,
+>     log.do_compile for me?
+>
+>     The text you pasted is not enough.
+>
+>     -- Hongzhi
+>
+>
+>     On 2018年07月10日 12:11, Khem Raj wrote:
+>     > This is failing to build here
+>     >
+>     > | DEBUG: Executing shell function do_compile
+>     > | NOTE: make -j 16 CROSS_COMPILE=x86_64-bec-linux- ARCH=x86
+>     > CC=x86_64-bec-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3
+>     > -mfpmath=sse -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat
+>     > -Wformat-security -Werror=format-security
+>     >
+>     --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
+>     > AR=x86_64-bec-linux-ar LD=x86_64-bec-linux-ld
+>     >
+>     --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
+>     >
+>     DESTDIR=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/image
+>     > -C
+>     /mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
+>     > | make: Entering directory
+>     >
+>     '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+>     > | Makefile:19: *** recipe commences before first target.  Stop.
+>     > | make: Leaving directory
+>     >
+>     '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+>     > | ERROR: oe_runmake failed
+>     > On Sat, Jul 7, 2018 at 11:05 PM Hongzhi.Song
+>     <hongzhi.song@windriver.com <mailto:hongzhi.song@windriver.com>>
+>     wrote:
+>     >> The recipe builds the framework for kernel-selftest. Now, it just
+>     >> contains two sets of testcase, bpf and vm. We are appending others
+>     >> to the recipe.
+>     >>
+>     >> It needs some features which will be written into relevant recipe.
+>     >> But now, you should add them to conf/local.conf manually.
+>     >> KERNEL_FEATURES_append += "features/bpf/bpf.scc"
+>     >>
+>     >> Signed-off-by: Dengke Du <dengke.du@windriver.com
+>     <mailto:dengke.du@windriver.com>>
+>     >> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com
+>     <mailto:hongzhi.song@windriver.com>>
+>     >> ---
+>     >>   .../recipes-kernel/kselftest/kernel-selftest.bb
+>     <http://kernel-selftest.bb>   | 94 ++++++++++++++++++++++
+>     >>   1 file changed, 94 insertions(+)
+>     >>   create mode 100644
+>     meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>     <http://kernel-selftest.bb>
+>     >>
+>     >> diff --git
+>     a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>     <http://kernel-selftest.bb>
+>     b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>     <http://kernel-selftest.bb>
+>     >> new file mode 100644
+>     >> index 0000000..6f20bd3
+>     >> --- /dev/null
+>     >> +++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>     <http://kernel-selftest.bb>
+>     >> @@ -0,0 +1,94 @@
+>     >> +SUMMARY = "Kernel selftest for Linux"
+>     >> +DESCRIPTION = "Kernel selftest for Linux"
+>     >> +LICENSE = "GPLv2"
+>     >> +
+>     >> +# for bpf and vm
+>     >> +DEPENDS = " \
+>     >> +    elfutils \
+>     >> +    libcap \
+>     >> +    libcap-ng \
+>     >> +    fuse \
+>     >> +    util-linux \
+>     >> +    rsync-native \
+>     >> +"
+>     >> +# for vm
+>     >> +RDEPENDS_${PN} += "libgcc \
+>     >> +                   bash \
+>     >> +"
+>     >> +
+>     >> +do_configure[depends] += "virtual/kernel:do_shared_workdir"
+>     >> +
+>     >> +inherit linux-kernel-base kernel-arch
+>     >> +
+>     >> +do_populate_lic[depends] += "virtual/kernel:do_patch"
+>     >> +
+>     >> +S = "${WORKDIR}/${BP}"
+>     >> +
+>     >> +# now we just test bpf and vm
+>     >> +# we will append other kernel selftest in the future
+>     >> +TEST_LIST = "bpf \
+>     >> +             vm \
+>     >> +"
+>     >> +
+>     >> +EXTRA_OEMAKE = '\
+>     >> +    CROSS_COMPILE=${TARGET_PREFIX} \
+>     >> +    ARCH=${ARCH} \
+>     >> +    CC="${CC}" \
+>     >> +    AR="${AR}" \
+>     >> +    LD="${LD}" \
+>     >> +'
+>     >> +
+>     >> +EXTRA_OEMAKE += "\
+>     >> +    'DESTDIR=${D}' \
+>     >> +"
+>     >> +
+>     >> +KERNEL_SELFTEST_SRC ?= "Makefile \
+>     >> +                        include \
+>     >> +                        tools \
+>     >> +                        scripts \
+>     >> +                        arch \
+>     >> +"
+>     >> +
+>     >> +do_compile() {
+>     >> +    for i in ${TEST_LIST}
+>     >> +    do
+>     >> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
+>     >> +    done
+>     >> +}
+>     >> +
+>     >> +do_install() {
+>     >> +    for i in ${TEST_LIST}
+>     >> +    do
+>     >> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
+>     INSTALL_PATH=${D}/opt/kselftest/${i} install
+>     >> +    done
+>     >> +
+>     >> +    chown root:root  -R ${D}/opt/kselftest
+>     >> +}
+>     >> +
+>     >> +do_configure() {
+>     >> +    :
+>     >> +}
+>     >> +
+>     >> +do_configure[prefuncs] += "copy_kselftest_source_from_kernel
+>     remove_clang_related"
+>     >> +python copy_kselftest_source_from_kernel() {
+>     >> +    sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
+>     >> +    src_dir = d.getVar("STAGING_KERNEL_DIR")
+>     >> +    dest_dir = d.getVar("S")
+>     >> +    bb.utils.mkdirhier(dest_dir)
+>     >> +    for s in sources:
+>     >> +        src = oe.path.join(src_dir, s)
+>     >> +        dest = oe.path.join(dest_dir, s)
+>     >> +        if os.path.isdir(src):
+>     >> +            oe.path.copytree(src, dest)
+>     >> +        else:
+>     >> +            bb.utils.copyfile(src, dest)
+>     >> +}
+>     >> +
+>     >> +remove_clang_related() {
+>     >> +       sed -i -e '/test_pkt_access/d' -e
+>     '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
+>     >> +}
+>     >> +
+>     >> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>     >> +
+>     >> +INHIBIT_PACKAGE_DEBUG_SPLIT="1"
+>     >> +FILES_${PN} += "/opt/kselftest/"
+>     >> --
+>     >> 2.8.1
+>     >>
+>     >> --
+>     >> _______________________________________________
+>     >> Openembedded-devel mailing list
+>     >> Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
 
