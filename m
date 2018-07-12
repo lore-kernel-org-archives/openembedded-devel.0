@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-oi0-f43.google.com (mail-oi0-f43.google.com
-	[209.85.218.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D1227603D
+Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
+	[209.85.218.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 79A9C75447
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 01:27:14 +0000 (UTC)
-Received: by mail-oi0-f43.google.com with SMTP id l10-v6so6114802oii.0
+	Thu, 12 Jul 2018 01:27:15 +0000 (UTC)
+Received: by mail-oi0-f50.google.com with SMTP id w126-v6so52805209oie.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 18:27:15 -0700 (PDT)
+	Wed, 11 Jul 2018 18:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=VKKZY8an+OrUDpg9y8otIRmXG46YqwrqRXjCdfCxMSI=;
-	b=kudL3kJDyvwLgAPSWftZnDFjR628gHQpCDIKL6yarEEZqkCpuAaiWmIIU9xDEKJAXA
-	a4BhmCrdvRdBpf6mgYJ4FF9wE58xz1ax1X8WEkR9wbqc+HlOuA61nF1JLHOF+UcjiNLa
-	/bpr3iv+j2qZw/GO8ab3ccVZ9Ms02OS/jcMRU0iy/l7FvSy92aenxMsfFvW1iTUoQhlC
-	iDYl50g5YZdHeqhMrXxQHKPLa1hV1wkIOpMFweCQ5AZCsP6giqGyu8IRLMyE3QfYHcrg
-	PZIv4jslqDiykcRA+Z/M6H2Z5Pv0wZg55ndhkl2g9hXHyi4362nx6rHq780xkbib1iJM
-	IZBw==
+	bh=c3OLroWUwfyB9XTwZi2LSE231CArBXaFpzhrwElTFEU=;
+	b=d+AJ/OkejwZmxgIDGzpUfh6bH5De3ic3DwxcZ+aLCBp8W2ISnHzVDKsE5lWw9vrnX6
+	Em1DRALEF2xl8aFQ4tcrhf2/qwU5OukaP50Nbfu/Q9FgNULGJCrtzYTJ+YUbyIHfFT1U
+	GU0GhSFPzVQB+Tmv4eFhbbBHLfIzXDGTymNjpBqYzELA9E62qjtZIzpiBGRD6FY7WBGd
+	Mpmhi856nsYzOXgE5C2fnFOPd/abr+P/Cm+9XVSfwWn8uUkkx+oUKfbWU9/CH1K15caG
+	vWlOpf8oPxsCboCnQzTfxWNhIWySs5r4rY3lS6RGLhYxkuvhPlcH7A9T0ee9gQcUp7/P
+	tTEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=VKKZY8an+OrUDpg9y8otIRmXG46YqwrqRXjCdfCxMSI=;
-	b=E/U4Z+OX5jPROlUYFmiGcwxbE42uAa6P5SBjWkZUN5LVwmFDwhwwkYG6Q1KGqLtMvI
-	IjdEge9gWnkifUE2YZ7NktkLUd5Tnn8oiyotQvIz80hxoTfXGWi4mbwpRsFuVLd+6PXW
-	0nwsEjyY24ZXXmwOrE8cOyxymteA3CqmPczKvvw67pIQusZq6pE1wfyDnhbOUYRtamIS
-	hlryLgLVbiOFhC6NZXfAtkJ6Yf4CE95yqFsmHdVARTcJxsX26q6avQRKiVeM3QvXHgFR
-	BNuX+vZur4V54nq7UC7qmrDIiw2RIcSomztcRKpJTViLjaPC3sdqowyr9K29EvgAUh6f
-	lVZw==
-X-Gm-Message-State: AOUpUlGeMT7An5Bq3mIiC2vegtW+n9lqwNhKUb5f5938MctqbK23dcju
-	c1HdMnprPe4GaBNwW0NVtiM=
-X-Google-Smtp-Source: AAOMgpe1eFw2VBO8R8ZZwshUilaszUnn2lBOsItky7rjMe36Ow3KnvMIqfaDTn7n6RzPAsgAVKuQhg==
-X-Received: by 2002:aca:7247:: with SMTP id
-	p68-v6mr233488oic.252.1531358835341; 
-	Wed, 11 Jul 2018 18:27:15 -0700 (PDT)
+	bh=c3OLroWUwfyB9XTwZi2LSE231CArBXaFpzhrwElTFEU=;
+	b=LVJN279TtOMwqfhOqyCnMLkHsLeeuHjjvGGtVQZhkCYJE3kLbZkMhNHvvHRZ9RW/6c
+	p/48P+X8zEZgHjoGH3+N9Gb6lN88di29cVGLO0XTo2i3P2INZlk+Uo7iqnBBLh1WpZaB
+	wmslWppms/0tEX9pmveFUx4PYzSTww4x72YxLcxfckyT5eFc++9msozzZhgHYvs4U5p6
+	0qkuafj+mBQLeQdxAOVS0QjDvL4ftf/9ldiWssETSA40S0TC8QdZ49EW7wqTw4ROKRH8
+	mf0/8l1cbKvY5CfvlopMIpRhF4PpVcs46uSPJhB9FuWrc5heLwE/y3ANn9MLNz3z1QfT
+	bEeQ==
+X-Gm-Message-State: AOUpUlG/0ihhqyrA0/vInjgg7TfPvBH6vyaXxZpEKQTwYwirEXmC6Xad
+	YAdOu2XFY3uyb+o0Kpv1P8Y=
+X-Google-Smtp-Source: AAOMgpcys0+QafchbMbWbolc/bOQNEl+3ekdHK7Sb1SpmbhfX70n6/nP/sqivhq6/4fCwj7c9j7o2w==
+X-Received: by 2002:aca:c257:: with SMTP id
+	s84-v6mr255958oif.104.1531358836509; 
+	Wed, 11 Jul 2018 18:27:16 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:3df0:c2f2:5900:71b6])
 	by smtp.gmail.com with ESMTPSA id
-	y27-v6sm87401oix.4.2018.07.11.18.27.14
+	y27-v6sm87401oix.4.2018.07.11.18.27.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 11 Jul 2018 18:27:14 -0700 (PDT)
+	Wed, 11 Jul 2018 18:27:15 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Jul 2018 18:27:10 -0700
-Message-Id: <1531358832-14848-2-git-send-email-akuster808@gmail.com>
+Date: Wed, 11 Jul 2018 18:27:11 -0700
+Message-Id: <1531358832-14848-3-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
 References: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 2/4] pyxdg: Add new package
+Subject: [meta-oe][PATCH 3/4] openbox: fix runtime error for missing python and pyXDG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2018 01:27:14 -0000
+X-List-Received-Date: Thu, 12 Jul 2018 01:27:15 -0000
 
-needed for openbox
+Openbox-Message: Cannot set locale modifiers for the X server.
+/usr/bin/env: 'python': No such file or directory
+
+/usr/libexec/openbox-xdg-autostart needs python, add rdepends
+
+Also missing rdepends on pyXDG
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-gnome/pyxdg/pyxdg_0.26.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-gnome/pyxdg/pyxdg_0.26.bb
+ meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-gnome/pyxdg/pyxdg_0.26.bb b/meta-oe/recipes-gnome/pyxdg/pyxdg_0.26.bb
-new file mode 100644
-index 0000000..0128a7c
---- /dev/null
-+++ b/meta-oe/recipes-gnome/pyxdg/pyxdg_0.26.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "A Python module to deal with freedesktop.org specifications"
-+HOMEPAGE = "http://freedesktop.org/wiki/Software/pyxdg"
-+SECTION = "devel/python"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
+diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+index c35a0c7..f4d21b8 100644
+--- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
++++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+@@ -39,7 +39,6 @@ python populate_packages_prepend() {
+     do_split_packages(d, theme_dir, '(.*)', theme_name, '${PN} theme for %s', extra_depends='', allow_dirs=True)
+ }
+ 
+-RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks"
+ FILES_${PN}-core = "${bindir}/openbox ${bindir}/openbox-session ${libdir}/*${SOLIBS}"
+ 
+ FILES_${PN}-lxde += "${datadir}/lxde/ \
+@@ -54,3 +53,5 @@ FILES_${PN}-gnome += " \
+ "
+ 
+ FILES_${PN}-config += "${sysconfdir}"
 +
-+SRCREV = "7db14dcf4c4305c3859a2d9fcf9f5da2db328330"
-+SRC_URI = "git://anongit.freedesktop.org/xdg/pyxdg"
-+
-+inherit distutils
-+
-+S = "${WORKDIR}/git"
++RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks python pyxdg"
 -- 
 2.7.4
 
