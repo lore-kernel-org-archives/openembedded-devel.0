@@ -1,44 +1,25 @@
-Return-Path: <krzk@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 83F16754CA
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B51F876074
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 06:46:18 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 8BAA22086B
+	Thu, 12 Jul 2018 07:38:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6C7cqlR029698
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 06:46:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1531377979;
-	bh=tTbrHMwSu9z+eFrKktWn2UxofcO6Xz1pOi9T70NIjZ0=;
-	h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
-	b=GXvqmljYkOtlVzSplswrjq/BveVcnRYLxOIV0tQATCVDYQA3HubAbOf32mH0uuMYA
-	sG0oG+wmxD7AmLAT5EjdvD/T53SUPqbfOxs0YczMoqqwzFKdo93wOtigIHIUPT1c9z
-	6YQGzd/hM074ZePqwkPdWZBGvy/B7EItFDjaz0V4=
-Received: by mail-wr1-f45.google.com with SMTP id h9-v6so20460908wro.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 23:46:19 -0700 (PDT)
-X-Gm-Message-State: AOUpUlEhUjhN+yGjiz1ZxclDNL1e0w5qUpCCvNw9OEoBpwkMkBtStxLC
-	ViBB715mZEnwHQkjvaJ0oSw66IbxC33xPkRjyMk=
-X-Google-Smtp-Source: AAOMgpdnRME9Fc0dbDyWBBefmwwxCfP2Zd4opjst11g6tY+zfPnvyD24u8JUFj4TQLMcLQ36OYIdDsqfTwcSIBK5vxw=
-X-Received: by 2002:adf:f390:: with SMTP id
-	m16-v6mr632600wro.279.1531377978090; 
-	Wed, 11 Jul 2018 23:46:18 -0700 (PDT)
+	Thu, 12 Jul 2018 00:38:53 -0700
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Thu, 12 Jul 2018 00:38:52 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Jul 2018 15:38:50 +0800
+Message-ID: <1531381130-17517-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 2002:adf:9141:0:0:0:0:0 with HTTP; Wed, 11 Jul 2018 23:46:17
-	-0700 (PDT)
-In-Reply-To: <CAMKF1sq2a_uN6s_P=RXes3PYFx=j+zGSzuruK0Kjbga3ct++AQ@mail.gmail.com>
-References: <20180710155532.6127-1-krzk@kernel.org>
-	<CAMKF1sq2a_uN6s_P=RXes3PYFx=j+zGSzuruK0Kjbga3ct++AQ@mail.gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Date: Thu, 12 Jul 2018 08:46:17 +0200
-X-Gmail-Original-Message-ID: <CAJKOXPc0gD+x3yCppb9x9wsUwXUubhFoGEwXb=LEKM--9GRFhw@mail.gmail.com>
-Message-ID: <CAJKOXPc0gD+x3yCppb9x9wsUwXUubhFoGEwXb=LEKM--9GRFhw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libkcapi: Add new recipe for v1.1.1
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-networking][PATCH] openhpi: close socket in saHpiSessionClose
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,30 +32,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2018 06:46:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 12 Jul 2018 07:38:53 -0000
+Content-Type: text/plain
 
-On 11 July 2018 at 18:06, Khem Raj <raj.khem@gmail.com> wrote:
-> This fails for mips/musl builds
->
-> | ../git/lib/kcapi-kernel-if.c: In function '__kcapi_common_getinfo.isra.2':
-> | ../git/lib/kcapi-kernel-if.c:632:3: error: 'strncpy' output
-> truncated before terminating nul copying as many bytes from a string
-> as its length [-Werror=stringop-truncation]
-> |    strncpy(req.cru.cru_name, ciphername, strlen(ciphername));
-> |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> | ../git/lib/kcapi-kernel-if.c:629:3: error: 'strncpy' output
-> truncated before terminating nul copying as many bytes from a string
-> as its length [-Werror=stringop-truncation]
-> |    strncpy(req.cru.cru_driver_name, ciphername,
-> |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> |     strlen(ciphername));
-> |     ~~~~~~~~~~~~~~~~~~~
-> | cc1: all warnings being treated as errors
-> | make: *** [lib/libkcapi_la-kcapi-kernel-if.lo] Error 1
+From: Ovidiu Panait <ovidiu.panait@windriver.com>
 
-Thanks for letting me know. I'll take a look and fix it.
+Upstream issue: https://github.com/open-hpi/openhpi/issues/1918
 
-Best regards,
-Krzysztof
+The saHpiSessionClose doesn't close the socket and leaks the file
+descriptor.
+
+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../openhpi/files/0001-session-close-socket.patch  | 37 ++++++++++++++++++++++
+ .../recipes-daemons/openhpi/openhpi_3.6.1.bb       |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch
+
+diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch b/meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch
+new file mode 100644
+index 0000000..2cefd55
+--- /dev/null
++++ b/meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch
+@@ -0,0 +1,37 @@
++From b8bc6bfdb5e7fb5b46d3a830e04632939bee6b98 Mon Sep 17 00:00:00 2001
++From: Catalin Enache <catalin.enache@windriver.com>
++Date: Fri, 9 Feb 2018 16:35:11 +0200
++Subject: [PATCH] saHpiSessionClose: close socket
++
++saHpiSessionClose leaks file descriptors
++
++Upstream issue: https://github.com/open-hpi/openhpi/issues/1918
++
++Upstream-Status: Pending
++
++Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ baselib/session.cpp | 6 ++++++
++ 1 file changed, 6 insertions(+)
++
++diff --git a/baselib/session.cpp b/baselib/session.cpp
++index c5edfc8..4ece1b7 100644
++--- a/baselib/session.cpp
+++++ b/baselib/session.cpp
++@@ -126,6 +126,12 @@ cSession::cSession()
++ 
++ cSession::~cSession()
++ {
+++	cClientStreamSock * sock;
+++	gpointer ptr = wrap_g_static_private_get( &m_sockets );
+++	if ( ptr ) {
+++	    sock = reinterpret_cast<cClientStreamSock *>(ptr);
+++	    sock->Close();
+++	}
++     wrap_g_static_private_free( &m_sockets );
++ }
++ 
++-- 
++2.10.2
++
+diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+index ecf71d7..596578e 100644
+--- a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
++++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+@@ -44,6 +44,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://fix-narrowing-warning.patch \
+            file://0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch \
+            file://0001-ipmidirect-Replace-__STRING.patch \
++           file://0001-session-close-socket.patch \
+            "
+ 
+ SRC_URI[md5sum] = "4718b16e0f749b5ad214a9b04f45dd23"
+-- 
+2.7.4
+
 
