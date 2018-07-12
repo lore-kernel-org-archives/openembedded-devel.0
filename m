@@ -1,25 +1,18 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B51F876074
+Return-Path: <martin@geanix.com>
+Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
+	by mail.openembedded.org (Postfix) with ESMTP id BAC45754C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 07:38:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6C7cqlR029698
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 00:38:53 -0700
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Thu, 12 Jul 2018 00:38:52 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 12 Jul 2018 15:38:50 +0800
-Message-ID: <1531381130-17517-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 12 Jul 2018 12:06:12 +0000 (UTC)
+Received: from mnhu.deif.com (unknown [87.54.42.112])
+	by mail.hundeboll.net (Postfix) with ESMTPSA id 45BB41C0960;
+	Thu, 12 Jul 2018 14:06:13 +0200 (CEST)
+From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Jul 2018 14:05:50 +0200
+Message-Id: <471e7a0975e7869080f37ffc4cbc51de58fb74fa.1531397025.git-series.martin@geanix.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH] openhpi: close socket in saHpiSessionClose
+Subject: [meta-oe][PATCH v2] ell: update to 0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,81 +25,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2018 07:38:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Jul 2018 12:06:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
+Remove upstreamed patch to fix musl build, and replace with another
+(submitted) patch to fix a new musl issue.
 
-Upstream issue: https://github.com/open-hpi/openhpi/issues/1918
+Signed-off-by: Martin Hundebøll <martin@geanix.com>
 
-The saHpiSessionClose doesn't close the socket and leaks the file
-descriptor.
-
-Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../openhpi/files/0001-session-close-socket.patch  | 37 ++++++++++++++++++++++
- .../recipes-daemons/openhpi/openhpi_3.6.1.bb       |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch
 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch b/meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch
+Changes in v2:
+- Added patch to fix musl build
+---
+ meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch | 39 +++++++++++++++++++++++++++++++++++++++
+ meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch                         | 39 ---------------------------------------
+ meta-oe/recipes-core/ell/ell_0.4.bb                                                          | 19 -------------------
+ meta-oe/recipes-core/ell/ell_0.6.bb                                                          | 20 ++++++++++++++++++++
+ 4 files changed, 59 insertions(+), 58 deletions(-)
+ create mode 100644 meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
+ delete mode 100644 meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
+ delete mode 100644 meta-oe/recipes-core/ell/ell_0.4.bb
+ create mode 100644 meta-oe/recipes-core/ell/ell_0.6.bb
+
+diff --git a/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch b/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
 new file mode 100644
-index 0000000..2cefd55
+index 0000000..df3c055
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/0001-session-close-socket.patch
-@@ -0,0 +1,37 @@
-+From b8bc6bfdb5e7fb5b46d3a830e04632939bee6b98 Mon Sep 17 00:00:00 2001
-+From: Catalin Enache <catalin.enache@windriver.com>
-+Date: Fri, 9 Feb 2018 16:35:11 +0200
-+Subject: [PATCH] saHpiSessionClose: close socket
++++ b/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
+@@ -0,0 +1,39 @@
++From d8236d1d789f496a193dae5d2a15d706b81f6482 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
++Date: Thu, 12 Jul 2018 10:19:50 +0200
++Subject: [PATCH] dhcp: include if_arp.h from libc instead of linux headers
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++To: ell@lists.01.org
 +
-+saHpiSessionClose leaks file descriptors
++Compilation with musl libc fails due to redefinition of 'struct
++arp{req,req_old,hdr}' in linux/if_arp.h, since it is already defined and
++included in net/if_arp.h (through net/ethernet.h -> net/if_ether.h).
 +
-+Upstream issue: https://github.com/open-hpi/openhpi/issues/1918
++The only symbols used from if_arp.h is ARPHRD_ETHER, so it should be
++safe to avoid the compile error by including the if_arp.h header from
++the c-library instead.
 +
-+Upstream-Status: Pending
-+
-+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++Upstream-Status: Submitted [https://lists.01.org/pipermail/ell/2018-July/001242.html]
++Signed-off-by: Martin Hundebøll <martin@geanix.com>
 +---
-+ baselib/session.cpp | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ ell/dhcp.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/baselib/session.cpp b/baselib/session.cpp
-+index c5edfc8..4ece1b7 100644
-+--- a/baselib/session.cpp
-++++ b/baselib/session.cpp
-+@@ -126,6 +126,12 @@ cSession::cSession()
-+ 
-+ cSession::~cSession()
-+ {
-++	cClientStreamSock * sock;
-++	gpointer ptr = wrap_g_static_private_get( &m_sockets );
-++	if ( ptr ) {
-++	    sock = reinterpret_cast<cClientStreamSock *>(ptr);
-++	    sock->Close();
-++	}
-+     wrap_g_static_private_free( &m_sockets );
-+ }
++diff --git a/ell/dhcp.c b/ell/dhcp.c
++index 6c90370..0d99f74 100644
++--- a/ell/dhcp.c
+++++ b/ell/dhcp.c
++@@ -27,7 +27,7 @@
++ #include <netinet/ip.h>
++ #include <net/ethernet.h>
++ #include <linux/types.h>
++-#include <linux/if_arp.h>
+++#include <net/if_arp.h>
++ #include <errno.h>
++ #include <time.h>
 + 
 +-- 
-+2.10.2
++2.18.0
 +
-diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-index ecf71d7..596578e 100644
---- a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-+++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-@@ -44,6 +44,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://fix-narrowing-warning.patch \
-            file://0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch \
-            file://0001-ipmidirect-Replace-__STRING.patch \
-+           file://0001-session-close-socket.patch \
-            "
- 
- SRC_URI[md5sum] = "4718b16e0f749b5ad214a9b04f45dd23"
--- 
-2.7.4
+diff --git a/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch b/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
+deleted file mode 100644
+index a172a93..0000000
+--- a/meta-oe/recipes-core/ell/ell/0001-ell-fix-build-with-musl-libc.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 4f8c68757b05d12392cd1a8aed174cb8e56f80e3 Mon Sep 17 00:00:00 2001
+-From: "Maxin B. John" <maxin.john@intel.com>
+-Date: Thu, 5 Apr 2018 17:19:44 +0300
+-Subject: [PATCH] ell: fix build with musl libc
+-
+-musl libc doesn't implement TEMP_FAILURE_RETRY. Use the
+-TEMP_FAILURE_RETRY from glibc to fix build.
+-
+-Upstream-Status: Submitted [https://lists.01.org/pipermail/ell/2018-April/001209.html]
+-
+-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+----
+- ell/dbus.h | 10 ++++++++++
+- 1 file changed, 10 insertions(+)
+-
+-diff --git a/ell/dbus.h b/ell/dbus.h
+-index a7c08d2..3ff5e0f 100644
+---- a/ell/dbus.h
+-+++ b/ell/dbus.h
+-@@ -28,6 +28,16 @@
+- #include <stddef.h>
+- #include <stdarg.h>
+- 
+-+/* taken from glibc unistd.h for musl support */
+-+#ifndef TEMP_FAILURE_RETRY
+-+#define TEMP_FAILURE_RETRY(expression)             \
+-+  (__extension__                                   \
+-+    ({ long int __result;                          \
+-+       do __result = (long int) (expression);      \
+-+       while (__result == -1L && errno == EINTR);  \
+-+       __result; }))
+-+#endif
+-+
+- #ifdef __cplusplus
+- extern "C" {
+- #endif
+--- 
+-2.4.0
+-
+diff --git a/meta-oe/recipes-core/ell/ell_0.4.bb b/meta-oe/recipes-core/ell/ell_0.4.bb
+deleted file mode 100644
+index 1524bd6..0000000
+--- a/meta-oe/recipes-core/ell/ell_0.4.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY  = "Embedded Linux Library"
+-DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
+-LICENSE  = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+-SECTION = "libs"
+-
+-inherit autotools pkgconfig
+-
+-S = "${WORKDIR}/git"
+-SRCREV = "b4aea06fabb2af1af01f861f8f394c75950b6d47"
+-SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git \
+-           file://0001-ell-fix-build-with-musl-libc.patch \
+-          "
+-
+-do_configure_prepend () {
+-    mkdir ${S}/build-aux
+-}
+-
+-DEPENDS = "dbus"
+diff --git a/meta-oe/recipes-core/ell/ell_0.6.bb b/meta-oe/recipes-core/ell/ell_0.6.bb
+new file mode 100644
+index 0000000..399eddb
+--- /dev/null
++++ b/meta-oe/recipes-core/ell/ell_0.6.bb
+@@ -0,0 +1,20 @@
++SUMMARY  = "Embedded Linux Library"
++DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
++LICENSE  = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
++SECTION = "libs"
++
++inherit autotools pkgconfig
++
++S = "${WORKDIR}/git"
++SRCREV = "59ff3160fe55a841e662f8776f0520f2038235f4"
++SRC_URI = " \
++    git://git.kernel.org/pub/scm/libs/ell/ell.git \
++    file://0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch \
++"
++
++do_configure_prepend () {
++    mkdir ${S}/build-aux
++}
++
++DEPENDS = "dbus"
 
+base-commit: b56fc26fefff498b10236ea6486a5d5624f726cc
+-- 
+git-series 0.9.1
 
