@@ -1,51 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F8787602E
+Return-Path: <akuster808@gmail.com>
+Received: from mail-oi0-f46.google.com (mail-oi0-f46.google.com
+	[209.85.218.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E2A475223
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 20:00:06 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id b14-v6so15090981vke.13
+	Thu, 12 Jul 2018 01:27:13 +0000 (UTC)
+Received: by mail-oi0-f46.google.com with SMTP id n84-v6so52812462oib.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 13:00:08 -0700 (PDT)
+	Wed, 11 Jul 2018 18:27:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=yXwG+O/xfpkxfXW7XnvHtiKGiBNHmteZtMlCU9fbnBg=;
-	b=lg/9m+tEvRWhb0mxVwhDf3eGLL1iJnpRUEN2AfriDoqY6slvQ2Iyw0AVdrFOxYP5v9
-	f3N92virz68gOSw7dUHetlOdGKwZeeeeZJ8JIqG9paInqzVdBJv80zA7u6BhNHdzqTq/
-	WLiPq8tOmydKeTfTq5LBPeuWocWA+BEwXOF/bAq2YiQQhdf7kscg0tuMBHwGaglo2hGT
-	Fk6YChADUSbSN/iH+fMsAKwl1MvbTGFKqNZKaa8ZQ66l55o0YdzJBIdA2eeP1v1zx4Yr
-	3iKeqw4/WkGsOJSjCGm/SztNQ+VEdU676VyRC1qCjgQrwwHpCFYrzOF0pHZLdY2xmmvS
-	49+w==
+	h=from:to:subject:date:message-id;
+	bh=JI2J2OIQ7UP2jocnfqtpw7sZMcGojsPN2wPlFUSfs8I=;
+	b=nhOnqKsgTl/AFhGig7u7jTlCj4W58f9b4eSLRpNbhH3IxHG4dbdHsiedamdmOGopdM
+	nuJT7aNAyGjKI3Q77iM08HZgSCr9x4i/mg8J0Y354VVBHwsbfh/WeYSCj74Br+ycXOZQ
+	ovxI+MS9rtd1F1EpqnWziZ3ZioewH5v79gnIsq1yk+DK/gu7Vcmp0c4HV6y5wFjgfn7Y
+	w02EihcfHstzeYMBLKP/kzdaY1uR9U7UuZkybJ5aXF9AF+0Stv03GdvvbCPxz9h6IE9J
+	o2xk/QdSGotf5riOEQ692DUZ2auLAMYmVy8ah6fOTLysaJg9JmVCBuEPNnEygaAGmtff
+	qQYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=yXwG+O/xfpkxfXW7XnvHtiKGiBNHmteZtMlCU9fbnBg=;
-	b=PuCEk7skOGNhFezM6BJ6AjuIphYFdx5UZ/syJBFE0P1/CGpYbqO/2X7F29DwS8V78J
-	SrJuOfqghGaoqrWXlafC9qCrkYfvYSpxsbdta26Q4bGq8yRT/pRaBox670zJawF0wZzs
-	0HGYwRBvSjKSt+T7ywuKI1AJqXE2HoaWeCQ4WosLTyee8itfxf3Kdli5aMdBdpLjaQ0+
-	XwIGdaYk5s9JPNhz2NpMwYiXJAXa74rKGuS3bOfYDMZz8D4sQJNSjmjrJ0lOYKqurEv5
-	itK5qkZvUyYlq5fh9itWioH62CeF8qWSQ759F1BywVNz18wBmscVtH8iODfL7gJMRDgy
-	Y51w==
-X-Gm-Message-State: AOUpUlGw/nMdU0FlvsXqj69slEYgwWyE7BE8PK3OBn919UKkX+A9xeBP
-	UMEa+ouLhD8EEuy/m9dzUZBqCJ7Xm8si8vUf7fo=
-X-Google-Smtp-Source: AAOMgpfCbBKu8gz5+plPisfc5rmKTsEMHyhHUZMjYl9Of+BqzBeGhFUv0SA/tlqFPqPCnJZuRsUlRrcbO+H4l0EBRZo=
-X-Received: by 2002:a1f:a2cc:: with SMTP id l195-v6mr17315vke.95.1531339207610;
-	Wed, 11 Jul 2018 13:00:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
-	<CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
-	<3410d266-209f-a545-56e2-62cf57226609@windriver.com>
-	<CAMKF1sqrrvEWBXiZ24Tb_4rD4FZmVpr9Zo6n_SnbNGHT0BfqRw@mail.gmail.com>
-	<c53c5df8-88e9-60f4-6180-a984c2ac5884@windriver.com>
-In-Reply-To: <c53c5df8-88e9-60f4-6180-a984c2ac5884@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 11 Jul 2018 13:59:41 -0600
-Message-ID: <CAMKF1sr6aXVo9uksqkaC6YU6m09NzNc9o4U8M1eSUnos47Xxow@mail.gmail.com>
-To: "Hongzhi.Song" <hongzhi.song@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=JI2J2OIQ7UP2jocnfqtpw7sZMcGojsPN2wPlFUSfs8I=;
+	b=fFQTFIKQ7iOqPMZcWvyXVuCS6sqwkF42ct4ZkhNa2EAXeNiLx/NDsiPpF9FpyWQFHT
+	ROeUikJbfVWaUqcEoq1Pe4eKbTpL+XEA5PY8Mn/VgauwR7scIVUuDqq0SUqVUAUgvLzj
+	ow4vAxzP/ZmoqCS88s+bhu36e6Si3U1VIJ+b7GIYi9HbcT2smkf3GBbQsgU7Hkd1kM8Z
+	qGxmZ2gIVvux+KM+a02ugZx++ZxMJTOMOcegXkkqulDpWHkiz1OVwCuVmh1RGsoaXhfn
+	wO4MWBpPuqrV7PIGWMfuw8v8qRyBsaKSsiU+zS7uTX0ebX9EQ6X/8a0V1y8lwPLceeI6
+	9Mmw==
+X-Gm-Message-State: AOUpUlHg42WbT5tHl8uYTJ+94/z6X3a04/s2eRqYTWN69qTXDsYcE7dY
+	o13AxU/yo3xeBYZCZKq/Fz0=
+X-Google-Smtp-Source: AAOMgpfDaENmhcukU20BCr4nvINjZWx4bmHE2tqHGuIFf/Sg1UI5miIs8MYSB3r/bc/e4uAWIYcMkQ==
+X-Received: by 2002:aca:a56:: with SMTP id 83-v6mr228577oik.57.1531358834419; 
+	Wed, 11 Jul 2018 18:27:14 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4000:1184:3df0:c2f2:5900:71b6])
+	by smtp.gmail.com with ESMTPSA id
+	y27-v6sm87401oix.4.2018.07.11.18.27.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 11 Jul 2018 18:27:13 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Jul 2018 18:27:09 -0700
+Message-Id: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/4] nmap: update to 7.70
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,220 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jul 2018 20:00:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Jul 2018 01:27:13 -0000
 
-bec is my distro config its not a whole different than oe-core nodistro.
-The issue is not related to libc, since its happening on glibc or musl alik=
-e.
-It could be related to parallel compile race, you might want to explore it =
-from
-that angle.
+Update LIC_FILES_CHKSUM for yr change
 
-On Wed, Jul 11, 2018 at 4:40 AM Hongzhi, Song
-<hongzhi.song@windriver.com> wrote:
->
-> Sorry, I didn't reproduce the problem by appending your auto.conf to
->
-> my local.conf. It just prompted some error because of using musl-lib
->
-> instead of the error about Makefile your encountered.
->
->
-> Then I commented off the statement of "TCLIBC_qemux86 =3D "musl"" and
->
-> rebuild the image, it passed.
->
->
-> 1. What else can I do to reproduce your case?
->
-> 2. What is "bec" in your cross-compiler?
->
->     How can I get it?
->
-> 3. Could the meta-oe accept it with only glibc support in the bb file.
->
->     We can add the support with musl in the future.
->
->
-> --Hongzhi
->
->
->
-> On 2018=E5=B9=B407=E6=9C=8810=E6=97=A5 15:43, Khem Raj wrote:
->
-> Look at the report I sent to oe Devel earlier it should have link to full=
- logs
->
-> On Mon, Jul 9, 2018 at 10:51 PM Hongzhi, Song <hongzhi.song@windriver.com=
-> wrote:
->>
->> Could you attach building arguments, conf/local.conf, log.do_compile for=
- me?
->>
->> The text you pasted is not enough.
->>
->> -- Hongzhi
->>
->>
->> On 2018=E5=B9=B407=E6=9C=8810=E6=97=A5 12:11, Khem Raj wrote:
->> > This is failing to build here
->> >
->> > | DEBUG: Executing shell function do_compile
->> > | NOTE: make -j 16 CROSS_COMPILE=3Dx86_64-bec-linux- ARCH=3Dx86
->> > CC=3Dx86_64-bec-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3
->> > -mfpmath=3Dsse -fstack-protector-strong  -D_FORTIFY_SOURCE=3D2 -Wforma=
-t
->> > -Wformat-security -Werror=3Dformat-security
->> > --sysroot=3D/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selft=
-est/1.0-r0/recipe-sysroot
->> > AR=3Dx86_64-bec-linux-ar LD=3Dx86_64-bec-linux-ld
->> > --sysroot=3D/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selft=
-est/1.0-r0/recipe-sysroot
->> >    DESTDIR=3D/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-self=
-test/1.0-r0/image
->> > -C /mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r=
-0/kernel-selftest-1.0/tools/testing/selftests/bpf
->> > | make: Entering directory
->> > '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/=
-kernel-selftest-1.0/tools/testing/selftests/bpf'
->> > | Makefile:19: *** recipe commences before first target.  Stop.
->> > | make: Leaving directory
->> > '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/=
-kernel-selftest-1.0/tools/testing/selftests/bpf'
->> > | ERROR: oe_runmake failed
->> > On Sat, Jul 7, 2018 at 11:05 PM Hongzhi.Song <hongzhi.song@windriver.c=
-om> wrote:
->> >> The recipe builds the framework for kernel-selftest. Now, it just
->> >> contains two sets of testcase, bpf and vm. We are appending others
->> >> to the recipe.
->> >>
->> >> It needs some features which will be written into relevant recipe.
->> >> But now, you should add them to conf/local.conf manually.
->> >> KERNEL_FEATURES_append +=3D "features/bpf/bpf.scc"
->> >>
->> >> Signed-off-by: Dengke Du <dengke.du@windriver.com>
->> >> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
->> >> ---
->> >>   .../recipes-kernel/kselftest/kernel-selftest.bb    | 94 +++++++++++=
-+++++++++++
->> >>   1 file changed, 94 insertions(+)
->> >>   create mode 100644 meta-oe/recipes-kernel/kselftest/kernel-selftest=
-.bb
->> >>
->> >> diff --git a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb b/me=
-ta-oe/recipes-kernel/kselftest/kernel-selftest.bb
->> >> new file mode 100644
->> >> index 0000000..6f20bd3
->> >> --- /dev/null
->> >> +++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
->> >> @@ -0,0 +1,94 @@
->> >> +SUMMARY =3D "Kernel selftest for Linux"
->> >> +DESCRIPTION =3D "Kernel selftest for Linux"
->> >> +LICENSE =3D "GPLv2"
->> >> +
->> >> +# for bpf and vm
->> >> +DEPENDS =3D " \
->> >> +    elfutils \
->> >> +    libcap \
->> >> +    libcap-ng \
->> >> +    fuse \
->> >> +    util-linux \
->> >> +    rsync-native \
->> >> +"
->> >> +# for vm
->> >> +RDEPENDS_${PN} +=3D "libgcc \
->> >> +                   bash \
->> >> +"
->> >> +
->> >> +do_configure[depends] +=3D "virtual/kernel:do_shared_workdir"
->> >> +
->> >> +inherit linux-kernel-base kernel-arch
->> >> +
->> >> +do_populate_lic[depends] +=3D "virtual/kernel:do_patch"
->> >> +
->> >> +S =3D "${WORKDIR}/${BP}"
->> >> +
->> >> +# now we just test bpf and vm
->> >> +# we will append other kernel selftest in the future
->> >> +TEST_LIST =3D "bpf \
->> >> +             vm \
->> >> +"
->> >> +
->> >> +EXTRA_OEMAKE =3D '\
->> >> +    CROSS_COMPILE=3D${TARGET_PREFIX} \
->> >> +    ARCH=3D${ARCH} \
->> >> +    CC=3D"${CC}" \
->> >> +    AR=3D"${AR}" \
->> >> +    LD=3D"${LD}" \
->> >> +'
->> >> +
->> >> +EXTRA_OEMAKE +=3D "\
->> >> +    'DESTDIR=3D${D}' \
->> >> +"
->> >> +
->> >> +KERNEL_SELFTEST_SRC ?=3D "Makefile \
->> >> +                        include \
->> >> +                        tools \
->> >> +                        scripts \
->> >> +                        arch \
->> >> +"
->> >> +
->> >> +do_compile() {
->> >> +    for i in ${TEST_LIST}
->> >> +    do
->> >> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
->> >> +    done
->> >> +}
->> >> +
->> >> +do_install() {
->> >> +    for i in ${TEST_LIST}
->> >> +    do
->> >> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=
-=3D${D}/opt/kselftest/${i} install
->> >> +    done
->> >> +
->> >> +    chown root:root  -R ${D}/opt/kselftest
->> >> +}
->> >> +
->> >> +do_configure() {
->> >> +    :
->> >> +}
->> >> +
->> >> +do_configure[prefuncs] +=3D "copy_kselftest_source_from_kernel remov=
-e_clang_related"
->> >> +python copy_kselftest_source_from_kernel() {
->> >> +    sources =3D (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
->> >> +    src_dir =3D d.getVar("STAGING_KERNEL_DIR")
->> >> +    dest_dir =3D d.getVar("S")
->> >> +    bb.utils.mkdirhier(dest_dir)
->> >> +    for s in sources:
->> >> +        src =3D oe.path.join(src_dir, s)
->> >> +        dest =3D oe.path.join(dest_dir, s)
->> >> +        if os.path.isdir(src):
->> >> +            oe.path.copytree(src, dest)
->> >> +        else:
->> >> +            bb.utils.copyfile(src, dest)
->> >> +}
->> >> +
->> >> +remove_clang_related() {
->> >> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S=
-}/tools/testing/selftests/bpf/Makefile
->> >> +}
->> >> +
->> >> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->> >> +
->> >> +INHIBIT_PACKAGE_DEBUG_SPLIT=3D"1"
->> >> +FILES_${PN} +=3D "/opt/kselftest/"
->> >> --
->> >> 2.8.1
->> >>
->> >> --
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-security/nmap/{nmap_7.60.bb => nmap_7.70.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-security/nmap/{nmap_7.60.bb => nmap_7.70.bb} (87%)
+
+diff --git a/meta-oe/recipes-security/nmap/nmap_7.60.bb b/meta-oe/recipes-security/nmap/nmap_7.70.bb
+similarity index 87%
+rename from meta-oe/recipes-security/nmap/nmap_7.60.bb
+rename to meta-oe/recipes-security/nmap/nmap_7.70.bb
+index 74b4388..e47d09f 100644
+--- a/meta-oe/recipes-security/nmap/nmap_7.60.bb
++++ b/meta-oe/recipes-security/nmap/nmap_7.70.bb
+@@ -3,15 +3,15 @@ DESCRIPTION = "Nmap ("Network Mapper") is a free and open source (license) utili
+ SECTION = "security"
+ LICENSE = "GPL-2.0"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING;beginline=7;endline=12;md5=700c690f4ca6b1754f3f1db8645e42d9"
++LIC_FILES_CHKSUM = "file://COPYING;beginline=7;endline=12;md5=1489288f46af415fadc4e8b6345ab9f4"
+ 
+ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
+            file://nmap-redefine-the-python-library-dir.patch \
+            file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
+ "
+ 
+-SRC_URI[md5sum] = "4e454266559ddf2c4e2109866c62560c"
+-SRC_URI[sha256sum] = "a8796ecc4fa6c38aad6139d9515dc8113023a82e9d787e5a5fb5fa1b05516f21"
++SRC_URI[md5sum] = "84eb6fbe788e0d4918c2b1e39421bf79"
++SRC_URI[sha256sum] = "847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
+ 
+ inherit autotools-brokensep pkgconfig python3native
+ 
+-- 
+2.7.4
+
 
