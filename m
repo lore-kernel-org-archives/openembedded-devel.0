@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
-	[209.85.218.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 79A9C75447
+Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
+	[209.85.218.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BB1A755B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 01:27:15 +0000 (UTC)
-Received: by mail-oi0-f50.google.com with SMTP id w126-v6so52805209oie.7
+	Thu, 12 Jul 2018 01:27:16 +0000 (UTC)
+Received: by mail-oi0-f51.google.com with SMTP id i12-v6so52840552oik.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 18:27:16 -0700 (PDT)
+	Wed, 11 Jul 2018 18:27:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=c3OLroWUwfyB9XTwZi2LSE231CArBXaFpzhrwElTFEU=;
-	b=d+AJ/OkejwZmxgIDGzpUfh6bH5De3ic3DwxcZ+aLCBp8W2ISnHzVDKsE5lWw9vrnX6
-	Em1DRALEF2xl8aFQ4tcrhf2/qwU5OukaP50Nbfu/Q9FgNULGJCrtzYTJ+YUbyIHfFT1U
-	GU0GhSFPzVQB+Tmv4eFhbbBHLfIzXDGTymNjpBqYzELA9E62qjtZIzpiBGRD6FY7WBGd
-	Mpmhi856nsYzOXgE5C2fnFOPd/abr+P/Cm+9XVSfwWn8uUkkx+oUKfbWU9/CH1K15caG
-	vWlOpf8oPxsCboCnQzTfxWNhIWySs5r4rY3lS6RGLhYxkuvhPlcH7A9T0ee9gQcUp7/P
-	tTEw==
+	bh=fW9TeMKoVZhhBgEEEFwbJfWMw4VPk8BH4POlKCEx6SQ=;
+	b=qwFHwfybjjcTCTzKX6XO6FDBbB8v8pxcGQlwQa+Fcf1AdcfIdiihp0UE2Zpqe6E0eO
+	hp1KKKFh0gOe7DH4p5AADTvCeI954502PbGO1X+c/CgxB6TcjloAzrsfPDpE8ai5p6jq
+	3E79GGWivvc4GNqv2za18DOYSsQj+ODEstKVP68Wh7HfmgLQ+XNTIplb5zKWqwwPncs3
+	cM6SzoesfZ+9QVRSl28uGld3JMwTReSUbevpc/2Zr8eYrZzCZvd6m6ja1KGTe4JHKy0j
+	CjF2MX/G7nooniIbBWzlAabLd0PchqJ+X5Y9QlyixfcbTZzRn6orUCFMD9E1Q+M/ErsI
+	TVdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=c3OLroWUwfyB9XTwZi2LSE231CArBXaFpzhrwElTFEU=;
-	b=LVJN279TtOMwqfhOqyCnMLkHsLeeuHjjvGGtVQZhkCYJE3kLbZkMhNHvvHRZ9RW/6c
-	p/48P+X8zEZgHjoGH3+N9Gb6lN88di29cVGLO0XTo2i3P2INZlk+Uo7iqnBBLh1WpZaB
-	wmslWppms/0tEX9pmveFUx4PYzSTww4x72YxLcxfckyT5eFc++9msozzZhgHYvs4U5p6
-	0qkuafj+mBQLeQdxAOVS0QjDvL4ftf/9ldiWssETSA40S0TC8QdZ49EW7wqTw4ROKRH8
-	mf0/8l1cbKvY5CfvlopMIpRhF4PpVcs46uSPJhB9FuWrc5heLwE/y3ANn9MLNz3z1QfT
-	bEeQ==
-X-Gm-Message-State: AOUpUlG/0ihhqyrA0/vInjgg7TfPvBH6vyaXxZpEKQTwYwirEXmC6Xad
-	YAdOu2XFY3uyb+o0Kpv1P8Y=
-X-Google-Smtp-Source: AAOMgpcys0+QafchbMbWbolc/bOQNEl+3ekdHK7Sb1SpmbhfX70n6/nP/sqivhq6/4fCwj7c9j7o2w==
-X-Received: by 2002:aca:c257:: with SMTP id
-	s84-v6mr255958oif.104.1531358836509; 
-	Wed, 11 Jul 2018 18:27:16 -0700 (PDT)
+	bh=fW9TeMKoVZhhBgEEEFwbJfWMw4VPk8BH4POlKCEx6SQ=;
+	b=cMeYX+HOGDoOvLDt3MfzH/AcGfV3g1kCX9f8dzfvgccjJDcIfyqCsDCVXqiZ1gwBeP
+	CNwikSpipewkuFa9Lpo204RFZJWo/ycsBnzRda01LnsTHGdmagegK+pnUvcuoANYkHT6
+	TMdmD38gWoMpdD6PoYH7Jl7niR6m8fJUGZyL0g4j67hfeCj3CXf9YlMsuC15HrUe1fGW
+	pQsQPH0Iph2iX7su3UVdThC5wApPK8GXv4cdJGHsQJc0lT+ngsJURBDR91jNUXgt3deW
+	W1lDTrdnrY42cxnObg9On8lKcX/KXcoYQ8h2YrGHfLoVf6sh3ehtX8C/d4+SxbGVyJqK
+	Jn1A==
+X-Gm-Message-State: AOUpUlHkeGkhK+ZulPvVFfVK1pFYPjUZTS2Z/GRfwSO8KC8L6cA+1BDS
+	6VryGS2IwdWjemLb3dn16q55cw==
+X-Google-Smtp-Source: AAOMgpeCP4o0moHBKRzwUZJcxAf8hyOK06PjXFZd6SIE/j6gFZFMSxBEMvrdRxWcLY3UlclYHFhjlw==
+X-Received: by 2002:aca:bc54:: with SMTP id
+	m81-v6mr233343oif.308.1531358837526; 
+	Wed, 11 Jul 2018 18:27:17 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4000:1184:3df0:c2f2:5900:71b6])
 	by smtp.gmail.com with ESMTPSA id
-	y27-v6sm87401oix.4.2018.07.11.18.27.15
+	y27-v6sm87401oix.4.2018.07.11.18.27.16
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 11 Jul 2018 18:27:15 -0700 (PDT)
+	Wed, 11 Jul 2018 18:27:16 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Jul 2018 18:27:11 -0700
-Message-Id: <1531358832-14848-3-git-send-email-akuster808@gmail.com>
+Date: Wed, 11 Jul 2018 18:27:12 -0700
+Message-Id: <1531358832-14848-4-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
 References: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 3/4] openbox: fix runtime error for missing python and pyXDG
+Subject: [meta-oe][PATCH 4/4] xf86-video-armsoc: add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,38 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2018 01:27:15 -0000
-
-Openbox-Message: Cannot set locale modifiers for the X server.
-/usr/bin/env: 'python': No such file or directory
-
-/usr/libexec/openbox-xdg-autostart needs python, add rdepends
-
-Also missing rdepends on pyXDG
+X-List-Received-Date: Thu, 12 Jul 2018 01:27:16 -0000
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../xorg-driver/xf86-video-armsoc_1.4.1.bb                 | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
 
-diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-index c35a0c7..f4d21b8 100644
---- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-+++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-@@ -39,7 +39,6 @@ python populate_packages_prepend() {
-     do_split_packages(d, theme_dir, '(.*)', theme_name, '${PN} theme for %s', extra_depends='', allow_dirs=True)
- }
- 
--RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks"
- FILES_${PN}-core = "${bindir}/openbox ${bindir}/openbox-session ${libdir}/*${SOLIBS}"
- 
- FILES_${PN}-lxde += "${datadir}/lxde/ \
-@@ -54,3 +53,5 @@ FILES_${PN}-gnome += " \
- "
- 
- FILES_${PN}-config += "${sysconfdir}"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
+new file mode 100644
+index 0000000..b436ef1
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
+@@ -0,0 +1,14 @@
++require recipes-graphics/xorg-driver/xorg-driver-video.inc
 +
-+RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks python pyxdg"
++SUMMARY = "X.Org X server -- ARM SOC display driver"
++LICENSE = "MIT-X & GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=10ce5de3b111315ea652a5f74ec0c602"
++
++DEPENDS += "virtual/libx11 libdrm xorgproto"
++
++SRCREV = "8bbdb2ae3bb8ef649999a8da33ddbe11a04763b8"
++SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-armsoc"
++
++S = "${WORKDIR}/git"
++
++RDEPENDS_${PN} += "xserver-xorg-module-exa"
 -- 
 2.7.4
 
