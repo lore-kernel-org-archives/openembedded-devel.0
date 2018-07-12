@@ -1,53 +1,44 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
-	[209.85.218.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BB1A755B3
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 83F16754CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 01:27:16 +0000 (UTC)
-Received: by mail-oi0-f51.google.com with SMTP id i12-v6so52840552oik.2
+	Thu, 12 Jul 2018 06:46:18 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 8BAA22086B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jul 2018 18:27:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=fW9TeMKoVZhhBgEEEFwbJfWMw4VPk8BH4POlKCEx6SQ=;
-	b=qwFHwfybjjcTCTzKX6XO6FDBbB8v8pxcGQlwQa+Fcf1AdcfIdiihp0UE2Zpqe6E0eO
-	hp1KKKFh0gOe7DH4p5AADTvCeI954502PbGO1X+c/CgxB6TcjloAzrsfPDpE8ai5p6jq
-	3E79GGWivvc4GNqv2za18DOYSsQj+ODEstKVP68Wh7HfmgLQ+XNTIplb5zKWqwwPncs3
-	cM6SzoesfZ+9QVRSl28uGld3JMwTReSUbevpc/2Zr8eYrZzCZvd6m6ja1KGTe4JHKy0j
-	CjF2MX/G7nooniIbBWzlAabLd0PchqJ+X5Y9QlyixfcbTZzRn6orUCFMD9E1Q+M/ErsI
-	TVdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=fW9TeMKoVZhhBgEEEFwbJfWMw4VPk8BH4POlKCEx6SQ=;
-	b=cMeYX+HOGDoOvLDt3MfzH/AcGfV3g1kCX9f8dzfvgccjJDcIfyqCsDCVXqiZ1gwBeP
-	CNwikSpipewkuFa9Lpo204RFZJWo/ycsBnzRda01LnsTHGdmagegK+pnUvcuoANYkHT6
-	TMdmD38gWoMpdD6PoYH7Jl7niR6m8fJUGZyL0g4j67hfeCj3CXf9YlMsuC15HrUe1fGW
-	pQsQPH0Iph2iX7su3UVdThC5wApPK8GXv4cdJGHsQJc0lT+ngsJURBDR91jNUXgt3deW
-	W1lDTrdnrY42cxnObg9On8lKcX/KXcoYQ8h2YrGHfLoVf6sh3ehtX8C/d4+SxbGVyJqK
-	Jn1A==
-X-Gm-Message-State: AOUpUlHkeGkhK+ZulPvVFfVK1pFYPjUZTS2Z/GRfwSO8KC8L6cA+1BDS
-	6VryGS2IwdWjemLb3dn16q55cw==
-X-Google-Smtp-Source: AAOMgpeCP4o0moHBKRzwUZJcxAf8hyOK06PjXFZd6SIE/j6gFZFMSxBEMvrdRxWcLY3UlclYHFhjlw==
-X-Received: by 2002:aca:bc54:: with SMTP id
-	m81-v6mr233343oif.308.1531358837526; 
-	Wed, 11 Jul 2018 18:27:17 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4000:1184:3df0:c2f2:5900:71b6])
-	by smtp.gmail.com with ESMTPSA id
-	y27-v6sm87401oix.4.2018.07.11.18.27.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 11 Jul 2018 18:27:16 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Jul 2018 18:27:12 -0700
-Message-Id: <1531358832-14848-4-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
-References: <1531358832-14848-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-oe][PATCH 4/4] xf86-video-armsoc: add new package
+	Thu, 12 Jul 2018 06:46:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1531377979;
+	bh=tTbrHMwSu9z+eFrKktWn2UxofcO6Xz1pOi9T70NIjZ0=;
+	h=In-Reply-To:References:From:Date:Subject:To:Cc:From;
+	b=GXvqmljYkOtlVzSplswrjq/BveVcnRYLxOIV0tQATCVDYQA3HubAbOf32mH0uuMYA
+	sG0oG+wmxD7AmLAT5EjdvD/T53SUPqbfOxs0YczMoqqwzFKdo93wOtigIHIUPT1c9z
+	6YQGzd/hM074ZePqwkPdWZBGvy/B7EItFDjaz0V4=
+Received: by mail-wr1-f45.google.com with SMTP id h9-v6so20460908wro.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Jul 2018 23:46:19 -0700 (PDT)
+X-Gm-Message-State: AOUpUlEhUjhN+yGjiz1ZxclDNL1e0w5qUpCCvNw9OEoBpwkMkBtStxLC
+	ViBB715mZEnwHQkjvaJ0oSw66IbxC33xPkRjyMk=
+X-Google-Smtp-Source: AAOMgpdnRME9Fc0dbDyWBBefmwwxCfP2Zd4opjst11g6tY+zfPnvyD24u8JUFj4TQLMcLQ36OYIdDsqfTwcSIBK5vxw=
+X-Received: by 2002:adf:f390:: with SMTP id
+	m16-v6mr632600wro.279.1531377978090; 
+	Wed, 11 Jul 2018 23:46:18 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:adf:9141:0:0:0:0:0 with HTTP; Wed, 11 Jul 2018 23:46:17
+	-0700 (PDT)
+In-Reply-To: <CAMKF1sq2a_uN6s_P=RXes3PYFx=j+zGSzuruK0Kjbga3ct++AQ@mail.gmail.com>
+References: <20180710155532.6127-1-krzk@kernel.org>
+	<CAMKF1sq2a_uN6s_P=RXes3PYFx=j+zGSzuruK0Kjbga3ct++AQ@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Thu, 12 Jul 2018 08:46:17 +0200
+X-Gmail-Original-Message-ID: <CAJKOXPc0gD+x3yCppb9x9wsUwXUubhFoGEwXb=LEKM--9GRFhw@mail.gmail.com>
+Message-ID: <CAJKOXPc0gD+x3yCppb9x9wsUwXUubhFoGEwXb=LEKM--9GRFhw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libkcapi: Add new recipe for v1.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2018 01:27:16 -0000
+X-List-Received-Date: Thu, 12 Jul 2018 06:46:18 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../xorg-driver/xf86-video-armsoc_1.4.1.bb                 | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
+On 11 July 2018 at 18:06, Khem Raj <raj.khem@gmail.com> wrote:
+> This fails for mips/musl builds
+>
+> | ../git/lib/kcapi-kernel-if.c: In function '__kcapi_common_getinfo.isra.2':
+> | ../git/lib/kcapi-kernel-if.c:632:3: error: 'strncpy' output
+> truncated before terminating nul copying as many bytes from a string
+> as its length [-Werror=stringop-truncation]
+> |    strncpy(req.cru.cru_name, ciphername, strlen(ciphername));
+> |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> | ../git/lib/kcapi-kernel-if.c:629:3: error: 'strncpy' output
+> truncated before terminating nul copying as many bytes from a string
+> as its length [-Werror=stringop-truncation]
+> |    strncpy(req.cru.cru_driver_name, ciphername,
+> |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> |     strlen(ciphername));
+> |     ~~~~~~~~~~~~~~~~~~~
+> | cc1: all warnings being treated as errors
+> | make: *** [lib/libkcapi_la-kcapi-kernel-if.lo] Error 1
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
-new file mode 100644
-index 0000000..b436ef1
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-armsoc_1.4.1.bb
-@@ -0,0 +1,14 @@
-+require recipes-graphics/xorg-driver/xorg-driver-video.inc
-+
-+SUMMARY = "X.Org X server -- ARM SOC display driver"
-+LICENSE = "MIT-X & GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=10ce5de3b111315ea652a5f74ec0c602"
-+
-+DEPENDS += "virtual/libx11 libdrm xorgproto"
-+
-+SRCREV = "8bbdb2ae3bb8ef649999a8da33ddbe11a04763b8"
-+SRC_URI = "git://anongit.freedesktop.org/xorg/driver/xf86-video-armsoc"
-+
-+S = "${WORKDIR}/git"
-+
-+RDEPENDS_${PN} += "xserver-xorg-module-exa"
--- 
-2.7.4
+Thanks for letting me know. I'll take a look and fix it.
 
+Best regards,
+Krzysztof
 
