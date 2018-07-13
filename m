@@ -1,49 +1,102 @@
-Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
-	[209.85.218.49])
-	by mail.openembedded.org (Postfix) with ESMTP id C626778685
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 467C76079E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2018 14:13:10 +0000 (UTC)
-Received: by mail-oi0-f49.google.com with SMTP id r16-v6so62488727oie.3
+	Fri, 13 Jul 2018 14:59:14 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id a7-v6so12313403plp.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2018 07:13:12 -0700 (PDT)
+	Fri, 13 Jul 2018 07:59:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=xQklUpoZnPXSPEBpmjYk/2pjiO3BVRlceWogmUy4CH8=;
-	b=leXQBq2sOCfZcwQZ606yuamKyfAV2Amd1FCdL1thVXyiKV8j0DXSce88TeXchnmsEd
-	hX4250aU6i2Iu4x7e4vlYjkROLH9khqgPbCBXP7zHq64GbMi+HsFyF3kCNj/jlzVBgal
-	GtrQ77KLRzrdGwGQvTJJr0vHyT+gP5CiPnck5kePwBS5CVPepVzHGz45kVld+OrOKBel
-	+d+Gipor9CMWdH+ccVsAYq+h9HGfDkGYe12flTA1N5uU4zB3CWelQiM3KtGDqC6BUIgc
-	1Xk4AkzbM4/mFId0f4CWCAv3vVOSwm0IauZ3uvtqkdQo/i6PWhVeyBcmMmqOHhquA9zr
-	7bmQ==
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=RteEuHTfeNOLAri5njoyA0V/I10p72FCgzhyTD//stE=;
+	b=u48wH/ab6taf9NEd7lmI+h53aZUhfFH6yo6tcBOtKG6wwXgt+Nheirx+FfmZoESLrA
+	kbs4qrOeW9bgHg7fcY8bEWykUNYQPUS7YzagRWcyI1bFxn6t3YIKxkf9sCZixUhkAH9R
+	/1fLImrsSS2hnaqM7QesCTaJStEaKDnmdW8J7ZsWOLyJh4LLVQ0NXLFOQ4+Ymu+gPIMh
+	KuRUCCwsBl5AsyucwKatmXoZlGj1QcQ7/d18AFzhq2333yAxPoapzj8itIDpleP3I5FY
+	9rcbg070jHaY8liRghCpWRNIwFqFTmus+UnJitzaSZK/5zz0oRzwpx9f2KBDsZgJRu0t
+	6I4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=xQklUpoZnPXSPEBpmjYk/2pjiO3BVRlceWogmUy4CH8=;
-	b=P9DqTeJkvao0QckhZz5SO/NfV10RXlG7JficepgwdkfQD5MmnU354Tb+lcmli1xnxz
-	v9p/MfV3yM6EoRPSD5Sn7jgT5PO8m4Ix7GnCnNyCZbWNHNOGLGeBuCYx8uaxKGKyKhm5
-	W4TfpJ0kQJOe/8HR6eWPNY77vq1TGbdVBCG3hR918uEfwbIyLKqKy/OzUI3dNjuC9L9c
-	eAv4WDOYSisndBcaMRr/TEzFtJcaKTlYZQOu/swMDfKkohgkea09q2S2rbeh+KxlenJA
-	Z4LCP0QvAW7UIRjLfWRAD9Ki6Rl5jA6gR4AeY+fqrOF8phzc0N9CWcu0GkQPBxg0iLGT
-	RcCg==
-X-Gm-Message-State: AOUpUlFsK3xLrndAcv3sRbO9Z66E0S0MpadCn/OiMiGwEnxYZ1l5bP7X
-	135k/Y0mcH/Jbv9zDkq/PV/py86pPHNL/9xaUMo=
-X-Google-Smtp-Source: AAOMgpeD7Je7nNkdCtBYHJRembNDyanAG9QjvHFfiaS+PeCqfaMv7ikqSYmX58+bJqxnyxypmVRivVrUbDkpWiy60Ks=
-X-Received: by 2002:aca:560d:: with SMTP id
-	k13-v6mr6752746oib.190.1531491191869; 
-	Fri, 13 Jul 2018 07:13:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a4a:90c5:0:0:0:0:0 with HTTP; Fri, 13 Jul 2018 07:13:11
-	-0700 (PDT)
-In-Reply-To: <20180713140616.15664-3-hongzhi.song@windriver.com>
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=RteEuHTfeNOLAri5njoyA0V/I10p72FCgzhyTD//stE=;
+	b=dmhzfHaPxtx4p2Mn0DN4ntNVeF1sEm79fT3A4jFj34YJHiNlfGLIPzC+IwoSNqWFUV
+	4/t8kmy4jEjuHDNQGgKcgsZQ++kP1EkcVLmCLPRiE+70XoDwN0cDQ96nvtkMdaVLHzEB
+	g5daN2NQ7cqCnlWyo2ntL+0h6e45JYNgg9spYgOIaDkZY3tvVtHg119knMORMgb61PAS
+	vUBocDjhVevhUXNyNfpo/fqRL7edtpJRPO4D2EBnftem9SASrKdOjfLYeGlDMkV+z4+g
+	H1hyKFXZFFIWD+KIIZa3/8+yRH5Lxwz/qYD+xs7v0TS8MBhTWx6Bj28wllv8TuB2w+Ov
+	jSDw==
+X-Gm-Message-State: AOUpUlFfvujoShzTo1sBFFxZ7Kv0iKEUUK/xtSDQ0hIuDcvHx8WtvtQX
+	kcPCTUNww1vSMWh/SgEb0V7DqQ==
+X-Google-Smtp-Source: AAOMgpdnDRxR/+VO/+Lxj9S/ekFQVdRZjxpI8wmBnlsPz/xE04SqvpzQG5yUWZ1g0qUlVtkFsGzH0Q==
+X-Received: by 2002:a17:902:7b83:: with SMTP id
+	w3-v6mr3625557pll.192.1531493955334; 
+	Fri, 13 Jul 2018 07:59:15 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1184:955f:e3a6:6fb7:17eb?
+	([2601:202:4000:1184:955f:e3a6:6fb7:17eb])
+	by smtp.gmail.com with ESMTPSA id
+	e19-v6sm2770142pgv.48.2018.07.13.07.59.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 13 Jul 2018 07:59:14 -0700 (PDT)
+To: "Hongzhi.Song" <hongzhi.song@windriver.com>, raj.khem@gmail.com,
+	openembedded-devel@lists.openembedded.org
 References: <20180713140616.15664-1-hongzhi.song@windriver.com>
 	<20180713140616.15664-3-hongzhi.song@windriver.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Fri, 13 Jul 2018 16:13:11 +0200
-Message-ID: <CANNYZj8Doep17N+hmd_WbJr0V91kpHMDH_RdhsOPsCS3ax276A@mail.gmail.com>
-To: "Hongzhi.Song" <hongzhi.song@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <978a9da0-b906-816e-2ae7-40b505684fca@gmail.com>
+Date: Fri, 13 Jul 2018 07:59:13 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
+MIME-Version: 1.0
+In-Reply-To: <20180713140616.15664-3-hongzhi.song@windriver.com>
 Subject: Re: [OE-core][PATCH] x86: remove "qemu-usermode" from MACHINE_FEATURES_BACKFILL_CONSIDERED
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,10 +110,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2018 14:13:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 13 Jul 2018 14:59:14 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-2018-07-13 16:06 GMT+02:00 Hongzhi.Song <hongzhi.song@windriver.com>:
+
+
+On 07/13/2018 07:06 AM, Hongzhi.Song wrote:
 > error information:
 > ---
 > qemu: uncaught target signal 11 (Segmentation fault) - core dumped
@@ -70,13 +127,25 @@ Content-Type: text/plain; charset="UTF-8"
 > ---
 >
 > qemux86 will face the error above.
+Wrong ML
+think it should be: openembedded-core@lists.openembedded.org
+>
+> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+> ---
+>  meta/conf/machine/include/x86/arch-x86.inc | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta/conf/machine/include/x86/arch-x86.inc b/meta/conf/machine/include/x86/arch-x86.inc
+> index 70814b8d4d..091d60f507 100644
+> --- a/meta/conf/machine/include/x86/arch-x86.inc
+> +++ b/meta/conf/machine/include/x86/arch-x86.inc
+> @@ -26,6 +26,7 @@ TUNE_LDARGS += "${@bb.utils.contains('TUNE_FEATURES', 'mx32', '-m elf32_x86_64',
+>  TUNE_ASARGS += "${@bb.utils.contains('TUNE_FEATURES', 'mx32', '-x32', '', d)}"
+>  # user mode qemu doesn't support x32
+>  MACHINE_FEATURES_BACKFILL_CONSIDERED_append = " ${@bb.utils.contains('TUNE_FEATURES', 'mx32', 'qemu-usermode', '', d)}"
+> +MACHINE_FEATURES_BACKFILL_CONSIDERED_append = " ${@bb.utils.contains('TUNE_FEATURES', 'm32', 'qemu-usermode', '', d)}"
+>  MACHINEOVERRIDES =. "${@bb.utils.contains('TUNE_FEATURES', 'mx32', 'x86-x32:', '' ,d)}"
+>  
+>  # ELF64 ABI
 
-I believe this error does not happen on the autobuilder, and disabling
-qemu-usermode on x86 is an unacceptable reduction in functionality. We
-need to address the issue, not disable the feature.
-
-Please provide information about your environment. Which version of
-oe-core and qemu are you seeing this with?
-
-Alex
 
