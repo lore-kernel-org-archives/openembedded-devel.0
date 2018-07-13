@@ -1,51 +1,50 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
 	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 467C76079E
+	by mail.openembedded.org (Postfix) with ESMTP id 57686605BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2018 14:59:14 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id a7-v6so12313403plp.3
+	Fri, 13 Jul 2018 15:02:54 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id k1-v6so12315196plt.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2018 07:59:15 -0700 (PDT)
+	Fri, 13 Jul 2018 08:02:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=RteEuHTfeNOLAri5njoyA0V/I10p72FCgzhyTD//stE=;
-	b=u48wH/ab6taf9NEd7lmI+h53aZUhfFH6yo6tcBOtKG6wwXgt+Nheirx+FfmZoESLrA
-	kbs4qrOeW9bgHg7fcY8bEWykUNYQPUS7YzagRWcyI1bFxn6t3YIKxkf9sCZixUhkAH9R
-	/1fLImrsSS2hnaqM7QesCTaJStEaKDnmdW8J7ZsWOLyJh4LLVQ0NXLFOQ4+Ymu+gPIMh
-	KuRUCCwsBl5AsyucwKatmXoZlGj1QcQ7/d18AFzhq2333yAxPoapzj8itIDpleP3I5FY
-	9rcbg070jHaY8liRghCpWRNIwFqFTmus+UnJitzaSZK/5zz0oRzwpx9f2KBDsZgJRu0t
-	6I4w==
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=a859av9Do5YMY791yqp1/deZ+g5HZPBQy/85mwlbnsw=;
+	b=WvIp73n8pCPBl6ZgmCWLroMjXcYWMInhJFVpklvv9en5YlkNkWEGnWSsI/JkE/j7Vy
+	l5eatPUntHQq1/1FRXRXRjFpFLq0Ln3St/PuPEPh4AUTQao79j83gxoqi8qf8JwAjKan
+	6dC23/wKpx5gs39gnNCaCs4LFDvBVkgSwzHFwrcyKkstkXEc6OI5uYEk+Pc0se55H6yz
+	SfzR4KDCR6wxr9iYuSuey8L0fK7EGKa0HQZUeRKEOqWtFtxNmLgZQMg3/jl4GILSabup
+	U2vMCscje93UFZYVA0kxMrCg0w7l/p15uk55bzGotv2UuYyFQ3q+yDu9XC38oZD9vAT5
+	pebw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=RteEuHTfeNOLAri5njoyA0V/I10p72FCgzhyTD//stE=;
-	b=dmhzfHaPxtx4p2Mn0DN4ntNVeF1sEm79fT3A4jFj34YJHiNlfGLIPzC+IwoSNqWFUV
-	4/t8kmy4jEjuHDNQGgKcgsZQ++kP1EkcVLmCLPRiE+70XoDwN0cDQ96nvtkMdaVLHzEB
-	g5daN2NQ7cqCnlWyo2ntL+0h6e45JYNgg9spYgOIaDkZY3tvVtHg119knMORMgb61PAS
-	vUBocDjhVevhUXNyNfpo/fqRL7edtpJRPO4D2EBnftem9SASrKdOjfLYeGlDMkV+z4+g
-	H1hyKFXZFFIWD+KIIZa3/8+yRH5Lxwz/qYD+xs7v0TS8MBhTWx6Bj28wllv8TuB2w+Ov
-	jSDw==
-X-Gm-Message-State: AOUpUlFfvujoShzTo1sBFFxZ7Kv0iKEUUK/xtSDQ0hIuDcvHx8WtvtQX
-	kcPCTUNww1vSMWh/SgEb0V7DqQ==
-X-Google-Smtp-Source: AAOMgpdnDRxR/+VO/+Lxj9S/ekFQVdRZjxpI8wmBnlsPz/xE04SqvpzQG5yUWZ1g0qUlVtkFsGzH0Q==
-X-Received: by 2002:a17:902:7b83:: with SMTP id
-	w3-v6mr3625557pll.192.1531493955334; 
-	Fri, 13 Jul 2018 07:59:15 -0700 (PDT)
+	:content-language;
+	bh=a859av9Do5YMY791yqp1/deZ+g5HZPBQy/85mwlbnsw=;
+	b=YfmZmuzVxoC0r1X6l9+RKzSz6amIIeHVM/cGZV1gWTeupdLrK/zg1aRG4I0as/WSOE
+	o23sAAKChnF8n36amVA9JvwqcXDaN5TsQicOyuSifnQ4YzKxNkRqllrx05/Q3NxZpqmg
+	vSGVDlIOqCo85JqPUiWNsTD0H5hvmslCy6s4GOAbQkOTNeVNeS6yatunYrCJfCIFAx7j
+	QEWEQ/BCRoSkCVZuypauy1UHQQHDJ4kPQ+RdkZaNp7T4PTgmaMLzUc0KxhOkOMWAKZuk
+	c3J3xr94ipX/gRwu+w4gXlX8CMWAev50Ltu9B37E7BMdu6VuFR9MTVj+OsbULJmfIBLk
+	8LsA==
+X-Gm-Message-State: AOUpUlFeAh34zb/1tGvIfFNSo3J07URtVoPTPcHxPGlPIMMzJgX8liRZ
+	KQAUa9aVp/o0Ep+anfQ6d7oQ7w==
+X-Google-Smtp-Source: AAOMgpfBQSju/VZEzNE97aFeF0PAOxPnRQXBQ9dnk2NqhjdsEG9BvTmj3hO9y0UEkammF6rZiqjHQA==
+X-Received: by 2002:a17:902:6b84:: with SMTP id
+	p4-v6mr6791445plk.272.1531494175445; 
+	Fri, 13 Jul 2018 08:02:55 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1184:955f:e3a6:6fb7:17eb?
 	([2601:202:4000:1184:955f:e3a6:6fb7:17eb])
 	by smtp.gmail.com with ESMTPSA id
-	e19-v6sm2770142pgv.48.2018.07.13.07.59.14
+	y132-v6sm43378419pfb.91.2018.07.13.08.02.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 13 Jul 2018 07:59:14 -0700 (PDT)
-To: "Hongzhi.Song" <hongzhi.song@windriver.com>, raj.khem@gmail.com,
+	Fri, 13 Jul 2018 08:02:54 -0700 (PDT)
+To: "Hongzhi, Song" <hongzhi.song@windriver.com>, raj.khem@gmail.com,
 	openembedded-devel@lists.openembedded.org
 References: <20180713140616.15664-1-hongzhi.song@windriver.com>
-	<20180713140616.15664-3-hongzhi.song@windriver.com>
+	<d3ce5260-4581-c1b8-53f0-7a521ba97e99@windriver.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -91,13 +90,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <978a9da0-b906-816e-2ae7-40b505684fca@gmail.com>
-Date: Fri, 13 Jul 2018 07:59:13 -0700
+Message-ID: <cd12f3a2-ed7e-77a8-9d07-874cd3354bc4@gmail.com>
+Date: Fri, 13 Jul 2018 08:02:53 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.8.0
 MIME-Version: 1.0
-In-Reply-To: <20180713140616.15664-3-hongzhi.song@windriver.com>
-Subject: Re: [OE-core][PATCH] x86: remove "qemu-usermode" from MACHINE_FEATURES_BACKFILL_CONSIDERED
+In-Reply-To: <d3ce5260-4581-c1b8-53f0-7a521ba97e99@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v2 0/1] Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,42 +110,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2018 14:59:14 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Jul 2018 15:02:54 -0000
 Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
 
 
-On 07/13/2018 07:06 AM, Hongzhi.Song wrote:
-> error information:
-> ---
-> qemu: uncaught target signal 11 (Segmentation fault) - core dumped
-> If the above error message is about missing .so libraries,
-> then setting up GIR_EXTRA_LIBS_PATH in the recipe should help.
-> (typically like this: GIR_EXTRA_LIBS_PATH="${B}/something/.libs" )
-> ---
+On 07/13/2018 07:10 AM, Hongzhi, Song wrote:
+> Attachment is my local.conf
+
+Thanks.  Do you think this might qualify for an FAQ ?
+https://wiki.yoctoproject.org/wiki/Technical_FAQ
+
+
+- armin
 >
-> qemux86 will face the error above.
-Wrong ML
-think it should be: openembedded-core@lists.openembedded.org
+> --Hongzhi
 >
-> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> ---
->  meta/conf/machine/include/x86/arch-x86.inc | 1 +
->  1 file changed, 1 insertion(+)
 >
-> diff --git a/meta/conf/machine/include/x86/arch-x86.inc b/meta/conf/machine/include/x86/arch-x86.inc
-> index 70814b8d4d..091d60f507 100644
-> --- a/meta/conf/machine/include/x86/arch-x86.inc
-> +++ b/meta/conf/machine/include/x86/arch-x86.inc
-> @@ -26,6 +26,7 @@ TUNE_LDARGS += "${@bb.utils.contains('TUNE_FEATURES', 'mx32', '-m elf32_x86_64',
->  TUNE_ASARGS += "${@bb.utils.contains('TUNE_FEATURES', 'mx32', '-x32', '', d)}"
->  # user mode qemu doesn't support x32
->  MACHINE_FEATURES_BACKFILL_CONSIDERED_append = " ${@bb.utils.contains('TUNE_FEATURES', 'mx32', 'qemu-usermode', '', d)}"
-> +MACHINE_FEATURES_BACKFILL_CONSIDERED_append = " ${@bb.utils.contains('TUNE_FEATURES', 'm32', 'qemu-usermode', '', d)}"
->  MACHINEOVERRIDES =. "${@bb.utils.contains('TUNE_FEATURES', 'mx32', 'x86-x32:', '' ,d)}"
->  
->  # ELF64 ABI
+> On 2018年07月13日 22:06, Hongzhi.Song wrote:
+>> 0001-kernel-selftest-Add-a-recipe-on-kernel-selftest.patch:
+>>      1. This patch add support for musl libc.
+>>      2. I don't reproduce the error about Makefile with your auto.conf.
+>>      3. Boot failed using your auto.conf with error:
+>>         ---
+>>         [  576.229543] mount[2571]: segfault at 0 ip   (null) sp
+>> bfb52e0c error
+>>                        4 in mount.util-linux[8048000+9000]
+>>         You are in emergency mode. After logging in, type "journalctl
+>> -xb" to view
+>>         system logs, "systemctl reboot" to reboot, "systemctl
+>> default" or "exit"
+>>         to boot into default mode.
+>>         /sbin/sulogin terminated by signal SEGV.
+>>         ---
+>>         runqemu qemux86 nographic slirp qemuparams="-m 2048"
+>>      4. With this patch set, I have fixed all musl related issues in
+>> my build.
+>>         It builds and works well. But I still have not met the error
+>> in yours.
+>>
+>>         In my case, I just start build from latest poky without any
+>> change
+>>         other than a few necessary kernel config fragments. I'd like to
+>>         reproduce your error but I can't. Could you please provide
+>> more info
+>>         about your build config?
+>>
+>> 0001-x86-remove-qemu-usermode-from-MACHINE_FEATURES_BACKF.patch:
+>>      This patch is to fix gobject-introspection do_compile.
+>>
+>>      With m32, qemu-usermode will be back filled and
+>> gobject-introspection
+>>      tends to use qemu-i386. Is this the way to fix? If you have no
+>> objection
+>>      I will commit to oe-core next.
+>>
+>> Hongzhi.Song (1):
+>>    kernel-selftest: Add a recipe on kernel selftest
+>>
+>>   .../kernel-selftest/kernel-selftest.bb             | 104 ++++++
+>>   .../kernel-selftest/kernel-selftest/COPYING        | 356
+>> +++++++++++++++++++++
+>>   .../kernel-selftest/userfaultfd.patch              | 322
+>> +++++++++++++++++++
+>>   3 files changed, 782 insertions(+)
+>>   create mode 100644
+>> meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+>>   create mode 100644
+>> meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
+>>   create mode 100644
+>> meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
+>>
+>
+>
+>
 
 
