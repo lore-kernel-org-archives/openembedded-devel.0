@@ -1,23 +1,27 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AF7B4786C8
+Return-Path: <krzk@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B25D577190
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2018 07:59:26 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6D7xQY4029344
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jul 2018 00:59:26 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Fri, 13 Jul 2018 00:59:25 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Jul 2018 00:59:25 -0700
-Message-ID: <20180713075925.59746-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] augeas: Upgrade to 1.10.1
+	Fri, 13 Jul 2018 10:28:58 +0000 (UTC)
+Received: from localhost.localdomain (xdsl-188-155-58-14.adslplus.ch
+	[188.155.58.14])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id 4BAF320858;
+	Fri, 13 Jul 2018 10:28:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1531477739;
+	bh=W2+BTsuKDkwRBU9Mr8Ymm6nhLV+dPqs9SOP5hVVVqXw=;
+	h=From:To:Cc:Subject:Date:From;
+	b=rqHSH2yfM5V+onD2Y88vbwXvhgKsGCdlNqMJdE+V+1ou7uCPq0GdG4jWLzLDVNqnQ
+	Qn5so2r0lVVnZvRyVgySdlRIUtiWBje7xjUS7m4w5VgwgxTa5AazZwoq6GkiiPiQCi
+	36j585S9JWpurv4YM8F4NzNCTwjt38ismpea7Sx4=
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Jul 2018 12:28:35 +0200
+Message-Id: <20180713102835.3442-1-krzk@kernel.org>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-oe][PATCH v2] libkcapi: Add new recipe for v1.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,57 +34,236 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jul 2018 07:59:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Jul 2018 10:28:58 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Add new recipe with libkcapi v1.1.1, Linux Kernel Crypto API User Space
+Interface Library.
 
-* Add EXTRA_AUTORECONF += "-I ${S}/gnulib/m4" to
-  fix below compile error:
-| In file included from ../../../augeas-1.10.1/gnulib/lib/printf-args.h:41,
-|                  from ../../../augeas-1.10.1/gnulib/lib/printf-args.c:29:
-| ./wchar.h:571:6: error: #if with no expression
-|  # if
-|       ^
-| In file included from ../../../augeas-1.10.1/gnulib/lib/mbrtowc.c:21:
-| ./wchar.h:571:6: error: #if with no expression
-|  # if
-|       ^
-| Makefile:1581: recipe for target 'printf-args.lo' failed
-| make[4]: *** [printf-args.lo] Error 1
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-support/augeas/augeas.inc                     | 2 ++
- .../augeas/{augeas_1.5.0.bb => augeas_1.10.1.bb}              | 4 ++--
- 2 files changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/augeas/{augeas_1.5.0.bb => augeas_1.10.1.bb} (12%)
 
-diff --git a/meta-oe/recipes-support/augeas/augeas.inc b/meta-oe/recipes-support/augeas/augeas.inc
-index 185abae18..c939d4b89 100644
---- a/meta-oe/recipes-support/augeas/augeas.inc
-+++ b/meta-oe/recipes-support/augeas/augeas.inc
-@@ -31,3 +31,5 @@ do_install_append() {
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[libselinux] = "--with-selinux,--without-selinux,libselinux"
+Changes since v1:
+1. Add patches fixing compilation with GCC v8.1
+---
+ ...e-buffer-overflow-with-strncpy-and-Wstrin.patch | 50 ++++++++++++++++
+ ...e-Wstringop-truncation-warning-on-false-p.patch | 67 ++++++++++++++++++++++
+ ...e-to-terminate-strncpy-copied-string-Wstr.patch | 37 ++++++++++++
+ meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb    | 29 ++++++++++
+ 4 files changed, 183 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/files/0001-Fix-possible-buffer-overflow-with-strncpy-and-Wstrin.patch
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/files/0002-apps-Disable-Wstringop-truncation-warning-on-false-p.patch
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/files/0003-test-Be-sure-to-terminate-strncpy-copied-string-Wstr.patch
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
+
+diff --git a/meta-oe/recipes-crypto/libkcapi/files/0001-Fix-possible-buffer-overflow-with-strncpy-and-Wstrin.patch b/meta-oe/recipes-crypto/libkcapi/files/0001-Fix-possible-buffer-overflow-with-strncpy-and-Wstrin.patch
+new file mode 100644
+index 000000000000..f35f631c6010
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/files/0001-Fix-possible-buffer-overflow-with-strncpy-and-Wstrin.patch
+@@ -0,0 +1,50 @@
++From 303c766d67cef5c357e9b3d3a97f7b480d29e1cb Mon Sep 17 00:00:00 2001
++From: Krzysztof Kozlowski <krzk@kernel.org>
++Date: Thu, 12 Jul 2018 18:13:16 +0200
++Subject: [PATCH 1/3] Fix possible buffer overflow with strncpy and
++ -Wstringop-truncation warning
 +
-+EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
-diff --git a/meta-oe/recipes-support/augeas/augeas_1.5.0.bb b/meta-oe/recipes-support/augeas/augeas_1.10.1.bb
-similarity index 12%
-rename from meta-oe/recipes-support/augeas/augeas_1.5.0.bb
-rename to meta-oe/recipes-support/augeas/augeas_1.10.1.bb
-index c4f62e747..26e191bd3 100644
---- a/meta-oe/recipes-support/augeas/augeas_1.5.0.bb
-+++ b/meta-oe/recipes-support/augeas/augeas_1.10.1.bb
-@@ -1,4 +1,4 @@
- require augeas.inc
- 
--SRC_URI[md5sum] = "01190e455c513124a2dae29a1182c113"
--SRC_URI[sha256sum] = "223bb6e6fe3e9e92277dafd5d34e623733eb969a72a382998d204feab253f73f"
-+SRC_URI[md5sum] = "6c0b2ea6eec45e8bc374b283aedf27ce"
-+SRC_URI[sha256sum] = "52db256afab261d31cc147eaa1a71795a5fec59e888dfd0b65a84c7aacd6364d"
++If valid cipher name (to which netlink socket was bound) is longer than
++CRYPTO_MAX_ALG_NAME defined in lib/cryptouser.h, then the strncpy() will
++try to copy length of this cipher name into smaller buffer.
++
++In libkcapi the CRYPTO_MAX_ALG_NAME (thus the size of the buffer) is
++defined as 64 but since commit f437a3f477cc ("crypto: api - Extend
++algorithm name limit to 128 bytes") in Linux kernel (v4.12), the kernel
++defines it as 128.
++
++It is error-prone to use source buffer length as limit of dst buffer.
++Instead choose sizeof(dst buffer).
++
++This also fixes the warning with GCC v8.1.0:
++
++    lib/kcapi-kernel-if.c: In function '__kcapi_common_getinfo.isra.2':
++    lib/kcapi-kernel-if.c:632:3: error: 'strncpy' output truncated before terminating nul copying as many bytes from a string as its length [-Werror=stringop-truncation]
++        strncpy(req.cru.cru_name, ciphername, strlen(ciphername));
++        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
++Upstream-Status: Submitted
++---
++ lib/kcapi-kernel-if.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/lib/kcapi-kernel-if.c b/lib/kcapi-kernel-if.c
++index 2481f8abde63..807cbfe219cd 100644
++--- a/lib/kcapi-kernel-if.c
+++++ b/lib/kcapi-kernel-if.c
++@@ -627,9 +627,9 @@ static int __kcapi_common_getinfo(struct kcapi_handle *handle,
++ 
++ 	if (drivername)
++ 		strncpy(req.cru.cru_driver_name, ciphername,
++-			strlen(ciphername));
+++			sizeof(req.cru.cru_driver_name) - 1);
++ 	else
++-		strncpy(req.cru.cru_name, ciphername, strlen(ciphername));
+++		strncpy(req.cru.cru_name, ciphername, sizeof(req.cru.cru_name) - 1);
++ 
++ 	/* talk to netlink socket */
++ 	sd =  socket(AF_NETLINK, SOCK_RAW, NETLINK_CRYPTO);
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-crypto/libkcapi/files/0002-apps-Disable-Wstringop-truncation-warning-on-false-p.patch b/meta-oe/recipes-crypto/libkcapi/files/0002-apps-Disable-Wstringop-truncation-warning-on-false-p.patch
+new file mode 100644
+index 000000000000..ba76599fd831
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/files/0002-apps-Disable-Wstringop-truncation-warning-on-false-p.patch
+@@ -0,0 +1,67 @@
++From 88f1a8fe4697b0921f39fcd9c7efc4a0486cf91b Mon Sep 17 00:00:00 2001
++From: Krzysztof Kozlowski <krzk@kernel.org>
++Date: Thu, 12 Jul 2018 18:13:24 +0200
++Subject: [PATCH 2/3] apps: Disable -Wstringop-truncation warning on false
++ positives
++
++The GCC v8.1.0 warns:
++
++    In function 'paste',
++        inlined from 'get_hmac_file' at apps/kcapi-hasher.c:395:11:
++    apps/kcapi-hasher.c:346:2: error: 'strncpy' destination unchanged after copying no bytes [-Werror=stringop-truncation]
++      strncpy(dst, src, size);
++      ^~~~~~~~~~~~~~~~~~~~~~~
++
++These are false positives because at the end of paste() calls, the buffer is
++NULL terminated.
++
++Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
++Upstream-Status: Submitted
++---
++ apps/kcapi-hasher.c | 16 ++++++++++++++++
++ 1 file changed, 16 insertions(+)
++
++diff --git a/apps/kcapi-hasher.c b/apps/kcapi-hasher.c
++index ae88211ff4dd..4052260bf871 100644
++--- a/apps/kcapi-hasher.c
+++++ b/apps/kcapi-hasher.c
++@@ -61,6 +61,10 @@
++ 
++ #include "app-internal.h"
++ 
+++#define GCC_VERSION (__GNUC__ * 10000 \
+++			+ __GNUC_MINOR__ * 100 \
+++			+ __GNUC_PATCHLEVEL__)
+++
++ struct hash_name {
++ 	const char *kcapiname;
++ 	const char *bsdname;
++@@ -341,6 +345,17 @@ out:
++ 	return ret;
++ }
++ 
+++/*
+++ * GCC v8.1.0 introduced -Wstringop-truncation but it is not smart enough to
+++ * find that cursor string will be NULL-terminated after all paste() calls and
+++ * warns with:
+++ * error: 'strncpy' destination unchanged after copying no bytes [-Werror=stringop-truncation]
+++ * error: 'strncpy' output truncated before terminating nul copying 5 bytes from a string of the same length [-Werror=stringop-truncation]
+++ */
+++#pragma GCC diagnostic push
+++#if GCC_VERSION >= 80100
+++#pragma GCC diagnostic ignored "-Wstringop-truncation"
+++#endif
++ static char *paste(char *dst, const char *src, size_t size)
++ {
++ 	strncpy(dst, src, size);
++@@ -398,6 +413,7 @@ static char *get_hmac_file(const char *filename, const char *subdir)
++ 	strncpy(cursor, "\0", 1);
++ 	return checkfile;
++ }
+++#pragma GCC diagnostic pop /* -Wstringop-truncation */
++ 
++ static int hash_files(const struct hash_params *params,
++ 		      char *filenames[], uint32_t files,
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-crypto/libkcapi/files/0003-test-Be-sure-to-terminate-strncpy-copied-string-Wstr.patch b/meta-oe/recipes-crypto/libkcapi/files/0003-test-Be-sure-to-terminate-strncpy-copied-string-Wstr.patch
+new file mode 100644
+index 000000000000..885f3ca12465
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/files/0003-test-Be-sure-to-terminate-strncpy-copied-string-Wstr.patch
+@@ -0,0 +1,37 @@
++From 505d949dcb6b756f6db6588d3425d9cd6108c77f Mon Sep 17 00:00:00 2001
++From: Krzysztof Kozlowski <krzk@kernel.org>
++Date: Thu, 12 Jul 2018 18:13:32 +0200
++Subject: [PATCH 3/3] test: Be sure to terminate strncpy() copied string
++ (-Wstringop-truncation)
++
++strncpy() might not NULL-terminate the buffer.  This fixes GCC v8.1.0 warning:
++
++    test/kcapi-main.c: In function 'main':
++    test/kcapi-main.c:3123:5: error: 'strncpy' specified bound 63 equals destination size [-Werror=stringop-truncation]
++         strncpy(cavs_test.cipher, optarg,
++         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++          CIPHERMAXNAME);
++          ~~~~~~~~~~~~~~
++
++Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
++Upstream-Status: Submitted
++---
++ test/kcapi-main.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/test/kcapi-main.c b/test/kcapi-main.c
++index 835249987aa5..c167b7f61809 100644
++--- a/test/kcapi-main.c
+++++ b/test/kcapi-main.c
++@@ -3121,7 +3121,7 @@ int main(int argc, char *argv[])
++ 				break;
++ 			case 'c':
++ 				strncpy(cavs_test.cipher, optarg,
++-					CIPHERMAXNAME);
+++					CIPHERMAXNAME - 1);
++ 				break;
++ 			case 'p':
++ 				len = strlen(optarg);
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
+new file mode 100644
+index 000000000000..e401b70a7da3
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
++HOMEPAGE = "http://www.chronox.de/libkcapi.html"
++LICENSE = "BSD | GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d0421cf231423bda10cea691b613e866"
++
++DEPENDS = "libtool"
++
++S = "${WORKDIR}/git"
++# Use v1.1.1 with changes on top for building in OE
++SRCREV = "342b50fc9225a991c224126c13c188ad9f1ef9f9"
++PV = "1.1.1+git${SRCPV}"
++SRC_URI = " \
++    git://github.com/smuellerDD/libkcapi.git \
++    file://0001-Fix-possible-buffer-overflow-with-strncpy-and-Wstrin.patch \
++    file://0002-apps-Disable-Wstringop-truncation-warning-on-false-p.patch \
++    file://0003-test-Be-sure-to-terminate-strncpy-copied-string-Wstr.patch \
++"
++
++inherit autotools
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[testapp] = "--enable-kcapi-test,,,"
++PACKAGECONFIG[apps] = "--enable-kcapi-speed --enable-kcapi-hasher --enable-kcapi-rngapp --enable-kcapi-encapp --enable-kcapi-dgstapp,,,"
++
++do_install_append() {
++    # bindir contains testapp and apps.  However it is always created, even
++    # when no binaries are installed (empty bin_PROGRAMS in Makefile.am),
++    rmdir --ignore-fail-on-non-empty ${D}${bindir}
++}
 -- 
-2.17.1
+2.14.1
 
 
