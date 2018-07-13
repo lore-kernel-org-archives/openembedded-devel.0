@@ -1,18 +1,23 @@
-Return-Path: <martin@geanix.com>
-Received: from mail.hundeboll.net (mail.hundeboll.net [88.198.92.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B149754C8
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 51FA16FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jul 2018 18:35:09 +0000 (UTC)
-Received: from hundeboll.local (unknown [85.184.147.232])
-	by mail.hundeboll.net (Postfix) with ESMTPSA id EE41E1C0974;
-	Thu, 12 Jul 2018 20:35:09 +0200 (CEST)
-From: =?UTF-8?q?Martin=20Hundeb=C3=B8ll?= <martin@geanix.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jul 2018 20:35:08 +0200
-Message-Id: <20180712183508.7978-1-martin@geanix.com>
-X-Mailer: git-send-email 2.18.0
+	Fri, 13 Jul 2018 01:19:03 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6D1J3I8003436
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jul 2018 18:19:04 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Thu, 12 Jul 2018 18:19:03 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Jul 2018 18:19:03 -0700
+Message-ID: <20180713011903.84114-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] ell: update patch status to backport
+Subject: [meta-oe][PATCH] cryptsetup: Upgrade to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,29 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jul 2018 18:35:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 Jul 2018 01:19:03 -0000
+Content-Type: text/plain
 
-Signed-off-by: Martin Hundebøll <martin@geanix.com>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+* Update the homepage to https://gitlab.com/cryptsetup/cryptsetup
+* Add json-c to DEPENDS as cryptsetup requires the
+  json-c library for JSON data processing since cryptsetup
+  2.0.0 per "The LUKS2 format and features" part of
+  https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.0/v2.0.0-ReleaseNotes
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...1-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb}       | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb} (78%)
 
-diff --git a/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch b/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
-index df3c055d3..ada65401a 100644
---- a/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
-+++ b/meta-oe/recipes-core/ell/ell/0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch
-@@ -15,7 +15,7 @@ The only symbols used from if_arp.h is ARPHRD_ETHER, so it should be
- safe to avoid the compile error by including the if_arp.h header from
- the c-library instead.
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+similarity index 78%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+index c13b764f7..176e29a91 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+@@ -4,16 +4,16 @@ device-mapper mappings. These include plain dm-crypt volumes and \
+ LUKS volumes. The difference is that LUKS uses a metadata header \
+ and can hence offer more features than plain dm-crypt. On the other \
+ hand, the header is visible and vulnerable to damage."
+-HOMEPAGE = "http://code.google.com/p/cryptsetup/"
++HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
+ SECTION = "console"
+ LICENSE = "GPL-2.0-with-OpenSSL-exception"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
  
--Upstream-Status: Submitted [https://lists.01.org/pipermail/ell/2018-July/001242.html]
-+Upstream-Status: Backport [https://lists.01.org/pipermail/ell/2018-July/001244.html]
- Signed-off-by: Martin Hundebøll <martin@geanix.com>
- ---
-  ell/dhcp.c | 2 +-
+-DEPENDS = "util-linux libdevmapper popt libgcrypt"
++DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
+ 
+-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
+-SRC_URI[md5sum] = "058ed35c5b776032c2a036838f9e22a7"
+-SRC_URI[sha256sum] = "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
++SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
++SRC_URI[sha256sum] = "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
+ 
+ inherit autotools gettext pkgconfig
+ 
 -- 
-2.18.0
+2.17.1
 
 
