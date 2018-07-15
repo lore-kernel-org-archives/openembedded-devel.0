@@ -1,46 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 09EE075169
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BF6F74C1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jul 2018 18:24:01 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id x24-v6so22539486ual.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Jul 2018 11:24:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=zecPXg2aj/2AcSF1ZwGXlvWNQP7QWDMxP3RXw4YR//U=;
-	b=jK4b+43ONVAaIVygm0WmngG7o44QEs5lrLaKwNlBy8eRe8TZOiB2rkFbp2pjnEaBrK
-	xeIgUHcjSuOkaqqg53/uRGo4+zYhIVMRNRzTC210n/hB3B7cYYhwolns4iOEerLQnh4m
-	ZSMe8Z5TkEPXTojRgejb7bZia7mT22OqupJtYhHlghgiQ4hKJCwPfmncAIGrNjJ6piUi
-	KPyejqFvDLgMC1zMPBHnQB5CG5hFZKtRWMFWDprw7cXOywV7I2lPd96s0DlsVt77w/1m
-	IFFeq8piVGMTdSaru8cyMvDUFg7CkGLU/iBVejRZ9UQyBNjhrrMhHBecUnPXJNjfVXPI
-	P1zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=zecPXg2aj/2AcSF1ZwGXlvWNQP7QWDMxP3RXw4YR//U=;
-	b=cDxtF6aQunHeLSK+qB66979bOXOZoOM+Ich3G/o8Ofo8P9tXChY+85SmFMYopeXKMl
-	QZ3yHPG/YVWk75pNEDiFioCMFjsyNxRp7RvZMcoiK0mc+zPmB6LnOv1EQ27h6KoQdv+J
-	ODpTR4w6zSsz7hZPI0P08eW67jUWCajRnS2iP6flO/WssUJjWs820iBNwxE5CznMtz9H
-	XZ27YPeExsWMeJ6zR3U/MzDvQeTHvuEMpqAF9Q/iCeixdyg4PtcuvMKgQ4uX86eGAfZb
-	ommcM6LcIxekFn+mtYg1T3HkcIKXYLTZBUXZ3tWwzNcMqu3tLnN8WiZ9iqOEe367tVZA
-	iKfw==
-X-Gm-Message-State: AOUpUlGONej39XpR/rZ3HLGl1B7byYmzdJ8YzeMYo4ZsVgI9G17+iA4h
-	/yJ4s96acTU6ZSScVEiq1PEXdp11y+1qalXOsFnm/w==
-X-Google-Smtp-Source: AAOMgpd/W20ymNpMnRxT0fCNv/1X/fCLaoZrkeO5H3kgfmv16aU5zq0TAQpP8M0TSjfssE+7G0YVU8ZC/uIYz9ziKQ4=
-X-Received: by 2002:a9f:2187:: with SMTP id 7-v6mr7845229uac.49.1531592642564; 
-	Sat, 14 Jul 2018 11:24:02 -0700 (PDT)
+	Sun, 15 Jul 2018 13:41:42 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6FDfbJl027171
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 15 Jul 2018 06:41:38 -0700 (PDT)
+Received: from [128.224.162.202] (128.224.162.202) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Sun, 15 Jul 2018 06:41:31 -0700
+To: Khem Raj <raj.khem@gmail.com>, <Martin.Jansa@gmail.com>,
+	<akuster808@gmail.com>
+References: <1531497317-26576-1-git-send-email-hongxu.jia@windriver.com>
+	<f831e0e9-60e6-7a54-d051-c21604c0bb6a@gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <04bb8026-4d28-2a40-7dd0-4b8ff34e9222@windriver.com>
+Date: Sun, 15 Jul 2018 21:41:29 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-References: <20180713011903.84114-1-mingli.yu@windriver.com>
-In-Reply-To: <20180713011903.84114-1-mingli.yu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 14 Jul 2018 11:23:36 -0700
-Message-ID: <CAMKF1spHkse1PnbcvYX7-5XxFRnVRt9rdjzD0VxzD-x=w3fJtA@mail.gmail.com>
-To: Mingli Yu <mingli.yu@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] cryptsetup: Upgrade to 2.0.3
+In-Reply-To: <f831e0e9-60e6-7a54-d051-c21604c0bb6a@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] mozjs: 17.0.0 -> 52.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,71 +36,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jul 2018 18:24:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 15 Jul 2018 13:41:42 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-This fails to build when systemd is selected in DISTRO_FEATURES
+On 2018年07月14日 01:31, Khem Raj wrote:
+> fails for configure
+> | checking for the Android toolchain directory... not found
+> | Traceback (most recent call last):
+> |   File
+> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/../../configure.py",
+> line 115, in <module>
+> |     sys.exit(main(sys.argv))
+> |   File
+> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/../../configure.py",
+> line 34, in main
+> |     sandbox.run(os.path.join(os.path.dirname(__file__), 'moz.configure'))
+> |   File
+> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/python/mozbuild/mozbuild/configure/__init__.py",
+> line 359, in run
+> |     raise InvalidOptionError('Unknown option: %s' % without_value)
+> | mozbuild.configure.options.InvalidOptionError: Unknown option:
+> --disable-static
 
-cryptsetup-2.0.3: cryptsetup: Files/directories were installed but not
-shipped in any package:
-  /usr/lib/tmpfiles.d
-  /usr/lib/tmpfiles.d/cryptsetup.conf
-Please set FILES such that these items are packaged. Alternatively if
-they are unneeded, avoid installing them or delete them within
-do_install.
+Hi Khem,
 
+The `--disable-static' option has already been explicitly removed by me
 
-On Thu, Jul 12, 2018 at 6:19 PM <mingli.yu@windriver.com> wrote:
->
-> From: Mingli Yu <mingli.yu@windriver.com>
->
-> * Update the homepage to https://gitlab.com/cryptsetup/cryptsetup
-> * Add json-c to DEPENDS as cryptsetup requires the
->   json-c library for JSON data processing since cryptsetup
->   2.0.0 per "The LUKS2 format and features" part of
->   https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.0/v2.0.0-ReleaseNotes
->
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> ---
->  .../{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb}       | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->  rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb} (78%)
->
-> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
-> similarity index 78%
-> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
-> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
-> index c13b764f7..176e29a91 100644
-> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
-> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
-> @@ -4,16 +4,16 @@ device-mapper mappings. These include plain dm-crypt volumes and \
->  LUKS volumes. The difference is that LUKS uses a metadata header \
->  and can hence offer more features than plain dm-crypt. On the other \
->  hand, the header is visible and vulnerable to damage."
-> -HOMEPAGE = "http://code.google.com/p/cryptsetup/"
-> +HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
->  SECTION = "console"
->  LICENSE = "GPL-2.0-with-OpenSSL-exception"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
->
-> -DEPENDS = "util-linux libdevmapper popt libgcrypt"
-> +DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
->
-> -SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
-> -SRC_URI[md5sum] = "058ed35c5b776032c2a036838f9e22a7"
-> -SRC_URI[sha256sum] = "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
-> +SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
-> +SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
-> +SRC_URI[sha256sum] = "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
->
->  inherit autotools gettext pkgconfig
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+in mozjs 52.8.1, I could not reproduce the failure in my build, would you
+
+please paste the reproduce steps, or result of `bitbake -e mozjs' to trace
+
+where the option come from
+
+//Hongxu
+
 
