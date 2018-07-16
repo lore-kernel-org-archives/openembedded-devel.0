@@ -1,48 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B98F774E53
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 38189744DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jul 2018 18:50:40 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id w7-v6so809198uan.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Jul 2018 11:50:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=4CLO3fZg3RGzpUA6HejJ0tYu61ZloVJXr/yJHh8Cmmw=;
-	b=oEvpY0hB0YYmH+yqTnHMgtMwfn+3jx/pMWC3wp7Gr3SjT57ER2Ms70ZpZ1k/9qbJKU
-	sfb2Qu+MxYlKwGYPB8dPechHnvno52lhy8Hmu8DXDxvLlqLpoCG1h7Qf4Jeww+PD+5N6
-	D/ppCWvbkorT4AOv6A59/fSzuEvWXGHqefYxVRCw5iYjQ/nA/x2Vg4W2VqQAhYMsxssh
-	SHOMkvVVIqT1a74Vq3DoYj2khl0f2r+LimfDUqFP9BuFfQ1JHpJLJLCmv4a7TaB3MkrC
-	Rg7idxpm9xwvjF1/gSIc18lIAe+xd2n0tCzU0JUsxLO8L4o9siEOogLlvR6jNY5GgOZJ
-	3VCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=4CLO3fZg3RGzpUA6HejJ0tYu61ZloVJXr/yJHh8Cmmw=;
-	b=C2o5R29xcO/ThaaOYBrVfwiSG3ts41RtjTfRn1NP+vsjNKIa4bJ2Dw0RzM46TmsBvk
-	RrxJMaTmo9gv2vrh2Wf6mBeJaoA74LrmFqzaKL8k3r5bKZw4Dd7d8j+Fjbkt+Y9mYWiT
-	CHZVUkfeufQA9U6ecyiCxoaCSgcet1uDHnsPRNOSbeVhMSb1Z/yGnQ0xLQ5SxolzFhbq
-	bsAyFoumVSuc1X5L9zBPcONToWniBUu9dPiuluzuQmlnlatfU39gMrDxYzk4IXKBNa/U
-	PqNu7ipkSURTYuNkXPYe4emQvi6DxT++gJW7eNKqoeCmhYto5+qPLYJ3Cpuoftk7XIG+
-	Ddew==
-X-Gm-Message-State: AOUpUlHAX//OUSaP1D03DgcxXDqsMu5LpD4NyKc6CM0QcG5tHYNl7E81
-	R4ChWKlhQxyIO9b3w7/C7sjk6YRLrSQ8RFZsF3A=
-X-Google-Smtp-Source: AAOMgpe9NfGcXcvDnlnMY1/0pK965E4KTYqobMyGbDqFA3cV6G3oPlczCaGUw7QS5YK8DnDtWV1eR3l1nEULuYXCiWs=
-X-Received: by 2002:ab0:11dd:: with SMTP id
-	q29-v6mr9263400uac.191.1531680640171; 
-	Sun, 15 Jul 2018 11:50:40 -0700 (PDT)
-MIME-Version: 1.0
+	Mon, 16 Jul 2018 01:34:13 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6G1YCnd001021
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 15 Jul 2018 18:34:12 -0700 (PDT)
+Received: from [128.224.162.202] (128.224.162.202) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Sun, 15 Jul 2018 18:33:54 -0700
+To: Khem Raj <raj.khem@gmail.com>
 References: <1531497317-26576-1-git-send-email-hongxu.jia@windriver.com>
 	<f831e0e9-60e6-7a54-d051-c21604c0bb6a@gmail.com>
 	<04bb8026-4d28-2a40-7dd0-4b8ff34e9222@windriver.com>
-In-Reply-To: <04bb8026-4d28-2a40-7dd0-4b8ff34e9222@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 15 Jul 2018 11:50:13 -0700
-Message-ID: <CAMKF1somytP21aUEymwYZJjXLruaS8RzZ-_tjmQ_Lp7Tn3G_OA@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
+	<CAMKF1somytP21aUEymwYZJjXLruaS8RzZ-_tjmQ_Lp7Tn3G_OA@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <d86a021e-60e6-a679-e456-fcebcd5c73ba@windriver.com>
+Date: Mon, 16 Jul 2018 09:33:52 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1somytP21aUEymwYZJjXLruaS8RzZ-_tjmQ_Lp7Tn3G_OA@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/2] mozjs: 17.0.0 -> 52.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -57,68 +36,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Jul 2018 18:50:40 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Jul 2018 01:34:13 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Sun, Jul 15, 2018 at 6:41 AM Hongxu Jia <hongxu.jia@windriver.com> wrote=
-:
+On 2018年07月16日 02:50, Khem Raj wrote:
+> On Sun, Jul 15, 2018 at 6:41 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>> On 2018年07月14日 01:31, Khem Raj wrote:
+>>
+>> fails for configure
+>> | checking for the Android toolchain directory... not found
+>> | Traceback (most recent call last):
+>> |   File
+>> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/../../configure.py",
+>> line 115, in <module>
+>> |     sys.exit(main(sys.argv))
+>> |   File
+>> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/../../configure.py",
+>> line 34, in main
+>> |     sandbox.run(os.path.join(os.path.dirname(__file__), 'moz.configure'))
+>> |   File
+>> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/python/mozbuild/mozbuild/configure/__init__.py",
+>> line 359, in run
+>> |     raise InvalidOptionError('Unknown option: %s' % without_value)
+>> | mozbuild.configure.options.InvalidOptionError: Unknown option:
+>> --disable-static
+>>
+>> Hi Khem,
+>>
+>> The `--disable-static' option has already been explicitly removed by me
+>>
+>> in mozjs 52.8.1, I could not reproduce the failure in my build, would you
+>>
+>> please paste the reproduce steps, or result of `bitbake -e mozjs' to trace
+>>
+>> where the option come from
+>>
+> If you add
 >
-> On 2018=E5=B9=B407=E6=9C=8814=E6=97=A5 01:31, Khem Raj wrote:
+> require conf/distro/include/no-static-libs.inc
 >
-> fails for configure
-> | checking for the Android toolchain directory... not found
-> | Traceback (most recent call last):
-> |   File
-> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/5=
-2.8.1-r0/mozjs-52.8.1/js/src/../../configure.py",
-> line 115, in <module>
-> |     sys.exit(main(sys.argv))
-> |   File
-> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/5=
-2.8.1-r0/mozjs-52.8.1/js/src/../../configure.py",
-> line 34, in main
-> |     sandbox.run(os.path.join(os.path.dirname(__file__), 'moz.configure'=
-))
-> |   File
-> "/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-linux-gnueabi/mozjs/5=
-2.8.1-r0/mozjs-52.8.1/python/mozbuild/mozbuild/configure/__init__.py",
-> line 359, in run
-> |     raise InvalidOptionError('Unknown option: %s' % without_value)
-> | mozbuild.configure.options.InvalidOptionError: Unknown option:
-> --disable-static
+> in your local.conf you will see it. Basically you need to set
 >
-> Hi Khem,
+> DISABLE_STATIC = "" in the recipe and that should take care of it.
+
+Thanks for pointing it out, I will set it in V2
+
+> Second look at recipe, I see that it has
 >
-> The `--disable-static' option has already been explicitly removed by me
+> ARM_INSTRUCTION_SET = "arm"
+
+Build on qemuarm, without it (using thumb1 specific) still successfully,
+I will remove it in V2.
+
+//Hongxu
+
+> the failure you see is thumb1 specific, so lets make this thumb1
+> specific as well
+> e.g.
 >
-> in mozjs 52.8.1, I could not reproduce the failure in my build, would you
+> ARM_INSTRUCTION_SET_armv5 = "arm"
+> ARM_INSTRUCTION_SET_armv4 = "arm"
 >
-> please paste the reproduce steps, or result of `bitbake -e mozjs' to trac=
-e
 >
-> where the option come from
->
-
-If you add
-
-require conf/distro/include/no-static-libs.inc
-
-in your local.conf you will see it. Basically you need to set
-
-DISABLE_STATIC =3D "" in the recipe and that should take care of it.
-
-Second look at recipe, I see that it has
-
-ARM_INSTRUCTION_SET =3D "arm"
-
-the failure you see is thumb1 specific, so lets make this thumb1
-specific as well
-e.g.
-
-ARM_INSTRUCTION_SET_armv5 =3D "arm"
-ARM_INSTRUCTION_SET_armv4 =3D "arm"
+>> //Hongxu
 
 
-> //Hongxu
 
