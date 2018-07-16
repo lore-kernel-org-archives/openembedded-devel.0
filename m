@@ -1,26 +1,28 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 69C0060103
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EBCD7546A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 07:21:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6G7LaQP004174
+	Mon, 16 Jul 2018 07:27:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6G7RIfZ004170
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 16 Jul 2018 00:21:36 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 16 Jul 2018 00:21:35 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <Martin.Jansa@gmail.com>, <akuster808@gmail.com>, <raj.khem@gmail.com>
-Date: Mon, 16 Jul 2018 15:31:42 +0800
-Message-ID: <1531726302-21202-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <CAMKF1sqT8iAJnY4r6SkmaK_mANyn09_=afi=1dieu5+nBha9mw@mail.gmail.com>
-References: <CAMKF1sqT8iAJnY4r6SkmaK_mANyn09_=afi=1dieu5+nBha9mw@mail.gmail.com>
+	Mon, 16 Jul 2018 00:27:18 -0700 (PDT)
+Received: from [128.224.162.173] (128.224.162.173) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 16 Jul 2018 00:27:17 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <20180713011903.84114-1-mingli.yu@windriver.com>
+	<CAMKF1spHkse1PnbcvYX7-5XxFRnVRt9rdjzD0VxzD-x=w3fJtA@mail.gmail.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5B4C4789.4020700@windriver.com>
+Date: Mon, 16 Jul 2018 15:21:45 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH V2] polkit: 0.113 -> 0.115
+In-Reply-To: <CAMKF1spHkse1PnbcvYX7-5XxFRnVRt9rdjzD0VxzD-x=w3fJtA@mail.gmail.com>
+X-Originating-IP: [128.224.162.173]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] cryptsetup: Upgrade to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,203 +35,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2018 07:21:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Jul 2018 07:27:18 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-- Rebase patches to 0.115
-  0001-make-netgroup-support-configurable.patch
-  polkit-1_pam.patch
 
-- Add --disable-libelogind which OE does not have recipe
-  libelogind
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../0001-make-netgroup-support-configurable.patch  | 56 ++++++++--------------
- .../polkit/polkit/polkit-1_pam.patch               | 18 +++++--
- .../polkit/{polkit_0.113.bb => polkit_0.115.bb}    | 10 ++--
- 3 files changed, 43 insertions(+), 41 deletions(-)
- rename meta-oe/recipes-extended/polkit/{polkit_0.113.bb => polkit_0.115.bb} (87%)
+On 2018年07月15日 02:23, Khem Raj wrote:
+> This fails to build when systemd is selected in DISTRO_FEATURES
+>
+> cryptsetup-2.0.3: cryptsetup: Files/directories were installed but not
+> shipped in any package:
+>    /usr/lib/tmpfiles.d
+>    /usr/lib/tmpfiles.d/cryptsetup.conf
+> Please set FILES such that these items are packaged. Alternatively if
+> they are unneeded, avoid installing them or delete them within
+> do_install.
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch b/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch
-index 4e3af87..3b0ef5e 100644
---- a/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch
-+++ b/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch
-@@ -12,16 +12,19 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
- Upstream-Status: Pending
- 
-+Rebase to 0.115
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-  configure.ac                                          | 2 +-
-  src/polkitbackend/polkitbackendinteractiveauthority.c | 6 +++++-
-- src/polkitbackend/polkitbackendjsauthority.c          | 5 ++---
-- 3 files changed, 8 insertions(+), 5 deletions(-)
-+ src/polkitbackend/polkitbackendjsauthority.cpp        | 2 ++
-+ 3 files changed, 8 insertions(+), 2 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 07982d1..21590b2 100644
-+index 8b3e1b1..1c392df 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -158,7 +158,7 @@ AC_CHECK_LIB(expat,XML_ParserCreate,[EXPAT_LIBS="-lexpat"],
-+@@ -99,7 +99,7 @@ AC_CHECK_LIB(expat,XML_ParserCreate,[EXPAT_LIBS="-lexpat"],
-  	     [AC_MSG_ERROR([Can't find expat library. Please install expat.])])
-  AC_SUBST(EXPAT_LIBS)
-  
-@@ -31,10 +34,10 @@ index 07982d1..21590b2 100644
-  if test "x$GCC" = "xyes"; then
-    LDFLAGS="-Wl,--as-needed $LDFLAGS"
- diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
--index 7019356..cf39d77 100644
-+index cb6fdab..de3f752 100644
- --- a/src/polkitbackend/polkitbackendinteractiveauthority.c
- +++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
--@@ -2213,7 +2213,7 @@ get_users_in_group (PolkitIdentity                    *group,
-+@@ -2224,7 +2224,7 @@ get_users_in_group (PolkitIdentity                    *group,
-   out:
-    return ret;
-  }
-@@ -43,7 +46,7 @@ index 7019356..cf39d77 100644
-  static GList *
-  get_users_in_net_group (PolkitIdentity                    *group,
-                          gboolean                           include_root)
--@@ -2270,6 +2270,8 @@ get_users_in_net_group (PolkitIdentity                    *group,
-+@@ -2285,6 +2285,8 @@ get_users_in_net_group (PolkitIdentity                    *group,
-    return ret;
-  }
-  
-@@ -52,7 +55,7 @@ index 7019356..cf39d77 100644
-  /* ---------------------------------------------------------------------------------------------------- */
-  
-  static void
--@@ -2355,10 +2357,12 @@ authentication_agent_initiate_challenge (AuthenticationAgent         *agent,
-+@@ -2369,10 +2371,12 @@ authentication_agent_initiate_challenge (AuthenticationAgent         *agent,
-          {
-            user_identities = g_list_concat (user_identities, get_users_in_group (identity, FALSE));
-          }
-@@ -65,43 +68,26 @@ index 7019356..cf39d77 100644
-        else
-          {
-            g_warning ("Unsupported identity");
--diff --git a/src/polkitbackend/polkitbackendjsauthority.c b/src/polkitbackend/polkitbackendjsauthority.c
--index 097dcc5..e59b3f7 100644
----- a/src/polkitbackend/polkitbackendjsauthority.c
--+++ b/src/polkitbackend/polkitbackendjsauthority.c
--@@ -1498,7 +1498,6 @@ js_polkit_spawn (JSContext  *cx,
-- 
-- /* ---------------------------------------------------------------------------------------------------- */
-- 
---
-- static JSBool
-- js_polkit_user_is_in_netgroup (JSContext  *cx,
--                                unsigned    argc,
--@@ -1518,6 +1517,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
--   user = JS_EncodeString (cx, user_str);
--   netgroup = JS_EncodeString (cx, netgroup_str);
-+diff --git a/src/polkitbackend/polkitbackendjsauthority.cpp b/src/polkitbackend/polkitbackendjsauthority.cpp
-+index 517f3c6..6042dd2 100644
-+--- a/src/polkitbackend/polkitbackendjsauthority.cpp
-++++ b/src/polkitbackend/polkitbackendjsauthority.cpp
-+@@ -1502,6 +1502,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
-+   user = JS_EncodeString (cx, args[0].toString());
-+   netgroup = JS_EncodeString (cx, args[1].toString());
-  
- +#if defined HAVE_INNETGR
-    if (innetgr (netgroup,
-                 NULL,  /* host */
-                 user,
--@@ -1525,6 +1525,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
-+@@ -1509,6 +1510,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
-      {
--       is_in_netgroup =  JS_TRUE;
-+       is_in_netgroup =  true;
-      }
- +#endif
-  
-    JS_free (cx, netgroup);
-    JS_free (cx, user);
--@@ -1536,8 +1537,6 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
--   return ret;
-- }
-- 
---
---
-- /* ---------------------------------------------------------------------------------------------------- */
-- 
-- typedef struct
- -- 
--2.7.0
-+2.7.4
- 
-diff --git a/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch b/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
-index 74647ef..c491abf 100644
---- a/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
-+++ b/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
-@@ -4,9 +4,18 @@ Upstream-Status:Inappropriate [configuration]
- 
- Signed-off-by: Xiaofeng Yan <xiaofeng.yan@windriver.com>
- 
----- a/configure.ac	2011-03-04 02:26:20.000000000 +0800
--+++ b/configure.ac.new	2011-07-18 10:14:12.516818852 +0800
--@@ -350,10 +350,10 @@
-+Upstream-Status: Inappropriate [oe specific]
-+Rebase to 0.115
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ configure.ac | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 36df239..8b3e1b1 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -471,10 +471,10 @@ elif test x$with_os_type = xfreebsd -o x$with_os_type = xnetbsd; then
-      PAM_FILE_INCLUDE_PASSWORD=system
-      PAM_FILE_INCLUDE_SESSION=system
-  else
-@@ -21,3 +30,6 @@ Signed-off-by: Xiaofeng Yan <xiaofeng.yan@windriver.com>
-  fi
-  
-  AC_SUBST(PAM_FILE_INCLUDE_AUTH)
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.113.bb b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-similarity index 87%
-rename from meta-oe/recipes-extended/polkit/polkit_0.113.bb
-rename to meta-oe/recipes-extended/polkit/polkit_0.115.bb
-index f34928f..ad0f66a 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.113.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
-@@ -24,10 +24,13 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
-     file://0001-make-netgroup-support-configurable.patch \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
- "
--SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
--SRC_URI[sha256sum] = "e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81"
-+SRC_URI[md5sum] = "f03b055d6ae5fc8eac76838c7d83d082"
-+SRC_URI[sha256sum] = "2f87ecdabfbd415c6306673ceadc59846f059b18ef2fce42bac63fe283f12131"
- 
--EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages"
-+EXTRA_OECONF = "--with-os-type=moblin \
-+                --disable-man-pages \
-+                --disable-libelogind \
-+               "
- 
- do_compile_prepend () {
-     export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
-@@ -40,6 +43,7 @@ FILES_${PN}_append = " \
-     ${nonarch_libdir}/${BPN}-1 \
-     ${datadir}/dbus-1 \
-     ${datadir}/${BPN}-1 \
-+    ${datadir}/gettext \
- "
- 
- FILES_${PN}-examples = "${bindir}/*example*"
--- 
-2.7.4
+Will send out V2 to address this.
 
+Thanks,
+
+>
+>
+> On Thu, Jul 12, 2018 at 6:19 PM <mingli.yu@windriver.com> wrote:
+>>
+>> From: Mingli Yu <mingli.yu@windriver.com>
+>>
+>> * Update the homepage to https://gitlab.com/cryptsetup/cryptsetup
+>> * Add json-c to DEPENDS as cryptsetup requires the
+>>    json-c library for JSON data processing since cryptsetup
+>>    2.0.0 per "The LUKS2 format and features" part of
+>>    https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.0/v2.0.0-ReleaseNotes
+>>
+>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> ---
+>>   .../{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb}       | 10 +++++-----
+>>   1 file changed, 5 insertions(+), 5 deletions(-)
+>>   rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb} (78%)
+>>
+>> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+>> similarity index 78%
+>> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+>> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+>> index c13b764f7..176e29a91 100644
+>> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+>> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+>> @@ -4,16 +4,16 @@ device-mapper mappings. These include plain dm-crypt volumes and \
+>>   LUKS volumes. The difference is that LUKS uses a metadata header \
+>>   and can hence offer more features than plain dm-crypt. On the other \
+>>   hand, the header is visible and vulnerable to damage."
+>> -HOMEPAGE = "http://code.google.com/p/cryptsetup/"
+>> +HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
+>>   SECTION = "console"
+>>   LICENSE = "GPL-2.0-with-OpenSSL-exception"
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+>>
+>> -DEPENDS = "util-linux libdevmapper popt libgcrypt"
+>> +DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
+>>
+>> -SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
+>> -SRC_URI[md5sum] = "058ed35c5b776032c2a036838f9e22a7"
+>> -SRC_URI[sha256sum] = "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
+>> +SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
+>> +SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
+>> +SRC_URI[sha256sum] = "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
+>>
+>>   inherit autotools gettext pkgconfig
+>>
+>> --
+>> 2.17.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
