@@ -1,31 +1,48 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 72AB971C07
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 37C6D65CF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 03:49:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6G3nY8X014269
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 15 Jul 2018 20:49:34 -0700 (PDT)
-Received: from [128.224.162.173] (128.224.162.173) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Sun, 15 Jul 2018 20:49:34 -0700
-To: Khem Raj <raj.khem@gmail.com>, Jagadeesh Krishnanjanappa
-	<jkrishnanjanappa@mvista.com>
-References: <1530984352-5594-1-git-send-email-jkrishnanjanappa@mvista.com>
-	<CAMKF1sqb2w1WUW4Y+AeVdE986b4Vf0VNCAZbcC0iEjduvLghag@mail.gmail.com>
-	<CAD3vsf7kL2tq28JxbTjrU0UHJNiYohcDcAw8qyD8q-me=rTm1A@mail.gmail.com>
-	<2dc32d53-c796-179d-ef1b-b30b094cc7aa@gmail.com>
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-Message-ID: <5B4C1482.3020306@windriver.com>
-Date: Mon, 16 Jul 2018 11:44:02 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+	Mon, 16 Jul 2018 04:42:20 +0000 (UTC)
+Received: by mail-vk0-f44.google.com with SMTP id e139-v6so19505274vkf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Jul 2018 21:42:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=3oaHHburWsx6NggKuJ9ilnGaFSlu087NIMhQM1/hnf8=;
+	b=LiJFDR0Uw0jyVqx/D6XNjVzammlsXOqOirtnWb9IuLLgKutEHa+RC519rMfZPVd0cn
+	Se2hLEAxCTRmsrpWRuikw4h5rkANIhwSJ04jLcituhqLjHASLL55EiydQD76c6MmvfOs
+	WWWGvdCKp9QZ6Q6zbSVyL3B4v8rucc5DWE1Fa1wdTdb0J/xwzOJPSR3rAjzYdyD8mnG6
+	vui7Ua//njfCv0A/0nrMF6eBfXdyFEYOrd/nzpcoQNdsqtxb6sAf6NB5BEp+bU3iah08
+	vMxJiADnfUFu8NAYjV0J/EVeXgODrVtpdYGxYfoCdQN41Nkud8iENjPGlXRrlnMuoTu1
+	luzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=3oaHHburWsx6NggKuJ9ilnGaFSlu087NIMhQM1/hnf8=;
+	b=qCDqRUwF9W4xQU2f3fH0NskHrS+OPShB+zByJllX65xAguXYHIC9Jeo1molrCgS7IY
+	uXZNkXRu9vbZp5Jonb51AAnbvd3ZcN0CyPlvEpdUEmkxERpEEcOzpmq/M06N7OK4FPmr
+	RzxbEiKtMLDDHFJD8fI2EtRI6O0G0HSOuk0LM++yGMDkruOes3c6k2nwBkSpvFAlIZDx
+	XdSeT+Fe9pLbuUoAEWPbjZEKjXE4AoFToKNakHM8qBMXox/krf6yo1NPDrbkDEa0zwvk
+	C/PtQNx85K/qauGw0aRqF26saGdsR7uXhEo4/rkdDPFo1RFSwboYeK7sJv6r5Oq9QHuW
+	qb0Q==
+X-Gm-Message-State: AOUpUlGf3IZ0+GpXFNwPPD3RkmXvT60plcgNDe2tojEa5k152vHgQ6UH
+	KtvLws/l0glVXbJrxrdHUlTW0BQUr0MqebgtbcA=
+X-Google-Smtp-Source: AAOMgpdLmFf6jUwp8Rc83q2APiDXgsXCTPAjcaGBKovJH3sEHV+jVECR4IoOH1ATlMtxwK6+iqSqHLJQ0uGjdg1DzJo=
+X-Received: by 2002:a1f:3984:: with SMTP id
+	g126-v6mr8714630vka.28.1531716139900; 
+	Sun, 15 Jul 2018 21:42:19 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <2dc32d53-c796-179d-ef1b-b30b094cc7aa@gmail.com>
-X-Originating-IP: [128.224.162.173]
+References: <1531497317-26576-1-git-send-email-hongxu.jia@windriver.com>
+	<1531497317-26576-2-git-send-email-hongxu.jia@windriver.com>
+In-Reply-To: <1531497317-26576-2-git-send-email-hongxu.jia@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 15 Jul 2018 21:41:53 -0700
+Message-ID: <CAMKF1sqT8iAJnY4r6SkmaK_mANyn09_=afi=1dieu5+nBha9mw@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] tgt: Migrate recipe from meta-openstack layer
+Subject: Re: [PATCH 2/2] polkit: 0.113 -> 0.115
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,489 +55,305 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jul 2018 03:49:35 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Jul 2018 04:42:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+
+This fails with
+
+| checking for LIBELOGIND... no
+| configure: error: Package requirements (libelogind) were not met:
+|
+| Package 'libelogind', required by 'virtual:world', not found
+|
+| Consider adjusting the PKG_CONFIG_PATH environment variable if you
+| installed software in a non-standard prefix.
+|
+| Alternatively, you may set the environment variables LIBELOGIND_CFLAGS
+| and LIBELOGIND_LIBS to avoid the need to call pkg-config.
+| See the pkg-config man page for more details.
+| NOTE: The following config.log files may provide further information.
+| NOTE: /mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/polkit/0.115-r0/build/config.log
+| ERROR: configure failed
 
 
-
-On 2018年07月14日 02:47, Khem Raj wrote:
-> On 7/13/18 12:35 PM, Jagadeesh Krishnanjanappa wrote:
->> Yes, we need to copy libconfig-general-perl recipe (from meta-openstack) to
->> meta-networking as well.
->>
->> Bruce comment:
->> We have specific version requirements with openstack, so we'll keep the
->> original
->> recipe in place in meta-openstack, so you might want to change the short
->> log of
->> your patch to "copy recipe from meta-openstack".
->>
->> Since tgt recipe will continue to exists under meta-openstack layer as
->> per above comment,
->> copying it under meta-networking would create duplication. Is it OK?
->>
+On Fri, Jul 13, 2018 at 8:45 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
 >
-> this is SCSI target framework, in my mind this is neither openstack
-> specific nor networking specific. same is true for
-> libconfig-general-perl, however if there are no users of this outside
-> openstack layer users then its better it stays there, otherwise it
-> should move to meta-oe
-
-If we won't support the iscsitarget in the future as it needs too much 
-change to work with kernel >= 4.14, it should be convenient to move tgt 
-to meta-oe.
-
-Thanks,
-
+> - Rebase patches to 0.115
+>   0001-make-netgroup-support-configurable.patch
+>   polkit-1_pam.patch
 >
->> Regards,
->> Jagadeesh
->>
->> On Thu, Jul 12, 2018 at 7:44 PM, Khem Raj <raj.khem@gmail.com
->> <mailto:raj.khem@gmail.com>> wrote:
->>
->>      I guess more recipes needs to be migrated. This fails with
->>
->>      ERROR: Nothing RPROVIDES 'libconfig-general-perl' (but
->>      /mnt/a/oe/sources/meta-openembedded/meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb>
->>      RDEPENDS on or otherwise requires it)
->>      NOTE: Runtime target 'libconfig-general-perl' is unbuildable,
->>      removing...
->>      Missing or unbuildable dependency chain was: ['libconfig-general-perl']
->>      NOTE: Runtime target 'tgt' is unbuildable, removing...
->>      Missing or unbuildable dependency chain was: ['tgt',
->>      'libconfig-general-perl']
->>      ERROR: Nothing RPROVIDES 'tgt-dev' (but
->>      /mnt/a/oe/sources/meta-openembedded/meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb>
->>      RDEPENDS on or otherwise requires it)
->>      No eligible RPROVIDERs exist for 'tgt-dev'
->>      NOTE: Runtime target 'tgt-dev' is unbuildable, removing...
->>      Missing or unbuildable dependency chain was: ['tgt-dev']
->>
->>
->>      On Sat, Jul 7, 2018 at 11:26 AM Jagadeesh Krishnanjanappa
->>      <jkrishnanjanappa@mvista.com <mailto:jkrishnanjanappa@mvista.com>>
->>      wrote:
->>      >
->>      > As iscsitarget cannot be built with Linux kernel >= 4.14, so
->>      > migrate Linux SCSI target framework (tgt) recipe from meta-openstack
->>      > layer; to allow users to test iSCSI target feature with tgt in
->>      > meta-networking layer.
->>      >
->>      > Signed-off-by: Jagadeesh Krishnanjanappa
->>      <jkrishnanjanappa@mvista.com <mailto:jkrishnanjanappa@mvista.com>>
->>      > ---
->>      >  ...-path-of-header-files-check-in-Yocto-buil.patch |  47 +++++++++
->>      >  .../tgt/files/0001-usr-Makefile-WARNING-fix.patch  |  29 ++++++
->>      >  .../recipes-support/tgt/files/tgtd.init            | 116
->>      +++++++++++++++++++++
->>      >  ...Makefile-apply-LDFLAGS-to-all-executables.patch |  35 +++++++
->>      >  meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb>     |  73 +++++++++++++
->>      >  5 files changed, 300 insertions(+)
->>      >  create mode 100644
->>      meta-networking/recipes-support/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
->>      >  create mode 100644
->>      meta-networking/recipes-support/tgt/files/0001-usr-Makefile-WARNING-fix.patch
->>      >  create mode 100644
->>      meta-networking/recipes-support/tgt/files/tgtd.init
->>      >  create mode 100644
->>      meta-networking/recipes-support/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
->>      >  create mode 100644 meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb>
->>      >
->>      > diff --git
->>      a/meta-networking/recipes-support/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
->>      b/meta-networking/recipes-support/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
->>      > new file mode 100644
->>      > index 0000000..173ecb6
->>      > --- /dev/null
->>      > +++
->>      b/meta-networking/recipes-support/tgt/files/0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
->>      > @@ -0,0 +1,47 @@
->>      > +From 93fea40915d01be6d02587a0b8be85a642e6a8d5 Mon Sep 17 00:00:00
->>      2001
->>      > +From: Zhenhua Luo <zhenhua.luo@freescale.com
->>      <mailto:zhenhua.luo@freescale.com>>
->>      > +Date: Thu, 10 Apr 2014 11:26:39 +0800
->>      > +Subject: [PATCH] Correct the path of header files check in Yocto
->>      build env
->>      > +
->>      > +Upstream-Status: Inappropriate [the fix is specific to Yocto
->>      build env]
->>      > +
->>      > +Current Makefile will check headers on host instead of Yocto
->>      sysroot, following
->>      > +error appears. Change the path of header check.
->>      > +| bs_aio.c:34:20: fatal error: libaio.h: No such file or directory
->>      > +| #include <libaio.h>
->>      > +|                     ^
->>      > +| compilation terminated.
->>      > +
->>      > +Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com
->>      <mailto:zhenhua.luo@freescale.com>>
->>      > +
->>      > +---
->>      > + usr/Makefile | 6 +++---
->>      > + 1 file changed, 3 insertions(+), 3 deletions(-)
->>      > +
->>      > +diff --git a/usr/Makefile b/usr/Makefile
->>      > +index decf13c..9ff8f15 100644
->>      > +--- a/usr/Makefile
->>      > ++++ b/usr/Makefile
->>      > +@@ -1,11 +1,11 @@
->>      > + sbindir ?= $(PREFIX)/sbin
->>      > + libdir ?= $(PREFIX)/lib/tgt
->>      > +
->>      > +-ifneq ($(shell test -e /usr/include/linux/signalfd.h && echo 1),)
->>      > ++ifneq ($(shell test -e $(SYSROOT)/usr/include/linux/signalfd.h
->>      && echo 1),)
->>      > + CFLAGS += -DUSE_SIGNALFD
->>      > + endif
->>      > +
->>      > +-ifneq ($(shell test -n $(shell find /usr/include -name
->>      "timerfd.h" | head -n1) && echo 1),)
->>      > ++ifneq ($(shell test -n $(shell find $(SYSROOT)/usr/include -name
->>      "timerfd.h" | head -n1) && echo 1),)
->>      > + CFLAGS += -DUSE_TIMERFD
->>      > + endif
->>      > +
->>      > +@@ -25,7 +25,7 @@ ifneq ($(SD_NOTIFY),)
->>      > + CFLAGS += -DUSE_SYSTEMD
->>      > + endif
->>      > +
->>      > +-ifneq ($(shell test -e /usr/include/sys/eventfd.h && test -e
->>      /usr/include/libaio.h && echo 1),)
->>      > ++ifneq ($(shell test -e $(SYSROOT)/usr/include/sys/eventfd.h &&
->>      test -e $(SYSROOT)/usr/include/libaio.h && echo 1),)
->>      > + CFLAGS += -DUSE_EVENTFD
->>      > + TGTD_OBJS += bs_aio.o
->>      > + LIBS += -laio
->>      > diff --git
->>      a/meta-networking/recipes-support/tgt/files/0001-usr-Makefile-WARNING-fix.patch
->>      b/meta-networking/recipes-support/tgt/files/0001-usr-Makefile-WARNING-fix.patch
->>      > new file mode 100644
->>      > index 0000000..078ba9e
->>      > --- /dev/null
->>      > +++
->>      b/meta-networking/recipes-support/tgt/files/0001-usr-Makefile-WARNING-fix.patch
->>      > @@ -0,0 +1,29 @@
->>      > +From 6f4e3b11c7dccf83e2d18635c84837b212dfcc1c Mon Sep 17 00:00:00
->>      2001
->>      > +From: Li xin <lixin.fnst@cn.fujitsu.com
->>      <mailto:lixin.fnst@cn.fujitsu.com>>
->>      > +Date: Sun, 26 Jul 2015 04:23:51 +0900
->>      > +Subject: [PATCH] usr/Makefile: WARNING fix WARNING: QA Issue: tgt:
->>      > + /work/i586-oe-linux/tgt/1.0.60+gitAUTOINC+ab51727a36-r0/
->>      > + packages-split/tgt/usr/sbin/tgtd contains probably-redundant
->>      RPATH /usr/lib
->>      > + [useless-rpaths]
->>      > +
->>      > +Upstream-Status: pending
->>      > +
->>      > +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com
->>      <mailto:lixin.fnst@cn.fujitsu.com>>
->>      > +
->>      > +---
->>      > + usr/Makefile | 2 +-
->>      > + 1 file changed, 1 insertion(+), 1 deletion(-)
->>      > +
->>      > +diff --git a/usr/Makefile b/usr/Makefile
->>      > +index 9ff8f15..cc8df11 100644
->>      > +--- a/usr/Makefile
->>      > ++++ b/usr/Makefile
->>      > +@@ -63,7 +63,7 @@ TGTD_OBJS += tgtd.o mgmt.o target.o scsi.o
->>      log.o driver.o util.o work.o \
->>      > +
->>      > + TGTD_DEP = $(TGTD_OBJS:.o=.d)
->>      > +
->>      > +-LDFLAGS = -Wl,-E,-rpath=$(libdir)
->>      > ++LDFLAGS += -Wl,-E
->>      > +
->>      > + .PHONY:all
->>      > + all: $(PROGRAMS) $(MODULES)
->>      > diff --git a/meta-networking/recipes-support/tgt/files/tgtd.init
->>      b/meta-networking/recipes-support/tgt/files/tgtd.init
->>      > new file mode 100644
->>      > index 0000000..4b0ce94
->>      > --- /dev/null
->>      > +++ b/meta-networking/recipes-support/tgt/files/tgtd.init
->>      > @@ -0,0 +1,116 @@
->>      > +#!/bin/sh
->>      > +
->>      > +### BEGIN INIT INFO
->>      > +# Provides: tgtd
->>      > +# Required-Start: $remote_fs $network $syslog
->>      > +# Required-Stop: $remote_fs $syslog
->>      > +# Default-Start:     3 5
->>      > +# Default-Stop:      0 1 2 6
->>      > +# Short-Description: SCSI target daemon
->>      > +# Description: Linux SCSI target framework (tgt)
->>      > +### END INIT INFO
->>      > +
->>      > +DESC="tgtd"
->>      > +DAEMON="/usr/sbin/tgtd"
->>      > +TGTD_CONFIG=/etc/tgt/targets.conf
->>      > +
->>      > +start ()
->>      > +{
->>      > +    echo -n "Starting $DESC..."
->>      > +
->>      > +    # Ensure service isn't running
->>      > +    tgt-admin -s >/dev/null 2>&1
->>      > +    RETVAL=$?
->>      > +    if [ "$RETVAL" -ne 107 ] ; then
->>      > +        echo "$DESC is already running."
->>      > +        exit 1
->>      > +    fi
->>      > +
->>      > +    # Start tgtd first
->>      > +    $DAEMON &>/dev/null
->>      > +    RETVAL=$?
->>      > +    if [ "$RETVAL" -ne 0 ]; then
->>      > +        echo "failed."
->>      > +        exit 1
->>      > +    fi
->>      > +
->>      > +    # Put tgtd into "offline" state until all the targets are
->>      configured.
->>      > +    # We don't want initiators to (re)connect and fail the connection
->>      > +    # if it's not ready.
->>      > +    tgtadm --op update --mode sys --name State -v offline
->>      > +    # Configure the targets.
->>      > +    tgt-admin -f -e -c $TGTD_CONFIG
->>      > +    # Put tgtd into "ready" state.
->>      > +    tgtadm --op update --mode sys --name State -v ready
->>      > +
->>      > +    echo "done."
->>      > +}
->>      > +
->>      > +stop ()
->>      > +{
->>      > +    echo -n "Stopping $DESC..."
->>      > +
->>      > +    # Remove all targets. It only removes targets which are not
->>      in use.
->>      > +    tgt-admin --update ALL -c /dev/null &>/dev/null
->>      > +    # tgtd will exit if all targets were removed
->>      > +    tgtadm --op delete --mode system &>/dev/null
->>      > +    RETVAL=$?
->>      > +    if [ "$RETVAL" -eq 107 ] ; then
->>      > +        if [ "$TASK" != "restart" ] ; then
->>      > +            return 1
->>      > +        fi
->>      > +    elif [ "$RETVAL" -ne 0 ] ; then
->>      > +        echo "Some initiators are still connected - could not
->>      stop tgtd"
->>      > +        return 2
->>      > +    fi
->>      > +    echo -n
->>      > +}
->>      > +
->>      > +reload()
->>      > +{
->>      > +        echo "Reloading configuration of $DESC" "$NAME"
->>      > +        # Update configuration for targets. Only targets which
->>      > +        # are not in use will be updated.
->>      > +        tgt-admin --update ALL -c $TGTD_CONFIG &>/dev/null
->>      > +        RETVAL=$?
->>      > +        if [ "$RETVAL" -eq 107 ] ; then
->>      > +                echo "tgtd is not running"
->>      > +                exit 1
->>      > +        fi
->>      > +}
->>      > +
->>      > +status()
->>      > +{
->>      > +        tgt-admin -s >/dev/null 2>&1
->>      > +       RETVAL=$?
->>      > +        if [ "$RETVAL" -eq 107 ] ; then
->>      > +                echo "tgtd is not running"
->>      > +        else
->>      > +                echo "tgtd is running"
->>      > +        fi
->>      > +}
->>      > +
->>      > +case "$1" in
->>      > +    start)
->>      > +        start
->>      > +        ;;
->>      > +    stop)
->>      > +        stop
->>      > +        ;;
->>      > +    restart|force-reload)
->>      > +        stop
->>      > +        start
->>      > +        ;;
->>      > +    reload)
->>      > +        reload
->>      > +        ;;
->>      > +    status)
->>      > +        status
->>      > +        ;;
->>      > +    *)
->>      > +        echo "Usage: $0
->>      {start|stop|force-reload|restart|status|reload}"
->>      > +        exit 1
->>      > +        ;;
->>      > +esac
->>      > +
->>      > +exit 0
->>      > diff --git
->>      a/meta-networking/recipes-support/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
->>      b/meta-networking/recipes-support/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
->>      > new file mode 100644
->>      > index 0000000..d480ef7
->>      > --- /dev/null
->>      > +++
->>      b/meta-networking/recipes-support/tgt/files/usr-Makefile-apply-LDFLAGS-to-all-executables.patch
->>      > @@ -0,0 +1,35 @@
->>      > +From a815ac8ee16b344d9e24b445957f32bf2aafa532 Mon Sep 17 00:00:00
->>      2001
->>      > +From: Mark Asselstine <mark.asselstine@windriver.com
->>      <mailto:mark.asselstine@windriver.com>>
->>      > +Date: Thu, 5 Jan 2017 11:07:51 -0500
->>      > +Subject: [PATCH] usr/Makefile: apply LDFLAGS to all executables
->>      > +
->>      > +Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com
->>      <mailto:mark.asselstine@windriver.com>>
->>      > +---
->>      > + usr/Makefile | 4 ++--
->>      > + 1 file changed, 2 insertions(+), 2 deletions(-)
->>      > +
->>      > +diff --git a/usr/Makefile b/usr/Makefile
->>      > +index cc8df11..c55fd68 100644
->>      > +--- a/usr/Makefile
->>      > ++++ b/usr/Makefile
->>      > +@@ -78,7 +78,7 @@ TGTADM_OBJS = tgtadm.o concat_buf.o
->>      > + TGTADM_DEP = $(TGTADM_OBJS:.o=.d)
->>      > +
->>      > + tgtadm: $(TGTADM_OBJS)
->>      > +-      $(CC) $^ -o $@
->>      > ++      $(CC) $^ -o $@ $(LDFLAGS)
->>      > +
->>      > + -include $(TGTADM_DEP)
->>      > +
->>      > +@@ -86,7 +86,7 @@ TGTIMG_OBJS = tgtimg.o libssc.o libcrc32c.o
->>      > + TGTIMG_DEP = $(TGTIMG_OBJS:.o=.d)
->>      > +
->>      > + tgtimg: $(TGTIMG_OBJS)
->>      > +-      $(CC) $^ -o $@
->>      > ++      $(CC) $^ -o $@ $(LDFLAGS)
->>      > +
->>      > + -include $(TGTIMG_DEP)
->>      > +
->>      > +--
->>      > +2.7.4
->>      > +
->>      > diff --git a/meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb> b/meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb>
->>      > new file mode 100644
->>      > index 0000000..9ca181a
->>      > --- /dev/null
->>      > +++ b/meta-networking/recipes-support/tgt/tgt_git.bb
->>      <http://tgt_git.bb>
->>      > @@ -0,0 +1,73 @@
->>      > +DESCRIPTION = "Linux SCSI target framework (tgt)"
->>      > +HOMEPAGE = "http://stgt.sourceforge.net"
->>      > +LICENSE = "GPLv2"
->>      > +LIC_FILES_CHKSUM =
->>      "file://scripts/tgtd.spec;beginline=7;endline=7;md5=21c19ea7dad04648b9c2f791b6e29b4c"
->>      > +DEPENDS = "sg3-utils"
->>      > +
->>      > +SRCREV = "cb7971cfeecaa43c15eed4719dc82516d7e87b6c"
->>      > +PV = "1.0.67+git${SRCPV}"
->>      > +
->>      > +SRC_URI = "git://github.com/fujita/tgt.git
->>      <http://github.com/fujita/tgt.git> \
->>      > +
->>       file://0001-Correct-the-path-of-header-files-check-in-Yocto-buil.patch
->>      \
->>      > +        file://0001-usr-Makefile-WARNING-fix.patch \
->>      > +        file://usr-Makefile-apply-LDFLAGS-to-all-executables.patch \
->>      > +"
->>      > +SRC_URI += "file://tgtd.init"
->>      > +
->>      > +S = "${WORKDIR}/git"
->>      > +
->>      > +CONFFILES_${PN} += "${sysconfdir}/tgt/targets.conf"
->>      > +
->>      > +inherit update-rc.d
->>      > +
->>      > +CFLAGS += ' -I. -DUSE_SIGNALFD -DUSE_TIMERFD -D_GNU_SOURCE
->>      -DTGT_VERSION=\\"1.0.63\\" -DBSDIR=\\"${libdir}/backing-store\\"'
->>      > +
->>      > +#do_compile() {
->>      > +#    oe_runmake SYSROOT="${STAGING_DIR_TARGET}" -e programs conf
->>      scripts
->>      > +#}
->>      > +EXTRA_OEMAKE = "-e programs conf scripts"
->>      > +
->>      > +do_install() {
->>      > +    oe_runmake -e DESTDIR="${D}" install-programs install-conf
->>      install-scripts
->>      > +
->>      > +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit',
->>      'true', 'false', d)}; then
->>      > +        install -d ${D}${sysconfdir}/init.d
->>      > +        install -m 0755 ${WORKDIR}/tgtd.init
->>      ${D}${sysconfdir}/init.d/tgtd
->>      > +    fi
->>      > +}
->>      > +
->>      > +RDEPENDS_${PN} = " \
->>      > +    bash \
->>      > +    libaio \
->>      > +    libconfig-general-perl \
->>      > +    perl-module-english \
->>      > +    perl-module-tie-hash-namedcapture \
->>      > +    perl-module-xsloader \
->>      > +    perl-module-carp \
->>      > +    perl-module-exporter \
->>      > +    perl-module-errno \
->>      > +    perl-module-exporter-heavy \
->>      > +    perl-module-symbol \
->>      > +    perl-module-selectsaver \
->>      > +    perl-module-dynaloader \
->>      > +    perl-module-carp-heavy \
->>      > +    perl-module-filehandle \
->>      > +    perl-module-feature \
->>      > +    perl-module-overload \
->>      > +    perl-module-fcntl \
->>      > +    perl-module-io \
->>      > +    perl-module-io-file \
->>      > +    perl-module-io-handle \
->>      > +    perl-module-io-seekable \
->>      > +    perl-module-file-glob \
->>      > +    perl-module-base \
->>      > +    perl-module-encoding-warnings \
->>      > +    perl-module-file-spec-unix \
->>      > +    perl-module-file-spec \
->>      > +    perl-module-file-spec-functions \
->>      > +    perl-module-getopt-long \
->>      > +    perl-module-constant \
->>      > +    "
->>      > +INITSCRIPT_PACKAGES = "${PN}"
->>      > +INITSCRIPT_NAME_${PN} = "tgtd"
->>      > +
->>      > --
->>      > 2.7.4
->>      >
->>      > --
->>      > _______________________________________________
->>      > Openembedded-devel mailing list
->>      > Openembedded-devel@lists.openembedded.org
->>      <mailto:Openembedded-devel@lists.openembedded.org>
->>      > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>      <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->>
->>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  .../0001-make-netgroup-support-configurable.patch  | 56 ++++++++--------------
+>  .../polkit/polkit/polkit-1_pam.patch               | 18 +++++--
+>  meta-oe/recipes-extended/polkit/polkit_0.113.bb    | 51 --------------------
+>  meta-oe/recipes-extended/polkit/polkit_0.115.bb    | 52 ++++++++++++++++++++
+>  4 files changed, 88 insertions(+), 89 deletions(-)
+>  delete mode 100644 meta-oe/recipes-extended/polkit/polkit_0.113.bb
+>  create mode 100644 meta-oe/recipes-extended/polkit/polkit_0.115.bb
 >
+> diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch b/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch
+> index 4e3af87..3b0ef5e 100644
+> --- a/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch
+> +++ b/meta-oe/recipes-extended/polkit/polkit/0001-make-netgroup-support-configurable.patch
+> @@ -12,16 +12,19 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>  ---
+>  Upstream-Status: Pending
 >
+> +Rebase to 0.115
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +---
+>   configure.ac                                          | 2 +-
+>   src/polkitbackend/polkitbackendinteractiveauthority.c | 6 +++++-
+> - src/polkitbackend/polkitbackendjsauthority.c          | 5 ++---
+> - 3 files changed, 8 insertions(+), 5 deletions(-)
+> + src/polkitbackend/polkitbackendjsauthority.cpp        | 2 ++
+> + 3 files changed, 8 insertions(+), 2 deletions(-)
 >
+>  diff --git a/configure.ac b/configure.ac
+> -index 07982d1..21590b2 100644
+> +index 8b3e1b1..1c392df 100644
+>  --- a/configure.ac
+>  +++ b/configure.ac
+> -@@ -158,7 +158,7 @@ AC_CHECK_LIB(expat,XML_ParserCreate,[EXPAT_LIBS="-lexpat"],
+> +@@ -99,7 +99,7 @@ AC_CHECK_LIB(expat,XML_ParserCreate,[EXPAT_LIBS="-lexpat"],
+>              [AC_MSG_ERROR([Can't find expat library. Please install expat.])])
+>   AC_SUBST(EXPAT_LIBS)
+>
+> @@ -31,10 +34,10 @@ index 07982d1..21590b2 100644
+>   if test "x$GCC" = "xyes"; then
+>     LDFLAGS="-Wl,--as-needed $LDFLAGS"
+>  diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
+> -index 7019356..cf39d77 100644
+> +index cb6fdab..de3f752 100644
+>  --- a/src/polkitbackend/polkitbackendinteractiveauthority.c
+>  +++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
+> -@@ -2213,7 +2213,7 @@ get_users_in_group (PolkitIdentity                    *group,
+> +@@ -2224,7 +2224,7 @@ get_users_in_group (PolkitIdentity                    *group,
+>    out:
+>     return ret;
+>   }
+> @@ -43,7 +46,7 @@ index 7019356..cf39d77 100644
+>   static GList *
+>   get_users_in_net_group (PolkitIdentity                    *group,
+>                           gboolean                           include_root)
+> -@@ -2270,6 +2270,8 @@ get_users_in_net_group (PolkitIdentity                    *group,
+> +@@ -2285,6 +2285,8 @@ get_users_in_net_group (PolkitIdentity                    *group,
+>     return ret;
+>   }
+>
+> @@ -52,7 +55,7 @@ index 7019356..cf39d77 100644
+>   /* ---------------------------------------------------------------------------------------------------- */
+>
+>   static void
+> -@@ -2355,10 +2357,12 @@ authentication_agent_initiate_challenge (AuthenticationAgent         *agent,
+> +@@ -2369,10 +2371,12 @@ authentication_agent_initiate_challenge (AuthenticationAgent         *agent,
+>           {
+>             user_identities = g_list_concat (user_identities, get_users_in_group (identity, FALSE));
+>           }
+> @@ -65,43 +68,26 @@ index 7019356..cf39d77 100644
+>         else
+>           {
+>             g_warning ("Unsupported identity");
+> -diff --git a/src/polkitbackend/polkitbackendjsauthority.c b/src/polkitbackend/polkitbackendjsauthority.c
+> -index 097dcc5..e59b3f7 100644
+> ---- a/src/polkitbackend/polkitbackendjsauthority.c
+> -+++ b/src/polkitbackend/polkitbackendjsauthority.c
+> -@@ -1498,7 +1498,6 @@ js_polkit_spawn (JSContext  *cx,
+> -
+> - /* ---------------------------------------------------------------------------------------------------- */
+> -
+> --
+> - static JSBool
+> - js_polkit_user_is_in_netgroup (JSContext  *cx,
+> -                                unsigned    argc,
+> -@@ -1518,6 +1517,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+> -   user = JS_EncodeString (cx, user_str);
+> -   netgroup = JS_EncodeString (cx, netgroup_str);
+> +diff --git a/src/polkitbackend/polkitbackendjsauthority.cpp b/src/polkitbackend/polkitbackendjsauthority.cpp
+> +index 517f3c6..6042dd2 100644
+> +--- a/src/polkitbackend/polkitbackendjsauthority.cpp
+> ++++ b/src/polkitbackend/polkitbackendjsauthority.cpp
+> +@@ -1502,6 +1502,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+> +   user = JS_EncodeString (cx, args[0].toString());
+> +   netgroup = JS_EncodeString (cx, args[1].toString());
+>
+>  +#if defined HAVE_INNETGR
+>     if (innetgr (netgroup,
+>                  NULL,  /* host */
+>                  user,
+> -@@ -1525,6 +1525,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+> +@@ -1509,6 +1510,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+>       {
+> -       is_in_netgroup =  JS_TRUE;
+> +       is_in_netgroup =  true;
+>       }
+>  +#endif
+>
+>     JS_free (cx, netgroup);
+>     JS_free (cx, user);
+> -@@ -1536,8 +1537,6 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+> -   return ret;
+> - }
+> -
+> --
+> --
+> - /* ---------------------------------------------------------------------------------------------------- */
+> -
+> - typedef struct
+>  --
+> -2.7.0
+> +2.7.4
+>
+> diff --git a/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch b/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
+> index 74647ef..c491abf 100644
+> --- a/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
+> +++ b/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
+> @@ -4,9 +4,18 @@ Upstream-Status:Inappropriate [configuration]
+>
+>  Signed-off-by: Xiaofeng Yan <xiaofeng.yan@windriver.com>
+>
+> ---- a/configure.ac     2011-03-04 02:26:20.000000000 +0800
+> -+++ b/configure.ac.new 2011-07-18 10:14:12.516818852 +0800
+> -@@ -350,10 +350,10 @@
+> +Upstream-Status: Inappropriate [oe specific]
+> +Rebase to 0.115
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +---
+> + configure.ac | 8 ++++----
+> + 1 file changed, 4 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 36df239..8b3e1b1 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -471,10 +471,10 @@ elif test x$with_os_type = xfreebsd -o x$with_os_type = xnetbsd; then
+>       PAM_FILE_INCLUDE_PASSWORD=system
+>       PAM_FILE_INCLUDE_SESSION=system
+>   else
+> @@ -21,3 +30,6 @@ Signed-off-by: Xiaofeng Yan <xiaofeng.yan@windriver.com>
+>   fi
+>
+>   AC_SUBST(PAM_FILE_INCLUDE_AUTH)
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.113.bb b/meta-oe/recipes-extended/polkit/polkit_0.113.bb
+> deleted file mode 100644
+> index f34928f..0000000
+> --- a/meta-oe/recipes-extended/polkit/polkit_0.113.bb
+> +++ /dev/null
+> @@ -1,51 +0,0 @@
+> -SUMMARY = "PolicyKit Authorization Framework"
+> -DESCRIPTION = "The polkit package is an application-level toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes."
+> -HOMEPAGE = "http://www.freedesktop.org/wiki/Software/polkit"
+> -LICENSE = "LGPLv2+"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb \
+> -                    file://src/polkit/polkit.h;beginline=1;endline=20;md5=0a8630b0133176d0504c87a0ded39db4"
+> -
+> -DEPENDS = "expat glib-2.0 intltool-native mozjs"
+> -
+> -inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection
+> -
+> -PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
+> -                 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
+> -                    bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
+> -                "
+> -
+> -PACKAGECONFIG[pam] = "--with-authfw=pam,--with-authfw=shadow,libpam,libpam"
+> -PACKAGECONFIG[systemd] = "--enable-libsystemd-login=yes --with-systemdsystemunitdir=${systemd_unitdir}/system/,--enable-libsystemd-login=no --with-systemdsystemunitdir=,systemd"
+> -# there is no --enable/--disable option for consolekit and it's not picked by shlibs, so add it to RDEPENDS
+> -PACKAGECONFIG[consolekit] = ",,,consolekit"
+> -
+> -PAM_SRC_URI = "file://polkit-1_pam.patch"
+> -SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+> -    file://0001-make-netgroup-support-configurable.patch \
+> -    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+> -"
+> -SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
+> -SRC_URI[sha256sum] = "e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81"
+> -
+> -EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages"
+> -
+> -do_compile_prepend () {
+> -    export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
+> -}
+> -
+> -PACKAGES =+ "${PN}-examples"
+> -
+> -FILES_${PN}_append = " \
+> -    ${libdir}/${BPN}-1 \
+> -    ${nonarch_libdir}/${BPN}-1 \
+> -    ${datadir}/dbus-1 \
+> -    ${datadir}/${BPN}-1 \
+> -"
+> -
+> -FILES_${PN}-examples = "${bindir}/*example*"
+> -
+> -USERADD_PACKAGES = "${PN}"
+> -USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
+> -
+> -SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+> -SYSTEMD_AUTO_ENABLE = "disable"
+> diff --git a/meta-oe/recipes-extended/polkit/polkit_0.115.bb b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
+> new file mode 100644
+> index 0000000..3ca173e
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/polkit/polkit_0.115.bb
+> @@ -0,0 +1,52 @@
+> +SUMMARY = "PolicyKit Authorization Framework"
+> +DESCRIPTION = "The polkit package is an application-level toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes."
+> +HOMEPAGE = "http://www.freedesktop.org/wiki/Software/polkit"
+> +LICENSE = "LGPLv2+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb \
+> +                    file://src/polkit/polkit.h;beginline=1;endline=20;md5=0a8630b0133176d0504c87a0ded39db4"
+> +
+> +DEPENDS = "expat glib-2.0 intltool-native mozjs"
+> +
+> +inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection
+> +
+> +PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
+> +                 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
+> +                    bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
+> +                "
+> +
+> +PACKAGECONFIG[pam] = "--with-authfw=pam,--with-authfw=shadow,libpam,libpam"
+> +PACKAGECONFIG[systemd] = "--enable-libsystemd-login=yes --with-systemdsystemunitdir=${systemd_unitdir}/system/,--enable-libsystemd-login=no --with-systemdsystemunitdir=,systemd"
+> +# there is no --enable/--disable option for consolekit and it's not picked by shlibs, so add it to RDEPENDS
+> +PACKAGECONFIG[consolekit] = ",,,consolekit"
+> +
+> +PAM_SRC_URI = "file://polkit-1_pam.patch"
+> +SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+> +    file://0001-make-netgroup-support-configurable.patch \
+> +    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+> +"
+> +SRC_URI[md5sum] = "f03b055d6ae5fc8eac76838c7d83d082"
+> +SRC_URI[sha256sum] = "2f87ecdabfbd415c6306673ceadc59846f059b18ef2fce42bac63fe283f12131"
+> +
+> +EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages"
+> +
+> +do_compile_prepend () {
+> +    export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
+> +}
+> +
+> +PACKAGES =+ "${PN}-examples"
+> +
+> +FILES_${PN}_append = " \
+> +    ${libdir}/${BPN}-1 \
+> +    ${nonarch_libdir}/${BPN}-1 \
+> +    ${datadir}/dbus-1 \
+> +    ${datadir}/${BPN}-1 \
+> +    ${datadir}/gettext \
+> +"
+> +
+> +FILES_${PN}-examples = "${bindir}/*example*"
+> +
+> +USERADD_PACKAGES = "${PN}"
+> +USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
+> +
+> +SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+> +SYSTEMD_AUTO_ENABLE = "disable"
+> --
+> 2.7.4
 >
 
