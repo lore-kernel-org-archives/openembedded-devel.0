@@ -1,27 +1,31 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C35A789A5
+Return-Path: <mmcclain@uplogix.com>
+X-Greylist: delayed 375 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 17 Jul 2018 19:26:42 UTC
+Received: from s05-gw002.mycloudmailbox.com (s05-gw002.mycloudmailbox.com
+	[199.244.76.202])
+	by mail.openembedded.org (Postfix) with ESMTP id 39F1D605C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 17:00:41 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	17 Jul 2018 10:00:42 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.51,366,1526367600"; d="scan'208";a="73537958"
-Received: from ttorling-mac01.ra.intel.com ([10.72.60.175])
-	by orsmga001.jf.intel.com with ESMTP; 17 Jul 2018 10:00:32 -0700
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-In-Reply-To: <1531156122-14173-1-git-send-email-derek@asterius.io>
-Date: Tue, 17 Jul 2018 10:00:32 -0700
-Message-Id: <BA7DC9DB-441C-4CBE-87E6-731B1A532D70@linux.intel.com>
-References: <1531156122-14173-1-git-send-email-derek@asterius.io>
-To: Derek Straka <derek@asterius.io>
-X-Mailer: Apple Mail (2.3445.9.1)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python-py: update to version 1.5.4
+	Tue, 17 Jul 2018 19:26:42 +0000 (UTC)
+Received: from S05-MBX04-11.S05.local (unknown [10.30.33.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by s05-gw002.mycloudmailbox.com (Postfix) with ESMTPS id
+	41VVVN3JQkzVq7X for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Jul 2018 15:20:28 -0400 (EDT)
+Received: from localhost.localdomain (10.30.32.129) by S05-MBX04-11.S05.local
+	(10.30.33.98) with Microsoft SMTP Server (TLS) id 15.0.1367.3;
+	Tue, 17 Jul 2018 15:20:27 -0400
+From: Matthew McClain <mmcclain@uplogix.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 Jul 2018 14:20:23 -0500
+Message-ID: <20180717192023.77954-1-mmcclain@uplogix.com>
+X-Mailer: git-send-email 2.18.0
+MIME-Version: 1.0
+X-Originating-IP: [10.30.32.129]
+X-ClientProxiedBy: S05-CAS010.S05.local (10.30.32.60) To
+	S05-MBX04-11.S05.local (10.30.33.98)
+X-RoutingAgent: Treated
+Subject: [meta-java][PATCH] openjdk-8: 'do_unpack_remove_X11_wrappers' confuses pyro bitbake parser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,69 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 17:00:41 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Jul 2018 19:26:42 -0000
+Content-Type: text/plain
 
-A recent change upstream added a dependency on =
-${PYTHON_PN}-setuptools-scm:
+Renaming the function to anything else allows the recipe to be parsed.  The
+problem appears to be the word "_remove_".  This affects both the sumo and
+master branches.
 
-=
-https://github.com/pytest-dev/py/commit/aebd1abcc4e4ae69fe69bc0c4fd273fcbf=
-d32731#diff-2eeaed663bd0d25b7e608891384b7298
+Signed-off-by: Matthew McClain <mmcclain@uplogix.com>
+---
+ recipes-core/openjdk/openjdk-8-common.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> On Jul 9, 2018, at 10:08 AM, Derek Straka <derek@asterius.io> wrote:
->=20
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
-> meta-python/recipes-devtools/python/python-py.inc                     =
-| 4 ++--
-> .../python/{python-py_1.5.2.bb =3D> python-py_1.5.4.bb}                =
- | 0
-> .../python/{python3-py_1.5.2.bb =3D> python3-py_1.5.4.bb}              =
- | 0
-> 3 files changed, 2 insertions(+), 2 deletions(-)
-> rename meta-python/recipes-devtools/python/{python-py_1.5.2.bb =3D> =
-python-py_1.5.4.bb} (100%)
-> rename meta-python/recipes-devtools/python/{python3-py_1.5.2.bb =3D> =
-python3-py_1.5.4.bb} (100%)
->=20
-> diff --git a/meta-python/recipes-devtools/python/python-py.inc =
-b/meta-python/recipes-devtools/python/python-py.inc
-> index c7d6727..495becf 100644
-> --- a/meta-python/recipes-devtools/python/python-py.inc
-> +++ b/meta-python/recipes-devtools/python/python-py.inc
-> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://py.readthedocs.io/"
-> LICENSE =3D "MIT"
-> LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3Da6bb0320b04a0a503f12f69fea479de9"
->=20
-> -SRC_URI[md5sum] =3D "279ca69c632069e1b71e11b14641ca28"
-> -SRC_URI[sha256sum] =3D =
-"ca18943e28235417756316bfada6cd96b23ce60dd532642690dcfdaba988a76d"
-> +SRC_URI[md5sum] =3D "7502d66fa68ea4ae5b61c511cd177d6a"
-> +SRC_URI[sha256sum] =3D =
-"3fd59af7435864e1a243790d322d763925431213b6b8529c6ca71081ace3bbf7"
->=20
-> BBCLASSEXTEND =3D "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python-py_1.5.2.bb =
-b/meta-python/recipes-devtools/python/python-py_1.5.4.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-py_1.5.2.bb
-> rename to meta-python/recipes-devtools/python/python-py_1.5.4.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-py_1.5.2.bb =
-b/meta-python/recipes-devtools/python/python3-py_1.5.4.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-py_1.5.2.bb
-> rename to meta-python/recipes-devtools/python/python3-py_1.5.4.bb
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index b2020c3..fbb10be 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -39,7 +39,7 @@ do_unpack_extract_submodules () {
+     tar xjf ${WORKDIR}/${NASHORN_FILE} --transform "s,-${NASHORN_CHANGESET},,g"
+ }
+ 
+-do_unpack_remove_X11_wrappers() {
++do_unpack_delete_X11_wrappers() {
+     find ${S}/jdk/src/solaris/classes/sun/awt/X11 -maxdepth 1 -name '*.java' -delete
+ }
+ 
+@@ -153,7 +153,7 @@ def jdk_configure_options(d):
+     return options[3]
+ 
+ do_unpack[postfuncs] += "do_unpack_extract_submodules"
+-do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_remove_X11_wrappers', d)}"
++do_unpack[postfuncs] += "${@bb.utils.contains('PACKAGECONFIG', 'x11', '', 'do_unpack_delete_X11_wrappers', d)}"
+ 
+ do_configure_prepend() {
+         export ${@jdk_environment_options(d)}
+-- 
+2.17.1
 
 
