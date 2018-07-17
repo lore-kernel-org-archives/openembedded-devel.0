@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f45.google.com (mail-pl0-f45.google.com
-	[209.85.160.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B92878869
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 7304778872
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 01:51:02 +0000 (UTC)
-Received: by mail-pl0-f45.google.com with SMTP id 94-v6so4154338ple.12
+	Tue, 17 Jul 2018 01:51:03 +0000 (UTC)
+Received: by mail-pg1-f173.google.com with SMTP id g2-v6so3404494pgs.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 18:51:03 -0700 (PDT)
+	Mon, 16 Jul 2018 18:51:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=0Tm/8UinkdCv6Lub2EBtjbGSFFiH1ek5er6KeP11gAI=;
-	b=QPuOG23ZKv1/L2Urs1RBXdIcOvltzjFjFBplXvvGzMjV8dFFnuBL/fGpSU7ZddqC6o
-	Yh0/q1foKdbnrM6zriX15y+5w75B0OEBAAfsPUEk7o/HqtXIGuiu9biFOHs1CnnozFAA
-	PR60EODMOWaO+hilgMS5iEGiztuKfz9SwwtwHRwGHMxuC4Cb5pSOmIajEUusyGDfJ1D1
-	NshvWUIFJliAIDjtbKXYqYef4H1+bzDv7BgdHdJHeot0PKYy/pILZZHJhg/+GtNrrvmb
-	Iay7YuTP+znOGOG+POcwr+atlOqotPbE7AUwid3MUbBKlkcSCN+HqNhSAdVJshCi9gYQ
-	hTTg==
+	bh=j5xxetKAQy8+UncvsM3uMQ76qQjWz1vBqDtaYKsZGHk=;
+	b=LjSJk4sjDA3iIHpLUN1PTJ1n1B3XZgHC5kZLPP9azFpGqzPYAybgkg44RpQsHz+JYf
+	iD8rP+d2D1Jn0V9hbZyue+ZYLeDH7hDsBULqP3gMDEw8D6VlWjN64e9VHickCxiQ39vX
+	mrreE0WpPATUOw9vbsiirG7SjRV+jTA0qNliGwj56drnr/u6z472yRm5ZbZwKUawblhY
+	JFX/834Nt/7RUYXigYOCJZOdV9BHl7+KwZVhmSdUUJuoiM5siFrlXPrpZm7ENxYXZVeK
+	BYrOA5TlXA5MXdxOxMFpZ7ngOEsUu1nOmYl5ayksCgXPHW7crsM4Bjuf9bsQJlGgq+cz
+	cP/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=0Tm/8UinkdCv6Lub2EBtjbGSFFiH1ek5er6KeP11gAI=;
-	b=R6McyrMblIAiAKb7s8dR06VQAe+C7OU3B9gMHzHxygE5/IX4Aww8BEPt41KSNe8Cm8
-	K7GoIl/2P43Th5FFZ3sDqWc5k2OGRZTtaoxaPJQek6AEEBzjUFZx+I2fhWfe4x5kd4le
-	6AXUBzbtr6nlc3KCvq9EKHsHcJQ7rufBLLSBos1Prt9b5gQZMJzpJkbFsYOKBRHG7nSw
-	5X5hrVLtF2ntEsWrzCiwiwjAoiZFPKUFEnHVKVzePuPXaNZi2ZRwDjUHUVmOKDzuCJo/
-	4ir9JhK93dCgBn6qQIE+OqKu+EYWEfqq8ciyWyZ2CX2fTM+NU8+HLZmvpiA40Vrh3YJ+
-	F4Vg==
-X-Gm-Message-State: AOUpUlEhDfOTfgVFlKKEocEh3maJpNM3mFNRPkn7xlVrtZIcgap/ycWk
-	l8ysts4kibs8OhJw1VZfZmFPMQ==
-X-Google-Smtp-Source: AAOMgpeda0IN/Fk3iFkRDNRUDVXNhl/zP/VXgtjLxFtI5dEvCJBOsfOlWg1Yaxg0cPWy7u2rZIL/Lg==
-X-Received: by 2002:a17:902:5617:: with SMTP id
-	h23-v6mr18642684pli.324.1531792263131; 
-	Mon, 16 Jul 2018 18:51:03 -0700 (PDT)
+	bh=j5xxetKAQy8+UncvsM3uMQ76qQjWz1vBqDtaYKsZGHk=;
+	b=j0zWXRWc8nTUQxec3ovL5Ro008SDdoNNg+oht7kBPtZuimq/O6proRmxMsfE7+TrPF
+	00abcInDlZFmCgN+LX/pxe7czNfklHVqtmGRKovZBkO7fZlNY7RpI/pz/b3xc2AYblFn
+	LA0ULYMXhCNYsZRHrc6cieP9YcdRj5SLbSV3YxzJuflY3FHySHpIsxTD1ZeO0X5TvSpU
+	tj/p/QsT/jTmJ/EYjmn1siRE5YmJrK4tQQLEsLM4hcOXmntL3OUdBaTwEWA4mwFfqKtW
+	y/FSTWL58+/p6vvHfV6ivGawcV6pI84V3XfCPwYTipucXqqUmA4mWpBx3PB+RTeEsNGB
+	t18A==
+X-Gm-Message-State: AOUpUlFNI/1sgGSjyHmCbHE74vszPr7WzM//OaUGj8y7Bg1jg//pWzzt
+	V3L7Y9KGHAoxXU3WBUw+pVXbxw==
+X-Google-Smtp-Source: AAOMgpcYqNRPf+8BXAo45WYhH5nd2wy0mcp0yEJ9uK787OMNh/ZhV5CDRjCJ9zvpGvi6ZL3Hh5Z7aw==
+X-Received: by 2002:a65:5b08:: with SMTP id
+	y8-v6mr17109334pgq.297.1531792264135; 
+	Mon, 16 Jul 2018 18:51:04 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::1736])
 	by smtp.gmail.com with ESMTPSA id
-	66-v6sm27878586pfd.71.2018.07.16.18.51.02
+	66-v6sm27878586pfd.71.2018.07.16.18.51.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Jul 2018 18:51:02 -0700 (PDT)
+	Mon, 16 Jul 2018 18:51:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2018 18:50:50 -0700
-Message-Id: <20180717015053.8191-2-raj.khem@gmail.com>
+Date: Mon, 16 Jul 2018 18:50:51 -0700
+Message-Id: <20180717015053.8191-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180717015053.8191-1-raj.khem@gmail.com>
 References: <20180717015053.8191-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/4] volume-key: Upgrade to 0.3.10
+Subject: [meta-networking][PATCH 2/4] mbedtls: Upgrade to 2.11.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,97 +58,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 01:51:02 -0000
+X-List-Received-Date: Tue, 17 Jul 2018 01:51:03 -0000
 
-Add dependency on swig-native which was missing
+- Use libs section, libdevel is not common
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...icitly-support-python3-by-pkg-config.patch | 26 +++++++++----------
- ...lume-key_0.3.9.bb => volume-key_0.3.10.bb} |  5 ++--
- 2 files changed, 15 insertions(+), 16 deletions(-)
- rename meta-oe/recipes-extended/volume_key/{volume-key_0.3.9.bb => volume-key_0.3.10.bb} (84%)
+ .../mbedtls/{mbedtls_2.9.0.bb => mbedtls_2.11.0.bb}         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.9.0.bb => mbedtls_2.11.0.bb} (91%)
 
-diff --git a/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch b/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
-index 03edb13909..7fc76ab2f9 100644
---- a/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
-+++ b/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
-@@ -1,4 +1,4 @@
--From 18415c0b4c6e50ed9b99dfdae8d210590d0ab72e Mon Sep 17 00:00:00 2001
-+From 968c7506bea3b8d66e18a562d8b8491172631b37 Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
- Date: Fri, 28 Apr 2017 04:50:30 -0400
- Subject: [PATCH] explicitly support python3 by pkg-config
-@@ -9,13 +9,14 @@ use pkg-config to replace
- Upstream-Status: Inappropriate [wr-installer specific]
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.11.0.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.11.0.bb
+index ee4f164a4b..71b1f80238 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.11.0.bb
+@@ -20,12 +20,12 @@ HOMEPAGE = "https://tls.mbed.org/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
  
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
- ---
-  Makefile.am  | 5 ++---
-  configure.ac | 2 ++
-  2 files changed, 4 insertions(+), 3 deletions(-)
+-SECTION = "libdevel"
++SECTION = "libs"
  
- diff --git a/Makefile.am b/Makefile.am
--index 4569bbf..7a8daf4 100644
-+index 68560b1..ee2b4dc 100644
- --- a/Makefile.am
- +++ b/Makefile.am
- @@ -20,7 +20,6 @@ ACLOCAL_AMFLAGS = -I m4
-@@ -39,18 +40,15 @@ index 4569bbf..7a8daf4 100644
-  
-  src_volume_key_SOURCES = src/volume_key.c
- diff --git a/configure.ac b/configure.ac
--index ff35dd0..0928a6c 100644
-+index 40c3906..16c067d 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -27,6 +27,8 @@ AM_INIT_AUTOMAKE([no-dist-gzip dist-xz no-define subdir-objects -Wall])
-- AC_PROG_CC
-- AM_PROG_CC_C_O
-- LT_INIT([disable-static])
--+
--+PKG_CHECK_MODULES(python3, [python3])
-- AM_PATH_PYTHON
-+@@ -31,6 +31,8 @@ LT_INIT([disable-static])
-+ AC_PATH_PROGS(PYTHON, python2.7 python2.6 python2 python, [Python is required])
-+ AM_PATH_PYTHON([2.6], [], AC_MSG_ERROR([Python 2.6 or 2.7 is required]))
-  
-- dnl Not gpg2, it cannot receive passphrases from gpgme
---- 
--2.8.1
--
-++PKG_CHECK_MODULES(python3, [python3])
-++
-+ AC_PATH_PROG([GPG], [gpg2])
-+ AC_ARG_VAR([GPG])
-+ AC_DEFINE_UNQUOTED([GPG_PATH], "$GPG", [Path to the gpg2 executable])
-diff --git a/meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb b/meta-oe/recipes-extended/volume_key/volume-key_0.3.10.bb
-similarity index 84%
-rename from meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb
-rename to meta-oe/recipes-extended/volume_key/volume-key_0.3.10.bb
-index febf3f256d..e8d20553fb 100644
---- a/meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb
-+++ b/meta-oe/recipes-extended/volume_key/volume-key_0.3.10.bb
-@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
-            file://0001-explicitly-support-python3-by-pkg-config.patch \
- "
--SRC_URI[md5sum] = "a2d14931177c660e1f3ebbcf5f47d8e2"
--SRC_URI[sha256sum] = "450a54fe9bf56acec6850c1e71371d3e4913c9ca1ef0cdc3a517b4b6910412a6"
-+SRC_URI[md5sum] = "605fd99a6e42916728020562a6edee78"
-+SRC_URI[sha256sum] = "c5729de7e33e39c8674e9aae2337d2719f9298d6499f1656d0d25a065a7e98a7"
+ SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
  
- SRCNAME = "volume_key"
- S = "${WORKDIR}/${SRCNAME}-${PV}"
-@@ -25,6 +25,7 @@ DEPENDS += " \
-     cryptsetup \
-     nss \
-     gpgme \
-+    swig-native \
- "
+-SRC_URI[md5sum] = "31dcf56cb92da5d7ec2dbb7a3cc5dff3"
+-SRC_URI[sha256sum] = "a06a9b43e583b7e6707becfeeb13d88ed00f25fee31a5386cb3a3014c454bad8"
++SRC_URI[md5sum] = "3b133b9b4cf0ccf3ac1c91436771bfa5"
++SRC_URI[sha256sum] = "2a87061ad770e6d019b3b9cd27ea42a58bd0affccc4c6bfe4f5f0eee9ebf8aa8"
  
- RDEPENDS_python3-${PN} += "${PN}"
+ inherit cmake
+ 
 -- 
 2.18.0
 
