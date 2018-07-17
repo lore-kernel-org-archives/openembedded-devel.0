@@ -1,23 +1,28 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 75D467890D
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F9417890D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 03:38:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6H3cH1G020750
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 20:38:17 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Mon, 16 Jul 2018 20:38:16 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Jul 2018 20:38:16 -0700
-Message-ID: <20180717033816.57004-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Tue, 17 Jul 2018 03:41:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6H3f281002469
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 16 Jul 2018 20:41:02 -0700
+Received: from [128.224.162.173] (128.224.162.173) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 16 Jul 2018 20:41:01 -0700
+To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+References: <20180717015840.131005-1-mingli.yu@windriver.com>
+	<a140d60a-53db-1a9a-d0b1-cbb4729379df@gmail.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5B4D63FE.6080103@windriver.com>
+Date: Tue, 17 Jul 2018 11:35:26 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] bonnie++: Upgrade to 1.04
+In-Reply-To: <a140d60a-53db-1a9a-d0b1-cbb4729379df@gmail.com>
+X-Originating-IP: [128.224.162.173]
+Subject: Re: [meta-oe][PATCH v2] cryptsetup: Upgrade to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,70 +35,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 03:38:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 Jul 2018 03:41:03 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <mingli.yu@windriver.com>
 
-Remove the patch gcc-4.3-fixes.patch as build
-successfully without it.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../{bonnie++_1.03e.bb => bonnie++_1.04.bb}   |  7 +++----
- .../bonnie/files/gcc-4.3-fixes.patch          | 19 -------------------
- 2 files changed, 3 insertions(+), 23 deletions(-)
- rename meta-oe/recipes-benchmark/bonnie/{bonnie++_1.03e.bb => bonnie++_1.04.bb} (73%)
- delete mode 100644 meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
+On 2018年07月17日 10:37, Khem Raj wrote:
+>
+>
+> On 7/16/18 6:58 PM, mingli.yu@windriver.com wrote:
+>> From: Mingli Yu <mingli.yu@windriver.com>
+>>
+>> * Update the homepage to https://gitlab.com/cryptsetup/cryptsetup
+>> * Add json-c to DEPENDS as cryptsetup requires the
+>>    json-c library for JSON data processing since cryptsetup
+>>    2.0.0 per "The LUKS2 format and features" part of
+>>
+>> https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.0/v2.0.0-ReleaseNotes
+>>
+>> * Add file /usr/lib/tmpfiles.d/cryptsetup.conf to
+>>    FILES_${PN} when systemd enabled in DISTRO_FEATURES
+>>
+>
+> I am seeing a new failure for
+> meta-oe/recipes-extended/libblockdev/libblockdev_2.16.bb
 
-diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.04.bb
-similarity index 73%
-rename from meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-rename to meta-oe/recipes-benchmark/bonnie/bonnie++_1.04.bb
-index 2c1217e34..d7583f076 100644
---- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
-+++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.04.bb
-@@ -4,11 +4,10 @@ SECTION = "benchmark/tests"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://copyright.txt;md5=cd4dde95a6b9d122f0a9150ae9cc3ee0"
- 
--SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
--           file://gcc-4.3-fixes.patch \
-+SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}_${PV}.tgz \
- "
--SRC_URI[md5sum] = "750aa5b5051263a99c6c195888c74968"
--SRC_URI[sha256sum] = "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876df8721f01ba2e2cb"
-+SRC_URI[md5sum] = "1414aab86e2db1b4691bd4be82031012"
-+SRC_URI[sha256sum] = "507bd2ce5360c7c98b91b0fdc2bed5c9320b5c9699f7d4a3d1c86b256896c15e"
- 
- inherit autotools-brokensep
- 
-diff --git a/meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch b/meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
-deleted file mode 100644
-index 67f1b7494..000000000
---- a/meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--Includes string.h to one of the source file.
--
--Upstream-Status: Inappropriate [not author.]
-----
-- zcav.cpp |    1 +
-- 1 file changed, 1 insertion(+)
--
--Index: bonnie++-1.03a/zcav.cpp
--===================================================================
----- bonnie++-1.03a.orig/zcav.cpp
--+++ bonnie++-1.03a/zcav.cpp
--@@ -15,6 +15,7 @@ using namespace std;
-- #else
-- #include <vector.h>
-- #endif
--+#include <string.h>
-- 
-- // Read the specified number of megabytes of data from the fd and return the
-- // amount of time elapsed in seconds.
--- 
-2.17.1
+Will fix it in V3.
 
+Thanks,
+
+>
+>
+> | ../../../git/src/plugins/crypto.c: In function 'bd_crypto_tc_open':
+> | ../../../git/src/plugins/crypto.c:973:12: error: missing initializer
+> for field 'veracrypt_pim' of 'struct crypt_params_tcrypt'
+> [-Werror=missing-field-initializers]
+> |      struct crypt_params_tcrypt params =
+> {NULL,0,NULL,0,NULL,NULL,NULL,0,0};
+> |             ^~~~~~~~~~~~~~~~~~~
+> | In file included from ../../../git/src/plugins/crypto.c:22:
+> |
+> /mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/libblockdev/2.16-r0/recipe-sysroot/usr/include/libcryptsetup.h:436:11:
+> note: 'veracrypt_pim' declared here
+> |   uint32_t veracrypt_pim;    /**< VeraCrypt Personal Iteration
+> Multiplier */
+> |            ^~~~~~~~~~~~~
+>
+>
+>
+>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> ---
+>>   .../{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb}     | 12 +++++++-----
+>>   1 file changed, 7 insertions(+), 5 deletions(-)
+>>   rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_1.7.4.bb =>
+>> cryptsetup_2.0.3.bb} (72%)
+>>
+>> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+>> b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+>> similarity index 72%
+>> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+>> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+>> index c13b764f7..df85add6a 100644
+>> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+>> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+>> @@ -4,16 +4,16 @@ device-mapper mappings. These include plain dm-crypt
+>> volumes and \
+>>   LUKS volumes. The difference is that LUKS uses a metadata header \
+>>   and can hence offer more features than plain dm-crypt. On the other \
+>>   hand, the header is visible and vulnerable to damage."
+>> -HOMEPAGE = "http://code.google.com/p/cryptsetup/"
+>> +HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
+>>   SECTION = "console"
+>>   LICENSE = "GPL-2.0-with-OpenSSL-exception"
+>>   LIC_FILES_CHKSUM =
+>> "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+>> -DEPENDS = "util-linux libdevmapper popt libgcrypt"
+>> +DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
+>> -SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
+>> -SRC_URI[md5sum] = "058ed35c5b776032c2a036838f9e22a7"
+>> -SRC_URI[sha256sum] =
+>> "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
+>> +SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
+>> +SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
+>> +SRC_URI[sha256sum] =
+>> "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
+>>   inherit autotools gettext pkgconfig
+>> @@ -33,4 +33,6 @@ RRECOMMENDS_${PN} = "kernel-module-aes-generic \
+>>   EXTRA_OECONF = "--enable-static"
+>> +FILES_${PN} +=
+>> "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf',
+>> '', d)}"
+>> +
+>>   BBCLASSEXTEND = "native nativesdk"
+>>
+>
 
