@@ -1,51 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C3E6788E0
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E7EF778869
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 01:51:04 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id e11-v6so3115773plb.3
+	Tue, 17 Jul 2018 01:58:39 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6H1wfdB015205
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 18:51:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=7zBfkvtQfXzC5oxaPZLxcIgWJVT6cATXWdjCRqTS5qY=;
-	b=aHwgVuskWD5hvhhbjSw2idQU/DZHIw0SJ8PXPC8gSUDT6jzjmqkZzJu/4IKmUGKRwE
-	TM8mPv7QBbFLqP+3UUYxDV4CpvmMvXtB+JyV5Oc8AioKeqN756LebfDoZ/CWl3rPgn/D
-	B5lBYrh2Q2h0tixI3M6gkjFoDctH6lEz4IZsy7sVjOyu3MZn+obHNJJJ/vtN/pYILXbq
-	LSAZNwMYgqZgO+rOBBuFv1ppRQzxCl1QjQh47uK5/YAb3vpfpoCNvHnYMhhKPIGJ1RqU
-	Gl56S2E4xHlk1oqj73lD/lBmjqHxM1HXAV8GkwllGnMBN2qGolXbLAGA5ZA1UU99Dfp/
-	1yYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=7zBfkvtQfXzC5oxaPZLxcIgWJVT6cATXWdjCRqTS5qY=;
-	b=rO42pAgx0WutSjXCwweuA0vCjSdSYoCAsQj6wmoTmk+cwl8W1Q62hHyf8E5i7miFJp
-	70JbWqJdFA/dNZp5u2M4cLGLwV2pQqM6dpi0CashFY/QaoXnbE+xPsq11Ry8ydEttYjy
-	VJADG93N68DTBuXUq1sDU5Ybb4H9K9uuk409eVqIFJ/fv7DfIUpS2h5ouQoj3uftaxXo
-	7j4utv1QzLdl/vrF0M7HbehaQ6ngJkxvwqTI5DoaiPz57c9aSPyoOWZUggd5jrs5UXxi
-	k0g1unJchInQS/ggOWjmAa1xG+F9+fBMENIbk7LT7StL/VTbHZmYxEvCE1HxFcJ3f2mO
-	WLMA==
-X-Gm-Message-State: AOUpUlGdhJif2Tu+6qNRzMBb2WmLX/njw3gfJbHDMMFNuQ3VzAnoxBtC
-	TMC04IbX4PJdSlf7Uva8dIAh4w==
-X-Google-Smtp-Source: AAOMgpcG4HqKvNYtuMZXN5eJpcvz6bxeNm5MBhHnjMLj6R8W4VEfeCFSzfGcJIWovcu+C1JPBgB7VQ==
-X-Received: by 2002:a17:902:b7c6:: with SMTP id
-	v6-v6mr10466684plz.49.1531792265978; 
-	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::1736])
-	by smtp.gmail.com with ESMTPSA id
-	66-v6sm27878586pfd.71.2018.07.16.18.51.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2018 18:50:53 -0700
-Message-Id: <20180717015053.8191-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180717015053.8191-1-raj.khem@gmail.com>
-References: <20180717015053.8191-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/4] rsyslog: Disable valgrind support on risv64
+	Mon, 16 Jul 2018 18:58:41 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Mon, 16 Jul 2018 18:58:40 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 16 Jul 2018 18:58:40 -0700
+Message-ID: <20180717015840.131005-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2] cryptsetup: Upgrade to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +30,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 01:51:05 -0000
+X-List-Received-Date: Tue, 17 Jul 2018 01:58:40 -0000
+Content-Type: text/plain
 
-valgrind is not yet working on risc-v arch
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* Update the homepage to https://gitlab.com/cryptsetup/cryptsetup
+* Add json-c to DEPENDS as cryptsetup requires the
+  json-c library for JSON data processing since cryptsetup
+  2.0.0 per "The LUKS2 format and features" part of
+  https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.0/v2.0.0-ReleaseNotes
+* Add file /usr/lib/tmpfiles.d/cryptsetup.conf to
+  FILES_${PN} when systemd enabled in DISTRO_FEATURES
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb}     | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_1.7.4.bb => cryptsetup_2.0.3.bb} (72%)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
-index d65a2be889..386ad32101 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
-@@ -149,5 +149,6 @@ VALGRIND_mips64 = ""
- VALGRIND_mips64n32 = ""
- VALGRIND_arm = ""
- VALGRIND_aarch64 = ""
-+VALGRIND_riscv64 = ""
- RDEPENDS_${PN}-ptest += "make diffutils gzip bash gawk coreutils procps"
- RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+similarity index 72%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+index c13b764f7..df85add6a 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+@@ -4,16 +4,16 @@ device-mapper mappings. These include plain dm-crypt volumes and \
+ LUKS volumes. The difference is that LUKS uses a metadata header \
+ and can hence offer more features than plain dm-crypt. On the other \
+ hand, the header is visible and vulnerable to damage."
+-HOMEPAGE = "http://code.google.com/p/cryptsetup/"
++HOMEPAGE = "https://gitlab.com/cryptsetup/cryptsetup"
+ SECTION = "console"
+ LICENSE = "GPL-2.0-with-OpenSSL-exception"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
+ 
+-DEPENDS = "util-linux libdevmapper popt libgcrypt"
++DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
+ 
+-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
+-SRC_URI[md5sum] = "058ed35c5b776032c2a036838f9e22a7"
+-SRC_URI[sha256sum] = "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
++SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
++SRC_URI[sha256sum] = "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
+ 
+ inherit autotools gettext pkgconfig
+ 
+@@ -33,4 +33,6 @@ RRECOMMENDS_${PN} = "kernel-module-aes-generic \
+ 
+ EXTRA_OECONF = "--enable-static"
+ 
++FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.18.0
+2.17.1
 
 
