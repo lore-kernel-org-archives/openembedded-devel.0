@@ -1,31 +1,30 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 532EE78CCF
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B5811784DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 08:58:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6R8wnKx022129
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 27 Jul 2018 01:58:49 -0700 (PDT)
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Fri, 27 Jul 2018 01:58:49 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <20180713140616.15664-1-hongzhi.song@windriver.com>
-	<20180713140616.15664-2-hongzhi.song@windriver.com>
-	<CAJTo0LbXD42g6wJ4z3Kgg+TXSRaAueLgWzYjkkdq13YO3aVb+Q@mail.gmail.com>
-	<37cf1c1d-c607-6ba3-20f0-8fe9e46706f1@windriver.com>
-	<CAMKF1soQMbp7urcfEd0ri3XCQ=oyP_BwqJkoEDi8zDS1O4KqJg@mail.gmail.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <729ad129-04ef-77b7-a70e-775e63a4b7d7@windriver.com>
-Date: Fri, 27 Jul 2018 17:00:43 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Fri, 27 Jul 2018 09:01:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="42731875"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 27 Jul 2018 17:01:28 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id A08174B69E01
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jul 2018 17:01:25 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.227) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.399.0; Fri, 27 Jul 2018 17:01:24 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 Jul 2018 13:15:14 -0700
+Message-ID: <1531858514-4984-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soQMbp7urcfEd0ri3XCQ=oyP_BwqJkoEDi8zDS1O4KqJg@mail.gmail.com>
-X-Originating-IP: [128.224.162.198]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] kernel-selftest: Add a recipe on kernel selftest
+X-Originating-IP: [10.167.225.227]
+X-yoursite-MailScanner-ID: A08174B69E01.ABCD2
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-qt5][sumo][PATCH] qtwebkit: Make qtwebkit support armv BE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,121 +37,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 08:58:49 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 27 Jul 2018 09:01:30 -0000
+Content-Type: text/plain
 
-Hi Raj,
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../qtwebkit/0001-Fix-build-bug-for-armeb.patch    | 26 ++++++++++++++++++++++
+ recipes-qt/qt5/qtwebkit_git.bb                     |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch
 
-Could you help to confirm that if the libelf exists in your recipe-sysroot?
+diff --git a/recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch b/recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch
+new file mode 100644
+index 0000000..9e15205
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch
+@@ -0,0 +1,26 @@
++From 21cd85076261611a28d5f0a68828bc2216b8e7fe Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Thu, 26 Jul 2018 17:50:32 +0900
++Subject: [PATCH] Fix build bug for armeb.
++
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ Source/WTF/wtf/dtoa/utils.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Source/WTF/wtf/dtoa/utils.h b/Source/WTF/wtf/dtoa/utils.h
++index 298bf4d..7f6c873 100644
++--- a/Source/WTF/wtf/dtoa/utils.h
+++++ b/Source/WTF/wtf/dtoa/utils.h
++@@ -46,7 +46,7 @@
++ // disabled.)
++ // On Linux,x86 89255e-22 != Div_double(89255.0/1e22)
++ #if defined(_M_X64) || defined(__x86_64__) || \
++-defined(__ARMEL__) || \
+++defined(__arm__) || \
++ defined(_MIPS_ARCH_MIPS32R2)
++ #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
++ #elif CPU(MIPS) || CPU(PPC) || CPU(PPC64) || OS(WINCE) || CPU(SH4) || CPU(S390) || CPU(S390X) || CPU(IA64) || CPU(SPARC) || CPU(ALPHA) || CPU(MIPS64) || CPU(AARCH64) || CPU(HPPA)
++-- 
++2.7.4
++
+diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+index c8e8328..025f0b1 100644
+--- a/recipes-qt/qt5/qtwebkit_git.bb
++++ b/recipes-qt/qt5/qtwebkit_git.bb
+@@ -31,6 +31,7 @@ ARM_INSTRUCTION_SET_armv7ve = "thumb"
+ SRC_URI += "\
+     file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
+     file://0002-Exclude-backtrace-API-for-non-glibc-libraries.patch \
++    file://0001-Fix-build-bug-for-armeb.patch \
+ "
+ 
+ PACKAGECONFIG ??= "gstreamer qtlocation qtmultimedia qtsensors qtwebchannel \
+-- 
+2.7.4
 
-Because I can't reproduce your error.
 
-
---Hongzhi
-
-
-On 2018年07月27日 16:40, Khem Raj wrote:
-> this fails on rpi
->
-> ERROR: Logfile of failure stored in:
-> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198
-> Log data follows:
-> | DEBUG: Executing shell function do_compile
-> | NOTE: make -j 16 CROSS_COMPILE=arm-bec-linux-gnueabi- ARCH=arm
-> CC=arm-bec-linux-gnueabi-gcc  -march=armv7ve -mthumb -mfpu=neon-vfpv4
-> -mfloat-abi=hard -mcpu=cortex-a7 -fstack-protector-strong
-> -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
-> -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
-> -Wformat-security -Werror=format-security
-> --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot
-> AR=arm-bec-linux-gnueabi-ar LD=arm-bec-linux-gnueabi-ld
-> --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot
->   DESTDIR=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/image
-> -C /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
-> | make: Entering directory
-> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
-> | make -C ../../../lib/bpf
-> OUTPUT=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/
-> | make[1]: Entering directory
-> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf'
-> |
-> | Auto-detecting system features:
-> | ...                        libelf: [ ^[[31mOFF^[[m ]
-> | ...                           bpf: [ ^[[31mOFF^[[m ]
-> |
-> | BPF API too old
-> | make[1]: *** [Makefile:219: bpfdep] Error 255
-> | make[1]: *** Waiting for unfinished jobs....
-> | No libelf found
-> | make[1]: *** [Makefile:216: elfdep] Error 255
-> |   HOSTCC   /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep.o
-> |   HOSTLD   /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep-in.o
-> |   LINK     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep
-> | make[1]: Leaving directory
-> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf'
-> | make: *** [Makefile:33:
-> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/libbpf.a]
-> Error 2
-> | make: Leaving directory
-> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
-> | ERROR: oe_runmake failed
-> | WARNING: /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/run.do_compile.22198:1
-> exit 1 from 'exit 1'
-> | ERROR: Function failed: do_compile (log file is located at
-> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198)
->
-> On Mon, Jul 16, 2018 at 2:51 AM Hongzhi, Song
-> <hongzhi.song@windriver.com> wrote:
->>
->>
->> On 2018年07月14日 00:23, Burton, Ross wrote:
->>> On 13 July 2018 at 15:06, Hongzhi.Song <hongzhi.song@windriver.com> wrote:
->>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
->>> Why are you shipping your own copy of the kernel's COPYING file even
->>> though you copy another in that prefunc?
->>>
->>> Isn't it possible to just depend on kernel-source and build directly
->>> from the kernel source tree?
->>>
->>>> +# for bpf and vm
->>>> +DEPENDS = " \
->>>> +    elfutils \
->>>> +    libcap \
->>>> +    libcap-ng \
->>>> +    fuse \
->>>> +    util-linux \
->>>> +    rsync-native \
->>>> +"
->>> Really not convinced these dependencies are accurate.
->>>
->>>> +TEST_LIST = "bpf \
->>>> +             vm \
->>>> +"
->>> You're not listing memfd in here, but that is the only place which
->>> uses fuse as far as I can tell.
->>>
->>> My suggestion is to trim the DEPENDS back to the core minimum and use
->>> PACKAGECONIG to select what directories get built. This means you can
->>> have optional test suites where the dependencies are not in oe-core
->>> (fuse for memfd, for example), and get the right RDEPENDS too.
->>>
->>>> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/opt/kselftest/${i} install
->>> FHS says /opt is for sysadmin-installed tools that are not package
->>> managed.  You're building a package.  You're also building a package
->>> which is essentially ptest.  I'd say inherit ptest, write a runner,
->>> and put all the binaries in $PTESTDIR.
->> Hi Burton,
->>
->> kernel-selftest is designed to be shared by ptest and oe-self, and thus is
->> not supposed to inherit ptest.
->>
->> The suggestions you mentioned above will be modified soon.
->>
->> --Hongzhi
->>
->>> Ross
->>>
 
 
