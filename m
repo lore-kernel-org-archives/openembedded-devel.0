@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
-	[209.85.192.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FD457887F
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C3E6788E0
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 17 Jul 2018 01:51:04 +0000 (UTC)
-Received: by mail-pf0-f176.google.com with SMTP id l9-v6so15556774pff.9
+Received: by mail-pl0-f68.google.com with SMTP id e11-v6so3115773plb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
+	Mon, 16 Jul 2018 18:51:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=uSW2WsGLzq0csiQHXskypkKv35zwnwLRQ9QfGJMAAts=;
-	b=XhzHB3QcRisfoYgVec/Ye1EkYt/1l33WvEZRqpPBHhYyZsISOvkmZPLViUbEMxxTin
-	QjfxEIkM6+jPR2mc60lJIvQrmEpkACgX0+/vbS5zJW8b3hJVCkG46VJMyMYYP3jstXmt
-	JsnFik0opcgau20rADVymOHdbvIGA5pbwDNr1QdXLqz4aIEztIJcRGotMmdvZ4kcDa1t
-	aBIX9mg8QmztKl/pIgci1ybcACAvhYIfiihia/VVf/Rs784O61kwy8/vBEum36HbVsvL
-	IkjMXdSoLtdYTOic0z+K5fvPAqD/BWEk4BzHJJlsK7KAz5lyYchvyDZuB6LT5TR5wGI0
-	nnYQ==
+	bh=7zBfkvtQfXzC5oxaPZLxcIgWJVT6cATXWdjCRqTS5qY=;
+	b=aHwgVuskWD5hvhhbjSw2idQU/DZHIw0SJ8PXPC8gSUDT6jzjmqkZzJu/4IKmUGKRwE
+	TM8mPv7QBbFLqP+3UUYxDV4CpvmMvXtB+JyV5Oc8AioKeqN756LebfDoZ/CWl3rPgn/D
+	B5lBYrh2Q2h0tixI3M6gkjFoDctH6lEz4IZsy7sVjOyu3MZn+obHNJJJ/vtN/pYILXbq
+	LSAZNwMYgqZgO+rOBBuFv1ppRQzxCl1QjQh47uK5/YAb3vpfpoCNvHnYMhhKPIGJ1RqU
+	Gl56S2E4xHlk1oqj73lD/lBmjqHxM1HXAV8GkwllGnMBN2qGolXbLAGA5ZA1UU99Dfp/
+	1yYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=uSW2WsGLzq0csiQHXskypkKv35zwnwLRQ9QfGJMAAts=;
-	b=aHDG2VHR2EdgmGun5RsS6f7B237qcGII0XTJHdVWUzNr283LCiANIoGQK1r3UmPa0x
-	9BAI0OghqnTTUBuAijte2bvC0kYWpj2Gs1iaJtJXG+0PwTPz/INA2qAsVa3wTcSRy7fK
-	NN6YoBmmgTmX5T8mXaWxabROHKrM5lBZ2xI+i1X38IACpOftV/v9EKfyWS2xtk02E2NT
-	61mcoZZe84pOtv3IhSKFwmJ0Cgc1nIH8otv2PxB8MQGG7Hpa6rJ75SePkioAzrxhKGN2
-	Pxy0Y3tC/ELaN7llztxNZhPQZjJkrYAFoHkf2E+2Hu77AF1IWL1MaB6fbKaJQCXy3Nd2
-	ZvVw==
-X-Gm-Message-State: AOUpUlFe4mOAevJ3oEoXt/F0i6DpdTcYOjXJnGlVYnVcAfvAyrYGUNYf
-	UjraRkAQ7UQ4gveaIkoUsK5M5g==
-X-Google-Smtp-Source: AAOMgpfDdwXvFg7LSKV/RcWqPzmstK7SEOpY5Mcy4G2Is9w6iwl6Jmj4edR3tQqBduPbZGhhd+qwfg==
-X-Received: by 2002:a65:5086:: with SMTP id
-	r6-v6mr17318653pgp.375.1531792265081; 
+	bh=7zBfkvtQfXzC5oxaPZLxcIgWJVT6cATXWdjCRqTS5qY=;
+	b=rO42pAgx0WutSjXCwweuA0vCjSdSYoCAsQj6wmoTmk+cwl8W1Q62hHyf8E5i7miFJp
+	70JbWqJdFA/dNZp5u2M4cLGLwV2pQqM6dpi0CashFY/QaoXnbE+xPsq11Ry8ydEttYjy
+	VJADG93N68DTBuXUq1sDU5Ybb4H9K9uuk409eVqIFJ/fv7DfIUpS2h5ouQoj3uftaxXo
+	7j4utv1QzLdl/vrF0M7HbehaQ6ngJkxvwqTI5DoaiPz57c9aSPyoOWZUggd5jrs5UXxi
+	k0g1unJchInQS/ggOWjmAa1xG+F9+fBMENIbk7LT7StL/VTbHZmYxEvCE1HxFcJ3f2mO
+	WLMA==
+X-Gm-Message-State: AOUpUlGdhJif2Tu+6qNRzMBb2WmLX/njw3gfJbHDMMFNuQ3VzAnoxBtC
+	TMC04IbX4PJdSlf7Uva8dIAh4w==
+X-Google-Smtp-Source: AAOMgpcG4HqKvNYtuMZXN5eJpcvz6bxeNm5MBhHnjMLj6R8W4VEfeCFSzfGcJIWovcu+C1JPBgB7VQ==
+X-Received: by 2002:a17:902:b7c6:: with SMTP id
+	v6-v6mr10466684plz.49.1531792265978; 
 	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::1736])
 	by smtp.gmail.com with ESMTPSA id
-	66-v6sm27878586pfd.71.2018.07.16.18.51.04
+	66-v6sm27878586pfd.71.2018.07.16.18.51.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Jul 2018 18:51:04 -0700 (PDT)
+	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2018 18:50:52 -0700
-Message-Id: <20180717015053.8191-4-raj.khem@gmail.com>
+Date: Mon, 16 Jul 2018 18:50:53 -0700
+Message-Id: <20180717015053.8191-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180717015053.8191-1-raj.khem@gmail.com>
 References: <20180717015053.8191-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/4] blueman: Package orphan'ed files when systemd is enabled
+Subject: [meta-oe][PATCH 4/4] rsyslog: Disable valgrind support on risv64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +58,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 01:51:04 -0000
+X-List-Received-Date: Tue, 17 Jul 2018 01:51:05 -0000
 
-Fixes
-
-ERROR: blueman-2.0.5+gitAUTOINC+c4a03417e8-r0 do_package: QA Issue: blueman: Files/directories were installed but not shipped in any package:
-  /usr/lib/systemd/system
-  /usr/lib/systemd/system/blueman-mechanism.service
+valgrind is not yet working on risc-v arch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-connectivity/blueman/blueman_git.bb | 1 +
+ meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/blueman/blueman_git.bb b/meta-oe/recipes-connectivity/blueman/blueman_git.bb
-index 884e9859a1..f479386c14 100644
---- a/meta-oe/recipes-connectivity/blueman/blueman_git.bb
-+++ b/meta-oe/recipes-connectivity/blueman/blueman_git.bb
-@@ -34,6 +34,7 @@ FILES_${PN} += " \
-     ${datadir}/dbus-1 \
-     ${datadir}/Thunar \
-     ${systemd_user_unitdir} \
-+    ${exec_prefix}${systemd_system_unitdir} \
-     ${PYTHON_SITEPACKAGES_DIR} \
- "
- 
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+index d65a2be889..386ad32101 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+@@ -149,5 +149,6 @@ VALGRIND_mips64 = ""
+ VALGRIND_mips64n32 = ""
+ VALGRIND_arm = ""
+ VALGRIND_aarch64 = ""
++VALGRIND_riscv64 = ""
+ RDEPENDS_${PN}-ptest += "make diffutils gzip bash gawk coreutils procps"
+ RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
 -- 
 2.18.0
 
