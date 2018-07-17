@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 7304778872
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FD457887F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 01:51:03 +0000 (UTC)
-Received: by mail-pg1-f173.google.com with SMTP id g2-v6so3404494pgs.6
+	Tue, 17 Jul 2018 01:51:04 +0000 (UTC)
+Received: by mail-pf0-f176.google.com with SMTP id l9-v6so15556774pff.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jul 2018 18:51:04 -0700 (PDT)
+	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=j5xxetKAQy8+UncvsM3uMQ76qQjWz1vBqDtaYKsZGHk=;
-	b=LjSJk4sjDA3iIHpLUN1PTJ1n1B3XZgHC5kZLPP9azFpGqzPYAybgkg44RpQsHz+JYf
-	iD8rP+d2D1Jn0V9hbZyue+ZYLeDH7hDsBULqP3gMDEw8D6VlWjN64e9VHickCxiQ39vX
-	mrreE0WpPATUOw9vbsiirG7SjRV+jTA0qNliGwj56drnr/u6z472yRm5ZbZwKUawblhY
-	JFX/834Nt/7RUYXigYOCJZOdV9BHl7+KwZVhmSdUUJuoiM5siFrlXPrpZm7ENxYXZVeK
-	BYrOA5TlXA5MXdxOxMFpZ7ngOEsUu1nOmYl5ayksCgXPHW7crsM4Bjuf9bsQJlGgq+cz
-	cP/w==
+	bh=uSW2WsGLzq0csiQHXskypkKv35zwnwLRQ9QfGJMAAts=;
+	b=XhzHB3QcRisfoYgVec/Ye1EkYt/1l33WvEZRqpPBHhYyZsISOvkmZPLViUbEMxxTin
+	QjfxEIkM6+jPR2mc60lJIvQrmEpkACgX0+/vbS5zJW8b3hJVCkG46VJMyMYYP3jstXmt
+	JsnFik0opcgau20rADVymOHdbvIGA5pbwDNr1QdXLqz4aIEztIJcRGotMmdvZ4kcDa1t
+	aBIX9mg8QmztKl/pIgci1ybcACAvhYIfiihia/VVf/Rs784O61kwy8/vBEum36HbVsvL
+	IkjMXdSoLtdYTOic0z+K5fvPAqD/BWEk4BzHJJlsK7KAz5lyYchvyDZuB6LT5TR5wGI0
+	nnYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=j5xxetKAQy8+UncvsM3uMQ76qQjWz1vBqDtaYKsZGHk=;
-	b=j0zWXRWc8nTUQxec3ovL5Ro008SDdoNNg+oht7kBPtZuimq/O6proRmxMsfE7+TrPF
-	00abcInDlZFmCgN+LX/pxe7czNfklHVqtmGRKovZBkO7fZlNY7RpI/pz/b3xc2AYblFn
-	LA0ULYMXhCNYsZRHrc6cieP9YcdRj5SLbSV3YxzJuflY3FHySHpIsxTD1ZeO0X5TvSpU
-	tj/p/QsT/jTmJ/EYjmn1siRE5YmJrK4tQQLEsLM4hcOXmntL3OUdBaTwEWA4mwFfqKtW
-	y/FSTWL58+/p6vvHfV6ivGawcV6pI84V3XfCPwYTipucXqqUmA4mWpBx3PB+RTeEsNGB
-	t18A==
-X-Gm-Message-State: AOUpUlFNI/1sgGSjyHmCbHE74vszPr7WzM//OaUGj8y7Bg1jg//pWzzt
-	V3L7Y9KGHAoxXU3WBUw+pVXbxw==
-X-Google-Smtp-Source: AAOMgpcYqNRPf+8BXAo45WYhH5nd2wy0mcp0yEJ9uK787OMNh/ZhV5CDRjCJ9zvpGvi6ZL3Hh5Z7aw==
-X-Received: by 2002:a65:5b08:: with SMTP id
-	y8-v6mr17109334pgq.297.1531792264135; 
-	Mon, 16 Jul 2018 18:51:04 -0700 (PDT)
+	bh=uSW2WsGLzq0csiQHXskypkKv35zwnwLRQ9QfGJMAAts=;
+	b=aHDG2VHR2EdgmGun5RsS6f7B237qcGII0XTJHdVWUzNr283LCiANIoGQK1r3UmPa0x
+	9BAI0OghqnTTUBuAijte2bvC0kYWpj2Gs1iaJtJXG+0PwTPz/INA2qAsVa3wTcSRy7fK
+	NN6YoBmmgTmX5T8mXaWxabROHKrM5lBZ2xI+i1X38IACpOftV/v9EKfyWS2xtk02E2NT
+	61mcoZZe84pOtv3IhSKFwmJ0Cgc1nIH8otv2PxB8MQGG7Hpa6rJ75SePkioAzrxhKGN2
+	Pxy0Y3tC/ELaN7llztxNZhPQZjJkrYAFoHkf2E+2Hu77AF1IWL1MaB6fbKaJQCXy3Nd2
+	ZvVw==
+X-Gm-Message-State: AOUpUlFe4mOAevJ3oEoXt/F0i6DpdTcYOjXJnGlVYnVcAfvAyrYGUNYf
+	UjraRkAQ7UQ4gveaIkoUsK5M5g==
+X-Google-Smtp-Source: AAOMgpfDdwXvFg7LSKV/RcWqPzmstK7SEOpY5Mcy4G2Is9w6iwl6Jmj4edR3tQqBduPbZGhhd+qwfg==
+X-Received: by 2002:a65:5086:: with SMTP id
+	r6-v6mr17318653pgp.375.1531792265081; 
+	Mon, 16 Jul 2018 18:51:05 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::1736])
 	by smtp.gmail.com with ESMTPSA id
-	66-v6sm27878586pfd.71.2018.07.16.18.51.03
+	66-v6sm27878586pfd.71.2018.07.16.18.51.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Jul 2018 18:51:03 -0700 (PDT)
+	Mon, 16 Jul 2018 18:51:04 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Jul 2018 18:50:51 -0700
-Message-Id: <20180717015053.8191-3-raj.khem@gmail.com>
+Date: Mon, 16 Jul 2018 18:50:52 -0700
+Message-Id: <20180717015053.8191-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180717015053.8191-1-raj.khem@gmail.com>
 References: <20180717015053.8191-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/4] mbedtls: Upgrade to 2.11.0
+Subject: [meta-oe][PATCH 3/4] blueman: Package orphan'ed files when systemd is enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,38 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 01:51:03 -0000
+X-List-Received-Date: Tue, 17 Jul 2018 01:51:04 -0000
 
-- Use libs section, libdevel is not common
+Fixes
+
+ERROR: blueman-2.0.5+gitAUTOINC+c4a03417e8-r0 do_package: QA Issue: blueman: Files/directories were installed but not shipped in any package:
+  /usr/lib/systemd/system
+  /usr/lib/systemd/system/blueman-mechanism.service
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../mbedtls/{mbedtls_2.9.0.bb => mbedtls_2.11.0.bb}         | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.9.0.bb => mbedtls_2.11.0.bb} (91%)
+ meta-oe/recipes-connectivity/blueman/blueman_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.11.0.bb
-similarity index 91%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.11.0.bb
-index ee4f164a4b..71b1f80238 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.9.0.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.11.0.bb
-@@ -20,12 +20,12 @@ HOMEPAGE = "https://tls.mbed.org/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
- 
--SECTION = "libdevel"
-+SECTION = "libs"
- 
- SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
- 
--SRC_URI[md5sum] = "31dcf56cb92da5d7ec2dbb7a3cc5dff3"
--SRC_URI[sha256sum] = "a06a9b43e583b7e6707becfeeb13d88ed00f25fee31a5386cb3a3014c454bad8"
-+SRC_URI[md5sum] = "3b133b9b4cf0ccf3ac1c91436771bfa5"
-+SRC_URI[sha256sum] = "2a87061ad770e6d019b3b9cd27ea42a58bd0affccc4c6bfe4f5f0eee9ebf8aa8"
- 
- inherit cmake
+diff --git a/meta-oe/recipes-connectivity/blueman/blueman_git.bb b/meta-oe/recipes-connectivity/blueman/blueman_git.bb
+index 884e9859a1..f479386c14 100644
+--- a/meta-oe/recipes-connectivity/blueman/blueman_git.bb
++++ b/meta-oe/recipes-connectivity/blueman/blueman_git.bb
+@@ -34,6 +34,7 @@ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+     ${datadir}/Thunar \
+     ${systemd_user_unitdir} \
++    ${exec_prefix}${systemd_system_unitdir} \
+     ${PYTHON_SITEPACKAGES_DIR} \
+ "
  
 -- 
 2.18.0
