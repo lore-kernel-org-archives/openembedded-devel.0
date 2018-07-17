@@ -1,30 +1,23 @@
-Return-Path: <hongl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 69B6B74FE8
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 75D467890D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 03:33:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="42310231"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Jul 2018 11:33:40 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 565094B5CC0B
+	Tue, 17 Jul 2018 03:38:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6H3cH1G020750
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jul 2018 11:33:41 +0800 (CST)
-Received: from localhost.local (10.167.225.78) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.399.0; Tue, 17 Jul 2018 11:33:40 +0800
-From: Hong Liu <hongl.fnst@cn.fujitsu.com>
+	Mon, 16 Jul 2018 20:38:17 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
+	Mon, 16 Jul 2018 20:38:16 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Jul 2018 11:32:50 +0800
-Message-ID: <20180717033250.6843-1-hongl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.14.3
+Date: Mon, 16 Jul 2018 20:38:16 -0700
+Message-ID: <20180717033816.57004-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.78]
-X-yoursite-MailScanner-ID: 565094B5CC0B.AEEAD
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-oe][PATCH] numactl: 2.0.11 -> 2.0.12
+Subject: [meta-oe][PATCH v2] bonnie++: Upgrade to 1.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +30,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jul 2018 03:33:47 -0000
+X-List-Received-Date: Tue, 17 Jul 2018 03:38:16 -0000
 Content-Type: text/plain
 
-1.Upgrade numactl 2.0.11 to 2.0.12.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-2.Modify README to README.md
+Remove the patch gcc-4.3-fixes.patch as build
+successfully without it.
 
-Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-support/numactl/numactl_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../{bonnie++_1.03e.bb => bonnie++_1.04.bb}   |  7 +++----
+ .../bonnie/files/gcc-4.3-fixes.patch          | 19 -------------------
+ 2 files changed, 3 insertions(+), 23 deletions(-)
+ rename meta-oe/recipes-benchmark/bonnie/{bonnie++_1.03e.bb => bonnie++_1.04.bb} (73%)
+ delete mode 100644 meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
 
-diff --git a/meta-oe/recipes-support/numactl/numactl_git.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
-index b9cbcf0..57b7203 100644
---- a/meta-oe/recipes-support/numactl/numactl_git.bb
-+++ b/meta-oe/recipes-support/numactl/numactl_git.bb
-@@ -9,10 +9,10 @@ RDEPENDS_${PN} = "perl"
+diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.04.bb
+similarity index 73%
+rename from meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
+rename to meta-oe/recipes-benchmark/bonnie/bonnie++_1.04.bb
+index 2c1217e34..d7583f076 100644
+--- a/meta-oe/recipes-benchmark/bonnie/bonnie++_1.03e.bb
++++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_1.04.bb
+@@ -4,11 +4,10 @@ SECTION = "benchmark/tests"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://copyright.txt;md5=cd4dde95a6b9d122f0a9150ae9cc3ee0"
  
- inherit autotools-brokensep ptest
+-SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
+-           file://gcc-4.3-fixes.patch \
++SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}_${PV}.tgz \
+ "
+-SRC_URI[md5sum] = "750aa5b5051263a99c6c195888c74968"
+-SRC_URI[sha256sum] = "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876df8721f01ba2e2cb"
++SRC_URI[md5sum] = "1414aab86e2db1b4691bd4be82031012"
++SRC_URI[sha256sum] = "507bd2ce5360c7c98b91b0fdc2bed5c9320b5c9699f7d4a3d1c86b256896c15e"
  
--LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=5644cc3851cb2499f6c48e52fe198bd9"
-+LIC_FILES_CHKSUM = "file://README.md;beginline=19;endline=32;md5=f8ff2391624f28e481299f3f677b21bb"
+ inherit autotools-brokensep
  
--SRCREV = "ea3a70681c2f523fe58e1d44527f478ca76db74e"
--PV = "2.0.11+git${SRCPV}"
-+SRCREV = "841253d1313b01a968c380cae4f498f20c46e5aa"
-+PV = "2.0.12+git${SRCPV}"
- 
- SRC_URI = "git://github.com/numactl/numactl \
-     file://fix-null-pointer.patch \
+diff --git a/meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch b/meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
+deleted file mode 100644
+index 67f1b7494..000000000
+--- a/meta-oe/recipes-benchmark/bonnie/files/gcc-4.3-fixes.patch
++++ /dev/null
+@@ -1,19 +0,0 @@
+-Includes string.h to one of the source file.
+-
+-Upstream-Status: Inappropriate [not author.]
+----
+- zcav.cpp |    1 +
+- 1 file changed, 1 insertion(+)
+-
+-Index: bonnie++-1.03a/zcav.cpp
+-===================================================================
+---- bonnie++-1.03a.orig/zcav.cpp
+-+++ bonnie++-1.03a/zcav.cpp
+-@@ -15,6 +15,7 @@ using namespace std;
+- #else
+- #include <vector.h>
+- #endif
+-+#include <string.h>
+- 
+- // Read the specified number of megabytes of data from the fd and return the
+- // amount of time elapsed in seconds.
 -- 
-2.7.4
-
-
+2.17.1
 
 
