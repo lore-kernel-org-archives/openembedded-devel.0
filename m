@@ -1,25 +1,26 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B92D78493
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 551E978493
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2018 07:31:47 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6I7Vmds001623
+	Wed, 18 Jul 2018 07:31:49 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6I7VocV012409
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2018 00:31:48 -0700 (PDT)
+	Wed, 18 Jul 2018 00:31:50 -0700
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 18 Jul 2018 00:31:48 -0700
+	14.3.399.0; Wed, 18 Jul 2018 00:31:49 -0700
 From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Jul 2018 15:31:28 +0800
-Message-ID: <1531899089-395618-9-git-send-email-changqing.li@windriver.com>
+Date: Wed, 18 Jul 2018 15:31:29 +0800
+Message-ID: <1531899089-395618-10-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
 References: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH] udisks2: 2.7.6 -> 2.7.7
+Subject: [PATCH][meta-oe] xf86-video-ati: 7.8.0 -> 18.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,80 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jul 2018 07:31:47 -0000
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 18 Jul 2018 07:31:49 -0000
+Content-Type: text/plain
 
 From: Changqing Li <changqing.li@windriver.com>
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../udisks2/0001-data-fix-out-of-tree-build.patch  | 35 ----------------------
- .../udisks/{udisks2_2.7.6.bb => udisks2_2.7.7.bb}  |  3 +-
- 2 files changed, 1 insertion(+), 37 deletions(-)
- delete mode 100644 meta-oe/recipes-support/udisks/udisks2/0001-data-fix-out-of-tree-build.patch
- rename meta-oe/recipes-support/udisks/{udisks2_2.7.6.bb => udisks2_2.7.7.bb} (91%)
+ .../{xf86-video-ati_7.8.0.bb => xf86-video-ati_18.0.1.bb}           | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-driver/{xf86-video-ati_7.8.0.bb => xf86-video-ati_18.0.1.bb} (77%)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2/0001-data-fix-out-of-tree-build.patch b/meta-oe/recipes-support/udisks/udisks2/0001-data-fix-out-of-tree-build.patch
-deleted file mode 100644
-index 1cbd877..0000000
---- a/meta-oe/recipes-support/udisks/udisks2/0001-data-fix-out-of-tree-build.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 7fdd4acdf6daf95c5cc74e968f4710513c8ddaea Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
--Date: Fri, 23 Mar 2018 18:33:52 +0100
--Subject: [PATCH] data: fix out of tree build
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--| sed: can't read udisks2.service.in: No such file or directory
--
--Upstream-Status: Submitted [1]
--
--[1] https://github.com/storaged-project/udisks/pull/510
--
--Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-----
-- data/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/data/Makefile.am b/data/Makefile.am
--index ddf9e3d6..b38928c8 100644
----- a/data/Makefile.am
--+++ b/data/Makefile.am
--@@ -22,7 +22,7 @@ systemdservicedir       = $(systemdsystemunitdir)
-- systemdservice_DATA     = $(systemdservice_in_files:.service.in=.service)
-- 
-- $(systemdservice_DATA): udisks2.service.in Makefile
---	@sed -e "s|\@udisksdprivdir\@|$(libexecdir)/udisks2|" udisks2.service.in > udisks2.service
--+	@sed -e "s|\@udisksdprivdir\@|$(libexecdir)/udisks2|" $(srcdir)/udisks2.service.in > udisks2.service
-- endif
-- 
-- udevrulesdir = $(udevdir)/rules.d
---- 
--2.14.3
--
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.7.6.bb b/meta-oe/recipes-support/udisks/udisks2_2.7.7.bb
-similarity index 91%
-rename from meta-oe/recipes-support/udisks/udisks2_2.7.6.bb
-rename to meta-oe/recipes-support/udisks/udisks2_2.7.7.bb
-index 4d22afd..ac86a69 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.7.6.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.7.7.bb
-@@ -20,10 +20,9 @@ RDEPENDS_${PN} = "acl"
+diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_18.0.1.bb
+similarity index 77%
+rename from meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
+rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_18.0.1.bb
+index fb81e53..969c1a0 100644
+--- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
++++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_18.0.1.bb
+@@ -14,10 +14,12 @@ REQUIRED_DISTRO_FEATURES += "opengl"
  
- SRC_URI = " \
-     git://github.com/storaged-project/udisks.git \
--    file://0001-data-fix-out-of-tree-build.patch \
-     file://non-gnu-libc.patch \
- "
--SRCREV = "b6471f2e99f6aa1133af0de658f1fa05c748932c"
-+SRCREV = "fcf888ca00980f75ce0c47041629b3d77e9f352e"
- S = "${WORKDIR}/git"
+ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
  
- CVE_PRODUCT = "udisks"
+-SRC_URI[md5sum] = "f34d04a755e761e03b459155fa3ddcbb"
+-SRC_URI[sha256sum] = "401f5de772928f3dc4ce43a885adb0a47a2f61aa4a9e45d2ab3d184136a9d6fa"
++SRC_URI[md5sum] = "40e7c0a5a69aba3d84e0958f58705ea7"
++SRC_URI[sha256sum] = "72ea3b8127d4550b64f797457f5a7851a541fa4ee2cc3f345b6c1886b81714a0"
+ 
+ EXTRA_OECONF += "--disable-glamor"
+ 
+ RDEPENDS_${PN} += "xserver-xorg-module-exa"
+ RRECOMMENDS_${PN} += "linux-firmware-radeon"
++
++FILES_${PN} += "${datadir}/X11"
 -- 
 2.7.4
 
