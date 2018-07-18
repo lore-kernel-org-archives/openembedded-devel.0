@@ -1,26 +1,29 @@
-Return-Path: <Changqing.Li@windriver.com>
+Return-Path: <Hongzhi.Song@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 551E978493
+	by mail.openembedded.org (Postfix) with ESMTP id 13C067886F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2018 07:31:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6I7VocV012409
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2018 00:31:50 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 18 Jul 2018 00:31:49 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Jul 2018 15:31:29 +0800
-Message-ID: <1531899089-395618-10-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
-References: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
+	Wed, 18 Jul 2018 07:57:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6I7vlgZ012856
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 18 Jul 2018 00:57:47 -0700
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Wed, 18 Jul 2018 00:57:46 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
+	<CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <ce227b25-5e4b-4948-e4e8-df9e800694b6@windriver.com>
+Date: Wed, 18 Jul 2018 15:59:38 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] xf86-video-ati: 7.8.0 -> 18.0.1
+In-Reply-To: <CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
+X-Originating-IP: [128.224.162.198]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,40 +36,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jul 2018 07:31:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Jul 2018 07:57:48 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-From: Changqing Li <changqing.li@windriver.com>
+Hi Raj,
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../{xf86-video-ati_7.8.0.bb => xf86-video-ati_18.0.1.bb}           | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-driver/{xf86-video-ati_7.8.0.bb => xf86-video-ati_18.0.1.bb} (77%)
+I have try my best to reproduce your error, but I failed.
 
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_18.0.1.bb
-similarity index 77%
-rename from meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
-rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_18.0.1.bb
-index fb81e53..969c1a0 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_7.8.0.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ati_18.0.1.bb
-@@ -14,10 +14,12 @@ REQUIRED_DISTRO_FEATURES += "opengl"
- 
- COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
- 
--SRC_URI[md5sum] = "f34d04a755e761e03b459155fa3ddcbb"
--SRC_URI[sha256sum] = "401f5de772928f3dc4ce43a885adb0a47a2f61aa4a9e45d2ab3d184136a9d6fa"
-+SRC_URI[md5sum] = "40e7c0a5a69aba3d84e0958f58705ea7"
-+SRC_URI[sha256sum] = "72ea3b8127d4550b64f797457f5a7851a541fa4ee2cc3f345b6c1886b81714a0"
- 
- EXTRA_OECONF += "--disable-glamor"
- 
- RDEPENDS_${PN} += "xserver-xorg-module-exa"
- RRECOMMENDS_${PN} += "linux-firmware-radeon"
-+
-+FILES_${PN} += "${datadir}/X11"
--- 
-2.7.4
+Could you help me to do the build in docker and share the dock image
+with us. Or maybe you have a better method.
+
+
+Thanks,
+
+Hongzhi
+
+
+On 2018年07月10日 12:11, Khem Raj wrote:
+> This is failing to build here
+>
+> | DEBUG: Executing shell function do_compile
+> | NOTE: make -j 16 CROSS_COMPILE=x86_64-bec-linux- ARCH=x86
+> CC=x86_64-bec-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3
+> -mfpmath=sse -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
+> -Wformat-security -Werror=format-security
+> --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
+> AR=x86_64-bec-linux-ar LD=x86_64-bec-linux-ld
+> --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
+>    DESTDIR=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/image
+> -C /mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
+> | make: Entering directory
+> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+> | Makefile:19: *** recipe commences before first target.  Stop.
+> | make: Leaving directory
+> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+> | ERROR: oe_runmake failed
+> On Sat, Jul 7, 2018 at 11:05 PM Hongzhi.Song <hongzhi.song@windriver.com> wrote:
+>> The recipe builds the framework for kernel-selftest. Now, it just
+>> contains two sets of testcase, bpf and vm. We are appending others
+>> to the recipe.
+>>
+>> It needs some features which will be written into relevant recipe.
+>> But now, you should add them to conf/local.conf manually.
+>> KERNEL_FEATURES_append += "features/bpf/bpf.scc"
+>>
+>> Signed-off-by: Dengke Du <dengke.du@windriver.com>
+>> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+>> ---
+>>   .../recipes-kernel/kselftest/kernel-selftest.bb    | 94 ++++++++++++++++++++++
+>>   1 file changed, 94 insertions(+)
+>>   create mode 100644 meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>>
+>> diff --git a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>> new file mode 100644
+>> index 0000000..6f20bd3
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
+>> @@ -0,0 +1,94 @@
+>> +SUMMARY = "Kernel selftest for Linux"
+>> +DESCRIPTION = "Kernel selftest for Linux"
+>> +LICENSE = "GPLv2"
+>> +
+>> +# for bpf and vm
+>> +DEPENDS = " \
+>> +    elfutils \
+>> +    libcap \
+>> +    libcap-ng \
+>> +    fuse \
+>> +    util-linux \
+>> +    rsync-native \
+>> +"
+>> +# for vm
+>> +RDEPENDS_${PN} += "libgcc \
+>> +                   bash \
+>> +"
+>> +
+>> +do_configure[depends] += "virtual/kernel:do_shared_workdir"
+>> +
+>> +inherit linux-kernel-base kernel-arch
+>> +
+>> +do_populate_lic[depends] += "virtual/kernel:do_patch"
+>> +
+>> +S = "${WORKDIR}/${BP}"
+>> +
+>> +# now we just test bpf and vm
+>> +# we will append other kernel selftest in the future
+>> +TEST_LIST = "bpf \
+>> +             vm \
+>> +"
+>> +
+>> +EXTRA_OEMAKE = '\
+>> +    CROSS_COMPILE=${TARGET_PREFIX} \
+>> +    ARCH=${ARCH} \
+>> +    CC="${CC}" \
+>> +    AR="${AR}" \
+>> +    LD="${LD}" \
+>> +'
+>> +
+>> +EXTRA_OEMAKE += "\
+>> +    'DESTDIR=${D}' \
+>> +"
+>> +
+>> +KERNEL_SELFTEST_SRC ?= "Makefile \
+>> +                        include \
+>> +                        tools \
+>> +                        scripts \
+>> +                        arch \
+>> +"
+>> +
+>> +do_compile() {
+>> +    for i in ${TEST_LIST}
+>> +    do
+>> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
+>> +    done
+>> +}
+>> +
+>> +do_install() {
+>> +    for i in ${TEST_LIST}
+>> +    do
+>> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/opt/kselftest/${i} install
+>> +    done
+>> +
+>> +    chown root:root  -R ${D}/opt/kselftest
+>> +}
+>> +
+>> +do_configure() {
+>> +    :
+>> +}
+>> +
+>> +do_configure[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
+>> +python copy_kselftest_source_from_kernel() {
+>> +    sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
+>> +    src_dir = d.getVar("STAGING_KERNEL_DIR")
+>> +    dest_dir = d.getVar("S")
+>> +    bb.utils.mkdirhier(dest_dir)
+>> +    for s in sources:
+>> +        src = oe.path.join(src_dir, s)
+>> +        dest = oe.path.join(dest_dir, s)
+>> +        if os.path.isdir(src):
+>> +            oe.path.copytree(src, dest)
+>> +        else:
+>> +            bb.utils.copyfile(src, dest)
+>> +}
+>> +
+>> +remove_clang_related() {
+>> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
+>> +}
+>> +
+>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
+>> +
+>> +INHIBIT_PACKAGE_DEBUG_SPLIT="1"
+>> +FILES_${PN} += "/opt/kselftest/"
+>> --
+>> 2.8.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
