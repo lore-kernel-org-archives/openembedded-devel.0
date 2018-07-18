@@ -1,104 +1,49 @@
-Return-Path: <Rasmus.Villemoes@prevas.se>
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0117.outbound.protection.outlook.com [104.47.2.117])
-	by mail.openembedded.org (Postfix) with ESMTP id 68DB2789FD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f50.google.com (mail-vk0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 83B9E78911
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jul 2018 12:08:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=prevasonline.onmicrosoft.com; s=selector1-prevas-se;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=XRcbNU+JlOGQyDUCu92+0SpqNsmzwA5JnhcR3RnBXrU=;
-	b=VRbqtK6wuRMfdwXwZekEMSvhWxS7MzLyppzthBlyVl6AnLo/8w8PBC50cpow8ISpNs0tQKiLDYaFEUoxukQgJXQZ3GDRsat+AaPB01glEDujEeWmUvQzYIck9dHWvAXhrs3t+cMiE8yhiJ5k0PZASgXIANSXv3KWVcVWY/5BCL0=
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=Rasmus.Villemoes@prevas.se; 
-Received: from [172.16.11.32] (81.216.59.226) by
-	DB6PR1001MB1335.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:4:b4::22) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.973.16; Wed, 18 Jul 2018 07:33:40 +0000
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20180716092221.32243-1-rasmus.villemoes@prevas.dk>
-	<20180717072008.GA2101@jama>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Message-ID: <2bc90b65-1345-107f-0db4-045fbeb5b6cf@prevas.dk>
-Date: Wed, 18 Jul 2018 09:33:38 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Wed, 18 Jul 2018 15:04:55 +0000 (UTC)
+Received: by mail-vk0-f50.google.com with SMTP id o82-v6so830108vko.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Jul 2018 08:04:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=Gf6kTQkOh91aA2ULaouFovfwBnIyfMBZnVNl+uR3Z2M=;
+	b=rUFnLJalJLqoj4+RcsOeX0u7sUfluCu5w0euL5oT2NlqQlOc7ZjK4rI7rS3YVSekwZ
+	W/ZTJwi0EtJYMLBf6R6/HVyaWCB+eEwfPE6AxHv70nBh8kQMQJ394MSDMDPYRabnkahk
+	Kp7HrgDIJn2Vnq3XXCeng5pWsmCK7TUS0WznkCkkxXV08L0f1Jzk2/j6xAEAVn/Aho/u
+	Og3NXV9GihcQdvG8JEJw5ekkkwvWKKk2JwLZermaja/f6MHekyyGDYDcdBao4nVQShit
+	4vk0ywGIq5Ird6+1Pse+QJZioBmJvz7tKpawHHzIwIxbObi5bzkLgU227N7K5yD//DxM
+	V1Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Gf6kTQkOh91aA2ULaouFovfwBnIyfMBZnVNl+uR3Z2M=;
+	b=PFVKT8ewRqydHDEjf9Vmh2bcV18So0p1F7OuGqYIkm0LLhxYlTbpx4jKoMN+UHl8by
+	7ttjXr4//VsyWlo4GLAsy9sXr191St3lYrONsauGu0/2CvQGP2I2QmYUb8K2ua2uo7bl
+	lEFET+tlp9eVsu674NZ0gXyh2jangWUiPi7sPr6CJoNGnk4dcb4A75Mhx66HQH/zE9Vu
+	/6/mu2O5QAkFKSYj/BmA8S/z/DI8OschPc+xOgoMhWESe5Ii3nEBLxCkPR+TAC73tWKZ
+	lljqJEh+2HD+colXZ6KOxOVDQfCtg58mdjfak6b2CTVTWT8PXg7PJg/5h2dejWzARQPF
+	vZTg==
+X-Gm-Message-State: AOUpUlEKOrejpAkP7dkq0DxAR5Ns3x/rA7MXrDN02Xm8jRuoH3mFvLHm
+	AqfSD/glDJ3Ni1YW4enTug7aufQjcEnyYI70vQE=
+X-Google-Smtp-Source: AAOMgpeYzisq7vWzqKW0k9yexR31/LXWcByPaPI1m9ItGzenj4YM+nvzBi+n0gM5IVt94CX1f3S208v0fSLMBr/b60A=
+X-Received: by 2002:a1f:e605:: with SMTP id d5-v6mr3542939vkh.4.1531926295218; 
+	Wed, 18 Jul 2018 08:04:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20180717072008.GA2101@jama>
-X-Originating-IP: [81.216.59.226]
-X-ClientProxiedBy: DB6P189CA0029.EURP189.PROD.OUTLOOK.COM (2603:10a6:6:2e::42)
-	To DB6PR1001MB1335.EURPRD10.PROD.OUTLOOK.COM
-	(2603:10a6:4:b4::22)
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 75db36bc-dbcb-4905-7827-08d5ec80c8c3
-X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989117)(5600053)(711020)(4534165)(4627221)(201703031133081)(201702281549075)(8990107)(2017052603328)(7153060)(7193020);
-	SRVR:DB6PR1001MB1335; 
-X-Microsoft-Exchange-Diagnostics: 1; DB6PR1001MB1335;
-	3:p0aeXjiJtA4UbtOCXVUrmol1qTS1gL7Z1DwMv3MyvNtKSC///MAJ2Kh2coPkDPLVCs5+rtNuApMh3n6OQN6/vaTsCxvYrB7AkKr4blZqDu0LEOZLOS+2dbtow+TYIP5Gg18jq63swII0BX0J4tpCCxMMvogbwakes8SW0mGIu8RG+r6xGJDNxzKpbTTwFrEb+1M3EWt2k2bxI5syKET8yEcFtx+EkVRTpjd9faWBz9T4B3LM2X6K10dRd9KJksC2;
-	25:auHmMmtKWnOCiYgor+Y9CV3iRSb9lDdaSK1ZuA99KuJFr4bmbg0PKbFps60JKai97kE/1IQ+wJQCUWfIEq7ESvs4hZcYRxQephjUwlgb1FMtEqsCZNRIUx1IqxEjM+XTlmqo4JmaLWDA6Hdtp6OlI90eRZxgIdoxeCO9k/Roci0HawB/yQ4lXWup0akRkDAT5JYk8X5vO6B/wPCB05iFjx1aG0K9B51fJ4uNueoDiE6e0Kxjh64moAOP/vdp/mLt5vya+bNLfs1tnjEDWHwKLch/+ZbJY/49+XnEL2zokmGTnZATyxkrRqCa6fKRxd1anI5ZBgMXx1Ye8LCebQOPWw==;
-	31:4jJ7W/PMCXSnA0uB02OrSewoLzfOju17ZsYYMWimax304Nin+vxqXdY8StW+KPmYXQMqM1e10yQ2sxhdMYVd5Nd3RrdCARnltURigC3bJS1bRtbedPy/mC6GM6A63yHfEkwlL7QvmqiVMUay4M1hVbgayZ7iiY7BlGMXRe2rozDLz0x1iwJHk6PxZ7NNmrZaqWVjBHt2jLa8N3cd7M8jUuE4RviDG3BfoK/B5nzHtHY=
-X-MS-TrafficTypeDiagnostic: DB6PR1001MB1335:
-X-Microsoft-Antispam-PRVS: <DB6PR1001MB133502B0A0A0BF97FCB3F4A98A530@DB6PR1001MB1335.EURPRD10.PROD.OUTLOOK.COM>
-X-Exchange-Antispam-Report-Test: UriScan:(17755550239193);
-X-MS-Exchange-SenderADCheck: 1
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(6040522)(2401047)(5005006)(8121501046)(3002001)(3231311)(944501410)(52105095)(93006095)(10201501046)(149027)(150027)(6041310)(20161123562045)(20161123558120)(20161123564045)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(6072148)(201708071742011)(7699016);
-	SRVR:DB6PR1001MB1335; BCL:0; PCL:0; RULEID:;
-	SRVR:DB6PR1001MB1335; 
-X-Microsoft-Exchange-Diagnostics: 1; DB6PR1001MB1335;
-	4:eHVbY4FSk+qFpb7BgIDiqqUEt7dyfya2H4wY6te2B18BLo6eoAh47ttLofW/eWV6uCBbY83LjbP5HmuoAnbeJJ4Ai+0GvMXtaTLdldDVoSVsTIqKgeXmFnaZCEuzMMpOEBohOosASq4/aWoyrY7IS3pVP9flMZ1S7g1jdfkd4zcHP0siQo3b/gY8V18rw8e/RloXDDDLkxIZao1oPnqnqpdEf0+FcXSLa9nK/TYpEIMRh83mcEH2T10vX1c5Iwu7E7u6IQCwoWPOqZfp9EUl49n7QD1ZPQXzOlzmHk+O6GeVdKKMBR+kokz13neWC1RR
-X-Forefront-PRVS: 0737B96801
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(6049001)(396003)(39840400004)(346002)(366004)(136003)(376002)(199004)(189003)(4326008)(230700001)(53936002)(36756003)(23746002)(316002)(58126008)(6246003)(16576012)(68736007)(2906002)(25786009)(6116002)(3846002)(446003)(11346002)(2616005)(476003)(956004)(486006)(31696002)(97736004)(39060400002)(44832011)(47776003)(8936002)(229853002)(8976002)(65806001)(65956001)(66066001)(53546011)(81166006)(81156014)(76176011)(8676002)(52116002)(386003)(16526019)(106356001)(105586002)(31686004)(42882007)(6916009)(77096007)(305945005)(74482002)(186003)(7736002)(64126003)(6486002)(478600001)(50466002)(72206003)(5660300001)(65826007)(26005);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DB6PR1001MB1335; H:[172.16.11.32];
-	FPR:; SPF:None; LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-Received-SPF: None (protection.outlook.com: prevas.se does not designate
-	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?Windows-1252?Q?1; DB6PR1001MB1335;
-	23:3q2tj+qwhFSx5cPmgOWeWwnmAuH6Iu67xeF?=
-	=?Windows-1252?Q?k3LwK9H3xL4W2JkKuZ1WIx0z6XlWaqscAtxQtgD+4B7i1WytXKDK3559?=
-	=?Windows-1252?Q?nB2vp1VguW3YJVOQecgdOJWF9gbcXT+xlspI/yNyQWBIgxGVYvlz3eX+?=
-	=?Windows-1252?Q?6YtBd3bhrL8jveJ3cShrUN7E1E6pHW5+v/DCZu3ORJkj98mNwLjZoEFk?=
-	=?Windows-1252?Q?D+eH/RT+yO7gmjcWCKFXGbUOq1WpBi984tj/cb3WYN9fhX8sZCNnDpst?=
-	=?Windows-1252?Q?Ajc+RqbT+2BoK1u688F3nbYx5jcDs7qJKO1zWE17XKFdRlz+UrA+YO44?=
-	=?Windows-1252?Q?B0clSDCe26poj8YEiwivVJJrFY7YKkQqtgZQ+c1ntq8vpZOHz97xhRkX?=
-	=?Windows-1252?Q?HNdNYniuD/S2RSOfVGaXhsPR5FqNin2xrq+XG1HYqtbw5RAOly5w6fTn?=
-	=?Windows-1252?Q?PhbEnB1T8gq7Z5hTXbiv8w+RSgH4Nc9JfgXQO+ckCP5usysc8+z7qqP+?=
-	=?Windows-1252?Q?/SBgKnwnnt3WBCAM+ZBTZqpmjipL9N5Vl3RuAHF4QUM6QoROpr8TKbOu?=
-	=?Windows-1252?Q?/7oIv/yDiqUndcm7BBdttBYai+fEUrWMqlokqbiPJtfJJaxsyNP8UEhp?=
-	=?Windows-1252?Q?os4sIztgbFWoAXagrj2nD7pi3m7u6usZwBkDKO1Gv+B1iCF/QMAFziCK?=
-	=?Windows-1252?Q?gJs9iF7iNDLXiiKrnHGF0/zfcF9wpY77qa54HXvCnIU5seTYn9aNt3FY?=
-	=?Windows-1252?Q?iRszgbQPndp3OMgLRtD3WfVVSw59+QdFiIi0E5MwvJQCxb/yxBKBDKn6?=
-	=?Windows-1252?Q?+KagE1Bw3yPlIyUdHdtZf0XuTpMGuGUCUgmWGKRH+vcU5J47bSLo9/G0?=
-	=?Windows-1252?Q?b4w0ZPkmbIjaTY76KLK+0XmIFXdGa7GQhG+oSzl4p01A7AfFerLhebkJ?=
-	=?Windows-1252?Q?fgdA8CTT/Zom8Qi/TMPbeDv1EwrnXhPNQAypdwuxMiXhVrTefc01FoPo?=
-	=?Windows-1252?Q?5hQ+dMlgUAmPDWP4YqjX2p3kEi2wha/5eITfCzPcg0so0gIuOf3ljUAZ?=
-	=?Windows-1252?Q?y6wkc7ycUsxF8CY/h1WOf06l34N7o3C3Z8XSFo22EJ43kjvOjx5JQHYA?=
-	=?Windows-1252?Q?cIC9jdR6de4fPDgB8bGKYX4L0IE5rQqTsf3rWeIrcnh5K/fJDgup87vX?=
-	=?Windows-1252?Q?u7Ujw8gSqgy0An43K8YybMUlq3OmgKMerSiLzmhZiAIiU3UBB0Rb9ANz?=
-	=?Windows-1252?Q?N0d3B62KTZECY7nmJlwKcwSG5Yw3dK51Hin6ELu368V36XD8M9GK0GGF?=
-	=?Windows-1252?Q?KsE2ipngk4RDWVsWDff+dOvqQup29jLf6zkQudldIz/e9wUCzk3ud67v?=
-	=?Windows-1252?Q?6Mkl2wjvzn7qL568U3+UbH8/3zyDTTxBW4PrFBvM1O7NrUhHYhruCJdK?=
-	=?Windows-1252?Q?FM7jReFfXcpyNRNN03qPJGPOiSFR22Fg8hKbYDxic8p70gtfzup5OGxl?=
-	=?Windows-1252?Q?7bLNneSarsclfiYJGWuAsmAR9uMCP/SOO4YPh5Mu4NmT+bv3bJE31z5n?=
-	=?Windows-1252?Q?l3y/PMkOqJQzQSkw=3D?=
-X-Microsoft-Antispam-Message-Info: hqRwxlnz8jjulp54fC/2SaR6Ufdbb/zpWz8YygW6k0LqgwaRSvJzN3Ufr1BK03IMk0wEAotks8ZpHH4AHcDMLGBPvqRGaxKuCVFNvW+F+v7NIFmi66lKxxFrXethVFySk6sy8K+WyXyX8HtbD2ojPFaaZcG5+Gfu9+6q/p6SuIYBPQCUq2cqg0AW+vkia3ssL54gUxsghuLuM4k/m2VshO8RztUDOkgqTt0PdfjtlmBUKLTDE3Ur8Nfpb062bKKzaJEjKVJVvIJRDxYXypqyfwbTCfVe/Rw9p4sRI9gUpysw2gSqTskJpTV0CIzZBZjmu7rUTCyxKnUquSM50TrLWYyvAOTWYGnvRWrbFw/oJeI=
-X-Microsoft-Exchange-Diagnostics: 1; DB6PR1001MB1335;
-	6:0p4kqh6DsBLHKZxHc7IgB++zUjDBx92B25uNPVhk+jjzhuL11DC8A0OCAZyDu5w0MTjXd3uMWwtFwKTBBg7wyNbE1AusPlqxjUXpJN1nRaNSS/KlS3SVcgEjNsxt6vxH+SiENVxA9QYxV9otjtGGoJ75VNHeivrdX7JMerJNiU5orDpk7IP3sk7+GQRRCuydlBrqN9G5jsj4H5Oox0pO+2bswF1hxtb0g7v2+6Snb7G1jPuR85pX81eDk2MI5eU6DECfSIDD0d0cDnFO1+jTuF1GxWP7DbjS+1PNh6q9KlLYfJzTA3zKtgiGdOd6n2qv+cADpOagIb5QzVHpFaePUpquPaQWUpyDL5FJrzKJ5rEilQ+WwyjffyN7cV3Yty8HaMPdOIDJnPvc9l9GcElOkcWj8zlquG50sSszrS/rVx0oEYfSeaie4tP0H9bH0es9rVdVsKyN87kARX3xRa3Chw==;
-	5:rSuH7hzAXi/mvMvyBDS8SvYomQdtsxNHInLN6JJoSnC+77tQvOgil9SJ2AtEoJ6ZkZh5S2bJqptANOqtVTIxYaiRsAgsA6/l3tWv9UhH+ep5cgSyMfMktFqvAJGOSjT/xKRKcYlNehiYKpj5uJ6BauuegV3qVNbh5v1nqoNOe5U=;
-	7:ISNqPXYvNLWH059qmXcmriieZIUiG0cZycQEDzv+EZjJi5BuT6tYoj5D9pTOMAqp6C2HLROL6GNDtSFf3Fu29oeNXBBUj+THLONxEywdSi5fNJzCsccyClhzr1mmkz+pdyJPGMniIV5n9s78okCbYBvuti/ownhUNMHtz62+Ez5vTi/GoaejYRrxo6YxsCGRnbGIbawoBDEep+G+u5ZGm/NT/qiQZCd1N0WiCIODmzhtrrS3o/KJan1MEqRE39sw
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2018 07:33:40.8683 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75db36bc-dbcb-4905-7827-08d5ec80c8c3
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR1001MB1335
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] qfilesystemengine_unix.cpp: optionally disable use of statx(2)
+References: <20180717015840.131005-1-mingli.yu@windriver.com>
+	<a140d60a-53db-1a9a-d0b1-cbb4729379df@gmail.com>
+	<5B4EFA3C.6010202@windriver.com>
+In-Reply-To: <5B4EFA3C.6010202@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 Jul 2018 08:04:28 -0700
+Message-ID: <CAMKF1soBJYHX3X6jWhGSFS-VuwtS6HyomR0BDCjPByirtX67Sg@mail.gmail.com>
+To: Mingli Yu <mingli.yu@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] cryptsetup: Upgrade to 2.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,35 +56,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jul 2018 12:08:06 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Jul 2018 15:04:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 2018-07-17 09:20, Martin Jansa wrote:
-> On Mon, Jul 16, 2018 at 11:22:21AM +0200, Rasmus Villemoes wrote:
->> When used inside an unprivileged docker container, statx(2) gets
->> rejected with -EPERM by the default seccomp profile, unless the host
->> runs an almost-bleeding edge version of docker (at least 18.04). That
->> causes most qt apps, qmake in particular, to fail.
->> +
->> diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
->> index 09b6cc5..41f9b7a 100644
->> --- a/recipes-qt/qt5/qt5-git.inc
->> +++ b/recipes-qt/qt5/qt5-git.inc
->> @@ -15,3 +15,5 @@ CVE_PRODUCT = "qt"
->>  S = "${WORKDIR}/git"
->>  
->>  PV = "5.11.1+git${SRCPV}"
->> +
->> +SRC_URI_append_no-xstat = " file://0001-qfilesystemengine_unix.cpp-disable-use-of-statx-2.patch"
-> 
-> Isn't this applicable only to *qtbase* ?
+On Wed, Jul 18, 2018 at 1:34 AM Yu, Mingli <mingli.yu@windriver.com> wrote:
+>
+>
+>
+> On 2018=E5=B9=B407=E6=9C=8817=E6=97=A5 10:37, Khem Raj wrote:
+> >
+> >
+> > On 7/16/18 6:58 PM, mingli.yu@windriver.com wrote:
+> >> From: Mingli Yu <mingli.yu@windriver.com>
+> >>
+> >> * Update the homepage to https://gitlab.com/cryptsetup/cryptsetup
+> >> * Add json-c to DEPENDS as cryptsetup requires the
+> >>    json-c library for JSON data processing since cryptsetup
+> >>    2.0.0 per "The LUKS2 format and features" part of
+> >>
+> >> https://mirrors.edge.kernel.org/pub/linux/utils/cryptsetup/v2.0/v2.0.0=
+-ReleaseNotes
+> >>
+> >> * Add file /usr/lib/tmpfiles.d/cryptsetup.conf to
+> >>    FILES_${PN} when systemd enabled in DISTRO_FEATURES
+> >>
+> >
+> > I am seeing a new failure for
+> > meta-oe/recipes-extended/libblockdev/libblockdev_2.16.bb
+> >
+> >
+> > | ../../../git/src/plugins/crypto.c: In function 'bd_crypto_tc_open':
+> > | ../../../git/src/plugins/crypto.c:973:12: error: missing initializer
+> > for field 'veracrypt_pim' of 'struct crypt_params_tcrypt'
+> > [-Werror=3Dmissing-field-initializers]
+> > |      struct crypt_params_tcrypt params =3D
+> > {NULL,0,NULL,0,NULL,NULL,NULL,0,0};
+> > |             ^~~~~~~~~~~~~~~~~~~
+> > | In file included from ../../../git/src/plugins/crypto.c:22:
+> > |
+> > /mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/libb=
+lockdev/2.16-r0/recipe-sysroot/usr/include/libcryptsetup.h:436:11:
+>
+> Hi Khem,
+>
+> The root cause for this failure is some API changed after cryptsetup
+> upgrade to 2.0.3 and libblockdev depends on cryptsetup and we should
+> also upgrade libblockdev accordingly.
+>
+> And I notice there is already a patch with subject "[oe]
+> [PATCH][meta-oe] libblockdev: 2.16 -> 2.18" has already upgraded the
+> libblockdev to 2.18.
+>
+> After upgrade to 2.18, the build failure for libblockdev which your saw
+> should be gone, so I think there is no need to resend V3 for cryptsetup.
+> What do you think?
 
-That is entirely likely. I have no idea which source files go into
-building which qt modules, or if any source files are shared between
-modules.
+Thats fine. I will pickup that series on top of
+this and see how it goes.
 
-Rasmus
-
+>
+> Thanks,
+>
+> > note: 'veracrypt_pim' declared here
+> > |   uint32_t veracrypt_pim;    /**< VeraCrypt Personal Iteration
+> > Multiplier */
+> > |            ^~~~~~~~~~~~~
+> >
+> >
+> >
+> >> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> >> ---
+> >>   .../{cryptsetup_1.7.4.bb =3D> cryptsetup_2.0.3.bb}     | 12 +++++++-=
+----
+> >>   1 file changed, 7 insertions(+), 5 deletions(-)
+> >>   rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_1.7.4.bb =3D>
+> >> cryptsetup_2.0.3.bb} (72%)
+> >>
+> >> diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+> >> b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+> >> similarity index 72%
+> >> rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+> >> rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+> >> index c13b764f7..df85add6a 100644
+> >> --- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_1.7.4.bb
+> >> +++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
+> >> @@ -4,16 +4,16 @@ device-mapper mappings. These include plain dm-crypt
+> >> volumes and \
+> >>   LUKS volumes. The difference is that LUKS uses a metadata header \
+> >>   and can hence offer more features than plain dm-crypt. On the other =
+\
+> >>   hand, the header is visible and vulnerable to damage."
+> >> -HOMEPAGE =3D "http://code.google.com/p/cryptsetup/"
+> >> +HOMEPAGE =3D "https://gitlab.com/cryptsetup/cryptsetup"
+> >>   SECTION =3D "console"
+> >>   LICENSE =3D "GPL-2.0-with-OpenSSL-exception"
+> >>   LIC_FILES_CHKSUM =3D
+> >> "file://COPYING;md5=3D32107dd283b1dfeb66c9b3e6be312326"
+> >> -DEPENDS =3D "util-linux libdevmapper popt libgcrypt"
+> >> +DEPENDS =3D "util-linux libdevmapper popt libgcrypt json-c"
+> >> -SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz=
+"
+> >> -SRC_URI[md5sum] =3D "058ed35c5b776032c2a036838f9e22a7"
+> >> -SRC_URI[sha256sum] =3D
+> >> "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
+> >> +SRC_URI =3D "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz=
+"
+> >> +SRC_URI[md5sum] =3D "ea1c722f8d4c4e36427628b679b1f819"
+> >> +SRC_URI[sha256sum] =3D
+> >> "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
+> >>   inherit autotools gettext pkgconfig
+> >> @@ -33,4 +33,6 @@ RRECOMMENDS_${PN} =3D "kernel-module-aes-generic \
+> >>   EXTRA_OECONF =3D "--enable-static"
+> >> +FILES_${PN} +=3D
+> >> "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/=
+tmpfiles.d/cryptsetup.conf',
+> >> '', d)}"
+> >> +
+> >>   BBCLASSEXTEND =3D "native nativesdk"
+> >>
+> >
 
