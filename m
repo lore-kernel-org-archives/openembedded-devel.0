@@ -1,49 +1,48 @@
-Return-Path: <narmstrong@baylibre.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id ED1977459D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id E515C78A91
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2018 13:45:28 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id s14-v6so6514209wmc.1
+	Thu, 19 Jul 2018 14:23:27 +0000 (UTC)
+Received: by mail-qt0-f180.google.com with SMTP id y19-v6so7318107qto.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2018 06:45:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=baylibre-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=hLIuu8PTiOhcRvY7Ptb1p+MCpQztDEhR94JaP2flk+A=;
-	b=nqHd8kIE+yymjpwyvWb1BcyJ551CBOZu9Ydt3KpRiRIBUu4UhjwH4hE/MChNg5uhzt
-	c9oMnzR0KaYdqMZjWi0zfi9Z9+9/ICCbkNRCRunlDe0zdX7WTIU4e5DaI8mxIXudJdy8
-	L0vJoyPTk2D+awbDx9GCUhCJzIO7Ze+Cj30X5aiEdJhvZau9ZuInaQEPAj+ljMNXrfHZ
-	w0NFZGYsVONuggitw6PFNslezmOMlpwRXSdlQOp0g83ei7nqZPLLs3CMMKWq9+dT9qTa
-	RDGU0XG9sZ0i6P6d6f/GxJ8nSB5N0EiSRhMb6wzOuCzL5/6JmC4HVLNTww1IJQVcRUEw
-	+5Vg==
+	Thu, 19 Jul 2018 07:23:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XykZYCzlEjLiecQHMu8Q7SFktoqeQAt06/9M7Dyl4nM=;
+	b=YRZGM2sbKOxLHk0T4UHTDyYEm5ZnbXOtMvLSI3mn21xrh6HnlHsPOIaonxhqycGkxd
+	4JFg70Io7yWU/WZZYKE7Xf+GsIa7lJF3lOD5sLu5coTkJE+SIcWMJkH785C1qCtu2Zcu
+	IQSXv/+aucJtWtQKLlTva5Y8y2hVqzpxbOK+3mjOup7nJ7ITr9vsQmBHh/da9JIPu39D
+	S7TkUBGxgzGFdD2ce0ObXsCoPFQt45mRApw4HIhar+EwPqpgSkREwrtJiRZcHLOiPKrt
+	yPmq1uCkz2qbTwxxI2bRPoC2RTNJ3PCAIZ7U1gvRmyOwO9l8hOxCyaYQydcrvYr+263o
+	xIkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hLIuu8PTiOhcRvY7Ptb1p+MCpQztDEhR94JaP2flk+A=;
-	b=e0tkCMIIt0+VYG8bd6g+qLO+QxNwhThs56xpwot0J5m8peNklvtNeXUfHlqWNBik9H
-	9MXZxKmz9Ea+ual9zX0Aivo/q9wn0F/ya0dpB799yE4Wo+venIovq6u/vGaTWIiqkhqb
-	1QqUdJpDKtGWLQaoHjET5k8GhoOs+MppAWX97N2fc3sjdzrPmTUhOlpBXlJ8SaDdI5KU
-	TsO26DKaN8Gk2I6pETq8RAyQmDR4EuM+OIpDejOo6y0A5T62dZJHwcB+ifkQLUGLNmHa
-	U2hZ3xCyif7QpQfFAXbCMDvFCSAcwHd/H4AGbrDTSIeJRLfDhD/qiopoUl2gSmA+NOHu
-	WbZQ==
-X-Gm-Message-State: AOUpUlGqkYpVQVckU6qMGSY8pu7WBs8dEnA6KMAMdrO9bmc2uoqffTRS
-	XATaG4VMmeMB8HNsYq0lQ2W4tvIxq94Gwg==
-X-Google-Smtp-Source: AAOMgpfb53GbQdk9HM1n8JlfWgrT4buLTpPRH6lYJ1z2dbPld+Rq6qUG1vl90HN6bBD9TYjvhnzODA==
-X-Received: by 2002:a1c:7408:: with SMTP id
-	p8-v6mr4166949wmc.118.1532007929164; 
-	Thu, 19 Jul 2018 06:45:29 -0700 (PDT)
-Received: from bender.home (LFbn-MAR-1-570-38.w90-118.abo.wanadoo.fr.
-	[90.118.15.38]) by smtp.gmail.com with ESMTPSA id
-	v1-v6sm17106035wrs.34.2018.07.19.06.45.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 19 Jul 2018 06:45:28 -0700 (PDT)
-From: Neil Armstrong <narmstrong@baylibre.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jul 2018 15:45:25 +0200
-Message-Id: <1532007925-9057-1-git-send-email-narmstrong@baylibre.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Neil Armstrong <narmstrong@baylibre.com>
-Subject: [meta-oe] [PATCH] libiio: fix build of python bindins
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XykZYCzlEjLiecQHMu8Q7SFktoqeQAt06/9M7Dyl4nM=;
+	b=ORuNJ6OeGDk7adxqaL5Y84ypAFyFkPOGphvHQ1cgI75byn783fdXv5W8OVEOl4oimT
+	PYlgEOiEHvJWvopJhDVpekhOuJqQXyaFCRqaurLL9FSMCTz+c+q7Dnj4RADEXcxIENw3
+	Wsfz8w/N4t+ie2qQ3fcIsR4lBfWBTjmOPoU+UJgIViz9Y+iN20SVA8uqS6q6hsLPY17c
+	FLTteVlzwFgREjkM15DQ/bvqvfdlthtzjKIayXx1mwMBnlYtpwRJBGDVukYEDncf47ik
+	CSzHFJfC12DjP3qlYDpP3nlz/u3zIMHPy8cujxCeIV3w6zUECC1Zx3kJotmoK+6Z4rZH
+	MaNQ==
+X-Gm-Message-State: AOUpUlG7p3FGKgP1I6fP2hoXpxu2bvOwZSUQ/Ui9fo1SZmJ0DmhRvspU
+	nCqr5KA1AqOI537rZ/9thGDK6rTWlI+XzyKGDuM=
+X-Google-Smtp-Source: AAOMgpfjf8IYJX+4kzJEbJvIIFsdjE+DtVjRHw+RzNKX+Sf1/i47CLnWkNlE5EXhEatJj5OLxdHXKSzuWuXNL3d/tSw=
+X-Received: by 2002:ac8:70c5:: with SMTP id
+	g5-v6mr9967625qtp.376.1532010208641; 
+	Thu, 19 Jul 2018 07:23:28 -0700 (PDT)
+MIME-Version: 1.0
+References: <1527446036-4930-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1B56A49860EB2D45ADE3731B15C959FD019455969C@G08CNEXMBPEKD01.g08.fujitsu.local>
+In-Reply-To: <1B56A49860EB2D45ADE3731B15C959FD019455969C@G08CNEXMBPEKD01.g08.fujitsu.local>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 19 Jul 2018 07:23:02 -0700
+Message-ID: <CAMKF1sq5csd9-5OHfzumJtVQejxb7hx_4TKofATUMwwr4dKmPg@mail.gmail.com>
+To: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] Fix confilct error in do_rootfs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,38 +55,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2018 13:45:29 -0000
+X-List-Received-Date: Thu, 19 Jul 2018 14:23:28 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-In the actual form, the python bindings are never built since the
-recipe does not depend on python, thus he cmake script does not
-detect python and does not build the bindings.
+On Thu, Jul 19, 2018 at 2:00 AM Lei, Maohui <leimaohui@cn.fujitsu.com> wrote:
+>
+> ping
+>
 
-Add a summy PACKAGECONFIG for the python bindings to make it simpler
-to disable.
+can you rebase on latest master and resend ?
 
-Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
----
- meta-oe/recipes-support/libiio/libiio_git.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index ba380ed..fa6f4c2 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -24,10 +24,11 @@ EXTRA_OECMAKE = " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
- "
- 
--PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
-+PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND PYTHON_BINDINGS"
- 
- PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
- PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
-+PACKAGECONFIG[PYTHON_BINDINGS] = ",,python"
- 
- PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-python"
- 
--- 
-2.7.4
-
+> > -----Original Message-----
+> > From: Lei, Maohui
+> > Sent: Monday, May 28, 2018 2:34 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Lei, Maohui
+> > Subject: [oe] [meta-networking][PATCH] Fix confilct error in do_rootfs.
+> >
+> > Error: Transaction check error:
+> >   file /usr/bin/mailq conflicts between attempted installs of esmtp-1.2-
+> > r0.x86_64 and postfix-3.2.2-r0.x86_64
+> >   file /usr/bin/newaliases conflicts between attempted installs of esmtp-1.2-
+> > r0.x86_64 and postfix-3.2.2-r0.x86_64
+> >
+> > Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+> > ---
+> >  meta-networking/recipes-daemons/postfix/postfix.inc | 7 ++++---
+> >  meta-networking/recipes-support/esmtp/esmtp_1.2.bb  | 6 +++---
+> >  2 files changed, 7 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-
+> > networking/recipes-daemons/postfix/postfix.inc
+> > index 09447d5..a5e8618 100644
+> > --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+> > +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+> > @@ -219,9 +219,10 @@ do_install_append_class-target() {
+> >      sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--
+> > sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
+> >  }
+> >
+> > -ALTERNATIVE_${PN} = "sendmail"
+> > -ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
+> > -ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
+> > +ALTERNATIVE_${PN} += "mailq newaliases"
+> > +ALTERNATIVE_TARGET[mailq] = "${bindir}/mailq"
+> > +ALTERNATIVE_TARGET[newaliases] = "${bindir}/newaliases"
+> > +
+> >  ALTERNATIVE_PRIORITY = "120"
+> >
+> >  ALTERNATIVE_${PN}-doc += "mailq.1 newaliases.1 sendmail.1"
+> > diff --git a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb b/meta-
+> > networking/recipes-support/esmtp/esmtp_1.2.bb
+> > index 2da73e7..9fb817b 100644
+> > --- a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+> > +++ b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+> > @@ -18,10 +18,10 @@ EXTRA_OECONF = "--with-libesmtp=${STAGING_EXECPREFIXDIR}"
+> >
+> >  inherit autotools update-alternatives
+> >
+> > -ALTERNATIVE_${PN} = "sendmail"
+> > +ALTERNATIVE_${PN} += "mailq newaliases"
+> > +ALTERNATIVE_TARGET[mailq] = "${bindir}/mailq"
+> > +ALTERNATIVE_TARGET[newaliases] = "${bindir}/newaliases"
+> >
+> > -ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
+> > -ALTERNATIVE_TARGET[sendmail] = "${bindir}/esmtp"
+> >  ALTERNATIVE_PRIORITY = "10"
+> >
+> >  ALTERNATIVE_${PN}-doc += "mailq.1 newaliases.1 sendmail.1"
+> > --
+> > 1.9.1
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
