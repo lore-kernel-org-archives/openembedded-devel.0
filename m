@@ -1,31 +1,23 @@
-Return-Path: <Hongzhi.Song@windriver.com>
+Return-Path: <Changqing.Li@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 04AC760110
+	by mail.openembedded.org (Postfix) with ESMTP id B27D07469C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jul 2018 06:04:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6K64vHk017671
+	Fri, 20 Jul 2018 08:19:41 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6K8Jf5W020837
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 19 Jul 2018 23:04:57 -0700
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Thu, 19 Jul 2018 23:04:56 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1531029841-6475-1-git-send-email-hongzhi.song@windriver.com>
-	<CAMKF1srOBABtnM6hE7jnM0xWK5SYqDBerEL_Wc4Ys+Bbuy1jQg@mail.gmail.com>
-	<ce227b25-5e4b-4948-e4e8-df9e800694b6@windriver.com>
-	<CAMKF1sqrzToZ3DM+_sJAKGguUaqv+qwReddDLMn8uiA+mWm3FQ@mail.gmail.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <7dc56cfc-bba1-1707-b25d-c2f6e7821464@windriver.com>
-Date: Fri, 20 Jul 2018 14:07:01 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Fri, 20 Jul 2018 01:19:41 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Fri, 20 Jul 2018 01:19:27 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 20 Jul 2018 16:19:25 +0800
+Message-ID: <1532074765-8918-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqrzToZ3DM+_sJAKGguUaqv+qwReddDLMn8uiA+mWm3FQ@mail.gmail.com>
-X-Originating-IP: [128.224.162.198]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] kselftest: Add a recipe on kernel selftest
+Subject: [PATCH][meta-oe] protobuf-c: fix build error with protobuf 3.6.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,200 +30,253 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jul 2018 06:04:59 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 20 Jul 2018 08:19:42 -0000
+Content-Type: text/plain
 
-Hi Raj,
+From: Changqing Li <changqing.li@windriver.com>
 
-Even if enable ptest, the error can't be reproduced. In fact, the recipe
+1. protoc-c depend on protobuf, from protobuf 3.6.0.1,
+scoped_array is removed, but protoc-c still use scoped_array,
+caused compile error.
 
-doesn't inherit ptest, it just compiles programs and output them, which
+2. fix compile error since missing namespace
 
-will be used by other oe modules(oe-selftest or ptest), to a custom 
-directory.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ ...c-fix-compile-error-with-protobuf-3.6.0.1.patch | 207 +++++++++++++++++++++
+ .../recipes-devtools/protobuf/protobuf-c_1.3.0.bb  |   4 +-
+ 2 files changed, 210 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch
 
-
-I know that you are busy with your job. And my request will add your 
-workload
-
-, which is not my intention. But it is really hard for me to reproduce 
-your error.~_~
-
-
-So I sincerely hope that could I get your whole environment, including 
-your metadata
-
-and other files? I think docker would be an easy way.
-
-
-Could you help me again? If I get your image, I think I will be 
-confident to fix the error.
-
-
---Hongzhi
-
-
-On 2018年07月20日 00:21, Khem Raj wrote:
-> can you try with ptest enabled in DISTRO_FEATURES
-> On Wed, Jul 18, 2018 at 12:57 AM Hongzhi, Song
-> <hongzhi.song@windriver.com> wrote:
->> Hi Raj,
->>
->> I have try my best to reproduce your error, but I failed.
->>
->> Could you help me to do the build in docker and share the dock image
->> with us. Or maybe you have a better method.
->>
->>
->> Thanks,
->>
->> Hongzhi
->>
->>
->> On 2018年07月10日 12:11, Khem Raj wrote:
->>> This is failing to build here
->>>
->>> | DEBUG: Executing shell function do_compile
->>> | NOTE: make -j 16 CROSS_COMPILE=x86_64-bec-linux- ARCH=x86
->>> CC=x86_64-bec-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3
->>> -mfpmath=sse -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
->>> -Wformat-security -Werror=format-security
->>> --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
->>> AR=x86_64-bec-linux-ar LD=x86_64-bec-linux-ld
->>> --sysroot=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/recipe-sysroot
->>>     DESTDIR=/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/image
->>> -C /mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
->>> | make: Entering directory
->>> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
->>> | Makefile:19: *** recipe commences before first target.  Stop.
->>> | make: Leaving directory
->>> '/mnt/a/oe/build/tmp/work/qemux86_64-bec-linux/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
->>> | ERROR: oe_runmake failed
->>> On Sat, Jul 7, 2018 at 11:05 PM Hongzhi.Song <hongzhi.song@windriver.com> wrote:
->>>> The recipe builds the framework for kernel-selftest. Now, it just
->>>> contains two sets of testcase, bpf and vm. We are appending others
->>>> to the recipe.
->>>>
->>>> It needs some features which will be written into relevant recipe.
->>>> But now, you should add them to conf/local.conf manually.
->>>> KERNEL_FEATURES_append += "features/bpf/bpf.scc"
->>>>
->>>> Signed-off-by: Dengke Du <dengke.du@windriver.com>
->>>> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
->>>> ---
->>>>    .../recipes-kernel/kselftest/kernel-selftest.bb    | 94 ++++++++++++++++++++++
->>>>    1 file changed, 94 insertions(+)
->>>>    create mode 100644 meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
->>>>
->>>> diff --git a/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
->>>> new file mode 100644
->>>> index 0000000..6f20bd3
->>>> --- /dev/null
->>>> +++ b/meta-oe/recipes-kernel/kselftest/kernel-selftest.bb
->>>> @@ -0,0 +1,94 @@
->>>> +SUMMARY = "Kernel selftest for Linux"
->>>> +DESCRIPTION = "Kernel selftest for Linux"
->>>> +LICENSE = "GPLv2"
->>>> +
->>>> +# for bpf and vm
->>>> +DEPENDS = " \
->>>> +    elfutils \
->>>> +    libcap \
->>>> +    libcap-ng \
->>>> +    fuse \
->>>> +    util-linux \
->>>> +    rsync-native \
->>>> +"
->>>> +# for vm
->>>> +RDEPENDS_${PN} += "libgcc \
->>>> +                   bash \
->>>> +"
->>>> +
->>>> +do_configure[depends] += "virtual/kernel:do_shared_workdir"
->>>> +
->>>> +inherit linux-kernel-base kernel-arch
->>>> +
->>>> +do_populate_lic[depends] += "virtual/kernel:do_patch"
->>>> +
->>>> +S = "${WORKDIR}/${BP}"
->>>> +
->>>> +# now we just test bpf and vm
->>>> +# we will append other kernel selftest in the future
->>>> +TEST_LIST = "bpf \
->>>> +             vm \
->>>> +"
->>>> +
->>>> +EXTRA_OEMAKE = '\
->>>> +    CROSS_COMPILE=${TARGET_PREFIX} \
->>>> +    ARCH=${ARCH} \
->>>> +    CC="${CC}" \
->>>> +    AR="${AR}" \
->>>> +    LD="${LD}" \
->>>> +'
->>>> +
->>>> +EXTRA_OEMAKE += "\
->>>> +    'DESTDIR=${D}' \
->>>> +"
->>>> +
->>>> +KERNEL_SELFTEST_SRC ?= "Makefile \
->>>> +                        include \
->>>> +                        tools \
->>>> +                        scripts \
->>>> +                        arch \
->>>> +"
->>>> +
->>>> +do_compile() {
->>>> +    for i in ${TEST_LIST}
->>>> +    do
->>>> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
->>>> +    done
->>>> +}
->>>> +
->>>> +do_install() {
->>>> +    for i in ${TEST_LIST}
->>>> +    do
->>>> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/opt/kselftest/${i} install
->>>> +    done
->>>> +
->>>> +    chown root:root  -R ${D}/opt/kselftest
->>>> +}
->>>> +
->>>> +do_configure() {
->>>> +    :
->>>> +}
->>>> +
->>>> +do_configure[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
->>>> +python copy_kselftest_source_from_kernel() {
->>>> +    sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
->>>> +    src_dir = d.getVar("STAGING_KERNEL_DIR")
->>>> +    dest_dir = d.getVar("S")
->>>> +    bb.utils.mkdirhier(dest_dir)
->>>> +    for s in sources:
->>>> +        src = oe.path.join(src_dir, s)
->>>> +        dest = oe.path.join(dest_dir, s)
->>>> +        if os.path.isdir(src):
->>>> +            oe.path.copytree(src, dest)
->>>> +        else:
->>>> +            bb.utils.copyfile(src, dest)
->>>> +}
->>>> +
->>>> +remove_clang_related() {
->>>> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
->>>> +}
->>>> +
->>>> +PACKAGE_ARCH = "${MACHINE_ARCH}"
->>>> +
->>>> +INHIBIT_PACKAGE_DEBUG_SPLIT="1"
->>>> +FILES_${PN} += "/opt/kselftest/"
->>>> --
->>>> 2.8.1
->>>>
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch
+new file mode 100644
+index 0000000..17f5b58
+--- /dev/null
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch
+@@ -0,0 +1,207 @@
++From fb77cbce29d9ea4d4acbfd6ba72cb1cffabf649a Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Fri, 20 Jul 2018 11:47:53 +0800
++Subject: [PATCH] protobuf-c: fix compile error with protobuf 3.6.0.1
++
++Backport from upstream:
++https://github.com/protobuf-c/protobuf-c/pull/328
++
++1. protoc-c depend on protobuf, from protobuf 3.6.0.1,
++scoped_array is removed, but protoc-c still use scoped_array,
++caused compile error.
++
++2. fix compile error since missing namespace
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ protoc-c/c_field.cc     |  2 +-
++ protoc-c/c_field.h      |  2 +-
++ protoc-c/c_file.cc      |  8 ++++----
++ protoc-c/c_file.h       | 10 +++++-----
++ protoc-c/c_generator.cc | 12 ++++++------
++ protoc-c/c_helpers.cc   |  4 +++-
++ protoc-c/c_message.cc   |  6 +++---
++ protoc-c/c_message.h    |  7 ++++---
++ 8 files changed, 27 insertions(+), 24 deletions(-)
++
++diff --git a/protoc-c/c_field.cc b/protoc-c/c_field.cc
++index 9fa56ef..eaa38d2 100644
++--- a/protoc-c/c_field.cc
+++++ b/protoc-c/c_field.cc
++@@ -189,7 +189,7 @@ void FieldGenerator::GenerateDescriptorInitializerGeneric(io::Printer* printer,
++ FieldGeneratorMap::FieldGeneratorMap(const Descriptor* descriptor)
++   : descriptor_(descriptor),
++     field_generators_(
++-      new scoped_ptr<FieldGenerator>[descriptor->field_count()]) {
+++      new std::unique_ptr<FieldGenerator>[descriptor->field_count()]) {
++   // Construct all the FieldGenerators.
++   for (int i = 0; i < descriptor->field_count(); i++) {
++     field_generators_[i].reset(MakeGenerator(descriptor->field(i)));
++diff --git a/protoc-c/c_field.h b/protoc-c/c_field.h
++index 91f1a03..94b2fad 100644
++--- a/protoc-c/c_field.h
+++++ b/protoc-c/c_field.h
++@@ -117,7 +117,7 @@ class FieldGeneratorMap {
++ 
++  private:
++   const Descriptor* descriptor_;
++-  scoped_array<scoped_ptr<FieldGenerator> > field_generators_;
+++  std::unique_ptr<std::unique_ptr<FieldGenerator>[]> field_generators_;
++ 
++   static FieldGenerator* MakeGenerator(const FieldDescriptor* field);
++ 
++diff --git a/protoc-c/c_file.cc b/protoc-c/c_file.cc
++index 9851768..6dae516 100644
++--- a/protoc-c/c_file.cc
+++++ b/protoc-c/c_file.cc
++@@ -83,13 +83,13 @@ FileGenerator::FileGenerator(const FileDescriptor* file,
++                              const string& dllexport_decl)
++   : file_(file),
++     message_generators_(
++-      new scoped_ptr<MessageGenerator>[file->message_type_count()]),
+++      new std::unique_ptr<MessageGenerator>[file->message_type_count()]),
++     enum_generators_(
++-      new scoped_ptr<EnumGenerator>[file->enum_type_count()]),
+++      new std::unique_ptr<EnumGenerator>[file->enum_type_count()]),
++     service_generators_(
++-      new scoped_ptr<ServiceGenerator>[file->service_count()]),
+++      new std::unique_ptr<ServiceGenerator>[file->service_count()]),
++     extension_generators_(
++-      new scoped_ptr<ExtensionGenerator>[file->extension_count()]) {
+++      new std::unique_ptr<ExtensionGenerator>[file->extension_count()]) {
++ 
++   for (int i = 0; i < file->message_type_count(); i++) {
++     message_generators_[i].reset(
++diff --git a/protoc-c/c_file.h b/protoc-c/c_file.h
++index ed38ce4..adc2841 100644
++--- a/protoc-c/c_file.h
+++++ b/protoc-c/c_file.h
++@@ -98,13 +98,13 @@ class FileGenerator {
++  private:
++   const FileDescriptor* file_;
++ 
++-  scoped_array<scoped_ptr<MessageGenerator> > message_generators_;
++-  scoped_array<scoped_ptr<EnumGenerator> > enum_generators_;
++-  scoped_array<scoped_ptr<ServiceGenerator> > service_generators_;
++-  scoped_array<scoped_ptr<ExtensionGenerator> > extension_generators_;
+++  std::unique_ptr<std::unique_ptr<MessageGenerator>[]> message_generators_;
+++  std::unique_ptr<std::unique_ptr<EnumGenerator>[]> enum_generators_;
+++  std::unique_ptr<std::unique_ptr<ServiceGenerator>[]> service_generators_;
+++  std::unique_ptr<std::unique_ptr<ExtensionGenerator>[]> extension_generators_;
++ 
++   // E.g. if the package is foo.bar, package_parts_ is {"foo", "bar"}.
++-  vector<string> package_parts_;
+++  std::vector<string> package_parts_;
++ 
++   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
++ };
++diff --git a/protoc-c/c_generator.cc b/protoc-c/c_generator.cc
++index a0d0cb6..c46cfe4 100644
++--- a/protoc-c/c_generator.cc
+++++ b/protoc-c/c_generator.cc
++@@ -80,13 +80,13 @@ namespace c {
++ //   "foo=bar,baz,qux=corge"
++ // parses to the pairs:
++ //   ("foo", "bar"), ("baz", ""), ("qux", "corge")
++-void ParseOptions(const string& text, vector<pair<string, string> >* output) {
++-  vector<string> parts;
+++void ParseOptions(const string& text, std::vector<std::pair<string, string> >* output) {
+++  std::vector<string> parts;
++   SplitStringUsing(text, ",", &parts);
++ 
++   for (unsigned i = 0; i < parts.size(); i++) {
++     string::size_type equals_pos = parts[i].find_first_of('=');
++-    pair<string, string> value;
+++    std::pair<string, string> value;
++     if (equals_pos == string::npos) {
++       value.first = parts[i];
++       value.second = "";
++@@ -105,7 +105,7 @@ bool CGenerator::Generate(const FileDescriptor* file,
++                             const string& parameter,
++                             OutputDirectory* output_directory,
++                             string* error) const {
++-  vector<pair<string, string> > options;
+++  std::vector<std::pair<string, string> > options;
++   ParseOptions(parameter, &options);
++ 
++   // -----------------------------------------------------------------
++@@ -149,7 +149,7 @@ bool CGenerator::Generate(const FileDescriptor* file,
++ 
++   // Generate header.
++   {
++-    scoped_ptr<io::ZeroCopyOutputStream> output(
+++    std::unique_ptr<io::ZeroCopyOutputStream> output(
++       output_directory->Open(basename + ".h"));
++     io::Printer printer(output.get(), '$');
++     file_generator.GenerateHeader(&printer);
++@@ -157,7 +157,7 @@ bool CGenerator::Generate(const FileDescriptor* file,
++ 
++   // Generate cc file.
++   {
++-    scoped_ptr<io::ZeroCopyOutputStream> output(
+++    std::unique_ptr<io::ZeroCopyOutputStream> output(
++       output_directory->Open(basename + ".c"));
++     io::Printer printer(output.get(), '$');
++     file_generator.GenerateSource(&printer);
++diff --git a/protoc-c/c_helpers.cc b/protoc-c/c_helpers.cc
++index b79b5b0..f4ef73d 100644
++--- a/protoc-c/c_helpers.cc
+++++ b/protoc-c/c_helpers.cc
++@@ -86,6 +86,8 @@ namespace c {
++ #pragma warning(disable:4996)
++ #endif
++ 
+++using std::vector;
+++
++ string DotsToUnderscores(const string& name) {
++   return StringReplace(name, ".", "_", true);
++ }
++@@ -559,7 +561,7 @@ static int CEscapeInternal(const char* src, int src_len, char* dest,
++ }
++ string CEscape(const string& src) {
++   const int dest_length = src.size() * 4 + 1; // Maximum possible expansion
++-  scoped_array<char> dest(new char[dest_length]);
+++  std::unique_ptr<char[]> dest(new char[dest_length]);
++   const int len = CEscapeInternal(src.data(), src.size(),
++                                   dest.get(), dest_length, false);
++   GOOGLE_DCHECK_GE(len, 0);
++diff --git a/protoc-c/c_message.cc b/protoc-c/c_message.cc
++index 6b22c71..85a946e 100755
++--- a/protoc-c/c_message.cc
+++++ b/protoc-c/c_message.cc
++@@ -83,11 +83,11 @@ MessageGenerator::MessageGenerator(const Descriptor* descriptor,
++   : descriptor_(descriptor),
++     dllexport_decl_(dllexport_decl),
++     field_generators_(descriptor),
++-    nested_generators_(new scoped_ptr<MessageGenerator>[
+++    nested_generators_(new std::unique_ptr<MessageGenerator>[
++       descriptor->nested_type_count()]),
++-    enum_generators_(new scoped_ptr<EnumGenerator>[
+++    enum_generators_(new std::unique_ptr<EnumGenerator>[
++       descriptor->enum_type_count()]),
++-    extension_generators_(new scoped_ptr<ExtensionGenerator>[
+++    extension_generators_(new std::unique_ptr<ExtensionGenerator>[
++       descriptor->extension_count()]) {
++ 
++   for (int i = 0; i < descriptor->nested_type_count(); i++) {
++diff --git a/protoc-c/c_message.h b/protoc-c/c_message.h
++index 8b115d1..114c2d0 100644
++--- a/protoc-c/c_message.h
+++++ b/protoc-c/c_message.h
++@@ -126,9 +126,10 @@ class MessageGenerator {
++   const Descriptor* descriptor_;
++   string dllexport_decl_;
++   FieldGeneratorMap field_generators_;
++-  scoped_array<scoped_ptr<MessageGenerator> > nested_generators_;
++-  scoped_array<scoped_ptr<EnumGenerator> > enum_generators_;
++-  scoped_array<scoped_ptr<ExtensionGenerator> > extension_generators_;
+++
+++  std::unique_ptr<std::unique_ptr<MessageGenerator>[]> nested_generators_;
+++  std::unique_ptr<std::unique_ptr<EnumGenerator>[]> enum_generators_;
+++  std::unique_ptr<std::unique_ptr<ExtensionGenerator>[]> extension_generators_;
++ 
++   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageGenerator);
++ };
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
+index 9b69690..7017b69 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
+@@ -15,7 +15,9 @@ DEPENDS = "protobuf-native protobuf"
+ PV .= "+git${SRCPV}"
+ SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
+ 
+-SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
++SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
++           file://0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch \
++"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.7.4
 
 
