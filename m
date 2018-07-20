@@ -1,48 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 13ACC78A8C
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id ABB9560290
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2018 17:13:25 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id t5-v6so7860565qtn.3
+	Fri, 20 Jul 2018 02:29:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="42458598"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Jul 2018 10:29:58 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 55EB14B5CF67
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jul 2018 10:13:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=2T96d68XaPO4RuyjwhSWXyMU6FzK1g1EDu0XHujJ13Q=;
-	b=qk8H8e7Cv93R6vqYRRJoUS98Qb31iq4azYpTwguKTzXzOCH/uB4fsBvfGbUYq5wcJz
-	/J+KohTp7G7ZZhLxHzdsZtooRv8YK+cZONiSVFgSYdUBBX4ZgAsmnNH3ZiWtyFDp0Kbu
-	5sTMs8DBd/AhG/Wl6UTahU3hzQi+6BS73I/Y40X0iRWk909WIVaLN4eaAhSW9SAdmP1B
-	KnamcHCvcc16myqcED9D8SYlOMDsCymEViB9X2+n4lbxf45UxetBW8KebHKe5vpU1aq2
-	fHWmFaWIIePlQc16K7cci132Jb8pQHZSz9VBL637PLvuoHQYYhfaPKq27cwednpPr1Iq
-	01aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=2T96d68XaPO4RuyjwhSWXyMU6FzK1g1EDu0XHujJ13Q=;
-	b=t1qj+oqLV5UMJwt2q+1ukHU5FvRt8+wmi9wwyssAPiir1IDMVA5O7lCPnHvdHbIHNK
-	7GI0ZgaQFAEUeWY/wQB9jo0mh6cEF3+zx/wwHZFmsO/rbPYfD+tFPv7iZzomiHT6ZhLP
-	jxGupoZhAMdWPHyk+8XWCozW/GGeCQk0dRSjNyQWN8Y9IMS5KPzEJ8d3IW3SoxZ3n/4w
-	//4ZKgiWdhid8AHbzuM6zgSitjiC7MrKp0+OGVCmZoC2G9ukmU2wu5akrgzSZd0B4zIx
-	M0OU7XY+dd4WkaKG8D0eRx7Az5gpXt4vn6u5HRY5N2rP/Fm+6SWyqLKgyPhqXH8/LaM/
-	s89Q==
-X-Gm-Message-State: AOUpUlEOzofsywfXdWZBBdmdfAthqBd+JvrhDk+mRP7zzd37MfEjLwl9
-	K/RjUfo4h3/zBYqlZ6V/b5bDSml/RDq8qXsg2o7xxpDO
-X-Google-Smtp-Source: AAOMgpd9ZnOq90KH+B6peGnuz80tOGhBQDPE+Fi2GaI0AaWTlflURW1HoHF61pBamTMPnouu+xXjbdG9nw2VUcYm0tI=
-X-Received: by 2002:a0c:d2f3:: with SMTP id
-	x48-v6mr11688828qvh.214.1532020406607; 
-	Thu, 19 Jul 2018 10:13:26 -0700 (PDT)
+	Fri, 20 Jul 2018 10:29:56 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.227) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.399.0; Fri, 20 Jul 2018 10:29:58 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <1529967003-49427-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-References: <1531980780-138112-1-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1531980780-138112-1-git-send-email-changqing.li@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 19 Jul 2018 10:12:49 -0700
-Message-ID: <CAMKF1spShdTYnsMubxu=nGSOcZSk9mcD4JeK512Rgm+MmUgryQ@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] protobuf: upgrade 3.5.1 -> 3.6.0.1
+X-Originating-IP: [10.167.225.227]
+X-yoursite-MailScanner-ID: 55EB14B5CF67.AF6AA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] ctdb: Has been integrated into samba. So, there is no need to maitain this recipe anymore.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,194 +36,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jul 2018 17:13:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Fri, 20 Jul 2018 02:30:00 -0000
+X-Original-Date: Mon, 25 Jun 2018 15:50:03 -0700
+X-List-Received-Date: Fri, 20 Jul 2018 02:30:00 -0000
+Content-Type: text/plain
 
-On Wed, Jul 18, 2018 at 11:13 PM <changqing.li@windriver.com> wrote:
->
-> From: Changqing Li <changqing.li@windriver.com>
->
-> License-Update: copyright year updated and clean some useless content
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  .../0001-protobuf-fix-configure-error.patch        | 33 ++++++++++++++++=
-++++++
->  .../{protobuf_3.5.1.bb =3D> protobuf_3.6.0.1.bb}     | 14 ++++++---
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../01-support-cross-compile-for-linux-os.patch    | 24 ---------
+ .../ctdb/02-link-rep_snprintf-for-ltdbtool.patch   | 17 -------
+ ...rvice-ensure-the-PID-directory-is-created.patch | 25 ----------
+ meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb | 57 ----------------------
+ 4 files changed, 123 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch
+ delete mode 100644 meta-networking/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch
+ delete mode 100644 meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
+ delete mode 100644 meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
+
+diff --git a/meta-networking/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch b/meta-networking/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch
+deleted file mode 100644
+index c9195b4..0000000
+--- a/meta-networking/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch
++++ /dev/null
+@@ -1,24 +0,0 @@
+-support cross-compile for linux-os.
+-
+-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+-
+-diff -Nurp ctdb-2.5.1.orig/configure ctdb-2.5.1/configure
+---- ctdb-2.5.1.orig/configure	2015-05-07 16:24:28.545000238 +0900
+-+++ ctdb-2.5.1/configure	2015-05-07 16:28:20.894000244 +0900
+-@@ -10692,10 +10692,16 @@ if test x"$libreplace_cv_HAVE_GETADDRINF
+- 	# see bug 5910, use our replacements if we detect
+- 	# a broken system.
+- 	if test "$cross_compiling" = yes; then :
+-+		case "$target_os" in
+-+		*linux*)
+-+			;;
+-+		*)
+-   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+- $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+- as_fn_error $? "cannot run test program while cross compiling
+- See \`config.log' for more details" "$LINENO" 5; }
+-+			;;
+-+		esac
+- else
+-   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+- /* end confdefs.h.  */
+diff --git a/meta-networking/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch b/meta-networking/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch
+deleted file mode 100644
+index 1294fe4..0000000
+--- a/meta-networking/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+-link rep_snprintf from lib/replace/snprintf.o for ltdbtool
+-
+-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+-
+-Index: ctdb-2.5.6/Makefile.in
+-===================================================================
+---- ctdb-2.5.6.orig/Makefile.in
+-+++ ctdb-2.5.6/Makefile.in
+-@@ -176,7 +176,7 @@ bin/ctdb: $(CTDB_CLIENT_OBJ) tools/ctdb.
+- 	@echo Linking $@
+- 	$(WRAPPER) $(CC) $(CFLAGS) -o $@ tools/ctdb.o tools/ctdb_vacuum.o $(CTDB_CLIENT_OBJ) $(LIB_FLAGS)
+- 
+--bin/ltdbtool: tools/ltdbtool.o $(TDB_OBJ)
+-+bin/ltdbtool: tools/ltdbtool.o $(TDB_OBJ) lib/replace/snprintf.o
+- 	@echo Linking $@
+- 	$(WRAPPER) $(CC) $(CFLAGS) -o $@ $+ $(LIB_FLAGS)
+- 
+diff --git a/meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch b/meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
+deleted file mode 100644
+index a7e987b..0000000
+--- a/meta-networking/recipes-support/ctdb/ctdb/service-ensure-the-PID-directory-is-created.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From f02ff7383f1cc0c118732352ccbae476c7b3b3ba Mon Sep 17 00:00:00 2001
+-From: Mark Asselstine <mark.asselstine@windriver.com>
+-Date: Tue, 17 Nov 2015 16:17:00 -0500
+-Subject: [PATCH] service: ensure the PID directory is created
+-
+-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+----
+- config/ctdb.service | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/config/ctdb.service b/config/ctdb.service
+-index ea37c30..8537105 100644
+---- a/config/ctdb.service
+-+++ b/config/ctdb.service
+-@@ -5,6 +5,7 @@ After=network.target
+- [Service]
+- Type=forking
+- LimitCORE=infinity
+-+RuntimeDirectory=/run/ctdb
+- PIDFile=/run/ctdb/ctdbd.pid
+- ExecStart=/usr/sbin/ctdbd_wrapper /run/ctdb/ctdbd.pid start
+- ExecStop=/usr/sbin/ctdbd_wrapper /run/ctdb/ctdbd.pid stop
+--- 
+-2.1.4
+-
+diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
+deleted file mode 100644
+index df1a19e..0000000
+--- a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
++++ /dev/null
+@@ -1,57 +0,0 @@
+-DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
+-used by Samba and other projects to store temporary data. If an \
+-application is already using TDB for temporary data it is very easy \
+-to convert that application to be cluster aware and use CTDB instead."
+-HOMEPAGE = "https://ctdb.samba.org/"
+-LICENSE = "GPL-2.0+ & LGPL-3.0+ & GPL-3.0+"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+-                    file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+-                    file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 \
+-                    "
+-
+-SRC_URI = "https://ftp.samba.org/pub/${BPN}/${BP}.tar.gz \
+-           file://01-support-cross-compile-for-linux-os.patch \
+-           file://02-link-rep_snprintf-for-ltdbtool.patch \
+-           file://service-ensure-the-PID-directory-is-created.patch \
+-          "
+-
+-SRC_URI[md5sum] = "efc50109f90a4c790124c35e4ba234ad"
+-SRC_URI[sha256sum] = "fc1cdd7efcc91afc629f21408281bba5da107b9c17e74bdee2f28a532d14f874"
+-
+-inherit autotools-brokensep pkgconfig systemd
+-
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[libtdb] = "--without-included-tdb,--with-included-tdb,libtdb"
+-
+-PARALLEL_MAKE = ""
+-
+-DEPENDS += "popt libtevent libtalloc libldb libtirpc"
+-CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+-LDFLAGS += "-ltirpc"
+-
+-# ctdbd_wrapper requires pgrep, hence procps
+-RDEPENDS_${PN} += "procps"
+-
+-do_configure() {
+-    gnu-configize --force ${S}
+-    oe_runconf
+-}
+-
+-do_install_append() {
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${S}/config/ctdb.service ${D}${systemd_unitdir}/system
+-    sed -i -e 's,/usr/sbin/,${sbindir}/,' ${D}${systemd_unitdir}/system/ctdb.service
+-    sed -i -e 's,\([=\ ]\)/run/,\1${localstatedir}/run/,' ${D}${systemd_unitdir}/system/ctdb.service
+-
+-    rm -r ${D}/${localstatedir}/run
+-}
+-
+-# The systemd service is disabled by default, as the service will fail to
+-# start without /etc/ctdb/nodes. If the user supplies this, they can re-enable
+-# the service.
+-SYSTEMD_AUTO_ENABLE = "disable"
+-SYSTEMD_SERVICE_${PN} = "ctdb.service"
+-
+-# onnode is a shell script with bashisms and bash #!
+-RDEPENDS_${PN} += "bash"
+-- 
+2.7.4
 
 
-my host has gcc8 and it failed to build native version
-NOTE: Running task 13158 of 33598
-(virtual:native:/mnt/a/oe/sources/meta-openembedded/meta-oe/recipes-devtool=
-s/protobuf/protobuf-c_1.3.0.bb:do_compile)
-|                                ^
-|    vector<pair<string, string> > options;
-|                      ^
-| ../git/protoc-c/c_generator.cc:108:29: error: expected
-primary-expression before =E2=80=98>=E2=80=99 token
-|    vector<pair<string, string> > options;
-|                              ^
-| ../git/protoc-c/c_generator.cc:108:31: error: expected
-primary-expression before =E2=80=98>=E2=80=99 token
-|    vector<pair<string, string> > options;
-|                                ^
-| ../git/protoc-c/c_generator.cc:108:33: error: =E2=80=98options=E2=80=99 w=
-as not
-declared in this scope
-|    vector<pair<string, string> > options;
-|                                  ^~~~~~~
-| ../git/protoc-c/c_generator.cc:152:5: error: =E2=80=98scoped_ptr=E2=80=99=
- was not
-declared in this scope
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|      ^~~~~~~~~~
-| ../git/protoc-c/c_generator.cc:152:5: note: suggested alternative:
-=E2=80=98sched_param=E2=80=99
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|      ^~~~~~~~~~
-|      sched_param
-| ../git/protoc-c/c_generator.cc:152:40: error: expected
-primary-expression before =E2=80=98>=E2=80=99 token
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|                                         ^
-| ../git/protoc-c/c_generator.cc:152:42: error: =E2=80=98output=E2=80=99 wa=
-s not
-declared in this scope
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|                                           ^~~~~~
-| ../git/protoc-c/c_generator.cc:152:42: note: suggested alternative: =E2=
-=80=98getpt=E2=80=99
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|                                           ^~~~~~
-|                                           getpt
-| ../git/protoc-c/c_generator.cc:160:5: error: =E2=80=98scoped_ptr=E2=80=99=
- was not
-declared in this scope
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|      ^~~~~~~~~~
-| ../git/protoc-c/c_generator.cc:160:5: note: suggested alternative:
-=E2=80=98sched_param=E2=80=99
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|      ^~~~~~~~~~
-|      sched_param
-| ../git/protoc-c/c_generator.cc:160:40: error: expected
-primary-expression before =E2=80=98>=E2=80=99 token
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|                                         ^
-| ../git/protoc-c/c_generator.cc:160:42: error: =E2=80=98output=E2=80=99 wa=
-s not
-declared in this scope
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|                                           ^~~~~~
-| ../git/protoc-c/c_generator.cc:160:42: note: suggested alternative: =E2=
-=80=98getpt=E2=80=99
-|      scoped_ptr<io::ZeroCopyOutputStream> output(
-|                                           ^~~~~~
-|                                           getpt
-| make: *** [Makefile:1497: protoc-c/protoc_gen_c-c_primitive_field.o] Erro=
-r 1
-| make: *** [Makefile:1441: protoc-c/protoc_gen_c-c_generator.o] Error 1
-| ERROR: oe_runmake failed
 
->  2 files changed, 43 insertions(+), 4 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-proto=
-buf-fix-configure-error.patch
->  rename meta-oe/recipes-devtools/protobuf/{protobuf_3.5.1.bb =3D> protobu=
-f_3.6.0.1.bb} (86%)
->
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix=
--configure-error.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-pr=
-otobuf-fix-configure-error.patch
-> new file mode 100644
-> index 0000000..a2f7a4b
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-config=
-ure-error.patch
-> @@ -0,0 +1,33 @@
-> +From 52959e8e01e39139d18f752e97283e45b4b7a426 Mon Sep 17 00:00:00 2001
-> +From: Changqing Li <changqing.li@windriver.com>
-> +Date: Wed, 18 Jul 2018 17:52:34 +0800
-> +Subject: [PATCH] protobuf: fix configure error
-> +
-> +fix below error:
-> +gnu-configize: 'configure.ac' or 'configure.in' is required
-> +
-> +third_party/googletest is git submodule of protobuf. Above error
-> +caused by missing submodule googletest.
-> +
-> +Upstream-Status: Inappropriate [oe-specific]
-> +
-> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> +---
-> + configure.ac | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index aec10cf..7fbe57d 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -214,7 +214,6 @@ AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
-> + #   too.
-> + export CFLAGS
-> + export CXXFLAGS
-> +-AC_CONFIG_SUBDIRS([third_party/googletest])
-> +
-> + AC_CONFIG_FILES([Makefile src/Makefile benchmarks/Makefile conformance/=
-Makefile protobuf.pc protobuf-lite.pc])
-> + AC_OUTPUT
-> +--
-> +2.7.4
-> +
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb b/meta-o=
-e/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
-> similarity index 86%
-> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
-> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
-> index 8cef391..5850744 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
-> @@ -5,18 +5,19 @@ all of its internal RPC protocols and file formats."
->  HOMEPAGE =3D "https://github.com/google/protobuf"
->  SECTION =3D "console/tools"
->  LICENSE =3D "BSD-3-Clause"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D35953c752efc9299b184f91bef540=
-095"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D37b5762e07f0af8c74ce80a8bda42=
-66b"
->
->  DEPENDS =3D "zlib"
->  DEPENDS_append_class-target =3D " protobuf-native"
->
->  PV .=3D "+git${SRCPV}"
-> -SRCREV =3D "106ffc04be1abf3ff3399f54ccf149815b287dd9"
->
-> -SRC_URI =3D "git://github.com/google/protobuf.git;branch=3D3.5.x \
-> +SRCREV =3D "ce044817c7ba0aea27c3fd8e496635d94d20a755"
-> +
-> +SRC_URI =3D "git://github.com/google/protobuf.git;branch=3D3.6.x \
->             file://run-ptest \
-> +           file://0001-protobuf-fix-configure-error.patch \
->  "
-> -
->  S =3D "${WORKDIR}/git"
->
->  inherit autotools-brokensep pkgconfig ptest
-> @@ -82,3 +83,8 @@ RDEPENDS_${PN}-ptest =3D "bash python-protobuf"
->  MIPS_INSTRUCTION_SET =3D "mips"
->
->  BBCLASSEXTEND =3D "native nativesdk"
-> +
-> +LDFLAGS_append_arm =3D " -latomic"
-> +LDFLAGS_append_mips =3D " -latomic"
-> +LDFLAGS_append_powerpc =3D " -latomic"
-> +LDFLAGS_append_mipsel =3D " -latomic"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
