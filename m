@@ -1,24 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 231D46FF0E
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 08788753E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 02:28:36 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6N2SZS7020242
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 22 Jul 2018 19:28:35 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Sun, 22 Jul 2018 19:28:34 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>, <rasmus.villemoes@prevas.dk>
-Date: Mon, 23 Jul 2018 10:38:46 +0800
-Message-ID: <1532313526-4782-1-git-send-email-hongxu.jia@windriver.com>
+	Mon, 23 Jul 2018 04:44:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6N4iOYp009098
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Jul 2018 21:44:24 -0700 (PDT)
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Sun, 22 Jul 2018 21:44:23 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 23 Jul 2018 12:44:18 +0800
+Message-ID: <1532321061-20994-1-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] vim/vim-tiny: fix multiple .bb files provide xxd
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-webserver][PATCH] apache2: upgrade 2.4.33 -> 2.3.34
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +31,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2018 02:28:37 -0000
+X-List-Received-Date: Mon, 23 Jul 2018 04:44:24 -0000
 Content-Type: text/plain
 
-Since the following commit applied:
-...
-commit 34988c5319b08a14a145d82ed1057468f22632f9
-Author: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Date:   Wed Jul 18 10:14:51 2018 +0200
+Security fixes:
 
-    vim: provide xxd
-...
+CVE-2018-8011
+mod_md: DoS via Coredumps on specially crafted requests
 
-And vim-tiny recipe contains vim reicpe, it caused both of
-them provides xxd. Add `${PN}' prefix to it.
+CVE-2018-1333
+mod_http2: DoS for HTTP/2 connections by specially crafted requests
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-support/vim/vim_8.1.0172.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../apache2/{apache2-native_2.4.33.bb => apache2-native_2.4.34.bb}    | 4 ++--
+ .../recipes-httpd/apache2/{apache2_2.4.33.bb => apache2_2.4.34.bb}    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.33.bb => apache2-native_2.4.34.bb} (91%)
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.33.bb => apache2_2.4.34.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/vim/vim_8.1.0172.bb b/meta-oe/recipes-support/vim/vim_8.1.0172.bb
-index b188c15..fd2afbc 100644
---- a/meta-oe/recipes-support/vim/vim_8.1.0172.bb
-+++ b/meta-oe/recipes-support/vim/vim_8.1.0172.bb
-@@ -112,4 +112,4 @@ ALTERNATIVE_PRIORITY = "100"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.33.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
+similarity index 91%
+rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.33.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
+index a471036..a3a6804 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.33.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
+@@ -15,8 +15,8 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+ S = "${WORKDIR}/httpd-${PV}"
  
- BBCLASSEXTEND = "native"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+-SRC_URI[md5sum] = "6ef469d3f16fffeb688bc6e0346823e5"
+-SRC_URI[sha256sum] = "de02511859b00d17845b9abdd1f975d5ccb5d0b280c567da5bf2ad4b70846f05"
++SRC_URI[md5sum] = "818adca52f3be187fe45d6822755be95"
++SRC_URI[sha256sum] = "fa53c95631febb08a9de41fd2864cfff815cf62d9306723ab0d4b8d7aa1638f0"
  
--PROVIDES += "xxd"
-+PROVIDES += "${PN}-xxd"
+ EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+                 --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.33.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
+similarity index 98%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.33.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
+index 696378e..6642f2b 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.33.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
+@@ -23,8 +23,8 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
+           "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+-SRC_URI[md5sum] = "6ef469d3f16fffeb688bc6e0346823e5"
+-SRC_URI[sha256sum] = "de02511859b00d17845b9abdd1f975d5ccb5d0b280c567da5bf2ad4b70846f05"
++SRC_URI[md5sum] = "818adca52f3be187fe45d6822755be95"
++SRC_URI[sha256sum] = "fa53c95631febb08a9de41fd2864cfff815cf62d9306723ab0d4b8d7aa1638f0"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
 2.7.4
 
