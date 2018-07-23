@@ -1,30 +1,25 @@
-Return-Path: <hongl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BE6874D59
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BF2D474591
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 09:33:59 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="42543811"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Jul 2018 17:33:50 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9CBA84B66A22
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 17:33:49 +0800 (CST)
-Received: from localhost.local (10.167.225.78) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.399.0; Mon, 23 Jul 2018 17:33:48 +0800
-From: Hong Liu <hongl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Jul 2018 17:33:23 +0800
-Message-ID: <20180723093326.12122-1-hongl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.14.3
+	Mon, 23 Jul 2018 10:08:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6NA8chp031263
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 23 Jul 2018 03:08:38 -0700
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
+	Mon, 23 Jul 2018 03:08:37 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Mon, 23 Jul 2018 03:08:36 -0700
+Message-ID: <20180723100836.12809-2-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20180723100836.12809-1-hongzhi.song@windriver.com>
+References: <20180723100836.12809-1-hongzhi.song@windriver.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.78]
-X-yoursite-MailScanner-ID: 9CBA84B66A22.AF472
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-networking][PATCH] libtalloc: 2.1.11 -> 2.1.14
+Subject: [meta-oe][PATCH v3 1/1] kernel-selftest: add support for musllibc and perfect the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,81 +32,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2018 09:33:59 -0000
+X-List-Received-Date: Mon, 23 Jul 2018 10:08:38 -0000
 Content-Type: text/plain
 
-1.Upgrade  libtalloc form 2.1.11 to 2.1.14.
+1. Add support for musllibc
+2. Use PACKAGECONFIG to add dependency
 
-2.Modify options-2.1.10.patch to suit new version
-
-Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
- .../libtalloc/libtalloc/options-2.1.10.patch              | 15 ++++++++-------
- .../{libtalloc_2.1.11.bb => libtalloc_2.1.14.bb}          |  4 ++--
- 2 files changed, 10 insertions(+), 9 deletions(-)
- rename meta-networking/recipes-support/libtalloc/{libtalloc_2.1.11.bb => libtalloc_2.1.14.bb} (93%)
+ .../kernel-selftest/kernel-selftest.bb             | 30 ++++++++--------------
+ ...bpf-test_progs.c-add-support-for-musllibc.patch | 25 ++++++++++++++++++
+ 2 files changed, 35 insertions(+), 20 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
 
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch b/meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch
-index 63f21e7..9444c24 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch
-@@ -20,27 +20,28 @@ Modified to apply to version 2.1.10.
- Signed-off-by: Joe Slater <joe.slater@windriver.com>
- 
- ---
-- lib/replace/system/wscript_configure |  6 ++-
-+ lib/replace/system/wscript_configure |  7 +++
-  lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
-  wscript                              |  7 ++-
-- 3 files changed, 79 insertions(+), 19 deletions(-)
-+ 3 files changed, 81 insertions(+), 18 deletions(-)
- 
- Index: talloc-2.1.11/lib/replace/system/wscript_configure
- ===================================================================
- --- talloc-2.1.11.orig/lib/replace/system/wscript_configure
- +++ talloc-2.1.11/lib/replace/system/wscript_configure
--@@ -1,6 +1,10 @@
-+@@ -1,5 +1,12 @@
-  #!/usr/bin/env python
-- 
---conf.CHECK_HEADERS('sys/capability.h')
-+
- +import Options
- +
- +if Options.options.enable_libcap:
- +    conf.CHECK_HEADERS('sys/capability.h')
- +
-- conf.CHECK_FUNCS('getpwnam_r getpwuid_r getpwent_r')
-- 
-++conf.CHECK_FUNCS('getpwnam_r getpwuid_r getpwent_r')
-++
-  # solaris varients of getXXent_r
-+ conf.CHECK_C_PROTOTYPE('getpwent_r',
-+                        'struct passwd *getpwent_r(struct passwd *src, char *buf, int buflen)',
- Index: talloc-2.1.11/lib/replace/wscript
- ===================================================================
- --- talloc-2.1.11.orig/lib/replace/wscript
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.11.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb
-similarity index 93%
-rename from meta-networking/recipes-support/libtalloc/libtalloc_2.1.11.bb
-rename to meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb
-index 848cf4d..531d0ba 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.11.bb
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb
-@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6
- SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
-            file://options-2.1.10.patch \
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 2c23b26b5..71e3bf9b0 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -5,27 +5,17 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
  "
--SRC_URI[md5sum] = "452596f904ca2b10322bdaabf147a721"
--SRC_URI[sha256sum] = "639eb35556a0af999123c4d883e79be05ff9f00ab4f9e4ac2e5775f9c5eeeed3"
-+SRC_URI[md5sum] = "7478da02e309316231a497a9f17a980d"
-+SRC_URI[sha256sum] = "b185602756a628bac507fa8af8b9df92ace69d27c0add5dab93190ad7c3367ce"
  
- inherit waf-samba
+-# vm
+-SRC_URI += "file://COPYING \
+-"
++# for musl libc
+ SRC_URI_libc-musl += "file://userfaultfd.patch \
++                      file://0001-bpf-test_progs.c-add-support-for-musllibc.patch \
+ "
  
+-# for bpf and vm
+-DEPENDS = " \
+-    elfutils \
+-    libcap \
+-    libcap-ng \
+-    fuse \
+-    util-linux \
+-    rsync-native \
+-"
+-# for vm
+-RDEPENDS_${PN} += "libgcc \
+-                   bash \
+-"
++PACKAGECONFIG ??= "bpf vm"
++
++PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
++PACKAGECONFIG[vm] = ",,,libgcc bash"
+ 
+-do_configure[depends] += "virtual/kernel:do_shared_workdir"
++do_patch[depends] += "virtual/kernel:do_shared_workdir"
+ 
+ inherit linux-kernel-base kernel-arch
+ 
+@@ -69,10 +59,10 @@ do_compile() {
+ do_install() {
+     for i in ${TEST_LIST}
+     do
+-        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/opt/kselftest/${i} install
++        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/usr/kernel-selftest/${i} install
+     done
+ 
+-    chown root:root  -R ${D}/opt/kselftest
++    chown root:root  -R ${D}/usr/kernel-selftest
+ }
+ 
+ do_configure() {
+@@ -101,4 +91,4 @@ remove_clang_related() {
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+ INHIBIT_PACKAGE_DEBUG_SPLIT="1"
+-FILES_${PN} += "/opt/kselftest/"
++FILES_${PN} += "/usr/kernel-selftest"
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
+new file mode 100644
+index 000000000..5f2542681
+--- /dev/null
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
+@@ -0,0 +1,25 @@
++From a2e6b8fde28b743b69990a4e16c296e099631ed4 Mon Sep 17 00:00:00 2001
++From: "Hongzhi.Song" <hongzhi.song@windriver.com>
++Date: Mon, 23 Jul 2018 00:56:19 -0700
++Subject: [PATCH] bpf: test_progs.c add support for musllibc
++
++Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
++---
++ tools/testing/selftests/bpf/test_progs.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/tools/testing/selftests/bpf/test_progs.c b/tools/testing/selftests/bpf/test_progs.c
++index 11ee25c..21b27b7 100644
++--- a/tools/testing/selftests/bpf/test_progs.c
+++++ b/tools/testing/selftests/bpf/test_progs.c
++@@ -4,6 +4,7 @@
++  * modify it under the terms of version 2 of the GNU General Public
++  * License as published by the Free Software Foundation.
++  */
+++#define __always_inline __inline __attribute__ ((__always_inline__))
++ #include <stdio.h>
++ #include <unistd.h>
++ #include <errno.h>
++-- 
++2.11.0
++
 -- 
-2.7.4
-
-
+2.11.0
 
 
