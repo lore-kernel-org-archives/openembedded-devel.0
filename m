@@ -1,26 +1,32 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EC6D753F1
+Return-Path: <hongl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7024E74D0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 04:44:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6N4iXgZ009101
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 23 Jul 2018 09:33:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="42543812"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Jul 2018 17:33:50 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3775C4B66A23
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jul 2018 21:44:33 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Sun, 22 Jul 2018 21:44:33 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Mon, 23 Jul 2018 17:33:50 +0800 (CST)
+Received: from localhost.local (10.167.225.78) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.399.0; Mon, 23 Jul 2018 17:33:49 +0800
+From: Hong Liu <hongl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Jul 2018 12:44:21 +0800
-Message-ID: <1532321061-20994-4-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1532321061-20994-1-git-send-email-yi.zhao@windriver.com>
-References: <1532321061-20994-1-git-send-email-yi.zhao@windriver.com>
+Date: Mon, 23 Jul 2018 17:33:24 +0800
+Message-ID: <20180723093326.12122-2-hongl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.14.3
+In-Reply-To: <20180723093326.12122-1-hongl.fnst@cn.fujitsu.com>
+References: <20180723093326.12122-1-hongl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-filesystems][PATCH 2/2] xfsprogs: upgrade 4.14.0 -> 4.17.0
+X-Originating-IP: [10.167.225.78]
+X-yoursite-MailScanner-ID: 3775C4B66A23.ACACF
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [PATCH] [meta-oe][PATCH] tslib: 1.15 -> 1.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,76 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2018 04:44:32 -0000
+X-List-Received-Date: Mon, 23 Jul 2018 09:33:57 -0000
 Content-Type: text/plain
 
-Add a patch to disable xfs_scrub build since it is experimental.
+Upgrade tslib from 1.15 to 1.16.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
 ---
- .../xfsprogs/files/disable-xfs_scrub-build.patch   | 30 ++++++++++++++++++++++
- .../{xfsprogs_4.14.0.bb => xfsprogs_4.17.0.bb}     |  5 ++--
- 2 files changed, 33 insertions(+), 2 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/disable-xfs_scrub-build.patch
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.14.0.bb => xfsprogs_4.17.0.bb} (91%)
+ meta-oe/recipes-graphics/tslib/{tslib_1.15.bb => tslib_1.16.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/tslib/{tslib_1.15.bb => tslib_1.16.bb} (96%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/disable-xfs_scrub-build.patch b/meta-filesystems/recipes-utils/xfsprogs/files/disable-xfs_scrub-build.patch
-new file mode 100644
-index 0000000..c07b4b5
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/disable-xfs_scrub-build.patch
-@@ -0,0 +1,30 @@
-+From 2bd40e5ed4df0b0a42beff8806b1ec5daa372c48 Mon Sep 17 00:00:00 2001
-+From: Yi Zhao <yi.zhao@windriver.com>
-+Date: Thu, 19 Jul 2018 16:49:41 +0800
-+Subject: [PATCH] Disable xfs_scrub build
-+
-+Disable xfs_scrub build since it is experimental.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 7ddfa31..cd60319 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -48,7 +48,7 @@ LIBFROG_SUBDIR = libfrog
-+ DLIB_SUBDIRS = libxlog libxcmd libhandle
-+ LIB_SUBDIRS = libxfs $(DLIB_SUBDIRS)
-+ TOOL_SUBDIRS = copy db estimate fsck growfs io logprint mkfs quota \
-+-		mdrestore repair rtcp m4 man doc debian spaceman scrub
-++		mdrestore repair rtcp m4 man doc debian spaceman
-+ 
-+ ifneq ("$(PKG_PLATFORM)","darwin")
-+ TOOL_SUBDIRS += fsr
-+-- 
-+2.7.4
-+
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.14.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.17.0.bb
-similarity index 91%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.14.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.17.0.bb
-index 5d76afe..06f774d 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.14.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.17.0.bb
-@@ -8,9 +8,10 @@ DEPENDS = "util-linux util-linux-native"
- SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://remove_flags_from_build_flags.patch \
-            file://0001-build-Check-for-sync_file_range-libc-function.patch \
-+           file://disable-xfs_scrub-build.patch \
-            "
--SRC_URI[md5sum] = "2d50e3751cc98e6c9364bc3d2297b9fd"
--SRC_URI[sha256sum] = "b1b710b268bc95d6f45eca06e1262c29eb38865a19cd4404e48ba446e043b7ec"
-+SRC_URI[md5sum] = "b935b693dfac0264e232c3c4e52d5569"
-+SRC_URI[sha256sum] = "f53f5169cb98cfca471ddea30092738c427ba284c5356e01b45dd1ae3b297e0d"
+diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.15.bb b/meta-oe/recipes-graphics/tslib/tslib_1.16.bb
+similarity index 96%
+rename from meta-oe/recipes-graphics/tslib/tslib_1.15.bb
+rename to meta-oe/recipes-graphics/tslib/tslib_1.16.bb
+index 7ae941a3..8d23bd5 100644
+--- a/meta-oe/recipes-graphics/tslib/tslib_1.15.bb
++++ b/meta-oe/recipes-graphics/tslib/tslib_1.16.bb
+@@ -17,8 +17,8 @@ SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.
+            file://ts.conf \
+            file://tslib.sh \
+ "
+-SRC_URI[md5sum] = "9ff36788c9ab76a10b58422227b9629e"
+-SRC_URI[sha256sum] = "7ce48807cab655076d71a1ceef3ed0ab8a25df98074981d4a8fd1477ee5f710c"
++SRC_URI[md5sum] = "254a022fc8aa89d164840fe8869c2441"
++SRC_URI[sha256sum] = "c9a54651337a701a66b074c603c313225579995a7910e519bbc7b1dcdab9a755"
  
- inherit autotools-brokensep
+ UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
  
 -- 
 2.7.4
+
+
 
 
