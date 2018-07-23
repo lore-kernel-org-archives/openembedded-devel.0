@@ -1,44 +1,51 @@
-Return-Path: <williamdelacre@gmail.com>
-Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 660B3746E8
+Return-Path: <freebendy@gmail.com>
+Received: from mail-pl0-f54.google.com (mail-pl0-f54.google.com
+	[209.85.160.54])
+	by mail.openembedded.org (Postfix) with ESMTP id D921A74D49
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 12:28:10 +0000 (UTC)
-Received: by mail-vk0-f53.google.com with SMTP id t4-v6so198778vke.9
+	Mon, 23 Jul 2018 13:49:45 +0000 (UTC)
+Received: by mail-pl0-f54.google.com with SMTP id 6-v6so265065plb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 05:28:11 -0700 (PDT)
+	Mon, 23 Jul 2018 06:49:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=1V6O1UIMt0SvzHSJ+gmC+/TKbjV8c61o3GnS4WGRLUI=;
-	b=XE5D+5GS/JmAwsnVOY2n7TiS3JzJliBzevRxz2AC9jfycA/zPeVL7RyTSP3PIoHqSO
-	XHu80A6HDvn6mx7n9TrfAoq2XjZ5yUzb2SFSb3rbCSNJQvkq+3KgJZ9cijEAHJ3hzVbJ
-	kkeLW96K3g1q6+WwxeiUeXF/KdULR+TSsUcLah5u9ohqm8Z3w+h1D7kvRDXOrlbm32sD
-	myo3YUqCGS282l4kJK7cDvJcrF9ydhYtTN28/duNzPPYYHOHEWjjhyF1bZ+o7lH//cVp
-	3TsfuT93EHTvxCgaoKJO7hPwGLFNy5E+5zVfXfP6eRh8X99eQ+KqoCqw7ltzzaP1UDLt
-	oNbA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=1xO/OyySF1Q7CSxw1OuLgLpbm4Fi6seJR3N8jPY48jo=;
+	b=KiOTy7JpG+ishMhCuoHZGrIi2jzdvrP7PqHoITNUh8Dtf0RrWDeRRWueUc4hLugbve
+	WpVLE7iKHhGBOrHof3iUdTnir/uvFhpAup6UEr7Nim4lLsk5eCmFDeatu2W+Fl0PXxKU
+	YqOt+jPf5Bqzo+ZuX6CI4ImXsQ3YBHxkrLEqhzmrrpcyZpNofqMDkc9sFQxPwDacB63y
+	xcM9iWGgAUKvChRnmsZ67C4kJZCdoNaDsdZolnmoQbL7soLol5/AW1lkWy9RbFKsoEqG
+	IXNpnLS1oXfoo7a+FGEbvrgWyIAZn8+Pu8G6zTkBOAqf6xPBf3vAzLVxv4ZGDlrzugrw
+	/KZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=1V6O1UIMt0SvzHSJ+gmC+/TKbjV8c61o3GnS4WGRLUI=;
-	b=aMe8hxSLNA3QL8LiAf9tWntR9eJ8R3EmbdtyILhhWM/Ht9sQhR+5fkO+YgtxXSOaR9
-	fykvMCtMd/rQ5IYtpfc2LUAy0oE8JSXHyjgbsLciZ7Lom+86lIXSy14W9pkWwGgDS1/i
-	yH68HXC9zIB6xje7K0Y9vS9ZyMRJAecmTyv0mJzqUjPyYsX+hXc6ttORHsY4ebtaEzX0
-	F1uf9O178Pkl25nYI6fpytMjvDWPLln9+77un7ZyI+3qRo0YcUTeVRun6NPoLpwVYRMY
-	H84Pc6oSTS5WEOA+kgeF0PCYvS7/xrUT8uTtRZ8+ajMvjHTPduShLnMYEmexnBoq07YP
-	6Bpw==
-X-Gm-Message-State: AOUpUlF3v/snu4LLa4QeWYnl1cOyVTC5T+PZtwICSLpDyFPskEFPiv49
-	grER8LlhkL5fCKRiEy1zpBNR/vegX1itlqF3paNgdw==
-X-Google-Smtp-Source: AAOMgpecXUhhu7625PvA7ygXqd/EGYgKryKC/1LDtUgLIeS7kwEU9Ir2miwwqQGJyTJfEoCHjSeEw7fuVwo80UeGhns=
-X-Received: by 2002:a1f:81c7:: with SMTP id
-	c190-v6mr7417916vkd.96.1532348891122; 
-	Mon, 23 Jul 2018 05:28:11 -0700 (PDT)
-MIME-Version: 1.0
-From: William Delacre <williamdelacre@gmail.com>
-Date: Mon, 23 Jul 2018 14:28:00 +0200
-Message-ID: <CAOnRZELTeZbVDTo_eT_r6e6EG6et0vs7O_mT_fpqJ_RpoVhk2Q@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=1xO/OyySF1Q7CSxw1OuLgLpbm4Fi6seJR3N8jPY48jo=;
+	b=shNlxuLd1CAzkP3RMUi3nyM6Rm42+meBTku7f+zwMAdD3W+O0Saor7K0wPJJDOf4O8
+	wlWP90ryRe18yecT8FaV8X6tEGl9NFmVU+BwQOOGByhwBwcJbQjCPKwEMVhxnTt8bYsO
+	gqyAWZs1sYUtfl/g/m8JqSoLyt26Xu9E5acyOW4dUmzCAvjKB6uLn28rIikhJZQV1M+g
+	y4LG3TzZqD63U++SDDwrRO+XJaAwlZyQ2nbjfHgNAIh3FrFOgnUq/rVfQnlmHknNaolr
+	TcvSmvFQSQxyUnWl313fjMrQTrElrHjE7yuiYC4yL1p3P08fCtWxdvvfqfwIWs53xkAD
+	EfGw==
+X-Gm-Message-State: AOUpUlFmQhl2cdxrHpUoMtOzP80xdtzB9zOXEZW145Nwwj+CpGg1hKYh
+	8hbLDygacjmxInXEFGJFcQfxwSti3teK
+X-Google-Smtp-Source: AAOMgpc/P1hFwWbaivwW1stBGHl5KCef3tl16qXVRA7qCaKziAVI7DLC98QY/5idavpNZ5yaOTwt7Q==
+X-Received: by 2002:a17:902:76c2:: with SMTP id
+	j2-v6mr12885413plt.19.1532353786613; 
+	Mon, 23 Jul 2018 06:49:46 -0700 (PDT)
+Received: from localhost.localdomain ([116.7.218.38])
+	by smtp.gmail.com with ESMTPSA id
+	v23-v6sm4182356pfm.80.2018.07.23.06.49.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 23 Jul 2018 06:49:45 -0700 (PDT)
+From: Binghua Guan <freebendy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: (No subject)
+Date: Mon, 23 Jul 2018 21:29:45 +0800
+Message-Id: <20180723132950.4543-2-freebendy@gmail.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20180723132950.4543-1-freebendy@gmail.com>
+References: <20180723132950.4543-1-freebendy@gmail.com>
+Subject: [meta-oe] [PATCH 2/7] python-mccabe: add native and nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,36 +58,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2018 12:28:10 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 23 Jul 2018 13:49:46 -0000
 
-Hi ! :-)
+Signed-off-by: Binghua Guan <freebendy@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-I=E2=80=99m facing issues when trying to run =E2=80=98bitbake python-twiste=
-d=E2=80=99 (do_compile
-error)
+diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
+index a86d15800..6b63cd780 100644
+--- a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
++++ b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
+@@ -16,3 +16,5 @@ RDEPENDS_${PN} += " \
+     python-prettytable \
+     python-cmd2 \
+     python-pyparsing"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.11.0
 
-Log says :
-=E2=80=9CDownload error on https://pypi.python.org/simple/incremental/: [Er=
-rno -3]
-Temporary failure in name resolution
-
-............
-
-distutils.errors.DistutilsError : Could not find suitable distribution for
-Requirement.parse(=E2=80=98incremental>=3D16.10.1=E2=80=99)=E2=80=9D
-
-First of all I=E2=80=99m not connected to internet, so I=E2=80=99ve pre-dow=
-nloaded all the
-required packages (twisted-17.9.0.tar.bz2 & incremental-17.5.0.tar.gz are
-present in my build/downloads folder)
-
-It=E2=80=99s the first time I have some =E2=80=9Cdownloading issues=E2=80=
-=9D and I=E2=80=99m stuck on it
-for a few hours now..
-
-Any tips for me ?
-
-Thanks in advance !
 
