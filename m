@@ -1,51 +1,52 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
-	[209.85.221.43])
-	by mail.openembedded.org (Postfix) with ESMTP id E4DF3744AE
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 7ACB574F9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 16:47:58 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id t13-v6so1359541wrv.12
+	Mon, 23 Jul 2018 16:48:33 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id f21-v6so1768246wmc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 09:48:00 -0700 (PDT)
+	Mon, 23 Jul 2018 09:48:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=QqYpEUmk3O54fNLu5nfuDIXfJet0hDafYQyxfj6Gt+I=;
-	b=cxhcFPvTzDp0LXBx0b+C/b3YI/o+w+AXCiCmSpOpgRL0MuhaxxwG4Nd6+vZFcdCtah
-	WntMDryrNHjGAJUxFZb3jKuQGtCw8eE2l2cYLMrR52r+mNSOTuqoHGUJs/fmiLhYCjNV
-	0PIUt/EXFmw12uj7/dyOPVenKAyLmhnOsYsRt2i1uwTX8I20fc5PNsGmqvr6G4Lutuis
-	rjWzfiqj+BJ4a96SxmVQZuMZMKJnPHX1wTkx5udQ26rgGl+kUTBnqiDdJ1gGiJ3iBW2P
-	uljiC5gSGjoJQJ2LdCwJ113Og9qKwKLzH4CsXvyJ4qnxRi+LxQRLisMWgw2RnNLkbuo1
-	qmBw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=mFV9rOnh0xOwtCmUxW9U2n1dErXktYyjix36ZolxYUo=;
+	b=i5fFmpiX9V9EZ6M96XXhi5riGd886A3tOrm+7Q0q6DhRdpJaaymLQKQdD8xKjvVPFo
+	Tqv9oS+cLhndnIIPlGecqVYaqcz0qpudq8VKu+rwiDt18Z6M7yJ/omePAw/ezHgX/krJ
+	nrDm5kVwd6d2ckmUZJeIvN45KCZ/GTHlNUclbXxDI8YWaEPWJb7nbrzJe+JUhCtaagYD
+	twVVhSXUhccP0vztpyVoW9pc0HMhi0mN2KFVkoGyeh43uUoVsICxJ/PK9N/OXp0FWn3+
+	Y998Cy1ixTsPiB50ZV4OunK8gwcNQMLZjjS25yQVTr0NaS4ZuRY+KRlqjosZ5Q/lgTaA
+	/W5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QqYpEUmk3O54fNLu5nfuDIXfJet0hDafYQyxfj6Gt+I=;
-	b=FKgYZF2euuCUuvIku6974xGDQO5X9sWt1yJ92Arszi5ZJWi3GhgBP/E3mcY3GPuG/Z
-	eagdKdE0cJCvuLOQVoVj0HRQFuyc79B5gcrTswau+24LJ4E0AAnLdETgEaLbvWJ9a4CK
-	CXuJlI9lMILFp/hIetka/y7uYVCKV/ZqcDpI2gm+gYn2FIWf96X+5VTvrCirQStBKXT7
-	lSaN1FBiASfJ/z5qqnp3S2jUOs6oMe8KT3cTLHXyXptb0kUDxy288jc2gK7zKfzXvWW1
-	iie1TXtNf6vE+rL+wPRsfMVXJtog1jS/MDLGjnW+xorqroNbLdkBdwTSUi9o6TiJlVnr
-	lLTw==
-X-Gm-Message-State: AOUpUlFiZeTlhLdXzvHmyZ8FEYVO2NmKQ17aZZgI0xLkxsr3o1FZk4dq
-	i5sRxrekXDT1vCKuoW1HITisXeZ2
-X-Google-Smtp-Source: AAOMgpcUjFB7xq83umVbfmNnLSNwRNRyccBHYxQDmklnhJ7Ek41mDJTeuEVNntW/uZUvd4RgI/Xa/w==
-X-Received: by 2002:a5d:438d:: with SMTP id
-	i13-v6mr9529459wrq.156.1532364479096; 
-	Mon, 23 Jul 2018 09:47:59 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=mFV9rOnh0xOwtCmUxW9U2n1dErXktYyjix36ZolxYUo=;
+	b=aqtMdhqlltFRHOg2i80vyShw5+wRJhHSC3R9QyTpphC4liMgD5vMwmFPGF8RgbeS7C
+	9RzC/ecoKw7CEPX3OrzD4sk0vewN/X7SiB5yVSnhOVluBxRQ1qC2vyZfkvOtZvJ++kRZ
+	Hq4hz01KTifeIGHtpIBJ/1+t01x5fKyXAt8AvpFTsWXKKFCYdINY+7+6vgOpGD+1i6JA
+	31OgHtiY28CTuZjZwBWfMYtQjFDhj2sSdtJ3RHmlBilLXidwmBUJGg79eD2pvic1mAwJ
+	sRNot4GknZ1ItRYCczsonh4ObDftbq3Dv2olS+xu8ivDb9K90GqzS2V8uclTSATbP5yr
+	TCpw==
+X-Gm-Message-State: AOUpUlH5g8+dQDh6Qi3rfRnwHb3Eat0/tkNkI5pde/McOVgZphRPpHSM
+	9ydim+rFVgsuWqAH5qTgEClOL47y
+X-Google-Smtp-Source: AAOMgpch5NEKC0ZUB9QEYUP1WITQLyiAkSfBFv60nhiC21KPDz2Bn0Qho1p63tTP1mYP7Ivl98F9Xw==
+X-Received: by 2002:a1c:f611:: with SMTP id
+	w17-v6mr3877893wmc.143.1532364513146; 
+	Mon, 23 Jul 2018 09:48:33 -0700 (PDT)
 Received: from localhost.localdomain ([2.43.248.104])
 	by smtp.gmail.com with ESMTPSA id
-	a9-v6sm6706961wrp.55.2018.07.23.09.47.58
+	x204-v6sm20840239wme.33.2018.07.23.09.48.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Jul 2018 09:47:58 -0700 (PDT)
+	Mon, 23 Jul 2018 09:48:32 -0700 (PDT)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Jul 2018 18:47:54 +0200
-Message-Id: <20180723164754.29131-1-costamagnagianfranco@yahoo.it>
+Date: Mon, 23 Jul 2018 18:48:25 +0200
+Message-Id: <20180723164826.29256-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.17.1
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] meta-oe: update cpprest with patches uploaded in Debian, add upstream proposed gcc-8 patch, add boost 1.63 build fix patch
+MIME-Version: 1.0
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH 1/2] meta-networking: drop duplicated websocketpp recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,595 +59,911 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2018 16:47:59 -0000
+X-List-Received-Date: Mon, 23 Jul 2018 16:48:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- .../0001-disable-more-Werror-warnings.patch   |  48 ------
- .../0002-Define-virtual-destructor.patch      |  28 ----
- ...build-problem-on-Clang.patch => 732.patch} |   5 +-
- .../cpprest/cpprest-2.10.2/747.patch          |  12 ++
- .../cpprest/cpprest-2.10.2/787.patch          |  32 ++++
- .../cpprest/cpprest-2.10.2/boost-fix.patch    |  14 ++
- .../cpprest-2.10.2/disable-float-tests.patch  |  25 +++
- .../disable-outside-tests.patch               | 142 ++++++++++++++++++
- .../disable-test-timeouts.patch               | 103 +++++++++++++
- .../cpprest-2.10.2/fix-cmake-install.patch    |  50 +++++-
- .../recipes-support/cpprest/cpprest_2.10.2.bb |  11 +-
- 11 files changed, 382 insertions(+), 88 deletions(-)
- delete mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-disable-more-Werror-warnings.patch
- delete mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/0002-Define-virtual-destructor.patch
- rename meta-oe/recipes-support/cpprest/cpprest-2.10.2/{0001-Fix-a-build-problem-on-Clang.patch => 732.patch} (82%)
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/747.patch
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/787.patch
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/boost-fix.patch
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-float-tests.patch
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-outside-tests.patch
- create mode 100644 meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-test-timeouts.patch
+ .../0001-Fix-issue-599.patch                  |  31 -
+ ...5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch | 155 -----
+ ...300d874a30db35e3ad58f188944bef0bf31b.patch | 600 ------------------
+ .../websocketpp-0.7.0/disable-tests.patch     |  51 --
+ .../websocketpp/websocketpp_0.7.0.bb          |  21 -
+ 5 files changed, 858 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/0001-Fix-issue-599.patch
+ delete mode 100644 meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch
+ delete mode 100644 meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/9ddb300d874a30db35e3ad58f188944bef0bf31b.patch
+ delete mode 100644 meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/disable-tests.patch
+ delete mode 100644 meta-networking/recipes-support/websocketpp/websocketpp_0.7.0.bb
 
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-disable-more-Werror-warnings.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-disable-more-Werror-warnings.patch
+diff --git a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/0001-Fix-issue-599.patch b/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/0001-Fix-issue-599.patch
 deleted file mode 100644
-index febfd5bc9..000000000
---- a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-disable-more-Werror-warnings.patch
+index 2a9ea74cd..000000000
+--- a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/0001-Fix-issue-599.patch
 +++ /dev/null
-@@ -1,48 +0,0 @@
--From ee92f84a96a507b0a7a3c54929ce190ee28b4ecd Mon Sep 17 00:00:00 2001
--From: Alexander Moriarty <amoriarty@fetchrobotics.com>
--Date: Wed, 6 Jun 2018 10:38:43 -0700
--Subject: [PATCH] disable more -Werror warnings
+@@ -1,31 +0,0 @@
+-From 1dd07113f2a7489444a8990a95be42e035f8e9df Mon Sep 17 00:00:00 2001
+-From: Kurt Roeckx <kroeckx@debian.org>
+-Date: Tue, 1 Nov 2016 12:57:35 +0100
+-Subject: [PATCH] Fix issue #599
+-Forwarded: https://github.com/zaphoyd/websocketpp/pull/600
 -
--gcc-8: -Wno-format-truncation
--
--clang-6: -Wdelete-non-virtual-dtor
--clang-6: -Wunused-lambda-capture
--
--removed duplicated: -Wno-reorder
--
--This fixes #778
--
--Upstream-Status: Pending [https://github.com/Microsoft/cpprestsdk/pull/779]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- Release/CMakeLists.txt | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
+- websocketpp/transport/asio/security/tls.hpp | 4 ----
+- 1 file changed, 4 deletions(-)
 -
--diff --git a/Release/CMakeLists.txt b/Release/CMakeLists.txt
--index 1267aff1..fb291ccd 100644
----- a/Release/CMakeLists.txt
--+++ b/Release/CMakeLists.txt
--@@ -166,12 +166,12 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR IOS)
--     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-attributes -Wno-pointer-arith")
--   elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
--     set(WARNINGS -Wall -Wextra -Wcast-qual -Wconversion -Wformat=2 -Winit-self -Winvalid-pch -Wmissing-format-attribute -Wmissing-include-dirs -Wpacked -Wredundant-decls)
---    set(LINUX_SUPPRESSIONS -Wno-overloaded-virtual -Wno-sign-conversion -Wno-deprecated -Wno-unknown-pragmas -Wno-reorder -Wno-char-subscripts -Wno-switch -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated -Wno-unused-value -Wno-unknown-warning-option -Wno-return-type-c-linkage -Wno-unused-function -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-reorder -Wno-unused-local-typedefs)
--+    set(LINUX_SUPPRESSIONS -Wno-overloaded-virtual -Wno-sign-conversion -Wno-deprecated -Wno-unknown-pragmas -Wno-reorder -Wno-char-subscripts -Wno-switch -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated -Wno-unused-value -Wno-unknown-warning-option -Wno-return-type-c-linkage -Wno-unused-function -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-unused-local-typedefs -Wno-delete-non-virtual-dtor -Wno-unused-lambda-capture)
--     set(WARNINGS ${WARNINGS} ${LINUX_SUPPRESSIONS})
--     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-return-type-c-linkage -Wno-unneeded-internal-declaration")
--   else()
--     set(WARNINGS -Wall -Wextra -Wcast-qual -Wconversion -Wformat=2 -Winit-self -Winvalid-pch -Wmissing-format-attribute -Wmissing-include-dirs -Wpacked -Wredundant-decls)
---    set(OSX_SUPPRESSIONS -Wno-overloaded-virtual -Wno-sign-conversion -Wno-deprecated -Wno-unknown-pragmas -Wno-reorder -Wno-char-subscripts -Wno-switch -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated -Wno-unused-value -Wno-unknown-warning-option -Wno-return-type-c-linkage -Wno-unused-function -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-reorder -Wno-unused-local-typedefs)
--+    set(OSX_SUPPRESSIONS -Wno-overloaded-virtual -Wno-sign-conversion -Wno-deprecated -Wno-unknown-pragmas -Wno-reorder -Wno-char-subscripts -Wno-switch -Wno-unused-parameter -Wno-unused-variable -Wno-deprecated -Wno-unused-value -Wno-unknown-warning-option -Wno-return-type-c-linkage -Wno-unused-function -Wno-sign-compare -Wno-shorten-64-to-32 -Wno-unused-local-typedefs -Wno-delete-non-virtual-dtor -Wno-unused-lambda-capture)
--     set(WARNINGS ${WARNINGS} ${OSX_SUPPRESSIONS})
-- 
--     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -Wno-return-type-c-linkage -Wno-unneeded-internal-declaration")
--@@ -184,7 +184,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR IOS)
-- elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
--   message("-- Setting gcc options")
-- 
---  set(WARNINGS -Wall -Wextra -Wunused-parameter -Wcast-align -Wcast-qual -Wconversion -Wformat=2 -Winit-self -Winvalid-pch -Wmissing-format-attribute -Wmissing-include-dirs -Wpacked -Wredundant-decls -Wunreachable-code)
--+  set(WARNINGS -Wall -Wextra -Wunused-parameter -Wcast-align -Wcast-qual -Wconversion -Wformat=2 -Winit-self -Winvalid-pch -Wmissing-format-attribute -Wmissing-include-dirs -Wpacked -Wredundant-decls -Wunreachable-code -Wno-format-truncation)
--   set(LD_FLAGS "${LD_FLAGS} -Wl,-z,defs")
-- 
--   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-strict-aliasing")
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0002-Define-virtual-destructor.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0002-Define-virtual-destructor.patch
+-diff --git a/websocketpp/transport/asio/security/tls.hpp b/websocketpp/transport/asio/security/tls.hpp
+-index 7b32db8..a8aafec 100644
+---- a/websocketpp/transport/asio/security/tls.hpp
+-+++ b/websocketpp/transport/asio/security/tls.hpp
+-@@ -355,13 +355,9 @@ protected:
+-     template <typename ErrorCodeType>
+-     lib::error_code translate_ec(ErrorCodeType ec) {
+-         if (ec.category() == lib::asio::error::get_ssl_category()) {
+--            if (ERR_GET_REASON(ec.value()) == SSL_R_SHORT_READ) {
+--                return make_error_code(transport::error::tls_short_read);
+--            } else {
+-                 // We know it is a TLS related error, but otherwise don't know
+-                 // more. Pass through as TLS generic.
+-                 return make_error_code(transport::error::tls_error);
+--            }
+-         } else {
+-             // We don't know any more information about this error so pass
+-             // through
+--- 
+-2.7.4
+-
+diff --git a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch b/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch
 deleted file mode 100644
-index 34cbe6697..000000000
---- a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0002-Define-virtual-destructor.patch
+index 530c960ce..000000000
+--- a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch
 +++ /dev/null
-@@ -1,28 +0,0 @@
--From 816d183eb0fe9ab4607cb049b4b792f8df84d5fe Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 22 May 2018 22:17:43 -0700
--Subject: [PATCH] Define virtual destructor
+@@ -1,155 +0,0 @@
+-From 4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4 Mon Sep 17 00:00:00 2001
+-From: Peter Thorson <git@zaphoyd.com>
+-Date: Sun, 11 Jun 2017 16:13:25 -0500
+-Subject: [PATCH] minor adjustments to recent extension negotiation related
+- fixes, refactor a bit more extension negotiation code to be simpler
 -
--Fixes
--error: destructor called on non-final 'pplx::details::linux_scheduler' that has virtual functions but non-virtual destructor [-Werror,-Wdelete-non-virtual-dtor]
--    __data_.second().~_Tp();
--
--Upstream-Status: Pending [https://github.com/Microsoft/cpprestsdk/issues/747]
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- Release/include/pplx/pplxlinux.h | 1 +
-- 1 file changed, 1 insertion(+)
+- websocketpp/impl/connection_impl.hpp |  6 +--
+- websocketpp/processors/hybi13.hpp    | 92 ++++++++++++++++++------------------
+- 2 files changed, 49 insertions(+), 49 deletions(-)
 -
--diff --git a/Release/include/pplx/pplxlinux.h b/Release/include/pplx/pplxlinux.h
--index 6aa1ba35..f3f8d70d 100644
----- a/Release/include/pplx/pplxlinux.h
--+++ b/Release/include/pplx/pplxlinux.h
--@@ -240,6 +240,7 @@ namespace platform
--     {
--     public:
--         _PPLXIMP virtual void schedule( TaskProc_t proc, _In_ void* param);
--+    virtual ~linux_scheduler() {}
--     };
+-Index: websocketpp-0.7.0/websocketpp/impl/connection_impl.hpp
+-===================================================================
+---- websocketpp-0.7.0.orig/websocketpp/impl/connection_impl.hpp
+-+++ websocketpp-0.7.0/websocketpp/impl/connection_impl.hpp
+-@@ -1222,17 +1222,17 @@
+-     std::pair<lib::error_code,std::string> neg_results;
+-     neg_results = m_processor->negotiate_extensions(m_request);
 - 
-- } // namespace details
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-Fix-a-build-problem-on-Clang.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/732.patch
-similarity index 82%
-rename from meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-Fix-a-build-problem-on-Clang.patch
-rename to meta-oe/recipes-support/cpprest/cpprest-2.10.2/732.patch
-index dc6b9dfca..9fcffbfed 100644
---- a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/0001-Fix-a-build-problem-on-Clang.patch
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/732.patch
-@@ -1,4 +1,4 @@
--From 0c07931f77aa9df2da065b633ae66faad5a570ec Mon Sep 17 00:00:00 2001
-+From 3d8caad3f459d8b2136c5bc9be7fdec53e5d777d Mon Sep 17 00:00:00 2001
- From: Wu Yongwei <wuyongwei@gmail.com>
- Date: Tue, 10 Apr 2018 11:29:12 +0800
- Subject: [PATCH] Fix a build problem on Clang.
-@@ -6,9 +6,6 @@ Subject: [PATCH] Fix a build problem on Clang.
- AND_CAPTURE_MEMBER_FUNCTION_POINTERS workaround had a check for GCC,
- but did not exclude Clang.  Clang has a fake GCC version of 4.2, thus
- caused problems.
+--    if (neg_results.first == error::make_error_code(error::extension_parse_error)) {
+-+    if (neg_results.first == processor::error::make_error_code(processor::error::extension_parse_error)) {
+-         // There was a fatal error in extension parsing that should result in
+-         // a failed connection attempt.
+--        m_alog.write(log::alevel::info, "Bad request: " + neg_results.first.message());
+-+        m_elog.write(log::elevel::info, "Bad request: " + neg_results.first.message());
+-         m_response.set_status(http::status_code::bad_request);
+-         return neg_results.first;
+-     } else if (neg_results.first) {
+-         // There was a fatal error in extension processing that is probably our
+-         // fault. Consider extension negotiation to have failed and continue as
+-         // if extensions were not supported
+--        m_alog.write(log::alevel::info, 
+-+        m_elog.write(log::elevel::info, 
+-             "Extension negotiation failed: " + neg_results.first.message());
+-     } else {
+-         // extension negotiation succeeded, set response header accordingly
+-Index: websocketpp-0.7.0/websocketpp/processors/hybi13.hpp
+-===================================================================
+---- websocketpp-0.7.0.orig/websocketpp/processors/hybi13.hpp
+-+++ websocketpp-0.7.0/websocketpp/processors/hybi13.hpp
+-@@ -97,11 +97,6 @@
+-     /**
+-      * This exists mostly because the code for requests and responses is
+-      * identical and I can't have virtual template methods.
+--     *
+--     * NOTE: this method makes assumptions that the permessage-deflate
+--     * extension is the only one supported. If additional extensions are
+--     * ever supported it should be reviewed carefully. Most cases where
+--     * that assumption is made are explicitly noted.
+-      */
+-     template <typename header_type>
+-     err_str_pair negotiate_extensions_helper(header_type const & header) {
+-@@ -130,55 +125,60 @@
+- 
+-         http::parameter_list::const_iterator it;
+- 
+-+        // look through the list of extension requests to find the first
+-+        // one that we can accept.
+-         if (m_permessage_deflate.is_implemented()) {
+-             err_str_pair neg_ret;
+-             for (it = p.begin(); it != p.end(); ++it) {
+--                // look through each extension, if the key is permessage-deflate
+--                if (it->first == "permessage-deflate") {
+--                    // if we have already successfully negotiated this extension
+--                    // then skip any other requests to negotiate the same one
+--                    // with different parameters 
+--                    if (m_permessage_deflate.is_enabled()) {
+--                        continue;
+--                    }
+--                    
+--                    
+--                    neg_ret = m_permessage_deflate.negotiate(it->second);
+--
+--                    if (neg_ret.first) {
+--                        // Figure out if this is an error that should halt all
+--                        // extension negotiations or simply cause negotiation of
+--                        // this specific extension to fail.
+--                        //std::cout << "permessage-compress negotiation failed: "
+--                        //          << neg_ret.first.message() << std::endl;
+--                    } else {
+--                        // Note: this list will need commas if WebSocket++ ever
+--                        // supports more than one extension
+--                        
+--                        // Actually try to initialize the extension before we
+--                        // deem negotiation complete
+--                        ret.first = m_permessage_deflate.init(base::m_server);
+--                        if (!ret.first) {
+--
+--                            // TODO: support multiple extensions.
+--                            // right now, because there is only one extension 
+--                            // supported, it failing to negotiate means we are
+--                            // done with all negotiating. In the future if more
+--                            // extensions are supported a better solution will
+--                            // be needed here.
+--                            break;
+--                        } else {
+--                            ret.second += neg_ret.second;
+--
+--                            // continue looking for more extensions
+--                            continue;
+--                        }
+--                        
+--                    }
+-+                // not a permessage-deflate extension request, ignore
+-+                if (it->first != "permessage-deflate") {
+-+                    continue;
+-+                }
+-+
+-+                // if we have already successfully negotiated this extension
+-+                // then skip any other requests to negotiate the same one
+-+                // with different parameters 
+-+                if (m_permessage_deflate.is_enabled()) {
+-+                    continue;
+-+                }
+-+                
+-+                // attempt to negotiate this offer
+-+                neg_ret = m_permessage_deflate.negotiate(it->second);
+-+
+-+                if (neg_ret.first) {
+-+                    // negotiation offer failed. Do nothing. We will continue
+-+                    // searching for a permessage-deflate config that succeeds
+-+                    continue;
+-+                }
+-+
+-+                // Negotiation tentatively succeeded
+-+
+-+                // Actually try to initialize the extension before we
+-+                // deem negotiation complete
+-+                lib::error_code ec = m_permessage_deflate.init(base::m_server);
+-+
+-+                if (ec) {
+-+                    // Negotiation succeeded but initialization failed this is 
+-+                    // an error that should stop negotiation of permessage 
+-+                    // deflate. Return the reason for the init failure
+-+
+-+                    ret.first = ec;
+-+                    break;
+-+                } else {
+-+                    // Successfully initialized, push the negotiated response into
+-+                    // the reply and stop looking for additional permessage-deflate
+-+                    // extensions
+-+                    ret.second += neg_ret.second;
+-+                    break;
+-                 }
+-             }
+-         }
+- 
+-+        // support for future extensions would go here. Should check the value of 
+-+        // ret.first before continuing. Might need to consider whether failure of
+-+        // negotiation of an earlier extension should stop negotiation of subsequent
+-+        // ones
+-+
+-         return ret;
+-     }
+- 
+diff --git a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/9ddb300d874a30db35e3ad58f188944bef0bf31b.patch b/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/9ddb300d874a30db35e3ad58f188944bef0bf31b.patch
+deleted file mode 100644
+index 94bfeb2fd..000000000
+--- a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/9ddb300d874a30db35e3ad58f188944bef0bf31b.patch
++++ /dev/null
+@@ -1,600 +0,0 @@
+-## Description: add some description
+-## Origin/Author: add some origin or author
+-## Bug: bug URL
+-From 9ddb300d874a30db35e3ad58f188944bef0bf31b Mon Sep 17 00:00:00 2001
+-From: Peter Thorson <git@zaphoyd.com>
+-Date: Sun, 11 Jun 2017 15:24:43 -0500
+-Subject: [PATCH] Update permessage-deflate support to reflect that zlib
+- doesn't support a 256 bit window. Improve extension negotiation error
+- checking and documentation. fixes #596 fixes #653
 -
--Upstream-Status: Backport [https://github.com/Microsoft/cpprestsdk/pull/732]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  Release/src/http/client/http_client_asio.cpp | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/747.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/747.patch
-new file mode 100644
-index 000000000..94bb00598
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/747.patch
-@@ -0,0 +1,12 @@
-+Description: fix for upstream issue 747, clang 6 build error
-+From: rozhuk-im
-+--- a/Release/include/pplx/pplxlinux.h	2018-04-29 16:22:39.927675000 +0300
-++++ b/Release/include/pplx/pplxlinux.h	2018-04-29 16:22:57.809537000 +0300
-+@@ -240,6 +240,7 @@
-+     {
-+     public:
-+         _PPLXIMP virtual void schedule( TaskProc_t proc, _In_ void* param);
-++    virtual ~linux_scheduler() {}
-+     };
-+ 
-+ } // namespace details
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/787.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/787.patch
-new file mode 100644
-index 000000000..359a3ba52
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/787.patch
-@@ -0,0 +1,32 @@
-+From 212536f9d66400bef4400c55efd05dd01303c035 Mon Sep 17 00:00:00 2001
-+From: Andreas Stieger <astieger@suse.com>
-+Date: Sun, 17 Jun 2018 13:00:05 +0200
-+Subject: [PATCH] Fix gcc8 error/warning -Werror=format-truncation=
-+
-+utilities::datetime::to_string(): datetime_str and buf were oversized
-+for fitting into output without possible trunctation
-+---
-+ Release/src/utilities/asyncrt_utils.cpp | 7 ++++---
-+ 1 file changed, 4 insertions(+), 3 deletions(-)
-+
-+diff --git a/Release/src/utilities/asyncrt_utils.cpp b/Release/src/utilities/asyncrt_utils.cpp
-+index 0e62bdee..be38907c 100644
-+--- a/Release/src/utilities/asyncrt_utils.cpp
-++++ b/Release/src/utilities/asyncrt_utils.cpp
-+@@ -691,12 +691,13 @@ utility::string_t datetime::to_string(date_format format) const
-+     {
-+         // Append fractional second, which is a 7-digit value with no trailing zeros
-+         // This way, '1200' becomes '00012'
-+-        char buf[9] = { 0 };
-++        const int max_frac_length = 8;
-++        char buf[max_frac_length+1] = { 0 };
-+         snprintf(buf, sizeof(buf), ".%07ld", (long int)frac_sec);
-+         // trim trailing zeros
-+-        for (int i = 7; buf[i] == '0'; i--) buf[i] = '\0';
-++        for (int i = max_frac_length-1; buf[i] == '0'; i--) buf[i] = '\0';
-+         // format the datetime into a separate buffer
-+-        char datetime_str[max_dt_length+1] = {0};
-++        char datetime_str[max_dt_length-max_frac_length-1+1] = {0};
-+         strftime(datetime_str, sizeof(datetime_str), "%Y-%m-%dT%H:%M:%S", &datetime);
-+         // now print this buffer into the output buffer
-+         snprintf(output, sizeof(output), "%s%sZ", datetime_str, buf);
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/boost-fix.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/boost-fix.patch
-new file mode 100644
-index 000000000..5318a6a10
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/boost-fix.patch
-@@ -0,0 +1,14 @@
-+Origin: https://github.com/Microsoft/cpprestsdk/issues/813
-+Last-Update: 2018-07-23
-+
-+--- cpprest-2.10.2.orig/Release/libs/websocketpp/websocketpp/transport/asio/security/tls.hpp
-++++ cpprest-2.10.2/Release/libs/websocketpp/websocketpp/transport/asio/security/tls.hpp
-+@@ -312,7 +312,7 @@ protected:
-+                 return make_error_code(transport::error::tls_short_read);
-+ #else
-+             if (ERR_GET_REASON(ec.value()) == boost::asio::ssl::error::stream_truncated) {
-+-                return make_error_code(boost::asio::ssl::error::stream_truncated);
-++                return make_error_code(static_cast<std::errc>(boost::asio::ssl::error::stream_truncated));
-+ #endif
-+             } else {
-+                 // We know it is a TLS related error, but otherwise don't know
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-float-tests.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-float-tests.patch
-new file mode 100644
-index 000000000..75f74ec65
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-float-tests.patch
-@@ -0,0 +1,25 @@
-+Description: new toolchain might have increased the float precision
-+Author: Gianfranco Costamagna <locutusofborg@debian.org>
-+Last-Update: 2017-10-28
-+Forwarded: https://github.com/Microsoft/cpprestsdk/issues/576
-+
-+--- casablanca-2.10.0.orig/Release/tests/functional/streams/istream_tests.cpp
-++++ casablanca-2.10.0/Release/tests/functional/streams/istream_tests.cpp
-+@@ -1302,7 +1302,7 @@ void compare_float(float expected, float
-+ {
-+     compare_floating(expected, actual, FLT_EPSILON);
-+ }
-+-
-++/*
-+ TEST(extract_floating_point)
-+ {
-+     std::string test_string;
-+@@ -1349,7 +1349,7 @@ TEST(extract_floating_point)
-+             VERIFY_ARE_EQUAL(1 / expected, 1 / actual);
-+     } while (!std_istream.eof());
-+ }
-+-
-++*/
-+ TEST(extract_floating_point_with_exceptions)
-+ {
-+     std::vector<std::pair<std::string, std::string>> tests;
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-outside-tests.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-outside-tests.patch
-new file mode 100644
-index 000000000..b9b3591c3
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-outside-tests.patch
-@@ -0,0 +1,142 @@
-+Description: Debian forbids calls to external websites.
-+
-+Author: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Origin: Debian
-+Forwarded: not-needed
-+Reviewed-By: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Last-Update: 2015-11-25
-+
-+Index: casablanca/Release/tests/functional/http/client/CMakeLists.txt
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/http/client/CMakeLists.txt
-++++ casablanca/Release/tests/functional/http/client/CMakeLists.txt
-+@@ -9,7 +9,6 @@
-+   multiple_requests.cpp
-+   oauth1_tests.cpp
-+   oauth2_tests.cpp
-+-  outside_tests.cpp
-+   pipeline_stage_tests.cpp
-+   progress_handler_tests.cpp
-+   proxy_tests.cpp
-+Index: casablanca/Release/tests/functional/http/client/authentication_tests.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/http/client/authentication_tests.cpp
-++++ casablanca/Release/tests/functional/http/client/authentication_tests.cpp
-+@@ -663,15 +663,19 @@
-+     VERIFY_ARE_EQUAL(return_code, response.status_code());
-+ }
-+ 
-++/*
-+ TEST(auth_no_data)
-+ {
-+     auth_test_impl(false);
-+ }
-++*/
-+ 
-++/*
-+ TEST(unsuccessful_auth_with_basic_cred)
-+ {
-+     auth_test_impl(true);
-+ }
-++*/
-+ 
-+ TEST_FIXTURE(uri_address, set_user_options_asio_http)
-+ {
-+@@ -692,7 +696,7 @@
-+     auto response = client.request(methods::GET).get();
-+     VERIFY_ARE_EQUAL(200, response.status_code());
-+ }
-+-
-++/*
-+ TEST_FIXTURE(uri_address, set_user_options_asio_https)
-+ {
-+     handle_timeout([]
-+@@ -714,7 +718,7 @@
-+         VERIFY_IS_FALSE(v.empty());
-+     });
-+ }
-+-
-++*/
-+ #endif
-+ 
-+ } // SUITE(authentication_tests)
-+Index: casablanca/Release/tests/functional/websockets/client/authentication_tests.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/websockets/client/authentication_tests.cpp
-++++ casablanca/Release/tests/functional/websockets/client/authentication_tests.cpp
-+@@ -86,7 +86,7 @@
-+     }
-+     return false;
-+ }
-+-
-++/*
-+ TEST(ssl_test)
-+ {
-+     websocket_client client;
-+@@ -122,7 +122,7 @@
-+         throw;
-+     }
-+ }
-+-
-++*/
-+ // These tests are specific to our websocketpp based implementation.
-+ #if !defined(__cplusplus_winrt)
-+ 
-+@@ -153,14 +153,15 @@
-+         throw;
-+     }
-+ }
-+-
-++/*
-+ // Test specifically for server SignalR team hit interesting cases with.
-+ TEST(sni_with_older_server_test)
-+ {
-+     websocket_client client;
-+     sni_test_impl(client);
-+ }
-+-
-++*/
-++/*
-+ // WinRT doesn't expose option for disabling.
-+ // No stable server is available to reliably test this.
-+ // The configuration below relies on a timeout in the success case.
-+@@ -188,7 +189,8 @@
-+         throw;
-+     }
-+ }
-+-
-++*/
-++/*
-+ // Winrt doesn't allow explicitly setting server host for SNI.
-+ TEST(sni_explicit_hostname)
-+ {
-+@@ -199,7 +201,7 @@
-+     websocket_client client(config);
-+     sni_test_impl(client);
-+ }
-+-
-++*/
-+ void handshake_error_test_impl(const ::utility::string_t &host)
-+ {
-+     websocket_client client;
-+Index: casablanca/Release/tests/functional/http/client/connections_and_errors.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/http/client/connections_and_errors.cpp
-++++ casablanca/Release/tests/functional/http/client/connections_and_errors.cpp
-+@@ -415,6 +415,7 @@
-+ }
-+ #endif
-+ 
-++/*
-+ // Try to connect to a server on a closed port and cancel the operation.
-+ TEST_FIXTURE(uri_address, cancel_bad_port)
-+ {
-+@@ -446,7 +447,7 @@
-+ 
-+     VERIFY_THROWS_HTTP_ERROR_CODE(t.get(), std::errc::operation_canceled);
-+ }
-+-
-++*/
-+ } // SUITE(connections_and_errors)
-+ 
-+ }}}}
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-test-timeouts.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-test-timeouts.patch
-new file mode 100644
-index 000000000..93c3e8a26
---- /dev/null
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/disable-test-timeouts.patch
-@@ -0,0 +1,103 @@
-+Description: Some tests takes too long on slow architectures and timeouts
-+ We can safely disable them.
-+ e.g.
-+ Release/tests/functional/http/client/connections_and_errors.cpp:142: error: Failure in request_timeout_microsecond: Test case timed out and is hung. Aborting all remaining test cases. Expected under 180000ms. FAILED
-+
-+Index: casablanca/Release/tests/functional/http/client/connections_and_errors.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/http/client/connections_and_errors.cpp
-++++ casablanca/Release/tests/functional/http/client/connections_and_errors.cpp
-+@@ -127,7 +127,7 @@
-+     // Try sending another request.
-+     VERIFY_THROWS(client.request(methods::GET).wait(), web::http::http_exception);
-+ }
-+-
-++/*
-+ TEST_FIXTURE(uri_address, request_timeout)
-+ {
-+     test_http_server::scoped_server scoped(m_uri);
-+@@ -146,7 +146,8 @@
-+ #endif
-+     t.get();
-+ }
-+-
-++*/
-++/*
-+ TEST_FIXTURE(uri_address, request_timeout_microsecond)
-+ {
-+     pplx::task<test_request*> t;
-+@@ -168,7 +169,7 @@
-+     try { t.get(); }
-+     catch (...) {}
-+ }
-+-
-++*/
-+ TEST_FIXTURE(uri_address, invalid_method)
-+ {
-+     web::http::uri uri(U("http://www.bing.com/"));
-+Index: casablanca/Release/tests/functional/http/listener/requests_tests.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/http/listener/requests_tests.cpp
-++++ casablanca/Release/tests/functional/http/listener/requests_tests.cpp
-+@@ -173,7 +173,7 @@
-+ 
-+     listener.close().wait();
-+ }
-+-
-++/*
-+ TEST_FIXTURE(uri_address, response_order)
-+ {
-+     http_listener listener(m_uri);
-+@@ -217,7 +217,7 @@
-+ 
-+     listener.close().wait();
-+ }
-+-
-++*/
-+ TEST_FIXTURE(uri_address, uri_encoding, "Ignore", "Codeplex 201")
-+ {
-+     http_listener listener(m_uri);
-+Index: casablanca/Release/tests/functional/websockets/client/authentication_tests.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/websockets/client/authentication_tests.cpp
-++++ casablanca/Release/tests/functional/websockets/client/authentication_tests.cpp
-+@@ -221,7 +221,7 @@
-+         VERIFY_ARE_EQUAL("TLS handshake failed", e.error_code().message());
-+     }
-+ }
-+-
-++/*
-+ TEST(self_signed_cert)
-+ {
-+     handshake_error_test_impl(U("wss://self-signed.badssl.com/"));
-+@@ -236,7 +236,7 @@
-+ {
-+     handshake_error_test_impl(U("wss://expired.badssl.com/"));
-+ }
-+-
-++*/
-+ #endif
-+ 
-+ } // SUITE(authentication_tests)
-+Index: casablanca/Release/tests/functional/websockets/client/client_construction.cpp
-+===================================================================
-+--- casablanca.orig/Release/tests/functional/websockets/client/client_construction.cpp
-++++ casablanca/Release/tests/functional/websockets/client/client_construction.cpp
-+@@ -81,7 +81,7 @@
-+     VERIFY_ARE_EQUAL(config2.credentials().username(), cred.username());
-+ }
-+ 
-+-
-++/*
-+ // Verify that we can get the baseuri from websocket_client connect.
-+ TEST_FIXTURE(uri_address, uri_test)
-+ {
-+@@ -101,7 +101,7 @@
-+     VERIFY_ARE_EQUAL(client2.uri(), m_uri);
-+     client2.close().wait();
-+ }
-+-
-++*/
-+ TEST_FIXTURE(uri_address, move_operations)
-+ {
-+     std::string body("hello");
-diff --git a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
-index 0feafef5b..ab9227680 100644
---- a/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
-+++ b/meta-oe/recipes-support/cpprest/cpprest-2.10.2/fix-cmake-install.patch
-@@ -4,14 +4,56 @@ Upstream-Status: https://github.com/Microsoft/cpprestsdk/pull/737
- Forwarded: https://github.com/Microsoft/cpprestsdk/pull/737
- Last-Update: 2018-04-19
- 
----- cpprest-2.10.2.orig/CMakeLists.txt
--+++ cpprest-2.10.2/CMakeLists.txt
--@@ -18,7 +18,7 @@ enable_testing()
-+Index: cpprest/Release/CMakeLists.txt
-+===================================================================
-+--- cpprest.orig/Release/CMakeLists.txt
-++++ cpprest/Release/CMakeLists.txt
-+@@ -18,7 +18,6 @@
-  set(WERROR ON CACHE BOOL "Treat Warnings as Errors.")
-  set(CPPREST_EXCLUDE_WEBSOCKETS OFF CACHE BOOL "Exclude websockets functionality.")
-  set(CPPREST_EXCLUDE_COMPRESSION OFF CACHE BOOL "Exclude compression functionality.")
- -set(CPPREST_EXPORT_DIR lib/cpprestsdk CACHE STRING "Directory to install CMake config files.")
--+set(CPPREST_EXPORT_DIR lib/cmake/cpprestsdk CACHE STRING "Directory to install CMake config files.")
-  set(CPPREST_INSTALL_HEADERS ON CACHE BOOL "Install header files.")
-  set(CPPREST_INSTALL ON CACHE BOOL "Add install commands.")
-  
-+@@ -63,6 +62,9 @@
-+ include(cmake/cpprest_find_openssl.cmake)
-+ include(cmake/cpprest_find_websocketpp.cmake)
-+ include(CheckIncludeFiles)
-++if(UNIX)
-++include(GNUInstallDirs)
-++endif(UNIX)
-+ 
-+ find_package(Threads REQUIRED)
-+ if(THREADS_HAVE_PTHREAD_ARG)
-+Index: cpprest/Release/src/CMakeLists.txt
-+===================================================================
-+--- cpprest.orig/Release/src/CMakeLists.txt
-++++ cpprest/Release/src/CMakeLists.txt
-+@@ -250,21 +250,21 @@
-+   install(
-+     TARGETS ${CPPREST_TARGETS}
-+     EXPORT cpprestsdk-targets
-+-    RUNTIME DESTINATION bin
-+-    LIBRARY DESTINATION lib
-+-    ARCHIVE DESTINATION lib
-++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+   )
-+ 
-+   configure_file(../cmake/cpprestsdk-config.in.cmake "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake" @ONLY)
-+ 
-+   install(
-+     FILES "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake"
-+-    DESTINATION ${CPPREST_EXPORT_DIR}
-++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake
-+   )
-+   install(
-+     EXPORT cpprestsdk-targets
-+     FILE cpprestsdk-targets.cmake
-+     NAMESPACE cpprestsdk::
-+-    DESTINATION ${CPPREST_EXPORT_DIR}
-++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake
-+   )
-+ endif()
-diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb
-index fea5d4b2e..47183c576 100644
---- a/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb
-+++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.2.bb
-@@ -6,10 +6,13 @@ LIC_FILES_CHKSUM = "file://${S}/../license.txt;md5=a2e15b954769218ff912468eecd6a
- DEPENDS = "openssl websocketpp zlib boost"
- 
- SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
--           file://fix-cmake-install.patch \
--           file://0001-Fix-a-build-problem-on-Clang.patch;patchdir=.. \
--           file://0002-Define-virtual-destructor.patch;patchdir=.. \
--           file://0001-disable-more-Werror-warnings.patch;patchdir=.. \
-+           file://disable-outside-tests.patch;patchdir=.. \
-+           file://disable-test-timeouts.patch;patchdir=.. \
-+           file://disable-float-tests.patch;patchdir=.. \
-+           file://fix-cmake-install.patch;patchdir=.. \
-+           file://747.patch;patchdir=.. \
-+           file://732.patch;patchdir=.. \
-+           file://787.patch;patchdir=.. \
-            "
- 
- # tag 2.10.2
+----
+- changelog.md                                       |   8 ++
+- test/extension/permessage_deflate.cpp              | 153 +++++++++++++++++----
+- .../extensions/permessage_deflate/enabled.hpp      |  94 ++++++++++---
+- websocketpp/impl/connection_impl.hpp               |  10 +-
+- websocketpp/processors/hybi13.hpp                  |  28 +++-
+- 5 files changed, 247 insertions(+), 46 deletions(-)
+-
+-diff --git a/changelog.md b/changelog.md
+-index bba753cb..de98edd2 100644
+-#--- a/changelog.md
+-#+++ b/changelog.md
+-#@@ -17,6 +17,14 @@ HEAD
+-# - Compatibility: Update `telemetry_client` to use a slightly more cross platform
+-#   method of sleeping. Should work on windows now. Thank you Meir Yanovich for
+-#   reporting.
+-#+- Compatibility: Updated permessage-deflate support to reflect that the zlib
+-#+  library does not actually support a sliding window size of 256 bits. 
+-#+  WebSocket++ will no longer negotiate 256 bit deflate windows. If the user
+-#+  of the library tries to request a 256 bit window a 512 bit window will be
+-#+  specified instead (This was the previous behavior). #596 #653 Thank you 
+-#+  Vinnie Falco and Gianfranco Costamagna for reporting.
+-#+- Compatibility: Better error handling and logging in cases where extension
+-#+  requests parse correctly but negotiation fails. 
+-# - Bug: Store loggers in shared pointers to avoid crashes related to connections
+-#   trying to write logs entries after their respective endpoint has been
+-#   deallocated. Thank you Thalhammer for reporting and Jupp Müller for the 
+-diff --git a/test/extension/permessage_deflate.cpp b/test/extension/permessage_deflate.cpp
+-index 4cd3e7b6..805afcc3 100644
+---- a/test/extension/permessage_deflate.cpp
+-+++ b/test/extension/permessage_deflate.cpp
+-@@ -186,15 +186,22 @@ BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_invalid ) {
+- 
+- BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_valid ) {
+-     ext_vars v;
+-+    
+-+    // confirm that a request for a value of 8 is interpreted as 9
+-     v.attr["server_max_window_bits"] = "8";
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+- 
+-+    v.attr["server_max_window_bits"] = "9";
+-     v.esp = v.exts.negotiate(v.attr);
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+- 
+--    v.attr["server_max_window_bits"] = "15";
+- 
+-+    v.attr["server_max_window_bits"] = "15";
+-     v.esp = v.exts.negotiate(v.attr);
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-@@ -213,7 +220,7 @@ BOOST_AUTO_TEST_CASE( invalid_set_server_max_window_bits ) {
+- 
+- BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_decline ) {
+-     ext_vars v;
+--    v.attr["server_max_window_bits"] = "8";
+-+    v.attr["server_max_window_bits"] = "9";
+- 
+-     v.ec = v.exts.set_server_max_window_bits(15,pmd_mode::decline);
+-     v.esp = v.exts.negotiate(v.attr);
+-@@ -223,7 +230,7 @@ BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_decline ) {
+-     BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate");
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_accept ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_accept_8 ) {
+-     ext_vars v;
+-     v.attr["server_max_window_bits"] = "8";
+- 
+-@@ -232,10 +239,22 @@ BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_accept ) {
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_largest ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_accept ) {
+-+    ext_vars v;
+-+    v.attr["server_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_server_max_window_bits(15,pmd_mode::accept);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_largest_8 ) {
+-     ext_vars v;
+-     v.attr["server_max_window_bits"] = "8";
+- 
+-@@ -244,10 +263,22 @@ BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_largest ) {
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_smallest ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_largest ) {
+-+    ext_vars v;
+-+    v.attr["server_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_server_max_window_bits(15,pmd_mode::largest);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_smallest_8 ) {
+-     ext_vars v;
+-     v.attr["server_max_window_bits"] = "8";
+- 
+-@@ -256,7 +287,19 @@ BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_smallest ) {
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_server_max_window_bits_smallest ) {
+-+    ext_vars v;
+-+    v.attr["server_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_server_max_window_bits(15,pmd_mode::smallest);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; server_max_window_bits=9");
+- }
+- 
+- // Negotiate server_max_window_bits
+-@@ -292,7 +335,13 @@ BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_valid ) {
+-     v.esp = v.exts.negotiate(v.attr);
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+-+
+-+    v.attr["client_max_window_bits"] = "9";
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+- 
+-     v.attr["client_max_window_bits"] = "15";
+-     v.esp = v.exts.negotiate(v.attr);
+-@@ -311,7 +360,7 @@ BOOST_AUTO_TEST_CASE( invalid_set_client_max_window_bits ) {
+-     BOOST_CHECK_EQUAL(v.ec,pmde::make_error_code(pmde::invalid_max_window_bits));
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_decline ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_decline_8 ) {
+-     ext_vars v;
+-     v.attr["client_max_window_bits"] = "8";
+- 
+-@@ -323,7 +372,19 @@ BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_decline ) {
+-     BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate");
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_accept ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_decline ) {
+-+    ext_vars v;
+-+    v.attr["client_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_client_max_window_bits(9,pmd_mode::decline);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_accept_8 ) {
+-     ext_vars v;
+-     v.attr["client_max_window_bits"] = "8";
+- 
+-@@ -332,10 +393,22 @@ BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_accept ) {
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_largest ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_accept ) {
+-+    ext_vars v;
+-+    v.attr["client_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_client_max_window_bits(15,pmd_mode::accept);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_largest_8 ) {
+-     ext_vars v;
+-     v.attr["client_max_window_bits"] = "8";
+- 
+-@@ -344,10 +417,22 @@ BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_largest ) {
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+- }
+- 
+--BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_smallest ) {
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_largest ) {
+-+    ext_vars v;
+-+    v.attr["client_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_client_max_window_bits(15,pmd_mode::largest);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_smallest_8 ) {
+-     ext_vars v;
+-     v.attr["client_max_window_bits"] = "8";
+- 
+-@@ -356,7 +441,19 @@ BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_smallest ) {
+-     BOOST_CHECK( v.exts.is_enabled() );
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-     BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+--    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=8");
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+-+}
+-+
+-+BOOST_AUTO_TEST_CASE( negotiate_client_max_window_bits_smallest ) {
+-+    ext_vars v;
+-+    v.attr["client_max_window_bits"] = "9";
+-+
+-+    v.ec = v.exts.set_client_max_window_bits(15,pmd_mode::smallest);
+-+    v.esp = v.exts.negotiate(v.attr);
+-+    BOOST_CHECK( v.exts.is_enabled() );
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.first, websocketpp::lib::error_code() );
+-+    BOOST_CHECK_EQUAL( v.esp.second, "permessage-deflate; client_max_window_bits=9");
+- }
+- 
+- 
+-@@ -507,7 +604,8 @@ BOOST_AUTO_TEST_CASE( compress_data ) {
+-     std::string compress_out;
+-     std::string decompress_out;
+- 
+--    v.exts.init(true);
+-+    v.ec = v.exts.init(true);
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+- 
+-     v.ec = v.exts.compress(compress_in,compress_out);
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-@@ -520,7 +618,8 @@ BOOST_AUTO_TEST_CASE( compress_data ) {
+- BOOST_AUTO_TEST_CASE( compress_data_multiple ) {
+-     ext_vars v;
+- 
+--    v.exts.init(true);
+-+    v.ec = v.exts.init(true);
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+- 
+-     for (int i = 0; i < 2; i++) {
+-         std::string compress_in = "Hello";
+-@@ -545,11 +644,12 @@ BOOST_AUTO_TEST_CASE( compress_data_large ) {
+- 
+-     websocketpp::http::attribute_list alist;
+- 
+--    alist["server_max_window_bits"] = "8";
+--    v.exts.set_server_max_window_bits(8,websocketpp::extensions::permessage_deflate::mode::smallest);
+-+    alist["server_max_window_bits"] = "9";
+-+    v.exts.set_server_max_window_bits(9,websocketpp::extensions::permessage_deflate::mode::smallest);
+- 
+-     v.exts.negotiate(alist);
+--    v.exts.init(true);
+-+    v.ec = v.exts.init(true);
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+- 
+-     v.ec = v.exts.compress(compress_in,compress_out);
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-@@ -573,7 +673,8 @@ BOOST_AUTO_TEST_CASE( compress_data_no_context_takeover ) {
+-     v.exts.enable_server_no_context_takeover();
+- 
+-     v.exts.negotiate(alist);
+--    v.exts.init(true);
+-+    v.ec = v.exts.init(true);
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+- 
+-     v.ec = v.exts.compress(compress_in,compress_out1);
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-@@ -609,7 +710,8 @@ BOOST_AUTO_TEST_CASE( compress_empty ) {
+-     std::string compress_out;
+-     std::string decompress_out;
+- 
+--    v.exts.init(true);
+-+    v.ec = v.exts.init(true);
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+- 
+-     v.ec = v.exts.compress(compress_in,compress_out);
+-     BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+-@@ -640,7 +742,8 @@ BOOST_AUTO_TEST_CASE( decompress_data ) {
+-     std::string out;
+-     std::string reference = "Hello";
+- 
+--    v.exts.init(true);
+-+    v.ec = v.exts.init(true);
+-+    BOOST_CHECK_EQUAL( v.ec, websocketpp::lib::error_code() );
+- 
+-     v.ec = v.exts.decompress(in,11,out);
+- 
+-diff --git a/websocketpp/extensions/permessage_deflate/enabled.hpp b/websocketpp/extensions/permessage_deflate/enabled.hpp
+-index 1581f14c..f20a1b1d 100644
+---- a/websocketpp/extensions/permessage_deflate/enabled.hpp
+-+++ b/websocketpp/extensions/permessage_deflate/enabled.hpp
+-@@ -46,7 +46,7 @@
+- namespace websocketpp {
+- namespace extensions {
+- 
+--/// Implementation of the draft permessage-deflate WebSocket extension
+-+/// Implementation of RFC 7692, the permessage-deflate WebSocket extension
+- /**
+-  * ### permessage-deflate interface
+-  *
+-@@ -174,18 +174,30 @@ namespace websocketpp {
+- namespace extensions {
+- namespace permessage_deflate {
+- 
+--/// Default value for server_max_window_bits as defined by draft 17
+-+/// Default value for server_max_window_bits as defined by RFC 7692
+- static uint8_t const default_server_max_window_bits = 15;
+--/// Minimum value for server_max_window_bits as defined by draft 17
+-+/// Minimum value for server_max_window_bits as defined by RFC 7692
+-+/**
+-+ * NOTE: A value of 8 is not actually supported by zlib, the deflate
+-+ * library that WebSocket++ uses. To preserve backwards compatibility
+-+ * with RFC 7692 and previous versions of the library a value of 8
+-+ * is accepted by the library but will always be negotiated as 9.
+-+ */
+- static uint8_t const min_server_max_window_bits = 8;
+--/// Maximum value for server_max_window_bits as defined by draft 17
+-+/// Maximum value for server_max_window_bits as defined by RFC 7692
+- static uint8_t const max_server_max_window_bits = 15;
+- 
+--/// Default value for client_max_window_bits as defined by draft 17
+-+/// Default value for client_max_window_bits as defined by RFC 7692
+- static uint8_t const default_client_max_window_bits = 15;
+--/// Minimum value for client_max_window_bits as defined by draft 17
+-+/// Minimum value for client_max_window_bits as defined by RFC 7692
+-+/**
+-+ * NOTE: A value of 8 is not actually supported by zlib, the deflate
+-+ * library that WebSocket++ uses. To preserve backwards compatibility
+-+ * with RFC 7692 and previous versions of the library a value of 8
+-+ * is accepted by the library but will always be negotiated as 9.
+-+ */
+- static uint8_t const min_client_max_window_bits = 8;
+--/// Maximum value for client_max_window_bits as defined by draft 17
+-+/// Maximum value for client_max_window_bits as defined by RFC 7692
+- static uint8_t const max_client_max_window_bits = 15;
+- 
+- namespace mode {
+-@@ -372,7 +384,7 @@ class enabled {
+-     /**
+-      * The bits setting is the base 2 logarithm of the maximum window size that
+-      * the server must use to compress outgoing messages. The permitted range
+--     * is 8 to 15 inclusive. 8 represents a 256 byte window and 15 a 32KiB
+-+     * is 9 to 15 inclusive. 9 represents a 512 byte window and 15 a 32KiB
+-      * window. The default setting is 15.
+-      *
+-      * Mode Options:
+-@@ -386,6 +398,14 @@ class enabled {
+-      * adjusted by the server. A server may unilaterally set this value without
+-      * client support.
+-      *
+-+     * NOTE: The permessage-deflate spec specifies that a value of 8 is allowed.
+-+     * Prior to version 0.8.0 a value of 8 was also allowed by this library.
+-+     * zlib, the deflate compression library that WebSocket++ uses has always
+-+     * silently adjusted a value of 8 to 9. In recent versions of zlib (1.2.9 
+-+     * and greater) a value of 8 is now explicitly rejected. WebSocket++ 0.8.0
+-+     * continues to perform the 8->9 conversion for backwards compatibility
+-+     * purposes but this should be considered deprecated functionality.
+-+     *
+-      * @param bits The size to request for the outgoing window size
+-      * @param mode The mode to use for negotiating this parameter
+-      * @return A status code
+-@@ -394,6 +414,12 @@ class enabled {
+-         if (bits < min_server_max_window_bits || bits > max_server_max_window_bits) {
+-             return error::make_error_code(error::invalid_max_window_bits);
+-         }
+-+
+-+        // See note in doc comment above about what is happening here
+-+        if (bits == 8) {
+-+            bits = 9;
+-+        }
+-+
+-         m_server_max_window_bits = bits;
+-         m_server_max_window_bits_mode = mode;
+- 
+-@@ -403,8 +429,8 @@ class enabled {
+-     /// Limit client LZ77 sliding window size
+-     /**
+-      * The bits setting is the base 2 logarithm of the window size that the
+--     * client must use to compress outgoing messages. The permitted range is 8
+--     * to 15 inclusive. 8 represents a 256 byte window and 15 a 32KiB window.
+-+     * client must use to compress outgoing messages. The permitted range is 9
+-+     * to 15 inclusive. 9 represents a 512 byte window and 15 a 32KiB window.
+-      * The default setting is 15.
+-      *
+-      * Mode Options:
+-@@ -417,6 +443,14 @@ class enabled {
+-      * outgoing window size unilaterally. A server may only limit the client's
+-      * window size if the remote client supports that feature.
+-      *
+-+     * NOTE: The permessage-deflate spec specifies that a value of 8 is allowed.
+-+     * Prior to version 0.8.0 a value of 8 was also allowed by this library.
+-+     * zlib, the deflate compression library that WebSocket++ uses has always
+-+     * silently adjusted a value of 8 to 9. In recent versions of zlib (1.2.9 
+-+     * and greater) a value of 8 is now explicitly rejected. WebSocket++ 0.8.0
+-+     * continues to perform the 8->9 conversion for backwards compatibility
+-+     * purposes but this should be considered deprecated functionality.
+-+     *
+-      * @param bits The size to request for the outgoing window size
+-      * @param mode The mode to use for negotiating this parameter
+-      * @return A status code
+-@@ -425,6 +459,12 @@ class enabled {
+-         if (bits < min_client_max_window_bits || bits > max_client_max_window_bits) {
+-             return error::make_error_code(error::invalid_max_window_bits);
+-         }
+-+
+-+        // See note in doc comment above about what is happening here
+-+        if (bits == 8) {
+-+            bits = 9;
+-+        }
+-+
+-         m_client_max_window_bits = bits;
+-         m_client_max_window_bits_mode = mode;
+- 
+-@@ -642,11 +682,17 @@ class enabled {
+-      * client requested that we use.
+-      *
+-      * options:
+--     * - decline (refuse to use the attribute)
+--     * - accept (use whatever the client says)
+--     * - largest (use largest possible value)
+-+     * - decline (ignore value, offer our default instead)
+-+     * - accept (use the value requested by the client)
+-+     * - largest (use largest value acceptable to both)
+-      * - smallest (use smallest possible value)
+-      *
+-+     * NOTE: As a value of 8 is no longer explicitly supported by zlib but might
+-+     * be requested for negotiation by an older client/server, if the result of
+-+     * the negotiation would be to send a value of 8, a value of 9 is offered
+-+     * instead. This ensures that WebSocket++ will only ever negotiate connections
+-+     * with compression settings explicitly supported by zlib.
+-+     *
+-      * @param [in] value The value of the attribute from the offer
+-      * @param [out] ec A reference to the error code to return errors via
+-      */
+-@@ -678,6 +724,11 @@ class enabled {
+-                 ec = make_error_code(error::invalid_mode);
+-                 m_server_max_window_bits = default_server_max_window_bits;
+-         }
+-+
+-+        // See note in doc comment
+-+        if (m_server_max_window_bits == 8) {
+-+            m_server_max_window_bits = 9;
+-+        }
+-     }
+- 
+-     /// Negotiate client_max_window_bits attribute
+-@@ -687,11 +738,17 @@ class enabled {
+-      * negotiation mode.
+-      *
+-      * options:
+--     * - decline (refuse to use the attribute)
+--     * - accept (use whatever the client says)
+--     * - largest (use largest possible value)
+-+     * - decline (ignore value, offer our default instead)
+-+     * - accept (use the value requested by the client)
+-+     * - largest (use largest value acceptable to both)
+-      * - smallest (use smallest possible value)
+-      *
+-+     * NOTE: As a value of 8 is no longer explicitly supported by zlib but might
+-+     * be requested for negotiation by an older client/server, if the result of
+-+     * the negotiation would be to send a value of 8, a value of 9 is offered
+-+     * instead. This ensures that WebSocket++ will only ever negotiate connections
+-+     * with compression settings explicitly supported by zlib.
+-+     *
+-      * @param [in] value The value of the attribute from the offer
+-      * @param [out] ec A reference to the error code to return errors via
+-      */
+-@@ -727,6 +784,11 @@ class enabled {
+-                 ec = make_error_code(error::invalid_mode);
+-                 m_client_max_window_bits = default_client_max_window_bits;
+-         }
+-+
+-+        // See note in doc comment
+-+        if (m_client_max_window_bits == 8) {
+-+            m_client_max_window_bits = 9;
+-+        }
+-     }
+- 
+-     bool m_enabled;
+-diff --git a/websocketpp/impl/connection_impl.hpp b/websocketpp/impl/connection_impl.hpp
+-index 105911db..ae55c338 100644
+---- a/websocketpp/impl/connection_impl.hpp
+-+++ b/websocketpp/impl/connection_impl.hpp
+-@@ -1222,12 +1222,18 @@ lib::error_code connection<config>::process_handshake_request() {
+-     std::pair<lib::error_code,std::string> neg_results;
+-     neg_results = m_processor->negotiate_extensions(m_request);
+- 
+--    if (neg_results.first) {
+-+    if (neg_results.first == error::make_error_code(error::extension_parse_error)) {
+-         // There was a fatal error in extension parsing that should result in
+-         // a failed connection attempt.
+--        m_alog.write(log::alevel::devel, "Bad request: " + neg_results.first.message());
+-+        m_alog.write(log::alevel::info, "Bad request: " + neg_results.first.message());
+-         m_response.set_status(http::status_code::bad_request);
+-         return neg_results.first;
+-+    } else if (neg_results.first) {
+-+        // There was a fatal error in extension processing that is probably our
+-+        // fault. Consider extension negotiation to have failed and continue as
+-+        // if extensions were not supported
+-+        m_alog.write(log::alevel::info, 
+-+            "Extension negotiation failed: " + neg_results.first.message());
+-     } else {
+-         // extension negotiation succeeded, set response header accordingly
+-         // we don't send an empty extensions header because it breaks many
+-diff --git a/websocketpp/processors/hybi13.hpp b/websocketpp/processors/hybi13.hpp
+-index 79486654..a95bc649 100644
+---- a/websocketpp/processors/hybi13.hpp
+-+++ b/websocketpp/processors/hybi13.hpp
+-@@ -97,6 +97,11 @@ class hybi13 : public processor<config> {
+-     /**
+-      * This exists mostly because the code for requests and responses is
+-      * identical and I can't have virtual template methods.
+-+     *
+-+     * NOTE: this method makes assumptions that the permessage-deflate
+-+     * extension is the only one supported. If additional extensions are
+-+     * ever supported it should be reviewed carefully. Most cases where
+-+     * that assumption is made are explicitly noted.
+-      */
+-     template <typename header_type>
+-     err_str_pair negotiate_extensions_helper(header_type const & header) {
+-@@ -149,9 +154,26 @@ class hybi13 : public processor<config> {
+-                     } else {
+-                         // Note: this list will need commas if WebSocket++ ever
+-                         // supports more than one extension
+--                        ret.second += neg_ret.second;
+--                        m_permessage_deflate.init(base::m_server);
+--                        continue;
+-+                        
+-+                        // Actually try to initialize the extension before we
+-+                        // deem negotiation complete
+-+                        ret.first = m_permessage_deflate.init(base::m_server);
+-+                        if (!ret.first) {
+-+
+-+                            // TODO: support multiple extensions.
+-+                            // right now, because there is only one extension 
+-+                            // supported, it failing to negotiate means we are
+-+                            // done with all negotiating. In the future if more
+-+                            // extensions are supported a better solution will
+-+                            // be needed here.
+-+                            break;
+-+                        } else {
+-+                            ret.second += neg_ret.second;
+-+
+-+                            // continue looking for more extensions
+-+                            continue;
+-+                        }
+-+                        
+-                     }
+-                 }
+-             }
+diff --git a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/disable-tests.patch b/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/disable-tests.patch
+deleted file mode 100644
+index 342981d4d..000000000
+--- a/meta-networking/recipes-support/websocketpp/websocketpp-0.7.0/disable-tests.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-Description: Disable failing test_transport_asio_timers.
+-Because of "address already in use" error
+-/«PKGBUILDDIR»/test/transport/asio/timers.cpp(129): error in "tls_handshake_timeout": check ec == make_error_code(tls_handshake_timeout) failed [websocketpp.transport.asio.socket:8 != websocketpp.transport.asio.socket:5]
+-Author: Gianfranco Costamagna <locutusofborg@debian.org>
+-
+---- websocketpp-0.7.0.orig/test/transport/CMakeLists.txt
+-+++ websocketpp-0.7.0/test/transport/CMakeLists.txt
+-@@ -1,24 +1,24 @@
+- if (OPENSSL_FOUND)
+- 
+--# Test transport integration
+--file (GLOB SOURCE integration.cpp)
+--
+--init_target (test_transport)
+--build_test (${TARGET_NAME} ${SOURCE})
+--link_boost ()
+--link_openssl()
+--final_target ()
+--set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "test")
+--
+--# Test transport asio timers
+--file (GLOB SOURCE asio/timers.cpp)
+--
+--init_target (test_transport_asio_timers)
+--build_test (${TARGET_NAME} ${SOURCE})
+--link_boost ()
+--link_openssl()
+--final_target ()
+--set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "test")
+-+## Test transport integration
+-+#file (GLOB SOURCE integration.cpp)
+-+#
+-+#init_target (test_transport)
+-+#build_test (${TARGET_NAME} ${SOURCE})
+-+#link_boost ()
+-+#link_openssl()
+-+#final_target ()
+-+#set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "test")
+-+#
+-+## Test transport asio timers
+-+#file (GLOB SOURCE asio/timers.cpp)
+-+#
+-+#init_target (test_transport_asio_timers)
+-+#build_test (${TARGET_NAME} ${SOURCE})
+-+#link_boost ()
+-+#link_openssl()
+-+#final_target ()
+-+#set_target_properties(${TARGET_NAME} PROPERTIES FOLDER "test")
+- 
+- # Test transport asio security
+- file (GLOB SOURCE asio/security.cpp)
+diff --git a/meta-networking/recipes-support/websocketpp/websocketpp_0.7.0.bb b/meta-networking/recipes-support/websocketpp/websocketpp_0.7.0.bb
+deleted file mode 100644
+index 65fc974b6..000000000
+--- a/meta-networking/recipes-support/websocketpp/websocketpp_0.7.0.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-SUMMARY = "C++/Boost Asio based websocket client/server library."
+-SECTION = "libs/network"
+-HOMEPAGE = "https://github.com/zaphoyd/websocketpp"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=4d168d763c111f4ffc62249870e4e0ea"
+-DEPENDS = "openssl boost zlib"
+-
+-SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https;branch=master"
+-
+-# tag 0.7.0
+-SRCREV= "378437aecdcb1dfe62096ffd5d944bf1f640ccc3"
+-
+-SRC_URI += "file://0001-Fix-issue-599.patch \
+-            file://9ddb300d874a30db35e3ad58f188944bef0bf31b.patch \
+-            file://4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch \
+-            file://disable-tests.patch \
+- "
+-
+-S = "${WORKDIR}/git"
+-
+-inherit cmake
 -- 
 2.17.1
 
