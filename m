@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A4AF660197
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AFC587895F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 15:37:27 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id m13-v6so4546680qth.1
+	Tue, 24 Jul 2018 15:40:14 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id b15-v6so4527704qtp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 08:37:28 -0700 (PDT)
+	Tue, 24 Jul 2018 08:40:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=WnbvdhwFOhDkVxbuj5GoglFBj3sgbLf9FE7CpxP2nUA=;
-	b=N05We8v4y0QALJ20KRb+/mk3ISm1QhEZsUMCFTYBZSAu6huEa++x8wcmIGRfU11VEh
-	NrsXZkI+UKedkRPfYdKyb04fE1LoQJqMlHTWTDoRtcym/vxrI9TafBSSZdM7GyUIr9nB
-	aJBIsIQwQBjT3UhvyVg7q74f675j5CfCaVQml65yXIxMdAlfv2z7opGJZVqV2FoB8eaX
-	2zpgkXy1jragcfCTn4J8dkdrMSi24Zhmj1JY7/6meu4qjeno9/opkCCAxWR8/NbMmxMj
-	nPedgKXvoIR+14HC5YTt8uVV5afuO8+sgmqL5P0JkKH/Wmd0SANf1/eqOYRUh6kf+8nd
-	dQOg==
+	:cc; bh=6iWh3tjb4js5ab4ly8F4pB/Co6R83WHekkN5pTQyt8U=;
+	b=Hlg/ziiw4JvnkjdySTlD658Dg9wl1rKP1BhRhJlPuFVPT5+XVIC0S66aIbE1M/QVUx
+	5eDqE6kFCZnfloQZ4n9Wa5Uygk91AirVUxHmxJ6CM+wL88/HNdwOugrrRC+x2RUjzcA+
+	c46fq+qHD69L7sd/zrdZVO8Ns8QjT+8uyNcFLqk4hUZI6IZ0du8XcL0MXM24lEwg5Mm6
+	DrmD2rNWz35LTS+E/JsU2QlfM81EY2S19b5l2ltHhJflsdUg90b1lpo7gXukALGZ/VfN
+	NvTf/R6LkF+vLQyERBYKmPqIje+dEyrG/VkCTkRHteUzCNx1rB7MzDd5Cdg3gBGvBFra
+	ESow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=WnbvdhwFOhDkVxbuj5GoglFBj3sgbLf9FE7CpxP2nUA=;
-	b=ow1NVFrjYDfgT26l2PAU219892PQ5vBZVzX3D79p/2+52U4v1KsQNjUcdW8oUv9L//
-	ZXKV+ToniN7/salGZTGv72wqDOWoRUZ7eN4GIx7dLyFbW7QyR2DNR7dNYQCTmIFQnAgp
-	bpqaj3kO1+6s9wMr3ba7cqpxpRHX4oaHtB6NaGiMlPSmrfg9o0XayMH8EmLDnpFq4eH+
-	zyTxd8MvZJuDmoqDYrqbrSxAK0wie/xUcmAoXGrp0MUpFte7RhpwV/RSMl+uHoAiZ7JF
-	QD7GO4OEIYpWSdqyX3ME5Zlj4WN+CfCrJIx3gyJmhi+1D6OOrUjT4AaG/rxfQoO3wHt5
-	Rjig==
-X-Gm-Message-State: AOUpUlF24aNGxCy7LSQCwNCTnd3sHRbdMDyUpu0hbxT582JGAmEN7JhJ
-	bf8L6+iCPIsfVSb1OjiJL6VQdG2H8n1yNsaY80Q=
-X-Google-Smtp-Source: AAOMgpcYGkyZqi+AqzP1IP+yPdPo0I8hvDqUmbNelu0SPAFQkSsFfL8395a3lg6Bk387gjd+lOaLmK/X1v+KNRGH28k=
-X-Received: by 2002:ac8:91d:: with SMTP id
-	t29-v6mr16851664qth.188.1532446648265; 
-	Tue, 24 Jul 2018 08:37:28 -0700 (PDT)
+	bh=6iWh3tjb4js5ab4ly8F4pB/Co6R83WHekkN5pTQyt8U=;
+	b=TebQvTRMXch/0GLVJUasfemn/15FIrGyzLS1eNtMXAm6yl708Og18+c6eSnPoIWAQK
+	rOTmpDdXZ/LrU5dp429J33a/ex0pvtnl6MTaU0zWTxzkgaMwfB8S3CYk3Tn5QLa8fjO5
+	C/JC10WZbeBeRhiwExGG6Peim0IQRe6qFzfLysX3J6ctWB2y3fDTPjJCl3uUyL8j8lWt
+	S+eOk8p7qokWgM4jwWl1of/pIWp/68gjUIGqPJxNwkLUjRf4yeVpxTsl7vf5w10K2ka6
+	yvh4/N9kd8CcfxRgfnwGhnvdn5N2ic2Qovh5W/H34xTTZzDYNixFhXMHpVnkDSYEt2xZ
+	o7DQ==
+X-Gm-Message-State: AOUpUlGRW7sznMpNGAfINLz4q7ENgDOSKnYOW47mqaBK921OztIv28N2
+	AeMcZBXNPn9svPrDO/HC8x6QLVnow5MxpUOLw3x4Cg==
+X-Google-Smtp-Source: AAOMgpdAgpt1bpZm9cEsMLi0CPiiy2QkCOlllxg4I4vCiRmsLtKisoe+IgFjLHqCFm9wEK89lwi/fwe1jNzQ5QNozjk=
+X-Received: by 2002:ac8:2ad8:: with SMTP id
+	c24-v6mr17118073qta.117.1532446815491; 
+	Tue, 24 Jul 2018 08:40:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180724054254.36340-1-mingli.yu@windriver.com>
-In-Reply-To: <20180724054254.36340-1-mingli.yu@windriver.com>
+References: <20180724134300.31744-1-philip@balister.org>
+In-Reply-To: <20180724134300.31744-1-philip@balister.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Jul 2018 08:37:02 -0700
-Message-ID: <CAMKF1sqkDnUAqc28ZkPtxNJM9U1_xPFTG9VFF=z_xjcb=YzA9Q@mail.gmail.com>
-To: Mingli Yu <mingli.yu@windriver.com>
+Date: Tue, 24 Jul 2018 08:39:49 -0700
+Message-ID: <CAMKF1so9ECEqyD49imbeZMPfPwmHs5UBA8oU8bOh89+kvUx9eA@mail.gmail.com>
+To: Philip Balister <philip@balister.org>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] iperf3: Upgrade to 3.6
+Subject: Re: [meta-oe][PATCH] lapack: Add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,71 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 15:37:28 -0000
+X-List-Received-Date: Tue, 24 Jul 2018 15:40:14 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jul 23, 2018 at 10:43 PM <mingli.yu@windriver.com> wrote:
+On Tue, Jul 24, 2018 at 6:43 AM Philip Balister <philip@balister.org> wrote:
 >
-> From: Mingli Yu <mingli.yu@windriver.com>
+>  * Build tested.
+>  * Note: needs FORTRAN enabled in local.conf or similar.
+>  * Used to build scipy on pi-3. scipy passed many tests.
+>  * Based on work from meta-gnss https://github.com/carlesfernandez/meta-gnss-sdr
+>  * Hopefully this helps others playing with scipy and things.
 >
-> * Licence-Update:
->   - Copyright years are updated to 2018
->   - Remove the part about src/tcp_window_size.{c,h}
->     as iperf3 uses get/setsockopt() with SO_SNDBUF
->     and SO_RCVBUF directly now
-> * Update the path parameter for --with-openssl as
->   ${RECIPE_SYSROOT}/usr to fix the below do_configure
->   error
->   | checking for openssl/ssl.h in /poky-build/tmp/work/i586-poky-linux/iperf3/3.6-r0/recipe-sysroot... no
->   | checking whether compiling and linking against OpenSSL works... no
->   | configure: error: in `/poky-build/tmp/work/i586-poky-linux/iperf3/3.6-r0/build':
->   | configure: error: --with-openssl was given, but test for OpenSSL failed
->
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+
+thanks for this,  fortran is not a daily driver for many here, and is
+not enabled
+in toolchain by default as well. So in this scenario is there any easy way to
+exclude this recipe from parsing ? I am interested in getting our recipe fail
+count down and this recipe wont help.
+
+> Signed-off-by: Philip Balister <philip@balister.org>
 > ---
->  .../iperf3/{iperf3_3.2.bb => iperf3_3.6.bb}                 | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.2.bb => iperf3_3.6.bb} (83%)
+>  meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb | 24 ++++++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
 >
-> diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
-> similarity index 83%
-> rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-> rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
-> index 2ed08110f..a575d465e 100644
-> --- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-> +++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
-> @@ -9,7 +9,7 @@ SECTION = "console/network"
->  BUGTRACKER = "https://github.com/esnet/iperf/issues"
->  AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
->  LICENSE = "BSD"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d098223e44bdd19585315ee75cd9d2d7"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=a9a036136b748453e839c0eb8906ef2e"
->
->  DEPENDS = "openssl"
->
-> @@ -18,7 +18,7 @@ SRC_URI = "git://github.com/esnet/iperf.git \
->             file://0002-Remove-pg-from-profile_CFLAGS.patch \
->             "
->
-> -SRCREV = "88d907f7fb58bfab5d086c5da60c922e1c582c92"
-> +SRCREV = "88f3ad87f38762081a6d7127890ff5c3a052b06a"
->
->  S = "${WORKDIR}/git"
->
-> @@ -28,6 +28,6 @@ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sc
->
->  CFLAGS += "-D_GNU_SOURCE"
->
-> -EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}"
-> +EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}/usr"
->
-
-Hardcoding /usr may not be best here. Can you figure out a bitbake
-variable to use here ?
-
->  BBCLASSEXTEND = "native"
+> diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+> new file mode 100644
+> index 000000000..ef1abd567
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "Linear Algebra PACKage"
+> +URL = "http://www.netlib.org/lapack"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
+> +
+> +# Recipe needs FORTRAN support (copied from conf/local.conf.sample.extended)
+> +# Enabling FORTRAN
+> +# Note this is not officially supported and is just illustrated here to
+> +# show an example of how it can be done
+> +# You'll also need your fortran recipe to depend on libgfortran
+> +#FORTRAN_forcevariable = ",fortran"
+> +#RUNTIMETARGET_append_pn-gcc-runtime = " libquadmath"
+> +
+> +DEPENDS = "libgfortran"
+> +
+> +SRC_URI = "http://www.netlib.org/lapack/lapack-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "96591affdbf58c450d45c1daa540dbd2"
+> +SRC_URI[sha256sum] = "deb22cc4a6120bff72621155a9917f485f96ef8319ac074a7afbc68aab88bcf6"
+> +
+> +EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON "
+> +OECMAKE_GENERATOR = "Unix Makefiles"
+> +
+> +inherit cmake pkgconfig
+> +
 > --
-> 2.17.1
+> 2.13.6
 >
 > --
 > _______________________________________________
