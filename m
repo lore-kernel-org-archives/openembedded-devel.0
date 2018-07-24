@@ -1,48 +1,64 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id AAB9E74C97
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-oi0-f45.google.com (mail-oi0-f45.google.com
+	[209.85.218.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BEF1B74C97
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 16:47:17 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id c14-v6so3204768wmb.4
+	Tue, 24 Jul 2018 18:05:16 +0000 (UTC)
+Received: by mail-oi0-f45.google.com with SMTP id i12-v6so9173733oik.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 09:47:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZRcTFFuS0iqlLFbDgF0TPJ03WE2DSZ4fxer2DRkuiCw=;
-	b=LYnDzA4PHGhmC3m6t4bLlYRm5708vYvZD88EkoNklGffiLqAiC8+opZpnhOV2kmqmf
-	lfKLnKm1mL4ph9znOmXiH04/bu4jO7sxAIowvRgxXiEvhCfTt0NEts7bMHqvQg1vx3jF
-	7JaQj2Lz/vZI9xOWvt5OCpQ+Vas2rnHTmiwqAelccOqTGmlFavncMimaswn4N+Nh/uMM
-	ac8+RYtPY0wV8nAdjT4o9m6g87ZCcKmEorygBAfMVS+K3whWoHNrgSeF/uGTmk/dVbJ3
-	0ezQeiytE0cPBBMSfEi21EF5lztrmFkFd6a7K1+K2DqITRxQCkVq9eEYov9eK71ZRi9F
-	tLCw==
+	Tue, 24 Jul 2018 11:05:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc; bh=FE523QEk/JcEhfvdZ5VUwsCdbiiN30hdHXzvWPnm+7Q=;
+	b=WtD2AgIwidEJPSXMb+9b0dke1Ym/mcFUH6xcxho6HvMUbPjvaIWWuxTnstUrEp7lK+
+	bSbBhUF9nKWjpIH+bRUWa5FQ68PQn8sirnxaxJcXK5hgck5jEBXfiR+R91ZaIjtaoTid
+	o/up/WurQo+52etwJKvdCGK+YFIH/l9OjF680rlroaRxUOKF5J+Zymeh//odSvV8kH2U
+	yig0fRyedkQVSpL13sRnh4xgFEuok936qYvzeg9XG/nz6UoBkqo//drRsBw3ZTiA5Dy8
+	L0bWQiHJ/dKgLJuCnn4v3ItCWGe9prMYGYebnoE+XGcjponEEux67O8z+pho9wAthAir
+	cmWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
 	:message-id:subject:to:cc;
-	bh=ZRcTFFuS0iqlLFbDgF0TPJ03WE2DSZ4fxer2DRkuiCw=;
-	b=ncRAiB2UmIru8a9rJXWUuJFHS0TaCnPN8tJcNxhz/2hjfRMauSrv1TMvu/AaF2jzhx
-	IioYO4dsOABFo9gckJsQcaZpyEbh3VbcCXug30F+MUCQHy6AJHss8zI4xGE1Ca/u6wZs
-	tZLUTsQS32DHlzjIa//h19+mbHnGtvOBfXVD2F/XjolppRv5yJsMaG9YY7gC+KmeuWon
-	e5t6uUdV4Uk0YjUiH6MY/M4KniV32jiIAVYemWMI82AhqSSDKAV+SsUJsjlCCrqdIhDp
-	nXm1wsO+XsQSt5JY7nWpODPCck6yzZvVyffx3JpdinCxoO8qtXMw5mfam3puT/zoeR7R
-	jzvw==
-X-Gm-Message-State: AOUpUlGAvzpiHuUEbY9xFpMqkclR8Gotw/pRPpt7dFAovM70WRvRgZ3E
-	yBtMmaCm0COI0/BUHXCpxYfReyn8VN86+sm+fstdCA==
-X-Google-Smtp-Source: AAOMgpfbve17vOe7FPZOwNDi1MQPQxEfhqcQCQ52DvM88uWqh7Neisai42qQnJvBTlXN6EqHUEhBBfUQzTs/x44tbBE=
-X-Received: by 2002:a1c:8f0e:: with SMTP id
-	r14-v6mr2584986wmd.79.1532450838150; 
-	Tue, 24 Jul 2018 09:47:18 -0700 (PDT)
+	bh=FE523QEk/JcEhfvdZ5VUwsCdbiiN30hdHXzvWPnm+7Q=;
+	b=OD2AAbhGxnf6gKQrl+UrSRRBul7Af3rFbEarRPgXtpx5kv90klAYaMyRX2T2qcykxW
+	MvHaf1ZN8FWBI3GvO5z2oTEXP3F8lp1JPATBClb3WKKPF0U88UPUhobQ2IQJ98ASlTCS
+	WRMnsyQgd5BViNLmv1xmrFcknk3vVCNlrQQFwQBT6p5oRHxOfdjwc4blDP/xKucqPxUN
+	Mqmz/6oVx1kUd12TkDmbWYlRvB3O+UZLrHCP7wCUctgJTnZt87PqJpDL8bq2l7lkGq0G
+	3/i13DELIUzZIEyqpP/ex1Ii1zrnAcdQjmY+veIK5l8eBIHk29ENscf/4OuMky8lyAB5
+	9qkw==
+X-Gm-Message-State: AOUpUlHmH6sL67AAAUvKBFTwKcHicQSz78eNWW2PBQ4jExUBColKhnKR
+	osTIZuBsDSrLWrlVi9MVp8JDhInz1yg5MQ==
+X-Google-Smtp-Source: AAOMgpfBf2uVgujvC121wJRblPifGfO2sn1bWyK0/iaiUdrWqdhFtTN7x12COh+qEEOdckVDF061IA==
+X-Received: by 2002:a54:4d82:: with SMTP id y2-v6mr4566608oix.25.1532455517214;
+	Tue, 24 Jul 2018 11:05:17 -0700 (PDT)
+Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com.
+	[209.85.218.53]) by smtp.gmail.com with ESMTPSA id
+	f4-v6sm7046484oic.52.2018.07.24.11.05.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 24 Jul 2018 11:05:15 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi0-f53.google.com with SMTP id y207-v6so9120363oie.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jul 2018 11:05:15 -0700 (PDT)
+X-Received: by 2002:aca:f516:: with SMTP id
+	t22-v6mr4566703oih.56.1532455515255; 
+	Tue, 24 Jul 2018 11:05:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
-	<1531899089-395618-6-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1531899089-395618-6-git-send-email-changqing.li@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 24 Jul 2018 18:47:07 +0200
-Message-ID: <CA+chaQdAwHn0fAj2A6oX5HrbK5zADMmYX0DACO2KEVt55+0ZBQ@mail.gmail.com>
-To: changqing.li@windriver.com
+References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
+	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
+	<20180724152529.GA19585@mail.itconsulting-heinold.de>
+In-Reply-To: <20180724152529.GA19585@mail.itconsulting-heinold.de>
+Date: Tue, 24 Jul 2018 19:05:02 +0100
+X-Gmail-Original-Message-ID: <CAP9ODKp3_1iQybyE0McSFUbd7YFPoPbD8HVy+qu05aP18zvwKw@mail.gmail.com>
+Message-ID: <CAP9ODKp3_1iQybyE0McSFUbd7YFPoPbD8HVy+qu05aP18zvwKw@mail.gmail.com>
+To: Henning Heinold <henning@itconsulting-heinold.de>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] pps-tools: 0.0.0+gitX -> 1.0.2
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] bug-tracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,58 +71,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 16:47:17 -0000
+X-List-Received-Date: Tue, 24 Jul 2018 18:05:17 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Why not use RDEPENDS_${PN} instead of RDEPENDS_pps-tools? It's now broken
-with multilib.
+Em ter, 24 de jul de 2018 16:25, Henning Heinold <
+henning@itconsulting-heinold.de> escreveu:
 
-Also meta-oe is using 4 spaces for indentation, would be nice to fix the
-do_install.
+> On Tue, Jul 24, 2018 at 08:55:34AM +0100, Otavio Salvador wrote:
+> > Em ter, 24 de jul de 2018 08:33, Richard Leitner <
+> > richard.leitner@skidata.com> escreveu:
+> >
+> > > Hi,
+> > > finally I have another question regarding the meta-java layer :-)
+> > >
+> > > Do we have some kind of bug-tracker?
+> > >
+> > > If no: I would really love to see one for meta-java.
+> > > What are our possibilities here? YP Bugzilla? GitHub? others?
+> > >
+> > > What do you think?
+> > >
+> >
+> > We recently passed the review process of meta-qt5 to github and it has
+> been
+> > much better this using the patchwork.
+> >
+> > Maybe we could consider the possibility of moving meta-java there and
+> make
+> > the yp.org a mirror so we use the issues, PR and all resources it offers
+> > (Travis as well).
+>
+> The question is under which github space that should happen and who has
+> the control over it.
+>
 
-On Wed, Jul 18, 2018 at 9:32 AM <changqing.li@windriver.com> wrote:
+We can make a organization as we did for qt5 or it might be under OSSystems
+umbrella.
 
-> From: Changqing Li <changqing.li@windriver.com>
 >
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  .../pps-tools/{pps-tools_git.bb => pps-tools_1.0.2.bb}               | 5
-> +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-support/pps-tools/{pps-tools_git.bb =>
-> pps-tools_1.0.2.bb} (82%)
->
-> diff --git a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
-> b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
-> similarity index 82%
-> rename from meta-oe/recipes-support/pps-tools/pps-tools_git.bb
-> rename to meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
-> index 8bf9036..106be35 100644
-> --- a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
-> +++ b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
-> @@ -4,12 +4,13 @@ HOMEPAGE = "http://linuxpps.org"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->
-> -PV = "0.0.0+git${SRCPV}"
-> -SRCREV = "0deb9c7e135e9380a6d09e9d2e938a146bb698c8"
-> +SRCREV = "cb48b7ecf7079ceba7081c78d4e61e507b0e8d2d"
->  SRC_URI = "git://github.com/ago/pps-tools.git"
->
->  S = "${WORKDIR}/git"
->
-> +RDEPENDS_pps-tools = "bash"
-> +
->  do_install() {
->          install -d ${D}${bindir} ${D}${includedir} \
->                     ${D}${includedir}/sys
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Bye Henning
 >
 
