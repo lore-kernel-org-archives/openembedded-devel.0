@@ -1,23 +1,43 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 556F9755A1
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id BC4BA60079
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 09:38:54 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6O9cthp020959
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 24 Jul 2018 10:37:24 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1532428645; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: In-Reply-To: References: MIME-Version: Sender;
+	bh=Ethstp7fybcQUubZHWj6X3tTzN/NfYDVUx0o/aU3uro=;
+	b=Q/FS2gdNKimNV/ZmkRDN1un4Mgu5v1VOc4NLhcGItL9ijmUvgbIWTtlnL0ucHTQ9AXrEZg8D
+	gdd4yDbrqO7qc+Rn4bgbsbEmH71auJ4NU3wGcfhWp04BFrVSXbcmH4ne6sk7QYj2mgMM6Rkq
+	LBRysg6WyNIuG11vm0ccTmDMWQ0=
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Sender: derek@asterius.io
+Received: from mail-it0-f42.google.com (mail-it0-f42.google.com
+	[209.85.214.42])
+	by mxa.mailgun.org with ESMTP id 5b570165.7f9d71071330-smtp-out-n03;
+	Tue, 24 Jul 2018 10:37:25 -0000 (UTC)
+Received: by mail-it0-f42.google.com with SMTP id h23-v6so2948351ita.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 02:38:55 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Tue, 24 Jul 2018 02:38:54 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Jul 2018 02:38:54 -0700
-Message-ID: <20180724093854.17201-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Tue, 24 Jul 2018 03:37:25 -0700 (PDT)
+X-Gm-Message-State: AOUpUlHP12hTLosmBvJhHkPBMswiDRqk4i5b9qY0EAaOlcugF+z9sdUb
+	nQ7VFMtqf650tqL3p2M8aLhnmJWBCfidgI1sU4k=
+X-Google-Smtp-Source: AAOMgpfly3alwXwo6TCerzcaA6GDjUbUEKP8QsWPatYX4I7V/6mDI8bleSt6ewZFUszaSEXt7MWRTbqg50oJkpWMm0I=
+X-Received: by 2002:a02:5e42:: with SMTP id
+	h63-v6mr14871763jab.117.1532428644798; 
+	Tue, 24 Jul 2018 03:37:24 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] librelp: Upgrade to 1.2.16
+References: <20180724082715.11769-1-alexandru.vasiu@ni.com>
+In-Reply-To: <20180724082715.11769-1-alexandru.vasiu@ni.com>
+From: Derek Straka <derek@asterius.io>
+Date: Tue, 24 Jul 2018 06:37:13 -0400
+X-Gmail-Original-Message-ID: <CADNbA1qXNc5=0wiit1u9sR9Jc5peJf6Ti82yiEUCzaCaLmrzMg@mail.gmail.com>
+Message-ID: <CADNbA1qXNc5=0wiit1u9sR9Jc5peJf6Ti82yiEUCzaCaLmrzMg@mail.gmail.com>
+To: Alexandru Vasiu <alexandru.vasiu@ni.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to version 0.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,121 +50,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 09:38:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Jul 2018 10:37:25 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Can you remove the old version too?  Thanks
 
-Add 0001-src-tcp.c-fix-jump-misses-init-error.patch
-to fix -Werror=jump-misses-init error
+On Tue, Jul 24, 2018, 4:29 AM Alexandru Vasiu <alexandru.vasiu@ni.com>
+wrote:
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...src-tcp.c-fix-jump-misses-init-error.patch | 71 +++++++++++++++++++
- .../{librelp_1.2.14.bb => librelp_1.2.16.bb}  |  6 +-
- 2 files changed, 75 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch
- rename meta-oe/recipes-extended/rsyslog/{librelp_1.2.14.bb => librelp_1.2.16.bb} (59%)
-
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch
-new file mode 100644
-index 000000000..68b686346
---- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch
-@@ -0,0 +1,71 @@
-+From 3e5a0cb440c788e2383e40ab23ac1cf01d96961b Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Tue, 24 Jul 2018 01:30:25 -0700
-+Subject: [PATCH] src/tcp.c: fix jump-misses-init error
-+
-+Fix below jump-misses-init error
-+
-+| In file included from ../../git/src/tcp.c:51:
-+| ../../git/src/tcp.c: In function 'relpTcpConnect':
-+| ../../git/src/relp.h:220:3: error: jump skips variable initialization [-Werror=jump-misses-init]
-+|    goto finalize_it;  \
-+|    ^~~~
-+| ../../git/src/tcp.c:1951:3: note: in expansion of macro 'ABORT_FINALIZE'
-+|    ABORT_FINALIZE(RELP_RET_IO_ERR);
-+|    ^~~~~~~~~~~~~~
-+| ../../git/src/tcp.c:2005:1: note: label 'finalize_it' defined here
-+|  finalize_it:
-+|  ^~~~~~~~~~~
-+| ../../git/src/tcp.c:1991:6: note: 'r' declared here
-+|   int r = getsockopt(pThis->sock, SOL_SOCKET, SO_ERROR, &so_error, &len);
-+|       ^
-+| In file included from ../../git/src/tcp.c:51:
-+| ../../git/src/relp.h:220:3: error: jump skips variable initialization [-Werror=jump-misses-init]
-+|    goto finalize_it;  \
-+|    ^~~~
-+| ../../git/src/tcp.c:1951:3: note: in expansion of macro 'ABORT_FINALIZE'
-+|    ABORT_FINALIZE(RELP_RET_IO_ERR);
-+|    ^~~~~~~~~~~~~~
-+| ../../git/src/tcp.c:2005:1: note: label 'finalize_it' defined here
-+|  finalize_it:
-+|  ^~~~~~~~~~~
-+| ../../git/src/tcp.c:1989:12: note: 'len' declared here
-+|   socklen_t len = sizeof so_error;
-+|             ^~~
-+
-+Upstream-Status: Submitted[https://github.com/rsyslog/librelp/pull/117]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ src/tcp.c | 7 ++++---
-+ 1 file changed, 4 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/tcp.c b/src/tcp.c
-+index f35eb84..fb34dc7 100644
-+--- a/src/tcp.c
-++++ b/src/tcp.c
-+@@ -1936,6 +1936,9 @@ relpTcpConnect(relpTcp_t *const pThis,
-+ 	struct addrinfo hints;
-+ 	struct addrinfo *reslocal = NULL;
-+ 	struct pollfd pfd;
-++	int so_error;
-++	socklen_t len = sizeof so_error;
-++	int r;
-+ 
-+ 	ENTER_RELPFUNC;
-+ 	RELPOBJ_assert(pThis, Tcp);
-+@@ -1985,10 +1988,8 @@ relpTcpConnect(relpTcp_t *const pThis,
-+ 		ABORT_FINALIZE(RELP_RET_TIMED_OUT);
-+ 	}
-+ 
-+-	int so_error;
-+-	socklen_t len = sizeof so_error;
-+ 
-+-	int r = getsockopt(pThis->sock, SOL_SOCKET, SO_ERROR, &so_error, &len);
-++	r = getsockopt(pThis->sock, SOL_SOCKET, SO_ERROR, &so_error, &len);
-+ 	if (r == -1 || so_error != 0) {
-+ 		pThis->pEngine->dbgprint("socket has an error %d\n", so_error);
-+ 		ABORT_FINALIZE(RELP_RET_IO_ERR);
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.2.14.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.2.16.bb
-similarity index 59%
-rename from meta-oe/recipes-extended/rsyslog/librelp_1.2.14.bb
-rename to meta-oe/recipes-extended/rsyslog/librelp_1.2.16.bb
-index 28047eb54..6c68f6040 100644
---- a/meta-oe/recipes-extended/rsyslog/librelp_1.2.14.bb
-+++ b/meta-oe/recipes-extended/rsyslog/librelp_1.2.16.bb
-@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
- 
- DEPENDS = "gmp nettle libidn zlib gnutls"
- 
--SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https"
-+SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https \
-+           file://0001-src-tcp.c-fix-jump-misses-init-error.patch \
-+"
- 
--SRCREV = "fc512e337bfc7c92770246dbff5f482b879498b9"
-+SRCREV = "5e849ff060be0c7dce972e194c54fdacfee0adc2"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.1
-
+> Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+> ---
+>  meta-python/recipes-devtools/python/python-pyiface.inc       | 4 ++--
+>  meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb  | 2 ++
+>  meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb | 2 ++
+>  3 files changed, 6 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-pyiface_0.0.9.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-pyiface_0.0.9.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc
+> b/meta-python/recipes-devtools/python/python-pyiface.inc
+> index 895a0ae09..a1156f428 100644
+> --- a/meta-python/recipes-devtools/python/python-pyiface.inc
+> +++ b/meta-python/recipes-devtools/python/python-pyiface.inc
+> @@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
+>
+>  LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+>
+> -SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
+> -SRC_URI[sha256sum] =
+> "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
+> +SRC_URI[md5sum] = "bc94e3d0c1cf8f49ac86514a8e90ed5c"
+> +SRC_URI[sha256sum] =
+> "a58367d456ac0b4b9d1d5c31d5dd24363ad6c5bcc73edf027ded63732f784cf4"
+>
+>  inherit pypi
+> diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+> b/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+> new file mode 100644
+> index 000000000..854cb30ee
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools
+> +require python-pyiface.inc
+> \ No newline at end of file
+> diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+> b/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+> new file mode 100644
+> index 000000000..721e7b1c9
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools3
+> +require python-pyiface.inc
+> --
+> 2.18.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
