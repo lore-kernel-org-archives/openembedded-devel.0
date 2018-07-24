@@ -1,47 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f169.google.com (mail-qt0-f169.google.com
-	[209.85.216.169])
-	by mail.openembedded.org (Postfix) with ESMTP id E5EEB60603
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id AAB9E74C97
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 15:41:53 +0000 (UTC)
-Received: by mail-qt0-f169.google.com with SMTP id m13-v6so4562616qth.1
+	Tue, 24 Jul 2018 16:47:17 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id c14-v6so3204768wmb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 08:41:55 -0700 (PDT)
+	Tue, 24 Jul 2018 09:47:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0rMt0pBMBPnvZvd08scu2YF0xYoDUNtKO+Wj0sGDNUI=;
-	b=HsvOIDy3/sUFAvOuynKIczzcpm1+O6wjidW6zevhtbWMYzy/LJT1/x2XF2+VHV66jf
-	cmQ983+UADm+ZFaN0tsryzH6k8iY9iinNYCdYZ9NOIAmDpd2GeVewKy2jbqni0V8IFWq
-	b071ViHvYFDaqtANTBVGo7tsEOCwGkIvq6JbG6tzWIimqMXxtTphA4uazUZEALykWeAC
-	i2ECJxMGS3L7qpHhw+MZrtIxY45TL6v+UD/SL6vkoa8Dc96c9lk2JBQo4MjCkJQ72503
-	WPt8NzvncWPK7MIk0gmW/4qqHUbzMNqpcK3H8/zvXDjWkgcVXZE7TXonCNjSawr+KT0h
-	aJkg==
+	:cc; bh=ZRcTFFuS0iqlLFbDgF0TPJ03WE2DSZ4fxer2DRkuiCw=;
+	b=LYnDzA4PHGhmC3m6t4bLlYRm5708vYvZD88EkoNklGffiLqAiC8+opZpnhOV2kmqmf
+	lfKLnKm1mL4ph9znOmXiH04/bu4jO7sxAIowvRgxXiEvhCfTt0NEts7bMHqvQg1vx3jF
+	7JaQj2Lz/vZI9xOWvt5OCpQ+Vas2rnHTmiwqAelccOqTGmlFavncMimaswn4N+Nh/uMM
+	ac8+RYtPY0wV8nAdjT4o9m6g87ZCcKmEorygBAfMVS+K3whWoHNrgSeF/uGTmk/dVbJ3
+	0ezQeiytE0cPBBMSfEi21EF5lztrmFkFd6a7K1+K2DqITRxQCkVq9eEYov9eK71ZRi9F
+	tLCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=0rMt0pBMBPnvZvd08scu2YF0xYoDUNtKO+Wj0sGDNUI=;
-	b=OeZYcFsS+X2i+QbKytVn+/hazLzfWnxJpclN/cvexDbJYZEYkF+pjyyY1E5M6Cbx82
-	T/NNEswBVX9+KEtbbvmjqdWfbzjbNUso7eAsiFjtLv9M5TMW77rL51AZY6xX/6qiMglN
-	cZz1pot2BDvAXYMDfgsifXgDlbd8JkN3kkMy6uf/cKcMo4oFUXLmcN8YrB5vABbS+34p
-	oRmBvKJR1bvdHimtxc1V2DyJqbq9ZO9n+CIdHmPvWLKdKdb5wUpVmiNiT8Ta6E6hVG6f
-	KkNaC6wbsHDsRmO2VQefJVUPb+YL7Jg01lfG9x8B4VNi1dzm5PEPLK7P4VOCSsh9Ql3a
-	S1LA==
-X-Gm-Message-State: AOUpUlGIxBPYR3sCEJQ1zrrLws6OPZZEZXKhHJ9ILYjjotVmKTtnLBoQ
-	OVUi1IRqhkweR5HnTgZe/Z5zkXtyhkQnzkAWPuc=
-X-Google-Smtp-Source: AAOMgpferHFTl1YX5TbecU0vOlEAVO/ntre1Yg8tSOOKnAYBpIBJEijk2KosP/hITfqKdTSDHxGzW1cyjE4OxIqobzY=
-X-Received: by 2002:ac8:25f1:: with SMTP id
-	f46-v6mr17441006qtf.20.1532446914658; 
-	Tue, 24 Jul 2018 08:41:54 -0700 (PDT)
+	bh=ZRcTFFuS0iqlLFbDgF0TPJ03WE2DSZ4fxer2DRkuiCw=;
+	b=ncRAiB2UmIru8a9rJXWUuJFHS0TaCnPN8tJcNxhz/2hjfRMauSrv1TMvu/AaF2jzhx
+	IioYO4dsOABFo9gckJsQcaZpyEbh3VbcCXug30F+MUCQHy6AJHss8zI4xGE1Ca/u6wZs
+	tZLUTsQS32DHlzjIa//h19+mbHnGtvOBfXVD2F/XjolppRv5yJsMaG9YY7gC+KmeuWon
+	e5t6uUdV4Uk0YjUiH6MY/M4KniV32jiIAVYemWMI82AhqSSDKAV+SsUJsjlCCrqdIhDp
+	nXm1wsO+XsQSt5JY7nWpODPCck6yzZvVyffx3JpdinCxoO8qtXMw5mfam3puT/zoeR7R
+	jzvw==
+X-Gm-Message-State: AOUpUlGAvzpiHuUEbY9xFpMqkclR8Gotw/pRPpt7dFAovM70WRvRgZ3E
+	yBtMmaCm0COI0/BUHXCpxYfReyn8VN86+sm+fstdCA==
+X-Google-Smtp-Source: AAOMgpfbve17vOe7FPZOwNDi1MQPQxEfhqcQCQ52DvM88uWqh7Neisai42qQnJvBTlXN6EqHUEhBBfUQzTs/x44tbBE=
+X-Received: by 2002:a1c:8f0e:: with SMTP id
+	r14-v6mr2584986wmd.79.1532450838150; 
+	Tue, 24 Jul 2018 09:47:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180724150101.12609-1-brgl@bgdev.pl>
-In-Reply-To: <20180724150101.12609-1-brgl@bgdev.pl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Jul 2018 08:41:28 -0700
-Message-ID: <CAMKF1sra8-e7r14QcRtkfL0ysiurQKuwJV+WS3F8+8f7WR2FSA@mail.gmail.com>
-To: brgl@bgdev.pl
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] libgpiod: bump version to v1.1.1
+References: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
+	<1531899089-395618-6-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1531899089-395618-6-git-send-email-changqing.li@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 24 Jul 2018 18:47:07 +0200
+Message-ID: <CA+chaQdAwHn0fAj2A6oX5HrbK5zADMmYX0DACO2KEVt55+0ZBQ@mail.gmail.com>
+To: changqing.li@windriver.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] pps-tools: 0.0.0+gitX -> 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,48 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 15:41:54 -0000
+X-List-Received-Date: Tue, 24 Jul 2018 16:47:17 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jul 24, 2018 at 8:01 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> This is a bug-fix release that fixes a couple memory leaks and bugs in
-> python bindings discovered in the v1.1 release.
->
+Why not use RDEPENDS_${PN} instead of RDEPENDS_pps-tools? It's now broken
+with multilib.
 
-the subject of message is misleading,  we have filters and the message
-can get lost, I have staged this
+Also meta-oe is using 4 spaces for indentation, would be nice to fix the
+do_install.
 
-> Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+On Wed, Jul 18, 2018 at 9:32 AM <changqing.li@windriver.com> wrote:
+
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > ---
->  .../libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb}           | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-support/libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb} (78%)
+>  .../pps-tools/{pps-tools_git.bb => pps-tools_1.0.2.bb}               | 5
+> +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/pps-tools/{pps-tools_git.bb =>
+> pps-tools_1.0.2.bb} (82%)
 >
-> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
-> similarity index 78%
-> rename from meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-> rename to meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
-> index ab0bc980d..9d3d759fe 100644
-> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
-> @@ -2,8 +2,8 @@ require libgpiod.inc
+> diff --git a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
+> b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
+> similarity index 82%
+> rename from meta-oe/recipes-support/pps-tools/pps-tools_git.bb
+> rename to meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
+> index 8bf9036..106be35 100644
+> --- a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
+> +++ b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
+> @@ -4,12 +4,13 @@ HOMEPAGE = "http://linuxpps.org"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 >
->  DEPENDS += "autoconf-archive-native"
+> -PV = "0.0.0+git${SRCPV}"
+> -SRCREV = "0deb9c7e135e9380a6d09e9d2e938a146bb698c8"
+> +SRCREV = "cb48b7ecf7079ceba7081c78d4e61e507b0e8d2d"
+>  SRC_URI = "git://github.com/ago/pps-tools.git"
 >
-> -SRC_URI[md5sum] = "80237a047a9d653a14c5d71e5ce9d641"
-> -SRC_URI[sha256sum] = "9758466468a7ef3f5e30c182c1303abef6241e665cda4d82a64328a7474838c1"
-> +SRC_URI[md5sum] = "e5e946cb01a35e5046a1a7a108d6a96d"
-> +SRC_URI[sha256sum] = "172fa1544ecb51f37533b3e67862298d50c0a5cc84975f3c0706dc15467f0dfd"
+>  S = "${WORKDIR}/git"
 >
->  PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
->
+> +RDEPENDS_pps-tools = "bash"
+> +
+>  do_install() {
+>          install -d ${D}${bindir} ${D}${includedir} \
+>                     ${D}${includedir}/sys
 > --
-> 2.17.1
+> 2.7.4
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
