@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AFC587895F
+Received: from mail-qt0-f169.google.com (mail-qt0-f169.google.com
+	[209.85.216.169])
+	by mail.openembedded.org (Postfix) with ESMTP id E5EEB60603
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 15:40:14 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id b15-v6so4527704qtp.11
+	Tue, 24 Jul 2018 15:41:53 +0000 (UTC)
+Received: by mail-qt0-f169.google.com with SMTP id m13-v6so4562616qth.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 08:40:16 -0700 (PDT)
+	Tue, 24 Jul 2018 08:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6iWh3tjb4js5ab4ly8F4pB/Co6R83WHekkN5pTQyt8U=;
-	b=Hlg/ziiw4JvnkjdySTlD658Dg9wl1rKP1BhRhJlPuFVPT5+XVIC0S66aIbE1M/QVUx
-	5eDqE6kFCZnfloQZ4n9Wa5Uygk91AirVUxHmxJ6CM+wL88/HNdwOugrrRC+x2RUjzcA+
-	c46fq+qHD69L7sd/zrdZVO8Ns8QjT+8uyNcFLqk4hUZI6IZ0du8XcL0MXM24lEwg5Mm6
-	DrmD2rNWz35LTS+E/JsU2QlfM81EY2S19b5l2ltHhJflsdUg90b1lpo7gXukALGZ/VfN
-	NvTf/R6LkF+vLQyERBYKmPqIje+dEyrG/VkCTkRHteUzCNx1rB7MzDd5Cdg3gBGvBFra
-	ESow==
+	:cc; bh=0rMt0pBMBPnvZvd08scu2YF0xYoDUNtKO+Wj0sGDNUI=;
+	b=HsvOIDy3/sUFAvOuynKIczzcpm1+O6wjidW6zevhtbWMYzy/LJT1/x2XF2+VHV66jf
+	cmQ983+UADm+ZFaN0tsryzH6k8iY9iinNYCdYZ9NOIAmDpd2GeVewKy2jbqni0V8IFWq
+	b071ViHvYFDaqtANTBVGo7tsEOCwGkIvq6JbG6tzWIimqMXxtTphA4uazUZEALykWeAC
+	i2ECJxMGS3L7qpHhw+MZrtIxY45TL6v+UD/SL6vkoa8Dc96c9lk2JBQo4MjCkJQ72503
+	WPt8NzvncWPK7MIk0gmW/4qqHUbzMNqpcK3H8/zvXDjWkgcVXZE7TXonCNjSawr+KT0h
+	aJkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=6iWh3tjb4js5ab4ly8F4pB/Co6R83WHekkN5pTQyt8U=;
-	b=TebQvTRMXch/0GLVJUasfemn/15FIrGyzLS1eNtMXAm6yl708Og18+c6eSnPoIWAQK
-	rOTmpDdXZ/LrU5dp429J33a/ex0pvtnl6MTaU0zWTxzkgaMwfB8S3CYk3Tn5QLa8fjO5
-	C/JC10WZbeBeRhiwExGG6Peim0IQRe6qFzfLysX3J6ctWB2y3fDTPjJCl3uUyL8j8lWt
-	S+eOk8p7qokWgM4jwWl1of/pIWp/68gjUIGqPJxNwkLUjRf4yeVpxTsl7vf5w10K2ka6
-	yvh4/N9kd8CcfxRgfnwGhnvdn5N2ic2Qovh5W/H34xTTZzDYNixFhXMHpVnkDSYEt2xZ
-	o7DQ==
-X-Gm-Message-State: AOUpUlGRW7sznMpNGAfINLz4q7ENgDOSKnYOW47mqaBK921OztIv28N2
-	AeMcZBXNPn9svPrDO/HC8x6QLVnow5MxpUOLw3x4Cg==
-X-Google-Smtp-Source: AAOMgpdAgpt1bpZm9cEsMLi0CPiiy2QkCOlllxg4I4vCiRmsLtKisoe+IgFjLHqCFm9wEK89lwi/fwe1jNzQ5QNozjk=
-X-Received: by 2002:ac8:2ad8:: with SMTP id
-	c24-v6mr17118073qta.117.1532446815491; 
-	Tue, 24 Jul 2018 08:40:15 -0700 (PDT)
+	bh=0rMt0pBMBPnvZvd08scu2YF0xYoDUNtKO+Wj0sGDNUI=;
+	b=OeZYcFsS+X2i+QbKytVn+/hazLzfWnxJpclN/cvexDbJYZEYkF+pjyyY1E5M6Cbx82
+	T/NNEswBVX9+KEtbbvmjqdWfbzjbNUso7eAsiFjtLv9M5TMW77rL51AZY6xX/6qiMglN
+	cZz1pot2BDvAXYMDfgsifXgDlbd8JkN3kkMy6uf/cKcMo4oFUXLmcN8YrB5vABbS+34p
+	oRmBvKJR1bvdHimtxc1V2DyJqbq9ZO9n+CIdHmPvWLKdKdb5wUpVmiNiT8Ta6E6hVG6f
+	KkNaC6wbsHDsRmO2VQefJVUPb+YL7Jg01lfG9x8B4VNi1dzm5PEPLK7P4VOCSsh9Ql3a
+	S1LA==
+X-Gm-Message-State: AOUpUlGIxBPYR3sCEJQ1zrrLws6OPZZEZXKhHJ9ILYjjotVmKTtnLBoQ
+	OVUi1IRqhkweR5HnTgZe/Z5zkXtyhkQnzkAWPuc=
+X-Google-Smtp-Source: AAOMgpferHFTl1YX5TbecU0vOlEAVO/ntre1Yg8tSOOKnAYBpIBJEijk2KosP/hITfqKdTSDHxGzW1cyjE4OxIqobzY=
+X-Received: by 2002:ac8:25f1:: with SMTP id
+	f46-v6mr17441006qtf.20.1532446914658; 
+	Tue, 24 Jul 2018 08:41:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180724134300.31744-1-philip@balister.org>
-In-Reply-To: <20180724134300.31744-1-philip@balister.org>
+References: <20180724150101.12609-1-brgl@bgdev.pl>
+In-Reply-To: <20180724150101.12609-1-brgl@bgdev.pl>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Jul 2018 08:39:49 -0700
-Message-ID: <CAMKF1so9ECEqyD49imbeZMPfPwmHs5UBA8oU8bOh89+kvUx9eA@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
+Date: Tue, 24 Jul 2018 08:41:28 -0700
+Message-ID: <CAMKF1sra8-e7r14QcRtkfL0ysiurQKuwJV+WS3F8+8f7WR2FSA@mail.gmail.com>
+To: brgl@bgdev.pl
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] lapack: Add recipe.
+Subject: Re: [PATCH] libgpiod: bump version to v1.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,62 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 15:40:14 -0000
+X-List-Received-Date: Tue, 24 Jul 2018 15:41:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Jul 24, 2018 at 6:43 AM Philip Balister <philip@balister.org> wrote:
+On Tue, Jul 24, 2018 at 8:01 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 >
->  * Build tested.
->  * Note: needs FORTRAN enabled in local.conf or similar.
->  * Used to build scipy on pi-3. scipy passed many tests.
->  * Based on work from meta-gnss https://github.com/carlesfernandez/meta-gnss-sdr
->  * Hopefully this helps others playing with scipy and things.
+> This is a bug-fix release that fixes a couple memory leaks and bugs in
+> python bindings discovered in the v1.1 release.
 >
 
-thanks for this,  fortran is not a daily driver for many here, and is
-not enabled
-in toolchain by default as well. So in this scenario is there any easy way to
-exclude this recipe from parsing ? I am interested in getting our recipe fail
-count down and this recipe wont help.
+the subject of message is misleading,  we have filters and the message
+can get lost, I have staged this
 
-> Signed-off-by: Philip Balister <philip@balister.org>
+> Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
 > ---
->  meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+>  .../libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb}           | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb} (78%)
 >
-> diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
-> new file mode 100644
-> index 000000000..ef1abd567
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Linear Algebra PACKage"
-> +URL = "http://www.netlib.org/lapack"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
-> +
-> +# Recipe needs FORTRAN support (copied from conf/local.conf.sample.extended)
-> +# Enabling FORTRAN
-> +# Note this is not officially supported and is just illustrated here to
-> +# show an example of how it can be done
-> +# You'll also need your fortran recipe to depend on libgfortran
-> +#FORTRAN_forcevariable = ",fortran"
-> +#RUNTIMETARGET_append_pn-gcc-runtime = " libquadmath"
-> +
-> +DEPENDS = "libgfortran"
-> +
-> +SRC_URI = "http://www.netlib.org/lapack/lapack-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "96591affdbf58c450d45c1daa540dbd2"
-> +SRC_URI[sha256sum] = "deb22cc4a6120bff72621155a9917f485f96ef8319ac074a7afbc68aab88bcf6"
-> +
-> +EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON "
-> +OECMAKE_GENERATOR = "Unix Makefiles"
-> +
-> +inherit cmake pkgconfig
-> +
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
+> similarity index 78%
+> rename from meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
+> rename to meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
+> index ab0bc980d..9d3d759fe 100644
+> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
+> @@ -2,8 +2,8 @@ require libgpiod.inc
+>
+>  DEPENDS += "autoconf-archive-native"
+>
+> -SRC_URI[md5sum] = "80237a047a9d653a14c5d71e5ce9d641"
+> -SRC_URI[sha256sum] = "9758466468a7ef3f5e30c182c1303abef6241e665cda4d82a64328a7474838c1"
+> +SRC_URI[md5sum] = "e5e946cb01a35e5046a1a7a108d6a96d"
+> +SRC_URI[sha256sum] = "172fa1544ecb51f37533b3e67862298d50c0a5cc84975f3c0706dc15467f0dfd"
+>
+>  PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
+>
 > --
-> 2.13.6
+> 2.17.1
 >
 > --
 > _______________________________________________
