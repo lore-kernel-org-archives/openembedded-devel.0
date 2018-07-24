@@ -1,69 +1,42 @@
-Return-Path: <prvs=736b72a50=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BE9C606B2
+Return-Path: <prvs=6743d8940e=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 9739F75532
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 08:01:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,397,1526335200"; 
-   d="scan'208";a="1570185"
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
-	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <d9901e65-dba2-c1ba-5f8b-88d8b2bb01b8@skidata.com>
-Date: Tue, 24 Jul 2018 10:02:03 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Tue, 24 Jul 2018 08:28:45 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w6O8Pb8U001877 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jul 2018 03:28:46 -0500
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mx0a-00010702.pphosted.com with ESMTP id 2kc0uv6nfc-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jul 2018 03:28:46 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com
+	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
+	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w6O8SjAV009015
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jul 2018 03:28:45 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Tue, 24 Jul 2018 03:28:45 -0500
+Received: from avasiuPC.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Tue, 24 Jul 2018 03:28:44 -0500
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Jul 2018 11:27:15 +0300
+Message-ID: <20180724082715.11769-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] bug-tracker
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-07-24_03:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to version 0.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,30 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 08:01:51 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Jul 2018 08:28:45 -0000
+Content-Type: text/plain
 
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+---
+ meta-python/recipes-devtools/python/python-pyiface.inc       | 4 ++--
+ meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb  | 2 ++
+ meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb | 2 ++
+ 3 files changed, 6 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
 
-On 07/24/2018 09:55 AM, Otavio Salvador wrote:
-> 
-> Em ter, 24 de jul de 2018 08:33, Richard Leitner <richard.leitner@skidata.com <mailto:richard.leitner@skidata.com>> escreveu:
-> 
->     Hi,
->     finally I have another question regarding the meta-java layer :-)
-> 
->     Do we have some kind of bug-tracker?
-> 
->     If no: I would really love to see one for meta-java.
->     What are our possibilities here? YP Bugzilla? GitHub? others?
-> 
->     What do you think?
-> 
-> 
-> We recently passed the review process of meta-qt5 to github and it has been much better this using the patchwork.
-> 
-> Maybe we could consider the possibility of moving meta-java there and make the yp.org <http://yp.org> a mirror so we use the issues, PR and all resources it offers (Travis as well).
+diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
+index 895a0ae09..a1156f428 100644
+--- a/meta-python/recipes-devtools/python/python-pyiface.inc
++++ b/meta-python/recipes-devtools/python/python-pyiface.inc
+@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+ 
+-SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
+-SRC_URI[sha256sum] = "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
++SRC_URI[md5sum] = "bc94e3d0c1cf8f49ac86514a8e90ed5c"
++SRC_URI[sha256sum] = "a58367d456ac0b4b9d1d5c31d5dd24363ad6c5bcc73edf027ded63732f784cf4"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+new file mode 100644
+index 000000000..854cb30ee
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-pyiface.inc
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+new file mode 100644
+index 000000000..721e7b1c9
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pyiface.inc
+-- 
+2.18.0
 
-+1 from my side!
 
