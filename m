@@ -1,52 +1,22 @@
-Return-Path: <alistair23@gmail.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 74E3775532
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7DD7575532
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 23:12:02 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id q5-v6so1942051ljh.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 16:12:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=fm1QROl0JLy0RyFc54zNy2QNJ1izIRSFVbej0cN3aFA=;
-	b=VwvjpJHOAlpdrv83Z9H3aFRCfKi0EdwWxV6qcJM+v7MXNzs6sEFii/P85OxNUlygVY
-	fJAlub/EtB4X5I/AjTFjxw8T/mOvChrpS3ly2/gf8PCDz8bxEvuh87jvYoDqzJpKqQQ3
-	W8m3wpAgt83tRU4QxSr8MDlQl+gf9yzG8RvkCHK7rtkJEkA8t7+ziWVT/z8ugu+oNCMR
-	2JKz1xezYWoiODDMQUdlkGRxBGdFnaV9WlkapuhuJUXmxGQFXTcsSXmFTJC1uEWIVF2Y
-	YdmG/Qm/gbz0MIs8xUoVpsUNptyIHFmnvoFtZEV5zuNDKSCtYCgPAP/tSXQSP+8oiDAT
-	ZyUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=fm1QROl0JLy0RyFc54zNy2QNJ1izIRSFVbej0cN3aFA=;
-	b=ep+mnJMqatddhGjSi55Hr0RknRPaOhzp1VyIRTS9/I9fR8768YapkrdeIQ7lrt6fA/
-	G+HJyxSwXJfO/ZbHo5DXwiva656IewCYf0mTw9M8WGvsqiIQtVCNvuMiUosQiXKQ2b5h
-	rHGu2QNuz6IVeUyBPKSZWAdvzvLH6mfl2wCeqm0j5i+8kYN6SnIr3p2yOUWRrE3vEilf
-	PTtUcLvFTCHvxCHPDFsAiy5dYPLy0NcWGvcvr5fwnVvdoXWU7jWeg5DU9btCyhi+NBWr
-	0UbP/0ZsEutQTyjoLqs8WHDVwybnjDGMCMNZ0Jb1Iyr5e/FBDF7G/rzg+dyggiClzHTu
-	9BHg==
-X-Gm-Message-State: AOUpUlE9ODhu3uMyW+9pIQZ34XEd/5nr8ZUy3uVhdHTjxIF7VD0M1F/1
-	hjgOnWhy4erC3fUYBTqnu73QnkG5WvIKgNdfRRs=
-X-Google-Smtp-Source: AAOMgpcxwGrdbzr7uNImsyYvVUwo1Fyg8QqKu14ejz/RLasDxCRTtf4vXgTPyzLuYtN2aN41GeJMSiswx+WZcYpn1+U=
-X-Received: by 2002:a2e:8185:: with SMTP id
-	e5-v6mr10702322ljg.93.1532387523054; 
-	Mon, 23 Jul 2018 16:12:03 -0700 (PDT)
+	Tue, 24 Jul 2018 01:21:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6O1L7f9024012
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 23 Jul 2018 18:21:07 -0700 (PDT)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Mon, 23 Jul 2018 18:20:54 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Mon, 23 Jul 2018 18:20:53 -0700
+Message-ID: <20180724012054.5687-1-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 2002:a2e:859a:0:0:0:0:0 with HTTP; Mon, 23 Jul 2018 16:11:32
-	-0700 (PDT)
-In-Reply-To: <CAMKF1soTg324TAuiTLRczMKq2aF0GSqNdDqhTmUW+neGAtj+fw@mail.gmail.com>
-References: <20180716223703.1588-1-alistair.francis@wdc.com>
-	<CAMKF1soTg324TAuiTLRczMKq2aF0GSqNdDqhTmUW+neGAtj+fw@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Jul 2018 16:11:32 -0700
-Message-ID: <CAKmqyKOs2XKDxHckLB3H6aUORi+UndKzoy4hV+2PsvdC0=+6-A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>,
-	megha.dey@linux.intel.com,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ndctl: Add the NDCTL package
+Subject: [PATCH v3 0/1] Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,86 +29,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jul 2018 23:12:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 24 Jul 2018 01:21:06 -0000
+Content-Type: text/plain
 
-On Fri, Jul 20, 2018 at 4:06 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> fails to build on qemux86_64
->
-> | install: cannot stat
-> '/home/jenkins/oe/world/oe-build/build/tmpfs/work/qemux86_64-bec-linux/ndctl/v61+gitAUTOINC+0d6aeeabec-r0/ndctl_runner':
-> No such file or directory
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_install (log file is located at
-> /home/jenkins/oe/world/oe-build/build/tmpfs/work/qemux86_64-bec-linux/ndctl/v61+gitAUTOINC+0d6aeeabec-r0/temp/log.do_install.28110)
+v3:
+    add support for musl when build bpf and modify the recipe slightly
 
-Fixed in v2.
+Hongzhi.Song (1):
+  kernel-selftest: Add a recipe on kernel selftest
 
-Alistair
+ .../kernel-selftest/kernel-selftest.bb             |  94 ++++++
+ ...bpf-test_progs.c-add-support-for-musllibc.patch |  25 ++
+ ...-swap.h-micro-define-to-support-musl-libc.patch |  26 ++
+ .../kernel-selftest/kernel-selftest/COPYING        | 356 +++++++++++++++++++++
+ .../kernel-selftest/userfaultfd.patch              | 322 +++++++++++++++++++
+ 5 files changed, 823 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
 
-> On Mon, Jul 16, 2018 at 3:47 PM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
->>
->> Add the NDCTL package (the libnvdimm utility library). This is based
->> on the work from the meta-luv layer with a version bump.
->>
->> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->> ---
->>  meta-oe/recipes-core/ndctl/ndctl_git.bb | 34 +++++++++++++++++++++++++
->>  1 file changed, 34 insertions(+)
->>  create mode 100644 meta-oe/recipes-core/ndctl/ndctl_git.bb
->>
->> diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
->> new file mode 100644
->> index 000000000..3bf54e74b
->> --- /dev/null
->> +++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
->> @@ -0,0 +1,34 @@
->> +SUMMARY = "libnvdimm utility library"
->> +DESCRIPTION = "Utility library for managing the libnvdimm \
->> +(non-volatile memory device) sub-system in the Linux kernel. \
->> +The LIBNVDIMM subsystem provides support for three types of \
->> +NVDIMMs, namely,PMEM, BLK, and NVDIMM devices that can \
->> +simultaneously support both PMEM and BLK mode access."
->> +HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/nvdimm/nvdimm.git/tree/Documentation/nvdimm/nvdimm.txt?h=libnvdimm-for-next"
->> +LICENSE = "GPLv2+"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
->> +
->> +inherit autotools-brokensep pkgconfig module-base
->> +
->> +SRCREV = "0d6aeeabec9d271e08c12e4cf679b59946e20156"
->> +SRC_URI = "git://github.com/pmem/ndctl.git"
->> +
->> +DEPENDS = "virtual/kernel kmod udev json-c"
->> +
->> +PV = "v61+git${SRCPV}"
->> +S = "${WORKDIR}/git"
->> +
->> +EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
->> +
->> +do_configure_prepend() {
->> +    ${S}/autogen.sh
->> +}
->> +
->> +do_install_append() {
->> +        install -d ${D}${bindir}
->> +        install -m 755 ${WORKDIR}/ndctl_runner ${D}${bindir}
->> +}
->> +
->> +COMPATIBLE_HOST='(x86_64).*'
->> +
->> +FILES_${PN} += "/usr/share/bash-completion/completions/ndctl"
->> --
->> 2.17.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+2.11.0
+
 
