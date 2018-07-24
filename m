@@ -1,42 +1,50 @@
-Return-Path: <prvs=6743d8940e=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 0287E71BF9
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A6F378911
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 10:41:47 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w6OAfJrU010713 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 05:41:48 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2kc2bpeta4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 05:41:48 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com
-	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w6OAfm2D022957
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Tue, 24 Jul 2018 13:43:05 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id v72-v6so2042856vkd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 05:41:48 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Tue, 24 Jul 2018 05:41:47 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Tue, 24 Jul 2018 05:41:47 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Jul 2018 13:41:31 +0300
-Message-ID: <20180724104131.8157-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.18.0
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-07-24_04:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH v2] python-pyiface: Upgrade to version 0.0.9
+	Tue, 24 Jul 2018 06:43:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=jhep/BB+6++bf9AjnuXsreAKD1fZj7OYa0Ow2P8LZek=;
+	b=I3HOpKd0Lt64HMfeNkZH4EYfvmWB1ojifV1A3xSIjRxksm5czlMki0ww4pgXB5Fx6f
+	n5aek6Lt1+H1EvqGsFLIGBkKaoeCnb2Dqi/HH9ZaB4NKqRBSqhwVIOnozixJ4DQBpaG9
+	xSYMdUXQ0iKbGNjJ0SwLKfI+LCZ2rOSFJniSlOJHx1nCK0Wc/9Zu4IjhJfIzefxr46gn
+	uHupEl2Nbifn5lM+KzJyRUidZLyKuZh1qN8fjWQ/q1bJzl8eAGtd8CEYRr9q11hUMa2p
+	a70pXsc2ZbruOPfWHiruG0GQhjH3Ox/qGhvRuH+DEp7+i8xiHfUDttMeDXAQ3FljYrFF
+	C0oQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=jhep/BB+6++bf9AjnuXsreAKD1fZj7OYa0Ow2P8LZek=;
+	b=SkCZngz5VCQinhvTmWefDnLa2pKsRXvT+qieeHgIF376GSZGt/yErrkB+Oqv/J7qLB
+	MX5GXZEpGRPriK6FcE3odHefWwcyFBVqUSbq3hl5fsZ6i41A2FGb4oz+LBiqg43h/mMz
+	9D7tATkZ6EMupnhsBcXuKdBSQ4/y4Ov4YJe5jo4CHKz9mbKk8nUgfBie65Oh09elTfxW
+	FrlOma8iKXBZemkNYVbSiQUoUYdIMjGcATmDNbS5zBbxXMhK8EEdyGNd17ZbyNHeCPAQ
+	qAfOvZBIfIGUmGITc2WqyXfCLumA8xVIGXY9FljvHuZGY3el+wrIBceHPoHKrdmzXD6b
+	H/zg==
+X-Gm-Message-State: AOUpUlHUkSts7tg1qNqd8xcFVJsgAjLR7fpRZxTnDRJonUa16MrvY6LY
+	TyvKETOpbeY90Z1kFJokqtjInMHK
+X-Google-Smtp-Source: AAOMgpdQNh9j7cd+HFi9msEoCPs0RUc92t1VbNBk7cqHcfaUN3FUJq4WkN4ZxOYJP1mTLA7G2e9ZeQ==
+X-Received: by 2002:a1f:9945:: with SMTP id
+	b66-v6mr10193087vke.100.1532439785434; 
+	Tue, 24 Jul 2018 06:43:05 -0700 (PDT)
+Received: from prague.hsd1.va.comcast.net
+	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
+	by smtp.gmail.com with ESMTPSA id
+	d28-v6sm2435665uan.55.2018.07.24.06.43.03
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 24 Jul 2018 06:43:04 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 24 Jul 2018 09:43:00 -0400
+Message-Id: <20180724134300.31744-1-philip@balister.org>
+X-Mailer: git-send-email 2.13.6
+Subject: [meta-oe][PATCH] lapack: Add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,41 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 10:41:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Jul 2018 13:43:05 -0000
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+ * Build tested.
+ * Note: needs FORTRAN enabled in local.conf or similar.
+ * Used to build scipy on pi-3. scipy passed many tests.
+ * Based on work from meta-gnss https://github.com/carlesfernandez/meta-gnss-sdr
+ * Hopefully this helps others playing with scipy and things.
+
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
- .../{python-pyiface_0.0.7.bb => python-pyiface_0.0.9.bb}      | 0
- .../{python3-pyiface_0.0.7.bb => python3-pyiface_0.0.9.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.7.bb => python-pyiface_0.0.9.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.7.bb => python3-pyiface_0.0.9.bb} (100%)
+ meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index 895a0ae09..a1156f428 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
- 
--SRC_URI[md5sum] = "1bbc53c281925eae5f508b8b1a1f8259"
--SRC_URI[sha256sum] = "83a64f5672cda48776ca9ed228dbf2e2df7b074a7dcb52ed4f6987322051928d"
-+SRC_URI[md5sum] = "bc94e3d0c1cf8f49ac86514a8e90ed5c"
-+SRC_URI[sha256sum] = "a58367d456ac0b4b9d1d5c31d5dd24363ad6c5bcc73edf027ded63732f784cf4"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.7.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+new file mode 100644
+index 000000000..ef1abd567
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Linear Algebra PACKage"
++URL = "http://www.netlib.org/lapack"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
++
++# Recipe needs FORTRAN support (copied from conf/local.conf.sample.extended)
++# Enabling FORTRAN
++# Note this is not officially supported and is just illustrated here to
++# show an example of how it can be done
++# You'll also need your fortran recipe to depend on libgfortran
++#FORTRAN_forcevariable = ",fortran"
++#RUNTIMETARGET_append_pn-gcc-runtime = " libquadmath"
++
++DEPENDS = "libgfortran"
++
++SRC_URI = "http://www.netlib.org/lapack/lapack-${PV}.tar.gz"
++SRC_URI[md5sum] = "96591affdbf58c450d45c1daa540dbd2"
++SRC_URI[sha256sum] = "deb22cc4a6120bff72621155a9917f485f96ef8319ac074a7afbc68aab88bcf6"
++
++EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON "
++OECMAKE_GENERATOR = "Unix Makefiles"
++
++inherit cmake pkgconfig
++
 -- 
-2.18.0
+2.13.6
 
 
