@@ -1,50 +1,34 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 283DA78883
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 48D4E60603
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 15:01:02 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id b15-v6so4460540wrv.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 08:01:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=IcNqLa5Kk7ty3CvUZNJ4VvK1h0LkzBDiOkV/KR9cDmM=;
-	b=yTOseLeMwFOeeLA9guyFqRSNpvrI1fmnc++LpJ4tgsuF0tBdePFNxXwHkC1FYQUlqg
-	dKCWwshO+5GE1ijTstGyKnpUj2xZ+L+HW/vnkijoFioOYFHi0SlPNBJ9trvMNJaNXWba
-	f2n6BbSMoT8SHKGL+mdKUjPV09bRQmEMwwaaRTHIilqx+gVxv88zWOjsuHF9AhE6t5jR
-	2Yd8neY+QBi2UViBIXrnYSNeTtMyyrn6wA55hcfMtgXgzxDiARcE1W2Akv+6zz155mUA
-	CLegmIdVqC6SMgC1IFdvClhzRPG76Q3YKb9jY2iMFBraiHhfyknGmuFkaJ6lBaSrH/7r
-	yqMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=IcNqLa5Kk7ty3CvUZNJ4VvK1h0LkzBDiOkV/KR9cDmM=;
-	b=GEHEXEUVAMkt00aA9YRTGSXwWrMHxpCFcMRdMklHwVRhoeKC3cuvmW1xVx7GpHBFgo
-	wolIaawUPr7LbvhHFxpmrIqeMtCcFp44pghLo2d/8akWVe8/I9dtCQ86bURTvNsM6Utl
-	/2HKKvMdv6Zo16PMG/E2QeJL8Ll+12kDXTVzSVxla6jCxE1TXAQI19Vnb8g23EN+S3W5
-	ICzhIHnEIYQ9lRfL4Rg+iINpcExZYPTHfhhkoQCdvjiWLIBi4j5s58lUb6u3Af3+pVQK
-	npJ+RcLCYPN6jvJsU5y1n5H0SiK4MkRxD01NF9AVV77f7T72UOvqmYSXsKWL0inrduww
-	6i2Q==
-X-Gm-Message-State: AOUpUlFpnlBQLQtaU7zDiSRPlHbzBojmyI5wsPEaefBovIo5Hlk6uRFE
-	67dfHJiSYWnMJURqyFTBqAyo+A==
-X-Google-Smtp-Source: AAOMgpeaDl8AeZuayTsrFJvBs+DPR4wRlhrWj5L2VdffmrHV0zQHrWoTTMy1u8O3LkqDq1fRwLkOmw==
-X-Received: by 2002:adf:8481:: with SMTP id 1-v6mr12307457wrg.34.1532444463663;
-	Tue, 24 Jul 2018 08:01:03 -0700 (PDT)
-Received: from brgl-bgdev.baylibre.local
-	(AStLambert-681-1-38-117.w90-86.abo.wanadoo.fr. [90.86.157.117])
-	by smtp.gmail.com with ESMTPSA id
-	z14-v6sm1755115wma.18.2018.07.24.08.01.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 24 Jul 2018 08:01:02 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jul 2018 17:01:01 +0200
-Message-Id: <20180724150101.12609-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.17.1
-Subject: [PATCH] libgpiod: bump version to v1.1.1
+	Tue, 24 Jul 2018 15:25:42 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A9ECD2E61A8D;
+	Tue, 24 Jul 2018 17:25:42 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A1BEE2E61A8C;
+	Tue, 24 Jul 2018 17:25:39 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham autolearn_force=no version=3.4.0
+Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA;
+	Tue, 24 Jul 2018 17:25:39 +0200 (CEST)
+Date: Tue, 24 Jul 2018 17:25:29 +0200
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Message-ID: <20180724152529.GA19585@mail.itconsulting-heinold.de>
+References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
+	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] bug-tracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 15:01:03 -0000
+X-List-Received-Date: Tue, 24 Jul 2018 15:25:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-This is a bug-fix release that fixes a couple memory leaks and bugs in
-python bindings discovered in the v1.1 release.
+On Tue, Jul 24, 2018 at 08:55:34AM +0100, Otavio Salvador wrote:
+> Em ter, 24 de jul de 2018 08:33, Richard Leitner <
+> richard.leitner@skidata.com> escreveu:
+> 
+> > Hi,
+> > finally I have another question regarding the meta-java layer :-)
+> >
+> > Do we have some kind of bug-tracker?
+> >
+> > If no: I would really love to see one for meta-java.
+> > What are our possibilities here? YP Bugzilla? GitHub? others?
+> >
+> > What do you think?
+> >
+> 
+> We recently passed the review process of meta-qt5 to github and it has been
+> much better this using the patchwork.
+> 
+> Maybe we could consider the possibility of moving meta-java there and make
+> the yp.org a mirror so we use the issues, PR and all resources it offers
+> (Travis as well).
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
----
- .../libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb} (78%)
+The question is under which github space that should happen and who has
+the control over it.
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
-similarity index 78%
-rename from meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-rename to meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
-index ab0bc980d..9d3d759fe 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
-@@ -2,8 +2,8 @@ require libgpiod.inc
- 
- DEPENDS += "autoconf-archive-native"
- 
--SRC_URI[md5sum] = "80237a047a9d653a14c5d71e5ce9d641"
--SRC_URI[sha256sum] = "9758466468a7ef3f5e30c182c1303abef6241e665cda4d82a64328a7474838c1"
-+SRC_URI[md5sum] = "e5e946cb01a35e5046a1a7a108d6a96d"
-+SRC_URI[sha256sum] = "172fa1544ecb51f37533b3e67862298d50c0a5cc84975f3c0706dc15467f0dfd"
- 
- PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
- 
--- 
-2.17.1
-
+Bye Henning
 
