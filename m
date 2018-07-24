@@ -1,24 +1,23 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B473F75114
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C31487602E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 02:34:13 +0000 (UTC)
+	Tue, 24 Jul 2018 05:42:54 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6O2YFtp024653
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6O5gtG9019018
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jul 2018 19:34:15 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Mon, 23 Jul 2018 19:34:14 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Mon, 23 Jul 2018 22:42:55 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
+	Mon, 23 Jul 2018 22:42:54 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Jul 2018 10:34:08 +0800
-Message-ID: <1532399648-7226-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Mon, 23 Jul 2018 22:42:54 -0700
+Message-ID: <20180724054254.36340-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-filesystems][PATCH] yaffs2-utils: update to latest master
+Subject: [meta-oe][PATCH] iperf3: Upgrade to 3.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +30,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 02:34:13 -0000
+X-List-Received-Date: Tue, 24 Jul 2018 05:42:54 -0000
 Content-Type: text/plain
 
-License-Update: Modify the line number for mkyaffs2image.c license.
-                Add license for mkyaffsimage.c since it also be built.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+* Licence-Update:
+  - Copyright years are updated to 2018
+  - Remove the part about src/tcp_window_size.{c,h}
+    as iperf3 uses get/setsockopt() with SO_SNDBUF
+    and SO_RCVBUF directly now
+* Update the path parameter for --with-openssl as
+  ${RECIPE_SYSROOT}/usr to fix the below do_configure
+  error
+  | checking for openssl/ssl.h in /poky-build/tmp/work/i586-poky-linux/iperf3/3.6-r0/recipe-sysroot... no
+  | checking whether compiling and linking against OpenSSL works... no
+  | configure: error: in `/poky-build/tmp/work/i586-poky-linux/iperf3/3.6-r0/build':
+  | configure: error: --with-openssl was given, but test for OpenSSL failed
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../iperf3/{iperf3_3.2.bb => iperf3_3.6.bb}                 | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.2.bb => iperf3_3.6.bb} (83%)
 
-diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-index 317965e..9ca6d9b 100644
---- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-+++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-@@ -5,7 +5,9 @@ SECTION = "base"
- HOMEPAGE = "http://www.yaffs.net"
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
+similarity index 83%
+rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
+rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
+index 2ed08110f..a575d465e 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
+@@ -9,7 +9,7 @@ SECTION = "console/network"
+ BUGTRACKER = "https://github.com/esnet/iperf/issues"
+ AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d098223e44bdd19585315ee75cd9d2d7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a9a036136b748453e839c0eb8906ef2e"
  
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://utils/mkyaffs2image.c;beginline=12;endline=14;md5=5f5464f9b3e981ca574e65b00e438561"
-+LIC_FILES_CHKSUM = "file://utils/mkyaffs2image.c;beginline=11;endline=13;md5=5f5464f9b3e981ca574e65b00e438561 \
-+                    file://utils/mkyaffsimage.c;beginline=10;endline=12;md5=5f5464f9b3e981ca574e65b00e438561 \
-+                    "
+ DEPENDS = "openssl"
  
- PV = "0.0+git${SRCPV}"
- 
-@@ -17,7 +19,7 @@ SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
-            file://0001-define-loff_t-if-not-already-defined.patch \
+@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/esnet/iperf.git \
+            file://0002-Remove-pg-from-profile_CFLAGS.patch \
             "
  
--SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
-+SRCREV = "0065378b27638ee07352282b51b596fabcac26e4"
+-SRCREV = "88d907f7fb58bfab5d086c5da60c922e1c582c92"
++SRCREV = "88f3ad87f38762081a6d7127890ff5c3a052b06a"
  
- UPSTREAM_CHECK_COMMITS = "1"
+ S = "${WORKDIR}/git"
  
+@@ -28,6 +28,6 @@ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sc
+ 
+ CFLAGS += "-D_GNU_SOURCE"
+ 
+-EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}"
++EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}/usr"
+ 
+ BBCLASSEXTEND = "native"
 -- 
-2.7.4
+2.17.1
 
 
