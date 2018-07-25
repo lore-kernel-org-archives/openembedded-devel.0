@@ -1,53 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D7396010D
+Return-Path: <lukaszgardon555@gmail.com>
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id DBAA2605BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 05:38:54 +0000 (UTC)
-Received: by mail-qk0-f173.google.com with SMTP id 26-v6so4160388qks.9
+	Wed, 25 Jul 2018 06:45:23 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id 203-v6so5674399ljj.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 22:38:56 -0700 (PDT)
+	Tue, 24 Jul 2018 23:45:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=3aYGlXZBza+Xum6wQ40//2rl35lF0y7F+fTYFWYPSsU=;
-	b=d5CUrnbnCVyxc2CkiGl28WJXbT4NdXo/BS7t6eeogOJYnZKXcSzsn42kZYJwec27a7
-	sx1tG7V688SdLqBR1OlKS7GJISTbnD1yPu2ULQhAr/CfnortNtI8dAprqZUqaiUFobzz
-	itJr1CGLYqQb6xCcoJOUoGvyyx2HQt2O5Nl7irRUDL8FkaM7+kP93DWnCkxTWsqEyAPG
-	S+LcopDfbFrlwx4eLACu3RMcgk1RyLdvdTfFMxDFTVVlclORX6G85plakkKdQmNCWQB4
-	7CWw9+1c9FdJ9eY3VpNL08pXnADBE1qef2QqngBeaXzGbn4ZI2kndQSd7YGdmPazrJlJ
-	QLHg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=aYunlwnyDGXmcmUu/AV8kLuMXIML4ao+vxuaMkJHtGQ=;
+	b=cIzZtnkRnWyikIMXpF4p7AtOuUs1yYmks7Q2hYZ0BKgr42tD6nI3vBFQddQB22LDWJ
+	RRyUeXmlOrrQNiZ7pP8Bx8deOtfDe9tLvDwNE2pgbuBESwB0j66tcKewaXs6Tevw1uK1
+	mj85E/6FTChPx4IGAAKByFwqRgfDUoaCyYQn3RUhHrtfGZ+Pph31Ed8ApbYwzlKKs/Q4
+	LEmbqj2z4i8RFzkyfuhy+dAoEWs4TQw1rpZYXbHqJc8iTSCoqi5M2kpUeRLUKMDDbeeP
+	8R5iV51e8sTS+6wuD457GOQDnLrkxyQVicjWUyQUd3EvFOSkAEunyZ77kkQyG5vJNM1r
+	4a0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=3aYGlXZBza+Xum6wQ40//2rl35lF0y7F+fTYFWYPSsU=;
-	b=Nb/750LM70dD7be2ZCLWUvfX5C6f1te+1vSoctNIaipx5r3T2+CnbbXC5YinmZ3vlp
-	hs6EWty1IsngLMGxsR8A8NWhB89JKFYA5KUBLhzGtaKEU52Eqg6OymtMzg5x7Keun47Z
-	s1n1aq4/SNKF9nER2dqPV4Oqcx9hGw8Abv2Z/mRekjT4ej3rxab0CrcrGLJh7Imd1st3
-	rMmYOg0yty53bCcep2IvXfVCW+lleqCu5oyviiWdqaocv17eP85OJkMZTd+cFMdJ91v1
-	EFjw+KnXOPuOn1GoitcK9vEfv3Tjkhda3M2zgVwjGFi3VmuORKq7dbhM4oZIaFAGVI6J
-	89KA==
-X-Gm-Message-State: AOUpUlHpOBXTeDgTzWxBqJDT8x28yQwUz3uuy740PNqTSu7lnKQQdr+8
-	W4fASAQywDD9byfPd0pA17hfDCI3QuMum1Kq4NY=
-X-Google-Smtp-Source: AAOMgpcZMFeZ9nf57D6xSwizCSyrc//TGmT2tQULUXlMdnsfBpEH/n6pYPCyYMsBCaP3JPSazXXiwVsqLUMBnyyuRrQ=
-X-Received: by 2002:ae9:c00d:: with SMTP id
-	u13-v6mr17828208qkk.290.1532497135687; 
-	Tue, 24 Jul 2018 22:38:55 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=aYunlwnyDGXmcmUu/AV8kLuMXIML4ao+vxuaMkJHtGQ=;
+	b=Z2hFc/ybNkFmPTkLrgZrooJDfSdnHfWpQcAvVu0G+ms9+magScb6Xx/XU9CFQGoxjP
+	lWAiHfHmtrAaJqtGNLrh71vT3l1+Sb0gyoaO3LiswlORtotFfvX9D+qMbhHZ7mb09Fbw
+	1P87dLVHDqfJhh1zDAfmJO/2X7/icuJyUo/Ro3GuxNWYU5q6Li/IdIx3TDUQBAy8sosn
+	JptJPlxyGxqkK/c1L5zurmQz4XxCx7NznmC8f3EwXIFL2HYeBYCpOdC+Soy/xB7HsClh
+	ReJVZar6VivNgnCZ4roMsxlyI9nVy493624SjJKFdZPoifLxAsHGrckvjx2//b1l/79c
+	l5cQ==
+X-Gm-Message-State: AOUpUlFV9UAJbf7NC93TxkvMHKKRCjq48WprPUXUPSeJ5Fc+QvCFEGQJ
+	Wc8hLn8acCe7c+zUUxISzg9gd3g+
+X-Google-Smtp-Source: AAOMgpd9a9pz9DBpA4BoGRER1zSZQw2Y4hC1Q0mfyC9oU5JuHd68o6p61ElhD+wmF8NcveLtGmlgfA==
+X-Received: by 2002:a2e:29da:: with SMTP id
+	p87-v6mr13697007ljp.12.1532501124010; 
+	Tue, 24 Jul 2018 23:45:24 -0700 (PDT)
+Received: from localhost.localdomain.localdomain
+	(apn-31-0-66-183.dynamic.gprs.plus.pl. [31.0.66.183])
+	by smtp.gmail.com with ESMTPSA id
+	f25-v6sm2623208ljc.97.2018.07.24.23.45.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 24 Jul 2018 23:45:23 -0700 (PDT)
+From: =?UTF-8?q?=C5=81ukasz=20Gardo=C5=84?= <lukaszgardon555@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Jul 2018 08:45:04 +0200
+Message-Id: <1532501104-18601-1-git-send-email-lukaszgardon555@gmail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
-	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
-	<20180724152529.GA19585@mail.itconsulting-heinold.de>
-	<CAP9ODKp3_1iQybyE0McSFUbd7YFPoPbD8HVy+qu05aP18zvwKw@mail.gmail.com>
-	<CANx9H-BRdfmLO1vbeFocn6RSOmcd5F73hB_bYQqOMsc5o_nPSA@mail.gmail.com>
-In-Reply-To: <CANx9H-BRdfmLO1vbeFocn6RSOmcd5F73hB_bYQqOMsc5o_nPSA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 24 Jul 2018 22:38:29 -0700
-Message-ID: <CAMKF1sp4c_LFSGWKvkQ_bdi3Qz3maQO5k+mo1ViYNxxKAQ_5sA@mail.gmail.com>
-To: Tim Orling <ticotimo@gmail.com>
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] bug-tracker
+Subject: [meta-python][PATCHv2] python-tornado: upgrade to version 5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,72 +59,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 05:38:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Jul 2018 06:45:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-how about gitlab ?
-On Tue, Jul 24, 2018 at 9:17 PM Tim Orling <ticotimo@gmail.com> wrote:
->
-> On Tue, Jul 24, 2018 at 11:05 AM Otavio Salvador <
-> otavio.salvador@ossystems.com.br> wrote:
->
-> > Em ter, 24 de jul de 2018 16:25, Henning Heinold <
-> > henning@itconsulting-heinold.de> escreveu:
-> >
-> > > On Tue, Jul 24, 2018 at 08:55:34AM +0100, Otavio Salvador wrote:
-> > > > Em ter, 24 de jul de 2018 08:33, Richard Leitner <
-> > > > richard.leitner@skidata.com> escreveu:
-> > > >
-> > > > > Hi,
-> > > > > finally I have another question regarding the meta-java layer :-)
-> > > > >
-> > > > > Do we have some kind of bug-tracker?
-> > > > >
-> > > > > If no: I would really love to see one for meta-java.
-> > > > > What are our possibilities here? YP Bugzilla? GitHub? others?
-> > > > >
-> > > > > What do you think?
-> > > > >
-> > > >
-> > > > We recently passed the review process of meta-qt5 to github and it =
-has
-> > > been
-> > > > much better this using the patchwork.
-> > > >
-> > > > Maybe we could consider the possibility of moving meta-java there a=
-nd
-> > > make
-> > > > the yp.org a mirror so we use the issues, PR and all resources it
-> > offers
-> > > > (Travis as well).
-> > >
-> > > The question is under which github space that should happen and who h=
-as
-> > > the control over it.
-> > >
-> >
-> > We can make a organization as we did for qt5 or it might be under OSSys=
-tems
-> > umbrella.
-> >
->
-> I=E2=80=99d vote for new organization. Just make sure to update the layer=
- index.
->
-> >
-> > >
-> > > Bye Henning
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+License-Update: Checksum changed due to updation in documentation. There
+are no changes in the license terms.
+
+Signed-off-by: Łukasz Gardoń <lukaszgardon555@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-tornado.inc              | 6 +++---
+ .../python/{python-tornado_4.5.3.bb => python-tornado_5.1.bb}       | 0
+ .../python/{python3-tornado_4.5.3.bb => python3-tornado_5.1.bb}     | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb => python-tornado_5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.bb => python3-tornado_5.1.bb} (100%)
+
+diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
+index 29d10da..b40d091 100644
+--- a/meta-python/recipes-devtools/python/python-tornado.inc
++++ b/meta-python/recipes-devtools/python/python-tornado.inc
+@@ -4,10 +4,10 @@ By using non-blocking network I/O, Tornado can scale to tens of thousands of ope
+ polling, WebSockets, and other applications that require a long-lived connection to each user."
+ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=15;md5=8d463fc66ff8f275354ffe88d1896e12"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=15;md5=aff6d41a5e0da5827d1494624bbd683d"
+ 
+-SRC_URI[md5sum] = "a5fc7fd4aea94867609a491ce65786f1"
+-SRC_URI[sha256sum] = "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a"
++SRC_URI[md5sum] = "bd264851c409f926d1dae1ad5055d28d"
++SRC_URI[sha256sum] = "4f66a2172cb947387193ca4c2c3e19131f1c70fa8be470ddbbd9317fd0801582"
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email \
+                    ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python-tornado_5.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
+rename to meta-python/recipes-devtools/python/python-tornado_5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python3-tornado_5.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
+rename to meta-python/recipes-devtools/python/python3-tornado_5.1.bb
+-- 
+1.8.3.1
+
 
