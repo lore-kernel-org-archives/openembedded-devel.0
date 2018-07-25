@@ -1,79 +1,30 @@
-Return-Path: <Aditya.Tayade@kpit.com>
-X-Greylist: delayed 32757 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 25 Jul 2018 01:29:04 UTC
-Received: from IND01-BO1-obe.outbound.protection.outlook.com
-	(mail-bo1ind01on0064.outbound.protection.outlook.com [104.47.101.64])
-	by mail.openembedded.org (Postfix) with ESMTP id 56CE778887
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EC9871B57
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 01:29:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1; 
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=Q34J8mgYcHx1B7k0CSp+PT+xNe4VrEV3Cub8nxsG760=;
-	b=lzuc63+SzO0Ac97Qkfitll7RslIo4A2XckAcyYPhs29KlkL3YuufQkFNZiyaBYgw3VUq2MjZAIuAXVtXQJjpeiLtL+CmFSXvcp5a2e9DMdaOIFCZ5G/HeYB/QMpVuC5u1gjpoY1P3tDgRVXC9ux3o24otL0EPAzGa29iZ1F+KXQ=
-Received: from MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM (10.164.150.144) by
-	MAXPR01MB0297.INDPRD01.PROD.OUTLOOK.COM (10.164.150.20) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.973.21; Wed, 25 Jul 2018 01:29:01 +0000
-Received: from MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM
-	([fe80::6dde:1fb8:4a3f:52a0]) by
-	MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM
-	([fe80::6dde:1fb8:4a3f:52a0%2]) with mapi id 15.20.0973.022;
-	Wed, 25 Jul 2018 01:29:01 +0000
-From: Aditya Tayade <Aditya.Tayade@kpit.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] libbytesize: fix gettext not found issue
-Thread-Index: AQHUI2SzJ6XwGv2Of0eBTSA0n9ONaKSeh7vMgACeUq0=
-Date: Wed, 25 Jul 2018 01:29:00 +0000
-Message-ID: <MAXPR01MB034871D225312CE9BAE6A46D91540@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
-References: <MAXPR01MB03485F715FB80DCF083B704191550@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>,
-	<MAXPR01MB0348E0FB92BCD5785A4E22E391550@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
-In-Reply-To: <MAXPR01MB0348E0FB92BCD5785A4E22E391550@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Aditya.Tayade@kpit.com; 
-x-originating-ip: [183.87.61.198]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; MAXPR01MB0297;
-	6:IianM7qxIMt8y75F4q+AxCtW/sPrTrXtJOP6q9FmOmZdMpWIIs6eGUtM0+IsIgCq7FHDxI5iOR9WM+qE13sKnlMYjaqxntYIIFi1MkXscpmimHCGZIK+iOFTqHKhKN1wesMrCn7mV9McpnHYv2k1DjWIw7KYpLFMvqUgXT1GK6+OizM2X+T7RXsIsPH6SUS9cYF8qIJWduHvr1LmtPVdcA+FXelyFBPHjXexWiZCx/Nrp6YdM3sqaN9I3Z/LTwpkXdkmw+3if+prDxYHyDkGKecVPVGBZbcRkAaZVy7eMDrPiykZVrW87mcFHIvLLDMxjAgeZ/QCu21MFzmbXJsYYgPnAmH++cPi3hMlTbL4OgWrzSbens86+3iJAW+N6M3PUQtGHbOvPHZVGrRSlpxYkcd1/h/gbV3U21IpQJczaI6wBxYE91FOj4VRGqupKaHIJceEtx1BpWyTzrIAzmOh5Q==;
-	5:+c5lEf5NZn13mrB71bGERgEJgMoZTv/wEKmP4o1W4dbwigbqT7lGJQY8w5rHSOhyoNYB5fRj89vyc76tSLxIdCeetrTc5mvoX6f+sF9+HnK7fB++cQtW1ZLkNjtsRq6Bx7n3Aj239qRHlvfp7+FV1cpCGh2HJ3J/LcTh6CENUbQ=;
-	7:iUqK8LarH/vZ1OPI/eK3p3RomsgFB/HZwfFZixDsR3FATa/ip1CGRLHCCWDWvDZF2sVqez7zyb9bDnXseESuLZOTvT/XCE9TaDB99VNugWxnP1B3iO7BIWmgUA8YTSapdanVJtnAupMi//QbfzVhgokOEzZAvzoin+KbSeDn7BvavteAxLFFfg0lh4V8T31t2gPrfQU5QGqv8YM8zlRonAQr0FJsXUy+4W38Nfxf9B0kdL2MbrrN8fU023W1ebiY
-x-ms-exchange-antispam-srfa-diagnostics: SOS;
-x-ms-office365-filtering-correlation-id: fc909e9e-374d-4f0e-cf10-08d5f1ce001b
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989117)(5600073)(711020)(4618075)(4534165)(7168020)(4627221)(201703031133081)(201702281549075)(8990107)(2017052603328)(7153060)(49563074)(7193020);
-	SRVR:MAXPR01MB0297; 
-x-ms-traffictypediagnostic: MAXPR01MB0297:
-x-microsoft-antispam-prvs: <MAXPR01MB029788D92FB9903F2629A2A991540@MAXPR01MB0297.INDPRD01.PROD.OUTLOOK.COM>
-x-exchange-antispam-report-test: UriScan:(223705240517415);
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(102415395)(6040522)(2401047)(8121501046)(5005006)(3002001)(3231311)(944501410)(52105095)(93006095)(93001095)(10201501046)(6055026)(149027)(150027)(6041310)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(20161123564045)(20161123558120)(20161123560045)(20161123562045)(6072148)(201708071742011)(7699016);
-	SRVR:MAXPR01MB0297; BCL:0; PCL:0; RULEID:; SRVR:MAXPR01MB0297; 
-x-forefront-prvs: 0744CFB5E8
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(376002)(346002)(136003)(366004)(39860400002)(396003)(189003)(199004)(6116002)(606006)(3846002)(5024004)(72206003)(478600001)(8936002)(569054002)(19627405001)(14444005)(256004)(99936001)(14454004)(6306002)(54896002)(236005)(4326008)(6606003)(55016002)(33656002)(9686003)(25786009)(39060400002)(6916009)(5640700003)(2351001)(105586002)(53386004)(6436002)(53936002)(68736007)(2501003)(11346002)(476003)(486006)(54906003)(66066001)(5660300001)(99286004)(446003)(55236004)(2900100001)(7696005)(2906002)(316002)(74316002)(6506007)(102836004)(81156014)(1857600001)(8676002)(5250100002)(81166006)(186003)(86362001)(76176011)(26005)(106356001)(97736004)(7736002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:MAXPR01MB0297;
-	H:MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: kpit.com does not designate
-	permitted sender hosts)
-x-microsoft-antispam-message-info: kwN4yYmbEDTvjMyF8sgOS2LEaraSOUgTWFnv3tT8HuZ5mxTUQuh8YKTYrE9H4uWyCnmy6UgRCueYDLp+SSPwsOd7XkeAkCmPxu6RSdsAjW/528S3aaaScCt36y0g4ETrTg+Z7B6gXkNVLd4mcJenPzA1Z/khWsB9QhqzeF+c+cMGNwAbf6RiGrKjP4eoE6gWZi0XStlmAtoVP/GLCbseEVC91cHZu9RgTTjAD4Rn5WW5a546O7HPMGx4ptRJJSqYF++HgkNEfc7nyYZfoxhKEXKs89OT/Vja3SeR95khBTrRFywsLEGadsrJO86SRjeW/FydEmRsXo5eYXuDff3PJHkTuS2RR2pUI0aOSe5Em4A=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Wed, 25 Jul 2018 02:05:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6P25CQq009679
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 24 Jul 2018 19:05:13 -0700 (PDT)
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Tue, 24 Jul 2018 19:05:12 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1531980780-138112-1-git-send-email-changqing.li@windriver.com>
+	<CAMKF1spShdTYnsMubxu=nGSOcZSk9mcD4JeK512Rgm+MmUgryQ@mail.gmail.com>
+	<4001df0b-edea-9ee4-be1a-0f10d1469b06@windriver.com>
+	<CAMKF1sog17N18Q=wmUj3QZYsQktP=8ZO9XVnu-juZhJpn3BXPg@mail.gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <fdfcbb47-596c-305f-74e1-d53b2596e2e2@windriver.com>
+Date: Wed, 25 Jul 2018 10:05:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc909e9e-374d-4f0e-cf10-08d5f1ce001b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jul 2018 01:29:00.8610 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MAXPR01MB0297
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe][PATCH] libbytesize: fix gettext not found issue
+In-Reply-To: <CAMKF1sog17N18Q=wmUj3QZYsQktP=8ZO9XVnu-juZhJpn3BXPg@mail.gmail.com>
+X-Originating-IP: [128.224.162.228]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] protobuf: upgrade 3.5.1 -> 3.6.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,58 +37,204 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 01:29:05 -0000
-X-Groupsio-MsgNum: 73498
+X-List-Received-Date: Wed, 25 Jul 2018 02:05:18 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_MAXPR01MB034871D225312CE9BAE6A46D91540MAXPR01MB0348INDP_"
-
---_004_MAXPR01MB034871D225312CE9BAE6A46D91540MAXPR01MB0348INDP_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-In Sumo branch, libbytesize_0.10.bb<http://10.bb> do_configure fails with e=
-rror "configure: error: gettext not found", hence added a dependency to get=
-text -native for the same.
 
 
-Kindly review the attached patch and integrate it with upstream if changes =
-looks fine.
+On 07/21/2018 07:14 AM, Khem Raj wrote:
+> After all patches, this still fails to build native version of
+> protobuf-c_1.3.0.bb,
+
+Hi,  I send a V2 protobuf-c patch,  please try with the V2 protobuf-c 
+patch and this patch, thanks.
+I  can build success on my host.
+
+//sandy
+>
+> On Fri, Jul 20, 2018 at 1:22 AM Changqing Li <changqing.li@windriver.com> wrote:
+>>
+>>
+>> On 07/20/2018 01:12 AM, Khem Raj wrote:
+>>> On Wed, Jul 18, 2018 at 11:13 PM <changqing.li@windriver.com> wrote:
+>>>> From: Changqing Li <changqing.li@windriver.com>
+>>>>
+>>>> License-Update: copyright year updated and clean some useless content
+>>>>
+>>>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>>> ---
+>>>>    .../0001-protobuf-fix-configure-error.patch        | 33 ++++++++++++++++++++++
+>>>>    .../{protobuf_3.5.1.bb => protobuf_3.6.0.1.bb}     | 14 ++++++---
+>>> my host has gcc8 and it failed to build native version
+>>> NOTE: Running task 13158 of 33598
+>>> (virtual:native:/mnt/a/oe/sources/meta-openembedded/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb:do_compile)
+>>> |                                ^
+>>> |    vector<pair<string, string> > options;
+>>> |                      ^
+>>> | ../git/protoc-c/c_generator.cc:108:29: error: expected
+>>> primary-expression before ‘>’ token
+>>> |    vector<pair<string, string> > options;
+>>> |                              ^
+>>> | ../git/protoc-c/c_generator.cc:108:31: error: expected
+>>> primary-expression before ‘>’ token
+>>> |    vector<pair<string, string> > options;
+>>> |                                ^
+>>> | ../git/protoc-c/c_generator.cc:108:33: error: ‘options’ was not
+>>> declared in this scope
+>>> |    vector<pair<string, string> > options;
+>>> |                                  ^~~~~~~
+>>> | ../git/protoc-c/c_generator.cc:152:5: error: ‘scoped_ptr’ was not
+>>> declared in this scope
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |      ^~~~~~~~~~
+>>> | ../git/protoc-c/c_generator.cc:152:5: note: suggested alternative:
+>>> ‘sched_param’
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |      ^~~~~~~~~~
+>>> |      sched_param
+>>> | ../git/protoc-c/c_generator.cc:152:40: error: expected
+>>> primary-expression before ‘>’ token
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |                                         ^
+>>> | ../git/protoc-c/c_generator.cc:152:42: error: ‘output’ was not
+>>> declared in this scope
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |                                           ^~~~~~
+>>> | ../git/protoc-c/c_generator.cc:152:42: note: suggested alternative: ‘getpt’
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |                                           ^~~~~~
+>>> |                                           getpt
+>>> | ../git/protoc-c/c_generator.cc:160:5: error: ‘scoped_ptr’ was not
+>>> declared in this scope
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |      ^~~~~~~~~~
+>>> | ../git/protoc-c/c_generator.cc:160:5: note: suggested alternative:
+>>> ‘sched_param’
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |      ^~~~~~~~~~
+>>> |      sched_param
+>>> | ../git/protoc-c/c_generator.cc:160:40: error: expected
+>>> primary-expression before ‘>’ token
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |                                         ^
+>>> | ../git/protoc-c/c_generator.cc:160:42: error: ‘output’ was not
+>>> declared in this scope
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |                                           ^~~~~~
+>>> | ../git/protoc-c/c_generator.cc:160:42: note: suggested alternative: ‘getpt’
+>>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
+>>> |                                           ^~~~~~
+>>> |                                           getpt
+>>> | make: *** [Makefile:1497: protoc-c/protoc_gen_c-c_primitive_field.o] Error 1
+>>> | make: *** [Makefile:1441: protoc-c/protoc_gen_c-c_generator.o] Error 1
+>>> | ERROR: oe_runmake failed
+>> I have send a patch for protobuf-c to fix this problem and have cc to
+>> you. Thanks.
+>>
+>> //sandy
+>>>>    2 files changed, 43 insertions(+), 4 deletions(-)
+>>>>    create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch
+>>>>    rename meta-oe/recipes-devtools/protobuf/{protobuf_3.5.1.bb => protobuf_3.6.0.1.bb} (86%)
+>>>>
+>>>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch
+>>>> new file mode 100644
+>>>> index 0000000..a2f7a4b
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch
+>>>> @@ -0,0 +1,33 @@
+>>>> +From 52959e8e01e39139d18f752e97283e45b4b7a426 Mon Sep 17 00:00:00 2001
+>>>> +From: Changqing Li <changqing.li@windriver.com>
+>>>> +Date: Wed, 18 Jul 2018 17:52:34 +0800
+>>>> +Subject: [PATCH] protobuf: fix configure error
+>>>> +
+>>>> +fix below error:
+>>>> +gnu-configize: 'configure.ac' or 'configure.in' is required
+>>>> +
+>>>> +third_party/googletest is git submodule of protobuf. Above error
+>>>> +caused by missing submodule googletest.
+>>>> +
+>>>> +Upstream-Status: Inappropriate [oe-specific]
+>>>> +
+>>>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>>>> +---
+>>>> + configure.ac | 1 -
+>>>> + 1 file changed, 1 deletion(-)
+>>>> +
+>>>> +diff --git a/configure.ac b/configure.ac
+>>>> +index aec10cf..7fbe57d 100644
+>>>> +--- a/configure.ac
+>>>> ++++ b/configure.ac
+>>>> +@@ -214,7 +214,6 @@ AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
+>>>> + #   too.
+>>>> + export CFLAGS
+>>>> + export CXXFLAGS
+>>>> +-AC_CONFIG_SUBDIRS([third_party/googletest])
+>>>> +
+>>>> + AC_CONFIG_FILES([Makefile src/Makefile benchmarks/Makefile conformance/Makefile protobuf.pc protobuf-lite.pc])
+>>>> + AC_OUTPUT
+>>>> +--
+>>>> +2.7.4
+>>>> +
+>>>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
+>>>> similarity index 86%
+>>>> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
+>>>> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
+>>>> index 8cef391..5850744 100644
+>>>> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
+>>>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
+>>>> @@ -5,18 +5,19 @@ all of its internal RPC protocols and file formats."
+>>>>    HOMEPAGE = "https://github.com/google/protobuf"
+>>>>    SECTION = "console/tools"
+>>>>    LICENSE = "BSD-3-Clause"
+>>>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
+>>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
+>>>>
+>>>>    DEPENDS = "zlib"
+>>>>    DEPENDS_append_class-target = " protobuf-native"
+>>>>
+>>>>    PV .= "+git${SRCPV}"
+>>>> -SRCREV = "106ffc04be1abf3ff3399f54ccf149815b287dd9"
+>>>>
+>>>> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.5.x \
+>>>> +SRCREV = "ce044817c7ba0aea27c3fd8e496635d94d20a755"
+>>>> +
+>>>> +SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
+>>>>               file://run-ptest \
+>>>> +           file://0001-protobuf-fix-configure-error.patch \
+>>>>    "
+>>>> -
+>>>>    S = "${WORKDIR}/git"
+>>>>
+>>>>    inherit autotools-brokensep pkgconfig ptest
+>>>> @@ -82,3 +83,8 @@ RDEPENDS_${PN}-ptest = "bash python-protobuf"
+>>>>    MIPS_INSTRUCTION_SET = "mips"
+>>>>
+>>>>    BBCLASSEXTEND = "native nativesdk"
+>>>> +
+>>>> +LDFLAGS_append_arm = " -latomic"
+>>>> +LDFLAGS_append_mips = " -latomic"
+>>>> +LDFLAGS_append_powerpc = " -latomic"
+>>>> +LDFLAGS_append_mipsel = " -latomic"
+>>>> --
+>>>> 2.7.4
+>>>>
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> --
+>> BRs
+>>
+>> Sandy(Li Changqing)
+>> +861084778653
+>>
+
+-- 
+BRs
+
+Sandy(Li Changqing)
++861084778653
 
 
-Regards,
-Aditya Tayade
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
-
---_004_MAXPR01MB034871D225312CE9BAE6A46D91540MAXPR01MB0348INDP_
-Content-Type: text/x-patch; name="libbytesize-add-gettext-dependency.patch"
-Content-Description: libbytesize-add-gettext-dependency.patch
-Content-Disposition: attachment;
-	filename="libbytesize-add-gettext-dependency.patch"; size=643;
-	creation-date="Tue, 24 Jul 2018 16:06:44 GMT";
-	modification-date="Tue, 24 Jul 2018 16:23:06 GMT"
-Content-Transfer-Encoding: base64
-
-bGliYnl0ZXNpemU6IGZpeCBnZXR0ZXh0IG5vdCBmb3VuZCBpc3N1ZQoKbGliYnl0ZXNpemVfMC4x
-MC5iYiBkb19jb25maWd1cmUgZmFpbHMgd2l0aCBlcnJvciAiY29uZmlndXJlOiBlcnJvcjogZ2V0
-dGV4dCBub3QgZm91bmQiCgpVcHN0cmVhbSBzdGF0dXM6IFBlbmRpbmcKClNpZ24tb2ZmIGJ5OiBB
-ZGl0eWEgVGF5YWRlIDxBZGl0eWEuVGF5YWRlQGtwaXQuY29tPgoKZGlmZiAtLWdpdCBhL21ldGEt
-b2UvcmVjaXBlcy1zdXBwb3J0L2xpYmJ5dGVzaXplL2xpYmJ5dGVzaXplXzAuMTAuYmIgYi9tZXRh
-LW9lL3JlY2lwZXMtc3VwcG9ydC9saWJieXRlc2l6ZS9saWJieXRlc2l6ZV8wLjEwLmJiCmluZGV4
-IDY5MDMwMjEuLmZlZGRlODAgMTAwNjQ0Ci0tLSBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xp
-YmJ5dGVzaXplL2xpYmJ5dGVzaXplXzAuMTAuYmIKKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBv
-cnQvbGliYnl0ZXNpemUvbGliYnl0ZXNpemVfMC4xMC5iYgpAQCAtMjEsNiArMjEsNyBAQCBERVBF
-TkRTICs9ICIgXAogICAgIGxpYnBjcmUgXAogICAgIGdtcCBcCiAgICAgbXBmciBcCisgICAgZ2V0
-dGV4dC1uYXRpdmUgXAogIgogCiBGSUxFU18ke1BOfSArPSAiJHtQWVRIT05fU0lURVBBQ0tBR0VT
-X0RJUn0vYnl0ZXNpemUiCg==
-
---_004_MAXPR01MB034871D225312CE9BAE6A46D91540MAXPR01MB0348INDP_--
