@@ -1,25 +1,50 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 54E9A78957
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 479B278741
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 03:27:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6P3Ro7e010311
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 25 Jul 2018 04:05:50 +0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id t79-v6so4082209qke.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 20:27:50 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Tue, 24 Jul 2018 20:27:50 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Jul 2018 11:27:32 +0800
-Message-ID: <1532489252-246963-11-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1532489252-246963-1-git-send-email-changqing.li@windriver.com>
-References: <1532489252-246963-1-git-send-email-changqing.li@windriver.com>
+	Tue, 24 Jul 2018 21:05:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=YqHTmuDi6mYMQd5aSi8qi6Ee8QGwIS8ph1DJRj8yRWY=;
+	b=gaGZcBttbqXYw955/SXgTHc+Ftix7E2gHFYdHcfNIIOdLgx9DJAxK0nG4Pl4iTzBxZ
+	pfNsVXJ/tWALrubZkMgj8BQI/SbohP+hGtqPX+/z4fKQTxrrz3JObDPET9U8iE/z5uts
+	T8iYJeHA7VEV0qT9GsGwvknana0pH8sUZbG7CcmFEMujIyj18qqid8VPdMj3n2MbIYV5
+	YPKmPEFURknX/UpAlO8LkGBLdQjgFeXiuWDjBpEAUi9BkIYUFEtLMcyhqyw53EElrmy0
+	KY/PKKH9WKtSOAKwKjCsNUZU6Xr5sJxSdErEpWG17Rmwn7SgM62fEd3Eg6QVMx2UlQMq
+	JU3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=YqHTmuDi6mYMQd5aSi8qi6Ee8QGwIS8ph1DJRj8yRWY=;
+	b=ecOIGoY2/zAOmmdGqThuWhn+h27cqRrF7eatgzgLB98iq+sCO6bBRuYQoDb+5U8vGz
+	IX4atGdYXh9T7J7JlHIhcBehbTPOsQSt2cprr0tlvRwPU+l6+A76iyaaRHLYoe/VcWG9
+	p8UEPVOAZuSxgGY9+1QKHJkZmBYnCIGPeMNspNpjuTjmSY/2EgBmzmRY8eY8V0UhZuHw
+	+20VNjTkDb15jMPH0BYgP2AyUQ4d4hZylclfNXgBgat1lHtlyY0aDy9mO8/6UAGT+eaV
+	GAjBQwK2E/zaYDXIwFBkJdh9nUqmsHzTFrYtOyG94eUnWEnqHqgWyMDoIuFSbHNRY0AY
+	ihVA==
+X-Gm-Message-State: AOUpUlHdTLdTP7KGmUDN8Vidm4xj9a4IB92nTJ6lMgpa8I7Twobc88p8
+	kYX8UramJPxTTYv4AQ/Cfwzdp23QPos+PFlu8nI=
+X-Google-Smtp-Source: AAOMgpcYgP5f1WFXvB8zPMXer1QK7QjKjefXxtu7l5IEDEwxn52wXbCcx2GC/UutQGcsH/f73VnaJm67kHfh7Dgfd/E=
+X-Received: by 2002:a37:4a94:: with SMTP id
+	x142-v6mr17825497qka.110.1532491550972; 
+	Tue, 24 Jul 2018 21:05:50 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] netcat-openbsd: 1.105 -> 1.190
+References: <MAXPR01MB03485F715FB80DCF083B704191550@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
+	<MAXPR01MB0348E0FB92BCD5785A4E22E391550@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
+	<MAXPR01MB034871D225312CE9BAE6A46D91540@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
+In-Reply-To: <MAXPR01MB034871D225312CE9BAE6A46D91540@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 24 Jul 2018 21:05:24 -0700
+Message-ID: <CAMKF1soBLh_MHbLS11MqcxFg4LjnV8y0QRMYad3m7oqYQuVGTg@mail.gmail.com>
+To: Aditya Tayade <Aditya.Tayade@kpit.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libbytesize: fix gettext not found issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,175 +57,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 03:27:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 25 Jul 2018 04:05:50 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Changqing Li <changqing.li@windriver.com>
+Can you try setting
 
-License-Update: License updated/Add copyright for
-    some missing file/fix some URL 
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- ...bundle-own-base64-encode-decode-functions.patch | 70 ++++++++++++----------
- ...at-openbsd_1.105.bb => netcat-openbsd_1.190.bb} | 14 ++---
- 2 files changed, 47 insertions(+), 37 deletions(-)
- rename meta-networking/recipes-support/netcat/{netcat-openbsd_1.105.bb => netcat-openbsd_1.190.bb} (72%)
-
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch
-index 0966b65..929f63f 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.patch
-@@ -1,40 +1,47 @@
--From ccd166b73eaae4dd1e1785c63ceb9b303568ed46 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 21 Mar 2017 11:30:49 -0700
-+From 3da48ec13a44b71ca51adbc803b42c1b29a43f57 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Tue, 24 Jul 2018 14:03:51 +0800
- Subject: [PATCH] bundle own base64 encode/decode functions
- 
- Not all libc implementations provide it.
- as an aside libresolv is no longer needed
- 
-+Upstream-Status: Pending
-+
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Update to version 1.190-2
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-  Makefile |   4 +-
-  base64.c | 313 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-- netcat.c |   2 +
-+ netcat.c |   3 +
-  socks.c  |   3 +
-- 4 files changed, 320 insertions(+), 2 deletions(-)
-+ 4 files changed, 321 insertions(+), 2 deletions(-)
-  create mode 100644 base64.c
- 
--Index: netcat-openbsd-1.105/Makefile
--===================================================================
----- netcat-openbsd-1.105.orig/Makefile
--+++ netcat-openbsd-1.105/Makefile
--@@ -1,9 +1,9 @@
-- #       $OpenBSD: Makefile,v 1.6 2001/09/02 18:45:41 jakob Exp $
-+diff --git a/Makefile b/Makefile
-+index 8247cfd..b8d8547 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -1,10 +1,10 @@
-+ #	$OpenBSD: Makefile,v 1.7 2015/09/11 21:07:01 beck Exp $
-  
-  PROG=	nc
- -SRCS=	netcat.c atomicio.c socks.c
- +SRCS=	netcat.c atomicio.c socks.c base64.c
-  
---LIBS=  `pkg-config --libs libbsd` -lresolv
--+LIBS=  `pkg-config --libs libbsd`
-+ PKG_CONFIG ?= pkg-config
-+-LIBS=  `$(PKG_CONFIG) --libs libbsd` -lresolv
-++LIBS=  `$(PKG_CONFIG) --libs libbsd`
-  OBJS=  $(SRCS:.c=.o)
-  CFLAGS=  -g -O2
-  LDFLAGS=  -Wl,--no-add-needed
--Index: netcat-openbsd-1.105/base64.c
--===================================================================
-+diff --git a/base64.c b/base64.c
-+new file mode 100644
-+index 0000000..b0ee6c2
- --- /dev/null
--+++ netcat-openbsd-1.105/base64.c
-++++ b/base64.c
- @@ -0,0 +1,313 @@
- +/*
- + * Copyright (c) 1996-1999 by Internet Software Consortium.
-@@ -349,31 +356,34 @@ Index: netcat-openbsd-1.105/base64.c
- +
- +	return (tarindex);
- +}
--Index: netcat-openbsd-1.105/netcat.c
--===================================================================
----- netcat-openbsd-1.105.orig/netcat.c
--+++ netcat-openbsd-1.105/netcat.c
--@@ -169,6 +169,9 @@ static int connect_with_timeout(int fd,
--         socklen_t salen, int ctimeout);
-+diff --git a/netcat.c b/netcat.c
-+index a0fb51b..9c4ed23 100644
-+--- a/netcat.c
-++++ b/netcat.c
-+@@ -240,6 +240,9 @@ static int connect_with_timeout(int fd, const struct sockaddr *sa,
-+ 
-  static void quit();
-  
--+int	b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
--+int	b64_pton(char const *src, u_char *target, size_t targsize);
-++int    b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
-++int    b64_pton(char const *src, u_char *target, size_t targsize);
- +
-  int
-  main(int argc, char *argv[])
-  {
--Index: netcat-openbsd-1.105/socks.c
--===================================================================
----- netcat-openbsd-1.105.orig/socks.c
--+++ netcat-openbsd-1.105/socks.c
-+diff --git a/socks.c b/socks.c
-+index 9068f39..c576f6b 100644
-+--- a/socks.c
-++++ b/socks.c
- @@ -53,6 +53,9 @@
-  #define SOCKS_DOMAIN	3
-  #define SOCKS_IPV6	4
-  
--+int	b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
--+int	b64_pton(char const *src, u_char *target, size_t targsize);
-++int    b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize);
-++int    b64_pton(char const *src, u_char *target, size_t targsize);
- +
-  int	remote_connect(const char *, const char *, struct addrinfo);
-  int	socks_connect(const char *, const char *, struct addrinfo,
-  	    const char *, const char *, struct addrinfo, int,
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.190.bb
-similarity index 72%
-rename from meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-rename to meta-networking/recipes-support/netcat/netcat-openbsd_1.190.bb
-index 9d7420f..b4802fa 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.190.bb
-@@ -1,21 +1,21 @@
- require netcat.inc
- SUMMARY = "OpenBSD Netcat"
- HOMEPAGE = "http://ftp.debian.org"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=ee6bbaacb5db5f2973818f0902c3ae6f"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=f39e60ae4ea9fdb559c833be2e59de99"
- 
- DEPENDS += "glib-2.0 libbsd"
- do_patch[depends] = "quilt-native:do_populate_sysroot"
- 
- SRC_URI = "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
--           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-7.debian.tar.gz;name=netcat-patch;subdir=${BP} \
-+           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-2.debian.tar.xz;name=netcat-patch;subdir=${BP} \
-            file://0001-bundle-own-base64-encode-decode-functions.patch \
-            "
- 
--SRC_URI[netcat.md5sum] = "7e67b22f1ad41a1b7effbb59ff28fca1"
--SRC_URI[netcat.sha256sum] = "40653fe66c1516876b61b07e093d826e2a5463c5d994f1b7e6ce328f3edb211e"
--SRC_URI[netcat-patch.md5sum] = "e914f8eb7eda5c75c679dd77787ac76b"
--SRC_URI[netcat-patch.sha256sum] = "eee759327ffea293e81d0dde67921b7fcfcad279ffd7a2c9d037bbc8f882b363"
-+SRC_URI[netcat.md5sum] = "dd32fd1d7903b541ad8709794539b959"
-+SRC_URI[netcat.sha256sum] = "68ccc448392c05ec51baed0167a72b8c650454f990b895d6e6877d416a38e536"
-+SRC_URI[netcat-patch.md5sum] = "78058b7af0170654b877b02c37716cdf"
-+SRC_URI[netcat-patch.sha256sum] = "88088af3f520c7825e59bc133d65e70fc4a30139d451c6faabbd9f240bc78374"
- 
- inherit pkgconfig
- 
--- 
-2.7.4
-
+USE_NLS =3D "yes" in the affected recipe ?
+On Tue, Jul 24, 2018 at 6:29 PM Aditya Tayade <Aditya.Tayade@kpit.com> wrot=
+e:
+>
+> Hi,
+>
+> In Sumo branch, libbytesize_0.10.bb<http://10.bb> do_configure fails with=
+ error "configure: error: gettext not found", hence added a dependency to g=
+ettext -native for the same.
+>
+>
+> Kindly review the attached patch and integrate it with upstream if change=
+s looks fine.
+>
+>
+> Regards,
+> Aditya Tayade
+> This message contains information that may be privileged or confidential =
+and is the property of the KPIT Technologies Ltd. It is intended only for t=
+he person to whom it is addressed. If you are not the intended recipient, y=
+ou are not authorized to read, print, retain copy, disseminate, distribute,=
+ or use this message or any part thereof. If you receive this message in er=
+ror, please notify the sender immediately and delete all copies of this mes=
+sage. KPIT Technologies Ltd. does not accept any liability for virus infect=
+ed mails.
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
