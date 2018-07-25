@@ -1,45 +1,31 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 69D337893C
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 80D0E6010D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 19:28:12 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1532460493; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=lX9E5O06VRIIAgQDeAlgA7edPj2BprXFxrQw+dcLY1w=;
-	b=tji/9rGT48zw+ug/+qrlNmJ55iRqCNT85F5xXnKh9ievqsy/ICIgaeVqnFc6mKLPt6oDSRvT
-	hc7X3lHGrmlt/m3gn1kCo2EQUbcTa81ot0MnjKrm3Aw8OgLccXWMQVe+Q0XvS8j4CR9I7Upg
-	3pssNL3JP9vPRWPKxOa44Vgc+BY=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mxa.mailgun.org with ESMTP id 5b577dcb.7efc3c408130-smtp-out-n02;
-	Tue, 24 Jul 2018 19:28:11 -0000 (UTC)
-Received: by mail-io0-f179.google.com with SMTP id k16-v6so4367124iom.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jul 2018 12:28:11 -0700 (PDT)
-X-Gm-Message-State: AOUpUlFttr1t1MBP0sO2p9DrNYMmvQFa2Zmxg5mictBbkmqRlitYcq7/
-	bkwu5v/mMgKQhcYqG4IaRpXHu8vHuUisKuqlEZc=
-X-Google-Smtp-Source: AAOMgpfakrLVBEnBVm1OiN7N0CxcCG4CEw+2q0ZHN8vf+3rTeRc/uap8CFJZXp6wKtR06qpjjC8w5CBg5X/lpmAY37s=
-X-Received: by 2002:a6b:e403:: with SMTP id
-	u3-v6mr5260945iog.131.1532460491082; 
-	Tue, 24 Jul 2018 12:28:11 -0700 (PDT)
+	Wed, 25 Jul 2018 00:57:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6P0vSxI029558
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 24 Jul 2018 17:57:28 -0700
+Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Tue, 24 Jul 2018 17:57:27 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
+	<1531899089-395618-6-git-send-email-changqing.li@windriver.com>
+	<CA+chaQdAwHn0fAj2A6oX5HrbK5zADMmYX0DACO2KEVt55+0ZBQ@mail.gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <7a57a79d-49d4-ac13-ecd7-fee271e0a17f@windriver.com>
+Date: Wed, 25 Jul 2018 08:57:24 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.8.0
 MIME-Version: 1.0
-Received: by 2002:a6b:8c4e:0:0:0:0:0 with HTTP; Tue, 24 Jul 2018 12:28:10
-	-0700 (PDT)
-In-Reply-To: <20180724183302.21403-1-lukaszgardon555@gmail.com>
-References: <20180724183302.21403-1-lukaszgardon555@gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Tue, 24 Jul 2018 15:28:10 -0400
-X-Gmail-Original-Message-ID: <CADNbA1rJUAt5GMHeYA-H1dz9_Xb2j41d8+d8Uw+UjofRXBiwpA@mail.gmail.com>
-Message-ID: <CADNbA1rJUAt5GMHeYA-H1dz9_Xb2j41d8+d8Uw+UjofRXBiwpA@mail.gmail.com>
-To: lukaszgard <lukaszgardon555@gmail.com>
+In-Reply-To: <CA+chaQdAwHn0fAj2A6oX5HrbK5zADMmYX0DACO2KEVt55+0ZBQ@mail.gmail.com>
+X-Originating-IP: [128.224.162.228]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-tornado: upgrade to version 5.1
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] pps-tools: 0.0.0+gitX -> 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,75 +38,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jul 2018 19:28:12 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Jul 2018 00:57:29 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Thanks for the recipe update.  Could you provide a quick explanation of
-what caused the LIC_FILES_CHKSUM to be updated? See
-https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Describin=
-g_license_changes
-for more details.
 
-On Tue, Jul 24, 2018 at 2:33 PM, lukaszgard <lukaszgardon555@gmail.com>
-wrote:
 
-> Signed-off-by: =C5=81ukasz Gardo=C5=84 <lukaszgardon555@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python-tornado.inc      | 6 +++---
->  .../{python-tornado_4.5.3.bb =3D> python-tornado_5.1.bb}      | 0
->  .../{python3-tornado_4.5.3.bb =3D> python3-tornado_5.1.bb}    | 0
->  3 files changed, 3 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb =3D>
-> python-tornado_5.1.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.bb =3D=
+On 07/25/2018 12:47 AM, Martin Jansa wrote:
+> Why not use RDEPENDS_${PN} instead of RDEPENDS_pps-tools? It's now 
+> broken with multilib.
 >
-> python3-tornado_5.1.bb} (100%)
+> Also meta-oe is using 4 spaces for indentation, would be nice to fix 
+> the do_install.
+
+Thanks,  I will send a patch to fix this.
+
+//Sandy
 >
-> diff --git a/meta-python/recipes-devtools/python/python-tornado.inc
-> b/meta-python/recipes-devtools/python/python-tornado.inc
-> index 29d10da6b..b40d0912f 100644
-> --- a/meta-python/recipes-devtools/python/python-tornado.inc
-> +++ b/meta-python/recipes-devtools/python/python-tornado.inc
-> @@ -4,10 +4,10 @@ By using non-blocking network I/O, Tornado can scale to
-> tens of thousands of ope
->  polling, WebSockets, and other applications that require a long-lived
-> connection to each user."
->  HOMEPAGE =3D "http://www.tornadoweb.org/en/stable/"
->  LICENSE =3D "Apache-2.0"
-> -LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D3;endline=3D15;md5=3D
-> 8d463fc66ff8f275354ffe88d1896e12"
-> +LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D3;endline=3D15;md5=3D
-> aff6d41a5e0da5827d1494624bbd683d"
+> On Wed, Jul 18, 2018 at 9:32 AM <changqing.li@windriver.com 
+> <mailto:changqing.li@windriver.com>> wrote:
 >
-> -SRC_URI[md5sum] =3D "a5fc7fd4aea94867609a491ce65786f1"
-> -SRC_URI[sha256sum] =3D "6d14e47eab0e15799cf3cdcc86b0b9
-> 8279da68522caace2bd7ce644287685f0a"
-> +SRC_URI[md5sum] =3D "bd264851c409f926d1dae1ad5055d28d"
-> +SRC_URI[sha256sum] =3D "4f66a2172cb947387193ca4c2c3e19
-> 131f1c70fa8be470ddbbd9317fd0801582"
+>     From: Changqing Li <changqing.li@windriver.com
+>     <mailto:changqing.li@windriver.com>>
 >
->  RDEPENDS_${PN} +=3D "${PYTHON_PN}-compression ${PYTHON_PN}-numbers
-> ${PYTHON_PN}-email \
->                     ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html
-> ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
-> diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
-> b/meta-python/recipes-devtools/python/python-tornado_5.1.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
-> rename to meta-python/recipes-devtools/python/python-tornado_5.1.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
-> b/meta-python/recipes-devtools/python/python3-tornado_5.1.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
-> rename to meta-python/recipes-devtools/python/python3-tornado_5.1.bb
-> --
-> 2.17.1
+>     Signed-off-by: Changqing Li <changqing.li@windriver.com
+>     <mailto:changqing.li@windriver.com>>
+>     ---
+>      .../pps-tools/{pps-tools_git.bb <http://pps-tools_git.bb> =>
+>     pps-tools_1.0.2.bb <http://pps-tools_1.0.2.bb>}              | 5 +++--
+>      1 file changed, 3 insertions(+), 2 deletions(-)
+>      rename meta-oe/recipes-support/pps-tools/{pps-tools_git.bb
+>     <http://pps-tools_git.bb> => pps-tools_1.0.2.bb
+>     <http://pps-tools_1.0.2.bb>} (82%)
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     diff --git a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
+>     <http://pps-tools_git.bb>
+>     b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
+>     <http://pps-tools_1.0.2.bb>
+>     similarity index 82%
+>     rename from meta-oe/recipes-support/pps-tools/pps-tools_git.bb
+>     <http://pps-tools_git.bb>
+>     rename to meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
+>     <http://pps-tools_1.0.2.bb>
+>     index 8bf9036..106be35 100644
+>     --- a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
+>     <http://pps-tools_git.bb>
+>     +++ b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
+>     <http://pps-tools_1.0.2.bb>
+>     @@ -4,12 +4,13 @@ HOMEPAGE = "http://linuxpps.org"
+>      LICENSE = "GPLv2"
+>      LIC_FILES_CHKSUM =
+>     "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 >
+>     -PV = "0.0.0+git${SRCPV}"
+>     -SRCREV = "0deb9c7e135e9380a6d09e9d2e938a146bb698c8"
+>     +SRCREV = "cb48b7ecf7079ceba7081c78d4e61e507b0e8d2d"
+>      SRC_URI = "git://github.com/ago/pps-tools.git
+>     <http://github.com/ago/pps-tools.git>"
+>
+>      S = "${WORKDIR}/git"
+>
+>     +RDEPENDS_pps-tools = "bash"
+>     +
+>      do_install() {
+>              install -d ${D}${bindir} ${D}${includedir} \
+>                         ${D}${includedir}/sys
+>     -- 
+>     2.7.4
+>
+>     -- 
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
+-- 
+BRs
+
+Sandy(Li Changqing)
++861084778653
+
 
