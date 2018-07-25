@@ -1,31 +1,50 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 80D0E6010D
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id 88CA774501
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 00:57:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6P0vSxI029558
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 24 Jul 2018 17:57:28 -0700
-Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Tue, 24 Jul 2018 17:57:27 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1531899089-395618-1-git-send-email-changqing.li@windriver.com>
-	<1531899089-395618-6-git-send-email-changqing.li@windriver.com>
-	<CA+chaQdAwHn0fAj2A6oX5HrbK5zADMmYX0DACO2KEVt55+0ZBQ@mail.gmail.com>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <7a57a79d-49d4-ac13-ecd7-fee271e0a17f@windriver.com>
-Date: Wed, 25 Jul 2018 08:57:24 +0800
+	Wed, 25 Jul 2018 01:05:57 +0000 (UTC)
+Received: (qmail 17949 invoked by uid 1003); 25 Jul 2018 01:05:57 -0000
+Received: from unknown (HELO ?192.168.11.100?)
+	(philip@opensdr.com@73.152.143.112)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	25 Jul 2018 01:05:57 -0000
+To: Khem Raj <raj.khem@gmail.com>
+References: <20180724134300.31744-1-philip@balister.org>
+	<CAMKF1so9ECEqyD49imbeZMPfPwmHs5UBA8oU8bOh89+kvUx9eA@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Openpgp: preference=signencrypt
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+Message-ID: <96073ef8-520f-42f1-0d65-df0f2f3d8144@balister.org>
+Date: Tue, 24 Jul 2018 21:05:49 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Thunderbird/52.5.2
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQdAwHn0fAj2A6oX5HrbK5zADMmYX0DACO2KEVt55+0ZBQ@mail.gmail.com>
-X-Originating-IP: [128.224.162.228]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] pps-tools: 0.0.0+gitX -> 1.0.2
+In-Reply-To: <CAMKF1so9ECEqyD49imbeZMPfPwmHs5UBA8oU8bOh89+kvUx9eA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] lapack: Add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,87 +57,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 00:57:29 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 25 Jul 2018 01:05:57 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 7bit
+
+On 07/24/2018 11:39 AM, Khem Raj wrote:
+> On Tue, Jul 24, 2018 at 6:43 AM Philip Balister <philip@balister.org> wrote:
+>>
+>>  * Build tested.
+>>  * Note: needs FORTRAN enabled in local.conf or similar.
+>>  * Used to build scipy on pi-3. scipy passed many tests.
+>>  * Based on work from meta-gnss https://github.com/carlesfernandez/meta-gnss-sdr
+>>  * Hopefully this helps others playing with scipy and things.
+>>
+> 
+> thanks for this,  fortran is not a daily driver for many here, and is
+> not enabled
+> in toolchain by default as well. So in this scenario is there any easy way to
+> exclude this recipe from parsing ? I am interested in getting our recipe fail
+> count down and this recipe wont help.
+
+Yeah, after I sent this I thought about that. I'd like it in meta-oe for
+visibility, since it seems like scipy comes up every so often. The
+recipe isn't complete crap, so I think it makes sense to have it here,
+we just need a way to exclude it from parsing to help khem.
+
+Any suggestions?
+
+Philip
 
 
-
-On 07/25/2018 12:47 AM, Martin Jansa wrote:
-> Why not use RDEPENDS_${PN} instead of RDEPENDS_pps-tools? It's now 
-> broken with multilib.
->
-> Also meta-oe is using 4 spaces for indentation, would be nice to fix 
-> the do_install.
-
-Thanks,  I will send a patch to fix this.
-
-//Sandy
->
-> On Wed, Jul 18, 2018 at 9:32 AM <changqing.li@windriver.com 
-> <mailto:changqing.li@windriver.com>> wrote:
->
->     From: Changqing Li <changqing.li@windriver.com
->     <mailto:changqing.li@windriver.com>>
->
->     Signed-off-by: Changqing Li <changqing.li@windriver.com
->     <mailto:changqing.li@windriver.com>>
->     ---
->      .../pps-tools/{pps-tools_git.bb <http://pps-tools_git.bb> =>
->     pps-tools_1.0.2.bb <http://pps-tools_1.0.2.bb>}              | 5 +++--
->      1 file changed, 3 insertions(+), 2 deletions(-)
->      rename meta-oe/recipes-support/pps-tools/{pps-tools_git.bb
->     <http://pps-tools_git.bb> => pps-tools_1.0.2.bb
->     <http://pps-tools_1.0.2.bb>} (82%)
->
->     diff --git a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
->     <http://pps-tools_git.bb>
->     b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
->     <http://pps-tools_1.0.2.bb>
->     similarity index 82%
->     rename from meta-oe/recipes-support/pps-tools/pps-tools_git.bb
->     <http://pps-tools_git.bb>
->     rename to meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
->     <http://pps-tools_1.0.2.bb>
->     index 8bf9036..106be35 100644
->     --- a/meta-oe/recipes-support/pps-tools/pps-tools_git.bb
->     <http://pps-tools_git.bb>
->     +++ b/meta-oe/recipes-support/pps-tools/pps-tools_1.0.2.bb
->     <http://pps-tools_1.0.2.bb>
->     @@ -4,12 +4,13 @@ HOMEPAGE = "http://linuxpps.org"
->      LICENSE = "GPLv2"
->      LIC_FILES_CHKSUM =
->     "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->
->     -PV = "0.0.0+git${SRCPV}"
->     -SRCREV = "0deb9c7e135e9380a6d09e9d2e938a146bb698c8"
->     +SRCREV = "cb48b7ecf7079ceba7081c78d4e61e507b0e8d2d"
->      SRC_URI = "git://github.com/ago/pps-tools.git
->     <http://github.com/ago/pps-tools.git>"
->
->      S = "${WORKDIR}/git"
->
->     +RDEPENDS_pps-tools = "bash"
->     +
->      do_install() {
->              install -d ${D}${bindir} ${D}${includedir} \
->                         ${D}${includedir}/sys
->     -- 
->     2.7.4
->
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
--- 
-BRs
-
-Sandy(Li Changqing)
-+861084778653
-
+> 
+>> Signed-off-by: Philip Balister <philip@balister.org>
+>> ---
+>>  meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb | 24 ++++++++++++++++++++++++
+>>  1 file changed, 24 insertions(+)
+>>  create mode 100644 meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+>>
+>> diff --git a/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+>> new file mode 100644
+>> index 000000000..ef1abd567
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-devtools/lapack/lapack_3.8.0.bb
+>> @@ -0,0 +1,24 @@
+>> +SUMMARY = "Linear Algebra PACKage"
+>> +URL = "http://www.netlib.org/lapack"
+>> +LICENSE = "BSD-3-Clause"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
+>> +
+>> +# Recipe needs FORTRAN support (copied from conf/local.conf.sample.extended)
+>> +# Enabling FORTRAN
+>> +# Note this is not officially supported and is just illustrated here to
+>> +# show an example of how it can be done
+>> +# You'll also need your fortran recipe to depend on libgfortran
+>> +#FORTRAN_forcevariable = ",fortran"
+>> +#RUNTIMETARGET_append_pn-gcc-runtime = " libquadmath"
+>> +
+>> +DEPENDS = "libgfortran"
+>> +
+>> +SRC_URI = "http://www.netlib.org/lapack/lapack-${PV}.tar.gz"
+>> +SRC_URI[md5sum] = "96591affdbf58c450d45c1daa540dbd2"
+>> +SRC_URI[sha256sum] = "deb22cc4a6120bff72621155a9917f485f96ef8319ac074a7afbc68aab88bcf6"
+>> +
+>> +EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON "
+>> +OECMAKE_GENERATOR = "Unix Makefiles"
+>> +
+>> +inherit cmake pkgconfig
+>> +
+>> --
+>> 2.13.6
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
 
