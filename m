@@ -1,30 +1,23 @@
 Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7EC9871B57
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FF4E7487E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 02:05:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6P25CQq009679
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 24 Jul 2018 19:05:13 -0700 (PDT)
-Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Tue, 24 Jul 2018 19:05:12 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1531980780-138112-1-git-send-email-changqing.li@windriver.com>
-	<CAMKF1spShdTYnsMubxu=nGSOcZSk9mcD4JeK512Rgm+MmUgryQ@mail.gmail.com>
-	<4001df0b-edea-9ee4-be1a-0f10d1469b06@windriver.com>
-	<CAMKF1sog17N18Q=wmUj3QZYsQktP=8ZO9XVnu-juZhJpn3BXPg@mail.gmail.com>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <fdfcbb47-596c-305f-74e1-d53b2596e2e2@windriver.com>
-Date: Wed, 25 Jul 2018 10:05:06 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Wed, 25 Jul 2018 03:27:34 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6P3RYtR000543
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Jul 2018 20:27:34 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Tue, 24 Jul 2018 20:27:33 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Jul 2018 11:27:22 +0800
+Message-ID: <1532489252-246963-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sog17N18Q=wmUj3QZYsQktP=8ZO9XVnu-juZhJpn3BXPg@mail.gmail.com>
-X-Originating-IP: [128.224.162.228]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] protobuf: upgrade 3.5.1 -> 3.6.0.1
+Subject: [PATCH][meta-networking] autofs: upgrade 5.1.2 -> 5.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,204 +30,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 02:05:18 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 25 Jul 2018 03:27:35 -0000
+Content-Type: text/plain
 
+From: Changqing Li <changqing.li@windriver.com>
 
-On 07/21/2018 07:14 AM, Khem Raj wrote:
-> After all patches, this still fails to build native version of
-> protobuf-c_1.3.0.bb,
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../autofs/autofs-5.1.2-libtirpc-as-need.patch     | 39 ----------------------
+ .../recipes-daemons/autofs/autofs/libtirpc.patch   | 35 -------------------
+ .../autofs/{autofs_5.1.2.bb => autofs_5.1.4.bb}    |  6 ++--
+ 3 files changed, 2 insertions(+), 78 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs/autofs-5.1.2-libtirpc-as-need.patch
+ delete mode 100644 meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
+ rename meta-networking/recipes-daemons/autofs/{autofs_5.1.2.bb => autofs_5.1.4.bb} (91%)
 
-Hi,  I send a V2 protobuf-c patch,  please try with the V2 protobuf-c 
-patch and this patch, thanks.
-I  can build success on my host.
-
-//sandy
->
-> On Fri, Jul 20, 2018 at 1:22 AM Changqing Li <changqing.li@windriver.com> wrote:
->>
->>
->> On 07/20/2018 01:12 AM, Khem Raj wrote:
->>> On Wed, Jul 18, 2018 at 11:13 PM <changqing.li@windriver.com> wrote:
->>>> From: Changqing Li <changqing.li@windriver.com>
->>>>
->>>> License-Update: copyright year updated and clean some useless content
->>>>
->>>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->>>> ---
->>>>    .../0001-protobuf-fix-configure-error.patch        | 33 ++++++++++++++++++++++
->>>>    .../{protobuf_3.5.1.bb => protobuf_3.6.0.1.bb}     | 14 ++++++---
->>> my host has gcc8 and it failed to build native version
->>> NOTE: Running task 13158 of 33598
->>> (virtual:native:/mnt/a/oe/sources/meta-openembedded/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb:do_compile)
->>> |                                ^
->>> |    vector<pair<string, string> > options;
->>> |                      ^
->>> | ../git/protoc-c/c_generator.cc:108:29: error: expected
->>> primary-expression before ‘>’ token
->>> |    vector<pair<string, string> > options;
->>> |                              ^
->>> | ../git/protoc-c/c_generator.cc:108:31: error: expected
->>> primary-expression before ‘>’ token
->>> |    vector<pair<string, string> > options;
->>> |                                ^
->>> | ../git/protoc-c/c_generator.cc:108:33: error: ‘options’ was not
->>> declared in this scope
->>> |    vector<pair<string, string> > options;
->>> |                                  ^~~~~~~
->>> | ../git/protoc-c/c_generator.cc:152:5: error: ‘scoped_ptr’ was not
->>> declared in this scope
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |      ^~~~~~~~~~
->>> | ../git/protoc-c/c_generator.cc:152:5: note: suggested alternative:
->>> ‘sched_param’
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |      ^~~~~~~~~~
->>> |      sched_param
->>> | ../git/protoc-c/c_generator.cc:152:40: error: expected
->>> primary-expression before ‘>’ token
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |                                         ^
->>> | ../git/protoc-c/c_generator.cc:152:42: error: ‘output’ was not
->>> declared in this scope
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |                                           ^~~~~~
->>> | ../git/protoc-c/c_generator.cc:152:42: note: suggested alternative: ‘getpt’
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |                                           ^~~~~~
->>> |                                           getpt
->>> | ../git/protoc-c/c_generator.cc:160:5: error: ‘scoped_ptr’ was not
->>> declared in this scope
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |      ^~~~~~~~~~
->>> | ../git/protoc-c/c_generator.cc:160:5: note: suggested alternative:
->>> ‘sched_param’
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |      ^~~~~~~~~~
->>> |      sched_param
->>> | ../git/protoc-c/c_generator.cc:160:40: error: expected
->>> primary-expression before ‘>’ token
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |                                         ^
->>> | ../git/protoc-c/c_generator.cc:160:42: error: ‘output’ was not
->>> declared in this scope
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |                                           ^~~~~~
->>> | ../git/protoc-c/c_generator.cc:160:42: note: suggested alternative: ‘getpt’
->>> |      scoped_ptr<io::ZeroCopyOutputStream> output(
->>> |                                           ^~~~~~
->>> |                                           getpt
->>> | make: *** [Makefile:1497: protoc-c/protoc_gen_c-c_primitive_field.o] Error 1
->>> | make: *** [Makefile:1441: protoc-c/protoc_gen_c-c_generator.o] Error 1
->>> | ERROR: oe_runmake failed
->> I have send a patch for protobuf-c to fix this problem and have cc to
->> you. Thanks.
->>
->> //sandy
->>>>    2 files changed, 43 insertions(+), 4 deletions(-)
->>>>    create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch
->>>>    rename meta-oe/recipes-devtools/protobuf/{protobuf_3.5.1.bb => protobuf_3.6.0.1.bb} (86%)
->>>>
->>>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch
->>>> new file mode 100644
->>>> index 0000000..a2f7a4b
->>>> --- /dev/null
->>>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-protobuf-fix-configure-error.patch
->>>> @@ -0,0 +1,33 @@
->>>> +From 52959e8e01e39139d18f752e97283e45b4b7a426 Mon Sep 17 00:00:00 2001
->>>> +From: Changqing Li <changqing.li@windriver.com>
->>>> +Date: Wed, 18 Jul 2018 17:52:34 +0800
->>>> +Subject: [PATCH] protobuf: fix configure error
->>>> +
->>>> +fix below error:
->>>> +gnu-configize: 'configure.ac' or 'configure.in' is required
->>>> +
->>>> +third_party/googletest is git submodule of protobuf. Above error
->>>> +caused by missing submodule googletest.
->>>> +
->>>> +Upstream-Status: Inappropriate [oe-specific]
->>>> +
->>>> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
->>>> +---
->>>> + configure.ac | 1 -
->>>> + 1 file changed, 1 deletion(-)
->>>> +
->>>> +diff --git a/configure.ac b/configure.ac
->>>> +index aec10cf..7fbe57d 100644
->>>> +--- a/configure.ac
->>>> ++++ b/configure.ac
->>>> +@@ -214,7 +214,6 @@ AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
->>>> + #   too.
->>>> + export CFLAGS
->>>> + export CXXFLAGS
->>>> +-AC_CONFIG_SUBDIRS([third_party/googletest])
->>>> +
->>>> + AC_CONFIG_FILES([Makefile src/Makefile benchmarks/Makefile conformance/Makefile protobuf.pc protobuf-lite.pc])
->>>> + AC_OUTPUT
->>>> +--
->>>> +2.7.4
->>>> +
->>>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
->>>> similarity index 86%
->>>> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
->>>> rename to meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
->>>> index 8cef391..5850744 100644
->>>> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
->>>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.6.0.1.bb
->>>> @@ -5,18 +5,19 @@ all of its internal RPC protocols and file formats."
->>>>    HOMEPAGE = "https://github.com/google/protobuf"
->>>>    SECTION = "console/tools"
->>>>    LICENSE = "BSD-3-Clause"
->>>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
->>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
->>>>
->>>>    DEPENDS = "zlib"
->>>>    DEPENDS_append_class-target = " protobuf-native"
->>>>
->>>>    PV .= "+git${SRCPV}"
->>>> -SRCREV = "106ffc04be1abf3ff3399f54ccf149815b287dd9"
->>>>
->>>> -SRC_URI = "git://github.com/google/protobuf.git;branch=3.5.x \
->>>> +SRCREV = "ce044817c7ba0aea27c3fd8e496635d94d20a755"
->>>> +
->>>> +SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
->>>>               file://run-ptest \
->>>> +           file://0001-protobuf-fix-configure-error.patch \
->>>>    "
->>>> -
->>>>    S = "${WORKDIR}/git"
->>>>
->>>>    inherit autotools-brokensep pkgconfig ptest
->>>> @@ -82,3 +83,8 @@ RDEPENDS_${PN}-ptest = "bash python-protobuf"
->>>>    MIPS_INSTRUCTION_SET = "mips"
->>>>
->>>>    BBCLASSEXTEND = "native nativesdk"
->>>> +
->>>> +LDFLAGS_append_arm = " -latomic"
->>>> +LDFLAGS_append_mips = " -latomic"
->>>> +LDFLAGS_append_powerpc = " -latomic"
->>>> +LDFLAGS_append_mipsel = " -latomic"
->>>> --
->>>> 2.7.4
->>>>
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> --
->> BRs
->>
->> Sandy(Li Changqing)
->> +861084778653
->>
-
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/autofs-5.1.2-libtirpc-as-need.patch b/meta-networking/recipes-daemons/autofs/autofs/autofs-5.1.2-libtirpc-as-need.patch
+deleted file mode 100644
+index 18ce193..0000000
+--- a/meta-networking/recipes-daemons/autofs/autofs/autofs-5.1.2-libtirpc-as-need.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From b31decac4acb194b020c621d2d11019f636a45e0 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 24 Apr 2017 20:41:25 -0700
+-Subject: [PATCH] autofs: Upgrade to 5.1.2 release
+-
+-Make configure compatible with -Wl,--as-needed following
+-https://wiki.gentoo.org/wiki/Project:Quality_Assurance/As-needed#Failure_in_..2Fconfigure
+-
+-2016-07-05 Martin von Gagern
+-
+----
+- aclocal.m4 | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/aclocal.m4 b/aclocal.m4
+-index 0e4a624..2e620cd 100644
+---- a/aclocal.m4
+-+++ b/aclocal.m4
+-@@ -415,9 +415,9 @@ AC_DEFUN([AF_CHECK_LIBTIRPC],
+- [
+- # save current flags
+- af_check_libtirpc_save_cflags="$CFLAGS"
+--af_check_libtirpc_save_ldflags="$LDFLAGS"
+-+af_check_libtirpc_save_libs="$LIBS"
+- CFLAGS="$CFLAGS -I=/usr/include/tirpc"
+--LDFLAGS="$LDFLAGS -ltirpc"
+-+LIBS="$LIBS -ltirpc"
+- 
+- AC_TRY_LINK(
+-     [ #include <rpc/rpc.h> ],
+-@@ -440,7 +440,7 @@ AC_CHECK_FUNCS([getrpcbyname getservbyname])
+- 
+- # restore flags
+- CFLAGS="$af_check_libtirpc_save_cflags"
+--LDFLAGS="$af_check_libtirpc_save_ldflags"
+-+LIBS="$af_check_libtirpc_save_libs"
+- ])
+- 
+- AC_DEFUN([AF_WITH_LIBTIRPC],
+diff --git a/meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch b/meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
+deleted file mode 100644
+index 0a2d502..0000000
+--- a/meta-networking/recipes-daemons/autofs/autofs/libtirpc.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From cb6a4f61adb027f2366318f2c08c8264ebf39218 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 5 Jan 2013 19:53:10 -0800
+-
+----
+- Makefile.rules | 2 +-
+- aclocal.m4     | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/Makefile.rules b/Makefile.rules
+-index 6fa3e02..709dd04 100644
+---- a/Makefile.rules
+-+++ b/Makefile.rules
+-@@ -46,7 +46,7 @@ CFLAGS += -D_REENTRANT -D_FILE_OFFSET_BITS=64
+- LIBS += -lpthread
+- 
+- ifdef TIRPCLIB
+--CFLAGS += -I/usr/include/tirpc
+-+CFLAGS += -I=/usr/include/tirpc
+- LIBS += $(TIRPCLIB)
+- endif
+- 
+-diff --git a/aclocal.m4 b/aclocal.m4
+-index 2a9a802..0e4a624 100644
+---- a/aclocal.m4
+-+++ b/aclocal.m4
+-@@ -416,7 +416,7 @@ AC_DEFUN([AF_CHECK_LIBTIRPC],
+- # save current flags
+- af_check_libtirpc_save_cflags="$CFLAGS"
+- af_check_libtirpc_save_ldflags="$LDFLAGS"
+--CFLAGS="$CFLAGS -I/usr/include/tirpc"
+-+CFLAGS="$CFLAGS -I=/usr/include/tirpc"
+- LDFLAGS="$LDFLAGS -ltirpc"
+- 
+- AC_TRY_LINK(
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.4.bb
+similarity index 91%
+rename from meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
+rename to meta-networking/recipes-daemons/autofs/autofs_5.1.4.bb
+index e279995..187c6fa 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.4.bb
+@@ -13,7 +13,6 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+            file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
+            file://no-bash.patch \
+            file://cross.patch \
+-           file://libtirpc.patch \
+            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
+            file://fix_disable_ldap.patch \
+            file://autofs-5.0.7-fix-lib-deps.patch \
+@@ -24,12 +23,11 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
+            file://0001-Define-__SWORD_TYPE-and-_PATH_NSSWITCH_CONF.patch \
+            file://0002-Replace-__S_IEXEC-with-S_IEXEC.patch \
+-           file://autofs-5.1.2-libtirpc-as-need.patch \
+            file://pkgconfig-libnsl.patch \
+            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
+            "
+-SRC_URI[md5sum] = "28cf88f99eff553a8500659ba5d45a76"
+-SRC_URI[sha256sum] = "0d57e4138c2ec8058ca92164d035546f68ce4af93acb893369993d67c7056a10"
++SRC_URI[md5sum] = "17bc9d371cf39d99f400ebadfc2289bb"
++SRC_URI[sha256sum] = "8d1c9964c8286ccb08262ad47c60bb6343492902def5399fd36d79a0ccb0e718"
+ 
+ UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
+ 
 -- 
-BRs
-
-Sandy(Li Changqing)
-+861084778653
+2.7.4
 
 
