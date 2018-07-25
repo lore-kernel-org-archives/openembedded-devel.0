@@ -1,48 +1,48 @@
 Return-Path: <freebendy@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9379C7307F
+Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
+	[209.85.160.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 17C7574D0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 13:33:04 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id a11-v6so612599pgw.6
+	Wed, 25 Jul 2018 13:50:32 +0000 (UTC)
+Received: by mail-pl0-f66.google.com with SMTP id e11-v6so3332216plb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 06:33:05 -0700 (PDT)
+	Wed, 25 Jul 2018 06:50:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=64eFHZiH77jeAD3jgem70Q7t1+3ZCpQUCZrk4FelLB0=;
-	b=Qcl+U8wpe6q0h/pEZ75sgjCiVZ4qJAhHPYxSJAX5NzroHAhOl943EC5ewkiHe13RML
-	ysHHWGLfqm/rgsPSWv05vUkBqPmxdkHycrBC7A0M3LcD6vvkhTEbvS70C+BytRgnFfHi
-	4IPP4YJ1jwCfGsDMVCfnVVWlP2e1euCUMAiYgeApC3frEPW6KzNZa55LRmtJyO2/IQ4c
-	VdkwkNktAYWJLgTYkqt8acuLt2JNZ5igqKyupKkTmEZp0+lakqDh9dvVVZJqmidN42+t
-	uexkAmB2DAxwsURzgaHuYBLVqWH8AjTLFvdA9BaZdmWJjbSFUpaHrnE95V0KHeQSMjWj
-	7HPw==
+	bh=DmBl/Vl2nDg3Inp6Q/OTZSvt7Kle6/Jj8lQ+7D5sfoc=;
+	b=bJP98RLoOB6zJH0MJRzQ7wCQGDdPOIuiLWKuqC8pT5Qxgd3V2hFpjh8DnxmmuXYFdt
+	f5Ta4oWVYRi+AMGYxHXnR6cRwpO8GUr6EplWsS9dhbZI+mPwGuuxjRqG0CgbAYf420kx
+	rNf7tYUoue0z2HBURpDL4T/BeBeDwgN/HIQ1MV+yivV4qz894JnjWEdLRPC/o82PLjix
+	723PMHj98KQcxcQpRekOPcfrUDw867K4B+Cvnj8aIuJkmcuikrz5B6ABwDmAGI/C0LI+
+	s50lRPcsGmVU1vk4BjpTvJwHZJ8o5H6v2dgA9nc4VnhdkEQ4l/E8h18dpQAZ6aY8dIXZ
+	PYzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=64eFHZiH77jeAD3jgem70Q7t1+3ZCpQUCZrk4FelLB0=;
-	b=Aw0ipVDc/UzfTvXwsZCKdXhtDc4Q9EZ/63Wg8aYR3uA+HXBuP16IxEqLCbxpTz+6Oz
-	OmPld7l4XDqNWuCnxvJNz+wI4V7gtmPOiJUNvPpG7qR0SJmXiXVmBsgGVG/Zd1j0Lp1f
-	5HI4JNpfzB9rUGZlb+0cuZ6fcVyMPiWgjr3yTjYKzXp0a4DJ0Q1JbLikeZAej6vbNF+x
-	NHHgFmVxA/PgL2aD6/ctKxTvSaANk1OtrkxgJOyP4U+ts6AC0hcjhEYsmVH3aHikqXLw
-	sGg79+FyBb2rKwt8GP5BZkbSZBciJ7v6IHtcFzcQH/pp4EwwXUCgSfih2fYYUqskg8PM
-	icOg==
-X-Gm-Message-State: AOUpUlHO48fE9VihonRaXUmMWhNkGtZNlTAo9698Il3Nkj/4qa18+IHz
-	Jy1WquAsltX+f9dhhyNzyHqHbCCwZw==
-X-Google-Smtp-Source: AAOMgpfcKTqqzH+MYTxgjdBU1sJVZIuUk/bNTjH2rO5H10wOpNSAOxlvC8UTAprUqB7uJK6Iy7XRIg==
-X-Received: by 2002:a62:6941:: with SMTP id
-	e62-v6mr22355831pfc.217.1532525585266; 
-	Wed, 25 Jul 2018 06:33:05 -0700 (PDT)
+	bh=DmBl/Vl2nDg3Inp6Q/OTZSvt7Kle6/Jj8lQ+7D5sfoc=;
+	b=r1dIIqAZfXNH4E2xtM4dg86nxqZta7FrDdNeT4wVBKFDT9pZOYyM2GHGE8WwY/uTQN
+	ERImqbH/ggp+cLXhz3gsV2DixZLCK/RxlVJNZ4aXYbRhf/vMJFsLWJJ/CU+S5q1+CAV1
+	c/sZZ3RvhFKnqUJxri7bFZVWEo3XCFsEE9nd3SyC+bYDPWbZyRz0WR2w4OTqXsj9kkfj
+	wHYj3PAVvRgNO5eg0ykF6xY/cPcvG2Joy/XgJLoCXkcmdGeIhV52Flfsq/b0bAUCFSIW
+	En/NPKENQE3ZemTY/NpHMrOyFmEUbawMs0eGMvBPXfs+Poq/XAa8UCFbHDfRslB0g2Z/
+	vZOg==
+X-Gm-Message-State: AOUpUlHdygr5QE/52fFQZpqWn+gCBL+1N81EgM+Tc8zzQo6asumytmjg
+	Y7GEQjYaUVx1svnFEv0pSBFBlWH5Nw==
+X-Google-Smtp-Source: AAOMgpff/PtLp7fWMJ5ovQE+Q7xYgz1BxbRDtHu9CYl2LfhYqeLkBAJ7c7S9c0s/BLQfVYe6TXlXOw==
+X-Received: by 2002:a17:902:6105:: with SMTP id
+	t5-v6mr21333727plj.92.1532526633995; 
+	Wed, 25 Jul 2018 06:50:33 -0700 (PDT)
 Received: from localhost.localdomain ([116.7.217.144])
 	by smtp.gmail.com with ESMTPSA id
-	s20-v6sm17960249pga.37.2018.07.25.06.33.03
+	q81-v6sm31592877pfd.15.2018.07.25.06.50.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 25 Jul 2018 06:33:04 -0700 (PDT)
+	Wed, 25 Jul 2018 06:50:32 -0700 (PDT)
 From: Binghua Guan <freebendy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jul 2018 21:29:15 +0800
-Message-Id: <20180725132915.2558-1-freebendy@gmail.com>
+Date: Wed, 25 Jul 2018 21:49:54 +0800
+Message-Id: <20180725134954.4746-1-freebendy@gmail.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-python] [PATCH] meta-python: add python-crcmod recipe
+Subject: [meta-python] [PATCH] meta-python: add python-inflection recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,54 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 13:33:04 -0000
+X-List-Received-Date: Wed, 25 Jul 2018 13:50:33 -0000
 
 Signed-off-by: Binghua Guan <freebendy@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-crcmod.inc     | 14 ++++++++++++++
- meta-python/recipes-devtools/python/python-crcmod_1.7.bb  |  2 ++
- meta-python/recipes-devtools/python/python3-crcmod_1.7.bb |  2 ++
- 3 files changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-crcmod.inc
- create mode 100644 meta-python/recipes-devtools/python/python-crcmod_1.7.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-crcmod_1.7.bb
+ meta-python/recipes-devtools/python/python-inflection.inc  | 14 ++++++++++++++
+ .../recipes-devtools/python/python-inflection_0.3.1.bb     |  4 ++++
+ .../recipes-devtools/python/python3-inflection_0.3.1.bb    |  2 ++
+ 3 files changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-inflection.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-inflection_0.3.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-inflection_0.3.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-crcmod.inc b/meta-python/recipes-devtools/python/python-crcmod.inc
+diff --git a/meta-python/recipes-devtools/python/python-inflection.inc b/meta-python/recipes-devtools/python/python-inflection.inc
 new file mode 100644
-index 000000000..85da7cb3c
+index 000000000..556b26820
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-crcmod.inc
++++ b/meta-python/recipes-devtools/python/python-inflection.inc
 @@ -0,0 +1,14 @@
-+SUMMARY = "A Python module for generating objects that compute the Cyclic Redundancy Check."
-+HOMEPAGE = "https://pypi.org/project/crcmod"
++SUMMARY = "A port of Ruby on Rails' inflection to Python."
++HOMEPAGE = "https://pypi.org/project/inflection"
 +LICENSE = "MIT"
 +SECTION = "devel/python"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f9a19291627cad2d1dfbfcf3c9fb85c2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=de7833d9c2ce0052a4073928c76a13d7"
 +
-+SRC_URI[md5sum] = "2d5b92117d958dcead94f9e17f54cd32"
-+SRC_URI[sha256sum] = "dc7051a0db5f2bd48665a990d3ec1cc305a466a77358ca4492826f41f283601e"
++SRC_URI[md5sum] = "7941165e9f148e0520023941c0886b40"
++SRC_URI[sha256sum] = "18ea7fb7a7d152853386523def08736aa8c32636b047ade55f7578c4edeb16ca"
 +
 +inherit pypi
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-unittest"
++RDEPENDS_${PN} += "${PYTHON_PN}-pytest"
 +
 +BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-crcmod_1.7.bb b/meta-python/recipes-devtools/python/python-crcmod_1.7.bb
+diff --git a/meta-python/recipes-devtools/python/python-inflection_0.3.1.bb b/meta-python/recipes-devtools/python/python-inflection_0.3.1.bb
 new file mode 100644
-index 000000000..45b9a2ce6
+index 000000000..4a9d49791
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-crcmod_1.7.bb
-@@ -0,0 +1,2 @@
++++ b/meta-python/recipes-devtools/python/python-inflection_0.3.1.bb
+@@ -0,0 +1,4 @@
 +inherit setuptools
-+require python-crcmod.inc
-diff --git a/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb b/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb
++require python-inflection.inc
++
++RDEPENDS_${PN} += "${PYTHON_PN}-codecs"
+diff --git a/meta-python/recipes-devtools/python/python3-inflection_0.3.1.bb b/meta-python/recipes-devtools/python/python3-inflection_0.3.1.bb
 new file mode 100644
-index 000000000..6996b13d0
+index 000000000..cc36a02a7
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-crcmod_1.7.bb
++++ b/meta-python/recipes-devtools/python/python3-inflection_0.3.1.bb
 @@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-crcmod.inc
++require python-inflection.inc
 -- 
 2.11.0
 
