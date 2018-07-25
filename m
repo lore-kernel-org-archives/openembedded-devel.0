@@ -1,51 +1,68 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-it0-f46.google.com (mail-it0-f46.google.com
-	[209.85.214.46])
-	by mail.openembedded.org (Postfix) with ESMTP id BB8C574A35
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D21078981
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 08:04:00 +0000 (UTC)
-Received: by mail-it0-f46.google.com with SMTP id 72-v6so7433487itw.3
+	Wed, 25 Jul 2018 08:39:25 +0000 (UTC)
+Received: by mail-oi0-f42.google.com with SMTP id b15-v6so12443713oib.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 01:04:02 -0700 (PDT)
+	Wed, 25 Jul 2018 01:39:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=8GEgiWAKf77mIBy41464ae0H3Oruj0xob2zyP4jCL7U=;
-	b=QmYu32QyTf41dizRB+hjP15zsM0ug3wXeVoq6vlzcpGVsI2RDik9a+zhjvkvTGL1/n
-	vMH51ibgBeWvc3nWP2V691K9xn4KxdHMqCnUPQy/VB8pfr9zBqDIM3dmDbH6IQV4LUSZ
-	nHQ3HtG3p7pvuWf8KsE5SpIX9bQoviAwOsHETuLhmO6ll+lM53US7lz1Y9QBHxYQbzst
-	OB5gK9iWUa1NtU0J2PvCjFhpBdU79xaMo7N+fbj3mrAbnm0FNZelIzDr487KHqSlR3+I
-	prJkjT1N0DoP0bLpbDtgBlcP6w59NQRtmoiKkTEW4Yf1k2qclpCXCroZDofVbn+fORDY
-	TsAQ==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc; bh=vS6MqXMs1yarbbkXgFhsIJiZb6Xcy3akwCNpb1e4psI=;
+	b=iEHk/5aXd2ppGp9AMKI3OOzZDLJmQdlC92PDiR6TBIXyunp8IWV+Yk8YdJDI3BDQc7
+	TJFasNMQDQhKilBtcys3gIHyFvCGFSusV5t77S56gO+yO4NeUOvFGdeL2GkXUvLATG4R
+	kjgjem4Peup3lIu+G4GTNvRHmKHqDsdANFhx5aszS6nPCTz8MimtyMA7CDJosjPjr1Au
+	u/n0fon58e+dwi2Pt+17j2EJQC5ZgMuftnTsMqUP2xtfQfa+5BbzI6zIesaeKM1LEn4+
+	6xeQBcQxJ9mvmafIAA7vdZEPRVwBWF2opUmmxQx+//Ow/gYBACs1E9u/ixYP7vJrMfrO
+	U/NA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
 	:message-id:subject:to:cc;
-	bh=8GEgiWAKf77mIBy41464ae0H3Oruj0xob2zyP4jCL7U=;
-	b=JKyU/Wtk2qV+M3BOKkPBTJWKZczcrhygjbDhV88iLuZTVYRU8uEnh1gpXdbL5P4I/3
-	GXBilU8FaC5xciC0/EauLiJa8RQTnBtPXSi0+GQ3V2AUZ1g+xClyN7VYKuFIdB1j5OV0
-	q9dLqwnOsKc7589l7jmKIeeYZWE6Fl6zsrWepSrrkHvKPAlpAYydcUYZgW9q0jtvpGqA
-	DI23d0bRXh82ocLih52C8BDvIwv3oiJRNN8JmcOu7qbGBOjr/Im+rY016vrM1/WX+KXp
-	Lo6Cj8WDDp9lWv9hx7bfymzTYowpcP4UKJoGDPUbGlC7EgdiSNHEcjMKn7gwmUFu1XVe
-	8pnQ==
-X-Gm-Message-State: AOUpUlFtW6jbZ3PAghYn+qyz/K8SDH0QOYL7ZnGo35BKq84ojT6ICXLj
-	0izmgprbWcV0nNKlN4o5mUSOvhAJXOpl9ISZRPNnUg==
-X-Google-Smtp-Source: AAOMgpdKrA/hK+lZmMIAGCpTmOf+0ptHEld0s1il91UCfWa+jD3YiCCeRyZIswwnj7bWYtYJUqwVUD/ZuTeSAnPtOFI=
-X-Received: by 2002:a24:d80a:: with SMTP id
-	b10-v6mr5315391itg.141.1532505841837; 
-	Wed, 25 Jul 2018 01:04:01 -0700 (PDT)
+	bh=vS6MqXMs1yarbbkXgFhsIJiZb6Xcy3akwCNpb1e4psI=;
+	b=GVYEM6iDlDuwglTJtwGE0ZVs3Z1Oxukeb+CMSfsb/Wp6kreK6a+nGXo3qCc1XbpUIx
+	i5Srp2qvY8n976vcds3+FCy4KWUMfEOVo7vQeFeIQyAsMb4czqhydaaOobaaaopWEOkp
+	Y7i4Gqi/weIW7+U3qwtJXccHHVAe7SnWA7HmBAWbRsednRrw7s07g36yUEy/KSNGa09I
+	29TbvysM19rojmPT/+ymXv1tMwGLMHr8nfXexnJDLntDZj6ZD7ppM6dBXBDsn601ogoJ
+	4Ca+HZ1FIoPMAO9d0AZLjjDkOjvBodNcDs3txAw09Mu0Z4FR8Jh3sb/W0FNonkcfB32n
+	dvfQ==
+X-Gm-Message-State: AOUpUlFqZN5tKRJlRQ+yEHFDFFz/ZVQj0ydx1muztXOLNqbModFMoc/p
+	GlHwpYNpuBannjHnvR+7TRKdxtGcgVO+bw==
+X-Google-Smtp-Source: AAOMgpeDNg+nanzXmp9cMG7EVn/ayclcKXIIWM0Jd2yjkoepMyT8bdn5z2+tIu34CWVEMRi2yVYCOA==
+X-Received: by 2002:aca:44c5:: with SMTP id
+	r188-v6mr2261113oia.280.1532507966046; 
+	Wed, 25 Jul 2018 01:39:26 -0700 (PDT)
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com.
+	[209.85.218.42]) by smtp.gmail.com with ESMTPSA id
+	n188-v6sm10124230oia.17.2018.07.25.01.39.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 25 Jul 2018 01:39:24 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi0-f42.google.com with SMTP id k12-v6so12443005oiw.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jul 2018 01:39:24 -0700 (PDT)
+X-Received: by 2002:aca:e504:: with SMTP id
+	c4-v6mr2575506oih.246.1532507964114; 
+	Wed, 25 Jul 2018 01:39:24 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a5e:9402:0:0:0:0:0 with HTTP; Wed, 25 Jul 2018 01:04:01
-	-0700 (PDT)
-In-Reply-To: <CAMKF1sra8-e7r14QcRtkfL0ysiurQKuwJV+WS3F8+8f7WR2FSA@mail.gmail.com>
-References: <20180724150101.12609-1-brgl@bgdev.pl>
-	<CAMKF1sra8-e7r14QcRtkfL0ysiurQKuwJV+WS3F8+8f7WR2FSA@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Wed, 25 Jul 2018 10:04:01 +0200
-Message-ID: <CAMRc=Mcf6_NJEQwMtjgDJ2NGOmSjB1M2udHVDb1yKfL22ajjcg@mail.gmail.com>
+References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
+	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
+	<20180724152529.GA19585@mail.itconsulting-heinold.de>
+	<CAP9ODKp3_1iQybyE0McSFUbd7YFPoPbD8HVy+qu05aP18zvwKw@mail.gmail.com>
+	<CANx9H-BRdfmLO1vbeFocn6RSOmcd5F73hB_bYQqOMsc5o_nPSA@mail.gmail.com>
+	<CAMKF1sp4c_LFSGWKvkQ_bdi3Qz3maQO5k+mo1ViYNxxKAQ_5sA@mail.gmail.com>
+In-Reply-To: <CAMKF1sp4c_LFSGWKvkQ_bdi3Qz3maQO5k+mo1ViYNxxKAQ_5sA@mail.gmail.com>
+Date: Wed, 25 Jul 2018 09:39:12 +0100
+X-Gmail-Original-Message-ID: <CAP9ODKpyad5xfNkEf6+SxiW90xr=BT6=5Y3VFtv1+z5+NXFY-A@mail.gmail.com>
+Message-ID: <CAP9ODKpyad5xfNkEf6+SxiW90xr=BT6=5Y3VFtv1+z5+NXFY-A@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] libgpiod: bump version to v1.1.1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] bug-tracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,54 +75,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jul 2018 08:04:00 -0000
+X-List-Received-Date: Wed, 25 Jul 2018 08:39:25 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-2018-07-24 17:41 GMT+02:00 Khem Raj <raj.khem@gmail.com>:
-> On Tue, Jul 24, 2018 at 8:01 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->>
->> This is a bug-fix release that fixes a couple memory leaks and bugs in
->> python bindings discovered in the v1.1 release.
->>
->
-> the subject of message is misleading,  we have filters and the message
-> can get lost, I have staged this
->
+Em qua, 25 de jul de 2018 06:38, Khem Raj <raj.khem@gmail.com> escreveu:
 
-Sorry for that. I assume no need to resend then?
+> how about gitlab ?
 
-Bart
 
->> Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
->> ---
->>  .../libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb}           | 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>  rename meta-oe/recipes-support/libgpiod/{libgpiod_1.1.bb => libgpiod_1.1.1.bb} (78%)
->>
->> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
->> similarity index 78%
->> rename from meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
->> rename to meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
->> index ab0bc980d..9d3d759fe 100644
->> --- a/meta-oe/recipes-support/libgpiod/libgpiod_1.1.bb
->> +++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.1.1.bb
->> @@ -2,8 +2,8 @@ require libgpiod.inc
->>
->>  DEPENDS += "autoconf-archive-native"
->>
->> -SRC_URI[md5sum] = "80237a047a9d653a14c5d71e5ce9d641"
->> -SRC_URI[sha256sum] = "9758466468a7ef3f5e30c182c1303abef6241e665cda4d82a64328a7474838c1"
->> +SRC_URI[md5sum] = "e5e946cb01a35e5046a1a7a108d6a96d"
->> +SRC_URI[sha256sum] = "172fa1544ecb51f37533b3e67862298d50c0a5cc84975f3c0706dc15467f0dfd"
->>
->>  PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
->>
->> --
->> 2.17.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Personally I prefer github as most people have account on it and are used
+to it.
 
