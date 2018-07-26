@@ -1,54 +1,48 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yw0-f182.google.com (mail-yw0-f182.google.com
-	[209.85.161.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7501478C31
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AC8C578C3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 19:40:55 +0000 (UTC)
-Received: by mail-yw0-f182.google.com with SMTP id r184-v6so1006956ywg.6
+	Thu, 26 Jul 2018 19:52:24 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id q12-v6so2814447qtp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 12:40:56 -0700 (PDT)
+	Thu, 26 Jul 2018 12:52:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=U8UybPseocOdeYD14v02601sPrY/8QuX8OcnxACE6OU=;
-	b=m8JHHNmAcf21QblCE4WkGp9TZPyMGcwCt/syLm2RqGYBcki3QejkfhFihOAu7Xd5yt
-	3oB+ZIAH/p1wv0TbasGi7PkYwErh2sao+kh+pLO3zuiH3WKAj2X4UkzFij6hfsxROIUl
-	G/1XHou4qiZN/nWLKxLMq/xVXAoqYFLdY3ekTNZUduFjt1/no6NvDRKOnwCzTk1G9VJ5
-	gwxb6l9qJC98IZRkgmbnbwnBv+CBnBjOUa6OcqVvUlwalzabPnHWG7/uP8ZdUF7xkVWr
-	qcCjy49o6qq+8qijRinLYloM44syyrImjVtC3evk9mKp8FaNhvov+rnayPBTwEGAcwqj
-	ioRw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=oICP285ryvIaYoZoOGELPaa8U+hzZOs3gjEyRrXkq4c=;
+	b=XzlwdRL0oyLOfF72uxANr+RYXBMCsi1Id5UvVrRxHglgrx+J4gTGZF19LbD4VbbX2a
+	S+cKulCqpZjXQ52rzWeUiw16OZsrz2yFPmzDmPvJera6z6LZc+ryJvJo242kftP3f8yJ
+	9QN0mzkagpJVrvS2zVE32cUXviteInHx7DSJ7RHp+KxzA585pplGpQ9g/YCniwBM5tap
+	TVl6V4stTOacdFmca5m93rY0rkfj34uHTWFLqQ7PGhwdLoEIXPCpTLq8u8pAOYETkzvs
+	yV1sZtq3MIlcrG3naO+wu3XtoUT3UTyE2wzq4jWn8ep43qxS8yOpqTkMNHgMH5APP2KT
+	xSbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
-	:references:from:date:message-id:subject:to:cc
-	:content-transfer-encoding;
-	bh=U8UybPseocOdeYD14v02601sPrY/8QuX8OcnxACE6OU=;
-	b=GVG5d8ibGL4FE37QeZ+8CKvwKIroy62A61ThDvTqBF7DEx5POap6yixHsAhQToEtat
-	hU6gDC7mWFt5TezU3s21hJ8YHinPvGIhATmSJquzoO2pSlbV89FOmSGnrNScip6t6yot
-	cFvR44xHLDfKG8U/qmn8YuX8YjYquULtvHP/4Ka/n27z75HxZW1LAGtXkqqhTfWBrGhI
-	csVmqmQHIZY08p0bvQjMVw5ZBZB+fBaQBtXgW+pZoTjVun59ZT+I/Z+w86XkUxILJokt
-	31nR6Cda/Fwzdp3CjgUf8J3w1gBDWPLe5k3UG7Zozp7lirJGYtfU9YKvx+otK9R/8rvY
-	wB8A==
-X-Gm-Message-State: AOUpUlHp/HbSelXWkGbYBDvPC4jArI9cU3i9O9rzdQ+EFDefzqxKPL8y
-	rT/SpkxtSCQibBuCuGafPkgVoBKtR0DOLjekp58=
-X-Google-Smtp-Source: AAOMgpcUhZe0Y12oWYcDEkbig2CwQyWIFFU3qlHDBbFFKyFXKfz6Ra6cL3h9FsK5zqA0+T5YgaVfwv5OGCFyfn4AA9k=
-X-Received: by 2002:a0d:c342:: with SMTP id
-	f63-v6mr1741884ywd.508.1532634056343; 
-	Thu, 26 Jul 2018 12:40:56 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=oICP285ryvIaYoZoOGELPaa8U+hzZOs3gjEyRrXkq4c=;
+	b=IsFTRyXSHdiXsH8CyYOuOt/DwFcOFBHCRl04N51e2sxjtnHCA/uf1vasSNy/2s/Csd
+	bDnWvIWn+RiQ8vZfFhvZJLhOsmI5O8T6x19FK1wnBT34KhfdMyTxn/afJubafv7aMKvv
+	wYhqLvjTR9x00koSMHkMf7/94F4hLOYNvpJSSdJ65V+LAU2TwTpCyoN4cvkmtojLIspV
+	UVRsp3yFBE5apYjJ4WMCtvjH7YhjKKrk/zSH4tlbKZddhhg8uiYWYYA00++YkB0xasbk
+	8TQocsCjW8nMvKp0HDFIY+lld2Hxw+RuwbYXyGZE7ZzPwrhhzmrkHv6XYrhyXx3llE1t
+	AJdQ==
+X-Gm-Message-State: AOUpUlHwomiSOWu5+otOHKvG4J/wLtooY2T3J4ayAN8J5xCWHP+TXim7
+	HyhcS71Ko0xDMcp/gSF2ZgjhJVyoUw+FwsI21sw=
+X-Google-Smtp-Source: AAOMgpd6tDC+CK0HK7TS6NqoJiCYmx8QCt5gil5akE6LsOZSZzzcA5KUWoP+rOtLjFHgKBCvRRi82Ihb5ddQUTPPxNI=
+X-Received: by 2002:a0c:983d:: with SMTP id
+	c58-v6mr3016687qvd.221.1532634745169; 
+	Thu, 26 Jul 2018 12:52:25 -0700 (PDT)
 MIME-Version: 1.0
-Reply-To: mark.asselstine@windriver.com
-Sender: asselsm@gmail.com
-Received: by 2002:a5b:612:0:0:0:0:0 with HTTP;
-	Thu, 26 Jul 2018 12:40:55 -0700 (PDT)
-In-Reply-To: <CAOnRZELTeZbVDTo_eT_r6e6EG6et0vs7O_mT_fpqJ_RpoVhk2Q@mail.gmail.com>
-References: <CAOnRZELTeZbVDTo_eT_r6e6EG6et0vs7O_mT_fpqJ_RpoVhk2Q@mail.gmail.com>
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Thu, 26 Jul 2018 15:40:55 -0400
-X-Google-Sender-Auth: UWzRVFG4ZdlnncFzfogsVHmxEsI
-Message-ID: <CAPuovEKX5w=1ObAgOw71UteCmh74Qf9KQ44_L4NbmLniwX4Jyg@mail.gmail.com>
-To: William Delacre <williamdelacre@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: (No subject)
+References: <20180726183413.17793-1-lukaszgardon555@gmail.com>
+In-Reply-To: <20180726183413.17793-1-lukaszgardon555@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 26 Jul 2018 12:51:59 -0700
+Message-ID: <CAMKF1sowd+zMuuEZuH1hzmpQTjQ5u4Ta=+MnUFbWoY-dAv=KbA@mail.gmail.com>
+To: =?UTF-8?B?xYF1a2FzeiBHYXJkb8WE?= <lukaszgardon555@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCHv4] python-tornado: upgrade to version 5.1.0, added setting PV in recipe to support fetching from pypi.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,49 +55,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 19:40:55 -0000
+X-List-Received-Date: Thu, 26 Jul 2018 19:52:25 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 23, 2018 at 8:28 AM, William Delacre
-<williamdelacre@gmail.com> wrote:
-> Hi ! :-)
+On Thu, Jul 26, 2018 at 11:34 AM lukaszgard <lukaszgardon555@gmail.com> wro=
+te:
 >
-> I=E2=80=99m facing issues when trying to run =E2=80=98bitbake python-twis=
-ted=E2=80=99 (do_compile
-> error)
+> From: =C5=81ukasz Gardo=C5=84 <lukaszgardon555@gmail.com>
 >
-> Log says :
-> =E2=80=9CDownload error on https://pypi.python.org/simple/incremental/: [=
-Errno -3]
-> Temporary failure in name resolution
+> License-Update: Change license file from setup.py to
+> LICENSE, based on the same the same license policy Apache 2.0.
 >
-> ............
+> Signed-off-by: =C5=81ukasz Gardo=C5=84 <lukaszgardon555@gmail.com>
+> ---
+>  meta-python/recipes-devtools/python/python-tornado.inc    | 8 +++++---
+>  .../{python-tornado_4.5.3.bb =3D> python-tornado_5.1.0.bb}  | 0
+>  ...{python3-tornado_4.5.3.bb =3D> python3-tornado_5.1.0.bb} | 0
+>  3 files changed, 5 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb =3D>=
+ python-tornado_5.1.0.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.bb =3D=
+> python3-tornado_5.1.0.bb} (100%)
 >
-> distutils.errors.DistutilsError : Could not find suitable distribution fo=
-r
-> Requirement.parse(=E2=80=98incremental>=3D16.10.1=E2=80=99)=E2=80=9D
+> diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/met=
+a-python/recipes-devtools/python/python-tornado.inc
+> index 29d10da6b..a6a082dec 100644
+> --- a/meta-python/recipes-devtools/python/python-tornado.inc
+> +++ b/meta-python/recipes-devtools/python/python-tornado.inc
+> @@ -4,10 +4,12 @@ By using non-blocking network I/O, Tornado can scale to=
+ tens of thousands of ope
+>  polling, WebSockets, and other applications that require a long-lived co=
+nnection to each user."
+>  HOMEPAGE =3D "http://www.tornadoweb.org/en/stable/"
+>  LICENSE =3D "Apache-2.0"
+> -LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D3;endline=3D15;md5=3D8=
+d463fc66ff8f275354ffe88d1896e12"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
+d57"
 >
-> First of all I=E2=80=99m not connected to internet, so I=E2=80=99ve pre-d=
-ownloaded all the
-> required packages (twisted-17.9.0.tar.bz2 & incremental-17.5.0.tar.gz are
-> present in my build/downloads folder)
->
-> It=E2=80=99s the first time I have some =E2=80=9Cdownloading issues=E2=80=
-=9D and I=E2=80=99m stuck on it
-> for a few hours now..
->
-> Any tips for me ?
+> -SRC_URI[md5sum] =3D "a5fc7fd4aea94867609a491ce65786f1"
+> -SRC_URI[sha256sum] =3D "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2b=
+d7ce644287685f0a"
+> +SRC_URI[md5sum] =3D "bd264851c409f926d1dae1ad5055d28d"
+> +SRC_URI[sha256sum] =3D "4f66a2172cb947387193ca4c2c3e19131f1c70fa8be470dd=
+bbd9317fd0801582"
+> +
+> +PV =3D "5.1"
 
-Check all aspects of what you have manually downloaded and populated
-in your downloads. My guess is that a checksum or some other detail
-isn't matching and it is rejecting what you have and thus attempting
-to re-download the file.
-
-Mark
+why should this be 5.1 ?
 
 >
-> Thanks in advance !
+>  RDEPENDS_${PN} +=3D "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYT=
+HON_PN}-email \
+>                     ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-j=
+son ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
+> diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb =
+b/meta-python/recipes-devtools/python/python-tornado_5.1.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
+> rename to meta-python/recipes-devtools/python/python-tornado_5.1.0.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb=
+ b/meta-python/recipes-devtools/python/python3-tornado_5.1.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
+> rename to meta-python/recipes-devtools/python/python3-tornado_5.1.0.bb
+> --
+> 2.17.1
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
