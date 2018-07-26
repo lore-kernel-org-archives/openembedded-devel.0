@@ -1,50 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id DDABC78B10
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl0-f47.google.com (mail-pl0-f47.google.com
+	[209.85.160.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 5211F78C2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 14:24:05 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id s12-v6so2195830wmc.0
+	Thu, 26 Jul 2018 15:10:45 +0000 (UTC)
+Received: by mail-pl0-f47.google.com with SMTP id t17-v6so954954ply.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 07:24:07 -0700 (PDT)
+	Thu, 26 Jul 2018 08:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=pu0KJfmWSIienCXAKqtTIeetemT0hOghhIo88vwixc0=;
-	b=YD6X21lgLGeM+P3Ps4+itGPAYfy6ZCHj5iDgMNb3/QpKaEXVoMSPsyXDq3m4MhNgNI
-	vygmT2wGoUitobtN3kYYkzuty8K3fQYGbgEES3zeJSuFqJ7bqFNQMFd1Spz5YlXD63Q8
-	lbu/UnNZg4dlf/z/onLEUmKLU5H5axrNhDDk2CQl2DTkYweaZLOSNxonhXX+7GFGxmpY
-	t245sQXxgBibD+cXMsUCQJtBWfUZvF4TrkcK7usb816z2hxmkmc7URDGBzYuTHHSlAt0
-	vMrXmkmJzsrLqv636XmA+Kvl380bAm7o34T3U6MuNUm48hiBJ+pfIq7E0gViPaFgsrjA
-	Uzmw==
+	h=from:to:subject:date:message-id;
+	bh=RjmfXPtL2YnjpikfGs5ZDbvdBYXSFSNv5KN0+SakkbY=;
+	b=XWrbT3kP90QrN1i7cbwmPMjXaZOR+C/MZVX3DjY2Nz+oKkQWGRkWIA3A9EDezFDYTj
+	Bu3nIM6k6sZRx3cXY2m76Px5BFOTMYeIlL9RTjQKCjK9T4etAYD5AZHsLi3MGQeeniIR
+	0yD9EHdLvgfsHw5/uHwX153BE5gVSOmI+XC2Q1cI/B3/8pls/E5mYLZmNi1YqCcMF+GS
+	xXXKEVP/2tJITIB24367HVNMBxzWX+JB/mnJyQfBvUiahQPOcur9THN6xoEKAyi4GzGw
+	AnxL9wIxZ0fJaPIm4ylYTnjW3LwIdKjvhbEULLiwwgzUK6viYmume+sz8l5YEpHg4bXE
+	R+Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=pu0KJfmWSIienCXAKqtTIeetemT0hOghhIo88vwixc0=;
-	b=D1u10NEx7VSQOOwS7bBx8PiWo+I3LexQEchC5JkZA1uNNyLvqAzvoVOL4JDXgicLWo
-	C/IqV8Ug3a2Jf6Z20gmd0EmbAwm2IkgyYV8CWYODGi+rVjSwEbjFCwzxox3GXH5KLzOu
-	cpsRH2eOJZxTFsCa9hO4zBZdVIExH97dg7oQIawtjCrt0s2P+1IAhYbiRz7XCySFKu7Z
-	nhe91FgK/f6+bFt3Jk5t97V9P5rQyWmwDspX83MsgP5ij6gUaHT0ltdHrKhH+quMnGMw
-	YAs3t8tCaeN/2y286Tx/Op9RP8kTtEYQ2a2GN8qvWGgFo/xKiPwVue9ieqmEfokFYo0M
-	MbjQ==
-X-Gm-Message-State: AOUpUlFzlS9EE3DwwxdCq+5e8PlVbA9rJ9wlALpj1mwRZPUTmn6qzblq
-	wVh76XnadLmsnZCJV/XzyBvI7G4tZmF8U+vp02o=
-X-Google-Smtp-Source: AAOMgpcEzlUFIBbDicmNS84oqxvggV2zzEauQoKiHDCHMiM9fEpMKgQye/tFhOO/C3Jk96Op5+3yma/wUw6l9Oa/igU=
-X-Received: by 2002:a1c:b484:: with SMTP id
-	d126-v6mr1731699wmf.17.1532615046698; 
-	Thu, 26 Jul 2018 07:24:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180601045815.15819-1-raj.khem@gmail.com>
-	<20180601045815.15819-3-raj.khem@gmail.com>
-	<CA+chaQe10kmj=fpbQ58brd1G8UfOjPB9dW8XKs1e+gYqOWCM9A@mail.gmail.com>
-	<CAMKF1sqhYpv2THHc9-oWDc-5mb0hnaVazN+Q5oDNfeqiQ7N=8Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sqhYpv2THHc9-oWDc-5mb0hnaVazN+Q5oDNfeqiQ7N=8Q@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 26 Jul 2018 16:23:56 +0200
-Message-ID: <CA+chaQfcm5Uz3vs=HsCyL6h+1PGuD9KonPH-vd4ZzL=-kkobLA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] openocd: Upgrade to latest tip of master
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=RjmfXPtL2YnjpikfGs5ZDbvdBYXSFSNv5KN0+SakkbY=;
+	b=OHNCaeHIg5lQE9OyEMYpdZKyciPg/PB6jH7t+WRZYA/uXFNiaa6FzyTEf07qGbc9Hu
+	mc9qqNfO3HgWC2HAleyO9fpRcUb8Nvc7e192mm6ZOxyWg5QUvDqq2jc4kMyqDcK8aV3S
+	joExm5reA59QdkVPROegzChLXd0v/WGQ2SHFh0dbhkrxVc8LUk9DzT8PUd1gzHpfYyeZ
+	kbr2tlYVfVyDKGPowr44WGrCvdRDBd8ey32bNYtslQVx/Yc9e59Ap23E+gciD7ce+L0h
+	TkoWW3Dip/cczK5CkjW8iz6xmF4CzeJjgPC3vLX35DX+ws1IYyN9nb44OV4CCYPXdFcI
+	qzvA==
+X-Gm-Message-State: AOUpUlEc9BQx2VAZwz6GNMV35hbJzeZC9JdC3AAKibqpnix2PrhfYnYP
+	OU0KzQcemIdGT8A3KPToA3w=
+X-Google-Smtp-Source: AAOMgpd2DspD1G/wXDl/1PRynhII2aE+HpXOmn15xQpoPhDO2vMr7omt6oEcrLOk/wunaYDHJjTiRA==
+X-Received: by 2002:a17:902:bd44:: with SMTP id
+	b4-v6mr2392676plx.144.1532617847125; 
+	Thu, 26 Jul 2018 08:10:47 -0700 (PDT)
+Received: from pahoa2.kama-aina.net (c-67-181-203-136.hsd1.ca.comcast.net.
+	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
+	l84-v6sm3882855pfg.3.2018.07.26.08.10.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 26 Jul 2018 08:10:46 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Jul 2018 08:10:45 -0700
+Message-Id: <20180726151045.19586-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH] wireshark: update to 2.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,140 +56,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 14:24:06 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 26 Jul 2018 15:10:46 -0000
 
-I'm testing the change which just disables them, I'll send it after few
-more builds with it. I'll leave enabling them to someone actually using
-openocd.
+includes security fixes:
 
-On Thu, Jul 26, 2018 at 4:21 PM Khem Raj <raj.khem@gmail.com> wrote:
+wnpa-sec-2018-34 BGP dissector large loop. Bug 13741. CVE-2018-14342.
+wnpa-sec-2018-35 ISMP dissector crash. Bug 14672. CVE-2018-14344.
+wnpa-sec-2018-36 Multiple dissectors could crash. Bug 14675. CVE-2018-14340.
+wnpa-sec-2018-37 ASN.1 BER dissector crash. Bug 14682. CVE-2018-14343.
+wnpa-sec-2018-38 MMSE dissector infinite loop. Bug 14738. CVE-2018-14339.
+wnpa-sec-2018-39 DICOM dissector crash. Bug 14742. CVE-2018-14341.
+wnpa-sec-2018-40 Bazaar dissector infinite loop. Bug 14841. CVE-2018-14368.
+wnpa-sec-2018-41 HTTP2 dissector crash. Bug 14869. CVE-2018-14369.
+wnpa-sec-2018-42 CoAP dissector crash. Bug 14966. CVE-2018-14367.
 
-> On Thu, Jul 26, 2018 at 4:21 AM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> >
-> > It probably isn't caused by this upgrade, but openocd is using git
-> submodules which are checked out during do_configure:
-> >
-> > http://repo.or.cz/openocd.git/blob/refs/heads/master:/bootstrap#l37
-> >
-> > Would it make sense to call bootstrap with nosubmodule?
->
-> I think so, we can explicily fetch the submodiule and place it where its
-> needed.
->
-> >
-> > It seems to be used by internal_jimtcl
-> > http://repo.or.cz/openocd.git/blob/refs/heads/master:/configure.ac#l574
-> > and internal_libjaylink
-> > http://repo.or.cz/openocd.git/blob/refs/heads/master:/configure.ac#l679
-> >
-> > I don't use openocd, I've just noticed random build failure:
-> >
-> > Makefile.am:23: installing './texinfo.tex'
-> > Setting up submodules
-> > Submodule 'jimtcl' (http://repo.or.cz/r/jimtcl.git) registered for path
-> 'jimtcl'
-> > Submodule 'src/jtag/drivers/libjaylink' (
-> http://repo.or.cz/r/libjaylink.git) registered for path
-> 'src/jtag/drivers/libjaylink'
-> > Submodule 'tools/git2cl' (http://repo.or.cz/r/git2cl.git) registered
-> for path 'tools/git2cl'
-> > Cloning into 'jimtcl'...
-> > fatal: unable to access 'http://repo.or.cz/r/jimtcl.git/': Could not
-> resolve host: repo.or.cz
-> > Clone of 'http://repo.or.cz/r/jimtcl.git' into submodule path 'jimtcl'
-> failed
-> > WARNING: exit code 1 from a shell command.
-> >
-> > On Fri, Jun 1, 2018 at 6:58 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >>
-> >> Fix build with new libusb and gcc8
-> >>
-> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >> ---
-> >>  ...2-deprecated-libusb_set_debug-with-l.patch | 39 +++++++++++++++++++
-> >>  .../recipes-devtools/openocd/openocd_git.bb   |  5 ++-
-> >>  2 files changed, 42 insertions(+), 2 deletions(-)
-> >>  create mode 100644
-> meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
-> >>
-> >> diff --git
-> a/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
-> b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
-> >> new file mode 100644
-> >> index 0000000000..c5b9083dca
-> >> --- /dev/null
-> >> +++
-> b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
-> >> @@ -0,0 +1,39 @@
-> >> +From b95a996bfb281104b68ec66f32ebb79db519a4a8 Mon Sep 17 00:00:00 2001
-> >> +From: Khem Raj <raj.khem@gmail.com>
-> >> +Date: Thu, 31 May 2018 21:06:46 -0700
-> >> +Subject: [PATCH] Fix libusb-1.0.22 deprecated libusb_set_debug with
-> >> + libusb_set_option
-> >> +
-> >> +libusb_set_debug is deprecated in libusb >= 1.0.22 therefore replace
-> >> +with equivalent libusb_set_option()  API
-> >> +
-> >> +see libusb commit for more details
-> >> +
-> >> +
-> https://github.com/libusb/libusb/commit/539f22e2fd916558d11ab9a66f10f461c5593168
-> >> +
-> >> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >> +---
-> >> +Upstream-Status: Submitted [http://openocd.zylin.com/#/c/4540/]
-> >> + src/jtag/drivers/xds110.c | 5 ++++-
-> >> + 1 file changed, 4 insertions(+), 1 deletion(-)
-> >> +
-> >> +diff --git a/src/jtag/drivers/xds110.c b/src/jtag/drivers/xds110.c
-> >> +index 90b699027..9bfe02ea8 100644
-> >> +--- a/src/jtag/drivers/xds110.c
-> >> ++++ b/src/jtag/drivers/xds110.c
-> >> +@@ -367,8 +367,11 @@ static bool usb_connect(void)
-> >> +
-> >> +               /* Set libusb to auto detach kernel and disable debug
-> messages */
-> >> +               (void)libusb_set_auto_detach_kernel_driver(dev, 1);
-> >> ++#if LIBUSB_API_VERSION >= 0x01000106
-> >> ++              libusb_set_option(ctx, LIBUSB_OPTION_LOG_LEVEL,
-> LIBUSB_LOG_LEVEL_NONE);
-> >> ++#else
-> >> +               libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_NONE);
-> >> +-
-> >> ++#endif
-> >> +               /* Claim the debug interface on the XDS110 */
-> >> +               result = libusb_claim_interface(dev, INTERFACE_DEBUG);
-> >> +       } else {
-> >> +--
-> >> +2.17.1
-> >> +
-> >> diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> >> index 67abeede93..84727bf970 100644
-> >> --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> >> +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
-> >> @@ -5,8 +5,9 @@ DEPENDS = "libusb-compat libftdi"
-> >>  RDEPENDS_${PN} = "libusb1"
-> >>
-> >>  SRC_URI = "git://repo.or.cz/openocd.git \
-> >> -"
-> >> -SRCREV = "3737dd69e73816d186ba418d7b833462a8041079"
-> >> +
->  file://0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch \
-> >> +          "
-> >> +SRCREV = "cdf1e826eb23c29de1019ce64125f644f01b0afe"
-> >>
-> >>  PV = "0.10+gitr${SRCPV}"
-> >>  S = "${WORKDIR}/git"
-> >> --
-> >> 2.17.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../wireshark/{wireshark_2.6.1.bb => wireshark_2.6.2.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.6.1.bb => wireshark_2.6.2.bb} (95%)
+
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+similarity index 95%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+index 91c5e96bb0..4da0cecee4 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+@@ -14,8 +14,8 @@ SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "b0e9e5fe22e96d9fdfad18f750fa8f55"
+-SRC_URI[sha256sum] = "ab6e5bbc3464c956347b8671ce8397950ad5daff3bf9964c967d495f4ddbcd88"
++SRC_URI[md5sum] = "086d235509717190d06554b2ab870209"
++SRC_URI[sha256sum] = "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
+ 
+ PE = "1"
+ 
+-- 
+2.17.1
+
 
