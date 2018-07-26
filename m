@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A291078C49
+Received: from mail-qk0-f171.google.com (mail-qk0-f171.google.com
+	[209.85.220.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 676B078C2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 17:28:52 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id b15-v6so2349020qtp.11
+	Thu, 26 Jul 2018 17:36:53 +0000 (UTC)
+Received: by mail-qk0-f171.google.com with SMTP id b5-v6so1536003qkg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 10:28:54 -0700 (PDT)
+	Thu, 26 Jul 2018 10:36:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Zwc4gBNV9PNq9/zDkivc51VnaB0iNXeKM0T+er9Vp4U=;
-	b=CQsCY171BIem47BGv9iIKz/2fGE8TBkFzhC91E0/Z+ZuRSTWQ2/tCkOd5Ff+AnoNPf
-	r7LwHEIKWR2maaYb4ZGkhJQTcmh2+QGP4rPs3+laBZD7S3gqtMUs6euCkZc5Qr6vM9G1
-	/S5V4WpDN+FNcC0gHyEntLXgebOIsLJnu00c9QjUD6GcpESIowjpNhlR9mmmwzays4m6
-	2jJ1nDa/BNP/P8I5KEGPhbtzCWGYxt2Ht8O2DO82jcOtEZS8462BgjnLfn7XeoJAdR5Y
-	0QJmyKbj4uVIJokUaVLMpTWnXYx4u4N7932Zgj0idqGhr+NJcE4hpLkeWqiCbdm/7jWO
-	HTSQ==
+	:cc:content-transfer-encoding;
+	bh=qyj839iwgG6g0t933M4vggpZ/HZ6X2wXlCwM584vS38=;
+	b=vGG7PIIgZTzbPzP09kOgjRf4FH/3WJcQOD8UcXJKJXMJqDwxYdqdVljkYHG8cwGLLd
+	6awFKykR/UP6viXMOSb2FJldnhGZSfIEfl7BCxghFhvQEK3z3XLio8wKuL8o+zBKK9KI
+	/sMoWatz6dgxJOJu94pH3oP4I3yF4z048yDDJobeths2KhPZx3WXJfMSLXd3crWuz0zT
+	feEFfJ8sLelXx5uYu9KfyK4E0qKbv9pc5xZYrh3hNXom8NS22d/YTwz+ugefR/e9UkmR
+	v5xG1E4pQUj3PossCJ0XUx/YlTVT2UpESYo6Qrtkja/T10dWXlN0UXPDPKG02TWQ9iAJ
+	nhKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Zwc4gBNV9PNq9/zDkivc51VnaB0iNXeKM0T+er9Vp4U=;
-	b=tRNOyBAFJNxZm97t1KnGpRBg0aZYPJm4I2x+HMzfxNnP+L/kwxlrAa/uj19gys7XIB
-	UvbvrnjCrtgZcuG9nXGn0jaNjHLXjGzEPU1Z+p95ZjlvET60Y9vgIi9ibTnZn4gv4DVW
-	2twqBi9dFAo0iqUtz1Zp29g+xxQV0qlQC11T4YBgxvmAjItfHGabiI0DP+8GNVZYfJnI
-	m2MIT6063So21XIOt4yt3dPRd3Njcl10wsoxTwk+MQwIjpb6J3L1uaJcXVGw82sfPPJX
-	NerJVVz++rlBLO1xIHhPq+impi4VjjBU96Qd56Trcfv278ITc04gwYEsmoU+SIK3iWUS
-	/FYw==
-X-Gm-Message-State: AOUpUlGYAx2i2gdpj9O6+HdLrfPF97QGHv+DatDscKHZ0Ymfz60QEi23
-	7rzxhZzrxrM77j+I6NMiYGJoY5LOMhoHzXJ3dYc=
-X-Google-Smtp-Source: AAOMgpcOo84hQRBLzF27ucpaSnGz/EL6T+w/fU3/6E8d47yQok3dyrO1ZWMBD9fcjm/lpDyageamDXAj3PTc85aLvNk=
-X-Received: by 2002:ac8:25f1:: with SMTP id
-	f46-v6mr2893981qtf.20.1532626133346; 
-	Thu, 26 Jul 2018 10:28:53 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=qyj839iwgG6g0t933M4vggpZ/HZ6X2wXlCwM584vS38=;
+	b=e+7DBcm7S172cpqaXlUJebvsy84odZr0dswirs8Y20xalRM5/cwqaJ8k2nVslqx/65
+	YM4y3Uz+P3ZCrfhh2UTiynT0GLy3IQcPCQwPsSdrcCHkKhqxJkSql+RTCYYwm4jpdem4
+	Xoq6C5qlVyt3AVpcScjjZ/fqcOa19g+CdOFnJ+wPNcMFq38YmoQG1bKtFTm80YxXtRSB
+	rn+S8Cn/Z0M/rkgxLjWWM0MJcCnRy5auwerGpD/38Q+2167W+Q/yHOGXPZSYRXgJUOwN
+	IaQMoiJnew84irl0spzwu9ZKV8jvVcC4D8UAaqwDdoEaGzJ8BM74sY9oTqmawladMtHV
+	YaoQ==
+X-Gm-Message-State: AOUpUlFPgrJLkNH9JmmXuIHb4yRTXS0Zkl0cXh9ux/iavpDzKCgrr/cK
+	QvW7m7pgt8PgpTqBagTJgzicor+tArEGzH+6sQs=
+X-Google-Smtp-Source: AAOMgpcTwMRTP2EdV7/eInS4RaQTC1jgMR0m7FgY5uP1rc3VE8OiWAzVZ2S6puEnqNFsM8rCxaK+FC1ydAZp9DxDJMU=
+X-Received: by 2002:a37:417:: with SMTP id 23-v6mr2577543qke.12.1532626614072; 
+	Thu, 26 Jul 2018 10:36:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180723093326.12122-1-hongl.fnst@cn.fujitsu.com>
-	<20180723093326.12122-4-hongl.fnst@cn.fujitsu.com>
-In-Reply-To: <20180723093326.12122-4-hongl.fnst@cn.fujitsu.com>
+References: <1532584693-20420-1-git-send-email-lukaszgardon555@gmail.com>
+In-Reply-To: <1532584693-20420-1-git-send-email-lukaszgardon555@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 26 Jul 2018 10:28:27 -0700
-Message-ID: <CAMKF1sp_GxwJq=kfqihhkMMaioov6mtuL_of+drCPvahiVjuuQ@mail.gmail.com>
-To: hongl.fnst@cn.fujitsu.com
+Date: Thu, 26 Jul 2018 10:36:28 -0700
+Message-ID: <CAMKF1sq=6bQ65uF75ESDUmf59UELnxbmqPrphzuq7M2=URYDuA@mail.gmail.com>
+To: =?UTF-8?B?xYF1a2FzeiBHYXJkb8WE?= <lukaszgardon555@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] [meta-python][PATCH] python-pbr:3.1.1 -> 4.1.0
+Subject: Re: [meta-python][PATCHv3] python-tornado: upgrade to version 5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,70 +54,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 17:28:52 -0000
+X-List-Received-Date: Thu, 26 Jul 2018 17:36:53 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-WARNING: python3-pbr-3.1.1-r0 do_fetch: Checksum mismatch for local
-file /mnt/a/oe/downloads/pbr-3.1.1.tar.gz
-Cleaning and trying again.
-WARNING: python3-pbr-3.1.1-r0 do_fetch: Renaming
-/mnt/a/oe/downloads/pbr-3.1.1.tar.gz to
-/mnt/a/oe/downloads/pbr-3.1.1.tar.gz_bad-checksum_4e82c2e07af544c56a5b71c801525b00
-ERROR: python3-pbr-3.1.1-r0 do_fetch: Checksum failure fetching
-https://files.pythonhosted.org/packages/source/p/pbr/pbr-3.1.1.tar.gz
-ERROR: python3-pbr-3.1.1-r0 do_fetch: Fetcher failure for URL:
-'https://files.pythonhosted.org/packages/source/p/pbr/pbr-3.1.1.tar.gz'.
-Checksum mismatch!
-File: '/mnt/a/oe/downloads/pbr-3.1.1.tar.gz' has md5 checksum
-4e82c2e07af544c56a5b71c801525b00 when b8d6e1b6064f9621fa6f87264aa99db9
-was expected
-File: '/mnt/a/oe/downloads/pbr-3.1.1.tar.gz' has sha256 checksum
-05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1 when
-e0f23b61ec42473723b2fec2f33fb12558ff221ee551962f01dd4de9053c2055 was
-expected
-If this change is expected (e.g. you have upgraded to a new version
-without updating the checksums) then you can use these lines within
-the recipe:
-SRC_URI[md5sum] = "4e82c2e07af544c56a5b71c801525b00"
-SRC_URI[sha256sum] =
-"05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1"
-Otherwise you should retry the download and/or check with upstream to
-determine if the file has become corrupted or otherwise unexpectedly
-modified.
-
-ERROR: python3-pbr-3.1.1-r0 do_fetch: Function failed: base_do_fetch
-On Mon, Jul 23, 2018 at 2:34 AM Hong Liu <hongl.fnst@cn.fujitsu.com> wrote:
+Please address Tim's review as well. See
+https://github.com/tornadoweb/tornado/blob/master/LICENSE
+and change recipe to <name>_5.1.0.bb
+On Wed, Jul 25, 2018 at 10:58 PM =C5=81ukasz Gardo=C5=84
+<lukaszgardon555@gmail.com> wrote:
 >
-> Upgrade python-pbr from 3.1.1 to 4.1.0.
+> License-Update: Changed begin and end line range, due to
+> removed shebang line from licence file (setup.py) - no
+> changes in the license terms.
 >
-> Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+> Signed-off-by: =C5=81ukasz Gardo=C5=84 <lukaszgardon555@gmail.com>
 > ---
->  .../python/{python-pbr_3.1.1.bb => python-pbr_4.1.0.bb}               | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-pbr_3.1.1.bb => python-pbr_4.1.0.bb} (75%)
+>  meta-python/recipes-devtools/python/python-tornado.inc              | 6 =
++++---
+>  .../python/{python-tornado_4.5.3.bb =3D> python-tornado_5.1.bb}       | =
+0
+>  .../python/{python3-tornado_4.5.3.bb =3D> python3-tornado_5.1.bb}     | =
+0
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb =3D>=
+ python-tornado_5.1.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.bb =3D=
+> python3-tornado_5.1.bb} (100%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb b/meta-python/recipes-devtools/python/python-pbr_4.1.0.bb
-> similarity index 75%
-> rename from meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
-> rename to meta-python/recipes-devtools/python/python-pbr_4.1.0.bb
-> index bdff867..32d0d2c 100644
-> --- a/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
-> +++ b/meta-python/recipes-devtools/python/python-pbr_4.1.0.bb
-> @@ -4,8 +4,8 @@ SECTION = "devel/python"
->  LICENSE = "Apache-2.0"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
+> diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/met=
+a-python/recipes-devtools/python/python-tornado.inc
+> index 29d10da..8acb432 100644
+> --- a/meta-python/recipes-devtools/python/python-tornado.inc
+> +++ b/meta-python/recipes-devtools/python/python-tornado.inc
+> @@ -4,10 +4,10 @@ By using non-blocking network I/O, Tornado can scale to=
+ tens of thousands of ope
+>  polling, WebSockets, and other applications that require a long-lived co=
+nnection to each user."
+>  HOMEPAGE =3D "http://www.tornadoweb.org/en/stable/"
+>  LICENSE =3D "Apache-2.0"
+> -LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D3;endline=3D15;md5=3D8=
+d463fc66ff8f275354ffe88d1896e12"
+> +LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D2;endline=3D14;md5=3D8=
+d463fc66ff8f275354ffe88d1896e12"
 >
-> -SRC_URI[md5sum] = "4e82c2e07af544c56a5b71c801525b00"
-> -SRC_URI[sha256sum] = "05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1"
-> +SRC_URI[md5sum] = "b8d6e1b6064f9621fa6f87264aa99db9"
-> +SRC_URI[sha256sum] = "e0f23b61ec42473723b2fec2f33fb12558ff221ee551962f01dd4de9053c2055"
+> -SRC_URI[md5sum] =3D "a5fc7fd4aea94867609a491ce65786f1"
+> -SRC_URI[sha256sum] =3D "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2b=
+d7ce644287685f0a"
+> +SRC_URI[md5sum] =3D "bd264851c409f926d1dae1ad5055d28d"
+> +SRC_URI[sha256sum] =3D "4f66a2172cb947387193ca4c2c3e19131f1c70fa8be470dd=
+bbd9317fd0801582"
 >
->  inherit pypi setuptools
->
+>  RDEPENDS_${PN} +=3D "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYT=
+HON_PN}-email \
+>                     ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-j=
+son ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
+> diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb =
+b/meta-python/recipes-devtools/python/python-tornado_5.1.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
+> rename to meta-python/recipes-devtools/python/python-tornado_5.1.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb=
+ b/meta-python/recipes-devtools/python/python3-tornado_5.1.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
+> rename to meta-python/recipes-devtools/python/python3-tornado_5.1.bb
 > --
-> 2.7.4
->
->
+> 1.8.3.1
 >
 > --
 > _______________________________________________
