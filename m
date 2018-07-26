@@ -1,26 +1,45 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 820E278B52
+Return-Path: <prvs=6745f49190=alexandru.vasiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 557C678ABE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 06:19:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6Q6JGkw026817
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 25 Jul 2018 23:19:16 -0700 (PDT)
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Wed, 25 Jul 2018 23:19:15 -0700
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-References: <20180726060037.33196-1-hongzhi.song@windriver.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <4d522d08-ed12-ff7e-107d-48e6e2b945ab@windriver.com>
-Date: Thu, 26 Jul 2018 14:21:11 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Thu, 26 Jul 2018 10:34:24 +0000 (UTC)
+Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w6QAVDVJ025172 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jul 2018 05:34:25 -0500
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2kewd3jhc6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jul 2018 05:34:25 -0500
+Received: from us-aus-exch2.ni.corp.natinst.com
+	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w6QAYOcK032600
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jul 2018 05:34:24 -0500
+Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
+	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Thu, 26 Jul 2018 05:34:24 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Thu, 26 Jul 2018 05:34:23 -0500
+Received: from avasiuPC.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Thu, 26 Jul 2018 05:34:20 -0500
+From: Alexandru Vasiu <alexandru.vasiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 26 Jul 2018 13:33:57 +0300
+Message-ID: <20180726103357.28977-1-alexandru.vasiu@ni.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-In-Reply-To: <20180726060037.33196-1-hongzhi.song@windriver.com>
-X-Originating-IP: [128.224.162.198]
-Subject: Re: [meta-oe][PATCH v4] snappy: add a new recipe
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-07-26_03:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to version 0.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,78 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 06:19:16 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 26 Jul 2018 10:34:24 -0000
+Content-Type: text/plain
 
-Please ignore this.
+Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
+---
+ meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
+ .../{python-pyiface_0.0.9.bb => python-pyiface_0.0.10.bb}     | 0
+ .../{python3-pyiface_0.0.9.bb => python3-pyiface_0.0.10.bb}   | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyiface_0.0.9.bb => python-pyiface_0.0.10.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.9.bb => python3-pyiface_0.0.10.bb} (100%)
 
---Hongzhi
-
-
-On 2018年07月26日 14:00, Hongzhi.Song wrote:
-> Snappy is a compression/decompression library. It does not aim for
-> maximum compression, or compatibility with any other compression
-> library; instead, it aims for very high speeds and reasonable compression.
->
-> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> ---
->   meta-oe/recipes-extended/snappy/snappy_1.1.7.bb | 46 +++++++++++++++++++++++++
->   1 file changed, 46 insertions(+)
->   create mode 100644 meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
->
-> diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-> new file mode 100644
-> index 000000000..8b27d9f27
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-> @@ -0,0 +1,46 @@
-> +#
-> +# Copyright (C) 2014 Wind River Systems, Inc.
-> +#
-> +# Redistribution and use in source and binary forms, with or without
-> +# modification, are permitted provided that the following conditions are met:
-> +#
-> +# 1. Redistributions of source code must retain the above copyright notice,
-> +# this list of conditions and the following disclaimer.
-> +#
-> +# 2. Redistributions in binary form must reproduce the above copyright notice,
-> +# this list of conditions and the following disclaimer in the documentation
-> +# and/or other materials provided with the distribution.
-> +
-> +# 3. Neither the name of the copyright holder nor the names of its contributors
-> +# may be used to endorse or promote products derived from this software without
-> +# specific prior written permission.
-> +#
-> +# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-> +# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-> +# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-> +# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-> +# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-> +# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-> +# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
-> +# OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
-> +# AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-> +# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-> +# THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> +
-> +SUMMARY = "A compression/decompression library"
-> +DESCRIPTION = "Snappy is a fast data compression and decompression library \
-> +It was designed to be very fast and stable, but not to achieve a high \
-> +compression ratio."
-> +
-> +LICENSE = "NewBSD"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
-> +
-> +SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.7.tar.gz/sha512/32046f532606ba545a4e4825c0c66a19be449f2ca2ff760a6fa170a3603731479a7deadb683546e5f8b5033414c50f4a9a29f6d23b7a41f047e566e69eca7caf/snappy-1.1.7.tar.gz"
-> +
-> +SRC_URI[md5sum] = "ee9086291c9ae8deb4dac5e0b85bf54a"
-> +SRC_URI[sha256sum] = "3dfa02e873ff51a11ee02b9ca391807f0c8ea0529a4924afa645fbf97163f9d4"
-> +
-> +inherit cmake pkgconfig
-> +
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
+diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
+index a1156f428..087f30c22 100644
+--- a/meta-python/recipes-devtools/python/python-pyiface.inc
++++ b/meta-python/recipes-devtools/python/python-pyiface.inc
+@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+ 
+-SRC_URI[md5sum] = "bc94e3d0c1cf8f49ac86514a8e90ed5c"
+-SRC_URI[sha256sum] = "a58367d456ac0b4b9d1d5c31d5dd24363ad6c5bcc73edf027ded63732f784cf4"
++SRC_URI[md5sum] = "c0bf0c7eeaedb785e9fa3018158f018f"
++SRC_URI[sha256sum] = "2b22e4ad0eb541de808d59c9d804dad0f7d07e0719ff6d701f02ea296aa0b7cc"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
+rename to meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
+rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb
+-- 
+2.18.0
 
 
