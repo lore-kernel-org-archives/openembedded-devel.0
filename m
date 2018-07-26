@@ -1,47 +1,50 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 9919678C00
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 92B9178BE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 20:43:09 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1532637790; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=FK4m8q6y04oXLWflOmRGbwtXqrd2ufd5A3fDH0vtLE0=;
-	b=BIJyFeugbn3GWhNlF7At/lH4VnrVd6cwEBn3AqJGkEmWr8w138DnE8d4UyONJ5yE7ZX0KSWd
-	DhpTgTBPm6l3PGiyO5/puhHqmYPw8YAEUcDLwrN4emyM5p+ClIXmHGID/DMpRke7daknldVW
-	H9SXnuOOsQK/falk9M05gIIFVYU=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-it0-f48.google.com (mail-it0-f48.google.com
-	[209.85.214.48])
-	by mxa.mailgun.org with ESMTP id 5b5a325d.7fcaef5e9bf0-smtp-out-n03;
-	Thu, 26 Jul 2018 20:43:09 -0000 (UTC)
-Received: by mail-it0-f48.google.com with SMTP id 72-v6so4663801itw.3
+	Thu, 26 Jul 2018 22:50:13 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id h14-v6so3213843wrw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 13:43:09 -0700 (PDT)
-X-Gm-Message-State: AOUpUlHfEWKeFwBOL7dEh31lzPlh8C3jEZ3wjwy7wE5RbgmZioXMjQ0j
-	udjoYVoexKK9HoYvBC3j8R77mdd5TEpGnGmSnPo=
-X-Google-Smtp-Source: AAOMgpfUrbk4l45W+blgobASAHx+6sD4HrMwEvUtF+DYZeJsELIWHBHPzNi6GVauRzq0zTd7T8nJQ9rNhuV+lCv+CmE=
-X-Received: by 2002:a02:b804:: with SMTP id o4-v6mr3196790jam.12.1532637788494;
-	Thu, 26 Jul 2018 13:43:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a6b:8c4e:0:0:0:0:0 with HTTP; Thu, 26 Jul 2018 13:43:07
-	-0700 (PDT)
-In-Reply-To: <CAMKF1so3wtYgy_i6-SXVRwz18kD+s_MYyc=QW5ev9yaxCnsZAw@mail.gmail.com>
-References: <20180726183413.17793-1-lukaszgardon555@gmail.com>
-	<CAMKF1sowd+zMuuEZuH1hzmpQTjQ5u4Ta=+MnUFbWoY-dAv=KbA@mail.gmail.com>
-	<CADNbA1qQnzQ_Mgm-rOJLu4qJk3ybEj9mPn_CHXDTy6_s8j03YQ@mail.gmail.com>
-	<CAMKF1so3wtYgy_i6-SXVRwz18kD+s_MYyc=QW5ev9yaxCnsZAw@mail.gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Thu, 26 Jul 2018 16:43:07 -0400
-X-Gmail-Original-Message-ID: <CADNbA1oHmSz_wunvUSmh87v5fYazne_Cx3Jt-FKYRWz5Z3dVcQ@mail.gmail.com>
-Message-ID: <CADNbA1oHmSz_wunvUSmh87v5fYazne_Cx3Jt-FKYRWz5Z3dVcQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCHv4] python-tornado: upgrade to version 5.1.0, added setting PV in recipe to support fetching from pypi.
+	Thu, 26 Jul 2018 15:50:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=TnGBQKBQSzh0GG2L6DaqTjLIeEHGnIwgCNITQhKPSKE=;
+	b=SZdBl5lRTfrdRpwb4QbkGW4c4bx+XiEms6UXktokWfS01UZJU7YiHdc5+jrEczV8Hf
+	S31AGWrIC7MK/QHzBkgL44qsUvOlTdexA1Z2q8Z11yI1dMs0Qh9O1Bbfsei8EqoK1pcw
+	QeS5qo/iViZ72qWQzYTMjudZoaq5MC1ZKv4qoGG7v+f+NIXAxawBKsmn3ybMvdRPxCPJ
+	NuGp0RY5TL28HKkYtZcM7XlrvxWp71p3nvQTZXh9m7qMquC4qH00SF5CFYsyq8qo7idH
+	UM0R7SD+4d8ax2LMy60hXTg/yGx0MoMynXhAkPW/oqN1LbmLbAOLyfrUdRmnCtNY7kbI
+	YhRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=TnGBQKBQSzh0GG2L6DaqTjLIeEHGnIwgCNITQhKPSKE=;
+	b=Kgi4xXvaPYCkIpaBdDbVcw4cA360wNbZYuf7A9fdl47jI3mJC82NkwZ2QczCPKHlWF
+	DKQLtUvXzhZZP1uWvSWvLmogoeoRd+4FwZ0ZuJ8IifYtf5KzVmwXccUXAVRLyrAb48j4
+	QDTu/AeMpCmEteGVz4GtMS4k1GWKpxDnVTRQLHJSuhyW5855ecaApBS3ZLQ6pBJ+RFm/
+	4JVzyQybxMXJZgvmPSlWfUVhgxEQnombJsIBw7MKerQobOoBxxJ1kgXE6UWSG02P86ZB
+	LD6q4e+9nKrC1XjBBNiYZjCwXrtnZzpD8jBjQgyKyy4ZuXHsQvyKCpre2Ec0AkJnAW3w
+	asHg==
+X-Gm-Message-State: AOUpUlFt4Q+ADqp3iqgEjd0NvoDM2/D8XnnbXuNjO1R565C5AxvE24Yx
+	8nnxpMHyZsknF4VMzso5bfK0ItfGswA=
+X-Google-Smtp-Source: AAOMgpc5Pe+CanIBS/wSxxIHB3KwEWsQvSf0CPga+3fcmMgr/QJPJ4ZPj9nwNQnBwyir8hp8ZCYunA==
+X-Received: by 2002:adf:92c3:: with SMTP id
+	61-v6mr3090958wrn.231.1532645414168; 
+	Thu, 26 Jul 2018 15:50:14 -0700 (PDT)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	l10-v6sm3451742wrv.23.2018.07.26.15.50.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 26 Jul 2018 15:50:13 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Jul 2018 23:50:11 +0100
+Message-Id: <20180726225011.2503-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] rygel: remove obsolete ossp-uuid dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,110 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 20:43:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Jul 2018 22:50:15 -0000
 
-I don't think so, but it isn't a strong preference.
+Not only was uuid removed as a build dependency of Rygel in 0.27.1, but
+oe-core's ossp-uuid has always renamed the library to libossp-uuid so it was
+never used (as util-linux provides libuuid.so).
 
-On Thu, Jul 26, 2018 at 4:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Thu, Jul 26, 2018 at 1:00 PM Derek Straka <derek@asterius.io> wrote:
-> >
-> > Pypi has the version as 5.1 (https://pypi.org/project/tornado/#history)=
-.
-> Upstream is inconsistent in 5.1 vs 5.1.0
-> >
->
-> then does it make sense to call the recipe 5.1.0 ?
->
-> > On Thu, Jul 26, 2018 at 3:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >>
-> >> On Thu, Jul 26, 2018 at 11:34 AM lukaszgard <lukaszgardon555@gmail.com=
->
-> wrote:
-> >> >
-> >> > From: =C5=81ukasz Gardo=C5=84 <lukaszgardon555@gmail.com>
-> >> >
-> >> > License-Update: Change license file from setup.py to
-> >> > LICENSE, based on the same the same license policy Apache 2.0.
-> >> >
-> >> > Signed-off-by: =C5=81ukasz Gardo=C5=84 <lukaszgardon555@gmail.com>
-> >> > ---
-> >> >  meta-python/recipes-devtools/python/python-tornado.inc    | 8
-> +++++---
-> >> >  .../{python-tornado_4.5.3.bb =3D> python-tornado_5.1.0.bb}  | 0
-> >> >  ...{python3-tornado_4.5.3.bb =3D> python3-tornado_5.1.0.bb} | 0
-> >> >  3 files changed, 5 insertions(+), 3 deletions(-)
-> >> >  rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb
-> =3D> python-tornado_5.1.0.bb} (100%)
-> >> >  rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.b=
-b
-> =3D> python3-tornado_5.1.0.bb} (100%)
-> >> >
-> >> > diff --git a/meta-python/recipes-devtools/python/python-tornado.inc
-> b/meta-python/recipes-devtools/python/python-tornado.inc
-> >> > index 29d10da6b..a6a082dec 100644
-> >> > --- a/meta-python/recipes-devtools/python/python-tornado.inc
-> >> > +++ b/meta-python/recipes-devtools/python/python-tornado.inc
-> >> > @@ -4,10 +4,12 @@ By using non-blocking network I/O, Tornado can
-> scale to tens of thousands of ope
-> >> >  polling, WebSockets, and other applications that require a
-> long-lived connection to each user."
-> >> >  HOMEPAGE =3D "http://www.tornadoweb.org/en/stable/"
-> >> >  LICENSE =3D "Apache-2.0"
-> >> > -LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D3;endline=3D15;md=
-5=3D
-> 8d463fc66ff8f275354ffe88d1896e12"
-> >> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D
-> 3b83ef96387f14655fc854ddc3c6bd57"
-> >> >
-> >> > -SRC_URI[md5sum] =3D "a5fc7fd4aea94867609a491ce65786f1"
-> >> > -SRC_URI[sha256sum] =3D "6d14e47eab0e15799cf3cdcc86b0b9
-> 8279da68522caace2bd7ce644287685f0a"
-> >> > +SRC_URI[md5sum] =3D "bd264851c409f926d1dae1ad5055d28d"
-> >> > +SRC_URI[sha256sum] =3D "4f66a2172cb947387193ca4c2c3e19
-> 131f1c70fa8be470ddbbd9317fd0801582"
-> >> > +
-> >> > +PV =3D "5.1"
-> >>
-> >> why should this be 5.1 ?
-> >>
-> >> >
-> >> >  RDEPENDS_${PN} +=3D "${PYTHON_PN}-compression ${PYTHON_PN}-numbers
-> ${PYTHON_PN}-email \
-> >> >                     ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html
-> ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
-> >> > diff --git a/meta-python/recipes-devtools/python/python-
-> tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python-
-> tornado_5.1.0.bb
-> >> > similarity index 100%
-> >> > rename from meta-python/recipes-devtools/python/
-> python-tornado_4.5.3.bb
-> >> > rename to meta-python/recipes-devtools/python/python-tornado_5.1.0.b=
-b
-> >> > diff --git a/meta-python/recipes-devtools/python/python3-
-> tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python3-
-> tornado_5.1.0.bb
-> >> > similarity index 100%
-> >> > rename from meta-python/recipes-devtools/python/
-> python3-tornado_4.5.3.bb
-> >> > rename to meta-python/recipes-devtools/python/python3-tornado_5.1.0.
-> bb
-> >> > --
-> >> > 2.17.1
-> >> >
-> >> > --
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
->
+diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
+index f13f5cec06..21331ffcb0 100644
+--- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
++++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
+@@ -8,7 +8,7 @@ HOMEPAGE = "http://live.gnome.org/Rygel"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+-DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
++DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
+ RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
+ RRECOMMENDS_${PN} = "rygel-plugin-media-export"
+ 
+-- 
+2.11.0
+
 
