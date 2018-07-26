@@ -1,52 +1,26 @@
-Return-Path: <lukaszgardon555@gmail.com>
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
-	[209.85.167.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EBD278B70
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id ED78A60616
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 05:58:28 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id v22-v6so351261lfe.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jul 2018 22:58:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=HNJYoWSB2SOQDTAieGljzVXZ5go0ayLAlfmW2Pr1ZGQ=;
-	b=RV5dwKdH8CMbJEDs57KS8Y91fEuBjm6Sh1XC176psyAq3bJ+dr6xeWa64vKL9GdsGR
-	CgPtGY2dlOCJSNyPXiHyQVkvyQQtNHjCizorHWTcY6Xbxq/+CVMt283XaQf8LDsLgFPx
-	hOGyv8nXJJEsXuTbTOJcqbYIiGalCakr4M1kaYNbgVbC5E8Aqe+yL3tJ5ckc4ujMEKG9
-	4TLEPxllnL5zI3SS66I20uJnL4nBEo/r0gDrztVjq2fypObdDM8A8v2m/OFMcTKoLCCB
-	qx3L04VCAcW0pcRKgITslpw3DnQgSMZX9NirW8MaJDO+Stz1JtXE2bN+iYaCNIdwli7k
-	3zqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=HNJYoWSB2SOQDTAieGljzVXZ5go0ayLAlfmW2Pr1ZGQ=;
-	b=s7gkuu7tF8LcKS0etatr0VnNUexTmYS8SR1emw5amY+tNVazjL74vAHp70psmayizd
-	t3kk00/HLr+MHkopVXW5JP2ey/1T7vWFvHEI3hjU0cpDNZgyGvUis2I3E+5T/2q2C0KF
-	MBO/LjKQw4R5SulUw2GlXYVC93r6oBiUQAdbrYx0tbvS0cdoxnuvFHd4f3BtyfPrfMLg
-	xa82ngFl6HuVvQVWY0BsQhGNa+8bZDj6wVGgHYo9S0uAmMnIAoGx5V8z++EzhS99Oa/m
-	JRcU1iMsjRCfhqwWSP9+zrSqoDbIhZjnJMHb+w7Ml98Zzx8l3I+nkPuicn13EThLyQj8
-	YNUw==
-X-Gm-Message-State: AOUpUlE2XYIcB6fWBuF1+rCNfpcPmOdEqUdcpSQhIldtxXciiKZTJOpF
-	pKlMW1SrfhlwKLsK1CwKDitoD4/e
-X-Google-Smtp-Source: AAOMgpe6bcXCIMglOC2AjEAtQFARGWgwYGyvDr8hQgLQURz1HpSVLySBkFQyfWpVrThyFUXYSOTQKQ==
-X-Received: by 2002:a19:238d:: with SMTP id
-	j135-v6mr350564lfj.58.1532584708664; 
-	Wed, 25 Jul 2018 22:58:28 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(apn-31-0-66-183.dynamic.gprs.plus.pl. [31.0.66.183])
-	by smtp.gmail.com with ESMTPSA id
-	j15-v6sm71656ljg.52.2018.07.25.22.58.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 25 Jul 2018 22:58:28 -0700 (PDT)
-From: =?UTF-8?q?=C5=81ukasz=20Gardo=C5=84?= <lukaszgardon555@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Jul 2018 07:58:13 +0200
-Message-Id: <1532584693-20420-1-git-send-email-lukaszgardon555@gmail.com>
-X-Mailer: git-send-email 1.8.3.1
+	Thu, 26 Jul 2018 06:00:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6Q60ARM026765
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 25 Jul 2018 23:00:10 -0700 (PDT)
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Wed, 25 Jul 2018 23:00:09 -0700
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+References: <20180726055756.32558-1-hongzhi.song@windriver.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <54b429d3-c0f8-2fe2-033b-53dabb985bf3@windriver.com>
+Date: Thu, 26 Jul 2018 14:02:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCHv3] python-tornado: upgrade to version 5.1
+In-Reply-To: <20180726055756.32558-1-hongzhi.song@windriver.com>
+X-Originating-IP: [128.224.162.198]
+Subject: Re: [meta-oe][PATCH] snappy: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,50 +33,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 05:58:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Jul 2018 06:00:10 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-License-Update: Changed begin and end line range, due to
-removed shebang line from licence file (setup.py) - no
-changes in the license terms.
+please ignore it.
 
-Signed-off-by: Łukasz Gardoń <lukaszgardon555@gmail.com>
----
- meta-python/recipes-devtools/python/python-tornado.inc              | 6 +++---
- .../python/{python-tornado_4.5.3.bb => python-tornado_5.1.bb}       | 0
- .../python/{python3-tornado_4.5.3.bb => python3-tornado_5.1.bb}     | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb => python-tornado_5.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.bb => python3-tornado_5.1.bb} (100%)
+--Hongzhi
 
-diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
-index 29d10da..8acb432 100644
---- a/meta-python/recipes-devtools/python/python-tornado.inc
-+++ b/meta-python/recipes-devtools/python/python-tornado.inc
-@@ -4,10 +4,10 @@ By using non-blocking network I/O, Tornado can scale to tens of thousands of ope
- polling, WebSockets, and other applications that require a long-lived connection to each user."
- HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=15;md5=8d463fc66ff8f275354ffe88d1896e12"
-+LIC_FILES_CHKSUM = "file://setup.py;beginline=2;endline=14;md5=8d463fc66ff8f275354ffe88d1896e12"
- 
--SRC_URI[md5sum] = "a5fc7fd4aea94867609a491ce65786f1"
--SRC_URI[sha256sum] = "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a"
-+SRC_URI[md5sum] = "bd264851c409f926d1dae1ad5055d28d"
-+SRC_URI[sha256sum] = "4f66a2172cb947387193ca4c2c3e19131f1c70fa8be470ddbbd9317fd0801582"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email \
-                    ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
-diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python-tornado_5.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
-rename to meta-python/recipes-devtools/python/python-tornado_5.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python3-tornado_5.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
-rename to meta-python/recipes-devtools/python/python3-tornado_5.1.bb
--- 
-1.8.3.1
+
+On 2018年07月26日 13:57, Hongzhi.Song wrote:
+> Snappy is a compression/decompression library. It does not aim for
+> maximum compression, or compatibility with any other compression
+> library; instead, it aims for very high speeds and reasonable compression.
+>
+> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+> ---
+>   meta-oe/recipes-extended/snappy/snappy_1.1.7.bb | 46 +++++++++++++++++++++++++
+>   1 file changed, 46 insertions(+)
+>   create mode 100644 meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+>
+> diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+> new file mode 100644
+> index 000000000..8b27d9f27
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+> @@ -0,0 +1,46 @@
+> +#
+> +# Copyright (C) 2014 Wind River Systems, Inc.
+> +#
+> +# Redistribution and use in source and binary forms, with or without
+> +# modification, are permitted provided that the following conditions are met:
+> +#
+> +# 1. Redistributions of source code must retain the above copyright notice,
+> +# this list of conditions and the following disclaimer.
+> +#
+> +# 2. Redistributions in binary form must reproduce the above copyright notice,
+> +# this list of conditions and the following disclaimer in the documentation
+> +# and/or other materials provided with the distribution.
+> +
+> +# 3. Neither the name of the copyright holder nor the names of its contributors
+> +# may be used to endorse or promote products derived from this software without
+> +# specific prior written permission.
+> +#
+> +# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+> +# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+> +# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+> +# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+> +# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+> +# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+> +# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+> +# OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+> +# AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+> +# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+> +# THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+> +
+> +SUMMARY = "A compression/decompression library"
+> +DESCRIPTION = "Snappy is a fast data compression and decompression library \
+> +It was designed to be very fast and stable, but not to achieve a high \
+> +compression ratio."
+> +
+> +LICENSE = "NewBSD"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
+> +
+> +SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.7.tar.gz/sha512/32046f532606ba545a4e4825c0c66a19be449f2ca2ff760a6fa170a3603731479a7deadb683546e5f8b5033414c50f4a9a29f6d23b7a41f047e566e69eca7caf/snappy-1.1.7.tar.gz"
+> +
+> +SRC_URI[md5sum] = "ee9086291c9ae8deb4dac5e0b85bf54a"
+> +SRC_URI[sha256sum] = "3dfa02e873ff51a11ee02b9ca391807f0c8ea0529a4924afa645fbf97163f9d4"
+> +
+> +inherit cmake pkgconfig
+> +
+> +PACKAGECONFIG ??= ""
+> +PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
 
 
