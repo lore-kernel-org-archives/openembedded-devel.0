@@ -1,45 +1,47 @@
-Return-Path: <prvs=6745f49190=alexandru.vasiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 557C678ABE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id DF4F77550F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 10:34:24 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w6QAVDVJ025172 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 05:34:25 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2kewd3jhc6-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 05:34:25 -0500
-Received: from us-aus-exch2.ni.corp.natinst.com
-	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w6QAYOcK032600
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Thu, 26 Jul 2018 11:21:18 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id o18-v6so1642786wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jul 2018 05:34:24 -0500
-Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
-	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Thu, 26 Jul 2018 05:34:24 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Thu, 26 Jul 2018 05:34:23 -0500
-Received: from avasiuPC.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Thu, 26 Jul 2018 05:34:20 -0500
-From: Alexandru Vasiu <alexandru.vasiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 26 Jul 2018 13:33:57 +0300
-Message-ID: <20180726103357.28977-1-alexandru.vasiu@ni.com>
-X-Mailer: git-send-email 2.18.0
+	Thu, 26 Jul 2018 04:21:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=2XEXF/oTfJpvB1boJhtTI/kl29F2Ue4P6e7ycdGJM9A=;
+	b=SQ4m8wCFU1IgjgyX4wf9ROfRWEF5JZ/F0VCjpvkUkYLHdeGhDF6KpO0FgFbBaVwHFE
+	f2V0KdzhMEeO2dTFk/FkeS0CTwbRkpJX2Qnaq/LsUJqUcE4+Nu3Gc/Hzk0hsbCH2f4+I
+	bp3ukPMPTamUfT0KLtUFPWJrnYMBuf/JV0tUvjNO1Zjqn9QyX7DX0A7xvf5Z6PkRbaB4
+	PaS1+9dcaaiOCSCg2RZbNUq5nzjdGUpZJ/YjaNEVhINGzSLoFkzMHKuGObkBPneauJ5f
+	alNEPVNQ+CDSvL4C+Tfh4QBsUoBhryOCp1MtAjjVdZET/qZ4UzH8u4T1VzUb0A5F07jr
+	8Tqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=2XEXF/oTfJpvB1boJhtTI/kl29F2Ue4P6e7ycdGJM9A=;
+	b=DYivsd0FuhIeLKRngFgrg64vjYX6GcTGjDDNxvdzoWY0yNbtBe1IPorMrr/w6UJqsO
+	yuq+LHnRoMODVxNEFrswAq0oSvBaI2uZqMz9De0CaNl31/wZtTQkVpeyvH31/2r5ng5x
+	wQBCtG9rg2RV625vLj/euK1mCXdsp7xTJF0SlCLXI63ngr3Gyf1thjhMHQcfKaj8tv/C
+	Krg3lycsiVnfhbIehncJFIF8HBDY3YGW+3daVQ8VMrIKobzHmpxp09o/7jOxdQy453nz
+	LbESwI2kdativw+pw3cN399VDsDNNg+0nzX/DKIfAxulZwvz4U0hqeSgtHCyMGGdhqNN
+	X7Kg==
+X-Gm-Message-State: AOUpUlHcuU/7hZUQskm2J66cUZWnOLkDgeKoAWYXusKlkhlq3VVVb5B1
+	pRi1oeO9Zr9UgOkbMJoNqAVuPyZIZUqWQDZaADE=
+X-Google-Smtp-Source: AAOMgpek9eoXJVu3NcHcOZJLHmLEzlBiur7Adlb8zf+v4d39kHYdshxhY5JwkySVxDIyJApCFRTOdb4nOa265aeWuZo=
+X-Received: by 2002:a1c:9807:: with SMTP id a7-v6mr1237407wme.32.1532604079562;
+	Thu, 26 Jul 2018 04:21:19 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-07-26_03:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][meta-python][PATCH] python-pyiface: Upgrade to version 0.0.10
+References: <20180601045815.15819-1-raj.khem@gmail.com>
+	<20180601045815.15819-3-raj.khem@gmail.com>
+In-Reply-To: <20180601045815.15819-3-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 26 Jul 2018 13:21:10 +0200
+Message-ID: <CA+chaQe10kmj=fpbQ58brd1G8UfOjPB9dW8XKs1e+gYqOWCM9A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 3/3] openocd: Upgrade to latest tip of master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,41 +54,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jul 2018 10:34:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 26 Jul 2018 11:21:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alexandru Vasiu <alexandru.vasiu@ni.com>
----
- meta-python/recipes-devtools/python/python-pyiface.inc        | 4 ++--
- .../{python-pyiface_0.0.9.bb => python-pyiface_0.0.10.bb}     | 0
- .../{python3-pyiface_0.0.9.bb => python3-pyiface_0.0.10.bb}   | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyiface_0.0.9.bb => python-pyiface_0.0.10.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyiface_0.0.9.bb => python3-pyiface_0.0.10.bb} (100%)
+It probably isn't caused by this upgrade, but openocd is using git
+submodules which are checked out during do_configure:
 
-diff --git a/meta-python/recipes-devtools/python/python-pyiface.inc b/meta-python/recipes-devtools/python/python-pyiface.inc
-index a1156f428..087f30c22 100644
---- a/meta-python/recipes-devtools/python/python-pyiface.inc
-+++ b/meta-python/recipes-devtools/python/python-pyiface.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv3+"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
- 
--SRC_URI[md5sum] = "bc94e3d0c1cf8f49ac86514a8e90ed5c"
--SRC_URI[sha256sum] = "a58367d456ac0b4b9d1d5c31d5dd24363ad6c5bcc73edf027ded63732f784cf4"
-+SRC_URI[md5sum] = "c0bf0c7eeaedb785e9fa3018158f018f"
-+SRC_URI[sha256sum] = "2b22e4ad0eb541de808d59c9d804dad0f7d07e0719ff6d701f02ea296aa0b7cc"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb b/meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyiface_0.0.9.bb
-rename to meta-python/recipes-devtools/python/python-pyiface_0.0.10.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb b/meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyiface_0.0.9.bb
-rename to meta-python/recipes-devtools/python/python3-pyiface_0.0.10.bb
--- 
-2.18.0
+http://repo.or.cz/openocd.git/blob/refs/heads/master:/bootstrap#l37
 
+Would it make sense to call bootstrap with nosubmodule?
+
+It seems to be used by internal_jimtcl
+http://repo.or.cz/openocd.git/blob/refs/heads/master:/configure.ac#l574
+and internal_libjaylink
+http://repo.or.cz/openocd.git/blob/refs/heads/master:/configure.ac#l679
+
+I don't use openocd, I've just noticed random build failure:
+
+Makefile.am:23: installing './texinfo.tex'
+Setting up submodules
+Submodule 'jimtcl' (http://repo.or.cz/r/jimtcl.git) registered for path
+'jimtcl'
+Submodule 'src/jtag/drivers/libjaylink' (http://repo.or.cz/r/libjaylink.git)
+registered for path 'src/jtag/drivers/libjaylink'
+Submodule 'tools/git2cl' (http://repo.or.cz/r/git2cl.git) registered for
+path 'tools/git2cl'
+Cloning into 'jimtcl'...
+fatal: unable to access 'http://repo.or.cz/r/jimtcl.git/': Could not
+resolve host: repo.or.cz
+Clone of 'http://repo.or.cz/r/jimtcl.git' into submodule path 'jimtcl'
+failed
+WARNING: exit code 1 from a shell command.
+
+On Fri, Jun 1, 2018 at 6:58 AM Khem Raj <raj.khem@gmail.com> wrote:
+
+> Fix build with new libusb and gcc8
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...2-deprecated-libusb_set_debug-with-l.patch | 39 +++++++++++++++++++
+>  .../recipes-devtools/openocd/openocd_git.bb   |  5 ++-
+>  2 files changed, 42 insertions(+), 2 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
+>
+> diff --git
+> a/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
+> b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
+> new file mode 100644
+> index 0000000000..c5b9083dca
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-devtools/openocd/openocd/0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch
+> @@ -0,0 +1,39 @@
+> +From b95a996bfb281104b68ec66f32ebb79db519a4a8 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 31 May 2018 21:06:46 -0700
+> +Subject: [PATCH] Fix libusb-1.0.22 deprecated libusb_set_debug with
+> + libusb_set_option
+> +
+> +libusb_set_debug is deprecated in libusb >= 1.0.22 therefore replace
+> +with equivalent libusb_set_option()  API
+> +
+> +see libusb commit for more details
+> +
+> +
+> https://github.com/libusb/libusb/commit/539f22e2fd916558d11ab9a66f10f461c5593168
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> +Upstream-Status: Submitted [http://openocd.zylin.com/#/c/4540/]
+> + src/jtag/drivers/xds110.c | 5 ++++-
+> + 1 file changed, 4 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/src/jtag/drivers/xds110.c b/src/jtag/drivers/xds110.c
+> +index 90b699027..9bfe02ea8 100644
+> +--- a/src/jtag/drivers/xds110.c
+> ++++ b/src/jtag/drivers/xds110.c
+> +@@ -367,8 +367,11 @@ static bool usb_connect(void)
+> +
+> +               /* Set libusb to auto detach kernel and disable debug
+> messages */
+> +               (void)libusb_set_auto_detach_kernel_driver(dev, 1);
+> ++#if LIBUSB_API_VERSION >= 0x01000106
+> ++              libusb_set_option(ctx, LIBUSB_OPTION_LOG_LEVEL,
+> LIBUSB_LOG_LEVEL_NONE);
+> ++#else
+> +               libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_NONE);
+> +-
+> ++#endif
+> +               /* Claim the debug interface on the XDS110 */
+> +               result = libusb_claim_interface(dev, INTERFACE_DEBUG);
+> +       } else {
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> index 67abeede93..84727bf970 100644
+> --- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> +++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+> @@ -5,8 +5,9 @@ DEPENDS = "libusb-compat libftdi"
+>  RDEPENDS_${PN} = "libusb1"
+>
+>  SRC_URI = "git://repo.or.cz/openocd.git \
+> -"
+> -SRCREV = "3737dd69e73816d186ba418d7b833462a8041079"
+> +
+>  file://0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch \
+> +          "
+> +SRCREV = "cdf1e826eb23c29de1019ce64125f644f01b0afe"
+>
+>  PV = "0.10+gitr${SRCPV}"
+>  S = "${WORKDIR}/git"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
