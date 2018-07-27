@@ -1,30 +1,28 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B5811784DF
+Return-Path: <ueba.takuma@jp.fujitsu.com>
+Received: from mgwkm01.jp.fujitsu.com (mgwkm01.jp.fujitsu.com [202.219.69.168])
+	by mail.openembedded.org (Postfix) with ESMTP id D048578CA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 09:01:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="42731875"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Jul 2018 17:01:28 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id A08174B69E01
+	Fri, 27 Jul 2018 09:20:20 +0000 (UTC)
+Received: from kw-mxq.gw.nic.fujitsu.com (unknown [192.168.231.130]) by
+	mgwkm01.jp.fujitsu.com with smtp
+	id 127a_4772_4b05b722_4dbc_4680_a763_64f071c628cc;
+	Fri, 27 Jul 2018 18:20:16 +0900
+Received: from m3051.s.css.fujitsu.com (m3051.s.css.fujitsu.com
+	[10.134.21.209])
+	by kw-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 1056AAC02BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 17:01:25 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.227) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.399.0; Fri, 27 Jul 2018 17:01:24 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Jul 2018 13:15:14 -0700
-Message-ID: <1531858514-4984-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.227]
-X-yoursite-MailScanner-ID: A08174B69E01.ABCD2
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-qt5][sumo][PATCH] qtwebkit: Make qtwebkit support armv BE
+	Fri, 27 Jul 2018 18:20:15 +0900 (JST)
+Received: from ueba-FMVA09006.utsfd.cs.fujitsu.co.jp
+	(ubi186.utsfd.cs.fujitsu.co.jp [10.24.19.186])
+	by m3051.s.css.fujitsu.com (Postfix) with ESMTP id DCF48340;
+	Fri, 27 Jul 2018 18:20:14 +0900 (JST)
+From: Takuma Ueba <ueba.takuma@jp.fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Jul 2018 18:20:08 +0900
+Message-Id: <20180727092008.3528-1-ueba.takuma@jp.fujitsu.com>
+X-Mailer: git-send-email 2.17.1
+X-TM-AS-MML: disable
+Subject: [meta-python][PATCH] python-mock: fix license from Apache-2.0 to BSD-2-Clause
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,63 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 09:01:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Jul 2018 09:20:21 -0000
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+This packages license shold be not Apache-2.0 but BSD-2-Clause.
+I judgetd by LICENSE file and SPDX file.
+
+Signed-off-by: Takuma Ueba <ueba.takuma@jp.fujitsu.com>
 ---
- .../qtwebkit/0001-Fix-build-bug-for-armeb.patch    | 26 ++++++++++++++++++++++
- recipes-qt/qt5/qtwebkit_git.bb                     |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch
+ meta-python/recipes-devtools/python/python-mock_2.0.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch b/recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch
-new file mode 100644
-index 0000000..9e15205
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebkit/0001-Fix-build-bug-for-armeb.patch
-@@ -0,0 +1,26 @@
-+From 21cd85076261611a28d5f0a68828bc2216b8e7fe Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@cn.fujitsu.com>
-+Date: Thu, 26 Jul 2018 17:50:32 +0900
-+Subject: [PATCH] Fix build bug for armeb.
-+
-+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-+---
-+ Source/WTF/wtf/dtoa/utils.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Source/WTF/wtf/dtoa/utils.h b/Source/WTF/wtf/dtoa/utils.h
-+index 298bf4d..7f6c873 100644
-+--- a/Source/WTF/wtf/dtoa/utils.h
-++++ b/Source/WTF/wtf/dtoa/utils.h
-+@@ -46,7 +46,7 @@
-+ // disabled.)
-+ // On Linux,x86 89255e-22 != Div_double(89255.0/1e22)
-+ #if defined(_M_X64) || defined(__x86_64__) || \
-+-defined(__ARMEL__) || \
-++defined(__arm__) || \
-+ defined(_MIPS_ARCH_MIPS32R2)
-+ #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
-+ #elif CPU(MIPS) || CPU(PPC) || CPU(PPC64) || OS(WINCE) || CPU(SH4) || CPU(S390) || CPU(S390X) || CPU(IA64) || CPU(SPARC) || CPU(ALPHA) || CPU(MIPS64) || CPU(AARCH64) || CPU(HPPA)
-+-- 
-+2.7.4
-+
-diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index c8e8328..025f0b1 100644
---- a/recipes-qt/qt5/qtwebkit_git.bb
-+++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -31,6 +31,7 @@ ARM_INSTRUCTION_SET_armv7ve = "thumb"
- SRC_URI += "\
-     file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
-     file://0002-Exclude-backtrace-API-for-non-glibc-libraries.patch \
-+    file://0001-Fix-build-bug-for-armeb.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python-mock_2.0.0.bb b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
+index 840c36efe..210502ff5 100644
+--- a/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "A Python Mocking and Patching Library for Testing"
+-LICENSE = "Apache-2.0"
++LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=de9dfbf780446b18aab11f00baaf5b7e"
  
- PACKAGECONFIG ??= "gstreamer qtlocation qtmultimedia qtsensors qtwebchannel \
+ SRC_URI[md5sum] = "0febfafd14330c9dcaa40de2d82d40ad"
 -- 
-2.7.4
-
+2.17.1
 
 
 
