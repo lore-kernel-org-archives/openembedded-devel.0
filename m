@@ -1,39 +1,18 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id BE0BA78CD7
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id CDAD278BFB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 20:16:21 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id y5-v6so6326201qti.12
+	Fri, 27 Jul 2018 20:25:29 +0000 (UTC)
+Received: from localhost.localdomain (62-178-50-190.cable.dynamic.surfer.at
+	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id D0A1C173C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 13:16:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=zPQZPGAH/1lSqFGsuCpmoaYswwNQ5gt6nX/qu5m7lyE=;
-	b=gjMuT3nL/ybjoISp90ffy8btMoiAkzqqiYEfT2gGMDkqAlf7JbNADJ+kMJYeP6UisV
-	quVqs9HEtQgerxMdjnavsSuS1okwGlfZlLd/NuYRCbV8xiocm/OCZ4satVD9ZoX4rCX+
-	727o4fCaxeJZbVIRuAq02gcF4ciMfWQuuWEiCUuZLCLVf+nxAvdF9j9hCv/XAXpg0XjS
-	jngZdSYZ3sEYqw/Xm/xtRoguE/PJWRgAg4+4oFeAkwjq6IUEqmmZ6tBe3zN/bjDDBGjE
-	47XoXu1BUoSIJBSNtKVUfM0dIGHtjL7qaX1LqvfIZsUxz6vV2/b+1AAn1N5kqlTESi0m
-	Lepg==
-X-Gm-Message-State: AOUpUlE/jm5BfO0ZYTkmLdTjZD9wVArBonFW2xoUtrBAZAffFHBPbKx4
-	F9iLFke0I264DJcvYIK66VHFVDsPBvw=
-X-Google-Smtp-Source: AAOMgpc5Cz+FnBdWvOSMzxLPyaIejNNats+MiHD98f3fNbkASAMjYc59Qe++OSJeM1Y7N0mhWr+M5g==
-X-Received: by 2002:a0c:afd5:: with SMTP id
-	t21-v6mr7002079qvc.229.1532722582386; 
-	Fri, 27 Jul 2018 13:16:22 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.61.164])
-	by smtp.gmail.com with ESMTPSA id
-	f184-v6sm3208645qkc.23.2018.07.27.13.16.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 27 Jul 2018 13:16:21 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	Fri, 27 Jul 2018 22:25:29 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 16:16:08 -0400
-Message-Id: <1532722568-9134-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-parse: update to version 1.8.4
+Date: Fri, 27 Jul 2018 22:25:24 +0200
+Message-Id: <20180727202524.31873-1-dv@pseudoterminal.org>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-multimedia][PATCH] libopenmpt: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +25,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 20:16:21 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 20:25:30 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+libopenmpt is a cross-platform C++ and C library to decode tracked music
+files ("modules", like the .mod .xm .s3m .it formats) into raw PCM audio.
+It is based on the player code of OpenMPT module tracker.
+
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- .../python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb}         | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb} (54%)
+ .../libopenmpt/files/run-ptest                |   9 ++
+ .../libopenmpt/libopenmpt_0.3.10.bb           | 104 ++++++++++++++++++
+ 2 files changed, 113 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
+ create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-similarity index 54%
-rename from meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-rename to meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-index 8e16372..c66d4c8 100644
---- a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "Parse strings using a specification based on the Python format() syntax"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://parse.py;beginline=1191;endline=1209;md5=5147afdd9b3615290ad8733f0137a1a1"
-+LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
- 
--SRC_URI[md5sum] = "42002338551bdfa0f01bbe4e679a17dd"
--SRC_URI[sha256sum] = "8048dde3f5ca07ad7ac7350460952d83b63eaacecdac1b37f45fd74870d849d2"
-+SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
-+SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
- 
- inherit pypi setuptools
- 
+diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
+new file mode 100644
+index 000000000..84981b22c
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
+@@ -0,0 +1,9 @@
++#!/bin/sh
++
++./libopenmpttest >/dev/null 2>&1
++
++if [ $? -eq 0 ]; then
++   echo "PASS: libopenmpttest"
++else
++   echo "FAIL: libopenmpttest"
++fi
+diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+new file mode 100644
+index 000000000..dddf80407
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+@@ -0,0 +1,104 @@
++SUMMARY = "C and C++ cross-platform library for decoding tracked music files (modules)"
++DESCRIPTION = "libopenmpt is a cross-platform C++ and C library to decode tracked \
++music files (modules) into a raw PCM audio stream. It also comes with openmpt123, a \
++cross-platform command-line or terminal based module file player, and libopenmpt_modplug, \
++a wrapper around libopenmpt that provides an interface that is ABI compatile with \
++libmodplug. libopenmpt is based on the player code of the OpenMPT project."
++HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
++SECTION = "libs"
++
++DEPENDS = "virtual/libiconv"
++
++RDEPENDS_${PN}_libc-glibc = " \
++    glibc-gconv-cp1252 \
++    glibc-gconv-ibm437 \
++    glibc-gconv-iso8859-1 \
++    glibc-gconv-iso8859-15 \
++"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e804150573f149befef6c07e173f20c3"
++
++SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
++           file://run-ptest \
++          "
++SRC_URI[md5sum] = "66bbc6fbb5f27a554cb145d805e9ef9d"
++SRC_URI[sha256sum] = "14a137b8d1a20e1b6a5e67cbc9467ab7e5e4e67d5aa38a247afc825685c53939"
++
++S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
++
++inherit autotools pkgconfig ptest
++
++PACKAGECONFIG ??= " \
++    libopenmpt-modplug openmpt123 \
++    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
++    flac mpg123 ogg sndfile vorbis vorbisfile zlib \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
++"
++
++# libopenmpt_modplug is a library that wraps libopenmpt calls into
++# functions that are ABI compatible with libmodplug. This allows for
++# using modplug headers and linking against libopenmpt_modplug
++# instead of against the original libmodplug library.
++# NOTE: The wrapper is compatible to the ABI from libmodplug version
++# 0.8.8 and newer.
++PACKAGECONFIG[libopenmpt-modplug] = "--enable-libopenmpt_modplug,--disable-libopenmpt_modplug"
++PACKAGECONFIG[openmpt123]         = "--enable-openmpt123,--disable-openmpt123"
++PACKAGECONFIG[tests]              = "--enable-tests,--disable-tests"
++
++# These packageconfigs affect openmpt123
++PACKAGECONFIG[flac]               = "--with-flac,--without-flac,flac"
++PACKAGECONFIG[mpg123]             = "--with-mpg123,--without-mpg123,mpg123"
++PACKAGECONFIG[ogg]                = "--with-ogg,--without-ogg,libogg"
++PACKAGECONFIG[portaudio]          = "--with-portaudio,--without-portaudio,portaudio-v19"
++PACKAGECONFIG[pulseaudio]         = "--with-pulseaudio,--without-pulseaudio,pulseaudio"
++PACKAGECONFIG[sdl]                = "--with-sdl,--without-sdl,virtual/libsdl"
++PACKAGECONFIG[sdl2]               = "--with-sdl2,--without-sdl2,virtual/libsdl2"
++PACKAGECONFIG[sndfile]            = "--with-sndfile,--without-sndfile,libsndfile1"
++PACKAGECONFIG[vorbis]             = "--with-vorbis,--without-vorbis,libvorbis"
++PACKAGECONFIG[vorbisfile]         = "--with-vorbisfile,--without-vorbisfile,libvorbis"
++PACKAGECONFIG[zlib]               = "--with-zlib,--without-zlib,zlib"
++
++# --disable-libmodplug is necessary, since otherwise we'd
++# have a collision with the libmodplug package, because of the
++# libmodplug.so file. (libmodplug.so from libopenmpt isintended
++# to be used as a drop-in replacement, and according to the
++# documentation, is not complete.)
++EXTRA_OECONF += " \
++    --disable-doxygen-doc \
++    --disable-examples \
++    --disable-libmodplug \
++    --without-portaudiocpp \
++"
++
++# Since version 0.3, libopenmpt uses SemVer 2.0.0 versioning.
++# The SemVer versioning scheme is incompatible with Debian/Ubuntu
++# package version names.
++DEBIAN_NOAUTONAME_${PN} = "1"
++DEBIAN_NOAUTONAME_${PN}-modplug = "1"
++
++PACKAGES =+ "${PN}-modplug ${PN}-openmpt123 ${PN}-openmpt123-doc"
++FILES_${PN}-modplug = "${libdir}/libopenmpt_modplug.so.*"
++FILES_${PN}-openmpt123 = "${bindir}/openmpt123"
++FILES_${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
++
++do_compile_ptest() {
++    oe_runmake ${PARALLEL_MAKE} libopenmpttest
++}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/test
++    install -m 0755 ${B}/libopenmpttest ${D}${PTEST_PATH}
++    install -m 0644 ${S}/test/test.mptm ${D}${PTEST_PATH}/test
++    install -m 0644 ${S}/test/test.s3m ${D}${PTEST_PATH}/test
++    install -m 0644 ${S}/test/test.xm ${D}${PTEST_PATH}/test
++
++    install -d ${D}${PTEST_PATH}/libopenmpt
++    install -m 0644 ${S}/libopenmpt/libopenmpt_version.mk ${D}${PTEST_PATH}/libopenmpt
++}
++
++python __anonymous() {
++    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
++    if ("sdl" in packageconfig) and ("sdl2" in packageconfig):
++        bb.error("sdl and sdl2 packageconfigs cannot be both enabled")
++}
 -- 
-2.7.4
+2.17.1
 
 
