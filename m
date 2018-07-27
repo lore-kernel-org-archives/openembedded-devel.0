@@ -1,47 +1,39 @@
-Return-Path: <prvs=674688ffdd=adrian.ratiu@ni.com>
-X-Greylist: delayed 4454 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 27 Jul 2018 12:34:49 UTC
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 81B9C78D06
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E8BBC78CC0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 12:34:49 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w6RBKYZe015183 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 06:20:36 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2kewd36f7d-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 06:20:36 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com
-	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
-	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w6RBKZwM004230
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Fri, 27 Jul 2018 12:39:23 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id d22-v6so3120149qkc.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 06:20:35 -0500
-Received: from us-aus-exch4.ni.corp.natinst.com (130.164.68.14) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 27 Jul 2018 06:20:35 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch4.ni.corp.natinst.com (130.164.68.14) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 27 Jul 2018 06:20:35 -0500
-Received: from ionel-work.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 27 Jul 2018 06:20:34 -0500
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Jul 2018 14:20:33 +0300
-Message-ID: <20180727112033.12616-1-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.18.0
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-07-27_05:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-oe][PATCH] libblockdev: cleanup/fix PACKAGECONFIG/dependencies
+	Fri, 27 Jul 2018 05:39:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ojAOt1AHq6tscwfy6gXoi5NCtZOtZ9FD8bS9ovVpWfQ=;
+	b=PG2jbWvczng6ESZZoZENmOc2AeLtdHP4i4Buagxx/flNN4ZQ5BZsuK//ULVpeLp/8T
+	DizRAFZzn9wyoTXutuy4V2mnqiyASHBvdbgSm3k6oFb0jEj/qEDPfFhTHgNC3tq1qVw3
+	gyPpQOgSOOPgoArB9Dv+wY8vHFs9WqOxdnn+sktzFAFLRy38NCyyDYrp+l9StAbXldDD
+	l42caqrLwZhw4mzwyDoB1jQhLYdc95Qh+w8y8IgjmC4zyvlg7Jr8No9HVn7GvRqMakCb
+	B0Tgpxl+cAi6vUdeyIYtfIY0f/tta3Jju9Joi5EXWTtaPbNfTdN1yIIpDFGab/54u0sp
+	qezQ==
+X-Gm-Message-State: AOUpUlHcwhXLXKFCm1KlLoeMd4VpdUcNJvQV1RVAbh1LiPzaAYsZ+3k+
+	qs/VHS2ZgFhsPLtk0H57kBrGmAHr
+X-Google-Smtp-Source: AAOMgpeBCppCLHy8Ao7gTBCNYqNP/AxJF5uPpCV3w4qenIiRTbSs125f2IN4XHwMkdebowJTjXSApw==
+X-Received: by 2002:a37:2b89:: with SMTP id
+	r9-v6mr5592487qkr.389.1532695164433; 
+	Fri, 27 Jul 2018 05:39:24 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.61.164])
+	by smtp.gmail.com with ESMTPSA id
+	w13-v6sm3014930qtc.88.2018.07.27.05.39.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 27 Jul 2018 05:39:23 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Jul 2018 08:39:15 -0400
+Message-Id: <1532695155-27937-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-daemon: fix build dependencies to use the native version rather than target for docutils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,60 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 12:34:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Jul 2018 12:39:25 -0000
 
-It only makes sense to rdepend on lvm2 if lvm is enabled by the
-configuration and the nss and volume-key dependencies are only needed
-if --with-escrow is configured. These dependencies are quite big so
-it's good to have a way to disable them.
-
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-extended/libblockdev/libblockdev_2.18.bb  | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
+ meta-python/recipes-devtools/python/python-daemon_2.1.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
-index 4dbd04cd7..a58871f0c 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
-@@ -12,8 +12,6 @@ inherit autotools python3native gobject-introspection
+diff --git a/meta-python/recipes-devtools/python/python-daemon_2.1.2.bb b/meta-python/recipes-devtools/python/python-daemon_2.1.2.bb
+index 4c18e2b..ffb5beb 100644
+--- a/meta-python/recipes-devtools/python/python-daemon_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python-daemon_2.1.2.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Library to implement a well-behaved Unix daemon process"
+ HOMEPAGE = "https://pagure.io/python-daemon/"
+ SECTION = "devel/python"
  
- DEPENDS += " \
-     cryptsetup \
--    nss \
--    volume-key \
-     libbytesize \
-     btrfs-tools \
- "
-@@ -26,16 +24,12 @@ SRC_URI = " \
- 
- S = "${WORKDIR}/git"
- 
--RDEPENDS_${PN} += " \
--    lvm2 \
--"
--
- FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
- 
--PACKAGECONFIG ??= "python3 lvm dm kmod parted fs"
-+PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow"
- PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
- PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
--PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools"
-+PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools, lvm2"
- PACKAGECONFIG[dm] = "--with-dm, --without-dm"
- PACKAGECONFIG[dmraid] = "--with-dmraid, --without-dmraid"
- PACKAGECONFIG[kmod] = "--with-kbd, --without-kbd, kmod"
-@@ -44,6 +38,7 @@ PACKAGECONFIG[fs] = "--with-fs, --without-fs, util-linux"
- PACKAGECONFIG[doc] = "--with-gtk-doc, --without-gtk-doc, gtk-doc-native"
- PACKAGECONFIG[nvdimm] = "--with-nvdimm, --without-nvdimm"
- PACKAGECONFIG[vdo] = "--with-vdo, --without-vdo"
-+PACKAGECONFIG[escrow] = "--with-escrow, --without-escrow, nss volume-key"
- 
- export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
- 
+-DEPENDS = "python-docutils"
++DEPENDS += "python-docutils-native"
+ RDEPENDS_${PN} = "python-docutils \
+                   python-lockfile (>= 0.10) \
+                   python-resource \
 -- 
-2.18.0
+2.7.4
 
 
