@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A62C878CDC
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BE0BA78CD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 20:05:40 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id n6-v6so6320681qtl.4
+	Fri, 27 Jul 2018 20:16:21 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id y5-v6so6326201qti.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 13:05:42 -0700 (PDT)
+	Fri, 27 Jul 2018 13:16:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+9vBkC4yOZ6aZeltK0gniUNBkYdLfJuBUdSCbKCn+XI=;
-	b=Q0+Yve+g4qFJo+j+BcaKwrW6HngdhIRLN9eDnREgjvKiksClPe1nY3iumsFZhlEB//
-	GVkDqn0W3UdqIZisdx1Z25wf9rrYbwmKlbiMwDCtduSqN7N4YBOEuOSt05YNQht3rz4M
-	e2lNKotGOS/cx66Gb6/ZqhWy0wbjE7hiXWWq0a3/7gH5aTNNCYlwg+BdhOfslr/SAm8c
-	qAVTZ4J0b49MDs6hwMvnw9+r8W6ujOIOZ2w5HDSmpx2GEUxvRDHXQNfYUXjPpH8pP1AM
-	UWWru9yhsxqcRlQEXMOLv3uF45A7aS+eCP/SmNhA8EV5U6RrBSTXJxBZBfEvzZrdDLmv
-	Ifwg==
-X-Gm-Message-State: AOUpUlGIPzgkc+fXVTUfNlnZi2OylZbhqmylwNI0mYRczrXuDfLtDGZ2
-	WEuWpGYvBaR7i+desnGHCFvsrto8EG4=
-X-Google-Smtp-Source: AAOMgpe4xd7yyuUL9SwrYXH2YmrhwDYkGpTsB4dhkW1wGwQyqPeVH532ALrqz8sfGNt2pwyJURTxIQ==
-X-Received: by 2002:ac8:705a:: with SMTP id
-	y26-v6mr7892522qtm.118.1532721941167; 
-	Fri, 27 Jul 2018 13:05:41 -0700 (PDT)
+	bh=zPQZPGAH/1lSqFGsuCpmoaYswwNQ5gt6nX/qu5m7lyE=;
+	b=gjMuT3nL/ybjoISp90ffy8btMoiAkzqqiYEfT2gGMDkqAlf7JbNADJ+kMJYeP6UisV
+	quVqs9HEtQgerxMdjnavsSuS1okwGlfZlLd/NuYRCbV8xiocm/OCZ4satVD9ZoX4rCX+
+	727o4fCaxeJZbVIRuAq02gcF4ciMfWQuuWEiCUuZLCLVf+nxAvdF9j9hCv/XAXpg0XjS
+	jngZdSYZ3sEYqw/Xm/xtRoguE/PJWRgAg4+4oFeAkwjq6IUEqmmZ6tBe3zN/bjDDBGjE
+	47XoXu1BUoSIJBSNtKVUfM0dIGHtjL7qaX1LqvfIZsUxz6vV2/b+1AAn1N5kqlTESi0m
+	Lepg==
+X-Gm-Message-State: AOUpUlE/jm5BfO0ZYTkmLdTjZD9wVArBonFW2xoUtrBAZAffFHBPbKx4
+	F9iLFke0I264DJcvYIK66VHFVDsPBvw=
+X-Google-Smtp-Source: AAOMgpc5Cz+FnBdWvOSMzxLPyaIejNNats+MiHD98f3fNbkASAMjYc59Qe++OSJeM1Y7N0mhWr+M5g==
+X-Received: by 2002:a0c:afd5:: with SMTP id
+	t21-v6mr7002079qvc.229.1532722582386; 
+	Fri, 27 Jul 2018 13:16:22 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	k3-v6sm3766628qkl.95.2018.07.27.13.05.39
+	f184-v6sm3208645qkc.23.2018.07.27.13.16.21
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 27 Jul 2018 13:05:40 -0700 (PDT)
+	Fri, 27 Jul 2018 13:16:21 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 16:05:32 -0400
-Message-Id: <1532721932-28435-1-git-send-email-derek@asterius.io>
+Date: Fri, 27 Jul 2018 16:16:08 -0400
+Message-Id: <1532722568-9134-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-alembic: update to version 1.0.0
+Subject: [meta-python][PATCH] python-parse: update to version 1.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 20:05:40 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 20:16:21 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-alembic.inc                | 4 ++--
- .../python/{python-alembic_0.9.10.bb => python-alembic_1.0.0.bb}      | 0
- .../python/{python3-alembic_0.9.10.bb => python3-alembic_1.0.0.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-alembic_0.9.10.bb => python-alembic_1.0.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-alembic_0.9.10.bb => python3-alembic_1.0.0.bb} (100%)
+ .../python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb}         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb} (54%)
 
-diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
-index 4de845c..477e89c 100644
---- a/meta-python/recipes-devtools/python/python-alembic.inc
-+++ b/meta-python/recipes-devtools/python/python-alembic.inc
-@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
+diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+similarity index 54%
+rename from meta-python/recipes-devtools/python/python-parse_1.8.2.bb
+rename to meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+index 8e16372..c66d4c8 100644
+--- a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
++++ b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "Parse strings using a specification based on the Python format() syntax"
  LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
+-LIC_FILES_CHKSUM = "file://parse.py;beginline=1191;endline=1209;md5=5147afdd9b3615290ad8733f0137a1a1"
++LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
  
--SRC_URI[md5sum] = "117dac728cd081739bdbed73fe252a7d"
--SRC_URI[sha256sum] = "1cd32df9a3b8c1749082ef60ffbe05ff16617b6afadfdabc680dcb9344af33d7"
-+SRC_URI[md5sum] = "762ab9ba56d1c0b1bfbc7c9f7f849c92"
-+SRC_URI[sha256sum] = "52d73b1d750f1414fa90c25a08da47b87de1e4ad883935718a8f36396e19e78e"
+-SRC_URI[md5sum] = "42002338551bdfa0f01bbe4e679a17dd"
+-SRC_URI[sha256sum] = "8048dde3f5ca07ad7ac7350460952d83b63eaacecdac1b37f45fd74870d849d2"
++SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
++SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
  
- PYPI_PACKAGE = "alembic"
+ inherit pypi setuptools
  
-diff --git a/meta-python/recipes-devtools/python/python-alembic_0.9.10.bb b/meta-python/recipes-devtools/python/python-alembic_1.0.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-alembic_0.9.10.bb
-rename to meta-python/recipes-devtools/python/python-alembic_1.0.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_0.9.10.bb b/meta-python/recipes-devtools/python/python3-alembic_1.0.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-alembic_0.9.10.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_1.0.0.bb
 -- 
 2.7.4
 
