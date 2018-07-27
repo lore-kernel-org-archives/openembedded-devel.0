@@ -1,49 +1,28 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id D005A78D34
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1851378D35
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 16:12:45 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id s12-v6so5812823wmc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 09:12:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id;
-	bh=0dLgL8Qii0LILQWQsqlXp7VdzwzYiKU0t8W9eGmOgS8=;
-	b=v24CvvZ14wfKI+Tqwe8caoS55rDiWxeKx9LIl8DH77fCokeEJiB1Jodx+HWKjjLgDb
-	k8os/uguhd9MzSLRM81yrE5ZaczDhKU0sowUqkGtNGovLGGxexcggLG7/HWmFn1yTJK9
-	5y1t62cZGgKElbvxwUZ1t7ePmp2SV/yOCaRsIuo66/763u2nnIKKFC+cFnasUaIr2kn6
-	5cFZcu+yMsB6MpOi32NQRnUMSbMWg8C1uRcps3FHqCNXInn6Imm/k9vKsUEIyNEv/TMh
-	VikxRSnDYMpHkbu6CGaFJAgf5hyudEK2x/nFls2I+eNqKFgw71G7thvSFok/N/efVJap
-	QuYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=0dLgL8Qii0LILQWQsqlXp7VdzwzYiKU0t8W9eGmOgS8=;
-	b=CNnXCUQbewRgRXmyZF/93MXup0cG0ZGVkb5M50YQaRfU/PMUbRRddAxSIVNo3rwoSh
-	HbR5KV2KWzZcVRq5bPJKeTZ3Xp/v0dNn97dQZ9b8mhpNR3B9eofvYZfLTFMMvS9oKU7g
-	2JvP0Ibs/v85t30EgWb4R2bweixy3o/xxbD4M+Ym77TW+Aee9Ut0xF40GlxaSbkCgAPu
-	dCvqXkOhC9Jif8ZAtirYKeuqFQSVG6oJo3zVG+lbCzydEvq9099oedPIyj72A0MSAy8q
-	x0O/9aQynEIvT9sQb052Aq6mXc5mv+QpvUn+XvRPBwlLcmC/gs78HxrlnSFfbvyEue1k
-	//0A==
-X-Gm-Message-State: AOUpUlEmSNp3eHAGmDPHjUrGOcxS/pA8/wJsa0s/yzV/sHOyyDo5ZwPT
-	BgFO25+Hulk2T4xDgX4i0PRgKiFMLF0=
-X-Google-Smtp-Source: AAOMgpecqdMhmu002WkKgySkqB2CNZMXIXfCWywU43pUGLkYxFQaF6W0kbhca2oStvWcJC3B9qGyFQ==
-X-Received: by 2002:a1c:a009:: with SMTP id
-	j9-v6mr4479198wme.132.1532707966104; 
-	Fri, 27 Jul 2018 09:12:46 -0700 (PDT)
-Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
-	b11-v6sm3287130wrv.82.2018.07.27.09.12.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jul 2018 09:12:45 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 17:12:42 +0100
-Message-Id: <20180727161242.5515-1-ross.burton@intel.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [PATCH] pax-utils: add (from oe-core)
+	Fri, 27 Jul 2018 16:16:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w6RGGNxT030247
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 27 Jul 2018 09:16:23 -0700
+Received: from yow-masselst-lx1.localnet (128.224.20.96) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.399.0; Fri, 27 Jul 2018 09:16:23 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: William Delacre <williamdelacre@gmail.com>
+Date: Fri, 27 Jul 2018 12:16:22 -0400
+Message-ID: <1748388.J95ykxND2L@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <CAOnRZEJ7iVfFxr4e=6VcjCCpi4uERXhv-e8FZgMuAQv6XD2GXQ@mail.gmail.com>
+References: <CAOnRZELTeZbVDTo_eT_r6e6EG6et0vs7O_mT_fpqJ_RpoVhk2Q@mail.gmail.com>
+	<CAPuovE+nMp9xaj_gusMTGM9_ChFuuHDzc9NKBRYZMX493DbU=Q@mail.gmail.com>
+	<CAOnRZEJ7iVfFxr4e=6VcjCCpi4uERXhv-e8FZgMuAQv6XD2GXQ@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,57 +35,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 16:12:46 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 16:16:24 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- .../recipes-devtools/pax-utils/pax-utils_1.2.2.bb  | 36 ++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
+On Friday, July 27, 2018 12:04:37 PM EDT William Delacre wrote:
+> Thanks a lot for the answer, it worked perfectly !
+>=20
+> There is just one point I don=E2=80=99t really understand : why do we nee=
+d to add a
+> dependency to =E2=80=98python-incremental-NATIVE=E2=80=99 ?
+>=20
+> What would happen if I just add to the python-twisted recipe :
+>=20
+> DEPENDS +=3D =E2=80=9C${PYTHON_PN}-incremental=E2=80=9C
 
-diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
-new file mode 100644
-index 0000000000..9635a5e708
---- /dev/null
-+++ b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Security-focused ELF files checking tool"
-+DESCRIPTION = "This is a small set of various PaX aware and related \
-+utilities for ELF binaries. It can check ELF binary files and running \
-+processes for issues that might be relevant when using ELF binaries \
-+along with PaX, such as non-PIC code or executable stack and heap."
-+HOMEPAGE = "http://www.gentoo.org/proj/en/hardened/pax-utils.xml"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
-+
-+SRC_URI = "https://dev.gentoo.org/~vapier/dist/pax-utils-${PV}.tar.xz"
-+SRC_URI[md5sum] = "a580468318f0ff42edf4a8cd314cc942"
-+SRC_URI[sha256sum] = "7f4a7f8db6b4743adde7582fa48992ad01776796fcde030683732f56221337d9"
-+
-+RDEPENDS_${PN} += "bash"
-+
-+export GNULIB_OVERRIDES_WINT_T = "0"
-+
-+do_configure_prepend() {
-+    touch ${S}/NEWS ${S}/AUTHORS ${S}/ChangeLog ${S}/README
-+}
-+
-+do_install() {
-+    oe_runmake PREFIX=${D}${prefix} DESTDIR=${D} install
-+}
-+
-+BBCLASSEXTEND = "native"
-+
-+inherit autotools pkgconfig
-+
-+PACKAGECONFIG ??= ""
-+
-+PACKAGECONFIG[libcap] = "--with-caps, --without-caps, libcap"
-+PACKAGECONFIG[libseccomp] = "--with-seccomp, --without-seccomp, libseccomp"
-+PACKAGECONFIG[pyelftools] = "--with-python, --without-python,, pyelftools"
-+
-+EXTRA_OECONF += "--enable-largefile"
--- 
-2.11.0
+This would assume that python is completely arch independent, which it is n=
+ot.=20
+Assume for example python-incremental had some C extensions, using DEPENDS=
+=20
+would build them for the target arch yet possibly attempt to run them on yo=
+ur=20
+build host. -native takes care of this.
+
+Some may say this is a bit of a hack since the difference in ARCH *might*=20
+equate to a difference in behavior. But I have dealt with many python recip=
+es=20
+and have yet to run into any scenario where this potential issue exists.
+
+At least that is what I can recall at the moment. Unfortunately I have=20
+forgotten some of the subtleties that might be in play.
+
+Mark
+
+>=20
+> William
+>=20
+> Le ven. 27 juil. 2018 =C3=A0 17:03, Mark Asselstine <
+>=20
+> mark.asselstine@windriver.com> a =C3=A9crit :
+> > On Thu, Jul 26, 2018 at 3:40 PM, Mark Asselstine
+> >=20
+> > <mark.asselstine@windriver.com> wrote:
+> > > On Mon, Jul 23, 2018 at 8:28 AM, William Delacre
+> > >=20
+> > > <williamdelacre@gmail.com> wrote:
+> > >> Hi ! :-)
+> > >>=20
+> > >> I=E2=80=99m facing issues when trying to run =E2=80=98bitbake python=
+=2Dtwisted=E2=80=99
+> >=20
+> > (do_compile
+> >=20
+> > >> error)
+> > >>=20
+> > >> Log says :
+> > >> =E2=80=9CDownload error on https://pypi.python.org/simple/incrementa=
+l/: [Errno
+> >=20
+> > -3]
+> >=20
+> > >> Temporary failure in name resolution
+> >=20
+> > With the additional info you sent me along with a second look at the
+> > error I can fairly confidently say I know what the issue is.
+> >=20
+> > Python, like some other languages (ruby, go...) will attempt to
+> > download dependencies/requirements if they are not present. This is
+> > done "outside" of the bitbake system and thus will ignore
+> > BB_NO_NETWORK and is generally a bad thing. It isn't quite host
+> > contamination but it is very similar. What we do with our python
+> > recipes in bitbake is review a python package's source setup.py,
+> > requirements.txt...files in order to determine what other python
+> > packages are needed, add them as RDEPENDS or similar in order to avoid
+> > the python attempting to complete a download such as this.
+> >=20
+> > In this case python-twisted 'requires' python-incremental but the
+> > Rocko version of the python-twisted recipe lacks the needed assignment
+> > to ensure this is available in the recipe sysroot and thus the
+> > attempted download.
+> >=20
+> > Cherry pick commit b08b570c8624303acbb6bb064a7bda466a679df4
+> > [python-twisted: avoid downloading build dependencies] to Rocko and
+> > you will be good to go. You should also follow up this thread with a
+> > request to have this commit put onto Rocko to avoid others hitting the
+> > same issue.
+> >=20
+> > Mark
+> >=20
+> > >> ............
+> > >>=20
+> > >> distutils.errors.DistutilsError : Could not find suitable distributi=
+on
+> >=20
+> > for
+> >=20
+> > >> Requirement.parse(=E2=80=98incremental>=3D16.10.1=E2=80=99)=E2=80=9D
+> > >>=20
+> > >> First of all I=E2=80=99m not connected to internet, so I=E2=80=99ve =
+pre-downloaded all
+> >=20
+> > the
+> >=20
+> > >> required packages (twisted-17.9.0.tar.bz2 & incremental-17.5.0.tar.gz
+> >=20
+> > are
+> >=20
+> > >> present in my build/downloads folder)
+> > >>=20
+> > >> It=E2=80=99s the first time I have some =E2=80=9Cdownloading issues=
+=E2=80=9D and I=E2=80=99m stuck on
+> > >> it
+> > >> for a few hours now..
+> > >>=20
+> > >> Any tips for me ?
+> > >=20
+> > > Check all aspects of what you have manually downloaded and populated
+> > > in your downloads. My guess is that a checksum or some other detail
+> > > isn't matching and it is rejecting what you have and thus attempting
+> > > to re-download the file.
+> > >=20
+> > > Mark
+> > >=20
+> > >> Thanks in advance !
+> > >> --
+> > >> _______________________________________________
+> > >> Openembedded-devel mailing list
+> > >> Openembedded-devel@lists.openembedded.org
+> > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
 
 
