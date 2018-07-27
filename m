@@ -1,47 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com
-	[209.85.216.174])
-	by mail.openembedded.org (Postfix) with ESMTP id E2CCB78AFA
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CE4878CB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 08:38:21 +0000 (UTC)
-Received: by mail-qt0-f174.google.com with SMTP id n6-v6so4298167qtl.4
+	Fri, 27 Jul 2018 08:40:46 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id d4-v6so4282850qtn.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 01:38:23 -0700 (PDT)
+	Fri, 27 Jul 2018 01:40:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=S+4qcYM45wWLW5zR643WwTvZ7v1Lep68RM2VH0E44P4=;
-	b=caBAEv4XSOVAGcjTMX90VNn94zebDG/iIz6Ex+ojSsYPeKjzojBI2OAjvAK0VJ4U+h
-	Z+w3Olv25jVDLaRhqHCpFlQmZpGctXsbNV17fGHClzFGlpXI1N7Dl71j2odokrWyUwfs
-	ESY9ARbYePMCShTclhNqBsg/zmV3jY9WiCB2eOOpt9yyfYSEb7wlGb9cyyqr+VuAZDcv
-	6naRmdVZ46sY5EqxbDQp+NAmRvhwqKw0jVSR7jFCnXbtIC7zJqZ7Tane0PmJB+ziIEi7
-	6q7HqVxA1KQFQqC94QVkMglh4ld1sbKXOUmYoELCmZ0h5iJGX7a5SesXmUmk76Cv9ZzR
-	gdBg==
+	:cc:content-transfer-encoding;
+	bh=8OjT58thdp/z+eYFt+LMAMZ+p93l6xfhWO6wjbyFmxM=;
+	b=sPvTSuV+Pdd0himcYC6FVSph9LJ78HHWbjrHJ8F9Y2YhHuZvQA7x9Ulxzf18xzdhEP
+	yAaoRf52IAgVgZ+EYDOYnwAqpku1Jf/E9HFE0IMtzO/DsJwhHcVum6TH9ZimTDPvfm20
+	nh8JVDONQcg7p5ikK9YK7rlZTSxDNkc0EkzcL2mPTJEYboJ7+/xYrhGMPYHJpD0cds1j
+	VmKElSvPPLCaqO6Q7LH8O0NDyYECAK+IUEnt8BeiA92jMjwf07ZNmgm7S0lXLpUHzDUG
+	vqN61qCCooZpAKc2Z+9L8jvD2ogY4DU+FLcHH915HL6syBQWpA3z6YavxPNF4WR9XYbc
+	Q0GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=S+4qcYM45wWLW5zR643WwTvZ7v1Lep68RM2VH0E44P4=;
-	b=mm5IVVHm7IS5yWqcDNQsOoRdgM/i/N8JIdStaKaeLMV0IHc5yB6x8mOpHgl4S4zuSq
-	o4pdbu2R003s734+dFVn1tCJUf8hfDVlZbXItAeBbgsdLCyCsGXMz3shGyawYHBQ37Mo
-	X5eSwF6oBJpAbmutkzLBIoMzrXMxxNPYUJpGJ4dM2qNyyCLmEfSfUfOOXS9FqMW+EUgM
-	ttd+f0g2WcaOdxb+XPEkfYyUsdBtaZCvOYl/nn89RvNUY6JIu+DECyG6OE93tYjZ8vGZ
-	7HW38F62tbQnNnLcaOElkKjfH6D2KEAnv0Jt0VI5ypFzeAHZXk7U2vDFPGn82vyouIUH
-	9geg==
-X-Gm-Message-State: AOUpUlErFHx9xwuA/PWOiPJnsO0PfcEEIydrDyWa78p/yccfnu5Co9Xp
-	mPmYbWNaaaf1k9DcmW8tLWVhQC1pV6ejyHgGR/o=
-X-Google-Smtp-Source: AAOMgpejTGmNCizTFcna2T+jeLWzDzcyPKBpc6nPT/S7vngZbpMkAQZCCLTKztvUUioNZTpc8+V5qCfgKJiGqKLokFM=
-X-Received: by 2002:ac8:70c5:: with SMTP id
-	g5-v6mr5191100qtp.376.1532680702453; 
-	Fri, 27 Jul 2018 01:38:22 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=8OjT58thdp/z+eYFt+LMAMZ+p93l6xfhWO6wjbyFmxM=;
+	b=lC6G4DLW9BfXR3od5tYxvUIAe64JFgau0uyHoQH2vsHMZwVVXbBFxKUDfkzSqCk4zx
+	8nlWHfnuKcHBzu4Q7E4C2FPBU1yktGlqcz5KmIYe/KY/9TnbYAtuKl3xPFftngSmOg7w
+	31xHzRci0TeBPau1tgxixRyDGCnS8HQgAPnDmarwLF8p05pWTwgLNFcHlU1NaCFnNc+8
+	fb7vYjDJMgpONuqCnoPTdv0oo08lz5k2XbtK1H6uszpT9fTk+IM6S50onJTAX6vrHigC
+	g0/jQPW/Hu7pEAeg/lYkZ3vwDjRFVU+9ewqzkUZWrdFYtnQl6s4OhggnTCK7gEnHvYno
+	zSjQ==
+X-Gm-Message-State: AOUpUlGQkSp2f/8ggppFF6jEoLz8ue5NMz/Crgk3kh/ae053Emg46hsL
+	0TFX6r08EqUgdXpAgKmJsycXklzk7puYnlv6TxVrVrZx
+X-Google-Smtp-Source: AAOMgpeZwNFjwd9TAg6Qe8sgppxC8Xg5VU65QxhofWaIcK3OP9MZt5UFpI3ckKq/ebJcfVga5oVFvXANVRfi06WNSTw=
+X-Received: by 2002:ac8:3209:: with SMTP id
+	x9-v6mr5350125qta.128.1532680847037; 
+	Fri, 27 Jul 2018 01:40:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180726151045.19586-1-akuster808@gmail.com>
-In-Reply-To: <20180726151045.19586-1-akuster808@gmail.com>
+References: <20180713140616.15664-1-hongzhi.song@windriver.com>
+	<20180713140616.15664-2-hongzhi.song@windriver.com>
+	<CAJTo0LbXD42g6wJ4z3Kgg+TXSRaAueLgWzYjkkdq13YO3aVb+Q@mail.gmail.com>
+	<37cf1c1d-c607-6ba3-20f0-8fe9e46706f1@windriver.com>
+In-Reply-To: <37cf1c1d-c607-6ba3-20f0-8fe9e46706f1@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 27 Jul 2018 01:37:56 -0700
-Message-ID: <CAMKF1sqwAVsyjjhwP5WRs3hAfO37ZUh=i3C9KMgHc7hfznt+fA@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
+Date: Fri, 27 Jul 2018 01:40:20 -0700
+Message-ID: <CAMKF1soQMbp7urcfEd0ri3XCQ=oyP_BwqJkoEDi8zDS1O4KqJg@mail.gmail.com>
+To: "Hongzhi.Song" <hongzhi.song@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] wireshark: update to 2.6.2
+Subject: Re: [meta-oe][PATCH 1/1] kernel-selftest: Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,64 +58,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 08:38:22 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 08:40:46 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-wireshark-native fails in do_install
+this fails on rpi
 
-| install: cannot stat
-'/mnt/a/oe/build/tmp/work/x86_64-linux/wireshark-native/1_2.6.2-r0/build/run/make-dissectors':
-No such file or directory
-| WARNING: /mnt/a/oe/build/tmp/work/x86_64-linux/wireshark-native/1_2.6.2-r0/temp/run.do_install.31339:1
-exit 1 from 'install -m 0755
-/mnt/a/oe/build/tmp/work/x86_64-linux/wireshark-native/1_2.6.2-r0/build/run/$f
-/mnt/a/oe/build/tmp/work/x86_64-linux/wireshark-native/1_2.6.2-r0/image/mnt/a/oe/build/tmp/work/x86_64-linux/wireshark-native/1_2.6.2-r0/recipe-sysroot-native/usr/bin'
-| ERROR: Function failed: do_install (log file is located at
-/mnt/a/oe/build/tmp/work/x86_64-linux/wireshark-native/1_2.6.2-r0/temp/log.do_install.31339)
-On Thu, Jul 26, 2018 at 8:11 AM Armin Kuster <akuster808@gmail.com> wrote:
+ERROR: Logfile of failure stored in:
+/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0=
+-r0/temp/log.do_compile.22198
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| NOTE: make -j 16 CROSS_COMPILE=3Darm-bec-linux-gnueabi- ARCH=3Darm
+CC=3Darm-bec-linux-gnueabi-gcc  -march=3Darmv7ve -mthumb -mfpu=3Dneon-vfpv4
+-mfloat-abi=3Dhard -mcpu=3Dcortex-a7 -fstack-protector-strong
+-D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-security
+-fstack-protector-strong  -D_FORTIFY_SOURCE=3D2 -Wformat
+-Wformat-security -Werror=3Dformat-security
+--sysroot=3D/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-=
+selftest/1.0-r0/recipe-sysroot
+AR=3Darm-bec-linux-gnueabi-ar LD=3Darm-bec-linux-gnueabi-ld
+--sysroot=3D/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-=
+selftest/1.0-r0/recipe-sysroot
+ DESTDIR=3D/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-s=
+elftest/1.0-r0/image
+-C /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/=
+1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
+| make: Entering directory
+'/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.=
+0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+| make -C ../../../lib/bpf
+OUTPUT=3D/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-sel=
+ftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/
+| make[1]: Entering directory
+'/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.=
+0-r0/kernel-selftest-1.0/tools/lib/bpf'
+|
+| Auto-detecting system features:
+| ...                        libelf: [ ^[[31mOFF^[[m ]
+| ...                           bpf: [ ^[[31mOFF^[[m ]
+|
+| BPF API too old
+| make[1]: *** [Makefile:219: bpfdep] Error 255
+| make[1]: *** Waiting for unfinished jobs....
+| No libelf found
+| make[1]: *** [Makefile:216: elfdep] Error 255
+|   HOSTCC   /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel=
+-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep.o
+|   HOSTLD   /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel=
+-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep-in.=
+o
+|   LINK     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel=
+-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep
+| make[1]: Leaving directory
+'/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.=
+0-r0/kernel-selftest-1.0/tools/lib/bpf'
+| make: *** [Makefile:33:
+/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0=
+-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/libbpf.a]
+Error 2
+| make: Leaving directory
+'/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.=
+0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+| ERROR: oe_runmake failed
+| WARNING: /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-s=
+elftest/1.0-r0/temp/run.do_compile.22198:1
+exit 1 from 'exit 1'
+| ERROR: Function failed: do_compile (log file is located at
+/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0=
+-r0/temp/log.do_compile.22198)
+
+On Mon, Jul 16, 2018 at 2:51 AM Hongzhi, Song
+<hongzhi.song@windriver.com> wrote:
 >
-> includes security fixes:
 >
-> wnpa-sec-2018-34 BGP dissector large loop. Bug 13741. CVE-2018-14342.
-> wnpa-sec-2018-35 ISMP dissector crash. Bug 14672. CVE-2018-14344.
-> wnpa-sec-2018-36 Multiple dissectors could crash. Bug 14675. CVE-2018-14340.
-> wnpa-sec-2018-37 ASN.1 BER dissector crash. Bug 14682. CVE-2018-14343.
-> wnpa-sec-2018-38 MMSE dissector infinite loop. Bug 14738. CVE-2018-14339.
-> wnpa-sec-2018-39 DICOM dissector crash. Bug 14742. CVE-2018-14341.
-> wnpa-sec-2018-40 Bazaar dissector infinite loop. Bug 14841. CVE-2018-14368.
-> wnpa-sec-2018-41 HTTP2 dissector crash. Bug 14869. CVE-2018-14369.
-> wnpa-sec-2018-42 CoAP dissector crash. Bug 14966. CVE-2018-14367.
 >
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../wireshark/{wireshark_2.6.1.bb => wireshark_2.6.2.bb}      | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/wireshark/{wireshark_2.6.1.bb => wireshark_2.6.2.bb} (95%)
+> On 2018=E5=B9=B407=E6=9C=8814=E6=97=A5 00:23, Burton, Ross wrote:
+> > On 13 July 2018 at 15:06, Hongzhi.Song <hongzhi.song@windriver.com> wro=
+te:
+> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd7810fab7487fb0aad327b76f1=
+be7cd7 \
+> > Why are you shipping your own copy of the kernel's COPYING file even
+> > though you copy another in that prefunc?
+> >
+> > Isn't it possible to just depend on kernel-source and build directly
+> > from the kernel source tree?
+> >
+> >> +# for bpf and vm
+> >> +DEPENDS =3D " \
+> >> +    elfutils \
+> >> +    libcap \
+> >> +    libcap-ng \
+> >> +    fuse \
+> >> +    util-linux \
+> >> +    rsync-native \
+> >> +"
+> > Really not convinced these dependencies are accurate.
+> >
+> >> +TEST_LIST =3D "bpf \
+> >> +             vm \
+> >> +"
+> > You're not listing memfd in here, but that is the only place which
+> > uses fuse as far as I can tell.
+> >
+> > My suggestion is to trim the DEPENDS back to the core minimum and use
+> > PACKAGECONIG to select what directories get built. This means you can
+> > have optional test suites where the dependencies are not in oe-core
+> > (fuse for memfd, for example), and get the right RDEPENDS too.
+> >
+> >> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=
+=3D${D}/opt/kselftest/${i} install
+> > FHS says /opt is for sysadmin-installed tools that are not package
+> > managed.  You're building a package.  You're also building a package
+> > which is essentially ptest.  I'd say inherit ptest, write a runner,
+> > and put all the binaries in $PTESTDIR.
 >
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-> similarity index 95%
-> rename from meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
-> rename to meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-> index 91c5e96bb0..4da0cecee4 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-> @@ -14,8 +14,8 @@ SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
+> Hi Burton,
 >
->  UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+> kernel-selftest is designed to be shared by ptest and oe-self, and thus i=
+s
+> not supposed to inherit ptest.
 >
-> -SRC_URI[md5sum] = "b0e9e5fe22e96d9fdfad18f750fa8f55"
-> -SRC_URI[sha256sum] = "ab6e5bbc3464c956347b8671ce8397950ad5daff3bf9964c967d495f4ddbcd88"
-> +SRC_URI[md5sum] = "086d235509717190d06554b2ab870209"
-> +SRC_URI[sha256sum] = "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
+> The suggestions you mentioned above will be modified soon.
 >
->  PE = "1"
+> --Hongzhi
 >
-> --
-> 2.17.1
+> >
+> > Ross
+> >
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
