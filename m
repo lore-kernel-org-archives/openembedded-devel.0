@@ -1,49 +1,39 @@
-Return-Path: <lukaszgardon555@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 1089460064
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f181.google.com (mail-qt0-f181.google.com
+	[209.85.216.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E2986067C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 17:43:53 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id t25-v6so6300620wmi.3
+	Fri, 27 Jul 2018 18:03:55 +0000 (UTC)
+Received: by mail-qt0-f181.google.com with SMTP id c15-v6so5951356qtp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 10:43:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=T5ufiSvoUsUaxo09s9O9c4MC0GDhF5iziMt278si/1E=;
-	b=K/LcC2upUZ3Pi2yluBLdjr+sIjleLUO5RpqomKzEzPV0dzP8tcK6IkMyXS4AGtY3X6
-	CPGc5nslYFIlojCSL/EQo/eAba1Sw0VTCTPhihfIoaLWossK3B4MCbDrGrZ0/tTAG292
-	wwCXxlMTB2KHcrLuX3ff2qeZ0gkNRXGIRubO7uLCDrFzfLJjxi5cdn0yLMxCupAYSSNM
-	3u5JKKalX8rS9Y2/vQ3OtM93LeMMxwE1zlEPGH6Y7vs9JDcgSV0k8VBfzd3PaqrmuZvQ
-	LHBugVjIIkuOOfmJzy/cAG8eibbGNkT/7IJVbFobevqjR8L9OqAStkiwRADUDxNmMO7/
-	N2/g==
+	Fri, 27 Jul 2018 11:03:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=T5ufiSvoUsUaxo09s9O9c4MC0GDhF5iziMt278si/1E=;
-	b=UCzPrPVAIxF9aJGEGokhrFYeJl6kIWqYgzDnpLxrFO/uC+r+u4P7PtEZ6S9d/uKEkH
-	9EwM6U751w7r5N0Xl6cNq7fiNj7eWfihkuY+CH7pV8B2pMBWVUkmRETKVLCl6ZOenDJ0
-	swuSHMEHjkszDliQj3spoWZogwcqdgj3ZIRbBM3laZx/rPiHiPjGdWmcXNrYclK1M9gf
-	a7Ul4d7T4VH9HUdX0ychkQu6DW+8TTFQLp11StejvMSoDBy8xv9v7Uv81eVPzsgvEjpJ
-	ShPx6egd33f37Bjmi6K2PYnPK5nrFc4K5+67ldLM7D30WQBCY0tecmA1ftdno+XM23cR
-	FLSQ==
-X-Gm-Message-State: AOUpUlG5p6Dwn5aIqIyzvKLUePjkaH7ep9g8pStyCukxYrpxoaweuOt9
-	QC6F9Ific7UVsRJRYwPtEQlqjLOJKwmZNw==
-X-Google-Smtp-Source: AAOMgpfimCqOniGpQMkMi07rYQAeQ3dZDONMl5zPJi8kON03EYuLYEzIiWhO32FFgYsVtFDcAYWQng==
-X-Received: by 2002:a1c:c95:: with SMTP id 143-v6mr5465465wmm.50.1532713434491;
-	Fri, 27 Jul 2018 10:43:54 -0700 (PDT)
-Received: from localhost.localdomain (public-gprs216950.centertel.pl.
-	[46.134.186.183]) by smtp.gmail.com with ESMTPSA id
-	d14-v6sm6298733wrr.12.2018.07.27.10.43.53
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+pLEDZvb0dWFs9N8rBgE6LrT/KusglTpH+wyDlEOB60=;
+	b=DCf+TD2VxuJz0T7B7MPARCOkDhMaSVgrEJ5dNzuIwLgWgtZuaDjPD3Lf4osu45swh2
+	0uTkoHRkeWNboTl4HJyxVJl01Hu48WbhKYPTw2EmsWv6212IsX1dbQSFFC5riFyKpomt
+	a5sZ5oInbTkNknxIG//EmH2+4VFSTuJRnkf9f/IZNLRKNIZPJnasQ0W3BFSdu1gsrUXe
+	NZiKf192vGWK94WmiTa0bsdrM7L1ORpUa8vLvlycYC4baK11a11xNlt7hDHhlCqVcm53
+	UJx/LGWdqn7c5nl2cUNfJUhZvBvQm2UQwYSNUn5AGPRuM86cW8i8sH8LkiKyB9/U+mnP
+	MPLw==
+X-Gm-Message-State: AOUpUlHIOL3c0ose7DzN3K+YX0B6984wS35w9Tm9P7E6w7Uhd78wZv3E
+	qdigXe5C7ekQGjezV14LBB4TznkADvA=
+X-Google-Smtp-Source: AAOMgpcubL6bW61AGivWOKcMG1jXzCqHa7ctcpFO8MpWVgEVnkTWZHANfgGX4S7AYe1Dz/2Z/3DrLQ==
+X-Received: by 2002:ac8:23b1:: with SMTP id
+	q46-v6mr6818251qtq.322.1532714635866; 
+	Fri, 27 Jul 2018 11:03:55 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.61.164])
+	by smtp.gmail.com with ESMTPSA id
+	j16-v6sm2444360qtp.13.2018.07.27.11.03.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 27 Jul 2018 10:43:53 -0700 (PDT)
-From: =?UTF-8?q?=C5=81ukasz=20Gardo=C5=84?= <lukaszgardon555@gmail.com>
+	Fri, 27 Jul 2018 11:03:55 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 19:43:50 +0200
-Message-Id: <20180727174350.17335-1-lukaszgardon555@gmail.com>
-X-Mailer: git-send-email 2.15.2 (Apple Git-101.1)
-MIME-Version: 1.0
-Subject: [meta-python][PATCHv5] python-tornado: upgrade to version 5.1
+Date: Fri, 27 Jul 2018 14:03:48 -0400
+Message-Id: <1532714628-4473-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-ndg-httpsclient: update to version 0.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,49 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 17:43:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 27 Jul 2018 18:03:55 -0000
 
-License-Update: Change license file from setup.py to
-LICENSE, based on the same the same license policy Apache 2.0.
-
-Signed-off-by: Łukasz Gardoń <lukaszgardon555@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-tornado.inc              | 6 +++---
- .../python/{python-tornado_4.5.3.bb => python-tornado_5.1.bb}       | 0
- .../python/{python3-tornado_4.5.3.bb => python3-tornado_5.1.bb}     | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-tornado_4.5.3.bb => python-tornado_5.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-tornado_4.5.3.bb => python3-tornado_5.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-ndg-httpsclient.inc        | 4 ++--
+ ...ython-ndg-httpsclient_0.5.0.bb => python-ndg-httpsclient_0.5.1.bb} | 0
+ ...hon3-ndg-httpsclient_0.5.0.bb => python3-ndg-httpsclient_0.5.1.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-ndg-httpsclient_0.5.0.bb => python-ndg-httpsclient_0.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-ndg-httpsclient_0.5.0.bb => python3-ndg-httpsclient_0.5.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
-index 29d10da6b..16899f88c 100644
---- a/meta-python/recipes-devtools/python/python-tornado.inc
-+++ b/meta-python/recipes-devtools/python/python-tornado.inc
-@@ -4,10 +4,10 @@ By using non-blocking network I/O, Tornado can scale to tens of thousands of ope
- polling, WebSockets, and other applications that require a long-lived connection to each user."
- HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=15;md5=8d463fc66ff8f275354ffe88d1896e12"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+index 4e07e4e..91235b9 100644
+--- a/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
++++ b/meta-python/recipes-devtools/python/python-ndg-httpsclient.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://MANIFEST.in;md5=ce22c0cd986d2de3f7073cd6b5523ae0"
  
--SRC_URI[md5sum] = "a5fc7fd4aea94867609a491ce65786f1"
--SRC_URI[sha256sum] = "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a"
-+SRC_URI[md5sum] = "bd264851c409f926d1dae1ad5055d28d"
-+SRC_URI[sha256sum] = "4f66a2172cb947387193ca4c2c3e19131f1c70fa8be470ddbbd9317fd0801582"
+-SRC_URI[md5sum] = "1c28be0449268359e795b3b5687feeb7"
+-SRC_URI[sha256sum] = "c009f5430790936b3a97eaf9f968516664d97e146ab2bda991f0caadb7cc088b"
++SRC_URI[md5sum] = "b0fc8ea38f87d2c1ab1ed79a95c078f9"
++SRC_URI[sha256sum] = "d72faed0376ab039736c2ba12e30695e2788c4aa569c9c3e3d72131de2592210"
  
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email \
-                    ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
-diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python-tornado_5.1.bb
+ PYPI_PACKAGE = "ndg_httpsclient"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.5.0.bb b/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.5.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
-rename to meta-python/recipes-devtools/python/python-tornado_5.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb b/meta-python/recipes-devtools/python/python3-tornado_5.1.bb
+rename from meta-python/recipes-devtools/python/python-ndg-httpsclient_0.5.0.bb
+rename to meta-python/recipes-devtools/python/python-ndg-httpsclient_0.5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.0.bb b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
-rename to meta-python/recipes-devtools/python/python3-tornado_5.1.bb
+rename from meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.5.1.bb
 -- 
-2.15.2 (Apple Git-101.1)
+2.7.4
 
 
