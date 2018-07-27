@@ -1,50 +1,49 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-oi0-f66.google.com (mail-oi0-f66.google.com
 	[209.85.218.66])
-	by mail.openembedded.org (Postfix) with ESMTP id CA3C978CEC
+	by mail.openembedded.org (Postfix) with ESMTP id 3EBE478CEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 21:40:18 +0000 (UTC)
-Received: by mail-oi0-f66.google.com with SMTP id v8-v6so11552488oie.5
+	Fri, 27 Jul 2018 21:41:21 +0000 (UTC)
+Received: by mail-oi0-f66.google.com with SMTP id q11-v6so11530873oic.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 14:40:20 -0700 (PDT)
+	Fri, 27 Jul 2018 14:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=RV9uRCIXSqmAq9dRyKOKvdUHuvVjLNNOVGSv5Ce3V7s=;
-	b=lPx1e9+W/vj65+gRQtp8GEs6avlRGgwvyZCR8NuMwari9GzuUNOxjnjovtnnhBRewj
-	s9Bs2tTuEYT6RYhuCh56k4JTQScHVLMXtovC8z+PS9SPEZnOYvr8688cacQpnFcv2hLN
-	owcGV2kKvYYaJCeXIXzN690BsA3MeKGXFqkyPz5RDZRXLu7Th9/scfHMU4YpY7XHKaGn
-	Mkon2aWqXSyWpjgAFavUck0pV1bpWCohwzYkF934Ybn56Ctzycf5H7bh5qbWqY/sR/at
-	/PE1/dEdutcqxzSxlDx3yX4siyd4e4C/H8+ewO2JpurGEmXrSWaOyGxUKwPWyGL2Bpp+
-	zYvw==
+	bh=VBfWwwCDa47i4MEOHvqta9GxHxTd26km6WHzTfj3Wxo=;
+	b=HS6Y5YmU3znuowHetoU0O3TV8Ywgt2zkuBaT1sf/p4bSKL9+ejAVkK7ey3gipflGeL
+	k83qwnsqzc4FDy50ZSokW0tVyDOp9iW6XVQFLi1Cp1BVaw9WPrKzUFu5xBTW6Q2LBC6B
+	QwgjdLbynef5v7ey8pBEQwKABjapXJe+bm3n5H37U1fQB0TXO+sj9WQ59e5am2/w2kj5
+	1/9a1fv/ii34F40WWnmHyL6navRLK090XRpolr0at3BCeLEOLDSlVNVpd1lUHE5MOKHr
+	h8TnYWMUsthrUQd3RsPP7PczclrFihFaQ2z/cf4tx7btSd0ckI//MPbVqy76AboeqEXS
+	r5Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=RV9uRCIXSqmAq9dRyKOKvdUHuvVjLNNOVGSv5Ce3V7s=;
-	b=H8Km3WoNNRy5PGzHPIpc8NpwHOa57eT1BBCLCkNg2B3bwz4ZnMa48GhA7CiL3osiaC
-	g0hrIGpN1ucSwVpNxhHkOBdnly3luYVdP7U//lEV3K4MRqdZ9x/FKleznrrnMptPi9+I
-	MwMIPGBdp3VC7DVUxLbXnWLzi1eDkAN0p/upsFkYuVGKaSJR1ix5on9EcbLk15K9qMTP
-	5zW814/1XpkBLoYvkir6R1gObBK4lgG0cpuwdBzHxMb+khHjx9IFE6TjwoIniz6cibRK
-	Rh7EVvJOAYRntMNBxUX7SyjJapFCdZ99wPkLwjorMRtr7ngXPHPVMuxbCFWmasScOwdj
-	+/Hg==
-X-Gm-Message-State: AOUpUlHBanEhOEjm1lGhcmRttldLlaZdC7JD8NxlLI4k+bx672v0OA9h
-	l4Ua0otcVWFn7Wc7BeITZYG1hGyo
-X-Google-Smtp-Source: AAOMgpfsIO+C3V7uxJaqgCp+JLi2CIij64NjegCtiOMnlg6ifFpq6ExsK7hL4J2a/m9HKBaisoufag==
-X-Received: by 2002:aca:5841:: with SMTP id
-	m62-v6mr8869512oib.346.1532727619481; 
-	Fri, 27 Jul 2018 14:40:19 -0700 (PDT)
+	bh=VBfWwwCDa47i4MEOHvqta9GxHxTd26km6WHzTfj3Wxo=;
+	b=oUwWjHsRGmbFKvqsVWAC1E6U+gArw++CAKO5aMp5uA5K4CXRrsRMnOd0Hm1vQFUuqT
+	WMGiPL0lGeBBwBI1qRLRj4LEzm96JGLRR1F4Mew5SvV0QQzSeMXD/fT6keJ/vbu0Pj2G
+	12rNiccauznxAIBc04iDeZUZdOIiBW3Yj6C1kVXGebAQcTHPcCTeElpLuDjgvY0Uxgez
+	4LKiohyeJO93xo68hqPIjFw6c0nU8Ia+DYfxBkXn83xbnSpkzxu2mqP0ZepbmNclbBSb
+	IenZbzFwKaXiZ+1YN53smqzUf0/cQ5DKGAUh3FA69pEB3WKXxTtZ8mV+KvfbDxUFJ8pT
+	QNFw==
+X-Gm-Message-State: AOUpUlF7MZRak+XBisGJmIxmjoESWgYfc8yhGdm99TvMxW0P7g2s7xUj
+	TkWbGqRW8O6UfWRF7ytbRo3A3ORz
+X-Google-Smtp-Source: AAOMgpfxR5wt6gYphs7+jAHMBeUVeOcJ6gwBs236SGpUE+XH0ASjoNx3ekj5cDG0eXwk4pr4pX5QKw==
+X-Received: by 2002:aca:1d2:: with SMTP id
+	201-v6mr7799308oib.296.1532727682308; 
+	Fri, 27 Jul 2018 14:41:22 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:9e0:3a49:ede8:663?
 	([2601:202:4180:c33:9e0:3a49:ede8:663])
 	by smtp.gmail.com with ESMTPSA id
-	e204-v6sm7265231oif.21.2018.07.27.14.40.18
+	e19-v6sm3091294oii.56.2018.07.27.14.41.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jul 2018 14:40:18 -0700 (PDT)
-To: Carlos Rafael Giani <dv@pseudoterminal.org>,
-	openembedded-devel@lists.openembedded.org
-References: <20180727202524.31873-1-dv@pseudoterminal.org>
+	Fri, 27 Jul 2018 14:41:21 -0700 (PDT)
+To: Derek Straka <derek@asterius.io>, openembedded-devel@lists.openembedded.org
+References: <1532722568-9134-1-git-send-email-derek@asterius.io>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -90,13 +89,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <e12d30b6-bd70-9499-181f-3e17e6f9d57b@gmail.com>
-Date: Fri, 27 Jul 2018 14:40:17 -0700
+Message-ID: <c9fc0732-de4a-2691-240e-b3968156f76b@gmail.com>
+Date: Fri, 27 Jul 2018 14:41:19 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180727202524.31873-1-dv@pseudoterminal.org>
-Subject: Re: [meta-multimedia][PATCH] libopenmpt: add recipe
+In-Reply-To: <1532722568-9134-1-git-send-email-derek@asterius.io>
+Subject: Re: [meta-python][PATCH] python-parse: update to version 1.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,153 +108,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 21:40:18 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 21:41:21 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 07/27/2018 01:25 PM, Carlos Rafael Giani wrote:
-> libopenmpt is a cross-platform C++ and C library to decode tracked music
-> files ("modules", like the .mod .xm .s3m .it formats) into raw PCM audio.
-> It is based on the player code of OpenMPT module tracker.
->
-> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org
+On 07/27/2018 01:16 PM, Derek Straka wrote:
+> Signed-off-by: Derek Straka <derek@asterius.io>
 > ---
->  .../libopenmpt/files/run-ptest                |   9 ++
->  .../libopenmpt/libopenmpt_0.3.10.bb           | 104 ++++++++++++++++++
->  2 files changed, 113 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
->  create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+>  .../python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb}         | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb} (54%)
 >
-> diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
-> new file mode 100644
-> index 000000000..84981b22c
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
-> @@ -0,0 +1,9 @@
-> +#!/bin/sh
-> +
-> +./libopenmpttest >/dev/null 2>&1
-> +
-> +if [ $? -eq 0 ]; then
-> +   echo "PASS: libopenmpttest"
-> +else
-> +   echo "FAIL: libopenmpttest"
-> +fi
-> diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-> new file mode 100644
-> index 000000000..dddf80407
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-> @@ -0,0 +1,104 @@
-> +SUMMARY = "C and C++ cross-platform library for decoding tracked music files (modules)"
-> +DESCRIPTION = "libopenmpt is a cross-platform C++ and C library to decode tracked \
-> +music files (modules) into a raw PCM audio stream. It also comes with openmpt123, a \
-> +cross-platform command-line or terminal based module file player, and libopenmpt_modplug, \
-> +a wrapper around libopenmpt that provides an interface that is ABI compatile with \
-> +libmodplug. libopenmpt is based on the player code of the OpenMPT project."
-> +HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
-> +SECTION = "libs"
-> +
-> +DEPENDS = "virtual/libiconv"
-> +
-> +RDEPENDS_${PN}_libc-glibc = " \
-> +    glibc-gconv-cp1252 \
-> +    glibc-gconv-ibm437 \
-> +    glibc-gconv-iso8859-1 \
-> +    glibc-gconv-iso8859-15 \
-The style seems to be a bit off. Please check
-https://www.openembedded.org/wiki/Styleguide
-- armin
-> +"
-> +
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e804150573f149befef6c07e173f20c3"
-> +
-> +SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
-> +           file://run-ptest \
-> +          "
-> +SRC_URI[md5sum] = "66bbc6fbb5f27a554cb145d805e9ef9d"
-> +SRC_URI[sha256sum] = "14a137b8d1a20e1b6a5e67cbc9467ab7e5e4e67d5aa38a247afc825685c53939"
-> +
-> +S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
-> +
-> +inherit autotools pkgconfig ptest
-> +
-> +PACKAGECONFIG ??= " \
-> +    libopenmpt-modplug openmpt123 \
-> +    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
-> +    flac mpg123 ogg sndfile vorbis vorbisfile zlib \
-> +    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
-> +"
-> +
-> +# libopenmpt_modplug is a library that wraps libopenmpt calls into
-> +# functions that are ABI compatible with libmodplug. This allows for
-> +# using modplug headers and linking against libopenmpt_modplug
-> +# instead of against the original libmodplug library.
-> +# NOTE: The wrapper is compatible to the ABI from libmodplug version
-> +# 0.8.8 and newer.
-> +PACKAGECONFIG[libopenmpt-modplug] = "--enable-libopenmpt_modplug,--disable-libopenmpt_modplug"
-> +PACKAGECONFIG[openmpt123]         = "--enable-openmpt123,--disable-openmpt123"
-> +PACKAGECONFIG[tests]              = "--enable-tests,--disable-tests"
-> +
-> +# These packageconfigs affect openmpt123
-> +PACKAGECONFIG[flac]               = "--with-flac,--without-flac,flac"
-> +PACKAGECONFIG[mpg123]             = "--with-mpg123,--without-mpg123,mpg123"
-> +PACKAGECONFIG[ogg]                = "--with-ogg,--without-ogg,libogg"
-> +PACKAGECONFIG[portaudio]          = "--with-portaudio,--without-portaudio,portaudio-v19"
-> +PACKAGECONFIG[pulseaudio]         = "--with-pulseaudio,--without-pulseaudio,pulseaudio"
-> +PACKAGECONFIG[sdl]                = "--with-sdl,--without-sdl,virtual/libsdl"
-> +PACKAGECONFIG[sdl2]               = "--with-sdl2,--without-sdl2,virtual/libsdl2"
-> +PACKAGECONFIG[sndfile]            = "--with-sndfile,--without-sndfile,libsndfile1"
-> +PACKAGECONFIG[vorbis]             = "--with-vorbis,--without-vorbis,libvorbis"
-> +PACKAGECONFIG[vorbisfile]         = "--with-vorbisfile,--without-vorbisfile,libvorbis"
-> +PACKAGECONFIG[zlib]               = "--with-zlib,--without-zlib,zlib"
-> +
-> +# --disable-libmodplug is necessary, since otherwise we'd
-> +# have a collision with the libmodplug package, because of the
-> +# libmodplug.so file. (libmodplug.so from libopenmpt isintended
-> +# to be used as a drop-in replacement, and according to the
-> +# documentation, is not complete.)
-> +EXTRA_OECONF += " \
-> +    --disable-doxygen-doc \
-> +    --disable-examples \
-> +    --disable-libmodplug \
-> +    --without-portaudiocpp \
-> +"
-> +
-> +# Since version 0.3, libopenmpt uses SemVer 2.0.0 versioning.
-> +# The SemVer versioning scheme is incompatible with Debian/Ubuntu
-> +# package version names.
-> +DEBIAN_NOAUTONAME_${PN} = "1"
-> +DEBIAN_NOAUTONAME_${PN}-modplug = "1"
-> +
-> +PACKAGES =+ "${PN}-modplug ${PN}-openmpt123 ${PN}-openmpt123-doc"
-> +FILES_${PN}-modplug = "${libdir}/libopenmpt_modplug.so.*"
-> +FILES_${PN}-openmpt123 = "${bindir}/openmpt123"
-> +FILES_${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
-> +
-> +do_compile_ptest() {
-> +    oe_runmake ${PARALLEL_MAKE} libopenmpttest
-> +}
-> +
-> +do_install_ptest() {
-> +    install -d ${D}${PTEST_PATH}/test
-> +    install -m 0755 ${B}/libopenmpttest ${D}${PTEST_PATH}
-> +    install -m 0644 ${S}/test/test.mptm ${D}${PTEST_PATH}/test
-> +    install -m 0644 ${S}/test/test.s3m ${D}${PTEST_PATH}/test
-> +    install -m 0644 ${S}/test/test.xm ${D}${PTEST_PATH}/test
-> +
-> +    install -d ${D}${PTEST_PATH}/libopenmpt
-> +    install -m 0644 ${S}/libopenmpt/libopenmpt_version.mk ${D}${PTEST_PATH}/libopenmpt
-> +}
-> +
-> +python __anonymous() {
-> +    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
-> +    if ("sdl" in packageconfig) and ("sdl2" in packageconfig):
-> +        bb.error("sdl and sdl2 packageconfigs cannot be both enabled")
-> +}
+> diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+> similarity index 54%
+> rename from meta-python/recipes-devtools/python/python-parse_1.8.2.bb
+> rename to meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+> index 8e16372..c66d4c8 100644
+> --- a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
+> +++ b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+> @@ -1,9 +1,9 @@
+>  SUMMARY = "Parse strings using a specification based on the Python format() syntax"
+>  LICENSE = "BSD"
+> -LIC_FILES_CHKSUM = "file://parse.py;beginline=1191;endline=1209;md5=5147afdd9b3615290ad8733f0137a1a1"
+> +LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
+
+Why did the license checksum change? maybe add reason as part of commit
+header
+
+>  
+> -SRC_URI[md5sum] = "42002338551bdfa0f01bbe4e679a17dd"
+> -SRC_URI[sha256sum] = "8048dde3f5ca07ad7ac7350460952d83b63eaacecdac1b37f45fd74870d849d2"
+> +SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
+> +SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
+>  
+>  inherit pypi setuptools
+>  
 
 
