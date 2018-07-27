@@ -1,32 +1,39 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 26BEF78CDD;
-	Fri, 27 Jul 2018 19:58:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6RJw0Ds021631
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 27 Jul 2018 12:58:01 -0700 (PDT)
-Received: from [172.25.44.2] (172.25.44.2) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.399.0;
-	Fri, 27 Jul 2018 12:58:00 -0700
-To: Aditya Tayade <Aditya.Tayade@kpit.com>,
-	"openembedded-issues@lists.openembedded.org"
-	<openembedded-issues@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <MA1PR01MB053655685322C5FE49975DADEE550@MA1PR01MB0536.INDPRD01.PROD.OUTLOOK.COM>
-	<MAXPR01MB034862B6CB3CFEF598A3BA47912A0@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <98805952-f1f9-d24e-03c2-8f58fbc64d1b@windriver.com>
-Date: Fri, 27 Jul 2018 15:57:59 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <MAXPR01MB034862B6CB3CFEF598A3BA47912A0@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
-X-Originating-IP: [172.25.44.2]
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	Nisha Parrakat <Nisha.Parrakat@kpit.com>
-Subject: Re: [meta-openembedded] Original ltrace_git.bb SRCREV commit used is now unavailable in git tarball from ltrace.org
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A62C878CDC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jul 2018 20:05:40 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id n6-v6so6320681qtl.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jul 2018 13:05:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+9vBkC4yOZ6aZeltK0gniUNBkYdLfJuBUdSCbKCn+XI=;
+	b=Q0+Yve+g4qFJo+j+BcaKwrW6HngdhIRLN9eDnREgjvKiksClPe1nY3iumsFZhlEB//
+	GVkDqn0W3UdqIZisdx1Z25wf9rrYbwmKlbiMwDCtduSqN7N4YBOEuOSt05YNQht3rz4M
+	e2lNKotGOS/cx66Gb6/ZqhWy0wbjE7hiXWWq0a3/7gH5aTNNCYlwg+BdhOfslr/SAm8c
+	qAVTZ4J0b49MDs6hwMvnw9+r8W6ujOIOZ2w5HDSmpx2GEUxvRDHXQNfYUXjPpH8pP1AM
+	UWWru9yhsxqcRlQEXMOLv3uF45A7aS+eCP/SmNhA8EV5U6RrBSTXJxBZBfEvzZrdDLmv
+	Ifwg==
+X-Gm-Message-State: AOUpUlGIPzgkc+fXVTUfNlnZi2OylZbhqmylwNI0mYRczrXuDfLtDGZ2
+	WEuWpGYvBaR7i+desnGHCFvsrto8EG4=
+X-Google-Smtp-Source: AAOMgpe4xd7yyuUL9SwrYXH2YmrhwDYkGpTsB4dhkW1wGwQyqPeVH532ALrqz8sfGNt2pwyJURTxIQ==
+X-Received: by 2002:ac8:705a:: with SMTP id
+	y26-v6mr7892522qtm.118.1532721941167; 
+	Fri, 27 Jul 2018 13:05:41 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.61.164])
+	by smtp.gmail.com with ESMTPSA id
+	k3-v6sm3766628qkl.95.2018.07.27.13.05.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 27 Jul 2018 13:05:40 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Jul 2018 16:05:32 -0400
+Message-Id: <1532721932-28435-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-alembic: update to version 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,82 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 19:58:07 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jul 2018 20:05:40 -0000
 
-On 07/27/2018 06:34 AM, Aditya Tayade wrote:
-> Hi,
-> 
-> 
-> Me too facing same issue. Any advice on this.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-alembic.inc                | 4 ++--
+ .../python/{python-alembic_0.9.10.bb => python-alembic_1.0.0.bb}      | 0
+ .../python/{python3-alembic_0.9.10.bb => python3-alembic_1.0.0.bb}    | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-alembic_0.9.10.bb => python-alembic_1.0.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_0.9.10.bb => python3-alembic_1.0.0.bb} (100%)
 
-Archived versions to fix previous releases may be here:
-    https://alioth-archive.debian.org/git/collab-maint/
-
-for master, a commit to pull from ltrace.org makes sense
-to me but someone who follows debian development might
-be able to help locate the git repo. All I found was:
-    https://alioth-archive.debian.org/git/collab-maint/
-and a maze of twisty little hyperlinks.
-
-Aditya, Nisha,
-
-Will you send a patch? See:
-    https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
-
-../Randy
-
-
-> 
-> 
-> 
-> Regards,
-> 
-> Aditya Tayade
-> 
-> ________________________________
-> From: Nisha Parrakat
-> Sent: Tuesday, July 24, 2018 4:08:12 PM
-> To: openembedded-issues@lists.openembedded.org; openembedded-devel@lists.openembedded.org
-> Cc: yocto@yoctoproject.org
-> Subject: [meta-openembedded] Original ltrace_git.bb SRCREV commit used is now unavailable in git tarball from ltrace.org
-> 
-> 
-> Hi all,
-> 
-> 
-> ltrace recipe is pointing to a fetch url (git://anonscm.debian.org/collab-maint/ltrace.git;branch=master) that is discontinued now.
-> 
-> No ltrace found in alternate salsa.debian.org.
-> 
-> Tarball for ltrace is present in ltrace.org but the SRCREV in the mentioned in the original recipe is not found any more but we do see the same commit with another sha but a different git history.
-> 
-> 
-> Please advice if we should modify the SRCREV to reflect the new git source from ltrace.org?
-> 
-> 
-> original SRCREV in recipe c22d3594...
-> 
-> corresponding SRCREV coming from the git tarball is ea8928da...
-> 
-> 
-> Please advice .
-> 
-> 
-> 
-> 
-> Regards,
-> Ms Nisha Parrakat
-> KPIT Technologies Ltd, Pune, INDIA
-> 
-> 
-> This message contains information that may be privileged or confidential and is the property of the KPIT Technologies Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Technologies Ltd. does not accept any liability for virus infected mails.
-> 
-
-
+diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
+index 4de845c..477e89c 100644
+--- a/meta-python/recipes-devtools/python/python-alembic.inc
++++ b/meta-python/recipes-devtools/python/python-alembic.inc
+@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
+ 
+-SRC_URI[md5sum] = "117dac728cd081739bdbed73fe252a7d"
+-SRC_URI[sha256sum] = "1cd32df9a3b8c1749082ef60ffbe05ff16617b6afadfdabc680dcb9344af33d7"
++SRC_URI[md5sum] = "762ab9ba56d1c0b1bfbc7c9f7f849c92"
++SRC_URI[sha256sum] = "52d73b1d750f1414fa90c25a08da47b87de1e4ad883935718a8f36396e19e78e"
+ 
+ PYPI_PACKAGE = "alembic"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-alembic_0.9.10.bb b/meta-python/recipes-devtools/python/python-alembic_1.0.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-alembic_0.9.10.bb
+rename to meta-python/recipes-devtools/python/python-alembic_1.0.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_0.9.10.bb b/meta-python/recipes-devtools/python/python3-alembic_1.0.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-alembic_0.9.10.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.0.0.bb
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.7.4
+
 
