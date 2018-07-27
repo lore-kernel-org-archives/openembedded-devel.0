@@ -1,18 +1,46 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id CDAD278BFB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id D961378CB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 20:25:29 +0000 (UTC)
-Received: from localhost.localdomain (62-178-50-190.cable.dynamic.surfer.at
-	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id D0A1C173C
+	Fri, 27 Jul 2018 20:52:40 +0000 (UTC)
+Received: by mail-qk0-f178.google.com with SMTP id c126-v6so4158288qkd.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 22:25:29 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 22:25:24 +0200
-Message-Id: <20180727202524.31873-1-dv@pseudoterminal.org>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] libopenmpt: add recipe
+	Fri, 27 Jul 2018 13:52:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=4b1/JWncf4BwOKlegFqrylt2dhivTOsDA4W1wGiGjgk=;
+	b=O8B7WUbsq5h/rH0b3I0FT9rEuHaz3g0NP+upFfbgIEOrH6iMGmDLprzAgkW8oSn5Ve
+	ZxHiQxJVMZfPibfJODjkc2KgbkXAoP3sEnghRzT8VUKgXCAsYyNj3qcOZ9iFJCso+BxS
+	82wZPvi0zHAun0iR1eoGDxPFHyeesFnvUK03SBSU8+ujAe5FGt6H0HLQ4OT3iGc2JJVF
+	kdxG/a+zRFwoXMzQ+RAMV3IBdIvns4P1nT7kooJTE816DntndL9mF2OUaC8ugB3ilqcA
+	IEGJx/BqgWcq1CnWqtdgDmv/KGCHkBYPpz2QFiXO7xYMT/Uabmf+rIYCMIVScwBH1uIR
+	lJRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=4b1/JWncf4BwOKlegFqrylt2dhivTOsDA4W1wGiGjgk=;
+	b=MhiTucaYVGz+2oQUGzHQhtcD3GRimsZyNlZN3awSmGdNelJtbs1UMcnLXIK1e5wAzL
+	zzLDz9CAabixoJ5iWK7ENe+2s1emL/kF5u+iZYICgDrdI7MgSXQOUE/NRRSh10H/wFqR
+	QrRQWaUXM6cKPfi6Kan/nTuIgtkOTs7CN+xDnYCVA1szrLiXBmoxVd2My3XnzBh1qV9m
+	BAk3ivbKpYMlB5k+txiFsaCi6YaLc7fRp4M/nf7KTHQX/0HAwcj4WOWRjNKydRDcNqsp
+	/ZsxBr6M8L8+9npNnmTLRnv2QdjMrLrMtZfnac3UB/6mOu7Dxae3k6olIneMbL89fZnD
+	1MGg==
+X-Gm-Message-State: AOUpUlG6xxbY5MBYZDer+4uVDnugfHEJenqel2ceXew2sMgf8O6Z9Cl6
+	yzRlWKhQwmz4/I4HU5PGkMqOy/RqFJoUxt9mskAJuA==
+X-Google-Smtp-Source: AAOMgpc84TFjn841oRyELF6jsVWtIL+V7iALEaC0G5W7qkMMOeo88lRROgegLv/z9LAXBNyQmbMFjdURjpYuQJySdHw=
+X-Received: by 2002:a37:417:: with SMTP id 23-v6mr7066824qke.12.1532724761585; 
+	Fri, 27 Jul 2018 13:52:41 -0700 (PDT)
+MIME-Version: 1.0
+References: <1532717148-965-1-git-send-email-derek@asterius.io>
+In-Reply-To: <1532717148-965-1-git-send-email-derek@asterius.io>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 27 Jul 2018 13:52:15 -0700
+Message-ID: <CAMKF1soo_ez-zBEuK1JFuN3SRyZfh3ZxyD8Sy0KV6GcHhBnRfw@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-greenlet: update to version 0.4.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,146 +53,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 20:25:30 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 20:52:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-libopenmpt is a cross-platform C++ and C library to decode tracked music
-files ("modules", like the .mod .xm .s3m .it formats) into raw PCM audio.
-It is based on the player code of OpenMPT module tracker.
+this is already submitted earlier, I had to fix the checksums but its in queue
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
----
- .../libopenmpt/files/run-ptest                |   9 ++
- .../libopenmpt/libopenmpt_0.3.10.bb           | 104 ++++++++++++++++++
- 2 files changed, 113 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
- create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
-new file mode 100644
-index 000000000..84981b22c
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
-@@ -0,0 +1,9 @@
-+#!/bin/sh
-+
-+./libopenmpttest >/dev/null 2>&1
-+
-+if [ $? -eq 0 ]; then
-+   echo "PASS: libopenmpttest"
-+else
-+   echo "FAIL: libopenmpttest"
-+fi
-diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-new file mode 100644
-index 000000000..dddf80407
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-@@ -0,0 +1,104 @@
-+SUMMARY = "C and C++ cross-platform library for decoding tracked music files (modules)"
-+DESCRIPTION = "libopenmpt is a cross-platform C++ and C library to decode tracked \
-+music files (modules) into a raw PCM audio stream. It also comes with openmpt123, a \
-+cross-platform command-line or terminal based module file player, and libopenmpt_modplug, \
-+a wrapper around libopenmpt that provides an interface that is ABI compatile with \
-+libmodplug. libopenmpt is based on the player code of the OpenMPT project."
-+HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
-+SECTION = "libs"
-+
-+DEPENDS = "virtual/libiconv"
-+
-+RDEPENDS_${PN}_libc-glibc = " \
-+    glibc-gconv-cp1252 \
-+    glibc-gconv-ibm437 \
-+    glibc-gconv-iso8859-1 \
-+    glibc-gconv-iso8859-15 \
-+"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e804150573f149befef6c07e173f20c3"
-+
-+SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
-+           file://run-ptest \
-+          "
-+SRC_URI[md5sum] = "66bbc6fbb5f27a554cb145d805e9ef9d"
-+SRC_URI[sha256sum] = "14a137b8d1a20e1b6a5e67cbc9467ab7e5e4e67d5aa38a247afc825685c53939"
-+
-+S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
-+
-+inherit autotools pkgconfig ptest
-+
-+PACKAGECONFIG ??= " \
-+    libopenmpt-modplug openmpt123 \
-+    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
-+    flac mpg123 ogg sndfile vorbis vorbisfile zlib \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
-+"
-+
-+# libopenmpt_modplug is a library that wraps libopenmpt calls into
-+# functions that are ABI compatible with libmodplug. This allows for
-+# using modplug headers and linking against libopenmpt_modplug
-+# instead of against the original libmodplug library.
-+# NOTE: The wrapper is compatible to the ABI from libmodplug version
-+# 0.8.8 and newer.
-+PACKAGECONFIG[libopenmpt-modplug] = "--enable-libopenmpt_modplug,--disable-libopenmpt_modplug"
-+PACKAGECONFIG[openmpt123]         = "--enable-openmpt123,--disable-openmpt123"
-+PACKAGECONFIG[tests]              = "--enable-tests,--disable-tests"
-+
-+# These packageconfigs affect openmpt123
-+PACKAGECONFIG[flac]               = "--with-flac,--without-flac,flac"
-+PACKAGECONFIG[mpg123]             = "--with-mpg123,--without-mpg123,mpg123"
-+PACKAGECONFIG[ogg]                = "--with-ogg,--without-ogg,libogg"
-+PACKAGECONFIG[portaudio]          = "--with-portaudio,--without-portaudio,portaudio-v19"
-+PACKAGECONFIG[pulseaudio]         = "--with-pulseaudio,--without-pulseaudio,pulseaudio"
-+PACKAGECONFIG[sdl]                = "--with-sdl,--without-sdl,virtual/libsdl"
-+PACKAGECONFIG[sdl2]               = "--with-sdl2,--without-sdl2,virtual/libsdl2"
-+PACKAGECONFIG[sndfile]            = "--with-sndfile,--without-sndfile,libsndfile1"
-+PACKAGECONFIG[vorbis]             = "--with-vorbis,--without-vorbis,libvorbis"
-+PACKAGECONFIG[vorbisfile]         = "--with-vorbisfile,--without-vorbisfile,libvorbis"
-+PACKAGECONFIG[zlib]               = "--with-zlib,--without-zlib,zlib"
-+
-+# --disable-libmodplug is necessary, since otherwise we'd
-+# have a collision with the libmodplug package, because of the
-+# libmodplug.so file. (libmodplug.so from libopenmpt isintended
-+# to be used as a drop-in replacement, and according to the
-+# documentation, is not complete.)
-+EXTRA_OECONF += " \
-+    --disable-doxygen-doc \
-+    --disable-examples \
-+    --disable-libmodplug \
-+    --without-portaudiocpp \
-+"
-+
-+# Since version 0.3, libopenmpt uses SemVer 2.0.0 versioning.
-+# The SemVer versioning scheme is incompatible with Debian/Ubuntu
-+# package version names.
-+DEBIAN_NOAUTONAME_${PN} = "1"
-+DEBIAN_NOAUTONAME_${PN}-modplug = "1"
-+
-+PACKAGES =+ "${PN}-modplug ${PN}-openmpt123 ${PN}-openmpt123-doc"
-+FILES_${PN}-modplug = "${libdir}/libopenmpt_modplug.so.*"
-+FILES_${PN}-openmpt123 = "${bindir}/openmpt123"
-+FILES_${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
-+
-+do_compile_ptest() {
-+    oe_runmake ${PARALLEL_MAKE} libopenmpttest
-+}
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/test
-+    install -m 0755 ${B}/libopenmpttest ${D}${PTEST_PATH}
-+    install -m 0644 ${S}/test/test.mptm ${D}${PTEST_PATH}/test
-+    install -m 0644 ${S}/test/test.s3m ${D}${PTEST_PATH}/test
-+    install -m 0644 ${S}/test/test.xm ${D}${PTEST_PATH}/test
-+
-+    install -d ${D}${PTEST_PATH}/libopenmpt
-+    install -m 0644 ${S}/libopenmpt/libopenmpt_version.mk ${D}${PTEST_PATH}/libopenmpt
-+}
-+
-+python __anonymous() {
-+    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
-+    if ("sdl" in packageconfig) and ("sdl2" in packageconfig):
-+        bb.error("sdl and sdl2 packageconfigs cannot be both enabled")
-+}
--- 
-2.17.1
-
+On Fri, Jul 27, 2018 at 11:46 AM Derek Straka <derek@asterius.io> wrote:
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/recipes-devtools/python/python-greenlet.inc               | 4 ++--
+>  .../python/{python-greenlet_0.4.13.bb => python-greenlet_0.4.14.bb}   | 0
+>  .../python/{python3-greenlet_0.4.13.bb => python3-greenlet_0.4.14.bb} | 0
+>  3 files changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-greenlet_0.4.13.bb => python-greenlet_0.4.14.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-greenlet_0.4.13.bb => python3-greenlet_0.4.14.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-greenlet.inc b/meta-python/recipes-devtools/python/python-greenlet.inc
+> index 7a42240..fcd81f6 100644
+> --- a/meta-python/recipes-devtools/python/python-greenlet.inc
+> +++ b/meta-python/recipes-devtools/python/python-greenlet.inc
+> @@ -3,7 +3,7 @@ LICENSE = "MIT & PSF"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+>                      file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+>
+> -SRC_URI[md5sum] = "6e0b9dd5385f81d478451ec8ed1d62b3"
+> -SRC_URI[sha256sum] = "0fef83d43bf87a5196c91e73cb9772f945a4caaff91242766c5916d1dd1381e4"
+> +SRC_URI[md5sum] = "a87b6028c3b742b210bf5973939db595"
+> +SRC_URI[sha256sum] = "f1cc268a15ade58d9a0c04569fe6613e19b8b0345b64453064e2c3c6d79051af"
+>
+>  inherit pypi
+> diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.13.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.14.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-greenlet_0.4.13.bb
+> rename to meta-python/recipes-devtools/python/python-greenlet_0.4.14.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.13.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.14.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-greenlet_0.4.13.bb
+> rename to meta-python/recipes-devtools/python/python3-greenlet_0.4.14.bb
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
