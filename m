@@ -1,50 +1,49 @@
-Return-Path: <williamdelacre@gmail.com>
-Received: from mail-ua0-f172.google.com (mail-ua0-f172.google.com
-	[209.85.217.172])
-	by mail.openembedded.org (Postfix) with ESMTP id BC93078C97
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D005A78D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 16:04:47 +0000 (UTC)
-Received: by mail-ua0-f172.google.com with SMTP id r18-v6so3661487ual.13
+	Fri, 27 Jul 2018 16:12:45 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id s12-v6so5812823wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 09:04:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=hkHVQWUXdVx2466lYRaSHGeJnax4fTbKts3uamf4AhM=;
-	b=M+PrUjMC0Sv+WVOk2B4CyXyf0yqNJQ0AhnVScz8ifirhs/f3TjUTTEH7vgd+Mfq0sV
-	kZhFhkeVaXdedPp+ZslNenpxxeHgYi37fk+pY3TeseeLKa2whvNJS23hsB1LOlJxrtan
-	N00Q3AuYK/ihplVl1aFhH13mZkLtVzY8g1HGXq1utm9UOlAXDmGjUd4GLQ48byzXvp6s
-	rN8OckpeDs1czClN9gfd3HIIo8nu1L5WCmMrvwC9jXeqIu2faIh2tsjrKqppifJ7sPdJ
-	GD8n59KDKN/PrOWabIpXUSbMRx78tLx3kPigSaIiW2iRAX/eyHCh2fh0BSbmIZ8/oGKL
-	rm0Q==
+	Fri, 27 Jul 2018 09:12:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=0dLgL8Qii0LILQWQsqlXp7VdzwzYiKU0t8W9eGmOgS8=;
+	b=v24CvvZ14wfKI+Tqwe8caoS55rDiWxeKx9LIl8DH77fCokeEJiB1Jodx+HWKjjLgDb
+	k8os/uguhd9MzSLRM81yrE5ZaczDhKU0sowUqkGtNGovLGGxexcggLG7/HWmFn1yTJK9
+	5y1t62cZGgKElbvxwUZ1t7ePmp2SV/yOCaRsIuo66/763u2nnIKKFC+cFnasUaIr2kn6
+	5cFZcu+yMsB6MpOi32NQRnUMSbMWg8C1uRcps3FHqCNXInn6Imm/k9vKsUEIyNEv/TMh
+	VikxRSnDYMpHkbu6CGaFJAgf5hyudEK2x/nFls2I+eNqKFgw71G7thvSFok/N/efVJap
+	QuYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=hkHVQWUXdVx2466lYRaSHGeJnax4fTbKts3uamf4AhM=;
-	b=WxTcT9yH/bMskGqOekZ8gGX4mvBbXkPyS6xo5AwKlm0J4sDzel/QVJ7vA5dainhRTA
-	FNHwqARZhclYgMb4ZCk1jgUF73GgZ3A90VGDp32VwzJLcKYB+Dfcc1yavAWh5z37KPNm
-	FSud+2Tt5DSIwtx4D5sC/OhPkg5bHjPgJ4TXjKdVOGt5shMk9hhCoR6S/vHGf3cd2yNo
-	rPYNn65xAujf2mq2RF1cIgA2SsyGf56UWKxUZL3a+MMYE2aoWqTEnBcAS2JFXeRD1BbP
-	ZGI/sqvvVG61Je2fc0YGS1f1lewsk/4tmQH/mfETr8WUr5Rbyb9kjGyQkfnQ4EoDNAXu
-	uowg==
-X-Gm-Message-State: AOUpUlGsljFRzz0s2MXbWkjV4asT2tdxt1o7+A2h/X5U9tFnrMruumNA
-	KZoKzrHjnLjB0+7YH8OFQzM9swnDKFmbmEshHe9IYA==
-X-Google-Smtp-Source: AAOMgpeBh6fYupC4Ew/zXQDQGKIv+ax1t/SMYuyvnxy1qgU4QkS3TFBGm/mejJua3KXCpsDyABOui8rGJ0X6yyi5BBQ=
-X-Received: by 2002:ab0:66d4:: with SMTP id
-	d20-v6mr4927643uaq.112.1532707488611; 
-	Fri, 27 Jul 2018 09:04:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAOnRZELTeZbVDTo_eT_r6e6EG6et0vs7O_mT_fpqJ_RpoVhk2Q@mail.gmail.com>
-	<CAPuovEKX5w=1ObAgOw71UteCmh74Qf9KQ44_L4NbmLniwX4Jyg@mail.gmail.com>
-	<CAPuovE+nMp9xaj_gusMTGM9_ChFuuHDzc9NKBRYZMX493DbU=Q@mail.gmail.com>
-In-Reply-To: <CAPuovE+nMp9xaj_gusMTGM9_ChFuuHDzc9NKBRYZMX493DbU=Q@mail.gmail.com>
-From: William Delacre <williamdelacre@gmail.com>
-Date: Fri, 27 Jul 2018 18:04:37 +0200
-Message-ID: <CAOnRZEJ7iVfFxr4e=6VcjCCpi4uERXhv-e8FZgMuAQv6XD2GXQ@mail.gmail.com>
-To: mark.asselstine@windriver.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: (No subject)
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=0dLgL8Qii0LILQWQsqlXp7VdzwzYiKU0t8W9eGmOgS8=;
+	b=CNnXCUQbewRgRXmyZF/93MXup0cG0ZGVkb5M50YQaRfU/PMUbRRddAxSIVNo3rwoSh
+	HbR5KV2KWzZcVRq5bPJKeTZ3Xp/v0dNn97dQZ9b8mhpNR3B9eofvYZfLTFMMvS9oKU7g
+	2JvP0Ibs/v85t30EgWb4R2bweixy3o/xxbD4M+Ym77TW+Aee9Ut0xF40GlxaSbkCgAPu
+	dCvqXkOhC9Jif8ZAtirYKeuqFQSVG6oJo3zVG+lbCzydEvq9099oedPIyj72A0MSAy8q
+	x0O/9aQynEIvT9sQb052Aq6mXc5mv+QpvUn+XvRPBwlLcmC/gs78HxrlnSFfbvyEue1k
+	//0A==
+X-Gm-Message-State: AOUpUlEmSNp3eHAGmDPHjUrGOcxS/pA8/wJsa0s/yzV/sHOyyDo5ZwPT
+	BgFO25+Hulk2T4xDgX4i0PRgKiFMLF0=
+X-Google-Smtp-Source: AAOMgpecqdMhmu002WkKgySkqB2CNZMXIXfCWywU43pUGLkYxFQaF6W0kbhca2oStvWcJC3B9qGyFQ==
+X-Received: by 2002:a1c:a009:: with SMTP id
+	j9-v6mr4479198wme.132.1532707966104; 
+	Fri, 27 Jul 2018 09:12:46 -0700 (PDT)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	b11-v6sm3287130wrv.82.2018.07.27.09.12.45
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 27 Jul 2018 09:12:45 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Jul 2018 17:12:42 +0100
+Message-Id: <20180727161242.5515-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] pax-utils: add (from oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,101 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 16:04:48 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Jul 2018 16:12:46 -0000
 
-Thanks a lot for the answer, it worked perfectly !
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ .../recipes-devtools/pax-utils/pax-utils_1.2.2.bb  | 36 ++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
 
-There is just one point I don=E2=80=99t really understand : why do we need =
-to add a
-dependency to =E2=80=98python-incremental-NATIVE=E2=80=99 ?
+diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
+new file mode 100644
+index 0000000000..9635a5e708
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.2.2.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Security-focused ELF files checking tool"
++DESCRIPTION = "This is a small set of various PaX aware and related \
++utilities for ELF binaries. It can check ELF binary files and running \
++processes for issues that might be relevant when using ELF binaries \
++along with PaX, such as non-PIC code or executable stack and heap."
++HOMEPAGE = "http://www.gentoo.org/proj/en/hardened/pax-utils.xml"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++
++SRC_URI = "https://dev.gentoo.org/~vapier/dist/pax-utils-${PV}.tar.xz"
++SRC_URI[md5sum] = "a580468318f0ff42edf4a8cd314cc942"
++SRC_URI[sha256sum] = "7f4a7f8db6b4743adde7582fa48992ad01776796fcde030683732f56221337d9"
++
++RDEPENDS_${PN} += "bash"
++
++export GNULIB_OVERRIDES_WINT_T = "0"
++
++do_configure_prepend() {
++    touch ${S}/NEWS ${S}/AUTHORS ${S}/ChangeLog ${S}/README
++}
++
++do_install() {
++    oe_runmake PREFIX=${D}${prefix} DESTDIR=${D} install
++}
++
++BBCLASSEXTEND = "native"
++
++inherit autotools pkgconfig
++
++PACKAGECONFIG ??= ""
++
++PACKAGECONFIG[libcap] = "--with-caps, --without-caps, libcap"
++PACKAGECONFIG[libseccomp] = "--with-seccomp, --without-seccomp, libseccomp"
++PACKAGECONFIG[pyelftools] = "--with-python, --without-python,, pyelftools"
++
++EXTRA_OECONF += "--enable-largefile"
+-- 
+2.11.0
 
-What would happen if I just add to the python-twisted recipe :
-
-DEPENDS +=3D =E2=80=9C${PYTHON_PN}-incremental=E2=80=9C
-
-William
-
-Le ven. 27 juil. 2018 =C3=A0 17:03, Mark Asselstine <
-mark.asselstine@windriver.com> a =C3=A9crit :
-
-> On Thu, Jul 26, 2018 at 3:40 PM, Mark Asselstine
-> <mark.asselstine@windriver.com> wrote:
-> > On Mon, Jul 23, 2018 at 8:28 AM, William Delacre
-> > <williamdelacre@gmail.com> wrote:
-> >> Hi ! :-)
-> >>
-> >> I=E2=80=99m facing issues when trying to run =E2=80=98bitbake python-t=
-wisted=E2=80=99
-> (do_compile
-> >> error)
-> >>
-> >> Log says :
-> >> =E2=80=9CDownload error on https://pypi.python.org/simple/incremental/=
-: [Errno
-> -3]
-> >> Temporary failure in name resolution
->
-> With the additional info you sent me along with a second look at the
-> error I can fairly confidently say I know what the issue is.
->
-> Python, like some other languages (ruby, go...) will attempt to
-> download dependencies/requirements if they are not present. This is
-> done "outside" of the bitbake system and thus will ignore
-> BB_NO_NETWORK and is generally a bad thing. It isn't quite host
-> contamination but it is very similar. What we do with our python
-> recipes in bitbake is review a python package's source setup.py,
-> requirements.txt...files in order to determine what other python
-> packages are needed, add them as RDEPENDS or similar in order to avoid
-> the python attempting to complete a download such as this.
->
-> In this case python-twisted 'requires' python-incremental but the
-> Rocko version of the python-twisted recipe lacks the needed assignment
-> to ensure this is available in the recipe sysroot and thus the
-> attempted download.
->
-> Cherry pick commit b08b570c8624303acbb6bb064a7bda466a679df4
-> [python-twisted: avoid downloading build dependencies] to Rocko and
-> you will be good to go. You should also follow up this thread with a
-> request to have this commit put onto Rocko to avoid others hitting the
-> same issue.
->
-> Mark
->
-> >>
-> >> ............
-> >>
-> >> distutils.errors.DistutilsError : Could not find suitable distribution
-> for
-> >> Requirement.parse(=E2=80=98incremental>=3D16.10.1=E2=80=99)=E2=80=9D
-> >>
-> >> First of all I=E2=80=99m not connected to internet, so I=E2=80=99ve pr=
-e-downloaded all
-> the
-> >> required packages (twisted-17.9.0.tar.bz2 & incremental-17.5.0.tar.gz
-> are
-> >> present in my build/downloads folder)
-> >>
-> >> It=E2=80=99s the first time I have some =E2=80=9Cdownloading issues=E2=
-=80=9D and I=E2=80=99m stuck on it
-> >> for a few hours now..
-> >>
-> >> Any tips for me ?
-> >
-> > Check all aspects of what you have manually downloaded and populated
-> > in your downloads. My guess is that a checksum or some other detail
-> > isn't matching and it is rejecting what you have and thus attempting
-> > to re-download the file.
-> >
-> > Mark
-> >
-> >>
-> >> Thanks in advance !
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
