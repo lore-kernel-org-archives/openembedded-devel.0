@@ -1,42 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f170.google.com (mail-qk0-f170.google.com
-	[209.85.220.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 937F378CDE
+Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
+	[209.85.216.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CA4B78CDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 19:12:12 +0000 (UTC)
-Received: by mail-qk0-f170.google.com with SMTP id c126-v6so3971814qkd.7
+	Fri, 27 Jul 2018 19:21:00 +0000 (UTC)
+Received: by mail-qt0-f172.google.com with SMTP id b15-v6so6171589qtp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 12:12:13 -0700 (PDT)
+	Fri, 27 Jul 2018 12:21:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ptVa7yJtq9QvFXvQ6alZhpqNBfOoeC6B5pU/JmrfXsY=;
-	b=KH7LCxmjqz/c+exIDEPZjASaWxYDQEjtgaepm4L7l+PAQjHTOtOwR9PRbBw4waRTGp
-	XFSdKsjGCDM1VF37PNV0HBHZeqGEPdywAmA/6DHKE8BJuzgAJjgNWv11ibpsJGGgveUt
-	sXi4DoUkeadwByAZUcN2ZvgArIX/3thDwTE0f8T5p4jDfGhjWjR6/sykj7XG4cQzgSLF
-	YY/168pfvlS+VIPKjhQAiP1ppXVCd2K7aBtZzZH5QXBBpfZZUiuIo2XX7gCLN2zFLPMU
-	PpypzKxOvg0+a3obsdBTWIjZkRu0BierszTyoKrz1j0OAeohuRLPRimKBrn+ieJJHqa2
-	dWbA==
-X-Gm-Message-State: AOUpUlGJYHUw/VbGYyRGrImJlMiS7McB1jFLhms/ENB2TEOyMeROMNDc
-	8jojBfJatMDfSFZj0vAqjgqF+ip7OjE=
-X-Google-Smtp-Source: AAOMgpcGxywjURN8SIFtqVDWsLatQTSAu7W2biO1o8dqIU4UDcEEKgBd8U4bsjUbBH+DwEGzeDFxYg==
-X-Received: by 2002:a37:d942:: with SMTP id
-	u63-v6mr7352435qki.165.1532718733134; 
-	Fri, 27 Jul 2018 12:12:13 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+e2Om5yTKez5AS7yPjqiIHIUjSE8/yHz4wR/Ya40MCA=;
+	b=YZWDGOANwA/3zhJ8ivqQVPacMxhRfASmNM7vS1TM/XQdXHBVu9TxMtW9ouJSfWqkE5
+	xEkYsUrDFj6nL8ThXnrwppCZvoY0BLcNdJBWniUk4cjmNRhskArjYxoau8DzrP1LLvl5
+	qDJjgCXsTMRuuimZ65FeCG/+mlGR1HuIgvLOAVm0TbxE82I+Hjxb2I/pSIEeDg6ewG6m
+	ZB0QDQoXTF1xfadlGpGPcuerdIuILnCgmMb9p1RdP8yTiHjugydCXna+B20/sGoCT7zU
+	CtWDPCZk39LcpPAxBD/zIBFVHGt1ocaYrJM+LSt8FjtdBROXftS7kVzMB11KdUlF1oLY
+	wLnA==
+X-Gm-Message-State: AOUpUlEe6BzGqZ5NPXBrgdgARoSi4K7npVqG+zlWYwvdFm5hX9GXGknB
+	Qt+CnxKRGxpJM2ltiIxfUsUWqyerBVU=
+X-Google-Smtp-Source: AAOMgpcXY0Sz613sPupr4rjZh/E2pO5PLopupsQASeo4iTEz65EBIUxfqeb5PkzPZ9/gNMHbFNql5g==
+X-Received: by 2002:ac8:31cd:: with SMTP id
+	i13-v6mr7459022qte.144.1532719260799; 
+	Fri, 27 Jul 2018 12:21:00 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	b22-v6sm2643419qtq.93.2018.07.27.12.12.12
+	j128-v6sm2556942qkc.50.2018.07.27.12.20.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 27 Jul 2018 12:12:12 -0700 (PDT)
+	Fri, 27 Jul 2018 12:21:00 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 15:12:05 -0400
-Message-Id: <1532718725-15312-2-git-send-email-derek@asterius.io>
+Date: Fri, 27 Jul 2018 15:20:53 -0400
+Message-Id: <1532719253-10531-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1532718725-15312-1-git-send-email-derek@asterius.io>
-References: <1532718725-15312-1-git-send-email-derek@asterius.io>
-Subject: [meta-python][PATCH 2/2] python-cryptography: update to version 2.3
+Subject: [meta-python][PATCH] python3-meh: update to version 0.47
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,40 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 19:12:12 -0000
+X-List-Received-Date: Fri, 27 Jul 2018 19:21:00 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cryptography.inc           | 4 ++--
- .../{python-cryptography_2.2.2.bb => python-cryptography_2.3.bb}      | 0
- .../{python3-cryptography_2.2.2.bb => python3-cryptography_2.3.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cryptography_2.2.2.bb => python-cryptography_2.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cryptography_2.2.2.bb => python3-cryptography_2.3.bb} (100%)
+ .../python-meh/{python3-meh_0.46.bb => python3-meh_0.47.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-extended/python-meh/{python3-meh_0.46.bb => python3-meh_0.47.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
-index 64192f8..dbbfe2c 100644
---- a/meta-python/recipes-devtools/python/python-cryptography.inc
-+++ b/meta-python/recipes-devtools/python/python-cryptography.inc
-@@ -10,8 +10,8 @@ DEPENDS += " \
-     ${PYTHON_PN}-six \
+diff --git a/meta-python/recipes-extended/python-meh/python3-meh_0.46.bb b/meta-python/recipes-extended/python-meh/python3-meh_0.47.bb
+similarity index 90%
+rename from meta-python/recipes-extended/python-meh/python3-meh_0.46.bb
+rename to meta-python/recipes-extended/python-meh/python3-meh_0.47.bb
+index 40e2cbd..95d6d18 100644
+--- a/meta-python/recipes-extended/python-meh/python3-meh_0.46.bb
++++ b/meta-python/recipes-extended/python-meh/python3-meh_0.47.bb
+@@ -10,7 +10,7 @@ S = "${WORKDIR}/git"
+ 
+ SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master \
  "
+-SRCREV = "bb1156728a4f76e5e3638ab20b9454a1568a99db"
++SRCREV = "78d868d99104317ce8820f39f61d207566e61a55"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--SRC_URI[md5sum] = "17c4ed4b4d0f25adbc576d89071dc92e"
--SRC_URI[sha256sum] = "9fc295bf69130a342e7a19a39d7bbeb15c0bcaabc7382ec33ef3b2b7d18d2f63"
-+SRC_URI[md5sum] = "a0f3f563ab1c5c3bc02fae8d4aa3ad16"
-+SRC_URI[sha256sum] = "c132bab45d4bd0fff1d3fe294d92b0a6eb8404e93337b3127bdec9f21de117e6"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-cffi \
-diff --git a/meta-python/recipes-devtools/python/python-cryptography_2.2.2.bb b/meta-python/recipes-devtools/python/python-cryptography_2.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cryptography_2.2.2.bb
-rename to meta-python/recipes-devtools/python/python-cryptography_2.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.2.2.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cryptography_2.2.2.bb
-rename to meta-python/recipes-devtools/python/python3-cryptography_2.3.bb
+ FILES_${PN} += "${datadir}/*"
 -- 
 2.7.4
 
