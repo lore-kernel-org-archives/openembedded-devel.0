@@ -1,44 +1,48 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 3568460620
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 289BC74AEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 21:48:17 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1532728098; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: In-Reply-To: References: MIME-Version: Sender;
-	bh=jjZbHGyyxT7RlCHz9gALTPl56BM10IvJxSxsYVlQotI=;
-	b=uoRMKBRXVN1CaFqsW3S12dHlM/lQDkzMQXvTPE9IcYF48+yY3vSB7VlGgGqL+KqRqFvDNlFF
-	FtRmNEsh8Z1WIkLkdzVMoHmQO1XtszlpJHTopmJTy/dQIXygGtSweeC/lcE8XnLtPvzcshrF
-	TbfuWfjMMMgtqogmF4lXJl1kjME=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mxa.mailgun.org with ESMTP id 5b5b9321.7ff7f813f1b0-smtp-out-n01;
-	Fri, 27 Jul 2018 21:48:17 -0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id z19-v6so5302018ioh.4
+	Sat, 28 Jul 2018 00:03:21 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id s9-v6so6905493wmh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 14:48:17 -0700 (PDT)
-X-Gm-Message-State: AOUpUlEwXOLdYC1jKpEPjvSVI1EGDaWGT1av8G47DVh2Med5Xfms+SH9
-	w3245ZNSRhJ6gQ2ATAPJCRDfhrrv291Kq3X3bSg=
-X-Google-Smtp-Source: AAOMgpeqeEIYY2u9Iiu5QjEC0z6L5bcCbaPCGB44oNos7ms31MwziZ73mG92PUTnRjLQTO+3XxFK26lLjUORjvoQofY=
-X-Received: by 2002:a6b:e403:: with SMTP id
-	u3-v6mr6364500iog.131.1532728096606; 
-	Fri, 27 Jul 2018 14:48:16 -0700 (PDT)
+	Fri, 27 Jul 2018 17:03:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=pWm5YWy2/cC3b0ihSXIR/0kTxVaYv6ODaBlEAHiUOdM=;
+	b=hMc+KV9VQf5aOAgUGg92Qtm+jctAU2kuW1hgWJCxwA7jRd5NBrVyzzM38CwGe+RLIM
+	Uh0Ida7qr7eoQlRAkUqQwH3+cwn1nqwe0DpWmQ2JPG9f0dYbEtkfUlZPgbhakl7hY7aJ
+	OBtuUwLOgPNM+HYcbD8yC9syBTdIR5VtzMCIpxpdyHqnI0WZ83jPH5jI2IrKrX6Mcfvz
+	guOxXy6doR6JqwZuoz8MDgX+v4iZ5HTb5qs00S8YFx2uHfjY4/2fyw0GSriMOv8R2Ixt
+	hmoY0NDCE91X1cJCHy0yrxfBHXmjcCcp/fPfArfTUaO6neIjV9OPptm9imcdmZ9H91DP
+	XspA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=pWm5YWy2/cC3b0ihSXIR/0kTxVaYv6ODaBlEAHiUOdM=;
+	b=am2n0YWbxHHNx5m2dxBAZq+1IlLk4UgFciBeHwQqesJoh55YxGcai48OpnNh7Ik1h2
+	yFVJjFlio6iFwyuOC8livVzFKSzR7caeDCH9tnz5P16li7yyKmQIWkZOI4kIh/ozxvWt
+	gU62R2Svyf4/wTqU0brpMtiOlgc8Qak5UIWlIjGkjqNW5TDHIPt/H8MlIl26cNallX9P
+	5RNxzhBaIyvJNiIjcCMWsopGXfrVv0MHGSPz9a5ExrA4E6hiamGr3gwLkz0oWxtPt2Py
+	KpbrwalKcxnSZJ0eQvww0HaLsPM87sQOUOP1ZGXZ2yz0G5VJQh9R/tOguO04AJvAvqr/
+	I5Bw==
+X-Gm-Message-State: AOUpUlHULUYhxxoGlWf0+84ykNlTmVVFqC/GqGn5g06DhK22iyS8aNcQ
+	WWdDFmwq2WPFXtNmia9bMCgzg7+Y744IvSTJVsyqiw==
+X-Google-Smtp-Source: AAOMgpegSs686vX9/hNfQpfZcNuozxF86YZ1JUo8i0aCmAx2E+Ta4N8vFSdwoNUmYEYchkR678DDKts7lV7RTP5N0p8=
+X-Received: by 2002:a1c:b484:: with SMTP id
+	d126-v6mr6105433wmf.17.1532736202605; 
+	Fri, 27 Jul 2018 17:03:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <1532722568-9134-1-git-send-email-derek@asterius.io>
-	<c9fc0732-de4a-2691-240e-b3968156f76b@gmail.com>
-In-Reply-To: <c9fc0732-de4a-2691-240e-b3968156f76b@gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Fri, 27 Jul 2018 17:47:46 -0400
-X-Gmail-Original-Message-ID: <CADNbA1qsECV0A1TdiqYH1WcDqWpTGX9K9xNorX4n5TGS70RWLw@mail.gmail.com>
-Message-ID: <CADNbA1qsECV0A1TdiqYH1WcDqWpTGX9K9xNorX4n5TGS70RWLw@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
+References: <1519987524-4045-1-git-send-email-mikko.gronoff@qt.io>
+	<CA+chaQdsMvcCGbvZmp50eeOtuAm1LjTKwB=oQ7taMZuJn9j_tQ@mail.gmail.com>
+In-Reply-To: <CA+chaQdsMvcCGbvZmp50eeOtuAm1LjTKwB=oQ7taMZuJn9j_tQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 28 Jul 2018 02:03:11 +0200
+Message-ID: <CA+chaQd=R5R4u6RQcLi0B+xCPRxa-Y3K0ytKCMY5d-R=4dXACw@mail.gmail.com>
+To: Mikko Gronoff <mikko.gronoff@qt.io>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-parse: update to version 1.8.4
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] Change default SRC_URI from github.com to code.qt.io
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,55 +55,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jul 2018 21:48:17 -0000
+X-List-Received-Date: Sat, 28 Jul 2018 00:03:22 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Sure.  I'll add something in the message.  The checksum itself didn't
-change, the lines did.  For whatever reason upstream throws the license at
-the bottom of the source file instead of the top
+In the end it took 60 hours for qtbase, 10 hours for qtdeclarative..
 
-On Fri, Jul 27, 2018, 5:42 PM akuster808 <akuster808@gmail.com> wrote:
+On Fri, Jul 27, 2018 at 9:21 AM Martin Jansa <martin.jansa@gmail.com> wrote:
 
+> One disadvantage of this is that fetching from code.qt.io seems to be
+> significantly slower than from github.com.
 >
+> One extreme case is just running in one of my old build dirs, where the
+> checkout from code.qt.io wasn't updated on premirror for quite long time
+> and now the do_fetch of qtbase is already running for 43 hours..
 >
-> On 07/27/2018 01:16 PM, Derek Straka wrote:
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> >  .../python/{python-parse_1.8.2.bb => python-parse_1.8.4.bb}         |
-> 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{python-parse_1.8.2.bb =>
-> python-parse_1.8.4.bb} (54%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-> b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-> > similarity index 54%
-> > rename from meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-> > rename to meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-> > index 8e16372..c66d4c8 100644
-> > --- a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-> > +++ b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-> > @@ -1,9 +1,9 @@
-> >  SUMMARY = "Parse strings using a specification based on the Python
-> format() syntax"
-> >  LICENSE = "BSD"
-> > -LIC_FILES_CHKSUM =
-> "file://parse.py;beginline=1191;endline=1209;md5=5147afdd9b3615290ad8733f0137a1a1"
-> > +LIC_FILES_CHKSUM =
-> "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
+> Most of the time it's removing various refs from gerrit reviews:
+> $ tail
+> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
+>  x [deleted]         (none)     -> refs/changes/83/75483/6
+>  x [deleted]         (none)     -> refs/changes/83/75783/1
+>  x [deleted]         (none)     -> refs/changes/83/75783/2
+>  x [deleted]         (none)     -> refs/changes/83/75783/3
+>  x [deleted]         (none)     -> refs/changes/83/75783/4
+>  x [deleted]         (none)     -> refs/changes/83/75783/5
+>  x [deleted]         (none)     -> refs/changes/83/75783/6
+>  x [deleted]         (none)     -> refs/changes/83/7583/1
+>  x [deleted]         (none)     -> refs/changes/83/76183/1
+>  x [deleted]         (none)     -> refs/changes/83/76183/2
 >
-> Why did the license checksum change? maybe add reason as part of commit
-> header
+> and there is a lot of them:
+> $ grep -c deleted
+> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
+> 81174
 >
-> >
-> > -SRC_URI[md5sum] = "42002338551bdfa0f01bbe4e679a17dd"
-> > -SRC_URI[sha256sum] =
-> "8048dde3f5ca07ad7ac7350460952d83b63eaacecdac1b37f45fd74870d849d2"
-> > +SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
-> > +SRC_URI[sha256sum] =
-> "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
-> >
-> >  inherit pypi setuptools
-> >
+> $ grep -c deleted.*refs/changes
+> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
+> 63253
+>
+> $ grep -c deleted.*refs/builds
+> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
+> 17921
+>
+> Yes it might be faster to delete the archive from premirror and do clone
+> from scratch, but other developers wouldn't know what to do with local
+> downloads directory.
+>
+> On Fri, Mar 2, 2018 at 5:19 PM Mikko Gronoff <mikko.gronoff@qt.io> wrote:
+>
+>> There have been issues in the past with github qt mirror being out of
+>> sync with code.qt.io for certain module repos. Right now there's been a
+>> several days long break in update cycle for seemingly all the qt
+>> modules where content has not been pushed to the github mirror. Change
+>> the default SRC_URI to the more reliable code.qt.io.
+>>
+>> Change-Id: Ic7d3b9a82ef0ae502e99a8516ef78ca09250fd1e
+>> Signed-off-by: Mikko Gronoff <mikko.gronoff@qt.io>
+>> Reviewed-by: Samuli Piippo <samuli.piippo@qt.io>
+>> ---
+>>  conf/layer.conf                              | 4 ++--
+>>  recipes-qt/examples/qt5everywheredemo_1.0.bb | 3 ++-
+>>  2 files changed, 4 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/conf/layer.conf b/conf/layer.conf
+>> index 7751ce2..f540710 100644
+>> --- a/conf/layer.conf
+>> +++ b/conf/layer.conf
+>> @@ -33,7 +33,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+>>
+>>  IMAGE_FEATURES[validitems] += "qtcreator-debug"
+>>
+>> -QT_GIT ?= "git://github.com/qt"
+>> -QT_LABS_GIT ?= "git://github.com/qt-labs"
+>> +QT_GIT_PROJECT ?= "qt"
+>> +QT_GIT ?= "git://code.qt.io/${QT_GIT_PROJECT}
+>> <http://code.qt.io/$%7BQT_GIT_PROJECT%7D>"
+>>  QT_GIT_PROTOCOL ?= "git"
+>>  QT_EDITION ?= "opensource"
+>> diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb
+>> b/recipes-qt/examples/qt5everywheredemo_1.0.bb
+>> index dfbe4ae..36d57f1 100644
+>> --- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
+>> +++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
+>> @@ -7,7 +7,8 @@ LIC_FILES_CHKSUM =
+>> "file://qml/QtDemo/main.qml;endline=39;md5=7d80863906a4bc8ffc
+>>  DEPENDS = "qtdeclarative qtxmlpatterns qtgraphicaleffects qtsvg
+>> qtmultimedia"
+>>
+>>  SRCREV = "35d72a2eba7456a2efc5eb8b77afbc00f69ba0ac"
+>> -SRC_URI = "${QT_LABS_GIT}/qt-labs-qt5-everywhere-demo"
+>> +QT_GIT_PROJECT = "qt-labs"
+>> +SRC_URI = "${QT_GIT}/qt5-everywhere-demo"
+>>
+>>  S = "${WORKDIR}/git/QtDemo"
+>>
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
 
