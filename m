@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
-	[209.85.160.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 42CC47469C
+Received: from mail-pl0-f67.google.com (mail-pl0-f67.google.com
+	[209.85.160.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C6507469C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jul 2018 02:39:37 +0000 (UTC)
-Received: by mail-pl0-f68.google.com with SMTP id w8-v6so3053759ply.8
+	Sat, 28 Jul 2018 02:39:38 +0000 (UTC)
+Received: by mail-pl0-f67.google.com with SMTP id t17-v6so3046505ply.13
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 27 Jul 2018 19:39:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=gcwjE3DhGY8jvGXYbcnz966Umz5gRfcNrksfOnsLxo4=;
-	b=HK2FDa+Wz/atGT8o70MNKLTjEjIhO5kFO7lh49rReuFu0h/3gJew75vZ5vGaJh9NG+
-	1yX/Hm4lRtxdciCLs72dYU8vBA0L2Nn0/zIkwGhZZ57iJM2c4udcziFpZrJHnf5PJg+q
-	3OgL1cZZDslMtCJQ3XLt+cscBEyTcg0K3EsBAs5E2CJvUHSTRDmcaSHkOxVQbxRZV7gh
-	eRu6OTiKVk6ROKneKLn39oM1OyJU1YvIUE+4Vk9KpLFxj4N9yCPiJdm04S2SO/uUF966
-	kS+MpzzSERV/UpcMtxyHD9IGeddcTWc/FQUN/1c/JGX6vp979CN/d2Oq/L6TK2nOtigO
-	FwCQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=r/duU0DG3qoGfAl1H0UU2hW4L/wWiMSFlrsHBSWWD8M=;
+	b=gcqLcssKoDaLWc8gQVS/CMtavFJD7h5lng2Tzg7QRvv/JvKrYcLxAkCvXKPkXFkHdF
+	fqyxS9zNnGK7F3oUyOkGdBHgpSusn5iOz8cxzcqNvG1e9kx1O7l9CP05AOQPTvEJlq+m
+	M7ilJeh+BZIjfX6PVW+HWOrOAqk1LJO6OZqaUKwBWvcZPo9pKd89GXKvenxfAvp3rlpD
+	18H5zK2CoMGAPaN/40UsKN9ypJB7+UPpXl3NoSH33phajvPI+MSwNE6/jF16oSgxqVtN
+	W/shENlm9uCl7eeTe5BFCtKWCSUOtBJeKuKfutUh3nLiQvPQpgfyI0N11njpr0X5Zixg
+	HoUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gcwjE3DhGY8jvGXYbcnz966Umz5gRfcNrksfOnsLxo4=;
-	b=TNmDywQBe+AMTre7PwQyyrSE2HPOKD6Xq6sBkwapwhmlbyPYoCCiyHlfO0qREvIliZ
-	9F6Hs7ub77/ZQdkKbZu/AWNcViD63RbUtOJluMN8RMaz8/GhQiGFTKqjzeVkL7Bh95yx
-	GSXJXEuoNDSgrxE72WuLfptsLPaLrFc7k8Vu78m6iwOHQ5eZ5DwYvXbATurNbqCFk+/m
-	NDd8dDlA+KHTgrqSU9h6sVYAXuAPcpyUVZJ1RrmwSV8qy2xLOrG4cLf/N+ku7l0/omLt
-	Ud4QIDdqWZpW61jRR9Om9XGE1XaAxp//ARFZWivkKqlJYPaJT2gDM6v8DM9vniYRZ4pD
-	sSnw==
-X-Gm-Message-State: AOUpUlEUfujgyz55HnGDZ9YMJvCl5m89aM5ckOv9zQzkrRI09bgyZ9J+
-	CXhJOutIf5n94Kocv3xIDS/QIonj
-X-Google-Smtp-Source: AAOMgpdwcMxY3SsRnqFoatVZfJJaLmHwJbeNw0dhi6YSYUdp4/DxPGHpI7iO7AtCaD7zRPtUgddSmA==
-X-Received: by 2002:a17:902:ac1:: with SMTP id
-	59-v6mr8191497plp.18.1532745578564; 
-	Fri, 27 Jul 2018 19:39:38 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=r/duU0DG3qoGfAl1H0UU2hW4L/wWiMSFlrsHBSWWD8M=;
+	b=IMmD9klP74DPZiNVn5YjDeHURO8LYO3YeOD/1W1h0KIZW/aoH1RcUCDgt4N486TV6g
+	QHHglKbAXA4WZ+J9NUC9B1dPZWgB7ep4AD3rIhNZORENha2aCiaYlgLV0hsDAeyfmaT6
+	4gQwp5LESH/0VZE4Pmv5e2Bf5sTFqOmmGqc0f+iJB/7tZ//GMytZTs98rda9rJbxExvY
+	xjh5nTNC+Pei9lsr00srGW+gtA/ysSd5wMhEbWFPVhVgN3aCHxmaxD2kGGgjHTceYC2Z
+	yQ9grFw6A2hIOM1prkdoFI/0oMbpZyBV3uDy9y5/ylraD1yaq+y+47J5xrgi0CP7EiLr
+	4Tjw==
+X-Gm-Message-State: AOUpUlEH4WGERWf1jXhaTT03B1ue9SH4dHdQSJdbAf1eeE5EaT8So4oo
+	i8hbvg8WhaAr9pAc75RY6VYhS1rd
+X-Google-Smtp-Source: AAOMgpemuf93QhYI1MiFNMZNaWJ1vl4sTCYK60Wdg86RsvFWjSTiecRAXv1Scb1dGTQXCVrU1Iggdw==
+X-Received: by 2002:a17:902:b7c6:: with SMTP id
+	v6-v6mr7947191plz.49.1532745579352; 
+	Fri, 27 Jul 2018 19:39:39 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::ee7a])
 	by smtp.gmail.com with ESMTPSA id
-	m20-v6sm8749341pfg.61.2018.07.27.19.39.37
+	m20-v6sm8749341pfg.61.2018.07.27.19.39.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Fri, 27 Jul 2018 19:39:38 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 19:39:28 -0700
-Message-Id: <20180728023930.25045-1-raj.khem@gmail.com>
+Date: Fri, 27 Jul 2018 19:39:29 -0700
+Message-Id: <20180728023930.25045-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
-Subject: [meta-python][PATCH] python3-bandit: Add missing dependency on pbr native
+In-Reply-To: <20180728023930.25045-1-raj.khem@gmail.com>
+References: <20180728023930.25045-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python-stevedore: Upgrade to 1.29.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,28 +60,42 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 28 Jul 2018 02:39:38 -0000
 
-Fixes:
-
-| ERROR: Do not try to fetch `pbr>=1.8' for building. Please add its native recipe to DEPENDS.
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-bandit_1.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-stevedore.inc    | 6 +++---
+ ...ython-stevedore_1.28.0.bb => python-stevedore_1.29.0.bb} | 0
+ ...hon3-stevedore_1.28.0.bb => python3-stevedore_1.29.0.bb} | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-stevedore_1.28.0.bb => python-stevedore_1.29.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-stevedore_1.28.0.bb => python3-stevedore_1.29.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.4.0.bb b/meta-python/recipes-devtools/python/python3-bandit_1.4.0.bb
-index 2d24c8b0f7..84f47614e0 100644
---- a/meta-python/recipes-devtools/python/python3-bandit_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bandit_1.4.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
- SRC_URI[md5sum] = "f74155cb9921be857693b32d2531e857"
- SRC_URI[sha256sum] = "cb977045497f83ec3a02616973ab845c829cdab8144ce2e757fe031104a9abd4"
+diff --git a/meta-python/recipes-devtools/python/python-stevedore.inc b/meta-python/recipes-devtools/python/python-stevedore.inc
+index b23fb4c8c5..16e4155e10 100644
+--- a/meta-python/recipes-devtools/python/python-stevedore.inc
++++ b/meta-python/recipes-devtools/python/python-stevedore.inc
+@@ -3,11 +3,11 @@ HOMEPAGE = "https://github.com/dreamhost/stevedore"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--DEPENDS = "python3-pyyaml python3-six python3-stevedore"
-+DEPENDS = "python3-pyyaml python3-six python3-stevedore python3-pbr-native"
+-SRC_URI[md5sum] = "b736a71431a2ff5831bbff4a6ccec0c1"
+-SRC_URI[sha256sum] = "f1c7518e7b160336040fee272174f1f7b29a46febb3632502a8f2055f973d60b"
++SRC_URI[md5sum] = "525186cba577852e0408c92c3f8fac65"
++SRC_URI[sha256sum] = "1e153545aca7a6a49d8337acca4f41c212fbfa60bf864ecd056df0cafb9627e8"
  
- inherit setuptools3 pypi
+ inherit pypi
+-
++DEPENDS += "${PYTHON_PN}-pbr"
+ RDEPENDS_${PN} += "${PYTHON_PN}-pbr ${PYTHON_PN}-six"
  
+ BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-stevedore_1.28.0.bb b/meta-python/recipes-devtools/python/python-stevedore_1.29.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-stevedore_1.28.0.bb
+rename to meta-python/recipes-devtools/python/python-stevedore_1.29.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-stevedore_1.28.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_1.29.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-stevedore_1.28.0.bb
+rename to meta-python/recipes-devtools/python/python3-stevedore_1.29.0.bb
 -- 
 2.18.0
 
