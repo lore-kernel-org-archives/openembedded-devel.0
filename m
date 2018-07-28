@@ -1,51 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 61B4C78CFD
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EFD8745F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jul 2018 02:39:39 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id f1-v6so4212492pgq.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jul 2018 19:39:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Qy11YN55GLslJojdOL/g0YfZ6IaaGLfrOgt/MpTAEFk=;
-	b=BlosMzZBcKsUDF7SmVHu1VQ4oeFfd9XRGQjleBNY/Gu+9SNj45I9vNwRpQAJPGBY6J
-	HBxvmp6dCIoNz4Iq2AHkwWbYAz1KTo8YMq7w9zKvmvzO3BiR1z2u284qf1Jl3mFr7i9N
-	kuQM1AGSLTfJVjBjHfv2m94KFZtDmlkap1/Eqf/sLGH4AMeHjII2tcgps0vKdyZTO5+l
-	K9KV6V81Rlz7dN/e/z/rYVludCr8sr0vgmJ5xt7CIWBRmyxBfz9ikFOGedH8AuTf6Ndm
-	skSPtGjAaWAq8JYmozhIwmzCAnDYJ4LhcqTHUAc3zmQEOiBf5rIh/6Qlqbzu9r5m/JYR
-	spJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Qy11YN55GLslJojdOL/g0YfZ6IaaGLfrOgt/MpTAEFk=;
-	b=B45xBw6Ao1MmlON7/o7TDkhgtlvC076cOiBLWv60pHc118fH5lXbxP9p8VD//imnZ3
-	XtewLPQswV3TvLYqyKzQGtPPd2P3F6HI+SPe3SMz7D3GqzeQbjqCptu/uktGCgrag9T2
-	opa3cqVAB1kK5N9tM+5plyiHuj4uVa1dris2DHRjy8gyDHLCM6xcHI5McZYEcaQ8Kz7Z
-	SJT6DMo6iPscgx2KD0V8d3Rsjg5qD30c1Mx2APUxu/3ze1iC556m98ge/5qOhVLtVCez
-	gO2wXPK7Duv/h6QKMNupANAaId33t198pV03s1jFUITU9v8I8unUhrtiC/JiyPGGBVhw
-	wF/g==
-X-Gm-Message-State: AOUpUlFnL1xln2ayWF+cZNbIpxC6ZGkZWQq6Tfx/pNQmhHITwPtju1tM
-	lkUXS8oxIo3FlHDFgG9ah9bt2wjK
-X-Google-Smtp-Source: AAOMgpdH0WaHSwgTixZfYmwXbfL+CE2ZPzY2zc8rIvWONEqcSPnP08+r1x/2924OWL06DnbPxFFG/Q==
-X-Received: by 2002:aa7:86d7:: with SMTP id
-	h23-v6mr9040292pfo.132.1532745580324; 
-	Fri, 27 Jul 2018 19:39:40 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::ee7a])
-	by smtp.gmail.com with ESMTPSA id
-	m20-v6sm8749341pfg.61.2018.07.27.19.39.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jul 2018 19:39:39 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jul 2018 19:39:30 -0700
-Message-Id: <20180728023930.25045-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180728023930.25045-1-raj.khem@gmail.com>
-References: <20180728023930.25045-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH] samba: LDB 1.4.0 breaks Samba < 4.9
+	Sat, 28 Jul 2018 06:00:21 +0000 (UTC)
+Received: from [172.16.1.14] (62-178-50-190.cable.dynamic.surfer.at
+	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id 54D8A172A;
+	Sat, 28 Jul 2018 08:00:21 +0200 (CEST)
+To: akuster808 <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20180727202524.31873-1-dv@pseudoterminal.org>
+	<e12d30b6-bd70-9499-181f-3e17e6f9d57b@gmail.com>
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <0f8dae5f-67a5-0ad8-0b7d-2dee258c642c@pseudoterminal.org>
+Date: Sat, 28 Jul 2018 08:00:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <e12d30b6-bd70-9499-181f-3e17e6f9d57b@gmail.com>
+Subject: Re: [meta-multimedia][PATCH] libopenmpt: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,120 +30,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jul 2018 02:39:40 -0000
+X-List-Received-Date: Sat, 28 Jul 2018 06:00:22 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ild-Samba-against-a-newer-minor-vers.patch | 86 +++++++++++++++++++
- .../recipes-connectivity/samba/samba_4.7.8.bb |  1 +
- 2 files changed, 87 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch
+Actually, I see nothing wrong with the RDEPENDS_${PN}_libc-glibc block. 
+It fits exactly the description in that style guide. Or what am I missing?
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba/0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch b/meta-networking/recipes-connectivity/samba/samba/0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch
-new file mode 100644
-index 0000000000..4c94831d7f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch
-@@ -0,0 +1,86 @@
-+From 0bc8bc4143a58f91f6d7ce228b6763f377fdf45a Mon Sep 17 00:00:00 2001
-+From: Andrew Bartlett <abartlet@samba.org>
-+Date: Thu, 12 Jul 2018 12:34:56 +1200
-+Subject: [PATCH] ldb: Refuse to build Samba against a newer minor version of
-+ ldb
-+
-+Samba is not compatible with new versions of ldb (except release versions)
-+
-+Other users would not notice the breakages, but Samba makes many
-+more assuptions about the LDB internals than any other package.
-+
-+(Specifically, LDB 1.2 and 1.4 broke builds against released
-+Samba versions)
-+
-+BUG: https://bugzilla.samba.org/show_bug.cgi?id=13519
-+
-+Signed-off-by: Andrew Bartlett <abartlet@samba.org>
-+Reviewed-by: Gary Lockyer <gary@catalyst.net.nz>
-+(cherry picked from commit 52efa796538ae004ca62ea32fc8c833472991be6)
-+---
-+ lib/ldb/wscript | 32 ++++++++++++++++++++++----------
-+ 1 file changed, 22 insertions(+), 10 deletions(-)
-+
-+diff --git a/lib/ldb/wscript b/lib/ldb/wscript
-+index d94086b..2bb0832 100644
-+--- a/lib/ldb/wscript
-++++ b/lib/ldb/wscript
-+@@ -62,23 +62,33 @@ def configure(conf):
-+     conf.env.standalone_ldb = conf.IN_LAUNCH_DIR()
-+ 
-+     if not conf.env.standalone_ldb:
-++        max_ldb_version = [int(x) for x in VERSION.split(".")]
-++        max_ldb_version[2] = 999
-++        max_ldb_version_dots = "%d.%d.%d" % tuple(max_ldb_version)
-++
-+         if conf.env.disable_python:
-+-            if conf.CHECK_BUNDLED_SYSTEM_PKG('ldb', minversion=VERSION,
-+-                                         onlyif='talloc tdb tevent',
-+-                                         implied_deps='replace talloc tdb tevent'):
-++            if conf.CHECK_BUNDLED_SYSTEM_PKG('ldb',
-++                                             minversion=VERSION,
-++                                             maxversion=max_ldb_version_dots,
-++                                             onlyif='talloc tdb tevent',
-++                                             implied_deps='replace talloc tdb tevent'):
-+                 conf.define('USING_SYSTEM_LDB', 1)
-+         else:
-+             using_system_pyldb_util = True
-+-            if not conf.CHECK_BUNDLED_SYSTEM_PKG('pyldb-util', minversion=VERSION,
-+-                                             onlyif='talloc tdb tevent',
-+-                                             implied_deps='replace talloc tdb tevent ldb'):
-++            if not conf.CHECK_BUNDLED_SYSTEM_PKG('pyldb-util',
-++                                                 minversion=VERSION,
-++                                                 maxversion=max_ldb_version_dots,
-++                                                 onlyif='talloc tdb tevent',
-++                                                 implied_deps='replace talloc tdb tevent ldb'):
-+                 using_system_pyldb_util = False
-+ 
-+             # We need to get a pyldb-util for all the python versions
-+             # we are building for
-+             if conf.env['EXTRA_PYTHON']:
-+                 name = 'pyldb-util' + conf.all_envs['extrapython']['PYTHON_SO_ABI_FLAG']
-+-                if not conf.CHECK_BUNDLED_SYSTEM_PKG(name, minversion=VERSION,
-++                if not conf.CHECK_BUNDLED_SYSTEM_PKG(name,
-++                                                     minversion=VERSION,
-++                                                     maxversion=max_ldb_version_dots,
-+                                                      onlyif='talloc tdb tevent',
-+                                                      implied_deps='replace talloc tdb tevent ldb'):
-+                     using_system_pyldb_util = False
-+@@ -86,9 +96,11 @@ def configure(conf):
-+             if using_system_pyldb_util:
-+                 conf.define('USING_SYSTEM_PYLDB_UTIL', 1)
-+ 
-+-            if conf.CHECK_BUNDLED_SYSTEM_PKG('ldb', minversion=VERSION,
-+-                                         onlyif='talloc tdb tevent pyldb-util',
-+-                                         implied_deps='replace talloc tdb tevent'):
-++            if conf.CHECK_BUNDLED_SYSTEM_PKG('ldb',
-++                                             minversion=VERSION,
-++                                             maxversion=max_ldb_version_dots,
-++                                             onlyif='talloc tdb tevent pyldb-util',
-++                                             implied_deps='replace talloc tdb tevent'):
-+                 conf.define('USING_SYSTEM_LDB', 1)
-+ 
-+     if conf.CONFIG_SET('USING_SYSTEM_LDB'):
-+-- 
-+2.18.0
-+
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
-index fc1a2e0fd0..9858a18c49 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
-@@ -24,6 +24,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://dnsserver-4.7.0.patch \
-            file://smb_conf-4.7.0.patch \
-            file://volatiles.03_samba \
-+           file://0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch \
-           "
- SRC_URI_append_libc-musl = " \
-            file://samba-pam.patch \
--- 
-2.18.0
+
+On 2018-07-27 23:40, akuster808 wrote:
+>
+> On 07/27/2018 01:25 PM, Carlos Rafael Giani wrote:
+>> libopenmpt is a cross-platform C++ and C library to decode tracked music
+>> files ("modules", like the .mod .xm .s3m .it formats) into raw PCM audio.
+>> It is based on the player code of OpenMPT module tracker.
+>>
+>> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org
+>> ---
+>>   .../libopenmpt/files/run-ptest                |   9 ++
+>>   .../libopenmpt/libopenmpt_0.3.10.bb           | 104 ++++++++++++++++++
+>>   2 files changed, 113 insertions(+)
+>>   create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
+>>   create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+>>
+>> diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
+>> new file mode 100644
+>> index 000000000..84981b22c
+>> --- /dev/null
+>> +++ b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
+>> @@ -0,0 +1,9 @@
+>> +#!/bin/sh
+>> +
+>> +./libopenmpttest >/dev/null 2>&1
+>> +
+>> +if [ $? -eq 0 ]; then
+>> +   echo "PASS: libopenmpttest"
+>> +else
+>> +   echo "FAIL: libopenmpttest"
+>> +fi
+>> diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+>> new file mode 100644
+>> index 000000000..dddf80407
+>> --- /dev/null
+>> +++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+>> @@ -0,0 +1,104 @@
+>> +SUMMARY = "C and C++ cross-platform library for decoding tracked music files (modules)"
+>> +DESCRIPTION = "libopenmpt is a cross-platform C++ and C library to decode tracked \
+>> +music files (modules) into a raw PCM audio stream. It also comes with openmpt123, a \
+>> +cross-platform command-line or terminal based module file player, and libopenmpt_modplug, \
+>> +a wrapper around libopenmpt that provides an interface that is ABI compatile with \
+>> +libmodplug. libopenmpt is based on the player code of the OpenMPT project."
+>> +HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
+>> +SECTION = "libs"
+>> +
+>> +DEPENDS = "virtual/libiconv"
+>> +
+>> +RDEPENDS_${PN}_libc-glibc = " \
+>> +    glibc-gconv-cp1252 \
+>> +    glibc-gconv-ibm437 \
+>> +    glibc-gconv-iso8859-1 \
+>> +    glibc-gconv-iso8859-15 \
+> The style seems to be a bit off. Please check
+> https://www.openembedded.org/wiki/Styleguide
+> - armin
+>> +"
+>> +
+>> +LICENSE = "BSD-3-Clause"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e804150573f149befef6c07e173f20c3"
+>> +
+>> +SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
+>> +           file://run-ptest \
+>> +          "
+>> +SRC_URI[md5sum] = "66bbc6fbb5f27a554cb145d805e9ef9d"
+>> +SRC_URI[sha256sum] = "14a137b8d1a20e1b6a5e67cbc9467ab7e5e4e67d5aa38a247afc825685c53939"
+>> +
+>> +S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
+>> +
+>> +inherit autotools pkgconfig ptest
+>> +
+>> +PACKAGECONFIG ??= " \
+>> +    libopenmpt-modplug openmpt123 \
+>> +    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
+>> +    flac mpg123 ogg sndfile vorbis vorbisfile zlib \
+>> +    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
+>> +"
+>> +
+>> +# libopenmpt_modplug is a library that wraps libopenmpt calls into
+>> +# functions that are ABI compatible with libmodplug. This allows for
+>> +# using modplug headers and linking against libopenmpt_modplug
+>> +# instead of against the original libmodplug library.
+>> +# NOTE: The wrapper is compatible to the ABI from libmodplug version
+>> +# 0.8.8 and newer.
+>> +PACKAGECONFIG[libopenmpt-modplug] = "--enable-libopenmpt_modplug,--disable-libopenmpt_modplug"
+>> +PACKAGECONFIG[openmpt123]         = "--enable-openmpt123,--disable-openmpt123"
+>> +PACKAGECONFIG[tests]              = "--enable-tests,--disable-tests"
+>> +
+>> +# These packageconfigs affect openmpt123
+>> +PACKAGECONFIG[flac]               = "--with-flac,--without-flac,flac"
+>> +PACKAGECONFIG[mpg123]             = "--with-mpg123,--without-mpg123,mpg123"
+>> +PACKAGECONFIG[ogg]                = "--with-ogg,--without-ogg,libogg"
+>> +PACKAGECONFIG[portaudio]          = "--with-portaudio,--without-portaudio,portaudio-v19"
+>> +PACKAGECONFIG[pulseaudio]         = "--with-pulseaudio,--without-pulseaudio,pulseaudio"
+>> +PACKAGECONFIG[sdl]                = "--with-sdl,--without-sdl,virtual/libsdl"
+>> +PACKAGECONFIG[sdl2]               = "--with-sdl2,--without-sdl2,virtual/libsdl2"
+>> +PACKAGECONFIG[sndfile]            = "--with-sndfile,--without-sndfile,libsndfile1"
+>> +PACKAGECONFIG[vorbis]             = "--with-vorbis,--without-vorbis,libvorbis"
+>> +PACKAGECONFIG[vorbisfile]         = "--with-vorbisfile,--without-vorbisfile,libvorbis"
+>> +PACKAGECONFIG[zlib]               = "--with-zlib,--without-zlib,zlib"
+>> +
+>> +# --disable-libmodplug is necessary, since otherwise we'd
+>> +# have a collision with the libmodplug package, because of the
+>> +# libmodplug.so file. (libmodplug.so from libopenmpt isintended
+>> +# to be used as a drop-in replacement, and according to the
+>> +# documentation, is not complete.)
+>> +EXTRA_OECONF += " \
+>> +    --disable-doxygen-doc \
+>> +    --disable-examples \
+>> +    --disable-libmodplug \
+>> +    --without-portaudiocpp \
+>> +"
+>> +
+>> +# Since version 0.3, libopenmpt uses SemVer 2.0.0 versioning.
+>> +# The SemVer versioning scheme is incompatible with Debian/Ubuntu
+>> +# package version names.
+>> +DEBIAN_NOAUTONAME_${PN} = "1"
+>> +DEBIAN_NOAUTONAME_${PN}-modplug = "1"
+>> +
+>> +PACKAGES =+ "${PN}-modplug ${PN}-openmpt123 ${PN}-openmpt123-doc"
+>> +FILES_${PN}-modplug = "${libdir}/libopenmpt_modplug.so.*"
+>> +FILES_${PN}-openmpt123 = "${bindir}/openmpt123"
+>> +FILES_${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
+>> +
+>> +do_compile_ptest() {
+>> +    oe_runmake ${PARALLEL_MAKE} libopenmpttest
+>> +}
+>> +
+>> +do_install_ptest() {
+>> +    install -d ${D}${PTEST_PATH}/test
+>> +    install -m 0755 ${B}/libopenmpttest ${D}${PTEST_PATH}
+>> +    install -m 0644 ${S}/test/test.mptm ${D}${PTEST_PATH}/test
+>> +    install -m 0644 ${S}/test/test.s3m ${D}${PTEST_PATH}/test
+>> +    install -m 0644 ${S}/test/test.xm ${D}${PTEST_PATH}/test
+>> +
+>> +    install -d ${D}${PTEST_PATH}/libopenmpt
+>> +    install -m 0644 ${S}/libopenmpt/libopenmpt_version.mk ${D}${PTEST_PATH}/libopenmpt
+>> +}
+>> +
+>> +python __anonymous() {
+>> +    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
+>> +    if ("sdl" in packageconfig) and ("sdl2" in packageconfig):
+>> +        bb.error("sdl and sdl2 packageconfigs cannot be both enabled")
+>> +}
 
 
