@@ -1,18 +1,50 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 51F7278CB2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0037378875
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jul 2018 11:55:08 +0000 (UTC)
-Received: from localhost.localdomain (62-178-50-190.cable.dynamic.surfer.at
-	[62.178.50.190]) by ptmx.org (Postfix) with ESMTPSA id A4A921786
+	Sun, 29 Jul 2018 00:12:10 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id k21-v6so2995362pff.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jul 2018 13:55:08 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Jul 2018 13:55:04 +0200
-Message-Id: <20180728115504.7826-1-dv@pseudoterminal.org>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH v2] libopenmpt: add recipe
+	Sat, 28 Jul 2018 17:12:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=qJOiqepSSwzIzrfBwiUSi20xho5Okx1Q0mqtYIQMV5w=;
+	b=PnqR4kOIPKyZwbu4+meOYSRAUTU29IaSaRco/eHB9nQgGGrLABiOcxCMX+6nkUm/Cp
+	H98c6uORgpH4cV71iF2P3FdOmloJ6917dcubOoujpOspfmeMEuABuL/6tUEek/E47u/W
+	0fXSHURdPonDINkh0UQHvoQr/2U92+YVeXbE9jMrBbjGxy2HWiMhrFVi1iDmjUZGa/oI
+	ERYh1ODFZvabBCY0dL/lNpcNRIuJ11pHc5M/k/yH1hx8LLRGPVOHONdmGch4IJ4v63WN
+	kyHjpttj6FX1lxSTq9JNzeuKMT7A31t7z5wd1BcGYOCpUPERIEiNw2HoexLrlr/Uc4kz
+	vEpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=qJOiqepSSwzIzrfBwiUSi20xho5Okx1Q0mqtYIQMV5w=;
+	b=D6wva/38H+4drtDHUan2V7X/QOTQUL9g3IloG1cSzLplJfppVdUM5i52rd3EyBJsL2
+	RgO4pJhxN5VFKrFZiwBjuSDT035DGLHFPJ3NKiQjk6kLDyLNb6Atmr27bOnRxhFb6nBh
+	KOIIL13PB02DIPdiwc65dS796E9QV+n3AAHuKB4jx5xUu5iP6kq0Fl9if2/GZNVvICZS
+	pCPWS6b9W4YKrTBy/F8Owf1d4nP9BlTLWVYcrTZbdA4xJ1f9C4yZfn8t0bKFWidTTKXh
+	VmRFnH9Kzh0AhyW30EPef9OhK5CVfIo5sKXq7a0PvCHwQjd4PjjtN7Vj59AYGF6UG6le
+	RO1w==
+X-Gm-Message-State: AOUpUlHOoAVo1Ouudiw43nhW60Da0qF3A6LSSoDMKWFkUdwj+zr4T8cN
+	qi1wjI+xhleELRzllzJmA6s=
+X-Google-Smtp-Source: AAOMgpdkkY8BIdeoHKAC4hMMp0Twt8dlKDQKacu1fELQp9u8KN2puj3dqjKJ8HL4bkAuwcohROkLwQ==
+X-Received: by 2002:a63:ac57:: with SMTP id
+	z23-v6mr10829300pgn.74.1532823131962; 
+	Sat, 28 Jul 2018 17:12:11 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4180:c33:2d0e:93fa:42c7:a420])
+	by smtp.gmail.com with ESMTPSA id
+	g85-v6sm22183078pfk.39.2018.07.28.17.12.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 28 Jul 2018 17:12:11 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sat, 28 Jul 2018 17:12:10 -0700
+Message-Id: <1532823130-27823-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][V2][PATCH] wireshark: update to 2.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,146 +57,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jul 2018 11:55:08 -0000
+X-List-Received-Date: Sun, 29 Jul 2018 00:12:11 -0000
 
-libopenmpt is a cross-platform C++ and C library to decode tracked music
-files ("modules", like the .mod .xm .s3m .it formats) into raw PCM audio.
-It is based on the player code of OpenMPT module tracker.
+[v2]
+Fix native build, lemon is the only one needed natively
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+[v1]
+includes security fixes:
+
+wnpa-sec-2018-34 BGP dissector large loop. Bug 13741. CVE-2018-14342.
+wnpa-sec-2018-35 ISMP dissector crash. Bug 14672. CVE-2018-14344.
+wnpa-sec-2018-36 Multiple dissectors could crash. Bug 14675. CVE-2018-14340.
+wnpa-sec-2018-37 ASN.1 BER dissector crash. Bug 14682. CVE-2018-14343.
+wnpa-sec-2018-38 MMSE dissector infinite loop. Bug 14738. CVE-2018-14339.
+wnpa-sec-2018-39 DICOM dissector crash. Bug 14742. CVE-2018-14341.
+wnpa-sec-2018-40 Bazaar dissector infinite loop. Bug 14841. CVE-2018-14368.
+wnpa-sec-2018-41 HTTP2 dissector crash. Bug 14869. CVE-2018-14369.
+wnpa-sec-2018-42 CoAP dissector crash. Bug 14966. CVE-2018-14367.
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../libopenmpt/files/run-ptest                |   9 ++
- .../libopenmpt/libopenmpt_0.3.10.bb           | 104 ++++++++++++++++++
- 2 files changed, 113 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
- create mode 100644 meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
+ .../wireshark/{wireshark_2.6.1.bb => wireshark_2.6.2.bb}          | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.6.1.bb => wireshark_2.6.2.bb} (94%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
-new file mode 100644
-index 000000000..84981b22c
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libopenmpt/files/run-ptest
-@@ -0,0 +1,9 @@
-+#!/bin/sh
-+
-+./libopenmpttest >/dev/null 2>&1
-+
-+if [ $? -eq 0 ]; then
-+   echo "PASS: libopenmpttest"
-+else
-+   echo "FAIL: libopenmpttest"
-+fi
-diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-new file mode 100644
-index 000000000..d14246f32
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.3.10.bb
-@@ -0,0 +1,104 @@
-+SUMMARY = "C and C++ cross-platform library for decoding tracked music files (modules)"
-+DESCRIPTION = "libopenmpt is a cross-platform C++ and C library to decode tracked \
-+music files (modules) into a raw PCM audio stream. It also comes with openmpt123, a \
-+cross-platform command-line or terminal based module file player, and libopenmpt_modplug, \
-+a wrapper around libopenmpt that provides an interface that is ABI compatile with \
-+libmodplug. libopenmpt is based on the player code of the OpenMPT project."
-+HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
-+SECTION = "libs"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e804150573f149befef6c07e173f20c3"
-+
-+DEPENDS = "virtual/libiconv"
-+
-+SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
-+           file://run-ptest \
-+          "
-+SRC_URI[md5sum] = "66bbc6fbb5f27a554cb145d805e9ef9d"
-+SRC_URI[sha256sum] = "14a137b8d1a20e1b6a5e67cbc9467ab7e5e4e67d5aa38a247afc825685c53939"
-+
-+S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
-+
-+inherit autotools pkgconfig ptest
-+
-+PACKAGECONFIG ??= " \
-+    libopenmpt-modplug openmpt123 \
-+    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
-+    flac mpg123 ogg sndfile vorbis vorbisfile zlib \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
-+"
-+
-+# libopenmpt_modplug is a library that wraps libopenmpt calls into
-+# functions that are ABI compatible with libmodplug. This allows for
-+# using modplug headers and linking against libopenmpt_modplug
-+# instead of against the original libmodplug library.
-+# NOTE: The wrapper is compatible to the ABI from libmodplug version
-+# 0.8.8 and newer.
-+PACKAGECONFIG[libopenmpt-modplug] = "--enable-libopenmpt_modplug,--disable-libopenmpt_modplug"
-+PACKAGECONFIG[openmpt123]         = "--enable-openmpt123,--disable-openmpt123"
-+PACKAGECONFIG[tests]              = "--enable-tests,--disable-tests"
-+
-+# These packageconfigs affect openmpt123
-+PACKAGECONFIG[flac]               = "--with-flac,--without-flac,flac"
-+PACKAGECONFIG[mpg123]             = "--with-mpg123,--without-mpg123,mpg123"
-+PACKAGECONFIG[ogg]                = "--with-ogg,--without-ogg,libogg"
-+PACKAGECONFIG[portaudio]          = "--with-portaudio,--without-portaudio,portaudio-v19"
-+PACKAGECONFIG[pulseaudio]         = "--with-pulseaudio,--without-pulseaudio,pulseaudio"
-+PACKAGECONFIG[sdl]                = "--with-sdl,--without-sdl,virtual/libsdl"
-+PACKAGECONFIG[sdl2]               = "--with-sdl2,--without-sdl2,virtual/libsdl2"
-+PACKAGECONFIG[sndfile]            = "--with-sndfile,--without-sndfile,libsndfile1"
-+PACKAGECONFIG[vorbis]             = "--with-vorbis,--without-vorbis,libvorbis"
-+PACKAGECONFIG[vorbisfile]         = "--with-vorbisfile,--without-vorbisfile,libvorbis"
-+PACKAGECONFIG[zlib]               = "--with-zlib,--without-zlib,zlib"
-+
-+# --disable-libmodplug is necessary, since otherwise we'd
-+# have a collision with the libmodplug package, because of the
-+# libmodplug.so file. (libmodplug.so from libopenmpt isintended
-+# to be used as a drop-in replacement, and according to the
-+# documentation, is not complete.)
-+EXTRA_OECONF += " \
-+    --disable-doxygen-doc \
-+    --disable-examples \
-+    --disable-libmodplug \
-+    --without-portaudiocpp \
-+"
-+
-+do_compile_ptest() {
-+    oe_runmake ${PARALLEL_MAKE} libopenmpttest
-+}
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/test
-+    install -m 0755 ${B}/libopenmpttest ${D}${PTEST_PATH}
-+    install -m 0644 ${S}/test/test.mptm ${D}${PTEST_PATH}/test
-+    install -m 0644 ${S}/test/test.s3m ${D}${PTEST_PATH}/test
-+    install -m 0644 ${S}/test/test.xm ${D}${PTEST_PATH}/test
-+
-+    install -d ${D}${PTEST_PATH}/libopenmpt
-+    install -m 0644 ${S}/libopenmpt/libopenmpt_version.mk ${D}${PTEST_PATH}/libopenmpt
-+}
-+
-+python __anonymous() {
-+    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
-+    if ("sdl" in packageconfig) and ("sdl2" in packageconfig):
-+        bb.error("sdl and sdl2 packageconfigs cannot be both enabled")
-+}
-+
-+PACKAGES =+ "${PN}-modplug ${PN}-openmpt123 ${PN}-openmpt123-doc"
-+FILES_${PN}-modplug = "${libdir}/libopenmpt_modplug.so.*"
-+FILES_${PN}-openmpt123 = "${bindir}/openmpt123"
-+FILES_${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
-+
-+# Since version 0.3, libopenmpt uses SemVer 2.0.0 versioning.
-+# The SemVer versioning scheme is incompatible with Debian/Ubuntu
-+# package version names.
-+DEBIAN_NOAUTONAME_${PN} = "1"
-+DEBIAN_NOAUTONAME_${PN}-modplug = "1"
-+
-+RDEPENDS_${PN}_libc-glibc = " \
-+    glibc-gconv-cp1252 \
-+    glibc-gconv-ibm437 \
-+    glibc-gconv-iso8859-1 \
-+    glibc-gconv-iso8859-15 \
-+"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+similarity index 94%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+index 91c5e96..91ad639 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+@@ -14,8 +14,8 @@ SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "b0e9e5fe22e96d9fdfad18f750fa8f55"
+-SRC_URI[sha256sum] = "ab6e5bbc3464c956347b8671ce8397950ad5daff3bf9964c967d495f4ddbcd88"
++SRC_URI[md5sum] = "086d235509717190d06554b2ab870209"
++SRC_URI[sha256sum] = "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
+ 
+ PE = "1"
+ 
+@@ -35,7 +35,6 @@ PACKAGECONFIG[libnl] = ",,libnl"
+ PACKAGECONFIG[portaudio] = "-DENABLE_PORTAUDIO=ON,-DENABLE_PORTAUDIO=OFF, portaudio-v19"
+ PACKAGECONFIG[gtk2] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF, gtk+"
+ PACKAGECONFIG[gtk3] = "-DENABLE_GTK3=ON,-DENABLE_GTK3=OFF, gtk+3"
+-PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qtbase"
+ PACKAGECONFIG[graphics] = ",-DENABLE_GTK=OFF,"
+ PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON,-DENABLE_GNUTLS=OFF, gnutls"
+ PACKAGECONFIG[ssl] = ",,openssl"
+@@ -50,6 +49,7 @@ PACKAGECONFIG[lz4] = "-DENABLE_LZ4=ON,-DENABLE_LZ4=OFF, lz4"
+ 
+ # these next two options require addional layers
+ PACKAGECONFIG[c-ares] = "-DENABLE_CARES=ON,-DENABLE_CARES=OFF, c-ares"
++PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON,-DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qtbase"
+ 
+ EXTRA_OECMAKE += "-DBUILD_wireshark=ON \
+                   -DENABLE_NETLINK=ON \
+@@ -62,7 +62,7 @@ EXTRA_OECMAKE += "-DBUILD_wireshark=ON \
+                  "
+ do_install_append_class-native() {
+ 	install -d ${D}${bindir}
+-	for f in make-dissectors lemon make-taps
++	for f in lemon
+ 	do
+ 		install -m 0755 ${B}/run/$f ${D}${bindir}
+ 	done
 -- 
-2.17.1
+2.7.4
 
 
