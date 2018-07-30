@@ -1,25 +1,32 @@
 Return-Path: <Hongzhi.Song@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EAEE978D22
+	by mail.openembedded.org (Postfix) with ESMTP id ED26178D3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 01:47:44 +0000 (UTC)
+	Mon, 30 Jul 2018 03:34:14 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6U1ljn6012286
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jul 2018 18:47:46 -0700 (PDT)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Sun, 29 Jul 2018 18:47:45 -0700
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 29 Jul 2018 18:47:43 -0700
-Message-ID: <20180730014743.18367-2-hongzhi.song@windriver.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20180730014743.18367-1-hongzhi.song@windriver.com>
-References: <20180730014743.18367-1-hongzhi.song@windriver.com>
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6U3YEsQ019887
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 29 Jul 2018 20:34:14 -0700 (PDT)
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Sun, 29 Jul 2018 20:34:14 -0700
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+References: <20180713140616.15664-1-hongzhi.song@windriver.com>
+	<20180713140616.15664-2-hongzhi.song@windriver.com>
+	<CAJTo0LbXD42g6wJ4z3Kgg+TXSRaAueLgWzYjkkdq13YO3aVb+Q@mail.gmail.com>
+	<37cf1c1d-c607-6ba3-20f0-8fe9e46706f1@windriver.com>
+	<CAMKF1soQMbp7urcfEd0ri3XCQ=oyP_BwqJkoEDi8zDS1O4KqJg@mail.gmail.com>
+	<729ad129-04ef-77b7-a70e-775e63a4b7d7@windriver.com>
+Message-ID: <c58c0d27-080b-8ed9-6680-2e4b566b2811@windriver.com>
+Date: Mon, 30 Jul 2018 11:36:01 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v4 1/1] snappy: add a new recipe
+In-Reply-To: <729ad129-04ef-77b7-a70e-775e63a4b7d7@windriver.com>
+X-Originating-IP: [128.224.162.198]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/1] kernel-selftest: Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,47 +39,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 01:47:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 Jul 2018 03:34:15 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Snappy is a compression/decompression library. It does not aim for
-maximum compression, or compatibility with any other compression
-library; instead, it aims for very high speeds and reasonable compression.
+ping
 
-Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
----
- meta-oe/recipes-extended/snappy/snappy_1.1.7.bb | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+--Hongzhi
 
-diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-new file mode 100644
-index 000000000..6f1978a07
---- /dev/null
-+++ b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-@@ -0,0 +1,21 @@
-+#
-+# Copyright (C) 2014 Wind River Systems, Inc.
-+# Released under the BSD-3-Clause license (see COPYING.BSD-3 for the terms)
-+#
-+SUMMARY = "A compression/decompression library"
-+DESCRIPTION = "Snappy is a fast data compression and decompression library \
-+It was designed to be very fast and stable, but not to achieve a high \
-+compression ratio."
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
-+
-+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.7.tar.gz/sha512/32046f532606ba545a4e4825c0c66a19be449f2ca2ff760a6fa170a3603731479a7deadb683546e5f8b5033414c50f4a9a29f6d23b7a41f047e566e69eca7caf/snappy-1.1.7.tar.gz"
-+
-+SRC_URI[md5sum] = "ee9086291c9ae8deb4dac5e0b85bf54a"
-+SRC_URI[sha256sum] = "3dfa02e873ff51a11ee02b9ca391807f0c8ea0529a4924afa645fbf97163f9d4"
-+
-+inherit cmake pkgconfig
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
--- 
-2.11.0
+
+On 2018年07月27日 17:00, Hongzhi, Song wrote:
+> Hi Raj,
+>
+> Could you help to confirm that if the libelf exists in your 
+> recipe-sysroot?
+>
+> Because I can't reproduce your error.
+>
+>
+> --Hongzhi
+>
+>
+> On 2018年07月27日 16:40, Khem Raj wrote:
+>> this fails on rpi
+>>
+>> ERROR: Logfile of failure stored in:
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198 
+>>
+>> Log data follows:
+>> | DEBUG: Executing shell function do_compile
+>> | NOTE: make -j 16 CROSS_COMPILE=arm-bec-linux-gnueabi- ARCH=arm
+>> CC=arm-bec-linux-gnueabi-gcc  -march=armv7ve -mthumb -mfpu=neon-vfpv4
+>> -mfloat-abi=hard -mcpu=cortex-a7 -fstack-protector-strong
+>> -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+>> -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
+>> -Wformat-security -Werror=format-security
+>> --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot 
+>>
+>> AR=arm-bec-linux-gnueabi-ar LD=arm-bec-linux-gnueabi-ld
+>> --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot 
+>>
+>> DESTDIR=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/image
+>> -C 
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
+>> | make: Entering directory
+>> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf' 
+>>
+>> | make -C ../../../lib/bpf
+>> OUTPUT=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/ 
+>>
+>> | make[1]: Entering directory
+>> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf' 
+>>
+>> |
+>> | Auto-detecting system features:
+>> | ...                        libelf: [ ^[[31mOFF^[[m ]
+>> | ...                           bpf: [ ^[[31mOFF^[[m ]
+>> |
+>> | BPF API too old
+>> | make[1]: *** [Makefile:219: bpfdep] Error 255
+>> | make[1]: *** Waiting for unfinished jobs....
+>> | No libelf found
+>> | make[1]: *** [Makefile:216: elfdep] Error 255
+>> |   HOSTCC 
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep.o
+>> |   HOSTLD 
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep-in.o
+>> |   LINK 
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep
+>> | make[1]: Leaving directory
+>> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf' 
+>>
+>> | make: *** [Makefile:33:
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/libbpf.a] 
+>>
+>> Error 2
+>> | make: Leaving directory
+>> '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf' 
+>>
+>> | ERROR: oe_runmake failed
+>> | WARNING: 
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/run.do_compile.22198:1
+>> exit 1 from 'exit 1'
+>> | ERROR: Function failed: do_compile (log file is located at
+>> /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198) 
+>>
+>>
+>> On Mon, Jul 16, 2018 at 2:51 AM Hongzhi, Song
+>> <hongzhi.song@windriver.com> wrote:
+>>>
+>>>
+>>> On 2018年07月14日 00:23, Burton, Ross wrote:
+>>>> On 13 July 2018 at 15:06, Hongzhi.Song <hongzhi.song@windriver.com> 
+>>>> wrote:
+>>>>> +LIC_FILES_CHKSUM = 
+>>>>> "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
+>>>> Why are you shipping your own copy of the kernel's COPYING file even
+>>>> though you copy another in that prefunc?
+>>>>
+>>>> Isn't it possible to just depend on kernel-source and build directly
+>>>> from the kernel source tree?
+>>>>
+>>>>> +# for bpf and vm
+>>>>> +DEPENDS = " \
+>>>>> +    elfutils \
+>>>>> +    libcap \
+>>>>> +    libcap-ng \
+>>>>> +    fuse \
+>>>>> +    util-linux \
+>>>>> +    rsync-native \
+>>>>> +"
+>>>> Really not convinced these dependencies are accurate.
+>>>>
+>>>>> +TEST_LIST = "bpf \
+>>>>> +             vm \
+>>>>> +"
+>>>> You're not listing memfd in here, but that is the only place which
+>>>> uses fuse as far as I can tell.
+>>>>
+>>>> My suggestion is to trim the DEPENDS back to the core minimum and use
+>>>> PACKAGECONIG to select what directories get built. This means you can
+>>>> have optional test suites where the dependencies are not in oe-core
+>>>> (fuse for memfd, for example), and get the right RDEPENDS too.
+>>>>
+>>>>> +        oe_runmake -C ${S}/tools/testing/selftests/${i} 
+>>>>> INSTALL_PATH=${D}/opt/kselftest/${i} install
+>>>> FHS says /opt is for sysadmin-installed tools that are not package
+>>>> managed.  You're building a package.  You're also building a package
+>>>> which is essentially ptest.  I'd say inherit ptest, write a runner,
+>>>> and put all the binaries in $PTESTDIR.
+>>> Hi Burton,
+>>>
+>>> kernel-selftest is designed to be shared by ptest and oe-self, and 
+>>> thus is
+>>> not supposed to inherit ptest.
+>>>
+>>> The suggestions you mentioned above will be modified soon.
+>>>
+>>> --Hongzhi
+>>>
+>>>> Ross
+>>>>
+>
 
 
