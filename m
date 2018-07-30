@@ -1,48 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f182.google.com (mail-qt0-f182.google.com
-	[209.85.216.182])
-	by mail.openembedded.org (Postfix) with ESMTP id A5C40745A5
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7398F78D51
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jul 2018 21:50:25 +0000 (UTC)
-Received: by mail-qt0-f182.google.com with SMTP id y5-v6so10209657qti.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jul 2018 14:50:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8tfjdD146M8bAh5+CifjzwYGbH/jt+4sdz6NLNAahfw=;
-	b=YJxn1FLSb3wO5tpR+f4u72Tcf4YaggScJe1aYiXcClu878sNC9nwT4hqkEWRQip+xv
-	DvKzy0BXdzNGE2Ce/sxxVAVoT4hJf8BaHMe5FXLSjX3Y6/UrTfsZYO1CpN2vTysFcs9Z
-	fszGFwF7N8eXHR/o6nDC3RR+Ghep+sX4iyhY0o7Ps2V6XLVy+UU6Kmn5fc0A+4lc739u
-	QZ3RaROW1e9Az850n2DpMVjWJiwlOL0RYECEU+46rBoTVxd1Pus7ilZOzMStFzroncsy
-	j4wx5SBTDKnVQESuy/GN8Lr7LXiBZ8xForXpGWxSUMhFGt3VNzgy9+qicQC3Z53Kmout
-	i7ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=8tfjdD146M8bAh5+CifjzwYGbH/jt+4sdz6NLNAahfw=;
-	b=ZH4yYwnFNwv9jz6hamzZKZ+vCp0ngiNd9/Jn0tD6bioZAbRuwrzv+78gPrNv3uX26B
-	D6puiMEOlxivroAxYcjIJ/adS6pAJTIdaZrJmtVH80Xnop13di1DJkEDkNNJqPldz6sz
-	Nia/rsqEEZ/FUply9ABoSFPuvDxIMZcs1alyNSFnIxEWHKgIKuhkC6cv1aRUE6cap2J6
-	yzHLRuYqRx2OCet6UFO7R2ZfooJ2PwZBqRRwwKVVIrIYHnt7dNt81bG5L1faqYNklEpA
-	0WgGbWWpKen2tx/UzZ3qvHqL9TsTTNpixlVwPAT81SaZL1hVrc6OIUP1pQ4XwyiRqCv6
-	w21A==
-X-Gm-Message-State: AOUpUlFXxRAP+e2E55O5NZIGmMgPCUkOM9AOV5WVQKKWdh7Qytl5pKi5
-	TaGHNmetXpO5NeT+Gvirf/upcIL0lQyUSo2Hg3U=
-X-Google-Smtp-Source: AAOMgpeblisNcNU3koE4Dyl0D8n3ofqQJk2Wfor+XykK8QYtFS/RA8BCacekFnAckZgxnr2h/nePJwCgwfPaZN3qehA=
-X-Received: by 2002:ac8:25f1:: with SMTP id
-	f46-v6mr14799587qtf.20.1532901026307; 
-	Sun, 29 Jul 2018 14:50:26 -0700 (PDT)
+	Mon, 30 Jul 2018 01:11:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6U1BhnQ019145
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 29 Jul 2018 18:11:44 -0700 (PDT)
+Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Sun, 29 Jul 2018 18:11:43 -0700
+To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
+References: <20180729074241.17191-1-raj.khem@gmail.com>
+From: Yi Zhao <yi.zhao@windriver.com>
+Message-ID: <c568b0c1-416c-f712-7702-3c60f38ec955@windriver.com>
+Date: Mon, 30 Jul 2018 09:11:41 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-References: <1532882465-3210-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1532882465-3210-1-git-send-email-akuster808@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Jul 2018 14:50:15 -0700
-Message-ID: <CAMKF1spEi6G+gJMo1Wd-EpaY=-+KokOBcKjgjQp8ND7WOipwhg@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][v3][PATCH] wireshark: update to 2.6.2
+In-Reply-To: <20180729074241.17191-1-raj.khem@gmail.com>
+X-Originating-IP: [128.224.162.137]
+Subject: Re: [meta-networking][PATCH] samba: Update to 4.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,161 +33,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jul 2018 21:50:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Jul 2018 01:11:45 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Can you also validate if it=E2=80=99s building ok on musl
 
-On Sun, Jul 29, 2018 at 9:41 AM Armin Kuster <akuster808@gmail.com> wrote:
 
-> [v3]
-> Get  wireshark-gtk building again
-> split tshark, wireshark-gtk into their own pkgs
->
-> [v2]
-> Fix native build, lemon is the only one needed natively
->
-> [v1]
-> includes security fixes:
->
-> wnpa-sec-2018-34 BGP dissector large loop. Bug 13741. CVE-2018-14342.
-> wnpa-sec-2018-35 ISMP dissector crash. Bug 14672. CVE-2018-14344.
-> wnpa-sec-2018-36 Multiple dissectors could crash. Bug 14675.
-> CVE-2018-14340.
-> wnpa-sec-2018-37 ASN.1 BER dissector crash. Bug 14682. CVE-2018-14343.
-> wnpa-sec-2018-38 MMSE dissector infinite loop. Bug 14738. CVE-2018-14339.
-> wnpa-sec-2018-39 DICOM dissector crash. Bug 14742. CVE-2018-14341.
-> wnpa-sec-2018-40 Bazaar dissector infinite loop. Bug 14841. CVE-2018-1436=
-8.
-> wnpa-sec-2018-41 HTTP2 dissector crash. Bug 14869. CVE-2018-14369.
-> wnpa-sec-2018-42 CoAP dissector crash. Bug 14966. CVE-2018-14367.
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../{wireshark_2.6.1.bb =3D> wireshark_2.6.2.bb}     | 34
-> +++++++++++++++-------
->  1 file changed, 24 insertions(+), 10 deletions(-)
->  rename meta-networking/recipes-support/wireshark/{wireshark_2.6.1.bb =3D=
->
-> wireshark_2.6.2.bb} (70%)
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
-> b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-> similarity index 70%
-> rename from meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
-> rename to meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-> index 91c5e96..1735ae7 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
-> @@ -14,8 +14,8 @@ SRC_URI =3D "
-> https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
->
->  UPSTREAM_CHECK_URI =3D "https://1.as.dl.wireshark.org/src"
->
-> -SRC_URI[md5sum] =3D "b0e9e5fe22e96d9fdfad18f750fa8f55"
-> -SRC_URI[sha256sum] =3D
-> "ab6e5bbc3464c956347b8671ce8397950ad5daff3bf9964c967d495f4ddbcd88"
-> +SRC_URI[md5sum] =3D "086d235509717190d06554b2ab870209"
-> +SRC_URI[sha256sum] =3D
-> "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
->
->  PE =3D "1"
->
-> @@ -23,8 +23,11 @@ inherit cmake pkgconfig pythonnative perlnative
-> upstream-version-is-even
->
->  ARM_INSTRUCTION_SET =3D "arm"
->
-> +# Options: gtk+, gtk+3 and qt5
-> +GTK =3D "gtk+3"
-> +
->  PACKAGECONFIG ?=3D "libpcap gnutls libnl libcap sbc"
-> -PACKAGECONFIG_append_class-target =3D "
-> ${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk3 graphics ", "", d)}=
-"
-> +PACKAGECONFIG_append_class-target =3D "
-> ${@bb.utils.contains("DISTRO_FEATURES", "x11", " ${GTK}", "", d)}"
->
->  PACKAGECONFIG_class-native =3D "libpcap gnutls ssl libssh"
->
-> @@ -33,10 +36,8 @@ PACKAGECONFIG[libpcap] =3D
-> "-DENABLE_PCAP=3DON,-DENABLE_PCAP=3DOFF -DENABLE_PCAP_NG_DE
->  PACKAGECONFIG[libsmi] =3D "-DENABLE_SMI=3DON,-DENABLE_SMI=3DOFF,libsmi"
->  PACKAGECONFIG[libnl] =3D ",,libnl"
->  PACKAGECONFIG[portaudio] =3D "-DENABLE_PORTAUDIO=3DON,-DENABLE_PORTAUDIO=
-=3DOFF,
-> portaudio-v19"
-> -PACKAGECONFIG[gtk2] =3D "-DENABLE_GTK=3DON,-DENABLE_GTK=3DOFF, gtk+"
-> -PACKAGECONFIG[gtk3] =3D "-DENABLE_GTK3=3DON,-DENABLE_GTK3=3DOFF, gtk+3"
-> -PACKAGECONFIG[qt5] =3D "-DENABLE_QT5=3DON,-DENABLE_QT5=3DOFF
-> -DBUILD_wireshark=3DOFF, qtbase"
-> -PACKAGECONFIG[graphics] =3D ",-DENABLE_GTK=3DOFF,"
-> +PACKAGECONFIG[gtk+] =3D "-DENABLE_GTK=3DON -DBUILD_wireshark_gtk=3DON,
-> -DENABLE_GTK=3DOFF, gtk+"
-> +PACKAGECONFIG[gtk+3] =3D "-DENABLE_GTK3=3DON -DBUILD_wireshark_gtk=3DON,
-> -DENABLE_GTK3=3DOFF, gtk+3"
->  PACKAGECONFIG[gnutls] =3D "-DENABLE_GNUTLS=3DON,-DENABLE_GNUTLS=3DOFF, g=
-nutls"
->  PACKAGECONFIG[ssl] =3D ",,openssl"
->  PACKAGECONFIG[krb5] =3D "-DENABLE_KRB5=3DON,-DENABLE_KRB5=3DOFF, krb5"
-> @@ -50,9 +51,9 @@ PACKAGECONFIG[lz4] =3D "-DENABLE_LZ4=3DON,-DENABLE_LZ4=
-=3DOFF,
-> lz4"
->
->  # these next two options require addional layers
->  PACKAGECONFIG[c-ares] =3D "-DENABLE_CARES=3DON,-DENABLE_CARES=3DOFF, c-a=
-res"
-> +PACKAGECONFIG[qt5] =3D "-DENABLE_QT5=3DON -DBUILD_wireshark=3DON,
-> -DENABLE_QT5=3DOFF -DBUILD_wireshark=3DOFF, qtbase"
->
-> -EXTRA_OECMAKE +=3D "-DBUILD_wireshark=3DON \
-> -                  -DENABLE_NETLINK=3DON \
-> +EXTRA_OECMAKE +=3D "-DENABLE_NETLINK=3DON \
->                    -DBUILD_mmdbresolve=3DOFF \
->                    -DBUILD_randpktdump=3DOFF \
->                    -DBUILD_androiddump=3DOFF \
-> @@ -60,9 +61,11 @@ EXTRA_OECMAKE +=3D "-DBUILD_wireshark=3DON \
->                    -DM_INCLUDE_DIR=3D${includedir} \
->                    -DM_LIBRARY=3D${libdir} \
->                   "
-> +CFLAGS_append =3D " -lm"
-> +
->  do_install_append_class-native() {
->         install -d ${D}${bindir}
-> -       for f in make-dissectors lemon make-taps
-> +       for f in lemon
->         do
->                 install -m 0755 ${B}/run/$f ${D}${bindir}
->         done
-> @@ -75,6 +78,17 @@ do_install_append_class-target() {
->         done
->  }
->
-> +PACKAGE_BEFORE_PN +=3D "tshark"
-> +PACKAGE_BEFORE_PN +=3D "${PN}-gtk"
-> +
-> +FILES_tshark =3D "${bindir}/tshark ${mandir}/man1/tshark.*"
-> +FILES_${PN}-gtk =3D "${bindir}/wireshark-gtk ${datadir}/icons
-> ${datadir}/appdata \
-> +                   ${datadir}/applications ${datadir}/wireshark
-> ${datadir}/mime \
-> +                   ${mandir}/man1/wireshark.* "
-> +
->  FILES_${PN} +=3D "${datadir}*"
->
-> +RDEPENDS_tshark =3D "wireshark"
-> +RDEPENDS_${PN}-gtk =3D "${@bb.utils.contains("DISTRO_FEATURES", "x11",
-> "${GTK}", "", d)} wireshark"
-> +
->  BBCLASSEXTEND =3D "native"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+在 2018年07月29日 15:42, Khem Raj 写道:
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
+> similarity index 94%
+> rename from meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
+> rename to meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
+> index fc1a2e0fd0..5afb1d1345 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
+> @@ -13,25 +13,27 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
+>   "
+>   
+>   SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+> +           file://smb.conf \
+>              file://16-do-not-check-xsltproc-manpages.patch \
+>              file://20-do-not-import-target-module-while-cross-compile.patch \
+>              file://21-add-config-option-without-valgrind.patch \
+> -           file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
+> -           file://0006-avoid-using-colon-in-the-checking-msg.patch \
+>              file://netdb_defines.patch \
+>              file://glibc_only.patch \
+>              file://iconv-4.7.0.patch \
+>              file://dnsserver-4.7.0.patch \
+>              file://smb_conf-4.7.0.patch \
+>              file://volatiles.03_samba \
+> -          "
+> +           file://0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch \
+> +           file://samba-pam.patch \
+> +           file://samba-4.3.9-remove-getpwent_r.patch \
+> +           "
+>   SRC_URI_append_libc-musl = " \
+>              file://samba-pam.patch \
+>              file://samba-4.3.9-remove-getpwent_r.patch \
+>             "
+>   
+> -SRC_URI[md5sum] = "16b70fda54cf84521ed976a0856430cc"
+> -SRC_URI[sha256sum] = "ca6fca9d7e248bcaa55c54bdcc115eeed10660074da5c54a2b78dd3cccc604de"
+> +SRC_URI[md5sum] = "67f271ed6b793c2acfe014b5b8f0cca8"
+> +SRC_URI[sha256sum] = "e0569a8a605d5dfb49f1fdd11db796f4d36fe0351c4a7f21387ef253010b82ed"
+>   
+>   UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.7(\.\d+)+).tar.gz"
+Please also update UPSTREAM_CHECK_REGEX to check 4.8 series: 
+"samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
+
+//Yi
+
+>   
+> @@ -39,7 +41,7 @@ inherit systemd waf-samba cpan-base perlnative update-rc.d
+>   # remove default added RDEPENDS on perl
+>   RDEPENDS_${PN}_remove = "perl"
+>   
+> -DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libbsd libaio libpam"
+> +DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libbsd libaio libpam"
+>   
+>   inherit distro_features_check
+>   REQUIRED_DISTRO_FEATURES = "pam"
+> @@ -104,7 +106,7 @@ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODU
+>   # .so files so there will not be a conflict.  This is not done consistantly, so be very careful
+>   # when adding to this list.
+>   #
+> -SAMBA4_LIBS="heimdal,cmocka,NONE"
+> +SAMBA4_LIBS="heimdal,cmocka,ldb,pyldb-util,NONE"
+>   
+>   EXTRA_OECONF += "--enable-fhs \
+>                    --with-piddir=/run \
+> @@ -135,7 +137,7 @@ do_install_append() {
+>       done
+>   
+>       install -d ${D}${systemd_system_unitdir}
+> -    install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
+> +    install -m 0644 ${S}/bin/default/packaging/systemd/*.service ${D}${systemd_system_unitdir}/
+>       sed -e 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' \
+>           -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
+>           -i ${D}${systemd_system_unitdir}/*.service
+> @@ -159,7 +161,7 @@ do_install_append() {
+>   
+>       install -d ${D}${sysconfdir}/samba
+>       echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
+> -    install -m644 packaging/RHEL/setup/smb.conf ${D}${sysconfdir}/samba/smb.conf
+> +    install -m644 ${WORKDIR}/smb.conf ${D}${sysconfdir}/samba/smb.conf
+>       install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
+>   
+>       install -d ${D}${sysconfdir}/default
+> @@ -268,6 +270,7 @@ FILES_winbind = "${sbindir}/winbindd \
+>                    ${libdir}/samba/idmap \
+>                    ${libdir}/samba/nss_info \
+>                    ${libdir}/winbind_krb5_locator.so \
+> +                 ${libdir}/winbind-krb5-localauth.so \
+>                    ${sysconfdir}/init.d/winbind \
+>                    ${systemd_system_unitdir}/winbind.service"
+>   
+
 
