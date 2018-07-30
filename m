@@ -1,35 +1,46 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BA17278DB8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 12:12:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6UCCWC7021093
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 30 Jul 2018 05:12:32 -0700 (PDT)
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Mon, 30 Jul 2018 05:12:31 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <20180713140616.15664-1-hongzhi.song@windriver.com>
-	<20180713140616.15664-2-hongzhi.song@windriver.com>
-	<CAJTo0LbXD42g6wJ4z3Kgg+TXSRaAueLgWzYjkkdq13YO3aVb+Q@mail.gmail.com>
-	<37cf1c1d-c607-6ba3-20f0-8fe9e46706f1@windriver.com>
-	<CAMKF1soQMbp7urcfEd0ri3XCQ=oyP_BwqJkoEDi8zDS1O4KqJg@mail.gmail.com>
-	<729ad129-04ef-77b7-a70e-775e63a4b7d7@windriver.com>
-	<c58c0d27-080b-8ed9-6680-2e4b566b2811@windriver.com>
-	<CAMKF1so=Z61q3ZqGmmv6pzht5b9CK1_CFofNA9yKdXE-orX_3A@mail.gmail.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <72cde4ee-b3b7-ca7d-bb2b-edc567fd1837@windriver.com>
-Date: Mon, 30 Jul 2018 20:14:21 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com
+	[209.85.161.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 134B578D72;
+	Mon, 30 Jul 2018 14:10:42 +0000 (UTC)
+Received: by mail-yw0-f171.google.com with SMTP id c135-v6so4396291ywa.0;
+	Mon, 30 Jul 2018 07:10:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=8LpxwTBRv8Kxd6+j91srYhpM+h3cOKozWlvKYuvawwU=;
+	b=VeizvjQT+DcWW6tvDwX/NPv4uIVV4r0XoiLqaJgfNWDoSE6L8KmlGrftOaZN1yO5Px
+	RsNahuyOsdl/e635Rn10oq6yT+oK8oy3z7HclbixT2M16ih+lRSJC3xUVV8nYVkxpJ0x
+	kYI7mERG4Oo9yp6zK9Yv7cClDqTAYgkffcfMYDniEVJlUvpewPRtTH7fHq/tbbogB2oj
+	GtoZX1OpPGN5vAVUx7uFKNWMBsgwov/xViRqMCduW2Tcu6Gc5jtWG63wk8fagJSuEMNo
+	abFzwjHSG9nzbkAp4FVasQ5UfPBlvEIoIFVOc5zUvt6t6qPjW0SsjDTVsnE1PeE7o8vc
+	rYKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=8LpxwTBRv8Kxd6+j91srYhpM+h3cOKozWlvKYuvawwU=;
+	b=twKZ+GS+uuJBM8sXGzoGRGep8LD/ZGxwpLoMewORqoVjv7sZ1MAOwmkpNW6bkMBT8H
+	uVEoYuc73UO0wLmimRemFTQW/jhd7+HLpAddE/P4+XePdKYdYwEVBYt+U41SaUsCimsM
+	TsN+VJNVf6DwYE+/Ha4UMwHFrDKVQGwPGCsdMFZH4E0BAigr3aG+cPMW/pl7MZ7zD8yX
+	+dzAp8srCfpiH1+AkRUKlDFURQTWjfC1ZdBbUDgGuBOVbbWW8xh0LGQzVhyWreAd0fVR
+	hSArKkD4NyrSdfdOTJTRDnfgCEGfCJgCFhzW50KmHWOZ0jq6O1RMGfdeiSVQMrDoA8rc
+	8Exw==
+X-Gm-Message-State: AOUpUlFdBckRbRdCMA3a1sZjDLA84exdggr6XvX3ezLhF/hwnjPiSfWH
+	Pt2ZLKonSKhRPtb8HLpNo8H+Vmvc6Lx6aDwmxR4=
+X-Google-Smtp-Source: AAOMgpeGZYT7jRDYU3sjx24ZJrdyNZqz0MeGEqzqRgO4rRR6xBrtQdHvmBjUArI4xdf74ua8IEHA5AbXwrpAHWF+lK8=
+X-Received: by 2002:a81:a692:: with SMTP id
+	d140-v6mr8740327ywh.50.1532959843650; 
+	Mon, 30 Jul 2018 07:10:43 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1so=Z61q3ZqGmmv6pzht5b9CK1_CFofNA9yKdXE-orX_3A@mail.gmail.com>
-X-Originating-IP: [128.224.162.198]
+From: Adam Lee <adam.yh.lee@gmail.com>
+Date: Mon, 30 Jul 2018 10:10:32 -0400
+Message-ID: <CAFeBWL4qPSzB=o8BicxhpW-xwi4BQhBFQPuajx5A0GA=X=znYg@mail.gmail.com>
+To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>, 
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] kernel-selftest: Add a recipe on kernel selftest
+Subject: devtool add recipe with no srctree / fetchuri?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,220 +53,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 12:12:35 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 30 Jul 2018 14:10:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Raj,
+Is it possible to run 'devtool add [recipe-name]' without 'srctree' or
+'fetchuri'?
+I just want to add a simple recipe with a few files to be installed on the
+target file system.
+I can directly add a file in my meta-layer, but devtool is probably the
+more correct approach.
 
-I can continue to fix the error with rpi that you build. But I found 
-that rpi gets kernel
-
-from git://github.com/raspberrypi/linux.git;branch=rpi-4.14.y, which is 
-not belong
-
-to openembeded. I think that the rpi recipe must make some special 
-change which
-
-cause the error.
-
-
-And the recipe in meta-oe is OK both with glibc and musl. So could you 
-build a project
-
-with oe-core's kernel?  If there is no problem, would you merge the recipe?
-
-
---Hongzhi
-
-
-On 2018年07月30日 12:02, Khem Raj wrote:
-> I can not get it compiling for musl and rpi with poky lsb equivalent 
-> distro until there are clean builds it won’t be possible for me to get 
-> this in
->
-> On Sun, Jul 29, 2018 at 8:34 PM Hongzhi, Song 
-> <hongzhi.song@windriver.com <mailto:hongzhi.song@windriver.com>> wrote:
->
->     ping
->
->     --Hongzhi
->
->
->     On 2018年07月27日 17:00, Hongzhi, Song wrote:
->     > Hi Raj,
->     >
->     > Could you help to confirm that if the libelf exists in your
->     > recipe-sysroot?
->     >
->     > Because I can't reproduce your error.
->     >
->     >
->     > --Hongzhi
->     >
->     >
->     > On 2018年07月27日 16:40, Khem Raj wrote:
->     >> this fails on rpi
->     >>
->     >> ERROR: Logfile of failure stored in:
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198
->
->     >>
->     >> Log data follows:
->     >> | DEBUG: Executing shell function do_compile
->     >> | NOTE: make -j 16 CROSS_COMPILE=arm-bec-linux-gnueabi- ARCH=arm
->     >> CC=arm-bec-linux-gnueabi-gcc  -march=armv7ve -mthumb
->     -mfpu=neon-vfpv4
->     >> -mfloat-abi=hard -mcpu=cortex-a7 -fstack-protector-strong
->     >> -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
->     -Werror=format-security
->     >> -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
->     >> -Wformat-security -Werror=format-security
->     >>
->     --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot
->
->     >>
->     >> AR=arm-bec-linux-gnueabi-ar LD=arm-bec-linux-gnueabi-ld
->     >>
->     --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot
->
->     >>
->     >>
->     DESTDIR=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/image
->     >> -C
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
->     >> | make: Entering directory
->     >>
->     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
->
->     >>
->     >> | make -C ../../../lib/bpf
->     >>
->     OUTPUT=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/
->
->     >>
->     >> | make[1]: Entering directory
->     >>
->     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf'
->
->     >>
->     >> |
->     >> | Auto-detecting system features:
->     >> | ...                        libelf: [ ^[[31mOFF^[[m ]
->     >> | ...                           bpf: [ ^[[31mOFF^[[m ]
->     >> |
->     >> | BPF API too old
->     >> | make[1]: *** [Makefile:219: bpfdep] Error 255
->     >> | make[1]: *** Waiting for unfinished jobs....
->     >> | No libelf found
->     >> | make[1]: *** [Makefile:216: elfdep] Error 255
->     >> |   HOSTCC
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep.o
->     >> |   HOSTLD
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep-in.o
->     >> |   LINK
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep
->     >> | make[1]: Leaving directory
->     >>
->     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf'
->
->     >>
->     >> | make: *** [Makefile:33:
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/libbpf.a]
->
->     >>
->     >> Error 2
->     >> | make: Leaving directory
->     >>
->     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
->
->     >>
->     >> | ERROR: oe_runmake failed
->     >> | WARNING:
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/run.do_compile.22198:1
->     >> exit 1 from 'exit 1'
->     >> | ERROR: Function failed: do_compile (log file is located at
->     >>
->     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198)
->
->     >>
->     >>
->     >> On Mon, Jul 16, 2018 at 2:51 AM Hongzhi, Song
->     >> <hongzhi.song@windriver.com
->     <mailto:hongzhi.song@windriver.com>> wrote:
->     >>>
->     >>>
->     >>> On 2018年07月14日 00:23, Burton, Ross wrote:
->     >>>> On 13 July 2018 at 15:06, Hongzhi.Song
->     <hongzhi.song@windriver.com <mailto:hongzhi.song@windriver.com>>
->     >>>> wrote:
->     >>>>> +LIC_FILES_CHKSUM =
->     >>>>> "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
->     >>>> Why are you shipping your own copy of the kernel's COPYING
->     file even
->     >>>> though you copy another in that prefunc?
->     >>>>
->     >>>> Isn't it possible to just depend on kernel-source and build
->     directly
->     >>>> from the kernel source tree?
->     >>>>
->     >>>>> +# for bpf and vm
->     >>>>> +DEPENDS = " \
->     >>>>> +    elfutils \
->     >>>>> +    libcap \
->     >>>>> +    libcap-ng \
->     >>>>> +    fuse \
->     >>>>> +    util-linux \
->     >>>>> +    rsync-native \
->     >>>>> +"
->     >>>> Really not convinced these dependencies are accurate.
->     >>>>
->     >>>>> +TEST_LIST = "bpf \
->     >>>>> +             vm \
->     >>>>> +"
->     >>>> You're not listing memfd in here, but that is the only place
->     which
->     >>>> uses fuse as far as I can tell.
->     >>>>
->     >>>> My suggestion is to trim the DEPENDS back to the core minimum
->     and use
->     >>>> PACKAGECONIG to select what directories get built. This means
->     you can
->     >>>> have optional test suites where the dependencies are not in
->     oe-core
->     >>>> (fuse for memfd, for example), and get the right RDEPENDS too.
->     >>>>
->     >>>>> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
->     >>>>> INSTALL_PATH=${D}/opt/kselftest/${i} install
->     >>>> FHS says /opt is for sysadmin-installed tools that are not
->     package
->     >>>> managed.  You're building a package. You're also building a
->     package
->     >>>> which is essentially ptest.  I'd say inherit ptest, write a
->     runner,
->     >>>> and put all the binaries in $PTESTDIR.
->     >>> Hi Burton,
->     >>>
->     >>> kernel-selftest is designed to be shared by ptest and oe-self,
->     and
->     >>> thus is
->     >>> not supposed to inherit ptest.
->     >>>
->     >>> The suggestions you mentioned above will be modified soon.
->     >>>
->     >>> --Hongzhi
->     >>>
->     >>>> Ross
->     >>>>
->     >
->
-
+Adam
 
