@@ -1,26 +1,28 @@
-Return-Path: <Yi.Zhao@windriver.com>
+Return-Path: <Mingli.Yu@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7398F78D51
+	by mail.openembedded.org (Postfix) with ESMTP id A446778D49
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 01:11:45 +0000 (UTC)
+	Mon, 30 Jul 2018 01:41:58 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6U1BhnQ019145
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6U1fw9Y019289
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 29 Jul 2018 18:11:44 -0700 (PDT)
-Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	Sun, 29 Jul 2018 18:41:58 -0700 (PDT)
+Received: from [128.224.162.173] (128.224.162.173) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Sun, 29 Jul 2018 18:11:43 -0700
-To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-References: <20180729074241.17191-1-raj.khem@gmail.com>
-From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <c568b0c1-416c-f712-7702-3c60f38ec955@windriver.com>
-Date: Mon, 30 Jul 2018 09:11:41 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Sun, 29 Jul 2018 18:41:57 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <20180724093854.17201-1-mingli.yu@windriver.com>
+	<CAMKF1so9XxBM8_QdOR73kpME0u8HfLhBZyDaLL_LR_F2WnQhuQ@mail.gmail.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5B5E6B70.9090307@windriver.com>
+Date: Mon, 30 Jul 2018 09:35:44 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-In-Reply-To: <20180729074241.17191-1-raj.khem@gmail.com>
-X-Originating-IP: [128.224.162.137]
-Subject: Re: [meta-networking][PATCH] samba: Update to 4.8.3
+In-Reply-To: <CAMKF1so9XxBM8_QdOR73kpME0u8HfLhBZyDaLL_LR_F2WnQhuQ@mail.gmail.com>
+X-Originating-IP: [128.224.162.173]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] librelp: Upgrade to 1.2.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,102 +35,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 01:11:45 -0000
+X-List-Received-Date: Mon, 30 Jul 2018 01:41:58 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
 
 
-在 2018年07月29日 15:42, Khem Raj 写道:
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
-> similarity index 94%
-> rename from meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
-> rename to meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
-> index fc1a2e0fd0..5afb1d1345 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.7.8.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
-> @@ -13,25 +13,27 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
->   "
->   
->   SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-> +           file://smb.conf \
->              file://16-do-not-check-xsltproc-manpages.patch \
->              file://20-do-not-import-target-module-while-cross-compile.patch \
->              file://21-add-config-option-without-valgrind.patch \
-> -           file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
-> -           file://0006-avoid-using-colon-in-the-checking-msg.patch \
->              file://netdb_defines.patch \
->              file://glibc_only.patch \
->              file://iconv-4.7.0.patch \
->              file://dnsserver-4.7.0.patch \
->              file://smb_conf-4.7.0.patch \
->              file://volatiles.03_samba \
-> -          "
-> +           file://0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch \
-> +           file://samba-pam.patch \
-> +           file://samba-4.3.9-remove-getpwent_r.patch \
-> +           "
->   SRC_URI_append_libc-musl = " \
->              file://samba-pam.patch \
->              file://samba-4.3.9-remove-getpwent_r.patch \
->             "
->   
-> -SRC_URI[md5sum] = "16b70fda54cf84521ed976a0856430cc"
-> -SRC_URI[sha256sum] = "ca6fca9d7e248bcaa55c54bdcc115eeed10660074da5c54a2b78dd3cccc604de"
-> +SRC_URI[md5sum] = "67f271ed6b793c2acfe014b5b8f0cca8"
-> +SRC_URI[sha256sum] = "e0569a8a605d5dfb49f1fdd11db796f4d36fe0351c4a7f21387ef253010b82ed"
->   
->   UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.7(\.\d+)+).tar.gz"
-Please also update UPSTREAM_CHECK_REGEX to check 4.8 series: 
-"samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
+On 2018年07月27日 22:17, Khem Raj wrote:
+> fails with security_flags turned on
 
-//Yi
+Will fix it in V2.
 
->   
-> @@ -39,7 +41,7 @@ inherit systemd waf-samba cpan-base perlnative update-rc.d
->   # remove default added RDEPENDS on perl
->   RDEPENDS_${PN}_remove = "perl"
->   
-> -DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libbsd libaio libpam"
-> +DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libbsd libaio libpam"
->   
->   inherit distro_features_check
->   REQUIRED_DISTRO_FEATURES = "pam"
-> @@ -104,7 +106,7 @@ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODU
->   # .so files so there will not be a conflict.  This is not done consistantly, so be very careful
->   # when adding to this list.
->   #
-> -SAMBA4_LIBS="heimdal,cmocka,NONE"
-> +SAMBA4_LIBS="heimdal,cmocka,ldb,pyldb-util,NONE"
->   
->   EXTRA_OECONF += "--enable-fhs \
->                    --with-piddir=/run \
-> @@ -135,7 +137,7 @@ do_install_append() {
->       done
->   
->       install -d ${D}${systemd_system_unitdir}
-> -    install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
-> +    install -m 0644 ${S}/bin/default/packaging/systemd/*.service ${D}${systemd_system_unitdir}/
->       sed -e 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' \
->           -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
->           -i ${D}${systemd_system_unitdir}/*.service
-> @@ -159,7 +161,7 @@ do_install_append() {
->   
->       install -d ${D}${sysconfdir}/samba
->       echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
-> -    install -m644 packaging/RHEL/setup/smb.conf ${D}${sysconfdir}/samba/smb.conf
-> +    install -m644 ${WORKDIR}/smb.conf ${D}${sysconfdir}/samba/smb.conf
->       install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
->   
->       install -d ${D}${sysconfdir}/default
-> @@ -268,6 +270,7 @@ FILES_winbind = "${sbindir}/winbindd \
->                    ${libdir}/samba/idmap \
->                    ${libdir}/samba/nss_info \
->                    ${libdir}/winbind_krb5_locator.so \
-> +                 ${libdir}/winbind-krb5-localauth.so \
->                    ${sysconfdir}/init.d/winbind \
->                    ${systemd_system_unitdir}/winbind.service"
->   
+Thanks,
 
+>
+> | ../../git/src/tcp.c:352:57: error: '%s' directive output may be
+> truncated writing up to 1024 bytes into a region of size 1011
+> [-Werror=format-truncation=]
+> |      snprintf((char*)szHname, NI_MAXHOST, "[MALICIOUS:IP=%s]", szIP);
+> |                                                          ^~    ~~~~
+> | In file included from
+> /mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/librelp/1.2.16-r0/recipe-sysroot/usr/include/stdio.h:862,
+> |                  from ../../git/src/tcp.c:38:
+> | /mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/librelp/1.2.16-r0/recipe-sysroot/usr/include/bits/stdio2.h:64:10:
+> note: '__builtin___snprintf_chk' output between 16 and 1040 bytes into
+> a destination of size 1025
+> |    return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+> |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> |         __bos (__s), __fmt, __va_arg_pack ());
+> |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> | cc1: all warnings being treated as errors
+> | make[2]: *** [Makefile:536: librelp_la-tcp.lo] Error 1
+> On Tue, Jul 24, 2018 at 2:39 AM <mingli.yu@windriver.com> wrote:
+>>
+>> From: Mingli Yu <mingli.yu@windriver.com>
+>>
+>> Add 0001-src-tcp.c-fix-jump-misses-init-error.patch
+>> to fix -Werror=jump-misses-init error
+>>
+>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> ---
+>>   ...src-tcp.c-fix-jump-misses-init-error.patch | 71 +++++++++++++++++++
+>>   .../{librelp_1.2.14.bb => librelp_1.2.16.bb}  |  6 +-
+>>   2 files changed, 75 insertions(+), 2 deletions(-)
+>>   create mode 100644 meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch
+>>   rename meta-oe/recipes-extended/rsyslog/{librelp_1.2.14.bb => librelp_1.2.16.bb} (59%)
+>>
+>> diff --git a/meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch b/meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch
+>> new file mode 100644
+>> index 000000000..68b686346
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/rsyslog/librelp/0001-src-tcp.c-fix-jump-misses-init-error.patch
+>> @@ -0,0 +1,71 @@
+>> +From 3e5a0cb440c788e2383e40ab23ac1cf01d96961b Mon Sep 17 00:00:00 2001
+>> +From: Mingli Yu <mingli.yu@windriver.com>
+>> +Date: Tue, 24 Jul 2018 01:30:25 -0700
+>> +Subject: [PATCH] src/tcp.c: fix jump-misses-init error
+>> +
+>> +Fix below jump-misses-init error
+>> +
+>> +| In file included from ../../git/src/tcp.c:51:
+>> +| ../../git/src/tcp.c: In function 'relpTcpConnect':
+>> +| ../../git/src/relp.h:220:3: error: jump skips variable initialization [-Werror=jump-misses-init]
+>> +|    goto finalize_it;  \
+>> +|    ^~~~
+>> +| ../../git/src/tcp.c:1951:3: note: in expansion of macro 'ABORT_FINALIZE'
+>> +|    ABORT_FINALIZE(RELP_RET_IO_ERR);
+>> +|    ^~~~~~~~~~~~~~
+>> +| ../../git/src/tcp.c:2005:1: note: label 'finalize_it' defined here
+>> +|  finalize_it:
+>> +|  ^~~~~~~~~~~
+>> +| ../../git/src/tcp.c:1991:6: note: 'r' declared here
+>> +|   int r = getsockopt(pThis->sock, SOL_SOCKET, SO_ERROR, &so_error, &len);
+>> +|       ^
+>> +| In file included from ../../git/src/tcp.c:51:
+>> +| ../../git/src/relp.h:220:3: error: jump skips variable initialization [-Werror=jump-misses-init]
+>> +|    goto finalize_it;  \
+>> +|    ^~~~
+>> +| ../../git/src/tcp.c:1951:3: note: in expansion of macro 'ABORT_FINALIZE'
+>> +|    ABORT_FINALIZE(RELP_RET_IO_ERR);
+>> +|    ^~~~~~~~~~~~~~
+>> +| ../../git/src/tcp.c:2005:1: note: label 'finalize_it' defined here
+>> +|  finalize_it:
+>> +|  ^~~~~~~~~~~
+>> +| ../../git/src/tcp.c:1989:12: note: 'len' declared here
+>> +|   socklen_t len = sizeof so_error;
+>> +|             ^~~
+>> +
+>> +Upstream-Status: Submitted[https://github.com/rsyslog/librelp/pull/117]
+>> +
+>> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>> +---
+>> + src/tcp.c | 7 ++++---
+>> + 1 file changed, 4 insertions(+), 3 deletions(-)
+>> +
+>> +diff --git a/src/tcp.c b/src/tcp.c
+>> +index f35eb84..fb34dc7 100644
+>> +--- a/src/tcp.c
+>> ++++ b/src/tcp.c
+>> +@@ -1936,6 +1936,9 @@ relpTcpConnect(relpTcp_t *const pThis,
+>> +       struct addrinfo hints;
+>> +       struct addrinfo *reslocal = NULL;
+>> +       struct pollfd pfd;
+>> ++      int so_error;
+>> ++      socklen_t len = sizeof so_error;
+>> ++      int r;
+>> +
+>> +       ENTER_RELPFUNC;
+>> +       RELPOBJ_assert(pThis, Tcp);
+>> +@@ -1985,10 +1988,8 @@ relpTcpConnect(relpTcp_t *const pThis,
+>> +               ABORT_FINALIZE(RELP_RET_TIMED_OUT);
+>> +       }
+>> +
+>> +-      int so_error;
+>> +-      socklen_t len = sizeof so_error;
+>> +
+>> +-      int r = getsockopt(pThis->sock, SOL_SOCKET, SO_ERROR, &so_error, &len);
+>> ++      r = getsockopt(pThis->sock, SOL_SOCKET, SO_ERROR, &so_error, &len);
+>> +       if (r == -1 || so_error != 0) {
+>> +               pThis->pEngine->dbgprint("socket has an error %d\n", so_error);
+>> +               ABORT_FINALIZE(RELP_RET_IO_ERR);
+>> +--
+>> +2.17.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/rsyslog/librelp_1.2.14.bb b/meta-oe/recipes-extended/rsyslog/librelp_1.2.16.bb
+>> similarity index 59%
+>> rename from meta-oe/recipes-extended/rsyslog/librelp_1.2.14.bb
+>> rename to meta-oe/recipes-extended/rsyslog/librelp_1.2.16.bb
+>> index 28047eb54..6c68f6040 100644
+>> --- a/meta-oe/recipes-extended/rsyslog/librelp_1.2.14.bb
+>> +++ b/meta-oe/recipes-extended/rsyslog/librelp_1.2.16.bb
+>> @@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
+>>
+>>   DEPENDS = "gmp nettle libidn zlib gnutls"
+>>
+>> -SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https"
+>> +SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https \
+>> +           file://0001-src-tcp.c-fix-jump-misses-init-error.patch \
+>> +"
+>>
+>> -SRCREV = "fc512e337bfc7c92770246dbff5f482b879498b9"
+>> +SRCREV = "5e849ff060be0c7dce972e194c54fdacfee0adc2"
+>>
+>>   S = "${WORKDIR}/git"
+>>
+>> --
+>> 2.17.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
