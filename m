@@ -1,29 +1,25 @@
 Return-Path: <robert.joslyn@redrectangle.org>
-X-Greylist: delayed 3359 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 30 Jul 2018 03:37:13 UTC
 Received: from slow1-d.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
-	by mail.openembedded.org (Postfix) with ESMTP id BBE5678D3F
+	by mail.openembedded.org (Postfix) with ESMTP id 5A90978D50
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 03:37:13 +0000 (UTC)
+	Mon, 30 Jul 2018 03:38:07 +0000 (UTC)
 Received: from relay4-d.mail.gandi.net (unknown [217.70.183.196])
-	by slow1-d.mail.gandi.net (Postfix) with ESMTP id D663A3A06DB
+	by slow1-d.mail.gandi.net (Postfix) with ESMTP id C6A8A3A2125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 04:16:44 +0200 (CEST)
+	Mon, 30 Jul 2018 04:16:32 +0200 (CEST)
 X-Originating-IP: 204.52.246.158
 Received: from localhost.localdomain (eastside-a.concentrator.fsr.net
 	[204.52.246.158])
 	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id C1D16E0006;
-	Mon, 30 Jul 2018 02:16:42 +0000 (UTC)
+	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 4F70CE0005;
+	Mon, 30 Jul 2018 02:16:29 +0000 (UTC)
 From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Jul 2018 19:16:12 -0700
-Message-Id: <20180730021613.26889-4-robert.joslyn@redrectangle.org>
+Date: Sun, 29 Jul 2018 19:16:09 -0700
+Message-Id: <20180730021613.26889-1-robert.joslyn@redrectangle.org>
 X-Mailer: git-send-email 2.16.4
-In-Reply-To: <20180730021613.26889-1-robert.joslyn@redrectangle.org>
-References: <20180730021613.26889-1-robert.joslyn@redrectangle.org>
 X-Spam-Level: 
-Subject: [meta-python][PATCH 4/5] python-parse-type: Add Python 3 recipe
+Subject: [meta-python][PATCH 1/5] python-linecache2: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,59 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 03:37:14 -0000
+X-List-Received-Date: Mon, 30 Jul 2018 03:38:07 -0000
 
 ---
- meta-python/recipes-devtools/python/python-parse-type.inc   | 11 +++++++++++
- .../recipes-devtools/python/python-parse-type_0.4.2.bb      | 13 ++-----------
- .../recipes-devtools/python/python3-parse-type_0.4.2.bb     |  2 ++
- 3 files changed, 15 insertions(+), 11 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-parse-type.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+ .../recipes-devtools/python/python-linecache2_1.0.0.bb      | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-linecache2_1.0.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-parse-type.inc b/meta-python/recipes-devtools/python/python-parse-type.inc
+diff --git a/meta-python/recipes-devtools/python/python-linecache2_1.0.0.bb b/meta-python/recipes-devtools/python/python-linecache2_1.0.0.bb
 new file mode 100644
-index 000000000..a4d9c0719
+index 000000000..386da2daa
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-parse-type.inc
-@@ -0,0 +1,11 @@
-+SUMMARY = "Simplifies building parse types based on the parse module"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
-+PYPI_PACKAGE = "parse_type"
++++ b/meta-python/recipes-devtools/python/python-linecache2_1.0.0.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "A backport of linecache to older supported Pythons"
++HOMEPAGE = "https://github.com/testing-cabal/linecache2"
++LICENSE = "Python-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=19;endline=19;md5=368ddc8588431c180ae7c33f4fb57519"
 +
-+SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
-+SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
++DEPENDS = "${PYTHON_PN}-pbr-native"
 +
-+inherit pypi
++SRC_URI[md5sum] = "7b25d0289ec36bff1f9e63c4329ce65c"
++SRC_URI[sha256sum] = "4b26ff4e7110db76eeb6f5a7b64a82623839d595c2038eeda662f2a2db78e97c"
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-parse"
-diff --git a/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
-index b516c5912..8e10e801c 100644
---- a/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
-@@ -1,11 +1,2 @@
--SUMMARY = "Simplifies building parse types based on the parse module"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
--PYPI_PACKAGE = "parse_type"
--
--SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
--SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
--
--RDEPENDS_${PN} += "python-parse"
--
--inherit pypi setuptools
-+inherit setuptools
-+require python-parse-type.inc
-diff --git a/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb b/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
-new file mode 100644
-index 000000000..91d9ce2d4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-parse-type.inc
++inherit pypi setuptools
++
++CLEAN_BROKEN = "1"
 -- 
 2.16.4
 
