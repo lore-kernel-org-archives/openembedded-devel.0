@@ -1,56 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E75F78CD1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 64EB178DD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 18:24:25 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id n11-v6so401444wmc.2
+	Mon, 30 Jul 2018 18:34:02 +0000 (UTC)
+Received: by mail-qk0-f175.google.com with SMTP id t79-v6so8512132qke.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 11:24:27 -0700 (PDT)
+	Mon, 30 Jul 2018 11:34:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=flZwbKNSgLPlosprPgK3fmV/Ozh2Tvh8zP6uJR4nFGY=;
-	b=p/IIgD54N7u+1nYVvCjtsYqW2nf++zyUc+a/8ijXmkwzhk+2YkZRHx1KzbSiMZWiq0
-	k5QXWFj5dO603hNKX4Rxiy9lJBLNSscAc/mXpt6aKkLrMbej3KXCiXKDh4lQ28LQr+dG
-	8F08CndVgxk0wHo2lxJITLqHj7mtrcCH3PV0gTCMYPal1Az/O/8sxVDJpOR2twa31Xbj
-	BlPqnVUuNuKdum/Brn7q9fswMvCRqnWtN9TQeo/vpiutS+MMXGDPX30jYPTSxbzG1vnv
-	shgu2YeX6BdJTaJWG4vw3ZYwQQ0osNYNDCMB6GfQSSbgmMIYp75KfrRnGYkuDR54PAph
-	c3eg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=d7KtsbYA9+XB6ifPqHhVOGqGagdNy2TnWfZuGeCRajA=;
+	b=TtxEqrIy+zL4Rgx3JJsJVP3rep42BAjjmcb1kjd0+1xxNA1/tpdN2J5fxX8zxwuqqY
+	vZaoW1TK7CwPdIe6weXeZsN9Nki7z19xlW4anEWiburoE7f7mgYGItNvshgY1dw2ZeD/
+	LO+WkZcse0v4bKkd/mC7UjNiSiD5/IMTlyzYEn5im6AWRiHVzdABcgrrGpMsxo1FfivY
+	9l11louwqgvX1/yNp/wlraVijdbz7ZpEh3YDKL/kpsf5wj0DZzIH3js5Vdpr6frPHzHw
+	0/Ql/GD8F2KYLp+f9LLZQJt7GVN9y+gqF+dG+cGDwSgvfh0pitvAVw2CQLfr45dNZsvf
+	tdoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=flZwbKNSgLPlosprPgK3fmV/Ozh2Tvh8zP6uJR4nFGY=;
-	b=fiOUmFpVI/eGmrfLdNZucZ9TxxS7k0Fck3nqAQZywLABsuELW+L0P7OX2oEB6kwXfs
-	f+AppELgC+2brNBbOIWfHyMRHm0dCpHIsyi2OM/M0z0WKHVTSA34ja9OkSqTzahUvW+W
-	8baHhvHWQaiWklNebf0FRV4ek1iab4K3ezZQSkJLkgjlIRcgbzhvi+sbRuRQuUqUBmPk
-	WyGww5AahSf82/QGEdv7WSiuDT0D3S9pugQp1YFzbl/IrltT+lmpEttz69A5lnbRoQk+
-	3O5o90g1spYJo93/vLk45emKI/s69drrzQHTXY94OZ5Upxipq57YJxn0DcEjiuMGwomw
-	NgCQ==
-X-Gm-Message-State: AOUpUlHbDpQ3gCDmurXcMrqEJfspAb255ovu/kMpXauRbt6Jfp3CnPCu
-	Wy7MFp2yF/M1C9Hp5ZqYLzQ=
-X-Google-Smtp-Source: AAOMgpecRTX3T8/ppD9bnPGc13lUbcAWh48QSNIZVXIef1xudw2T03Ny8F23VuaMoR4Hj3W8KkW0zA==
-X-Received: by 2002:a1c:9c56:: with SMTP id
-	f83-v6mr222719wme.135.1532975066725; 
-	Mon, 30 Jul 2018 11:24:26 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	a6-v6sm288913wmf.22.2018.07.30.11.24.25
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 30 Jul 2018 11:24:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 30 Jul 2018 20:24:29 +0200
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Message-ID: <20180730182429.GB1361@jama>
-References: <20180730161223.9299-1-oleksandr.kravchuk@pelagicore.com>
-	<20180730162307.GA1361@jama>
-	<518c2a4d-a677-3ad2-e50c-c4332f873ab2@sashko.rv.ua>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=d7KtsbYA9+XB6ifPqHhVOGqGagdNy2TnWfZuGeCRajA=;
+	b=CzsIR3b23C96glkGFvlf5zweiFb/+cKj2Ft8ryOPCGkO8v7Jwmw7HJ5dUL40hz080T
+	Z3+ZoMxh4glo4XcO4f2bNStn1IyyVySnG5DB8OePSwCWLJ8iW2vWUJopS+oPRhBI928o
+	zOJCbmXvNiJdqFXBKqPYYllmNKZaac9XAB6rvEHxMCu+AYnCS4oqOI6hhRkTAn/Y5p/W
+	bP0aGC82U5Km4cfzutA0cvxi9Frthmp85dpavUK11ifa7w72Ff++tdjumA52m7/qi3wy
+	gJYyn/YzBPrA/6PJ8VTOnsnZklpbXoi6iMwdtrfmEeXN648DYD45ZqCE8e2HNTIuiHqf
+	l2Ag==
+X-Gm-Message-State: AOUpUlFjKqGDzq9SXjgeBF/Jm7qTFlLqbYt4Zk3HPkA4jzL2eg2ziFeu
+	Y85SQsBv/Gt1xC0TqWGuXPXF10IKxJJPg0+mZvo=
+X-Google-Smtp-Source: AAOMgpdYjNpR3V19Yq5kBHo3pE6a66LiGRKtkRDvl7tymZ+sXD/al0rby6RhLHS0V6YoUUxFmpxLahLjcrgKnWk/Bcw=
+X-Received: by 2002:a37:a24f:: with SMTP id
+	l76-v6mr16187247qke.406.1532975643086; 
+	Mon, 30 Jul 2018 11:34:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <518c2a4d-a677-3ad2-e50c-c4332f873ab2@sashko.rv.ua>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org,
-	Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Subject: Re: [meta-oe][PATCH] Revert "glibmm: Upgrade to 2.56.0"
+References: <1532882465-3210-1-git-send-email-akuster808@gmail.com>
+	<CAMKF1spEi6G+gJMo1Wd-EpaY=-+KokOBcKjgjQp8ND7WOipwhg@mail.gmail.com>
+	<bb053f36-0099-802b-b891-9302c6e90cbe@gmail.com>
+In-Reply-To: <bb053f36-0099-802b-b891-9302c6e90cbe@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 30 Jul 2018 11:33:52 -0700
+Message-ID: <CAMKF1sqT5B1jia+=5+SemfM-jcRNnw9XGsJhED9QsUABjqZ6_Q@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][v3][PATCH] wireshark: update to 2.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,234 +57,181 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 18:24:26 -0000
-X-Groupsio-MsgNum: 73653
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZfOjI3PrQbgiZnxM"
-Content-Disposition: inline
-
---ZfOjI3PrQbgiZnxM
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Jul 2018 18:34:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 30, 2018 at 07:39:46PM +0200, Oleksandr Kravchuk wrote:
-> On 30/07/18 18:23, Martin Jansa wrote:
-> > On Mon, Jul 30, 2018 at 06:12:23PM +0200, Oleksandr Kravchuk wrote:
-> >> sumo branch of poky contains glib v2.54 which makes compilation of this
-> >> package fail due to nonexistent functions in the library used by the
-> >> C++ bindings.
-> > This explanation doesn't make any sense to me.
-> >
-> > With sumo branch of poky use sumo branch of meta-oe which still has
-> > 2.54.1 version.
->=20
-> Martin -
->=20
-> I appreciate fast response, but your feedback is very ambiguous and=20
-> therefore not helpful: which part of my explanation need to be improved?=
-=20
-> One needs to know if explanation has to be extended or changed=20
-> completely. You simply repeated statement from my commit message and=20
-> presented it as something opposite of what I've said. This is what truly=
-=20
-> doesn't make any sense.
->=20
-> Let me try to explain it differently: poky has glib version 2.54 in its=
-=20
-> 'sumo' branch; corresponding branch (sumo) of meta-openembeded has C++=20
-> binding for glib version 2.56, which has C++ function wrappers for=20
-> functions implemented in glib 2.56, which obviously won't compile, since=
-=20
-> we have glib and headers for it of version 2.54.
+Arm64 or mips64 or both is just fine
 
-This isn't true, meta-openembedded sumo has 2.54.1 version not 2.56 as
-you said. Also the subject of your e-mail doesn't have [sumo] in it, so
-even if you were right, then it would look like you're trying to get it
-reverted in master branch (where it doesn't make any sense) not in sumo
-branch.
+On Mon, Jul 30, 2018 at 8:08 AM akuster808 <akuster808@gmail.com> wrote:
 
-> If my English is still too poor for you, I propose you checking out sumo=
-=20
-> branches of poky and open-embedded and trying to build 'glibmm' package.
+>
+>
+> On 07/29/2018 02:50 PM, Khem Raj wrote:
+>
+> Can you also validate if it=E2=80=99s building ok on musl
+>
+>
+> Sure. any particular arch ? I have arm, arm64 and mips64  boards at home
+> plus the normal qemu ones.
+>
+>
+>
+> On Sun, Jul 29, 2018 at 9:41 AM Armin Kuster <akuster808@gmail.com> wrote=
+:
+>
+>> [v3]
+>> Get  wireshark-gtk building again
+>> split tshark, wireshark-gtk into their own pkgs
+>>
+>> [v2]
+>> Fix native build, lemon is the only one needed natively
+>>
+>> [v1]
+>> includes security fixes:
+>>
+>> wnpa-sec-2018-34 BGP dissector large loop. Bug 13741. CVE-2018-14342.
+>> wnpa-sec-2018-35 ISMP dissector crash. Bug 14672. CVE-2018-14344.
+>> wnpa-sec-2018-36 Multiple dissectors could crash. Bug 14675.
+>> CVE-2018-14340.
+>> wnpa-sec-2018-37 ASN.1 BER dissector crash. Bug 14682. CVE-2018-14343.
+>> wnpa-sec-2018-38 MMSE dissector infinite loop. Bug 14738. CVE-2018-14339=
+.
+>> wnpa-sec-2018-39 DICOM dissector crash. Bug 14742. CVE-2018-14341.
+>> wnpa-sec-2018-40 Bazaar dissector infinite loop. Bug 14841.
+>> CVE-2018-14368.
+>> wnpa-sec-2018-41 HTTP2 dissector crash. Bug 14869. CVE-2018-14369.
+>> wnpa-sec-2018-42 CoAP dissector crash. Bug 14966. CVE-2018-14367.
+>>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>  .../{wireshark_2.6.1.bb =3D> wireshark_2.6.2.bb}     | 34
+>> +++++++++++++++-------
+>>  1 file changed, 24 insertions(+), 10 deletions(-)
+>>  rename meta-networking/recipes-support/wireshark/{wireshark_2.6.1.bb =
+=3D>
+>> wireshark_2.6.2.bb} (70%)
+>>
+>> diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.b=
+b
+>> b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+>> similarity index 70%
+>> rename from meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
+>> rename to meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+>> index 91c5e96..1735ae7 100644
+>> --- a/meta-networking/recipes-support/wireshark/wireshark_2.6.1.bb
+>> +++ b/meta-networking/recipes-support/wireshark/wireshark_2.6.2.bb
+>> @@ -14,8 +14,8 @@ SRC_URI =3D "
+>> https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
+>>
+>>  UPSTREAM_CHECK_URI =3D "https://1.as.dl.wireshark.org/src"
+>>
+>> -SRC_URI[md5sum] =3D "b0e9e5fe22e96d9fdfad18f750fa8f55"
+>> -SRC_URI[sha256sum] =3D
+>> "ab6e5bbc3464c956347b8671ce8397950ad5daff3bf9964c967d495f4ddbcd88"
+>> +SRC_URI[md5sum] =3D "086d235509717190d06554b2ab870209"
+>> +SRC_URI[sha256sum] =3D
+>> "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
+>>
+>>  PE =3D "1"
+>>
+>> @@ -23,8 +23,11 @@ inherit cmake pkgconfig pythonnative perlnative
+>> upstream-version-is-even
+>>
+>>  ARM_INSTRUCTION_SET =3D "arm"
+>>
+>> +# Options: gtk+, gtk+3 and qt5
+>> +GTK =3D "gtk+3"
+>> +
+>>  PACKAGECONFIG ?=3D "libpcap gnutls libnl libcap sbc"
+>> -PACKAGECONFIG_append_class-target =3D "
+>> ${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk3 graphics ", "", d)=
+}"
+>> +PACKAGECONFIG_append_class-target =3D "
+>> ${@bb.utils.contains("DISTRO_FEATURES", "x11", " ${GTK}", "", d)}"
+>>
+>>  PACKAGECONFIG_class-native =3D "libpcap gnutls ssl libssh"
+>>
+>> @@ -33,10 +36,8 @@ PACKAGECONFIG[libpcap] =3D
+>> "-DENABLE_PCAP=3DON,-DENABLE_PCAP=3DOFF -DENABLE_PCAP_NG_DE
+>>  PACKAGECONFIG[libsmi] =3D "-DENABLE_SMI=3DON,-DENABLE_SMI=3DOFF,libsmi"
+>>  PACKAGECONFIG[libnl] =3D ",,libnl"
+>>  PACKAGECONFIG[portaudio] =3D
+>> "-DENABLE_PORTAUDIO=3DON,-DENABLE_PORTAUDIO=3DOFF, portaudio-v19"
+>> -PACKAGECONFIG[gtk2] =3D "-DENABLE_GTK=3DON,-DENABLE_GTK=3DOFF, gtk+"
+>> -PACKAGECONFIG[gtk3] =3D "-DENABLE_GTK3=3DON,-DENABLE_GTK3=3DOFF, gtk+3"
+>> -PACKAGECONFIG[qt5] =3D "-DENABLE_QT5=3DON,-DENABLE_QT5=3DOFF
+>> -DBUILD_wireshark=3DOFF, qtbase"
+>> -PACKAGECONFIG[graphics] =3D ",-DENABLE_GTK=3DOFF,"
+>> +PACKAGECONFIG[gtk+] =3D "-DENABLE_GTK=3DON -DBUILD_wireshark_gtk=3DON,
+>> -DENABLE_GTK=3DOFF, gtk+"
+>> +PACKAGECONFIG[gtk+3] =3D "-DENABLE_GTK3=3DON -DBUILD_wireshark_gtk=3DON=
+,
+>> -DENABLE_GTK3=3DOFF, gtk+3"
+>>  PACKAGECONFIG[gnutls] =3D "-DENABLE_GNUTLS=3DON,-DENABLE_GNUTLS=3DOFF, =
+gnutls"
+>>  PACKAGECONFIG[ssl] =3D ",,openssl"
+>>  PACKAGECONFIG[krb5] =3D "-DENABLE_KRB5=3DON,-DENABLE_KRB5=3DOFF, krb5"
+>> @@ -50,9 +51,9 @@ PACKAGECONFIG[lz4] =3D "-DENABLE_LZ4=3DON,-DENABLE_LZ4=
+=3DOFF,
+>> lz4"
+>>
+>>  # these next two options require addional layers
+>>  PACKAGECONFIG[c-ares] =3D "-DENABLE_CARES=3DON,-DENABLE_CARES=3DOFF, c-=
+ares"
+>> +PACKAGECONFIG[qt5] =3D "-DENABLE_QT5=3DON -DBUILD_wireshark=3DON,
+>> -DENABLE_QT5=3DOFF -DBUILD_wireshark=3DOFF, qtbase"
+>>
+>> -EXTRA_OECMAKE +=3D "-DBUILD_wireshark=3DON \
+>> -                  -DENABLE_NETLINK=3DON \
+>> +EXTRA_OECMAKE +=3D "-DENABLE_NETLINK=3DON \
+>>                    -DBUILD_mmdbresolve=3DOFF \
+>>                    -DBUILD_randpktdump=3DOFF \
+>>                    -DBUILD_androiddump=3DOFF \
+>> @@ -60,9 +61,11 @@ EXTRA_OECMAKE +=3D "-DBUILD_wireshark=3DON \
+>>                    -DM_INCLUDE_DIR=3D${includedir} \
+>>                    -DM_LIBRARY=3D${libdir} \
+>>                   "
+>> +CFLAGS_append =3D " -lm"
+>> +
+>>  do_install_append_class-native() {
+>>         install -d ${D}${bindir}
+>> -       for f in make-dissectors lemon make-taps
+>> +       for f in lemon
+>>         do
+>>                 install -m 0755 ${B}/run/$f ${D}${bindir}
+>>         done
+>> @@ -75,6 +78,17 @@ do_install_append_class-target() {
+>>         done
+>>  }
+>>
+>> +PACKAGE_BEFORE_PN +=3D "tshark"
+>> +PACKAGE_BEFORE_PN +=3D "${PN}-gtk"
+>> +
+>> +FILES_tshark =3D "${bindir}/tshark ${mandir}/man1/tshark.*"
+>> +FILES_${PN}-gtk =3D "${bindir}/wireshark-gtk ${datadir}/icons
+>> ${datadir}/appdata \
+>> +                   ${datadir}/applications ${datadir}/wireshark
+>> ${datadir}/mime \
+>> +                   ${mandir}/man1/wireshark.* "
+>> +
+>>  FILES_${PN} +=3D "${datadir}*"
+>>
+>> +RDEPENDS_tshark =3D "wireshark"
+>> +RDEPENDS_${PN}-gtk =3D "${@bb.utils.contains(" <$%7B@bb.utils.contains(=
+>DISTRO_FEATURES",
+>> "x11", "${GTK}", "", d)} wireshark"
+>> +
+>>  BBCLASSEXTEND =3D "native"
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
-If you git skills aren't good enough to see what's in sumo branch, then
-you can see it here:=20
-http://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-core/gli=
-b-2.0?h=3Dsumo
-
-Not even in sumo-next branch:
-http://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-core/gli=
-b-2.0?h=3Dsumo-next
-
-> SPOILER: result is going to be the following:
-
-Only for people who are mixing incompatible branches..
-
->=20
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc: In member function=20
-> 'void Gio::Application::set_option_context_parameter_string(const=20
-> Glib::ustring&)':
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc:1169:3: error:=20
-> 'g_application_set_option_context_parameter_string' was not declared in=
-=20
-> this scope
-> |=A0=A0=A0 g_application_set_option_context_parameter_string(gobj(),=20
-> parameter_string.empty() ? nullptr : parameter_string.c_str());
-> |=A0=A0=A0 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc:1169:3: note:=20
-> suggested alternative: 'set_option_context_parameter_string'
-> |=A0=A0=A0 g_application_set_option_context_parameter_string(gobj(),=20
-> parameter_string.empty() ? nullptr : parameter_string.c_str());
-> |=A0=A0=A0 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> |=A0=A0=A0 set_option_context_parameter_string
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc: In member function=20
-> 'void Gio::Application::set_option_context_summary(const Glib::ustring&)':
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc:1174:3: error:=20
-> 'g_application_set_option_context_summary' was not declared in this scope
-> |=A0=A0=A0 g_application_set_option_context_summary(gobj(), summary.empty=
-() ?=20
-> nullptr : summary.c_str());
-> |=A0=A0=A0 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc:1174:3: note:=20
-> suggested alternative: 'set_option_context_summary'
-> |=A0=A0=A0 g_application_set_option_context_summary(gobj(), summary.empty=
-() ?=20
-> nullptr : summary.c_str());
-> |=A0=A0=A0 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> |=A0=A0=A0 set_option_context_summary
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc: In member function=20
-> 'void Gio::Application::set_option_context_description(const=20
-> Glib::ustring&)':
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc:1179:3: error:=20
-> 'g_application_set_option_context_description' was not declared in this=
-=20
-> scope
-> |=A0=A0=A0 g_application_set_option_context_description(gobj(),=20
-> description.empty() ? nullptr : description.c_str());
-> |=A0=A0=A0 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> | ../../../glibmm-2.56.0/gio/giomm/application.cc:1179:3: note:=20
-> suggested alternative: 'set_option_context_description'
-> |=A0=A0=A0 g_application_set_option_context_description(gobj(),=20
-> description.empty() ? nullptr : description.c_str());
-> |=A0=A0=A0 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> |=A0=A0=A0 set_option_context_description
->=20
->=20
-> Let us check the first function=20
-> (https://developer.gnome.org/gio/stable/GApplication.html#g-application-s=
-et-option-context-parameter-string)=20
-> and find out that it was introduced in 2.56.
->=20
-> >
-> >> This reverts commit acfba081bbe49fd9dccbf12be6535d5342c6d747.
-> >> ---
-> >>   .../0001-Glib-Threads-Private-Fix-gobj.patch  | 40 +++++++++++++++++=
-++
-> >>   .../{glibmm_2.56.0.bb =3D> glibmm_2.54.1.bb}    |  5 ++-
-> >>   2 files changed, 43 insertions(+), 2 deletions(-)
-> >>   create mode 100644 meta-oe/recipes-core/glib-2.0/glibmm/0001-Glib-Th=
-reads-Private-Fix-gobj.patch
-> >>   rename meta-oe/recipes-core/glib-2.0/{glibmm_2.56.0.bb =3D> glibmm_2=
-=2E54.1.bb} (86%)
-> >>
-> >> diff --git a/meta-oe/recipes-core/glib-2.0/glibmm/0001-Glib-Threads-Pr=
-ivate-Fix-gobj.patch b/meta-oe/recipes-core/glib-2.0/glibmm/0001-Glib-Threa=
-ds-Private-Fix-gobj.patch
-> >> new file mode 100644
-> >> index 000000000..7899022f1
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-core/glib-2.0/glibmm/0001-Glib-Threads-Private-F=
-ix-gobj.patch
-> >> @@ -0,0 +1,40 @@
-> >> +From 838fe84c2ddcc9af51c34f751defbf3dd0ba8a06 Mon Sep 17 00:00:00 2001
-> >> +From: Kjell Ahlstedt <kjellahlstedt@gmail.com>
-> >> +Date: Wed, 20 Dec 2017 20:00:32 +0100
-> >> +Subject: [PATCH] Glib::Threads::Private: Fix gobj()
-> >> +
-> >> +Bug 791711
-> >> +
-> >> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >> +---
-> >> +Upstream-Status: Backport [https://github.com/GNOME/glibmm/commit/37d=
-57ae9572b7d74aa385a30313eceae7f2d3fce]
-> >> + glib/glibmm/threads.h | 2 +-
-> >> + glib/src/threads.hg   | 2 +-
-> >> + 2 files changed, 2 insertions(+), 2 deletions(-)
-> >> +
-> >> +diff --git a/glib/glibmm/threads.h b/glib/glibmm/threads.h
-> >> +index f7e2b82a..2c0cbe8c 100644
-> >> +--- a/glib/glibmm/threads.h
-> >> ++++ b/glib/glibmm/threads.h
-> >> +@@ -657,7 +657,7 @@ public:
-> >> +    */
-> >> +   inline void replace(T* data);
-> >> +
-> >> +-  GPrivate* gobj() { return gobject_; }
-> >> ++  GPrivate* gobj() { return &gobject_; }
-> >> +
-> >> + private:
-> >> +   GPrivate gobject_;
-> >> +diff --git a/glib/src/threads.hg b/glib/src/threads.hg
-> >> +index 86d7a17b..c82a6130 100644
-> >> +--- a/glib/src/threads.hg
-> >> ++++ b/glib/src/threads.hg
-> >> +@@ -628,7 +628,7 @@ public:
-> >> +    */
-> >> +   inline void replace(T* data);
-> >> +
-> >> +-  GPrivate* gobj() { return gobject_; }
-> >> ++  GPrivate* gobj() { return &gobject_; }
-> >> +
-> >> + private:
-> >> +   GPrivate gobject_;
-> >> diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.56.0.bb b/meta-oe/=
-recipes-core/glib-2.0/glibmm_2.54.1.bb
-> >> similarity index 86%
-> >> rename from meta-oe/recipes-core/glib-2.0/glibmm_2.56.0.bb
-> >> rename to meta-oe/recipes-core/glib-2.0/glibmm_2.54.1.bb
-> >> index 2f048d2f6..4706432ab 100644
-> >> --- a/meta-oe/recipes-core/glib-2.0/glibmm_2.56.0.bb
-> >> +++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.54.1.bb
-> >> @@ -13,9 +13,10 @@ SHRT_VER =3D "${@d.getVar('PV').split('.')[0]}.${@d=
-=2EgetVar('PV').split('.')[1]}"
-> >>   SRC_URI =3D " \
-> >>       ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-=
-${PV}.tar.xz \
-> >>       file://remove-examples.patch \
-> >> +    file://0001-Glib-Threads-Private-Fix-gobj.patch \
-> >>   "
-> >> -SRC_URI[md5sum] =3D "5aa7a60084fe3e01d746c96f4a115302"
-> >> -SRC_URI[sha256sum] =3D "6e74fcba0d245451c58fc8a196e9d103789bc510e1eee=
-1a9b1e816c5209e79a9"
-> >> +SRC_URI[md5sum] =3D "dee5ebe309f5976c3dacfcf5c43a062b"
-> >> +SRC_URI[sha256sum] =3D "7cc28c732b04d70ed34f0c923543129083cfb90580ea4=
-a2b4be5b38802bf6a4a"
-> >>  =20
-> >>   do_install_append() {
-> >>       install -d ${D}${datadir}/glibmm-2.4
-> >> --=20
-> >> 2.17.1
-> >>
-> >> --=20
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ZfOjI3PrQbgiZnxM
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCW19X3AAKCRA3VSO3ZXaA
-HLTaAKCxB3UNGoYqv4BnZllt7O0uDRpnWQCgtwWTJzleX0VxHkrLz+CU23hCWik=
-=SLQq
------END PGP SIGNATURE-----
-
---ZfOjI3PrQbgiZnxM--
