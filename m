@@ -1,27 +1,27 @@
 Return-Path: <robert.joslyn@redrectangle.org>
 Received: from slow1-d.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 4631C78D5D
+	by mail.openembedded.org (Postfix) with ESMTP id 3491778D5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 03:41:23 +0000 (UTC)
+	Mon, 30 Jul 2018 03:42:18 +0000 (UTC)
 Received: from relay4-d.mail.gandi.net (unknown [217.70.183.196])
-	by slow1-d.mail.gandi.net (Postfix) with ESMTP id 81A723A24D2
+	by slow1-d.mail.gandi.net (Postfix) with ESMTP id 7436F3A232D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 04:16:47 +0200 (CEST)
+	Mon, 30 Jul 2018 04:16:36 +0200 (CEST)
 X-Originating-IP: 204.52.246.158
 Received: from localhost.localdomain (eastside-a.concentrator.fsr.net
 	[204.52.246.158])
 	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 890FCE0005;
-	Mon, 30 Jul 2018 02:16:45 +0000 (UTC)
+	by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 63331E0006;
+	Mon, 30 Jul 2018 02:16:34 +0000 (UTC)
 From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Jul 2018 19:16:13 -0700
-Message-Id: <20180730021613.26889-5-robert.joslyn@redrectangle.org>
+Date: Sun, 29 Jul 2018 19:16:10 -0700
+Message-Id: <20180730021613.26889-2-robert.joslyn@redrectangle.org>
 X-Mailer: git-send-email 2.16.4
 In-Reply-To: <20180730021613.26889-1-robert.joslyn@redrectangle.org>
 References: <20180730021613.26889-1-robert.joslyn@redrectangle.org>
 X-Spam-Level: 
-Subject: [meta-python][PATCH 5/5] python-behave: Add Python 3 recipe
+Subject: [meta-python][PATCH 2/5] python-traceback2: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,68 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 03:41:23 -0000
+X-List-Received-Date: Mon, 30 Jul 2018 03:42:19 -0000
 
-Fix broken dependencies of Python 2 recipe as well.
 ---
- meta-python/recipes-devtools/python/python-behave.inc    | 15 +++++++++++++++
- .../recipes-devtools/python/python-behave_1.2.6.bb       | 16 +++++++---------
- .../recipes-devtools/python/python3-behave_1.2.6.bb      |  2 ++
- 3 files changed, 24 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-behave.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+ .../recipes-devtools/python/python-traceback2_1.4.0.bb    | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-behave.inc b/meta-python/recipes-devtools/python/python-behave.inc
+diff --git a/meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb b/meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
 new file mode 100644
-index 000000000..ded75801d
+index 000000000..696c875c6
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-behave.inc
++++ b/meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
 @@ -0,0 +1,15 @@
-+SUMMARY = "A behavior-driven development framework, Python style"
-+HOMEPAGE = "https://github.com/behave/behave"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
++SUMMARY = "A backport of traceback to older supported Pythons"
++HOMEPAGE = "https://github.com/testing-cabal/traceback2"
++LICENSE = "Python-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=31;endline=31;md5=368ddc8588431c180ae7c33f4fb57519"
 +
-+SRC_URI[md5sum] = "3f05c859a1c45f5ed33e925817ad887d"
-+SRC_URI[sha256sum] = "b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"
++DEPENDS = "${PYTHON_PN}-pbr-native"
 +
-+inherit pypi
++SRC_URI[md5sum] = "9e9723f4d70bfc6308fa992dd193c400"
++SRC_URI[sha256sum] = "05acc67a09980c2ecfedd3423f7ae0104839eccb55fc645773e1caa0951c3030"
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-parse-type \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-six \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python-behave_1.2.6.bb
-index 679730262..66221682a 100644
---- a/meta-python/recipes-devtools/python/python-behave_1.2.6.bb
-+++ b/meta-python/recipes-devtools/python/python-behave_1.2.6.bb
-@@ -1,10 +1,8 @@
--SUMMARY = "A behavior-driven development framework, Python style"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
-+inherit setuptools
-+require python-behave.inc
- 
--SRC_URI[md5sum] = "3f05c859a1c45f5ed33e925817ad887d"
--SRC_URI[sha256sum] = "b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"
--
--RDEPENDS_${PN} += "python-difflib python-setuptools python-pkgutil python-misc python-argparse python-xml python-enum34 python-parse python-parse-type python-six"
--
--inherit pypi setuptools
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-argparse \
-+    ${PYTHON_PN}-enum34 \
-+    ${PYTHON_PN}-traceback2 \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-new file mode 100644
-index 000000000..1c55871b1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-behave.inc
++inherit pypi setuptools
++
++CLEANBROKEN = "1"
++
++RDEPENDS_${PN} = "${PYTHON_PN}-linecache2"
 -- 
 2.16.4
 
