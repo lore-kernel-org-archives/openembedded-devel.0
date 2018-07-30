@@ -1,51 +1,35 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-it0-f46.google.com (mail-it0-f46.google.com
-	[209.85.214.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 740EC78D67
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BA17278DB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 10:23:06 +0000 (UTC)
-Received: by mail-it0-f46.google.com with SMTP id d16-v6so8908795itj.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 03:23:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=wJ37tIBjT2NQXNmaIK13nGskt3DuRniEDo9ANO9btfU=;
-	b=gUBO3awp+gdxFDhKqg23eehS805SN+3u7YyKzyxnq/5AswwP7BqU4UF/g3/KzZSxT6
-	r7u4PMLFzMqE2yXpUbo4LDlHxW7L2UKCYZGQScO7AvEB72gnMD8Ny+4PdlLUL/bO4SRC
-	gOjo4EsrcfiXRewnrdC9MdsPfkonoTGHTzTtqElDJuXR+rQq+EDpHurmvDWexZcPuinG
-	kRc+RdJFVkH70H2XDxoyNcZiQURE6iMsdOBdOkST41Vq99cetasgx+SIoLUQeeliDgDb
-	39CQPvKSy30MUaIUmSOewfDBxjK3YO1kVfQmnRqm2FpnyLjcm4jqWPUBWAEw2DiDKIGF
-	2GVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=wJ37tIBjT2NQXNmaIK13nGskt3DuRniEDo9ANO9btfU=;
-	b=OiT7Ew2/IQv3faGG44qA782fe9K2Eu7gCRi0f0L9Vx7nzTGwehJx7SUTZvni5XojV5
-	N3ZifSpYvKkPiA/Ynmq2h6pbT0l5SoW01MWeuA4NEPgCLXWnZyAuWTNs1J7BZn+7Y6Hs
-	kTAcc/0okNjzEniYlQFBxJYHgvFpu06NE7oYWIBc0RE2fQsb/4GIN5bGr1c7M1o+aRhF
-	kJdhfTZAgNA6mNG2EZoBgJ0QYzZBYULQLk016Kdjg9ocExkTs1XM7ugLVUGdPIz5LPVW
-	UCvFK0Xs7gr7XXqCMSSK8vX8n/y3uinvNESQJ8L7+zWRzHuCNa1y8pa1ScTp1fRUoHE7
-	DW2w==
-X-Gm-Message-State: AOUpUlEF+ZOQ1zRCUKIvpJYhEpDzLgG+ELIrJOo6puqw8sDQjKcB/bOB
-	O/VmHBzsMJz2Yhz8xdazuV87pCbzEZXLMnHpXNU=
-X-Google-Smtp-Source: AAOMgpdvRfCaBtBvZ21FWelgSSnxbbrc3OeG7ZNkgIhuYzQ2QT2U1oi6h2megRzKPl2rzyE0yarUChJmFRDc8edF2Bo=
-X-Received: by 2002:a24:764d:: with SMTP id
-	z74-v6mr13905482itb.34.1532946187365; 
-	Mon, 30 Jul 2018 03:23:07 -0700 (PDT)
+	Mon, 30 Jul 2018 12:12:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w6UCCWC7021093
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 30 Jul 2018 05:12:32 -0700 (PDT)
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 30 Jul 2018 05:12:31 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <20180713140616.15664-1-hongzhi.song@windriver.com>
+	<20180713140616.15664-2-hongzhi.song@windriver.com>
+	<CAJTo0LbXD42g6wJ4z3Kgg+TXSRaAueLgWzYjkkdq13YO3aVb+Q@mail.gmail.com>
+	<37cf1c1d-c607-6ba3-20f0-8fe9e46706f1@windriver.com>
+	<CAMKF1soQMbp7urcfEd0ri3XCQ=oyP_BwqJkoEDi8zDS1O4KqJg@mail.gmail.com>
+	<729ad129-04ef-77b7-a70e-775e63a4b7d7@windriver.com>
+	<c58c0d27-080b-8ed9-6680-2e4b566b2811@windriver.com>
+	<CAMKF1so=Z61q3ZqGmmv6pzht5b9CK1_CFofNA9yKdXE-orX_3A@mail.gmail.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <72cde4ee-b3b7-ca7d-bb2b-edc567fd1837@windriver.com>
+Date: Mon, 30 Jul 2018 20:14:21 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Received: by 2002:a6b:c6c2:0:0:0:0:0 with HTTP; Mon, 30 Jul 2018 03:23:06
-	-0700 (PDT)
-In-Reply-To: <CA+chaQd=R5R4u6RQcLi0B+xCPRxa-Y3K0ytKCMY5d-R=4dXACw@mail.gmail.com>
-References: <1519987524-4045-1-git-send-email-mikko.gronoff@qt.io>
-	<CA+chaQdsMvcCGbvZmp50eeOtuAm1LjTKwB=oQ7taMZuJn9j_tQ@mail.gmail.com>
-	<CA+chaQd=R5R4u6RQcLi0B+xCPRxa-Y3K0ytKCMY5d-R=4dXACw@mail.gmail.com>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Date: Mon, 30 Jul 2018 13:23:06 +0300
-Message-ID: <CABXoSoXGNM1JT6aNKGpmJtxHVnrgbXXUWGHqJGqJhxhu1-KLFQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] Change default SRC_URI from github.com to code.qt.io
+In-Reply-To: <CAMKF1so=Z61q3ZqGmmv6pzht5b9CK1_CFofNA9yKdXE-orX_3A@mail.gmail.com>
+X-Originating-IP: [128.224.162.198]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/1] kernel-selftest: Add a recipe on kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,119 +42,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jul 2018 10:23:06 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 30 Jul 2018 12:12:35 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Have you been using codereview.qt-project.org as the QT_GIT previously?
-refs/changes/* are gerrit and CI specific refs and are never be
-mirrored to github or code.qt.io
+Hi Raj,
 
--samuli
+I can continue to fix the error with rpi that you build. But I found 
+that rpi gets kernel
 
-On 28 July 2018 at 03:03, Martin Jansa <martin.jansa@gmail.com> wrote:
-> In the end it took 60 hours for qtbase, 10 hours for qtdeclarative..
+from git://github.com/raspberrypi/linux.git;branch=rpi-4.14.y, which is 
+not belong
+
+to openembeded. I think that the rpi recipe must make some special 
+change which
+
+cause the error.
+
+
+And the recipe in meta-oe is OK both with glibc and musl. So could you 
+build a project
+
+with oe-core's kernel?  If there is no problem, would you merge the recipe?
+
+
+--Hongzhi
+
+
+On 2018年07月30日 12:02, Khem Raj wrote:
+> I can not get it compiling for musl and rpi with poky lsb equivalent 
+> distro until there are clean builds it won’t be possible for me to get 
+> this in
 >
-> On Fri, Jul 27, 2018 at 9:21 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, Jul 29, 2018 at 8:34 PM Hongzhi, Song 
+> <hongzhi.song@windriver.com <mailto:hongzhi.song@windriver.com>> wrote:
 >
->> One disadvantage of this is that fetching from code.qt.io seems to be
->> significantly slower than from github.com.
->>
->> One extreme case is just running in one of my old build dirs, where the
->> checkout from code.qt.io wasn't updated on premirror for quite long time
->> and now the do_fetch of qtbase is already running for 43 hours..
->>
->> Most of the time it's removing various refs from gerrit reviews:
->> $ tail
->> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
->>  x [deleted]         (none)     -> refs/changes/83/75483/6
->>  x [deleted]         (none)     -> refs/changes/83/75783/1
->>  x [deleted]         (none)     -> refs/changes/83/75783/2
->>  x [deleted]         (none)     -> refs/changes/83/75783/3
->>  x [deleted]         (none)     -> refs/changes/83/75783/4
->>  x [deleted]         (none)     -> refs/changes/83/75783/5
->>  x [deleted]         (none)     -> refs/changes/83/75783/6
->>  x [deleted]         (none)     -> refs/changes/83/7583/1
->>  x [deleted]         (none)     -> refs/changes/83/76183/1
->>  x [deleted]         (none)     -> refs/changes/83/76183/2
->>
->> and there is a lot of them:
->> $ grep -c deleted
->> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
->> 81174
->>
->> $ grep -c deleted.*refs/changes
->> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
->> 63253
->>
->> $ grep -c deleted.*refs/builds
->> work/x86_64-linux/qtbase-native/5.9.6+gitAUTOINC+9c50112304-r0/temp/log.do_fetch
->> 17921
->>
->> Yes it might be faster to delete the archive from premirror and do clone
->> from scratch, but other developers wouldn't know what to do with local
->> downloads directory.
->>
->> On Fri, Mar 2, 2018 at 5:19 PM Mikko Gronoff <mikko.gronoff@qt.io> wrote:
->>
->>> There have been issues in the past with github qt mirror being out of
->>> sync with code.qt.io for certain module repos. Right now there's been a
->>> several days long break in update cycle for seemingly all the qt
->>> modules where content has not been pushed to the github mirror. Change
->>> the default SRC_URI to the more reliable code.qt.io.
->>>
->>> Change-Id: Ic7d3b9a82ef0ae502e99a8516ef78ca09250fd1e
->>> Signed-off-by: Mikko Gronoff <mikko.gronoff@qt.io>
->>> Reviewed-by: Samuli Piippo <samuli.piippo@qt.io>
->>> ---
->>>  conf/layer.conf                              | 4 ++--
->>>  recipes-qt/examples/qt5everywheredemo_1.0.bb | 3 ++-
->>>  2 files changed, 4 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/conf/layer.conf b/conf/layer.conf
->>> index 7751ce2..f540710 100644
->>> --- a/conf/layer.conf
->>> +++ b/conf/layer.conf
->>> @@ -33,7 +33,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
->>>
->>>  IMAGE_FEATURES[validitems] += "qtcreator-debug"
->>>
->>> -QT_GIT ?= "git://github.com/qt"
->>> -QT_LABS_GIT ?= "git://github.com/qt-labs"
->>> +QT_GIT_PROJECT ?= "qt"
->>> +QT_GIT ?= "git://code.qt.io/${QT_GIT_PROJECT}
->>> <http://code.qt.io/$%7BQT_GIT_PROJECT%7D>"
->>>  QT_GIT_PROTOCOL ?= "git"
->>>  QT_EDITION ?= "opensource"
->>> diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb
->>> b/recipes-qt/examples/qt5everywheredemo_1.0.bb
->>> index dfbe4ae..36d57f1 100644
->>> --- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
->>> +++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
->>> @@ -7,7 +7,8 @@ LIC_FILES_CHKSUM =
->>> "file://qml/QtDemo/main.qml;endline=39;md5=7d80863906a4bc8ffc
->>>  DEPENDS = "qtdeclarative qtxmlpatterns qtgraphicaleffects qtsvg
->>> qtmultimedia"
->>>
->>>  SRCREV = "35d72a2eba7456a2efc5eb8b77afbc00f69ba0ac"
->>> -SRC_URI = "${QT_LABS_GIT}/qt-labs-qt5-everywhere-demo"
->>> +QT_GIT_PROJECT = "qt-labs"
->>> +SRC_URI = "${QT_GIT}/qt5-everywhere-demo"
->>>
->>>  S = "${WORKDIR}/git/QtDemo"
->>>
->>> --
->>> 2.7.4
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     ping
+>
+>     --Hongzhi
+>
+>
+>     On 2018年07月27日 17:00, Hongzhi, Song wrote:
+>     > Hi Raj,
+>     >
+>     > Could you help to confirm that if the libelf exists in your
+>     > recipe-sysroot?
+>     >
+>     > Because I can't reproduce your error.
+>     >
+>     >
+>     > --Hongzhi
+>     >
+>     >
+>     > On 2018年07月27日 16:40, Khem Raj wrote:
+>     >> this fails on rpi
+>     >>
+>     >> ERROR: Logfile of failure stored in:
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198
+>
+>     >>
+>     >> Log data follows:
+>     >> | DEBUG: Executing shell function do_compile
+>     >> | NOTE: make -j 16 CROSS_COMPILE=arm-bec-linux-gnueabi- ARCH=arm
+>     >> CC=arm-bec-linux-gnueabi-gcc  -march=armv7ve -mthumb
+>     -mfpu=neon-vfpv4
+>     >> -mfloat-abi=hard -mcpu=cortex-a7 -fstack-protector-strong
+>     >> -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security
+>     -Werror=format-security
+>     >> -fstack-protector-strong  -D_FORTIFY_SOURCE=2 -Wformat
+>     >> -Wformat-security -Werror=format-security
+>     >>
+>     --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot
+>
+>     >>
+>     >> AR=arm-bec-linux-gnueabi-ar LD=arm-bec-linux-gnueabi-ld
+>     >>
+>     --sysroot=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/recipe-sysroot
+>
+>     >>
+>     >>
+>     DESTDIR=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/image
+>     >> -C
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf
+>     >> | make: Entering directory
+>     >>
+>     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+>
+>     >>
+>     >> | make -C ../../../lib/bpf
+>     >>
+>     OUTPUT=/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/
+>
+>     >>
+>     >> | make[1]: Entering directory
+>     >>
+>     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf'
+>
+>     >>
+>     >> |
+>     >> | Auto-detecting system features:
+>     >> | ...                        libelf: [ ^[[31mOFF^[[m ]
+>     >> | ...                           bpf: [ ^[[31mOFF^[[m ]
+>     >> |
+>     >> | BPF API too old
+>     >> | make[1]: *** [Makefile:219: bpfdep] Error 255
+>     >> | make[1]: *** Waiting for unfinished jobs....
+>     >> | No libelf found
+>     >> | make[1]: *** [Makefile:216: elfdep] Error 255
+>     >> |   HOSTCC
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep.o
+>     >> |   HOSTLD
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep-in.o
+>     >> |   LINK
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/fixdep
+>     >> | make[1]: Leaving directory
+>     >>
+>     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/lib/bpf'
+>
+>     >>
+>     >> | make: *** [Makefile:33:
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/libbpf.a]
+>
+>     >>
+>     >> Error 2
+>     >> | make: Leaving directory
+>     >>
+>     '/mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf'
+>
+>     >>
+>     >> | ERROR: oe_runmake failed
+>     >> | WARNING:
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/run.do_compile.22198:1
+>     >> exit 1 from 'exit 1'
+>     >> | ERROR: Function failed: do_compile (log file is located at
+>     >>
+>     /mnt/a/oe/build/tmp/work/raspberrypi3-bec-linux-gnueabi/kernel-selftest/1.0-r0/temp/log.do_compile.22198)
+>
+>     >>
+>     >>
+>     >> On Mon, Jul 16, 2018 at 2:51 AM Hongzhi, Song
+>     >> <hongzhi.song@windriver.com
+>     <mailto:hongzhi.song@windriver.com>> wrote:
+>     >>>
+>     >>>
+>     >>> On 2018年07月14日 00:23, Burton, Ross wrote:
+>     >>>> On 13 July 2018 at 15:06, Hongzhi.Song
+>     <hongzhi.song@windriver.com <mailto:hongzhi.song@windriver.com>>
+>     >>>> wrote:
+>     >>>>> +LIC_FILES_CHKSUM =
+>     >>>>> "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
+>     >>>> Why are you shipping your own copy of the kernel's COPYING
+>     file even
+>     >>>> though you copy another in that prefunc?
+>     >>>>
+>     >>>> Isn't it possible to just depend on kernel-source and build
+>     directly
+>     >>>> from the kernel source tree?
+>     >>>>
+>     >>>>> +# for bpf and vm
+>     >>>>> +DEPENDS = " \
+>     >>>>> +    elfutils \
+>     >>>>> +    libcap \
+>     >>>>> +    libcap-ng \
+>     >>>>> +    fuse \
+>     >>>>> +    util-linux \
+>     >>>>> +    rsync-native \
+>     >>>>> +"
+>     >>>> Really not convinced these dependencies are accurate.
+>     >>>>
+>     >>>>> +TEST_LIST = "bpf \
+>     >>>>> +             vm \
+>     >>>>> +"
+>     >>>> You're not listing memfd in here, but that is the only place
+>     which
+>     >>>> uses fuse as far as I can tell.
+>     >>>>
+>     >>>> My suggestion is to trim the DEPENDS back to the core minimum
+>     and use
+>     >>>> PACKAGECONIG to select what directories get built. This means
+>     you can
+>     >>>> have optional test suites where the dependencies are not in
+>     oe-core
+>     >>>> (fuse for memfd, for example), and get the right RDEPENDS too.
+>     >>>>
+>     >>>>> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
+>     >>>>> INSTALL_PATH=${D}/opt/kselftest/${i} install
+>     >>>> FHS says /opt is for sysadmin-installed tools that are not
+>     package
+>     >>>> managed.  You're building a package. You're also building a
+>     package
+>     >>>> which is essentially ptest.  I'd say inherit ptest, write a
+>     runner,
+>     >>>> and put all the binaries in $PTESTDIR.
+>     >>> Hi Burton,
+>     >>>
+>     >>> kernel-selftest is designed to be shared by ptest and oe-self,
+>     and
+>     >>> thus is
+>     >>> not supposed to inherit ptest.
+>     >>>
+>     >>> The suggestions you mentioned above will be modified soon.
+>     >>>
+>     >>> --Hongzhi
+>     >>>
+>     >>>> Ross
+>     >>>>
+>     >
+>
+
 
