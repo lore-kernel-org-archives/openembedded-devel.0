@@ -1,54 +1,47 @@
-Return-Path: <williamdelacre@gmail.com>
-Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F05E606B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 041B778DBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2018 11:54:32 +0000 (UTC)
-Received: by mail-vk0-f48.google.com with SMTP id k82-v6so7342034vkd.5
+	Tue, 31 Jul 2018 12:15:22 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id o18-v6so2936775wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2018 04:54:34 -0700 (PDT)
+	Tue, 31 Jul 2018 05:15:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=2ILSQJ6TjISpOKUGw79eBva+CoUb3MrxB00nw3C8ZfY=;
-	b=FwQm+1hEKTvyIH+NIVDCmYOP3EwqK1CeVk17hG9/kvVSOqpY7NRZz+tPwXL80NnWND
-	mAZEML5H9bfnPeAzcrP5aU7R308QyeI4Zp+h9teG3nz1Mspi/JupgGeyThouyiF+5+zG
-	PVGO/efUG4azbj0atptZdV4j8AFlkSLaAsVWKA7owYPFvgXls826qvq/3fjuTN2B73aX
-	R+joEd1u9reWTjhADTmZnNS9OAaViZBhXXa85xP14/sLrI18xulwL8h2bwgvhlmjcZJY
-	NQfeUoU1lGaElMqSZU+r1mr3zSsmIy2nM/Bd5mwta9CEsq3AeeC8vrNrHIb228jQhCWH
-	p3eA==
+	h=from:to:cc:subject:date:message-id;
+	bh=vXGA7moPhBKZNboMOvhOcGQSVQQ5RzYbb2YhTX0ukJE=;
+	b=SoAi2ZGFXXGTAvn1AhcUJJa5p0+id+MtG/UBbeRa1hgBGvreEoby1IAFmvmoUur4MS
+	DMtDHHb+i6co6+EK/08F9AWmMvqgvEwRqRDQmgrbv+AwcG4VLZnb5Jg4x4jM+AG/qG4c
+	h/9G2Y7ZcmbLnHxNmaNWtYPon6gCn6YL+iUFXS3Z0Bh5rYbuQIq8+dIFxOP2rthDSohR
+	3HLzlvuZQjW4v42LpQ4TsBV2cIBaI635VEsxDmQ3sxOosjATi6ejgthjqmM4WAkQlQJR
+	eGQat/1FMjq+tl18AizzbZEH3+jdtLKAYzQPr6TRGYkVmrn7JSVRkNnLR9KbAmDLVaqa
+	CFCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=2ILSQJ6TjISpOKUGw79eBva+CoUb3MrxB00nw3C8ZfY=;
-	b=fCS1f/+7ohQMVBbhpWdIVTYzmRIgkzdV9VrMWUYdHvCBQbva3nTtUrMxH0S7CP/Byd
-	T+SS5kD11YAOu8FqAKpZ6E0CKdicb3/+xDbvs9bjcXLMgovQ5utKBw1jBHgRUar2sz7m
-	2JPlCvI7NSYN44TCKrsUroK25nY/U731uyeqB2q0ON0ru6U0rqv0TB5eDdKSFz06LW+K
-	6LuOCJGToC/WMgKeUGS1O/XmxgWy9+ktZgPH0R7D+iRf/Xd+q5Q/TXE6jPFN/OhEolXV
-	bKlBmAPgXWW3zFx6j5GnxVCKsg52sQPcoWrjEJurSNyMDyvO4kkwTD0c1GkDvx2w77UB
-	vlKA==
-X-Gm-Message-State: AOUpUlH3F1pqWnWDgdMqvScPsoaQBbcKVBecZTiA696uAGQbaa/SUpFl
-	OS/v9Z4hfaBaNSwnhcU4zEKjLVGZ11SmDgH2Reg=
-X-Google-Smtp-Source: AAOMgpdqBROvs3C0jKcEYeH9IafrPyMEUaW5UDUVFHXysjrssbNn3rCbdIoGhsseu4LTK85sVVK7FvQOvvJgkCQhP8o=
-X-Received: by 2002:a1f:5107:: with SMTP id
-	f7-v6mr11585825vkb.30.1533038073540; 
-	Tue, 31 Jul 2018 04:54:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAOnRZELTeZbVDTo_eT_r6e6EG6et0vs7O_mT_fpqJ_RpoVhk2Q@mail.gmail.com>
-	<CAPuovE+nMp9xaj_gusMTGM9_ChFuuHDzc9NKBRYZMX493DbU=Q@mail.gmail.com>
-	<CAOnRZEJ7iVfFxr4e=6VcjCCpi4uERXhv-e8FZgMuAQv6XD2GXQ@mail.gmail.com>
-	<1748388.J95ykxND2L@yow-masselst-lx1>
-	<CAOnRZEKK9xiSzTFH0+RQJxPzu2=qaEuNhYHKv4jFY0MPh-eWtw@mail.gmail.com>
-	<20180727164420.GM20696@vctlabs.com>
-In-Reply-To: <20180727164420.GM20696@vctlabs.com>
-From: William Delacre <williamdelacre@gmail.com>
-Date: Tue, 31 Jul 2018 13:54:22 +0200
-Message-ID: <CAOnRZEK6f6dJtHcxrOTZN1CE_w=4=VHRKkArM76=KtJY69EK0w@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>,
-	"S. Lockwood-Childs" <sjl@vctlabs.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: (No subject)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=vXGA7moPhBKZNboMOvhOcGQSVQQ5RzYbb2YhTX0ukJE=;
+	b=qLJ0puWPMHqj7dsWPpQSwgHTuGsqgxb1ZxqePaFb4KB9H+PgoA8QrtQt5RG7M+H0cX
+	c+jlz4FPkMkyjKkjsOqriac6ff1viQKbY8Ggy6DCoREKdAggHo8Mk4cnoddvHUX7AIfj
+	277WcyZA3EQqgS+oPil7yR1GTHmhvcw8YSIHBOUmPOnpDxTw6Os2eKsvaujXoBKOt+2o
+	gS7eLpYnNfBXcaXGiI7DiQdrEiGarG0+DrT2yI/kbQ3/y7/pz/XvlHjd4Of+z4Ry/CiL
+	SWd04LaDq7hbv0zGfVEKdVBaG9W5PLizwDG4Zplu7/gtJ5MT6UANJm1zdOs4EwZqz6uP
+	/K5A==
+X-Gm-Message-State: AOUpUlGcQgbuPFkTE+XzMZ4Hzq+9LqJbD9AfgAzqPgtcQN6nx4OWwVvR
+	c+Eo+g+SYvGlMOAyqLSKItevIfT0
+X-Google-Smtp-Source: AAOMgpcy8l+PedYSmk6rav3lfhF1AowwxDSUNHati0tMAj19Tz+KYUDGRC7FshfpkGXpF+eby1NbrQ==
+X-Received: by 2002:a1c:1fc6:: with SMTP id
+	f189-v6mr2060815wmf.12.1533039323551; 
+	Tue, 31 Jul 2018 05:15:23 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	m13-v6sm20202323wru.93.2018.07.31.05.15.22
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 31 Jul 2018 05:15:22 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Jul 2018 12:15:25 +0000
+Message-Id: <20180731121525.29477-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][meta-python][PATCH] python-{m2crypto, protobuf, slip-dbus}, lio-utils: add CLEANBROKEN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,211 +54,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2018 11:54:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 Jul 2018 12:15:23 -0000
 
-Le ven. 27 juil. 2018 =C3=A0 18:40, S. Lockwood-Childs <sjl@vctlabs.com> a
-=C3=A9crit :
+* these are failing after distutils started calling clean in:
+  http://git.openembedded.org/openembedded-core/commit/?id=57414f4a1c549e6faaa110e6e95ff601b05b7361
+  http://git.openembedded.org/openembedded-core/commit/?id=9d556092fcc6f04c487afd126d52935bac133165
 
-> It depends on the role of the particular dependency:
->
-> * tool you need to run during build             <-- native dependency
-> * library you need to link against during build <-- target dependency
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb            | 4 ++++
+ meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb | 4 ++++
+ meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb  | 3 +++
+ meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb | 4 ++++
+ 4 files changed, 15 insertions(+)
 
+diff --git a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
+index 3a6319c314..d9780cfb4c 100644
+--- a/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
++++ b/meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb
+@@ -60,3 +60,7 @@ RDEPENDS_${PN} += "python-stringold python-subprocess python-shell \
+     bash"
+ 
+ FILES_${PN} += "${sbindir}/* /etc/init.d/* /etc/target/*"
++
++# http://errors.yoctoproject.org/Errors/Details/184712/
++# python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory
++CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
+index 272c76ca17..899a361bd8 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
++++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
+@@ -48,3 +48,7 @@ do_compile_prepend() {
+ }
+ 
+ BBCLASSEXTEND = "native"
++
++# http://errors.yoctoproject.org/Errors/Details/184714/
++# SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
++CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb b/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb
+index dc0823fd23..dddc9bbb58 100644
+--- a/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb
+@@ -1,3 +1,6 @@
+ inherit setuptools
+ require python-protobuf.inc
+ 
++# http://errors.yoctoproject.org/Errors/Details/184715/
++# Can't find required file: ../src/google/protobuf/descriptor.proto
++CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb b/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb
+index 8081416ee4..dc587e761e 100644
+--- a/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb
++++ b/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb
+@@ -25,3 +25,7 @@ SRC_URI[sha256sum] = "bc897f1ab6f5b4989f85548799aaeb84fde67bbba18e40341bfe1d7885
+ do_compile_prepend() {
+     sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
+ }
++
++# http://errors.yoctoproject.org/Errors/Details/184713/
++# python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory
++CLEANBROKEN = "1"
+-- 
+2.17.1
 
-Thanks for the precision :-)
-
-My question may seem a bit stupid but how do you know which is which ?
-Let=E2=80=99s say I want to write a recipe to install any specific software=
- on my
-target, how do I choose the dependencies ?
-I have to refer to the software Makefile/CMakeList ?
-
-William
-
->
->
-> --SJLC
->
-> On Fri, Jul 27, 2018 at 06:25:27PM +0200, William Delacre wrote:
-> > Okay, it makes sense!
-> >
-> > My question may seem stupid but then why don=E2=80=99t we always use =
-=E2=80=98-native=E2=80=99
-> for
-> > the dependencies ?
-> >
-> > Is it because sometimes we know that the behavior of =E2=80=98foo=E2=80=
-=99 and
-> =E2=80=98foo-native=E2=80=99
-> > would be the same, independently of the architecture ?
-> >
-> > William
-> >
-> > Le ven. 27 juil. 2018 =C3=A0 18:16, Mark Asselstine <
-> > mark.asselstine@windriver.com> a =C3=A9crit :
-> >
-> > > On Friday, July 27, 2018 12:04:37 PM EDT William Delacre wrote:
-> > > > Thanks a lot for the answer, it worked perfectly !
-> > > >
-> > > > There is just one point I don=E2=80=99t really understand : why do =
-we need to
-> > > add a
-> > > > dependency to =E2=80=98python-incremental-NATIVE=E2=80=99 ?
-> > > >
-> > > > What would happen if I just add to the python-twisted recipe :
-> > > >
-> > > > DEPENDS +=3D =E2=80=9C${PYTHON_PN}-incremental=E2=80=9C
-> > >
-> > > This would assume that python is completely arch independent, which i=
-t
-> is
-> > > not.
-> > > Assume for example python-incremental had some C extensions, using
-> DEPENDS
-> > > would build them for the target arch yet possibly attempt to run them
-> on
-> > > your
-> > > build host. -native takes care of this.
-> > >
-> > > Some may say this is a bit of a hack since the difference in ARCH
-> *might*
-> > > equate to a difference in behavior. But I have dealt with many python
-> > > recipes
-> > > and have yet to run into any scenario where this potential issue
-> exists.
-> > >
-> > > At least that is what I can recall at the moment. Unfortunately I hav=
-e
-> > > forgotten some of the subtleties that might be in play.
-> > >
-> > > Mark
-> > >
-> > > >
-> > > > William
-> > > >
-> > > > Le ven. 27 juil. 2018 =C3=A0 17:03, Mark Asselstine <
-> > > >
-> > > > mark.asselstine@windriver.com> a =C3=A9crit :
-> > > > > On Thu, Jul 26, 2018 at 3:40 PM, Mark Asselstine
-> > > > >
-> > > > > <mark.asselstine@windriver.com> wrote:
-> > > > > > On Mon, Jul 23, 2018 at 8:28 AM, William Delacre
-> > > > > >
-> > > > > > <williamdelacre@gmail.com> wrote:
-> > > > > >> Hi ! :-)
-> > > > > >>
-> > > > > >> I=E2=80=99m facing issues when trying to run =E2=80=98bitbake =
-python-twisted=E2=80=99
-> > > > >
-> > > > > (do_compile
-> > > > >
-> > > > > >> error)
-> > > > > >>
-> > > > > >> Log says :
-> > > > > >> =E2=80=9CDownload error on https://pypi.python.org/simple/incr=
-emental/:
-> > > [Errno
-> > > > >
-> > > > > -3]
-> > > > >
-> > > > > >> Temporary failure in name resolution
-> > > > >
-> > > > > With the additional info you sent me along with a second look at
-> the
-> > > > > error I can fairly confidently say I know what the issue is.
-> > > > >
-> > > > > Python, like some other languages (ruby, go...) will attempt to
-> > > > > download dependencies/requirements if they are not present. This =
-is
-> > > > > done "outside" of the bitbake system and thus will ignore
-> > > > > BB_NO_NETWORK and is generally a bad thing. It isn't quite host
-> > > > > contamination but it is very similar. What we do with our python
-> > > > > recipes in bitbake is review a python package's source setup.py,
-> > > > > requirements.txt...files in order to determine what other python
-> > > > > packages are needed, add them as RDEPENDS or similar in order to
-> avoid
-> > > > > the python attempting to complete a download such as this.
-> > > > >
-> > > > > In this case python-twisted 'requires' python-incremental but the
-> > > > > Rocko version of the python-twisted recipe lacks the needed
-> assignment
-> > > > > to ensure this is available in the recipe sysroot and thus the
-> > > > > attempted download.
-> > > > >
-> > > > > Cherry pick commit b08b570c8624303acbb6bb064a7bda466a679df4
-> > > > > [python-twisted: avoid downloading build dependencies] to Rocko a=
-nd
-> > > > > you will be good to go. You should also follow up this thread wit=
-h
-> a
-> > > > > request to have this commit put onto Rocko to avoid others hittin=
-g
-> the
-> > > > > same issue.
-> > > > >
-> > > > > Mark
-> > > > >
-> > > > > >> ............
-> > > > > >>
-> > > > > >> distutils.errors.DistutilsError : Could not find suitable
-> > > distribution
-> > > > >
-> > > > > for
-> > > > >
-> > > > > >> Requirement.parse(=E2=80=98incremental>=3D16.10.1=E2=80=99)=E2=
-=80=9D
-> > > > > >>
-> > > > > >> First of all I=E2=80=99m not connected to internet, so I=E2=80=
-=99ve
-> pre-downloaded
-> > > all
-> > > > >
-> > > > > the
-> > > > >
-> > > > > >> required packages (twisted-17.9.0.tar.bz2 &
-> > > incremental-17.5.0.tar.gz
-> > > > >
-> > > > > are
-> > > > >
-> > > > > >> present in my build/downloads folder)
-> > > > > >>
-> > > > > >> It=E2=80=99s the first time I have some =E2=80=9Cdownloading i=
-ssues=E2=80=9D and I=E2=80=99m
-> stuck
-> > > on
-> > > > > >> it
-> > > > > >> for a few hours now..
-> > > > > >>
-> > > > > >> Any tips for me ?
-> > > > > >
-> > > > > > Check all aspects of what you have manually downloaded and
-> populated
-> > > > > > in your downloads. My guess is that a checksum or some other
-> detail
-> > > > > > isn't matching and it is rejecting what you have and thus
-> attempting
-> > > > > > to re-download the file.
-> > > > > >
-> > > > > > Mark
-> > > > > >
-> > > > > >> Thanks in advance !
-> > > > > >> --
-> > > > > >> _______________________________________________
-> > > > > >> Openembedded-devel mailing list
-> > > > > >> Openembedded-devel@lists.openembedded.org
-> > > > > >>
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > >
-> > >
-> > >
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
