@@ -1,45 +1,46 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-ua0-f176.google.com (mail-ua0-f176.google.com
-	[209.85.217.176])
-	by mail.openembedded.org (Postfix) with ESMTP id AC76678D86
+Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F59E78D81
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2018 01:38:52 +0000 (UTC)
-Received: by mail-ua0-f176.google.com with SMTP id u11-v6so4486337uan.13
+	Tue, 31 Jul 2018 01:39:45 +0000 (UTC)
+Received: by mail-vk0-f43.google.com with SMTP id p12-v6so6722288vkf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jul 2018 18:38:54 -0700 (PDT)
+	Mon, 30 Jul 2018 18:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OUk5+AxrZodp/7upGmsiDD/kFMSDlTc3EuInXe6+h4o=;
-	b=RjXVPDEQDj/e+7Miuuj6P/RgBDwHzlOLAQmpgghw4RSo9sjeDkgLJRquySxwc3A3BK
-	GLf+5WLAar8X7J/pGlhvvHnx65RDItEO2szpMR1sYwjcKkyBcE0riX23Mj4VAwKEopz3
-	hOW0L1dTbFk6zIZFFk4GCdYULXELbkuk3vOoQAoBTLi23A3FEx+SlQ6M/rM6fVyOX9cC
-	FZUUvY0RdYNLuYqhv1omufvlt1PEZrAMjfJN+DDgZuTGp+o9b7vJNI6GLMfyemRzc9R3
-	K2Wy/UNDCztA/3osxw1yqz8FhbUghYDuDPfZnhdrcUJ3cUxkElZTPwZsT4dbJi01ijoX
-	e0IA==
+	:cc; bh=TxtUEqGe2Dekubi3Fya/5fSemj+x9MHp1FQKWBanzD8=;
+	b=tjbVe6F4UfoPvgCSn+VmdpEx407HXLPF58R2b9IwJgXfN2sbqmeIRIVsAxDiztecWc
+	YTfw4vCebo+JgldRCqNitydlQOums/dMDVzbPwJyBKJ9SklieQVwslKWf6hosvmHIrSg
+	Gn7S9A2XHhvCUyEdbe1qqfNa8ODkGcroNebKmJey3fvamgbWdNBbHj6g5dlZY+HoWvW0
+	OW0Go2KIFdyINF8DeQpI1vjBEQv08RqCEWyBAVP5EE+C2DaOPX3xEu+fbDbkQFIBmmPm
+	cDIcpf9pjLLfkor76OlbmMFc2dfo/tOFsHF9/9zAhjOBBFkNbL+kzeVDXbfPSGM5NBSe
+	IpUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=OUk5+AxrZodp/7upGmsiDD/kFMSDlTc3EuInXe6+h4o=;
-	b=MepOy157oe01YCVCc/RJ2VebunAxW9Zf+fmjhSlbgv1CGU9wsaFsWdVZOPpAOjlVtg
-	U8oLFX2Um+seLTaV511byT8aiKOxoobaYin+XVSiFImFzAehSuuariP11uF0RjFAFClo
-	+wbCBuv5Ru6G7Egd3Gea/W11yq5YILyRuzIrbCOr5HUBSqP03mqF91KXE0rYjjwAt7xd
-	16dRFBwCmohQMpTE+nubQBsxM/SnkfVyLjqYPSQXkVBmi6dmIq9GNyYIs1kKv0dsO8W7
-	5PGyWafOxxcPwD/zGkBhl2mvDXEASJN4keb/wbZwCtXW4oY5sXTjoNdVxIXn/nNTSPWg
-	opdQ==
-X-Gm-Message-State: AOUpUlHweVY98GVsz0R6PgiX2ILdxyjWPdplCYb/DS3qhahDOEblmlLD
-	Us+jH7gSMFaREbr4o1kBucFtMtydqfLnap8Cm8lWzg==
-X-Google-Smtp-Source: AAOMgpcpXnPuu9R4185m00Wy5Jx+b8SFTUrzWFygFBrpXl3KFIp5E1wWB38FfvvC/D+67GGpBAavGx4Cnmg5DkIpTlk=
-X-Received: by 2002:a9f:35ec:: with SMTP id
-	u41-v6mr13952415uad.86.1533001133340; 
-	Mon, 30 Jul 2018 18:38:53 -0700 (PDT)
+	bh=TxtUEqGe2Dekubi3Fya/5fSemj+x9MHp1FQKWBanzD8=;
+	b=P8DvxQHMdO84NLqwSh2/9W2Nl6mpgNXktONScvtk9gHqOzi6fIxmiPmdBMXy04rKt2
+	qhLiTB7HtDYE6TJogGkmKeEyanhbaIY9bdWWjaqh4y44/ASYX7Tk3CYrUMbA2j3LsW8y
+	nmoj+A5HOVpmC0NT2/GnidZ7/d/sukzenAEs0lzT5LYaF/nyRjviJMHMbg81QiGcuLgS
+	3WPJzdb613oYoQkxQfD65kAzFWKZUHVOz6Zg3VBvC99lzoWWy3AJjg58J2SsAsz0i1a1
+	ADuqQlgA+PQo1i7W/hUJKKB4gyNLJvgJEfQ+s9bD+saRaeCrlbKcEuPss5HChXDVK/Up
+	8NYA==
+X-Gm-Message-State: AOUpUlH2E7lLqu4m+XJWtNRB6vOyb1BVlX75GOh5o2NgmrArurVLo0Dw
+	bq7x1YLzzcx9V6UKtRFoB0GUCe7XdGghxJVWLPhxFA==
+X-Google-Smtp-Source: AAOMgpcFC28hoTiQBbr9sMFX/WA9lLb7buiBShRLvCA4ihOFlsW11ij1otK6EGdfxKi5z4He5/UdtM/IwpxOWlki8mg=
+X-Received: by 2002:a1f:b9ca:: with SMTP id
+	j193-v6mr12620507vkf.139.1533001186395; 
+	Mon, 30 Jul 2018 18:39:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20180730021613.26889-1-robert.joslyn@redrectangle.org>
 	<20180730021613.26889-2-robert.joslyn@redrectangle.org>
-In-Reply-To: <20180730021613.26889-2-robert.joslyn@redrectangle.org>
+	<CANx9H-C9T8NyDrBwbwq7d_OLftU9g_cHg=fcLg1oc8_oiPSWsA@mail.gmail.com>
+In-Reply-To: <CANx9H-C9T8NyDrBwbwq7d_OLftU9g_cHg=fcLg1oc8_oiPSWsA@mail.gmail.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 30 Jul 2018 18:38:42 -0700
-Message-ID: <CANx9H-C9T8NyDrBwbwq7d_OLftU9g_cHg=fcLg1oc8_oiPSWsA@mail.gmail.com>
+Date: Mon, 30 Jul 2018 18:39:35 -0700
+Message-ID: <CANx9H-AzcN0exR0xb1w4xytWbjUNxfQhg0YirfjOmxKjDEaxsw@mail.gmail.com>
 To: Robert Joslyn <robert.joslyn@redrectangle.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org
@@ -56,53 +57,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2018 01:38:52 -0000
+X-List-Received-Date: Tue, 31 Jul 2018 01:39:45 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Why no python3 version n as well?
+Ah, it=E2=80=99s a backport. Never mind
 
-On Sun, Jul 29, 2018 at 8:42 PM Robert Joslyn <
-robert.joslyn@redrectangle.org> wrote:
+On Mon, Jul 30, 2018 at 6:38 PM Tim Orling <ticotimo@gmail.com> wrote:
 
-> ---
->  .../recipes-devtools/python/python-traceback2_1.4.0.bb    | 15
-> +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-traceback2_1.4.0.bb
+> Why no python3 version n as well?
 >
-> diff --git a/meta-python/recipes-devtools/python/
-> python-traceback2_1.4.0.bb b/meta-python/recipes-devtools/python/
-> python-traceback2_1.4.0.bb
-> new file mode 100644
-> index 000000000..696c875c6
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY = "A backport of traceback to older supported Pythons"
-> +HOMEPAGE = "https://github.com/testing-cabal/traceback2"
-> +LICENSE = "Python-2.0"
-> +LIC_FILES_CHKSUM =
-> "file://PKG-INFO;beginline=31;endline=31;md5=368ddc8588431c180ae7c33f4fb57519"
-> +
-> +DEPENDS = "${PYTHON_PN}-pbr-native"
-> +
-> +SRC_URI[md5sum] = "9e9723f4d70bfc6308fa992dd193c400"
-> +SRC_URI[sha256sum] =
-> "05acc67a09980c2ecfedd3423f7ae0104839eccb55fc645773e1caa0951c3030"
-> +
-> +inherit pypi setuptools
-> +
-> +CLEANBROKEN = "1"
-> +
-> +RDEPENDS_${PN} = "${PYTHON_PN}-linecache2"
-> --
-> 2.16.4
+> On Sun, Jul 29, 2018 at 8:42 PM Robert Joslyn <
+> robert.joslyn@redrectangle.org> wrote:
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> ---
+>>  .../recipes-devtools/python/python-traceback2_1.4.0.bb    | 15
+>> +++++++++++++++
+>>  1 file changed, 15 insertions(+)
+>>  create mode 100644 meta-python/recipes-devtools/python/
+>> python-traceback2_1.4.0.bb
+>>
+>> diff --git a/meta-python/recipes-devtools/python/
+>> python-traceback2_1.4.0.bb b/meta-python/recipes-devtools/python/
+>> python-traceback2_1.4.0.bb
+>> new file mode 100644
+>> index 000000000..696c875c6
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
+>> @@ -0,0 +1,15 @@
+>> +SUMMARY =3D "A backport of traceback to older supported Pythons"
+>> +HOMEPAGE =3D "https://github.com/testing-cabal/traceback2"
+>> +LICENSE =3D "Python-2.0"
+>> +LIC_FILES_CHKSUM =3D
+>> "file://PKG-INFO;beginline=3D31;endline=3D31;md5=3D368ddc8588431c180ae7c=
+33f4fb57519"
+>> +
+>> +DEPENDS =3D "${PYTHON_PN}-pbr-native"
+>> +
+>> +SRC_URI[md5sum] =3D "9e9723f4d70bfc6308fa992dd193c400"
+>> +SRC_URI[sha256sum] =3D
+>> "05acc67a09980c2ecfedd3423f7ae0104839eccb55fc645773e1caa0951c3030"
+>> +
+>> +inherit pypi setuptools
+>> +
+>> +CLEANBROKEN =3D "1"
+>> +
+>> +RDEPENDS_${PN} =3D "${PYTHON_PN}-linecache2"
+>> --
+>> 2.16.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
 
