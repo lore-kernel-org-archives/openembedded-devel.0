@@ -1,24 +1,22 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 865E478D8E
+Return-Path: <robert.joslyn@redrectangle.org>
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+	[217.70.183.201])
+	by mail.openembedded.org (Postfix) with ESMTP id 4011B745BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2018 02:38:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w6V2coCd005586
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 30 Jul 2018 19:38:50 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.399.0;
-	Mon, 30 Jul 2018 19:38:49 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Mon, 30 Jul 2018 19:38:49 -0700
-Message-ID: <20180731023849.126160-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <CAMKF1sqkDnUAqc28ZkPtxNJM9U1_xPFTG9VFF=z_xjcb=YzA9Q@mail.gmail.com>
-References: <CAMKF1sqkDnUAqc28ZkPtxNJM9U1_xPFTG9VFF=z_xjcb=YzA9Q@mail.gmail.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] iperf3: Upgrade to 3.6
+	Tue, 31 Jul 2018 03:10:26 +0000 (UTC)
+X-Originating-IP: 50.37.87.235
+Received: from xps13.localdomain (50-37-87-235.mscw.id.frontiernet.net
+	[50.37.87.235])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay8-d.mail.gandi.net (Postfix) with ESMTPSA id 4B4791BF208;
+	Tue, 31 Jul 2018 03:10:25 +0000 (UTC)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Jul 2018 20:09:32 -0700
+Message-Id: <20180731030937.3685-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.16.4
+X-Spam-Level: 
+Subject: [meta-python][PATCH v2 0/5] Add python3-behave Recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,64 +29,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jul 2018 02:38:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 31 Jul 2018 03:10:27 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Add Python 3 version of python-behave and its dependencies. Fix missing
+dependencies for the Python 2 recipe as well.
 
-* Licence-Update:
-  - Copyright years are updated to 2018
-  - Remove the part about src/tcp_window_size.{c,h}
-    as iperf3 uses get/setsockopt() with SO_SNDBUF
-    and SO_RCVBUF directly now
-* Update the path parameter for --with-openssl as
-  ${RECIPE_SYSROOT}${prefix} to fix the below do_configure
-  error
-  | checking for openssl/ssl.h in /poky-build/tmp/work/i586-poky-linux/iperf3/3.6-r0/recipe-sysroot... no
-  | checking whether compiling and linking against OpenSSL works... no
-  | configure: error: in `/poky-build/tmp/work/i586-poky-linux/iperf3/3.6-r0/build':
-  | configure: error: --with-openssl was given, but test for OpenSSL failed
+Changes in v2:
+* Clarify license of python-parse-type from BSD to BSD-3-Clause
+* Add HOMEPAGE to python-parse-type.inc
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../iperf3/{iperf3_3.2.bb => iperf3_3.6.bb}                 | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-benchmark/iperf3/{iperf3_3.2.bb => iperf3_3.6.bb} (83%)
+Robert Joslyn (5):
+  python-linecache2: Add recipe
+  python-traceback2: Add recipe
+  python-parse: Update to 1.8.4 and add Python 3 version
+  python-parse-type: Add Python 3 recipe
+  python-behave: Add Python 3 recipe
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
-similarity index 83%
-rename from meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
-index 2ed08110f..4e11d8233 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.6.bb
-@@ -9,7 +9,7 @@ SECTION = "console/network"
- BUGTRACKER = "https://github.com/esnet/iperf/issues"
- AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d098223e44bdd19585315ee75cd9d2d7"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a9a036136b748453e839c0eb8906ef2e"
- 
- DEPENDS = "openssl"
- 
-@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/esnet/iperf.git \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            "
- 
--SRCREV = "88d907f7fb58bfab5d086c5da60c922e1c582c92"
-+SRCREV = "88f3ad87f38762081a6d7127890ff5c3a052b06a"
- 
- S = "${WORKDIR}/git"
- 
-@@ -28,6 +28,6 @@ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sc
- 
- CFLAGS += "-D_GNU_SOURCE"
- 
--EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}"
-+EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}${prefix}"
- 
- BBCLASSEXTEND = "native"
+ meta-python/recipes-devtools/python/python-behave.inc    | 15 +++++++++++++++
+ .../recipes-devtools/python/python-behave_1.2.6.bb       | 16 +++++++---------
+ .../recipes-devtools/python/python-linecache2_1.0.0.bb   | 13 +++++++++++++
+ .../recipes-devtools/python/python-parse-type.inc        | 12 ++++++++++++
+ .../recipes-devtools/python/python-parse-type_0.4.2.bb   | 13 ++-----------
+ meta-python/recipes-devtools/python/python-parse.inc     | 13 +++++++++++++
+ .../recipes-devtools/python/python-parse_1.8.2.bb        | 13 -------------
+ .../recipes-devtools/python/python-parse_1.8.4.bb        |  2 ++
+ .../recipes-devtools/python/python-traceback2_1.4.0.bb   | 15 +++++++++++++++
+ .../recipes-devtools/python/python3-behave_1.2.6.bb      |  2 ++
+ .../recipes-devtools/python/python3-parse-type_0.4.2.bb  |  2 ++
+ .../recipes-devtools/python/python3-parse_1.8.4.bb       |  2 ++
+ 12 files changed, 85 insertions(+), 33 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-behave.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-linecache2_1.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-parse-type.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-parse.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python-parse_1.8.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-parse_1.8.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
+
 -- 
-2.17.1
+2.16.4
 
 
