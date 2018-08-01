@@ -1,24 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A48178D45
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CEB5F78D45
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed,  1 Aug 2018 07:11:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w717BL6Z004301
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w717BWrx022177
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 1 Aug 2018 00:11:26 -0700
+	Wed, 1 Aug 2018 00:11:32 -0700 (PDT)
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 1 Aug 2018 00:11:20 -0700
+	14.3.399.0; Wed, 1 Aug 2018 00:11:31 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Wed, 1 Aug 2018 15:21:24 +0800
-Message-ID: <cover.1533107855.git.hongxu.jia@windriver.com>
+Date: Wed, 1 Aug 2018 15:21:26 +0800
+Message-ID: <2c1741bf8ecf487a42eda85c8c4f962854f24d90.1533107855.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
+In-Reply-To: <cover.1533107855.git.hongxu.jia@windriver.com>
+References: <cover.1533107855.git.hongxu.jia@windriver.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 00/16] upgrade 16 recipes
+Subject: [PATCH 02/16] usermode: 0.111 -> 0.112
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,141 +33,118 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 01 Aug 2018 07:11:31 -0000
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-The following changes since commit a001e465293b36c03d4ca4500857fe0a67d13e20:
+- Drop 0001-formatting-issues.patch which upstream fixed the issue
 
-  samba: Update to 4.8.3 (2018-07-30 01:34:10 -0700)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/openembedded-core-contrib hongxu/upgrade-20180801
-  http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/upgrade-20180801
-
-Hongxu Jia (16):
-  dconf 0.18.0 -> 0.28.0
-  usermode: 0.111 -> 0.112
-  libgnomekbd: 3.22.0 -> 3.26.0
-  network-manager-applet: 1.8.10 -> 1.8.14
-  libblockdev: clean up obsolete patches
-  thin-provisioning-tools: 0.6.3 -> 0.7.6
-  efibootmgr: 0.15 -> 0.16
-  efivar: 0.31 -> 0.36
-  lvm2/libdevmapper: 2.02.177 -> 2.02.180
-  volume-key: 0.3.10 -> 0.3.11
-  tigervnc: 1.8.0 -> 1.9.0
-  libreport: 2.9.2 -> 2.9.5
-  isomd5sum: 1.2.1 -> 1.2.3
-  python3-blivet: 2.2.0 -> 3.0.1
-  python3-pykickstart: 2.35 -> 3.15
-  python3-blivetgui: 2.1.5 -> 2.1.8
-
- ..._1.8.10.bb => network-manager-applet_1.8.14.bb} |   5 +-
- meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb     |  36 --
- meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb     |  23 +
- ...libgnomekbd_3.22.0.bb => libgnomekbd_3.26.0.bb} |   4 +-
- .../0001-Missing-n-in-translated-string.patch      |  28 ++
- .../usermode/usermode/0001-formatting-issues.patch |  34 --
- .../{usermode_1.111.bb => usermode_1.112.bb}       |   6 +-
- .../{efibootmgr_0.15.bb => efibootmgr_0.16.bb}     |   2 +-
- ...-Add-Wunknown-attributes-when-using-clang.patch |  33 --
- ...Do-not-use-__bswap_constant_-16-32-macros.patch |  35 --
- .../efivar/0003-efivar-fix-for-cross-compile.patch |  42 --
- .../allow-multi-definitions-for-native.patch       |  14 +-
- .../recipes-bsp/efivar/efivar/musl-strndupa.patch  |  25 --
- .../efivar/{efivar_0.31.bb => efivar_0.36.bb}      |  11 +-
- .../files/0001-tweak-install-prefix.patch          |  14 +-
- .../{isomd5sum_1.2.1.bb => isomd5sum_1.2.3.bb}     |   2 +-
- .../files/0002-remove-python2-support.patch        |  30 --
- ...emove-dmraid-while-compiling-with-with-dm.patch | 492 ---------------------
- ...ix-compile-failure-against-musl-C-library.patch |  50 ---
- .../files/0005-fix-a-clang-compiling-issue.patch   | 111 -----
- .../0001-Makefile.am-remove-doc-and-apidoc.patch   |   8 +-
- ...ac-remove-prog-test-of-xmlto-and-asciidoc.patch |  16 +-
- .../files/0003-without-build-plugins.patch         |   6 +-
- ...configure.ac-remove-prog-test-of-augparse.patch |  10 +-
- .../files/0005-remove-python2-support.patch        | 142 ------
- .../{libreport_2.9.2.bb => libreport_2.9.5.bb}     |   5 +-
- ...-explicitly-support-python3-by-pkg-config.patch |  54 ---
- .../{volume-key_0.3.10.bb => volume-key_0.3.11.bb} |   5 +-
- .../files/0001-tigervnc-remove-includedir.patch    |  16 +-
- ...005-Remove-INITARGS-from-xserver119.patch.patch |  27 --
- .../{tigervnc_1.8.0.bb => tigervnc_1.9.0.bb}       |  11 +-
- ...0004-tweak-MODPROBE_CMD-for-cross-compile.patch |  29 +-
- .../lvm2/files/0005-do-not-build-manual.patch      |  46 +-
- ...mapper_2.02.177.bb => libdevmapper_2.02.180.bb} |   4 +-
- meta-oe/recipes-support/lvm2/lvm2.inc              |   4 +-
- .../lvm2/{lvm2_2.02.177.bb => lvm2_2.02.180.bb}    |   4 +-
- ...01-do-not-strip-pdata_tools-at-do_install.patch |  12 +-
- .../0001-fix-compile-failed-with-libc-musl.patch   |  42 ++
- ...s_0.6.3.bb => thin-provisioning-tools_0.7.6.bb} |   3 +-
- .../python3-blivet/0001-comment-out-selinux.patch  |  20 +-
- .../0002-run_program-support-timeout.patch         |  10 +-
- .../0003-support-infinit-timeout.patch             |  16 +-
- .../0004-Mount-var-volatile-during-install.patch   |  59 ---
- ...004-fix-new.roots-object-is-not-iterable.patch} |   8 +-
- ...orrect-timeout-while-system-time-changed.patch} |   8 +-
- .../0005-update-fstab-by-appending.patch           |  32 --
- ...kages.patch => 0006-tweak-btrfs-packages.patch} |  10 +-
- ...007-invoking-mount-with-infinite-timeout.patch} |   8 +-
- ...use-oe-variable-to-replace-hardcoded-dir.patch} |   6 +-
- ...0009-invoking-fsck-with-infinite-timeout.patch} |   6 +-
- ...0010-invoking-mkfs-with-infinite-timeout.patch} |   4 +-
- ...> 0011-invoking-dd-with-infinite-timeout.patch} |  10 +-
- ...evert-Adapt-to-logging-module-name-change.patch |  30 --
- ...on3-blivet_2.2.0.bb => python3-blivet_3.0.1.bb} |  25 +-
- ...ivetgui_2.1.5.bb => python3-blivetgui_2.1.8.bb} |   2 +-
- ...0001-support-authentication-for-kickstart.patch |  59 ++-
- ...-parser.py-add-lock-for-readKickstart-and.patch |  36 +-
- ...-sections-shutdown-and-environment-in-gen.patch |  10 +-
- ...d.py-retry-to-invoke-request-with-timeout.patch |  25 +-
- .../files/0005-tweak-shebang-to-python3.patch      |  25 --
- ...ckstart_2.35.bb => python3-pykickstart_3.15.bb} |   5 +-
- 61 files changed, 345 insertions(+), 1510 deletions(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.8.10.bb => network-manager-applet_1.8.14.bb} (86%)
- delete mode 100644 meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
- create mode 100644 meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
- rename meta-gnome/recipes-gnome/libgnome/{libgnomekbd_3.22.0.bb => libgnomekbd_3.26.0.bb} (71%)
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../0001-Missing-n-in-translated-string.patch      | 28 ++++++++++++++++++
+ .../usermode/usermode/0001-formatting-issues.patch | 34 ----------------------
+ .../{usermode_1.111.bb => usermode_1.112.bb}       |  6 ++--
+ 3 files changed, 31 insertions(+), 37 deletions(-)
  create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-Missing-n-in-translated-string.patch
  delete mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
  rename meta-gnome/recipes-support/usermode/{usermode_1.111.bb => usermode_1.112.bb} (84%)
- rename meta-oe/recipes-bsp/efibootmgr/{efibootmgr_0.15.bb => efibootmgr_0.16.bb} (93%)
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
- rename meta-oe/recipes-bsp/efivar/{efivar_0.31.bb => efivar_0.36.bb} (72%)
- rename meta-oe/recipes-extended/isomd5sum/{isomd5sum_1.2.1.bb => isomd5sum_1.2.3.bb} (94%)
- delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
- delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
- delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
- delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0005-fix-a-clang-compiling-issue.patch
- delete mode 100644 meta-oe/recipes-extended/libreport/files/0005-remove-python2-support.patch
- rename meta-oe/recipes-extended/libreport/{libreport_2.9.2.bb => libreport_2.9.5.bb} (93%)
- delete mode 100644 meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
- rename meta-oe/recipes-extended/volume_key/{volume-key_0.3.10.bb => volume-key_0.3.11.bb} (78%)
- delete mode 100644 meta-oe/recipes-graphics/tigervnc/files/0005-Remove-INITARGS-from-xserver119.patch.patch
- rename meta-oe/recipes-graphics/tigervnc/{tigervnc_1.8.0.bb => tigervnc_1.9.0.bb} (91%)
- rename meta-oe/recipes-support/lvm2/{libdevmapper_2.02.177.bb => libdevmapper_2.02.180.bb} (63%)
- rename meta-oe/recipes-support/lvm2/{lvm2_2.02.177.bb => lvm2_2.02.180.bb} (93%)
- create mode 100644 meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
- rename meta-oe/recipes-support/thin-provisioning-tools/{thin-provisioning-tools_0.6.3.bb => thin-provisioning-tools_0.7.6.bb} (83%)
- delete mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0004-Mount-var-volatile-during-install.patch
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0006-fix-new.roots-object-is-not-iterable.patch => 0004-fix-new.roots-object-is-not-iterable.patch} (78%)
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0007-fix-incorrect-timeout-while-system-time-changed.patch => 0005-fix-incorrect-timeout-while-system-time-changed.patch} (86%)
- delete mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0005-update-fstab-by-appending.patch
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0008-tweak-btrfs-packages.patch => 0006-tweak-btrfs-packages.patch} (85%)
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0009-invoking-mount-with-infinite-timeout.patch => 0007-invoking-mount-with-infinite-timeout.patch} (74%)
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0010-use-oe-variable-to-replace-hardcoded-dir.patch => 0008-use-oe-variable-to-replace-hardcoded-dir.patch} (85%)
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0011-invoking-fsck-with-infinite-timeout.patch => 0009-invoking-fsck-with-infinite-timeout.patch} (84%)
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0012-invoking-mkfs-with-infinite-timeout.patch => 0010-invoking-mkfs-with-infinite-timeout.patch} (87%)
- rename meta-python/recipes-extended/python-blivet/python3-blivet/{0014-invoking-dd-with-infinite-timeout.patch => 0011-invoking-dd-with-infinite-timeout.patch} (78%)
- delete mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0013-Revert-Adapt-to-logging-module-name-change.patch
- rename meta-python/recipes-extended/python-blivet/{python3-blivet_2.2.0.bb => python3-blivet_3.0.1.bb} (51%)
- rename meta-python/recipes-extended/python-blivet/{python3-blivetgui_2.1.5.bb => python3-blivetgui_2.1.8.bb} (92%)
- delete mode 100644 meta-python/recipes-extended/python-pykickstart/files/0005-tweak-shebang-to-python3.patch
- rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_2.35.bb => python3-pykickstart_3.15.bb} (86%)
 
+diff --git a/meta-gnome/recipes-support/usermode/usermode/0001-Missing-n-in-translated-string.patch b/meta-gnome/recipes-support/usermode/usermode/0001-Missing-n-in-translated-string.patch
+new file mode 100644
+index 0000000..9db700e
+--- /dev/null
++++ b/meta-gnome/recipes-support/usermode/usermode/0001-Missing-n-in-translated-string.patch
+@@ -0,0 +1,28 @@
++From 7cbc6441cd06e0c0bb51ac37c8f22b0fd51f12f2 Mon Sep 17 00:00:00 2001
++From: Jiri Kucera <jkucera@redhat.com>
++Date: Wed, 11 Apr 2018 17:13:44 +0200
++Subject: [PATCH] Missing \n in translated string
++
++Upstream-Status: Backport
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ po/tr.po | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/po/tr.po b/po/tr.po
++index 84e5021..a28e947 100644
++--- a/po/tr.po
+++++ b/po/tr.po
++@@ -408,7 +408,7 @@ msgstr "Grafik pencere açılamadı ve uçbirim denetimi bulunamadı.\n"
++ #: ../../po/../userpasswd.c:37
++ #, c-format
++ msgid "Unexpected command-line arguments\n"
++-msgstr "Beklenmeyen komut satırı argümanları"
+++msgstr "Beklenmeyen komut satırı argümanları\n"
++ 
++ #: ../../po/../userinfo.c:411
++ #, c-format
++-- 
++2.7.4
++
+diff --git a/meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch b/meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
+deleted file mode 100644
+index 9d512d4..0000000
+--- a/meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 7a316dad0697af2ef4e8079a5af51565a8195aa6 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Mon, 24 Jul 2017 01:42:30 -0400
+-Subject: [PATCH] userhelper.c: fix formatting issues
+-
+-Fixed when compile with "-Wformat -Wformat-security -Werror=format-security":
+-|../usermode-1.111/userhelper.c:585:4: error: format not a string
+-literal and no format arguments [-Werror=format-security]
+-|    text = g_strdup_printf(dgettext(data->domain, data->banner));
+-|    ^~~~
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- userhelper.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/userhelper.c b/userhelper.c
+-index 76ad492..ee0da49 100644
+---- a/userhelper.c
+-+++ b/userhelper.c
+-@@ -582,7 +582,7 @@ converse_console(int num_msg, const struct pam_message **msg,
+- 
+- 	if (banner == 0) {
+- 		if ((data->banner != NULL) && (data->domain != NULL)) {
+--			text = g_strdup_printf(dgettext(data->domain, data->banner));
+-+			text = g_strdup_printf("%s", dgettext(data->domain, data->banner));
+- 		} else {
+- 			if ((service != NULL) && (strlen(service) > 0)) {
+- 				if (data->fallback_allowed) {
+--- 
+-2.8.1
+-
+diff --git a/meta-gnome/recipes-support/usermode/usermode_1.111.bb b/meta-gnome/recipes-support/usermode/usermode_1.112.bb
+similarity index 84%
+rename from meta-gnome/recipes-support/usermode/usermode_1.111.bb
+rename to meta-gnome/recipes-support/usermode/usermode_1.112.bb
+index 3aea2e6..51f81a1 100644
+--- a/meta-gnome/recipes-support/usermode/usermode_1.111.bb
++++ b/meta-gnome/recipes-support/usermode/usermode_1.112.bb
+@@ -14,12 +14,12 @@ DEPENDS = "libuser ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '',
+ "
+ 
+ SRC_URI = "https://releases.pagure.org/${BPN}/${BPN}-${PV}.tar.xz \
+-           file://0001-formatting-issues.patch \
+            file://0001-fix-compile-failure-against-musl-C-library.patch \
+            file://0001-Makefile.am-Link-with-libm-for-powl-API.patch \
++           file://0001-Missing-n-in-translated-string.patch \
+            "
+-SRC_URI[md5sum] = "28ba510fbd8da9f4e86e57d6c31cff29"
+-SRC_URI[sha256sum] = "3dd0b9639b5bd396b7ea5fada6aaa694dbfdaa3ad06eb95a6eabcdfd02f875c6"
++SRC_URI[md5sum] = "a766a9f7600f573fb6de4655d4162196"
++SRC_URI[sha256sum] = "37c4d667209da14082c08df6e48fe955d1532efebd5322f13f94683c6cc10370"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
 -- 
 2.7.4
 
