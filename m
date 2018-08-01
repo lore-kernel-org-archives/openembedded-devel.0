@@ -1,25 +1,50 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8894F78CF6
+Return-Path: <ricardo@foundries.io>
+Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
+	[209.85.220.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C42E78C01
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Aug 2018 01:25:50 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w711PorE019615
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  1 Aug 2018 03:06:19 +0000 (UTC)
+Received: by mail-qk0-f173.google.com with SMTP id 27-v6so11734730qkv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jul 2018 18:25:50 -0700 (PDT)
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
-	Tue, 31 Jul 2018 18:25:49 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 31 Jul 2018 18:25:40 -0700
-Message-ID: <20180801012540.11856-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20180801012540.11856-1-mingli.yu@windriver.com>
-References: <20180801012540.11856-1-mingli.yu@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] makedumpfile: Upgrade to 1.6.4
+	Tue, 31 Jul 2018 20:06:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=foundries-io.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=VKJ1sAju9LahjpLppHMyw63t+Uz06Rx4/pPBde33Cms=;
+	b=t5v+mtkLh5rZoSMq1BDh+DgbQriESExJoSMQPMEBUVw5YkuITZwlDruFv1meiWpKd4
+	g8b0K8+4tzfjgiOFcQsX9hWJeMQhTLbJRe5PGD/xhAPUkZrj4O1PsqgxIhu0ZGn4zSZp
+	gd+81YPRNknMoUKRl+1xH7txEd4YObAYd8nP9x0XOx1cxvYe4jDWqLJkrZnOljwWzm0g
+	sUuBfzI/Q/ADjnPtfX9PCBJAwkUHK9k5+eY621vlNpbj2oncas8qagA8pQADJeVsx8vU
+	ksxv7d6Brv0Jc4I33kWz1id5JD1BsN48HmtKsw7NWpE01gMEtp1Mpa84AlpAgpYCPsv7
+	KCTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=VKJ1sAju9LahjpLppHMyw63t+Uz06Rx4/pPBde33Cms=;
+	b=hO7GhkPsGrEmUyO31/hU+IW9BvzVt9+uRMHLOZIQtFf/oN6ddpFdCeyaWQLPF/kI8C
+	c4xCUkVthSiuBzIGrGL7lo31E5oLhwbwSv7Jk44gHAZL/7e7Kg0fvxQS7m/quwT3q6k5
+	r2Lek4TtiRuWEzPD9mRcMF3BC94QX7Qvb/ePU0Zahpjrv9I6OHKXT0LUlH5Qr5IJlfxv
+	5alDU2xOmG4x0x/gBZPqqKprcMv/xTDfS2h3D3gd6GYIto0J0f4oQH8NaiY5fUtqQQAN
+	DglRg/3cpkNsBFpyHG9j614cmjHkMA4ZGPounWkA+J8yopJ9COZ03hO3/qnCXynvKy/l
+	xD9A==
+X-Gm-Message-State: AOUpUlGxDZnZLtCoCDIi4yvt01EXLxlVWSVNYlFCBZ4d4Yy/jvUEV1Lc
+	Ab6QISyx8bqGC7u1h7ExT0qh192Lig==
+X-Google-Smtp-Source: AAOMgpdcZHa27GGopM917LdKPG5CjOzXKBxW4WCkObqF067KQwIfkqWTrEYHM3aUdJQ5r/DvNL0k3A==
+X-Received: by 2002:a37:1adb:: with SMTP id
+	l88-v6mr22105717qkh.413.1533092780372; 
+	Tue, 31 Jul 2018 20:06:20 -0700 (PDT)
+Received: from localhost.localdomain ([189.4.104.186])
+	by smtp.gmail.com with ESMTPSA id
+	e1-v6sm9581041qkd.15.2018.07.31.20.06.18
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 31 Jul 2018 20:06:19 -0700 (PDT)
+From: Ricardo Salveti <ricardo@foundries.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Aug 2018 00:06:12 -0300
+Message-Id: <1533092773-22300-1-git-send-email-ricardo@foundries.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH 1/2] mozjs: set -fno-schedule-insns2 on both CFLAGS and CXXFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,152 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2018 01:25:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 01 Aug 2018 03:06:20 -0000
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Mozjs fails to start on several architectures due broken build
+optimizations when building with GCC >= 6.
 
-Refresh the patches to avoid fuzz warnings
+Set -fno-schedule-insns2 as workaround (flag also used by Firefox and
+Debian).
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
 ---
- ...01-makedumpfile-replace-hardcode-CFLAGS.patch | 16 +++++++---------
- ...upport-only-46-bit-for-MAX_PHYSMEM_BITS.patch | 15 +++++++--------
- ...kedumpfile_1.6.2.bb => makedumpfile_1.6.4.bb} |  4 ++--
- 3 files changed, 16 insertions(+), 19 deletions(-)
- rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.6.2.bb => makedumpfile_1.6.4.bb} (92%)
+ meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-index d599a9193..a47806526 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-@@ -1,4 +1,4 @@
--From 3c2f4ff583a156a7ed2fa0cc002a413c391d063d Mon Sep 17 00:00:00 2001
-+From 8eeb1b15608ce1a9a1f0d5417938fd6da4504406 Mon Sep 17 00:00:00 2001
- From: Mingli Yu <mingli.yu@windriver.com>
- Date: Thu, 21 Jul 2016 18:06:21 +0800
- Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
-@@ -13,12 +13,13 @@ Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
- Upstream-Status: Inappropriate[oe specific]
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+index da80b63..adc27ac 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+@@ -30,6 +30,11 @@ CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
  
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+ DEPENDS += "nspr zlib"
+ 
++# Avoid broken JIT on several architectures (from Firefox and Debian)
++# https://bugzilla.mozilla.org/show_bug.cgi?id=1245783
++CFLAGS += "-fno-schedule-insns2"
++CXXFLAGS += "-fno-schedule-insns2"
 +
- ---
-  Makefile | 46 +++++++++++++++++++++++-----------------------
-  1 file changed, 23 insertions(+), 23 deletions(-)
- 
- diff --git a/Makefile b/Makefile
--index 7dde3e4..c5286ac 100644
-+index 612b9d0..f6d6265 100644
- --- a/Makefile
- +++ b/Makefile
- @@ -8,13 +8,6 @@ ifeq ($(strip $CC),)
-@@ -80,9 +81,9 @@ index 7dde3e4..c5286ac 100644
- +		-DRELEASE_DATE='"$(DATE)"'
- +
-  SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
-- SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c
-+ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c
-  OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
--@@ -54,17 +54,17 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-+@@ -53,17 +53,17 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-  
-  LIBS = -ldw -lbz2 -lebl -ldl -lelf -lz
-  ifneq ($(LINKTYPE), dynamic)
-@@ -103,7 +104,7 @@ index 7dde3e4..c5286ac 100644
-  endif
-  
-  LIBS := -lpthread $(LIBS)
--@@ -72,14 +72,14 @@ LIBS := -lpthread $(LIBS)
-+@@ -71,14 +71,14 @@ LIBS := -lpthread $(LIBS)
-  all: makedumpfile
-  
-  $(OBJ_PART): $(SRC_PART)
-@@ -120,7 +121,7 @@ index 7dde3e4..c5286ac 100644
-  	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
-  	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
-  	mv temp.8 makedumpfile.8
--@@ -90,7 +90,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-+@@ -89,7 +89,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-  	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
-  
-  eppic_makedumpfile.so: extension_eppic.c
-@@ -129,6 +130,3 @@ index 7dde3e4..c5286ac 100644
-  
-  clean:
-  	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
---- 
--2.8.1
--
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-index e0c3d9af6..766f4fc76 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-@@ -1,4 +1,4 @@
--From 653fe8e724081d2f289c2245d1220d5f7170538d Mon Sep 17 00:00:00 2001
-+From ba123fa6b2aa0ac62d1b78f327339635ae87201a Mon Sep 17 00:00:00 2001
- From: Alexandru Moise <alexandru.moise@windriver.com>
- Date: Fri, 29 Apr 2016 07:40:46 +0000
- Subject: [PATCH] mem_section: Support only 46 bit for MAX_PHYSMEM_BITS on
-@@ -20,18 +20,20 @@ Upstream-Status: Pending
- 
- Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
- Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
- ---
-  arch/ppc64.c | 28 ++--------------------------
-  1 file changed, 2 insertions(+), 26 deletions(-)
- 
- diff --git a/arch/ppc64.c b/arch/ppc64.c
--index 89a7f05..6c928ab 100644
-+index 8b6f7d5..458f06b 100644
- --- a/arch/ppc64.c
- +++ b/arch/ppc64.c
--@@ -302,37 +302,13 @@ ppc64_vtop_level4(unsigned long vaddr)
-+@@ -462,38 +462,14 @@ ppc64_vtop_level4(unsigned long vaddr)
-+ 	return paddr;
-  }
-  
-- int
-+-int
- -set_ppc64_max_physmem_bits(void)
- -{
- -	long array_len = ARRAY_LENGTH(mem_section);
-@@ -53,7 +55,7 @@ index 89a7f05..6c928ab 100644
- -	return FALSE;
- -}
- -
---int
-+ int
-  get_machdep_info_ppc64(void)
-  {
-  	unsigned long vmlist, vmap_area_list, vmalloc_start;
-@@ -68,6 +70,3 @@ index 89a7f05..6c928ab 100644
-  	info->page_offset = __PAGE_OFFSET;
-  
-  	if (SYMBOL(_stext) == NOT_FOUND_SYMBOL) {
---- 
--2.5.0
--
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.2.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.4.bb
-similarity index 92%
-rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.2.bb
-rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.4.bb
-index 38f9d24c9..629e2518f 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.2.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.4.bb
-@@ -25,8 +25,8 @@ SRC_URI = "\
-     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
-     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
- "
--SRC_URI[md5sum] = "72be5bf973eed898c5127e3abc466583"
--SRC_URI[sha256sum] = "ee3d21cb4032a60bd2c802d1d8b21b9f399710e1574f8de8ead5ab50cd821a6d"
-+SRC_URI[md5sum] = "7dfbca19f487604c271e2892ba07f4bd"
-+SRC_URI[sha256sum] = "7e06f72d5f291fcab9e92975f405a76e37d4f7fc8fa4172f199636398ae812b1"
- 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/makedumpfile/files/makedumpfile/"
- UPSTREAM_CHECK_REGEX = "makedumpfile/(?P<pver>\d+(\.\d+)+)/"
+ # nspr's package-config is ignored so set libs manually
+ EXTRA_OECONF = " \
+     --target=${TARGET_SYS} \
 -- 
-2.17.1
+2.7.4
 
 
