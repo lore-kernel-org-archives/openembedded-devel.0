@@ -1,25 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B68BC78D63
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BA0C78D63
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Aug 2018 07:11:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w717BjTx022183
+	Wed,  1 Aug 2018 07:11:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w717BffM004307
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 1 Aug 2018 00:11:45 -0700 (PDT)
+	Wed, 1 Aug 2018 00:11:41 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 1 Aug 2018 00:11:44 -0700
+	14.3.399.0; Wed, 1 Aug 2018 00:11:39 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Wed, 1 Aug 2018 15:21:32 +0800
-Message-ID: <1c6a3bcf7c4d2d70876bbaee00b4704732f9307a.1533107855.git.hongxu.jia@windriver.com>
+Date: Wed, 1 Aug 2018 15:21:30 +0800
+Message-ID: <d1318a396b3e0eebfc045fb3489a43209da21ea4.1533107855.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1533107855.git.hongxu.jia@windriver.com>
 References: <cover.1533107855.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 08/16] efivar: 0.31 -> 0.36
+Subject: [PATCH 06/16] thin-provisioning-tools: 0.6.3 -> 0.7.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,269 +33,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2018 07:11:44 -0000
+X-List-Received-Date: Wed, 01 Aug 2018 07:11:45 -0000
 Content-Type: text/plain
-
-- Drop obsolete patches
-  0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
-  musl-strndupa.patch
-  0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
-  0003-efivar-fix-for-cross-compile.patch
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...-Add-Wunknown-attributes-when-using-clang.patch | 33 -----------------
- ...Do-not-use-__bswap_constant_-16-32-macros.patch | 35 ------------------
- .../efivar/0003-efivar-fix-for-cross-compile.patch | 42 ----------------------
- .../allow-multi-definitions-for-native.patch       | 14 +++++---
- .../recipes-bsp/efivar/efivar/musl-strndupa.patch  | 25 -------------
- .../efivar/{efivar_0.31.bb => efivar_0.36.bb}      | 11 ++----
- 6 files changed, 11 insertions(+), 149 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
- delete mode 100644 meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
- rename meta-oe/recipes-bsp/efivar/{efivar_0.31.bb => efivar_0.36.bb} (72%)
+ ...01-do-not-strip-pdata_tools-at-do_install.patch | 12 +++----
+ .../0001-fix-compile-failed-with-libc-musl.patch   | 42 ++++++++++++++++++++++
+ ...s_0.6.3.bb => thin-provisioning-tools_0.7.6.bb} |  3 +-
+ 3 files changed, 50 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
+ rename meta-oe/recipes-support/thin-provisioning-tools/{thin-provisioning-tools_0.6.3.bb => thin-provisioning-tools_0.7.6.bb} (83%)
 
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch b/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
-deleted file mode 100644
-index b4ce132..0000000
---- a/meta-oe/recipes-bsp/efivar/efivar/0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From d65c325dd8681edf2ee3332eeb0a547229c7ffb5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 24 Aug 2017 15:54:47 -0700
--Subject: [PATCH] efivar-dp.h: Add -Wunknown-attributes when using clang
--
--change !dp check to a comparision against NULL to silent clang warning
--nonnull parameter 'dp' will evaluate to 'true' on first encounter
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
-----
-- src/include/efivar/efivar-dp.h | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/src/include/efivar/efivar-dp.h b/src/include/efivar/efivar-dp.h
--index 3a509b7..c140e8d 100644
----- a/src/include/efivar/efivar-dp.h
--+++ b/src/include/efivar/efivar-dp.h
--@@ -783,9 +783,14 @@ extern int efidp_append_instance(const_efidp dp, const_efidp dpi, efidp *out);
--  * though older or other compilers might just ignore that attribute if they
--  * don't support it.  Ugh.
--  */
--+#pragma GCC diagnostic push
-- #if defined(__GNUC__) && __GNUC__ >= 6
-- #pragma GCC diagnostic ignored "-Wnonnull-compare"
-- #endif
--+#if defined(__clang__)
--+#pragma GCC diagnostic ignored "-Wunknown-attributes"
--+#pragma GCC diagnostic ignored "-Wpointer-bool-conversion"
--+#endif
-- 
-- static inline int16_t
-- __attribute__((__artificial__))
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch b/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
-deleted file mode 100644
-index 2a6eb06..0000000
---- a/meta-oe/recipes-bsp/efivar/efivar/0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From dd4291265b7b3d7d7ffa1d8adf32781ae25dbfeb Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 15 Jul 2017 00:29:42 -0700
--Subject: [PATCH] makeguids: Do not use __bswap_constant_{16|32} macros
--
--not available on musl
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
-----
-- src/makeguids.c | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/src/makeguids.c b/src/makeguids.c
--index da2f5f7..daf821a 100644
----- a/src/makeguids.c
--+++ b/src/makeguids.c
--@@ -155,13 +155,13 @@ main(int argc, char *argv[])
-- #if BYTE_ORDER == BIG_ENDIAN\n\
-- #define cpu_to_be32(n) (n)\n\
-- #define cpu_to_be16(n) (n)\n\
---#define cpu_to_le32(n) (__bswap_constant_32(n))\n\
---#define cpu_to_le16(n) (__bswap_constant_16(n))\n\
--+#define cpu_to_le32(n) ((uint32_t) ((n)>>24 | (n)>>8&0xff00 | (n)<<8&0xff0000 | (n)<<24))\n\
--+#define cpu_to_le16(n) ((uint16_t) ((n)<<8 | (n)>>8))\n\
-- #else\n\
-- #define cpu_to_le32(n) (n)\n\
-- #define cpu_to_le16(n) (n)\n\
---#define cpu_to_be32(n) (__bswap_constant_32(n))\n\
---#define cpu_to_be16(n) (__bswap_constant_16(n))\n\
--+#define cpu_to_be32(n) ((uint32_t) ((n)>>24 | (n)>>8&0xff00 | (n)<<8&0xff0000 | (n)<<24))\n\
--+#define cpu_to_be16(n) ((uint16_t) ((n)<<8 | (n)>>8))\n\
-- #endif\n\
-- """);
-- 
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch b/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
-deleted file mode 100644
-index 83105fe..0000000
---- a/meta-oe/recipes-bsp/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From dea4a55714249b2734a36701120fd22c91c64ec2 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Sat, 7 May 2016 02:06:47 -0400
--Subject: [PATCH] Makefile: fix efivar.pc not found
--
--It fixes efivar.pc not found:
--...
--| install -d -m 755 efivar/0.23-r0/image/usr/lib/pkgconfig/
--| install -m 644 efivar.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
--;  install -m 644 efiboot.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
--;
--| install: cannot stat 'efivar.pc': No such file or directory
--| install: cannot stat 'efiboot.pc': No such file or directory
--| make[1]: *** [install] Error 1
--| make[1]: Leaving directory `efivar/0.23-r0/git/src'
--| make: *** [install] Error 2
--| ERROR: oe_runmake failed
--...
--
--Upstream-Status: Pending
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
--
-----
-- src/Makefile | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
--diff --git a/src/Makefile b/src/Makefile
--index dcc7fc8..691aa8a 100644
----- a/src/Makefile
--+++ b/src/Makefile
--@@ -94,7 +94,9 @@ install : all
-- 		ln -fs $(x).1.$(VERSION) $(DESTDIR)$(libdir)/$(x) ;\
-- 		)
-- 	$(INSTALL) -d -m 755 $(DESTDIR)$(PCDIR)
---	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(x) $(DESTDIR)$(PCDIR) ;)
--+	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(TOPDIR)/src/$(x).in $(DESTDIR)$(PCDIR)/$(x) ;\
--+		sed -i -e "s:@@LIBDIR@@:$(libdir):g" -e "s:@@VERSION@@:$(VERSION):g" \
--+			$(DESTDIR)$(PCDIR)/$(x); )
-- 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/efivar
-- 	$(foreach x, $(wildcard $(TOPDIR)/src/include/efivar/*.h), $(INSTALL) -m 644 $(x) $(DESTDIR)$(includedir)/efivar/$(notdir $(x));)
-- 	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch b/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
-index f88af1f..043b07a 100644
---- a/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
-+++ b/meta-oe/recipes-bsp/efivar/efivar/allow-multi-definitions-for-native.patch
+diff --git a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
+index b4cdda1..547949d 100644
+--- a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
++++ b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
 @@ -1,6 +1,6 @@
--From c801dcb03d42eb533a9bead0b397d7ce4fc5a6fe Mon Sep 17 00:00:00 2001
--From: Kai Kang <kai.kang@windriver.com>
--Date: Wed, 10 Aug 2016 17:49:50 +0800
-+From c10368b397483a2fc7b493c099d8416d902f8cd8 Mon Sep 17 00:00:00 2001
+-From e8be402e20cbdfbd8192a171ac9904d9362103bf Mon Sep 17 00:00:00 2001
++From de869ad2cb19d81257a159770ebe27593a71593c Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Wed, 31 Aug 2016 01:35:40 -0400
++Date: Tue, 31 Jul 2018 11:29:51 +0800
+ Subject: [PATCH] do not strip pdata_tools at do_install
+ 
+ It caused QA Issue:
+@@ -17,11 +17,11 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  1 file changed, 1 deletion(-)
+ 
+ diff --git a/Makefile.in b/Makefile.in
+-index 4264191..ac22042 100644
++index 02b75dd..df590b4 100644
+ --- a/Makefile.in
+ +++ b/Makefile.in
+-@@ -189,7 +189,6 @@ distclean: clean
+- install: bin/pdata_tools
++@@ -267,7 +267,6 @@ MANPAGES:=$(patsubst %,man8/%.8,$(TOOLS))
++ install: bin/pdata_tools $(MANPAGES)
+  	$(INSTALL_DIR) $(BINDIR)
+  	$(INSTALL_PROGRAM) bin/pdata_tools $(BINDIR)
+ -	$(STRIP) $(BINDIR)/pdata_tools
+@@ -29,5 +29,5 @@ index 4264191..ac22042 100644
+  	ln -s -f pdata_tools $(BINDIR)/cache_dump
+  	ln -s -f pdata_tools $(BINDIR)/cache_metadata_size
+ -- 
+-2.8.1
++2.7.4
+ 
+diff --git a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
+new file mode 100644
+index 0000000..28b44da
+--- /dev/null
++++ b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-fix-compile-failed-with-libc-musl.patch
+@@ -0,0 +1,42 @@
++From fcbcf9c494cca166106ae4cb03c1dd135ee4f25c Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Tue, 31 Jul 2018 14:18:35 +0800
- Subject: [PATCH] allow multi definitions for native
- 
- Upstream-Status: Pending
-@@ -14,12 +14,13 @@ Add link option '-z muldefs' to fix it.
- 
- Signed-off-by: Kai Kang <kai.kang@windriver.com>
- 
++Date: Wed, 1 Aug 2018 09:34:00 +0800
++Subject: [PATCH] fix compile failed with libc musl
++
++There is a failure while compiling with libc musl:
++[snip]
++|./block-cache/io_engine.h:18:17: error: expected
++unqualified-id before numeric constant
++|  unsigned const PAGE_SIZE = 4096;
++[snip]
++
++The musl defeines macro PAGE_SIZE, undef it conditionally
++could fix the issue.
++
++http://musl.openwall.narkive.com/tO8vrHdP/why-musl-define-page-size
++
++Upstream-Status: Submitted [git://github.com/jthornber/thin-provisioning-tools]
++
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
- ---
-  Make.rules | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/Make.rules b/Make.rules
--index 88b9aa7..799332f 100644
-+index 042585b..257ba45 100644
- --- a/Make.rules
- +++ b/Make.rules
- @@ -20,6 +20,7 @@ include $(TOPDIR)/Make.version
-@@ -28,5 +29,8 @@ index 88b9aa7..799332f 100644
-  	  -Wl,--version-script=$(MAP) \
- +	  -Wl,-z,muldefs \
-  	  -o $@ $^ $(LDLIBS)
-+ 	ln -vfs $@ $@.1
-  
-- %.abixml : %.so
++---
++ block-cache/io_engine.h | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/block-cache/io_engine.h b/block-cache/io_engine.h
++index 1704251..e36b932 100644
++--- a/block-cache/io_engine.h
+++++ b/block-cache/io_engine.h
++@@ -12,6 +12,10 @@
++ 
++ //----------------------------------------------------------------
++ 
+++// Musl defines
+++#ifdef PAGE_SIZE
+++#undef PAGE_SIZE
+++#endif
++ namespace bcache {
++ 	using sector_t = uint64_t;
++ 
 +-- 
 +2.7.4
 +
-diff --git a/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch b/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
-deleted file mode 100644
-index 5864ac6..0000000
---- a/meta-oe/recipes-bsp/efivar/efivar/musl-strndupa.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From 8000b9afc858472912aace985004b44f8eb467e0 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 18 Aug 2017 09:49:49 -0700
--Subject: [PATCH] support musl
--
--Upstream-Status: Pending
-----
-- src/linux.c | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/src/linux.c b/src/linux.c
--index 34ed479..1304f2b 100644
----- a/src/linux.c
--+++ b/src/linux.c
--@@ -40,6 +40,10 @@
-- #include <efivar.h>
-- #include <efiboot.h>
-- 
--+#if !defined(__GLIBC__)
--+#define strndupa(x,s) strncpy(alloca(strlen(x)+1),x,s)
--+#endif
--+
-- #include "dp.h"
-- #include "linux.h"
-- #include "util.h"
-diff --git a/meta-oe/recipes-bsp/efivar/efivar_0.31.bb b/meta-oe/recipes-bsp/efivar/efivar_0.36.bb
-similarity index 72%
-rename from meta-oe/recipes-bsp/efivar/efivar_0.31.bb
-rename to meta-oe/recipes-bsp/efivar/efivar_0.36.bb
-index 9d4cdc9..dfb46c2 100644
---- a/meta-oe/recipes-bsp/efivar/efivar_0.31.bb
-+++ b/meta-oe/recipes-bsp/efivar/efivar_0.36.bb
-@@ -12,15 +12,11 @@ inherit pkgconfig
+diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.7.6.bb
+similarity index 83%
+rename from meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb
+rename to meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.7.6.bb
+index 4a692dc..20cb17a 100644
+--- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb
++++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.7.6.bb
+@@ -9,9 +9,10 @@ S = "${WORKDIR}/git"
  
- COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
+ SRC_URI = "git://github.com/jthornber/thin-provisioning-tools \
+            file://0001-do-not-strip-pdata_tools-at-do_install.patch \
++           file://0001-fix-compile-failed-with-libc-musl.patch \
+ "
  
--SRCREV = "11324799c68193116e1dd5f94b416591bd324f90"
-+SRCREV = "ef3449223ecd1e7b1098c523d66b2f960fe839ea"
- SRC_URI = "git://github.com/rhinstaller/efivar.git \
-            file://allow-multi-definitions-for-native.patch \
--           file://0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch \
--           file://musl-strndupa.patch \
--           file://0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch \
-            "
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
--                                file://0003-efivar-fix-for-cross-compile.patch \
-                                 ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
-                               "
- SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
-@@ -28,15 +24,12 @@ SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.pat
+-SRCREV = "49bfc12e9c7956c1ac134b24afbe1a6a602ce7d5"
++SRCREV = "6f936992b8e6208a7838fcf1ec87c5bd3a694a77"
  
- S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
  
--# Setting CROSS_COMPILE breaks pkgconfig, so just set AR
--EXTRA_OEMAKE = "AR=${TARGET_PREFIX}gcc-ar"
--
- do_compile_prepend() {
-     sed -i -e s:-Werror::g ${S}/gcc.specs
- }
- 
- do_compile_class-native() {
--    oe_runmake -C src makeguids
-+    oe_runmake -C src makeguids CC_FOR_BUILD=${BUILD_CC}
- }
- 
- do_install() {
 -- 
 2.7.4
 
