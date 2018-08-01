@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7706678D63
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D00078D07
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Aug 2018 07:11:35 +0000 (UTC)
+	Wed,  1 Aug 2018 07:11:37 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w717BarQ001789
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w717BcaU022180
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 1 Aug 2018 00:11:36 -0700 (PDT)
+	Wed, 1 Aug 2018 00:11:38 -0700 (PDT)
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 1 Aug 2018 00:11:35 -0700
+	14.3.399.0; Wed, 1 Aug 2018 00:11:37 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Wed, 1 Aug 2018 15:21:28 +0800
-Message-ID: <5c982c67471b18dbdcd788f2b727a71583668f50.1533107855.git.hongxu.jia@windriver.com>
+Date: Wed, 1 Aug 2018 15:21:29 +0800
+Message-ID: <2d5e331deb3e4940e3ce8ac80c474ba041a9ac32.1533107855.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1533107855.git.hongxu.jia@windriver.com>
 References: <cover.1533107855.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 04/16] network-manager-applet: 1.8.10 -> 1.8.14
+Subject: [PATCH 05/16] libblockdev: clean up obsolete patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +32,731 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2018 07:11:35 -0000
+X-List-Received-Date: Wed, 01 Aug 2018 07:11:37 -0000
 Content-Type: text/plain
+
+Since upgrading libblockdev to 2.18, these patches are
+useless, remove them.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...ork-manager-applet_1.8.10.bb => network-manager-applet_1.8.14.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.8.10.bb => network-manager-applet_1.8.14.bb} (86%)
+ .../files/0002-remove-python2-support.patch        |  30 --
+ ...emove-dmraid-while-compiling-with-with-dm.patch | 492 ---------------------
+ ...ix-compile-failure-against-musl-C-library.patch |  50 ---
+ .../files/0005-fix-a-clang-compiling-issue.patch   | 111 -----
+ 4 files changed, 683 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
+ delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
+ delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
+ delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0005-fix-a-clang-compiling-issue.patch
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-similarity index 86%
-rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
-rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-index 91ae8b7..c9cbcc6 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-@@ -11,8 +11,8 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "eae3be75e77ff1a7ea3174be25e62d03"
--SRC_URI[archive.sha256sum] = "0adc4bfae8b49f7a1d929c22ef20933bd41fb4a8b458280f44c65f9e45b4c9c3"
-+SRC_URI[archive.md5sum] = "bcdd92645d36fc5778f27aeb2773509b"
-+SRC_URI[archive.sha256sum] = "ca9b1233721f700a7190b98eea69ce6d0ccf74fbfde173ac868a4ec7a78840cb"
- 
- PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
- PACKAGECONFIG ??= ""
-@@ -42,6 +42,7 @@ FILES_${PN} += " \
-     ${datadir}/nm-applet/ \
-     ${datadir}/libnm-gtk/wifi.ui \
-     ${datadir}/libnma/wifi.ui \
-+    ${datadir}/metainfo \
- "
- 
- # musl builds generate gir files which otherwise go un-packaged
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch b/meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
+deleted file mode 100644
+index 0719759..0000000
+--- a/meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From 40dae7ea6450cb30f066da8443eabf063b5b0ad7 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Mon, 8 May 2017 02:05:40 -0400
+-Subject: [PATCH 2/3] remove python2 support
+-
+-Only python3 is required.
+-
+-Upstream-Status: Inappropriate [wr-installer specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- src/python/gi/overrides/Makefile.am | 5 -----
+- 1 file changed, 5 deletions(-)
+-
+-diff --git a/src/python/gi/overrides/Makefile.am b/src/python/gi/overrides/Makefile.am
+-index a2927ac..6385502 100644
+---- a/src/python/gi/overrides/Makefile.am
+-+++ b/src/python/gi/overrides/Makefile.am
+-@@ -1,8 +1,3 @@
+--pylibdir = $(shell python -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib(1,0,prefix='${exec_prefix}'))")
+--
+--overridesdir = $(pylibdir)/gi/overrides
+--dist_overrides_DATA = BlockDev.py
+--
+- if WITH_PYTHON3
+- py3libdir = $(shell python3 -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib(1,0,prefix='${exec_prefix}'))")
+- py3overridesdir = $(py3libdir)/gi/overrides
+--- 
+-1.8.3.1
+-
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch b/meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
+deleted file mode 100644
+index ac5b5e2..0000000
+--- a/meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
++++ /dev/null
+@@ -1,492 +0,0 @@
+-From bda7c937ba544182a5cae2a9cf0c173e0ba268c9 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Thu, 27 Jul 2017 09:47:23 +0800
+-Subject: [PATCH 3/3] remove dmraid while compiling with --with-dm
+-
+-Fix the following failure:
+-
+-...
+-Perhaps you should add the directory containing `dmraid.pc'
+-to the PKG_CONFIG_PATH environment variable
+-No package 'dmraid' found
+-...
+-
+-...
+-../../../git/src/plugins/dm.c:24:10: fatal error: dmraid/dmraid.h: No
+-such file or directory
+- #include <dmraid/dmraid.h>
+-          ^~~~~~~~~~~~~~~~~
+-...
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- src/lib/plugin_apis/dm.api          |  50 ------
+- src/plugins/Makefile.am             |   2 +-
+- src/plugins/dm.c                    | 330 ------------------------------------
+- src/plugins/dm.h                    |   5 -
+- src/python/gi/overrides/BlockDev.py |   6 -
+- 5 files changed, 1 insertion(+), 392 deletions(-)
+-
+-diff --git a/src/lib/plugin_apis/dm.api b/src/lib/plugin_apis/dm.api
+-index 04fd8d8..5d30b6a 100644
+---- a/src/lib/plugin_apis/dm.api
+-+++ b/src/lib/plugin_apis/dm.api
+-@@ -111,53 +111,3 @@ gchar* bd_dm_get_subsystem_from_name (const gchar *device_name, GError **error);
+-  * Tech category: %BD_DM_TECH_MAP-%BD_DM_TECH_MODE_QUERY
+-  */
+- gboolean bd_dm_map_exists (const gchar *map_name, gboolean live_only, gboolean active_only, GError **error);
+--
+--/**
+-- * bd_dm_get_member_raid_sets:
+-- * @name: (allow-none): name of the member
+-- * @uuid: (allow-none): uuid of the member
+-- * @major: major number of the device or -1 if not specified
+-- * @minor: minor number of the device or -1 if not specified
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: (transfer full) (array zero-terminated=1): list of names of the RAID sets related to
+-- * the member or %NULL in case of error
+-- *
+-- * One of @name, @uuid or @major:@minor has to be given.
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_MODE_QUERY
+-- */
+--gchar** bd_dm_get_member_raid_sets (const gchar *name, const gchar *uuid, gint major, gint minor, GError **error);
+--
+--/**
+-- * bd_dm_activate_raid_set:
+-- * @name: name of the DM RAID set to activate
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: whether the RAID set @name was successfully activate or not
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_CREATE_ACTIVATE
+-- */
+--gboolean bd_dm_activate_raid_set (const gchar *name, GError **error);
+--
+--/**
+-- * bd_dm_deactivate_raid_set:
+-- * @name: name of the DM RAID set to deactivate
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: whether the RAID set @name was successfully deactivate or not
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_REMOVE_DEACTIVATE
+-- */
+--gboolean bd_dm_deactivate_raid_set (const gchar *name, GError **error);
+--
+--/**
+-- * bd_dm_get_raid_set_type:
+-- * @name: name of the DM RAID set to get the type of
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: string representation of the @name RAID set's type
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_QUERY
+-- */
+--gchar* bd_dm_get_raid_set_type (const gchar *name, GError **error);
+-diff --git a/src/plugins/Makefile.am b/src/plugins/Makefile.am
+-index b69c8f7..7575f4a 100644
+---- a/src/plugins/Makefile.am
+-+++ b/src/plugins/Makefile.am
+-@@ -75,7 +75,7 @@ endif
+- 
+- if WITH_DM
+- libbd_dm_la_CFLAGS = $(GLIB_CFLAGS) $(DEVMAPPER_CFLAGS) $(UDEV_CFLAGS) -Wall -Wextra -Werror
+--libbd_dm_la_LIBADD = $(GLIB_LIBS) $(DEVMAPPER_LIBS) $(UDEV_LIBS) -ldmraid ${builddir}/../utils/libbd_utils.la
+-+libbd_dm_la_LIBADD = $(GLIB_LIBS) $(DEVMAPPER_LIBS) $(UDEV_LIBS) ${builddir}/../utils/libbd_utils.la
+- libbd_dm_la_LDFLAGS = -L${srcdir}/../utils/ -version-info 2:0:0 -Wl,--no-undefined
+- # Dear author of libdmdraid, VERSION really is not a good name for an enum member!
+- libbd_dm_la_CPPFLAGS = -I${builddir}/../../include/ -UVERSION
+-diff --git a/src/plugins/dm.c b/src/plugins/dm.c
+-index 0e5466c..31ebe96 100644
+---- a/src/plugins/dm.c
+-+++ b/src/plugins/dm.c
+-@@ -21,17 +21,11 @@
+- #include <unistd.h>
+- #include <blockdev/utils.h>
+- #include <libdevmapper.h>
+--#include <dmraid/dmraid.h>
+- #include <libudev.h>
+- 
+- #include "dm.h"
+- #include "check_deps.h"
+- 
+--/* macros taken from the pyblock/dmraid.h file plus one more*/
+--#define for_each_raidset(_c, _n) list_for_each_entry(_n, LC_RS(_c), list)
+--#define for_each_subset(_rs, _n) list_for_each_entry(_n, &(_rs)->sets, list)
+--#define for_each_device(_rs, _d) list_for_each_entry(_d, &(_rs)->devs, devs)
+--
+- /**
+-  * SECTION: dm
+-  * @short_description: plugin for basic operations with device mapper
+-@@ -380,327 +374,3 @@ gboolean bd_dm_map_exists (const gchar *map_name, gboolean live_only, gboolean a
+- 
+-     return ret;
+- }
+--
+--/**
+-- * init_dmraid_stack: (skip)
+-- *
+-- * Initializes the dmraid stack by creating the library context, discovering
+-- * devices, raid sets, etc.
+-- */
+--static struct lib_context* init_dmraid_stack (GError **error) {
+--    gint rc = 0;
+--    gchar *argv[] = {"blockdev.dmraid", NULL};
+--    struct lib_context *lc;
+--
+--    /* the code for this function was cherry-picked from the pyblock code */
+--    /* XXX: do this all just once, store global lc and provide a reinit
+--     *      function? */
+--
+--    /* initialize dmraid library context */
+--    lc = libdmraid_init (1, (gchar **)argv);
+--
+--    rc = discover_devices (lc, NULL);
+--    if (!rc) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
+--                     "Failed to discover devices");
+--        libdmraid_exit (lc);
+--        return NULL;
+--    }
+--    discover_raid_devices (lc, NULL);
+--
+--    if (!count_devices (lc, RAID)) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_NO_DEVS,
+--                     "No RAIDs discovered");
+--        libdmraid_exit (lc);
+--        return NULL;
+--    }
+--
+--    argv[0] = NULL;
+--    if (!group_set (lc, argv)) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
+--                     "Failed to group_set");
+--        libdmraid_exit (lc);
+--        return NULL;
+--    }
+--
+--    return lc;
+--}
+--
+--/**
+-- * raid_dev_matches_spec: (skip)
+-- *
+-- * Returns: whether the device specified by @sysname matches the spec given by @name,
+-- *          @uuid, @major and @minor
+-- */
+--static gboolean raid_dev_matches_spec (struct raid_dev *raid_dev, const gchar *name, const gchar *uuid, gint major, gint minor) {
+--    gchar const *dev_name = NULL;
+--    gchar const *dev_uuid;
+--    gchar const *major_str;
+--    gchar const *minor_str;
+--    struct udev *context;
+--    struct udev_device *device;
+--    gboolean ret = TRUE;
+--
+--    /* find the second '/' to get name (the rest of the string) */
+--    dev_name = strchr (raid_dev->di->path, '/');
+--    if (dev_name && strlen (dev_name) > 1) {
+--        dev_name++;
+--        dev_name = strchr (dev_name, '/');
+--    }
+--    if (dev_name && strlen (dev_name) > 1) {
+--        dev_name++;
+--    }
+--    else
+--        dev_name = NULL;
+--
+--    /* if we don't have the name, we cannot check any match */
+--    g_return_val_if_fail (dev_name, FALSE);
+--
+--    /* g_return_val_if_fail above checks value of dev_name and returns FALSE if
+--     * it is NULL so we don't need to check it here */
+--    /* coverity[var_deref_model] */
+--    if (name && strcmp (dev_name, name) != 0) {
+--        return FALSE;
+--    }
+--
+--    context = udev_new ();
+--    device = udev_device_new_from_subsystem_sysname (context, "block", dev_name);
+--    dev_uuid = udev_device_get_property_value (device, "UUID");
+--    major_str = udev_device_get_property_value (device, "MAJOR");
+--    minor_str = udev_device_get_property_value (device, "MINOR");
+--
+--    if (uuid && (g_strcmp0 (uuid, "") != 0) && (g_strcmp0 (uuid, dev_uuid) != 0))
+--        ret = FALSE;
+--
+--    if (major >= 0 && (atoi (major_str) != major))
+--        ret = FALSE;
+--
+--    if (minor >= 0 && (atoi (minor_str) != minor))
+--        ret = FALSE;
+--
+--    udev_device_unref (device);
+--    udev_unref (context);
+--
+--    return ret;
+--}
+--
+--/**
+-- * find_raid_sets_for_dev: (skip)
+-- */
+--static void find_raid_sets_for_dev (const gchar *name, const gchar *uuid, gint major, gint minor, struct lib_context *lc, struct raid_set *rs, GPtrArray *ret_sets) {
+--    struct raid_set *subset = NULL;
+--    struct raid_dev *dev = NULL;
+--
+--    if (T_GROUP(rs) || !list_empty(&(rs->sets))) {
+--        for_each_subset (rs, subset)
+--            find_raid_sets_for_dev (name, uuid, major, minor, lc, subset, ret_sets);
+--    } else {
+--        for_each_device (rs, dev) {
+--            if (raid_dev_matches_spec (dev, name, uuid, major, minor))
+--                g_ptr_array_add (ret_sets, g_strdup (rs->name));
+--        }
+--    }
+--}
+--
+--/**
+-- * bd_dm_get_member_raid_sets:
+-- * @name: (allow-none): name of the member
+-- * @uuid: (allow-none): uuid of the member
+-- * @major: major number of the device or -1 if not specified
+-- * @minor: minor number of the device or -1 if not specified
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: (transfer full) (array zero-terminated=1): list of names of the RAID sets related to
+-- * the member or %NULL in case of error
+-- *
+-- * One of @name, @uuid or @major:@minor has to be given.
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_MODE_QUERY
+-- */
+--gchar** bd_dm_get_member_raid_sets (const gchar *name, const gchar *uuid, gint major, gint minor, GError **error) {
+--    guint64 i = 0;
+--    struct lib_context *lc = NULL;
+--    struct raid_set *rs = NULL;
+--    GPtrArray *ret_sets = g_ptr_array_new ();
+--    gchar **ret = NULL;
+--
+--    lc = init_dmraid_stack (error);
+--    if (!lc)
+--        /* error is already populated */
+--        return NULL;
+--
+--    for_each_raidset (lc, rs) {
+--        find_raid_sets_for_dev (name, uuid, major, minor, lc, rs, ret_sets);
+--    }
+--
+--    /* now create the return value -- NULL-terminated array of strings */
+--    ret = g_new0 (gchar*, ret_sets->len + 1);
+--    for (i=0; i < ret_sets->len; i++)
+--        ret[i] = (gchar*) g_ptr_array_index (ret_sets, i);
+--    ret[i] = NULL;
+--
+--    g_ptr_array_free (ret_sets, FALSE);
+--
+--    libdmraid_exit (lc);
+--    return ret;
+--}
+--
+--/**
+-- * find_in_raid_sets: (skip)
+-- *
+-- * Runs @eval_fn with @data on each set (traversing recursively) and returns the
+-- * first RAID set that @eval_fn returns. Thus the @eval_fn should return %NULL
+-- * on all RAID sets that don't fulfill the search criteria.
+-- */
+--static struct raid_set* find_in_raid_sets (struct raid_set *rs, RSEvalFunc eval_fn, gpointer data) {
+--    struct raid_set *subset = NULL;
+--    struct raid_set *ret = NULL;
+--
+--    ret = eval_fn (rs, data);
+--    if (ret)
+--        return ret;
+--
+--    if (T_GROUP(rs) || !list_empty(&(rs->sets))) {
+--        for_each_subset (rs, subset) {
+--            ret = find_in_raid_sets (subset, eval_fn, data);
+--            if (ret)
+--                return ret;
+--        }
+--    }
+--
+--    return ret;
+--}
+--
+--static struct raid_set* rs_matches_name (struct raid_set *rs, gpointer *name_data) {
+--    gchar *name = (gchar*) name_data;
+--
+--    if (g_strcmp0 (rs->name, name) == 0)
+--        return rs;
+--    else
+--        return NULL;
+--}
+--
+--static gboolean change_set_by_name (const gchar *name, enum activate_type action, GError **error) {
+--    gint rc = 0;
+--    struct lib_context *lc = NULL;
+--    struct raid_set *iter_rs = NULL;
+--    struct raid_set *match_rs = NULL;
+--
+--    lc = init_dmraid_stack (error);
+--    if (!lc)
+--        /* error is already populated */
+--        return FALSE;
+--
+--    for_each_raidset (lc, iter_rs) {
+--        match_rs = find_in_raid_sets (iter_rs, (RSEvalFunc)rs_matches_name, (gchar *)name);
+--        if (match_rs)
+--            break;
+--    }
+--
+--    if (!match_rs) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_NO_EXIST,
+--                     "RAID set %s doesn't exist", name);
+--        libdmraid_exit (lc);
+--        return FALSE;
+--    }
+--
+--    rc = change_set (lc, action, match_rs);
+--    if (!rc) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
+--                     "Failed to activate the RAID set '%s'", name);
+--        libdmraid_exit (lc);
+--        return FALSE;
+--    }
+--
+--    libdmraid_exit (lc);
+--    return TRUE;
+--}
+--
+--/**
+-- * bd_dm_activate_raid_set:
+-- * @name: name of the DM RAID set to activate
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: whether the RAID set @name was successfully activate or not
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_CREATE_ACTIVATE
+-- */
+--gboolean bd_dm_activate_raid_set (const gchar *name, GError **error) {
+--    guint64 progress_id = 0;
+--    gchar *msg = NULL;
+--    gboolean ret = FALSE;
+--
+--    msg = g_strdup_printf ("Activating DM RAID set '%s'", name);
+--    progress_id = bd_utils_report_started (msg);
+--    g_free (msg);
+--    ret = change_set_by_name (name, A_ACTIVATE, error);
+--    bd_utils_report_finished (progress_id, "Completed");
+--    return ret;
+--}
+--
+--/**
+-- * bd_dm_deactivate_raid_set:
+-- * @name: name of the DM RAID set to deactivate
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: whether the RAID set @name was successfully deactivate or not
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_REMOVE_DEACTIVATE
+-- */
+--gboolean bd_dm_deactivate_raid_set (const gchar *name, GError **error) {
+--    guint64 progress_id = 0;
+--    gchar *msg = NULL;
+--    gboolean ret = FALSE;
+--
+--    msg = g_strdup_printf ("Deactivating DM RAID set '%s'", name);
+--    progress_id = bd_utils_report_started (msg);
+--    g_free (msg);
+--    ret = change_set_by_name (name, A_DEACTIVATE, error);
+--    bd_utils_report_finished (progress_id, "Completed");
+--    return ret;
+--}
+--
+--/**
+-- * bd_dm_get_raid_set_type:
+-- * @name: name of the DM RAID set to get the type of
+-- * @error: (out): variable to store error (if any)
+-- *
+-- * Returns: string representation of the @name RAID set's type
+-- *
+-- * Tech category: %BD_DM_TECH_RAID-%BD_DM_TECH_QUERY
+-- */
+--gchar* bd_dm_get_raid_set_type (const gchar *name, GError **error) {
+--    struct lib_context *lc = NULL;
+--    struct raid_set *iter_rs = NULL;
+--    struct raid_set *match_rs = NULL;
+--    const gchar *type = NULL;
+--
+--    lc = init_dmraid_stack (error);
+--    if (!lc)
+--        /* error is already populated */
+--        return NULL;
+--
+--    for_each_raidset (lc, iter_rs) {
+--        match_rs = find_in_raid_sets (iter_rs, (RSEvalFunc)rs_matches_name, (gchar *)name);
+--        if (match_rs)
+--            break;
+--    }
+--
+--    if (!match_rs) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_NO_EXIST,
+--                     "RAID set %s doesn't exist", name);
+--        libdmraid_exit (lc);
+--        return NULL;
+--    }
+--
+--    type = get_set_type (lc, match_rs);
+--    if (!type) {
+--        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
+--                     "Failed to get RAID set's type");
+--        libdmraid_exit (lc);
+--        return NULL;
+--    }
+--
+--    libdmraid_exit (lc);
+--    return g_strdup (type);
+--}
+-diff --git a/src/plugins/dm.h b/src/plugins/dm.h
+-index 0dce6ac..1ee3788 100644
+---- a/src/plugins/dm.h
+-+++ b/src/plugins/dm.h
+-@@ -1,5 +1,4 @@
+- #include <glib.h>
+--#include <dmraid/dmraid.h>
+- 
+- #ifndef BD_DM
+- #define BD_DM
+-@@ -48,9 +47,5 @@ gboolean bd_dm_map_exists (const gchar *map_name, gboolean live_only, gboolean a
+- gchar* bd_dm_name_from_node (const gchar *dm_node, GError **error);
+- gchar* bd_dm_node_from_name (const gchar *map_name, GError **error);
+- gchar* bd_dm_get_subsystem_from_name (const gchar *device_name, GError **error);
+--gchar** bd_dm_get_member_raid_sets (const gchar *name, const gchar *uuid, gint major, gint minor, GError **error);
+--gboolean bd_dm_activate_raid_set (const gchar *name, GError **error);
+--gboolean bd_dm_deactivate_raid_set (const gchar *name, GError **error);
+--gchar* bd_dm_get_raid_set_type (const gchar *name, GError **error);
+- 
+- #endif  /* BD_DM */
+-diff --git a/src/python/gi/overrides/BlockDev.py b/src/python/gi/overrides/BlockDev.py
+-index fb3ffb4..eed0a38 100644
+---- a/src/python/gi/overrides/BlockDev.py
+-+++ b/src/python/gi/overrides/BlockDev.py
+-@@ -233,12 +233,6 @@ def dm_create_linear(map_name, device, length, uuid=None):
+-     return _dm_create_linear(map_name, device, length, uuid)
+- __all__.append("dm_create_linear")
+- 
+--_dm_get_member_raid_sets = BlockDev.dm_get_member_raid_sets
+--@override(BlockDev.dm_get_member_raid_sets)
+--def dm_get_member_raid_sets(name=None, uuid=None, major=-1, minor=-1):
+--    return _dm_get_member_raid_sets(name, uuid, major, minor)
+--__all__.append("dm_get_member_raid_sets")
+--
+- 
+- _loop_setup = BlockDev.loop_setup
+- @override(BlockDev.loop_setup)
+--- 
+-2.14.3
+-
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch b/meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
+deleted file mode 100644
+index 0b5b809..0000000
+--- a/meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From 59fbd57acd1df25b1972a131dc6a77a4fe147729 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Thu, 27 Jul 2017 10:45:02 +0800
+-Subject: [PATCH] fix compile failure against musl C library
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- src/plugins/crypto.c | 2 +-
+- src/plugins/part.c   | 3 ++-
+- 2 files changed, 3 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/plugins/crypto.c b/src/plugins/crypto.c
+-index b961471..2d3d251 100644
+---- a/src/plugins/crypto.c
+-+++ b/src/plugins/crypto.c
+-@@ -22,7 +22,7 @@
+- #include <libcryptsetup.h>
+- #include <nss.h>
+- #include <volume_key/libvolume_key.h>
+--#include <sys/fcntl.h>
+-+#include <fcntl.h>
+- #include <sys/ioctl.h>
+- #include <linux/random.h>
+- #include <locale.h>
+-diff --git a/src/plugins/part.c b/src/plugins/part.c
+-index 6b2a690..ab490d9 100644
+---- a/src/plugins/part.c
+-+++ b/src/plugins/part.c
+-@@ -25,6 +25,7 @@
+- #include <inttypes.h>
+- #include <unistd.h>
+- #include <sys/file.h>
+-+#include <fcntl.h>
+- #include <sys/ioctl.h>
+- #include <linux/fs.h>
+- #include <blockdev/utils.h>
+-@@ -1354,7 +1355,7 @@ static gboolean set_gpt_flags (const gchar *device, int part_num, guint64 flags,
+-         real_flags |= 0x4000000000000000; /* 1 << 62 */
+-     if (flags & BD_PART_FLAG_GPT_NO_AUTOMOUNT)
+-         real_flags |= 0x8000000000000000; /* 1 << 63 */
+--    mask_str = g_strdup_printf ("%.16"__PRI64_PREFIX"x", real_flags);
+-+    mask_str = g_strdup_printf ("%.16"__PRI64"x", real_flags);
+- 
+-     args[2] = g_strdup_printf ("%d:=:%s", part_num, mask_str);
+-     g_free (mask_str);
+--- 
+-2.14.3
+-
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0005-fix-a-clang-compiling-issue.patch b/meta-oe/recipes-extended/libblockdev/files/0005-fix-a-clang-compiling-issue.patch
+deleted file mode 100644
+index b214f0b..0000000
+--- a/meta-oe/recipes-extended/libblockdev/files/0005-fix-a-clang-compiling-issue.patch
++++ /dev/null
+@@ -1,111 +0,0 @@
+-From 9b4a7a4d0653b627d747e00d6b3ada2990caa1d3 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Wed, 9 Aug 2017 13:57:57 +0800
+-Subject: [PATCH] fix a clang compiling issue
+-
+-[snip]
+-../../../git/src/plugins/fs.c:2617:26: error: missing field 'start'
+-initializer [-Werror,-Wmissing-field-initializers]
+-    PedGeometry geom = {0};
+-                         ^
+-../../../git/src/plugins/fs.c:2618:30: error: missing field 'start'
+-initializer [-Werror,-Wmissing-field-initializers]
+-    PedGeometry new_geom = {0};
+-[snip]
+-
+-Fix typo s/enum libvk_packet_format format/enum libvk_secret secret_type/
+-
+-Upstream-Status: Submitted [https://github.com/storaged-project/libblockdev/pull/266]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- src/plugins/crypto.c  | 6 +++---
+- src/plugins/fs/vfat.c | 4 ++--
+- src/plugins/part.c    | 4 ++--
+- src/utils/exec.c      | 2 +-
+- 4 files changed, 8 insertions(+), 8 deletions(-)
+-
+-diff --git a/src/plugins/crypto.c b/src/plugins/crypto.c
+-index 563093e..b961471 100644
+---- a/src/plugins/crypto.c
+-+++ b/src/plugins/crypto.c
+-@@ -970,7 +970,7 @@ gboolean bd_crypto_tc_open (const gchar *device, const gchar *name, const guint8
+-     gint ret = 0;
+-     guint64 progress_id = 0;
+-     gchar *msg = NULL;
+--    struct crypt_params_tcrypt params = {0};
+-+    struct crypt_params_tcrypt params = {NULL,0,NULL,0,NULL,NULL,NULL,0,0};
+- 
+-     msg = g_strdup_printf ("Started opening '%s' TrueCrypt/VeraCrypt device", device);
+-     progress_id = bd_utils_report_started (msg);
+-@@ -1090,7 +1090,7 @@ static gchar *replace_char (gchar *str, gchar orig, gchar new) {
+-     return str;
+- }
+- 
+--static gboolean write_escrow_data_file (struct libvk_volume *volume, struct libvk_ui *ui, enum libvk_packet_format format, const gchar *out_path,
+-+static gboolean write_escrow_data_file (struct libvk_volume *volume, struct libvk_ui *ui, enum libvk_secret secret_type, const gchar *out_path,
+-                                         CERTCertificate *cert, GError **error) {
+-     gpointer packet_data = NULL;
+-     gsize packet_data_size = 0;
+-@@ -1099,7 +1099,7 @@ static gboolean write_escrow_data_file (struct libvk_volume *volume, struct libv
+-     gsize bytes_written = 0;
+-     GError *tmp_error = NULL;
+- 
+--    packet_data = libvk_volume_create_packet_asymmetric_with_format (volume, &packet_data_size, format, cert,
+-+    packet_data = libvk_volume_create_packet_asymmetric_with_format (volume, &packet_data_size, secret_type, cert,
+-                                                                      ui, LIBVK_PACKET_FORMAT_ASYMMETRIC_WRAP_SECRET_ONLY, error);
+- 
+-     if (!packet_data) {
+-diff --git a/src/plugins/fs/vfat.c b/src/plugins/fs/vfat.c
+-index 3ed7d4a..5ff7795 100644
+---- a/src/plugins/fs/vfat.c
+-+++ b/src/plugins/fs/vfat.c
+-@@ -376,8 +376,8 @@ BDFSVfatInfo* bd_fs_vfat_get_info (const gchar *device, GError **error) {
+-  */
+- gboolean bd_fs_vfat_resize (const gchar *device, guint64 new_size, GError **error) {
+-     PedDevice *ped_dev = NULL;
+--    PedGeometry geom = {0};
+--    PedGeometry new_geom = {0};
+-+    PedGeometry geom = {NULL, 0, 0, 0};
+-+    PedGeometry new_geom = {NULL, 0, 0, 0};
+-     PedFileSystem *fs = NULL;
+-     PedSector start = 0;
+-     PedSector length = 0;
+-diff --git a/src/plugins/part.c b/src/plugins/part.c
+-index fed8300..6b2a690 100644
+---- a/src/plugins/part.c
+-+++ b/src/plugins/part.c
+-@@ -926,7 +926,7 @@ static PedPartition* add_part_to_disk (PedDevice *dev, PedDisk *disk, BDPartType
+-         return NULL;
+-     }
+- 
+--    part = ped_partition_new (disk, type, NULL, geom->start, geom->end);
+-+    part = ped_partition_new (disk, (PedPartitionType)type, NULL, geom->start, geom->end);
+-     if (!part) {
+-         set_parted_error (error, BD_PART_ERROR_FAIL);
+-         g_prefix_error (error, "Failed to create new partition on device '%s'", dev->path);
+-@@ -1564,7 +1564,7 @@ gboolean bd_part_set_part_flags (const gchar *disk, const gchar *part, guint64 f
+-     PedPartition *ped_part = NULL;
+-     const gchar *part_num_str = NULL;
+-     gint part_num = 0;
+--    guint64 i = 0;
+-+    int i = 0;
+-     gint status = 0;
+-     gboolean ret = FALSE;
+-     guint64 progress_id = 0;
+-diff --git a/src/utils/exec.c b/src/utils/exec.c
+-index 11c1489..dcf87e5 100644
+---- a/src/utils/exec.c
+-+++ b/src/utils/exec.c
+-@@ -354,7 +354,7 @@ gboolean bd_utils_exec_and_report_progress (const gchar **argv, const BDExtraArg
+-     GIOStatus io_status = G_IO_STATUS_NORMAL;
+-     guint i = 0;
+-     guint8 completion = 0;
+--    GPollFD fds[2] = {{0}, {0}};
+-+    GPollFD fds[2] = {{0,0,0}, {0,0,0}};
+-     gboolean out_done = FALSE;
+-     gboolean err_done = FALSE;
+-     GString *stdout_data = g_string_new (NULL);
+--- 
+-2.14.3
+-
 -- 
 2.7.4
 
