@@ -1,50 +1,45 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
-	[209.85.218.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 56E8D78BE0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Aug 2018 12:10:27 +0000 (UTC)
-Received: by mail-oi0-f50.google.com with SMTP id d189-v6so34085448oib.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Aug 2018 05:10:28 -0700 (PDT)
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-yw0-f175.google.com (mail-yw0-f175.google.com
+	[209.85.161.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 87A92753F1;
+	Wed,  1 Aug 2018 14:35:47 +0000 (UTC)
+Received: by mail-yw0-f175.google.com with SMTP id y203-v6so7255889ywd.9;
+	Wed, 01 Aug 2018 07:35:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=74AlRxEJ+0ms/x4K9H4hUg6SHeNeaMllyLdrQ/TWAEY=;
-	b=NS542NCDK+FKGwX4e+zG33jf5ZjBP7WRxvWvewlWZ/7tcMX5el7dbV2SGaLuIvr/yj
-	nfN5UBuk6XhPSvLseB064jhqP37kd3XKAGsKjdtZXvXdca717Pxs57VUkKbm63s13LBF
-	VTrG1AY+7LgqbpPf9QkBuFxF0ndtVtVJtyIYbwMrEu7nEtXJR6kH8ei9ge2bbWw5pe08
-	7nZm3yO1bJlNU+x/R0LF0ZWN3qVrMggIDj/BC7qgAj9lgwbkXNqTFJULaD8KAvK60maY
-	6l2BhFCzf9z0ARCykHCLj/ycoFK0XnVdlKzzguR9dZ+D45PxyKYlticXy8QOW1zjAHXq
-	j4QA==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=ia82tCvvTv4EMcImOJtmiJ87fWrhi0jhCJMsYQZxWvs=;
+	b=TnwaSxmxeIej3kazEUmSiDXeb9gyWwWmN9l8bClZFj3YaoJUPxCQb7GoEVM9acG6ZU
+	yRn6gQWlcjJH1n7KRTmxKVHUExz2+o6BhJZrdCJ1EU7G1Sv6mmZ+uyDLIIDh4bAQbHNL
+	53xkyvFktgAafhBnceyJAPgqn0dN1lHGRh2MJPJp12IhY6bCt0ldlNzXTVyB/xF4Z4tU
+	QrzyphYXI0wk20tkfEfSEL17FNCPJthEQ6ksz/t2177b9FYaDWsX02uwaoE0PgXjL1fP
+	E/j4wbnBuqxtk7xE6YW6JkTR3zhQaa3WN88K32Oh98jC2Nrz45nhMLMN0uUStavCT9FL
+	Srww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=74AlRxEJ+0ms/x4K9H4hUg6SHeNeaMllyLdrQ/TWAEY=;
-	b=tT/1Uva8yNH1FueZedXHxEwgcm2f8tQgjXJZdjSQQTFBhVAhelf+KEvEaG2BSxhj78
-	IfgesyzIJczYHnUzypMjAp1PKdF8Omd5UlsxX6+dpOzXzPw+nfeB8a6saeRGXpekZ9Kl
-	7smAa2ImthH/Tv7gRafiAEpbGCiX4Rh+7jA0eYTI4DgmeKJ9IL6pK5O2TGr/fHjHAuEw
-	DbwdlQ6/zEGa+H7pDVBgCZ825kg9uIXaPBOK9UUmgE+vePcE4TpNpMzElaIeYP4vG/nh
-	Bh1e0mYZzADbVCSqMtM8Xlt/JZNuuOm+pmYhvq9EutV1KO1aLeNhhEU6vmMsh/wVcA2T
-	R3GQ==
-X-Gm-Message-State: AOUpUlHzorN1CWRt+Ufw+Wi4SzrRBOs/hAAeyjI+Crs600sYR2NW47Eo
-	yjVucKKCt3Ge9S8SntRJvrC7m7XbXcmwBdVkhRo=
-X-Google-Smtp-Source: AAOMgpfjqNajpj4zK44t80iXNqVALxjrGw2z1SO49/lCrxnwfRUfzx9czhVPjlhOAICB+s95J+tOoCF+SP3CZifuy0M=
-X-Received: by 2002:aca:dbc2:: with SMTP id
-	s185-v6mr2975053oig.251.1533125428256; 
-	Wed, 01 Aug 2018 05:10:28 -0700 (PDT)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=ia82tCvvTv4EMcImOJtmiJ87fWrhi0jhCJMsYQZxWvs=;
+	b=ZYxiV+pdBWc9jyFa1czP9ozTsbkFFTpLnq5UEqYxibihU4PZVZNvUkVOjUmV926RVS
+	wBOxSF2wrqvD+rqtDeyrgPWp1fgHnh4qezUIWSO+FO49e994Vv2ffW8zd/sX6dalHfgs
+	yh+4cd5PWuOUb8AgSTJPjTjl4Z2CfX7sfm3jKVk+L1Jm5FOWYjImly6BQW/OR6odnfZo
+	Xt/GVwoWoYdDSLGt5TBmfUE2ndZJLW2DJDvB+ExWuGGC2GfWa9JuQhbnWJV8OY7R3kqO
+	h9DW5NOUJdB2Z9doi5sRfs+CFEp40ZtLR+APke9K+XXT85uOd5M/key+g9EVBbiuq8HJ
+	hYSQ==
+X-Gm-Message-State: AOUpUlHD9PVWzEIvrg0vSaFL570/qs2EQdjhOIlCm0E3D595ZnWuwJg2
+	EVaGj0ELtldpcCSWfmPvUhPwL7R9/R05RC6vVia9aA==
+X-Google-Smtp-Source: AAOMgpeRet+v0iu/i8DejYVBWX4rfDVj54BY/rpjCO04iKk7XbrJXLze7MLrQcu+77hKAkeVVP4EoRYYkzjR9+s7biQ=
+X-Received: by 2002:a0d:f7c3:: with SMTP id
+	h186-v6mr13136260ywf.272.1533134147985; 
+	Wed, 01 Aug 2018 07:35:47 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a8a:1115:0:0:0:0:0 with HTTP;
-	Wed, 1 Aug 2018 05:10:27 -0700 (PDT)
-In-Reply-To: <5c982c67471b18dbdcd788f2b727a71583668f50.1533107855.git.hongxu.jia@windriver.com>
-References: <cover.1533107855.git.hongxu.jia@windriver.com>
-	<5c982c67471b18dbdcd788f2b727a71583668f50.1533107855.git.hongxu.jia@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 1 Aug 2018 14:10:27 +0200
-Message-ID: <CALbNGRSYD4kzn8w-WDa-h7uuO5nSVUTV0Du-PAZE9ZBC0pSu+g@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 04/16] network-manager-applet: 1.8.10 -> 1.8.14
+From: Adam Lee <adam.yh.lee@gmail.com>
+Date: Wed, 1 Aug 2018 10:35:36 -0400
+Message-ID: <CAFeBWL7rT1Xiabn6Z9R=hUQkEat+4FW2Vm4aa7vKJQFYzSfF4Q@mail.gmail.com>
+To: "openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: "make clean" on Weston
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,41 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Aug 2018 12:10:27 -0000
+X-List-Received-Date: Wed, 01 Aug 2018 14:35:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Aug 1, 2018 at 9:21 AM, Hongxu Jia <hongxu.jia@windriver.com> wrote:
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  ...ork-manager-applet_1.8.10.bb => network-manager-applet_1.8.14.bb} | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->  rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_1.8.10.bb => network-manager-applet_1.8.14.bb} (86%)
->
-> diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-> similarity index 86%
-> rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
-> rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-> index 91ae8b7..c9cbcc6 100644
-> --- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.10.bb
-> +++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.14.bb
-> @@ -11,8 +11,8 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
->
->  REQUIRED_DISTRO_FEATURES = "x11"
->
-> -SRC_URI[archive.md5sum] = "eae3be75e77ff1a7ea3174be25e62d03"
-> -SRC_URI[archive.sha256sum] = "0adc4bfae8b49f7a1d929c22ef20933bd41fb4a8b458280f44c65f9e45b4c9c3"
-> +SRC_URI[archive.md5sum] = "bcdd92645d36fc5778f27aeb2773509b"
-> +SRC_URI[archive.sha256sum] = "ca9b1233721f700a7190b98eea69ce6d0ccf74fbfde173ac868a4ec7a78840cb"
->
->  PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
->  PACKAGECONFIG ??= ""
-> @@ -42,6 +42,7 @@ FILES_${PN} += " \
->      ${datadir}/nm-applet/ \
->      ${datadir}/libnm-gtk/wifi.ui \
->      ${datadir}/libnma/wifi.ui \
-> +    ${datadir}/metainfo \
-${datadir}/appdata was replaced by ${datadir}/metainfo - so
-${datadir}/appdata can be removed
+Neither "bitbake -c clean weston" nor "bitbake -c cleanall weston" seems to
+clean the build directory for me.
+Is this how it is for autotool project? "make clean" doesn't work either
+("no rule to make target clean").
 
-Andreas
+I need my directory cleaned so I can commit only the necessary changes.
+
+/build/workspace/sources/weston$ git status
+On branch devtool
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   Makefile.am
+        modified:   Makefile.in
+        modified:   aclocal.m4
+        modified:   build-aux/compile
+        modified:   build-aux/config.guess
+        modified:   build-aux/config.sub
+        modified:   build-aux/depcomp
+        modified:   build-aux/install-sh
+        modified:   build-aux/ltmain.sh
+        modified:   build-aux/missing
+        modified:   build-aux/test-driver
+        modified:   clients/ivi-shell-user-interface.c
+        modified:   clients/simple-egl.c
+        modified:   clients/simple-touch.c
+        modified:   config.h.in
+        modified:   configure
+        modified:   ivi-shell/hmi-controller.c
+        modified:   ivi-shell/ivi-layout.c
+        modified:   ivi-shell/ivi-shell.c
+        modified:   libweston/input.c
+        modified:   libweston/libinput-device.c
+        modified:   m4/libtool.m4
+        modified:   m4/ltoptions.m4
+        modified:   m4/ltsugar.m4
+        modified:   m4/ltversion.m4
+        modified:   m4/lt~obsolete.m4
+
+Adam
 
