@@ -1,11 +1,12 @@
 Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 98C6E78DC3
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 306B978DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 09:23:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,434,1526335200"; d="scan'208";a="11646102"
+	Thu,  2 Aug 2018 10:38:02 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; 
+   d="scan'208";a="1586905"
 To: <openembedded-devel@lists.openembedded.org>
-References: <20180802091657.30254-1-richard.leitner@skidata.com>
+References: <20180727132923.15149-1-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -51,16 +52,17 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <75233921-98ca-beb4-350e-36bdd15b22d6@skidata.com>
-Date: Thu, 2 Aug 2018 11:24:01 +0200
+Message-ID: <983c8ed5-0993-2ee9-7e6d-505b6442f68a@skidata.com>
+Date: Thu, 2 Aug 2018 12:38:29 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180802091657.30254-1-richard.leitner@skidata.com>
+In-Reply-To: <20180727132923.15149-1-git@andred.net>
 X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][master-next][PATCH] ca-certificates-java: add support for openjdk-7
+Cc: =?UTF-8?Q?Andr=c3=a9_Draszik?= <andre.draszik@jci.com>
+Subject: Re: [meta-java][RFC][PATCH 1/7] openjdk-8-native: add meaningful (R)PROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,52 +75,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 09:23:35 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 10:38:03 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi,
-please just ignore this patch... I sent it by accident... Sorry!
+Hi André,
+thanks for the patches!
+
+Some comments from my side:
+
+A cover letter describing the purpose of the whole patchset would be great ;-)
+
+Furthermore IMHO the -runtime-native and -sdk-native providers should be documented/described in the README file.
+
+Otherwise feel free to add
+	Acked-by: Richard Leitner <richard.leitner@skidata.com>
+for this patch.
 
 regards;Richard.L
 
-On 08/02/2018 11:16 AM, Richard Leitner wrote:
-> As this package should be fully comaptible with openjdk-7{-jre} add
-> support for it.
+On 07/27/2018 03:29 PM, André Draszik wrote:
+> From: André Draszik <andre.draszik@jci.com>
 > 
-> Furthermore depend on icedtea7-native instead of openjdk-8-native
-> because it should be availabe already. Otherwise openjdk-8-native would
-> be built only for this recipe if we use openjdk-7{-jre} only.
+> The OpenJDK8-native recipe provides a Java SDK, and a Java Runtime. It
+> is compatible with Java versions 5 through 8 (including), so add
+> appropriate (R)PROVIDES, so that recipes depending on it can can specify
+> that virtual dependency, rather than hard-coding to openjdk-8. This makes
+> it possible to:
+> a) add OpenJDK9 and OpenJDK10 recipes in the future without much disruption
+> b) use a different provider than OpenJDK, e.g. Oracle Java, or Zulu Java
 > 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> This is the approach taken by e.g. Debian.
+> 
+> Signed-off-by: André Draszik <andre.draszik@jci.com>
 > ---
->  recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+>  recipes-core/openjdk/openjdk-8-native.inc | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> index 2db1915..52443ed 100644
-> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> @@ -14,7 +14,9 @@ DEPENDS = "virtual/javac-native fastjar-native"
->  # We can't use virtual/javac-native, because that would create a
->  # keystore that can't be read on the target (as virtual/javac-native
->  # usually is either too old, or plain incompatible with this)
-> -PACKAGE_WRITE_DEPS += "openjdk-8-native"
-> +# Therefore we use icedtea7-native as it's a dependency for all our openjdk
-> +# versions and should therefore be available already.
-> +PACKAGE_WRITE_DEPS += "icedtea7-native"
->  
->  SRC_URI = "\
->  	git://salsa.debian.org/java-team/ca-certificates-java.git \
-> @@ -33,7 +35,7 @@ JARFILENAME = "${BPN}.jar"
->  
->  python () {
->      runtime = d.getVar("PREFERRED_RPROVIDER_java2-runtime") or ""
-> -    if not runtime in ("openjdk-8", "openjre-8"):
-> +    if not runtime in ("openjdk-8", "openjre-8", "openjdk-7-jre"):
->          raise bb.parse.SkipRecipe("PREFERRED_RPROVIDER_java2-runtime '%s' unsupported" % runtime)
+> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
+> index 761ddc7..2dd31e7 100644
+> --- a/recipes-core/openjdk/openjdk-8-native.inc
+> +++ b/recipes-core/openjdk/openjdk-8-native.inc
+> @@ -87,3 +87,6 @@ do_install() {
+>          ln -sf "../lib/jvm/${JDK_DIR}/bin/$tool" ${D}${bindir}/$tool
+>      done
 >  }
->  
+> +
+> +PROVIDES = "${@' '.join('virtual/java'+str(x)+'-sdk-native virtual/java'+str(x)+'-runtime-native' for x in range(5,9))}"
+> +RPROVIDES_${PN} = "${@' '.join('virtual-java'+str(x)+'-sdk-native virtual-java'+str(x)+'-runtime-native' for x in range(5,9))}"
 > 
 
