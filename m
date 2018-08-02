@@ -1,69 +1,19 @@
 Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 85EF66074F
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B3D9B6074F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 09:10:39 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,434,1526335200"; 
-   d="scan'208";a="1586692"
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20180727131616.13881-1-git@andred.net>
-	<20180727131616.13881-2-git@andred.net>
+	Thu,  2 Aug 2018 09:16:40 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,434,1526335200"; d="scan'208";a="11645935"
 From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <d084d6c5-4f19-612e-b78b-37d4c2ab45cd@skidata.com>
-Date: Thu, 2 Aug 2018 11:11:06 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Aug 2018 11:16:57 +0200
+Message-ID: <20180802091657.30254-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <20180727131616.13881-2-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][master-next][PATCH 2/2] ca-certificates-java: update to v20180516
+Subject: [meta-java][master-next][PATCH] ca-certificates-java: add support for openjdk-7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,60 +26,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 09:10:40 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 02 Aug 2018 09:16:41 -0000
+Content-Type: text/plain
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+As this package should be fully comaptible with openjdk-7{-jre} add
+support for it.
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+Furthermore depend on icedtea7-native instead of openjdk-8-native
+because it should be availabe already. Otherwise openjdk-8-native would
+be built only for this recipe if we use openjdk-7{-jre} only.
 
-If you have any questions, please let me know.
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-regards;Richard.L
+diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+index 2db1915..52443ed 100644
+--- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
++++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+@@ -14,7 +14,9 @@ DEPENDS = "virtual/javac-native fastjar-native"
+ # We can't use virtual/javac-native, because that would create a
+ # keystore that can't be read on the target (as virtual/javac-native
+ # usually is either too old, or plain incompatible with this)
+-PACKAGE_WRITE_DEPS += "openjdk-8-native"
++# Therefore we use icedtea7-native as it's a dependency for all our openjdk
++# versions and should therefore be available already.
++PACKAGE_WRITE_DEPS += "icedtea7-native"
+ 
+ SRC_URI = "\
+ 	git://salsa.debian.org/java-team/ca-certificates-java.git \
+@@ -33,7 +35,7 @@ JARFILENAME = "${BPN}.jar"
+ 
+ python () {
+     runtime = d.getVar("PREFERRED_RPROVIDER_java2-runtime") or ""
+-    if not runtime in ("openjdk-8", "openjre-8"):
++    if not runtime in ("openjdk-8", "openjre-8", "openjdk-7-jre"):
+         raise bb.parse.SkipRecipe("PREFERRED_RPROVIDER_java2-runtime '%s' unsupported" % runtime)
+ }
+ 
+-- 
+2.11.0
 
-On 07/27/2018 03:16 PM, André Draszik wrote:
-> From: André Draszik <andre.draszik@jci.com>
-> 
-> This is the latest available version and contains
-> some fixes for Java 10 & Java 11
-> 
-> Signed-off-by: André Draszik <andre.draszik@jci.com>
-> ---
->  .../ca-certificates-java/ca-certificates-java.hook.in           | 1 -
->  ...icates-java_20170930.bb => ca-certificates-java_20180516.bb} | 2 +-
->  2 files changed, 1 insertion(+), 2 deletions(-)
->  rename recipes-core/ca-certificates-java/{ca-certificates-java_20170930.bb => ca-certificates-java_20180516.bb} (98%)
-> 
-> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in b/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in
-> index f01fe36..89c764f 100755
-> --- a/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in
-> +++ b/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in
-> @@ -61,4 +61,3 @@ else
->  fi | SYSROOT="${D:-}" ${JAVA} -Xmx64m \
->                                -jar ${D:-}@@datadir_java@@/@@JARFILENAME@@ \
->                                -storepass changeit
-> -
-> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> similarity index 98%
-> rename from recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
-> rename to recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> index 35e2c16..2db1915 100644
-> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
-> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> @@ -22,7 +22,7 @@ SRC_URI = "\
->  	file://${BPN}.hook.in \
->  "
->  
-> -SRCREV = "53651f7939e6f35694ee31e5ef0376f1bfce7e55"
-> +SRCREV = "793b846dcd4e79371bbe8069e4125ec2fd462e57"
->  
->  inherit java allarch
->  
-> 
 
