@@ -1,47 +1,69 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 837CE60248
+Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 85EF66074F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 09:05:36 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id c192-v6so1001650qkg.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Aug 2018 02:05:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=r84Q+x337LY6SlA4DVu4SA+W4mK4Fxqq8S+jyFBWRbM=;
-	b=WAUr9EiOFbUOdXDQLZL52/HN9sK8H/fpfq1qrxUdsQ0+aSUD6aXwpEInJopIfu2QZr
-	DncvtG2C5pz3BU2KJ2Dr/oYtdaXC9BmgEtoMTeGB2ldO9GDs0m+1vmyem4iDSBUVIbz6
-	KCrqU75fhq6X5+Cm7rMS8mMYfuG7qvP8mjSO/ZuKL5gn6qatjBqbjW/9Ea3Kxx2bs7hC
-	ZfJQPmo6wROdNIJfOT8/rySjJGEYWDUZrUni4VQ0FKL+pcwGR51e0GgYFZxknXQst3jT
-	9TcTGAI3seamm3wDQ2kjHBfBB39h8EqV1aKAZaLzl3wy9RZfFjpJJkbZwmV6krJwViBb
-	a2zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=r84Q+x337LY6SlA4DVu4SA+W4mK4Fxqq8S+jyFBWRbM=;
-	b=Eq5uwGS4qr4s/E4a6idK3BzPATd3IZlj2yd8tO610wEXRehYAqnjm0oPI4+EE1KMMs
-	W5YYutFjTgYvPeQSis9YNM6Nm6g/noaoMe2QbEJLBjmWybHFLqoWeZzRcOPjJkooKcjW
-	ro1lC7DcXGqeIq3h7GEi4bs7g1LpfjqnQ1ht78hGe2xqZH8R7+4PmuXTjxenkvg8yQEs
-	VhqCR3cQ6bhwDdHek4Z8oLfyWT4wMKskIpu2uZWxctRWkdkm7p1j2jSCUIxipliPVO6b
-	9UDqr5ugS8Ss1Av54Cx0V/eDCypf80+5q96L/wOeDbV6VnzvaTlxIxf0vIHpqI9zOpdW
-	dipw==
-X-Gm-Message-State: AOUpUlH55zv0vsqtY/8eX/sWCM14WAscx7NCHEOWbhOKnfTJ1WzC7iEu
-	AwSuTlIOtab4BTT0VTTzxSQssDAtHR976xdndgU=
-X-Google-Smtp-Source: AAOMgpeUZ6N2CKKGZsCmmn6SUIMk5Va32kp3es1I4NGkdxQPhX/AUKCEGdNy0ZcPu7j0ihNU7z3UQp4EznObEjpXNM8=
-X-Received: by 2002:ae9:c00d:: with SMTP id
-	u13-v6mr1575900qkk.290.1533200737158; 
-	Thu, 02 Aug 2018 02:05:37 -0700 (PDT)
+	Thu,  2 Aug 2018 09:10:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,434,1526335200"; 
+   d="scan'208";a="1586692"
+To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20180727131616.13881-1-git@andred.net>
+	<20180727131616.13881-2-git@andred.net>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <d084d6c5-4f19-612e-b78b-37d4c2ab45cd@skidata.com>
+Date: Thu, 2 Aug 2018 11:11:06 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-References: <20180802082018.116688-1-dmitriyz@waymo.com>
-In-Reply-To: <20180802082018.116688-1-dmitriyz@waymo.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Aug 2018 02:05:10 -0700
-Message-ID: <CAMKF1sqe-mfHGwxi8A0yxnFVOeFG4mQxLyHNOLECn5G8gTHG4Q@mail.gmail.com>
-To: dmitriyz@waymo.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] meta-python: make python-chardet coexist for both python2 and python3
+In-Reply-To: <20180727131616.13881-2-git@andred.net>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][master-next][PATCH 2/2] ca-certificates-java: update to v20180516
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,43 +76,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 09:05:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 02 Aug 2018 09:10:40 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Hi Dima
-On Thu, Aug 2, 2018 at 1:20 AM Dima Zavin <dmitriyz@waymo.com> wrote:
->
-> Signed-off-by: Dima Zavin <dmitriyz@waymo.com>
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
+
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
+
+If you have any questions, please let me know.
+
+regards;Richard.L
+
+On 07/27/2018 03:16 PM, André Draszik wrote:
+> From: André Draszik <andre.draszik@jci.com>
+> 
+> This is the latest available version and contains
+> some fixes for Java 10 & Java 11
+> 
+> Signed-off-by: André Draszik <andre.draszik@jci.com>
 > ---
->  meta-python/recipes-devtools/python/python-chardet.inc | 7 +++++++
->  1 file changed, 7 insertions(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python-chardet.inc b/meta-python/recipes-devtools/python/python-chardet.inc
-> index 246a65aa6..1a85e7410 100644
-> --- a/meta-python/recipes-devtools/python/python-chardet.inc
-> +++ b/meta-python/recipes-devtools/python/python-chardet.inc
-> @@ -22,3 +22,10 @@ RDEPENDS_${PN}_class-target += " \
->      ${PYTHON_PN}-argparse \
->      ${PYTHON_PN}-logging \
+>  .../ca-certificates-java/ca-certificates-java.hook.in           | 1 -
+>  ...icates-java_20170930.bb => ca-certificates-java_20180516.bb} | 2 +-
+>  2 files changed, 1 insertion(+), 2 deletions(-)
+>  rename recipes-core/ca-certificates-java/{ca-certificates-java_20170930.bb => ca-certificates-java_20180516.bb} (98%)
+> 
+> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in b/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in
+> index f01fe36..89c764f 100755
+> --- a/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in
+> +++ b/recipes-core/ca-certificates-java/ca-certificates-java/ca-certificates-java.hook.in
+> @@ -61,4 +61,3 @@ else
+>  fi | SYSROOT="${D:-}" ${JAVA} -Xmx64m \
+>                                -jar ${D:-}@@datadir_java@@/@@JARFILENAME@@ \
+>                                -storepass changeit
+> -
+> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> similarity index 98%
+> rename from recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
+> rename to recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> index 35e2c16..2db1915 100644
+> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20170930.bb
+> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> @@ -22,7 +22,7 @@ SRC_URI = "\
+>  	file://${BPN}.hook.in \
 >  "
-> +
-> +do_install_append () {
-> +    maj_ver=$(echo ${PYTHON_BASEVERSION} | cut -d . -f 1)
-> +    if [ "$maj_ver" == "3" ] ; then
-> +        mv ${D}${bindir}/chardetect ${D}${bindir}/chardetect3
-> +    fi
-> +}
-
-Its better to do the renaming in recipe for python3 version of this
-module for help see how its
-done for cython
-
-> --
-> 2.18.0.597.ga71716f1ad-goog
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>  
+> -SRCREV = "53651f7939e6f35694ee31e5ef0376f1bfce7e55"
+> +SRCREV = "793b846dcd4e79371bbe8069e4125ec2fd462e57"
+>  
+>  inherit java allarch
+>  
+> 
 
