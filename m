@@ -1,13 +1,13 @@
 Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 6529D78D67
+	by mail.openembedded.org (Postfix) with ESMTP id 311F578D67
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 10:43:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; d="scan'208";a="11647626"
+	Thu,  2 Aug 2018 10:48:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; d="scan'208";a="11647723"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
 References: <20180727132923.15149-1-git@andred.net>
-	<20180727132923.15149-7-git@andred.net>
+	<20180727132923.15149-5-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <49965ec9-b0e0-7f45-2bd0-1763a61a4870@skidata.com>
-Date: Thu, 2 Aug 2018 12:44:03 +0200
+Message-ID: <adb7f3f5-cb65-cf96-be52-e02bb06428d8@skidata.com>
+Date: Thu, 2 Aug 2018 12:49:22 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180727132923.15149-7-git@andred.net>
+In-Reply-To: <20180727132923.15149-5-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][RFC][PATCH 7/7] ca-certificates-java: switch to more generic / more correct JAVA (R)DEPENDS
+Subject: Re: [meta-java][RFC][PATCH 5/7] layer.conf: set defaults for Java JRE (R)PROVIDERS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,67 +75,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 10:43:36 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 10:48:55 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 Hi André,
-again: thank you and feel free to add
-
-Acked-by: Richard Leitner <richard.leitner@skidata.com>
-
-regards;Richard.L
 
 On 07/27/2018 03:29 PM, André Draszik wrote:
 > From: André Draszik <andre.draszik@jci.com>
 > 
-> This recipe here actually depends on Java7 upwards, not Java2 upwards,
-> so state that dependency correctly using the newly introduced (virtual)
-> RPROVIDES of the OpenJDK8/OpenJRE8 recipes.
-> 
-> At the same time, we can remove hard-coded references to openjdk-8 and
-> openjre-8, and thusly make the build more flexible.
+> OpenJRE-8 seems like a good choice.
+
+I'm not sure if OpenJRE-8 is the best choice as it currently doesn't support JIT for
+arm architectures...
+
+Maybe openjdk-7-jre would be better here?
+
+Furthermore as already mentioned in PATCH 1 IMHO it would be great to describe/document those PROVIDERs in the README.
+This would help newcomers a lot.
+
 > 
 > Signed-off-by: André Draszik <andre.draszik@jci.com>
 > ---
->  .../ca-certificates-java_20180516.bb                   | 10 ++--------
->  1 file changed, 2 insertions(+), 8 deletions(-)
+>  conf/layer.conf | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 > 
-> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> index a2d7abd..2ae7352 100644
-> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> @@ -14,7 +14,7 @@ DEPENDS = "virtual/javac-native fastjar-native"
->  # We can't use virtual/javac-native, because that would create a
->  # keystore that can't be read on the target (as virtual/javac-native
->  # usually is either too old, or plain incompatible with this)
-> -PACKAGE_WRITE_DEPS += "openjdk-8-native"
-> +PACKAGE_WRITE_DEPS += "virtual/java7-runtime-native"
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 8b2978a..e965170 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -17,3 +17,12 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += "\
 >  
->  SRC_URI = "\
->  	git://salsa.debian.org/java-team/ca-certificates-java.git \
-> @@ -31,12 +31,6 @@ B = "${WORKDIR}/build"
->  
->  JARFILENAME = "${BPN}.jar"
->  
-> -python () {
-> -    runtime = d.getVar("PREFERRED_RPROVIDER_java2-runtime") or ""
-> -    if not runtime in ("openjdk-8", "openjre-8"):
-> -        raise bb.parse.SkipRecipe("PREFERRED_RPROVIDER_java2-runtime '%s' unsupported" % runtime)
-> -}
-> -
->  do_patch_append () {
->      bb.build.exec_func('do_fix_sysconfdir', d)
->  }
-> @@ -99,7 +93,7 @@ pkg_postinst_${PN} () {
->  }
->  
->  RDEPENDS_${PN} = "ca-certificates"
-> -RDEPENDS_${PN}_append_class-target = " java2-runtime"
-> +RDEPENDS_${PN}_append_class-target = " virtual-java7-runtime"
->  
->  FILES_${PN} += "${datadir_java}"
->  
+>  MULTI_PROVIDER_WHITELIST_append = " ${@' '.join('virtual/java'+str(x)+'-sdk-native virtual/java'+str(x)+'-runtime-native' for x in range(5,9))}"
+>  MULTI_PROVIDER_WHITELIST_append = " ${@' '.join('virtual/java'+str(x)+'-runtime' for x in range(5,9))}"
+> +
+> +PREFERRED_PROVIDER_virtual/java5-runtime ?= "openjre-8"
+> +PREFERRED_PROVIDER_virtual/java6-runtime ?= "openjre-8"
+> +PREFERRED_PROVIDER_virtual/java7-runtime ?= "openjre-8"
+> +PREFERRED_PROVIDER_virtual/java8-runtime ?= "openjre-8"
+> +PREFERRED_RPROVIDER_virtual-java5-runtime ?= "openjre-8"
+> +PREFERRED_RPROVIDER_virtual-java6-runtime ?= "openjre-8"
+> +PREFERRED_RPROVIDER_virtual-java7-runtime ?= "openjre-8"
+> +PREFERRED_RPROVIDER_virtual-java8-runtime ?= "openjre-8"
 > 
+
+regards;Richard.L
 
