@@ -1,14 +1,14 @@
 Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
 Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E6E378DC5
+	by mail.openembedded.org (Postfix) with ESMTP id 0E2B278D67
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 10:41:55 +0000 (UTC)
+	Thu,  2 Aug 2018 10:42:50 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; 
-   d="scan'208";a="1586916"
+   d="scan'208";a="1586920"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
 References: <20180727132923.15149-1-git@andred.net>
-	<20180727132923.15149-4-git@andred.net>
+	<20180727132923.15149-6-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -54,16 +54,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <6af80303-3cec-509b-777a-5aaa2da0970d@skidata.com>
-Date: Thu, 2 Aug 2018 12:42:22 +0200
+Message-ID: <2b823634-a261-3492-d466-50ffef928a0f@skidata.com>
+Date: Thu, 2 Aug 2018 12:43:18 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180727132923.15149-4-git@andred.net>
+In-Reply-To: <20180727132923.15149-6-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][RFC][PATCH 4/7] openjre-8: add meaningful (R)PROVIDES
+Subject: Re: [meta-java][RFC][PATCH 6/7] openjdk-7: (R)PROVIDE virtual Java [567] packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,7 +76,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 10:41:56 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 10:42:51 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -91,39 +91,33 @@ regards;Richard.L
 On 07/27/2018 03:29 PM, André Draszik wrote:
 > From: André Draszik <andre.draszik@jci.com>
 > 
-> Then OpenJRE8 recipe provides a Java Runtime. It
-> is compatible with Java versions 5 through 8 (including), so add
-> appropriate (R)PROVIDES, so that recipes depending on it can can specify
-> that virtual dependency, rather than hard-coding to openjre-8. This makes
-> it possible to:
-> a) add OpenJRE9 and OpenJRE10 recipes in the future without much disruption
-> b) use a different provider than OpenJDK, e.g. Oracle Java, or Zulu Java
-> 
-> This is the approach taken by e.g. Debian.
+> Similar to OpenJDK-8, OpenJDK-7 is a provider of Java 5 through 7
+> (including).
 > 
 > Signed-off-by: André Draszik <andre.draszik@jci.com>
 > ---
->  recipes-core/openjdk/openjre-8_172b11.bb | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  recipes-core/openjdk/openjdk-7-common.inc | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/recipes-core/openjdk/openjre-8_172b11.bb b/recipes-core/openjdk/openjre-8_172b11.bb
-> index 220dc01..eac5e5e 100644
-> --- a/recipes-core/openjdk/openjre-8_172b11.bb
-> +++ b/recipes-core/openjdk/openjre-8_172b11.bb
-> @@ -33,10 +33,10 @@ FILES_${PN}-doc_append = "\
->      ${JRE_HOME}/THIRD_PARTY_README \
->  "
+> diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+> index 1ac3154..85a34da 100644
+> --- a/recipes-core/openjdk/openjdk-7-common.inc
+> +++ b/recipes-core/openjdk/openjdk-7-common.inc
+> @@ -22,6 +22,7 @@ JDK_DIR = "java-7-openjdk"
 >  
-> -RPROVIDES_${PN} = "java2-vm"
-> -PROVIDES_${PN} = "java2-vm"
-> -RPROVIDES_${PN} = "java2-runtime"
-> -PROVIDES_${PN} = "java2-runtime"
-> +PROVIDES = "java2-vm java2-runtime"
-> +PROVIDES += "${@' '.join('virtual/java'+str(x)+'-runtime' for x in range(5,9))}"
-> +RPROVIDES_${PN} = "java2-vm java2-runtime"
-> +RPROVIDES_${PN} += "${@' '.join('virtual-java'+str(x)+'-runtime' for x in range(5,9))}"
+>  PN = "${JDKPN}-jre"
+>  PROVIDES += "${JDKPN}"
+> +PROVIDES += "${@' '.join('virtual/java'+str(x)+'-sdk virtual/java'+str(x)+'-runtime' for x in range(5,8))}"
 >  
->  inherit update-alternatives
+>  DEPENDS = " \
+>      icedtea7-native zip-native ant-native \
+> @@ -283,6 +284,7 @@ FILES_${JDKPN}-jdk = " \
+>  RDEPENDS_${JDKPN}-jre = "${JDKPN}-java ${JDKPN}-common"
+>  RDEPENDS_${JDKPN}-java = "${JDKPN}-common"
+>  RPROVIDES_${JDKPN}-jre = "java2-runtime"
+> +RPROVIDES_${JDKPN}-jre += "${@' '.join('virtual-java'+str(x)+'-runtime' for x in range(5,8))}"
+>  
+>  RDEPENDS_${JDKPN}-jdk = "${JDKPN}-jre"
 >  
 > 
 
