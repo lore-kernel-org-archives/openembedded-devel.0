@@ -1,21 +1,47 @@
-Return-Path: <prvs=745a9cfa4=Andreas.Obergschwandtner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id F097778DE9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f170.google.com (mail-qt0-f170.google.com
+	[209.85.216.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A84C74CE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 14:45:33 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,436,1526335200"; d="scan'208";a="11652914"
-From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Aug 2018 16:45:23 +0200
-Message-ID: <20180802144523.28023-2-andreas.obergschwandtner@skidata.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
-References: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
+	Thu,  2 Aug 2018 18:12:15 +0000 (UTC)
+Received: by mail-qt0-f170.google.com with SMTP id n6-v6so3368094qtl.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Aug 2018 11:12:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=LD0NsmulkinjkamyxEUo02/iAeczaRLcbWLdfkdhqUk=;
+	b=qLiuluEy0+BcUxuHLQs4maPI1a7qzbNhfmD1s7VpebIWtTim79fZYC9O8FKr9o2PcI
+	mlYHhJcsQMVGvIpEn2lkHQOpe4Q//zdy4XoFcaxkWzgtPReU5kLGobh9+qa6xy2SgHt/
+	qIG8lkAhAJb/DLq1xE5uI1fWUrsvmvCkhZNYNLkAXcVX/WdR1jmQ0eCxgNzgAlc5jjKW
+	oE0p5hLU0AcV08IaqVZZLu/AtJYB2AT29izup0ivSO1Ph8StdhRTRDHzHPo7LS3ftT+k
+	AYhyLvZLrvvtIfrMoN025qTm3vTmJqu3gOT2IcsftPbkPHwuBqOYTWXHWh+B/e7htOWQ
+	SvNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=LD0NsmulkinjkamyxEUo02/iAeczaRLcbWLdfkdhqUk=;
+	b=TV77ovig3ZnHZUu9Dqvm87mxgv/Lu6P7fRjIarB49i5WM8aZdhZPxunfVfyvOJRM8N
+	jIXrf8XeNr1j/bE9RcMwp/BrYnikwo1+rM7qd/If5T8g0RqFq+ulnO7BNssau3MyLBtk
+	nFnfsikbNggBg9B8YKnRbu9b7mshc4P07i7oZlJO32VdG/lqJBVIzt4dPefbsNCQGrDX
+	QhWT6iutIlyxv8LPTNzhXM8ABuhkbiTxQlOzTfLuscYRFEs4tQFxSUtO5Msc3Tcs4F8q
+	fC3mHWjtmlkhXEYn1bhFG0xmfC2ishAcPKS7AkQMVx91Amw7YC4AvWuXs3oIMkVPPyjz
+	RujQ==
+X-Gm-Message-State: AOUpUlEhhIEKYeLAq9bY6+T1RVeaPyfDhJNpPQf7JfXg6CC4UOcMapH3
+	geF4AFSeH+Iz9mlOirXP2whFRVeylPxCmBop1pup4Psf
+X-Google-Smtp-Source: AAOMgpdtRLCf3zztZWlTupHkRJa2KUx/FKROVMxPfRkwsSxVkCNrgf4ZaIo2NK/nDy4nBLrh5LeGYTAaLkS80t4evl4=
+X-Received: by 2002:ac8:70c5:: with SMTP id g5-v6mr586744qtp.376.1533233535883;
+	Thu, 02 Aug 2018 11:12:15 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex4srv.skidata.net (192.168.111.82)
-Subject: [meta-java][PATCH 2/2] icedtea: disable error format-overflow for gcc 7
+References: <20180731030937.3685-1-robert.joslyn@redrectangle.org>
+	<20180731030937.3685-5-robert.joslyn@redrectangle.org>
+In-Reply-To: <20180731030937.3685-5-robert.joslyn@redrectangle.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Aug 2018 11:11:49 -0700
+Message-ID: <CAMKF1srNOQX4hDPYSr3=nMPdk8dM3o8Z3GToudKbCkd4O8tOgw@mail.gmail.com>
+To: Robert Joslyn <robert.joslyn@redrectangle.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2 4/5] python-parse-type: Add Python 3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,38 +54,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 14:45:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Aug 2018 18:12:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-no patch has been found in debian and hotspot repo for
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824. The warning was
-added with gcc 7.
+On Mon, Jul 30, 2018 at 8:11 PM Robert Joslyn
+<robert.joslyn@redrectangle.org> wrote:
+>
+> Clarify license from BSD to BSD-3-Clause.
+> ---
+>  meta-python/recipes-devtools/python/python-parse-type.inc   | 12 ++++++++++++
+>  .../recipes-devtools/python/python-parse-type_0.4.2.bb      | 13 ++-----------
+>  .../recipes-devtools/python/python3-parse-type_0.4.2.bb     |  2 ++
+>  3 files changed, 16 insertions(+), 11 deletions(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python-parse-type.inc
+>  create mode 100644 meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-parse-type.inc b/meta-python/recipes-devtools/python/python-parse-type.inc
+> new file mode 100644
+> index 000000000..4549ec98b
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-parse-type.inc
+> @@ -0,0 +1,12 @@
+> +SUMMARY = "Simplifies building parse types based on the parse module"
+> +HOMEPAGE = "https://github.com/jenisys/parse_type"
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
+> +
+> +SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
+> +SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
+> +
+> +PYPI_PACKAGE = "parse_type"
+> +inherit pypi
+> +
+> +RDEPENDS_${PN} += "${PYTHON_PN}-parse"
 
-Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
----
- recipes-core/icedtea/icedtea7-native.inc | 8 ++++++++
- 1 file changed, 8 insertions(+)
+there is no recipe for python3-parse but this does mean that
+python3-parse-type will rdep on it and fail the dep check like below
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 93463be..453fae3 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -24,6 +24,14 @@ CFLAGS_append = " -fno-tree-dse"
- CXXFLAGS_append = " -fno-tree-dse"
- CXX_append = " -std=gnu++98"
- 
-+# Disable format-overflow error with host g++ >= 7.3.
-+# Bug is reported https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-+# but no patch was found for Debian.
-+FLAGS_GCC7 = " -Wno-error=format-overflow"
-+
-+CFLAGS_append = " ${@java_version_specific_cflags(d)}"
-+CXXFLAGS_append = " ${@java_version_specific_cflags(d)}"
-+
- inherit native java autotools pkgconfig
- 
- JAVA_HOME[unexport] = "1"
--- 
-2.17.1
+ERROR: Nothing RPROVIDES 'python3-parse' (but
+/mnt/a/oe/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+RDEPENDS on or otherwise requires it)
+NOTE: Runtime target 'python3-parse' is unbuildable, removing...
 
+> diff --git a/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+> index b516c5912..8e10e801c 100644
+> --- a/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+> +++ b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+> @@ -1,11 +1,2 @@
+> -SUMMARY = "Simplifies building parse types based on the parse module"
+> -LICENSE = "BSD"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
+> -PYPI_PACKAGE = "parse_type"
+> -
+> -SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
+> -SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
+> -
+> -RDEPENDS_${PN} += "python-parse"
+> -
+> -inherit pypi setuptools
+> +inherit setuptools
+> +require python-parse-type.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb b/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+> new file mode 100644
+> index 000000000..91d9ce2d4
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools3
+> +require python-parse-type.inc
+> --
+> 2.16.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
