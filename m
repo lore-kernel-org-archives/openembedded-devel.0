@@ -1,68 +1,40 @@
-Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 311F578D67
+Return-Path: <hainsvdbosch@ziggo.nl>
+X-Greylist: delayed 999 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 02 Aug 2018 12:35:17 UTC
+Received: from smtpq4.tb.mail.iss.as9143.net (smtpq4.tb.mail.iss.as9143.net
+	[212.54.42.167])
+	by mail.openembedded.org (Postfix) with ESMTP id F3ED678D99
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 10:48:54 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; d="scan'208";a="11647723"
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20180727132923.15149-1-git@andred.net>
-	<20180727132923.15149-5-git@andred.net>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <adb7f3f5-cb65-cf96-be52-e02bb06428d8@skidata.com>
-Date: Thu, 2 Aug 2018 12:49:22 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20180727132923.15149-5-git@andred.net>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][RFC][PATCH 5/7] layer.conf: set defaults for Java JRE (R)PROVIDERS
+	Thu,  2 Aug 2018 12:35:17 +0000 (UTC)
+Received: from [212.54.42.132] (helo=smtp8.tb.mail.iss.as9143.net)
+	by smtpq4.tb.mail.iss.as9143.net with esmtp (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>) id 1flCYx-0001UY-D1
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Aug 2018 14:18:39 +0200
+Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
+	helo=localhost.localdomain)
+	by smtp8.tb.mail.iss.as9143.net with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+	(envelope-from <hainsvdbosch@ziggo.nl>)
+	id 1flCYx-0000Ok-AT; Thu, 02 Aug 2018 14:18:39 +0200
+From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  2 Aug 2018 14:18:25 +0200
+Message-Id: <20180802121825.26225-1-hainsvdbosch@ziggo.nl>
+X-Mailer: git-send-email 2.17.1
+X-SourceIP: 82.73.120.193
+X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
+X-Ziggo-spambar: /
+X-Ziggo-spamscore: 0.0
+X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=EJqyLGRC c=1 sm=1 tr=0
+	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
+	a=dapMudl6Dx4A:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8
+	a=1cI4GYfS3LhjqKuKisQA:9 a=ZPHkQOs1zdIA:10
+	a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 none
+X-Ziggo-Spam-Status: No
+X-Spam-Status: No
+X-Spam-Flag: No
+Subject: [meta-oe][PATCH] libtalloc: refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,50 +47,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 10:48:55 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 02 Aug 2018 12:35:18 -0000
 
-Hi André,
+WARNING: libtalloc-2.1.14-r0 do_patch:
+Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
+The context lines in the patches can be updated with devtool:
 
-On 07/27/2018 03:29 PM, André Draszik wrote:
-> From: André Draszik <andre.draszik@jci.com>
-> 
-> OpenJRE-8 seems like a good choice.
+    devtool modify <recipe>
+    devtool finish --force-patch-refresh <recipe> <layer_path>
 
-I'm not sure if OpenJRE-8 is the best choice as it currently doesn't support JIT for
-arm architectures...
+Then the updated patches and the source tree (in devtool's workspace)
+should be reviewed to make sure the patches apply in the correct place
+and don't introduce duplicate lines (which can, and does happen
+when some of the context is ignored). Further information:
+http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
+Details:
+Applying patch avoid-attr-unless-wanted.patch
+patching file lib/replace/wscript
+Hunk #1 succeeded at 837 with fuzz 2 (offset 201 lines).
+Hunk #2 succeeded at 850 with fuzz 2 (offset 204 lines).
 
-Maybe openjdk-7-jre would be better here?
+Now at patch avoid-attr-unless-wanted.patch
+---
+ .../libtalloc/avoid-attr-unless-wanted.patch         | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-Furthermore as already mentioned in PATCH 1 IMHO it would be great to describe/document those PROVIDERs in the README.
-This would help newcomers a lot.
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
+index a3ee9ccd9..db3ddce2c 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
+@@ -1,20 +1,20 @@
+ --- a/lib/replace/wscript	2015-11-13 16:04:04.000000000 +0100
+ +++ b/lib/replace/wscript	2015-11-13 16:23:20.000000000 +0100
+-@@ -636,8 +636,6 @@
++@@ -837,8 +837,6 @@ def build(bld):
+      if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE += ' inet_aton.c'
+      if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE += ' inet_ntop.c'
+      if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE += ' inet_pton.c'
+ -    if not bld.CONFIG_SET('HAVE_GETXATTR') or bld.CONFIG_SET('XATTR_ADDITIONAL_OPTIONS'):
+ -                                                 REPLACE_SOURCE += ' xattr.c'
+  
+-     bld.SAMBA_LIBRARY('replace',
+-                       source=REPLACE_SOURCE,
+-@@ -648,7 +646,7 @@
++     if not bld.CONFIG_SET('HAVE_CLOSEFROM'):
++         REPLACE_SOURCE += ' closefrom.c'
++@@ -852,7 +850,7 @@ def build(bld):
+                        # at the moment:
+                        # hide_symbols=bld.BUILTIN_LIBRARY('replace'),
+                        private_library=True,
+ -                      deps='crypt dl nsl socket rt attr' + extra_libs)
+ +                      deps='crypt dl nsl socket rt ' + extra_libs)
+  
+-     bld.SAMBA_SUBSYSTEM('replace-test',
+-                       source='''test/testsuite.c test/strptime.c
++     replace_test_cflags="-Wno-format-zero-length"
++     if bld.CONFIG_SET('HAVE_WNO_FORMAT_TRUNCATION'):
+-- 
+2.17.1
 
-> 
-> Signed-off-by: André Draszik <andre.draszik@jci.com>
-> ---
->  conf/layer.conf | 9 +++++++++
->  1 file changed, 9 insertions(+)
-> 
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 8b2978a..e965170 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -17,3 +17,12 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += "\
->  
->  MULTI_PROVIDER_WHITELIST_append = " ${@' '.join('virtual/java'+str(x)+'-sdk-native virtual/java'+str(x)+'-runtime-native' for x in range(5,9))}"
->  MULTI_PROVIDER_WHITELIST_append = " ${@' '.join('virtual/java'+str(x)+'-runtime' for x in range(5,9))}"
-> +
-> +PREFERRED_PROVIDER_virtual/java5-runtime ?= "openjre-8"
-> +PREFERRED_PROVIDER_virtual/java6-runtime ?= "openjre-8"
-> +PREFERRED_PROVIDER_virtual/java7-runtime ?= "openjre-8"
-> +PREFERRED_PROVIDER_virtual/java8-runtime ?= "openjre-8"
-> +PREFERRED_RPROVIDER_virtual-java5-runtime ?= "openjre-8"
-> +PREFERRED_RPROVIDER_virtual-java6-runtime ?= "openjre-8"
-> +PREFERRED_RPROVIDER_virtual-java7-runtime ?= "openjre-8"
-> +PREFERRED_RPROVIDER_virtual-java8-runtime ?= "openjre-8"
-> 
-
-regards;Richard.L
 
