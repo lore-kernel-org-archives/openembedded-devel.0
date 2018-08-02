@@ -1,12 +1,13 @@
 Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 306B978DD7
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 38DDB78DC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 10:38:02 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; 
-   d="scan'208";a="1586905"
-To: <openembedded-devel@lists.openembedded.org>
+	Thu,  2 Aug 2018 10:39:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; d="scan'208";a="11647544"
+To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
+	<openembedded-devel@lists.openembedded.org>
 References: <20180727132923.15149-1-git@andred.net>
+	<20180727132923.15149-2-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -52,17 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <983c8ed5-0993-2ee9-7e6d-505b6442f68a@skidata.com>
-Date: Thu, 2 Aug 2018 12:38:29 +0200
+Message-ID: <77b94997-751b-4bfc-e3ca-01044c8d4ba7@skidata.com>
+Date: Thu, 2 Aug 2018 12:40:09 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180727132923.15149-1-git@andred.net>
+In-Reply-To: <20180727132923.15149-2-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Cc: =?UTF-8?Q?Andr=c3=a9_Draszik?= <andre.draszik@jci.com>
-Subject: Re: [meta-java][RFC][PATCH 1/7] openjdk-8-native: add meaningful (R)PROVIDES
+Subject: Re: [meta-java][RFC][PATCH 2/7] layer.conf: allow multiple Java SDKs & runtimes to co-exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,54 +75,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 10:38:03 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 10:39:42 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 Hi André,
-thanks for the patches!
+again: thank you and feel free to add
 
-Some comments from my side:
-
-A cover letter describing the purpose of the whole patchset would be great ;-)
-
-Furthermore IMHO the -runtime-native and -sdk-native providers should be documented/described in the README file.
-
-Otherwise feel free to add
-	Acked-by: Richard Leitner <richard.leitner@skidata.com>
-for this patch.
+Acked-by: Richard Leitner <richard.leitner@skidata.com>
 
 regards;Richard.L
 
 On 07/27/2018 03:29 PM, André Draszik wrote:
 > From: André Draszik <andre.draszik@jci.com>
 > 
-> The OpenJDK8-native recipe provides a Java SDK, and a Java Runtime. It
-> is compatible with Java versions 5 through 8 (including), so add
-> appropriate (R)PROVIDES, so that recipes depending on it can can specify
-> that virtual dependency, rather than hard-coding to openjdk-8. This makes
-> it possible to:
-> a) add OpenJDK9 and OpenJDK10 recipes in the future without much disruption
-> b) use a different provider than OpenJDK, e.g. Oracle Java, or Zulu Java
+> Using MULTI_PROVIDER_WHITELIST, we can instruct Bitbake to not complain
+> if multiple recipes provide or runtime provide the same Java environment.
 > 
-> This is the approach taken by e.g. Debian.
+> This is a common use-case, and Java packages don't conflict with each
+> other as they are typically installed under a different prefix, while still
+> providing (more or less) the same features.
 > 
 > Signed-off-by: André Draszik <andre.draszik@jci.com>
 > ---
->  recipes-core/openjdk/openjdk-8-native.inc | 3 +++
+>  conf/layer.conf | 3 +++
 >  1 file changed, 3 insertions(+)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-> index 761ddc7..2dd31e7 100644
-> --- a/recipes-core/openjdk/openjdk-8-native.inc
-> +++ b/recipes-core/openjdk/openjdk-8-native.inc
-> @@ -87,3 +87,6 @@ do_install() {
->          ln -sf "../lib/jvm/${JDK_DIR}/bin/$tool" ${D}${bindir}/$tool
->      done
->  }
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 3b00f61..8b2978a 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -14,3 +14,6 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+>  SIGGEN_EXCLUDERECIPES_ABISAFE += "\
+>      ca-certificates-java \
+>  "
 > +
-> +PROVIDES = "${@' '.join('virtual/java'+str(x)+'-sdk-native virtual/java'+str(x)+'-runtime-native' for x in range(5,9))}"
-> +RPROVIDES_${PN} = "${@' '.join('virtual-java'+str(x)+'-sdk-native virtual-java'+str(x)+'-runtime-native' for x in range(5,9))}"
+> +MULTI_PROVIDER_WHITELIST_append = " ${@' '.join('virtual/java'+str(x)+'-sdk-native virtual/java'+str(x)+'-runtime-native' for x in range(5,9))}"
+> +MULTI_PROVIDER_WHITELIST_append = " ${@' '.join('virtual/java'+str(x)+'-runtime' for x in range(5,9))}"
 > 
 
