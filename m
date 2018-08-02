@@ -1,40 +1,20 @@
-Return-Path: <hainsvdbosch@ziggo.nl>
-X-Greylist: delayed 999 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 02 Aug 2018 12:35:17 UTC
-Received: from smtpq4.tb.mail.iss.as9143.net (smtpq4.tb.mail.iss.as9143.net
-	[212.54.42.167])
-	by mail.openembedded.org (Postfix) with ESMTP id F3ED678D99
+Return-Path: <prvs=745a9cfa4=Andreas.Obergschwandtner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id B07E178BED
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 12:35:17 +0000 (UTC)
-Received: from [212.54.42.132] (helo=smtp8.tb.mail.iss.as9143.net)
-	by smtpq4.tb.mail.iss.as9143.net with esmtp (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>) id 1flCYx-0001UY-D1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Aug 2018 14:18:39 +0200
-Received: from 524978c1.cm-4-2b.dynamic.ziggo.nl ([82.73.120.193]
-	helo=localhost.localdomain)
-	by smtp8.tb.mail.iss.as9143.net with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
-	(envelope-from <hainsvdbosch@ziggo.nl>)
-	id 1flCYx-0000Ok-AT; Thu, 02 Aug 2018 14:18:39 +0200
-From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2018 14:18:25 +0200
-Message-Id: <20180802121825.26225-1-hainsvdbosch@ziggo.nl>
+	Thu,  2 Aug 2018 14:45:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,436,1526335200"; 
+   d="scan'208";a="1587577"
+From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Aug 2018 16:45:22 +0200
+Message-ID: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
 X-Mailer: git-send-email 2.17.1
-X-SourceIP: 82.73.120.193
-X-Authenticated-Sender: hainsvdbosch@ziggo.nl (via SMTP)
-X-Ziggo-spambar: /
-X-Ziggo-spamscore: 0.0
-X-Ziggo-spamreport: CMAE Analysis: v=2.3 cv=EJqyLGRC c=1 sm=1 tr=0
-	a=Q7YWMR2eS1SS1617XCK1UA==:17 a=9+rZDBEiDlHhcck0kWbJtElFXBc=:19
-	a=dapMudl6Dx4A:10 a=Q4-j1AaZAAAA:8 a=iGHA9ds3AAAA:8
-	a=1cI4GYfS3LhjqKuKisQA:9 a=ZPHkQOs1zdIA:10
-	a=9H3Qd4_ONW2Ztcrla5EB:22 a=nM-MV4yxpKKO9kiQg6Ot:22 none
-X-Ziggo-Spam-Status: No
-X-Spam-Status: No
-X-Spam-Flag: No
-Subject: [meta-oe][PATCH] libtalloc: refresh patch
+MIME-Version: 1.0
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
+	sdex4srv.skidata.net (192.168.111.82)
+Subject: [meta-java][PATCH 1/2] classes:java: move version_specific_cflags to java.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,63 +27,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 12:35:18 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 14:45:34 -0000
+Content-Type: text/plain
 
-WARNING: libtalloc-2.1.14-r0 do_patch:
-Some of the context lines in patches were ignored. This can lead to incorrectly applied patches.
-The context lines in the patches can be updated with devtool:
+moved version_specific_cflags from openjfdk-8-common.inc to java.bbclass and
+renamed it to java_version_specific_cflags because it will be used for a fix
+in icedtea7
 
-    devtool modify <recipe>
-    devtool finish --force-patch-refresh <recipe> <layer_path>
-
-Then the updated patches and the source tree (in devtool's workspace)
-should be reviewed to make sure the patches apply in the correct place
-and don't introduce duplicate lines (which can, and does happen
-when some of the context is ignored). Further information:
-http://lists.openembedded.org/pipermail/openembedded-core/2018-March/148675.html
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
-Details:
-Applying patch avoid-attr-unless-wanted.patch
-patching file lib/replace/wscript
-Hunk #1 succeeded at 837 with fuzz 2 (offset 201 lines).
-Hunk #2 succeeded at 850 with fuzz 2 (offset 204 lines).
-
-Now at patch avoid-attr-unless-wanted.patch
+Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
 ---
- .../libtalloc/avoid-attr-unless-wanted.patch         | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ classes/java.bbclass                      | 29 +++++++++++++++++++++
+ recipes-core/openjdk/openjdk-8-common.inc | 31 ++---------------------
+ 2 files changed, 31 insertions(+), 29 deletions(-)
 
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
-index a3ee9ccd9..db3ddce2c 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc/avoid-attr-unless-wanted.patch
-@@ -1,20 +1,20 @@
- --- a/lib/replace/wscript	2015-11-13 16:04:04.000000000 +0100
- +++ b/lib/replace/wscript	2015-11-13 16:23:20.000000000 +0100
--@@ -636,8 +636,6 @@
-+@@ -837,8 +837,6 @@ def build(bld):
-      if not bld.CONFIG_SET('HAVE_INET_ATON'):     REPLACE_SOURCE += ' inet_aton.c'
-      if not bld.CONFIG_SET('HAVE_INET_NTOP'):     REPLACE_SOURCE += ' inet_ntop.c'
-      if not bld.CONFIG_SET('HAVE_INET_PTON'):     REPLACE_SOURCE += ' inet_pton.c'
- -    if not bld.CONFIG_SET('HAVE_GETXATTR') or bld.CONFIG_SET('XATTR_ADDITIONAL_OPTIONS'):
- -                                                 REPLACE_SOURCE += ' xattr.c'
-  
--     bld.SAMBA_LIBRARY('replace',
--                       source=REPLACE_SOURCE,
--@@ -648,7 +646,7 @@
-+     if not bld.CONFIG_SET('HAVE_CLOSEFROM'):
-+         REPLACE_SOURCE += ' closefrom.c'
-+@@ -852,7 +850,7 @@ def build(bld):
-                        # at the moment:
-                        # hide_symbols=bld.BUILTIN_LIBRARY('replace'),
-                        private_library=True,
- -                      deps='crypt dl nsl socket rt attr' + extra_libs)
- +                      deps='crypt dl nsl socket rt ' + extra_libs)
-  
--     bld.SAMBA_SUBSYSTEM('replace-test',
--                       source='''test/testsuite.c test/strptime.c
-+     replace_test_cflags="-Wno-format-zero-length"
-+     if bld.CONFIG_SET('HAVE_WNO_FORMAT_TRUNCATION'):
+diff --git a/classes/java.bbclass b/classes/java.bbclass
+index aa012ab..906bf8e 100644
+--- a/classes/java.bbclass
++++ b/classes/java.bbclass
+@@ -28,6 +28,35 @@ STAGING_LIBDIR_JVM_NATIVE ?= "${STAGING_LIBDIR_NATIVE}/jvm"
+ EXTRA_OEMAKE_remove_task-compile = "${PARALLEL_MAKE}"
+ EXTRA_OEMAKE_remove_task-install = "${PARALLEL_MAKEINST}"
+ 
++# Determine the version specific compiler flags depending on the used
++# host gcc version
++def java_version_specific_cflags(d):
++    import re
++
++    extraflags = None
++    version = None
++
++    if bb.data.inherits_class('native', d):
++        from subprocess import Popen, PIPE
++
++        cmd = d.expand('${CC} -dumpversion').split()
++        cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
++        version = cc.communicate()[0].decode('utf-8')[0]
++    else:
++        # in the cross case, trust that GCCVERSION is correct. This won't
++        # work if the native toolchain is Clang, but as of this writing that
++        # doesn't work anyway.
++        version = d.getVar('GCCVERSION', expand=True)[0]
++        # skip non digit characters at the beginning, e.g. from "linaro-6.2%"
++        match = re.search("\d", version)
++        if match:
++            version = version[match.start():]
++
++    if version.isdigit():
++        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
++        return extraflags
++    return ''
++
+ # OpenJDK supports parallel compilation but uses a plain number for this.
+ # In OE we have PARALLEL_MAKE which is the actual option passed to make,
+ # e.g. "-j 4".
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 0af320d..5fae03a 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -224,33 +224,6 @@ FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+ # version is and only add the flags that are appropriate for that GCC
+ # version.
+ 
+-def version_specific_cflags(d):
+-    import re
+-
+-    extraflags = None
+-    version = None
+-
+-    if bb.data.inherits_class('native', d):
+-        from subprocess import Popen, PIPE
+-
+-        cmd = d.expand('${CC} -dumpversion').split()
+-        cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
+-        version = cc.communicate()[0].decode('utf-8')[0]
+-    else:
+-        # in the cross case, trust that GCCVERSION is correct. This won't
+-        # work if the native toolchain is Clang, but as of this writing that
+-        # doesn't work anyway.
+-        version = d.getVar('GCCVERSION', expand=True)[0]
+-        # skip non digit characters at the beginning, e.g. from "linaro-6.2%"
+-        match = re.search("\d", version)
+-        if match:
+-            version = version[match.start():]
+-
+-    if version.isdigit():
+-        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
+-        return extraflags
+-    return ''
+-
+-CFLAGS_append = " ${@version_specific_cflags(d)}"
+-CXXFLAGS_append = " ${@version_specific_cflags(d)}"
++CFLAGS_append = " ${@java_version_specific_cflags(d)}"
++CXXFLAGS_append = " ${@java_version_specific_cflags(d)}"
+ CXX_append = " -std=gnu++98"
 -- 
 2.17.1
 
