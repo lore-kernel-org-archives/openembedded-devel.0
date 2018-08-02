@@ -1,48 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id C61D878DD7
+Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 1568878DA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 08:07:26 +0000 (UTC)
-Received: by mail-qt0-f177.google.com with SMTP id y19-v6so1346870qto.5
+	Thu,  2 Aug 2018 08:18:28 +0000 (UTC)
+Received: by mail-qt0-f178.google.com with SMTP id z8-v6so1347039qto.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Aug 2018 01:07:28 -0700 (PDT)
+	Thu, 02 Aug 2018 01:18:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eAByzU4TB6pc9xK8U+g+nxKZ0MVhVbB/4AvbesGLdFA=;
-	b=PPyC9aYxCxzbGmKUGHxkbC51tWb3nMNWhgB/+Ja8Bl1kULTClLVYCUFiOeJsqfCnHR
-	1834ypIus1jWHb7Q3QvEcr+k2EZcMBBA3T+tC5v6ziKrUgBkX7CvpA3AgFa8SkYPKGyM
-	+oAZCT6g5ur/KqI0BJLB6pm9w5h07lqi7lTEvUIUlp3n+nqW4+EH3JLfr12AW8yJoL1I
-	CRBNeufpJjWD1aja1UcJD1Uau2d+vcauOjP2sgfEu4zcpY1JcCg9mP3pMU5emV02rCjN
-	7jaiet1S5cDmzq9aCjkxCtqisOrhSfaRdgDU+rB9sVLrQ4IIjenmPA1ZpRaydn2bgCRM
-	0oRA==
+	:cc; bh=0WVDK7ztNjcKQv5+I5h7slu2+RyAQ6xPSErO8ANPdjk=;
+	b=lVX+mAmwy68R7JZjytDcqsMUnf7GC1YhARAQ6gFRVoCkB86OawRczpJXzTfQdp+UvN
+	5X71bIptneuiWTNzE6fASdYEckWZhsKAb4+A9EYsinDbVdauznI+QFarQW/F8h+d1Xyo
+	gE/5A9JLTjaXCmezAeEcvPZtQd/y/7ay2DRAPaR5xZgImpTBMDGIHBqjyz+EUDh9VWFP
+	t6W/I04KYj3hh8C3g3VJm0xA9GUagaLH2bU5nzwP4uk6zmFE7X2lve0nSsOLktTzILB2
+	HpWFlIjhFkypUA7ulX/MiAmYjMsdJjRezINQtsWWpAio/XJ1vV9pKK/4hSFo6GCfc2r/
+	OWcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=eAByzU4TB6pc9xK8U+g+nxKZ0MVhVbB/4AvbesGLdFA=;
-	b=MIU58GhMIXnJwPyouR06DyY3wddlV6yJsFK24n5xp3UyytS3b8K/vOoYH5b/SPqMT/
-	E1qqapDf2ykeMjA0lxSDHz2lQqr93U25xQrEZp/ZXHnFQiDggrM5vDr6TkEh7blZLnUp
-	KiPWVEMKpr2SfrFXaKTBCVdjjBlI4V85rSNrLx4XjCKffgkbLwU8i9zd3X1g8WjDT9Tw
-	FoqUWQjMUD7RKHmHe/eh5fukaFhxiPG4fK4R9kK4Kiz9UX1UpsVUOdQalaXlwI8l4/Xt
-	Epu22RO/EAxUn2omGj17Ceua5jpNDMUOphU/yu8zwepgjrAMUQzLltqXzBgUz9lVVF2q
-	dbHQ==
-X-Gm-Message-State: AOUpUlH/+ebvjFyowH9kNp6d3WePifHEihcEAm/lXCqjYtPUeUF2s2uA
-	6+kK8WdLehqB+xNY8hfCOhk0gxdzO5QdOaLQE0eXRg==
-X-Google-Smtp-Source: AAOMgpfJiyOhuN6g/pq5kS/xDWyQhLKVv91+Twp2kMgekAtYu9G+uq2m2XxBLsxL+M0mT3yamogmHmKh4xcukd8VndQ=
-X-Received: by 2002:ac8:91d:: with SMTP id
-	t29-v6mr1578009qth.188.1533197247376; 
-	Thu, 02 Aug 2018 01:07:27 -0700 (PDT)
+	bh=0WVDK7ztNjcKQv5+I5h7slu2+RyAQ6xPSErO8ANPdjk=;
+	b=YP7L13UtJmE7t3hSeqrsZmpOjwLk/uWF8aaiHuNaglJqcwxJ7MipxQud0MIXGRyK75
+	PcmhX/uE88QVESmvEhMh1jqOyegZWJNXDIHCHNBcNJ/2eSh7q5oukDERskX5uIIOrRC7
+	ewaUQcD7PH1yyHCjJUUa8n+lZ2oStnz2L5A35q1lvknyZWbCUxnRbeNFlqNPlcBW1O5n
+	j9cvJbU50gRwPTsgiCvmskJq1ecyCktCCoMGWOnMN0u00K5Kdc6zlnwMo82ocrTJqyTR
+	A7kgTTdAOmGatWxm9HnY7+U8oDDqyQjcb4bRDV7TQsIMsbBMMbR4IgM/BsGp1yKYgnnS
+	CFLw==
+X-Gm-Message-State: AOUpUlEdPKk2kURPBFrIVsIj7594iz9dENDO189guGBZAFSWQsJZ5VMK
+	7KRNxVaXzlED/YFUNfSAwWi36ZHqQ+rjnpryDiU=
+X-Google-Smtp-Source: AAOMgpes65+O4TJDFqMhJ/AyZMUx/iU4D4pPhP1H63Wv8MCxu27edhSouee0BHymNtqd9o/Et/adH8WVC/uihlgBuus=
+X-Received: by 2002:a0c:e0c8:: with SMTP id x8-v6mr1591622qvk.74.1533197909732;
+	Thu, 02 Aug 2018 01:18:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180731030937.3685-1-robert.joslyn@redrectangle.org>
-	<20180731030937.3685-4-robert.joslyn@redrectangle.org>
-In-Reply-To: <20180731030937.3685-4-robert.joslyn@redrectangle.org>
+References: <1533033627-32108-1-git-send-email-ovidiu.panait@windriver.com>
+In-Reply-To: <1533033627-32108-1-git-send-email-ovidiu.panait@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Aug 2018 01:07:01 -0700
-Message-ID: <CAMKF1spvEf1-PeC1+zUVvR9TU4eLBBNYwhP3Rkcg+7E38mwxiw@mail.gmail.com>
-To: Robert Joslyn <robert.joslyn@redrectangle.org>
+Date: Thu, 2 Aug 2018 01:18:03 -0700
+Message-ID: <CAMKF1spjw32cWX=xHEXro_4zipRn7S+SrL1d4UVUHsNgFYz7Kg@mail.gmail.com>
+To: Ovidiu Panait <ovidiu.panait@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2 3/5] python-parse: Update to 1.8.4 and add Python 3 version
+Subject: Re: [meta-oe][PATCH] lvm2-udevrules: Add ALLOW_EMPTY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,85 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 08:07:26 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 08:18:29 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jul 30, 2018 at 8:11 PM Robert Joslyn
-<robert.joslyn@redrectangle.org> wrote:
+On Tue, Jul 31, 2018 at 3:50 AM Ovidiu Panait
+<ovidiu.panait@windriver.com> wrote:
 >
-> Correct the license to MIT. The PyPI metadata says BSD, but the license
-> text in the code is actually MIT.
+> When lvm2 is configured without udev feature, the lvm2-udevrules package
+> is empty, so do_rootfs will fail to install any other packages that
+> rdepend on it. (e.g. cryptsetup with meta-secure-core layer since commit
+> https://github.com/jiazhang0/meta-secure-core/commit/afc3939):
+>
+> ..
+> Problem: conflicting requests
+>  - nothing provides lvm2-udevrules needed by cryptsetup
+> ..
+>
 
-Part of this patch is already applied by another pull. Please rebase
-on top of current master and resend.
+I think this is a good thing to get this error during build, since
+package depends on it at runtime, having
+empty content will just defer the error until the system is booted and
+then its harder to debug the failures
 
+> Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 > ---
->  meta-python/recipes-devtools/python/python-parse.inc       | 13 +++++++++++++
->  meta-python/recipes-devtools/python/python-parse_1.8.2.bb  | 13 -------------
->  meta-python/recipes-devtools/python/python-parse_1.8.4.bb  |  2 ++
->  meta-python/recipes-devtools/python/python3-parse_1.8.4.bb |  2 ++
->  4 files changed, 17 insertions(+), 13 deletions(-)
->  create mode 100644 meta-python/recipes-devtools/python/python-parse.inc
->  delete mode 100644 meta-python/recipes-devtools/python/python-parse_1.8.2.bb
->  create mode 100644 meta-python/recipes-devtools/python/python-parse_1.8.4.bb
->  create mode 100644 meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
+>  meta-oe/recipes-support/lvm2/lvm2_2.02.177.bb | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-parse.inc b/meta-python/recipes-devtools/python/python-parse.inc
-> new file mode 100644
-> index 000000000..2510b27ae
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-parse.inc
-> @@ -0,0 +1,13 @@
-> +SUMMARY = "Parse strings using a specification based on the Python format() syntax"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
-> +
-> +SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
-> +SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
-> +
-> +inherit pypi
-> +
-> +RDEPENDS_${PN} += "\
-> +    ${PYTHON_PN}-datetime \
-> +    ${PYTHON_PN}-logging \
-> +    "
-> diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb b/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-> deleted file mode 100644
-> index 8e16372c5..000000000
-> --- a/meta-python/recipes-devtools/python/python-parse_1.8.2.bb
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -SUMMARY = "Parse strings using a specification based on the Python format() syntax"
-> -LICENSE = "BSD"
-> -LIC_FILES_CHKSUM = "file://parse.py;beginline=1191;endline=1209;md5=5147afdd9b3615290ad8733f0137a1a1"
-> -
-> -SRC_URI[md5sum] = "42002338551bdfa0f01bbe4e679a17dd"
-> -SRC_URI[sha256sum] = "8048dde3f5ca07ad7ac7350460952d83b63eaacecdac1b37f45fd74870d849d2"
-> -
-> -inherit pypi setuptools
-> -
-> -RDEPENDS_${PN} += "\
-> -    ${PYTHON_PN}-datetime \
-> -    ${PYTHON_PN}-logging \
-> -    "
-> diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.4.bb b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-> new file mode 100644
-> index 000000000..d31ccc72a
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools
-> +require python-parse.inc
-> diff --git a/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb b/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
-> new file mode 100644
-> index 000000000..b1242545c
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools3
-> +require python-parse.inc
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.177.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.177.bb
+> index 1d9de3d94..388e89117 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2_2.02.177.bb
+> +++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.177.bb
+> @@ -46,6 +46,7 @@ FILES_${PN}-scripts = " \
+>  # Specified explicitly for the udev rules, just in case that it does not get picked
+>  # up automatically:
+>  FILES_${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
+> +ALLOW_EMPTY_${PN}-udevrules = "1"
+>  RDEPENDS_${PN}_append_class-target = " libdevmapper"
+>  RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
+>
 > --
-> 2.16.4
+> 2.17.1
 >
 > --
 > _______________________________________________
