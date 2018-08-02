@@ -1,14 +1,13 @@
 Return-Path: <prvs=7451dbc88=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E2B278D67
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 6529D78D67
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Aug 2018 10:42:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; 
-   d="scan'208";a="1586920"
+	Thu,  2 Aug 2018 10:43:36 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,435,1526335200"; d="scan'208";a="11647626"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
 References: <20180727132923.15149-1-git@andred.net>
-	<20180727132923.15149-6-git@andred.net>
+	<20180727132923.15149-7-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -54,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <2b823634-a261-3492-d466-50ffef928a0f@skidata.com>
-Date: Thu, 2 Aug 2018 12:43:18 +0200
+Message-ID: <49965ec9-b0e0-7f45-2bd0-1763a61a4870@skidata.com>
+Date: Thu, 2 Aug 2018 12:44:03 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180727132923.15149-6-git@andred.net>
+In-Reply-To: <20180727132923.15149-7-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][RFC][PATCH 6/7] openjdk-7: (R)PROVIDE virtual Java [567] packages
+Subject: Re: [meta-java][RFC][PATCH 7/7] ca-certificates-java: switch to more generic / more correct JAVA (R)DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,7 +75,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Aug 2018 10:42:51 -0000
+X-List-Received-Date: Thu, 02 Aug 2018 10:43:36 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -91,33 +90,52 @@ regards;Richard.L
 On 07/27/2018 03:29 PM, André Draszik wrote:
 > From: André Draszik <andre.draszik@jci.com>
 > 
-> Similar to OpenJDK-8, OpenJDK-7 is a provider of Java 5 through 7
-> (including).
+> This recipe here actually depends on Java7 upwards, not Java2 upwards,
+> so state that dependency correctly using the newly introduced (virtual)
+> RPROVIDES of the OpenJDK8/OpenJRE8 recipes.
+> 
+> At the same time, we can remove hard-coded references to openjdk-8 and
+> openjre-8, and thusly make the build more flexible.
 > 
 > Signed-off-by: André Draszik <andre.draszik@jci.com>
 > ---
->  recipes-core/openjdk/openjdk-7-common.inc | 2 ++
->  1 file changed, 2 insertions(+)
+>  .../ca-certificates-java_20180516.bb                   | 10 ++--------
+>  1 file changed, 2 insertions(+), 8 deletions(-)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
-> index 1ac3154..85a34da 100644
-> --- a/recipes-core/openjdk/openjdk-7-common.inc
-> +++ b/recipes-core/openjdk/openjdk-7-common.inc
-> @@ -22,6 +22,7 @@ JDK_DIR = "java-7-openjdk"
+> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> index a2d7abd..2ae7352 100644
+> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+> @@ -14,7 +14,7 @@ DEPENDS = "virtual/javac-native fastjar-native"
+>  # We can't use virtual/javac-native, because that would create a
+>  # keystore that can't be read on the target (as virtual/javac-native
+>  # usually is either too old, or plain incompatible with this)
+> -PACKAGE_WRITE_DEPS += "openjdk-8-native"
+> +PACKAGE_WRITE_DEPS += "virtual/java7-runtime-native"
 >  
->  PN = "${JDKPN}-jre"
->  PROVIDES += "${JDKPN}"
-> +PROVIDES += "${@' '.join('virtual/java'+str(x)+'-sdk virtual/java'+str(x)+'-runtime' for x in range(5,8))}"
+>  SRC_URI = "\
+>  	git://salsa.debian.org/java-team/ca-certificates-java.git \
+> @@ -31,12 +31,6 @@ B = "${WORKDIR}/build"
 >  
->  DEPENDS = " \
->      icedtea7-native zip-native ant-native \
-> @@ -283,6 +284,7 @@ FILES_${JDKPN}-jdk = " \
->  RDEPENDS_${JDKPN}-jre = "${JDKPN}-java ${JDKPN}-common"
->  RDEPENDS_${JDKPN}-java = "${JDKPN}-common"
->  RPROVIDES_${JDKPN}-jre = "java2-runtime"
-> +RPROVIDES_${JDKPN}-jre += "${@' '.join('virtual-java'+str(x)+'-runtime' for x in range(5,8))}"
+>  JARFILENAME = "${BPN}.jar"
 >  
->  RDEPENDS_${JDKPN}-jdk = "${JDKPN}-jre"
+> -python () {
+> -    runtime = d.getVar("PREFERRED_RPROVIDER_java2-runtime") or ""
+> -    if not runtime in ("openjdk-8", "openjre-8"):
+> -        raise bb.parse.SkipRecipe("PREFERRED_RPROVIDER_java2-runtime '%s' unsupported" % runtime)
+> -}
+> -
+>  do_patch_append () {
+>      bb.build.exec_func('do_fix_sysconfdir', d)
+>  }
+> @@ -99,7 +93,7 @@ pkg_postinst_${PN} () {
+>  }
+>  
+>  RDEPENDS_${PN} = "ca-certificates"
+> -RDEPENDS_${PN}_append_class-target = " java2-runtime"
+> +RDEPENDS_${PN}_append_class-target = " virtual-java7-runtime"
+>  
+>  FILES_${PN} += "${datadir_java}"
 >  
 > 
 
