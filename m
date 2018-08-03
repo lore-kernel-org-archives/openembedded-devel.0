@@ -1,24 +1,66 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ACB73600EA
+Return-Path: <prvs=746ebc3bc=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 27B0171C42
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 06:30:11 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w736UATY020549
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 2 Aug 2018 23:30:11 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Thu, 2 Aug 2018 23:30:09 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Fri, 3 Aug 2018 14:40:32 +0800
-Message-ID: <1533278432-19581-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri,  3 Aug 2018 07:03:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,437,1526335200"; d="scan'208";a="11663331"
+To: <openembedded-devel@lists.openembedded.org>
+References: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <c57c6e6e-5fdf-1e9d-623d-ccc7b75eb224@skidata.com>
+Date: Fri, 3 Aug 2018 09:04:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mozjs: tweak location of tmp dir creation
+In-Reply-To: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH 1/2] classes:java: move version_specific_cflags to java.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,40 +73,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 06:30:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 03 Aug 2018 07:03:53 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-The tmp dir creation is out of build dir which has
-the risk to be broken by others.
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
+
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
+
+If you have any questions, please let me know.
+
+regards;Richard.L
+
+On 08/02/2018 04:45 PM, andreas.obergschwandtner@skidata.com wrote:
+> 
+> moved version_specific_cflags from openjfdk-8-common.inc to java.bbclass and
+> renamed it to java_version_specific_cflags because it will be used for a fix
+> in icedtea7
+> 
+> Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+
 ...
-|   File "build/tmp-glibc/work/i586-wrs-linux/mozjs/52.8.1-r0/
-mozjs-52.8.1/build/moz.configure/util.configure", line 190,
-in try_invoke_compiler
-|     os.remove(path)
-| OSError: [Errno 2] No such file or directory: '/tmp/conftest.OiV37V.cpp'
-...
-
-Set var-TMP for tempfile.mktemp to use current build dir to
-replace default `/tmp'.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
-index da80b63..3d79c39 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
-@@ -49,6 +49,7 @@ EXTRA_OEMAKE_task-install += "STATIC_LIBRARY_NAME=js_static"
- 
- do_configure() {
-     export SHELL="/bin/sh"
-+    export TMP="${B}"
-     ${S}/js/src/configure ${EXTRA_OECONF}
- }
- 
--- 
-2.7.4
-
 
