@@ -1,25 +1,23 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 17BC678D62
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E6BBE78E31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 09:23:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w739Nix0012299
+	Fri,  3 Aug 2018 10:02:40 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w73A2f6F029872
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 3 Aug 2018 02:23:44 -0700 (PDT)
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.399.0; Fri, 3 Aug 2018 02:23:43 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
+	Fri, 3 Aug 2018 03:02:41 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.218) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Fri, 3 Aug 2018 03:02:40 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 3 Aug 2018 17:34:03 +0800
-Message-ID: <1533288843-73014-3-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1533288843-73014-1-git-send-email-liezhi.yang@windriver.com>
-References: <1533288843-73014-1-git-send-email-liezhi.yang@windriver.com>
+Date: Fri, 3 Aug 2018 18:06:44 +0800
+Message-ID: <1533290805-13421-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 2/2] python-pbr.inc: remove it
+Subject: [meta-oe][PATCH 1/2] rsyslog: fix configuration file for logrotate
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,49 +30,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 09:23:43 -0000
+X-List-Received-Date: Fri, 03 Aug 2018 10:02:41 -0000
 Content-Type: text/plain
 
-There is one in oe-ocore, so remove it, and let python-pbr_4.2.0.bb use the one
-in oe-core.
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+The logrotate.rsyslog file uses 'cat /var/run/rsyslogd.pid' to
+determine the pid of rsyslogd daemon. This is incorrect, because
+rsyslogd may start in a way that does not create rsyslog.pid file.
+
+Failing to send HUP signal to rsyslogd daemon will result in
+unexpected behaviour. e.g. rsyslogd is writing to /var/log/messages-xxxx
+instead of /var/log/messages.
+
+We should really use pkill to send HUP signal to rsyslogd to ensure
+correct behaviour.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-pbr.inc      | 14 --------------
- meta-python/recipes-devtools/python/python-pbr_4.2.0.bb |  3 ++-
- 2 files changed, 2 insertions(+), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pbr.inc
+ meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate | 4 ++--
+ meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb         | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pbr.inc b/meta-python/recipes-devtools/python/python-pbr.inc
-deleted file mode 100644
-index 225d78b..0000000
---- a/meta-python/recipes-devtools/python/python-pbr.inc
-+++ /dev/null
-@@ -1,14 +0,0 @@
--DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
--HOMEPAGE = "https://pypi.python.org/pypi/pbr"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
--
--SRC_URI[md5sum] = "6619780896ca81c7cd19c6e2f439b6c9"
--SRC_URI[sha256sum] = "1b8be50d938c9bb75d0eaf7eda111eec1bf6dc88a62a6412e33bf077457e0f45"
--
--inherit pypi
--
--RDEPENDS_${PN} += "${PYTHON_PN}-pip"
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb b/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
-index 8f7f924..a4b56cd 100644
---- a/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_4.2.0.bb
-@@ -1,2 +1,3 @@
- inherit setuptools
--require python-pbr.inc
-+# The inc file is in oe-core
-+require recipes-devtools/python/python-pbr.inc
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
+index 94ec517..5f8568f 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
+@@ -9,7 +9,7 @@
+         delaycompress
+         compress
+         postrotate
+-		/bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
++		@BINDIR@/pkill -HUP rsyslogd 2> /dev/null || true
+         endscript
+ }
+ 
+@@ -34,6 +34,6 @@
+         delaycompress
+         sharedscripts
+         postrotate
+-		/bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
++		@BINDIR@/pkill -HUP rsyslogd 2> /dev/null || true
+         endscript
+ }
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+index 9737892..d90695a 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+@@ -125,6 +125,7 @@ do_install_append() {
+     install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
+     install -m 644 ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+     install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
++    sed -i -e "s#@BINDIR@#${bindir}#g" ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
+ }
+ 
+ FILES_${PN} += "${bindir}"
 -- 
-2.7.4
+1.9.1
 
 
