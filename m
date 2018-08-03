@@ -1,27 +1,19 @@
 Return-Path: <robert.joslyn@redrectangle.org>
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
-	[217.70.183.198])
-	by mail.openembedded.org (Postfix) with ESMTP id 67498745D9
+Received: from relay10.mail.gandi.net (relay10.mail.gandi.net [217.70.178.230])
+	by mail.openembedded.org (Postfix) with ESMTP id CAEEA78E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 03:19:52 +0000 (UTC)
-X-Originating-IP: 50.37.87.235
+	Fri,  3 Aug 2018 03:27:25 +0000 (UTC)
 Received: from xps13.localdomain (50-37-87-235.mscw.id.frontiernet.net
 	[50.37.87.235])
 	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id 1EA46C0002;
-	Fri,  3 Aug 2018 03:19:51 +0000 (UTC)
-Message-ID: <1533266389.1986.6.camel@redrectangle.org>
+	by relay10.mail.gandi.net (Postfix) with ESMTPSA id 37882240005;
+	Fri,  3 Aug 2018 03:27:24 +0000 (UTC)
 From: Robert Joslyn <robert.joslyn@redrectangle.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 02 Aug 2018 20:19:49 -0700
-In-Reply-To: <CAMKF1srNOQX4hDPYSr3=nMPdk8dM3o8Z3GToudKbCkd4O8tOgw@mail.gmail.com>
-References: <20180731030937.3685-1-robert.joslyn@redrectangle.org>
-	<20180731030937.3685-5-robert.joslyn@redrectangle.org>
-	<CAMKF1srNOQX4hDPYSr3=nMPdk8dM3o8Z3GToudKbCkd4O8tOgw@mail.gmail.com>
-X-Mailer: Evolution 3.24.6 
-Mime-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2 4/5] python-parse-type: Add Python 3 recipe
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  2 Aug 2018 20:26:59 -0700
+Message-Id: <20180803032704.3521-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.16.4
+Subject: [meta-python][PATCH v3 0/5] Add python3-behave Recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,112 +26,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 03:19:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Aug 2018 03:27:26 -0000
 
-On Thu, 2018-08-02 at 11:11 -0700, Khem Raj wrote:
-> On Mon, Jul 30, 2018 at 8:11 PM Robert Joslyn
-> <robert.joslyn@redrectangle.org> wrote:
-> > 
-> > Clarify license from BSD to BSD-3-Clause.
-> > ---
-> >  meta-python/recipes-devtools/python/python-parse-type.inc   | 12
-> > ++++++++++++
-> >  .../recipes-devtools/python/python-parse-type_0.4.2.bb      | 13
-> > ++-----------
-> >  .../recipes-devtools/python/python3-parse-type_0.4.2.bb     |  2
-> > ++
-> >  3 files changed, 16 insertions(+), 11 deletions(-)
-> >  create mode 100644 meta-python/recipes-devtools/python/python-
-> > parse-type.inc
-> >  create mode 100644 meta-python/recipes-devtools/python/python3-
-> > parse-type_0.4.2.bb
-> > 
-> > diff --git a/meta-python/recipes-devtools/python/python-parse-
-> > type.inc b/meta-python/recipes-devtools/python/python-parse-
-> > type.inc
-> > new file mode 100644
-> > index 000000000..4549ec98b
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python-parse-type.inc
-> > @@ -0,0 +1,12 @@
-> > +SUMMARY = "Simplifies building parse types based on the parse
-> > module"
-> > +HOMEPAGE = "https://github.com/jenisys/parse_type"
-> > +LICENSE = "BSD-3-Clause"
-> > +LIC_FILES_CHKSUM =
-> > "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
-> > +
-> > +SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
-> > +SRC_URI[sha256sum] =
-> > "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
-> > +
-> > +PYPI_PACKAGE = "parse_type"
-> > +inherit pypi
-> > +
-> > +RDEPENDS_${PN} += "${PYTHON_PN}-parse"
-> 
-> there is no recipe for python3-parse but this does mean that
-> python3-parse-type will rdep on it and fail the dep check like below
-> 
-> ERROR: Nothing RPROVIDES 'python3-parse' (but
-> /mnt/a/oe/sources/meta-openembedded/meta-python/recipes-
-> devtools/python/python3-parse-type_0.4.2.bb
-> RDEPENDS on or otherwise requires it)
-> NOTE: Runtime target 'python3-parse' is unbuildable, removing...
+Add Python 3 version of python-behave and its dependencies. Fix missing
+dependencies for the Python 2 recipe as well.
 
-I added python3-parse as patch 3 of the series, but that patch got
-dropped since another patch to the recipe was pulled in to master
-first. I'll resend the series rebased on master, which will fix both
-issues.
+Changes in v2:
+* Clarify license of python-parse-type from BSD to BSD-3-Clause
+* Add HOMEPAGE to python-parse-type.inc
 
-Thanks,
-Robert
+Changes in v3:
+* The python-parse recipe was bumped to a newer version on master.
+  Rebase on master, adding python3-parse only.
+* Add HOMEPAGE to python-parse.inc
 
-> > diff --git a/meta-python/recipes-devtools/python/python-parse-
-> > type_0.4.2.bb b/meta-python/recipes-devtools/python/python-parse-
-> > type_0.4.2.bb
-> > index b516c5912..8e10e801c 100644
-> > --- a/meta-python/recipes-devtools/python/python-parse-
-> > type_0.4.2.bb
-> > +++ b/meta-python/recipes-devtools/python/python-parse-
-> > type_0.4.2.bb
-> > @@ -1,11 +1,2 @@
-> > -SUMMARY = "Simplifies building parse types based on the parse
-> > module"
-> > -LICENSE = "BSD"
-> > -LIC_FILES_CHKSUM =
-> > "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
-> > -PYPI_PACKAGE = "parse_type"
-> > -
-> > -SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
-> > -SRC_URI[sha256sum] =
-> > "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
-> > -
-> > -RDEPENDS_${PN} += "python-parse"
-> > -
-> > -inherit pypi setuptools
-> > +inherit setuptools
-> > +require python-parse-type.inc
-> > diff --git a/meta-python/recipes-devtools/python/python3-parse-
-> > type_0.4.2.bb b/meta-python/recipes-devtools/python/python3-parse-
-> > type_0.4.2.bb
-> > new file mode 100644
-> > index 000000000..91d9ce2d4
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-parse-
-> > type_0.4.2.bb
-> > @@ -0,0 +1,2 @@
-> > +inherit setuptools3
-> > +require python-parse-type.inc
-> > --
-> > 2.16.4
-> > 
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Robert Joslyn (5):
+  python-linecache2: Add recipe
+  python-traceback2: Add recipe
+  python3-parse: Add recipe
+  python-parse-type: Add Python 3 recipe
+  python-behave: Add Python 3 recipe
+
+ meta-python/recipes-devtools/python/python-behave.inc    | 15 +++++++++++++++
+ .../recipes-devtools/python/python-behave_1.2.6.bb       | 16 +++++++---------
+ .../recipes-devtools/python/python-linecache2_1.0.0.bb   | 13 +++++++++++++
+ .../recipes-devtools/python/python-parse-type.inc        | 12 ++++++++++++
+ .../recipes-devtools/python/python-parse-type_0.4.2.bb   | 13 ++-----------
+ meta-python/recipes-devtools/python/python-parse.inc     | 14 ++++++++++++++
+ .../recipes-devtools/python/python-parse_1.8.4.bb        | 15 ++-------------
+ .../recipes-devtools/python/python-traceback2_1.4.0.bb   | 15 +++++++++++++++
+ .../recipes-devtools/python/python3-behave_1.2.6.bb      |  2 ++
+ .../recipes-devtools/python/python3-parse-type_0.4.2.bb  |  2 ++
+ .../recipes-devtools/python/python3-parse_1.8.4.bb       |  2 ++
+ 11 files changed, 86 insertions(+), 33 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-behave.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-linecache2_1.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-parse-type.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-parse.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-traceback2_1.4.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
+
+-- 
+2.16.4
 
 
