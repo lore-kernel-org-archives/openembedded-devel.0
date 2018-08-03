@@ -1,21 +1,21 @@
 Return-Path: <robert.joslyn@redrectangle.org>
 Received: from relay10.mail.gandi.net (relay10.mail.gandi.net [217.70.178.230])
-	by mail.openembedded.org (Postfix) with ESMTP id 25A2B78E30
+	by mail.openembedded.org (Postfix) with ESMTP id 2071278E3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 03:27:40 +0000 (UTC)
+	Fri,  3 Aug 2018 03:27:42 +0000 (UTC)
 Received: from xps13.localdomain (50-37-87-235.mscw.id.frontiernet.net
 	[50.37.87.235])
 	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay10.mail.gandi.net (Postfix) with ESMTPSA id E6D2B240008;
-	Fri,  3 Aug 2018 03:27:40 +0000 (UTC)
+	by relay10.mail.gandi.net (Postfix) with ESMTPSA id F12AB240004;
+	Fri,  3 Aug 2018 03:27:42 +0000 (UTC)
 From: Robert Joslyn <robert.joslyn@redrectangle.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2018 20:27:02 -0700
-Message-Id: <20180803032704.3521-4-robert.joslyn@redrectangle.org>
+Date: Thu,  2 Aug 2018 20:27:03 -0700
+Message-Id: <20180803032704.3521-5-robert.joslyn@redrectangle.org>
 X-Mailer: git-send-email 2.16.4
 In-Reply-To: <20180803032704.3521-1-robert.joslyn@redrectangle.org>
 References: <20180803032704.3521-1-robert.joslyn@redrectangle.org>
-Subject: [meta-python][PATCH v3 3/5] python3-parse: Add recipe
+Subject: [meta-python][PATCH v3 4/5] python-parse-type: Add Python 3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,66 +28,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 03:27:41 -0000
+X-List-Received-Date: Fri, 03 Aug 2018 03:27:43 -0000
 
-Correct the license to MIT. The PyPI metadata says BSD, but the license
-text in the code is actually MIT.
+Clarify license from BSD to BSD-3-Clause.
 ---
- meta-python/recipes-devtools/python/python-parse.inc      | 14 ++++++++++++++
- meta-python/recipes-devtools/python/python-parse_1.8.4.bb | 15 ++-------------
- .../recipes-devtools/python/python3-parse_1.8.4.bb        |  2 ++
- 3 files changed, 18 insertions(+), 13 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-parse.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
+ meta-python/recipes-devtools/python/python-parse-type.inc   | 12 ++++++++++++
+ .../recipes-devtools/python/python-parse-type_0.4.2.bb      | 13 ++-----------
+ .../recipes-devtools/python/python3-parse-type_0.4.2.bb     |  2 ++
+ 3 files changed, 16 insertions(+), 11 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-parse-type.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-parse.inc b/meta-python/recipes-devtools/python/python-parse.inc
+diff --git a/meta-python/recipes-devtools/python/python-parse-type.inc b/meta-python/recipes-devtools/python/python-parse-type.inc
 new file mode 100644
-index 000000000..fa55a93c5
+index 000000000..4549ec98b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-parse.inc
-@@ -0,0 +1,14 @@
-+SUMMARY = "Parse strings using a specification based on the Python format() syntax"
-+HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
++++ b/meta-python/recipes-devtools/python/python-parse-type.inc
+@@ -0,0 +1,12 @@
++SUMMARY = "Simplifies building parse types based on the parse module"
++HOMEPAGE = "https://github.com/jenisys/parse_type"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
 +
-+SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
-+SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
++SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
++SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
 +
++PYPI_PACKAGE = "parse_type"
 +inherit pypi
 +
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-logging \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.4.bb b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-index c66d4c8a2..d31ccc72a 100644
---- a/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-+++ b/meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-@@ -1,13 +1,2 @@
--SUMMARY = "Parse strings using a specification based on the Python format() syntax"
++RDEPENDS_${PN} += "${PYTHON_PN}-parse"
+diff --git a/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+index b516c5912..8e10e801c 100644
+--- a/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
++++ b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+@@ -1,11 +1,2 @@
+-SUMMARY = "Simplifies building parse types based on the parse module"
 -LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
+-PYPI_PACKAGE = "parse_type"
 -
--SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
--SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
+-SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
+-SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
+-
+-RDEPENDS_${PN} += "python-parse"
 -
 -inherit pypi setuptools
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-logging \
--    "
 +inherit setuptools
-+require python-parse.inc
-diff --git a/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb b/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
++require python-parse-type.inc
+diff --git a/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb b/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
 new file mode 100644
-index 000000000..b1242545c
+index 000000000..91d9ce2d4
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
++++ b/meta-python/recipes-devtools/python/python3-parse-type_0.4.2.bb
 @@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-parse.inc
++require python-parse-type.inc
 -- 
 2.16.4
 
