@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
-	[209.85.216.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 492AB72EA2
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 4261D72EA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 16:34:00 +0000 (UTC)
-Received: by mail-qt0-f180.google.com with SMTP id a5-v6so6812261qtp.2
+	Fri,  3 Aug 2018 16:36:27 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id r1-v6so3074468pgp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Aug 2018 09:34:01 -0700 (PDT)
+	Fri, 03 Aug 2018 09:36:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=fWSbluS3YWLsf3RgYDNfOBalp5qoHEMpJ8EQTz2kOso=;
-	b=vUZU/rik94h5xdv+zEcpgbZvCOj0yeIx+4AjTvty3hS0MTCfcdPtsFVZXs1+ZKHPpC
-	udpuMyswtE0GapZ9KRJ/nrewZgBanwUwdSXM/TG+Ybac6DWp7dJJuzqkYFJo5BP/8ISp
-	fT7rOJkYcgdYpTLv6GbRJ803e/mxj0tDHR526t3NYIU1IQMPmquwWM6cfyw8Yzs11Rhr
-	/h/8xQQMFaOOn9JFVkQ2ddyXQGiVv1OEyu2QAfwFSmXhQkHzJWnEH4dB2N6G9jivNtNS
-	winsfjVCQCzgBkH/q7SlFI/1tdO+REBxN0beYrQVrotaKYv0WUYZoCVha8WilhN7fTTQ
-	upDQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=W2RNHDsHvS715IjlgfjA93Js8s/V++NT3feZHBU65MM=;
+	b=m5lIRKZK55/+bTPwFpmhvLwtU5Sc2bF53uxtXcLAEBjocJyXvW4OJzAB2sz8hz3Ane
+	bk+/UZnnlCcnDreNZTYpv8+C66/lcO0bWRcgC5RoK367WNCy7miGK5gxlZpmwx11RE3V
+	rl7iYMQ5Sc4fC6aqEUhDbwG0Cq2qq0ijlLcNauvQgAkBH8mGPgM9el9dKmrYyFPr5nbB
+	M5JoZ4uoiBMeK+sOR0ZLYxYRNTKOPfVAN7EO6/+D+4XODZsPnzOBy5eTeiinSAX6vsQr
+	rr/VnnW7ZoAsmPoBgV7kevYQ9JhD6ybWgUWTwND7WyJCFe4WFiIeNACVIc4UWnhAXVoh
+	eq4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=fWSbluS3YWLsf3RgYDNfOBalp5qoHEMpJ8EQTz2kOso=;
-	b=E12ExmVNeJureTk6ZJ/in92xXz/xPof+qgMAK7KSI83CRwHdFc8yigRiHxAqSAeJEE
-	X1MM8sL/VdYmeZW+p4cXi43jBvy7DCZHtVFjOkz7MYxswQDCrDvha/66JIW4KxfOVbll
-	zNIWoKMb/hzNnrviECh66rTnlNPiaDgkcVS1BC/d5b0YcSkYaTJGqHAKNfF+jtkmONbE
-	WTQjVE2jWCT3zqBpj4TS1F9hyi0R6FbGRmCL7Wx0UW73+iYDAxNCFxmxUmVNYHk4UPOg
-	2jR0L+sD/jmAAOsqdUjUAHVeqIlVT7Ct60NWocP021PwzBfzsk6G+oUd27uOIc9b6jlA
-	91Rg==
-X-Gm-Message-State: AOUpUlFxTNoSbmbU90WHGVjZ09Axb6qv6wYR3IMxm1pXyAbhirSQBvMk
-	1WIm7zhqxK05jop7lgFp3Bd6vZ4bOuO7C6eWMRU=
-X-Google-Smtp-Source: AAOMgpfLFEY9YNS+sgkWx8lg46dAnhp9H3KoyAdIHzv4xDxiMJ3tJOi4EQzClfvJXghkMTjlaux1nrrMAN1nZ7T6coo=
-X-Received: by 2002:ac8:3209:: with SMTP id
-	x9-v6mr4785395qta.128.1533314040905; 
-	Fri, 03 Aug 2018 09:34:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <1533290805-13421-1-git-send-email-Qi.Chen@windriver.com>
-In-Reply-To: <1533290805-13421-1-git-send-email-Qi.Chen@windriver.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=W2RNHDsHvS715IjlgfjA93Js8s/V++NT3feZHBU65MM=;
+	b=hL/Md+QjZutzAZqr2XlQOaigqx6E39KORyKdbtm4tBfHov5lJPsmwM5JXqW/XxlwTt
+	T462hHFY06SK/fwInreGzgldiWFcu9ajQFK3RKo/e0xxZPtYC9f07acHfJD2tP+ilbf7
+	5LWPjnxKSjtMg2IH4WTW56swVxfmGZh7e+eFCt+gy9c8IixxQEI1MtvnkRfLI8R2VV+X
+	71ikPngz75/0hLkAWc7P5O0vPAeJsKGd29s3kpf3X6F6bxHcGSnW3clEHVD6tvz3v7vi
+	OyFd2rmBAjxvKH1fhqE2aJm4dAF/Z9fgIxFhfyfrc6lmZaR/P5tk6CNQqbiQfzR38qq8
+	a/hQ==
+X-Gm-Message-State: AOUpUlFUER6AfiONCZsY5XsUyUEH5R/xYPRps1wukr87c9jjuW94pvoT
+	sDgMKX1dIUxlZu3ZrT8ACX7jl+jh
+X-Google-Smtp-Source: AAOMgpf226s1KTcyn9EREstL0iFfE5GWeuhlf/bdS9+l3qyV3JiFxwguq23YeY+BFHSyJyC3dW3BVw==
+X-Received: by 2002:a62:444d:: with SMTP id
+	r74-v6mr5325959pfa.96.1533314187986; 
+	Fri, 03 Aug 2018 09:36:27 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::5b3b])
+	by smtp.gmail.com with ESMTPSA id
+	r83-v6sm12583587pgr.8.2018.08.03.09.36.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 03 Aug 2018 09:36:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 3 Aug 2018 09:33:34 -0700
-Message-ID: <CAMKF1sqRfR-JDwt+HiWJ8qDsAFnK92iKbNAJf2uF7Qxj-DZFDQ@mail.gmail.com>
-To: ChenQi <Qi.Chen@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] rsyslog: fix configuration file for logrotate
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  3 Aug 2018 09:36:18 -0700
+Message-Id: <20180803163618.7359-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-oe][PATCH] openlmi-tools: Fix setup.py clean during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,76 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 16:34:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 03 Aug 2018 16:36:27 -0000
 
-is this patch any different from last posted patch ?
+setuptools bbclass now runs clean target before configure
+therefore create the setup.py before main configure task
 
-https://patchwork.openembedded.org/patch/153125/
+secondly, all action happens inside cli subdir so mark it
+default S
 
-If not then there is no need to resend, if yes then please describe
-the change and mark
-patch as v2, v3 and so on. Save some time for reviewers
-On Fri, Aug 3, 2018 at 3:02 AM <Qi.Chen@windriver.com> wrote:
->
-> From: Chen Qi <Qi.Chen@windriver.com>
->
-> The logrotate.rsyslog file uses 'cat /var/run/rsyslogd.pid' to
-> determine the pid of rsyslogd daemon. This is incorrect, because
-> rsyslogd may start in a way that does not create rsyslog.pid file.
->
-> Failing to send HUP signal to rsyslogd daemon will result in
-> unexpected behaviour. e.g. rsyslogd is writing to /var/log/messages-xxxx
-> instead of /var/log/messages.
->
-> We should really use pkill to send HUP signal to rsyslogd to ensure
-> correct behaviour.
->
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> ---
->  meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate | 4 ++--
->  meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb         | 1 +
->  2 files changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-> index 94ec517..5f8568f 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-> @@ -9,7 +9,7 @@
->          delaycompress
->          compress
->          postrotate
-> -               /bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
-> +               @BINDIR@/pkill -HUP rsyslogd 2> /dev/null || true
->          endscript
->  }
->
-> @@ -34,6 +34,6 @@
->          delaycompress
->          sharedscripts
->          postrotate
-> -               /bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
-> +               @BINDIR@/pkill -HUP rsyslogd 2> /dev/null || true
->          endscript
->  }
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
-> index 9737892..d90695a 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
-> @@ -125,6 +125,7 @@ do_install_append() {
->      install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
->      install -m 644 ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
->      install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
-> +    sed -i -e "s#@BINDIR@#${bindir}#g" ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
->  }
->
->  FILES_${PN} += "${bindir}"
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-extended/openlmi/openlmi-tools_0.10.5.bb   | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+index 05dc854fca..419b3ee6e8 100644
+--- a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
++++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+@@ -2,7 +2,7 @@ SUMMARY = "Set of CLI tools for Openlmi providers"
+ DESCRIPTION = "openlmi-tools is a set of command line tools for Openlmi providers."
+ HOMEPAGE = "http://www.openlmi.org/"
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
++LIC_FILES_CHKSUM = "file://../COPYING;md5=75859989545e37968a99b631ef42722e"
+ SECTION = "System/Management"
+ 
+ inherit setuptools
+@@ -14,13 +14,11 @@ SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
+ SRC_URI[md5sum] = "e156246cb7b49753db82f4ddf7f03e50"
+ SRC_URI[sha256sum] = "292b8f5f2250655a4add8183c529b73358bc980bd4f23cfa484a940953fce9e4"
+ 
+-do_compile_prepend() {
+-    cd cli
++S = "${WORKDIR}/${BP}/cli"
++
++do_configure_prepend() {
+     sed 's/@@VERSION@@/$(VERSION)/g' setup.py.skel >setup.py
+ }
+-do_install_prepend() {
+-    cd cli
+-}
+ 
+ python() {
+     if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
+-- 
+2.18.0
+
 
