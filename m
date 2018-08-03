@@ -1,23 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DE12E78ABE
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5277778D62
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 09:23:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w739Nego012286
+	Fri,  3 Aug 2018 09:23:42 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w739NgeH025486
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 3 Aug 2018 02:23:41 -0700 (PDT)
+	Fri, 3 Aug 2018 02:23:43 -0700
 Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.399.0; Fri, 3 Aug 2018 02:23:40 -0700
+	14.3.399.0; Fri, 3 Aug 2018 02:23:41 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 3 Aug 2018 17:34:01 +0800
-Message-ID: <1533288843-73014-1-git-send-email-liezhi.yang@windriver.com>
+Date: Fri, 3 Aug 2018 17:34:02 +0800
+Message-ID: <1533288843-73014-2-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1533288843-73014-1-git-send-email-liezhi.yang@windriver.com>
+References: <1533288843-73014-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 0/2] python3-pbr: remove it to use the on in oe-core
+Subject: [meta-python][PATCH 1/2] python3-pbr: remove it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,29 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 09:23:41 -0000
+X-List-Received-Date: Fri, 03 Aug 2018 09:23:42 -0000
 Content-Type: text/plain
 
-Please note the second patch which removes python-pbr.inc since it is duplicated
-to the one in oe-core. There are also other recipes have the similar issues,
-for example, python-six, there is a python-six.inc in both oe-core and meta-python,
-but their contents are the same, while oe-core's is for python3, and
-meta-python's is for python2, I think that we can remove the one in meta-python
-as I did for python-pbr. I will send patches to cleanup them if no objections.
+There is one in oe-core, so remove it.
 
-// Robert
-
-Robert Yang (2):
-  python3-pbr: remove it
-  python-pbr.inc: remove it
-
- meta-python/recipes-devtools/python/python-pbr.inc       | 14 --------------
- meta-python/recipes-devtools/python/python-pbr_4.2.0.bb  |  3 ++-
- meta-python/recipes-devtools/python/python3-pbr_4.2.0.bb |  2 --
- 3 files changed, 2 insertions(+), 17 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pbr.inc
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ meta-python/recipes-devtools/python/python3-pbr_4.2.0.bb | 2 --
+ 1 file changed, 2 deletions(-)
  delete mode 100644 meta-python/recipes-devtools/python/python3-pbr_4.2.0.bb
 
+diff --git a/meta-python/recipes-devtools/python/python3-pbr_4.2.0.bb b/meta-python/recipes-devtools/python/python3-pbr_4.2.0.bb
+deleted file mode 100644
+index 97e7361..0000000
+--- a/meta-python/recipes-devtools/python/python3-pbr_4.2.0.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit setuptools3
+-require python-pbr.inc
 -- 
 2.7.4
 
