@@ -1,21 +1,24 @@
-Return-Path: <robert.joslyn@redrectangle.org>
-Received: from relay10.mail.gandi.net (relay10.mail.gandi.net [217.70.178.230])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E08778E2B
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id ACB73600EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 03:27:46 +0000 (UTC)
-Received: from xps13.localdomain (50-37-87-235.mscw.id.frontiernet.net
-	[50.37.87.235])
-	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay10.mail.gandi.net (Postfix) with ESMTPSA id 248A8240004;
-	Fri,  3 Aug 2018 03:27:45 +0000 (UTC)
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Aug 2018 20:27:04 -0700
-Message-Id: <20180803032704.3521-6-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.16.4
-In-Reply-To: <20180803032704.3521-1-robert.joslyn@redrectangle.org>
-References: <20180803032704.3521-1-robert.joslyn@redrectangle.org>
-Subject: [meta-python][PATCH v3 5/5] python-behave: Add Python 3 recipe
+	Fri,  3 Aug 2018 06:30:11 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w736UATY020549
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 2 Aug 2018 23:30:11 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Thu, 2 Aug 2018 23:30:09 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Fri, 3 Aug 2018 14:40:32 +0800
+Message-ID: <1533278432-19581-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] mozjs: tweak location of tmp dir creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,69 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 03:27:46 -0000
+X-List-Received-Date: Fri, 03 Aug 2018 06:30:11 -0000
+Content-Type: text/plain
 
-Fix broken dependencies of Python 2 recipe as well.
+The tmp dir creation is out of build dir which has
+the risk to be broken by others.
+...
+|   File "build/tmp-glibc/work/i586-wrs-linux/mozjs/52.8.1-r0/
+mozjs-52.8.1/build/moz.configure/util.configure", line 190,
+in try_invoke_compiler
+|     os.remove(path)
+| OSError: [Errno 2] No such file or directory: '/tmp/conftest.OiV37V.cpp'
+...
+
+Set var-TMP for tempfile.mktemp to use current build dir to
+replace default `/tmp'.
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-behave.inc    | 15 +++++++++++++++
- .../recipes-devtools/python/python-behave_1.2.6.bb       | 16 +++++++---------
- .../recipes-devtools/python/python3-behave_1.2.6.bb      |  2 ++
- 3 files changed, 24 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-behave.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
+ meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-behave.inc b/meta-python/recipes-devtools/python/python-behave.inc
-new file mode 100644
-index 000000000..ded75801d
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-behave.inc
-@@ -0,0 +1,15 @@
-+SUMMARY = "A behavior-driven development framework, Python style"
-+HOMEPAGE = "https://github.com/behave/behave"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
-+
-+SRC_URI[md5sum] = "3f05c859a1c45f5ed33e925817ad887d"
-+SRC_URI[sha256sum] = "b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-parse-type \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-six \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python-behave_1.2.6.bb
-index 679730262..66221682a 100644
---- a/meta-python/recipes-devtools/python/python-behave_1.2.6.bb
-+++ b/meta-python/recipes-devtools/python/python-behave_1.2.6.bb
-@@ -1,10 +1,8 @@
--SUMMARY = "A behavior-driven development framework, Python style"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
-+inherit setuptools
-+require python-behave.inc
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+index da80b63..3d79c39 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+@@ -49,6 +49,7 @@ EXTRA_OEMAKE_task-install += "STATIC_LIBRARY_NAME=js_static"
  
--SRC_URI[md5sum] = "3f05c859a1c45f5ed33e925817ad887d"
--SRC_URI[sha256sum] = "b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"
--
--RDEPENDS_${PN} += "python-difflib python-setuptools python-pkgutil python-misc python-argparse python-xml python-enum34 python-parse python-parse-type python-six"
--
--inherit pypi setuptools
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-argparse \
-+    ${PYTHON_PN}-enum34 \
-+    ${PYTHON_PN}-traceback2 \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-new file mode 100644
-index 000000000..1c55871b1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-behave.inc
+ do_configure() {
+     export SHELL="/bin/sh"
++    export TMP="${B}"
+     ${S}/js/src/configure ${EXTRA_OECONF}
+ }
+ 
 -- 
-2.16.4
+2.7.4
 
 
