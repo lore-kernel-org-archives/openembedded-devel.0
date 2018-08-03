@@ -1,11 +1,13 @@
 Return-Path: <prvs=746ebc3bc=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 27B0171C42
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id B041478E23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 07:03:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,437,1526335200"; d="scan'208";a="11663331"
+	Fri,  3 Aug 2018 07:03:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,437,1526335200"; 
+   d="scan'208";a="1588740"
 To: <openembedded-devel@lists.openembedded.org>
 References: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
+	<20180802144523.28023-2-andreas.obergschwandtner@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -51,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <c57c6e6e-5fdf-1e9d-623d-ccc7b75eb224@skidata.com>
-Date: Fri, 3 Aug 2018 09:04:20 +0200
+Message-ID: <51200210-2c79-43be-e725-a41dba892620@skidata.com>
+Date: Fri, 3 Aug 2018 09:04:23 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
+In-Reply-To: <20180802144523.28023-2-andreas.obergschwandtner@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 1/2] classes:java: move version_specific_cflags to java.bbclass
+Subject: Re: [meta-java][PATCH 2/2] icedtea: disable error format-overflow for gcc 7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,7 +75,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 07:03:53 -0000
+X-List-Received-Date: Fri, 03 Aug 2018 07:03:57 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -92,9 +94,9 @@ regards;Richard.L
 
 On 08/02/2018 04:45 PM, andreas.obergschwandtner@skidata.com wrote:
 > 
-> moved version_specific_cflags from openjfdk-8-common.inc to java.bbclass and
-> renamed it to java_version_specific_cflags because it will be used for a fix
-> in icedtea7
+> no patch has been found in debian and hotspot repo for
+> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824. The warning was
+> added with gcc 7.
 > 
 > Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
 
