@@ -1,30 +1,26 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 304B974603
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B9AA606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 08:33:17 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="43028852"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Aug 2018 16:33:11 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E49884B6ADE9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Aug 2018 16:33:09 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.227) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.399.0; Fri, 3 Aug 2018 16:33:10 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 3 Aug 2018 16:32:33 +0800
-Message-ID: <1533285153-19673-1-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Fri,  3 Aug 2018 08:58:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w738wSdU029021
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 3 Aug 2018 01:58:28 -0700 (PDT)
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Fri, 3 Aug 2018 01:58:27 -0700
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+References: <20180801083239.11360-1-hongzhi.song@windriver.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <7d958eb9-915a-3dc9-e897-aefde141b772@windriver.com>
+Date: Fri, 3 Aug 2018 17:01:27 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.227]
-X-yoursite-MailScanner-ID: E49884B6ADE9.A07FA
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] Fix bug when inherit archiver.
+In-Reply-To: <20180801083239.11360-1-hongzhi.song@windriver.com>
+X-Originating-IP: [128.224.162.198]
+Subject: Re: [meta-oe][PATCH v4 0/1] Add a recipe about kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,28 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Aug 2018 08:33:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 03 Aug 2018 08:58:29 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
----
- meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb | 1 +
- 1 file changed, 1 insertion(+)
+ping
 
-diff --git a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-index b72ffa9..4a7d84a 100644
---- a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-+++ b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-@@ -32,5 +32,6 @@ do_packagedata[noexec] = "1"
- deltask package_write_ipk
- deltask package_write_deb
- deltask package_write_rpm
-+deltask do_deploy_archives 
- 
- BBCLASSEXTEND = "native"
--- 
-1.9.1
+--Hongzhi
 
 
+On 2018年08月01日 16:32, Hongzhi.Song wrote:
+> v4:
+>     add the optimization level of compiler, when define _FORTIFY_SOURCE
+>
+> v3:
+>      add support for musl when build bpf and modify the recipe slightly
+>
+> Hongzhi.Song (1):
+>    kernel-selftest: Add a recipe on kernel selftest
+>
+>   .../kernel-selftest/kernel-selftest.bb             | 104 ++++++
+>   ...bpf-test_progs.c-add-support-for-musllibc.patch |  25 ++
+>   ...-swap.h-micro-define-to-support-musl-libc.patch |  26 ++
+>   .../kernel-selftest/kernel-selftest/COPYING        | 356 +++++++++++++++++++++
+>   .../kernel-selftest/userfaultfd.patch              | 322 +++++++++++++++++++
+>   5 files changed, 833 insertions(+)
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
+>
 
 
