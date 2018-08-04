@@ -1,54 +1,49 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B3C7778D34
+Return-Path: <williamdelacre@gmail.com>
+Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id A68C878BEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Aug 2018 10:50:08 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id d10-v6so11620898itj.5
+	Sat,  4 Aug 2018 12:13:02 +0000 (UTC)
+Received: by mail-ua0-f177.google.com with SMTP id m13-v6so7312790uaq.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Aug 2018 03:50:10 -0700 (PDT)
+	Sat, 04 Aug 2018 05:13:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=q+kS4faEcphOdJDBkiAHcgt25u3xaZ6FcXv5sxKnQqY=;
+	b=ZN4s8HJCg/9TEWJWDdMs2bX0lbhRDxUvbP9wdsHKrHMYsnscQkBlAW6unKTf/udmrZ
+	XznpKmHq30PrUoMSirerPUDibujM3z0fSKMH+uy1k8KRgVDFl47vDMbJOKbCn05cQPxx
+	hEbjLlWBxeQGP6Rx2D7p+WW5NnlM+t44GVEmnaCmh6Fj45qb6eO1z98t0fwEnSMyHfK1
+	FOashOoCpTVY92txMWZH2gZvA+t87WSk2/NTL0VyKXD/fhvafyc8uINV0Fc63+E5uMay
+	XEDTqpg5uFmwGKiG71Psl7iSpky2sXS/I6aXid+yNm5bzGCy+8Kn70FPrruEScCyg2xt
+	Gnow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=prk9UDh9nwsvZrs1VPXUrQeUIoKwHYashOOO9hXGR88=;
-	b=MiIdsWwnuOYIQCcv+1mL7ZttfWovlzqg85uGfZ802O4AxfW8i7/7vGBtP7YoI3Cxau
-	Q3qaVR69ij0mnTDh4SW/osdeR7XfWp5MvW+XdejgWH3JYg8JWHkQ2TWNyjoR2SLFSeiP
-	I5+kolX+YsFxZp2xvviYAbSiNOkqhLRxDzuOO7jUn6r+ZmRwC18ZoAWgHwt4LtXAZuSt
-	o5PcdYQVvywpFx3Lwo4uP0Wew0yZjkSGR47RF8cekP4D8ZmHg3PeSzRHMlaOwK0ojeIz
-	hR0Iwdnla84FE7qQIkMUBrmx1VdC3RZ82V+o/8cmVG8GJQgDWQ9yTy9PszP8fWCSKhYe
-	og0w==
-X-Gm-Message-State: AOUpUlEr8hGX/LcVfs/niqk30L1PtGqwut4cnMaVTE8r28oc5RJfkRfN
-	2cEOPTgAE3plVRY6W38DgNV/+m6fBLA=
-X-Google-Smtp-Source: AAOMgpeT5kisJXUnmYMIGIMxYSLJEsYhBa9JTFW5Q2+yjwWWQ0VEqvcXI4gfI+jjNGs/uBXX9TKj5Q==
-X-Received: by 2002:a24:a13:: with SMTP id 19-v6mr9923150itw.41.1533379809661; 
-	Sat, 04 Aug 2018 03:50:09 -0700 (PDT)
-Received: from mail-it0-f41.google.com (mail-it0-f41.google.com.
-	[209.85.214.41]) by smtp.gmail.com with ESMTPSA id
-	i20-v6sm2158088ioj.57.2018.08.04.03.50.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 04 Aug 2018 03:50:09 -0700 (PDT)
-Received: by mail-it0-f41.google.com with SMTP id p81-v6so11998043itp.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Aug 2018 03:50:09 -0700 (PDT)
-X-Received: by 2002:a02:2505:: with SMTP id
-	g5-v6mr6528223jag.112.1533379809300; 
-	Sat, 04 Aug 2018 03:50:09 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=q+kS4faEcphOdJDBkiAHcgt25u3xaZ6FcXv5sxKnQqY=;
+	b=V1X2Qhg+utVQiHlSj2bGlTdtcXXy8HeYRG7oAqWNyI2qs2t77t9NgkvI1lFpK444Ko
+	3gEEPgALZa6ANiJHM6GgeOpdxQhnwezULRRMpLtyudK0mt1CFXPiz27D3r252APuAzNf
+	Wy3WSeJ2yhp/FH0QYInKzQY3MXTCXqlSHNXq3kslIl3kJcj8R4lXsUzux6fKMJmML3tG
+	ktwj3M7gHk047fq/qJi99aEj97Nr0aeCmVg4sr7UFpHqzw9vxi84RRQ0vxK0n5s0GFLH
+	fx2U6qYTU6RtvLjuYJ+mGyLFFFpN2zJBQqukUgFRDThjZ9lIL7MpjT7MqY/mjFVPClwQ
+	V3PQ==
+X-Gm-Message-State: AOUpUlG2n1J+Pj+salJng0b4MgH1lZzJuA1Gsk7Z6BcQr4aQqANBKzBi
+	1UWr5qJc/danziDQXSY37GQuk9NZPekrkg6JUSI=
+X-Google-Smtp-Source: AAOMgpfgT8kPk8vh1jra6bjb+vTKA5PPRv0OovkpVk+OlpQlWV6cGjDPqdXE0fB7BCIHnN34WVrAj4Hk1rphEvOKKCc=
+X-Received: by 2002:a1f:3b43:: with SMTP id
+	i64-v6mr4695810vka.152.1533384783529; 
+	Sat, 04 Aug 2018 05:13:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180727131616.13881-1-git@andred.net>
-	<390065ca-13d0-7dcd-8528-575b25187e2e@skidata.com>
-	<872b2392cfb7793f514cf8b806262e8d37bb9fd4.camel@andred.net>
-	<2e3d0628-932b-0466-2832-82741e7cd699@skidata.com>
-	<e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
-In-Reply-To: <e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
-From: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-Date: Sat, 4 Aug 2018 11:50:03 +0100
-X-Gmail-Original-Message-ID: <CAKUP++vtmLkigt6jwvxEpA=5P8_VOJK8UdWfegzH3DbG=QLGiw@mail.gmail.com>
-Message-ID: <CAKUP++vtmLkigt6jwvxEpA=5P8_VOJK8UdWfegzH3DbG=QLGiw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+References: <CAOnRZEJX6vtCikSJK4py2y3r3J-N3fT_tA5FLFYFyPF6vrczjw@mail.gmail.com>
+	<1533334371.30932.14.camel@gmail.com>
+In-Reply-To: <1533334371.30932.14.camel@gmail.com>
+From: William Delacre <williamdelacre@gmail.com>
+Date: Sat, 4 Aug 2018 14:12:52 +0200
+Message-ID: <CAOnRZELTAgoQ4yMaB8L4vmo8JV6Lx-HWfGCAORk=Rm3Djn0aaw@mail.gmail.com>
+To: Max Krummenacher <max.oss.09@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java][master-next][PATCH 1/2] openjdk-8: update to 8u172b11
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Actually installed packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,89 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Aug 2018 10:50:08 -0000
+X-List-Received-Date: Sat, 04 Aug 2018 12:13:02 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, 4 Aug 2018, 11:41 Andr=C3=A9 Draszik, <git@andred.net> wrote:
+Le sam. 4 ao=C3=BBt 2018 =C3=A0 00:12, Max Krummenacher <max.oss.09@gmail.c=
+om> a
+=C3=A9crit :
 
-> On Tue, 2018-07-31 at 13:33 +0200, Richard Leitner wrote:
-> > On 07/31/2018 01:19 PM, Andr=C3=A9 Draszik wrote:
-> > > On Tue, 2018-07-31 at 11:00 +0200, Richard Leitner wrote:
-> > > > Hi Andr=C3=A9,
-> > > > thank you for your patches.
-> > > >
-> > > > Unfortunately I have checksum issues for aarch64's jdk, corba, jaxp=
-,
-> > > > jaxws, langtools & nashorn:
-> > >
-> > > Hm, is that another instance of
-> > >
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-May/1183
-> > > 58.html
-> > > ?
-> > >
-> > > I'll check...
+> Hi
+>
+> > What=E2=80=99s the difference between the build/buildhistory/packages c=
+ontent
+> (all
+> > the packages found here) and the installed-packages.txt file in
+> > /buildhistory/images/...... ?
 > >
-> > Thanks!
+> > I can see packages in first one which are not included in
+> > installed-packages.txt
 >
-> I'll get back to that next week, see below.
+> A recipe can provide several packages, usually one with the same
+> name as the recipe name, then the -dev, -dbg, -doc ... packages,
+> but a lot of recipes provide additional packages.
 >
-> [...]
+> An image recipe defines what packages need to be installed in an
+> image.
 >
-> > > > For qemuarm java runs (correctly) in interpreted mode.
-> > The errors occur only on qemuarm64.
-> > I've attached the testimage logs. Hope that helps.
-> >
-> > If you need anything else from me please just drop me a line!
+> Even if your image requires only a part of the packages that a
+> recipe provides, all packages will be built and will be visible
+> in build/buildhistory/packages leading to what you describe above.
 >
-> I am generally using real hardware for aarch64, but I've executed the
-> aarch64 qemu openjdk-8-test-image, and it also works for me (again, with
-> the
-> versions I had posted originally).
+> On top of that, if you built an image which contains different
+> packages before or bitbaked single recipes then those would also
+> be seen in the build/buildhistory/packages tree.
 >
-> RESULTS:
-> RESULTS - ping.PingTest.test_ping - Testcase 964: PASSED
-> RESULTS - ssh.SSHTest.test_ssh - Testcase 224: PASSED
-> RESULTS - java.JavaTest.test_java_exists - Testcase -1: PASSED
-> RESULTS - java.JavaTest.test_java_jar_comp_mode - Testcase -1: PASSED
-> RESULTS - java.JavaTest.test_java_jar_int_mode - Testcase -1: PASSED
-> RESULTS - java.JavaTest.test_java_jar_works - Testcase -1: PASSED
-> RESULTS - java.JavaTest.test_java_version - Testcase -1: PASSED
-> RESULTS - javac.JavacTest.test_javac_exists - Testcase -1: PASSED
-> RESULTS - javac.JavacTest.test_javac_works - Testcase -1: PASSED
-> SUMMARY:
-> openjdk-8-test-image () - Ran 9 tests in 56.859s
-> openjdk-8-test-image - OK - All required tests passed
->
->
-> And:
->
-> root@qemuarm64:~# java -version
-> openjdk version "1.8.0_172-internal"
-> OpenJDK Runtime Environment (build 1.8.0_172-internal-b11)
-> OpenJDK 64-Bit Server VM (build 25.172-b11, mixed mode)
->
->
-> That said, I also notice your -version output has 'linux-aarch64 compress=
-ed
-> oops' here:
-> | # Java VM: OpenJDK 64-Bit Server VM (25.172-b11 mixed mode linux-aarch6=
-4
-> compressed oops)
->
-> I wonder why I don't have 'linux-aarch64', and what is 'compressed oops'?
-> Thumb?
->
->
->
-> I'll try a few things:
-> * my poky is not current master, but maybe two months old
-> * re-download and compare the openjdk archives.
->
-
-I'm actually also using musl, not glibc, will look into that, too
+> Max
 
 
-A.
+That=E2=80=99s really clear ! All I needed ! Thanks a lot :-)
+
+>
+>
+>
 
