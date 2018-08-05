@@ -1,57 +1,48 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
-	[209.85.208.49])
-	by mail.openembedded.org (Postfix) with ESMTP id D1BC271957
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
+	[209.85.208.68])
+	by mail.openembedded.org (Postfix) with ESMTP id A15CA78A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Aug 2018 10:56:28 +0000 (UTC)
-Received: by mail-ed1-f49.google.com with SMTP id j21-v6so1299831edp.10
+	Sun,  5 Aug 2018 15:17:02 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id e19-v6so3868666edq.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Aug 2018 03:56:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=JJKQYiWQywKnjJiu5GSmjsBAM3aE0oMAi95poANbXCg=;
-	b=QgOy/O8G3dQjscjG7DAfuN9KgoKl+JZcC0PGzu7C4TwLqVCjp2VfzlOKowE8Mjcz/m
-	UaEg1VmBeVLQ3LbyaZ29dOMzw3JA0tByVbQgTTIdFgtCKlyr/vexMefCFpyKCyRNUD7P
-	Kb6oj5w5kJziQcJEPheHv4WEqd5kYyCZ5XbGcTA/9JQL1kRcgYmFosm5FOxabrezOv7C
-	cZDBc85bj/27wEhBslbN3dbC2OIFHfDDFPOOEUFTM7CTYZ4QheXXhVOBkFWCHsB4gWhF
-	VyrxgGvuOXrVuL2X0LtwdTwGdAuAP4HymDdEESU7vjLJdViZ9Wvt5BVcyJ3TkKp0Mx5E
-	pr0w==
+	Sun, 05 Aug 2018 08:17:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=JJKQYiWQywKnjJiu5GSmjsBAM3aE0oMAi95poANbXCg=;
-	b=jgPUCjBA8SDHbL8MHKn72tL+ejCQ3dyVLFDqEKFJlBfvGvzZuujAOsWXKDfszwy7Cq
-	kvTkjudtg5F3MgOaUSzKoyx+ybXvU+oeSxcu3UztnahIWFj9cbMo+fFr4tzy70me4I4o
-	e91f06c8J4/axP1ImSjLRJkogFy/I9z1rHbriwLygDGiZQeaUide/asRMo3SVlIr2qSI
-	RJWG/VgOBzbLO2NxlJtlonRmM+lx51llNqQv0b2oq9MstUbHWDn+Cx3f6RFDZ/i4eXiM
-	nHfp0034bjddPkLdubUrIRTWcqvOrD/AfyGWfnvsJDLw1HI1725oj+ZNJO3ZoYaOg70K
-	7kIA==
-X-Gm-Message-State: AOUpUlFmV2pd4A8bmqaqGU6gHAF6jneGl6axel/CsZiMmwT7U5rklYVW
-	xn/yWzc35TbGw9QAMFDkQRdZeiQi
-X-Google-Smtp-Source: AAOMgpdxTndcfbWYQZdZts9z8Uni2HXnB1x9KfmB5yyeThPsHmJH09mRv0J8X/3ASe/YIDTxBSQgHg==
-X-Received: by 2002:a50:944f:: with SMTP id
-	q15-v6mr14440921eda.70.1533466589547; 
-	Sun, 05 Aug 2018 03:56:29 -0700 (PDT)
-Received: from Saturn.local.all ([195.48.14.138])
-	by smtp.gmail.com with ESMTPSA id
-	s41-v6sm8040601edd.61.2018.08.05.03.56.28
+	bh=/tbY8uxBdXRujhXqO0/2EvEjSCkS8VUgYQTXDOjuW38=;
+	b=EOfE6f1+KgRa1RpmOWGvtKRTKuCgovTYAf4L2wOtB+RMxSIM6qIo8RI2XgWmgHl4iR
+	b2tq2+/mWOzJP1RNtXs87RRzN8C0seB2BAEFb9AefK29cJ+ZgitBgwlTcn84citVL6se
+	MpC2rOLLTFUwPBBmsKAMAIbaKPYDcRhJH8myJEGXJe1osqFgBwnXcbjFoDw/oVjD4rf0
+	SUZih+lIfB7pI777G4Ad0J1xJX2WOdBjPcJdQp7vQenZSOCLp6ft61tWsJsuOLpFhHyY
+	qPr6xvc0eSVjxKIEGXLYxYsWFLb89oZrG8b7oLhR+3O+SQf03LHtQQER/QplIiQB+jMq
+	xGJA==
+X-Gm-Message-State: AOUpUlHXhTUQlj06PWuMouIWIXPqNK9Gaqa5oITKVr4yZkCUjHZM2p7m
+	ysOQsYz5kjJYyZ1sAvkJ/sOQRysO
+X-Google-Smtp-Source: AAOMgpfLU9DJIpbx3M+GsKjKOql5x8q82uaMJrIohpdH4dpcGyYCGmUj/CXWVRgqprU6cFP7IA9lWA==
+X-Received: by 2002:a50:b684:: with SMTP id
+	d4-v6mr14654083ede.250.1533482223384; 
+	Sun, 05 Aug 2018 08:17:03 -0700 (PDT)
+Received: from tfsielt31850.fritz.box (188-141-55-36.dynamic.upc.ie.
+	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
+	x13-v6sm11375658edx.17.2018.08.05.08.17.02
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 05 Aug 2018 03:56:28 -0700 (PDT)
-Message-ID: <1533466587.3114.25.camel@gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: William Delacre <williamdelacre@gmail.com>
-Date: Sun, 05 Aug 2018 12:56:27 +0200
-In-Reply-To: <CAOnRZE+mRfYDwY7P3Dhs9-RcMZRH8QH9-2MQzKbVaxUBNpdeRA@mail.gmail.com>
-References: <CAOnRZEJX6vtCikSJK4py2y3r3J-N3fT_tA5FLFYFyPF6vrczjw@mail.gmail.com>
-	<1533334371.30932.14.camel@gmail.com>
-	<CAOnRZELTAgoQ4yMaB8L4vmo8JV6Lx-HWfGCAORk=Rm3Djn0aaw@mail.gmail.com>
-	<CAOnRZE+mRfYDwY7P3Dhs9-RcMZRH8QH9-2MQzKbVaxUBNpdeRA@mail.gmail.com>
-X-Mailer: Evolution 3.26.6 
+	Sun, 05 Aug 2018 08:17:02 -0700 (PDT)
+Message-ID: <2331871aa2d04d81366a40787db418acf7dc00b8.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: Richard Leitner <richard.leitner@skidata.com>, 
+	openembedded-devel@lists.openembedded.org
+Date: Sun, 05 Aug 2018 16:17:01 +0100
+In-Reply-To: <e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
+References: <20180727131616.13881-1-git@andred.net>
+	<390065ca-13d0-7dcd-8528-575b25187e2e@skidata.com>
+	<872b2392cfb7793f514cf8b806262e8d37bb9fd4.camel@andred.net>
+	<2e3d0628-932b-0466-2832-82741e7cd699@skidata.com>
+	<e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
+X-Mailer: Evolution 3.28.2-1 
 Mime-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Actually installed packages
+Subject: Re: [meta-java][master-next][PATCH 1/2] openjdk-8: update to 8u172b11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,58 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2018 10:56:29 -0000
+X-List-Received-Date: Sun, 05 Aug 2018 15:17:02 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi
-
-> Sorry, I just have a last question about those packages.
-> In bitbake.conf, you can find this :
+On Sat, 2018-08-04 at 11:41 +0100, André Draszik wrote:
+> On Tue, 2018-07-31 at 13:33 +0200, Richard Leitner wrote:
+> > On 07/31/2018 01:19 PM, André Draszik wrote:
+> > > On Tue, 2018-07-31 at 11:00 +0200, Richard Leitner wrote:
+> > > > Hi André,
+> > > > thank you for your patches.
+> > > > 
+> > > > Unfortunately I have checksum issues for aarch64's jdk, corba, jaxp,
+> > > > jaxws, langtools & nashorn:
+> > > 
+> > > Hm, is that another instance of
+> > > http://lists.openembedded.org/pipermail/openembedded-devel/2018-May/11
+> > > 83
+> > > 58.html
+> > > ?
+> > > 
+> > > I'll check...
+> > 
+> > Thanks!
 > 
-> PACKAGE_BEFORE_PN ?= ""
-> PACKAGES = "${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale
-> ${PACKAGE_BEFORE_PN} ${PN}"
-> 
+> I'll get back to that next week, see below.
 
-This is the default list of packages which together with the
-corresponding FILES_* variables define what packages with what
-content get created.
+Indeed, it's another case like previously. At least now the checksums will
+be stable, though. See diff (similar for all 6 archives):
 
-See also the following links into the documentation:
-https://www.yoctoproject.org/docs/2.5/mega-manual/mega-manual.html#new-recipe-packaging
-https://www.yoctoproject.org/docs/2.5/mega-manual/mega-manual.html#splitting-an-application-into-mul
-tiple-packages
+diff -urN new/corba-3a04a7c080af/.hg_archival.txt orig/corba-3a04a7c080af/.hg_archival.txt
+--- new/corba-3a04a7c080af/.hg_archival.txt 2018-05-09 04:52:12.000000000 +0100
++++ orig/corba-3a04a7c080af/.hg_archival.txt     2018-05-09 04:52:12.000000000 +0100
+@@ -1,4 +1,5 @@
+ repo: 55540e827aef970ecc010b7e06b912d991c8e3ce
+ node: 3a04a7c080af040b0075b2079cc1fa91c8197b8b
+ branch: default
+-tag: aarch64-jdk8u181-b03
++latesttag: aarch64-jdk8u172-b11
++latesttagdistance: 1
 
-> This means that all those packages (whatever the recipe is) will be
-> automatically installed
+etc.
 
-No, that is plain wrong. The packages will get created but if they get
-installed or not is up to the image recipe you are building.
+I'll post updated patches hopefully this week, after I've trackced down
+what's missing to be able to use this against latest poky master and/or
+glibc on aarch64.
 
-Packages get installed because they are listed in IMAGE_INSTALL
-variable of the image recipe or they are RDEPENDS, RRECOMMENDS of
-a package which gets installed.
 
->  if the PACKAGES variable is not redefined in the
-> recipe (so if '=' is used and not '+=' or *append) *So if I don't want
-> those packages for one of my software/library, I have to explicitely
-> specify it in the recipe ?
+Nevertheless, I'll probably also switch to direct mercurial clones, rather
+than mercurial archives to avoid these mismatches in the future. Unless
+there is a strong reason not to.
 
-I guess that is the wrong question, yes if you don't want a specific
-package you would need to not have it in the PACKAGES variable. 
-I think though that I've seen strange things happening when not
-having the defaults (-dbg, -dev, ...) though.
 
-However, 
-
-if your install task installs files which you do not want in any package,
-then you rather should delete those files before packaging them, i.e.:
-do_install_append () { rm -f ${D}/usr/bin/not_to_be_distributed }
-
-if the defaults package files into the wrong package then mess with the
-FILES_* variable.
-
-Max
+A.
 
 
