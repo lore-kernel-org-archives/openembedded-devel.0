@@ -1,22 +1,22 @@
 Return-Path: <kai.kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E4D3755AD
+	by mail.openembedded.org (Postfix) with ESMTP id 2FF6674CE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2018 10:39:15 +0000 (UTC)
+	Mon,  6 Aug 2018 10:39:16 +0000 (UTC)
 Received: from ala-blade48.wrs.com (ala-blade48.wrs.com [147.11.105.68])
-	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdFNU028712
+	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdGtY028715
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Aug 2018 03:39:15 -0700 (PDT)
+	Mon, 6 Aug 2018 03:39:16 -0700 (PDT)
 Received: by ala-blade48.wrs.com (sSMTP sendmail emulation);
-	Mon, 06 Aug 2018 03:39:15 -0700
+	Mon, 06 Aug 2018 03:39:16 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Aug 2018 03:39:06 -0700
-Message-Id: <20180806103907.37227-5-kai.kang@windriver.com>
+Date: Mon,  6 Aug 2018 03:39:07 -0700
+Message-Id: <20180806103907.37227-6-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180806103907.37227-1-kai.kang@windriver.com>
 References: <20180806103907.37227-1-kai.kang@windriver.com>
-Subject: [meta-perl][PATCH 4/5] libio-socket-ssl-perl: 2.054 -> 2.508
+Subject: [meta-perl][PATCH 5/5] logcheck: 1.3.18 -> 1.3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,31 +29,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2018 10:39:15 -0000
+X-List-Received-Date: Mon, 06 Aug 2018 10:39:16 -0000
+
+Upgrade logcheck from 1.3.18 to 1.3.19.
+
+* update SRC_URI to replace git repo with tarball that saves some space
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...{libio-socket-ssl-perl_2.054.bb => libio-socket-ssl-perl_2.058.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.054.bb => libio-socket-ssl-perl_2.058.bb} (91%)
+ .../logcheck/{logcheck_1.3.18.bb => logcheck_1.3.19.bb}            | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-perl/recipes-extended/logcheck/{logcheck_1.3.18.bb => logcheck_1.3.19.bb} (92%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.058.bb
-similarity index 91%
-rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
-rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.058.bb
-index ea78bc4e0..0fd5ea9d1 100644
---- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
-+++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.058.bb
-@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "\
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[md5sum] = "e1b412e28d107c716e7ca637e2b7f8bd"
--SRC_URI[sha256sum] = "02ea04e9a336a7d3ca9aa604c0c5b5aaf3efa513cefecfc73cc79ceeb5131e4b"
-+SRC_URI[md5sum] = "5eb4091dc1e83d769cadbc925c721511"
-+SRC_URI[sha256sum] = "746cd17c292cfc206b394497a060b0582d0b06a1040e6bb27e6530d56786e40b"
+diff --git a/meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb b/meta-perl/recipes-extended/logcheck/logcheck_1.3.19.bb
+similarity index 92%
+rename from meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb
+rename to meta-perl/recipes-extended/logcheck/logcheck_1.3.19.bb
+index 6182c17f9..873ac2b10 100644
+--- a/meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb
++++ b/meta-perl/recipes-extended/logcheck/logcheck_1.3.19.bb
+@@ -11,12 +11,11 @@ HOMEPAGE = "http://logcheck.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
  
- S = "${WORKDIR}/IO-Socket-SSL-${PV}"
+-SRC_URI = "git://salsa.debian.org/debian/logcheck.git;protocol=https \
++SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
+            file://99_logcheck \
+ "
+-SRCREV = "0a5865d80fa34c55387a1917a3e6f885bcff7f1d"
+-
+-S = "${WORKDIR}/git"
++SRC_URI[md5sum] = "7b50d10da6f185228627c55fdd51f624"
++SRC_URI[sha256sum] = "06294c092b2115eca3d054c57778718c91dd2e0fd1c46650b7343c2a92672ca9"
+ 
+ inherit useradd
  
 -- 
 2.11.0
