@@ -1,22 +1,22 @@
 Return-Path: <kai.kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E6FBF74C8A
+	by mail.openembedded.org (Postfix) with ESMTP id 6E4D3755AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2018 10:39:13 +0000 (UTC)
+	Mon,  6 Aug 2018 10:39:15 +0000 (UTC)
 Received: from ala-blade48.wrs.com (ala-blade48.wrs.com [147.11.105.68])
-	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdE8H028709
+	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdFNU028712
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Aug 2018 03:39:14 -0700 (PDT)
+	Mon, 6 Aug 2018 03:39:15 -0700 (PDT)
 Received: by ala-blade48.wrs.com (sSMTP sendmail emulation);
-	Mon, 06 Aug 2018 03:39:14 -0700
+	Mon, 06 Aug 2018 03:39:15 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Aug 2018 03:39:05 -0700
-Message-Id: <20180806103907.37227-4-kai.kang@windriver.com>
+Date: Mon,  6 Aug 2018 03:39:06 -0700
+Message-Id: <20180806103907.37227-5-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180806103907.37227-1-kai.kang@windriver.com>
 References: <20180806103907.37227-1-kai.kang@windriver.com>
-Subject: [meta-perl][PATCH 3/5] libnet-ssleay-perl: 1.84 -> 1.85
+Subject: [meta-perl][PATCH 4/5] libio-socket-ssl-perl: 2.054 -> 2.508
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,31 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2018 10:39:14 -0000
+X-List-Received-Date: Mon, 06 Aug 2018 10:39:15 -0000
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../libnet/{libnet-ssleay-perl_1.84.bb => libnet-ssleay-perl_1.85.bb} | 4 ++--
+ ...{libio-socket-ssl-perl_2.054.bb => libio-socket-ssl-perl_2.058.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libnet/{libnet-ssleay-perl_1.84.bb => libnet-ssleay-perl_1.85.bb} (90%)
+ rename meta-perl/recipes-perl/libio/{libio-socket-ssl-perl_2.054.bb => libio-socket-ssl-perl_2.058.bb} (91%)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
-rename to meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-index cfecef9cf..a0bb90e7d 100644
---- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
-@@ -25,8 +25,8 @@ RDEPENDS_${PN} += "\
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.058.bb
+similarity index 91%
+rename from meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
+rename to meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.058.bb
+index ea78bc4e0..0fd5ea9d1 100644
+--- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.054.bb
++++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.058.bb
+@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "\
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
             file://run-ptest \
            "
--SRC_URI[md5sum] = "cfbe968487149626978f427cc9fb8c77"
--SRC_URI[sha256sum] = "823ec3cbb428309d6a9e56f362a9300693ce3215b7fede109adb7be361fff177"
-+SRC_URI[md5sum] = "d602bdce4e0531c6efc276e3e429ca69"
-+SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
+-SRC_URI[md5sum] = "e1b412e28d107c716e7ca637e2b7f8bd"
+-SRC_URI[sha256sum] = "02ea04e9a336a7d3ca9aa604c0c5b5aaf3efa513cefecfc73cc79ceeb5131e4b"
++SRC_URI[md5sum] = "5eb4091dc1e83d769cadbc925c721511"
++SRC_URI[sha256sum] = "746cd17c292cfc206b394497a060b0582d0b06a1040e6bb27e6530d56786e40b"
  
- S = "${WORKDIR}/Net-SSLeay-${PV}"
+ S = "${WORKDIR}/IO-Socket-SSL-${PV}"
  
 -- 
 2.11.0
