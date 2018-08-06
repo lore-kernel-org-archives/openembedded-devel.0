@@ -1,22 +1,22 @@
 Return-Path: <kai.kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C1D36755AD
+	by mail.openembedded.org (Postfix) with ESMTP id DF385753E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2018 08:54:23 +0000 (UTC)
+	Mon,  6 Aug 2018 08:54:24 +0000 (UTC)
 Received: from ala-blade48.wrs.com (ala-blade48.wrs.com [147.11.105.68])
-	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w768sOOM011194
+	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w768sPCE011197
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Aug 2018 01:54:24 -0700 (PDT)
+	Mon, 6 Aug 2018 01:54:25 -0700 (PDT)
 Received: by ala-blade48.wrs.com (sSMTP sendmail emulation);
-	Mon, 06 Aug 2018 01:54:24 -0700
+	Mon, 06 Aug 2018 01:54:25 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Aug 2018 01:54:04 -0700
-Message-Id: <20180806085408.44739-7-kai.kang@windriver.com>
+Date: Mon,  6 Aug 2018 01:54:05 -0700
+Message-Id: <20180806085408.44739-8-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180806085408.44739-1-kai.kang@windriver.com>
 References: <20180806085408.44739-1-kai.kang@windriver.com>
-Subject: [meta-xfce][PATCH 06/10] xfce4-genmon-plugin: 4.0.0 -> 4.0.1
+Subject: [meta-xfce][PATCH 07/10] exo: 0.12.1 -> 0.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,29 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2018 08:54:24 -0000
+X-List-Received-Date: Mon, 06 Aug 2018 08:54:25 -0000
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../{xfce4-genmon-plugin_4.0.0.bb => xfce4-genmon-plugin_4.0.1.bb}    | 4 ++--
+ meta-xfce/recipes-xfce/exo/{exo_0.12.1.bb => exo_0.12.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/genmon/{xfce4-genmon-plugin_4.0.0.bb => xfce4-genmon-plugin_4.0.1.bb} (71%)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.12.1.bb => exo_0.12.2.bb} (87%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.0.bb b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.1.bb
-similarity index 71%
-rename from meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.0.bb
-rename to meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.1.bb
-index 0624fe96d..002e93da4 100644
---- a/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/genmon/xfce4-genmon-plugin_4.0.1.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=68ad62c64cc6c620126241fd429e68fe"
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.12.1.bb b/meta-xfce/recipes-xfce/exo/exo_0.12.2.bb
+similarity index 87%
+rename from meta-xfce/recipes-xfce/exo/exo_0.12.1.bb
+rename to meta-xfce/recipes-xfce/exo/exo_0.12.2.bb
+index 1210e256d..ea25cca3c 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.12.1.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.12.2.bb
+@@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
+     file://reduce-build-to-exo-csource-only.patch \
+ "
  
- inherit xfce-panel-plugin
+-SRC_URI[md5sum] = "a7bb4e61c54f5168ee21902b0ed70533"
+-SRC_URI[sha256sum] = "6b7e00d8cb24e0b3472c2514736d3aaf7c46d2a4eea0e07755d64f20d8666741"
++SRC_URI[md5sum] = "15b66320dd89e04fbd07a47f1c4b1cb1"
++SRC_URI[sha256sum] = "6d4b0a88c1e1d3d5ed612cbf012c7511ef67b1636f4f85caa9dc68649b7e6350"
  
--SRC_URI[md5sum] = "f28cfbf9c82e758a236c1f5fcbcb8a35"
--SRC_URI[sha256sum] = "a7db4f786166643076323dcde99ad12e92383cc29b4b806862d5483ec468c3e3"
-+SRC_URI[md5sum] = "9dd0681c179302d56d92bbda5765bd09"
-+SRC_URI[sha256sum] = "4c6ce37fbe71094548b44862587c2813da991aeaaecff8e572724dbbec83ab86"
+ PACKAGES =+ "exo-csource"
+ 
 -- 
 2.11.0
 
