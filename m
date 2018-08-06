@@ -1,48 +1,27 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
-	[209.85.208.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A15CA78A8B
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CA1C078558
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Aug 2018 15:17:02 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id e19-v6so3868666edq.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Aug 2018 08:17:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=/tbY8uxBdXRujhXqO0/2EvEjSCkS8VUgYQTXDOjuW38=;
-	b=EOfE6f1+KgRa1RpmOWGvtKRTKuCgovTYAf4L2wOtB+RMxSIM6qIo8RI2XgWmgHl4iR
-	b2tq2+/mWOzJP1RNtXs87RRzN8C0seB2BAEFb9AefK29cJ+ZgitBgwlTcn84citVL6se
-	MpC2rOLLTFUwPBBmsKAMAIbaKPYDcRhJH8myJEGXJe1osqFgBwnXcbjFoDw/oVjD4rf0
-	SUZih+lIfB7pI777G4Ad0J1xJX2WOdBjPcJdQp7vQenZSOCLp6ft61tWsJsuOLpFhHyY
-	qPr6xvc0eSVjxKIEGXLYxYsWFLb89oZrG8b7oLhR+3O+SQf03LHtQQER/QplIiQB+jMq
-	xGJA==
-X-Gm-Message-State: AOUpUlHXhTUQlj06PWuMouIWIXPqNK9Gaqa5oITKVr4yZkCUjHZM2p7m
-	ysOQsYz5kjJYyZ1sAvkJ/sOQRysO
-X-Google-Smtp-Source: AAOMgpfLU9DJIpbx3M+GsKjKOql5x8q82uaMJrIohpdH4dpcGyYCGmUj/CXWVRgqprU6cFP7IA9lWA==
-X-Received: by 2002:a50:b684:: with SMTP id
-	d4-v6mr14654083ede.250.1533482223384; 
-	Sun, 05 Aug 2018 08:17:03 -0700 (PDT)
-Received: from tfsielt31850.fritz.box (188-141-55-36.dynamic.upc.ie.
-	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
-	x13-v6sm11375658edx.17.2018.08.05.08.17.02
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 05 Aug 2018 08:17:02 -0700 (PDT)
-Message-ID: <2331871aa2d04d81366a40787db418acf7dc00b8.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: Richard Leitner <richard.leitner@skidata.com>, 
-	openembedded-devel@lists.openembedded.org
-Date: Sun, 05 Aug 2018 16:17:01 +0100
-In-Reply-To: <e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
-References: <20180727131616.13881-1-git@andred.net>
-	<390065ca-13d0-7dcd-8528-575b25187e2e@skidata.com>
-	<872b2392cfb7793f514cf8b806262e8d37bb9fd4.camel@andred.net>
-	<2e3d0628-932b-0466-2832-82741e7cd699@skidata.com>
-	<e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
-X-Mailer: Evolution 3.28.2-1 
-Mime-Version: 1.0
-Subject: Re: [meta-java][master-next][PATCH 1/2] openjdk-8: update to 8u172b11
+	Mon,  6 Aug 2018 01:29:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w761TdUt007253
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 5 Aug 2018 18:29:39 -0700
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Sun, 5 Aug 2018 18:29:38 -0700
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+References: <20180801083239.11360-1-hongzhi.song@windriver.com>
+From: "Hongzhi, Song" <hongzhi.song@windriver.com>
+Message-ID: <69958f41-e2d9-8189-aca9-3c8128a4bee1@windriver.com>
+Date: Mon, 6 Aug 2018 09:32:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <20180801083239.11360-1-hongzhi.song@windriver.com>
+X-Originating-IP: [128.224.162.198]
+Subject: Re: [meta-oe][PATCH v4 0/1] Add a recipe about kernel selftest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,58 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Aug 2018 15:17:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 06 Aug 2018 01:29:40 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-On Sat, 2018-08-04 at 11:41 +0100, André Draszik wrote:
-> On Tue, 2018-07-31 at 13:33 +0200, Richard Leitner wrote:
-> > On 07/31/2018 01:19 PM, André Draszik wrote:
-> > > On Tue, 2018-07-31 at 11:00 +0200, Richard Leitner wrote:
-> > > > Hi André,
-> > > > thank you for your patches.
-> > > > 
-> > > > Unfortunately I have checksum issues for aarch64's jdk, corba, jaxp,
-> > > > jaxws, langtools & nashorn:
-> > > 
-> > > Hm, is that another instance of
-> > > http://lists.openembedded.org/pipermail/openembedded-devel/2018-May/11
-> > > 83
-> > > 58.html
-> > > ?
-> > > 
-> > > I'll check...
-> > 
-> > Thanks!
-> 
-> I'll get back to that next week, see below.
+ping
 
-Indeed, it's another case like previously. At least now the checksums will
-be stable, though. See diff (similar for all 6 archives):
-
-diff -urN new/corba-3a04a7c080af/.hg_archival.txt orig/corba-3a04a7c080af/.hg_archival.txt
---- new/corba-3a04a7c080af/.hg_archival.txt 2018-05-09 04:52:12.000000000 +0100
-+++ orig/corba-3a04a7c080af/.hg_archival.txt     2018-05-09 04:52:12.000000000 +0100
-@@ -1,4 +1,5 @@
- repo: 55540e827aef970ecc010b7e06b912d991c8e3ce
- node: 3a04a7c080af040b0075b2079cc1fa91c8197b8b
- branch: default
--tag: aarch64-jdk8u181-b03
-+latesttag: aarch64-jdk8u172-b11
-+latesttagdistance: 1
-
-etc.
-
-I'll post updated patches hopefully this week, after I've trackced down
-what's missing to be able to use this against latest poky master and/or
-glibc on aarch64.
+--Hongzhi
 
 
-Nevertheless, I'll probably also switch to direct mercurial clones, rather
-than mercurial archives to avoid these mismatches in the future. Unless
-there is a strong reason not to.
-
-
-A.
+On 2018年08月01日 16:32, Hongzhi.Song wrote:
+> v4:
+>     add the optimization level of compiler, when define _FORTIFY_SOURCE
+>
+> v3:
+>      add support for musl when build bpf and modify the recipe slightly
+>
+> Hongzhi.Song (1):
+>    kernel-selftest: Add a recipe on kernel selftest
+>
+>   .../kernel-selftest/kernel-selftest.bb             | 104 ++++++
+>   ...bpf-test_progs.c-add-support-for-musllibc.patch |  25 ++
+>   ...-swap.h-micro-define-to-support-musl-libc.patch |  26 ++
+>   .../kernel-selftest/kernel-selftest/COPYING        | 356 +++++++++++++++++++++
+>   .../kernel-selftest/userfaultfd.patch              | 322 +++++++++++++++++++
+>   5 files changed, 833 insertions(+)
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
+>   create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
+>
 
 
