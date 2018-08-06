@@ -1,17 +1,12 @@
 Return-Path: <prvs=749eeb56f=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A9EE7199E
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id AEA2374D03
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2018 10:37:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.51,452,1526335200"; 
-   d="scan'208";a="1592234"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180727131616.13881-1-git@andred.net>
-	<390065ca-13d0-7dcd-8528-575b25187e2e@skidata.com>
-	<872b2392cfb7793f514cf8b806262e8d37bb9fd4.camel@andred.net>
-	<2e3d0628-932b-0466-2832-82741e7cd699@skidata.com>
-	<e3cd5b4ebde785d03e79564e0243006287f12a47.camel@andred.net>
-	<2331871aa2d04d81366a40787db418acf7dc00b8.camel@andred.net>
+	Mon,  6 Aug 2018 10:37:43 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.51,452,1526335200"; d="scan'208";a="11695346"
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <9d34c4df011bea3937bc720c637237d5438422d9.camel@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -57,16 +52,17 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <e13cd433-bbbe-3689-f6cf-e7ac780091b8@skidata.com>
-Date: Mon, 6 Aug 2018 12:37:44 +0200
+Message-ID: <849c85df-f6c9-2e8a-76f8-bcdaa4cdae75@skidata.com>
+Date: Mon, 6 Aug 2018 12:38:13 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <2331871aa2d04d81366a40787db418acf7dc00b8.camel@andred.net>
+In-Reply-To: <9d34c4df011bea3937bc720c637237d5438422d9.camel@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][master-next][PATCH 1/2] openjdk-8: update to 8u172b11
+Cc: Jens Rehsack <sno@netbsd.org>
+Subject: Re: [meta-java] openjdk vs openjre recipe history
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,73 +75,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2018 10:37:15 -0000
+X-List-Received-Date: Mon, 06 Aug 2018 10:37:44 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
+Hi,
 
-On 08/05/2018 05:17 PM, André Draszik wrote:
-> On Sat, 2018-08-04 at 11:41 +0100, André Draszik wrote:
->> On Tue, 2018-07-31 at 13:33 +0200, Richard Leitner wrote:
->>> On 07/31/2018 01:19 PM, André Draszik wrote:
->>>> On Tue, 2018-07-31 at 11:00 +0200, Richard Leitner wrote:
->>>>> Hi André,
->>>>> thank you for your patches.
->>>>>
->>>>> Unfortunately I have checksum issues for aarch64's jdk, corba, jaxp,
->>>>> jaxws, langtools & nashorn:
->>>>
->>>> Hm, is that another instance of
->>>> http://lists.openembedded.org/pipermail/openembedded-devel/2018-May/11
->>>> 83
->>>> 58.html
->>>> ?
->>>>
->>>> I'll check...
->>>
->>> Thanks!
->>
->> I'll get back to that next week, see below.
+On 08/04/2018 12:01 PM, André Draszik wrote:
+> Hi,
 > 
-> Indeed, it's another case like previously. At least now the checksums will
-> be stable, though. See diff (similar for all 6 archives):
-> 
-> diff -urN new/corba-3a04a7c080af/.hg_archival.txt orig/corba-3a04a7c080af/.hg_archival.txt
-> --- new/corba-3a04a7c080af/.hg_archival.txt 2018-05-09 04:52:12.000000000 +0100
-> +++ orig/corba-3a04a7c080af/.hg_archival.txt     2018-05-09 04:52:12.000000000 +0100
-> @@ -1,4 +1,5 @@
->  repo: 55540e827aef970ecc010b7e06b912d991c8e3ce
->  node: 3a04a7c080af040b0075b2079cc1fa91c8197b8b
->  branch: default
-> -tag: aarch64-jdk8u181-b03
-> +latesttag: aarch64-jdk8u172-b11
-> +latesttagdistance: 1
-> 
-> etc.
+> Does anybody know why there are openjdk & openjre recipes, rather than just
+> one recipe creating mulitple runtime packages?
 
-Ok. Thank you for checking!
+I guess you are talking about openjdk/jre 8, as openjdk and jre 7 are within
+one recipe.
 
-> 
-> I'll post updated patches hopefully this week, after I've trackced down
-> what's missing to be able to use this against latest poky master and/or
-> glibc on aarch64.
+The initial openjdk-8 commit bac3b9acee5110390d15d38dacdb1622e31b2238 was
+done by Jens, so maybe he could provide some more details?
 
-Thanks.
+In his commit message it sounds like he intended to do separate recipes
+because of a stripped openjre-8 and avoiding cherry-picking files...
+
+
+commit bac3b9acee5110390d15d38dacdb1622e31b2238
+Author: Jens Rehsack <rehsack@gmail.com>
+Date:   Tue Dec 8 14:52:51 2015 +0100
+
+    openjdk-8: add recipes for openjdk-8 and openjre-8
+    
+    This adds openjdk-8 for native and target builds and allows a stripped
+    openjre-8 being built as well instead of trying to cherry-pick jre
+    components from jdk-image.
+    
+    The recipes allow building openjdk-8 with or without:
+    * x11
+    * cups
+    * alsa/pulseaudio
+    and let packager enable unlimited-crypto, if desired.
+    
+    To support certificate based java libraries, cacerts is created based on
+    ca-certificates from OE-core.
+    
+    Since there can be only one PROVIDES for virtual/java-native and virtual/javac-native,
+    move the provides to openjdk-8-native (I think everyone agrees it's a better
+    choice than ecj-bootstrap-native).
+    
+    Plus: Applying a fix from openjdk-9 repository which fixes build issues using gcc5
 
 > 
+> With the current approach, we get
+> * a JRE from the openjdk recipe
+> * a (separately compiled) JRE from the openjre recipe
+> even though they are compiled from the same sources
 > 
-> Nevertheless, I'll probably also switch to direct mercurial clones, rather
-> than mercurial archives to avoid these mismatches in the future. Unless
-> there is a strong reason not to.
-
-The only downside which comes to my mind is the (probably) longer execution
-time of do_fetch... But IMHO this is a lesser pain than the invalid checksums
-
+> And you also have to constantly modify your PREFERRED_PROVIDER java2-vm /
+> java2-runtime based on the image you want to build, e.g. building an image
+> that wants to install openjdk, but your preferred provider is openjre, gives
+> you lots of warnings from bitbake, meaning you have to update your preferred
+> provider.
+> 
+> This isn't very intuitive to say the least.
+> 
+> Other distros (or debian at least), just create multiple packages from the
+> same recipe, i.e. there is one openjdk source, which creates both the
+> runtime only package, and the compiler in a separate package, amongst other
+> things.
 > 
 > 
-> A.
+> Cheers,
+> Andre'
 > 
-
-thanks&regards;Richard.L
 
