@@ -1,22 +1,22 @@
 Return-Path: <kai.kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CB18075258
+	by mail.openembedded.org (Postfix) with ESMTP id E6FBF74C8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2018 10:39:12 +0000 (UTC)
+	Mon,  6 Aug 2018 10:39:13 +0000 (UTC)
 Received: from ala-blade48.wrs.com (ala-blade48.wrs.com [147.11.105.68])
-	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdDIM028706
+	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdE8H028709
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Aug 2018 03:39:13 -0700 (PDT)
+	Mon, 6 Aug 2018 03:39:14 -0700 (PDT)
 Received: by ala-blade48.wrs.com (sSMTP sendmail emulation);
-	Mon, 06 Aug 2018 03:39:13 -0700
+	Mon, 06 Aug 2018 03:39:14 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Aug 2018 03:39:04 -0700
-Message-Id: <20180806103907.37227-3-kai.kang@windriver.com>
+Date: Mon,  6 Aug 2018 03:39:05 -0700
+Message-Id: <20180806103907.37227-4-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180806103907.37227-1-kai.kang@windriver.com>
 References: <20180806103907.37227-1-kai.kang@windriver.com>
-Subject: [meta-perl][PATCH 2/5] libnet-dns-perl: 1.14 -> 1.17
+Subject: [meta-perl][PATCH 3/5] libnet-ssleay-perl: 1.84 -> 1.85
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,45 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2018 10:39:13 -0000
-
-Upgrade libnet-dns-perl from 1.14 to 1.17.
-
-* correct LICENSE which should be MIT
+X-List-Received-Date: Mon, 06 Aug 2018 10:39:14 -0000
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../libnet/{libnet-dns-perl_1.14.bb => libnet-dns-perl_1.17.bb}   | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.14.bb => libnet-dns-perl_1.17.bb} (68%)
+ .../libnet/{libnet-ssleay-perl_1.84.bb => libnet-ssleay-perl_1.85.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-ssleay-perl_1.84.bb => libnet-ssleay-perl_1.85.bb} (90%)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
-similarity index 68%
-rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
-rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
-index efaa7f7b1..79583551f 100644
---- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
-@@ -1,16 +1,16 @@
- DESCRIPTION = "This package contains the DNS.pm module with friends."
- HOMEPAGE = "http://www.net-dns.org/"
- SECTION = "libs"
--LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LICENSE = "MIT"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+similarity index 90%
+rename from meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
+rename to meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+index cfecef9cf..a0bb90e7d 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.84.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+@@ -25,8 +25,8 @@ RDEPENDS_${PN} += "\
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+            file://run-ptest \
+           "
+-SRC_URI[md5sum] = "cfbe968487149626978f427cc9fb8c77"
+-SRC_URI[sha256sum] = "823ec3cbb428309d6a9e56f362a9300693ce3215b7fede109adb7be361fff177"
++SRC_URI[md5sum] = "d602bdce4e0531c6efc276e3e429ca69"
++SRC_URI[sha256sum] = "9d8188b9fb1cae3bd791979c20554925d5e94a138d00414f1a6814549927b0c8"
  
--LIC_FILES_CHKSUM = "file://README;md5=92d93d8c5bf22de77578531e283dd219"
-+LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=27db37b42cd1a5173a53922d67072bcb"
- 
- DEPENDS += "perl"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "0da1099c0a3548d36ea9e31d5bb9e122"
--SRC_URI[sha256sum] = "83c38a594eeb2c85d66e60047a0f5b403f34bd92a5d13606f02e828d450299fc"
-+SRC_URI[md5sum] = "28fcbcbf4483a9f23f75be4b9e3e45c8"
-+SRC_URI[sha256sum] = "9a79fd8fea1a708726c18d193ae4437479206ccb20ffa7f0971371e172e2c2e0"
- 
- S = "${WORKDIR}/Net-DNS-${PV}"
+ S = "${WORKDIR}/Net-SSLeay-${PV}"
  
 -- 
 2.11.0
