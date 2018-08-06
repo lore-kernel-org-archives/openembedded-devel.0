@@ -1,22 +1,22 @@
 Return-Path: <kai.kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D86B37199E
+	by mail.openembedded.org (Postfix) with ESMTP id CB18075258
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Aug 2018 10:39:11 +0000 (UTC)
+	Mon,  6 Aug 2018 10:39:12 +0000 (UTC)
 Received: from ala-blade48.wrs.com (ala-blade48.wrs.com [147.11.105.68])
-	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdCGG028703
+	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w76AdDIM028706
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Aug 2018 03:39:12 -0700 (PDT)
+	Mon, 6 Aug 2018 03:39:13 -0700 (PDT)
 Received: by ala-blade48.wrs.com (sSMTP sendmail emulation);
-	Mon, 06 Aug 2018 03:39:12 -0700
+	Mon, 06 Aug 2018 03:39:13 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Aug 2018 03:39:03 -0700
-Message-Id: <20180806103907.37227-2-kai.kang@windriver.com>
+Date: Mon,  6 Aug 2018 03:39:04 -0700
+Message-Id: <20180806103907.37227-3-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20180806103907.37227-1-kai.kang@windriver.com>
 References: <20180806103907.37227-1-kai.kang@windriver.com>
-Subject: [meta-perl][PATCH 1/5] adduser: 3.116 -> 3.117
+Subject: [meta-perl][PATCH 2/5] libnet-dns-perl: 1.14 -> 1.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,41 +29,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Aug 2018 10:39:12 -0000
+X-List-Received-Date: Mon, 06 Aug 2018 10:39:13 -0000
 
-Upgrade adduser from 3.116 to 3.117.
+Upgrade libnet-dns-perl from 1.14 to 1.17.
 
-* remove redefine of S
+* correct LICENSE which should be MIT
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-perl/adduser/{adduser_3.116.bb => adduser_3.117.bb}     | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-perl/recipes-perl/adduser/{adduser_3.116.bb => adduser_3.117.bb} (91%)
+ .../libnet/{libnet-dns-perl_1.14.bb => libnet-dns-perl_1.17.bb}   | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-perl/recipes-perl/libnet/{libnet-dns-perl_1.14.bb => libnet-dns-perl_1.17.bb} (68%)
 
-diff --git a/meta-perl/recipes-perl/adduser/adduser_3.116.bb b/meta-perl/recipes-perl/adduser/adduser_3.117.bb
-similarity index 91%
-rename from meta-perl/recipes-perl/adduser/adduser_3.116.bb
-rename to meta-perl/recipes-perl/adduser/adduser_3.117.bb
-index 363f5b117..e5cefd4c6 100644
---- a/meta-perl/recipes-perl/adduser/adduser_3.116.bb
-+++ b/meta-perl/recipes-perl/adduser/adduser_3.117.bb
-@@ -10,13 +10,11 @@ SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.x
-            file://adduser-add-M-option-for-useradd.patch \
- "
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
+similarity index 68%
+rename from meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
+rename to meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
+index efaa7f7b1..79583551f 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.14.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.17.bb
+@@ -1,16 +1,16 @@
+ DESCRIPTION = "This package contains the DNS.pm module with friends."
+ HOMEPAGE = "http://www.net-dns.org/"
+ SECTION = "libs"
+-LICENSE = "Artistic-1.0 | GPL-1.0+"
++LICENSE = "MIT"
  
--SRC_URI[md5sum] = "e042a5842b8f24312d6f5a99a1af8f2c"
--SRC_URI[sha256sum] = "72d811ad3ba17d2794b14d19acd1d6b57f9dd31d9250d51e786895dee2daeac0"
-+SRC_URI[md5sum] = "9f36d69585e74c022aa8e22a0337507d"
-+SRC_URI[sha256sum] = "be01881356e40c4d7dd2ce209fb4a94c0589056ac3ebe7debbbf09a6383c1411"
+-LIC_FILES_CHKSUM = "file://README;md5=92d93d8c5bf22de77578531e283dd219"
++LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=27db37b42cd1a5173a53922d67072bcb"
  
- inherit cpan-base update-alternatives
+ DEPENDS += "perl"
  
--S = "${WORKDIR}/${BPN}"
--
- do_install() {
-     install -d ${D}${sbindir}
-     install -m 0755 ${S}/adduser ${D}${sbindir}
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "0da1099c0a3548d36ea9e31d5bb9e122"
+-SRC_URI[sha256sum] = "83c38a594eeb2c85d66e60047a0f5b403f34bd92a5d13606f02e828d450299fc"
++SRC_URI[md5sum] = "28fcbcbf4483a9f23f75be4b9e3e45c8"
++SRC_URI[sha256sum] = "9a79fd8fea1a708726c18d193ae4437479206ccb20ffa7f0971371e172e2c2e0"
+ 
+ S = "${WORKDIR}/Net-DNS-${PV}"
+ 
 -- 
 2.11.0
 
