@@ -1,28 +1,67 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B861B74573
+Return-Path: <Mark.Jonas@de.bosch.com>
+X-Greylist: delayed 566 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 07 Aug 2018 14:26:42 UTC
+Received: from de-deferred2.bosch-org.com (de-deferred2.bosch-org.com
+	[139.15.180.217])
+	by mail.openembedded.org (Postfix) with ESMTP id E970178C93
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2018 09:05:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7795S34017040
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 7 Aug 2018 02:05:28 -0700 (PDT)
-Received: from [128.224.162.228] (128.224.162.228) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Tue, 7 Aug 2018 02:05:27 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1532074765-8918-1-git-send-email-changqing.li@windriver.com>
-	<20180806141924.GC1361@jama>
-From: Changqing Li <changqing.li@windriver.com>
-Message-ID: <65a53da2-ec4e-4189-a6ff-e6ba74bc0178@windriver.com>
-Date: Tue, 7 Aug 2018 17:05:22 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.8.0
+	Tue,  7 Aug 2018 14:26:42 +0000 (UTC)
+Received: from de-out1.bosch-org.com (unknown [139.15.180.215])
+	by fe0vms0193.rbdmz01.com (Postfix) with ESMTPS id 41lGmr485Gz45h
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 Aug 2018 16:17:16 +0200 (CEST)
+Received: from si0vm1948.rbesz01.com (unknown [139.15.230.188])
+	by si0vms0217.rbdmz01.com (Postfix) with ESMTPS id 41lGmp2KRSz4f3klZ;
+	Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=de.bosch.com;
+	s=2015-01-21; t=1533651434;
+	bh=Uu3tfjNzaZZXE7XFciQf8V7qfY8IJbZYhx2W8Tf9qAY=; l=10;
+	h=From:From:Reply-To:Sender;
+	b=U6JVaXOxZatF5NatJgkxCOgXucGFIUfBsG4KR15i6AOZg/SPXZiwySDynItKXxpDf
+	OHfY+QWTesWzauhaMwYG36pn+KJ+r0xRD0YHKwHMlIdtL7v1kGaEcad1b39ZUiWmMt
+	+wq2TqtHntBHXO2gc7YOx0mJluDhNR2AzNdR/Xyc=
+Received: from fe0vm7918.rbesz01.com (unknown [10.58.172.176])
+	by si0vm1948.rbesz01.com (Postfix) with ESMTPS id 41lGmp1wYLz3rT;
+	Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
+X-AuditID: 0a3aad10-16dff70000000c8a-81-5b69a9eaa722
+Received: from fe0vm1652.rbesz01.com ( [10.58.173.29])
+	(using TLS with cipher AES128-SHA (128/128 bits))
+	(Client did not present a certificate)
+	by fe0vm7918.rbesz01.com (SMG Outbound) with SMTP id
+	61.EB.03210.AE9A96B5; Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
+Received: from FE-HUB1000.de.bosch.com (fe-hub1000.de.bosch.com [10.4.103.107])
+	by fe0vm1652.rbesz01.com (Postfix) with ESMTPS id 41lGmp0MJtzDpmd;
+	Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
+Received: from luchador.grb-fir.grb.de.bosch.com (10.19.187.97) by
+	FE-HUB1000.de.bosch.com (10.4.103.107) with Microsoft SMTP Server id
+	14.3.408.0; Tue, 7 Aug 2018 16:17:13 +0200
+From: Mark Jonas <mark.jonas@de.bosch.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Aug 2018 16:15:14 +0200
+Message-ID: <1533651314-10320-1-git-send-email-mark.jonas@de.bosch.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1533407162-21497-1-git-send-email-mark.jonas@de.bosch.com>
+References: <1533407162-21497-1-git-send-email-mark.jonas@de.bosch.com>
 MIME-Version: 1.0
-In-Reply-To: <20180806141924.GC1361@jama>
-X-Originating-IP: [128.224.162.228]
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-oe] protobuf-c: fix build error with protobuf 3.6.0.1
+X-Brightmail-Tracker: H4sIAAAAAAAAA21SfUwTZxzmvTvKtXJ6bWH9WSuag4DCVLr5gV+LcRrRLWZRY4Jk2Q55aZvR
+	lt4VIposzKhERiaZukjFakybIEu1qBHq56xsKY6RgW5WhDiqcbUx+BGNoEZ3pcX2j/1zee55
+	fs/ved8nL02q3Gla2mSxY8HCV3IyBaVY4pk+J3LCVFo4/FBZ1HfNTRbtueVARYPhZ8QKstjn
+	GEor7m1vRV8QWxTLynGlqQYL8z75WmG8c/gPouqCbps70iSrQ680DUhOAzsfOlqfoyhWsfUE
+	BMMFDUgh4UsIXg2MErGfcwi8vQ/I6JSMzYfbgc5xnMHOA/fhi+OYZG1Q7zmZ1oBoWs2uh/u7
+	1FGaYnPg91MeKooZdg0MuZ6kxoKz4Hbv3nGrnC2GW85A/BBr4N+f7sXnldDdfJ+KrQe4Gg6T
+	TWiKI0lyJEnHENGGMitwYY150WJ90VyhDIvbC/Vzt1rNp1GsOLYT+a5X+BFLIy6dwW5TqSqV
+	rxFrzX60gCa4TEbIlqjJZdbyWiMvGr8SqiuxyGkZlJKSolK/p8XqMrNJFE1Wix8BTXIZzNZv
+	JR9Tztdux4I1ZvOjaTTFaRj9WkliDbwdf4NxFRYm1KU0zQGzp1VSlQI24G0Vpkr7hMxNj2V+
+	kKwkxxK03I8+ptOlbHd0BSNW8WbRZIjbp8bsqgk2Yb2OPqXfPD74I6miLFYL1mqYxqifjU4a
+	qy3vT6DVMSVBQ6kqM0lIbImgIJI6VDOeqDldep+JbGA61S0lKmWcTJg+ckke1qUAb2gJODtf
+	IOh6HiLA6bpLwd9drTT0tJyTwxnnDTm880of19F9CnC+vaeAa4e8DLTtCzMw2D0yGUYDO1no
+	PxtUQih4RQ0hzwENBPr7NfC2v04H4dNHddA+2pUFY30nZ8CfO0PZ0HPgZi4MDA3nQss/D3Ph
+	eNsPeeB03JwNru/vzoaBB2350L53fwEEm0MFEalXQur1UcF4r3be/j+9xtnE5bR1aLetacOI
+	q2PFGDhtjbtSQbb+jtk2vOhXeNexfF0d3KjPc6/WHgvod2hXNq5dlnr5deSvOUc+WzjyMoNK
+	Kdkx8/gv/s3evIzFLYO2swt8hbYPf+Of/pz/yPflqalNV7esm7UpZ1J2VrdPtjE89nkPRo9d
+	ylU6w6U+vPw8kVP83YXdIkeJRl6fTwoi/x/C3yuDOAQAAA==
+Cc: ben.guan@cn.bosch.com
+Subject: [meta-oe][PATCH v2] directfb: fix tslib version check in configure.in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,346 +74,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2018 09:05:27 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 07 Aug 2018 14:26:43 -0000
+Content-Type: text/plain
 
+From: Ben Guan <ben.guan@cn.bosch.com>
 
+The patch makes sure that the old as well as the new tslib pkg-config
+metadata file naming style is handled correctly.
 
-On 08/06/2018 10:19 PM, Martin Jansa wrote:
-> On Fri, Jul 20, 2018 at 04:19:25PM +0800, changqing.li@windriver.com wrote:
->> From: Changqing Li <changqing.li@windriver.com>
->>
->> 1. protoc-c depend on protobuf, from protobuf 3.6.0.1,
->> scoped_array is removed, but protoc-c still use scoped_array,
->> caused compile error.
->>
->> 2. fix compile error since missing namespace
-> There is also an error in grpc caused by new protobuf 3.6.0.1 (the same
-> with 3.6.1).
->
-> It triggers the build failure only on older hosts, I'm seeing the issue
-> on Ubuntu 14.04 with gcc 4.8.4 and wasn't able to reproduce it on Ubuntu
-> 18.04 with gcc 7.3.0.
->
-> grpc-native fails to build with;
->
-> DEBUG: Executing shell function do_compile
-> NOTE: VERBOSE=1 cmake --build
-> TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build --target all
-> -- -j 24
-> [1/13] cd TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/git &&
-> TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/recipe-sysroot-native/usr/bin/protoc
-> --grpc_out=generate_mock_code=true:TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --cpp_out=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --plugin=protoc-gen-grpc=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/grpc_cpp_plugin
-> -I . -I /usr/local/include src/proto/grpc/status/status.proto
-> FAILED: gens/src/proto/grpc/status/status.grpc.pb.cc
-> gens/src/proto/grpc/status/status.grpc.pb.h
-> gens/src/proto/grpc/status/status_mock.grpc.pb.h
-> gens/src/proto/grpc/status/status.pb.cc
-> gens/src/proto/grpc/status/status.pb.h
-> cd TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/git &&
-> TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/recipe-sysroot-native/usr/bin/protoc
-> --grpc_out=generate_mock_code=true:TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --cpp_out=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --plugin=protoc-gen-grpc=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/grpc_cpp_plugin
-> -I . -I /usr/local/include src/proto/grpc/status/status.proto
-> terminate called after throwing an instance of 'std::system_error'
->    what():  Unknown error -1
-> --grpc_out: protoc-gen-grpc: Plugin killed by signal 6.
-> [2/13] cd TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/git &&
-> TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/recipe-sysroot-native/usr/bin/protoc
-> --grpc_out=generate_mock_code=true:TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --cpp_out=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --plugin=protoc-gen-grpc=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/grpc_cpp_plugin
-> -I . -I /usr/local/include
-> src/proto/grpc/reflection/v1alpha/reflection.proto
-> FAILED: gens/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.cc
-> gens/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.h
-> gens/src/proto/grpc/reflection/v1alpha/reflection_mock.grpc.pb.h
-> gens/src/proto/grpc/reflection/v1alpha/reflection.pb.cc
-> gens/src/proto/grpc/reflection/v1alpha/reflection.pb.h
-> cd TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/git &&
-> TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/recipe-sysroot-native/usr/bin/protoc
-> --grpc_out=generate_mock_code=true:TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --cpp_out=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/gens
-> --plugin=protoc-gen-grpc=TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/build/grpc_cpp_plugin
-> -I . -I /usr/local/include
-> src/proto/grpc/reflection/v1alpha/reflection.proto
-> terminate called after throwing an instance of 'std::system_error'
->    what():  Unknown error -1
-> --grpc_out: protoc-gen-grpc: Plugin killed by signal 6.
-> ninja: build stopped: subcommand failed.
-> WARNING: exit code 1 from a shell command.
-> ERROR: Function failed: do_compile (log file is located at
-> TOPDIR/BUILD/work/x86_64-linux/grpc-native/1.8.5-r0/temp/log.do_compile.26868)
->
-> I was assuming it's caused by missing BUILD_CXXFLAGS += "-std=c++11"
-> but adding that also doesn't help.
->
-> Anyone else seeing this? I'm tempted to just switch back to protobuf
-> 3.5.x, because we might switch to newer Ubuntu sooner then switching to
-> meta-oe with protobuf 3.6.x.
->
-> Cheers,
+tslib 0.0 to 1.0 created only a tslib-<VERSION>.pc pkg-config metadata
+file.
 
-This error is reported during grpc_cpp_plugin try to load libprotobuf.so,
-not related to the "-std=c++11".  but now, I don't have proper solution
-for this.  so I am ok about switch back to protobuf 3.5.x if you need it.
+With tslib 1.1 the tslib-<VERSION>.pc phase out was started.
+Additionally, the pkg-config metadata file tslib.pc was added.
 
-//sandy
+Since tslib 1.6 the tslib-<VERSION>.pc metadata file is deprecated.
+Now, there is only a tslib.pc.
 
->
->> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> ---
->>   ...c-fix-compile-error-with-protobuf-3.6.0.1.patch | 207 +++++++++++++++++++++
->>   .../recipes-devtools/protobuf/protobuf-c_1.3.0.bb  |   4 +-
->>   2 files changed, 210 insertions(+), 1 deletion(-)
->>   create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch
->>
->> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch
->> new file mode 100644
->> index 0000000..17f5b58
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch
->> @@ -0,0 +1,207 @@
->> +From fb77cbce29d9ea4d4acbfd6ba72cb1cffabf649a Mon Sep 17 00:00:00 2001
->> +From: Changqing Li <changqing.li@windriver.com>
->> +Date: Fri, 20 Jul 2018 11:47:53 +0800
->> +Subject: [PATCH] protobuf-c: fix compile error with protobuf 3.6.0.1
->> +
->> +Backport from upstream:
->> +https://github.com/protobuf-c/protobuf-c/pull/328
->> +
->> +1. protoc-c depend on protobuf, from protobuf 3.6.0.1,
->> +scoped_array is removed, but protoc-c still use scoped_array,
->> +caused compile error.
->> +
->> +2. fix compile error since missing namespace
->> +
->> +Signed-off-by: Changqing Li <changqing.li@windriver.com>
->> +---
->> + protoc-c/c_field.cc     |  2 +-
->> + protoc-c/c_field.h      |  2 +-
->> + protoc-c/c_file.cc      |  8 ++++----
->> + protoc-c/c_file.h       | 10 +++++-----
->> + protoc-c/c_generator.cc | 12 ++++++------
->> + protoc-c/c_helpers.cc   |  4 +++-
->> + protoc-c/c_message.cc   |  6 +++---
->> + protoc-c/c_message.h    |  7 ++++---
->> + 8 files changed, 27 insertions(+), 24 deletions(-)
->> +
->> +diff --git a/protoc-c/c_field.cc b/protoc-c/c_field.cc
->> +index 9fa56ef..eaa38d2 100644
->> +--- a/protoc-c/c_field.cc
->> ++++ b/protoc-c/c_field.cc
->> +@@ -189,7 +189,7 @@ void FieldGenerator::GenerateDescriptorInitializerGeneric(io::Printer* printer,
->> + FieldGeneratorMap::FieldGeneratorMap(const Descriptor* descriptor)
->> +   : descriptor_(descriptor),
->> +     field_generators_(
->> +-      new scoped_ptr<FieldGenerator>[descriptor->field_count()]) {
->> ++      new std::unique_ptr<FieldGenerator>[descriptor->field_count()]) {
->> +   // Construct all the FieldGenerators.
->> +   for (int i = 0; i < descriptor->field_count(); i++) {
->> +     field_generators_[i].reset(MakeGenerator(descriptor->field(i)));
->> +diff --git a/protoc-c/c_field.h b/protoc-c/c_field.h
->> +index 91f1a03..94b2fad 100644
->> +--- a/protoc-c/c_field.h
->> ++++ b/protoc-c/c_field.h
->> +@@ -117,7 +117,7 @@ class FieldGeneratorMap {
->> +
->> +  private:
->> +   const Descriptor* descriptor_;
->> +-  scoped_array<scoped_ptr<FieldGenerator> > field_generators_;
->> ++  std::unique_ptr<std::unique_ptr<FieldGenerator>[]> field_generators_;
->> +
->> +   static FieldGenerator* MakeGenerator(const FieldDescriptor* field);
->> +
->> +diff --git a/protoc-c/c_file.cc b/protoc-c/c_file.cc
->> +index 9851768..6dae516 100644
->> +--- a/protoc-c/c_file.cc
->> ++++ b/protoc-c/c_file.cc
->> +@@ -83,13 +83,13 @@ FileGenerator::FileGenerator(const FileDescriptor* file,
->> +                              const string& dllexport_decl)
->> +   : file_(file),
->> +     message_generators_(
->> +-      new scoped_ptr<MessageGenerator>[file->message_type_count()]),
->> ++      new std::unique_ptr<MessageGenerator>[file->message_type_count()]),
->> +     enum_generators_(
->> +-      new scoped_ptr<EnumGenerator>[file->enum_type_count()]),
->> ++      new std::unique_ptr<EnumGenerator>[file->enum_type_count()]),
->> +     service_generators_(
->> +-      new scoped_ptr<ServiceGenerator>[file->service_count()]),
->> ++      new std::unique_ptr<ServiceGenerator>[file->service_count()]),
->> +     extension_generators_(
->> +-      new scoped_ptr<ExtensionGenerator>[file->extension_count()]) {
->> ++      new std::unique_ptr<ExtensionGenerator>[file->extension_count()]) {
->> +
->> +   for (int i = 0; i < file->message_type_count(); i++) {
->> +     message_generators_[i].reset(
->> +diff --git a/protoc-c/c_file.h b/protoc-c/c_file.h
->> +index ed38ce4..adc2841 100644
->> +--- a/protoc-c/c_file.h
->> ++++ b/protoc-c/c_file.h
->> +@@ -98,13 +98,13 @@ class FileGenerator {
->> +  private:
->> +   const FileDescriptor* file_;
->> +
->> +-  scoped_array<scoped_ptr<MessageGenerator> > message_generators_;
->> +-  scoped_array<scoped_ptr<EnumGenerator> > enum_generators_;
->> +-  scoped_array<scoped_ptr<ServiceGenerator> > service_generators_;
->> +-  scoped_array<scoped_ptr<ExtensionGenerator> > extension_generators_;
->> ++  std::unique_ptr<std::unique_ptr<MessageGenerator>[]> message_generators_;
->> ++  std::unique_ptr<std::unique_ptr<EnumGenerator>[]> enum_generators_;
->> ++  std::unique_ptr<std::unique_ptr<ServiceGenerator>[]> service_generators_;
->> ++  std::unique_ptr<std::unique_ptr<ExtensionGenerator>[]> extension_generators_;
->> +
->> +   // E.g. if the package is foo.bar, package_parts_ is {"foo", "bar"}.
->> +-  vector<string> package_parts_;
->> ++  std::vector<string> package_parts_;
->> +
->> +   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
->> + };
->> +diff --git a/protoc-c/c_generator.cc b/protoc-c/c_generator.cc
->> +index a0d0cb6..c46cfe4 100644
->> +--- a/protoc-c/c_generator.cc
->> ++++ b/protoc-c/c_generator.cc
->> +@@ -80,13 +80,13 @@ namespace c {
->> + //   "foo=bar,baz,qux=corge"
->> + // parses to the pairs:
->> + //   ("foo", "bar"), ("baz", ""), ("qux", "corge")
->> +-void ParseOptions(const string& text, vector<pair<string, string> >* output) {
->> +-  vector<string> parts;
->> ++void ParseOptions(const string& text, std::vector<std::pair<string, string> >* output) {
->> ++  std::vector<string> parts;
->> +   SplitStringUsing(text, ",", &parts);
->> +
->> +   for (unsigned i = 0; i < parts.size(); i++) {
->> +     string::size_type equals_pos = parts[i].find_first_of('=');
->> +-    pair<string, string> value;
->> ++    std::pair<string, string> value;
->> +     if (equals_pos == string::npos) {
->> +       value.first = parts[i];
->> +       value.second = "";
->> +@@ -105,7 +105,7 @@ bool CGenerator::Generate(const FileDescriptor* file,
->> +                             const string& parameter,
->> +                             OutputDirectory* output_directory,
->> +                             string* error) const {
->> +-  vector<pair<string, string> > options;
->> ++  std::vector<std::pair<string, string> > options;
->> +   ParseOptions(parameter, &options);
->> +
->> +   // -----------------------------------------------------------------
->> +@@ -149,7 +149,7 @@ bool CGenerator::Generate(const FileDescriptor* file,
->> +
->> +   // Generate header.
->> +   {
->> +-    scoped_ptr<io::ZeroCopyOutputStream> output(
->> ++    std::unique_ptr<io::ZeroCopyOutputStream> output(
->> +       output_directory->Open(basename + ".h"));
->> +     io::Printer printer(output.get(), '$');
->> +     file_generator.GenerateHeader(&printer);
->> +@@ -157,7 +157,7 @@ bool CGenerator::Generate(const FileDescriptor* file,
->> +
->> +   // Generate cc file.
->> +   {
->> +-    scoped_ptr<io::ZeroCopyOutputStream> output(
->> ++    std::unique_ptr<io::ZeroCopyOutputStream> output(
->> +       output_directory->Open(basename + ".c"));
->> +     io::Printer printer(output.get(), '$');
->> +     file_generator.GenerateSource(&printer);
->> +diff --git a/protoc-c/c_helpers.cc b/protoc-c/c_helpers.cc
->> +index b79b5b0..f4ef73d 100644
->> +--- a/protoc-c/c_helpers.cc
->> ++++ b/protoc-c/c_helpers.cc
->> +@@ -86,6 +86,8 @@ namespace c {
->> + #pragma warning(disable:4996)
->> + #endif
->> +
->> ++using std::vector;
->> ++
->> + string DotsToUnderscores(const string& name) {
->> +   return StringReplace(name, ".", "_", true);
->> + }
->> +@@ -559,7 +561,7 @@ static int CEscapeInternal(const char* src, int src_len, char* dest,
->> + }
->> + string CEscape(const string& src) {
->> +   const int dest_length = src.size() * 4 + 1; // Maximum possible expansion
->> +-  scoped_array<char> dest(new char[dest_length]);
->> ++  std::unique_ptr<char[]> dest(new char[dest_length]);
->> +   const int len = CEscapeInternal(src.data(), src.size(),
->> +                                   dest.get(), dest_length, false);
->> +   GOOGLE_DCHECK_GE(len, 0);
->> +diff --git a/protoc-c/c_message.cc b/protoc-c/c_message.cc
->> +index 6b22c71..85a946e 100755
->> +--- a/protoc-c/c_message.cc
->> ++++ b/protoc-c/c_message.cc
->> +@@ -83,11 +83,11 @@ MessageGenerator::MessageGenerator(const Descriptor* descriptor,
->> +   : descriptor_(descriptor),
->> +     dllexport_decl_(dllexport_decl),
->> +     field_generators_(descriptor),
->> +-    nested_generators_(new scoped_ptr<MessageGenerator>[
->> ++    nested_generators_(new std::unique_ptr<MessageGenerator>[
->> +       descriptor->nested_type_count()]),
->> +-    enum_generators_(new scoped_ptr<EnumGenerator>[
->> ++    enum_generators_(new std::unique_ptr<EnumGenerator>[
->> +       descriptor->enum_type_count()]),
->> +-    extension_generators_(new scoped_ptr<ExtensionGenerator>[
->> ++    extension_generators_(new std::unique_ptr<ExtensionGenerator>[
->> +       descriptor->extension_count()]) {
->> +
->> +   for (int i = 0; i < descriptor->nested_type_count(); i++) {
->> +diff --git a/protoc-c/c_message.h b/protoc-c/c_message.h
->> +index 8b115d1..114c2d0 100644
->> +--- a/protoc-c/c_message.h
->> ++++ b/protoc-c/c_message.h
->> +@@ -126,9 +126,10 @@ class MessageGenerator {
->> +   const Descriptor* descriptor_;
->> +   string dllexport_decl_;
->> +   FieldGeneratorMap field_generators_;
->> +-  scoped_array<scoped_ptr<MessageGenerator> > nested_generators_;
->> +-  scoped_array<scoped_ptr<EnumGenerator> > enum_generators_;
->> +-  scoped_array<scoped_ptr<ExtensionGenerator> > extension_generators_;
->> ++
->> ++  std::unique_ptr<std::unique_ptr<MessageGenerator>[]> nested_generators_;
->> ++  std::unique_ptr<std::unique_ptr<EnumGenerator>[]> enum_generators_;
->> ++  std::unique_ptr<std::unique_ptr<ExtensionGenerator>[]> extension_generators_;
->> +
->> +   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageGenerator);
->> + };
->> +--
->> +2.7.4
->> +
->> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
->> index 9b69690..7017b69 100644
->> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
->> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.0.bb
->> @@ -15,7 +15,9 @@ DEPENDS = "protobuf-native protobuf"
->>   PV .= "+git${SRCPV}"
->>   SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
->>   
->> -SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
->> +SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
->> +           file://0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch \
->> +"
->>   
->>   S = "${WORKDIR}/git"
->>   
->> -- 
->> 2.7.4
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Ben Guan <ben.guan@cn.bosch.com>
+Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+---
+Changes in v2:
+ - send patch to openembedded-devel
+ - apply to master (a001e465)
+ - add Signed-off-by to contained patch
+ - add upstream status to contained patch
+---
+ meta-oe/recipes-graphics/directfb/directfb.inc     |  1 +
+ .../directfb/fix-tslib-version-check.patch         | 38 ++++++++++++++++++++++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch
 
+diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+index bd66a28..96aa311 100644
+--- a/meta-oe/recipes-graphics/directfb/directfb.inc
++++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+@@ -20,6 +20,7 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
+            file://union-sigval.patch \
+            file://use-PTHREAD_MUTEX_RECURSIVE.patch \
+            file://fix-client-gfx_state-initialisation.patch \
++           file://fix-tslib-version-check.patch \
+           "
+ 
+ S = "${WORKDIR}/DirectFB-${PV}"
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch b/meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch
+new file mode 100644
+index 0000000..352bfaf
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch
+@@ -0,0 +1,38 @@
++fix tslib version check in configure.in
++
++The patch makes sure that the old as well as the new tslib pkg-config
++metadata file naming style is handled correctly.
++
++tslib 0.0 to 1.0 created only a tslib-<VERSION>.pc pkg-config metadata
++file.
++
++With tslib 1.1 the tslib-<VERSION>.pc phase out was started.
++Additionally, the pkg-config metadata file tslib.pc was added.
++
++Since tslib 1.6 the tslib-<VERSION>.pc metadata file is deprecated.
++Now, there is only a tslib.pc.
++
++Upstream-Status: Inappropriate [no upstream]
++Signed-off-by: Ben Guan <ben.guan@cn.bosch.com>
++Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
++
++diff -Nru DirectFB-1.7.7.orig/configure.in DirectFB-1.7.7/configure.in
++--- DirectFB-1.7.7.orig/configure.in	2015-02-10 01:16:46.000000000 +0800
+++++ DirectFB-1.7.7/configure.in	2018-06-06 17:19:18.472143103 +0800
++@@ -2459,10 +2459,13 @@
++ 
++ enable_tslib=no
++ if test "$checkfor_tslib" = "yes"; then
++-  PKG_CHECK_MODULES([TSLIB], [tslib-1.0 >= 1.0.0], [enable_tslib=yes], [enable_tslib=no])
+++  PKG_CHECK_MODULES([TSLIB], [tslib >= 1.1], [enable_tslib=yes], [enable_tslib=no])
++   if test "$enable_tslib" = "no"; then
++-     PKG_CHECK_MODULES([TSLIB], [tslib-0.0], [enable_tslib=yes], [enable_tslib=no
++-       AC_MSG_WARN([*** no tslib -- tslib driver will not be built.])])
+++    PKG_CHECK_MODULES([TSLIB], [tslib-1.0 >= 1.0], [enable_tslib=yes], [enable_tslib=no])
+++    if test "$enable_tslib" = "no"; then
+++      PKG_CHECK_MODULES([TSLIB], [tslib-0.0], [enable_tslib=yes], [enable_tslib=no
+++        AC_MSG_WARN([*** no tslib -- tslib driver will not be built.])])
+++    fi
++   fi
++ fi
++ 
 -- 
-BRs
-
-Sandy(Li Changqing)
-+861084778653
+2.7.4
 
 
