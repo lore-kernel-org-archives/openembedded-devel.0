@@ -1,67 +1,47 @@
-Return-Path: <Mark.Jonas@de.bosch.com>
-X-Greylist: delayed 566 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 07 Aug 2018 14:26:42 UTC
-Received: from de-deferred2.bosch-org.com (de-deferred2.bosch-org.com
-	[139.15.180.217])
-	by mail.openembedded.org (Postfix) with ESMTP id E970178C93
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id ED1A6745AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2018 14:26:42 +0000 (UTC)
-Received: from de-out1.bosch-org.com (unknown [139.15.180.215])
-	by fe0vms0193.rbdmz01.com (Postfix) with ESMTPS id 41lGmr485Gz45h
+	Tue,  7 Aug 2018 23:01:08 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id r24-v6so362141wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2018 16:17:16 +0200 (CEST)
-Received: from si0vm1948.rbesz01.com (unknown [139.15.230.188])
-	by si0vms0217.rbdmz01.com (Postfix) with ESMTPS id 41lGmp2KRSz4f3klZ;
-	Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=de.bosch.com;
-	s=2015-01-21; t=1533651434;
-	bh=Uu3tfjNzaZZXE7XFciQf8V7qfY8IJbZYhx2W8Tf9qAY=; l=10;
-	h=From:From:Reply-To:Sender;
-	b=U6JVaXOxZatF5NatJgkxCOgXucGFIUfBsG4KR15i6AOZg/SPXZiwySDynItKXxpDf
-	OHfY+QWTesWzauhaMwYG36pn+KJ+r0xRD0YHKwHMlIdtL7v1kGaEcad1b39ZUiWmMt
-	+wq2TqtHntBHXO2gc7YOx0mJluDhNR2AzNdR/Xyc=
-Received: from fe0vm7918.rbesz01.com (unknown [10.58.172.176])
-	by si0vm1948.rbesz01.com (Postfix) with ESMTPS id 41lGmp1wYLz3rT;
-	Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
-X-AuditID: 0a3aad10-16dff70000000c8a-81-5b69a9eaa722
-Received: from fe0vm1652.rbesz01.com ( [10.58.173.29])
-	(using TLS with cipher AES128-SHA (128/128 bits))
-	(Client did not present a certificate)
-	by fe0vm7918.rbesz01.com (SMG Outbound) with SMTP id
-	61.EB.03210.AE9A96B5; Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
-Received: from FE-HUB1000.de.bosch.com (fe-hub1000.de.bosch.com [10.4.103.107])
-	by fe0vm1652.rbesz01.com (Postfix) with ESMTPS id 41lGmp0MJtzDpmd;
-	Tue,  7 Aug 2018 16:17:14 +0200 (CEST)
-Received: from luchador.grb-fir.grb.de.bosch.com (10.19.187.97) by
-	FE-HUB1000.de.bosch.com (10.4.103.107) with Microsoft SMTP Server id
-	14.3.408.0; Tue, 7 Aug 2018 16:17:13 +0200
-From: Mark Jonas <mark.jonas@de.bosch.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Aug 2018 16:15:14 +0200
-Message-ID: <1533651314-10320-1-git-send-email-mark.jonas@de.bosch.com>
+	Tue, 07 Aug 2018 16:01:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=52bwNQYO/xNTFR5nNAlDg0WU+xMmN+tsNkVEfwZTk+Y=;
+	b=BFk5SuW8Vk47dYYl2oYme+bDifc+FEd0BYekxz2TLBiOYYAfa4SGQeG/bWl5ol6Ikz
+	0vLy7uzEMERjiwFuEaf8iGWy6lBV1pHU48kAHT5RVKxygAimtdhVUMG0hEh5DCTiTFt9
+	dyOcGav7Hyv1/+BlnxSWE2k6f5FHNRtB/r7rHyry527+IVhTVvPyo7+hW+GZX4uS6qar
+	vMdxELDBeHWaMarmLylJ35KGuojmW+ueBaRhCND99FNuO5SKpKuSY55gF+iFlr+LppCx
+	sLtgpmm8LXv00gDRHODaRlzHNID6KQPNMgA0VMbYSamlzA2MmBVmb8y+gLD9VfBXB3k/
+	HHTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=52bwNQYO/xNTFR5nNAlDg0WU+xMmN+tsNkVEfwZTk+Y=;
+	b=XbJL1uy54sOk/TUWvTPXGezMNL26Y+KU+2VAaGztSb+PWxzIyAYXzrnkSblRxYT/ZW
+	U7Jib2eA+T8tSR7BHLCxDhCRvRfGy+pPhi/jfeLwqN8Yb0TrPUxMQHatodvCsTobJrgW
+	nNFHTB6bl7BJokuJQHM0TGqFY14nXmQpiXREI6b0VffXReuyHA0MCqsAdkDFmUZmiW6t
+	yJB/s52PgmCKVV/34d/FKz+pD+pgqTQBxyMJsL0OSfrA/P5/qbyt3HBspZwEYFifB+h9
+	c3KY68JiSBt5Aa9KRJf1DkjvcHOXJJ64cKDCuyQv3wFQ0rso5JE7f0QSOlG8UgwUq1YK
+	2xlw==
+X-Gm-Message-State: AOUpUlF8e0nNEWmvPF1rjGerX78UmjSUEBchbtuX8O9pBfw3ev1rGIXy
+	xWLSYJmNtVC+Jk7KBC1skgcVdYDh
+X-Google-Smtp-Source: AA+uWPzARmWjAoHX1rL9OmmRrlDs2eWOQifRxjZ0pK+sa7ov8N8kZ4DHVadPCgTlhna4wx3/I+A0eA==
+X-Received: by 2002:a1c:b49:: with SMTP id 70-v6mr216009wml.149.1533682869308; 
+	Tue, 07 Aug 2018 16:01:09 -0700 (PDT)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
+	l72-v6sm7388972wma.17.2018.08.07.16.01.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 07 Aug 2018 16:01:08 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Aug 2018 23:01:03 +0000
+Message-Id: <1533682863-25087-1-git-send-email-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1533407162-21497-1-git-send-email-mark.jonas@de.bosch.com>
-References: <1533407162-21497-1-git-send-email-mark.jonas@de.bosch.com>
-MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA21SfUwTZxzmvTvKtXJ6bWH9WSuag4DCVLr5gV+LcRrRLWZRY4Jk2Q55aZvR
-	lt4VIposzKhERiaZukjFakybIEu1qBHq56xsKY6RgW5WhDiqcbUx+BGNoEZ3pcX2j/1zee55
-	fs/ved8nL02q3Gla2mSxY8HCV3IyBaVY4pk+J3LCVFo4/FBZ1HfNTRbtueVARYPhZ8QKstjn
-	GEor7m1vRV8QWxTLynGlqQYL8z75WmG8c/gPouqCbps70iSrQ680DUhOAzsfOlqfoyhWsfUE
-	BMMFDUgh4UsIXg2MErGfcwi8vQ/I6JSMzYfbgc5xnMHOA/fhi+OYZG1Q7zmZ1oBoWs2uh/u7
-	1FGaYnPg91MeKooZdg0MuZ6kxoKz4Hbv3nGrnC2GW85A/BBr4N+f7sXnldDdfJ+KrQe4Gg6T
-	TWiKI0lyJEnHENGGMitwYY150WJ90VyhDIvbC/Vzt1rNp1GsOLYT+a5X+BFLIy6dwW5TqSqV
-	rxFrzX60gCa4TEbIlqjJZdbyWiMvGr8SqiuxyGkZlJKSolK/p8XqMrNJFE1Wix8BTXIZzNZv
-	JR9Tztdux4I1ZvOjaTTFaRj9WkliDbwdf4NxFRYm1KU0zQGzp1VSlQI24G0Vpkr7hMxNj2V+
-	kKwkxxK03I8+ptOlbHd0BSNW8WbRZIjbp8bsqgk2Yb2OPqXfPD74I6miLFYL1mqYxqifjU4a
-	qy3vT6DVMSVBQ6kqM0lIbImgIJI6VDOeqDldep+JbGA61S0lKmWcTJg+ckke1qUAb2gJODtf
-	IOh6HiLA6bpLwd9drTT0tJyTwxnnDTm880of19F9CnC+vaeAa4e8DLTtCzMw2D0yGUYDO1no
-	PxtUQih4RQ0hzwENBPr7NfC2v04H4dNHddA+2pUFY30nZ8CfO0PZ0HPgZi4MDA3nQss/D3Ph
-	eNsPeeB03JwNru/vzoaBB2350L53fwEEm0MFEalXQur1UcF4r3be/j+9xtnE5bR1aLetacOI
-	q2PFGDhtjbtSQbb+jtk2vOhXeNexfF0d3KjPc6/WHgvod2hXNq5dlnr5deSvOUc+WzjyMoNK
-	Kdkx8/gv/s3evIzFLYO2swt8hbYPf+Of/pz/yPflqalNV7esm7UpZ1J2VrdPtjE89nkPRo9d
-	ylU6w6U+vPw8kVP83YXdIkeJRl6fTwoi/x/C3yuDOAQAAA==
-Cc: ben.guan@cn.bosch.com
-Subject: [meta-oe][PATCH v2] directfb: fix tslib version check in configure.in
+Cc: Alex Kiernan <alex.kiernan@hivehome.com>
+Subject: [meta-python][PATCH] python-m2crypto: Move swig fix to configure task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,93 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2018 14:26:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Aug 2018 23:01:09 -0000
 
-From: Ben Guan <ben.guan@cn.bosch.com>
+From: Alex Kiernan <alex.kiernan@hivehome.com>
 
-The patch makes sure that the old as well as the new tslib pkg-config
-metadata file naming style is handled correctly.
+Fixes:
 
-tslib 0.0 to 1.0 created only a tslib-<VERSION>.pc pkg-config metadata
-file.
+| DEBUG: Executing shell function do_configure
+...
+| SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
+| error: command 'swig' failed with exit status 1
 
-With tslib 1.1 the tslib-<VERSION>.pc phase out was started.
-Additionally, the pkg-config metadata file tslib.pc was added.
-
-Since tslib 1.6 the tslib-<VERSION>.pc metadata file is deprecated.
-Now, there is only a tslib.pc.
-
-Signed-off-by: Ben Guan <ben.guan@cn.bosch.com>
-Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
-Changes in v2:
- - send patch to openembedded-devel
- - apply to master (a001e465)
- - add Signed-off-by to contained patch
- - add upstream status to contained patch
----
- meta-oe/recipes-graphics/directfb/directfb.inc     |  1 +
- .../directfb/fix-tslib-version-check.patch         | 38 ++++++++++++++++++++++
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch
 
-diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
-index bd66a28..96aa311 100644
---- a/meta-oe/recipes-graphics/directfb/directfb.inc
-+++ b/meta-oe/recipes-graphics/directfb/directfb.inc
-@@ -20,6 +20,7 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
-            file://union-sigval.patch \
-            file://use-PTHREAD_MUTEX_RECURSIVE.patch \
-            file://fix-client-gfx_state-initialisation.patch \
-+           file://fix-tslib-version-check.patch \
-           "
- 
- S = "${WORKDIR}/DirectFB-${PV}"
-diff --git a/meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch b/meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch
-new file mode 100644
-index 0000000..352bfaf
---- /dev/null
-+++ b/meta-oe/recipes-graphics/directfb/directfb/fix-tslib-version-check.patch
-@@ -0,0 +1,38 @@
-+fix tslib version check in configure.in
-+
-+The patch makes sure that the old as well as the new tslib pkg-config
-+metadata file naming style is handled correctly.
-+
-+tslib 0.0 to 1.0 created only a tslib-<VERSION>.pc pkg-config metadata
-+file.
-+
-+With tslib 1.1 the tslib-<VERSION>.pc phase out was started.
-+Additionally, the pkg-config metadata file tslib.pc was added.
-+
-+Since tslib 1.6 the tslib-<VERSION>.pc metadata file is deprecated.
-+Now, there is only a tslib.pc.
-+
-+Upstream-Status: Inappropriate [no upstream]
-+Signed-off-by: Ben Guan <ben.guan@cn.bosch.com>
-+Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
-+
-+diff -Nru DirectFB-1.7.7.orig/configure.in DirectFB-1.7.7/configure.in
-+--- DirectFB-1.7.7.orig/configure.in	2015-02-10 01:16:46.000000000 +0800
-++++ DirectFB-1.7.7/configure.in	2018-06-06 17:19:18.472143103 +0800
-+@@ -2459,10 +2459,13 @@
-+ 
-+ enable_tslib=no
-+ if test "$checkfor_tslib" = "yes"; then
-+-  PKG_CHECK_MODULES([TSLIB], [tslib-1.0 >= 1.0.0], [enable_tslib=yes], [enable_tslib=no])
-++  PKG_CHECK_MODULES([TSLIB], [tslib >= 1.1], [enable_tslib=yes], [enable_tslib=no])
-+   if test "$enable_tslib" = "no"; then
-+-     PKG_CHECK_MODULES([TSLIB], [tslib-0.0], [enable_tslib=yes], [enable_tslib=no
-+-       AC_MSG_WARN([*** no tslib -- tslib driver will not be built.])])
-++    PKG_CHECK_MODULES([TSLIB], [tslib-1.0 >= 1.0], [enable_tslib=yes], [enable_tslib=no])
-++    if test "$enable_tslib" = "no"; then
-++      PKG_CHECK_MODULES([TSLIB], [tslib-0.0], [enable_tslib=yes], [enable_tslib=no
-++        AC_MSG_WARN([*** no tslib -- tslib driver will not be built.])])
-++    fi
-+   fi
-+ fi
-+ 
+ meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
+index 272c76c..7e22163 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
++++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
+@@ -27,7 +27,7 @@ export SWIG_FEATURES
+ # Get around a problem with swig, but only if the
+ # multilib header file exists.
+ #
+-do_compile_prepend() {
++do_configure_prepend() {
+     ${CPP} -dM - < /dev/null | grep -v __STDC__ | grep -v __REGISTER_PREFIX__ | grep -v __GNUC__ \
+ 	| sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' > SWIG/gcc_macros.h
+     if [ "${SITEINFO_BITS}" = "64" ];then
 -- 
 2.7.4
 
