@@ -1,19 +1,24 @@
-Return-Path: <sjl@vctlabs.com>
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id 9025D78AE3
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 94E2178AE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2018 00:41:13 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 894392804CF; Mon,  6 Aug 2018 17:45:07 -0700 (PDT)
-Date: Mon, 6 Aug 2018 17:45:07 -0700
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20180807004507.GG20696@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
+	Tue,  7 Aug 2018 00:58:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w770wcFF024906
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Aug 2018 17:58:39 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Mon, 6 Aug 2018 17:58:38 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Aug 2018 08:58:37 +0800
+Message-ID: <1533603517-134770-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [sumo][meta-python][PATCH] python-future: make recipe available as python3 version
+Subject: [PATCH][meta-webserver] phpmyadmin: add rdepend to php-cli
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,67 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2018 00:41:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Aug 2018 00:58:38 -0000
+Content-Type: text/plain
 
-Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+From: Changqing Li <changqing.li@windriver.com>
+
+phpmyadmin install some bin list below that depend on interpreter php,
+without rdepend,  will report "Not found the interpreter php"
+
+/usr/share/phpmyadmin/vendor/phpmyadmin/sql-parser/bin/lint-query
+/usr/share/phpmyadmin/vendor/phpmyadmin/sql-parser/bin/tokenize-query
+/usr/share/phpmyadmin/vendor/phpmyadmin/sql-parser/bin/highlight-query
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-future.inc     | 13 +++++++++++++
- .../recipes-devtools/python/python-future_0.16.0.bb       | 15 ++-------------
- .../recipes-devtools/python/python3-future_0.16.0.bb      |  2 ++
- 3 files changed, 17 insertions(+), 13 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-future.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-future_0.16.0.bb
+ meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-future.inc b/meta-python/recipes-devtools/python/python-future.inc
-new file mode 100644
-index 0000000..2247561
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-future.inc
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "Clean single-source support for Python 3 and 2"
-+HOMEPAGE = "https://python-future.org"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f457538b297bd0ef86564b8ac216ad7"
-+
-+SRC_URI[md5sum] = "3e8e88a2bda48d54b1da7634d04760d7"
-+SRC_URI[sha256sum] = "e39ced1ab767b5936646cedba8bcce582398233d6a627067d4c6a454c90cfedb"
-+
-+PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d"
-+
-+inherit pypi
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-future_0.16.0.bb b/meta-python/recipes-devtools/python/python-future_0.16.0.bb
-index 46f7fe5..d95e1ba 100644
---- a/meta-python/recipes-devtools/python/python-future_0.16.0.bb
-+++ b/meta-python/recipes-devtools/python/python-future_0.16.0.bb
-@@ -1,13 +1,2 @@
--DESCRIPTION = "Clean single-source support for Python 3 and 2"
--HOMEPAGE = "https://python-future.org"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f457538b297bd0ef86564b8ac216ad7"
--
--SRC_URI[md5sum] = "3e8e88a2bda48d54b1da7634d04760d7"
--SRC_URI[sha256sum] = "e39ced1ab767b5936646cedba8bcce582398233d6a627067d4c6a454c90cfedb"
--
--PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3d"
--
--inherit pypi setuptools
--
--BBCLASSEXTEND = "native"
-+inherit setuptools
-+require python-future.inc
-diff --git a/meta-python/recipes-devtools/python/python3-future_0.16.0.bb b/meta-python/recipes-devtools/python/python3-future_0.16.0.bb
-new file mode 100644
-index 0000000..f059186
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-future_0.16.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-future.inc
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb
+index c5b515e..a626852 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb
+@@ -38,4 +38,4 @@ do_install() {
+ FILES_${PN} = "${datadir}/${BPN} \
+                ${sysconfdir}/apache2/conf.d"
+ 
+-RDEPENDS_${PN} += "bash"
++RDEPENDS_${PN} += "bash php-cli"
 -- 
-1.9.4
+2.7.4
 
 
