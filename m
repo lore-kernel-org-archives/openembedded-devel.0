@@ -1,47 +1,46 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id ED1A6745AC
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B0F8D78869
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Aug 2018 23:01:08 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id r24-v6so362141wmh.0
+	Wed,  8 Aug 2018 09:00:26 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id z74-v6so954473qkb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Aug 2018 16:01:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=52bwNQYO/xNTFR5nNAlDg0WU+xMmN+tsNkVEfwZTk+Y=;
-	b=BFk5SuW8Vk47dYYl2oYme+bDifc+FEd0BYekxz2TLBiOYYAfa4SGQeG/bWl5ol6Ikz
-	0vLy7uzEMERjiwFuEaf8iGWy6lBV1pHU48kAHT5RVKxygAimtdhVUMG0hEh5DCTiTFt9
-	dyOcGav7Hyv1/+BlnxSWE2k6f5FHNRtB/r7rHyry527+IVhTVvPyo7+hW+GZX4uS6qar
-	vMdxELDBeHWaMarmLylJ35KGuojmW+ueBaRhCND99FNuO5SKpKuSY55gF+iFlr+LppCx
-	sLtgpmm8LXv00gDRHODaRlzHNID6KQPNMgA0VMbYSamlzA2MmBVmb8y+gLD9VfBXB3k/
-	HHTw==
+	Wed, 08 Aug 2018 02:00:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=52bwNQYO/xNTFR5nNAlDg0WU+xMmN+tsNkVEfwZTk+Y=;
-	b=XbJL1uy54sOk/TUWvTPXGezMNL26Y+KU+2VAaGztSb+PWxzIyAYXzrnkSblRxYT/ZW
-	U7Jib2eA+T8tSR7BHLCxDhCRvRfGy+pPhi/jfeLwqN8Yb0TrPUxMQHatodvCsTobJrgW
-	nNFHTB6bl7BJokuJQHM0TGqFY14nXmQpiXREI6b0VffXReuyHA0MCqsAdkDFmUZmiW6t
-	yJB/s52PgmCKVV/34d/FKz+pD+pgqTQBxyMJsL0OSfrA/P5/qbyt3HBspZwEYFifB+h9
-	c3KY68JiSBt5Aa9KRJf1DkjvcHOXJJ64cKDCuyQv3wFQ0rso5JE7f0QSOlG8UgwUq1YK
-	2xlw==
-X-Gm-Message-State: AOUpUlF8e0nNEWmvPF1rjGerX78UmjSUEBchbtuX8O9pBfw3ev1rGIXy
-	xWLSYJmNtVC+Jk7KBC1skgcVdYDh
-X-Google-Smtp-Source: AA+uWPzARmWjAoHX1rL9OmmRrlDs2eWOQifRxjZ0pK+sa7ov8N8kZ4DHVadPCgTlhna4wx3/I+A0eA==
-X-Received: by 2002:a1c:b49:: with SMTP id 70-v6mr216009wml.149.1533682869308; 
-	Tue, 07 Aug 2018 16:01:09 -0700 (PDT)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
-	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
-	l72-v6sm7388972wma.17.2018.08.07.16.01.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 07 Aug 2018 16:01:08 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Aug 2018 23:01:03 +0000
-Message-Id: <1533682863-25087-1-git-send-email-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Alex Kiernan <alex.kiernan@hivehome.com>
-Subject: [meta-python][PATCH] python-m2crypto: Move swig fix to configure task
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=XzBt6WawvNYKSc5bJB9AQFH7P9G8KVmhoHJFVjmEdlU=;
+	b=HYGc+XdT/ZAhk4pytbYAuK/1zHe+gR5wKr3Pdxk66CuZigzcRgPoQhVlAZR1RBhAx3
+	tOymrzRrvsU0GOKDpPv2WDCdA6LpaRrmUMc7zEZ5AZpn2/YJN6+7GIbDQVPmKmUh1qXp
+	eRpf/pk/40WQqre3+NWtkkam2nXEm163+cfLUC+PZ0wApuLU8YOVtCF6mDHhpBGvPTp0
+	Tzuq6G6RYQtbXKCvVDMMr+3BJIQvBQwyzBYzKty8vctXP7ID35DLNOeKIousodjCUUZl
+	x5fgHpYLrMmftpwfCb3A/r8Vz6pCmZ/h754IDXbPGhv34jsw92Y9qDUVJ3yA1eeKH6SJ
+	VYwg==
+X-Gm-Message-State: AOUpUlGcErvCP/Y59cywnJL9rGNNxivbgG5FSDRDOmMUFxPMdV6NhVAf
+	zrgIsNDPTOSMlFPZjmAh2OZE5ZtI
+X-Google-Smtp-Source: AA+uWPyA0Lo7A+ZavdLOonAfDPOjBSNj0K31+r9FLelK8kG1b3PynnNgITWLWwE1NwVq/44vxmafTw==
+X-Received: by 2002:a37:b445:: with SMTP id
+	d66-v6mr1553015qkf.357.1533718827472; 
+	Wed, 08 Aug 2018 02:00:27 -0700 (PDT)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	o68-v6sm2130528qkf.9.2018.08.08.02.00.25
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 08 Aug 2018 02:00:26 -0700 (PDT)
+Message-ID: <45f8db3f198dfefc9e9c437457f24a6ba82d92ac.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: Richard Leitner <richard.leitner@skidata.com>, 
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 08 Aug 2018 10:00:23 +0100
+In-Reply-To: <902bc2a0-067b-fb87-efd3-66ff587e80b3@skidata.com>
+References: <20180802144523.28023-1-andreas.obergschwandtner@skidata.com>
+	<44106c2a8fb083e5ad989a46c03cc5bbc996b754.camel@andred.net>
+	<902bc2a0-067b-fb87-efd3-66ff587e80b3@skidata.com>
+X-Mailer: Evolution 3.28.2-1 
+Mime-Version: 1.0
+Subject: Re: [meta-java][PATCH 1/2] classes:java: move version_specific_cflags to java.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,37 +53,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Aug 2018 23:01:09 -0000
+X-List-Received-Date: Wed, 08 Aug 2018 09:00:26 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-From: Alex Kiernan <alex.kiernan@hivehome.com>
+Hi,
 
-Fixes:
+On Mon, 2018-08-06 at 08:31 +0200, Richard Leitner wrote:
+> On 08/04/2018 11:53 AM, André Draszik wrote:
+> > On Thu, 2018-08-02 at 16:45 +0200, Andreas Obergschwandtner wrote:
+> > > moved version_specific_cflags from openjfdk-8-common.inc to
+> > > java.bbclass
+> > > and
+> > > renamed it to java_version_specific_cflags because it will be used for
+> > > a
+> > > fix
+> > > in icedtea7
+> > 
+> > Does it really make sense to have openjdk / icedtea specific flags in a
+> > generic java class in a function with a generic name as is
+> > java_version_specific_cflags?
+> 
+> As far as I understood this patch the specific GCC flags are in the
+> openjdk/icedtea recipe (those FLAGS_GCCx which are appended to C(XX)FLAGS
+> using the java_version_specific_cflags function).
+> 
+> Therefore I think the function itself is not bound to any recipe at all as
+> it only checks if the flags should be set for the used GCC version.
+> 
+> Nonetheless a improvement which would make sense IMHO is:
+>  a) either getting the fact it's for GCC-only inside the function name or
+>     make it work for all supported compilers
+>  b) maybe move it to oe-core or meta-oe as it might be useful also for
+>     other recipes (beside java).
+> 
+> What do you think about it?
 
-| DEBUG: Executing shell function do_configure
-...
-| SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
-| error: command 'swig' failed with exit status 1
+OK, fair enough, the commit message subject is mentioning
+version_specific_cflags, and I didn't read the actual patch carefully
+enough.
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
----
+Still, this patch places things related to *compiling* Java itself into a
+class (java.bbclass) that is meant to be used by recipes building/installing
+java sources judging by the class' name.
 
- meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Maybe it would be better to create a new class for these things instead?
+> 
+> As mentioned above, I don't think it is openjdk/icedtea specific...
+> Basically it's not even java specific. IMHO it's a plain helper function
+> for GCC flags which are not supported in older releases of GCC. So maybe
+> there's really a better place to be in for this function. Any ideas?
 
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-index 272c76c..7e22163 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-+++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-@@ -27,7 +27,7 @@ export SWIG_FEATURES
- # Get around a problem with swig, but only if the
- # multilib header file exists.
- #
--do_compile_prepend() {
-+do_configure_prepend() {
-     ${CPP} -dM - < /dev/null | grep -v __STDC__ | grep -v __REGISTER_PREFIX__ | grep -v __GNUC__ \
- 	| sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' > SWIG/gcc_macros.h
-     if [ "${SITEINFO_BITS}" = "64" ];then
--- 
-2.7.4
+In this specific case, it's a patch against master, and it's for GCC >= 6.
+Are compilers not supporting -fno-lifetime-dse -fno-delete-null-pointer-
+checks (gcc 5?) even still supported by everything on master? Would it make
+sense to add -fno-lifetime-dse -fno-delete-null-pointer-checks to CFLAGS
+CXXFLAGS unconditionally instead?
+
+
+Cheers,
+Andre'
 
 
