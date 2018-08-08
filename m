@@ -1,50 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
-	[209.85.218.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FC8978BFD
+Return-Path: <freebendy@gmail.com>
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F13778D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Aug 2018 10:00:30 +0000 (UTC)
-Received: by mail-oi0-f51.google.com with SMTP id k12-v6so2704048oiw.8
+	Wed,  8 Aug 2018 13:45:00 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id f6-v6so1069218plo.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Aug 2018 03:00:31 -0700 (PDT)
+	Wed, 08 Aug 2018 06:45:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=qAdCdvtHtZuBs13xnJsZMWqmqyM141vXk5cKKiJb57Y=;
-	b=YZDeT6iryPSKFEDai8WPjWO5qxswecW57tC5Hrfh9gx3yCZo0i6gXi2UaUxh4U9qG9
-	6EyV4HqmbyGb3YirxvNQpqsiYfv8sMBZDk8OHU65cVvWS7YWtxNR3zAeCMqJAJv6RAQ6
-	nkMKqmQWQw3YC5Qpoq3okWTeju7S0ctRcR90gjMAYuGvY1XH9aRPFL0jtZeZIsIRXRJw
-	iZabuN26Ko5fR4YWXLoRKkc44T50cjb1V60wWk9p3Uw3eGnEse5phDYokroIL44+r1NR
-	dBma20UP2AsJvG227B4Cu0iSfcyIkqQYZ7Ho1hEsXSZYlCKivOo3ey992EId78y5FTOH
-	9AAw==
+	h=from:to:cc:subject:date:message-id;
+	bh=22yaKZoix6QzcE2JwxcvkQDBTiierh1wb9mg+tX5utE=;
+	b=mGeVN0JtfOOkoov0pF0F5AkA6z3eFYM60mLu+Wo/TejYmcJT28lC70M9H7BS5Ax9ok
+	PVQo6kl4DDxU6adN3H6Y8r9wCV3wHqDKeDHDvKIldyl4QygKOBJp9hkFanALBDS/R9W6
+	4fOLGF1H4xkMLkfhVmF/sX6zMvS2Bsp5Nnn0rc1WXX7ynqa8Nnpkcq4UPR7hib0ipKfN
+	fY8sWdxJgDL3mm2npDZQSaGgmA+nJU8O6SQHqm6joRt9WEFtx6WQXoEVvcQM4OJ+1ye1
+	ihpbOTuwO0Gus7+pPgMsTWNIpkQhDOr0ttU/ZcS219W6EessBwLccxMdpIZIuyH14iAg
+	AiDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=qAdCdvtHtZuBs13xnJsZMWqmqyM141vXk5cKKiJb57Y=;
-	b=XOz5PIeZ6XAEQ+CD4UAqjtCpE9ow1AbMt1m2IvHDJWUOX+OkH30UYFD1YZbmijNqlQ
-	Ly6m3dV8QPEkYcuu1REfvQThS8u4oLxNdYoxtDIEeytmAUGXa1KSUxF+P8fbNzEM7Bxo
-	Wl3NQikb+FQ0EhympajHIFk9rZl++tysYI0odQhBvWgrUXLXTWUqslJLWoPd39Gl5XoA
-	kepSLP2nzYNj6DRbcuI15eN6LggwfcIOatwYLRrC208VkDxpd+T0UT+Rt8zsJ255Mbkf
-	DO6fxVdQsmKG1yfFwGh2EkIub6rGbe6Hy2aM3sfcm7YJTyQrlE7S2eJdqNFG3XVCzJHw
-	tB3Q==
-X-Gm-Message-State: AOUpUlH4KbSTTiqMLITAXi7G7E0kP/NW5rEmBydyehgr3Qu0PDkamo3c
-	4h5/sKLN+31znJMWa3pQMl7+UE7HvM/OAffLUR4=
-X-Google-Smtp-Source: AA+uWPyrYP24/7q1HD/Z+ecX80/avBtBlkrLTqCm4vl9UqMI09grssJQ3xcLDWX+8RJ/zSK7xGskBPK0uLU7oN+rqJM=
-X-Received: by 2002:aca:bf07:: with SMTP id
-	p7-v6mr2343818oif.285.1533722431108; 
-	Wed, 08 Aug 2018 03:00:31 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:590c:0:0:0:0:0 with HTTP;
-	Wed, 8 Aug 2018 03:00:30 -0700 (PDT)
-In-Reply-To: <20180806085408.44739-1-kai.kang@windriver.com>
-References: <20180806085408.44739-1-kai.kang@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 8 Aug 2018 12:00:30 +0200
-Message-ID: <CALbNGRTVzUQLu0ZkB0-006SHAhpYQt-vWZsxssJEkJc_8VJRzA@mail.gmail.com>
-To: Kai Kang <kai.kang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH 00/10] Upgrade packages in layer meta-xfce
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=22yaKZoix6QzcE2JwxcvkQDBTiierh1wb9mg+tX5utE=;
+	b=eTW4MeMGrP9gkwJ24U0pXpdnQQujjrlWbelq4E6RqhRseZMmiKL1bP0bAtNGsRxp6z
+	HoSBBEs9AjABCJBCJDPIGRIofcyJocGs2OmP374kaW8hZG8ANAQiO3MA2iq1xXQZvoa9
+	mvSPtos29ZUf4ItblAa+IDEYk4K8bB0CAnO3lj1uKXPBMBvwU0LKHdvCP+CEBQY4Rwxh
+	h1UCMriVLYpqo+rFQtD9pAVy7LBlPzqnH6EosnrUlTeoLzNCTvhMUGwoL1PUzxF7ZgXG
+	MDlRB8WUMd3SYBc7VJj2XybU61qyJq1MiKZSC1uLo/fhu7m7n1eJkHCuwJIwFh6CbMdC
+	Vmdw==
+X-Gm-Message-State: AOUpUlEFGpUSX2/gnSN/AFxP1Xlrafxt/8YEiVFnnAeiZyXFNU3yrgni
+	EWEO4ztemnFVM4wd8gCuyEKH7ZzgKw==
+X-Google-Smtp-Source: AA+uWPz3i05s6SxLWHfwsVVOTvz4zMmdGx0x0lcPW0zUu4IAjv7p6uDmwExUYMYzBM8XfxFv61cxfA==
+X-Received: by 2002:a17:902:6ac3:: with SMTP id
+	i3-v6mr2707877plt.252.1533735901453; 
+	Wed, 08 Aug 2018 06:45:01 -0700 (PDT)
+Received: from localhost.localdomain ([116.7.217.1])
+	by smtp.gmail.com with ESMTPSA id
+	14-v6sm10837793pft.93.2018.08.08.06.44.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Aug 2018 06:45:00 -0700 (PDT)
+From: Binghua Guan <freebendy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Aug 2018 13:43:22 +0000
+Message-Id: <20180808134322.3996-1-freebendy@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-python] [PATCH] meta-python: add python-pycodestyle recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,61 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Aug 2018 10:00:30 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Aug 2018 13:45:00 -0000
 
-On Mon, Aug 6, 2018 at 10:53 AM, Kai Kang <kai.kang@windriver.com> wrote:
->
->
-> Kai Kang (10):
->   libwnck3: 3.20.1 -> 3.24.1
->   xfce4-mount-plugin: 1.1.2 -> 1.1.3
->   xfce4-hotcorner-plugin: fix library install path
->   xfce4-embed-plugin: 1.0.0 -> 1.6.0
->   xfce4-eyes-plugin: 4.4.5 -> 4.5.0
->   xfce4-genmon-plugin: 4.0.0 -> 4.0.1
->   exo: 0.12.1 -> 0.12.2
->   xfce4-session: 4.12.1 -> 4.13.0
->   xfconf: 4.13.4 -> 4.13.5
->   xfwm4: 4.12.4 -> 4.12.5
->
->  .../{libwnck3_3.20.1.bb =3D> libwnck3_3.24.1.bb}     |  7 ++--
->  ...plugin_1.0.0.bb =3D> xfce4-embed-plugin_1.6.0.bb} |  6 ++--
->  ...-plugin_4.4.5.bb =3D> xfce4-eyes-plugin_4.5.0.bb} |  4 +--
->  ...lugin_4.0.0.bb =3D> xfce4-genmon-plugin_4.0.1.bb} |  4 +--
->  ...1-CMakeLists.txt-fix-library-install-path.patch | 39 ++++++++++++++++=
-++++++
->  .../hotcorner/xfce4-hotcorner-plugin_0.0.2.bb      |  5 ++-
->  ...plugin_1.1.2.bb =3D> xfce4-mount-plugin_1.1.3.bb} |  4 +--
->  .../exo/{exo_0.12.1.bb =3D> exo_0.12.2.bb}           |  4 +--
->  ...4-session_4.12.1.bb =3D> xfce4-session_4.13.0.bb} |  6 ++--
->  .../xfconf/{xfconf_4.13.4.bb =3D> xfconf_4.13.5.bb}  |  4 +--
->  .../xfwm4/{xfwm4_4.12.4.bb =3D> xfwm4_4.12.5.bb}     |  6 ++--
->  11 files changed, 66 insertions(+), 23 deletions(-)
->  rename meta-gnome/recipes-gnome/libwnck/{libwnck3_3.20.1.bb =3D> libwnck=
-3_3.24.1.bb} (70%)
->  rename meta-xfce/recipes-panel-plugins/embed/{xfce4-embed-plugin_1.0.0.b=
-b =3D> xfce4-embed-plugin_1.6.0.bb} (57%)
->  rename meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.4.5.bb =
-=3D> xfce4-eyes-plugin_4.5.0.bb} (68%)
->  rename meta-xfce/recipes-panel-plugins/genmon/{xfce4-genmon-plugin_4.0.0=
-.bb =3D> xfce4-genmon-plugin_4.0.1.bb} (71%)
->  create mode 100644 meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotco=
-rner-plugin/0001-CMakeLists.txt-fix-library-install-path.patch
->  rename meta-xfce/recipes-panel-plugins/mount/{xfce4-mount-plugin_1.1.2.b=
-b =3D> xfce4-mount-plugin_1.1.3.bb} (70%)
->  rename meta-xfce/recipes-xfce/exo/{exo_0.12.1.bb =3D> exo_0.12.2.bb} (87=
-%)
->  rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.12.1.bb =3D=
-> xfce4-session_4.13.0.bb} (83%)
->  rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.13.4.bb =3D> xfconf_4.13.=
-5.bb} (75%)
->  rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.12.4.bb =3D> xfwm4_4.12.5.b=
-b} (73%)
->
-> --
-> 2.11.0
->
-Acked-By: Andreas M=C3=BCller <schnitzeltony@gmaill.com>
+Signed-off-by: Binghua Guan <freebendy@gmail.com>
+---
+ .../recipes-devtools/python/python-pycodestyle.inc   | 12 ++++++++++++
+ .../python/python-pycodestyle_2.4.0.bb               |  4 ++++
+ .../python/python3-pycodestyle_2.4.0.bb              |  2 ++
+ 3 files changed, 18 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pycodestyle.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pycodestyle_2.4.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pycodestyle_2.4.0.bb
+
+diff --git a/meta-python/recipes-devtools/python/python-pycodestyle.inc b/meta-python/recipes-devtools/python/python-pycodestyle.inc
+new file mode 100644
+index 000000000..c0e46b7ea
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pycodestyle.inc
+@@ -0,0 +1,12 @@
++SUMMARY = "Python style guide checker (formly called pep8)"
++HOMEPAGE = "https://pypi.org/project/pycodestyle"
++LICENSE = "MIT"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=01831ddbaf398471da3cc87f5037e822"
++
++SRC_URI[md5sum] = "85bbebd2c90d2f833c1db467d4d0e9a3"
++SRC_URI[sha256sum] = "cbfca99bd594a10f674d0cd97a3d802a1fdef635d4361e1a2658de47ed261e3a"
++
++inherit pypi
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pycodestyle_2.4.0.bb b/meta-python/recipes-devtools/python/python-pycodestyle_2.4.0.bb
+new file mode 100644
+index 000000000..7c736e76f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pycodestyle_2.4.0.bb
+@@ -0,0 +1,4 @@
++inherit setuptools
++require python-pycodestyle.inc
++
++RDEPENDS_${PN} += "${PYTHON_PN}-lang"
+diff --git a/meta-python/recipes-devtools/python/python3-pycodestyle_2.4.0.bb b/meta-python/recipes-devtools/python/python3-pycodestyle_2.4.0.bb
+new file mode 100644
+index 000000000..cedcdb3bf
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pycodestyle_2.4.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pycodestyle.inc
+-- 
+2.17.1
+
 
