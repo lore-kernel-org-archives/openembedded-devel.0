@@ -1,42 +1,44 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yw1-f67.google.com (mail-yw1-f67.google.com
-	[209.85.161.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 73A4B6086F
+Received: from mail-yw1-f48.google.com (mail-yw1-f48.google.com
+	[209.85.161.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 635676086F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Aug 2018 00:26:48 +0000 (UTC)
-Received: by mail-yw1-f67.google.com with SMTP id l189-v6so2979005ywb.10
+	Thu,  9 Aug 2018 00:26:49 +0000 (UTC)
+Received: by mail-yw1-f48.google.com with SMTP id e23-v6so2974064ywe.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Aug 2018 17:26:49 -0700 (PDT)
+	Wed, 08 Aug 2018 17:26:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=3jHCx+SSVndpJJjPzjtjD7CP/UQDCEcWcr6ksJHYiOc=;
-	b=Uq4eB915WNIayUczVI9IAI/LwzH5zVUlsRhelD7H5YJG3wnQrfcEy6gehWeuAayIQn
-	2aYiM88w2YB/vmZ8KxzbN0RsDMLDIvB86a7dPyFAzVTtVVaSUXkLhPVRcqRkzs0aJWRm
-	Y9SUayQXqSjBzPIryZ3hENM7zN4L78Nld077/hIpDg2ngK22xQ0pRyKXiCjOqLxc/WWW
-	wPlkkCIwTM4bdYufFA1MQ7nxByJbaMYiAd3LBbOeRd9tq8/4txCu0XBmhM+gS/4ux4BJ
-	hqgKe1Rrh3JG4Ikw2yZmZ5R9pyO/81e6eB76WHMIEhgeKDagzpSAJITwSWm2I7n78Qoc
-	vdHw==
-X-Gm-Message-State: AOUpUlF2/IudtoMXzh3m5G7492oiLTJa6INUs2sLgNOMWgGvQ3fcEBh8
-	ijOKZBgzsXo/Hz2i/ztZ3xH4U2qv
-X-Google-Smtp-Source: AA+uWPwWY8SgAGFkiWAs5Z7xbVWmEekSfm9EblVFLLb9KtfQsT5S03UP3nz07L6iIEY5Q+AHW3VeqQ==
-X-Received: by 2002:a25:14c5:: with SMTP id
-	188-v6mr2774046ybu.24.1533774409069; 
-	Wed, 08 Aug 2018 17:26:49 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=SHkGVw5urdODyWwuzM4Kk6jORxC5XDUvPoixmQ5Z0uo=;
+	b=BKAv8+NubZY814EAwt5CLv8B4798BtfYa/5/hEP+qY7WU4O8IICZS5jHinGDRxZS24
+	sYG4vPZ+81cH9451sYMtPo7D9mx5203jV5rrZB9lrLO62N3uVTWk2wZBLMISsfK7JpF6
+	1yUB/DyvgvE0QclKZwGeowOwy+8S2rbZw+wU52PxueL3St7z7xRfEnzufymYVVs414mi
+	UGhYsxcfGT3h76uyo3sao0tecj+IxtRhjw+qtV3PSZT6wLaLInz+Gu2cI2EVQh68qTGj
+	ms5ayKgPV3X7Z4Pwi0J8ncEROfVDX69u/7U8bWM7bztmC/SMM/Dgi0cCbadxRtUsonk1
+	kAuQ==
+X-Gm-Message-State: AOUpUlFTGOeQIjGOMw/P+9seCcH+TL/ry9/IVqHcFF8QcBiXfhNEiBU1
+	1AESjFZMtlu9ZwurSvcLlkLrfuO3
+X-Google-Smtp-Source: AA+uWPw1OX4djmr60+/TTgXacRYQrL0SScrjx8MsWbJ9yTL3jQGJOdY6VHTx0eFOjQqKjJInkDYOyQ==
+X-Received: by 2002:a81:59c6:: with SMTP id
+	n189-v6mr2697273ywb.30.1533774410329; 
+	Wed, 08 Aug 2018 17:26:50 -0700 (PDT)
 Received: from tfsielt31850.jci.com (188-141-55-36.dynamic.upc.ie.
 	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
-	u67-v6sm2132354ywa.56.2018.08.08.17.26.47
+	u67-v6sm2132354ywa.56.2018.08.08.17.26.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Aug 2018 17:26:48 -0700 (PDT)
+	Wed, 08 Aug 2018 17:26:49 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Aug 2018 01:26:41 +0100
-Message-Id: <20180809002644.18549-1-git@andred.net>
+Date: Thu,  9 Aug 2018 01:26:42 +0100
+Message-Id: <20180809002644.18549-2-git@andred.net>
 X-Mailer: git-send-email 2.18.0
+In-Reply-To: <20180809002644.18549-1-git@andred.net>
+References: <20180809002644.18549-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-java][master-next][PATCH 1/4] gitignore: ignore new python byte-code files
+Subject: [meta-java][master-next][PATCH 2/4] openjdk-8: speed-up do_install() (pack200)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,32 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Aug 2018 00:26:48 -0000
+X-List-Received-Date: Thu, 09 Aug 2018 00:26:49 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: André Draszik <andre.draszik@jci.com>
 
-Since we run oeqa tests, we get python byte-code in
-the source tree here.
+We run pack200 sequentially on all found archives, but there
+doesn't seem to be a reason to do so, the
+java_get_parallel_make() apperas to be related to compiling
+java itself, running multiple java applications (pack200)
+at the same time on the same machine should be possible,
+otherwise we have a big problem...
 
-Ignore them to clean-up the git status
+Just run up to BB_NUMBER_THREADS pack200 processes at the same
+time to speed up the build.
 
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- .gitignore | 1 +
- 1 file changed, 1 insertion(+)
+ recipes-core/openjdk/openjdk-8-cross.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/.gitignore b/.gitignore
-index 51a512c..8e5c599 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -1,4 +1,5 @@
- *.bak
- *.orig
-+*.pyc
- *.rej
- *.swp
+diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
+index 03cab11..d0b2ec8 100644
+--- a/recipes-core/openjdk/openjdk-8-cross.inc
++++ b/recipes-core/openjdk/openjdk-8-cross.inc
+@@ -77,13 +77,13 @@ do_install_append() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'repack', 'true', 'false', d)} ; then
+       if [ -d ${D}${JDK_HOME} ] ; then
+         find ${D}${JDK_HOME} -name "*.jar" -print0 | \
+-          xargs -0 -n1 -P ${@java_get_parallel_make(d)} sh -c ' \
++          xargs -0 -n1 -P ${BB_NUMBER_THREADS} sh -c ' \
+               echo "Repacking" "$0" ; \
+               pack200 --repack --effort=9 --segment-limit=-1 --modification-time=latest --strip-debug "$0"'
+       fi
+       if [ -d ${D}${JRE_HOME} ] ; then
+         find ${D}${JRE_HOME} -name "*.jar" -print0 | \
+-          xargs -0 -n1 -P ${@java_get_parallel_make(d)} sh -c ' \
++          xargs -0 -n1 -P ${BB_NUMBER_THREADS} sh -c ' \
+               echo "Repacking" "$0" ; \
+               pack200 --repack --effort=9 --segment-limit=-1 --modification-time=latest --strip-debug "$0"'
+       fi
 -- 
 2.18.0
 
