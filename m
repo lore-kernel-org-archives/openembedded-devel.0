@@ -1,26 +1,46 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 239B378E7D
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-yw1-f67.google.com (mail-yw1-f67.google.com
+	[209.85.161.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CE1078DE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Aug 2018 05:17:28 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w795HAS4020535
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  9 Aug 2018 07:53:58 +0000 (UTC)
+Received: by mail-yw1-f67.google.com with SMTP id q129-v6so3598870ywg.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Aug 2018 22:17:20 -0700
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 8 Aug 2018 22:16:59 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Aug 2018 13:16:47 +0800
-Message-ID: <1533791809-371521-3-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1533791809-371521-1-git-send-email-changqing.li@windriver.com>
-References: <1533791809-371521-1-git-send-email-changqing.li@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH][meta-oe] oprofile: upgrade 1.2.0 -> 1.3.0
+	Thu, 09 Aug 2018 00:53:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Fs81mNdDPHImq0yfS15nNOFtyK2pTaBFVORrH8SbLpM=;
+	b=m5TGu4XI6MExkwfDMFDAZNzaogUZy79ojpZX3f0hwCF+LGXHUVwfvRC35fgkJr1sEc
+	w+QtB/AWgQ6F67BbSKMymhutpku5ftWTjbYqHemBtvgtG1spnDEOpZpeQAOVUNlQEcB3
+	0+FP+aPP2wuGE9zp5gU3G/dYYhK9Y27bEeJMMrFjS23B1CybHowQx1pfTErVyWSdEezK
+	KmKGJoahteLDJktXyLnVoDjoFbxh2XZqLQ7a0PsZDldtVUa2vK6EuoeFSrpPkG/glLVW
+	hKdqY2hsbDp3nG3SGnsK+x5xl9rahsROAvgOOq9/i0VmUf+b3Z615+QkMiuYgowXN5FG
+	4MIw==
+X-Gm-Message-State: AOUpUlE21cAtMdlS9zKUXzXegK1NFcqkPPNyHLFeV61B6E+VxYF7DsP/
+	V5ekDVfTH11eONtOlR/r9y86ew/2
+X-Google-Smtp-Source: AA+uWPyL42mXSgHby8KOMhTeTmikgitXCW5+9dH1MZBeoPlHjwU9+XJ4B7NotSmKCrU+UeyOsJGEFw==
+X-Received: by 2002:a81:1690:: with SMTP id
+	138-v6mr475927yww.507.1533801239190; 
+	Thu, 09 Aug 2018 00:53:59 -0700 (PDT)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	v129-v6sm2452486ywa.76.2018.08.09.00.53.57
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 09 Aug 2018 00:53:58 -0700 (PDT)
+Message-ID: <51c0ef3f90e70b80fef4b5de2a185f4a6b57e6fe.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: Richard Leitner <richard.leitner@skidata.com>, 
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 09 Aug 2018 08:53:55 +0100
+In-Reply-To: <adb7f3f5-cb65-cf96-be52-e02bb06428d8@skidata.com>
+References: <20180727132923.15149-1-git@andred.net>
+	<20180727132923.15149-5-git@andred.net>
+	<adb7f3f5-cb65-cf96-be52-e02bb06428d8@skidata.com>
+X-Mailer: Evolution 3.28.2-1 
+Mime-Version: 1.0
+Subject: Re: [meta-java][RFC][PATCH 5/7] layer.conf: set defaults for Java JRE (R)PROVIDERS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,103 +53,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Aug 2018 05:17:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Aug 2018 07:53:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+On Thu, 2018-08-02 at 12:49 +0200, Richard Leitner wrote:
+> Hi André,
+> 
+> On 07/27/2018 03:29 PM, André Draszik wrote:
+> > From: André Draszik <andre.draszik@jci.com>
+> > 
+> > OpenJRE-8 seems like a good choice.
+> 
+> I'm not sure if OpenJRE-8 is the best choice as it currently doesn't
+> support JIT for
+> arm architectures...
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- meta-oe/recipes-kernel/oprofile/oprofile.inc       |  1 -
- .../0001-fix-musl-libc-compile-error.patch         | 30 ----------------------
- meta-oe/recipes-kernel/oprofile/oprofile_1.2.0.bb  | 10 --------
- meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb  | 10 ++++++++
- 4 files changed, 10 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/oprofile/oprofile/0001-fix-musl-libc-compile-error.patch
- delete mode 100644 meta-oe/recipes-kernel/oprofile/oprofile_1.2.0.bb
- create mode 100644 meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
+Oh, thanks. I didn't realise that...
 
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile.inc b/meta-oe/recipes-kernel/oprofile/oprofile.inc
-index dabc30b..349e2bf 100644
---- a/meta-oe/recipes-kernel/oprofile/oprofile.inc
-+++ b/meta-oe/recipes-kernel/oprofile/oprofile.inc
-@@ -30,7 +30,6 @@ UPSTREAM_CHECK_REGEX = "oprofile-(?P<pver>\d+(\.\d+)+)/"
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/oprofile/files/oprofile/"
- 
- SRC_URI_append_libc-musl = " file://musl.patch \
--                             file://0001-fix-musl-libc-compile-error.patch \
- "
- 
- inherit autotools pkgconfig ptest
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile/0001-fix-musl-libc-compile-error.patch b/meta-oe/recipes-kernel/oprofile/oprofile/0001-fix-musl-libc-compile-error.patch
-deleted file mode 100644
-index c21a105..0000000
---- a/meta-oe/recipes-kernel/oprofile/oprofile/0001-fix-musl-libc-compile-error.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 512f1b3a4727a3a18f8fa55f196eedcacdd4a872 Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Wed, 18 Jul 2018 13:01:03 +0800
--Subject: [PATCH] fix musl libc compile error
--
--use op_basename instead of basename to fix below error:
--../../oprofile-1.2.0/pp/oparchive.cpp:264:20: error: 'basename'
--was not declared in this scope
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- pp/oparchive.cpp | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/pp/oparchive.cpp b/pp/oparchive.cpp
--index 6221e14..274152b 100644
----- a/pp/oparchive.cpp
--+++ b/pp/oparchive.cpp
--@@ -261,7 +261,7 @@ int oparchive(options::spec const & spec)
-- 		/* determine the session name of sample file */
-- 		int offset = sample_name.find('{');
-- 		string base_samples_dir = sample_name.substr(0, offset-1);
---		string session = basename(base_samples_dir.c_str());
--+		string session = op_basename(base_samples_dir.c_str());
-- 		/* Get rid of the the archive_path from the name */
-- 		string sample_base = sample_name.substr(offset);
-- 		string sample_archive_file = dest_samples_dir + "/" + session + "/" + sample_base;
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.2.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.2.0.bb
-deleted file mode 100644
-index e85e805..0000000
---- a/meta-oe/recipes-kernel/oprofile/oprofile_1.2.0.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require oprofile.inc
--
--DEPENDS += "virtual/kernel"
--DEPENDS_append_powerpc64 = " libpfm4"
--
--SRC_URI[md5sum] = "4fcd3920984dcb607314b2e225086c3a"
--SRC_URI[sha256sum] = "eb95f98c40b7d0ee29b45fba3565d9f8381747528aa6b6159e37d4fa0c8ca57d"
--
--S = "${WORKDIR}/oprofile-${PV}"
--
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-new file mode 100644
-index 0000000..1dc535e
---- /dev/null
-+++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-@@ -0,0 +1,10 @@
-+require oprofile.inc
-+
-+DEPENDS += "virtual/kernel"
-+DEPENDS_append_powerpc64 = " libpfm4"
-+
-+SRC_URI[md5sum] = "bd998df5521ebedae31e71cd3fb6200b"
-+SRC_URI[sha256sum] = "95ded8bde1ec39922f0af015981a67aec63e025a501e4dc04cd65d38f73647e6"
-+
-+S = "${WORKDIR}/oprofile-${PV}"
-+
--- 
-2.7.4
+Anybody know why? Just nobody interested enough so far to integrate the
+aarch32 hotspot port into meta-java?
+
+
+Cheers,
+Andre'
 
 
