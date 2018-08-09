@@ -1,82 +1,35 @@
-Return-Path: <MANJUKUM@xilinx.com>
-X-Greylist: delayed 48928 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 09 Aug 2018 15:29:53 UTC
-Received: from NAM01-SN1-obe.outbound.protection.outlook.com
-	(mail-sn1nam01on0040.outbound.protection.outlook.com [104.47.32.40])
-	by mail.openembedded.org (Postfix) with ESMTP id 236D16093A
+Return-Path: <mmcclain@uplogix.com>
+Received: from s05-gw003.mycloudmailbox.com (s05-gw003.mycloudmailbox.com
+	[199.244.76.203])
+	by mail.openembedded.org (Postfix) with ESMTP id 249CA744F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Aug 2018 15:29:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=2ViJ/2SC6yU2EYV3LEWKCpMKa87OFwtCBWERcyAEb4s=;
-	b=gB42tjdR7QcZjRZHYw6cwmA/mJNn8kRU+MZzGPQg+HHmh4+P8AvPU5804A0qM8JX974kvKSjU20RRjS639d0ZSvb8YR5101YPUrxYC3ilE4eZ+UTcFJcYTkW5+sGWHd8tleejVTqsD6fOiL+yN+9JwKj8Gl7VP0P3kIlX82eo/Q=
-Received: from BYAPR02MB4583.namprd02.prod.outlook.com (52.135.239.210) by
-	BYAPR02MB4565.namprd02.prod.outlook.com (52.135.239.204) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1017.15; Thu, 9 Aug 2018 14:55:40 +0000
-Received: from BYAPR02MB4583.namprd02.prod.outlook.com
-	([fe80::8524:66ba:f3be:bce6]) by
-	BYAPR02MB4583.namprd02.prod.outlook.com
-	([fe80::8524:66ba:f3be:bce6%3]) with mapi id 15.20.1038.023;
-	Thu, 9 Aug 2018 14:55:40 +0000
-From: Manjukumar Harthikote Matha <MANJUKUM@xilinx.com>
-To: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] wireshark_2.6.1.bb: Fix the configure error on git
-	describe
-Thread-Index: AQHUL+t7gplyp/fnkkOmtZtVaVJCLqS3ghQQ
-Date: Thu, 9 Aug 2018 14:55:40 +0000
-Message-ID: <BYAPR02MB458332A5F9D09A529BBB5342B9250@BYAPR02MB4583.namprd02.prod.outlook.com>
-References: <1533778721-28693-1-git-send-email-manjukumar.harthikote-matha@xilinx.com>
-	<4b304730-403e-daec-ca87-b7a4423a31dc@gmail.com>
-In-Reply-To: <4b304730-403e-daec-ca87-b7a4423a31dc@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=MANJUKUM@xilinx.com; 
-x-originating-ip: [73.231.161.32]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; BYAPR02MB4565;
-	6:tih+fdA0c/VPjv2D+9//NRrmRK11yOwcE22eTurKZmKYWONWjP09czH9gWO3GM0skWoedYUEiiM5JjhKP6kCwmNxYqMLAMv4rZyLztINseqM9qJDq7QmNjkZpHc/U41q9jl2qmMHf12PKsIWuHWW/6DQsew7RtBP0oUAMC6bmvMycLka1B0A4g1ilGxQZuCDLLfXmH1PAv6ntes8gapHKdyvLRW7KRq8QBDIqn66x6YWUt00WWeKwZBjoJ59j8N9qtSS5KWLOcMCf7VKJciCLo7K5eTKe+zvXVPvc5+DjWKDJtvg0kwdN7lUYbfskl+NVsDo3CNVYGvQ4b/txXnSV5l2sy87TgHAF8PLpWGKiB/JD2al7TgzbfyLjGooQ+hu+dIAUnsxkW8G7IjTLRkVhg0nxpISYaKcj55h2L4w+IdDMpKxZDyPOqEJOCoGbkaYzHUYG9McRzWsDdiQpAe1Eg==;
-	5:OeCBhVmWA2sDvXABLtAkF8BiZaByCgr/TK+Kmn67/uX3z+HkZvM5jTfGcZusylKCMrQES/H+ID4VMizCgl1cjHIFV0LR3VF2550pp+jPIzL3wNSlI8LDxHDAleVglzHh1291DIsCQ++DDm/o7+xZ+Yt3rrtQvqTZtVm+9hjqu14=;
-	7:PSxIEC4Ct3KDOsIwQhxqboT+JEKlHFi1WwN8ywJmoaMD4WiLgpO53srEICNQxiNa6tK3/EZM1DahFku/N7HffYWdqeT4u4B9NqdVSihCT0HBmnZ8vjXluUiYLgKxEJkbboUGsPgowG4myrs4UpGklQur7qOj7RyxPq1stohOg8ECkTOp9FjEb9/c4SML0wgOlVEsVoewxU2ThRup6RTrrcUCx2xMEhNxvIrkweLNGD6TR//NudMyhbY6y/NFfIaX
-x-ms-exchange-antispam-srfa-diagnostics: SOS;
-x-ms-office365-filtering-correlation-id: 36cf55c8-f646-47f0-b151-08d5fe082c93
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989117)(4534165)(4627221)(201703031133081)(201702281549075)(8990107)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:BYAPR02MB4565; 
-x-ms-traffictypediagnostic: BYAPR02MB4565:
-x-microsoft-antispam-prvs: <BYAPR02MB4565C77B7306449B77530ADAB9250@BYAPR02MB4565.namprd02.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(85827821059158)(264703809997249)(192813158149592); 
-x-ms-exchange-senderadcheck: 1
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(3231311)(944501410)(52105095)(93006095)(93001095)(3002001)(6055026)(149027)(150027)(6041310)(20161123560045)(20161123562045)(20161123564045)(20161123558120)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(6072148)(201708071742011)(7699016);
-	SRVR:BYAPR02MB4565; BCL:0; PCL:0; RULEID:; SRVR:BYAPR02MB4565; 
-x-forefront-prvs: 0759F7A50A
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(136003)(346002)(39860400002)(376002)(396003)(366004)(189003)(199004)(13464003)(33656002)(476003)(6436002)(5660300001)(8936002)(102836004)(97736004)(14454004)(256004)(478600001)(53546011)(316002)(2900100001)(81166006)(81156014)(39060400002)(55016002)(486006)(9686003)(186003)(105586002)(76176011)(305945005)(11346002)(2501003)(99286004)(74316002)(7736002)(25786009)(110136005)(26005)(3846002)(5250100002)(6116002)(2906002)(6506007)(86362001)(7696005)(72206003)(229853002)(14444005)(68736007)(66066001)(8676002)(106356001)(6246003)(53936002)(446003);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BYAPR02MB4565;
-	H:BYAPR02MB4583.namprd02.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: xilinx.com does not designate
-	permitted sender hosts)
-x-microsoft-antispam-message-info: hqPVrmP0j0Rw9BQA+y6RTpcOn1MF7VNBC5gC3Ja/UDcncDoxIqzmsrrQai0TS4CYkfM8V8YZ/HAoLaEumluw3GUPLKCQMG1XLlBAU8Qd3R3QpEDmBc1b3912ytgdu9MjQ/SsoBlnAVYdBHT5stFxXDfERocT/IXG0F29jP2b3koQQp10QfXkz8YJDmWM5U+0WOWr3JIAmkoq/5H7Hj74PQou+ZYDTMbWMdapHD+Lk28Fi2srBqimwd0XvsbJZ48T7TzPCTMMFVmNhp6rvd0DjinCNWDCFTNr7/Mf+9ua43cnwdviycaeBumVMwtP4nqrxzEpw9riohqjkNaLdVYOIUWfW1DXZeKxsvRE/OjFmtE=
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Thu,  9 Aug 2018 17:16:55 +0000 (UTC)
+Received: from S05-MBX04-11.S05.local (unknown [10.30.33.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by s05-gw003.mycloudmailbox.com (Postfix) with ESMTPS id
+	41mZgD42SPzVqPR; Thu,  9 Aug 2018 13:16:56 -0400 (EDT)
+Received: from sprocket.local (10.30.32.129) by S05-MBX04-11.S05.local
+	(10.30.33.98) with Microsoft SMTP Server (TLS) id 15.0.1367.3;
+	Thu, 9 Aug 2018 13:16:55 -0400
+To: "Maxin B. John" <maxin.john@intel.com>, =?UTF-8?Q?Andr=c3=a9_Draszik?=
+	<git@andred.net>
+References: <20170930022455.137406-1-fupan.li@windriver.com>
+	<6464289341266dc9d8b146f788f07aac3af57c2a.camel@andred.net>
+	<20180809111952.GA13716@mbabyjoh-desk.ger.corp.intel.com>
+From: Matthew McClain <mmcclain@uplogix.com>
+Message-ID: <80895c2d-a930-902f-c6d7-e83cb98fe579@uplogix.com>
+Date: Thu, 9 Aug 2018 12:16:55 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:52.0)
+	Gecko/20100101 Thunderbird/52.9.1
 MIME-Version: 1.0
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 36cf55c8-f646-47f0-b151-08d5fe082c93
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Aug 2018 14:55:40.2602 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR02MB4565
-Subject: Re: [PATCH] wireshark_2.6.1.bb: Fix the configure error on git describe
+In-Reply-To: <20180809111952.GA13716@mbabyjoh-desk.ger.corp.intel.com>
+X-Originating-IP: [10.30.32.129]
+X-ClientProxiedBy: S05-CAS009.S05.local (10.30.32.59) To
+	S05-MBX04-11.S05.local (10.30.33.98)
+X-RoutingAgent: Treated
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH] openjdk-8-common: Fix the issue of building failed adlc on host with gcc < 6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -89,25 +42,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Aug 2018 15:29:54 -0000
+X-List-Received-Date: Thu, 09 Aug 2018 17:16:56 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
 
-SGkgQXJtaW4sDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogYWt1c3Rl
-cjgwOCBbbWFpbHRvOmFrdXN0ZXI4MDhAZ21haWwuY29tXQ0KPiBTZW50OiBUaHVyc2RheSwgQXVn
-dXN0IDA5LCAyMDE4IDc6MTYgQU0NCj4gVG86IE1hbmp1a3VtYXIgSGFydGhpa290ZSBNYXRoYSA8
-TUFOSlVLVU1AeGlsaW54LmNvbT47IG9wZW5lbWJlZGRlZC0NCj4gZGV2ZWxAbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0hdIHdpcmVzaGFya18yLjYuMS5i
-YjogRml4IHRoZSBjb25maWd1cmUgZXJyb3Igb24gZ2l0DQo+IGRlc2NyaWJlDQo+IA0KPiBNYW5q
-dWt1bWFyLA0KPiANCj4gDQo+IE9uIDA4LzA4LzIwMTggMDY6MzggUE0sIE1hbmp1a3VtYXIgTWF0
-aGEgd3JvdGU6DQo+ID4gVGhpcyBwYXRjaCBmaXhlcyB0aGUgZm9sbG93aW5nIGVycm9yIGR1cmlu
-ZyBkb19jb25maWd1cmUgdGFzaw0KPiA+DQo+ID4gfCBmYXRhbDogTm8gbmFtZXMgZm91bmQsIGNh
-bm5vdCBkZXNjcmliZSBhbnl0aGluZy4NCj4gPiB8IENNYWtlIEVycm9yIGF0IENNYWtlTGlzdHMu
-dHh0OjMwODYgKHN0cmluZyk6DQo+ID4gfCAgIHN0cmluZyBiZWdpbiBpbmRleDogMSBpcyBvdXQg
-b2YgcmFuZ2UgMCAtIDANCj4gPiB8DQo+ID4NCj4gPiBVc2luZyAtLWFsd2F5cyBpcyBhIGZhbGxi
-YWNrIGZvciBmZXRjaGluZyB1bmlxdWVseSBhYmJyZXZpYXRlZCBjb21taXQNCj4gPiBvYmplY3QN
-Cj4gDQo+IFRoZXJlIGlzIGFuIHVwZ3JhZGUgdG8gMi42LjIgc2l0dGluZyBpbiBtYXN0ZXItbmV4
-dC4gSGF2ZSB5b3UgY2hlY2tlZCB0aGF0DQo+IHZlcnNpb24/DQo+IA0KDQpXaWxsIHRyeSBpdCBv
-dXQgbm93IGFuZCBrZWVwIHlvdSBwb3N0ZWQNCg0KVGhhbmtzLA0KTWFuanUNCg0KPC4uLj4NCg0K
+On 8/9/18 6:19 AM, Maxin B. John wrote:
+> On Thu, Aug 09, 2018 at 12:04:01PM +0100, André Draszik wrote:
+>> Hi Maxin,
+>>
+>> You reverted this patch, do you remember what the problem was? It looks
+>> useful, and I believe a solution similar to this one is actually needed...
+> IIRC, this patch caused build error on one machine with gcc version 5.1.1.
+
+I'm interested in the correct solution for this too.
+I'm building on top of CentOS 7 which uses GCC 4.8.5.
+I've currently got variables like the following in a .bbappend to get
+around building adlc which uses the system's compiler.
+
+TARGET_CFLAGS = " -fno-lifetime-dse"
+TARGET_CXXFLAGS = " -fno-lifetime-dse"
+
+I read as much as I could find on the meta-java list before I settled on
+this.
+
+http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/106599.html
+
+Erkka Kääriä:
+ > Adlc is a native tool that openjdk builds and uses during its build 
+process.
+ > Bitbake however passes target machine specific CFLAGS and CXXFLAGS 
+because we
+ > are crosscompiling openjdk for the target architecture. This can 
+cause issues,
+ > if these flags contains values, that work for the Yocto provided 
+crosscompiler
+ > but not for the system compiler.
+ >
+ > As an example, compilation will fail on Ubuntu 14.04 if
+ > -fstack-protector-strong is specified in the distro security flags. 
+Ubuntu
+ > 14.04 ships with GCC 4.8, whereas this flag is only supported by GCC 
+4.9+.
+
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-May/112703.html
+
+Khem Raj:
+ > see if you can check -fno-lifetime-dse options is supported in Makefiles
+ > before using the option, that way you can ensure that its only used with
+ > compilers which support it
+
+I don't think this was ever acted upon.
+
+Thanks,
+Matthew
+
+>> On Fri, 2017-09-29 at 19:24 -0700, fupan.li@windriver.com wrote:
+>>> From: Fupan Li <fupan.li@windriver.com>
+>>>
+>>> The patch recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-adlc-
+>>> flags.patch
+>>> had tried to fix this issue, and it tried to filter out the
+>>> TARGET_FLAGS/TARGET_
+>>> CXXFLGAS, but for the flags such as "-fno-lifetime-dse" was added to
+>>> CFLAGS/CXXFLAGS,
+>>> directly, thus that patch failed to filter it out.
+>>>
+>>> To fix this issue, it's better to add those GCC version specific flags to
+>>> BUILD_CFLAGS/
+>>> BUILD_CXXFLAGS and TARGET_CFLAGS/TARGET_CXXFLAGS separatedly, thus that
+>>> patch can work
+>>> as expected.
+>>>
+>>> Signed-off-by: Fupan Li <fupan.li@windriver.com>
+>>> ---
+>>>   recipes-core/openjdk/openjdk-8-common.inc | 36 ++++++++++++++++++++----
+>>> -------
+>>>   1 file changed, 24 insertions(+), 12 deletions(-)
+>>>
+>>> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-
+>>> core/openjdk/openjdk-8-common.inc
+>>> index 83828e1..c609232 100644
+>>> --- a/recipes-core/openjdk/openjdk-8-common.inc
+>>> +++ b/recipes-core/openjdk/openjdk-8-common.inc
+>>> @@ -231,27 +231,39 @@ FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-
+>>> pointer-checks"
+>>>   # version is and only add the flags that are appropriate for that GCC
+>>>   # version.
+>>>   
+>>> -def version_specific_cflags(d):
+>>> +def version_specific_cflags(d, toolchain):
+>>>       extraflags = None
+>>>       version = None
+>>>   
+>>> -    if bb.data.inherits_class('native', d):
+>>> -        from subprocess import Popen, PIPE
+>>> +    from subprocess import Popen, PIPE
+>>> +    cmd = d.expand('%s -dumpversion' % toolchain ).split()
+>>> +    cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
+>>> +    version = cc.communicate()[0].decode('utf-8')[0]
+>>>   
+>>> -        cmd = d.expand('${CC} -dumpversion').split()
+>>> -        cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
+>>> -        version = cc.communicate()[0].decode('utf-8')[0]
+>>> +    if version.isdigit():
+>>> +        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
+>>> +        return extraflags
+>>> +    return ''
+>>> +
+>>> +python __anonymous() {
+>>> +    if bb.data.inherits_class('native', d):
+>>> +        toolchain = d.getVar('CC', True)
+>>> +        extraflags = version_specific_cflags(d, toolchain)
+>>> +        d.appendVar("CFLAGS", ' ' + extraflags)
+>>> +        d.appendVar("CXXFLAGS", ' ' + extraflags)
+>>>       else:
+>>>           # in the cross case, trust that GCCVERSION is correct. This won't
+>>>           # work if the native toolchain is Clang, but as of this writing
+>>> that
+>>>           # doesn't work anyway.
+>>>           version = d.getVar('GCCVERSION', expand=True)[0]
+>>> -
+>>> -    if version.isdigit():
+>>>           extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
+>>> -        return extraflags
+>>> -    return ''
+>>> +        d.appendVar("TARGET_CFLAGS", ' ' + extraflags)
+>>> +        d.appendVar("TARGET_CXXFLAGS", ' ' + extraflags)
+>>> +
+>>> +        toolchain = d.getVar('BUILD_CC', True)
+>>> +        extraflags = version_specific_cflags(d, toolchain)
+>>> +        d.appendVar("BUILD_CFLAGS", ' ' + extraflags)
+>>> +        d.appendVar("BUILD_CXXFLAGS", ' ' + extraflags)
+>>> +}
+>>>   
+>>> -CFLAGS_append = " ${@version_specific_cflags(d)}"
+>>> -CXXFLAGS_append = " ${@version_specific_cflags(d)}"
+>>>   CXX_append = " -std=gnu++98"
+>>> -- 
+>>> 2.11.0
+>>>
+
 
