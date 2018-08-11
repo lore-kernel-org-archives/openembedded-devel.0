@@ -1,50 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id C5F0D74C1A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D58EA78E30
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Aug 2018 21:54:00 +0000 (UTC)
-Received: by mail-qt0-f177.google.com with SMTP id r21-v6so11911583qtm.2
+	Sat, 11 Aug 2018 14:59:20 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id h9-v6so10666107wro.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Aug 2018 14:54:02 -0700 (PDT)
+	Sat, 11 Aug 2018 07:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=jD5nRhL4XKqrzau21nIFTlFEYlwyCxFm6o8mER8XO3U=;
-	b=lZKluygb7agoeAvuczhO3fSBU4HCXS68UbsIsNzBWDCRLTHT2riY5te7YU4ZmXSqVh
-	+rhBBGbxk5UtYNLuApIV5esnKtK7ZReAf12jotLIZ23XZazqallH3eLE2Hq9wSshm4LZ
-	OMBZmFmJC4cTlwG9Qje15TlpF0DEEWu/lCNgFfvP0NZZOz45lh8IyDi6RoJX545tksac
-	izfdfcxwyVoriKtGXYb3l2boBUxfVyG6ISoXNUCmiZRzvsdpoSQjsttb4LeFq/FuX02B
-	i7NRr9Xj8kOnmVDXP/xVMxV9k9LgxpHro75cvCZCa1vRuDi5vMO6uaEDsNs7teLbok6y
-	qPCg==
+	h=from:to:cc:subject:date:message-id;
+	bh=XaU1PoOOrUW13DMf8357TOO/py/xIa222Nu4I80usDg=;
+	b=fPFxN0gKC2DtqqwqlLwHwni3aBVruYtaH/kPL4GluG/qSr4lTdrKjF0qns6K9f9vWu
+	vGslnlQli2wvRQUYKReMcmwvWHymSqNcJwbBN7yI3XpTGzIRSOMzmpkA2b0rT98ixxQx
+	jJJRPtiil14uB6uqzqPs3BjpMGsAMnrDKYBv6bR7EsvcYEcheMIJ7GiH+T8qHnY7Dtvi
+	wP2dTJiBx4uqqF/u9/iVsN1YZMDqFqvYDWERKVp9sI9Ucb1gFOMbkHmtBL2Ilt2lFBy2
+	9rhGWizAEvxUXquX2TpK2N/llpsEns+acL3mApZqmeJJQvmCDXHcYbcxWXzoP/HtX7dg
+	678g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=jD5nRhL4XKqrzau21nIFTlFEYlwyCxFm6o8mER8XO3U=;
-	b=sUdjlKDmNuBBceX/5zgMISd5BW1MNMnWmdVDVR5HUveMEMBvIavDq/1HHHpC1yElMT
-	wBn2nCKrVofGMC+hTVPnF6aI+/FSkWi9aDSx7QxDgQd231gqTkeXykATuLt4uCb1gDkf
-	7RDqBXAeNxxB/MIAeC/H1CPsxVbPdOGmhLuOaNpyDywJPZlb2MlNgmYLYXb00U7wIdcr
-	vZZjNStKkGRAX/LoxlfcYRlVWybsRnOCPy+Vum/4rGcqtS9ha4gizyuFSGxxHptIARul
-	sLYMyoGqitCEtWBXD9DEL6IzAXHMttBR5aw+NnYwF7APagf1uLBtueE2RqZTU9xf9U1o
-	S7PA==
-X-Gm-Message-State: AOUpUlFQl02fOXGAsM8SYji+soDMpfj5amAjG8reK7N8hDbYInnHhe76
-	8nuoDZdbQCj5i8eRUHSdqISjyNBd7qFEOPLqYRA=
-X-Google-Smtp-Source: AA+uWPy3SFxvhrba6YUDRYEms1owOl4vIIQ3ovvfsrdj8u+as0/1vDm0tO3hTVqKRwTvG4CdmlshdzcPVH6o24LS8U4=
-X-Received: by 2002:a0c:983d:: with SMTP id
-	c58-v6mr7452105qvd.221.1533938041422; 
-	Fri, 10 Aug 2018 14:54:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <1533682863-25087-1-git-send-email-alex.kiernan@gmail.com>
-	<CADseiPmto9xeXiAmpGQ88GksoCw0qjgJzhjC=VFaxCksYdAExg@mail.gmail.com>
-	<CA+chaQfT5qC=3L4jNVS6pUHg1Us5Mg26xK9s0F+sO5oHFOjE8w@mail.gmail.com>
-In-Reply-To: <CA+chaQfT5qC=3L4jNVS6pUHg1Us5Mg26xK9s0F+sO5oHFOjE8w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 10 Aug 2018 14:53:35 -0700
-Message-ID: <CAMKF1srUwgnsx0B2N2KhDDrn_mDVGhN=PG5vnhvir4KDZf3n0A@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	alex.kiernan@hivehome.com
-Subject: Re: [meta-python][PATCH] python-m2crypto: Move swig fix to configure task
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=XaU1PoOOrUW13DMf8357TOO/py/xIa222Nu4I80usDg=;
+	b=CTgA7lKxJ2i4pq8gzRTacUVgupf6H5Q9akm/n5b8s1d3IYs8XkxsxWYlMBvx8yoz0T
+	wXqd/i63NCxRTzsGFEKCo+dN3KwjhGbcCx2mz2V6Ft9Rvjc+7wLdHGrnDS4NJTg1b/Rf
+	Zcn6/WwhJgib/nQ5mrPzKKy4ZiS7y4kXpP5rIQSrtXCX9iZG/LRab7Tb+JfjepaAhABq
+	q8SxWOAKeE8Zpn1Sr27MT++fYaVIMKc3PNYMDwikXfjM8FkkjSGH0QborD+vjR9xYGlB
+	bic6XPpYS3Idwu9wqICF43uE/0mloiNPoXdV32+M6Jj3Aggfu7Ukps1Cq1rN85G4rzDC
+	ke1A==
+X-Gm-Message-State: AOUpUlFTvlkCxUFuxbmIM96jvEjODvWz+5fK3W8KF1Ma/1Yc1owSI1nA
+	c60ulDxsNFPhDH8SQkHMQBG40wKA
+X-Google-Smtp-Source: AA+uWPwwlo4yrNlCf1VPwXONUA0j+Ps3ksi6EU0H+LwSLofN53sdWAScXlLAA4zMkMU5qsZyOzdMIA==
+X-Received: by 2002:adf:a789:: with SMTP id
+	j9-v6mr6485209wrc.277.1533999561584; 
+	Sat, 11 Aug 2018 07:59:21 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	w8-v6sm10914892wrp.72.2018.08.11.07.59.20
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 11 Aug 2018 07:59:20 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 11 Aug 2018 14:58:27 +0000
+Message-Id: <20180811145827.11578-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] android-tools: fix build with glibc-2.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,77 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Aug 2018 21:54:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 11 Aug 2018 14:59:22 -0000
 
-On Fri, Aug 10, 2018 at 2:04 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> Depending on in which order the changes are applied you might want to
-> remove CLEANBROKEN added in:
-> https://patchwork.openembedded.org/patch/153208/
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...sb_linux.c-fix-build-with-glibc-2.28.patch | 24 +++++++++++++++++++
+ .../android-tools/android-tools_5.1.1.r37.bb  |  1 +
+ 2 files changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/0001-usb_linux.c-fix-build-with-glibc-2.28.patch
 
-I think we need a V2 of the above listed patch since Alex's fix is
-right way for this recipe.
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0001-usb_linux.c-fix-build-with-glibc-2.28.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0001-usb_linux.c-fix-build-with-glibc-2.28.patch
+new file mode 100644
+index 0000000000..15401d1524
+--- /dev/null
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/0001-usb_linux.c-fix-build-with-glibc-2.28.patch
+@@ -0,0 +1,24 @@
++From cb80906bd3869bba370a088e4634ae4a8093fdd8 Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Sat, 11 Aug 2018 13:23:37 +0000
++Subject: [PATCH] usb_linux.c: fix build with glibc-2.28
++
++* include sysmacros for major, minor
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ adb/usb_linux.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/adb/usb_linux.c b/adb/usb_linux.c
++index f16bdd036..c8a773244 100644
++--- a/adb/usb_linux.c
+++++ b/adb/usb_linux.c
++@@ -22,6 +22,7 @@
++ #include <sys/ioctl.h>
++ #include <sys/types.h>
++ #include <sys/time.h>
+++#include <sys/sysmacros.h>
++ #include <dirent.h>
++ #include <fcntl.h>
++ #include <errno.h>
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index 780ecaa11a..a85e8b6652 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -47,6 +47,7 @@ SRC_URI = " \
+     file://ext4_utils.mk;subdir=${BPN} \
+     file://fastboot.mk;subdir=${BPN} \
+     file://mkbootimg.mk;subdir=${BPN} \
++    file://0001-usb_linux.c-fix-build-with-glibc-2.28.patch;patchdir=system/core \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
 
-> On Fri, Aug 10, 2018 at 10:52 PM Ian Coolidge <ian@boundarydevices.com>
-> wrote:
->
-> > Thanks for this, this fixes that recipe.
-> >
-> > On Tue, Aug 7, 2018 at 4:01 PM, Alex Kiernan <alex.kiernan@gmail.com>
-> > wrote:
-> >
-> > > From: Alex Kiernan <alex.kiernan@hivehome.com>
-> > >
-> > > Fixes:
-> > >
-> > > | DEBUG: Executing shell function do_configure
-> > > ...
-> > > | SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
-> > > | error: command 'swig' failed with exit status 1
-> > >
-> > > Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> > > ---
-> > >
-> > >  meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/meta-python/recipes-devtools/python/
-> > python-m2crypto_0.26.4.bb
-> > > b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-> > > index 272c76c..7e22163 100644
-> > > --- a/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-> > > +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-> > > @@ -27,7 +27,7 @@ export SWIG_FEATURES
-> > >  # Get around a problem with swig, but only if the
-> > >  # multilib header file exists.
-> > >  #
-> > > -do_compile_prepend() {
-> > > +do_configure_prepend() {
-> > >      ${CPP} -dM - < /dev/null | grep -v __STDC__ | grep -v
-> > > __REGISTER_PREFIX__ | grep -v __GNUC__ \
-> > >         | sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' >
-> > > SWIG/gcc_macros.h
-> > >      if [ "${SITEINFO_BITS}" = "64" ];then
-> > > --
-> > > 2.7.4
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
