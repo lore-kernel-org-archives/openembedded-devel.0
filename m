@@ -1,13 +1,12 @@
 Return-Path: <prvs=756920f33=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D26E7892B
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 5631C78EB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:15:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,232,1531778400"; 
-   d="scan'208";a="1603933"
+	Mon, 13 Aug 2018 08:15:49 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,232,1531778400"; d="scan'208";a="11802859"
 To: <openembedded-devel@lists.openembedded.org>
-References: <20180809002730.22163-1-git@andred.net>
-	<b0b8acbd7d7bccca691c733fdbde560dfedb66ce.camel@andred.net>
+References: <20180809002644.18549-1-git@andred.net>
+	<9981ffaaeb6e2a2dc7af5585574bcffdd96dfd2e.camel@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <2a290818-bd7d-c6b2-895f-a17ff9082d2a@skidata.com>
-Date: Mon, 13 Aug 2018 10:16:00 +0200
+Message-ID: <ef95e3c0-8511-24e0-030d-5e980e594298@skidata.com>
+Date: Mon, 13 Aug 2018 10:16:24 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <b0b8acbd7d7bccca691c733fdbde560dfedb66ce.camel@andred.net>
+In-Reply-To: <9981ffaaeb6e2a2dc7af5585574bcffdd96dfd2e.camel@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][master-next][PATCH v2] openjdk-8: update to 8u172b11
+Subject: Re: [meta-java][master-next][PATCH 1/4] gitignore: ignore new python byte-code files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,15 +74,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:15:28 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 08:15:49 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 
-On 8/13/18 10:07 AM, André Draszik wrote:
-> please ignore this, I'll send a v3
-> 
+On 8/13/18 9:44 AM, André Draszik wrote:
+> Please ignore this series, I'll send a mew one.
 
 ok. thanks for the info.
 
