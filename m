@@ -1,43 +1,44 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
-	[209.85.161.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 42D5978DD3
+Received: from mail-yw1-f67.google.com (mail-yw1-f67.google.com
+	[209.85.161.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5842878E25
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 10:09:49 +0000 (UTC)
-Received: by mail-yw1-f66.google.com with SMTP id j68-v6so13154759ywg.1
+	Mon, 13 Aug 2018 10:09:50 +0000 (UTC)
+Received: by mail-yw1-f67.google.com with SMTP id s68-v6so13143794ywg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 03:09:50 -0700 (PDT)
+	Mon, 13 Aug 2018 03:09:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=JzrJIjqeDHXISLa1YkZKa62Rb18MZ6jumP/9RadtjAc=;
-	b=A8iWprAi1SOTQ7g/aOsia2y3cKdCAoyXN8tiNUMTX539UziUsTuQe55Gw6kBC2p8Go
-	BMn6o8wj01We4sbCvNReyDZgfJpO38CjpRbbjGsFl6DLC/hhYGb3Tj593sN/WWkXbEFo
-	sFe5CDQcEIMyaUU4Lc7tGLxzB8WjjAvnlvpafnNgCbodOQT4W/x7lKrAXy3AL58Tx7sc
-	VeBMK06L6Efbae8oR9bX8SNQrK2y4nqDLQp/0zYjuRbzhxPEm5hO+zoNMRMw4A2RL36V
-	njXlq+1TL+kEyefclYq1P43RqN07dfygG3ZgGuROams9a8JWLjmN0BJqtudiQjhwBjFM
-	Oh9A==
-X-Gm-Message-State: AOUpUlHNTRcdEjUk4fJiDeIsgk/HLrorL7tv8lO/DHGO+sCljXnDkFul
-	pkRaPTUNYzA2djC2HvvFmeLpU9iA
-X-Google-Smtp-Source: AA+uWPykVvgthT35Pxw8vlLldXE2fCdYyMbuEOVlBXYHQv7DICva6Z4K+w3UNhDfJCmXP+helPULQQ==
-X-Received: by 2002:a25:8ca:: with SMTP id 193-v6mr8782107ybi.72.1534154990139;
-	Mon, 13 Aug 2018 03:09:50 -0700 (PDT)
+	bh=C7JFBcndPpj7pmcHcdsuc3dNXWY/p22TMxWl3ha2nVQ=;
+	b=P3QlI7gyE9DAKj/Yjd0SGR44M7o1CwH0ZVALsAfcoYx9KvXCANyyqtwPWctYZ7A1uU
+	XOM3Svybcl8suES0FTWlSbZ0aj7uOMVADuPk5g2a/RoK2yRzjvEgBPIvsu9xPEXN4fhj
+	iY98/HJOCBJTuCxTu97LzI31HY0y1LZDUAX1pF82AQ+Kpcd165eImKaRgxLm9oari7yg
+	eTJEiySmTyfITIJyRePUrNw9MyLc/Lg3jq7jwrE5pjtEY78giVsIjAQW0M5GAPyGfH9T
+	pH0Lo07xX1xqrLVuem4ml68jNfI1pkDpiS9DAJ6XRWRPHBnvBXyyPeWvm/Hj5fbwIs5F
+	2xIg==
+X-Gm-Message-State: AOUpUlFQX8USq5b2B3Vvn+4nnXWfQMErIpww1Z3RAf8ru8BbxQfeqkc6
+	4jfNiZ7O7slw2uM7DpzeqjbvNcKa
+X-Google-Smtp-Source: AA+uWPwX+dlaRFwGEkTaEHlFo3/PVEaOAmlM2yRKCEZKIREemlEVS6OCkXQYVxHWRYg5NcDt5da3fw==
+X-Received: by 2002:a25:abac:: with SMTP id
+	v41-v6mr6717731ybi.225.1534154991228; 
+	Mon, 13 Aug 2018 03:09:51 -0700 (PDT)
 Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	i62-v6sm6918738ywb.54.2018.08.13.03.09.49
+	i62-v6sm6918738ywb.54.2018.08.13.03.09.50
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 03:09:49 -0700 (PDT)
+	Mon, 13 Aug 2018 03:09:50 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 11:09:34 +0100
-Message-Id: <20180813100936.23663-8-git@andred.net>
+Date: Mon, 13 Aug 2018 11:09:35 +0100
+Message-Id: <20180813100936.23663-9-git@andred.net>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813100936.23663-1-git@andred.net>
 References: <20180813100936.23663-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 7/9] Revert "openjdk-8: fix build for gcc8.x"
+Subject: [meta-java][PATCH 8/9] openjdk-8: gcc-8 fix #3: working binaries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,74 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 10:09:49 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 10:09:50 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: André Draszik <andre.draszik@jci.com>
 
-This reverts commit 52fb41cec7d5125bb11c718705158696ffef11f8.
+Similar to the existing gcc-6 and gcc-7 support, we need to
+add the same specific compiler flags to avoid miscompilation
+on gcc-8:
+  -fno-lifetime-dse
+  -fno-delete-null-pointer-checks
 
-The change being reverted has two problems:
-- it still doesn't produce working binaries
-- compilation on pre-gcc v7 compilers fails (which is
-  relevant for compiling openjdk-8-native, as that
-  uses the build machine's gcc, not yocto's gcc):
-  | At global scope:
-  | cc1plus: error: unrecognized command line option ‘-Wno-stringop-overflow’ [-Werror]
-  | cc1plus: all warnings being treated as errors
+With this,
+    bitbake -c testimage openjdk-8-test-image
+works again for x86_64 and aarch64:
+RESULTS:
+RESULTS - ping.PingTest.test_ping - Testcase 964: PASSED (0.12s)
+RESULTS - ssh.SSHTest.test_ssh - Testcase 224: PASSED (1.20s)
+RESULTS - java.JavaTest.test_java_exists - Testcase -1: PASSED (0.15s)
+RESULTS - java.JavaTest.test_java_jar_comp_mode - Testcase -1: PASSED (41.98s)
+RESULTS - java.JavaTest.test_java_jar_int_mode - Testcase -1: PASSED (1.76s)
+RESULTS - java.JavaTest.test_java_jar_works - Testcase -1: PASSED (2.13s)
+RESULTS - java.JavaTest.test_java_version - Testcase -1: PASSED (1.51s)
+RESULTS - javac.JavacTest.test_javac_exists - Testcase -1: PASSED (0.11s)
+RESULTS - javac.JavacTest.test_javac_works - Testcase -1: PASSED (17.64s)
+SUMMARY:
+openjdk-8-test-image () - Ran 9 tests in 67.112s
+openjdk-8-test-image - OK - All required tests passed
 
-We now use a different approach to address the issues
-than that patch, and it is thusly not needed anymore.
-
-We fully support gcc < 7 again.
+NOTE: armv5e still doesn't work with gcc v8, and other arches
+weren't tested.
 
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- .../openjdk/openjdk-8-release-16xbyy.inc      |  1 -
- .../hotspot_fix_gcc8x_build.patch             | 21 -------------------
- 2 files changed, 22 deletions(-)
- delete mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
+ recipes-core/openjdk/openjdk-8-common.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-index bd440c6..8b30c37 100644
---- a/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-16xbyy.inc
-@@ -16,7 +16,6 @@ PATCHES_URI = "\
-     file://0008-jdk-use-correct-include-for-signal.patch \
-     file://0009-jdk-disable-backtrace-musl-build-fix.patch \
-     file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
--    file://hotspot_fix_gcc8x_build.patch \
-     file://0011-hotspot-backport-patch-to-fix-misuses-of-strncpy-str.patch \
- "
- # some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
-diff --git a/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch b/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
-deleted file mode 100644
-index 1a406f2..0000000
---- a/recipes-core/openjdk/patches-openjdk-8/hotspot_fix_gcc8x_build.patch
-+++ /dev/null
-@@ -1,21 +0,0 @@
--From: Richard Leitner <richard.leitner@skidata.com>
--Date: Thu, 14 Jun 2018 23:42:11 +0200
--Subject: [PATCH] openjdk-8: hotspot: fix gcc8 compilation
--
--As oe-core/yocto-project master migrated to gcc8.x we need to support this.
--Therefore disable following gcc warnings/errors which caused the build to fail:
--  + stringop-overflow
--  + return-type
-----
--
----- a/hotspot/make/linux/makefiles/gcc.make
--+++ b/hotspot/make/linux/makefiles/gcc.make
--@@ -197,7 +197,7 @@
-- endif
-- 
-- # Compiler warnings are treated as errors
---WARNINGS_ARE_ERRORS = -Werror
--+WARNINGS_ARE_ERRORS = -Werror -Wno-stringop-overflow -Wno-error=return-type
-- 
-- ifeq ($(USE_CLANG), true)
--   # However we need to clean the code up before we can unrestrictedly enable this option with Clang
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 77d905d..aaa4483 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -216,7 +216,7 @@ EXTRA_OECONF_append = "\
+ # of these changes.
+ FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+ FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-FLAGS_GCC8 = "-Wno-error=return-type"
++FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks -Wno-error=return-type"
+ 
+ # All supported cross compilers support the compiler flags that were
+ # added to make compilation with gcc6 work. But the host compiler for
 -- 
 2.18.0
 
