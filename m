@@ -1,51 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BF10874607
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3567260745
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:18:07 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id f1-v6so7184130pgq.12
+	Mon, 13 Aug 2018 08:18:09 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id f14-v6so7184818pgv.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:18:09 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=txYr0xcolQ4vuw6Eore3TsFubDr2DG/pgyWYCFe6YWw=;
-	b=pxd+182TCbR9iHlKDl4SU+kCo6kpVtmvlNDqTwjEZRADsr5vs4S1IqKxzxVpGPKMjH
-	RtjBhrOz1GRBYWDvY4q0x1QL+emWbCubute4Uzk6zFIFO/p6oQDiOjQEgiWnmavn/W39
-	LVYWwiaoiYV/ZMVG73BRcvyVJcMXOzTH5F//MH9ubg5M3KzTM8tXjNqcaBuBn4GOvYBS
-	789INkGxc/PGNegGqKq/42IYP6vSWDnU2tVe1lplecrV0qRXYClnOFHBaWmC1/8J7HGD
-	M4Obud/x8d0QTil+h6OiBczgVRbecqVT7BBKGbpIipKjEZz4aD9R8FtdqiHrOM1WG+0o
-	+dBg==
+	bh=x97DjTV33C5+VTXm1g38aZrIULX3O/+v22ng8N6JFa8=;
+	b=oTDy5UK3ni3f9aZDsso2gHdtrNerKf0YNLtcPYSOkblsXKslNeDaZFkxlUb62tbdxF
+	bmpicQA49VRzXnrSDQ7H3xCx/7YSdiIUnLxuYlCxhsCc6cG51xZgm8HiK5oaYQVyXRoF
+	/lmMG80Th5qfHhDNbEQIHGdXyZe6q0rooapcscuy4Qzil84MUzXmywtVZJqAnm/N8Ptf
+	kkIs+C0XyT8C9OkBQAubdGdQP4uSfGuXXLSEuuSennzMna1z2jRke69KGxE8r44iajDn
+	Ny2hQwSCeJDZjK8/qu0Hqjky3p5s55dBD9r9rF+v3X1tVyo53JB9ql+EV52xopcmNY4U
+	8a1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=txYr0xcolQ4vuw6Eore3TsFubDr2DG/pgyWYCFe6YWw=;
-	b=LFyxJcyCYp8Io/NDaytPG9Z6nRcoWTZ463dWpXsxw+perPxfUpoGrTzGqUlGKmz69W
-	NzpbfxzOZjq+aNPzDFAolPh+dvpmH4q1A/EsKh9gqoU5+LtSSCz+4vlF4vovCLhBJZ4c
-	oAr1VeyU53RtJxE29Eu7EeNQ85cqI+Vuib2mVhvz0VIHc1vHvfBQZ3isV57SYpJ/GqxI
-	TBVZ3F5uwQmMiLEf51QjlpDzdxFNWD+/N10tVPuSNhJqEcRUAx9GUuIVTWnBJbUBnTW/
-	IWnMAbFubh1t/qYd3vfuiFnveUAhzb/9H7elIplBZJwa6m7YHIHxS0wASvqknQc3eddx
-	tNCg==
-X-Gm-Message-State: AOUpUlFdYEO2gbAQ+k7kZ1n1Rwl3NXGKU4qhXmDxMRy02yKu7TxwLCaf
-	KFIImozerUFHaQ72BuSEwciP6ISX
-X-Google-Smtp-Source: AA+uWPwGzhlZN+kNKNiwTBekyj0rZ1wI2kj2jQIGg3MxD+GaNIxgAxvmGHddSyGeHcOqA+ixMLGIhg==
-X-Received: by 2002:a62:1016:: with SMTP id
-	y22-v6mr17998112pfi.109.1534148288438; 
-	Mon, 13 Aug 2018 01:18:08 -0700 (PDT)
+	bh=x97DjTV33C5+VTXm1g38aZrIULX3O/+v22ng8N6JFa8=;
+	b=feekaDfQzkf6D8Y75nTFib8CxGswxuNmgu9VLWM98a/TGjwnyGfRUQ0cbX5zNlyfNN
+	/4tgJNh6tRRJAeNTT4KyngW1jLMVlS7CdCzHqWqOIqfncpHDWhryDpr9OqP2il8Vxz1o
+	w7xRFBtCGQ4iHefeQZPw1BFwQbE1qq2g9HXB07fuxxipRLu/58QKoorgYR+9YM+OJBQi
+	pXAlQIvaC3pF9mVZ3c/SU1SrJmqbwDuZOQkFVVOZzDt1VdSjl6zW/yJE8UXS1a+QWdQX
+	OuWC9MOcWQpuJi2iEaVnKiYlkpXcw+jKk0v/9CLETY0Zc0XRkqmtkR8Oopbw3WrVx/7l
+	u+DQ==
+X-Gm-Message-State: AOUpUlFfUpsDdGAQVvuvCND7W59JTnaU7LFDi9+bt4WrnEZOphrzvMmD
+	IFtHuifTkNmMP8pSv5GZt/ZbcNQD
+X-Google-Smtp-Source: AA+uWPy77PqRlIQcTejprDZX9CrPNUPVJmCYDBsnWzsfAbbG8JBzB2RrhDRZf3x+gInKhM/XXMZUNQ==
+X-Received: by 2002:a62:bd4:: with SMTP id 81-v6mr17956811pfl.67.1534148289857;
+	Mon, 13 Aug 2018 01:18:09 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
-	b64-v6sm23414971pfg.66.2018.08.13.01.18.07
+	b64-v6sm23414971pfg.66.2018.08.13.01.18.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 01:18:07 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:08 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:35 -0700
-Message-Id: <20180813081742.6961-14-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:36 -0700
+Message-Id: <20180813081742.6961-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 14/21] f2fs-tools: Upgrade to 1.11.0
+Subject: [meta-oe][PATCH 15/21] udisks: Fix build with glibc 2.28+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,121 +57,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:18:07 -0000
-
-Fix build with when S != B
+X-List-Received-Date: Mon, 13 Aug 2018 08:18:09 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...srcdir-prefix-to-denote-include-path.patch | 29 +++++++++++++++
- .../0002-Fix-mkfs-out-of-tree-builds.patch    | 37 -------------------
- ...fs-tools_1.8.0.bb => f2fs-tools_1.11.0.bb} |  8 ++--
- 3 files changed, 34 insertions(+), 40 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch
- delete mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
- rename meta-filesystems/recipes-utils/f2fs-tools/{f2fs-tools_1.8.0.bb => f2fs-tools_1.11.0.bb} (63%)
+ .../udisks/0001-include-sys-sysmacros.h.patch | 77 +++++++++++++++++++
+ .../recipes-support/udisks/udisks_1.0.5.bb    | 14 ++--
+ 2 files changed, 84 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch
 
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch
+diff --git a/meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch b/meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch
 new file mode 100644
-index 0000000000..0a3261b4e7
+index 0000000000..f140793c5e
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch
-@@ -0,0 +1,29 @@
-+From 0fb9d6bc25e903f7831a38468845ea143fb5afd5 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch
+@@ -0,0 +1,77 @@
++From 64f051963d6cdeebd19f9e7f0a7e584a1f7acc60 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 11 Aug 2018 18:49:03 -0700
-+Subject: [PATCH] f2fs-tools: Use srcdir prefix to denote include path
++Date: Sat, 11 Aug 2018 19:12:57 -0700
++Subject: [PATCH] include sys/sysmacros.h
 +
-+This helps builds when builddir != srcdir
++fixes build with glibc 2.28+
 +
-+Upstream-Status: Submitted [https://lkml.org/lkml/2018/8/12/1]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tools/sg_write_buffer/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/daemon.c          | 1 +
++ src/device.c          | 1 +
++ src/mount-monitor.c   | 1 +
++ tools/udisks.c        | 1 +
++ tools/umount-udisks.c | 1 +
++ 5 files changed, 5 insertions(+)
 +
-+diff --git a/tools/sg_write_buffer/Makefile.am b/tools/sg_write_buffer/Makefile.am
-+index 922c328..19c438d 100644
-+--- a/tools/sg_write_buffer/Makefile.am
-++++ b/tools/sg_write_buffer/Makefile.am
-+@@ -1,7 +1,7 @@
-+ ## Makefile.am
++diff --git a/src/daemon.c b/src/daemon.c
++index 14e952f..2c61cfb 100644
++--- a/src/daemon.c
+++++ b/src/daemon.c
++@@ -39,6 +39,7 @@
++ #include <errno.h>
++ #include <string.h>
++ #include <sys/types.h>
+++#include <sys/sysmacros.h>
++ #include <sys/stat.h>
++ #include <sys/time.h>
++ #include <sys/resource.h>
++diff --git a/src/device.c b/src/device.c
++index d73f9d6..5911d78 100644
++--- a/src/device.c
+++++ b/src/device.c
++@@ -29,6 +29,7 @@
++ #include <errno.h>
++ #include <string.h>
++ #include <sys/types.h>
+++#include <sys/sysmacros.h>
++ #include <sys/wait.h>
++ #include <sys/stat.h>
++ #include <sys/time.h>
++diff --git a/src/mount-monitor.c b/src/mount-monitor.c
++index 573a69c..ccf3365 100644
++--- a/src/mount-monitor.c
+++++ b/src/mount-monitor.c
++@@ -28,6 +28,7 @@
++ #include <errno.h>
++ #include <string.h>
++ #include <sys/types.h>
+++#include <sys/sysmacros.h>
++ #include <sys/stat.h>
++ #include <mntent.h>
 + 
-+ if LINUX
-+-AM_CPPFLAGS = -I./include
-++AM_CPPFLAGS = -I$(srcdir)/include
-+ AM_CFLAGS = -Wall
-+ sbin_PROGRAMS = sg_write_buffer
-+ sg_write_buffer_SOURCES = sg_write_buffer.c \
-+-- 
-+2.18.0
-+
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
-deleted file mode 100644
-index 9e561cb111..0000000000
---- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 0731eefd389e01419f78a115e1363ed0c28cfd3a Mon Sep 17 00:00:00 2001
--From: "Yong, Jonathan" <jonathan.yong@intel.com>
--Date: Thu, 30 Mar 2017 08:03:37 +0000
--Subject: [PATCH] Fix mkfs out of tree builds
--
--Libraries are built in builddir, not srcdir, fix Makefile.am
--accordingly.
--
--Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
--Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
--
--The patch was imported from the f2fs-tools repo
--(git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git)
--commit ID 0731eefd389e01419f78a115e1363ed0c28cfd3a.
--
--Upstream-Status: Accepted, expected to be included in 1.9.0.
--
--Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
--
-----
-- mkfs/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/mkfs/Makefile.am b/mkfs/Makefile.am
--index 162a0cf..0ea8b49 100644
----- a/mkfs/Makefile.am
--+++ b/mkfs/Makefile.am
--@@ -10,5 +10,5 @@ lib_LTLIBRARIES = libf2fs_format.la
-- libf2fs_format_la_SOURCES = f2fs_format_main.c f2fs_format.c f2fs_format_utils.c
-- libf2fs_format_la_CFLAGS = -DWITH_BLKDISCARD
-- libf2fs_format_la_CPPFLAGS = -I$(top_srcdir)/include
---libf2fs_format_la_LDFLAGS = -luuid -L$(top_srcdir)/lib -lf2fs \
--+libf2fs_format_la_LDFLAGS = -luuid -L$(top_builddir)/lib -lf2fs \
-- 	-version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
---- 
--2.10.2
--
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
-similarity index 63%
-rename from meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
-rename to meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
-index 691cb6ea0e..2240049d44 100644
---- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
-+++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
-@@ -7,10 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=362b4b2594cd362b874a97718faa51d3"
- # to provide libuuid
- DEPENDS = "util-linux"
++diff --git a/tools/udisks.c b/tools/udisks.c
++index d30159b..f24a30a 100644
++--- a/tools/udisks.c
+++++ b/tools/udisks.c
++@@ -29,6 +29,7 @@
++ #include <errno.h>
++ #include <string.h>
++ #include <sys/types.h>
+++#include <sys/sysmacros.h>
++ #include <sys/stat.h>
++ #include <sys/wait.h>
++ #include <fcntl.h>
++diff --git a/tools/umount-udisks.c b/tools/umount-udisks.c
++index 2813fe0..5cf6b4d 100644
++--- a/tools/umount-udisks.c
+++++ b/tools/umount-udisks.c
++@@ -29,6 +29,7 @@
++ #include <errno.h>
++ #include <string.h>
++ #include <sys/types.h>
+++#include <sys/sysmacros.h>
++ #include <sys/stat.h>
++ #include <fcntl.h>
++ #include <pwd.h>
+diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+index e33266001e..7cd9992214 100644
+--- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
++++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+@@ -11,13 +11,13 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+     dbus-glib-native \
+ "
  
--SRCREV = "1e7aedf99b85d16f94d1d8ad2fcf846403bb2174"
-+# v1.11.0
-+SRCREV = "b98fab3666e498c2e27ad9dcda6874c9b683f06b"
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git \
--    file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch \
--    file://0002-Fix-mkfs-out-of-tree-builds.patch"
-+           file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch \
-+           file://0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch \
+-SRC_URI = " \
+-    http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
+-    file://optional-depends.patch \
+-    file://0001-fix-build-with-newer-glibc-versions.patch \
+-    file://udisks-1.0.5-fix-service-file.patch \
+-    file://0001-Make-udev-rules-directory-configurable.patch \
+-"
++SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
++           file://optional-depends.patch \
++           file://0001-fix-build-with-newer-glibc-versions.patch \
++           file://udisks-1.0.5-fix-service-file.patch \
++           file://0001-Make-udev-rules-directory-configurable.patch \
++           file://0001-include-sys-sysmacros.h.patch \
 +           "
- S = "${WORKDIR}/git"
  
- inherit pkgconfig autotools
+ SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
+ SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3552b4b31c6f71"
 -- 
 2.18.0
 
