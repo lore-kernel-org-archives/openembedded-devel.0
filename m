@@ -1,48 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C914878F29
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-yw1-f54.google.com (mail-yw1-f54.google.com
+	[209.85.161.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7001378DD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 09:18:09 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id c13-v6so13639658wrt.1
+	Mon, 13 Aug 2018 10:09:41 +0000 (UTC)
+Received: by mail-yw1-f54.google.com with SMTP id j68-v6so13154570ywg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 02:18:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Ymil844D/YBybhzF60PXjrYkz8nkv0VzVtAZoZPdG/Y=;
-	b=TQQt9PkrbKIb4lQKtscFEff0uvwp+imvrKIZNTLqC0uf4hzSBiVdshJzGMJzSIE4Fg
-	FQ/+sRjk+3upVK4yQUX0BOMsCN6Se2htzXdery+G2nbeC6FC1WI/N7QjplBDcH/PWhbX
-	xwS3+OrtK1rASpWD41mucuNDQGspL877E05gQvMSvadTIEzT24rzrO4QeEHXidcu7ERK
-	+p//ipsTLH0j9B3ihzEGj1g9ienm7t8q3ekktMjJP6zMBB+ckXA6RqTbSpcoCSqsQaM6
-	dM15/xlniTmUjoFWyK6lMKfzBtlsdfc6SYadTvp0rj0ze+/b+Ec5bemINbHMAjpPvpD/
-	Kqyg==
+	Mon, 13 Aug 2018 03:09:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Ymil844D/YBybhzF60PXjrYkz8nkv0VzVtAZoZPdG/Y=;
-	b=iK4xDCB122+G4rf7vfCazKvoaNrOSGYTH+IRNmBJsFDYETyuvSFW8cImVSeGJZBqye
-	YjET+79RBz8Atv5cDYbYx3bSdRgRwdWav7pqYqEZ0zXEGr/IWGrEuCal9WCLUlqLmO+T
-	14QmP0SxUQKs1qShjNYMGuHOaxTeeOgR2Zuts/gik25bjM6B4vX3HT2aByZVML9BYcmw
-	Zp9JYmlRBewiLsbulCGoO7rSi0TwpmFgUTx0ActLq2MiMjN5q0agXNAqvhgWzwqacH3/
-	8Uh2MHPUAIQ4E/pmM+hVsfvb1nEg+RJ/lL0t0zxqGVN/YnkO3Wp852paJGoalibAJetg
-	OA5g==
-X-Gm-Message-State: AOUpUlGL22SHGnZ5Ppy2eDlUK7NF7jXKpUlVdYaVtkw4LnX6G/MaKCLy
-	ADTAI/CaoyRyCSVnIYK5aSVmAb95XG/EtpsGrVM=
-X-Google-Smtp-Source: AA+uWPzBUv8zogNrkkwSaaDDHLRlnHIGioiJ6TZ/sx4qCu8srwM9neJJ1/xsmT1/Cg4RLv2XSfxSeo2h1gbdZNnyY4w=
-X-Received: by 2002:adf:e50f:: with SMTP id
-	j15-v6mr9882807wrm.111.1534151890527; 
-	Mon, 13 Aug 2018 02:18:10 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=CjQ5c5Te5WEjmiBuh79qqlm6Raeekz+8cQOTePymyyQ=;
+	b=OMxrkRGdXgx6LOFRVpxyLh7KA9iI+obI8JWaa+Fmn5L1yIpmyd1sJcrZy5cGiMcTqB
+	Pl6TELf2XB7DonDjXV9MBHJXDy4kGBYtweankw/ARIqIUjkcT37F+ne2Pqpx6irJWCcW
+	g1d0a0SW4q/z13AYxo3uLfMM34Lce7JKgwIwLGSsQ4cCnD5tTn2mAHV6a7fidk1ZOPBx
+	n/ZrHaOlGqGPU6+7L2K/pxMxffIi0VNR2f0z+RXIAdufN0DPi7KFgWEVqxplQ7qLq5U7
+	h8tbZZQg8nJsirdpIpfPLsN4B8wgnIoplt+M6uIirf3QETkQ9ORmd6lrwParrsULklJE
+	I2mA==
+X-Gm-Message-State: AOUpUlH3+W9Dg4CUII8MC/JqpRJojyjIyRuZ/6bzZ0oIqybUX346SArr
+	CnuY71Q8XDSLhiD198taF6waeLe9
+X-Google-Smtp-Source: AA+uWPxSy0YXnr7lEqA9gHnebGxs5ad1gmSZFRq4nCZk9xtXkVeokqwsJQssaGqiFqwmpHASMChJ2A==
+X-Received: by 2002:a25:4103:: with SMTP id o3-v6mr8540799yba.48.1534154982039;
+	Mon, 13 Aug 2018 03:09:42 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	i62-v6sm6918738ywb.54.2018.08.13.03.09.40
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Aug 2018 03:09:41 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Aug 2018 11:09:27 +0100
+Message-Id: <20180813100936.23663-1-git@andred.net>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-References: <1533285153-19673-1-git-send-email-leimaohui@cn.fujitsu.com>
-In-Reply-To: <1533285153-19673-1-git-send-email-leimaohui@cn.fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 13 Aug 2018 11:17:59 +0200
-Message-ID: <CA+chaQcYCa3Qa5pmUxYoy1fARpkiVJUzuoXb-_4+e__bNGbPGQ@mail.gmail.com>
-To: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] Fix bug when inherit archiver.
+Subject: [meta-java] OpenJDK-8 fixes and updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +48,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 09:18:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 13 Aug 2018 10:09:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Please start the commit summary with "gnulib: ".
+Hi,
 
-On Fri, Aug 3, 2018 at 10:33 AM Lei Maohui <leimaohui@cn.fujitsu.com> wrote:
+This series addresses a few OpenJDK-8 issues:
 
-> Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> index b72ffa9..4a7d84a 100644
-> --- a/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> +++ b/meta-oe/recipes-support/gnulib/gnulib_2017-08-20.18.bb
-> @@ -32,5 +32,6 @@ do_packagedata[noexec] = "1"
->  deltask package_write_ipk
->  deltask package_write_deb
->  deltask package_write_rpm
-> +deltask do_deploy_archives
->
->  BBCLASSEXTEND = "native"
-> --
-> 1.9.1
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Highlights are:
+* compilation on gcc < v7 host compilers was broken
+* compilation on gcc v8 (cross) compilers produced non-working binaries
+* update  to the latest 8u172b11 release
+
+This series was tested on:
+* qemux86-64 (with & without security flags, host gcc 6.3.0, target gcc 8)
+* qemuarm64 (with & without security flags, host gcc 4.8.4 & 6.3.0, target gcc 8)
+* qemuarm64 (host gcc 7.3.0, target gcc 7.3.0)
+
+Note that yocto's gcc 8 update completely broke qemuarm support, but I'll
+hopefully address this by importing the aarch32 openjdk port into this layer.
+
+
 
