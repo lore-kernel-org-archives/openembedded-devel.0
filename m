@@ -1,50 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3567260745
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+	[209.85.210.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F000600BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:18:09 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id f14-v6so7184818pgv.13
+	Mon, 13 Aug 2018 08:18:10 +0000 (UTC)
+Received: by mail-pf1-f180.google.com with SMTP id j8-v6so7345963pff.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:18:10 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=x97DjTV33C5+VTXm1g38aZrIULX3O/+v22ng8N6JFa8=;
-	b=oTDy5UK3ni3f9aZDsso2gHdtrNerKf0YNLtcPYSOkblsXKslNeDaZFkxlUb62tbdxF
-	bmpicQA49VRzXnrSDQ7H3xCx/7YSdiIUnLxuYlCxhsCc6cG51xZgm8HiK5oaYQVyXRoF
-	/lmMG80Th5qfHhDNbEQIHGdXyZe6q0rooapcscuy4Qzil84MUzXmywtVZJqAnm/N8Ptf
-	kkIs+C0XyT8C9OkBQAubdGdQP4uSfGuXXLSEuuSennzMna1z2jRke69KGxE8r44iajDn
-	Ny2hQwSCeJDZjK8/qu0Hqjky3p5s55dBD9r9rF+v3X1tVyo53JB9ql+EV52xopcmNY4U
-	8a1w==
+	bh=TrPWzhWvvFqazs9GMswOs2QM0GIF7n6XcJxeq7ZBQSs=;
+	b=ki0NqYD2soc9YJhaE8TBZ8clLSKVqYkoWVKMUxF23uyc7a2OKr665PmnE2izdNLvow
+	QL0K3OJlfT9S4kzkfFUAdRo0DRYOh4+wMFg0eTBcD6WUCeDiO+yprrXTLbTcJAiUUuiR
+	kxaOIJt3sJws5PGbJdqW1vHoBU1v1Uka8ufrFRVKBDFEq+i4NKldfifL/VeEZgYTFtyH
+	BkB+mZBoJI8ZFClWSqfZ63LxtA23jZzfUbXadsmYDwzyhoe5tklcwKVUQoz9lPFXKspd
+	YKur72qIUrxm2nuuBvVeFFrgSxe2Ee4ELFoYZRjb2eNDtwa2YOB23SZbuFwqmquFwTvE
+	Eslg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=x97DjTV33C5+VTXm1g38aZrIULX3O/+v22ng8N6JFa8=;
-	b=feekaDfQzkf6D8Y75nTFib8CxGswxuNmgu9VLWM98a/TGjwnyGfRUQ0cbX5zNlyfNN
-	/4tgJNh6tRRJAeNTT4KyngW1jLMVlS7CdCzHqWqOIqfncpHDWhryDpr9OqP2il8Vxz1o
-	w7xRFBtCGQ4iHefeQZPw1BFwQbE1qq2g9HXB07fuxxipRLu/58QKoorgYR+9YM+OJBQi
-	pXAlQIvaC3pF9mVZ3c/SU1SrJmqbwDuZOQkFVVOZzDt1VdSjl6zW/yJE8UXS1a+QWdQX
-	OuWC9MOcWQpuJi2iEaVnKiYlkpXcw+jKk0v/9CLETY0Zc0XRkqmtkR8Oopbw3WrVx/7l
-	u+DQ==
-X-Gm-Message-State: AOUpUlFfUpsDdGAQVvuvCND7W59JTnaU7LFDi9+bt4WrnEZOphrzvMmD
-	IFtHuifTkNmMP8pSv5GZt/ZbcNQD
-X-Google-Smtp-Source: AA+uWPy77PqRlIQcTejprDZX9CrPNUPVJmCYDBsnWzsfAbbG8JBzB2RrhDRZf3x+gInKhM/XXMZUNQ==
-X-Received: by 2002:a62:bd4:: with SMTP id 81-v6mr17956811pfl.67.1534148289857;
-	Mon, 13 Aug 2018 01:18:09 -0700 (PDT)
+	bh=TrPWzhWvvFqazs9GMswOs2QM0GIF7n6XcJxeq7ZBQSs=;
+	b=TyD4VcuVI4UD1+hk3MBtGNTKg7EXgcnvVXzRtTp3Q+tQvlHh2Tj7WORBtkBB9MJX49
+	xc9HEIBDblcUK35aPiU27Dzp+++mgV6M1jvvZ8V76c5jJUMdcBi5vdcOyV8WuQwu1uP1
+	RPjMay5k6Luqb5jTY/8HKDuN73+b4T/e2/rfY548cr6XavWCMQReWlYaMTbgl9DKrZxL
+	JbzQiwKz7AmvXT7d6lFqmlbLUqLoUT9nbkcARY2io//5Ro9V0Iop1UDTE83eHgo9j3gg
+	Jc1VMVgXUGG03Kcvq9I3yn7oysuw5ugiKfNuZXfSifA2kE/gTAJMW/g5yK022cbGpJwe
+	a80w==
+X-Gm-Message-State: AOUpUlHnE7ojxGYou510Sft6QvySzL1cESe3v/Bi/frGPI6ClI1dYjkH
+	ChFqID1LG2LdCe2IyL0zXMprWPtP
+X-Google-Smtp-Source: AA+uWPxyJAtSQSdGB7qu80b3DusGErjT9kfVNar1PChNB4nRpJDB1jpmjgDS1f1/ph3/FKLYEySQWA==
+X-Received: by 2002:aa7:87d0:: with SMTP id
+	i16-v6mr17938811pfo.82.1534148290930; 
+	Mon, 13 Aug 2018 01:18:10 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
-	b64-v6sm23414971pfg.66.2018.08.13.01.18.08
+	b64-v6sm23414971pfg.66.2018.08.13.01.18.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 01:18:08 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:36 -0700
-Message-Id: <20180813081742.6961-15-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:37 -0700
+Message-Id: <20180813081742.6961-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 15/21] udisks: Fix build with glibc 2.28+
+Subject: [meta-oe][PATCH 16/21] tcsh: Add dep on virtual/crypt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,123 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:18:09 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 08:18:10 -0000
+
+libcrypt is now a separate package starting glibc 2.28+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../udisks/0001-include-sys-sysmacros.h.patch | 77 +++++++++++++++++++
- .../recipes-support/udisks/udisks_1.0.5.bb    | 14 ++--
- 2 files changed, 84 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch
+ meta-oe/recipes-shells/tcsh/tcsh_6.20.00.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch b/meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch
-new file mode 100644
-index 0000000000..f140793c5e
---- /dev/null
-+++ b/meta-oe/recipes-support/udisks/udisks/0001-include-sys-sysmacros.h.patch
-@@ -0,0 +1,77 @@
-+From 64f051963d6cdeebd19f9e7f0a7e584a1f7acc60 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 11 Aug 2018 19:12:57 -0700
-+Subject: [PATCH] include sys/sysmacros.h
-+
-+fixes build with glibc 2.28+
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/daemon.c          | 1 +
-+ src/device.c          | 1 +
-+ src/mount-monitor.c   | 1 +
-+ tools/udisks.c        | 1 +
-+ tools/umount-udisks.c | 1 +
-+ 5 files changed, 5 insertions(+)
-+
-+diff --git a/src/daemon.c b/src/daemon.c
-+index 14e952f..2c61cfb 100644
-+--- a/src/daemon.c
-++++ b/src/daemon.c
-+@@ -39,6 +39,7 @@
-+ #include <errno.h>
-+ #include <string.h>
-+ #include <sys/types.h>
-++#include <sys/sysmacros.h>
-+ #include <sys/stat.h>
-+ #include <sys/time.h>
-+ #include <sys/resource.h>
-+diff --git a/src/device.c b/src/device.c
-+index d73f9d6..5911d78 100644
-+--- a/src/device.c
-++++ b/src/device.c
-+@@ -29,6 +29,7 @@
-+ #include <errno.h>
-+ #include <string.h>
-+ #include <sys/types.h>
-++#include <sys/sysmacros.h>
-+ #include <sys/wait.h>
-+ #include <sys/stat.h>
-+ #include <sys/time.h>
-+diff --git a/src/mount-monitor.c b/src/mount-monitor.c
-+index 573a69c..ccf3365 100644
-+--- a/src/mount-monitor.c
-++++ b/src/mount-monitor.c
-+@@ -28,6 +28,7 @@
-+ #include <errno.h>
-+ #include <string.h>
-+ #include <sys/types.h>
-++#include <sys/sysmacros.h>
-+ #include <sys/stat.h>
-+ #include <mntent.h>
-+ 
-+diff --git a/tools/udisks.c b/tools/udisks.c
-+index d30159b..f24a30a 100644
-+--- a/tools/udisks.c
-++++ b/tools/udisks.c
-+@@ -29,6 +29,7 @@
-+ #include <errno.h>
-+ #include <string.h>
-+ #include <sys/types.h>
-++#include <sys/sysmacros.h>
-+ #include <sys/stat.h>
-+ #include <sys/wait.h>
-+ #include <fcntl.h>
-+diff --git a/tools/umount-udisks.c b/tools/umount-udisks.c
-+index 2813fe0..5cf6b4d 100644
-+--- a/tools/umount-udisks.c
-++++ b/tools/umount-udisks.c
-+@@ -29,6 +29,7 @@
-+ #include <errno.h>
-+ #include <string.h>
-+ #include <sys/types.h>
-++#include <sys/sysmacros.h>
-+ #include <sys/stat.h>
-+ #include <fcntl.h>
-+ #include <pwd.h>
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index e33266001e..7cd9992214 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -11,13 +11,13 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-     dbus-glib-native \
- "
- 
--SRC_URI = " \
--    http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
--    file://optional-depends.patch \
--    file://0001-fix-build-with-newer-glibc-versions.patch \
--    file://udisks-1.0.5-fix-service-file.patch \
--    file://0001-Make-udev-rules-directory-configurable.patch \
--"
-+SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
-+           file://optional-depends.patch \
-+           file://0001-fix-build-with-newer-glibc-versions.patch \
-+           file://udisks-1.0.5-fix-service-file.patch \
-+           file://0001-Make-udev-rules-directory-configurable.patch \
-+           file://0001-include-sys-sysmacros.h.patch \
-+           "
- 
- SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
- SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3552b4b31c6f71"
+diff --git a/meta-oe/recipes-shells/tcsh/tcsh_6.20.00.bb b/meta-oe/recipes-shells/tcsh/tcsh_6.20.00.bb
+index b59d88f5de..c171963c2f 100644
+--- a/meta-oe/recipes-shells/tcsh/tcsh_6.20.00.bb
++++ b/meta-oe/recipes-shells/tcsh/tcsh_6.20.00.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.tcsh.org/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://Copyright;md5=575cf2715c3bf894e1f79aec1d4eaaf5"
+ SECTION = "base"
+-DEPENDS = "ncurses gettext-native"
++DEPENDS = "ncurses virtual/crypt gettext-native"
+ SRC_URI = " \
+     http://ftp.funet.fi/pub/mirrors/ftp.astron.com/pub/tcsh/${BP}.tar.gz \
+     file://0001-Enable-system-malloc-on-all-linux.patch \
 -- 
 2.18.0
 
