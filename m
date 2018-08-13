@@ -1,53 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pl0-f54.google.com (mail-pl0-f54.google.com
 	[209.85.160.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CAD5602D9
+	by mail.openembedded.org (Postfix) with ESMTP id ABAA474C68
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 13 Aug 2018 08:17:56 +0000 (UTC)
-Received: by mail-pl0-f54.google.com with SMTP id x6-v6so6601081plv.10
+Received: by mail-pl0-f54.google.com with SMTP id g6-v6so6602939plq.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:17:57 -0700 (PDT)
+	Mon, 13 Aug 2018 01:17:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=oUgAejVZycSDZ1vwqzuPBRZG62QIazq7MOm0nRUAUlw=;
-	b=Oy7I5S4Au4LCEQ5W0tHhiE6mB586GZKBYDN7LP+baPwhrLoCmdonJvJO/XIceEiNRV
-	OMntkxpVL7s7FjmpKtydrrdKXhfS6CJ1NcUvomXlS/jrq8hGrUgQfDgKP/HaoxBNVn35
-	iF4ElMCipW9TwO1Z9qO1No/PpwYk14NIVtCQT594oZP+zfHg8H+eTpiNEqd/+PP7FUg5
-	iGCFLXCqTB3s1iUcEjfbvOauzOj8DSl/ZEbjpJZ3L6+WdeJefhQBhjjnLBfm62si8PWI
-	Wab047CfQ+CR4zhi9jhy3mty+uI3UTqrogHV66DR14aoT3+/HhQt7ZBEm1ioCKNRMqnH
-	AX2w==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Yv8FQWjX7C5dRCl122yhyeElefu6vwBUHrjt8xi0gLE=;
+	b=Gg/mM06g6UoxbEII4EuuAs35j01wk9qcVoCEoBB6fl1CV2m/O62VXksWwFkUKQJ7yJ
+	FtFT7y+WKmw7FNuDX3WGRi5dBT4J0V7IAQHuIJQ2SUtpWooxeArLIMZf9tI9tLcGMJj3
+	soPx2H/f2YQWPaKwlkkCTxxsWMdbVPmdf7DDGtBCyBMhOOPq6uQZbe4p3LDjyk8EEQN6
+	pM1J0socuYCHTvFdx6Nke6GbsQhw8fiPBDSOxBCB25wO3c4eQ0cWGWIf+hb8qEoxsXRb
+	uxW02dgJO4dxwSyVXmgP/Pu0O7PXMbNit1purHz4Tp/nkpe4p45FiM9evB3DVtM6LkmG
+	cDyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=oUgAejVZycSDZ1vwqzuPBRZG62QIazq7MOm0nRUAUlw=;
-	b=HSniSHoYI673rxTDirwQzFQqf5m1At3GanA8LsP2ErmGIUaS6eqaGUukaUaz+373Vt
-	nB/wBCAxDfW5PiQj2vwffINr2qXOJPef73vl9FxsELU3/hsxR2x4LjWo4Kh/Pl+CQ7Aw
-	bBLOa/uyFJ8MqDuZlW9wr8MSs0Wc18KZUdkllAVzoti9M+z502DrFC+CfaJiu+27yqhk
-	MAOa32TJOLWnKkjK4D7M/LcKjG9E4kuzCK8X2orvMX+xY5KGSEpCkA3tmgcZdyqQ2fQ1
-	o4Cv833uGbSb1CZQ+lGkHjzNmFYBNeLL2bD7UjkyrOG5ufDM18YB6qKc+QbwXvHB3OC1
-	lihw==
-X-Gm-Message-State: AOUpUlH12x3rRkxC3xhgb21XHSCLZMStSa5ED9jAofASSBRkz4mf2YiF
-	txatDMj0DWzKtfeSblrzm2tffI7T
-X-Google-Smtp-Source: AA+uWPznwwIQE78s7Z+NIy6zVUMQBl1hPg9pNzEJeyO61vfulEEbH7V4AXqQHiuLidCx5EtGQTw5Hw==
-X-Received: by 2002:a17:902:7c89:: with SMTP id
-	y9-v6mr15676334pll.187.1534148276847; 
-	Mon, 13 Aug 2018 01:17:56 -0700 (PDT)
+	:references;
+	bh=Yv8FQWjX7C5dRCl122yhyeElefu6vwBUHrjt8xi0gLE=;
+	b=tXp+6f0O/+pacP05vsJ4i6qYYOy38EZ2j5/QKVodrCazY5vKZRlMiYyYAzPt7RS2je
+	Plo8fngD0mcXK7AFFJJs5TMcDihKNwugODVkF/FSUsj7POl5YG3oE5Hgr2P2rGuEkdeE
+	HtIVNcQI+gseFgWmXPwBRaitwliqnUZAOMtDvJGPGRVN9agyQY+iJ6K+nNL9WI8Cf85T
+	Kx7vdam/BFt0B2FBkFtzXub9yFgINlHC8anVvcG46HXFXj9E7O8+4OD43A0P5cP8v+yE
+	l08CP2srDnUpwiqU3/u7HXLknD1ElJfLeHSU+5EfOKyXL66ywXsKYTKaSnFjKHfpiocE
+	Oumw==
+X-Gm-Message-State: AOUpUlETooB4nkjD70/aFVOCPtZ4ojmV072HqRJC5OdmvsGqQMdncoSZ
+	WtmaxLb5Tm2NRmgvexqT3sTmqFDx
+X-Google-Smtp-Source: AA+uWPzopMTyD8D+iel1hiaOxg7MkV2BiznvnHFCc/rqZFU6j/uCPVRzBL7KhpT3KNUIauE//pcnxQ==
+X-Received: by 2002:a17:902:4503:: with SMTP id
+	m3-v6mr15768051pld.168.1534148277603; 
+	Mon, 13 Aug 2018 01:17:57 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
 	b64-v6sm23414971pfg.66.2018.08.13.01.17.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 01:17:56 -0700 (PDT)
+	Mon, 13 Aug 2018 01:17:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:26 -0700
-Message-Id: <20180813081742.6961-5-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:27 -0700
+Message-Id: <20180813081742.6961-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 05/21] xfce4-diskperf-plugin: Fix build with glibc 2.28+
+Subject: [meta-networking][PATCH 06/21] yp-tools: Add dep on virtual/crypt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,65 +59,28 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 13 Aug 2018 08:17:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+
+needed with glibc 2.28+ where crypt has moved into
+independent recipe
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...lude-sys-sysmacros.h-for-major-minor.patch | 30 +++++++++++++++++++
- .../diskperf/xfce4-diskperf-plugin_2.6.1.bb   |  3 ++
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin/0001-panel-plugin-Include-sys-sysmacros.h-for-major-minor.patch
+ meta-networking/recipes-support/nis/yp-tools_4.2.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin/0001-panel-plugin-Include-sys-sysmacros.h-for-major-minor.patch b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin/0001-panel-plugin-Include-sys-sysmacros.h-for-major-minor.patch
-new file mode 100644
-index 0000000000..007d3e5852
---- /dev/null
-+++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin/0001-panel-plugin-Include-sys-sysmacros.h-for-major-minor.patch
-@@ -0,0 +1,30 @@
-+From c35a8cb24e8adafb11cbc261de37d97244e55927 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 11 Aug 2018 10:08:27 -0700
-+Subject: [PATCH] panel-plugin: Include sys/sysmacros.h for major/minor
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+glibc 2.28+ needs it
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Cc: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ panel-plugin/devperf.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/panel-plugin/devperf.c b/panel-plugin/devperf.c
-+index 175fd44..cb2e88a 100644
-+--- a/panel-plugin/devperf.c
-++++ b/panel-plugin/devperf.c
-+@@ -34,6 +34,7 @@
-+ #include <errno.h>
-+ #include <sys/time.h>
-+ /* for major() and minor() */
-++#include <sys/sysmacros.h>
-+ #define _BSD_SOURCE
-+ #include <sys/types.h>
-+ 
-diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.1.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.1.bb
-index 161b2bb2b2..dc7f1fcd9a 100644
---- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.1.bb
-+++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.1.bb
-@@ -5,5 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
+diff --git a/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
+index 4e27e32d48..bb401666c6 100644
+--- a/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
++++ b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
+@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/thkukuk/yp-tools \
  
- inherit xfce-panel-plugin
+ S = "${WORKDIR}/git"
  
-+SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2 \
-+           file://0001-panel-plugin-Include-sys-sysmacros.h-for-major-minor.patch \
-+           "
- SRC_URI[md5sum] = "63d5f03934c2dbddb3ad7bf7f535cc23"
- SRC_URI[sha256sum] = "212ddc742be3eecb6ad5554e1b1df03d5685cb71f48a558d5f895de37c57e4fa"
+-DEPENDS = "libtirpc libnsl2"
++DEPENDS = "libtirpc libnsl2 virtual/crypt"
+ 
+ inherit autotools systemd
+ SYSTEMD_SERVICE_${PN} = "domainname.service"
 -- 
 2.18.0
 
