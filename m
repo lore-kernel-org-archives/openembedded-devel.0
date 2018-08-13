@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
-	[209.85.210.170])
-	by mail.openembedded.org (Postfix) with ESMTP id E0F2578F32
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id B5F62745AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:18:14 +0000 (UTC)
-Received: by mail-pf1-f170.google.com with SMTP id j8-v6so7346035pff.6
+	Mon, 13 Aug 2018 08:18:16 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id r1-v6so7187587pgp.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:18:16 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=clox3yf/XK5h2w9G0FNDG7flXcb+oIoT+EOMi4Sb+Is=;
-	b=JQ+mt3DRK/aFKEQrWgdfaWYewOXn1Ljr/wjDzNfeXvRcFVnlAcDg3cTDUPPk2H/zKS
-	A2gG0hWNP90A57LADZmzN+rHdJzXxc5oh9hCCDYxaQaa8RuozPWchx7WeC0gfcEW+6Aq
-	KVRlbvZ6QVGVFW+tdz3UZScx4YklNGqDq9z0HEt2GEELBy9wBYWG0PIWz5ig1gkoedOx
-	mJAPi/WzqPVg4CbXZ9XcCWRy2LkRE3bsnlAf9skxDqpveg7HwYN3P43Ldr9XyRKhoOpw
-	cc4NbGS21tHY9KGN0ZZICx0ESZAw2jpydXwlMpaOc/oh6nk+iZpEuLtbRXUT2i8bn8tc
-	5FxQ==
+	bh=CZoWycTkZfnOQFxCpBkWuVIeQxK4OxG3fEUFITu1/cY=;
+	b=fZGjFyBvUvPzmCHNWwk26iYyDp7GJIJvoCVli+dwsgIDv3SOVD5EOFTorU1Qq52RtH
+	c3vranLRcdSSTlHUPbTxbCwJ9P9Q3LEylFd77Kj8C4TldrCd/sy/BBiarPVbWwKGk7PD
+	8nSgIEIyrGUqVEPon57XrWtZjaMhlWEyIexsVX0v+hIhesdsByxBOfzquHJ8/ceRQ8Xr
+	1xyfoc/Uw3cs6gIX6boqBYZfdYpHrKw61VPM8Smh9toMggbuPiQnS8IW0/kMXPpUMDq7
+	qHl+b3ZspmutIA4xG8gdi2TvwgkXCSmwgenwzG8kUdUto2SOlLSH14YQcfQ5kMqsL4Rb
+	dglQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=clox3yf/XK5h2w9G0FNDG7flXcb+oIoT+EOMi4Sb+Is=;
-	b=TbgMra/Y6PHTM5zyJGa6uYtxLa+mBTnThoj71ExWVKrjJCdib1yFbmdhq05Qm0JUpA
-	xr8+yhlKgOkV2IT6evXWGEA2RsQJ9Ti8OlRvjSuu3dD+/izY+01E3R4Ex3kEUXtyc/VW
-	t1lXT4tttpwmUl3VJLzV+VirWBJUNocKFPmxt0Fv79JF8Cieb2eDuUmripkGPF+d325j
-	lozcjqGONmOFKajtmaDpUtE3WktnZuBYbrMjfxSOszxTWGhVE6EhJ19Xf7v44Jys7Upu
-	772S8A3l8lWsQcSkAFrj0DEP/PlKFGqAVE0sLc7CHy9utSUplTlhESmme9Y/a3GCJDn8
-	g3jQ==
-X-Gm-Message-State: AOUpUlH+P/o4OshgKlOv15pL0SU26mhRuhQ2q+lpxDUE3v++fr/GJeHC
-	FDcO7C8trSvEQK2MAys1GjbXd+T7
-X-Google-Smtp-Source: AA+uWPxTGaJBSIrqhbpDqAXPRYLgq1MBE1TXIe3qLo8DbHJgBzHMs5kf9LQyzW1c0gq4AfkGX49Qmw==
-X-Received: by 2002:aa7:84c2:: with SMTP id
-	x2-v6mr10559823pfn.220.1534148295529; 
-	Mon, 13 Aug 2018 01:18:15 -0700 (PDT)
+	bh=CZoWycTkZfnOQFxCpBkWuVIeQxK4OxG3fEUFITu1/cY=;
+	b=jk5izc7/DxO5Wzk3zU5TOAvRDKfnZg+1cWRTYshm82V2B00AR0W/W3McM938FerPq5
+	YVZzRik9O3hezK7sxx9FcRNQdFAJ/5qHqZWiNeB1TYoVN7hVGtj8B048IqgnH9nFRcWk
+	dJGNA+z/cGpMu2fdEphCLGLV91DnVJHmZsFfP/q/tPNSPBoLJzAtZfybEvCTX43KgKSI
+	KeyZoNthUET3L2QqPtok0pe+GX+ZBtPF0ASORSFVDru+gICO4EFjQi5t3aXww8HwqhXV
+	yMYNKGHor7WDdqSXqYF+EoxEzO7ON8tJPj6vewKcCaTC2BjcgmfnEgZ1npzgntjNbKBG
+	PdcA==
+X-Gm-Message-State: AOUpUlGbg9kQSjw+w/dlpPuQ28RoxPwTrnKGcRAV1dHRKdJ2Mn8miZcb
+	TnHU3geA6SlxAXx3YfTTI8mhqmp3
+X-Google-Smtp-Source: AA+uWPzhKvQ1Tvfarh1q863deL6/Kj3+vkPggyc8f24eHw+yRD2Avfh+FGEMaqZq68L8RLu7HohT9w==
+X-Received: by 2002:a62:1157:: with SMTP id
+	z84-v6mr18050753pfi.66.1534148296769; 
+	Mon, 13 Aug 2018 01:18:16 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
-	b64-v6sm23414971pfg.66.2018.08.13.01.18.14
+	b64-v6sm23414971pfg.66.2018.08.13.01.18.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 01:18:14 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:15 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:41 -0700
-Message-Id: <20180813081742.6961-20-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:42 -0700
+Message-Id: <20180813081742.6961-21-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH 20/21] nginx: Upgrade to 1.15.2
+Subject: [meta-oe][PATCH 21/21] stress-ng: Upgrade to 0.09.36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,40 +58,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:18:15 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 08:18:17 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb | 6 ------
- meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb | 6 ++++++
- 2 files changed, 6 insertions(+), 6 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb
+ ...01-Several-changes-to-fix-musl-build.patch |  2 +-
+ ...0002-stress-fcntl-fix-build-for-musl.patch | 25 -------------------
+ ...ess-ng_0.09.14.bb => stress-ng_0.09.36.bb} |  7 +++---
+ 3 files changed, 4 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+ rename meta-oe/recipes-test/stress-ng/{stress-ng_0.09.14.bb => stress-ng_0.09.36.bb} (76%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+index d604f860a1..93d9b544d5 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+@@ -1,4 +1,4 @@
+-From 784dcd09d3f266e271d007f4fd257e85036872ca Mon Sep 17 00:00:00 2001
++From d499375fe267be8819ecb985123d89a21edc0e59 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
+ Date: Tue, 17 Oct 2017 10:13:20 -0500
+ Subject: [PATCH] Several changes to fix musl build
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
 deleted file mode 100644
-index de229605ee..0000000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.14.0.bb
+index ed3287e329..0000000000
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
 +++ /dev/null
-@@ -1,6 +0,0 @@
--require nginx.inc
+@@ -1,25 +0,0 @@
+-From faadbc147394cea9278bc2494f33e3521d88e742 Mon Sep 17 00:00:00 2001
+-From: Tim Orling <timothy.t.orling@linux.intel.com>
+-Date: Tue, 9 Jan 2018 18:38:45 -0800
+-Subject: [PATCH] stress-fcntl: fix build for musl
 -
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
+-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 -
--SRC_URI[md5sum] = "2d856aca3dfe1d32e3c9f8c4cac0cc95"
--SRC_URI[sha256sum] = "5d15becbf69aba1fe33f8d416d97edd95ea8919ea9ac519eff9bafebb6022cb5"
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb
-new file mode 100644
-index 0000000000..3694f5b586
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.15.2.bb
-@@ -0,0 +1,6 @@
-+require nginx.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3691402cc54ce09f800ca348634a2dfe"
-+
-+SRC_URI[md5sum] = "d063f746d3dc4298aed9c518f1684166"
-+SRC_URI[sha256sum] = "eeba09aecfbe8277ac33a5a2486ec2d6731739f3c1c701b42a0c3784af67ad90"
+-Upstream-status: Pending
+-
+----
+- stress-fcntl.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/stress-fcntl.c b/stress-fcntl.c
+-index 2ea867b..e91b345 100644
+---- a/stress-fcntl.c
+-+++ b/stress-fcntl.c
+-@@ -415,6 +415,7 @@ ofd_lock_abort:	{ /* Nowt */ }
+- #if (defined(F_GET_FILE_RW_HINT) && defined(F_SET_FILE_RW_HINT)) | \
+-     (defined(F_GET_RW_HINT) && defined(F_SET_RW_HINT))
+- 	{
+-+		int ret;
+- 		size_t i;
+- 		unsigned long hint;
+- 		static const unsigned long hints[] = {
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.09.14.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.09.36.bb
+similarity index 76%
+rename from meta-oe/recipes-test/stress-ng/stress-ng_0.09.14.bb
+rename to meta-oe/recipes-test/stress-ng/stress-ng_0.09.36.bb
+index 7fab43025f..9d1f316477 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng_0.09.14.bb
++++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.09.36.bb
+@@ -6,13 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "zlib libaio"
+ 
+ SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.xz \
+-           file://0002-stress-fcntl-fix-build-for-musl.patch \
+-          "
++           "
+ SRC_URI_append_libc-musl = " \
+     file://0001-Several-changes-to-fix-musl-build.patch \
+     "
+-SRC_URI[md5sum] = "1f8b6c2c2830704d2a2814c16082d48e"
+-SRC_URI[sha256sum] = "02cac34a5cb041197af60c1867844c6cbb089a6d10a38cdcf7b8f27bfaa6ef8f"
++SRC_URI[md5sum] = "7907e858f560870926e31dfa92f887b7"
++SRC_URI[sha256sum] = "16102abee20fe26b1a8784ab05c61b3e72474503bc50b9debc9f457cb4b4e228"
+ 
+ UPSTREAM_CHECK_URI ?= "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/"
+ UPSTREAM_CHECK_REGEX ?= "(?P<pver>\d+(\.\d+)+)\.tar"
 -- 
 2.18.0
 
