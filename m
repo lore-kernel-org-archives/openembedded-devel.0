@@ -1,6 +1,6 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D1D278F78
+	by mail.openembedded.org (Postfix) with ESMTP id 5D1C478F7D
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 13 Aug 2018 17:50:49 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
@@ -9,18 +9,18 @@ Received: from orsmga002.jf.intel.com ([10.7.209.21])
 	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
 	13 Aug 2018 10:50:50 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.53,234,1531810800"; d="scan'208";a="83030457"
+X-IronPort-AV: E=Sophos;i="5.53,234,1531810800"; d="scan'208";a="83030464"
 Received: from kkurdej-mobl.ger.corp.intel.com (HELO localhost.localdomain)
 	([10.252.36.13])
-	by orsmga002.jf.intel.com with ESMTP; 13 Aug 2018 10:50:34 -0700
+	by orsmga002.jf.intel.com with ESMTP; 13 Aug 2018 10:50:36 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 19:50:28 +0200
-Message-Id: <3f85d2095fea4e117c60518c07f04c6e733efe61.1534182463.git.paul.eggleton@linux.intel.com>
+Date: Mon, 13 Aug 2018 19:50:29 +0200
+Message-Id: <bfdf3b7fab388394660c7887856a037aa68c88e3.1534182463.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1534182463.git.paul.eggleton@linux.intel.com>
 References: <cover.1534182463.git.paul.eggleton@linux.intel.com>
-Subject: [meta-multimedia][PATCH 2/4] faac: set LICENSE_FLAGS
+Subject: [meta-oe][PATCH 3/4] faad2: set more accurate SUMMARY and add HOMEPAGE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,27 +35,25 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 13 Aug 2018 17:50:49 -0000
 
-Commercial usage requires licensing according to the homepage, so set
-LICENSE_FLAGS = "commercial" to indicate that.
+Make it clear what this library is for and provide a link for more
+information.
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- meta-multimedia/recipes-multimedia/faac/faac_1.29.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-multimedia/faad2/faad2_2.7.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
-index 9f11dbdaa..d36f2f48d 100644
---- a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
-+++ b/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
-@@ -5,6 +5,8 @@ HOMEPAGE = "http://www.audiocoding.com/faac.html"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                     file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
+diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb b/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
+index 63e590c9e..b777831ad 100644
+--- a/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
++++ b/meta-oe/recipes-multimedia/faad2/faad2_2.7.bb
+@@ -1,4 +1,5 @@
+-SUMMARY = "Library for reading some sort of media format"
++SUMMARY = "An open source MPEG-4 and MPEG-2 AAC decoding library"
++HOMEPAGE = "http://www.audiocoding.com/faad2.html"
+ SECTION = "libs"
+ LICENSE = "GPLv2"
  
-+LICENSE_FLAGS = "commercial"
-+
- inherit autotools
- 
- SRC_URI = " \
 -- 
 2.17.1
 
