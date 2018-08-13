@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl0-f54.google.com (mail-pl0-f54.google.com
-	[209.85.160.54])
-	by mail.openembedded.org (Postfix) with ESMTP id ABAA474C68
+Received: from mail-pl0-f44.google.com (mail-pl0-f44.google.com
+	[209.85.160.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 706BB70016
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:17:56 +0000 (UTC)
-Received: by mail-pl0-f54.google.com with SMTP id g6-v6so6602939plq.9
+	Mon, 13 Aug 2018 08:17:58 +0000 (UTC)
+Received: by mail-pl0-f44.google.com with SMTP id x6-v6so6601105plv.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:17:58 -0700 (PDT)
+	Mon, 13 Aug 2018 01:17:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Yv8FQWjX7C5dRCl122yhyeElefu6vwBUHrjt8xi0gLE=;
-	b=Gg/mM06g6UoxbEII4EuuAs35j01wk9qcVoCEoBB6fl1CV2m/O62VXksWwFkUKQJ7yJ
-	FtFT7y+WKmw7FNuDX3WGRi5dBT4J0V7IAQHuIJQ2SUtpWooxeArLIMZf9tI9tLcGMJj3
-	soPx2H/f2YQWPaKwlkkCTxxsWMdbVPmdf7DDGtBCyBMhOOPq6uQZbe4p3LDjyk8EEQN6
-	pM1J0socuYCHTvFdx6Nke6GbsQhw8fiPBDSOxBCB25wO3c4eQ0cWGWIf+hb8qEoxsXRb
-	uxW02dgJO4dxwSyVXmgP/Pu0O7PXMbNit1purHz4Tp/nkpe4p45FiM9evB3DVtM6LkmG
-	cDyg==
+	bh=TuaVCnwWEyWDTsiZivWRhNBdiTMljDlqFBLprPpthPc=;
+	b=sFCxIlt9NYVH6dac252IfCOXggsWx8zw5B+dQYzUZs+vbweQtfEPalvGKpO3EcJwpT
+	hfjSebDzVZevEcdPPwKUvDAS0cN5IL7kZu0rcBP+aX0+V8NrND3vtyFR1twuPj6cyS9a
+	l7Ail+Qn3sh/Iqwxl3XJzk7aVnJalFnSj7lxGtNDGhLB856zCZNRMMv2Cc077Zpi0hZU
+	vtbx1+oWXuAdIqAAYrYmEGqtGQTNkIP38gzF2lgFjvrdiJBC3clRQfKT8aJe/sVeS1j7
+	3TF27pfAKj7V+OOEqrS0lbtB5xnudGrgT0Xj5761wXrLALC2uJyexkHkyYSEyqSmMMzb
+	aztQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Yv8FQWjX7C5dRCl122yhyeElefu6vwBUHrjt8xi0gLE=;
-	b=tXp+6f0O/+pacP05vsJ4i6qYYOy38EZ2j5/QKVodrCazY5vKZRlMiYyYAzPt7RS2je
-	Plo8fngD0mcXK7AFFJJs5TMcDihKNwugODVkF/FSUsj7POl5YG3oE5Hgr2P2rGuEkdeE
-	HtIVNcQI+gseFgWmXPwBRaitwliqnUZAOMtDvJGPGRVN9agyQY+iJ6K+nNL9WI8Cf85T
-	Kx7vdam/BFt0B2FBkFtzXub9yFgINlHC8anVvcG46HXFXj9E7O8+4OD43A0P5cP8v+yE
-	l08CP2srDnUpwiqU3/u7HXLknD1ElJfLeHSU+5EfOKyXL66ywXsKYTKaSnFjKHfpiocE
-	Oumw==
-X-Gm-Message-State: AOUpUlETooB4nkjD70/aFVOCPtZ4ojmV072HqRJC5OdmvsGqQMdncoSZ
-	WtmaxLb5Tm2NRmgvexqT3sTmqFDx
-X-Google-Smtp-Source: AA+uWPzopMTyD8D+iel1hiaOxg7MkV2BiznvnHFCc/rqZFU6j/uCPVRzBL7KhpT3KNUIauE//pcnxQ==
-X-Received: by 2002:a17:902:4503:: with SMTP id
-	m3-v6mr15768051pld.168.1534148277603; 
-	Mon, 13 Aug 2018 01:17:57 -0700 (PDT)
+	bh=TuaVCnwWEyWDTsiZivWRhNBdiTMljDlqFBLprPpthPc=;
+	b=CqYkZWviQnypQQXVUhdtvI130o8u15Risu+ILxurvD/a9C+EoN/e30EZCxV5OgCeSC
+	UN0z3rMtN80QkO41G1/nMUj6o89RvZ38ICI9GOswga6X7WcAyHxWAzSpLmdLAv4kYii/
+	u+KODjqbZc/13wbrEXGceYgtNeQpCXd0D7hrgGMzpKIf95OStPr0gzMsMf8BU9LzFqya
+	tcSXMktoZw1nmjM8OJ/qD5hfUnSq2rt4BQjDpnOULM7OAHnpp3GddlS8I0r35hR/V9Ki
+	+eYJvHQ0hVaXfVDoFQRYMy7fNGUsjic4UI1C6hu/4mXSqdx2ZdELiK40zJ9lV2vXGVR4
+	5CAA==
+X-Gm-Message-State: AOUpUlGn/BeZ+Vndq5wD157Pc2YmC/JTIjILpjT+4Gh4wJb1yd1JVdin
+	bvw7dWKslll4d1hcEkslAruB4fSQ
+X-Google-Smtp-Source: AA+uWPyNJ+wZm9L2eUI8QShEbsPmzmRFI3pMMs7pXf37C6VTFCrhTYLyRJmyhqk/sAQ1iY0buVqJjg==
+X-Received: by 2002:a17:902:b944:: with SMTP id
+	h4-v6mr15339971pls.157.1534148279177; 
+	Mon, 13 Aug 2018 01:17:59 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
-	b64-v6sm23414971pfg.66.2018.08.13.01.17.56
+	b64-v6sm23414971pfg.66.2018.08.13.01.17.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Mon, 13 Aug 2018 01:17:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:27 -0700
-Message-Id: <20180813081742.6961-6-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:28 -0700
+Message-Id: <20180813081742.6961-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 06/21] yp-tools: Add dep on virtual/crypt
+Subject: [meta-oe][PATCH 07/21] lsscsi: Upgrade to 0.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,29 +58,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:17:56 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 08:17:58 -0000
 
-needed with glibc 2.28+ where crypt has moved into
-independent recipe
+rename folder to match recipe name
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/nis/yp-tools_4.2.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{lssci/lsscsi_0.28.bb => lsscsi/lsscsi_0.30.bb}         | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-bsp/{lssci/lsscsi_0.28.bb => lsscsi/lsscsi_0.30.bb} (63%)
 
-diff --git a/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
-index 4e27e32d48..bb401666c6 100644
---- a/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
-+++ b/meta-networking/recipes-support/nis/yp-tools_4.2.3.bb
-@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/thkukuk/yp-tools \
+diff --git a/meta-oe/recipes-bsp/lssci/lsscsi_0.28.bb b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+similarity index 63%
+rename from meta-oe/recipes-bsp/lssci/lsscsi_0.28.bb
+rename to meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+index 4b8cbaf099..af34cdc483 100644
+--- a/meta-oe/recipes-bsp/lssci/lsscsi_0.28.bb
++++ b/meta-oe/recipes-bsp/lsscsi/lsscsi_0.30.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM="file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- S = "${WORKDIR}/git"
+ SRC_URI = "http://sg.danny.cz/scsi/${BP}.tgz"
  
--DEPENDS = "libtirpc libnsl2"
-+DEPENDS = "libtirpc libnsl2 virtual/crypt"
+-SRC_URI[md5sum] = "4a39e3b09cd422e2cae3edbaf56b3176"
+-SRC_URI[sha256sum] = "025d009a1af42bc5b2fca664c44c9ecdfd754356e4a44f5c6aced2420afadd50"
++SRC_URI[md5sum] = "298a700cd50bb4be1382d618f7b038f4"
++SRC_URI[sha256sum] = "619a2187405f02c5f57682f3478bffc75326803cd08839e39d434250c5518b15"
  
- inherit autotools systemd
- SYSTEMD_SERVICE_${PN} = "domainname.service"
+ inherit autotools
++
++S = "${WORKDIR}/lsscsi-030r154"
 -- 
 2.18.0
 
