@@ -1,48 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CE4478F74
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
+	[209.85.208.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 33EBF78F34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 18:34:39 +0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id b5-v6so11672980qkg.6
+	Mon, 13 Aug 2018 19:32:54 +0000 (UTC)
+Received: by mail-ed1-f54.google.com with SMTP id e19-v6so8857340edq.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 11:34:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0VuZKn7tWKCrvo58axG9lx5EMUm0yqW+6QVmEd60EV0=;
-	b=qKLxklFctt8PuVwAtk0Y8Ufrbq7i1IqxtDzOyecVB9i9WCuFQwHhbHidwwltiyU0hR
-	UPCtDnNnxVL4Uvv8irGYHBPfCrQEI2TxhdzF6ul1RITH6pKglHAPVmBtwBiBaTtBJNhf
-	eYk/NYT3EeqdLdwW2OpZDRzLWabIgO6/Xc6X8CJkTqR7QK8308bvWU3luvickhv1V1Jq
-	FfJznInhAr/LR5u56mBSUKQ2Ad0kIKlJYChwBWfl07qVcbKi2tvyvsJz72h2g6L4/aCC
-	TUMqRClsV4aD8ajqz/rnxq0dc7uSaOyMQXbSlT8M+Watd9ObHnQ64kd6SOwkip2MkkXr
-	0M7g==
+	Mon, 13 Aug 2018 12:32:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0VuZKn7tWKCrvo58axG9lx5EMUm0yqW+6QVmEd60EV0=;
-	b=STmquSrUaaRDf6VLp2SgaIQFjyC7+ihv+xuLysgDY+4i8hKRsWkbQ6Jc6zeOA/eZ6Z
-	alz1DhUPdpIgKAZD+QX5DwIrfmwyKxqf5Gea6sXoHacn4CHydWConui9LD1YeLUAWYEP
-	XStToR/V8O5GfBoxf3BTwPfrJDo1USxcfS5O8uEOi0a15EPIbqZxkabalEC0rwHi5N4U
-	mAzlPjlqbjAVN7eZJ9Gp6VP37kv9jS5fXpxonIT2JnaNrTjQUN7VkU07GBoS4I6xFuOv
-	ebGd1O3umCii4lpBC+3FfdOGgFk45IM0PKALMQ4H7FRPeK0KJORhfj/H/7rJ642o5/DO
-	81hw==
-X-Gm-Message-State: AOUpUlEU5u/+Gc1lJRy2BPXnKg8mFxF5SUIeNv5dyDoce+kkJxCDqWDB
-	i2QdnS+vxaWVdfttkBW1UsNZQjfsIVv8Ngm14Bc=
-X-Google-Smtp-Source: AA+uWPz3rymOR+RwIqegPLLv3548rx4EABAuDQkQh7UGSKInXAb1ptRsZtrUa/7Fw84OYkkMEe5fiVNKY19pQKG8NXs=
-X-Received: by 2002:a37:8f41:: with SMTP id
-	r62-v6mr17144627qkd.412.1534185277568; 
-	Mon, 13 Aug 2018 11:34:37 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1767XJlngaI2cC4p7e/5gklL/imUkurL8k7zZNNTeSo=;
+	b=tlyEJBWF+cqT/U2sSINSIg8WHEEr06JNwsmyB96Spk+Ras+pmMFkkrzYKnz3wmzTH6
+	CBfz9xXmt9gq1FCyiveC+ocESYoyEa46AXFyrejvPSFC+QaQPUL3GfITt+C1vXarzCIJ
+	AKI/9VzgnBxyJnoKCsnTYoFV0h84kXIGmmb1BlRbJY7T+r1Ll7H0PP4q4DS8kYU7TSAF
+	/uL3Q7iih5C9hHRnwiUsZGpUJJ1iXaYDVQZFoU1MF2t9+nroGgXgGoHrKpKuQaME8jxc
+	jtWOPzzAdaDblM/td6r1krEKh8tyFr9PSvJUnHQ1MfJO3FAY8Oyh3kE9LBTMUmFomlsN
+	HZAw==
+X-Gm-Message-State: AOUpUlGMKOh5aFzTy5I3ouP1nF65OvGWAFapuSvy83J6s3O7zDoniz+o
+	dvsAt2uyjqqwPeZqbGvMhFTfJtLS
+X-Google-Smtp-Source: AA+uWPyaYiWvH7pOhxP0xZsEl/GPPLGua9GnZ2/qqCc7L7hw5tEWT3XwLce8jUPP+uXm/arOkYUyrA==
+X-Received: by 2002:a50:8854:: with SMTP id
+	c20-v6mr23774704edc.146.1534188773908; 
+	Mon, 13 Aug 2018 12:32:53 -0700 (PDT)
+Received: from tfsielt31850.fritz.box (188-141-55-36.dynamic.upc.ie.
+	[188.141.55.36]) by smtp.gmail.com with ESMTPSA id
+	m8-v6sm6852328edr.15.2018.08.13.12.32.52
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Aug 2018 12:32:53 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Aug 2018 20:32:51 +0100
+Message-Id: <20180813193251.4079-1-git@andred.net>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-References: <20180813102801.30262-1-hongzhi.song@windriver.com>
-	<20180813102801.30262-2-hongzhi.song@windriver.com>
-In-Reply-To: <20180813102801.30262-2-hongzhi.song@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 13 Aug 2018 11:34:11 -0700
-Message-ID: <CAMKF1sqKJCLWEcVtZGSKcULs=nMHBzDaTT3uqn5qFJZzdkgW6w@mail.gmail.com>
-To: "Hongzhi.Song" <hongzhi.song@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v5 1/1] kernel-selftest: Add a recipe on kernel selftest
+Subject: [meta-java][PATCH] openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,902 +49,812 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 18:34:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 13 Aug 2018 19:32:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Can you rebase this on top of current master please ?
-On Mon, Aug 13, 2018 at 3:28 AM Hongzhi.Song <hongzhi.song@windriver.com> wrote:
->
-> The recipe builds the framework for kernel-selftest. Now, it just
-> contains two sets of testcase, bpf and vm. We will append more to
-> this recipe.
->
-> The following kernel config fragments must be manually enabled,
-> i.e. in local.conf, to use this test suite.
-> KERNEL_FEATURES_append += "features/bpf/bpf.scc \
->                         cfg/debug-kselftest.scc \
->                    features/hugetlb/hugetlb.scc \
-> "
->
-> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> ---
->  .../kernel-selftest/kernel-selftest.bb             | 105 ++++++
->  ...bpf-test_progs.c-add-support-for-musllibc.patch |  25 ++
->  ...-swap.h-micro-define-to-support-musl-libc.patch |  26 ++
->  .../kernel-selftest/kernel-selftest/COPYING        | 356 +++++++++++++++++++++
->  .../kernel-selftest/userfaultfd.patch              | 322 +++++++++++++++++++
->  5 files changed, 834 insertions(+)
->  create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->  create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
->  create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch
->  create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
->  create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
->
-> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-> new file mode 100644
-> index 000000000..e09831f76
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-> @@ -0,0 +1,105 @@
-> +SUMMARY = "Kernel selftest for Linux"
-> +DESCRIPTION = "Kernel selftest for Linux"
-> +LICENSE = "GPLv2"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
-> +"
-> +
-> +# for musl libc
-> +SRC_URI_libc-musl += "file://userfaultfd.patch \
-> +                      file://0001-bpf-test_progs.c-add-support-for-musllibc.patch \
-> +"
-> +
-> +PACKAGECONFIG ??= "bpf vm"
-> +
-> +PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
-> +PACKAGECONFIG[vm] = ",,,libgcc bash"
-> +
-> +do_patch[depends] += "virtual/kernel:do_shared_workdir"
-> +
-> +inherit linux-kernel-base kernel-arch
-> +
-> +do_populate_lic[depends] += "virtual/kernel:do_patch"
-> +
-> +S = "${WORKDIR}/${BP}"
-> +
-> +# now we just test bpf and vm
-> +# we will append other kernel selftest in the future
-> +TEST_LIST = "bpf \
-> +             vm \
-> +"
-> +
-> +EXTRA_OEMAKE = '\
-> +    CROSS_COMPILE=${TARGET_PREFIX} \
-> +    ARCH=${ARCH} \
-> +    CC="${CC}" \
-> +    AR="${AR}" \
-> +    LD="${LD}" \
-> +'
-> +
-> +EXTRA_OEMAKE += "\
-> +    'DESTDIR=${D}' \
-> +"
-> +
-> +KERNEL_SELFTEST_SRC ?= "Makefile \
-> +                        include \
-> +                        tools \
-> +                        scripts \
-> +                        arch \
-> +                       COPYING \
-> +"
-> +
-> +python __anonymous () {
-> +    import re
-> +
-> +    var = d.getVar('TARGET_CC_ARCH')
-> +    pattern = '_FORTIFY_SOURCE=[^0]'
-> +
-> +    if re.search(pattern, var):
-> +        d.appendVar('TARGET_CC_ARCH', " -O")
-> +}
-> +
-> +do_compile() {
-> +    for i in ${TEST_LIST}
-> +    do
-> +        oe_runmake -C ${S}/tools/testing/selftests/${i}
-> +    done
-> +}
-> +
-> +do_install() {
-> +    for i in ${TEST_LIST}
-> +    do
-> +        oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/usr/kernel-selftest/${i} install
-> +    done
-> +
-> +    chown root:root  -R ${D}/usr/kernel-selftest
-> +}
-> +
-> +do_configure() {
-> +    :
-> +}
-> +
-> +do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
-> +python copy_kselftest_source_from_kernel() {
-> +    sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
-> +    src_dir = d.getVar("STAGING_KERNEL_DIR")
-> +    dest_dir = d.getVar("S")
-> +    bb.utils.mkdirhier(dest_dir)
-> +    for s in sources:
-> +        src = oe.path.join(src_dir, s)
-> +        dest = oe.path.join(dest_dir, s)
-> +        if os.path.isdir(src):
-> +            oe.path.copytree(src, dest)
-> +        else:
-> +            bb.utils.copyfile(src, dest)
-> +}
-> +
-> +remove_unrelated() {
-> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile
-> +    sed -i '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile
-> +}
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> +
-> +INHIBIT_PACKAGE_DEBUG_SPLIT="1"
-> +FILES_${PN} += "/usr/kernel-selftest"
-> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
-> new file mode 100644
-> index 000000000..5f2542681
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-bpf-test_progs.c-add-support-for-musllibc.patch
-> @@ -0,0 +1,25 @@
-> +From a2e6b8fde28b743b69990a4e16c296e099631ed4 Mon Sep 17 00:00:00 2001
-> +From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-> +Date: Mon, 23 Jul 2018 00:56:19 -0700
-> +Subject: [PATCH] bpf: test_progs.c add support for musllibc
-> +
-> +Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> +---
-> + tools/testing/selftests/bpf/test_progs.c | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/tools/testing/selftests/bpf/test_progs.c b/tools/testing/selftests/bpf/test_progs.c
-> +index 11ee25c..21b27b7 100644
-> +--- a/tools/testing/selftests/bpf/test_progs.c
-> ++++ b/tools/testing/selftests/bpf/test_progs.c
-> +@@ -4,6 +4,7 @@
-> +  * modify it under the terms of version 2 of the GNU General Public
-> +  * License as published by the Free Software Foundation.
-> +  */
-> ++#define __always_inline __inline __attribute__ ((__always_inline__))
-> + #include <stdio.h>
-> + #include <unistd.h>
-> + #include <errno.h>
-> +--
-> +2.11.0
-> +
-> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch
-> new file mode 100644
-> index 000000000..e2245fc4c
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/0001-swap.h-micro-define-to-support-musl-libc.patch
-> @@ -0,0 +1,26 @@
-> +From c21dfb0dfdfec281479e267ad7fe9a8d4ba15a70 Mon Sep 17 00:00:00 2001
-> +From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-> +Date: Tue, 17 Jul 2018 23:47:48 -0700
-> +Subject: [PATCH] add micro define to support musl libc
-> +
-> +Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> +---
-> + recipe-sysroot/usr/include/linux/swab.h | 2 ++
-> + 1 file changed, 2 insertions(+)
-> +
-> +diff --git a/recipe-sysroot/usr/include/linux/swab.h b/recipe-sysroot/usr/include/linux/swab.h
-> +index afb7eb7..33efa10 100644
-> +--- a/recipe-sysroot/usr/include/linux/swab.h
-> ++++ b/recipe-sysroot/usr/include/linux/swab.h
-> +@@ -6,6 +6,8 @@
-> +
-> + #include <asm/swab.h>
-> +
-> ++#define __always_inline __inline __attribute__ ((__always_inline__))
-> ++
-> + /*
-> +  * casts are necessary for constants, because we never know how for sure
-> +  * how U/UL/ULL map to __u16, __u32, __u64. At least not in a portable way.
-> +--
-> +2.11.0
-> +
-> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
-> new file mode 100644
-> index 000000000..ca442d313
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/COPYING
-> @@ -0,0 +1,356 @@
-> +
-> +   NOTE! This copyright does *not* cover user programs that use kernel
-> + services by normal system calls - this is merely considered normal use
-> + of the kernel, and does *not* fall under the heading of "derived work".
-> + Also note that the GPL below is copyrighted by the Free Software
-> + Foundation, but the instance of code that it refers to (the Linux
-> + kernel) is copyrighted by me and others who actually wrote it.
-> +
-> + Also note that the only valid version of the GPL as far as the kernel
-> + is concerned is _this_ particular version of the license (ie v2, not
-> + v2.2 or v3.x or whatever), unless explicitly otherwise stated.
-> +
-> +                       Linus Torvalds
-> +
-> +----------------------------------------
-> +
-> +                   GNU GENERAL PUBLIC LICENSE
-> +                      Version 2, June 1991
-> +
-> + Copyright (C) 1989, 1991 Free Software Foundation, Inc.
-> +                       51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-> + Everyone is permitted to copy and distribute verbatim copies
-> + of this license document, but changing it is not allowed.
-> +
-> +                           Preamble
-> +
-> +  The licenses for most software are designed to take away your
-> +freedom to share and change it.  By contrast, the GNU General Public
-> +License is intended to guarantee your freedom to share and change free
-> +software--to make sure the software is free for all its users.  This
-> +General Public License applies to most of the Free Software
-> +Foundation's software and to any other program whose authors commit to
-> +using it.  (Some other Free Software Foundation software is covered by
-> +the GNU Library General Public License instead.)  You can apply it to
-> +your programs, too.
-> +
-> +  When we speak of free software, we are referring to freedom, not
-> +price.  Our General Public Licenses are designed to make sure that you
-> +have the freedom to distribute copies of free software (and charge for
-> +this service if you wish), that you receive source code or can get it
-> +if you want it, that you can change the software or use pieces of it
-> +in new free programs; and that you know you can do these things.
-> +
-> +  To protect your rights, we need to make restrictions that forbid
-> +anyone to deny you these rights or to ask you to surrender the rights.
-> +These restrictions translate to certain responsibilities for you if you
-> +distribute copies of the software, or if you modify it.
-> +
-> +  For example, if you distribute copies of such a program, whether
-> +gratis or for a fee, you must give the recipients all the rights that
-> +you have.  You must make sure that they, too, receive or can get the
-> +source code.  And you must show them these terms so they know their
-> +rights.
-> +
-> +  We protect your rights with two steps: (1) copyright the software, and
-> +(2) offer you this license which gives you legal permission to copy,
-> +distribute and/or modify the software.
-> +
-> +  Also, for each author's protection and ours, we want to make certain
-> +that everyone understands that there is no warranty for this free
-> +software.  If the software is modified by someone else and passed on, we
-> +want its recipients to know that what they have is not the original, so
-> +that any problems introduced by others will not reflect on the original
-> +authors' reputations.
-> +
-> +  Finally, any free program is threatened constantly by software
-> +patents.  We wish to avoid the danger that redistributors of a free
-> +program will individually obtain patent licenses, in effect making the
-> +program proprietary.  To prevent this, we have made it clear that any
-> +patent must be licensed for everyone's free use or not licensed at all.
-> +
-> +  The precise terms and conditions for copying, distribution and
-> +modification follow.
-> +
-> +                   GNU GENERAL PUBLIC LICENSE
-> +   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-> +
-> +  0. This License applies to any program or other work which contains
-> +a notice placed by the copyright holder saying it may be distributed
-> +under the terms of this General Public License.  The "Program", below,
-> +refers to any such program or work, and a "work based on the Program"
-> +means either the Program or any derivative work under copyright law:
-> +that is to say, a work containing the Program or a portion of it,
-> +either verbatim or with modifications and/or translated into another
-> +language.  (Hereinafter, translation is included without limitation in
-> +the term "modification".)  Each licensee is addressed as "you".
-> +
-> +Activities other than copying, distribution and modification are not
-> +covered by this License; they are outside its scope.  The act of
-> +running the Program is not restricted, and the output from the Program
-> +is covered only if its contents constitute a work based on the
-> +Program (independent of having been made by running the Program).
-> +Whether that is true depends on what the Program does.
-> +
-> +  1. You may copy and distribute verbatim copies of the Program's
-> +source code as you receive it, in any medium, provided that you
-> +conspicuously and appropriately publish on each copy an appropriate
-> +copyright notice and disclaimer of warranty; keep intact all the
-> +notices that refer to this License and to the absence of any warranty;
-> +and give any other recipients of the Program a copy of this License
-> +along with the Program.
-> +
-> +You may charge a fee for the physical act of transferring a copy, and
-> +you may at your option offer warranty protection in exchange for a fee.
-> +
-> +  2. You may modify your copy or copies of the Program or any portion
-> +of it, thus forming a work based on the Program, and copy and
-> +distribute such modifications or work under the terms of Section 1
-> +above, provided that you also meet all of these conditions:
-> +
-> +    a) You must cause the modified files to carry prominent notices
-> +    stating that you changed the files and the date of any change.
-> +
-> +    b) You must cause any work that you distribute or publish, that in
-> +    whole or in part contains or is derived from the Program or any
-> +    part thereof, to be licensed as a whole at no charge to all third
-> +    parties under the terms of this License.
-> +
-> +    c) If the modified program normally reads commands interactively
-> +    when run, you must cause it, when started running for such
-> +    interactive use in the most ordinary way, to print or display an
-> +    announcement including an appropriate copyright notice and a
-> +    notice that there is no warranty (or else, saying that you provide
-> +    a warranty) and that users may redistribute the program under
-> +    these conditions, and telling the user how to view a copy of this
-> +    License.  (Exception: if the Program itself is interactive but
-> +    does not normally print such an announcement, your work based on
-> +    the Program is not required to print an announcement.)
-> +
-> +These requirements apply to the modified work as a whole.  If
-> +identifiable sections of that work are not derived from the Program,
-> +and can be reasonably considered independent and separate works in
-> +themselves, then this License, and its terms, do not apply to those
-> +sections when you distribute them as separate works.  But when you
-> +distribute the same sections as part of a whole which is a work based
-> +on the Program, the distribution of the whole must be on the terms of
-> +this License, whose permissions for other licensees extend to the
-> +entire whole, and thus to each and every part regardless of who wrote it.
-> +
-> +Thus, it is not the intent of this section to claim rights or contest
-> +your rights to work written entirely by you; rather, the intent is to
-> +exercise the right to control the distribution of derivative or
-> +collective works based on the Program.
-> +
-> +In addition, mere aggregation of another work not based on the Program
-> +with the Program (or with a work based on the Program) on a volume of
-> +a storage or distribution medium does not bring the other work under
-> +the scope of this License.
-> +
-> +  3. You may copy and distribute the Program (or a work based on it,
-> +under Section 2) in object code or executable form under the terms of
-> +Sections 1 and 2 above provided that you also do one of the following:
-> +
-> +    a) Accompany it with the complete corresponding machine-readable
-> +    source code, which must be distributed under the terms of Sections
-> +    1 and 2 above on a medium customarily used for software interchange; or,
-> +
-> +    b) Accompany it with a written offer, valid for at least three
-> +    years, to give any third party, for a charge no more than your
-> +    cost of physically performing source distribution, a complete
-> +    machine-readable copy of the corresponding source code, to be
-> +    distributed under the terms of Sections 1 and 2 above on a medium
-> +    customarily used for software interchange; or,
-> +
-> +    c) Accompany it with the information you received as to the offer
-> +    to distribute corresponding source code.  (This alternative is
-> +    allowed only for noncommercial distribution and only if you
-> +    received the program in object code or executable form with such
-> +    an offer, in accord with Subsection b above.)
-> +
-> +The source code for a work means the preferred form of the work for
-> +making modifications to it.  For an executable work, complete source
-> +code means all the source code for all modules it contains, plus any
-> +associated interface definition files, plus the scripts used to
-> +control compilation and installation of the executable.  However, as a
-> +special exception, the source code distributed need not include
-> +anything that is normally distributed (in either source or binary
-> +form) with the major components (compiler, kernel, and so on) of the
-> +operating system on which the executable runs, unless that component
-> +itself accompanies the executable.
-> +
-> +If distribution of executable or object code is made by offering
-> +access to copy from a designated place, then offering equivalent
-> +access to copy the source code from the same place counts as
-> +distribution of the source code, even though third parties are not
-> +compelled to copy the source along with the object code.
-> +
-> +  4. You may not copy, modify, sublicense, or distribute the Program
-> +except as expressly provided under this License.  Any attempt
-> +otherwise to copy, modify, sublicense or distribute the Program is
-> +void, and will automatically terminate your rights under this License.
-> +However, parties who have received copies, or rights, from you under
-> +this License will not have their licenses terminated so long as such
-> +parties remain in full compliance.
-> +
-> +  5. You are not required to accept this License, since you have not
-> +signed it.  However, nothing else grants you permission to modify or
-> +distribute the Program or its derivative works.  These actions are
-> +prohibited by law if you do not accept this License.  Therefore, by
-> +modifying or distributing the Program (or any work based on the
-> +Program), you indicate your acceptance of this License to do so, and
-> +all its terms and conditions for copying, distributing or modifying
-> +the Program or works based on it.
-> +
-> +  6. Each time you redistribute the Program (or any work based on the
-> +Program), the recipient automatically receives a license from the
-> +original licensor to copy, distribute or modify the Program subject to
-> +these terms and conditions.  You may not impose any further
-> +restrictions on the recipients' exercise of the rights granted herein.
-> +You are not responsible for enforcing compliance by third parties to
-> +this License.
-> +
-> +  7. If, as a consequence of a court judgment or allegation of patent
-> +infringement or for any other reason (not limited to patent issues),
-> +conditions are imposed on you (whether by court order, agreement or
-> +otherwise) that contradict the conditions of this License, they do not
-> +excuse you from the conditions of this License.  If you cannot
-> +distribute so as to satisfy simultaneously your obligations under this
-> +License and any other pertinent obligations, then as a consequence you
-> +may not distribute the Program at all.  For example, if a patent
-> +license would not permit royalty-free redistribution of the Program by
-> +all those who receive copies directly or indirectly through you, then
-> +the only way you could satisfy both it and this License would be to
-> +refrain entirely from distribution of the Program.
-> +
-> +If any portion of this section is held invalid or unenforceable under
-> +any particular circumstance, the balance of the section is intended to
-> +apply and the section as a whole is intended to apply in other
-> +circumstances.
-> +
-> +It is not the purpose of this section to induce you to infringe any
-> +patents or other property right claims or to contest validity of any
-> +such claims; this section has the sole purpose of protecting the
-> +integrity of the free software distribution system, which is
-> +implemented by public license practices.  Many people have made
-> +generous contributions to the wide range of software distributed
-> +through that system in reliance on consistent application of that
-> +system; it is up to the author/donor to decide if he or she is willing
-> +to distribute software through any other system and a licensee cannot
-> +impose that choice.
-> +
-> +This section is intended to make thoroughly clear what is believed to
-> +be a consequence of the rest of this License.
-> +
-> +  8. If the distribution and/or use of the Program is restricted in
-> +certain countries either by patents or by copyrighted interfaces, the
-> +original copyright holder who places the Program under this License
-> +may add an explicit geographical distribution limitation excluding
-> +those countries, so that distribution is permitted only in or among
-> +countries not thus excluded.  In such case, this License incorporates
-> +the limitation as if written in the body of this License.
-> +
-> +  9. The Free Software Foundation may publish revised and/or new versions
-> +of the General Public License from time to time.  Such new versions will
-> +be similar in spirit to the present version, but may differ in detail to
-> +address new problems or concerns.
-> +
-> +Each version is given a distinguishing version number.  If the Program
-> +specifies a version number of this License which applies to it and "any
-> +later version", you have the option of following the terms and conditions
-> +either of that version or of any later version published by the Free
-> +Software Foundation.  If the Program does not specify a version number of
-> +this License, you may choose any version ever published by the Free Software
-> +Foundation.
-> +
-> +  10. If you wish to incorporate parts of the Program into other free
-> +programs whose distribution conditions are different, write to the author
-> +to ask for permission.  For software which is copyrighted by the Free
-> +Software Foundation, write to the Free Software Foundation; we sometimes
-> +make exceptions for this.  Our decision will be guided by the two goals
-> +of preserving the free status of all derivatives of our free software and
-> +of promoting the sharing and reuse of software generally.
-> +
-> +                           NO WARRANTY
-> +
-> +  11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-> +FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
-> +OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-> +PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
-> +OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-> +MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS
-> +TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
-> +PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
-> +REPAIR OR CORRECTION.
-> +
-> +  12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-> +WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-> +REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
-> +INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING
-> +OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED
-> +TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY
-> +YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
-> +PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
-> +POSSIBILITY OF SUCH DAMAGES.
-> +
-> +                    END OF TERMS AND CONDITIONS
-> +
-> +           How to Apply These Terms to Your New Programs
-> +
-> +  If you develop a new program, and you want it to be of the greatest
-> +possible use to the public, the best way to achieve this is to make it
-> +free software which everyone can redistribute and change under these terms.
-> +
-> +  To do so, attach the following notices to the program.  It is safest
-> +to attach them to the start of each source file to most effectively
-> +convey the exclusion of warranty; and each file should have at least
-> +the "copyright" line and a pointer to where the full notice is found.
-> +
-> +    <one line to give the program's name and a brief idea of what it does.>
-> +    Copyright (C) <year>  <name of author>
-> +
-> +    This program is free software; you can redistribute it and/or modify
-> +    it under the terms of the GNU General Public License as published by
-> +    the Free Software Foundation; either version 2 of the License, or
-> +    (at your option) any later version.
-> +
-> +    This program is distributed in the hope that it will be useful,
-> +    but WITHOUT ANY WARRANTY; without even the implied warranty of
-> +    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> +    GNU General Public License for more details.
-> +
-> +    You should have received a copy of the GNU General Public License
-> +    along with this program; if not, write to the Free Software
-> +    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-> +
-> +
-> +Also add information on how to contact you by electronic and paper mail.
-> +
-> +If the program is interactive, make it output a short notice like this
-> +when it starts in an interactive mode:
-> +
-> +    Gnomovision version 69, Copyright (C) year name of author
-> +    Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-> +    This is free software, and you are welcome to redistribute it
-> +    under certain conditions; type `show c' for details.
-> +
-> +The hypothetical commands `show w' and `show c' should show the appropriate
-> +parts of the General Public License.  Of course, the commands you use may
-> +be called something other than `show w' and `show c'; they could even be
-> +mouse-clicks or menu items--whatever suits your program.
-> +
-> +You should also get your employer (if you work as a programmer) or your
-> +school, if any, to sign a "copyright disclaimer" for the program, if
-> +necessary.  Here is a sample; alter the names:
-> +
-> +  Yoyodyne, Inc., hereby disclaims all copyright interest in the program
-> +  `Gnomovision' (which makes passes at compilers) written by James Hacker.
-> +
-> +  <signature of Ty Coon>, 1 April 1989
-> +  Ty Coon, President of Vice
-> +
-> +This General Public License does not permit incorporating your program into
-> +proprietary programs.  If your program is a subroutine library, you may
-> +consider it more useful to permit linking proprietary applications with the
-> +library.  If this is what you want to do, use the GNU Library General
-> +Public License instead of this License.
-> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
-> new file mode 100644
-> index 000000000..bed20510e
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/userfaultfd.patch
-> @@ -0,0 +1,322 @@
-> +From c7b375747cffb627d02543d946b28525455d7d46 Mon Sep 17 00:00:00 2001
-> +From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-> +Date: Fri, 13 Jul 2018 06:06:19 -0700
-> +Subject: [PATCH] vm: add some funtions to support musl libc
-> +
-> +Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
-> +---
-> + tools/testing/selftests/vm/userfaultfd.c | 298 +++++++++++++++++++++++++++++++
-> + 1 file changed, 298 insertions(+)
-> +
-> +diff --git a/tools/testing/selftests/vm/userfaultfd.c b/tools/testing/selftests/vm/userfaultfd.c
-> +index de2f9ec..dc73021 100644
-> +--- a/tools/testing/selftests/vm/userfaultfd.c
-> ++++ b/tools/testing/selftests/vm/userfaultfd.c
-> +@@ -71,6 +71,304 @@
-> +
-> + #ifdef __NR_userfaultfd
-> +
-> ++/* Linear congruential.  */
-> ++#define       TYPE_0          0
-> ++#define       BREAK_0         8
-> ++#define       DEG_0           0
-> ++#define       SEP_0           0
-> ++
-> ++/* x**7 + x**3 + 1.  */
-> ++#define       TYPE_1          1
-> ++#define       BREAK_1         32
-> ++#define       DEG_1           7
-> ++#define       SEP_1           3
-> ++
-> ++/* x**15 + x + 1.  */
-> ++#define       TYPE_2          2
-> ++#define       BREAK_2         64
-> ++#define       DEG_2           15
-> ++#define       SEP_2           1
-> ++
-> ++/* x**31 + x**3 + 1.  */
-> ++#define       TYPE_3          3
-> ++#define       BREAK_3         128
-> ++#define       DEG_3           31
-> ++#define       SEP_3           3
-> ++
-> ++/* x**63 + x + 1.  */
-> ++#define       TYPE_4          4
-> ++#define       BREAK_4         256
-> ++#define       DEG_4           63
-> ++#define       SEP_4           1
-> ++
-> ++/* Array versions of the above information to make code run faster.
-> ++   Relies on fact that TYPE_i == i.  */
-> ++
-> ++#define       MAX_TYPES       5       /* Max number of types above.  */
-> ++
-> ++#define __set_errno(val) (errno = (val))
-> ++
-> ++struct random_data
-> ++  {
-> ++    int32_t *fptr;      /* Front pointer.  */
-> ++    int32_t *rptr;      /* Rear pointer.  */
-> ++    int32_t *state;     /* Array of state values.  */
-> ++    int rand_type;      /* Type of random number generator.  */
-> ++    int rand_deg;       /* Degree of random number generator.  */
-> ++    int rand_sep;       /* Distance between front and rear.  */
-> ++    int32_t *end_ptr;       /* Pointer behind state table.  */
-> ++  };
-> ++
-> ++struct random_poly_info
-> ++{
-> ++  int seps[MAX_TYPES];
-> ++  int degrees[MAX_TYPES];
-> ++};
-> ++
-> ++static const struct random_poly_info random_poly_info =
-> ++{
-> ++  { SEP_0, SEP_1, SEP_2, SEP_3, SEP_4 },
-> ++  { DEG_0, DEG_1, DEG_2, DEG_3, DEG_4 }
-> ++};
-> ++
-> ++/* If we are using the trivial TYPE_0 R.N.G., just do the old linear
-> ++   congruential bit.  Otherwise, we do our fancy trinomial stuff, which is the
-> ++   same in all the other cases due to all the global variables that have been
-> ++   set up.  The basic operation is to add the number at the rear pointer into
-> ++   the one at the front pointer.  Then both pointers are advanced to the next
-> ++   location cyclically in the table.  The value returned is the sum generated,
-> ++   reduced to 31 bits by throwing away the "least random" low bit.
-> ++   Note: The code takes advantage of the fact that both the front and
-> ++   rear pointers can't wrap on the same call by not testing the rear
-> ++   pointer if the front one has wrapped.  Returns a 31-bit random number.  */
-> ++
-> ++int random_r (struct random_data *buf, int32_t *result)
-> ++{
-> ++  int32_t *state;
-> ++
-> ++  if (buf == NULL || result == NULL)
-> ++    goto fail;
-> ++
-> ++  state = buf->state;
-> ++
-> ++  if (buf->rand_type == TYPE_0)
-> ++    {
-> ++      int32_t val = ((state[0] * 1103515245U) + 12345U) & 0x7fffffff;
-> ++      state[0] = val;
-> ++      *result = val;
-> ++    }
-> ++  else
-> ++    {
-> ++      int32_t *fptr = buf->fptr;
-> ++      int32_t *rptr = buf->rptr;
-> ++      int32_t *end_ptr = buf->end_ptr;
-> ++      uint32_t val;
-> ++
-> ++      val = *fptr += (uint32_t) *rptr;
-> ++      /* Chucking least random bit.  */
-> ++      *result = val >> 1;
-> ++      ++fptr;
-> ++      if (fptr >= end_ptr)
-> ++      {
-> ++        fptr = state;
-> ++        ++rptr;
-> ++      }
-> ++      else
-> ++      {
-> ++        ++rptr;
-> ++        if (rptr >= end_ptr)
-> ++          rptr = state;
-> ++      }
-> ++      buf->fptr = fptr;
-> ++      buf->rptr = rptr;
-> ++    }
-> ++  return 0;
-> ++
-> ++ fail:
-> ++  __set_errno (EINVAL);
-> ++  return -1;
-> ++}
-> ++
-> ++/* Initialize the random number generator based on the given seed.  If the
-> ++   type is the trivial no-state-information type, just remember the seed.
-> ++   Otherwise, initializes state[] based on the given "seed" via a linear
-> ++   congruential generator.  Then, the pointers are set to known locations
-> ++   that are exactly rand_sep places apart.  Lastly, it cycles the state
-> ++   information a given number of times to get rid of any initial dependencies
-> ++   introduced by the L.C.R.N.G.  Note that the initialization of randtbl[]
-> ++   for default usage relies on values produced by this routine.  */
-> ++int srandom_r (unsigned int seed, struct random_data *buf)
-> ++{
-> ++  int type;
-> ++  int32_t *state;
-> ++  long int i;
-> ++  int32_t word;
-> ++  int32_t *dst;
-> ++  int kc;
-> ++
-> ++  if (buf == NULL)
-> ++    goto fail;
-> ++  type = buf->rand_type;
-> ++  if ((unsigned int) type >= MAX_TYPES)
-> ++    goto fail;
-> ++
-> ++  state = buf->state;
-> ++  /* We must make sure the seed is not 0.  Take arbitrarily 1 in this case.  */
-> ++  if (seed == 0)
-> ++    seed = 1;
-> ++  state[0] = seed;
-> ++  if (type == TYPE_0)
-> ++    goto done;
-> ++
-> ++  dst = state;
-> ++  word = seed;
-> ++  kc = buf->rand_deg;
-> ++  for (i = 1; i < kc; ++i)
-> ++    {
-> ++      /* This does:
-> ++         state[i] = (16807 * state[i - 1]) % 2147483647;
-> ++       but avoids overflowing 31 bits.  */
-> ++      long int hi = word / 127773;
-> ++      long int lo = word % 127773;
-> ++      word = 16807 * lo - 2836 * hi;
-> ++      if (word < 0)
-> ++      word += 2147483647;
-> ++      *++dst = word;
-> ++    }
-> ++
-> ++  buf->fptr = &state[buf->rand_sep];
-> ++  buf->rptr = &state[0];
-> ++  kc *= 10;
-> ++  while (--kc >= 0)
-> ++    {
-> ++      int32_t discard;
-> ++      (void) random_r (buf, &discard);
-> ++    }
-> ++
-> ++ done:
-> ++  return 0;
-> ++
-> ++ fail:
-> ++  return -1;
-> ++}
-> ++
-> ++/* Initialize the state information in the given array of N bytes for
-> ++   future random number generation.  Based on the number of bytes we
-> ++   are given, and the break values for the different R.N.G.'s, we choose
-> ++   the best (largest) one we can and set things up for it.  srandom is
-> ++   then called to initialize the state information.  Note that on return
-> ++   from srandom, we set state[-1] to be the type multiplexed with the current
-> ++   value of the rear pointer; this is so successive calls to initstate won't
-> ++   lose this information and will be able to restart with setstate.
-> ++   Note: The first thing we do is save the current state, if any, just like
-> ++   setstate so that it doesn't matter when initstate is called.
-> ++   Returns 0 on success, non-zero on failure.  */
-> ++int initstate_r (unsigned int seed, char *arg_state, size_t n,
-> ++             struct random_data *buf)
-> ++{
-> ++  if (buf == NULL)
-> ++    goto fail;
-> ++
-> ++  int32_t *old_state = buf->state;
-> ++  if (old_state != NULL)
-> ++    {
-> ++      int old_type = buf->rand_type;
-> ++      if (old_type == TYPE_0)
-> ++      old_state[-1] = TYPE_0;
-> ++      else
-> ++      old_state[-1] = (MAX_TYPES * (buf->rptr - old_state)) + old_type;
-> ++    }
-> ++
-> ++  int type;
-> ++  if (n >= BREAK_3)
-> ++    type = n < BREAK_4 ? TYPE_3 : TYPE_4;
-> ++  else if (n < BREAK_1)
-> ++    {
-> ++      if (n < BREAK_0)
-> ++      goto fail;
-> ++
-> ++      type = TYPE_0;
-> ++    }
-> ++  else
-> ++    type = n < BREAK_2 ? TYPE_1 : TYPE_2;
-> ++
-> ++  int degree = random_poly_info.degrees[type];
-> ++  int separation = random_poly_info.seps[type];
-> ++
-> ++  buf->rand_type = type;
-> ++  buf->rand_sep = separation;
-> ++  buf->rand_deg = degree;
-> ++  int32_t *state = &((int32_t *) arg_state)[1];       /* First location.  */
-> ++  /* Must set END_PTR before srandom.  */
-> ++  buf->end_ptr = &state[degree];
-> ++
-> ++  buf->state = state;
-> ++
-> ++  srandom_r (seed, buf);
-> ++
-> ++  state[-1] = TYPE_0;
-> ++  if (type != TYPE_0)
-> ++    state[-1] = (buf->rptr - state) * MAX_TYPES + type;
-> ++
-> ++  return 0;
-> ++
-> ++ fail:
-> ++  __set_errno (EINVAL);
-> ++  return -1;
-> ++}
-> ++
-> ++/* Restore the state from the given state array.
-> ++   Note: It is important that we also remember the locations of the pointers
-> ++   in the current state information, and restore the locations of the pointers
-> ++   from the old state information.  This is done by multiplexing the pointer
-> ++   location into the zeroth word of the state information. Note that due
-> ++   to the order in which things are done, it is OK to call setstate with the
-> ++   same state as the current state
-> ++   Returns 0 on success, non-zero on failure.  */
-> ++int setstate_r (char *arg_state, struct random_data *buf)
-> ++{
-> ++  int32_t *new_state = 1 + (int32_t *) arg_state;
-> ++  int type;
-> ++  int old_type;
-> ++  int32_t *old_state;
-> ++  int degree;
-> ++  int separation;
-> ++
-> ++  if (arg_state == NULL || buf == NULL)
-> ++    goto fail;
-> ++
-> ++  old_type = buf->rand_type;
-> ++  old_state = buf->state;
-> ++  if (old_type == TYPE_0)
-> ++    old_state[-1] = TYPE_0;
-> ++  else
-> ++    old_state[-1] = (MAX_TYPES * (buf->rptr - old_state)) + old_type;
-> ++
-> ++  type = new_state[-1] % MAX_TYPES;
-> ++  if (type < TYPE_0 || type > TYPE_4)
-> ++    goto fail;
-> ++
-> ++  buf->rand_deg = degree = random_poly_info.degrees[type];
-> ++  buf->rand_sep = separation = random_poly_info.seps[type];
-> ++  buf->rand_type = type;
-> ++
-> ++  if (type != TYPE_0)
-> ++    {
-> ++      int rear = new_state[-1] / MAX_TYPES;
-> ++      buf->rptr = &new_state[rear];
-> ++      buf->fptr = &new_state[(rear + separation) % degree];
-> ++    }
-> ++  buf->state = new_state;
-> ++  /* Set end_ptr too.  */
-> ++  buf->end_ptr = &new_state[degree];
-> ++
-> ++  return 0;
-> ++
-> ++ fail:
-> ++  __set_errno (EINVAL);
-> ++  return -1;
-> ++}
-> ++
-> + static unsigned long nr_cpus, nr_pages, nr_pages_per_cpu, page_size;
-> +
-> + #define BOUNCE_RANDOM         (1<<0)
-> +--
-> +2.11.0
-> +
-> --
-> 2.11.0
->
+From: André Draszik <andre.draszik@jci.com>
+
+Using gcc-8, Hotspot is being miscompiled, resulting in non-
+working binaries.
+
+The reason is undefined behaviour, which gcc-8 even warns about
+and errors out. We have so far have taped over those warnings,
+but it turns out that we simply cannot do that.
+
+Add patches to address undefined behaviour causing miscompilation
+of hotsport.
+
+This also means we can remove the -Wno-error=return-type C compiler
+flag again which was recently added in error in
+commit 52fb41cec7d5 ("openjdk-8: fix build for gcc8.x") only hiding
+the compiler warnings/errors that were flagging the incorrect code
+in the first place.
+
+With these patches applied, the openjdk-8 ARM port works again:
+| RESULTS:
+| RESULTS - ping.PingTest.test_ping - Testcase 964: PASSED (0.04s)
+| RESULTS - ssh.SSHTest.test_ssh - Testcase 224: PASSED (0.68s)
+| RESULTS - java.JavaTest.test_java_exists - Testcase -1: PASSED (0.14s)
+| RESULTS - java.JavaTest.test_java_jar_comp_mode - Testcase -1: FAILED (5.13s)
+| RESULTS - java.JavaTest.test_java_jar_int_mode - Testcase -1: PASSED (4.48s)
+| RESULTS - java.JavaTest.test_java_jar_works - Testcase -1: PASSED (4.44s)
+| RESULTS - java.JavaTest.test_java_version - Testcase -1: PASSED (3.66s)
+| RESULTS - javac.JavacTest.test_javac_exists - Testcase -1: PASSED (0.13s)
+| RESULTS - javac.JavacTest.test_javac_works - Testcase -1: PASSED (30.87s)
+| SUMMARY:
+| openjdk-8-test-image () - Ran 9 tests in 50.263s
+
+The java.JavaTest.test_java_jar_comp_mode failure can be ignored for now,
+as that test verifies compiled mode which is not available on arm. The
+testcase must be fixed instead.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ recipes-core/openjdk/openjdk-8-common.inc     |   2 +-
+ .../openjdk-8-release-172b11-common.inc       |  13 +
+ ...4-fix-undefined-behaviour-gcc-v8-fix.patch |  41 +++
+ ...Fix-further-functions-with-a-missing.patch |  38 +++
+ ...o-fix-undefined-behaviour-gcc-v8-fix.patch |  42 ++++
+ ...urn-type-issues-introduced-by-806165.patch |  56 +++++
+ ...ero-build-requires-disabled-warnings.patch | 148 +++++++++++
+ ...return-statement-in-__sync_val_compa.patch |  53 ++++
+ ...g-build-after-8062808-Turn-on-the-Wr.patch |  47 ++++
+ ...pot-Turn-on-the-Wreturn-type-warning.patch | 233 ++++++++++++++++++
+ 10 files changed, 672 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0016-hotspot-Zero-build-requires-disabled-warnings.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0019-hotspot-Turn-on-the-Wreturn-type-warning.patch
+
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index d0f7540..9696672 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -217,7 +217,7 @@ EXTRA_OECONF_append = "\
+ # of these changes.
+ FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+ FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+-FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks -Wno-error=return-type"
++FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+ 
+ # flags for -native, and for bits that need a host-tool during -cross
+ BUILD_CFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+index 8b30c37..4bcecef 100644
+--- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+@@ -17,6 +17,19 @@ PATCHES_URI = "\
+     file://0009-jdk-disable-backtrace-musl-build-fix.patch \
+     file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
+     file://0011-hotspot-backport-patch-to-fix-misuses-of-strncpy-str.patch \
++    ${HOTSPOT_UB_PATCH} \
++"
++HOTSPOT_UB_PATCH = "\
++    file://0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch \
++    file://0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch \
++    file://0016-hotspot-Zero-build-requires-disabled-warnings.patch \
++    file://0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch \
++    file://0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch \
++    file://0019-hotspot-Turn-on-the-Wreturn-type-warning.patch \
++"
++HOTSPOT_UB_PATCH_prepend_aarch64 = "\
++    file://0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch \
++    file://0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch \
+ "
+ # some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
+ # reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch b/recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch
+new file mode 100644
+index 0000000..e11c19c
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch
+@@ -0,0 +1,41 @@
++From 1fa1097d45afa2fe2bfd989fbd90578f5c5fc540 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 12:14:21 +0100
++Subject: [PATCH] hotspot/aarch64: fix undefined behaviour (gcc v8 fix)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Backport patch from
++  http://hg.openjdk.java.net/aarch64-port/jdk8u/hotspot/rev/253b0c304db6
++to address segfaults due to undefined behaviour.
++
++|# HG changeset patch
++|# User shade
++|# Date 1526068247 -7200
++|# Node ID 253b0c304db6d31be3d3d7cf7cf1b3561a16dc3a
++|# Parent  1ced2ae00e35e6f855175fc44500b37fbac9e314
++UB in os_linux_aarch64.cpp SpinPause
++Reviewed-by: aph, shade, adinn
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport [http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916]
++---
++ hotspot/src/os_cpu/linux_aarch64/vm/os_linux_aarch64.cpp | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/hotspot/src/os_cpu/linux_aarch64/vm/os_linux_aarch64.cpp b/hotspot/src/os_cpu/linux_aarch64/vm/os_linux_aarch64.cpp
++index 8b985693..f536817e 100644
++--- a/hotspot/src/os_cpu/linux_aarch64/vm/os_linux_aarch64.cpp
+++++ b/hotspot/src/os_cpu/linux_aarch64/vm/os_linux_aarch64.cpp
++@@ -699,6 +699,7 @@ void os::verify_stack_alignment() {
++ 
++ extern "C" {
++   int SpinPause() {
+++    return 0;
++   }
++ 
++   void _Copy_conjoint_jshorts_atomic(jshort* from, jshort* to, size_t count) {
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch b/recipes-core/openjdk/patches-openjdk-8/0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch
+new file mode 100644
+index 0000000..0216c68
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch
+@@ -0,0 +1,38 @@
++From 3dffe06da016a959f1d8c3afc292ab92a9d4d137 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 17:03:56 +0100
++Subject: [PATCH] hotspot/aarch64: Fix further functions with a missing return
++ value.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++|# HG changeset patch
++|# User andrew
++|# Date 1518669922 0
++|#      Thu Feb 15 04:45:22 2018 +0000
++|# Node ID adaf109718c10888cce5b6e73af7f3e15a7ab0db
++|# Parent  3ade0115344b77e6d00462044e0cf68722685bfe
++PR3519: Fix further functions with a missing return value.
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport
++---
++ hotspot/src/cpu/aarch64/vm/c1_LIRAssembler_aarch64.cpp | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/hotspot/src/cpu/aarch64/vm/c1_LIRAssembler_aarch64.cpp b/hotspot/src/cpu/aarch64/vm/c1_LIRAssembler_aarch64.cpp
++index 4e98cb39..bbc81b4a 100644
++--- a/hotspot/src/cpu/aarch64/vm/c1_LIRAssembler_aarch64.cpp
+++++ b/hotspot/src/cpu/aarch64/vm/c1_LIRAssembler_aarch64.cpp
++@@ -205,6 +205,7 @@ Address LIR_Assembler::as_Address(LIR_Address* addr, Register tmp) {
++       return Address(base, tmp, Address::lsl(addr->scale()));
++     }
++   }
+++  return Address();
++ }
++ 
++ Address LIR_Assembler::as_Address_hi(LIR_Address* addr) {
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch b/recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch
+new file mode 100644
+index 0000000..467a1cd
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch
+@@ -0,0 +1,42 @@
++From 3bd88f93a90876f8ead05de40816da0bd1e39aac Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 11:49:26 +0100
++Subject: [PATCH] hotspot/zero: fix undefined behaviour (gcc v8 fix)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Backport patch from
++  https://bugs.openjdk.java.net/browse/JDK-8202600
++  http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916
++to address segfaults due to undefined behaviour.
++
++|# HG changeset patch
++|# User sgehwolf
++|# Date 1525366788 -7200
++|# Node ID ca4663e589160509d6aef8ec890815e1330b97bc
++|# Parent  a27880c1288ba776f65748b68c198df97427f950
++8202600: [Zero] Undefined behaviour in src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++Reviewed-by: stuefe, shade, dholmes
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport [http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/rev/ca4663e58916]
++---
++ hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++index 1d069c6d..8dcf9d44 100644
++--- a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
+++++ b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++@@ -408,6 +408,7 @@ void os::print_register_info(outputStream *st, void *context) {
++ 
++ extern "C" {
++   int SpinPause() {
+++    return 0; // Shouldn't matter.
++   }
++ 
++ 
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch b/recipes-core/openjdk/patches-openjdk-8/0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch
+new file mode 100644
+index 0000000..fb7bb59
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch
+@@ -0,0 +1,56 @@
++From f6424c46b4af08d0662eec1a5897d5502270a3b1 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 16:40:34 +0100
++Subject: [PATCH 1/5] hotspot: fix -Wreturn-type issues introduced by 8061651
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++|# HG changeset patch
++|# User andrew
++|# Date 1529475043 -3600
++|#      Wed Jun 20 07:10:43 2018 +0100
++|# Node ID f6341f4635dacb56678264d29a88cd052b74036b
++|# Parent  30520d5018b509b0ae68f5fcc9a5c540e3e5b2de
++PR3601: Fix additional -Wreturn-type issues introduced by 8061651
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport
++---
++ hotspot/src/share/vm/prims/jvm.cpp | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/hotspot/src/share/vm/prims/jvm.cpp b/hotspot/src/share/vm/prims/jvm.cpp
++index 07c36de8..067fd3ac 100644
++--- a/hotspot/src/share/vm/prims/jvm.cpp
+++++ b/hotspot/src/share/vm/prims/jvm.cpp
++@@ -835,7 +835,7 @@ JVM_END
++ JVM_ENTRY(jboolean, JVM_KnownToNotExist(JNIEnv *env, jobject loader, const char *classname))
++   JVMWrapper("JVM_KnownToNotExist");
++ #if INCLUDE_CDS
++-  return ClassLoaderExt::known_to_not_exist(env, loader, classname, CHECK_(false));
+++  return ClassLoaderExt::known_to_not_exist(env, loader, classname, THREAD);
++ #else
++   return false;
++ #endif
++@@ -845,7 +845,7 @@ JVM_END
++ JVM_ENTRY(jobjectArray, JVM_GetResourceLookupCacheURLs(JNIEnv *env, jobject loader))
++   JVMWrapper("JVM_GetResourceLookupCacheURLs");
++ #if INCLUDE_CDS
++-  return ClassLoaderExt::get_lookup_cache_urls(env, loader, CHECK_NULL);
+++  return ClassLoaderExt::get_lookup_cache_urls(env, loader, THREAD);
++ #else
++   return NULL;
++ #endif
++@@ -855,7 +855,7 @@ JVM_END
++ JVM_ENTRY(jintArray, JVM_GetResourceLookupCache(JNIEnv *env, jobject loader, const char *resource_name))
++   JVMWrapper("JVM_GetResourceLookupCache");
++ #if INCLUDE_CDS
++-  return ClassLoaderExt::get_lookup_cache(env, loader, resource_name, CHECK_NULL);
+++  return ClassLoaderExt::get_lookup_cache(env, loader, resource_name, THREAD);
++ #else
++   return NULL;
++ #endif
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0016-hotspot-Zero-build-requires-disabled-warnings.patch b/recipes-core/openjdk/patches-openjdk-8/0016-hotspot-Zero-build-requires-disabled-warnings.patch
+new file mode 100644
+index 0000000..d6bedbc
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0016-hotspot-Zero-build-requires-disabled-warnings.patch
+@@ -0,0 +1,148 @@
++From 43c1f744e5f6171df3158baf88dd0a64c4b5e439 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 16:45:24 +0100
++Subject: [PATCH 2/5] hotspot: Zero build requires disabled warnings
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++|# HG changeset patch
++|# User sgehwolf
++|# Date 1525714161 -3600
++|#      Mon May 07 18:29:21 2018 +0100
++|# Node ID afb31413c73cbc06420fdb447aa90a7a38258904
++|# Parent  bcbc64dfb629c5f188bbf59b8f986ad95963ed60
++8143245, PR3548: Zero build requires disabled warnings
++Reviewed-by: dholmes, coleenp
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport
++---
++ hotspot/src/cpu/zero/vm/cppInterpreter_zero.cpp  |  2 +-
++ hotspot/src/cpu/zero/vm/interpreterRT_zero.cpp   |  4 ++--
++ .../src/os_cpu/linux_zero/vm/os_linux_zero.cpp   | 16 +++++++++++++---
++ .../os_cpu/linux_zero/vm/thread_linux_zero.hpp   |  3 ++-
++ 4 files changed, 18 insertions(+), 7 deletions(-)
++
++diff --git a/hotspot/src/cpu/zero/vm/cppInterpreter_zero.cpp b/hotspot/src/cpu/zero/vm/cppInterpreter_zero.cpp
++index 242ce1cf..065471af 100644
++--- a/hotspot/src/cpu/zero/vm/cppInterpreter_zero.cpp
+++++ b/hotspot/src/cpu/zero/vm/cppInterpreter_zero.cpp
++@@ -100,7 +100,7 @@ intptr_t narrow(BasicType type, intptr_t result) {
++     case T_DOUBLE:
++     case T_VOID:
++       return result;
++-    default  : ShouldNotReachHere();
+++    default  : ShouldNotReachHere(); return NULL_WORD;
++   }
++ }
++ 
++diff --git a/hotspot/src/cpu/zero/vm/interpreterRT_zero.cpp b/hotspot/src/cpu/zero/vm/interpreterRT_zero.cpp
++index e23e3eaa..061ed8ce 100644
++--- a/hotspot/src/cpu/zero/vm/interpreterRT_zero.cpp
+++++ b/hotspot/src/cpu/zero/vm/interpreterRT_zero.cpp
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2003, 2012, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2003, 2016, Oracle and/or its affiliates. All rights reserved.
++  * Copyright 2007, 2008, 2010 Red Hat, Inc.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++@@ -62,7 +62,7 @@ void InterpreterRuntime::SignatureHandlerGeneratorBase::pass_object() {
++ }
++ 
++ void InterpreterRuntime::SignatureHandlerGeneratorBase::push(BasicType type) {
++-  ffi_type *ftype;
+++  ffi_type *ftype = NULL;
++   switch (type) {
++   case T_VOID:
++     ftype = &ffi_type_void;
++diff --git a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++index 8dcf9d44..508eb172 100644
++--- a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
+++++ b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++@@ -1,6 +1,6 @@
++ /*
++  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
++- * Copyright 2007, 2008, 2009, 2010 Red Hat, Inc.
+++ * Copyright 2016 Red Hat, Inc.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++  * This code is free software; you can redistribute it and/or modify it
++@@ -61,6 +61,7 @@ address os::current_stack_pointer() {
++ 
++ frame os::get_sender_for_C_frame(frame* fr) {
++   ShouldNotCallThis();
+++  return frame(NULL, NULL); // silence compile warning.
++ }
++ 
++ frame os::current_frame() {
++@@ -98,16 +99,19 @@ void os::initialize_thread(Thread * thr){
++ 
++ address os::Linux::ucontext_get_pc(ucontext_t* uc) {
++   ShouldNotCallThis();
+++  return NULL; // silence compile warnings
++ }
++ 
++ ExtendedPC os::fetch_frame_from_context(void* ucVoid,
++                                         intptr_t** ret_sp,
++                                         intptr_t** ret_fp) {
++   ShouldNotCallThis();
+++  return NULL; // silence compile warnings
++ }
++ 
++ frame os::fetch_frame_from_context(void* ucVoid) {
++   ShouldNotCallThis();
+++  return frame(NULL, NULL); // silence compile warnings
++ }
++ 
++ extern "C" JNIEXPORT int
++@@ -247,11 +251,16 @@ JVM_handle_linux_signal(int sig,
++   }
++ #endif // !PRODUCT
++ 
++-  const char *fmt = "caught unhandled signal %d";
++   char buf[64];
++ 
++-  sprintf(buf, fmt, sig);
+++  sprintf(buf, "caught unhandled signal %d", sig);
+++
+++// Silence -Wformat-security warning for fatal()
+++PRAGMA_DIAG_PUSH
+++PRAGMA_FORMAT_NONLITERAL_IGNORED
++   fatal(buf);
+++PRAGMA_DIAG_POP
+++  return true; // silence compiler warnings
++ }
++ 
++ void os::Linux::init_thread_fpu_state(void) {
++@@ -260,6 +269,7 @@ void os::Linux::init_thread_fpu_state(void) {
++ 
++ int os::Linux::get_fpu_control_word() {
++   ShouldNotCallThis();
+++  return -1; // silence compile warnings
++ }
++ 
++ void os::Linux::set_fpu_control_word(int fpu) {
++diff --git a/hotspot/src/os_cpu/linux_zero/vm/thread_linux_zero.hpp b/hotspot/src/os_cpu/linux_zero/vm/thread_linux_zero.hpp
++index 39f77f85..b9c73dc4 100644
++--- a/hotspot/src/os_cpu/linux_zero/vm/thread_linux_zero.hpp
+++++ b/hotspot/src/os_cpu/linux_zero/vm/thread_linux_zero.hpp
++@@ -1,5 +1,5 @@
++ /*
++- * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
+++ * Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
++  * Copyright 2007, 2008, 2009, 2010 Red Hat, Inc.
++  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++  *
++@@ -110,6 +110,7 @@
++                                            void* ucontext,
++                                            bool isInJava) {
++     ShouldNotCallThis();
+++    return false; // silence compile warning
++   }
++ 
++   // These routines are only used on cpu architectures that
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch b/recipes-core/openjdk/patches-openjdk-8/0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch
+new file mode 100644
+index 0000000..001e905
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch
+@@ -0,0 +1,53 @@
++From 6e1d92639787ac8f506f810776a3f1c35f2cd070 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 16:46:33 +0100
++Subject: [PATCH 3/5] hotspot: Missing return statement in
++ __sync_val_compare_and_swap_8
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++|# HG changeset patch
++|# User andrew
++|# Date 1518667645 0
++|#      Thu Feb 15 04:07:25 2018 +0000
++|# Node ID 1d35411eb7bdf16191e220ffe3b1dc4d5d0c6041
++|# Parent  999983606f5c61b093c6f6316a7b26c4cd4ca79e
++8197981, PR3548: Missing return statement in __sync_val_compare_and_swap_8
++Summary: Fix issue discovered by -Wreturn-type on systems without LP64.
++Reviewed-by: aph
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport
++---
++ hotspot/src/os_cpu/bsd_zero/vm/os_bsd_zero.cpp     | 1 +
++ hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/hotspot/src/os_cpu/bsd_zero/vm/os_bsd_zero.cpp b/hotspot/src/os_cpu/bsd_zero/vm/os_bsd_zero.cpp
++index c857b552..4aaf78b1 100644
++--- a/hotspot/src/os_cpu/bsd_zero/vm/os_bsd_zero.cpp
+++++ b/hotspot/src/os_cpu/bsd_zero/vm/os_bsd_zero.cpp
++@@ -457,6 +457,7 @@ extern "C" {
++     long long unsigned int oldval,
++     long long unsigned int newval) {
++     ShouldNotCallThis();
+++    return 0;
++   }
++ };
++ #endif // !_LP64
++diff --git a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++index 508eb172..bb8fa1f1 100644
++--- a/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
+++++ b/hotspot/src/os_cpu/linux_zero/vm/os_linux_zero.cpp
++@@ -498,6 +498,7 @@ extern "C" {
++     long long unsigned int oldval,
++     long long unsigned int newval) {
++     ShouldNotCallThis();
+++    return 0;
++   }
++ };
++ #endif // !_LP64
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch b/recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch
+new file mode 100644
+index 0000000..1421963
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch
+@@ -0,0 +1,47 @@
++From dbf31e2dfd00e20ab49af70f3533a348e8a6515e Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 16:47:25 +0100
++Subject: [PATCH 4/5] hotspot: Fix debug build after 8062808: Turn on the
++ -Wreturn-type warning
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++|# HG changeset patch
++|# User goetz
++|# Date 1415873641 -3600
++|#      Thu Nov 13 11:14:01 2014 +0100
++|# Node ID 1878c4c1d04e1f3c6f67a19d36c35863d6b5f906
++|# Parent  533473c67de6ff767710594639033c8e83523fe5
++8064786, PR3599: Fix debug build after 8062808: Turn on the -Wreturn-type warning
++Reviewed-by: stefank, tschatzl
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport
++---
++ hotspot/src/share/vm/prims/jni.cpp | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/hotspot/src/share/vm/prims/jni.cpp b/hotspot/src/share/vm/prims/jni.cpp
++index 6a6ab936..e2f2ad3b 100644
++--- a/hotspot/src/share/vm/prims/jni.cpp
+++++ b/hotspot/src/share/vm/prims/jni.cpp
++@@ -708,6 +708,7 @@ JNI_ENTRY(jint, jni_Throw(JNIEnv *env, jthrowable obj))
++ 
++   THROW_OOP_(JNIHandles::resolve(obj), JNI_OK);
++   ShouldNotReachHere();
+++  return 0;  // Mute compiler.
++ JNI_END
++ 
++ #ifndef USDT2
++@@ -734,6 +735,7 @@ JNI_ENTRY(jint, jni_ThrowNew(JNIEnv *env, jclass clazz, const char *message))
++   Handle protection_domain (THREAD, k->protection_domain());
++   THROW_MSG_LOADER_(name, (char *)message, class_loader, protection_domain, JNI_OK);
++   ShouldNotReachHere();
+++  return 0;  // Mute compiler.
++ JNI_END
++ 
++ 
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0019-hotspot-Turn-on-the-Wreturn-type-warning.patch b/recipes-core/openjdk/patches-openjdk-8/0019-hotspot-Turn-on-the-Wreturn-type-warning.patch
+new file mode 100644
+index 0000000..0156978
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0019-hotspot-Turn-on-the-Wreturn-type-warning.patch
+@@ -0,0 +1,233 @@
++From cc0d371f17c0ab060eb1e6b42d4bf053a2cbc3ba Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 13 Aug 2018 16:48:32 +0100
++Subject: [PATCH 5/5] hotspot: Turn on the -Wreturn-type warning
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++|# HG changeset patch
++|# User stefank
++|# Date 1525453613 -3600
++|#      Fri May 04 18:06:53 2018 +0100
++|# Node ID 07a1135a327362f157955d470fad5df07cc35164
++|# Parent  de79964656fc652f2085dac4fe99bcc128b5a3b1
++8062808, PR3548: Turn on the -Wreturn-type warning
++Reviewed-by: mgerdin, tschatzl, coleenp, jrose, kbarrett
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++Upstream-Status: Backport
++---
++ hotspot/make/linux/makefiles/gcc.make               | 2 +-
++ hotspot/src/cpu/x86/vm/x86_32.ad                    | 1 +
++ hotspot/src/os_cpu/linux_x86/vm/os_linux_x86.cpp    | 1 +
++ hotspot/src/share/vm/classfile/defaultMethods.cpp   | 4 ++--
++ hotspot/src/share/vm/classfile/symbolTable.cpp      | 4 ++--
++ hotspot/src/share/vm/classfile/systemDictionary.cpp | 6 +++---
++ hotspot/src/share/vm/memory/heapInspection.hpp      | 2 +-
++ hotspot/src/share/vm/memory/metaspaceShared.hpp     | 2 +-
++ hotspot/src/share/vm/oops/constantPool.hpp          | 2 +-
++ hotspot/src/share/vm/prims/jvm.cpp                  | 2 +-
++ hotspot/src/share/vm/runtime/reflection.cpp         | 2 +-
++ hotspot/src/share/vm/runtime/sharedRuntime.cpp      | 2 +-
++ hotspot/src/share/vm/services/memTracker.hpp        | 2 +-
++ 13 files changed, 17 insertions(+), 15 deletions(-)
++
++diff --git a/hotspot/make/linux/makefiles/gcc.make b/hotspot/make/linux/makefiles/gcc.make
++index 272afcea..157afff2 100644
++--- a/hotspot/make/linux/makefiles/gcc.make
+++++ b/hotspot/make/linux/makefiles/gcc.make
++@@ -207,7 +207,7 @@ ifeq ($(USE_CLANG), true)
++   WARNINGS_ARE_ERRORS += -Wno-return-type -Wno-empty-body
++ endif
++ 
++-WARNING_FLAGS = -Wpointer-arith -Wsign-compare -Wundef -Wunused-function -Wunused-value
+++WARNING_FLAGS = -Wpointer-arith -Wsign-compare -Wundef -Wunused-function -Wunused-value -Wreturn-type
++ 
++ ifeq ($(USE_CLANG),)
++   # Since GCC 4.3, -Wconversion has changed its meanings to warn these implicit
++diff --git a/hotspot/src/cpu/x86/vm/x86_32.ad b/hotspot/src/cpu/x86/vm/x86_32.ad
++index f42d1a28..c8f4ee16 100644
++--- a/hotspot/src/cpu/x86/vm/x86_32.ad
+++++ b/hotspot/src/cpu/x86/vm/x86_32.ad
++@@ -1250,6 +1250,7 @@ uint MachSpillCopyNode::implementation( CodeBuffer *cbuf, PhaseRegAlloc *ra_, bo
++ 
++ 
++   Unimplemented();
+++  return 0; // Mute compiler
++ }
++ 
++ #ifndef PRODUCT
++diff --git a/hotspot/src/os_cpu/linux_x86/vm/os_linux_x86.cpp b/hotspot/src/os_cpu/linux_x86/vm/os_linux_x86.cpp
++index fb96738a..4cdeb372 100644
++--- a/hotspot/src/os_cpu/linux_x86/vm/os_linux_x86.cpp
+++++ b/hotspot/src/os_cpu/linux_x86/vm/os_linux_x86.cpp
++@@ -541,6 +541,7 @@ JVM_handle_linux_signal(int sig,
++   err.report_and_die();
++ 
++   ShouldNotReachHere();
+++  return true; // Mute compiler
++ }
++ 
++ void os::Linux::init_thread_fpu_state(void) {
++diff --git a/hotspot/src/share/vm/classfile/defaultMethods.cpp b/hotspot/src/share/vm/classfile/defaultMethods.cpp
++index 0e3d5d7b..d3df1d15 100644
++--- a/hotspot/src/share/vm/classfile/defaultMethods.cpp
+++++ b/hotspot/src/share/vm/classfile/defaultMethods.cpp
++@@ -506,7 +506,7 @@ Symbol* MethodFamily::generate_method_message(Symbol *klass_name, Method* method
++   ss.write((const char*)name->bytes(), name->utf8_length());
++   ss.write((const char*)signature->bytes(), signature->utf8_length());
++   ss.print(" is abstract");
++-  return SymbolTable::new_symbol(ss.base(), (int)ss.size(), CHECK_NULL);
+++  return SymbolTable::new_symbol(ss.base(), (int)ss.size(), THREAD);
++ }
++ 
++ Symbol* MethodFamily::generate_conflicts_message(GrowableArray<Method*>* methods, TRAPS) const {
++@@ -521,7 +521,7 @@ Symbol* MethodFamily::generate_conflicts_message(GrowableArray<Method*>* methods
++     ss.print(".");
++     ss.write((const char*)name->bytes(), name->utf8_length());
++   }
++-  return SymbolTable::new_symbol(ss.base(), (int)ss.size(), CHECK_NULL);
+++  return SymbolTable::new_symbol(ss.base(), (int)ss.size(), THREAD);
++ }
++ 
++ 
++diff --git a/hotspot/src/share/vm/classfile/symbolTable.cpp b/hotspot/src/share/vm/classfile/symbolTable.cpp
++index ec97077b..2621a7d6 100644
++--- a/hotspot/src/share/vm/classfile/symbolTable.cpp
+++++ b/hotspot/src/share/vm/classfile/symbolTable.cpp
++@@ -249,7 +249,7 @@ Symbol* SymbolTable::lookup(const char* name, int len, TRAPS) {
++   MutexLocker ml(SymbolTable_lock, THREAD);
++ 
++   // Otherwise, add to symbol to table
++-  return the_table()->basic_add(index, (u1*)name, len, hashValue, true, CHECK_NULL);
+++  return the_table()->basic_add(index, (u1*)name, len, hashValue, true, THREAD);
++ }
++ 
++ Symbol* SymbolTable::lookup(const Symbol* sym, int begin, int end, TRAPS) {
++@@ -288,7 +288,7 @@ Symbol* SymbolTable::lookup(const Symbol* sym, int begin, int end, TRAPS) {
++   // Grab SymbolTable_lock first.
++   MutexLocker ml(SymbolTable_lock, THREAD);
++ 
++-  return the_table()->basic_add(index, (u1*)buffer, len, hashValue, true, CHECK_NULL);
+++  return the_table()->basic_add(index, (u1*)buffer, len, hashValue, true, THREAD);
++ }
++ 
++ Symbol* SymbolTable::lookup_only(const char* name, int len,
++diff --git a/hotspot/src/share/vm/classfile/systemDictionary.cpp b/hotspot/src/share/vm/classfile/systemDictionary.cpp
++index 8d2e7f49..62bdba3e 100644
++--- a/hotspot/src/share/vm/classfile/systemDictionary.cpp
+++++ b/hotspot/src/share/vm/classfile/systemDictionary.cpp
++@@ -229,15 +229,15 @@ Klass* SystemDictionary::resolve_or_null(Symbol* class_name, Handle class_loader
++                  class_name->as_C_string(),
++                  class_loader.is_null() ? "null" : class_loader->klass()->name()->as_C_string()));
++   if (FieldType::is_array(class_name)) {
++-    return resolve_array_class_or_null(class_name, class_loader, protection_domain, CHECK_NULL);
+++    return resolve_array_class_or_null(class_name, class_loader, protection_domain, THREAD);
++   } else if (FieldType::is_obj(class_name)) {
++     ResourceMark rm(THREAD);
++     // Ignore wrapping L and ;.
++     TempNewSymbol name = SymbolTable::new_symbol(class_name->as_C_string() + 1,
++                                    class_name->utf8_length() - 2, CHECK_NULL);
++-    return resolve_instance_class_or_null(name, class_loader, protection_domain, CHECK_NULL);
+++    return resolve_instance_class_or_null(name, class_loader, protection_domain, THREAD);
++   } else {
++-    return resolve_instance_class_or_null(class_name, class_loader, protection_domain, CHECK_NULL);
+++    return resolve_instance_class_or_null(class_name, class_loader, protection_domain, THREAD);
++   }
++ }
++ 
++diff --git a/hotspot/src/share/vm/memory/heapInspection.hpp b/hotspot/src/share/vm/memory/heapInspection.hpp
++index 09ee6602..c5fec15c 100644
++--- a/hotspot/src/share/vm/memory/heapInspection.hpp
+++++ b/hotspot/src/share/vm/memory/heapInspection.hpp
++@@ -367,7 +367,7 @@ class HeapInspection : public StackObj {
++       _csv_format(csv_format), _print_help(print_help),
++       _print_class_stats(print_class_stats), _columns(columns) {}
++   void heap_inspection(outputStream* st) NOT_SERVICES_RETURN;
++-  size_t populate_table(KlassInfoTable* cit, BoolObjectClosure* filter = NULL) NOT_SERVICES_RETURN;
+++  size_t populate_table(KlassInfoTable* cit, BoolObjectClosure* filter = NULL) NOT_SERVICES_RETURN_(0);
++   static void find_instances_at_safepoint(Klass* k, GrowableArray<oop>* result) NOT_SERVICES_RETURN;
++  private:
++   void iterate_over_heap(KlassInfoTable* cit, BoolObjectClosure* filter = NULL);
++diff --git a/hotspot/src/share/vm/memory/metaspaceShared.hpp b/hotspot/src/share/vm/memory/metaspaceShared.hpp
++index 2f3abae6..d58ebecb 100644
++--- a/hotspot/src/share/vm/memory/metaspaceShared.hpp
+++++ b/hotspot/src/share/vm/memory/metaspaceShared.hpp
++@@ -93,7 +93,7 @@ class MetaspaceShared : AllStatic {
++   static void preload_and_dump(TRAPS) NOT_CDS_RETURN;
++   static int preload_and_dump(const char * class_list_path,
++                               GrowableArray<Klass*>* class_promote_order,
++-                              TRAPS) NOT_CDS_RETURN;
+++                              TRAPS) NOT_CDS_RETURN_(0);
++ 
++   static ReservedSpace* shared_rs() {
++     CDS_ONLY(return _shared_rs);
++diff --git a/hotspot/src/share/vm/oops/constantPool.hpp b/hotspot/src/share/vm/oops/constantPool.hpp
++index f170decc..a1e168b2 100644
++--- a/hotspot/src/share/vm/oops/constantPool.hpp
+++++ b/hotspot/src/share/vm/oops/constantPool.hpp
++@@ -349,7 +349,7 @@ class ConstantPool : public Metadata {
++ 
++   Klass* klass_at(int which, TRAPS) {
++     constantPoolHandle h_this(THREAD, this);
++-    return klass_at_impl(h_this, which, CHECK_NULL);
+++    return klass_at_impl(h_this, which, THREAD);
++   }
++ 
++   Symbol* klass_name_at(int which);  // Returns the name, w/o resolving.
++diff --git a/hotspot/src/share/vm/prims/jvm.cpp b/hotspot/src/share/vm/prims/jvm.cpp
++index 067fd3ac..b9e5b322 100644
++--- a/hotspot/src/share/vm/prims/jvm.cpp
+++++ b/hotspot/src/share/vm/prims/jvm.cpp
++@@ -4280,7 +4280,7 @@ JVM_ENTRY(jlong,JVM_DTraceActivate(
++     JVM_DTraceProvider* providers))
++   JVMWrapper("JVM_DTraceActivate");
++   return DTraceJSDT::activate(
++-    version, module_name, providers_count, providers, CHECK_0);
+++    version, module_name, providers_count, providers, THREAD);
++ JVM_END
++ 
++ JVM_ENTRY(jboolean,JVM_DTraceIsProbeEnabled(JNIEnv* env, jmethodID method))
++diff --git a/hotspot/src/share/vm/runtime/reflection.cpp b/hotspot/src/share/vm/runtime/reflection.cpp
++index e2f282ee..679e1775 100644
++--- a/hotspot/src/share/vm/runtime/reflection.cpp
+++++ b/hotspot/src/share/vm/runtime/reflection.cpp
++@@ -1093,7 +1093,7 @@ oop Reflection::invoke(instanceKlassHandle klass, methodHandle reflected_method,
++   } else {
++     if (rtype == T_BOOLEAN || rtype == T_BYTE || rtype == T_CHAR || rtype == T_SHORT)
++       narrow((jvalue*) result.get_value_addr(), rtype, CHECK_NULL);
++-    return box((jvalue*) result.get_value_addr(), rtype, CHECK_NULL);
+++    return box((jvalue*) result.get_value_addr(), rtype, THREAD);
++   }
++ }
++ 
++diff --git a/hotspot/src/share/vm/runtime/sharedRuntime.cpp b/hotspot/src/share/vm/runtime/sharedRuntime.cpp
++index 8ffa8ab3..219bcd5c 100644
++--- a/hotspot/src/share/vm/runtime/sharedRuntime.cpp
+++++ b/hotspot/src/share/vm/runtime/sharedRuntime.cpp
++@@ -1038,7 +1038,7 @@ Handle SharedRuntime::find_callee_info(JavaThread* thread, Bytecodes::Code& bc,
++   // last java frame on stack (which includes native call frames)
++   vframeStream vfst(thread, true);  // Do not skip and javaCalls
++ 
++-  return find_callee_info_helper(thread, vfst, bc, callinfo, CHECK_(Handle()));
+++  return find_callee_info_helper(thread, vfst, bc, callinfo, THREAD);
++ }
++ 
++ 
++diff --git a/hotspot/src/share/vm/services/memTracker.hpp b/hotspot/src/share/vm/services/memTracker.hpp
++index 38a027ea..13436a4b 100644
++--- a/hotspot/src/share/vm/services/memTracker.hpp
+++++ b/hotspot/src/share/vm/services/memTracker.hpp
++@@ -64,7 +64,7 @@ class MemTracker : AllStatic {
++     const NativeCallStack& stack, MEMFLAGS flag = mtNone) { }
++   static inline void record_virtual_memory_commit(void* addr, size_t size, const NativeCallStack& stack) { }
++   static inline Tracker get_virtual_memory_uncommit_tracker() { return Tracker(); }
++-  static inline Tracker get_virtual_memory_release_tracker() { }
+++  static inline Tracker get_virtual_memory_release_tracker() { return Tracker(); }
++   static inline void record_virtual_memory_type(void* addr, MEMFLAGS flag) { }
++   static inline void record_thread_stack(void* addr, size_t size) { }
++   static inline void release_thread_stack(void* addr, size_t size) { }
++-- 
++2.18.0
++
+-- 
+2.18.0
+
 
