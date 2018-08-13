@@ -1,41 +1,44 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yw1-f54.google.com (mail-yw1-f54.google.com
-	[209.85.161.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 7001378DD2
+Received: from mail-yw1-f68.google.com (mail-yw1-f68.google.com
+	[209.85.161.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F2B678DD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 10:09:41 +0000 (UTC)
-Received: by mail-yw1-f54.google.com with SMTP id j68-v6so13154570ywg.1
+	Mon, 13 Aug 2018 10:09:42 +0000 (UTC)
+Received: by mail-yw1-f68.google.com with SMTP id z143-v6so13130357ywa.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 03:09:42 -0700 (PDT)
+	Mon, 13 Aug 2018 03:09:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=CjQ5c5Te5WEjmiBuh79qqlm6Raeekz+8cQOTePymyyQ=;
-	b=OMxrkRGdXgx6LOFRVpxyLh7KA9iI+obI8JWaa+Fmn5L1yIpmyd1sJcrZy5cGiMcTqB
-	Pl6TELf2XB7DonDjXV9MBHJXDy4kGBYtweankw/ARIqIUjkcT37F+ne2Pqpx6irJWCcW
-	g1d0a0SW4q/z13AYxo3uLfMM34Lce7JKgwIwLGSsQ4cCnD5tTn2mAHV6a7fidk1ZOPBx
-	n/ZrHaOlGqGPU6+7L2K/pxMxffIi0VNR2f0z+RXIAdufN0DPi7KFgWEVqxplQ7qLq5U7
-	h8tbZZQg8nJsirdpIpfPLsN4B8wgnIoplt+M6uIirf3QETkQ9ORmd6lrwParrsULklJE
-	I2mA==
-X-Gm-Message-State: AOUpUlH3+W9Dg4CUII8MC/JqpRJojyjIyRuZ/6bzZ0oIqybUX346SArr
-	CnuY71Q8XDSLhiD198taF6waeLe9
-X-Google-Smtp-Source: AA+uWPxSy0YXnr7lEqA9gHnebGxs5ad1gmSZFRq4nCZk9xtXkVeokqwsJQssaGqiFqwmpHASMChJ2A==
-X-Received: by 2002:a25:4103:: with SMTP id o3-v6mr8540799yba.48.1534154982039;
-	Mon, 13 Aug 2018 03:09:42 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=3jHCx+SSVndpJJjPzjtjD7CP/UQDCEcWcr6ksJHYiOc=;
+	b=lRRoLTUJSGguOXdGbL2u3qj+IubmFE4vbRM1iGEkNeMvy0BN5lu83BVhXeod1n7jvJ
+	lZmjWiNX0F3lxtux0kyqMES0MmL8+GDPyZ4ZndDL5505mVS/I6XSibc5EDCh85+o/pld
+	hpPAz6RQwtpkGNo0ePGnBPSUlcNfPEZ3L8PNPexDXUocQzB0NLZhRh8L18r1FYJtHTd1
+	98tFke32xxrUdvYEMV/OyFTuRo3IL2j0ronOua6JCPxK2H4TDt7+7KHNfNCHT9Of2iAm
+	4vxyI7K5kS4em7O1tsNIESg5EmiW6Z0cVx/YkaZCHn7Xv8QFpyRSoOwMRxLxkzK9msBK
+	TWLg==
+X-Gm-Message-State: AOUpUlFJjJ6bfCisNdKsngGH2/eZo2mTB9KAvpa6kheyKBPD5YX+v3Oc
+	2WJ/JNgiqt/iFA9uT6F7eoqTyi0p
+X-Google-Smtp-Source: AA+uWPyTVGwYXgz4e6h+6BMnNDrL2O9jmaTjiPU8Rdn10X8Ow7VzS3Wp9nP8vTijWXQMHOgRuoGP7A==
+X-Received: by 2002:a25:ac46:: with SMTP id
+	r6-v6mr8308730ybd.450.1534154983296; 
+	Mon, 13 Aug 2018 03:09:43 -0700 (PDT)
 Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	i62-v6sm6918738ywb.54.2018.08.13.03.09.40
+	i62-v6sm6918738ywb.54.2018.08.13.03.09.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 03:09:41 -0700 (PDT)
+	Mon, 13 Aug 2018 03:09:42 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 11:09:27 +0100
-Message-Id: <20180813100936.23663-1-git@andred.net>
+Date: Mon, 13 Aug 2018 11:09:28 +0100
+Message-Id: <20180813100936.23663-2-git@andred.net>
 X-Mailer: git-send-email 2.18.0
+In-Reply-To: <20180813100936.23663-1-git@andred.net>
+References: <20180813100936.23663-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-java] OpenJDK-8 fixes and updates
+Subject: [meta-java][PATCH 1/9] gitignore: ignore new python byte-code files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,26 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 10:09:41 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 10:09:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi,
+From: André Draszik <andre.draszik@jci.com>
 
-This series addresses a few OpenJDK-8 issues:
+Since we run oeqa tests, we get python byte-code in
+the source tree here.
 
-Highlights are:
-* compilation on gcc < v7 host compilers was broken
-* compilation on gcc v8 (cross) compilers produced non-working binaries
-* update  to the latest 8u172b11 release
+Ignore them to clean-up the git status
 
-This series was tested on:
-* qemux86-64 (with & without security flags, host gcc 6.3.0, target gcc 8)
-* qemuarm64 (with & without security flags, host gcc 4.8.4 & 6.3.0, target gcc 8)
-* qemuarm64 (host gcc 7.3.0, target gcc 7.3.0)
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ .gitignore | 1 +
+ 1 file changed, 1 insertion(+)
 
-Note that yocto's gcc 8 update completely broke qemuarm support, but I'll
-hopefully address this by importing the aarch32 openjdk port into this layer.
-
+diff --git a/.gitignore b/.gitignore
+index 51a512c..8e5c599 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,5 @@
+ *.bak
+ *.orig
++*.pyc
+ *.rej
+ *.swp
+-- 
+2.18.0
 
 
