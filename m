@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AABD605BE
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BF10874607
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:18:06 +0000 (UTC)
-Received: by mail-pg1-f177.google.com with SMTP id k3-v6so7196845pgq.5
+	Mon, 13 Aug 2018 08:18:07 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id f1-v6so7184130pgq.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:18:07 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=sO0TdRVSObMZ38COMpuLx80u9+hyqbz6ECbjZjCmtfA=;
-	b=Ah7WkdZjzOmonlhn9gRhM5pfmMio7VZkAqK6ZdO5umM3isAD3VjTmx2UjhOz48+YMW
-	aA7Jv/4yhWh15uWswDVFndu6sj0IdqzeQ9JN4D+Rmke3WgWYfVMKqfQYRLR+ay63EwXw
-	pqchwcmir3Pwd+xYm5SU1BBSpyyfGdg04n0+LoWQd6O/Xnv/zOYrnvc1d1MmN/6MoKrt
-	KffUjkmSqAJfCLDCLBxo/9WStXPrMCfx3f4QDviwxO4rVtkVZ2747K3IU/otIzD9Kt5c
-	540/fI+xDLHEZybjNVV0TH5uDpZJrb3kO1t3IifbFNZwnOb8WnMebdfe8GbJxnGGIfB/
-	d/mQ==
+	bh=txYr0xcolQ4vuw6Eore3TsFubDr2DG/pgyWYCFe6YWw=;
+	b=pxd+182TCbR9iHlKDl4SU+kCo6kpVtmvlNDqTwjEZRADsr5vs4S1IqKxzxVpGPKMjH
+	RtjBhrOz1GRBYWDvY4q0x1QL+emWbCubute4Uzk6zFIFO/p6oQDiOjQEgiWnmavn/W39
+	LVYWwiaoiYV/ZMVG73BRcvyVJcMXOzTH5F//MH9ubg5M3KzTM8tXjNqcaBuBn4GOvYBS
+	789INkGxc/PGNegGqKq/42IYP6vSWDnU2tVe1lplecrV0qRXYClnOFHBaWmC1/8J7HGD
+	M4Obud/x8d0QTil+h6OiBczgVRbecqVT7BBKGbpIipKjEZz4aD9R8FtdqiHrOM1WG+0o
+	+dBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=sO0TdRVSObMZ38COMpuLx80u9+hyqbz6ECbjZjCmtfA=;
-	b=r6hdI4dKQSM0Snpb0kJ1Ot6S8aNIXYdptAjTSoLspJTq4TvYwJjlSYdN8L13htX8Di
-	vz3JrcoLKuDycDA+N47EXVTItGu+Hqo7WCRiWVxeY/acxawJHlXdkv+sKHlfwcDpBwCm
-	uHTzRmMyx2yei4CtXVu/KmliraEOxxQrQrYFXxx8TVmAOThcg8H1rBK4I4VGllFfA4/5
-	ZewYIhu8j88rXQbAirbtwLytJB5lm84hvc6uevwAR3XFdL0CmAWZEFXndwmYughLMNtY
-	iS4EuxuQvbut6mmspQ76waWB1QfqoFRCSuaKI7FgXcopD/0/RVhR5+MQ9Yqwq9+vl3J5
-	dqkg==
-X-Gm-Message-State: AOUpUlH2+LUjrjT81HPWs4D7R1GCyw9KRdqGUPWc2pchpOLi96cauTte
-	2y39lyQkdBbI/uYucTkaJkf0pCGp
-X-Google-Smtp-Source: AA+uWPyWIiOi4BGFJEqnBipiiT1+ODHqXADOeCfFTS8JBDg9iapJzUOOdRJO94hC1X23qGOrk3ux+A==
-X-Received: by 2002:a62:cd3:: with SMTP id
-	80-v6mr18171320pfm.184.1534148287129; 
-	Mon, 13 Aug 2018 01:18:07 -0700 (PDT)
+	bh=txYr0xcolQ4vuw6Eore3TsFubDr2DG/pgyWYCFe6YWw=;
+	b=LFyxJcyCYp8Io/NDaytPG9Z6nRcoWTZ463dWpXsxw+perPxfUpoGrTzGqUlGKmz69W
+	NzpbfxzOZjq+aNPzDFAolPh+dvpmH4q1A/EsKh9gqoU5+LtSSCz+4vlF4vovCLhBJZ4c
+	oAr1VeyU53RtJxE29Eu7EeNQ85cqI+Vuib2mVhvz0VIHc1vHvfBQZ3isV57SYpJ/GqxI
+	TBVZ3F5uwQmMiLEf51QjlpDzdxFNWD+/N10tVPuSNhJqEcRUAx9GUuIVTWnBJbUBnTW/
+	IWnMAbFubh1t/qYd3vfuiFnveUAhzb/9H7elIplBZJwa6m7YHIHxS0wASvqknQc3eddx
+	tNCg==
+X-Gm-Message-State: AOUpUlFdYEO2gbAQ+k7kZ1n1Rwl3NXGKU4qhXmDxMRy02yKu7TxwLCaf
+	KFIImozerUFHaQ72BuSEwciP6ISX
+X-Google-Smtp-Source: AA+uWPwGzhlZN+kNKNiwTBekyj0rZ1wI2kj2jQIGg3MxD+GaNIxgAxvmGHddSyGeHcOqA+ixMLGIhg==
+X-Received: by 2002:a62:1016:: with SMTP id
+	y22-v6mr17998112pfi.109.1534148288438; 
+	Mon, 13 Aug 2018 01:18:08 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
-	b64-v6sm23414971pfg.66.2018.08.13.01.18.05
+	b64-v6sm23414971pfg.66.2018.08.13.01.18.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 01:18:06 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:34 -0700
-Message-Id: <20180813081742.6961-13-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:35 -0700
+Message-Id: <20180813081742.6961-14-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 13/21] usermode: Fix build with glibc 2.28+
+Subject: [meta-filesystems][PATCH 14/21] f2fs-tools: Upgrade to 1.11.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,58 +58,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:18:06 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 08:18:07 -0000
+
+Fix build with when S != B
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...lude-sys-sysmacros.h-for-major-minor.patch | 25 +++++++++++++++++++
- .../usermode/usermode_1.112.bb                |  1 +
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-Include-sys-sysmacros.h-for-major-minor.patch
+ ...srcdir-prefix-to-denote-include-path.patch | 29 +++++++++++++++
+ .../0002-Fix-mkfs-out-of-tree-builds.patch    | 37 -------------------
+ ...fs-tools_1.8.0.bb => f2fs-tools_1.11.0.bb} |  8 ++--
+ 3 files changed, 34 insertions(+), 40 deletions(-)
+ create mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch
+ delete mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
+ rename meta-filesystems/recipes-utils/f2fs-tools/{f2fs-tools_1.8.0.bb => f2fs-tools_1.11.0.bb} (63%)
 
-diff --git a/meta-gnome/recipes-support/usermode/usermode/0001-Include-sys-sysmacros.h-for-major-minor.patch b/meta-gnome/recipes-support/usermode/usermode/0001-Include-sys-sysmacros.h-for-major-minor.patch
+diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch
 new file mode 100644
-index 0000000000..277f6e21b0
+index 0000000000..0a3261b4e7
 --- /dev/null
-+++ b/meta-gnome/recipes-support/usermode/usermode/0001-Include-sys-sysmacros.h-for-major-minor.patch
-@@ -0,0 +1,25 @@
-+From 75539659396b18110d5a52a8a32845254b4d8eca Mon Sep 17 00:00:00 2001
++++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch
+@@ -0,0 +1,29 @@
++From 0fb9d6bc25e903f7831a38468845ea143fb5afd5 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 11 Aug 2018 18:25:47 -0700
-+Subject: [PATCH] Include sys/sysmacros.h for major/minor
++Date: Sat, 11 Aug 2018 18:49:03 -0700
++Subject: [PATCH] f2fs-tools: Use srcdir prefix to denote include path
 +
-+usermount.c:238: undefined reference to `major'
++This helps builds when builddir != srcdir
 +
-+Upstream-Status: Pending
++Upstream-Status: Submitted [https://lkml.org/lkml/2018/8/12/1]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ usermount.c | 1 +
-+ 1 file changed, 1 insertion(+)
++ tools/sg_write_buffer/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/usermount.c b/usermount.c
-+index 4107027..21ef77f 100644
-+--- a/usermount.c
-++++ b/usermount.c
-+@@ -40,6 +40,7 @@
-+ #include <sys/stat.h>
-+ #include <sys/time.h>
-+ #include <sys/types.h>
-++#include <sys/sysmacros.h>
-+ #include <errno.h>
-+ #include <glob.h>
-+ #include <libintl.h>
-diff --git a/meta-gnome/recipes-support/usermode/usermode_1.112.bb b/meta-gnome/recipes-support/usermode/usermode_1.112.bb
-index 51f81a1fac..82ccf3eda7 100644
---- a/meta-gnome/recipes-support/usermode/usermode_1.112.bb
-+++ b/meta-gnome/recipes-support/usermode/usermode_1.112.bb
-@@ -17,6 +17,7 @@ SRC_URI = "https://releases.pagure.org/${BPN}/${BPN}-${PV}.tar.xz \
-            file://0001-fix-compile-failure-against-musl-C-library.patch \
-            file://0001-Makefile.am-Link-with-libm-for-powl-API.patch \
-            file://0001-Missing-n-in-translated-string.patch \
-+           file://0001-Include-sys-sysmacros.h-for-major-minor.patch \
-            "
- SRC_URI[md5sum] = "a766a9f7600f573fb6de4655d4162196"
- SRC_URI[sha256sum] = "37c4d667209da14082c08df6e48fe955d1532efebd5322f13f94683c6cc10370"
++diff --git a/tools/sg_write_buffer/Makefile.am b/tools/sg_write_buffer/Makefile.am
++index 922c328..19c438d 100644
++--- a/tools/sg_write_buffer/Makefile.am
+++++ b/tools/sg_write_buffer/Makefile.am
++@@ -1,7 +1,7 @@
++ ## Makefile.am
++ 
++ if LINUX
++-AM_CPPFLAGS = -I./include
+++AM_CPPFLAGS = -I$(srcdir)/include
++ AM_CFLAGS = -Wall
++ sbin_PROGRAMS = sg_write_buffer
++ sg_write_buffer_SOURCES = sg_write_buffer.c \
++-- 
++2.18.0
++
+diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
+deleted file mode 100644
+index 9e561cb111..0000000000
+--- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From 0731eefd389e01419f78a115e1363ed0c28cfd3a Mon Sep 17 00:00:00 2001
+-From: "Yong, Jonathan" <jonathan.yong@intel.com>
+-Date: Thu, 30 Mar 2017 08:03:37 +0000
+-Subject: [PATCH] Fix mkfs out of tree builds
+-
+-Libraries are built in builddir, not srcdir, fix Makefile.am
+-accordingly.
+-
+-Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
+-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+-
+-The patch was imported from the f2fs-tools repo
+-(git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git)
+-commit ID 0731eefd389e01419f78a115e1363ed0c28cfd3a.
+-
+-Upstream-Status: Accepted, expected to be included in 1.9.0.
+-
+-Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
+-
+----
+- mkfs/Makefile.am | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/mkfs/Makefile.am b/mkfs/Makefile.am
+-index 162a0cf..0ea8b49 100644
+---- a/mkfs/Makefile.am
+-+++ b/mkfs/Makefile.am
+-@@ -10,5 +10,5 @@ lib_LTLIBRARIES = libf2fs_format.la
+- libf2fs_format_la_SOURCES = f2fs_format_main.c f2fs_format.c f2fs_format_utils.c
+- libf2fs_format_la_CFLAGS = -DWITH_BLKDISCARD
+- libf2fs_format_la_CPPFLAGS = -I$(top_srcdir)/include
+--libf2fs_format_la_LDFLAGS = -luuid -L$(top_srcdir)/lib -lf2fs \
+-+libf2fs_format_la_LDFLAGS = -luuid -L$(top_builddir)/lib -lf2fs \
+- 	-version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
+--- 
+-2.10.2
+-
+diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
+similarity index 63%
+rename from meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
+rename to meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
+index 691cb6ea0e..2240049d44 100644
+--- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
++++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
+@@ -7,10 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=362b4b2594cd362b874a97718faa51d3"
+ # to provide libuuid
+ DEPENDS = "util-linux"
+ 
+-SRCREV = "1e7aedf99b85d16f94d1d8ad2fcf846403bb2174"
++# v1.11.0
++SRCREV = "b98fab3666e498c2e27ad9dcda6874c9b683f06b"
+ SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git \
+-    file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch \
+-    file://0002-Fix-mkfs-out-of-tree-builds.patch"
++           file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch \
++           file://0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch \
++           "
+ S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools
 -- 
 2.18.0
 
