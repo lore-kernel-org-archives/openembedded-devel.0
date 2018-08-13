@@ -1,33 +1,23 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AE9D78F63
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 627A378F61
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 15:53:20 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 309D92E62375;
-	Mon, 13 Aug 2018 17:53:20 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A19E82E62374;
-	Mon, 13 Aug 2018 17:53:19 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham autolearn_force=no version=3.4.0
-Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Mon, 13 Aug 2018 17:53:19 +0200 (CEST)
-Date: Mon, 13 Aug 2018 17:53:13 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <20180813155313.GA10693@mail.itconsulting-heinold.de>
-References: <20180813152021.29931-1-richard.leitner@skidata.com>
+	Mon, 13 Aug 2018 16:11:50 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w7DGBo5L004084
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 13 Aug 2018 09:11:50 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Mon, 13 Aug 2018 09:11:49 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Tue, 14 Aug 2018 00:22:15 +0800
+Message-ID: <cover.1534177115.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20180813152021.29931-1-richard.leitner@skidata.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Virus-Scanned: ClamAV using ClamSMTP
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH] openjdk-7: clarify a bitbake warning
+Subject: [PATCH 0/5] misc fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,46 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 15:53:20 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Aug 2018 16:11:50 -0000
+Content-Type: text/plain
 
-On Mon, Aug 13, 2018 at 05:20:21PM +0200, Richard Leitner wrote:
-> We get a bitbake warning during recipe building complaining about
-> unsupported architectures unconditionally. That check is relevant
-> only for shark builds, so it is quite confusing for non-shark
-> builds.
-> 
-> Make the warning conditional on whether shark builds are enabled
-> or not.
-> 
-> This is the same patch as the one for openjdk-8 by André Draszik
-> (commit 86c729cb51f880fd5a1ec6485baddfa2bedaa998)
-> 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
->  recipes-core/openjdk/openjdk-common.inc | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
-> index 816b463..c92af40 100644
-> --- a/recipes-core/openjdk/openjdk-common.inc
-> +++ b/recipes-core/openjdk/openjdk-common.inc
-> @@ -55,7 +55,8 @@ def get_llvm_configure_arch(d):
->      elif arch == "powerpc" or arch == "powerpc64":
->          arch = "powerpc"
->      else:
-> -        bb.warn("%s does not support %s yet" % (d.getVar('PN', True), arch) );
-> +        if 'shark' in d.getVar('PACKAGECONFIG').split():
-> +            bb.warn("%s does not support %s in Shark builds yet" % (d.getVar('PN', True), arch) );
->  
->      return arch
->  
-> -- 
-> 2.11.0
+The following changes since commit 30bbde3d09ebdf1ad2eac7764abeae0990f4cea2:
 
-Looks good to me.
+  oprofile: upgrade 1.2.0 -> 1.3.0 (2018-08-11 20:16:53 -0700)
 
-Bye Henning
+are available in the git repository at:
+
+  git://git.openembedded.org/openembedded-core-contrib hongxu/misc-fixes
+  http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/misc-fixes
+
+Hongxu Jia (5):
+  python3-pydbus: cherry-pick patches from fedora
+  python-pykickstart: fix typo
+  python3-blivet: remove dmraid from dependency check
+  libblockdev: drop obsolete patch
+  python3-blivet: add `-Z y' and `-y' to lvm.pvcreate
+
+ .../0001-fix-configure-and-compile-failures.patch  |  87 ---------
+ .../libblockdev/libblockdev_2.18.bb                |   1 -
+ .../0001-Support-asynchronous-calls-58.patch       |  93 ++++++++++
+ ...nsformation-between-D-Bus-errors-and-exce.patch | 203 +++++++++++++++++++++
+ .../python/python3-pydbus_0.6.0.bb                 |   4 +
+ .../0012-remove-dmraid-dependency-check.patch      |  31 ++++
+ .../0013-add-Z-y-and-y-to-lvm.pvcreate.patch       |  41 +++++
+ .../python-blivet/python3-blivet_3.0.1.bb          |   2 +
+ ...0001-support-authentication-for-kickstart.patch |  10 +-
+ ...d.py-retry-to-invoke-request-with-timeout.patch |   6 +-
+ 10 files changed, 382 insertions(+), 96 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libblockdev/files/0001-fix-configure-and-compile-failures.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pydbus/0001-Support-asynchronous-calls-58.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pydbus/0002-Support-transformation-between-D-Bus-errors-and-exce.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0012-remove-dmraid-dependency-check.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0013-add-Z-y-and-y-to-lvm.pvcreate.patch
+
+-- 
+2.7.4
+
 
