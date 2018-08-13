@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
-	[209.85.210.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 53EB878CB0
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com
+	[209.85.215.172])
+	by mail.openembedded.org (Postfix) with ESMTP id AD75F7892B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:18:12 +0000 (UTC)
-Received: by mail-pf1-f173.google.com with SMTP id x17-v6so7348033pfh.5
+	Mon, 13 Aug 2018 08:18:13 +0000 (UTC)
+Received: by mail-pg1-f172.google.com with SMTP id y5-v6so7210623pgv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 01:18:13 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=NRarwSxsCsnrnyacumUTGAocF/u6tpvy0wYMo7VtCAI=;
-	b=JbSl3np1RhSCD7qH0dvkfNvDmxTtkcTvs/kZbwDUrHgrtSOJby5iGhBwx5BUK9nUzD
-	pdbmdcYh62K4vZ37H6yUqBLuNILWLe7Mw76NJpZJ56ad0UD6Si5UFlS2XVSyBBkGFA+C
-	Fl+GQdeIsoFjognERnslRhWdaFZe9FnfG2lx030019coo6cHrscuBEuDZUik3P3/iG0r
-	qKDDCBvCdjjwUVl3NbxplCV4eJEsc8uCdzwpBMFVWWw8NZykdJtIupsueTe2CkgbpGFz
-	rgwIaw0vw/1g/CMcCcZpq09VKFUP6OiYpmBN/OriTk+SXJPeSUqDxmBtzOmobssgFGuy
-	G8CA==
+	bh=sgVrVRJWhc3TcyBky+M+QzAIim8RcItICQkpt8gXCik=;
+	b=cSDxYEZ6gVluC9G4hL6QfcQwD0e5ZWfl3DLf/Ikk53Vq4tbyjzZ//uS/DnuGYVV/WH
+	Z9mXrmw5uFrz5mEnWZI8yvJVSAJx8NBCtQbT+9gYbY/5zvjnYbjAWXQQEv7ZufZRFC9k
+	D8ctqlomIqd7Z0jRp1yktknMvs7vcr/yHC2xcVoKp8vIxtEXL4zGCa32yvuNoOwozDO8
+	cVH/PLJPg+Zihsz+ygADmopjUaKPZHzWGJBFLolbd9mAMBhIjyGezo0nN+rL7rye9qcf
+	1hjNR4S5QyKLTel7fqsSi0H8+maPm+FxueDt2XXEgFt8mdbyIMoxkCVzd9NxMZStyn92
+	zf9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=NRarwSxsCsnrnyacumUTGAocF/u6tpvy0wYMo7VtCAI=;
-	b=GHgh5K4DhUzgFKoQpzZMcwoDdC8mKeQg31CdaJBUhoLrfyTpfooAcsc1NUtI+8Frrb
-	vr2mRWlz/pZifwZlMYsUxzozrzAMtwJHyquG+qfumE5laCtgrDnlXdzWouy0sFSD9xhf
-	ELKnZ/9m5jc1Vmoa8K3CrdxqR5KinW4eTiLzHbTcY1FQHYC+HZIwIGY8Jg+qcvajNLM6
-	RSZgE65fQ93i9o1+N2IvyYDspIhKbIh2+xHVM0PJYFiBQTN7IgEQPhWKLMmS439NNvpB
-	6KHXsaB1FBamVA76/gHxkvaL1QvmFgeVahwprYf6FO1g4hqSHGhr6MXTRoWjtGcJD711
-	jI0g==
-X-Gm-Message-State: AOUpUlG1/rVCb0rgnlOyq+fsQx/+Wa6VXYCNgPaRvK1OX12cIArHpLQ3
-	rjpYnP2+01OkgMFCrs2nNZ78RwqU
-X-Google-Smtp-Source: AA+uWPztJJNvY4Kpi1LzH8kYxZO0pW/zqZKCBpqYB9Q+KVYa2fAxLoqtyQvHVTCD2nkYgxqNtsFBgA==
-X-Received: by 2002:a62:d544:: with SMTP id
-	d65-v6mr17757986pfg.107.1534148293127; 
-	Mon, 13 Aug 2018 01:18:13 -0700 (PDT)
+	bh=sgVrVRJWhc3TcyBky+M+QzAIim8RcItICQkpt8gXCik=;
+	b=mDq69N8MNUQcycHAuITBrR1ElHBTQVc9AC0CCRyLkcHSRNSZBc59W5x/FyBq8Jz/Li
+	L/wPxchv4HQbN7Z1P0GfY263INbPFvMTajubKvA4F/M8Lf/PJLmDdb8W8BsMgtBO6bxe
+	FzVnY8G+fpxhIkVaBCS5j/l5/pcBp0lncNPybL9NIPgOktES3VXH9T3DFy44k8J0qzeR
+	fXqDeH4pU9N/W1KB8X5FoomDw5Nv+ujwlReqZJ21fPySxFlDfZ+J6YAILacOVEw+ic6X
+	udp0SYreFrjbFDDbn/fH2fifXMm3uiE921HL0mekwins8eur4WfyjoTHj1BLjQl6Mzm7
+	gSqg==
+X-Gm-Message-State: AOUpUlEA2cEEn+oRbwE2krBE+fqGLGUSxj1ugQhPkwQV3Cw8zFb7wdvk
+	Xg4vFkn/s7ZQ5+DBjU42ZoKkUMif
+X-Google-Smtp-Source: AA+uWPxpR55dFQRpZmIOcO+kCuuLYNC5udyuulHdnlFWliAe8/vvbNDWGGB6Njeyt0+pFxlgsQmXBg==
+X-Received: by 2002:a62:dbc5:: with SMTP id
+	f188-v6mr18229404pfg.182.1534148294225; 
+	Mon, 13 Aug 2018 01:18:14 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f217])
 	by smtp.gmail.com with ESMTPSA id
-	b64-v6sm23414971pfg.66.2018.08.13.01.18.12
+	b64-v6sm23414971pfg.66.2018.08.13.01.18.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Aug 2018 01:18:12 -0700 (PDT)
+	Mon, 13 Aug 2018 01:18:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Aug 2018 01:17:39 -0700
-Message-Id: <20180813081742.6961-18-raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 01:17:40 -0700
+Message-Id: <20180813081742.6961-19-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180813081742.6961-1-raj.khem@gmail.com>
 References: <20180813081742.6961-1-raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 18/21] owfs: Upgrade to 3.2p2 and fix build with glibc 2.28+
+Subject: [meta-oe][PATCH 19/21] cfengine, cfengine-masterfiles: Upgrade to 3.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,105 +58,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:18:12 -0000
+X-List-Received-Date: Mon, 13 Aug 2018 08:18:14 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...01-include-sys-sysmacros.h-for-major.patch | 46 +++++++++++++++++++
- .../owfs/{owfs_2.9p1.bb => owfs_3.2p2.bb}     | 19 ++++----
- 2 files changed, 57 insertions(+), 8 deletions(-)
- create mode 100644 meta-filesystems/recipes-filesystems/owfs/owfs/0001-include-sys-sysmacros.h-for-major.patch
- rename meta-filesystems/recipes-filesystems/owfs/{owfs_2.9p1.bb => owfs_3.2p2.bb} (84%)
+ ...10.2.bb => cfengine-masterfiles_3.12.0.bb} |  4 +--
+ .../cfengine/change-hard-coded-lib-path.patch | 28 -------------------
+ .../set-path-of-default-config-file.patch     | 23 ++++++++++++---
+ ...{cfengine_3.10.2.bb => cfengine_3.12.0.bb} |  7 ++---
+ 4 files changed, 24 insertions(+), 38 deletions(-)
+ rename meta-oe/recipes-extended/cfengine/{cfengine-masterfiles_3.10.2.bb => cfengine-masterfiles_3.12.0.bb} (87%)
+ delete mode 100644 meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch
+ rename meta-oe/recipes-extended/cfengine/{cfengine_3.10.2.bb => cfengine_3.12.0.bb} (93%)
 
-diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs/0001-include-sys-sysmacros.h-for-major.patch b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-include-sys-sysmacros.h-for-major.patch
-new file mode 100644
-index 0000000000..0a990ac686
---- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-include-sys-sysmacros.h-for-major.patch
-@@ -0,0 +1,46 @@
-+From dd1af7541f18399bcdcb129a8b6618c18ebd9d63 Mon Sep 17 00:00:00 2001
-+From: Tomasz Torcz <tomek@pipebreaker.pl>
-+Date: Sat, 17 Mar 2018 12:56:04 +0100
-+Subject: [PATCH] include <sys/sysmacros.h> for major()
-+
-+  Linux glibc ceased to include it in sys/types.h:
-+https://sourceware.org/ml/libc-alpha/2015-11/msg00253.html
-+
-+Upstream-Status: Backport
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac                  | 2 +-
-+ module/owlib/src/include/ow.h | 6 +++++-
-+ 2 files changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 86751bf7..d625d3f0 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -180,7 +180,7 @@ m4_include([src/scripts/m4/acx_pthread.m4])
-+ # Checks for header files.
-+ AC_HEADER_DIRENT
-+ AC_HEADER_STDC
-+-AC_CHECK_HEADERS([asm/types.h arpa/inet.h sys/ioctl.h sys/mkdev.h sys/socket.h sys/time.h sys/times.h sys/types.h sys/param.h sys/uio.h feature_tests.h fcntl.h netinet/in.h stdlib.h string.h strings.h sys/file.h syslog.h termios.h unistd.h limits.h stdint.h features.h getopt.h resolv.h semaphore.h])
-++AC_CHECK_HEADERS([asm/types.h arpa/inet.h sys/ioctl.h sys/mkdev.h sys/socket.h sys/sysmacros.h sys/time.h sys/times.h sys/types.h sys/param.h sys/uio.h feature_tests.h fcntl.h netinet/in.h stdlib.h string.h strings.h sys/file.h syslog.h termios.h unistd.h limits.h stdint.h features.h getopt.h resolv.h semaphore.h])
-+ AC_CHECK_HEADERS([linux/limits.h linux/types.h netdb.h dlfcn.h])
-+ AC_CHECK_HEADERS(sys/event.h sys/inotify.h)
-+ 
-+diff --git a/module/owlib/src/include/ow.h b/module/owlib/src/include/ow.h
-+index 9dbec5f3..0a310552 100644
-+--- a/module/owlib/src/include/ow.h
-++++ b/module/owlib/src/include/ow.h
-+@@ -188,8 +188,12 @@
-+ #include <netdb.h>				/* for getaddrinfo */
-+ #endif							/* HAVE_NETDB_H */
-+ 
-++#ifdef HAVE_SYS_SYSMACROS_H
-++#include <sys/sysmacros.h>			/* for major() */
-++#endif							/* HAVE_SYS_SYSMACROS_H */
-++
-+ #ifdef HAVE_SYS_MKDEV_H
-+-#include <sys/mkdev.h>			/* for major() */
-++#include <sys/mkdev.h>			/* for major() on Solaris */
-+ #endif							/* HAVE_SYS_MKDEV_H */
-+ 
-+ #include <stddef.h> // for offsetof()
-diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
-similarity index 84%
-rename from meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb
-rename to meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
-index 21fd7e93e2..50865cccda 100644
---- a/meta-filesystems/recipes-filesystems/owfs/owfs_2.9p1.bb
-+++ b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p2.bb
-@@ -4,18 +4,21 @@ HOMEPAGE = "http://www.owfs.org/"
- SECTION = "console/network"
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
+similarity index 87%
+rename from meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
+index b52e7cc082..dda6af9c9d 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
+@@ -22,8 +22,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
  
- LICENSE = "GPLv2 & LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a0bc427f423a41220ab79a0b392218bd \
--                    file://COPYING.LIB;md5=865c4bd642d9e04f43925ad7e929ae87"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=12a64df1cc87275e940cab05ee75c37d \
-+                    file://COPYING.LIB;md5=16ff3ffebed582e19ea7a4f48ec77b42"
+ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
  
- DEPENDS = "fuse virtual/libusb0"
+-SRC_URI[md5sum] = "1247ef4e8f3cee5efa98da50c326e5a4"
+-SRC_URI[sha256sum] = "5d18a8d71f451d0b5dd1f5e579452b29b99b664f2bb0827dbba9a615f2764df6"
++SRC_URI[md5sum] = "d59bd8c95620da816c382f749d425860"
++SRC_URI[sha256sum] = "1c50e3d8c702097e13a21258626d936d6ff2e6492e893dfe286ff0d6204d7a65"
+ 
+ inherit autotools
+ 
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch b/meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch
+deleted file mode 100644
+index 2295e415cd..0000000000
+--- a/meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-Upstream-Status: Inappropriate [configuration]
 -
--SRC_URI = "${SOURCEFORGE_MIRROR}/owfs/owfs-${PV}.tar.gz \
-+# v3.2p2
-+SRCREV = "93c1f36d9ac481075287da331d5184f590f8c0fa"
-+SRC_URI = "git://github.com/owfs/owfs \
-            file://owhttpd \
--           file://owserver "
--SRC_URI[md5sum] = "56ba145be208002e58775a7203369851"
--SRC_URI[sha256sum] = "9d22dbff72d235476688c02669f7171b23e21dffadf40bbdd3b8263908218424"
-+           file://owserver \
-+           file://0001-include-sys-sysmacros.h-for-major.patch \
-+           "
+-projlibdir use a hard coded lib path, this will cause error when build a 64bit
+-target. So change it to suitable path.
+-
+-Signed-off-by: Song.Li <Song.Li@windriver.com>
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 38e2b9c..bc6b996 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -188,7 +188,7 @@ AS_IF([test x"$enable_fhs" = xyes], [
+-   fi
+- 
+-   sbindir='${exec_prefix}/bin' # /var/cfengine/bin despite being sbin_?
+--  projlibdir='${exec_prefix}/lib'
+-+  projlibdir='${libdir}'
+-   mandir='${exec_prefix}/share/man'
+- ])
+- 
+--- 
+-1.7.1
+-
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch b/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch
+index b9526f2843..db69f951ca 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch
++++ b/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch
+@@ -1,23 +1,38 @@
++From dc270040cb3beb5ca42f864813145c8a68594bad Mon Sep 17 00:00:00 2001
++From: Kai Kang <kai.kang@windriver.com>
++Date: Mon, 18 Jul 2016 09:06:06 +0800
++Subject: [PATCH] cfengine: add recipe and base policy
 +
-+S = "${WORKDIR}/git"
+ Upstream-Status: Inappropriate [configuration]
  
--inherit autotools-brokensep update-rc.d
-+inherit autotools-brokensep update-rc.d pkgconfig
+ Set the path of default configure file.
  
- EXTRA_OECONF = " \
-                  --with-fuseinclude=${STAGING_INCDIR} \
+ Signed-off-by: Kai Kang <kai.kang@windriver.com>
++
+ ---
++ misc/init.d/cfengine3.in | 12 ++++--------
++ 1 file changed, 4 insertions(+), 8 deletions(-)
++
+ diff --git a/misc/init.d/cfengine3.in b/misc/init.d/cfengine3.in
+-index d6ae26f..1dee283 100644
++index c584817..12f5803 100644
+ --- a/misc/init.d/cfengine3.in
+ +++ b/misc/init.d/cfengine3.in
+-@@ -101,11 +101,7 @@ if [ -z "$LOCKDIR" ]; then
++@@ -101,14 +101,10 @@ if [ -z "$LOCKDIR" ]; then
+  fi
+  
+  # default control file
+ -if [ "$DEBIAN" = "1" ]; then
+ -    DEFAULT=/etc/default/cfengine3
++-    INIT_FUNCTIONS=/lib/lsb/init-functions
++-    if [ -e "$INIT_FUNCTIONS" ]; then
++-        . "$INIT_FUNCTIONS"
++-    fi
+ -else
+ -    DEFAULT=/etc/sysconfig/cfengine3
+--fi
+ +DEFAULT=/etc/default/cfengine3
+++INIT_FUNCTIONS=/lib/lsb/init-functions
+++if [ -e "$INIT_FUNCTIONS" ]; then
+++    . "$INIT_FUNCTIONS"
++ fi
+  
+  if [ -f $DEFAULT ]; then
+-     . $DEFAULT
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
+index b86b0a1f18..aa33a97a4d 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
+@@ -16,12 +16,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
+ DEPENDS = "attr tokyocabinet"
+ 
+ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
+-           file://change-hard-coded-lib-path.patch \
+            file://set-path-of-default-config-file.patch \
+-"
++           "
+ 
+-SRC_URI[md5sum] = "c16baf08189a1af6fcf2e2ff61102992"
+-SRC_URI[sha256sum] = "d4fa9ac7276dba7b85d6757aab2f0929ab8d3b115cb0e7b0cf984760347429d7"
++SRC_URI[md5sum] = "33ef12260db4b430352229f37f7cb0e5"
++SRC_URI[sha256sum] = "d71ba98a272390c6fa8bc20e8ea27f0050a0a72a3e6b206a4762b4646be332ec"
+ 
+ inherit autotools systemd
+ 
 -- 
 2.18.0
 
