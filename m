@@ -1,25 +1,50 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 94DFC78F63
+Return-Path: <yevgenyp@pointgrab.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D9DF578F5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 16:11:57 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7DGBwUh018925
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 13 Aug 2018 09:11:58 -0700 (PDT)
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 13 Aug 2018 09:11:57 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 14 Aug 2018 00:22:20 +0800
-Message-ID: <b2fbe0dec029ea45e924db69c452dad1936abd37.1534177115.git.hongxu.jia@windriver.com>
+	Mon, 13 Aug 2018 16:50:05 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id h10-v6so14837253wre.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 09:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pointgrab-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=U/YF7N95kU8qWxkmYzrovRWOi67XgA1HuEgQreYLqyc=;
+	b=UwEIVL0SgIlBXwH0lGO/rmkpiL+CAv/q/UTjp/gGOEGGjfdBAtYYG88IT10hgDL/ua
+	Zp3yxdcmgAJxmSD6cr6qIyWARGdKC5vLnFDmGM45ug+8BC+BpgaBwSWqjydP/N2VBdkJ
+	Wznorcvr/B0Pq35ID4nLA7PLHuB0Qj7Tiht0BCAHxAz124UGtPZs7XwxiBeddcwLGGZ7
+	99BT6qXIXbzl1TRNRHuZT2t8VfFLw1E0TNuABQHEvLVl0k2ZfG0LhI1t/USK6pkQBY6J
+	bxh6LRp8j45X8hHYYud51iJYS2eHlaM12sTHZ9ONLrFvEmjEGexaJmVewMt2lB5jnNEA
+	Rf0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=U/YF7N95kU8qWxkmYzrovRWOi67XgA1HuEgQreYLqyc=;
+	b=ZZJyJx9PUE8wqRBs4dkgQURoNdkUh4H9A4IPOrwFg2kKpvKvep8mTlkXYP7RyRKIt8
+	EVuv+xKQj4/ja5TRcUiLMeacAx4+4hvah8tXxDFlVRr2K26Pw1cIlaFR5y8RcwwVCT4E
+	fH59HsNUQgkCNh/ObRSXCQeVhVAPBIfznDPh7bQvtSy/2DhT/OOwERAq61+IZstCCTrn
+	tjKXIeuRCj4zBhkIEzyiM/FM4+LfgCgF7Ke4oh5B1XHeUKuzdodjrXQCgPUAJCDoLQsi
+	GQvx7QA2HGtDEuA10xHRQgxZMmRgj3HuZoBGTzi+teN///E7twztc/XnUGTwrW9i6TZ7
+	KBKw==
+X-Gm-Message-State: AOUpUlEbJBcUfHeKp7jRzOxdbesIw/pWroxSH9zjBhHkvF+ZMOhxKCW1
+	CvOfDkqrL/c7MLfqi5Eo8um8UpTBfmw=
+X-Google-Smtp-Source: AA+uWPzwuJIRv1Ic8xNiuMtBZomDt3wnYd3a0VOE7wmSIb/ZkbRZNiI8a0DVqbmncSVNCPZTGoH/UQ==
+X-Received: by 2002:a5d:4c4c:: with SMTP id
+	n12-v6mr11493736wrt.71.1534179006219; 
+	Mon, 13 Aug 2018 09:50:06 -0700 (PDT)
+Received: from yevgeny-lnx.localdomain ([77.222.132.139])
+	by smtp.gmail.com with ESMTPSA id
+	b2-v6sm11776410wmh.3.2018.08.13.09.50.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 13 Aug 2018 09:50:05 -0700 (PDT)
+From: Yevgeny Popovych <yevgenyp@pointgrab.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Aug 2018 19:49:53 +0300
+Message-Id: <1534178993-13146-1-git-send-email-yevgenyp@pointgrab.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1534177115.git.hongxu.jia@windriver.com>
-References: <cover.1534177115.git.hongxu.jia@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 5/5] python3-blivet: add `-Z y' and `-y' to lvm.pvcreate
+Cc: Yevgeny Popovych <yevgenyp@pointgrab.com>
+Subject: [meta-java][PATCH] dbus-java: Do not build any documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,84 +57,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 16:11:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 13 Aug 2018 16:50:06 -0000
 
-While reinstall a crypt fs, it occasionally failed
-[snip]
-|gi.overrides.BlockDev.LVMError: Process reported exit code 5:
-WARNING: atari signature detected on /dev/mapper/luks-0e5f891c
--7701-48bc-a41e-8d626b6ef953 at offset 466. Wipe it? [y/n]:
-[snip]
+Support for respective docbook tools has been removed in pyro release.
 
-Add `-Z y' and `-y' to lvm.pvcreate
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
+Cc: Henning Heinold <henning@itconsulting-heinold.de>
+Cc: Maxin John <maxin.john@intel.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Cc: Richard Leitner <richard.leitner@skidata.com>
 ---
- .../0013-add-Z-y-and-y-to-lvm.pvcreate.patch       | 41 ++++++++++++++++++++++
- .../python-blivet/python3-blivet_3.0.1.bb          |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0013-add-Z-y-and-y-to-lvm.pvcreate.patch
+ recipes-extended/dbus/dbus-java_2.7.bb | 22 ++--------------------
+ 1 file changed, 2 insertions(+), 20 deletions(-)
 
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/0013-add-Z-y-and-y-to-lvm.pvcreate.patch b/meta-python/recipes-extended/python-blivet/python3-blivet/0013-add-Z-y-and-y-to-lvm.pvcreate.patch
-new file mode 100644
-index 0000000..33b5f51
---- /dev/null
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0013-add-Z-y-and-y-to-lvm.pvcreate.patch
-@@ -0,0 +1,41 @@
-+From bddbfa499df16b108f2d892ee48d65617523c33d Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 9 Aug 2018 11:00:39 +0800
-+Subject: [PATCH] add `-Z y' and `-y' to lvm.pvcreate
-+
-+While reinstall a crypt fs, it occasionally failed
-+[snip]
-+|gi.overrides.BlockDev.LVMError: Process reported exit code 5:
-+WARNING: atari signature detected on /dev/mapper/luks-0e5f891c
-+-7701-48bc-a41e-8d626b6ef953 at offset 466. Wipe it? [y/n]:
-+[snip]
-+
-+Add `-Z y' and `-y' to lvm.pvcreate
-+
-+Upstream-Status: Submitted [https://github.com/storaged-project/blivet/pull/714]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ blivet/formats/lvmpv.py | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/blivet/formats/lvmpv.py b/blivet/formats/lvmpv.py
-+index 260cc0b..4bbb46f 100644
-+--- a/blivet/formats/lvmpv.py
-++++ b/blivet/formats/lvmpv.py
-+@@ -120,9 +120,9 @@ class LVMPhysicalVolume(DeviceFormat):
-+         log_method_call(self, device=self.device,
-+                         type=self.type, status=self.status)
-+ 
-+-        # Consider use of -Z|--zero
-+-        # -f|--force or -y|--yes may be required
-+-        blockdev.lvm.pvcreate(self.device, data_alignment=self.data_alignment)
-++        ea_zero = blockdev.ExtraArg.new("-Z", "y")
-++        ea_yes = blockdev.ExtraArg.new("-y", "")
-++        blockdev.lvm.pvcreate(self.device, data_alignment=self.data_alignment, extra=[ea_zero, ea_yes])
-+ 
-+     def _destroy(self, **kwargs):
-+         log_method_call(self, device=self.device,
-+-- 
-+2.7.4
-+
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_3.0.1.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_3.0.1.bb
-index 5fcbd88..75f02f1 100644
---- a/meta-python/recipes-extended/python-blivet/python3-blivet_3.0.1.bb
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivet_3.0.1.bb
-@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/rhinstaller/blivet;branch=3.1-release \
-            file://0010-invoking-mkfs-with-infinite-timeout.patch \
-            file://0011-invoking-dd-with-infinite-timeout.patch \
-            file://0012-remove-dmraid-dependency-check.patch \
-+           file://0013-add-Z-y-and-y-to-lvm.pvcreate.patch \
- "
+diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
+index 4964cf8..0b093a0 100644
+--- a/recipes-extended/dbus/dbus-java_2.7.bb
++++ b/recipes-extended/dbus/dbus-java_2.7.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://dbus.freedesktop.org/doc/dbus-java"
+ SECTION = "libs"
+ LICENSE = "LGPL-2.1 & AFL-2.1"
  
- UPSTREAM_CHECK_GITTAGREGEX = "blivet-(?P<pver>\d+(\.\d+)+)$"
+-DEPENDS = "libmatthew docbook-utils-native docbook-sgml-dtd-4.1-native fastjar-native"
++DEPENDS = "libmatthew gettext-native fastjar-native"
+ RDEPENDS_${PN}-viewer = "java2-runtime libunixsocket-java ${PN}-bin libmatthew-debug-java ${JPN}"
+ RDEPENDS_${PN}-bin = "java2-runtime libunixsocket-java libmatthew-debug-java ${JPN}"
+ RSUGGESTS_${JPN} = "libunixsocket-java"
+@@ -49,15 +49,6 @@ do_compile () {
+ 		JAVAUNIXJARDIR=${datadir_java} \
+ 		JAVAUNIXLIBDIR=${libdir_jni} \
+ 		bin
+-
+-	# Generate man pages.
+-	oe_runmake \
+-		JAVAC="oefatal \"No Java compilation expected here.\"" \
+-		JAR="oefatal \"No jar invocation expected here.\"" \
+-		JARPREFIX=${datadir_java} \
+-		JAVAUNIXJARDIR=${datadir_java} \
+-		JAVAUNIXLIBDIR=${libdir_jni} \
+-		man
+ }
+ 
+ JARFILENAME = "${JPN}-${PV}.jar"
+@@ -73,20 +64,11 @@ do_install () {
+   install bin/CreateInterface ${D}${bindir}
+   install bin/ListDBus ${D}${bindir}
+   install bin/DBusDaemon ${D}${bindir}
+-
+-	oe_runmake \
+-		JAVAC="oefatal \"No Java compilation expected here.\"" \
+-		JAR="oefatal \"No jar invocation expected here.\"" \
+-		MANPREFIX=${D}${mandir} \
+-		DOCPREFIX=${D}${docdir}/${JPN} \
+-		install-man
+ }
+ 
+ # ${JPN} must be last otherwise it would pick up dbus-viewer*.jar
+ # and dbus-bin*.jar
+-PACKAGES = "${PN}-viewer ${PN}-viewer-doc ${PN}-bin ${PN}-bin-doc ${JPN}"
++PACKAGES = "${PN}-viewer ${PN}-bin ${JPN}"
+ 
+ FILES_${PN}-viewer = "${datadir}/java/dbus-java-viewer*.jar ${bindir}/DBusViewer"
+-FILES_${PN}-viewer-doc = "${mandir}/DBusViewer*"
+ FILES_${PN}-bin = "${datadir}/java/dbus-java-bin*.jar ${bindir}"
+-FILES_${PN}-bin-doc = "${mandir} ${docdir}/${JPN}"
 -- 
 2.7.4
 
