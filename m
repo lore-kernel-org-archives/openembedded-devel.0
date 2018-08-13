@@ -1,67 +1,48 @@
-Return-Path: <prvs=756920f33=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 5631C78EB1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3846374765
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 08:15:49 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,232,1531778400"; d="scan'208";a="11802859"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180809002644.18549-1-git@andred.net>
-	<9981ffaaeb6e2a2dc7af5585574bcffdd96dfd2e.camel@andred.net>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <ef95e3c0-8511-24e0-030d-5e980e594298@skidata.com>
-Date: Mon, 13 Aug 2018 10:16:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
-MIME-Version: 1.0
-In-Reply-To: <9981ffaaeb6e2a2dc7af5585574bcffdd96dfd2e.camel@andred.net>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][master-next][PATCH 1/4] gitignore: ignore new python byte-code files
+	Mon, 13 Aug 2018 08:17:51 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id r1-v6so7187225pgp.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 01:17:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=ZAU63xWZGDle5X1XYLuvz5+ozxU1MGbkMY/dph93UW0=;
+	b=dmwk6v+86RR0bmhwsyhuYPMaGiFcrz7QhdIK+kxwiIIjFMNIBmpy4DKUhq4fpTwhg/
+	NGliwt4RRTvVbBeI5FIIbcr28nEa1VRj8qu6CsvhjDIiiKB9HSI8M/38c3PbIgqzAo5V
+	gq1a54bn99RoVyWGCPe8Cmwz+JVpfo6hwWzWoWfUOZBAfcck9eKl6HV5V8hsiIlhHDfz
+	6Wy23mUftPby49s/snlONcCbJsOLKB2N45DzVfcvF5suFl+ZdU+71C3NIkyN3BPrgCUj
+	Mx8LfMNrVjVIeK3DCtgWdDFKd7aQF3t+f1dLiqDq483IiyebfkOMI89Fx4J5UfzVO06s
+	237Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZAU63xWZGDle5X1XYLuvz5+ozxU1MGbkMY/dph93UW0=;
+	b=DQEJA+q15AixjaQHB19UnFpONwZ+aTgXVnHkl+cYOrrGElgX4jh+MjNm1t9gwBMHZn
+	Z3LkfX+s89C25Ff2dP5NyQ1iWkNG4MSEMDp83lhGdzhradc8HqR/S2gas1OzMch+4yAo
+	iSgQwUOa7ytp3IM2Fx2pfBkzUA86pKjqj/FDfv2uE1Dt2rF1ZbDXThB7W+dFQY7e3EFB
+	ycA63hB8B1u8LHbIvxJlgihnUNExQrW/5PN5pG9F1gS0SaMrMBy+rSyaTLHU7rwIj3Rw
+	MbYs9b2mDOhqSAj3IDQ+UsDQoL6UFboUWN8j1B+TOq26Q15lmDGMrzB4xEb1hTnp5iPt
+	Yl3Q==
+X-Gm-Message-State: AOUpUlHyPdvwvd6ofMGly890bvods2rIJig3ynze1y45xvG8H2ebLWL0
+	2d/QzNB5wUeIuHgZRFmFcuKBpTmX
+X-Google-Smtp-Source: AA+uWPyR1dxyqwz++/SAGVAdBgZK3cWdBpaNc9U/kQMN+Y0MCww4Qqux+HJ5DMQFwDjxn+djhxOIRw==
+X-Received: by 2002:a63:fa18:: with SMTP id
+	y24-v6mr16246464pgh.362.1534148271730; 
+	Mon, 13 Aug 2018 01:17:51 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::f217])
+	by smtp.gmail.com with ESMTPSA id
+	b64-v6sm23414971pfg.66.2018.08.13.01.17.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Aug 2018 01:17:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Aug 2018 01:17:22 -0700
+Message-Id: <20180813081742.6961-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-webserver][PATCH 01/21] sthttpd: Add dependency on virtual/crypt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,16 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 08:15:49 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Aug 2018 08:17:51 -0000
 
+This is required with glibc 2.28+ where crypt is
+no longer part of glibc
 
-On 8/13/18 9:44 AM, André Draszik wrote:
-> Please ignore this series, I'll send a mew one.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-ok. thanks for the info.
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+index 81815d6526..8632b97f44 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://opensource.dyc.edu/sthttpd"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://src/thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dcbe9eb18815516502872"
+ 
+-DEPENDS += "base-passwd"
++DEPENDS += "base-passwd virtual/crypt"
+ 
+ SRC_URI = "https://github.com/blueness/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
+            file://thttpd.service \
+-- 
+2.18.0
 
-regards;Richard.L
 
