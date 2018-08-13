@@ -1,68 +1,47 @@
-Return-Path: <prvs=756920f33=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id DB9C6748EE
+Return-Path: <fritjof.jonsson@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BEA0C78E67
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 13:03:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,233,1531778400"; d="scan'208";a="11808528"
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20180813100936.23663-1-git@andred.net>
-	<20180813100936.23663-7-git@andred.net>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <665bfde0-e444-200f-2d07-9013c2a7d4e1@skidata.com>
-Date: Mon, 13 Aug 2018 15:03:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
-MIME-Version: 1.0
-In-Reply-To: <20180813100936.23663-7-git@andred.net>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 6/9] openjdk-8: gcc-8 fix #2: silence build warnings/errors (return-type)
+	Mon, 13 Aug 2018 13:20:54 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 2E2581836F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 15:20:55 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id R0fR-t3_03MD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 9562818055
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 3FDA91E0BD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 34A241E0BF
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+Received: from lnxfritjofj.se.axis.com (lnxfritjofj.se.axis.com [10.88.130.23])
+	by thoth.se.axis.com (Postfix) with ESMTP id 288F22F05;
+	Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+Received: by lnxfritjofj.se.axis.com (Postfix, from userid 12665)
+	id 2511E409CC; Mon, 13 Aug 2018 15:20:54 +0200 (CEST)
+From: Fritjof Jonsson <fritjof.jonsson@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Aug 2018 15:20:30 +0200
+Message-Id: <20180813132030.22046-1-fritjofj@axis.com>
+X-Mailer: git-send-email 2.11.0
+X-TM-AS-GCONF: 00
+Cc: Fritjof Jonsson <fritjofj@axis.com>
+Subject: [meta-oe][PATCH v2] Add recipe for cereal, a header-only C++11 serialization library.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,57 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 13:03:12 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Aug 2018 13:20:55 -0000
 
-Hi André,
-just some nitpicking:
+Change-Id: I93a3d6b34650998d67f5c00ed8ff14e2658cbec7
+Signed-off-by: Fritjof Jonsson <fritjofj@axis.com>
+---
+ meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb
 
-On 8/13/18 12:09 PM, André Draszik wrote:
-> From: André Draszik <andre.draszik@jci.com>
-> 
-> Similar to the patch just reverted, we wilence the build warnings
-> regarding return type of functions, but we only do this for gcc versions
-> where it matters, now that our infrastructure for doing so works again:
+diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb
+new file mode 100644
+index 000000000..6507dd63e
+--- /dev/null
++++ b/meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "A C++11 library for serialization"
++HOMEPAGE = "https://uscilab.github.io/cereal/"
++
++SECTION = "libs"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "[file://LICENSE;md5=e612690af2f575dfd02e2e91443cea23]file://LICENSE;md5=e612690af2f575dfd02e2e91443cea23"
++
++SRCREV = "51cbda5f30e56c801c07fe3d3aba5d7fb9e6cca4"
++SRC_URI = "git://github.com/USCiLab/cereal.git"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE = "-DJUST_INSTALL_CEREAL=ON"
+-- 
+2.11.0
 
-I guess with "the patch just reverted" you refer to the [PATCH 7/9] which will be applied afterwards.
-
-Is it OK for you if I apply Patch #7 before Patch #6 so the commit message works out?
-
-Furthermore I'll change "wilence" to "silence" if it's OK for you? ;-)
-
-> 
->     | <<PKGBUILDDIR>>/hotspot/src/share/vm/utilities/globalDefinitions_gcc.hpp:223:32: error: control reaches end of non-void function [-Werror=return-type]
->     |  #define BREAKPOINT ::breakpoint()
->     |                     ~~~~~~~~~~~~^~
->     | <<PKGBUILDDIR>>/hotspot/src/share/vm/utilities/debug.hpp:192:3: note: in expansion of macro 'BREAKPOINT'
->     |    BREAKPOINT;                                                                \
->     |    ^~~~~~~~~~
->     | <<PKGBUILDDIR>>/hotspot/src/cpu/aarch64/vm/c1_LIRAssembler_aarch64.cpp:197:2: note: in expansion of macro 'ShouldNotReachHere'
->     |   ShouldNotReachHere();
->     |   ^~~~~~~~~~~~~~~~~~
->     etc.
-> 
-> Signed-off-by: André Draszik <andre.draszik@jci.com>
-> ---
->  recipes-core/openjdk/openjdk-8-common.inc | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-> index fb97e97..77d905d 100644
-> --- a/recipes-core/openjdk/openjdk-8-common.inc
-> +++ b/recipes-core/openjdk/openjdk-8-common.inc
-> @@ -216,6 +216,7 @@ EXTRA_OECONF_append = "\
->  # of these changes.
->  FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->  FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
-> +FLAGS_GCC8 = "-Wno-error=return-type"
->  
->  # All supported cross compilers support the compiler flags that were
->  # added to make compilation with gcc6 work. But the host compiler for
-> 
-
-regards;Richard.L
 
