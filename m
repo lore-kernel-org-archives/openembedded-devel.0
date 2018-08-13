@@ -1,20 +1,33 @@
-Return-Path: <prvs=756920f33=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 2135478FA0
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AE9D78F63
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 15:46:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,234,1531778400"; 
-   d="scan'208";a="1605069"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Aug 2018 17:46:28 +0200
-Message-ID: <20180813154628.32257-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.11.0
+	Mon, 13 Aug 2018 15:53:20 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 309D92E62375;
+	Mon, 13 Aug 2018 17:53:20 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A19E82E62374;
+	Mon, 13 Aug 2018 17:53:19 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham autolearn_force=no version=3.4.0
+Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA;
+	Mon, 13 Aug 2018 17:53:19 +0200 (CEST)
+Date: Mon, 13 Aug 2018 17:53:13 +0200
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <20180813155313.GA10693@mail.itconsulting-heinold.de>
+References: <20180813152021.29931-1-richard.leitner@skidata.com>
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH v2] icedtea: disable error format-overflow for gcc 7
+In-Reply-To: <20180813152021.29931-1-richard.leitner@skidata.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH] openjdk-7: clarify a bitbake warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,47 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 15:46:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 13 Aug 2018 15:53:20 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+On Mon, Aug 13, 2018 at 05:20:21PM +0200, Richard Leitner wrote:
+> We get a bitbake warning during recipe building complaining about
+> unsupported architectures unconditionally. That check is relevant
+> only for shark builds, so it is quite confusing for non-shark
+> builds.
+> 
+> Make the warning conditional on whether shark builds are enabled
+> or not.
+> 
+> This is the same patch as the one for openjdk-8 by Andr� Draszik
+> (commit 86c729cb51f880fd5a1ec6485baddfa2bedaa998)
+> 
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> ---
+>  recipes-core/openjdk/openjdk-common.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
+> index 816b463..c92af40 100644
+> --- a/recipes-core/openjdk/openjdk-common.inc
+> +++ b/recipes-core/openjdk/openjdk-common.inc
+> @@ -55,7 +55,8 @@ def get_llvm_configure_arch(d):
+>      elif arch == "powerpc" or arch == "powerpc64":
+>          arch = "powerpc"
+>      else:
+> -        bb.warn("%s does not support %s yet" % (d.getVar('PN', True), arch) );
+> +        if 'shark' in d.getVar('PACKAGECONFIG').split():
+> +            bb.warn("%s does not support %s in Shark builds yet" % (d.getVar('PN', True), arch) );
+>  
+>      return arch
+>  
+> -- 
+> 2.11.0
 
-As no patch has been found in debian and hotspot repo for this issue we
-just disable this warning which was introduced with GCC 7.
+Looks good to me.
 
-Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-
-Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
-Changes v2:
-   + adapted by Richard Leitner to use the openjdk-build-helper class from
-     André Draszik instead of our own in the java class.
-    (Therefore it now depends on the "prepare for openjdk-8 build infra re-use"
-     series from André)
----
- recipes-core/icedtea/icedtea7-native.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 30fb24a..796acb6 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -24,6 +24,12 @@ CFLAGS_append = " -fno-tree-dse"
- CXXFLAGS_append = " -fno-tree-dse"
- CXX_append = " -std=gnu++98"
- 
-+# Disable format-overflow error with host g++ >= 7.3.
-+# This bug is known as https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-+FLAGS_GCC7 = " -Wno-error=format-overflow"
-+BUILD_CFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
-+BUILD_CXXFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
-+
- inherit native java autotools pkgconfig
- inherit openjdk-build-helper
- 
--- 
-2.11.0
-
+Bye Henning
 
