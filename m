@@ -1,48 +1,39 @@
-Return-Path: <andreas.kling@gmail.com>
+Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
 	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E30B779062
+	by mail.openembedded.org (Postfix) with ESMTP id 3D48679057
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 18:50:41 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id q12-v6so22257126qtp.6
+	Tue, 14 Aug 2018 20:24:25 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id n6-v6so22580195qtl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 11:50:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=yIFL+CKhxTrmd4v6MWw9b/yR0BGqNcY/l6CA8Cl7edA=;
-	b=rifqlGDkPE04PAVi2G+5EV+StpZICLH/Tx2Ih27UZ4nt1q6mnhp/qZ7nhcmR6wgDRE
-	Dhz/KG0KuS4dtaCeak7KFjNq14afWekOI6g3bhGHEEnXQgUOhUrY3rJSWCqqia6ldYCD
-	fBd/AxAmfj2bUKSjV9HRoqTSGNMvsSDSLRNRkWjZ6SivTWaeQdUCk8cgZvXTor3wIwqy
-	0j333aR5Nvn9ofKKbLM5Woeo58nbSuAhbCOVirC1Y9dn8NQJgneIk3HVdbs56lZ+2Lur
-	Xj6nCOREbhDVcjxB2hVbcdBZjBszp5uvh9o1qoSEAoInraKbQ9M7vXaKTahR2zxW8UhP
-	GITg==
+	Tue, 14 Aug 2018 13:24:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=yIFL+CKhxTrmd4v6MWw9b/yR0BGqNcY/l6CA8Cl7edA=;
-	b=ZMmjEev2edPTBjuzT0UqpZiQL1k3hGaZ4CmRxzTz2QhZ7cD/wd9QOgOI+C8kCYtXkm
-	Xo8T9KQGO6lllOQfR8adFAwK+R2Uzn1rmUWNC3lBPc5x/lFcVS1cL472x2/R1/ORrY5Y
-	k6c+dbncHY4DjiUgw0DiEM0PokLcRqQVy4nJa0YLD6r3UH5wStMQMZYar4WL3u1EVoXN
-	6SBKa8lAUaC8FpMlJnxNbOQHOVEg76ubJUgsAqdG+ldQrCPrD89lwsBKBQRUaztWPlTm
-	E7tR2M+urMM77Cfp8wjca8sfZeq7eUbiY3BP73uX5VQK6yW53np1ANK77F/U5xo4Mzu9
-	lDOA==
-X-Gm-Message-State: AOUpUlEfGXCr27QNWy3QM0nf6a8gHiFf7R5yh7aRwxYyySOfXCm5BHUS
-	ipwRJ18c4zoLjmQ/H1EOUXr3qOiATdYSRVh72x8=
-X-Google-Smtp-Source: AA+uWPy2b27w5a6DvKevTam+FHQuFZdr+8CyqxsGERiMAc9tX6UCLuasguwh7kT7h61pzjmzkEdj6sEGUlpz2SYA6jA=
-X-Received: by 2002:a0c:e505:: with SMTP id
-	l5-v6mr20113451qvm.128.1534272642709; 
-	Tue, 14 Aug 2018 11:50:42 -0700 (PDT)
-MIME-Version: 1.0
-References: <1533092773-22300-1-git-send-email-ricardo@foundries.io>
-	<CAMKF1sqAMyN2QErgLn1VZ4hxXjm-fGdRTnZ5ZeBEs5mXOqEL+g@mail.gmail.com>
-In-Reply-To: <CAMKF1sqAMyN2QErgLn1VZ4hxXjm-fGdRTnZ5ZeBEs5mXOqEL+g@mail.gmail.com>
-From: Andy <andreas.kling@gmail.com>
-Date: Tue, 14 Aug 2018 20:50:31 +0200
-Message-ID: <CAE-gg=6XBsP+Nm0fdSrmou6bYWYYcb4=W7P78KJt=7MTrh98-g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/2] mozjs: set -fno-schedule-insns2 on both CFLAGS and CXXFLAGS
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=E3w5VVLJ2F0JpL1NaIvDqj4pxTm7isYyfMjS02oIa6k=;
+	b=VH2UTo26xsxYJonWaGRpCJ6YQ3azTxUL8D6tBubgerh9+7bjDthMB3AvslKR75BKAZ
+	WyUQiAu3lUw9iJq1vmAwjMyC+NLnmni0aRmuD2yCzkpVr01cFcZNAT5oV6NUIcY7B56B
+	TlndpiAENNwsj+Ag00Wddo9JT0p6L+GBPu/4mezdJjfR2D8jmWyfgfZolTHIOyHNHys+
+	GetwD6YuQIY4snq+84gvS3xY8CBCvm709y9m0BwWQu4L+6uRscDWsOJTFo3vBOje/HNU
+	6PZOZnEC4cnjM7cYSHfElhIkfsp9OWumEHHCrl3WOnhq5XiM8A63t5gxA1TJFJdZivXP
+	a1VQ==
+X-Gm-Message-State: AOUpUlEet6VrTu3sPgLitzY0dQMapXDNxr6AX6icKIWiG4ekeQKlXKmO
+	0K9Bb9s5esspGuUpSUEBhEggN4WKrTk=
+X-Google-Smtp-Source: AA+uWPwbEb2MPLQN5v4ycalwIm20NW1VQ/wE4TyamUV/JkiwcR3oWH7mcu+AuuK7lW+csc2X3aytrQ==
+X-Received: by 2002:ac8:4102:: with SMTP id
+	q2-v6mr23058854qtl.222.1534278265706; 
+	Tue, 14 Aug 2018 13:24:25 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.61.164])
+	by smtp.gmail.com with ESMTPSA id
+	d137-v6sm13045251qkg.91.2018.08.14.13.24.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 14 Aug 2018 13:24:24 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Aug 2018 16:24:03 -0400
+Message-Id: <1534278243-7774-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pandas: update to version 0.23.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,55 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 18:50:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 14 Aug 2018 20:24:25 -0000
 
-Hi,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pandas.inc                 | 4 ++--
+ .../python/{python-pandas_0.23.3.bb => python-pandas_0.23.4.bb}       | 0
+ .../python/{python3-pandas_0.23.3.bb => python3-pandas_0.23.4.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pandas_0.23.3.bb => python-pandas_0.23.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pandas_0.23.3.bb => python3-pandas_0.23.4.bb} (100%)
 
-Am Do., 2. Aug. 2018 um 10:34 Uhr schrieb Khem Raj <raj.khem@gmail.com>:
->
-> Hi Ricardo
->
->
-> On Tue, Jul 31, 2018 at 8:06 PM Ricardo Salveti <ricardo@foundries.io> wrote:
-> >
-> > Mozjs fails to start on several architectures due broken build
-> > optimizations when building with GCC >= 6.
-> >
-> > Set -fno-schedule-insns2 as workaround (flag also used by Firefox and
-> > Debian).
-> >
-> > Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
-> > ---
-> >  meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 5 +++++
-> >  1 file changed, 5 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
-> > index da80b63..adc27ac 100644
-> > --- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
-> > +++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
-> > @@ -30,6 +30,11 @@ CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
-> >
-> >  DEPENDS += "nspr zlib"
-> >
-> > +# Avoid broken JIT on several architectures (from Firefox and Debian)
-> > +# https://bugzilla.mozilla.org/show_bug.cgi?id=1245783
-> > +CFLAGS += "-fno-schedule-insns2"
-> > +CXXFLAGS += "-fno-schedule-insns2"
-> > +
->
-> Could you test with -fno-tree-vrp -fno-strict-aliasing
-> -fno-delete-null-pointer-checks instead of -fno-schedule-insns2
->
+diff --git a/meta-python/recipes-devtools/python/python-pandas.inc b/meta-python/recipes-devtools/python/python-pandas.inc
+index 8b4914f..d6ca243 100644
+--- a/meta-python/recipes-devtools/python/python-pandas.inc
++++ b/meta-python/recipes-devtools/python/python-pandas.inc
+@@ -6,8 +6,8 @@ HOMEPAGE = "http://pandas.pydata.org/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ee0470f2de336c370a71c2f8d5e81c11"
+ 
+-SRC_URI[md5sum] = "ed532e0cdc2aebe190f01e2ae84162f6"
+-SRC_URI[sha256sum] = "9cd3614b4e31a0889388ff1bd19ae857ad52658b33f776065793c293a29cf612"
++SRC_URI[md5sum] = "7b597c7f989652e0c9af5f09a157e3ae"
++SRC_URI[sha256sum] = "5b24ca47acf69222e82530e89111dd9d14f9b970ab2cd3a1c2c78f0c4fbba4f4"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pandas_0.23.3.bb b/meta-python/recipes-devtools/python/python-pandas_0.23.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pandas_0.23.3.bb
+rename to meta-python/recipes-devtools/python/python-pandas_0.23.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.23.3.bb b/meta-python/recipes-devtools/python/python3-pandas_0.23.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pandas_0.23.3.bb
+rename to meta-python/recipes-devtools/python/python3-pandas_0.23.4.bb
+-- 
+2.7.4
 
-at least polkit is able to start again using
-
-CFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
-CXXFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
-
-before I got:
-Assertion failure: !joinable()
-in cortexa7t2hf-neon-poky-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/threading/Thread.h:122
-
-Andy
 
