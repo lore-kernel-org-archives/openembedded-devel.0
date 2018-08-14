@@ -1,14 +1,13 @@
 Return-Path: <prvs=7572862bc=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 61CD57902F
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id D593279028
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 14:46:40 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; 
-   d="scan'208";a="1607080"
+	Tue, 14 Aug 2018 14:50:36 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; d="scan'208";a="11830870"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
-References: <20180813154628.32257-1-richard.leitner@skidata.com>
-	<e59fb02e35fd04a6b888ed84bc409531c579cf18.camel@andred.net>
+References: <20180813193251.4079-1-git@andred.net>
+	<20180814125058.16842-1-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -54,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <3b88006f-132f-7067-81ad-c551769c3633@skidata.com>
-Date: Tue, 14 Aug 2018 16:47:16 +0200
+Message-ID: <40ccf60e-bf58-5fa8-394f-d6d47e1d737e@skidata.com>
+Date: Tue, 14 Aug 2018 16:51:13 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <e59fb02e35fd04a6b888ed84bc409531c579cf18.camel@andred.net>
+In-Reply-To: <20180814125058.16842-1-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH v2] icedtea: disable error format-overflow for gcc 7
+Subject: Re: [meta-java][PATCH v3] openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,38 +75,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 14:46:40 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 14:50:37 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Hi,
+On 8/14/18 2:50 PM, André Draszik wrote:
 
-On 8/14/18 10:27 AM, André Draszik wrote:
-> On Mon, 2018-08-13 at 17:46 +0200, Richard Leitner wrote:
->> From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
->>
->> As no patch has been found in debian and hotspot repo for this issue we
->> just disable this warning which was introduced with GCC 7.
->>
->> Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-> 
-> Two points:
-> 
-> TBH, I'd be a bit wary of this considering the recent fallout from silencing
-> compiler warnings. Can you try to address this instead please?
+> ---
+> v3:
+> * rebase against master-next
 
-I agree... Therefore I've removed the patch from master-next.
-
-> 
-> E.g. OpenJDK-8 has very similar code, so should be possible?
-> 
-> Also, I have gcc 7.3, yet I don't see that error. Is there something else
-> happening?
-
-We have already looked into it more deeply and will probably send a patch
-for it next week. Although we are currently not entirely sure why the compiler
-is complaining ;-)
+Thank you :-)
 
 regards;Richard.L
 
