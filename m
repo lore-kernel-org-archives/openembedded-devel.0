@@ -1,23 +1,23 @@
-Return-Path: <prvs=756920f33=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 52FD078F34
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D5F278F4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Aug 2018 20:58:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,235,1531778400"; d="scan'208";a="11815827"
-To: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-References: <20180813154628.32257-1-richard.leitner@skidata.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <d6e9741b-9dec-6423-39d8-3b0384388988@skidata.com>
-Date: Mon, 13 Aug 2018 22:58:50 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Tue, 14 Aug 2018 01:46:22 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7E1kMoo010392
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 13 Aug 2018 18:46:23 -0700
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
+	Mon, 13 Aug 2018 18:46:10 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 18:46:10 -0700
+Message-ID: <20180814014610.40143-1-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <20180813154628.32257-1-richard.leitner@skidata.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH v2] icedtea: disable error format-overflow for gcc 7
+Subject: [meta-oe][PATCH] kernel-selftest: compatible with latest kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,59 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Aug 2018 20:58:51 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: de-AT
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 14 Aug 2018 01:46:23 -0000
+Content-Type: text/plain
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+There are some new program added for bpf. So we make corresponding
+modifications.
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+---
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-If you have any questions, please let me know.
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 27d98a304..e09831f76 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -79,7 +79,7 @@ do_configure() {
+     :
+ }
+ 
+-do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
++do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
+ python copy_kselftest_source_from_kernel() {
+     sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
+     src_dir = d.getVar("STAGING_KERNEL_DIR")
+@@ -94,8 +94,9 @@ python copy_kselftest_source_from_kernel() {
+             bb.utils.copyfile(src, dest)
+ }
+ 
+-remove_clang_related() {
+-	sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
++remove_unrelated() {
++	sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile
++    sed -i '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile
+ }
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-- 
+2.11.0
 
-regards;Richard.L
-
-On 08/13/2018 05:46 PM, Richard Leitner wrote:
-> From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-> 
-> As no patch has been found in debian and hotspot repo for this issue we
-> just disable this warning which was introduced with GCC 7.
-> 
-> Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-> 
-> Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
-> Changes v2:
->     + adapted by Richard Leitner to use the openjdk-build-helper class from
->       André Draszik instead of our own in the java class.
->      (Therefore it now depends on the "prepare for openjdk-8 build infra re-use"
->       series from André)
-> ---
->   recipes-core/icedtea/icedtea7-native.inc | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-> index 30fb24a..796acb6 100644
-> --- a/recipes-core/icedtea/icedtea7-native.inc
-> +++ b/recipes-core/icedtea/icedtea7-native.inc
-> @@ -24,6 +24,12 @@ CFLAGS_append = " -fno-tree-dse"
->   CXXFLAGS_append = " -fno-tree-dse"
->   CXX_append = " -std=gnu++98"
->   
-> +# Disable format-overflow error with host g++ >= 7.3.
-> +# This bug is known as https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-> +FLAGS_GCC7 = " -Wno-error=format-overflow"
-> +BUILD_CFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
-> +BUILD_CXXFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
-> +
->   inherit native java autotools pkgconfig
->   inherit openjdk-build-helper
->   
-> 
 
