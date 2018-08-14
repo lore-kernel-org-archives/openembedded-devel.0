@@ -1,51 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 78FE379057
+Return-Path: <andreas.kling@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id E30B779062
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 16:35:16 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id k19-v6so9495178pfi.1
+	Tue, 14 Aug 2018 18:50:41 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id q12-v6so22257126qtp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 09:35:17 -0700 (PDT)
+	Tue, 14 Aug 2018 11:50:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8cmD7z6hux3/JweTqdP43H02JMCGBY/m4kEQz1hZjsM=;
-	b=IaSjRcn7FTsxyDj1UobiZ6DzXQ3QEORhMN5geGdg3rsBW4OjJbNT4NihOhjFe6vD3j
-	c8VnV1gcWjNMfNxguFMJ1dRtB7wlwAsnJbgwyQwxQKDQs+2A9yniGPviMjDwSvTeZNIg
-	nZff6UBkPq9j5t6pMAeJ/rgEJy8DkN8zny3mohcac/YF+03tdvhxBciXJjdsDqLq3xf0
-	6Cd2TCc3lsa8EPd2JO1Q7evHQUwebOgAzhDo94giWTZi7noktorFotBWfyV5m4sQw2OH
-	V4f4uiESS90wYQV3tnpD7hSb6x+pdhQ4VEwS0m4Hn88j5ZnI0JA/j5Q6xJNJYkHZ/Ays
-	+dig==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=yIFL+CKhxTrmd4v6MWw9b/yR0BGqNcY/l6CA8Cl7edA=;
+	b=rifqlGDkPE04PAVi2G+5EV+StpZICLH/Tx2Ih27UZ4nt1q6mnhp/qZ7nhcmR6wgDRE
+	Dhz/KG0KuS4dtaCeak7KFjNq14afWekOI6g3bhGHEEnXQgUOhUrY3rJSWCqqia6ldYCD
+	fBd/AxAmfj2bUKSjV9HRoqTSGNMvsSDSLRNRkWjZ6SivTWaeQdUCk8cgZvXTor3wIwqy
+	0j333aR5Nvn9ofKKbLM5Woeo58nbSuAhbCOVirC1Y9dn8NQJgneIk3HVdbs56lZ+2Lur
+	Xj6nCOREbhDVcjxB2hVbcdBZjBszp5uvh9o1qoSEAoInraKbQ9M7vXaKTahR2zxW8UhP
+	GITg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=8cmD7z6hux3/JweTqdP43H02JMCGBY/m4kEQz1hZjsM=;
-	b=Zhtymx1xKZBUH6PclUqMmCnGUs3NaHw7SttrPm9OzOp2oMQjoQPHvMtJm6VoDAy8ay
-	Ol4ZC0EZljHBoQ81A1zSl3GxI4dKyjIN4/+ZmCgMmdgdt8QRKoxHjmqgJHx92K2ntBSZ
-	vQo3Y12cT37D2PVJ6URvOf6L86rnuiAjZ2tDyXS358Gvm19TWgYDr4SufmqalU1mpTBL
-	jWaNmM+JkLRVjRYEgNKd6z+p3WGWSIrjFDnBucRejCydLcJsOg6VaNGY7aIyyuLCrucx
-	xcAFLGmog3DDhHHwhIXqKhL5YtlVnkY+VamuhSC1dJr+S8QuvuwoZIVxzgKsSdefAork
-	5aEA==
-X-Gm-Message-State: AOUpUlH0lS47s+Pq7LJ4XDmQ66YYxryMRm/gUYgiJxHJoyL4Y8Hqce5+
-	Nkrbj2lI/bxUMcbzn6B7Vv9BvzOI
-X-Google-Smtp-Source: AA+uWPybqZuxz8wXHVDT31rv/EmsD7n1TaSYwcmR7Xh59MEykXZyebnstnEZcqY7Dok7PrWQwqCVYw==
-X-Received: by 2002:a63:8dca:: with SMTP id
-	z193-v6mr22009142pgd.228.1534264517290; 
-	Tue, 14 Aug 2018 09:35:17 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::f217])
-	by smtp.gmail.com with ESMTPSA id
-	16-v6sm35564388pfo.164.2018.08.14.09.35.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Aug 2018 09:35:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Aug 2018 09:34:45 -0700
-Message-Id: <20180814163445.24736-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180814163445.24736-1-raj.khem@gmail.com>
-References: <20180814163445.24736-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] ckermit: Pass -DNOARROWKEYS by default
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=yIFL+CKhxTrmd4v6MWw9b/yR0BGqNcY/l6CA8Cl7edA=;
+	b=ZMmjEev2edPTBjuzT0UqpZiQL1k3hGaZ4CmRxzTz2QhZ7cD/wd9QOgOI+C8kCYtXkm
+	Xo8T9KQGO6lllOQfR8adFAwK+R2Uzn1rmUWNC3lBPc5x/lFcVS1cL472x2/R1/ORrY5Y
+	k6c+dbncHY4DjiUgw0DiEM0PokLcRqQVy4nJa0YLD6r3UH5wStMQMZYar4WL3u1EVoXN
+	6SBKa8lAUaC8FpMlJnxNbOQHOVEg76ubJUgsAqdG+ldQrCPrD89lwsBKBQRUaztWPlTm
+	E7tR2M+urMM77Cfp8wjca8sfZeq7eUbiY3BP73uX5VQK6yW53np1ANK77F/U5xo4Mzu9
+	lDOA==
+X-Gm-Message-State: AOUpUlEfGXCr27QNWy3QM0nf6a8gHiFf7R5yh7aRwxYyySOfXCm5BHUS
+	ipwRJ18c4zoLjmQ/H1EOUXr3qOiATdYSRVh72x8=
+X-Google-Smtp-Source: AA+uWPy2b27w5a6DvKevTam+FHQuFZdr+8CyqxsGERiMAc9tX6UCLuasguwh7kT7h61pzjmzkEdj6sEGUlpz2SYA6jA=
+X-Received: by 2002:a0c:e505:: with SMTP id
+	l5-v6mr20113451qvm.128.1534272642709; 
+	Tue, 14 Aug 2018 11:50:42 -0700 (PDT)
+MIME-Version: 1.0
+References: <1533092773-22300-1-git-send-email-ricardo@foundries.io>
+	<CAMKF1sqAMyN2QErgLn1VZ4hxXjm-fGdRTnZ5ZeBEs5mXOqEL+g@mail.gmail.com>
+In-Reply-To: <CAMKF1sqAMyN2QErgLn1VZ4hxXjm-fGdRTnZ5ZeBEs5mXOqEL+g@mail.gmail.com>
+From: Andy <andreas.kling@gmail.com>
+Date: Tue, 14 Aug 2018 20:50:31 +0200
+Message-ID: <CAE-gg=6XBsP+Nm0fdSrmou6bYWYYcb4=W7P78KJt=7MTrh98-g@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] mozjs: set -fno-schedule-insns2 on both CFLAGS and CXXFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,50 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 16:35:16 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 18:50:42 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-glibc 2.28+ has caught up with rest of libraries
-and now build complains in same manner as musl
+Hi,
 
-ckucmd.c: In function 'cmdconchk':
-ckucmd.c:7386:14: error: 'FILE' {aka 'struct _IO_FILE'} has no member named '_cnt'
-     x = stdin->_cnt;
-              ^~
+Am Do., 2. Aug. 2018 um 10:34 Uhr schrieb Khem Raj <raj.khem@gmail.com>:
+>
+> Hi Ricardo
+>
+>
+> On Tue, Jul 31, 2018 at 8:06 PM Ricardo Salveti <ricardo@foundries.io> wrote:
+> >
+> > Mozjs fails to start on several architectures due broken build
+> > optimizations when building with GCC >= 6.
+> >
+> > Set -fno-schedule-insns2 as workaround (flag also used by Firefox and
+> > Debian).
+> >
+> > Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+> > ---
+> >  meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 5 +++++
+> >  1 file changed, 5 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+> > index da80b63..adc27ac 100644
+> > --- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+> > +++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+> > @@ -30,6 +30,11 @@ CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
+> >
+> >  DEPENDS += "nspr zlib"
+> >
+> > +# Avoid broken JIT on several architectures (from Firefox and Debian)
+> > +# https://bugzilla.mozilla.org/show_bug.cgi?id=1245783
+> > +CFLAGS += "-fno-schedule-insns2"
+> > +CXXFLAGS += "-fno-schedule-insns2"
+> > +
+>
+> Could you test with -fno-tree-vrp -fno-strict-aliasing
+> -fno-delete-null-pointer-checks instead of -fno-schedule-insns2
+>
 
-therefore add -DNOARROWKEYS even for glibc as well
+at least polkit is able to start again using
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/ckermit/ckermit_302.bb | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+CFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
+CXXFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
 
-diff --git a/meta-oe/recipes-support/ckermit/ckermit_302.bb b/meta-oe/recipes-support/ckermit/ckermit_302.bb
-index 61c08ee276..abeeeccd1d 100644
---- a/meta-oe/recipes-support/ckermit/ckermit_302.bb
-+++ b/meta-oe/recipes-support/ckermit/ckermit_302.bb
-@@ -20,12 +20,6 @@ export INFODIR = "${infodir}"
- 
- EXTRA_OEMAKE = "-e MAKEFLAGS="
- 
--# Additional flags. For uclibc we add -DNOARROWKEYS which stops ckermit
--# trying to look inside the stdio headers.
--CKERMIT_ADDITIONAL = ""
--CKERMIT_ADDITIONAL_libc-uclibc = "-DNOARROWKEYS"
--CKERMIT_ADDITIONAL_libc-musl = "-DNOARROWKEYS"
--
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_compile () {
-@@ -49,7 +43,7 @@ do_compile () {
-         -DNORESEND -DNOAUTODL -DNOSTREAMING -DNOHINTS -DNOCKXYZ -DNOLEARN \
-         -DNOMKDIR -DNOPERMS -DNOCKTIMERS -DNOCKREGEX -DNOREALPATH \
-         -DCK_SMALL -DNOLOGDIAL -DNORENAME -DNOWHATAMI \
--        ${CKERMIT_ADDITIONAL}"
-+        -DNOARROWKEYS"
- }
- 
- do_install () {
--- 
-2.18.0
+before I got:
+Assertion failure: !joinable()
+in cortexa7t2hf-neon-poky-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/threading/Thread.h:122
 
+Andy
 
