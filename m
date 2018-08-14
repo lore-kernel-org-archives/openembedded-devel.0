@@ -1,52 +1,44 @@
-Return-Path: <prvs=75725d379=Mikko.Rapeli@bmw.de>
-X-Greylist: delayed 590 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 Aug 2018 08:00:57 UTC
-Received: from esa6.bmw.c3s2.iphmx.com (esa6.bmw.c3s2.iphmx.com
-	[68.232.139.124])
-	by mail.openembedded.org (Postfix) with ESMTP id 94B2274583
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-yw1-f65.google.com (mail-yw1-f65.google.com
+	[209.85.161.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B96C74573
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 08:00:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
-	t=1534233660; x=1565769660;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-id:content-transfer-encoding: mime-version;
-	bh=tBk6GWWCfRf8Dym+Fz5XeG3xbF2sIJ6E4u6NHHe50uI=;
-	b=bfe7HhlMS618nLBXaEl20qCBtqRNfQRcBXux/vsSqd2B5YS4jMYygKZS
-	Ar4qeNXw3BIU71SHlFX8519N24esoZlzqrzdYudiPQZcYnQaOuBSg03zW
-	8JQZrCy/ZMl73Zy9Kgfus9RQfaG4nLnfDnBmZXp4a4uOj9TwGN0w69gRj 0=;
-Received: from esagw2.bmwgroup.com (HELO esagw2.muc) ([160.46.252.38]) by
-	esa6.bmw.c3s2.iphmx.com with ESMTP/TLS; 14 Aug 2018 09:51:07 +0200
-Received: from esabb6.muc ([160.50.100.50])  by esagw2.muc with ESMTP/TLS;
-	14 Aug 2018 09:51:06 +0200
-Received: from smucm10m.bmwgroup.net (HELO smucm10m.europe.bmw.corp)
-	([160.48.96.49])
-	by esabb6.muc with ESMTP/TLS; 14 Aug 2018 09:51:06 +0200
-Received: from smucm10k.europe.bmw.corp (160.48.96.47) by
-	smucm10m.europe.bmw.corp
-	(160.48.96.49) with Microsoft SMTP Server (TLS;
-	Tue, 14 Aug 2018 09:51:06 +0200
-Received: from smucm10k.europe.bmw.corp ([160.48.96.47]) by
-	smucm10k.europe.bmw.corp ([160.48.96.47]) with mapi id 15.00.1367.000;
-	Tue, 14 Aug 2018 09:51:06 +0200
-From: <Mikko.Rapeli@bmw.de>
-To: <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH] ltrace: added alternate source
-Thread-Index: AQHUMwDSMnDyCBQUUkuCSq7KnoqMWqS93gaAgADhjQA=
-Date: Tue, 14 Aug 2018 07:51:06 +0000
-Message-ID: <20180814075105.GN8291@hiutale>
-References: <MAXPR01MB0348B0F7FCE0B995544DA5B291390@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
-	<CAMKF1sosfZqgHsHaKi7ifNPobSiZxnzULf=15BLOXRw9TCa-nA@mail.gmail.com>
-In-Reply-To: <CAMKF1sosfZqgHsHaKi7ifNPobSiZxnzULf=15BLOXRw9TCa-nA@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [192.168.221.42]
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ltrace: added alternate source
+	Tue, 14 Aug 2018 08:27:16 +0000 (UTC)
+Received: by mail-yw1-f65.google.com with SMTP id c135-v6so15636166ywa.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Aug 2018 01:27:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Epy8lHqDUBZTEEWoH5XIJ9Kim/Xb1Q3FF6Rh2MEpftw=;
+	b=BbNzU3GWjbLrhaHaoOJgCXOa0yhH9UGQT/Ytz/YCx8bJyEsHZf9Q6nFAmcN1j0CwIY
+	N/Oa+USVZe0X7W30rimiUalEq9zZ+xjYdCr1Hz/vaaFZcxrtBEcSl1WA9jCWuwnwdjaa
+	ZT/IERiJzlzRNNkbWe7+Ca75DVhK1tpW/hyC4MQ8Wade+SW12LPoZdWafKUYigQSLEne
+	umJFt4ATxm+iD2frALJ2eV+2UJMqbMUKgJPyUh0zDmkH/KqTOD7tolkgMOyfiKjd4SO8
+	G8vgmc4RBa3GnwywtskXiUg3o2e+Wx0ydTh8cJi3WAt3/KzK0MXkqEmDCIktKdT++GR1
+	HtOQ==
+X-Gm-Message-State: AOUpUlG1GyzSFCOm/7m+7jvYCjfif1IgPYtjDEl3g/VTea12sbb3q1BE
+	+FgBPOAwfX6hA6AjpgCfhc9+tqwT
+X-Google-Smtp-Source: AA+uWPyrdDzvj/C1rMUEYRj90ArPX39ofu/MNzVRPvvYMn1vrC0Q8mB7j3lXrACoipGesXhqDVZ6gg==
+X-Received: by 2002:a81:d52:: with SMTP id
+	79-v6mr11765695ywn.123.1534235237821; 
+	Tue, 14 Aug 2018 01:27:17 -0700 (PDT)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	139-v6sm13660198ywr.61.2018.08.14.01.27.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 14 Aug 2018 01:27:16 -0700 (PDT)
+Message-ID: <e59fb02e35fd04a6b888ed84bc409531c579cf18.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Aug 2018 09:27:14 +0100
+In-Reply-To: <20180813154628.32257-1-richard.leitner@skidata.com>
+References: <20180813154628.32257-1-richard.leitner@skidata.com>
+X-Mailer: Evolution 3.28.2-1 
+Mime-Version: 1.0
+Subject: Re: [meta-java][PATCH v2] icedtea: disable error format-overflow for gcc 7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,36 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 08:00:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <D735247C961F8F4B8B5C25F2998ADCEC@bmwmail.corp>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Aug 2018 08:27:18 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 13, 2018 at 11:23:49AM -0700, Khem Raj wrote:
-> On Mon, Aug 13, 2018 at 5:37 AM Aditya Tayade <Aditya.Tayade@kpit.com> wr=
-ote:
-> >
-> > Description:
-> > As alioth (the Debian service hosting anonscm) has been discontinued us=
-ing https://alioth-archive.debian.org/git/ltrace/ltrace.git.tar.xz as a new=
- source for ltrace.
-> > The new source tree SRCREV SHA "ea8928dab8" and old source tree (from d=
-iscontinued link)SRCREV SHA "c22d359433" points to same git history but hav=
-e some diffs.
-> > Hence added a patch which applies the diff to SHA "ea8928dab8" to make =
-it same as SHA "c22d359433" from the earlier git source.
-> >
->=20
-> it might be better to push a repo from
-> https://alioth-archive.debian.org/git/ltrace/ltrace.git.tar.xz into
-> github or some place. Have we asked the debian salsa migration team if
-> this is planned for migration at all ?
+On Mon, 2018-08-13 at 17:46 +0200, Richard Leitner wrote:
+> From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+> 
+> As no patch has been found in debian and hotspot repo for this issue we
+> just disable this warning which was introduced with GCC 7.
+> 
+> Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
 
-Yes, but hosting the git repo feels like taking over maintenance of it too.
+Two points:
 
-This patch enables building ltrace from poky master and sumo again without
-ltrace sources in download caches. Thus I would take it.
+TBH, I'd be a bit wary of this considering the recent fallout from silencing
+compiler warnings. Can you try to address this instead please?
 
--Mikko=
+E.g. OpenJDK-8 has very similar code, so should be possible?
+
+Also, I have gcc 7.3, yet I don't see that error. Is there something else
+happening?
+
+
+Cheers,
+Andre'
+
 
