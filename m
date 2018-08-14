@@ -1,44 +1,58 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yw1-f65.google.com (mail-yw1-f65.google.com
-	[209.85.161.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B96C74573
+Return-Path: <yevgenyp@pointgrab.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C560078F5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 08:27:16 +0000 (UTC)
-Received: by mail-yw1-f65.google.com with SMTP id c135-v6so15636166ywa.0
+	Tue, 14 Aug 2018 09:09:18 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id h14-v6so16532853wrw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 01:27:18 -0700 (PDT)
+	Tue, 14 Aug 2018 02:09:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pointgrab-com.20150623.gappssmtp.com; s=20150623;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=yajfi09wolKxzWRF3lagAc7wzHAY8wQMIFCPCECHrQY=;
+	b=vYikrvkggKQcKY3EyIA/djzufRV/JT88lK0HqYnE4AW47TRTAPUem792RAYvB1k/+V
+	aT9rFXcK9b1DNVFL2VqpHwgql8XPP7ZKwYo+ZagMnho0HHfrWLbYP6mX2L0gyjll6i7/
+	g5yzqdSa9t42WRW3EW2YNLXoMcxxXX8utncLDQZJF33FzKPC3n8jRL4TpZrpC/BotPUD
+	GLOvkQmvZe0kDR1YaZOHzC05TyXTKbMt7joWBRDQUB3PpylkKKlCwreM09xHwJPZFNBp
+	ePMd5w75fdoV9/6UFgV0k3a/sa4a3d/IlgNqpxVvkf46ETnVWX+TNhv04SM/kysAxG62
+	znZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Epy8lHqDUBZTEEWoH5XIJ9Kim/Xb1Q3FF6Rh2MEpftw=;
-	b=BbNzU3GWjbLrhaHaoOJgCXOa0yhH9UGQT/Ytz/YCx8bJyEsHZf9Q6nFAmcN1j0CwIY
-	N/Oa+USVZe0X7W30rimiUalEq9zZ+xjYdCr1Hz/vaaFZcxrtBEcSl1WA9jCWuwnwdjaa
-	ZT/IERiJzlzRNNkbWe7+Ca75DVhK1tpW/hyC4MQ8Wade+SW12LPoZdWafKUYigQSLEne
-	umJFt4ATxm+iD2frALJ2eV+2UJMqbMUKgJPyUh0zDmkH/KqTOD7tolkgMOyfiKjd4SO8
-	G8vgmc4RBa3GnwywtskXiUg3o2e+Wx0ydTh8cJi3WAt3/KzK0MXkqEmDCIktKdT++GR1
-	HtOQ==
-X-Gm-Message-State: AOUpUlG1GyzSFCOm/7m+7jvYCjfif1IgPYtjDEl3g/VTea12sbb3q1BE
-	+FgBPOAwfX6hA6AjpgCfhc9+tqwT
-X-Google-Smtp-Source: AA+uWPyrdDzvj/C1rMUEYRj90ArPX39ofu/MNzVRPvvYMn1vrC0Q8mB7j3lXrACoipGesXhqDVZ6gg==
-X-Received: by 2002:a81:d52:: with SMTP id
-	79-v6mr11765695ywn.123.1534235237821; 
-	Tue, 14 Aug 2018 01:27:17 -0700 (PDT)
-Received: from tfsielt31850 ([77.107.218.170])
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=yajfi09wolKxzWRF3lagAc7wzHAY8wQMIFCPCECHrQY=;
+	b=OtOoAyBQ14EBfvEhiYPWqy/x4o1zbLrmW8s6B24P7mhsK7AkdTmhTNMarHaJRaoaP2
+	ypT5B222HmDRiWiP9sxtMJmvI2y6PS+gcTO8eiMVe0YdtmUOOVpNgaEJEXQ9NhGFza1/
+	cjCUAb5BurbryRGm90iqpggkhFZzMk9delpSLySpCA4FKt/wf+mr9m6C9sQPAd6gxWth
+	Nsxz+/wKY+diDoMnxsogCpgL77rLh9ljgxzQi90/l0XQATzazP0kqavzEGrqv3iSUuY3
+	QKl5mu5Ds+SYxFjAeeK7jtLSvuraAgUjOur07RZHunWamVIQ/FJvwrf51ZoYxuYOqJ2+
+	FCeA==
+X-Gm-Message-State: AOUpUlFiD65Ru0dn+T8u7bwy8VLVfk8BnwP3yyuNFX/hUYmI/yuviPNW
+	wVJihAr5ZYY0T8anJ1Br0Wvgq7ACXk8=
+X-Google-Smtp-Source: AA+uWPwWl5l+MUG/lZBdXP6VMuoFM2s6ssbHEoBsNzJNgXmvxSYxfl4AM+e3Bj+le1xuX7qQCz/83w==
+X-Received: by 2002:adf:dc4c:: with SMTP id
+	m12-v6mr13722852wrj.84.1534237759099; 
+	Tue, 14 Aug 2018 02:09:19 -0700 (PDT)
+Received: from [192.168.225.135] ([77.222.132.139])
 	by smtp.gmail.com with ESMTPSA id
-	139-v6sm13660198ywr.61.2018.08.14.01.27.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 14 Aug 2018 01:27:16 -0700 (PDT)
-Message-ID: <e59fb02e35fd04a6b888ed84bc409531c579cf18.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Aug 2018 09:27:14 +0100
-In-Reply-To: <20180813154628.32257-1-richard.leitner@skidata.com>
-References: <20180813154628.32257-1-richard.leitner@skidata.com>
-X-Mailer: Evolution 3.28.2-1 
-Mime-Version: 1.0
-Subject: Re: [meta-java][PATCH v2] icedtea: disable error format-overflow for gcc 7
+	y14-v6sm23631963wrq.45.2018.08.14.02.09.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Aug 2018 02:09:18 -0700 (PDT)
+To: Richard Leitner <richard.leitner@skidata.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1534178993-13146-1-git-send-email-yevgenyp@pointgrab.com>
+	<35140665-b22c-5dbf-4667-34f3fd3e3a06@skidata.com>
+From: Yevgeny Popovych <yevgenyp@pointgrab.com>
+Message-ID: <7f00259f-da02-17c0-54cb-344f804e2240@pointgrab.com>
+Date: Tue, 14 Aug 2018 12:09:17 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <35140665-b22c-5dbf-4667-34f3fd3e3a06@skidata.com>
+Subject: Re: [meta-java][PATCH] dbus-java: Do not build any documentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,30 +65,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 08:27:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 14 Aug 2018 09:09:19 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2018-08-13 at 17:46 +0200, Richard Leitner wrote:
-> From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
+Hi Richard,
+
+Thank you, please find my answers below.
+If you are going to accept this, can you consider also applying to sumo?
+
+
+On 08/14/2018 09:56 AM, Richard Leitner wrote:
+> Hi Yevgeny,
+> thank you for your patch.
 > 
-> As no patch has been found in debian and hotspot repo for this issue we
-> just disable this warning which was introduced with GCC 7.
+> Please find my comments below.
 > 
-> Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
+> On 8/13/18 6:49 PM, Yevgeny Popovych wrote:
+>> Support for respective docbook tools has been removed in pyro release.
+> 
+> Do you have any reference for that?
+> It would be great if you could include it here.
 
-Two points:
+Yes, it was removed by commit 4814d93646f6b86aaffbd3fca1af29c8c577db5b
+in openembedded-core, which is included since pyro release.
 
-TBH, I'd be a bit wary of this considering the recent fallout from silencing
-compiler warnings. Can you try to address this instead please?
+> 
+> Is there no alternative to removing the manpages?
 
-E.g. OpenJDK-8 has very similar code, so should be possible?
+Nothing I can think of.. and it's probably not a huge loss.
+For instance, before removing SGML stack Alexander Kanavin 
+removed man pages for iputils (58ac4da13cf32e1c8484d1a6ac51f0f439a6932c).
 
-Also, I have gcc 7.3, yet I don't see that error. Is there something else
-happening?
+> 
+>>
+>> Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
+>> Cc: Henning Heinold <henning@itconsulting-heinold.de>
+>> Cc: Maxin John <maxin.john@intel.com>
+>> Cc: Otavio Salvador <otavio@ossystems.com.br>
+>> Cc: Richard Leitner <richard.leitner@skidata.com>
+>> ---
+>>  recipes-extended/dbus/dbus-java_2.7.bb | 22 ++--------------------
+>>  1 file changed, 2 insertions(+), 20 deletions(-)
+>>
+>> diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
+>> index 4964cf8..0b093a0 100644
+>> --- a/recipes-extended/dbus/dbus-java_2.7.bb
+>> +++ b/recipes-extended/dbus/dbus-java_2.7.bb
+>> @@ -6,7 +6,7 @@ HOMEPAGE = "http://dbus.freedesktop.org/doc/dbus-java"
+>>  SECTION = "libs"
+>>  LICENSE = "LGPL-2.1 & AFL-2.1"
+>>  
+>> -DEPENDS = "libmatthew docbook-utils-native docbook-sgml-dtd-4.1-native fastjar-native"
+>> +DEPENDS = "libmatthew gettext-native fastjar-native"
+>>  RDEPENDS_${PN}-viewer = "java2-runtime libunixsocket-java ${PN}-bin libmatthew-debug-java ${JPN}"
+>>  RDEPENDS_${PN}-bin = "java2-runtime libunixsocket-java libmatthew-debug-java ${JPN}"
+>>  RSUGGESTS_${JPN} = "libunixsocket-java"
+>> @@ -49,15 +49,6 @@ do_compile () {
+>>  		JAVAUNIXJARDIR=${datadir_java} \
+>>  		JAVAUNIXLIBDIR=${libdir_jni} \
+>>  		bin
+>> -
+>> -	# Generate man pages.
+>> -	oe_runmake \
+>> -		JAVAC="oefatal \"No Java compilation expected here.\"" \
+>> -		JAR="oefatal \"No jar invocation expected here.\"" \
+>> -		JARPREFIX=${datadir_java} \
+>> -		JAVAUNIXJARDIR=${datadir_java} \
+>> -		JAVAUNIXLIBDIR=${libdir_jni} \
+>> -		man
+>>  }
+>>  
+>>  JARFILENAME = "${JPN}-${PV}.jar"
+>> @@ -73,20 +64,11 @@ do_install () {
+>>    install bin/CreateInterface ${D}${bindir}
+>>    install bin/ListDBus ${D}${bindir}
+>>    install bin/DBusDaemon ${D}${bindir}
+>> -
+>> -	oe_runmake \
+>> -		JAVAC="oefatal \"No Java compilation expected here.\"" \
+>> -		JAR="oefatal \"No jar invocation expected here.\"" \
+>> -		MANPREFIX=${D}${mandir} \
+>> -		DOCPREFIX=${D}${docdir}/${JPN} \
+>> -		install-man
+>>  }
+>>  
+>>  # ${JPN} must be last otherwise it would pick up dbus-viewer*.jar
+>>  # and dbus-bin*.jar
+>> -PACKAGES = "${PN}-viewer ${PN}-viewer-doc ${PN}-bin ${PN}-bin-doc ${JPN}"
+>> +PACKAGES = "${PN}-viewer ${PN}-bin ${JPN}"
+>>  
+>>  FILES_${PN}-viewer = "${datadir}/java/dbus-java-viewer*.jar ${bindir}/DBusViewer"
+>> -FILES_${PN}-viewer-doc = "${mandir}/DBusViewer*"
+>>  FILES_${PN}-bin = "${datadir}/java/dbus-java-bin*.jar ${bindir}"
+>> -FILES_${PN}-bin-doc = "${mandir} ${docdir}/${JPN}"
+>>
+> 
+> regards;Richard.L
+> 
 
-
-Cheers,
-Andre'
-
+--
+Sincerely,
+Yevgeny Popovych
 
