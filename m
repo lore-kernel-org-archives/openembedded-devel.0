@@ -1,69 +1,48 @@
-Return-Path: <prvs=7572862bc=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id BB56F79028
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4349C745A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 15:10:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; 
-   d="scan'208";a="1607149"
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20180813193251.4079-1-git@andred.net>
-	<20180814125058.16842-1-git@andred.net>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <b575f956-fd93-7448-5866-3e76526037ba@skidata.com>
-Date: Tue, 14 Aug 2018 17:11:17 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
-MIME-Version: 1.0
-In-Reply-To: <20180814125058.16842-1-git@andred.net>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH v3] openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
+	Tue, 14 Aug 2018 16:34:59 +0000 (UTC)
+Received: by mail-pg1-f180.google.com with SMTP id x5-v6so9334999pgp.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Aug 2018 09:35:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=xucLsN9EGraJx/n+G2i1oZVa1072llxTh6yZe9RQlPM=;
+	b=MIT4qjrVpTCOjb4xd9FfKJ9b4YXBJiWXP5ECRz4wgfPQ3PJRw+sMOaE+1HQqWUOmLE
+	vQu7Pxry1sGHUHnlvtnUCgVdeWP7kCh+F2uDuGXrv2zTTLrpKeaXxQYlblsyU2kQKTpy
+	LjiKzJG5XelSZi8eoKV7U7X91RYDkOCC4eoLoi1t3Ar3Zop9l5neuOLKxXE8IyY0eR+N
+	lIYJjZI61+lg1sFNHqutaGke5/kmeCWJDdfdISCEGqWDexp7KsEs5qwivQ4O2ZzpTQ5n
+	/+YqjcowdbvyBfaYnQba6EF0gwL6K8pgCVq1nCBQgDWPkyh9lP3BdKJNadap65ODBErV
+	NHMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xucLsN9EGraJx/n+G2i1oZVa1072llxTh6yZe9RQlPM=;
+	b=Senb21ZzZrRF5nRu9RzjsjcnRH/C7fSKFlsCobDTYlCFufkmDgHXJv6qruPhy3csGZ
+	m/C73oc8bWsQBGgaEn69QO6utlbo8QkXHXRXtCpD+fK9wig3qxILjbiJupaxxB/V7zDl
+	btqPZhZM28XmaPpGBg6MTVUqoC90qL50s3Om/vq5eLndX6eZF3QL5ZJBMoncxtcHgyL8
+	xr482bO+yhyOAX9pEzwRslP9Z21Z6LJxyCME3tTWVpeAP4BJgH5JdXptmLRRBnUPBdJR
+	GTgpkKnQxm3crxsi1dGJFMvaL4nhCv2UOOmBFvu/HtkfE2lMXM7lRA4Ird10rvQdiqfC
+	bDLw==
+X-Gm-Message-State: AOUpUlEXPDPlQydKjkZjD0hIiZHdnhA6VYSGnnFmTW+1w3Uo5OCDbnML
+	WCU7MMBv9Z7inF+WKvFNDUOhBk/C
+X-Google-Smtp-Source: AA+uWPzcBT07KqHUAeR3drz6eJlqD0ndTEyxWJ3ZVlnnoLxw008PBVRzrKd1FTQIL1WTjtc7zAXDsQ==
+X-Received: by 2002:a62:54c7:: with SMTP id
+	i190-v6mr24042728pfb.155.1534264499938; 
+	Tue, 14 Aug 2018 09:34:59 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::f217])
+	by smtp.gmail.com with ESMTPSA id
+	16-v6sm35564388pfo.164.2018.08.14.09.34.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Aug 2018 09:34:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Aug 2018 09:34:44 -0700
+Message-Id: <20180814163445.24736-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-oe][PATCH V2 1/2] stress-ng: Upgrade to 0.09.37
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,91 +55,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 15:10:42 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 14 Aug 2018 16:34:59 -0000
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+Carries fixes needed for building with glibc 2.28+
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Update to 0.09.37
 
-If you have any questions, please let me know.
+ ...force-sync-after-build-in-case-reboo.patch | 28 +++++++++++++++++++
+ ...01-Several-changes-to-fix-musl-build.patch |  2 +-
+ ...0002-stress-fcntl-fix-build-for-musl.patch | 25 -----------------
+ ...ess-ng_0.09.14.bb => stress-ng_0.09.37.bb} |  8 +++---
+ 4 files changed, 33 insertions(+), 30 deletions(-)
+ create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng/0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch
+ delete mode 100644 meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+ rename meta-oe/recipes-test/stress-ng/{stress-ng_0.09.14.bb => stress-ng_0.09.37.bb} (74%)
 
-regards;Richard.L
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch
+new file mode 100644
+index 0000000000..fd2199e535
+--- /dev/null
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch
+@@ -0,0 +1,28 @@
++From 7c97710bfc44d895b7111bef9c55866f00a3589c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 13 Aug 2018 11:54:27 -0700
++Subject: [PATCH] Revert "Makefile: force sync after build in case reboot loses
++ executable"
++
++This reverts commit ae6322b1baea56a589207c96e358daae8edd0a8f.
++
++Not needed for cross-builds
++
++Upstream-Status: Inappropriate [Cross compile specific]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile | 1 -
++ 1 file changed, 1 deletion(-)
++
++Index: stress-ng-0.09.37/Makefile
++===================================================================
++--- stress-ng-0.09.37.orig/Makefile
+++++ stress-ng-0.09.37/Makefile
++@@ -344,7 +344,6 @@ OBJS += $(CONFIG_OBJS)
++ stress-ng: info $(OBJS)
++ 	@echo "LD $@"
++ 	@$(CC) $(CPPFLAGS) $(CFLAGS) $(OBJS) -lm $(LDFLAGS) -lc -o $@
++-	@sync
++ 
++ .PHONY: info
++ info:
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+index d604f860a1..93d9b544d5 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+@@ -1,4 +1,4 @@
+-From 784dcd09d3f266e271d007f4fd257e85036872ca Mon Sep 17 00:00:00 2001
++From d499375fe267be8819ecb985123d89a21edc0e59 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
+ Date: Tue, 17 Oct 2017 10:13:20 -0500
+ Subject: [PATCH] Several changes to fix musl build
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+deleted file mode 100644
+index ed3287e329..0000000000
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From faadbc147394cea9278bc2494f33e3521d88e742 Mon Sep 17 00:00:00 2001
+-From: Tim Orling <timothy.t.orling@linux.intel.com>
+-Date: Tue, 9 Jan 2018 18:38:45 -0800
+-Subject: [PATCH] stress-fcntl: fix build for musl
+-
+-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+-
+-Upstream-status: Pending
+-
+----
+- stress-fcntl.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/stress-fcntl.c b/stress-fcntl.c
+-index 2ea867b..e91b345 100644
+---- a/stress-fcntl.c
+-+++ b/stress-fcntl.c
+-@@ -415,6 +415,7 @@ ofd_lock_abort:	{ /* Nowt */ }
+- #if (defined(F_GET_FILE_RW_HINT) && defined(F_SET_FILE_RW_HINT)) | \
+-     (defined(F_GET_RW_HINT) && defined(F_SET_RW_HINT))
+- 	{
+-+		int ret;
+- 		size_t i;
+- 		unsigned long hint;
+- 		static const unsigned long hints[] = {
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.09.14.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.09.37.bb
+similarity index 74%
+rename from meta-oe/recipes-test/stress-ng/stress-ng_0.09.14.bb
+rename to meta-oe/recipes-test/stress-ng/stress-ng_0.09.37.bb
+index 7fab43025f..19ce641924 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng_0.09.14.bb
++++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.09.37.bb
+@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "zlib libaio"
+ 
+ SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.xz \
+-           file://0002-stress-fcntl-fix-build-for-musl.patch \
+-          "
++           file://0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch \
++           "
+ SRC_URI_append_libc-musl = " \
+     file://0001-Several-changes-to-fix-musl-build.patch \
+     "
+-SRC_URI[md5sum] = "1f8b6c2c2830704d2a2814c16082d48e"
+-SRC_URI[sha256sum] = "02cac34a5cb041197af60c1867844c6cbb089a6d10a38cdcf7b8f27bfaa6ef8f"
++SRC_URI[md5sum] = "81d73313ea7778f749470b6f950553af"
++SRC_URI[sha256sum] = "8494afb2f2e2cf7e79ec9c6c3129308b098e530141ba2b07d6547708fd63af3d"
+ 
+ UPSTREAM_CHECK_URI ?= "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/"
+ UPSTREAM_CHECK_REGEX ?= "(?P<pver>\d+(\.\d+)+)\.tar"
+-- 
+2.18.0
 
-On 8/14/18 2:50 PM, André Draszik wrote:
-> From: André Draszik <andre.draszik@jci.com>
-> 
-> Using gcc-8, Hotspot is being miscompiled, resulting in non-
-> working binaries.
-> 
-> The reason is undefined behaviour, which gcc-8 even warns about
-> and errors out. We have so far have taped over those warnings,
-> but it turns out that we simply cannot do that.
-> 
-> Add patches to address undefined behaviour causing miscompilation
-> of hotsport.
-> 
-> This also means we can remove the -Wno-error=return-type C compiler
-> flag again which was recently added in error in
-> commit 52fb41cec7d5 ("openjdk-8: fix build for gcc8.x") only hiding
-> the compiler warnings/errors that were flagging the incorrect code
-> in the first place.
-> 
-> With these patches applied, the openjdk-8 ARM port works again:
-> | RESULTS:
-> | RESULTS - ping.PingTest.test_ping - Testcase 964: PASSED (0.04s)
-> | RESULTS - ssh.SSHTest.test_ssh - Testcase 224: PASSED (0.68s)
-> | RESULTS - java.JavaTest.test_java_exists - Testcase -1: PASSED (0.14s)
-> | RESULTS - java.JavaTest.test_java_jar_comp_mode - Testcase -1: FAILED (5.13s)
-> | RESULTS - java.JavaTest.test_java_jar_int_mode - Testcase -1: PASSED (4.48s)
-> | RESULTS - java.JavaTest.test_java_jar_works - Testcase -1: PASSED (4.44s)
-> | RESULTS - java.JavaTest.test_java_version - Testcase -1: PASSED (3.66s)
-> | RESULTS - javac.JavacTest.test_javac_exists - Testcase -1: PASSED (0.13s)
-> | RESULTS - javac.JavacTest.test_javac_works - Testcase -1: PASSED (30.87s)
-> | SUMMARY:
-> | openjdk-8-test-image () - Ran 9 tests in 50.263s
-> 
-> The java.JavaTest.test_java_jar_comp_mode failure can be ignored for now,
-> as that test verifies compiled mode which is not available on arm. The
-> testcase must be fixed instead.
-> 
-> (We need to refresh one unrelated existing patch to avoid patch fuzz warnings)
-> 
-> Signed-off-by: André Draszik <andre.draszik@jci.com>
-> 
-> ---
-> v3:
-> * rebase against master-next
-> 
-> v2:
-> *  refresh musl-0007-hotspot-os_linux_x86-remove-glibc-dependencies-fpu_c.patch
->    to avoid patch fuzz warnings
-> ---
->  recipes-core/openjdk/openjdk-8-common.inc     |   2 +-
->  .../openjdk-8-release-172b11-common.inc       |  13 +
->  ...4-fix-undefined-behaviour-gcc-v8-fix.patch |  41 +++
->  ...Fix-further-functions-with-a-missing.patch |  38 +++
->  ...o-fix-undefined-behaviour-gcc-v8-fix.patch |  42 ++++
->  ...urn-type-issues-introduced-by-806165.patch |  56 +++++
->  ...ero-build-requires-disabled-warnings.patch | 148 +++++++++++
->  ...return-statement-in-__sync_val_compa.patch |  53 ++++
->  ...g-build-after-8062808-Turn-on-the-Wr.patch |  47 ++++
->  ...pot-Turn-on-the-Wreturn-type-warning.patch | 233 ++++++++++++++++++
->  ..._x86-remove-glibc-dependencies-fpu_c.patch |   2 +-
->  11 files changed, 673 insertions(+), 2 deletions(-)
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0016-hotspot-Zero-build-requires-disabled-warnings.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch
->  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0019-hotspot-Turn-on-the-Wreturn-type-warning.patch
-> 
 
