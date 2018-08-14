@@ -1,49 +1,53 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 83BE97900E
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C5FD78FD1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 14:38:56 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id y2-v6so12543568wma.1
+	Tue, 14 Aug 2018 14:38:59 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id f12-v6so17396715wrv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 07:38:57 -0700 (PDT)
+	Tue, 14 Aug 2018 07:39:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=j3N4ukFibMmluiOyVX9dnf7hTByLTyTbtK+h88nTJq4=;
-	b=BF9I0nPJI49jUum267qaCVWD8xZZ3C7a8Iq8/rzUZrbiq80mnympJcXeMXhXGR+PS0
-	+JQWERO2MLE4ph12A/fMi44LPYSK9JLDqoOBzwea8N7Oy0FO6wkG/DN7328GYVNtYI0d
-	gW8x+8PNO7nFPizGbs+nE+487py3Wzeq/EF3NECnJxArL1JFSa9ETozX26AaiXeouBUG
-	VIn0LMhS67HaEkzazKc7H8alERRahOfGclbGMH6Qov87e1PciZrAknAqRhYrsjdWEgQO
-	+h+ca2YIotQjleS2/tB8/gIyC0Xy6/iMQHZ/lxc54HUyY/h0HhApotquV1OwGczT2TRY
-	uJnw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=vkHWIWVVneASazvF84igIG6Ih4bYi/YJMBSpwba67yY=;
+	b=INeFNLHXWJRfs/kupW1yOjCk5cWP7wHcT1oM/lemhuDFyDLdjgp8V2dwXPgvLWIVmV
+	KrkJOZGZ6cVosr/chuW5tOIJB7+U7wVh2bSsKBMhLN86qMku92iX7/MFP/On+DcG8zH4
+	UT787RWTSD5hd70IxwJRhFmuaXieljYvVt7MKbsibANGRraBreIQa5cvbnJF6WoJyhMu
+	H2MsMI1DA0VREneu5ooFbuUq6a7MLr/JqTvil+Yjq5RhFsQIug83FASy0gyxhPuQAivr
+	emK+J8cXA2MUzyV0lbGfK4+p8cfpAjdIwMohQ7mlF7kurQSq7nlUIN7wZEzxC8u7fl9y
+	vn3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=j3N4ukFibMmluiOyVX9dnf7hTByLTyTbtK+h88nTJq4=;
-	b=R6paKt8KnDVVQiytGubpOFEGz+TM0eqtTFEROC1e1kbs3mN5/38ZBj4Pie0NwVEkzq
-	BsdHxxT80J9cMQrg0xO0F262StBPPnimxH/EDpXIg/pB5cGH6hFHz08z19OK5iDheF/2
-	5qvMbqNoGMaynNDPAgpUQ4hsjM2l65CM5yYarX0/S4b0BUWnCNvbSk2i39O+Wss4HLTl
-	REaCCZ7GIHkj+/aCuys2jCStnseEGC6HLleRFTOKfmnYEEFL4svlEw7dYv1HxvgY5Mk7
-	0pYKVzVppTq79o8qug2Ig8W0sczgKxlddAkZYR4jQul/lE5Q49JHtOQJtgqPg4MoiwTq
-	MOlg==
-X-Gm-Message-State: AOUpUlHwZ9eb8FgGmq3LxlBsg0NbXfWKB5mq+JenVr+rL6Tqe+jgt4VH
-	7JsS81L6K5FNrQzRfg3aTUfFm1eX
-X-Google-Smtp-Source: AA+uWPwonm4F55DxiA1Of2/gaoedpiFmDJj28yNlQyJe/7iZDNIv1ECBtDDbGeOpi9e5LY9LyQ8d7g==
-X-Received: by 2002:a1c:af0c:: with SMTP id
-	y12-v6mr10448409wme.87.1534257537082; 
-	Tue, 14 Aug 2018 07:38:57 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=vkHWIWVVneASazvF84igIG6Ih4bYi/YJMBSpwba67yY=;
+	b=H+47xlo30ACLKQudcrMlgf8qqJB/l90MfgnTMJnmFTMIYvtDq2byVZlCnFcDb/sreH
+	/+WxNLxEoDH0eMs23Al9CxFeVQ720QjTBL3+3X5EvqLeEr+68/e7k9/41ankZ+mRcp3y
+	Ogiycklmj2zLO/HOtogDWbdSpgFKZGA1ju9Nu4HBnymtlchBx5GotkpiSx+xY0kS/RUt
+	XcGgV2Zj8p/0BEf09drTHsDdjtEeZFLWF/0Nd8R1OGIOfk6eXasRqaH4k0WOL5K5s7gW
+	Yt+LMJ+Snv6SuGr21rhAx9EfNRxSzDWFEOS7u0u+Ga5YVMwDo6Y+6n99iuFkUa4RFhJq
+	if1A==
+X-Gm-Message-State: AOUpUlE6NJ1aAs3JGkpmLcDzztvB7KJfMvQg4DsdmvXo7/rjq6h6hCZM
+	ivoSqHfLjULz6o5qUU2QBwtgYCL3
+X-Google-Smtp-Source: AA+uWPzCJbAacfQMjnidbPP1iWfJk14aMHQsxpDKv+15a+oVvUY6BotoilRXaEHjTpD0prcyAJMI8w==
+X-Received: by 2002:adf:eb87:: with SMTP id
+	t7-v6mr13575403wrn.123.1534257540190; 
+	Tue, 14 Aug 2018 07:39:00 -0700 (PDT)
 Received: from localhost.localdomain
 	(host146-228-dynamic.182-80-r.retail.telecomitalia.it.
 	[80.182.228.146]) by smtp.gmail.com with ESMTPSA id
-	l15-v6sm20296997wrt.67.2018.08.14.07.38.56
+	l15-v6sm20296997wrt.67.2018.08.14.07.38.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 14 Aug 2018 07:38:56 -0700 (PDT)
+	Tue, 14 Aug 2018 07:38:59 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Aug 2018 16:38:16 +0200
-Message-Id: <1534257497-12184-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue, 14 Aug 2018 16:38:17 +0200
+Message-Id: <1534257497-12184-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Cc: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Subject: [PATCH 1/2] pcmciautils: drop duplicate chunk from pcmciautils-018/makefile_race.patch
+In-Reply-To: <1534257497-12184-1-git-send-email-andrea.adami@gmail.com>
+References: <1534257497-12184-1-git-send-email-andrea.adami@gmail.com>
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [PATCH 2/2] pcmciautils: depend on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,44 +60,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 14:38:56 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 14:38:59 -0000
 
-The new rule was patched into the makefile twice.
+pcmciautils needs yacc as well as lex.
 
-Backport of oe-core commit c52228f4d071
+Backport of oe-core commit dd5208ae22d4
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Signed-off-by: Ross Burton <ross.burton@intel.com>
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../pcmciautils/pcmciautils/makefile_race.patch            | 14 --------------
- 1 file changed, 14 deletions(-)
+ meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch
-index f5a518f..4c5eba7 100644
---- a/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch
-+++ b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch
-@@ -16,20 +16,6 @@ Index: pcmciautils-018/Makefile
- ===================================================================
- --- pcmciautils-018.orig/Makefile
- +++ pcmciautils-018/Makefile
--@@ -249,6 +249,9 @@ $(PCMCIA_SOCKET_STARTUP): $(LIBC) src/st
-- yacc_config.o lex_config.o: %.o: %.c src/yacc_config.h
-- 	$(CC) -c -MD -O -pipe $(CPPFLAGS) $<
-- 
--+src/lex_config.o : src/lex_config.c src/yacc_config.h
--+	$(QUIET) $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
--+
-- debugtools: ccdv $(CBDUMP) $(CISDUMP)
-- 
-- $(CBDUMP): $(LIBC) debug/cbdump.o
--Index: pcmciautils-018/Makefile
--===================================================================
----- pcmciautils-018.orig/Makefile
--+++ pcmciautils-018/Makefile
- @@ -246,8 +246,8 @@ $(PCMCIA_SOCKET_STARTUP): $(LIBC) src/st
-  	$(QUIET) $(LD) $(LDFLAGS) -o $@ $(CRT0) src/startup.o src/yacc_config.o src/lex_config.o $(LIB_OBJS) $(ARCH_LIB_OBJS)
-  	$(QUIET) $(STRIPCMD) $@
+diff --git a/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb b/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb
+index 2e59f05..fc06455 100644
+--- a/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb
++++ b/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb
+@@ -5,7 +5,7 @@ SECTION = "kernel/userland"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-DEPENDS = "udev sysfsutils flex-native"
++DEPENDS = "udev sysfsutils flex-native bison-native"
+ RDEPENDS_${PN} = "udev module-init-tools"
+ 
+ PR = "r1"
 -- 
 2.7.4
 
