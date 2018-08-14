@@ -1,13 +1,11 @@
 Return-Path: <prvs=7572862bc=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 191237458A
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id CAEBC79013
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 12:13:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; 
-   d="scan'208";a="1606667"
-To: Yevgeny Popovych <yevgenyp@pointgrab.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1534178993-13146-1-git-send-email-yevgenyp@pointgrab.com>
+	Tue, 14 Aug 2018 12:14:04 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; d="scan'208";a="11827234"
+To: <openembedded-devel@lists.openembedded.org>
+References: <20180814101150.6817-1-richard.leitner@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +51,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <c26838d5-88dd-e948-58c4-21ccd941d537@skidata.com>
-Date: Tue, 14 Aug 2018 14:14:32 +0200
+Message-ID: <04689ebb-d21a-7314-083c-33a7aa83ef4f@skidata.com>
+Date: Tue, 14 Aug 2018 14:14:40 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <1534178993-13146-1-git-send-email-yevgenyp@pointgrab.com>
+In-Reply-To: <20180814101150.6817-1-richard.leitner@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] dbus-java: Do not build any documentation
+Subject: Re: [meta-java][PATCH] oeqa: runtime: java: skip not supported version/arch combinations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,7 +73,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 12:13:57 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 12:14:05 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -92,68 +90,62 @@ If you have any questions, please let me know.
 
 regards;Richard.L
 
-On 8/13/18 6:49 PM, Yevgeny Popovych wrote:
-> Support for respective docbook tools has been removed in pyro release.
+On 8/14/18 12:11 PM, Richard Leitner wrote:
+> The following OpenJDK Version/Target architecture combinations are
+> currently not supported with "compiled mode" aka JIT:
 > 
-> Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
-> Cc: Henning Heinold <henning@itconsulting-heinold.de>
-> Cc: Maxin John <maxin.john@intel.com>
-> Cc: Otavio Salvador <otavio@ossystems.com.br>
-> Cc: Richard Leitner <richard.leitner@skidata.com>
+>     OpenJRE-8 on arm
+>     OpenJDK-7 on aarch64
+>     OpenJDK-7 on x86
+>     OpenJDK-7 on x86-64
+> 
+> Therefore we skip the correspoding oeqa runtime tests for now.
+> 
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 > ---
->  recipes-extended/dbus/dbus-java_2.7.bb | 22 ++--------------------
->  1 file changed, 2 insertions(+), 20 deletions(-)
+>  lib/oeqa/runtime/cases/java.py | 22 +++++++++++++++++++++-
+>  1 file changed, 21 insertions(+), 1 deletion(-)
 > 
-> diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
-> index 4964cf8..0b093a0 100644
-> --- a/recipes-extended/dbus/dbus-java_2.7.bb
-> +++ b/recipes-extended/dbus/dbus-java_2.7.bb
-> @@ -6,7 +6,7 @@ HOMEPAGE = "http://dbus.freedesktop.org/doc/dbus-java"
->  SECTION = "libs"
->  LICENSE = "LGPL-2.1 & AFL-2.1"
+> diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
+> index feb572b..f2375a4 100644
+> --- a/lib/oeqa/runtime/cases/java.py
+> +++ b/lib/oeqa/runtime/cases/java.py
+> @@ -3,6 +3,7 @@ import os
+>  from oeqa.runtime.case import OERuntimeTestCase
+>  from oeqa.core.decorator.depends import OETestDepends
+>  from oeqa.core.decorator.oeid import OETestID
+> +from oeqa.core.decorator.data import skipIfDataVar
+>  from oeqa.runtime.decorator.package import OEHasPackage
 >  
-> -DEPENDS = "libmatthew docbook-utils-native docbook-sgml-dtd-4.1-native fastjar-native"
-> +DEPENDS = "libmatthew gettext-native fastjar-native"
->  RDEPENDS_${PN}-viewer = "java2-runtime libunixsocket-java ${PN}-bin libmatthew-debug-java ${JPN}"
->  RDEPENDS_${PN}-bin = "java2-runtime libunixsocket-java libmatthew-debug-java ${JPN}"
->  RSUGGESTS_${JPN} = "libunixsocket-java"
-> @@ -49,15 +49,6 @@ do_compile () {
->  		JAVAUNIXJARDIR=${datadir_java} \
->  		JAVAUNIXLIBDIR=${libdir_jni} \
->  		bin
-> -
-> -	# Generate man pages.
-> -	oe_runmake \
-> -		JAVAC="oefatal \"No Java compilation expected here.\"" \
-> -		JAR="oefatal \"No jar invocation expected here.\"" \
-> -		JARPREFIX=${datadir_java} \
-> -		JAVAUNIXJARDIR=${datadir_java} \
-> -		JAVAUNIXLIBDIR=${libdir_jni} \
-> -		man
->  }
+>  class JavaTest(OERuntimeTestCase):
+> @@ -50,8 +51,27 @@ class JavaTest(OERuntimeTestCase):
+>          msg = 'Incorrect mode: %s' % output
+>          self.assertIn(', interpreted mode)', output, msg=msg)
 >  
->  JARFILENAME = "${JPN}-${PV}.jar"
-> @@ -73,20 +64,11 @@ do_install () {
->    install bin/CreateInterface ${D}${bindir}
->    install bin/ListDBus ${D}${bindir}
->    install bin/DBusDaemon ${D}${bindir}
-> -
-> -	oe_runmake \
-> -		JAVAC="oefatal \"No Java compilation expected here.\"" \
-> -		JAR="oefatal \"No jar invocation expected here.\"" \
-> -		MANPREFIX=${D}${mandir} \
-> -		DOCPREFIX=${D}${docdir}/${JPN} \
-> -		install-man
->  }
->  
->  # ${JPN} must be last otherwise it would pick up dbus-viewer*.jar
->  # and dbus-bin*.jar
-> -PACKAGES = "${PN}-viewer ${PN}-viewer-doc ${PN}-bin ${PN}-bin-doc ${JPN}"
-> +PACKAGES = "${PN}-viewer ${PN}-bin ${JPN}"
->  
->  FILES_${PN}-viewer = "${datadir}/java/dbus-java-viewer*.jar ${bindir}/DBusViewer"
-> -FILES_${PN}-viewer-doc = "${mandir}/DBusViewer*"
->  FILES_${PN}-bin = "${datadir}/java/dbus-java-bin*.jar ${bindir}"
-> -FILES_${PN}-bin-doc = "${mandir} ${docdir}/${JPN}"
+> +    # As OpenJDK-7 doesn't support compiled mode (JIT) for all architectures yet
+> +    # we skip these tests for now.
+> +    @OEHasPackage(["openjdk-7-jre", "openjdk-7"])
+>      @OETestDepends(['java.JavaTest.test_java_exists'])
+> -    def test_java_jar_comp_mode(self):
+> +    @skipIfDataVar('ARCH', 'arm64', 'OpenJDK 7 compiled mode not yet supported for aarch64')
+> +    @skipIfDataVar('ARCH', 'x86', 'OpenJDK 7 compiled mode not yet supported for x86')
+> +    @skipIfDataVar('ARCH', 'x86-64', 'OpenJDK 7 compiled mode not yet supported for x86-64')
+> +    def test_java7_jar_comp_mode(self):
+> +        status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
+> +        msg = 'Exit status was not 0. Output: %s' % output
+> +        self.assertEqual(status, 0, msg=msg)
+> +
+> +        msg = 'Incorrect mode: %s' % output
+> +        self.assertIn(', compiled mode)', output, msg=msg)
+> +
+> +    # As OpenJDK-8 doesn't support compiled mode (JIT) for arm yet we skip this
+> +    # test for now.
+> +    @OEHasPackage(["openjre-8", "openjdk-8"])
+> +    @OETestDepends(['java.JavaTest.test_java_exists'])
+> +    @skipIfDataVar('ARCH', 'arm', 'OpenJDK 8 compiled mode not yet supported for arm')
+> +    def test_java8_jar_comp_mode(self):
+>          status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
+>          msg = 'Exit status was not 0. Output: %s' % output
+>          self.assertEqual(status, 0, msg=msg)
 > 
 
