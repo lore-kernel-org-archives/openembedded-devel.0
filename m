@@ -1,45 +1,68 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
-	[209.85.161.66])
-	by mail.openembedded.org (Postfix) with ESMTP id CACBC78E39
+Return-Path: <prvs=7572862bc=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C9147307F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 12:02:39 +0000 (UTC)
-Received: by mail-yw1-f66.google.com with SMTP id 139-v6so15952397ywg.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 05:02:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=3MjEDtUMtqPWpIiwFN1Ym8ak6Os4g3clKTA5qc8JEhk=;
-	b=JQIEBojZxhq/DSjMKgtDNOX8Q3c89OjEzYNClUhFLfX8h0Nay2Bs2tey51hSgfWNJU
-	9qcD80LCUoCMD3iDWuU5wy9I/4bzJD5DiM+TvC4IHnFD52YfhX1Hk+pbtux6bNnCV06e
-	gSBXkg5bEOVuo1C5qpNpvBxWaS8Ya6tbnLX+hZxsz4NN2JZgvyTPEIXL5Yev9dd0lBi9
-	PK2QgR0cD3LdA9ZvAr4+K56iRSCWInwJzRwgX7vsswfAFh8M/bcjItzECZFCl3LSraka
-	H0dSmxbTfHmii4vgnhKDYLPxwdlbu+k7EnuMTSQ1GOa/wStVJ4AYAIXRoX3a4PhfdfA6
-	6J+A==
-X-Gm-Message-State: AOUpUlFsl0P1wQf/7f3pp6P2n1tsLY+sdOyAEGpp4+yGMjYD8ED28Mpo
-	jaKvLrzw6VNvQZFFDF2sxuiItQaL
-X-Google-Smtp-Source: AA+uWPyy9yQrQA+2e7sa6gtrVlI7U5czk+p/31mjZOKmEwPFxcGMH0MsMV734PBlrHZy0OIqP/QsFg==
-X-Received: by 2002:a25:e482:: with SMTP id
-	b124-v6mr9332942ybh.127.1534248160411; 
-	Tue, 14 Aug 2018 05:02:40 -0700 (PDT)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	x7-v6sm17735872ywd.43.2018.08.14.05.02.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 14 Aug 2018 05:02:39 -0700 (PDT)
-Message-ID: <4a823df1ee3f4df8dd51ccd99f3a206b09f9434d.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Aug 2018 13:02:37 +0100
-In-Reply-To: <cc05a931-904e-b9f6-d56c-c4392da29ed8@skidata.com>
+	Tue, 14 Aug 2018 12:09:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; d="scan'208";a="11827135"
+To: <openembedded-devel@lists.openembedded.org>
 References: <20180813193251.4079-1-git@andred.net>
 	<20180814104236.30076-1-git@andred.net>
 	<cc05a931-904e-b9f6-d56c-c4392da29ed8@skidata.com>
-X-Mailer: Evolution 3.28.2-1 
-Mime-Version: 1.0
+	<4a823df1ee3f4df8dd51ccd99f3a206b09f9434d.camel@andred.net>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <a55ef258-7cad-3070-c2f3-b1c623d447e4@skidata.com>
+Date: Tue, 14 Aug 2018 14:09:59 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.0
+MIME-Version: 1.0
+In-Reply-To: <4a823df1ee3f4df8dd51ccd99f3a206b09f9434d.camel@andred.net>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
 Subject: Re: [meta-java][PATCH v2] openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,38 +76,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 12:02:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 14 Aug 2018 12:09:25 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On Tue, 2018-08-14 at 13:08 +0200, Richard Leitner wrote:
-> Hi André,
+On 8/14/18 2:02 PM, André Draszik wrote:
+> On Tue, 2018-08-14 at 13:08 +0200, Richard Leitner wrote:
+>> Hi André,
+>>
+>> this v2 isn't applying to the current master-next... could you please
+>> check?
+>>
+>>
+>> Applying: openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
+>> .git/rebase-apply/patch:101: trailing whitespace.
+>>  
+>> .git/rebase-apply/patch:106: trailing whitespace.
+>>  
+>> .git/rebase-apply/patch:108: trailing whitespace.
+>> -- 
+>> .git/rebase-apply/patch:150: trailing whitespace.
+>>  
+>> .git/rebase-apply/patch:152: trailing whitespace.
+>> -- 
+>> error: patch failed: recipes-core/openjdk/openjdk-8-common.inc:216
+>> error: recipes-core/openjdk/openjdk-8-common.inc: patch does not apply
+>> Patch failed at 0001 openjdk-8: gcc-8 fix #4: undefined behaviour
+>> (hotspot)
 > 
-> this v2 isn't applying to the current master-next... could you please
-> check?
+> OK. I'm still a bit dubious about just silencing the compiler rather than
+> fixing the warnings, given all the problems this has caused so far, so this
+> version #2 actually sits on top of d359ad5ad46c.
+
+Yeah, we'll take a look at fixing this.
+Furthermore I will remove the patch from master-next with my next push.
+
+Nonetheless could you please rebase your patch on the current master-next?
+As the error silencing patch doesn't collide with this patch it should be fine.
+
 > 
+> Cheers,
+> Andre'
 > 
-> Applying: openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
-> .git/rebase-apply/patch:101: trailing whitespace.
->  
-> .git/rebase-apply/patch:106: trailing whitespace.
->  
-> .git/rebase-apply/patch:108: trailing whitespace.
-> -- 
-> .git/rebase-apply/patch:150: trailing whitespace.
->  
-> .git/rebase-apply/patch:152: trailing whitespace.
-> -- 
-> error: patch failed: recipes-core/openjdk/openjdk-8-common.inc:216
-> error: recipes-core/openjdk/openjdk-8-common.inc: patch does not apply
-> Patch failed at 0001 openjdk-8: gcc-8 fix #4: undefined behaviour
-> (hotspot)
 
-OK. I'm still a bit dubious about just silencing the compiler rather than
-fixing the warnings, given all the problems this has caused so far, so this
-version #2 actually sits on top of d359ad5ad46c.
-
-Cheers,
-Andre'
-
+regards;Richard.L
 
