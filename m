@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DA9A560103
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E0FF74598
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 20:51:04 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id c15-v6so22711945qtp.0
+	Tue, 14 Aug 2018 21:16:54 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id 27-v6so14472902qkv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 13:51:06 -0700 (PDT)
+	Tue, 14 Aug 2018 14:16:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xaRhfMb7sx8MmLdZWI7dN84PciWyuELueatlosAT2W0=;
-	b=GOKSd9jQEgL8cbW26sCQ/tLCf6PmgOKWFLUzq0UT6gD2fduDjSvFjIF6hbH4lD6koF
-	+BEcb8+XjTGu5x75I6AbJ4xUT/jgTEAwis5ite9VKsl+uDKt5TFdcdnwPEDZabUxQyw9
-	ApWc20mKAYE4OsL7Z7aK0P/i9GKLSZ3Qk6QxvpaJucS/4CxdjdKer6idngqutOEFeFtA
-	qdcxcaLKRA4aiLQjVaPVQBjttBLd8WDpG8M/dg75YMQqNp4hS1FlEyHp1Q3GxoENog+z
-	pcGSThWUSjIM75hV1c1TtzWKpQA80I2K5DBCCHj1cya//9y+cKVCUSrfjmmZSRUdK1Q2
-	fJTA==
-X-Gm-Message-State: AOUpUlH/708leAKx5HXIx1dAky9RF8AxeUaEdbutduRAjevvu2Cnruna
-	cSOHDaOx/zmtQl3PWnSm5Es2bBJxFu8=
-X-Google-Smtp-Source: AA+uWPzkE88B08K3YJZX0fsNqGqq4OFqnpeA6nqxAcWW/vXM04IBHiwj/sIJ/SJISDHh5Eh4jSqqhg==
-X-Received: by 2002:a0c:ad3a:: with SMTP id
-	u55-v6mr20656167qvc.132.1534279865465; 
-	Tue, 14 Aug 2018 13:51:05 -0700 (PDT)
+	bh=plZMOsxO9mYBRHyxfvDgXsSISDzPgXDUo9dpK1gYE5U=;
+	b=TLMtDAS3WCVY6PgrPwASt8ORD/qnnFo3mOtHmomgHZbPjiLtYQanJEfdec7MYOlFHH
+	uDeP/awZkACNLU7JojPFULOHSuYl1rcLkr2+s9DXYj1Ax4BfqASxF38kChw3rhPgndrx
+	tUpnW/Wn46inWh4QUBeldp+vgLI8xBr4OEoRnjFBlSoWII/YYc0sm3i/pQrl5BbCYWWN
+	It7hgQbLPHx1t8naSDc+QNrCayYklKMWFeTzWAUj9oPXolvGABWRn74l4sx3k8HnE8qy
+	4c8PmTs+sWMmiF2c6NuyOQLRHZ/fvlJLF1G297Whs+icPCQeO4FNBzO3HUx3k6SncxZm
+	cCxw==
+X-Gm-Message-State: AOUpUlG5l3iTCwogh9YVAQzToWnIyc1DhRb6daaRnFOH6mlig5+Evnxu
+	hGi7l+ov+PIH+rKLOEVWEE8E1+BAOKw=
+X-Google-Smtp-Source: AA+uWPyOTftmxaltYO+g7mZ2qAgOPkKaSL53gnjmmqb1gy8/v8Qj5RLoHz+8CUImKbd2lSvw7DJ1Xw==
+X-Received: by 2002:a37:d60f:: with SMTP id
+	t15-v6mr22092374qki.316.1534281414704; 
+	Tue, 14 Aug 2018 14:16:54 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	t11-v6sm14289948qtc.2.2018.08.14.13.51.04
+	c138-v6sm11715350qkg.79.2018.08.14.14.16.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 14 Aug 2018 13:51:04 -0700 (PDT)
+	Tue, 14 Aug 2018 14:16:53 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Aug 2018 16:50:57 -0400
-Message-Id: <1534279857-12829-1-git-send-email-derek@asterius.io>
+Date: Tue, 14 Aug 2018 17:16:43 -0400
+Message-Id: <1534281403-21391-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-certifi: update to version 2018.8.13
+Subject: [meta-python][PATCH] python-cython: update to version 0.28.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,39 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 20:51:05 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 21:16:54 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-certifi.inc                | 4 ++--
- .../{python-certifi_2018.4.16.bb => python-certifi_2018.8.13.bb}      | 0
- .../{python3-certifi_2018.4.16.bb => python3-certifi_2018.8.13.bb}    | 0
+ meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
+ .../python/{python-cython_0.28.4.bb => python-cython_0.28.5.bb}       | 0
+ .../python/{python3-cython_0.28.4.bb => python3-cython_0.28.5.bb}     | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-certifi_2018.4.16.bb => python-certifi_2018.8.13.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-certifi_2018.4.16.bb => python3-certifi_2018.8.13.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-cython_0.28.4.bb => python-cython_0.28.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.28.4.bb => python3-cython_0.28.5.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
-index a930ff9..c7955c5 100644
---- a/meta-python/recipes-devtools/python/python-certifi.inc
-+++ b/meta-python/recipes-devtools/python/python-certifi.inc
-@@ -7,7 +7,7 @@ HOMEPAGE = " http://certifi.io/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
- 
--SRC_URI[sha256sum] = "13e698f54293db9f89122b0581843a782ad0934a4fe0172d2a980ba77fc61bb7"
--SRC_URI[md5sum] = "f5d81d0048e84285611412b0dea0630a"
-+SRC_URI[md5sum] = "a84571995a209dcd00a1702a74302b88"
-+SRC_URI[sha256sum] = "4c1d68a1408dd090d2f3a869aa94c3947cc1d967821d1ed303208c9f41f0f2f4"
- 
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index 713fd2f..0939cad 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
  BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-certifi_2018.4.16.bb b/meta-python/recipes-devtools/python/python-certifi_2018.8.13.bb
+ 
+-SRC_URI[md5sum] = "fa01ba71b1e3136b0f12e3ed8958ea02"
+-SRC_URI[sha256sum] = "76ac2b08d3d956d77b574bb43cbf1d37bd58b9d50c04ba281303e695854ebc46"
++SRC_URI[md5sum] = "0cb620e1259818e4ecc1a056e8c3a8be"
++SRC_URI[sha256sum] = "b64575241f64f6ec005a4d4137339fb0ba5e156e826db2fdb5f458060d9979e0"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.28.4.bb b/meta-python/recipes-devtools/python/python-cython_0.28.5.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-certifi_2018.4.16.bb
-rename to meta-python/recipes-devtools/python/python-certifi_2018.8.13.bb
-diff --git a/meta-python/recipes-devtools/python/python3-certifi_2018.4.16.bb b/meta-python/recipes-devtools/python/python3-certifi_2018.8.13.bb
+rename from meta-python/recipes-devtools/python/python-cython_0.28.4.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.28.5.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.28.4.bb b/meta-python/recipes-devtools/python/python3-cython_0.28.5.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-certifi_2018.4.16.bb
-rename to meta-python/recipes-devtools/python/python3-certifi_2018.8.13.bb
+rename from meta-python/recipes-devtools/python/python3-cython_0.28.4.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.28.5.bb
 -- 
 2.7.4
 
