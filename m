@@ -1,23 +1,24 @@
-Return-Path: <Hongzhi.Song@windriver.com>
+Return-Path: <Dengke.Du@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D5F278F4C
+	by mail.openembedded.org (Postfix) with ESMTP id D31CE78A06
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 01:46:22 +0000 (UTC)
+	Tue, 14 Aug 2018 03:28:16 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7E1kMoo010392
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 13 Aug 2018 18:46:23 -0700
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.399.0;
-	Mon, 13 Aug 2018 18:46:10 -0700
-From: "Hongzhi.Song" <hongzhi.song@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Mon, 13 Aug 2018 18:46:10 -0700
-Message-ID: <20180814014610.40143-1-hongzhi.song@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7E3SH5a013072
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Aug 2018 20:28:17 -0700
+Received: from pek-lpg-core1-vm1.wrs.com (128.224.156.106) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Mon, 13 Aug 2018 20:28:16 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 14 Aug 2018 11:38:48 +0800
+Message-ID: <1534217928-13556-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] kernel-selftest: compatible with latest kernel
+Subject: [meta-virtualization][PATCH] lxc: add runtime depends for util-linux-getopt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,43 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 01:46:23 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 03:28:17 -0000
 Content-Type: text/plain
 
-There are some new program added for bpf. So we make corresponding
-modifications.
+When runing:
 
-Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+    lxc-create -t download -n test
+
+The system reports that the getopt command can't find. This is because
+the lxc-download template depends on getopt command. So add the runtime
+depends on util-linux-getopt for lxc.
+
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ recipes-containers/lxc/lxc_3.0.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index 27d98a304..e09831f76 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -79,7 +79,7 @@ do_configure() {
-     :
- }
+diff --git a/recipes-containers/lxc/lxc_3.0.1.bb b/recipes-containers/lxc/lxc_3.0.1.bb
+index a77dd09..d4bfd92 100644
+--- a/recipes-containers/lxc/lxc_3.0.1.bb
++++ b/recipes-containers/lxc/lxc_3.0.1.bb
+@@ -25,6 +25,7 @@ RDEPENDS_${PN} = " \
+ 		gnutls \
+ 		nettle \
+ 		util-linux-mountpoint \
++		util-linux-getopt \
+ "
  
--do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
-+do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
- python copy_kselftest_source_from_kernel() {
-     sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
-     src_dir = d.getVar("STAGING_KERNEL_DIR")
-@@ -94,8 +94,9 @@ python copy_kselftest_source_from_kernel() {
-             bb.utils.copyfile(src, dest)
- }
- 
--remove_clang_related() {
--	sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
-+remove_unrelated() {
-+	sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile
-+    sed -i '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile
- }
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
+ RDEPENDS_${PN}_append_libc-glibc = " glibc-utils"
 -- 
-2.11.0
+2.7.4
 
 
