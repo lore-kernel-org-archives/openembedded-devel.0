@@ -1,9 +1,10 @@
 Return-Path: <prvs=7572862bc=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id D593279028
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id BB56F79028
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Aug 2018 14:50:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; d="scan'208";a="11830870"
+	Tue, 14 Aug 2018 15:10:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,238,1531778400"; 
+   d="scan'208";a="1607149"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
 References: <20180813193251.4079-1-git@andred.net>
@@ -53,8 +54,8 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <40ccf60e-bf58-5fa8-394f-d6d47e1d737e@skidata.com>
-Date: Tue, 14 Aug 2018 16:51:13 +0200
+Message-ID: <b575f956-fd93-7448-5866-3e76526037ba@skidata.com>
+Date: Tue, 14 Aug 2018 17:11:17 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
@@ -75,18 +76,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Aug 2018 14:50:37 -0000
+X-List-Received-Date: Tue, 14 Aug 2018 15:10:42 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-On 8/14/18 2:50 PM, André Draszik wrote:
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
+
+If you have any questions, please let me know.
+
+regards;Richard.L
+
+On 8/14/18 2:50 PM, André Draszik wrote:
+> From: André Draszik <andre.draszik@jci.com>
+> 
+> Using gcc-8, Hotspot is being miscompiled, resulting in non-
+> working binaries.
+> 
+> The reason is undefined behaviour, which gcc-8 even warns about
+> and errors out. We have so far have taped over those warnings,
+> but it turns out that we simply cannot do that.
+> 
+> Add patches to address undefined behaviour causing miscompilation
+> of hotsport.
+> 
+> This also means we can remove the -Wno-error=return-type C compiler
+> flag again which was recently added in error in
+> commit 52fb41cec7d5 ("openjdk-8: fix build for gcc8.x") only hiding
+> the compiler warnings/errors that were flagging the incorrect code
+> in the first place.
+> 
+> With these patches applied, the openjdk-8 ARM port works again:
+> | RESULTS:
+> | RESULTS - ping.PingTest.test_ping - Testcase 964: PASSED (0.04s)
+> | RESULTS - ssh.SSHTest.test_ssh - Testcase 224: PASSED (0.68s)
+> | RESULTS - java.JavaTest.test_java_exists - Testcase -1: PASSED (0.14s)
+> | RESULTS - java.JavaTest.test_java_jar_comp_mode - Testcase -1: FAILED (5.13s)
+> | RESULTS - java.JavaTest.test_java_jar_int_mode - Testcase -1: PASSED (4.48s)
+> | RESULTS - java.JavaTest.test_java_jar_works - Testcase -1: PASSED (4.44s)
+> | RESULTS - java.JavaTest.test_java_version - Testcase -1: PASSED (3.66s)
+> | RESULTS - javac.JavacTest.test_javac_exists - Testcase -1: PASSED (0.13s)
+> | RESULTS - javac.JavacTest.test_javac_works - Testcase -1: PASSED (30.87s)
+> | SUMMARY:
+> | openjdk-8-test-image () - Ran 9 tests in 50.263s
+> 
+> The java.JavaTest.test_java_jar_comp_mode failure can be ignored for now,
+> as that test verifies compiled mode which is not available on arm. The
+> testcase must be fixed instead.
+> 
+> (We need to refresh one unrelated existing patch to avoid patch fuzz warnings)
+> 
+> Signed-off-by: André Draszik <andre.draszik@jci.com>
+> 
 > ---
 > v3:
 > * rebase against master-next
-
-Thank you :-)
-
-regards;Richard.L
+> 
+> v2:
+> *  refresh musl-0007-hotspot-os_linux_x86-remove-glibc-dependencies-fpu_c.patch
+>    to avoid patch fuzz warnings
+> ---
+>  recipes-core/openjdk/openjdk-8-common.inc     |   2 +-
+>  .../openjdk-8-release-172b11-common.inc       |  13 +
+>  ...4-fix-undefined-behaviour-gcc-v8-fix.patch |  41 +++
+>  ...Fix-further-functions-with-a-missing.patch |  38 +++
+>  ...o-fix-undefined-behaviour-gcc-v8-fix.patch |  42 ++++
+>  ...urn-type-issues-introduced-by-806165.patch |  56 +++++
+>  ...ero-build-requires-disabled-warnings.patch | 148 +++++++++++
+>  ...return-statement-in-__sync_val_compa.patch |  53 ++++
+>  ...g-build-after-8062808-Turn-on-the-Wr.patch |  47 ++++
+>  ...pot-Turn-on-the-Wreturn-type-warning.patch | 233 ++++++++++++++++++
+>  ..._x86-remove-glibc-dependencies-fpu_c.patch |   2 +-
+>  11 files changed, 673 insertions(+), 2 deletions(-)
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0016-hotspot-Zero-build-requires-disabled-warnings.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/0019-hotspot-Turn-on-the-Wreturn-type-warning.patch
+> 
 
