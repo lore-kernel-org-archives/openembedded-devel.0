@@ -1,48 +1,39 @@
-Return-Path: <nickaein.i@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 365D179179
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 63DEA79201
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Aug 2018 10:06:57 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id y2-v6so908612wma.1
+	Wed, 15 Aug 2018 15:44:54 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id w26-v6so1652818qto.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Aug 2018 03:06:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=EFnarzq0tI4KviIhPbGeuLUY1eADgcx5rK28qNtXX2I=;
-	b=iPCjSJpBRUfOotDG+QELRpV75gV4kUsjVBjk5U9nFkfGF7JWY3JOclr180Wlii2MRs
-	rD5OSTEQBcwIB8kN2APXrO2RzFe7Cq2allM5S1tRPLC0V9oL8ADvLHpBSULnLrHwh+aJ
-	jLG1xl3TVb7x2CBwITnowZTxGq1aA5C8Ve140EprdL1tvxLw6xkI54YISzWZMXZO1oaG
-	SIXQj7xBC90p43vBbrPczpsuqxriTrUx/UndvV8cu5GBZrZV4bN0nBoy46uxf8bA9g4d
-	Vn6+lv/KgWg10ka2Lyca+Rt0an/MSv9OLRwlzwej/eDpZz7xvBsT5aXsHYzEM0q+zJd4
-	jofw==
+	Wed, 15 Aug 2018 08:44:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EFnarzq0tI4KviIhPbGeuLUY1eADgcx5rK28qNtXX2I=;
-	b=Oi5Pkneom0IFx/3TBZ6MmjvxoHkFAb65cgo26p23BiuTituSYTljts1KnBkIgac1vz
-	5aKOGXJv1OYFH1fOW5+BDECvYIBkjm+CZTSQYXFUds/0yTkkdQ7CFJhhEDZkMAwRCN9m
-	ry4af75ZPfneKuGO1WR7DG51AfPWhu05azpqw/li0/QU/ohWuwQ95sBDb8/RTKjtCO2V
-	S/iMToMCXz00s0IJVZKefi2wBUAdS9UFO4BZucpTsyTsrLRiA0wI01AMJHQ9MvRCrLWD
-	v0JLaf8UmfXncQLMtV5drWO9ITQfWeEIjxBrYCsduE1FTGE3aqTZwhNpTJgA5W6/Wwy1
-	F2kw==
-X-Gm-Message-State: AOUpUlFeqb6kWZ+D5qDvRKryTL9VRMaF+YiHBr4x9jLygfCKer7Cf80Y
-	fORgm+WGpi2/3VVfovYWrt5gOQKAFTc=
-X-Google-Smtp-Source: AA+uWPxhqWSG+eXLtmACcJDukgAcTofAHiLL2uz4uIYd1uAxhIfutM4NTWE+3QcTbUtHllhCoVOC/Q==
-X-Received: by 2002:a1c:4004:: with SMTP id
-	n4-v6mr12725081wma.83.1534327618435; 
-	Wed, 15 Aug 2018 03:06:58 -0700 (PDT)
-Received: from localhost.localdomain ([91.92.208.25])
+	bh=KVuTEs2Be/CLlMEXBLaEzVcbPF7hVD924xDCEd8ghMs=;
+	b=hq6n7W+TbK7NxzU8D4uoOwNFaas8z6AqxQg+gH+kkL6aiOgfSHsc6ALK7weCx16ght
+	5L9HFoYDfiptemIuJoKPcY/xb45b8+zQK8FbZOQ1YzLIf0zJz5hnjyUw5lk6C8fgvgdA
+	l/eX7AliCWiqZYWP7mDR4QyITYjFPP68SH3VKxpeeIm+l07gZuiWXSOe8T+wv9LVHPHA
+	hM0TltbavVQjszeyvGI1pjRUi/MwNtCoGqpdx9dvsjhwcIbAsDIZXva6Gg3iQbB6Ivug
+	HUDSnb6nTC1O6ovUGSVikvxMqPpgLUIwPAySogX8WL9adgTbShY49tU6qHgnz+PeO2hv
+	tM1w==
+X-Gm-Message-State: AOUpUlH88/CZk9QCecyfmhDb1Dp/81S+pu4SWdlbH1FT61r9/qQnHYEQ
+	uqb9XWQRiDOzELEgi3x61TPtlu0EoQo=
+X-Google-Smtp-Source: AA+uWPzU4LgCKD3B7wZHMm/Kz/mjY+AbPk97DQJjJ6cMimGYtI2dPtbrfQAj9Dk4E3ZHlufcYbpl+Q==
+X-Received: by 2002:a0c:e9ce:: with SMTP id
+	q14-v6mr23643842qvo.106.1534347894691; 
+	Wed, 15 Aug 2018 08:44:54 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.61.164])
 	by smtp.gmail.com with ESMTPSA id
-	w204-v6sm1888566wmw.5.2018.08.15.03.06.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Aug 2018 03:06:57 -0700 (PDT)
-From: Isaac Nickaein <nickaein.i@gmail.com>
+	g19-v6sm15202331qtk.80.2018.08.15.08.44.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 15 Aug 2018 08:44:54 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Aug 2018 14:36:49 +0430
-Message-Id: <20180815100649.55872-1-nickaein.i@gmail.com>
-X-Mailer: git-send-email 2.17.0
-Cc: Isaac Nickaein <nickaein.i@gmail.com>
-Subject: [PATCH] iotop: Add missing dependency: python-subprocess
+Date: Wed, 15 Aug 2018 11:44:47 -0400
+Message-Id: <1534347887-7105-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-prompt-toolkit: update to version 2.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,29 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2018 10:06:58 -0000
+X-List-Received-Date: Wed, 15 Aug 2018 15:44:54 -0000
 
-This adds python-subprocess as run-time dependency for iotop.
+Update to the latest stable release.  This branch is
+incompatible with the 1.x.y releases
 
-More info:
-http://lists.openembedded.org/pipermail/openembedded-core/2018-August/154111.html
-
-Signed-off-by: Isaac Nickaein <nickaein.i@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-extended/iotop/iotop_0.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-prompt-toolkit.inc         | 4 ++--
+ ...python-prompt-toolkit_1.0.15.bb => python-prompt-toolkit_2.0.4.bb} | 0
+ ...thon3-prompt-toolkit_1.0.15.bb => python3-prompt-toolkit_2.0.4.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-prompt-toolkit_1.0.15.bb => python-prompt-toolkit_2.0.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_1.0.15.bb => python3-prompt-toolkit_2.0.4.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/iotop/iotop_0.6.bb b/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-index 5dcae98b1..45c2ed01f 100644
---- a/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-+++ b/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-@@ -21,4 +21,4 @@ do_install_append() {
+diff --git a/meta-python/recipes-devtools/python/python-prompt-toolkit.inc b/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
+index cc409a4..1a4bd35 100644
+--- a/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
++++ b/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
+@@ -2,8 +2,8 @@ SUMMARY = "Library for building powerful interactive command lines in Python"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
  
- RDEPENDS_${PN} = "python-curses python-textutils \
-                   python-codecs python-ctypes python-pprint \
--                  python-shell"
-+                  python-shell python-subprocess"
+-SRC_URI[md5sum] = "8fe70295006dbc8afedd43e5eba99032"
+-SRC_URI[sha256sum] = "858588f1983ca497f1cf4ffde01d978a3ea02b01c8a26a8bbc5cd2e66d816917"
++SRC_URI[md5sum] = "8db8b8e40e91bc6dce133d8d5727a717"
++SRC_URI[sha256sum] = "ff58ce8bb82c11c43416dd3eec7701dcbe8c576e2d7649f1d2b9d21a2fd93808"
+ 
+ PYPI_PACKAGE = "prompt_toolkit"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-prompt-toolkit_1.0.15.bb b/meta-python/recipes-devtools/python/python-prompt-toolkit_2.0.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-prompt-toolkit_1.0.15.bb
+rename to meta-python/recipes-devtools/python/python-prompt-toolkit_2.0.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_1.0.15.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_1.0.15.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.4.bb
 -- 
-2.17.0
+2.7.4
 
 
