@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
-	[209.85.221.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 023CA7927C
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id E24EF79265
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 18:28:03 +0000 (UTC)
-Received: by mail-wr1-f46.google.com with SMTP id v90-v6so1812474wrc.0
+	Thu, 16 Aug 2018 18:28:04 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id l2-v6so16263683wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 11:28:05 -0700 (PDT)
+	Thu, 16 Aug 2018 11:28:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=NPPo/7lZW4OxKMjfQHXQFAblMQKN26VQZywuc3OX12U=;
-	b=p1kXtJ+mHbLGTwAqWo39ufp+4ah9YFnPwdWNDvufb4N8KPMI0DExNnKnbI1fkoPNaz
-	cMeCll56UFxJqoiSihDqw/uDq/O8KXW7nnDQd8/wCDO0Mzjv+4ORi0s1mvLakNWiqkdV
-	jcdwRsCgnLaWKKzjCVLPvGjOPK+RHaPBNZZ0t/X/x4BnsCisi7LDjDBWS7heKNt8LA0z
-	hoi5HALN7yF7DCTMUkfadLKM0uve2yUidv4bBGdyjFoqERnDGXh2ucL9ObAjtuYqNOyj
-	7gUBkwfSg0qRgyuEdBjHyzBN2axqp6ukzKadXg8rg8iVJyldiSOQIBftxPIrNboATkxY
-	1dmA==
+	bh=5rzAe4lPDoJJg3BZmvldzk02sBICqw7W8tYxKJ91Tbg=;
+	b=SXE+cpO1g0asr6W0fEaKTTMLvrNJpAfI107nDaxD/lEk9JCXd/FNZ2eD8ruGTWSrQt
+	3DLT/ocGfbCNVVj7FKrBKGBG73ng/rRmjYbRe6WM4LBDJpDM4pR+LbHMNUsgPI5yISdG
+	TyVopLFEb5JbrVDgDs0cqzbQIfSU1cjqZBGERWLrzE3d9lY5fJQTU7W3KRZsi29M/6Jj
+	nuhOKwv79zvhPUI0cxoSt6J7/O9chaMgAQLJGiEw7zIE1EDQPoNH19Kx/nDbn0kkI+zm
+	AgQneqAruc1ZeWXc8OjnpEjznCMLdt8707QIsJsXl2vN1KpRSI2/2dqDRNZKAiNLteHY
+	IcwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=NPPo/7lZW4OxKMjfQHXQFAblMQKN26VQZywuc3OX12U=;
-	b=mpkyTGaW6a4Rkx0PjdFFDVkxPiRYnmobehCNkfAWHOcfMvOVwPWA96RvfpPouVUAZT
-	aSdv1GviB1zko6gD2DPEy/qEe99zQHHSy2LBRPhSTTNBHdB5f5vGOTaKdz5DtEckgzZY
-	y3mZUBvRunUQvcIK/OHZm8KJmDl3mrVQ3E4VxozE+u8GQ8MbjkmV3722nH0AFG6lLqOX
-	7mTa2NgC4CuBSW1uSfEkWmovHa+qUcRzY9iGeNi6YwPdQWjitzGpZ5DxFyeF+Pc38nsJ
-	pmvGKszeu4d/ToJpxNH4aCjD0H39BycNlP3l+PFmOvtUEZSGc0SunMXZ5s4+lMbxrf+Q
-	uPhg==
-X-Gm-Message-State: AOUpUlHocS68VZMvJYlq9I94CToD94Kqww/gIQJYa99urDDLC4v6FBf2
-	4XQSvU9mQOIA00SQQtzgeKE+y0BS
-X-Google-Smtp-Source: AA+uWPyeldeoxTs/KETuM6QwMmk2iudUSshFwzodiQl7sT4mX/2dwH48HNPlmT1+Xd/26ELq3qTFzg==
-X-Received: by 2002:a5d:438d:: with SMTP id
-	i13-v6mr20556024wrq.156.1534444084463; 
-	Thu, 16 Aug 2018 11:28:04 -0700 (PDT)
+	bh=5rzAe4lPDoJJg3BZmvldzk02sBICqw7W8tYxKJ91Tbg=;
+	b=IXe+smc0teMbTTlZcKe7ceQ0f8jFORuSu428rMlpmTCJv7ecFU0wUEUGu+/KAHh+R1
+	XWUzWou+9p4zlkLnvmhTpZuMKmVf/JalhDrFpvex7exNAatZwGFdUitmIoP8cZy0jfdr
+	0nZemWMnh6zeoUZ0B9aSk64iK1KZgqwNLpZHu3E1vnSO5lYTWDfgd06aSuKx0ksqDGXb
+	inxYlBl7EM2ORNQLTCARnvp8FHF06yUG9J01FsR3iYPyj6kGAo5WdxCdV6kNVd5d/g3i
+	kGqdzXsm5aZ8SqfOPDTEBcHLOmWnyNi2L07dPgXjiC0Cd8TMAn5AKYe7zt1+eMQtxtfQ
+	iN+Q==
+X-Gm-Message-State: AOUpUlEhf2NIW+3uyVzfrEJsBZ8IoJlxCGCFqyFqB/BjQbBssKcztAGm
+	YcBMVvPmDnXSvQmQqvBnrCUnTS4h
+X-Google-Smtp-Source: AA+uWPwt8bISgpXzgNn9ENbuvfWe7fPHaRlqa7nFIu3PFaPok6xaoeu6StTmrz4clY8HCx0fqsXwng==
+X-Received: by 2002:a1c:a703:: with SMTP id
+	q3-v6mr17115700wme.28.1534444085443; 
+	Thu, 16 Aug 2018 11:28:05 -0700 (PDT)
 Received: from localhost.localdomain
 	(p200300F07BC4D1601E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc4:d160:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	g10-v6sm26040224wrv.90.2018.08.16.11.28.03
+	g10-v6sm26040224wrv.90.2018.08.16.11.28.04
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 16 Aug 2018 11:28:03 -0700 (PDT)
+	Thu, 16 Aug 2018 11:28:04 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Aug 2018 20:27:40 +0200
-Message-Id: <20180816182748.2400-9-schnitzeltony@gmail.com>
+Date: Thu, 16 Aug 2018 20:27:41 +0200
+Message-Id: <20180816182748.2400-10-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.14.4
 In-Reply-To: <20180816182748.2400-1-schnitzeltony@gmail.com>
 References: <20180816182748.2400-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 08/16] xfwm4: upgrade 4.12.5 -> 4.13.1
+Subject: [PATCH 09/16] dconf: prettify
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,55 +62,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 18:28:04 -0000
+X-List-Received-Date: Thu, 16 Aug 2018 18:28:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* gtk3 based
-* it is a development version - but no stoppers were found
-* add PACKAGECONFIGs for better customization
+* GNOME_COMPRESS_TYPE = "xz" is defaul for ages
+* FILES_${PN}-dbg: are packed correctly
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../xfwm4/{xfwm4_4.12.5.bb => xfwm4_4.13.1.bb}           | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.12.5.bb => xfwm4_4.13.1.bb} (53%)
+ meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.5.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.1.bb
-similarity index 53%
-rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.5.bb
-rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.1.bb
-index f90d8da59..64ad9f64e 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.5.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.13.1.bb
-@@ -2,14 +2,24 @@ DESCRIPTION="Xfce4 Window Manager"
- SECTION = "x11/wm"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
--DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui libxinerama xfconf libwnck dbus-glib startup-notification exo-native"
-+DEPENDS = "virtual/libx11 libxfce4util libxfce4ui xfconf libwnck3 dbus-glib libxinerama exo-native"
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
+index edda1cc08..99292a88c 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.28.0.bb
+@@ -1,21 +1,18 @@
+ SUMMARY = "configuation database system"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-
+ SECTION = "x11/gnome"
  
- inherit xfce update-alternatives distro_features_check
+-GNOMEBASEBUILDCLASS = "meson"
+-inherit gnomebase gsettings bash-completion
+ SRC_URI[archive.md5sum] = "81faa8e68e5ea71ff0ee75050fc0759c"
+ SRC_URI[archive.sha256sum] = "61d3b3865ef58b729c3b39aa0979f886c014aa8362f93dcfc74bf5648ed9c742"
+-GNOME_COMPRESS_TYPE = "xz"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ DEPENDS = "dbus glib-2.0 intltool-native"
  
--SRC_URI[md5sum] = "61f6bc8b15c6a7361a58d875917e1791"
--SRC_URI[sha256sum] = "7775c02216666c2d023275e7ed6d85e57d965e5cc1407bb6a05c53cc38d8caca"
-+SRC_URI[md5sum] = "1a78bcc2100c03f6fea0dbce0ca813cf"
-+SRC_URI[sha256sum] = "75ebc20d313cff4905e76fc320254c30461dbfa985461b8e75dca04770cedf12"
+-inherit vala
++GNOMEBASEBUILDCLASS = "meson"
 +
-+PACKAGECONFIG ?= " \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
-+    xpresent \
-+    startup-notification \
-+"
-+
-+PACKAGECONFIG[epoxy] = "--enable-epoxy,--disable-epoxy,libepoxy"
-+PACKAGECONFIG[xpresent] = "--enable-xpresent,--disable-xpresent,libxpresent"
-+PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
++inherit gnomebase gsettings bash-completion vala
  
- python populate_packages_prepend () {
-     themedir = d.expand('${datadir}/themes')
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+     ${libdir}/gio/modules/*.so \
+ "
+-FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
 -- 
 2.14.4
 
