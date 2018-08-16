@@ -1,49 +1,49 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f46.google.com (mail-oi0-f46.google.com
-	[209.85.218.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 02F7779164
+Return-Path: <ricardo@foundries.io>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E60D579272
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 21:28:49 +0000 (UTC)
-Received: by mail-oi0-f46.google.com with SMTP id n21-v6so10671276oig.3
+	Thu, 16 Aug 2018 23:11:13 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id n6-v6so6803219qtl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 14:28:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=t1ilkGUT3DWfZp8wCJoPiiF9++5cxEKVLX1zA8f0UW4=;
-	b=iQHPvoSi6Dywy98NltA9GzKpONChjoe7e86zK/blAXc6B/HfaAogGDkaCJgn8vr9bx
-	N9TN0S4MYgQ1vJxbEayep/RgEJvbjISp/PuB+gGwQBEOCRvfnKYnCIc13mNZVh2Hax84
-	w/LCcE1VtDXFHN3JXlihrRC+ehkrESha5xzPWEqx5gEu8vQa+WgNeBYBvmFJIyE9KzA3
-	w2ztseHSWkyAjAJ9zm3itvMbmzM/PD4e5Kjvq3S2QIDZvFZ57DToDcUTvipMfkCtKwah
-	e1fZuV4uKb8ZVHnY7WhfSAwJuGTua+2GKSEZ1AZbreSnSvfmCuh+yf8btT/bz7rVaw13
-	FQyw==
+	Thu, 16 Aug 2018 16:11:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=foundries-io.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=20WLrirOVIMI01ZCA/rZU0Dn7hRVX1W+Jqi6Ju8juyk=;
+	b=GaVsVQu5CQ0VlApOTmWmKXogMMfzRITEhR5RfY0mIGTSgJ9RNN4jfRRr+ctavX5AgY
+	vhmmrif7evZFWap3PFBLWJL5+EwL7C8OaB6D+n20vU70rSc0/zShDakdQj/rychHels6
+	hpyp99T1/f0Tje9K0B5XZqbgbzkjG2ismyLc1D6g+cuulyof9n+2NInliZ7UDbNvkl4A
+	YDLjcPfGCgwCWxhgmvyzrb47o0MgyrAKSUebeoQ+o6+zcUk6fh3dVF/KpHUogHeQZsVW
+	sDgw9am+VIQjIB2dPKHXfufCUcerkUcD/c1R1OghSuPDCsPm6L+JhSz6Y8DRNXD63bma
+	9hoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=t1ilkGUT3DWfZp8wCJoPiiF9++5cxEKVLX1zA8f0UW4=;
-	b=dY+Q6gcssrRuQyLDIyXQU/GwYxgrU96jbXxbJ8hiV11FApMIK5LiPBmn6J9Uep2Tbh
-	EhDZpa/LEWkxee5oWiRrJdgi+xjJoxJx68Aq/TcxsGzRLofh2QL3p/FtZ0zHkjCQD0jO
-	XkVDgSZtHcQLEn/riDdaYJLCynQFAvyJOZ++cctOlVom9cGS2CSzmnKkHt5IaBUHsx55
-	+MPC9Bu3rPku0lxd3jPTxe2jD28g47shlK9oqMnpkL0LUoUnWLUskM0je1U78IPSf34A
-	znnKz07df4SIRn5VKqSp1KKFw9bm7rxDrx5wMEDgUSJmPM173Vhkk5WlIr55iKaIohj4
-	0WDg==
-X-Gm-Message-State: AOUpUlEOy3puDVNZVenz6ieYjO4q3Sd3sIsVNy/GyDYcgw5MNX3596Jj
-	zdHeQAzQT59U3S4PZdz0iyuz78fbCnKn6YdtPqA7HPV/
-X-Google-Smtp-Source: AA+uWPysdLwTnsv+fSLZvdQvlxqt32CB2+zxCIvP70iT0WdPaeLECOLbNcAIvdMvkTHqOp5DVKwPCW2mbouzhsuWiX0=
-X-Received: by 2002:aca:c351:: with SMTP id
-	t78-v6mr31210078oif.338.1534454930575; 
-	Thu, 16 Aug 2018 14:28:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:590c:0:0:0:0:0 with HTTP; Thu, 16 Aug 2018 14:28:49
-	-0700 (PDT)
-In-Reply-To: <20180816182748.2400-1-schnitzeltony@gmail.com>
-References: <20180816182748.2400-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 16 Aug 2018 23:28:49 +0200
-Message-ID: <CALbNGRQXs=QAmobAa+XoKP15-EiQ806eL7Dbs-BC=CTh6r_yww@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/16] updates & minor cleanups
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=20WLrirOVIMI01ZCA/rZU0Dn7hRVX1W+Jqi6Ju8juyk=;
+	b=XDGW3tDQkvQv88siDkbCCwBIgXQJ1Ow1SU45Q1CADEtFN9RSHxOn7gpRsJHHKGgrr6
+	UCiw2KNRfEMRGIw4mfBYl4GGMsaFXQmybo/+DD/czludfIQ8r+fkaOEDliCFLW3gN51a
+	hVltUYGaqzRT+O0vhwwXZSVX68sS77U2DAwfK58B9Cij0BvxgyjjVhn0FmSF/lzID7Wp
+	EUmp5WqF1IY8XJ0SObd5lwpc/iJPGfX8bIWqN0487I8sbA/mRLRc8GrfmuBQy/b4sNlO
+	JXXOTq5iHcGrqbfAaVmz95LFyJamxvpeurN59wyRqMDdJLjCMszB9HLWo7v60Nx59Obe
+	tgrA==
+X-Gm-Message-State: AOUpUlGFKjT5cOu3iZtmo1ehTOcdKU24qgHJe38BLvNqFxbFiaMC857f
+	XA1ff7+g1aMCR+UZnyc4MtqDSnVPag==
+X-Google-Smtp-Source: AA+uWPwTAc4ZJGZdCgnJWj7P7olsZD3gxnHEmalZrzUm+h8GPhvdkL3/GB+w/lCLYjT6O1dtdO5wLw==
+X-Received: by 2002:ac8:19db:: with SMTP id
+	s27-v6mr33252381qtk.215.1534461074445; 
+	Thu, 16 Aug 2018 16:11:14 -0700 (PDT)
+Received: from localhost.localdomain ([189.4.104.186])
+	by smtp.gmail.com with ESMTPSA id
+	a12-v6sm345267qkg.71.2018.08.16.16.11.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Aug 2018 16:11:13 -0700 (PDT)
+From: Ricardo Salveti <ricardo@foundries.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Aug 2018 20:11:07 -0300
+Message-Id: <20180816231107.17741-1-ricardo@foundries.io>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH] mozjs: disable null pointer optimization with GCC >= 6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,16 +56,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 21:28:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Aug 2018 23:11:14 -0000
 
-On Thu, Aug 16, 2018 at 8:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> Some of them I carry along for a while. Patches were tested with glibc 2.=
-28. In
-> case of trouble I'll take care.
-OOps: I meant they were not yet tested with glibc 2.28 - sorry
+Mozjs fails to start on several architectures due broken build
+optimizations when built with GCC >= 6.
 
-Andreas
+Set -fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks
+to both CFLAGS and CXXFLAGS as workaround (flags also used by Firefox
+and Fedora).
+
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+---
+ meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+index fe9698f..626522e 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+@@ -32,6 +32,11 @@ CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
+ 
+ DEPENDS += "nspr zlib"
+ 
++# Disable null pointer optimization in gcc >= 6
++# https://bugzilla.redhat.com/show_bug.cgi?id=1328045
++CFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
++CXXFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
++
+ # nspr's package-config is ignored so set libs manually
+ EXTRA_OECONF = " \
+     --target=${TARGET_SYS} \
+-- 
+2.7.4
+
 
