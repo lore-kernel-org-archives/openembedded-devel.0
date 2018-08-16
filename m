@@ -1,32 +1,44 @@
-Return-Path: <ashie@clear-code.com>
-Received: from mail.clear-code.com (mail.clear-code.com [153.126.206.245])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CAB77926A
+Return-Path: <mhm.dawod@gmail.com>
+Received: from mail-qk0-f169.google.com (mail-qk0-f169.google.com
+	[209.85.220.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 143B574CB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 06:25:09 +0000 (UTC)
-Received: from [192.168.10.7] (212.42.138.58.dy.bbexcite.jp [58.138.42.212])
-	by mail.clear-code.com (Postfix) with ESMTPSA id 9D5CED519B;
-	Thu, 16 Aug 2018 15:25:08 +0900 (JST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.clear-code.com 9D5CED519B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=clear-code.com;
-	s=default; t=1534400708;
-	bh=AwMgpBa8pt2i9Mtt1s+Lq4e7PBQb9u5IFL3U+zKt824=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=uYFKhGY7gyxc6iRfZrdpIap9q6kFniFNY5LAJVvswPzyRTSrJVU7aMkac5YIAyf6m
-	Pq5WG9AnwMOfxXbMm2esrQ45kPMkhOtGZIEcR3u3oHjZRcgWJ01YQSS5xqJfDxLPLW
-	97cT2aeFh2DyacY2xGff3+RvQd+HESfA6sdHtHg8=
-To: Anuj Mittal <anuj.mittal@intel.com>, Khem Raj <raj.khem@gmail.com>
-References: <20180816051257.4465-1-ashie@clear-code.com>
-	<CAMKF1sqOZFf5rjWqX0fSRQ+X1S3v5T39JvfZE2OUCo=Z-jVyoQ@mail.gmail.com>
-	<2ee375f8-c365-b311-3da4-8413bcb8cce4@intel.com>
-From: Takuro Ashie <ashie@clear-code.com>
-Message-ID: <8b63b108-dba4-c54c-063b-859e2d69814f@clear-code.com>
-Date: Thu, 16 Aug 2018 15:25:08 +0900
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Thu, 16 Aug 2018 13:26:09 +0000 (UTC)
+Received: by mail-qk0-f169.google.com with SMTP id z74-v6so3583976qkb.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Aug 2018 06:26:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=p62lZBVoMawBH9k2snRK18g4QJ9u1vgNx+zKaAq/0WE=;
+	b=Xqof/2v61QtFYU7DSBfo6DCRuq9Dh77x2ZRynv3Sx5MCuXwTbHH/eyRsrJVdMZRv9L
+	4YtY7gIEgVQ/IgszkCwxl9J1/Ay8Pog0kbTjhmdNETMfy1KtpdkWRermVCVjNMGWP5k5
+	0kbPayOnKHzjPsHyTuQGqXpI1Y0JlV4L3wrRQa7gb7HnMq64zHckd/+EvJXAyKgnSzVi
+	tX8j3pZrLIb56IOXDZtEFJb8QKBYq4A7hxnomFUryCpLlgx1CzNacot1Mrx15PZZnoS5
+	DHfyVcRG+1JODWRs8iJEb5HPpQ68Uy8J+Kay5D5kkbwBGL4bu046YA2b/rykUFl2z8/a
+	EjNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=p62lZBVoMawBH9k2snRK18g4QJ9u1vgNx+zKaAq/0WE=;
+	b=lu1iQAmsYyqcXr0PD4Oz+jVEuIVNfxa7u6xByY9aAqciNJSGdJGHqbczMsk9KcraPN
+	C/3yDkddRBj4jebMaC/6nZoHQS7AEMO/tgNmQfLsYZPDVspTEdonHz7Osr816ZLfBGK/
+	3O7zI+CoqOhpeWTCi0ToNnsspuyM3pTHmMle3S2BL8ef4RRqSQ1XaBI9/TWeRh3UdWQx
+	JGcjx748JZb9984DCx6QKT3GXTbaQfFG0NXb/aH2zEkVCh90hvJLsJ+0c3Bz6wOZ3ayK
+	UApC4yd9Z/kLXI0u/H5cer149Xb1CEwThe5sN1EPXjcNEOp6d7eA2D2rb9MHcm2eyRdF
+	AwZg==
+X-Gm-Message-State: AOUpUlGMNVcoE4MitY4sXg72oi7sE/PCkZFU9LNqzsNw4NxwGO4og/PX
+	sKXqAPtm0sK6NtFU2dLvrsB/oZWwIYBCjZNgrXNWYw==
+X-Google-Smtp-Source: AA+uWPz8hRGHxUUPWlvRVig81ngagDZPLawKCxGDEzJi9Ja5K8aM0iHXUIA86xe6EU9UPsRM6wI6TmrKrnGIz8w44hE=
+X-Received: by 2002:a0c:aa46:: with SMTP id
+	e6-v6mr26674692qvb.50.1534425970775; 
+	Thu, 16 Aug 2018 06:26:10 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <2ee375f8-c365-b311-3da4-8413bcb8cce4@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] uim: Fix SRC_URI
+From: Mohamed Dawod <mhm.dawod@gmail.com>
+Date: Thu, 16 Aug 2018 15:25:59 +0200
+Message-ID: <CAGCTLNRr7118-2whFfsWw-KbaT23bCKmp4J-HmyBZMFWw750Bw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [qt5]: qt5 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,24 +51,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 06:25:10 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 16 Aug 2018 13:26:10 -0000
+Content-Type: text/plain; charset="UTF-8"
+
+can i run qt5 apps on image that support wayland weston without x11 ?
+and how ?
 
 
+-- 
 
-On 2018年08月16日 15:05, Anuj Mittal wrote:
-> But this one is a release tarball and not the archive one ... shouldn't
-> those be okay?
-
-Yes, It's not git archive, the tar ball is created manually by the 
-maintainer.
-(generated configure script is included, git archive doesn't include it 
-though).
-Just the download URL is changed.
-So the md5sum & sha256sum aren't changed.
-
-Regards,
-
+Mohamed Dawod
+Computer Engineering Department
+Faculty of Engineering
+Cairo University
 
