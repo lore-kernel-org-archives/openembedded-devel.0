@@ -1,49 +1,23 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D6A3079234
+Return-Path: <avinash.reddy.palleti@intel.com>
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by mail.openembedded.org (Postfix) with ESMTP id C754B79265
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 18:31:40 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id b15-v6so9732763oib.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 11:31:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=Km0KyYOfW5xVerKD8aq4oG4s1MyVjwnjXM9/TSYL5EY=;
-	b=if58oQZYugzw+W0+2pjk+8LE+XSeJGVZ/Yo16JIKhLcmPkH54E5bGB/FWoB+d2DX1o
-	hhKHs2exedHoOESMcBUCOn3mcJz1/ikGcCnxsT9z+KLW6wBTlyR1BV/uX+pJc7zn9Vun
-	+CgkOE/l+chul0waoKtPAVD+WpGyZSXvguRIKEunsPjIJWwHuT5k7qXNtAf/Bm5Pzm/j
-	1QBF9hlqDPh8KAtZGU3hwR0m2gHoOEwBPhR/JaE0CE8V+Z6wrB6zdWfufS67Vj2M5kvG
-	/i/eKhttbmY2xN/j8z89sVQvImwaqMBpB58UFdcco9V1eXhb55/dxgOlOE3UdsR+8/zP
-	U+Aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=Km0KyYOfW5xVerKD8aq4oG4s1MyVjwnjXM9/TSYL5EY=;
-	b=WVfvu4vzqBreypavfH7mK8rDrWbfTgcYd2QaAddzkwNQxwQ/t7bmvdBWTWB19u56+0
-	SiU6otrHNNfED1M9VZljXR1BT8VFqgQbCYk9WRxPpRRrtIXNhvxOCKJlp9JzjH3fDOzv
-	I5j/h/RZUbZUvz0EJY8BGQ4m4TwPrUc8kYq3dS4lRY/5xDaCAcILBsSPnKIyZua8Y77w
-	+aWXNE9Eiu4YiiuziMoSWdUitKF3cnMU1z5vTaiRlCpS+luSrFH1AeROBs8AeJ8Twg4S
-	LqnJk0XDnSy1P10L+r0o1cEJD4rTN1U8H1iC8e59+yYzVKORdQwVqfMnTdtCPCjTl2Vn
-	fE0A==
-X-Gm-Message-State: AOUpUlENMIwGHNsW5tqLHOn7VQNqawSELmc1oFfU40Bqd6CCGCQAsKjL
-	vYyB3kJrZ/Yu9N1w0YBNDtvEnuVOH0zt0sqxxjApv+d0
-X-Google-Smtp-Source: AA+uWPz/jAGj2C0cGng08p+yDQ2eiQwm2tyld4YOKW/lmMS0BsGpHt4KoJnmAfMAyFK8VyDpnZfFhXABMeFeNjybBvA=
-X-Received: by 2002:aca:c351:: with SMTP id
-	t78-v6mr30556620oif.338.1534444301473; 
-	Thu, 16 Aug 2018 11:31:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:590c:0:0:0:0:0 with HTTP; Thu, 16 Aug 2018 11:31:40
-	-0700 (PDT)
-In-Reply-To: <20180816182748.2400-1-schnitzeltony@gmail.com>
-References: <20180816182748.2400-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 16 Aug 2018 20:31:40 +0200
-Message-ID: <CALbNGRRY6iMw+1rw5DkirSvYcxZySbqLvTVnnF3=73ejFa-TnA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/16] updates & minor cleanups
+	Thu, 16 Aug 2018 18:49:39 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	16 Aug 2018 11:49:40 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.53,247,1531810800"; d="scan'208";a="65495960"
+Received: from arpallet-desk.iind.intel.com ([10.66.247.158])
+	by orsmga007.jf.intel.com with ESMTP; 16 Aug 2018 11:49:39 -0700
+From: avinash.reddy.palleti@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Aug 2018 00:18:06 +0530
+Message-Id: <1534445286-27883-1-git-send-email-avinash.reddy.palleti@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] cpuid: Fix build with glibc 2.28+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,39 +30,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 18:31:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Aug 2018 18:49:39 -0000
 
-On Thu, Aug 16, 2018 at 8:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
-> Some of them I carry along for a while. Patches were tested with glibc 2.=
-28. In
-> case of trouble I'll take care.
->
-> Andreas M=C3=BCller (16):
->   gvfs: upgrade 1.36.0 -> 1.36.2
->   gtksourceview3: upgrade 3.24.6 -> 3.24.8
->   libxpresent: initial add 1.0.0
->   xfce4-whiskermenu-plugin: upgrade 2.2.0 -> 2.2.1
->   poppler: upgrade 0.66.0 -> 0.67.0
->   fftw: upgrade 3.3.7 -> 3.3.8
->   fftw: enable neon for single precision on aarch64 by default
->   xfwm4: upgrade 4.12.5 -> 4.13.1
->   dconf: prettify
->   dconf-editor: re-add 3.28.0
->   xfce4-session: upgrade 4.13.0 -> 4.13.1
->   xfce4-screenshooter: upgrade 1.9.2 -> 1.9.3
->   libsdl-net: initial add 1.2.8
->   libsdl2-net: initial add 2.0.1
->   move all libsdl recipes in one folder and follow oe-core's folder for
->     libsdl
->   libsdl2-image: upgrade 2.0.1 -> 2.0.3
->
-Forgot to mention
+From: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
 
-They are at https://github.com/schnitzeltony/meta-openembedded.git
-branch patches
+Include sys/sysmacros.h for cpuid.c
 
-Andreas
+Signed-off-by: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
+---
+ meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb   |  3 ++-
+ ...ix-Add-sys-sysmacros.h-to-fix-build-issue.patch | 24 ++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch
+
+diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
+index 7a70f75..ff03f94 100644
+--- a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
++++ b/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
+@@ -4,7 +4,8 @@ from the CPUID instruction, and also determines the exact model of CPU(s). \
+ It supports Intel, AMD, and VIA CPUs, as well as older Transmeta, Cyrix, \
+ UMC, NexGen, Rise, and SiS CPUs"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++					file://0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch"
+ 
+ SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz"
+ SRC_URI[md5sum] = "1c46a6662626c5a6eaca626f23a5a7d7"
+diff --git a/meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch b/meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch
+new file mode 100644
+index 0000000..985182e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch
+@@ -0,0 +1,24 @@
++From 2693a499d4eec4504962e85a9713fa6431d3025f Mon Sep 17 00:00:00 2001
++From: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
++Date: Thu, 16 Aug 2018 22:36:31 +0530
++Subject: [PATCH] Fix: Add sys/sysmacros.h to fix build issue
++
++---
++ cpuid.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/cpuid.c b/cpuid.c
++index 3c94837..0a98616 100644
++--- a/cpuid.c
+++++ b/cpuid.c
++@@ -31,6 +31,7 @@
++ #include <stdio.h>
++ #include <sys/types.h>
++ #include <sys/stat.h>
+++#include <sys/sysmacros.h>
++ #include <fcntl.h>
++ #include <errno.h>
++ #include <unistd.h>
++-- 
++2.7.4
++
+-- 
+2.7.4
+
 
