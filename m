@@ -1,51 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 285B379234
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
+	[209.85.218.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D6A3079234
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 18:29:46 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id y5-v6so5874691qti.12
+	Thu, 16 Aug 2018 18:31:40 +0000 (UTC)
+Received: by mail-oi0-f68.google.com with SMTP id b15-v6so9732763oib.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 11:29:47 -0700 (PDT)
+	Thu, 16 Aug 2018 11:31:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=pY839/RShqqGg7C5ZPdtfqOx1Ep2IT4bPNgb2pEEzIM=;
-	b=kG/vDCJWfRHqqlycq2tc23ZGtOh3e4iF8zQrCs9sdRUhpu57IhaHNhGnSrZhtSsOS7
-	MkNI29Y7RmjVm4CXWKfBZInlkWNtOzJXRQd3TMvNUyywNlCsNHWhGX3FUWBAIMeO0hz5
-	tqg+FHpEujQeSLMm/c9E+OQX1CbnHvEjfpDMfEHx19Y7y6pMUpMHVI68AIMrORzw4jV6
-	XIpOTyyHjGW1dKUUauDsXRtsYJ+31GOtq6xFGcsZuO+CcDAm5+GmuBiyl7yAOh5JLTDk
-	ofXp85ugW/AAsAJlghYJrMcKG5aNPqqhB6+Kg8LDpRoXzWHJ1fT2Nj99bSgzeY5kX5MY
-	rzaQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=Km0KyYOfW5xVerKD8aq4oG4s1MyVjwnjXM9/TSYL5EY=;
+	b=if58oQZYugzw+W0+2pjk+8LE+XSeJGVZ/Yo16JIKhLcmPkH54E5bGB/FWoB+d2DX1o
+	hhKHs2exedHoOESMcBUCOn3mcJz1/ikGcCnxsT9z+KLW6wBTlyR1BV/uX+pJc7zn9Vun
+	+CgkOE/l+chul0waoKtPAVD+WpGyZSXvguRIKEunsPjIJWwHuT5k7qXNtAf/Bm5Pzm/j
+	1QBF9hlqDPh8KAtZGU3hwR0m2gHoOEwBPhR/JaE0CE8V+Z6wrB6zdWfufS67Vj2M5kvG
+	/i/eKhttbmY2xN/j8z89sVQvImwaqMBpB58UFdcco9V1eXhb55/dxgOlOE3UdsR+8/zP
+	U+Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=pY839/RShqqGg7C5ZPdtfqOx1Ep2IT4bPNgb2pEEzIM=;
-	b=Z0oFDuBEJNKEBhTjHR46QKKOJP8ehO2TTIIkvyOnpWF0uTeAcQzf9tecyalTqBRZZ8
-	W/kEPTUCjFg0GrOdGcwy7i6TSLOhZvlOAtwqMyrI6fjJJiHO6VqxdhZtuEKpE2rTThk9
-	acEbwa2UZVAWyByoHgJ/Wkt33bYKx+BSVOLzefVJAe8vg47SXVDWkZlV7nPusNHW9taZ
-	BpzxYjNNafSjJmpeGTyR4ZB1h1EeMn+rt00gST/J6GvP1O3jQnTZLYSyeFAnjtgGhbV/
-	ObLISpnKV2suPgI9HQ1v2tPsm6GbFsLayvaNjHfoDRKKZ45xN79wB45Dktv56Y/+STZv
-	PeLA==
-X-Gm-Message-State: AOUpUlEzdYED+f4xmpm6bcoP0xkjiIhlGObkSYrwoiOMHeEo1d0tKX2R
-	H40WqqxK1/JqIQjcavRgT0oCLawFr3G14k7Grko=
-X-Google-Smtp-Source: AA+uWPwjcpRUjFd2p0FTKKXGFa+63ZqyrRg8MZvb64QcPDc/f99oRXHjAqvGDdc5zJwBTrXzf/amUlqeBnSjSHwRoSQ=
-X-Received: by 2002:ac8:70c5:: with SMTP id
-	g5-v6mr30885770qtp.376.1534444186803; 
-	Thu, 16 Aug 2018 11:29:46 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=Km0KyYOfW5xVerKD8aq4oG4s1MyVjwnjXM9/TSYL5EY=;
+	b=WVfvu4vzqBreypavfH7mK8rDrWbfTgcYd2QaAddzkwNQxwQ/t7bmvdBWTWB19u56+0
+	SiU6otrHNNfED1M9VZljXR1BT8VFqgQbCYk9WRxPpRRrtIXNhvxOCKJlp9JzjH3fDOzv
+	I5j/h/RZUbZUvz0EJY8BGQ4m4TwPrUc8kYq3dS4lRY/5xDaCAcILBsSPnKIyZua8Y77w
+	+aWXNE9Eiu4YiiuziMoSWdUitKF3cnMU1z5vTaiRlCpS+luSrFH1AeROBs8AeJ8Twg4S
+	LqnJk0XDnSy1P10L+r0o1cEJD4rTN1U8H1iC8e59+yYzVKORdQwVqfMnTdtCPCjTl2Vn
+	fE0A==
+X-Gm-Message-State: AOUpUlENMIwGHNsW5tqLHOn7VQNqawSELmc1oFfU40Bqd6CCGCQAsKjL
+	vYyB3kJrZ/Yu9N1w0YBNDtvEnuVOH0zt0sqxxjApv+d0
+X-Google-Smtp-Source: AA+uWPz/jAGj2C0cGng08p+yDQ2eiQwm2tyld4YOKW/lmMS0BsGpHt4KoJnmAfMAyFK8VyDpnZfFhXABMeFeNjybBvA=
+X-Received: by 2002:aca:c351:: with SMTP id
+	t78-v6mr30556620oif.338.1534444301473; 
+	Thu, 16 Aug 2018 11:31:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180813081742.6961-1-raj.khem@gmail.com>
-	<20180813081742.6961-19-raj.khem@gmail.com>
-	<CA+chaQcy1F03YbKDg4SEHwajyrx2gRjLCQVAHg++Hu5xCaguew@mail.gmail.com>
-	<CAMKF1sodqt9+PP_upLN3F8fKpM-F4JxzTkRBe8Pw7-JkHuteag@mail.gmail.com>
-	<CA+chaQfp3vJLnEPYFtmJBQ0MEKpEADgf4vVRjdsvp=C4P71dXQ@mail.gmail.com>
-In-Reply-To: <CA+chaQfp3vJLnEPYFtmJBQ0MEKpEADgf4vVRjdsvp=C4P71dXQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 16 Aug 2018 11:29:20 -0700
-Message-ID: <CAMKF1sq4fC9bvbR+CzipUHkoJei06jz00psktxKGXK7kSQdG1w@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 19/21] cfengine, cfengine-masterfiles: Upgrade to 3.12.0
+Received: by 2002:ac9:590c:0:0:0:0:0 with HTTP; Thu, 16 Aug 2018 11:31:40
+	-0700 (PDT)
+In-Reply-To: <20180816182748.2400-1-schnitzeltony@gmail.com>
+References: <20180816182748.2400-1-schnitzeltony@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 16 Aug 2018 20:31:40 +0200
+Message-ID: <CALbNGRRY6iMw+1rw5DkirSvYcxZySbqLvTVnnF3=73ejFa-TnA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 00/16] updates & minor cleanups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,182 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 18:29:46 -0000
+X-List-Received-Date: Thu, 16 Aug 2018 18:31:41 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 16, 2018 at 11:14 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+On Thu, Aug 16, 2018 at 8:27 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+> Some of them I carry along for a while. Patches were tested with glibc 2.=
+28. In
+> case of trouble I'll take care.
 >
-> I'll check that.
+> Andreas M=C3=BCller (16):
+>   gvfs: upgrade 1.36.0 -> 1.36.2
+>   gtksourceview3: upgrade 3.24.6 -> 3.24.8
+>   libxpresent: initial add 1.0.0
+>   xfce4-whiskermenu-plugin: upgrade 2.2.0 -> 2.2.1
+>   poppler: upgrade 0.66.0 -> 0.67.0
+>   fftw: upgrade 3.3.7 -> 3.3.8
+>   fftw: enable neon for single precision on aarch64 by default
+>   xfwm4: upgrade 4.12.5 -> 4.13.1
+>   dconf: prettify
+>   dconf-editor: re-add 3.28.0
+>   xfce4-session: upgrade 4.13.0 -> 4.13.1
+>   xfce4-screenshooter: upgrade 1.9.2 -> 1.9.3
+>   libsdl-net: initial add 1.2.8
+>   libsdl2-net: initial add 2.0.1
+>   move all libsdl recipes in one folder and follow oe-core's folder for
+>     libsdl
+>   libsdl2-image: upgrade 2.0.1 -> 2.0.3
 >
-> I'm also seeing failures in netkit-rsh uw-imap inetutils pure-ftpd all related to crypt(), I'll check if it's just a dependency and then a bit strange error in kernel-selftest
+Forgot to mention
 
-mostly should be dependency, but I wonder why I dont see it in my
-world builds for rpi
+They are at https://github.com/schnitzeltony/meta-openembedded.git
+branch patches
 
->
-> sed: can't read kernel-selftest/1.0-r0/kernel-selftest-1.0/tools/testing/selftests/bpf/Makefile: No such file or directory
->
-> Which might be because older kernel used in this build.
->
-
-selftest package is misbehaving send a revert
-
->
-> On Thu, Aug 16, 2018 at 7:58 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> On Thu, Aug 16, 2018 at 10:27 AM Martin Jansa <martin.jansa@gmail.com> wrote:
->> >
->> > With this one I'm seeing cfengine-3.12.0-r0 do_package failure:
->> >
->> > ERROR: SYSTEMD_SERVICE_cfengine value cf-consumer.service does not exist
->>
->> its likely, since my local builders use sysvinit and OE builders
->> where I relied for systemd builds are currently enjoying a cruise in pacific
->>
->> care to cook a patch ? if not I will get to it eventually.
->>
->> >
->> > On Mon, Aug 13, 2018 at 10:20 AM Khem Raj <raj.khem@gmail.com> wrote:
->> >>
->> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> ---
->> >>  ...10.2.bb => cfengine-masterfiles_3.12.0.bb} |  4 +--
->> >>  .../cfengine/change-hard-coded-lib-path.patch | 28 -------------------
->> >>  .../set-path-of-default-config-file.patch     | 23 ++++++++++++---
->> >>  ...{cfengine_3.10.2.bb => cfengine_3.12.0.bb} |  7 ++---
->> >>  4 files changed, 24 insertions(+), 38 deletions(-)
->> >>  rename meta-oe/recipes-extended/cfengine/{cfengine-masterfiles_3.10.2.bb => cfengine-masterfiles_3.12.0.bb} (87%)
->> >>  delete mode 100644 meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch
->> >>  rename meta-oe/recipes-extended/cfengine/{cfengine_3.10.2.bb => cfengine_3.12.0.bb} (93%)
->> >>
->> >> diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
->> >> similarity index 87%
->> >> rename from meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
->> >> rename to meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
->> >> index b52e7cc082..dda6af9c9d 100644
->> >> --- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
->> >> +++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
->> >> @@ -22,8 +22,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
->> >>
->> >>  SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
->> >>
->> >> -SRC_URI[md5sum] = "1247ef4e8f3cee5efa98da50c326e5a4"
->> >> -SRC_URI[sha256sum] = "5d18a8d71f451d0b5dd1f5e579452b29b99b664f2bb0827dbba9a615f2764df6"
->> >> +SRC_URI[md5sum] = "d59bd8c95620da816c382f749d425860"
->> >> +SRC_URI[sha256sum] = "1c50e3d8c702097e13a21258626d936d6ff2e6492e893dfe286ff0d6204d7a65"
->> >>
->> >>  inherit autotools
->> >>
->> >> diff --git a/meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch b/meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch
->> >> deleted file mode 100644
->> >> index 2295e415cd..0000000000
->> >> --- a/meta-oe/recipes-extended/cfengine/cfengine/change-hard-coded-lib-path.patch
->> >> +++ /dev/null
->> >> @@ -1,28 +0,0 @@
->> >> -Upstream-Status: Inappropriate [configuration]
->> >> -
->> >> -projlibdir use a hard coded lib path, this will cause error when build a 64bit
->> >> -target. So change it to suitable path.
->> >> -
->> >> -Signed-off-by: Song.Li <Song.Li@windriver.com>
->> >> -Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
->> >> -Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> >> ----
->> >> - configure.ac | 2 +-
->> >> - 1 file changed, 1 insertion(+), 1 deletion(-)
->> >> -
->> >> -diff --git a/configure.ac b/configure.ac
->> >> -index 38e2b9c..bc6b996 100644
->> >> ---- a/configure.ac
->> >> -+++ b/configure.ac
->> >> -@@ -188,7 +188,7 @@ AS_IF([test x"$enable_fhs" = xyes], [
->> >> -   fi
->> >> -
->> >> -   sbindir='${exec_prefix}/bin' # /var/cfengine/bin despite being sbin_?
->> >> --  projlibdir='${exec_prefix}/lib'
->> >> -+  projlibdir='${libdir}'
->> >> -   mandir='${exec_prefix}/share/man'
->> >> - ])
->> >> -
->> >> ---
->> >> -1.7.1
->> >> -
->> >> diff --git a/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch b/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch
->> >> index b9526f2843..db69f951ca 100644
->> >> --- a/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch
->> >> +++ b/meta-oe/recipes-extended/cfengine/cfengine/set-path-of-default-config-file.patch
->> >> @@ -1,23 +1,38 @@
->> >> +From dc270040cb3beb5ca42f864813145c8a68594bad Mon Sep 17 00:00:00 2001
->> >> +From: Kai Kang <kai.kang@windriver.com>
->> >> +Date: Mon, 18 Jul 2016 09:06:06 +0800
->> >> +Subject: [PATCH] cfengine: add recipe and base policy
->> >> +
->> >>  Upstream-Status: Inappropriate [configuration]
->> >>
->> >>  Set the path of default configure file.
->> >>
->> >>  Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> >> +
->> >>  ---
->> >> + misc/init.d/cfengine3.in | 12 ++++--------
->> >> + 1 file changed, 4 insertions(+), 8 deletions(-)
->> >> +
->> >>  diff --git a/misc/init.d/cfengine3.in b/misc/init.d/cfengine3.in
->> >> -index d6ae26f..1dee283 100644
->> >> +index c584817..12f5803 100644
->> >>  --- a/misc/init.d/cfengine3.in
->> >>  +++ b/misc/init.d/cfengine3.in
->> >> -@@ -101,11 +101,7 @@ if [ -z "$LOCKDIR" ]; then
->> >> +@@ -101,14 +101,10 @@ if [ -z "$LOCKDIR" ]; then
->> >>   fi
->> >>
->> >>   # default control file
->> >>  -if [ "$DEBIAN" = "1" ]; then
->> >>  -    DEFAULT=/etc/default/cfengine3
->> >> +-    INIT_FUNCTIONS=/lib/lsb/init-functions
->> >> +-    if [ -e "$INIT_FUNCTIONS" ]; then
->> >> +-        . "$INIT_FUNCTIONS"
->> >> +-    fi
->> >>  -else
->> >>  -    DEFAULT=/etc/sysconfig/cfengine3
->> >> --fi
->> >>  +DEFAULT=/etc/default/cfengine3
->> >> ++INIT_FUNCTIONS=/lib/lsb/init-functions
->> >> ++if [ -e "$INIT_FUNCTIONS" ]; then
->> >> ++    . "$INIT_FUNCTIONS"
->> >> + fi
->> >>
->> >>   if [ -f $DEFAULT ]; then
->> >> -     . $DEFAULT
->> >> diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
->> >> similarity index 93%
->> >> rename from meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
->> >> rename to meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
->> >> index b86b0a1f18..aa33a97a4d 100644
->> >> --- a/meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
->> >> +++ b/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
->> >> @@ -16,12 +16,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
->> >>  DEPENDS = "attr tokyocabinet"
->> >>
->> >>  SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
->> >> -           file://change-hard-coded-lib-path.patch \
->> >>             file://set-path-of-default-config-file.patch \
->> >> -"
->> >> +           "
->> >>
->> >> -SRC_URI[md5sum] = "c16baf08189a1af6fcf2e2ff61102992"
->> >> -SRC_URI[sha256sum] = "d4fa9ac7276dba7b85d6757aab2f0929ab8d3b115cb0e7b0cf984760347429d7"
->> >> +SRC_URI[md5sum] = "33ef12260db4b430352229f37f7cb0e5"
->> >> +SRC_URI[sha256sum] = "d71ba98a272390c6fa8bc20e8ea27f0050a0a72a3e6b206a4762b4646be332ec"
->> >>
->> >>  inherit autotools systemd
->> >>
->> >> --
->> >> 2.18.0
->> >>
->> >> --
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Andreas
 
