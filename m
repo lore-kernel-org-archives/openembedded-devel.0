@@ -1,46 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com
-	[209.85.216.174])
-	by mail.openembedded.org (Postfix) with ESMTP id F07D360236
+Return-Path: <mhm.dawod@gmail.com>
+Received: from mail-qt0-f171.google.com (mail-qt0-f171.google.com
+	[209.85.216.171])
+	by mail.openembedded.org (Postfix) with ESMTP id F3B787926B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 14:24:35 +0000 (UTC)
-Received: by mail-qt0-f174.google.com with SMTP id z8-v6so4831938qto.9
+	Thu, 16 Aug 2018 14:37:39 +0000 (UTC)
+Received: by mail-qt0-f171.google.com with SMTP id c15-v6so4924975qtp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 07:24:37 -0700 (PDT)
+	Thu, 16 Aug 2018 07:37:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=RhJ7jqKI5UOATrbgg+Dz8h7+6PHqFQ/QR22cJuJVZug=;
-	b=QLA4YXJH0sQvCWcTqpBtcTATxnAFTKXRJTD/PolMUNjvdorS867FnxpWn4yw3xXqYq
-	WUYEzuXI2N6xlLxX1z5rRBFzb02e9vvFH8wEcQEiN0ieeS+dl4m03k3rBU1mGy5XwKvx
-	dnFHUH1rw3YdOiC/Dfm0IPOGrxMf/7l2N+JMfYVqId9VKqcc7jS81rN1Y4she3ApgOPp
-	sKrJy7hk9H9amasj5wIhYwH0K9s+gPRo8zZ52hYstCD3tf6rRGr4BtDsFRcYprGBbufR
-	mCO3eNWczoix3NfV7eE73igmdbeN+LZKPpE1O9PwDMWvyd5vDcv9Xxf1XUti1qHj+SNv
-	of8w==
+	:cc; bh=PZJVXIh9e8hgCg0juCnYcwAzJVPSlM1qXAQslNR76eg=;
+	b=mrZpGAlZoErMgR3rUuJA3ELLNC+1sfliP38KXWXewjO7sPO4CKhZ44p+1th9rb71Mc
+	hyKtGvoVZlC3rZCTRB6u/BWfLvcs2FS90wcZZCqOkbXjaGfcH2sRSIGT8InXpaPaUYs6
+	QramB+n13KjWj0YKfzTDF5tTarz3O/cAIRJ8Ct6eUCe0XDIYcvDMN47XtxdpwNcjrLUn
+	yt4S/FDwYIVLv1uPijBS5LEuQLCkL6i84+8q+mR+yJzktVoBqL7oPGLtevymMZgZT3Z+
+	uQUxIeNuKK8vXOYV6MtFVxO6BO+DMtRgF2+A54n951DyET/SPOPvGC8EGswFV6R+wp/b
+	8uqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=RhJ7jqKI5UOATrbgg+Dz8h7+6PHqFQ/QR22cJuJVZug=;
-	b=AHIDrYhBtqSV+X7yesvAMaxM5xGoShzYK+wgfn5/1odDne/sf4RpLMRuE7SUHlxW18
-	HXdacY2l+GBiuFB6B0+s7TS0tU/YG6tIiSFsBLuGM4ub85YQ5HHAieU1VYRvR+3Ko0+R
-	eZ1pm1R9w8D98wK2Lv/Z7/uvycJIfTl6PnqFlrzJpVn3FR0Ky/w/yXQ8PWMDPHIYCdcL
-	/+6VieTdTkMB3PFBapADtq8XQ/htxKobqfo8VXy75gmNOzQnQuQDdcfnbKL4szjr0xU2
-	Y5KzXvJOMuAZPC0szdEjektTyl1qV0nbCM0aYXJrG/n0OHngEn+7WvIim1goUtY3oVrx
-	B40g==
-X-Gm-Message-State: AOUpUlH7Y5LFSDhfN8pQYMEtDVvMdbND5oAbiOTn+bLpyk/XCeKM94+3
-	kdrX2DqjfNeKwqwCqWHx6uUJ3x5QASDsk8XonuA=
-X-Google-Smtp-Source: AA+uWPxJN3vU+UU5i1sWsHsWsy80mQVIdcRLH75AcQc2oYjOv5OhcUgO49BWiPvCcW/6rCPTghX/31q2LasdAKIrLJE=
-X-Received: by 2002:ac8:2ad8:: with SMTP id
-	c24-v6mr30181699qta.117.1534429476700; 
-	Thu, 16 Aug 2018 07:24:36 -0700 (PDT)
+	bh=PZJVXIh9e8hgCg0juCnYcwAzJVPSlM1qXAQslNR76eg=;
+	b=pXGVevN5BY55FpD9U+rrXbZabH+uIIzX7rITlVRqUd7ky8ruzga2dhBfhpbcfZklGS
+	vwQzOtLMUM3f/svWx/BKVti59zJhHHy1upSA54BGsNX3FA4B5Mv1p1+Gk8Y7B6DvWLx7
+	taqxxDJIRFLLLaF65ZnMcxbEHn1BL33zh0NlYWuj7E6pWXvV3KAwumNLMnUCchOoDHpQ
+	fm0hQNTmWh3hdIYPs0Rq3dEaox2H+7d3AixIbDQZbdOeZ23Z8dza9DS6c/Bwm0KotDsW
+	Y5t6T0yvBB6iEhO8FVIbeGlS2cYe+ek6v+wGhp4oUfIcuHDVsuYfsUWqAeUe2CpqKYms
+	ORBA==
+X-Gm-Message-State: AOUpUlHYBca+stga9FKXE6xoTSsBY5ojGmz00vGEV7v833YA3BHhflPP
+	Xe7BVNWw6umz7L1g4JmpfSSwiODBD618l+OlG3E=
+X-Google-Smtp-Source: AA+uWPwcJC+94WI9/LWjdgF7lT82OypDLh4/eQlPHCDktQUoWtL2kgaelMTm0bZCQIllFFh2juHiICfmHA9bfkqcRjc=
+X-Received: by 2002:a0c:c30f:: with SMTP id
+	f15-v6mr26631329qvi.104.1534430260909; 
+	Thu, 16 Aug 2018 07:37:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAGCTLNRr7118-2whFfsWw-KbaT23bCKmp4J-HmyBZMFWw750Bw@mail.gmail.com>
-In-Reply-To: <CAGCTLNRr7118-2whFfsWw-KbaT23bCKmp4J-HmyBZMFWw750Bw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 16 Aug 2018 07:24:10 -0700
-Message-ID: <CAMKF1sr2se=QBu8UjieWGXUPT=Jyj3PesogniqK-F6BnzsrWZA@mail.gmail.com>
-To: Mohamed Dawod <mhm.dawod@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMKF1sr2se=QBu8UjieWGXUPT=Jyj3PesogniqK-F6BnzsrWZA@mail.gmail.com>
+In-Reply-To: <CAMKF1sr2se=QBu8UjieWGXUPT=Jyj3PesogniqK-F6BnzsrWZA@mail.gmail.com>
+From: Mohamed Dawod <mhm.dawod@gmail.com>
+Date: Thu, 16 Aug 2018 16:37:28 +0200
+Message-ID: <CAGCTLNTSwV=ozB7gCX+G4QqTyiR8aVC=kPHvLL0J2VZGPDwJuQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [qt5]: qt5 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -54,27 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 14:24:36 -0000
+X-List-Received-Date: Thu, 16 Aug 2018 14:37:40 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Aug 16, 2018 at 6:26 AM Mohamed Dawod <mhm.dawod@gmail.com> wrote:
+where i should use -platform wayland ?
+did you mean when i run the application, i need to add this suffix to the
+app name ?
+
+On Thu, Aug 16, 2018 at 4:24 PM Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Thu, Aug 16, 2018 at 6:26 AM Mohamed Dawod <mhm.dawod@gmail.com> wrote:
+> >
+> > can i run qt5 apps on image that support wayland weston without x11 ?
+> > and how ?
+> >
 >
-> can i run qt5 apps on image that support wayland weston without x11 ?
-> and how ?
+> add qtwayland to IMAGE_INSTALL and use '-platform wayland'
+>
+> >
+> > --
+> >
+> > Mohamed Dawod
+> > Computer Engineering Department
+> > Faculty of Engineering
+> > Cairo University
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
-add qtwayland to IMAGE_INSTALL and use '-platform wayland'
 
->
-> --
->
-> Mohamed Dawod
-> Computer Engineering Department
-> Faculty of Engineering
-> Cairo University
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+
+Mohamed Dawod
+Computer Engineering Department
+Faculty of Engineering
+Cairo University
 
