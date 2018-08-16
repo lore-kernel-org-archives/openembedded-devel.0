@@ -1,39 +1,52 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C13C474598
+Return-Path: <ricardo@foundries.io>
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+	[209.85.167.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D2D4745C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Aug 2018 15:52:08 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id h4-v6so1670748qtj.7
+	Thu, 16 Aug 2018 02:18:11 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id y200-v6so2258575lfd.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Aug 2018 08:52:09 -0700 (PDT)
+	Wed, 15 Aug 2018 19:18:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=foundries-io.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Fyr2V/dX9xdTyGz1aYA+GobaIJJwCJFQqZFJFAMrWuM=;
+	b=C2d4q4yowIbYJT6O6IcypFm88ahtaGmHmpF9DezZw3OgibHdhBsm2FDGr0W4QQv6uv
+	9vd+euefHnidEwXoHRhvaWD54J4TpPjx7QqWvSXsqTRq9Z2p1PzBuB6+3KxZtGlY14Ke
+	o57VDNGpdVVtzsvyi95wbryd0agGtFE7g4GfcAr/Ffd9th2ko+6wGyfF3kd4VDWKqeRH
+	OTTRG1uj5Vl/4XmzIY0MSfnn5ka6rvF7Grcecie60W0vTCLoE5A+epl6che+zRYyhWEv
+	588caKEFZPPteKKTwL971xDhZCptAiDjKvHT2MUaIWyWZjA6CPHQe73OIA17AIZoeYRE
+	Ad+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tI0l9OCpPOAX7WudH/6BXHymnzqZTWISoOnYFwY6OSo=;
-	b=A3mmiwcq1KhGWoXBdnMI50L+kOVRLISiriIBPHdk8eO4jk7zvzJsxhIYAyGhidYlcD
-	wBu5DPRFdYbcj3ldkUJboR/qPj0UsAY6OKRPJBYrJ7X2Y+0cfBe8j0o6JkOfLX/k5d5N
-	1u1o0Sqh8GOaZlNMV3qZuVRRJ7WEhJQjlN8wlDGKlln+DoJgM23b3zX8m8N19uksWLy6
-	Mc3YoQFD8rY5zMcsnLrTsaoxuIMlxanTWqNnBGHUqvl30DxNJWAK4xK/5vMoaCW/ufzX
-	hFrxAZ258jThNDO6gPLzWb0VxV1v4rXZoEtfuorvgDSyJN5fGM754xgihkkAtqwWbwaO
-	P2Mg==
-X-Gm-Message-State: AOUpUlEJ7z90UtFG33w1xYFERrK2//wLlP5siH4jWQXP9MufZkhsGfwd
-	qBBkA2E31QGZ/IY5DpCmIr72Y6NTEw0=
-X-Google-Smtp-Source: AA+uWPzYdV1wdWbpFJQmND2ncJj+t6dNC38BSYfLir5ZfkQu8Gvg9W69rCMBN6AmgteTI6z16uHgSw==
-X-Received: by 2002:a0c:c963:: with SMTP id
-	v32-v6mr23287268qvj.215.1534348329021; 
-	Wed, 15 Aug 2018 08:52:09 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.61.164])
-	by smtp.gmail.com with ESMTPSA id
-	b83-v6sm13978689qkc.20.2018.08.15.08.52.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 15 Aug 2018 08:52:08 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Aug 2018 11:52:01 -0400
-Message-Id: <1534348321-7741-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pip: update to version 18.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Fyr2V/dX9xdTyGz1aYA+GobaIJJwCJFQqZFJFAMrWuM=;
+	b=ExI+0EBm/dPc0vM/GEufiyIX/RILLyd4e2VkdwsADXaTcsOoSSe+TWYjzG0jGDQjHG
+	JaLbWSVJ/V0WOUDcvIfS65e65q/sCczvcF3CXYnuaPkJs+xGvevfkMGmc4iy/RQkR1nL
+	ZCM/wtsobBU2Tw/+YLeVcSWYf2Xiji02hFKd3APcefhDeLdZ9/q0DWtxY5CzxlB+JTqm
+	HyjifuE5wRBoSEi4pFnSmjcNLEiyMYxdPeLC73RCLTK3lzD2xsoTu6Di3MAI/Flw3J8c
+	lDfL8kRYjHLjvsTN267G0WL+ReJIouaLH2a2MWbJzXNpV6RAFbEhUC2Bjds3Y/g1OULZ
+	+L2w==
+X-Gm-Message-State: AOUpUlFvuy1DAsOtTL0EnDN8LSETB2IUc0N9UsoAFLUSSsnppKt2JHFD
+	F36CBQlyM1dKpiMbCeybYo/cx9/+HimSsRON+1zC
+X-Google-Smtp-Source: AA+uWPylBdMZhJrNIkVytT8zg6vy0QR6062qzkldsRSQiXXiMP0I7DvcR8gDu7NAKhVuUgr8n/7gBlH6poTtWi0NdPw=
+X-Received: by 2002:a19:ef13:: with SMTP id
+	n19-v6mr2659250lfh.48.1534385891678; 
+	Wed, 15 Aug 2018 19:18:11 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a19:e611:0:0:0:0:0 with HTTP; Wed, 15 Aug 2018 19:17:31
+	-0700 (PDT)
+In-Reply-To: <CAE-gg=6XBsP+Nm0fdSrmou6bYWYYcb4=W7P78KJt=7MTrh98-g@mail.gmail.com>
+References: <1533092773-22300-1-git-send-email-ricardo@foundries.io>
+	<CAMKF1sqAMyN2QErgLn1VZ4hxXjm-fGdRTnZ5ZeBEs5mXOqEL+g@mail.gmail.com>
+	<CAE-gg=6XBsP+Nm0fdSrmou6bYWYYcb4=W7P78KJt=7MTrh98-g@mail.gmail.com>
+From: Ricardo Salveti <ricardo@foundries.io>
+Date: Wed, 15 Aug 2018 23:17:31 -0300
+Message-ID: <CAAaKDhEao-tigyhko=j3AWGxJd4kzryQ1r2tLf6DrNMmwxEWnw@mail.gmail.com>
+To: Andy <andreas.kling@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] mozjs: set -fno-schedule-insns2 on both CFLAGS and CXXFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,38 +59,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Aug 2018 15:52:08 -0000
+X-List-Received-Date: Thu, 16 Aug 2018 02:18:11 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-License-Update: Copyright year changed to include 2018
+On Tue, Aug 14, 2018 at 3:50 PM, Andy <andreas.kling@gmail.com> wrote:
+> Hi,
+>
+> Am Do., 2. Aug. 2018 um 10:34 Uhr schrieb Khem Raj <raj.khem@gmail.com>:
+>>
+>> Hi Ricardo
+>>
+>>
+>> On Tue, Jul 31, 2018 at 8:06 PM Ricardo Salveti <ricardo@foundries.io> wrote:
+>> >
+>> > Mozjs fails to start on several architectures due broken build
+>> > optimizations when building with GCC >= 6.
+>> >
+>> > Set -fno-schedule-insns2 as workaround (flag also used by Firefox and
+>> > Debian).
+>> >
+>> > Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+>> > ---
+>> >  meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb | 5 +++++
+>> >  1 file changed, 5 insertions(+)
+>> >
+>> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+>> > index da80b63..adc27ac 100644
+>> > --- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+>> > +++ b/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+>> > @@ -30,6 +30,11 @@ CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
+>> >
+>> >  DEPENDS += "nspr zlib"
+>> >
+>> > +# Avoid broken JIT on several architectures (from Firefox and Debian)
+>> > +# https://bugzilla.mozilla.org/show_bug.cgi?id=1245783
+>> > +CFLAGS += "-fno-schedule-insns2"
+>> > +CXXFLAGS += "-fno-schedule-insns2"
+>> > +
+>>
+>> Could you test with -fno-tree-vrp -fno-strict-aliasing
+>> -fno-delete-null-pointer-checks instead of -fno-schedule-insns2
+>>
+>
+> at least polkit is able to start again using
+>
+> CFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
+> CXXFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
+>
+> before I got:
+> Assertion failure: !joinable()
+> in cortexa7t2hf-neon-poky-linux-gnueabi/mozjs/52.8.1-r0/mozjs-52.8.1/js/src/threading/Thread.h:122
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-pip_10.0.1.bb => python-pip_18.0.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pip_10.0.1.bb => python-pip_18.0.bb} (62%)
+Finally able to test this locally across multiple builds, and these
+flags seems to be working fine as well.
 
-diff --git a/meta-python/recipes-devtools/python/python-pip_10.0.1.bb b/meta-python/recipes-devtools/python/python-pip_18.0.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python-pip_10.0.1.bb
-rename to meta-python/recipes-devtools/python/python-pip_18.0.bb
-index 5aaf818..6b943b0 100644
---- a/meta-python/recipes-devtools/python/python-pip_10.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pip_18.0.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "PIP is a tool for installing and managing Python packages"
- HOMEPAGE = "https://pip.pypa.io/"
- LICENSE = "MIT & LGPL-2.1"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f8d33acaac5c5dac8c613904bd56a6f"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=593c6cd9d639307226978cbcae61ad4b"
- 
--SRC_URI[md5sum] = "83a177756e2c801d0b3a6f7b0d4f3f7e"
--SRC_URI[sha256sum] = "f2bd08e0cd1b06e10218feaf6fef299f473ba706582eb3bd9d52203fdbd7ee68"
-+SRC_URI[md5sum] = "52f75ceb21e96c258f289859a2996b60"
-+SRC_URI[sha256sum] = "a0e11645ee37c90b40c46d607070c4fd583e2cd46231b1c06e389c5e814eed76"
- 
- inherit pypi setuptools
- 
+Looking around and it seems fedora is also using the flags you
+suggested, should we use them instead of '-fno-schedule-insns2'? If
+so, I can prepare another patch with the new changes.
+
+Thanks,
 -- 
-2.7.4
-
+Ricardo Salveti
 
