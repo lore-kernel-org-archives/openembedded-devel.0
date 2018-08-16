@@ -1,45 +1,48 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A94779254
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id DC1D378E00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 20:05:07 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1534449908; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=MT2Sx21PaGX5teE2ZRR+SfCpswNPIOQOugOvt2QymLg=;
-	b=PRO1TLZQdUDAVvoiz6rTaLXLbM1HuAXqNTRd/UDcIkBY5ZlD4l1SDcs6nTmMoQpQy7GQieK8
-	KxBor6zpLy8kh7Gm05AvbVefgZ5twE9HPkQzZ8qfXC74cqSoOUjQ1u4CAGKRHogD49WSm8Hf
-	LupCyas7Zf/fxioMdlbqX2VL2Gg=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
-	[209.85.223.176])
-	by mxa.mailgun.org with ESMTP id 5b75d8f4.7f940012ba70-smtp-out-n03;
-	Thu, 16 Aug 2018 20:05:08 -0000 (UTC)
-Received: by mail-io0-f176.google.com with SMTP id y24-v6so1146086iob.12
+	Thu, 16 Aug 2018 20:39:18 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id j5-v6so5271674wrr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 13:05:08 -0700 (PDT)
-X-Gm-Message-State: AOUpUlHSrK4ZaBGfxhJz6liYgJIoG6o3BDFSYLF7E2Vnx/g9p/7Rn85i
-	yKqH/j4fEeD+qeQPz4AkGAS8tV5mDui26EXUjuA=
-X-Google-Smtp-Source: AA+uWPxkfN+8+HGmithTwHXdlmNFcU+9CG223R8xvrPsdJaNakTpiCW7dduFUYv9P20MqrSv1IZEP9Pc0ffuT4s1HQg=
-X-Received: by 2002:a6b:dd01:: with SMTP id
-	f1-v6mr26947959ioc.45.1534449907993; 
-	Thu, 16 Aug 2018 13:05:07 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:a6b:a3cd:0:0:0:0:0 with HTTP; Thu, 16 Aug 2018 13:05:07
-	-0700 (PDT)
-In-Reply-To: <1534445286-27883-1-git-send-email-avinash.reddy.palleti@intel.com>
-References: <1534445286-27883-1-git-send-email-avinash.reddy.palleti@intel.com>
-From: Derek Straka <derek@asterius.io>
-Date: Thu, 16 Aug 2018 16:05:07 -0400
-X-Gmail-Original-Message-ID: <CADNbA1obPEC9SRZx8qggwaAsPMKdpsxiGk0hbDBFKR5vxzP7nw@mail.gmail.com>
-Message-ID: <CADNbA1obPEC9SRZx8qggwaAsPMKdpsxiGk0hbDBFKR5vxzP7nw@mail.gmail.com>
-To: avinash.reddy.palleti@intel.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] cpuid: Fix build with glibc 2.28+
+	Thu, 16 Aug 2018 13:39:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=x5HDEGAGVSUVPK5ynRQXrjLdWVASi0ckr4eym5tOwXU=;
+	b=jwyKOiOXAtgf+K0JtQ8BFz5M1oD5K2G+I1995j9LYDcG9wjDd9GTuvbrDOUGHQ+Aty
+	03xfn1Oso3nyRQr8iq8isrOjFydF6oJ4XjTd4QYwlmI0EJhcA47FHWLva0l4Hp59wZWd
+	DQiBthqqxn1UH3b29VdoDseyn50xLDYYXPQUcMAtS40JOE47e1id7o08ivB28QnlEvjG
+	VVwERf7dvI3bzk9qdspSvjVpgqbm8xniN1IIMIUOoBImnMJtRfPlfAdczVnoJRsdeBJH
+	E1ojdYRFK6bbkCY6kk/JdODTimdIAWKknymlWSEnuArzfJ4oOx8ISHxMwcjZAzYJN0dz
+	GQCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=x5HDEGAGVSUVPK5ynRQXrjLdWVASi0ckr4eym5tOwXU=;
+	b=rsl4Hu7krJjFabMr+qtWhzEiMTUvVaOiDoHoYcXVWdSX3TTv8KLsHSuBzgkOWMRm0s
+	EQHXI5Nhk0Uy1J8nHykoEqN3zl4ghUebdBnXhfH5hwJ4KxjEtDVSh5khb86rWh+kokln
+	pklzZOeGEO3T6KfBGDAQsLO9UKtXoHjWv4DKjUACx/ye8FuLFY3nJEYePpK4oWN9Jfew
+	1hF2jbqgSzpRcEHWG9tNO4JU6kCswG0J5Zp5OrWPwbxPT0duvP71bzFoLQtGBuQGdlZe
+	i4qxboMIew2jYXyLdRnkKv4tLZLJmWCSeEr6nRhPNdth0187DM8v20Nv7vSDkAxwERo8
+	cx3Q==
+X-Gm-Message-State: AOUpUlGAj+rr0/q+mrFPEaIcrFfObY5PKNMAjkq0q35OUDm/t5yh6h0F
+	KrfSjbglp/Mr+PUZZkD+ir83qSID
+X-Google-Smtp-Source: AA+uWPy0pBbuwV78/oPaDVYhMyOHf1/ZSKH7dWNRSkG3Ewps1B62sels46Dim+awO90VESK04vpcxQ==
+X-Received: by 2002:a5d:6381:: with SMTP id
+	p1-v6mr2584868wru.106.1534451959303; 
+	Thu, 16 Aug 2018 13:39:19 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	i15-v6sm187350wro.7.2018.08.16.13.39.18
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 16 Aug 2018 13:39:18 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Aug 2018 20:39:15 +0000
+Message-Id: <20180816203920.464-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][meta-networking][PATCH 1/6] inetutils: fix build with glibc-2.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,84 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 20:05:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 16 Aug 2018 20:39:19 -0000
 
-On Thu, Aug 16, 2018 at 2:48 PM, <avinash.reddy.palleti@intel.com> wrote:
+* fixes:
+  ../../inetutils-1.9.4/src/uucpd.c:236: error: undefined reference to 'crypt'
+  ../../inetutils-1.9.4/src/rexecd.c:378: error: undefined reference to 'crypt'
 
-> From: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
->
-> Include sys/sysmacros.h for cpuid.c
->
-> Signed-off-by: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
-> ---
->  meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb   |  3 ++-
->  ...ix-Add-sys-sysmacros.h-to-fix-build-issue.patch | 24
-> ++++++++++++++++++++++
->  2 files changed, 26 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-
-> sysmacros.h-to-fix-build-issue.patch
->
-> diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-> b/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-> index 7a70f75..ff03f94 100644
-> --- a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-> +++ b/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-> @@ -4,7 +4,8 @@ from the CPUID instruction, and also determines the exact
-> model of CPU(s). \
->  It supports Intel, AMD, and VIA CPUs, as well as older Transmeta, Cyrix, \
->  UMC, NexGen, Rise, and SiS CPUs"
->  LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-> +                                       file://0001-Fix-Add-sys-
-> sysmacros.h-to-fix-build-issue.patch"
->
-> Why is the patch being added to the LIC_FILES_CHKSUM?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-connectivity/inetutils/inetutils_1.9.4.bb           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+index 190cd5f142..a27dbae2e6 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+@@ -4,7 +4,7 @@ rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
+ talkd, telnet, telnetd, tftp, tftpd, and uucpd."
+ HOMEPAGE = "http://www.gnu.org/software/inetutils"
+ SECTION = "net"
+-DEPENDS = "ncurses netbase readline"
++DEPENDS = "ncurses netbase readline virtual/crypt"
+ 
+ LICENSE = "GPLv3"
+ 
+-- 
+2.17.1
 
->  SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz"
->  SRC_URI[md5sum] = "1c46a6662626c5a6eaca626f23a5a7d7"
-> diff --git a/meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-
-> sysmacros.h-to-fix-build-issue.patch b/meta-oe/recipes-devtools/
-> cpuid/files/0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch
-> new file mode 100644
-> index 0000000..985182e
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/cpuid/files/0001-Fix-Add-sys-
-> sysmacros.h-to-fix-build-issue.patch
-> @@ -0,0 +1,24 @@
-> +From 2693a499d4eec4504962e85a9713fa6431d3025f Mon Sep 17 00:00:00 2001
-> +From: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
-> +Date: Thu, 16 Aug 2018 22:36:31 +0530
-> +Subject: [PATCH] Fix: Add sys/sysmacros.h to fix build issue
-> +
-> +---
-> + cpuid.c | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/cpuid.c b/cpuid.c
-> +index 3c94837..0a98616 100644
-> +--- a/cpuid.c
-> ++++ b/cpuid.c
-> +@@ -31,6 +31,7 @@
-> + #include <stdio.h>
-> + #include <sys/types.h>
-> + #include <sys/stat.h>
-> ++#include <sys/sysmacros.h>
-> + #include <fcntl.h>
-> + #include <errno.h>
-> + #include <unistd.h>
-> +--
-> +2.7.4
-> +
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
