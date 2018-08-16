@@ -1,44 +1,47 @@
-Return-Path: <mhm.dawod@gmail.com>
-Received: from mail-qk0-f169.google.com (mail-qk0-f169.google.com
-	[209.85.220.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 143B574CB4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com
+	[209.85.216.174])
+	by mail.openembedded.org (Postfix) with ESMTP id F07D360236
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 13:26:09 +0000 (UTC)
-Received: by mail-qk0-f169.google.com with SMTP id z74-v6so3583976qkb.10
+	Thu, 16 Aug 2018 14:24:35 +0000 (UTC)
+Received: by mail-qt0-f174.google.com with SMTP id z8-v6so4831938qto.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Aug 2018 06:26:11 -0700 (PDT)
+	Thu, 16 Aug 2018 07:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=p62lZBVoMawBH9k2snRK18g4QJ9u1vgNx+zKaAq/0WE=;
-	b=Xqof/2v61QtFYU7DSBfo6DCRuq9Dh77x2ZRynv3Sx5MCuXwTbHH/eyRsrJVdMZRv9L
-	4YtY7gIEgVQ/IgszkCwxl9J1/Ay8Pog0kbTjhmdNETMfy1KtpdkWRermVCVjNMGWP5k5
-	0kbPayOnKHzjPsHyTuQGqXpI1Y0JlV4L3wrRQa7gb7HnMq64zHckd/+EvJXAyKgnSzVi
-	tX8j3pZrLIb56IOXDZtEFJb8QKBYq4A7hxnomFUryCpLlgx1CzNacot1Mrx15PZZnoS5
-	DHfyVcRG+1JODWRs8iJEb5HPpQ68Uy8J+Kay5D5kkbwBGL4bu046YA2b/rykUFl2z8/a
-	EjNA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=RhJ7jqKI5UOATrbgg+Dz8h7+6PHqFQ/QR22cJuJVZug=;
+	b=QLA4YXJH0sQvCWcTqpBtcTATxnAFTKXRJTD/PolMUNjvdorS867FnxpWn4yw3xXqYq
+	WUYEzuXI2N6xlLxX1z5rRBFzb02e9vvFH8wEcQEiN0ieeS+dl4m03k3rBU1mGy5XwKvx
+	dnFHUH1rw3YdOiC/Dfm0IPOGrxMf/7l2N+JMfYVqId9VKqcc7jS81rN1Y4she3ApgOPp
+	sKrJy7hk9H9amasj5wIhYwH0K9s+gPRo8zZ52hYstCD3tf6rRGr4BtDsFRcYprGBbufR
+	mCO3eNWczoix3NfV7eE73igmdbeN+LZKPpE1O9PwDMWvyd5vDcv9Xxf1XUti1qHj+SNv
+	of8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=p62lZBVoMawBH9k2snRK18g4QJ9u1vgNx+zKaAq/0WE=;
-	b=lu1iQAmsYyqcXr0PD4Oz+jVEuIVNfxa7u6xByY9aAqciNJSGdJGHqbczMsk9KcraPN
-	C/3yDkddRBj4jebMaC/6nZoHQS7AEMO/tgNmQfLsYZPDVspTEdonHz7Osr816ZLfBGK/
-	3O7zI+CoqOhpeWTCi0ToNnsspuyM3pTHmMle3S2BL8ef4RRqSQ1XaBI9/TWeRh3UdWQx
-	JGcjx748JZb9984DCx6QKT3GXTbaQfFG0NXb/aH2zEkVCh90hvJLsJ+0c3Bz6wOZ3ayK
-	UApC4yd9Z/kLXI0u/H5cer149Xb1CEwThe5sN1EPXjcNEOp6d7eA2D2rb9MHcm2eyRdF
-	AwZg==
-X-Gm-Message-State: AOUpUlGMNVcoE4MitY4sXg72oi7sE/PCkZFU9LNqzsNw4NxwGO4og/PX
-	sKXqAPtm0sK6NtFU2dLvrsB/oZWwIYBCjZNgrXNWYw==
-X-Google-Smtp-Source: AA+uWPz8hRGHxUUPWlvRVig81ngagDZPLawKCxGDEzJi9Ja5K8aM0iHXUIA86xe6EU9UPsRM6wI6TmrKrnGIz8w44hE=
-X-Received: by 2002:a0c:aa46:: with SMTP id
-	e6-v6mr26674692qvb.50.1534425970775; 
-	Thu, 16 Aug 2018 06:26:10 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=RhJ7jqKI5UOATrbgg+Dz8h7+6PHqFQ/QR22cJuJVZug=;
+	b=AHIDrYhBtqSV+X7yesvAMaxM5xGoShzYK+wgfn5/1odDne/sf4RpLMRuE7SUHlxW18
+	HXdacY2l+GBiuFB6B0+s7TS0tU/YG6tIiSFsBLuGM4ub85YQ5HHAieU1VYRvR+3Ko0+R
+	eZ1pm1R9w8D98wK2Lv/Z7/uvycJIfTl6PnqFlrzJpVn3FR0Ky/w/yXQ8PWMDPHIYCdcL
+	/+6VieTdTkMB3PFBapADtq8XQ/htxKobqfo8VXy75gmNOzQnQuQDdcfnbKL4szjr0xU2
+	Y5KzXvJOMuAZPC0szdEjektTyl1qV0nbCM0aYXJrG/n0OHngEn+7WvIim1goUtY3oVrx
+	B40g==
+X-Gm-Message-State: AOUpUlH7Y5LFSDhfN8pQYMEtDVvMdbND5oAbiOTn+bLpyk/XCeKM94+3
+	kdrX2DqjfNeKwqwCqWHx6uUJ3x5QASDsk8XonuA=
+X-Google-Smtp-Source: AA+uWPxJN3vU+UU5i1sWsHsWsy80mQVIdcRLH75AcQc2oYjOv5OhcUgO49BWiPvCcW/6rCPTghX/31q2LasdAKIrLJE=
+X-Received: by 2002:ac8:2ad8:: with SMTP id
+	c24-v6mr30181699qta.117.1534429476700; 
+	Thu, 16 Aug 2018 07:24:36 -0700 (PDT)
 MIME-Version: 1.0
-From: Mohamed Dawod <mhm.dawod@gmail.com>
-Date: Thu, 16 Aug 2018 15:25:59 +0200
-Message-ID: <CAGCTLNRr7118-2whFfsWw-KbaT23bCKmp4J-HmyBZMFWw750Bw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [qt5]: qt5 support
+References: <CAGCTLNRr7118-2whFfsWw-KbaT23bCKmp4J-HmyBZMFWw750Bw@mail.gmail.com>
+In-Reply-To: <CAGCTLNRr7118-2whFfsWw-KbaT23bCKmp4J-HmyBZMFWw750Bw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 16 Aug 2018 07:24:10 -0700
+Message-ID: <CAMKF1sr2se=QBu8UjieWGXUPT=Jyj3PesogniqK-F6BnzsrWZA@mail.gmail.com>
+To: Mohamed Dawod <mhm.dawod@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [qt5]: qt5 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,17 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Aug 2018 13:26:10 -0000
+X-List-Received-Date: Thu, 16 Aug 2018 14:24:36 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-can i run qt5 apps on image that support wayland weston without x11 ?
-and how ?
+On Thu, Aug 16, 2018 at 6:26 AM Mohamed Dawod <mhm.dawod@gmail.com> wrote:
+>
+> can i run qt5 apps on image that support wayland weston without x11 ?
+> and how ?
+>
 
+add qtwayland to IMAGE_INSTALL and use '-platform wayland'
 
--- 
-
-Mohamed Dawod
-Computer Engineering Department
-Faculty of Engineering
-Cairo University
+>
+> --
+>
+> Mohamed Dawod
+> Computer Engineering Department
+> Faculty of Engineering
+> Cairo University
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
