@@ -1,25 +1,24 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 25B73792EE
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 35B136093F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Aug 2018 09:37:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7H9bJGr006529
+	Fri, 17 Aug 2018 09:38:31 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7H9cWqN032255
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Aug 2018 02:37:19 -0700 (PDT)
-Received: from pek-lpg-core1-vm1.wrs.com (128.224.156.106) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Fri, 17 Aug 2018 02:37:18 -0700
-From: Dengke Du <dengke.du@windriver.com>
+	Fri, 17 Aug 2018 02:38:32 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Fri, 17 Aug 2018 02:38:31 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Aug 2018 17:47:49 +0800
-Message-ID: <1534499269-29908-2-git-send-email-dengke.du@windriver.com>
+Date: Fri, 17 Aug 2018 17:38:30 +0800
+Message-ID: <1534498710-392479-1-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1534499269-29908-1-git-send-email-dengke.du@windriver.com>
-References: <1534499269-29908-1-git-send-email-dengke.du@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] kernel-selftest: add ptest support
+Subject: [meta-networking][PATCH] ipvsadm: fix usrmerge install path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,57 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Aug 2018 09:37:18 -0000
+X-List-Received-Date: Fri, 17 Aug 2018 09:38:31 -0000
 Content-Type: text/plain
 
-Group the kernel-selftest testcases in run-ptest.
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Update SBIN to fix below error when
+usrmerge enabled in DISTRO_FEATURES.
+
+ERROR: QA Issue: ipvsadm-dbg package is not obeying usrmerge distro feature. /sbin should be relocated to /usr. [usrmerge]
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb     |  4 +++-
- .../recipes-kernel/kernel-selftest/kernel-selftest/run-ptest  | 11 +++++++++++
- 2 files changed, 14 insertions(+), 1 deletion(-)
- create mode 100755 meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
+ meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index d5ccace..d2923bc 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -4,6 +4,8 @@ LICENSE = "GPLv2"
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
+index 58407a1..4f3c16d 100644
+--- a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.29.bb
+@@ -34,6 +34,7 @@ do_compile() {
+ }
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
- "
-+SRC_URI += "file://run-ptest \
-+"
+ do_install() {
++    sed -i -e "s;SBIN\t\t= \$(BUILD_ROOT)/sbin;SBIN\t\t= \$(BUILD_ROOT)/$base_sbindir;" ${S}/Makefile
+     oe_runmake 'BUILD_ROOT=${D}' install
+ }
  
- # for musl libc
- SRC_URI_libc-musl += "file://userfaultfd.patch \
-@@ -17,7 +19,7 @@ PACKAGECONFIG[vm] = ",,,libgcc bash"
- 
- do_patch[depends] += "virtual/kernel:do_shared_workdir"
- 
--inherit linux-kernel-base kernel-arch
-+inherit linux-kernel-base kernel-arch ptest
- 
- do_populate_lic[depends] += "virtual/kernel:do_patch"
- 
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-new file mode 100755
-index 0000000..d40b957
---- /dev/null
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest/run-ptest
-@@ -0,0 +1,11 @@
-+#!/bin/sh
-+export PATH=$PATH:/usr/kernel-selftest/bpf
-+
-+# test_align
-+test_align | grep "12 pass" &> /dev/null
-+if [ $? == 0 ]; then
-+    echo "[PASS]: test_align"
-+else
-+    echo "[FAIL]: test_align"
-+fi
-+
 -- 
 2.7.4
 
