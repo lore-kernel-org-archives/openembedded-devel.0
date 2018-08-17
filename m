@@ -1,35 +1,49 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id F364379116
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 29D6C74589
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Aug 2018 13:45:40 +0000 (UTC)
-Received: from svr-orw-mbx-07.mgc.mentorg.com ([147.34.90.207])
-	by relay1.mentorg.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-SHA384:256)
-	id 1fqf4Q-00070Z-4r from Joe_MacDonald@mentor.com ;
-	Fri, 17 Aug 2018 06:45:42 -0700
-Received: from svr-orw-mbx-08.mgc.mentorg.com (147.34.90.208) by
-	SVR-ORW-MBX-07.mgc.mentorg.com (147.34.90.207) with Microsoft SMTP
-	Server (TLS) id 15.0.1320.4; Fri, 17 Aug 2018 06:45:39 -0700
-Received: from burninator.cal.mentorg.com (147.34.91.1) by
-	svr-orw-mbx-08.mgc.mentorg.com (147.34.90.208) with Microsoft SMTP
-	Server id
-	15.0.1320.4 via Frontend Transport; Fri, 17 Aug 2018 06:45:39 -0700
-Received: by burninator.cal.mentorg.com (Postfix, from userid 5844)
-	id 1790D28A2431; Fri, 17 Aug 2018 09:45:37 -0400 (EDT)
-Date: Fri, 17 Aug 2018 09:45:35 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20180817134535.GB12454@mentor.com>
-References: <20180816152927.4833-1-joe_macdonald@mentor.com>
-	<20155edf-dc19-5d00-7a6f-dbadb24b66f8@gmail.com>
+	Fri, 17 Aug 2018 14:21:26 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id z8-v6so8874120qto.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Aug 2018 07:21:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=EEFRPjzCCMKtfCPhPOPWLj8M4C/0c5WiWerMi3CZFnk=;
+	b=H+QV8xoObT8XOKjfGNkFILRWrxg7pvoh2USg7mG17dUjoqilQx7kWBo1UvMzQboEVx
+	G2WQcDwLRRdedl0+mMc4cQ//Up0Sf8XbEjb9hRXcwVp+NEJ2oAqfBhCqrip05iFzce+8
+	yc58r8g6OgMA7ufcA+8ovndUHnIL3Fu1YJUW5MoV/Qf7RO9l09o7Pcxl4lgvFHYO9mF0
+	2hlvNeYQZmQO4jkd1vJ01+NehJDsfVMb192++5xTIp0Ds8DsdeVxO6CGSC7H7RJbszwV
+	MrMiLnVuLkB8YsgGx8vS6jHuH90QvX6WnDezBV2CxqbS3IEDR9R04X9SrOW9o6dTCaf4
+	JcnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=EEFRPjzCCMKtfCPhPOPWLj8M4C/0c5WiWerMi3CZFnk=;
+	b=mkOhhXKTeXt3Ft4LZek2RSDoUqNJrsamEYTYTlaQEe7ssS71s4QX+J3MYYsxjVNwo0
+	4RWtAyQnnj0h1ZyH8aqoaEPaqtzrnn6l5SA2oM2MlcpSukwkDbcGc0OtUFNh6o3hgzv0
+	VVsMvf6m5UqLWZwlJxbXvW4hCPSBGVjTpo/oI91wWnW7l1BYkRs0YjA4GLQSx82Fxjcq
+	R3tkg7je6++DDwlP/fXmBDCIkL0lBX8sIZyO9xmwuonuaU81mR3a1U88MOHN+c0rjqNh
+	OrSluuE/342w+77fhxfCzjfrN/VRODvXnYQ2onnMgdw/8rgNhvvc/p9iKPc9d2imBBzi
+	lBfQ==
+X-Gm-Message-State: AOUpUlFYDS2yCNgwXqnJoAlQQ9V91Pfd5mV5BNA61r5z7P19T+zDxFsl
+	7BDCxyKIzmBzydJ6XorN7qNApN0vlg0WrPV83ng=
+X-Google-Smtp-Source: AA+uWPzXnj0Z5lx0wwedz61ccxA1hFSkqlq/Hj6bFm8qi5FY8JsKB8+b5fQ4HAn5zmRcob4WNwa3sPs6r7hkHCj5kaw=
+X-Received: by 2002:ac8:25f1:: with SMTP id
+	f46-v6mr35491972qtf.20.1534515687698; 
+	Fri, 17 Aug 2018 07:21:27 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20155edf-dc19-5d00-7a6f-dbadb24b66f8@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-800 http://www.vim.org
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: openembedded-devel@lists.openembedded.org, stefan.bosak@gmail.com
-Subject: Re: [meta-networking][PATCH v2] bird: initial import
+References: <20180723231104.23011-1-alistair.francis@wdc.com>
+In-Reply-To: <20180723231104.23011-1-alistair.francis@wdc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 17 Aug 2018 07:21:01 -0700
+Message-ID: <CAMKF1sqs1Xtj6o=yReDTjg7qp=w68PBZRWOXOrWENS3fn+fgFg@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>,
+	megha.dey@linux.intel.com,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2] ndctl: Add the NDCTL package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,171 +56,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Aug 2018 13:45:41 -0000
-X-Groupsio-MsgNum: 74021
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="DKU6Jbt7q3WqK7+M"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 17 Aug 2018 14:21:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---DKU6Jbt7q3WqK7+M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Alistair
 
-[Re: [oe] [meta-networking][PATCH v2] bird: initial import] On 18.08.16 (Th=
-u 17:02) Khem Raj wrote:
-
->=20
->=20
-> On 8/16/18 8:29 AM, Joe MacDonald wrote:
-> > Initial integration of the two stable BIRD releases, 1.6.4 and 2.0.2.
-> >=20
-> > Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> > ---
-> >=20
-> > v2:
-> >    - adding upstream-status and link to upstream commit accomplishing t=
-he same
-> >      goal.
-> >=20
-> >  .../recipes-protocols/bird/bird.inc           |   32 +
-> >  .../recipes-protocols/bird/bird_1.6.4.bb      |    9 +
-> >  .../recipes-protocols/bird/bird_2.0.2.bb      |    9 +
-> >  ...-extend-config.sub-to-recognize-musl.patch | 4430 +++++++++++++++++
-> >  .../recipes-protocols/bird/files/bird.init    |    2 +
-> >  5 files changed, 4482 insertions(+)
-> >  create mode 100644 meta-networking/recipes-protocols/bird/bird.inc
-> >  create mode 100644 meta-networking/recipes-protocols/bird/bird_1.6.4.bb
-> >  create mode 100644 meta-networking/recipes-protocols/bird/bird_2.0.2.bb
-> >  create mode 100644 meta-networking/recipes-protocols/bird/files/0001-m=
-usl-extend-config.sub-to-recognize-musl.patch
-> >  create mode 100755 meta-networking/recipes-protocols/bird/files/bird.i=
-nit
-> >=20
-> > diff --git a/meta-networking/recipes-protocols/bird/bird.inc b/meta-net=
-working/recipes-protocols/bird/bird.inc
-> > new file mode 100644
-> > index 000000000..33d17dcb7
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-protocols/bird/bird.inc
-> > @@ -0,0 +1,32 @@
-> > +SUMMARY =3D "BIRD Internet Routing Daemon"
-> > +DESCRIPTION =3D "\
-> > +BIRD is dynamic routing daemon supporting IPv4 and IPv6 versions of ro=
-uting \
-> > +protocols BGP, RIP and OSPF."
-> > +HOMEPAGE =3D "http://bird.network.cz"
-> > +SECTION =3D "console/network"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://README;beginline=3D87;endline=3D103;md5=
-=3D0efecc23f039022580d0bac9a52f6117"
-> > +DEPENDS =3D "flex bison ncurses readline"
-> > +
->=20
-> does it need flex and bison on target ? or just native versions
-
-Confirmed in my rework tree now that we only need the native versions.
-
-> > +inherit autotools
-> > +
-> > +EXTRA_OECONF  +=3D "\
-> > +--enable-pthreads \
-> > +"
-> > +
-> > +do_configure() {
-> > +    oe_runconf ${EXTRA_OECONF}
-> > +}
-> > +
-> > +do_install_append() {
-> > +    install -m 0755 -d ${D}${sysconfdir}/init.d
-> > +    install -m 0755 ${WORKDIR}/bird.init ${D}${sysconfdir}/init.d/bird
->=20
-> may be use a single line
->=20
-> install -D -m 0755 ${WORKDIR}/bird.init ${D}${sysconfdir}/init.d/bird
-
-I actually prefer this split over two steps since it makes things
-cleaner when we inevitably need to change what gets included in our
-do_install*().  In my reworked version I've removed the mode set on the
-first line, though, to better align with the other examples elsewhere in
-the meta-openembedded tree.
-
-> > +    rm -rf ${D}/run ${D}/var/run=20
-> > +}
-> > +
-> > +PACKAGES +=3D " bird-client"
-> > +
-> > +FILES_${PN} +=3D "/run /var/run"
->=20
-> I think we don't need this
-
-Yeah, we don't need this.
-
-> > +FILES_${PN}-client =3D "/usr/sbin/birdc*"
-> > +
->=20
-> may be use ${sbindir} here
-
-I've fixed this too.
-
-> > +RUNIT_SERVICES =3D "bird"
-> > diff --git a/meta-networking/recipes-protocols/bird/bird_1.6.4.bb b/met=
-a-networking/recipes-protocols/bird/bird_1.6.4.bb
-> > new file mode 100644
-> > index 000000000..27c62aeee
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-protocols/bird/bird_1.6.4.bb
-> > @@ -0,0 +1,9 @@
-> > +require bird.inc
-> > +
-> > +SRC_URI =3D "\
-> > +    ftp://bird.network.cz/pub/${PN}/${PN}-${PV}.tar.gz \
-> > +    file://bird.init \
-> > +    file://0001-musl-extend-config.sub-to-recognize-musl.patch \
-> > +    "
-> > +SRC_URI[md5sum] =3D "d62ec2547338e8d3dfb934b4c7b2faa4"
-> > +SRC_URI[sha256sum] =3D "c26b8caae988dba81a9dbbee93502463d4326d1b749d72=
-8d62aa5529c605afc0"
-> > diff --git a/meta-networking/recipes-protocols/bird/bird_2.0.2.bb b/met=
-a-networking/recipes-protocols/bird/bird_2.0.2.bb
-> > new file mode 100644
-> > index 000000000..92d858869
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-protocols/bird/bird_2.0.2.bb
-> > @@ -0,0 +1,9 @@
-> > +require bird.inc
-> > +
-> > +SRC_URI =3D "\
-> > +    ftp://bird.network.cz/pub/${PN}/${PN}-${PV}.tar.gz \
-> > +    file://bird.init \
-> > +    file://0001-musl-extend-config.sub-to-recognize-musl.patch \
-> > +    "
-> > +SRC_URI[md5sum] =3D "de17645b045fa13912409aea59420132"
-> > +SRC_URI[sha256sum] =3D "035f91d6f568f8ed438a0814235ac4c5c79147cd2acf20=
-1322c307732883480f"
->=20
-> do we need to maintain both 1.6 and 2.x versions ?
-> I guess they must be incompatible with each other and 1.6 still
-> deployed. but I would prefer to just maintain latest version
-
-That's a much bigger question, ongoing in the v1 thread.
-
--J.
+We have accepted this patch however a new run with x86-64/musl shows
+that it failed to build with following error
+probably #include <sys/types.h> will fix it
 
 
---DKU6Jbt7q3WqK7+M
-Content-Type: application/pgp-signature; name="signature.asc"
+| In file included from util/abspath.c:5:
+| ./util/strbuf.h:68:45: error: unknown type name 'ssize_t'; did you
+mean 'size_t'?
+|  extern void strbuf_init(struct strbuf *buf, ssize_t hint);
+|                                              ^~~~~~~
+|                                              size_t
+| ./util/strbuf.h:73:15: error: unknown type name 'ssize_t'
+|  static inline ssize_t strbuf_avail(const struct strbuf *sb) {
+|                ^~~~~~~
+| ./util/strbuf.h:105:8: error: unknown type name 'ssize_t'
+|  extern ssize_t strbuf_read(struct strbuf *, int fd, ssize_t hint);
+|         ^~~~~~~
+| ./util/strbuf.h:105:53: error: unknown type name 'ssize_t'; did you
+mean 'size_t'?
+|  extern ssize_t strbuf_read(struct strbuf *, int fd, ssize_t hint);
+|                                                      ^~~~~~~
+|                                                      size_t
+| make[2]: *** [Makefile:678: util/abspath.o] Error 1
 
------BEGIN PGP SIGNATURE-----
+On Mon, Jul 23, 2018 at 4:11 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> Add the NDCTL package (the libnvdimm utility library). This is based
+> on the work from the meta-luv layer with a version bump.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+> V2:
+>  - Fix install failure
+>
+>  meta-oe/recipes-core/ndctl/ndctl_git.bb | 29 +++++++++++++++++++++++++
+>  1 file changed, 29 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/ndctl/ndctl_git.bb
+>
+> diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+> new file mode 100644
+> index 000000000..36f94ecfd
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+> @@ -0,0 +1,29 @@
+> +SUMMARY = "libnvdimm utility library"
+> +DESCRIPTION = "Utility library for managing the libnvdimm \
+> +(non-volatile memory device) sub-system in the Linux kernel. \
+> +The LIBNVDIMM subsystem provides support for three types of \
+> +NVDIMMs, namely,PMEM, BLK, and NVDIMM devices that can \
+> +simultaneously support both PMEM and BLK mode access."
+> +HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/nvdimm/nvdimm.git/tree/Documentation/nvdimm/nvdimm.txt?h=libnvdimm-for-next"
+> +LICENSE = "GPLv2+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
+> +
+> +inherit autotools-brokensep pkgconfig module-base
+> +
+> +SRCREV = "0d6aeeabec9d271e08c12e4cf679b59946e20156"
+> +SRC_URI = "git://github.com/pmem/ndctl.git"
+> +
+> +DEPENDS = "virtual/kernel kmod udev json-c"
+> +
+> +PV = "v61+git${SRCPV}"
+> +S = "${WORKDIR}/git"
+> +
+> +EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+> +
+> +do_configure_prepend() {
+> +    ${S}/autogen.sh
+> +}
+> +
+> +COMPATIBLE_HOST='(x86_64).*'
+> +
+> +FILES_${PN} += "/usr/share/bash-completion/completions/ndctl"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-iQEzBAABCgAdFiEEkMd/b97HINT8/zEqSfx99yw59pYFAlt20X8ACgkQSfx99yw5
-9pZBxgf6A+XWpICSDyX54RspeNnuacjli2NxW80X9tPBGFdjFzDdbGkBMhChA0T9
-dR4bp+RMDsQCbE+xHXiUnLfoKpx3tBo7dlxEEE1O6eyQ0j0Z4QW9ODq16aX6fTN3
-y9wDgZBdV9PcnInBBxAgktb7NWSES1nhVOJ8d5YcU5n9loOqgkA3rB8cMYr5YFdv
-OAuMh13m8Lh4Ak4+A/TxvBrqPwAIkPo/GyLRtx8weJN0gFU1WsQ4uRreaSqvxcJF
-acwZ9AZibgOMA+FDAHbNoncgeKXvujVB/7SPTSeaxxxbgbwlLg7FMGan15p0ZJPl
-5kAo9cFWuzyl8Q1fPSlyVSyHZ1djAQ==
-=NObY
------END PGP SIGNATURE-----
-
---DKU6Jbt7q3WqK7+M--
