@@ -1,47 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 9345B790A8
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id BE1FB79241
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 15:12:20 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id o18-v6so9919274wmc.0
+	Sat, 18 Aug 2018 15:12:21 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id h15-v6so9426441wrs.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 08:12:21 -0700 (PDT)
+	Sat, 18 Aug 2018 08:12:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=iOE8p5xvSnE0dK3egn1qnWBBV+NhTqs8gQIe/9572zQ=;
-	b=WX8X3nblFezMOTkJnWpESGuSP2Udbj/rgviDyNKXQJ+zF1CCCWvzcfwMTH+i4JpKtX
-	3ASRBcW6R92OOvvgT0wit258SAAD9Df6fg0HLZ9Qi/5QlqVFx5AEfQEf0ROld4+6A5Zo
-	se0XB6E5wDsccCuzg0s69F7xJyaq18RHMoR7hQcTlKN8bDIPcfWJlZClYWD3+XAEhCvT
-	eGn6IJ6WakEZwX7dFvl8q1K42KEnGG/dLcki3Wg6lVnOxyC/4oSCLP6pLhJaXByk3z+3
-	FxMp7V/akMxWQ6+xlMvG31LXepVqFXCNqteAmhf2tiS/3KB6lj9xDQF0TAKlNkAXLxU3
-	yXhA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=3z4g94jwLSbWsC6PGcszmKAuEzTiMWe0pZEDBf9SrJg=;
+	b=p+IpMx4/YLnjNpGfJJFgbpuaJCOBl2vmb+f2PO60bw1gEnZJAUEKqURsetyzHTv5j6
+	ZrdkNl6kS7X8Feo9g+Fz8ykwc7ob5x3/HhYE+ef4S7CTOzciMPBDWDbta0elOCVnnhPJ
+	DRSD+nb1rm1Jb1FVYcBL7OmPSUtmXkZtTnZ8ScT4cZ/wLIlq8LgFYYUZCeygQccnOXKs
+	cnkIjD1yJpKXXvhvet3rK7Y/yNawekymrdAAzHT1Znx6Na6MHFb+NUK5RnUi9/M1Dm/+
+	51x1slWcjoY10Wahyyqey7GXId3YYXPtPVvJUw3IpCPJW/1/7YLVcX6TegEZFhD28MaS
+	AdMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=iOE8p5xvSnE0dK3egn1qnWBBV+NhTqs8gQIe/9572zQ=;
-	b=WpMmv591w1X5MU48D4znrNjTkV8p1tNmw+gQeeigerJdEl1WtLlgeHdB4Qup9RZcAT
-	hj3GK0gMtwVgs4fvN+3bmFV6MSYrTBR5Evs6el46WzgQm7EIRtDIfNRjneKTemkcDIl2
-	8rcM29MpMVLCNDXAoa2pmeOXSkzwOXdsn47DgFBAIRgc4jMESA6GTIqCw+YHGtVfKcZ/
-	SshwMbSImDaHR8qaaiTuSUHemag6VXaXQgPXfk/FmIny0YHdw4ejGpId/R07HOZabIBD
-	IzVyoAd9128yPI+Fs8WApL3Ome0oK28QVPnnGMSRjq8/GC+GPZ3HOJhrjxIcm8z7r1VG
-	Sntw==
-X-Gm-Message-State: AOUpUlHBbjSr0/Zkz7Wrxn0dRb74gd0USMzJwjOE/trPeQYK9ed7eV93
-	aBT4YwZ9J3QLx13JiyZvhzh2SSd7
-X-Google-Smtp-Source: AA+uWPzhL0cH2ebYVcizLP1WeH+sjB7nmXTervY22uImwioAhYY+L++eWA5xGnDd1hIqN5wwoEw59g==
-X-Received: by 2002:a1c:3503:: with SMTP id
-	c3-v6mr18923499wma.46.1534605141052; 
-	Sat, 18 Aug 2018 08:12:21 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=3z4g94jwLSbWsC6PGcszmKAuEzTiMWe0pZEDBf9SrJg=;
+	b=po09FhKKWwdO0ZBWny0zDQCRtmfO3bjKlj7eYNlkiVqSXdV78TVgW4EtkahQPMW90Z
+	1XvNS77Qzp4JJsCGRu/o2wnyQqTwfYsolIQvqL2Hv4e9sPcnG/dNr6/aV8c+vTQTFlGq
+	5zja7njhfnvDmIh0ui6W9J92F3uM/2lpMvJTXDQkYdH1KNzAiRM1lsY5EZsM5WgZ3VrK
+	olXLalLdkUQ18McxZTfdE3U+SUOeVmYcfpcobOq6eYjPf7qNUPmYOp5zlOKcY+zKrVuY
+	dGNdBKMZeNQk8Ef29XuqPPkkvXVnAuoSZaVUnQxK7LVtFPABTxhmHGbdlr3SCIS5jmQs
+	0DOQ==
+X-Gm-Message-State: AOUpUlH1VNlNBG8GE9Xl/l25vUw0T59KDga4kYLksSI2/iwbkVvY1SP0
+	ukd7OkCU4IDK3wjR8i/WRznHn6D1
+X-Google-Smtp-Source: AA+uWPyfFtQvd2KIvOlHoN2OQyHcL1g+A9BFT3pa2o3znkGOC49dl9lR1Baw9SueaNuec4/3Le/GHw==
+X-Received: by 2002:adf:c08c:: with SMTP id
+	d12-v6mr24376370wrf.268.1534605142326; 
+	Sat, 18 Aug 2018 08:12:22 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	g2-v6sm14238693wrd.71.2018.08.18.08.12.20
+	200-v6sm12838192wmv.6.2018.08.18.08.12.21
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 18 Aug 2018 08:12:20 -0700 (PDT)
+	Sat, 18 Aug 2018 08:12:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Aug 2018 15:12:17 +0000
-Message-Id: <20180818151218.6980-1-Martin.Jansa@gmail.com>
+Date: Sat, 18 Aug 2018 15:12:18 +0000
+Message-Id: <20180818151218.6980-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/2] fwts: add dependency on bison-native
+In-Reply-To: <20180818151218.6980-1-Martin.Jansa@gmail.com>
+References: <20180818151218.6980-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/2] mce-inject: add dependency on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,37 +58,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Aug 2018 15:12:20 -0000
+X-List-Received-Date: Sat, 18 Aug 2018 15:12:22 -0000
 
 * fixes:
-fwts/18.05.00+gitAUTOINC+b0ec7aa2ef-r0/build/src/acpica/source/compiler'
-m4 -P -I../../../../../git/src/acpica/source/compiler ../../../../../git/src/acpica/source/compiler/aslparser.y > aslcompiler.y
-flex -i -PAslCompiler -oaslcompilerlex.c ../../../../../git/src/acpica/source/compiler/aslcompiler.l
-yacc -v -d -y -bdtparser -pDtParser ../../../../../git/src/acpica/source/compiler/dtparser.y
-flex -i -PDtParser -odtparserlex.c ../../../../../git/src/acpica/source/compiler/dtparser.l
-yacc -v -d -y -bprparser -pPrParser ../../../../../git/src/acpica/source/compiler/prparser.y
-flex -i -PPrParser -oprparserlex.c ../../../../../git/src/acpica/source/compiler/prparser.l
-/bin/bash: yacc: command not found
-Makefile:3684: recipe for target 'dtparser.c' failed
+NOTE: make -j 24 destdir=mce-inject/git-r0/image
+Makefile:42: .depend: No such file or directory
+bison -d mce.y
+bison -d mce.y
+make: bison: Command not found
+Makefile:20: recipe for target 'mce.tab.h' failed
+make: *** [mce.tab.h] Error 127
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-test/fwts/fwts_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/mcelog/mce-inject_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index defe31ddff..d3fb644dfd 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -22,7 +22,7 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-support/mcelog/mce-inject_git.bb b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
+index 86d50a2bef..cc33cbaf28 100644
+--- a/meta-oe/recipes-support/mcelog/mce-inject_git.bb
++++ b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
+@@ -10,6 +10,8 @@ SRCREV = "4cbe46321b4a81365ff3aafafe63967264dbfec5"
  
- COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
+ UPSTREAM_CHECK_COMMITS = "1"
  
--DEPENDS = "libpcre json-c glib-2.0 dtc"
-+DEPENDS = "libpcre json-c glib-2.0 dtc bison-native"
- DEPENDS_append_libc-musl = " libexecinfo"
++DEPENDS = "bison-native"
++
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://README;beginline=30;md5=94c18755082a2da9c9cf97cba3ad47d6"
  
- inherit autotools bash-completion pkgconfig
 -- 
 2.17.1
 
