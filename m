@@ -1,51 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id BE1FB79241
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1385874FAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 15:12:21 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id h15-v6so9426441wrs.7
+	Sat, 18 Aug 2018 20:27:43 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id s12-v6so10607404wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 08:12:23 -0700 (PDT)
+	Sat, 18 Aug 2018 13:27:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=3z4g94jwLSbWsC6PGcszmKAuEzTiMWe0pZEDBf9SrJg=;
-	b=p+IpMx4/YLnjNpGfJJFgbpuaJCOBl2vmb+f2PO60bw1gEnZJAUEKqURsetyzHTv5j6
-	ZrdkNl6kS7X8Feo9g+Fz8ykwc7ob5x3/HhYE+ef4S7CTOzciMPBDWDbta0elOCVnnhPJ
-	DRSD+nb1rm1Jb1FVYcBL7OmPSUtmXkZtTnZ8ScT4cZ/wLIlq8LgFYYUZCeygQccnOXKs
-	cnkIjD1yJpKXXvhvet3rK7Y/yNawekymrdAAzHT1Znx6Na6MHFb+NUK5RnUi9/M1Dm/+
-	51x1slWcjoY10Wahyyqey7GXId3YYXPtPVvJUw3IpCPJW/1/7YLVcX6TegEZFhD28MaS
-	AdMA==
+	h=from:to:cc:subject:date:message-id;
+	bh=usBAA/Am+025dsBISle24IfMekL7t/CP3QvA9n0EqME=;
+	b=YVHNSmjjXWp35ke71LKryg0wXusSDlD8uGdvpfe8sjL6+iFu5EWClU770I1MZ2fZev
+	gN8qGEIBw+62jf8dVOMQkOUZ6ZZmqG0GcS+JtvO4iAyqosJ4iWsiVxtJZIzg12pbjsHN
+	VVz6BG2M5uYa5SsUU+SBwnBGHp4FXG/LiGpbBug5CFAiypODm+pua00HXMTXFkHNn5+F
+	f6mwe8MLZX0CGlmfEGHpVXhBqfd2k2ODP6JSQu6x9al2YLDel7Cptj8mS52QuYwmKPV2
+	WmyX+8gNogWCuO+WTddKRMHGeK1vSB8+n9Z6b8yfrgO9W3NiTaQF+HNCPifRHqBtJ/I5
+	ubJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=3z4g94jwLSbWsC6PGcszmKAuEzTiMWe0pZEDBf9SrJg=;
-	b=po09FhKKWwdO0ZBWny0zDQCRtmfO3bjKlj7eYNlkiVqSXdV78TVgW4EtkahQPMW90Z
-	1XvNS77Qzp4JJsCGRu/o2wnyQqTwfYsolIQvqL2Hv4e9sPcnG/dNr6/aV8c+vTQTFlGq
-	5zja7njhfnvDmIh0ui6W9J92F3uM/2lpMvJTXDQkYdH1KNzAiRM1lsY5EZsM5WgZ3VrK
-	olXLalLdkUQ18McxZTfdE3U+SUOeVmYcfpcobOq6eYjPf7qNUPmYOp5zlOKcY+zKrVuY
-	dGNdBKMZeNQk8Ef29XuqPPkkvXVnAuoSZaVUnQxK7LVtFPABTxhmHGbdlr3SCIS5jmQs
-	0DOQ==
-X-Gm-Message-State: AOUpUlH1VNlNBG8GE9Xl/l25vUw0T59KDga4kYLksSI2/iwbkVvY1SP0
-	ukd7OkCU4IDK3wjR8i/WRznHn6D1
-X-Google-Smtp-Source: AA+uWPyfFtQvd2KIvOlHoN2OQyHcL1g+A9BFT3pa2o3znkGOC49dl9lR1Baw9SueaNuec4/3Le/GHw==
-X-Received: by 2002:adf:c08c:: with SMTP id
-	d12-v6mr24376370wrf.268.1534605142326; 
-	Sat, 18 Aug 2018 08:12:22 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=usBAA/Am+025dsBISle24IfMekL7t/CP3QvA9n0EqME=;
+	b=jwDJY8ivkdQh+xveDuLaivmo2GEO7BELBQb5gR0JjbR+PtqIBmoJsIQ+VP14zTEnfS
+	jPg+HqWIQnS+fRqmGkI9CCwoUoprai8IXkghNWALrjHWPcDU1iide0/WNbMruAyi1NJY
+	Y8/NFTl2TEiZh5D3RVbY1uLcD6ycqD+UIDEKmpgTfcjUMupaHoXZg/oMBlTq7SlmeC0E
+	Necya7YFHL6fy+0UWSh6t/seO4O80vdaUnxuiykE7+hG6eJsE75BUwRwDdJE1rHHSr1+
+	bupuWBFoWO4RxUuxyRzcbUapmY44wtPQib6atqHrV1+0XCDXb8fEjcy8cZy+C2BXx5JF
+	ha+g==
+X-Gm-Message-State: AOUpUlHRVRSt+mvbhAPCtyK/cvBFw/FYPiRXq3zCk8VFgxYRGeNKP4BT
+	dC0WHF7zbHiDeoJga3hjdqJBAi1R
+X-Google-Smtp-Source: AA+uWPyQaLoPxwY1FF3eH3kPzpCwjgNJtRNYGXx0Oq+25eXfhKdzi9JGr1pcf8NN06zsvzyotFv30w==
+X-Received: by 2002:a1c:1314:: with SMTP id
+	20-v6mr21298186wmt.55.1534624064664; 
+	Sat, 18 Aug 2018 13:27:44 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	200-v6sm12838192wmv.6.2018.08.18.08.12.21
+	g133-v6sm8323692wmf.44.2018.08.18.13.27.43
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 18 Aug 2018 08:12:21 -0700 (PDT)
+	Sat, 18 Aug 2018 13:27:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Aug 2018 15:12:18 +0000
-Message-Id: <20180818151218.6980-2-Martin.Jansa@gmail.com>
+Date: Sat, 18 Aug 2018 20:27:42 +0000
+Message-Id: <20180818202742.5967-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20180818151218.6980-1-Martin.Jansa@gmail.com>
-References: <20180818151218.6980-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/2] mce-inject: add dependency on bison-native
+Subject: [meta-networking][PATCH] snort: add dependency on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,35 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Aug 2018 15:12:22 -0000
+X-List-Received-Date: Sat, 18 Aug 2018 20:27:44 -0000
 
 * fixes:
-NOTE: make -j 24 destdir=mce-inject/git-r0/image
-Makefile:42: .depend: No such file or directory
-bison -d mce.y
-bison -d mce.y
-make: bison: Command not found
-Makefile:20: recipe for target 'mce.tab.h' failed
-make: *** [mce.tab.h] Error 127
+   ERROR!  bison not found.
+   Get it from http://www.gnu.org/software/bison/
+   (You may also try byacc or yacc instead.)
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/mcelog/mce-inject_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/mcelog/mce-inject_git.bb b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
-index 86d50a2bef..cc33cbaf28 100644
---- a/meta-oe/recipes-support/mcelog/mce-inject_git.bb
-+++ b/meta-oe/recipes-support/mcelog/mce-inject_git.bb
-@@ -10,6 +10,8 @@ SRCREV = "4cbe46321b4a81365ff3aafafe63967264dbfec5"
+diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
+index fdf41bfbda..22f52b55f0 100644
+--- a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
++++ b/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
+@@ -4,7 +4,7 @@ SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
  
- UPSTREAM_CHECK_COMMITS = "1"
+-DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc"
++DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc bison-native"
  
-+DEPENDS = "bison-native"
-+
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://README;beginline=30;md5=94c18755082a2da9c9cf97cba3ad47d6"
- 
+ SRC_URI = "https://www.snort.org/downloads/snort/${BP}.tar.gz \
+     file://snort.init \
 -- 
 2.17.1
 
