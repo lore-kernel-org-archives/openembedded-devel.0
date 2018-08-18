@@ -1,50 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 11CA7792A9
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 36311792A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 11:26:45 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id y9-v6so9593677wma.5
+	Sat, 18 Aug 2018 11:26:47 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id o18-v6so9589166wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 04:26:47 -0700 (PDT)
+	Sat, 18 Aug 2018 04:26:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=OftdxU7pI7uWhmm6xrsCoubxS4WVKPrMb7BSpvfM/QY=;
-	b=tLnUmSxqfGIfNnX5ZbbwQW2DzH/AFri7VlpwK6kK4ZnRD2l7nPnTQjhidbDC2ik4eQ
-	JBMFv1diENSR/aiWFR2G1fOaUAMdmu9zeeguMeT5knLD+3z9vYIK94YbHelPzcigkBNH
-	vw5rnDlJt96l4QlTd0NPHM/QZ5xN/9tRdx09eUzYQTokiCTHHsOpeQmbKVutusHw5weO
-	CHpUSfKc4xR7cTs3AQF1nv+SXk4hcrnlunoXy7uW48C7dtnj4zxq5JNPZ38N078taMX8
-	GApEmCuMJE4nxUt52x/r8OpEA0VAUvpxVG2COWpI7/Qu08yIThDmqAJvXlsTEwOoTBdU
-	NS0g==
+	bh=3lyR8cVpHQnYaVqFytYFFbzJjE1YdDnAzBEUkqJTRfE=;
+	b=G2YT6DpbWJwIvqCRlpgN3VSy2d9fkwfU1AFlt/8l70B9+x/F3TyoHufdAyb5Wooz6h
+	q9XyU7OLxKLDQp/XLy9ew+MIhGdNSkoQroOxM7bo23KNgJDalquc66BGNHwpd5kUvFj4
+	SC5Ma8KDsEFM9IrFhMZjY5J/hkUTNeg46tTyH5nLEydsA9TNX78riDsMyKirMhtDSqCc
+	QRyGgj6S1mr9oEtdLY0lB72pPJJRcJNoIEIzIfZVicHQsdxrQlutUIGBzZbWn5HwwYK1
+	uCOpwo16Rg55yixW2VhMblthpXle8d3Yl2M2a0+MpdIZf6FWduRxc3pI4zGWpCTN63I6
+	Xesw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=OftdxU7pI7uWhmm6xrsCoubxS4WVKPrMb7BSpvfM/QY=;
-	b=iFfHJ0qeCcooKodcnKuXEIxjMs0EavwFvFvvWi/6pZ/y9djKlyr0gNuddW0aM24G0O
-	8m63L3Tkc/LRGAB1lckO6EET2g9Zdlgmu17udSSeBMmvkSvvG75VeHdHl0nLHtbLTgKZ
-	CjI+b8OQ40CMkXdh/MCyFAcWiPbyoPQwFmauJqlRuBhEBCroGtCvxesqo2RS4TtZvoFy
-	7W1alIn+u8rUHIso9mBibAvaL4xuoJF6kmDjsuICnwLITYCgHBN0R7wSDQFpNEB5Gz89
-	gsslhKAyFty1UIOjXoi6vXTYEtXVXg/k7nTEsd9I6Rr0f6GIhCRbEoXRRc5y94U9hoRR
-	qFcA==
-X-Gm-Message-State: AOUpUlFW/aueKUtlUaOwQtS60lABs5HxKqLZb5ySEACeGmSuyF2XsxWd
-	uJIUwkSeoTbnbqS8j+9RbWX8hSW+
-X-Google-Smtp-Source: AA+uWPzE0jLwTHBc7OvDhF6a0PvNm/tu961MGnEhfhUsKgXACtDo6XuCZvwhOmrVAEUSd9tCKGlq3A==
-X-Received: by 2002:a1c:55c8:: with SMTP id
-	j191-v6mr20738014wmb.67.1534591606615; 
-	Sat, 18 Aug 2018 04:26:46 -0700 (PDT)
+	bh=3lyR8cVpHQnYaVqFytYFFbzJjE1YdDnAzBEUkqJTRfE=;
+	b=eFmsCRaqnVNaCw9oeCzWwnpHTd40K4TJBbMjqb+PkAKaBu7WLCqKlpfezNGPAnoRqy
+	UIR1nQfj4qmCNt3sdiKMXOWmz2pwNGwjuwab2uDgplQAUPmbz+/7VB+iJfzDYrafv4wY
+	KuE15Cc3y2rwKhvzsaHgx9mWkQsfh+VjKvHjA2FtGuZ4/8sVtmLBeJGXtWmKvzLXEe2U
+	0rc+qeq11V8iXO9uw/leqD1++dajx7rWVkz9Pi1bDPMelSaSsG0jP52bMr2tu7EUUyCX
+	E3/JLxLSrZAMcimTfwhaydHKZiWaBQMLP+bX2LsOpOuBgQbgY8tkzpT/4DpjMpx7NIIA
+	leSw==
+X-Gm-Message-State: AOUpUlEGLaD04G3RWgp7ICSS7bm3Cw9TYb1Qsnp8m+4dbl74rMcOb9H+
+	cpTKRq1lXQOZ+Ozm8tQINqPJkVOt
+X-Google-Smtp-Source: AA+uWPzFxYG/mEJo+CLZ9qcFLZtqimMnEQbfioVscE/nXsBUHDTGDdO5m+/uf9ZYt3ha00TXiJSa8A==
+X-Received: by 2002:a1c:5e08:: with SMTP id
+	s8-v6mr13145705wmb.88.1534591607830; 
+	Sat, 18 Aug 2018 04:26:47 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	200-v6sm11693861wmv.6.2018.08.18.04.26.45
+	v5-v6sm3700155wru.60.2018.08.18.04.26.47
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 18 Aug 2018 04:26:45 -0700 (PDT)
+	Sat, 18 Aug 2018 04:26:47 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Aug 2018 11:26:36 +0000
-Message-Id: <20180818112638.10006-5-Martin.Jansa@gmail.com>
+Date: Sat, 18 Aug 2018 11:26:37 +0000
+Message-Id: <20180818112638.10006-6-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20180818112638.10006-1-Martin.Jansa@gmail.com>
 References: <20180818112638.10006-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-networking][PATCH 5/7] nftables: add dependency on bison-native
+Subject: [meta-oe][meta-networking][PATCH 6/7] daq: add dependency on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,33 +57,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Aug 2018 11:26:46 -0000
+X-List-Received-Date: Sat, 18 Aug 2018 11:26:47 -0000
 
 * fixes:
-checking whether yytext is a pointer... no
+checking for flex 2.4 or higher... yes
 checking for bison... no
-checking for byacc... no
-*** Error: No suitable bison/yacc found. ***
-    Please install the 'bison' package.
+configure: WARNING: don't have both flex and bison; reverting to lex/yacc
+checking for capable lex... insufficient
+configure: error: Your operating system's lex is insufficient to compile
+         libsfbpf. You should install both bison and flex.
+         flex is a lex replacement that has many advantages,
+         including being able to compile libsfbpf.  For more
+         information, see http://www.gnu.org/software/flex/flex.html .
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-filter/nftables/nftables_0.7.bb | 2 +-
+ meta-networking/recipes-connectivity/daq/daq_2.0.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables_0.7.bb b/meta-networking/recipes-filter/nftables/nftables_0.7.bb
-index 0ea79953be..287c350b9c 100644
---- a/meta-networking/recipes-filter/nftables/nftables_0.7.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_0.7.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
- SECTION = "net"
+diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb b/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+index ec35175a08..42ffb17a1f 100644
+--- a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
++++ b/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"
  
--DEPENDS = "libmnl libnftnl readline gmp"
-+DEPENDS = "libmnl libnftnl readline gmp bison-native"
- RRECOMMENDS_${PN} += "kernel-module-nf-tables \
-     "
+ PARALLEL_MAKE = ""
  
+-DEPENDS = "libpcap libpcre libdnet"
++DEPENDS = "libpcap libpcre libdnet bison-native"
+ 
+ SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
+            file://disable-run-test-program-while-cross-compiling.patch \
 -- 
 2.17.1
 
