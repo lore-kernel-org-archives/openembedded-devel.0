@@ -1,51 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AC09B79159
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id DADE97934A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Aug 2018 16:32:01 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id d4-v6so5592687pfn.0
+	Sun, 19 Aug 2018 23:04:52 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id z25-v6so1150315pgu.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Aug 2018 09:32:03 -0700 (PDT)
+	Sun, 19 Aug 2018 16:04:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=xZJAGBtZdc4mZ7NCZYJG88YH5fy8g2REd9F9DSA4Vao=;
-	b=ndtDJB4PHWdviv/b9dBo6uOoT097EcoVFzRdOHXpnYbcfTbaARKvUtiOQ8Vm3x+qn8
-	DlHlHEYzLwrDEG7XAPtIAUTNE3UbVy31FIFvGxvFbqe26dX6Hmp7yLn07tgIK/pffdVD
-	hK0gZ0gC3CQpXBAgx2cn088uDOFkupE3H681BDh9/WUsMa5dT9NDM7cu0NCAyjPYnlV3
-	a5edI0+fOcwLCIQKdX833tY+xIYDnT1BGxMvBGQARYj5GoytQd5OPyArmFywhB0KvOLC
-	9/pfBz4Vr31hk0E7fkhqKNh/j8sHCnaO6zZj4FN/kyjN77uiWGjoQq9Z3Aa2elo0amdn
-	GHcw==
+	h=from:to:cc:subject:date:message-id;
+	bh=csRVd28eWLvZ3Jvr3WMNf40WMVfeZXT0xmaBDsp0GPs=;
+	b=N2d1CLyAxIEF7A/bAvipGTJebWGm2HZUvzuz+LnqtUl0IURjep48K7cgwrRskBrpDn
+	cImfQ9JB84nYTqPFmRvU20DlPCk919+6pYpg47ddUEmAd8T4cpHS3fTRpUk+b9kki8rp
+	bqqC0foUmlZA6LrCnkIcB+I4Q0Uv9SsiaQCxY3beVHP/PftIUzcMI99GX7M0RmzYSKYF
+	yoflTCsxzV+DWNhM2sqrRKcx+7+cJkRf3lRcWFwzck/9g469r/UCuK/lpo1iRf6Q11Ag
+	3oG5THT8duCFKX+nEP9hhp5JShi0XnxO0S/P12R13svSIKW13zqzWGSqbISDbNTiIHs2
+	KMaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=xZJAGBtZdc4mZ7NCZYJG88YH5fy8g2REd9F9DSA4Vao=;
-	b=l4OTqwRdxU1I6ZnGjtnri72v8q3wi7aKyoVVP77aJCVQD89HoGiWb/BZyCDaKbpWMd
-	YrxNTDx/2FeQevXvStfQ8FJZfrRYklB95/16W5tkt83JRoutMjQ2h06irYv85itKFLjH
-	jpAi+oQOABo45dAq5rOUqyTdU7KCxTyRsUm9GIWFWHe+LGs4IzP+4i+d0Yxkkpvlw+Bt
-	wVCNEvLBMGfM31m70lW0WFtVlqJ1oTaiagPZvba3TwPOoF85RI0MgTxBpY9SGL4utuv8
-	J7+g7XrYbPa6/nHsdiod2oRzw7w8JqofDspPj/dMF8WAyd5gfIq+67Q5IT89uot4Rfr/
-	KdOg==
-X-Gm-Message-State: AOUpUlGwMyWwj5WMxfOwWcHGJPpBm6kePECiJaIbgudW3olO0ZH3snLK
-	CpVHLTV+BHVORQf4GrLDP/ORBc8P
-X-Google-Smtp-Source: AA+uWPyHVyAiCJH5sYTXYaGY4V9Igo25vB+a/XHnDSB7NrXmRyd4Q9Tc9hwjs2x/FLQ7eDA1ozyDTg==
-X-Received: by 2002:a63:ed4f:: with SMTP id
-	m15-v6mr40058034pgk.147.1534696322424; 
-	Sun, 19 Aug 2018 09:32:02 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=csRVd28eWLvZ3Jvr3WMNf40WMVfeZXT0xmaBDsp0GPs=;
+	b=mrYwPmo0GodX4mB9nG9JPAZQ7hKySLqrbopLT5qa0gvmciPAikxUufJvaEKgIZGKhI
+	LpM5WFvX/AgOf1EqDHcVfsiKqUEDWXQvKzwZUI88RFVS2JwksT+PqwUq0mYgE3VYaxLE
+	ocB8GLmYvZFAVJ/h7wr/kzNidAfZZnHYZabIRtDsR5a65UVHlsJQxi3Ff4yrAeL3Z0PV
+	p41koezymdgXwy/Tu+51Yt0tX6+u3MpV6GSpDifX2TPa5s3BMb9ssCq1V/9LKgUAiYKM
+	4Izg0RS/4Dhkkog2WeObh0VCvCj4WO3d/sT4j0pYTtHcJIZalG1XI4CDkefJziukCnPS
+	EZ0A==
+X-Gm-Message-State: AOUpUlF03YWkHJGF2bKu7ojBsOFkwhnhhsKioMImuU0n6i0PxjgZ2xF2
+	IFiVT5eXeY5c52jZO0XVaWyEmrz6
+X-Google-Smtp-Source: AA+uWPx1KhbNSA8rlGhCLwG1tbaeEk5iO8EkYxoWkg2q+TX2VUxQnNIL5Vkl7vCGFNRhjxTEZCuwoQ==
+X-Received: by 2002:a62:d74f:: with SMTP id
+	v15-v6mr14123873pfl.257.1534719893415; 
+	Sun, 19 Aug 2018 16:04:53 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::4add])
 	by smtp.gmail.com with ESMTPSA id
-	n83-v6sm14190520pfk.19.2018.08.19.09.32.01
+	m15-v6sm14241217pfk.149.2018.08.19.16.04.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 19 Aug 2018 09:32:01 -0700 (PDT)
+	Sun, 19 Aug 2018 16:04:52 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Aug 2018 09:31:52 -0700
-Message-Id: <20180819163152.28471-3-raj.khem@gmail.com>
+Date: Sun, 19 Aug 2018 16:04:43 -0700
+Message-Id: <20180819230444.42440-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180819163152.28471-1-raj.khem@gmail.com>
-References: <20180819163152.28471-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] umip: Add bison-native to build deps
+Subject: [meta-networking][PATCH 1/2] dlm: Build fence only when pacemaker recipe is available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,29 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Aug 2018 16:32:01 -0000
+X-List-Received-Date: Sun, 19 Aug 2018 23:04:53 -0000
 
-Fixes:
-| ../ylwrap: line 176: yacc: command not found
+pacemaker is not in meta-networking, and therefore dlm fails
+to build when meta-cgl is not included, this changeset makes
+the pacemaker dependency to be optional, and disabled by default
+so users who have pacemaker in the bbfiles should enable pacemaker
+support via a bbappend or setting it in config metadata
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-connectivity/umip/umip_1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-extended/dlm/dlm_4.0.7.bb | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-index 0c120bfd84..8db252d237 100644
---- a/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-+++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "http://umip.org/"
- SECTION = "System Environment/Base"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
--DEPENDS = "rpm indent-native"
-+DEPENDS = "rpm indent-native bison-native"
+diff --git a/meta-networking/recipes-extended/dlm/dlm_4.0.7.bb b/meta-networking/recipes-extended/dlm/dlm_4.0.7.bb
+index f7f7e188c5..18843a61f8 100644
+--- a/meta-networking/recipes-extended/dlm/dlm_4.0.7.bb
++++ b/meta-networking/recipes-extended/dlm/dlm_4.0.7.bb
+@@ -20,17 +20,24 @@ UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)"
+ LICENSE = "LGPLv2+ & GPLv2 & GPLv2+"
+ LIC_FILES_CHKSUM = "file://README.license;md5=8f0bbcdd678df1bce9863492b6c8832d"
  
- SRC_URI = "git://github.com/jlanza/umip \
-            file://add-dependency-to-support-parallel-compilation.patch \
+-DEPENDS = "corosync systemd pacemaker"
++DEPENDS = "corosync systemd"
+ 
+ inherit pkgconfig systemd distro_features_check
+ 
++PACKAGECONFIG ??= ""
++
++PACKAGECONFIG[pacemaker] = ",,pacemaker"
++
+ SYSTEMD_SERVICE_${PN} = "dlm.service"
+ SYSTEMD_AUTO_ENABLE = "enable"
+ 
+ export EXTRA_OEMAKE = ""
+ 
++DONTBUILD = "${@bb.utils.contains('PACKAGECONFIG', 'pacemaker', '', 'fence', d)}"
++
+ do_compile_prepend() {
+     sed -i "s/libsystemd-daemon/libsystemd/g" ${S}/dlm_controld/Makefile
++    sed -i -e "s/ ${DONTBUILD}//g" ${S}/Makefile
+ }
+ 
+ do_compile () {
 -- 
 2.18.0
 
