@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AB9D6003C
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 0848F78FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Aug 2018 16:28:29 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id 126-v6so9372137qke.5
+	Sun, 19 Aug 2018 16:31:59 +0000 (UTC)
+Received: by mail-pf1-f176.google.com with SMTP id x17-v6so5580000pfh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Aug 2018 09:28:30 -0700 (PDT)
+	Sun, 19 Aug 2018 09:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=GHFanK7CciVrSkKilf/QsAS4CL6mKzAxj42lhHLvZ1E=;
-	b=uB/gqsr3yhwoWYrxyMlhMhaL8a+xIYkzZPvYAonCGS3S1vQQXtTW3cN/WGNObo4fBF
-	b9c+GxAUBRWU0lan28FQOo0ai/JSL5KE6i7aIlRvmOLVP+PjSkCw6uTDQ34iQiPnKIq9
-	Rov7LR15P6H/4UiVefTF48TpEpuiqRaoa7uz//PAHBWpws4p8LnmY2QjUw75GfLtFIyK
-	MmC1kLzhiNbRn7kOaeXZ+KnQae92quUnhggYfsdwP7tXfMH/nRvyAsIOBZz2Wuzp8vBo
-	+u9JqS8WJAjk3et91g0v3dfXuokeUbmVtdR6SIG8DDBxJAecXbBPEVwcKAhzTTBjNhFv
-	bTKw==
+	h=from:to:cc:subject:date:message-id;
+	bh=ToU5gbEwQQZsLwVkuNqHXsu00WW1BNDz1ri1zIbdqMQ=;
+	b=gEc3GhjO5Av4d03xm05E3fm/TS6GYa9WXlmoFU7MVZZe5HTawkIGgFxhHDAvg20hTi
+	UixG+gkTBEXIN9WzZm+heBZOicXECpJEhq1tA4PiT1f2X+zcANBrSHLtUIgroIPargF/
+	DsLHTxrSTG3AyknoPlnLo24U37PdOWIPuAN3wrL8pqsChuW4HJU/cLzvrXdq3vMVOE64
+	V+oEMN1+5htznht6KZ7J2rTeFZi5Pw02M/Zqir1clswktdlj7lM1z7SAf/s0JjBYw7bp
+	IgC0U5P3OYxHnDESHsThyc7AHPsTGIGxOmaHqwGF5OuEN0LwQUvtJ1RA/iA9SibT/dXS
+	3VJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=GHFanK7CciVrSkKilf/QsAS4CL6mKzAxj42lhHLvZ1E=;
-	b=rkufHeA3xS1rZ+OuNh2LpC1h6+f/1OuCVUEp+SV3u2evrXBtTVuByHwtjaPZoOwFsk
-	hOJlaQjSSKR/G1v6mxi1U7clcfeW4AJOyKl0y83qvhKukQvTlC5K8DzfJPIEizgkRa65
-	9IcLyHLMoPopFH7HLmrauUdKe+uD+WS4MnUX/TtMNYKTursV98vQYAwLuCCV3HNIB9iW
-	7dVr32l+w+F7le15r0VtjCi4azsmd7COCzzKUHKcxHYx3Uos2RQ9R+Xun5m6BBNT0zq/
-	PlyKOea+aXkAOuQ20Xla0A9fAE7ITCTUt8H5pxXUvcWrLW3Kv07ktV2OlOjNZrzhAqsI
-	E7cA==
-X-Gm-Message-State: AOUpUlEnBJE2pR/UHBoyUoQ5eIpZ0R9cn682b5koSS0sOYnqEx8OoX2a
-	Xr4dWU+ph/zwuyYjO/envdzpgPOQ4RDnsrL728Y=
-X-Google-Smtp-Source: AA+uWPwF51HovqGFPHI4a92zWiSbZKGQfJ3kZrScdS64E/gVCesQbVTHWdjhIXOPi/Zq31Led0eM2A1F+a5pnAOvPJg=
-X-Received: by 2002:a37:4a94:: with SMTP id
-	x142-v6mr37771716qka.110.1534696109814; 
-	Sun, 19 Aug 2018 09:28:29 -0700 (PDT)
-MIME-Version: 1.0
-References: <1534690217-30223-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1534690217-30223-1-git-send-email-akuster808@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ToU5gbEwQQZsLwVkuNqHXsu00WW1BNDz1ri1zIbdqMQ=;
+	b=YjA7rytM5OdWPzBLxZJq5xEuO+ZWAOCvjSLUDd364uvxaS33VaTlwTSrFuPHrkzdND
+	xsG91VB0Jn83WecgbdkP4I1p0b/kGAvBlumwoCnSjmjywIxyNXyaRrRpedIP5qx9rR80
+	J6ydSGY6Iu0HxHHQhNNcJ2rt5dcjZby7XjKH7QT81rNfbZd9KrmSyV9ahrsPQ2iYB87F
+	BowJl1yAmAwnylej3nMVXkeFCCOf1p/0EUGQk7c2hxTjIFNE8eX67BG9cgJgjJeEagJz
+	pwcZCX9c/pcCx4mMeiBL6E5N+9OIeoUZjiCaqLwb5hd4cOn4hJkgcrflutYVK2/qoujR
+	447w==
+X-Gm-Message-State: AOUpUlH2sos/Lp39mfKnJKEwGJTg8zgMMudC9kjK9QEyHRT6O0sJxoV7
+	1Vf0g/MgRKgf2t7ku3paR9vse9UH
+X-Google-Smtp-Source: AA+uWPxE5NKxPb1f48wey2NWyFvy2fPSJUXS5vm/n+p0D6mcT+Ky+hUywaTZ1nJB7ZOzkX0wweM1+w==
+X-Received: by 2002:a63:ec14:: with SMTP id
+	j20-v6mr39649955pgh.28.1534696320374; 
+	Sun, 19 Aug 2018 09:32:00 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::4add])
+	by smtp.gmail.com with ESMTPSA id
+	n83-v6sm14190520pfk.19.2018.08.19.09.31.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 19 Aug 2018 09:31:59 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 19 Aug 2018 09:28:03 -0700
-Message-ID: <CAMKF1so7Dqxb744zENOYBGum-n4f=cD9DoyEomSV0fyjd6T=1w@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [SUMO][meta-networking][PATCH] wireshark: update to 2.4.8
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 19 Aug 2018 09:31:50 -0700
+Message-Id: <20180819163152.28471-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-networking][PATCH 1/3] openl2tp: Add bison-native to build deps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,55 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Aug 2018 16:28:29 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 19 Aug 2018 16:32:00 -0000
 
-On Sun, Aug 19, 2018 at 7:50 AM Armin Kuster <akuster808@gmail.com> wrote:
->
-> Bug fix update only
->
-> includes security fixes:
->
-> wnpa-sec-2018-25 The LDSS dissector could crash. (Bug 14615)
-> wnpa-sec-2018-28 Multiple dissectors could consume excessive memory. (Bug 14678)
-> wnpa-sec-2018-29 The DNS dissector could crash. (Bug 14681)
-> wnpa-sec-2018-30 The GSM A DTAP dissector could crash. (Bug 14688)
-> wnpa-sec-2018-31 The Q.931 dissector could crash. (Bug 14689)
-> wnpa-sec-2018-33 Multiple dissectors could crash. (Bug 14703)
->
+Fixes:
+| make: bison: Command not found
+| make: *** [Makefile:212: l2tp_config_parse.c] Error 127
 
-LGTM
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../wireshark/{wireshark_2.4.7.bb => wireshark_2.4.8.bb}              | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/wireshark/{wireshark_2.4.7.bb => wireshark_2.4.8.bb} (95%)
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.4.7.bb b/meta-networking/recipes-support/wireshark/wireshark_2.4.8.bb
-> similarity index 95%
-> rename from meta-networking/recipes-support/wireshark/wireshark_2.4.7.bb
-> rename to meta-networking/recipes-support/wireshark/wireshark_2.4.8.bb
-> index 2b2acae..7c81ad3 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_2.4.7.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_2.4.8.bb
-> @@ -11,8 +11,8 @@ SRC_URI += "file://libgcrypt.patch"
->
->  UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
->
-> -SRC_URI[md5sum] = "a78f3fd231154d6c93a2fec202c9d2bb"
-> -SRC_URI[sha256sum] = "5ecb3c68734fb89c83ac283e6cdf264eb15b9c7e7ea63dcfd4f0bad3e77c4f44"
-> +SRC_URI[md5sum] = "25f93aa6a2b3fdd9d1f01a49f84d224f"
-> +SRC_URI[sha256sum] = "db8ed7828c157e4ffb91fb8c41fa5a2f37fd44259175951a5c37848bf641f5e8"
->
->  PE = "1"
->
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+index e51a101a0d..90e8b111dc 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
+                     file://usl/LICENSE;md5=9c1387a3c5213aa40671438af3e00793 \
+                     "
+ 
+-DEPENDS = "popt flex readline rpcsvc-proto-native"
++DEPENDS = "popt flex readline rpcsvc-proto-native bison-native"
+ 
+ SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
+            file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
+-- 
+2.18.0
+
 
