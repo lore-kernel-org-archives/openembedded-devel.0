@@ -1,47 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 1385874FAD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CA4460237
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 20:27:43 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id s12-v6so10607404wmc.0
+	Sun, 19 Aug 2018 01:41:54 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id 126-v6so8737989qke.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Aug 2018 13:27:45 -0700 (PDT)
+	Sat, 18 Aug 2018 18:41:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=usBAA/Am+025dsBISle24IfMekL7t/CP3QvA9n0EqME=;
-	b=YVHNSmjjXWp35ke71LKryg0wXusSDlD8uGdvpfe8sjL6+iFu5EWClU770I1MZ2fZev
-	gN8qGEIBw+62jf8dVOMQkOUZ6ZZmqG0GcS+JtvO4iAyqosJ4iWsiVxtJZIzg12pbjsHN
-	VVz6BG2M5uYa5SsUU+SBwnBGHp4FXG/LiGpbBug5CFAiypODm+pua00HXMTXFkHNn5+F
-	f6mwe8MLZX0CGlmfEGHpVXhBqfd2k2ODP6JSQu6x9al2YLDel7Cptj8mS52QuYwmKPV2
-	WmyX+8gNogWCuO+WTddKRMHGeK1vSB8+n9Z6b8yfrgO9W3NiTaQF+HNCPifRHqBtJ/I5
-	ubJA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=HxF+M70I6MBXd3kT1eVS6ogxTEHtbEeOdw4qx7GQmmY=;
+	b=edf1fNCK6bdyIJ8bfI3TTfgDlsum9GNDQT6phsLaEFHBnG7I5Gol9T1Rexfk+WiESy
+	SRMuUf4yIqChT30MDu3uUpN5cNJptjjhgAV2yjTRlMPpemS2dU8GjK4y5k7Mry5ehwzE
+	H4QPJWvduNzfPdbLl0C34Hy1uralDMKyPykX90HbLbZZxuK8yS7vkiQS8WdVtw4XHqys
+	UX+g9ivNy+2fmAL8WBcCAfOPjIl39D6/Zzqy+D4EQJVYYeEg1O9RuTJmDALUTxteyQ2/
+	RBuBqs0Ek4K1imNoZIwBqXNOXGZ6KpU5hcchS9BG6OVhNnHfLHuwNNznGHS0gt9iK/ay
+	WNEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=usBAA/Am+025dsBISle24IfMekL7t/CP3QvA9n0EqME=;
-	b=jwDJY8ivkdQh+xveDuLaivmo2GEO7BELBQb5gR0JjbR+PtqIBmoJsIQ+VP14zTEnfS
-	jPg+HqWIQnS+fRqmGkI9CCwoUoprai8IXkghNWALrjHWPcDU1iide0/WNbMruAyi1NJY
-	Y8/NFTl2TEiZh5D3RVbY1uLcD6ycqD+UIDEKmpgTfcjUMupaHoXZg/oMBlTq7SlmeC0E
-	Necya7YFHL6fy+0UWSh6t/seO4O80vdaUnxuiykE7+hG6eJsE75BUwRwDdJE1rHHSr1+
-	bupuWBFoWO4RxUuxyRzcbUapmY44wtPQib6atqHrV1+0XCDXb8fEjcy8cZy+C2BXx5JF
-	ha+g==
-X-Gm-Message-State: AOUpUlHRVRSt+mvbhAPCtyK/cvBFw/FYPiRXq3zCk8VFgxYRGeNKP4BT
-	dC0WHF7zbHiDeoJga3hjdqJBAi1R
-X-Google-Smtp-Source: AA+uWPyQaLoPxwY1FF3eH3kPzpCwjgNJtRNYGXx0Oq+25eXfhKdzi9JGr1pcf8NN06zsvzyotFv30w==
-X-Received: by 2002:a1c:1314:: with SMTP id
-	20-v6mr21298186wmt.55.1534624064664; 
-	Sat, 18 Aug 2018 13:27:44 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	g133-v6sm8323692wmf.44.2018.08.18.13.27.43
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 18 Aug 2018 13:27:43 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Aug 2018 20:27:42 +0000
-Message-Id: <20180818202742.5967-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] snort: add dependency on bison-native
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=HxF+M70I6MBXd3kT1eVS6ogxTEHtbEeOdw4qx7GQmmY=;
+	b=EmlI49Dd65qVXPkuRWGs+YyqVe+4pb1+/nI7k4Szk94IQZY3c/e4iTMD+RgEo1NYEr
+	neKWaPqENder13mILwU/HDK/c1WBNZfG33U57fV/BOfWIRtwe3gtNHJ48llRUipTYSMx
+	wKYJchb2UtGU2NJOjdctozrNXUm0ofdIj53KWMlcJgBPoINPJMgAnJj4Mg2lJTLoAb+A
+	3tZ/ogro5xzmBLWpN5QBvncuPPtDDyw98z867qgWCLDdcQA1ngu9eiYgbY6s5Y+CojWt
+	u5EwVofBYsFYEryNNSAGYl5etR7um2lWqsVNvrSTvhYpfSDnXF9xhKgXzQc962TPoWkX
+	Q10w==
+X-Gm-Message-State: AOUpUlEF9KwrT2reKp28w4mfDBcQlq0V6I4FCLpA7x8pW9Ul7bmH+wqR
+	xnxxKORSKDrG+z2FIjASDgCcs+38PDPiDpll5XI=
+X-Google-Smtp-Source: AA+uWPza4E+T+otKY/rWs3RTwVny2wT0YYynemlgjBEPDcoxZbCnjHS2fXhdH2XaXvndkZCmAma8aMM3NS31AGEgekI=
+X-Received: by 2002:a37:1be4:: with SMTP id
+	m97-v6mr9843446qkh.12.1534642915665; 
+	Sat, 18 Aug 2018 18:41:55 -0700 (PDT)
+MIME-Version: 1.0
+References: <MAXPR01MB0348B0F7FCE0B995544DA5B291390@MAXPR01MB0348.INDPRD01.PROD.OUTLOOK.COM>
+	<CAMKF1sosfZqgHsHaKi7ifNPobSiZxnzULf=15BLOXRw9TCa-nA@mail.gmail.com>
+	<20180814075105.GN8291@hiutale>
+In-Reply-To: <20180814075105.GN8291@hiutale>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 18 Aug 2018 18:41:29 -0700
+Message-ID: <CAMKF1sr4tcDx98-gHnOHuXf+ugZb=0Y_cN1KxSTYxG6=rXV5LA@mail.gmail.com>
+To: Mikko Rapeli <Mikko.Rapeli@bmw.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] ltrace: added alternate source
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,32 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Aug 2018 20:27:44 -0000
+X-List-Received-Date: Sun, 19 Aug 2018 01:41:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* fixes:
-   ERROR!  bison not found.
-   Get it from http://www.gnu.org/software/bison/
-   (You may also try byacc or yacc instead.)
+On Tue, Aug 14, 2018 at 12:51 AM <Mikko.Rapeli@bmw.de> wrote:
+>
+> On Mon, Aug 13, 2018 at 11:23:49AM -0700, Khem Raj wrote:
+> > On Mon, Aug 13, 2018 at 5:37 AM Aditya Tayade <Aditya.Tayade@kpit.com> wrote:
+> > >
+> > > Description:
+> > > As alioth (the Debian service hosting anonscm) has been discontinued using https://alioth-archive.debian.org/git/ltrace/ltrace.git.tar.xz as a new source for ltrace.
+> > > The new source tree SRCREV SHA "ea8928dab8" and old source tree (from discontinued link)SRCREV SHA "c22d359433" points to same git history but have some diffs.
+> > > Hence added a patch which applies the diff to SHA "ea8928dab8" to make it same as SHA "c22d359433" from the earlier git source.
+> > >
+> >
+> > it might be better to push a repo from
+> > https://alioth-archive.debian.org/git/ltrace/ltrace.git.tar.xz into
+> > github or some place. Have we asked the debian salsa migration team if
+> > this is planned for migration at all ?
+>
+> Yes, but hosting the git repo feels like taking over maintenance of it too.
+>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+we might have to do that if we depend on it and no one else cares regardless
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
-index fdf41bfbda..22f52b55f0 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.11.1.bb
-@@ -4,7 +4,7 @@ SECTION = "net"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
- 
--DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc"
-+DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc bison-native"
- 
- SRC_URI = "https://www.snort.org/downloads/snort/${BP}.tar.gz \
-     file://snort.init \
--- 
-2.17.1
+> This patch enables building ltrace from poky master and sumo again without
+> ltrace sources in download caches. Thus I would take it.
+>
 
+I gave it a try and it failed in patching
+
+Applying patch add-support-for-old-source-commit-SHA-c22d359433.patch
+patching file sysdeps/linux-gnu/mksyscallent_s390
+Hunk #2 FAILED at 37.
+1 out of 2 hunks FAILED -- rejects in file sysdeps/linux-gnu/mksyscallent_s390
+patching file sysdeps/linux-gnu/s390/syscalls31.h
+Hunk #1 FAILED at 35.
+Hunk #2 FAILED at 65.
+Hunk #3 FAILED at 89.
+Hunk #4 FAILED at 108.
+Hunk #5 FAILED at 157.
+Hunk #6 FAILED at 183.
+Hunk #7 FAILED at 201.
+Hunk #8 FAILED at 217.
+Hunk #9 FAILED at 287.
+Hunk #10 FAILED at 306.
+Hunk #11 FAILED at 329.
+11 out of 11 hunks FAILED -- rejects in file sysdeps/linux-gnu/s390/syscalls31.h
+patching file sysdeps/linux-gnu/s390/syscalls64.h
+Hunk #1 FAILED at 41.
+Hunk #2 FAILED at 109.
+Hunk #3 FAILED at 188.
+Hunk #4 FAILED at 287.
+Hunk #5 FAILED at 306.
+Hunk #6 FAILED at 329.
+6 out of 6 hunks FAILED -- rejects in file sysdeps/linux-gnu/s390/syscalls64.h
+Patch add-support-for-old-source-commit-SHA-c22d359433.patch does not
+apply (enforce with -f)
+
+
+
+> -Mikko
 
