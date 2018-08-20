@@ -1,44 +1,44 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-yb0-f175.google.com (mail-yb0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C54E790A1
+Received: from mail-yb0-f180.google.com (mail-yb0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D382790F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 15:32:39 +0000 (UTC)
-Received: by mail-yb0-f175.google.com with SMTP id f145-v6so2568202ybg.4
+	Mon, 20 Aug 2018 15:32:40 +0000 (UTC)
+Received: by mail-yb0-f180.google.com with SMTP id k5-v6so1709601ybo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 08:32:40 -0700 (PDT)
+	Mon, 20 Aug 2018 08:32:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=YrGyZ+Zwt+ScZ93gKlH12xvGGjfEmZLigrrNRXSCv1s=;
-	b=fwxRRUHoW6tmtbP1X3eture1UPVuFfvCQrADo4Ocg6v4vdjoX1YTpHf2YE5DjpqXTk
-	IScXZ/P4QwZqN7vdoZvCmbsaqZY4mkbcvbK+xpLHS7gYigVJENx7fMiYTikI6y6oRGhR
-	l/ursin09a/nkSSzG1lMin6fQzaItz2kqwfb/MujLho8r/jC/Fp4ZiXmzi4GI0NeDe5K
-	vlUqboON6BTnVRjEhUsCZTylKbUkLT9/0rTLrHK24J/jKaTz5K8L7dfzL93yIk27hBQQ
-	zvBa7+MSlh3bJomarNKW3p3KbjF/xo8+a5UDXJXHM3DPOTxq6BJDwntDGMn1xR3Km2cx
-	LPFw==
-X-Gm-Message-State: AOUpUlFEKjGTM337wumcrx2Wp5s+9/ug31bMCK3dciHMKfOKIV6nDWRo
-	7uAooMD16sxn/DWfUww00rsD/z63
-X-Google-Smtp-Source: AA+uWPwqfjIU8xj8YGHAchZCszFeOK6avI6Mpn4Ps7xTp5H9W1JshaEq0grhpPm/UAJVhGVsS4NssQ==
-X-Received: by 2002:a25:918e:: with SMTP id
-	w14-v6mr1322389ybl.233.1534779160185; 
-	Mon, 20 Aug 2018 08:32:40 -0700 (PDT)
+	bh=JNjqW941q//CJRMVhjIn8OX6ykVa67wU0siNvZFFAOo=;
+	b=Ne00up3DkFBeo/QO6GQpOc786/hMnLX1f+GXPELWZrtRsOxrxe2IHnrghZPMj/ycMR
+	kGlYF6rjlTKYHzy7JqJjCmXqvE7H8SyzUwUNN954uBBi7tcwyjdjbHFSE1xp5HC4m/5u
+	foquZeqYlfW9b4c0gquGIuwCSEDK/QiG1J7yMh+Vt7PZUUeYA1X++Gs9tNbOsMdTRHtt
+	B9QMBLmlUO5wLAWvIvCbXRoRCTbXgokeCpETHXmq8M6duMLW31OB69ZGhxI6Vh7ymSfc
+	MK+TbKDqYOf0qw4HAbqT6eB9Ia2JNYP6xStD045kqGI7Ehw4uQ42FAaoXZ7ynuSWBjIa
+	QZYg==
+X-Gm-Message-State: AOUpUlEyWqmNoBvBtEHmYCmGKL3goyvoKc6p17f/IIfNsocFY6Keujbd
+	FHYNHMdIi7hEoc77wh6V3GREb0M9
+X-Google-Smtp-Source: AA+uWPwZAtAQdsr9A0lPadRD/bHs34hLsRJDbKzoWrWTjyirJUWItHzkohQmJAFVQyel/FLVn/r18g==
+X-Received: by 2002:a25:1fc1:: with SMTP id
+	f184-v6mr4465661ybf.164.1534779161373; 
+	Mon, 20 Aug 2018 08:32:41 -0700 (PDT)
 Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	z193-v6sm1496775ywd.90.2018.08.20.08.32.39
+	z193-v6sm1496775ywd.90.2018.08.20.08.32.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Aug 2018 08:32:39 -0700 (PDT)
+	Mon, 20 Aug 2018 08:32:40 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Aug 2018 16:32:32 +0100
-Message-Id: <20180820153234.10990-3-git@andred.net>
+Date: Mon, 20 Aug 2018 16:32:33 +0100
+Message-Id: <20180820153234.10990-4-git@andred.net>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180820153234.10990-1-git@andred.net>
 References: <20180820153234.10990-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH v2 3/5] openjdk-8: always apply some patches
+Subject: [meta-java][PATCH v2 4/5] openjdk-8: allow to build client JVM via PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,54 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2018 15:32:39 -0000
+X-List-Received-Date: Mon, 20 Aug 2018 15:32:40 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: André Draszik <andre.draszik@jci.com>
 
-As a simplification for the upcoming aarch32 port.
+The aarch32 port will need to unconditionally enable this.
 
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- recipes-core/openjdk/openjdk-8-native.inc                | 2 --
- recipes-core/openjdk/openjdk-8-release-172b11-common.inc | 3 ++-
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ recipes-core/openjdk/openjdk-8-cross.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-index e6f7933..6a01046 100644
---- a/recipes-core/openjdk/openjdk-8-native.inc
-+++ b/recipes-core/openjdk/openjdk-8-native.inc
-@@ -7,8 +7,6 @@ DEPENDS = "\
-     ca-certificates-native openssl-native coreutils-native \
- "
+diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
+index 939155b..d04b0d3 100644
+--- a/recipes-core/openjdk/openjdk-8-cross.inc
++++ b/recipes-core/openjdk/openjdk-8-cross.inc
+@@ -32,7 +32,9 @@ PACKAGECONFIG[jpeg] = "--with-libjpeg=system,--with-libjpeg=bundled,jpeg,"
+ PACKAGECONFIG[png] = "--with-libpng=system,--with-libpng=bundled,libpng,"
+ PACKAGECONFIG[zlib] = "--with-zlib=system,--with-zlib=bundled,zlib,"
  
--SRC_URI_append += "file://handle_extra_output.patch"
--
- PACKAGECONFIG ??= "gif jpeg png zlib"
- PACKAGECONFIG[x11] = "--with-x,,libx11-native xorgproto-native libxt-native libxext-native libxrender-native"
- PACKAGECONFIG[cups] = "--with-cups,,cups"
-diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-index 4bcecef..8e94a4f 100644
---- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
-@@ -18,6 +18,8 @@ PATCHES_URI = "\
-     file://0010-build-fix-build-on-as-needed-toolchains-generic.patch \
-     file://0011-hotspot-backport-patch-to-fix-misuses-of-strncpy-str.patch \
-     ${HOTSPOT_UB_PATCH} \
-+    ${LIBPNG_NEON_PATCH} \
-+    file://handle_extra_output.patch \
- "
- HOTSPOT_UB_PATCH = "\
-     file://0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch \
-@@ -43,7 +45,6 @@ PATCHES_URI_append_class-target = "\
-     file://openjdk8-fix-assembler-flag-handling-in-makefile.patch;striplevel=0 \
-     file://openjdk8-fix-adlc-flags.patch;striplevel=0 \
-     file://openjdk8-add-missing-linker-flags.patch;striplevel=0 \
--    ${LIBPNG_NEON_PATCH} \
- "
- PATCHES_URI_append_libc-musl = "\
-     file://musl-0001-hotspot-stop-using-obsolete-isnanf.patch \
++# JVM variants
+ export WANT_LLVM_RELEASE = "3.5.2"
++PACKAGECONFIG[client] = "--with-jvm-variants=client,,,"
+ PACKAGECONFIG[zero] = "--with-jvm-variants=zero,,,"
+ PACKAGECONFIG[shark] = "--with-jvm-variants=zeroshark,,llvm3.5,"
+ 
 -- 
 2.18.0
 
