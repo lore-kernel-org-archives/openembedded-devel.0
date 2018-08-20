@@ -1,11 +1,17 @@
 Return-Path: <prvs=7639e01b5=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id D29DE78FF5
+	by mail.openembedded.org (Postfix) with ESMTP id 68F2378FF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 15:09:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,265,1531778400"; d="scan'208";a="11908302"
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	Mon, 20 Aug 2018 15:25:57 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,265,1531778400"; d="scan'208";a="11908694"
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
+	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
+	<20180724152529.GA19585@mail.itconsulting-heinold.de>
+	<CAP9ODKp3_1iQybyE0McSFUbd7YFPoPbD8HVy+qu05aP18zvwKw@mail.gmail.com>
+	<CANx9H-BRdfmLO1vbeFocn6RSOmcd5F73hB_bYQqOMsc5o_nPSA@mail.gmail.com>
+	<CAMKF1sp4c_LFSGWKvkQ_bdi3Qz3maQO5k+mo1ViYNxxKAQ_5sA@mail.gmail.com>
+	<CAP9ODKpyad5xfNkEf6+SxiW90xr=BT6=5Y3VFtv1+z5+NXFY-A@mail.gmail.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -51,15 +57,18 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <89ed3963-b2cd-6f1d-8654-b0dd2c50911a@skidata.com>
-Date: Mon, 20 Aug 2018 17:09:47 +0200
+Message-ID: <36f387ee-a523-6ac9-3e79-61689da55ccb@skidata.com>
+Date: Mon, 20 Aug 2018 17:26:38 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
+In-Reply-To: <CAP9ODKpyad5xfNkEf6+SxiW90xr=BT6=5Y3VFtv1+z5+NXFY-A@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java] changes pushed to sumo branch
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>
+Subject: Re: [meta-java] bug-tracker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -72,19 +81,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2018 15:09:07 -0000
+X-List-Received-Date: Mon, 20 Aug 2018 15:25:58 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Hi,
-this is a note to let you know that I've just pushed the following cherry-picked commits from master to the sumo branch of the meta-java repository at git://git.yoctoproject.org/meta-java.
 
+On 7/25/18 10:39 AM, Otavio Salvador wrote:
+> Em qua, 25 de jul de 2018 06:38, Khem Raj <raj.khem@gmail.com> escreveu:
+> 
+>> how about gitlab ?
+> 
+> 
+> Personally I prefer github as most people have account on it and are used
+> to it.
 
-Yevgeny Popovych (1):
-      dbus-java: do not build any documentation
+Same for me... I'd prefer github and a new organization as owner.
 
+So who would be capable of doing this?
+Also setting up the mirrors (either way it will be) correctly?
 
-If you have any questions, please let me know.
-regards;Richard.L 
+Or are there any reasons against it?
+
+regards;Richard.L
+
+P.S.: CC'ing the meta-java maintainers
 
