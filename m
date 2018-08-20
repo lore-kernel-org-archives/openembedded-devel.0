@@ -1,33 +1,19 @@
 Return-Path: <prvs=7639e01b5=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 434CE790C8
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 134B7748D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 17:42:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,266,1531778400"; 
-   d="scan'208";a="1615665"
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-References: <a0731f9a-83e2-9ea2-a04e-191ef3793e74@skidata.com>
-	<CAP9ODKqDEZ8ND4K3SEELY2mTjALCX5rzWLxjD0Vht7RFTVZ6cw@mail.gmail.com>
-	<20180724152529.GA19585@mail.itconsulting-heinold.de>
-	<CAP9ODKp3_1iQybyE0McSFUbd7YFPoPbD8HVy+qu05aP18zvwKw@mail.gmail.com>
-	<CANx9H-BRdfmLO1vbeFocn6RSOmcd5F73hB_bYQqOMsc5o_nPSA@mail.gmail.com>
-	<CAMKF1sp4c_LFSGWKvkQ_bdi3Qz3maQO5k+mo1ViYNxxKAQ_5sA@mail.gmail.com>
-	<CAP9ODKpyad5xfNkEf6+SxiW90xr=BT6=5Y3VFtv1+z5+NXFY-A@mail.gmail.com>
-	<36f387ee-a523-6ac9-3e79-61689da55ccb@skidata.com>
-	<CAP9ODKrAAvosag_JtRptgec-JiPsiKi98Jhh4VEfuV+wTzDdvw@mail.gmail.com>
+	Mon, 20 Aug 2018 21:14:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,266,1531778400"; d="scan'208";a="11913553"
 From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <758564ee-1d9c-8640-f0bc-d4c89f191015@skidata.com>
-Date: Mon, 20 Aug 2018 19:42:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 20 Aug 2018 23:14:36 +0200
+Message-ID: <20180820211443.32757-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKrAAvosag_JtRptgec-JiPsiKi98Jhh4VEfuV+wTzDdvw@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Cc: Mario Goulart <mario@ossystems.com.br>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] bug-tracker
+Subject: [meta-java][PATCH 0/7] openjdk include cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,24 +26,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2018 17:42:06 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: de-AT
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Aug 2018 21:14:14 -0000
+Content-Type: text/plain
 
+Remove duplicated code in openjdk includes by moving it to the
+openjdk-build-helper class. Furthermore make the naming of files in
+recipes-core/openjdk/ consistent again.
 
-On 08/20/2018 07:13 PM, Otavio Salvador wrote:
->> Same for me... I'd prefer github and a new organization as owner.
->>
->> So who would be capable of doing this?
->> Also setting up the mirrors (either way it will be) correctly?
->>
->> Or are there any reasons against it?
-> Sounds good to me.
-> 
-> I can help setting it up if desired.
+Richard Leitner (7):
+  openjdk-build-helper: add get_*_arch functions
+  openjdk-8: use openjdk_build_helper's ARCH translation functions
+  openjdk-7: use openjdk_build_helper's ARCH translation functions
+  icedtea7-native: use openjdk_build_helper's ARCH translation functions
+  openjdk-7: remove version dependent stuff from openjdk-common
+  openjdk-8: use openjdk-common
+  openjdk-7: merge postinst into openjdk-7-common
 
-Would be great :-) Thanks!
+ classes/openjdk-build-helper.bbclass      |  51 +++++++++++
+ recipes-core/icedtea/icedtea7-native.inc  |  42 +--------
+ recipes-core/openjdk/openjdk-7-common.inc | 141 +++++++++++++++++++++++++++++-
+ recipes-core/openjdk/openjdk-8-common.inc |  44 +---------
+ recipes-core/openjdk/openjdk-common.inc   |  77 +---------------
+ recipes-core/openjdk/openjdk-postinst.inc | 100 ---------------------
+ 6 files changed, 194 insertions(+), 261 deletions(-)
+ delete mode 100644 recipes-core/openjdk/openjdk-postinst.inc
 
-regards;Richard.L
+-- 
+2.11.0
+
 
