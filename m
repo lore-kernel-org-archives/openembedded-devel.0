@@ -1,14 +1,12 @@
 Return-Path: <prvs=7639e01b5=Richard.Leitner@skidata.com>
 Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 9702D79062
+	by mail.openembedded.org (Postfix) with ESMTP id 0D20478FF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 13:53:28 +0000 (UTC)
+	Mon, 20 Aug 2018 15:06:41 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.53,265,1531778400"; 
-   d="scan'208";a="1615042"
-To: <openembedded-devel@lists.openembedded.org>
-References: <3463e929-53ce-df98-355c-11de357fc5ae@skidata.com>
-	<69df7e62-bd10-ba0e-7441-1bb4f76940f3@skidata.com>
-	<6b18853d33e195e369de5d2184a2eb12f1abc3d6.camel@andred.net>
+   d="scan'208";a="1615345"
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -54,16 +52,15 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <1d5d1512-2e67-7000-0158-fcaaec61ef68@skidata.com>
-Date: Mon, 20 Aug 2018 15:54:08 +0200
+Message-ID: <1198d2de-2f35-734a-85fc-730a5c3b703c@skidata.com>
+Date: Mon, 20 Aug 2018 17:07:22 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <6b18853d33e195e369de5d2184a2eb12f1abc3d6.camel@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH 3/3] openjdk-8: use ca-certificates-java (was: Re: Fwd: [yocto] [meta-java][PATCH 3/3] openjdk-8: use ca-certificates-java)
+Subject: [meta-java] merged master-next to master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,24 +73,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2018 13:53:29 -0000
+X-List-Received-Date: Mon, 20 Aug 2018 15:06:42 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Hi André,
+Hi,
+this is a note to let you know that I've just merged the following patches from master-next to the master branch of the meta-java repository at git://git.yoctoproject.org/meta-java.
 
-On 8/20/18 3:42 PM, André Draszik wrote:
-> Hi Richard,
-> 
-> What package manager are (were) you using when that failed for you?
+If any of them should be backported to any stable branches please get in contact with us by replying to this email. Thanks.
 
-I'm pretty sure I used the default one (rpm)...
 
-> 
-> 
-> Thanks,
-> Andre'
+André Draszik (13):
+      ca-certificates-java: update to v20180516
+      gitignore: ignore new python byte-code files
+      openjdk-8: speed-up do_install() (pack200)
+      openjdk-8: remove superfluous compiler flag (-std=gnu++98)
+      openjdk-8: fix infrastructure for version host gcc != cross gcc (again)
+      openjdk-8: gcc-8 fix #1: backport patch to fix misuses of strncpy/strncat
+      Revert "openjdk-8: fix build for gcc8.x"
+      openjdk-8: gcc-8 fix #2: silence build warnings/errors (return-type)
+      openjdk-8: gcc-8 fix #3: working binaries
+      openjdk-8: update to 8u172b11
+      java.bbclass: move openjdk/icedtea specific code into new class
+      openjdk-build-helper: move c compiler flags retrieval to here (from openjdk-8)
+      openjdk-8: gcc-8 fix #4: undefined behaviour (hotspot)
 
-regards;Richard.L
+Matthew McClain (1):
+      openjdk-8: 'do_unpack_remove_X11_wrappers' confuses pyro bitbake parser
+
+Richard Leitner (3):
+      openjdk-7: clarify a bitbake warning
+      oeqa: runtime: java: skip not supported version/arch combinations
+      README: add "Known Limitations/Bugs" section
+
+Yevgeny Popovych (1):
+      dbus-java: do not build any documentation
+
+
+If you have any questions, please let me know.
+regards;Richard.L 
 
