@@ -1,28 +1,24 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EDEA60616
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DD3CE79090
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 06:04:41 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w7K64df5008811
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 19 Aug 2018 23:04:39 -0700 (PDT)
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Sun, 19 Aug 2018 23:04:38 -0700
-To: Martin Jansa <martin.jansa@gmail.com>, Dengke Du <dengke.du@windriver.com>
-References: <1534499269-29908-1-git-send-email-dengke.du@windriver.com>
-	<CA+chaQev7OU47E-bV+x4OX9ZVgE7ZGX8ZWg1h27e-rVkPQ9Ayw@mail.gmail.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <b1b2fffc-1ad1-65e0-539a-816cf39fff67@windriver.com>
-Date: Mon, 20 Aug 2018 14:08:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Mon, 20 Aug 2018 09:41:48 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7K9fnke007576
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Aug 2018 02:41:50 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Mon, 20 Aug 2018 02:41:48 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 20 Aug 2018 17:41:47 +0800
+Message-ID: <1534758107-254391-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQev7OU47E-bV+x4OX9ZVgE7ZGX8ZWg1h27e-rVkPQ9Ayw@mail.gmail.com>
-X-Originating-IP: [128.224.162.198]
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] kernel-selftest: compatible with latest kernel
+Subject: [meta-oe][PATCH] fio: disable compiler optimizations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,69 +31,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Aug 2018 06:04:42 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 20 Aug 2018 09:41:49 -0000
+Content-Type: text/plain
 
-Thank you very much for your work.
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
---Hongzhi
+Add parameter "--disable-optimizations" to
+configure script to disable compiler optimizations
+to fix below issue:
+$ gdb /usr/bin/fio
+(gdb) r -h
+Starting program: /usr/bin/fio -h
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
 
+Program received signal SIGILL, Illegal instruction.
+0x0000000000407220 in prio_tree_init () at lib/prio_tree.c:61
+61	index_bits_to_maxindex[i] = (1UL << (i + 1)) - 1;
+(gdb) bt
+ #0 0x0000000000407220 in prio_tree_init () at lib/prio_tree.c:61
+ #1 0x0000000000482208 in __libc_csu_init (argc=argc@entry=2,
+    argv=argv@entry=0x7fffffffecc8, envp=0x7fffffffece0)
+    at /usr/src/debug/glibc/2.26-r0/git/csu/elf-init.c:88
+ #2 0x00000031c742095e in __libc_start_main (main=0x407700 <main>, argc=2,
+    argv=0x7fffffffecc8, init=0x4821b6 <__libc_csu_init>,
+    fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7fffffffecb8)
+    at /usr/src/debug/glibc/2.26-r0/git/csu/libc-start.c:264
+ #3 0x00000000004077ea in _start () at ../sysdeps/x86_64/start.S:120
 
-On 2018年08月17日 17:44, Martin Jansa wrote:
-> see
-> http://lists.openembedded.org/pipermail/openembedded-devel/2018-August/120021.html
->
-> On Fri, Aug 17, 2018 at 11:37 AM Dengke Du <dengke.du@windriver.com> wrote:
->
->> From: "Hongzhi.Song" <hongzhi.song@windriver.com>
->>
->> There are some new program added for bpf. So we make corresponding
->> modifications.
->>
->> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
->> ---
->>   meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 7 ++++---
->>   1 file changed, 4 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->> b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->> index 27d98a3..d5ccace 100644
->> --- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->> @@ -79,7 +79,7 @@ do_configure() {
->>       :
->>   }
->>
->> -do_patch[prefuncs] += "copy_kselftest_source_from_kernel
->> remove_clang_related"
->> +do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
->>   python copy_kselftest_source_from_kernel() {
->>       sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
->>       src_dir = d.getVar("STAGING_KERNEL_DIR")
->> @@ -94,8 +94,9 @@ python copy_kselftest_source_from_kernel() {
->>               bb.utils.copyfile(src, dest)
->>   }
->>
->> -remove_clang_related() {
->> -       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d'
->> ${S}/tools/testing/selftests/bpf/Makefile
->> +remove_unrelated() {
->> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e
->> '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile
->> +       sed -i '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile
->>   }
->>
->>   PACKAGE_ARCH = "${MACHINE_ARCH}"
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ meta-oe/recipes-benchmark/fio/fio_3.7.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-benchmark/fio/fio_3.7.bb b/meta-oe/recipes-benchmark/fio/fio_3.7.bb
+index 410e27b..9bec2df 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_3.7.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_3.7.bb
+@@ -32,6 +32,7 @@ S = "${WORKDIR}/git"
+ DISABLE_STATIC = ""
+ 
+ EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
++EXTRA_OECONF = "--disable-optimizations"
+ 
+ do_configure() {
+     ./configure ${EXTRA_OECONF}
+-- 
+2.7.4
 
 
