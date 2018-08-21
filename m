@@ -1,30 +1,23 @@
-Return-Path: <Hongzhi.Song@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4317B79012
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A30DF75260
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2018 05:24:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w7L5Orpq007370
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 20 Aug 2018 22:24:53 -0700 (PDT)
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Mon, 20 Aug 2018 22:24:52 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1534499269-29908-1-git-send-email-dengke.du@windriver.com>
-	<CA+chaQev7OU47E-bV+x4OX9ZVgE7ZGX8ZWg1h27e-rVkPQ9Ayw@mail.gmail.com>
-	<b1b2fffc-1ad1-65e0-539a-816cf39fff67@windriver.com>
-	<CAMKF1sqXKUbaj9oAXC402X7Q91MDhcoEBJHFPpw7-qi6pmf8Rg@mail.gmail.com>
-From: "Hongzhi, Song" <hongzhi.song@windriver.com>
-Message-ID: <096cdb2a-6313-67f7-742b-96f937edba81@windriver.com>
-Date: Tue, 21 Aug 2018 13:28:17 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Tue, 21 Aug 2018 06:01:21 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7L61M67007269
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Aug 2018 23:01:22 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Mon, 20 Aug 2018 23:01:22 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 21 Aug 2018 14:01:20 +0800
+Message-ID: <1534831280-440509-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqXKUbaj9oAXC402X7Q91MDhcoEBJHFPpw7-qi6pmf8Rg@mail.gmail.com>
-X-Originating-IP: [128.224.162.198]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] kernel-selftest: compatible with latest kernel
+Subject: [PATCH][meta-oe] php: fix CVE-2017-9120
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,87 +30,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2018 05:24:53 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 21 Aug 2018 06:01:21 -0000
+Content-Type: text/plain
 
-Hi Raj,
+From: Changqing Li <changqing.li@windriver.com>
 
-What is the linux version used by you.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../recipes-devtools/php/php/CVE-2017-9120.patch    | 21 +++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_7.2.8.bb           |  1 +
+ 2 files changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2017-9120.patch
 
---Hongzhi
-
-
-On 2018年08月21日 12:02, Khem Raj wrote:
-> I am still seeing build failures with musl/x86_64 see
->
-> http://errors.yoctoproject.org/Errors/Details/186953/
-> On Sun, Aug 19, 2018 at 11:05 PM Hongzhi, Song
-> <hongzhi.song@windriver.com> wrote:
->> Thank you very much for your work.
->>
->> --Hongzhi
->>
->>
->> On 2018年08月17日 17:44, Martin Jansa wrote:
->>> see
->>> http://lists.openembedded.org/pipermail/openembedded-devel/2018-August/120021.html
->>>
->>> On Fri, Aug 17, 2018 at 11:37 AM Dengke Du <dengke.du@windriver.com> wrote:
->>>
->>>> From: "Hongzhi.Song" <hongzhi.song@windriver.com>
->>>>
->>>> There are some new program added for bpf. So we make corresponding
->>>> modifications.
->>>>
->>>> Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
->>>> ---
->>>>    meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 7 ++++---
->>>>    1 file changed, 4 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->>>> b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->>>> index 27d98a3..d5ccace 100644
->>>> --- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->>>> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
->>>> @@ -79,7 +79,7 @@ do_configure() {
->>>>        :
->>>>    }
->>>>
->>>> -do_patch[prefuncs] += "copy_kselftest_source_from_kernel
->>>> remove_clang_related"
->>>> +do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
->>>>    python copy_kselftest_source_from_kernel() {
->>>>        sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
->>>>        src_dir = d.getVar("STAGING_KERNEL_DIR")
->>>> @@ -94,8 +94,9 @@ python copy_kselftest_source_from_kernel() {
->>>>                bb.utils.copyfile(src, dest)
->>>>    }
->>>>
->>>> -remove_clang_related() {
->>>> -       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d'
->>>> ${S}/tools/testing/selftests/bpf/Makefile
->>>> +remove_unrelated() {
->>>> +       sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e
->>>> '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile
->>>> +       sed -i '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile
->>>>    }
->>>>
->>>>    PACKAGE_ARCH = "${MACHINE_ARCH}"
->>>> --
->>>> 2.7.4
->>>>
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2017-9120.patch b/meta-oe/recipes-devtools/php/php/CVE-2017-9120.patch
+new file mode 100644
+index 0000000..728f25b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/CVE-2017-9120.patch
+@@ -0,0 +1,21 @@
++php: patch for CVE-2017-9120
++
++Upstream-Status: Backport [https://bugs.php.net/bug.php?id=74544]
++
++CVE: CVE-2017-9120
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++diff --git a/ext/mysqli/mysqli_api.c b/ext/mysqli/mysqli_api.c
++index 03a39d7..7b88731 100644
++--- a/ext/mysqli/mysqli_api.c
+++++ b/ext/mysqli/mysqli_api.c
++@@ -1965,7 +1965,7 @@ PHP_FUNCTION(mysqli_real_escape_string) {
++ 	}
++ 	MYSQLI_FETCH_RESOURCE_CONN(mysql, mysql_link, MYSQLI_STATUS_VALID);
++ 
++-	newstr = zend_string_alloc(2 * escapestr_len, 0);
+++	newstr = zend_string_safe_alloc(2, escapestr_len, 0, 0);
++ 	ZSTR_LEN(newstr) = mysql_real_escape_string(mysql->mysql, ZSTR_VAL(newstr), escapestr, escapestr_len);
++ 	newstr = zend_string_truncate(newstr, ZSTR_LEN(newstr), 0);
++ 
+diff --git a/meta-oe/recipes-devtools/php/php_7.2.8.bb b/meta-oe/recipes-devtools/php/php_7.2.8.bb
+index e8cb7fd..2a7937e 100644
+--- a/meta-oe/recipes-devtools/php/php_7.2.8.bb
++++ b/meta-oe/recipes-devtools/php/php_7.2.8.bb
+@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=67e369bc8d1f2e641236b8002039a6a2"
+ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+             file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
+             file://0001-fix-error-caused-by-a-new-variable-is-declared-after.patch \
++            file://CVE-2017-9120.patch \
+            "
+ SRC_URI_append_class-target = " \
+                                 file://pear-makefile.patch \
+-- 
+2.7.4
 
 
