@@ -1,48 +1,56 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6855B79163
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E649774E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2018 18:40:26 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id h138-v6so9055141qke.8
+	Tue, 21 Aug 2018 21:58:47 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id z96-v6so8415930wrb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2018 11:40:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=yRRRC58DBqlZxy12CBBVeD0e+N15cqDQdrImz5yFkg4=;
-	b=klTf1DB/rF9ZBA5xUXMDh28PB3cQDLFTl7EamUSiK+wzeOkbzfQYB+eRl+9a5rLzse
-	KNqV8oZtFIg3I0jbqlmiZaPaZXKH9jBqSt33QbfvagJTKcjAqTWTEbSaRAODAPzp1QQB
-	LHJ7DvaL2KlGw2I/UnKJkiub/pFCBEZ7b6vgsxpBK3l2YIdL+QO0RlAhkTYugsw08ay6
-	M9cOjD0qA6X1+TDMuhPMHMUEZJ//TOZ2fkS9Dk6GAQ1fVJEVJZk+aI0LLxzFthzYcOxO
-	1xixg0nblqYE275sBRwcqZlUAcixCiexktgPjjAKfdR1au6PNhopbduBgeAAcMKA8zr7
-	MsbQ==
+	Tue, 21 Aug 2018 14:58:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=l/MoooN7VuVae+OYJRTlCddAmEV4ueN0EfwD7hM05SU=;
+	b=bRu5SWUV4RcNklnLGtRmLOYb9ybZ+3oVocuOytYSRa97LxcCa20BI36qerohvq+K0i
+	9aJC8gfW52ZZqiIYQwiUrBmdDQvKt0z0R7ymrgnJo18xNKsbS/5hAGWzpnDijeqEzLFr
+	WsVxKx6H2a+TdCd+R/uxSTi8Xd95XrWXCNxO8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=yRRRC58DBqlZxy12CBBVeD0e+N15cqDQdrImz5yFkg4=;
-	b=YKTp8IX0pfjysbHpwCQblllOIF1oRITVVuLxpw4Yq7HWUBPVh9O5ODSB/x4xxgAD8c
-	erLH9v+4eWP61V5XPqvsCMQ/nFChRox4Tz8+Mfzw0i5Bm5MiQr/QITdjQfBdkui9+HW9
-	J5Ibu3djS9Yd2XQpm91chworfDKJ8qF+Wp47+ArvFBGm8+gWxUO9RPOL0se3/sjCiwHb
-	ops16MELI65ziOwQoHGd0QJvOlrjoXc2XXoXG5kqFZEwu5jB5sEkJ92891QO3DgKHknD
-	ESgZ7bA/W+o/mNXhm5BcMKoHavxmaKkvtexaBHZ10WBW3KvwzIKxFSgQHEZml43TKRBg
-	1dtA==
-X-Gm-Message-State: AOUpUlG7bWFL8qy9+cCCzHMz5GzTKfJSWWfAiLEUlH95CSsan91D6FLM
-	TQyDEm3a9DayFEDslFFoXNlW4PJGEaGjLFPJdoPdlw==
-X-Google-Smtp-Source: AA+uWPwpq2OGV6+oOkFnj8hvVnobZ/Rp+lrjTFlFCFbayl5+mMarl8AESCS4mKhqqVXUyotalHoPMq98asGi3J2nZow=
-X-Received: by 2002:a37:9904:: with SMTP id
-	b4-v6mr36726271qke.102.1534876827029; 
-	Tue, 21 Aug 2018 11:40:27 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180821173930.12507-1-raj.khem@gmail.com>
-	<20180821183558.GY15656@vctlabs.com>
-In-Reply-To: <20180821183558.GY15656@vctlabs.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Aug 2018 11:40:01 -0700
-Message-ID: <CAMKF1som2Rg_k5tUsVsDK_rYByrgSz8wF-o2JSLZ5505Eo9hHA@mail.gmail.com>
-To: "S. Lockwood-Childs" <sjl@vctlabs.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] dos2unit: Remove after move to core
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=l/MoooN7VuVae+OYJRTlCddAmEV4ueN0EfwD7hM05SU=;
+	b=PHvTNL5AJdwlC2ymlQPOIDfUTwzvZxrEdLKUszvCa2Wu1UimwznumCl/VI+iF8Vo6r
+	TdX8orh/AUQt7H5EdQeAk2h2YNUpgLscU1TUJSQhPoNuuiWLPfJT906AnmItgj86TX4T
+	X900AZR4yiWR60QOjEO/kJFFPpMQ5wqJQTMwrtAEIoPwYmXUQ5+JwgAC2woVbzAyH1li
+	MOaFau3WELM3sjCLM5JTPUl4li/VvsI6IbYoJPAFjDh5QPQE/7uaC2vPTv0SfbIt5aSX
+	X8weTFKEH9/fxiFbFLNBkDWlE0gScMyn1KbzvdRAdjUVctbFRjxkGw1dbIG00i+tmB61
+	9VMA==
+X-Gm-Message-State: AOUpUlHus/NrhVdn5pIwphL3ViYK+p5LWb+5cG1PJIf0J9GcjHQMVlpG
+	Tzg7h3jAL0SaAU6D7FUZywOqkQ==
+X-Google-Smtp-Source: AA+uWPyEmodqFT8T5JNNn8w8ed+QqB9qu5ZbU0UA80LHOvVbSUFh+bYtML6vIYi5eWozBiMcWXxfEA==
+X-Received: by 2002:a5d:6908:: with SMTP id
+	t8-v6mr16984281wru.170.1534888728738; 
+	Tue, 21 Aug 2018 14:58:48 -0700 (PDT)
+Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
+	by smtp.gmail.com with ESMTPSA id
+	o3-v6sm8871996wrn.58.2018.08.21.14.58.47
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 21 Aug 2018 14:58:47 -0700 (PDT)
+Message-ID: <a6e6fea9d8763611b2df805006639187f9c95326.camel@linuxfoundation.org>
+From: richard.purdie@linuxfoundation.org
+To: "Jonas Mark (BT-FIR/ENG1)" <Mark.Jonas@de.bosch.com>
+Date: Tue, 21 Aug 2018 22:58:46 +0100
+In-Reply-To: <664116f8b9fb427aaa911962e77f1a3d@de.bosch.com>
+References: <664116f8b9fb427aaa911962e77f1a3d@de.bosch.com>
+X-Mailer: Evolution 3.28.1-2 
+Mime-Version: 1.0
+Cc: "GUAN Ben \(BT-FIR/ENG1-Zhu\)" <Ben.Guan@cn.bosch.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [meta-oe][PATCH] directfb: fix tslib version check in configure.in
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,20 +63,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2018 18:40:26 -0000
+X-List-Received-Date: Tue, 21 Aug 2018 21:58:48 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 21, 2018 at 11:32 AM S. Lockwood-Childs <sjl@vctlabs.com> wrote:
->
-> Is this a test to see if anybody reviews the reviewer :)
->
-> dos2unit -> dox2unix in title
->
+On Tue, 2018-08-21 at 08:36 +0000, Jonas Mark (BT-FIR/ENG1) wrote:
+> Hi Richard,
+> 
+> This is my third attempt getting my reply onto the mailing list. I
+> suspect the first two attempts were filtered due to the link to the
+> v2
+> patch I added. I removed the link this time.
+> 	
+> I already sent an updated version of the patch to the
+> openembedded-devel@lists.openembedded.org mailing list because an
+> automatic system informed me that I hit the wrong mailing list. I
+> propose to switch to openembedded-devel for further discussions.
+> 
+> [meta-oe,v2] directfb: fix tslib version check in configure.in
+> 
+> Sadly, there hasn't been any reaction yet.
 
-thanks, fixed in kraj/master
+FWIW your messages do appear to be making it to the mailing list(s) and
+you can see them in the archives, e.g.:
 
-> On Tue, Aug 21, 2018 at 10:39:30AM -0700, Khem Raj wrote:
-> > Its in OE-Core now
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+http://lists.openembedded.org/pipermail/openembedded-devel/2018-August/120115.html
+
+I look after OE-Core, not meta-oe where this patch needs to go so I
+can't help with that but the patch is on the right list for them to see
+it.
+
+Cheers,
+
+Richard
 
