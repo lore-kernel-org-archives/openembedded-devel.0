@@ -1,23 +1,24 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D61E574598
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A8C1078E00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2018 01:33:15 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7L1XG8d015958
+	Tue, 21 Aug 2018 01:49:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w7L1nYrD005935
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Aug 2018 18:33:16 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.399.0; Mon, 20 Aug 2018 18:33:16 -0700
-From: <changqing.li@windriver.com>
+	Mon, 20 Aug 2018 18:49:34 -0700 (PDT)
+Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
+	Mon, 20 Aug 2018 18:49:33 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Aug 2018 09:33:15 +0800
-Message-ID: <1534815195-139979-1-git-send-email-changqing.li@windriver.com>
+Date: Tue, 21 Aug 2018 09:49:31 +0800
+Message-ID: <1534816171-23333-1-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] ntp: Upgrade 4.2.8p11 -> 4.2.8p12
+X-Originating-IP: [128.224.162.137]
+Subject: [meta-oe][PATCH] multipath-tools: disable the systemd service start automatically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,51 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Aug 2018 01:33:16 -0000
+X-List-Received-Date: Tue, 21 Aug 2018 01:49:33 -0000
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+We don't offer /etc/multpath.conf but an example configure file
+/etc/multipath.conf.example. When the servcie start by default, it will
+get the error: /etc/multipath.conf was not met
+So disable the service by default.
 
-1. Upgrade ntp to 4.2.8p12
-2. Disable sntp service by default.
-   Default NTPSERVER in config sntp is "ntpserver.example.org",
-   just an example, not a valid address, if enable sntp service
-   by default, it will startup failed during boot. It should be
-   enabled after user set the correct config for sntp according
-   to current config of ntpd.
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../recipes-support/ntp/{ntp_4.2.8p11.bb => ntp_4.2.8p12.bb}         | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p11.bb => ntp_4.2.8p12.bb} (97%)
+ meta-oe/recipes-support/multipath-tools/multipath-tools_0.7.7.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-similarity index 97%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-index c698fa0..4254301 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p11.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p12.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.7.7.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.7.7.bb
+index 213ce15..5cc1546 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.7.7.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.7.7.bb
+@@ -63,7 +63,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
+            file://0030-Always-use-devmapper.patch \
+            file://0031-Always-use-devmapper-for-kpartx.patch \
+            "
+-          
++
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
  
--SRC_URI[md5sum] = "00950ca2855579541896513e78295361"
--SRC_URI[sha256sum] = "f14a39f753688252d683ff907035ffff106ba8d3db21309b742e09b5c3cd278e"
-+SRC_URI[md5sum] = "1522d66574bae14abb2622746dad2bdc"
-+SRC_URI[sha256sum] = "709b222b5013d77d26bfff532b5ea470a8039497ef29d09363931c036cb30454"
+ SRCREV = "386d288b5595fc2c01dffe698b6eb306c6674908"
+@@ -73,6 +73,7 @@ S = "${WORKDIR}/git"
+ inherit systemd pkgconfig
  
- inherit autotools update-rc.d useradd systemd pkgconfig
+ SYSTEMD_SERVICE_${PN} = "multipathd.service"
++SYSTEMD_AUTO_ENABLE = "disable"
  
-@@ -120,6 +120,7 @@ SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
- SYSTEMD_SERVICE_${PN} = "ntpd.service"
- SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
- SYSTEMD_SERVICE_sntp = "sntp.service"
-+SYSTEMD_AUTO_ENABLE_sntp = "disable"
+ TARGET_CC_ARCH += "${LDFLAGS}"
  
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
 -- 
 2.7.4
 
