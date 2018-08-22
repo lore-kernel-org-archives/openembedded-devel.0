@@ -1,16 +1,14 @@
 Return-Path: <prvs=765f72d04=Richard.Leitner@skidata.com>
 Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 40A8F7919C
+	by mail.openembedded.org (Postfix) with ESMTP id 47E7B793C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 13:35:31 +0000 (UTC)
+	Wed, 22 Aug 2018 13:38:09 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.53,274,1531778400"; 
-   d="scan'208";a="1619472"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180820153234.10990-1-git@andred.net>
-	<8fbb395c-0d16-0498-6b42-8482fa0cb972@skidata.com>
-	<ab7d92497b385db0bf5fee8ba61f125131bf1570.camel@andred.net>
-	<82afa6b0-9354-e827-c844-53fbefb7735c@skidata.com>
-	<87e69908e530da8fd208d852b7e123befc872e7d.camel@andred.net>
+   d="scan'208";a="1619479"
+To: Henning Heinold <henning@itconsulting-heinold.de>
+References: <20180820211443.32757-1-richard.leitner@skidata.com>
+	<20180820211615.404-1-richard.leitner@skidata.com>
+	<20180821074700.GC21359@mail.itconsulting-heinold.de>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -56,16 +54,17 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <3c3d3290-e86d-cfc1-561d-87794fc9f874@skidata.com>
-Date: Wed, 22 Aug 2018 15:36:14 +0200
+Message-ID: <fa6e30f1-ca1d-4c7d-0934-59c99cb85d11@skidata.com>
+Date: Wed, 22 Aug 2018 15:38:51 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <87e69908e530da8fd208d852b7e123befc872e7d.camel@andred.net>
+In-Reply-To: <20180821074700.GC21359@mail.itconsulting-heinold.de>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH v2 1/5] layer.conf: stop OpenJDK-8(native) build dependencies from being installed
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH 5/7] openjdk-7: remove version dependent stuff from openjdk-common
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -78,61 +77,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 13:35:32 -0000
+X-List-Received-Date: Wed, 22 Aug 2018 13:38:09 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 
-On 8/22/18 2:57 PM, André Draszik wrote:
-> On Wed, 2018-08-22 at 14:11 +0200, Richard Leitner wrote:
->> Hi André,
->>
->> On 8/22/18 2:04 PM, André Draszik wrote:
->>> Hi Richard,
->>>
->>> I've noticed that I had one more uncommitted but necessary patch lying
->>> around to make the aarch32 port work with musl.
->>
->> Thank you for noticing!
->>
->> We should definitely add qemu test-images with musl. So similar issues 
->> pop up during my automated tests ;-)
->>
->> Do you have a qemu musl setup which could be integrated in our oeqa?
+On 8/21/18 9:47 AM, Henning Heinold wrote:
+> On Mon, Aug 20, 2018 at 11:16:13PM +0200, Richard Leitner wrote:
+>> openjdk-common.inc should not contain any OpenJDK-7 dependet stuff.
+>> Therefore move it to the openjdk-7-common.inc.
 > 
-> Well, I have my hacked qemu cortex a7 machine that doesn't work with oeqa.
-> For musl, I have my own distro, but not sure how the rest of the Yocto
-> project does the automated musl testing - there might be something more
-> standard...
+> Hi,
 > 
-> Because of the different hotspot versions, it would really need to test all
-> three ports, default, aarch64, aarch32 and each with glibc and musl.
-
-ACK.
-Plus OpenJDK-7... And in the future hopefully 9 or 10 ;-)
-
+> besides the typo, how about the following phrase
 > 
-> BTW, I just today saw that meta-ivi has a qemu cortex a9 here
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-ivi/tree/meta-ivi-bsp
-> maybe that works better with oeqa?
+> "Move the OpenJDK-7 specific parts from openjdk-common.inc to
+> openjdk-7-common.inc."
 
-Thanks for that pointer...
-
-I hacked together a similar machine based on some staled patches from
-oe-core [1] and meta-qemuarma9 [2] which works for oeqa.
-
-I'll try to get the best out of the three and create a patch for oe-core.
+Your right... That definitely sounds better... Thanks ;-)
 
 regards;Richard.L
-
-> 
-> 
-> Cheers,
-> Andre'
-> 
-> 
-
-[1] https://patchwork.openembedded.org/project/oe-core/patches/?q=qemuarma9
-[2] https://github.com/WindRiver-Labs/meta-qemuarma9
 
