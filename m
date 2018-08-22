@@ -1,25 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
+Return-Path: <Changqing.Li@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B875979164
+	by mail.openembedded.org (Postfix) with ESMTP id EAEB260800
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 00:26:45 +0000 (UTC)
+	Wed, 22 Aug 2018 01:15:45 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7M0Qkrm019124
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7M1FkeJ020146
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2018 17:26:46 -0700
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Tue, 21 Aug 2018 17:26:42 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Tue, 21 Aug 2018 18:15:47 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.399.0; Tue, 21 Aug 2018 18:15:46 -0700
+From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Aug 2018 08:26:40 +0800
-Message-ID: <1534897600-14302-1-git-send-email-yi.zhao@windriver.com>
+Date: Wed, 22 Aug 2018 09:15:45 +0800
+Message-ID: <1534900545-60263-1-git-send-email-changqing.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-networking][PATCH 2/2] samba: upgrade 4.8.3 -> 4.8.4
+Subject: [PATCH][meta-oe] postgresql: Upgrade 10.4 -> 10.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 00:26:45 -0000
+X-List-Received-Date: Wed, 22 Aug 2018 01:15:46 -0000
 Content-Type: text/plain
 
-Security fixes:
+From: Changqing Li <changqing.li@windriver.com>
 
-CVE-2018-1139 (Weak authentication protocol allowed.)
-CVE-2018-1140 (Denial of Service Attack on DNS and LDAP server.)
-CVE-2018-10858 (Insufficient input validation on client directory listing in libsmbclient.)
-CVE-2018-10918 (Denial of Service Attack on AD DC DRSUAPI server.)
-CVE-2018-10919 (Confidential attribute disclosure from the AD LDAP server.)
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../recipes-connectivity/samba/{samba_4.8.3.bb => samba_4.8.4.bb}     | 4 ++--
+ .../recipes-dbs/postgresql/{postgresql_10.4.bb => postgresql_10.5.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.8.3.bb => samba_4.8.4.bb} (98%)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_10.4.bb => postgresql_10.5.bb} (52%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-index d244e61..da0ac32 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
-@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
-            file://samba-4.3.9-remove-getpwent_r.patch \
-           "
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_10.4.bb b/meta-oe/recipes-dbs/postgresql/postgresql_10.5.bb
+similarity index 52%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_10.4.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_10.5.bb
+index 26c44a4..acd3d85 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_10.4.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_10.5.bb
+@@ -6,5 +6,5 @@ SRC_URI += "\
+     file://not-check-libperl.patch \
+ "
  
--SRC_URI[md5sum] = "67f271ed6b793c2acfe014b5b8f0cca8"
--SRC_URI[sha256sum] = "e0569a8a605d5dfb49f1fdd11db796f4d36fe0351c4a7f21387ef253010b82ed"
-+SRC_URI[md5sum] = "ca5bfbebd8d9eb95506e16594b2bbee2"
-+SRC_URI[sha256sum] = "f5044d149e01894a08b1d114b8b69aed78171a7bb19608bd1fd771453b9a5406"
- 
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
- 
+-SRC_URI[md5sum] = "8e8770c289b3e0bdb779b5b171593479"
+-SRC_URI[sha256sum] = "1b60812310bd5756c62d93a9f93de8c28ea63b0df254f428cd1cf1a4d9020048"
++SRC_URI[md5sum] = "a5fe5fdff2d6c28f65601398be0950df"
++SRC_URI[sha256sum] = "6c8e616c91a45142b85c0aeb1f29ebba4a361309e86469e0fb4617b6a73c4011"
 -- 
 2.7.4
 
