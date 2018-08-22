@@ -1,66 +1,41 @@
-Return-Path: <prvs=765f72d04=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E01A79007
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-yb0-f194.google.com (mail-yb0-f194.google.com
+	[209.85.213.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0979479057
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 09:25:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,273,1531778400"; d="scan'208";a="11940922"
-To: <openembedded-devel@lists.openembedded.org>
-References: <20180820153234.10990-1-git@andred.net>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <8fbb395c-0d16-0498-6b42-8482fa0cb972@skidata.com>
-Date: Wed, 22 Aug 2018 11:26:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
+	Wed, 22 Aug 2018 12:01:45 +0000 (UTC)
+Received: by mail-yb0-f194.google.com with SMTP id v13-v6so543578ybq.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Aug 2018 05:01:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XjUCrzKQ/7SuI/LtjJThmckdy4H6PPMOudBGQsu6Ab0=;
+	b=d5xYL43cvUreAllcGaKg6E0ITJ85kmyYcjEgJ7+O+WCasQZExX1evyU/qp6dGUo9rp
+	4Aan25leZ5DHwyBtLqIypNA7dJYoRo4s4zr6DVLW+G077VDB3th0uE5amet2iJ/y1458
+	jCnMxec0X/va8BlrXggFzuAVi1ixJaXXO5FiWkt7lrNLMfnrAjZxTwZkfYETPGjp5q4y
+	o5hX7xNZE40AUeMsWOOa8nzp7Ae2m3l+nEqR8a0iJ5vDp42+gGDhrahKXKY+BAY6A1dw
+	bnCt8Df6jCE3nu83xVMBQcWHYyhdS74Q2OfTac0A846JQKxDcCJ84jcj9psVn9WCNM5/
+	tAZw==
+X-Gm-Message-State: AOUpUlGFvce7jVy+tYuZ/UeGO3zOBTeKxZndPjbVrKw+9ShP0qfZAeqo
+	Raf2E52cloAGxQX6BdRHwRq2X4ZG
+X-Google-Smtp-Source: AA+uWPw/u4isgJMVGGg61QAU2BL803jV3HQaznPHWWsXdP/4P8vXCYSe0IQArARL7G7GYp7TdJ/JGA==
+X-Received: by 2002:a25:ad85:: with SMTP id z5-v6mr8243120ybi.86.1534939305847;
+	Wed, 22 Aug 2018 05:01:45 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	e126-v6sm638442ywf.72.2018.08.22.05.01.44
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 22 Aug 2018 05:01:45 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Aug 2018 13:01:42 +0100
+Message-Id: <20180822120142.26972-1-git@andred.net>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-In-Reply-To: <20180820153234.10990-1-git@andred.net>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH v2 1/5] layer.conf: stop OpenJDK-8(native) build dependencies from being installed
+Subject: [meta-java][PATCH v3] openjdk-8: add aarch32 port 8u172b11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,53 +48,788 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 09:25:35 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
+X-List-Received-Date: Wed, 22 Aug 2018 12:01:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Hi,
-this is a note to let you know that I've just added this series to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+From: André Draszik <andre.draszik@jci.com>
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+Similar to the aarch64 build, we import the specific aarch32 port when
+building for ARMv7. We also add all the necessary patches to:
+* compile using gcc v8
+* compile against musl
 
-If you have any questions, please let me know.
+This was tested on:
+* QEMU with cortex A7 emulation (using glibc)
+* real hardware (using musl)
 
-regards;Richard.L
+Signed-off-by: André Draszik <andre.draszik@jci.com>
 
-On 8/20/18 5:32 PM, André Draszik wrote:
-> From: André Draszik <andre.draszik@jci.com>
-> 
-> Avoid installation of all openjdk-8-native buildtime dependencies into
-> a depending recipe's sysroot.
-> To execute openjdk-8-native as part of a depending recipe's build, we
-> don't need the openjdk-8-native build time dependencies (like ant-native,
-> or more importantly icedtea-7-native), just its runtime dependencies,
-> unless of course that depending recipe's builds needs those tools itself.
-> In that case, it needs to specify them explicitly, though (of course!).
-> 
-> Use SSTATE_EXCLUDEDEPS_SYSROOT to prevent openjdk-8-native build time
-> dependencies from being copied in the sysroot unless explicitly requested.
-> 
-> Signed-off-by: André Draszik <andre.draszik@jci.com>
-> ---
->  conf/layer.conf | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 3b00f61..8e8a300 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -14,3 +14,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
->  SIGGEN_EXCLUDERECIPES_ABISAFE += "\
->      ca-certificates-java \
->  "
-> +
-> +SSTATE_EXCLUDEDEPS_SYSROOT += "\
-> +    openjdk-8-native->(ant-native|attr-native|coreutils-native|icedtea7-native|libxslt-native|make-native|openssl-native|zip-native|unzip-native) \
-> +"
-> 
+---
+v3: add one forgotten musl aarch32 patch
+v2: add missing signed-off-by
+---
+ .../openjdk-8-release-172b11-aarch32.inc      | 58 +++++++++++++++++++
+ .../openjdk-8-release-172b11-aarch64.inc      |  2 +
+ .../openjdk-8-release-172b11-common.inc       | 36 ++++++++++--
+ .../openjdk/openjdk-8-release-172b11.inc      |  7 ++-
+ recipes-core/openjdk/openjdk-8_172b11.bb      |  2 +
+ recipes-core/openjdk/openjre-8_172b11.bb      |  2 +
+ ...ot-aarch32-fix-missing-return-values.patch | 53 +++++++++++++++++
+ ...hotspot-remaining-musl-fixes-aarch32.patch | 35 +++++++++++
+ ...-hotspot-disable-agent-build-common.patch} | 41 ++-----------
+ ...spot-disable-agent-build-pt2-aarch32.patch | 51 ++++++++++++++++
+ ...0005-hotspot-disable-agent-build-pt2.patch | 51 ++++++++++++++++
+ ...ux-remove-glibc-dependencies-common.patch} | 19 +-----
+ ...-remove-glibc-dependencies-pt2-aarch.patch | 36 ++++++++++++
+ ..._linux-remove-glibc-dependencies-pt2.patch | 34 +++++++++++
+ ... => openjdk8-fix-shark-build-common.patch} | 38 ------------
+ ...openjdk8-fix-shark-build-pt2-aarch32.patch | 11 ++++
+ .../openjdk8-fix-shark-build-pt2.patch        | 38 ++++++++++++
+ 17 files changed, 416 insertions(+), 98 deletions(-)
+ create mode 100644 recipes-core/openjdk/openjdk-8-release-172b11-aarch32.inc
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0001-hotspot-aarch32-fix-missing-return-values.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot-remaining-musl-fixes-aarch32.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{musl-0005-hotspot-disable-agent-build.patch => musl-0005-hotspot-disable-agent-build-common.patch} (55%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2-aarch32.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{musl-0006-hotspot-os_linux-remove-glibc-dependencies.patch => musl-0006-hotspot-os_linux-remove-glibc-dependencies-common.patch} (79%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2-aarch.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{openjdk8-fix-shark-build.patch => openjdk8-fix-shark-build-common.patch} (93%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2-aarch32.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2.patch
+
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-aarch32.inc b/recipes-core/openjdk/openjdk-8-release-172b11-aarch32.inc
+new file mode 100644
+index 0000000..9cc2083
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-8-release-172b11-aarch32.inc
+@@ -0,0 +1,58 @@
++require openjdk-8-release-172b11-common.inc
++
++COMPATIBLE_HOST = "^$"
++COMPATIBLE_HOST_armv7a = "arm"
++COMPATIBLE_HOST_armv7ve = "arm"
++
++CORBA_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[corba.md5sum] = "557b94847d8fade14c048cb0a96ed035"
++SRC_URI[corba.sha256sum] = "366fa9aaf11d75f74e8c6bdf9cab9214cf66b0eac1ca40f2789b3ba442929708"
++
++HOTSPOT_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[hotspot.md5sum] = "37d796794234f38fa71339ba78368b80"
++SRC_URI[hotspot.sha256sum] = "5f89f8ba9a099a2d84b4ca6bd49553ce4efe1b29d55de9134809b7b59b6c9ce3"
++
++JAXP_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[jaxp.md5sum] = "2dc311a7c0d6483226cdc5e501b1f8d0"
++SRC_URI[jaxp.sha256sum] = "f62db09a41213b5b5d1886c1aeabe43def09235de1d60af518213b9acea4fdca"
++
++JAXWS_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[jaxws.md5sum] = "fbd81e288d1ee5df631f213c130f21bb"
++SRC_URI[jaxws.sha256sum] = "bac66e848ee48c6fef6130db4bb6879dbd64c550c1f42e4676ab6a2c3ee4fab8"
++
++JDK_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[jdk.md5sum] = "b8003e6f1714617461f3eb7ee8b1efee"
++SRC_URI[jdk.sha256sum] = "0a7eef6fef2b457bef3bd1d24031234bbb9d74a5fca2f65e1603278cd9d393a0"
++
++LANGTOOLS_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[langtools.md5sum] = "e38f50b0113b3a956ac4917720655e93"
++SRC_URI[langtools.sha256sum] = "9ca88fcfe5a07861de693ff3b38d03f063a7937576cd93116ea6b4a4bd7894d5"
++
++NASHORN_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[nashorn.md5sum] = "c191cc92996fcb271254fc0a4f3eb7c9"
++SRC_URI[nashorn.sha256sum] = "853bb3162fefa989fa0c31848cb990d8e5698ccd8a2a336dbf98bde35eb5241d"
++
++OPENJDK_CHANGESET_arm = "jdk8u172-b11-aarch32-180511"
++SRC_URI[openjdk.md5sum] = "25398ccf25633a878dca54a8d606e48e"
++SRC_URI[openjdk.sha256sum] = "8c8e515ebcceded4b90187b4bdaf129b63ae6e64ddfe4f05a60df0694235b9e7"
++
++PACKAGECONFIG_append_armv7a = " client"
++PACKAGECONFIG_append_armv7ve = " client"
++
++do_install_append() {
++    if [ -d ${D}${JDK_HOME} ] ; then
++        sed -e 's,^\(-server ERROR$\),# \1,' \
++            -e 's,^-client IGNORE,-client ERROR,' \
++            -e 's,ALIASED_TO -server,ALIASED_TO -client,' \
++            -i ${D}${JDK_HOME}/jre/lib/${JDK_ARCH}/jvm.cfg
++    fi
++    if [ -d ${D}${JRE_HOME} ] ; then
++        sed -e 's,^\(-server ERROR$\),# \1,' \
++            -e 's,^-client IGNORE,-client ERROR,' \
++            -e 's,ALIASED_TO -server,ALIASED_TO -client,' \
++            -i ${D}${JRE_HOME}/lib/${JDK_ARCH}/jvm.cfg
++    fi
++}
++
++JDK_ARCH_armv7a = "aarch32"
++JDK_ARCH_armv7ve = "aarch32"
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-aarch64.inc b/recipes-core/openjdk/openjdk-8-release-172b11-aarch64.inc
+index dddae6a..f0f4655 100644
+--- a/recipes-core/openjdk/openjdk-8-release-172b11-aarch64.inc
++++ b/recipes-core/openjdk/openjdk-8-release-172b11-aarch64.inc
+@@ -1,5 +1,7 @@
+ require openjdk-8-release-172b11-common.inc
+ 
++COMPATIBLE_HOST = "aarch64"
++
+ CORBA_CHANGESET_aarch64 = "3a04a7c080af"
+ SRC_URI[corba.md5sum] = "758b29d6cf714fd894df8674afd78e17"
+ SRC_URI[corba.sha256sum] = "564113dbeadc57ac5831ccc056e0b920adbd3b74558cf750aa899f5de25ceb5e"
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+index 8e94a4f..0cda4bb 100644
+--- a/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-172b11-common.inc
+@@ -33,30 +33,52 @@ HOTSPOT_UB_PATCH_prepend_aarch64 = "\
+     file://0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch \
+     file://0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch \
+ "
++HOTSPOT_UB_PATCH_append_armv7a = " file://0001-hotspot-aarch32-fix-missing-return-values.patch"
++HOTSPOT_UB_PATCH_append_armv7ve = " file://0001-hotspot-aarch32-fix-missing-return-values.patch"
+ # some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
+ # reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
+ # by Roman Kennke (rkennke at redhat.com)
+ LIBPNG_NEON_PATCH = "file://openjdk8-fix-libpng-neon-build.patch;striplevel=0"
+ LIBPNG_NEON_PATCH_aarch64 = ""
++
+ PATCHES_URI_append_class-target = "\
+     file://openjdk8-restrict-to-staging-dir.patch;striplevel=0 \
+-    file://openjdk8-fix-shark-build.patch;striplevel=0 \
++    file://openjdk8-fix-shark-build-common.patch;striplevel=0 \
++    ${FIX_SHARK_BUILD_PT2_PATCH} \
+     file://openjdk8-fix-shark-stdc++11.patch;striplevel=0 \
+     file://openjdk8-fix-assembler-flag-handling-in-makefile.patch;striplevel=0 \
+     file://openjdk8-fix-adlc-flags.patch;striplevel=0 \
+     file://openjdk8-add-missing-linker-flags.patch;striplevel=0 \
+ "
++FIX_SHARK_BUILD_PT2_PATCH = "file://openjdk8-fix-shark-build-pt2.patch;striplevel=0"
++FIX_SHARK_BUILD_PT2_PATCH_armv7a = "file://openjdk8-fix-shark-build-pt2-aarch32.patch;striplevel=0"
++FIX_SHARK_BUILD_PT2_PATCH_armv7ve = "file://openjdk8-fix-shark-build-pt2-aarch32.patch;striplevel=0"
++
+ PATCHES_URI_append_libc-musl = "\
+-    file://musl-0001-hotspot-stop-using-obsolete-isnanf.patch \
++    ${OBSOLETE_ISNANF_PATCH} \
+     file://musl-0002-jdk-give-a-much-bigger-buffer-to-getmntent_r.patch \
+     file://musl-0003-jdk-fix-libjvm-load-on-musl-set-LD_LIBRARY_PATH.patch \
+     file://musl-0004-jdk-remove-sysctl.h-include-musl-build-fix.patch \
+-    file://musl-0005-hotspot-disable-agent-build.patch \
+-    file://musl-0006-hotspot-os_linux-remove-glibc-dependencies.patch \
++    file://musl-0005-hotspot-disable-agent-build-common.patch \
++    ${DISABLE_AGENT_BUILD_PT2} \
++    file://musl-0006-hotspot-os_linux-remove-glibc-dependencies-common.patch \
++    ${REMOVE_GLIBC_DEPENDENCIES_PT2} \
+     file://musl-0007-hotspot-os_linux_x86-remove-glibc-dependencies-fpu_c.patch \
+     file://musl-0008-jdk-musl-build-fix-use-SIGRTMAX-rather-than-__SIGRTM.patch \
+     file://musl-0009-jdk-musl-has-gethostby_r.patch \
+ "
++OBSOLETE_ISNANF_PATCH = "file://musl-0001-hotspot-stop-using-obsolete-isnanf.patch"
++OBSOLETE_ISNANF_PATCH_armv7a = ""
++OBSOLETE_ISNANF_PATCH_armv7ve = ""
++DISABLE_AGENT_BUILD_PT2 = "file://musl-0005-hotspot-disable-agent-build-pt2.patch"
++DISABLE_AGENT_BUILD_PT2_armv7a = "file://musl-0005-hotspot-disable-agent-build-pt2-aarch32.patch"
++DISABLE_AGENT_BUILD_PT2_armv7ve = "file://musl-0005-hotspot-disable-agent-build-pt2-aarch32.patch"
++REMOVE_GLIBC_DEPENDENCIES_PT2 = "file://musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2.patch"
++REMOVE_GLIBC_DEPENDENCIES_PT2_armv7a = "file://musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2-aarch.patch"
++REMOVE_GLIBC_DEPENDENCIES_PT2_armv7ve = "file://musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2-aarch.patch"
++
++PATCHES_URI_append_libc-musl_armv7a = " file://hotspot-remaining-musl-fixes-aarch32.patch"
++PATCHES_URI_append_libc-musl_armv7ve = " file://hotspot-remaining-musl-fixes-aarch32.patch"
+ PATCHES_URI_append_libc-musl_aarch64 = " file://hotspot-remaining-musl-fixes-aarch64.patch"
+ 
+ # Name of the directory containing the compiled output
+@@ -72,10 +94,14 @@ BUILD_CFLAGS_append = " -Wno-error=deprecated-declarations"
+ TARGET_CFLAGS_append = " -Wno-error=deprecated-declarations"
+ 
+ # Enable zero mode for arm based builds, as normal hotspot fails to build
+-PACKAGECONFIG_append_arm = " zero"
++PACKAGECONFIG_append_armv4 = " zero"
++PACKAGECONFIG_append_armv5 = " zero"
++PACKAGECONFIG_append_armv6 = " zero"
+ 
+ OPENJDK_ARCH_PORT = "jdk8u"
+ OPENJDK_ARCH_PORT_aarch64 = "aarch64-port"
++OPENJDK_ARCH_PORT_armv7a = "aarch32-port"
++OPENJDK_ARCH_PORT_armv7ve = "aarch32-port"
+ OPENJDK_HG_U = "jdk8u"
+ OPENJDK_HG_URL = "http://hg.openjdk.java.net/${OPENJDK_ARCH_PORT}/${OPENJDK_HG_U}"
+ 
+diff --git a/recipes-core/openjdk/openjdk-8-release-172b11.inc b/recipes-core/openjdk/openjdk-8-release-172b11.inc
+index fdf7b39..b308e50 100644
+--- a/recipes-core/openjdk/openjdk-8-release-172b11.inc
++++ b/recipes-core/openjdk/openjdk-8-release-172b11.inc
+@@ -1,7 +1,10 @@
+ require openjdk-8-release-172b11-common.inc
+ 
+-# We do not yet work for aarch64.
+-COMPATIBLE_HOST = "^(?!aarch64).*"
++# We do not yet work for aarch64, and we make sure
++# to use the aarch32 port for ARMv7.
++COMPATIBLE_HOST = "^(?!(aarch64)).*$"
++COMPATIBLE_HOST_armv7a = "^$"
++COMPATIBLE_HOST_armv7ve = "^$"
+ 
+ CORBA_CHANGESET = "875a75c440cd"
+ SRC_URI[corba.md5sum] = "66242dd6e749f39a5ef6add34f5ecb2f"
+diff --git a/recipes-core/openjdk/openjdk-8_172b11.bb b/recipes-core/openjdk/openjdk-8_172b11.bb
+index 9c2a7a1..c1c6e1e 100644
+--- a/recipes-core/openjdk/openjdk-8_172b11.bb
++++ b/recipes-core/openjdk/openjdk-8_172b11.bb
+@@ -1,5 +1,7 @@
+ INC_FILE_SUFFIX = ""
+ INC_FILE_SUFFIX_aarch64 = "-aarch64"
++INC_FILE_SUFFIX_armv7a = "-aarch32"
++INC_FILE_SUFFIX_armv7ve = "-aarch32"
+ require openjdk-8-release-${PV}${INC_FILE_SUFFIX}.inc
+ require openjdk-8-cross.inc
+ 
+diff --git a/recipes-core/openjdk/openjre-8_172b11.bb b/recipes-core/openjdk/openjre-8_172b11.bb
+index 220dc01..dd29691 100644
+--- a/recipes-core/openjdk/openjre-8_172b11.bb
++++ b/recipes-core/openjdk/openjre-8_172b11.bb
+@@ -1,5 +1,7 @@
+ INC_FILE_SUFFIX = ""
+ INC_FILE_SUFFIX_aarch64 = "-aarch64"
++INC_FILE_SUFFIX_armv7a = "-aarch32"
++INC_FILE_SUFFIX_armv7ve = "-aarch32"
+ require openjdk-8-release-${PV}${INC_FILE_SUFFIX}.inc
+ require openjdk-8-cross.inc
+ 
+diff --git a/recipes-core/openjdk/patches-openjdk-8/0001-hotspot-aarch32-fix-missing-return-values.patch b/recipes-core/openjdk/patches-openjdk-8/0001-hotspot-aarch32-fix-missing-return-values.patch
+new file mode 100644
+index 0000000..bedc448
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/0001-hotspot-aarch32-fix-missing-return-values.patch
+@@ -0,0 +1,53 @@
++From 658adc5b6567e9a6df56beabb8d226a9b4d8e762 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Thu, 16 Aug 2018 02:27:44 +0100
++Subject: [PATCH] hotspot/aarch32: fix missing return values
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++---
++ hotspot/src/cpu/aarch32/vm/c1_LIRAssembler_aarch32.cpp | 3 +++
++ hotspot/src/cpu/aarch32/vm/relocInfo_aarch32.cpp       | 1 +
++ 2 files changed, 4 insertions(+)
++
++diff --git a/hotspot/src/cpu/aarch32/vm/c1_LIRAssembler_aarch32.cpp b/hotspot/src/cpu/aarch32/vm/c1_LIRAssembler_aarch32.cpp
++index cd291bf2..4ba98c68 100644
++--- a/hotspot/src/cpu/aarch32/vm/c1_LIRAssembler_aarch32.cpp
+++++ b/hotspot/src/cpu/aarch32/vm/c1_LIRAssembler_aarch32.cpp
++@@ -158,16 +158,19 @@ static Register as_reg(LIR_Opr op) {
++ Address LIR_Assembler::as_Address(LIR_Address* addr) {
++   // as_Address(LIR_Address*, Address::InsnDataType) should be used instead
++   ShouldNotCallThis();
+++  return Address();
++ }
++ 
++ Address LIR_Assembler::as_Address_hi(LIR_Address* addr) {
++   // as_Address_hi(LIR_Address*, Address::InsnDataType) should be used instead
++   ShouldNotCallThis();
+++  return Address();
++ }
++ 
++ Address LIR_Assembler::as_Address_lo(LIR_Address* addr) {
++   // as_Address_lo(LIR_Address*, Address::InsnDataType) should be used instead
++   ShouldNotCallThis();
+++  return Address();
++ }
++ 
++ Address LIR_Assembler::as_Address(LIR_Address* addr, Register tmp, Address::InsnDataType type) {
++diff --git a/hotspot/src/cpu/aarch32/vm/relocInfo_aarch32.cpp b/hotspot/src/cpu/aarch32/vm/relocInfo_aarch32.cpp
++index 979d53c9..c0b1a4c7 100644
++--- a/hotspot/src/cpu/aarch32/vm/relocInfo_aarch32.cpp
+++++ b/hotspot/src/cpu/aarch32/vm/relocInfo_aarch32.cpp
++@@ -87,6 +87,7 @@ address Relocation::pd_call_destination(address orig_addr) {
++   }
++ 
++   ShouldNotReachHere();
+++  return NULL;
++ }
++ 
++ void Relocation::pd_set_call_destination(address x) {
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/hotspot-remaining-musl-fixes-aarch32.patch b/recipes-core/openjdk/patches-openjdk-8/hotspot-remaining-musl-fixes-aarch32.patch
+new file mode 100644
+index 0000000..1140887
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/hotspot-remaining-musl-fixes-aarch32.patch
+@@ -0,0 +1,35 @@
++From 4bab4a4468a59e303e8d05a409a07a24c2342452 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Mon, 20 Aug 2018 12:38:38 +0100
++Subject: [PATCH] hotspot: remaining musl fixes (aarch32)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++* fpu_control.h doesn't exist in musl
++| hotspot/src/os_cpu/linux_aarch32/vm/os_linux_aarch32.cpp:78:11: fatal error: fpu_control.h: No such file or directory
++|  # include <fpu_control.h>
++|            ^~~~~~~~~~~~~~~
++| compilation terminated.
++
++Upstream-Status: Inappropriate [OE specific]
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++---
++ hotspot/src/os_cpu/linux_aarch32/vm/os_linux_aarch32.cpp | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/hotspot/src/os_cpu/linux_aarch32/vm/os_linux_aarch32.cpp b/hotspot/src/os_cpu/linux_aarch32/vm/os_linux_aarch32.cpp
++index 052a423c..93a315e4 100644
++--- a/hotspot/src/os_cpu/linux_aarch32/vm/os_linux_aarch32.cpp
+++++ b/hotspot/src/os_cpu/linux_aarch32/vm/os_linux_aarch32.cpp
++@@ -75,7 +75,6 @@
++ # include <pwd.h>
++ # include <poll.h>
++ # include <ucontext.h>
++-# include <fpu_control.h>
++ 
++ #define REG_FP 29
++ #define SPELL_REG_SP "sp"
++-- 
++2.11.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build.patch b/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-common.patch
+similarity index 55%
+rename from recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build.patch
+rename to recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-common.patch
+index 24342b5..9126495 100644
+--- a/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build.patch
++++ b/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-common.patch
+@@ -1,7 +1,7 @@
+ From 19b1d6b4dc64a1c44a8f90776a489eee5c76463d Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
+ Date: Tue, 27 Feb 2018 15:12:08 +0000
+-Subject: [PATCH 5/9] hotspot: disable agent build
++Subject: [PATCH] hotspot: disable agent build (common)
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+@@ -11,25 +11,10 @@ the agent needs thread_db, which doesn't exist in musl
+ Upstream-Status: Inappropriate [musl specific]
+ Signed-off-by: André Draszik <andre.draszik@jci.com>
+ ---
+- common/autoconf/jdk-options.m4           | 2 +-
+- hotspot/make/linux/makefiles/defs.make   | 4 ++++
+- hotspot/make/linux/makefiles/sa.make     | 2 +-
+- hotspot/make/linux/makefiles/saproc.make | 2 ++
+- 4 files changed, 8 insertions(+), 2 deletions(-)
++ hotspot/make/linux/makefiles/defs.make | 4 ++++
++ hotspot/make/linux/makefiles/sa.make   | 2 +-
++ 2 files changed, 5 insertions(+), 1 deletion(-)
+ 
+-diff --git a/common/autoconf/jdk-options.m4 b/common/autoconf/jdk-options.m4
+-index a8f71705..036963ac 100644
+---- a/common/autoconf/jdk-options.m4
+-+++ b/common/autoconf/jdk-options.m4
+-@@ -151,7 +151,7 @@ AC_DEFUN_ONCE([JDKOPT_SETUP_JVM_VARIANTS],
+-   AC_SUBST(JVM_VARIANT_ZEROSHARK)
+-   AC_SUBST(JVM_VARIANT_CORE)
+- 
+--  INCLUDE_SA=true
+-+  INCLUDE_SA=false
+-   if test "x$JVM_VARIANT_ZERO" = xtrue ; then
+-     INCLUDE_SA=false
+-   fi
+ diff --git a/hotspot/make/linux/makefiles/defs.make b/hotspot/make/linux/makefiles/defs.make
+ index 3af5878a..d10bab95 100644
+ --- a/hotspot/make/linux/makefiles/defs.make
+@@ -65,24 +50,6 @@ index 66a7b945..61cc7244 100644
+  	   $(MAKE) -f sa.make $(GENERATED)/sa-jdi.jar; \
+  	fi
+  
+-diff --git a/hotspot/make/linux/makefiles/saproc.make b/hotspot/make/linux/makefiles/saproc.make
+-index 6579c8e1..8f29004c 100644
+---- a/hotspot/make/linux/makefiles/saproc.make
+-+++ b/hotspot/make/linux/makefiles/saproc.make
+-@@ -62,11 +62,13 @@ endif
+- # if $(AGENT_DIR) does not exist, we don't build SA
+- # also, we don't build SA on Itanium or zero.
+- 
+-+ifeq (0,1)
+- ifneq ($(wildcard $(AGENT_DIR)),)
+- ifneq ($(filter-out ia64 zero,$(SRCARCH)),)
+-   BUILDLIBSAPROC = $(LIBSAPROC)
+- endif
+- endif
+-+endif
+- 
+- ifneq ($(ALT_SASRCDIR),)
+- ALT_SAINCDIR=-I$(ALT_SASRCDIR) -DALT_SASRCDIR
+ -- 
+ 2.16.2
+ 
+diff --git a/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2-aarch32.patch b/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2-aarch32.patch
+new file mode 100644
+index 0000000..cb893e5
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2-aarch32.patch
+@@ -0,0 +1,51 @@
++From 5fa42493fd2dafb3bf9cf5a8a2be57e743eeafb8 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Wed, 15 Aug 2018 13:50:04 +0100
++Subject: [PATCH] hotspot: disable agent build (pt2: aarch32)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++the agent needs thread_db, which doesn't exist in musl
++
++Upstream-Status: Inappropriate [musl specific]
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++---
++ common/autoconf/jdk-options.m4           | 2 +-
++ hotspot/make/linux/makefiles/saproc.make | 2 ++
++ 2 files changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/common/autoconf/jdk-options.m4 b/common/autoconf/jdk-options.m4
++index 56fa4198..4675f0b5 100644
++--- a/common/autoconf/jdk-options.m4
+++++ b/common/autoconf/jdk-options.m4
++@@ -151,7 +151,7 @@ AC_DEFUN_ONCE([JDKOPT_SETUP_JVM_VARIANTS],
++   AC_SUBST(JVM_VARIANT_ZEROSHARK)
++   AC_SUBST(JVM_VARIANT_CORE)
++ 
++-  INCLUDE_SA=true
+++  INCLUDE_SA=false
++   if test "x$JVM_VARIANT_ZERO" = xtrue; then
++     INCLUDE_SA=false
++   fi
++diff --git a/hotspot/make/linux/makefiles/saproc.make b/hotspot/make/linux/makefiles/saproc.make
++index ea52011e..f87d2cdb 100644
++--- a/hotspot/make/linux/makefiles/saproc.make
+++++ b/hotspot/make/linux/makefiles/saproc.make
++@@ -62,11 +62,13 @@ endif
++ # if $(AGENT_DIR) does not exist, we don't build SA
++ # also, we don't build SA on Itanium or zero.
++ 
+++ifeq (0,1)
++ ifneq ($(wildcard $(AGENT_DIR)),)
++ ifneq ($(filter-out aarch32 ia64 zero,$(SRCARCH)),)
++   BUILDLIBSAPROC = $(LIBSAPROC)
++ endif
++ endif
+++endif
++ 
++ ifneq ($(ALT_SASRCDIR),)
++ ALT_SAINCDIR=-I$(ALT_SASRCDIR) -DALT_SASRCDIR
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2.patch b/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2.patch
+new file mode 100644
+index 0000000..4b0b0f0
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/musl-0005-hotspot-disable-agent-build-pt2.patch
+@@ -0,0 +1,51 @@
++From 19b1d6b4dc64a1c44a8f90776a489eee5c76463d Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Tue, 27 Feb 2018 15:12:08 +0000
++Subject: [PATCH] hotspot: disable agent build (pt2)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++the agent needs thread_db, which doesn't exist in musl
++
++Upstream-Status: Inappropriate [musl specific]
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++---
++ common/autoconf/jdk-options.m4           | 2 +-
++ hotspot/make/linux/makefiles/saproc.make | 2 ++
++ 2 files changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/common/autoconf/jdk-options.m4 b/common/autoconf/jdk-options.m4
++index a8f71705..036963ac 100644
++--- a/common/autoconf/jdk-options.m4
+++++ b/common/autoconf/jdk-options.m4
++@@ -151,7 +151,7 @@ AC_DEFUN_ONCE([JDKOPT_SETUP_JVM_VARIANTS],
++   AC_SUBST(JVM_VARIANT_ZEROSHARK)
++   AC_SUBST(JVM_VARIANT_CORE)
++ 
++-  INCLUDE_SA=true
+++  INCLUDE_SA=false
++   if test "x$JVM_VARIANT_ZERO" = xtrue ; then
++     INCLUDE_SA=false
++   fi
++diff --git a/hotspot/make/linux/makefiles/saproc.make b/hotspot/make/linux/makefiles/saproc.make
++index 6579c8e1..8f29004c 100644
++--- a/hotspot/make/linux/makefiles/saproc.make
+++++ b/hotspot/make/linux/makefiles/saproc.make
++@@ -62,11 +62,13 @@ endif
++ # if $(AGENT_DIR) does not exist, we don't build SA
++ # also, we don't build SA on Itanium or zero.
++ 
+++ifeq (0,1)
++ ifneq ($(wildcard $(AGENT_DIR)),)
++ ifneq ($(filter-out ia64 zero,$(SRCARCH)),)
++   BUILDLIBSAPROC = $(LIBSAPROC)
++ endif
++ endif
+++endif
++ 
++ ifneq ($(ALT_SASRCDIR),)
++ ALT_SAINCDIR=-I$(ALT_SASRCDIR) -DALT_SASRCDIR
++-- 
++2.16.2
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies.patch b/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-common.patch
+similarity index 79%
+rename from recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies.patch
+rename to recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-common.patch
+index 4abd558..74cd422 100644
+--- a/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies.patch
++++ b/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-common.patch
+@@ -1,16 +1,11 @@
+ From a02a9fbc3f1fed181504bdb5b0a16863247f92fc Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
+ Date: Fri, 2 Mar 2018 10:11:51 +0000
+-Subject: [PATCH 6/9] hotspot: os_linux: remove glibc dependencies
++Subject: [PATCH] hotspot: os_linux: remove glibc dependencies (common)
+ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+ 
+-* gnu/libc-version.h doesn't exist in musl
+-    | hotspot/src/os/linux/vm/os_linux.cpp:97:11: fatal error: gnu/libc-version.h: No such file or directory
+-    |  # include <gnu/libc-version.h>
+-    |            ^~~~~~~~~~~~~~~~~~~~
+-
+ * dlvsym() is a GNU extension and doesn't exist in musl
+     | hotspot/src/os/linux/vm/os_linux.cpp:2846:13: error: 'dlvsym' was not declared in this scope
+     |    void *f = dlvsym(handle, name, "libnuma_1.1");
+@@ -23,21 +18,13 @@ Content-Transfer-Encoding: 8bit
+ Upstream-Status: Inappropriate [musl specific]
+ Signed-off-by: André Draszik <andre.draszik@jci.com>
+ ---
+- hotspot/src/os/linux/vm/os_linux.cpp | 12 +++++++++++-
+- 1 file changed, 11 insertions(+), 1 deletion(-)
++ hotspot/src/os/linux/vm/os_linux.cpp | 11 +++++++++++
++ 1 file changed, 11 insertions(+)
+ 
+ diff --git a/hotspot/src/os/linux/vm/os_linux.cpp b/hotspot/src/os/linux/vm/os_linux.cpp
+ index 044a70a6..3137796a 100644
+ --- a/hotspot/src/os/linux/vm/os_linux.cpp
+ +++ b/hotspot/src/os/linux/vm/os_linux.cpp
+-@@ -94,7 +94,6 @@
+- # include <string.h>
+- # include <syscall.h>
+- # include <sys/sysinfo.h>
+--# include <gnu/libc-version.h>
+- # include <sys/ipc.h>
+- # include <sys/shm.h>
+- # include <link.h>
+ @@ -530,6 +529,13 @@ void os::Linux::hotspot_sigmask(Thread* thread) {
+  // detecting pthread library
+  
+diff --git a/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2-aarch.patch b/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2-aarch.patch
+new file mode 100644
+index 0000000..512af52
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2-aarch.patch
+@@ -0,0 +1,36 @@
++From 2915f7f56b99fa130942acb4289c9b5310075adc Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Fri, 2 Mar 2018 10:11:51 +0000
++Subject: [PATCH] hotspot: os_linux: remove glibc dependencies (pt2: aarch32)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++* gnu/libc-version.h doesn't exist in musl
++    | hotspot/src/os/linux/vm/os_linux.cpp:97:11: fatal error: gnu/libc-version.h: No such file or directory
++    |  # include <gnu/libc-version.h>
++    |            ^~~~~~~~~~~~~~~~~~~~
++
++Upstream-Status: Inappropriate [musl specific]
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++---
++ hotspot/src/os/linux/vm/os_linux.cpp | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/hotspot/src/os/linux/vm/os_linux.cpp b/hotspot/src/os/linux/vm/os_linux.cpp
++index 8656357d..555b3a15 100644
++--- a/hotspot/src/os/linux/vm/os_linux.cpp
+++++ b/hotspot/src/os/linux/vm/os_linux.cpp
++@@ -94,9 +94,6 @@
++ # include <string.h>
++ # include <syscall.h>
++ # include <sys/sysinfo.h>
++-#ifndef __UCLIBC__
++-# include <gnu/libc-version.h>
++-#endif
++ # include <sys/ipc.h>
++ # include <sys/shm.h>
++ # include <link.h>
++-- 
++2.18.0
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2.patch b/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2.patch
+new file mode 100644
+index 0000000..91a653c
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/musl-0006-hotspot-os_linux-remove-glibc-dependencies-pt2.patch
+@@ -0,0 +1,34 @@
++From a02a9fbc3f1fed181504bdb5b0a16863247f92fc Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@jci.com>
++Date: Fri, 2 Mar 2018 10:11:51 +0000
++Subject: [PATCH] hotspot: os_linux: remove glibc dependencies (common)
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++* gnu/libc-version.h doesn't exist in musl
++    | hotspot/src/os/linux/vm/os_linux.cpp:97:11: fatal error: gnu/libc-version.h: No such file or directory
++    |  # include <gnu/libc-version.h>
++    |            ^~~~~~~~~~~~~~~~~~~~
++
++Upstream-Status: Inappropriate [musl specific]
++Signed-off-by: André Draszik <andre.draszik@jci.com>
++---
++ hotspot/src/os/linux/vm/os_linux.cpp | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/hotspot/src/os/linux/vm/os_linux.cpp b/hotspot/src/os/linux/vm/os_linux.cpp
++index 044a70a6..3137796a 100644
++--- a/hotspot/src/os/linux/vm/os_linux.cpp
+++++ b/hotspot/src/os/linux/vm/os_linux.cpp
++@@ -94,7 +94,6 @@
++ # include <string.h>
++ # include <syscall.h>
++ # include <sys/sysinfo.h>
++-# include <gnu/libc-version.h>
++ # include <sys/ipc.h>
++ # include <sys/shm.h>
++ # include <link.h>
++-- 
++2.16.2
++
+diff --git a/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build.patch b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-common.patch
+similarity index 93%
+rename from recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build.patch
+rename to recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-common.patch
+index f241361..ece7f14 100644
+--- a/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build.patch
++++ b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-common.patch
+@@ -92,19 +92,6 @@
+      _thread->metadata_handles()->push((Metadata*)_value);              \
+    } else {                                                             \
+      _thread = NULL;                                                    \
+---- hotspot/src/cpu/zero/vm/entry_zero.hpp.orig
+-+++ hotspot/src/cpu/zero/vm/entry_zero.hpp
+-@@ -26,6 +26,10 @@
+- #ifndef CPU_ZERO_VM_ENTRY_ZERO_HPP
+- #define CPU_ZERO_VM_ENTRY_ZERO_HPP
+- 
+-+#include "utilities/globalDefinitions.hpp"
+-+#include "utilities/exceptions.hpp"
+-+#include "interpreter/cppInterpreter.hpp"
+-+
+- class ZeroEntry {
+-  public:
+-   ZeroEntry() {
+ --- hotspot/src/share/vm/shark/sharkEntry.hpp.orig
+ +++ hotspot/src/share/vm/shark/sharkEntry.hpp
+ @@ -27,6 +27,7 @@
+@@ -115,31 +102,6 @@
+  
+  class SharkContext;
+  
+---- hotspot/src/share/vm/interpreter/cppInterpreterGenerator.hpp.orig
+-+++ hotspot/src/share/vm/interpreter/cppInterpreterGenerator.hpp
+-@@ -30,6 +30,10 @@
+- 
+- #ifdef CC_INTERP
+- 
+-+#ifdef TARGET_ARCH_zero
+-+#include "entry_zero.hpp"
+-+#endif
+-+
+- class CppInterpreterGenerator: public AbstractInterpreterGenerator {
+-   protected:
+-   // shared code sequences
+---- hotspot/src/cpu/zero/vm/nativeInst_zero.cpp.orig
+-+++ hotspot/src/cpu/zero/vm/nativeInst_zero.cpp
+-@@ -26,6 +26,9 @@
+- #include "precompiled.hpp"
+- #include "assembler_zero.inline.hpp"
+- #include "memory/resourceArea.hpp"
+-+#ifdef CC_INTERP
+-+#include "entry_zero.hpp"
+-+#endif
+- #include "nativeInst_zero.hpp"
+- #include "oops/oop.inline.hpp"
+- #include "runtime/handles.hpp"
+ --- hotspot/src/share/vm/shark/llvmHeaders.hpp.orig
+ +++ hotspot/src/share/vm/shark/llvmHeaders.hpp
+ @@ -35,7 +35,11 @@
+diff --git a/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2-aarch32.patch b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2-aarch32.patch
+new file mode 100644
+index 0000000..b09745c
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2-aarch32.patch
+@@ -0,0 +1,11 @@
++--- hotspot/src/cpu/zero/vm/entry_zero.hpp
+++++ hotspot/src/cpu/zero/vm/entry_zero.hpp
++@@ -26,6 +26,8 @@
++ #ifndef CPU_ZERO_VM_ENTRY_ZERO_HPP
++ #define CPU_ZERO_VM_ENTRY_ZERO_HPP
++ 
+++#include "utilities/globalDefinitions.hpp"
+++#include "utilities/exceptions.hpp"
++ #include "interpreter/cppInterpreter.hpp"
++ 
++ class ZeroEntry {
+diff --git a/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2.patch b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2.patch
+new file mode 100644
+index 0000000..018640b
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-build-pt2.patch
+@@ -0,0 +1,38 @@
++--- hotspot/src/cpu/zero/vm/entry_zero.hpp.orig
+++++ hotspot/src/cpu/zero/vm/entry_zero.hpp
++@@ -26,6 +26,10 @@
++ #ifndef CPU_ZERO_VM_ENTRY_ZERO_HPP
++ #define CPU_ZERO_VM_ENTRY_ZERO_HPP
++ 
+++#include "utilities/globalDefinitions.hpp"
+++#include "utilities/exceptions.hpp"
+++#include "interpreter/cppInterpreter.hpp"
+++
++ class ZeroEntry {
++  public:
++   ZeroEntry() {
++--- hotspot/src/share/vm/interpreter/cppInterpreterGenerator.hpp.orig
+++++ hotspot/src/share/vm/interpreter/cppInterpreterGenerator.hpp
++@@ -30,6 +30,10 @@
++ 
++ #ifdef CC_INTERP
++ 
+++#ifdef TARGET_ARCH_zero
+++#include "entry_zero.hpp"
+++#endif
+++
++ class CppInterpreterGenerator: public AbstractInterpreterGenerator {
++   protected:
++   // shared code sequences
++--- hotspot/src/cpu/zero/vm/nativeInst_zero.cpp.orig
+++++ hotspot/src/cpu/zero/vm/nativeInst_zero.cpp
++@@ -26,6 +26,9 @@
++ #include "precompiled.hpp"
++ #include "assembler_zero.inline.hpp"
++ #include "memory/resourceArea.hpp"
+++#ifdef CC_INTERP
+++#include "entry_zero.hpp"
+++#endif
++ #include "nativeInst_zero.hpp"
++ #include "oops/oop.inline.hpp"
++ #include "runtime/handles.hpp"
+-- 
+2.18.0
+
 
