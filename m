@@ -1,19 +1,67 @@
-Return-Path: <prvs=7652d1b30=Andreas.Obergschwandtner@skidata.com>
+Return-Path: <prvs=765f72d04=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 48A8E72EA2
+	by mail.openembedded.org (Postfix) with ESMTP id 74B636079F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 13:42:02 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,274,1531778400"; d="scan'208";a="11945640"
-From: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Aug 2018 15:41:48 +0200
-Message-ID: <20180822134148.3463-1-andreas.obergschwandtner@skidata.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 22 Aug 2018 14:28:17 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,274,1531778400"; d="scan'208";a="11946720"
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <20180820211443.32757-1-richard.leitner@skidata.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <99385f2e-2ab7-77ef-56c3-fbcdeedc9803@skidata.com>
+Date: Wed, 22 Aug 2018 16:28:59 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.0
 MIME-Version: 1.0
+In-Reply-To: <20180820211443.32757-1-richard.leitner@skidata.com>
 X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
-	sdex4srv.skidata.net (192.168.111.82)
-Subject: [meta-java][PATCH v3] icedtea: disable error format-overflow for gcc 7
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH 0/7] openjdk include cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,99 +74,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 13:42:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Aug 2018 14:28:17 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-As no patch has been found in debian and hotspot repo for this issue we
-just disable this warning which was introduced with GCC 7.
+Hi,
+this is a note to let you know that I've just added this series to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
-Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
-Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
----
-Changes v3:
-   + fixed the format-overflow warnings by patching affected files
-     in openjdk-7-hotspot.
-Changes v2:
-   + adapted by Richard Leitner to use the openjdk-build-helper class from
-     André Draszik instead of our own in the java class.
-     (Therefore it now depends on the "prepare for openjdk-8 build infra re-use"
-     series from André)
+If you have any questions, please let me know.
 
- ...-hotspot-handle-gcc7-format-overflow.patch | 41 +++++++++++++++++++
- .../icedtea/openjdk-7-release-03b147.inc      |  2 +
- 2 files changed, 43 insertions(+)
- create mode 100644 recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-handle-gcc7-format-overflow.patch
+regards;Richard.L
 
-diff --git a/recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-handle-gcc7-format-overflow.patch b/recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-handle-gcc7-format-overflow.patch
-new file mode 100644
-index 0000000..27d41dd
---- /dev/null
-+++ b/recipes-core/icedtea/openjdk-7-03b147/icedtea-hotspot-handle-gcc7-format-overflow.patch
-@@ -0,0 +1,41 @@
-+# HG changeset patch
-+# User Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
-+# Date 1534928526 -7200
-+#      Wed Aug 22 11:02:06 2018 +0200
-+# Node ID 96d06a5c27f84a4d48cff0d927cf377866db894e
-+# Parent  a456d0771ba0f6604b172f05f0b594178f7cc49c
-+Handle format-overflow warning for GCC >= 7
-+
-+diff --git openjdk/hotspot/src/share/vm/adlc/output_c.cpp openjdk/hotspot/src/share/vm/adlc/output_c.cpp
-+--- openjdk/hotspot/src/share/vm/adlc/output_c.cpp
-++++ openjdk/hotspot/src/share/vm/adlc/output_c.cpp
-+@@ -462,9 +462,11 @@
-+   for (i = maxcycleused; i > 0; i /= 10)
-+     cycledigit++;
-+ 
-+-  int maskdigit = 0;
-+-  for (i = rescount; i > 0; i /= 10)
-++  int maskdigit = 1;
-++  for (i = rescount / 10; i > 0; i /= 10)
-+     maskdigit++;
-++  if (maskdigit > 10)
-++    maskdigit = 10;
-+ 
-+   static const char * pipeline_use_cycle_mask = "Pipeline_Use_Cycle_Mask";
-+   static const char * pipeline_use_element    = "Pipeline_Use_Element";
-+diff --git openjdk/hotspot/src/share/vm/code/dependencies.cpp openjdk/hotspot/src/share/vm/code/dependencies.cpp
-+--- openjdk/hotspot/src/share/vm/code/dependencies.cpp
-++++ openjdk/hotspot/src/share/vm/code/dependencies.cpp
-+@@ -429,6 +429,12 @@
-+   Dependencies::write_dependency_to(log, dept, nargs, ciargs, witness);
-+ }
-+ 
-++// disable format overflow checking for GCC versions > 7 because the lead to
-++// a false positive in this case.
-++// See https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
-++#if defined (__GNUC__) && __GNUC__ >= 7
-++#pragma GCC diagnostic ignored "-Wformat-overflow"
-++#endif
-+ void Dependencies::write_dependency_to(CompileLog* log,
-+                                        DepType dept,
-+                                        int nargs, ciObject* args[],
-diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-index fe18ee5..484f124 100644
---- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-+++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-@@ -89,6 +89,7 @@ OPENJDK_PATCHES = " \
- 	file://icedtea-x11_extension_cleanup.patch;apply=no \
- 	file://icedtea-CVE-2014-1876-unpack.patch;apply=no \
- 	file://icedtea-jdk-unzip.patch;apply=no \
-+	file://icedtea-hotspot-handle-gcc7-format-overflow.patch;apply=no \
-         "
- 
- OPENJDK_HEADLESS_PATCHES = " \
-@@ -111,6 +112,7 @@ export DISTRIBUTION_PATCHES = " \
- 	patches/icedtea-x11_extension_cleanup.patch \
- 	patches/icedtea-CVE-2014-1876-unpack.patch \
- 	patches/icedtea-jdk-unzip.patch \
-+	patches/icedtea-hotspot-handle-gcc7-format-overflow.patch \
- 	${CLEAN_X11_DISTRIBUTION_PATCH} \
-         "
- 
--- 
-2.17.1
-
+On 8/20/18 11:14 PM, Richard Leitner wrote:
+> Remove duplicated code in openjdk includes by moving it to the
+> openjdk-build-helper class. Furthermore make the naming of files in
+> recipes-core/openjdk/ consistent again.
+> 
+> Richard Leitner (7):
+>   openjdk-build-helper: add get_*_arch functions
+>   openjdk-8: use openjdk_build_helper's ARCH translation functions
+>   openjdk-7: use openjdk_build_helper's ARCH translation functions
+>   icedtea7-native: use openjdk_build_helper's ARCH translation functions
+>   openjdk-7: remove version dependent stuff from openjdk-common
+>   openjdk-8: use openjdk-common
+>   openjdk-7: merge postinst into openjdk-7-common
+> 
+>  classes/openjdk-build-helper.bbclass      |  51 +++++++++++
+>  recipes-core/icedtea/icedtea7-native.inc  |  42 +--------
+>  recipes-core/openjdk/openjdk-7-common.inc | 141 +++++++++++++++++++++++++++++-
+>  recipes-core/openjdk/openjdk-8-common.inc |  44 +---------
+>  recipes-core/openjdk/openjdk-common.inc   |  77 +---------------
+>  recipes-core/openjdk/openjdk-postinst.inc | 100 ---------------------
+>  6 files changed, 194 insertions(+), 261 deletions(-)
+>  delete mode 100644 recipes-core/openjdk/openjdk-postinst.inc
+> 
 
