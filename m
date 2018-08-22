@@ -1,24 +1,25 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E1A716079F
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B875979164
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 00:26:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w7M0QZTq019027
+	Wed, 22 Aug 2018 00:26:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7M0Qkrm019124
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Aug 2018 17:26:35 -0700 (PDT)
+	Tue, 21 Aug 2018 17:26:46 -0700
 Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Tue, 21 Aug 2018 17:26:34 -0700
+	Tue, 21 Aug 2018 17:26:42 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Aug 2018 08:26:32 +0800
-Message-ID: <1534897592-14237-1-git-send-email-yi.zhao@windriver.com>
+Date: Wed, 22 Aug 2018 08:26:40 +0800
+Message-ID: <1534897600-14302-1-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.137]
-Subject: [meta-webserver][PATCH] xdebug: upgrade 2.6.0 -> 2.6.1
+Subject: [meta-networking][PATCH 2/2] samba: upgrade 4.8.3 -> 4.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 00:26:35 -0000
+X-List-Received-Date: Wed, 22 Aug 2018 00:26:45 -0000
 Content-Type: text/plain
+
+Security fixes:
+
+CVE-2018-1139 (Weak authentication protocol allowed.)
+CVE-2018-1140 (Denial of Service Attack on DNS and LDAP server.)
+CVE-2018-10858 (Insufficient input validation on client directory listing in libsmbclient.)
+CVE-2018-10918 (Denial of Service Attack on AD DC DRSUAPI server.)
+CVE-2018-10919 (Confidential attribute disclosure from the AD LDAP server.)
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../recipes-php/xdebug/{xdebug_2.6.0.bb => xdebug_2.6.1.bb}           | 4 ++--
+ .../recipes-connectivity/samba/{samba_4.8.3.bb => samba_4.8.4.bb}     | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/xdebug/{xdebug_2.6.0.bb => xdebug_2.6.1.bb} (86%)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.8.3.bb => samba_4.8.4.bb} (98%)
 
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.6.1.bb
-similarity index 86%
-rename from meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb
-rename to meta-webserver/recipes-php/xdebug/xdebug_2.6.1.bb
-index 2b8d1ef..773dbf3 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_2.6.0.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_2.6.1.bb
-@@ -6,8 +6,8 @@ DEPENDS = "php re2c-native"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
+index d244e61..da0ac32 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.8.3.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.8.4.bb
+@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
+            file://samba-4.3.9-remove-getpwent_r.patch \
+           "
  
- SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+-SRC_URI[md5sum] = "67f271ed6b793c2acfe014b5b8f0cca8"
+-SRC_URI[sha256sum] = "e0569a8a605d5dfb49f1fdd11db796f4d36fe0351c4a7f21387ef253010b82ed"
++SRC_URI[md5sum] = "ca5bfbebd8d9eb95506e16594b2bbee2"
++SRC_URI[sha256sum] = "f5044d149e01894a08b1d114b8b69aed78171a7bb19608bd1fd771453b9a5406"
  
--SRC_URI[md5sum] = "ed3545852e6f4a00fb8730362d0431ee"
--SRC_URI[sha256sum] = "b5264cc03bf68fcbb04b97229f96dca505d7b87ec2fb3bd4249896783d29cbdc"
-+SRC_URI[md5sum] = "35cc0f2e8b7d40556a9ad9afd9c49aee"
-+SRC_URI[sha256sum] = "dae691d6c052073b886e0c6e1306a707bca9fd18a1e3485384ef6c4aacf1bd77"
- 
- UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
  
 -- 
 2.7.4
