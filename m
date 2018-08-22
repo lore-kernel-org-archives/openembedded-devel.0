@@ -1,23 +1,66 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 276AD74A32
+Return-Path: <prvs=765f72d04=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E01A79007
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 09:13:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7M9DpZG026399
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Aug 2018 02:13:51 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.399.0; Wed, 22 Aug 2018 02:13:50 -0700
-From: <mingli.yu@windriver.com>
+	Wed, 22 Aug 2018 09:25:34 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,273,1531778400"; d="scan'208";a="11940922"
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Aug 2018 17:13:49 +0800
-Message-ID: <1534929229-207708-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.7.4
+References: <20180820153234.10990-1-git@andred.net>
+From: Richard Leitner <richard.leitner@skidata.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
+	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
+	P3I6bcPJefUstj65yFQnTw==
+Message-ID: <8fbb395c-0d16-0498-6b42-8482fa0cb972@skidata.com>
+Date: Wed, 22 Aug 2018 11:26:16 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] nmap: install ndiff
+In-Reply-To: <20180820153234.10990-1-git@andred.net>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH v2 1/5] layer.conf: stop OpenJDK-8(native) build dependencies from being installed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,53 +73,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Aug 2018 09:13:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Aug 2018 09:25:35 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+Hi,
+this is a note to let you know that I've just added this series to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
 
-Currently, the ndiff isn't built and installed
-as ndiff is python2 compatible script and it
-checks PYTHON_VERSION to determine whether
-build and install ndiff in configure phase.
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
-Update to inherit pythonnative to let the
-PYTHON_VERSION to be 2 to let ndiff be built
-and installed.
+If you have any questions, please let me know.
 
-Apart from ndiff python script, there is another
-script named ndiff.py used by ndiff, export
-PYTHON_SITEPACKAGES_DIR to make ndiff.py installed
-in the correct place.
+regards;Richard.L
 
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
----
- meta-oe/recipes-security/nmap/nmap_7.70.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-security/nmap/nmap_7.70.bb b/meta-oe/recipes-security/nmap/nmap_7.70.bb
-index e47d09f..01be151 100644
---- a/meta-oe/recipes-security/nmap/nmap_7.70.bb
-+++ b/meta-oe/recipes-security/nmap/nmap_7.70.bb
-@@ -13,7 +13,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
- SRC_URI[md5sum] = "84eb6fbe788e0d4918c2b1e39421bf79"
- SRC_URI[sha256sum] = "847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
- 
--inherit autotools-brokensep pkgconfig python3native
-+inherit autotools-brokensep pkgconfig pythonnative
- 
- PACKAGECONFIG ?= "ncat nping ndiff pcap"
- 
-@@ -36,6 +36,8 @@ EXTRA_OECONF = "--with-libdnet=included --with-liblinear=included --without-subv
- # disable for now until py3 is supported
- EXTRA_OECONF += "--without-zenmap"
- 
-+export PYTHON_SITEPACKAGES_DIR
-+
- do_configure() {
-     autoconf
-     oe_runconf
--- 
-2.7.4
-
+On 8/20/18 5:32 PM, André Draszik wrote:
+> From: André Draszik <andre.draszik@jci.com>
+> 
+> Avoid installation of all openjdk-8-native buildtime dependencies into
+> a depending recipe's sysroot.
+> To execute openjdk-8-native as part of a depending recipe's build, we
+> don't need the openjdk-8-native build time dependencies (like ant-native,
+> or more importantly icedtea-7-native), just its runtime dependencies,
+> unless of course that depending recipe's builds needs those tools itself.
+> In that case, it needs to specify them explicitly, though (of course!).
+> 
+> Use SSTATE_EXCLUDEDEPS_SYSROOT to prevent openjdk-8-native build time
+> dependencies from being copied in the sysroot unless explicitly requested.
+> 
+> Signed-off-by: André Draszik <andre.draszik@jci.com>
+> ---
+>  conf/layer.conf | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 3b00f61..8e8a300 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -14,3 +14,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+>  SIGGEN_EXCLUDERECIPES_ABISAFE += "\
+>      ca-certificates-java \
+>  "
+> +
+> +SSTATE_EXCLUDEDEPS_SYSROOT += "\
+> +    openjdk-8-native->(ant-native|attr-native|coreutils-native|icedtea7-native|libxslt-native|make-native|openssl-native|zip-native|unzip-native) \
+> +"
+> 
 
