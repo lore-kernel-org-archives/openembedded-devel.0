@@ -1,50 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D08A571A74
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id E144A79547
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 15:48:37 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id o15-v6so6783463qtk.6
+	Thu, 23 Aug 2018 15:59:24 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id z4-v6so2813304pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 08:48:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9d/xxKuUF83d/HRrM4eRFYTYurTWKIIAbAQT3CeF5NU=;
-	b=frYTyZCJW9OhSK9d3Hx3Hy5yMRuL3M/9PF799vwkTvrU8ziojd3BI1spggdbAhI45I
-	6hoglPtMzxZ354ginIdzxBvU9utjUt2e63Q5BoORZb7vc7G/Prn0KmBQGDtmdARjrz1j
-	s0K1YJ7Fdd2w7OVF3MDsXyc5IpNH6YnUGNPzm4KIDc6oDrT/Mr1YSgub3wrvJnXuBwhD
-	45jkahNWbHofXh4G1wCgDYn6ndxeWHc7kBDvcMkX0Rl+kPWJlUljOJfc9P6wkzok1KCJ
-	tP84MPy8S61QqxnjKfRNJJ+rxoojB960e81o5VWafTztUDedu3D+2JvkSR3qdlo8ijSz
-	3ICA==
+	Thu, 23 Aug 2018 08:59:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mvista-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=U04QuFB44k60+5PE0ZbCE9FQdJ6xDYQpxw5hYBPr8kk=;
+	b=qdsjvyveyqsgRmOcQY1TRW/I/Ito7dm/WK/HsNlTJyF4p9udj2pa+PmiGrmYuRTpPl
+	vUphe2V9mq5ZgOaoN3SoNQnBmEynf8u7FyAI+AHV6xtWeg0JR2PhLkT7/Upz4Ws8YAdj
+	Wt6fgsyBd8Jr+Sy6TCJaPNYBYS/PtmsSbynJu7fRlsjchagrCJnEb0DeOHFhidpoJTUU
+	Lj/9skpSbcJjfGhB6n2DvcMd69KynfoH5pa1243pU1VbgV6ha4Hml0Uk0q/UUBlN4zk5
+	0h1TtwXfOdlEE1Vnjic8fj5rm+oONqSAIth/nx2ZZ5N5RE240ghldiRHtTIwELWzAFFY
+	z3Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=9d/xxKuUF83d/HRrM4eRFYTYurTWKIIAbAQT3CeF5NU=;
-	b=S2DEvvGcUyRfW+tiT4Aca4LqDOvc6NV6NB+cdJT9P7Lk7682ww86Cof7YmZCmXqqKH
-	ZriU3i+F3Bq7lHC+bcJvVl60sbOYrsz6r5l3zSsT728r2WhQ8/VnwiD3Q298CPRV5rsx
-	TxP5Unvt/xdkav4DWipSZPcCOyYdV4irGOVeiEC+kDJABJu88/G0DsMnUtPnzyx3B7IB
-	tQDDzAI0f/kHVseOhfOQxcqLU4/Xxi04MlNcEnhrfjJh59PpKKymQoXX16WI2lRR0cYM
-	RZRd8XbJggiPlwI89xq/8FsaibxXNpJx+TFUbFmBO0wsDFN4gJaC0CB/NaXbTEJvh1Of
-	KyeQ==
-X-Gm-Message-State: APzg51D3131soMC2q+Jhq+SpnR7dtmUMIFOjpOPlkE9cOuO0c0bpW/PN
-	KVv2XTcN8QAoTlU1vCDbAFoqoSlPqeNe+v4+zyg=
-X-Google-Smtp-Source: AA+uWPyelK+6TBKJmmRtP8TN1zIf+vj/VVAlGG4bwpzfk730ZG/RTXab3mt9TQ3KoLmvzq8ZGQWxX1XNDrEPq2sOa+I=
-X-Received: by 2002:aed:3848:: with SMTP id
-	j66-v6mr24740728qte.218.1535039318427; 
-	Thu, 23 Aug 2018 08:48:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180823122731.27991-1-oleksandr.kravchuk@pelagicore.com>
-	<4f921ce1-dfc2-f051-30e1-33033c65c41c@gmail.com>
-	<CAGoQ_if3mXJNQ4z4XNB0q6zOtvoSipRJLB8Ncc9=FwUzaz_JdA@mail.gmail.com>
-In-Reply-To: <CAGoQ_if3mXJNQ4z4XNB0q6zOtvoSipRJLB8Ncc9=FwUzaz_JdA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 23 Aug 2018 08:48:12 -0700
-Message-ID: <CAMKF1soObwjuXWncaZTd998d5bNkkaYnHM+rQO+HcMD2FbLUhw@mail.gmail.com>
-To: open.source@oleksandr-kravchuk.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	dev@sashko.rv.ua
-Subject: Re: [meta-oe][rocko] libsodium: update to 1.0.16
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=U04QuFB44k60+5PE0ZbCE9FQdJ6xDYQpxw5hYBPr8kk=;
+	b=R1S4jdOmH1ASgtE2/x0rbL6fse5Z+KNK2TKlk5D2mMbt8A/dUoKqN7buqrb3UCKL/S
+	5BigzfgA80uWJZdmYf95BxTPgcOudZFGeiLRG2hi8kLMXXQL5TOae8YMLpMysfDu/wBe
+	QGFeHZTHsSJd0FurbRGwc/jmxIwWRUkeJZ+W2+rsQiUBrk+7fNqChsZlA0BDjnw/7IoA
+	7F53VZRoORlWRjRSSHQJXkIPHR6iTG7yE1JCKEP8S6v4YZ3Oe0elvmC8r9Izx9S2VztB
+	PJ+ugIIkOuxOWx3EQAWvWzzd83+d4qKmcGvVKlxux4BDOUx2BxiMuWyddB03cXnLDlCt
+	qaEw==
+X-Gm-Message-State: AOUpUlHwS7YmF2KeemultuTsoJ+8ZpAT9XDAEYukmSrLUz6FIs9nvqcg
+	0xp21+7ZFBLvMprTnN0H3Gx+AoaRRO+Umw==
+X-Google-Smtp-Source: AA+uWPxvc3jgg8T6XardZD+JZFRqXF1NepsKrmRxWbqS23OsO03HCVS9shbydKTZMZMAMHWXksi2eQ==
+X-Received: by 2002:aa7:88d3:: with SMTP id
+	p19-v6mr56985489pfo.160.1535039965691; 
+	Thu, 23 Aug 2018 08:59:25 -0700 (PDT)
+Received: from jkrishnanjanappa-desktop.mvista.com ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id
+	u83-v6sm17223129pfj.37.2018.08.23.08.59.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 23 Aug 2018 08:59:24 -0700 (PDT)
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Aug 2018 21:29:19 +0530
+Message-Id: <1535039959-20687-1-git-send-email-jkrishnanjanappa@mvista.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][SUMO][resend PATCH] lftp: CVE-2018-10916
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,109 +56,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2018 15:48:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 23 Aug 2018 15:59:25 -0000
 
-On Thu, Aug 23, 2018 at 7:46 AM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> On Thu, Aug 23, 2018 at 4:23 PM, akuster808 <akuster808@gmail.com> wrote:
->
-> >
-> >
-> > On 08/23/2018 05:27 AM, Oleksandr Kravchuk wrote:
-> > > From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> > >
-> > > Added link to bug tracker and updated md5sum of LICENSE, which has been
-> > > updated with the copyright year.
-> > >
-> > > Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
-> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > > ---
-> > >  .../recipes-support/libsodium/libsodium_1.0.11.bb   | 12 ------------
-> > >  .../recipes-support/libsodium/libsodium_1.0.16.bb   | 13 +++++++++++++
-> >
-> > We normally don't update packages in stable releases. Is this a bug fix
-> > only updated ?
-> > In order for the to land in Rocko, Sumo would require the same change.
-> >
->
-> SRC_URI points to broken URI and v1.0.11 was marked as unsupported by the
-> project:
-> https://download.libsodium.org/libsodium/releases/old/unsupported/
->
-> I thought since this is a minor release anyway, it would make sense to
-> update
-> the package instead of updating SRC_URI, since who knows how long it will
-> be there for.
+Affects lftp <= 4.8.3
 
-it seems to be a bugfix release Armin we should be ok.
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+---
+ .../lftp/files/CVE-2018-10916.patch                | 82 ++++++++++++++++++++++
+ .../recipes-connectivity/lftp/lftp_4.7.7.bb        |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
 
->
->
-> >
-> > - armin
-> > >  2 files changed, 13 insertions(+), 12 deletions(-)
-> > >  delete mode 100644 meta-oe/recipes-support/libsodium/
-> > libsodium_1.0.11.bb
-> > >  create mode 100644 meta-oe/recipes-support/libsodium/
-> > libsodium_1.0.16.bb
-> > >
-> > > diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb
-> > b/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb
-> > > deleted file mode 100644
-> > > index cbcbe96cd..000000000
-> > > --- a/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb
-> > > +++ /dev/null
-> > > @@ -1,12 +0,0 @@
-> > > -SUMMARY = "The Sodium crypto library"
-> > > -HOMEPAGE = "http://libsodium.org/"
-> > > -LICENSE = "ISC"
-> > > -LIC_FILES_CHKSUM = "file://LICENSE;md5=c9f00492f01f5610253fde01c3d2e8
-> > 66"
-> > > -
-> > > -SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-
-> > ${PV}.tar.gz"
-> > > -SRC_URI[md5sum] = "b58928d035064b2a46fb564937b83540"
-> > > -SRC_URI[sha256sum] = "a14549db3c49f6ae2170cbbf4664bd
-> > 48ace50681045e8dbea7c8d9fb96f9c765"
-> > > -
-> > > -inherit autotools
-> > > -
-> > > -BBCLASSEXTEND = "native nativesdk"
-> > > diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.16.bb
-> > b/meta-oe/recipes-support/libsodium/libsodium_1.0.16.bb
-> > > new file mode 100644
-> > > index 000000000..57f38fec2
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/libsodium/libsodium_1.0.16.bb
-> > > @@ -0,0 +1,13 @@
-> > > +SUMMARY = "The Sodium crypto library"
-> > > +HOMEPAGE = "http://libsodium.org/"
-> > > +BUGTRACKER = "https://github.com/jedisct1/libsodium/issues"
-> > > +LICENSE = "ISC"
-> > > +LIC_FILES_CHKSUM = "file://LICENSE;md5=7f5ecba1fa793fc1f3c8f32d6cb5a3
-> > 7b"
-> > > +
-> > > +SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-
-> > ${PV}.tar.gz"
-> > > +SRC_URI[md5sum] = "37b18839e57e7a62834231395c8e962b"
-> > > +SRC_URI[sha256sum] = "eeadc7e1e1bcef09680fb4837d448f
-> > bdf57224978f865ac1c16745868fbd0533"
-> > > +
-> > > +inherit autotools
-> > > +
-> > > +BBCLASSEXTEND = "native nativesdk"
-> >
-> >
->
->
-> --
-> Oleksandr Kravchuk
-> http://oleksandr-kravchuk.com/
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch b/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
+new file mode 100644
+index 0000000..213403e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
+@@ -0,0 +1,82 @@
++From a27e07d90a4608ceaf928b1babb27d4d803e1992 Mon Sep 17 00:00:00 2001
++From: "Alexander V. Lukyanov" <lavv17f@gmail.com>
++Date: Tue, 31 Jul 2018 10:57:35 +0300
++Subject: [PATCH] mirror: prepend ./ to rm and chmod arguments to avoid URL
++ recognition (fix #452)
++
++CVE: CVE-2018-10916
++Upstream-Status: Backport from v4.8.4
++
++Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
++---
++ src/MirrorJob.cc | 24 +++++++++---------------
++ 1 file changed, 9 insertions(+), 15 deletions(-)
++
++diff --git a/src/MirrorJob.cc b/src/MirrorJob.cc
++index cf106c40..0be45431 100644
++--- a/src/MirrorJob.cc
+++++ b/src/MirrorJob.cc
++@@ -1164,24 +1164,21 @@ int   MirrorJob::Do()
++ 	    }
++ 	    continue;
++ 	 }
+++	 bool use_rmdir = (file->TypeIs(file->DIRECTORY)
+++			   && recursion_mode==RECURSION_NEVER);
++ 	 if(script)
++ 	 {
++-	    ArgV args("rm");
++-	    if(file->TypeIs(file->DIRECTORY))
++-	    {
++-	       if(recursion_mode==RECURSION_NEVER)
++-		  args.setarg(0,"rmdir");
++-	       else
++-		  args.Append("-r");
++-	    }
+++	    ArgV args(use_rmdir?"rmdir":"rm");
+++	    if(file->TypeIs(file->DIRECTORY) && !use_rmdir)
+++	       args.Append("-r");
++ 	    args.Append(target_session->GetFileURL(file->name));
++ 	    xstring_ca cmd(args.CombineQuoted());
++ 	    fprintf(script,"%s\n",cmd.get());
++ 	 }
++ 	 if(!script_only)
++ 	 {
++-	    ArgV *args=new ArgV("rm");
++-	    args->Append(file->name);
+++	    ArgV *args=new ArgV(use_rmdir?"rmdir":"rm");
+++	    args->Append(dir_file(".",file->name));
++ 	    args->seek(1);
++ 	    rmJob *j=new rmJob(target_session->Clone(),args);
++ 	    j->cmdline.set_allocated(args->Combine());
++@@ -1185,10 +1182,7 @@ int   MirrorJob::Do()
++ 	    if(file->TypeIs(file->DIRECTORY))
++ 	    {
++ 	       if(recursion_mode==RECURSION_NEVER)
++-	       {
++-		  args->setarg(0,"rmdir");
++ 		  j->Rmdir();
++-	       }
++ 	       else
++ 		  j->Recurse();
++ 	    }
++@@ -1252,7 +1246,7 @@ int   MirrorJob::Do()
++ 	 if(!script_only)
++ 	 {
++ 	    ArgV *a=new ArgV("chmod");
++-	    a->Append(file->name);
+++	    a->Append(dir_file(".",file->name));
++ 	    a->seek(1);
++ 	    ChmodJob *cj=new ChmodJob(target_session->Clone(),
++ 				 file->mode&~mode_mask,a);
++@@ -1372,7 +1366,7 @@ int   MirrorJob::Do()
++ 	 if(!script_only)
++ 	 {
++ 	    ArgV *args=new ArgV("rm");
++-	    args->Append(file->name);
+++	    args->Append(dir_file(".",file->name));
++ 	    args->seek(1);
++ 	    rmJob *j=new rmJob(source_session->Clone(),args);
++ 	    j->cmdline.set_allocated(args->Combine());
++-- 
++2.13.3
++
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
+index b6b65da..042b0aa 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
+            file://fix-gcc-6-conflicts-signbit.patch \
++           file://CVE-2018-10916.patch \
+           "
+ SRC_URI[md5sum] = "3701e7675baa5619c92622eb141c8301"
+ SRC_URI[sha256sum] = "fe441f20a9a317cfb99a8b8e628ba0457df472b6d93964d17374d5b5ebdf9280"
+-- 
+2.7.4
+
 
