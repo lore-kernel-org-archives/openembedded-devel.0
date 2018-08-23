@@ -1,51 +1,51 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
-	[209.85.167.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D0BF67933C
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 81C6879541
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 09:41:32 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id e23-v6so3558254lfc.13
+	Thu, 23 Aug 2018 09:44:49 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id s12-v6so3669151ljj.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 02:41:34 -0700 (PDT)
+	Thu, 23 Aug 2018 02:44:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
 	bh=87gbjTI8AkGn8YxBvaPsB9RLIed+GV0UBy4JKasSB8M=;
-	b=QQVGnCmI+Gtw8Ju8MGFXGClpGQoPQJkVD0L10QaneoBg094aEsrxKm0FDene6iDelq
-	yrg7F48I5yohN+MDyoDH3ti9tIIrJYjhoN1FikYOPXW7cdZLXtR0l5rxw33YhvK/VD+b
-	WmFe2eu2OIuUqOvamDpOfNQvutRT3U1j4m+gaT2D0rgcYLoFI3Xgx3iGwECE/5DNgVsJ
-	YkH7tLQfju5NpzH2nQL59VknrT3IQapV0eguAUDAAdgehUId7WFEl/rrcBe5OWeYLNKN
-	zAUxWey9TOJihajF+S47NRpSGSxgKJVe71fN6SPxkzM0pP0PqMmkV0EYW4CiHwkPDwkr
-	JdxA==
+	b=J3J9JvhA8uRAlguCpC+HobPPRPeIN4SFFgh0OQWQNBsRFxMGpT/m6E0Kc4i4hK9DPY
+	VOc6M0YLveTf1ZNWiictmtlJ9XwWwPDutnW3c6FFCVBpYxCo074N9GTQb8uHErq4SFRd
+	6I6fvbs3+AHu4Vdm95w/Hhgjp6QLV0H9p2N+RcCngnhrBnRrmu/Ar3t3OUd5fyFXEq8o
+	Mf13RcpHHfz32bnCKlTQnq3CGoT0qqqOWWnQ4Tu0kmlowEuBoVcCJ5sV138DrKBa3yfT
+	aX0O/eq5yngNfg4LiQsM+53PXPWGsqknO8RnevpypEk/wQZ9r7cdE+mHqYxLJpColVzs
+	pnVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=87gbjTI8AkGn8YxBvaPsB9RLIed+GV0UBy4JKasSB8M=;
-	b=N4CASj1cu5o7XKI18+NBx2XeqObk5Eq1rslRWR+9upZ0/WyeJZLJ1HLhGn0i6FSFqo
-	BUXf5x5jZoIgqQarOQMLL0iJOVWx2sLPXGYZ3k5Dh4GGuqXz/adVWwjRVl7nJLp+xwVr
-	5aHxl8eI/Fj9ZAkfI6rkQZ/24W5YwHNsMmPuVKBqp+VI+m4TMYZ7XRLad6ruHVNek8YD
-	yf6P/S5Tary0238qMsaXWnNi6Op32OWegXApy65y+wAPY5m11bNuggzmi830IrG1P2qs
-	CS189DsOV/lbIOXKMPNCiLsqN08c67VvtwbcBHPiu+Em1UsTPMEutKN3VXbFMjv8ySc7
-	AFQg==
-X-Gm-Message-State: AOUpUlEHG06bhKHGzIwO4u+JA8ZrPT2CTROI65MV57U7TFLVgkG/b7l+
-	kb8+x3Gfr7ZJcvsCBoT7Oi6uqwjRuLQ=
-X-Google-Smtp-Source: AA+uWPybqMLF+DfhpDSoTHKSh3uaanm4y6I71finaFJbZT0HFp+tRb3vj/P8W7l6KZE0vzqC40a12g==
-X-Received: by 2002:a19:ea52:: with SMTP id
-	i79-v6mr12608376lfh.75.1535017293066; 
-	Thu, 23 Aug 2018 02:41:33 -0700 (PDT)
+	b=bhl3QISOtvmcQDw6cyNG7EI+DDgaXPIFasrica6S5F5h7BGpT7SQfra+2NSIPDJZ86
+	T59sDw20dWHaDDcK5y85fDrJXouGyWeqk8uEdyZcPffEMowfXlkwNIts63IN5Cov7Jar
+	57VLcFCQE8JHMC+Iry8nXFghRU1lZrTcPfyTG893/XxhnZVk0JE8tuGxwdtekpDHdsQL
+	FoxlREfgaCd0BilNlx1WPuA/MaszCRlAtIxDeORjvIzc2B7L9tuADWH4N+QNN4Cy/c6A
+	LdMyDkareEQE7UWXxRc+gFZtWf6WM3ZkrPprayK52NOUO1HArezBEyK5COQM+g80Xarh
+	r+eg==
+X-Gm-Message-State: APzg51Dx8cYekNzv4CDrK6X7yzrBUGi42Yb9KHj2drCZhHRQxzcSK5nS
+	banYnzWIVrLdQzIQnXgzmIX2FpmFoKU=
+X-Google-Smtp-Source: ANB0VdZ3nEjKV5aNBo/TCB08+/i8ESk6/8Cqzw6EwIvYkW/P4mkX8jAm6TIYjB56MwbrCVprp/u2Yw==
+X-Received: by 2002:a2e:9d0c:: with SMTP id
+	t12-v6mr1756514lji.75.1535017489983; 
+	Thu, 23 Aug 2018 02:44:49 -0700 (PDT)
 Received: from scout.office.pelagicore.net ([83.218.80.243])
 	by smtp.gmail.com with ESMTPSA id
-	n23-v6sm670232ljh.77.2018.08.23.02.41.31
+	t18-v6sm660428lje.95.2018.08.23.02.44.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 Aug 2018 02:41:32 -0700 (PDT)
+	Thu, 23 Aug 2018 02:44:49 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Aug 2018 11:40:57 +0200
-Message-Id: <20180823094057.8794-1-oleksandr.kravchuk@pelagicore.com>
+Date: Thu, 23 Aug 2018 11:44:47 +0200
+Message-Id: <20180823094447.9539-1-oleksandr.kravchuk@pelagicore.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Junil Kim <jjunil79.kim@lge.com>
-Subject: [meta-oe][sumo] ltrace_git: Update SRC_URI due to inaccessible problem
+Subject: [meta-oe][rocko] ltrace_git: Update SRC_URI due to inaccessible problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2018 09:41:33 -0000
+X-List-Received-Date: Thu, 23 Aug 2018 09:44:50 -0000
 
 From: Junil Kim <logyourself@gmail.com>
 
