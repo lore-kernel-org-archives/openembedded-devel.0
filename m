@@ -1,52 +1,52 @@
 Return-Path: <jkrishnanjanappa@mvista.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F03679567
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E78F79567
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 11:21:46 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id s13-v6so2399929pfi.7
+	Thu, 23 Aug 2018 11:21:53 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id h79-v6so1672076pfk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 04:21:47 -0700 (PDT)
+	Thu, 23 Aug 2018 04:21:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mvista-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=cebTT97RlchBYLamsWS6a8pvW53ndWH/paJyOSK+7Gk=;
-	b=neHQW8y0GJ17ZaJhajfhbl+RKKbKG3PlhFPuqaSYGYBA6lE3Xap94KmPxqYSLbHnWz
-	Nm6aSgtEh52JpEf8ZSAhHe8Cc+idums3SWvdFNusrlqIHk4OuAuYQDCDMkhL1Tel2Rx8
-	5PeRx6FuMh91/OBcRmG28tqcNsLqs4cA089xpUL5Jew4vnYgH8Fjh0p0C/R8MO6HDMsH
-	WMbz2jJu2j3VWHJjqyNQPYso/Hd9/nzuw9pYcdi9l035VMS0eZJaLvrtPIzj90utKdBf
-	He5Nlcq2e8SJ/rivp6fcI46eT4jXy39poc20ZuTe4HJoGEgHrSCXftYERsmhnqCkIdIJ
-	oi6w==
+	bh=U04QuFB44k60+5PE0ZbCE9FQdJ6xDYQpxw5hYBPr8kk=;
+	b=JmN+p4ywRLysfe3aLxIitSm5hLZn1yDQC4sSbYQE6tcIdQurmnRv0CafJBX2qZkeDv
+	bm12fjn40D0pKzFHjkbe3tlYTv2l7gncPUaZTd7v0SZyemFuWT9t3bZQZ4cwO1GCT4uG
+	UpFsz4xGtNZlGJuTEkqup1gMsb8fd8Mf3q54QQjY01TsD88GmruvFAmj4K/56A9PB+Bq
+	cc4QKRjd+UR2F+FHhJIAuldLL6e0+mkOk9f6h2UuUcE/LAI3V2aINvTDIlcU1QAifFLh
+	DPCpxsQ3ND1hhM9nVTFQ2Z1RNwgK7frwCJTxwN+hypxfkUgFfRfnnoR1lfwXxk2dPyXy
+	a4YQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=cebTT97RlchBYLamsWS6a8pvW53ndWH/paJyOSK+7Gk=;
-	b=Rjy3RpZLpFvzhUNijTGI6bGK5IL85ufEePeW3uZkOBWryseatt8+vaZhrEGdg5daxB
-	RonF6RQSlsmUZ7djy+HdNQCAETpAvwkzy79DZ0Jxv5VND7VGRPQNJ3RZWnLeKPrJbVZZ
-	ITRISeqPiYH0UjON6Zxmf1fIKIz4Dcv6ZSYq9vZR0AbFboccAq32gZrczz+TOSgJAstr
-	L/VtTi9tsfU1qNltrRANH8UDUZKYGGawwZIa/HbLYWMVcfYvfNqQtmR+N5hCz07oRSkX
-	WDlX1KY+iEgDpZ2GUPGzcn4P0wLyy6jRTik6f+ixjtyjpy8XhLM51CS2FSAoGnMW7DdT
-	DrIA==
-X-Gm-Message-State: AOUpUlHQ4snpetJo4JOfSVXyX8K1BMQhcUYJF7WdlCIgNDpS2SnAkQlM
-	mjc1zGR7nIbHG5Q8BOQ5erdPFBhk3Y+8/g==
-X-Google-Smtp-Source: AA+uWPwyv0rBrzVrjCYn0CZsTqQLSb62CpLIP7xIVXfy8AGyn2KtgadL37vAgzuWH7Go5IQG/E3Xvg==
-X-Received: by 2002:a62:9992:: with SMTP id
-	t18-v6mr62058177pfk.239.1535023307193; 
-	Thu, 23 Aug 2018 04:21:47 -0700 (PDT)
+	bh=U04QuFB44k60+5PE0ZbCE9FQdJ6xDYQpxw5hYBPr8kk=;
+	b=riJWwyYInmlZJVFFF/LCl93rX1qySYmD9cwanVlOyXTooEyeqRWUSMpZpvXA/9JcoJ
+	SXJyFZAydmvMcT+YcrNm5XgGQGbNH524s5siPqbG0yxQOtYlWBryCUQ/D4z33R2HUUO4
+	DthTlIinJNuHn017VwT+p/vC7mq7f6FT/mRTnn70J2RlqxT3LHqaMrkqVpOXIUl7Cyrk
+	W8s5RjVg7dp2rOGwwJbI7BLute4ItVuRufs9AU4tkZ63gtrmWACPGpTCqq3tmZsxKyZx
+	SzeRKOJmQU/YeXdzBd0iBdj/8UZ5TsRR6+tkBdv8baK+3w8AOy080bIJgPCsbLB8ogig
+	cv6w==
+X-Gm-Message-State: APzg51DXhFp+R52df+5P8IoA+B/5XL54gonjbWF64Kayz0zgiPu2bqLZ
+	pGeP/0ZOcpmi1qejZHUPfCpwySKmsvQPkA==
+X-Google-Smtp-Source: ANB0VdYPNCdPpZ+G1FutC4mQQltyoynfPzUoGSKevRmPRXilextSBSnxA5lfTkAImL4LjXz9i8jBSw==
+X-Received: by 2002:a63:d20e:: with SMTP id
+	a14-v6mr5407593pgg.226.1535023314286; 
+	Thu, 23 Aug 2018 04:21:54 -0700 (PDT)
 Received: from jkrishnanjanappa-desktop.mvista.com ([111.93.218.67])
 	by smtp.gmail.com with ESMTPSA id
-	z5-v6sm5856811pfh.83.2018.08.23.04.21.45
+	z5-v6sm5856811pfh.83.2018.08.23.04.21.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 23 Aug 2018 04:21:46 -0700 (PDT)
+	Thu, 23 Aug 2018 04:21:53 -0700 (PDT)
 From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Aug 2018 16:51:23 +0530
-Message-Id: <1535023284-8126-2-git-send-email-jkrishnanjanappa@mvista.com>
+Date: Thu, 23 Aug 2018 16:51:24 +0530
+Message-Id: <1535023284-8126-3-git-send-email-jkrishnanjanappa@mvista.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1535023284-8126-1-git-send-email-jkrishnanjanappa@mvista.com>
 References: <1535023284-8126-1-git-send-email-jkrishnanjanappa@mvista.com>
-Subject: [meta-filesystems][ROCKO][SUMO][PATCH] fuse: CVE-2018-10906
+Subject: [meta-networking][ROCKO][PATCH] lftp: CVE-2018-10916
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,174 +59,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2018 11:21:46 -0000
+X-List-Received-Date: Thu, 23 Aug 2018 11:21:53 -0000
 
-* CVE-2018-10906-1:
-
-fusermount: don't feed "escaped commas" into mount options
-
-The old code permits the following behavior:
-
-$ _FUSE_COMMFD=10000 priv_strace -etrace=mount -s200 fusermount -o 'foobar=\,allow_other' mount
-mount("/dev/fuse", ".", "fuse", MS_NOSUID|MS_NODEV, "foobar=\\,allow_other,fd=3,rootmode=40000,user_id=1000,group_id=1000") = -1 EINVAL (Invalid argument)
-
-However, backslashes do not have any special meaning for the kernel here.
-
-As it happens, you can't abuse this because there is no FUSE mount option
-that takes a string value that can contain backslashes; but this is very
-brittle. Don't interpret "escape characters" in places where they don't
-work.
-
-* CVE-2018-10906-2:
-
-fusermount: refuse unknown options
-
-Blacklists are notoriously fragile; especially if the kernel wishes to add
-some security-critical mount option at a later date, all existing systems
-with older versions of fusermount installed will suddenly have a security
-problem.
-Additionally, if the kernel's option parsing became a tiny bit laxer, the
-blacklist could probably be bypassed.
-
-Whitelist known-harmless flags instead, even if it's slightly more
-inconvenient.
-
-Affects fuse < 2.9.8 and fuse < 3.2.5
+Affects lftp <= 4.8.3
 
 Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 ---
- .../fuse/files/CVE-2018-10906-1.patch              | 52 ++++++++++++++++++++++
- .../fuse/files/CVE-2018-10906-2.patch              | 48 ++++++++++++++++++++
- .../recipes-support/fuse/fuse_2.9.7.bb             |  2 +
- 3 files changed, 102 insertions(+)
- create mode 100644 meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-1.patch
- create mode 100644 meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-2.patch
+ .../lftp/files/CVE-2018-10916.patch                | 82 ++++++++++++++++++++++
+ .../recipes-connectivity/lftp/lftp_4.7.7.bb        |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
 
-diff --git a/meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-1.patch b/meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-1.patch
+diff --git a/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch b/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
 new file mode 100644
-index 0000000..83bef30
+index 0000000..213403e
 --- /dev/null
-+++ b/meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-1.patch
-@@ -0,0 +1,52 @@
-+From 28bdae3d113ef479c1660a581ef720cdc33bf466 Mon Sep 17 00:00:00 2001
-+From: Jann Horn <jannh@google.com>
-+Date: Fri, 13 Jul 2018 15:15:36 -0700
-+Subject: [PATCH] fusermount: don't feed "escaped commas" into mount options
++++ b/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
+@@ -0,0 +1,82 @@
++From a27e07d90a4608ceaf928b1babb27d4d803e1992 Mon Sep 17 00:00:00 2001
++From: "Alexander V. Lukyanov" <lavv17f@gmail.com>
++Date: Tue, 31 Jul 2018 10:57:35 +0300
++Subject: [PATCH] mirror: prepend ./ to rm and chmod arguments to avoid URL
++ recognition (fix #452)
 +
-+The old code permits the following behavior:
-+
-+$ _FUSE_COMMFD=10000 priv_strace -etrace=mount -s200 fusermount -o 'foobar=\,allow_other' mount
-+mount("/dev/fuse", ".", "fuse", MS_NOSUID|MS_NODEV, "foobar=\\,allow_other,fd=3,rootmode=40000,user_id=1000,group_id=1000") = -1 EINVAL (Invalid argument)
-+
-+However, backslashes do not have any special meaning for the kernel here.
-+
-+As it happens, you can't abuse this because there is no FUSE mount option
-+that takes a string value that can contain backslashes; but this is very
-+brittle. Don't interpret "escape characters" in places where they don't
-+work.
-+
-+CVE: CVE-2018-10906
-+Upstream-Status: Backport [https://github.com/libfuse/libfuse/commit/28bdae3d113ef479c1660a581ef720cdc33bf466]
++CVE: CVE-2018-10916
++Upstream-Status: Backport from v4.8.4
 +
 +Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 +---
-+ util/fusermount.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
++ src/MirrorJob.cc | 24 +++++++++---------------
++ 1 file changed, 9 insertions(+), 15 deletions(-)
 +
-+diff --git a/util/fusermount.c b/util/fusermount.c
-+index 0e1d34d..143bd4a 100644
-+--- a/util/fusermount.c
-++++ b/util/fusermount.c
-+@@ -29,6 +29,7 @@
-+ #include <sys/socket.h>
-+ #include <sys/utsname.h>
-+ #include <sched.h>
-++#include <stdbool.h>
-+ 
-+ #define FUSE_COMMFD_ENV		"_FUSE_COMMFD"
-+ 
-+@@ -754,8 +755,10 @@ static int do_mount(const char *mnt, char **typep, mode_t rootmode,
-+ 		unsigned len;
-+ 		const char *fsname_str = "fsname=";
-+ 		const char *subtype_str = "subtype=";
-++		bool escape_ok = begins_with(s, fsname_str) ||
-++				 begins_with(s, subtype_str);
-+ 		for (len = 0; s[len]; len++) {
-+-			if (s[len] == '\\' && s[len + 1])
-++			if (escape_ok && s[len] == '\\' && s[len + 1])
-+ 				len++;
-+ 			else if (s[len] == ',')
-+ 				break;
++diff --git a/src/MirrorJob.cc b/src/MirrorJob.cc
++index cf106c40..0be45431 100644
++--- a/src/MirrorJob.cc
+++++ b/src/MirrorJob.cc
++@@ -1164,24 +1164,21 @@ int   MirrorJob::Do()
++ 	    }
++ 	    continue;
++ 	 }
+++	 bool use_rmdir = (file->TypeIs(file->DIRECTORY)
+++			   && recursion_mode==RECURSION_NEVER);
++ 	 if(script)
++ 	 {
++-	    ArgV args("rm");
++-	    if(file->TypeIs(file->DIRECTORY))
++-	    {
++-	       if(recursion_mode==RECURSION_NEVER)
++-		  args.setarg(0,"rmdir");
++-	       else
++-		  args.Append("-r");
++-	    }
+++	    ArgV args(use_rmdir?"rmdir":"rm");
+++	    if(file->TypeIs(file->DIRECTORY) && !use_rmdir)
+++	       args.Append("-r");
++ 	    args.Append(target_session->GetFileURL(file->name));
++ 	    xstring_ca cmd(args.CombineQuoted());
++ 	    fprintf(script,"%s\n",cmd.get());
++ 	 }
++ 	 if(!script_only)
++ 	 {
++-	    ArgV *args=new ArgV("rm");
++-	    args->Append(file->name);
+++	    ArgV *args=new ArgV(use_rmdir?"rmdir":"rm");
+++	    args->Append(dir_file(".",file->name));
++ 	    args->seek(1);
++ 	    rmJob *j=new rmJob(target_session->Clone(),args);
++ 	    j->cmdline.set_allocated(args->Combine());
++@@ -1185,10 +1182,7 @@ int   MirrorJob::Do()
++ 	    if(file->TypeIs(file->DIRECTORY))
++ 	    {
++ 	       if(recursion_mode==RECURSION_NEVER)
++-	       {
++-		  args->setarg(0,"rmdir");
++ 		  j->Rmdir();
++-	       }
++ 	       else
++ 		  j->Recurse();
++ 	    }
++@@ -1252,7 +1246,7 @@ int   MirrorJob::Do()
++ 	 if(!script_only)
++ 	 {
++ 	    ArgV *a=new ArgV("chmod");
++-	    a->Append(file->name);
+++	    a->Append(dir_file(".",file->name));
++ 	    a->seek(1);
++ 	    ChmodJob *cj=new ChmodJob(target_session->Clone(),
++ 				 file->mode&~mode_mask,a);
++@@ -1372,7 +1366,7 @@ int   MirrorJob::Do()
++ 	 if(!script_only)
++ 	 {
++ 	    ArgV *args=new ArgV("rm");
++-	    args->Append(file->name);
+++	    args->Append(dir_file(".",file->name));
++ 	    args->seek(1);
++ 	    rmJob *j=new rmJob(source_session->Clone(),args);
++ 	    j->cmdline.set_allocated(args->Combine());
 +-- 
 +2.13.3
 +
-diff --git a/meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-2.patch b/meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-2.patch
-new file mode 100644
-index 0000000..597e12b
---- /dev/null
-+++ b/meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-2.patch
-@@ -0,0 +1,48 @@
-+From 5018a0c016495155ee598b7e0167b43d5d902414 Mon Sep 17 00:00:00 2001
-+From: Jann Horn <jannh@google.com>
-+Date: Sat, 14 Jul 2018 03:47:50 -0700
-+Subject: [PATCH] fusermount: refuse unknown options
-+
-+Blacklists are notoriously fragile; especially if the kernel wishes to add
-+some security-critical mount option at a later date, all existing systems
-+with older versions of fusermount installed will suddenly have a security
-+problem.
-+Additionally, if the kernel's option parsing became a tiny bit laxer, the
-+blacklist could probably be bypassed.
-+
-+Whitelist known-harmless flags instead, even if it's slightly more
-+inconvenient.
-+
-+CVE: CVE-2018-10906
-+Upstream-Status: Backport [https://github.com/libfuse/libfuse/commit/5018a0c016495155ee598b7e0167b43d5d902414]
-+
-+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-+---
-+ util/fusermount.c | 8 +++++++-
-+ 1 file changed, 7 insertions(+), 1 deletion(-)
-+
-+diff --git a/util/fusermount.c b/util/fusermount.c
-+index 4e0f51a..2792407 100644
-+--- a/util/fusermount.c
-++++ b/util/fusermount.c
-+@@ -819,10 +819,16 @@ static int do_mount(const char *mnt, char **typep, mode_t rootmode,
-+ 						flags |= flag;
-+ 					else
-+ 						flags  &= ~flag;
-+-				} else {
-++				} else if (opt_eq(s, len, "default_permissions") ||
-++					   opt_eq(s, len, "allow_other") ||
-++					   begins_with(s, "max_read=") ||
-++					   begins_with(s, "blksize=")) {
-+ 					memcpy(d, s, len);
-+ 					d += len;
-+ 					*d++ = ',';
-++				} else {
-++					fprintf(stderr, "%s: unknown option '%.*s'\n", progname, len, s);
-++					exit(1);
-+ 				}
-+ 			}
-+ 		}
-+-- 
-+2.13.3
-+
-diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
-index 202d4c3..1eb9b70 100644
---- a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
-@@ -15,6 +15,8 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
-            file://aarch64.patch \
-            file://0001-fuse-fix-the-return-value-of-help-option.patch \
-            file://fuse.conf \
-+           file://CVE-2018-10906-1.patch \
-+           file://CVE-2018-10906-2.patch \
- "
- SRC_URI[md5sum] = "9bd4ce8184745fd3d000ca2692adacdb"
- SRC_URI[sha256sum] = "832432d1ad4f833c20e13b57cf40ce5277a9d33e483205fc63c78111b3358874"
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
+index b6b65da..042b0aa 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
+            file://fix-gcc-6-conflicts-signbit.patch \
++           file://CVE-2018-10916.patch \
+           "
+ SRC_URI[md5sum] = "3701e7675baa5619c92622eb141c8301"
+ SRC_URI[sha256sum] = "fe441f20a9a317cfb99a8b8e628ba0457df472b6d93964d17374d5b5ebdf9280"
 -- 
 2.7.4
 
