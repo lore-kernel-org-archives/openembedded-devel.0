@@ -1,49 +1,41 @@
-Return-Path: <logyourself@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CA9679558
+Return-Path: <johannes.pointner@br-automation.com>
+X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 23 Aug 2018 11:19:59 UTC
+Received: from mail2.br-automation.com (mail2.br-automation.com
+	[213.33.116.61])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B78A762B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 10:00:45 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id s13-v6so2301137pfi.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 03:00:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=v+1rTE+7i4dpgB7bKekry0h7g9rp8OBeGDdcMxljwEo=;
-	b=R8SEcuaG4WWUZR2k+LsZuZXYzFsmA2JJEqcceLp30OrDumB/JSNLFwxAsSIGWoD8FG
-	Qcm7UgQRoL13wNJsw6lDGyrdr/3sGnxjXmCHlqTrZemOBpajKsgl7DltqyODrQPK0Oe+
-	/y0KoGdXGO4wgHVESQmIuCCNc3bo0UuQpjWcUVU2jxjPISuHzcQ+cSxPbSI8gvvWBPB3
-	72jxySkyduyVRYXA/o6zcAEZM0Vz714Emn95Z88l6uH0cY1lDlnNNJ8NY+xh4Oo1EkyD
-	ipsom7zZkeQiNPr3Eqc1YBWMBjvVlwRns2aSuQOXlYnR6nXeKeBFj9PdMLHSupopTzKR
-	MFOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=v+1rTE+7i4dpgB7bKekry0h7g9rp8OBeGDdcMxljwEo=;
-	b=TOLH/7AjGXPLPNGdsGDMhuBWH3u2nZiUXSdnN1J3d+JUKn34yXfPssKjV3KDgaI7/J
-	Ta+mOnb2gYMrMwYN6yAh0cXJcdNWxSCwbJkKK+MGczvipjaRI8rvNkBsEfCzufwxP6og
-	5MitLsSG3Le7oOaA6V6zVXzHGkfziZa0ri4+kzNRBsicoErHMOI6jnuBHbBgIKk2hNOl
-	5x6f0E1N0cNVbV792jnWwaaqh/V/nLGckBDb5tMBShTbsnLDnYTHGm1zmqD+lcM7psIS
-	T/qgxcyiDuV435tz20XCn3ZtLqLcfFEVlC1gOGvmnHLAm2kVDk/zX4+ocAvVxm8dPpkH
-	khHg==
-X-Gm-Message-State: AOUpUlGadg70uTrqVnMm9TnAgeKmnmCY9TGWL/+QfDjoDZLHrqHFj+c9
-	FGfTmMqvTk6ZERimUOyqMZGMAVb34R4=
-X-Google-Smtp-Source: AA+uWPyKIQV+gQkRUaxrKCs5GUQR38UjahJuZnwzPkVeka+P9bqqZHsptGKbnuLrTHNSgoVS862eCQ==
-X-Received: by 2002:a62:6602:: with SMTP id
-	a2-v6mr62096490pfc.159.1535018446059; 
-	Thu, 23 Aug 2018 03:00:46 -0700 (PDT)
-Received: from localhost.localdomain ([182.212.44.138])
-	by smtp.gmail.com with ESMTPSA id
-	i3-v6sm4255700pgq.35.2018.08.23.03.00.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 Aug 2018 03:00:45 -0700 (PDT)
-From: Junil Kim <logyourself@gmail.com>
+	Thu, 23 Aug 2018 11:19:59 +0000 (UTC)
+X-AuditID: c0a80110-71dff70000000f26-a6-5b7e94db5c09
+Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
+	by mail2.br-automation.com () with SMTP id CF.BE.03878.BD49E7B5;
+	Thu, 23 Aug 2018 13:04:59 +0200 (CEST)
+MIME-Version: 1.0
+From: Johannes Pointner <johannes.pointner@br-automation.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Aug 2018 19:00:37 +0900
-Message-Id: <20180823100037.31812-1-logyourself@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Junil Kim <jjunil79.kim@lge.com>
-Subject: [meta-oe, morty][PATCH] ltrace_git: Update SRC_URI due to inaccessible problem
+Date: Thu, 23 Aug 2018 13:04:57 +0200
+Message-Id: <20180823110457.13293-1-johannes.pointner@br-automation.com>
+X-Mailer: git-send-email 2.18.0
+X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 23/08/2018 13:05:02,
+	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 23/08/2018 13:05:02,
+	Serialize complete at 23/08/2018 13:05:02,
+	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
+	9.0.1FP5|November 22, 2015) at 23.08.2018 13:04:58
+X-TNEFEvaluated: 1
+X-Disclaimed: 55583
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpnluLIzCtJLcpLzFFi42I5sILRRvf2lLpog3mHeC0uHl7K7MDocW7j
+	CsYAxigum5TUnMyy1CJ9uwSujG8/9rEWTOeq6Pxzh62BcTpnFyMHh4SAicSNs2JdjFwcQgKb
+	GSUudDezdDFycvAKCEqcnPkEzGYTsJU4MuErmC0ioCvx8cNcRhCbWcBa4v3yBawgtrCAjcTa
+	vXfB4iwCqhL3FvxkBZnPK+AhsXEHJ0S5tsSyha+ZQWwJAXmJh8fbGUH2Sgh0MEt83jAHKiEk
+	cXrxWShbWGLqk5PsExj5ZiE5aRaSWQsYmVYxiucmZuYY6SUV6SaWluTnJpZk5ufpJefnbmKE
+	BI/ADsbdb7QPMQpwMCrx8O7Lq4sWYk0sK67MPcQowcGsJML7fHNNtBBvSmJlVWpRfnxRaU5q
+	8SFGaQ4WJXHepOjQaCGB9MSS1OzU1ILUIpgsEwenVAMj69aVT+98N7L03urY2sYuVH+yqPOx
+	jZa1n+ZBnyr1osdxWR/nvo7WnrNk0p1DrcfnLPRfmHG1PHNBpHcEf3PWKZ76GCZ74+ajV3gv
+	XLCeqpq4ULC/av3G+/XXlfapnszukVmyKtpd0rE24J3mrfWnmh9Osmm9mr/q5Y+Nj1Yt+WLj
+	XqxybO4TJZbijERDLeai4kQAktBUxRoCAAA=
+Subject: [meta-networking][PATCH] mbedtls: upgrade to 2.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,31 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2018 10:00:45 -0000
+X-List-Received-Date: Thu, 23 Aug 2018 11:20:00 -0000
+Content-Transfer-Encoding: quoted-printable
 
-Existing URI service was closed and fetch error occurred.
-Change existing repository to another mirrored SRC URI.
-
-Signed-off-by: Junil Kim <jjunil79.kim@lge.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
 ---
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../mbedtls/{mbedtls=5F2.11.0.bb =3D> mbedtls=5F2.12.0.bb}          | 4 ++=
+--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls=5F2.11.0.bb =
+=3D> mbedtls=5F2.12.0.bb} (92%)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index 8ae018503..097723802 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -15,7 +15,7 @@ SRCREV = "01b10e191e99d8cb147e5a2b7da8196e0ec6fb94"
- 
- DEPENDS = "elfutils"
- RDEPENDS_${PN} = "elfutils"
--SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
-+SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http \
-            file://configure-allow-to-disable-selinux-support.patch \
-            file://0001-replace-readdir_r-with-readdir.patch \
-           "
--- 
-2.17.1
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.11.0.=
+bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.12.0.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.11.0.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.12.0.bb
+index 71b1f8023..71380ba19 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.11.0.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls=5F2.12.0.bb
+@@ -24,8 +24,8 @@ SECTION =3D "libs"
+=20
+ SRC=5FURI =3D "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
+=20
+-SRC=5FURI[md5sum] =3D "3b133b9b4cf0ccf3ac1c91436771bfa5"
+-SRC=5FURI[sha256sum] =3D "2a87061ad770e6d019b3b9cd27ea42a58bd0affccc4c6bfe=
+4f5f0eee9ebf8aa8"
++SRC=5FURI[md5sum] =3D "90b55ca8c726f6612de8a31a2a090e94"
++SRC=5FURI[sha256sum] =3D "a2bed048f41a19ec7b4dd2e96649145bbd68a6955c3b51ae=
+b7ccbf8908c3ce97"
+=20
+ inherit cmake
+=20
+--=20
+2.18.0
+
 
 
