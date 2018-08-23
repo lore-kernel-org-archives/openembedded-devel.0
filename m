@@ -1,52 +1,49 @@
 Return-Path: <jkrishnanjanappa@mvista.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E78F79567
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 737AA793F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 11:21:53 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id h79-v6so1672076pfk.8
+	Thu, 23 Aug 2018 11:25:37 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id j26-v6so2549361pfi.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 04:21:54 -0700 (PDT)
+	Thu, 23 Aug 2018 04:25:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=U04QuFB44k60+5PE0ZbCE9FQdJ6xDYQpxw5hYBPr8kk=;
-	b=JmN+p4ywRLysfe3aLxIitSm5hLZn1yDQC4sSbYQE6tcIdQurmnRv0CafJBX2qZkeDv
-	bm12fjn40D0pKzFHjkbe3tlYTv2l7gncPUaZTd7v0SZyemFuWT9t3bZQZ4cwO1GCT4uG
-	UpFsz4xGtNZlGJuTEkqup1gMsb8fd8Mf3q54QQjY01TsD88GmruvFAmj4K/56A9PB+Bq
-	cc4QKRjd+UR2F+FHhJIAuldLL6e0+mkOk9f6h2UuUcE/LAI3V2aINvTDIlcU1QAifFLh
-	DPCpxsQ3ND1hhM9nVTFQ2Z1RNwgK7frwCJTxwN+hypxfkUgFfRfnnoR1lfwXxk2dPyXy
-	a4YQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=k6reiVXvALPVw5M6vcxm58AMYfJhNDLmmdGozaPwYeU=;
+	b=ggLx0JrbfxgvnzKcHII03H5l1fg+O+75uZp+dNs2FCtegWQ0W0nvTf83jaI2DsYCwL
+	qTCAGxWQEb4OOoZho1DQ12UDTa2bMJIM+HqBE1cf3Hbofps2OfCW6cWyqXsvn07JKcWH
+	i5YYvR7/OyVJUnG6FJAFO50IEkfxY9JHYYFS8uEoNygweThcQCqrrcIySSe6xaEh2wac
+	QjFD2/MAfrqbc1U+/xglqygjhVeyijLrEFIoUxNZFYBuf9ARpivPaBn93wzT7avmqBam
+	3kCUljy2Yxb6Nf3ocQHUqtSDNZ6DciJZebglseQrKSX7/BVrUO9LVM7lNsbtgEotIyP0
+	WLeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=U04QuFB44k60+5PE0ZbCE9FQdJ6xDYQpxw5hYBPr8kk=;
-	b=riJWwyYInmlZJVFFF/LCl93rX1qySYmD9cwanVlOyXTooEyeqRWUSMpZpvXA/9JcoJ
-	SXJyFZAydmvMcT+YcrNm5XgGQGbNH524s5siPqbG0yxQOtYlWBryCUQ/D4z33R2HUUO4
-	DthTlIinJNuHn017VwT+p/vC7mq7f6FT/mRTnn70J2RlqxT3LHqaMrkqVpOXIUl7Cyrk
-	W8s5RjVg7dp2rOGwwJbI7BLute4ItVuRufs9AU4tkZ63gtrmWACPGpTCqq3tmZsxKyZx
-	SzeRKOJmQU/YeXdzBd0iBdj/8UZ5TsRR6+tkBdv8baK+3w8AOy080bIJgPCsbLB8ogig
-	cv6w==
-X-Gm-Message-State: APzg51DXhFp+R52df+5P8IoA+B/5XL54gonjbWF64Kayz0zgiPu2bqLZ
-	pGeP/0ZOcpmi1qejZHUPfCpwySKmsvQPkA==
-X-Google-Smtp-Source: ANB0VdYPNCdPpZ+G1FutC4mQQltyoynfPzUoGSKevRmPRXilextSBSnxA5lfTkAImL4LjXz9i8jBSw==
-X-Received: by 2002:a63:d20e:: with SMTP id
-	a14-v6mr5407593pgg.226.1535023314286; 
-	Thu, 23 Aug 2018 04:21:54 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=k6reiVXvALPVw5M6vcxm58AMYfJhNDLmmdGozaPwYeU=;
+	b=B7buxGSXxsleSUlcY+kmpW8uVDjJXXKphUU2stpDrdy7z26oXbH4x1DEhUpx80Bb5n
+	M9a+QQWcXokuN+XHAifnWPQfY1PN0CEtp6vMFllwlW/LGMzcBiNIOeZX7TeICTWlg3Lh
+	DJ+/nY+0yXK82lWMP3Egv3ISBENb+2j3Os4Nusjea2q6x6m0GNLUotdjv58DMYo36JYD
+	5Pq/H7uC2k9oH5ONullxRV9ywXYg3CS94XU26GLERUpG7Cd9Wc6hcMEiydlnIu23m6x5
+	EoUUNEw16GEj7oOcmqgNXFkhivBIklQXEdhXBr+LIr+yRp6bkMbx8iUjVDGZFr6itZxK
+	HJ0Q==
+X-Gm-Message-State: AOUpUlECB1+bg1Md9ChviOzYnI8ZuglxYoXHg2ssYWBxuLymuZg7QpxU
+	MqKECUlH/bOGu/2gmM7dmrqL96wD9j18OQ==
+X-Google-Smtp-Source: AA+uWPztpmaAWhdsK743xJy1/fn03WArYrMobVifULSqCzsIp6ceeogeuMTCWrLwbLfELv9MalFLcA==
+X-Received: by 2002:a63:a919:: with SMTP id
+	u25-v6mr56517647pge.211.1535023538255; 
+	Thu, 23 Aug 2018 04:25:38 -0700 (PDT)
 Received: from jkrishnanjanappa-desktop.mvista.com ([111.93.218.67])
 	by smtp.gmail.com with ESMTPSA id
-	z5-v6sm5856811pfh.83.2018.08.23.04.21.52
+	t9-v6sm5248244pgi.87.2018.08.23.04.25.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 23 Aug 2018 04:21:53 -0700 (PDT)
+	Thu, 23 Aug 2018 04:25:37 -0700 (PDT)
 From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Aug 2018 16:51:24 +0530
-Message-Id: <1535023284-8126-3-git-send-email-jkrishnanjanappa@mvista.com>
+Date: Thu, 23 Aug 2018 16:55:32 +0530
+Message-Id: <1535023532-9876-1-git-send-email-jkrishnanjanappa@mvista.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1535023284-8126-1-git-send-email-jkrishnanjanappa@mvista.com>
-References: <1535023284-8126-1-git-send-email-jkrishnanjanappa@mvista.com>
-Subject: [meta-networking][ROCKO][PATCH] lftp: CVE-2018-10916
+Subject: [meta-networking][PATCH] lftp: CVE-2018-10916
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,20 +56,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Aug 2018 11:21:53 -0000
+X-List-Received-Date: Thu, 23 Aug 2018 11:25:37 -0000
 
 Affects lftp <= 4.8.3
 
 Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 ---
  .../lftp/files/CVE-2018-10916.patch                | 82 ++++++++++++++++++++++
- .../recipes-connectivity/lftp/lftp_4.7.7.bb        |  1 +
+ .../recipes-connectivity/lftp/lftp_4.8.3.bb        |  1 +
  2 files changed, 83 insertions(+)
  create mode 100644 meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
 
 diff --git a/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch b/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
 new file mode 100644
-index 0000000..213403e
+index 0000000..c0e87d9
 --- /dev/null
 +++ b/meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
 @@ -0,0 +1,82 @@
@@ -125,8 +122,8 @@ index 0000000..213403e
 ++	    args->Append(dir_file(".",file->name));
 + 	    args->seek(1);
 + 	    rmJob *j=new rmJob(target_session->Clone(),args);
-+ 	    j->cmdline.set_allocated(args->Combine());
-+@@ -1185,10 +1182,7 @@ int   MirrorJob::Do()
++ 	    args->CombineTo(j->cmdline);
++@@ -1189,10 +1186,7 @@ int   MirrorJob::Do()
 + 	    if(file->TypeIs(file->DIRECTORY))
 + 	    {
 + 	       if(recursion_mode==RECURSION_NEVER)
@@ -137,7 +134,7 @@ index 0000000..213403e
 + 	       else
 + 		  j->Recurse();
 + 	    }
-+@@ -1252,7 +1246,7 @@ int   MirrorJob::Do()
++@@ -1258,7 +1252,7 @@ int   MirrorJob::Do()
 + 	 if(!script_only)
 + 	 {
 + 	    ArgV *a=new ArgV("chmod");
@@ -146,7 +143,7 @@ index 0000000..213403e
 + 	    a->seek(1);
 + 	    ChmodJob *cj=new ChmodJob(target_session->Clone(),
 + 				 file->mode&~mode_mask,a);
-+@@ -1372,7 +1366,7 @@ int   MirrorJob::Do()
++@@ -1380,7 +1374,7 @@ int   MirrorJob::Do()
 + 	 if(!script_only)
 + 	 {
 + 	    ArgV *args=new ArgV("rm");
@@ -154,22 +151,22 @@ index 0000000..213403e
 ++	    args->Append(dir_file(".",file->name));
 + 	    args->seek(1);
 + 	    rmJob *j=new rmJob(source_session->Clone(),args);
-+ 	    j->cmdline.set_allocated(args->Combine());
++ 	    args->CombineTo(j->cmdline);
 +-- 
 +2.13.3
 +
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
-index b6b65da..042b0aa 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.7.bb
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
+index c6e3727..e0b6beb 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.3.bb
 @@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
  SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
             file://fix-gcc-6-conflicts-signbit.patch \
 +           file://CVE-2018-10916.patch \
            "
- SRC_URI[md5sum] = "3701e7675baa5619c92622eb141c8301"
- SRC_URI[sha256sum] = "fe441f20a9a317cfb99a8b8e628ba0457df472b6d93964d17374d5b5ebdf9280"
+ SRC_URI[md5sum] = "12b1fcbf13f41e9cdb0903fc670fa1f1"
+ SRC_URI[sha256sum] = "c4159f056afee41866a6c2d639655bc351e6d3486bbe7758eaedb24f6a4239d5"
 -- 
 2.7.4
 
