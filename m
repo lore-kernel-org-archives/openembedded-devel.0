@@ -1,33 +1,24 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id A7603795DE
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B3BB795AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 08:40:13 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A9B262E62375;
-	Fri, 24 Aug 2018 10:40:13 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2EAE02E62374;
-	Fri, 24 Aug 2018 10:40:13 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham autolearn_force=no version=3.4.0
-Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Fri, 24 Aug 2018 10:40:13 +0200 (CEST)
-Date: Fri, 24 Aug 2018 10:40:03 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <20180824084003.GA11185@mail.itconsulting-heinold.de>
-References: <20180824071029.27238-1-richard.leitner@skidata.com>
+	Fri, 24 Aug 2018 09:16:23 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7O9GNbP017696
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Aug 2018 02:16:24 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.399.0; Fri, 24 Aug 2018 02:16:17 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 Aug 2018 17:16:16 +0800
+Message-ID: <1535102176-216187-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20180824071029.27238-1-richard.leitner@skidata.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH] oeqa: runtime: java: enable test_java8_jar_comp_mode for armv7
+Subject: [PATCH][meta-networking] net-snmp: Fix host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,74 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2018 08:40:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Aug 2018 09:16:23 -0000
+Content-Type: text/plain
 
-On Fri, Aug 24, 2018 at 09:10:29AM +0200, Richard Leitner wrote:
-> As commit "openjdk-8: add aarch32 port 8u172b11" introduced support for
-> the aarch32 port of openjdk-8 enable the test_java8_jar_comp_mode test
-> for ARMv7 machines. This is done by skipping the test only for machines
-> which have armv{4-6} in their tunes.
-> 
-> Furthermore update the "Known Limitations" section in the README.
-> 
-> This patch depends on OE-Core rev 10b935c713748346aea6c36c2f41e0ae6c320821,
-> named "oeqa/core/decorator: add skipIfInDataVar"
-> 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
->  README                         | 2 +-
->  lib/oeqa/runtime/cases/java.py | 6 ++++--
->  2 files changed, 5 insertions(+), 3 deletions(-)
-> 
-> diff --git a/README b/README
-> index f7b8782..0f510d7 100644
-> --- a/README
-> +++ b/README
-> @@ -78,7 +78,7 @@ Known Limitations/Bugs
->  OpenJDK:
->  	The following OpenJDK version/target-architecture combinations currently
->  	only support "interpreted mode":
-> -		openjdk-8 on arm
-> +		openjdk-8 on arm except armv7
->  		openjdk-7 on aarch64
->  		openjdk-7 on x86
->  		openjdk-7 on x86-64
-> diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
-> index f2375a4..661b208 100644
-> --- a/lib/oeqa/runtime/cases/java.py
-> +++ b/lib/oeqa/runtime/cases/java.py
-> @@ -3,7 +3,7 @@ import os
->  from oeqa.runtime.case import OERuntimeTestCase
->  from oeqa.core.decorator.depends import OETestDepends
->  from oeqa.core.decorator.oeid import OETestID
-> -from oeqa.core.decorator.data import skipIfDataVar
-> +from oeqa.core.decorator.data import skipIfDataVar, skipIfInDataVar
->  from oeqa.runtime.decorator.package import OEHasPackage
->  
->  class JavaTest(OERuntimeTestCase):
-> @@ -70,7 +70,9 @@ class JavaTest(OERuntimeTestCase):
->      # test for now.
->      @OEHasPackage(["openjre-8", "openjdk-8"])
->      @OETestDepends(['java.JavaTest.test_java_exists'])
-> -    @skipIfDataVar('ARCH', 'arm', 'OpenJDK 8 compiled mode not yet supported for arm')
-> +    @skipIfInDataVar('TUNE_FEATURES', 'armv4', 'OpenJDK 8 compiled mode not yet supported for armv4')
-> +    @skipIfInDataVar('TUNE_FEATURES', 'armv5', 'OpenJDK 8 compiled mode not yet supported for armv5')
-> +    @skipIfInDataVar('TUNE_FEATURES', 'armv6', 'OpenJDK 8 compiled mode not yet supported for armv6')
->      def test_java8_jar_comp_mode(self):
->          status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
->          msg = 'Exit status was not 0. Output: %s' % output
-> -- 
-> 2.11.0
+From: Changqing Li <changqing.li@windriver.com>
 
-Hi,
+If "/usr/local/ssl/include" directory exists on the host machine,
+net-snmp will also search the host openssl headers:
 
-looks good to me. You can add
+x86_64-wrs-linux-libtool: compile: x86_64-wrs-linux-gcc ...
+-I/usr/local/ssl/include
 
-Acked-by: Henning Heinold <henning@itconsulting-heinold.de>
+Fix this by selecting the proper sysroot headers using
+--with-openssl=${STAGING_EXECPREFIXDIR}
 
-if you want.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Bye Henning
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 413f033..779e5cd 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -56,6 +56,7 @@ EXTRA_OECONF = "--enable-shared \
+                 --with-install-prefix=${D} \
+                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
+                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
++                --with-openssl=${STAGING_EXECPREFIXDIR} \
+ "
+ 
+ # net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp
+-- 
+2.7.4
+
 
