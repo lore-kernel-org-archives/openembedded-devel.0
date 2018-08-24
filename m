@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E1A4D79608
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 42CF671BF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 15:58:09 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id h138-v6so6148616qke.8
+	Fri, 24 Aug 2018 16:35:05 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id a4-v6so1313301plm.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 08:58:11 -0700 (PDT)
+	Fri, 24 Aug 2018 09:35:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=oWIlN8ZDm8/EwE1L1hmwTbZWWgFv9OXiUinLRVn4PjQ=;
-	b=l1QFS11sA83h+R7J6sB/L6PuYn9kB08OfAMw7VacG9YqFBKb44dJrTgppoQu22dRiV
-	Phk5+6qSFZSqfmd9+UOTANokTcozNPthkNtLt9eBLFnaePuCvP0Orod+WTSitgwD+Mwb
-	BZPxhPy8/faLPoN0zpnXYa/ujdpvZar1uk2QsjGtnZCozQFDigM6HQUxDAoUW7jjoGhv
-	P3w3yoJYfygd9tCCXbxkIW1WXuPE2LCnhfZFqCvn02V+68MhWNCRnR0p4M2yLmn+Mihd
-	q2+l6GSlopEIWKoXWHSV/VFliNPRVigPXIG+XuA83bLX0CpalHucDyRREvDTpaQn6q1L
-	uvOw==
+	h=from:to:cc:subject:date:message-id;
+	bh=IqloltNFnEHALtOferQhgw0CSkl/xWhviiNI8StoYuk=;
+	b=RWVcVAmd/Z2hk/0noBgXZieTg3t0bw574FWFCiFXc3/y/LKE7mtSVBQuUxA/O9D9is
+	TRUUxdGnuGnNFf6bnRxuMlsaA1JJhsuX5aArSEQ929ruCHM7f4KmJK67WEETG9HpCOl0
+	MTDXdhuPkBBOUdtSPTqHSVlkpPu5F1OR2EaSZ76nvl5v0yFZ7tjgPEkI4G05SQQBAFUh
+	h/kn1bl++LpKKXnX7lzMJn9pRBMVA9wdpupHVpJ/2b08fn5dQsSs1FxxR6OcKX2bx0gF
+	iM7UyZOySHbp/+QUNKQXqR3Url4Iw355PYn3j68DWZ1zeTCtUIx46Z0T/+6ZejwGOZDl
+	4yVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=oWIlN8ZDm8/EwE1L1hmwTbZWWgFv9OXiUinLRVn4PjQ=;
-	b=DxX6X29Z2SbvXURa8nnAkwt+soffsMGCxY3iLsEL270AaVnAJw4S+s4K8neYnH093c
-	U7t6bf7MJhPkXcAJBwFgx5ObieFliWRL26Su0J1cXGdEhqITUc9T/tJvuqyUg01QeO/q
-	aj9eIMp7uRwUfSi48ZYUxSRHnhQ/TrbekTIXFYQ71kJ2rhZ+HpruSZGXgVKsYAYZcqUR
-	YBSPI8YkLEApIGouoYWf40wxOv2VKH0tIJdzAvA+jdy13pyN1s6hsnQzb7nQEW1yPt55
-	ibnTiwFByWzqFofs1Cf72rJAqScrBAgCriQq/TyLPq+nFvGxo35rNilpVY/xElxAHGVl
-	fW+A==
-X-Gm-Message-State: APzg51DKqto98CnJCdQbICoS+pmwzQioT9R+mJ3SfdgGXHQ6VF/2j1bI
-	wRbDsDZh1FPZu5IDlxOSVqlN/7PbhCrIi7Dk3Zg=
-X-Google-Smtp-Source: ANB0VdaJAG/NqyzqC4C+E2uai2W1F7DJunBOmxMvb7u7m63I7dkOM2sWAy6NUwRO2sVQPdcy+UVyOIxiaBSVj33UqhU=
-X-Received: by 2002:a37:2e03:: with SMTP id
-	u3-v6mr2271321qkh.223.1535126290546; 
-	Fri, 24 Aug 2018 08:58:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <1535024421-10058-1-git-send-email-kuo-lang.tseng@intel.com>
-	<CAMKF1soraLLWVhx+tk3fB8dv1gB7yarS8vqJMum8Vkg7C+XiHQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soraLLWVhx+tk3fB8dv1gB7yarS8vqJMum8Vkg7C+XiHQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IqloltNFnEHALtOferQhgw0CSkl/xWhviiNI8StoYuk=;
+	b=NcZZl3JxONjJX4WNlRvVPZuIFkoMQyw2xkF1IOzVcViC4vudTnhLTjw54fwPMlTBU3
+	QCFPDMGeQndu81B9PzaHqC1qjVKauZhr0L5qnvkkcdStYzb/ls/YyqoR+vmmPbOWR8nD
+	fsR0kT8XDAuQLDt6IyJTxigwUIgdddHZOEjw0HlttjyScxbRukyhod/JmCJdm/VMWpyR
+	PJamr/A8bUNkfTody1I8X1RdJg24/GIOWg/hs/UI1Ha6T6ba9C6XSTEYCw81IbJuF66r
+	cgbLU8L2LFUq01U4Sz3VriMOnBsrsmRD10ZlWFG05lEsZNeuIPHggYh48R4OaBB8qjI4
+	Y9WA==
+X-Gm-Message-State: APzg51DXd/9Vyfo0Yn17iAJ8teJHBJZ8TZIwqCpIyWpAimvBlxNUXzgc
+	9pFQQYYb49XllLB4ntZcmDye4vSQ
+X-Google-Smtp-Source: ANB0VdYk/NX3aTpAvxNRwFwJEXNjxQnod+EVqfmbJYcj6XM5Q342mi3t3YpCS//tBdz5fCiwDQsVSw==
+X-Received: by 2002:a17:902:7c8e:: with SMTP id
+	y14-v6mr2391976pll.259.1535128505779; 
+	Fri, 24 Aug 2018 09:35:05 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::4add])
+	by smtp.gmail.com with ESMTPSA id
+	f87-v6sm15708240pfh.168.2018.08.24.09.35.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 24 Aug 2018 09:35:05 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 24 Aug 2018 08:57:44 -0700
-Message-ID: <CAMKF1sqboZpbh3iXhPfvHfZZtNqiUu0UHhq4OhjDuo9wVLCbvA@mail.gmail.com>
-To: kuo-lang.tseng@intel.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] turbostat: upgrade to 18.07.27
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Aug 2018 09:34:55 -0700
+Message-Id: <20180824163456.10528-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-python][PATCH 1/2] python-pyflame: Limit support to just glibc based systems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,52 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2018 15:58:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 24 Aug 2018 16:35:05 -0000
 
-another failure seen in License checksum mismatch
+Fixes:
+| checking build system type... x86_64-pc-linux-gnu
+| checking host system type... x86_64-bec-linux-musl
+| configure: error: Pyflame can only be built for Linux hosts
 
-http://errors.yoctoproject.org/Errors/Details/187128/
-On Fri, Aug 24, 2018 at 1:12 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> it does not seem to build see
-> http://errors.yoctoproject.org/Errors/Details/187118/
-> On Thu, Aug 23, 2018 at 11:44 AM Kuo-Lang Tseng
-> <kuo-lang.tseng@intel.com> wrote:
-> >
-> > Update the license hash value also since SPDX header has been
-> > inserted to kernel COPYING file since v4.17.
-> >
-> > Signed-off-by: Kuo-Lang Tseng <kuo-lang.tseng@intel.com>
-> >
-> > v2: add meta-oe prefix to subject line
-> > ---
-> >  .../turbostat/{turbostat_3.4.bb => turbostat_18.07.27.bb}               | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-oe/recipes-kernel/turbostat/{turbostat_3.4.bb => turbostat_18.07.27.bb} (96%)
-> >
-> > diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
-> > similarity index 96%
-> > rename from meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-> > rename to meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
-> > index 3559417..5e64efa 100644
-> > --- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-> > +++ b/meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
-> > @@ -12,7 +12,7 @@ processor frequency and idle power saving state residency on supported \
-> >  processors."
-> >
-> >  LICENSE = "GPLv2"
-> > -LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
-> >
-> >  COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
-> >  COMPATIBLE_HOST_libc-musl = "null"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andrew Jeffery <andrew@aj.id.au>
+---
+ meta-python/recipes-devtools/python/python-pyflame.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/meta-python/recipes-devtools/python/python-pyflame.inc
+index 3b84a7e8f8..2ee79f7b8a 100644
+--- a/meta-python/recipes-devtools/python/python-pyflame.inc
++++ b/meta-python/recipes-devtools/python/python-pyflame.inc
+@@ -10,3 +10,4 @@ S = "${WORKDIR}/git"
+ 
+ inherit pkgconfig autotools
+ 
++COMPATIBLE_HOST_libc-musl_class-target = "null"
+-- 
+2.18.0
+
 
