@@ -1,47 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AE56279493
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id A7603795DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 08:12:42 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id z78-v6so5364376qka.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 01:12:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=o1rBaffnqtcOo3zREagMPABZ/SVY0Lk7XO3FD4mnde0=;
-	b=UuHuuFZIy0mTbwnGM7+eWq3mQTVSfvzc6xzlxUh3AidMEXwzTiIhzeHbUboRe1gRhF
-	Wxnti7FjW18dmK9/E8iEJyZISmRb2k4XpSxkAIBwQahypvcmsWcjefjznCJKHbwg2+am
-	zqALNVRGKo9ttBPC6qN51jbI1dBp0DuIK0fekLM8lZA82ZLkJW2LiH1j+UceQGwiwgyN
-	hOLfyrz3SDxznRC6MZ0ZA7djt5XIHm+wd8olFNiAU5qAQSH3jdJrTkguxi7HWbBnOjX0
-	JNCnaajPVPeDRzRq9rBgtsVg6qQcJ4B0uAkZIoVFPY7J/lmljdg5uOGCnCJ1JCMuM0lN
-	GgzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=o1rBaffnqtcOo3zREagMPABZ/SVY0Lk7XO3FD4mnde0=;
-	b=KOzK9UviKli6abafi38F1xktj3MsSwEhesQIyEhqoGFUqCpL6Olrep3VrpL7HJGJsH
-	LWOlc+CamLwTfB4wPDd9ACM9nOajk4MyM7db8dKk+EDvsxtH46mvwc95+PbjKUbgx18g
-	YxbcAceqoNj7gzYzxBtG8sU65COCLtEEFVxAyroPCCFod2xL8fDE86U938EyH/lao5Q4
-	m+9dNyBGhGWQIAz2BB/p9bxokgPph9OFtuWyvYZ3rK51C3g2Ck6vgLCH6G8OhxdA1cMk
-	vogCk7VJW1DilcgO3qUHIcO/wbYXrLmCUgtX7i/PqTAUUQIrqg14BBHuCwPyAUIKHjpt
-	MlTA==
-X-Gm-Message-State: APzg51B3rj/OVlwgUtlN3JGdQUq6RLkMtnLGN+Yiyuh1zBNjwlwGEZhD
-	kFlmiHkyTy3/ZduHVAumq2eTBnh7SsSVV5964VE=
-X-Google-Smtp-Source: ANB0VdaZ6ewDgcqbF1KrHYj2MbW9egeWBemZ+RL9p1RoYjuiMQ2/LwqV3WbTcQOmT2B90T5hNStrZ0ZcJbYaYrdHBZg=
-X-Received: by 2002:a37:1115:: with SMTP id
-	b21-v6mr599755qkh.206.1535098363446; 
-	Fri, 24 Aug 2018 01:12:43 -0700 (PDT)
+	Fri, 24 Aug 2018 08:40:13 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A9B262E62375;
+	Fri, 24 Aug 2018 10:40:13 +0200 (CEST)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2EAE02E62374;
+	Fri, 24 Aug 2018 10:40:13 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham autolearn_force=no version=3.4.0
+Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA;
+	Fri, 24 Aug 2018 10:40:13 +0200 (CEST)
+Date: Fri, 24 Aug 2018 10:40:03 +0200
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <20180824084003.GA11185@mail.itconsulting-heinold.de>
+References: <20180824071029.27238-1-richard.leitner@skidata.com>
 MIME-Version: 1.0
-References: <1535024421-10058-1-git-send-email-kuo-lang.tseng@intel.com>
-In-Reply-To: <1535024421-10058-1-git-send-email-kuo-lang.tseng@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 24 Aug 2018 01:12:17 -0700
-Message-ID: <CAMKF1soraLLWVhx+tk3fB8dv1gB7yarS8vqJMum8Vkg7C+XiHQ@mail.gmail.com>
-To: kuo-lang.tseng@intel.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] turbostat: upgrade to 18.07.27
+In-Reply-To: <20180824071029.27238-1-richard.leitner@skidata.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH] oeqa: runtime: java: enable test_java8_jar_comp_mode for armv7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +40,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2018 08:12:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 24 Aug 2018 08:40:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-it does not seem to build see
-http://errors.yoctoproject.org/Errors/Details/187118/
-On Thu, Aug 23, 2018 at 11:44 AM Kuo-Lang Tseng
-<kuo-lang.tseng@intel.com> wrote:
->
-> Update the license hash value also since SPDX header has been
-> inserted to kernel COPYING file since v4.17.
->
-> Signed-off-by: Kuo-Lang Tseng <kuo-lang.tseng@intel.com>
->
-> v2: add meta-oe prefix to subject line
+On Fri, Aug 24, 2018 at 09:10:29AM +0200, Richard Leitner wrote:
+> As commit "openjdk-8: add aarch32 port 8u172b11" introduced support for
+> the aarch32 port of openjdk-8 enable the test_java8_jar_comp_mode test
+> for ARMv7 machines. This is done by skipping the test only for machines
+> which have armv{4-6} in their tunes.
+> 
+> Furthermore update the "Known Limitations" section in the README.
+> 
+> This patch depends on OE-Core rev 10b935c713748346aea6c36c2f41e0ae6c320821,
+> named "oeqa/core/decorator: add skipIfInDataVar"
+> 
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 > ---
->  .../turbostat/{turbostat_3.4.bb => turbostat_18.07.27.bb}               | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-kernel/turbostat/{turbostat_3.4.bb => turbostat_18.07.27.bb} (96%)
->
-> diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
-> similarity index 96%
-> rename from meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-> rename to meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
-> index 3559417..5e64efa 100644
-> --- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-> +++ b/meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
-> @@ -12,7 +12,7 @@ processor frequency and idle power saving state residency on supported \
->  processors."
->
->  LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
->
->  COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
->  COMPATIBLE_HOST_libc-musl = "null"
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>  README                         | 2 +-
+>  lib/oeqa/runtime/cases/java.py | 6 ++++--
+>  2 files changed, 5 insertions(+), 3 deletions(-)
+> 
+> diff --git a/README b/README
+> index f7b8782..0f510d7 100644
+> --- a/README
+> +++ b/README
+> @@ -78,7 +78,7 @@ Known Limitations/Bugs
+>  OpenJDK:
+>  	The following OpenJDK version/target-architecture combinations currently
+>  	only support "interpreted mode":
+> -		openjdk-8 on arm
+> +		openjdk-8 on arm except armv7
+>  		openjdk-7 on aarch64
+>  		openjdk-7 on x86
+>  		openjdk-7 on x86-64
+> diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
+> index f2375a4..661b208 100644
+> --- a/lib/oeqa/runtime/cases/java.py
+> +++ b/lib/oeqa/runtime/cases/java.py
+> @@ -3,7 +3,7 @@ import os
+>  from oeqa.runtime.case import OERuntimeTestCase
+>  from oeqa.core.decorator.depends import OETestDepends
+>  from oeqa.core.decorator.oeid import OETestID
+> -from oeqa.core.decorator.data import skipIfDataVar
+> +from oeqa.core.decorator.data import skipIfDataVar, skipIfInDataVar
+>  from oeqa.runtime.decorator.package import OEHasPackage
+>  
+>  class JavaTest(OERuntimeTestCase):
+> @@ -70,7 +70,9 @@ class JavaTest(OERuntimeTestCase):
+>      # test for now.
+>      @OEHasPackage(["openjre-8", "openjdk-8"])
+>      @OETestDepends(['java.JavaTest.test_java_exists'])
+> -    @skipIfDataVar('ARCH', 'arm', 'OpenJDK 8 compiled mode not yet supported for arm')
+> +    @skipIfInDataVar('TUNE_FEATURES', 'armv4', 'OpenJDK 8 compiled mode not yet supported for armv4')
+> +    @skipIfInDataVar('TUNE_FEATURES', 'armv5', 'OpenJDK 8 compiled mode not yet supported for armv5')
+> +    @skipIfInDataVar('TUNE_FEATURES', 'armv6', 'OpenJDK 8 compiled mode not yet supported for armv6')
+>      def test_java8_jar_comp_mode(self):
+>          status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
+>          msg = 'Exit status was not 0. Output: %s' % output
+> -- 
+> 2.11.0
+
+Hi,
+
+looks good to me. You can add
+
+Acked-by: Henning Heinold <henning@itconsulting-heinold.de>
+
+if you want.
+
+Bye Henning
 
