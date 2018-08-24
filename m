@@ -1,55 +1,48 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 75501793B4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id E1A4D79608
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 13:43:37 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 7BDD9184D9;
-	Fri, 24 Aug 2018 15:43:37 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id upL9QiflWsEl; Fri, 24 Aug 2018 15:43:36 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 15DBB184A9;
-	Fri, 24 Aug 2018 15:43:36 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id F13581A06D;
-	Fri, 24 Aug 2018 15:43:35 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E60C91A06B;
-	Fri, 24 Aug 2018 15:43:35 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Fri, 24 Aug 2018 15:43:35 +0200 (CEST)
-Received: from XBOX02.axis.com (xbox02.axis.com [10.0.5.16])
-	by thoth.se.axis.com (Postfix) with ESMTP id DA47A1F6D;
-	Fri, 24 Aug 2018 15:43:35 +0200 (CEST)
-Received: from XBOX02.axis.com (10.0.5.16) by XBOX02.axis.com (10.0.5.16) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Fri, 24 Aug 2018 15:43:35 +0200
-Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
-	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
-	15.00.1365.000; Fri, 24 Aug 2018 15:43:35 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: "mingli.yu@windriver.com" <mingli.yu@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] lmbench: fix usrmerge install path
-Thread-Index: AQHUO4xT5ECkL6LwrUeDm1+WLFT/uqTO3y7Q
-Date: Fri, 24 Aug 2018 13:43:35 +0000
-Message-ID: <21952e8e816346f2b5604a2daa93c9ff@XBOX02.axis.com>
-References: <1535102689-9093-1-git-send-email-mingli.yu@windriver.com>
-In-Reply-To: <1535102689-9093-1-git-send-email-mingli.yu@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	Fri, 24 Aug 2018 15:58:09 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id h138-v6so6148616qke.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Aug 2018 08:58:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=oWIlN8ZDm8/EwE1L1hmwTbZWWgFv9OXiUinLRVn4PjQ=;
+	b=l1QFS11sA83h+R7J6sB/L6PuYn9kB08OfAMw7VacG9YqFBKb44dJrTgppoQu22dRiV
+	Phk5+6qSFZSqfmd9+UOTANokTcozNPthkNtLt9eBLFnaePuCvP0Orod+WTSitgwD+Mwb
+	BZPxhPy8/faLPoN0zpnXYa/ujdpvZar1uk2QsjGtnZCozQFDigM6HQUxDAoUW7jjoGhv
+	P3w3yoJYfygd9tCCXbxkIW1WXuPE2LCnhfZFqCvn02V+68MhWNCRnR0p4M2yLmn+Mihd
+	q2+l6GSlopEIWKoXWHSV/VFliNPRVigPXIG+XuA83bLX0CpalHucDyRREvDTpaQn6q1L
+	uvOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=oWIlN8ZDm8/EwE1L1hmwTbZWWgFv9OXiUinLRVn4PjQ=;
+	b=DxX6X29Z2SbvXURa8nnAkwt+soffsMGCxY3iLsEL270AaVnAJw4S+s4K8neYnH093c
+	U7t6bf7MJhPkXcAJBwFgx5ObieFliWRL26Su0J1cXGdEhqITUc9T/tJvuqyUg01QeO/q
+	aj9eIMp7uRwUfSi48ZYUxSRHnhQ/TrbekTIXFYQ71kJ2rhZ+HpruSZGXgVKsYAYZcqUR
+	YBSPI8YkLEApIGouoYWf40wxOv2VKH0tIJdzAvA+jdy13pyN1s6hsnQzb7nQEW1yPt55
+	ibnTiwFByWzqFofs1Cf72rJAqScrBAgCriQq/TyLPq+nFvGxo35rNilpVY/xElxAHGVl
+	fW+A==
+X-Gm-Message-State: APzg51DKqto98CnJCdQbICoS+pmwzQioT9R+mJ3SfdgGXHQ6VF/2j1bI
+	wRbDsDZh1FPZu5IDlxOSVqlN/7PbhCrIi7Dk3Zg=
+X-Google-Smtp-Source: ANB0VdaJAG/NqyzqC4C+E2uai2W1F7DJunBOmxMvb7u7m63I7dkOM2sWAy6NUwRO2sVQPdcy+UVyOIxiaBSVj33UqhU=
+X-Received: by 2002:a37:2e03:: with SMTP id
+	u3-v6mr2271321qkh.223.1535126290546; 
+	Fri, 24 Aug 2018 08:58:10 -0700 (PDT)
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Subject: Re: [meta-oe][PATCH] lmbench: fix usrmerge install path
+References: <1535024421-10058-1-git-send-email-kuo-lang.tseng@intel.com>
+	<CAMKF1soraLLWVhx+tk3fB8dv1gB7yarS8vqJMum8Vkg7C+XiHQ@mail.gmail.com>
+In-Reply-To: <CAMKF1soraLLWVhx+tk3fB8dv1gB7yarS8vqJMum8Vkg7C+XiHQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 24 Aug 2018 08:57:44 -0700
+Message-ID: <CAMKF1sqboZpbh3iXhPfvHfZZtNqiUu0UHhq4OhjDuo9wVLCbvA@mail.gmail.com>
+To: kuo-lang.tseng@intel.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] turbostat: upgrade to 18.07.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,87 +55,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2018 13:43:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Aug 2018 15:58:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
-> devel-bounces@lists.openembedded.org> On Behalf Of
-> mingli.yu@windriver.com
-> Sent: den 24 augusti 2018 11:25
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-oe][PATCH] lmbench: fix usrmerge install path
->=20
-> From: Mingli Yu <Mingli.Yu@windriver.com>
->=20
-> Update $(base_libdir) to $(baselib) to fix
-> the below do_install error when usrmerge
-> enabled in DISTRO_FEATURES.
->=20
-> | if [ ! -d /poky-build/tmp-glibc/work/core2-64-wrs-linux/lmbench/3.0-
-> a9-r2/image/usr/usr/lib64 ]; then mkdir
-> /poky-build/tmp-glibc/work/core2-64-wrs-linux/lmbench/3.0-a9-
-> r2/image/usr/usr/lib64; fi
-> | mkdir: cannot create directory /poky-build/tmp-glibc/work/core2-64-
-> wrs-linux/lmbench/3.0-a9-r2/image/usr/usr/lib64 No such file or
-> directory
-> | Makefile:141: recipe for target 'install-target' failed
-> | make[1]: *** [install-target] Error 1
->=20
-> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-> ---
->  meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-> b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-> index 593b62f..c78e7a8 100644
-> --- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-> +++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-> @@ -51,8 +51,13 @@ do_compile () {
->      install -d ${S}/bin/${TARGET_SYS}
->      oe_runmake -C src
->  }
-> +export baselib
->=20
->  do_install () {
-> +    # fix the lib path when usrmerge enabled
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'fals=
-e', d)}; then
-> +        sed -i -e "s;\$(BASE)\$(base_libdir);\$(BASE)/\$(baselib);g" ${S=
-}/src/Makefile
+another failure seen in License checksum mismatch
 
-The use of $(base_libdir) in the src/Makefile is introduced via an=20
-OE patch, "use-base_libdir-instead-of-hardcoded-lib.patch", and it=20
-Would be better to change that directly instead. There you should=20
-change "$(BASE)$(base_libdir)" to "$(DESTDIR)$(libdir)" while=20
-adding DESTDIR=3D"${D}" to the oe_runmake install line in the=20
-recipe and things should end up where we want them.
-
-While at it you may as well correct the patch to install libmbench.a=20
-with its correct name again (currently it is installed as lmbench.a=20
-due to a mistake in the patch).
-
-Oh, and the Upstream-Status tag in the patch is wrong as well (it is=20
-missing the dash in Upstream-Status)...
-
-As an alternative to the above, and this is what I would recommend,=20
-you can drop the patch and instead add the following after the call=20
-to oe_runmake in do_install:
-
-    if [ "${prefix}/lib" !=3D "${libdir}" ]; then
-        mv ${D}${prefix}/lib ${D}${libdir}
-    fi
-
-> +    fi
->      install -d ${D}${sysconfdir}/default/volatiles \
->             ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
->             ${D}${datadir}/lmbench/scripts
-> --
-> 2.7.4
-
-//Peter
-
+http://errors.yoctoproject.org/Errors/Details/187128/
+On Fri, Aug 24, 2018 at 1:12 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> it does not seem to build see
+> http://errors.yoctoproject.org/Errors/Details/187118/
+> On Thu, Aug 23, 2018 at 11:44 AM Kuo-Lang Tseng
+> <kuo-lang.tseng@intel.com> wrote:
+> >
+> > Update the license hash value also since SPDX header has been
+> > inserted to kernel COPYING file since v4.17.
+> >
+> > Signed-off-by: Kuo-Lang Tseng <kuo-lang.tseng@intel.com>
+> >
+> > v2: add meta-oe prefix to subject line
+> > ---
+> >  .../turbostat/{turbostat_3.4.bb => turbostat_18.07.27.bb}               | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >  rename meta-oe/recipes-kernel/turbostat/{turbostat_3.4.bb => turbostat_18.07.27.bb} (96%)
+> >
+> > diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
+> > similarity index 96%
+> > rename from meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
+> > rename to meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
+> > index 3559417..5e64efa 100644
+> > --- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
+> > +++ b/meta-oe/recipes-kernel/turbostat/turbostat_18.07.27.bb
+> > @@ -12,7 +12,7 @@ processor frequency and idle power saving state residency on supported \
+> >  processors."
+> >
+> >  LICENSE = "GPLv2"
+> > -LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
+> >
+> >  COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+> >  COMPATIBLE_HOST_libc-musl = "null"
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
