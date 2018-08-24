@@ -1,24 +1,20 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DD9B746D3
+Return-Path: <prvs=767db467e=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AE91795AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Aug 2018 03:40:13 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w7O3eEul024049
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Aug 2018 20:40:14 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.399.0;
-	Thu, 23 Aug 2018 20:40:13 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Fri, 24 Aug 2018 07:09:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,281,1531778400"; 
+   d="scan'208";a="1622953"
+From: Richard Leitner <richard.leitner@skidata.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 24 Aug 2018 11:40:11 +0800
-Message-ID: <1535082011-30825-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Fri, 24 Aug 2018 09:10:29 +0200
+Message-ID: <20180824071029.27238-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-webserver][PATCH] apache2: set files layout to debian style
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: [meta-java][PATCH] oeqa: runtime: java: enable test_java8_jar_comp_mode for armv7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +27,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Aug 2018 03:40:13 -0000
+X-List-Received-Date: Fri, 24 Aug 2018 07:09:55 -0000
 Content-Type: text/plain
 
-The default layout installs log files to /var/apache2/logs. But we
-assume the log directory is /var/log/apache2 in volatile.conf. Specify
-the layout to debian style to set the correct the log directory.
+As commit "openjdk-8: add aarch32 port 8u172b11" introduced support for
+the aarch32 port of openjdk-8 enable the test_java8_jar_comp_mode test
+for ARMv7 machines. This is done by skipping the test only for machines
+which have armv{4-6} in their tunes.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Furthermore update the "Known Limitations" section in the README.
+
+This patch depends on OE-Core rev 10b935c713748346aea6c36c2f41e0ae6c320821,
+named "oeqa/core/decorator: add skipIfInDataVar"
+
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ README                         | 2 +-
+ lib/oeqa/runtime/cases/java.py | 6 ++++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-index 6642f2b..a92ec54 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.34.bb
-@@ -58,10 +58,12 @@ EXTRA_OECONF = "--enable-ssl \
-     --libexecdir=${libdir}/${BPN}/modules \
-     ap_cv_void_ptr_lt_long=no \
-     --enable-mpms-shared \
--    ac_cv_have_threadsafe_pollset=no"
-+    ac_cv_have_threadsafe_pollset=no \
-+    --enable-layout=Debian \
-+    --prefix=${base_prefix}/"
+diff --git a/README b/README
+index f7b8782..0f510d7 100644
+--- a/README
++++ b/README
+@@ -78,7 +78,7 @@ Known Limitations/Bugs
+ OpenJDK:
+ 	The following OpenJDK version/target-architecture combinations currently
+ 	only support "interpreted mode":
+-		openjdk-8 on arm
++		openjdk-8 on arm except armv7
+ 		openjdk-7 on aarch64
+ 		openjdk-7 on x86
+ 		openjdk-7 on x86-64
+diff --git a/lib/oeqa/runtime/cases/java.py b/lib/oeqa/runtime/cases/java.py
+index f2375a4..661b208 100644
+--- a/lib/oeqa/runtime/cases/java.py
++++ b/lib/oeqa/runtime/cases/java.py
+@@ -3,7 +3,7 @@ import os
+ from oeqa.runtime.case import OERuntimeTestCase
+ from oeqa.core.decorator.depends import OETestDepends
+ from oeqa.core.decorator.oeid import OETestID
+-from oeqa.core.decorator.data import skipIfDataVar
++from oeqa.core.decorator.data import skipIfDataVar, skipIfInDataVar
+ from oeqa.runtime.decorator.package import OEHasPackage
  
- PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
--PACKAGECONFIG[selinux] = "--enable-selinux --enable-layout=Debian --prefix=${base_prefix}/,--disable-selinux,libselinux,libselinux"
-+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
- PACKAGECONFIG[openldap] = "--enable-ldap --enable-authnz-ldap,--disable-ldap --disable-authnz-ldap,openldap"
- PACKAGECONFIG[zlib] = "--enable-deflate --with-z=${STAGING_LIBDIR},,zlib,zlib"
- 
+ class JavaTest(OERuntimeTestCase):
+@@ -70,7 +70,9 @@ class JavaTest(OERuntimeTestCase):
+     # test for now.
+     @OEHasPackage(["openjre-8", "openjdk-8"])
+     @OETestDepends(['java.JavaTest.test_java_exists'])
+-    @skipIfDataVar('ARCH', 'arm', 'OpenJDK 8 compiled mode not yet supported for arm')
++    @skipIfInDataVar('TUNE_FEATURES', 'armv4', 'OpenJDK 8 compiled mode not yet supported for armv4')
++    @skipIfInDataVar('TUNE_FEATURES', 'armv5', 'OpenJDK 8 compiled mode not yet supported for armv5')
++    @skipIfInDataVar('TUNE_FEATURES', 'armv6', 'OpenJDK 8 compiled mode not yet supported for armv6')
+     def test_java8_jar_comp_mode(self):
+         status, output = self.target.run('java -showversion -Xcomp -jar /tmp/test.jar')
+         msg = 'Exit status was not 0. Output: %s' % output
 -- 
-2.7.4
+2.11.0
 
 
