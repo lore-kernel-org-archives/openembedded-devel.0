@@ -1,49 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 50C6678E21
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D8AC1746D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Aug 2018 12:16:05 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id f21-v6so5530633wmc.5
+	Sun, 26 Aug 2018 22:32:34 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id j192-v6so6565487wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Aug 2018 05:16:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=p/UKy11AmjXp3K5EZKwYG0VOmrcYIItttEtp+5O8yGw=;
-	b=FUoeFtR3MLKYRoRB0S3+FLraVKfFMkEWzbvZxqcRdCh/O3U69Hq7Y8GbZPUGFsTD/q
-	GFfL/oG7rpFUVYyAgQIwVuOeODT4Phx0FB7QpAv18wjcsQQlMKSOjze9edhneJwYFLtX
-	te86Zj4pZf1fnweTsrtJf9DQToSUT1twdnfgLHIXAGGJ+VgL4Llwx7dR041I29DF3ynO
-	qixPhXg0MWYQYb+u1oQDupssNGWeIUTly4tB+0prXViPGFUQ6Ptd5UNiipax+NnlnEe/
-	9F2bJK/j6CmX2O7ZrHBowaWilPEsJtzyAGzJe1f3WIi9ZW9TR8DOzcrK36N0ilad/mzr
-	LyPg==
+	Sun, 26 Aug 2018 15:32:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=Dddqg2MCNDhYHuECX5ffJpSXXauCNYtuSIgg690mz3g=;
+	b=bB3eULDxMknThkjbQZsHW6eQ7UdXc5euPmCwMevLivfMtYW+5WF+4120/ZBaf1LOMY
+	m/i/6akCYANto1E8xh4t882YKu4ODNMRZFVzxSmAyQDyWTdQ1YLXDMJHRKnxtx92fJih
+	XQaksMX/T9qx3/JYBCzwezygBsfhjmN7iYOMNj4YrfgvRlUC2e2JrKW46XicTarNmLZa
+	iy4RJj6BB7UPF8kBT+LYyaZxpXRrrN0LHixFgOt8yvk/vQhAY09x7xsmQCPRaSBcC0zK
+	iYmMBXJpzLQDvOOrii7bs7ET5ZfLCWy/yN7vFjtMnqJssGA3vahOWBtjfeeImAKKo7xB
+	4odA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=p/UKy11AmjXp3K5EZKwYG0VOmrcYIItttEtp+5O8yGw=;
-	b=Y6FyWm4HWpmhgWdWeZQVUrvTe4IPsIX19iS9wrnSZKP5clu4qMsDNaLAEFse7gulF+
-	eUSYCh1L+tM6y9gySCGAi1jBfUqyVFCrKeQoTt8P+fbqb4NUBkrPqh5N2/13XcRZRIw7
-	NWrscsPUCD4WjwFVGqRpTE9pk1yyKO28Bqw4nADj9UEjq2u8KD/Z3nOlpQW8V/asyGjg
-	R09E5sJZYP1NYMdgYSlxLBHqNuqPJsSKP/AVISQclA7ZKxIM8nIp5arWAPC/Dab/X6rF
-	kleI3dhBZCxa0qvGxnB0LJBUs3/FDBZT/ETmhgNoDQw+S9th4ttCBu22g5h6AUZB4LYw
-	2qag==
-X-Gm-Message-State: APzg51DF4XYcXj0+i9B7rjz8nwXp7kI6O6ZYpTwwxHRxhLiz1AZItlUP
-	Hd5N1p2p2ZiSyME30EBMpmEj6C1b1YeB8rltSL8=
-X-Google-Smtp-Source: ANB0Vdad9Yfc9T8M28bNVd8XZnOZHZj7/UeivvKzUDtpJXoj+15KdtRwY9tmCpmqTCNZV7SppQ4qGNx2BfdKoDmr8/o=
-X-Received: by 2002:a1c:b441:: with SMTP id
-	d62-v6mr3183841wmf.17.1535285765984; 
-	Sun, 26 Aug 2018 05:16:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180826045735.7732-1-yisooan@gmail.com>
-	<CA+chaQeMuN4+wxyyA_jvJonCtSiLO614uWt7LqjvK3CwBeo2Lg@mail.gmail.com>
-	<c25b4db3-f7c9-1de7-d5df-a9c6b9320168@gmail.com>
-In-Reply-To: <c25b4db3-f7c9-1de7-d5df-a9c6b9320168@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 26 Aug 2018 14:15:54 +0200
-Message-ID: <CA+chaQevzQwz6Yg2NDbRUeQh86P+6PUrMppzE1jCQis0_=J9uA@mail.gmail.com>
-To: yisooan@gmail.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][morty][PATCH v2] libconfig: fix SRC_URI
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Dddqg2MCNDhYHuECX5ffJpSXXauCNYtuSIgg690mz3g=;
+	b=J/dCz5VHg6RjByIcVu6exAu6AHS6UUFhrse5ZEdWR491r3Wd0QSy1Wwiz5H9BS3UCh
+	6itpQWNZ/9plkpjfnl1+BoauueWKmqru/b2PIq7ZyEr3J2O7WVXqAGanwkKRXDDi1hJq
+	yDw3Zzchwq0T1AlQ+75NkVWzeBmf7w7UFn4xfAQPSYom4vxq5mkO+bAAcckmiSQX+p3v
+	gzYFtORdJaJj3VVR+V98fqRn8LUHIMf0D/9ARKc8QXMlVhuYiAsqVl5hSb+cnMD5r0c2
+	+R+Gfp9gFR6/CTmskmEd4TuxvIObvSnDDUv3YNYzC5Xt5w0QJd7pPk6pe6t4htrJpZ2A
+	dGog==
+X-Gm-Message-State: APzg51DiYOMYjSzl85ZxnXaHJNZsPLXv9P639HkT77hQD5bvqq2WxX9E
+	AM3dF8f2xudIY2V23aVTNfmbvTu4PFM=
+X-Google-Smtp-Source: ANB0Vda9sruK4hntzGui7aykCxmefEvFd9GSmrJ1v7VAGyjvvR9Ff6CrtkTK/bkaxWo7TMIX3Bmv3A==
+X-Received: by 2002:a1c:1bca:: with SMTP id
+	b193-v6mr4004358wmb.6.1535322755194; 
+	Sun, 26 Aug 2018 15:32:35 -0700 (PDT)
+Received: from lund.luxoft.com ([2a04:ae08:1403:ff00:b821:e49c:2197:f50])
+	by smtp.gmail.com with ESMTPSA id
+	p11-v6sm15440282wrd.74.2018.08.26.15.32.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 26 Aug 2018 15:32:34 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Aug 2018 00:32:15 +0200
+Message-Id: <20180826223215.9091-1-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Subject: [rocko][meta-oe][PATCH] libconfig: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,95 +57,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Aug 2018 12:16:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 26 Aug 2018 22:32:35 -0000
 
-Using git fetcher is fine, but don't use tag parameter nor tagname in
-SRCREV, use git SHA which matches the tag in SRCREV.
+Project has moved to GitHub and deleted old tarballs. Checksums were
+changed since the new package is auto generated by GitHub.
 
-Otherwise bitbake fetcher will still need to access then network every
-single time to map tag name to git SHA used internally.
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ meta-oe/recipes-extended/libconfig/libconfig_1.5.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-On Sun, Aug 26, 2018 at 1:34 PM Yi-Soo An <yisooan@gmail.com> wrote:
+diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+index fb6e50e51..196bad119 100644
+--- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
++++ b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+@@ -1,14 +1,14 @@
+ SUMMARY = "C/C++ Configuration File Library"
+ DESCRIPTION = "Library for manipulating structured configuration files"
+-HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
++HOMEPAGE = "https://github.com/hyperrealm/libconfig/"
+ SECTION = "libs"
+ 
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
+ 
+-SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
++SRC_URI = "https://github.com/hyperrealm/libconfig/archive/v${PV}.tar.gz"
+ 
+ inherit autotools-brokensep pkgconfig
+ 
+-SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
+-SRC_URI[sha256sum] = "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
++SRC_URI[md5sum] = "e92a91c2ddf3bf77bea0f5ed7f09e492"
++SRC_URI[sha256sum] = "cae5c02361d8a9b2bb26946c64f089d2e5e599972f386203fbc48975c0d885c8"
+-- 
+2.17.1
 
-> Thank you for the email.
->
-> I have a question.
->
-> Since hyperrealm has moved to github and the library is maintained there.
-> Is it better to replace the current SRC_URI with git? as below.
-> SRC_URI = "git://github.com/hyperrealm/libconfig.git;tag=v1.5"
-> archive seems to need extra information, like checksum.
->
-> Best regards,
-> Yi-Soo An
->
-> On 08/26/2018 03:00 PM, Martin Jansa wrote:
-> > Don't use github archives which are regenerated from time to time with
-> > different checksum.
-> >
-> > To fix it in morty all newer release needs to be fixed as well and then
-> > the fix backported to morty (or explained in commit message why the fix
-> > is needed only for morty).
-> >
-> > On Sun, Aug 26, 2018 at 7:01 AM Yi-Soo An <yisooan@gmail.com
-> > <mailto:yisooan@gmail.com>> wrote:
-> >
-> >     It causes a fetch error since hyperrealm has moved to github
-> >     and the current SRC_URI is not available any longer.
-> >
-> >     To fix the error, use github repository.
-> >
-> >     Signed-off-by: Yi-Soo An <yisooan@gmail.com <mailto:
-> yisooan@gmail.com>>
-> >     ---
-> >       meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-> >     <http://libconfig_1.5.bb> | 8 ++++----
-> >       1 file changed, 4 insertions(+), 4 deletions(-)
-> >
-> >     diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-> >     <http://libconfig_1.5.bb>
-> >     b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-> >     <http://libconfig_1.5.bb>
-> >     index fb6e50e51..a0b3a9471 100644
-> >     --- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-> >     <http://libconfig_1.5.bb>
-> >     +++ b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-> >     <http://libconfig_1.5.bb>
-> >     @@ -1,14 +1,14 @@
-> >       SUMMARY = "C/C++ Configuration File Library"
-> >       DESCRIPTION = "Library for manipulating structured configuration
-> >     files"
-> >     -HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
-> >     +HOMEPAGE = "https://hyperrealm.github.io/libconfig"
-> >       SECTION = "libs"
-> >
-> >       LICENSE = "LGPLv2.1"
-> >       LIC_FILES_CHKSUM =
-> >     "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
-> >
-> >     -SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz
-> >     <http://www.hyperrealm.com/$%7BBPN%7D/$%7BBP%7D.tar.gz>"
-> >     +SRC_URI = "
-> https://github.com/hyperrealm/libconfig/archive/v1.5.tar.gz"
-> >
-> >       inherit autotools-brokensep pkgconfig
-> >
-> >     -SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
-> >     -SRC_URI[sha256sum] =
-> >     "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
-> >     +SRC_URI[md5sum] = "e92a91c2ddf3bf77bea0f5ed7f09e492"
-> >     +SRC_URI[sha256sum] =
-> >     "cae5c02361d8a9b2bb26946c64f089d2e5e599972f386203fbc48975c0d885c8"
-> >     --
-> >     2.17.1
-> >
-> >     --
-> >     _______________________________________________
-> >     Openembedded-devel mailing list
-> >     Openembedded-devel@lists.openembedded.org
-> >     <mailto:Openembedded-devel@lists.openembedded.org>
-> >     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
->
 
