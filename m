@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C568B78EC5
+Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
+	[209.85.216.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C8EB78EC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 16:43:13 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id r37-v6so18824148qtc.0
+	Mon, 27 Aug 2018 16:44:43 +0000 (UTC)
+Received: by mail-qt0-f175.google.com with SMTP id d4-v6so18743633qtn.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 09:43:15 -0700 (PDT)
+	Mon, 27 Aug 2018 09:44:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=oCo0ACwNpYjdxraKFtdxK0Ka7yWUjLC4erjA/cbwysg=;
-	b=ZHRafUzaCmOjDuI5/kp5SsERrfbQdyEZwx8s+H29ZuedowBI4qwhqQAEpxct8jsc/+
-	MHxkHE8jguh1zH/huqUp7d62XQJzBzDrgFMiLrN50goWwZEloHeaelW8HRcv6YSr+vDN
-	fcDbjitfVRvd3tymHQowQcAmIvjm4AQnXr+lX0a1oxsa2ACyOG6UOLpMUvouZ7RVteE6
-	gSWPbGMv9zXX24zLb/KMh/D5BS4GMdZtqKDHoMzUf70OtRBapZTfiJwFTK94fMGJB1e6
-	3uOmE5CI2iz1Jzgu06KZnScqiG4N7La6xktE/N76WdCsoXvIWMNMgK5sEGA6X80nQMoJ
-	EGnA==
+	:cc; bh=p/NvbMbeFWYqC8kwGVmIbDNjn+izXwxkv5qp/I+Gz/k=;
+	b=gB1ExD3J7MY5KZDrg1j0YVBfv0F2zT/Higz/xHa4cl5fW9PjHsplGVYpjrYp1H0XaZ
+	xCVz25Fs//wi5Yvkd5HB/QPss3p7Xw6v74XMFQ7/1MvRtQrAemm4LSGHWMrNPhXpveIw
+	2RjhETce7/ivFPcgRpl8L+kcVbrcFAdnd5G3pAk/7a4EDsRsuoNNs+pG/xzklurMqhJw
+	YCkMV2YjpPyQuYjoqxFeoZtddEyhvEMOtIuFHgu1y07k0yjpcc5XkxEg+XuoSTlQq1B6
+	pKD97Xkf22UwHJSLCiggtVmsnLjuxqmcHWKCcg0DG/xwu+IzQQmzc9ZIYlSHw36wyVN/
+	ITeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=oCo0ACwNpYjdxraKFtdxK0Ka7yWUjLC4erjA/cbwysg=;
-	b=LfSARoYijJT6xY8gcLtss66ox6dvSna3lt3G05Rr0nfk+2y3hXwguHH6gokRVIHKJU
-	/6zaCzAJeXN0cpvgo2LD9lFmaJTfrK0C7MDWlgNKMV5CJ6poko6hGWuea8llCuloAemA
-	JJTMUj5H4WAVA5Bp+xoh8zHeEA3PEPxLCL69INrd5TpKZ9exyoIZA89sR9U7TkIip0uh
-	oZhg+0sxVtaG0PQJkBaBiuu59eg+zB0Zd1gYOOUSmaSnpGhnarD62sYyXocuJ7RnWbYC
-	5eVzng6ohKuseQcnXC6/DWd5mLmvRcIp5Iji6S7lcuXbRtPVZ+8n7FNcHyF1x3n1wTTW
-	Bbgg==
-X-Gm-Message-State: APzg51Csxken83P8xHJKWMuvLUcFg7TJelgH69BBt+qAzo20kykSjCEl
-	ztI3X5KPTe0JevmDRnUjHRyiC0ukDf+SfQWjzVo=
-X-Google-Smtp-Source: ANB0VdaHY3HchyjY90Bd7cs71wK7PPrGb3UFwGm1G7vv3n7chVlme/he76c5aqwEHeEG/gzz+7YpSqEojtOhpQZ9sJM=
-X-Received: by 2002:aed:3848:: with SMTP id
-	j66-v6mr14744514qte.218.1535388194440; 
-	Mon, 27 Aug 2018 09:43:14 -0700 (PDT)
+	bh=p/NvbMbeFWYqC8kwGVmIbDNjn+izXwxkv5qp/I+Gz/k=;
+	b=HZJZ14vjAqdeiqwVvEGR1pk1rbhLT2qG5OVfSNJ1hXqrhr+KYoSAz0RrrCSQ+QfuYD
+	eLBd/cm/+ewAAUDFBezj2Kf3vO+byoNUGGh0hkbdey7L+/shWsmVZvY9ZeJzlWuIxarZ
+	eV6lIrUsVZWvTK2/RXF+KG4NnxHzJATCxZJkWqfgLakNXuTJlw/XDOsUErlsVXKF52BU
+	h8U2U15PHacWkmq6dth98TnLvSnbViOK8eZyS+nMmyYCz99in/B0uevdZnDfhspCQKlH
+	/M0k6dmrU1RW+74wtehBOMzZ3tB7Nk5NVg7QrKJn+BrhZi8DrgYWeO5JZhmoobBiW2mw
+	Vstw==
+X-Gm-Message-State: APzg51ANECedPntwUjSVyFqqOpaZD0T/uldATNTZlc5zKFu+RhHvaaLa
+	fKIDRSorcWV9wlYeTmLtKf6D5E6YECJvAO53P3A=
+X-Google-Smtp-Source: ANB0VdZhgrMi+ajW9BNyZCveNvYcU11mddHdhO5rqT/9gPXPrFwFplc63EEqaPW2tE+HJXudv0fpTYHwOIIUmlREwjg=
+X-Received: by 2002:ac8:4304:: with SMTP id
+	z4-v6mr14519855qtm.295.1535388284837; 
+	Mon, 27 Aug 2018 09:44:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180827142738.18615-1-sno@netbsd.org>
-	<20180827142738.18615-2-sno@netbsd.org>
-In-Reply-To: <20180827142738.18615-2-sno@netbsd.org>
+References: <20180827132729.23213-1-sno@netbsd.org>
+In-Reply-To: <20180827132729.23213-1-sno@netbsd.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 27 Aug 2018 09:42:48 -0700
-Message-ID: <CAMKF1srxejEKKqRiW5zsKcqRM_u5mhe8_sA0bS8DkKcaF2p3Og@mail.gmail.com>
+Date: Mon, 27 Aug 2018 09:44:18 -0700
+Message-ID: <CAMKF1sqL5N-kM++o2qroPxWJWB3gDKofLBDvs35v54Q4fh5kjA@mail.gmail.com>
 To: sno@netbsd.org
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-perl][PATCH 2/2] libcrypt-openssl-rsa-perl: Update to 0.30
+Subject: Re: [meta-perl][PATCH] libnet-ssleay-perl: Fix configure issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 16:43:14 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 16:44:44 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Aug 27, 2018 at 7:28 AM Jens Rehsack <sno@netbsd.org> wrote:
+On Mon, Aug 27, 2018 at 6:27 AM Jens Rehsack <sno@netbsd.org> wrote:
 >
-> Update recipe for CPAN hosted Perl5 module Crypt::OpenSSL::RSA
-> from 0.28 to 0.30 to fix build issues when using openssl 1.1 and
-> to express our love to the Perl Programming Language.
->
-> Changes since 0.28: https://metacpan.org/changes/release/TODDR/Crypt-OpenSSL-RSA-0.30
+> Fix libnet-ssleay-perl tries to execute found openssl binaries
+> at the place of ${OPENSSL_PREFIX} and bailing out when either
+> binaries are missing or can't be executed. From cross-compiling
+> perspective, both is insane.
 >
 > Signed-off-by: Jens Rehsack <sno@netbsd.org>
 > ---
->  ...rsa-perl_0.28.bb => libcrypt-openssl-rsa-perl_0.30.bb} | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->  rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.28.bb => libcrypt-openssl-rsa-perl_0.30.bb} (64%)
+>  .../no-exec-on-configure.patch                | 33 +++++++++++++++++++
+>  .../libnet/libnet-ssleay-perl_1.85.bb         |  8 +++--
+>  2 files changed, 39 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
 >
-> diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.30.bb
-> similarity index 64%
-> rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
-> rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.30.bb
-> index f0c610f3a..0a2ad8aa4 100644
-> --- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
-> +++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.30.bb
-> @@ -1,14 +1,14 @@
->  SUMMARY = "Crypt Openssl RSA cpan module"
->  SECTION = "libs"
->  LICENSE = "Artistic-1.0 | GPL-1.0+"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
+> diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
+> new file mode 100644
+> index 000000000..6efa7d8f9
+> --- /dev/null
+> +++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
+> @@ -0,0 +1,33 @@
+> +--- a/inc/Module/Install/PRIVATE/Net/SSLeay.pm 2018-08-27 14:56:24.788544991 +0200
+> ++++ b/inc/Module/Install/PRIVATE/Net/SSLeay.pm 2018-08-27 15:00:12.847266331 +0200
+> +@@ -24,20 +24,7 @@
+> +     $self->requires_external_cc;
+> +
+> +     my $prefix = $self->find_openssl_prefix;
+> +-    my $exec   = $self->find_openssl_exec($prefix);
+> +-
+> +-    unless (-x $exec) {
+> +-        print <<EOM;
+> +-*** Could not find OpenSSL
+> +-    If it's already installed, please set the OPENSSL_PREFIX environment
+> +-    variable accordingly. If it isn't installed yet, get the latest version
+> +-    from http://www.openssl.org/.
+> +-EOM
+> +-        exit 0; # according http://wiki.cpantesters.org/wiki/CPANAuthorNotes this is best-practice when "missing library"
+> +-    }
+> +-
+> +-    $self->check_openssl_version($prefix, $exec);
+> +-    my $opts = $self->ssleay_get_build_opts($prefix, $exec);
+> ++    my $opts = $self->ssleay_get_build_opts($prefix);
+> +
+> +     $self->makemaker_args(
+> +         CCCDLFLAGS => $opts->{cccdlflags},
+> +@@ -58,7 +45,7 @@
+> + }
+> +
+> + sub ssleay_get_build_opts {
+> +-    my ($self, $prefix, $exec) = @_;
+> ++    my ($self, $prefix) = @_;
+> +
+> +     my $opts = {
+> +         lib_links  => [],
+> diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+> index a0bb90e7d..6a116459e 100644
+> --- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+> +++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+> @@ -23,6 +23,7 @@ RDEPENDS_${PN} += "\
+>  "
 >
+>  SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+> +           file://no-exec-on-configure.patch \
+>             file://run-ptest \
+>            "
+>  SRC_URI[md5sum] = "d602bdce4e0531c6efc276e3e429ca69"
+> @@ -32,9 +33,12 @@ S = "${WORKDIR}/Net-SSLeay-${PV}"
+>
+>  inherit cpan ptest
+>
+> -export OPENSSL_PREFIX="${STAGING_LIBDIR}"
+> +#EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
+>
+> -EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
+> +do_configure() {
+> +    export OPENSSL_PREFIX="${STAGING_DIR_TARGET}/usr"
 
-what changed to cause this ? may be mention it in
-commit message
+perhaps use STAGING_EXECPREFIXDIR
 
->  SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz "
+> +    cpan_do_configure
+> +}
 >
-> -SRC_URI[md5sum] = "86217a5036fc63779c30420b5fd84129"
-> -SRC_URI[sha256sum] = "5357f977464bb3a8184cf2d3341851a10d5515b4b2b0dfb88bf78995c0ded7be"
-> +SRC_URI[md5sum] = "10bca2fc6d0ba1aa329f227424ae87d5"
-> +SRC_URI[sha256sum] = "23e13531397af102db4fd24bcf70137add7c85c23cca697c43aa71c2959a29ac"
->
-> -DEPENDS += "openssl"
-> +DEPENDS += "libcrypt-openssl-guess-native openssl"
->
->  RDEPENDS_${PN}="libcrypt-openssl-random-perl"
->
+>  do_install_ptest() {
+>      cp -r ${B}/t ${D}${PTEST_PATH}
 > --
 > 2.17.1
 >
