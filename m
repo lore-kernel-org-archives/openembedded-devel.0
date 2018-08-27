@@ -1,50 +1,49 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D8AC1746D3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+	[209.85.221.53])
+	by mail.openembedded.org (Postfix) with ESMTP id A2FC27842F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Aug 2018 22:32:34 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id j192-v6so6565487wmj.1
+	Mon, 27 Aug 2018 00:48:04 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id 20-v6so11977108wrb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Aug 2018 15:32:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=Dddqg2MCNDhYHuECX5ffJpSXXauCNYtuSIgg690mz3g=;
-	b=bB3eULDxMknThkjbQZsHW6eQ7UdXc5euPmCwMevLivfMtYW+5WF+4120/ZBaf1LOMY
-	m/i/6akCYANto1E8xh4t882YKu4ODNMRZFVzxSmAyQDyWTdQ1YLXDMJHRKnxtx92fJih
-	XQaksMX/T9qx3/JYBCzwezygBsfhjmN7iYOMNj4YrfgvRlUC2e2JrKW46XicTarNmLZa
-	iy4RJj6BB7UPF8kBT+LYyaZxpXRrrN0LHixFgOt8yvk/vQhAY09x7xsmQCPRaSBcC0zK
-	iYmMBXJpzLQDvOOrii7bs7ET5ZfLCWy/yN7vFjtMnqJssGA3vahOWBtjfeeImAKKo7xB
-	4odA==
+	Sun, 26 Aug 2018 17:48:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qv/LbxkRkxfRWXLz8W2CIwxHjanuRDzQ3n7aD4OErzk=;
+	b=V/lUtA6dToSlNXKya3AyahtqtLnpcCiyWE6XOFCVCz5B0aESDhsGD7FoPeY8CunDMp
+	WdKtoPmx7HNw2udwXN/1AIWP3BmaORN6azS/+Q1I4nSqexi14wA5L+fujMTpJz8ugENh
+	00opjffnqQNMzYgH/tGtbL9Un/+NIFqwrxDXJlKFtbpW/I3bNlupyIGPKVx3aT1hIUWn
+	oRCM/osi6A4zkC/MWFbG66dl+LUnzvEL6HUc3yoW2uKETsmno864j7CLpakdPwX6VUH0
+	DO5WXhbmTCAHJyvRn1X7CBOonuxa/jyIEiRjdhlO0QHOwflniWczUNwljTP0IZJS7a/n
+	YonA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Dddqg2MCNDhYHuECX5ffJpSXXauCNYtuSIgg690mz3g=;
-	b=J/dCz5VHg6RjByIcVu6exAu6AHS6UUFhrse5ZEdWR491r3Wd0QSy1Wwiz5H9BS3UCh
-	6itpQWNZ/9plkpjfnl1+BoauueWKmqru/b2PIq7ZyEr3J2O7WVXqAGanwkKRXDDi1hJq
-	yDw3Zzchwq0T1AlQ+75NkVWzeBmf7w7UFn4xfAQPSYom4vxq5mkO+bAAcckmiSQX+p3v
-	gzYFtORdJaJj3VVR+V98fqRn8LUHIMf0D/9ARKc8QXMlVhuYiAsqVl5hSb+cnMD5r0c2
-	+R+Gfp9gFR6/CTmskmEd4TuxvIObvSnDDUv3YNYzC5Xt5w0QJd7pPk6pe6t4htrJpZ2A
-	dGog==
-X-Gm-Message-State: APzg51DiYOMYjSzl85ZxnXaHJNZsPLXv9P639HkT77hQD5bvqq2WxX9E
-	AM3dF8f2xudIY2V23aVTNfmbvTu4PFM=
-X-Google-Smtp-Source: ANB0Vda9sruK4hntzGui7aykCxmefEvFd9GSmrJ1v7VAGyjvvR9Ff6CrtkTK/bkaxWo7TMIX3Bmv3A==
-X-Received: by 2002:a1c:1bca:: with SMTP id
-	b193-v6mr4004358wmb.6.1535322755194; 
-	Sun, 26 Aug 2018 15:32:35 -0700 (PDT)
-Received: from lund.luxoft.com ([2a04:ae08:1403:ff00:b821:e49c:2197:f50])
-	by smtp.gmail.com with ESMTPSA id
-	p11-v6sm15440282wrd.74.2018.08.26.15.32.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 26 Aug 2018 15:32:34 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Aug 2018 00:32:15 +0200
-Message-Id: <20180826223215.9091-1-oleksandr.kravchuk@pelagicore.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Subject: [rocko][meta-oe][PATCH] libconfig: fix SRC_URI
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=qv/LbxkRkxfRWXLz8W2CIwxHjanuRDzQ3n7aD4OErzk=;
+	b=WsYFFSqKLIfnOPQNKrRq8OBC0DefhsyRn/r9w5kIOy8+VVA/H7fGpuCD3EtP5OqYqJ
+	yg2aOmAKAZii5izX7cPDArWDXSbpaLXnyoNxZr9ADMicy3RvhdAzSCNn01n0tezVqQ5r
+	B95DwNGs7MbANR2sYWxPma4/oHZ76IUnNKEsKQS7/cgjesukfdiw8H1ZbEGzdudPG/GX
+	b7Zqcq3xsS8RT3m2LH3a1wY1IRwUcFpVSzNBdyXLGZ6+6dzrcixd2ImOJP5LpbgHg+Qu
+	/l8kgYWaoQsGz3F0+Ab6D0n58JtZYRtlUrg+LSC2/pyFSWYLr0Jw26AYHEhxA8ULk+bv
+	138w==
+X-Gm-Message-State: APzg51AOORgCYFAn1GBQKrTcPrcgI6HHIi8ynuidnFOJAZbyxD5cbYNV
+	4dXlNUyhOZQG9at62sJrXUpbpjTJBK8tlO/hbw4=
+X-Google-Smtp-Source: ANB0VdbRY3SaPAmYs6f+wuoQZ56Y2Go9AAFQhtIreTu5/lN+eG0g73TKhHmU9vdesYGmiP5kKL88fhPcQbjbU4ZJw4Q=
+X-Received: by 2002:adf:aa9c:: with SMTP id
+	h28-v6mr7172667wrc.149.1535330885185; 
+	Sun, 26 Aug 2018 17:48:05 -0700 (PDT)
+MIME-Version: 1.0
+References: <20180826223215.9091-1-oleksandr.kravchuk@pelagicore.com>
+In-Reply-To: <20180826223215.9091-1-oleksandr.kravchuk@pelagicore.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 27 Aug 2018 02:47:53 +0200
+Message-ID: <CA+chaQd_qoZnLW9=o1mzrxucY35TpyRRkd=eLTBO60ewch4a7Q@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Subject: Re: [rocko][meta-oe][PATCH] libconfig: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Aug 2018 22:32:35 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 00:48:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Project has moved to GitHub and deleted old tarballs. Checksums were
-changed since the new package is auto generated by GitHub.
+NAK, see the review of the other change for libconfig which was sent
+yesterday.
 
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
----
- meta-oe/recipes-extended/libconfig/libconfig_1.5.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-index fb6e50e51..196bad119 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-@@ -1,14 +1,14 @@
- SUMMARY = "C/C++ Configuration File Library"
- DESCRIPTION = "Library for manipulating structured configuration files"
--HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
-+HOMEPAGE = "https://github.com/hyperrealm/libconfig/"
- SECTION = "libs"
- 
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
- 
--SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
-+SRC_URI = "https://github.com/hyperrealm/libconfig/archive/v${PV}.tar.gz"
- 
- inherit autotools-brokensep pkgconfig
- 
--SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
--SRC_URI[sha256sum] = "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
-+SRC_URI[md5sum] = "e92a91c2ddf3bf77bea0f5ed7f09e492"
-+SRC_URI[sha256sum] = "cae5c02361d8a9b2bb26946c64f089d2e5e599972f386203fbc48975c0d885c8"
--- 
-2.17.1
+On Mon, Aug 27, 2018 at 12:32 AM Oleksandr Kravchuk <
+open.source@oleksandr-kravchuk.com> wrote:
 
+> Project has moved to GitHub and deleted old tarballs. Checksums were
+> changed since the new package is auto generated by GitHub.
+>
+> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+> ---
+>  meta-oe/recipes-extended/libconfig/libconfig_1.5.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> index fb6e50e51..196bad119 100644
+> --- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> +++ b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> @@ -1,14 +1,14 @@
+>  SUMMARY = "C/C++ Configuration File Library"
+>  DESCRIPTION = "Library for manipulating structured configuration files"
+> -HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
+> +HOMEPAGE = "https://github.com/hyperrealm/libconfig/"
+>  SECTION = "libs"
+>
+>  LICENSE = "LGPLv2.1"
+>  LIC_FILES_CHKSUM =
+> "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
+>
+> -SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
+> +SRC_URI = "https://github.com/hyperrealm/libconfig/archive/v${PV}.tar.gz"
+>
+>  inherit autotools-brokensep pkgconfig
+>
+> -SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
+> -SRC_URI[sha256sum] =
+> "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
+> +SRC_URI[md5sum] = "e92a91c2ddf3bf77bea0f5ed7f09e492"
+> +SRC_URI[sha256sum] =
+> "cae5c02361d8a9b2bb26946c64f089d2e5e599972f386203fbc48975c0d885c8"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
