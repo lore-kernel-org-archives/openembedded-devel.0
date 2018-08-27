@@ -1,12 +1,12 @@
 Return-Path: <prvs=7706363eb=Richard.Leitner@skidata.com>
 Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 31EF079272
+	by mail.openembedded.org (Postfix) with ESMTP id D948A60620
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 11:26:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,295,1531778400"; d="scan'208";a="12008436"
-References: <20180824075428.30511-1-richard.leitner@skidata.com>
+	Mon, 27 Aug 2018 11:26:55 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,295,1531778400"; d="scan'208";a="12008460"
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
+References: <20180822134148.3463-1-andreas.obergschwandtner@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -52,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <867e06ca-e6c4-9b70-a0ab-4023f0fbb02f@skidata.com>
-Date: Mon, 27 Aug 2018 13:26:52 +0200
+Message-ID: <e33ffb85-671c-be34-698f-26296e35d027@skidata.com>
+Date: Mon, 27 Aug 2018 13:27:41 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <20180824075428.30511-1-richard.leitner@skidata.com>
+In-Reply-To: <20180822134148.3463-1-andreas.obergschwandtner@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] conf: distro: add mejate{, -musl} distributions
+Subject: Re: [meta-java][PATCH v3] icedtea: disable error format-overflow for gcc 7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,7 +74,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 11:26:06 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 11:26:56 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -91,9 +91,11 @@ If you have any questions, please let me know.
 
 regards;Richard.L
 
-On 8/24/18 9:54 AM, Richard Leitner wrote:
-> Add meta-java test distributions for glibc and musl. Those should be
-> used for oeqa tests of the *-test-image's to cover also musl.
+On 8/22/18 3:41 PM, spoofed@skidata.com wrote:
+> As no patch has been found in debian and hotspot repo for this issue we
+> just disable this warning which was introduced with GCC 7.
 > 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
+> 
+> Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
 
