@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
-	[209.85.210.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 6889B60721
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id DF67260721
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 27 Aug 2018 17:48:06 +0000 (UTC)
-Received: by mail-pf1-f179.google.com with SMTP id x17-v6so8079924pfh.5
+Received: by mail-pf1-f177.google.com with SMTP id d4-v6so8087718pfn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 10:48:07 -0700 (PDT)
+	Mon, 27 Aug 2018 10:48:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=ia9MxzaBVSqLOi4mxsya55xKTorAVvz8/Arwfg1zFAM=;
-	b=CtZYSlP/WiKLx/D6vKPBLlpmTpACSAD2LVgRX0+k4o9VEnmY7jU6oxAqckvcpdT12g
-	Z0tJAx1v8GVrrrvQCAIOPyk8Rga9JICmo7EaXd/g97GRq5QtGjjlgjFeTcrp61mFkfSl
-	XlqUsWmFsEO9kO8cpB/KpuJYoOmFv24VUIXkWBUT6iEejH70qJaSIaaVJ3ZYEob3vZVx
-	WHCDQqLOnO4mXgZmmoW9K2kz/ww8QEyvkmg74g8RAo5FWeP6baQDuFz78q0u/knPYlcx
-	WGgFWZeTH4ONcBuyrjNPSUUeaQ/bnz/oL9bXzL7AkOL7LfLatvyQDoMNZ9NYfvQEx6Tq
-	k7Wg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=k7GT3pUuqjDe3ThDBARv43Ii73ofCRWXnpQATZug/xA=;
+	b=Zh3jM9M52wuKtlWRIF5E3PEEQ6JVqIeSd2d+05r3WlDgfg2akt8wOv6NO/XD789rpW
+	7hp/LyRjd0RgENW2pV4GxusELP/tBW3HHgNJNrPpNyOd/ZWFAJ5cyeKhG8bBWUJxk9jR
+	pDywFVAlNnMTD71H9cqNIZ5E8po092/XYPmscYxt66kT+BcXiY+Glk8AfvkXNCJZJjxf
+	Hd52xUYl4ZVfOXO9NIW0rW6CcbJGKadJr7pEhxHdcNjNzrO6igAxL1NAUMErvjlMqQTh
+	T9xQtpN3pwsCeerhvE9u5j2OhFqrrVNyExIuMdp0nPEbJcb/kxG+mapFKgn6+SsWEfDM
+	uaCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ia9MxzaBVSqLOi4mxsya55xKTorAVvz8/Arwfg1zFAM=;
-	b=oXZKRuI0nWanvcKZ4fVagFL6Af+3j2ddyu8/ZpLPRUe8eU06drhiXaCCSa9hLCRqnG
-	66Pc5eb3zN9DN8E4T6dfwBasb4xYb4pJ0dg1P/eriCU+VdZKv2rfbQ+DGuzTkjRFLF+U
-	OhxI8yFogVUI6Upln6TdK6BHvA8Cv5P3Kikd+5tObgM0hYEvdsfgJ45u8osPRaYKnsQN
-	uIq/bfIqdmsA2ahFxSBkCPOUaiVPUwIvz40MCQUEapEK2DMpbZOuTgt0mKRyUFVNtI2l
-	EolU0tIbahcgGYgGikMWBC8NvRGSIVWUmD9dFDU3YBML/ABk8g2SXrY4qavu5DBpbOIj
-	f6AA==
-X-Gm-Message-State: APzg51DmhsD5pa1CS/BzBCu4szq6DBeKE40qbOobSF1DN9ViC0OFDDiW
-	NxadLPsmjGgdy2Ju6dIc3HwPojh0
-X-Google-Smtp-Source: ANB0VdYbdUxrGrfHbzwtg13ZPvGZWxzi2QJxUi9gXT8eKEiWQn+ZzibqqfFu+9k4Fi/XzSGsNfH2PQ==
-X-Received: by 2002:a63:524e:: with SMTP id
-	s14-v6mr12903650pgl.35.1535392087019; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=k7GT3pUuqjDe3ThDBARv43Ii73ofCRWXnpQATZug/xA=;
+	b=EjXPDF1RWm+wSjXakkV6V+vgKler7iUliegRVJG4o08fOUNOfpjkHE2X0TW1Td9SyW
+	ZlrOpIgXQ6JAsnrEcRavepHiM2xaU1WRNvZMh5cwTN23vpj+On29o+kdtBfV/8yFf+9y
+	xAWCA0HZ7vBhpMhYQ4Y2mfJ93r3CPkyP7pr/8FmJ2ezSXg8X7p5IjQNhlKwYO8R7FH+U
+	/WkuvJWmEZl2344eMVpjXA3LXiGg63I2E9oZx9nE5+vw7B8m3T3DA8xwEGGn0nO7mdZ5
+	VW8y2pbuEXXO5imufptrYBrDR6JJJlxHew1bD+Fxxch6bDJEX5rotfXXAwZYQJoJnAJQ
+	USGw==
+X-Gm-Message-State: APzg51DD5ZeUdN7OxMc5Xf8ZS10U56v4GWjS8n7VoJCHvx64VMpBZeni
+	nLmP8uD0jpu4A9d4yOvUVHq7rmzL
+X-Google-Smtp-Source: ANB0VdaiVEe6+dHIYwXo8oR2Sw2T3r3jdWjVetuj0Jo/VTkIAQ0MzN3YtZvijxmFkcN9er2TSjtZ3A==
+X-Received: by 2002:a62:f5c1:: with SMTP id
+	b62-v6mr15609746pfm.158.1535392087771; 
 	Mon, 27 Aug 2018 10:48:07 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f180])
 	by smtp.gmail.com with ESMTPSA id
-	u43-v6sm24454446pgn.81.2018.08.27.10.48.06
+	u43-v6sm24454446pgn.81.2018.08.27.10.48.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Aug 2018 10:48:06 -0700 (PDT)
+	Mon, 27 Aug 2018 10:48:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Aug 2018 10:47:53 -0700
-Message-Id: <20180827174757.7027-1-raj.khem@gmail.com>
+Date: Mon, 27 Aug 2018 10:47:54 -0700
+Message-Id: <20180827174757.7027-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
-Subject: [meta-python][PATCH 1/5] python-pyflame: Disable for mips arch
+In-Reply-To: <20180827174757.7027-1-raj.khem@gmail.com>
+References: <20180827174757.7027-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/5] can-isotp: Upgrade to latest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +58,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 17:48:06 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 17:48:07 -0000
 
-Fails to build as support is missing
-
-src/ptrace.cc:135:48: error: 'regs' has incomplete type
+Fixes build with linux kernel 4.18+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-pyflame.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-extended/socketcan/can-isotp_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/meta-python/recipes-devtools/python/python-pyflame.inc
-index 71fe769765..3914028ec3 100644
---- a/meta-python/recipes-devtools/python/python-pyflame.inc
-+++ b/meta-python/recipes-devtools/python/python-pyflame.inc
-@@ -11,3 +11,4 @@ S = "${WORKDIR}/git"
- inherit pkgconfig autotools
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+index 3c019eb7ce..6ce3cab112 100644
+--- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -1,6 +1,6 @@
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=72d977d697c3c05830fdff00a7448931"
+-SRCREV = "d1248b0f22ea8dc3b9d84a61bd35a83309bdb4b4"
++SRCREV = "6003f9997587e6a563cebf1f246bcd0eb6deff3d"
+ PV = "1.0+git${SRCPV}"
  
- COMPATIBLE_HOST_libc-musl_class-target = "null"
-+COMPATIBLE_HOST_mipsarch_class-target = "null"
+ SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https"
 -- 
 2.18.0
 
