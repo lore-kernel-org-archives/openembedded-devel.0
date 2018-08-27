@@ -1,47 +1,50 @@
-Return-Path: <prvs=77774814f4=adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 0986079256
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id AC39F78685
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 12:32:02 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w7RCPGaL030444 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 07:32:03 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2m334x6b3w-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 07:32:03 -0500
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w7RCW2WQ001923
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Mon, 27 Aug 2018 13:27:47 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id v17-v6so13624391wrr.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 07:32:02 -0500
-Received: from us-aus-exch4.ni.corp.natinst.com (130.164.68.14) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 27 Aug 2018 07:32:01 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch4.ni.corp.natinst.com (130.164.68.14) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 27 Aug 2018 07:32:01 -0500
-Received: from ionel-work.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Mon, 27 Aug 2018 07:32:00 -0500
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Aug 2018 15:33:38 +0300
-Message-ID: <20180827123338.7571-3-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180827123338.7571-1-adrian.ratiu@ni.com>
-References: <20180827123338.7571-1-adrian.ratiu@ni.com>
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-08-27_05:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-python][PATCH 3/3] python3-pytest-tempdir: add recipe
+	Mon, 27 Aug 2018 06:27:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=slkRqjvYD5o/X4xVCa2gm1MQywEQaozaI2p1ab/POmA=;
+	b=VyO5qwgHCzZvGfqcgC8fo02YqmjWCG80eJygFAdStP15KRU4AeLi4zo8jwQdIDqOwC
+	t/YlBS1jS5dwK9BWCEe/Vt6bkpihVLILiP5nZE1BHeYgivxb/s1bfctRGJDVrjOuuqKR
+	wnpGyzxOzqVsvqbtuhGJqKXeLdk+sYXtYT7/rzjVE6fBcJwicZHzZCZgSj3+8TYKwAJP
+	EB1ymF+L5Dk5JbOzR+bsGrn6A824nwdXES+1bOZco9WJ4sBAkzKkCmyV2kVLMHG6eeAR
+	lHwBGbwEcrPeG9h1etoerwHeKBAW9V/nxXXO4TMreO6/ztF1VLsV2JxuBkALOjEyyjZL
+	slYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=slkRqjvYD5o/X4xVCa2gm1MQywEQaozaI2p1ab/POmA=;
+	b=k/hSRiPbRVgpRMY/2KGNytYR7nuKabnqFgpEdXbdRGp42b6Bzf4cF+NapqBmlTuNvM
+	O28wtaDdednfV9IBq64xWGbniLlc6qGIXjyQgcnyZHce5X8Tw7Wdm1Tyuavq1iqwjrC6
+	8GcI717sOBmG/1J8GINX2KSDuwNqWmLi3YEyau43Q0sLe2C9rs01tzlLA97c8eKvQQPZ
+	9airFx4rH+S4nJrzFjfEkX8FUfuhjylMkypLylmpFX/ckpfisvfGi28QtdEZNb1ka74q
+	lD3dGB93sOTNPkfDbIr/s3IFItf/1EFsMg8umq62g3mn4FW8r3ZeDJB5ZPDg0Z8h8dk5
+	NM0Q==
+X-Gm-Message-State: APzg51Dla4eI3z1bMf+9Oenyd7S8cXMImzisD8ZaMgnh/lzEan3a44WK
+	rPoiTrHkMoyPnu9K3Y90E4FHbqhd
+X-Google-Smtp-Source: ANB0VdZApd8ahN34qSBBg1gjdCCpbRziEKLo0YqexDFeJO2c75PK3OYuv0KosUQtu+nHmFvTUaeiAw==
+X-Received: by 2002:adf:9081:: with SMTP id
+	i1-v6mr9276912wri.271.1535376468254; 
+	Mon, 27 Aug 2018 06:27:48 -0700 (PDT)
+Received: from beaker.muppets.liwing.de (b2b-78-94-80-58.unitymedia.biz.
+	[78.94.80.58]) by smtp.gmail.com with ESMTPSA id
+	b124-v6sm7426678wmg.47.2018.08.27.06.27.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 27 Aug 2018 06:27:47 -0700 (PDT)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Aug 2018 15:27:29 +0200
+Message-Id: <20180827132729.23213-1-sno@netbsd.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Jens Rehsack <sno@netbsd.org>
+Subject: [meta-perl][PATCH] libnet-ssleay-perl: Fix configure issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,71 +57,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 12:32:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 27 Aug 2018 13:27:48 -0000
 
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+Fix libnet-ssleay-perl tries to execute found openssl binaries
+at the place of ${OPENSSL_PREFIX} and bailing out when either
+binaries are missing or can't be executed. From cross-compiling
+perspective, both is insane.
 
-Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- .../recipes-devtools/python/python-pytest-tempdir.inc | 10 ++++++++++
- .../python/python-pytest-tempdir_2016.8.20.bb         | 11 ++---------
- .../python/python3-pytest-tempdir_2016.8.20.bb        |  7 +++++++
- 3 files changed, 19 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pytest-tempdir.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-tempdir_2016.8.20.bb
+ .../no-exec-on-configure.patch                | 33 +++++++++++++++++++
+ .../libnet/libnet-ssleay-perl_1.85.bb         |  8 +++--
+ 2 files changed, 39 insertions(+), 2 deletions(-)
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest-tempdir.inc b/meta-python/recipes-devtools/python/python-pytest-tempdir.inc
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
 new file mode 100644
-index 000000000..196f6d644
+index 000000000..6efa7d8f9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pytest-tempdir.inc
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "Adds support for a predictable and repeatable temporary directory."
-+HOMEPAGE = "https://github.com/saltstack/pytest-tempdir"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=8751a9cf4a70be4f02697a9b89e686ce"
-+
-+SRC_URI[md5sum] = "f87f2583f5f8aaca7203d57ada3948b5"
-+SRC_URI[sha256sum] = "65ff815966ea6dfc07ca1b43747c9888a6d883971170e67b16290f9f50d434ea"
-+
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb b/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb
-index 74030dcf5..8a9b83e3d 100644
---- a/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb
-+++ b/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb
-@@ -1,13 +1,6 @@
--DESCRIPTION = "Adds support for a predictable and repeatable temporary directory."
--HOMEPAGE = "https://github.com/saltstack/pytest-tempdir"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=8751a9cf4a70be4f02697a9b89e686ce"
-+require python-pytest-tempdir.inc
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl/no-exec-on-configure.patch
+@@ -0,0 +1,33 @@
++--- a/inc/Module/Install/PRIVATE/Net/SSLeay.pm	2018-08-27 14:56:24.788544991 +0200
+++++ b/inc/Module/Install/PRIVATE/Net/SSLeay.pm	2018-08-27 15:00:12.847266331 +0200
++@@ -24,20 +24,7 @@
++     $self->requires_external_cc;
++ 
++     my $prefix = $self->find_openssl_prefix;
++-    my $exec   = $self->find_openssl_exec($prefix);
++-
++-    unless (-x $exec) {
++-        print <<EOM;
++-*** Could not find OpenSSL
++-    If it's already installed, please set the OPENSSL_PREFIX environment
++-    variable accordingly. If it isn't installed yet, get the latest version
++-    from http://www.openssl.org/.
++-EOM
++-        exit 0; # according http://wiki.cpantesters.org/wiki/CPANAuthorNotes this is best-practice when "missing library"
++-    }
++-
++-    $self->check_openssl_version($prefix, $exec);
++-    my $opts = $self->ssleay_get_build_opts($prefix, $exec);
+++    my $opts = $self->ssleay_get_build_opts($prefix);
++ 
++     $self->makemaker_args(
++         CCCDLFLAGS => $opts->{cccdlflags},
++@@ -58,7 +45,7 @@
++ }
++ 
++ sub ssleay_get_build_opts {
++-    my ($self, $prefix, $exec) = @_;
+++    my ($self, $prefix) = @_;
++ 
++     my $opts = {
++         lib_links  => [],
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+index a0bb90e7d..6a116459e 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb
+@@ -23,6 +23,7 @@ RDEPENDS_${PN} += "\
+ "
  
--SRC_URI[md5sum] = "f87f2583f5f8aaca7203d57ada3948b5"
--SRC_URI[sha256sum] = "65ff815966ea6dfc07ca1b43747c9888a6d883971170e67b16290f9f50d434ea"
--
--inherit pypi setuptools
-+inherit setuptools
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
++           file://no-exec-on-configure.patch \
+            file://run-ptest \
+           "
+ SRC_URI[md5sum] = "d602bdce4e0531c6efc276e3e429ca69"
+@@ -32,9 +33,12 @@ S = "${WORKDIR}/Net-SSLeay-${PV}"
  
- RDEPENDS_${PN} += " \
-     python-pytest \
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-tempdir_2016.8.20.bb b/meta-python/recipes-devtools/python/python3-pytest-tempdir_2016.8.20.bb
-new file mode 100644
-index 000000000..02e821563
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-tempdir_2016.8.20.bb
-@@ -0,0 +1,7 @@
-+require python-pytest-tempdir.inc
-+
-+inherit setuptools3
-+
-+RDEPENDS_${PN} += " \
-+    python3-pytest \
-+    "
+ inherit cpan ptest
+ 
+-export OPENSSL_PREFIX="${STAGING_LIBDIR}"
++#EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
+ 
+-EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
++do_configure() {
++    export OPENSSL_PREFIX="${STAGING_DIR_TARGET}/usr"
++    cpan_do_configure
++}
+ 
+ do_install_ptest() {
+     cp -r ${B}/t ${D}${PTEST_PATH}
 -- 
-2.18.0
+2.17.1
 
 
