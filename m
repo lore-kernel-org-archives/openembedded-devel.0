@@ -1,51 +1,54 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
-	[209.85.210.177])
-	by mail.openembedded.org (Postfix) with ESMTP id DF67260721
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EA5F78EFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 17:48:06 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id d4-v6so8087718pfn.0
+	Mon, 27 Aug 2018 17:48:07 +0000 (UTC)
+Received: by mail-pg1-f180.google.com with SMTP id m4-v6so7238924pgv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 10:48:08 -0700 (PDT)
+	Mon, 27 Aug 2018 10:48:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=k7GT3pUuqjDe3ThDBARv43Ii73ofCRWXnpQATZug/xA=;
-	b=Zh3jM9M52wuKtlWRIF5E3PEEQ6JVqIeSd2d+05r3WlDgfg2akt8wOv6NO/XD789rpW
-	7hp/LyRjd0RgENW2pV4GxusELP/tBW3HHgNJNrPpNyOd/ZWFAJ5cyeKhG8bBWUJxk9jR
-	pDywFVAlNnMTD71H9cqNIZ5E8po092/XYPmscYxt66kT+BcXiY+Glk8AfvkXNCJZJjxf
-	Hd52xUYl4ZVfOXO9NIW0rW6CcbJGKadJr7pEhxHdcNjNzrO6igAxL1NAUMErvjlMqQTh
-	T9xQtpN3pwsCeerhvE9u5j2OhFqrrVNyExIuMdp0nPEbJcb/kxG+mapFKgn6+SsWEfDM
-	uaCQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=oM/mR5hpCZototr5VurTXV3HAaiaEIqkmHk3kSVrW2k=;
+	b=Gv9/2kA6+ykGuoUoG1Xg6UHbByGk9/2KEexSxqlMdANZfNHqQ6zDaSA4+OxcNNJVQ1
+	GPXaJOTAi2/wAkFwuXLTQmWHHaDlhcghofu7CzsZ8ux9QC0Lr65U08R3CiaujO3USzjA
+	1aZdD8i20U+ZpzN9B7iyreuMbGXZIDBJTJtoicy4baMEx8Z5vYYyjRKRgPMOcqkIyQ9I
+	n+hZ/IbrCWhs7Jm5IEbY0/2qNnEilnFhKvvs/3QnMwYx/evdxKGdciXpjY3vsmz+1SuV
+	D+YHH7YZozJmK03LJUgtRzjGm7iIem09mF2av/toCIA3jLfpki2XrgsBqtdVjJVqGG/W
+	v2wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=k7GT3pUuqjDe3ThDBARv43Ii73ofCRWXnpQATZug/xA=;
-	b=EjXPDF1RWm+wSjXakkV6V+vgKler7iUliegRVJG4o08fOUNOfpjkHE2X0TW1Td9SyW
-	ZlrOpIgXQ6JAsnrEcRavepHiM2xaU1WRNvZMh5cwTN23vpj+On29o+kdtBfV/8yFf+9y
-	xAWCA0HZ7vBhpMhYQ4Y2mfJ93r3CPkyP7pr/8FmJ2ezSXg8X7p5IjQNhlKwYO8R7FH+U
-	/WkuvJWmEZl2344eMVpjXA3LXiGg63I2E9oZx9nE5+vw7B8m3T3DA8xwEGGn0nO7mdZ5
-	VW8y2pbuEXXO5imufptrYBrDR6JJJlxHew1bD+Fxxch6bDJEX5rotfXXAwZYQJoJnAJQ
-	USGw==
-X-Gm-Message-State: APzg51DD5ZeUdN7OxMc5Xf8ZS10U56v4GWjS8n7VoJCHvx64VMpBZeni
-	nLmP8uD0jpu4A9d4yOvUVHq7rmzL
-X-Google-Smtp-Source: ANB0VdaiVEe6+dHIYwXo8oR2Sw2T3r3jdWjVetuj0Jo/VTkIAQ0MzN3YtZvijxmFkcN9er2TSjtZ3A==
-X-Received: by 2002:a62:f5c1:: with SMTP id
-	b62-v6mr15609746pfm.158.1535392087771; 
-	Mon, 27 Aug 2018 10:48:07 -0700 (PDT)
+	:references:mime-version:content-transfer-encoding;
+	bh=oM/mR5hpCZototr5VurTXV3HAaiaEIqkmHk3kSVrW2k=;
+	b=M+vYMWxF7Re/6wYXyTrEMZ50kaVu4yr8Wd8orH3otzDFGqFjtlajSE/GHoeIb8JoXv
+	zgODsyFnkPBi4Lp3XwYMn8w23htThhVfZF2AT2EKEOzjA+025pOGPi3bOH+xHV6GbM7N
+	h/ZcwhHn5MwqqrIy+flonzEiN7dl01XqiGTvAEGoCoe9r5Ce9Ac0et4zJoAN3Ij8HjEX
+	O712MZ/XFyYjvbkAMtqXC3Fkn62XqTrNuqN9iuFTU+/zWVJbLuHArtsHnX+Jn13mw7Kk
+	Ak4FfD+zIVi/G2XRpghLLFx6+MTg8POewOJV/3U6cizB7EbcrxjhCbKMP7pPk3Xbdera
+	BgGQ==
+X-Gm-Message-State: APzg51BdWWHhoE94bMgoUfzouxpzfExo6vhzczHRoZF8A0FU+TgYGru0
+	djwjsaG+GOmRGdTb9zMpS5GUuyeR
+X-Google-Smtp-Source: ANB0VdZhOafqBjtJGOeP7AEm9MmZ9+1oFXSac9ROpHDCfa6aJZRbMVwjb6C3gPFKrkNrA5n0cvO7iw==
+X-Received: by 2002:a62:c082:: with SMTP id
+	g2-v6mr15346684pfk.72.1535392088631; 
+	Mon, 27 Aug 2018 10:48:08 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::f180])
 	by smtp.gmail.com with ESMTPSA id
 	u43-v6sm24454446pgn.81.2018.08.27.10.48.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Aug 2018 10:48:07 -0700 (PDT)
+	Mon, 27 Aug 2018 10:48:08 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Aug 2018 10:47:54 -0700
-Message-Id: <20180827174757.7027-2-raj.khem@gmail.com>
+Date: Mon, 27 Aug 2018 10:47:55 -0700
+Message-Id: <20180827174757.7027-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180827174757.7027-1-raj.khem@gmail.com>
 References: <20180827174757.7027-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/5] can-isotp: Upgrade to latest
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Subject: [meta-gnome][PATCH V2 3/5] gedit: Add dep on python-six-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +61,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 17:48:07 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 17:48:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Fixes build with linux kernel 4.18+
+Fixes errors e.g.
+recipe-sysroot-native/usr/share/gtk-doc/python/gtkdoc/common.py", line 31, in <module>
+    import six
+ImportError: No module named 'six'
+make[3]: *** [install-data-local] Error 1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-extended/socketcan/can-isotp_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2: Depend on python3 since thats what is needed
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-index 3c019eb7ce..6ce3cab112 100644
---- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-@@ -1,6 +1,6 @@
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=72d977d697c3c05830fdff00a7448931"
--SRCREV = "d1248b0f22ea8dc3b9d84a61bd35a83309bdb4b4"
-+SRCREV = "6003f9997587e6a563cebf1f246bcd0eb6deff3d"
- PV = "1.0+git${SRCPV}"
+ meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+index ba425ad6b9..ea6439d91a 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+@@ -3,11 +3,13 @@ SECTION = "x11/gnome"
+ LICENSE = "GPLv2+"
+ PR = "r2"
  
- SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https"
+-DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ gtksourceview2 iso-codes intltool-native gnome-common-native libice"
++DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ \
++           gtksourceview2 iso-codes intltool-native gnome-common-native \
++           libice python3-six-native"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-inherit distro_features_check gnome gettext pythonnative
++inherit distro_features_check gnome gettext python3native
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
 -- 
 2.18.0
 
