@@ -1,13 +1,12 @@
 Return-Path: <prvs=7706363eb=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id B367760620
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 31EF079272
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 11:25:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,295,1531778400"; 
-   d="scan'208";a="1625966"
+	Mon, 27 Aug 2018 11:26:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,295,1531778400"; d="scan'208";a="12008436"
+References: <20180824075428.30511-1-richard.leitner@skidata.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-References: <20180824071029.27238-1-richard.leitner@skidata.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -53,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <2a6dc426-4062-1ec5-ff56-4c1237587e67@skidata.com>
-Date: Mon, 27 Aug 2018 13:26:14 +0200
+Message-ID: <867e06ca-e6c4-9b70-a0ab-4023f0fbb02f@skidata.com>
+Date: Mon, 27 Aug 2018 13:26:52 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <20180824071029.27238-1-richard.leitner@skidata.com>
+In-Reply-To: <20180824075428.30511-1-richard.leitner@skidata.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] oeqa: runtime: java: enable test_java8_jar_comp_mode for armv7
+Subject: Re: [meta-java][PATCH] conf: distro: add mejate{, -musl} distributions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,7 +74,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 11:25:38 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 11:26:06 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -92,17 +91,9 @@ If you have any questions, please let me know.
 
 regards;Richard.L
 
-On 8/24/18 9:10 AM, Richard Leitner wrote:
-> As commit "openjdk-8: add aarch32 port 8u172b11" introduced support for
-> the aarch32 port of openjdk-8 enable the test_java8_jar_comp_mode test
-> for ARMv7 machines. This is done by skipping the test only for machines
-> which have armv{4-6} in their tunes.
-> 
-> Furthermore update the "Known Limitations" section in the README.
-> 
-> This patch depends on OE-Core rev 10b935c713748346aea6c36c2f41e0ae6c320821,
-> named "oeqa/core/decorator: add skipIfInDataVar"
+On 8/24/18 9:54 AM, Richard Leitner wrote:
+> Add meta-java test distributions for glibc and musl. Those should be
+> used for oeqa tests of the *-test-image's to cover also musl.
 > 
 > Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> Acked-by: Henning Heinold <henning@itconsulting-heinold.de>
 
