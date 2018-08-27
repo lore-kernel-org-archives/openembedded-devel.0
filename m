@@ -1,67 +1,47 @@
-Return-Path: <prvs=7706363eb=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id D948A60620
+Return-Path: <prvs=77774814f4=adrian.ratiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CF0179209
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 11:26:55 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,295,1531778400"; d="scan'208";a="12008460"
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <20180822134148.3463-1-andreas.obergschwandtner@skidata.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <e33ffb85-671c-be34-698f-26296e35d027@skidata.com>
-Date: Mon, 27 Aug 2018 13:27:41 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
+	Mon, 27 Aug 2018 12:32:00 +0000 (UTC)
+Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w7RCPFTr005007 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Aug 2018 07:32:01 -0500
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mx0a-00010702.pphosted.com with ESMTP id 2m34mw62rh-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Aug 2018 07:32:01 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com
+	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
+	by us-aus-skprod2.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w7RCW0Tw014349
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Aug 2018 07:32:00 -0500
+Received: from us-aus-exch5.ni.corp.natinst.com (130.164.68.15) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 27 Aug 2018 07:32:00 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch5.ni.corp.natinst.com (130.164.68.15) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 27 Aug 2018 07:32:00 -0500
+Received: from ionel-work.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Mon, 27 Aug 2018 07:31:59 -0500
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Aug 2018 15:33:37 +0300
+Message-ID: <20180827123338.7571-2-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.18.0
+In-Reply-To: <20180827123338.7571-1-adrian.ratiu@ni.com>
+References: <20180827123338.7571-1-adrian.ratiu@ni.com>
 MIME-Version: 1.0
-In-Reply-To: <20180822134148.3463-1-andreas.obergschwandtner@skidata.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH v3] icedtea: disable error format-overflow for gcc 7
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-08-27_05:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Subject: [meta-python][PATCH 2/3] python3-pytest-helpers-namespace: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,28 +54,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 11:26:56 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Aug 2018 12:32:00 -0000
+Content-Type: text/plain
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-	git://git.yoctoproject.org/meta-java
+From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+---
+ .../python/python-pytest-helpers-namespace.inc        | 10 ++++++++++
+ .../python-pytest-helpers-namespace_2016.7.10.bb      | 11 ++---------
+ .../python3-pytest-helpers-namespace_2016.7.10.bb     |  7 +++++++
+ 3 files changed, 19 insertions(+), 9 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb
 
-If you have any questions, please let me know.
+diff --git a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
+new file mode 100644
+index 000000000..a69867d91
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
+@@ -0,0 +1,10 @@
++DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, however, provide a helpers namespace in pytest which enables you to register helper functions in your conftest.py to be used within your tests without having to import them."
++HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=71fac4dfeee99c39c51f617e9486237c"
++
++SRC_URI[md5sum] = "80fe3e515f640b1459709b539f6b857e"
++SRC_URI[sha256sum] = "d8bdb017c0f7271699c08850b6b12e1ce9e52913cbd4461b5febd21082a29113"
++
++inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb
+index afca48702..2b6ee8550 100644
+--- a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb
++++ b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb
+@@ -1,13 +1,6 @@
+-DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, however, provide a helpers namespace in pytest which enables you to register helper functions in your conftest.py to be used within your tests without having to import them."
+-HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
+-SECTION = "devel/python"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=71fac4dfeee99c39c51f617e9486237c"
++require python-pytest-helpers-namespace.inc
+ 
+-SRC_URI[md5sum] = "80fe3e515f640b1459709b539f6b857e"
+-SRC_URI[sha256sum] = "d8bdb017c0f7271699c08850b6b12e1ce9e52913cbd4461b5febd21082a29113"
+-
+-inherit pypi setuptools
++inherit setuptools
+ 
+ RDEPENDS_${PN} += " \
+     python-pytest \
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb
+new file mode 100644
+index 000000000..f03f5d415
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb
+@@ -0,0 +1,7 @@
++require python-pytest-helpers-namespace.inc
++
++inherit setuptools3
++
++RDEPENDS_${PN} += " \
++    python3-pytest \
++    "
+-- 
+2.18.0
 
-regards;Richard.L
-
-On 8/22/18 3:41 PM, spoofed@skidata.com wrote:
-> As no patch has been found in debian and hotspot repo for this issue we
-> just disable this warning which was introduced with GCC 7.
-> 
-> Also known as: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=881824
-> 
-> Signed-off-by: Andreas Obergschwandtner <andreas.obergschwandtner@skidata.com>
 
