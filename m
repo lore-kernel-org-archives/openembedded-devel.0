@@ -1,49 +1,52 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 2081D60620
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 15C2A60620
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 11:07:55 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id m199-v6so9504473wma.1
+	Mon, 27 Aug 2018 11:07:56 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id 207-v6so7866584wme.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Aug 2018 04:07:57 -0700 (PDT)
+	Mon, 27 Aug 2018 04:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=Fx16sx2fnODjy70ms1SJ7vcI5FwJCNprUp6SiMA+meI=;
-	b=CZH8EP0kf/SxqfvJxBJ9luB4A9jvLHY0jg/jyFdFDXR2M/XPs5sCNuCNwY3+M++p4l
-	qw0+9SHdsLkFN7PurUWPhxWtQvDSfY5nDYiAYvIb0fpoqEalAGbmiEPnXZmSBUeG6mKu
-	51yRTEyYmNbpGhOSopqJ5ddOLahpt+CEz5pf5Ds6YylJA8O9d9fI9zQiFwej+rB8sqrl
-	8FLcaYjMCkz2myMSaumJuWQ0iAYYhjnGS/RKnQ9v/tT5wPOnC3+Qw6RryT+1QKLBybI2
-	jQAyBk7+ZEOcl08P+92mAtaAd7XpsqvH2UtXjmf2yNCpaUdDlCIFcqGs1dzoYfdSIVbd
-	aWIQ==
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=PVgFOV1zMDVI3bI2lJ+A4x+HH/ihLZ2FvlNdJAd5fnw=;
+	b=Jo7UCJ1X//Us0ELKntoBH/idupjhlpXUTdtjgBwfOwxxyLoBKcanN0ncfr2yqqzwAp
+	/G8js1q7agzLbH7Y34OQiYjFGiUUgHJWYp/Mp4NqxFhCXZ/nJIvnYa4TdcFduy1FLXsz
+	xSAPrOySUtPEuV9m+LR0uhXW71FoX27y+YaRBu48gaSy0GhUOdr7PgiT4IOQhpMAdUTx
+	3s3VPb1O3VecbweGn+sKrH3FF5MEiPk87ZlZyX8JqJde6rNIEiELWzJzJH+ZhE3bAP2j
+	SoxLHLPb0t1qrmyxs9UdyjYb1dX89ZFWMDf1jKPQPwd9oIwkn8dUqeSde0De+nryv6dl
+	GuAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=Fx16sx2fnODjy70ms1SJ7vcI5FwJCNprUp6SiMA+meI=;
-	b=AsuFg3/Tv2Zxcu50PH5ocv3nnT09JHKw4SK0QN/QFD7irYryYJRne6Wb1HxGToRjwT
-	KbCKC4KeuznHUWrEXeAyjiaZJWdNclJzOmZEAMsrytnwqCD+5CvuD0TY0pj/09dNHt9p
-	m8jqdnGl/NVp6NwfWS3/jxYATFscB/bbdt/UAWRArzYBGgQxnGKELQwsVhQL3xGW4HCV
-	V9P9wgLBN/uSpUQorvou19uIbITXl41Z8FCZ9+BNk4lkbKcG460zWdrFkCl2qevsNmFp
-	FtpQf05OsHSagjbU3ovnzxNbEo4TiSdqfRa9kfo0ubGNlepfdLyNstOiB1kr1ZRqDNx1
-	My8w==
-X-Gm-Message-State: APzg51CjoRqkxdMB2waeTxYlVY5wkJPf4KemH4fGHZg9BQ83U9hc5Q56
-	tZE0wIHshrASllOTjaxx9A8QySF5
-X-Google-Smtp-Source: ANB0VdYDEKhGzlOpictLaDDPcUgS13sG/So59qsOxVkHnv6UD1WPRlL1yJl0UeUKFd7BC5dfkUuAwQ==
-X-Received: by 2002:a1c:cbc1:: with SMTP id
-	b184-v6mr5521932wmg.149.1535368076592; 
-	Mon, 27 Aug 2018 04:07:56 -0700 (PDT)
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=PVgFOV1zMDVI3bI2lJ+A4x+HH/ihLZ2FvlNdJAd5fnw=;
+	b=o7lwO87hJh5ENMZUePqLxATKGIN0jZ4sMJROU4ww5ctUw1ze70L4zwapacQq0wak8I
+	Tus02O4y7FDdugZqIGRcEZZFapLdeqabbgJLOfDAm4737o5gaJkZbF6sPCGd05pXerAx
+	Jq8V7PqLHDmWJvMPRIIzM2VVodN/zqfU7TtwUwjITKt1HxxvdAYE3KEhxNyBgs7RkoOg
+	YnTDNULXv7R4pbESba98k+65U7bJcoaACvtocLWbEyH3RXpLgsIzBa+FPWAqO1nNTE7A
+	DpcEdRRZZq6qCtW48jLGIg3yg+7boqwOB0qkzKcNz3fR2splZ0j6ywiByJygLEcVD2PB
+	KsMQ==
+X-Gm-Message-State: APzg51BcMWAeUv/ZzUMyxtOjj5e7eUJSCxKIQOVKysMylfgNSFYcvWLK
+	arBuO6aTJz3+1ubcIvnP3fJuI+nz
+X-Google-Smtp-Source: ANB0VdZFlTqCUB9wKSX6DKZkdJbXlzANLgnw0EjMY1mmbXxO7eiOdhPnm5riCgO06JUCUSAlRGtqJw==
+X-Received: by 2002:a1c:1584:: with SMTP id
+	126-v6mr5414088wmv.24.1535368077651; 
+	Mon, 27 Aug 2018 04:07:57 -0700 (PDT)
 Received: from beaker.muppets.liwing.de (b2b-78-94-80-58.unitymedia.biz.
 	[78.94.80.58]) by smtp.gmail.com with ESMTPSA id
-	a11-v6sm19243016wrr.81.2018.08.27.04.07.55
+	a11-v6sm19243016wrr.81.2018.08.27.04.07.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Aug 2018 04:07:55 -0700 (PDT)
+	Mon, 27 Aug 2018 04:07:56 -0700 (PDT)
 Sender: Jens Rehsack <rehsack@gmail.com>
 From: Jens Rehsack <sno@netbsd.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Aug 2018 13:07:30 +0200
-Message-Id: <20180827110735.6396-1-sno@netbsd.org>
+Date: Mon, 27 Aug 2018 13:07:31 +0200
+Message-Id: <20180827110735.6396-2-sno@netbsd.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20180827110735.6396-1-sno@netbsd.org>
+References: <20180827110735.6396-1-sno@netbsd.org>
 Cc: Jens Rehsack <sno@netbsd.org>
-Subject: [meta-python][PATCH 1/6] python{3, }-protobuf: consolidate CLEANBROKEN
+Subject: [meta-python][PATCH 2/6] python{,3}-grpcio: update to 1.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,55 +59,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Aug 2018 11:07:56 -0000
+X-List-Received-Date: Mon, 27 Aug 2018 11:07:57 -0000
 
-Since python-protobuf and python3-protobuf share the same build
-instructions, it's sane to clarify for both at the same place,
-that running
-  setup.py clean
-is wrong in configure stage.
+Update python-grpcio and add related python3-grpcio recipe
+for recent features and bug-fixes.
 
 Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- meta-python/recipes-devtools/python/python-protobuf.inc       | 4 ++++
- meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb  | 4 ----
- meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb | 1 -
- 3 files changed, 4 insertions(+), 5 deletions(-)
+ .../recipes-devtools/python/python-grpcio.inc | 25 +++++++++++++++++++
+ ...-Do-not-mix-C-and-C-compiler-options.patch |  4 +--
+ .../python/python-grpcio_1.14.1.bb            |  6 +++++
+ .../python/python-grpcio_1.8.4.bb             | 25 -------------------
+ .../python/python3-grpcio_1.14.1.bb           |  2 ++
+ 5 files changed, 35 insertions(+), 27 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-grpcio.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-grpcio_1.14.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-grpcio_1.14.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-protobuf.inc b/meta-python/recipes-devtools/python/python-protobuf.inc
-index 6a0568ae6..a1866b351 100644
---- a/meta-python/recipes-devtools/python/python-protobuf.inc
-+++ b/meta-python/recipes-devtools/python/python-protobuf.inc
-@@ -10,6 +10,10 @@ inherit pypi
- SRC_URI[md5sum] = "074abcceee0d795ba34ad6430f71d0e8"
- SRC_URI[sha256sum] = "a37836aa47d1b81c2db1a6b7a5e79926062b5d76bd962115a0e615551be2b48d"
- 
-+# http://errors.yoctoproject.org/Errors/Details/184715/
-+# Can't find required file: ../src/google/protobuf/descriptor.proto
+diff --git a/meta-python/recipes-devtools/python/python-grpcio.inc b/meta-python/recipes-devtools/python/python-grpcio.inc
+new file mode 100644
+index 000000000..23d25f7aa
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-grpcio.inc
+@@ -0,0 +1,25 @@
++DESCRIPTION = "Google gRPC"
++HOMEPAGE = "http://www.grpc.io/"
++SECTION = "devel/python"
++
++DEPENDS_append = "${PYTHON_PN}-protobuf"
++
++FILESEXTRAPATHS_prepend := "${THISDIR}/python-grpcio:"
++SRC_URI_append_class-target = " file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch "
++
++RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
++                  ${PYTHON_PN}-setuptools \
++                  ${PYTHON_PN}-six \
++"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
++
++inherit pypi
++
++SRC_URI[md5sum] = "0987ae2e47b5103de3cacc437874a3c5"
++SRC_URI[sha256sum] = "4bf23666e763ca7ff6010465864e9f088f4ac7ecc1e11abd6f85b250e66b2c05"
++
 +CLEANBROKEN = "1"
 +
- UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
- 
- RDEPENDS_${PN} += " \
-diff --git a/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb b/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb
-index dddc9bbb5..f04fc489f 100644
---- a/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python-protobuf_3.6.0.bb
-@@ -1,6 +1,2 @@
- inherit setuptools
- require python-protobuf.inc
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+index 0c1d964a6..61edc437b 100644
+--- a/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
++++ b/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+@@ -22,11 +22,11 @@ Index: grpcio-1.8.4/setup.py
+ ===================================================================
+ --- grpcio-1.8.4.orig/setup.py
+ +++ grpcio-1.8.4/setup.py
+-@@ -115,7 +115,7 @@ if EXTRA_ENV_COMPILE_ARGS is None:
++@@ -135,7 +135,7 @@ if EXTRA_ENV_COMPILE_ARGS is None:
+      else:
+        EXTRA_ENV_COMPILE_ARGS += ' -D_ftime=_ftime64 -D_timeb=__timeb64'
+    elif "linux" in sys.platform:
+--    EXTRA_ENV_COMPILE_ARGS += ' -std=c++11 -std=gnu99 -fvisibility=hidden -fno-wrapv -fno-exceptions'
++-    EXTRA_ENV_COMPILE_ARGS += ' -std=gnu99 -fvisibility=hidden -fno-wrapv -fno-exceptions'
+ +    EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv -fno-exceptions'
+    elif "darwin" in sys.platform:
+      EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv -fno-exceptions'
+diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.14.1.bb b/meta-python/recipes-devtools/python/python-grpcio_1.14.1.bb
+new file mode 100644
+index 000000000..820bea44b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-grpcio_1.14.1.bb
+@@ -0,0 +1,6 @@
++inherit setuptools
++require python-grpcio.inc
++
++RDEPENDS_${PN} += " python-enum34 \
++                    python-futures \
++"
+diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb b/meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb
+deleted file mode 100644
+index bec9d846b..000000000
+--- a/meta-python/recipes-devtools/python/python-grpcio_1.8.4.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "Google gRPC"
+-HOMEPAGE = "http://www.grpc.io/"
+-SECTION = "devel/python"
 -
--# http://errors.yoctoproject.org/Errors/Details/184715/
--# Can't find required file: ../src/google/protobuf/descriptor.proto
--CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
-index 53d5528c4..781d1dc4d 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_3.6.0.bb
-@@ -1,3 +1,2 @@
- inherit setuptools3
- require python-protobuf.inc
--CLEANBROKEN = "1"
+-DEPENDS = "python-protobuf"
+-
+-SRC_URI_append_class-target = " file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch "
+-
+-RDEPENDS_${PN} = "python-enum34 \
+-                  python-futures \
+-                  python-protobuf \
+-                  python-setuptools \
+-                  python-six \
+-"
+-
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
+-
+-inherit pypi setuptools
+-
+-SRC_URI[md5sum] = "7860f7c61de3890323670b7b1ff63e56"
+-SRC_URI[sha256sum] = "88d87aab9c7889b3ab29dd74aac1a5493ed78b9bf5afba1c069c9dd5531f951d"
+-
+-# For usage in other recipes when compiling protobuf files (e.g. by grpcio-tools)
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.14.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.14.1.bb
+new file mode 100644
+index 000000000..d4720b4b8
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.14.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-grpcio.inc
 -- 
 2.17.1
 
