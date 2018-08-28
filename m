@@ -1,48 +1,50 @@
 Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 338BF745D4
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A2B1471B69
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 07:25:45 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id t25-v6so825792wmi.3
+	Tue, 28 Aug 2018 07:26:18 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id 20-v6so520318wrb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 00:25:46 -0700 (PDT)
+	Tue, 28 Aug 2018 00:26:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=ZVfYfqQVUMI9rwLanXUK7qylhD/sMwu20Vq8wxX3MC8=;
-	b=iZyIY5+tt1FkDE/R80T+Um7qVhNMmp88iJumK7FnpHr7Cv7BbRtb1V9LqtgtCdwAAv
-	DACWSIuz/eOiNMMncpWjasVgzhbVymcryJmATuziqse9q8e+96oLE7CEtsAS7XCrrfKc
-	ukoKkQQI36eS1UaQM+JaGL00qfBCDT9cyrDAIyCo8qkOsauUkuB81yRwdYk5v2aRSM2S
-	sapARfycHxe+SQGJA+1zWOEfVBO+duehzLHBM26fFB6moXho76s4WDejXd7OthZIM25M
-	r3ZmAT9l6mMZNCMB0NuSgGO5G9UD9CZttX3a3NCM5VWTF5GOCVgyeHSGYT9caVBRx4t+
-	vqCQ==
+	bh=IpA3boni2UEJNx1W53HkzS8gyNkNvwiYIddL4s3zztA=;
+	b=C0CIhrMjF1SmC1+7kSsafjkqJVjaDYG0mq5Q5+a/yJOHEuRWihH8ehprtRofJ4tsy6
+	jPTqbXnC8IU+2qEK2GjhI3OUk8jm15qTQ1l2oX2u/4R9It5JajQu3VklvdsmPZQPyq9F
+	0agYR7LYO1B+d2yT6lVBBIQhVhQ6NbL5rMxWWeU40Y34JwakHr9p33eDJz99aFM0NFTl
+	9O7KuBPwp/H9NqAmR5kdyuQImYPEaV0DCOZHxU1EOBXEZ3bQ6v0l9JCZn9X3NZruh4dW
+	5XvOYQvE1hilXLfMu5IhF4p/lYbmCzL0taoK9NWLKdWznCPJdlFCIkcAA9VyHXmf8pad
+	EBbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZVfYfqQVUMI9rwLanXUK7qylhD/sMwu20Vq8wxX3MC8=;
-	b=edLOuwgTjwPB0Fx7KjNBXuaoaK0R2171mGQu8793LnJEZkDCRJvWHFeE+R1lz/St4U
-	u5WhCQFmhFkDsxFkSVdNyZ0x07LkqaRnk6AZlph97yIbt0uujFdLyNhkI48dOE54/NC+
-	IyCkqYUAR14sfwEF9SbHB889PHpxbdMZNjiIaMuFEMQ6fJZj5tp00HkYnFbAeqVf18No
-	P69GfU/NtRfB1xrPWDW65W9D7BWOocGijN1sXcx+fyHQtjzarWWY3qaSWGqRn3fwDTXp
-	Drn4XpxQi85UlHE5guN84olysB6KOkcnQ6uRQiJsV9EXRNJGPfw7opPXz/i9oSJjyeu+
-	6JRw==
-X-Gm-Message-State: APzg51CEzeOtTSJD1CMT9zX2yYFa7MlfCProOsyqSs3gub52yMbCTuzP
-	dS/6LEnzv38OH9ECx4wYfv7pEtVKjpw=
-X-Google-Smtp-Source: ANB0VdbQZBvrU/liVMYlk1EarPY0H7cjHKOGsFPQ/guvCdh5MeD+xkTKrj+VFTBL1mmpR+H2Uw1SSQ==
-X-Received: by 2002:a1c:b49:: with SMTP id 70-v6mr514600wml.149.1535441145690; 
-	Tue, 28 Aug 2018 00:25:45 -0700 (PDT)
+	bh=IpA3boni2UEJNx1W53HkzS8gyNkNvwiYIddL4s3zztA=;
+	b=ZJOrd5QfF3J4yM/VJrSFGd3oLl1yaVfaVp08VGM5V6MiFPPVuNt8FzYFUYxiz9s7Wm
+	Fp50FmP8VJ3S30c4qiyMS0gkvP+dzV8tXpUUAA1SZv9qHSmkcG5EvnApJpKWsGV4SbtX
+	r3dZy74GhJV8UvCF8erlWoabFTZEHRvt5M4yxY2YszzA9Bg5DFGTJ51wQcXidsJfrb1i
+	IsJ9LymjP+dCxZ3ZHgQN3IRsBHAVAgG/CRsCFHEfSv2+RWbEV9gCDSZMB1nf5sFpE3f7
+	lmDY6Y9lPQ38YZIlh/VxPz2BQPWVjX9+mu6NLt/gBjjbsk9DW/1j+qt+TP0AtbwEjq57
+	cN4w==
+X-Gm-Message-State: APzg51AhgeJ+O06tyc7kBzzRFbaRwC/jMGngcQxgY2fqPv4yMOhGy+XA
+	+Px7A+kfL/WD8HO/OZFJDlPaj5u5+ng=
+X-Google-Smtp-Source: ANB0VdaA+uvdclbaz8Iq1vLBy9+GHHobC3hgzXCbQ82KP8/MfaC2xCJVcM2faHAI2Ohf4NxmJT1C/g==
+X-Received: by 2002:adf:9b9b:: with SMTP id
+	d27-v6mr241208wrc.240.1535441179180; 
+	Tue, 28 Aug 2018 00:26:19 -0700 (PDT)
 Received: from localhost.localdomain ([80.215.36.164])
 	by smtp.gmail.com with ESMTPSA id
-	j44-v6sm825491wre.40.2018.08.28.00.25.44
+	l18-v6sm432941wru.75.2018.08.28.00.26.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 28 Aug 2018 00:25:45 -0700 (PDT)
+	Tue, 28 Aug 2018 00:26:18 -0700 (PDT)
 From: vincent.prince.fr@gmail.com
 To: openembedded-devel@lists.openembedded.org,
 	akuster808@gmail.com
-Date: Tue, 28 Aug 2018 09:24:50 +0200
-Message-Id: <1535441090-18418-1-git-send-email-vincent.prince.fr@gmail.com>
+Date: Tue, 28 Aug 2018 09:26:03 +0200
+Message-Id: <1535441163-18555-1-git-send-email-vincent.prince.fr@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Cc: Junil Kim <jjunil79.kim@lge.com>
-Subject: [meta-oe][sumo][PATCH v2] ltrace_git: Update SRC_URI due to inaccessible problem
+Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>
+Subject: [meta-oe][sumo][PATCH v2] libsodium: Update SRC_URI due to inaccessible problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,32 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2018 07:25:45 -0000
+X-List-Received-Date: Tue, 28 Aug 2018 07:26:19 -0000
 
-From: Junil Kim <logyourself@gmail.com>
+From: Vincent Prince <vincent.prince.external@saftbatteries.com>
 
-Existing URI service was closed and fetch error occurred.
-Change existing repository to another mirrored SRC URI.
-
-Signed-off-by: Junil Kim <jjunil79.kim@lge.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Vincent Prince <vincent.prince.external@saftbatteries.com>
 ---
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb | 2 +-
+ meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index abe015d..f4033f7 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -15,7 +15,7 @@ SRCREV = "c22d359433b333937ee3d803450dc41998115685"
+diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
+index cbcbe96..00fa7aa 100644
+--- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
++++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://libsodium.org/"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c9f00492f01f5610253fde01c3d2e866"
  
- DEPENDS = "elfutils"
- RDEPENDS_${PN} = "elfutils"
--SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
-+SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http \
-            file://configure-allow-to-disable-selinux-support.patch \
-            file://0001-replace-readdir_r-with-readdir.patch \
-            file://0001-Use-correct-enum-type.patch \
+-SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
++SRC_URI = "https://download.libsodium.org/libsodium/releases/old/unsupported/${BPN}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "b58928d035064b2a46fb564937b83540"
+ SRC_URI[sha256sum] = "a14549db3c49f6ae2170cbbf4664bd48ace50681045e8dbea7c8d9fb96f9c765"
+ 
 -- 
 2.7.4
 
