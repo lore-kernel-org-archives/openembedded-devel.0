@@ -1,23 +1,24 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2102E78C7E
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AB91678D7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 07:29:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7S7TBxF026631
+	Tue, 28 Aug 2018 07:49:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7S7n4GE009716
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 00:29:11 -0700 (PDT)
-Received: from pek-lpg-core1-vm1.wrs.com (128.224.156.106) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.408.0; Tue, 28 Aug 2018 00:29:10 -0700
-From: Dengke Du <dengke.du@windriver.com>
+	Tue, 28 Aug 2018 00:49:04 -0700
+Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.408.0; Tue, 28 Aug 2018 00:49:03 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Aug 2018 15:39:54 +0800
-Message-ID: <1535441994-32199-1-git-send-email-dengke.du@windriver.com>
+Date: Tue, 28 Aug 2018 15:59:48 +0800
+Message-ID: <1535443188-29064-1-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] snappy: add -fPIC flags
+Subject: [meta-networking][PATCH] cyrus-sasl: CLEANBROKEN = "1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,26 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2018 07:29:10 -0000
+X-List-Received-Date: Tue, 28 Aug 2018 07:49:03 -0000
 Content-Type: text/plain
 
-Let the libsnappy.a be position independent code, so other packages can use it
-to make shared PIC library, such as ceph.
+Fixed rebuild error:
+configure: error: changes in the environment can compromise the build
+configure: error: run `make distclean' and/or `rm .././config.cache' and start over
+configure: error: ./configure failed for saslauthd
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-extended/snappy/snappy_1.1.7.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-index 6f1978a..70223be 100644
---- a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-+++ b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-@@ -19,3 +19,4 @@ inherit cmake pkgconfig
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+index 317d238..3391da0 100644
+--- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+@@ -19,6 +19,8 @@ UPSTREAM_CHECK_REGEX = "cyrus-sasl-(?P<pver>(\d+(\.\d+)+))\.tar"
  
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
-+TARGET_CFLAGS += "-fPIC"
+ inherit autotools-brokensep pkgconfig useradd systemd
+ 
++CLEANBROKEN = "1"
++
+ EXTRA_OECONF += "--with-dblib=berkeley \
+                  --with-bdb-libdir=${STAGING_LIBDIR} \
+                  --with-bdb-incdir=${STAGING_INCDIR} \
 -- 
 2.7.4
 
