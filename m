@@ -1,49 +1,51 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2537F78CE4
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 07F1B78EFB
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 28 Aug 2018 13:21:24 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id b19-v6so1912869wme.3
+Received: by mail-wm0-f67.google.com with SMTP id c14-v6so1911709wmb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 06:21:25 -0700 (PDT)
+	Tue, 28 Aug 2018 06:21:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=w8y0qeqvDeNl2qtZu5C6QMIpQD5RPz3AK4dhl/VveNU=;
-	b=kBpLDzujm74ycKkKz0Ved14Nx8s82ajWpo8V7rM+v0AxaX/VHhIlWE56UyiaIZ+g0H
-	F1Ndckqqqgc1t9LYmchHUwi+c2ri7DxJwXtwTQZnlDJnEhg6OO9zE1x6g1kO/MUQlSpf
-	8L6lfp2D15L+wVn6LRsU82C8iRyI436Bw4+/pWFGaJzKXP0h20Gc2j1QIa5V+rCZXkrj
-	2dGNwzf6Nv07zSer25PtapKBKPgzRWl+cwvBND3DV3w/OfAWkyLpuQhVP587zYIex7Yw
-	oXzzn9c3zwclXbeqOW/PuN3D4ktpY7kND1OjotVu6zzxP8xJAEjKeeui++N0tNJRXXWf
-	oeYg==
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=bpQQ00D0OR/DkWeA2gKSusO3IvneCXbad05x9nZpPng=;
+	b=CoyBCd5PyVOH850yX57MnHG+rwDqE+HvhSuW78gw9XD1pvrcGhJnzDKC+oNYFW9LW4
+	hWXKZIaVie/G7IlxAwVE9zpjIOg/vd35fjwfXLvlYjaoad3Sjf+W1/HA9tiQyacDky3W
+	9J8A2dUhUN9D4G/itsWA8iA2hpKxliADXyKs2VV4nY6lnhXctpsEGtac4PKkI7GrHvEC
+	3G385GG+x7wOmBB/zQ/p6BTLdPTR9ohwmfJ7Djg+i/xBibn56vqf9lEs0Vd92RRwKNEv
+	Z4uBMeCvC0ecOhJAXTW+bAeKIZ9yS12CcQIfdHPi91JKtMxlvC3/XC1G50eoB90toOLS
+	mO1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=w8y0qeqvDeNl2qtZu5C6QMIpQD5RPz3AK4dhl/VveNU=;
-	b=rE8vurimrT5BBCWPlTra/zL55p4RVb6opChUlw2vycwwQzszSG+XI5aqTygXG9pPvp
-	yE7C/ayg6xd18th3t5VOJtd5AFP7Tj6NZ85fVqh9mfhxNE3F84wYS/RalcldW+1AF7a0
-	C5yQTIfJaMaq0EBt0kaE5L1ISay2taQJq7GTD0wi+uYJzxZwtB6aLZZFEK8OIpqUFtQD
-	s+HJF6VezchYQ2gtaj2JsO0/+AY4MNJYV/b+nYYfgPCbY6zJgrCACjDIvpgkjFXQqA+J
-	0u41ndBErZJAW5GZOa+MMFPPCVGhrd90hPhw2Yp3M7+TABhCUebO+yk/j6YjoYlUTn0n
-	WWhA==
-X-Gm-Message-State: APzg51BJJUI2mDYOjABl19gBRwNnRYB4eL37+sgOwrbHZNSCLybdKllZ
-	ap8B+3R/TI+Vt8hJjHhQf91ZxwiT
-X-Google-Smtp-Source: ANB0VdYRrj9kmZeE4NzInSxjA12zQqqjx86bM+Sl+dkg8Ks3kCkjpxGqqeb5dJk7/OncrFjSzY4OnQ==
-X-Received: by 2002:a1c:8291:: with SMTP id
-	e139-v6mr1455087wmd.39.1535462484754; 
-	Tue, 28 Aug 2018 06:21:24 -0700 (PDT)
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=bpQQ00D0OR/DkWeA2gKSusO3IvneCXbad05x9nZpPng=;
+	b=aUtxjh02tW4akaiddC/IuNrqM+1PnKZCmnPrveUG7WCLVHU2Xwi2Zvj2+AX1M24fAR
+	oksovQ/5oeWMyNzhQLQ6xI2MP2fBW+LrwG+bXV5WcJ8b/LR/8C/LTQfF1BCFWzBYDcOJ
+	KwDCzzD9iJohqQGW9XlzTYfaxGLo3CrpFUV5AiXnjnMOYQvk3tJrsimTAbViyzNVv3Y4
+	3qVxr7eNluaFN4ZlhH6o/cTKcliBRYJdfeK8t7wOKla++PqSa060bfSv+emq4UM+Ut+/
+	gyWF0gZrYqyNTTAXt29HRcciUKpwQXQVD5MoX39A7+WqJCkOZVn9uDtCR7AQwPH9NUsK
+	S3/Q==
+X-Gm-Message-State: APzg51AG1m+Ty3buDCy/CbfhFn2awfdXLclpcWPqoaAZ7cz1Cp4w7Zbx
+	sE0GaRHlzC7G4Du36SrXgaJ/yj4u
+X-Google-Smtp-Source: ANB0VdbTcO2gl4AEel+xeZfPRc5ur5MbBNnGYoAKSC88KdS9klLThY0f0+VOgeWGCFFcvIpfkwDtwQ==
+X-Received: by 2002:a1c:64c:: with SMTP id 73-v6mr1305036wmg.7.1535462485728; 
+	Tue, 28 Aug 2018 06:21:25 -0700 (PDT)
 Received: from beaker.muppets.liwing.de (b2b-78-94-80-58.unitymedia.biz.
 	[78.94.80.58]) by smtp.gmail.com with ESMTPSA id
-	d10-v6sm2350488wrv.70.2018.08.28.06.21.23
+	d10-v6sm2350488wrv.70.2018.08.28.06.21.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 28 Aug 2018 06:21:23 -0700 (PDT)
+	Tue, 28 Aug 2018 06:21:24 -0700 (PDT)
 Sender: Jens Rehsack <rehsack@gmail.com>
 From: Jens Rehsack <sno@netbsd.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Aug 2018 15:21:05 +0200
-Message-Id: <20180828132106.22102-1-sno@netbsd.org>
+Date: Tue, 28 Aug 2018 15:21:06 +0200
+Message-Id: <20180828132106.22102-2-sno@netbsd.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20180828132106.22102-1-sno@netbsd.org>
+References: <20180828132106.22102-1-sno@netbsd.org>
 Cc: Jens Rehsack <sno@netbsd.org>
-Subject: [meta-perl][PATCH v2 1/2] libcrypt-openssl-guess: Add recipe
+Subject: [meta-perl][PATCH v2 2/2] libcrypt-openssl-rsa-perl: Update to 0.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,45 +58,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2018 13:21:24 -0000
+X-List-Received-Date: Tue, 28 Aug 2018 13:21:25 -0000
 
-Add recipe for CPAN hosted Perl5 module Crypt::OpenSSL::Guess
-version 0.11 as prerequisite for libcrypt-openssl-rsa-perl update
-to express our love for the Perl Programming Language.
+Update recipe for CPAN hosted Perl5 module Crypt::OpenSSL::RSA
+from 0.28 to 0.30 to fix build issues when using openssl 1.1 and
+to express our love to the Perl Programming Language.
+
+LICENSE checksum updated because of:
+    f0a2ed2 Purge trailing whitespace
+
+Changes since 0.28: https://metacpan.org/changes/release/TODDR/Crypt-OpenSSL-RSA-0.30
 
 Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- .../libcrypt/libcrypt-openssl-guess_0.11.bb   | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess_0.11.bb
+ ...rsa-perl_0.28.bb => libcrypt-openssl-rsa-perl_0.30.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-rsa-perl_0.28.bb => libcrypt-openssl-rsa-perl_0.30.bb} (64%)
 
-diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess_0.11.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess_0.11.bb
-new file mode 100644
-index 000000000..21be04720
---- /dev/null
-+++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-guess_0.11.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Guess OpenSSL include path"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ea914cc2718e8d53bd7744d96e66c03c"
-+
-+SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Guess-${PV}.tar.gz "
-+
-+SRC_URI[md5sum] = "e768fe2c07826b0ac9ea604c79f93032"
-+SRC_URI[sha256sum] = "aa6b18e38cb852cbad80a58cd90c395b40819d4d01e0ab37e7703149094d7167"
-+
-+DEPENDS += "openssl"
-+
-+RDEPENDS_${PN}="perl-module-config perl-module-exporter perl-module-symbol perl-module-file-spec"
-+
-+EXTRA_CPANFLAGS = "INC='-I${STAGING_INCDIR}' LIBS='-L${STAGING_LIBDIR} -lssl -L${STAGING_DIR_TARGET}${base_libdir} -lcrypto'"
-+
-+S = "${WORKDIR}/Crypt-OpenSSL-Guess-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.30.bb
+similarity index 64%
+rename from meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
+rename to meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.30.bb
+index f0c610f3a..0a2ad8aa4 100644
+--- a/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.28.bb
++++ b/meta-perl/recipes-perl/libcrypt/libcrypt-openssl-rsa-perl_0.30.bb
+@@ -1,14 +1,14 @@
+ SUMMARY = "Crypt Openssl RSA cpan module"
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
+ 
+ SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz "
+ 
+-SRC_URI[md5sum] = "86217a5036fc63779c30420b5fd84129"
+-SRC_URI[sha256sum] = "5357f977464bb3a8184cf2d3341851a10d5515b4b2b0dfb88bf78995c0ded7be"
++SRC_URI[md5sum] = "10bca2fc6d0ba1aa329f227424ae87d5"
++SRC_URI[sha256sum] = "23e13531397af102db4fd24bcf70137add7c85c23cca697c43aa71c2959a29ac"
+ 
+-DEPENDS += "openssl"
++DEPENDS += "libcrypt-openssl-guess-native openssl"
+ 
+ RDEPENDS_${PN}="libcrypt-openssl-random-perl"
+ 
 -- 
 2.17.1
 
