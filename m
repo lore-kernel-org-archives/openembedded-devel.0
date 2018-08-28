@@ -1,50 +1,23 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
-	[209.85.221.46])
-	by mail.openembedded.org (Postfix) with ESMTP id A2B1471B69
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2102E78C7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 07:26:18 +0000 (UTC)
-Received: by mail-wr1-f46.google.com with SMTP id 20-v6so520318wrb.12
+	Tue, 28 Aug 2018 07:29:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7S7TBxF026631
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 00:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=IpA3boni2UEJNx1W53HkzS8gyNkNvwiYIddL4s3zztA=;
-	b=C0CIhrMjF1SmC1+7kSsafjkqJVjaDYG0mq5Q5+a/yJOHEuRWihH8ehprtRofJ4tsy6
-	jPTqbXnC8IU+2qEK2GjhI3OUk8jm15qTQ1l2oX2u/4R9It5JajQu3VklvdsmPZQPyq9F
-	0agYR7LYO1B+d2yT6lVBBIQhVhQ6NbL5rMxWWeU40Y34JwakHr9p33eDJz99aFM0NFTl
-	9O7KuBPwp/H9NqAmR5kdyuQImYPEaV0DCOZHxU1EOBXEZ3bQ6v0l9JCZn9X3NZruh4dW
-	5XvOYQvE1hilXLfMu5IhF4p/lYbmCzL0taoK9NWLKdWznCPJdlFCIkcAA9VyHXmf8pad
-	EBbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=IpA3boni2UEJNx1W53HkzS8gyNkNvwiYIddL4s3zztA=;
-	b=ZJOrd5QfF3J4yM/VJrSFGd3oLl1yaVfaVp08VGM5V6MiFPPVuNt8FzYFUYxiz9s7Wm
-	Fp50FmP8VJ3S30c4qiyMS0gkvP+dzV8tXpUUAA1SZv9qHSmkcG5EvnApJpKWsGV4SbtX
-	r3dZy74GhJV8UvCF8erlWoabFTZEHRvt5M4yxY2YszzA9Bg5DFGTJ51wQcXidsJfrb1i
-	IsJ9LymjP+dCxZ3ZHgQN3IRsBHAVAgG/CRsCFHEfSv2+RWbEV9gCDSZMB1nf5sFpE3f7
-	lmDY6Y9lPQ38YZIlh/VxPz2BQPWVjX9+mu6NLt/gBjjbsk9DW/1j+qt+TP0AtbwEjq57
-	cN4w==
-X-Gm-Message-State: APzg51AhgeJ+O06tyc7kBzzRFbaRwC/jMGngcQxgY2fqPv4yMOhGy+XA
-	+Px7A+kfL/WD8HO/OZFJDlPaj5u5+ng=
-X-Google-Smtp-Source: ANB0VdaA+uvdclbaz8Iq1vLBy9+GHHobC3hgzXCbQ82KP8/MfaC2xCJVcM2faHAI2Ohf4NxmJT1C/g==
-X-Received: by 2002:adf:9b9b:: with SMTP id
-	d27-v6mr241208wrc.240.1535441179180; 
-	Tue, 28 Aug 2018 00:26:19 -0700 (PDT)
-Received: from localhost.localdomain ([80.215.36.164])
-	by smtp.gmail.com with ESMTPSA id
-	l18-v6sm432941wru.75.2018.08.28.00.26.18
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 28 Aug 2018 00:26:18 -0700 (PDT)
-From: vincent.prince.fr@gmail.com
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Tue, 28 Aug 2018 09:26:03 +0200
-Message-Id: <1535441163-18555-1-git-send-email-vincent.prince.fr@gmail.com>
+	Tue, 28 Aug 2018 00:29:11 -0700 (PDT)
+Received: from pek-lpg-core1-vm1.wrs.com (128.224.156.106) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Tue, 28 Aug 2018 00:29:10 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Aug 2018 15:39:54 +0800
+Message-ID: <1535441994-32199-1-git-send-email-dengke.du@windriver.com>
 X-Mailer: git-send-email 2.7.4
-Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>
-Subject: [meta-oe][sumo][PATCH v2] libsodium: Update SRC_URI due to inaccessible problem
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] snappy: add -fPIC flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,28 +30,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2018 07:26:19 -0000
+X-List-Received-Date: Tue, 28 Aug 2018 07:29:10 -0000
+Content-Type: text/plain
 
-From: Vincent Prince <vincent.prince.external@saftbatteries.com>
+Let the libsnappy.a be position independent code, so other packages can use it
+to make shared PIC library, such as ceph.
 
-Signed-off-by: Vincent Prince <vincent.prince.external@saftbatteries.com>
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/snappy/snappy_1.1.7.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
-index cbcbe96..00fa7aa 100644
---- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
-+++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://libsodium.org/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c9f00492f01f5610253fde01c3d2e866"
+diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+index 6f1978a..70223be 100644
+--- a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
++++ b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+@@ -19,3 +19,4 @@ inherit cmake pkgconfig
  
--SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
-+SRC_URI = "https://download.libsodium.org/libsodium/releases/old/unsupported/${BPN}-${PV}.tar.gz"
- SRC_URI[md5sum] = "b58928d035064b2a46fb564937b83540"
- SRC_URI[sha256sum] = "a14549db3c49f6ae2170cbbf4664bd48ace50681045e8dbea7c8d9fb96f9c765"
- 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
++TARGET_CFLAGS += "-fPIC"
 -- 
 2.7.4
 
