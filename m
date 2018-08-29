@@ -1,24 +1,40 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 453C774F9D
+Return-Path: <prvs=8779ca2b03=adrian.ratiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B82C7918F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2018 09:45:28 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w7T9jSpJ009687
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2018 02:45:28 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Wed, 29 Aug 2018 02:45:20 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Aug 2018 02:45:20 -0700
-Message-ID: <20180829094520.70347-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 29 Aug 2018 10:13:18 +0000 (UTC)
+Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w7TACMBH009759; Wed, 29 Aug 2018 05:13:18 -0500
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2m34mwd2fm-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Wed, 29 Aug 2018 05:13:18 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com
+	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
+	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
+	w7TADHq3011430
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+	Wed, 29 Aug 2018 05:13:17 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Wed, 29 Aug 2018 05:13:17 -0500
+Received: from ionel-work.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Wed, 29 Aug 2018 05:13:16 -0500
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Wed, 29 Aug 2018 13:14:53 +0300
+Message-ID: <20180829101456.31305-1-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] cryptsetup: Upgrade to 2.0.4
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-08-29_03:, , signatures=0
+X-Proofpoint-Spam-Reason: safe
+Cc: Sergey Kizunov <sergey.kizunov@ni.com>
+Subject: [meta-python][PATCH 1/4] python-pytest-tempdir: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2018 09:45:28 -0000
+X-List-Received-Date: Wed, 29 Aug 2018 10:13:18 -0000
 Content-Type: text/plain
 
-From: Mingli Yu <mingli.yu@windriver.com>
+From: Sergey Kizunov <sergey.kizunov@ni.com>
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Adds support for a predictable and repeatable temporary directory.
+
+Signed-off-by: Sergey Kizunov <sergey.kizunov@ni.com>
 ---
- .../cryptsetup/{cryptsetup_2.0.3.bb => cryptsetup_2.0.4.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.0.3.bb => cryptsetup_2.0.4.bb} (91%)
+ .../python/python-pytest-tempdir_2016.8.20.bb      | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.4.bb
-similarity index 91%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.4.bb
-index df85add6a..cc7bc6e01 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.3.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.0.4.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
- DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
- 
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
--SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
--SRC_URI[sha256sum] = "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
-+SRC_URI[md5sum] = "ed42b31f67d05b05e392d1943d467b8d"
-+SRC_URI[sha256sum] = "9d3a3c7033293e0c97f0ad0501fd5b4d4913ae497cbf70cca06633ccc54b5734"
- 
- inherit autotools gettext pkgconfig
- 
+diff --git a/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb b/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb
+new file mode 100644
+index 000000000..74030dcf5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pytest-tempdir_2016.8.20.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Adds support for a predictable and repeatable temporary directory."
++HOMEPAGE = "https://github.com/saltstack/pytest-tempdir"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=8751a9cf4a70be4f02697a9b89e686ce"
++
++SRC_URI[md5sum] = "f87f2583f5f8aaca7203d57ada3948b5"
++SRC_URI[sha256sum] = "65ff815966ea6dfc07ca1b43747c9888a6d883971170e67b16290f9f50d434ea"
++
++inherit pypi setuptools
++
++RDEPENDS_${PN} += " \
++    python-pytest \
++    "
 -- 
-2.17.1
+2.18.0
 
 
