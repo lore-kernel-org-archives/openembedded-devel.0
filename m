@@ -1,44 +1,47 @@
-Return-Path: <prvs=8779ca2b03=adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 1162D791E3
+Return-Path: <texier.pj2@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id AC6397929E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2018 10:13:22 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
-	w7TACStI009791; Wed, 29 Aug 2018 05:13:22 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2m34mwd2fu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT); Wed, 29 Aug 2018 05:13:22 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com
-	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
-	by us-aus-skprod3.natinst.com (8.16.0.22/8.16.0.22) with ESMTPS id
-	w7TADL6P011442
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-	Wed, 29 Aug 2018 05:13:21 -0500
-Received: from us-aus-exch5.ni.corp.natinst.com (130.164.68.15) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Wed, 29 Aug 2018 05:13:21 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch5.ni.corp.natinst.com (130.164.68.15) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Wed, 29 Aug 2018 05:13:21 -0500
-Received: from ionel-work.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Wed, 29 Aug 2018 05:13:20 -0500
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Wed, 29 Aug 2018 13:14:56 +0300
-Message-ID: <20180829101456.31305-4-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180829101456.31305-1-adrian.ratiu@ni.com>
-References: <20180829101456.31305-1-adrian.ratiu@ni.com>
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
-	definitions=2018-08-29_03:, , signatures=0
-X-Proofpoint-Spam-Reason: safe
-Subject: [meta-python][PATCH 4/4] python3-pytest-helpers-namespace: add recipe
+	Wed, 29 Aug 2018 21:52:19 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id b19-v6so6691965wme.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Aug 2018 14:52:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=QtmZNAKQUza8PlzBBzbkzvuPXlRMV+DbjO2O3/TJNog=;
+	b=bwY8kzujNworfBXK66ss2jLqBQ6RYX3aZf/8EEzHqJYzR37wWUgKRCUJk6gzcfmL6z
+	NATss48Q8+bvou/NjAbW76tF/SERyQDg6yVi6SF8mK37OfkGsSaYlJ39JG7eZIYAXRLY
+	Hd6Kt/nlUkcm118qcyshFaVHum72ZzxFvLIVw7yVtlYrsPyl3tk0ZemNYZlXDfq8UuOK
+	Sl/eHcAaNkI6FZHLTYitNp2QruGHwoME5F+VeztkCdVZ7fAI35ZOt/LXsDn9uqzuy0Kn
+	VXwNL0c93KCTNA/J0HZqPs/FPHhPVER6Qwcfni6jJ5owIPBJcS9W/2Lg8CmbutIYYB2x
+	n4cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=QtmZNAKQUza8PlzBBzbkzvuPXlRMV+DbjO2O3/TJNog=;
+	b=L984bXtSWbfCE7htKzBiuc4jtqwiAzj80fxmUxxZAUlLC2GoMo3qg+ba9dJB1kBzHa
+	4VY0K23Pj0nWsElEu0VSctnlX10WKqCwXrdTohhToZtBO2JD7EUwdzMolMbt5EfeSUGn
+	UiNPgjq16wjiXMKDsI0a5WTTEzEVbSWEvB4Scifx1wjp7L8yNOdlCtfsm2rKicUqQinl
+	EyHx9BkWnRdlBUIXxbNeHR3dEKbAqbJ9pxz5H1py6QAB5Z7+P5orxfx6eSQv4lkR5lIM
+	y40yRBkJCLiHrVQjAbqBhlQtgt2lpzgFhvOcrpu8/npfI8lRoLPAs2Guo4g7N9GLqHj3
+	0aww==
+X-Gm-Message-State: APzg51DKCyITHUzp0LdwearS17bJOYdT/rlQxEY09+VGS6RlS7qKtdE/
+	AVGlPo/4XsNrl//n5hyg62I0/cPo
+X-Google-Smtp-Source: ANB0Vdbeet4x4gVW2DaAvhK8MmewyaIBz+MlgkjnzKv6d+C/RV5KIcVh2tWIRKaHiGuq4TmX7wjdDA==
+X-Received: by 2002:a1c:a60e:: with SMTP id
+	p14-v6mr5678345wme.64.1535579540132; 
+	Wed, 29 Aug 2018 14:52:20 -0700 (PDT)
+Received: from menoah.home ([2a01:cb19:190:c500:1198:c038:2f3f:1b47])
+	by smtp.gmail.com with ESMTPSA id
+	34-v6sm8734151wra.20.2018.08.29.14.52.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 29 Aug 2018 14:52:19 -0700 (PDT)
+From: Pierre-Jean Texier <texier.pj2@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Aug 2018 23:52:16 +0200
+Message-Id: <1535579536-14562-1-git-send-email-texier.pj2@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH v2] spitools: 0.8.1 -> 0.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,71 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2018 10:13:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Aug 2018 21:52:19 -0000
 
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-
-Signed-off-by: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
 ---
- .../python/python-pytest-helpers-namespace.inc        | 10 ++++++++++
- .../python-pytest-helpers-namespace_2016.7.10.bb      | 11 ++---------
- .../python3-pytest-helpers-namespace_2016.7.10.bb     |  7 +++++++
- 3 files changed, 19 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb
+ meta-oe/recipes-support/spitools/spitools_git.bb | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
-new file mode 100644
-index 000000000..a69867d91
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, however, provide a helpers namespace in pytest which enables you to register helper functions in your conftest.py to be used within your tests without having to import them."
-+HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=71fac4dfeee99c39c51f617e9486237c"
-+
-+SRC_URI[md5sum] = "80fe3e515f640b1459709b539f6b857e"
-+SRC_URI[sha256sum] = "d8bdb017c0f7271699c08850b6b12e1ce9e52913cbd4461b5febd21082a29113"
-+
-+inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb
-index afca48702..2b6ee8550 100644
---- a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb
-+++ b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace_2016.7.10.bb
-@@ -1,13 +1,6 @@
--DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, however, provide a helpers namespace in pytest which enables you to register helper functions in your conftest.py to be used within your tests without having to import them."
--HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=71fac4dfeee99c39c51f617e9486237c"
-+require python-pytest-helpers-namespace.inc
+diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
+index 3f6cdc6..af1cd60 100644
+--- a/meta-oe/recipes-support/spitools/spitools_git.bb
++++ b/meta-oe/recipes-support/spitools/spitools_git.bb
+@@ -4,11 +4,9 @@ AUTHOR = "Christophe BLAESS"
+ LICENSE="GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
  
--SRC_URI[md5sum] = "80fe3e515f640b1459709b539f6b857e"
--SRC_URI[sha256sum] = "d8bdb017c0f7271699c08850b6b12e1ce9e52913cbd4461b5febd21082a29113"
+-PR = "r0"
 -
--inherit pypi setuptools
-+inherit setuptools
+-BPV = "0.8.1"
++BPV = "0.8.3"
+ PV = "${BPV}"
+-SRCREV = "318bcae5249722873bf58b27afdd20473c7047cc"
++SRCREV = "a3f1f68a048d0d2321ee562b3744dd1162cad22f"
  
- RDEPENDS_${PN} += " \
-     python-pytest \
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb
-new file mode 100644
-index 000000000..f03f5d415
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2016.7.10.bb
-@@ -0,0 +1,7 @@
-+require python-pytest-helpers-namespace.inc
-+
-+inherit setuptools3
-+
-+RDEPENDS_${PN} += " \
-+    python3-pytest \
-+    "
+ S = "${WORKDIR}/git"
+ 
+@@ -16,4 +14,3 @@ SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
+ 
+ 
+ inherit autotools
+-
 -- 
-2.18.0
+2.7.4
 
 
