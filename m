@@ -1,50 +1,47 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f48.google.com (mail-oi0-f48.google.com
-	[209.85.218.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 363267503E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
+	[209.85.216.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CBA071957
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 23:46:24 +0000 (UTC)
-Received: by mail-oi0-f48.google.com with SMTP id p84-v6so6033985oic.4
+	Wed, 29 Aug 2018 01:35:02 +0000 (UTC)
+Received: by mail-qt0-f177.google.com with SMTP id g53-v6so4017949qtg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 16:46:25 -0700 (PDT)
+	Tue, 28 Aug 2018 18:35:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=eLhhJIIMur/kVNndq1otpCTfggAOLFqoxOVpWl5Q8eY=;
-	b=Dmadcb+xVV2WAChqjZgqn63GwL4fUdYVER/M+bedTfoh33kg4YXQ4q0xcsT+0KAYAE
-	CQJQNuJROlRDaVng/4Xns4MmenmgH+foORrOil+XRPXjqCHZSZpw9jDmMFAoYMcsAHh+
-	RdBLKlQ6ig5SjaoIHOWPcQXKhEDsx0Amz+NLqQwMFdDUV54LQxTh6La6YbNEDL3uEe3N
-	znOAQuycqk2es6W/jpuAOPDBCTIm5mD1ijxtS42f6+z8NFIUxg4VeBDKO9lExdBq/faT
-	89gM51BEoVip+KPUVAwLaCe6JikTkjiDtvpm/vI/UBH+j8Mrv/bp4SdumP2il3A3/wBw
-	Unbg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=nD6vTbrNo3usoSITTXX5F/yoM6S9/K4iwKKwMwEmqfs=;
+	b=KfJrwUKzr0F5jwMfX7JXXI3voMXWLicasazNFO6wfVBBxRuAg9+pqm6a+v2lbGC35T
+	GT5YE1oc4uatZAqLbM8JHwRYWWadr6lJbaEA3a5Vb+rnEmEXBgIJhakEGXoRL5ajKfjZ
+	WUhX9nHx3gn6HAH5gO9/sfcdzvu7a09YgDPwcO+HQja3DhKX/Uza543tCC4SuyzM00yN
+	jpIstN6EH7Q0eShiNBnjBtq1+7Xf6VrpJ8Md10TqUNq1FQRXZZWXGxe0LctvlvGX/j7j
+	SdEOSxlh1vpv9XLm3DMaYmeCTlk3wy9VkPxg5dckSq/x/DQ4azgJ5oAH7tpFwUwSWvWo
+	PDig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=eLhhJIIMur/kVNndq1otpCTfggAOLFqoxOVpWl5Q8eY=;
-	b=pZ+ntSkdRMzxib3apLXlghFIcJhRf3m2RHJZuC4WoHX+WGsISVc3bT99OL9n8bFong
-	4aV5rzNpMUmMDsyLMoipCMQEsDTcM2n5E9WA7GxxOwywD2FeI3jbJ8btdvgE0nw4psuJ
-	bFulR8bXTEOh+/xYe2qZ1al96LAhrHWdwzTw6Po8eLI72Kez2v/JuQSPr9QXWnOPiL+F
-	RoWOQH1sXTFPS3HMUhAZtvsOvsLTsDctMXIcCdLPJN4kJYFDirab55RnBAVr1F1dFi2+
-	kRdSzVLOAryiZY4MQUarvKTLj6d7FTm1A6lvP+i2p1TDa5tGPNA8FtgiO0QgCTtUMHda
-	89Aw==
-X-Gm-Message-State: APzg51DrjAXtlGZfXIMHgD2adX3FNP4WG26Obl33aRVdIaXq7VtAGRCr
-	8Iu9Hjsg5mnYCiYDryyVQR3hsotqX7tHwzc8RP0=
-X-Google-Smtp-Source: ANB0VdYOLqI/bpFcRN2DIaoSle0y4r7K+kWN1El4AGSqFkCKm0CKG9Qn/SRAXHeR19R297GQyKMi/+YvMG8nQWo14GA=
-X-Received: by 2002:aca:f488:: with SMTP id
-	s130-v6mr326735oih.269.1535499985162; 
-	Tue, 28 Aug 2018 16:46:25 -0700 (PDT)
+	bh=nD6vTbrNo3usoSITTXX5F/yoM6S9/K4iwKKwMwEmqfs=;
+	b=PHdIFLUR/EhhDqVwuv+D8Jp2WuHuqsXwU0QWEoNgXw+SQ02g0KoE+0nLZG3aKjJkKa
+	PeXXcdei2mCw0mIIEJCUvXhQjOoXe+gDVwfX/fdo9QBTKT9jbAQ7dMQ/TtGE9/YEOIcO
+	hqtG6iKNwXhlijwnV1ggRQIuM54hcliwh04ik1O6qVscPOnxJBNdNRc+ZfvZASXwVSt2
+	JUvg8YGHXp93q/wTGA1/D1Bt/eA9xtIhQwFS6VIKp90LTGucR9L9w01tO6DNr0rfCB9h
+	vG9jqUKsCh2BBr6cl3FLyDTR/gvMNzJgTVkGpl4T3x5Xp0zDyBKKTnon80ta31zD1oJK
+	plkA==
+X-Gm-Message-State: APzg51BfVGhY2nMV4A8Ksp+Xm1ZKYa8PGDSo6CJYtb8ZmdWUqgJ4ntRM
+	P+F9o4yCJmyhjK8hmimBq+zNBDtss8tjJrX4lD4=
+X-Google-Smtp-Source: ANB0Vda8m7Bf7jogUo9hqlb5HGJO8r4c+uZ9dD2g4qtkvBnXdhMUkFCdTbDeOUhAFaiudHwMTC6/Wvopbib9bawVkSg=
+X-Received: by 2002:aed:3848:: with SMTP id
+	j66-v6mr4498320qte.218.1535506502935; 
+	Tue, 28 Aug 2018 18:35:02 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:ac9:454b:0:0:0:0:0 with HTTP; Tue, 28 Aug 2018 16:46:24
-	-0700 (PDT)
-In-Reply-To: <6811474E739E4AD599463CACAD2CDF1B@ThinkpadOdile>
-References: <6811474E739E4AD599463CACAD2CDF1B@ThinkpadOdile>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 29 Aug 2018 01:46:24 +0200
-Message-ID: <CALbNGRRBM_7qdfJwr8=j-diPX--W8hE9iFtuVtfVB6D5mauZ=g@mail.gmail.com>
-To: raiatea <raiatea@ymail.com>
-Cc: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-gnome
+References: <1535482087-19250-1-git-send-email-texier.pj2@gmail.com>
+In-Reply-To: <1535482087-19250-1-git-send-email-texier.pj2@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 28 Aug 2018 18:34:37 -0700
+Message-ID: <CAMKF1sqvY9Rx7dtf3tRKzi2f9+sagj4=HQGM3eK-tkFpTnsxsg@mail.gmail.com>
+To: Pierre-Jean TEXIER <texier.pj2@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] spitools: 0.8.1 -> 0.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,72 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Aug 2018 23:46:24 -0000
+X-List-Received-Date: Wed, 29 Aug 2018 01:35:02 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Aug 28, 2018 at 1:46 PM, raiatea <raiatea@ymail.com> wrote:
-> Hello,
-Hi Raiatea,
+Hi Pierre
+On Tue, Aug 28, 2018 at 11:48 AM Pierre-Jean Texier
+<texier.pj2@gmail.com> wrote:
+>
+> Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
+> ---
+>  meta-oe/recipes-support/spitools/spitools_git.bb | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
+> index 3f6cdc6..4944e25 100644
+> --- a/meta-oe/recipes-support/spitools/spitools_git.bb
+> +++ b/meta-oe/recipes-support/spitools/spitools_git.bb
+> @@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
+>
+>  PR = "r0"
 
-I put meta-openembedded mailing list in CC - there are more people who
-might help you.
->
-> I'm a beginner so the question might be stupid.
-Don't think so :)
-> I found your email in the readme of meta-openembedded-sumo as layer
-> maintainer.
-As far as I can remember, I am maintainer on meta-xfce a layer within
-meta-openembedded - but never mind.
->
-> I'm using an Ultra96 board with a Xilinx Zynq, Xilinx provides the tool
-> Petalinux based on Yocto.
-> I would like to use a window manager but things are evolving:
->  - Sato/Matchbox is too simple for my need
->  - elf (Enlightenment) has been removed
->  - Xfce could be fine
-My personal favourite - use it most: A classic desktop with many
-features/plugins/configurations. It is fast on weak hardware and does
-not need graphic acceleration.
->  - Gnome : I don't clearly see if all required files are present
->
-> In pyro: 49 recipes including gnome-session/-settings...
-> I don't know if this is enought for a complete install, but it is more than
-> what is present in rocko and sumo:
->
-> In rocko : 35 recipes, without session...
-> In sumo: 25 recipes, without session...
->
-> I think the last Xilinx tool of 2018.2 is using sumo, so meta-gnome is
-> uncomplete (a previous version used pyro and had efl, but I would like to
-> use the last tools if possible). Maybe things are elsewhere.
->
-> Could you tell me how I can manage meta-gnome for a complete install ?
-> Are there packagegroup files for gnome, or should I create them ?
-To build a Gnome3 desktop many recipes missing in meta-gnome. Few
-years ago we had Gnome2 desktop working but it never made it to
-Gnome3. Many recipes were removed meanwhile - old sources turned into
-maintenance burden. Left over are applications and libraries.
+Drop this while you are here.
 
-If you are looking for desktop environments and have no problem in
-building/using Qt5 [1]: In [2] you find
-
-* kde5/plasma: Very beautiful but hungry of resources of all kinds -
-no way without accelerated OpenGL(ES) or on weak machines (CPU/RAM).
-* lxqt: Very fast / low memory consumption but a bit lightweight in
-features (my opinion)
-* lumina: Interesting but appears a bit unfinished to me
-
-All of them work perfectly fine on sumo.
-
-[1] https://github.com/meta-qt5/meta-qt5
-[2] https://github.com/schnitzeltony/meta-qt5-extra
 >
-> Best regards,
-> Raiatea
+> -BPV = "0.8.1"
+> +BPV = "0.8.3"
+>  PV = "${BPV}"
+> -SRCREV = "318bcae5249722873bf58b27afdd20473c7047cc"
+> +SRCREV = "a3f1f68a048d0d2321ee562b3744dd1162cad22f"
 >
-Hope that helps,
-
-Regards
-
-Andreas
+>  S = "${WORKDIR}/git"
+>
+> @@ -16,4 +16,3 @@ SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
+>
+>
+>  inherit autotools
+> -
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
