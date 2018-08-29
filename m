@@ -1,47 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CBA071957
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BCFE71A70
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2018 01:35:02 +0000 (UTC)
-Received: by mail-qt0-f177.google.com with SMTP id g53-v6so4017949qtg.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Aug 2018 18:35:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=nD6vTbrNo3usoSITTXX5F/yoM6S9/K4iwKKwMwEmqfs=;
-	b=KfJrwUKzr0F5jwMfX7JXXI3voMXWLicasazNFO6wfVBBxRuAg9+pqm6a+v2lbGC35T
-	GT5YE1oc4uatZAqLbM8JHwRYWWadr6lJbaEA3a5Vb+rnEmEXBgIJhakEGXoRL5ajKfjZ
-	WUhX9nHx3gn6HAH5gO9/sfcdzvu7a09YgDPwcO+HQja3DhKX/Uza543tCC4SuyzM00yN
-	jpIstN6EH7Q0eShiNBnjBtq1+7Xf6VrpJ8Md10TqUNq1FQRXZZWXGxe0LctvlvGX/j7j
-	SdEOSxlh1vpv9XLm3DMaYmeCTlk3wy9VkPxg5dckSq/x/DQ4azgJ5oAH7tpFwUwSWvWo
-	PDig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=nD6vTbrNo3usoSITTXX5F/yoM6S9/K4iwKKwMwEmqfs=;
-	b=PHdIFLUR/EhhDqVwuv+D8Jp2WuHuqsXwU0QWEoNgXw+SQ02g0KoE+0nLZG3aKjJkKa
-	PeXXcdei2mCw0mIIEJCUvXhQjOoXe+gDVwfX/fdo9QBTKT9jbAQ7dMQ/TtGE9/YEOIcO
-	hqtG6iKNwXhlijwnV1ggRQIuM54hcliwh04ik1O6qVscPOnxJBNdNRc+ZfvZASXwVSt2
-	JUvg8YGHXp93q/wTGA1/D1Bt/eA9xtIhQwFS6VIKp90LTGucR9L9w01tO6DNr0rfCB9h
-	vG9jqUKsCh2BBr6cl3FLyDTR/gvMNzJgTVkGpl4T3x5Xp0zDyBKKTnon80ta31zD1oJK
-	plkA==
-X-Gm-Message-State: APzg51BfVGhY2nMV4A8Ksp+Xm1ZKYa8PGDSo6CJYtb8ZmdWUqgJ4ntRM
-	P+F9o4yCJmyhjK8hmimBq+zNBDtss8tjJrX4lD4=
-X-Google-Smtp-Source: ANB0Vda8m7Bf7jogUo9hqlb5HGJO8r4c+uZ9dD2g4qtkvBnXdhMUkFCdTbDeOUhAFaiudHwMTC6/Wvopbib9bawVkSg=
-X-Received: by 2002:aed:3848:: with SMTP id
-	j66-v6mr4498320qte.218.1535506502935; 
-	Tue, 28 Aug 2018 18:35:02 -0700 (PDT)
+	Wed, 29 Aug 2018 02:13:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7T2Dtdg027695
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 28 Aug 2018 19:13:55 -0700 (PDT)
+Received: from [128.224.162.149] (128.224.162.149) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Tue, 28 Aug 2018 19:13:54 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1535441994-32199-1-git-send-email-dengke.du@windriver.com>
+	<CAMKF1soJ5kaqW+XKAgCPtNwZE08yuzz5TCOKt7eVX=TitSYBDA@mail.gmail.com>
+From: Dengke Du <dengke.du@windriver.com>
+Message-ID: <8d7e8465-54a8-eae2-ecb1-0d8fb11f49c6@windriver.com>
+Date: Wed, 29 Aug 2018 10:10:15 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-References: <1535482087-19250-1-git-send-email-texier.pj2@gmail.com>
-In-Reply-To: <1535482087-19250-1-git-send-email-texier.pj2@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 28 Aug 2018 18:34:37 -0700
-Message-ID: <CAMKF1sqvY9Rx7dtf3tRKzi2f9+sagj4=HQGM3eK-tkFpTnsxsg@mail.gmail.com>
-To: Pierre-Jean TEXIER <texier.pj2@gmail.com>
+In-Reply-To: <CAMKF1soJ5kaqW+XKAgCPtNwZE08yuzz5TCOKt7eVX=TitSYBDA@mail.gmail.com>
+X-Originating-IP: [128.224.162.149]
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] spitools: 0.8.1 -> 0.8.3
+Subject: Re: [meta-oe][PATCH] snappy: add -fPIC flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,48 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2018 01:35:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 29 Aug 2018 02:13:55 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Hi Pierre
-On Tue, Aug 28, 2018 at 11:48 AM Pierre-Jean Texier
-<texier.pj2@gmail.com> wrote:
->
-> Signed-off-by: Pierre-Jean Texier <texier.pj2@gmail.com>
-> ---
->  meta-oe/recipes-support/spitools/spitools_git.bb | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
-> index 3f6cdc6..4944e25 100644
-> --- a/meta-oe/recipes-support/spitools/spitools_git.bb
-> +++ b/meta-oe/recipes-support/spitools/spitools_git.bb
-> @@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
->
->  PR = "r0"
 
-Drop this while you are here.
+
+On 2018年08月29日 00:45, Khem Raj wrote:
+> On Tue, Aug 28, 2018 at 12:29 AM Dengke Du <dengke.du@windriver.com> wrote:
+>> Let the libsnappy.a be position independent code, so other packages can use it
+>> to make shared PIC library, such as ceph.
+>>
+>> Signed-off-by: Dengke Du <dengke.du@windriver.com>
+>> ---
+>>   meta-oe/recipes-extended/snappy/snappy_1.1.7.bb | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+>> index 6f1978a..70223be 100644
+>> --- a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+>> +++ b/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+>> @@ -19,3 +19,4 @@ inherit cmake pkgconfig
+>>
+>>   PACKAGECONFIG ??= ""
+>>   PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
+>> +TARGET_CFLAGS += "-fPIC"
+> perhaps adding the -fPIC flag to CPPFLAGS is better since adding to
+> it would mean it applies to  C and C++ compilers equally
+
+Thanks!
 
 >
-> -BPV = "0.8.1"
-> +BPV = "0.8.3"
->  PV = "${BPV}"
-> -SRCREV = "318bcae5249722873bf58b27afdd20473c7047cc"
-> +SRCREV = "a3f1f68a048d0d2321ee562b3744dd1162cad22f"
 >
->  S = "${WORKDIR}/git"
->
-> @@ -16,4 +16,3 @@ SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
->
->
->  inherit autotools
-> -
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
