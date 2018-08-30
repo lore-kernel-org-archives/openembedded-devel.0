@@ -1,51 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C406171B2E
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4514060069
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2018 23:32:18 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id z8-v6so7819654qto.9
+	Thu, 30 Aug 2018 03:36:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w7U3aqmb013795
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Aug 2018 16:32:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=a4uQ5cD9ZNQLs+jSnGogm/kgjYVuvMZ0EkgZGWE92bg=;
-	b=R3F+fILnStS+IPicqYm43/BajZEO044N2kb/gXo16Tyh9iuUGdTFcSUctVtVyKUXyn
-	wHmyzkCsWJOGmva1kLokkmF2tsqwpUYJzwf1OcVBizh4eS3Ny65TPqS2VPDFsn6Y1As/
-	ZPcnRTOH0v65/4dstD07OAfdUw1FZwAKKFaK34hfRAJtl35W/xENA9PNH0pvsaNbZzus
-	YSYJyQ1+AC7SNi3Fvqd8oK7rxY17lf/3gRj52pQVF8zXLehOonQ+8e1ZVUi5Zz9NoRuz
-	rvu+ySysmBwwWreylvisUW5pFwLIWio7krlJCnnkZrle8jChOeIU79N6MyS2oUbaZvO1
-	fGNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=a4uQ5cD9ZNQLs+jSnGogm/kgjYVuvMZ0EkgZGWE92bg=;
-	b=KJza4NaNAURlEgc1O2bJh8Cg6iM6JOWlmgxtHsYOq4WrTN8xq7LdXFvdYdNQzSCufe
-	oq9AGSuMOdTTMJtuwgQwjUo9xNyHuCP4OGVY2tpPOArm7lbt+/rIs3mLrFUB0gklEugA
-	ktE5wOklqGuUuVSvXm4SjfE5WN+GVpnccHRtKXV/Qw1kiY+3sYql5JNYXcrjo4kCm7Ke
-	IC5H/enwst8LQhiBm+gp31PSXyjcb9WXM/g4MvBqsTt2m8+ATLryAZFwIgmSiZApgHnK
-	3+WyCrQGuZUIiuDL6Z87Jpf+rKq8PaPfQ8pWtD15JPKHzeLMSW7aKaB7nPXeBstZtdYv
-	GNbw==
-X-Gm-Message-State: APzg51Dn3iAPAzNQzm/XbHh62fQg5xrseh5wmfXsN2dpRp0ZkmAOR/sx
-	kj7Hyvul1Q9vWKSiqPVXjEvHOmqDXMAjgDtabIY=
-X-Google-Smtp-Source: ANB0VdYI6oUikSpNnaVIqbNKHb7ucrs/DneSlP9hn59+g1JBXQzeGLfPnq2lyub8BaqKRFhjKrPvTYiZ8ZsD91ui0vE=
-X-Received: by 2002:ac8:758d:: with SMTP id
-	s13-v6mr9376975qtq.161.1535585539469; 
-	Wed, 29 Aug 2018 16:32:19 -0700 (PDT)
+	Wed, 29 Aug 2018 20:36:52 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
+	Wed, 29 Aug 2018 20:36:51 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 29 Aug 2018 20:36:49 -0700
+Message-ID: <20180830033649.60425-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20180723231104.23011-1-alistair.francis@wdc.com>
-	<CAMKF1sqs1Xtj6o=yReDTjg7qp=w68PBZRWOXOrWENS3fn+fgFg@mail.gmail.com>
-	<CAKmqyKMnqrjf3-zLooNc2KcBpLhctLOufEDep0NnOCo6g_mJWg@mail.gmail.com>
-In-Reply-To: <CAKmqyKMnqrjf3-zLooNc2KcBpLhctLOufEDep0NnOCo6g_mJWg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Aug 2018 16:31:53 -0700
-Message-ID: <CAMKF1srJ3o0R0zaPZ4r_bLxcHdphoZumHEoPuAdtGbfWzh+a3A@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>,
-	megha.dey@linux.intel.com,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] ndctl: Add the NDCTL package
+Subject: [meta-oe][PATCH] rsyslog: update from 8.36 to 8.37
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,114 +30,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Aug 2018 23:32:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 30 Aug 2018 03:36:51 -0000
+Content-Type: text/plain
 
-On Wed, Aug 29, 2018 at 3:47 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Fri, Aug 17, 2018 at 7:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> > Hi Alistair
-> >
-> > We have accepted this patch however a new run with x86-64/musl shows
-> > that it failed to build with following error
-> > probably #include <sys/types.h> will fix it
->
-> Hey Khem,
->
-> Sorry for the delay, I tried to reproduce this today and I wasn't able
-> to. I did see a different issue about missing systemd which I have a
-> fix for though.
->
+Drop upstreamed patch:
+   edce434db fix race in parallel builds
 
-http://git.openembedded.org/meta-openembedded/commit/?id=1e6a27d8e226029689caa22a7cec10f8982ad180
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ .../rsyslog/fix-race-in-parallel-builds.patch | 41 -------------------
+ .../{rsyslog_8.36.0.bb => rsyslog_8.37.0.bb}  |  5 +--
+ 2 files changed, 2 insertions(+), 44 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/fix-race-in-parallel-builds.patch
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.36.0.bb => rsyslog_8.37.0.bb} (97%)
 
-fixed the issue.
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/fix-race-in-parallel-builds.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/fix-race-in-parallel-builds.patch
+deleted file mode 100644
+index a1efe4d4b..000000000
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/fix-race-in-parallel-builds.patch
++++ /dev/null
+@@ -1,41 +0,0 @@
+-From 7f003e3a7d4d6dda1cbca1694b62754878c58df0 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Fri, 27 Jul 2018 10:19:29 +0800
+-Subject: [PATCH] fix race in parallel builds
+-
+-If libgcry.la is built later than lmcry_gcry.la, there is a failure:
+-[snip]
+-|../aarch64-wrs-linux-libtool  --tag=CC   --mode=link aarch64-wrs-linux-gcc
+--o lmcry_gcry.la lmcry_gcry_la-lmcry_gcry.lo libgcry.la -lgcrypt
+-|aarch64-wrs-linux-libtool:   error: cannot find the library 'libgcry.la'
+-or unhandled argument 'libgcry.la'
+-|Makefile:1049: recipe for target 'lmcry_gcry.la' failed
+-|make[2]: *** [lmcry_gcry.la] Error 1
+-[snip]
+-
+-The LIBADD of lmcry_gcry.la contains libgcry.la, we should also add libgcry.la
+-to lmcry_gcry.la's DEPENDENCIES.
+-
+-Upstream-Status: Submitted [https://github.com/rsyslog/rsyslog/pull/2882]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- runtime/Makefile.am | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/runtime/Makefile.am b/runtime/Makefile.am
+-index 56bc08e..5ada0c4 100644
+---- a/runtime/Makefile.am
+-+++ b/runtime/Makefile.am
+-@@ -202,7 +202,7 @@ if ENABLE_LIBGCRYPT
+-    libgcry_la_SOURCES = libgcry.c libgcry_common.c libgcry.h
+-    libgcry_la_CPPFLAGS = $(RSRT_CFLAGS) $(LIBGCRYPT_CFLAGS)
+-    pkglib_LTLIBRARIES += lmcry_gcry.la
+--   lmcry_gcry_la_DEPENDENCIES = librsyslog.la
+-+   lmcry_gcry_la_DEPENDENCIES = librsyslog.la libgcry.la
+-    lmcry_gcry_la_SOURCES = lmcry_gcry.c lmcry_gcry.h
+-    lmcry_gcry_la_CPPFLAGS = $(RSRT_CFLAGS) $(LIBGCRYPT_CFLAGS)
+-    lmcry_gcry_la_LDFLAGS = -module -avoid-version \
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.37.0.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.37.0.bb
+index 13c1f56ee..fb151428f 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.36.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.37.0.bb
+@@ -24,15 +24,14 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
+            file://use-pkgconfig-to-check-libgcrypt.patch \
+            file://run-ptest \
+            file://rsyslog-fix-ptest-not-finish.patch \
+-           file://fix-race-in-parallel-builds.patch \
+ "
+ 
+ SRC_URI_append_libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
+ "
+ 
+-SRC_URI[md5sum] = "6846bb6d37af3ce067988dd2460d3a5d"
+-SRC_URI[sha256sum] = "8a4b5beb92c6b308c3d14de2364c2788f62ef5d37ca0448144619edfe508ee70"
++SRC_URI[md5sum] = "e0942b4b88a13602a6b6352bf9f05091"
++SRC_URI[sha256sum] = "295c289b4c8abd8f8f3fe35a83249b739cedabe82721702b910255f9faf147e7"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+-- 
+2.17.1
 
-
-> Alistair
->
-> >
-> >
-> > | In file included from util/abspath.c:5:
-> > | ./util/strbuf.h:68:45: error: unknown type name 'ssize_t'; did you
-> > mean 'size_t'?
-> > |  extern void strbuf_init(struct strbuf *buf, ssize_t hint);
-> > |                                              ^~~~~~~
-> > |                                              size_t
-> > | ./util/strbuf.h:73:15: error: unknown type name 'ssize_t'
-> > |  static inline ssize_t strbuf_avail(const struct strbuf *sb) {
-> > |                ^~~~~~~
-> > | ./util/strbuf.h:105:8: error: unknown type name 'ssize_t'
-> > |  extern ssize_t strbuf_read(struct strbuf *, int fd, ssize_t hint);
-> > |         ^~~~~~~
-> > | ./util/strbuf.h:105:53: error: unknown type name 'ssize_t'; did you
-> > mean 'size_t'?
-> > |  extern ssize_t strbuf_read(struct strbuf *, int fd, ssize_t hint);
-> > |                                                      ^~~~~~~
-> > |                                                      size_t
-> > | make[2]: *** [Makefile:678: util/abspath.o] Error 1
-> >
-> > On Mon, Jul 23, 2018 at 4:11 PM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> >>
-> >> Add the NDCTL package (the libnvdimm utility library). This is based
-> >> on the work from the meta-luv layer with a version bump.
-> >>
-> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> >> ---
-> >> V2:
-> >>  - Fix install failure
-> >>
-> >>  meta-oe/recipes-core/ndctl/ndctl_git.bb | 29 +++++++++++++++++++++++++
-> >>  1 file changed, 29 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-core/ndctl/ndctl_git.bb
-> >>
-> >> diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
-> >> new file mode 100644
-> >> index 000000000..36f94ecfd
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
-> >> @@ -0,0 +1,29 @@
-> >> +SUMMARY = "libnvdimm utility library"
-> >> +DESCRIPTION = "Utility library for managing the libnvdimm \
-> >> +(non-volatile memory device) sub-system in the Linux kernel. \
-> >> +The LIBNVDIMM subsystem provides support for three types of \
-> >> +NVDIMMs, namely,PMEM, BLK, and NVDIMM devices that can \
-> >> +simultaneously support both PMEM and BLK mode access."
-> >> +HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/nvdimm/nvdimm.git/tree/Documentation/nvdimm/nvdimm.txt?h=libnvdimm-for-next"
-> >> +LICENSE = "GPLv2+"
-> >> +LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
-> >> +
-> >> +inherit autotools-brokensep pkgconfig module-base
-> >> +
-> >> +SRCREV = "0d6aeeabec9d271e08c12e4cf679b59946e20156"
-> >> +SRC_URI = "git://github.com/pmem/ndctl.git"
-> >> +
-> >> +DEPENDS = "virtual/kernel kmod udev json-c"
-> >> +
-> >> +PV = "v61+git${SRCPV}"
-> >> +S = "${WORKDIR}/git"
-> >> +
-> >> +EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
-> >> +
-> >> +do_configure_prepend() {
-> >> +    ${S}/autogen.sh
-> >> +}
-> >> +
-> >> +COMPATIBLE_HOST='(x86_64).*'
-> >> +
-> >> +FILES_${PN} += "/usr/share/bash-completion/completions/ndctl"
-> >> --
-> >> 2.17.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
