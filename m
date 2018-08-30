@@ -1,48 +1,49 @@
-Return-Path: <yevgenyp@pointgrab.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E895776EBF
+Return-Path: <oterenti@cisco.com>
+X-Greylist: delayed 731 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 30 Aug 2018 14:27:26 UTC
+Received: from aer-iport-1.cisco.com (aer-iport-1.cisco.com [173.38.203.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C59A793EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2018 11:32:00 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id f8-v6so6974177ljk.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2018 04:32:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pointgrab-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=1NP0fYMzlVee+49lgd9xSyIgWoefkX/zoADfNyZqamU=;
-	b=uEOqdjGmnIvog5uTp8eKRCGF6GvBfpicdaHQSQuNUjxxjSVnl9EUPILxszCAPZDhOo
-	17J5ijQUCIy4Vy+b8I3Ig2tX1UU4mxr8CsB+p0WhkAOnxJRcdfIgbiq6B1cJ5kLkpfk7
-	3LrfUXZzH0w/kkRE6kuczwRKdkdGJV2iR67u6ZX01Jmll9i88zUnEl2NsFtaKJu6BbgW
-	IXCm7sTJ67fC3RrfmjFgkTLZUZ/2s8Un/AB6RREneej1ibOfBdmH/9YrvY76xURVKhTS
-	ZMxZbuT3Ns/epwwUz4tvl9httJgr7Qo3/e2xGz96rXf8mE9tX/RpucBoC3FqW70r3Qtx
-	C1rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1NP0fYMzlVee+49lgd9xSyIgWoefkX/zoADfNyZqamU=;
-	b=M02RMhzzhHZnl/ujJGP6ty04Zo6i+qQoXs7/EFhYxTmxcbAVbJ2QsEp440vGb9RcoS
-	ufQ5g603bqqkdJDI7zgeGYRw832A51OH3vR98sH7W+io/ToF8Qa7xIBUnvKclRcS0k5B
-	u9O946WMyGAOQNmVu9d3A4qOa34R7hmPOLg/NS5bLgEZe5LEu+gcqRpWL0oxs2tVMYd1
-	2g2REB+5MK+arhuEx6TPY5GoP4nOv9gQFxkqNzODOFNzhYija5ZZTGT/wbh9GruQ2BJQ
-	XPSi/4r6YH7/crebfzKrA66zzq1qMrTJStTZfym0yHBe1XQhHSFdJ66jd0fnLLGHZNQD
-	VFtQ==
-X-Gm-Message-State: APzg51DKCwT76CbkveJ+LVBZFTdoprRPUZwJMqM7orRmfnNCkzCZQ8JA
-	eF0L7fg0YzqXhiztoPoVVQLVeJqFyOs=
-X-Google-Smtp-Source: ANB0VdalMehI7Eblpr9vOB5i6wFcUuJTl5tpcnVyTvXYRx4gDsjTd9P4Ox5BIecxs+1oPy8EsrhSAA==
-X-Received: by 2002:a2e:8147:: with SMTP id t7-v6mr7520763ljg.32.1535628721143;
-	Thu, 30 Aug 2018 04:32:01 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:70:0:9:bdf0:af66:b584:4e8b])
-	by smtp.gmail.com with ESMTPSA id
-	v63-v6sm1186337lje.20.2018.08.30.04.32.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 30 Aug 2018 04:32:00 -0700 (PDT)
-From: Yevgeny Popovych <yevgenyp@pointgrab.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Aug 2018 14:31:49 +0300
-Message-Id: <1535628709-5431-1-git-send-email-yevgenyp@pointgrab.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] crda: Fix 64bit builds by inheriting siteinfo class
+	Thu, 30 Aug 2018 14:27:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=678; q=dns/txt; s=iport;
+	t=1535639248; x=1536848848;
+	h=from:subject:to:cc:message-id:date:mime-version:
+	content-transfer-encoding;
+	bh=hACCkC3YmwW4IUd1NBhR4WcprLHJz7wqtQ/NPyP/pxw=;
+	b=Na5FLpIA3zyulQIR1lxvSlLcuJYlqbPJSJqomH4xUVfjvpZKpkKFMENa
+	5txssv3H60JCq4HKsEcp6G/SiHYjFeMnjis+iACYRv0uJlAq4wkg8WsiV
+	Q+lRjIruO8Lz+C2glcQtyyxycGVvJUFz59t1MBR8AB69lQ7l/StBrIrOG Y=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0D9AQCJ+4db/xbLJq1aGgEBAQEBAgE?=
+	=?us-ascii?q?BAQEIAQEBAYQ0bRKEGohwjSyJDY9DCyeERYNEOBQBAgEBAgEBAm0cDIU5BCQ?=
+	=?us-ascii?q?PAQVBBTACJgJgDAgBAYMdAYF0BQgPoziBLoRrhRwUd4NehT+BQT+BOYpqglc?=
+	=?us-ascii?q?CjhKNKwmGM4k8BheBMVaGQ4YIiySIDgIECwIUgVghJoEsTSMVgyUICYsDhUE?=
+	=?us-ascii?q?8jVwBAQ?=
+X-IronPort-AV: E=Sophos;i="5.53,307,1531785600"; 
+   d="scan'208";a="6218843"
+Received: from aer-iport-nat.cisco.com (HELO aer-core-2.cisco.com)
+	([173.38.203.22])
+	by aer-iport-1.cisco.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	30 Aug 2018 14:14:58 +0000
+Received: from [10.61.217.217] ([10.61.217.217]) (authenticated bits=0)
+	by aer-core-2.cisco.com (8.15.2/8.15.2) with ESMTPSA id w7UEER6U024735
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 30 Aug 2018 14:14:57 GMT
+From: Oleksandr Terentiev <oterenti@cisco.com>
+To: openembedded-devel@lists.openembedded.org, Mingli.Yu@windriver.com,
+	akuster808@gmail.com
+Message-ID: <fc6a9148-ca04-de42-f7fb-70d736561b94@cisco.com>
+Date: Thu, 30 Aug 2018 17:14:26 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-Authenticated-User: oterenti
+X-Outbound-SMTP-Client: 10.61.217.217, [10.61.217.217]
+X-Outbound-Node: aer-core-2.cisco.com
+Cc: xe-linux-external@cisco.com
+Subject: protobuf: question about ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,31 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2018 11:32:01 -0000
+X-List-Received-Date: Thu, 30 Aug 2018 14:27:27 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Variables provided by siteinfo are already in use,
-but the siteinfo class is not inherited for some reason.
+Hi,
 
-Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
----
- meta-networking/recipes-connectivity/crda/crda_3.18.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Recently I tried to launch ptests for protobuf packet and it looks like 
+tests themselves need interaction with a user.
+Here is an output when I run /usr/lib/protobuf/ptest/run-ptest
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index 82a297b..9a79396 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -18,7 +18,8 @@ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
- SRC_URI[md5sum] = "0431fef3067bf503dfb464069f06163a"
- SRC_URI[sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
- 
--inherit python-dir pythonnative
-+inherit python-dir pythonnative siteinfo
-+
- # Recursive make problem
- EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg'"
- EXTRA_OEMAKE_append = " USE_OPENSSL=1"
--- 
-2.7.4
+> root@qemux86:~# /usr/lib64/protobuf/ptest/run-ptest
+> Generating new test file using add_person_cpp...
+> /tmp/test.data: File not found.  Creating a new file.
+> Enter person ID number:
+
+I looked at run-ptest script
+http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/protobuf/protobuf/run-ptest
+And it seems doesn't implement user interaction as protobuf tests require.
+So what is the best way to automate those tests?
+
+Thanks,
+Alex Terentiev
 
 
