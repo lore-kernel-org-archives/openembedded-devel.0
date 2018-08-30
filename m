@@ -1,51 +1,54 @@
-Return-Path: <diego.rondini@kynetics.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id BB36A748D2
+Return-Path: <alistair23@gmail.com>
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FCEA79504
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2018 14:44:14 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id h4-v6so6730717edi.6
+	Thu, 30 Aug 2018 23:42:09 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id p6-v6so8663245ljc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Aug 2018 07:44:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=u4JyJxzS2jreVg6IZEFmzCVIWFjjipC1OH/HMEWBNt0=;
-	b=MwaD/K1eYwh17oUPZ2bqVgW8rtxq/OEBgtr3idNU8KWV1x0CZ6C7+9wt9Nsc9C8CmX
-	iUnHu993igZuZ8CjPe9tYAWg+ChT5Tf3RO19d4vCGSIhscN9F+elp8h9/w2iDDAPmyFq
-	KNvNltmA3DWVBcDCSElv2U8tAznXxailQ6FSpuwHN2V+G7QskuLYWdJiczgAw7XUr4S6
-	iJKw/n1BXF/dv75C6uBULjCyV9JKVtoeC2TMWDuEExuEkvAMl4LnNSR4Ej2CuZWDsUlH
-	VgxuNpv4vbaunMTpyYrkfC0Ow7AyTEPiYO2TIoM+FltYBpHNdo7a+TBy/Q52fLw1R/F1
-	AfZg==
+	Thu, 30 Aug 2018 16:42:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=SbVzD4BF5oiAMgolK/vx2tKyKkjNaVppXMw0zmRHqIo=;
+	b=emlG2nEBqH1FirMIwjuOTZR3kEueLSqSCkqZh24KyyNQLFUjqX9UXvVkBjN55HbMMd
+	X35DmeNYiX8jbVzXxa9KJRB1SB1TFVkyJYRBrLbdcV2jQRh3ntEpBN1+DN8VrAEhXAc7
+	qSyN+14IuRI1mJn374F7V14+GKTfrtb2bE4/VicE1qJVJF/TxRRyrKeQIdxBu4qH6lfu
+	3KXdpE2+ye2TdcMVhpfOXT9Fr02RMN9Q2OuDRbLsjrmDOKUOv+4SPoNRajjWas7Roe8d
+	rzBKa64BF5O6k8LssvUuUmIZVkdKgPrTFwH+4MtrSmLqEJ4ANAUChAlIOoPFRLPaWbTJ
+	xCKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=u4JyJxzS2jreVg6IZEFmzCVIWFjjipC1OH/HMEWBNt0=;
-	b=Vt57B7ZHQZ7LnNQpwTtJUfmAt3+VEufZ3hK1ZHAMXAuBO9NpbedVqpI4OG1i4kimud
-	2y3rSl9txr11cFPTB5Ppg56jR6Om6tTJgBA4cArAhPIBrl05xqS7EKaPe5uwDQZa5Rt8
-	6hPixEsZ0hDcjv2kZJON/iiLgg9l7bnoX+YMYGKwl9kka0fyaoW2KTCJUaJeTtRDW0NC
-	3Ar/5GcU2tQmz1BeeI06p5VPZi5Vki95tg+kLeg7EjQDOphpNkRLDvJFawkk1wS7b/jU
-	kaCkvKwZUQbjMys68DQhOf8mI9yWB7eMUcc+wyJVf5ihfSNcCbmuYANtudwJZVNCtJQr
-	MKLA==
-X-Gm-Message-State: APzg51DyNMXl1SENoO8hCKz48DOjAZ7ofOHLekIeG4TTC1H/abdJjyvk
-	ec1dbFOt9tecc7tIZTe1H9ssG7CjLcEBWFNN
-X-Google-Smtp-Source: ANB0Vdadf9Zuzgf4WrCEugzMecOIEdvzey87ur+220FCr2weCQ3WnSYRNTcM5kvpcVkKGUZORNgblw==
-X-Received: by 2002:a50:e185:: with SMTP id
-	k5-v6mr7686488edl.195.1535640255054; 
-	Thu, 30 Aug 2018 07:44:15 -0700 (PDT)
-Received: from ip-172-31-7-228.eu-west-1.compute.internal
-	(ec2-54-171-5-113.eu-west-1.compute.amazonaws.com. [54.171.5.113])
-	by smtp.gmail.com with ESMTPSA id
-	p10-v6sm2668202edh.9.2018.08.30.07.44.14
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 30 Aug 2018 07:44:14 -0700 (PDT)
-From: Diego Rondini <diego.rondini@kynetics.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Aug 2018 14:43:51 +0000
-Message-Id: <1535640231-3318-1-git-send-email-diego.rondini@kynetics.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Gregory Vimont <gregory.vimont@softbankrobotics.com>
-Subject: [meta-oe][rocko][sumo][PATCH] tbb: check the version of the cross gcc instead of host gcc
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=SbVzD4BF5oiAMgolK/vx2tKyKkjNaVppXMw0zmRHqIo=;
+	b=KAYKN1DwCmIiCerSvKcFI4h2mks9N4Evn5RwJkKVJHJok0bGehM8iJkmjG28uwIUYW
+	I4ylY89QpjEr7E3z5/sCf99MO9lMTUu0OV5FuOC4nM91mn844uLry/K++x8oF1lsYFpq
+	dRTRrXmYa7Hf5F/+acMrdL+1qlFSrQf2uGRaBTf0vlFm0CoTxw5I3B5nLJy5qJ7WTKeH
+	dVv/DKd61Z70FM7vdnMytlPP0+kaLZL7BaD+H7k1f9rWR0d+VkN0nl0MiEbstM2MyNb/
+	/9el4uhrG8ZRjKaSyCZuWkIa/+PmoXo2nm2A1QRv+wDhhmayg8BGqQz8MYSa0ozdg0bh
+	ODCg==
+X-Gm-Message-State: APzg51A2jQKLRCHeg8c7GijCdLiuoriRmOly2MfUUcwHm3L+qY6lx7RC
+	UvY8nRkaA0WcP3zLcvW9R4IQtIq4SLmPLiay0DU=
+X-Google-Smtp-Source: ANB0VdbJrZaC3rdaGj5JStu0fa1kjii7ErGH9BSDoTLqi0zGkdaBEj8OyQaMNXvVkgpcRl3isJgDtuivcegkTqXYcso=
+X-Received: by 2002:a2e:380d:: with SMTP id
+	f13-v6mr9170923lja.74.1535672529974; 
+	Thu, 30 Aug 2018 16:42:09 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a2e:5649:0:0:0:0:0 with HTTP; Thu, 30 Aug 2018 16:41:39
+	-0700 (PDT)
+In-Reply-To: <CAMKF1srJ3o0R0zaPZ4r_bLxcHdphoZumHEoPuAdtGbfWzh+a3A@mail.gmail.com>
+References: <20180723231104.23011-1-alistair.francis@wdc.com>
+	<CAMKF1sqs1Xtj6o=yReDTjg7qp=w68PBZRWOXOrWENS3fn+fgFg@mail.gmail.com>
+	<CAKmqyKMnqrjf3-zLooNc2KcBpLhctLOufEDep0NnOCo6g_mJWg@mail.gmail.com>
+	<CAMKF1srJ3o0R0zaPZ4r_bLxcHdphoZumHEoPuAdtGbfWzh+a3A@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 30 Aug 2018 16:41:39 -0700
+Message-ID: <CAKmqyKN_JLCsw+MWWUtKVYCp0e9r7khQK6y4DUyNwjMDDuGE+g@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Ricardo Neri <ricardo.neri-calderon@linux.intel.com>,
+	megha.dey@linux.intel.com,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2] ndctl: Add the NDCTL package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,100 +61,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Aug 2018 14:44:15 -0000
+X-List-Received-Date: Thu, 30 Aug 2018 23:42:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Gregory Vimont <gregory.vimont@softbankrobotics.com>
+On Wed, Aug 29, 2018 at 4:31 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Aug 29, 2018 at 3:47 PM Alistair Francis <alistair23@gmail.com> wrote:
+>>
+>> On Fri, Aug 17, 2018 at 7:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> > Hi Alistair
+>> >
+>> > We have accepted this patch however a new run with x86-64/musl shows
+>> > that it failed to build with following error
+>> > probably #include <sys/types.h> will fix it
+>>
+>> Hey Khem,
+>>
+>> Sorry for the delay, I tried to reproduce this today and I wasn't able
+>> to. I did see a different issue about missing systemd which I have a
+>> fix for though.
+>>
+>
+> http://git.openembedded.org/meta-openembedded/commit/?id=1e6a27d8e226029689caa22a7cec10f8982ad180
+>
+> fixed the issue.
 
-When cross compiling on linux with gcc, the host gcc was used instead of
-the cross gcc to set compilation flags according to gcc version.
+Ah, I missed that. Thanks for that.
 
-Signed-off-by: Gregory Vimont <gregory.vimont@softbankrobotics.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-The reason of the backport is to fix a crash, details here:
-http://lists.openembedded.org/pipermail/openembedded-devel/2018-August/120116.html
----
- meta-oe/recipes-support/tbb/tbb.bb                 |  1 +
- .../tbb/tbb/0002-linux-Fix-gcc-version-check.patch | 57 ++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
+Alistair
 
-diff --git a/meta-oe/recipes-support/tbb/tbb.bb b/meta-oe/recipes-support/tbb/tbb.bb
-index bad9481..f870104 100644
---- a/meta-oe/recipes-support/tbb/tbb.bb
-+++ b/meta-oe/recipes-support/tbb/tbb.bb
-@@ -13,6 +13,7 @@ PV = "${PRDATE}+${SRCPV}"
- SRC_URI = "git://github.com/01org/tbb;branch=${BRANCH} \
-            file://cross-compile.patch \
-            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
-+           file://0002-linux-Fix-gcc-version-check.patch \
-            file://tbb.pc \
- "
- 
-diff --git a/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch b/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
-new file mode 100644
-index 0000000..9824b61
---- /dev/null
-+++ b/meta-oe/recipes-support/tbb/tbb/0002-linux-Fix-gcc-version-check.patch
-@@ -0,0 +1,57 @@
-+From aee098f1bf0511c6b5544de3170a9e8b51673b60 Mon Sep 17 00:00:00 2001
-+From: Pierre Le Magourou <plemagourou@softbankrobotics.com>
-+Date: Tue, 23 Jan 2018 15:25:50 +0100
-+Subject: [PATCH] linux.gcc: Fix cross compilation error.
-+
-+When cross compiling on linux with gcc, the host gcc was used instead of
-+the cross gcc to set compilation flags according to gcc version.
-+
-+When the cross gcc was in version 5.X and the host gcc in version 7.X,
-+tbb was compiled with the -flifetime-dse=1 flag that does not exist on
-+gcc 5.X.
-+---
-+ build/linux.gcc.inc | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/build/linux.gcc.inc b/build/linux.gcc.inc
-+index 5c1889c..a4d6698 100644
-+--- a/build/linux.gcc.inc
-++++ b/build/linux.gcc.inc
-+@@ -41,29 +41,29 @@ LINK_FLAGS = -Wl,-rpath-link=. -rdynamic
-+ C_FLAGS = $(CPLUS_FLAGS)
-+ 
-+ # gcc 4.2 and higher support OpenMP
-+-ifneq (,$(shell gcc -dumpversion | egrep  "^(4\.[2-9]|[5-9])"))
-++ifneq (,$(shell $(CC) -dumpversion | egrep  "^(4\.[2-9]|[5-9])"))
-+     OPENMP_FLAG = -fopenmp
-+ endif
-+ 
-+ # gcc 4.8 and later support RTM intrinsics, but require command line switch to enable them
-+-ifneq (,$(shell gcc -dumpversion | egrep  "^(4\.[8-9]|[5-9])"))
-++ifneq (,$(shell $(CC) -dumpversion | egrep  "^(4\.[8-9]|[5-9])"))
-+     RTM_KEY = -mrtm
-+ endif
-+ 
-+ # gcc 4.0 and later have -Wextra that is used by some our customers.
-+-ifneq (,$(shell gcc -dumpversion | egrep  "^([4-9])"))
-++ifneq (,$(shell $(CC) -dumpversion | egrep  "^([4-9])"))
-+     TEST_WARNING_KEY += -Wextra
-+ endif
-+ 
-+ # gcc 5.0 and later have -Wsuggest-override option
-+ # enable it via a pre-included header in order to limit to C++11 and above
-+-ifneq (,$(shell gcc -dumpversion | egrep  "^([5-9])"))
-++ifneq (,$(shell $(CC) -dumpversion | egrep  "^([5-9])"))
-+     INCLUDE_TEST_HEADERS = -include $(tbb_root)/src/test/harness_preload.h
-+ endif
-+ 
-+ # gcc 6.0 and later have -flifetime-dse option that controls
-+ # elimination of stores done outside the object lifetime
-+-ifneq (,$(shell gcc -dumpversion | egrep  "^([6-9])"))
-++ifneq (,$(shell $(CC) -dumpversion | egrep  "^([6-9])"))
-+     # keep pre-contruction stores for zero initialization
-+     DSE_KEY = -flifetime-dse=1
-+ endif
-+-- 
-+2.15.1
-+
--- 
-2.7.4
-
+>
+>
+>> Alistair
+>>
+>> >
+>> >
+>> > | In file included from util/abspath.c:5:
+>> > | ./util/strbuf.h:68:45: error: unknown type name 'ssize_t'; did you
+>> > mean 'size_t'?
+>> > |  extern void strbuf_init(struct strbuf *buf, ssize_t hint);
+>> > |                                              ^~~~~~~
+>> > |                                              size_t
+>> > | ./util/strbuf.h:73:15: error: unknown type name 'ssize_t'
+>> > |  static inline ssize_t strbuf_avail(const struct strbuf *sb) {
+>> > |                ^~~~~~~
+>> > | ./util/strbuf.h:105:8: error: unknown type name 'ssize_t'
+>> > |  extern ssize_t strbuf_read(struct strbuf *, int fd, ssize_t hint);
+>> > |         ^~~~~~~
+>> > | ./util/strbuf.h:105:53: error: unknown type name 'ssize_t'; did you
+>> > mean 'size_t'?
+>> > |  extern ssize_t strbuf_read(struct strbuf *, int fd, ssize_t hint);
+>> > |                                                      ^~~~~~~
+>> > |                                                      size_t
+>> > | make[2]: *** [Makefile:678: util/abspath.o] Error 1
+>> >
+>> > On Mon, Jul 23, 2018 at 4:11 PM Alistair Francis
+>> > <alistair.francis@wdc.com> wrote:
+>> >>
+>> >> Add the NDCTL package (the libnvdimm utility library). This is based
+>> >> on the work from the meta-luv layer with a version bump.
+>> >>
+>> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>> >> ---
+>> >> V2:
+>> >>  - Fix install failure
+>> >>
+>> >>  meta-oe/recipes-core/ndctl/ndctl_git.bb | 29 +++++++++++++++++++++++++
+>> >>  1 file changed, 29 insertions(+)
+>> >>  create mode 100644 meta-oe/recipes-core/ndctl/ndctl_git.bb
+>> >>
+>> >> diff --git a/meta-oe/recipes-core/ndctl/ndctl_git.bb b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+>> >> new file mode 100644
+>> >> index 000000000..36f94ecfd
+>> >> --- /dev/null
+>> >> +++ b/meta-oe/recipes-core/ndctl/ndctl_git.bb
+>> >> @@ -0,0 +1,29 @@
+>> >> +SUMMARY = "libnvdimm utility library"
+>> >> +DESCRIPTION = "Utility library for managing the libnvdimm \
+>> >> +(non-volatile memory device) sub-system in the Linux kernel. \
+>> >> +The LIBNVDIMM subsystem provides support for three types of \
+>> >> +NVDIMMs, namely,PMEM, BLK, and NVDIMM devices that can \
+>> >> +simultaneously support both PMEM and BLK mode access."
+>> >> +HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/nvdimm/nvdimm.git/tree/Documentation/nvdimm/nvdimm.txt?h=libnvdimm-for-next"
+>> >> +LICENSE = "GPLv2+"
+>> >> +LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
+>> >> +
+>> >> +inherit autotools-brokensep pkgconfig module-base
+>> >> +
+>> >> +SRCREV = "0d6aeeabec9d271e08c12e4cf679b59946e20156"
+>> >> +SRC_URI = "git://github.com/pmem/ndctl.git"
+>> >> +
+>> >> +DEPENDS = "virtual/kernel kmod udev json-c"
+>> >> +
+>> >> +PV = "v61+git${SRCPV}"
+>> >> +S = "${WORKDIR}/git"
+>> >> +
+>> >> +EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+>> >> +
+>> >> +do_configure_prepend() {
+>> >> +    ${S}/autogen.sh
+>> >> +}
+>> >> +
+>> >> +COMPATIBLE_HOST='(x86_64).*'
+>> >> +
+>> >> +FILES_${PN} += "/usr/share/bash-completion/completions/ndctl"
+>> >> --
+>> >> 2.17.1
+>> >>
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
