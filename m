@@ -1,44 +1,49 @@
-Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E85974793
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B9E079567
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 10:50:39 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id l14-v6so10059432iob.7
+	Fri, 31 Aug 2018 13:39:04 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id y139-v6so5263050wmc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 03:50:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to:cc;
-	bh=p4s2K7I1+x/3M2UIlQgGLVjbsmjIapZfRL0ldhfKgsA=;
-	b=ZSBFv9jEtry5LY8FA5QTc5xH28l03ptLpRucu4crhfn3KebqxTU8HPeUx0kM0E1CCj
-	/MrDIwlH2gralREX4vN1/+Z9/jSbZOGrFjY4qDeqEdveJ4o5vkkP8nYaVSTU/5HR0pr8
-	jZEalGxe9W6bX+wNZV3BTNs9mI4ngibSY9wQwOHWQO0GgSOHV3k3dGRmnYD7auAi6tgE
-	SrnPeoBWyn3RcdorqMrFNQJy867dRclJeAieEQClAWugddptqOgSDwxEZ1H7saULsi1D
-	aTBF38PxFJgWqbjHewauvyXFZJf5SLt6jo4REQD9hEEPG52rgrjPnop1WYdsXTpnG4iS
-	4Psg==
+	Fri, 31 Aug 2018 06:39:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=MJdfPKMXml1m7U8huvQI9n1ztq2308W/SXZmJatGR9E=;
+	b=TVRm4K2huLDpJ/kz1CgBBi+9ktqv8cKRjRudyA3xKMH4qy79dKrigtadKFdHktLJO/
+	QJ3EgCClYoiS1rZRoHytNiUwk9jj6XCr2Q+GBMIowfhRtyA5Ag5cuGaR99NCQ1KGf9EX
+	VpX5yocXuBtgTmhSApNM0qcTD5zMuTlqyYMdhkgNLEaUiPoFRaT4sYF6YMkbrmCoMuEg
+	ZZr8vt6tg79cZKALdunrVV4/ieUlh48Oi52e6I8nNvKKhhKInJGdEDWu+p2VmI5qJVX0
+	MXIHqTou3dLpE8AusoU1uqU30Zyld+zBd+zQratRaAM+yDegEr+0p1ceV5rYtz7BHta8
+	4Dwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-	bh=p4s2K7I1+x/3M2UIlQgGLVjbsmjIapZfRL0ldhfKgsA=;
-	b=tity2t5Jvt2HP7pHzdPNpG3nvvWuN6sXlGHzLs5L/xxxAi8WQa5lNDn0ft/UiDXI7R
-	4b9PMGnMTfaMYYmcfgCb04hv/mV/f1Ma4rxXUncbPVMn23Bk8XKD6CBbXyYJ+qEJndo8
-	rT0kA8yJYNBNvZiAeq0DinPatt1o5jTb+qABpOLURB0r170UrILzOgrWfyYRW8P9U5H3
-	QgBJx1PCH5nCVuWg0PR+RuGimeyt7sKwuyjFq2A/4AKuKv3O81Zx8vLGkJzocPP5KmG+
-	jjgYj2/YoTOlFlpvpo2zJtEiO+aBNBxvW4xHeltW/EL9jmB4fc4LnsAIVBYzAQcHPzgm
-	7GjA==
-X-Gm-Message-State: APzg51BJfc6JbZ8uXSo4usBLCTms1DEsxsWCPQc2GheRxL9He2TNYZ8u
-	QMNY4dYsagwgtv0D949a7PBjyctu0CfThDuXRZZg8rHMXLk=
-X-Google-Smtp-Source: ANB0VdYcd9NIAwlfPEBKy/M/cf7XSDHkcYV21ElHyZnsGKgoNHy/7bjpFZg8fETdgVpXNGBZsF9+0Di9nyXrhWBw2zg=
-X-Received: by 2002:a6b:5c19:: with SMTP id
-	z25-v6mr11284839ioh.265.1535712640376; 
-	Fri, 31 Aug 2018 03:50:40 -0700 (PDT)
-MIME-Version: 1.0
-From: Vincent Prince <vincent.prince.fr@gmail.com>
-Date: Fri, 31 Aug 2018 12:50:28 +0200
-Message-ID: <CAB2nKc_eAekQGQUFcnNp-7VQf=9Yn2R9NDhiLYRfAMPfySsZiQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=MJdfPKMXml1m7U8huvQI9n1ztq2308W/SXZmJatGR9E=;
+	b=sAplCMahkCfTN800V7y4Cq3aMc6WqNcmPyDeQ7fCxSfAAjjyLqqO01kShQ5ickqJXY
+	TJkzUpjbRO5tTycY05gxVurLP80IWWpnKYPXLlw/XU18jvg85GpBhgEz2JjDN92PLzdW
+	3Lq30JBvrkbwZerp6bZne1f7KIjloJ4QScjoeWmxe8dRb5tacSFQdhsqiwcfjyRoRr2Z
+	fb1jio94HjwpdgOpcrwF0vMimvjL2l5xhjN6zijxBEU/m6jhSWEFAlRt6ev6OpufByZN
+	bmZOFL9BVw44WJ2DTxkP664If+8hGpbbNVfAHywrnIVnAu3ZGjRQ3zlkAgE4qOnM30IE
+	AmNw==
+X-Gm-Message-State: APzg51CU+Onri/6+sYMI3BCK3NJBPMFiU5xuda0kbeNGRzINGl9Aqisl
+	NdBKnX5AFdXLv37NPG7GGFJ/Ak5tfJ0=
+X-Google-Smtp-Source: ANB0VdaaJzyIlkeqHGXMkKi0XtFZO+ZeHI4iYMOM05w+4XOEBwEgkGu3P4UGvfIcY355s/v89KFT5Q==
+X-Received: by 2002:a1c:8682:: with SMTP id
+	i124-v6mr5104394wmd.77.1535722744837; 
+	Fri, 31 Aug 2018 06:39:04 -0700 (PDT)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	q200-v6sm7718945wmd.2.2018.08.31.06.39.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Aug 2018 06:39:03 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe] gflags 2.2.0 cmake problem
+Date: Fri, 31 Aug 2018 14:39:00 +0100
+Message-Id: <20180831133901.18202-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH 1/2] abiword: use fribidi not libfribidi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,28 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 10:50:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 31 Aug 2018 13:39:05 -0000
 
-Hi,
+The recipe is called fribidi, so use that instead of the PROVIDE.
 
-I'm having an issue with a project that depends on gflags.
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The following commit
-https://github.com/gflags/gflags/commit/9e937e80fb1760b0fa893a6e0ec401f9a5bc7946
-introduces different library names for gflags, ie, shared library name is
-libgflags_shared.so, but,It seems gflags recipe installs libgflags.so
-instead.
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
+index 0f3f507f3d..36b056fdd5 100644
+--- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
++++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
+@@ -8,7 +8,7 @@ DEPENDS  = " \
+     gtk+ \
+     gtkmathview \
+     wv \
+-    libfribidi \
++    fribidi \
+     jpeg \
+     libpng \
+     librsvg \
+-- 
+2.11.0
 
-When I use *find_package*(*gflags* REQUIRED) in my Cmake project, it
-appends -lgflags_shared instead of -lgflags.
-
-Any idea how to fix it properly?
-
-For now I added
-target_link_libraries(${TARGET_NAME} "gflags") instead of
-target_link_libraries(${TARGET_NAME} ${gflags_LIBRARIES})
-
-Regards,
-Vincent
 
