@@ -1,52 +1,49 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 88F2B79567
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id AD15D79567
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 13:39:05 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id c14-v6so5292754wmb.4
+	Fri, 31 Aug 2018 13:40:59 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id o37-v6so11261476wrf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 06:39:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=mx5cty9LOU6jWpeC75P7WHu/wAYMWaWVYEaA08k+QVw=;
-	b=BZ5+X1yBKBytG5D6vgo8Mp9gC1GsG4PcGqHdY3YwQQvxeAgyfj5V06uf8dGfjsvsbS
-	9kzDFRIhd6x5rHfCeJBh0EEeTmaTu0rVHrELbf0bIOGjAIYUbGP8cf6h/WI28fnw9BR/
-	aaplOLx3MAQ7ETG6nELmVxkiEZ3XCg3KyA7EfaryB2revqLdafnQOzWCZr7z8/RhO/FB
-	ilsZRgfwDAXuh5a/eaXeVij21Urck7weXTGEiahr9qYvp3bA+BrbD1akmb3KZmn0yTsD
-	HotQ2p0UlSXCt4iXNGOk9fAiJ1HuNWRuvxiwZhxxdmLUDqAIcx2a4XXvNNWgdgLYWRwM
-	nX3w==
+	Fri, 31 Aug 2018 06:41:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=82hhTKox/aTtZYtjxFPnkFf6PZKCF6bro4D0pQuy4ZQ=;
+	b=Zk2taHjlO9JG996QZMZrCOdRSA9TGwhhQjVN152E8LqaO1iqPLf5w0S1lyCPuqAINC
+	wZiUBmYiE23c3CLLHGK7upnON9nF0XOf23V5YFRMV8X++HffZC+Leu9b5b6WcK2h3Cpd
+	hThWrX9fbP9Fg0ZODRZgKMrWG4oA8sIF9JwZb8uxTyKv8bhgy1MsEG+JuQprZslb/zqH
+	jEWUWPUUeC9gxgc+D9W8QxCPaGMkTNohDYM2HGMnJBZOSiGkpNVjVDr08bCdnt/osvO5
+	qmz/n+Rg2sWJA50Dq3vzAJURAuCaok3eIz/CUwxQ9/y04Yu3mKGFcUrzFxNaMNduF4ee
+	hNsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=mx5cty9LOU6jWpeC75P7WHu/wAYMWaWVYEaA08k+QVw=;
-	b=qKCQGblMIZorSzA+h3CEeGhLtpV0vaF3xsTJjpUEc9fLh1YDzIGUiWPt3ZFsDSVBge
-	SPuY8HpV9c/gtMsFZNjSu/GboZq6Ko0Jvbhz2emOkDW+fbi0a9RiN4P7dBKzczLEbgIw
-	5R7+5S3mgwkcJK2c+kJ0LKjrDUxodtkFGsOIbT+ha94vyMF4pCFY9ooBbhr6u1DjavLA
-	/eWlIPTk+BL2HvKdfE7SppdcnW49kIvr/tfIjzecDF6Y4j6t1yaQVfXvcbArDWmoH0hf
-	87jAJzChL3HcRrkHepD+ad/xVNnwQAoSohdppeq7EzyLMjvP+11n9T+9sgoScmoltHRe
-	B5Bg==
-X-Gm-Message-State: APzg51BY+Lo3v9WIe900AyHlXDAGRNWTP5nyT7pp4ozxjy5SuKhagvQV
-	8lV99e5Y+XRshQ85eavFmwKNPRIfFPU=
-X-Google-Smtp-Source: ANB0Vdb8kddigrIvB0jpIErzusX7WRX/3b9qFD3fw21OV3Ddi9YrivQRHxdsaNmUbIZz+fQ7jqOhbw==
-X-Received: by 2002:a1c:638a:: with SMTP id
-	x132-v6mr4933135wmb.33.1535722745901; 
-	Fri, 31 Aug 2018 06:39:05 -0700 (PDT)
-Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
-	q200-v6sm7718945wmd.2.2018.08.31.06.39.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Aug 2018 06:39:05 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=82hhTKox/aTtZYtjxFPnkFf6PZKCF6bro4D0pQuy4ZQ=;
+	b=eTzAsnMjVWR1ngU7u1ITbdedRHyagzlGA0izKvBK5ZkltaNKb7KSrbcn4zLW2+tZyw
+	bj2ii7wcUxnkF0PaoBSyykaEvztCzgeHYDDBvj9QtL7RtgyNfpq3WwluTyrTgWbIhdi9
+	CiRgzqZebsL7FzDZVIQYTaTllKlsRJA74coByb0eQjgryT/Ct7XNCE4xG2p8tQswPTON
+	+9XE7VZZARVq8MhCT23N/4ZA9YsuRMiPDnz5SWBP1XXmt1+lVuXknBJM1GmAlzWg++d9
+	GyunXEMAucclQbJxbw1gHp388LtQ9Atgfp+YSk2BInM7smhbTgXkxH2TJcFurAYLd8cE
+	fj9A==
+X-Gm-Message-State: APzg51CGlmJllXdobDTOG5Pe/vIOlZY7UJVgzWxriR+K2UAYGZ6dX+I4
+	YfzcSNwtwCqSYKGwheqTF5O2zwzf
+X-Google-Smtp-Source: ANB0VdZxmcDLtLAK3enY2XFbqYUPF0zd9/p3zCToItuBJUo1BYdKOi291OnSSq5TW8pm3jXdo/Fxqg==
+X-Received: by 2002:adf:e846:: with SMTP id
+	d6-v6mr10438828wrn.269.1535722860027; 
+	Fri, 31 Aug 2018 06:41:00 -0700 (PDT)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
+	(host63-251-dynamic.54-79-r.retail.telecomitalia.it. [79.54.251.63])
+	by smtp.gmail.com with ESMTPSA id
+	k5-v6sm14939052wrm.96.2018.08.31.06.40.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 31 Aug 2018 06:40:59 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Aug 2018 14:39:01 +0100
-Message-Id: <20180831133901.18202-2-ross.burton@intel.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20180831133901.18202-1-ross.burton@intel.com>
-References: <20180831133901.18202-1-ross.burton@intel.com>
-Subject: [PATCH 2/2] vlc: use fribidi not libfribidi
+Date: Fri, 31 Aug 2018 15:40:54 +0200
+Message-Id: <1535722854-31672-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-initramfs][PATCH] kexec-tools-klibc: fix kexec_load() syscall workaround
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,29 +56,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 13:39:05 -0000
+X-List-Received-Date: Fri, 31 Aug 2018 13:40:59 -0000
 
-The recipe is called fribidi, so use that instead of the PROVIDE.
+As soon as klibc adds kexec_file_load() syscall we can rework this patch.
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...all.h-work-around-missing-syscall-wrapper.patch | 25 +++++++++++++---------
+ 1 file changed, 15 insertions(+), 10 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 8e82b3bd33..f13c0ead6e 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -5,7 +5,7 @@ SECTION = "multimedia"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch
+index 4a8968b..e0ba9b4 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/0006-kexec-syscall.h-work-around-missing-syscall-wrapper.patch
+@@ -1,6 +1,6 @@
+-From e6aa1f18dc44dc71be3ceada2a96383d22454399 Mon Sep 17 00:00:00 2001
++From 45a80fe7d247898d83edfeabe32b9de80a50a6be Mon Sep 17 00:00:00 2001
+ From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Thu, 19 Apr 2018 00:25:01 +0200
++Date: Fri, 31 Aug 2018 11:33:51 +0200
+ Subject: [PATCH] kexec-syscall.h: work around missing syscall() wrapper
  
--DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
-+DEPENDS = "fribidi libtool libgcrypt libgcrypt-native \
-    dbus dbus-glib libxml2 gnutls \
-    tremor faad2 ffmpeg flac fluidsynth alsa-lib \
-    lua-native lua libidn \
+ Fix
+@@ -12,26 +12,31 @@ Upstream-Status: Inappropriate [klibc specific]
+ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+ 
+ ---
+- kexec/kexec-syscall.h | 8 ++++++++
+- 1 file changed, 8 insertions(+)
++ kexec/kexec-syscall.h | 9 +++++++++
++ 1 file changed, 9 insertions(+)
+ 
+ diff --git a/kexec/kexec-syscall.h b/kexec/kexec-syscall.h
+-index 33638c2..6b633e4 100644
++index 33638c2..b4bd63c 100644
+ --- a/kexec/kexec-syscall.h
+ +++ b/kexec/kexec-syscall.h
+-@@ -77,7 +77,11 @@ struct kexec_segment;
++@@ -74,11 +74,16 @@
++ 
++ struct kexec_segment;
++ 
+++#ifndef __KLIBC__
+  static inline long kexec_load(void *entry, unsigned long nr_segments,
+  			struct kexec_segment *segments, unsigned long flags)
+  {
+-+#ifndef __KLIBC__
+  	return (long) syscall(__NR_kexec_load, entry, nr_segments, segments, flags);
++ }
+ +#else
+-+	return (long) kexec_load(entry, nr_segments, segments, flags);
+++extern long kexec_load(void *entry, unsigned long nr_segments,
+++			struct kexec_segment *segments, unsigned long flags);
+ +#endif
+- }
+  
+  static inline int is_kexec_file_load_implemented(void) {
+-@@ -90,8 +94,12 @@ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
++ 	if (__NR_kexec_file_load != 0xffffffff)
++@@ -90,8 +95,12 @@ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
+  			unsigned long cmdline_len, const char *cmdline_ptr,
+  			unsigned long flags)
+  {
 -- 
-2.11.0
+2.7.4
 
 
