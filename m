@@ -1,50 +1,49 @@
 Return-Path: <ross.burton@intel.com>
 Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
 	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 75709795C9
+	by mail.openembedded.org (Postfix) with ESMTP id DE459795D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 14:41:47 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id a108-v6so11417164wrc.13
+	Fri, 31 Aug 2018 14:42:02 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id z96-v6so11452805wrb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 07:41:48 -0700 (PDT)
+	Fri, 31 Aug 2018 07:42:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:subject:date:message-id;
-	bh=aQz/8h2uYd2X6UEJsDW57vf9nPnG/btwZlv4N219hp0=;
-	b=bZIkD5MPBccHy1cKCh73kPYsfdofGqm0eMBVv83CuUWyvoRUcLjyh6OO814+8OkjkH
-	jjYL/EUwcRqU89/YTyA3rGMj8a+an7IukM4VtgsI0CNLSFScIdGsybe2KxUtK4zIaSB6
-	PsJvQiE6sEW61Iu1Kl+LKCzMxkQkWxqDBUkUnzpuqnoyrZjQMBsKFa4AgQ6MDa0lRThW
-	1r1LGEVzPNq8RazCe36Fax0I8XIBdZDmnn03gMDhQyGfr/Bd5XXXogE4usG6xJgEw0Km
-	vznZbncOf2OOVeQZaJXtF6wlJiAHb0dPiJrrvp9QbeE1KntfWFG7gWVfRKgTt7gNP5BD
-	zJxA==
+	bh=VEJE1zDS29H79YJBltiGII95KRscvftajcxA0QVaH0k=;
+	b=qvAL7DdaH4kMcF+CBpy++PWZR6GzIhULOM8++vm5s4jbqBllr/LC5sJhXLeCsgnL8m
+	Sw1OJ8PJtu355Ny+hs5ZB1cqmaqcZgc4axCJmZNtQhojxojeZGx+7SEY91GrVdzyAElR
+	5bqHY0je4M8snEfqthFyyE6h/knMVjGMZPBAgAFElVbmzoe2wqOfCTYpnAOwBh092joE
+	HarmVkXsfNEXsi84uXJ2hSXA/HQCILv+/Hh7BuUW7FtVGysSnmJfLpAqAqn9eRMnW+/Z
+	mEttTSEo6LmSbmU86y+MSrAjv8ME28mYscM4uOBu8SizogsRP4I1t6mmxgTBFvjN3pXg
+	1mtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=aQz/8h2uYd2X6UEJsDW57vf9nPnG/btwZlv4N219hp0=;
-	b=WLK4A+lsByUg5trfMjU5EpxlPRoFu32P7hYcAidNMYiAFiwUJHp2OcoBhu1IYwacAD
-	UWBUWITfLDwtqNmuua3O10hgjIGg2qahxxswqD+uj7B3xjoNWWFCfRNoWaPW3hH2g6lA
-	uqGhgU8mpBIVFEK7HgQx4Pr9ftFYnYRWJaJjWt1/YqtnPj2o10t1ZzfqThvgjB/bpc4s
-	Z8zkDNfmnTAKscz0xIoM1LoievXRHicgpsi1/KWF4EZDW1s0MOyf0xRR5t3FZJJk9Nhl
-	Gwqpb7WBTD7Q+vm510+Ul6CG1A9VS1CFA1PaGyon0BfMq0RaB3WdIAi1nki8y/vWSsW0
-	LMhw==
-X-Gm-Message-State: APzg51CPVKbbXjc43m9q4V0W3axGW+DlgJMr/YsoDiP9teKbKruq+Yu6
-	qyCIxmnX5vjmLnxIOcYcFkEzA3gXR14=
-X-Google-Smtp-Source: ANB0VdYyE+vG1Y2wmozaDBWODz+yrut+KxOmvl8t3LvCgGw1bvPZIySGMJ3Rfv+Xea5C7zEZajebHA==
-X-Received: by 2002:a5d:5009:: with SMTP id
-	e9-v6mr11798716wrt.18.1535726507838; 
-	Fri, 31 Aug 2018 07:41:47 -0700 (PDT)
+	bh=VEJE1zDS29H79YJBltiGII95KRscvftajcxA0QVaH0k=;
+	b=hca/bTdWdrrScEpJq69QYeon2C/lqnJQp5WZL3B9hXlYOshho/pxMNiusO8GmXuT6U
+	No4niS2z3oK9wYN1poFGUi6hFwTbqmBeElpCgz2ZLu/Olo1jZQkQNFqH7vj9TIZXs3EX
+	EvXWQKoUCsIo+Wv35CI6U+r9cGhjRxffk7Y7y9OSQX1gjm4MgVyKWX2joTEwK8X+lJcx
+	xVXejN8vGENoqoJzaKrslI9PD4ep0SG2WY16PFRbJSX8Odh/X3MCkGogKZB+JrL0TwkA
+	U0yjI1lvvLOZgkWoyWvKQz0Sc7GM9+uIEppdCsWMXWCj/jIdZmCPwZxqVMtQKrolnJ5y
+	eWaw==
+X-Gm-Message-State: APzg51Af70xH2RMZ2nBW0Sk+IF6goSSzziH6i7IRz2xweY1usyV69lmi
+	gkTeHr+GanqvyD1AyKUsnTo6iKLcIyM=
+X-Google-Smtp-Source: ANB0VdZv9WnSs6jleKVVI6yxcAJ6/7w5qbV6vuE59lkUuJTmoO6TtlwKAnD+5NZhQAzjgZy4FBQLOA==
+X-Received: by 2002:a5d:6604:: with SMTP id n4-v6mr400525wru.281.1535726523410;
+	Fri, 31 Aug 2018 07:42:03 -0700 (PDT)
 Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
 	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
-	l18-v6sm7665167wru.75.2018.08.31.07.41.46
+	k5-v6sm15190022wrm.96.2018.08.31.07.42.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Aug 2018 07:41:47 -0700 (PDT)
+	Fri, 31 Aug 2018 07:42:02 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Aug 2018 15:41:44 +0100
-Message-Id: <20180831144144.5038-1-ross.burton@intel.com>
+Date: Fri, 31 Aug 2018 15:42:01 +0100
+Message-Id: <20180831144201.5100-1-ross.burton@intel.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [PATCH] phoronix-test-suite: add dependency on lsb_release
+Subject: [PATCH] postgresql: use util-linux's uuid
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +56,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 14:41:47 -0000
+X-List-Received-Date: Fri, 31 Aug 2018 14:42:03 -0000
+
+Postgreqsql was configured to use ossp-uuid but ossp-uuid is dead and everyone
+will be building util-linux anyway, so use the libuuid.so from there.
+
+Confusing the option is called e2fs because the library originated in e2fsprogs.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb  | 2 +-
+ meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
-index b9401f2790..b1fa51bf03 100644
---- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
-@@ -29,7 +29,7 @@ do_install() {
- SYSTEMD_AUTO_ENABLE = "disable"
- SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
- 
--RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release"
-+RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release lsb"
- 
- FILES_${PN} += " \
-     ${datadir}/phoronix-test-suite \
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+index 1301060ee5..44a1b30fe0 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -59,7 +59,7 @@ PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
+ PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
+ PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
+ PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
+-PACKAGECONFIG[uuid] = "--with-ossp-uuid,--without-ossp-uuid,ossp-uuid,"
++PACKAGECONFIG[uuid] = "--with-uuid=e2fs,--without-uuid,util-linux,"
+ PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
+ PACKAGECONFIG[nls] = "--enable-nls,--disable-nls,,"
+ PACKAGECONFIG[libxml] = "--with-libxml,--without-libxml,libxml2,libxml2"
 -- 
 2.11.0
 
