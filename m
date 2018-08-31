@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 07D40795EC
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D2AAB795CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 16:35:35 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id n6-v6so15190779qtl.4
+	Fri, 31 Aug 2018 16:39:08 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id 93-v6so1787229qks.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 09:35:37 -0700 (PDT)
+	Fri, 31 Aug 2018 09:39:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=8Tr6Eu/KTfd0CdCCaikfyQLwaZVft/tCXqy5bfeBdDc=;
-	b=MgYIBDe6LC3D5Z4MdnRe95rpcUYuHtbutjIAZInBIPCayNJRUedA9bmXQXvs4XfCI2
-	pBlJjzOyLElc/zGCKPVjWX8qfWaU0ATxg/xzRBMdH3zwox37ZkeiF2YMbkZqkJKdX93P
-	0HOHlFsQZ9yKgOwdFZa657a1k2MZBKGOL5Du2QoNJJZO4eN8zM1t9f5712JZsKZJ6/zV
-	337AdtZ0AdCew/o17/RzwEDeUKjhXKW19oIChe6K00zBNPFSDWS6pXEmJhBY2AjH5BTD
-	6RyBvwqi9j9LRw0u4aAuwkL9bAyYx/OVtn+DyjBLPFIWbOhrjuDb6yXwy9+OECP9/337
-	KWRQ==
+	:cc; bh=ucjW2dyjk/6Od436oYmjJV3qhIP7jOscR/PNxEytIbI=;
+	b=P3qYPo7RMs35ojeGlskBLJRFCwlN/p6GfwpI+k5PN87vMyc19IgErgOZHbGo69+jIF
+	/HzIKVqVieymVF37HLMZuCWlJeBM4G62jQKnwv+NLrqsrn/3njzvtBgcpi3c4Rv4YnQr
+	PheUaPFrLCDPwMqLgn/IRbvfH19iLQ8Nf9ml0/kniOxukN8nEBkONhyYwsLP7YU3uOVY
+	z1L1cIwcSAXHbWLZkKr+Re7HfK6g/vBp2JvfydBpt/h7aMVQR8jClHEpDgqwhNDeSM4a
+	CRx168+zWop7SvBpznllPWgkkXjDhekcGzkgKUKK0lyTFUL2YjeFk90p17fwuk99A+GQ
+	dhAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=8Tr6Eu/KTfd0CdCCaikfyQLwaZVft/tCXqy5bfeBdDc=;
-	b=hA9Rg44NgoxOSOEMaMNiVJod2zFN4RXCQ6vevFIZoo04K+UDH9nY4E7idn+OnkdZ9X
-	PPlOKn9Wk0jXveGrmUUg+UcqnYEU0AkAOjLHLXHBjuG1hJoQZ6JivzJTVdja2v73zyv0
-	PSj+oqyuGoJ4AnFczbK8OmxXicIhNSaoqILtXCFhyEAIejKyjHXuSkttoBtSRE40DMbB
-	cI73/dxji8xNDV63vXk2Qu3X4Sm8pVFUXFoK2sxhm6IG/XmKSlPb1VHhxwWZpYFQ97nj
-	6CTpiaEIeUhFlQPxMFs+EW2TlQ2UiUX47J1yBXll/+v9zTEI7I7YuTqU8J7IicELszJF
-	Q7Cw==
-X-Gm-Message-State: APzg51A3Xnp1un6G188HX1vVXlCOl0q34sakn+wYWWr69Bb8kIqYpOLU
-	+P9WQhnztv5t6Zmtpx3RB1XJWkN+ubvd4tJJxwk=
-X-Google-Smtp-Source: ANB0Vda950vfofn+fw0LZKbzFB0EshgsH7bZgLcx/HRdrkMH9pVXX4hTzAxNwWjPYW5Y7fvowYMGq8UE11L82YN8eQY=
-X-Received: by 2002:ac8:4304:: with SMTP id
-	z4-v6mr16207121qtm.295.1535733336615; 
-	Fri, 31 Aug 2018 09:35:36 -0700 (PDT)
+	bh=ucjW2dyjk/6Od436oYmjJV3qhIP7jOscR/PNxEytIbI=;
+	b=iuyjnbzQtJOB5ylcymG0c3H/hX86l0p1mz59eTZBh9Bw6XsxXqBv7B+ZFf/fcpV2yF
+	fXFDPcX3zVdPQ3zzf9EDrspxMXY5+rmNGbC4YiS76v9Jwk0PkRdkFy5cRIBLMQw7+dPO
+	Dv3WTnJSPvU+Ku48KGyB+26+XHUXeViz94CPyL2OpNv3mjB8RnPIiscTLqyq72bCRhpT
+	cD4VFK+5/uQ11DSqurcxIyaAQjT8qbUW/NIwWvQmhpGIRzk8mkARqPILqznGCs1BSYEZ
+	mrsK4KhLFAe73+1LTJopBDJo8xeILQ7Pa12cOFEyVxTxq8ThsC7r+YFRkqLRlHWu0taB
+	eegQ==
+X-Gm-Message-State: APzg51BBhAhFEiH7xnFZTotQAAGxCBsPVBQv6hSE/PSypSAxqSWekNJ+
+	GObYZJf4EzPZQXSm343TRm+QmUOZYdhLZ0lpVaY=
+X-Google-Smtp-Source: ANB0VdaVySfdYTDEiEwVqnYzom0Up/OsJIelrMwbNroQJAXWj6RSa52smAsvKKHDkjGUHsz4nCIpO7xdFkaaXPCKEQk=
+X-Received: by 2002:a37:2e03:: with SMTP id
+	u3-v6mr15878041qkh.223.1535733549555; 
+	Fri, 31 Aug 2018 09:39:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180831144201.5100-1-ross.burton@intel.com>
-In-Reply-To: <20180831144201.5100-1-ross.burton@intel.com>
+References: <20180831144206.5151-1-ross.burton@intel.com>
+In-Reply-To: <20180831144206.5151-1-ross.burton@intel.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 31 Aug 2018 09:35:10 -0700
-Message-ID: <CAMKF1sqDUFO5L3QWqpqBARB+zb7WLHB8jopL3MVVCwraLpD7Vw@mail.gmail.com>
+Date: Fri, 31 Aug 2018 09:38:43 -0700
+Message-ID: <CAMKF1sq0ncAjsHkmSRrjbnkoFjiiXqK7nZ=x9TLw5r7=0ys=BQ@mail.gmail.com>
 To: "Burton, Ross" <ross.burton@intel.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] postgresql: use util-linux's uuid
+Subject: Re: [PATCH] rygel: remove obsolete ossp-uuid dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,37 +54,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 16:35:36 -0000
+X-List-Received-Date: Fri, 31 Aug 2018 16:39:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-its already in see
-http://git.openembedded.org/meta-openembedded/commit/?id=140bf68e37
-
+already in http://git.openembedded.org/meta-openembedded/commit/?id=7c407d7d5a
 On Fri, Aug 31, 2018 at 7:42 AM Ross Burton <ross.burton@intel.com> wrote:
 >
-> Postgreqsql was configured to use ossp-uuid but ossp-uuid is dead and everyone
-> will be building util-linux anyway, so use the libuuid.so from there.
->
-> Confusing the option is called e2fs because the library originated in e2fsprogs.
+> Not only was uuid removed as a build dependency of Rygel in 0.27.1, but
+> oe-core's ossp-uuid has always renamed the library to libossp-uuid so it was
+> never used (as util-linux provides libuuid.so).
 >
 > Signed-off-by: Ross Burton <ross.burton@intel.com>
 > ---
->  meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
+>  meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-> index 1301060ee5..44a1b30fe0 100644
-> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-> @@ -59,7 +59,7 @@ PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
->  PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
->  PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
->  PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
-> -PACKAGECONFIG[uuid] = "--with-ossp-uuid,--without-ossp-uuid,ossp-uuid,"
-> +PACKAGECONFIG[uuid] = "--with-uuid=e2fs,--without-uuid,util-linux,"
->  PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
->  PACKAGECONFIG[nls] = "--enable-nls,--disable-nls,,"
->  PACKAGECONFIG[libxml] = "--with-libxml,--without-libxml,libxml2,libxml2"
+> diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
+> index f13f5cec06..21331ffcb0 100644
+> --- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
+> +++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
+> @@ -8,7 +8,7 @@ HOMEPAGE = "http://live.gnome.org/Rygel"
+>  LICENSE = "LGPL-2.1"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+>
+> -DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
+> +DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
+>  RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
+>  RRECOMMENDS_${PN} = "rygel-plugin-media-export"
+>
 > --
 > 2.11.0
 >
