@@ -1,42 +1,44 @@
-Return-Path: <krzk@kernel.org>
-X-Greylist: delayed 506 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 31 Aug 2018 07:45:13 UTC
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id CF46971ADD
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E85974793
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 07:45:13 +0000 (UTC)
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 033B52083A
+	Fri, 31 Aug 2018 10:50:39 +0000 (UTC)
+Received: by mail-io0-f181.google.com with SMTP id l14-v6so10059432iob.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 07:36:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1535701009;
-	bh=5bepa4R64adqTQhXCZsVOseaEvAkUa7Zc6v06y5xnPI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-	b=lDJZQB0XQ+kTSKY2vmpDW+G4ix4sOisj8MHpQCwsFFK9Ya3Mc2e9KPUjmDKznZ8+2
-	mHKjLbDN7PK5BbrZyKWwPBofneaT0JxA94RFEYYvSDxZLhY2DOTrRMBomV2khBmb0s
-	FsRX1ZzW8Io9ZzElZGcc8D3zcE/vohhkDfwhs0JI=
-Received: by mail-wm0-f48.google.com with SMTP id y139-v6so4202760wmc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 00:36:48 -0700 (PDT)
-X-Gm-Message-State: APzg51BAF9k7Mj+hXNQMQrt/Rmy5hcdk2LGKjRvHwEp5aJGY4KPvhst5
-	2sSW5HbZ8Qgs96Rs0m1tB3s6CLVs5Fye5RsylZc=
-X-Google-Smtp-Source: ANB0VdYgmKNTnEFq5zvhjYS1sex8BxK2da/je0tkvVY83OzsWF62e6YrjOYW0t+mvcn03jXAOLh5lMoKdrykENXUXjE=
-X-Received: by 2002:a1c:3e8e:: with SMTP id
-	l136-v6mr3916822wma.72.1535701007512; 
-	Fri, 31 Aug 2018 00:36:47 -0700 (PDT)
+	Fri, 31 Aug 2018 03:50:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=p4s2K7I1+x/3M2UIlQgGLVjbsmjIapZfRL0ldhfKgsA=;
+	b=ZSBFv9jEtry5LY8FA5QTc5xH28l03ptLpRucu4crhfn3KebqxTU8HPeUx0kM0E1CCj
+	/MrDIwlH2gralREX4vN1/+Z9/jSbZOGrFjY4qDeqEdveJ4o5vkkP8nYaVSTU/5HR0pr8
+	jZEalGxe9W6bX+wNZV3BTNs9mI4ngibSY9wQwOHWQO0GgSOHV3k3dGRmnYD7auAi6tgE
+	SrnPeoBWyn3RcdorqMrFNQJy867dRclJeAieEQClAWugddptqOgSDwxEZ1H7saULsi1D
+	aTBF38PxFJgWqbjHewauvyXFZJf5SLt6jo4REQD9hEEPG52rgrjPnop1WYdsXTpnG4iS
+	4Psg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=p4s2K7I1+x/3M2UIlQgGLVjbsmjIapZfRL0ldhfKgsA=;
+	b=tity2t5Jvt2HP7pHzdPNpG3nvvWuN6sXlGHzLs5L/xxxAi8WQa5lNDn0ft/UiDXI7R
+	4b9PMGnMTfaMYYmcfgCb04hv/mV/f1Ma4rxXUncbPVMn23Bk8XKD6CBbXyYJ+qEJndo8
+	rT0kA8yJYNBNvZiAeq0DinPatt1o5jTb+qABpOLURB0r170UrILzOgrWfyYRW8P9U5H3
+	QgBJx1PCH5nCVuWg0PR+RuGimeyt7sKwuyjFq2A/4AKuKv3O81Zx8vLGkJzocPP5KmG+
+	jjgYj2/YoTOlFlpvpo2zJtEiO+aBNBxvW4xHeltW/EL9jmB4fc4LnsAIVBYzAQcHPzgm
+	7GjA==
+X-Gm-Message-State: APzg51BJfc6JbZ8uXSo4usBLCTms1DEsxsWCPQc2GheRxL9He2TNYZ8u
+	QMNY4dYsagwgtv0D949a7PBjyctu0CfThDuXRZZg8rHMXLk=
+X-Google-Smtp-Source: ANB0VdYcd9NIAwlfPEBKy/M/cf7XSDHkcYV21ElHyZnsGKgoNHy/7bjpFZg8fETdgVpXNGBZsF9+0Di9nyXrhWBw2zg=
+X-Received: by 2002:a6b:5c19:: with SMTP id
+	z25-v6mr11284839ioh.265.1535712640376; 
+	Fri, 31 Aug 2018 03:50:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180831065552.19562-1-raj.khem@gmail.com>
-In-Reply-To: <20180831065552.19562-1-raj.khem@gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Date: Fri, 31 Aug 2018 09:36:36 +0200
-X-Gmail-Original-Message-ID: <CAJKOXPeOumX10kdV3utNgXyFL8R-aNW_HqPedbUmN8mB=gi5tg@mail.gmail.com>
-Message-ID: <CAJKOXPeOumX10kdV3utNgXyFL8R-aNW_HqPedbUmN8mB=gi5tg@mail.gmail.com>
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] libkcapi: Upgrade to 1.1.3
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Fri, 31 Aug 2018 12:50:28 +0200
+Message-ID: <CAB2nKc_eAekQGQUFcnNp-7VQf=9Yn2R9NDhiLYRfAMPfySsZiQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-oe] gflags 2.2.0 cmake problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,53 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 07:45:13 -0000
+X-List-Received-Date: Fri, 31 Aug 2018 10:50:39 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, 31 Aug 2018 at 08:56, Khem Raj <raj.khem@gmail.com> wrote:
->
-> Drop upstream patches
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Krzysztof Kozlowski <krzk@kernel.org>
-> ---
+Hi,
 
-(...)
+I'm having an issue with a project that depends on gflags.
 
-> diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-> index e401b70a7d..addd169a8d 100644
-> --- a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-> +++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-> @@ -6,14 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d0421cf231423bda10cea691b613e866"
->  DEPENDS = "libtool"
->
->  S = "${WORKDIR}/git"
-> -# Use v1.1.1 with changes on top for building in OE
-> -SRCREV = "342b50fc9225a991c224126c13c188ad9f1ef9f9"
-> -PV = "1.1.1+git${SRCPV}"
-> +# Use v1.1.3 with changes on top for building in OE
+The following commit
+https://github.com/gflags/gflags/commit/9e937e80fb1760b0fa893a6e0ec401f9a5bc7946
+introduces different library names for gflags, ie, shared library name is
+libgflags_shared.so, but,It seems gflags recipe installs libgflags.so
+instead.
 
-This comment can be dropped. Previously the SRCREV pointed to commit
-on top of v1.1.1, so not a v1.1.1 exactly. Now you have chosen exactly
-v1.1.3.
+When I use *find_package*(*gflags* REQUIRED) in my Cmake project, it
+appends -lgflags_shared instead of -lgflags.
 
-Anyway looks good:
-Reviewed-by: Krzysztof Kozlowski <krzk@kernel.org>
+Any idea how to fix it properly?
 
-Best regards,
-Krzysztof
+For now I added
+target_link_libraries(${TARGET_NAME} "gflags") instead of
+target_link_libraries(${TARGET_NAME} ${gflags_LIBRARIES})
 
-> +SRCREV = "1c736c43eb71fbb5640d00efaf34a1edf1972c49"
-> +PV = "1.1.3+git${SRCPV}"
->  SRC_URI = " \
->      git://github.com/smuellerDD/libkcapi.git \
-> -    file://0001-Fix-possible-buffer-overflow-with-strncpy-and-Wstrin.patch \
-> -    file://0002-apps-Disable-Wstringop-truncation-warning-on-false-p.patch \
-> -    file://0003-test-Be-sure-to-terminate-strncpy-copied-string-Wstr.patch \
->  "
->
->  inherit autotools
-> --
-> 2.18.0
->
+Regards,
+Vincent
 
