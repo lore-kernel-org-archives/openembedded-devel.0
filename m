@@ -1,51 +1,50 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
-	[209.85.218.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A1EE600BB
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A1EBA600BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 14:54:22 +0000 (UTC)
-Received: by mail-oi0-f50.google.com with SMTP id x197-v6so22168953oix.5
+	Fri, 31 Aug 2018 14:54:32 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id w11-v6so11488878wrc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 07:54:23 -0700 (PDT)
+	Fri, 31 Aug 2018 07:54:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=KjhVUgA0nYowvPXif9VMWAWAffACNOyYY/sUsVuUmgs=;
-	b=sSSXTpNwLChC4TYPJTe96FMlvUjvxjsKsX7BzVtayWGwyfIj3mD3+6pl1ZhMYFjhZQ
-	FJYuQGZExpk9zfW5T6KF3k2dRqsAkYZE3jlgKSJS9XxDjXVETgxUFvdlvS+JjG+R6g95
-	ZwiDiGBeviUSYcL59t+0GuBUL/V+UcIwI9pswk78qmA6MDBSqZvxZsYabsyXFBPFyLBN
-	oDqs2KfFy4CfAIvyO3otSQj/pneqpjSYIraU1SpT6rUEkKds9j7UH6/QWCsh5AulhrXY
-	VNFGL3KLF8kZwqJPhaRaw72lL3UPecdA7XD9+g/9M388KYp9OsCjp6RDk4NrTpIYiOKS
-	2QbQ==
+	h=from:to:subject:date:message-id;
+	bh=idLZn1a4UV27xou3D8xRsP7gIGDprX7+4mZpsydb/Bg=;
+	b=GaheV73P7zVB0kp8z3vn9Tfq1w151ztXmFrAe5vchuloNgdDYXNGBZCiLieY2/DlEv
+	LyOM+STwQwwD28CV5HRWLi95RLioBcZPDk6g8I8y51SoJvcQY3BTz8gasgaGp4YSq3F4
+	SmjgYlyGaovvXl41Z+gIp4JZ+/HfYe4YbYLvdcQ4NWwUxz1Q1FGiuMZXp8tA21d+FN4+
+	d+L4PScWFSBw33OrIlzPeKNVj9pMKNNixLlC9SrAvSX3F70101lq9sUwVFVIq55NwZ0F
+	ziRi25sT5GLYmdgQAddEtJoIg1tIopwLLW0PyyPHt3uf78L0z8f8ru9xmeSAChWgVHht
+	Fm4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=KjhVUgA0nYowvPXif9VMWAWAffACNOyYY/sUsVuUmgs=;
-	b=ht1AMxKO+uzrXjzqttTi/CSk2JcN8UnMtK5IXF3npNG32cZHk0SV40T450Qc+wvYRQ
-	6xJ/gqxQcBTz1y6z3R434XgkcEqRiJOvN6nWqgtlhW+epU2t29z3QbEfs3PM2DpOsMuX
-	QidzSjhrDPM13PKNc4zP+4wThRnJ64DY/i4inLFRzt6XwDRxeV/+QCkKdIh4/zME3Iu9
-	WCvlpfubI3DroyZH8+L23URNJNMlURhZmMhSuObFmk07qo8y8yrU1LxkF+sJqfRd/3XI
-	6PMYvgJo0acSLnCMUuJZOXaaKXe3dzgMY+csiRKq87XE5Kwywnop6jbxZ2lX+5soAsIV
-	0HGw==
-X-Gm-Message-State: APzg51Bg3CVBOnRFhqsM11FzC2f+Bz6YfC7JePN3ABGU4m67kkMrAnWB
-	qmk0KxaAzJ2lNoYicy+H+2Ht5jMswwGCbcUO6Ymytg==
-X-Google-Smtp-Source: ANB0VdZpvNEALzwZr7vTW1PX2HCCgVYkJDYMOu0j+FBAMgH6Irnw8SDOVfCSzezQktJm3RaxLEL92mir5Ll0pNQWujY=
-X-Received: by 2002:aca:6cd5:: with SMTP id
-	h204-v6mr7337828oic.140.1535727263525; 
-	Fri, 31 Aug 2018 07:54:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ac9:7c0c:0:0:0:0:0 with HTTP; Fri, 31 Aug 2018 07:54:02
-	-0700 (PDT)
-In-Reply-To: <CA+chaQcmKvqbQ4pzX94deHRj7SP6Sn+3O=o=zsdgM=F2Of3mYg@mail.gmail.com>
-References: <20180831144216.5212-1-ross.burton@intel.com>
-	<CA+chaQcmKvqbQ4pzX94deHRj7SP6Sn+3O=o=zsdgM=F2Of3mYg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 31 Aug 2018 15:54:02 +0100
-Message-ID: <CAJTo0LZ8X1Z6UmHEtij7ULCPRtK1C90pPuJt31x4jkTMZALceg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] python-protobuf: disable clean
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=idLZn1a4UV27xou3D8xRsP7gIGDprX7+4mZpsydb/Bg=;
+	b=mxK+92liGQ6Fk4unh1hTby0Bv2E7IZhoCB6jxlfN5h0MF9zqHoBsQYovnhTysCYcEW
+	37ZVsVGr8mr12d6zzFkc0Yd+396f7xiqdX8oGfwWOOStZmYjGMxdNqbA3Wl5PAnKrQ1E
+	72apk9QuHCdsdvd3WkS9KalYfJKn4DwkAeuVHdgZUBulZUqe1R2xswPgWgfjTMYcszNE
+	22GQASXnYWQjcDypBgGsHtc4E6+m723pFCphX/yekmxOV7b01SevubyjylB3eGp+J9PU
+	J0ngHVHAqj3aq0PMGD9XIvzEsJVVCloZOhT17mcBFbY9laJTtZV76p2szcAnIQtvgK9Z
+	DTmA==
+X-Gm-Message-State: APzg51DpN+Ba+NeY6EzxA7c/B7IQpjTZxcTm4eg3//2xIsZ5ELuHrKkY
+	e1qpLas5gMX87uzqkA9GRhzjGQ20nig=
+X-Google-Smtp-Source: ANB0Vdb7Lw6UETVagmQzgpObuoOR5xtmPfry4r+HYk6yFsz80b4YGHwSZha8oMWxP5/VFWbyq9VT3A==
+X-Received: by 2002:adf:dc46:: with SMTP id
+	m6-v6mr11789400wrj.84.1535727272951; 
+	Fri, 31 Aug 2018 07:54:32 -0700 (PDT)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	y206-v6sm5680819wmg.14.2018.08.31.07.54.31
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Aug 2018 07:54:32 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 Aug 2018 15:54:30 +0100
+Message-Id: <20180831145430.21569-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] python-pbr: add python3-pbr variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,55 +57,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 14:54:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 31 Aug 2018 14:54:33 -0000
 
-Erm, yeah, that would be a rebase gone bad.
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-python/recipes-devtools/python/python-pbr.inc     | 14 ++++++++++++++
+ .../recipes-devtools/python/python-pbr_3.1.1.bb        | 18 ++----------------
+ .../recipes-devtools/python/python3-pbr_3.1.1.bb       |  2 ++
+ 3 files changed, 18 insertions(+), 16 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pbr.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb
 
-Thanks for spotting ;)
-Ross
+diff --git a/meta-python/recipes-devtools/python/python-pbr.inc b/meta-python/recipes-devtools/python/python-pbr.inc
+new file mode 100644
+index 0000000000..d8847f6502
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pbr.inc
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
++HOMEPAGE = "https://pypi.python.org/pypi/pbr"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
++
++SRC_URI[md5sum] = "4e82c2e07af544c56a5b71c801525b00"
++SRC_URI[sha256sum] = "05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1"
++
++inherit pypi
++
++RDEPENDS_${PN} += "${PYTHON_PN}-pip"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb b/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
+index bdff867f30..8f7f924dab 100644
+--- a/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python-pbr_3.1.1.bb
+@@ -1,16 +1,2 @@
+-DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
+-HOMEPAGE = "https://pypi.python.org/pypi/pbr"
+-SECTION = "devel/python"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
+-
+-SRC_URI[md5sum] = "4e82c2e07af544c56a5b71c801525b00"
+-SRC_URI[sha256sum] = "05f61c71aaefc02d8e37c0a3eeb9815ff526ea28b3b76324769e6158d7f95be1"
+-
+-inherit pypi setuptools
+-
+-RDEPENDS_${PN}_class-target += " \
+-        python-pip \
+-        "
+-
+-BBCLASSEXTEND = "native"
++inherit setuptools
++require python-pbr.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb
+new file mode 100644
+index 0000000000..97e7361b16
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pbr_3.1.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pbr.inc
+-- 
+2.11.0
 
-On 31 August 2018 at 15:45, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Isn't this already covered by:
-> http://git.openembedded.org/meta-openembedded/commit/?id=19aeaf028f6819e5fa705593d4bcdbf0b98143e0
-> http://git.openembedded.org/meta-openembedded/commit/?id=e65b1c4ebbbf2174125e7c659b908dd0f46c4509
-> https://patchwork.openembedded.org/patch/154300/
-> ?
->
-> On Fri, Aug 31, 2018 at 4:42 PM Ross Burton <ross.burton@intel.com> wrote:
->>
->> The distutils class does a 'setup.py clean' but this breaks the protobuf
->> build:
->>
->> | Can't find required file: ../src/google/protobuf/descriptor.proto
->> | Generating google/protobuf/descriptor_pb2.py...
->> | ERROR: python3 setup.py build_ext execution failed.
->>
->> Disable the clean to work around this.
->>
->> Signed-off-by: Ross Burton <ross.burton@intel.com>
->> ---
->>  meta-python/recipes-devtools/python/python-protobuf.inc | 2 ++
->>  1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python-protobuf.inc
->> b/meta-python/recipes-devtools/python/python-protobuf.inc
->> index 6a0568ae62..421775d394 100644
->> --- a/meta-python/recipes-devtools/python/python-protobuf.inc
->> +++ b/meta-python/recipes-devtools/python/python-protobuf.inc
->> @@ -25,3 +25,5 @@ RDEPENDS_${PN} += " \
->>
->>  # For usage in other recipies when compiling protobuf files (e.g. by
->> grpcio-tools)
->>  BBCLASSEXTEND = "native"
->> +
->> +CLEANBROKEN = "1"
->> --
->> 2.11.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
