@@ -1,48 +1,50 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0563F79567
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 75709795C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 13:41:28 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id c14-v6so5300098wmb.4
+	Fri, 31 Aug 2018 14:41:47 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id a108-v6so11417164wrc.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Aug 2018 06:41:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=RsjZ8VwQ8A8ziyMV1NlTDs1cQ/aQQ2UkBZothzc69vg=;
-	b=GWusxu2Vz/KrUXNPPuloE81vQiwAxI5mbT4MYxxsjDOr98Zs3N9kh+DORr8z/L7LOY
-	FYDcq6ncA4sy/NnjuSmxi4x3PurIAp1xA0LAAKAxvn1Lb6pAyAGpdvz2Cbae4fHCBnUJ
-	aQpsDoVq9JoRCu2XeDrnKU7JjMfFfLWu0lGRLGcJwqakRHXVQmd1pWSXuuXKQlIog1EO
-	3bxBai0j8V2SoSF3ZQZz2IfgXQJ+6xuuKD/TJMYHJcVPx2isw0udP/dOGr9SQsAfpzac
-	d14sY6xeC3TW2mU78HXV8h+HkDbRJ/nH1lwqEOdymNtiNEkLmPzfqUavyiu0cx08ea0e
-	8jPg==
+	Fri, 31 Aug 2018 07:41:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=aQz/8h2uYd2X6UEJsDW57vf9nPnG/btwZlv4N219hp0=;
+	b=bZIkD5MPBccHy1cKCh73kPYsfdofGqm0eMBVv83CuUWyvoRUcLjyh6OO814+8OkjkH
+	jjYL/EUwcRqU89/YTyA3rGMj8a+an7IukM4VtgsI0CNLSFScIdGsybe2KxUtK4zIaSB6
+	PsJvQiE6sEW61Iu1Kl+LKCzMxkQkWxqDBUkUnzpuqnoyrZjQMBsKFa4AgQ6MDa0lRThW
+	1r1LGEVzPNq8RazCe36Fax0I8XIBdZDmnn03gMDhQyGfr/Bd5XXXogE4usG6xJgEw0Km
+	vznZbncOf2OOVeQZaJXtF6wlJiAHb0dPiJrrvp9QbeE1KntfWFG7gWVfRKgTt7gNP5BD
+	zJxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RsjZ8VwQ8A8ziyMV1NlTDs1cQ/aQQ2UkBZothzc69vg=;
-	b=P42+bkcGADTowl6A5/lEpXepRzlMw3sPztGQWHpnxIirQ/VmvaifVBMW8VCSuypK48
-	rTKlnfMG5AEuH+mz+WFnBrgnHq01P4pxDzAIaaIHM7CdMc/HeqFFcffdkaa1+gbr8aEc
-	2ae5kfdNecVawrMB3/6zu0XKMiXy5WY01+niVSc6KCIBi7js50SYB+V51Qd02ZZY1JV4
-	jrqvd7SkO/HbTOdOw1vILgy/jymJWo3LwMtkhdfuUIxr4nT2pV6iWtiUStkOf6c2OI0M
-	RLQhE2P3RIZ66UAeR85QKW75KYVEBFDVOjVimKxWaTSxY3JVXLzyAMKty30jldtQkiIO
-	TeLw==
-X-Gm-Message-State: APzg51DjYCQJlkBtRrZotAlDtEDwJiU/uYxu8+g5mHT4dd85bfYesxOY
-	VvKS61OS3Ai3u97kad3JwiadcHQM
-X-Google-Smtp-Source: ANB0VdaafLtrUPVQ3YlxIvg1KpZDdAEAtxoYp21RnnxlbXIKhM1k/nf8RYCgWIqlpPEyAguWIttzjg==
-X-Received: by 2002:a1c:a552:: with SMTP id
-	o79-v6mr4703970wme.45.1535722889516; 
-	Fri, 31 Aug 2018 06:41:29 -0700 (PDT)
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
-	(host63-251-dynamic.54-79-r.retail.telecomitalia.it. [79.54.251.63])
-	by smtp.gmail.com with ESMTPSA id
-	z14-v6sm3947118wma.18.2018.08.31.06.41.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 31 Aug 2018 06:41:28 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=aQz/8h2uYd2X6UEJsDW57vf9nPnG/btwZlv4N219hp0=;
+	b=WLK4A+lsByUg5trfMjU5EpxlPRoFu32P7hYcAidNMYiAFiwUJHp2OcoBhu1IYwacAD
+	UWBUWITfLDwtqNmuua3O10hgjIGg2qahxxswqD+uj7B3xjoNWWFCfRNoWaPW3hH2g6lA
+	uqGhgU8mpBIVFEK7HgQx4Pr9ftFYnYRWJaJjWt1/YqtnPj2o10t1ZzfqThvgjB/bpc4s
+	Z8zkDNfmnTAKscz0xIoM1LoievXRHicgpsi1/KWF4EZDW1s0MOyf0xRR5t3FZJJk9Nhl
+	Gwqpb7WBTD7Q+vm510+Ul6CG1A9VS1CFA1PaGyon0BfMq0RaB3WdIAi1nki8y/vWSsW0
+	LMhw==
+X-Gm-Message-State: APzg51CPVKbbXjc43m9q4V0W3axGW+DlgJMr/YsoDiP9teKbKruq+Yu6
+	qyCIxmnX5vjmLnxIOcYcFkEzA3gXR14=
+X-Google-Smtp-Source: ANB0VdYyE+vG1Y2wmozaDBWODz+yrut+KxOmvl8t3LvCgGw1bvPZIySGMJ3Rfv+Xea5C7zEZajebHA==
+X-Received: by 2002:a5d:5009:: with SMTP id
+	e9-v6mr11798716wrt.18.1535726507838; 
+	Fri, 31 Aug 2018 07:41:47 -0700 (PDT)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	l18-v6sm7665167wru.75.2018.08.31.07.41.46
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Aug 2018 07:41:47 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Aug 2018 15:41:25 +0200
-Message-Id: <1535722885-31725-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] kexec-tools-klibc: upgrade to latest master
+Date: Fri, 31 Aug 2018 15:41:44 +0100
+Message-Id: <20180831144144.5038-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] phoronix-test-suite: add dependency on lsb_release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,42 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Aug 2018 13:41:29 -0000
+X-List-Received-Date: Fri, 31 Aug 2018 14:41:47 -0000
 
-as of b9de21ef51a7ceab7122a707c188602eae22c4ee we can remove
-obsoleted kdump and get the --no-checks option.
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ .../recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-index 14edec2..4518e70 100644
---- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-+++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-@@ -13,7 +13,7 @@ DEPENDS = "zlib xz"
- inherit klibc autotools
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
+index b9401f2790..b1fa51bf03 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_8.0.1.bb
+@@ -29,7 +29,7 @@ do_install() {
+ SYSTEMD_AUTO_ENABLE = "disable"
+ SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
  
- SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
--SRCREV = "0481e9ed61ef80b3d851bb96b0c70a3d4a112c8b"
-+SRCREV = "b9de21ef51a7ceab7122a707c188602eae22c4ee"
+-RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release"
++RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release lsb"
  
- BUILD_PATCHES = "file://0001-force-static-build.patch \
-                  file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch"
-@@ -82,10 +82,9 @@ do_compile_prepend() {
-     done
- }
- 
--PACKAGES =+ "kexec-klibc kdump-klibc"
-+PACKAGES =+ "kexec-klibc"
- 
- FILES_kexec-klibc = "${sbindir}/kexec"
--FILES_kdump-klibc = "${sbindir}/kdump"
- 
- INSANE_SKIP_${PN} = "arch"
- 
+ FILES_${PN} += " \
+     ${datadir}/phoronix-test-suite \
 -- 
-2.7.4
+2.11.0
 
 
