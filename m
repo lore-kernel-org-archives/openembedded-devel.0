@@ -1,47 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AC987957B;
-	Sat,  1 Sep 2018 08:21:06 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id 89-v6so2900452qkp.2;
-	Sat, 01 Sep 2018 01:21:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZMsIoQ8b7Z3Pw/rBT4gvt1Z6wnEiy57lhU4yxy4KJf0=;
-	b=CpBKFBFA8AB07o1saFYuAtgdGcxOBs6ARjWX/PRKEtt/nQYMv/CD7oo2ddUsYldTF1
-	3fZCLo828HDBCcm5F5eRTA9JGkf2eWXgBD8nSXPUSzvuGk3oJx9bTk3xoVBNckqKduU+
-	m2KywVUzzGMtgmGCAwhKvjxwojqLKjno0PVdXjupAUOf9u20eoGu2CO159Zh4sZhQXO/
-	54oHWtl7V8na2Q8DUmBACFVjJgDmHG2ToXW/YNQJQ4K1TsW/+5DAS7jgc5uzxl0JPJfq
-	/Psn/nU9LQNnz6V/nENxBR6ZQhYImE0LA/0ILyJBpLK8YLhXJqbe0CxM3X86Gw63CvAA
-	XWcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ZMsIoQ8b7Z3Pw/rBT4gvt1Z6wnEiy57lhU4yxy4KJf0=;
-	b=Rm+R+7v7BwgZri+l/6O2ROA4amXaYM6AZteV2mncZJwMHYRuMZ2SL1NKie1iSKLdpx
-	n5mzl6f474KA9xt+ftI+owaqTpFnMfQowiJb7FqEhbQmEKZ7My4ErLhDQrCJQVvdMuLE
-	0LCWiTKpLyosCtOqd5ICyH9HO/59UEkG6ReFbehCvEdXojkY/m6i0TkOwgqeb42G5tWw
-	kRWOc0j4kdImwssKYT88dvpltJPi1bWl0qt/yy5gwthLY8Mtt1O8ExE4aR2ZmQr12yr/
-	OMp/2nnG+hKVmcVSN2SHnYIiseSn4VyzDMa+3yQ+ew2HWx2mbqIdqbGZk0jYXJengEdW
-	nmIA==
-X-Gm-Message-State: APzg51Cbeqhve78+0Q/cIVdkFKJxhTEpgvldbXIruGhAqwQk95jlX+uA
-	xxjf9VYwzHwtOwUTGjVi15uyrqGmoIaqEC6uVQpa3EW0
-X-Google-Smtp-Source: ANB0VdbAO6i7gR5BZsOlSrOj7RLxLKzSWNKo9aCht4t+YDfoN9psOSh0Sa+8Oa0iXPF2nPBI51FJYpQYLCHBIONu0Dg=
-X-Received: by 2002:a37:c04f:: with SMTP id
-	o76-v6mr18280160qki.315.1535790067833; 
-	Sat, 01 Sep 2018 01:21:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1535451643.git.alex.kanavin@gmail.com>
-In-Reply-To: <cover.1535451643.git.alex.kanavin@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 1 Sep 2018 01:20:42 -0700
-Message-ID: <CAMKF1spZJAUDAReUiBu=KB6bJj1M-s1xeK21St92v3Brbwi+sQ@mail.gmail.com>
-To: Alexander Kanavin <alex.kanavin@gmail.com>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFC PATCH 0/6] openssl 1.1.1 update
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 83C7071A8D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 Sep 2018 23:33:48 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	02 Sep 2018 16:33:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.53,322,1531810800"; d="scan'208";a="229660095"
+Received: from zhenmeih-mobl.gar.corp.intel.com (HELO localhost.localdomain)
+	([10.255.170.9])
+	by orsmga004.jf.intel.com with ESMTP; 02 Sep 2018 16:32:28 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Sep 2018 11:32:15 +1200
+Message-Id: <949605627c4ae0720e30b418b6aba508b0daab0e.1535931120.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1535931120.git.paul.eggleton@linux.intel.com>
+References: <cover.1535931120.git.paul.eggleton@linux.intel.com>
+Subject: [meta-networking][PATCH 1/1] mosquitto: upgrade to 1.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,135 +33,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Sep 2018 08:21:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 02 Sep 2018 23:33:48 -0000
 
-+OE-devel
+This includes one security fix and numerous other bugfixes. MQTT version
+3.1.1 is now the default protocol.
 
-On Tue, Aug 28, 2018 at 3:23 AM Alexander Kanavin
-<alex.kanavin@gmail.com> wrote:
->
-> This patch series updates openssl to the soon-to-be released 1.1.1 version
-> (latest news is 11 September), sets it as default, and removes dependencies
-> on openssl 1.0 entirely from oe-core. openssl 1.0 remains available as openssl10
-> recipe.
->
-> The following changes since commit a8368651ffed1bd6c4715a37dfe9f40c48ca23c4:
->
->   bitbake: fetcher: Fixed remote removal not throwing exception. (2018-08-28 10:32:08 +0100)
->
-> are available in the git repository at:
->
->   git://push.yoctoproject.org/poky-contrib akanavin/openssl-1.1.1
->
-> Alexander Kanavin (6):
->   openssl: rename openssl 1.0.x to openssl10 and make openssl 1.1.x the
->     default version
+See the following for details:
 
-This change is going to require some changes en-mass in meta-openembedded repos
+https://mosquitto.org/blog/2018/08/version-151-released/
+https://mosquitto.org/blog/2018/05/version-1-5-released/
 
-see the failures
+Changes to the recipe:
+* Drop explicit installation of the libmosquitto.a static library
+  because this no longer gets built by default, and the normal
+  "make install" which we are running will install it anyway if it were
+  to be enabled.
+* Drop our service file since there is one supplied in the source tree
+* Enable systemd notify support when systemd is being used
+* Update comments in the init script
 
-http://errors.yoctoproject.org/Errors/Build/67403/
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ .../mosquitto/files/mosquitto.init                |  4 ++--
+ .../mosquitto/files/mosquitto.service             | 15 ---------------
+ .../{mosquitto_1.4.15.bb => mosquitto_1.5.1.bb}   | 11 ++++-------
+ 3 files changed, 6 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/mosquitto/files/mosquitto.service
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.4.15.bb => mosquitto_1.5.1.bb} (89%)
 
-Feel free to send patches to meta-openembedded.
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+index d2a27b273..6a0c12760 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
++++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+@@ -8,9 +8,9 @@
+ # Required-Stop:    $remote_fs $syslog
+ # Default-Start:    2 3 4 5
+ # Default-Stop:     0 1 6
+-# Short-Description:    mosquitto MQTT v3.1 message broker
++# Short-Description:    mosquitto MQTT message broker
+ # Description: 
+-#  This is a message broker that supports version 3.1 of the MQ Telemetry
++#  This is a message broker that supports version 3.1/3.1.1 of the MQ Telemetry
+ #  Transport (MQTT) protocol.
+ #  
+ #  MQTT provides a method of carrying out messaging using a publish/subscribe
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.service b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.service
+deleted file mode 100644
+index 25f68fae0..000000000
+--- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.service
++++ /dev/null
+@@ -1,15 +0,0 @@
+-[Unit]
+-Description=Mosquitto - lightweight server implementation of the MQTT and MQTT-SN protocols
+-ConditionPathExists=/etc/mosquitto/mosquitto.conf
+-After=network.target
+-
+-[Service]
+-Type=simple
+-ExecStartPre=/bin/rm -f /var/run/mosquitto.pid
+-ExecStart=/usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+-ExecReload=/bin/kill -HUP $MAINPID
+-PIDFile=/var/run/mosquitto.pid
+-Restart=on-failure
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
+similarity index 89%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
+index f451687a6..fa51f4e76 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.4.15.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
+@@ -12,12 +12,11 @@ DEPENDS = "uthash"
+ 
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://0002-uthash-remove-in-tree-version.patch \
+-           file://mosquitto.service \
+            file://mosquitto.init \
+ "
+ 
+-SRC_URI[md5sum] = "546cb1ce35cc3f7d23e6d2f1f9a962e7"
+-SRC_URI[sha256sum] = "7d3b3e245a3b4ec94b05678c8199c806359737949f4cfe0bf936184f6ca89a83"
++SRC_URI[md5sum] = "f98c99998a36a234f3a9d9b402b991db"
++SRC_URI[sha256sum] = "8557bc7ae34dfaf32a0fb56d2491b7a7f731269c88337227233013502df4d5b0"
+ 
+ inherit systemd update-rc.d useradd
+ 
+@@ -34,6 +33,7 @@ EXTRA_OEMAKE = " \
+     ${@bb.utils.contains('PACKAGECONFIG', 'dns-srv', 'WITH_SRV=yes', 'WITH_SRV=no', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', 'WITH_TLS=yes WITH_TLS_PSK=yes', 'WITH_TLS=no WITH_TLS_PSK=no', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'uuid', 'WITH_UUID=yes', 'WITH_UUID=no', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'WITH_SYSTEMD=yes', 'WITH_SYSTEMD=no', d)} \
+     STRIP=/bin/true \
+     WITH_DOCS=no \
+ "
+@@ -43,11 +43,8 @@ export LIB_SUFFIX = "${@d.getVar('baselib', True).replace('lib', '')}"
+ do_install() {
+     oe_runmake 'DESTDIR=${D}' install
+ 
+-    install -d ${D}${libdir}
+-    install -m 0644 lib/libmosquitto.a ${D}${libdir}/
+-
+     install -d ${D}${systemd_unitdir}/system/
+-    install -m 0644 ${WORKDIR}/mosquitto.service ${D}${systemd_unitdir}/system/
++    install -m 0644 ${S}/service/systemd/mosquitto.service.notify ${D}${systemd_unitdir}/system/mosquitto.service
+ 
+     install -d ${D}${sysconfdir}/mosquitto
+     install -m 0644 ${D}${sysconfdir}/mosquitto/mosquitto.conf.example \
+-- 
+2.17.1
 
->   cryptodev-tests: port to openssl 1.1
->   openssl: update to 1.1.1
->   libressl: add a recipe to support openssh
->   openssh: depend on libressl
->   ca-certificates: update to 20180409
->
->  meta/conf/distro/include/default-versions.inc      |   3 -
->  meta/conf/distro/include/maintainers.inc           |   2 +
->  ...c-libraries-with-their-library-dependenci.patch |  73 +++++++++++++++
->  .../libressl/libressl_2.8.0.bb                     |  35 +++++++
->  meta/recipes-connectivity/openssh/openssh_7.7p1.bb |   2 +-
->  .../{openssl => files}/environment.d-openssl.sh    |   0
->  ...1-Take-linking-flags-from-LDFLAGS-env-var.patch |  43 ---------
->  ...SLDIR-and-ENGINESDIR-CFLAGS-to-be-control.patch |  39 --------
->  ...build-with-clang-using-external-assembler.patch |   0
->  .../0001-allow-manpages-to-be-disabled.patch       |   0
->  ...penssl-force-soft-link-to-avoid-rare-race.patch |   0
->  .../Makefiles-ptest.patch                          |   0
->  .../Use-SHA256-not-MD5-as-default-digest.patch     |   0
->  .../configure-musl-target.patch                    |   0
->  .../configure-targets.patch                        |   0
->  .../debian/c_rehash-compat.patch                   |   0
->  .../debian/debian-targets.patch                    |   0
->  .../debian/man-dir.patch                           |   0
->  .../debian/man-section.patch                       |   0
->  .../debian/no-rpath.patch                          |   0
->  .../debian/no-symbolic.patch                       |   0
->  .../{openssl-1.0.2p => openssl10}/debian/pic.patch |   0
->  .../debian1.0.2/block_digicert_malaysia.patch      |   0
->  .../debian1.0.2/block_diginotar.patch              |   0
->  .../debian1.0.2/soname.patch                       |   0
->  .../debian1.0.2/version-script.patch               |   0
->  .../engines-install-in-libdir-ssl.patch            |   0
->  .../{openssl-1.0.2p => openssl10}/oe-ldflags.patch |   0
->  .../openssl-c_rehash.sh                            |   0
->  .../openssl-fix-des.pod-error.patch                |   0
->  .../openssl_fix_for_x32.patch                      |   0
->  .../{openssl-1.0.2p => openssl10}/parallel.patch   |   0
->  .../{openssl-1.0.2p => openssl10}/ptest-deps.patch |   0
->  .../ptest_makefile_deps.patch                      |   0
->  .../reproducible-cflags.patch                      |   0
->  .../reproducible-mkbuildinf.patch                  |   0
->  .../{openssl-1.0.2p => openssl10}/run-ptest        |   0
->  .../shared-libs.patch                              |   0
->  .../{openssl_1.0.2p.bb => openssl10_1.0.2p.bb}     |  31 +++++--
->  .../{openssl_1.1.0i.bb => openssl_1.1.1-pre9.bb}   |  23 +++--
->  .../cryptodev/cryptodev-tests_1.9.bb               |   3 +-
->  .../files/0001-Port-tests-to-openssl-1.1.patch     | 103 +++++++++++++++++++++
->  ...tes_20170717.bb => ca-certificates_20180409.bb} |   4 +-
->  43 files changed, 255 insertions(+), 106 deletions(-)
->  create mode 100644 meta/recipes-connectivity/libressl/libressl/0001-Link-dynamic-libraries-with-their-library-dependenci.patch
->  create mode 100644 meta/recipes-connectivity/libressl/libressl_2.8.0.bb
->  rename meta/recipes-connectivity/openssl/{openssl => files}/environment.d-openssl.sh (100%)
->  delete mode 100644 meta/recipes-connectivity/openssl/openssl/0001-Take-linking-flags-from-LDFLAGS-env-var.patch
->  delete mode 100644 meta/recipes-connectivity/openssl/openssl/0001-allow-OPENSSLDIR-and-ENGINESDIR-CFLAGS-to-be-control.patch
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/0001-Fix-build-with-clang-using-external-assembler.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/0001-allow-manpages-to-be-disabled.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/0001-openssl-force-soft-link-to-avoid-rare-race.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/Makefiles-ptest.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/Use-SHA256-not-MD5-as-default-digest.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/configure-musl-target.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/configure-targets.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/c_rehash-compat.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/debian-targets.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/man-dir.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/man-section.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/no-rpath.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/no-symbolic.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian/pic.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian1.0.2/block_digicert_malaysia.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian1.0.2/block_diginotar.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian1.0.2/soname.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/debian1.0.2/version-script.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/engines-install-in-libdir-ssl.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/oe-ldflags.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/openssl-c_rehash.sh (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/openssl-fix-des.pod-error.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/openssl_fix_for_x32.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/parallel.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/ptest-deps.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/ptest_makefile_deps.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/reproducible-cflags.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/reproducible-mkbuildinf.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/run-ptest (100%)
->  rename meta/recipes-connectivity/openssl/{openssl-1.0.2p => openssl10}/shared-libs.patch (100%)
->  rename meta/recipes-connectivity/openssl/{openssl_1.0.2p.bb => openssl10_1.0.2p.bb} (91%)
->  rename meta/recipes-connectivity/openssl/{openssl_1.1.0i.bb => openssl_1.1.1-pre9.bb} (83%)
->  create mode 100644 meta/recipes-kernel/cryptodev/files/0001-Port-tests-to-openssl-1.1.patch
->  rename meta/recipes-support/ca-certificates/{ca-certificates_20170717.bb => ca-certificates_20180409.bb} (95%)
->
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
