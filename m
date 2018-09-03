@@ -1,43 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 2960A71E5A
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Sep 2018 05:43:28 +0000 (UTC)
-Received: by mail-qt0-f177.google.com with SMTP id z8-v6so20631665qto.9
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Sep 2018 22:43:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=WPL+OzZMK2iOsx0O3fG8hRR6/CETaIEwMtYqCZpPWWY=;
-	b=i5umaF2GDPNRCgzWsLCrzv3gGVevEa3uEDa2N2fkBPqh41Maa7h/ER8OO5ZnEb7Zyp
-	005AlZ5frXIkIzEZtcc8Z3+l4OH3gzXsNcYCpNUPUMRJ+JRR7QqEagniPmgt5VBRCGLj
-	othm/2Xt8ZnRCmfPHl3biun017J3PziiQJyZCN5f/TrhKuFNwigmmq26RrExL1tkFCz+
-	0lXSv0goLYGl+W/U6IakCWuHS4MB1bUfT5W9YCHGJeT3qyxlKvhhmCNCKCXCv7RN05CJ
-	Xy9yJYMBSTNoacJLSgGk5xNx8FWhJM9jmjDzpDAJS1/EN/FRjcTkQqmWZ3ii1bnR8MnS
-	BZ1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=WPL+OzZMK2iOsx0O3fG8hRR6/CETaIEwMtYqCZpPWWY=;
-	b=Et1RnRzAb3+9HXHY5akAuctyM447Fa4/Na3SgfLIBrJrfjPcVmuh4+AV+KN5Vs2nvc
-	Yii1HU2k4ant9B62iuC9PF9XLyUdn9bxxCgsiI5NNiFjhc+pb0KR/35zNQOErP4EpAzW
-	Nfo/uNFnW29NfcNIXst2ajAWgNILEi1UVxFx0aWDdppM1brHu+1P0a8fhDZ34BjUoD+V
-	qpERaBinuw5H+TIpckosBXCMfOtcLmd8AxmZCJPNgUiTV2qgdCe7HFxYcYeRUM9J6HtQ
-	O8B8v5X3VpLtFUjyyzezu7kFer6NPtoJv9lq4HUmNoAC/tGatXywhrjeWf62LTkESRUo
-	JcfQ==
-X-Gm-Message-State: APzg51B/fiKGUWAjhVvYIQnyxfalspXI0AdcLyZ4daPK9RDqyPFC6YRb
-	GMCbFNHUCLVHi2yfkDKWVE+aLx4EToQ0W1z6VIqda30z
-X-Google-Smtp-Source: ANB0VdZSuxrcL/GED15GmBNcfbQGRaD+ExMX5PXyf+L1/aTtwXTp3rZzloxoK14CeV9VCauo8IJe5AjRLZCa/xdWXnc=
-X-Received: by 2002:ac8:6c8:: with SMTP id
-	j8-v6mr24845049qth.314.1535953408402; 
-	Sun, 02 Sep 2018 22:43:28 -0700 (PDT)
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E3B52753E2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  3 Sep 2018 07:53:49 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w837roX4001147
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 3 Sep 2018 00:53:50 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.408.0; Mon, 3 Sep 2018 00:53:49 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 3 Sep 2018 15:53:47 +0800
+Message-ID: <1535961228-166818-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 2 Sep 2018 22:43:02 -0700
-Message-ID: <CAMKF1spYyj-18urxsniwFac5TV__ve_NY71L_ruyvF+XJ-H3_Q@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of the world, 2018-09-02
+Subject: [meta-networking][PATCH 1/2] lksctp-tools: Upgrade to 1.0.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,592 +30,383 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2018 05:43:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 03 Sep 2018 07:53:50 -0000
+Content-Type: text/plain
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-== Number of issues - stats ==
-{| class='wikitable'
-!|Date     !!colspan='4'|Failed tasks    !!|Signatures
-!!colspan='15'|QA !!Comment
-|-
-|| ||qemuarm ||qemuarm64 ||qemux86 ||qemux86_64 ||all
-||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps
-||version-going-backwards ||host-user-contaminated
-||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot
-||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path
-||qa_pseudo ||
-|-
-||2018-09-02 ||38 ||38 ||46 ||36 ||9 ||0 ||0 ||6 ||2 ||0 ||32 ||0 ||0
-||1 ||0 ||0 ||0 ||0 ||0 ||0 ||
-|}
+inherit autotools-brokensep to fix the gap
+between ${S} and ${B}
 
-== Failed tasks 2018-09-02 ==
+Backport 6 patches from master to fix build
+issue[https://github.com/sctp/lksctp-tools/compare/lksctp-tools-1.0.18...master]
+| WARNING: lksctp-tools-1.0.18+gitAUTOINC+1b077af62d-r0 do_package: QA Issue: lksctp-tools: Files/directories were installed but not shipped in:
+|  /usr/lib64/libsctp.so.1.0.17
+|  /usr/lib64/lksctp-tools/libwithsctp.so.1.0.17
 
-INFO: jenkins-job.sh-1.8.45 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.report.20180902_193948.log
+| -- Looking for sctp_connectx - not found[when
+build freediameter which depends on lksctp-tools]
 
-=== common (31) ===
-    * sources/meta-openembedded/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb:do_compile
-    * sources/meta-openembedded/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb:do_configure
-    * sources/meta-openembedded/meta-multimedia/recipes-multimedia/rtmpdump/rtmpdump_2.4.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-connectivity/crda/crda_3.18.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-irc/znc/znc_git.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-protocols/openflow/openflow_git.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-support/uftp/uftp_4.9.3.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-connectivity/umip/umip_1.0.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.11.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-extended/openwsman/openwsman_2.6.4.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/asio/asio_1.10.6.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/libgit2/libgit2_0.24.3.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/liboauth/liboauth_1.0.3.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/links/links_2.7.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/links/links-x11_2.7.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/opensc/opensc_0.16.0.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-support/synergy/synergy_git.bb:do_compile
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ ...ld-0b0dce7a36fb-actually-belongs-to-v4.19.patch | 31 ++++++++++
+ ...ld-fix-netinet-sctp.h-not-to-be-installed.patch | 35 +++++++++++
+ ...001-build-fix-probing-for-HAVE_SCTP_SENDV.patch | 35 +++++++++++
+ ...e-v4.12-secondary-defines-in-favor-of-HAV.patch | 52 ++++++++++++++++
+ ...c-add-CURRENT-REVISION-and-AGE-for-libsct.patch | 71 ++++++++++++++++++++++
+ ...ithsctp-use-PACKAGE_VERSION-in-withsctp.h.patch | 43 +++++++++++++
+ ...sctp-tools_1.0.17.bb => lksctp-tools_1.0.18.bb} | 12 +++-
+ 7 files changed, 276 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
+ rename meta-networking/recipes-support/lksctp-tools/{lksctp-tools_1.0.17.bb => lksctp-tools_1.0.18.bb} (72%)
 
-=== common-x86 (2) ===
-    * sources/meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb:do_patch
-    * sources/meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.8.bb:do_compile
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
+new file mode 100644
+index 0000000..7599b1b
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch
+@@ -0,0 +1,31 @@
++From e5952a0cdfa8b1b56a5823574835f1f771f14ae0 Mon Sep 17 00:00:00 2001
++From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++Date: Fri, 24 Aug 2018 09:53:00 -0300
++Subject: [PATCH] build: 0b0dce7a36fb actually belongs to v4.19
++
++Typo or not, this commit actually belongs to v4.19 and made me wonder why
++on v4.18 it didn't find this feature.
++
++Fixes: 817f0bfa248f ("build: add two defines for Peer Address Parameters extensions on sctp_paddrparams")
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++Reviewed-by: Xin Long <lucien.xin@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index f55775a..5de5c76 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -101,7 +101,7 @@ LKSCTP_CHECK_TYPE([struct sctp_prinfo], [HAVE_SCTP_SENDV])
++ # added on v4.16, 30f6ebf65bc4
++ LKSCTP_CHECK_DECL([SCTP_AUTH_NO_AUTH], [HAVE_SCTP_AUTH_NO_AUTH])
++ 
++-# New members to sctp_paddrparams, added on v4.18, 0b0dce7a36fb
+++# New members to sctp_paddrparams, added on v4.19, 0b0dce7a36fb
++ LKSCTP_CHECK_MEMBER([struct sctp_paddrparams.spp_ipv6_flowlabel],
++ 		    [HAVE_SCTP_SPP_IPV6_FLOWLABEL])
++ LKSCTP_CHECK_MEMBER([struct sctp_paddrparams.spp_dscp],
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
+new file mode 100644
+index 0000000..03c6c4f
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-netinet-sctp.h-not-to-be-installed.patch
+@@ -0,0 +1,35 @@
++From 378560050a8f93786c590cc99a55461666205b61 Mon Sep 17 00:00:00 2001
++From: Xin Long <lucien.xin@gmail.com>
++Date: Fri, 24 Aug 2018 01:13:32 +0800
++Subject: [PATCH] build: fix netinet/sctp.h not to be installed
++
++After libcnetinet_HEADERS was set to sctp.h.in, netinet/sctp.h can
++no longer be installed into ${includedir}.
++
++Since "AC_CONFIG_HEADERS([src/include/netinet/sctp.h])" is already
++added into configure.ac, there's no need to generate sctp.h by
++automake.
++
++So we simply set libcnetinet_HEADERS back to sctp.h.
++
++Fixes: 9607dd85e70a ("netinet/sctp.h: dynamically build based on system setup")
++Signed-off-by: Xin Long <lucien.xin@gmail.com>
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++---
++ src/include/netinet/Makefile.am | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/src/include/netinet/Makefile.am b/src/include/netinet/Makefile.am
++index ca0aac2..965db8c 100644
++--- a/src/include/netinet/Makefile.am
+++++ b/src/include/netinet/Makefile.am
++@@ -11,5 +11,4 @@ libcnetinetdir = $(includedir)/netinet
++ # API.
++ include_HEADERS =
++ 
++-libcnetinet_HEADERS = sctp.h.in
++-BUILT_SOURCES = sctp.h
+++libcnetinet_HEADERS = sctp.h
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
+new file mode 100644
+index 0000000..89c8983
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch
+@@ -0,0 +1,35 @@
++From 596efd6631b83069d41782fb0ee2d6cf76a50dfa Mon Sep 17 00:00:00 2001
++From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++Date: Fri, 24 Aug 2018 09:52:59 -0300
++Subject: [PATCH] build: fix probing for HAVE_SCTP_SENDV
++
++Somehow it was using a type that is non-existent. The right one is
++sctp_prinfo, introduced on ed63afb8a318 ("sctp: add support for PR-SCTP
++Information for sendmsg"), present on v4.17.
++
++Fixes: 1b798f1ca3b5 ("build: add define HAVE_SCTP_AUTH_NO_AUTH")
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++Reviewed-by: Xin Long <lucien.xin@gmail.com>
++---
++ configure.ac | 5 ++---
++ 1 file changed, 2 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index dad658c..f55775a 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -94,9 +94,8 @@ LKSCTP_CHECK_MEMBER([struct sctp_pdapi_event.pdapi_stream],
++ LKSCTP_CHECK_MEMBER([struct sctp_pdapi_event.pdapi_seq],
++ 		    [HAVE_SCTP_PDAPI_EVENT_PDAPI_SEQ])
++ 
++-# PR-SCTP field used to probe for sendv/recvv support, added on v4.17
++-LKSCTP_CHECK_MEMBER([struct sendv_prinfo.sctp_prinfo],
++-		    [HAVE_SCTP_SENDV])
+++# PR-SCTP struct used to probe for sendv/recvv support, added on v4.17
+++LKSCTP_CHECK_TYPE([struct sctp_prinfo], [HAVE_SCTP_SENDV])
++ 
++ # This event indicates that the peer does not support SCTP authentication,
++ # added on v4.16, 30f6ebf65bc4
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
+new file mode 100644
+index 0000000..d22cda6
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch
+@@ -0,0 +1,52 @@
++From db6d15bf12a0123e4320e5fd7cb688331dea1bdc Mon Sep 17 00:00:00 2001
++From: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++Date: Fri, 24 Aug 2018 09:52:58 -0300
++Subject: [PATCH] build: remove v4.12 secondary defines in favor of
++ HAVE_SCTP_STREAM_RECONFIG
++
++These were backups, commented out since beginning.
++HAVE_SCTP_STREAM_RECONFIG is enough to identify that these are there, so
++lets use only one.
++
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++Reviewed-by: Xin Long <lucien.xin@gmail.com>
++---
++ configure.ac                  | 8 --------
++ src/include/netinet/sctp.h.in | 2 --
++ 2 files changed, 10 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 2ae36ec..dad658c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -82,14 +82,6 @@ AC_CHECK_FUNCS([bzero gethostbyname gettimeofday memmove memset select socket \
++ LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_stream_reset_event],
++ 		    [HAVE_SCTP_STREAM_RESET_EVENT])
++ 
++-# Support for assoc reset event, added on v4.12, c95129d127c6
++-#LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_assoc_reset_event], \
++-#		    [HAVE_SCTP_ASSOC_RESET_EVENT])
++-
++-# Support for stream change event, added on v4.12, b444153fb5a6
++-#LKSCTP_CHECK_MEMBER([struct sctp_event_subscribe.sctp_stream_change_event], \
++-#		    [HAVE_SCTP_STREAM_CHANGE_EVENT])
++-
++ # RFC 6525 (Stream Reconf), finished on v4.12, c0d8bab6ae51
++ LKSCTP_CHECK_DECL([SCTP_RECONFIG_SUPPORTED], [HAVE_SCTP_STREAM_RECONFIG])
++ 
++diff --git a/src/include/netinet/sctp.h.in b/src/include/netinet/sctp.h.in
++index c049077..2009f1c 100644
++--- a/src/include/netinet/sctp.h.in
+++++ b/src/include/netinet/sctp.h.in
++@@ -61,8 +61,6 @@ extern "C" {
++ #define HAVE_SCTP_CANSET_PRIMARY
++ 
++ #undef HAVE_SCTP_STREAM_RESET_EVENT
++-#undef HAVE_SCTP_ASSOC_RESET_EVENT
++-#undef HAVE_SCTP_STREAM_CHANGE_EVENT
++ #undef HAVE_SCTP_STREAM_RECONFIG
++ #undef HAVE_SCTP_PEELOFF_FLAGS
++ #undef HAVE_SCTP_PDAPI_EVENT_PDAPI_STREAM
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
+new file mode 100644
+index 0000000..bec9bf0
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch
+@@ -0,0 +1,71 @@
++From 7de2bd7e769f10521e3d0c2cb42c6f6b9b505dd0 Mon Sep 17 00:00:00 2001
++From: Xin Long <lucien.xin@gmail.com>
++Date: Thu, 16 Aug 2018 14:12:30 +0800
++Subject: [PATCH] configure.ac: add CURRENT REVISION and AGE for libsctp and
++ libwithsctp
++
++Add CURRENT REVISION and AGE for libsctp and libwithsctp in
++configure.ac to update these 2 library version information.
++
++Compatible with before, they will start from 1:18:0. But each
++will get updated according to their definitions in the future.
++
++Signed-off-by: Xin Long <lucien.xin@gmail.com>
++Acked-by: Neil Horman <nhorman@tuxdriver.com>
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++---
++ configure.ac             | 7 +++++++
++ src/lib/Makefile.am      | 7 +++++--
++ src/withsctp/Makefile.am | 3 ++-
++ 3 files changed, 14 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 275ef4e..2ae36ec 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -14,6 +14,13 @@ dnl reduce clutter in the root; if we put it below AM_INIT_AUTOMAKE,
++ dnl configure will fail ...)
++ 
++ AC_INIT([lksctp-tools], [1.0.18], [], [], [http://www.lksctp.org/])
+++AC_SUBST(LIBSCTP_CURRENT, 1)
+++AC_SUBST(LIBSCTP_REVISION, 18)
+++AC_SUBST(LIBSCTP_AGE, 0)
+++AC_SUBST(LIBWITHSCTP_CURRENT, 1)
+++AC_SUBST(LIBWITHSCTP_REVISION, 18)
+++AC_SUBST(LIBWITHSCTP_AGE, 0)
+++
++ AC_CONFIG_AUX_DIR(bin)
++ AC_CONFIG_SRCDIR([src/apps/sctp_darn.c])
++ AC_CONFIG_HEADERS([config.h])
++diff --git a/src/lib/Makefile.am b/src/lib/Makefile.am
++index 6100c56..1d62175 100644
++--- a/src/lib/Makefile.am
+++++ b/src/lib/Makefile.am
++@@ -8,5 +8,8 @@ AM_CPPFLAGS = -I$(top_srcdir)/src/include
++ 
++ lib_LTLIBRARIES = libsctp.la
++ 
++-libsctp_la_SOURCES = bindx.c connectx.c peeloff.c opt_info.c addrs.c sendmsg.c recvmsg.c Versions.map
++-libsctp_la_LDFLAGS = -version-info 1:17:0 -Wl,--version-script=$(srcdir)/Versions.map
+++libsctp_la_SOURCES = bindx.c connectx.c peeloff.c opt_info.c \
+++		addrs.c sendmsg.c recvmsg.c Versions.map
+++libsctp_la_LDFLAGS = -version-info \
+++		@LIBSCTP_CURRENT@:@LIBSCTP_REVISION@:@LIBSCTP_AGE@ \
+++		-Wl,--version-script=$(srcdir)/Versions.map
++diff --git a/src/withsctp/Makefile.am b/src/withsctp/Makefile.am
++index 70b1cca..1f6ca37 100644
++--- a/src/withsctp/Makefile.am
+++++ b/src/withsctp/Makefile.am
++@@ -14,7 +14,8 @@ AM_CPPFLAGS=-I$(top_srcdir)/src/include
++ pkglib_LTLIBRARIES = libwithsctp.la
++ libwithsctp_la_SOURCES = sctp_load_libs.c sctp_socket.c sctp_bind.c \
++ 	sctp_sockopt.c sctp_socket.h
++-libwithsctp_la_LDFLAGS = -version-info 1:17:0 -ldl
+++libwithsctp_la_LDFLAGS = -version-info \
+++	@LIBWITHSCTP_CURRENT@:@LIBWITHSCTP_REVISION@:@LIBWITHSCTP_AGE@ -ldl
++ 
++ pkgdoc_DATA = sctp_load_libs.c sctp_socket.c sctp_bind.c \
++ 	sctp_sockopt.c sctp_socket.h checksctp.c
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
+new file mode 100644
+index 0000000..2537bb9
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch
+@@ -0,0 +1,43 @@
++From 7c0ef4d441b3833e721df58f56e2cb8c81b34df4 Mon Sep 17 00:00:00 2001
++From: Xin Long <lucien.xin@gmail.com>
++Date: Thu, 16 Aug 2018 14:12:01 +0800
++Subject: [PATCH] withsctp: use @PACKAGE_VERSION@ in withsctp.h
++
++use @PACKAGE_VERSION@ to replace the hardcode version.
++
++Signed-off-by: Xin Long <lucien.xin@gmail.com>
++Acked-by: Neil Horman <nhorman@tuxdriver.com>
++Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
++---
++ Makefile.rules           | 3 ++-
++ src/withsctp/withsctp.in | 3 ++-
++ 2 files changed, 4 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile.rules b/Makefile.rules
++index 83f5f0c..d3693fa 100644
++--- a/Makefile.rules
+++++ b/Makefile.rules
++@@ -15,4 +15,5 @@
++ edit = @sed \
++ 	-e "s|\@bindir\@|$(bindir)|" \
++ 	-e "s|\@libdir\@|$(libdir)|" \
++-	-e "s|\@PACKAGE\@|$(PACKAGE)|"
+++	-e "s|\@PACKAGE\@|$(PACKAGE)|" \
+++	-e "s|\@PACKAGE_VERSION\@|$(PACKAGE_VERSION)|"
++diff --git a/src/withsctp/withsctp.in b/src/withsctp/withsctp.in
++index 7f182ba..fda5ebc 100644
++--- a/src/withsctp/withsctp.in
+++++ b/src/withsctp/withsctp.in
++@@ -2,7 +2,8 @@
++ # -*- sh -*-
++ LIBDIR=@libdir@/@PACKAGE@
++ BINDIR=@bindir@
++-export LD_PRELOAD=${LIBDIR}/libwithsctp.so.1.0.17
+++LIBVER=@PACKAGE_VERSION@
+++export LD_PRELOAD=${LIBDIR}/libwithsctp.so.${LIBVER}
++ if ! ${BINDIR}/checksctp 2> /dev/null
++ then
++     ${BINDIR}/checksctp;
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+similarity index 72%
+rename from meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
+rename to meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+index 121cc99..cc2f835 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+@@ -8,13 +8,19 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
+ "
+ 
+-SRCREV = "736b91d340e3f2519714f2930ed63b164d363511"
++SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
+ 
+ PV .= "+git${SRCPV}"
+-LK_REL = "1.0.17"
++LK_REL = "1.0.18"
+ 
+ SRC_URI = " \
+     git://github.com/sctp/lksctp-tools.git \
++    file://0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch \
++    file://0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch \
++    file://0001-build-fix-netinet-sctp.h-not-to-be-installed.patch \
++    file://0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch \
++    file://0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch \
++    file://0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch \
+     file://run-ptest \
+     file://v4test.sh \
+     file://v6test.sh \
+@@ -24,7 +30,7 @@ S = "${WORKDIR}/git"
+ 
+ BBCLASSEXTEND = "native"
+ 
+-inherit autotools pkgconfig binconfig ptest
++inherit autotools-brokensep pkgconfig binconfig ptest
+ 
+ do_install_ptest () {
+     install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
+-- 
+2.7.4
 
-=== qemuarm (7) ===
-    * sources/meta-openembedded/meta-networking/recipes-connectivity/kea/kea_1.4.0.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-support/libldb/libldb_1.4.1.bb:do_package_qa
-    * sources/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb:do_configure
-    * sources/meta-openembedded/meta-oe/recipes-extended/redis/redis_4.0.8.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-extended/upm/upm_git.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qtbase_git.bb:do_configure
-    * sources/openembedded-core/meta/recipes-devtools/go/go-runtime_1.9.bb:do_compile
-
-=== qemuarm64 (4) ===
-    * sources/meta-browser/recipes-browser/chromium/chromium-ozone-wayland_64.0.3274.0.r517731.igalia.1.bb:do_compile
-    * sources/meta-browser/recipes-browser/chromium/chromium-x11_68.0.3440.106.bb:do_compile
-    * sources/meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb:do_compile
-    * sources/meta-openembedded/meta-python/recipes-devtools/python/python-pyflame_1.6.6.bb:do_compile
-
-=== qemux86 (12) ===
-    * sources/meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.bb:do_compile
-    * sources/meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb:do_compile
-    * sources/meta-openembedded/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-dbs/mongodb/mongodb_git.bb:do_compile
-    * sources/meta-openembedded/meta-python/recipes-devtools/python/python3-m2crypto_0.30.1.bb:do_compile
-    * sources/meta-openembedded/meta-python/recipes-devtools/python/python-m2crypto_0.30.1.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qt5-creator_4.5.1.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
-    * sources/meta-qt5/recipes-qt/qt5/qtwebkit-examples_git.bb:do_compile
-    * sources/openembedded-core/meta/recipes-graphics/mesa/mesa_18.1.7.bb:do_package_qa
-    * sources/openembedded-core/meta/recipes-multimedia/x264/x264_git.bb:do_package_qa
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (158) ===
-{| class=wikitable
-|-
-|| qemuarm || 38 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm.20180902_073910.log/
-||
-|-
-|| qemuarm64 || 38 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemuarm64.20180902_084833.log/
-||
-|-
-|| qemux86 || 46 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86.20180902_073921.log/
-||
-|-
-|| qemux86_64 || 36 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.world.qemux86-64.20180902_092525.log/
-||
-|}
-
-=== PNBLACKLISTs (0) ===
-
-=== QA issues (41) ===
-{| class=wikitable
-!| Count ||Issue
-|-
-||0 ||already-stripped
-|-
-||0 ||compile-host-path
-|-
-||0 ||file-rdeps
-|-
-||0 ||host-user-contaminated
-|-
-||0 ||installed-vs-shipped
-|-
-||0 ||invalid-pkgconfig
-|-
-||0 ||ldflags
-|-
-||0 ||libdir
-|-
-||0 ||pkgname
-|-
-||0 ||qa_pseudo
-|-
-||0 ||symlink-to-sysroot
-|-
-||1 ||unknown-configure-option
-|-
-||2 ||build-deps
-|-
-||32 ||version-going-backwards
-|-
-||6 ||textrel
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (9) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/thud/log.signatures.20180902_095951.log/
-    * ERROR: 9 issues were found in these recipes: 96boards-tools
-oprofile packagegroup-core-standalone-sdk-target
-packagegroup-core-tools-debug packagegroup-self-hosted
-phoronix-test-suite phpmyadmin
-
-    * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
-    * ERROR: 1 errors found in
-signatures.qemux86.do_populate_sysroot.sigdata.log
-    * ERROR: 1 errors found in
-signatures.qemux86.do_package_write_ipk.sigdata.log
-    * ERROR: 6 errors found in
-signatures.qemuarm.do_package_write_ipk.sigdata.log
-
-    * ERROR: oprofile different signature for task
-do_configure.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1535918391/signatures.qemux86.do_configure.sigdata.log
-    * ERROR: oprofile different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1535918391/signatures.qemux86.do_populate_sysroot.sigdata.log
-    * ERROR: oprofile different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1535918391/signatures.qemux86.do_package_write_ipk.sigdata.log
-    * ERROR: 96boards-tools different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: packagegroup-core-standalone-sdk-target different
-signature for task do_package_write_ipk.sigdata between qemux86copy
-and qemuarm
-    * ERROR: packagegroup-core-tools-debug different signature for
-task do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: packagegroup-self-hosted different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: phoronix-test-suite different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: phpmyadmin different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: 6 errors found in
-/home/jenkins/oe/world/oe-build/build/tmpfs/sstate-diff/1535918391/signatures.qemuarm.do_package_write_ipk.sigdata.log
-    * ERROR: 9 issues were found in these recipes: 96boards-tools
-oprofile packagegroup-core-standalone-sdk-target
-packagegroup-core-tools-debug packagegroup-self-hosted
-phoronix-test-suite phpmyadmin
-
-
-PNBLACKLISTs:
-openembedded-core/:
-meta-*:
-PNBLACKLIST[android-system] = "depends on lxc from
-meta-virtualiazation which isn't included in my world builds"
-PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-directory in /home/builder/poky :/"
-
-
-QA issues by type:
-count: 0 issue: already-stripped
-
-
-count: 0 issue: libdir
-
-
-count: 6 issue: textrel
-mesa-18.1.7: ELF binary
-'/tmp/work/i586-bec-linux-musl/mesa/2_18.1.7-r0/packages-split/libglapi/usr/lib/libglapi.so.0.0.0'
-has relocations in .text [textrel]
-mesa-18.1.7: ELF binary
-'/tmp/work/i586-bec-linux-musl/mesa/2_18.1.7-r0/packages-split/libgles1-mesa/usr/lib/libGLESv1_CM.so.1.1.0'
-has relocations in .text [textrel]
-mesa-18.1.7: ELF binary
-'/tmp/work/i586-bec-linux-musl/mesa/2_18.1.7-r0/packages-split/libgles2-mesa/usr/lib/libGLESv2.so.2.0.0'
-has relocations in .text [textrel]
-mesa-18.1.7: ELF binary
-'/tmp/work/i586-bec-linux-musl/mesa/2_18.1.7-r0/packages-split/libgl-mesa/usr/lib/libGL.so.1.2.0'
-has relocations in .text [textrel]
-x264-r2854+gitAUTOINC+e9a5903edf: ELF binary
-'/tmp/work/i586-bec-linux-musl/x264/r2854+gitAUTOINC+e9a5903edf-r0/packages-split/x264-bin/usr/bin/x264'
-has relocations in .text [textrel]
-x264-r2854+gitAUTOINC+e9a5903edf: ELF binary
-'/tmp/work/i586-bec-linux-musl/x264/r2854+gitAUTOINC+e9a5903edf-r0/packages-split/x264/usr/lib/libx264.so.152'
-has relocations in .text [textrel]
-
-
-count: 2 issue: build-deps
-libldb-1.4.1: libldb rdepends on samba, but it isn't a build
-dependency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
-libldb-1.4.1: pyldb rdepends on samba, but it isn't a build
-dependency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
-
-
-count: 0 issue: file-rdeps
-
-
-count: 32 issue: version-going-backwards
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-dbg went backwards
-which would break package feeds from (0:1.0-r8.2 to 0:1.0-r8.1)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-dev went backwards
-which would break package feeds from (0:1.0-r8.2 to 0:1.0-r8.1)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-ptest went backwards
-which would break package feeds from (0:1.0-r8.2 to 0:1.0-r8.1)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target went backwards which
-would break package feeds from (0:1.0-r8.2 to 0:1.0-r8.1)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-dbg went backwards which would break
-package feeds from (0:1.0-r3.2 to 0:1.0-r3.1)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-dev went backwards which would break
-package feeds from (0:1.0-r3.2 to 0:1.0-r3.1)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-ptest went backwards which would break
-package feeds from (0:1.0-r3.2 to 0:1.0-r3.1)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug went backwards which would break package
-feeds from (0:1.0-r3.2 to 0:1.0-r3.1) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-dbg went backwards which would break package
-feeds from (0:1.0-r13.2 to 0:1.0-r13.1) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-dbg went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-dev went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-ptest went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-dev went backwards which would break package
-feeds from (0:1.0-r13.2 to 0:1.0-r13.1) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-dbg went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-dev went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-ptest went backwards which would
-break package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-dbg went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-dev went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-ptest went backwards which would
-break package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-dbg went backwards which would
-break package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-dev went backwards which would
-break package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-ptest went backwards which would
-break package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-ptest went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-dbg went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-dev went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-ptest went backwards which would break
-package feeds from (0:1.0-r13.2 to 0:1.0-r13.1)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk went backwards which would break package
-feeds from (0:1.0-r13.2 to 0:1.0-r13.1) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted went backwards which would break package
-feeds from (0:1.0-r13.2 to 0:1.0-r13.1) [version-going-backwards]
-
-
-count: 0 issue: host-user-contaminated
-
-
-count: 0 issue: installed-vs-shipped
-
-
-count: 1 issue: unknown-configure-option
-gstd-1.0: gstd: configure was passed unrecognised options:
---disable-gtk-doc [unknown-configure-option]
-
-
-count: 0 issue: symlink-to-sysroot
-
-
-count: 0 issue: invalid-pkgconfig
-
-
-count: 0 issue: pkgname
-
-
-count: 0 issue: ldflags
-
-
-count: 0 issue: compile-host-path
-
-
-count: 0 issue: qa_pseudo
-
-
-
-This git log matches with the metadata as seen by qemuarm build.
-In some cases qemux86 and qemux86-64 builds are built with slightly
-different metadata, you can see the exact version near the top of each
-log.world.qemu* files linked from the report
-~/oe/world/oe-build ~/oe/world/oe-build
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-43ff74d tests/fetch: Update gnome.org urls after upstream changes
-not included in master yet:
-
-== Tested changes (not included in master yet) - openembedded-core ==
-latest upstream commit:
-853e049 ruby: improve reproducibility
-not included in master yet:
-42acb0e lib/oe/package_manager: turn postinst failure warnings into
-bitbake failures
-163764a sdk/context.py: add ability to check for multilib version of
-target package
-ce82ee4 sdk/buldgalculator.py: check against multilib for gtk+3
-595e992 oeqa/sdk: fixes related to hasPackage semantics
-4f662b2 oeqa/runtime/dnf: Make sure test_dnf_install does not skipped
-8e280af elfutils: Fix prelink libqb error on mips and mips64
-38c410b security_flags.inc: use `?=' to set a default var-lcl_maybe_fortify
-0ed4a62 security_flags.inc: add var-SECURITY_STACK_PROTECTOR to
-improve variable OVERRIDES
-4c3395a allarch: disable allarch when multilib is used
-84ecfdc sstate.bbclass: update SSTATE_DUPWHITELIST
-7ebcca3 update_font_cache: update script for multilib
-211fe48 update_gtk_immodules_cache: update for multilib
-fd471d7 statetests.py: drop test_sstate_allarch_samesigs_multilib
-f3499c5 multilib: fix install file conflicts
-faa944e distutils-common-base.bbclass: Define commonly used compiler variables
-b3a9ab7 systemd: Fix qsort_r patch for function return mismatch
-3efc123 musl: Update to latest
-f76cc1f gpgme: Inherit distutils3-base
-a55f49a libarchive: CVE-2017-14501
-d463f5e libcgroup: CVE-2018-14348
-2bba9f1 libsdl2: Fix left rotated display for RaspPi/VC4/GLES2
-bbf2a14 libjpeg-turbo: fix wrongly defined HAVE_STDLIB_H
-a3dbcbd kernel-devsrc: fix arm/arm64 target module build
-05fd1e8 linux-yocto: drop 4.15 versioned recipe
-e045d1c linux-yocto/4.12: drop versioned recipes
-c512fee linux-yocto/4.18: remove obselete bsp configuration options
-d49393d qemuarm64: add compatibility with -rt
-61ccb1f linux-yocto/4.18: update to 4.18.5
-4e06577 linux-yocto/4.14: update to v4.14.67
-d9cb0fe kernel-yocto/cfg: configuration warning fixes
-dec56f2 add todo to worker
-92e44d8 boost: Fix invalid const in atomic builtins
-2756568 libc-package: Add risc-v specific options to cross-localedef invocation
-2b1ee2b glibc-locale: Enable riscv64 and riscv32 in
-BINARY_LOCALE_ARCHES supported architectures
-ec1e165 packagegroup-core-tools-testapps: Exclude gst-examples on riscv64
-d9d742c tcf-agent: Disable non-building features on riscv64
-8d831ca gdb: Seprate out gold and dwp into a variable
-25da5ab openssh: update from 7.7p1 to 7.8p1
-3d48210 package.bbclass: warn if perms conf file does not exist
-e12710b openssl: rename openssl 1.0.x to openssl10 and make openssl
-1.1.x the default version
-47d76ca cryptodev-tests: port to openssl 1.1
-b445ab8 openssl: update to 1.1.1
-7c9eda8 libressl: add a recipe to support openssh
-0ca8fc8 ca-certificates: update to 20180409
-6ce8037 openssl: do not tweak so names, use PRIVATE_LIBS instead
-8c5db9e go-dep: Update 0.4.1 -> 0.5.0
-e6a1e5e linux-firmware: Update to feb25f3e revision
-db0f491 mesa: Upgrade 18.1.3 -> 18.1.7
-f240dbb recipes: Update git.gnome.org addresses after upstream changes
-6626ff8 oeqa/selftest/runtime_test: Fix
-runtime_test.TestImage.test_testimage_install after ssl changes
-929b1b3 openssl: Handle -conf package file conflicts
-86bd28b sysklogd: Use update-alternatives
-7c0099b packagegroup-core-x11-sato: Make weak include for gst-examples
-665301f musl: Update to 1.1.20
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-latest upstream commit:
-6964fa5 nmap: install ndiff
-not included in master yet:
-a4a9c0a xerces-c: Update SRC_URI
-77966d0 mbedtls: upgrade to 2.12.0
-29158f7 lftp: CVE-2018-10916
-cc7bce6 ell: update to 0.8
-7d1f239 eventlog: update SRC_URI to fetch from git
-e5d9482 xfsprogs: Fix build on mips
-093ab60 espeak: Fix cp command to preserve mode
-62489d5 espeak: Add -fPIC to CFLAGS needed on some arches with security flags on
-3e69704 autofs: specify fifodir and flagdir
-815f62b libio-socket-ssl-perl: 2.058 -> 2.059
-8b021f3 apache2: set files layout to debian style
-6782e58 autofs: Do not use pkg.m4 from build host
-2511a25 net-snmp: Fix host contamination
-6c9ac25 meta-python: Add python-pyflame recipe
-82fc7b9 meta-python: Port python-pyflame to 32-bit ARM
-bdf5540 meta-python: Make python-pyflame cope with prelinked ELFs
-a855c5b python-pyflame: Limit support to just glibc based systems
-9b5562e python-pyflame: Use SHA instead of tag in SRC_URI
-5cf9a14 mongodb: Upgrade to 4.0.1 release
-eac9bd9 Update maintainers
-a24b4c1 lmbench: fix usrmerge install path
-38717e1 python-pyflame: Disable for mips arch
-1db2116 can-isotp: Upgrade to latest
-0c9d8b0 gedit: Add dep on python-six-native
-c6b76a8 mongodb: Exclude on mips arch
-8d3d529 libpwquality: Inherit distutils3-base
-e78cf91 python{3, }-protobuf: consolidate CLEANBROKEN
-c591e5d python{, 3}-pint: add recipes for python2 and python3
-218c1e7 python{, 3}-intervals: add recipes for python2/3
-de3d90e python3-pyconnman: add recipe
-d9309e4 python{, 3}-grpcio-tools: update 1.8.4 -> 1.14.1
-b3b3449 python{,3}-grpcio: update to 1.14.1
-15bd5f4 python{, 3}-m2crypto: update from 0.26.4 -> 0.30.1
-196a373 kernel-selftest: Fix the COPYING checksum variablity
-0b18276 drbd-utils: fix usrmerge install path
-901af82 zsh: Delete ${D}/usr if empty
-fd8a326 open-vm-tools: Upgrade to 10.3.0
-bae481e wireless-regdb: make wireless-regdb architecture independent
-a8c59cf snappy: add -fPIC flags
-8e63f18 cyrus-sasl: CLEANBROKEN = "1"
-d361917 php: 7.2.8 -> 7.2.9
-e427280 nodejs: 8.11.3 -> 8.11.4
-0a83476 libcrypt-openssl-guess: Add recipe
-1fd6163 libcrypt-openssl-rsa-perl: Update to 0.30
-9070ae8 libnet-ssleay-perl: Fix configure issue
-60f6414 protobuf: Update from 3.6.0.1 -> 3.6.1
-aa6b137 protobuf-c: Update 1.3.0 -> 1.3.1
-46aa68d python{, 3}-protobuf: Update 3.6.0 -> 3.6.1
-948a85f grpc: update from 1.8.5 -> 1.14.1
-840850e php: define PACKAGECONFIG[] for valgrind
-48b61ca turbostat: Provide a persistent COPYING file
-b3f3251 civetweb: Fix build with clang
-028208f memcached: Update to 1.5.10
-c7285f6 mcelog: Upgrade to 160
-4fb7aa8 cryptsetup: Upgrade to 2.0.4
-f60b850 python-pytest-tempdir: add recipe
-2b5fb4f python3-pytest-tempdir: add recipe
-3465362 python-pytest-helpers-namespace: add recipe
-00deeee python3-pytest-helpers-namespace: add recipe
-c50d90b spitools: 0.8.1 -> 0.8.3
-72869dc rsyslog: update from 8.36 to 8.37
-3c6eceb crda: Fix 64bit builds by inheriting siteinfo class
-cb57282 ndisc6: Do not use gold linker and disable rpath
-58062ba libkcapi: Upgrade to 1.1.3
-685715f abiword: use fribidi not libfribidi
-e8b9543 vlc: use fribidi not libfribidi
-b5d062a kexec-tools-klibc: fix kexec_load() syscall workaround
-8eae2f8 kexec-tools-klibc: upgrade to latest master
-4abf0f4 phoronix-test-suite: add dependency on lsb_release
-d128fce kexec-tools-klibc: sync patches with oe-core
-c56b2fc kexec-tools-klibc: package vmcore-dmesg-klibc
-28d225b kexec-tools-klibc: add kexec-x32.patch from oe-core
-35952ed python-m2crypto: Add STDC_HOSTED to grep regexp
-8cb7fd1 jack: Fix build with python 3.7+
-85466e3 libp11: Fix build with openssl 1.1+
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-latest upstream commit:
-9ffdd55 qtscript: Update the custom patch from mainline
-not included in master yet:
-16eb842 qtscript: Fix build on musl
-0ebee59 qt3d-runtime: Fix compile errors as seen with mips/musl
-74c0945 qtwebkit: Fix build with musl
-3065292 qtwebkit: Fix conflicts with -I and -isystem
-7e6a42e qt5-creator: Fix building botan for all non-x86 arches
-099ef3e qt5-creator: Strip out redundant RPATH
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-f2e6235 chromium-x11: Enable builds with clang
-not included in master yet:
-ff59505 chromium: Refactor clang patch to fix chromium-ozone-wayland
-~/oe/world/oe-build
 
