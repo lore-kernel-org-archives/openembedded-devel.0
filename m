@@ -1,49 +1,49 @@
 Return-Path: <leon@sidebranch.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AD986011F
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 5286C7914C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Sep 2018 00:35:44 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id f38-v6so12802333edd.8
+	Mon,  3 Sep 2018 00:36:01 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id l5so10159555edw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Sep 2018 17:35:45 -0700 (PDT)
+	Sun, 02 Sep 2018 17:36:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=sidebranch-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=K6jQ89gDL5bjkfnmBJB3ZSJnqASCUFzO+PfcZnllk+k=;
-	b=Hd5s0aOcBUhwa3/kNoBSOqD/+ETVesjZAYMISAefbhz51Rm9ezQ80lfTe8cdB6SQR8
-	yx7Kgglb9iXKNB+G3vaIA93yJpHhfXiG013iVkHvwIXVA3twQhViXfwy8E5QSb8dXYD4
-	AyrRtZsTstWlRb5AD0ERpZsUekNu4BRZZ7W1mnF+DSU4VX68yRq5X6fT/jVZogZTSRMj
-	To/0qfK2XqMBBxHVJI9bxkH1muVdS1cHV3yYNxjQOz4XifY1qbmgJNwgOi78ZbqON6mH
-	DTYj4UnuOZ/1Vw3KwEwblONhTP5AUBTIQaaKq4JF4hoOeLcsvv5PLrR7naPuTnHtMvlb
-	e42w==
+	bh=e0MQrqUjIzT3HVUvWlv2qmbuYyntVGYQ5b1E9/hOHqU=;
+	b=xWQxqu3+y0FoCk3xxOcrNBTFDuxmbgxf3Fuvu0ZEvGbUJKUFR3Vgigewh8zhlc1AVw
+	qcvZ7OvHdI8H42J9r5EU33CHxzoz+fw+dSDWmkbyLwWvbPDedT/M46r76UNOE/dAKy7W
+	/V8VCynXzFj25Vg30C/aqVG37o7NNHioGzWf+HazltQ7PlyYvKv5eYYlQe6D3t8nCJv1
+	vmQY0DQSJD987P7mFrAN43dUbyLKE5oPZvU1UoG7K9i7PEHc9bCAP/IncDn6uwphdkvA
+	8eN4PV1fU4tU3bLbjME1Cm0XI+zLmUH+m7WCiO2LLhBh6nj8pPozKZXs9wo+Olcbgm9B
+	jo2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=K6jQ89gDL5bjkfnmBJB3ZSJnqASCUFzO+PfcZnllk+k=;
-	b=q12PfPpCWh53vk+woueAEXKmvn6rMsdrXTOm9B9qa1eucZrlDzzscJ18Cvdp1UF9Mm
-	wnkspymhhuDFXtOv7qhLYLVVqS1D+4YREzAB5zpTpw6JPvcEDQKwxgtoLAAqZcKYQrLT
-	RDN1GdHpWPJwmJXqAzTrpqFrBXiWeVxL8AIgRcjQPa8I3Z2RBJQ5SGqJUvU8oS1qgPNr
-	n3nWdZgp/FNcbpHsYUAsqFpQm/Ls3pfxKul6FI5B1rJyjUPZOfjSnHW59UBX+JEdoZqP
-	7ML9BgBoHEUsapBPqQ8c1E9kdXTx1VC4xVU0y5X1yoonPDPrzQvaJ3HtDgZBC+gZ1NwR
-	JEaQ==
-X-Gm-Message-State: APzg51AClYHywTep6xY38WlINIH2A+Nu5MvOR2svBebKL9T3MbXIJxXa
-	Nh/0vgpkCOPJGCAlbxb2EtNIS+0Ygb807Q==
-X-Google-Smtp-Source: ANB0VdaeHYpRIOVfpMw3LGp8eIuJ6NBpJeZ9SANroB2gJoM65hqOKof7XbkxtNy7N0kCn6tjiHzMXA==
-X-Received: by 2002:a50:ed1a:: with SMTP id
-	j26-v6mr28648731eds.29.1535934944664; 
-	Sun, 02 Sep 2018 17:35:44 -0700 (PDT)
+	bh=e0MQrqUjIzT3HVUvWlv2qmbuYyntVGYQ5b1E9/hOHqU=;
+	b=VtmqeF3A5W2Ld0Y6Qd1iVXc+1TYCF0YwdvP6i3Cc4OjvpTbrHkDUFpxe+65t0EQmAc
+	dE5DTBwc6U06w6x4eUwTS1/Sq13mktnb+cZRJPVJWkY//BX1nR3u4A7fgqkVfh0DYGAQ
+	0w03GAkcOsNIYLZgdAvgstqON+aPfu4A3TtAfZjI5KbR/m33MqKShIrRjuipjFBqxnlY
+	37uiPFNR034QOoz1KRreFV3aqIiW+iyVSCVjO8Ir9ScaUQLaat9ilG4N/U3ZmUoLcrah
+	VJnVNGsErw4OhqY0VqXIVlsaB9t3QM3MX7o5cSoBX6tPwbz30FynvapE6OqIFIG14T0M
+	0HUQ==
+X-Gm-Message-State: APzg51CHYIqhUh/+UjjrExUsoBbO9K2wlPPLL/cWXQiX9dQNAiHzx8ES
+	i13n00PAiPCpm+1LORtp3TAbe+5+hMhOjw==
+X-Google-Smtp-Source: ANB0Vda1pU/1jf16prM1C2p6ZYF1fe1UHy4dPZ0krXp9Lxxj4UJpSHhHmoMSaQ6yWU6ybEu/6/M3ag==
+X-Received: by 2002:a50:ee03:: with SMTP id
+	g3-v6mr29704416eds.66.1535934961811; 
+	Sun, 02 Sep 2018 17:36:01 -0700 (PDT)
 Received: from localhost.localdomain ([145.130.96.189])
 	by smtp.gmail.com with ESMTPSA id
-	a19-v6sm10751635edd.69.2018.09.02.17.35.43
+	d2-v6sm7070792edd.55.2018.09.02.17.36.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 02 Sep 2018 17:35:44 -0700 (PDT)
+	Sun, 02 Sep 2018 17:36:01 -0700 (PDT)
 From: Leon Woestenberg <leon@sidebranch.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Sep 2018 02:35:37 +0200
-Message-Id: <1535934937-30606-1-git-send-email-leon@sidebranch.com>
+Date: Mon,  3 Sep 2018 02:35:53 +0200
+Message-Id: <1535934953-30653-1-git-send-email-leon@sidebranch.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [openembedded-core][PATCH] kernel.bbclass: do not deploy fitImage; kernel-fitimage.bbclass does that.
+Subject: [openembedded-core][PATCH] kernel-fitimage.bbclass: Wrong binary was deployed for kernel-only FIT image.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,83 +56,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2018 00:35:44 -0000
+X-List-Received-Date: Mon, 03 Sep 2018 00:36:01 -0000
 
-kernel-fitimage.bbclass replaces an occurance of "fitImage" in
-KERNEL_IMAGETYPE_FOR_MAKE by an image type that is buildable for the
-architecture (such as zImage). The kernel-fitimage.bbclass packs that
-image as sub-image in a flattened image tree image (fitImage) and
-deploys this fitImage along with the image tree source file (.its).
+The kernel-fitimage.bbclass always outputs one FIT image without initramfs.
+This variant did deploy the kernel image itself rather than the FIT image.
 
-kernel-fitimage.bbclass does not alter KERNEL_IMAGETYPES, which thus
-also contains "fitImage", which kernel.bbclass will also deploy
-redundantly with different naming.
-
-The result is a dual deployment with slightly different naming,
-each with a set of symlinks.
-
-The solution chosen is to have fitImage deployment be handled by
-kernel-fitimage.bbclass, and have kernel.bbclass ignore fitImage
-types during deployment.
+(The FIT with initramfs was correctly deployed.)
 
 Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
 ---
- meta/classes/kernel.bbclass | 30 ++++++++++++++++++------------
- 1 file changed, 18 insertions(+), 12 deletions(-)
+ meta/classes/kernel-fitimage.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta/classes/kernel.bbclass b/meta/classes/kernel.bbclass
-index b341733..fd43ecd 100644
---- a/meta/classes/kernel.bbclass
-+++ b/meta/classes/kernel.bbclass
-@@ -675,8 +675,10 @@ kernel_do_deploy() {
- 	fi
+diff --git a/meta/classes/kernel-fitimage.bbclass b/meta/classes/kernel-fitimage.bbclass
+index 50a91e1..16499c8 100644
+--- a/meta/classes/kernel-fitimage.bbclass
++++ b/meta/classes/kernel-fitimage.bbclass
+@@ -463,7 +463,7 @@ kernel_do_deploy_append() {
+ 		install -m 0644 fit-image.its ${DEPLOYDIR}/${its_base_name}.its
+ 		linux_bin_base_name="fitImage-linux.bin-${PV}-${PR}-${MACHINE}-${DATETIME}"
+ 		linux_bin_symlink_name=fitImage-linux.bin-${MACHINE}
+-		install -m 0644 linux.bin ${DEPLOYDIR}/${linux_bin_base_name}.bin
++		install -m 0644 arch/${ARCH}/boot/fitImage ${DEPLOYDIR}/${linux_bin_base_name}.bin
  
- 	for type in ${KERNEL_IMAGETYPES} ; do
--		base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
--		install -m 0644 ${KERNEL_OUTPUT_DIR}/${type} $deployDir/${base_name}.bin
-+		if [ "$type" != "fitImage" ]; then
-+			base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
-+			install -m 0644 ${KERNEL_OUTPUT_DIR}/${type} $deployDir/${base_name}.bin
-+		fi
- 	done
- 	if [ ${MODULE_TARBALL_DEPLOY} = "1" ] && (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
- 		mkdir -p ${D}/lib
-@@ -685,21 +687,25 @@ kernel_do_deploy() {
- 	fi
- 
- 	for type in ${KERNEL_IMAGETYPES} ; do
--		base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
--		symlink_name=${type}-${KERNEL_IMAGE_SYMLINK_NAME}
--		ln -sf ${base_name}.bin $deployDir/${symlink_name}.bin
--		ln -sf ${base_name}.bin $deployDir/${type}
-+		if [ "$type" != "fitImage" ]; then
-+			base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
-+			symlink_name=${type}-${KERNEL_IMAGE_SYMLINK_NAME}
-+			ln -sf ${base_name}.bin $deployDir/${symlink_name}.bin
-+			ln -sf ${base_name}.bin $deployDir/${type}
-+		fi
- 	done
- 
- 	cd ${B}
- 	# Update deploy directory
- 	for type in ${KERNEL_IMAGETYPES} ; do
--		if [ -e "${KERNEL_OUTPUT_DIR}/${type}.initramfs" ]; then
--			echo "Copying deploy ${type} kernel-initramfs image and setting up links..."
--			initramfs_base_name=${type}-${INITRAMFS_BASE_NAME}
--			initramfs_symlink_name=${type}-initramfs-${MACHINE}
--			install -m 0644 ${KERNEL_OUTPUT_DIR}/${type}.initramfs $deployDir/${initramfs_base_name}.bin
--			ln -sf ${initramfs_base_name}.bin $deployDir/${initramfs_symlink_name}.bin
-+		if [ "$type" != "fitImage" ]; then
-+			if [ -e "${KERNEL_OUTPUT_DIR}/${type}.initramfs" ]; then
-+				echo "Copying deploy ${type} kernel-initramfs image and setting up links..."
-+				initramfs_base_name=${type}-${INITRAMFS_BASE_NAME}
-+				initramfs_symlink_name=${type}-initramfs-${MACHINE}
-+				install -m 0644 ${KERNEL_OUTPUT_DIR}/${type}.initramfs $deployDir/${initramfs_base_name}.bin
-+				ln -sf ${initramfs_base_name}.bin $deployDir/${initramfs_symlink_name}.bin
-+			fi
- 		fi
- 	done
- }
+ 		if [ -n "${INITRAMFS_IMAGE}" ]; then
+ 			echo "Copying fit-image-${INITRAMFS_IMAGE}.its source file..."
 -- 
 2.7.4
 
