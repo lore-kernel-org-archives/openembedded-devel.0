@@ -1,43 +1,47 @@
-Return-Path: <mhm.dawod@gmail.com>
-Received: from mail-qt0-f173.google.com (mail-qt0-f173.google.com
-	[209.85.216.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E5CF751AE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CE3BF749F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Sep 2018 15:49:16 +0000 (UTC)
-Received: by mail-qt0-f173.google.com with SMTP id t5-v6so1023757qtn.3
+	Mon,  3 Sep 2018 16:54:53 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id d15-v6so722929qkc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Sep 2018 08:49:17 -0700 (PDT)
+	Mon, 03 Sep 2018 09:54:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=Wwr7LEpd/68p0TXP7ZT17ifoVirzdsNVFFjPcLzG0so=;
-	b=LRlUjG+L0sP8jQhGKtXy6YmzAsOTh5PI1KfAPUJLDdhLXV9toWKHo8kuyksetvg3n9
-	i7PQOzwTkMAIWYUS9f4ZAUAuUaYpvzkMQCRvnk1tmRjxivaB3oG4cFyZmWGr0XU9kUKL
-	tbY3jz0m01lzmyny7dyjDbW7FEFN3XefGjxQuE/hwzZUtafKdHzBOfPm+aFhpkb5ohWl
-	O4NWe0WsBwZWwMfbgQhqD7XCny/+W4ocO+b15X0pfPmRmkKBslhZJWD4YA/4LsZYy9gb
-	dVnB4SDzLVuRtwkVd5Ph5B+HPNi/GaRC8Ba/JaaOKgKfET5f5is1x/qWB9/sR9OVJHUf
-	m+6A==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=zQ0h2dSv5K3AyK8dRBjDKhVNAFY0eRirT5Z/XaeemWI=;
+	b=Fo18TuSvGHAisegparNkrCFg28oozNjM9k+8NoEeBVUnbK1FYL7rQ4SxTYV/AkQKDS
+	C4QvhBuhZKaMl9IJlakOPiEOsL2j+ZyBDz9s6tjY7i7AQ6bLyKnjRF1S729py129KD1U
+	s+s14uaRx8BJzttXIP9GFvyQNQkJZgThrMyjc1uU74pnULmzmirioh79z3co458iuD83
+	gr+w+YjvgqngDFAsbAC/wEAuEA6K3veCpXecliTVry0TSbx//1zPho6XIXCXtXcxySdE
+	TEIAL7FBkpZBS8yhsm22Ty8NMGJ8IA4QwBPn21xrIAURODFH0llU0ale4SKGI9gu+upb
+	Tv1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=Wwr7LEpd/68p0TXP7ZT17ifoVirzdsNVFFjPcLzG0so=;
-	b=WkRcMw80pDx1HAkpMC2JbYS/lkJjAj79ZXuwDzB/6otUXO3eZwz/zmXaBojqIC8CNI
-	l/0ySOSjY6D3Gru9QtpW0dMvkQ+Rbj6AAHDLV7Ni9jdfh4aFGtSLqzHf0kKbdxhj1jvI
-	418+WX1Txv/VLS+IhCRlEmZzUgtEpZVHUsXRoway8gPqExCGBYPBsY8KSmIRCFkl8ofJ
-	Kp6mVgNe+w0iDEez+OPPk+MJ+mji42bSoRJD8JU4lWuxbXgJmWik7pR6v4a9tEAsxOTs
-	n4OUuaHxP1TyUZ0UiOWLqJjrgJZkRSmVhu5L4xrUk3XKmVArrFXHX5ZHmYONCyJih4Gq
-	pgHA==
-X-Gm-Message-State: APzg51DhxJY9KNb0/+TzaUafKvCWX0oAthgC8TGwdrMrbTQzII7ON3eT
-	f7uBV750k2H/+0mGEXV7SXwrhN1Rm7SXci0dWKyXN0rN
-X-Google-Smtp-Source: ANB0VdbMMLabbpiPGGMbHn17J2zXet5Tbj5/JoWMn62p/Tk9iCvzLNlcqGZ3bfvt8umzdiLy6jEpH3Fvcwq9St+4R7U=
-X-Received: by 2002:aed:2807:: with SMTP id r7-v6mr2409702qtd.2.1535989757306; 
-	Mon, 03 Sep 2018 08:49:17 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=zQ0h2dSv5K3AyK8dRBjDKhVNAFY0eRirT5Z/XaeemWI=;
+	b=OAHwypfb6nuSEdT7+/Ij9KCBSpmXAC4qwLNR7L+X9LiCChizAlAWFrcbRY328jF5gC
+	GWs27xG99YJIlspyEEap2qQDNlaC+vKDZq+HIHnZOEMjwLWK0vS3P8eBUeOJG17fvcVw
+	DLD9bzsRPCuPhFyrLCQEbbfQtPeO6soaZP4zVscFE5mae6rVlhgYwqsynGouYncmt42p
+	8YkAFRIIqn026AW/qykra2+up9/VJP0bnyRx2FBiCzoAVdf09xBQuljOCGvn+Hd0N9tG
+	nRyU7XujQoFISyQ7x1IGDIeZxinPdH4qIo4zeYOCHqwrgzC9v6GxuVI/5or3dbI4o3yL
+	0J/w==
+X-Gm-Message-State: APzg51CXcKaOK6E0h7xTQ5txn5rDj3rDTPgMrtL1UcgLoIqDYcPOFfyh
+	ZTExeoSAV20ess9CkZ13b012alEA54pZeWoepw61cA==
+X-Google-Smtp-Source: ANB0VdbZE87NETJXjJJdeopHexA0c1A78liwWTJofAnOc1Y4opaL194VY5UiRmo/gwQcU7DWgkkUHXd3uACzYiP+WPI=
+X-Received: by 2002:a37:6d0:: with SMTP id
+	199-v6mr25619124qkg.71.1535993694312; 
+	Mon, 03 Sep 2018 09:54:54 -0700 (PDT)
 MIME-Version: 1.0
-From: Mohamed Dawod <mhm.dawod@gmail.com>
-Date: Mon, 3 Sep 2018 17:49:06 +0200
-Message-ID: <CAGCTLNRznucdB5dQqzKfT0DBp=_=Sio1ykFERH9teK9T9GdXOw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [openembedded][qt5] : Text is hidden in Qt5 apps
+References: <1535934937-30606-1-git-send-email-leon@sidebranch.com>
+In-Reply-To: <1535934937-30606-1-git-send-email-leon@sidebranch.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 3 Sep 2018 09:54:28 -0700
+Message-ID: <CAMKF1spXp=U+k5yx-g7ip+U=rX4pV6-nCdPzM7_MGgfMOTLOgA@mail.gmail.com>
+To: Leon Woestenberg <leon@sidebranch.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [openembedded-core][PATCH] kernel.bbclass: do not deploy fitImage; kernel-fitimage.bbclass does that.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,25 +54,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2018 15:49:16 -0000
+X-List-Received-Date: Mon, 03 Sep 2018 16:54:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-I built custom image based on wayland instead of x11
-it support Qt5 apps.
-I built simple Qt5 app and tried to build it for the custom image to run it
-there.
-the application is work but the text is hidden !
-The same for the test app "Qt5_Cinematicexperience"
-No text at all for all films.
+Hi Leon
 
-Thanks,
-
-
--- 
-
-Mohamed Dawod
-Computer Engineering Department
-Faculty of Engineering
-Cairo University
+Please send these patches to openembedded-core ml
+On Sun, Sep 2, 2018 at 5:36 PM Leon Woestenberg <leon@sidebranch.com> wrote:
+>
+> kernel-fitimage.bbclass replaces an occurance of "fitImage" in
+> KERNEL_IMAGETYPE_FOR_MAKE by an image type that is buildable for the
+> architecture (such as zImage). The kernel-fitimage.bbclass packs that
+> image as sub-image in a flattened image tree image (fitImage) and
+> deploys this fitImage along with the image tree source file (.its).
+>
+> kernel-fitimage.bbclass does not alter KERNEL_IMAGETYPES, which thus
+> also contains "fitImage", which kernel.bbclass will also deploy
+> redundantly with different naming.
+>
+> The result is a dual deployment with slightly different naming,
+> each with a set of symlinks.
+>
+> The solution chosen is to have fitImage deployment be handled by
+> kernel-fitimage.bbclass, and have kernel.bbclass ignore fitImage
+> types during deployment.
+>
+> Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
+> ---
+>  meta/classes/kernel.bbclass | 30 ++++++++++++++++++------------
+>  1 file changed, 18 insertions(+), 12 deletions(-)
+>
+> diff --git a/meta/classes/kernel.bbclass b/meta/classes/kernel.bbclass
+> index b341733..fd43ecd 100644
+> --- a/meta/classes/kernel.bbclass
+> +++ b/meta/classes/kernel.bbclass
+> @@ -675,8 +675,10 @@ kernel_do_deploy() {
+>         fi
+>
+>         for type in ${KERNEL_IMAGETYPES} ; do
+> -               base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
+> -               install -m 0644 ${KERNEL_OUTPUT_DIR}/${type} $deployDir/${base_name}.bin
+> +               if [ "$type" != "fitImage" ]; then
+> +                       base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
+> +                       install -m 0644 ${KERNEL_OUTPUT_DIR}/${type} $deployDir/${base_name}.bin
+> +               fi
+>         done
+>         if [ ${MODULE_TARBALL_DEPLOY} = "1" ] && (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
+>                 mkdir -p ${D}/lib
+> @@ -685,21 +687,25 @@ kernel_do_deploy() {
+>         fi
+>
+>         for type in ${KERNEL_IMAGETYPES} ; do
+> -               base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
+> -               symlink_name=${type}-${KERNEL_IMAGE_SYMLINK_NAME}
+> -               ln -sf ${base_name}.bin $deployDir/${symlink_name}.bin
+> -               ln -sf ${base_name}.bin $deployDir/${type}
+> +               if [ "$type" != "fitImage" ]; then
+> +                       base_name=${type}-${KERNEL_IMAGE_BASE_NAME}
+> +                       symlink_name=${type}-${KERNEL_IMAGE_SYMLINK_NAME}
+> +                       ln -sf ${base_name}.bin $deployDir/${symlink_name}.bin
+> +                       ln -sf ${base_name}.bin $deployDir/${type}
+> +               fi
+>         done
+>
+>         cd ${B}
+>         # Update deploy directory
+>         for type in ${KERNEL_IMAGETYPES} ; do
+> -               if [ -e "${KERNEL_OUTPUT_DIR}/${type}.initramfs" ]; then
+> -                       echo "Copying deploy ${type} kernel-initramfs image and setting up links..."
+> -                       initramfs_base_name=${type}-${INITRAMFS_BASE_NAME}
+> -                       initramfs_symlink_name=${type}-initramfs-${MACHINE}
+> -                       install -m 0644 ${KERNEL_OUTPUT_DIR}/${type}.initramfs $deployDir/${initramfs_base_name}.bin
+> -                       ln -sf ${initramfs_base_name}.bin $deployDir/${initramfs_symlink_name}.bin
+> +               if [ "$type" != "fitImage" ]; then
+> +                       if [ -e "${KERNEL_OUTPUT_DIR}/${type}.initramfs" ]; then
+> +                               echo "Copying deploy ${type} kernel-initramfs image and setting up links..."
+> +                               initramfs_base_name=${type}-${INITRAMFS_BASE_NAME}
+> +                               initramfs_symlink_name=${type}-initramfs-${MACHINE}
+> +                               install -m 0644 ${KERNEL_OUTPUT_DIR}/${type}.initramfs $deployDir/${initramfs_base_name}.bin
+> +                               ln -sf ${initramfs_base_name}.bin $deployDir/${initramfs_symlink_name}.bin
+> +                       fi
+>                 fi
+>         done
+>  }
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
