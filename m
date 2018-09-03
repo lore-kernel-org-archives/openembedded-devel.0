@@ -1,25 +1,51 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D193160234
+Return-Path: <ross.burton@intel.com>
+Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
+	[209.85.218.67])
+	by mail.openembedded.org (Postfix) with ESMTP id CF46E60064
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Sep 2018 08:55:39 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w838tedE004070
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  3 Sep 2018 09:24:27 +0000 (UTC)
+Received: by mail-oi0-f67.google.com with SMTP id 13-v6so32545313ois.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 3 Sep 2018 01:55:41 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 3 Sep 2018 01:55:40 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 3 Sep 2018 16:55:33 +0800
-Message-ID: <1535964933-273206-2-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1535964933-273206-1-git-send-email-mingli.yu@windriver.com>
-References: <1535964933-273206-1-git-send-email-mingli.yu@windriver.com>
+	Mon, 03 Sep 2018 02:24:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=WNT17oGkk4yTrzpToZNGpWuLfseVo2xQIDJsSKB9QkU=;
+	b=ARiUuzjhqPLUyfYhK+DZOlTY84hz7OQUqgyUl6UKwwmKO4diBci8LvLNMdJminn15z
+	JYmfVnhgDoBD1Fme95oWSMbfTVmyZ7EPA42XEpI/M61odNvAB8sSj6v3M3/MHYNq72ML
+	JDYSYp01nQdo/6OQaNKg3RmeCpEgIZxQ8RH5bUunP2E/GAnQ7AXMOqjHlSeBWGT5mNZT
+	HoX+/48bKgQNlqZv+br4Q5w6KZXPKsDhPaqURoDSGHlzfyxB379qpSqi7BFGZ4C5mHQu
+	xP7arq6PRhddTUUAO3gnsAWJWdgBp9jLT3W3/n+O6rvwm9yaJtaOMtGpf0zSLUUWIX5t
+	YiSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=WNT17oGkk4yTrzpToZNGpWuLfseVo2xQIDJsSKB9QkU=;
+	b=uB5rF7oH9ajubAO858FjnrMnv+btC51L4aAC5K6MBBVXhHS4HbhZXell50WnpVBKFC
+	hJ6mw6bQojO9AJ2sI94JEgaUzaHeE3ZtN1NnmCMPHfkJj7BIttsL50t3HVn9S0hzEFAD
+	eZpz4j9BD53k4KvGZmEnsgNOa6Zfo8gD/jJdyyQHqNdslg/GegbE9oIayYs8+yWtyfC8
+	iYDy/NWP84VCt5Nm2gq6S3AbOzqLA651XxAQgg4snNNS0BGLALUUwxiqKScdDgKmOzsO
+	uERvXfigCh9lKA9xmcV36RUGLoZyTO1Ygg49j1nQ1HbVsaeleufGBtrOKqLJIKaksn75
+	12sg==
+X-Gm-Message-State: APzg51BA8WNhz4/gdHfqokCx5oPyqBmEknd+0zzXWQMPHXo0e51GU2u+
+	5/KvkKCiREdMsf3UPhslaWkbx05y/pdySovEmkiXnQ==
+X-Google-Smtp-Source: ANB0VdYHsjuCYg2vNN8njnzoThkExzKFr5hr0GnhlT+ZkD7eGkVijG3VolTq68quCxLA86wUd7jUBQyqsKH4Ic83kRU=
+X-Received: by 2002:aca:3c02:: with SMTP id
+	j2-v6mr19430686oia.50.1535966668740; 
+	Mon, 03 Sep 2018 02:24:28 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH v2 2/2] freediameter: update the old sctp api check
+Received: by 2002:ac9:140d:0:0:0:0:0 with HTTP;
+	Mon, 3 Sep 2018 02:24:08 -0700 (PDT)
+In-Reply-To: <CAMKF1sqDUFO5L3QWqpqBARB+zb7WLHB8jopL3MVVCwraLpD7Vw@mail.gmail.com>
+References: <20180831144201.5100-1-ross.burton@intel.com>
+	<CAMKF1sqDUFO5L3QWqpqBARB+zb7WLHB8jopL3MVVCwraLpD7Vw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 3 Sep 2018 10:24:08 +0100
+Message-ID: <CAJTo0LbcUKkCefREE6bEG83gkjfGh33gvd-_fqdPnHWhMpftMg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] postgresql: use util-linux's uuid
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,203 +58,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Sep 2018 08:55:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 03 Sep 2018 09:24:28 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+Sorry!
 
-The initial sctp api check for freediameter as below:
-===
-commit d3c5e991cb532ea09684d69fb4d0d58e9bc39a0c
-Author: Sebastien Decugis <sdecugis@freediameter.net>
-Date:   Mon Jun 3 12:05:37 2013 +0800
-
-    Add some compliancy to RFC6458. Not tested however as Ubuntu does not support this yet
-
- [snip]
- +/* Use old draft-ietf-tsvwg-sctpsocket-17 API ? If not defined, RFC6458 API will be used */
- +/* #define OLD_SCTP_SOCKET_API */
- +
- +/* Automatically fallback to old API if some of the new symbols are not defined */
- +#if (!defined(SCTP_CONNECTX_4_ARGS) || (!defined(SCTP_RECVRCVINFO)) || (!defined(SCTP_SNDINFO)))
- +# define OLD_SCTP_SOCKET_API
- +#endif
-===
-
-SCTP_RECVRCVINFO is defined in <linux/sctp.h>,
-but <linux/sctp.h> is't included in the source code
-previouly. So defined(SCTP_RECVRCVINFO) can be 0
-and it makes old sctp socket api definition in
-effect as below:
- # define OLD_SCTP_SOCKET_API
-
-After lksctp-tools upgrade to 1.0.18, there is below
-commit introduced in lksctp-tools git:
-===
-commit 3c8bd0d26b64611c690f33f5802c734b0642c1d8
-Author: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-Date:   Tue Apr 17 20:17:14 2018 -0300
-
-    sctp.h: make use kernel UAPI header
-
-    and with that, remove tons of duplicated declarations. These were
-    lagging behind the kernel header, which is always the most updated one,
-    and as the library is intended to be run only on Linux, there is no
-    reason that we cannot re-use what is in there.
-
-    That said, this patch drops all duplicated declarations and includes
-    linux/sctp.h to bring them into lksctp-tools.
-
-    Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-
- [snip]
- #include <stdint.h>
- #include <linux/types.h>
- #include <sys/socket.h>
-+#include <linux/sctp.h>
- [snip]
-===
-
-And above logic make defined(SCTP_RECVRCVINFO) to
-be 1 and the old sctp socket api macro as below
-won't be defined.
- # define OLD_SCTP_SOCKET_API
-
-And it encouters below build error:
-| /build/freediameter/1.2.1-r0/freeDiameter-1.2.1/libfdcore/sctp.c:1262:9: error: 'SCTP_SEND_FAILED_EVENT' undeclared (first use in this function); did you mean 'SCTP_SEND_FAILED'?
-    case SCTP_SEND_FAILED_EVENT:
-         ^~~~~~~~~~~~~~~~~~~~~~
-         SCTP_SEND_FAILED
-| /build/freediameter/1.2.1-r0/freeDiameter-1.2.1/libfdcore/sctp.c:1262:9: note: each undeclared identifier is reported only once for each function it appears in
-| /build/freediameter/1.2.1-r0/freeDiameter-1.2.1/libfdcore/sctp.c:1274:9: error: 'SCTP_NOTIFICATIONS_STOPPED_EVENT' undeclared (first use in this function); did you mean 'SCTP_AUTHENTICATION_EVENT'?
-    case SCTP_NOTIFICATIONS_STOPPED_EVENT:
-
-Update the old sctp socket api check to fix
-the above build error.
-
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
----
- ...core-sctp.c-update-the-old-sctp-api-check.patch | 97 ++++++++++++++++++++++
- .../freediameter/freediameter_1.2.1.bb             |  1 +
- 2 files changed, 98 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch
-
-diff --git a/meta-networking/recipes-protocols/freediameter/files/0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch b/meta-networking/recipes-protocols/freediameter/files/0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch
-new file mode 100644
-index 0000000..d5e242a
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch
-@@ -0,0 +1,97 @@
-+From d527a0b7b63e43263384540b5525714484bb089f Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <Mingli.Yu@windriver.com>
-+Date: Mon, 3 Sep 2018 14:40:56 +0800
-+Subject: [PATCH] libfdcore/sctp.c: update the old sctp api check
-+
-+The initial sctp api check for freediameter as below:
-+ ===
-+ commit d3c5e991cb532ea09684d69fb4d0d58e9bc39a0c
-+  Author: Sebastien Decugis <sdecugis@freediameter.net>
-+  Date:   Mon Jun 3 12:05:37 2013 +0800
-+    
-+    Add some compliancy to RFC6458. Not tested however as Ubuntu does not support this yet
-+    
-+    [snip]
-+    +/* Use old draft-ietf-tsvwg-sctpsocket-17 API ? If not defined, RFC6458 API will be used */
-+    +/* #define OLD_SCTP_SOCKET_API */
-+    +
-+    +/* Automatically fallback to old API if some of the new symbols are not defined */
-+    +#if (!defined(SCTP_CONNECTX_4_ARGS) || (!defined(SCTP_RECVRCVINFO)) || (!defined(SCTP_SNDINFO)))
-+    +# define OLD_SCTP_SOCKET_API
-+    +#endif
-+ ===
-+
-+SCTP_RECVRCVINFO is defined in <linux/sctp.h>,
-+but <linux/sctp.h> is't included in the source code
-+previouly. So defined(SCTP_RECVRCVINFO) can be 0 
-+and it make old sctp socket api definiton in effect 
-+as below:
-+ # define OLD_SCTP_SOCKET_API
-+
-+After lksctp-tools upgrade to 1.0.18, there is below
-+commit introduced:
-+===
-+commit 3c8bd0d26b64611c690f33f5802c734b0642c1d8
-+Author: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-+Date:   Tue Apr 17 20:17:14 2018 -0300
-+
-+    sctp.h: make use kernel UAPI header
-+
-+    and with that, remove tons of duplicated declarations. These were
-+    lagging behind the kernel header, which is always the most updated one,
-+    and as the library is intended to be run only on Linux, there is no
-+    reason that we cannot re-use what is in there.
-+
-+    That said, this patch drops all duplicated declarations and includes
-+    linux/sctp.h to bring them into lksctp-tools.
-+
-+    Signed-off-by: Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>
-+
-+ [snip]
-+ #include <stdint.h>
-+ #include <linux/types.h>
-+ #include <sys/socket.h>
-++#include <linux/sctp.h>
-+ [snip]
-+===
-+
-+And above logic make defined(SCTP_RECVRCVINFO) to
-+be 1 and the old sctp socket api macro as below
-+won't be defined.
-+ # define OLD_SCTP_SOCKET_API
-+
-+And it encouters below build error:
-+| /build/freediameter/1.2.1-r0/freeDiameter-1.2.1/libfdcore/sctp.c:1262:9: error: 'SCTP_SEND_FAILED_EVENT' undeclared (first use in this function); did you mean 'SCTP_SEND_FAILED'?
-+    case SCTP_SEND_FAILED_EVENT:
-+         ^~~~~~~~~~~~~~~~~~~~~~
-+         SCTP_SEND_FAILED
-+| /build/freediameter/1.2.1-r0/freeDiameter-1.2.1/libfdcore/sctp.c:1262:9: note: each undeclared identifier is reported only once for each function it appears in
-+| /build/freediameter/1.2.1-r0/freeDiameter-1.2.1/libfdcore/sctp.c:1274:9: error: 'SCTP_NOTIFICATIONS_STOPPED_EVENT' undeclared (first use in this function); did you mean 'SCTP_AUTHENTICATION_EVENT'?
-+    case SCTP_NOTIFICATIONS_STOPPED_EVENT:
-+
-+Update the old sctp socket api check to fix
-+the above build error.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+---
-+ libfdcore/sctp.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/libfdcore/sctp.c b/libfdcore/sctp.c
-+index c80a497..83440c7 100644
-+--- a/libfdcore/sctp.c
-++++ b/libfdcore/sctp.c
-+@@ -48,7 +48,7 @@
-+ /* #define OLD_SCTP_SOCKET_API */
-+ 
-+ /* Automatically fallback to old API if some of the new symbols are not defined */
-+-#if (!defined(SCTP_CONNECTX_4_ARGS) || (!defined(SCTP_RECVRCVINFO)) || (!defined(SCTP_SNDINFO))) 
-++#if (!defined(SCTP_CONNECTX_4_ARGS) || (!defined(SCTP_NOTIFICATIONS_STOPPED_EVENT)) || (!defined(SCTP_SNDINFO)))
-+ # define OLD_SCTP_SOCKET_API
-+ #endif
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb b/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-index 670d8b0..b8818fa 100644
---- a/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-+++ b/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-@@ -20,6 +20,7 @@ SRC_URI = "\
-     file://freediameter.init \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'file://install_test.patch file://run-ptest file://pass-ptest-env.patch', '', d)} \
-     file://freeDiameter.conf \
-+    file://0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch \
-     "
- 
- SRC_URI[md5sum] = "61b1062aa144b5f12eed514611e6d697"
--- 
-2.7.4
-
+On 31 August 2018 at 17:35, Khem Raj <raj.khem@gmail.com> wrote:
+> its already in see
+> http://git.openembedded.org/meta-openembedded/commit/?id=140bf68e37
+>
+> On Fri, Aug 31, 2018 at 7:42 AM Ross Burton <ross.burton@intel.com> wrote:
+>>
+>> Postgreqsql was configured to use ossp-uuid but ossp-uuid is dead and everyone
+>> will be building util-linux anyway, so use the libuuid.so from there.
+>>
+>> Confusing the option is called e2fs because the library originated in e2fsprogs.
+>>
+>> Signed-off-by: Ross Burton <ross.burton@intel.com>
+>> ---
+>>  meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+>> index 1301060ee5..44a1b30fe0 100644
+>> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
+>> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+>> @@ -59,7 +59,7 @@ PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
+>>  PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
+>>  PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
+>>  PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
+>> -PACKAGECONFIG[uuid] = "--with-ossp-uuid,--without-ossp-uuid,ossp-uuid,"
+>> +PACKAGECONFIG[uuid] = "--with-uuid=e2fs,--without-uuid,util-linux,"
+>>  PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
+>>  PACKAGECONFIG[nls] = "--enable-nls,--disable-nls,,"
+>>  PACKAGECONFIG[libxml] = "--with-libxml,--without-libxml,libxml2,libxml2"
+>> --
+>> 2.11.0
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
