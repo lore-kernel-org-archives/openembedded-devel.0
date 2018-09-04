@@ -1,23 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 10B2E74AF1
+Return-Path: <hongl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C4FA74F13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Sep 2018 07:45:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w847jrhT020198
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  4 Sep 2018 09:35:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="44439477"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 04 Sep 2018 17:35:32 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id A16EE4B6EC99
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Sep 2018 00:45:53 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Tue, 4 Sep 2018 00:45:52 -0700
-From: <kai.kang@windriver.com>
+	Tue,  4 Sep 2018 17:35:32 +0800 (CST)
+Received: from localhost.local (10.167.225.78) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.408.0; Tue, 4 Sep 2018 17:35:31 +0800
+From: Hong Liu <hongl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 4 Sep 2018 15:07:38 +0800
-Message-ID: <20180904070738.13171-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.18.0
+Date: Tue, 4 Sep 2018 17:35:29 +0800
+Message-ID: <20180904093529.31141-1-hongl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] lvm2: fix install file conflict with multilib
+X-Originating-IP: [10.167.225.78]
+X-yoursite-MailScanner-ID: A16EE4B6EC99.A11F1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [PATCH] [meta-oe][PATCH] ipc-run: 0.96 -> 0.99
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,40 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Sep 2018 07:45:52 -0000
+X-List-Received-Date: Tue, 04 Sep 2018 09:35:32 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+Upgrade ipc-run from 0.96 to 0.99
 
-When enable multilib and both lvm2 and multilib lvm2 such as lib32-lvm2
-are installed to image, it causes install file conflict.
-
-| file /etc/lvm/lvm.conf conflicts between attempted installs of
-| lib32-lvm2-2.02.180-r0.x86 and lvm2-2.02.180-r0.core2_64
-
-Inherit multilib_script to fix it.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-devtools/perl/{ipc-run_0.96.bb => ipc-run_0.99.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/perl/{ipc-run_0.96.bb => ipc-run_0.99.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
-index 5b9b2f7ec..9da0f5ec9 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
-@@ -7,6 +7,10 @@ SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch"
+diff --git a/meta-oe/recipes-devtools/perl/ipc-run_0.96.bb b/meta-oe/recipes-devtools/perl/ipc-run_0.99.bb
+similarity index 93%
+rename from meta-oe/recipes-devtools/perl/ipc-run_0.96.bb
+rename to meta-oe/recipes-devtools/perl/ipc-run_0.99.bb
+index 08c966d..3e9a2a9 100644
+--- a/meta-oe/recipes-devtools/perl/ipc-run_0.96.bb
++++ b/meta-oe/recipes-devtools/perl/ipc-run_0.99.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ebd37caf53781e8b7223e6b99b63f4e"
+ DEPENDS = "perl"
  
- DEPENDS += "autoconf-archive-native"
+ SRC_URI = "git://github.com/toddr/IPC-Run.git"
+-SRCREV = "96066366ac8c401dff9c979d04f25dc8219ffcc1"
++SRCREV = "5b990b641a73eb0bc1e2b4c19daeef390d4d797a"
  
-+inherit multilib_script
-+
-+MULTILIB_SCRIPTS = "${PN}:${sysconfdir}/lvm/lvm.conf"
-+
- CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
+ S = "${WORKDIR}/git"
  
- do_install_append() {
 -- 
-2.18.0
+2.7.4
+
+
 
 
