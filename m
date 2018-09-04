@@ -1,47 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
-	[209.85.222.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 2059D7469B
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com
+	[209.85.222.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 96B1C753D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Sep 2018 20:57:25 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id j7-v6so3421615qkd.13
+	Tue,  4 Sep 2018 21:13:57 +0000 (UTC)
+Received: by mail-ua1-f65.google.com with SMTP id q7-v6so4073565uam.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Sep 2018 13:57:27 -0700 (PDT)
+	Tue, 04 Sep 2018 14:13:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7CXJ2cJbYXTKfzPHiuDihkKbLb0sj4q3KgRXlDtXYRM=;
-	b=lCdHtYq9iSgPivHtny7iepnS0nC16RSidRb38SJBD56FidBnBFsN4B7UbLAV0m7DhZ
-	Ffpdbkj3aAmiJge6HyurcsVG9/zYyoWUjI06Wl3VOMRXxLPKH1d+Vmhnjbg0XgR0lpOT
-	BLgnP2NDHW/BqCQZAwIlHYQyeVaLrQgHm2vZFPQ69yJPfNRZASxzTwR2wDuY2UhxlabI
-	9RnNvGg4BwHoFfE28FXGRjuy9OrXvduQsveFb/unE4UYC6r6OgPpAvIRm7uBdIgVDO3I
-	QPVTuBYBoXZjld+3evbAa+pZvynEsvu55Uk0hdus/vubRa0tdN0pGBCAoFNEN1JgQ2vh
-	Za8g==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=5qniZTybbeaXndkXibmO4THwXqNxO2jiLkAHaLi2F4g=;
+	b=X61NhEViR1ABD5OWjN/sZ9Lo4jyhSS7cjgCuulc/w8G9+lQQEt5sEop9q0pFqEtuq4
+	GjxyAq8n0ys7sAS8QBhzTog3UuLhFRut9wT74q3pFEhq4q7VRciBXlo8Rv1JcRfpYiDy
+	VwNMVA8yi0Vv2v6tUBmMmxWe9udS9p5wYdwVteU1Xhoin2BmdworbLmfvAynlfeQXTTQ
+	Mkfmm0VdumT7gtj2+FoY6qo3heMoxH9B5B3GgxW0x/stW0N2BoU547nFu6E2MHxIzgcl
+	YvWiVFYEVGj0mJAVzYpVVxjXHLDWCkf+RrGVx0Gyx4jPUNrRZsodcpXRzNKqDj73wD6J
+	RHvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=7CXJ2cJbYXTKfzPHiuDihkKbLb0sj4q3KgRXlDtXYRM=;
-	b=NaN0zC/tGUO+d/zChnhnuhSBTpOIhFvrvWbu+bdaRcA4znNj+jwILEGicArLYWLEHY
-	JP0KnQQ/nmv7VvBBYMGBvSBWpk+VVJKasTOTAOgz9D1GFpobVG+savG5wNblkO7plxcY
-	vmzV2IZ1OhCrJOrQRRdu31hxAoonKejJ77NzSUwVP80RtosY2tmVOR6SRAOOsaX60fmu
-	RDbSkhVjNgAXlQirFTQVzTtTxr08i3UTojY8Pwbf3LsL26s2jGiL6qAY9tjcz4F1HbHL
-	eJd40SlMcznQxd9pBorI8G5TBJQpZfTVWWszHs9U6WAB0ZrGKIi4sMbXLoo/WnQgC0TF
-	dRgw==
-X-Gm-Message-State: APzg51DZf5JLg4P6T01kIadeK8HiQNf2SGMRvmhpuZyi7aySNemmhahl
-	7GJ7X4ASpmw7OFglM15Xz6nSJED+77oRbc234eA=
-X-Google-Smtp-Source: ANB0VdacBAHJEJ02LCGKLnpbbHLiJ7guubo/D1SiGXbsC4skdHGTn3VHPqiBGiEvCi70vNsi0jjLGDEY040CQ3fJHlI=
-X-Received: by 2002:a37:e118:: with SMTP id
-	c24-v6mr25147142qkm.68.1536094646814; 
-	Tue, 04 Sep 2018 13:57:26 -0700 (PDT)
+	bh=5qniZTybbeaXndkXibmO4THwXqNxO2jiLkAHaLi2F4g=;
+	b=FQnPEFZjKMnTtdhU8I6oE9seZFU7MChq/S+IOu2rnhhOJHhXThaGsA6kHauWKbaQNq
+	rcWu+MQ/5MQaskxxDGE0eW+AyWIiDwS0AfldlnOj4OXDu+ubKGyPfmxzP15uXxDGjtwf
+	/7S5PaWU7dKkzzfkf0j7bTsRoEqleFqSsRe0hqwS1oXmSRsFsiWuODRoqX7o3WUC0TZy
+	FVqzmGO1J26vesb+wtrkWJ18CceN/gqyBvM3tPRjW26Gna3AeA1NbRD01EsUb/pDJHXI
+	4m2VLaPetdBYI7XYGnRgrt7iLSVkXdOnbnY7xsLLsQCAjXe8Cs4VJtdXH11zd4rOqdqj
+	T1Iw==
+X-Gm-Message-State: APzg51AvC4l+imrtr51zOvNPb5T1o5bKAkmAClL6jvhTUX1RpiwvsEXW
+	mndqlVMcW13aNYWfIoo/J6v/psqWu/aBbSLO8HY=
+X-Google-Smtp-Source: ANB0VdaRUdt1UpgGD1swb+UyCj6Kd00VzVpSE8PTQUy4TPPRDlOl9+jhXgxvolVtAyV4cUj5ZYVsouBph3ebEB4b0IU=
+X-Received: by 2002:a9f:3b69:: with SMTP id
+	j41-v6mr18807401uah.37.1536095638439; 
+	Tue, 04 Sep 2018 14:13:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180904115659.46185-1-zhe.he@windriver.com>
-In-Reply-To: <20180904115659.46185-1-zhe.he@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Sep 2018 13:56:58 -0700
-Message-ID: <CAMKF1sqm8h1A07vs7gMhUGLiE+=PZi8QC8EkV1gogHz77X8wQw@mail.gmail.com>
-To: zhe.he@windriver.com
+Received: by 2002:ab0:2904:0:0:0:0:0 with HTTP;
+	Tue, 4 Sep 2018 14:13:58 -0700 (PDT)
+In-Reply-To: <09682179-6edc-c225-a2c8-2532c4776fd7@gmail.com>
+References: <20180703092018.5018-1-ross.burton@intel.com>
+	<20180703092018.5018-3-ross.burton@intel.com>
+	<09682179-6edc-c225-a2c8-2532c4776fd7@gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Tue, 4 Sep 2018 14:13:58 -0700
+Message-ID: <CAJ86T=XfnK1wbsRAnSbHeqTXGykXjvDPQKb1a13qWFRthuQzjg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] spice: Upgrade 0.14.0 -> 0.14.1
+Subject: Re: [PATCH 3/4] php: actually enable openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,56 +58,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Sep 2018 20:57:26 -0000
+X-List-Received-Date: Tue, 04 Sep 2018 21:13:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Fails to build ( with clang )
-http://errors.yoctoproject.org/Errors/Details/190549/
+On Tue, Jul 3, 2018 at 2:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On 7/3/18 2:20 AM, Ross Burton wrote:
+>> The PHP recipe depends on OpenSSL but support is disabled unless you pass
+>> --with-openssl.
+>
+> perhaps its better to turn it into a PACKAGECONFIG option while you are
+> at it
 
-On Tue, Sep 4, 2018 at 4:57 AM He Zhe <zhe.he@windriver.com> wrote:
+It looks like both versions of this patch got merged... so there's
+currently an unconditional --with-openssl in EXTRA_OECONF and a
+PACKAGECONFIG option too.
+
+>>
+>> Signed-off-by: Ross Burton <ross.burton@intel.com>
+>> ---
+>>  meta-oe/recipes-devtools/php/php.inc | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+>> index f262d60d15..258b20e68c 100644
+>> --- a/meta-oe/recipes-devtools/php/php.inc
+>> +++ b/meta-oe/recipes-devtools/php/php.inc
+>> @@ -57,7 +57,7 @@ EXTRA_OECONF = "--enable-mbstring \
+>>                  --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
+>>                  ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
+>>                  ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
+>> -                ${COMMON_EXTRA_OECONF} \
+>> +                ${COMMON_EXTRA_OECONF} --with-openssl \
+>>  "
+>>
+>>  CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=yes ac_cv_lib_dl_dlopen=yes"
+>>
 >
-> Adjust location of spice-common source as new spice asks spice-common
-> to be put under "subprojects" directory.
 >
-> Signed-off-by: He Zhe <zhe.he@windriver.com>
-> ---
->  meta-networking/recipes-support/spice/spice_git.bb | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
-> index 38b8bf306..022a09e19 100644
-> --- a/meta-networking/recipes-support/spice/spice_git.bb
-> +++ b/meta-networking/recipes-support/spice/spice_git.bb
-> @@ -13,18 +13,19 @@ architectures."
->  LICENSE = "BSD & LGPLv2.1+"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
->
-> -PV = "0.14.0+git${SRCPV}"
-> +PV = "0.14.1+git${SRCPV}"
->
-> -SRCREV_spice = "f1050bfc76c9c4146257e087baf74e0b62d7d218"
-> -SRCREV_spice-common = "95743f40a2da39e0a19859c305e69e2c99d39e42"
-> +SRCREV_spice = "eaa07ef15cfc3bf57a69da2576af66f028787774"
-> +SRCREV_spice-common = "6b93b3fce8909b836ef1d1434d191900d8aa00be"
->
->  SRCREV_FORMAT = "spice_spice-common"
->
->  SRC_URI = " \
->      git://anongit.freedesktop.org/spice/spice;name=spice \
-> -    git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common \
-> +    git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
->      file://0001-Convert-pthread_t-to-be-numeric.patch \
->  "
-> +
->  FOO = "\
->      file://0001-build-allow-separated-src-and-build-dirs.patch \
->  "
-> --
-> 2.11.0
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
