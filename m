@@ -1,51 +1,49 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ua1-f65.google.com (mail-ua1-f65.google.com
-	[209.85.222.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 96B1C753D4
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D078771B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Sep 2018 21:13:57 +0000 (UTC)
-Received: by mail-ua1-f65.google.com with SMTP id q7-v6so4073565uam.12
+	Tue,  4 Sep 2018 21:21:42 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id v17-v6so5387144wrr.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Sep 2018 14:13:58 -0700 (PDT)
+	Tue, 04 Sep 2018 14:21:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=5qniZTybbeaXndkXibmO4THwXqNxO2jiLkAHaLi2F4g=;
-	b=X61NhEViR1ABD5OWjN/sZ9Lo4jyhSS7cjgCuulc/w8G9+lQQEt5sEop9q0pFqEtuq4
-	GjxyAq8n0ys7sAS8QBhzTog3UuLhFRut9wT74q3pFEhq4q7VRciBXlo8Rv1JcRfpYiDy
-	VwNMVA8yi0Vv2v6tUBmMmxWe9udS9p5wYdwVteU1Xhoin2BmdworbLmfvAynlfeQXTTQ
-	Mkfmm0VdumT7gtj2+FoY6qo3heMoxH9B5B3GgxW0x/stW0N2BoU547nFu6E2MHxIzgcl
-	YvWiVFYEVGj0mJAVzYpVVxjXHLDWCkf+RrGVx0Gyx4jPUNrRZsodcpXRzNKqDj73wD6J
-	RHvA==
+	h=from:to:cc:subject:date:message-id;
+	bh=d/CkBsqkHbglu53sggARQgajOjNOYDCjHwk/UMGOuqo=;
+	b=fsyWWeFbWyG2KCtMQjtWMg0rHP2mt1YwyRW+A6cO86wtbkMfEW+8UpmVPOAs19QxVV
+	wa8V+8D/+qDbalJZD9d09ECh22n33fVviHZE+tdTwtd2sYuRaza1prso1BRvooHdanbY
+	KCvoleJ/FBDW0lsUR+iRdTzvHwrRIMzV5KvFrH8RgKq1Teeyt45z4KbTPCkcjrRvvHiT
+	30fM3QSrLYynV30ugRk6reQi8eRElU6bjDSRl1JL3w5qRcZUZ4OnEiaWYJxBdRU5IAKx
+	+iU4Vr1rrvm+Ql/NhRDXomsRY1gVppRbulQw4rYz3JY3jCBNgckGyn1zwIp/aIG3U19Y
+	OjaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=5qniZTybbeaXndkXibmO4THwXqNxO2jiLkAHaLi2F4g=;
-	b=FQnPEFZjKMnTtdhU8I6oE9seZFU7MChq/S+IOu2rnhhOJHhXThaGsA6kHauWKbaQNq
-	rcWu+MQ/5MQaskxxDGE0eW+AyWIiDwS0AfldlnOj4OXDu+ubKGyPfmxzP15uXxDGjtwf
-	/7S5PaWU7dKkzzfkf0j7bTsRoEqleFqSsRe0hqwS1oXmSRsFsiWuODRoqX7o3WUC0TZy
-	FVqzmGO1J26vesb+wtrkWJ18CceN/gqyBvM3tPRjW26Gna3AeA1NbRD01EsUb/pDJHXI
-	4m2VLaPetdBYI7XYGnRgrt7iLSVkXdOnbnY7xsLLsQCAjXe8Cs4VJtdXH11zd4rOqdqj
-	T1Iw==
-X-Gm-Message-State: APzg51AvC4l+imrtr51zOvNPb5T1o5bKAkmAClL6jvhTUX1RpiwvsEXW
-	mndqlVMcW13aNYWfIoo/J6v/psqWu/aBbSLO8HY=
-X-Google-Smtp-Source: ANB0VdaRUdt1UpgGD1swb+UyCj6Kd00VzVpSE8PTQUy4TPPRDlOl9+jhXgxvolVtAyV4cUj5ZYVsouBph3ebEB4b0IU=
-X-Received: by 2002:a9f:3b69:: with SMTP id
-	j41-v6mr18807401uah.37.1536095638439; 
-	Tue, 04 Sep 2018 14:13:58 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 2002:ab0:2904:0:0:0:0:0 with HTTP;
-	Tue, 4 Sep 2018 14:13:58 -0700 (PDT)
-In-Reply-To: <09682179-6edc-c225-a2c8-2532c4776fd7@gmail.com>
-References: <20180703092018.5018-1-ross.burton@intel.com>
-	<20180703092018.5018-3-ross.burton@intel.com>
-	<09682179-6edc-c225-a2c8-2532c4776fd7@gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 4 Sep 2018 14:13:58 -0700
-Message-ID: <CAJ86T=XfnK1wbsRAnSbHeqTXGykXjvDPQKb1a13qWFRthuQzjg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/4] php: actually enable openssl
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=d/CkBsqkHbglu53sggARQgajOjNOYDCjHwk/UMGOuqo=;
+	b=VHfYL7gYDS7vv/7bKXF0XKiQ/oR2O4na0FrkFgWngPzsf0gM+d7zDVvpA3suzNPLxj
+	piXgw1fCdT5XrCnuPulxQpVykcDMk3rIy+8TAVvDozNTZL3K5OeIof+17wyCkrOQjqJe
+	ezVvj4wWP9hVur1pwJ7/3UUR/ii0+5LDZz0UYZPVfOqrCTmEhY1Jp6wdAAyC2HhumVA8
+	4YkJd0yuvfZreAYp1W0PsTSFI9CdPbq4KncnWUo68EbYwsxgARR6P8rSs7p8jX+nZ2P5
+	9731F/HcEEUfqh8OWlf5sSh6/tW23bz1NcmbcfZ4n8lw4p1r1oFD/thOh/VwFYTA9yaM
+	12ug==
+X-Gm-Message-State: APzg51CvXk8WExfn9OSG16RwOQlyHSvG4hEuWTb/AtyQkg5LyXvzdGSZ
+	Obh9AERBDYjF3yiJtt9wb5UeOS7w
+X-Google-Smtp-Source: ANB0VdaBZcc3hqxQdhf9Mh7Nkg0fAOsm5oUxEHUoLp98E417piIZW754Tj7+8eAFnu9/JukS1BGDdQ==
+X-Received: by 2002:adf:b202:: with SMTP id
+	u2-v6mr22362959wra.19.1536096103090; 
+	Tue, 04 Sep 2018 14:21:43 -0700 (PDT)
+Received: from localhost.localdomain
+	(host205-252-dynamic.245-95-r.retail.telecomitalia.it.
+	[95.245.252.205]) by smtp.gmail.com with ESMTPSA id
+	f18-v6sm22437581wru.51.2018.09.04.14.21.41
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 04 Sep 2018 14:21:42 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Sep 2018 23:21:37 +0200
+Message-Id: <1536096097-23605-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-initramfs][PATCH] kexec-tools-klibc: rebase x86_kexec_test.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +56,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Sep 2018 21:13:57 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 04 Sep 2018 21:21:42 -0000
 
-On Tue, Jul 3, 2018 at 2:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On 7/3/18 2:20 AM, Ross Burton wrote:
->> The PHP recipe depends on OpenSSL but support is disabled unless you pass
->> --with-openssl.
->
-> perhaps its better to turn it into a PACKAGECONFIG option while you are
-> at it
+After last upgrade this patch does not apply anymore.
+Replace the previous hack just commenting out the two lines
+(package vmcore-dmesg as well).
 
-It looks like both versions of this patch got merged... so there's
-currently an unconditional --with-openssl in EXTRA_OECONF and a
-PACKAGECONFIG option too.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ .../kexec/kexec-tools-klibc/x86_kexec_test.patch           | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
->>
->> Signed-off-by: Ross Burton <ross.burton@intel.com>
->> ---
->>  meta-oe/recipes-devtools/php/php.inc | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
->> index f262d60d15..258b20e68c 100644
->> --- a/meta-oe/recipes-devtools/php/php.inc
->> +++ b/meta-oe/recipes-devtools/php/php.inc
->> @@ -57,7 +57,7 @@ EXTRA_OECONF = "--enable-mbstring \
->>                  --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
->>                  ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
->>                  ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
->> -                ${COMMON_EXTRA_OECONF} \
->> +                ${COMMON_EXTRA_OECONF} --with-openssl \
->>  "
->>
->>  CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=yes ac_cv_lib_dl_dlopen=yes"
->>
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch
+index b7d7c10..1c471f5 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/x86_kexec_test.patch
+@@ -14,17 +14,17 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/Makefile.in b/Makefile.in
+-index 79188d8..953c141 100644
++index fb01134..440730d 100644
+ --- a/Makefile.in
+ +++ b/Makefile.in
+-@@ -178,8 +178,8 @@ PSRCS:=$(foreach s, $(SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
++@@ -173,8 +173,8 @@ PSRCS:=$(foreach s, $(SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
+  PGSRCS:=$(foreach s, $(GENERATED_SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
+  
+- MAN_PAGES:=$(KEXEC_MANPAGE) $(KDUMP_MANPAGE) $(VMCORE_DMESG_MANPAGE)
++ MAN_PAGES:=$(KEXEC_MANPAGE) $(VMCORE_DMESG_MANPAGE)
+ -BINARIES_i386:=$(KEXEC_TEST)
+ -BINARIES_x86_64:=$(KEXEC_TEST)
+-+BINARIES_i386:=$(SBINDIR)/kexec
+-+BINARIES_x86_64:=$(SBINDIR)/kexec
+- BINARIES:=$(KEXEC) $(KDUMP) $(VMCORE_DMESG) $(BINARIES_$(ARCH))
+++#BINARIES_i386:=$(KEXEC_TEST)
+++#BINARIES_x86_64:=$(KEXEC_TEST)
++ BINARIES:=$(KEXEC) $(VMCORE_DMESG) $(BINARIES_$(ARCH))
+  
+- TARGETS:=$(BINARIES) $(MAN_PAGES)
++ UNINSTALL_KDUMP = $(sbindir)/kdump
+-- 
+2.7.4
+
 
