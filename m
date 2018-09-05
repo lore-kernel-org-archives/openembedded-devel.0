@@ -1,72 +1,97 @@
-Return-Path: <marc@cpdesign.com.au>
-X-Greylist: delayed 2036 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 05 Sep 2018 22:01:52 UTC
-Received: from out116-37-vmse01.mailcluster.com.au
-	(out116-37-vmse01.mailcluster.com.au [116.90.4.37])
-	by mail.openembedded.org (Postfix) with ESMTP id CA57A793FB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Sep 2018 22:01:52 +0000 (UTC)
-Received: from vmcp03.web-servers.com.au ([116.90.56.28])
-	by vmse01.mailcluster.com.au with esmtps
-	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.89)
-	(envelope-from <marc@cpdesign.com.au>) id 1fxfL8-0003vl-NL
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2018 07:27:56 +1000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=cpdesign.com.au; s=default; h=Content-Type:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:
-	Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=p4I9pEPvyLZKTP6lAJyMncYEtJlGPMEwiPbN0EoCakQ=;
-	b=Q7hh1YwDjZI/yET1DAhv8R9S0T
-	6/irp7AOpiv4Md3n2bYPVg77m171Hy6GUB61CJ1x76DzX/0/VUDqSsDMz5fH6eKQFanbeV7q2i1kD
-	oTAh4WPEo+ZMFQ6bWJ2xWXeJ5FS8fJJRTaCkUTWYbc1jo3cFL3EIxGHtPE3fhiQOhDCuFrGdUtHvh
-	ErxLtRvJmCHfGx+n2DLhKmMXKluVmVSPye+00hg37TUst3TRH/eg+qDeKDJdAjzb7px5R8yhGGXdF
-	wm5MfA3kuZwiwaSGrzkgQ0LK8+PCE5lWQ60va8hRVC5v3MgFycB0DVqJ93zh1I87wB6+dvseo4/kG
-	soeuH21g==;
-Received: from ppp118-209-236-9.bras2.mel11.internode.on.net
-	([118.209.236.9]:60218 helo=dev4.localnet)
-	by vmcp03.web-servers.com.au with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.91)
-	(envelope-from <marc@cpdesign.com.au>) id 1fxfKT-008LPJ-N9
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 Sep 2018 07:27:13 +1000
-From: Marc Reilly <marc@cpdesign.com.au>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 06 Sep 2018 07:27:13 +1000
-Message-ID: <14229355.xykvgNZyFh@dev4>
-Organization: Creative Product Design
-In-Reply-To: <CAGCTLNSmcsfowyhEBXDACoiK4-hfoLAb9RPMius=PKw=Nx8Rwg@mail.gmail.com>
-References: <CAGCTLNSmcsfowyhEBXDACoiK4-hfoLAb9RPMius=PKw=Nx8Rwg@mail.gmail.com>
+Return-Path: <akuster808@gmail.com>
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by mail.openembedded.org (Postfix) with ESMTP id B9B01793F3;
+	Wed,  5 Sep 2018 23:27:23 +0000 (UTC)
+Received: by mail-oi0-f42.google.com with SMTP id p84-v6so17057410oic.4;
+	Wed, 05 Sep 2018 16:27:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=OKbG1F5YcnAyE5kJbzgt+H57/AcXBkSSPCUyCArypk4=;
+	b=XjPslsZRG2tIuWPNKvm73UGlMPTxVfPpLLMTUS2N6jkrtvZLNYu3vspeYaUKhx4AB6
+	xQxkiody8RJDFf5rJ8wAANwc32Z97WydTneYHpqnbhMtaszx7Bko0Ff9Te1Gy4mHok+Q
+	p4HwayyxeE6Po0B8K3llE5m03VVrGsODvuknWqQzDV0z6EZsetiNOVyjiiq0ubQYDkfW
+	HaX77hzso3LZ6eZH3vVYxm+bwsdbygqkK6hQBnVwuwL53FRYr8v38zoHuVwLKGlfTWfV
+	++MfOPEMP1afUA/tO9joUsxrwheaTHwQysaMnIJj5IwUMpLsMWUdm5KeUXK+RRCkebDE
+	98Hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=OKbG1F5YcnAyE5kJbzgt+H57/AcXBkSSPCUyCArypk4=;
+	b=CUWV8Rj09sMuBzvF5rY7KG3DvG3cerKgdvfl6m2RwMI1wDAcOIG9D8W7FDxjB7vIcB
+	BWkN2lO9DEOLH6kvbHayOe+8Yf90OcOFSWNaqPyxTH+t10WBwmtyIDWv08Kc7rZg8LIR
+	pYV3cqgOZDl2y9LYp2SN/EyUQ++6EDtHxL4b1Mh2SUz9hszhoMe5Eq4qu2iRLv4KpdN2
+	FdWGkcGMuMBBDHo5PTSJeFToe2mUrCkcTn3vnI7peqHRfXdSxP9H2VR5qKhoaNKuz1/d
+	u+QBCnNmMT3NKUCxgJVixKbHDyUfPipKLsmSLLqxhX9GQ1EdEAxuk50X+IlUypoQ95Mv
+	eG0Q==
+X-Gm-Message-State: APzg51DXtQjnOh21BeXr9jkjLthms3sSv9SUAkazTtkQ+1hZ4fq4CXIk
+	r6RqTU8YLC7SF/Py8VK25AEiKRiy
+X-Google-Smtp-Source: ANB0Vda547sGZonPDEQHt8ikt/WOsIw9srNQbWUlcfZitaS6tk+WQO5zMPSmydAagsnL1tTZd62gBw==
+X-Received: by 2002:aca:3d56:: with SMTP id k83-v6mr61597oia.166.1536190039607;
+	Wed, 05 Sep 2018 16:27:19 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:45cc:4239:c235:fa42?
+	([2601:202:4180:c33:45cc:4239:c235:fa42])
+	by smtp.gmail.com with ESMTPSA id
+	1-v6sm6237755oir.19.2018.09.05.16.27.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 05 Sep 2018 16:27:19 -0700 (PDT)
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <81713c72-e806-ba69-0e6d-7ef4a2c00010@gmail.com>
+Date: Wed, 5 Sep 2018 16:27:18 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-X-Authenticated-User: marc@cpdesign.com.au
-X-Authenticator: dovecot_plain
-X-Originating-IP: 116.90.56.28
-X-SpamExperts-Domain: panthur-sh-outbound0.mailcluster.com.au
-X-SpamExperts-Username: 116.90.56.28
-Authentication-Results: mailcluster.com.au; auth=pass
-	smtp.auth=116.90.56.28@panthur-sh-outbound0.mailcluster.com.au
-X-SpamExperts-Outgoing-Class: unsure
-X-SpamExperts-Outgoing-Evidence: Combined (0.38)
-X-Recommended-Action: accept
-X-Filter-ID: EX5BVjFpneJeBchSMxfU5o0CozBosBQ8Q1DUKBbLkPN602E9L7XzfQH6nu9C/Fh9KJzpNe6xgvOx
-	q3u0UDjvO6Y61ZkTr3+ohSgjjw6DWeGQf1l1fL6qA6F1IhiFnmhjYbirbVgsPNisggIr8baehbgN
-	zB/4Jkrw1eDLcif59fuXf32htqV0hYHTgXAR13T/cD7g6rfkD501z7pOdWcyWoP1kxp/Q90I1E7H
-	2LRCFTEISG0iU2596YVtTfLLVlYgpBTrcr9Crq3W5u+rDAGnOvHVgFMSznkuKtEuCmy8IW3uSSkB
-	qBbjrDolErMrv/BJDCO6pwynrmwACiFMerxCDYrhylS5qWRAI3z2YWviHNWdhuuDinYBecBXGdF0
-	kur+wc+jkLlVgHdKhBSfUTh3/LnkxMlqe3bxde6oGP5iqS2NDgfBsXhpZpGXRrEDnbmi5YE5enyc
-	cp7RH4WQio3uGQiRtdZlCZVmqOKkeJ0MB55TjKT6cHpDpgZCny6AmGRBxRamOeYDBIwBrxIWz+W8
-	eik4xAm9D8KTeKJT7gNACPeFIG5rVgSZqKqezztI0zHJ//F0ElM8N8vLAwCfRc9maWVCMoM0/sUZ
-	7p0JxevUmna1gc/64jHpm9hXIkn6kqFVZ/3Su+IDKdiRxLJFZolHkcQj8fSOWJadTiMVDIZoB6nx
-	+sXcZUQ+Z99QziSoDnwU0a7RxMlf9XL1uzl2jW8ARMdvFvKHr17XSzfxhbDPcbC9iDAaUCMMs5F6
-	ArPjhpPkE42Qh2u0mBwKpGj6DQz7ExacHY6DoL2e33S6CddrwhNNn1E3xT6i58FmZiLYoSBHtZfY
-	sl6wKKWEHIxSfxg/7ZcAdAW/bklHMNlTiGDfjbj4sNl2Wo722zw8wHZfUVcmfqb5R4VemuUI6bcE
-	ARsm0Ki8KfQ960HHbAL7phoLgzhUQA3uoClQPSnn0hTaIer3Y9Pmbg52pYx0TRvgmjPTz7hS19vP
-	Oq5cFPdQRhf/rLvIoN7O8xGP44LyJ3Ns++IBkqlQzir5FTzS0QHfIdQs5NThjK3J+EDagbQ0uZRs
-	aHlWRIX+54vyc6Aa7Pvb/zfDUqZ4k6xPhG09aWWlFTZ9PQ==
-X-Report-Abuse-To: spam@vmse01.mailcluster.com.au
-Subject: Re: [openembedded][qt5] : Text is hidden in Qt5 apps
+Subject: OEDEM Sunday, 21 October 2018 in Edinburgh (before ELCE) - Update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -79,28 +104,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2018 22:01:53 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 05 Sep 2018 23:27:23 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-Hi,
+Hello,
 
-On Tuesday, September 4, 2018 8:11:49 PM AEST Mohamed Dawod wrote:
-> Hi,
-> I built custom image based on wayland instead of x11
-> it support Qt5 apps.
-> I built simple Qt5 app and tried to build it for the custom image to run it
-> there.
-> the application is work but the text is hidden !
-> The same for the test app "Qt5_Cinematicexperience"
-> No text at all for all films.
 
-I would guess that there is some font package(s) missing or some environment 
-variable needs to be set up to tell Qt where the fonts are.
-(But I don't use wayland, so not really sure)
+If you have not signed up for OEDeM, please do so ASAP. We have 41
+signed up so far. Sign-ups close Sept 15th
 
-Cheers
-Marc
+
+regards,
+
+Armin
+
+OEDeM Bouncer
 
 
 
