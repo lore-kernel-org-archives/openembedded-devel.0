@@ -1,48 +1,72 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A1FA79435
+Return-Path: <marc@cpdesign.com.au>
+X-Greylist: delayed 2036 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 05 Sep 2018 22:01:52 UTC
+Received: from out116-37-vmse01.mailcluster.com.au
+	(out116-37-vmse01.mailcluster.com.au [116.90.4.37])
+	by mail.openembedded.org (Postfix) with ESMTP id CA57A793FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Sep 2018 21:32:22 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id j192-v6so9215625wmj.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Sep 2018 14:32:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=mY4ilS45AW9dYN+fAAJN3eqqFsrmlgv3RF+ncEvToF8=;
-	b=O7uTOA5ooAqD9InuAujh4WoTV3JvHLxvaRp/c3v4a4K1aeHA9B8NTL4AI7gEazRskn
-	Ws9Q+SfywVURX8rWWQqf/H1NGIL5qavN/8pax9nGGX9UmLoY2TfSvQoOlegB26FA5pAn
-	KtJNtWKcfnQh1+o5TWd1rs+MQa6vl/3/EFijytuK3bx44ivJhbqJz6w42zHrkEanJHaY
-	XQ5hLCNGRw4avqtSpbYWQ4WnI8pUbLBLwFpoUIKrUQ7sJxjgBm1b/VwJ3Ye8SeFlOQ+H
-	49d5ZpN8Oa8rfLqt8yJkT8piDLU4F9TGL81U4hhWymD3PKTx+fSyfaV6yvQe1W0tJUNc
-	KSfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=mY4ilS45AW9dYN+fAAJN3eqqFsrmlgv3RF+ncEvToF8=;
-	b=JPlCZvuy4uzTGiXH0hsi3zYcpYMlRhurMZgAgVQ2PwKiY6cEZ8YaXchxhe5t4sWHVc
-	PxZN9M3nDE4BG+xfYBJ1vfnWDX9qXY0ki+9ZNe7bz1pSmhfYTwrdPHIcF0tewKWrt0BZ
-	xz45FZlUgipjG9ivTjLEhyfHbc/PLuRZJ7iaSJl1NkfBNo++quqbFkdyZ/L/4m8ajQ1O
-	Jx68JHfGURA/VTwEyT7U7RBeDyg9wwuJ8Nwfs3UBB8Ypsaqz2D7T6U5u4TLS3+8Lq290
-	jzUyivVFxhdSk8GUoueTk5iR/w6eMNoqt0xWfnr85vYBm147yyGEz6JxKbX2yEGY5KI4
-	y2tg==
-X-Gm-Message-State: APzg51Cvh2acp/AUHmUX4rxRAN7MJkrfNiDEOiygJv2oC7vrgSuFXBI4
-	CzWJ2anP7LIVE8NkbOrAUjr0TgUG
-X-Google-Smtp-Source: ANB0VdaHhuQNvlhL0GrRcFBBUK91Fr7L11qcVP/Us2SPhijROr2nlNPEED4TLNQWnNmlGaofa+xkNw==
-X-Received: by 2002:a1c:9dc3:: with SMTP id
-	g186-v6mr192352wme.26.1536183143341; 
-	Wed, 05 Sep 2018 14:32:23 -0700 (PDT)
-Received: from localhost.localdomain
-	(host205-252-dynamic.245-95-r.retail.telecomitalia.it.
-	[95.245.252.205]) by smtp.gmail.com with ESMTPSA id
-	14-v6sm4811352wmp.32.2018.09.05.14.32.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 05 Sep 2018 14:32:22 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed,  5 Sep 2018 22:01:52 +0000 (UTC)
+Received: from vmcp03.web-servers.com.au ([116.90.56.28])
+	by vmse01.mailcluster.com.au with esmtps
+	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.89)
+	(envelope-from <marc@cpdesign.com.au>) id 1fxfL8-0003vl-NL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2018 07:27:56 +1000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=cpdesign.com.au; s=default; h=Content-Type:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:To:From:Sender:
+	Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=p4I9pEPvyLZKTP6lAJyMncYEtJlGPMEwiPbN0EoCakQ=;
+	b=Q7hh1YwDjZI/yET1DAhv8R9S0T
+	6/irp7AOpiv4Md3n2bYPVg77m171Hy6GUB61CJ1x76DzX/0/VUDqSsDMz5fH6eKQFanbeV7q2i1kD
+	oTAh4WPEo+ZMFQ6bWJ2xWXeJ5FS8fJJRTaCkUTWYbc1jo3cFL3EIxGHtPE3fhiQOhDCuFrGdUtHvh
+	ErxLtRvJmCHfGx+n2DLhKmMXKluVmVSPye+00hg37TUst3TRH/eg+qDeKDJdAjzb7px5R8yhGGXdF
+	wm5MfA3kuZwiwaSGrzkgQ0LK8+PCE5lWQ60va8hRVC5v3MgFycB0DVqJ93zh1I87wB6+dvseo4/kG
+	soeuH21g==;
+Received: from ppp118-209-236-9.bras2.mel11.internode.on.net
+	([118.209.236.9]:60218 helo=dev4.localnet)
+	by vmcp03.web-servers.com.au with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.91)
+	(envelope-from <marc@cpdesign.com.au>) id 1fxfKT-008LPJ-N9
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Sep 2018 07:27:13 +1000
+From: Marc Reilly <marc@cpdesign.com.au>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2018 23:32:20 +0200
-Message-Id: <1536183140-21646-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] kexec-tools-klibc: remove unneeded aarch64 patch
+Date: Thu, 06 Sep 2018 07:27:13 +1000
+Message-ID: <14229355.xykvgNZyFh@dev4>
+Organization: Creative Product Design
+In-Reply-To: <CAGCTLNSmcsfowyhEBXDACoiK4-hfoLAb9RPMius=PKw=Nx8Rwg@mail.gmail.com>
+References: <CAGCTLNSmcsfowyhEBXDACoiK4-hfoLAb9RPMius=PKw=Nx8Rwg@mail.gmail.com>
+MIME-Version: 1.0
+X-Authenticated-User: marc@cpdesign.com.au
+X-Authenticator: dovecot_plain
+X-Originating-IP: 116.90.56.28
+X-SpamExperts-Domain: panthur-sh-outbound0.mailcluster.com.au
+X-SpamExperts-Username: 116.90.56.28
+Authentication-Results: mailcluster.com.au; auth=pass
+	smtp.auth=116.90.56.28@panthur-sh-outbound0.mailcluster.com.au
+X-SpamExperts-Outgoing-Class: unsure
+X-SpamExperts-Outgoing-Evidence: Combined (0.38)
+X-Recommended-Action: accept
+X-Filter-ID: EX5BVjFpneJeBchSMxfU5o0CozBosBQ8Q1DUKBbLkPN602E9L7XzfQH6nu9C/Fh9KJzpNe6xgvOx
+	q3u0UDjvO6Y61ZkTr3+ohSgjjw6DWeGQf1l1fL6qA6F1IhiFnmhjYbirbVgsPNisggIr8baehbgN
+	zB/4Jkrw1eDLcif59fuXf32htqV0hYHTgXAR13T/cD7g6rfkD501z7pOdWcyWoP1kxp/Q90I1E7H
+	2LRCFTEISG0iU2596YVtTfLLVlYgpBTrcr9Crq3W5u+rDAGnOvHVgFMSznkuKtEuCmy8IW3uSSkB
+	qBbjrDolErMrv/BJDCO6pwynrmwACiFMerxCDYrhylS5qWRAI3z2YWviHNWdhuuDinYBecBXGdF0
+	kur+wc+jkLlVgHdKhBSfUTh3/LnkxMlqe3bxde6oGP5iqS2NDgfBsXhpZpGXRrEDnbmi5YE5enyc
+	cp7RH4WQio3uGQiRtdZlCZVmqOKkeJ0MB55TjKT6cHpDpgZCny6AmGRBxRamOeYDBIwBrxIWz+W8
+	eik4xAm9D8KTeKJT7gNACPeFIG5rVgSZqKqezztI0zHJ//F0ElM8N8vLAwCfRc9maWVCMoM0/sUZ
+	7p0JxevUmna1gc/64jHpm9hXIkn6kqFVZ/3Su+IDKdiRxLJFZolHkcQj8fSOWJadTiMVDIZoB6nx
+	+sXcZUQ+Z99QziSoDnwU0a7RxMlf9XL1uzl2jW8ARMdvFvKHr17XSzfxhbDPcbC9iDAaUCMMs5F6
+	ArPjhpPkE42Qh2u0mBwKpGj6DQz7ExacHY6DoL2e33S6CddrwhNNn1E3xT6i58FmZiLYoSBHtZfY
+	sl6wKKWEHIxSfxg/7ZcAdAW/bklHMNlTiGDfjbj4sNl2Wo722zw8wHZfUVcmfqb5R4VemuUI6bcE
+	ARsm0Ki8KfQ960HHbAL7phoLgzhUQA3uoClQPSnn0hTaIer3Y9Pmbg52pYx0TRvgmjPTz7hS19vP
+	Oq5cFPdQRhf/rLvIoN7O8xGP44LyJ3Ns++IBkqlQzir5FTzS0QHfIdQs5NThjK3J+EDagbQ0uZRs
+	aHlWRIX+54vyc6Aa7Pvb/zfDUqZ4k6xPhG09aWWlFTZ9PQ==
+X-Report-Abuse-To: spam@vmse01.mailcluster.com.au
+Subject: Re: [openembedded][qt5] : Text is hidden in Qt5 apps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,89 +79,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2018 21:32:23 -0000
+X-List-Received-Date: Wed, 05 Sep 2018 22:01:53 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Remove temporary development leftover (hack).
+Hi,
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- ...4_purgatory-Makefile-remove-unknown-flags.patch | 51 ----------------------
- .../recipes-kernel/kexec/kexec-tools-klibc_git.bb  |  3 +-
- 2 files changed, 1 insertion(+), 53 deletions(-)
- delete mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch
+On Tuesday, September 4, 2018 8:11:49 PM AEST Mohamed Dawod wrote:
+> Hi,
+> I built custom image based on wayland instead of x11
+> it support Qt5 apps.
+> I built simple Qt5 app and tried to build it for the custom image to run it
+> there.
+> the application is work but the text is hidden !
+> The same for the test app "Qt5_Cinematicexperience"
+> No text at all for all films.
 
-diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch
-deleted file mode 100644
-index f87f433..0000000
---- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/arm64_purgatory-Makefile-remove-unknown-flags.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--From 1ceca8645dbe2780e1b8993c80de772993fe3053 Mon Sep 17 00:00:00 2001
--From: Andrea Adami <andrea.adami@gmail.com>
--Date: Thu, 19 Apr 2018 10:43:34 +0200
--Subject: [PATCH 1/2] purgatory/arm64: Makefile: remove unknown flags for arm64
--
--Fix
--
-- | aarch64-oe-linux-musl-ld: unrecognised emulation mode: cmodel=large
-- | Supported emulations: aarch64linux aarch64elf aarch64elf32
--   aarch64elf32b aarch64elfb armelf armelfb aarch64linuxb aarch64linux32
--  aarch64linux32b armelfb_linux_eabi armelf_linux_eabi
--
--Upstream-Status: Inappropriate [klibc specific]
--Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
--
-----
-- purgatory/arch/arm64/Makefile | 20 ++++++++++----------
-- 1 file changed, 10 insertions(+), 10 deletions(-)
--
--diff --git a/purgatory/arch/arm64/Makefile b/purgatory/arch/arm64/Makefile
--index 636abea..ddc9461 100644
----- a/purgatory/arch/arm64/Makefile
--+++ b/purgatory/arch/arm64/Makefile
--@@ -1,13 +1,13 @@
-- 
---arm64_PURGATORY_EXTRA_CFLAGS = \
---	-mcmodel=large \
---	-fno-PIC \
---	-fno-stack-protector \
---	-fno-asynchronous-unwind-tables \
---	-Wundef \
---	-Werror-implicit-function-declaration \
---	-Wdeclaration-after-statement \
---	-Werror=implicit-int \
---	-Werror=strict-prototypes
--+#arm64_PURGATORY_EXTRA_CFLAGS = \
--+#	-mcmodel=large \
--+#	-fno-PIC \
--+#	-fno-stack-protector \
--+#	-fno-asynchronous-unwind-tables \
--+#	-Wundef \
--+#	-Werror-implicit-function-declaration \
--+#	-Wdeclaration-after-statement \
--+#	-Werror=implicit-int \
--+#	-Werror=strict-prototypes
-- 
-- arm64_PURGATORY_SRCS += \
-- 	purgatory/arch/arm64/entry.S \
---- 
--2.7.4
--
-diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-index 92ab7e6..fe34671 100644
---- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-+++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
-@@ -48,8 +48,7 @@ SRC_URI_append_x86 = " file://x86_sys_io.patch file://x86_basename.patch \
- SRC_URI_append_x86-64 = " file://x86_sys_io.patch file://x86_basename.patch \
-                           file://x86_vfscanf.patch file://x86_kexec_test.patch"
- 
--SRC_URI_append_aarch64 = " file://arm64_purgatory-Makefile-remove-unknown-flags.patch \
--                           file://arm64_kexec-image-header.h-add-missing-le64toh.patch \
-+SRC_URI_append_aarch64 = " file://arm64_kexec-image-header.h-add-missing-le64toh.patch \
-                            file://arm64-crashdump-arm64.c-fix-warning.patch \
-                            file://arm64_kexec-arm64.c-workaround-for-getrandom-syscall.patch"
- 
--- 
-2.7.4
+I would guess that there is some font package(s) missing or some environment 
+variable needs to be set up to tell Qt where the fonts are.
+(But I don't use wayland, so not really sure)
+
+Cheers
+Marc
+
 
 
