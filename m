@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 55A76793E6
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+	[209.85.210.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D39179034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Sep 2018 21:02:40 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id h3-v6so510337plh.10
+	Wed,  5 Sep 2018 21:02:42 +0000 (UTC)
+Received: by mail-pf1-f169.google.com with SMTP id k19-v6so4105476pfi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Sep 2018 14:02:41 -0700 (PDT)
+	Wed, 05 Sep 2018 14:02:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=doIuFTzTmgAJeB6syKbQnIE6dNf5NKdHqiDT33HfaXI=;
-	b=FjAj72uCYAyUQCTyKaP27zCChMHsilTAjL82jyxh7Jc8SbKXCLV9flm/uQTXQwRGxQ
-	mL/Q8RlwTcXfUm5rTYn71hyEyzuwWUwj8PqW1vEZ49PZ++imbejWIxRT8TBvZSdeIjmS
-	jQtHSISM4e4hKLFeYm2q8z/+W8uv3fAGFjZjQmtEhI6843/Cw9ZFN+Yb3OLeYRp5wvQq
-	/T+4VvwkQnK4X2t416Dj15VyW+6mMfxOQnwXqA4h1YoUPOulxp7VtlbGp2zLqJ1E/niz
-	7PsVl5ZUxg+M36oxdFTEcutDWf62mBdy/ANFmbEVHOpjc7VDQWFjVgBB+Pya5oFDl4MF
-	x74g==
+	bh=KTeJ6TG92gkE6Js9/tpr/MzUxYeRkZGp8XzW51NCYM4=;
+	b=AoILfCzUiOFuYr2YQs0jq52s01wQPfmWS3He3AM5rx4s4DDMrr0SUfHG8mwxqHS5a2
+	K1+NV9vKGuQAMHngY8Jqeiv1L6nEs1nyWH+h/2UR0ap+QdyK8e0xVdmN+WU/A75U2o7g
+	PnTBsG1Y/FxXAg4OxWDAFAtqd6GcN+WylGB14HpSw8csFnuzMTDaHWAW8wRZxtYIUydN
+	vFOm1QkiCNcCuGv6aBxSKfiuqI3hgpKUTcDUOu2CEjJ0bwZPNbyI+IS+7kUTp9wlFQD4
+	bOWH1TDtpfFwDy7KlTDIwCT/4l4ruC9JLBInwE7ETixvDLRQiricydGjSS/3K+XLvshc
+	5mJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=doIuFTzTmgAJeB6syKbQnIE6dNf5NKdHqiDT33HfaXI=;
-	b=DWJz7e5IOtLxjIUTEnnC59/QzCD0aObrHjY0/w6wQ+2Em8FZN6+WyDMqm57cBBHPwx
-	MdF5BJ56IEpWca8+W08ZY7W3hdTQ4HeV/13VUKXiFuCZbdxU6yq1YcPWEWGiLxVsNlUZ
-	52krMUamQBPyD8Gga9uY1p8gWmBZs4lxBu9uujy5sqkU6I64/70u9vk/2hgAn24/R/I6
-	Q3z0j8hzy5gv35VaHUS5lk/m3Pd4UUJwWS3ulnCqTNvgOul/KM7+Ygxo8Xa0JfDUaRNN
-	cT3YrqkN1Qz9SdtNmtuPF6V3cRPpWHmhpJePmRflJp+p34WCdvZmsMA5xYwYZQHca/AI
-	QdVQ==
-X-Gm-Message-State: APzg51Dd+B3aEkiV9qWxlDYyxSkAD4/i2lQ5pqtsfTSuyamu1dGkLjlF
-	iLt4LiirHAxybUkBC9v6KuaHCJme
-X-Google-Smtp-Source: ANB0VdZjgmlNZpvF/Txw86gUw5bSBEbOYgEHPZMpcFnz5XNmHpEmuLeM84IVVYH+RXhIKOE5t1MxuA==
-X-Received: by 2002:a17:902:a413:: with SMTP id
-	p19-v6mr40595649plq.220.1536181361312; 
-	Wed, 05 Sep 2018 14:02:41 -0700 (PDT)
+	bh=KTeJ6TG92gkE6Js9/tpr/MzUxYeRkZGp8XzW51NCYM4=;
+	b=dvD+S6INw1LaJ6zo6OqdzvZzwhm17UNPaphh18amm1Rae06NTqOeBGcvYsQkA/DEJb
+	ttvDMbfnGXXvroVDi7iV6fgi7p2S0pNbdsZ0NhGKXu0WLVV802DQkyhY253ZZbaNjUuZ
+	sDyo2UgYEipumJFMK7i0uzB7gFdeE8nP3iWT7wSjH92jfGC1ekd7Lsl5twEv1P88noUJ
+	dEWkQn8nPZPB302nAP3CFUmUqu8m5caz/RrA7lH8Wy5Uu20/1xsZBFZDgeZhrYitROB6
+	91O9/iFrGEFyM2G7TIyq713yC4wYn6iopbB51gswY35JlSzHGaqcVKlioKnRImOj/JI6
+	B50Q==
+X-Gm-Message-State: APzg51DsyslYyKb7pieyZvLf2llNi2RZ+MDiiHrUQ9OuuyrOY74RvvaT
+	qcgxIJlceBW+TjJkRgj8rsZ8fFfy
+X-Google-Smtp-Source: ANB0VdbZNx3+3epl3Xp706so2TirDSHOIMN8C48IF4WiIxRamA/jrcHQst7CNxuIxWLd2mC86yO4iA==
+X-Received: by 2002:a63:d70e:: with SMTP id
+	d14-v6mr38858585pgg.110.1536181362476; 
+	Wed, 05 Sep 2018 14:02:42 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
 	by smtp.gmail.com with ESMTPSA id
-	e26-v6sm3689411pfi.70.2018.09.05.14.02.40
+	e26-v6sm3689411pfi.70.2018.09.05.14.02.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Sep 2018 14:02:40 -0700 (PDT)
+	Wed, 05 Sep 2018 14:02:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2018 14:02:22 -0700
-Message-Id: <20180905210224.21225-10-raj.khem@gmail.com>
+Date: Wed,  5 Sep 2018 14:02:23 -0700
+Message-Id: <20180905210224.21225-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180905210224.21225-1-raj.khem@gmail.com>
 References: <20180905210224.21225-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 10/12] sip: Upgrade to 4.19.12 release
+Subject: [meta-networking][PATCH 11/12] nopoll: Upgrade to 0.4.6.b400
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,39 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2018 21:02:40 -0000
-
-Inherit pythonnative instead of using python from build host
+X-List-Received-Date: Wed, 05 Sep 2018 21:02:42 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb} (90%)
+ .../nopoll/{nopoll_0.4.2.b297.bb => nopoll_0.4.6.b400.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-protocols/nopoll/{nopoll_0.4.2.b297.bb => nopoll_0.4.6.b400.bb} (84%)
 
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-rename to meta-oe/recipes-devtools/sip/sip_4.19.12.bb
-index ea944b32ff..be58959989 100644
---- a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-+++ b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
-@@ -4,13 +4,13 @@ SECTION = "devel"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
+diff --git a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
+similarity index 84%
+rename from meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
+rename to meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
+index 1d77891d47..8c57d29492 100644
+--- a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
++++ b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
+@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f0504124678c1b3158146e0630229298 \
+ DEPENDS = "openssl"
+ SRC_URI = "http://www.aspl.es/nopoll/downloads/nopoll-${PV}.tar.gz \
+           "
+-SRC_URI[md5sum] = "8c411cd0f3c0479aed28c4cf7b114fbb"
+-SRC_URI[sha256sum] = "f5fbf8aaa16a77b0f265d8c847eb06cb3e68f2b1a50737466dae81181618654c"
++SRC_URI[md5sum] = "8d333f158b5d5a8975a6149e6ef8db63"
++SRC_URI[sha256sum] = "7f1b20f1d0525f30cdd2a4fc386d328b4cf98c6d11cef51fe62cd9491ba19ad9"
  
--inherit python-dir
-+inherit python-dir pythonnative
- 
- DEPENDS = "python"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
--SRC_URI[md5sum] = "0625fb20347d4ff1b5da551539be0727"
--SRC_URI[sha256sum] = "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
-+SRC_URI[md5sum] = "e28b0790dfe4962ce6bbd7c4772f40c9"
-+SRC_URI[sha256sum] = "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822"
- 
- BBCLASSEXTEND = "native"
+ inherit autotools pkgconfig
  
 -- 
 2.18.0
