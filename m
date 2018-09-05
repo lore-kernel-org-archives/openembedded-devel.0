@@ -1,112 +1,51 @@
-Return-Path: <prvs=7790e8633=Alistair.Francis@wdc.com>
-X-Greylist: delayed 566 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 05 Sep 2018 18:27:08 UTC
-Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AB32793B7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+	[209.85.214.178])
+	by mail.openembedded.org (Postfix) with ESMTP id D6DFD79034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Sep 2018 18:27:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1536172031; x=1567708031;
-	h=from:to:cc:subject:date:message-id:mime-version;
-	bh=soIi6HW1bkmI8SVDpzAQg6ysAB3iPsquAxP4gr/9Hpk=;
-	b=oKaWQ3AMW1BU328CoyZFMcaDBZFd0ixSlqoncz2Oje0UR7QaDwRfyr9q
-	/fI9w74usHgYHRcz+NxWmHcEqXb0SzrPGXY2KRZqOERYObjPFEVRvG7qC
-	k4nfk2ikIlWeoSw0afrbpiIQVUGevaXqpph9uGoSYqDse2D+9nrBja+Sw
-	8EKjOLaM9TM3AjIsjtsy3FXYb5kSPzPi9ExRz8j2e6d8Y8UOtqqFUeEMZ
-	+hOf10PNCAlvQed8qs2VxYBX0m+npvlmXE5GSgLcKUveF6Uid8K4HnVO2
-	/VoqQCmBjEKHAUNvoWXJGIlrxxkCZjYdUNaRKVz655yJc+o43h2k5T9By w==;
-X-IronPort-AV: E=Sophos;i="5.53,334,1531756800"; d="scan'208";a="90678568"
-Received: from mail-sn1nam04lp0084.outbound.protection.outlook.com (HELO
-	NAM04-SN1-obe.outbound.protection.outlook.com) ([216.32.180.84])
-	by ob1.hgst.iphmx.com with ESMTP; 06 Sep 2018 02:17:44 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sharedspace.onmicrosoft.com; s=selector1-wdc-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=h6xVhm7tl2fFFlmymO191sedko+aKyOi7xj490PWaWM=;
-	b=Q7nhnkJZnV0/r1tDTjAOXWftI8V/XMOPe5Q06xPMPdwOpjssVLjvCQDBZd1XKg/xkIzEfgSDRQD4MuEMpxutG+qlWxIVzWTiWq/VL+VwtwrlWfTk4KeZqMT8fPIG3uBwOffjaA3Gos3lmsDufKq2Gx7w1XbDLLkixLnwUc2FYXs=
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=Alistair.Francis@wdc.com; 
-Received: from risc6-mainframe.int.fusionio.com (199.255.44.171) by
-	CY4PR04MB0390.namprd04.prod.outlook.com (2603:10b6:903:b1::15) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.1101.18; Wed, 5 Sep 2018 18:17:41 +0000
-From: Alistair Francis <alistair.francis@wdc.com>
+	Wed,  5 Sep 2018 21:02:31 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id s17-v6so3866361plp.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Sep 2018 14:02:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=0qRc9bRKR+UN4ao1n8C3gCb5ThqOkyH9GRJ6WFCslyE=;
+	b=nrkONzuaHHGsbvcuh0ia+sAO70z9AWowtZ4HoE6gizW0IjV3bIznRzdg7C5i/nKhtE
+	OE29pbRh303TpxgMXZ07fCFBXW0LsTmhXCQloDG1Zz7batOj/xWO0IZnh/zwkRSKRDYd
+	i6kaddldHg9i+hR+eXKgtDKDfddxATQu5U4yGbFuMokeWleBWEkDXoKy/thCSc157SML
+	CbE3T5iLdKbDs5srLS0pPxf/rRXa/oIAU72WJ+l66Ox1mbjkZhsPI1K+IsWmKi3gms87
+	8+zoriuqU+P/yXBvpJIeFrMNrFzsDet9fMQJ5SI+WrtM8OSrmPh2EI76O0ekdP0tfUSG
+	SWLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=0qRc9bRKR+UN4ao1n8C3gCb5ThqOkyH9GRJ6WFCslyE=;
+	b=BLBXVTDR3bKR50TTYJKK/NLDs9SZCsKAo5xrs4JKZ0PbBCZJCPeA5lb1vxs6MhAacQ
+	OmuBmCFpKhE3TpqqEv6m+fEx/sDHjtgfD+H/NBjBhvG6Bur07EM7ZUeCeL8TPraLr+F0
+	32GjXz8M3rCHMVUy1ErPsW7Jr0C2C4K3CD1IRhBGs+ui1sTflZQxASS4B4P2HYm9EBHP
+	erC648C2Kf4m/YKNKO6KvoDvT7SFiPLSh96uQqezhrZH36k6btAnLzrn3lSPnilVjS8N
+	l9dj/Q7nWG+B1JN4HATgYJ6EXg+fvFXizQbIXaTaYudF87V31gHUidTm4cR4G1OUBnqI
+	vq2A==
+X-Gm-Message-State: APzg51CZM4UKpLkK6aji1F/ZPBXB1fWYhK5fga0Er42O3ZZC/is/xnAl
+	YMT1wvJJEwtIcY06JJ5XXslK00Fk
+X-Google-Smtp-Source: ANB0Vda4Au4fq3Kj7ZCipgGtWPilEYXk70rPhtiufq3jKxZywxcp/FMK7wCWaN461gPHXLrdS6EhxQ==
+X-Received: by 2002:a17:902:7845:: with SMTP id
+	e5-v6mr40836412pln.197.1536181352215; 
+	Wed, 05 Sep 2018 14:02:32 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
+	by smtp.gmail.com with ESMTPSA id
+	e26-v6sm3689411pfi.70.2018.09.05.14.02.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 05 Sep 2018 14:02:31 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2018 11:17:32 -0700
-Message-Id: <20180905181732.19483-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.17.1
+Date: Wed,  5 Sep 2018 14:02:13 -0700
+Message-Id: <20180905210224.21225-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-X-Originating-IP: [199.255.44.171]
-X-ClientProxiedBy: BYAPR02CA0031.namprd02.prod.outlook.com
-	(2603:10b6:a02:ee::44) To CY4PR04MB0390.namprd04.prod.outlook.com
-	(2603:10b6:903:b1::15)
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: fad26fad-4782-4f26-2384-08d6135bde84
-X-MS-Office365-Filtering-HT: Tenant
-X-Microsoft-Antispam: BCL:0; PCL:0;
-	RULEID:(7020095)(4652040)(8989137)(4534165)(4627221)(201703031133081)(201702281549075)(8990107)(5600074)(711020)(4618075)(2017052603328)(7153060)(7193020);
-	SRVR:CY4PR04MB0390; 
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR04MB0390;
-	3:dIjCsjCYzWWSxTO8DIAH5yMhFPTMKB5zz6Ceab8R30ioaJuHyn0GarqQ6g5U2REB4lV3EWDwwpdmoBZEMUwuKevERkHGqOl7m34aQvEpQyAMNphmnvGU9KLsRud6va2gjIc01eHIYPqG5Vw1pqIUa0l95+x3ASPjrULSdgieXedXFO0b/VuXLavKhIdWnaM8QjPqkXzK3NcrvQkU+cm86jPC3/Mt899QrUP1cglt2dbU46wycuwtFLoFxmdbWRUx;
-	25:jwpbIG07AyAvRzOavH28Fs06k5PNMZZoh6kMpjpyFRAbkfp3pT4ZV8oMqgsTgjpoUVTE3sp0tE8OvIfSfdRdujf+6Opk9nVLlz8mW750wlqdCdc2vFKWyCvz3D5qGKBXUDwL692pjdYUSh44TVdl6dFIEJgnI2h7lOAvRuzvfKU6QYd8zWEs1+OyfsWZNAbGABf2h0HB9h8zLjBqLcYvEOHLJhznxZWHVlk3HDFnbnABT8rPe3fYLBadGyC0VGLPV/XJj1ETI5s2gQt0ELziYnr2ug4v7zWydBJktCbagqRXVWSyG/Hv68BXzdOepY4lyHWe6dHYZf1h2gwASlwgVg==;
-	31:xfmr/+UidPUBLXLkXH7WyMIE/1y12ULFR/4Pypu3JYdWnyEZerILjFCs+RPPMjThL6zQAvJSHkc82oojvx4utvXUzPZukWGsnm1HYL/4ydB/vxsHDtDjAe7rmswMUwQdAYglcZKQ3000mtVDhLjhln3656EPl129cMoDtAfbOQim8Z6VVucUvB26dMALt+DR1jOLXIolZkiubQgFFAdRnLrrE8WSqgJkyOSJxxT9zrs=
-X-MS-TrafficTypeDiagnostic: CY4PR04MB0390:
-WDCIPOUTBOUND: EOP-TRUE
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR04MB0390;
-	20:G917oStt3u3n94amvJod1/7b4EJ1pRXuG3VB3e3i19LnFy+FsVz+ld4/CYs6vYkRegnPn8LX6k9mo5Kxz3QDQ6tikJiYrUIcakBaQy+KTnQGuWE4Cknq821Jh3z0m7X8ZdR/ioFfHBkYvVKkI1J1P2QFfBzAJeJ6MsIBPY7V7usECUNBwIXRtvp9SZ6gr2oL6uY5Arrzu4oAC2RJBaVXnrnJiKidCdihAuGDAJAuhZvNBMIszxQxcgmhiJSelj5Zqgprh0/2wCYWNGmJtlWSxxN4FINQUmK57L/7/KWukuVDFVemcsv9j6PW7uq2zjiowUkhTSh2yZf6Fhq2XtkNj2b222zipGlmkOvFCY/qLEdVxsWzatrJkGsX6i/cyBMFykEsgFIv6DBtXOaHAYVj+o7qIgLJ9zBAdT2x81vf8JWU5fgXR919EPenPBeQTo2OzWGAk/OheZ6U3vQ42bIXuZiri0OCniGCMkBE3hV1wI8D6uJzTCS6Gp1HqSXjK7bZ;
-	4:ohtUmoOnikq6T2lF6vEVD+vhAJzh0e18OB4sykGlqCkfACLF9pk7Mirfepy4OK4i3se5n3vL3V8lxVvusjZfCYf6vkU6BcUgrEbK0jotJWUqzfWQOHXItTSpiNP6tA9mRY0Ka4HvbOu1f3w4YUWy60p9GWhptJ91TMPoZvFayXpBiVfv6tCaUMmZsQ4+icEQCal+V2+UWHZufEk9Mfn6BL6YxSykCLLjdDVczfJu48HE1MdRh2gdoLk/6cZAPJk7A6w9s5eGxpah/2aZ70gGq753dg2XvoPE2fhT7PzQh7Dipc1eYB34svKcqLRFcHvn
-X-Microsoft-Antispam-PRVS: <CY4PR04MB03905D161CBE5CBF71C9542290020@CY4PR04MB0390.namprd04.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:(166708455590820);
-X-MS-Exchange-SenderADCheck: 1
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(8211001083)(6040522)(2401047)(5005006)(8121501046)(10201501046)(3002001)(3231311)(944501410)(52105095)(93006095)(93001095)(6055026)(149027)(150027)(6041310)(20161123558120)(20161123562045)(20161123564045)(20161123560045)(201703131423095)(201702281528075)(20161123555045)(201703061421075)(201703061406153)(201708071742011)(7699016);
-	SRVR:CY4PR04MB0390; BCL:0; PCL:0; RULEID:; SRVR:CY4PR04MB0390; 
-X-Forefront-PRVS: 078693968A
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(39860400002)(346002)(136003)(366004)(396003)(376002)(199004)(189003)(6306002)(6512007)(1857600001)(476003)(956004)(106356001)(2616005)(186003)(68736007)(36756003)(53936002)(47776003)(16526019)(105586002)(6486002)(50226002)(8676002)(478600001)(8936002)(26005)(2906002)(316002)(72206003)(6506007)(66066001)(97736004)(16586007)(52116002)(7736002)(305945005)(81166006)(81156014)(6916009)(3846002)(6666003)(386003)(51416003)(53386004)(86362001)(575784001)(2351001)(6116002)(5660300001)(4326008)(48376002)(1076002)(50466002)(486006)(39060400002)(2361001)(44832011)(14444005)(25786009);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR04MB0390;
-	H:risc6-mainframe.int.fusionio.com; FPR:; SPF:None; LANG:en;
-	PTR:InfoNoRecords; A:1; MX:1; 
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; CY4PR04MB0390;
-	23:6FEJZgCr6s1K25jWqnqRO06eRGz605mPhdbRNqSZF?=
-	=?us-ascii?Q?UPUW94US4J9l3H7wq8eozz8h/PT2yxN+v/6374xCFkSK6lcYbt5TKZXZQbXt?=
-	=?us-ascii?Q?MMt7uGDK2sPrl59WOKrZe3/m8Dk0bRUK7IYiUe3sfRFwUDJucPC/4dvX8yJQ?=
-	=?us-ascii?Q?mBwsFXPKM6nNsAGkND+SkDuegSFeLN+Ym6sgk6v8xS1VDtue9YfVMqY7aiXd?=
-	=?us-ascii?Q?E920xznS2aCk/vXEcqkO9NTNeWtkALjXNCt8n0OnC17iqNCLobhs2Whbqe17?=
-	=?us-ascii?Q?pzoSgArtl2Udbosomkfiw9LRuhe3sxVxrt5dDH5ycCBLOlGq6RvqBCoTdmyz?=
-	=?us-ascii?Q?NyLJ5fLBwbB6w60pO3OIblBrLqvfTLb/4y27d3Bfh0ReNjgfjMQLhdAYReND?=
-	=?us-ascii?Q?IZkhVBVtLaNFwO0OlmKeDh+OUzwTT0vK+v/I3VEe19Dxdl3DaO09aYI1uD8s?=
-	=?us-ascii?Q?xLeSN/2Wt/+VrEDgcs8iY0v3dy6ULiqUSI2f4yZqr30KjCvhkC7p1jkNNBqJ?=
-	=?us-ascii?Q?0BpnTHzLgDFtggW4zc1D47Cb3zp+8mbgG3CUzGL7fhK0E7Usei2Eu+6eUsDy?=
-	=?us-ascii?Q?//35ZvcoZjtUCVPFcUlphy1XWp9KtvAeNaw7edFGFSRNVpL/X96izAFBib81?=
-	=?us-ascii?Q?N6+NUm7NF10yftVxRP573o9hku23oaZyUEqFWDYGjvWxDgYJjnc0hcl9wql4?=
-	=?us-ascii?Q?RRR69uTQ/Yg8Llp+7uXf2YGjWuYGHeNOEuzePo/YSwZraA5WaBF2cLMuTVts?=
-	=?us-ascii?Q?n7wY5h7osHvHiNX0M+jULuMFizbw9dMajUhz99mfymPn1Yffc+Lnjbpy1Ls0?=
-	=?us-ascii?Q?hNwQdupgGvqS+96bMJ3vZ2L6h/UeGEyZO2Dn6EUZ7BZoAPvKtTJD/bsnYWyH?=
-	=?us-ascii?Q?IRUMYMVgQ+neFu064ABUbph8p4a7s722ICrhKVeXuOovgs6YSCZwH6q4oPPJ?=
-	=?us-ascii?Q?jUqcpkSsER/vH+ph+rUKHnWSXA80Xy29TyweqBIq2IcUMhQFhV1Lmt16Es0i?=
-	=?us-ascii?Q?9iF7vYg0bwuBA7B84Hy9WIUYYOCI9zF2o2KTPZGa3wL9s2qKTO1cG3v9kVnG?=
-	=?us-ascii?Q?AH00jwsuJX9kbeN7R6QAlq4VF9HMS0+eWBMkmK379eMHpa7BepFmMBG71QM5?=
-	=?us-ascii?Q?y8025jnTRt43hvdVP103TRpxPIto8vF6bYF8B58VryQFQ8W0PyfPKRhRup2q?=
-	=?us-ascii?Q?ZgBzDbV7iwpNdCqZ3CgYEQnNYD75S+5SGxKldbP3lfoL9D/FEufciCbztwV3?=
-	=?us-ascii?Q?hLVB0dNyjg8UsAWeUYtmTbSyzStqI3fYjbXu0YeTAwQzey5kqpiCOukkQ6Dj?=
-	=?us-ascii?Q?sx6nnjis/OVlv4dN8q87lA2UAHGrBY0JtyS7dzlw1GJ?=
-X-Microsoft-Antispam-Message-Info: X7+qsV+bzQkdv8mHr0Mhu8JUd6NM3R0lOJ0jHY/fTDIwlaYWnzrtd/eAW+0C4vSdDAR7Tdzs43wRmTsvD5f5EO6n8E2HgHnvVDnWyomol1/kq5sl/FWgAQ7kGl1NaDJUpx2rc0RNaVKDNT0MdRPu6F+DXvsksq4GSZ04XCWVo5Y0myi1PLv/EzLtyM+F6z9en8lpVzL44k7HiyzVRkmnQGPnwoeg0zxg1CUZsiggQsSr2zw+Z4wvqBh6Db5LgKgwsihWmSpExH0AmbYByNqdJIOKQW7D+phsI6MyWLc8AuzE9naFif2MPIN9guDFVu+5UD7nvbHv76O+IArFj4mSgH9pyD/Uij7kEsVf4t4oe9s=
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR04MB0390;
-	6:fAbM7DRxfXDsJfEGp6OCen1fJ9RWtOBVyjFepme8J91OgYtR6CwwK77Do13vcdyRVGBuH4sd4XDhzNOi0piEmdhn4Z6PY8jachHjaRlrz/k97Qntn1IrKRpeXfnYjgy6LwPxCQfsIbQXhZgQ3OUBSvPBvthhA6U55BKjW/D3bGHbiRNdwLU8e8E7RW/diC5XSbNZadlhiCGCqGg8HBWP9V96M5joVsATjxQvBrCg+f4E+HtjjB1oV8Mbb4MRQSr91KP1cXfT0EKix8cclLv+9HQf2O7kDfQKksMc6NlWXiM15HsZeU0NSfHL6m5zD7vrIiNNDoW0OgLDEwKs/U4wvGBbljZ5rE7x384oA9dl2+Y+bb64CrpRu7t2Ld7YhjxavcitvgWa85LIu/fivltJHe93vt2wyUBlIUcP6CBPV7P7PeLYK6lSHuJUOStcS83lp6EdXLYqOMpcrzNtrCLd3Q==;
-	5:0JKJbDKgL/GjtshE1qVTO9G8+FiHh5OMB7FDu4xRhTCRMWrKcbhwtYJzOmua3e2NmH9hWUeTZAKCMXDXCNpjNrkuJdVtzy7cGD++xWMV72u7GXY5TwSzM9ZE5yKK4EK/ZPxbvwMWsN8EZjQjykMZAOaREZ7iRifQD5jd2Ohwjc0=;
-	7:DtJAyd9AGlmsPKcmGYEe+IA/NF9YkqObYfWqrm/NChDqJ60xY412M1lUv4pNEuxHYoeDs93zI+X1z5cU0fD7bjFKLbguHAKKEeYwbGT1D6SV/PAjWP2Z/cRXybJ/JexKH5OPk7Su8si8WqjSRxLtdoq1IA5rgaD4d57+LbMW2cj2MnXXudS77DUNf0XztxdJYoKMMK39CqxjRbydWfewpmTLIxRGMtX3qWbO9u+DuTggnDJfJm+WV1OJihZqZJpl
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2018 18:17:41.3938 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fad26fad-4782-4f26-2384-08d6135bde84
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB0390
-Subject: [PATCH] pmdk: Initial commit of the PMDK SDK
+Subject: [meta-oe][PATCH 01/12] asio: Upgrade to 1.12.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -119,142 +58,185 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2018 18:27:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 05 Sep 2018 21:02:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+* Fixes build with openSSL 1.1.x
+* Merge .inc into .bb its a single recipe using it
+
+License-Update: Change Copyright years
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...c.cfg-Specify-the-host-when-building.patch | 29 +++++++++++
- ...0002-Makefile-Don-t-install-the-docs.patch | 26 ++++++++++
- meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb   | 49 +++++++++++++++++++
- 3 files changed, 104 insertions(+)
- create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
- create mode 100644 meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
- create mode 100644 meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+ ...ndle-glibc-variant-of-strerror_r-wit.patch | 46 -------------
+ ...e-POSIX-poll.h-instead-of-sys-poll.h.patch | 64 -------------------
+ meta-oe/recipes-support/asio/asio_1.10.6.bb   | 11 ----
+ .../asio/{asio.inc => asio_1.12.1.bb}         |  7 ++
+ 4 files changed, 7 insertions(+), 121 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
+ delete mode 100644 meta-oe/recipes-support/asio/asio/0001-use-POSIX-poll.h-instead-of-sys-poll.h.patch
+ delete mode 100644 meta-oe/recipes-support/asio/asio_1.10.6.bb
+ rename meta-oe/recipes-support/asio/{asio.inc => asio_1.12.1.bb} (63%)
 
-diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-new file mode 100644
-index 000000000..747538b0c
---- /dev/null
-+++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-@@ -0,0 +1,29 @@
-+From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
-+From: Alistair Francis <alistair.francis@wdc.com>
-+Date: Mon, 23 Jul 2018 11:23:39 -0700
-+Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
-+ jemalloc
+diff --git a/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch b/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
+deleted file mode 100644
+index 4244b97a8c..0000000000
+--- a/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From 45c855400842fd40f200ae9b7abf9debf4ab5436 Mon Sep 17 00:00:00 2001
+-From: Christopher Kohlhoff <chris@kohlhoff.com>
+-Date: Sun, 28 Aug 2016 09:21:53 +1000
+-Subject: [PATCH] Automatically handle glibc variant of strerror_r without
+- #ifdefs.
+-
+----
+-Upstream-Status: Backport https://github.com/chriskohlhoff/asio/commit/443bc17d13eb5e37de780ea6e23157493cf7b3b9
+- include/asio/impl/error_code.ipp | 16 +++++++---------
+- 1 file changed, 7 insertions(+), 9 deletions(-)
+-
+-diff --git a/include/asio/impl/error_code.ipp b/include/asio/impl/error_code.ipp
+-index ccb70dd..a117658 100644
+---- a/include/asio/impl/error_code.ipp
+-+++ b/include/asio/impl/error_code.ipp
+-@@ -97,20 +97,18 @@ public:
+- #if defined(__sun) || defined(__QNX__) || defined(__SYMBIAN32__)
+-     using namespace std;
+-     return strerror(value);
+--#elif defined(__MACH__) && defined(__APPLE__) \
+--  || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__) \
+--  || defined(_AIX) || defined(__hpux) || defined(__osf__) \
+--  || defined(__ANDROID__)
+--    char buf[256] = "";
+--    using namespace std;
+--    strerror_r(value, buf, sizeof(buf));
+--    return buf;
+- #else
+-     char buf[256] = "";
+--    return strerror_r(value, buf, sizeof(buf));
+-+    using namespace std;
+-+    return strerror_result(strerror_r(value, buf, sizeof(buf)), buf);
+- #endif
+- #endif // defined(ASIO_WINDOWS)
+-   }
+-+
+-+private:
+-+  // Helper function to adapt the result from glibc's variant of strerror_r.
+-+  static const char* strerror_result(int, const char* s) { return s; }
+-+  static const char* strerror_result(const char* s, const char*) { return s; }
+- };
+- 
+- } // namespace detail
+--- 
+-2.9.3
+-
+diff --git a/meta-oe/recipes-support/asio/asio/0001-use-POSIX-poll.h-instead-of-sys-poll.h.patch b/meta-oe/recipes-support/asio/asio/0001-use-POSIX-poll.h-instead-of-sys-poll.h.patch
+deleted file mode 100644
+index 7f95f5a25e..0000000000
+--- a/meta-oe/recipes-support/asio/asio/0001-use-POSIX-poll.h-instead-of-sys-poll.h.patch
++++ /dev/null
+@@ -1,64 +0,0 @@
+-From dac36a170188917e2f61b0394ba8a2f6509ddf3a Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <adraszik@tycoint.com>
+-Date: Tue, 8 Nov 2016 20:39:55 +0000
+-Subject: [PATCH] use POSIX poll.h instead of sys/poll.h
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-POSIX specifies that <poll.h> is the correct header to
+-include for poll()
+-  http://pubs.opengroup.org/onlinepubs/009695399/functions/poll.html
+-whereas <sys/poll.h> is only needed for ancient glibc (<2.3),
+-so let's follow POSIX instead.
+-
+-As a side-effect, this silences numerous compilation warnings
+-when compiling against the musl C-library:
+-
+-In file included from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/socket_types.hpp:57:0,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/impl/error_code.ipp:29,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/error_code.hpp:185,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/throw_error.hpp:19,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/impl/posix_tss_ptr.ipp:23,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/posix_tss_ptr.hpp:74,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/tss_ptr.hpp:27,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/call_stack.hpp:20,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/impl/handler_alloc_hook.ipp:19,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/handler_alloc_hook.hpp:78,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/handler_alloc_helpers.hpp:21,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/bind_handler.hpp:19,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/detail/wrapped_handler.hpp:18,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/io_service.hpp:24,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/basic_io_object.hpp:19,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/basic_socket.hpp:20,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio/basic_datagram_socket.hpp:20,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/../../../include/asio.hpp:19,
+-                 from ../../../../asio-1.10.6/src/examples/cpp03/buffers/reference_counted.cpp:11:
+-<sysroot>/usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+- #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+-  ^~~~~~~
+-
+-etc.
+-
+-Signed-off-by: André Draszik <adraszik@tycoint.com>
+----
+-Upstream-Status: Submitted https://svn.boost.org/trac/boost/ticket/12419
+- include/asio/detail/socket_types.hpp | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/include/asio/detail/socket_types.hpp b/include/asio/detail/socket_types.hpp
+-index f2600c2..cb61b8e 100644
+---- a/include/asio/detail/socket_types.hpp
+-+++ b/include/asio/detail/socket_types.hpp
+-@@ -54,7 +54,7 @@
+- #else
+- # include <sys/ioctl.h>
+- # if !defined(__SYMBIAN32__)
+--#  include <sys/poll.h>
+-+#  include <poll.h>
+- # endif
+- # include <sys/types.h>
+- # include <sys/stat.h>
+--- 
+-2.10.2
+-
+diff --git a/meta-oe/recipes-support/asio/asio_1.10.6.bb b/meta-oe/recipes-support/asio/asio_1.10.6.bb
+deleted file mode 100644
+index 5656039846..0000000000
+--- a/meta-oe/recipes-support/asio/asio_1.10.6.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require asio.inc
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=fede5286a78559dd646e355ab0cc8f04"
+-
+-SRC_URI[md5sum] = "85d014a356a6e004cd30ccd4c9b6a5c2"
+-SRC_URI[sha256sum] = "e0d71c40a7b1f6c1334008fb279e7361b32a063e020efd21e40d9d8ff037195e"
+-
+-SRC_URI += "\
+-    file://0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch \
+-    file://0001-use-POSIX-poll.h-instead-of-sys-poll.h.patch \
+-"
+diff --git a/meta-oe/recipes-support/asio/asio.inc b/meta-oe/recipes-support/asio/asio_1.12.1.bb
+similarity index 63%
+rename from meta-oe/recipes-support/asio/asio.inc
+rename to meta-oe/recipes-support/asio/asio_1.12.1.bb
+index 54f78e41d1..28cd9c0e19 100644
+--- a/meta-oe/recipes-support/asio/asio.inc
++++ b/meta-oe/recipes-support/asio/asio_1.12.1.bb
+@@ -13,3 +13,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
+ inherit autotools
+ 
+ ALLOW_EMPTY_${PN} = "1"
 +
-+To avoid this error:
-+    configure: error: cannot run C compiled programs.
-+    If you meant to cross compile, use `--host'.
-+when cross compiling specify the host when configuring jemalloc.
++LIC_FILES_CHKSUM = "file://COPYING;md5=3e73f311a3af69e6df275e8c3b1c09b5"
 +
-+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-+Upstream-Status: Inappropriate [configuration]
-+---
-+ src/jemalloc/jemalloc.cfg | 1 +
-+ 1 file changed, 1 insertion(+)
++SRC_URI[md5sum] = "037854d113024f57c9753d6326b339bc"
++SRC_URI[sha256sum] = "a9091b4de847539fa5b2259bf76a5355339c7eaaa5e33d7d4ae74d614c21965a"
 +
-+diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
-+index 196129de6..79ebbab1c 100644
-+--- a/src/jemalloc/jemalloc.cfg
-++++ b/src/jemalloc/jemalloc.cfg
-+@@ -3,3 +3,4 @@
-+ --with-private-namespace=je_vmem_
-+ --disable-xmalloc
-+ --disable-munmap
-++--host=${HOST_SYS}
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-new file mode 100644
-index 000000000..bd1b97c24
---- /dev/null
-+++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-@@ -0,0 +1,26 @@
-+From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
-+From: Alistair Francis <alistair.francis@wdc.com>
-+Date: Mon, 23 Jul 2018 11:31:17 -0700
-+Subject: [PATCH 2/2] Makefile: Don't install the docs
-+
-+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-+Upstream-Status: Inappropriate [disable feature]
-+---
-+ Makefile | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 224a315f6..ce7f84afb 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
-+ 
-+ install uninstall:
-+ 	$(MAKE) -C src $@
-+-	$(MAKE) -C doc $@
-+ 
-+ .PHONY: all clean clobber test check cstyle check-license install uninstall\
-+ 	source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-new file mode 100644
-index 000000000..90d51e3f8
---- /dev/null
-+++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-@@ -0,0 +1,49 @@
-+SUMMARY = "Persistent Memory Development Kit"
-+DESCRIPTION = "Persistent Memory Development Kit"
-+HOMEPAGE = "http://pmem.io"
-+SECTION = "libs"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
-+DEPENDS = "ndctl"
-+
-+SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
-+           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
-+           file://0002-Makefile-Don-t-install-the-docs.patch \
-+          "
-+
-+SRC_URI[md5sum] = "d9a7b3f1059ffd54b4c92e38329fe69e"
-+SRC_URI[sha256sum] = "e11cfbbdf0773fb5965211e18044531f442ad1e6d6726f1bac8a6dcc0e092622"
-+
-+inherit autotools-brokensep pkgconfig
-+
-+# Fix jemalloc error:
-+# | configure: error: cannot run C compiled programs.
-+# | If you meant to cross compile, use `--host'.
-+EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}'"
-+
-+do_install() {
-+	oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-+
-+	# Copy these into the standard directories
-+	install -d ${D}${bindir}/
-+	mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
-+	mv ${D}/usr/local/bin/daxio ${D}${bindir}/
-+
-+	install -d ${D}${libdir}
-+	mv ${D}/usr/local/lib/*so* ${D}${libdir}/
-+
-+	install -d ${D}${libdir}/pkgconfig
-+	mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
-+
-+	install -d ${D}${includedir}
-+	mv ${D}/usr/local/include/* ${D}${includedir}/
-+
-+	# Remove uneeded files
-+	rm -rf ${D}/usr/local/
-+}
-+
-+# Include these by default otherwise the SDK is not very useful
-+FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
-+FILES_${PN} += "${libdir}/*so*"
-+FILES_${PN} += "${libdir}/pkgconfig/*.pc"
-+FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
++SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
 -- 
-2.17.1
+2.18.0
 
 
