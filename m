@@ -1,24 +1,20 @@
-Return-Path: <Yi.Zhao@windriver.com>
+Return-Path: <zhe.he@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E2C6C65C8F
+	by mail.openembedded.org (Postfix) with ESMTP id 982AD65C8F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Sep 2018 05:06:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w85566rI018909
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  5 Sep 2018 08:50:05 +0000 (UTC)
+Received: from ala-blade48.wrs.com (ala-blade48.wrs.com [147.11.105.68])
+	by mail.windriver.com (8.15.2/8.15.1) with SMTP id w858o5Ne021026
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 4 Sep 2018 22:06:06 -0700 (PDT)
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
-	Tue, 4 Sep 2018 22:06:04 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Sep 2018 13:06:03 +0800
-Message-ID: <1536123963-1967-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-webserver][PATCH] phpmyadmin: upgrade 4.8.2 -> 4.8.3
+	Wed, 5 Sep 2018 01:50:05 -0700 (PDT)
+Received: by ala-blade48.wrs.com (sSMTP sendmail emulation);
+	Wed, 05 Sep 2018 01:50:05 -0700
+From: He Zhe <zhe.he@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Sep 2018 01:50:05 -0700
+Message-Id: <20180905085005.35608-1-zhe.he@windriver.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-networking][PATCH v2] spice: Upgrade 0.14.0 -> 0.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,40 +27,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Sep 2018 05:06:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 05 Sep 2018 08:50:05 -0000
 
-Security fixes:
-CVE-2018-15605: An issue was discovered in phpMyAdmin before 4.8.3. A
-Cross-Site Scripting vulnerability has been found where an attacker can
-use a crafted file to manipulate an authenticated user who loads that
-file through the import feature.
+Adjust location of spice-common source as new spice asks spice-common
+to be put under "subprojects" directory.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Disable -Werror when building with clang for the moment. Some non-trivial
+changes need to be made to fix the warnings clang give.
+
+Signed-off-by: He Zhe <zhe.he@windriver.com>
 ---
- .../phpmyadmin/{phpmyadmin_4.8.2.bb => phpmyadmin_4.8.3.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.8.2.bb => phpmyadmin_4.8.3.bb} (91%)
+ meta-networking/recipes-support/spice/spice_git.bb | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
-similarity index 91%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
-index a626852..975f631 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.2.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.8.3.bb
-@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
-            file://apache.conf \
+diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
+index 38b8bf306..871bb0fe9 100644
+--- a/meta-networking/recipes-support/spice/spice_git.bb
++++ b/meta-networking/recipes-support/spice/spice_git.bb
+@@ -13,18 +13,19 @@ architectures."
+ LICENSE = "BSD & LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+-PV = "0.14.0+git${SRCPV}"
++PV = "0.14.1+git${SRCPV}"
+ 
+-SRCREV_spice = "f1050bfc76c9c4146257e087baf74e0b62d7d218"
+-SRCREV_spice-common = "95743f40a2da39e0a19859c305e69e2c99d39e42"
++SRCREV_spice = "eaa07ef15cfc3bf57a69da2576af66f028787774"
++SRCREV_spice-common = "6b93b3fce8909b836ef1d1434d191900d8aa00be"
+ 
+ SRCREV_FORMAT = "spice_spice-common"
+ 
+ SRC_URI = " \
+     git://anongit.freedesktop.org/spice/spice;name=spice \
+-    git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common \
++    git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
+     file://0001-Convert-pthread_t-to-be-numeric.patch \
  "
++
+ FOO = "\
+     file://0001-build-allow-separated-src-and-build-dirs.patch \
+ "
+@@ -55,3 +56,5 @@ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
+ COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
  
--SRC_URI[md5sum] = "047b340a038b89e9e34f426084101f03"
--SRC_URI[sha256sum] = "2b42e75274ab078a0c2ca3aff767f45d1d81849f9f762a2ed0674819f061ba1d"
-+SRC_URI[md5sum] = "c8a603f4b78d1dbcefc191b8ae598c79"
-+SRC_URI[sha256sum] = "95f2692094d31c2c323d4767023583ab112ad54fff9e3af372710fcb676151af"
- 
- UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
- UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
+ BBCLASSEXTEND = "native nativesdk"
++
++EXTRA_OECONF_toolchain-clang += "--disable-werror"
 -- 
-2.7.4
+2.11.0
 
 
