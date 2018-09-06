@@ -1,47 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BCA3C79645
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 76CB879657
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 14:23:02 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id t39-v6so12412817qtc.8
+	Thu,  6 Sep 2018 14:47:26 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id m84-v6so9538542lje.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 07:23:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=dnX7AMle47Rnaj3vZvePzJ8VaI5d7OCFSTkHfKX0ARM=;
-	b=HJPibbYLl3uHPK19USJwyIh4ulGmLtKP+zG7O5fJjDsLwumGUv6zgUJL549UZHYRHQ
-	I1DNXntJI2gpmBSP0sl5JzUBoa1ljKJV8j18cPNT2iMs1ur22k29gMjfCVedkJJ9iUh3
-	yrDYi+ylH8SPji5p34p103liLcZDae6X3lHafzr9QS5xavfjCLhAl6md9ZNgfX7xwBeW
-	AK2LHROyN2ndTp7c8PC7j+DVO92NXsqbuvCNbgrczRZ4i1lyZJiZtYLPxEMo9QqcCWem
-	iarlJdggyEhYlaN71VyZmHSbvq7gGbF88Jd86eqo08m7ZDyAio4qL0ILeR+OzahmRpgp
-	XA7g==
+	Thu, 06 Sep 2018 07:47:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=gDXqaEuhzywPNhWj8JyuXIl234UC/vjrwMnOkJkoECs=;
+	b=r4m0dA5FWPkgkLyx0CjL4lVI/Qxf/YCVh5RPdLeY1uYiSkWVy3N/joktxYai3ficWl
+	gNPA3lPHjP8cqh/gEzWecCRwJ8xMMMvaRRu2ilcLPNCaRsWpXV37K+Xo7UJ8pMve7yib
+	m2sGEfgShJBszhJZC+w99lrceijNUk1MFd8Z9iXgkhwA2tWKebwabz3lOBwB49bGpt/Z
+	wwOGg47GAJLfDN1sqfOhofnBGdf+1+TjGVYv0eg6B6TtUCgVfUsDkYoIYmnBCNSU2mqW
+	wfn8pBhfWvfod1UJdjvf2eoOiJVQ5Lh1Ock2Un8//n6T6vBXCfVm2oYihFsSCRtz/p70
+	N5zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=dnX7AMle47Rnaj3vZvePzJ8VaI5d7OCFSTkHfKX0ARM=;
-	b=qABaM5CiI6UnbYorlY53ryKdUcRJ8ob7+MGfmg/3UQvr3rs9O6V6l9Dap2jnsbB+92
-	wwmrU3419aMq7W/0Bty279igmfiWmJ18FZGTj9Ue28gfek/1ZCmz/fc/VSIa+66J4qyy
-	L6iCnSIaDgLmSqZJFB7nSJcBduIzVgSnlNAfc9tbTtspFy/ttN50MUD3/b3pCuUU0TIA
-	/DQJ12VUewjz4RnqZyY5v57wmmvasclbxGOq08Zz7xGkR0Th9fanNm6g+VixuXP8K5ES
-	maQyun565u/Re3NSap1cIFIwAMMs/qrCJfXRMBsbIUV0SLXpyt/eL8cNwPSpYV3uJR6f
-	Dfnw==
-X-Gm-Message-State: APzg51Dka6zs+opOTWCeTdm1rqR8rPb6mu/9PH9JZQnRpD19dl8OpiFM
-	z37kfZGuRieSCn6tGwcJW0VHFNWjx1ETXJLlxAzV1RoY
-X-Google-Smtp-Source: ANB0Vda1Eq/hdD1ync9rpy26rpsCBcK+IlAUBA/cdWXWQ9MuoPfS7hpjWe+YFx1tQsLcVW9VcpipJ0IYbEvaF/4SGEo=
-X-Received: by 2002:aed:3848:: with SMTP id
-	j66-v6mr2278464qte.218.1536243783351; 
-	Thu, 06 Sep 2018 07:23:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180906034847.53858-1-timothy.t.orling@linux.intel.com>
-In-Reply-To: <20180906034847.53858-1-timothy.t.orling@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Sep 2018 07:22:37 -0700
-Message-ID: <CAMKF1spq7BjF9d1SqkmewrWM0wFqjnALe8XCO7i-AxvAVuOyOQ@mail.gmail.com>
-To: Tim Orling <timothy.t.orling@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] cpuid: upgrade 20170122 -> 20180519
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=gDXqaEuhzywPNhWj8JyuXIl234UC/vjrwMnOkJkoECs=;
+	b=lISbIkNT9Vnx00Piq5Icomve+1COKStSQRkcORv+AOhWCF2UmvFe72OdIGOpp847sk
+	5iYaPpMl/zQwDRRo6p5JK6CfdFwgvg2lfxUUV5ZH/Y+KBS71ctpO9wVmTl69i3YN00YL
+	Se9gKPAKoWHGCXeCgUCJTUuWIbwKys1mp3I7HNTIEXEztlwgmFJVOZj4eQiqixUjeXbW
+	v0VEkHsx3fOyNyvg2lSupKfdiY0k6h+Wsuugi3pCBZ8K25o09jIN7hNaC0nuSLVtbjxB
+	Y2gcLLnvPlB5lx+InrxLmGOFhXHgTFMXboIvVddtlJPIeqe7HbEYpCME2fgKyHVz8Oad
+	Lq9Q==
+X-Gm-Message-State: APzg51BhCPIW6xsCU5LIbuUKWAS69Ct26JQCyG4A9IM7nU/kZtEoWpZ5
+	y//0rdQRTnQz60KkLIUgD8oFOCws6lU=
+X-Google-Smtp-Source: ANB0VdZs9+MQFlnBFrPe+RGvyHf/XRiqVUFyOmS79q6Mct9AeuG2tmDGBIUmSSpNKoq3P6xNY89rrQ==
+X-Received: by 2002:a2e:8:: with SMTP id 8-v6mr2173433lja.112.1536245246367;
+	Thu, 06 Sep 2018 07:47:26 -0700 (PDT)
+Received: from scout.office.pelagicore.net ([83.218.80.243])
+	by smtp.gmail.com with ESMTPSA id
+	v63-v6sm861359lje.20.2018.09.06.07.47.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Sep 2018 07:47:25 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  6 Sep 2018 16:07:55 +0200
+Message-Id: <20180906140755.95398-1-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Subject: [meta-oe] libfribidi: delete recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,46 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 14:23:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Sep 2018 14:47:26 -0000
 
-On Wed, Sep 5, 2018 at 8:49 PM Tim Orling
-<timothy.t.orling@linux.intel.com> wrote:
->
-> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
-> ---
->  .../recipes-devtools/cpuid/{cpuid_20170122.bb => cpuid_20180519.bb}   | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-devtools/cpuid/{cpuid_20170122.bb => cpuid_20180519.bb} (86%)
->
-> diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
-> similarity index 86%
-> rename from meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-> rename to meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
-> index 5dd1bdd4ee..4b07e2193a 100644
-> --- a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-> +++ b/meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
-> @@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->
->  SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
->             file://0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch"
-> -SRC_URI[md5sum] = "1c46a6662626c5a6eaca626f23a5a7d7"
-> -SRC_URI[sha256sum] = "667612aae6704341dd10844e97c84c5c5c8700817a5937a3c293b55013bc4865"
-> +SRC_URI[md5sum] = "b3b4e44ef49575043a91def0207dcc76"
-> +SRC_URI[sha256sum] = "967823be36f23cbc972eb0aa882d069c1d155a5978990ac3bcf425e6a2e7ff9a"
->
+Deleted recipe as it is already part of poky.
 
-fails to patch
-http://errors.yoctoproject.org/Errors/Details/191375/
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ .../libfribidi/fribidi_0.19.7.bb              | 20 -------------------
+ 1 file changed, 20 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
 
->  COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
->
-> --
-> 2.14.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
+deleted file mode 100644
+index 423a9148a..000000000
+--- a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-SUMMARY = "Fribidi library for bidirectional text"
+-SECTION = "libs"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
+-BBCLASSEXTEND = "native"
+-
+-PROVIDES = "libfribidi"
+-DEPENDS = "glib-2.0 libpcre"
+-
+-inherit autotools lib_package pkgconfig
+-
+-CFLAGS_append = "  -DPAGE_SIZE=4096 "
+-SECURITY_CFLAGS_remove_toolchain-clang = "-D_FORTIFY_SOURCE=2"
+-
+-SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.bz2"
+-
+-SRC_URI[md5sum] = "6c7e7cfdd39c908f7ac619351c1c5c23"
+-SRC_URI[sha256sum] = "08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e"
+-
+-CVE_PRODUCT = "gnu_fribidi"
+-- 
+2.17.1
+
 
