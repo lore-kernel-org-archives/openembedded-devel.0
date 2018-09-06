@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 81B3979702
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
+	[209.85.210.171])
+	by mail.openembedded.org (Postfix) with ESMTP id BB28B796C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 17:22:30 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id 2-v6so5573046pgo.4
+	Thu,  6 Sep 2018 17:22:31 +0000 (UTC)
+Received: by mail-pf1-f171.google.com with SMTP id h69-v6so5624642pfd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 10:22:31 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=3Q2jCSl9nxbxIm2uOBSzuA9w6TPUFlBjWUvXwAJCekI=;
-	b=bZbvJq1jDzEgBnJc7FGGFHcnFiHUBbTIGHdB+eKJOofQJ4m31xKvYC7t6mH9MthWeV
-	T4fukkQYVeTiu/nKadPRjWJydXwkPJr1UOYKR9bVS8Nx6gK6oHa1VjuvVq/G1e6GTxZU
-	OC+sJB15NwgHYqWW42EW3XZugUKPPZqLSX0bMg9/m69xsF/nJTPD7G+h68qiCynYfdye
-	F+d7b3LaRIzceI44YbkR4VUtEy09ullP9cHIqjP3I6L1RgeI7byQXTWcCUUOpm2Oe4aH
-	fuvvReDhvw8kNHXYDrtcIQJ3E5rsHk4Iu94YfRPJmg23oA+CQldBCS4Ce3XMaWMZXx5n
-	omrQ==
+	bh=8WCeVTuLiGN6zPsWLsSZ8VxQ9aVz7ABgBmtj9evYEwY=;
+	b=HLRrAzlDVDRzsG+cwg1fyQzVoCmEG2yQCDvgC1aF/1J5H8HB8hL0xgzOfkLwcoaM7G
+	xHfTXMUOIESYqvvAqQ8OIvXKOhVSo0CTg60TQyv/KgHEEmqrsTv2F8/d3Z6sk66JzlMT
+	TvZ4axE2qhqZURzZ33amkH1826BDD0lPZf3NGWPgy0AT34t07GP8mntkWPEpApUEcJHB
+	3JRlwCPUf8oCYK8UuBOws5fzukjfOABXQdBk5Y0/6F011dsP0KhVIqwVfC3S/7csWBnP
+	ExetZHMdQbgSLwn5uY9LxvV1nAfgoM7+4QVXH8uehpB5B1RjqY5+C0IMJPSv66f2RzPW
+	h7UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=3Q2jCSl9nxbxIm2uOBSzuA9w6TPUFlBjWUvXwAJCekI=;
-	b=Z2wqEbQUTLV991kFpfW8N0zXuTFIFR3OXYdrRXVoEDj89V95NSpzewlqXAUR1j3GsN
-	XYgkze4VwzpXSAqJiRC/GOmuQLwx+Ycxnn/iKBJCUVFti+4XFCThcksYkGYHyJfoPhas
-	Pdl3pNJB1NFZnboUm2kFRE5wuOWN62n+9AhjmAeO/YgOUZQfGxcnF9rIyRUZ4pJ5fjF5
-	siV/NiKhK3KpRxfvc8cpxY+HD18HbA0UPQOQVZbjFc1nPwzCf/obE40IYe1yS+vKA1IB
-	9UJvOHT3l6Et5xBK6hVLEB5K3Bp/WUiws+MyMb8o8jWI7/pJRlduH/j3Hxdm3H6XemN+
-	FSkA==
-X-Gm-Message-State: APzg51BgOtfDTUrAe8jL6OWN/cqGR0HfPhUcKa553pszyZXlZFWJJH4D
-	ZVDO7RSTCRscSCO4hAlJMkWk7zEN
-X-Google-Smtp-Source: ANB0VdaL7EzxfIZ6Jd4wluXfUjXRXFGkAwayi/Qlngt9hwNzUa3jZHGNSqS0FxXoGc5c12tGRmYcOw==
-X-Received: by 2002:a62:1544:: with SMTP id
-	65-v6mr3981564pfv.178.1536254551324; 
-	Thu, 06 Sep 2018 10:22:31 -0700 (PDT)
+	bh=8WCeVTuLiGN6zPsWLsSZ8VxQ9aVz7ABgBmtj9evYEwY=;
+	b=ndmygtADcDXzIeNvbyzfTAeVX0v8Y4aK3LlG8YusLRdWAZ9PUtnymSP79ptiIKxgty
+	nqZglNQhDdn73bFgVs+0joTR6+dLSoMw1L3jpZQWO/saoxdIr9f0jLBuxGoOf8AdN9Zm
+	BiJ7+FAKfxwNEjwIDhV15jJf97oaxfHv2cHwpcT8pYpa+nIEGnvk9ba7FkWZ0s7bILun
+	2Seg8z6qDR28Q4nm9vGlWXPFir68OW3DJ7sSUG1svoKpR8O3epETIIG/AxkIsZRXmSkR
+	LsSJE6udDINDD7vWATwqtRSdcK+qtHMQ9var0I/Z/8odZn5yBukOsmGTIkimp81PQbY/
+	nRag==
+X-Gm-Message-State: APzg51BN8tua/HUIFfwIzOM2ipnXBffTyF7Ie5Ad/gbnksnDQ1r2XXFt
+	gasLALX8pTzXx6QAhpYh+YCpGWxn
+X-Google-Smtp-Source: ANB0Vdbn1XecRRR/Oe5DRBNfbhIiBnjUvQEUa+QAsk8CS5ziVkNYd+eXcPC19VcTq3DGhCn60IDQCg==
+X-Received: by 2002:a63:4306:: with SMTP id
+	q6-v6mr3922311pga.181.1536254552581; 
+	Thu, 06 Sep 2018 10:22:32 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
 	by smtp.gmail.com with ESMTPSA id
-	22-v6sm8319828pfl.126.2018.09.06.10.22.29
+	22-v6sm8319828pfl.126.2018.09.06.10.22.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 10:22:29 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2018 10:22:03 -0700
-Message-Id: <20180906172210.42551-10-raj.khem@gmail.com>
+Date: Thu,  6 Sep 2018 10:22:04 -0700
+Message-Id: <20180906172210.42551-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180906172210.42551-1-raj.khem@gmail.com>
 References: <20180906172210.42551-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 10/17] mosquitto: Make enabling systemd also enable build dep on systemd
+Subject: [meta-oe][PATCH 11/17] synergy: Upgrade to 1.10.1-release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,43 +58,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 17:22:30 -0000
-
-systemd support in mqtt needs system developement headers and libs installed in recipe sysroot
+X-List-Received-Date: Thu, 06 Sep 2018 17:22:31 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/mosquitto/mosquitto_1.5.1.bb       | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../recipes-support/synergy/synergy_git.bb    | 27 ++++++-------------
+ 1 file changed, 8 insertions(+), 19 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
-index fa51f4e76e..ae493e7b12 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.1.bb
-@@ -20,11 +20,14 @@ SRC_URI[sha256sum] = "8557bc7ae34dfaf32a0fb56d2491b7a7f731269c88337227233013502d
+diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
+index 68f0387ba9..f5518bd8c1 100644
+--- a/meta-oe/recipes-support/synergy/synergy_git.bb
++++ b/meta-oe/recipes-support/synergy/synergy_git.bb
+@@ -1,35 +1,24 @@
+ SUMMARY = "Synergy - control multiple computers with one keyboard and mouse"
+ HOMEPAGE = "http://synergy-project.org"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d2ba51ca68e055566aade24662f9eb41"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=54c1fc8d8bb6776ae501acfb1585e9d6"
+ LICENSE = "GPL-2.0-with-OpenSSL-exception"
+ SECTION = "x11/utils"
  
- inherit systemd update-rc.d useradd
+ DEPENDS = "virtual/libx11 libxtst libxinerama curl openssl"
+-do_unpack_extra[depends] = "unzip-native:do_populate_sysroot"
  
--PACKAGECONFIG ??= "ssl uuid"
-+PACKAGECONFIG ??= "ssl uuid \
-+                  ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
-+                  "
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- PACKAGECONFIG[dns-srv] = ",,c-ares"
- PACKAGECONFIG[ssl] = ",,openssl"
- PACKAGECONFIG[uuid] = ",,util-linux"
-+PACKAGECONFIG[systemd] = "WITH_SYSTEMD=yes,WITH_SYSTEMD=no,systemd"
+-SRC_URI = "git://github.com/symless/synergy.git;protocol=http"
++SRC_URI = "git://github.com/symless/synergy-core;protocol=https;nobranch=1"
  
- EXTRA_OEMAKE = " \
-     prefix=${prefix} \
-@@ -33,7 +36,6 @@ EXTRA_OEMAKE = " \
-     ${@bb.utils.contains('PACKAGECONFIG', 'dns-srv', 'WITH_SRV=yes', 'WITH_SRV=no', d)} \
-     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', 'WITH_TLS=yes WITH_TLS_PSK=yes', 'WITH_TLS=no WITH_TLS_PSK=no', d)} \
-     ${@bb.utils.contains('PACKAGECONFIG', 'uuid', 'WITH_UUID=yes', 'WITH_UUID=no', d)} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'WITH_SYSTEMD=yes', 'WITH_SYSTEMD=no', d)} \
-     STRIP=/bin/true \
-     WITH_DOCS=no \
- "
+-# Version 1.8.8-stable
+-SRCREV ?= "c30301e23424db1125664da17deb8c3aa6aec52d"
+-PV = "1.8.8+${SRCPV}"
++# Version 1.10.1-stable
++SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
++PV = "1.10.1+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake distro_features_check
+ 
+-do_unpack_extra() {
+-    cd ${S}/ext
+-    for file in *.zip; do
+-        fname="${file##*/}"
+-        unzip $file -d ${fname%.*}
+-    done
+-}
+-addtask unpack_extra after do_unpack before do_patch
+-
+-do_install() {
+-    install -d ${D}/usr/bin
+-    install -m 0755 ${S}/bin/synergy* ${D}/usr/bin/
+-}
++EXTRA_OECMAKE += "-DSYNERGY_BUILD_LEGACY_GUI=OFF"
++
++FILES_${PN} += "${datadir}/icons/hicolor"
 -- 
 2.18.0
 
