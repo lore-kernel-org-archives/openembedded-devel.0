@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id F3243796E2
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+	[209.85.210.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 30699796EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 17:22:23 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id x17-v6so5625489pfh.5
+	Thu,  6 Sep 2018 17:22:25 +0000 (UTC)
+Received: by mail-pf1-f173.google.com with SMTP id h79-v6so5606325pfk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 10:22:25 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=+BvYWPtwcXFUYk4XyoHyc2L0Pw8tvanPNsLPMSqzpts=;
-	b=H9XyILPBwT/8kyhvb+HDIuuPkLCHKxMAUOnPkAR/wc7YCOMkisFJmCgBqBmZK1F6Uu
-	zwGW7z2vmjheCTrXdHRgHbg1XTgKDX/QGOu9VBdgbaGrmNW9TjMMa+3CCpT2cm9Vi/cy
-	ZvIOCerxcyfVuZMWzEfvq/Z6xRuzoDT2bobcnwVSrZ0tpHRjdsoSRGR8P2p072WIlBGh
-	7GtUI73IRBRBV2Bjzb5+wxOvLd9y9MEgJg0ox16Y657tPK/1AaLerAR3JTgwHBzvaYwH
-	WsFOSkUg0gFG7iAdfuh7AuNKMgMpy6q6DfgICIjgF64fwnz5Ew1xcYwTaQA2y6+A2j3T
-	uV5A==
+	bh=IVJBc4LqZ0GRlqYuSwWKuFzoLMflHtrchhE8rhpzM1c=;
+	b=G6SjcoZjmEEug01zXDBZIreNaNhGifm8L625mSzZJ1VOtAvFSPFa6pV07Heo5Nc+eY
+	PuOciLnWVHCLYN2sWLESma7NF2QcEOSrRxDt/3lC1J0ydPxbt+XM7Y8Rl6toJOu8YkNo
+	6V0fqP8zlJvKEnn6Dw+5cv5xCB9Jrqs5tB/NoR8ZNKzZEk2bfEWrtpI473eM1YFj14UX
+	9ioXeonlsg/XRlXepc3EfaWsuefY9wjECr1RnLZTajAZhXoYLKVa3/wicFHC+Zh+H1VF
+	3I0p2VP9CQsuPzkd3isq3uTdV8IzwC+Jonxe8cTyoYD2hikHG3WRr/ilf8g3MG2F1xke
+	6dKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=+BvYWPtwcXFUYk4XyoHyc2L0Pw8tvanPNsLPMSqzpts=;
-	b=awO82sQ11jAZpZedJ35Xu7V36kgm3ZCIngytDjrwyS/MCl784CxOHCDf62j1z5TaP4
-	kbXJLtkpPoEzy4tL44/h+l3AqJ9jVXWrSwqRann2Fi6KOCSDEpz5Kc7BrjB1a+qf2xKz
-	+QfWjLn9hxFmHvxqmuPi9cYMyeHdj2yWwY2toxUxZbtyp8NoRscoTht0IglNbnAUmOML
-	ynnIUUCxFwlOLgoMYaPiLLTxOMv5Vu3Nq8+CPIThlY5TCOAV+4/yjaCnTa034BfVS7lf
-	DRq5E+1ftpe+Cc18o6tDBaxpBhSBf3qzVdM8SQh0ByGt1QJf0TS1VYdSVttG2TAh0FB6
-	zT/A==
-X-Gm-Message-State: APzg51DqV5yqDmeMnZEbuDIFjj2UVAExWuJ2BlqqtO7gWYykMOCcfPzU
-	jaRbtk1du6FiUnd4Za1m9IfIQYQ1
-X-Google-Smtp-Source: ANB0VdaEEWD/933hZCpCCqJCEK6CLi+aaY4ZmRFnVzt6R3Kg16oaD/h6cxZUlL/IqJl6TWm+6agYuA==
-X-Received: by 2002:a65:49cc:: with SMTP id
-	t12-v6mr3901213pgs.27.1536254544742; 
-	Thu, 06 Sep 2018 10:22:24 -0700 (PDT)
+	bh=IVJBc4LqZ0GRlqYuSwWKuFzoLMflHtrchhE8rhpzM1c=;
+	b=Lx5nO4G1EkU5ueRD6hNaezHJC6yFicIfqndH1LTEx2jniFo3YQiO3Tfnzq7cEocayw
+	+oMXXKG82iIEgfX6nWSLO8EFk2tJ7MQ4fV3nwoEMOF6wy96PKSF6Dsq0IL4GooPob0zQ
+	ENliYs8Ep6UbZzyba8wYdfnFcNldM8SNxpCLCqUoxoZ8OqGxWlIJYOyZUL9czvH1T1mC
+	1SomgKzbNKVuvFp+kXb6IN4SW8cDZZkG+Hh/wY4/8M3ewx3/x0Ft1PqwSQNUx90ixIq+
+	SyQJjf8uq1QT5kLkEAp5cJbW4Cd/lCm3EkyRBjaDHBbfeY0K88dW8Pr2Wchadpy3dGP5
+	+mwg==
+X-Gm-Message-State: APzg51DGj8E1YwNpjIfjI68yTNnNTsGuK7e0C5ZfqiCKxUmlw6KeV2RW
+	2S9WuyaIcHaYzh3Umt7sEgelZP9A
+X-Google-Smtp-Source: ANB0VdbkkGp/O56ivfCBT8682me93/W4krtEjtBLxxerv4lLWGam1b9oCP5Cggz0jRg7Ib18/N114w==
+X-Received: by 2002:a63:2a0b:: with SMTP id
+	q11-v6mr3817770pgq.36.1536254546019; 
+	Thu, 06 Sep 2018 10:22:26 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
 	by smtp.gmail.com with ESMTPSA id
-	22-v6sm8319828pfl.126.2018.09.06.10.22.22
+	22-v6sm8319828pfl.126.2018.09.06.10.22.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 10:22:23 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2018 10:21:58 -0700
-Message-Id: <20180906172210.42551-5-raj.khem@gmail.com>
+Date: Thu,  6 Sep 2018 10:21:59 -0700
+Message-Id: <20180906172210.42551-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180906172210.42551-1-raj.khem@gmail.com>
 References: <20180906172210.42551-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 05/17] uftp: Upgrade to 4.9.8
+Subject: [meta-oe][PATCH 06/17] pam-ssh-agent-auth: Depend on openssl10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +58,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 17:22:24 -0000
-
-Fixes build with OpenSSL 1.1.x
+X-List-Received-Date: Thu, 06 Sep 2018 17:22:25 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/uftp/{uftp_4.9.3.bb => uftp_4.9.8.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/uftp/{uftp_4.9.3.bb => uftp_4.9.8.bb} (73%)
+ meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/uftp/uftp_4.9.3.bb b/meta-networking/recipes-support/uftp/uftp_4.9.8.bb
-similarity index 73%
-rename from meta-networking/recipes-support/uftp/uftp_4.9.3.bb
-rename to meta-networking/recipes-support/uftp/uftp_4.9.8.bb
-index 1166f9a8db..0bbdd6b1d1 100644
---- a/meta-networking/recipes-support/uftp/uftp_4.9.3.bb
-+++ b/meta-networking/recipes-support/uftp/uftp_4.9.8.bb
-@@ -6,8 +6,8 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb b/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
+index 1638c41c88..2a461fc11a 100644
+--- a/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
++++ b/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
+@@ -11,7 +11,7 @@ SRC_URI = "http://sourceforge.net/projects/pamsshagentauth/files/pam_ssh_agent_a
+ SRC_URI[md5sum] = "8dbe90ab3625e545036333e6f51ccf1d"
+ SRC_URI[sha256sum] = "3c53d358d6eaed1b211239df017c27c6f9970995d14102ae67bae16d4f47a763"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
--SRC_URI[md5sum] = "231d6ba7820d89a712fe7d727ab0f8e6"
--SRC_URI[sha256sum] = "9e9215af0315257c6cc4f40fbc6161057e861be1fff10a38a5564f699e99c78f"
-+SRC_URI[md5sum] = "f7a5affd3000b5aafbb13df49719b6c0"
-+SRC_URI[sha256sum] = "e98c6318e497124d777ca71eae752d213207c35de9f782c8bcaaf82ece20e599"
+-DEPENDS += "libpam openssl"
++DEPENDS += "libpam openssl10"
  
- DEPENDS = "openssl"
- 
+ inherit distro_features_check
+ REQUIRED_DISTRO_FEATURES = "pam"
 -- 
 2.18.0
 
