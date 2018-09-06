@@ -1,46 +1,54 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E8FA079708
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 245B2795D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 17:38:03 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id g53-v6so13203178qtg.10
+	Thu,  6 Sep 2018 19:17:15 +0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id j81-v6so17038073ite.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 10:38:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=bjgWXbdk4cojDKm2EogU4Mt/sVqgcwcpzaHWYVmfr6g=;
-	b=DXlF7YQ2Cs20H6G4G6S/h9/zK9iBP+v5U8V8+akoNY5fRipHbeNmXmsEee8bgEzREv
-	uLcg+YpP1C/iI3lOSrXNYA3nHas5L3CZisqyTgxEJnPuPS4KwbmtYln7GbHvqXKvfDV4
-	A8jELp2Roc9APzuJLz903DNpthTFedoen2MxcZz8nUoWNIEzA90xCqlpDGeqpvO3afhL
-	bEVUThfkx4HN1CrhGxQlEI8F/LCF+p6hF+MF6a5JwzvqzEBHfyjymuChIwVqoB+/IDcL
-	Sq7meSLpOwQCw7Xr6Hee4VeEofplZCxOKUqefVYl6jBi0xQmQcFPlPb7yiI/kYpIVrZh
-	c+HA==
+	Thu, 06 Sep 2018 12:17:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=aV06JB6EwbrZh49f7xarhHNfop9PTI9O6a4T3AzcpWk=;
+	b=amQ0SswRvZSz41SZ9dvIB1ypv1HN2/hqi5EAW/cGiIs+8HtDys20n9OVH5EkPnV+8u
+	wJNJgLzAgCYQLq7H8UXwKwQffwj9YDrNm+7IBFR25EXfHUcGoz0wc+DEZp3oeykFc12E
+	+CBj3THc/cI14etd0epTSexF2wkUNOs0eyg3Od7CBwHxBYgUBl81qDdPAWIUUGcnSPPF
+	R3gk0Xw1pVI+J82jxQ6lnlcD4CZTKH18YrPwQAm8wR7iXEvUth420rdSQP0Ye5QSdn8x
+	vkOslexcFIBMhRNZqQr5ywAgIjzzQbLhIN7kGUk6z92jmwV2Y/XjXzaLWrxa/XpmIOJP
+	PGNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=bjgWXbdk4cojDKm2EogU4Mt/sVqgcwcpzaHWYVmfr6g=;
-	b=Oq7c799LgV0liE+B9spn3dWx0u8xEhwuHlb94gKp9FksG4wo7tBZDt3oN4RSP+1jN+
-	MRx4JJS1SoD8iZMCl3OVbhwnKVP3Ju30QwAQN6vy3wERRSFs+Gsh+FFDfVGh67hqxHqR
-	TVFKTv3GsF8BN1mKFv897YM4A4PMwaiTNPBuI60iaxPhtStzSd9VfYCwRh/6Hn7Fo7kl
-	K9H0EKK8t6btDpbbEg8QuEToNRJqMa91G+IEA1NBxmDXFDdQqMGxXCHzWlj43i59cHXd
-	jdMyw0I7V3ijPKBy6MDmPGWejsNxMbO1d0GkJv5iKWIYXMskGESC8GWv197C4ARWyIlB
-	/gBg==
-X-Gm-Message-State: APzg51C+jU2+MQAWTsusltmrNtwpjv1woex6fh355BhE9VG0MQx6XIbx
-	j8+CQz0cdn1bsg+kx6+t9mNX9Os1YefHDNF3TrI=
-X-Google-Smtp-Source: ANB0Vdbmte4Z9RGmX2LTLEVaGHXnjBzhbtm4+hvOdC8R9tLopJ01MSxWT0DEDW449pW/QD/62zKMBOv41FErPoXBOWc=
-X-Received: by 2002:ac8:6c8:: with SMTP id j8-v6mr3001214qth.314.1536255484666;
-	Thu, 06 Sep 2018 10:38:04 -0700 (PDT)
+	bh=aV06JB6EwbrZh49f7xarhHNfop9PTI9O6a4T3AzcpWk=;
+	b=bOiGjMySDprdQ2EPIjwX8eGb6skAIMSLUlSa7nAHd+IcligmgPMazTIoXNshMxd+gV
+	mzagTGW9SQrDZ9m73HKrOZphkMtQKUcy42E3ynfu7Iylxk7oTrVKPodWdApfoKBaAbiN
+	t4UpIwtzXwjtc9md+IOKvDB13mT5NH1+OgX+STqepU5MzERc3DGduYHmhY5BKuin0gPN
+	xlTdWJ8iqfThHGsJsZREOn9yCrahp+OuJf2HzKSTTLFJyf+Zb/tCv5JXIxu5NwHtqkBN
+	KCUIr1yW/IbqOok5BWJLG8USyTgVE0ME/iaN7ELdkjdcR3nAgBM/k4V3UvdvI7ZUeTud
+	z1Gg==
+X-Gm-Message-State: APzg51C57z1MJsgVueFo3ALh6xjxWVqsW/MLfb6/9tVbvXNNmp82RTjJ
+	czlYlLt8vbCcOtFqF3MFCrzLFDXU2SXOsEhvqb9G0g==
+X-Google-Smtp-Source: ANB0VdaE0VTJ/389sRZh71rE8Q+ww++Q2EKFB+eLOeiTMtCLPQTARdpgO+rmBXWclZM10kka2EU4K4xgri7cGj842iw=
+X-Received: by 2002:a6b:6401:: with SMTP id
+	t1-v6mr3366728iog.111.1536261436877; 
+	Thu, 06 Sep 2018 12:17:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180905181732.19483-1-alistair.francis@wdc.com>
-In-Reply-To: <20180905181732.19483-1-alistair.francis@wdc.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Sep 2018 10:37:38 -0700
-Message-ID: <CAMKF1soxcVsMSPwCCGJVt6471n-LKXHs+HE3wHBpcRy9jPLc5Q@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] pmdk: Initial commit of the PMDK SDK
+Received: by 2002:a6b:238d:0:0:0:0:0 with HTTP;
+	Thu, 6 Sep 2018 12:17:16 -0700 (PDT)
+In-Reply-To: <CAMKF1sqUR8-z3_2dq3_-Q-krPMxnzN2kx6Jx_EmEKzNcwc2sEQ@mail.gmail.com>
+References: <20180906123745.26192-1-brgl@bgdev.pl>
+	<CAMKF1soK0OxkEai1r0U-aZdE97u5HPoev7G7Ykes9m8BP9uSmQ@mail.gmail.com>
+	<CAMRc=MejwMEJS89gOmxNqbAd6AnSg28fY+urhLT6ofaQ1aC5cQ@mail.gmail.com>
+	<CAMKF1sqUR8-z3_2dq3_-Q-krPMxnzN2kx6Jx_EmEKzNcwc2sEQ@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Thu, 6 Sep 2018 21:17:16 +0200
+Message-ID: <CAMRc=Mepc6fZusBM=gW0PjUP5iCS6s78KoeVoTSTUk7JuDOAHA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] networkd-dispatcher: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,152 +61,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 17:38:04 -0000
+X-List-Received-Date: Thu, 06 Sep 2018 19:17:16 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-fails to build with security flags on see
-http://errors.yoctoproject.org/Errors/Details/191388/
-On Wed, Sep 5, 2018 at 11:27 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+2018-09-06 18:58 GMT+02:00 Khem Raj <raj.khem@gmail.com>:
+> On Thu, Sep 6, 2018 at 9:13 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>>
+>> 2018-09-06 17:31 GMT+02:00 Khem Raj <raj.khem@gmail.com>:
+>> > On Thu, Sep 6, 2018 at 5:38 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>> >>
+>> >> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>> >>
+>> >> This adds a recipe for networkd-dispatcher.
+>> >>
+>> >> It's a simple package containing a python script that needs to be
+>> >> installed together with a systemd service and an example config
+>> >> file. There's nothing to build.
+>> >>
+>> >> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>> >> ---
+>> >>  .../networkd-dispatcher_1.7.bb                | 30 +++++++++++++++++++
+>> >>  1 file changed, 30 insertions(+)
+>> >>  create mode 100644 meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
+>> >>
+>> >> diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
+>> >> new file mode 100644
+>> >> index 000000000..1887c4c7a
+>> >> --- /dev/null
+>> >> +++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
+>> >> @@ -0,0 +1,30 @@
+>> >> +SUMMARY = "Dispatcher service for systemd-networkd connection status changes"
+>> >> +DESCRIPTION = "This daemon is similar to NetworkManager-dispatcher, but is much \
+>> >> +more limited in the types of events it supports due to the limited nature of \
+>> >> +systemd-networkd(8)."
+>> >> +AUTHOR = "Clayton Craft and others"
+>> >> +
+>> >> +LICENSE = "GPLv3"
+>> >> +LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+>> >> +
+>> >> +RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
+>> >> +
+>> >> +SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher.git;protocol=https"
+>> >> +SRCREV = "c7e25623a161b64618ea778541c064d2a1df086b"
+>> >
+>> > perhaps define PV in terms of SRCPV
+>> >
+>> >> +
+>> >> +S = "${WORKDIR}/git"
+>> >> +
+>> >> +# Nothing to build, just a python script to install.
+>> >> +do_compile() {
+>> >> +}
+>> >
+>> > use deltask
+>> >
+>> >> +
+>> >> +do_install() {
+>> >> +    mkdir -p ${D}/${sbindir}
+>> >> +    install -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
+>> >
+>> > condense both into install -D -m 0755 ....
+>> >
+>> >> +    mkdir -p ${D}/${systemd_unitdir}/system
+>> >> +    install -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_unitdir}/system/networkd-dispatcher.service
+>> >> +    mkdir -p ${D}/${sysconfdir}/conf.d
+>> >> +    install -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
+>> >
+>> > this whole section should check for systemd being in DISTRO_FEATURES
+>> >
+>>
+>> It doesn't seem necessary - if systemd is not in DISTRO_FEATURES the
+>> following error is raised:
+>>
+>> ERROR: Nothing RPROVIDES 'systemd' (but
+>> /<snip!>/meta-openembedded/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher.bb
+>> RDEPENDS on or otherwise requires it)
+>> systemd was skipped: missing required distro feature 'systemd' (not in
+>> DISTRO_FEATURES)
+>>
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  ...c.cfg-Specify-the-host-when-building.patch | 29 +++++++++++
->  ...0002-Makefile-Don-t-install-the-docs.patch | 26 ++++++++++
->  meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb   | 49 +++++++++++++++++++
->  3 files changed, 104 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
->  create mode 100644 meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
->  create mode 100644 meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+> which is other concern, since we do support sysvinit, we need to have
+> both options functional if possible.
 >
-> diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> new file mode 100644
-> index 000000000..747538b0c
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> @@ -0,0 +1,29 @@
-> +From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
-> +From: Alistair Francis <alistair.francis@wdc.com>
-> +Date: Mon, 23 Jul 2018 11:23:39 -0700
-> +Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
-> + jemalloc
-> +
-> +To avoid this error:
-> +    configure: error: cannot run C compiled programs.
-> +    If you meant to cross compile, use `--host'.
-> +when cross compiling specify the host when configuring jemalloc.
-> +
-> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> +Upstream-Status: Inappropriate [configuration]
-> +---
-> + src/jemalloc/jemalloc.cfg | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
-> +index 196129de6..79ebbab1c 100644
-> +--- a/src/jemalloc/jemalloc.cfg
-> ++++ b/src/jemalloc/jemalloc.cfg
-> +@@ -3,3 +3,4 @@
-> + --with-private-namespace=je_vmem_
-> + --disable-xmalloc
-> + --disable-munmap
-> ++--host=${HOST_SYS}
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> new file mode 100644
-> index 000000000..bd1b97c24
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> @@ -0,0 +1,26 @@
-> +From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
-> +From: Alistair Francis <alistair.francis@wdc.com>
-> +Date: Mon, 23 Jul 2018 11:31:17 -0700
-> +Subject: [PATCH 2/2] Makefile: Don't install the docs
-> +
-> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> +Upstream-Status: Inappropriate [disable feature]
-> +---
-> + Makefile | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/Makefile b/Makefile
-> +index 224a315f6..ce7f84afb 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
-> +
-> + install uninstall:
-> +       $(MAKE) -C src $@
-> +-      $(MAKE) -C doc $@
-> +
-> + .PHONY: all clean clobber test check cstyle check-license install uninstall\
-> +       source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> new file mode 100644
-> index 000000000..90d51e3f8
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> @@ -0,0 +1,49 @@
-> +SUMMARY = "Persistent Memory Development Kit"
-> +DESCRIPTION = "Persistent Memory Development Kit"
-> +HOMEPAGE = "http://pmem.io"
-> +SECTION = "libs"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
-> +DEPENDS = "ndctl"
-> +
-> +SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
-> +           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
-> +           file://0002-Makefile-Don-t-install-the-docs.patch \
-> +          "
-> +
-> +SRC_URI[md5sum] = "d9a7b3f1059ffd54b4c92e38329fe69e"
-> +SRC_URI[sha256sum] = "e11cfbbdf0773fb5965211e18044531f442ad1e6d6726f1bac8a6dcc0e092622"
-> +
-> +inherit autotools-brokensep pkgconfig
-> +
-> +# Fix jemalloc error:
-> +# | configure: error: cannot run C compiled programs.
-> +# | If you meant to cross compile, use `--host'.
-> +EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}'"
-> +
-> +do_install() {
-> +       oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-> +
-> +       # Copy these into the standard directories
-> +       install -d ${D}${bindir}/
-> +       mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
-> +       mv ${D}/usr/local/bin/daxio ${D}${bindir}/
-> +
-> +       install -d ${D}${libdir}
-> +       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
-> +
-> +       install -d ${D}${libdir}/pkgconfig
-> +       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
-> +
-> +       install -d ${D}${includedir}
-> +       mv ${D}/usr/local/include/* ${D}${includedir}/
-> +
-> +       # Remove uneeded files
-> +       rm -rf ${D}/usr/local/
-> +}
-> +
-> +# Include these by default otherwise the SDK is not very useful
-> +FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
-> +FILES_${PN} += "${libdir}/*so*"
-> +FILES_${PN} += "${libdir}/pkgconfig/*.pc"
-> +FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+Why? This package doesn't make sense without networkd.
+
+Bart
+
+>> For other issues: I'll fix them all in v2 and resend tomorrow.
+>>
+>> Thanks!
+>> Bart
+>>
+>> >> +}
+>> >> +
+>> >> +FILES_${PN} += "${systemd_unitdir}/system/networkd-dispatcher.service"
+>> >
+>> > use systemd_system_unitdir
+>> >
+>> >> --
+>> >> 2.18.0
+>> >>
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
