@@ -1,48 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 754607949C
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+	[209.85.210.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E1C8D7971B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 21:16:16 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id s17-v6so5545620plp.7
+	Thu,  6 Sep 2018 21:16:17 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id i26-v6so5881391pfo.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 14:16:17 -0700 (PDT)
+	Thu, 06 Sep 2018 14:16:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=gL8OePuwXhvD2YZWhvI1vQvsSyi8diOJZ/fD3GfB2os=;
-	b=XLnuEYWsh53HWGN7GdIYqWkE5e7tooDUoRgE+QvPnNU4PsAJl1hfonhWEK3El9hOdx
-	jajtn3UrkOhl1GBuuJfjxN70W7W2wkDnjCYXIBq1WLNOmvtHDb2WBPg9AOyyhiL0T4J3
-	+JC6Rs0pJ0E1+KYtnj6k40e6kgakhQUID5G9iA7apjMKUWBBdUbNzoxRU2yQW1T4YHL6
-	qgJLRL6qNLtHLICoXM2ULncRNahmIH84kGWha6AEsmW7zxQlqlbqL7swDMQ6fgK0ZZ1A
-	DpC+yoMGmiJmutR2KprdX2JG3f5eNhTco76JuI8ckYMlEI8ibLvKTcQtGqTt10iqGFLQ
-	bkLg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Su3zyAmVBZLGTl6I4Lt6AhuMHozY/wN9QJNsuTzpZMw=;
+	b=gBF0Trb6tiXAtixmnAH/POAFHOl3YZWjV/STnUue+6XgbdZ5Qj8/Q+rjTt6hkBWmpk
+	WbqyWSJWO09jxEfxvpS8WdxY5qtGu0BP1JkgB5HDfH8OvdB4e/VRGcW8KOeAk8314LvM
+	f7/YNkJbwsv4P/1twDUMK7+MUjbKHyAE6Dhm+y0QF5qUWU5LwWJlVB/LgJAeZLt1SGXG
+	KgAihSYwUyiAR1uve2guRNDwd4XHqusDCF8BhTqqjudt+FiABYH8bugcL94AaX7oq0tZ
+	ZefLEpGcL4M1zuxrrun15/M8Ak1Vp6A6700I4Gaw3LPXvUskyiROfFa8SxmutQ4qutTy
+	om0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gL8OePuwXhvD2YZWhvI1vQvsSyi8diOJZ/fD3GfB2os=;
-	b=IR2kTxzgJcpz4RUviDvsUQq79G6r7gpT7Uoxrlf8bWGhp/6VJXMfellP4Z/dD/wE0p
-	hTWLXjjN/jQC6JbHIyIdwUW6Hc8ce2WafxTrBZl52XVi37YfDER2ON3RDbEctcu5Bnwj
-	ZoVBJoBqUtsgW3JwK7ahLt7qm4lxcrs41RqoCywFFB1f9Bl91NzbNtkqjdkzO0MI6vW1
-	xnN0UkdXUPLleaQ0xCSBG0e/J4JErxHrpvxfewfduKgaCvzrpzjDaIjhJLuDbkQtA2m1
-	4VsaoVwz3freyBFTnUYLRZJZd2RL2sIz5bwJY1oobwnI7t3Ho+qN6rcxGfbFHxx0Bmk6
-	YBkw==
-X-Gm-Message-State: APzg51BuaTdOT1Lt6NUNDr9yMReRgR8r/u68o+iCLbl3UABBrRnrNDHV
-	INtmxWQYOUX/dRgyqJAckwT6AnOa
-X-Google-Smtp-Source: ANB0VdZl0OJvqEL/+W79wqAnTaN0T7440SX0n3F74U8q8a4/IAfrFeZRHY2hAkpLhf88Pn3VLPly5g==
-X-Received: by 2002:a17:902:6ac5:: with SMTP id
-	i5-v6mr4772150plt.232.1536268576938; 
-	Thu, 06 Sep 2018 14:16:16 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=Su3zyAmVBZLGTl6I4Lt6AhuMHozY/wN9QJNsuTzpZMw=;
+	b=aS6vSXug7tt5PqKfDar0P2nVwzEMFnqyQpE8BH4dyUHRDDdvrktb/ziE8baSlPZPd8
+	Cigp4N05xl2mt7E0KrnSepTs358R0rtBEv1y0F1KSVUJBPMRWkVwc8Q3HCbvsFzC091Y
+	6bxgwFJcG4MMTpNKvi8GOL8ZBQuIYDLW3ZDe/Gq2Vv70vgI+hJxC17MvXZM237SQhmH9
+	HjGVdUxrBrhz2rnnN5ZyZ+pEF8VG5rw6INFEij7udqLG3kz1iyaZ7JXkNG5sLjtKJDut
+	Z9xUq7fxRaRE33KwRNJTClowu58ibQ80oHtEl3f2XNQx4KX8MEayZAUtSd1mcgsTxcrj
+	yPIw==
+X-Gm-Message-State: APzg51BI6PSUsAkxwdPEtY4td0GLNGHbUrsNeHGJetneNbV2TGosSQ6O
+	dsMzZ/Nv48lTS3oD3o4dhd1RFjIq
+X-Google-Smtp-Source: ANB0VdbZL8xvfRwBp83pMfqJYeD+Sm6lb3lFHvQj6Y1iSgN11fskk3jYJMWB8gvZUC7SHgjYruYIEQ==
+X-Received: by 2002:a62:3001:: with SMTP id w1-v6mr5046051pfw.19.1536268578494;
+	Thu, 06 Sep 2018 14:16:18 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
 	by smtp.gmail.com with ESMTPSA id
-	r18-v6sm7375776pgj.51.2018.09.06.14.16.15
+	r18-v6sm7375776pgj.51.2018.09.06.14.16.16
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 14:16:16 -0700 (PDT)
+	Thu, 06 Sep 2018 14:16:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2018 14:16:04 -0700
-Message-Id: <20180906211606.4910-1-raj.khem@gmail.com>
+Date: Thu,  6 Sep 2018 14:16:05 -0700
+Message-Id: <20180906211606.4910-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
-Subject: [meta-oe][PATCH 1/3] uftrace: Upgrade to 0.8.3
+In-Reply-To: <20180906211606.4910-1-raj.khem@gmail.com>
+References: <20180906211606.4910-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] rtorrent: Upgrade to 0.9.7 release point
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 21:16:16 -0000
-
-* Deliberately provide a non existing path to with_elfutils so it does
-  not copy libelf.so into its staged install and become a provider for
-  that library while elfutils should be the legit provider and this
-  package should just list it in its rdeps
+X-List-Received-Date: Thu, 06 Sep 2018 21:16:18 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../uftrace/{uftrace_0.8.bb => uftrace_0.8.3.bb}          | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/uftrace/{uftrace_0.8.bb => uftrace_0.8.3.bb} (76%)
+ meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-similarity index 76%
-rename from meta-oe/recipes-devtools/uftrace/uftrace_0.8.bb
-rename to meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-index 82b179521c..a489f4a5d5 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-@@ -10,15 +10,17 @@ DEPENDS_append_libc-musl = " argp-standalone"
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
+index c731cf7079..9bb81c4096 100644
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
++++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
+@@ -8,9 +8,10 @@ DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
+ SRC_URI = "git://github.com/rakshasa/rtorrent \
+     file://don-t-run-code-while-configuring-package.patch \
+ "
+-SRCREV = "226e670decf92e7adaa845a6982aca4f164ea740"
++# v0.9.7
++SRCREV = "327164f9d86aafcd2500a317d485374df32ea622"
  
- inherit autotools
+-PV = "0.9.6+git${SRCPV}"
++PV = "0.9.7+git${SRCPV}"
  
--SRCREV = "5af9ff9fa89c340617e52c8ed05798b352a7145c"
-+# v0.8.3
-+SRCREV = "8b723a6fae2ef30495cd6279774fba9c95cd9c88"
- SRC_URI = "git://github.com/namhyung/${BPN}"
  S = "${WORKDIR}/git"
  
- LDFLAGS_append_libc-musl = " -largp"
--EXTRA_OECONF = "ARCH=${TARGET_ARCH}"
-+EXTRA_UFTRACE_OECONF = "ARCH=${TARGET_ARCH} \
-+                        with_elfutils=/use/libelf/from/sysroot"
- 
- do_configure() {
--    ${S}/configure ${EXTRA_OECONF}
-+    ${S}/configure ${EXTRA_UFTRACE_OECONF}
- }
- 
- FILES_SOLIBSDEV = ""
 -- 
 2.18.0
 
