@@ -1,47 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 76A707969E
+Return-Path: <akuster808@gmail.com>
+Received: from mail-oi0-f47.google.com (mail-oi0-f47.google.com
+	[209.85.218.47])
+	by mail.openembedded.org (Postfix) with ESMTP id DD18D795F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 15:31:31 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id k38-v6so12697775qtk.11
+	Thu,  6 Sep 2018 15:32:51 +0000 (UTC)
+Received: by mail-oi0-f47.google.com with SMTP id c190-v6so21293825oig.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 08:31:32 -0700 (PDT)
+	Thu, 06 Sep 2018 08:32:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xYtKefMExnD6le51jVzDzSHjgRhlUWJlDUEQ3k5kvLM=;
-	b=Lis1B+ouHFE4KLHxLsaAxEapi8gSOdAUfNDZewy3uiRtg6Krx5MGbEwGxGizCKFIPy
-	XgNQjVjQYj20oHXXbj4bv9xg3jy1/SREmlsLd7LhtAsvf4BZoUz9Qqpzc5OFm7GKcpRA
-	Yku4oqboDoArcgV44xkpiimM0jDu8TdbcuWl/sL+f9d7t3b4rwHEtS62qOPLqvBtZCtZ
-	U4TaAjp3paoWeglvMi3ZVwdDOSWJ6wkO2oBySqwOtkvr2FCQwgroFi3cXnQYedYyZyo8
-	1mo9gi+8e7BsgnO3Ccvz1VovhTrPsQvdDq7vmUTgC4yCTi99pcDHMUHcXSuXTug3HNiG
-	5FUw==
+	h=message-id:from:date:subject:to;
+	bh=ObNzWj8TZbT++ZAwq0XB5AQLH7KkeGHBdFRstrGr+OY=;
+	b=I6EE8PFCoPW74rBZfwX6/bDWvRhRWwK3Z8hNPD3j35XretXUnDBqeyFhlY0bmqrzsF
+	0ITd/lAtRjFDLGNXs3DUJheksgQkB5r04wkiFkAnmjBEb3WgRciNl19feZLRcCM97Lpj
+	0zKeqB3R1J+FUDcZz83sJ4QILwsoeZAi1D+vVCXsHRsOAOPQIUbkgElxoZ/G2g0Epd/p
+	y5sxEEeExML6v3XB2hk+mOv0gCAEvWu0aHVkR34auf3wvqFHkq3CQnDmT9R5EPL2mE0o
+	hS8xjfncx7vJPkKH/8ud4YDGzR/ec4WB8Py52z4GucO4mjs6m6x09dL2oweNr2U4nOxD
+	7xpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=xYtKefMExnD6le51jVzDzSHjgRhlUWJlDUEQ3k5kvLM=;
-	b=fNH7iLGb55tO1hw1/Etzbi5/1tFjywkA3s4i4Zngli051ZkQN8lWhq9Ze9pJlNh7Qr
-	M1HaP6ukOuqxaZtLtJ77bMmfKvEIc/duKo2TX3OFGXe2I70BHNJ6vvZOxfb8FfOt0sGK
-	XUWyQUFTGHtVEeG3Wx8oycebSfm7dZFkuEF0edEprvskBxlRYg68g0DBbT4tSo486Ilo
-	ySncJlNLMXIvmUQd7td9XafjhyX2Pm4qS2ibA1ZYxUVMPIWrEgPqRb6e0G/Y5NPJlE0s
-	SALYzoKuSnGWz8cir/7HPjQaq6ttVE2Gjo3XKI4TXqjKvbmxT7GXxcL0l+pa60YA721o
-	rGzA==
-X-Gm-Message-State: APzg51Brs9mPA5oI3qhq+zMaDp0OhJqKriueDxhHv7WIrc7LjcUzwI+1
-	Jjmql4ykkApU4GZoemg6uXbR9KX74N3ROh2lRP8=
-X-Google-Smtp-Source: ANB0VdbVtxZiiknJEQA4bTD46n3Zb/zGgEUEls+D9gz+lA6kOWYO2bE04fcJfdV+H4Tww4B0W/RCPh5NzEUAqgYKrFc=
-X-Received: by 2002:ac8:6c8:: with SMTP id j8-v6mr2535554qth.314.1536247892071;
-	Thu, 06 Sep 2018 08:31:32 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180906123745.26192-1-brgl@bgdev.pl>
-In-Reply-To: <20180906123745.26192-1-brgl@bgdev.pl>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Sep 2018 08:31:05 -0700
-Message-ID: <CAMKF1soK0OxkEai1r0U-aZdE97u5HPoev7G7Ykes9m8BP9uSmQ@mail.gmail.com>
-To: brgl@bgdev.pl
-Cc: bgolaszewski@baylibre.com,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] networkd-dispatcher: new package
+	h=x-gm-message-state:message-id:from:date:subject:to;
+	bh=ObNzWj8TZbT++ZAwq0XB5AQLH7KkeGHBdFRstrGr+OY=;
+	b=bMPMFB4vzjrPRYY6OfJSC549v6rcx/IjMxd5wesvkwh7MoaFgpGJcmGmwrSrB9kNnA
+	5/Pf+uoFhr22gN4lrYuz0+47LMtBUV2SnsKZQpyb47A1Ay/HTa61AHKyvCYw178yKJcF
+	xCOdgojNWu+vJic9xZJTpIi8sMwzaAu4eft95zNVzd9hybVGUtf8IoIPNLbJMTSeOXXk
+	AhvXAJrPe9JHJ5bEnHYic2HQBcVzVU4JL9Iqd4DCQ0eZ4CFF556ITc28daqOJLAfMUt4
+	pxD/hfIl2Wd3fHbVYt+WNsAJ7DUypa32GfIr6oALGQ4+AuH24nxxYLflAVpPv1gCHuK3
+	IjOw==
+X-Gm-Message-State: APzg51D3cjhtXxgOKGP4Ia2Klwa3WYBxV/TbSGlbDx8vbmfADIqOFBU0
+	bKVKf9KZrvfnfTBTZhutrgUcHUpj
+X-Google-Smtp-Source: ANB0VdaXjnZI0UVpep1Yi/0wFTEDcxh5e6HNCpBygJBe0dlKiG60QJZbaZA7NSfU28XPEFunSttlEg==
+X-Received: by 2002:aca:2c02:: with SMTP id
+	s2-v6mr3594696ois.305.1536247972720; 
+	Thu, 06 Sep 2018 08:32:52 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s ([2601:202:4180:c33:a9a3:ce31:52a9:bd5c])
+	by smtp.gmail.com with ESMTPSA id
+	r187-v6sm3259393oie.43.2018.09.06.08.32.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Sep 2018 08:32:52 -0700 (PDT)
+Message-ID: <5b9148a4.1c69fb81.f91e6.f65f@mx.google.com>
+From: Armin Kuster <akuster808@gmail.com>
+X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
+Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
+	Thu, 06 Sep 2018 08:32:50 -0700
+Date: Thu, 06 Sep 2018 08:32:50 -0700
+To: <openembedded-devel@lists.openembedded.org>
+X-Mailer: mail (GNU Mailutils 2.99.99)
+Subject: Rocko merge request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,82 +59,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 15:31:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Sep 2018 15:32:52 -0000
 
-On Thu, Sep 6, 2018 at 5:38 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> This adds a recipe for networkd-dispatcher.
->
-> It's a simple package containing a python script that needs to be
-> installed together with a systemd service and an example config
-> file. There's nothing to build.
->
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->  .../networkd-dispatcher_1.7.bb                | 30 +++++++++++++++++++
->  1 file changed, 30 insertions(+)
->  create mode 100644 meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
->
-> diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
-> new file mode 100644
-> index 000000000..1887c4c7a
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY = "Dispatcher service for systemd-networkd connection status changes"
-> +DESCRIPTION = "This daemon is similar to NetworkManager-dispatcher, but is much \
-> +more limited in the types of events it supports due to the limited nature of \
-> +systemd-networkd(8)."
-> +AUTHOR = "Clayton Craft and others"
-> +
-> +LICENSE = "GPLv3"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
-> +
-> +RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
-> +
-> +SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher.git;protocol=https"
-> +SRCREV = "c7e25623a161b64618ea778541c064d2a1df086b"
+The following changes since commit 352531015014d1957d6444d114f4451e241c4d23:
 
-perhaps define PV in terms of SRCPV
+  protobuf: Fix fetcher failure for rocko. (2018-06-07 06:43:47 -0700)
 
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +# Nothing to build, just a python script to install.
-> +do_compile() {
-> +}
+are available in the git repository at:
 
-use deltask
+  git://git.openembedded.org/meta-openembedded rocko-next
 
-> +
-> +do_install() {
-> +    mkdir -p ${D}/${sbindir}
-> +    install -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
+for you to fetch changes up to eae996301d9c097bcbeb8046f08041dc82bb62f8:
 
-condense both into install -D -m 0755 ....
+  glm: update 0.9.8.5 -> 0.9.9-a2 to fix x86_64 (sse-simd) build (2018-09-05 08:48:59 -0700)
 
-> +    mkdir -p ${D}/${systemd_unitdir}/system
-> +    install -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_unitdir}/system/networkd-dispatcher.service
-> +    mkdir -p ${D}/${sysconfdir}/conf.d
-> +    install -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
+----------------------------------------------------------------
+Andreas Müller (1):
+      glm: update 0.9.8.5 -> 0.9.9-a2 to fix x86_64 (sse-simd) build
 
-this whole section should check for systemd being in DISTRO_FEATURES
+Armin Kuster (1):
+      wireshark: update to 2.2.16
 
-> +}
-> +
-> +FILES_${PN} += "${systemd_unitdir}/system/networkd-dispatcher.service"
+Jagadeesh Krishnanjanappa (3):
+      apache2: CVE-2018-1333
+      fuse: CVE-2018-10906
+      lftp: CVE-2018-10916
 
-use systemd_system_unitdir
+Khem Raj (1):
+      python-evdev: Use target header to generate ecodes.c
 
-> --
-> 2.18.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Martin Jansa (1):
+      rarpd, sblim-sfcb, openct: inherit systemd unconditionally
+
+ .../fuse/files/CVE-2018-10906-1.patch              | 52 ++++++++++++++
+ .../fuse/files/CVE-2018-10906-2.patch              | 48 +++++++++++++
+ .../recipes-support/fuse/fuse_2.9.7.bb             |  2 +
+ .../lftp/files/CVE-2018-10916.patch                | 82 ++++++++++++++++++++++
+ .../recipes-connectivity/lftp/lftp_4.7.7.bb        |  1 +
+ .../{wireshark_2.2.12.bb => wireshark_2.2.16.bb}   |  4 +-
+ meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb   |  8 +--
+ .../sblim-sfcb/sblim-sfcb_1.4.9.bb                 |  8 +--
+ .../glm/{glm_0.9.8.5.bb => glm_0.9.9-a2.bb}        |  6 +-
+ meta-oe/recipes-support/openct/openct_0.6.20.bb    |  8 +--
+ .../recipes-devtools/python/python-evdev_0.7.0.bb  |  7 ++
+ .../recipes-httpd/apache2/apache2-native_2.4.27.bb |  1 +
+ .../recipes-httpd/apache2/apache2_2.4.27.bb        |  1 +
+ .../apache2/files/CVE-2018-1333.patch              | 44 ++++++++++++
+ 14 files changed, 252 insertions(+), 20 deletions(-)
+ create mode 100644 meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-1.patch
+ create mode 100644 meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-2.patch
+ create mode 100644 meta-networking/recipes-connectivity/lftp/files/CVE-2018-10916.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.12.bb => wireshark_2.2.16.bb} (95%)
+ rename meta-oe/recipes-graphics/glm/{glm_0.9.8.5.bb => glm_0.9.9-a2.bb} (68%)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/files/CVE-2018-1333.patch
 
