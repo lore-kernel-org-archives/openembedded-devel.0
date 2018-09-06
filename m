@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
 	[209.85.210.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D24974E1A
+	by mail.openembedded.org (Postfix) with ESMTP id C664A74E1A
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  6 Sep 2018 17:22:20 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id d4-v6so5628300pfn.0
+Received: by mail-pf1-f175.google.com with SMTP id i26-v6so5604150pfo.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 10:22:21 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SfCYqa6v9g0XIO5IVianXHkLXCCkwftJxwG6v+iumBU=;
-	b=k+mvG3uRxRz3Hpl3F17REdIvkTkKYXTmOi21B4H6aj3UOppKolFkAM+BrQoNLDXjjR
-	9qkqTG9cHoePiaHzFgwRnobYMFwpL0ZcHpU74NPfXgt8eaZLo/bowRwNZAodLKr97YFa
-	KSQFpmGv2GSBdnyfdNl9lLVI2lzHAmXv5KVWeM8L40I5IKml7n4MIRySW2hu6ZFC/4BH
-	vGx3KiiGtQd34OkZu2GXRvJxd5F56mi+34ceX8/Lk73DbarooFm1XoX8GhdNc2qF6TW5
-	8rqTPVRTsLu6TBQmhyi5X8njB4YH4hFyX9psm5v9exXpsbxIBJc8qUXcPQ3Wli5H5Mdr
-	8GWw==
+	bh=P8uGpRjG9Q36AoXoZEwOrSS7ObndshZ5DD/souwCtMk=;
+	b=cpCKaiteQ+CAxu2e44kCCWVrzkiCdcoeH1j7FXOMHX40krUXX/J4M179LmpBAT26Vo
+	JftUv8XUtimxtzJtqYxTnfL5zTWtCU4KgZiUHCWQXQBNTaEYez9G6RvUZMmq2GDRsz6v
+	TN9CyGDGU9s26cKCwblAv4uYSHsi/0nARhUd4BDvQf/NVnHbGprVpY9AAqEq3JnbB1On
+	1Bzyv8I0/nrhMOheAdfcHisBSdDwCzLiuAqvFkLP8yup/N8ivTszuNUnPykJgyTqJ1+o
+	RDQtULZlzaVVkSRqbftaYlFBMEoq8Fc0yat1L81chZSlHGe7v5BYNg5qvfXwuTf2CeWZ
+	d4SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=SfCYqa6v9g0XIO5IVianXHkLXCCkwftJxwG6v+iumBU=;
-	b=Cat9zolh2ihOFO905ZGK1Cc1OmCjah7bqz0xlU8GSD39EpWtS8MnJkeDCh5jIe4eAJ
-	7xFtR9pIs7HIiWE+8bkcoh861ZXBPOsH7ND7GMhmdNRrL1pWY9TjJaK4kyuvM+Yrzky7
-	3z0u9FbDVw6zaRy61KWOPHvqGpTffvw0o7QTrOgwT18MXe3eUwASV6p9Z3GuuZXfEFSW
-	YCiSHT7nVG9/z3ZzCDow+aPXeD+fMrKWhg+HtYL5vANYQ2aaEuINZFp/OaMHue//wBoh
-	SLJx+2QD+vq7Erx+Gijjn1QkfrS9RAejJKsZpX4ZpqJ/CXVbH+od8gSQWzCrdwBMIold
-	9Qjg==
-X-Gm-Message-State: APzg51AzjF1XGrW2pvlglPvtIq7muZSx049cJYVN12enKulvKsOszn/S
-	G3785gpNLvZeqMw1l0apkEu8dmWx
-X-Google-Smtp-Source: ANB0VdbQgrLvJ/3hcheonqfpKA0owg7nwuRWscr4RSusgMp/gnwu2vC1GYsJ8oRm45x+Sle1QDqgfw==
-X-Received: by 2002:a63:5815:: with SMTP id
-	m21-v6mr3895828pgb.78.1536254540760; 
-	Thu, 06 Sep 2018 10:22:20 -0700 (PDT)
+	bh=P8uGpRjG9Q36AoXoZEwOrSS7ObndshZ5DD/souwCtMk=;
+	b=SE70+Inld5gKrNdJ2XT7wpvCVYO5I2Muvu6V/rE5+WkHFeWVYYwDGYTcoLLM9C/pMk
+	RyTpXhuFhjGQSVg+7fhdlHM8OiyB1oQw0UJW7aHyRI+zj/bPdNdnMw3s1jY7OFXA20Kj
+	q3LCCbAl5Vg52ohR2i55T4i9R5pfFzBrRz1+F2DH0HDT8yDLzXeoVcS7tzz0X3IP4ELN
+	Kedd5YhVXR3ZFbr57Vaz0taoBCIXebk1zkNEQTD60+inCvpPdYUvCcBNAtlpDcKsMZ/Y
+	ysdnlFKPr/BhwyEHyXGUTK4+qY7TGCfQ3VpL/30+MdKGAgvsXvfR8sygzipCgcJJ9J6r
+	JXWg==
+X-Gm-Message-State: APzg51AXZS6q9TSgcos7lqZWuvS2FZwpqxRGPS5C3XZP+VUZoxBnaStI
+	UpOXoodmVQ9nYRlzfO2qmyNw+pgz
+X-Google-Smtp-Source: ANB0VdZGfQ2/hAaMLO4KG15wkRuvuEn3bR/D7Ix/yaP3LKRcNh1r2qjmUAEVU8nyEH8fzj+Peolk8w==
+X-Received: by 2002:a63:4663:: with SMTP id
+	v35-v6mr3910146pgk.178.1536254541613; 
+	Thu, 06 Sep 2018 10:22:21 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
 	by smtp.gmail.com with ESMTPSA id
-	22-v6sm8319828pfl.126.2018.09.06.10.22.19
+	22-v6sm8319828pfl.126.2018.09.06.10.22.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 10:22:20 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:21 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2018 10:21:55 -0700
-Message-Id: <20180906172210.42551-2-raj.khem@gmail.com>
+Date: Thu,  6 Sep 2018 10:21:56 -0700
+Message-Id: <20180906172210.42551-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180906172210.42551-1-raj.khem@gmail.com>
 References: <20180906172210.42551-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 02/17] links,links-x11: Upgrade to 2.16
+Subject: [meta-oe][PATCH 03/17] boinc: Upgrade to 7.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,181 +60,175 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 06 Sep 2018 17:22:20 -0000
 
-* Fixes build with OpenSSL 1.1.x
-
-License-Update: Corrected formatting
+* Fixes build wth OpenSSL 1.1.x
+* Drop cross compile patch, not needed anymore
+* Package systemd support
+* Drop no-pie flags, works ok with PIE now
+* autotools-brokensep is no longer needed
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../links/files/ac-prog-cxx.patch             | 24 ++++++---
- .../recipes-support/links/links-x11_2.16.bb   | 53 +++++++++++++++++++
- .../recipes-support/links/links-x11_2.7.bb    | 31 -----------
- meta-oe/recipes-support/links/links.inc       |  2 +-
- .../links/{links_2.7.bb => links_2.16.bb}     |  6 ++-
- 5 files changed, 75 insertions(+), 41 deletions(-)
- create mode 100644 meta-oe/recipes-support/links/links-x11_2.16.bb
- delete mode 100644 meta-oe/recipes-support/links/links-x11_2.7.bb
- rename meta-oe/recipes-support/links/{links_2.7.bb => links_2.16.bb} (53%)
+ .../boinc/boinc-client/cross-compile.patch    | 98 -------------------
+ ...-client_7.6.33.bb => boinc-client_7.12.bb} | 24 +++--
+ 2 files changed, 16 insertions(+), 106 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
+ rename meta-oe/recipes-extended/boinc/{boinc-client_7.6.33.bb => boinc-client_7.12.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/links/files/ac-prog-cxx.patch b/meta-oe/recipes-support/links/files/ac-prog-cxx.patch
-index 41c3826850..2dc57a5c83 100644
---- a/meta-oe/recipes-support/links/files/ac-prog-cxx.patch
-+++ b/meta-oe/recipes-support/links/files/ac-prog-cxx.patch
-@@ -1,11 +1,21 @@
----- links-2.1pre20/configure.in.orig	2005-12-21 15:23:49.000000000 +0000
--+++ links-2.1pre20/configure.in	2005-12-21 15:23:59.000000000 +0000
--@@ -18,7 +18,7 @@
-+From c00668541f68c17a5e453a4dcc2a86022b20af87 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Mon, 30 Jul 2012 23:52:49 +0200
-+
-+---
-+ configure.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 7c15b6b..9896631 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -23,7 +23,7 @@ AM_CONFIG_HEADER(config.h)
-  dnl Checks for programs.
-  AC_PROG_CC
-  
---#AC_PROG_CXX
-+-dnl AC_PROG_CXX
- +AC_PROG_CXX
-- #AC_PROG_AWK
-- #AM_PROG_LEX
-- #AC_PROG_YACC
-+ dnl AC_PROG_AWK
-+ dnl AM_PROG_LEX
-+ dnl AC_PROG_YACC
-diff --git a/meta-oe/recipes-support/links/links-x11_2.16.bb b/meta-oe/recipes-support/links/links-x11_2.16.bb
-new file mode 100644
-index 0000000000..f55a6fc7b3
---- /dev/null
-+++ b/meta-oe/recipes-support/links/links-x11_2.16.bb
-@@ -0,0 +1,53 @@
-+# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
-+# The following is the difference between the old and the new license text.
-+# Please update the LICENSE value if needed, and summarize the changes in
-+# the commit message via 'License-Update:' tag.
-+# (example: 'License-Update: copyright years updated.')
-+#
-+# The changes:
-+#
-+# --- COPYING
-+# +++ COPYING
-+# @@ -293,7 +293,7 @@
-+#      <one line to give the program's name and a brief idea of what it does.>
-+#      Copyright (C) <year>  <name of author>
-+#  
-+# -    on, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USAThis program is free software; you can redistribute it and/or modify
-+# +    This program is free software; you can redistribute it and/or modify
-+#      it under the terms of the GNU General Public License as published by
-+#      the Free Software Foundation; either version 2 of the License, or
-+#      (at your option) any later version.
-+# 
-+#
-+
-+require links.inc
-+
-+DEPENDS += "virtual/libx11"
-+RCONFLICTS_${PN} = "links"
-+
-+inherit distro_features_check
-+# depends on virtual/libx11
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+SRC_URI += " file://links2.desktop \
-+             http://www.xora.org.uk/oe/links2.png;name=icon"
-+
-+S = "${WORKDIR}/links-${PV}"
-+
-+EXTRA_OECONF = "--enable-graphics \
-+                --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
-+                --without-libtiff --without-svgalib --without-fb \
-+                --without-directfb --without-pmshell --without-atheos \
-+                --with-x --without-gpm"
-+
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch b/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
+deleted file mode 100644
+index 287391a522..0000000000
+--- a/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
++++ /dev/null
+@@ -1,98 +0,0 @@
+-Remove rpath, its bad for cross compiling to encode
+-build time rpaths
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Pending
+-
+-Index: boinc-client_release-7.6-7.6.33/api/Makefile.am
+-===================================================================
+---- boinc-client_release-7.6-7.6.33.orig/api/Makefile.am
+-+++ boinc-client_release-7.6-7.6.33/api/Makefile.am
+-@@ -43,18 +43,18 @@ endif
+- 
+- lib_LTLIBRARIES = libboinc_api.la
+- libboinc_api_la_SOURCES = $(api_files)
+--libboinc_api_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
+-+libboinc_api_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
+- 
+- if BUILD_GRAPHICS_API
+- lib_LTLIBRARIES += libboinc_graphics2.la
+- libboinc_graphics2_la_SOURCES = $(graphics2_files)
+- libboinc_graphics2_la_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/lib -I$(top_srcdir)/samples/image_libs
+--libboinc_graphics2_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION) -ljpeg
+-+libboinc_graphics2_la_LDFLAGS = -version-number $(LIBBOINC_VERSION) -ljpeg
+- endif #BUILD_GRAPHICS_API
+- 
+- lib_LTLIBRARIES += libboinc_opencl.la
+- libboinc_opencl_la_SOURCES = $(opencl_files)
+--libboinc_opencl_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
+-+libboinc_opencl_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
+- 
+- if INSTALL_HEADERS
+- ## install only headers that are meant for exporting the API !!
+-Index: boinc-client_release-7.6-7.6.33/lib/Makefile.am
+-===================================================================
+---- boinc-client_release-7.6-7.6.33.orig/lib/Makefile.am
+-+++ boinc-client_release-7.6-7.6.33/lib/Makefile.am
+-@@ -173,7 +173,7 @@ lib_LTLIBRARIES = libboinc.la
+- libboinc_la_SOURCES = $(generic_sources) $(mac_sources) $(win_sources)
+- libboinc_la_CFLAGS = $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
+- libboinc_la_CXXFLAGS = $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
+--libboinc_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -static -version-number $(LIBBOINC_VERSION)
+-+libboinc_la_LDFLAGS = -static -version-number $(LIBBOINC_VERSION)
+- libboinc_la_LIBADD =
+- 
+- if ENABLE_BOINCCRYPT
+-@@ -181,7 +181,7 @@ lib_LTLIBRARIES += libboinc_crypt.la
+- libboinc_crypt_la_SOURCES = crypt.cpp
+- libboinc_crypt_la_CFLAGS = $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS) $(SSL_CFLAGS)
+- libboinc_crypt_la_CXXFLAGS = $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS) $(SSL_CXXFLAGS)
+--libboinc_crypt_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -static -version-number $(LIBBOINC_VERSION)
+-+libboinc_crypt_la_LDFLAGS = -static -version-number $(LIBBOINC_VERSION)
+- libboinc_crypt_la_LIBADD =
+- endif
+- 
+-@@ -190,7 +190,7 @@ lib_LTLIBRARIES += libboinc_fcgi.la
+- libboinc_fcgi_la_SOURCES = $(libfcgi_sources) $(mac_sources) $(win_sources)
+- libboinc_fcgi_la_CFLAGS = -D_USING_FCGI_ $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
+- libboinc_fcgi_la_CXXFLAGS = -D_USING_FCGI_ $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
+--libboinc_fcgi_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
+-+libboinc_fcgi_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
+- libboinc_fcgi_la_LIBADD =
+- endif 
+- # end of "if ENABLE_FCGI"
+-Index: boinc-client_release-7.6-7.6.33/sched/Makefile.am
+-===================================================================
+---- boinc-client_release-7.6-7.6.33.orig/sched/Makefile.am
+-+++ boinc-client_release-7.6-7.6.33/sched/Makefile.am
+-@@ -26,7 +26,7 @@ lib_LTLIBRARIES = libsched.la
+- libsched_la_SOURCES = $(libsched_sources)
+- libsched_la_CFLAGS = $(AM_CPPFLAGS)
+- libsched_la_CXXFLAGS = $(AM_CPPFLAGS)
+--libsched_la_LDFLAGS= -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
+-+libsched_la_LDFLAGS= -version-number $(LIBBOINC_VERSION)
+- libsched_la_LIBADD= $(SSL_LIBS)
+- 
+- ## install only headers that are meant for exporting the API !!
+-@@ -48,7 +48,7 @@ lib_LTLIBRARIES += libsched_fcgi.la
+- libsched_fcgi_la_SOURCES = $(libsched_sources)
+- libsched_fcgi_la_CFLAGS = -D_USING_FCGI_ $(AM_CPPFLAGS)
+- libsched_fcgi_la_CXXFLAGS = -D_USING_FCGI_ $(AM_CPPFLAGS)
+--libsched_fcgi_la_LDFLAGS= -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
+-+libsched_fcgi_la_LDFLAGS= -version-number $(LIBBOINC_VERSION)
+- libsched_fcgi_la_LIBADD=
+- 
+- endif
+-Index: boinc-client_release-7.6-7.6.33/zip/Makefile.am
+-===================================================================
+---- boinc-client_release-7.6-7.6.33.orig/zip/Makefile.am
+-+++ boinc-client_release-7.6-7.6.33/zip/Makefile.am
+-@@ -61,7 +61,7 @@ endif
+- 
+- lib_LTLIBRARIES = libboinc_zip.la
+- libboinc_zip_la_SOURCES = $(libboinc_zip_sources)
+--libboinc_zip_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
+-+libboinc_zip_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
+- libboinc_zip_la_LIBADD =
+- 
+- # Some OSs may not prefix libraries with lib.
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.12.bb
+similarity index 82%
+rename from meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
+rename to meta-oe/recipes-extended/boinc/boinc-client_7.12.bb
+index 99b43fa3f8..e505bb4c5f 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
++++ b/meta-oe/recipes-extended/boinc/boinc-client_7.12.bb
+@@ -29,21 +29,19 @@ DEPENDS = "curl \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
+            nettle \
+ "
+-
+-SRC_URI = "https://github.com/BOINC/boinc/archive/client_release/7.6/${PV}.tar.gz \
++SRCREV = "bd12338dbd29083daa5a4b022592ca31ff68cd98"
++BRANCH = "client_release/7/${PV}"
++SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
+            file://boinc-AM_CONDITIONAL.patch \
+            file://opengl_m4_check.patch \
+-           file://cross-compile.patch \
+            file://gtk-configure.patch \
+ "
+-SRC_URI[md5sum] = "437b4b98e384b4bda4ef7056e68166ac"
+-SRC_URI[sha256sum] = "c4b1c29b9655013e0ac61dddf47ad7f30f38c46159f02a9d9dc8ab854e99aa6d"
+ 
+-inherit gettext autotools-brokensep pkgconfig distro_features_check
++inherit gettext autotools pkgconfig distro_features_check systemd
+ 
+ REQUIRED_DISTRO_FEATURES += "opengl"
+ 
+-S = "${WORKDIR}/${BPN}_release-7.6-${PV}"
++S = "${WORKDIR}/git"
+ 
+ EXTRA_OECONF += "\
+     --enable-libraries \
+@@ -75,5 +73,15 @@ do_compile_prepend () {
+ 	sed -i -e 's|^sys_lib_dlsearch_path_spec=.*|sys_lib_dlsearch_path_spec=""|g' ${B}/${TARGET_SYS}-libtool
+ 	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/${TARGET_SYS}-libtool
+ }
 +do_install_append() {
-+    install -d ${D}/${datadir}/applications
-+    install -m 0644 ${WORKDIR}/links2.desktop ${D}/${datadir}/applications
-+    install -d ${D}/${datadir}/pixmaps
-+    install -m 0644 ${WORKDIR}/links2.png ${D}/${datadir}/pixmaps
++	if [ -e ${D}${libdir}/systemd/system/boinc-client.service ]; then
++		install -D -m 0644 \
++		${D}${libdir}/systemd/system/boinc-client.service \
++		${D}${systemd_system_unitdir}/boinc-client.service
++		rm -rf ${D}${libdir}/systemd
++	fi
 +}
 +
-+SRC_URI[md5sum] = "645fb0c0294e4c3268f94d307d394ffb"
-+SRC_URI[sha256sum] = "82f03038d5e050a65681b9888762af41c40fd42dec7e59a8d630bfb0ee134a3f"
-+SRC_URI[icon.md5sum] = "477e8787927c634614bac01b44355a33"
-+SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
-diff --git a/meta-oe/recipes-support/links/links-x11_2.7.bb b/meta-oe/recipes-support/links/links-x11_2.7.bb
-deleted file mode 100644
-index 2ae11ac97e..0000000000
---- a/meta-oe/recipes-support/links/links-x11_2.7.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--require links.inc
--
--DEPENDS += "virtual/libx11"
--RCONFLICTS_${PN} = "links"
--
--inherit distro_features_check
--# depends on virtual/libx11
--REQUIRED_DISTRO_FEATURES = "x11"
--
--SRC_URI += " file://links2.desktop \
--             http://www.xora.org.uk/oe/links2.png;name=icon"
--
--S = "${WORKDIR}/links-${PV}"
--
--EXTRA_OECONF = "--enable-graphics \
--                --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
--                --without-libtiff --without-svgalib --without-fb \
--                --without-directfb --without-pmshell --without-atheos \
--                --with-x --without-gpm"
--
--do_install_append() {
--    install -d ${D}/${datadir}/applications
--    install -m 0644 ${WORKDIR}/links2.desktop ${D}/${datadir}/applications
--    install -d ${D}/${datadir}/pixmaps
--    install -m 0644 ${WORKDIR}/links2.png ${D}/${datadir}/pixmaps
--}
--
--SRC_URI[md5sum] = "d06aa6e14b2172d73188871a5357185a"
--SRC_URI[sha256sum] = "0c182b1cbcdfd5cdcd2f75a6032d1a4b660d07c1225c1e07757cec81d3302130"
--SRC_URI[icon.md5sum] = "477e8787927c634614bac01b44355a33"
--SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
-diff --git a/meta-oe/recipes-support/links/links.inc b/meta-oe/recipes-support/links/links.inc
-index e072408206..d6aa2d2d4e 100644
---- a/meta-oe/recipes-support/links/links.inc
-+++ b/meta-oe/recipes-support/links/links.inc
-@@ -3,7 +3,7 @@ browser, similar to Lynx."
- HOMEPAGE = "http://links.twibright.com/"
- SECTION = "console/network"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=65e735be2e05d5943803344148f57603"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b0c80473f97008e42e29a9f80fcc55ff"
- DEPENDS = "jpeg libpng flex openssl zlib"
++SYSTEMD_SERVICE_${PN} = "boinc-client.service"
  
- SRC_URI = "http://links.twibright.com/download/links-${PV}.tar.bz2 \
-diff --git a/meta-oe/recipes-support/links/links_2.7.bb b/meta-oe/recipes-support/links/links_2.16.bb
-similarity index 53%
-rename from meta-oe/recipes-support/links/links_2.7.bb
-rename to meta-oe/recipes-support/links/links_2.16.bb
-index e80dd7bca3..19ea7a67ba 100644
---- a/meta-oe/recipes-support/links/links_2.7.bb
-+++ b/meta-oe/recipes-support/links/links_2.16.bb
-@@ -9,5 +9,7 @@ EXTRA_OECONF = "--enable-graphics \
-                 --without-directfb --without-pmshell --without-atheos \
-                 --without-x"
- 
--SRC_URI[md5sum] = "d06aa6e14b2172d73188871a5357185a"
--SRC_URI[sha256sum] = "0c182b1cbcdfd5cdcd2f75a6032d1a4b660d07c1225c1e07757cec81d3302130"
-+SRC_URI[md5sum] = "645fb0c0294e4c3268f94d307d394ffb"
-+SRC_URI[sha256sum] = "82f03038d5e050a65681b9888762af41c40fd42dec7e59a8d630bfb0ee134a3f"
-+SRC_URI[icon.md5sum] = "477e8787927c634614bac01b44355a33"
-+SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
+-SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
++FILES_${PN} += "${libdir}/systemd"
 -- 
 2.18.0
 
