@@ -1,52 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-oi0-f43.google.com (mail-oi0-f43.google.com
-	[209.85.218.43])
-	by mail.openembedded.org (Postfix) with ESMTP id E9D97602D9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 76A707969E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 15:26:05 +0000 (UTC)
-Received: by mail-oi0-f43.google.com with SMTP id p84-v6so21289555oic.4
+	Thu,  6 Sep 2018 15:31:31 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id k38-v6so12697775qtk.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 08:26:07 -0700 (PDT)
+	Thu, 06 Sep 2018 08:31:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:from:date:subject:to;
-	bh=6jYWJvj2dx4x4ue2nj5ey67NUGJHw9Ui88/BNtPd8LI=;
-	b=eJV6A7p3aLmttFeHPqgcLVvCZqLzf4GzoDyjN48orA1fk+zY7s/KeKmoYJ8KAdPuaF
-	G6WTFB7P49ly2S8Vsgg5cIm6YirB0rW8Vcwkb8JE7FeWT2ggkt63j/SeDBgoiqoQyShU
-	9e2KgCgYshXTjGq8ibLvclQonXxZyC/rSNT9VFS2Io56N3T7DjWlOa1sz7OlgH1g+pg1
-	RjIHQmsUcGGZYAxdgM1vmX3S1mpSDilMpn3M79ByTGfLBUiiZ8gPW4qqNqZgdpwm2Zem
-	odRX2kS3rOIYA15EvPSuaiVkFVPnmGjImLXwK3PQzsKQ3CvE2kPhez+ZIu+Mz8ily0pM
-	z6Zw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=xYtKefMExnD6le51jVzDzSHjgRhlUWJlDUEQ3k5kvLM=;
+	b=Lis1B+ouHFE4KLHxLsaAxEapi8gSOdAUfNDZewy3uiRtg6Krx5MGbEwGxGizCKFIPy
+	XgNQjVjQYj20oHXXbj4bv9xg3jy1/SREmlsLd7LhtAsvf4BZoUz9Qqpzc5OFm7GKcpRA
+	Yku4oqboDoArcgV44xkpiimM0jDu8TdbcuWl/sL+f9d7t3b4rwHEtS62qOPLqvBtZCtZ
+	U4TaAjp3paoWeglvMi3ZVwdDOSWJ6wkO2oBySqwOtkvr2FCQwgroFi3cXnQYedYyZyo8
+	1mo9gi+8e7BsgnO3Ccvz1VovhTrPsQvdDq7vmUTgC4yCTi99pcDHMUHcXSuXTug3HNiG
+	5FUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:from:date:subject:to;
-	bh=6jYWJvj2dx4x4ue2nj5ey67NUGJHw9Ui88/BNtPd8LI=;
-	b=NghEgpeGcpZQZ+HoMcpjQXRj0D5XwZ4Ete1uYcVPEDsMzwbvu6GAgfVZbxScU4xPs4
-	NAiGMdPmRDjab4QnVYyU73X+46agNrIKqd30yri0oXrwgYZJaAPW9h349jtwM597AY6h
-	Wqjm30JQOANvS3vc66o0oyA8u+kXMmjW8YhfDeaJvJiRcRvbToeCila8AzvslI4kGT8e
-	hvrvSvJTX9rgL9e+jcxuU3u58LhoRcASxDe01arH8tqOVitFyYqt66Wd/xKCXLZiNH3a
-	vyj+oCrhM/k7gY7RU0NHD3SyQF9uicRHsp5qqLdUuBrJyxpdkisabFc01gSkbgpujp6w
-	3cIQ==
-X-Gm-Message-State: APzg51BHuN3X1549JNjfMr/F6gpBNsUCeS1G/n8fToNk6shSXGDZ6JZJ
-	d86rwhA7uZD/wIsQaffTeUy8p4wd
-X-Google-Smtp-Source: ANB0VdbU3vmlWOpPteVdAJxRYdusw/eEZqEKdmIvp6WLwWG+zQzNDsvceoJNDQd9iSm8TtOkJ7Qk+w==
-X-Received: by 2002:aca:190d:: with SMTP id
-	l13-v6mr3500929oii.216.1536247566800; 
-	Thu, 06 Sep 2018 08:26:06 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s ([2601:202:4180:c33:a9a3:ce31:52a9:bd5c])
-	by smtp.gmail.com with ESMTPSA id
-	d5-v6sm2868033oia.57.2018.09.06.08.26.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 08:26:06 -0700 (PDT)
-Message-ID: <5b91470e.1c69fb81.7c4ca.db46@mx.google.com>
-From: Armin Kuster <akuster808@gmail.com>
-X-Google-Original-From: "Armin Kuster" <akuster@akuster-ThinkPad-T460s>
-Received: by akuster-ThinkPad-T460s (sSMTP sendmail emulation);
-	Thu, 06 Sep 2018 08:26:04 -0700
-Date: Thu, 06 Sep 2018 08:26:04 -0700
-To: <openembedded-devel@lists.openembedded.org>
-X-Mailer: mail (GNU Mailutils 2.99.99)
-Subject: Sumo merge request
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=xYtKefMExnD6le51jVzDzSHjgRhlUWJlDUEQ3k5kvLM=;
+	b=fNH7iLGb55tO1hw1/Etzbi5/1tFjywkA3s4i4Zngli051ZkQN8lWhq9Ze9pJlNh7Qr
+	M1HaP6ukOuqxaZtLtJ77bMmfKvEIc/duKo2TX3OFGXe2I70BHNJ6vvZOxfb8FfOt0sGK
+	XUWyQUFTGHtVEeG3Wx8oycebSfm7dZFkuEF0edEprvskBxlRYg68g0DBbT4tSo486Ilo
+	ySncJlNLMXIvmUQd7td9XafjhyX2Pm4qS2ibA1ZYxUVMPIWrEgPqRb6e0G/Y5NPJlE0s
+	SALYzoKuSnGWz8cir/7HPjQaq6ttVE2Gjo3XKI4TXqjKvbmxT7GXxcL0l+pa60YA721o
+	rGzA==
+X-Gm-Message-State: APzg51Brs9mPA5oI3qhq+zMaDp0OhJqKriueDxhHv7WIrc7LjcUzwI+1
+	Jjmql4ykkApU4GZoemg6uXbR9KX74N3ROh2lRP8=
+X-Google-Smtp-Source: ANB0VdbVtxZiiknJEQA4bTD46n3Zb/zGgEUEls+D9gz+lA6kOWYO2bE04fcJfdV+H4Tww4B0W/RCPh5NzEUAqgYKrFc=
+X-Received: by 2002:ac8:6c8:: with SMTP id j8-v6mr2535554qth.314.1536247892071;
+	Thu, 06 Sep 2018 08:31:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20180906123745.26192-1-brgl@bgdev.pl>
+In-Reply-To: <20180906123745.26192-1-brgl@bgdev.pl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 6 Sep 2018 08:31:05 -0700
+Message-ID: <CAMKF1soK0OxkEai1r0U-aZdE97u5HPoev7G7Ykes9m8BP9uSmQ@mail.gmail.com>
+To: brgl@bgdev.pl
+Cc: bgolaszewski@baylibre.com,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] networkd-dispatcher: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,67 +54,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 15:26:06 -0000
+X-List-Received-Date: Thu, 06 Sep 2018 15:31:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The following changes since commit b0950aeff5b630256bb5e25ca15f4d59c115e7c1:
+On Thu, Sep 6, 2018 at 5:38 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>
+> This adds a recipe for networkd-dispatcher.
+>
+> It's a simple package containing a python script that needs to be
+> installed together with a systemd service and an example config
+> file. There's nothing to build.
+>
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+>  .../networkd-dispatcher_1.7.bb                | 30 +++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
+>
+> diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
+> new file mode 100644
+> index 000000000..1887c4c7a
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
+> @@ -0,0 +1,30 @@
+> +SUMMARY = "Dispatcher service for systemd-networkd connection status changes"
+> +DESCRIPTION = "This daemon is similar to NetworkManager-dispatcher, but is much \
+> +more limited in the types of events it supports due to the limited nature of \
+> +systemd-networkd(8)."
+> +AUTHOR = "Clayton Craft and others"
+> +
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+> +
+> +RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
+> +
+> +SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher.git;protocol=https"
+> +SRCREV = "c7e25623a161b64618ea778541c064d2a1df086b"
 
-  python-lockfile: Fix build error as following: (2018-06-14 20:27:46 -0700)
+perhaps define PV in terms of SRCPV
 
-are available in the git repository at:
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +# Nothing to build, just a python script to install.
+> +do_compile() {
+> +}
 
-  git://git.openembedded.org/meta-openembedded be79b8b
+use deltask
 
-for you to fetch changes up to be79b8b111a968efdbe5e1482d0c246d0b24763e:
+> +
+> +do_install() {
+> +    mkdir -p ${D}/${sbindir}
+> +    install -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
 
-  fuse: CVE-2018-10906 (2018-08-26 11:03:11 -0700)
+condense both into install -D -m 0755 ....
 
-----------------------------------------------------------------
-Armin Kuster (2):
-      wireshark: update to 2.4.7
-      wireshark: update to 2.4.8
+> +    mkdir -p ${D}/${systemd_unitdir}/system
+> +    install -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_unitdir}/system/networkd-dispatcher.service
+> +    mkdir -p ${D}/${sysconfdir}/conf.d
+> +    install -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
 
-Denys Dmytriyenko (1):
-      devmem2: ensure word is 32-bit, add support for 64-bit long
+this whole section should check for systemd being in DISTRO_FEATURES
 
-Jagadeesh Krishnanjanappa (1):
-      fuse: CVE-2018-10906
+> +}
+> +
+> +FILES_${PN} += "${systemd_unitdir}/system/networkd-dispatcher.service"
 
-Oleksandr Kravchuk (1):
-      libsodium: update to 1.0.16
+use systemd_system_unitdir
 
-changqing.li@windriver.com (1):
-      php: upgrade 7.2.4 -> 7.2.7     Included:
-
-leimaohui (2):
-      python-pytest: Fix conflict error as following:
-      libnih: Fix do_package error when enable mutilib.
-
- .../fuse/files/CVE-2018-10906-1.patch              | 52 ++++++++++++++++
- .../fuse/files/CVE-2018-10906-2.patch              | 48 +++++++++++++++
- .../recipes-support/fuse/fuse_2.9.7.bb             |  2 +
- .../{wireshark_2.4.6.bb => wireshark_2.4.8.bb}     |  4 +-
- .../recipes-crypto/libsodium/libsodium_1.0.11.bb   | 12 ----
- .../recipes-crypto/libsodium/libsodium_1.0.16.bb   | 13 ++++
- ...cinclude-use-pkgconfig-for-libxml2-config.patch |  2 +-
- .../php/php/acinclude-xml2-config.patch            |  2 +-
- meta-oe/recipes-devtools/php/php/iconv.patch       |  2 +-
- .../php/php/imap-fix-autofoo.patch                 |  2 +-
- .../recipes-devtools/php/php/pear-makefile.patch   |  2 +-
- .../php/php/php5-pear-makefile.patch               |  2 +-
- .../recipes-devtools/php/php/php_exec_native.patch |  2 +-
- .../php/{php_7.2.4.bb => php_7.2.7.bb}             |  5 +-
- meta-oe/recipes-support/devmem2/devmem2.bb         |  4 +-
- ...sure-word-is-32-bit-and-add-support-for-6.patch | 70 ++++++++++++++++++++++
- meta-oe/recipes-support/libnih/libnih_1.0.3.bb     | 10 ++++
- .../recipes-devtools/python/python-pytest.inc      | 10 ++++
- .../recipes-devtools/python/python-pytest_3.4.2.bb |  1 +
- .../python/python3-pytest_3.4.2.bb                 |  2 +
- 20 files changed, 222 insertions(+), 25 deletions(-)
- create mode 100644 meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-1.patch
- create mode 100644 meta-filesystems/recipes-support/fuse/files/CVE-2018-10906-2.patch
- rename meta-networking/recipes-support/wireshark/{wireshark_2.4.6.bb => wireshark_2.4.8.bb} (95%)
- delete mode 100644 meta-oe/recipes-crypto/libsodium/libsodium_1.0.11.bb
- create mode 100644 meta-oe/recipes-crypto/libsodium/libsodium_1.0.16.bb
- rename meta-oe/recipes-devtools/php/{php_7.2.4.bb => php_7.2.7.bb} (80%)
- create mode 100644 meta-oe/recipes-support/devmem2/devmem2/0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch
+> --
+> 2.18.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
