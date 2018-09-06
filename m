@@ -1,51 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 104EB79724
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id E8FA079708
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 17:22:40 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id s17-v6so5288269plp.7
+	Thu,  6 Sep 2018 17:38:03 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id g53-v6so13203178qtg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 10:22:41 -0700 (PDT)
+	Thu, 06 Sep 2018 10:38:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9XyNxhc3JyIbg6Ro2SOi27MWBnbJg48MXVjEiS0IX60=;
-	b=lFgFTq9TuLb5r14BbnpAIFFhAkoX4HlrOcxLfdq824r0xx78XsJDMgyRCOPIjk/RLU
-	sGipf+E5Oc8MIoj/jWIiHX7s8A8WTQdISuDAzYAQOXveG+htyYFKYoqpcvNtP7dIf906
-	gd37IhPc+wsVPFLbSF5NB2/R9A3tXZaSjQBLw6of+4LXN5pAYiWok9PCl2/xpEfVZgLg
-	9OVxgr2/j8808cZFDUZV6ZJ8WoaN88JzN3anQf/mN2AUjScFhW4YikT+7GszaqDwLIVx
-	9pmCl8ULSuK4R7j74HZ2sA4zqwzqgUQiqTuiNK3ZvmCbpJ97mxq10nxq73KX3Iqp5lgf
-	EY2A==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=bjgWXbdk4cojDKm2EogU4Mt/sVqgcwcpzaHWYVmfr6g=;
+	b=DXlF7YQ2Cs20H6G4G6S/h9/zK9iBP+v5U8V8+akoNY5fRipHbeNmXmsEee8bgEzREv
+	uLcg+YpP1C/iI3lOSrXNYA3nHas5L3CZisqyTgxEJnPuPS4KwbmtYln7GbHvqXKvfDV4
+	A8jELp2Roc9APzuJLz903DNpthTFedoen2MxcZz8nUoWNIEzA90xCqlpDGeqpvO3afhL
+	bEVUThfkx4HN1CrhGxQlEI8F/LCF+p6hF+MF6a5JwzvqzEBHfyjymuChIwVqoB+/IDcL
+	Sq7meSLpOwQCw7Xr6Hee4VeEofplZCxOKUqefVYl6jBi0xQmQcFPlPb7yiI/kYpIVrZh
+	c+HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=9XyNxhc3JyIbg6Ro2SOi27MWBnbJg48MXVjEiS0IX60=;
-	b=IDnCuuI/DwixDgTKdMYvzVGMdXiocjrIqbWJ7JYXFSPcW0l0xdnb+rPw89XzB5ckbe
-	WTzDZ4dCPdSnplV2+qgm1ym68we6Hem0qskhKBXTgn+xFqNfGQrZ9fzN9gIMKoCggwHn
-	Sq7W2DyeLYi0BwAEUHGghGM1mxLPKwTcju9SjbCLoC2pl0O8GYildcRQwtu+xy4r7AAH
-	qXFEWaN8lgzKOnITMNfQzMpWNaQQwDVBvaa61uM/bywG74Giiqxh4fuGHtr9JeAkC0H7
-	vPWNbAKuEFFePc05Y4ROGJRjuX4EUDQqxiYDethTx2SM4vUVet3q4MUqkjBgvUnpCGFb
-	KJiA==
-X-Gm-Message-State: APzg51C1dToi9tYsILgi8W5OCc3s/hXZAIACv9DbnoCsDNdiq1wMytbe
-	igqFS5vaXMVWIl32qun4O/WkQCRc
-X-Google-Smtp-Source: ANB0VdbD401QNdumMARBHTH2XoRk1+PVgsSMMdfxOw0QHrM1EvgUjGQdCk+vGzkZitCIw2nk80NFPQ==
-X-Received: by 2002:a17:902:654b:: with SMTP id
-	d11-v6mr3804851pln.8.1536254561021; 
-	Thu, 06 Sep 2018 10:22:41 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
-	by smtp.gmail.com with ESMTPSA id
-	22-v6sm8319828pfl.126.2018.09.06.10.22.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 10:22:39 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=bjgWXbdk4cojDKm2EogU4Mt/sVqgcwcpzaHWYVmfr6g=;
+	b=Oq7c799LgV0liE+B9spn3dWx0u8xEhwuHlb94gKp9FksG4wo7tBZDt3oN4RSP+1jN+
+	MRx4JJS1SoD8iZMCl3OVbhwnKVP3Ju30QwAQN6vy3wERRSFs+Gsh+FFDfVGh67hqxHqR
+	TVFKTv3GsF8BN1mKFv897YM4A4PMwaiTNPBuI60iaxPhtStzSd9VfYCwRh/6Hn7Fo7kl
+	K9H0EKK8t6btDpbbEg8QuEToNRJqMa91G+IEA1NBxmDXFDdQqMGxXCHzWlj43i59cHXd
+	jdMyw0I7V3ijPKBy6MDmPGWejsNxMbO1d0GkJv5iKWIYXMskGESC8GWv197C4ARWyIlB
+	/gBg==
+X-Gm-Message-State: APzg51C+jU2+MQAWTsusltmrNtwpjv1woex6fh355BhE9VG0MQx6XIbx
+	j8+CQz0cdn1bsg+kx6+t9mNX9Os1YefHDNF3TrI=
+X-Google-Smtp-Source: ANB0Vdbmte4Z9RGmX2LTLEVaGHXnjBzhbtm4+hvOdC8R9tLopJ01MSxWT0DEDW449pW/QD/62zKMBOv41FErPoXBOWc=
+X-Received: by 2002:ac8:6c8:: with SMTP id j8-v6mr3001214qth.314.1536255484666;
+	Thu, 06 Sep 2018 10:38:04 -0700 (PDT)
+MIME-Version: 1.0
+References: <20180905181732.19483-1-alistair.francis@wdc.com>
+In-Reply-To: <20180905181732.19483-1-alistair.francis@wdc.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Sep 2018 10:22:10 -0700
-Message-Id: <20180906172210.42551-17-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180906172210.42551-1-raj.khem@gmail.com>
-References: <20180906172210.42551-1-raj.khem@gmail.com>
-Subject: [meta-python][PATCH 17/17] python-m2crypto: Ignore WCHAR_MAX and WCHAR_MIN when on musl
+Date: Thu, 6 Sep 2018 10:37:38 -0700
+Message-ID: <CAMKF1soxcVsMSPwCCGJVt6471n-LKXHs+HE3wHBpcRy9jPLc5Q@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] pmdk: Initial commit of the PMDK SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,80 +53,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 17:22:40 -0000
+X-List-Received-Date: Thu, 06 Sep 2018 17:38:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This fixes the build until we upgrade to swig 4.0 where this is fixed
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-devtools/python/python-m2crypto.inc  |  9 +++------
- .../m2crypto-0.26.4-gcc_macros.patch             | 16 ++++++++++++----
- 2 files changed, 15 insertions(+), 10 deletions(-)
-
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
-index da714874af..a36ab8a7fa 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto.inc
-+++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
-@@ -19,10 +19,11 @@ inherit pypi siteinfo
- DEPENDS += "openssl swig-native"
- RDEPENDS_${PN} += "python-typing"
- 
--DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST} -I${STAGING_INCDIR}"
--DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
-+DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
-+DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
- 
- SWIG_FEATURES_x86 = "-D__i386__"
-+SWIG_FEATURES_x32 = "-D__ILP32__"
- SWIG_FEATURES ?= "-D__${HOST_ARCH}__"
- export SWIG_FEATURES
- 
-@@ -51,7 +52,3 @@ do_configure_prepend() {
- }
- 
- BBCLASSEXTEND = "native"
--
--# http://errors.yoctoproject.org/Errors/Details/184714/
--# SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
--CLEANBROKEN = "1"
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch b/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch
-index 931c25c8ee..7f6dd29f8a 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch
-+++ b/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch
-@@ -4,16 +4,19 @@ Index: M2Crypto-0.30.1/SWIG/_m2crypto.i
- ===================================================================
- --- M2Crypto-0.30.1.orig/SWIG/_m2crypto.i
- +++ M2Crypto-0.30.1/SWIG/_m2crypto.i
--@@ -7,7 +7,7 @@
--  * Copyright (c) 2009-2010 Heikki Toivonen. All rights reserved.
-+@@ -8,6 +8,11 @@
-   *
-   */
---
-+ 
- +%import "gcc_macros.h"
-++
-++%ignore WCHAR_MAX;
-++%ignore WCHAR_MIN;
-++
-  %module(threads=1) m2crypto
-  /* We really don't need threadblock (PyGILState_Ensure() etc.) anywhere.
-     Disable threadallow as well, only enable it for operations likely to
--@@ -15,11 +15,6 @@
-+@@ -15,11 +20,6 @@
-  %nothreadblock;
-  %nothreadallow;
-  
-@@ -25,3 +28,8 @@ Index: M2Crypto-0.30.1/SWIG/_m2crypto.i
-  %{
-  #ifdef _WIN32
-  #define _WINSOCKAPI_
-+@@ -95,4 +95,3 @@ static PyObject *x509_store_verify_cb_fu
-+ %constant int encrypt = 1;
-+ %constant int decrypt = 0;
-+ #endif
-+-  
--- 
-2.18.0
-
+fails to build with security flags on see
+http://errors.yoctoproject.org/Errors/Details/191388/
+On Wed, Sep 5, 2018 at 11:27 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  ...c.cfg-Specify-the-host-when-building.patch | 29 +++++++++++
+>  ...0002-Makefile-Don-t-install-the-docs.patch | 26 ++++++++++
+>  meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb   | 49 +++++++++++++++++++
+>  3 files changed, 104 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+>  create mode 100644 meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+>
+> diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+> new file mode 100644
+> index 000000000..747538b0c
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+> @@ -0,0 +1,29 @@
+> +From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
+> +From: Alistair Francis <alistair.francis@wdc.com>
+> +Date: Mon, 23 Jul 2018 11:23:39 -0700
+> +Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
+> + jemalloc
+> +
+> +To avoid this error:
+> +    configure: error: cannot run C compiled programs.
+> +    If you meant to cross compile, use `--host'.
+> +when cross compiling specify the host when configuring jemalloc.
+> +
+> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> +Upstream-Status: Inappropriate [configuration]
+> +---
+> + src/jemalloc/jemalloc.cfg | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
+> +index 196129de6..79ebbab1c 100644
+> +--- a/src/jemalloc/jemalloc.cfg
+> ++++ b/src/jemalloc/jemalloc.cfg
+> +@@ -3,3 +3,4 @@
+> + --with-private-namespace=je_vmem_
+> + --disable-xmalloc
+> + --disable-munmap
+> ++--host=${HOST_SYS}
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+> new file mode 100644
+> index 000000000..bd1b97c24
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+> @@ -0,0 +1,26 @@
+> +From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
+> +From: Alistair Francis <alistair.francis@wdc.com>
+> +Date: Mon, 23 Jul 2018 11:31:17 -0700
+> +Subject: [PATCH 2/2] Makefile: Don't install the docs
+> +
+> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> +Upstream-Status: Inappropriate [disable feature]
+> +---
+> + Makefile | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 224a315f6..ce7f84afb 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
+> +
+> + install uninstall:
+> +       $(MAKE) -C src $@
+> +-      $(MAKE) -C doc $@
+> +
+> + .PHONY: all clean clobber test check cstyle check-license install uninstall\
+> +       source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+> new file mode 100644
+> index 000000000..90d51e3f8
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+> @@ -0,0 +1,49 @@
+> +SUMMARY = "Persistent Memory Development Kit"
+> +DESCRIPTION = "Persistent Memory Development Kit"
+> +HOMEPAGE = "http://pmem.io"
+> +SECTION = "libs"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
+> +DEPENDS = "ndctl"
+> +
+> +SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
+> +           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
+> +           file://0002-Makefile-Don-t-install-the-docs.patch \
+> +          "
+> +
+> +SRC_URI[md5sum] = "d9a7b3f1059ffd54b4c92e38329fe69e"
+> +SRC_URI[sha256sum] = "e11cfbbdf0773fb5965211e18044531f442ad1e6d6726f1bac8a6dcc0e092622"
+> +
+> +inherit autotools-brokensep pkgconfig
+> +
+> +# Fix jemalloc error:
+> +# | configure: error: cannot run C compiled programs.
+> +# | If you meant to cross compile, use `--host'.
+> +EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}'"
+> +
+> +do_install() {
+> +       oe_runmake PREFIX=${prefix} DESTDIR=${D} install
+> +
+> +       # Copy these into the standard directories
+> +       install -d ${D}${bindir}/
+> +       mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
+> +       mv ${D}/usr/local/bin/daxio ${D}${bindir}/
+> +
+> +       install -d ${D}${libdir}
+> +       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
+> +
+> +       install -d ${D}${libdir}/pkgconfig
+> +       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
+> +
+> +       install -d ${D}${includedir}
+> +       mv ${D}/usr/local/include/* ${D}${includedir}/
+> +
+> +       # Remove uneeded files
+> +       rm -rf ${D}/usr/local/
+> +}
+> +
+> +# Include these by default otherwise the SDK is not very useful
+> +FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
+> +FILES_${PN} += "${libdir}/*so*"
+> +FILES_${PN} += "${libdir}/pkgconfig/*.pc"
+> +FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
