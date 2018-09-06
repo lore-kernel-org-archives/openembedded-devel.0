@@ -1,23 +1,49 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id B08D0753DE
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 03:49:19 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Sep 2018 20:49:20 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.53,334,1531810800"; d="scan'208";a="89374234"
-Received: from chiron.jf.intel.com ([10.54.74.39])
-	by orsmga002.jf.intel.com with ESMTP; 05 Sep 2018 20:48:55 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Sep 2018 20:48:47 -0700
-Message-Id: <20180906034847.53858-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.14.4
-Subject: [meta-oe][PATCH] cpuid: upgrade 20170122 -> 20180519
+Return-Path: <alex.kanavin@gmail.com>
+Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com
+	[209.85.218.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C483F794ED;
+	Thu,  6 Sep 2018 09:39:53 +0000 (UTC)
+Received: by mail-oi0-f41.google.com with SMTP id p84-v6so19300640oic.4;
+	Thu, 06 Sep 2018 02:39:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=0gSex9slIsI714ajQP0vcYN1Wo3ztb11AtKVJM71Am8=;
+	b=BMJjaaDBVhuAmNuJtSD8ItjRqfaLoNZfms3qo89MhuXoP31rgA/+5TU0pDc4KSHN7/
+	cUz9wRL9PCTsSfKTK2MMPMauViTV3Arnp52UFLsHByIB4gXxclPtio9JfxlnLIY0mkIP
+	XMBZP2XGdn3ralwfe8DK9LgjXcz/5loennAFMK7/hmX4fo+Toa3Svu+OjL1imox5AInv
+	CWtnf4otFEKSvBBJ7U7/RcRwPJDq9yF1zwUx8B1m/m6GG2zmLR/UQcPRsFM3rNUvLG2Y
+	cmIXw7bqXGkDy4n6Iz61pPH+UbAsX7ogJ3tr5//qJtGtzhMqm7SZbit5X0DOVg9keEO2
+	7sYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=0gSex9slIsI714ajQP0vcYN1Wo3ztb11AtKVJM71Am8=;
+	b=pW2m2NJCd+vL4dtwi/dn/Lkw/O8vjnwwexxnj5ZIHyi46H7j/Yekag6YpnHdXFHN8g
+	fDKPQLCt33ZXpQ+UeacdllkxJmI3fj7TNeuK3QlFzdHA/uw9qWuSvec/xF5eVc7ZZ1Kn
+	SQn8s4ekgKbLcNhk8QCt7o366Rlx9AKRVX0HjLbW4PHpDthOf2V7mVaMfiB8cy8T9j5X
+	uw5MaKMYM/VynUWc4++dR+grTRzepcuyinSMJUjVwOYih+6J2tgaQ64wS99QdrSj/iJW
+	MjzvHS+RaB7Ie31Raj3QXD0Z3Yen8z9mCFC36feZfvT1NViubjf/CN/GSRjADTSrnKV/
+	/BdA==
+X-Gm-Message-State: APzg51BI4xxm/jbJ4FHG/kBAGMBbo5zlauYLm1wIoG16rlrDSzHHDcx5
+	30Ms9A2H1PYV3XvuJQBl+vCjEeOqrSdXsklt2Bo=
+X-Google-Smtp-Source: ANB0VdbaApbFBI9jgbo6YmRQVFU1DzYHQw81Y6f0OIsW15ScLvlBSXL+Bo7GaBqCiBeA6kXp7xGAQZp2sM8I3uJflfo=
+X-Received: by 2002:aca:a8c1:: with SMTP id
+	r184-v6mr1926893oie.215.1536226794882; 
+	Thu, 06 Sep 2018 02:39:54 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a4a:5c9b:0:0:0:0:0 with HTTP;
+	Thu, 6 Sep 2018 02:39:54 -0700 (PDT)
+In-Reply-To: <81713c72-e806-ba69-0e6d-7ef4a2c00010@gmail.com>
+References: <81713c72-e806-ba69-0e6d-7ef4a2c00010@gmail.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Thu, 6 Sep 2018 11:39:54 +0200
+Message-ID: <CANNYZj8Doupz9W1zeuC5xygjqQ_ea3+v5Wa9xuBKSykLQ=yAJA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OEDEM Sunday, 21 October 2018 in Edinburgh (before ELCE) - Update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,33 +56,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 03:49:19 -0000
+X-List-Received-Date: Thu, 06 Sep 2018 09:39:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- .../recipes-devtools/cpuid/{cpuid_20170122.bb => cpuid_20180519.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/cpuid/{cpuid_20170122.bb => cpuid_20180519.bb} (86%)
+And the link for signing up is...? :)
 
-diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-rename to meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
-index 5dd1bdd4ee..4b07e2193a 100644
---- a/meta-oe/recipes-devtools/cpuid/cpuid_20170122.bb
-+++ b/meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
-            file://0001-Fix-Add-sys-sysmacros.h-to-fix-build-issue.patch"
--SRC_URI[md5sum] = "1c46a6662626c5a6eaca626f23a5a7d7"
--SRC_URI[sha256sum] = "667612aae6704341dd10844e97c84c5c5c8700817a5937a3c293b55013bc4865"
-+SRC_URI[md5sum] = "b3b4e44ef49575043a91def0207dcc76"
-+SRC_URI[sha256sum] = "967823be36f23cbc972eb0aa882d069c1d155a5978990ac3bcf425e6a2e7ff9a"
- 
- COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
- 
--- 
-2.14.4
+Alex
 
+2018-09-06 1:27 GMT+02:00 akuster808 <akuster808@gmail.com>:
+> Hello,
+>
+>
+> If you have not signed up for OEDeM, please do so ASAP. We have 41
+> signed up so far. Sign-ups close Sept 15th
+>
+>
+> regards,
+>
+> Armin
+>
+> OEDeM Bouncer
+>
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
