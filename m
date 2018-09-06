@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f176.google.com (mail-qt0-f176.google.com
-	[209.85.216.176])
-	by mail.openembedded.org (Postfix) with ESMTP id EF90960116
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C7EC74E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 16:59:18 +0000 (UTC)
-Received: by mail-qt0-f176.google.com with SMTP id g53-v6so13054760qtg.10
+	Thu,  6 Sep 2018 17:22:19 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id d19-v6so5582909pgv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 09:59:20 -0700 (PDT)
+	Thu, 06 Sep 2018 10:22:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Xww3OPVvddD2w0d1TTVHXfNjYHqBSYG9WAkRcE94Z90=;
-	b=kXkNjYk4mLlXxbExpQz1k1BRJQI3NxsC5ObkpqwC9godOlI0xwa+Y8BDYYJR7fVMtv
-	4+OF3nBzsvWsfaB+XV/Y1YnAP7ov1s6LtAw+r8gcmaCUeTpywRctA/x8lPcYR7z93Pwj
-	FPpuEKWkg5lN4jssM0VI3WeG+JO8IAO5TNy04R2rgIzL7xkZB3ImuIUj4SwmDovq4EUc
-	Vn6txlM24YppMBy4+eE9Aj0EPCaLsRCnU8jWpKZe3RV1C5cQ3JHZPFROM5Me6aQwlv9G
-	A1deLvvZ1V0uOIxxKR/7nRf4Wbz7X5nLQtbAvGx1UxOyp8jDcf8c4sfe4zCj+P6wI7u2
-	G6LA==
+	h=from:to:cc:subject:date:message-id;
+	bh=GjIqyk/dOXWh3LMVK4jxDt4u0wcqqiZTSTLpQYnno60=;
+	b=eXsXZ0u29stoWf7/rBJdD+RfBJ2jQKiy67qY0KELkfZH05PbVVJK8aCRe1cyGFdIMV
+	zOyylAzIf1JK7Yo0ASm5eMz4UdUtGD8Aq2ykj0PYHgYfMx84nt4NrGtbns47YzGW29SX
+	FSPaNG4a7QeokFAnK6vVJFmvgwNcO22Qn+GAVrqweqK1XrYS1SOCxoPSNvY1R06hEQi0
+	xyH3VNGtdNHBZZ40OJuveQZocwktOD/RZijNwPjp9SUnbNTzRoEx4UEDmRaNd95w9sG/
+	4C7HyotFKmcYM/lvPuNwoCmSD0uJacpfTV/6w/CnkZo+/+6pjNlz94GtjAT4qOjuXXJF
+	dmDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Xww3OPVvddD2w0d1TTVHXfNjYHqBSYG9WAkRcE94Z90=;
-	b=JQjKi5svGyuL9Q0fl1/kujhfmGyTG0J9ibAzGKWpBxzVCcBynw5zOhQazLPjeSCwsL
-	p004hT0FbnWpg4qsE+QaQ2uStW/f8CU2dKM3irM40UohyaL46dPsuYI1Zy552G3VYW5Z
-	MuXW9oxphzk+xVqQD8LZ7cqDqJI3nzIlY0qunc62o6rOUfOGt1C1QOlnVDbsLIoHHInk
-	gLrG0UN2vEITH3wQVZKd0VqjPj4IljdoGUr9+L+PTNwD9WeqPmFOyZe6rlrPBEQmvOrh
-	kAx6TFJ/65swaRjmtX7hr/aB6ND6Dv1dNTQt93kIPRThBeE7vFS4EBZs0Rttaki/TMrn
-	ckAg==
-X-Gm-Message-State: APzg51C3/lDj7K1Xh27U5mpmUrNRV4Wfm6FLSH8nj6Av+b8FDWsi+IXs
-	b7tKnJn30BA2Bf0DET2rNxhxnR/OC5S4E/sUNKE=
-X-Google-Smtp-Source: ANB0VdathDdwJJjnsBXmHeXPQvFcZpkR9iJtTPMdRYDP8c14gCxlDkzXD2vvFuBrsFX34/od5dS/e70um2Hf0PI9hDQ=
-X-Received: by 2002:ac8:6c8:: with SMTP id j8-v6mr2857160qth.314.1536253159683;
-	Thu, 06 Sep 2018 09:59:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180906123745.26192-1-brgl@bgdev.pl>
-	<CAMKF1soK0OxkEai1r0U-aZdE97u5HPoev7G7Ykes9m8BP9uSmQ@mail.gmail.com>
-	<CAMRc=MejwMEJS89gOmxNqbAd6AnSg28fY+urhLT6ofaQ1aC5cQ@mail.gmail.com>
-In-Reply-To: <CAMRc=MejwMEJS89gOmxNqbAd6AnSg28fY+urhLT6ofaQ1aC5cQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=GjIqyk/dOXWh3LMVK4jxDt4u0wcqqiZTSTLpQYnno60=;
+	b=umgNYcWHU/ElRiryNDqgXd8lqIzHd1nojyUmlCgvieyUgl8Zo31GV6j8swThSUk3L0
+	96sy+f1ZTJRcL593q6B2wtyCoi41AING9t6BnL2n6k++hWsDZJ94wlwW62gNCOlYO1zz
+	I9Tl1zH2V3erCA8XcNhBbY1pE6bkU99C7EeFGgSDa92YLHEEThPFt/sgZ0hZA8G/ctFm
+	eDvUd9m/LKbVNaxQc0PepM/pGBpiOM/9hd6O2bohqE05lyeQW6wP9XyDmyc35zgkC/Gm
+	2n//2gYXQ8sZnBqqnhKx7F9WtgZAyyYTkjjFgQzRxn8UR1tX1I/suwk3ktjh5MUnm78B
+	3WrQ==
+X-Gm-Message-State: APzg51AH1Aj3D3vniAdQwF+PAZdjIOXc2BhkvbzCj8HhoXbQdPfBgdng
+	UO8qOYkwYuFUVNlPfbKuBUii1o12
+X-Google-Smtp-Source: ANB0Vdax6QuJS6UT2PXHrYwG/4E9kc6SLD2b+Cr88P1dcWnWlI1WhP7MnQyL5IE5igGurdsxRNJCWg==
+X-Received: by 2002:a63:1125:: with SMTP id
+	g37-v6mr3862790pgl.187.1536254539863; 
+	Thu, 06 Sep 2018 10:22:19 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
+	by smtp.gmail.com with ESMTPSA id
+	22-v6sm8319828pfl.126.2018.09.06.10.22.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Sep 2018 10:22:19 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Sep 2018 09:58:53 -0700
-Message-ID: <CAMKF1sqUR8-z3_2dq3_-Q-krPMxnzN2kx6Jx_EmEKzNcwc2sEQ@mail.gmail.com>
-To: brgl@bgdev.pl
-Cc: bgolaszewski@baylibre.com,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] networkd-dispatcher: new package
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  6 Sep 2018 10:21:54 -0700
+Message-Id: <20180906172210.42551-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-oe][PATCH 01/17] pkcs11-helper: Upgrade to 1.25.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,104 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 16:59:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Sep 2018 17:22:19 -0000
 
-On Thu, Sep 6, 2018 at 9:13 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
->
-> 2018-09-06 17:31 GMT+02:00 Khem Raj <raj.khem@gmail.com>:
-> > On Thu, Sep 6, 2018 at 5:38 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> >>
-> >> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >>
-> >> This adds a recipe for networkd-dispatcher.
-> >>
-> >> It's a simple package containing a python script that needs to be
-> >> installed together with a systemd service and an example config
-> >> file. There's nothing to build.
-> >>
-> >> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >> ---
-> >>  .../networkd-dispatcher_1.7.bb                | 30 +++++++++++++++++++
-> >>  1 file changed, 30 insertions(+)
-> >>  create mode 100644 meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
-> >>
-> >> diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
-> >> new file mode 100644
-> >> index 000000000..1887c4c7a
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_1.7.bb
-> >> @@ -0,0 +1,30 @@
-> >> +SUMMARY = "Dispatcher service for systemd-networkd connection status changes"
-> >> +DESCRIPTION = "This daemon is similar to NetworkManager-dispatcher, but is much \
-> >> +more limited in the types of events it supports due to the limited nature of \
-> >> +systemd-networkd(8)."
-> >> +AUTHOR = "Clayton Craft and others"
-> >> +
-> >> +LICENSE = "GPLv3"
-> >> +LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
-> >> +
-> >> +RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
-> >> +
-> >> +SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher.git;protocol=https"
-> >> +SRCREV = "c7e25623a161b64618ea778541c064d2a1df086b"
-> >
-> > perhaps define PV in terms of SRCPV
-> >
-> >> +
-> >> +S = "${WORKDIR}/git"
-> >> +
-> >> +# Nothing to build, just a python script to install.
-> >> +do_compile() {
-> >> +}
-> >
-> > use deltask
-> >
-> >> +
-> >> +do_install() {
-> >> +    mkdir -p ${D}/${sbindir}
-> >> +    install -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
-> >
-> > condense both into install -D -m 0755 ....
-> >
-> >> +    mkdir -p ${D}/${systemd_unitdir}/system
-> >> +    install -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_unitdir}/system/networkd-dispatcher.service
-> >> +    mkdir -p ${D}/${sysconfdir}/conf.d
-> >> +    install -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
-> >
-> > this whole section should check for systemd being in DISTRO_FEATURES
-> >
->
-> It doesn't seem necessary - if systemd is not in DISTRO_FEATURES the
-> following error is raised:
->
-> ERROR: Nothing RPROVIDES 'systemd' (but
-> /<snip!>/meta-openembedded/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher.bb
-> RDEPENDS on or otherwise requires it)
-> systemd was skipped: missing required distro feature 'systemd' (not in
-> DISTRO_FEATURES)
->
+* Fixes build with OpenSSL 1.1.x
 
-which is other concern, since we do support sysvinit, we need to have
-both options functional if possible.
+License-Update:
 
-> For other issues: I'll fix them all in v2 and resend tomorrow.
->
-> Thanks!
-> Bart
->
-> >> +}
-> >> +
-> >> +FILES_${PN} += "${systemd_unitdir}/system/networkd-dispatcher.service"
-> >
-> > use systemd_system_unitdir
-> >
-> >> --
-> >> 2.18.0
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+* update year to 2018
+* remove 'All rights reserved'
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../{pkcs11-helper_1.11.bb => pkcs11-helper_1.25.1.bb}   | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-crypto/pkcs11-helper/{pkcs11-helper_1.11.bb => pkcs11-helper_1.25.1.bb} (74%)
+
+diff --git a/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.11.bb b/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.25.1.bb
+similarity index 74%
+rename from meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.11.bb
+rename to meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.25.1.bb
+index db71bd03b7..271f2eaa3c 100644
+--- a/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.11.bb
++++ b/meta-oe/recipes-crypto/pkcs11-helper/pkcs11-helper_1.25.1.bb
+@@ -11,16 +11,15 @@ SECTION = "Development/Libraries"
+ 
+ LICENSE = "GPLv2 & BSD"
+ LIC_FILES_CHKSUM = " \
+-    file://COPYING;md5=4948810631bcac142af53d32df5b6ee1 \
++    file://COPYING;md5=30f10d22cfb1ba98ccd714a41ad3311a \
+     file://COPYING.GPL;md5=8a71d0475d08eee76d8b6d0c6dbec543 \
+-    file://COPYING.BSD;md5=f79f90ea7a106796af80b5d05f1f8da1 \
++    file://COPYING.BSD;md5=66b7a37c3c10483c1fd86007726104d7 \
+ "
+ SRC_URI = "git://github.com/OpenSC/${BPN}.git"
+-SRC_URI[md5sum] = "9f62af9f475901b89355266141306673"
+-SRC_URI[sha256sum] = "494ec59c93e7c56c528f335d9353849e2e7c94a6b1b41c89604694e738113386"
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "e7adf8f35be232a4f04c53b4ac409be52792093e"
++# v1.25.1
++SRCREV = "2713cb09dcd90104cb7bceb5f14cd6f90834f7b1"
+ 
+ DEPENDS = "zlib nettle gnutls gmp openssl nss nspr"
+ 
+-- 
+2.18.0
+
 
