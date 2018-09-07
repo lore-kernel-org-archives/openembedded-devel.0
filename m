@@ -1,25 +1,53 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5662879727
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E4A54744E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 01:04:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8712oFK010240
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  7 Sep 2018 10:21:34 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id w11-v6so14430613wrc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Sep 2018 18:04:23 -0700
-Received: from localhost (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
-	Thu, 6 Sep 2018 18:03:37 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Sep 2018 09:03:35 +0800
-Message-ID: <1536282215-3208-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.137]
-Subject: [meta-filesystems][PATCH] xfsprogs: upgrade 4.17 -> 4.18
+	Fri, 07 Sep 2018 03:21:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=Hdyf94FHo/73IRfyvhz8YToQ5VZdWWDFfnQ9GuMRokE=;
+	b=VTTr/plb/B+xWWsIFYEqVzI2tNzqkyNIVDuxUUAA+s9FdAcoqvTQQNM/11Jh2gfzeg
+	rq75TiGZqG1iGcWzDraORsnnTiEJqDc/FT0y8xpTKEEXCttltHavxQdlVJg+5coNi0be
+	7p77cAVL4lhaI/W5UXmfWL5bZmnwz9FfenApwWZEM0gCnFfuj9YNEuJKKI4C9NoWWpzt
+	XqPEj79GMgWW92jJJSNIhfpIVZCiJP++6W+FOps1u8CbmQRmHC5G8OS6QooYRO9wOKrk
+	0GDznbp6ZcHOyi9e1d8Ftv9af3vGdbxzBVcfav56G048kwY4ze3qntpGUYo7H1p0Kk2W
+	6z0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Hdyf94FHo/73IRfyvhz8YToQ5VZdWWDFfnQ9GuMRokE=;
+	b=kDLANIQolI/8SidA0bJyV6GTFt10dxtkJEqPxQMtaHpmaM80ZuaQuLN55MJN4jOyrY
+	N0FFR+8ngzYxZ6DJFuqAixt/aMpqLRMcdqZgJQ/v7IqQQw3XRL0nBiMD/Xhz8iAE3Dl3
+	w/4Gey1iSkip4a6QN1IcWHwNOhUSqISBf8pFwPkFGZX7sPNVPNRvs7OE9A1h6NMMbJgD
+	/XX3PWmsTqAbtSJyMnU5zLhIjO0Oonkkk4G0Nc44qANov8r/MoZ7VxetZJzXPJa5bdjH
+	Ht4E3KgkYEVy1HxeHruNdVXLRlZl40dI1VCxYORCLEi99vAP5r7Yjz55556AobbCzpqW
+	IRWQ==
+X-Gm-Message-State: APzg51B6bkCeG8EpJia8YXMOn5X8zATK+QOctJML3TeiUDWMudZk/bOu
+	YqagfEpql/CJz8/gprQJnHDzamSTAJY=
+X-Google-Smtp-Source: ANB0VdZiq5LVByJFvPmuriR2aloVC9+80iGahf9gGQk2oY/XEo7/sryeQAxKMbsvDdbmgOJTTZ2dpA==
+X-Received: by 2002:adf:f648:: with SMTP id
+	x8-v6mr5783245wrp.144.1536315695233; 
+	Fri, 07 Sep 2018 03:21:35 -0700 (PDT)
+Received: from brgl-bgdev.baylibre.local
+	(AStLambert-681-1-83-232.w90-86.abo.wanadoo.fr. [90.86.25.232])
+	by smtp.gmail.com with ESMTPSA id
+	m68-v6sm13653275wmb.10.2018.09.07.03.21.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 07 Sep 2018 03:21:34 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Joe MacDonald <joe_macdonald@mentor.com>,
+	Armin Kuster <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
+Date: Fri,  7 Sep 2018 12:21:27 +0200
+Message-Id: <20180907102127.16144-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.18.0
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [PATCH v2] networkd-dispatcher: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,167 +60,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 01:04:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 07 Sep 2018 10:21:35 -0000
 
-License-Update: Removed doc/COPYING and up-to-date license files in
-LICENSE/. This does not change the license of any of the code.
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Rebase patches:
-  0001-build-Check-for-sync_file_range-libc-function.patch
-  0002-include-include-xfs-linux.h-after-sys-mman.h.patch
+This adds a recipe for networkd-dispatcher.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+It's a simple package containing a python script that needs to be
+installed together with a systemd service and an example config
+file. There's nothing to build.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- ...d-Check-for-sync_file_range-libc-function.patch | 29 ++++++++++------------
- ...lude-include-xfs-linux.h-after-sys-mman.h.patch |  8 +++---
- .../{xfsprogs_4.17.0.bb => xfsprogs_4.18.0.bb}     |  7 +++---
- 3 files changed, 21 insertions(+), 23 deletions(-)
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.17.0.bb => xfsprogs_4.18.0.bb} (86%)
+v1 -> v2:
+- skip the package if systemd is not in DISTRO_FEATURES
+- use -D in install for new directories
+- use deltask instead of an empty do_compile() function
+- define PV in the recipe as <version>+git${SRCPV}
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0001-build-Check-for-sync_file_range-libc-function.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0001-build-Check-for-sync_file_range-libc-function.patch
-index d8ff555..231da80 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/files/0001-build-Check-for-sync_file_range-libc-function.patch
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/0001-build-Check-for-sync_file_range-libc-function.patch
-@@ -1,14 +1,14 @@
--From ae7172194d3fbb563ff8bbe7c02d34f1bd0e5ec9 Mon Sep 17 00:00:00 2001
-+From f8a22f16c03e51d3c779b12f37d362faaa0ecf31 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 31 Jan 2018 21:28:53 -0800
- Subject: [PATCH] build: Check for sync_file_range libc function
- 
- glibc 2.27 now has sync_file_range()
- 
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
- Upstream-Status: Pending
- 
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-  include/builddefs.in | 1 +
-  io/Makefile          | 5 ++++-
-  io/io.h              | 2 +-
-@@ -16,10 +16,10 @@ Upstream-Status: Pending
-  4 files changed, 9 insertions(+), 2 deletions(-)
- 
- diff --git a/include/builddefs.in b/include/builddefs.in
--index 92d5076..504225a 100644
-+index b895949..a388c83 100644
- --- a/include/builddefs.in
- +++ b/include/builddefs.in
--@@ -105,6 +105,7 @@ HAVE_FIEMAP = @have_fiemap@
-+@@ -95,6 +95,7 @@ HAVE_FIEMAP = @have_fiemap@
-  HAVE_PREADV = @have_preadv@
-  HAVE_PWRITEV2 = @have_pwritev2@
-  HAVE_COPY_FILE_RANGE = @have_copy_file_range@
-@@ -28,10 +28,10 @@ index 92d5076..504225a 100644
-  HAVE_SYNCFS = @have_syncfs@
-  HAVE_READDIR = @have_readdir@
- diff --git a/io/Makefile b/io/Makefile
--index 6725936..1876e95 100644
-+index 00ede48..dd001b0 100644
- --- a/io/Makefile
- +++ b/io/Makefile
--@@ -59,10 +59,13 @@ CFILES += inject.c resblks.c
-+@@ -60,10 +60,13 @@ CFILES += inject.c resblks.c
-  LCFLAGS += -DHAVE_INJECT -DHAVE_RESBLKS
-  endif
-  
-@@ -47,10 +47,10 @@ index 6725936..1876e95 100644
-  ifeq ($(HAVE_SYNC_FILE_RANGE),yes)
-  CFILES += sync_file_range.c
- diff --git a/io/io.h b/io/io.h
--index 3862985..79ddc7b 100644
-+index e1f3d95..fe2e6a2 100644
- --- a/io/io.h
- +++ b/io/io.h
--@@ -158,7 +158,7 @@ extern void		fiemap_init(void);
-+@@ -151,7 +151,7 @@ extern void		fiemap_init(void);
-  #define fiemap_init()	do { } while (0)
-  #endif
-  
-@@ -60,23 +60,20 @@ index 3862985..79ddc7b 100644
-  #else
-  #define copy_range_init()	do { } while (0)
- diff --git a/io/sync_file_range.c b/io/sync_file_range.c
--index 7e4f3e6..aafea01 100644
-+index 30bbc93..6c49d73 100644
- --- a/io/sync_file_range.c
- +++ b/io/sync_file_range.c
--@@ -16,6 +16,7 @@
--  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-+@@ -4,6 +4,7 @@
-+  * All Rights Reserved.
-   */
-  
- +#ifndef HAVE_COPY_FILE_RANGE
-  #include "command.h"
-  #include "input.h"
-  #include "init.h"
--@@ -104,3 +105,5 @@ sync_range_init(void)
-+@@ -92,3 +93,5 @@ sync_range_init(void)
-  
-  	add_command(&sync_range_cmd);
-  }
- +
- +#endif
---- 
--2.16.1
--
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0002-include-include-xfs-linux.h-after-sys-mman.h.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0002-include-include-xfs-linux.h-after-sys-mman.h.patch
-index 89447fd..f924cd1 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/files/0002-include-include-xfs-linux.h-after-sys-mman.h.patch
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/0002-include-include-xfs-linux.h-after-sys-mman.h.patch
-@@ -1,4 +1,4 @@
--From 18298d7c028cd5fbd2c68fa428dc2384344aeb91 Mon Sep 17 00:00:00 2001
-+From 11a42df394de3dc520e72a016296dcc6dea02a7a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Thu, 23 Aug 2018 05:33:57 +0000
- Subject: [PATCH] include include/xfs/linux.h after <sys/mman.h>
-@@ -14,11 +14,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 3 insertions(+), 2 deletions(-)
- 
- diff --git a/io/mmap.c b/io/mmap.c
--index 106be49..34fadf4 100644
-+index dbfcca5..ca00df1 100644
- --- a/io/mmap.c
- +++ b/io/mmap.c
--@@ -16,10 +16,11 @@
--  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-+@@ -4,10 +4,11 @@
-+  * All Rights Reserved.
-   */
-  
- -#include "command.h"
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.17.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
-similarity index 86%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.17.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
-index ee571ce..0a1bacb 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.17.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.18.0.bb
-@@ -3,7 +3,8 @@ HOMEPAGE = "http://oss.sgi.com/projects/xfs"
- SECTION = "base"
- LICENSE = "GPLv2 & LGPLv2.1"
- LICENSE_libhandle = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
-+LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038 \
-+                    file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
- DEPENDS = "util-linux util-linux-native"
- SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://remove_flags_from_build_flags.patch \
-@@ -12,8 +13,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
-            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
-            "
--SRC_URI[md5sum] = "b935b693dfac0264e232c3c4e52d5569"
--SRC_URI[sha256sum] = "f53f5169cb98cfca471ddea30092738c427ba284c5356e01b45dd1ae3b297e0d"
-+SRC_URI[md5sum] = "5f80b631b68df89a8b9283307e96d2e8"
-+SRC_URI[sha256sum] = "397dc96f51aeeff73d021d3418d3172377b2685f2740ca60525096c070aa3df1"
- 
- inherit autotools-brokensep
- 
+ .../networkd-dispatcher.bb                    | 33 +++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher.bb
+
+diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher.bb
+new file mode 100644
+index 000000000..7bb2347a8
+--- /dev/null
++++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher.bb
+@@ -0,0 +1,33 @@
++python __anonymous() {
++    features = d.getVar('DISTRO_FEATURES')
++    if not features or 'systemd' not in features:
++        raise bb.parse.SkipPackage('networkd-dispatcher needs systemd in DISTRO_FEATURES')
++}
++
++SUMMARY = "Dispatcher service for systemd-networkd connection status changes"
++DESCRIPTION = "This daemon is similar to NetworkManager-dispatcher, but is much \
++more limited in the types of events it supports due to the limited nature of \
++systemd-networkd(8)."
++AUTHOR = "Clayton Craft and others"
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
++
++RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
++
++SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher.git;protocol=https"
++SRCREV = "c7e25623a161b64618ea778541c064d2a1df086b"
++PV = "1.7+git${SRCPV}"
++
++S = "${WORKDIR}/git"
++
++# Nothing to build, just a python script to install
++deltask do_compile
++
++do_install() {
++    install -D -m 0755 ${S}/networkd-dispatcher ${D}${sbindir}/networkd-dispatcher
++    install -D -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_system_unitdir}/networkd-dispatcher.service
++    install -D -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
++}
++
++FILES_${PN} += "${systemd_system_unitdir}/networkd-dispatcher.service"
 -- 
-2.7.4
+2.18.0
 
 
