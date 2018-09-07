@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
-	[209.85.222.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 58767797D0
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 96D8A797C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 13:51:31 +0000 (UTC)
-Received: by mail-qk1-f172.google.com with SMTP id z78-v6so9714138qka.0
+	Fri,  7 Sep 2018 14:09:17 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id j7-v6so16363184qtp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2018 06:51:32 -0700 (PDT)
+	Fri, 07 Sep 2018 07:09:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=LSRlqAzG4GAlZ3kAhNnEkPGovphcCde48i9R6e/45YM=;
-	b=rnSu20J6bUFrCleOHFT0u5Dmp9IJHpGnT5/T1zKn+Z5e5HIMm2eCejzjwVS1/z6dAf
-	HWUxN2Y1kGIsVUbjOcTMHLJtxk+TN6MLlc3gn4miRzKJOr8PXZdI92uCmOeZTTf5RqHx
-	6cy93q0oJQGF1PFBDBdXqLS3Ymv1V6uXWpcNJehUBtE9jd0k/p8ZdLmxN61iHkeoY/EK
-	18BAbYzQsBJbCtK6Mw3uh/Lg/fCHdF8MJyqQ5WAcOwFzEX1QZw8/XMHXb8jnT7aoT9sf
-	X0zhnsrAM6fWNEm5mOtnVXHCBStry4U63YkUiTuy/m5HAw8vT+HXQ54fD4uZ5iAIJAwc
-	adTw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=OfLAqMrViGvwR3gD2lWzL6aqONgVYaOmWHu/3OhhkeQ=;
+	b=qJtNe4+wLi6tllgxCadWeTN56GyJn7++iB7N8eqZmuwI7+G7FcToGu/nDpRK2UbPUB
+	JW1PjWdN7DwuFSc07Vlps54FONQsnUz6atA0fnhjvrzoVAUlFi5yRp/BXfJlAMor6SjD
+	lqEPTMrZL8rxgiZDSs0PTA+qf5DKuwH+gFszMdFMeUwgpAhlSFMsPyTMDq7rqJw82HLn
+	5bjr/Wrv+mSogUPOJAmjOyAyUslvuO4Ygeo7ivqY4e00E5o1wHT3kz74QbWFpf2IKiwt
+	CYcmx+v8AIOgXcG57h4rDdjmKUtOyle03T/8vlBSMYyvS8P5h8JU8i8Mi4Ft0KI0gr2f
+	vS9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=LSRlqAzG4GAlZ3kAhNnEkPGovphcCde48i9R6e/45YM=;
-	b=nq8JgM9/aHacGjGq9r245/9Vsh4WACAJRv0TcwzWFi+vKzDzT5HYjSqlegPydMHTGt
-	qHlSVtRuCi+rEs7tUREcrkLRuq9k9oEBvCt/UeXiEpRPdrYQymp1u5u0y2MoQpCnMCIQ
-	7Z0Gd1ADTsAzQ7psBBFLbOs7LnbqnPEnGqKsVP8drZISy92r5NPIPWzZOTmavNwGoNSl
-	2FsOh/MEvqQxHOmM16UPKrrgdnIHt7hqTXgX1rX7r49mu5+3b7u/uLDYDlBD272v/6Aw
-	oKXL+xa4CAFfqUGtvobZ8U4C2qmNg5cK4TTMQLAp60Lb73io9rZ8nGpeDinjVLnRLgwj
-	x6ng==
-X-Gm-Message-State: APzg51DP8NeGydP6TZu8FyzUrepbnTwRVmRfw7CBQSA6A61iqNAECAV2
-	864TSoVaocfG1g5bYMAKeNu3vOWA+IHzvX8NbAJaBBRd
-X-Google-Smtp-Source: ANB0VdbhhJi6Par/tjCM+XIk3jneenvx4xOooTItAONl1O3kSkxeV33S6KBmAVkvJQBO/xS1O7IlV6qRGHk20uaPv5U=
-X-Received: by 2002:a37:c5d2:: with SMTP id
-	k79-v6mr6001589qkl.206.1536328291828; 
-	Fri, 07 Sep 2018 06:51:31 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=OfLAqMrViGvwR3gD2lWzL6aqONgVYaOmWHu/3OhhkeQ=;
+	b=EmL3CGq3d6Xn2QKkpM1pi/HL4NTwmVLMenf9EHh+KnduOr4cFNw4RDvDqTQMeEGa+d
+	578dTdnoH9g0pCfI/87QmQaUUOzVnf/3Pb6LV4+4K9xWzgjsPKyD3TAo8NOmsYZndQKM
+	qiiD7Cu9uWRzSo/plmBihzALdUNGfh9t7IJ7D+1hFEvNm+g442Rzfl/sst18zNV2rmGf
+	ZFFo39kHGz9jJtn1xszuhSpNYGNDgDu9EKk1coeYxVUy3dgMoXiAdhyvSH7qvFGdL7Xw
+	RH/1jIngiGjbFf5AiTVESi497Lq6DAp9J+FZZacsq+mDFkd1d7QYzrgm/Q8mn6YwsJqe
+	yBlQ==
+X-Gm-Message-State: APzg51DqWOTZpXFxUb+wAP60Zl8SN3Sum9Dc/BB5i/9BP3wAMUrFG/dm
+	ik2kjnuENKqytB3+NaRwUACxj02CtfGd+v21Lyw=
+X-Google-Smtp-Source: ANB0VdY7BgKalb8uM2ogTtsDbvpWWb0UzprATFn066/f05bo53tOpSdA2SqGGRsYo8axxLL7ReOYFjeJ09ZOTw91ifE=
+X-Received: by 2002:ac8:4649:: with SMTP id f9-v6mr6325520qto.34.1536329358222;
+	Fri, 07 Sep 2018 07:09:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20180907003059.4041-1-alistair.francis@wdc.com>
-	<deae9220-8aef-6b98-99fd-732f7f8e502a@gmail.com>
-In-Reply-To: <deae9220-8aef-6b98-99fd-732f7f8e502a@gmail.com>
+References: <20180907102842.24197-1-schnitzeltony@gmail.com>
+In-Reply-To: <20180907102842.24197-1-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 7 Sep 2018 06:51:01 -0700
-Message-ID: <CAMKF1sqj8=mT23Epor16aKE4i_4Jm_CVQk6z=8vxUFLy01Ga-A@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] pmdk: Initial commit of the PMDK SDK
+Date: Fri, 7 Sep 2018 07:08:52 -0700
+Message-ID: <CAMKF1speuTVVk+o9svpy-Chudk18WGvMcvEEd70dsw8x+9Kdag@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] blueman: rdepend on packagegroup-tools-bluetooth instead of bluez5-obex
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,157 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 13:51:31 -0000
+X-List-Received-Date: Fri, 07 Sep 2018 14:09:17 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Unable to find file file://0003-Makefile-Don-t-build-the-examples.patch anywhere
-On Thu, Sep 6, 2018 at 5:53 PM Khem Raj <raj.khem@gmail.com> wrote:
+hi Andreas
+
+On Fri, Sep 7, 2018 at 3:29 AM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+> wrote:
 >
-> Hi Alistair
+> Have a better out-of-the-box experience
 >
-> On 9/6/18 5:30 PM, Alistair Francis wrote:
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> > v2:
-> >  - Fix fortify source compile error
-> >
-> >  ...c.cfg-Specify-the-host-when-building.patch | 29 +++++++++++
-> >  ...0002-Makefile-Don-t-install-the-docs.patch | 26 ++++++++++
-> >  meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb   | 52 +++++++++++++++++++
-> >  3 files changed, 107 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> >  create mode 100644 meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> >  create mode 100644 meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> >
-> > diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> > new file mode 100644
-> > index 000000000..747538b0c
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> > @@ -0,0 +1,29 @@
-> > +From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
-> > +From: Alistair Francis <alistair.francis@wdc.com>
-> > +Date: Mon, 23 Jul 2018 11:23:39 -0700
-> > +Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
-> > + jemalloc
-> > +
-> > +To avoid this error:
-> > +    configure: error: cannot run C compiled programs.
-> > +    If you meant to cross compile, use `--host'.
-> > +when cross compiling specify the host when configuring jemalloc.
-> > +
-> > +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > +Upstream-Status: Inappropriate [configuration]
-> > +---
-> > + src/jemalloc/jemalloc.cfg | 1 +
-> > + 1 file changed, 1 insertion(+)
-> > +
-> > +diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
-> > +index 196129de6..79ebbab1c 100644
-> > +--- a/src/jemalloc/jemalloc.cfg
-> > ++++ b/src/jemalloc/jemalloc.cfg
-> > +@@ -3,3 +3,4 @@
-> > + --with-private-namespace=je_vmem_
-> > + --disable-xmalloc
-> > + --disable-munmap
-> > ++--host=${HOST_SYS}
-> > +--
-> > +2.17.1
-> > +
-> > diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> > new file mode 100644
-> > index 000000000..bd1b97c24
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> > @@ -0,0 +1,26 @@
-> > +From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
-> > +From: Alistair Francis <alistair.francis@wdc.com>
-> > +Date: Mon, 23 Jul 2018 11:31:17 -0700
-> > +Subject: [PATCH 2/2] Makefile: Don't install the docs
-> > +
-> > +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > +Upstream-Status: Inappropriate [disable feature]
-> > +---
-> > + Makefile | 1 -
-> > + 1 file changed, 1 deletion(-)
-> > +
-> > +diff --git a/Makefile b/Makefile
-> > +index 224a315f6..ce7f84afb 100644
-> > +--- a/Makefile
-> > ++++ b/Makefile
-> > +@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
-> > +
-> > + install uninstall:
-> > +     $(MAKE) -C src $@
-> > +-    $(MAKE) -C doc $@
-> > +
-> > + .PHONY: all clean clobber test check cstyle check-license install uninstall\
-> > +     source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
-> > +--
-> > +2.17.1
-> > +
-> > diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> > new file mode 100644
-> > index 000000000..e4d4fcb4f
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> > @@ -0,0 +1,52 @@
-> > +SUMMARY = "Persistent Memory Development Kit"
-> > +DESCRIPTION = "Persistent Memory Development Kit"
-> > +HOMEPAGE = "http://pmem.io"
-> > +SECTION = "libs"
-> > +LICENSE = "BSD"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
-> > +DEPENDS = "ndctl"
-> > +
-> > +SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
-> > +           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
-> > +           file://0002-Makefile-Don-t-install-the-docs.patch \
-> > +           file://0003-Makefile-Don-t-build-the-examples.patch \
-> > +          "
-> > +
-> > +SRC_URI[md5sum] = "d9a7b3f1059ffd54b4c92e38329fe69e"
-> > +SRC_URI[sha256sum] = "e11cfbbdf0773fb5965211e18044531f442ad1e6d6726f1bac8a6dcc0e092622"
-> > +
-> > +inherit autotools-brokensep pkgconfig
-> > +
-> > +# Fix jemalloc error:
-> > +# | configure: error: cannot run C compiled programs.
-> > +# | If you meant to cross compile, use `--host'.
-> > +#
-> > +# Also fix #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Werror=cpp]
-> > +EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='-O'"
+
+Making a recipe rdep on a meta recipe is sort of too coarse grained
+the vice versa is expected
+can we encode all needed recipes in rdep ?
+
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  meta-oe/recipes-connectivity/blueman/blueman_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Perhaps its better to pass SELECTED_OPTIMIZATION variable instead of
-> hardcoding -O here since this might override the optlevel we expect
+> diff --git a/meta-oe/recipes-connectivity/blueman/blueman_git.bb b/meta-o=
+e/recipes-connectivity/blueman/blueman_git.bb
+> index f479386c1..947db7836 100644
+> --- a/meta-oe/recipes-connectivity/blueman/blueman_git.bb
+> +++ b/meta-oe/recipes-connectivity/blueman/blueman_git.bb
+> @@ -25,7 +25,7 @@ SYSTEMD_AUTO_ENABLE_${PN} =3D "disable"
+>  RRECOMENDS_${PN} +=3D "adwaita-icon-theme"
+>  RDEPENDS_${PN} +=3D " \
+>      python3-dbus \
+> -    bluez5-obex \
+> +    packagegroup-tools-bluetooth \
+>  "
 >
-> > +
-> > +do_install() {
-> > +     oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-> > +
-> > +     # Copy these into the standard directories
-> > +     install -d ${D}${bindir}/
-> > +     mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
-> > +     mv ${D}/usr/local/bin/daxio ${D}${bindir}/
-> > +
-> > +     install -d ${D}${libdir}
-> > +     mv ${D}/usr/local/lib/*so* ${D}${libdir}/
-> > +
-> > +     install -d ${D}${libdir}/pkgconfig
-> > +     mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
-> > +
-> > +     install -d ${D}${includedir}
-> > +     mv ${D}/usr/local/include/* ${D}${includedir}/
-> > +
-> > +     # Remove uneeded files
-> > +     rm -rf ${D}/usr/local/
-> > +}
-> > +
-> > +# Include these by default otherwise the SDK is not very useful
-> > +FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
-> > +FILES_${PN} += "${libdir}/*so*"
-> > +FILES_${PN} += "${libdir}/pkgconfig/*.pc"
-> > +FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
-> >
+>  PACKAGECONFIG[thunar] =3D "--enable-thunar-sendto,--disable-thunar-sendt=
+o,,thunar"
+> --
+> 2.14.4
 >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
