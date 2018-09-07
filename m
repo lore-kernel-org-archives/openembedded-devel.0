@@ -1,48 +1,49 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B263797B4
+Return-Path: <yevgenyp@pointgrab.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id DC8D8797B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 10:46:23 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id b19-v6so14304365wme.3
+	Fri,  7 Sep 2018 10:46:37 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id j19-v6so11896746ljc.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2018 03:46:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Fri, 07 Sep 2018 03:46:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pointgrab-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=2XE10w+m1LYv1pHl7eCb1+znalidcyHmFKtdc5nXWoc=;
-	b=iLnKRUjv9SlvITwjDb9RJCPd7M/RfTXkKWbrieT8sY2MC/o87t3vqtXa89tGiwVTIA
-	LMNMhqCeV4dOoPYUwoiya5Zj7GBjtNKpV/byVfUnV2egIoX+WotCDIL6Sd4dZrMWf0iT
-	iQcbV2ZMUyGHm7fs2qxHXq90Zq5a3XborwWCSDAj2w7Q90o1iY3MD09oCy4UGN4eTbwA
-	w2p0w5z6Hf+rdBHVHk/pMLyhcKRz9zdtUux2KNFc02eoLelwlwZOHn3tosoX1SMlL+IN
-	h5nnCNGbxnS++CINu7h1LCuALKFYKxqfoemAM2yL08OA4VICG76PMGCz184gycZ7yqJ9
-	v0WQ==
+	bh=167sTuF2NUf0limAz2kP2ULQoAQPkY3ozJGW1RW+kPA=;
+	b=JLNUuiq4imvNh6DEEipi4SfXCSGyPhqx3XZ2BMp69PxEh+CQHG6BjexvhTcQKRyhyX
+	fUN8V5t3sF4Hznbx1WOilWU8LiLt0+tGaMyp6BaUQXKr2475TRxuGFJal54uiztnIgqF
+	9UmE0q4VWNgqfP2tTj4yU45b/8ApQpqVrnaB0823S4K+hRucZKog72/sJv/tq/XV2tHt
+	aUVfsInIAR94Uk1jpBG7zBgwPY0GmsFQNsfkWGfszCibbcF3MvE1qLLEfIGYZBz0IGH6
+	M5BgRCkRavw/igB7LRkO37MD78wybExHsWFiNZHSCEUNsvAKHO+90NoBVYls5AA/Uypq
+	mQHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2XE10w+m1LYv1pHl7eCb1+znalidcyHmFKtdc5nXWoc=;
-	b=lH1KN9PB2SzRT1BISHHKtBQBLUBcv0zIFWiwr+yLuMbc++x3nwV0nCgg2friw2oXFP
-	Dwh3Tp9WxRy29ap4du3qpqFNpAnqogIh3i6GD2ovv8X4bwq8rr0by3Jrklgf+q5dC0o2
-	RaPy6Ee3Pwle3drShqvA6N19yncxjlKvTIlrMfjT0s/+oVCt9I5LpCkx5ICWuWUzSXiz
-	6SwR+OgBypX/B6MSt1J1nR06/hTDras/zKbEloF4OJAPXPvDPzJHABZBVEnF49zPNaRO
-	uTh+3hTdnWSeSl8ORZ2T4wLxtyDc0ld/wm8p0HxVZFIySrHilZUZhKotMhYm9TkeYBZe
-	0XeA==
-X-Gm-Message-State: APzg51D6lzfkS4t99z1s3M1XWfcFDp9m4+PhheztA9+0Am6yhoBtClzM
-	zhlD3XEZaxoBMc/D85VGRvLhto09
-X-Google-Smtp-Source: ANB0VdaGcRB0iYdAmDJuufC9G1oxFANZW5HtZSXcReiq5UzhedHsowJ/QrBZzSWS11t78R2CNkhBkg==
-X-Received: by 2002:a1c:b157:: with SMTP id
-	a84-v6mr4622665wmf.18.1536317184009; 
-	Fri, 07 Sep 2018 03:46:24 -0700 (PDT)
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
-	(host63-251-dynamic.54-79-r.retail.telecomitalia.it. [79.54.251.63])
+	bh=167sTuF2NUf0limAz2kP2ULQoAQPkY3ozJGW1RW+kPA=;
+	b=Xv1YeKiLj97ecAMnTpyELA53HTJgohnH12opxLMTNWg71uDvBRzEW7rq5YQW10CeQ5
+	xV8M2NycjG5lRL7HqXcxPXj6dzAzNmeYQRCPjM7yBuEjPgGOeSAUNU7TrFPPTiVYKOnL
+	V3kxP5iV3tU5aOuqQUOu4lCiNChDpAaMo/eKnYyVU/a+6DlSBXyrN3k6+joYqvQsVct4
+	7RDzXmrK/zWTWlpVY2j1M+ZFNUVszyQb4n4Hadu+Iy5SLtt45wknCRfpDzCQD1+Njox/
+	RNGX3JHSGFXsl+FFAAeQ5yQxdFUHiqr5+8hrH+7f9Dv1rdGmHoOqxPlWiL6T/7ws4XLS
+	0peA==
+X-Gm-Message-State: APzg51ANeRhKuC2yiQ7Ot9y2T1D8ZvQZUbswsV3KWpyJI1al9KSw1lme
+	762M18VI8SGJnPdOv2Mq2LsVX3Y6HRI=
+X-Google-Smtp-Source: ANB0VdY7x13N40EyF6OfYQCYBYE94+Onu+wde19c2jUhDbZaM+7wKlXxdyKTI9o1hE/q7ddoSK6Q9Q==
+X-Received: by 2002:a2e:8743:: with SMTP id
+	q3-v6mr4539805ljj.139.1536317198213; 
+	Fri, 07 Sep 2018 03:46:38 -0700 (PDT)
+Received: from yevgeny-lnx.localdomain ([77.222.132.139])
 	by smtp.gmail.com with ESMTPSA id
-	o3-v6sm10318746wrn.58.2018.09.07.03.46.22
+	l141-v6sm1245115lfg.55.2018.09.07.03.46.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 07 Sep 2018 03:46:23 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 07 Sep 2018 03:46:37 -0700 (PDT)
+From: Yevgeny Popovych <yevgenyp@pointgrab.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Sep 2018 12:46:20 +0200
-Message-Id: <1536317180-11032-1-git-send-email-andrea.adami@gmail.com>
+Date: Fri,  7 Sep 2018 13:44:31 +0300
+Message-Id: <1536317071-17077-1-git-send-email-yevgenyp@pointgrab.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] kexecboot-cfg: add new options for DTB and CMDLINE
+Subject: [meta-java][PATCH] openjdk-8, openjre-8: Fix PROVIDES assignment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 10:46:23 -0000
+X-List-Received-Date: Fri, 07 Sep 2018 10:46:38 -0000
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+PROVIDES is a recipe-specific variable, not package-specific like RPROVIDES.
+This bug would prevent you from having recipes DEPEND on java2-runtime
+or java2-vm (assuming you have set PREFERRED_PROVIDER correctly).
+
+Change-Id: I602d98241d2a6f42a13a1fa1edad049d4e8792b0
+Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
 ---
- meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ recipes-core/openjdk/openjdk-8_172b11.bb | 4 ++--
+ recipes-core/openjdk/openjre-8_172b11.bb | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
-index 804ec32..f90e234 100644
---- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
-+++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
-@@ -19,9 +19,15 @@ LABEL=${KEXECBOOT_LABEL}
- # Specify full kernel path on target.
- KERNEL=/boot/${KERNEL_IMAGETYPE}
- #
-+# Specify which device tree blob to use
-+# DTB=/boot/my-own-dtb
-+#
- # Append this tags to the kernel cmdline.
- APPEND=${CMDLINE} ${CMDLINE_DEBUG}
- #
-+# Overwrite kernel command line instead of appending to it
-+# CMDLINE=console=/dev/tty0 root=/dev/sdb1
-+#
- # Specify optional initrd/initramfs.
- # INITRD=/boot/initramfs.cpio.gz
- #
+diff --git a/recipes-core/openjdk/openjdk-8_172b11.bb b/recipes-core/openjdk/openjdk-8_172b11.bb
+index c1c6e1e..22d0113 100644
+--- a/recipes-core/openjdk/openjdk-8_172b11.bb
++++ b/recipes-core/openjdk/openjdk-8_172b11.bb
+@@ -47,10 +47,10 @@ FILES_${PN}-doc_append = "\
+ 
+ FILES_${PN}-source = " ${JDK_HOME}/src.zip "
+ 
++PROVIDES = "java2-vm"
++PROVIDES = "java2-runtime"
+ RPROVIDES_${PN} = "java2-vm"
+-PROVIDES_${PN} = "java2-vm"
+ RPROVIDES_${PN} = "java2-runtime"
+-PROVIDES_${PN} = "java2-runtime"
+ 
+ inherit update-alternatives
+ 
+diff --git a/recipes-core/openjdk/openjre-8_172b11.bb b/recipes-core/openjdk/openjre-8_172b11.bb
+index dd29691..d8d4ba8 100644
+--- a/recipes-core/openjdk/openjre-8_172b11.bb
++++ b/recipes-core/openjdk/openjre-8_172b11.bb
+@@ -35,10 +35,10 @@ FILES_${PN}-doc_append = "\
+     ${JRE_HOME}/THIRD_PARTY_README \
+ "
+ 
++PROVIDES = "java2-vm"
++PROVIDES = "java2-runtime"
+ RPROVIDES_${PN} = "java2-vm"
+-PROVIDES_${PN} = "java2-vm"
+ RPROVIDES_${PN} = "java2-runtime"
+-PROVIDES_${PN} = "java2-runtime"
+ 
+ inherit update-alternatives
+ 
 -- 
 2.7.4
 
