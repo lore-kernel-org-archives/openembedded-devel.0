@@ -1,49 +1,50 @@
 Return-Path: <yevgenyp@pointgrab.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 81E767981F
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com
+	[209.85.208.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 020D47982B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 17:25:08 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id c29-v6so12683995lfj.1
+	Fri,  7 Sep 2018 18:10:18 +0000 (UTC)
+Received: by mail-lj1-f172.google.com with SMTP id y17-v6so12967803ljy.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2018 10:25:09 -0700 (PDT)
+	Fri, 07 Sep 2018 11:10:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=pointgrab-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=5ceCmMUjAJlm8Eeyglnj6Vo67UrRrfEiOML/daak2Mc=;
-	b=IvVHAeb6AH4yxkx4ptPHZADCfFG1sPUISyRpiktg50GvFUVlQOnsfPkdpQMmDiPL16
-	WE1rePBNOa0dgUblbNUqsFB4LDkBN6RTC4Mg12HXItiD7NBgZHDYHLFRQUytCo+aovUB
-	mSE2qMziMzasARNG0jfaRXOxTgn6+ttx8HBrHIXZLQv5H5mH+bSdX7lrUkQXhxYMWCqa
-	O8MGv9xjIaIkl/7lfLhA/qnwhl+iohBXJTsl4eMe4ZBx8gkQZm7/M9ubJ4Kk4QF6PRD5
-	/6QddEXWuuF/WOWlTxIWkLcLbx2Vp+v7IlUTPqzHh8fPxKPCKpistaiJ7Bt5jPK9PG6e
-	xqGQ==
+	bh=YeoMyY7SX0mQE539h7LXo6P8DR+sC5XlujEpjyZbfqI=;
+	b=AbC0t57mtMRofW2uVtbeom5VvWIfmroB64i07Ctqg39UBYlb4PVdFQLHhmA/Enpemh
+	0MvrgdnIT9+dqNFCMbO7kd25NiujDChHxNzCCndPMsSurRgq3gPeOUSGf4UNIbD9CS5+
+	1XUhaIAN62C0hEyOmPo2Qgre91Lapqf1gq4LSrTQlcm05GbYIdZBWikhD8LDLScdNnSx
+	Mm55iz/3LawLCc2ducsRsXZ3jdSusYwPpCGjZh82B/wdFd4TH1fsi6st5EmSVEfrBGu9
+	8f9O6nJE1Z8ieHQkoMA29OYjfvhh5NSmLmGO/ZufKhLBt8TCwR//Qz4ahpu3qEsDnhsc
+	VtGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=5ceCmMUjAJlm8Eeyglnj6Vo67UrRrfEiOML/daak2Mc=;
-	b=OAyzEZ13fsf8Zny+sT01DyjuRjEBQCugKYYCNG8P+gC1VPIUKFwcXw8R778Uvdkfyw
-	NkYdLMBUIHfRQd8welggfUjpoYXbSIelzuu1qluF7SsGXgu1O6PsVc/Jl0+6LsBbUW0w
-	CNvUH7HUYTKSgXRTrjOaVnN87rOXDhlrZBAdxRSX9kI/S0q4i5NoTBpVmBa3o3DeYSq+
-	8NJWaq1yo1sMmHMWrUxoHl6swHe3NV5WEXTcUoxYEHK4L+44MexDds58/KL7exBAz7Gx
-	40IuGcN0JywSXTJPtKW98zb53XmuT9sAHwFLGhayRar2UuMQ7BfgqYGig/K4UleKeItN
-	dC/A==
-X-Gm-Message-State: APzg51AEWuPIppZw7mbKOrFXsd7k3RBSnuyKZov8NXBkAkqttsbh5Xnu
-	TiI2qMdNO5k/5TAE95m4U9QMVdqt2UI=
-X-Google-Smtp-Source: ANB0Vdb3W1safUxbms+cOddRt7BhMda3JVacUGqUAObk0b8Wgo+WVqgG3tlti9fXx3p1KunpjYzEtQ==
-X-Received: by 2002:a19:6619:: with SMTP id
-	a25-v6mr6052607lfc.62.1536341108653; 
-	Fri, 07 Sep 2018 10:25:08 -0700 (PDT)
+	bh=YeoMyY7SX0mQE539h7LXo6P8DR+sC5XlujEpjyZbfqI=;
+	b=IIQ0O/6yLJCE/BMapn4y5UZMvXXdlgQ9zWwLV4Bv7jYjvl7eLQjZYKe69w57t0AkMm
+	ZoRJgzf3D+J47l6fgRJ5rEvLDVOimLhuzYLdaJR+x1LyhVZO1eeiUmg/4PLNJI4+MPzp
+	H/FLMgIuZA94VOUKASOOmItk4Q6CHZpxgSve8neFGa6nzb/L/NUkvtU1BgGRwROLGIuB
+	ZJaFaiUZH9aZcJIbiitPtVhxtYCBpMCdwjG9L82KqNhLYMSflpKbmBiJWuNqxqwoNLaG
+	0+TUT+nn2s86dWfb1M33rvQ6QBMEr7DdyQx/KYJchkonNdu8kejDww9ye9sJSvqRUEa4
+	fDPg==
+X-Gm-Message-State: APzg51D1EMC7BD0Z2RzVBc8IMvgG9Q7AOSSBcuWlAPOvsHC5k5F3NGEe
+	GJqLa1G8cS2yaz21jya30XIL972HxwI=
+X-Google-Smtp-Source: ANB0VdZmhiCEo2WngOqnkGPsfvjqHVaEO9w8rmUBIqu3SnU7Wv2UZSvuXNgNucxu3UVfw2ltb0F0rg==
+X-Received: by 2002:a2e:6c17:: with SMTP id
+	h23-v6mr3416420ljc.81.1536343819268; 
+	Fri, 07 Sep 2018 11:10:19 -0700 (PDT)
 Received: from yevgeny-lnx.localdomain ([77.222.132.139])
 	by smtp.gmail.com with ESMTPSA id
-	m20-v6sm1378096lfb.27.2018.09.07.10.25.07
+	j24-v6sm1391050lfb.62.2018.09.07.11.10.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 07 Sep 2018 10:25:07 -0700 (PDT)
+	Fri, 07 Sep 2018 11:10:18 -0700 (PDT)
 From: Yevgeny Popovych <yevgenyp@pointgrab.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Sep 2018 20:25:02 +0300
-Message-Id: <1536341102-83842-1-git-send-email-yevgenyp@pointgrab.com>
+Date: Fri,  7 Sep 2018 21:10:07 +0300
+Message-Id: <1536343810-87649-1-git-send-email-yevgenyp@pointgrab.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-java][PATCH] cacao: class-native: RPROVIDE virtual/java-native
+Cc: andre.draszik@jci.com
+Subject: [meta-java][PATCH 0/3] ca-certificates-java: Fix usage as a native tool, do_rootfs failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 17:25:09 -0000
+X-List-Received-Date: Fri, 07 Sep 2018 18:10:19 -0000
 
-This will allow other native recipes RDEPEND on virtual/java-native.
+This series fixes several issues with ca-certificates-java:
+* when used as a native tool
+* failure on do_rootfs
 
-Change-Id: I85fcd012d09441867fa5f359463cbe8fff702fbe
-Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
----
- recipes-core/cacao/cacao_1.6.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+This doesn't fix all the issues and there is definitely a room for improvement.
+I presume that running it on the target doesn't work - at least ${sysconfdir} is
+not expanded in the hook.
+I also think that will be best to drop create-ca-certificates-java usage in
+the postinst and let it be called as a hook of ca-certificates. This will allow
+us to remove some code and simplify both script and recipe.
 
-diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
-index 1074ff5..ead0e2f 100644
---- a/recipes-core/cacao/cacao_1.6.1.bb
-+++ b/recipes-core/cacao/cacao_1.6.1.bb
-@@ -6,6 +6,7 @@ SECTION  = "interpreters"
- 
- DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-initial-native classpath-native bdwgc-native virtual/java-initial-native"
- PROVIDES_class-native = "virtual/java-native"
-+RPROVIDES_${PN}_class-native = "virtual/java-native"
- 
- DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
- RPROVIDES_${PN} = "java2-runtime"
+It would be great if others could test their use cases;
+and clarify them - is create-ca-certificates-java really needed?.
+
+Yevgeny Popovych (3):
+  ca-certificates-java: Fix sysconfdir for -native recipe
+  ca-certificates-java: Don't fail when called via hook on do_rootfs
+  ca-certificates-java: Distinguish between SYSROOT and D
+
+ .../ca-certificates-java.hook.in                   | 23 +++++++++++-----------
+ .../ca-certificates-java_20180516.bb               | 11 ++++++++---
+ 2 files changed, 19 insertions(+), 15 deletions(-)
+
 -- 
 2.7.4
 
