@@ -1,47 +1,51 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id A2EB960596
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 447B579803
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 16:44:23 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id t25-v6so15219659wmi.3
+	Fri,  7 Sep 2018 16:54:49 +0000 (UTC)
+Received: by mail-oi0-f42.google.com with SMTP id b15-v6so28422784oib.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2018 09:44:25 -0700 (PDT)
+	Fri, 07 Sep 2018 09:54:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=C8slR+hCfie2hwVgEz295vZe4PLs54ldNGCOGq+oElM=;
-	b=FiF+RKKkymLU4ulNXXx2JIHCRCoygTTXyMQggJiavjx2vIotzGV41IuSwff8A9GiXe
-	c4yrqUgcGzDukShiMQWZM4CsJa0Cta5B1TKFKaRrkHyLHva0Dmyx4xxSjW1WiLHBfB3b
-	CeqVyVKsOGdU7zFWKRblZxHHiPwRw+2OvwD2YTo/CR43JLS8Rh0+EmzQ4Dda61Z/fgnB
-	JU/umyMATtVmBt792NCv21PjSH689dxhy5fkljF92wJSdd7olvZH1DhOuZ8mJIX5BcRF
-	+qubMykyQN8oeiUUY3pjQxMAEJlorzYB1ctmaKL5w07cdB1onvoSXFiv6Dd/dLsfOfNm
-	aKGw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=khFxYMMjU+dq4KXIA6wChpEf7Ot2BaAzNGaY1z+3tFY=;
+	b=jpOhmWwLs6YlVR8c5QVBSgcxhOsdhHui8s02DgWzlbMSxDM120xvIgxMl65tGaghsZ
+	5agvQviNAknZJArOU+gUL4/VebrLwO+Sn/bGOCn7hLTQHWTWZRzmHIh3X52n3b046Uom
+	3rC6VcvHOkJFOd/KgXRcjtN5LGrwihWRbpmV6UePq/fChcq/9/NTfdN/PWmIKWKYZ4yb
+	UOGUbolUKZcq8yVneMQ2dDk+Y3EEpeGoTRALxcgWWJTc1+zIXd2B5Er8jIPjrx+X1YP8
+	HV1SF+TisUIsuDC90ICGRsji2oWfs6J01mmGr4zx4RJQoC3Ki3oOErGOGk8eOe8i/Iua
+	nDGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=C8slR+hCfie2hwVgEz295vZe4PLs54ldNGCOGq+oElM=;
-	b=tEimgRGDFycHBX3/oRyf0VDH+PJlt4W47Uf1FycAvtgXFqnR0UpFBMMN4OHarVW1wy
-	WOcz0UuR6gOMz17pHH3qTUPrG/ZeGZIN8sUc0vvat+rWbzj2XUAkcAo6r+xyrtSUZeK6
-	SJAH23/PdVCW5batmlgV4UfremDGLiM0B5pK4raNkMeOa0epi8Nc+xuLysWUPTmMp95O
-	SpqoejO5bz+d+DSPCzFHvM5TM1pfdmT3/m2yfQ674+rtb0zjEjhcW1m1oP0PUA1Op5Wt
-	iYp2UCU7Z09fFagsmygHQiXN5wzUiokwYHFaB3cTnZYfniV7VlH8tVNWjkynjqN0UpQ0
-	9KiQ==
-X-Gm-Message-State: APzg51CWoNSEyWZSBBiTZpR3sjRY+Azm3TccpY+tni7ZaADDy/jC6pSd
-	VXslKJ+opldU3/aB5tRHdu9Ca841
-X-Google-Smtp-Source: ANB0VdbeJeMVwhEyNpMkx3ezpnck84Q160/feNIuHMxPEboANX7J2a7CsYQ1CgBQeJv3rkxG4i8dgA==
-X-Received: by 2002:a1c:cc0e:: with SMTP id h14-v6mr6032039wmb.2.1536338664038;
-	Fri, 07 Sep 2018 09:44:24 -0700 (PDT)
-Received: from localhost.localdomain
-	(host215-117-dynamic.54-82-r.retail.telecomitalia.it.
-	[82.54.117.215]) by smtp.gmail.com with ESMTPSA id
-	75-v6sm16418787wml.21.2018.09.07.09.44.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 07 Sep 2018 09:44:23 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Sep 2018 18:44:20 +0200
-Message-Id: <1536338660-3264-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-handheld][PATCH kexecboot-handhelds: catch up with kexecboot upgrades (add --atags)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=khFxYMMjU+dq4KXIA6wChpEf7Ot2BaAzNGaY1z+3tFY=;
+	b=RXk5BxsGqqb6zfiOoQVxutvY1752kocFiNzcF3K118FNkwvRE1PcwFzqwRBcxsvsl+
+	zCu75p1fAXQZF6JgY6Fr7a/pxwP2oeVMZRdTo+5HPo0FYF6x7vbeHkMvQXy6qsurTedq
+	FN9qtzborLmZowEFL6/piEaaQqPVllHfpO9knSZUsnUJ6pqZHbL5ljfR/7uEUGl+RRQh
+	FPj/Qtm8MMMcd2vCalCqdwHAV6ORJtXYZlBjNQOLr1gTUR6nGOnQqYP4gjj0eUdDNMWN
+	PLM82jjLNOtMTntVVCkkvz1dYHMQgvTGOVYEbxK03DH5Z8yy3fkmrVHuodBaRILNCblb
+	WRHA==
+X-Gm-Message-State: APzg51DD/OrwrLa59LPMcBxASzht0gNHJbNtJEieqZDE5oBnVFOAVVxs
+	1ow/LNY192sFFS/dzVuO6XWF0aro5+tcdeFzRgA=
+X-Google-Smtp-Source: ANB0Vdb3s6xOlA9x34meqLLqp3e3IZhRLBxmczgghBosN2+A1HxAVgfXiatpeinNEwJKfb84bC7Wgv6Vn0Pvvinx5g4=
+X-Received: by 2002:aca:b154:: with SMTP id
+	a81-v6mr9618143oif.34.1536339290204; 
+	Fri, 07 Sep 2018 09:54:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ac9:490c:0:0:0:0:0 with HTTP;
+	Fri, 7 Sep 2018 09:54:49 -0700 (PDT)
+In-Reply-To: <CAMKF1speuTVVk+o9svpy-Chudk18WGvMcvEEd70dsw8x+9Kdag@mail.gmail.com>
+References: <20180907102842.24197-1-schnitzeltony@gmail.com>
+	<CAMKF1speuTVVk+o9svpy-Chudk18WGvMcvEEd70dsw8x+9Kdag@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 7 Sep 2018 18:54:49 +0200
+Message-ID: <CALbNGRT4HbiFCxVT9CYEX=-cOKCT0HfKkAJ35F5FH2e5xJWzDg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] blueman: rdepend on packagegroup-tools-bluetooth instead of bluez5-obex
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +58,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 16:44:25 -0000
+X-List-Received-Date: Fri, 07 Sep 2018 16:54:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-With the actual kexec-tools-klibc > 2.0.17 in meta-initramfs we can use the
-newly added fast reboot option (--no-checks).
+On Fri, Sep 7, 2018 at 4:08 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> hi Andreas
+>
+> On Fri, Sep 7, 2018 at 3:29 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+>>
+>> Have a better out-of-the-box experience
+>>
+>
+> Making a recipe rdep on a meta recipe is sort of too coarse grained
+> the vice versa is expected
+> can we encode all needed recipes in rdep ?
+That just causes redundancies - what is the problem exactly?
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- recipes-bsp/kexecboot/kexecboot-handhelds.inc | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/recipes-bsp/kexecboot/kexecboot-handhelds.inc b/recipes-bsp/kexecboot/kexecboot-handhelds.inc
-index f7f9a37..06bf96d 100644
---- a/recipes-bsp/kexecboot/kexecboot-handhelds.inc
-+++ b/recipes-bsp/kexecboot/kexecboot-handhelds.inc
-@@ -1,6 +1,6 @@
--EXTRA_OECONF_akita = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16"
--EXTRA_OECONF_c7x0 = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16"
--EXTRA_OECONF_spitz = "--enable-delay=3 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16"
--EXTRA_OECONF_poodle = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16"
--EXTRA_OECONF_tosa = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16"
--EXTRA_OECONF_collie = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16"
-+EXTRA_OECONF_akita = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16 --enable-atags --enable-no-checks"
-+EXTRA_OECONF_c7x0 = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16 --enable-atags  --enable-no-checks"
-+EXTRA_OECONF_spitz = "--enable-delay=3 --enable-evdev-rate=1000,250 --enable-fbui-width=480 --enable-bpp=16 --enable-atags  --enable-no-checks"
-+EXTRA_OECONF_poodle = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16 --enable-atags  --enable-no-checks"
-+EXTRA_OECONF_tosa = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16 --enable-atags  --enable-no-checks"
-+EXTRA_OECONF_collie = "--enable-delay=2 --enable-evdev-rate=1000,250 --enable-bpp=16 --enable-atags  --enable-no-checks"
--- 
-2.7.4
-
+Andreas
 
