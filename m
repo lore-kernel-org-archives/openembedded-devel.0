@@ -1,19 +1,20 @@
 Return-Path: <philip@balister.org>
 Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
 	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B8C574535
+	by mail.openembedded.org (Postfix) with ESMTP id 490C179788
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 00:29:48 +0000 (UTC)
-Received: (qmail 31581 invoked by uid 1003); 7 Sep 2018 00:29:53 -0000
+	Fri,  7 Sep 2018 00:33:22 +0000 (UTC)
+Received: (qmail 24952 invoked by uid 1003); 7 Sep 2018 00:33:27 -0000
 Received: from unknown (HELO ?192.168.11.100?)
 	(philip@opensdr.com@73.152.143.112)
 	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	7 Sep 2018 00:29:53 -0000
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20180905210224.21225-1-raj.khem@gmail.com>
-	<20180905210224.21225-10-raj.khem@gmail.com>
-	<70311756-b9d0-f3c2-cd7e-cb057f390ef4@balister.org>
-	<f539cee0-af55-37e5-72c2-01c431e11832@gmail.com>
+	7 Sep 2018 00:33:26 -0000
+To: Joshua Watt <jpewhacker@gmail.com>, Trevor Woerner <twoerner@gmail.com>,
+	Alexander Kanavin <alex.kanavin@gmail.com>
+References: <81713c72-e806-ba69-0e6d-7ef4a2c00010@gmail.com>
+	<CANNYZj8Doupz9W1zeuC5xygjqQ_ea3+v5Wa9xuBKSykLQ=yAJA@mail.gmail.com>
+	<CAHUNapR1AJEsDg8TUig18uSzYE74X7QGgj2pgc3Uo5OnaMxRVA@mail.gmail.com>
+	<bcaf6bfb74fb925d8987047c2a0552e726b3aea4.camel@gmail.com>
 From: Philip Balister <philip@balister.org>
 Openpgp: preference=signencrypt
 Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
@@ -40,13 +41,16 @@ Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
 	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
 	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
 	6eUfr0u7CwnEyqiQ
-Message-ID: <81feb8d0-7b41-a744-ebac-742dd92a32b4@balister.org>
-Date: Thu, 6 Sep 2018 20:29:48 -0400
+Message-ID: <a20bb9e5-d5cb-3e39-a0f5-fcb98a042887@balister.org>
+Date: Thu, 6 Sep 2018 20:33:22 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.5.2
 MIME-Version: 1.0
-In-Reply-To: <f539cee0-af55-37e5-72c2-01c431e11832@gmail.com>
-Subject: Re: [meta-oe][PATCH 10/12] sip: Upgrade to 4.19.12 release
+In-Reply-To: <bcaf6bfb74fb925d8987047c2a0552e726b3aea4.camel@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OEDEM Sunday, 21 October 2018 in Edinburgh (before ELCE) - Update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,61 +63,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 00:29:49 -0000
+X-List-Received-Date: Fri, 07 Sep 2018 00:33:22 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-MW
 Content-Transfer-Encoding: 7bit
 
-Yes working for the latest release. I emailed the pyqt/sip list with a
-question. Hopefully we can sort the issue out. Working toward a combined
-pyqt5 build for py 2 and 3
+On 09/06/2018 04:08 PM, Joshua Watt wrote:
+> On Thu, 2018-09-06 at 16:00 -0400, Trevor Woerner wrote:
+>> On Thu, Sep 6, 2018 at 5:39 AM, Alexander Kanavin <alex.kanavin@gmail
+>> .com>
+>> wrote:
+>>
+>>> And the link for signing up is...? :)
+>>>
+>>
+>> https://www.openembedded.org/wiki/OEDEM_2018
+>>
+>> or email Armin
+> 
+> Will there be an opportunity to dial in remotely?
+> 
+
+We try, but audio coverage can be tricky and the tech can be funny. No
+guarantees.
 
 Philip
-
-On 09/06/2018 08:23 PM, Khem Raj wrote:
-> 
-> 
-> On 9/6/18 5:17 PM, Philip Balister wrote:
->> This leads to a dysfunctional sip. I'm working on a working update.
->>
-> 
-> Thanks for update, although we will need to move to this version for
-> openssl 1.1.x support. are working on fixing the same version ?
-> if so I will look forward for patches.
-> 
->> On 09/05/2018 05:02 PM, Khem Raj wrote:
->>> Inherit pythonnative instead of using python from build host
->>>
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> ---
->>>  .../recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb}  | 6 +++---
->>>  1 file changed, 3 insertions(+), 3 deletions(-)
->>>  rename meta-oe/recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb} (90%)
->>>
->>> diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
->>> similarity index 90%
->>> rename from meta-oe/recipes-devtools/sip/sip_4.19.8.bb
->>> rename to meta-oe/recipes-devtools/sip/sip_4.19.12.bb
->>> index ea944b32ff..be58959989 100644
->>> --- a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
->>> +++ b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
->>> @@ -4,13 +4,13 @@ SECTION = "devel"
->>>  LICENSE = "GPLv2+"
->>>  LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
->>>  
->>> -inherit python-dir
->>> +inherit python-dir pythonnative
->>>  
->>>  DEPENDS = "python"
->>>  
->>>  SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
->>> -SRC_URI[md5sum] = "0625fb20347d4ff1b5da551539be0727"
->>> -SRC_URI[sha256sum] = "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
->>> +SRC_URI[md5sum] = "e28b0790dfe4962ce6bbd7c4772f40c9"
->>> +SRC_URI[sha256sum] = "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822"
->>>  
->>>  BBCLASSEXTEND = "native"
->>>  
->>>
-> 
 
