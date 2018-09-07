@@ -1,90 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E4C3C7977A
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B8C574535
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Sep 2018 00:24:00 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id h79-v6so6084251pfk.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 17:24:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:organization
-	:message-id:date:user-agent:mime-version:in-reply-to;
-	bh=J3PxWTqM7vFVxjPg+Lk2doskTdyvcx8u7LpjqT+Ks9c=;
-	b=AUh+rjpxycIt/ikeNIG7qfS2ur5h4Kp7B3eM70NDcYgERtmGctI8ORi6bvjqDiuK3G
-	HnWMDllBp9neh/PaxPn/1ST0g/pf2wN2EJR1RZJ42Uv9yj2uHuI0XAPL3d0dwEedH+PW
-	tz9qDxkVHMdzaVLF/zJ3Q9Jp9HC01dsUmm/UbQcAP9RvcCNnJ6+rpUcpX57p5FsZc+L7
-	jFL2Tgl1004mwy9NqV+8ptKseUCAM3aINgrTFkJlFGne/sRZc5MjLWJpBBm18fAMlcZT
-	kEc97sS83GxR81YtpZwvo1zYIr5mAl/xTNTM3LEA2j2dJ2zDyuunq4D2KbsV6XH9Mbws
-	s8hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:organization:message-id:date:user-agent:mime-version:in-reply-to;
-	bh=J3PxWTqM7vFVxjPg+Lk2doskTdyvcx8u7LpjqT+Ks9c=;
-	b=ewK7TI6JQ2r3vCI5ob6NumTppeoR7GNXjf6RwYL1clqKSCyYUu73b7gkEQCO6B2TRB
-	aOWXWXSHAXiqhbJYgG0kxCh3+sbPHRcmsfU6CyiGlP6W/VJL0qfNCv3P1sejX+xy55lp
-	c+q4uqKzF5wrptJK/JZq3uFEDDsewrwYvbKjH7oI7PMb9zNsWtUHt0/K+Ks7P5tAfb5W
-	G+tyUiXsBopGSNBqagFfw4/X57V7+43blJoRz2D0hrjLti01sZ/IN7PA7QvwCBLNVZlW
-	xH3rtUeQYNiMndeiZ0ZIiFIISJth+Fj20bOT2alamfBz1lz+G6CKGEY51vgyNYekfTP/
-	H4Aw==
-X-Gm-Message-State: APzg51DrttWReYa3qxj4t3ZLgm+nnQnyO4VFQPI0Bk15TivJ7jPc279C
-	UedJE/Iw8PEovkAYsWGc1m9aO+Wo
-X-Google-Smtp-Source: ANB0VdblfiimnZLnN/IfPfrrLO7ooNDQKjio7UQqsY/WsaQOsRaMhG8b03OluWbE/55BpmFqrVRZUw==
-X-Received: by 2002:a63:4663:: with SMTP id
-	v35-v6mr5528393pgk.178.1536279841417; 
-	Thu, 06 Sep 2018 17:24:01 -0700 (PDT)
-Received: from hermes.local ([2601:646:877f:9499:fc25:43f8:d4d:d1b3])
-	by smtp.gmail.com with ESMTPSA id
-	f186-v6sm6411349pgc.4.2018.09.06.17.24.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Sep 2018 17:24:00 -0700 (PDT)
-To: Philip Balister <philip@balister.org>,
-	openembedded-devel@lists.openembedded.org
+	Fri,  7 Sep 2018 00:29:48 +0000 (UTC)
+Received: (qmail 31581 invoked by uid 1003); 7 Sep 2018 00:29:53 -0000
+Received: from unknown (HELO ?192.168.11.100?)
+	(philip@opensdr.com@73.152.143.112)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	7 Sep 2018 00:29:53 -0000
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20180905210224.21225-1-raj.khem@gmail.com>
 	<20180905210224.21225-10-raj.khem@gmail.com>
 	<70311756-b9d0-f3c2-cd7e-cb057f390ef4@balister.org>
-From: Khem Raj <raj.khem@gmail.com>
+	<f539cee0-af55-37e5-72c2-01c431e11832@gmail.com>
+From: Philip Balister <philip@balister.org>
 Openpgp: preference=signencrypt
-Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-Organization: HIMVIS LLC
-Message-ID: <f539cee0-af55-37e5-72c2-01c431e11832@gmail.com>
-Date: Thu, 6 Sep 2018 17:23:55 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
-	Gecko/20100101 Thunderbird/60.0
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	xsBNBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAHNJVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz7CwH4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4YxjOwE0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAcLAZQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+Message-ID: <81feb8d0-7b41-a744-ebac-742dd92a32b4@balister.org>
+Date: Thu, 6 Sep 2018 20:29:48 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
 MIME-Version: 1.0
-In-Reply-To: <70311756-b9d0-f3c2-cd7e-cb057f390ef4@balister.org>
+In-Reply-To: <f539cee0-af55-37e5-72c2-01c431e11832@gmail.com>
 Subject: Re: [meta-oe][PATCH 10/12] sip: Upgrade to 4.19.12 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -98,95 +59,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Sep 2018 00:24:01 -0000
-X-Groupsio-MsgNum: 74405
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="W1XXzy8vux9dvPcLjptF54fB6TYG4xJ4g"
-
---W1XXzy8vux9dvPcLjptF54fB6TYG4xJ4g
-Content-Type: multipart/mixed; boundary="JppU0Ud3fZc2K0sZKif7kPrh2tLzkFA0E";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Philip Balister <philip@balister.org>,
- openembedded-devel@lists.openembedded.org
-Message-ID: <f539cee0-af55-37e5-72c2-01c431e11832@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 10/12] sip: Upgrade to 4.19.12 release
-References: <20180905210224.21225-1-raj.khem@gmail.com>
- <20180905210224.21225-10-raj.khem@gmail.com>
- <70311756-b9d0-f3c2-cd7e-cb057f390ef4@balister.org>
-In-Reply-To: <70311756-b9d0-f3c2-cd7e-cb057f390ef4@balister.org>
-
---JppU0Ud3fZc2K0sZKif7kPrh2tLzkFA0E
+X-List-Received-Date: Fri, 07 Sep 2018 00:29:49 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Content-Language: en-MW
+Content-Transfer-Encoding: 7bit
 
+Yes working for the latest release. I emailed the pyqt/sip list with a
+question. Hopefully we can sort the issue out. Working toward a combined
+pyqt5 build for py 2 and 3
 
+Philip
 
-On 9/6/18 5:17 PM, Philip Balister wrote:
-> This leads to a dysfunctional sip. I'm working on a working update.
->=20
-
-Thanks for update, although we will need to move to this version for
-openssl 1.1.x support. are working on fixing the same version ?
-if so I will look forward for patches.
-
-> On 09/05/2018 05:02 PM, Khem Raj wrote:
->> Inherit pythonnative instead of using python from build host
+On 09/06/2018 08:23 PM, Khem Raj wrote:
+> 
+> 
+> On 9/6/18 5:17 PM, Philip Balister wrote:
+>> This leads to a dysfunctional sip. I'm working on a working update.
 >>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../recipes-devtools/sip/{sip_4.19.8.bb =3D> sip_4.19.12.bb}  | 6 +++=
----
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>  rename meta-oe/recipes-devtools/sip/{sip_4.19.8.bb =3D> sip_4.19.12.b=
-b} (90%)
->>
->> diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb b/meta-oe/reci=
-pes-devtools/sip/sip_4.19.12.bb
->> similarity index 90%
->> rename from meta-oe/recipes-devtools/sip/sip_4.19.8.bb
->> rename to meta-oe/recipes-devtools/sip/sip_4.19.12.bb
->> index ea944b32ff..be58959989 100644
->> --- a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
->> +++ b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
->> @@ -4,13 +4,13 @@ SECTION =3D "devel"
->>  LICENSE =3D "GPLv2+"
->>  LIC_FILES_CHKSUM =3D "file://LICENSE-GPL2;md5=3De91355d8a6f8bd8f7c699=
-d62863c7303"
->> =20
->> -inherit python-dir
->> +inherit python-dir pythonnative
->> =20
->>  DEPENDS =3D "python"
->> =20
->>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${P=
-V}.tar.gz"
->> -SRC_URI[md5sum] =3D "0625fb20347d4ff1b5da551539be0727"
->> -SRC_URI[sha256sum] =3D "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c96=
-0801679942377c297bc"
->> +SRC_URI[md5sum] =3D "e28b0790dfe4962ce6bbd7c4772f40c9"
->> +SRC_URI[sha256sum] =3D "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4=
-a17518659e571923822"
->> =20
->>  BBCLASSEXTEND =3D "native"
->> =20
->>
+> 
+> Thanks for update, although we will need to move to this version for
+> openssl 1.1.x support. are working on fixing the same version ?
+> if so I will look forward for patches.
+> 
+>> On 09/05/2018 05:02 PM, Khem Raj wrote:
+>>> Inherit pythonnative instead of using python from build host
+>>>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> ---
+>>>  .../recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb}  | 6 +++---
+>>>  1 file changed, 3 insertions(+), 3 deletions(-)
+>>>  rename meta-oe/recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb} (90%)
+>>>
+>>> diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
+>>> similarity index 90%
+>>> rename from meta-oe/recipes-devtools/sip/sip_4.19.8.bb
+>>> rename to meta-oe/recipes-devtools/sip/sip_4.19.12.bb
+>>> index ea944b32ff..be58959989 100644
+>>> --- a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
+>>> +++ b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
+>>> @@ -4,13 +4,13 @@ SECTION = "devel"
+>>>  LICENSE = "GPLv2+"
+>>>  LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
+>>>  
+>>> -inherit python-dir
+>>> +inherit python-dir pythonnative
+>>>  
+>>>  DEPENDS = "python"
+>>>  
+>>>  SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
+>>> -SRC_URI[md5sum] = "0625fb20347d4ff1b5da551539be0727"
+>>> -SRC_URI[sha256sum] = "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
+>>> +SRC_URI[md5sum] = "e28b0790dfe4962ce6bbd7c4772f40c9"
+>>> +SRC_URI[sha256sum] = "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822"
+>>>  
+>>>  BBCLASSEXTEND = "native"
+>>>  
+>>>
+> 
 
-
---JppU0Ud3fZc2K0sZKif7kPrh2tLzkFA0E--
-
---W1XXzy8vux9dvPcLjptF54fB6TYG4xJ4g
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCW5HFGwAKCRC7BTNVkZ0z
-FJXHAJ9IyFeEGvm6zprdWiKU6IPlFlQ2nQCfZTej89nNr2/MOQxt/RLt1nMp/Dw=
-=tTyO
------END PGP SIGNATURE-----
-
---W1XXzy8vux9dvPcLjptF54fB6TYG4xJ4g--
