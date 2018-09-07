@@ -1,49 +1,90 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C9DD79727
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Sep 2018 21:24:18 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id r37-v6so14085281qtc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Sep 2018 14:24:19 -0700 (PDT)
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B7FD9602D9
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Sep 2018 00:12:24 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id j8-v6so6082653pff.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Sep 2018 17:12:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=okSrpL7FH3mF2JG3S2igJp0W6MA9Dp1wnAGLm50tdpU=;
-	b=P2iSz98VyKFKubmgCy8+ikb6dIeFSZciVS1JxKQYNFirs6gmfz7nnntfqT4aELCR7Q
-	qaQmyYA43NixzkQpGVIz2Z7lHaP3tLqmQIcqiTzWaTxA0gaDbhr2ee+5Fap79tDjSIho
-	tesCxdsOpHGqBQOyXeOzIS8IlSQRWQDOzUAUdQmGvEJqmBg9OyYK1y0MX+bHOb05ICDL
-	HNnGBJyfQjraBXefFos1QqaHUiajkT4FJ1ek+zIdn3s5r1A2JYlhfMCbCLb/eVpmIrXL
-	n1/LK62Je70rOMrkxWR87TNvSUhWJd0vBkpLQtnu252/pK8ZJOptN+kcZHxkQFl8r05s
-	+miw==
+	h=subject:to:cc:references:from:openpgp:autocrypt:organization
+	:message-id:date:user-agent:mime-version:in-reply-to;
+	bh=Ttk73usuInwM6oeG3X2qyjGrKRL0ID3lsPQAFbwX4v8=;
+	b=mC/3WbRH1LZl2J4lTxMeHvsF6485tQ7uzVKMKUEkSHiVZdj9qO9jwBjOQlPozbzqqE
+	4FIBqBpAK9NYg0WUESjCyEHAwpDRAb3dU4OeNmfYSrg77+6h3t2uVyMcHrnN2zdzgXBk
+	GOKjuSvBsMDctzSVrBve/hNmaCVNb4E5DBGcKuAItkBmFCNcqqdPo8tcPyiod+iWLWVE
+	x34BvBdgGisgQoWp3Jtn9sMTn2iatTqNRVsyLWnHPycisprSyE3nvIlwYuGN8Jr+fhnw
+	xONQq4/FfuTIz2TFMcDHGDH9QPzzHLcfiC3/nctLRusJhIz0ehkmuyyWZdGJng6whqMo
+	CBqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=okSrpL7FH3mF2JG3S2igJp0W6MA9Dp1wnAGLm50tdpU=;
-	b=S4GVIktmzoiup1Wc/lREN/uJH6WukewuTanb4ntoxCCf/iDG+yfSSRMHnfbXe9iqQW
-	0AUKhAtqvFn9uMiXGwU8MeyNt2mi57t+K1LW2CFPopFFeeRfKI20le0lhZge8garefmb
-	2km9hpJaRMfb9DhcugKVxIptx2wYOrpLOZOpbWsUCla/A4nZX4D8z6Ka2ufCInF9RMDu
-	Y0ydQD9I91mKdHjFAihr/hpF53TPofCrR+x1ON5c5cKJiwrXnVCfu4xDVeqhAhguxW/7
-	dvsEco+qv64Cb7bso5hG9mrNv3VUBjBpid+/CjYTujfvCKS9aCTwAU8jOaWhrNL/ykfN
-	qHoQ==
-X-Gm-Message-State: APzg51D1nZtUysGyGfiNDCAf7BMh3sr0uGiAe3UWDtLWcTat0lwn3vaS
-	Fh4AXNFUSlpWfbefAxOA/7H8dfb2huvABKQxnmM=
-X-Google-Smtp-Source: ANB0VdZHQr3DpSqPgSt3FGOgLiePOHpRE8FKALU+8nWu9vay8fKW3oGp9DFcsmdUGC7zQg/b0uDldn1LtrGluIPHugk=
-X-Received: by 2002:ac8:4304:: with SMTP id
-	z4-v6mr3619545qtm.295.1536269058930; 
-	Thu, 06 Sep 2018 14:24:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180905181732.19483-1-alistair.francis@wdc.com>
-	<CAMKF1soxcVsMSPwCCGJVt6471n-LKXHs+HE3wHBpcRy9jPLc5Q@mail.gmail.com>
-	<CAKmqyKPbksPN0TOP-QBcNtzGGUEFZhb+hm97q3DTT8s5o-ctng@mail.gmail.com>
-In-Reply-To: <CAKmqyKPbksPN0TOP-QBcNtzGGUEFZhb+hm97q3DTT8s5o-ctng@mail.gmail.com>
+	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
+	:organization:message-id:date:user-agent:mime-version:in-reply-to;
+	bh=Ttk73usuInwM6oeG3X2qyjGrKRL0ID3lsPQAFbwX4v8=;
+	b=rzMcjnu3oowsVeg2Krko/By4vrE+EvWp8fPy0BnbRfrbFySOcKVhfzb0L/ae5rYZpc
+	RpzSVw+YdFSlQ2e37oIfygOPpgLSDU6uGF4qEwKMq9QTDx/5rWepJmeTvP88jkVMFOFr
+	RJOze5U6gj+lKcHsErjA/BvcZtehl6uVKGQMD9R6Qf6YUjO86XnXp7txaP9PHKjb3180
+	IOjvK1es5G4FeXD8uhTNdgQjJZ8W/fTYPwwyxK7VSFh2lBI3vz1diEbl907GTRyalFqX
+	Ztp4R2xv8pFNcJDWx1wcd7ASK9dTILPAEaz/z8dOeLW4qJBM7hYwtzTZPkH0n5Ss9WJm
+	ppMA==
+X-Gm-Message-State: APzg51DAGxBTVdpxq+qC7aQde26ZbDNUnEBMQ9f7jCC5mdu4wTdELIiY
+	bR7ADT8l/1rDr5gNu6K3siBtsGhv
+X-Google-Smtp-Source: ANB0VdZZ0OsQ87CLOAeU3/q6dm/nzxo2MHZStpApkHKivIzODyblGfpBdkknbkXKaQg+hxSrEBteew==
+X-Received: by 2002:a63:e841:: with SMTP id
+	a1-v6mr5419961pgk.126.1536279145148; 
+	Thu, 06 Sep 2018 17:12:25 -0700 (PDT)
+Received: from hermes.local ([2601:646:877f:9499:fc25:43f8:d4d:d1b3])
+	by smtp.gmail.com with ESMTPSA id
+	o20-v6sm13565901pfj.35.2018.09.06.17.12.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Sep 2018 17:12:23 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <CAMKF1spYyj-18urxsniwFac5TV__ve_NY71L_ruyvF+XJ-H3_Q@mail.gmail.com>
+	<20180905093027.GB1795@jama>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 6 Sep 2018 14:23:52 -0700
-Message-ID: <CAMKF1sqo1Sufp5UfH+tSsSFp6-WJO4hEMNzTeSFSUPrxBHC0TQ@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] pmdk: Initial commit of the PMDK SDK
+Openpgp: preference=signencrypt
+Autocrypt: addr=raj.khem@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+Organization: HIMVIS LLC
+Message-ID: <a2124380-a155-6ab4-2569-b5f0c37c7b73@gmail.com>
+Date: Thu, 6 Sep 2018 17:12:15 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+	Gecko/20100101 Thunderbird/60.0
+MIME-Version: 1.0
+In-Reply-To: <20180905093027.GB1795@jama>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: State of the world, 2018-09-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,172 +97,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Sep 2018 21:24:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 07 Sep 2018 00:12:24 -0000
+X-Groupsio-MsgNum: 74403
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="Fhyy1XMfeXDdpFKXO7Iv0msn3WcHIF5Mc"
 
-On Thu, Sep 6, 2018 at 1:29 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Sep 6, 2018 at 10:37 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> > fails to build with security flags on see
-> > http://errors.yoctoproject.org/Errors/Details/191388/
->
-> Ah, it looks like the examples don't have -O set in the build scripts.
-> It looks like just setting EXTRA_CFLAGS in the recipe should fix that.
-> How do you do a fortified source build so I can test?
->
+--Fhyy1XMfeXDdpFKXO7Iv0msn3WcHIF5Mc
+Content-Type: multipart/mixed; boundary="B9bmLcMxyBGFN6ff0DS5h3AJEf35bEaES";
+ protected-headers="v1"
+From: Khem Raj <raj.khem@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Message-ID: <a2124380-a155-6ab4-2569-b5f0c37c7b73@gmail.com>
+Subject: Re: [oe] State of the world, 2018-09-02
+References: <CAMKF1spYyj-18urxsniwFac5TV__ve_NY71L_ruyvF+XJ-H3_Q@mail.gmail.com>
+ <20180905093027.GB1795@jama>
+In-Reply-To: <20180905093027.GB1795@jama>
 
-you can use latest poky distro from yp
-or you can use my distro
-https://github.com/kraj/oe-build
+--B9bmLcMxyBGFN6ff0DS5h3AJEf35bEaES
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-> Alistair
->
-> > On Wed, Sep 5, 2018 at 11:27 AM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> >>
-> >> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> >> ---
-> >>  ...c.cfg-Specify-the-host-when-building.patch | 29 +++++++++++
-> >>  ...0002-Makefile-Don-t-install-the-docs.patch | 26 ++++++++++
-> >>  meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb   | 49 +++++++++++++++++++
-> >>  3 files changed, 104 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> >>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> >>  create mode 100644 meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> >>
-> >> diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> >> new file mode 100644
-> >> index 000000000..747538b0c
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
-> >> @@ -0,0 +1,29 @@
-> >> +From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
-> >> +From: Alistair Francis <alistair.francis@wdc.com>
-> >> +Date: Mon, 23 Jul 2018 11:23:39 -0700
-> >> +Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
-> >> + jemalloc
-> >> +
-> >> +To avoid this error:
-> >> +    configure: error: cannot run C compiled programs.
-> >> +    If you meant to cross compile, use `--host'.
-> >> +when cross compiling specify the host when configuring jemalloc.
-> >> +
-> >> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> >> +Upstream-Status: Inappropriate [configuration]
-> >> +---
-> >> + src/jemalloc/jemalloc.cfg | 1 +
-> >> + 1 file changed, 1 insertion(+)
-> >> +
-> >> +diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
-> >> +index 196129de6..79ebbab1c 100644
-> >> +--- a/src/jemalloc/jemalloc.cfg
-> >> ++++ b/src/jemalloc/jemalloc.cfg
-> >> +@@ -3,3 +3,4 @@
-> >> + --with-private-namespace=je_vmem_
-> >> + --disable-xmalloc
-> >> + --disable-munmap
-> >> ++--host=${HOST_SYS}
-> >> +--
-> >> +2.17.1
-> >> +
-> >> diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> >> new file mode 100644
-> >> index 000000000..bd1b97c24
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
-> >> @@ -0,0 +1,26 @@
-> >> +From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
-> >> +From: Alistair Francis <alistair.francis@wdc.com>
-> >> +Date: Mon, 23 Jul 2018 11:31:17 -0700
-> >> +Subject: [PATCH 2/2] Makefile: Don't install the docs
-> >> +
-> >> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> >> +Upstream-Status: Inappropriate [disable feature]
-> >> +---
-> >> + Makefile | 1 -
-> >> + 1 file changed, 1 deletion(-)
-> >> +
-> >> +diff --git a/Makefile b/Makefile
-> >> +index 224a315f6..ce7f84afb 100644
-> >> +--- a/Makefile
-> >> ++++ b/Makefile
-> >> +@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
-> >> +
-> >> + install uninstall:
-> >> +       $(MAKE) -C src $@
-> >> +-      $(MAKE) -C doc $@
-> >> +
-> >> + .PHONY: all clean clobber test check cstyle check-license install uninstall\
-> >> +       source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
-> >> +--
-> >> +2.17.1
-> >> +
-> >> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> >> new file mode 100644
-> >> index 000000000..90d51e3f8
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
-> >> @@ -0,0 +1,49 @@
-> >> +SUMMARY = "Persistent Memory Development Kit"
-> >> +DESCRIPTION = "Persistent Memory Development Kit"
-> >> +HOMEPAGE = "http://pmem.io"
-> >> +SECTION = "libs"
-> >> +LICENSE = "BSD"
-> >> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
-> >> +DEPENDS = "ndctl"
-> >> +
-> >> +SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
-> >> +           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
-> >> +           file://0002-Makefile-Don-t-install-the-docs.patch \
-> >> +          "
-> >> +
-> >> +SRC_URI[md5sum] = "d9a7b3f1059ffd54b4c92e38329fe69e"
-> >> +SRC_URI[sha256sum] = "e11cfbbdf0773fb5965211e18044531f442ad1e6d6726f1bac8a6dcc0e092622"
-> >> +
-> >> +inherit autotools-brokensep pkgconfig
-> >> +
-> >> +# Fix jemalloc error:
-> >> +# | configure: error: cannot run C compiled programs.
-> >> +# | If you meant to cross compile, use `--host'.
-> >> +EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}'"
-> >> +
-> >> +do_install() {
-> >> +       oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-> >> +
-> >> +       # Copy these into the standard directories
-> >> +       install -d ${D}${bindir}/
-> >> +       mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
-> >> +       mv ${D}/usr/local/bin/daxio ${D}${bindir}/
-> >> +
-> >> +       install -d ${D}${libdir}
-> >> +       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
-> >> +
-> >> +       install -d ${D}${libdir}/pkgconfig
-> >> +       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
-> >> +
-> >> +       install -d ${D}${includedir}
-> >> +       mv ${D}/usr/local/include/* ${D}${includedir}/
-> >> +
-> >> +       # Remove uneeded files
-> >> +       rm -rf ${D}/usr/local/
-> >> +}
-> >> +
-> >> +# Include these by default otherwise the SDK is not very useful
-> >> +FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
-> >> +FILES_${PN} += "${libdir}/*so*"
-> >> +FILES_${PN} += "${libdir}/pkgconfig/*.pc"
-> >> +FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
-> >> --
-> >> 2.17.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+
+On 9/5/18 2:30 AM, Martin Jansa wrote:
+> On Sun, Sep 02, 2018 at 10:43:02PM -0700, Khem Raj wrote:
+>> http://www.openembedded.org/wiki/Bitbake_World_Status
+>>
+>> =3D=3D Number of issues - stats =3D=3D
+>> {| class=3D'wikitable'
+>> !|Date     !!colspan=3D'4'|Failed tasks    !!|Signatures
+>> !!colspan=3D'15'|QA !!Comment
+>> |-
+>> || ||qemuarm ||qemuarm64 ||qemux86 ||qemux86_64 ||all
+>> ||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps
+>> ||version-going-backwards ||host-user-contaminated
+>> ||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot=
+
+>> ||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path
+>> ||qa_pseudo ||
+>> |-
+>> ||2018-09-02 ||38 ||38 ||46 ||36 ||9 ||0 ||0 ||6 ||2 ||0 ||32 ||0 ||0
+>> ||1 ||0 ||0 ||0 ||0 ||0 ||0 ||
+>> |}
+>>
+>=20
+> Sadly looks very similar to previous openssl-1.1 upgrade in 2017:
+> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.2017081=
+8_090627.log
+>=20
+
+yes :), I have sent few patches since, which should make things better
+but other layers are going to go through same if other layer maintainers
+are waiting for 2.6 to release then my suggestion would be to start a
+bit earlier.
+
+
+--B9bmLcMxyBGFN6ff0DS5h3AJEf35bEaES--
+
+--Fhyy1XMfeXDdpFKXO7Iv0msn3WcHIF5Mc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCW5HCXwAKCRC7BTNVkZ0z
+FDVVAJ0ZAL8PpD9kYbCRxPJsCT+fLsqfqwCfZt//c/nBrpYZJEjQPpXDDAbfXHA=
+=kGsc
+-----END PGP SIGNATURE-----
+
+--Fhyy1XMfeXDdpFKXO7Iv0msn3WcHIF5Mc--
