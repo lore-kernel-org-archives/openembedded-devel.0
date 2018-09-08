@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 8704171C9B
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id E993979802
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat,  8 Sep 2018 07:11:35 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id s17-v6so7530771plp.7
+Received: by mail-pl1-f194.google.com with SMTP id f6-v6so7550787plo.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Sep 2018 00:11:36 -0700 (PDT)
+	Sat, 08 Sep 2018 00:11:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=brHDaFK+FDxXHhPaV1QYJMbU/l3xS12CfIIiYkXBnDY=;
-	b=htqLBFr7JCEbR5ESPqOiHfw9W5LEF5LbP/gPT167zXWmuFqoyLqMCYW4V1Hptnh7mv
-	OBGM6tAmr0qjpMRGLUR6SajYaZD+PPmCIIxJY7TTockRiNhgykluxt9FP+GKRlHSTDq+
-	prxM5YUg79hY7Ccy2Atmms1NwNmF+vMF2nDyKEB5VBckXRTrdLYcSNQRBMBitfUXYKKV
-	WFtJaXFx8hIfJlCCk/beeFGf6te7nTco7aQ0dE3ZFOfWK3Vqy8SbS18ZDEAA8GzX5/OK
-	ywiU/RyOUPaZHaXT7/lx+Z0FtttXXkHuw2a00LRqPY3rW5K8oC7TvZadh+7HsZC7HCkW
-	WyOw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=FAu1Dv9BS8dGayQb73fVYu9eqA9QvS2nxdjsqnkK3yI=;
+	b=MaRIwuAazGCZcq7nGd7MpCJqd5TbDCSNBA3yKfEWpabGNl/rIAdS7k48Wx0P69tb1g
+	ylTzoS0tR45PHY26xAbSP55HT9c9uwe3mLUjhv1h+AEEvck4sQzsO5loT1qVz/W3g5y7
+	0KC6v6RKNc+msTfk5G/FZJY7R6GNvmDwLv4X2GBiGCAAlBLTfR/umGKNZoIpdLjVdgM0
+	aebnZrCR3WmGPd449Dwh1Je/Z2qKVYGKyP/MPHAihebiuLS9T2xTNyGmQ5xTRTQlx5dO
+	mLA/VXEj5VGzmTSWLtlnVrEG6pROFTm9muZZKSPoZXNhQXl3biM/I/Yzc11IluBRZ+4B
+	8QHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=brHDaFK+FDxXHhPaV1QYJMbU/l3xS12CfIIiYkXBnDY=;
-	b=UCNl/ekLM6p5xwjUxIcgD5na4vLxpsFae9l81FRffrr12DM8qkQ9eKMRMmSmb6EAYq
-	KbFr0vsbYWorqHzO9cySKwkwDyG6pNGObHp9b/BYrvMv1+4RmkErdyN5GH5agAFcO/C3
-	OTgdqojZTc8JiWVy6hmM3TkZP255DI4PFYz/jmeEV5uWXi/xRPKolCgWR0tHPaGKe7Gj
-	PAhygxBLYeJ9jGgzqrRHELBYejjFXWiNe0m8gtUbVDf+mM9oERgR7RQ/xWU2t6wFkHBI
-	XIC8vC6JCmer98bKqENXs5ZyEY3bMnEql3U2giz0bRRhOJXC3Nfr/OoTT4iXcquiXy5/
-	LzKA==
-X-Gm-Message-State: APzg51Cu1anRbiQMp+b6+AvUj0PR2lJ6kQG07jV7mS6HmJ9wyYkIyJNs
-	okraxlWNDwKPHp0tqQlvi3upRzZ9
-X-Google-Smtp-Source: ANB0VdaSvwv9Huj/lbR4FSbjBFO2+4ScRYVwR8zsBzeLtVdnHeZcRXStIc+7uZajmnj16LdDMV+MqA==
-X-Received: by 2002:a17:902:c7:: with SMTP id
-	a65-v6mr11523105pla.264.1536390695755; 
-	Sat, 08 Sep 2018 00:11:35 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=FAu1Dv9BS8dGayQb73fVYu9eqA9QvS2nxdjsqnkK3yI=;
+	b=haTgCbcOTS6uOZGuZ0ZM9tUnf8pGfcoUBaDFiZSABMdlLfqlB/Hfl2k2OiF9zufrAo
+	H+oti3+D5sHgZ8/LeEE5AuOxUvPB95uhvLTiTszMAyM5Fq1tCX2LthAE3Cy0Qvbz9aV6
+	kblwKe5du1qVdrnAQACGG3rbRrOwOTTHkuJPU2AfmkwUONyAGIj9O9XMqnn11vpVAT4J
+	Z0NjidapVqzlF3o9mft7sGdXn91a3Hbe6CzoBXFMqnFGu//dVzlJJ8tqrQvFVWzUiJos
+	34hcCSYMIicY4EwTU5Y4Gwev1/O7VgXPIzGHTKMiJo+z+NuY426SIBVaYJy7kgyYWt8y
+	1D4Q==
+X-Gm-Message-State: APzg51B9fVKmqDJYRHn8wfZDYM9sOBNVZXKZ7XOShpG9K3D2q9nj1Khu
+	y6VsVs9WF3fCNxCgGBJUWGEYf2F0
+X-Google-Smtp-Source: ANB0VdZbfXDa6yLIANGYThvTAFZ+/gWqU2db83eUInABziULP5iWAZrUBNdK7mRohbyh+33BGQZxWA==
+X-Received: by 2002:a17:902:1566:: with SMTP id
+	b35-v6mr11621663plh.135.1536390696503; 
+	Sat, 08 Sep 2018 00:11:36 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::71e7])
 	by smtp.gmail.com with ESMTPSA id
-	a15-v6sm18702212pfe.32.2018.09.08.00.11.34
+	a15-v6sm18702212pfe.32.2018.09.08.00.11.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 08 Sep 2018 00:11:34 -0700 (PDT)
+	Sat, 08 Sep 2018 00:11:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  8 Sep 2018 00:11:21 -0700
-Message-Id: <20180908071125.28282-1-raj.khem@gmail.com>
+Date: Sat,  8 Sep 2018 00:11:22 -0700
+Message-Id: <20180908071125.28282-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
-Subject: [meta-networking][PATCH 1/5] openhpi: Upgrade to 3.8.0
+In-Reply-To: <20180908071125.28282-1-raj.khem@gmail.com>
+References: <20180908071125.28282-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/5] md5deep: Upgrade to latest master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,672 +58,259 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Sep 2018 07:11:35 -0000
+X-List-Received-Date: Sat, 08 Sep 2018 07:11:36 -0000
 
-* Add patches to fix build with OpenSSL 1.1.x
-* Forward patches and drop ones not needed anymore
+* Add clang fix
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-poke-at-build-host-s-etc-os-release.patch | 27 +++++
- .../0001-Fix-build-failures-with-gcc7.patch   | 49 ----------
- .../0001-ipmidirect-Replace-__STRING.patch    | 31 ------
- ...r-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch | 47 ---------
- .../recipes-daemons/openhpi/files/c++11.patch | 24 +++--
- .../openhpi/files/clang-c++11.patch           | 17 +---
- .../openhpi/files/cross_899198.patch          | 98 +++++++++++++++++++
- .../openhpi/files/no-md2.patch                | 37 +++++++
- .../openhpi/files/openhpi-3.6.1-ssl.patch     | 20 ++++
- .../files/openhpi-hpi-shell-thread-fix.patch  | 29 ------
- .../files/openhpi-libxml2-cross-compile.patch | 23 +++--
- .../files/openhpi-netsnmp-cross-compile.patch | 25 +++--
- ...-serial-tests-config-needed-by-ptest.patch | 19 ++--
- .../{openhpi_3.6.1.bb => openhpi_3.8.0.bb}    | 18 ++--
- 14 files changed, 249 insertions(+), 215 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-Do-not-poke-at-build-host-s-etc-os-release.patch
- delete mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch
- delete mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-ipmidirect-Replace-__STRING.patch
- delete mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/cross_899198.patch
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/no-md2.patch
- create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-3.6.1-ssl.patch
- delete mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-hpi-shell-thread-fix.patch
- rename meta-networking/recipes-daemons/openhpi/{openhpi_3.6.1.bb => openhpi_3.8.0.bb} (91%)
+ .../0001-Fix-errors-found-by-clang.patch      |  32 -----
+ ...identifier-spacing-as-dictated-by-C-.patch | 128 ++++++++++++++++++
+ .../files/wrong-variable-expansion.patch      |  26 +---
+ .../{md5deep_4.4.bb => md5deep_git.bb}        |  12 +-
+ 4 files changed, 140 insertions(+), 58 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch
+ create mode 100644 meta-oe/recipes-extended/md5deep/files/0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch
+ rename meta-oe/recipes-extended/md5deep/{md5deep_4.4.bb => md5deep_git.bb} (71%)
 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-Do-not-poke-at-build-host-s-etc-os-release.patch b/meta-networking/recipes-daemons/openhpi/files/0001-Do-not-poke-at-build-host-s-etc-os-release.patch
-new file mode 100644
-index 0000000000..ab9b25fed0
---- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/0001-Do-not-poke-at-build-host-s-etc-os-release.patch
-@@ -0,0 +1,27 @@
-+From 2bc5c6367a7f70ca5bff177ec95bcad3b1c2b66b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 6 Sep 2018 18:15:10 -0700
-+Subject: [PATCH] Do not poke at build host's /etc/os-release
-+
-+During cross compile we are interested in target distro and not host
-+distro therefore do not check for it.
-+
-+Upstream-Status: Inappropriate [Cross compile specific]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Index: openhpi-3.8.0/configure.ac
-+===================================================================
-+--- openhpi-3.8.0.orig/configure.ac
-++++ openhpi-3.8.0/configure.ac
-+@@ -194,7 +194,6 @@ AC_SUBST(JSON_C_LIB)
-+ AC_SUBST(JSON_C_INCLUDE)
-+ AC_CHECK_LIB([rabbitmq],[amqp_new_connection],[RABBITMQ_LIB=-lrabbitmq],[RABBITMQ_LIB=])
-+ AC_SUBST(RABBITMQ_LIB)
-+-AC_CHECK_FILE([/etc/os-release],[DISTRO=`grep "^ID=" /etc/os-release | awk -F"\"" '{ print $2 }'`])
-+ 
-+ AC_CHECK_HEADERS([amqp.h],[have_rabbitmq=yes],[have_rabbitmq=no])
-+ 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch b/meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch
+diff --git a/meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch b/meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch
 deleted file mode 100644
-index 4f493f7b8f..0000000000
---- a/meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch
+index cc7cdc3364..0000000000
+--- a/meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch
 +++ /dev/null
-@@ -1,49 +0,0 @@
--From 398c6db66c643ed6133cc2b028ab1e27a17c5295 Mon Sep 17 00:00:00 2001
+@@ -1,32 +0,0 @@
+-From 6ef69a26126ee4e69a25392fd456b8a66c51dffd Mon Sep 17 00:00:00 2001
 -From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 1 May 2017 19:10:09 +0000
--Subject: [PATCH] Fix build failures with gcc7
+-Date: Tue, 15 Nov 2016 02:46:55 +0000
+-Subject: [PATCH] Fix errors found by clang
+-
+-Fixes errors like
+-
+-../../git/src/hash.cpp:282:19: error: ordered comparison between pointer and zero ('const unsigned char *' and 'int')
+-            if(fdht->base>0){
+-               ~~~~~~~~~~^~
 -
 -Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- plugins/ipmidirect/ipmi_mc_vendor.cpp | 2 +-
-- plugins/ipmidirect/ipmi_resource.cpp  | 4 ++--
-- 2 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/plugins/ipmidirect/ipmi_mc_vendor.cpp b/plugins/ipmidirect/ipmi_mc_vendor.cpp
--index 2c6c090..557771c 100644
----- a/plugins/ipmidirect/ipmi_mc_vendor.cpp
--+++ b/plugins/ipmidirect/ipmi_mc_vendor.cpp
--@@ -322,7 +322,7 @@ cIpmiMcVendor::CreateResources( cIpmiDomain *domain, cIpmiMc *source_mc, cIpmiSd
--       if ( addr.m_channel != source_mc->GetChannel() ) 
--           stdlog << "WARNING : SDR channel " << addr.m_channel << " NOT equal to MC channel " << source_mc->GetChannel() << "\n";
-- 
---       if ( FindOrCreateResource( domain, source_mc, fru_id, sdr, sdrs ) == false ) {
--+       if ( !FindOrCreateResource( domain, source_mc, fru_id, sdr, sdrs ) ) {
-- 	    return false;
-- 	}
--      }
--diff --git a/plugins/ipmidirect/ipmi_resource.cpp b/plugins/ipmidirect/ipmi_resource.cpp
--index c438e74..2552673 100644
----- a/plugins/ipmidirect/ipmi_resource.cpp
--+++ b/plugins/ipmidirect/ipmi_resource.cpp
--@@ -73,7 +73,7 @@ cIpmiResource::SendCommandReadLock( const cIpmiMsg &msg, cIpmiMsg &rsp,
-- 
--   domain->ReadLock();
-- 
---  if ( domain->VerifyResource( resource ) == false )
--+  if ( !domain->VerifyResource( resource ) )
--        return SA_ERR_HPI_NOT_PRESENT;
-- 
--   return rv;
--@@ -91,7 +91,7 @@ cIpmiResource::SendCommandReadLock( cIpmiRdr *rdr, const cIpmiMsg &msg, cIpmiMsg
--   
--   domain->ReadLock();
--   
---  if ( domain->VerifyRdr( rdr ) == false )
--+  if ( !domain->VerifyRdr( rdr ) )
--        return SA_ERR_HPI_NOT_PRESENT;
-- 
--   return rv;
---- 
--1.9.1
--
-diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-ipmidirect-Replace-__STRING.patch b/meta-networking/recipes-daemons/openhpi/files/0001-ipmidirect-Replace-__STRING.patch
-deleted file mode 100644
-index 4d56f6535c..0000000000
---- a/meta-networking/recipes-daemons/openhpi/files/0001-ipmidirect-Replace-__STRING.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From be40b3f11460cf495bbbef45692e7763afda0c2b Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 14 Sep 2017 17:56:31 -0700
--Subject: [PATCH] ipmidirect: Replace __STRING
--
--__STRING is not universally available e.g.
--musl does not define it
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Pending
--
-- plugins/ipmidirect/t/test.h | 2 +-
+- src/hash.cpp | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/plugins/ipmidirect/t/test.h b/plugins/ipmidirect/t/test.h
--index 8d71381..978d5ff 100644
----- a/plugins/ipmidirect/t/test.h
--+++ b/plugins/ipmidirect/t/test.h
--@@ -22,7 +22,7 @@ TestFunction( const char *str, const char *file, int line, bool expr )
-- }
-- 
-- 
---#define Test(expr) TestFunction( __STRING(expr), __FILE__, __LINE__, expr )
--+#define Test(expr) TestFunction( #expr, __FILE__, __LINE__, expr )
-- 
-- 
-- static int
---- 
--2.14.1
--
-diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch b/meta-networking/recipes-daemons/openhpi/files/0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch
-deleted file mode 100644
-index 0f033ac855..0000000000
---- a/meta-networking/recipes-daemons/openhpi/files/0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--From be665d9513cca7e8b64c79ae424cf44ac166b052 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 14 Sep 2017 17:07:58 -0700
--Subject: [PATCH] plugins: Check for PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
-- before use
--
--musl does not define PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
--so we can not assume that all Linux systems support PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
--its a glibc specific define so check for it being defined before using it
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Pending
--
-- plugins/dynamic_simulator/thread.cpp | 2 +-
-- plugins/ipmidirect/thread.cpp        | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/plugins/dynamic_simulator/thread.cpp b/plugins/dynamic_simulator/thread.cpp
--index d663be0..9210fd7 100644
----- a/plugins/dynamic_simulator/thread.cpp
--+++ b/plugins/dynamic_simulator/thread.cpp
--@@ -229,7 +229,7 @@ cThread::Exit( void *rv )
-- /**
--  * Constructor
--  **/
---#if ( defined(__sun) && defined(__SVR4) ) || defined(__FreeBSD__)
--+#ifndef PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
-- cThreadLock::cThreadLock()
-- {
--   pthread_mutexattr_t attr;
--diff --git a/plugins/ipmidirect/thread.cpp b/plugins/ipmidirect/thread.cpp
--index 5c52557..48e83fa 100644
----- a/plugins/ipmidirect/thread.cpp
--+++ b/plugins/ipmidirect/thread.cpp
--@@ -167,7 +167,7 @@ cThread::Exit( void *rv )
-- //                  cThreadLock
-- //////////////////////////////////////////////////
-- 
---#if ( defined(__sun) && defined(__SVR4) ) || defined(__FreeBSD__)
--+#ifndef PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
-- cThreadLock::cThreadLock()
-- {
--   pthread_mutexattr_t attr;
---- 
--2.14.1
--
-diff --git a/meta-networking/recipes-daemons/openhpi/files/c++11.patch b/meta-networking/recipes-daemons/openhpi/files/c++11.patch
-index 0549d59777..5eff86b4d5 100644
---- a/meta-networking/recipes-daemons/openhpi/files/c++11.patch
-+++ b/meta-networking/recipes-daemons/openhpi/files/c++11.patch
-@@ -1,11 +1,21 @@
--Index: openhpi-3.6.1/configure.ac
--===================================================================
----- openhpi-3.6.1.orig/configure.ac
--+++ openhpi-3.6.1/configure.ac
--@@ -44,6 +44,7 @@ AC_PROG_CPP
-- AC_PROG_INSTALL
-- AC_PROG_LN_S
-+From ed51168dfd6844deeaebf7d5f6c65898aafb6299 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 27 Aug 2017 12:12:04 -0700
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index c29a31f..f7fe0f7 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -46,6 +46,7 @@ AC_PROG_LN_S
-  AC_PROG_MAKE_SET
-+ AC_PROG_AWK
-+ AC_PROG_GREP
- +AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
-  
-  enabled_non32bit="no"
-diff --git a/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch b/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch
-index 9b35a0cced..7958a07c67 100644
---- a/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch
-+++ b/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch
-@@ -1,3 +1,7 @@
-+Support build with Clang
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Index: openhpi-3.6.1/plugins/dynamic_simulator/new_sim.cpp
- ===================================================================
- --- openhpi-3.6.1.orig/plugins/dynamic_simulator/new_sim.cpp
-@@ -1273,16 +1277,3 @@ Index: openhpi-3.6.1/plugins/ipmidirect/ipmi.cpp
-  
-  static SaErrorT
-  IpmiResetWatchdog(void *hnd,
--Index: openhpi-3.6.1/plugins/ipmidirect/ipmi_auth.h
--===================================================================
----- openhpi-3.6.1.orig/plugins/ipmidirect/ipmi_auth.h
--+++ openhpi-3.6.1/plugins/ipmidirect/ipmi_auth.h
--@@ -32,7 +32,7 @@ class cIpmiAuthSg
-- {
-- public:
--   void *data; /* NULL to terminate. */
---  int   len;
--+  unsigned int   len;
-- };
-- 
-- 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/cross_899198.patch b/meta-networking/recipes-daemons/openhpi/files/cross_899198.patch
-new file mode 100644
-index 0000000000..3161140df9
---- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/cross_899198.patch
-@@ -0,0 +1,98 @@
-+From: Helmut Grohne <helmut@subdivi.de>
-+Subject: fix cross compilation
-+
-+The OH_SET_SIZES macro relies on the usual autoconf sizeof cache variables
-+during cross compilation, but it never ensure that they are initialized.
-+
-+pkg-config must be called with $ac_tool_prefix and PKG_PROG_PKG_CONFIG takes
-+care of that. Setting PKG_CONFIG_PATH breaks the pkg-config-cross-wrapper.
-+Don't do that.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: openhpi-3.8.0/acinclude.m4
-+===================================================================
-+--- openhpi-3.8.0.orig/acinclude.m4
-++++ openhpi-3.8.0/acinclude.m4
-+@@ -22,30 +22,39 @@ AC_DEFUN([OH_SET_SIZES],
-+ 
-+     if test "x$cross_compiling" != "xno"; then
-+         if test "x$OH_SIZEOF_UCHAR" = x; then
-++	    AC_CHECK_SIZEOF([unsigned char])
-+             OH_SIZEOF_UCHAR=$ac_cv_sizeof_uchar
-+         fi
-+         if test "x$OH_SIZEOF_USHORT" = x; then
-++	    AC_CHECK_SIZEOF([unsigned short])
-+             OH_SIZEOF_USHORT=$ac_cv_sizeof_ushort
-+         fi
-+         if test "x$OH_SIZEOF_UINT" = x; then
-++	    AC_CHECK_SIZEOF([unsigned int])
-+             OH_SIZEOF_UINT=$ac_cv_sizeof_uint
-+         fi
-+         if test "x$OH_SIZEOF_CHAR" = x; then
-++	    AC_CHECK_SIZEOF([char])
-+             OH_SIZEOF_CHAR=$ac_cv_sizeof_char
-+         fi
-+         if test "x$OH_SIZEOF_SHORT" = x; then
-++	    AC_CHECK_SIZEOF([short])
-+             OH_SIZEOF_SHORT=$ac_cv_sizeof_short
-+         fi
-+         if test "x$OH_SIZEOF_INT" = x; then
-++	    AC_CHECK_SIZEOF([int])
-+             OH_SIZEOF_INT=$ac_cv_sizeof_int
-+         fi
-+         if test "x$OH_SIZEOF_LLONG" = x; then
-++	    AC_CHECK_SIZEOF([long long])
-+             OH_SIZEOF_LLONG=$ac_cv_sizeof_longlong
-+         fi
-+         if test "x$OH_SIZEOF_FLOAT" = x; then
-++	    AC_CHECK_SIZEOF([float])
-+             OH_SIZEOF_FLOAT=$ac_cv_sizeof_float
-+         fi
-+         if test "x$OH_SIZEOF_DOUBLE" = x; then
-++	    AC_CHECK_SIZEOF([double])
-+             OH_SIZEOF_DOUBLE=$ac_cv_sizeof_double
-+         fi
-+     else
-+Index: openhpi-3.8.0/configure.ac
-+===================================================================
-+--- openhpi-3.8.0.orig/configure.ac
-++++ openhpi-3.8.0/configure.ac
-+@@ -87,9 +87,9 @@ have_rtas_lib=no
-+ 
-+ dnl Check for GLIB
-+ 
-+-AC_CHECK_PROG([found_pkg_config],[pkg-config],[yes])
-++PKG_PROG_PKG_CONFIG
-+ 
-+-if test "x$found_pkg_config" != "xyes"; then
-++if test "x$PKG_CONFIG" = "x"; then
-+     OH_CHECK_FAIL(pkg-config,pkg-config)
-+ fi
-+ PKG_CFG_SETPATH
-+@@ -105,7 +105,7 @@ GLIB=glib-2.0
-+ GTHREAD=gthread-2.0
-+ GMODULE=gmodule-2.0
-+ 
-+-if pkg-config --atleast-version $GLIB_REQUIRED_VERSION $GLIB; then
-++if $PKG_CONFIG --atleast-version $GLIB_REQUIRED_VERSION $GLIB; then
-+    :
-+ else
-+    AC_MSG_ERROR([
-+@@ -268,12 +268,12 @@ dnl
-+ dnl We really need to make ipmi enablement be contigent on OpenIPMI
-+ dnl
-+ 
-+-if PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig pkg-config --atleast-version 1.4.20 OpenIPMI; then
-++if $PKG_CONFIG --atleast-version 1.4.20 OpenIPMI; then
-+     have_openipmi=yes
-+     AC_CHECK_LIB([OpenIPMI], [ipmi_smi_setup_con], [have_openipmi=yes])
-+-    OPENIPMI_CFLAGS=`PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig pkg-config --cflags OpenIPMI`
-++    OPENIPMI_CFLAGS=`$PKG_CONFIG --cflags OpenIPMI`
-+     AC_SUBST(OPENIPMI_CFLAGS)
-+-    OPENIPMI_LIBS=`PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig pkg-config --libs OpenIPMI`
-++    OPENIPMI_LIBS=`$PKG_CONFIG --libs OpenIPMI`
-+     AC_SUBST(OPENIPMI_LIBS)
-+ fi
-+ 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/no-md2.patch b/meta-networking/recipes-daemons/openhpi/files/no-md2.patch
-new file mode 100644
-index 0000000000..c4dd23e790
---- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/no-md2.patch
-@@ -0,0 +1,37 @@
-+Description: Fix FTBFS with OpenSSL 1.1 by honouring OPENSSL_NO_MD2
-+Author: Adrian Bunk <bunk@debian.org>
-+Bug-Debian: https://bugs.debian.org/859543
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: openhpi-3.8.0/plugins/ipmidirect/ipmi_auth.cpp
-+===================================================================
-+--- openhpi-3.8.0.orig/plugins/ipmidirect/ipmi_auth.cpp
-++++ openhpi-3.8.0/plugins/ipmidirect/ipmi_auth.cpp
-+@@ -21,6 +21,7 @@
-+ #include "ipmi_auth.h"
-+ #include <string.h>
-+ #include <errno.h>
-++#include <openssl/opensslconf.h>
-+ 
-+ 
-+ cIpmiAuth *
-+@@ -32,7 +33,7 @@ IpmiAuthFactory( tIpmiAuthType type )
-+             return new cIpmiAuthNone;
-+ 
-+        case eIpmiAuthTypeMd2:
-+-#ifdef HAVE_OPENSSL_MD2_H
-++#if defined(HAVE_OPENSSL_MD2_H) && !defined(OPENSSL_NO_MD2)
-+             return new cIpmiAuthMd2;
-+ #else
-+             break;
-+@@ -78,7 +79,7 @@ cIpmiAuthNone::Check( cIpmiAuthSg /*d*/[
-+ }
-+ 
-+ 
-+-#ifdef HAVE_OPENSSL_MD2_H
-++#if defined(HAVE_OPENSSL_MD2_H) && !defined(OPENSSL_NO_MD2)
-+ #include <openssl/md2.h>
-+ 
-+ 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-3.6.1-ssl.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-3.6.1-ssl.patch
-new file mode 100644
-index 0000000000..ca522bcc67
---- /dev/null
-+++ b/meta-networking/recipes-daemons/openhpi/files/openhpi-3.6.1-ssl.patch
-@@ -0,0 +1,20 @@
-+Link with libssl
-+
-+fixed build with openssl-1.1.x
-+
-+Taken from Fedora
-+https://src.fedoraproject.org/rpms/openhpi/c/be77f5484b0206f8946a85b29424ea10bf863063
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Unknown
-+
-+diff -up openhpi-3.6.1/ssl/Makefile.am.than openhpi-3.6.1/ssl/Makefile.am
-+--- openhpi-3.6.1/ssl/Makefile.am.than	2017-02-21 12:21:12.114814698 -0500
-++++ openhpi-3.6.1/ssl/Makefile.am	2017-02-21 12:22:44.576454262 -0500
-+@@ -19,5 +19,5 @@ lib_LTLIBRARIES		= libopenhpi_ssl.la
-+ libopenhpi_ssl_la_SOURCES = oh_ssl.c oh_ssl.h
-+ 
-+ libopenhpi_ssl_la_LDFLAGS = -version-info @HPI_LIB_VERSION@
-+-libopenhpi_ssl_la_LIBADD  = @CRYPTO_LIB@
-++libopenhpi_ssl_la_LIBADD  = -lssl @CRYPTO_LIB@
-+ 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-hpi-shell-thread-fix.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-hpi-shell-thread-fix.patch
-deleted file mode 100644
-index cc21ff8c79..0000000000
---- a/meta-networking/recipes-daemons/openhpi/files/openhpi-hpi-shell-thread-fix.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--commit e9f9a73c9dba8dd59f3d6c3acd9988ec8361d55a
--Author: Aws Ismail <aws.ismail@windriver.com>
--Date:   Mon Dec 17 16:23:45 2012 -0500
--
--    Correct dangling g_thread_exit in session.c
--    
--    hpi_shell's session.c has its progress_bar
--    thread created using pthread_create but
--    exited using g_thread_exit. Use pthread_exit
--    instead to avoid unpredictable GLIB thread
--    errors.
--    
--    Upstream-Status: Pending
--    
--    Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
--
--Index: openhpi-3.6.1/hpi_shell/session.c
--===================================================================
----- openhpi-3.6.1.orig/hpi_shell/session.c
--+++ openhpi-3.6.1/hpi_shell/session.c
--@@ -73,7 +73,7 @@ static void* progress_bar(void *unused)
-- 		if (i < (PROGRESS_BUF_SIZE - mes_len - 1)) i++;
-- 		t++;
-- 	};
---        g_thread_exit(0);
--+        pthread_exit(0);
-- 	return (void *)1;
-- }
-- 
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-libxml2-cross-compile.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-libxml2-cross-compile.patch
-index c848b35027..160eeede69 100644
---- a/meta-networking/recipes-daemons/openhpi/files/openhpi-libxml2-cross-compile.patch
-+++ b/meta-networking/recipes-daemons/openhpi/files/openhpi-libxml2-cross-compile.patch
-@@ -1,4 +1,7 @@
--Fix libxml2 for cross-compiling
-+From afe545e77f9d841b7777d859e7e8108492fece96 Mon Sep 17 00:00:00 2001
-+From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Wed, 26 Apr 2017 16:22:00 +0800
-+Subject: [PATCH] Fix libxml2 for cross-compiling
- 
- Use proper XML2_INCLUDE path when cross-compiling
- 
-@@ -6,16 +9,20 @@ Upstream-Status: Pending
- 
- Signed-of-by: Aws Ismail <aws.ismail@windriver.com>
- 
--Index: openhpi-3.6.1/configure.ac
--===================================================================
----- openhpi-3.6.1.orig/configure.ac
--+++ openhpi-3.6.1/configure.ac
--@@ -177,7 +177,7 @@ AC_CHECK_HEADERS([openssl/md2.h openssl/
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 6242cbf..4fb6b69 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -179,7 +179,7 @@ AC_CHECK_HEADERS([openssl/md2.h openssl/md5.h openssl/bio.h openssl/ssl.h openss
-  
-  dnl xml is used for XML-based communication in ilo2_ribcl and oa_soap
-  AC_CHECK_LIB([xml2],[xmlParseMemory],[XML2_LIB=-lxml2],[XML2_LIB=])
---AC_CHECK_HEADERS([libxml2/libxml/xmlexports.h],[XML2_INCLUDE="-I/usr/include/libxml2"],[XML2_INCLUDE])
--+AC_CHECK_HEADERS([libxml2/libxml/xmlexports.h],[XML2_INCLUDE="$XML2_INCLUDE"],[XML2_INCLUDE])
-+-AC_CHECK_HEADERS([libxml2/libxml/xmlexports.h],[XML2_INCLUDE="-I/usr/include/libxml2"],[XML2_INCLUDE=])
-++AC_CHECK_HEADERS([libxml2/libxml/xmlexports.h],[XML2_INCLUDE="$XML2_INCLUDE"],[XML2_INCLUDE=])
-  AC_SUBST(XML2_LIB)
-  AC_SUBST(XML2_INCLUDE)
-  
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-netsnmp-cross-compile.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-netsnmp-cross-compile.patch
-index 95b0abc913..293c8d91f5 100644
---- a/meta-networking/recipes-daemons/openhpi/files/openhpi-netsnmp-cross-compile.patch
-+++ b/meta-networking/recipes-daemons/openhpi/files/openhpi-netsnmp-cross-compile.patch
-@@ -13,36 +13,33 @@ Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-  configure    | 4 ++--
-  2 files changed, 4 insertions(+), 4 deletions(-)
- 
--diff --git a/acinclude.m4 b/acinclude.m4
--index 82c33f6..727e461 100644
----- a/acinclude.m4
--+++ b/acinclude.m4
-+Index: openhpi-3.8.0/acinclude.m4
-+===================================================================
-+--- openhpi-3.8.0.orig/acinclude.m4
-++++ openhpi-3.8.0/acinclude.m4
- @@ -160,8 +160,8 @@ AC_DEFUN([OH_CHECK_NETSNMP],
-      ],
-      [
-          have_netsnmp=yes
---        SNMPFLAGS=`${net_snmp_config:-net-snmp-config} --cflags | perl -p -e 's/-O\S*//g'`
-+-        SNMPFLAGS=`${net_snmp_config:-net-snmp-config} --cflags | perl -p -e 's/ -O\S*//g'`
- -        SNMPLIBS=`${net_snmp_config:-net-snmp-config} --libs`
- +        SNMPFLAGS=""
- +        SNMPLIBS=""
-          AC_MSG_RESULT(yes)
-      ],
-      [AC_MSG_RESULT(no.  No SNMP based plugins can be built!)])
--diff --git a/configure b/configure
--index 00067bc..36b913c 100755
----- a/configure
--+++ b/configure
--@@ -15949,8 +15949,8 @@ _ACEOF
-+Index: openhpi-3.8.0/configure
-+===================================================================
-+--- openhpi-3.8.0.orig/configure
-++++ openhpi-3.8.0/configure
-+@@ -16062,8 +16062,8 @@ _ACEOF
-  if ac_fn_c_try_link "$LINENO"; then :
-  
-          have_netsnmp=yes
---        SNMPFLAGS=`${net_snmp_config:-net-snmp-config} --cflags | perl -p -e 's/-O\S*//g'`
-+-        SNMPFLAGS=`${net_snmp_config:-net-snmp-config} --cflags | perl -p -e 's/ -O\S*//g'`
- -        SNMPLIBS=`${net_snmp_config:-net-snmp-config} --libs`
- +        SNMPFLAGS=""
- +        SNMPLIBS=""
-          { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-  $as_echo "yes" >&6; }
-  
+-diff --git a/src/hash.cpp b/src/hash.cpp
+-index 4216157..52f419b 100644
+---- a/src/hash.cpp
+-+++ b/src/hash.cpp
+-@@ -279,7 +279,7 @@ void file_data_hasher_t::hash()
+- 		MAP_FILE|
+- #endif
+- 		MAP_SHARED,fd,0);
+--	    if(fdht->base>0){		
+-+	    if(fdht->base != (void *) -1){
+- 		/* mmap is successful, so set the bounds.
+- 		 * if it is not successful, we default to reading the fd
+- 		 */
 --- 
 -1.9.1
 -
-diff --git a/meta-networking/recipes-daemons/openhpi/files/openhpi-use-serial-tests-config-needed-by-ptest.patch b/meta-networking/recipes-daemons/openhpi/files/openhpi-use-serial-tests-config-needed-by-ptest.patch
-index 3e09180d4d..472318b808 100644
---- a/meta-networking/recipes-daemons/openhpi/files/openhpi-use-serial-tests-config-needed-by-ptest.patch
-+++ b/meta-networking/recipes-daemons/openhpi/files/openhpi-use-serial-tests-config-needed-by-ptest.patch
-@@ -1,4 +1,4 @@
--From 36fbaa27e7299f63c1324b0ad22b970e9365d6a7 Mon Sep 17 00:00:00 2001
-+From 5e0ae172586f5aeb270a8f9b012dd3e36536a2a9 Mon Sep 17 00:00:00 2001
- From: Jackie Huang <jackie.huang@windriver.com>
- Date: Wed, 24 Dec 2014 10:54:59 +0800
- Subject: [PATCH] openhpi: use serial-tests config needed by ptest
-@@ -9,17 +9,18 @@ serial-tests is required to generate those targets.
- Upstream-Status: Inappropriate [default automake behavior incompatible with ptest]
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+diff --git a/meta-oe/recipes-extended/md5deep/files/0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch b/meta-oe/recipes-extended/md5deep/files/0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch
+new file mode 100644
+index 0000000000..69460b314b
+--- /dev/null
++++ b/meta-oe/recipes-extended/md5deep/files/0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch
+@@ -0,0 +1,128 @@
++From 7d7b60e38ca701819d4d00b38161faddce01e2ae Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 6 Sep 2018 23:21:22 -0700
++Subject: [PATCH] Fix literal and identifier spacing as dictated by C++11
 +
- ---
-- configure.ac |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
--Index: openhpi-3.6.1/configure.ac
--===================================================================
----- openhpi-3.6.1.orig/configure.ac
--+++ openhpi-3.6.1/configure.ac
--@@ -7,7 +7,7 @@ dnl   various hacks by Sean Dague <http:
-+diff --git a/configure.ac b/configure.ac
-+index 89d8104..c29a31f 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -7,7 +7,7 @@ dnl   various hacks by Sean Dague <http://dague.net/sean> 4/23/03
-  AC_PREREQ(2.57)
-- AC_INIT(openhpi, 3.6.1)
-+ AC_INIT(openhpi, 3.8.0)
-  AC_CONFIG_SRCDIR(openhpi.spec.in)
- -AM_INIT_AUTOMAKE([1.8])
- +AM_INIT_AUTOMAKE([1.8 serial-tests])
-diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-similarity index 91%
-rename from meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-rename to meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-index 596578e118..741b04cdd2 100644
---- a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-+++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.8.0.bb
-@@ -20,7 +20,8 @@ SECTION = "net"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e3c772a32386888ccb5ae1c0ba95f1a4"
- 
--DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs autoconf-archive-native"
-+DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs \
-+           autoconf-archive-native os-release"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://openhpi.init \
-@@ -32,23 +33,22 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://openhpi-glib-cross-compile.patch \
-            file://openhpi-linkfix.patch \
-            file://openhpi-fix-host-gcc.patch \
--           file://openhpi-hpi-shell-thread-fix.patch \
-            file://openhpi-fix-testfail-errors.patch \
-            file://openhpi-add-libnetsnmp-when-link.patch \
-            file://openhpi-invalide-session.patch \
-            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
-            file://openhpi-fix-alignment-issue.patch \
--           file://0001-Fix-build-failures-with-gcc7.patch \
-            file://c++11.patch \
-            file://clang-c++11.patch \
-            file://fix-narrowing-warning.patch \
--           file://0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch \
--           file://0001-ipmidirect-Replace-__STRING.patch \
-            file://0001-session-close-socket.patch \
-+           file://openhpi-3.6.1-ssl.patch \
-+           file://0001-Do-not-poke-at-build-host-s-etc-os-release.patch \
-+           file://cross_899198.patch \
-+           file://no-md2.patch \
-            "
--
--SRC_URI[md5sum] = "4718b16e0f749b5ad214a9b04f45dd23"
--SRC_URI[sha256sum] = "e0a810cb401c4bdcfc9551f2e6afd5a8ca4b411f5ee3bc60c19f82fd6e84a3dc"
-+SRC_URI[md5sum] = "fffda3deea8a0d3671a72eea9d13a4df"
-+SRC_URI[sha256sum] = "c94332a29160dd75cb799c027e614690c00263b0fabed87417707bec04c38723"
- 
- inherit autotools pkgconfig ptest update-rc.d systemd
- 
-@@ -64,6 +64,8 @@ PACKAGECONFIG[sysfs] = "--enable-sysfs,--disable-sysfs,sysfsutils,"
- PACKAGECONFIG[libgcrypt] = "--enable-encryption,--disable-encryption,libgcrypt,"
- PACKAGECONFIG[non32bit] = "--enable-non32bit-int,--disable-non32bit-int,,"
- 
-+export DISTRO
++Fixes clang error like below
 +
- do_install_append () {
-     install -m 0755 -d ${D}${sysconfdir}/${BPN}
-     install -m 0755 ${S}/openhpiclient.conf.example ${D}${sysconfdir}/${BPN}/openhpiclient.conf
++error: invalid suffix on literal; C++11 requires a space between literal and identifier [-Wreserved-user-defined-literal]
++|         status("  Known files not found: %"PRIu64, this->match.unused);
++
++Upstream-Status: Submitted [https://github.com/jessek/hashdeep/pull/385/commits/18a6b5d57f7a648d2b7dcc6e50ff00a1e4b05fcc]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/display.cpp  | 16 ++++++++--------
++ src/files.cpp    |  4 ++--
++ src/hash.cpp     |  2 +-
++ src/hashlist.cpp |  4 ++--
++ src/xml.h        |  2 +-
++ 5 files changed, 14 insertions(+), 14 deletions(-)
++
++diff --git a/src/display.cpp b/src/display.cpp
++index b23335d..2eddc23 100644
++--- a/src/display.cpp
+++++ b/src/display.cpp
++@@ -311,7 +311,7 @@ void display::display_realtime_stats(const file_data_hasher_t *fdht, const hash_
++ 
++ 	ss << mb_read << "MB of " << fdht->stat_megs() << "MB done, ";
++ 	char msg[64];
++-	snprintf(msg,sizeof(msg),"%02"PRIu64":%02"PRIu64":%02"PRIu64" left", hour, min, seconds);
+++	snprintf(msg,sizeof(msg),"%02" PRIu64 ":%02" PRIu64 ":%02" PRIu64 " left", hour, min, seconds);
++ 	ss << msg;
++     }
++     ss << "\r";
++@@ -424,14 +424,14 @@ void display::display_audit_results()
++   
++     if (opt_verbose)    {
++ 	if(opt_verbose >= MORE_VERBOSE){
++-	    status("   Input files examined: %"PRIu64, this->match.total);
++-	    status("  Known files expecting: %"PRIu64, this->match.expect);
+++	    status("   Input files examined: %" PRIu64, this->match.total);
+++	    status("  Known files expecting: %" PRIu64, this->match.expect);
++ 	}
++-	status("          Files matched: %"PRIu64, this->match.exact);
++-	status("Files partially matched: %"PRIu64, this->match.partial);
++-	status("            Files moved: %"PRIu64, this->match.moved);
++-	status("        New files found: %"PRIu64, this->match.unknown);
++-	status("  Known files not found: %"PRIu64, this->match.unused);
+++	status("          Files matched: %" PRIu64, this->match.exact);
+++	status("Files partially matched: %" PRIu64, this->match.partial);
+++	status("            Files moved: %" PRIu64, this->match.moved);
+++	status("        New files found: %" PRIu64, this->match.unknown);
+++	status("  Known files not found: %" PRIu64, this->match.unused);
++     }
++ }
++ 
++diff --git a/src/files.cpp b/src/files.cpp
++index 89c6984..3dfd363 100644
++--- a/src/files.cpp
+++++ b/src/files.cpp
++@@ -509,7 +509,7 @@ int state::parse_encase_file(const char *fn, FILE *handle,uint32_t expected_hash
++         
++ 	    // Users expect the line numbers to start at one, not zero.
++ 	    if ((!ocb.opt_silent) || (mode_warn_only)) {
++-		ocb.error("%s: No hash found in line %"PRIu32, fn, count + 1);
+++		ocb.error("%s: No hash found in line %" PRIu32, fn, count + 1);
++ 		ocb.error("%s: %s", fn, strerror(errno));
++ 		return status_t::STATUS_USER_ERROR;
++ 	    }
++@@ -542,7 +542,7 @@ int state::parse_encase_file(const char *fn, FILE *handle,uint32_t expected_hash
++     }
++ 
++     if (expected_hashes != count){
++-	ocb.error("%s: Expecting %"PRIu32" hashes, found %"PRIu32"\n", 
+++	ocb.error("%s: Expecting %" PRIu32 " hashes, found %" PRIu32 "\n", 
++ 			fn, expected_hashes, count);
++     }
++     return status_t::status_ok;
++diff --git a/src/hash.cpp b/src/hash.cpp
++index 52f419b..a4b3128 100644
++--- a/src/hash.cpp
+++++ b/src/hash.cpp
++@@ -124,7 +124,7 @@ bool file_data_hasher_t::compute_hash(uint64_t request_start,uint64_t request_le
++     
++ 	// If an error occured, display a message and see if we need to quit.
++ 	if ((current_read_bytes<0) || (this->handle && ferror(this->handle))){
++-	    ocb->error_filename(this->file_name,"error at offset %"PRIu64": %s",
+++	    ocb->error_filename(this->file_name,"error at offset %" PRIu64 ": %s",
++ 				request_start, strerror(errno));
++ 	   
++ 	    if (file_fatal_error()){
++diff --git a/src/hashlist.cpp b/src/hashlist.cpp
++index b5b275f..eb0d45a 100644
++--- a/src/hashlist.cpp
+++++ b/src/hashlist.cpp
++@@ -342,7 +342,7 @@ hashlist::load_hash_file(display *ocb,const std::string &fn)
++     file_data_t *t = new (std::nothrow) file_data_t();
++     if (NULL == t)
++     {
++-      ocb->fatal_error("%s: Out of memory in line %"PRIu64,
+++      ocb->fatal_error("%s: Out of memory in line %" PRIu64,
++ 		       fn.c_str(), line_number);
++     }
++ 
++@@ -390,7 +390,7 @@ hashlist::load_hash_file(display *ocb,const std::string &fn)
++       if ( !algorithm_t::valid_hash(hash_column[column_number],word))
++       {
++ 	if (ocb)
++-	  ocb->error("%s: Invalid %s hash in line %"PRIu64,
+++	  ocb->error("%s: Invalid %s hash in line %" PRIu64,
++ 		     fn.c_str(),
++ 		     hashes[hash_column[column_number]].name.c_str(),
++ 		     line_number);
++diff --git a/src/xml.h b/src/xml.h
++index bfe0c94..017dba7 100644
++--- a/src/xml.h
+++++ b/src/xml.h
++@@ -100,7 +100,7 @@ public:
++     void xmlout(const std::string &tag,const std::string &value){ xmlout(tag,value,"",true); }
++     void xmlout(const std::string &tag,const int value){ xmlprintf(tag,"","%d",value); }
++     void xmloutl(const std::string &tag,const long value){ xmlprintf(tag,"","%ld",value); }
++-    void xmlout(const std::string &tag,const int64_t value){ xmlprintf(tag,"","%"PRId64,value); }
+++    void xmlout(const std::string &tag,const int64_t value){ xmlprintf(tag,"","%" PRId64,value); }
++     void xmlout(const std::string &tag,const double value){ xmlprintf(tag,"","%f",value); }
++     void xmlout(const std::string &tag,const struct timeval &ts){
++ 	xmlprintf(tag,"","%d.%06d",(int)ts.tv_sec, (int)ts.tv_usec);
++-- 
++2.18.0
++
+diff --git a/meta-oe/recipes-extended/md5deep/files/wrong-variable-expansion.patch b/meta-oe/recipes-extended/md5deep/files/wrong-variable-expansion.patch
+index 3a4c4f4c2c..73c6cb126a 100644
+--- a/meta-oe/recipes-extended/md5deep/files/wrong-variable-expansion.patch
++++ b/meta-oe/recipes-extended/md5deep/files/wrong-variable-expansion.patch
+@@ -1,6 +1,8 @@
+---- a/configure.ac	2014-08-22 12:22:54.290884351 +0200
+-+++ b/configure.ac	2014-08-22 12:23:15.822306295 +0200
+-@@ -42,18 +42,6 @@
++Index: git/configure.ac
++===================================================================
++--- git.orig/configure.ac
+++++ git/configure.ac
++@@ -42,18 +42,6 @@ case $host in
+       ;;		 		     
+  esac
+  
+@@ -19,21 +21,3 @@
+  #
+  #
+  ################################################################
+-@@ -71,7 +59,7 @@
+- 
+- if test $mingw = "no" ; then
+-   # add the warnings we don't want to do on mingw
+--  $WARNINGS_TO_TEST="$WARNINGS_TO_TEST -Wall -Wstrict-prototypes  -Weffc++"
+-+  WARNINGS_TO_TEST="$WARNINGS_TO_TEST -Wall -Wstrict-prototypes  -Weffc++"
+- fi
+- 
+- for option in $WARNINGS_TO_TEST
+-@@ -105,7 +93,7 @@
+- 
+- if test $mingw = "no" ; then
+-   # add the warnings we don't want to do on mingw
+--  $WARNINGS_TO_TEST="$WARNINGS_TO_TEST  -Weffc++"
+-+  WARNINGS_TO_TEST="$WARNINGS_TO_TEST  -Weffc++"
+- fi
+- 
+- for option in $WARNINGS_TO_TEST
+diff --git a/meta-oe/recipes-extended/md5deep/md5deep_4.4.bb b/meta-oe/recipes-extended/md5deep/md5deep_git.bb
+similarity index 71%
+rename from meta-oe/recipes-extended/md5deep/md5deep_4.4.bb
+rename to meta-oe/recipes-extended/md5deep/md5deep_git.bb
+index bb30abedd9..e8c6864c1f 100644
+--- a/meta-oe/recipes-extended/md5deep/md5deep_4.4.bb
++++ b/meta-oe/recipes-extended/md5deep/md5deep_git.bb
+@@ -4,13 +4,15 @@ AUTHOR = "Jesse Kornblum, Simson L. Garfinkel"
+ HOMEPAGE = "http://md5deep.sourceforge.net"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9190f660105b9a56cdb272309bfd5491"
+-# Release 4.4
+-SRCREV = "cd2ed7416685a5e83eb10bb659d6e9bec01244ae"
++
++PV = "4.4+git${SRCPV}"
++
++SRCREV = "877613493ff44807888ce1928129574be393cbb0"
+ 
+ SRC_URI = "git://github.com/jessek/hashdeep.git \
+-        file://wrong-variable-expansion.patch \
+-        file://0001-Fix-errors-found-by-clang.patch \
+-        "
++           file://wrong-variable-expansion.patch \
++           file://0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch \
++           "
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.18.0
 
