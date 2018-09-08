@@ -1,50 +1,46 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D26FB79817
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+	[209.85.222.182])
+	by mail.openembedded.org (Postfix) with ESMTP id E202C797B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Sep 2018 02:59:15 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id g44-v6so18280805qtb.12
+	Sat,  8 Sep 2018 07:05:05 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id 93-v6so11098622qks.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Sep 2018 19:59:17 -0700 (PDT)
+	Sat, 08 Sep 2018 00:05:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=ZCVhJa+n3TZIhyBecaoq/Dj+Qfzpj7eHM2pTO+UHm2w=;
-	b=JLb/2mayMLWyynM9AF7oYqqAqi57mIM4FpPfIfybBNCLI4WuiIr8LuYE42uL7UHs9M
-	tjOiWKsjyd6Us7UB4E/cYmulHedCZ8FgShof1dOR6a+4x26N5Ga4HLqEQpyU3/tmp0m+
-	2GbFUmwmnMXG1YBGYxfEeG5joNCAkDfNc7re5A3bHqpjcGnIo2VwN7m2c3EYFc0HPCXa
-	DAyJfDmSP6H2C5fILZkCuV6T4EaEZgGnrW81mht+zoJfMN72U3PwGvXhPZ+Yy3xY1S8z
-	LyE3TQwOZdU3nAyaGFUpKItIXZxPmN7RSv5LI5bTJnciI10d8YAwcTGHZEESFv2FvKAi
-	ZWXw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qWkEoTl9OH687O3ymNFCulX80m6qZPXcBeRZLjgI0l8=;
+	b=OoOArrW1qnapeGDHgRqxJZHiVI5KkdwLvKP64K6KkvnrGoTQfPkXT+fGXQnUk4s/nN
+	w5SoCwQuoZ73dYmm19FUFiroDCddYdMy9w5hMIfVxlFyE+0RxXeLWT8e1d5YYRLCrdkh
+	3lEJGBC9P/PsIpvhVMJvAn5/QynGGBPVgM2KKryIm9fg4TcJiotig3YS/wPCgxZwuHkq
+	eMx3lz6cV858dAI21D//Ey4sNiYtwm2vd4mEeJq3lKJ1fGWoxJ463MDPJgGkZOz7Oo01
+	p60WTWpxiz6QgYHvvc0XYkpPoPTjg/w0GirOFVa+Sz8oM+4/16XI0dIUhqJ9ksO8enY6
+	7Nxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=ZCVhJa+n3TZIhyBecaoq/Dj+Qfzpj7eHM2pTO+UHm2w=;
-	b=gU0EXh+6A7Nl9pgu0zzIP7yrKYzMvU1ywA2Py0u0IU6hoLgSP97u0/bTU+vkCxu/iA
-	7cyoZTogQ0zG01D3aHTtSjxaa+Yvy5k3sqz8pAklQWuRuyM0HM77ecW+Q3BAAmzulfkt
-	tiI3Aog3XMGT+YtcN7SAmR4Yu+7792bIEAGJ9rj4GtqrOgKlZcvqhcihJ5h75MN0lsmA
-	bdrFyqY+PwJKK38aZK94+1oHDUQh72GKuINMcykZK70a0BRuJ0efaljA+FchCwKF09BA
-	nmAVycsg6M0MIN8m6WNqF4O+MknIa7e137DU1z7mb0GXNCv1qFMVsIdPj9CeMfybF9Ui
-	XOGw==
-X-Gm-Message-State: APzg51AogAtPeOPmNwsn/pf0SPYWrzxBO0WUCbq8G9O8O7JGeCybIBR7
-	KNA+OEBLa3Q9ANKS+I6JxnAVApoy
-X-Google-Smtp-Source: ANB0Vda74KIjT8qPb1e2+3rb/3aeSkS/HztnPCC6CgZVS1jBdHu8NAllhcJurqgI1EiyKdOe08V2mg==
-X-Received: by 2002:a0c:9aef:: with SMTP id
-	k47-v6mr8124297qvf.134.1536375555986; 
-	Fri, 07 Sep 2018 19:59:15 -0700 (PDT)
-Received: from prague.hsd1.va.comcast.net
-	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
-	by smtp.gmail.com with ESMTPSA id
-	n8-v6sm6425758qtk.38.2018.09.07.19.59.14
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 07 Sep 2018 19:59:14 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Sep 2018 22:59:10 -0400
-Message-Id: <20180908025910.13871-1-philip@balister.org>
-X-Mailer: git-send-email 2.13.6
-Subject: [meta-oe][PATCH] sip: Update from 4.19.8 to 4.19.12.
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=qWkEoTl9OH687O3ymNFCulX80m6qZPXcBeRZLjgI0l8=;
+	b=jFxbshyyfHZto0Z0vhAZo60Qkrwow+wJDv7RTxVUseEhDSEryORJuUdUXG2yW4y2F9
+	AY0bLrkExlwlbo2hhb8Jzf3IkPL/4ijXBvE7nUEMsN0fQquWaakw/oEb4obL1EkbzTuq
+	PU+w/1igrmyiAbkSpXjP7kF5uaBpxJ+Pkp8n1nLwwFGFDsWKnAn+IU5ZIjKDLSBor624
+	gRNs4Y+uHFPeUPn4r1fjLxyzGv3ovMYLHrMQLba8+nVEO+pJHcfm6NtVCfxulhOS9a+N
+	mMsCDlmiUGLCj/VvaX5AdYAugKtNWptKMx8CaGYlKPZVL2q8XcetNimTXHoEN+2Dojow
+	EKcg==
+X-Gm-Message-State: APzg51BFYbOpdd2qYUCIIslD8S/CqkdRl/fBBUSiipk6jAOplhRnqZ/X
+	+/YlXjCJSPXmSReOm7w/XQfKMcjgSnOstqXmPuI=
+X-Google-Smtp-Source: ANB0Vdbij1zlPvDmbVUguWsiojOke/nkGqWqO6CMP7o/Zu8mPO0nAEwhkcYMUxYsZuz2Y+4n2FY6zTy3FvrbRA7o9aA=
+X-Received: by 2002:a37:ac02:: with SMTP id e2-v6mr8581090qkm.2.1536390306415; 
+	Sat, 08 Sep 2018 00:05:06 -0700 (PDT)
+MIME-Version: 1.0
+References: <20180907182156.25995-1-alistair.francis@wdc.com>
+In-Reply-To: <20180907182156.25995-1-alistair.francis@wdc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 8 Sep 2018 00:04:40 -0700
+Message-ID: <CAMKF1srCkfs7O1z0KDRqonXTwZc1GmCyjsjJmDBrVnT7Mv_irw@mail.gmail.com>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v3] pmdk: Initial commit of the PMDK SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,89 +53,204 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Sep 2018 02:59:16 -0000
+X-List-Received-Date: Sat, 08 Sep 2018 07:05:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 
- * This builds the private sip module for building PyQt5. In the
-   future we should split into a -tools and -modules. But lets fix
-   building for now
+now fails on musl
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-devtools/sip/files/sip.patch             | 16 ++++++++++++++++
- .../sip/{sip_4.19.8.bb => sip_4.19.12.bb}                | 16 +++++++++-------
- 2 files changed, 25 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/sip/files/sip.patch
- rename meta-oe/recipes-devtools/sip/{sip_4.19.8.bb => sip_4.19.12.bb} (69%)
-
-diff --git a/meta-oe/recipes-devtools/sip/files/sip.patch b/meta-oe/recipes-devtools/sip/files/sip.patch
-new file mode 100644
-index 000000000..78100fc4b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/sip/files/sip.patch
-@@ -0,0 +1,16 @@
-+diff -Nurd ./sip-4.19.12.orig/configure.py sip-4.19.12/configure.py
-+--- ./sip-4.19.12.orig/configure.py	2018-07-05 05:55:19.000000000 -0400
-++++ sip-4.19.12/configure.py	2018-09-07 16:41:18.102569271 -0400
-+@@ -949,10 +949,10 @@
-+ 
-+     if len(module_path) > 1:
-+         del module_path[-1]
-+-        module_path.insert(0, sip_root_dir)
-++        module_path.insert(0, sip_module_dir)
-+         sip_module_dir = os.path.join(*module_path)
-+     else:
-+-        sip_module_dir = sip_root_dir
-++        sip_module_dir = sip_module_dir
-+ 
-+     # Override from the command line.
-+     if opts.platform is not None:
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
-similarity index 69%
-rename from meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-rename to meta-oe/recipes-devtools/sip/sip_4.19.12.bb
-index ea944b32f..be384fd39 100644
---- a/meta-oe/recipes-devtools/sip/sip_4.19.8.bb
-+++ b/meta-oe/recipes-devtools/sip/sip_4.19.12.bb
-@@ -4,13 +4,15 @@ SECTION = "devel"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
- 
--inherit python-dir
--
- DEPENDS = "python"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
--SRC_URI[md5sum] = "0625fb20347d4ff1b5da551539be0727"
--SRC_URI[sha256sum] = "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
-+inherit python-dir pythonnative
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz \
-+           file://sip.patch \
-+          "
-+SRC_URI[md5sum] = "e28b0790dfe4962ce6bbd7c4772f40c9"                            
-+SRC_URI[sha256sum] = "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822" 
- 
- BBCLASSEXTEND = "native"
- 
-@@ -23,7 +25,7 @@ do_configure_prepend_class-target() {
-     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
-     echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
--    python configure.py --configuration sip.cfg --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
-+    python configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
- }
- do_configure_prepend_class-native() {
-     echo "py_platform = linux" > sip.cfg
-@@ -32,7 +34,7 @@ do_configure_prepend_class-native() {
-     echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
-     echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-     echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
--    python configure.py --configuration sip.cfg --sysroot ${STAGING_DIR_NATIVE}
-+    python configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
- }
- do_install() {
-     oe_runmake install
--- 
-2.13.6
-
+http://errors.yoctoproject.org/Errors/Details/192047/
+On Fri, Sep 7, 2018 at 11:22 AM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+> v3:
+>  - Add missing patch file
+>  - Use SELECTED_OPTIMIZATION
+> v2:
+>  - Fix fortify source compile error
+>
+>  ...c.cfg-Specify-the-host-when-building.patch | 29 +++++++++++
+>  ...0002-Makefile-Don-t-install-the-docs.patch | 26 ++++++++++
+>  ...03-Makefile-Don-t-build-the-examples.patch | 34 ++++++++++++
+>  meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb   | 52 +++++++++++++++++++
+>  4 files changed, 141 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+>  create mode 100644 meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch
+>  create mode 100644 meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+>
+> diff --git a/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+> new file mode 100644
+> index 000000000..747538b0c
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/files/0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch
+> @@ -0,0 +1,29 @@
+> +From 2a22dc96c3bbb5c9bbcc008f58d4f5c64e3d19e6 Mon Sep 17 00:00:00 2001
+> +From: Alistair Francis <alistair.francis@wdc.com>
+> +Date: Mon, 23 Jul 2018 11:23:39 -0700
+> +Subject: [PATCH] jemalloc/jemalloc.cfg: Specify the host when building
+> + jemalloc
+> +
+> +To avoid this error:
+> +    configure: error: cannot run C compiled programs.
+> +    If you meant to cross compile, use `--host'.
+> +when cross compiling specify the host when configuring jemalloc.
+> +
+> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> +Upstream-Status: Inappropriate [configuration]
+> +---
+> + src/jemalloc/jemalloc.cfg | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/src/jemalloc/jemalloc.cfg b/src/jemalloc/jemalloc.cfg
+> +index 196129de6..79ebbab1c 100644
+> +--- a/src/jemalloc/jemalloc.cfg
+> ++++ b/src/jemalloc/jemalloc.cfg
+> +@@ -3,3 +3,4 @@
+> + --with-private-namespace=je_vmem_
+> + --disable-xmalloc
+> + --disable-munmap
+> ++--host=${HOST_SYS}
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+> new file mode 100644
+> index 000000000..bd1b97c24
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/files/0002-Makefile-Don-t-install-the-docs.patch
+> @@ -0,0 +1,26 @@
+> +From 460a96e390cb80278784cfe36629e280fe7ffef7 Mon Sep 17 00:00:00 2001
+> +From: Alistair Francis <alistair.francis@wdc.com>
+> +Date: Mon, 23 Jul 2018 11:31:17 -0700
+> +Subject: [PATCH 2/2] Makefile: Don't install the docs
+> +
+> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> +Upstream-Status: Inappropriate [disable feature]
+> +---
+> + Makefile | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index 224a315f6..ce7f84afb 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -144,7 +144,6 @@ rpm dpkg: pkg-clean source
+> +
+> + install uninstall:
+> +       $(MAKE) -C src $@
+> +-      $(MAKE) -C doc $@
+> +
+> + .PHONY: all clean clobber test check cstyle check-license install uninstall\
+> +       source rpm dpkg pkg-clean pcheck check-remote format doc $(SUBDIRS)
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch b/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch
+> new file mode 100644
+> index 000000000..01f620057
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/files/0003-Makefile-Don-t-build-the-examples.patch
+> @@ -0,0 +1,34 @@
+> +From a7f07dca2468ea226d2f07fc0105166e75cadaf8 Mon Sep 17 00:00:00 2001
+> +From: Alistair Francis <alistair.francis@wdc.com>
+> +Date: Thu, 6 Sep 2018 16:18:50 -0700
+> +Subject: [PATCH] Makefile: Don't build the examples
+> +
+> +Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> +Upstream-Status: Inappropriate [configuration]
+> +---
+> + src/Makefile | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/Makefile b/src/Makefile
+> +index 4b50dd8b5..e00501e31 100644
+> +--- a/src/Makefile
+> ++++ b/src/Makefile
+> +@@ -38,13 +38,13 @@ include $(TOP)/src/version.inc
+> +
+> + TARGETS = libpmem libvmem libpmemblk libpmemlog libpmemobj libpmempool\
+> +                 libpmemcto libvmmalloc tools
+> +-ALL_TARGETS = $(TARGETS) common librpmem examples benchmarks
+> ++ALL_TARGETS = $(TARGETS) common librpmem benchmarks
+> +
+> + SCOPE_DIRS = $(TARGETS) common librpmem rpmem_common
+> +
+> + DEBUG_RELEASE_TARGETS = common libpmem libvmem libpmemblk libpmemlog libpmemobj\
+> +       libpmempool libvmmalloc librpmem libpmemcto
+> +-RELEASE_TARGETS = tools examples benchmarks
+> ++RELEASE_TARGETS = tools benchmarks
+> +
+> + CLEAN_NO_JE_TARGETS = $(ALL_TARGETS) rpmem_common test
+> + CLEAN_TARGETS = $(CLEAN_NO_JE_TARGETS) jemalloc
+> +--
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+> new file mode 100644
+> index 000000000..f3edbf10a
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/pmdk/pmdk_1.4.1.bb
+> @@ -0,0 +1,52 @@
+> +SUMMARY = "Persistent Memory Development Kit"
+> +DESCRIPTION = "Persistent Memory Development Kit"
+> +HOMEPAGE = "http://pmem.io"
+> +SECTION = "libs"
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
+> +DEPENDS = "ndctl"
+> +
+> +SRC_URI = "https://github.com/pmem/${BPN}/archive/${PV}.tar.gz \
+> +           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
+> +           file://0002-Makefile-Don-t-install-the-docs.patch \
+> +           file://0003-Makefile-Don-t-build-the-examples.patch \
+> +          "
+> +
+> +SRC_URI[md5sum] = "d9a7b3f1059ffd54b4c92e38329fe69e"
+> +SRC_URI[sha256sum] = "e11cfbbdf0773fb5965211e18044531f442ad1e6d6726f1bac8a6dcc0e092622"
+> +
+> +inherit autotools-brokensep pkgconfig
+> +
+> +# Fix jemalloc error:
+> +# | configure: error: cannot run C compiled programs.
+> +# | If you meant to cross compile, use `--host'.
+> +#
+> +# Also fix #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Werror=cpp]
+> +EXTRA_OEMAKE = "HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECTED_OPTIMIZATION}'"
+> +
+> +do_install() {
+> +       oe_runmake PREFIX=${prefix} DESTDIR=${D} install
+> +
+> +       # Copy these into the standard directories
+> +       install -d ${D}${bindir}/
+> +       mv ${D}/usr/local/bin/pmempool ${D}${bindir}/
+> +       mv ${D}/usr/local/bin/daxio ${D}${bindir}/
+> +
+> +       install -d ${D}${libdir}
+> +       mv ${D}/usr/local/lib/*so* ${D}${libdir}/
+> +
+> +       install -d ${D}${libdir}/pkgconfig
+> +       mv ${D}/usr/local/lib/pkgconfig/*.pc ${D}${libdir}/pkgconfig/
+> +
+> +       install -d ${D}${includedir}
+> +       mv ${D}/usr/local/include/* ${D}${includedir}/
+> +
+> +       # Remove uneeded files
+> +       rm -rf ${D}/usr/local/
+> +}
+> +
+> +# Include these by default otherwise the SDK is not very useful
+> +FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
+> +FILES_${PN} += "${libdir}/*so*"
+> +FILES_${PN} += "${libdir}/pkgconfig/*.pc"
+> +FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
