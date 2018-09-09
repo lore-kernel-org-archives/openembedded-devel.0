@@ -1,28 +1,43 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CF689793E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Sep 2018 07:22:14 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w897LNSf000985
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 9 Sep 2018 00:21:48 -0700
-Received: from [128.224.162.202] (128.224.162.202) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
-	Sun, 9 Sep 2018 00:21:16 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1536417214-146096-1-git-send-email-hongxu.jia@windriver.com>
-	<CAMKF1soJdQnygZD9sbmKZazJFm=G_ugjogz_jnfAppd5q7oT1A@mail.gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <b316249f-438a-c1a1-c562-bfce8b565df0@windriver.com>
-Date: Sun, 9 Sep 2018 15:21:15 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+Return-Path: <mhm.dawod@gmail.com>
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+	[209.85.222.182])
+	by mail.openembedded.org (Postfix) with ESMTP id CE4CC606BF;
+	Sun,  9 Sep 2018 11:10:31 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id f62-v6so10832590qke.2;
+	Sun, 09 Sep 2018 04:10:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=hiT2cEHEsi/qLnSvCSl4YQCn3FU6M+Nf0IiPgki/DuY=;
+	b=WkUDdg24+XCKOhTfT572LWxEzOe/VYKdv4ahCh6kQV7IbO0ekZhK4Lyk8GMf9JjGjc
+	C591WtQ5YI9rWkSeieFx1Dywz8TBe3QevSDovbyhHVfq7hL57cxelrB2JMLtb+0O1c5R
+	0U8e/4QMVZ7FcXrwucCyN/M4zP0iakW4PCdMQKwxmZIkCSPKfDKaOiXcaiDjcBo6lgcG
+	bQBX8k0ft64uA0+5ST+qsfIDCuQLL5wBRTtBYvE0pw4NQp069LTHr+jPgzB1AL1neP+j
+	TSs02TUeb3kha1YxcoEvoVLUnLq/6E6IzvTROlFKjVYhK86eaCt3HM/Z0ODexemMEG+1
+	Jziw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=hiT2cEHEsi/qLnSvCSl4YQCn3FU6M+Nf0IiPgki/DuY=;
+	b=pNHtbEOATcA5H/WDj4j/Fg67f/+z8hr/tEjAhTcdalVxrliJppROaLbC1xuwHXpeoo
+	GtVU9L5WBhR1UzYCQZLtgK8J/11BVpVo2aJ01RaCowwUkTY6Wx4lb5zx399V3zzL+T9h
+	O5VO6iMoLQPDh6pqR39Owu1OAFdl+YXO+evOMF9WGrNlzDOI9GOA/a+ycDWCzOKJLAN2
+	i/Xfb7oYb3uAzXfQNTB7O/E1+bcQQ9mtxDrvruhgq1LKymK3p4a0nOHU+PP+rrNXYJmx
+	GoM/Gyd6vUcKpg5BNyU9S4UjN7ZmDST+AGM4H9oyuwKg0+kb5UvltmnYgatt6BCWvU2r
+	YF3A==
+X-Gm-Message-State: APzg51AIlZyzVpn1PbhGaDW2RAsUXZChieYr8PydFFBJsNaHQyiO7Xf9
+	QRaQK2FpKAfqe3ZgoQsG6Mv2IcxBCACltyxaSF47FA==
+X-Google-Smtp-Source: ANB0VdaE+CSsrVBGsiwpg4jEOU+KKxV7SxduyCl/AvhSUyv9nQ9M+CTsJkkV8McJHYH168ccmDpUN+oqs2aegVDkmSM=
+X-Received: by 2002:ae9:c008:: with SMTP id
+	u8-v6mr9972638qkk.328.1536491432495; 
+	Sun, 09 Sep 2018 04:10:32 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soJdQnygZD9sbmKZazJFm=G_ugjogz_jnfAppd5q7oT1A@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sanlock: add version 3.6.0
+From: Mohamed Dawod <mhm.dawod@gmail.com>
+Date: Sun, 9 Sep 2018 13:10:21 +0200
+Message-ID: <CAGCTLNSbsH7Hto3CwpC+p0YFWQqnYRHYm2TwcbH6w5TzbtBP5A@mail.gmail.com>
+To: openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [openembedded][wayland][weston]: How to configure screen resolution
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,73 +50,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2018 07:22:15 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Sun, 09 Sep 2018 11:10:32 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 2018年09月09日 04:31, Khem Raj wrote:
-> fails to build with musl and may be clang
->
-> http://errors.yoctoproject.org/Errors/Details/192148/
+Hello,
 
-OK, I will fix it, v2 incoming
+I want to know how to change the screen resolution using weston.ini file ?
+How to generate this file and use it for my image?
 
-//Hongxu
+Thanks,
 
+-- 
 
-> On Sat, Sep 8, 2018 at 7:34 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
->> A shared storage lock manager.
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->> ---
->>   meta-oe/recipes-extended/sanlock/sanlock_3.6.0.bb | 35 +++++++++++++++++++++++
->>   1 file changed, 35 insertions(+)
->>   create mode 100644 meta-oe/recipes-extended/sanlock/sanlock_3.6.0.bb
->>
->> diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.6.0.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.6.0.bb
->> new file mode 100644
->> index 0000000..e9a5792
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/sanlock/sanlock_3.6.0.bb
->> @@ -0,0 +1,35 @@
->> +SUMMARY = "A shared storage lock manager"
->> +DESCRIPTION = "sanlock  is  a lock manager built on shared storage.  Hosts with access \
->> +to the storage can perform locking.   An  application  running  on  the \
->> +hosts  is  given  a small amount of space on the shared block device or \
->> +file, and uses sanlock for its  own  application-specific  synchronization. \
->> +Internally,  the  sanlock  daemon manages locks using two disk-based \
->> +lease algorithms: delta leases and paxos leases."
->> +HOMEPAGE = "https://pagure.io/sanlock"
->> +SECTION = "utils"
->> +
->> +LICENSE = "LGPLv2+ & GPLv2 & GPLv2+"
->> +LIC_FILES_CHKSUM = "file://README.license;md5=60487bf0bf429d6b5aa72b6d37a0eb22"
->> +
->> +SRC_URI = "git://pagure.io/sanlock.git;protocol=http \
->> +          "
->> +SRCREV = "90b2ffa77edd46bea007b7bb39bfd4d2db2ff7af"
->> +S = "${WORKDIR}/git"
->> +
->> +DEPENDS = "libaio util-linux"
->> +
->> +inherit distutils
->> +
->> +do_configure[noexec] = "1"
->> +
->> +do_compile_prepend () {
->> +    oe_runmake -C wdmd CMD_LDFLAGS="${LDFLAGS}" LIB_LDFLAGS="${LDFLAGS}"
->> +    oe_runmake -C src CMD_LDFLAGS="${LDFLAGS}" LIB_ENTIRE_LDFLAGS="${LDFLAGS}" LIB_CLIENT_LDFLAGS="${LDFLAGS}"
->> +    cd ${S}/python
->> +}
->> +
->> +do_install_prepend () {
->> +    oe_runmake -C wdmd DESTDIR=${D} install
->> +    oe_runmake -C src DESTDIR=${D} install
->> +    cd ${S}/python
->> +}
->> --
->> 2.8.1
->>
-
+Mohamed Dawod
+Computer Engineering Department
+Faculty of Engineering
+Cairo University
 
