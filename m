@@ -1,48 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f169.google.com (mail-qt0-f169.google.com
-	[209.85.216.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FF5E79559
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id F341379550
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Sep 2018 17:44:52 +0000 (UTC)
-Received: by mail-qt0-f169.google.com with SMTP id r37-v6so21727689qtc.0
+	Sun,  9 Sep 2018 23:01:16 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id l5so15138242edw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2018 10:44:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=53AQXOxVWEYKD96MKxyAoVsp5uDH+vy3LjyM5lHp8pM=;
-	b=tKSmEX4cEvVS/A0nqrDtciRr50gW1DSPwJSa+a0BXmtYfxgD5IkzeJYR0RQuXqrzix
-	rsi4+zF9FcDTkzsaJpKWWw56FD5YYXhCxkQ0frSGYPUCPq1rRaO525gSHiurHcDkLIg3
-	qjStlL/sv9Z34x4Lyrfr3j6en2vOjLMpdV7riVzcWyIr7K7nGsRWIP9+TCOmKrC07b+j
-	2PxO4PDHwNRaw+W7iMM5akryw1I5n4FsIqAEpT518zoP8/2T84uYdRqn8YF4YPMXHmvi
-	5XOUcj82tclWKDGP3PJPG2n1ZJzlKO19yMaFATaFSiyczx5PeZWfoOWKFaW3qiAjtvpH
-	1ONA==
+	Sun, 09 Sep 2018 16:01:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=J1+6oYwZSU7ZtkwhkdaJBd7Hw6l/TMT5ZIlWrSS7b4k=;
+	b=ZA9+ZIZ0w7drlZKRrUl0Rl2Zdwk9nldNOlWvmtyxbCLx5Fcgw1CNUf1O2heVUiKnMt
+	SPGCB+TUMbdp5ILEvlg1eAix77TB8f2dmYbJvAWAqm9l6YrePlJVtWHSFYsah7pp3kv/
+	J6noa19SCPEyJRgTbsQOHSd0CQikcYF9YDsWdb7L+wBCvygZIAq0dwm46Xtl3uE1UZmI
+	SdiiLG44eAzKJw9byeDRGHR2R3ypEtrjYUwQmyoXA06ns7NxhHxAcNICZXsDBCeLGoR5
+	aT6uzU/x+evSlQJpUjTMH0lXC7SA1dESeiCmcDf9FJmR+bmWSTC9yEdWFrchc4y/66FQ
+	Dpug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=53AQXOxVWEYKD96MKxyAoVsp5uDH+vy3LjyM5lHp8pM=;
-	b=m8iTLVIgK5jkxxvb7Xqb1cNFZ4ghqlf4N/I76/5XTuBA4uOv7ZkqebbAXcHWbpZBPU
-	MbvUwigONIBvoBH4QjxrK/gaxJdBeNxUtRCvHR/PEaQl1XPb/x1FbPc1ty/xG3sWmTES
-	TjvSCW6lFfosMSbMN2HvMuabCXK/cRnprcLdQtSpTMiLgDkoMk0lHDfz0XXXihjPZ51V
-	f66b53QTjwbLiTRCqH7mX3i9Okvzqf2os3whBYFQ4/MclTAwOgzKxXAB0gH3b5i/WckR
-	tGGhIukG/+SrgF2hXDswqmCM7Nk8EmRYm+6SkkhiyZfIV/eWj4ZvvydQnwNXKZHYjK8a
-	n+3Q==
-X-Gm-Message-State: APzg51DHqoAgPNmofHMapsP7ys9XVA0lnVftO16/qr3W0FDy/BXlnpI5
-	TRRb2Xot7L2UdX9N7Txe+gJYqt+oF+E/GN5Yvss=
-X-Google-Smtp-Source: ANB0VdataQtesMNS8eyrgV8v+Q27KhYCCpcxIip4KjC5NGnX+56oCkIROTBljPYLyfSLtXGguA/FFKGpLoEwnxNDrg4=
-X-Received: by 2002:a0c:f208:: with SMTP id
-	h8-v6mr12171826qvk.55.1536515093339; 
-	Sun, 09 Sep 2018 10:44:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <mailman.7483.1536390700.1670.openembedded-devel@lists.openembedded.org>
-	<CAATN8PUr0-pam4S6CgHT3t0iKiKjyC-pmPrxS=3uosuFkO0MRQ@mail.gmail.com>
-In-Reply-To: <CAATN8PUr0-pam4S6CgHT3t0iKiKjyC-pmPrxS=3uosuFkO0MRQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 9 Sep 2018 10:44:27 -0700
-Message-ID: <CAMKF1soGgYc8XBr0xNkmYxKwW3=bvuz0x_H3uAPniFjN6B839w@mail.gmail.com>
-To: costamagna.gianfranco@gmail.com
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/5] wvstreams: Depend on openssl10 and add patch to build with openssl
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=J1+6oYwZSU7ZtkwhkdaJBd7Hw6l/TMT5ZIlWrSS7b4k=;
+	b=Q3PihR8MXIvZFcylmLg68AO5pCz98htRUFh/TYJ/fZdH5Tf3nO1birKAwdpfxO8lYq
+	ttd7U3BKfJrhxJYmNoLJjyIsMwjIT2vkE4BqQbzZ6XHzkr+006VVflttZil3+xCk1ixN
+	ACQ5iO7zmrft0XanURMmYfDArSxVaWmyiCe6PgZNSMgcayDgbwqgjE6flHRHWRDqHf4r
+	lHIbZiWFlcnfEfllghWuMuGKw8/w0Pcm0OcHLDs7KfWPzczMwcpz2MDnJ3GMtwXLiqDI
+	uViK9XVrHc8Gt1IjYpUSjIEc2MUv9SlBtdtunj1u3Lj+wGTMRe3Y3Yt8ihGz+0H0pgeD
+	4kqA==
+X-Gm-Message-State: APzg51CZDfgUvpiht7qUkoPbaPsv2wTAn+y+OJeBJkQ26mDn5H1qD/dY
+	Xd3o7m8XzD6Oxoh3NBs5pKAUcV/1dYQ=
+X-Google-Smtp-Source: ANB0Vdb+2vJaLs6b/0tR7rrx/FyYnh5uku3B+jls2xglV/3uFGwsRjVMk1r98Bh1aZMPhCt4Bd3OYQ==
+X-Received: by 2002:a50:b5a5:: with SMTP id
+	a34-v6mr16010951ede.88.1536534077261; 
+	Sun, 09 Sep 2018 16:01:17 -0700 (PDT)
+Received: from localhost.localdomain ([2a04:ae08:1403:ff00:b821:e49c:2197:f50])
+	by smtp.gmail.com with ESMTPSA id
+	j10-v6sm8252229ede.5.2018.09.09.16.01.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 09 Sep 2018 16:01:16 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <dev@sashko.rv.ua>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Sep 2018 01:00:43 +0200
+Message-Id: <20180909230043.25831-1-dev@sashko.rv.ua>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <dev@sashko.rv.ua>
+Subject: [meta-oe][PATCH] nano: upgrade to 3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +58,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Sep 2018 17:44:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 09 Sep 2018 23:01:17 -0000
 
-On Sun, Sep 9, 2018 at 10:27 AM Gianfranco Costamagna
-<costamagna.gianfranco@gmail.com> wrote:
->
-> Hello, can you please consider keeping openssl 1.1 as default and apply this patch to the package?
-> https://sources.debian.org/src/wvstreams/4.6.1-14/debian/patches/wvstreams_openssl1.1.patch/
->
-> We fixed in Debian this openssl incompatibility some weeks ago, nobody tested the patch deeply, I only reviewed it, but the package is in testing and Ubuntu since some days and nobody reported regressions so far.
->
+Signed-off-by: Oleksandr Kravchuk <dev@sashko.rv.ua>
+---
+ meta-oe/recipes-support/nano/nano_2.9.8.bb             | 4 ----
+ meta-oe/recipes-support/nano/{nano.inc => nano_3.0.bb} | 5 ++++-
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/nano/nano_2.9.8.bb
+ rename meta-oe/recipes-support/nano/{nano.inc => nano_3.0.bb} (72%)
 
-Thanks for  reviewing it and the pointer. Test this out and apply it
-if all is ok
+diff --git a/meta-oe/recipes-support/nano/nano_2.9.8.bb b/meta-oe/recipes-support/nano/nano_2.9.8.bb
+deleted file mode 100644
+index aa6e9ff16..000000000
+--- a/meta-oe/recipes-support/nano/nano_2.9.8.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-include nano.inc
+-
+-SRC_URI[md5sum] = "31714360342f9baa344e2fa574c144db"
+-SRC_URI[sha256sum] = "c2deac31ba4d3fd27a42fafcc47ccf499296cc69a422bbecab63f2933ea85488"
+diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano_3.0.bb
+similarity index 72%
+rename from meta-oe/recipes-support/nano/nano.inc
+rename to meta-oe/recipes-support/nano/nano_3.0.bb
+index 22f0fb2a0..43ab9343b 100644
+--- a/meta-oe/recipes-support/nano/nano.inc
++++ b/meta-oe/recipes-support/nano/nano_3.0.bb
+@@ -8,10 +8,13 @@ SECTION = "console/utils"
+ DEPENDS = "ncurses file"
+ RDEPENDS_${PN} = "ncurses-terminfo"
+ 
+-PV_MAJOR = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
++PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+ 
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+ 
++SRC_URI[md5sum] = "74196427a09ec2f82a88facd220d2787"
++SRC_URI[sha256sum] = "e0a5bca354514e64762c987c200a8758b05e7bcced3b00b3e48ea0a2d383c8a0"
++
+ inherit autotools gettext pkgconfig
+ 
+ PACKAGECONFIG[tiny] = "--enable-tiny,"
+-- 
+2.17.1
 
-> (and I really think we should try to move away from openssl10!)
->
-
-yes me too.
-
-> cheers,
->
-> Gianfranco
 
