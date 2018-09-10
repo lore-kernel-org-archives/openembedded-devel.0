@@ -1,45 +1,47 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-it0-f42.google.com (mail-it0-f42.google.com
-	[209.85.214.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D9A47970D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0159179831
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 06:15:23 +0000 (UTC)
-Received: by mail-it0-f42.google.com with SMTP id h3-v6so28090604ita.2
+	Mon, 10 Sep 2018 06:19:06 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id d131-v6so13614396qke.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2018 23:15:24 -0700 (PDT)
+	Sun, 09 Sep 2018 23:19:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=ZuueWcGnhHx0aokQNU4Df1fA2K2mAa8JIBhJ+7mBfK0=;
-	b=YL2ClYqLtwOdQC2JGoT/8unnkikc8xAusdNl2WFb0zFF+WC9PZpXuT/RdQFxiRaieJ
-	igbfDf1d4VLrdCJAYuLKV6I4AwO8qkjm8Amg4KPpjB/4YmmQtIrJPv9wcD3afFZrhfUV
-	uRw8AMr3PP3f0V12q+g2SgHHC1GMc1kK2sLwJZCOQsYVSqIHlHl5b4m3m4UhctlxGM07
-	c9QfOF0wqc6OAM5wZZ6CwzdVcRET+1f42SGm2tsrjFmIE5tkTneAXvblBDoyl12MeSc+
-	XKegM2jLXDNoHtDflnI0dcFvF4bHPk1gBrSZxtsA/SSEAEVZXd4oEOcOTJERLYnFMsXR
-	fI0A==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=sdmp5qRYGz8f3zcPi2vo5Z3UeabH19upetD9aD7jQQU=;
+	b=t9Uh5vpudRvdzggHZIcKAkoaX7nwHRhwHUMLCjynRPIumuH9N02rLi37g1vsxRCYyV
+	4P5MYyRvMDJdcI5L+kgPi5fk4Xaz6W0w+RqHU2gyUoXclP1scT7E8CwUgbveHEl9Eyng
+	YuizMuJI6DCfoTurmEegmm8uHf9igOwIGsi18Y7q0vCUOgBFNEfpGSD17hMbF0+jqV/W
+	z/HH3zCC6KCZ4brNXog6dMzj58gHzYk2KDnW6k4XGY9gXf4CyJjH8k5+o8aIJqTfjiLw
+	ENP8HEttmqKt865s/WnPGEPP9FYcq+i51DFS2rNL5M83uJjkAzWmV+ZciLosbEW2i62R
+	y3MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=ZuueWcGnhHx0aokQNU4Df1fA2K2mAa8JIBhJ+7mBfK0=;
-	b=NLYKyCiLqmBIZOCsiQhpTpr1jnt7W3Z23whIViFjfwhUr6ybnush2KfNPwkXBUj8YG
-	3c70nKEmPAL4FV8WLtdM0U4nwKqfZdVUwQDY8Ja1xxHUBCLvLPuLj3pTqiD7Ywn980WJ
-	b0w8cSwxkj0yEtPZ3n30ePLZZ0IaXFbK7hT+2lHXZ1Kpe7vVZUQB1+rtYuAL4BiFBPns
-	rjHGb+lIwzVSUK/aC+Ne+PbeeXZr05leDPqsvmQxylv+WHhM395gq4Dgu5jRcYiJ2Cy0
-	hD/b7cLwXONHBGjx5igchDtlAUfTux0AKO584sW6yvM4ILaaOcMiiBppGYzNyBRPdBAV
-	M8nw==
-X-Gm-Message-State: APzg51CIfSsRmkQRnejTGQt+VMsmOe8fp3KLyv9JLgmFRePC6j2N2dYW
-	rsnfxrsl7SJO3DLfzbJUFeet61kMMEpexoqejdgRhQ==
-X-Google-Smtp-Source: ANB0VdaXefkUus5Ts+a0zGrzcN3NdmgRmyuQ2zEc2QzAWfANtN3kMcgNT0p6LJRp9flCJ9azLC9k2CZPbiQDuiKqU3s=
-X-Received: by 2002:a02:9d10:: with SMTP id
-	n16-v6mr17303755jak.56.1536560123394; 
-	Sun, 09 Sep 2018 23:15:23 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=sdmp5qRYGz8f3zcPi2vo5Z3UeabH19upetD9aD7jQQU=;
+	b=YGCocNzb7R5AiAgOUDbZIk0OICA+hDlKkS06lMzYqFr4EpUa3vWeMa4AZIV+kYbPn0
+	2lNzg2W/8zuvJR4J2/btjRZwmEnu8Lf0Y+BmjLEGv+MO80NbK/0eeDMNZ5wxoN74Gn+c
+	pNGm+2qWyjM8/5hRO3qjsUa4yoDoG+PFGzAhNHnQfUsIJrXvCuLth+C93sT1vadRO1w9
+	RuSSvWrT4cbCTvlkHG6uqiAOJSTD4qZEnh/ws/Q9US7H4kXWiMtLRhmF8ZG5a5PL2GeL
+	ce1kxKlttfpUX3Wv9p7Asfp2W9ynKFf/WNH4D0lDZuTwvCp3wDGVfbasyzlYVKd7Filj
+	sGAA==
+X-Gm-Message-State: APzg51DW7lVLQlTxkYu595fXCCAiiDhg3bdDIPCDyvvrt56G6dhMoSjC
+	Tw6UjmwKOF7pBCdfKBL4+xIfZhQj/t9R2WxqBZ4=
+X-Google-Smtp-Source: ANB0VdafgAyjdHAYIuz/BZU7vFVT8oqIWlQardAw0o5Dvw2AMjE1m+4Ow5AsibruG9AKueW+zfoht3IL15tPuABubsY=
+X-Received: by 2002:a37:c5d2:: with SMTP id
+	k79-v6mr14203308qkl.206.1536560347726; 
+	Sun, 09 Sep 2018 23:19:07 -0700 (PDT)
 MIME-Version: 1.0
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Date: Mon, 10 Sep 2018 08:15:12 +0200
-Message-ID: <CAATN8PW7KbbYPKnHhxM7Y8ZxbxTPvx7yngd=W-hBQm95YZZgtA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe][PATCH V2 07/10] wvstreams: Add openssl 1.1.x support
+References: <CAATN8PW7KbbYPKnHhxM7Y8ZxbxTPvx7yngd=W-hBQm95YZZgtA@mail.gmail.com>
+In-Reply-To: <CAATN8PW7KbbYPKnHhxM7Y8ZxbxTPvx7yngd=W-hBQm95YZZgtA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 9 Sep 2018 23:18:41 -0700
+Message-ID: <CAMKF1so4Uh5YCbz=h9uxbXoAYX0QRJVUGbMecjNV=LQ8R0LWaA@mail.gmail.com>
+To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH V2 07/10] wvstreams: Add openssl 1.1.x support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,15 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 06:15:23 -0000
+X-List-Received-Date: Mon, 10 Sep 2018 06:19:07 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hello Khem,
+On Sun, Sep 9, 2018 at 11:15 PM Gianfranco Costamagna
+<costamagna.gianfranco@gmail.com> wrote:
+>
+> Hello Khem,
+>
+> did you forget a
+> sed s/openssl10/openssl/g in the bb file? :)
 
-did you forget a
-sed s/openssl10/openssl/g in the bb file? :)
+no, this is a squashed patch with the last one.
 
-thanks for applying the fix!
-
-G.
+>
+> thanks for applying the fix!
+>
+> G.
 
