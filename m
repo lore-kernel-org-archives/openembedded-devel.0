@@ -1,47 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B7E1579716
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 25876796CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 18:39:37 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id j192-v6so22582599wmj.1
+	Mon, 10 Sep 2018 18:40:13 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id j26-v6so23051543wre.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 11:39:39 -0700 (PDT)
+	Mon, 10 Sep 2018 11:40:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
 	bh=UQYQ8OKcX2dRM+B26aEaKlAoqrqXPprk/sezrylIVBc=;
-	b=UJ5OvqQi6qZg2IyQSOGUj2vgs53/h+b85C7L3jIrrEEryzc2qb6GJ+3Wiu5HTAN2tA
-	dk8mVtECeJEFF8Z7a9/JMjMvif8vgASf3qENi78AuzHaAz3lXI+VD4upkvM4PFo1cF+8
-	FgyEHT8lx/3zLQmst2t5ocXOHOk8RQuSkO+brTOkkbfIqM76OdeqBzzS7NdOsBV9IFk4
-	9Nc3ecuT4W+eQ0XTgzLF65rime8O9gWwVKfXqirJWy2qjiDx+AU5wslrLJIdk+Jf6Ngn
-	5g1QM7zcmT5D4E+HSJaW5yTT2hq9a6hn8WLwmehtkM8t6kozpEdXyp+1QVwiHu3Kje5g
-	4NDA==
+	b=i4uo/lSECOTWtipNKDbMkOdkpiQUTSpDqEIpAkcvjfg8oHjJ/uyhi9RuIIleFaI8ol
+	TzFp2Hz2TDlw14yq/WGrzppsg8sEuKTB1iSkp3aXfzclIa2S0s7+jWeOwEg/z2LfaHXZ
+	dF8mQA1YUQnWRapzH831KMDHSaIcHBEyzwt+zLrlZTu7/KRbGtWK8vYv64StKCeyyiAT
+	VsKcIcrPGw0Bw+wtg03/dgE4rnnhw+UsxE0EBdxKoDyAN1wb0Jji17cx5hcZ01KyQi7n
+	bzo/zTBtow6fWOpx5tk0lgXmBE+8qzBpvUQVl3HXreuwuk7amF5EqtDP1qowROYz2Meu
+	FTgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=UQYQ8OKcX2dRM+B26aEaKlAoqrqXPprk/sezrylIVBc=;
-	b=luqbP7+9FzRQI47K4zKLBNFC8/14oNXWPsQnlkP5nLRjxgsBdTH0x9PRCuopWzNqjI
-	F6Y1/ihW42nylC57cGleIDL5p2dufSNOEO4HOy/kpmEco+yUjMKDCVKatlsD9xgN9J23
-	JZ+BBn9o4IMHg+BUSilEKsAh1QwrPKl0SgRyf8P9fdpliDXcJKzGnwkRMxrtKk7J1Iio
-	Qsi/f2pUCf6yvANdiE8/xsn0rB8nWyJqCejEYxR6Gna2XgfvARtZdqq5jHKyBrAG9ldL
-	0j+r1TOXU+RJ7rUGj+QHSQOuFnLMPVZo7zzkNhQPIU0x+/dP49CvpwCE6qvsEOaZrF4z
-	sSdQ==
-X-Gm-Message-State: APzg51DXCu63fLPxao0sp0YB5Qc6NRj/N8b7Te2czDvekvkIQ8KEqENT
-	xZt2efDmNn8hY2jbM/JJhO21T7dN
-X-Google-Smtp-Source: ANB0Vdb6pZ4ZJSE4+PI5Ng0z13huHrLmkG4G8vFD4vpJkiViT5iy95k5boCZk/CyTATyMp7a95AiAw==
-X-Received: by 2002:a1c:8f0e:: with SMTP id
-	r14-v6mr1581768wmd.79.1536604778101; 
-	Mon, 10 Sep 2018 11:39:38 -0700 (PDT)
+	b=ZBMmqlYjx1BImLZowBUiJSbekcISXQgyc4Vfk5wfJcow9FE536gMS9Idjr6yRZOP9F
+	aem1P/bfUjpISFBeEXch+uK4StbTboB1A0+eCTSmv7zCgdPNDMo3pRo/R0MCuGiCvaGM
+	jQxEb+D4WgqB2P7+/wRFdWdvM4jF5gRlPlr+8sIvWkvpdmjfxIa0GKCVWAEJiaGf0o/I
+	PXskv/qAcKuCfBIIQ/P+j6LCHWb5IXnmsHoYHv6oRUQyJMAdyXvyY7aMPzCThcPEfqlb
+	h0wQ71K48dMy+4btyS5+XsnYIdz8jEoyLoaS8fFl4QWxZzh2knVeofQjkktCBpbiNCLQ
+	2dcQ==
+X-Gm-Message-State: APzg51B9fjpossxsBs6VErNYkg3HxWGDGZUeS+duLwFCghsNjcJP2w4F
+	t6ISyIA/RJ+k+0St77VzOFDRug7U
+X-Google-Smtp-Source: ANB0VdYaggwu7BcSSUI2EznuoSP8WJh1FyOvK7IoJEkvLep/vI82bvrfsQou5i/9ZLGlvl99Tdpz1g==
+X-Received: by 2002:adf:ef89:: with SMTP id
+	d9-v6mr16193996wro.195.1536604813626; 
+	Mon, 10 Sep 2018 11:40:13 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	200-v6sm29483376wmv.6.2018.09.10.11.39.36
+	b10-v6sm16390450wrr.88.2018.09.10.11.40.12
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 10 Sep 2018 11:39:37 -0700 (PDT)
+	Mon, 10 Sep 2018 11:40:12 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Sep 2018 18:39:32 +0000
-Message-Id: <20180910183932.25639-1-Martin.Jansa@gmail.com>
+Date: Mon, 10 Sep 2018 18:40:16 +0000
+Message-Id: <20180910184016.6156-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] xmlstarlet: Disable PARALLEL_MAKE (again)
+Subject: [meta-oe][sumo][PATCH] xmlstarlet: Disable PARALLEL_MAKE (again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 18:39:38 -0000
+X-List-Received-Date: Mon, 10 Sep 2018 18:40:13 -0000
 
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
