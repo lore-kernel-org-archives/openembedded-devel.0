@@ -1,45 +1,48 @@
-Return-Path: <a.filippov@yadro.com>
-Received: from mta-01.yadro.com (mta-01.yadro.com [89.207.88.251])
-	by mail.openembedded.org (Postfix) with ESMTP id AA3277970D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A7D966011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 06:48:00 +0000 (UTC)
-Received: from localhost (unknown [127.0.0.1])
-	by mta-01.yadro.com (Postfix) with ESMTP id BEEAC41900;
-	Mon, 10 Sep 2018 06:48:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=yadro.com; h=
-	content-type:content-type:mime-version:x-mailer:message-id:date
-	:date:subject:subject:from:from:received:received:received; s=
-	mta-01; t=1536562079; x=1538376480; bh=UrzeZgBL1ShCIOAYHk+utC98j
-	jB5Astp4NwU2Pd0nkw=; b=AHu7NW5RoQdjVjsOaceUxuw+TwPgV057zgvmfq78Y
-	YVW/tgy3jS/LvA1YuGR3UuqU/1Ydxni+iDMYHkpXKXW9LWThgUJbP3N5E1FkVpmt
-	3CnsfO0hYWIUvc2KqGlTianuwQOz0eWTuLmIqVIR+9cG06O4xzkKnPV0eap9KSXm
-	RE=
-X-Virus-Scanned: amavisd-new at yadro.com
-Received: from mta-01.yadro.com ([127.0.0.1])
-	by localhost (mta-01.yadro.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ShDnRcnKpYSj; Mon, 10 Sep 2018 09:47:59 +0300 (MSK)
-Received: from T-EXCH-02.corp.yadro.com (t-exch-02.corp.yadro.com
-	[172.17.10.102])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mta-01.yadro.com (Postfix) with ESMTPS id 5B550411FB;
-	Mon, 10 Sep 2018 09:47:59 +0300 (MSK)
-Received: from bbwork.com (172.17.15.155) by T-EXCH-02.corp.yadro.com
-	(172.17.10.102) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id 15.1.669.32;
-	Mon, 10 Sep 2018 09:47:58 +0300
-From: Alexander Filippov <a.filippov@yadro.com>
-To: <openembedded-devel@lists.openembedded.org>, Joe MacDonald
-	<joe_macdonald@mentor.com>
-Date: Mon, 10 Sep 2018 09:47:35 +0300
-Message-ID: <20180910064735.12760-1-a.filippov@yadro.com>
-X-Mailer: git-send-email 2.14.4
-MIME-Version: 1.0
-X-Originating-IP: [172.17.15.155]
-X-ClientProxiedBy: T-EXCH-01.corp.yadro.com (172.17.10.101) To
-	T-EXCH-02.corp.yadro.com (172.17.10.102)
-Cc: openbmc@lists.ozlabs.org
-Subject: [meta-networking][PATCH] split net-snmp-libs into smaller packages
+	Mon, 10 Sep 2018 06:55:47 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id l9-v6so9966539pff.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Sep 2018 23:55:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=rHchlrcDAMfaXrTPkFdY7AYPakyK+J4tD3aPbfWd8B4=;
+	b=Q6Uee5vuHA/E4u1xcbtEmMccRV1pXqyhfm3trMs/zKqLFZHu3zBJdZFJX98Xec7YEw
+	tzhl7a4suZgr8/3dQpmciR9qZSbq91QYoFxoHFvVppd6/BWI2gtIFhxfTNHDlHm0OL8Z
+	YnNsjsXSMlv6FLlorA42csMsYVKsZS/QyOrLQYtryY6p6ZuArd5eQOA1heRtoQN3Edbu
+	U6QQoE6biXbdRcgpHOeArXO7alBaCFAKSvV/aPNoFLiwJE6lmATeou1tQsCjhO86ZHrf
+	4NzlaxGk4jZZR/ZfrotpBDntShSq+g9Nqw/RpMUXMfqhZdMYofZTbp6CCEY5vgnIYnFR
+	eKFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=rHchlrcDAMfaXrTPkFdY7AYPakyK+J4tD3aPbfWd8B4=;
+	b=Q0yHaBupSAJTNa4D8If6BjTUNE9YiqKAgRFI9DlnwcuexSBdptDpW+UyGumWEEo0Ql
+	dY2n2SZhwKtoX7S5TaxDZtiI7hZOKRFpgV7TkpmpG1WaI1h7geAMcSmeSxHutLis4NAn
+	6us8jxKo4/GVDv5RKzuvz9KFUdha1rWmONtSSQI7ElcCe6pjsQSA/XIqCJD7hSBiw9q/
+	XlhcPhLGzDwZ4MiryXDFSDue5Sq+0rKyfneSSbMTjKuNKtQh18/1Rs8hGL63bR3OHVrR
+	KPRSEbdc+RTKosYaETbTcWvqzGdFW8tCET2em2AdCPY3KIfKY+Uso29TQhLrWJC0Nr00
+	ESdQ==
+X-Gm-Message-State: APzg51DAqZY9rS4qepN3aSTkZpHwaSCUzNFG53Y/r/VRwstEZvmd4UUZ
+	a+suWU26OWs0SALlOVMwS/ILnwec
+X-Google-Smtp-Source: ANB0VdavJg/gtVgx6ooiTVZEvoM0IaWo0p+hmWkwUD2mcHFeS221z6OQAsxLqQyLvFiPmLAVsd1KBA==
+X-Received: by 2002:a63:6d4f:: with SMTP id
+	i76-v6mr20788671pgc.215.1536562548197; 
+	Sun, 09 Sep 2018 23:55:48 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::2887])
+	by smtp.gmail.com with ESMTPSA id
+	b3-v6sm29610816pgm.74.2018.09.09.23.55.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 09 Sep 2018 23:55:47 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Sep 2018 23:55:36 -0700
+Message-Id: <20180910065537.18612-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-initramfs][PATCH 1/2] klcc-cross: Recognise clang options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,79 +55,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 06:48:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Sep 2018 06:55:47 -0000
 
-By default `net-snmp-libs` contains all compiled libs.
-This commit splits `net-snmp-libs` into subpackages for each library.
+Let klcc understand '-no-integrated-as' which is a clang option used by
+meta-clang for compiler defaults
 
-This allows for smaller resulting image due to finer packaging.
-
-Signed-off-by: Alexander Filippov <a.filippov@yadro.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-protocols/net-snmp/net-snmp_5.8.bb     | 23 ++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
+ .../klcc-cross-accept-clang-options.patch     | 19 +++++++++++++++++++
+ .../recipes-devtools/klibc/klibc.inc          |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-cross-accept-clang-options.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 779e5cd2d..a32d09d77 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -168,17 +168,21 @@ net_snmp_sysroot_preprocess () {
-     fi
- }
- 
--PACKAGES += "${PN}-libs ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd"
-+PACKAGES += "${PN}-libs ${PN}-mibs ${PN}-server ${PN}-client \
-+             ${PN}-server-snmpd ${PN}-server-snmptrapd \
-+             ${PN}-lib-netsnmp ${PN}-lib-agent ${PN}-lib-helpers \
-+             ${PN}-lib-mibs ${PN}-lib-trapd"
- 
- # perl module
- PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'perl', '${PN}-perl-modules', '', d)}"
- 
- ALLOW_EMPTY_${PN} = "1"
- ALLOW_EMPTY_${PN}-server = "1"
-+ALLOW_EMPTY_${PN}-libs = "1"
- 
- FILES_${PN}-perl-modules = "${libdir}/perl/*"
- 
--FILES_${PN}-libs = "${libdir}/lib*${SOLIBS}"
-+FILES_${PN}-libs = ""
- FILES_${PN}-mibs = "${datadir}/snmp/mibs"
- FILES_${PN}-server-snmpd = "${sbindir}/snmpd \
-                             ${sysconfdir}/snmp/snmpd.conf \
-@@ -191,6 +195,12 @@ FILES_${PN}-server-snmptrapd = "${sbindir}/snmptrapd \
-                                 ${systemd_unitdir}/system/snmptrapd.service \
- "
- 
-+FILES_${PN}-lib-netsnmp = "${libdir}/libnetsnmp${SOLIBS}"
-+FILES_${PN}-lib-agent = "${libdir}/libnetsnmpagent${SOLIBS}"
-+FILES_${PN}-lib-helpers = "${libdir}/libnetsnmphelpers${SOLIBS}"
-+FILES_${PN}-lib-mibs = "${libdir}/libnetsnmpmibs${SOLIBS}"
-+FILES_${PN}-lib-trapd = "${libdir}/libnetsnmptrapd${SOLIBS}"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-cross-accept-clang-options.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-cross-accept-clang-options.patch
+new file mode 100644
+index 0000000000..07703aa536
+--- /dev/null
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-cross-accept-clang-options.patch
+@@ -0,0 +1,19 @@
++meta-clang passes this option to compiler defaults
 +
- FILES_${PN} = ""
- FILES_${PN}-client = "${bindir}/* ${datadir}/snmp/"
- FILES_${PN}-dbg += "${libdir}/.debug/ ${sbindir}/.debug/ ${bindir}/.debug/"
-@@ -214,10 +224,15 @@ SYSTEMD_SERVICE_${PN}-server-snmptrapd =  "snmptrapd.service"
- RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'perl', 'net-snmp-perl-modules', '', d)}"
- RDEPENDS_${PN} += "net-snmp-client"
- RDEPENDS_${PN}-server-snmpd += "net-snmp-mibs"
--RDEPENDS_${PN}-server-snmptrapd += "net-snmp-server-snmpd"
-+RDEPENDS_${PN}-server-snmptrapd += "net-snmp-server-snmpd ${PN}-lib-trapd"
- RDEPENDS_${PN}-server += "net-snmp-server-snmpd net-snmp-server-snmptrapd"
- RDEPENDS_${PN}-client += "net-snmp-mibs net-snmp-libs"
--RDEPENDS_${PN}-libs += "libpci"
-+RDEPENDS_${PN}-libs += "libpci \
-+                        ${PN}-lib-netsnmp \
-+                        ${PN}-lib-agent \
-+                        ${PN}-lib-helpers \
-+                        ${PN}-lib-mibs \
-+"
- RDEPENDS_${PN}-ptest += "perl \
-                          perl-module-test \
-                          perl-module-file-basename \
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: git/klcc/klcc.in
++===================================================================
++--- git.orig/klcc/klcc.in
+++++ git/klcc/klcc.in
++@@ -207,6 +207,9 @@ while ( defined($a = shift(@ARGV)) ) {
++     } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
++ 	# Override gcc encoded sysroot
++ 	push(@ccopt, $a);
+++    } elsif ( $a eq '-no-integrated-as' ) {
+++	# Allow clang options
+++	push(@ccopt, $a);
++     } else {
++ 	die "$0: unknown option: $a\n";
++     }
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 8616f89f2c..f0b20bc7fd 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -12,6 +12,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
+            file://klibc-linux-libc-dev.patch \
+            file://staging.patch \
+            file://klcc-consider-sysroot.patch \
++           file://klcc-cross-accept-clang-options.patch \
+            file://0001-dash-Specify-format-string-in-fmtstr.patch \
+            file://0001-Define-in_-structs-for-non-glibc-system-libs.patch \
+            file://0001-include-linux-sysinfo.h-directly.patch \
 -- 
-2.14.4
+2.18.0
 
 
