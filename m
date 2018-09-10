@@ -1,48 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 25876796CB
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 5713D796CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 18:40:13 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id j26-v6so23051543wre.2
+	Mon, 10 Sep 2018 18:43:02 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id o18-v6so22586550wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 11:40:14 -0700 (PDT)
+	Mon, 10 Sep 2018 11:43:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=UQYQ8OKcX2dRM+B26aEaKlAoqrqXPprk/sezrylIVBc=;
-	b=i4uo/lSECOTWtipNKDbMkOdkpiQUTSpDqEIpAkcvjfg8oHjJ/uyhi9RuIIleFaI8ol
-	TzFp2Hz2TDlw14yq/WGrzppsg8sEuKTB1iSkp3aXfzclIa2S0s7+jWeOwEg/z2LfaHXZ
-	dF8mQA1YUQnWRapzH831KMDHSaIcHBEyzwt+zLrlZTu7/KRbGtWK8vYv64StKCeyyiAT
-	VsKcIcrPGw0Bw+wtg03/dgE4rnnhw+UsxE0EBdxKoDyAN1wb0Jji17cx5hcZ01KyQi7n
-	bzo/zTBtow6fWOpx5tk0lgXmBE+8qzBpvUQVl3HXreuwuk7amF5EqtDP1qowROYz2Meu
-	FTgA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=uWKeWu3UhaKWoclGC70JWd9DHzZaHl4R9wlw1I5DLDU=;
+	b=vJGD3w4dP661dscv2vwgcFTN6EbK4+6x6VcsiRw7gvxLxLi3TZc1LBVlm0Angse8X7
+	GJkRLoBx2X7T467xEq10XOtQPBeqmQIQDJjzfOY1y7XUm4zDl3g6F7XDwvCZ7FWonV3d
+	f+BKXv9gWFKcXvDaOOmlLudH8kqvpIwdnAgSVZq7burgtKJ7RN1pbGLqPIzKnHc923P4
+	dN9H+M4US+n747JsukXTLfPEnp9mAEcPvx66XSXkBIV35yX3XjG3Lhp+xBe5utKSWOwr
+	JGxW+dWIEbOIigTr7LAn23VwITeOWeeZpHkM5rvFzGY8FiYbhG7PHvIqzCC+cPwzX9SZ
+	iozQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=UQYQ8OKcX2dRM+B26aEaKlAoqrqXPprk/sezrylIVBc=;
-	b=ZBMmqlYjx1BImLZowBUiJSbekcISXQgyc4Vfk5wfJcow9FE536gMS9Idjr6yRZOP9F
-	aem1P/bfUjpISFBeEXch+uK4StbTboB1A0+eCTSmv7zCgdPNDMo3pRo/R0MCuGiCvaGM
-	jQxEb+D4WgqB2P7+/wRFdWdvM4jF5gRlPlr+8sIvWkvpdmjfxIa0GKCVWAEJiaGf0o/I
-	PXskv/qAcKuCfBIIQ/P+j6LCHWb5IXnmsHoYHv6oRUQyJMAdyXvyY7aMPzCThcPEfqlb
-	h0wQ71K48dMy+4btyS5+XsnYIdz8jEoyLoaS8fFl4QWxZzh2knVeofQjkktCBpbiNCLQ
-	2dcQ==
-X-Gm-Message-State: APzg51B9fjpossxsBs6VErNYkg3HxWGDGZUeS+duLwFCghsNjcJP2w4F
-	t6ISyIA/RJ+k+0St77VzOFDRug7U
-X-Google-Smtp-Source: ANB0VdYaggwu7BcSSUI2EznuoSP8WJh1FyOvK7IoJEkvLep/vI82bvrfsQou5i/9ZLGlvl99Tdpz1g==
-X-Received: by 2002:adf:ef89:: with SMTP id
-	d9-v6mr16193996wro.195.1536604813626; 
-	Mon, 10 Sep 2018 11:40:13 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=uWKeWu3UhaKWoclGC70JWd9DHzZaHl4R9wlw1I5DLDU=;
+	b=f2SKF7viA3kCQeiZZVmi+fNaaQ7CkUTeAv6qksAvhIMsVr1dXG+cQbtRfi56V1H89x
+	BsKWApFD7Nbysh+PBEAQ9dPrj9HSRNOIigUm5TlBUbDAJitk3mZKeCrkyVhtT244Boeg
+	ldCE5ASRBfpa2pwP50/hk9gpI2spsXZFllPuzxxfDdsD3XeVLzGCorxDnxqiirnxo2e0
+	nuLarQ2lgIkML+jxuzDpGYy9jsIxWzvDZRcjZEGwdE60xi+sZoJ+4qzlEQqW04F4p+Ge
+	//Oqcfbz3kWyvd5KP8iwIinUbhn70Vu5wKjuPrMwAJyiDXDSKBo+mK/SodU9ls/rVgc8
+	cdDw==
+X-Gm-Message-State: APzg51BaFPb6YZLwsuEqFfjgu00f2OVaz7RRxuB9JsAFPO8YYINOzBa2
+	SsdoT5eL3s8oGRhhcE3+uYRenc+T
+X-Google-Smtp-Source: ANB0Vdax6BQjzEI4R9H3AFrUUTqy/VZHZ+u9iiQMDfPSLU3AYjkpZXoWLWfsjz8OpM8JuCTiBBJL/g==
+X-Received: by 2002:a1c:85cb:: with SMTP id
+	h194-v6mr1728249wmd.54.1536604982808; 
+	Mon, 10 Sep 2018 11:43:02 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	b10-v6sm16390450wrr.88.2018.09.10.11.40.12
+	r66-v6sm31409566wmb.37.2018.09.10.11.43.01
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 10 Sep 2018 11:40:12 -0700 (PDT)
+	Mon, 10 Sep 2018 11:43:02 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Sep 2018 18:40:16 +0000
-Message-Id: <20180910184016.6156-1-Martin.Jansa@gmail.com>
+Date: Mon, 10 Sep 2018 18:43:04 +0000
+Message-Id: <20180910184304.8068-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][sumo][PATCH] xmlstarlet: Disable PARALLEL_MAKE (again)
+In-Reply-To: <CA+chaQcY0TXd5ZpsaV-pOn-zO+kMQ8=_2hK3OOKbOEF-CFWEBg@mail.gmail.com>
+References: <CA+chaQcY0TXd5ZpsaV-pOn-zO+kMQ8=_2hK3OOKbOEF-CFWEBg@mail.gmail.com>
+Subject: [meta-python][PATCH] python-pyflame: skip for aarch64 as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,36 +57,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 18:40:13 -0000
+X-List-Received-Date: Mon, 10 Sep 2018 18:43:02 -0000
 
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
+* fails with:
+| ../../git/src/ptrace.cc: In function 'user_regs_struct pyflame::PtraceGetRegs(pid_t)':
+| ../../git/src/ptrace.cc:127:14: error: 'PTRACE_GETREGS' was not declared in this scope
+|    if (ptrace(PTRACE_GETREGS, pid, 0, &regs)) {
+|               ^~~~~~~~~~~~~~
+| ../../git/src/ptrace.cc:127:14: note: suggested alternative: 'PTRACE_GETREGSET'
+|    if (ptrace(PTRACE_GETREGS, pid, 0, &regs)) {
+|               ^~~~~~~~~~~~~~
+|               PTRACE_GETREGSET
+| ../../git/src/ptrace.cc: In function 'void pyflame::PtraceSetRegs(pid_t, user_regs_struct)':
+| ../../git/src/ptrace.cc:136:14: error: 'PTRACE_SETREGS' was not declared in this scope
+|    if (ptrace(PTRACE_SETREGS, pid, 0, &regs)) {
+|               ^~~~~~~~~~~~~~
+| ../../git/src/ptrace.cc:136:14: note: suggested alternative: 'PTRACE_SETREGSET'
+|    if (ptrace(PTRACE_SETREGS, pid, 0, &regs)) {
+|               ^~~~~~~~~~~~~~
+|               PTRACE_SETREGSET
+| Makefile:524: recipe for target 'ptrace.o' failed
+| make[2]: *** [ptrace.o] Error 1
 
-* MJ: this was applied for 1.5.0 version in:
-  https://patchwork.openembedded.org/patch/116023/
-  then removed with the upgrade to 1.6.1 in:
-  https://patchwork.openembedded.org/patch/141059/
-  but as reported before this issue is still reproducible
-  with 1.6.1
-
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-python/recipes-devtools/python/python-pyflame.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
-index e3d52e616a..e28fd61a03 100644
---- a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
-+++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
-@@ -24,3 +24,8 @@ inherit autotools
- EXTRA_OECONF="--disable-build-docs \
-   --with-libxml-prefix=${STAGING_LIBDIR}/.. \
-   --with-libxslt-prefix=${STAGING_LIBDIR}/.."
-+
-+# http://errors.yoctoproject.org/Errors/Details/157121/
-+# /bin/bash: src/usage.c: No such file or directory
-+# Makefile:2121: recipe for target 'src/usage.c' failed
-+PARALLEL_MAKE = ""
+diff --git a/meta-python/recipes-devtools/python/python-pyflame.inc b/meta-python/recipes-devtools/python/python-pyflame.inc
+index 3914028ec3..340aab74ef 100644
+--- a/meta-python/recipes-devtools/python/python-pyflame.inc
++++ b/meta-python/recipes-devtools/python/python-pyflame.inc
+@@ -12,3 +12,4 @@ inherit pkgconfig autotools
+ 
+ COMPATIBLE_HOST_libc-musl_class-target = "null"
+ COMPATIBLE_HOST_mipsarch_class-target = "null"
++COMPATIBLE_HOST_aarch64_class-target = "null"
 -- 
 2.17.1
 
