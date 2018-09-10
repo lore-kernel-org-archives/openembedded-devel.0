@@ -1,51 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 43324753D4
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D041874621
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 10 Sep 2018 05:06:39 +0000 (UTC)
-Received: by mail-pl1-f181.google.com with SMTP id ba4-v6so9149954plb.11
+Received: by mail-pg1-f196.google.com with SMTP id v66-v6so9800575pgb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Sep 2018 22:06:40 -0700 (PDT)
+	Sun, 09 Sep 2018 22:06:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Ghepz7qLAKgkzzV46OFOK/q1OgkhYSDmRd+4Gunuhog=;
-	b=sKOW3FWY4d/NHitzHYUl39WjTnpNCwIrHTUkQBbv2bse/TI30h3rXTF4JIXVx9CGdN
-	UCSYBKSi7jmJ7Of/D/rpjOmmTKgNonleuHjt25/m+hZ/XZmIkNHqOverWhNcld3P7Uvn
-	gKrR2DcAcL7DckKLtDyAdl18h7Y8FJR0Gnud3seFkVnw35gM76uDgWS+U2TkczcsV/q1
-	kZJ0LtUtFMhAzz4nf7QZ2bqWTawZ6aGMNHKu1FWUqKeWAdgwgxcwdk0d0EErHwBwnl0a
-	oqlsCBYJt10vDh/Hug+Sf0MaOye2mHc5LE/0pGQ1wg5pXOnCPYm2IRmtNEtdCw6gyzdQ
-	STDw==
+	bh=Zt2g/PFZptwtqB17r9h7IfUQMLxNHITp7mSkAqlxzo0=;
+	b=dnTZZj1Ek0N6mgIVnFCFObVnvBGXX5QzuUfU6RVr/qrvoiUo9A0M8pThSox5tAAIER
+	cO32LllLT/GAZ50X5ZUWXdDKCqvU90sqVkjzSoCm6dnq2Pns9chm5f5IFUHtKvTIdN7G
+	Yh5c2C5NeqD8j5k3PHcFInYaGEFKIRzurXFMDB30AFDN7/HGcDB56KJrfYSEp+M2DNQz
+	0OowlbN/xPij1YEezVVMmczqBTe3rRhy97k5IlLPEPU++OKTvK+4Q79w5bYL2TzX5rCw
+	mOtQIzoVVOHJBi3i+zpmBqzzf2n5IbbB2yf8MndhhGhsBTWP4zCQvOXMjq+TGGA/i37+
+	QYEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Ghepz7qLAKgkzzV46OFOK/q1OgkhYSDmRd+4Gunuhog=;
-	b=dmNIusdc8XDWD/vRH0Rj9Z89VGlmOQKZDxZN/7c+pBGo/nVfEGEZ1CXQcHaMxGra4f
-	vWHXzE7y+s02y43YMbloo2ubDcYQ3RbeoESMmSNJ8WVdthPpBkvtzG7b6RjpsYiomO5O
-	7qMTzYdJ296O/qV+RGFJvrXbTxc2AC/39xkCkaCdwGaMSqGMHdI4KMhC8BNjTIkAb7UQ
-	NHMmxSY7TaXL0QaDovKU8MIyZAi7FXgWwRSK0chR0jKud1FpTepU3QkHkAUSP7iIH2f9
-	FvbDU4YCcBZZf/4ncrhqY94Yt89ndjdN3Xzij48UpJFyYTX5W7HBBd21ieYIRQNcZe2z
-	1n6Q==
-X-Gm-Message-State: APzg51Bm26alRU+ArlrKvEG3gYcus9o+KCorttcaCAHu4cqbro8/b788
-	ct/uaylG2zpJhhfzJbE/aJo+6+GA
-X-Google-Smtp-Source: ANB0VdYHkzIHHlTwPKnLryAHQKuJkmQBcab0+m30Rr9pKv94+PKdm8DyAGqk5v8Oe7iUpIvFLhdHsA==
-X-Received: by 2002:a17:902:d917:: with SMTP id
-	c23-v6mr19962394plz.65.1536555999849; 
-	Sun, 09 Sep 2018 22:06:39 -0700 (PDT)
+	bh=Zt2g/PFZptwtqB17r9h7IfUQMLxNHITp7mSkAqlxzo0=;
+	b=knp05CSg4MC1m3iwAavz6RpObF9FVeoXVDjrV/e8q6yQO4+svUAHMhtnODK2Klicok
+	fQ8bZ2wTeFjSRi0nh6jm0MWTVOgvvvEqoyD4ABFw+r84bR4/a4lzzoeBz2kxlGjcWaip
+	vM96qp/V5Y2wC/uh6rfcWHCsCcLPOucbqSMbZul0OYT9qIve4beEic7mKL/222sJgbQO
+	QyWyAyE0hZshexejOcBvVVba3BN0u4H9Vehfm6AgdQD0VkUVZMLXbUAjZyotZTmpoxK1
+	9M0o9Ohjslgm9igfoC2PBAb8ULYRtD13C9m4bDiUdL+eU3XBren7HxggqH5EjtT3bz/j
+	GyEw==
+X-Gm-Message-State: APzg51CcIJvj9fMH3r4c7Kcy2/kM07gX+vZwupIpB1J4nyvYDUuo0Iii
+	t/LUcXit539V5A5YXlk1ZGMo7HjA
+X-Google-Smtp-Source: ANB0VdaFuaNvp96N8RsEWGWiT9q/HwKNapYUjC3IBBVH3nUqMlmAi3f+3/k9yrZB9DbrRHWi64OHuA==
+X-Received: by 2002:a62:5a01:: with SMTP id o1-v6mr21925126pfb.0.1536556000611;
+	Sun, 09 Sep 2018 22:06:40 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::2887])
 	by smtp.gmail.com with ESMTPSA id
 	x24-v6sm18819188pfh.67.2018.09.09.22.06.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 09 Sep 2018 22:06:39 -0700 (PDT)
+	Sun, 09 Sep 2018 22:06:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Sep 2018 22:06:21 -0700
-Message-Id: <20180910050629.16170-2-raj.khem@gmail.com>
+Date: Sun,  9 Sep 2018 22:06:22 -0700
+Message-Id: <20180910050629.16170-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20180910050629.16170-1-raj.khem@gmail.com>
 References: <20180910050629.16170-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH V2 02/10] uftrace: Upgrade to 0.8.3
+Subject: [meta-oe][PATCH 03/10] libqmi: Upgrade to 1.20.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,101 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 05:06:39 -0000
-
-* Deliberately provide a non existing path to with_elfutils so it does
-  not copy libelf.so into its staged install and become a provider for
-  that library while elfutils should be the legit provider and this
-  package should just list it in its rdeps
-
-* Fix build with musl
+X-List-Received-Date: Mon, 10 Sep 2018 05:06:40 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-V2: Fix build with musl
+ .../libqmi/{libqmi_1.20.0.bb => libqmi_1.20.2.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.20.0.bb => libqmi_1.20.2.bb} (82%)
 
- ...001-include-dlfcn.h-for-RTLD_DEFAULT.patch | 39 +++++++++++++++++++
- .../{uftrace_0.8.bb => uftrace_0.8.3.bb}      | 12 ++++--
- 2 files changed, 47 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0001-include-dlfcn.h-for-RTLD_DEFAULT.patch
- rename meta-oe/recipes-devtools/uftrace/{uftrace_0.8.bb => uftrace_0.8.3.bb} (65%)
-
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace/0001-include-dlfcn.h-for-RTLD_DEFAULT.patch b/meta-oe/recipes-devtools/uftrace/uftrace/0001-include-dlfcn.h-for-RTLD_DEFAULT.patch
-new file mode 100644
-index 0000000000..fe7aac9318
---- /dev/null
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace/0001-include-dlfcn.h-for-RTLD_DEFAULT.patch
-@@ -0,0 +1,39 @@
-+From cdf7f2e394fcfb93a61f509ae3388f29540a6b35 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 8 Sep 2018 11:56:13 -0700
-+Subject: [PATCH] include dlfcn.h for RTLD_DEFAULT
-+
-+Fixes
-+plthook.c:128:41: error: use of undeclared identifier 'RTLD_DEFAULT'
-+
-+Upstream-Status: Submitted [https://github.com/namhyung/uftrace/pull/487]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libmcount/plthook.c | 1 +
-+ utils/debug.c       | 1 +
-+ 2 files changed, 2 insertions(+)
-+
-+diff --git a/libmcount/plthook.c b/libmcount/plthook.c
-+index d9d84f0..d54f5e8 100644
-+--- a/libmcount/plthook.c
-++++ b/libmcount/plthook.c
-+@@ -6,6 +6,7 @@
-+ #include <sys/mman.h>
-+ #include <pthread.h>
-+ #include <assert.h>
-++#include <dlfcn.h>
-+ 
-+ /* This should be defined before #include "utils.h" */
-+ #define PR_FMT     "mcount"
-+diff --git a/utils/debug.c b/utils/debug.c
-+index 2134b09..5460def 100644
-+--- a/utils/debug.c
-++++ b/utils/debug.c
-+@@ -13,6 +13,7 @@
-+ #include <assert.h>
-+ #include <limits.h>
-+ #include <inttypes.h>
-++#include <dlfcn.h>
-+ 
-+ #include "utils/utils.h"
-+ 
-diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-similarity index 65%
-rename from meta-oe/recipes-devtools/uftrace/uftrace_0.8.bb
-rename to meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-index 82b179521c..e377a5c9d5 100644
---- a/meta-oe/recipes-devtools/uftrace/uftrace_0.8.bb
-+++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.8.3.bb
-@@ -10,15 +10,19 @@ DEPENDS_append_libc-musl = " argp-standalone"
- 
- inherit autotools
- 
--SRCREV = "5af9ff9fa89c340617e52c8ed05798b352a7145c"
--SRC_URI = "git://github.com/namhyung/${BPN}"
-+# v0.8.3
-+SRCREV = "8b723a6fae2ef30495cd6279774fba9c95cd9c88"
-+SRC_URI = "git://github.com/namhyung/${BPN} \
-+           file://0001-include-dlfcn.h-for-RTLD_DEFAULT.patch \
-+           "
- S = "${WORKDIR}/git"
- 
- LDFLAGS_append_libc-musl = " -largp"
--EXTRA_OECONF = "ARCH=${TARGET_ARCH}"
-+EXTRA_UFTRACE_OECONF = "ARCH=${TARGET_ARCH} \
-+                        with_elfutils=/use/libelf/from/sysroot"
- 
- do_configure() {
--    ${S}/configure ${EXTRA_OECONF}
-+    ${S}/configure ${EXTRA_UFTRACE_OECONF}
- }
- 
- FILES_SOLIBSDEV = ""
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+similarity index 82%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.20.0.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+index 9301cbd5ee..3e08c4f9e6 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.20.2.bb
+@@ -14,5 +14,5 @@ inherit autotools pkgconfig bash-completion
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+            file://0001-Detect-clang.patch \
+            "
+-SRC_URI[md5sum] = "797e365521df76b77b067e6317618b41"
+-SRC_URI[sha256sum] = "21428cd3749c56246565123f707fee51238651a22c60bdc85ebce97388626eb4"
++SRC_URI[md5sum] = "584214476ab75c394160cb85fbccaa1d"
++SRC_URI[sha256sum] = "c73459ca8bfe1213f8047858d4946fc1f58e164d4f488a7a6904edee25e2ca44"
 -- 
 2.18.0
 
