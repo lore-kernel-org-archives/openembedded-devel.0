@@ -1,49 +1,99 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-oi0-f44.google.com (mail-oi0-f44.google.com
-	[209.85.218.44])
-	by mail.openembedded.org (Postfix) with ESMTP id A6EE879826
+Return-Path: <leon.anavi@konsulko.com>
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BBDC479801
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 07:23:05 +0000 (UTC)
-Received: by mail-oi0-f44.google.com with SMTP id c190-v6so38199663oig.6
+	Mon, 10 Sep 2018 08:30:22 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id j26-v6so20947261wre.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Sep 2018 00:23:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=HABbLCXivr5fK5O7v0e7xp/w7gPlMWv3TAwGkxvkOJ4=;
-	b=OSwHWgSnZ219aOXlw4uoKZ6iZ7qmGjG6VWC9nADKJlBbXjQO6M4nltt9ATwKvtQGcL
-	YXcHs/l1R5U6o2owa0ZGXU9Oqge014w81takz+ROfUsWhyZenTS3h3zk2x44lBuzt4wT
-	AwI0u0+cO9yeGGajYxYpC0wpmoiU8qHhThzWC0Z0h5MAQA9q2GXVZMnRxkPVYhRf7IYy
-	rOGJTT6a5YNr5yBHjRiVBFYQuwN1FuLHgIB3dA1nZPJYRsKhe0J42n9FWmJdY4hWWvwX
-	JMlqavac0zexkCMTfZvIKWdsuubnhsr+7jNWt9AxiRxbAO/0dciO0lTw79CK3foaNz19
-	uZFg==
+	Mon, 10 Sep 2018 01:30:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=uILClppsiA8j9POJTyug+N8S//D29tlzZ0nfkvKWmcs=;
+	b=FTkK3oNJeTBUDp1UHVPW4bui7XPctOmvBNUepef7Nk8yYxHvvKUp9qycYOIsyFnqRw
+	5gNOPBs70xahtSV6oonERHS1M+m9xZh2vcJHwKL/9rX56StpBWsix8PqlQNaujYvBTSw
+	H72TxpkPzp502wY1nmxGAfSV8PuHwh4gw5/4o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=HABbLCXivr5fK5O7v0e7xp/w7gPlMWv3TAwGkxvkOJ4=;
-	b=GKGTYeng1F4Tt+HQoXE9CCpdZdhF6y2eEibc8AdrGGPuIYan7OEEVqswrqm+6lcpTj
-	8QbC7QmnCU2GQx1F0TD2rc6ztIUSqlfoT9cNxZTUNvmZ1EZRsdl6RWE3Afafuq1rYJtQ
-	A2KcA/gbo0D3MxmbIJ+xgHDOWOMYHWTrbzqXOZlZCbP8AMBcudM3xGc/6wxPX3EOI8jn
-	W4gopaHE3B5NtuRXrtlt4ctbCi5CaUibxPhOGBQd894YfW2b6o2c1keZOAF4eV5oQjBX
-	OWVhs8CljaCKTttmwt4jhwi4ZvFy9ZpbSO9cqiq9X4QMZOZk4kS+TK+eanVZlCZ8Qt4z
-	GYyg==
-X-Gm-Message-State: APzg51Az/QLulE4la6nVMvEbNpvglcfpsDUJypYWwa2x387oIHMxb0tM
-	oaMIooih+Alo+12ncggltOSBJBQymuWZ+hLe5jI=
-X-Google-Smtp-Source: ANB0VdZ8e1KrrrXT6oA6P6MVePWDhl1daZ5eguTacGU3RAGozymscZx3BCXhKIqkzGwMGhPyGfu+hKv/5n43YjYf6zk=
-X-Received: by 2002:aca:e38d:: with SMTP id
-	a135-v6mr21272730oih.16.1536564186708; 
-	Mon, 10 Sep 2018 00:23:06 -0700 (PDT)
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=uILClppsiA8j9POJTyug+N8S//D29tlzZ0nfkvKWmcs=;
+	b=YBWdRFXjOcrdjGcvka4rS0WYSK1xyhotSsVw8a10F/4sxsJ1Rs7VugpJ3VZLQK8cKo
+	Tyjg64J7KBIVxyFoPc+6Gf/ISPIFNOFRHUDI5RYMke74cVft4RH47SRf+YN7jM0UzMyf
+	TW2xip4xoCIEeR1+G7tt2XQVmWvrSg1xME1v33/6fJylrVq7ZPdwuAeEtlnloUvSaFxi
+	KuGCP9XVWx0Qv2SADsgHhNIe7yXeOM3jXwY2W+3N1LyPy9eFLz79FfxS7UVsPY6XUOj1
+	5D/XR9toXeOHFmE6cfH1e3c4toBhHhjFm0yHvWuQFfZRwQCylFjJD8UemWIASRdPGP1f
+	o73Q==
+X-Gm-Message-State: APzg51Co1r4eZX1bm4eQSrNc5c7bD15fC/Q5OX905J9V0XkJ4Uim7aqM
+	Hc+tgDaH1ad0F+xaLLiyhKaoZMfybSk=
+X-Google-Smtp-Source: ANB0VdbFS2BATuYFQqXQUgTCGxeskh+69bcABK/pZpMCsc/7zlxqKeiO+P0hji2USYW+cw3gBuYdug==
+X-Received: by 2002:a5d:674d:: with SMTP id
+	l13-v6mr13509814wrw.197.1536568223069; 
+	Mon, 10 Sep 2018 01:30:23 -0700 (PDT)
+Received: from [192.168.4.209] ([78.130.197.177])
+	by smtp.gmail.com with ESMTPSA id
+	v16-v6sm15300245wrw.12.2018.09.10.01.30.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 10 Sep 2018 01:30:22 -0700 (PDT)
+To: Mohamed Dawod <mhm.dawod@gmail.com>,
+	openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+References: <CAGCTLNSbsH7Hto3CwpC+p0YFWQqnYRHYm2TwcbH6w5TzbtBP5A@mail.gmail.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=leon.anavi@konsulko.com; prefer-encrypt=mutual; keydata=
+	xsFNBFnU8b4BEADKkOruSAClof+En5MwATpFk1fdeWsCYUcDMpuffX/xhU7JJKdW59hAYyW6
+	7NvECRTXCQ5GaaDYPNAmZlCW/PgZcn5NFl6cOStNvAali+ljVRhVq0DoTF0CLz2pu5+RWodW
+	mbDdraADLTiBaCDfbWabk2z/2wb/L83is91ILcbmziy9lTxrivRGfTjkhcN0DmQjd8SvdO8K
+	+KIN8K8rWb2aI5cbVGYoR817aLQ5eAfzkWjEqJxfswynO48gPUzsMZlv2vP7ThR/abBXNnDl
+	GYXRNUIinVsq7DddVHi4d2bd6zRJFIdQxyW9q8m3GzhVf44LWyiwrpJdyLYcKFPZmRj4sYSZ
+	hIQNx8QvPMOjvAKe6xOLU2mEISd+g4oRi8OBhIB9mmt2agDa6wC0FpKSt8igOTya6HuDweFA
+	AZvsnPYnkD5x8yUIYjAjA9S0jS5AORCgHIMS0ugZfn79q4zQa2aRhh0fVFiCzx9MLEgxDkiK
+	HP46cU4A6vEXZWMHYBErZvj+wXYbyZxdBhcCF1ugEOtbENs9IBe6HF4LKOSKuLRLOlqjYOgs
+	Vl2vHKam0ygEDOoFmxa+TQdF2gR1rB4tDPgKpHBO4QlbKWcXVIivGQ9MYilyrxgOMtFnS6aA
+	nAILTXSQL/2t1qKfylPO8ZKz1713ysXgA6uKxm8HxZVPU+i/XwARAQABzSRMZW9uIEFuYXZp
+	IDxsZW9uLmFuYXZpQGtvbnN1bGtvLmNvbT7CwX0EEwEIACcFAlnU8b4CGyMFCQlmAYAFCwkI
+	BwIGFQgJCgsCBBYCAwECHgECF4AACgkQJHbkEznh9PXxVg//StQNTxfTjZ/q+rW4xSrp7H45
+	DCIGkjF5q5ltByyiNT70Y4czbhCW4GBHCC+eGWzwXw7u6B2q0J0Co0CMZ/hMc9PT1avwbP6C
+	BeHDMegfY4Y2MKw+au3Ym6mQepGqIyeQxsBODLaUpcholfNtT5x3JozvbyyVMvPhGPjMjyaZ
+	A05E3xwFhNBjiZFe5TMmNf2UlJRvOc8RAt3oeSLbVq3iPRHPB33MYoi1x2RI+peb23lJUGPw
+	UUCFziwcMu9YcowxAiQ2Nba9zjsi7jzU4e4x4v3caAq3W/e2WYGFvD5zOHJ3HptLCIXZxqVi
+	G/UCWj1r+ZXgH5oksQ47xKKPS3U/6bpFVT9LtNQt0G1veaea4kLbBot8JKjIX3OjiGUp5ciY
+	SQQB/9nTYYgaIMuYrPJNkszwVS58f7CXtowh4oVdFRkRG9plFtpen7NvlEdXFPrqeoVNeCSQ
+	bHyyStHya0a5Iesx0VugIayowkZCu5i9j61ojMvOo99xpyuNx4yTPDyqu3WCAFyx9gr648YX
+	yS/9gM+xvhYeqw+8YO5fhdncU0mjXbD2cM0C1hdgrFpwqJBxg2RRgIOoKwzHLiGZ62l17A5I
+	GWsIeT3/jAp7bDUbWadLESFuRE/BzC6+x04aZHXHzY744dnPtRLupD/gQI+cUmX1jJbY8TrD
+	l1n5HIYeQePOwU0EWdTxvgEQAMAd4uIslpAHEkxBk3o29gfFB6afEO3nQCciPjyo+eNjqDzV
+	Fx5SX2fvPWnHC/H52OHbdJrbtlfATqs+1XvdMvw1Az6AmR84HvcO9Sv+Mhg09Ed5at2FHAle
+	yACsMcnJfiQM1M+JInOAnd0M94BS0APGVKwPErxdBiV1C6cksVOEfdAGT62mkxLqPKJwXtqm
+	4R7KTZqGRKKhaQKS8/PRylMPLg4ghy0uqW8CzNi7FYdWJMxpOzjvMqbRQ4gxushGAZ7/N3xM
+	ZQuJcGOJTggHsf6kcf4r+5nk5DS3YkVmgEia0TucZscYQ8NBHlvP47dR7/DAlXhEwxat6igC
+	6ZdmnQlolwIePxTtEPX0RHNTdRtDxNI4hRxaETqO7ihH7+qAqbJPc6clj8qX/Z/+hSA9Vbd3
+	ssEVA8CCL0o0FElr2mQGgaZ4TdhuK7yW5cLEXfxlqyaPrXhBG7SLsF2jdoJvnmzrqmMjKwKe
+	WkwEN2DTD21QHHu8d7qrZEJZhN2SYU1fgv9SnAXbzWAOTxQUwhQNl7oUdsBvys22LqexDsvz
+	f0TibgPtPbvdUty8clRWUKllVa/VmOtwNwDmXeUbnds/19BsJjEhcnq2xEHn6bkaDyTv9AU9
+	rpu7kKj5siGUpfzH0GamBMR52JnPPMM54rDBqp5llXeFF6spmKlhypwFUnyNABEBAAHCwWUE
+	GAEIAA8FAlnU8b4CGwwFCQlmAYAACgkQJHbkEznh9PURVg/8DUv/u6j+GnUfWgmBHEoQ6DDp
+	axqjUrK2kkCS6XhGVs/1fJyUXQwQpRD4TLAsKLB6fxS2ANds8tojXvW2fnJu+uIpw3Pxa9q4
+	pyaAZPBXx9O7KhLk2bXKy5EzfG9aIb+1EhLtWy40/36OHhCY3CvOblEtQIfziwN0E/Nj34bF
+	H89tThq4UnLVkKeoiSoAHiWWPqqXcR6e3lkm6n5bVLISgrrw2zKLXUVbYWdfkmABrTakypbg
+	VhBied88cLeeTG+sDdFgAXC8Ot4Lt9OhTDSSjnPircEcyczT1sFiYBoWC+XfUabMBQ1wPgLE
+	K+sPTsTFLzIVuJi0L4rTmkEPfsucdclI58/F31J+2VhctSg7hSBgWvi1u+pZorkmTeVEvqJ/
+	9EqSQXlN7sasxVR+TQ/7IscsK/rnJkWwhC46F5ug+t2bFYjyfIoNnwNmdaO9HZHAUOuaZU2F
+	vAlPsy4hV/piuhR1IDpAJ0W4QHGdXhpHCMtGE+K//KGdr/huxfj2hNTK9gYfUdgR1xdvqziC
+	s1Ajm9SKwsrCkU2JE8YZTSaXVPjZWxqh7Kv1OMlfHyduxzWPxEkOCMK+2KlsaGMV4KlP1quB
+	FEK7FSK7M45yhpEKSXyr61Xi/BnAaK9Cak9jZd3163yFORiJyPO2p9fXB3sgUTs3RrEpfq0G
+	Z14qQ+tQr2c=
+Message-ID: <bdc7edec-3e0b-0d97-05d7-8e7847326b96@konsulko.com>
+Date: Mon, 10 Sep 2018 11:30:21 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Received: by 2002:ac9:490c:0:0:0:0:0 with HTTP; Mon, 10 Sep 2018 00:23:06
-	-0700 (PDT)
-In-Reply-To: <20180910050629.16170-1-raj.khem@gmail.com>
-References: <20180910050629.16170-1-raj.khem@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 10 Sep 2018 09:23:06 +0200
-Message-ID: <CALbNGRTK2mY-88koia-Tjw9=pP9OWMLVugkwXw-tPXnPLnqt5w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH 01/10] xfce4-vala: Build for vala 0.42 to match oe-core
+In-Reply-To: <CAGCTLNSbsH7Hto3CwpC+p0YFWQqnYRHYm2TwcbH6w5TzbtBP5A@mail.gmail.com>
+Subject: Re: [openembedded][wayland][weston]: How to configure screen resolution
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +106,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Sep 2018 07:23:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 10 Sep 2018 08:30:23 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-On Mon, Sep 10, 2018 at 7:06 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-> index 388659f20b..97007bec4c 100644
-> --- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-> +++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-> @@ -11,7 +11,7 @@ SRC_URI = "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/
->  SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
->  SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
->
-> -EXTRA_OECONF = "-with-vala-api=0.40"
-> +EXTRA_OECONF = "-with-vala-api=0.42"
->
->  FILES_${PN} += "${datadir}/vala-*/vapi"
->
-> --
-Thanks - I should implement some self aligning solution...
+Hi Mohamed,
 
-Andreas
+
+On 9.09.2018 14:10, Mohamed Dawod wrote:
+> Hello,
+>
+> I want to know how to change the screen resolution using weston.ini fil=
+e ?
+
+You can set the resolution size width and height in pixels with property
+mode in the output section of weston.ini. For example:
+
+[output]
+mode=3D1680x1050
+
+Please have a look at weston documentation for details.
+
+
+> How to generate this file and use it for my image?
+
+You can update or provide your version of weston.ini through a bbappend
+file.
+
+Best regards,
+Leon
+
+>
+> Thanks,
+>
+
+--=20
+Leon Anavi
+Software Engineer
+konsulko.com
+
+
 
