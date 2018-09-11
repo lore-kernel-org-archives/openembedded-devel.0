@@ -1,30 +1,43 @@
-Return-Path: <hongl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E072F7984C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 09:30:55 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="44773895"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2018 17:30:55 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 387304B6AE13
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 17:30:52 +0800 (CST)
-Received: from localhost.local (10.167.225.78) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.408.0; Tue, 11 Sep 2018 17:30:51 +0800
-From: Hong Liu <hongl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 11 Sep 2018 17:30:50 +0800
-Message-ID: <20180911093050.25992-1-hongl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.14.3
+Return-Path: <mhm.dawod@gmail.com>
+Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id B51FF79660;
+	Tue, 11 Sep 2018 15:58:19 +0000 (UTC)
+Received: by mail-qt0-f180.google.com with SMTP id t5-v6so28783578qtn.3;
+	Tue, 11 Sep 2018 08:58:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=eJQenhguI8d+BODUVA9hBwZPNBJ7vd+vWKcPyuZ21T4=;
+	b=qMhOCpUqv7Ii+GBLS7dtP+PzprDy2BbYYQ49OFDjaHIshoqAweMtmVu0UuKUYN+NYU
+	Vu1EEvvaEXGxzMrZoVPaVWldISb49g6P58nXlwYfGV8dez9xqxUPO7QTBkEk0lQGSCBM
+	HeQdK9RHtSmkGseVCHSdwrWtC8SOe/AyqL22OKHWP4T/wjd0d54yLlIFGw7LHAZ/HBxC
+	hYOpT+YJxsWmFOKBz8Xcm4WUIAoWE/4udijie5isan8ON8W6gP8lpc9kNJiGZoNqRNCv
+	idq0Zd12azumhUkav6wDGMohGtGCi5qwUdBXJY50dSOiiWtu/22UvKcFPc8c8D4zp7fq
+	E5KA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=eJQenhguI8d+BODUVA9hBwZPNBJ7vd+vWKcPyuZ21T4=;
+	b=lWmBGsbRwrgvxhmlNiK642qBU8PmScHw1ZgIGTYmmEsElvou+bgvUbkJDFUJbx8i5d
+	rEomYjgr+wzLBJhqai7gfV/JIeSOJDunIRTFrz3DWW5KjzNHrGNB3/roM6NilF1iU0Qr
+	iZJXOvv0nTAgwYTfbnvLZmV0pIAE0KGuF36u9WP33HHCy6tZarNcblZ3dWDUjc9NRkpT
+	Ybtb62arTjOWwSpw0NlHSFekgkmufItRuilY3o/9rtMUuWUVPcMporo2ESkd+C+OBfQ6
+	9qyKA8rzATun2ELR62zGok1tLPanw1/Roav6C4mY4Jl1XQLoi+QkA/KNLU4Y/9mBznL5
+	C66Q==
+X-Gm-Message-State: APzg51AsuEvkA90hiQOaV27X5HclNXpGvsAiwQY44o1LBD5GwY2xCgrJ
+	qn0oc9ZFAPBd7UIklhJSPASH9ytX1uWpA7m8i6IZwA==
+X-Google-Smtp-Source: ANB0VdaA3W7Q90L15FBGPHaz7NwKtWhlw426SPZG/r1almoOrSqETUE8xfAqGrVVb7xBKb97yFMgMSKLAGdpoURhJ/A=
+X-Received: by 2002:ac8:32ea:: with SMTP id
+	a39-v6mr20894658qtb.234.1536681500181; 
+	Tue, 11 Sep 2018 08:58:20 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.78]
-X-yoursite-MailScanner-ID: 387304B6AE13.AD418
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-python][PATCH] python-greenlet: 0.4.14->0.4.15
+From: Mohamed Dawod <mhm.dawod@gmail.com>
+Date: Tue, 11 Sep 2018 17:58:06 +0200
+Message-ID: <CAGCTLNSFu5uE2K0c0JiarGyBJ1somNjsx_jZ2mf7+8NozCMfrQ@mail.gmail.com>
+To: openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [openembedded][wayland][weston]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +50,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2018 09:30:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 11 Sep 2018 15:58:20 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Upgrade python-greenlet from 0.4.14 to 0.4.15
+Hi,
+I need to change the screen resolution of weston in my new custom image.
+I used weston.ini file and installed it to the image in the path
+"/etc/xdg/weston"
+and i also installed the file to this path "/home/root/.config"
 
-Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-greenlet.inc               | 4 ++--
- .../python/{python-greenlet_0.4.14.bb => python-greenlet_0.4.15.bb}   | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-greenlet_0.4.14.bb => python-greenlet_0.4.15.bb} (100%)
+This way worked well with Jethro release of openembedded
+but with sumo release it didn't work at all !!!
 
-diff --git a/meta-python/recipes-devtools/python/python-greenlet.inc b/meta-python/recipes-devtools/python/python-greenlet.inc
-index fcd81f6..c7c656c 100644
---- a/meta-python/recipes-devtools/python/python-greenlet.inc
-+++ b/meta-python/recipes-devtools/python/python-greenlet.inc
-@@ -3,7 +3,7 @@ LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
- 
--SRC_URI[md5sum] = "a87b6028c3b742b210bf5973939db595"
--SRC_URI[sha256sum] = "f1cc268a15ade58d9a0c04569fe6613e19b8b0345b64453064e2c3c6d79051af"
-+SRC_URI[md5sum] = "10fa304f673fc18b28fa6d8c6658cb80"
-+SRC_URI[sha256sum] = "9416443e219356e3c31f1f918a91badf2e37acf297e2fa13d24d1cc2380f8fbc"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.14.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.15.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-greenlet_0.4.14.bb
-rename to meta-python/recipes-devtools/python/python-greenlet_0.4.15.bb
+Thanks in advance,
 -- 
-2.7.4
 
-
-
+Mohamed Dawod
+Computer Engineering Department
+Faculty of Engineering
+Cairo University
 
