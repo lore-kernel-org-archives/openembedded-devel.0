@@ -1,47 +1,38 @@
-Return-Path: <baptiste.durand@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E11A79641
+Return-Path: <stefan@agner.ch>
+X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 11 Sep 2018 23:05:08 UTC
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 164F57958F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 18:17:08 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id r1-v6so8464551wmh.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 11:17:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=9WeLUJ/Xjqs5WRvRiwS4DkZMUe5VOOeam75G3yRytl0=;
-	b=J8vIdbU+ZEuJTUD1hz585ZY0ybLg8QhZIWXl+21TTkH4W1+nbEGNGhNURb3VZTEXnQ
-	psj7h+nCoB9xWQwdD1dy3Vp6CqBBSCPkgTmEfjC5n6Z6CskQy54QXcEefNiYh8s1bKV+
-	Ez3sWjnMX/xniEDvK9RdSnu4tTVxHg8G42ELcXZunbNAp/3mJ6Dtz5aACA6qNSDrxA5x
-	/xOkd4XWXnlir74jDtsvCWdvwgs6RvtRUPWikrjazCfUTMRiabU4UEK6xbyrxijBwW/t
-	QmYyH2TdOtoRqMnSlQv6HOQrrXNUNzHDe2DLx6Gw9NPt7qJvyRUyfnsZRSy+Lmfeku2K
-	KbxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9WeLUJ/Xjqs5WRvRiwS4DkZMUe5VOOeam75G3yRytl0=;
-	b=toOZVSGYUhCfS94KKi9/MmCXWbapuLUE+lyfkd8siwhP9F8v4Ys/kwblDzltHB5n1L
-	IEBWEhTy1RHXg26lhh3ToFqEBZED4XsOkHVIKkheKrv/9ATJ930R0ZB98dX6jvE/8xgW
-	YfEVi0Zd9VvXFBm92HZZoJtMQdZnqyG0hdC4Vf3zDO2Rf+iMKpF2lyjmKHbCS7iRRl31
-	9OUXFIwbU0LMSF/DeC4Z0Ca1BHoPohsYudWRO/6dYq0zH2ryKt8Yo6PWXS8pKaQozjnN
-	rYu8WD5ZjUeJv+kT0JakFch3LLat649JtWc/4ozfQQd41GDLDQJydfdHNx/mxSgBaxOa
-	pftw==
-X-Gm-Message-State: APzg51CIx4CXqIEj8hIj16Sqj+5LjgDQmifq3xgaHNt4/PNw2FE0798m
-	wER8EkXNamIixPLGW/gbKbvI531A
-X-Google-Smtp-Source: ANB0VdaYNWGOA6VjgXnHlKlQ4EcM0RkUbfGOo0yB78fdN58SKh4F+za3qQKYa1z8TchJYBAkDJ0qwQ==
-X-Received: by 2002:a1c:ac04:: with SMTP id v4-v6mr2095531wme.51.1536689828966;
-	Tue, 11 Sep 2018 11:17:08 -0700 (PDT)
-Received: from baba-localdomain.home
-	(LFbn-REN-1-585-132.w81-53.abo.wanadoo.fr. [81.53.163.132])
-	by smtp.gmail.com with ESMTPSA id
-	1-v6sm2322221wmf.47.2018.09.11.11.17.08
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 11 Sep 2018 11:17:08 -0700 (PDT)
-From: Baptiste Durand <baptiste.durand@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Sep 2018 20:17:04 +0200
-Message-Id: <20180911181704.8223-1-baptiste.durand@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v3] minidlna: restore & fix recipe
+	Tue, 11 Sep 2018 23:05:08 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id EE3995C1877;
+	Wed, 12 Sep 2018 00:58:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1536706681;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	content-transfer-encoding:content-transfer-encoding:
+	in-reply-to:in-reply-to:references:references;
+	bh=n4YxPJl0Fftpgc+Qjq7UpmkuErluG2T7FxPdasly4Ls=;
+	b=AgzTmXmoT8GSHUx7JoljCgLliBIK1fq90tETCV/fNPhdMnZcKk6n41/LS4pWjloxn82OHG
+	nmgqBrS9Cbn7sRzqwo+vj2qkhqY8KMCEb+7mc5NWCQUoDvxieUS36pjg75tl6gTeUFT4GB
+	sylIqNbE4lWZDaxKXcmV4iSzOuScOdg=
+MIME-Version: 1.0
+Date: Tue, 11 Sep 2018 15:58:00 -0700
+From: Stefan Agner <stefan@agner.ch>
+To: Mohamed Dawod <mhm.dawod@gmail.com>
+In-Reply-To: <CAGCTLNQAv_ktGjwbqKLL_81yHb_uVN2b+CkwXR1eOZc_fBbU6A@mail.gmail.com>
+References: <CAGCTLNSbsH7Hto3CwpC+p0YFWQqnYRHYm2TwcbH6w5TzbtBP5A@mail.gmail.com>
+	<bdc7edec-3e0b-0d97-05d7-8e7847326b96@konsulko.com>
+	<CAGCTLNQF14iHMTvog5iTenWQiCvRkyGfJkN=fskfCDo=AE=7eg@mail.gmail.com>
+	<CAGCTLNQAv_ktGjwbqKLL_81yHb_uVN2b+CkwXR1eOZc_fBbU6A@mail.gmail.com>
+Message-ID: <c486c6389cda0587116ed752f1c6575e@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.3.4
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [openembedded][wayland][weston]: How to configure screen resolution
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,130 +45,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2018 18:17:08 -0000
+X-List-Received-Date: Tue, 11 Sep 2018 23:05:09 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Restore minidlna recipe and bump it to v1.2.1
-Move it to meta-multimedia
-Signed-off-by: Baptiste Durand <baptiste.durand@gmail.com>
----
- .../recipes-multimedia/minidlna/minidlna.inc  | 41 +++++++++++++++++++
- .../0001-Update-Gettext-version.patch         | 34 +++++++++++++++
- .../minidlna/minidlna/minidlna-daemon.init.d  |  0
- .../minidlna/minidlna/minidlna.service        |  0
- .../minidlna/minidlna_1.2.1.bb                |  4 ++
- 5 files changed, 79 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
- create mode 100644 meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch
- rename {meta-oe => meta-multimedia}/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d (100%)
- rename {meta-oe => meta-multimedia}/recipes-multimedia/minidlna/minidlna/minidlna.service (100%)
- create mode 100644 meta-multimedia/recipes-multimedia/minidlna/minidlna_1.2.1.bb
+I think weston is using KMS connector names.
 
-diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-new file mode 100644
-index 000000000..187ff536a
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-@@ -0,0 +1,41 @@
-+DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim of \
-+being fully compliant with DLNA/UPnP-AV clients."
-+LICENSE = "GPL-2.0|BSD"
-+DEPENDS = "ffmpeg flac libav jpeg sqlite3 libexif libogg libid3tag libvorbis"
-+
-+# because it depends on libav which has commercial flag
-+LICENSE_FLAGS = "commercial"
-+
-+inherit gettext autotools-brokensep update-rc.d systemd
-+
-+SRC_URI = "git://git.code.sf.net/p/minidlna/git;branch=master;module=git \
-+           file://minidlna-daemon.init.d \
-+           file://minidlna.service \
-+           file://0001-Update-Gettext-version.patch \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+# This remove "--exclude=autopoint" option from autoreconf argument to avoid
-+# configure.ac:30: error: required file './ABOUT-NLS' not found
-+EXTRA_AUTORECONF = ""
-+
-+do_install_append(){
-+    install -d ${D}${sysconfdir}
-+    install -m 0755 minidlna.conf ${D}${sysconfdir}
-+
-+# Systemd script
-+    install -d ${D}${nonarch_base_libdir}/systemd/system
-+    install -m 0755 ${WORKDIR}/minidlna.service ${D}${nonarch_base_libdir}/systemd/system
-+
-+# Sysvinit script
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0755 ${WORKDIR}/minidlna-daemon.init.d ${D}${sysconfdir}/init.d/minidlna
-+
-+}
-+
-+SYSTEMD_SERVICE_${PN} = "minidlna.service"
-+
-+INITSCRIPT_NAME = "minidlna"
-+INITSCRIPT_PARAMS = "defaults 90"
-+
-diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch
-new file mode 100644
-index 000000000..c18095d42
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch
-@@ -0,0 +1,34 @@
-+From a4290bf1887f9203288858ca76bdd20b2edf337a Mon Sep 17 00:00:00 2001
-+From: Baptiste Durand <baptiste.durand@gmail.com>
-+Date: Sun, 9 Sep 2018 20:50:41 +0200
-+Subject: [PATCH] Update Gettext version
-+
-+Upstream-Status: Inappropriate [oe-core specific]
-+
-+Signed-off-by: Baptiste Durand <baptiste.durand@gmail.com>
-+---
-+ configure.ac | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index f343d21..a556b33 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -14,7 +14,7 @@
-+ # License along with MiniDLNA; if not, write to the Free Software
-+ # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
-+ # USA.
-+-AC_INIT(MiniDLNA,1.1.3,,minidlna)
-++AC_INIT(MiniDLNA,1.2.1,,minidlna)
-+ #LT_INIT
-+ 
-+ AC_CANONICAL_TARGET
-+@@ -28,7 +28,7 @@ m4_ifdef([AC_USE_SYSTEM_EXTENSIONS], [AC_USE_SYSTEM_EXTENSIONS])
-+ 
-+ AM_ICONV
-+ AM_GNU_GETTEXT([external])
-+-AM_GNU_GETTEXT_VERSION(0.18)
-++AM_GNU_GETTEXT_VERSION(0.19)
-+ 
-+ # Checks for programs.
-+ AC_PROG_AWK
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d b/meta-multimedia/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
-similarity index 100%
-rename from meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
-rename to meta-multimedia/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna.service b/meta-multimedia/recipes-multimedia/minidlna/minidlna/minidlna.service
-similarity index 100%
-rename from meta-oe/recipes-multimedia/minidlna/minidlna/minidlna.service
-rename to meta-multimedia/recipes-multimedia/minidlna/minidlna/minidlna.service
-diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna_1.2.1.bb b/meta-multimedia/recipes-multimedia/minidlna/minidlna_1.2.1.bb
-new file mode 100644
-index 000000000..999d85ce7
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna_1.2.1.bb
-@@ -0,0 +1,4 @@
-+require ${BPN}.inc
-+
-+SRCREV = "c760a338e07ebd11d62fef701e3de824a91f8625"
-+LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
--- 
-2.17.1
+Try HDMI-A-1.
 
+Otherwise, running weston with --log=weston.log will produce a helpful
+logfile.
+
+--
+Stefan
+
+On 11.09.2018 02:02, Mohamed Dawod wrote:
+> ---------- Forwarded message ---------
+> From: Mohamed Dawod <mhm.dawod@gmail.com>
+> Date: Mon, Sep 10, 2018 at 1:15 PM
+> Subject: Re: [oe] [openembedded][wayland][weston]: How to configure screen
+> resolution
+> To: <leon.anavi@konsulko.com>
+> 
+> 
+> 
+> I typed the following weston.ini and weston-init.bbappend file but no thing
+> change !!!!
+> 
+> --------------------------------------------------------------------------------------------------------------------------------
+> This is my weston.ini file :
+> ===================
+> [core]
+> idle-time=0
+> 
+> [shell]
+> locking=false
+> 
+> [screensaver]
+> path=""
+> 
+> [output]
+> name=HDMI1
+> transform=0
+> mode=1920x1080
+> --------------------------------------------------------------------------------------------------------------------------------
+> and this is my weston-init.bbappend file :
+> ===============================
+> DESCRIPTION = "Installation of weston.ini config file"
+> LICENSE = "CLOSED"
+> 
+> FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+> SRC_URI_append = " file://weston.ini"
+> 
+> do_install_append() {
+>     WESTON_INI_CONFIG=${sysconfdir}/xdg/weston
+> #    WESTON_INI_CONFIG=/root/.conf
+> #    WESTON_INI_CONFIG=/.config
+> #    WESTON_INI_CONFIG=/run/user/root/weston
+>     install -d ${D}${WESTON_INI_CONFIG}
+>     install -m 0644 ${WORKDIR}/weston.ini ${D}${WESTON_INI_CONFIG}
+> }
+> 
+> PACKAGES += "${PN}-ini"
+> FILES_${PN}-ini = "${sysconfdir}/xdg"
+> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+> 
+> Thank you for your help,
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> On Mon, Sep 10, 2018 at 10:30 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+> 
+>> Hi Mohamed,
+>>
+>>
+>> On 9.09.2018 14:10, Mohamed Dawod wrote:
+>> > Hello,
+>> >
+>> > I want to know how to change the screen resolution using weston.ini file
+>> ?
+>>
+>> You can set the resolution size width and height in pixels with property
+>> mode in the output section of weston.ini. For example:
+>>
+>> [output]
+>> mode=1680x1050
+>>
+>> Please have a look at weston documentation for details.
+>>
+>>
+>> > How to generate this file and use it for my image?
+>>
+>> You can update or provide your version of weston.ini through a bbappend
+>> file.
+>>
+>> Best regards,
+>> Leon
+>>
+>> >
+>> > Thanks,
+>> >
+>>
+>> --
+>> Leon Anavi
+>> Software Engineer
+>> konsulko.com
+>>
+>>
+>>
+> 
+> -- 
+> 
+> Mohamed Dawod
+> Computer Engineering Department
+> Faculty of Engineering
+> Cairo University
+> 
+> 
+> -- 
+> 
+> Mohamed Dawod
+> Computer Engineering Department
+> Faculty of Engineering
+> Cairo University
 
