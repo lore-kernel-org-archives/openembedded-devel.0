@@ -1,12 +1,12 @@
 Return-Path: <prvs=786b59e7b=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 326C074743
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 60A7874743
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2018 06:56:53 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.53,363,1531778400"; 
-   d="scan'208";a="1655767"
-To: <openembedded-devel@lists.openembedded.org>
-References: <1536317071-17077-1-git-send-email-yevgenyp@pointgrab.com>
+	Wed, 12 Sep 2018 06:56:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.53,363,1531778400"; d="scan'208";a="12274212"
+To: <openembedded-devel@lists.openembedded.org>, Richard Leitner
+	<richard.leitner@skidata.com>
+References: <1536341102-83842-1-git-send-email-yevgenyp@pointgrab.com>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -52,16 +52,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <582dad2a-73ae-4f23-33ca-8468464380bb@skidata.com>
-Date: Wed, 12 Sep 2018 08:57:51 +0200
+Message-ID: <7ffd70f7-6e7e-56b5-1823-42484cf83859@skidata.com>
+Date: Wed, 12 Sep 2018 08:57:53 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.0
 MIME-Version: 1.0
-In-Reply-To: <1536317071-17077-1-git-send-email-yevgenyp@pointgrab.com>
+In-Reply-To: <1536341102-83842-1-git-send-email-yevgenyp@pointgrab.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] openjdk-8, openjre-8: Fix PROVIDES assignment
+Subject: Re: [meta-java][PATCH] cacao: class-native: RPROVIDE virtual/java-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,7 +74,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2018 06:56:54 -0000
+X-List-Received-Date: Wed, 12 Sep 2018 06:56:56 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -91,10 +91,8 @@ If you have any questions, please let me know.
 
 regards;Richard.L
 
-On 9/7/18 12:44 PM, Yevgeny Popovych wrote:
-> PROVIDES is a recipe-specific variable, not package-specific like RPROVIDES.
-> This bug would prevent you from having recipes DEPEND on java2-runtime
-> or java2-vm (assuming you have set PREFERRED_PROVIDER correctly).
+On 9/7/18 7:25 PM, Yevgeny Popovych wrote:
+> This will allow other native recipes RDEPEND on virtual/java-native.
 > 
 > Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
 
