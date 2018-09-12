@@ -1,50 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 96D7379498
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C85579498
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2018 04:59:35 +0000 (UTC)
-Received: by mail-pg1-f181.google.com with SMTP id 7-v6so397538pgf.2
+	Wed, 12 Sep 2018 04:59:36 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id u11-v6so370197plq.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 21:59:36 -0700 (PDT)
+	Tue, 11 Sep 2018 21:59:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=GORSd0PFV3NbEdTPK+y8DJm4OyMi9L3M7dR9LPSMpFM=;
-	b=NWBhxXdT0KDvF+P4fOZE6xoE3ypco8n7phl6HwTNq7K1pbCyxudKHyT+oneajX9ovx
-	XTecnJ8nHDfd3fbGkxeEXWeAl4ISEl/FBFRbCh1vXVulawV0RY1e/oZ+YuieZ+WcaIpw
-	paMXdj3/MOE5EkUBMTIf+Xr5fGg7bL8I65c4aHbcwUJtwPaw5DZiQK9m0BxL3m0+83Vl
-	GR4HqUu8Uit6OVDOCosjG68LUk4fc30oPqW/PHtAA6aqnptDAk/UobvUM/T7Wngc3FjK
-	U0tdfCEphqtRUZtMbm1+yv0kAHoHySO2qiNCnb6Sf4+WNZw9UZgIa9e44MwgnENsrMIl
-	yuEA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=e3R+93W1uk8L/IoxxjsdEpXAxiOzNJuaZWFu+77yIw0=;
+	b=DzVob/smy46m+qBLHvcAAC6hLnz08sZSu2L1sm9zZNXmWCBO1qbtr2rx8pWkJCXsyw
+	qbbG1iS5nrY9Evnc+RNK7TQyIUpySfjtDoP0m5LoJwyedwonHcf5MRJfG4V+vnxZKzq6
+	pY6sCDFgkJpgAGfr9nyGPYYMg1lpvquf8DHrF7e4S3hPnY3x34/o+5lwtAdxFUTIjiNh
+	fBT6XLb1XundAwnH1mJQIDxmqfupxZup/EECKnhUAgJ6pN9nIlic07nZBav6XW2Y3jVL
+	w6Wf6uOnKW9iDr2SyREPLgMMM0UlfXyFD57GTzLdvliE+pitN4ksY7roeWr4LfGWuZLv
+	BMlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=GORSd0PFV3NbEdTPK+y8DJm4OyMi9L3M7dR9LPSMpFM=;
-	b=XZuLj5Z6VEWZURPCcAUaq8/QleSq3b2txxL2XlRNifWQDqgqCVwPHc21fP87o3POju
-	726KViVxdXkPEBs3hy4E0OT7A1nRYc0C6pgFAHc04PJBvV9whSHBo7ptcurDXfto807F
-	0R4FotYhR1HPMpr52di499DXld78eLMOwyt2+rShblAqFfDfE6FHvgLHUH6+O/Fdg5oS
-	e8ZSJMTF/56R297bJ7bc3nQCAdj21DNHpyYVf2cKBgb119K43rybuKbHYVYo3g0UK6wK
-	vwaSopEyH0Cxy7f7UG8HSdWKrFmUt49vb2GTJFs8PYf4R1lxqKEHKyn6Y5smlvkgVtE9
-	dv5A==
-X-Gm-Message-State: APzg51BNLLrYRK+34iMTAQ3mQdD1Ql8LPSSNMSCWR5ZUJhd9QFZHHvvi
-	Q8Zxeft1y8q28ulrHhGEAZsyVA3C
-X-Google-Smtp-Source: ANB0VdYz6vOkPluNAWtOhNklxp41S/x6eQW96cVuR3Pio101/wSQEHsKHotHL2iQ1dCSUmn6zSNUBA==
-X-Received: by 2002:a65:4289:: with SMTP id j9-v6mr105662pgp.284.1536728376080;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=e3R+93W1uk8L/IoxxjsdEpXAxiOzNJuaZWFu+77yIw0=;
+	b=TRYwDgkt6RWUJtx3sAyYrxeiBjzzHtYa23AR4rZzRt2qkHOjOAWovLlDGK8wAVT9M9
+	DRYsvDVyUN6HUtRX8xa/fVQOhn2XZkV1sehx4E6gcL8X7KWrxJAl/OuFpAvYzzMFXcgb
+	C2KxJMjCMw5ir2fPvgsy9uF+GLgYnzl+YKdnTzD0iZOJZ6zWkf05+S5OdMVhWQOC68u0
+	pu7jwRRvmzwtjeCyd5aN/Hx7R2Jj9X4LJIlqaKt6Rdz6ZSjYpY8XybBuUi+E3PH+9fwx
+	081gXsQj+ESuQice2Vt7HMF/DYiV4PIhTo9/od2hPiRuFBkTHZ9t/hBhsMiBZshomo62
+	s5dw==
+X-Gm-Message-State: APzg51DxjY6bGeXqJItVy6CxYut3/LAyw9wFM8rpQTOw/EMoAcJwXpUZ
+	PsfDYLKPIL5DcvYPpen2D7d0pPro
+X-Google-Smtp-Source: ANB0VdZQMLKNokzknFrO8N73noS2vVaFwByKtCa4Ddw7xpgXjyHH0AgwWT17CvzuyQUgqitF7v7NGw==
+X-Received: by 2002:a17:902:7798:: with SMTP id
+	o24-v6mr95348pll.93.1536728376836; 
 	Tue, 11 Sep 2018 21:59:36 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::2887])
 	by smtp.gmail.com with ESMTPSA id
-	d12-v6sm25927706pfn.118.2018.09.11.21.59.35
+	d12-v6sm25927706pfn.118.2018.09.11.21.59.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Sep 2018 21:59:35 -0700 (PDT)
+	Tue, 11 Sep 2018 21:59:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Sep 2018 21:59:26 -0700
-Message-Id: <20180912045927.23092-1-raj.khem@gmail.com>
+Date: Tue, 11 Sep 2018 21:59:27 -0700
+Message-Id: <20180912045927.23092-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.0
+In-Reply-To: <20180912045927.23092-1-raj.khem@gmail.com>
+References: <20180912045927.23092-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] opencv: Fix build with clang
+Subject: [meta-oe][PATCH 2/2] lcdproc: Update to master tip
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,104 +60,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2018 04:59:35 -0000
+X-List-Received-Date: Wed, 12 Sep 2018 04:59:36 -0000
 Content-Transfer-Encoding: 8bit
+
+* Do not build on musl/arm since it does not build due to musl not
+implementing ioperm() function on ARM
+
+Drop 0001-include-asm-ioctl.h-explicitly.patch its fixed differently
+upstream already
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...Check-for-clang-before-using-isystem.patch | 32 +++++++++++++++++++
- .../opencv/opencv/0001-Dont-use-isystem.patch | 30 +++++++++++++++++
- .../recipes-support/opencv/opencv_3.4.3.bb    |  2 ++
- 3 files changed, 64 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Check-for-clang-before-using-isystem.patch
- create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch
+ .../0001-include-asm-ioctl.h-explicitly.patch | 43 -------------------
+ .../recipes-extended/lcdproc/lcdproc_git.bb   |  7 +--
+ 2 files changed, 4 insertions(+), 46 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Check-for-clang-before-using-isystem.patch b/meta-oe/recipes-support/opencv/opencv/0001-Check-for-clang-before-using-isystem.patch
-new file mode 100644
-index 0000000000..319071a311
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/0001-Check-for-clang-before-using-isystem.patch
-@@ -0,0 +1,32 @@
-+From fa76d8646bb2b9b514728eeef41afed7c43a36f2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 11 Sep 2018 18:18:33 -0700
-+Subject: [PATCH] Check for clang before using -isystem
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch b/meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch
+deleted file mode 100644
+index abdedad5d6..0000000000
+--- a/meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From b5ca64c7398d516e9845d849e8306df7ac024bc4 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 11 Apr 2017 13:59:34 -0700
+-Subject: [PATCH] include asm/ioctl.h explicitly
+-
+-Needed for _IOC* defines
+-
+-helps compiling with musl where this file is
+-not included indirectly
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- server/drivers/hd44780-pifacecad.c | 1 +
+- server/drivers/hd44780-spi.c       | 1 +
+- 2 files changed, 2 insertions(+)
+-
+-diff --git a/server/drivers/hd44780-pifacecad.c b/server/drivers/hd44780-pifacecad.c
+-index 43db19c..e2798ad 100644
+---- a/server/drivers/hd44780-pifacecad.c
+-+++ b/server/drivers/hd44780-pifacecad.c
+-@@ -54,6 +54,7 @@
+- #include <unistd.h>
+- #include <fcntl.h>
+- #include <sys/ioctl.h>
+-+#include <asm/ioctl.h>
+- #include <stdint.h>
+- #include <linux/spi/spidev.h>
+- 
+-diff --git a/server/drivers/hd44780-spi.c b/server/drivers/hd44780-spi.c
+-index 5f94333..8a4015b 100644
+---- a/server/drivers/hd44780-spi.c
+-+++ b/server/drivers/hd44780-spi.c
+-@@ -29,6 +29,7 @@
+- #include <unistd.h>
+- #include <fcntl.h>
+- #include <sys/ioctl.h>
+-+#include <asm/ioctl.h>
+- #include <stdint.h>
+- #include <linux/spi/spidev.h>
+- 
+--- 
+-2.12.2
+-
+diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc_git.bb b/meta-oe/recipes-extended/lcdproc/lcdproc_git.bb
+index fad1d616c3..93a09f28a0 100644
+--- a/meta-oe/recipes-extended/lcdproc/lcdproc_git.bb
++++ b/meta-oe/recipes-extended/lcdproc/lcdproc_git.bb
+@@ -11,15 +11,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
+ 
+ BASEPV = "0.5.9"
+ PV = "${BASEPV}+git${SRCPV}"
+-SRCREV = "79fa538647c3e09a87ecc86aae1abbb82e0a25c5"
+-SRC_URI = "git://github.com/lcdproc/lcdproc;branch=lcdproc-${BASEPV} \
+-           file://0001-include-asm-ioctl.h-explicitly.patch \
++SRCREV = "a4b5a7e058fdd0d914a61138748b589c0128b45b"
++SRC_URI = "git://github.com/lcdproc/lcdproc \
+            "
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig update-rc.d
+ 
++COMPATIBLE_HOST_arm_libc-musl = "null"
 +
-+When cross compiling with clang, the internal C++ headers are not found
-+when adding sysroot to -isystem, that is redundant anyway because it
-+will look for headers insider --sysroot path with same quality as it
-+would do with -isystem otherwise
-+
-+Upstream-Status: Submitted [https://github.com/opencv/opencv/pull/12504]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ cmake/OpenCVUtils.cmake | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/cmake/OpenCVUtils.cmake b/cmake/OpenCVUtils.cmake
-+index fae91c165f..60c20192dc 100644
-+--- a/cmake/OpenCVUtils.cmake
-++++ b/cmake/OpenCVUtils.cmake
-+@@ -259,7 +259,7 @@ function(ocv_include_directories)
-+     ocv_is_opencv_directory(__is_opencv_dir "${dir}")
-+     if(__is_opencv_dir)
-+       list(APPEND __add_before "${dir}")
-+-    elseif(CV_GCC AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "6.0" AND
-++    elseif(((CV_GCC AND NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "6.0") OR CV_CLANG) AND
-+            dir MATCHES "/usr/include$")
-+       # workaround for GCC 6.x bug
-+     else()
-+-- 
-+2.18.0
-+
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch b/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch
-new file mode 100644
-index 0000000000..bf0b80a30b
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/0001-Dont-use-isystem.patch
-@@ -0,0 +1,30 @@
-+From 7144c44ec70dee73a628463b99ffeed74b1a8ef6 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 11 Sep 2018 00:21:18 -0700
-+Subject: [PATCH] Dont use isystem
-+
-+clang really does not like it
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ cmake/OpenCVPCHSupport.cmake | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/cmake/OpenCVPCHSupport.cmake b/cmake/OpenCVPCHSupport.cmake
-+index f9b1b48b65..fe27a136f5 100644
-+--- a/cmake/OpenCVPCHSupport.cmake
-++++ b/cmake/OpenCVPCHSupport.cmake
-+@@ -18,6 +18,8 @@ IF(CV_GCC)
-+         SET(PCHSupport_FOUND TRUE)
-+     ENDIF()
-+ 
-++    SET(CMAKE_INCLUDE_SYSTEM_FLAG_C "-I")
-++    SET(CMAKE_INCLUDE_SYSTEM_FLAG_CXX "-I")
-+     SET(_PCH_include_prefix "-I")
-+     SET(_PCH_isystem_prefix "-isystem")
-+     SET(_PCH_define_prefix "-D")
-+-- 
-+2.18.0
-+
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.4.3.bb b/meta-oe/recipes-support/opencv/opencv_3.4.3.bb
-index 403146e7cd..0a99700b4a 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.4.3.bb
-@@ -51,6 +51,8 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-     file://0003-To-fix-errors-as-following.patch \
-     file://fixpkgconfig.patch \
-     file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
-+    file://0001-Dont-use-isystem.patch \
-+    file://0001-Check-for-clang-before-using-isystem.patch \
- "
- PV = "3.4.3+git${SRCPV}"
+ LCD_DRIVERS ?= "all,!irman,!svga"
+ LCD_DEFAULT_DRIVER ?= "curses"
  
 -- 
 2.19.0
