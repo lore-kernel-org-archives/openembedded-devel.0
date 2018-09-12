@@ -1,38 +1,48 @@
-Return-Path: <stefan@agner.ch>
-X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 11 Sep 2018 23:05:08 UTC
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 164F57958F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id D4B6B79567
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 23:05:08 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id EE3995C1877;
-	Wed, 12 Sep 2018 00:58:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1536706681;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=n4YxPJl0Fftpgc+Qjq7UpmkuErluG2T7FxPdasly4Ls=;
-	b=AgzTmXmoT8GSHUx7JoljCgLliBIK1fq90tETCV/fNPhdMnZcKk6n41/LS4pWjloxn82OHG
-	nmgqBrS9Cbn7sRzqwo+vj2qkhqY8KMCEb+7mc5NWCQUoDvxieUS36pjg75tl6gTeUFT4GB
-	sylIqNbE4lWZDaxKXcmV4iSzOuScOdg=
-MIME-Version: 1.0
-Date: Tue, 11 Sep 2018 15:58:00 -0700
-From: Stefan Agner <stefan@agner.ch>
-To: Mohamed Dawod <mhm.dawod@gmail.com>
-In-Reply-To: <CAGCTLNQAv_ktGjwbqKLL_81yHb_uVN2b+CkwXR1eOZc_fBbU6A@mail.gmail.com>
-References: <CAGCTLNSbsH7Hto3CwpC+p0YFWQqnYRHYm2TwcbH6w5TzbtBP5A@mail.gmail.com>
-	<bdc7edec-3e0b-0d97-05d7-8e7847326b96@konsulko.com>
-	<CAGCTLNQF14iHMTvog5iTenWQiCvRkyGfJkN=fskfCDo=AE=7eg@mail.gmail.com>
-	<CAGCTLNQAv_ktGjwbqKLL_81yHb_uVN2b+CkwXR1eOZc_fBbU6A@mail.gmail.com>
-Message-ID: <c486c6389cda0587116ed752f1c6575e@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.3.4
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [openembedded][wayland][weston]: How to configure screen resolution
+	Wed, 12 Sep 2018 00:18:59 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id r1-v6so61768pgp.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Sep 2018 17:19:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=9//mPoHJvSIukvytMJKGTKcA3CMVmMnUUWm1gwdDPD8=;
+	b=dboeNfwHFvEid/ILywOLUJSUeQx1ICf3g51DfaqplUdQAHJxJmCzE9Wf9uPqOzAmbT
+	KwGArFzV/mu0ZeIhqwE4Q5rzMkcaZZyeeTuDCxQOZl+fyp7BaC8xqEh/kpTaO8RI0kKN
+	ECeYXJ7KjpG3XWhnX9/rPIGYP23wh7QJ8+O0poIU9+yI1vObq5C/e/BDmO/e/WHcpuZx
+	cOfGM23E70r9DdnRhlpE53ahzMz5LEIEaUw+GknVobWGHP4npTkQnbdXAnypNcsNwBsh
+	Bwn7rO8gSGtcsAJKOfYcK4kxEAP77VhC+kS19Od6zIBY0prj2aCSO/wBsa1aCRFtzYWm
+	IBzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9//mPoHJvSIukvytMJKGTKcA3CMVmMnUUWm1gwdDPD8=;
+	b=MFh2Kf4i3M7ltjvbhu6Cf1D+Y40XE9SsyToNYCzmUsV5P2hwt7on26glz2UPNwUXnD
+	mfaZBhS86PBya7OoyAzmuHUunaltAihzwKCQi+waBc/TOO3car9+Sf3pPJ8fZ8RWdjTg
+	hcZY7BavJy9lvmMWZUk1dEU0AnyNBlicIUKAEaiyga2pO0ck8K6MAj0psj6TYy+msm/B
+	CILfvFVHt8SRJM9Av9fiA9GMGfcsDeBV8jdKAc9kZWFk48rTzp1QsPaMnsK7g7gcSXAj
+	hj7ZemAy3GIXv3Wk+g1Ug1DLHpwTil04DPHUdVTXuDwDSy/NOb+oqygjW++DqWM/AgHQ
+	sgfQ==
+X-Gm-Message-State: APzg51Dvdker3v2+3uzpv1zasmvq0B4wB2d+kkGgBdSYzWnqOH3rfMMv
+	EhjW9BimFidCqK/ril7omDWDVzFA
+X-Google-Smtp-Source: ANB0VdbAFYE3/OuoVqbkb+PAqAaPcQejO6y3WZjGd8nk1YVxf9nCncBpY3IjwYIXc2LNAJr2qleUQQ==
+X-Received: by 2002:a62:dbc5:: with SMTP id
+	f188-v6mr32669295pfg.182.1536711540243; 
+	Tue, 11 Sep 2018 17:19:00 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::2887])
+	by smtp.gmail.com with ESMTPSA id
+	g25-v6sm39781692pfd.23.2018.09.11.17.18.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Sep 2018 17:18:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Sep 2018 17:18:50 -0700
+Message-Id: <20180912001851.7181-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.18.0
+Subject: [meta-oe][PATCH 1/2] start-stop-daemon: Recognise musleabi triplet in dpkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,132 +55,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Sep 2018 23:05:09 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 Sep 2018 00:19:00 -0000
 
-I think weston is using KMS connector names.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-Add-linux-musleabi-to-ostable.patch  | 39 +++++++++++++++++++
+ .../start-stop-daemon_1.17.25.bb              |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-support/start-stop-daemon/start-stop-daemon/0001-Add-linux-musleabi-to-ostable.patch
 
-Try HDMI-A-1.
+diff --git a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon/0001-Add-linux-musleabi-to-ostable.patch b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon/0001-Add-linux-musleabi-to-ostable.patch
+new file mode 100644
+index 0000000000..269441fc8b
+--- /dev/null
++++ b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon/0001-Add-linux-musleabi-to-ostable.patch
+@@ -0,0 +1,39 @@
++From 087840efdbc86b1432ebdd81f25b4cb78c75f818 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 11 Sep 2018 12:28:10 -0700
++Subject: [PATCH] Add linux-musleabi to ostable
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ ostable      | 1 +
++ triplettable | 1 +
++ 2 files changed, 2 insertions(+)
++
++diff --git a/ostable b/ostable
++index 3bb6819..d0ffdc7 100644
++--- a/ostable
+++++ b/ostable
++@@ -15,6 +15,7 @@
++ uclibceabi-linux	linux-uclibceabi	linux[^-]*-uclibceabi
++ uclibc-linux		linux-uclibc		linux[^-]*-uclibc
++ musleabihf-linux	linux-musleabihf	linux[^-]*-musleabihf
+++musleabi-linux		linux-musleabi		linux[^-]*-musleabi
++ musl-linux		linux-musl		linux[^-]*-musl
++ gnueabihf-linux		linux-gnueabihf		linux[^-]*-gnueabihf
++ gnueabi-linux		linux-gnueabi		linux[^-]*-gnueabi
++diff --git a/triplettable b/triplettable
++index 7257744..45864c3 100644
++--- a/triplettable
+++++ b/triplettable
++@@ -6,6 +6,7 @@
++ uclibceabi-linux-arm	uclibc-linux-armel
++ uclibc-linux-<cpu>	uclibc-linux-<cpu>
++ musleabihf-linux-arm	musl-linux-armhf
+++musleabi-linux-arm	musl-linux-arm
++ musl-linux-<cpu>	musl-linux-<cpu>
++ gnueabihf-linux-arm	armhf
++ gnueabi-linux-arm	armel
++-- 
++2.18.0
++
+diff --git a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb
+index cc2727b758..b9b22a316e 100644
+--- a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb
++++ b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb
+@@ -9,6 +9,7 @@ RCONFLICTS_${PN} = "dpkg"
+ SRC_URI = " \
+     ${DEBIAN_MIRROR}/main/d/dpkg/dpkg_${PV}.tar.xz \
+     file://0001-dpkg-start-stop-daemon-Accept-SIG-prefixed-signal-na.patch \
++    file://0001-Add-linux-musleabi-to-ostable.patch \
+ "
+ 
+ SRC_URI[md5sum] = "e48fcfdb2162e77d72c2a83432d537ca"
+-- 
+2.18.0
 
-Otherwise, running weston with --log=weston.log will produce a helpful
-logfile.
-
---
-Stefan
-
-On 11.09.2018 02:02, Mohamed Dawod wrote:
-> ---------- Forwarded message ---------
-> From: Mohamed Dawod <mhm.dawod@gmail.com>
-> Date: Mon, Sep 10, 2018 at 1:15 PM
-> Subject: Re: [oe] [openembedded][wayland][weston]: How to configure screen
-> resolution
-> To: <leon.anavi@konsulko.com>
-> 
-> 
-> 
-> I typed the following weston.ini and weston-init.bbappend file but no thing
-> change !!!!
-> 
-> --------------------------------------------------------------------------------------------------------------------------------
-> This is my weston.ini file :
-> ===================
-> [core]
-> idle-time=0
-> 
-> [shell]
-> locking=false
-> 
-> [screensaver]
-> path=""
-> 
-> [output]
-> name=HDMI1
-> transform=0
-> mode=1920x1080
-> --------------------------------------------------------------------------------------------------------------------------------
-> and this is my weston-init.bbappend file :
-> ===============================
-> DESCRIPTION = "Installation of weston.ini config file"
-> LICENSE = "CLOSED"
-> 
-> FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-> SRC_URI_append = " file://weston.ini"
-> 
-> do_install_append() {
->     WESTON_INI_CONFIG=${sysconfdir}/xdg/weston
-> #    WESTON_INI_CONFIG=/root/.conf
-> #    WESTON_INI_CONFIG=/.config
-> #    WESTON_INI_CONFIG=/run/user/root/weston
->     install -d ${D}${WESTON_INI_CONFIG}
->     install -m 0644 ${WORKDIR}/weston.ini ${D}${WESTON_INI_CONFIG}
-> }
-> 
-> PACKAGES += "${PN}-ini"
-> FILES_${PN}-ini = "${sysconfdir}/xdg"
-> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-> 
-> Thank you for your help,
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> 
-> On Mon, Sep 10, 2018 at 10:30 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
-> 
->> Hi Mohamed,
->>
->>
->> On 9.09.2018 14:10, Mohamed Dawod wrote:
->> > Hello,
->> >
->> > I want to know how to change the screen resolution using weston.ini file
->> ?
->>
->> You can set the resolution size width and height in pixels with property
->> mode in the output section of weston.ini. For example:
->>
->> [output]
->> mode=1680x1050
->>
->> Please have a look at weston documentation for details.
->>
->>
->> > How to generate this file and use it for my image?
->>
->> You can update or provide your version of weston.ini through a bbappend
->> file.
->>
->> Best regards,
->> Leon
->>
->> >
->> > Thanks,
->> >
->>
->> --
->> Leon Anavi
->> Software Engineer
->> konsulko.com
->>
->>
->>
-> 
-> -- 
-> 
-> Mohamed Dawod
-> Computer Engineering Department
-> Faculty of Engineering
-> Cairo University
-> 
-> 
-> -- 
-> 
-> Mohamed Dawod
-> Computer Engineering Department
-> Faculty of Engineering
-> Cairo University
 
