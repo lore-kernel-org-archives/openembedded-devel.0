@@ -1,50 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C29360269
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 362B379717
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2018 14:19:06 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id r37-v6so2024552qtc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2018 07:19:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=+qwJJgVK/3+V+oqW3Y1cEPgpeTkAiduzJh7OGPdYh+0=;
-	b=nAgnTahR4SRotuIwJ2AAOuDgc/mlaP+kv1EWuUeU30bLDxOOVwv7gViy+aBwTvt4XY
-	+vvFGcjpquXuRVVN6QyYv+pgjVIWqITexcfa0VNM5Za1M3AAY7D44F2fWb4kg9iMtBoT
-	07xqikl0t2k3AKE2qj5gaxgzcc49bxTokFldq/BFRPwFbG/sPfLAaTqr9w55viwYA3/+
-	mEW7auIL69y8Xc4RKzA3EybuROHSiXFBo4wMZ86ltXvchEQEBfJSoQebjRLEtgXO7Bd8
-	VH2GAV4nQDigb8slSZ8dkS6RJMZ3v1Pb+jJyTa9dvhLPgZHLd1+FNoN6KX28XBj8s27a
-	HfbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=+qwJJgVK/3+V+oqW3Y1cEPgpeTkAiduzJh7OGPdYh+0=;
-	b=WAGntwB2kVBBOD7BcOCZovut2kqrxGE8Zd3XEjs2mp2Yh2ewUCC9LyVHNHDHvws0t/
-	Ic2LAxNZmA5+w2jsQNwN4w3W1ES7payjhhB0bfWEdViiAwy3vSfOJkS3/BFJgyIxAX95
-	wg6KEEG0yxwz2Z1JsX+N2mIP6HNAYaWsgLo0m4cbXLs30zQFc1/flkCfR8JsC8BBdpWn
-	num7yv2MuIIJTTakqFztqCY7828U2Nlg55L5RQczdVMc4v+RndCm53F9ITDsOC5RXwfP
-	Zi6b74RprTYHdqMJHz7pzW3rPi98INjchjy5I1tbfZa+eP91ic8/qq6PsG4zKv298RqG
-	Gm8Q==
-X-Gm-Message-State: APzg51Cy3SbgrIIcpy03x07cXBO6qIIeVFI2sG2NjECi/0zqntYvpazB
-	E0lYBddoPDQANRqcBJF9yje1wbac/Wzykgv5xRR/qQ==
-X-Google-Smtp-Source: ANB0VdammeyPXPpfjMInVww6k0Cycd75nHlLtfxWcf0LYHBVwHQ7cNskHg/YVlNZGXh8q527Grv+pzIbx61kbcgkG80=
-X-Received: by 2002:ac8:4649:: with SMTP id f9-v6mr1678808qto.34.1536761947894;
-	Wed, 12 Sep 2018 07:19:07 -0700 (PDT)
-MIME-Version: 1.0
+	Wed, 12 Sep 2018 15:43:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8CFgv1N031594
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 12 Sep 2018 08:43:07 -0700
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
+	Wed, 12 Sep 2018 08:42:40 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Wed, 12 Sep 2018 08:42:40 -0700
+Message-ID: <20180912154240.15100-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.10.2
+In-Reply-To: <20180912082642.35624-1-hongxu.jia@windriver.com>
 References: <20180912082642.35624-1-hongxu.jia@windriver.com>
-	<8a566f88-4b87-b0a4-228f-dbc2bbb8981b@windriver.com>
-	<CAMKF1so5pxbk84E+cjXbzbmVJfg=dDzjJ1Ubnkw2yUk4_E_xDQ@mail.gmail.com>
-	<425aaced-f337-89a0-d659-6754460f2e57@windriver.com>
-In-Reply-To: <425aaced-f337-89a0-d659-6754460f2e57@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 12 Sep 2018 07:18:41 -0700
-Message-ID: <CAMKF1soodAQ05RgCSoG+qt3pVZ40UF8_2HYYSH-sio3gpCPuDQ@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking] [PATCH] cyrus-sasl: use autotools-brokensep to build in sources
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH V2] cyrus-sasl: fix build out of source tree failed while configuring with `--enable-ldapdb'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,32 +33,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2018 14:19:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Sep 2018 15:43:33 -0000
+Content-Type: text/plain
 
-On Wed, Sep 12, 2018 at 7:17 AM Hongxu Jia <hongxu.jia@windriver.com> wrote=
-:
->
-> On 2018=E5=B9=B409=E6=9C=8812=E6=97=A5 22:12, Khem Raj wrote:
->
-> The crypto-compat.h locates in git/common/, it should be
-> `-I../../git/common'
->
-> this should b fixable in source Makefile.am to use $(srcdir) in that
-> -I spec it might be either missing or ignoring the fact that S can be
-> different then B
->
-> Yes, I will try send the fix on Makefile.am to upstream and wait their re=
-ply
->
+[snip]
+| powerpc-wrs-linux-gcc [snip] -I../common
+|../../git/saslauthd/lak.c:58:10: fatal error: crypto-compat.h:
+No such file or directory
+[snip]
 
-thanks
+The crypto-compat.h locates in git/common/, it should be                                                                                                                           |
+`-I../../git/common'
 
-> This patch is a quick fix to OE
->
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ...uthd-to-be-built-outside-of-source-tree-w.patch | 41 ++++++++++++++++++++++
+ .../cyrus-sasl/cyrus-sasl_2.1.27.bb                |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch
 
-I will wait for real fix
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch
+new file mode 100644
+index 0000000..c89822c
+--- /dev/null
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch
+@@ -0,0 +1,41 @@
++From 6515f3e7656d97d40a6a1cf4eb3ada193a698309 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Wed, 12 Sep 2018 23:18:12 +0800
++Subject: [PATCH] Allow saslauthd to be built outside of source tree while
++ configuring with `--enable-ldapdb'
++
++[snip]
++| powerpc-wrs-linux-gcc [snip] -I../common
++|../../git/saslauthd/lak.c:58:10: fatal error: crypto-compat.h:
++No such file or directory
++[snip]
++
++The crypto-compat.h locates in git/common/, it should be                                                                                                                           |
++`-I../../git/common'
++
++Remove useless `-I$(top_srcdir)/../include' which was incorrectly
++added by commit `faae590 cleanup misc INCLUDES for different build paths'
++
++Upstream-Status: Submitted [https://github.com/cyrusimap/cyrus-sasl]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ saslauthd/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/saslauthd/Makefile.am b/saslauthd/Makefile.am
++index d7244be..864b29b 100644
++--- a/saslauthd/Makefile.am
+++++ b/saslauthd/Makefile.am
++@@ -34,7 +34,7 @@ saslcache_SOURCES = saslcache.c
++ 
++ EXTRA_DIST	= saslauthd.8 saslauthd.mdoc include \
++ 		  getnameinfo.c getaddrinfo.c LDAP_SASLAUTHD
++-AM_CPPFLAGS	= -I$(top_srcdir)/include -I$(top_builddir)/include -I$(top_srcdir)/../include -I$(top_builddir)/common
+++AM_CPPFLAGS	= -I$(top_srcdir)/include -I$(top_builddir)/include -I$(top_builddir)/common -I$(top_srcdir)/common
++ DEFS            = @DEFS@ -DSASLAUTHD_CONF_FILE_DEFAULT=\"@sysconfdir@/saslauthd.conf\" -I. -I$(srcdir) -I..
++ 
++ 
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
+index a03712c..573f822 100644
+--- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
++++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https \
+            file://saslauthd.service \
+            file://saslauthd.conf \
+            file://0004-configure.ac-fix-condition-for-suppliment-snprintf-i.patch \
++           file://0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch \
+            "
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
+-- 
+2.7.4
 
-> //Hongxu
 
