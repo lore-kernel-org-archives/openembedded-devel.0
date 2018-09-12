@@ -1,51 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6433079567
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C2B3660110
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Sep 2018 00:19:00 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id d1-v6so79517pgo.3
+	Wed, 12 Sep 2018 04:57:55 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id m13-v6so642228qth.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Sep 2018 17:19:01 -0700 (PDT)
+	Tue, 11 Sep 2018 21:57:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fXTAjaCzMCShTzI9GIfLV5PEh7ZuewCsbnOxfT/wJE0=;
-	b=Wrc6srwanD9HacGB8801TwbmY41QZNeDU2rVXvYoDLG5/jHyWUz9zyXg7FFVCucf8/
-	0u73WvG35HfFLMdnsGJf6oav8eQC0mcgMEwf5nQV7O316xudItn3GJXZ4fF43eB7EVtx
-	rJQKEuAa8KDh0ocPOj6SSxPDkggm6rDfbY3hvMgtsA63EYVRan4fmKltYlXdCUeVygFM
-	rnYDrcmcH/Lk+joKH/5L6CnoN2yX0FU4Zu9mIjdO2k7kFmojopA7CQ0cSwNzd28j7gp/
-	d7rhDaq8WOsI5iOb5QIsD5Ab+hCK0OAG4zUZ3E8PXlFDxpYKgGiikuy89aenxlPhHx8O
-	er9w==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=WIaIleyHAbqTZS+DTMPusKllTAfnY9O+A46naND989k=;
+	b=eTet0uCQdPtyv6E2UdDH3e4klve3w2LXBbeCPTR7TGRV0y7Q1t3qitDor4av0Kmvje
+	2ubY8Ay1/W6Z2SRc1zf6PyfsWAOeYwLzM9Y0j0NY3teEFYPVRE1ks5xTHT57Cl+HEvO7
+	xayLLfF6mJ+d7vRX2F2i38Yc5BbgS3MeekifcYMTSzwvVBFPJj3/lof+0p+s8zPxXWi+
+	Er7DrNu16E+N48p98oc735ZLT5HwlwrtMJbo1xaJdAn6HmR2MhzcdPOYkTEjVkzbcCzu
+	05rheH/xSWutVZbPfKiVn1K4peBdUm2As7f4/B6sfgHGbINeKQW0V1M52HtXk3iXn0Rp
+	GK3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=fXTAjaCzMCShTzI9GIfLV5PEh7ZuewCsbnOxfT/wJE0=;
-	b=dgPaNFRW3pRyTXfpwn5jiov28QVjTyPzS2ogCvUUmyCpBQTGoBFFdnXrd/YZ3FDsSW
-	HPJzNZD2kSlhhmMUrWGtV3btn8p7gwoIT/bMr4aPd1YseeHcVCgexWTio4c4bBf7M2dn
-	emSY1mT96mr0ZeQyWsJ8nHnqSGwpLtgrEllbTK21x/FIgs1OMDdhOZGh/MN25b7d3xTs
-	KDVzCm1sUkcaBuBqb5cN5THWCPW45BEZ5yXyCK3dR9qGlXyBO9vi6hJT0cKACTEae1TT
-	6oOlc+AAOsSUNidRc58pjP0a2wmd1f8Uu6FepN2vQObIYTmG/mNLBfh0bAMEiWd8POVR
-	f1YA==
-X-Gm-Message-State: APzg51CADcB2fAllO40ZlrTULUhjtiO5ICKFUvzN7NHij2u71CqBm7tX
-	Np/s96Y3hzTMjP57Tk6Yf040KP+W
-X-Google-Smtp-Source: ANB0VdbVC71+UZjM1YvK3MbF6J7vnar8t31z35pyYUdtQtkRk0krekCB+WHFaTabW2Ver0/iqxOEMA==
-X-Received: by 2002:a62:3001:: with SMTP id
-	w1-v6mr32150014pfw.19.1536711541007; 
-	Tue, 11 Sep 2018 17:19:01 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::2887])
-	by smtp.gmail.com with ESMTPSA id
-	g25-v6sm39781692pfd.23.2018.09.11.17.19.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Sep 2018 17:19:00 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=WIaIleyHAbqTZS+DTMPusKllTAfnY9O+A46naND989k=;
+	b=ZrY/neiv2RTTJPNDjXIlr8yskUI+H+7C/MdwzSSLOpViABR6DO7MOKvNZY39E62xqc
+	ynIkguCNhoAMKP5HELlULgOZ5MUlPr/zFkZxgl69dSUZ2YA7xvp5pb43ex7rSOqdNN5L
+	P30fGauRkgE44iZRJNC7SkXBVDqHCm4STzTV63y1O4r5SWFj8/FoVI1viNdWBRxJcgBC
+	0egOYcnJlih/wSHqP3BU7ceGxYW+19vAIkMbcS3o6ZsF2HkpFGncarG7DRcgNdUUiTCH
+	nW9tGNLcbDlOkH+36sdcskxZwThqVACmiRhcRRrWrup7zl4wy6stnGUVv6Wa7Aa8NCq9
+	2dlQ==
+X-Gm-Message-State: APzg51ByGzB9NYTbRjvDQ/0BXtP/fcEU1BlxGIAsAFn20wPhTFJWDR9Y
+	gEGE+JggJh8dpxOv/HYvUUFCmqGji1Gg0sK9lwwInQ==
+X-Google-Smtp-Source: ANB0VdZ0IPreyEW0spQz/kKKsAs2YrudXbaEMpQSp7AIPHkQPCdGjmYGyd1MJr/DFOmZsOZ1eyxI4pVcC/2aTFkky0A=
+X-Received: by 2002:ac8:6c8:: with SMTP id j8-v6mr71469qth.314.1536728276099; 
+	Tue, 11 Sep 2018 21:57:56 -0700 (PDT)
+MIME-Version: 1.0
+References: <20180911093050.25992-1-hongl.fnst@cn.fujitsu.com>
+In-Reply-To: <20180911093050.25992-1-hongl.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Sep 2018 17:18:51 -0700
-Message-Id: <20180912001851.7181-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180912001851.7181-1-raj.khem@gmail.com>
-References: <20180912001851.7181-1-raj.khem@gmail.com>
-Subject: [meta-initramfs][PATCH 2/2] klibc: Fix build with security flags
+Date: Tue, 11 Sep 2018 21:57:30 -0700
+Message-ID: <CAMKF1sqqsQyBavuDnjDrzgR_1JK55KQhS1TdLzUQf9A+ppdQXQ@mail.gmail.com>
+To: hongl.fnst@cn.fujitsu.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] [meta-python][PATCH] python-greenlet: 0.4.14->0.4.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,92 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Sep 2018 00:19:00 -0000
+X-List-Received-Date: Wed, 12 Sep 2018 04:57:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Drop -Os which is also causing the relro
-Fixes
-| x86_64-bec-linux-musl-ld.bfd: discarded output section: `.got.plt'
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andrea Adami <andrea.adami@gmail.com>
----
- ...libc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch | 28 +++++++++++++++++++
- .../recipes-devtools/klibc/klibc.inc          |  9 +++---
- 2 files changed, 33 insertions(+), 4 deletions(-)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch
-
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch
-new file mode 100644
-index 0000000000..94818e3669
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch
-@@ -0,0 +1,28 @@
-+From cdc6edc2cfcd0ce88d6e66654d605dad303b1a75 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 11 Sep 2018 17:03:36 -0700
-+Subject: [PATCH] klibc/Kbuild: Accept EXTRA_KLIBCAFLAGS
-+
-+For passing additional assembler flags
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ usr/klibc/Kbuild | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/usr/klibc/Kbuild b/usr/klibc/Kbuild
-+index 98caf2e9..b34521e0 100644
-+--- a/usr/klibc/Kbuild
-++++ b/usr/klibc/Kbuild
-+@@ -168,7 +168,8 @@ $(SOHASH): $(SOLIB) $(SOLIB).hash
-+ targets += interp.o
-+ 
-+ quiet_cmd_interp = BUILD   $@
-+-      cmd_interp = $(KLIBCCC) $(klibccflags) -D__ASSEMBLY__     \
-++      cmd_interp = $(KLIBCCC) $(klibccflags) $(EXTRA_KLIBCAFLAGS) \
-++                             -D__ASSEMBLY__     \
-+                              -DLIBDIR=\"$(SHLIBDIR)\"         \
-+ 			     -DSOHASH=\"$(SOLIBHASH)\" \
-+ 			     -c -o $@ $<
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index f0b20bc7fd..3d25e96cd4 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -21,9 +21,10 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
-            file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
-            file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
-            file://0001-arm-Do-not-set-a-fallback-march-and-mtune.patch \
--           file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch  \
-+           file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch \
-            file://0001-klibc-add-getrandom-syscall.patch \
--"
-+           file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
-+           "
- 
- ARMPATCHES ?= ""
- 
-@@ -31,7 +32,6 @@ ARMPATCHES_arm = "file://klibc-config-eabi.patch \
-                   file://armv4-fix-v4bx.patch \
-                  "
- 
--
- S = "${WORKDIR}/git"
- 
- PARALLEL_MAKE = ""
-@@ -44,9 +44,10 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-                 'INSTALLDIR=${libdir}/klibc' \
-                 'SHLIBDIR=${libdir}' \
-                 '${KLIBCTHUMB}' \
--                'KLIBCOPTFLAGS=${TUNE_CCARGS} -Os' \
-+                'KLIBCOPTFLAGS=${TUNE_CCARGS}' \
-                  V=1 \
-                 "
-+EXTRA_OEMAKE += 'EXTRA_KLIBCAFLAGS="-Wa,--noexecstack" EXTRA_KLIBCLDFLAGS="-z noexecstack"'
- 
- export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
- KLIBCTHUMB = "${@['CONFIG_KLIBC_THUMB=n', 'CONFIG_KLIBC_THUMB=y'][(d.getVar('ARM_INSTRUCTION_SET') == 'thumb')]}"
--- 
-2.18.0
-
+Please update the python3 version of this package as well and send a v2
+On Tue, Sep 11, 2018 at 2:31 AM Hong Liu <hongl.fnst@cn.fujitsu.com> wrote:
+>
+> Upgrade python-greenlet from 0.4.14 to 0.4.15
+>
+> Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+> ---
+>  meta-python/recipes-devtools/python/python-greenlet.inc               | 4 ++--
+>  .../python/{python-greenlet_0.4.14.bb => python-greenlet_0.4.15.bb}   | 0
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-greenlet_0.4.14.bb => python-greenlet_0.4.15.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-greenlet.inc b/meta-python/recipes-devtools/python/python-greenlet.inc
+> index fcd81f6..c7c656c 100644
+> --- a/meta-python/recipes-devtools/python/python-greenlet.inc
+> +++ b/meta-python/recipes-devtools/python/python-greenlet.inc
+> @@ -3,7 +3,7 @@ LICENSE = "MIT & PSF"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+>                      file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+>
+> -SRC_URI[md5sum] = "a87b6028c3b742b210bf5973939db595"
+> -SRC_URI[sha256sum] = "f1cc268a15ade58d9a0c04569fe6613e19b8b0345b64453064e2c3c6d79051af"
+> +SRC_URI[md5sum] = "10fa304f673fc18b28fa6d8c6658cb80"
+> +SRC_URI[sha256sum] = "9416443e219356e3c31f1f918a91badf2e37acf297e2fa13d24d1cc2380f8fbc"
+>
+>  inherit pypi
+> diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.14.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.15.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-greenlet_0.4.14.bb
+> rename to meta-python/recipes-devtools/python/python-greenlet_0.4.15.bb
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
