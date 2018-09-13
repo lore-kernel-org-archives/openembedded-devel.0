@@ -1,43 +1,29 @@
-Return-Path: <mhm.dawod@gmail.com>
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
-	[209.85.222.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EC7279493;
-	Thu, 13 Sep 2018 08:33:02 +0000 (UTC)
-Received: by mail-qk1-f169.google.com with SMTP id 93-v6so2755502qks.3;
-	Thu, 13 Sep 2018 01:33:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=Pz0UJvJADy81iw9lrvdPv9iSAG2KCN+T7JPqUwcdvls=;
-	b=bGSoXAZh0vC5uqjOzoDWTz7+jlje01xcQfiz7+G5YioaNr5bSk8h8RRpUfKeY+xaSo
-	WEzp9X+Q1T6TnI1Y7NN9h7+7fLzAX973+CNQAbgvlNDsorMVvGcA8hC4a1ab0kPHdeas
-	yRrqGtHLjCMyi5gb9sCnUMPLgiJQ1Pp7GM9r1Yns9X2Y/vvqfBfY1Pt6VrBgTie6YhsK
-	r5upsbSof6tmWajO57hWNDwwmdck30iWbVK8R91GLH6zEAdim1i0DcTjE+e0cqUuz+j9
-	r7T4yA6g+yhJMyg5CgOl2+RvZxL0WqbaPFv7F2gZyslcFaiYtm1VhUMbimqnjV5WDnNz
-	9eKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=Pz0UJvJADy81iw9lrvdPv9iSAG2KCN+T7JPqUwcdvls=;
-	b=F2EnbqPiKnjeRXxKSG0nqhYyMCk/frikPHWv3DFHlmo+YvVOfyNZBPRNpHKcBKi5Gw
-	zdFwmT7oaEY3zK8era3VilzodfACfUIP+nLlTRlNa4mOrJAQSIVl+sIioAw/2dw8zY1B
-	mmGCP4vjjM5jhQqMKOcSypC7lVekUowDDyEBQ0QalxXBMrAWBcgEBP5P3TMdc0Afgh36
-	L0lxdTeHPPH1i4oWG6U6P63hte6tV1LtlEIw87zRWB1JHuS3Ycs8RaCIlCzsYDtNOPih
-	ybRyuHaAvD/BXJfw4+obv5QbzoRAxXsx6vLod1dxs08pcTjjEV0rOfgmPCYiIhyL18O3
-	QM6w==
-X-Gm-Message-State: APzg51BVEIePgmMSzLY6BfQjf4P1EZk6W1zdcZg6Kh+3EVar9KixmUog
-	2Zah1poyX6Bc8chXsghcxDZCmoWDtwgKHo5LinHXpA==
-X-Google-Smtp-Source: ANB0VdZu9aOnt2njgQqJ5nmezeTgZYAquKAWDS64bS8tpHP72uG4OB3w4bcTpEuhILDygt9lZn92RJhPRQLl50TsNrs=
-X-Received: by 2002:a37:64d8:: with SMTP id
-	y207-v6mr4353867qkb.312.1536827583040; 
-	Thu, 13 Sep 2018 01:33:03 -0700 (PDT)
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7674D78493
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Sep 2018 09:34:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8D9XlGP024973
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 13 Sep 2018 02:33:58 -0700
+Received: from [128.224.162.173] (128.224.162.173) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.408.0;
+	Thu, 13 Sep 2018 02:33:36 -0700
+To: ChenQi <Qi.Chen@windriver.com>,
+	<openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+References: <20180913082343.435508-1-mingli.yu@windriver.com>
+	<fbed68fd-3ec8-6058-e43b-329232c1e960@windriver.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <5B9A2E31.1080508@windriver.com>
+Date: Thu, 13 Sep 2018 17:30:25 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-From: Mohamed Dawod <mhm.dawod@gmail.com>
-Date: Thu, 13 Sep 2018 10:32:51 +0200
-Message-ID: <CAGCTLNQLVKqxn0zO176Y8+ShPALPra93BRp=7=a-etoGD0A_Mg@mail.gmail.com>
-To: openembedded-core@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [openembedded][linux][wayland]
+In-Reply-To: <fbed68fd-3ec8-6058-e43b-329232c1e960@windriver.com>
+X-Originating-IP: [128.224.162.173]
+Subject: Re: [meta-networking][PATCH] postfix: fix pkg_postinst_${PN}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,29 +36,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Sep 2018 08:33:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-
-Hello everyone,
-
-I built custom image for intel-corei7 processor supporting wayland weston
-instead of x11.
-
-I need to hide the mouse pointer from the desktop .
-I want to make it as mobiles, so I can use touch screen to click any where
-but there is no mouse pointer,
-
-Can any one help ?
-Any suggestions?
-
-Thank you in advance,
-Regards,
+X-List-Received-Date: Thu, 13 Sep 2018 09:34:23 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
--- 
 
-Mohamed Dawod
-Computer Engineering Department
-Faculty of Engineering
-Cairo University
+On 2018年09月13日 16:32, ChenQi wrote:
+> On 09/13/2018 04:23 PM, mingli.yu@windriver.com wrote:
+>> From: Mingli Yu <Mingli.Yu@windriver.com>
+>>
+>> "exit 0" will break the postinst logic
+>> below the line "exit 0" such as:
+>> ===
+>> update-alternatives --install /usr/sbin/sendmail sendmail
+>> /usr/sbin/sendmail.postfix 120
+>> update-alternatives --install /usr/bin/mailq mailq
+>> /usr/bin/mailq.postfix 120
+>> update-alternatives --install /usr/bin/newaliases newaliases
+>> /usr/bin/newaliases.postfix 120
+>> ===
+>>
+>> It's enough to call "$INTERCEPT_DIR/postinst_intercept
+>> delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}"
+>> , so remove it to guarantee the postinstall logic is correct
+>>
+>> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+>> ---
+>>   meta-networking/recipes-daemons/postfix/postfix.inc | 1 -
+>>   1 file changed, 1 deletion(-)
+>>
+>> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> index 49f9f7b1f..71d7ef5df 100644
+>> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> @@ -246,7 +246,6 @@ pkg_postinst_${PN} () {
+>>           # This can fail depending on host setup
+>>           if ! newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases;
+>> then
+>>               $INTERCEPT_DIR/postinst_intercept delay_to_first_boot
+>> ${PKG} mlprefix=${MLPREFIX}
+>> -            exit 0
+>>           fi
+>>           touch $D/etc/postfix/virtual_alias
+>>           postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+> I guess you need to use the if...else... block here.
+
+Thanks Qi, Will send out v2 to update the logic.
+
+Thanks,
+
+>
+> Regards,
+> Chen Qi
+>
 
