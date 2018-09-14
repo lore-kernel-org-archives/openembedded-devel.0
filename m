@@ -1,51 +1,37 @@
-Return-Path: <abrestic@google.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id ACF41798CD
+Return-Path: <38UqcWwgJANo67NAOPE8S6UIK.8KI@flex--abrestic.bounces.google.com>
+Received: from mail-io1-f74.google.com (mail-io1-f74.google.com
+	[209.85.166.74])
+	by mail.openembedded.org (Postfix) with ESMTP id 95D64798CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2018 23:56:06 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id h26-v6so6189267otl.9
+	Fri, 14 Sep 2018 23:57:36 +0000 (UTC)
+Received: by mail-io1-f74.google.com with SMTP id m15-v6so10346722ioj.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2018 16:56:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=waymo.com; s=google;
-	h=mime-version:reply-to:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-transfer-encoding;
-	bh=mkIBNN9AtCqX4WtGAJdGU8uZfMCpSs65+tYhyfn70ek=;
-	b=IGfWDqrOXA4iB2sjFkjmX39ezD/RdKc7L58RpU+ScaIKIHA/VokquBbI5ACff4LvBb
-	qC5DTXo7pLREqpWTzjifx3DzXT2lVAHJfnVFtfiA/XBD/kRL2yxXrnWND1+RY6RjvgQl
-	k529Ur9oy7UsDteyv3Q6Z34rII9sbb1iXJxvM=
+	Fri, 14 Sep 2018 16:57:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:reply-to:in-reply-to:references
-	:from:date:message-id:subject:to:cc:content-transfer-encoding;
-	bh=mkIBNN9AtCqX4WtGAJdGU8uZfMCpSs65+tYhyfn70ek=;
-	b=lXOOSv1nxPqr5NP8uw1IdzIVHrQ7L++u0NCiX1+Wh2X4O0sh/YEYVUXP7LodgYHECO
-	eg9rif5LQ9ieBFOpkSfS8xi5C8uKzYIvvXDgqW57HG2X9K8GvAWbARKALIiy6xDxBaLA
-	skcCTjwnqtp33y+yppE1Ct6iQw64TbjxSv0d/TXC3SfLjR8vUAovwlwPeCeonU5o02MD
-	JUR5v9Se6TzHNgCBUGZnim7RCoWYnX1PPfQH3RIKPUi984O/Gz2QQvW2X6Kz5/u2695A
-	7TobehMwAjZ4ebR6emXA1aOxl7JjUjliX6E8H2rh0OduLdRXFwg5Wn/UBsZu+yo2Bvvk
-	7BNQ==
-X-Gm-Message-State: APzg51BITz8YnyY7Jb4rxPkX+WrIK53eSS71ocSz6Um2xdKhy7R8sOKr
-	sFYpGv4lydxF+ZL2AHoeYnF9gMv2z0qp6csVe7Ut
-X-Google-Smtp-Source: ANB0VdauzxhM0gs8YEM+mncx+k6Lv+O19x0WlPBpTRc1YBCsESiHy8a6B65r3UZNa29uuTPt0H9affNjrQbKpSBMZrI=
-X-Received: by 2002:a9d:48a8:: with SMTP id
-	d37-v6mr6361255otf.316.1536969367194; 
-	Fri, 14 Sep 2018 16:56:07 -0700 (PDT)
-MIME-Version: 1.0
-Reply-To: abrestic@waymo.com
-Received: by 2002:ac9:79c7:0:0:0:0:0 with HTTP; Fri, 14 Sep 2018 16:56:06
-	-0700 (PDT)
-In-Reply-To: <58f99cfa-3da7-b4de-b068-a21655ad0870@windriver.com>
-References: <20180912212255.194513-1-abrestic@waymo.com>
-	<2a92e298-73d6-a5b2-4cc9-88cb6e32d1be@windriver.com>
-	<CAL1qeaHu+AZwF0GgBQ7a=AqRBieuZ0m-ZuxNg57c-L1s+xjEyg@mail.gmail.com>
-	<58f99cfa-3da7-b4de-b068-a21655ad0870@windriver.com>
+	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+	bh=cuRcJYJU2pkRmkDBLDr/JMSvSijUGjdqDRxlw01mbNs=;
+	b=OF3y6x8EF+6Dtmna9YZfF7+4CtJNiQSfSxyau7eOb+hmb/UvYTgrhkhHJUPTzzEJe1
+	ARcCkHN387EARvNGLt3Q44wWLwU4kS6tnYmdH0Tk0yJ2jlKhM7RwpaUxXNkjwSaLXmgD
+	FsxVQE+ulgzOHYgqMev48UPkQVdOTJs5E1gZzgJjWkRF3O0GKMqkQVm4AW9HRwHEij2M
+	EaNuCD4xZ2E29lfP7XK3nOLeoYFChxBRN6sv/XsLCy64P+FEcQhV3BT0IUw+cwjb4C1g
+	knZ1vDcAu2de9Ora3cmD/gb47++DkHo6fdvnO+EzCVv4DD8dwOKLOfyT7jElJyrKLgQs
+	lwfA==
+X-Gm-Message-State: APzg51B3vSPRnMEqDuQpxPQleCF7uttDNKafqgrSlIEfLHxc6CEoa0p2
+	Y0RMl71tBlqagZO9sbXL9lVmQLMR1P0bHCaDgTOhWL/bjNCAvn5O0BqLSiube6mIO1Vi5IsgueB
+	LhHtC/JknTkP9qtYJ0xf6WyL3cJH/t/5deURpDEmo+O3vBZlOft/K5uP/B5vHvZzA/JZuunUUls
+	wG56pyFewaE0qMXw==
+X-Google-Smtp-Source: ANB0Vda525ddQjl3WiMljIRA/sil7L2GKB5dJI+ew6rLn/X+7vMOyGD1a7iTQYisbm7wnciT7q97fL/wPxwZtw==
+X-Received: by 2002:a6b:4919:: with SMTP id
+	u25-v6mr11248995iob.0.1536969457658; 
+	Fri, 14 Sep 2018 16:57:37 -0700 (PDT)
+Date: Fri, 14 Sep 2018 16:57:27 -0700
+Message-Id: <20180914235727.182478-1-abrestic@waymo.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.19.0.397.gdd90340f6a-goog
 From: Andrew Bresticker <abrestic@waymo.com>
-Date: Fri, 14 Sep 2018 16:56:06 -0700
-Message-ID: <CAL1qeaExxb1gU2y7mmdg8OsGGHNzxY9Pw1tdpy4zARd2XDj=Sw@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] libdevmapper: Install dmsetup
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2] libdevmapper: Install dmsetup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,128 +44,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2018 23:56:06 -0000
+X-List-Received-Date: Fri, 14 Sep 2018 23:57:36 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 13, 2018 at 6:50 PM, Hongxu Jia <hongxu.jia@windriver.com> wrot=
-e:
-> On 2018=E5=B9=B409=E6=9C=8814=E6=97=A5 00:22, Andrew Bresticker wrote:
->>
->> Hi,
->>
->> On Thu, Sep 13, 2018 at 8:22 AM, Hongxu Jia <hongxu.jia@windriver.com>
->> wrote:
->>>
->>> On 2018=E5=B9=B409=E6=9C=8813=E6=97=A5 05:22, Andrew Bresticker wrote:
->>>
->>> Commit 6aa1dd223a140 ("lvm2/libdevmapper: fix invoking lvcreate failed"=
-)
->>> accidentally removed installation of dmsetup as part of the libdevmappe=
-r
->>> recipe. Add it back by explicitly installing it in do_install().
->>>
->>>
->>> Why? I am afraid your fix will cause `invoking lvcreate failed'
->>
->> Because presently users have no way to install the 'dmsetup' binary.
->> Commit 7f17da154372 ("lvm2: separate libdevmapper to avoid circular
->> dependency") moved installation of dmsetup from lvm2 to the
->> libdevmapper package, and then your commit removes installation of
->> dmsetup entirely (and in fact adds a patch to explicitly disable
->> installation of it as part of the lvm2 package).
->>
->> It looks like the cause of the 'invoking lvcreate failed' issue was a
->> mismatch in EXTRA_OECONF/PACKAGECONFIG between lvm2 and libdevmapper,
->> which was fixed in your patch. The installation of an unrelated binary
->> (dmsetup) doesn't undo that.
->
->
-> Would you do the following test with this fix? If lvcreate works
-> well, the patch is fine to me.
+Commit 6aa1dd223a140 ("lvm2/libdevmapper: fix invoking lvcreate failed")
+moved installation of dmsetup back to lvm2 from libdevmapper, but dmsetup
+had intentionally been moved to libdevmapper in commit 269d009a81d4
+("lvm2: libdevicemapper package needs udev rules and dmsetup"). Add it back
+to libdevmapper by explicitly installing it in do_install(), and refresh
+explicitly-do-not-install-libdm.patch so that we also explicitly do not
+install dmsetup as part of lvm2.
 
-Yes, lvcreate still works just fine:
+Signed-off-by: Andrew Bresticker <abrestic@waymo.com>
+---
+ .../lvm2/libdevmapper_2.02.180.bb             |  1 +
+ ...0001-explicitly-do-not-install-libdm.patch | 28 +++++++++++++++----
+ 2 files changed, 23 insertions(+), 6 deletions(-)
 
-# lvm pvcreate /dev/sdf1
-  Physical volume "/dev/sdf1" successfully created.
-# lvm vgcreate -s 4096K wrl /dev/sdf1
-  Volume group "wrl" successfully created
-# lvm lvcreate -n swap -L 300M -y --type linear wrl
-  Logical volume "swap" created.
+diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
+index f3f11ef64..26af3275d 100644
+--- a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
++++ b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
+@@ -9,6 +9,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+ do_install() {
+     oe_runmake 'DESTDIR=${D}' -C libdm install
++    oe_runmake 'DESTDIR=${D}' -C tools install_device-mapper
+ }
+ 
+ RRECOMMENDS_${PN}_append_class-target = " lvm2-udevrules"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
+index e85818dbd..7f5dd9334 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
++++ b/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
+@@ -1,4 +1,4 @@
+-From 0a8e466fcf99622896e070c5133165e4278e8cfb Mon Sep 17 00:00:00 2001
++From 5a3e13ae94318c2bed60f875bb3852c45ce0113c Mon Sep 17 00:00:00 2001
+ From: Hongxu Jia <hongxu.jia@windriver.com>
+ Date: Thu, 25 May 2017 05:27:11 -0400
+ Subject: [PATCH] explicitly do not install libdm
+@@ -9,12 +9,14 @@ explicitly do not do the installation here.
+ Upstream-Status: Inappropriate [meta-oe specific]
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Signed-off-by: Andrew Bresticker <abrestic@waymo.com>
+ ---
+  libdm/Makefile.in | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
++ tools/Makefile.in | 3 ++-
++ 2 files changed, 6 insertions(+), 3 deletions(-)
+ 
+ diff --git a/libdm/Makefile.in b/libdm/Makefile.in
+-index 3c9a4ce..45c91c6 100644
++index 66ec39513..c779c9d86 100644
+ --- a/libdm/Makefile.in
+ +++ b/libdm/Makefile.in
+ @@ -77,9 +77,11 @@ ifeq ("@PKGCONFIG@", "yes")
+@@ -23,14 +25,28 @@ index 3c9a4ce..45c91c6 100644
+  
+ -install: $(INSTALL_TYPE) install_include
+ +install:
+-+	echo "Do not install device mappler in lvm2"
+++	echo "Do not install device mapper in lvm2"
+  
+ -install_device-mapper: install
+ +install_device-mapper:
+-+	echo "Do not install device mappler in lvm2"
+++	echo "Do not install device mapper in lvm2"
+  
+  install_include: $(srcdir)/libdevmapper.h
+  	$(INSTALL_DATA) -D $< $(includedir)/$(<F)
++diff --git a/tools/Makefile.in b/tools/Makefile.in
++index 103b76732..63ba7fc04 100644
++--- a/tools/Makefile.in
+++++ b/tools/Makefile.in
++@@ -267,7 +267,8 @@ install_dmsetup_static: dmsetup.static
++ 	$(Q) $(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
++ 	$(Q) $(LN_S) -f $(<F) $(staticdir)/dmstats
++ 
++-install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
+++install_device-mapper:
+++	echo "Do not install device mapper in lvm2"
++ 
++ install_lvm2: $(INSTALL_LVM_TARGETS)
++ 
+ -- 
+-2.8.1
++2.19.0.397.gdd90340f6a-goog
+ 
+-- 
+2.19.0.397.gdd90340f6a-goog
 
-But I misspoke before -- your patch actually moved installation of
-dmsetup back to lvm2 from libdevmapper. So my patch results in dmsetup
-getting installed in two different packages, which is obviously no
-good. I think we do want to move it back to libdevmapper, though, per
-commit 269d009a81d4 ("lvm2: libdevicemapper package needs udev rules
-and dmsetup"). Patch v2 incoming...
-
-Thanks,
-Andrew
-
->
-> //Hongxu
->
->
->> Thanks,
->> Andrew
->>
->>> Here is the original log of `Commit 6aa1dd223a140',
->>> I quess the `---' cuased the log truncate in git
->>>
->>> Previously, libdevmapper is separated from lvm2 in the following commit=
-:
->>> ---
->>> commit 7f17da154372b5ec33947766783444961e8aa67c
->>> Author: Chen Qi <Qi.Chen@windriver.com>
->>> Date:   Mon Apr 24 16:06:41 2017 +0800
->>>
->>>      lvm2: separate libdevmapper to avoid circular dependency
->>> ---
->>>
->>> It caused invoking lvcreate failed:
->>> ---
->>> root@qemux86-64:~# lvm pvcreate /dev/sda
->>>    Physical volume "/dev/sda" successfully created.
->>> root@qemux86-64:~# lvm vgcreate -s 4096K wrl /dev/sda
->>>    Volume group "wrl" successfully created
->>> root@qemux86-64:~# lvm lvcreate -n swap -L 2293648K -y --type linear wr=
-l
->>>    Rounding up size to full physical extent 2.19 GiB
->>>    /dev/wrl/swap: not found: device not cleared
->>>    Aborting. Failed to wipe start of new LV.
->>> ---
->>>
->>> The lvm2 and libdevmapper should use the same PACKAGECONFIG
->>> and EXTRA_OECONF.
->>>
->>> And do not manually remove useless files.
->>>
->>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->>>
->>> //Hongxu
->>>
->>>
->>>
->>> Signed-off-by: Andrew Bresticker <abrestic@waymo.com>
->>> ---
->>>   meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb | 1 +
->>>   1 file changed, 1 insertion(+)
->>>
->>> diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
->>> b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
->>> index f3f11ef64..26af3275d 100644
->>> --- a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
->>> +++ b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
->>> @@ -9,6 +9,7 @@ TARGET_CC_ARCH +=3D "${LDFLAGS}"
->>>
->>>   do_install() {
->>>       oe_runmake 'DESTDIR=3D${D}' -C libdm install
->>> +    oe_runmake 'DESTDIR=3D${D}' -C tools install_device-mapper
->>>   }
->>>
->>>   RRECOMMENDS_${PN}_append_class-target =3D " lvm2-udevrules"
->>>
->>>
->
 
