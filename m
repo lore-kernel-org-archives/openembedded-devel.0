@@ -1,37 +1,48 @@
-Return-Path: <38UqcWwgJANo67NAOPE8S6UIK.8KI@flex--abrestic.bounces.google.com>
-Received: from mail-io1-f74.google.com (mail-io1-f74.google.com
-	[209.85.166.74])
-	by mail.openembedded.org (Postfix) with ESMTP id 95D64798CD
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 411247989A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2018 23:57:36 +0000 (UTC)
-Received: by mail-io1-f74.google.com with SMTP id m15-v6so10346722ioj.22
+	Sat, 15 Sep 2018 01:10:05 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id 2-v6so5140018pgo.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Sep 2018 16:57:38 -0700 (PDT)
+	Fri, 14 Sep 2018 18:10:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=nrvmso9DhTSyL6AsVAuRr+YeMKEoXzpFqZOzXaFd9PU=;
+	b=RXZ2FgmgsHiA+JPNLcSpdkFb9PcUXaarOAMk1AGD0DhL2mVMfRmlUmZw3ZPYICDA6w
+	QIQNhLVIEhMug6fo5puEUxWNf0nDZSLHMoixr/8LNxWh+7T233jiOY4SVpPSl2vB7lug
+	tyvPFtsiyHV7vrxDDZjuIechAu/IW/QFl4p2XeZtzRiYIR8/82PExF28sNkvyksY3PjH
+	SB7XBlpT8e8tal6eQXmcSV6uOmlwDh51x7WbDKPaj72vHGiY2FXZG2On4K0L3Tp1hvlP
+	YkNvoZEHLp59zxYnUQv9DS9GP/JkB1BU6l9wsFWJEvVOj373xdZ4I2fa9S1oqsioWKDD
+	hfnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-	bh=cuRcJYJU2pkRmkDBLDr/JMSvSijUGjdqDRxlw01mbNs=;
-	b=OF3y6x8EF+6Dtmna9YZfF7+4CtJNiQSfSxyau7eOb+hmb/UvYTgrhkhHJUPTzzEJe1
-	ARcCkHN387EARvNGLt3Q44wWLwU4kS6tnYmdH0Tk0yJ2jlKhM7RwpaUxXNkjwSaLXmgD
-	FsxVQE+ulgzOHYgqMev48UPkQVdOTJs5E1gZzgJjWkRF3O0GKMqkQVm4AW9HRwHEij2M
-	EaNuCD4xZ2E29lfP7XK3nOLeoYFChxBRN6sv/XsLCy64P+FEcQhV3BT0IUw+cwjb4C1g
-	knZ1vDcAu2de9Ora3cmD/gb47++DkHo6fdvnO+EzCVv4DD8dwOKLOfyT7jElJyrKLgQs
-	lwfA==
-X-Gm-Message-State: APzg51B3vSPRnMEqDuQpxPQleCF7uttDNKafqgrSlIEfLHxc6CEoa0p2
-	Y0RMl71tBlqagZO9sbXL9lVmQLMR1P0bHCaDgTOhWL/bjNCAvn5O0BqLSiube6mIO1Vi5IsgueB
-	LhHtC/JknTkP9qtYJ0xf6WyL3cJH/t/5deURpDEmo+O3vBZlOft/K5uP/B5vHvZzA/JZuunUUls
-	wG56pyFewaE0qMXw==
-X-Google-Smtp-Source: ANB0Vda525ddQjl3WiMljIRA/sil7L2GKB5dJI+ew6rLn/X+7vMOyGD1a7iTQYisbm7wnciT7q97fL/wPxwZtw==
-X-Received: by 2002:a6b:4919:: with SMTP id
-	u25-v6mr11248995iob.0.1536969457658; 
-	Fri, 14 Sep 2018 16:57:37 -0700 (PDT)
-Date: Fri, 14 Sep 2018 16:57:27 -0700
-Message-Id: <20180914235727.182478-1-abrestic@waymo.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.19.0.397.gdd90340f6a-goog
-From: Andrew Bresticker <abrestic@waymo.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nrvmso9DhTSyL6AsVAuRr+YeMKEoXzpFqZOzXaFd9PU=;
+	b=ASDGbu4aK/1/DZeQ++bPSVjhQPCWr1yvz15M1L6C5FQUOxVvF8rU9w+oXG1tJNncx3
+	kDeDW2qurvQpaLXIwSRtDJ5yCkoVaE43rrU8vKnnTY+mrjn4uU1IDQ2E/GP1mOnsqDXM
+	kK796lJp/vbwnPENoH21C49CyfB/T70ZfAGpi/zSUSrD0B7+OV5O8qS/5SKQg8/drL8n
+	5bu7aZ8chpJ7hZ0ZD+mdcfwRk4J77VL3gVdWWSDn1xhfjvi+IHDh0YstzyIdWqc1Xnax
+	eo+/ZNmUaD8oKmIHLvMAaUENmrmkUfyKrf2ZhdfRfDHtgVLucFSkar5bnTauVmfRmNOO
+	99eA==
+X-Gm-Message-State: APzg51AdlWgYOUC3DMx4QMyc73v+ASzHYykCMaHKCv8vDUJMbCHcohzx
+	wuId+8F93dwPi6/TRkU34yLXfcGA
+X-Google-Smtp-Source: ANB0VdZk5FuYeR7L5fqhB/VuWkMuOJ94pzeHSgKqDQ1a4Ze6QG1nEL7PVTi5gywldf8Ib8MocQykIA==
+X-Received: by 2002:a65:5286:: with SMTP id
+	y6-v6mr13187733pgp.65.1536973806027; 
+	Fri, 14 Sep 2018 18:10:06 -0700 (PDT)
+Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
+	by smtp.gmail.com with ESMTPSA id
+	f75-v6sm13263424pfk.85.2018.09.14.18.10.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 14 Sep 2018 18:10:05 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] libdevmapper: Install dmsetup
+Date: Fri, 14 Sep 2018 18:09:59 -0700
+Message-Id: <1536973799-961-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] stunnel: update 5.35 -> 5.49
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,95 +55,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Sep 2018 23:57:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 15 Sep 2018 01:10:05 -0000
 
-Commit 6aa1dd223a140 ("lvm2/libdevmapper: fix invoking lvcreate failed")
-moved installation of dmsetup back to lvm2 from libdevmapper, but dmsetup
-had intentionally been moved to libdevmapper in commit 269d009a81d4
-("lvm2: libdevicemapper package needs udev rules and dmsetup"). Add it back
-to libdevmapper by explicitly installing it in do_install(), and refresh
-explicitly-do-not-install-libdm.patch so that we also explicitly do not
-install dmsetup as part of lvm2.
+ - Update LIC_FILES_CHKSUM due to change in COPYING copyright year
+ - Fix dependency on libnsl2 (previously provided indirectly by tcp-wrappers)
+ - Drop obsolete dependency on zlib
+ - Add PACKAGECONFIG control for libwrap
+ - Move legacy stunnel3 wrapper (and its perl dependency) into separate package
 
-Signed-off-by: Andrew Bresticker <abrestic@waymo.com>
+For a full list of changes between stunnel 5.35 and 5.49 see:
+
+  https://www.stunnel.org/sdf_ChangeLog.html
+
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- .../lvm2/libdevmapper_2.02.180.bb             |  1 +
- ...0001-explicitly-do-not-install-libdm.patch | 28 +++++++++++++++----
- 2 files changed, 23 insertions(+), 6 deletions(-)
+ .../recipes-support/stunnel/stunnel_5.35.bb        | 26 ---------------
+ .../recipes-support/stunnel/stunnel_5.49.bb        | 37 ++++++++++++++++++++++
+ 2 files changed, 37 insertions(+), 26 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+ create mode 100644 meta-networking/recipes-support/stunnel/stunnel_5.49.bb
 
-diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
-index f3f11ef64..26af3275d 100644
---- a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
-+++ b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.180.bb
-@@ -9,6 +9,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_install() {
-     oe_runmake 'DESTDIR=${D}' -C libdm install
-+    oe_runmake 'DESTDIR=${D}' -C tools install_device-mapper
- }
- 
- RRECOMMENDS_${PN}_append_class-target = " lvm2-udevrules"
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
-index e85818dbd..7f5dd9334 100644
---- a/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
-@@ -1,4 +1,4 @@
--From 0a8e466fcf99622896e070c5133165e4278e8cfb Mon Sep 17 00:00:00 2001
-+From 5a3e13ae94318c2bed60f875bb3852c45ce0113c Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
- Date: Thu, 25 May 2017 05:27:11 -0400
- Subject: [PATCH] explicitly do not install libdm
-@@ -9,12 +9,14 @@ explicitly do not do the installation here.
- Upstream-Status: Inappropriate [meta-oe specific]
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+Signed-off-by: Andrew Bresticker <abrestic@waymo.com>
- ---
-  libdm/Makefile.in | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
-+ tools/Makefile.in | 3 ++-
-+ 2 files changed, 6 insertions(+), 3 deletions(-)
- 
- diff --git a/libdm/Makefile.in b/libdm/Makefile.in
--index 3c9a4ce..45c91c6 100644
-+index 66ec39513..c779c9d86 100644
- --- a/libdm/Makefile.in
- +++ b/libdm/Makefile.in
- @@ -77,9 +77,11 @@ ifeq ("@PKGCONFIG@", "yes")
-@@ -23,14 +25,28 @@ index 3c9a4ce..45c91c6 100644
-  
- -install: $(INSTALL_TYPE) install_include
- +install:
--+	echo "Do not install device mappler in lvm2"
-++	echo "Do not install device mapper in lvm2"
-  
- -install_device-mapper: install
- +install_device-mapper:
--+	echo "Do not install device mappler in lvm2"
-++	echo "Do not install device mapper in lvm2"
-  
-  install_include: $(srcdir)/libdevmapper.h
-  	$(INSTALL_DATA) -D $< $(includedir)/$(<F)
-+diff --git a/tools/Makefile.in b/tools/Makefile.in
-+index 103b76732..63ba7fc04 100644
-+--- a/tools/Makefile.in
-++++ b/tools/Makefile.in
-+@@ -267,7 +267,8 @@ install_dmsetup_static: dmsetup.static
-+ 	$(Q) $(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
-+ 	$(Q) $(LN_S) -f $(<F) $(staticdir)/dmstats
-+ 
-+-install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
-++install_device-mapper:
-++	echo "Do not install device mapper in lvm2"
-+ 
-+ install_lvm2: $(INSTALL_LVM_TARGETS)
-+ 
- -- 
--2.8.1
-+2.19.0.397.gdd90340f6a-goog
- 
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb b/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
+deleted file mode 100644
+index 427c8dd..0000000
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.35.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-SUMMARY = "Program for providing universal TLS/SSL tunneling service"
+-HOMEPAGE = "http://www.stunnel.org/"
+-DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
+-SECTION = "net"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=866cdc7459d91e092b174388fab8d283"
+-DEPENDS = "openssl zlib tcp-wrappers"
+-
+-RDEPENDS_${PN} += "perl"
+-
+-SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
+-           file://fix-openssl-no-des.patch \
+-"
+-
+-SRC_URI[md5sum] = "9079f5fafbccaf88b7d92b227d78249a"
+-SRC_URI[sha256sum] = "ffa386ae4c825f35f35157c285e7402a6d58779ad8c3822f74a9d355b54aba1d"
+-
+-inherit autotools
+-
+-EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
+-# When cross compiling, configure defaults to nobody, but provides no option to change it.
+-EXTRA_OEMAKE += "DEFAULT_GROUP='nogroup'"
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)}"
+-PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+-PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.49.bb b/meta-networking/recipes-support/stunnel/stunnel_5.49.bb
+new file mode 100644
+index 0000000..eca77cf
+--- /dev/null
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.49.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "Program for providing universal TLS/SSL tunneling service"
++DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
++HOMEPAGE = "https://www.stunnel.org/"
++SECTION = "net"
++# Note: Linking stunnel statically or dynamically with other modules is making
++# a combined work based on stunnel. Thus, the terms and conditions of the GNU
++# General Public License cover the whole combination.
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=f6b7fe7379c9c2d7db6c80f7bd41e06d"
++
++DEPENDS = "autoconf-archive libnsl2 openssl"
++
++SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
++           file://fix-openssl-no-des.patch \
++"
++
++SRC_URI[md5sum] = "0b41240e5585ec7d55ca343feed5530f"
++SRC_URI[sha256sum] = "3d6641213a82175c19f23fde1c3d1c841738385289eb7ca1554f4a58b96d955e"
++
++inherit autotools
++
++PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} libwrap"
++
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
++PACKAGECONFIG[libwrap] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
++PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
++
++EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
++
++# When cross compiling, configure defaults to nobody, but provides no option to change it.
++EXTRA_OEMAKE += "DEFAULT_GROUP='nogroup'"
++
++# stunnel3 is a Perl wrapper to allow use of the legacy stunnel 3.x commandline
++# syntax with stunnel >= 4.05
++PACKAGES =+ "stunnel3"
++FILES_stunnel3 = "${bindir}/stunnel3"
++RDEPENDS_stunnel3 += "${PN} perl"
 -- 
-2.19.0.397.gdd90340f6a-goog
+1.9.1
 
 
