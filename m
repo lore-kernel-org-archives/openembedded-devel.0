@@ -1,49 +1,46 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
-	[209.85.128.49])
-	by mail.openembedded.org (Postfix) with ESMTP id B68A274CAF
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Sep 2018 14:27:14 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id b19-v6so4869180wme.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Sep 2018 07:27:15 -0700 (PDT)
+Return-Path: <mhm.dawod@gmail.com>
+Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id B971E79306;
+	Sat, 15 Sep 2018 16:30:58 +0000 (UTC)
+Received: by mail-qt0-f180.google.com with SMTP id x7-v6so11605171qtk.5;
+	Sat, 15 Sep 2018 09:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Pbmj2FP3BPNXRek141z+iUhko8RFL98sqNQHWWqVUhY=;
-	b=Se3Utg3ahgEPVkghWmIe30LQPDVfwx27dRNpfC4ys5P2B3ONFq/Sn129yRPBOaH14p
-	TqgbxVquD6Mt7Fy1hGK9PxlDaMMIFWCEyWjqTJ50Q1EM3piRGh25k9vgeFimSAHDlcgJ
-	/7Xo3Exzsxw92wkrkE45amaue1dsT1MuGQMbRURS+5pUa8YUpAy4IwwXxqyYSRshUoD/
-	g0At2EB3+GEOZFVu75wcubFR1PX0xbsRML2ig9ni3p0N0bV9uTPbfu01bD8FeNJaLkOa
-	CuofD/w5UQopkHtZ2qKDWDjbsdOrq8vb33pGzQgRr1ygDecyouZWk5r8CndSbzhDuPmk
-	Uzdw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=wsMEIuuLzX9/25UdSqn+mndkhWJXBpst4rqosZ0P2pA=;
+	b=FV51uaazyM/24HcLhIRlZCsUQQzyrmyrqz6nTjpanofUkgzy/Ynliln0Ph9S32+jMV
+	ALQcGrOzABcacSNqPFt6cBdgvKuseC4dCF2pioVXrBl9yBXcF+9mBNzhbh+rDIB4iZR/
+	9HpAFZ6yMqZ0VQpV4n1bBmGKcwOyeCyNxbHkhE8JW6OjFggYShEn+PheVOA2ET4wLSqb
+	C8ye7IZLoV/ukC8t0Q0cTVXLC2ehFtsTpPrfC4CrDdVHXe08OXFXs0zhcpfXVGQ6a0MV
+	+MZtT3yh1iObcsk8Llew8WIgSpJGa0OqcXt0wCrz44J/FV5VuZE/2yvG0+IZw4rZt7Bm
+	B17w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Pbmj2FP3BPNXRek141z+iUhko8RFL98sqNQHWWqVUhY=;
-	b=Q/GF5yPWNMs6xMc9TtDroWuzPsrXM3t4+Uiv/taos49e7W3KMOpKAMPcl+QlgscGYX
-	QiMn/wmGKLl/GiRvuseTpWm2M4hNuJ9bjGI0/h91/iKSVsLQDuttAQqqhX6YBdkDeyqU
-	FnfWT7OKoGFz6J2uUbIywq1EjbYIFiV4nHeYaDXPFmeZfqnRrSGNThSJmW+FsQWkJhYs
-	so4qIQ5tkksrzzNAxy4x9xEXHiKnTzGGonS9pASzvIb2O5xg5abKQkmHj7yAB926Z2y8
-	W5YWazYUCjsDm+9IutlhoQZ79UW5mEz3osRKV8E2OeFFLRsN+B2n8RKN0VpVfLkm71IP
-	ZwZg==
-X-Gm-Message-State: APzg51C40PnT4xO2x4kjaVECiHXREX0fnoTGjRGKCtx/sn/aaFtYhUYo
-	y1mXydzWViONLMQvJzI8v1QwoXnk
-X-Google-Smtp-Source: ANB0VdbYGSGmFaeb2RTvRYctZb1iHfk2dknY075sfJbjK+qVMWQpfjvbTG4E1WV/wU0ZYkZwq2GJDA==
-X-Received: by 2002:a1c:2283:: with SMTP id
-	i125-v6mr5916101wmi.28.1537021634811; 
-	Sat, 15 Sep 2018 07:27:14 -0700 (PDT)
-Received: from localhost.localdomain
-	(host215-117-dynamic.54-82-r.retail.telecomitalia.it.
-	[82.54.117.215]) by smtp.gmail.com with ESMTPSA id
-	j11-v6sm8354932wrr.37.2018.09.15.07.27.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 15 Sep 2018 07:27:13 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Sep 2018 16:27:10 +0200
-Message-Id: <1537021630-14111-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] klibc: fix build with GCC and -pie for mips, mips64, aarch64
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=wsMEIuuLzX9/25UdSqn+mndkhWJXBpst4rqosZ0P2pA=;
+	b=GYYuKZa/bXupYcm3AZ9BB7Waq3MdmZx/REi4PUWsLoGpdzHqOja7/j6SH/9u8AW1Jj
+	fTJGu852VjJGQDtbKCdUh7hqlGaroOB8ZpUSDS/cyIEowFsXReBGYrqjloo2zHiSGLLo
+	6NbMQPgDUn6V7t1Cknx4bE91IS4zq8MTzmAPamr+vniCj03kMq6BKcGFTy/Fy8UCw7Sl
+	zHT1zpiKwAZc4Z96NBv2OJG1FyxUmstO2XwX76wynPv2ZECZgHndqo/FXnrj9RvfbYpB
+	gloyfOIbEZCrdUbgq04mhzyEKN+9oIPt7g6sNtQtq33zO1YCxtk2R899PfsNm0Xm8J/l
+	MH6A==
+X-Gm-Message-State: APzg51DVs3p7bQGIatn8dULs85yYnT+87BbarhemrGfA+KM+DdDs3s1l
+	i4HxtQfeaQpup7wIJOMw2Y3A8A8AguUeM0ub6M0jJw==
+X-Google-Smtp-Source: ANB0VdZ9HNoEuPE97bEs50k+CjxI8Qj51/EqxN0nJdaWNWFC+FqtgnH159juXfFnc5/gwgPMLf/AXbpo3dSnKCdZst0=
+X-Received: by 2002:a0c:e847:: with SMTP id
+	l7-v6mr12519186qvo.196.1537029059592; 
+	Sat, 15 Sep 2018 09:30:59 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAGCTLNRJaBrHJmR3McmfUdMaaqStfbwwBGtnzRbtWVff_yuCqQ@mail.gmail.com>
+In-Reply-To: <CAGCTLNRJaBrHJmR3McmfUdMaaqStfbwwBGtnzRbtWVff_yuCqQ@mail.gmail.com>
+From: Mohamed Dawod <mhm.dawod@gmail.com>
+Date: Sat, 15 Sep 2018 18:30:47 +0200
+Message-ID: <CAGCTLNStam9H=B5JiGpdoCGAxVcyzBtTstD04AZVE2sQWtNZEw@mail.gmail.com>
+To: openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [openembedded][Qt5]: typing problem.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +53,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Sep 2018 14:27:15 -0000
+X-List-Received-Date: Sat, 15 Sep 2018 16:30:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The MCONFIG makefiles for mips/mips64 do disable pic so we do not insist
-linking it with -pie.
+---------- Forwarded message ---------
+From: Mohamed Dawod <mhm.dawod@gmail.com>
+Date: Sat, Sep 15, 2018 at 10:51 AM
+Subject: [openembedded][Qt5]: typing problem.
+To: <openembedded-core@lists.openembedded.org>, <
+openembedded-devel@lists.openembedded.org>
 
-For aarch64 we have to readd the -Os optimization to avoid
 
- | usr/dash/shell.h:103:25: error:
- '-mgeneral-regs-only' is incompatible with floating-point argument
+HI everyone,
+I am trying to build custom image supporting wayland weston instead of x11
+and support qt5 apps.
+I successfully built it but when I try to type any thing in the text box in
+the qt5 app.
+no thing happen !!
+also the initial text in text boxes appears very small!!
+I added "fontconfig" and "frretype" to the PACAGECONFIG variabl in
+qtbase_git.bb recipe..
 
-as committed (c296fb707ae3 klibc: Pass Optimization with KLIBCOPTFLAGS)
-but reverted (76bc58e9329 klibc: Fix build with security flags) trying to
-fix the i386 build (see ld.bfd: discarded output section: `.got.plt').
-This latter issue was fixed for i386 passing -pie to the linker.
+How to solve this problem ?
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Thank you in advance,
+Regards,
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 837b026..6342be0 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -44,7 +44,7 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-                 'INSTALLDIR=${libdir}/klibc' \
-                 'SHLIBDIR=${libdir}' \
-                 '${KLIBCTHUMB}' \
--                'KLIBCOPTFLAGS=${TUNE_CCARGS}' \
-+                'KLIBCOPTFLAGS=${TUNE_CCARGS} -Os' \
-                  V=1 \
-                 "
- EXTRA_OEMAKE += "'EXTRA_KLIBCAFLAGS=${SECURITY_CFLAGS} -Wa,--noexecstack' \
-@@ -76,3 +76,5 @@ KLIBC_ARCH_powerpc64 = "ppc64"
- THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
- 
- SECURITY_LDFLAGS = "${@'-z relro -z now -pie' if '${GCCPIE}' else ''}"
-+SECURITY_LDFLAGS_mips = ""
-+SECURITY_LDFLAGS_mips64 = ""
 -- 
-2.7.4
 
+Mohamed Dawod
+Computer Engineering Department
+Faculty of Engineering
+Cairo University
+
+
+-- 
+
+Mohamed Dawod
+Computer Engineering Department
+Faculty of Engineering
+Cairo University
 
