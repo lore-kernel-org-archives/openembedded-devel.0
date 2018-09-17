@@ -1,26 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 83482795FA
+	by mail.openembedded.org (Postfix) with ESMTP id 8AAAA7969B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 15:58:00 +0000 (UTC)
+	Mon, 17 Sep 2018 15:58:06 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8HFvQ65006616
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8HFvQ67006616
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Sep 2018 08:57:36 -0700
+	Mon, 17 Sep 2018 08:57:47 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 08:57:15 -0700
+	14.3.408.0; Mon, 17 Sep 2018 08:57:41 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 00:05:19 +0800
-Message-ID: <22b65bdad6ad9f2684a97768654abe6233dc0f85.1537199591.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Sep 2018 00:05:20 +0800
+Message-ID: <850d56c5aa2a2b19dcecd04b6e9ad5d09ae62a58.1537199591.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
 References: <cover.1537199591.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 10/19] wvstreams: split one dpg package
+Subject: [PATCH 11/19] fontforge: split one dpg package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 15:58:00 -0000
+X-List-Received-Date: Mon, 17 Sep 2018 15:58:06 -0000
 Content-Type: text/plain
 
 Multiple -dbg packages per recipe is not encouraged, and only one is
@@ -44,43 +44,32 @@ requiring.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 14 ++++++--------
- 1 file changed, 6 insertions(+), 8 deletions(-)
+ meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index 293949d..b9f62da 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -36,23 +36,21 @@ LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
+index 481fedf..947d36e 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
+@@ -45,7 +45,9 @@ EOF
+     cd $currdir
+ }
  
- EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
- 
--PACKAGES_prepend = "libuniconf libuniconf-dbg "
--PACKAGES_prepend = "uniconfd uniconfd-dbg "
--PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
--PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
-+PACKAGES_prepend = "libuniconf "
-+PACKAGES_prepend = "uniconfd "
-+PACKAGES_prepend = "libwvstreams-base "
-+PACKAGES_prepend = "libwvstreams-extras "
- PACKAGES_prepend = "${PN}-valgrind "
- 
-+RPROVIDES_${PN}-dbg += "libuniconf-dbg uniconfd-dbg libwvstreams-base-dbg libwvstreams-extras-dbg"
+-PACKAGES =+ "${PN}-python-dbg ${PN}-python"
++PACKAGES =+ "${PN}-python"
 +
- FILES_libuniconf     = "${libdir}/libuniconf.so.*"
--FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
++RPROVIDES_${PN}-dbg += "${PN}-python-dbg"
  
- FILES_uniconfd     = "${sbindir}/uniconfd ${sysconfdir}/uniconf.conf ${localstatedir}/uniconf"
--FILES_uniconfd-dbg = "${sbindir}/.debug/uniconfd"
+ FILES_${PN} += " \
+     ${datadir}/mime \
+@@ -53,7 +55,6 @@ FILES_${PN} += " \
+ "
  
- FILES_libwvstreams-base     = "${libdir}/libwvutils.so.*"
--FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
+ FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR} ${datadir}/${PN}/python"
+-FILES_${PN}-python-dbg = "${PYTHON_SITEPACKAGES_DIR}/.debug"
+ RDEPENDS_${PN}-python = "python"
  
- FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
--FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
- 
- FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
- RDEPENDS_${PN} += "perl"
+ # for e.g kde's oxygen-fonts
 -- 
 2.7.4
 
