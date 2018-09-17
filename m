@@ -1,26 +1,48 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B41879558
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+	[209.85.221.49])
+	by mail.openembedded.org (Postfix) with ESMTP id EAFE17455D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 15:59:21 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8HFwVnc006677
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Sep 2018 08:59:02 -0700
-Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 08:58:46 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 00:05:27 +0800
-Message-ID: <4a8135752cc4b42fb49652ad84145fe60a8418e3.1537199591.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
-References: <cover.1537199591.git.hongxu.jia@windriver.com>
+	Mon, 17 Sep 2018 16:02:17 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id w11-v6so17902275wrc.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Sep 2018 09:02:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=o/AAXhNSALBqVMYZ+MHx70eXcQXzdBhRg/bWFqB52lo=;
+	b=c88vUlMn8jSGQtMDGwDnM40K1awHMZ9fqYTm2f3AfmTK57trtn3JlTC08HMJtUMzCW
+	UZlE2EqRGH0pYIVWJoPyObfKOxayiXsyvHUgLVKxrCqI9ocwnFFbJ4KF2Oz13oJGWjxK
+	wMEX5vL5yw0xmcbMTfMv7MPP+9FtbuggG9zzU8LW+YsfPLhj4y/FXFRVUme+Wj2b72Sc
+	xpM38x5M+fpWA+8JbO8hH/1O4yhsqZreziCw8AJm2yOjrmdeti1VUhNWE52YbfB0AtMB
+	QTEdOtiJd32ZrKyLAOlp4JHn8T8OfgmBO1c78gYvmMFV2aSc27BHghtVrA2ZLG8n96De
+	56Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=o/AAXhNSALBqVMYZ+MHx70eXcQXzdBhRg/bWFqB52lo=;
+	b=PmQTUCEmV+x46/FiMZmYh+v10phz8Q+Wm0PZIUY8iOSe7ex0jZI9sAbZ3dKYLfBLR5
+	pGtjXWmXIWveoNyQp3yesELeB1KnwHa5k114ez9c7tECzAmRm54DzgTYZMSEQJfbdZ7S
+	tkgKT+On65XYpf/mGjvRpGuS5Q4Su/PIHvJrSFBvNFW1b7rR9YNZ1ktvdl8N8oCzmJm4
+	SwDQTRCXgo0JEP9pSRPhdhgjWCoj4nkQ/9/tx2S9Vy3kuW3B/Fu3AJlSKvSJuqWNBGP6
+	Ncet4+4plq5DheGsNr494Nx6UZwnvp0qsIrl+mGVOx+VNNphaxAnQOZ1ZwfY075YE+Ap
+	rPHg==
+X-Gm-Message-State: APzg51Cwm7APwl8TgcWfb7wPh+4IcZUpX4s8ztzd95niPOYrAPdr57yC
+	WcpO8ihV1izQtDm5iwhvs9B+cJRxS18Hs/jOK8c=
+X-Google-Smtp-Source: ANB0VdYX+KyacTLI9cBf6ah1jaM9vtXJGCijrZ8SneG41jP4cLUiksYvvzuv1KEcIfN+7+qDfkjsOEROymXedDQSoX8=
+X-Received: by 2002:a5d:574b:: with SMTP id
+	q11-v6mr19773486wrw.272.1537200138515; 
+	Mon, 17 Sep 2018 09:02:18 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 18/19] pidgin: split one dpg package
+References: <cover.1537199591.git.hongxu.jia@windriver.com>
+In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 17 Sep 2018 18:02:07 +0200
+Message-ID: <CA+chaQdzPyhGSR=2yr6y6OvC8yKMq80nOX=WWnqdgqZkeN4Pow@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 00/19] 19 recipes to split one dpg package only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,52 +55,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 15:59:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 17 Sep 2018 16:02:18 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Multiple -dbg packages per recipe is not encouraged, and only one is
-recommended and the code only works properly in some cases for one.
+Would it make sense to do the same for -dev packages while you're at it? I
+guess that in most cases it will be used in the same recipes.
 
-Add RPROVIDES_${PN}-dbg to be compatiable with previous dbg packages
-requiring.
+On Mon, Sep 17, 2018 at 5:55 PM Hongxu Jia <hongxu.jia@windriver.com> wrote:
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/recipes-support/pidgin/pidgin_2.12.0.bb | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
-
-diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.12.0.bb b/meta-oe/recipes-support/pidgin/pidgin_2.12.0.bb
-index 088f08b..148e4b6 100644
---- a/meta-oe/recipes-support/pidgin/pidgin_2.12.0.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin_2.12.0.bb
-@@ -58,7 +58,9 @@ do_configure_prepend() {
- OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
- OE_LT_RPATH_ALLOW[export]="1"
- 
--PACKAGES =+ "libpurple-dbg libpurple-dev libpurple libgnt-dbg libgnt libgnt-dev finch-dbg finch finch-dev ${PN}-data"
-+PACKAGES =+ "libpurple-dev libpurple libgnt libgnt-dev finch finch-dev ${PN}-data"
-+
-+RPROVIDES_${PN}-dbg += "libpurple-dbg libgnt-dbg finch-dbg"
- 
- LEAD_SONAME = "libpurple.so.0"
- FILES_libpurple     = "${libdir}/libpurple*.so.* ${libdir}/purple-2 ${bindir}/purple-* ${sysconfdir}/gconf/schemas/purple* ${datadir}/purple/ca-certs"
-@@ -69,15 +71,10 @@ FILES_libpurple-dev = "${libdir}/libpurple*.la \
-                        ${libdir}/purple-2/liboscar.so \
-                        ${libdir}/purple-2/libymsg.so \
-                        ${datadir}/aclocal"
--FILES_libpurple-dbg += "${libdir}/.debug/libpurple* \
--                        ${libdir}/purple-2/.debug"
- FILES_libgnt         = "${libdir}/libgnt.so.* ${libdir}/gnt/*.so"
- FILES_libgnt-dev     = "${libdir}/gnt/*.la"
--FILES_libgnt-dbg     = "${libdir}/gnt/.debug"
- FILES_finch          = "${bindir}/finch"
- FILES_finch-dev      = "${libdir}/finch/*.la"
--FILES_finch-dbg      = "${bindir}/.debug/finch \
--                        ${libdir}/finch/.debug"
- 
- FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
-            ${datadir}/applications"
--- 
-2.7.4
-
+> Hi Khem,
+>
+> As RP replied in previously oe-core mailing, one dbg package is
+> recommended, so I tweak them in oe one by one.
+>
+> This pull request is one patch per recipe rather than merge them as
+> a large one, it may add your merging burden, but it is helpful for
+> reviewing
+> and rework any of them without resend all.
+>
+> But if you prefer one patch, I could resend V2.
+>
+> //Hongxu
+> The following changes since commit
+> a06c29be2f5bc204f965ee07298c34232c5c39fc:
+>
+>   klibc: fix build with GCC and -pie for mips, mips64, aarch64 (2018-09-15
+> 07:37:11 -0700)
+>
+> are available in the git repository at:
+>
+>   git://git.openembedded.org/openembedded-core-contrib hongxu/dbg-split
+>
+> http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/dbg-split
+>
+> Hongxu Jia (19):
+>   fuse: split one dpg package only
+>   libtevent: split one dpg package
+>   libtdb: split one dpg package
+>   libtalloc: split one dpg package
+>   isomd5sum: split one dpg package
+>   gnuplot: split one dpg package
+>   scsirastools: split one dpg package
+>   konkretcmpi: split one dpg package
+>   gpsd: split one dpg package
+>   wvstreams: split one dpg package
+>   fontforge: split one dpg package
+>   xerces-c: split one dpg package
+>   v4l-utils: split one dpg package
+>   lmsensors: split one dpg package
+>   dbench: split one dpg package
+>   postgresql: split one dpg package
+>   mariadb: split one dpg package
+>   pidgin: split one dpg package
+>   syslog-ng: split one dpg package
+>
+>  .../recipes-support/fuse/fuse_2.9.8.bb             |  8 +--
+>  .../recipes-support/libtalloc/libtalloc_2.1.14.bb  |  6 +-
+>  .../recipes-support/libtdb/libtdb_1.3.16.bb        |  5 +-
+>  .../recipes-support/libtevent/libtevent_0.9.37.bb  |  5 +-
+>  meta-oe/recipes-benchmark/dbench/dbench_4.0.bb     |  5 +-
+>  meta-oe/recipes-bsp/lm_sensors/lmsensors_3.4.0.bb  | 15 ++---
+>  .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 14 ++--
+>  meta-oe/recipes-dbs/mysql/mariadb.inc              |  9 ++-
+>  meta-oe/recipes-dbs/postgresql/postgresql.inc      | 74
+> ++++++----------------
+>  .../recipes-devtools/xerces-c/xerces-c_3.1.4.bb    |  8 +--
+>  meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb  |  6 +-
+>  .../recipes-extended/isomd5sum/isomd5sum_1.2.3.bb  |  5 +-
+>  .../konkretcmpi/konkretcmpi_0.9.2.bb               |  5 +-
+>  .../scsirastools/scsirastools_1.6.6.bb             |  8 +--
+>  .../fontforge/fontforge_20170731.bb                |  5 +-
+>  .../v4l2apps/v4l-utils_1.12.3.bb                   |  5 +-
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.17.bb       |  6 +-
+>  meta-oe/recipes-support/pidgin/pidgin_2.12.0.bb    |  9 +--
+>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |  4 +-
+>  19 files changed, 81 insertions(+), 121 deletions(-)
+>
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
