@@ -1,23 +1,51 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EA9E77943C
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
+	[209.85.214.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CF7B71AC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 08:17:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w8H8HraV023762
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 17 Sep 2018 13:09:15 +0000 (UTC)
+Received: by mail-pl1-f174.google.com with SMTP id f6-v6so7417405plo.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 01:17:54 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 01:17:53 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 17 Sep 2018 16:17:52 +0800
-Message-ID: <1537172272-368817-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 17 Sep 2018 06:09:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=U4F8my6Xq2x9UT6n1ntcccMjv1Iliwefss4lUrF9+nU=;
+	b=fXAo76dMgyaiZYC2MagZ/knb/QFEcEgV2ZXztAYIS/QAi/NdctDnP/GMUmPE99QVne
+	McQbwwAA7qM4GRUSK0OGZFVdvnUWCkOeesd5ODbYOZ47hiSK/qzcU8zO7QvMGHF7UPz/
+	yD8jsXgvMIYWQmubEaLr2oQD2Y1IkjxRUzogooausjIj/kMZEaC7PDSqqpAVxiI+wehX
+	xO9l3WDJtH4iDqPWqzvTaBfV5jYLh+Hp5sgjnfWLf0gBpyxi3ixcUg/U2dnWbcFuHN1r
+	Wge3c4+U9E+lpXz8OXzRIbPn+ybewE1213ewbd472CLyI+Manm+81KGtNBsUnuMM8R+T
+	GpOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=U4F8my6Xq2x9UT6n1ntcccMjv1Iliwefss4lUrF9+nU=;
+	b=cJQcXtdppESsCwKu5KbQ9P6I2tQ91oqYGF3d8hP05zDu4+IX9pV/5Ki0bXtddMMeqp
+	FcCEYCTiS2jcMpk72Bf174Yp7Z4KKbQqYAgqLdXPh7cM4ksbLZBa247uWVZhdkce7iMy
+	kH0Nb+h7AMxRAvnHdM6BqQE4HDKDvab+xuu2VBViQiytwEL6seDz2xUd4dzhzAdzhgyR
+	romtZvJkcHFiXjXEilzWhXdBAtaC5Sf1MWUpu7pAvy+CD4JJ16OhJfQmCM4nzm+kBgeL
+	ws4YAko2ExG/Fy8T9edsJtzwx522IskRiB3p5bCqOsDVXB4fGJ+QxnfQh62iiwhLjQbv
+	a8sg==
+X-Gm-Message-State: APzg51BwgDqJMIFtfllQu8ozSoT8jEVsU9OKa4jAu4837cU76B1o3B4I
+	DHaTt8jDCEHC6UMZI8StqUvLUxrLJba66nwsqVM=
+X-Google-Smtp-Source: ANB0Vdbcj3n5kQQ4pPMLz2M+ohUZLKT81MP5tvd7uRjkmtT8d2ZIBIf1E6QsQG2VYQ7Aj4GqZ71UtAI3ww5cOuHI9do=
+X-Received: by 2002:a17:902:1c5:: with SMTP id
+	b63-v6mr25121744plb.82.1537189757090; 
+	Mon, 17 Sep 2018 06:09:17 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] syslog-ng: fix segment fault during startup on arm64
+References: <1536948135-11493-1-git-send-email-andrea.adami@gmail.com>
+	<e7e25946-8c75-4cd6-9b1b-3aaa6fdd4a5b@windriver.com>
+	<CAAQYJAutgBtf4bmNagBkAo4ATnbC_P_4B4R31mzM_5bRKyHAxQ@mail.gmail.com>
+	<fae3f605-3c1a-e0cb-209f-5d2aca70e075@windriver.com>
+In-Reply-To: <fae3f605-3c1a-e0cb-209f-5d2aca70e075@windriver.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+Date: Mon, 17 Sep 2018 15:09:04 +0200
+Message-ID: <CAAQYJAs8ucjfYFFzDrzG9mGN8crk1yz_9sOC7-qRG=fNWqfaFw@mail.gmail.com>
+To: hongxu.jia@windriver.com
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH v2] klibc: fix build on i386 with GCC and security flags enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,120 +58,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 08:17:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 17 Sep 2018 13:09:16 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Changqing Li <changqing.li@windriver.com>
+On Sat, Sep 15, 2018 at 1:30 PM Hongxu Jia <hongxu.jia@windriver.com> wrote=
+:
+>
+> On 2018=E5=B9=B409=E6=9C=8815=E6=97=A5 18:58, Andrea Adami wrote:
+> > On Sat, Sep 15, 2018 at 10:15 AM Hongxu Jia <hongxu.jia@windriver.com> =
+wrote:
+> >> On 2018=E5=B9=B409=E6=9C=8815=E6=97=A5 02:02, Andrea Adami wrote:
+> >>> ld fails if distro's security-flags are enabled:
+> >>> Inject the SECURITY_XFLAGS if security_flags.inc was included.
+> >>>
+> >>> Fix on i386: ld: discarded output section: `.got.plt'
+> >>>
+> >>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> >>> ---
+> >>>    meta-initramfs/recipes-devtools/klibc/klibc.inc | 6 +++---
+> >>>    1 file changed, 3 insertions(+), 3 deletions(-)
+> >>>
+> >>> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-i=
+nitramfs/recipes-devtools/klibc/klibc.inc
+> >>> index 3d25e96..837b026 100644
+> >>> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> >>> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> >>> @@ -47,7 +47,8 @@ EXTRA_OEMAKE =3D "'KLIBCARCH=3D${KLIBC_ARCH}' \
+> >>>                    'KLIBCOPTFLAGS=3D${TUNE_CCARGS}' \
+> >>>                     V=3D1 \
+> >>>                    "
+> >>> -EXTRA_OEMAKE +=3D 'EXTRA_KLIBCAFLAGS=3D"-Wa,--noexecstack" EXTRA_KLI=
+BCLDFLAGS=3D"-z noexecstack"'
+> >>> +EXTRA_OEMAKE +=3D "'EXTRA_KLIBCAFLAGS=3D${SECURITY_CFLAGS} -Wa,--noe=
+xecstack' \
+> >>> +                 'EXTRA_KLIBCLDFLAGS=3D${SECURITY_LDFLAGS} -z noexec=
+stack'"
+> >>>
+> >> Is it necessary to pass SECURITY_XFLAGS directly? While including
+> >> security_flags.inc,
+> >> CC will contain SECURITY_CFLAGS and LDFLAGS will contain SECURITY_LDFL=
+AGS.
+> >> Maybe you should make sure  to pass LDFLAGS to EXTRA_KLIBCLDFLAGS to a=
+void
+> >> ldflags qa warning.
+> >>
+> >> [security_flags.inc]
+> >>    58 TARGET_CC_ARCH_append_class-target =3D " ${SECURITY_CFLAGS}"
+> >>    59 TARGET_LDFLAGS_append_class-target =3D " ${SECURITY_LDFLAGS}"
+> >> [security_flags.inc]
+> >>
+> >>>    export FIX_ARMV4_EABI_BX =3D "${FIX_V4BX}"
+> >>>    KLIBCTHUMB =3D "${@['CONFIG_KLIBC_THUMB=3Dn', 'CONFIG_KLIBC_THUMB=
+=3Dy'][(d.getVar('ARM_INSTRUCTION_SET') =3D=3D 'thumb')]}"
+> >>> @@ -74,5 +75,4 @@ KLIBC_ARCH_powerpc =3D "ppc"
+> >>>    KLIBC_ARCH_powerpc64 =3D "ppc64"
+> >>>    THIS_LIBKLIBC =3D "libklibc (=3D ${PV}-${PR})"
+> >>>
+> >>> -SECURITY_CFLAGS =3D "-fno-PIE -no-pie"
+> >>> -SECURITY_LDFLAGS =3D "-no-pie"
+> >>> +SECURITY_LDFLAGS =3D "${@'-z relro -z now -pie' if '${GCCPIE}' else =
+''}"
+> >> The same reason, it is not necessary to test GCCPIE,
+> >>
+> >> and it missed "-Wl,"?, how about directly set SECURITY_STACK_PROTECTOR=
+ =3D ""
+> >>
+> > Hi,
+> > thanks for reviewing.
+> >
+> > It is true the SECURITY_CFLAGS are passed to the compiler.
+> > The problem is, klibc has its own arch makefiles (MCONFIG) and the
+> > linker is called directly, so if you just append the LDFLAGS like
+> > this:
+> >
+> > EXTRA_OEMAKE +=3D "'EXTRA_KLIBCAFLAGS=3D-Wa,--noexecstack' \
+> >                   'EXTRA_KLIBCLDFLAGS=3D${LDFLAGS} -z noexecstack'"
+> >
+> > you get:
+> >
+> >    i586-oe-linux-musl-ld.bfd -m elf_i386 -o usr/kinit/ipconfig/static/i=
+pconfig -W
+> > l,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -z relro -z now -pie -z no=
+execstack u
+> > sr/klibc/arch/i386/crt0.o --start-group  usr/kinit/ipconfig/main.o usr/=
+kinit/ipc
+> > onfig/netdev.o usr/kinit/ipconfig/packet.o usr/kinit/ipconfig/dhcp_prot=
+o.o usr/k
+> > init/ipconfig/bootp_proto.o  usr/klibc/libc.a /tmp/build/tmp-musl/work/=
+i586-oe-l
+> > inux-musl/klibc/2.0.4-r0/recipe-sysroot/usr/lib/i586-oe-linux-musl/*/li=
+bgcc.a --
+> > end-group ; cp -f usr/kinit/ipconfig/static/ipconfig usr/kinit/ipconfig=
+/static/i
+> > pconfig.g ; i586-oe-linux-musl-strip --strip-all -R .comment -R .note -=
+-strip-al
+> > l -R .comment -R .note --strip-all -R .comment -R .note usr/kinit/ipcon=
+fig/stati
+> > c/ipconfig
+> > i586-oe-linux-musl-ld.bfd: unrecognized option '-Wl,-O1'
+> >
+> > Thus I am expliciting the SECURITY_LDFLAGS.
+> >
+> > Note that this patch, injecting the -pie, does now break build for mips=
+,
+> > because the MCONFIG foir mips disables pic.
+> > The immediate fix is to remove -pie for mips (standard behavior).
+>
+> OK, thanks for the explain
+>
+> //Hongxu
 
-service start failed since segment fault on arch arm64,
-syslog-ng have a submodule ivykis, from ivykis V0.42,
-it use pthread_atfork, but for arm64, this symbol is
-not included by libpthread, so cause segment fault.
+Hi,
 
-refer systemd, replace pthread_atfork with __register_atfork
-to fix this problem.
+with a following patch more archs were fixed when building with security fl=
+ags.
+I ended up appending both SECURITY_CFLAGS and SECURITY_LDFLAGS and I
+only have to special-case the mips/mips64 which at the time of klibc
+(10yrs ago) if you read the kernel was expecting pic code in userspace
+but here in klibc I see pic disabled in the makefiles...
+Maybe Khem can test runtime...my only mips is a DTB decoder (well,
+with a bit of motivation I could do that, it's OpenPli).
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- ...ng-fix-segment-fault-during-service-start.patch | 75 ++++++++++++++++++++++
- .../recipes-support/syslog-ng/syslog-ng_3.16.1.bb  |  1 +
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-support/syslog-ng/files/0001-syslog-ng-fix-segment-fault-during-service-start.patch
+Cheers
+Andrea
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/0001-syslog-ng-fix-segment-fault-during-service-start.patch b/meta-oe/recipes-support/syslog-ng/files/0001-syslog-ng-fix-segment-fault-during-service-start.patch
-new file mode 100644
-index 0000000..0fc40be
---- /dev/null
-+++ b/meta-oe/recipes-support/syslog-ng/files/0001-syslog-ng-fix-segment-fault-during-service-start.patch
-@@ -0,0 +1,75 @@
-+From caeccb7bec45f65bc89efa8195b3853368328361 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Mon, 17 Sep 2018 12:49:36 +0800
-+Subject: [PATCH] syslog-ng: fix segment fault during service start on arm64
-+
-+service start failed since segment fault on arch arm64,
-+syslog-ng have a submodule ivykis, from ivykis V0.42,
-+it use pthread_atfork, but for arm64, this symbol is
-+not included by libpthread, so cause segment fault.
-+
-+refer systemd, replace pthread_atfork with __register_atfork
-+to fix this problem.
-+
-+I have create an issue, and this proposal to upstream.
-+https://github.com/buytenh/ivykis/issues/15
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ lib/ivykis/src/pthr.h | 24 ++++++++++++------------
-+ 1 file changed, 12 insertions(+), 12 deletions(-)
-+
-+diff --git a/lib/ivykis/src/pthr.h b/lib/ivykis/src/pthr.h
-+index a41eaf3..72c5190 100644
-+--- a/lib/ivykis/src/pthr.h
-++++ b/lib/ivykis/src/pthr.h
-+@@ -24,6 +24,16 @@
-+ #include <pthread.h>
-+ #include <signal.h>
-+ 
-++#ifdef __GLIBC__
-++/* We use glibc __register_atfork() + __dso_handle directly here, as they are not included in the glibc
-++ * headers. __register_atfork() is mostly equivalent to pthread_atfork(), but doesn't require us to link against
-++ * libpthread, as it is part of glibc anyway. */
-++extern int __register_atfork(void (*prepare) (void), void (*parent) (void), void (*child) (void), void * __dso_handle);
-++extern void* __dso_handle __attribute__ ((__weak__));
-++#else
-++#define __register_atfork(prepare,parent,child,dso) pthread_atfork(prepare,parent,child)
-++#endif
-++
-+ #ifdef HAVE_PRAGMA_WEAK
-+ #pragma weak pthread_create
-+ #endif
-+@@ -36,16 +46,7 @@ static inline int pthreads_available(void)
-+ 
-+ #ifdef HAVE_PRAGMA_WEAK
-+ 
-+-/*
-+- * On Linux, pthread_atfork() is defined in libpthread_nonshared.a,
-+- * a static library, and we want to avoid "#pragma weak" for that
-+- * symbol because that causes it to be undefined even if you link
-+- * libpthread_nonshared.a in explicitly.
-+- */
-+-#ifndef HAVE_LIBPTHREAD_NONSHARED
-+-#pragma weak pthread_atfork
-+-#endif
-+-
-++#pragma weak __register_atfork
-+ #pragma weak pthread_create
-+ #pragma weak pthread_detach
-+ #pragma weak pthread_getspecific
-+@@ -73,8 +74,7 @@ static inline int
-+ pthr_atfork(void (*prepare)(void), void (*parent)(void), void (*child)(void))
-+ {
-+ 	if (pthreads_available())
-+-		return pthread_atfork(prepare, parent, child);
-+-
-++		return __register_atfork(prepare, parent, child, __dso_handle);
-+ 	return ENOSYS;
-+ }
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.16.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.16.1.bb
-index 2fd57fb..b5f42cf 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.16.1.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.16.1.bb
-@@ -9,6 +9,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
-            file://fix-config-libnet.patch \
-            file://fix-invalid-ownership.patch \
-            file://syslog-ng.service-the-syslog-ng-service.patch \
-+           file://0001-syslog-ng-fix-segment-fault-during-service-start.patch \
-            "
- 
- SRC_URI[md5sum] = "72d44ad02c2e9ba0748b3ecd3f15a7ff"
--- 
-2.7.4
 
+>
+> > Cheers
+> > Andrea
+> >
+> >
+> >> //Hongxu
+> >>
+>
 
