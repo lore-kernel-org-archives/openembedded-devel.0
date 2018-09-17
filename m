@@ -1,25 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 19B1A7963C
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 548B4795DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 15:56:43 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w8HFuiB4016069
+	Mon, 17 Sep 2018 15:57:01 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8HFuGNo006597
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Sep 2018 08:56:44 -0700 (PDT)
+	Mon, 17 Sep 2018 08:56:42 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 08:56:43 -0700
+	14.3.408.0; Mon, 17 Sep 2018 08:56:37 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 00:05:15 +0800
-Message-ID: <b299cc536575c6bae7e6817bb12698737548f0a0.1537199591.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Sep 2018 00:05:13 +0800
+Message-ID: <e4963093b3296e046eb17b43b6b39faf0010b279.1537199591.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
 References: <cover.1537199591.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 06/19] gnuplot: split one dpg package
+Subject: [PATCH 04/19] libtalloc: split one dpg package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 15:56:44 -0000
+X-List-Received-Date: Mon, 17 Sep 2018 15:57:01 -0000
 Content-Type: text/plain
 
 Multiple -dbg packages per recipe is not encouraged, and only one is
@@ -43,28 +44,30 @@ requiring.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb
-index 4cc289d..f9fd8ae 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.2.2.bb
-@@ -60,10 +60,12 @@ do_install_append_class-target() {
-     install -m 0644 ${WORKDIR}/gnuplot.png ${D}${datadir}/pixmaps/
- }
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb
+index 89aea20..9a463a6 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.14.bb
+@@ -37,13 +37,13 @@ EXTRA_OECONF += "--disable-rpath \
+                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
+                 "
  
--PACKAGES =+ "${PN}-x11-dbg ${PN}-x11"
-+PACKAGES =+ "${PN}-x11"
+-PACKAGES += "pytalloc pytalloc-dbg pytalloc-dev"
++PACKAGES += "pytalloc pytalloc-dev"
 +
-+RPROVIDES_${PN}-dbg += "${PN}-x11-dbg"
-+
- DESCRIPTION_${PN}-x11 = "X11 display terminal for Gnuplot."
- SECTION_${PN}-x11 = "x11/scientific"
- FILES_${PN}-x11 = "${libexecdir} ${datadir}/applications ${datadir}/pixmaps ${libdir}/X11 "
++RPROVIDES_${PN}-dbg += "pytalloc-dbg"
  
- FILES_${PN} += "${datadir}/texmf"
--FILES_${PN}-x11-dbg += "${libexecdir}/gnuplot/*/.debug"
+ FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
+                   ${libdir}/libpytalloc-util.so.2 \
+                   ${libdir}/libpytalloc-util.so.2.1.1 \
+                  "
+-FILES_pytalloc-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
+-                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
+ FILES_pytalloc-dev = "${libdir}/libpytalloc-util.so"
+ RDEPENDS_pytalloc = "python"
 -- 
 2.7.4
 
