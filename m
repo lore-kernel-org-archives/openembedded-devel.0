@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E4F76795EF
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 60AB6796A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 15:57:47 +0000 (UTC)
+	Mon, 17 Sep 2018 15:57:49 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w8HFvmRQ014339
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w8HFvot4016078
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Sep 2018 08:57:48 -0700 (PDT)
+	Mon, 17 Sep 2018 08:57:50 -0700 (PDT)
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 08:57:47 -0700
+	14.3.408.0; Mon, 17 Sep 2018 08:57:49 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 00:05:21 +0800
-Message-ID: <9b031741bd6629c60a01e5a613b3719ac56b71cd.1537199591.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Sep 2018 00:05:22 +0800
+Message-ID: <5ed8db754e1c9bcc847fef8394964fde46b9e770.1537199591.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
 References: <cover.1537199591.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 12/19] xerces-c: split one dpg package
+Subject: [PATCH 13/19] v4l-utils: split one dpg package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 15:57:48 -0000
+X-List-Received-Date: Mon, 17 Sep 2018 15:57:49 -0000
 Content-Type: text/plain
 
 Multiple -dbg packages per recipe is not encouraged, and only one is
@@ -43,40 +43,32 @@ requiring.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-index 9bc4ea3..caf2661 100644
---- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-+++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-@@ -24,24 +24,20 @@ do_install_prepend () {
- }
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+index 57cfb13..3bcbed8 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+@@ -31,7 +31,9 @@ EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/ud
  
- PACKAGES = "libxerces-c \
--    libxerces-c-dbg \
-     libxerces-c-dev \
-     xerces-c-samples \
--    xerces-c-samples-dbg \
-     libxerces-c-staticdev \
- "
+ VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
  
-+RPROVIDES_${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
+-PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dbg libv4l-dev"
++PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev"
 +
- FILES_libxerces-c = "${libdir}/libxerces-c-3.1.so"
--FILES_libxerces-c-dbg = "${libdir}/.debug \
--    ${prefix}/src/debug \
--"
- FILES_libxerces-c-dev = "${libdir}/lib*.la \
-     ${libdir}/libxerces-c.so \
-     ${libdir}/pkgconfig/xerces-c.pc \
-     ${includedir}/xercesc \
- "
- FILES_xerces-c-samples = "${bindir}/*"
--FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
- FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
++RPROVIDES_${PN}-dbg += "libv4l-dbg"
  
- BBCLASSEXTEND = "native"
+ FILES_media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
+ 
+@@ -46,7 +48,6 @@ FILES_libv4l += "${libdir}/libv4l*${SOLIBS} ${libdir}/libv4l/*.so ${libdir}/libv
+                  ${libdir}/libdvbv5*${SOLIBS} \
+                  ${libdir}/libv4l/*-decomp"
+ 
+-FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
+ FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
+                      ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
+                      ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
 -- 
 2.7.4
 
