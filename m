@@ -1,25 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 60AB6796A5
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 83482795FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 15:57:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w8HFvot4016078
+	Mon, 17 Sep 2018 15:58:00 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8HFvQ65006616
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Sep 2018 08:57:50 -0700 (PDT)
+	Mon, 17 Sep 2018 08:57:36 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 08:57:49 -0700
+	14.3.408.0; Mon, 17 Sep 2018 08:57:15 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 00:05:22 +0800
-Message-ID: <5ed8db754e1c9bcc847fef8394964fde46b9e770.1537199591.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Sep 2018 00:05:19 +0800
+Message-ID: <22b65bdad6ad9f2684a97768654abe6233dc0f85.1537199591.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
 References: <cover.1537199591.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 13/19] v4l-utils: split one dpg package
+Subject: [PATCH 10/19] wvstreams: split one dpg package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 15:57:49 -0000
+X-List-Received-Date: Mon, 17 Sep 2018 15:58:00 -0000
 Content-Type: text/plain
 
 Multiple -dbg packages per recipe is not encouraged, and only one is
@@ -43,32 +44,43 @@ requiring.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
-index 57cfb13..3bcbed8 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
-@@ -31,7 +31,9 @@ EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/ud
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index 293949d..b9f62da 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -36,23 +36,21 @@ LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
  
- VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
+ EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
  
--PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dbg libv4l-dev"
-+PACKAGES =+ "media-ctl ir-keytable rc-keymaps libv4l libv4l-dev"
+-PACKAGES_prepend = "libuniconf libuniconf-dbg "
+-PACKAGES_prepend = "uniconfd uniconfd-dbg "
+-PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
+-PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
++PACKAGES_prepend = "libuniconf "
++PACKAGES_prepend = "uniconfd "
++PACKAGES_prepend = "libwvstreams-base "
++PACKAGES_prepend = "libwvstreams-extras "
+ PACKAGES_prepend = "${PN}-valgrind "
+ 
++RPROVIDES_${PN}-dbg += "libuniconf-dbg uniconfd-dbg libwvstreams-base-dbg libwvstreams-extras-dbg"
 +
-+RPROVIDES_${PN}-dbg += "libv4l-dbg"
+ FILES_libuniconf     = "${libdir}/libuniconf.so.*"
+-FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
  
- FILES_media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
+ FILES_uniconfd     = "${sbindir}/uniconfd ${sysconfdir}/uniconf.conf ${localstatedir}/uniconf"
+-FILES_uniconfd-dbg = "${sbindir}/.debug/uniconfd"
  
-@@ -46,7 +48,6 @@ FILES_libv4l += "${libdir}/libv4l*${SOLIBS} ${libdir}/libv4l/*.so ${libdir}/libv
-                  ${libdir}/libdvbv5*${SOLIBS} \
-                  ${libdir}/libv4l/*-decomp"
+ FILES_libwvstreams-base     = "${libdir}/libwvutils.so.*"
+-FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
  
--FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
- FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
-                      ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
-                      ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
+ FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
+-FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
+ 
+ FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
+ RDEPENDS_${PN} += "perl"
 -- 
 2.7.4
 
