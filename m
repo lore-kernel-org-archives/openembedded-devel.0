@@ -1,25 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 810B3795FA
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B9D679567
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 15:56:04 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w8HFu51P014148
+	Mon, 17 Sep 2018 15:56:23 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8HFtmq8006587
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Sep 2018 08:56:05 -0700 (PDT)
+	Mon, 17 Sep 2018 08:55:58 -0700
 Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Mon, 17 Sep 2018 08:56:04 -0700
+	14.3.408.0; Mon, 17 Sep 2018 08:55:37 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 00:05:11 +0800
-Message-ID: <a02b754de2b528ec88712cdb2cf1f422a08dd6ae.1537199591.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Sep 2018 00:05:10 +0800
+Message-ID: <834ccb2e89f7f797d32d7cd4a4888bc9fe56717e.1537199591.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1537199591.git.hongxu.jia@windriver.com>
 References: <cover.1537199591.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 02/19] libtevent: split one dpg package
+Subject: [PATCH 01/19] fuse: split one dpg package only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 15:56:04 -0000
+X-List-Received-Date: Mon, 17 Sep 2018 15:56:23 -0000
 Content-Type: text/plain
 
 Multiple -dbg packages per recipe is not encouraged, and only one is
@@ -43,24 +44,39 @@ requiring.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-networking/recipes-support/libtevent/libtevent_0.9.37.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.37.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.37.bb
-index ee8b7fd..4df251c 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.9.37.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.37.bb
-@@ -39,7 +39,8 @@ EXTRA_OECONF += "--disable-rpath \
-                  --without-gettext \
-                 "
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb
+index 1815aa5..caa75c7 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.8.bb
+@@ -31,7 +31,9 @@ SYSTEMD_SERVICE_${PN} = ""
  
--PACKAGES += "python-tevent python-tevent-dbg"
-+PACKAGES += "python-tevent"
+ DEPENDS = "gettext-native"
+ 
+-PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
++PACKAGES =+ "fuse-utils libulockmgr libulockmgr-dev"
 +
-+RPROVIDES_${PN}-dbg += "python-tevent-dbg"
++RPROVIDES_${PN}-dbg += "fuse-utils-dbg libulockmgr-dbg"
  
- FILES_python-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
--FILES_python-tevent-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
+ RRECOMMENDS_${PN}_class-target = "kernel-module-fuse libulockmgr fuse-utils"
+ 
+@@ -40,13 +42,11 @@ FILES_${PN}-dev += "${libdir}/libfuse*.la"
+ 
+ FILES_libulockmgr = "${libdir}/libulockmgr.so.*"
+ FILES_libulockmgr-dev += "${libdir}/libulock*.la"
+-FILES_libulockmgr-dbg += "${libdir}/.debug/libulock*"
+ 
+ # Forbid auto-renaming to libfuse-utils
+ FILES_fuse-utils = "${bindir} ${base_sbindir}"
+-FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
+ DEBIAN_NOAUTONAME_fuse-utils = "1"
+-DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
++DEBIAN_NOAUTONAME_${PN}-dbg = "1"
+ 
+ do_configure_prepend() {
+     # Make this explicit so overriding base_sbindir propagates properly.
 -- 
 2.7.4
 
