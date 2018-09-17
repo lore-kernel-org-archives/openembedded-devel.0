@@ -1,44 +1,44 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
-	[209.85.222.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AD5DE71BF2
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C95367016E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 14:39:10 +0000 (UTC)
-Received: by mail-qk1-f174.google.com with SMTP id d131-v6so9078850qke.11
+	Mon, 17 Sep 2018 14:44:35 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id g44-v6so15446628qtb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 07:39:12 -0700 (PDT)
+	Mon, 17 Sep 2018 07:44:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
 	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=uctcmbx/BU1oIiT45kTsmS/t7mI/eKvxW7402qROSHs=;
-	b=ksNgeaBV0RZ1YxnLLgMUlLYSeclaYUbZvcwx1n5ADM51pCa+szkeGnY8nlQ864qdm3
-	GaLdqSwRPzVTScKD6sE5N2CPPlYUCWsf1u2JY6iE5nuAgASS6NK8fnZylEKEZ7kp9TfM
-	QTLxAxoLhqW2kADrxkGhe9XrZoihgV9UXtn4Bkcxh+LyogTpG7yECd3E+CsEz5/HEqHx
-	loYPXsAEr+t3Oat4NFt+602WHQk3iWFS7+NySp1hNDGjrbnoZBProYT+eWhbJFTrFOM9
-	9ho8wF7t9XebP93XlW5peP7bkr1/UndPqxOttIk+0mey+TmLvNCuh6xvYyCuNYR08CIU
-	0OsQ==
-X-Gm-Message-State: APzg51AeK+lV0+UoNLAlVPYzmV1nttRKTWoyHkTxRLG12rEu+y8iJs1u
-	TTLzbu8txzWQiNgkR+eF0zWAkp9V
-X-Google-Smtp-Source: ANB0VdZUUvTdMRPBaqhqk8lSSEF4ugGapRtxToKKk2rLlSySYI1bd4PIi7IaY83gL5kMHLCvSNDp5g==
-X-Received: by 2002:a37:4707:: with SMTP id
-	u7-v6mr17481256qka.229.1537195151540; 
-	Mon, 17 Sep 2018 07:39:11 -0700 (PDT)
+	bh=N0rVImQkRfq+XOXj2zRc104vkyI5UKQaVMw/J1lozXA=;
+	b=rIiEdbR6pUEq/98LQV8WyNnWsEeyLbahIKxAkmkqYcEWC02xzKSaiI6LQ+aBQqu6eg
+	oMgJBa563T8yk/agapYydYbQ2qskDrSFuBw1vrxlcLk9kQM6fzJk5XM+lfW9F/oCnhkC
+	Qq14uSZ8q1I2B0IauOGIG8OI8UZNLzNZFo/p31vNF8fpFhnTJbiOrqEe83S1A/P6dYDH
+	qMovsZPinqXHIkjlfYAKDnixaN87pAbDxaxe6Hg0Derg7k4nQPCLuogyxDXGiu56cb7n
+	Iw67cOXxxzcAAPduSwwPWds4HSWo35pZUa8VjLfU08V4wNl1opFFXDwqrgwAE4UwZiCv
+	9A/Q==
+X-Gm-Message-State: APzg51CQ+cjs8vptGcivV9wemgwRUSF/0Tdim8gybLyEywl+GAzHlOCF
+	quyrXD8mWqsSKc0C1LxFfI0olmzY
+X-Google-Smtp-Source: ANB0VdbNlTB4aCSgCu05QntXAfE5OJEP4VPkM5RS0ndIBsk/65nWmFPh7TlQw2Tt/rXoqVRaY0km9A==
+X-Received: by 2002:ac8:7311:: with SMTP id
+	x17-v6mr17617996qto.204.1537195476576; 
+	Mon, 17 Sep 2018 07:44:36 -0700 (PDT)
 Received: from bluvision ([77.107.218.170]) by smtp.gmail.com with ESMTPSA id
-	z39-v6sm9506995qtg.60.2018.09.17.07.39.10
+	j5-v6sm8910580qtb.34.2018.09.17.07.44.35
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 17 Sep 2018 07:39:10 -0700 (PDT)
-Message-ID: <a61039f1550ab18dd862f99506891423fcf28cd9.camel@andred.net>
+	Mon, 17 Sep 2018 07:44:35 -0700 (PDT)
+Message-ID: <9ebbdc41bb7ebce99e013df00ec5ab9d58c6e4b7.camel@andred.net>
 From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Sep 2018 15:39:09 +0100
-In-Reply-To: <1536343810-87649-2-git-send-email-yevgenyp@pointgrab.com>
+Date: Mon, 17 Sep 2018 15:44:34 +0100
+In-Reply-To: <1536343810-87649-3-git-send-email-yevgenyp@pointgrab.com>
 References: <1536343810-87649-1-git-send-email-yevgenyp@pointgrab.com>
-	<1536343810-87649-2-git-send-email-yevgenyp@pointgrab.com>
+	<1536343810-87649-3-git-send-email-yevgenyp@pointgrab.com>
 User-Agent: Evolution 3.30.0-1 
 Mime-Version: 1.0
-Subject: Re: [meta-java][PATCH 1/3] ca-certificates-java: Fix sysconfdir for -native recipe
+Subject: Re: [meta-java][PATCH 2/3] ca-certificates-java: Don't fail when called via hook on do_rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,64 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 14:39:10 -0000
+X-List-Received-Date: Mon, 17 Sep 2018 14:44:36 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 On Fri, 2018-09-07 at 21:10 +0300, Yevgeny Popovych wrote:
-> When ca-certificates-java-native is built, sysconfdir variable will
-> be set to value that includes WORKDIR.
-
-What is your use-case for a -native version of this?
-
-> Avoid patching source with this value - use sysconfdir_native.
+> It is possible that ca-certificates-java hook will be called via
+> update-ca-certificates hook during do_roofs (the case when D is set
+> and JVM_LIBDIR is not).
+> This is a valid case so don't fail.
 > 
-> Change-Id: I8ac79c3cd5016a8139d9d8c8d58bc2976d0b6fa3
+> Change-Id: I908e2f0acec487c41499543014014e29919bd6ab
 > Signed-off-by: Yevgeny Popovych <yevgenyp@pointgrab.com>
 > ---
->  .../ca-certificates-java/ca-certificates-java_20180516.bb        | 9
-> +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
+>  .../ca-certificates-java/ca-certificates-java.hook.in               | 6
+> +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/recipes-core/ca-certificates-java/ca-certificates-
-> java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-
-> java_20180516.bb
-> index 2db1915..7db5110 100644
-> --- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> +++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
-> @@ -41,9 +41,14 @@ do_patch_append () {
->      bb.build.exec_func('do_fix_sysconfdir', d)
->  }
->  
-> +# sysconfdir will include absolute native sysroot path in -native builds,
-> avoid this
-> +# (see 36.24 of 
-> https://www.yoctoproject.org/docs/2.5/mega-manual/mega-manual.html#faq)
-> +SYSCONFDIR_VALUE_class-target = "${sysconfdir}"
-> +SYSCONFDIR_VALUE_class-native = "${sysconfdir_native}"
-> +
->  do_fix_sysconfdir () {
-> -	sed -e 's|/etc/ssl/certs/java|${sysconfdir}/ssl/certs/java|g' \
-> -	    -i
-> ${S}/src/main/java/org/debian/security/UpdateCertificates.java
-> +    sed -e 's|/etc/ssl/certs/java|${SYSCONFDIR_VALUE}/ssl/certs/java|g' \
-> +        -i ${S}/src/main/java/org/debian/security/UpdateCertificates.java
->  }
->  
+> diff --git a/recipes-core/ca-certificates-java/ca-certificates-java/ca-
+> certificates-java.hook.in b/recipes-core/ca-certificates-java/ca-
+> certificates-java/ca-certificates-java.hook.in
+> index 89c764f..611a4ef 100755
+> --- a/recipes-core/ca-certificates-java/ca-certificates-java/ca-
+> certificates-java.hook.in
+> +++ b/recipes-core/ca-certificates-java/ca-certificates-java/ca-
+> certificates-java.hook.in
+> @@ -14,9 +14,9 @@ jvm_libdir="@@libdir_jvm@@"
+>  if [ -n "${D:-}" ] ; then
+>      # called from postinst as part of image build on host
+>      if [ -z "${JVM_LIBDIR:-}" ] ; then
+> -        # should never happen, this is supposed to be passed in
+> -        echo "$0: no JVM_LIBDIR specified" >&2
+> -        false
+> +        # if JVM_LIBDIR is not present - we were called as a hook
+> +        echo "called as a hook of ca-certificates on do_rootfs, exiting"
+> +        exit 0
 
-No.
-
-It's probably best to remove the BBCLASSEXTEND statement in this recipe
-instead, as it was never tested, and is unlikely to be needed.
-
-The whole idea is to make this independent of the build machine paths. If
-you want a -native version of this, you still need to make sure to point
-this into the yocto sysroot. Otherwise this will try to write to the *build
-machine's* /etc/ directory!
-
-If you really want a -native version, you need to point this into the
-sysroot, and update this dynamically because of sstate usage, too.
-
+I don't understand how silently not creating / updating the Java certificate
+store any more is good? True, there is an issue here, but I'd say that this
+should actually do something useful, not just pretend to have done
+something.
 
 Cheers,
 Andre'
