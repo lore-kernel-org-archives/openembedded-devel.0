@@ -1,21 +1,30 @@
-Return-Path: <max+openembedded@blarg.de>
-Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 3ED7379708
+Return-Path: <hongl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A0D37965C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2018 09:12:54 +0000 (UTC)
-Received: from heron.blarg.de (p3EE2FF12.dip0.t-ipconnect.de [62.226.255.18])
-	(Authenticated sender: max)
-	by swift.blarg.de (Postfix) with ESMTPSA id E966A220510;
-	Tue, 18 Sep 2018 11:12:54 +0200 (CEST)
-From: Max Kellermann <max+openembedded@blarg.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2018 11:12:44 +0200
-Message-Id: <20180918091244.3569-2-max+openembedded@blarg.de>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180918091244.3569-1-max+openembedded@blarg.de>
-References: <20180918091244.3569-1-max+openembedded@blarg.de>
-Cc: Max Kellermann <max.kellermann@gmail.com>
-Subject: [PATCH 2/2] [oe-core] libsolv: make rpm optional
+	Tue, 18 Sep 2018 09:35:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="45056801"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Sep 2018 17:35:27 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 297EB4B41ED3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Sep 2018 17:35:21 +0800 (CST)
+Received: from localhost.local (10.167.225.78) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.408.0; Tue, 18 Sep 2018 17:35:20 +0800
+From: Hong Liu <hongl.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 18 Sep 2018 17:35:19 +0800
+Message-ID: <20180918093521.1113-1-hongl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.14.3
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.78]
+X-yoursite-MailScanner-ID: 297EB4B41ED3.AF49F
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [PATCH] [meta-python][PATCH 1/2] python-cryptography:2.3 -> 2.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,41 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2018 09:12:54 -0000
+X-List-Received-Date: Tue, 18 Sep 2018 09:35:28 -0000
+Content-Type: text/plain
 
-From: Max Kellermann <max.kellermann@gmail.com>
+1.Upgrade python-cryptography from 2.3 to 2.3.1
 
-Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
+2.Upgrade python3-cryptography from 2.3 to 2.3.1
+
+Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
 ---
- meta/recipes-extended/libsolv/libsolv_0.6.35.bb | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ .../python/{python-cryptography_2.3.bb => python-cryptography_2.3.1.bb}   | 0
+ .../python/{python3-cryptography_2.3.bb => python3-cryptography_2.3.1.bb} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cryptography_2.3.bb => python-cryptography_2.3.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography_2.3.bb => python3-cryptography_2.3.1.bb} (100%)
 
-diff --git a/meta/recipes-extended/libsolv/libsolv_0.6.35.bb b/meta/recipes-extended/libsolv/libsolv_0.6.35.bb
-index 0956453022..12dfc5d3a2 100644
---- a/meta/recipes-extended/libsolv/libsolv_0.6.35.bb
-+++ b/meta/recipes-extended/libsolv/libsolv_0.6.35.bb
-@@ -5,7 +5,7 @@ SECTION = "devel"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.BSD;md5=62272bd11c97396d4aaf1c41bc11f7d8"
- 
--DEPENDS = "expat zlib rpm"
-+DEPENDS = "expat zlib"
- 
- SRC_URI = "git://github.com/openSUSE/libsolv.git"
- SRC_URI_append_libc-musl = " file://0001-Add-fallback-fopencookie-implementation.patch \
-@@ -19,7 +19,10 @@ S = "${WORKDIR}/git"
- 
- inherit cmake
- 
--EXTRA_OECMAKE = "-DLIB=${baselib} -DMULTI_SEMANTICS=ON -DENABLE_RPMMD=ON -DENABLE_RPMDB=ON -DENABLE_COMPLEX_DEPS=ON"
-+PACKAGECONFIG ??= "rpm"
-+PACKAGECONFIG[rpm] = "-DENABLE_RPMMD=ON -DENABLE_RPMDB=ON,,rpm"
-+
-+EXTRA_OECMAKE = "-DLIB=${baselib} -DMULTI_SEMANTICS=ON -DENABLE_COMPLEX_DEPS=ON"
- 
- PACKAGES =+ "${PN}-tools ${PN}ext"
- 
+diff --git a/meta-python/recipes-devtools/python/python-cryptography_2.3.bb b/meta-python/recipes-devtools/python/python-cryptography_2.3.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cryptography_2.3.bb
+rename to meta-python/recipes-devtools/python/python-cryptography_2.3.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_2.3.bb b/meta-python/recipes-devtools/python/python3-cryptography_2.3.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cryptography_2.3.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography_2.3.1.bb
 -- 
-2.18.0
+2.7.4
+
+
 
 
