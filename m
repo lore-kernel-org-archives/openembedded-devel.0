@@ -1,21 +1,19 @@
 Return-Path: <max+openembedded@blarg.de>
 Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 700DC795D9
+	by mail.openembedded.org (Postfix) with ESMTP id 6EFDC74599
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 18 Sep 2018 08:35:57 +0000 (UTC)
 Received: from heron.blarg.de (p3EE2FF12.dip0.t-ipconnect.de [62.226.255.18])
 	(Authenticated sender: max)
-	by swift.blarg.de (Postfix) with ESMTPSA id 3297A220524;
-	Tue, 18 Sep 2018 10:26:14 +0200 (CEST)
+	by swift.blarg.de (Postfix) with ESMTPSA id 00556220510;
+	Tue, 18 Sep 2018 10:26:13 +0200 (CEST)
 From: Max Kellermann <max+openembedded@blarg.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2018 10:26:01 +0200
-Message-Id: <20180918082608.1088-2-max+openembedded@blarg.de>
+Date: Tue, 18 Sep 2018 10:26:00 +0200
+Message-Id: <20180918082608.1088-1-max+openembedded@blarg.de>
 X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20180918082608.1088-1-max+openembedded@blarg.de>
-References: <20180918082608.1088-1-max+openembedded@blarg.de>
 Cc: Max Kellermann <max.kellermann@gmail.com>
-Subject: [PATCH 2/8] [meta-oe] vorbis-tools: add PACKAGECONFIG[ogg123]
+Subject: [PATCH 1/8] [meta-oe] devtools/php: remove the failing ${D}/${TMPDIR} code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +30,43 @@ X-List-Received-Date: Tue, 18 Sep 2018 08:35:58 -0000
 
 From: Max Kellermann <max.kellermann@gmail.com>
 
+Appending ${TMPDIR} to ${D} doesn't make any sense, because both are
+absolute paths.  And additionally, the code fails:
+
+ rmdir: failed to remove '/usr/src/oe/tmp-musl/work/core2-64-oe-linux-musl/php/7.1.9-r0/image//usr': Directory not empty
+
 Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
 ---
- .../recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb    | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/php/php.inc | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-index e43cb4032..8e9914b49 100644
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-@@ -8,7 +8,7 @@ SECTION = "multimedia"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 65dfd2d89..120f678d7 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -139,7 +139,6 @@ do_install_append_class-target() {
+     if [ -d ${RECIPE_SYSROOT_NATIVE}${sysconfdir} ];then
+          install -m 0644 ${RECIPE_SYSROOT_NATIVE}${sysconfdir}/pear.conf ${D}${sysconfdir}/
+     fi
+-    rm -rf ${D}/${TMPDIR}
+     rm -rf ${D}/.registry
+     rm -rf ${D}/.channels
+     rm -rf ${D}/.[a-z]*
+@@ -164,14 +163,6 @@ do_install_append_class-target() {
+             ${D}${systemd_unitdir}/system/php-fpm.service
+     fi
  
--DEPENDS = "libogg libvorbis curl libao"
-+DEPENDS = "libogg libvorbis"
- 
- SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
-            file://0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch \
-@@ -20,6 +20,7 @@ SRC_URI[sha256sum] = "a389395baa43f8e5a796c99daf62397e435a7e73531c9f44d9084055a0
- 
- inherit autotools pkgconfig gettext
- 
--PACKAGECONFIG ??= "flac"
-+PACKAGECONFIG ??= "flac ogg123"
- PACKAGECONFIG[flac] = ",--without-flac,flac,libflac"
- PACKAGECONFIG[speex] = ",--without-speex,speex,speex"
-+PACKAGECONFIG[ogg123] = "--enable-ogg123,--disable-ogg123,libao curl"
+-    TMP=`dirname ${D}/${TMPDIR}`
+-    while test ${TMP} != ${D}; do
+-        if [ -d ${TMP} ]; then
+-            rmdir ${TMP}
+-        fi
+-        TMP=`dirname ${TMP}`;
+-    done
+-
+     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
+         install -d ${D}${libdir}/apache2/modules
+         install -d ${D}${sysconfdir}/apache2/modules.d
 -- 
 2.18.0
 
