@@ -1,49 +1,29 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
-	[209.85.128.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 663EF79664
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 007827458B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 23:12:48 +0000 (UTC)
-Received: by mail-wm1-f48.google.com with SMTP id b19-v6so380597wme.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Sep 2018 16:12:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=XFhjK/+MqCBl8jRJZj0f2jdFNFbB3axiOPWoyqIwqak=;
-	b=LCVorhwqQk3IMYcPw1ylssvfyVDVfhI2+uO+A8db8fSnA7a0phIwd9aUDgiBamUiDM
-	yG+hJyYpiNb4B+WzlduragI0i6kfoSuKlLAB6lIcxLChpi0aZxCBt3WANJsSuctzfef2
-	tqF2rZr/l+Wunem3gZkUtQEIlRB00IrE8v2cjIYFszZxnRl6KcT4FfyG21T4XIOkBli9
-	ERQP0BJfEwOOvf59BMMtTZyRh0q9gpt6TmGEVQHI5a2/S/7lQKNSaAa73Pr/raju03cA
-	uMy3ID/mvX9KqwgARxdO2yx5mAPK2eNbDw0KZozWjqZh6MrqnnIoLNlvJprmhZZG2ByS
-	jI/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XFhjK/+MqCBl8jRJZj0f2jdFNFbB3axiOPWoyqIwqak=;
-	b=cbsfmGEupH98b7sfUDhWVZkZYPL4e83M8Rh5+uxKOPRWC9WeLtaC0WHfcxec44DZ4G
-	2YkLMYytijQL5NO1BmLg72p7M3ARX3fk5V4Fz5j0KZDJNzm7tYvtkDfzB7KfXy+9Tj1W
-	Lw7iMeAsru1+igZoYsQgzmOF8tvmvKbu5l6XhyJJKuyBzh/k+HdWMlSGLQNds5+DebE7
-	t/eXGF2p2e84zy2m/04KL4Kfl/zdaVd3xDSMxhkglDzbSWk3Mq/0+3zl1q2N5rMyITAe
-	cBEECJAYiHZ+SfGzUJ38IU67Qnx1tvsAYckPrN/mlPfjCBsSEXOVS6sDSCnjoEGk1XpL
-	mfDQ==
-X-Gm-Message-State: APzg51Dx0iHkUyRD3wKbDwUD+F5p8XfKxOubJiLFsyyjCzivBLuKVyka
-	CDJrjlMdUfL3tAF4wSoXXnt3KtWE
-X-Google-Smtp-Source: ANB0VdaldT8sWytxQrQ9Tgu2tdVVWpQxhPAM7x+PpURf8MbNhTMeOKr5zmdhdZ91N0W7GceibsxRtA==
-X-Received: by 2002:a1c:4857:: with SMTP id
-	v84-v6mr12500744wma.8.1537225968643; 
-	Mon, 17 Sep 2018 16:12:48 -0700 (PDT)
-Received: from localhost.localdomain
-	(host215-117-dynamic.54-82-r.retail.telecomitalia.it.
-	[82.54.117.215]) by smtp.gmail.com with ESMTPSA id
-	d10-v6sm16876357wrv.70.2018.09.17.16.12.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 17 Sep 2018 16:12:47 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Sep 2018 01:12:44 +0200
-Message-Id: <1537225964-3273-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] klibc-utils: remove the two static binaries (kinit and gzip)
+	Tue, 18 Sep 2018 01:41:43 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w8I1fffv019646
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 17 Sep 2018 18:41:41 -0700 (PDT)
+Received: from [128.224.162.202] (128.224.162.202) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
+	Mon, 17 Sep 2018 18:41:40 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
+References: <cover.1537199591.git.hongxu.jia@windriver.com>
+	<CA+chaQdzPyhGSR=2yr6y6OvC8yKMq80nOX=WWnqdgqZkeN4Pow@mail.gmail.com>
+	<362229a8-d5aa-e0eb-a1b6-fa3d71ff68c4@windriver.com>
+	<CALbNGRQNttTSCKZokeJ==i-kyrreQquRK7AE4ezsGY5=DZjLSg@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <72350b64-9160-f1bd-992b-ffbf3c18d5b3@windriver.com>
+Date: Tue, 18 Sep 2018 09:41:38 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRQNttTSCKZokeJ==i-kyrreQquRK7AE4ezsGY5=DZjLSg@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 00/19] 19 recipes to split one dpg package only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,56 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Sep 2018 23:12:48 -0000
+X-List-Received-Date: Tue, 18 Sep 2018 01:41:44 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-The shared utils can be built with security flags enabled.
-This breaks however build of kinit and gzipm both static.
+On 2018年09月18日 02:40, Andreas Müller wrote:
+> You know that this explodes image size - because dbg package RDEPENDS
+> on all non debug packages now - or did I miss something.
+>
+> E.G fontforge: We need all the python-dbg in the iamge now
+>
+> With this images with dbg-packages turn into non usable.
+>
+> Haven't got the point what gets better by doing so
 
-Remove them from this recipe.
+Sorry, I didn't get your point :(
 
-Fix QA Issue:
- 'klibc-utils-gzip/bin/gzip' has relocations in .text [textrel]
- 'klibc-utils-kinit/bin/kinit' has relocations in .text [textrel]
+First, do you mean one dbg package take more image size than sub
+dbg packages? I am afraid the sub dbg package could not work correctly
+(see my comments above)
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/klibc/klibc-utils.inc | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+Especially only one hardlink of separated debug info file in each
+directory (see commits `d4eaf42 package.bbclass: only one hardlink
+of separated debug info file in each directory' in oe-core)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-index 7df33d6..2aac9e6 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils.inc
-@@ -1,16 +1,16 @@
- do_install() {
-     install -d ${D}${base_bindir}
-     install -d ${D}${base_sbindir}
--    # debian packages kinit + kinit.shared but only sh.shared
-     if [ "${KLIBC_UTILS_VARIANT}" = "shared" ]; then
--        install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
-         install -m 755 usr/kinit/kinit.shared ${D}${base_bindir}/kinit.shared
-         install -m 755 usr/dash/sh.shared ${D}${base_bindir}/sh.shared
-     else
-         install -m 755 usr/dash/sh ${D}${base_bindir}/sh
-         install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
-+        install -m 755 usr/gzip/gzip ${D}${base_bindir}
-+        ln -s gzip ${D}${base_bindir}/gunzip
-+        ln -s gzip ${D}${base_bindir}/zcat
-     fi
--    install -m 755 usr/gzip/gzip ${D}${base_bindir}
-     install -m 755 usr/kinit/fstype/${KLIBC_UTILS_VARIANT}/fstype ${D}${base_bindir}
-     install -m 755 usr/kinit/ipconfig/${KLIBC_UTILS_VARIANT}/ipconfig ${D}${base_bindir}
-     install -m 755 usr/kinit/nfsmount/${KLIBC_UTILS_VARIANT}/nfsmount ${D}${base_bindir}
-@@ -44,8 +44,6 @@ do_install() {
-     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/true ${D}${base_bindir}
-     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/umount ${D}${base_bindir}
-     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/uname ${D}${base_bindir}
--    ln -s gzip ${D}${base_bindir}/gunzip
--    ln -s gzip ${D}${base_bindir}/zcat
- }
- 
- EXTRA_KLIBC_DEPS = "${@oe.utils.conditional('KLIBC_UTILS_VARIANT', 'shared', '${THIS_LIBKLIBC}', '', d)}"
--- 
-2.7.4
+Second, does this fix cause dbp package RDEPENDS issue? Or already
+existed issue? If the former, please paste a reproduce steps, if the latter,
+as I mentioned above, RP rethinks to improve debug package dependency
+handling in 2.7 (its too late for 2.6 now.),
+
+//Hongxu
+
+> Andreas
+
 
 
