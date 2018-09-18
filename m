@@ -1,48 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 86FAF79664
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
+	[209.85.222.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 171F27548B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2018 14:39:09 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id t5-v6so1899009qtn.3
+	Tue, 18 Sep 2018 14:43:05 +0000 (UTC)
+Received: by mail-qk1-f174.google.com with SMTP id n3-v6so650850qkn.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Sep 2018 07:39:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=81+TriKFuIPiE3Cv7ansXvGvLML7ixnDOs6Q+oZjjqk=;
-	b=aJLTt6hCdVLITTcWcQuDk8KnpNnxYtZnNKwtNc39h67lfvHxFTZ+31IX+oPf0g8XjN
-	dDG2lg5/HMn8z3SBTEKpfTplrVuT3R/Gq6bxTYxwSVSZO87agZXrp7WRuNt/lhZFu55r
-	Dg8VqGUHms8X1G7IgsUpoeTrZKjeGt8ZISGhg+Oajvh1bN35BbjUwMQHG+M4v63MLZTU
-	RAXSmcrKjXE5XA3cSvIhsuX6AIG5X31kEUf/NBR5Ul0z0GZ8troxt2wf35QKy1HnWd5f
-	68ajtF93HbRqeIUZS+fPXlzj951IHS0ht4nWgh701b8qYjSzijAvcBAD3UquTPATuU5C
-	nXNw==
+	Tue, 18 Sep 2018 07:43:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=81+TriKFuIPiE3Cv7ansXvGvLML7ixnDOs6Q+oZjjqk=;
-	b=VdCs0PS+QVqaWOA9gJFsGG1HhD38St/vx1ha7U5Oav8VYs+8QJPbBmaPeG7GWBzWUT
-	fBW4nYtWrtaPiPSdFX3an0/oFLgn4WWGW4RVM62Ja7g64cRBn/MWD5l8kdIdnBtPzI76
-	MbcMNZ+GVTE6z8+XIbTYSX1o+wR166CLSbk6U40FsT/kQ+QTxiqExHviwi7AXUOd7aXV
-	RgA65NwGv4lGNPZIepGYhzgwjmQ1zy8mmDmJeyYy5TCu7PZVwG681IC9nJJNzhTfBS+r
-	8zEiofmgpgO5OsPWZRyADOQqLrtZM85wcnGR4HAqDaLQzOdPmYDSkI78C8q7vP8XMV+d
-	rNcA==
-X-Gm-Message-State: APzg51D8pRj8Y/3BSaYyrWFrPvW1Gk5W7+hfcBua+a+ZnrDRJ4UeevbE
-	NWSnjSHUkcX6N+PS4KylZqpxB1rrCgeRYfd7LrkBpedq3nk=
-X-Google-Smtp-Source: ANB0VdaPL5seY2wM7fS/GHuzXTuTGld6cGrq0ud61LrjLIab2uZGtPikZmQqXT08wvgqFfBjEdDJsXdWu3vyljuMCsM=
-X-Received: by 2002:ac8:4649:: with SMTP id
-	f9-v6mr21657620qto.34.1537281550155; 
-	Tue, 18 Sep 2018 07:39:10 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7jFzdnitixExbMN7J9nRr3c+YVT9JZhuCKzBDceg+7E=;
+	b=hM/vzPT5mSsj3oo8v+vCr7baL2KML2cChsLSPwb+TogMwQL5M0g+K0vg1F+Ly0mydZ
+	KJ5z+M6t+Ik3rRr6Vo3rYYMVA1AnMC8aSdIrckNCJMEMi+3VfnMi2ZHvj3YltcjIgJtc
+	cZLCMpbBl3ipwCaumUIP0Wv6M3yWmx9bWSWJxCDe+BKz326GvGJ80yNAqDAL+0U36HTj
+	7uF9G2rqbuRD5HfIUS6M/Hg/BEK//fb7fgmd3pNlwiVANrYScNkubB+vjevhWozp3Fs3
+	S3unBfk0aa/bSoPDE9ptx2MDOSYTiJxwlOs/bmVSvnNgZmCCR2DrQxKCOvwar7MlI0OY
+	nwoA==
+X-Gm-Message-State: APzg51BSU//1cbP92IpER7tosPj4HMkLHM9B6auK06sn/2Fc2oeQ/Lg5
+	PLFylp/uzFDntnV+2Q5wJmjwxxoy
+X-Google-Smtp-Source: ANB0VdarlXpC6MImFd96Vqrj+ARSi/MMeuVRzRN0kKOf8XYVR0GRCvqO4YrczXpys5yJpJG5h3T9Cw==
+X-Received: by 2002:a37:4843:: with SMTP id
+	v64-v6mr20767009qka.209.1537281786722; 
+	Tue, 18 Sep 2018 07:43:06 -0700 (PDT)
+Received: from tfsielt31850.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	k15-v6sm13198668qtf.95.2018.09.18.07.43.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Sep 2018 07:43:06 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Sep 2018 15:43:04 +0100
+Message-Id: <20180918144304.26846-1-git@andred.net>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-References: <cover.1537199591.git.hongxu.jia@windriver.com>
-	<9b031741bd6629c60a01e5a613b3719ac56b71cd.1537199591.git.hongxu.jia@windriver.com>
-In-Reply-To: <9b031741bd6629c60a01e5a613b3719ac56b71cd.1537199591.git.hongxu.jia@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Sep 2018 07:38:43 -0700
-Message-ID: <CAMKF1srCou=EG6e+FSu=piH2ZYv5fxHui-SSjRh2a2o_WZiALw@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 12/19] xerces-c: split one dpg package
+Subject: [meta-java][PATCH] openjdk: remove incorrect PROVIDES (java2-vm java2-runtime)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,83 +49,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Sep 2018 14:39:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 18 Sep 2018 14:43:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Sep 17, 2018 at 8:57 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
->
-> Multiple -dbg packages per recipe is not encouraged, and only one is
-> recommended and the code only works properly in some cases for one.
->
-> Add RPROVIDES_${PN}-dbg to be compatiable with previous dbg packages
-> requiring.
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb | 8 ++------
->  1 file changed, 2 insertions(+), 6 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-> index 9bc4ea3..caf2661 100644
-> --- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-> +++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
-> @@ -24,24 +24,20 @@ do_install_prepend () {
->  }
->
->  PACKAGES = "libxerces-c \
-> -    libxerces-c-dbg \
->      libxerces-c-dev \
->      xerces-c-samples \
-> -    xerces-c-samples-dbg \
->      libxerces-c-staticdev \
->  "
->
-> +RPROVIDES_${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
-> +
->  FILES_libxerces-c = "${libdir}/libxerces-c-3.1.so"
-> -FILES_libxerces-c-dbg = "${libdir}/.debug \
-> -    ${prefix}/src/debug \
-> -"
+From: André Draszik <andre.draszik@jci.com>
 
-results in errors
+There are two issues here:
+* PROVIDES is not package specific
+* it doesn't look like the intention is to be able to
+  DEPENDS on java2-vm or java2-runtime anyway
 
-ERROR: xerces-c-3.1.4-r0 do_package: QA Issue: xerces-c:
-Files/directories were installed but not shippe
-  /usr/src
-  /usr/bin/.debug
-  /usr/bin/.debug/StdInParse
-  /usr/bin/.debug/XInclude
-  /usr/bin/.debug/Redirect
-  /usr/bin/.debug/PSVIWriter
-  /usr/bin/.debug/CreateDOMDocument
-  /usr/bin/.debug/MemParse
-  /usr/bin/.debug/PParse
-  /usr/bin/.debug/SAXPrint
-  /usr/bin/.debug/DOMCount
-  /usr/bin/.debug/SAXCount
-  /usr/bin/.debug/SEnumVal
-  /usr/bin/.debug/EnumVal
-  /usr/bin/.debug/SCMPrint
-  /usr/bin/.debug/SAX2Count
-  /usr/bin/.debug/SAX2Print
-  /usr/bin/.debug/DOMPrint
-  /usr/lib/.debug
-  /usr/lib/.debug/libxerces-c-3.1.so
-  /usr/src/debug
-  /usr/src/debug/xerces-c
-  /
+Regarding java2-vm:
+-------------------
+java2-vm was originally used in the OpenJDK 6 & 7 recipes to be able to
+select shark, zero, cacao, or jamvm VMs. OpenJDK-6 is not available any
+more, and OpenJDK-7 has removed support for most of this in commit
+38f4c1365c11 ("openjdk7: remove broken/unsupported VM's")
 
->  FILES_libxerces-c-dev = "${libdir}/lib*.la \
->      ${libdir}/libxerces-c.so \
->      ${libdir}/pkgconfig/xerces-c.pc \
->      ${includedir}/xercesc \
->  "
->  FILES_xerces-c-samples = "${bindir}/*"
-> -FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
->  FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
->
->  BBCLASSEXTEND = "native"
-> --
-> 2.7.4
->
+It is not clear why it was added to the OpenJDK-8 recipe either.
+
+Given OpenJDK-7 has no way of using the VM compiled as part of OpenJDK-8,
+and given that no part of the OpenJDK-8 makes use of the java2-vm part, the
+correct solution here is to actually *remove* the incorrect PROVIDES
+statement for java2-vm completely.
+
+Regarding java2-runtime:
+------------------------
+Again, looking at the other uses of this:
+java2-runtime is a virtual runtime package name, which is provided by
+different *runtime* packages (created by the OpenJDK-7, OpenJDK-8, JamVM, or
+Cacao recipes). Other recipes only ever RDEPEND on java2-runtime. It makes
+no sense for the OpenJDK-8 recipe to PROVIDES java2-runtime given the above.
+
+Remove the incorrect PROVIDES statements.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+
+---
+This applies on top of commit ec5aae3d ("conf: distro: add mejate{,-musl} distributions")
+---
+ recipes-core/openjdk/openjdk-8_172b11.bb | 2 --
+ recipes-core/openjdk/openjre-8_172b11.bb | 2 --
+ 2 files changed, 4 deletions(-)
+
+diff --git a/recipes-core/openjdk/openjdk-8_172b11.bb b/recipes-core/openjdk/openjdk-8_172b11.bb
+index c1c6e1e..08f3a32 100644
+--- a/recipes-core/openjdk/openjdk-8_172b11.bb
++++ b/recipes-core/openjdk/openjdk-8_172b11.bb
+@@ -48,9 +48,7 @@ FILES_${PN}-doc_append = "\
+ FILES_${PN}-source = " ${JDK_HOME}/src.zip "
+ 
+ RPROVIDES_${PN} = "java2-vm"
+-PROVIDES_${PN} = "java2-vm"
+ RPROVIDES_${PN} = "java2-runtime"
+-PROVIDES_${PN} = "java2-runtime"
+ 
+ inherit update-alternatives
+ 
+diff --git a/recipes-core/openjdk/openjre-8_172b11.bb b/recipes-core/openjdk/openjre-8_172b11.bb
+index dd29691..d2e8f31 100644
+--- a/recipes-core/openjdk/openjre-8_172b11.bb
++++ b/recipes-core/openjdk/openjre-8_172b11.bb
+@@ -36,9 +36,7 @@ FILES_${PN}-doc_append = "\
+ "
+ 
+ RPROVIDES_${PN} = "java2-vm"
+-PROVIDES_${PN} = "java2-vm"
+ RPROVIDES_${PN} = "java2-runtime"
+-PROVIDES_${PN} = "java2-runtime"
+ 
+ inherit update-alternatives
+ 
+-- 
+2.19.0
+
 
