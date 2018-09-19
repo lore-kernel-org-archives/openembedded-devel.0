@@ -1,58 +1,44 @@
-Return-Path: <yevgenyp@pointgrab.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 68A0579309
+Return-Path: <patrickvacek@gmail.com>
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+	[209.85.128.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 074AF795AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Sep 2018 09:45:02 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id q127-v6so4407632ljq.11
+	Wed, 19 Sep 2018 09:45:21 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id f21-v6so5510208wmc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Sep 2018 02:45:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pointgrab-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=hNVVRBGXFFX+0vFL4B7brvLd75ZmszO2W6lqN+Sp0zs=;
-	b=vox1ibz3F0iOB7oflg9lgAyYt4IOW41PCYatMZfn/dWbbxSqsYTFXura1iCp5kb5bz
-	gd//0rtBXI/mhQbxqXAUgriau+naOQNFqhdLtEVClepHOBA85W4xkpltUY8uwFTcgfti
-	nfz3A57pbqW+fuzL1FwryPtbfW62tbl7RL5Lao9Rl0VR3TOnIVK7n9Zi6pTULr2PQNue
-	aBRhm8g3R3um9FhENh7XQ0D3gAJAatwq4g+qtI7zjKP9vt2arj3uYgNkszH9ETq3p2/P
-	jtWPUy7/xu70psufdX7RBg06OSQCx8yu7TLIgysR+x2+AAo6dAChMZazNgnr/qccHP7v
-	8uLQ==
+	Wed, 19 Sep 2018 02:45:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=8i7/0HwfrS8qp3UDMR0tAePGqXZeBBFE7kMHxqJeK+8=;
+	b=s9ozhjsHZLN8FXPY2gGI9FTw4jSW/QRU2wub1VC6RaayCPbz7K8NJ5Jja/7eOQHkKP
+	bZKx4BLNxsD3l+wOIA9g3uaKXTl402VLkmfKwKjcL+dkxWs5SZEX+APiyF4IGIjLpmqB
+	nzWQSxSguhKYTob/sbFTR8RU0f9O6cxVz93np68dvGnOUc4YpjerOqp8/pt6zmBfFNnz
+	50t9F/CqqvfM49lw8NkRmemJLlLl7+W6Dzi2MO6Si1VzBiJX/UH9Kd8IR8YHWAZSKvky
+	nk8Tz4+vjyagiw39GcxUdPoTUF2IoiynKiRXYKlw4aHJKmvOuKm545CpwulNWatorer1
+	LGaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=hNVVRBGXFFX+0vFL4B7brvLd75ZmszO2W6lqN+Sp0zs=;
-	b=DvStqp2vBfJQ0XGwjHLzjgL6Z4HD6vGlTe6Q497a3wjHdrkLqq9PkPkmT/kQaHRO7b
-	yuuiN/s45NnQ0zFwkkVbmQM0UmezPuUXRQUeJpOg3XHv05Z+fWhBnkAlkc+CJN9/CnFc
-	CvkIp8myTyFQ2Q9VDa0tXFi521xCW9OvMdAnl19fHCFXfOFSAbi3Vg47Ga2aQEtNOHNW
-	MKCCf8BqOrQSOiYV/t//7advuocLnzPPYWrnEtKF4pdnwKrwqjHgJH67w9Yl+jXWxp44
-	r/64K3+aUsWmJ0i70MNV/L1b2zj5rhRzGVkpmfMoku/OI++2cqUH6jyXWW9hRzmbszqi
-	Fkwg==
-X-Gm-Message-State: APzg51CnEJsKwC1l1czKqiyA2UAJ9CiSz5I+jl6hdjXfAbdXEUprzeSX
-	ITj7/pOUdrufsknf09KEci/lW0eXol4=
-X-Google-Smtp-Source: ANB0VdZnIGEvYscb/pFmptsWl1hNAIzkzKLdVVP1CoH8Ua98+4G3yC+BMj1FuSd9ehNNm5+vn5nBKw==
-X-Received: by 2002:a2e:9ec9:: with SMTP id
-	h9-v6mr15344064ljk.133.1537350302435; 
-	Wed, 19 Sep 2018 02:45:02 -0700 (PDT)
-Received: from [192.168.225.135] ([77.222.132.139])
-	by smtp.gmail.com with ESMTPSA id
-	e30-v6sm3726351ljb.86.2018.09.19.02.45.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 19 Sep 2018 02:45:01 -0700 (PDT)
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	openembedded-devel@lists.openembedded.org
-References: <1536343810-87649-1-git-send-email-yevgenyp@pointgrab.com>
-	<0a5a90088e8a12ec2a3f3083544c545c60edbf94.camel@andred.net>
-From: Yevgeny Popovych <yevgenyp@pointgrab.com>
-Message-ID: <111740ee-7d19-d140-9eeb-9a9448f25048@pointgrab.com>
-Date: Wed, 19 Sep 2018 12:45:00 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=8i7/0HwfrS8qp3UDMR0tAePGqXZeBBFE7kMHxqJeK+8=;
+	b=ArNl/Nl31j69jmYTmlqGMc/ZzLeqP+jBw0ZgxSxid0BFdXJdMSCcAJ8Eb/IZ4UEqMV
+	grNPignQlZQG5KbkzrTLVkAFwC4ibm7HpJKlq/zZKkoTC98KsMZ2dRH4qU3fwjQws0wE
+	M5FDuun/TT0J6bPDndrbdvFIWWzFmpNSxQQjcyf9L3Obcg9Ee/bnKSx76XSV5CU+TfdR
+	iUNYAB0XbiPBWL7FznWhNYHYecqHhvapfQKcFceaqDuErrBAdioNHruho0E6RiBdNVu2
+	kQ9FtukbbPRQs01KpXQj7VJ3lTeYC5t8vdYr25EggvElUafYz4B4UONYOt8ijorCJKcT
+	ROCA==
+X-Gm-Message-State: APzg51CY+b1ORcBvQi4cxPfAdfpfalA1M4k6MTJv76uFD6jdXQsdAyWw
+	foc+9FGnf88JGVus/ZeIbWhxVe3+rHEE62MOtGKcxK5r
+X-Google-Smtp-Source: ANB0VdZzaBPoG/MwrNnZ5wOUJAWoC1WRCsLVgpe5brIilYptRAlzEOhAzCKp8GFpUjaNlTmIsw0C8l7DYkc0N+YrLks=
+X-Received: by 2002:a1c:85cb:: with SMTP id
+	h194-v6mr18302338wmd.54.1537350322291; 
+	Wed, 19 Sep 2018 02:45:22 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <0a5a90088e8a12ec2a3f3083544c545c60edbf94.camel@andred.net>
-Subject: Re: [meta-java][PATCH 0/3] ca-certificates-java: Fix usage as a native tool, do_rootfs failure
+From: Patrick Vacek <patrickvacek@gmail.com>
+Date: Wed, 19 Sep 2018 11:45:10 +0200
+Message-ID: <CAG+wK9k0p_-pEeCcxYpc3RhUvhHkJs5-1vSn1v4TQXq=aLEh2A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-oe][PATCH] openct: Remove apparently unnecessary pkg_postinst.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,95 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2018 09:45:02 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 19 Sep 2018 09:45:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Andre,
+This prevents an error about "Postinstall scriptlets".
+---
+ meta-oe/recipes-support/openct/openct_0.6.20.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-Thanks for the feedback!
-
-
-On 09/17/2018 06:10 PM, André Draszik wrote:
-> On Fri, 2018-09-07 at 21:10 +0300, Yevgeny Popovych wrote:
->> This series fixes several issues with ca-certificates-java:
->> * when used as a native tool
->> * failure on do_rootfs
-> 
-> Can you share complete logs? I'd like to understand the do_rootfs issues you
-> are seeing (I don't see any).
-
-The issue is that during do_rootfs, ca-certificates postinst calls
-ca-certificates-java hook and the hook fails. (didn't save the log, sorry)
-This is what patch #2 tries to fix (ca-certificates-java: Don't fail when called via hook on do_rootfs).
-
-Richard also saw this issue when he tried another patch
-(http://lists.openembedded.org/pipermail/openembedded-devel/2018-August/120066.html).
-Although that doesn't matter IMO, I am using deb `PACKAGE_CLASSES`,
-and Richard supposedly uses ipk (the default one).
-
-> 
->> This doesn't fix all the issues and there is definitely a room for
->> improvement.
-> 
-> What other issues?
-
-At least the use case for the target (the one mentioned below) and
-some postinst issues that may appear (didn't test that).
-
-> 
->> I presume that running it on the target doesn't work - at least
->> ${sysconfdir} is
->> not expanded in the hook.
-> 
-> True.
-> 
->> I also think that will be best to drop create-ca-certificates-java usage
->> in
->> the postinst and let it be called as a hook of ca-certificates. This will
->> allow
->> us to remove some code and simplify both script and recipe.
-> 
-> You can't do that, because ca-certificates could be installed before ca-
-> certificates-java. In which case the hook will not be run.
-
-This can't really happen.
-In OE, all packages are first unpacked and only then, in a separate step, the postinst are run.
-This means that during do_rootfs, ca-certificates will always have the java hook present.
-
-In addition to that, having the empty postinst in ca-certificates-java is desirable
-for target/runtime because on upgrades, the hook should be run by ca-certificates
-and our ca-certificates-java package should do nothing in this case.
-What I mean is that the package should just be a way to deliver the hook.
-
-> 
->>
->> It would be great if others could test their use cases;
->> and clarify them - is create-ca-certificates-java really needed?.
-> 
-> As per above.
-> 
-> Cheers,
-> Andre'
-> 
->>
->> Yevgeny Popovych (3):
->>   ca-certificates-java: Fix sysconfdir for -native recipe
->>   ca-certificates-java: Don't fail when called via hook on do_rootfs
->>   ca-certificates-java: Distinguish between SYSROOT and D
->>
->>  .../ca-certificates-java.hook.in                   | 23 +++++++++++----
->> -------
->>  .../ca-certificates-java_20180516.bb               | 11 ++++++++---
->>  2 files changed, 19 insertions(+), 15 deletions(-)
->>
->> -- 
->> 2.7.4
->>
-> 
-
--- 
-Sincerely,
-Yevgeny Popovych
+diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb
+b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+index 913290cd9..67b7c2975 100644
+--- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
++++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+@@ -88,7 +88,3 @@ do_install () {
+     touch ${D}${localstatedir}/run/openct/status
+     chmod 644 ${D}${localstatedir}/run/openct/status
+ }
+-
+-pkg_postinst_${PN} () {
+-    ln -sf ctapi/libopenctapi.so ${libdir}/libopenctapi.so
+-}
+--
+2.17.1
 
