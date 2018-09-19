@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E37BA74AE1
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 65E46793B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Sep 2018 14:31:38 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id g53-v6so5238758qtg.10
+	Wed, 19 Sep 2018 14:58:57 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id c126-v6so3158231qkd.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Sep 2018 07:31:40 -0700 (PDT)
+	Wed, 19 Sep 2018 07:58:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=YW0KpaO3Oo9sVqABF6wpChwNvVRdOlVgdXFzr7MrpQo=;
-	b=sqohEW95vpmxHfJr9ZwJmaMIJEWaHIm80gtiNBZq9/HpNf20WEhqx4Y+jVxhQY4dK5
-	H1NAclg086UIsmCx7eKvJfDCZMnLxdGv65QDVwlOTghlu3AZIVCevAYwQNIVvnl64F4c
-	4bRkgiY3EUshHsWBb3AJWr0kNGOdf/vP6k2hcBXIuMD8ay1R36FLrTx76bAynajwc5hT
-	DDHAxpgvOwWPBnw7iiNe+jF7WGwEkEfN/6AzAk9h1ZLAUnrXVjYo9AtiqdDDA7iwt+CG
-	OzSY996xqFGrtDIvOzOfMSqEtWe+kxgr0VMQw0Gbh4kRYcJMFG+TKhpbwEjctWUmRlgB
-	7JAA==
+	:cc; bh=9uD23jUmZWd2qp0Hud7mU6xF5GxgqalSw5uOLfnB7Zo=;
+	b=nvyI+342AkesHAGZYMaGtmw5WUK1KhD/l7xMmsQZdgr5pLYvlJPr5bAJGWdhJKpjb6
+	OmBx4Ngh5DIyTzZwQEIN/7UIbOrk/5SNMkouZ+L4oGU6vF++rem2U+fcRVJq+SfgNPtT
+	52mjMzlLy/tebmQJgke+IUC4zm3sgXaW0+dZlx7YKKFoKsfclqeijyfpiybRha3OHk4i
+	YdGie1+WHIWpqRthqX6Ps8xWz55Rl4+++rfdjt0bxzZaV99k4tnjmRI1KcqjbMVF09kq
+	2girGzbkLMGoYasosDfsTRNMrMxVsyWVrTaCdD0iDaOs/s5DRYOeXFBaKeHU0qxPlG+S
+	V2Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=YW0KpaO3Oo9sVqABF6wpChwNvVRdOlVgdXFzr7MrpQo=;
-	b=m24doGrB6iVcHUGczuyOZfiMWwxOFWhYkP6teXeWkMVyQG4HNV6fiEwq6Ir2Lq5JBm
-	Qn5k7azA6hAq1er6YHlM86DjGp/kerEV28wCn652G0VuMUelw7nPTuni9Udw73jJN5+7
-	T/joUZSeBqxa4VPIVKia8LCvZdskdljED7SY5rlenHwroaXFMoGsT9MdRfjLfsz1FKsi
-	zf229t32bznj5HyFGnUJreC3G3JqCqwK5+T/Hm08wkexQoT/evau53tt/o7K58pVz8NH
-	bqNsago0wlKXNNFbmHwzM34n1FCTdKgNM7KO+GGFQu5qJavW2YEjU+aVB3acEPbS10E6
-	H3Dw==
-X-Gm-Message-State: APzg51CiF/JKe3AyWSSYF+vuygGuq2HZ0nBkQo+t6M9KpB+RDsCnTMsL
-	KvUnTQdPkQaXJ3ExmQrhUmei7VGin39P1joSrbv82Ms7
-X-Google-Smtp-Source: ANB0VdajDVw7HYNCRuftzJZfexsuGGePYaJyrwOlToEYIBMD4eugrlZAANs1T5IOTjYANDh59Q0iO5Q6jn2msyy/BYY=
-X-Received: by 2002:a0c:f208:: with SMTP id
-	h8-v6mr24751729qvk.55.1537367499524; 
-	Wed, 19 Sep 2018 07:31:39 -0700 (PDT)
+	bh=9uD23jUmZWd2qp0Hud7mU6xF5GxgqalSw5uOLfnB7Zo=;
+	b=AgIgEbhFraCrTCvC+03YzmxxsGPCg0DsmnPMbURqbLJG7/oqiBeokZIFvOQrldNsHJ
+	CijuUviUKdxjKTmO4VbdDN2rxBer9I/Eof1DQiBjrvBKr3ag6OF7sgu/ywY86Y5/ngY+
+	dA34ezWdj4UDwFvUwCEc4hByOH+1HUctW6VdxSg1mRPqxpLrWz0uwk3cIdV2vmQ8uu07
+	RNJ/692z+gteSaK1o81OZTyo9k6oQus5vvOIKq8m6uQMgdVtKPXr0uqnjugqTo/Ph8rL
+	L7+jeAOjWTA0t1KpFL7S8wXYpqudMNMF9My0FtduPaF83ttT3TjougSDFArNjoKQkGcF
+	hMag==
+X-Gm-Message-State: APzg51DkGR4Q1xJHL93iAQ21U6mVh2iDM3KNHqumnlkAQ8feEr7KWVaI
+	eTQsjJKQ0Z99f7wbsayhMkGyXaLUkY1h6W/sfqg=
+X-Google-Smtp-Source: ANB0VdYIlIqR2MAT7dUl0fybHQ1nt8Y7IYZeyhsMkuRxkKx9Ryh4+2xyySCOMlYfPR1Uidw72/2D4TR2GnrFZN6BXkQ=
+X-Received: by 2002:a37:9904:: with SMTP id
+	b4-v6mr24597536qke.102.1537369137971; 
+	Wed, 19 Sep 2018 07:58:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <87sh25viuj.fsf@rkubodac-desk.ger.corp.intel.com>
-In-Reply-To: <87sh25viuj.fsf@rkubodac-desk.ger.corp.intel.com>
+References: <20180918093521.1113-1-hongl.fnst@cn.fujitsu.com>
+	<20180918093521.1113-2-hongl.fnst@cn.fujitsu.com>
+In-Reply-To: <20180918093521.1113-2-hongl.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Sep 2018 07:31:13 -0700
-Message-ID: <CAMKF1sp=RqqJy4RJLLn0+POqGfw7GOZqb7Fvn_NKktfnZWnXPw@mail.gmail.com>
-To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+Date: Wed, 19 Sep 2018 07:58:31 -0700
+Message-ID: <CAMKF1soScJH3oM9gPf7-n3quWcdvLP8iEVAgKK9L3gfVJG5ziw@mail.gmail.com>
+To: hongl.fnst@cn.fujitsu.com
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] nodejs: no internationalization support
+Subject: Re: [PATCH] [meta-python][PATCH2/2] python-cryptography-vectors: 2.3->2.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,36 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Sep 2018 14:31:39 -0000
+X-List-Received-Date: Wed, 19 Sep 2018 14:58:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Sep 19, 2018 at 4:17 AM Raphael Kubo da Costa
-<raphael.kubo.da.costa@intel.com> wrote:
+ERROR: python3-cryptography-vectors-2.3.1-r0 do_fetch: Fetcher failure
+for URL: 'https://files.pythonhosted.org/packages/source/c/cryptograph
+File: '/mnt/a/oe/downloads/cryptography_vectors-2.3.1.tar.gz' has md5
+checksum 9c8259889ab84b456459fc3fc3d185f4 when
+294d44f32885a6b97d5f9cdd
+File: '/mnt/a/oe/downloads/cryptography_vectors-2.3.1.tar.gz' has
+sha256 checksum
+bf4d9b61dce69c49e830950aa36fad194706463b0b6dfe81425b9e0bc66
+If this change is expected (e.g. you have upgraded to a new version
+without updating the checksums) then you can use these lines within
+the r
+SRC_URI[md5sum] = "9c8259889ab84b456459fc3fc3d185f4"
+SRC_URI[sha256sum] =
+"bf4d9b61dce69c49e830950aa36fad194706463b0b6dfe81425b9e0bc6644d46"
+Otherwise you should retry the download and/or check with upstream to
+determine if the file has become corrupted or otherwise
+On Tue, Sep 18, 2018 at 2:35 AM Hong Liu <hongl.fnst@cn.fujitsu.com> wrote:
 >
-> I originally filed
-> https://github.com/openembedded/meta-openembedded/issues/93 about this
-> but was told it's probably better to discuss it on the list.
+> 1.Upgrade python-cryptography-vectors from 2.3 to 2.3.1
 >
-> The nodejs recipe currently builds node with --without-intl. That means
-> there's no internationalization support. One of the consequences of that
-> is is that the inspector module is not built at all.
+> 2.Upgrade python3-cryptography-vectors from 2.3 to 2.3.1
 >
-
-right, it is there for size reasons. ICU is kind of large and since
-debugger uses it, when we disable ICU debugger is disabled too.
-
-I think we could make it a packageconfig and enable/disable debugger
-support that way if you care to send a patch, I can look into
-integrating it.
-
-> Recent (at least M71 onwards) Chromium releases need the inspector
-> module as part of the build, so I wonder if the recipe can start
-> depending on ICU and pass --with-intl=system-icu to configure.py.
+> Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
+> ---
+>  ...n-cryptography-vectors_2.3.bb => python-cryptography-vectors_2.3.1.bb} | 0
+>  ...-cryptography-vectors_2.3.bb => python3-cryptography-vectors_2.3.1.bb} | 0
+>  2 files changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-cryptography-vectors_2.3.bb => python-cryptography-vectors_2.3.1.bb} (100%)
+>  rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_2.3.bb => python3-cryptography-vectors_2.3.1.bb} (100%)
 >
-> Using --with-intl=system-icu might require checking if the ICU version
-> provided in a branch matches the one Node expects; in the worst case, I
-> guess --with-intl=small-icu should work).
+> diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_2.3.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_2.3.1.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-cryptography-vectors_2.3.bb
+> rename to meta-python/recipes-devtools/python/python-cryptography-vectors_2.3.1.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.3.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.3.1.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_2.3.bb
+> rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_2.3.1.bb
+> --
+> 2.7.4
 >
-> Is there any specific reason why --without-intl is being passed in the
-> first place?
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
