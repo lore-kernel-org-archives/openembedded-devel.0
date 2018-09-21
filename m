@@ -1,48 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 9AA4A7473A
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 738ED74573
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Sep 2018 05:18:50 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id q20-v6so3209750qkc.12
+	Fri, 21 Sep 2018 06:15:52 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w8L6Frpx028343
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Sep 2018 22:18:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=dLQH/b2lyoofZGcdH6vgp9wl5YQKwyqTDgiXdvT02zk=;
-	b=Td1r11YaDSBNn2Z2nhG47nWLEDYj4mgMchcPRK4P1/mLh1m9bKkaX3RzRQFZi/xvF5
-	LwKXljmqkOrOXu8luZklOyM6z+jyOMdH8tMRA+AE82xs2qSKoh7vEYeuzOJEI7XOE3X7
-	M4TeKspBgOpO4q43QeFZVMAGg9aZ5H2cz1wxCUW8SMa60uqvyarY4aJdneSUOTq4DqrM
-	ZZ6EsXhUXC9I9kSVPtBjF4aQcfGeYC6FPwnC0nKdvz/l1qOiFnaOFwumB+YUAcr5IZRE
-	i+pyusZdrtAjwaxpHbsbpB6gth19bZcytBD3XFpAkfbG8w4X4AYAKXgWoZik+5zMc7UZ
-	T3VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=dLQH/b2lyoofZGcdH6vgp9wl5YQKwyqTDgiXdvT02zk=;
-	b=Zwha3/3qxP81Xit7xTlWBo5XoJr4jeFFG/C/3RFylYuKubKWyrfHtV9i6nJnifoSvZ
-	n9sEdW9xcj/fIuuAJGSVrQ6u2v8cAREsJybSULsCToFqNicHxIDZvl+Z7ZU/fQJvkPzo
-	OmAeuZv8P6MtxwhDrzDT0TozUDMxMk99uoeZ82BNWm6VxfEibhDbb0bnNzdkdeBIwkAU
-	vVHDmOoeuUebNTuYgurw38NrV8J5iJ3/2MA9hU0Tra9q1+8g6LJv8pJUzjFKOLsBb+MR
-	R7sf1DnPXQkpLJeLHEj515pAvKa1HJ06lqxT6h59h4T0umrbFuj4Csq2jQ6tjvHi1u1r
-	eAMw==
-X-Gm-Message-State: APzg51AukFW0q+LF89qegT5al5Y8s0I3mBXUn3tEnwB9QXDi5E/tVO8y
-	hz7Pr1RMCltjNcIDprfhRJQLfW3WH59sI1A223Q=
-X-Google-Smtp-Source: ANB0VdZFRZFzwooCnTlU3o62317Ywq42URwRFsj83RcpjeAdF7RCsJIDKSpZ9h/9xUC93rqgRrVEdM/QonEYCLaI1OQ=
-X-Received: by 2002:a37:ac02:: with SMTP id e2-v6mr7540908qkm.2.1537507131086; 
-	Thu, 20 Sep 2018 22:18:51 -0700 (PDT)
+	Thu, 20 Sep 2018 23:15:53 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 20 Sep 2018 23:15:52 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Sep 2018 14:15:51 +0800
+Message-ID: <1537510551-128643-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20180918082608.1088-1-max+openembedded@blarg.de>
-	<20180918082608.1088-6-max+openembedded@blarg.de>
-In-Reply-To: <20180918082608.1088-6-max+openembedded@blarg.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Sep 2018 22:18:25 -0700
-Message-ID: <CAMKF1spppZzWp1A2cuUSKPmiY8MOVmYt8=NfMvP1OiWoSfNpxg@mail.gmail.com>
-To: max+openembedded@blarg.de
-Cc: Max Kellermann <max.kellermann@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 6/8] [meta-oe] mpd: make lots of plugins optional
+Subject: [PATCH][meta-oe] php: Upgrade 7.2.9 -< 7.2.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,108 +30,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2018 05:18:50 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 21 Sep 2018 06:15:52 -0000
+Content-Type: text/plain
 
-On Tue, Sep 18, 2018 at 1:37 AM Max Kellermann
-<max+openembedded@blarg.de> wrote:
->
-> From: Max Kellermann <max.kellermann@gmail.com>
->
-> The new options are enabled by default to avoid breaking existing
-> configurations.
->
-> Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
-> ---
->  .../recipes-multimedia/musicpd/mpd_0.20.21.bb | 44 +++++++++----------
->  1 file changed, 22 insertions(+), 22 deletions(-)
->
-> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> index 67a0c9ff8..b9c6d62d6 100644
-> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> @@ -6,37 +6,15 @@ HOMEPAGE ="http://www.musicpd.org"
->  inherit autotools useradd systemd pkgconfig
->
->  DEPENDS += " \
-> -    alsa-lib \
-> -    libsamplerate0 \
-> -    libsndfile1 \
-> -    libvorbis \
-> -    libogg \
-> -    faad2 \
-> -    ffmpeg \
->      curl \
->      sqlite \
-> -    bzip2 \
->      ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
->      tcp-wrappers \
-> -    openal-soft \
->      yajl \
-> -    jack \
-> -    faad2 \
-> -    flac \
-> -    libao \
-> -    fluidsynth \
-> -    libcdio \
-> -    wavpack \
-> -    libopus \
-> -    mpg123 \
-> -    libmms \
-> -    libmodplug \
->      boost \
->      icu \
->      dbus \
->      expat \
-> -    zlib \
-> -    libupnp \
->  "
->
->  # While this item does not require it, it depends on mpg123 which does
-> @@ -52,12 +30,34 @@ SRC_URI[sha256sum] = "8322764dc265c20f05c8c8fdfdd578b0722e74626bef56fcd8eebfb01a
->  EXTRA_OECONF = "enable_bzip2=yes"
->  EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
->
-> +PACKAGECONFIG ??= "aac alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
-> +
-> +PACKAGECONFIG[aad] = "--enable-aac,--disable-aac,faad2"
-                                      ^^^
-should this be aac ?
+From: Changqing Li <changqing.li@windriver.com>
 
-> +PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
-> +PACKAGECONFIG[ao] = "--enable-ao,--disable-ao,libao"
->  PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
-> +PACKAGECONFIG[bzip2] = "--enable-bzip2,--disable-bzip2,bzip2"
->  PACKAGECONFIG[cdioparanoia] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio-paranoia"
-> +PACKAGECONFIG[ffmpeg] = "--enable-ffmpeg,--disable-ffmpeg,ffmpeg"
-> +PACKAGECONFIG[flac] = "--enable-flac,--disable-flac,flac"
-> +PACKAGECONFIG[fluidsynth] = "--enable-fluidsynth,--disable-fluidsynth,fluidsynth"
->  PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
-> +PACKAGECONFIG[iso9660] = "--enable-iso9660,--disable-iso9660,libcdio"
-> +PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
->  PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
-> +PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
->  PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
-> +PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
-> +PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
-> +PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
->  PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
-> +PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
-> +PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
-> +PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
-> +PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
-> +PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
-> +PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
-> +PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
->
->  do_configure_prepend() {
->      sed -i -e 's|libsystemd-daemon|libsystemd|' ${S}/configure.ac
-> --
-> 2.18.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+1. Upgrade 7.2.9 -> 7.2.10
+2. php 5.x not support valgrind config, so move it to php_7.x.bb
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-oe/recipes-devtools/php/php.inc                         | 1 -
+ meta-oe/recipes-devtools/php/{php_7.2.9.bb => php_7.2.10.bb} | 5 +++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_7.2.9.bb => php_7.2.10.bb} (80%)
+
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 65dfd2d..9eacabe 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -92,7 +92,6 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+ PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
+ PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
+-PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
+ 
+ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+diff --git a/meta-oe/recipes-devtools/php/php_7.2.9.bb b/meta-oe/recipes-devtools/php/php_7.2.10.bb
+similarity index 80%
+rename from meta-oe/recipes-devtools/php/php_7.2.9.bb
+rename to meta-oe/recipes-devtools/php/php_7.2.10.bb
+index a5d5afe..8dc64bb 100644
+--- a/meta-oe/recipes-devtools/php/php_7.2.9.bb
++++ b/meta-oe/recipes-devtools/php/php_7.2.10.bb
+@@ -13,12 +13,13 @@ SRC_URI_append_class-target = " \
+                                 file://0001-opcache-config.m4-enable-opcache.patch \
+                                 "
+ 
+-SRC_URI[md5sum] = "175023bc43fd8f883e60849a02a03b93"
+-SRC_URI[sha256sum] = "e9e3aaa6c317b7fea78246a758b017544366049d2789ad5a44fe9398464c53a8"
++SRC_URI[md5sum] = "0ce8ff615bfb9de7a89bab8d742c11c0"
++SRC_URI[sha256sum] = "01b6129a0921a1636b07da9bc598a876669e45a462cef4b5844fc26862dbda9d"
+ 
+ PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
+                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
+                         ,--without-mysqli --without-pdo-mysql \
+                         ,mysql5"
++PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
+ 
+ FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
+-- 
+2.7.4
+
 
