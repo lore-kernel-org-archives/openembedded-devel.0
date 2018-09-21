@@ -1,48 +1,51 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 30B3A71BB9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 300DF798D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Sep 2018 10:55:21 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id j15-v6so8326222wrt.8
+	Fri, 21 Sep 2018 14:55:03 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id 85-v6so3102636pge.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Sep 2018 03:55:22 -0700 (PDT)
+	Fri, 21 Sep 2018 07:55:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=pzi8A7dvwktoa0NeaR0m8trSJoEo8htPeatqZKSB1DM=;
-	b=JPibFTb5B1jo5UVmpGGNl/NFpzrGJU2ACDUn3erLy33V8O12aC2YiOYvQ1aQfFPvTk
-	0w2UXdIoiFGMl7lkmu8Kr5SuIItZ+iG9lWeKoW8rANPOmpFIATPBP506mwB0jGCMjkBD
-	dEODAAmUDAUwFwylYR7p7TnrV7dwgl76wDAzZOV2ip/TN7z/A+E9QZYXK/QFMXN1vmtC
-	eWc6zpq5CWfzfTnJbULv3r7ppiYSQC7rLvLhGPBl5Pbffw3dTVepyEVLTQJXkCTlDVtD
-	4XHpkbMDgQ4g0LaS2OPuYqrqGMv0ygTQOJxBTQB33kiZ7H9OlC7f9wQgN847I/L/WX4X
-	mzDA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BVlP4FUL2OjdULUBenZIXCCQ56RdAoPvBCje6RE7u7E=;
+	b=DO2peZKSSfXoN4vz/soy1ip5mOOAVRsCPgQKllLT2ouFwLooSuQHWngD0rYyXBl37C
+	JtGOXbGMUdGz36wrAMNpL/dJcz/daa0u54sZ/CKVg1Fv7onCZ8sfuoewLsZjGM0dAHLY
+	N5Nkw2L4IvdrqhpWT3XxpSRqzxSVPbRylm6LILne4htLXW+ROcNgiD9XCZ/XlAk2iBQf
+	s5jBYvfdTrk4ju2SamefiJgq1EudwgpKMM0BTuToPIua/5bRYK5b7DlHbHniyJiMJ1+o
+	THeRqcY7jWs9iNuQD4G5KenZHOYnmtQekGGDEntZ5tadspsW7sFAubUcgWWzDYOdCrQX
+	kBhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pzi8A7dvwktoa0NeaR0m8trSJoEo8htPeatqZKSB1DM=;
-	b=ZwBMRLaf/W7YS3D5rqFf0Ttk7cMfVhLU0C8UwajHvcms7Ps+lYKBWjUTq+ykRCBYKp
-	Elx0VWIAemzy3GlfcmdFZIpBsQKpeCpN6Um4sh7V/rQLgjjgA/KWHdjRt/DTKMZIAe03
-	jLJrZdMAwdr/PbnkvliK/Jf6fVpspy/i67EFYYKFII1XrYV/gwq1q9tACWq4NJwXXbvw
-	o51C0/9jFhx1yftcdRIzRqcjxXrAM/U7hPYbA0XDwen99HK+IH/xKWT5ur/7/Gd+P8RP
-	TQtczzN020R7m4MxyfFbjFE4ySMzHr1hRyyzTsNcz1TkMVMK7H6yKj1V9f1nV/hPiGWu
-	xblQ==
-X-Gm-Message-State: APzg51ACBWkE91mZ7awLKnG+KVxKycJedbmXEGf8CauF42jceLhrXoKN
-	Wxs+8wFNH7od1iduHrmgTklphAdq
-X-Google-Smtp-Source: ANB0VdZd7EfSJuZvIGQJC8Gpr2Gnvd7R9QJyAzQpBMfml6n6LDxU8cvms9f1xtWnnE6gid/ELnUK7A==
-X-Received: by 2002:adf:c98d:: with SMTP id
-	f13-v6mr37533694wrh.148.1537527321599; 
-	Fri, 21 Sep 2018 03:55:21 -0700 (PDT)
-Received: from localhost.localdomain (193.164.125.18.ip.redstone-isp.net.
-	[193.164.125.18]) by smtp.gmail.com with ESMTPSA id
-	v192-v6sm4786299wmf.40.2018.09.21.03.55.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 21 Sep 2018 03:55:21 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BVlP4FUL2OjdULUBenZIXCCQ56RdAoPvBCje6RE7u7E=;
+	b=JG/ourbiawLvxgiaQ7PTe5srFwC9L8lAZe1BUMe8y2TQUGdnSdHfGI1kiKNelLZPoA
+	SSCf4ec3OxZ94MwPA23g8+R0BBXe1szrCn2YAR/VTyKx0GJOWRUQYoeq+MpX0hiQPnrd
+	1KanWZefQc4ECOGL2Gkq7ntVCwQ/zRpIZL2liuab3Q8Wv6mybVd6mhiwTRMW9DHOshdi
+	+zYJ26TcFl2Xxi633+OCI6C/K1in6DS/zk0zdSkMzsSK8yTgbL2uagJDNXbDMaj6w0uj
+	0fXY6cs6PHN5STZ8sWq2mH9yI2CAvespYz2RBgh+aQbCwTDcpUxYsSyd//e/72080TwU
+	ok8w==
+X-Gm-Message-State: APzg51ArZoOeit4B9PLszO6cLxVXbb7FVndEzJ7zN/ZGKPgozLJDUAHf
+	gcgZbCORloGduase6YWNRJEnSowK7Qc=
+X-Google-Smtp-Source: ANB0VdYzIQgszPezco5e9ymoo+m5zby+CcpAdrzJy3p/8SO0WrCTIIpAcPNegliBsr0bHME1DZUmIA==
+X-Received: by 2002:a62:398c:: with SMTP id
+	u12-v6mr47531540pfj.9.1537541703667; 
+	Fri, 21 Sep 2018 07:55:03 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::b1b1])
+	by smtp.gmail.com with ESMTPSA id
+	u13-v6sm36723052pfn.59.2018.09.21.07.55.02
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 21 Sep 2018 07:55:02 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Sep 2018 10:55:17 +0000
-Message-Id: <1537527318-7762-1-git-send-email-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] lvm2: Add RDEPEND on lvm2 to lvm2-udevrules
+Date: Fri, 21 Sep 2018 07:54:54 -0700
+Message-Id: <20180921145454.11843-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] libldb: Add samba to rdeps for pyldb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Sep 2018 10:55:21 -0000
+X-List-Received-Date: Fri, 21 Sep 2018 14:55:03 -0000
+Content-Transfer-Encoding: 8bit
 
-Some of the rules installed as part of lvm2-udevrules need to run dmsetup,
-so add the dependency on lvm2 in order to ensure these can execute
-correctly.
+Fixes
+ERROR: QA Issue: pyldb rdepends on samba, but it isn't a build
+dependency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
 
-This fixes cryptsetup hanging when creating volumes.
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+ meta-networking/recipes-support/libldb/libldb_1.4.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
-index 9da0f5ec9661..7bd7b09d8f78 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
-@@ -50,6 +50,7 @@ FILES_${PN}-scripts = " \
- # Specified explicitly for the udev rules, just in case that it does not get picked
- # up automatically:
- FILES_${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
-+RDEPENDS_${PN}-udevrules = "${PN}"
- RDEPENDS_${PN}_append_class-target = " libdevmapper"
- RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
+diff --git a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
+index ca152d9e07..99e62f66bb 100644
+--- a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
++++ b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
  
+ DEPENDS += "libtdb libtalloc libtevent popt"
+-RDEPENDS_pyldb += "python"
++RDEPENDS_pyldb += "python samba"
+ 
+ SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+            file://do-not-import-target-module-while-cross-compile.patch \
 -- 
-2.7.4
+2.19.0
 
 
