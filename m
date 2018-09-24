@@ -1,22 +1,20 @@
 Return-Path: <max+openembedded@blarg.de>
 Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BC7D6093A
+	by mail.openembedded.org (Postfix) with ESMTP id 1CC8C78E49
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Sep 2018 11:06:45 +0000 (UTC)
+	Mon, 24 Sep 2018 11:06:44 +0000 (UTC)
 Received: from heron.blarg.de (p5DE2B75B.dip0.t-ipconnect.de [93.226.183.91])
 	(Authenticated sender: max)
-	by swift.blarg.de (Postfix) with ESMTPSA id CCBC12209BA;
+	by swift.blarg.de (Postfix) with ESMTPSA id 9B07022051C;
 	Mon, 24 Sep 2018 13:06:45 +0200 (CEST)
 From: Max Kellermann <max+openembedded@blarg.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Sep 2018 13:06:29 +0200
-Message-Id: <20180924110634.5059-2-max+openembedded@blarg.de>
+Date: Mon, 24 Sep 2018 13:06:28 +0200
+Message-Id: <20180924110634.5059-1-max+openembedded@blarg.de>
 X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20180924110634.5059-1-max+openembedded@blarg.de>
-References: <20180924110634.5059-1-max+openembedded@blarg.de>
 MIME-Version: 1.0
 Cc: Max Kellermann <max.kellermann@gmail.com>
-Subject: [PATCH v4 2/7] mpc: new recipe
+Subject: [PATCH v4 1/7] libmpdclient: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,32 +34,35 @@ From: Max Kellermann <max.kellermann@gmail.com>
 
 Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
 ---
- .../recipes-multimedia/musicpd/mpc_0.30.bb       | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpc_0.30.bb
+ .../musicpd/libmpdclient_2.15.bb              | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpc_0.30.bb b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.30.bb
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb
 new file mode 100644
-index 000000000..6fac5b2e7
+index 000000000..c78344c66
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpc_0.30.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "A minimalist command line interface to the Music Player Daemon"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+HOMEPAGE = "https://www.musicpd.org/clients/mpc/"
++++ b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "C client library for the Music Player Daemon"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=06b9dfd2f197dc514d8ef06549684b77"
++HOMEPAGE = "https://www.musicpd.org/libs/libmpdclient/"
 +
 +inherit meson
 +
-+DEPENDS += " \
-+    libmpdclient \
-+"
-+
 +SRC_URI = " \
-+    git://github.com/MusicPlayerDaemon/mpc \
++    git://github.com/MusicPlayerDaemon/libmpdclient \
 +"
-+SRCREV = "6fc4e639152daeebb19e0fdfb277252acc734fc5"
++SRCREV = "7754ffdfb9371cd398371cb2670a54e9e1e623e2"
 +S = "${WORKDIR}/git"
++
++do_install_append() {
++    # libmpdclient's Vala bindings are outdated and unmaintained; it
++    # is likely that nobody will ever use them, so let's not install
++    # them
++    rm -rf ${D}${datadir}/vala
++}
 -- 
 2.19.0
 
