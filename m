@@ -1,47 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DAC6579448
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+	[209.85.208.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 386D378EE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Sep 2018 13:17:08 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id i10-v6so4518568qtp.0
+	Mon, 24 Sep 2018 10:05:13 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id l19-v6so3184016ljb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Sep 2018 06:17:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=PnWOSs4ckv291wrZ98DDLdnlyC0DslOruoF+JlSy+0E=;
-	b=Xmr0iUBboeumCBWbx9lzEz9PYSgSjw1ITHVzy7Ni57NJo6SltKiUA+UfR9P93TDifd
-	1s1YiN+pdkzYtN1aoi56yMGg7ZHInmSwQq2A7ZSNyZRu7bWKJ0FdRntchwoBfDiYuGvR
-	VIOi6IFZjmQeiDo+i+XQtPC2ZGp+rzmYSCcG4RkF61L7KWOZ3vnmyTiiIqeTVvKyGUp6
-	Uxt8etu+Pih8WK1ts6EEn1bj2ZM/B0ohXC3b0q0oafUMTb4GN5AkxCWoPv2VlOBlOomI
-	QXTZyeTy8sIOEOKSlBQsEKuzdSy08A78la4tPhVUPgsC8Vd1+VqTXo2osd0X4evYijXt
-	il3Q==
+	Mon, 24 Sep 2018 03:05:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=QyGOahtbHyJXTAgEr5ad4OLOBL4vzWxvWgEyxvPQzxc=;
+	b=GLdpal6PrSFiPgtk3UYNXSq4tySTkEIsjvhr6E8KCTgqYbm+ci1aHsyaZxQn5EbRuQ
+	xlwRb/Zxc8Ro9gyVvNS4VuVsqtxE7whJZ1vWNzE1gNx1zLEbIYS59GUpMgxCSB5X8PWh
+	3GGqShJzMho8sFq7dC6Tg6dzP77ETnylfxons=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=PnWOSs4ckv291wrZ98DDLdnlyC0DslOruoF+JlSy+0E=;
-	b=NAjNiMxdzaBRI26zUvgPdqRGUV+C44mzYZPSjQftYmWFwHDW6HnCQdLwMOgWYO8hMf
-	EAX3CsQHbrwXqVjZBwSMTL0Bn+kcYwBt2hDNxqsz46CX6GwmWOMxT0j4uMK2uTj/DCPU
-	KJsP9T1sre5XhTXAxofKHA0PHXmUlEzSCaQJIvK7btM80zcJIqOyfb+QCxknQfbzNaIg
-	nuYdx3QOAjUw1LhTK3Lc4aORHMfzKx+9hgqY0liRkz/Eb4xGPrTsFJlsuVdhkn4f4tf8
-	oCkDq/bjGtig5MDnvg2o4IKbZs11v2t8VCNDLpH0OA2EeZEXKsOvMhQ94nyFUyKciXny
-	nZoA==
-X-Gm-Message-State: ABuFfohrLVhzXjIy6vnPSu4Wbzt4tQyM9vfOO3Yh249qlw7MhpdeUtl3
-	9aqUeFniFgcEIeINNJVLbeBJ/LN5fKvLQ0m9lq4LFj7BsWI=
-X-Google-Smtp-Source: ACcGV61ixc1Oqx24v8xLK5qOoNJFT0/rTo5B/ofJRHXOJ2eKAR3+Dxlqwc6ZPs/qOTT+PikLZys2gD6sMCg124o3kQY=
-X-Received: by 2002:a0c:f94e:: with SMTP id
-	i14-v6mr1420334qvo.50.1537622229527; 
-	Sat, 22 Sep 2018 06:17:09 -0700 (PDT)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=QyGOahtbHyJXTAgEr5ad4OLOBL4vzWxvWgEyxvPQzxc=;
+	b=Dk3S+wMjXf7U1nqsI9B84K45FsLd/2b/eTi28oWueafzyqQ/oH4/Ob+1MzNgqKxzrC
+	dVjpK2D9cdZy4ImjAlaZM/wgtpz1rLw3lL6vE6qvL2p7asEllI69sCUtvE/JpiEajLh5
+	SD19peD1PfTpj3UjJ6LfVSSfI5HbFHfoIrVQyKN3+sixYa+9cxXLutSQ4yWy7WEnoS14
+	omyTgX6LMhEhIYSg7jNSInCEA3GC0Ek6bK/uyx/ePLODIK6rfd1BK8cE74KJNd4rlYp7
+	gjxOsKr9XGAu/4seyPS6pskxdPppqcy6pvJpawn/NwJ3UvAE6+81uTgkYSg6vdraIbMP
+	+WBw==
+X-Gm-Message-State: ABuFfog+A4sXU0tisa3/jXbzfbX05L/JIhdQ+bI37lzOqpDVXcCFKh7Y
+	8QpbLmji2k7fT6hK4submr5n8msBIAQ3u2H+FonJRw==
+X-Google-Smtp-Source: ACcGV62CuWtmlvKtf+QqlvwSNayUF0fOpua8tJi4hLqzDSKmniVgYg2QjGSaTtFAeI0XChlsaYZ94faWjffxZIBnnQY=
+X-Received: by 2002:a2e:4c09:: with SMTP id z9-v6mr8493816lja.19.1537783513709;
+	Mon, 24 Sep 2018 03:05:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <1537510551-128643-1-git-send-email-changqing.li@windriver.com>
-In-Reply-To: <1537510551-128643-1-git-send-email-changqing.li@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 22 Sep 2018 06:16:43 -0700
-Message-ID: <CAMKF1spt0HYHxVTTGgerYxR6LgqbhDx4Jeqfd0MbMpuzmtbB0A@mail.gmail.com>
-To: Changqing Li <changqing.li@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] php: Upgrade 7.2.9 -< 7.2.10
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Mon, 24 Sep 2018 12:05:02 +0200
+Message-ID: <CAP71Wjxwv3i2=UtbzNai79h-f83xcL6G1R8+kY-C-jA==VFy9Q@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>, 
+	Richard Purdie <richard.purdie@linuxfoundation.org>, 
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: meta-oe and yocto-check-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,65 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Sep 2018 13:17:09 -0000
+X-List-Received-Date: Mon, 24 Sep 2018 10:05:13 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-http://errors.yoctoproject.org/Errors/Details/193970/
-On Thu, Sep 20, 2018 at 11:16 PM <changqing.li@windriver.com> wrote:
->
-> From: Changqing Li <changqing.li@windriver.com>
->
-> 1. Upgrade 7.2.9 -> 7.2.10
-> 2. php 5.x not support valgrind config, so move it to php_7.x.bb
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ---
->  meta-oe/recipes-devtools/php/php.inc                         | 1 -
->  meta-oe/recipes-devtools/php/{php_7.2.9.bb => php_7.2.10.bb} | 5 +++--
->  2 files changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-devtools/php/{php_7.2.9.bb => php_7.2.10.bb} (80%)
->
-> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-> index 65dfd2d..9eacabe 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
-> @@ -92,7 +92,6 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
->  PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
->  PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
->  PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
-> -PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
->
->  export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
->  export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
-> diff --git a/meta-oe/recipes-devtools/php/php_7.2.9.bb b/meta-oe/recipes-devtools/php/php_7.2.10.bb
-> similarity index 80%
-> rename from meta-oe/recipes-devtools/php/php_7.2.9.bb
-> rename to meta-oe/recipes-devtools/php/php_7.2.10.bb
-> index a5d5afe..8dc64bb 100644
-> --- a/meta-oe/recipes-devtools/php/php_7.2.9.bb
-> +++ b/meta-oe/recipes-devtools/php/php_7.2.10.bb
-> @@ -13,12 +13,13 @@ SRC_URI_append_class-target = " \
->                                  file://0001-opcache-config.m4-enable-opcache.patch \
->                                  "
->
-> -SRC_URI[md5sum] = "175023bc43fd8f883e60849a02a03b93"
-> -SRC_URI[sha256sum] = "e9e3aaa6c317b7fea78246a758b017544366049d2789ad5a44fe9398464c53a8"
-> +SRC_URI[md5sum] = "0ce8ff615bfb9de7a89bab8d742c11c0"
-> +SRC_URI[sha256sum] = "01b6129a0921a1636b07da9bc598a876669e45a462cef4b5844fc26862dbda9d"
->
->  PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
->                          --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
->                          ,--without-mysqli --without-pdo-mysql \
->                          ,mysql5"
-> +PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
->
->  FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+hi Armin, Paul, Richard,
+
+I was looking at getting the compliance report for meta-oe (sumo
+branch), and I have found a few issues.
+
+* in meta-openembedded/sumo, grpc is in meta-oe layer, while it
+depends on meta-networking (c-ares). It was fixes in master, with
+251878e8b6b9 (grpc: move it from oe to networking layer), so I think
+this fix needs to be backported to sumo as well if we want the YP 2.0
+compliance script to even work. If agreed, once merged, please let me
+know so that I can try again to generate a compliance report.
+
+* in order to run the compliance report, i locally added
+networking-layer in meta-oe/conf/layer.conf, and it creates a
+dependency loop since meta-oe <-> meta-networking. I found out that
+yocto-check-layer doesn't like that too much, and brutally fails. The
+following patch makes yocto-check-layer work again even with
+dependency loop. I am going to do a few more tests and send that over
+as a patch.
+
+diff --git a/scripts/lib/checklayer/__init__.py
+b/scripts/lib/checklayer/__init__.py
+index 2618416fab..0cc9bf3b6d 100644
+--- a/scripts/lib/checklayer/__init__.py
++++ b/scripts/lib/checklayer/__init__.py
+@@ -151,11 +151,21 @@ def add_layer_dependencies(bblayersconf, layer,
+layers, logger):
+         logger.debug('Processing dependencies %s for layer %s.' % \
+                     (depends, layer['name']))
+
++        # To avoid never ending recursion, we keep track of layers while
++        # they are being processed in this 'static' attribute.
++        if not hasattr(recurse_dependencies, "layers"):
++            recurse_dependencies.layers = []
++
+         for depend in depends.split():
+             # core (oe-core) is suppose to be provided
+             if depend == 'core':
+                 continue
+
++            if depend in recurse_dependencies.layers:
++                continue
++
++            recurse_dependencies.layers.append(depend)
++
+             layer_depend = _find_layer_depends(depend, layers)
+             if not layer_depend:
+                 logger.error('Layer %s depends on %s and isn\'t found.' % \
+
+
+cheers
+nico
 
