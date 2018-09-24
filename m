@@ -1,31 +1,50 @@
-Return-Path: <okaya@kernel.org>
-X-Greylist: delayed 551 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 24 Sep 2018 19:30:14 UTC
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B350793B7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AECD9793F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Sep 2018 19:30:14 +0000 (UTC)
-Received: from
-	sinanubuntu1604.mkjiurmyylmellclgttazegk5f.bx.internal.cloudapp.net
-	(unknown [40.117.60.217])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 68AC820874;
-	Mon, 24 Sep 2018 19:21:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1537816864;
-	bh=HIQlKs1i4/G1wfvdqptp932f4SnI9HH/d2/Xqk6nOyU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=kxY6wtGbcx5TUfiJEZrfpIeV+x1fNptHCj2GkkrzAP+3nVh0Yb9ZyhaQDup+IaJKy
-	6rU88by0iw7hqvv7oLUkIKJp4uSS8NlN7E1N7laAtbdciXA0u3LL4amQP0iNHWfr9k
-	wqzb4GaE+uyE1y5DgM2rZxowtnSKMID5poSSyk8g=
-From: Sinan Kaya <okaya@kernel.org>
+	Mon, 24 Sep 2018 20:14:55 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id p12-v6so9565701pfh.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Sep 2018 13:14:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4tCg1YA+l9KFGn2pEpTwz6AlrK5jgM9r6adGC6UELKk=;
+	b=EMyH6nyFG1jaU1Ne7j+u424RM82b+r9D/3hFt0TLlf///hBpfrM0AGTSRRX+2SQujS
+	vuDhJykNvLqvR37ZFhLNv6EHj/R6uNvcKrFln7+E5LWTcD2fbwmFtWkuCpkAyGEuvX7x
+	xdCrsDuPHPm1uUXqjTwGda1CUciwA9A77ODWEj002beIcbFN7OdfvuAvo+qV0FQXR8gA
+	V+DML0CHJpfLIympqrTIUx3qf/pQ859kStqiA2n0RiIh4Qo2K3T3k4SWwfvObMJvSWrl
+	dByVu6da/rzuePJdECex9y4KIkcX14O47XcKVlLv9DkmSjslzVuQCeHavRxnQDUigdIU
+	XIzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4tCg1YA+l9KFGn2pEpTwz6AlrK5jgM9r6adGC6UELKk=;
+	b=ij1On7ifMA+9/fSWp8c0ZXczTljUJ4wjd5eiWRkVk32nB9slSol8e10HCRM+/e7vGQ
+	DTjSKG/RMkJZJrjmfBAPUZ7Tx+gaPgjxIhqX//Zq3KauResGVGgCF0Eoy8442oIpNaVq
+	o7aNS1GPXWaZV8gwXRFHL7KS4UqUn4Dd7cGbhanehYGyTUq9T9IuzYvDR05/lqjHRiZx
+	WyF92azj982VGuO/fmQGCjYbuBipen7Imyin1+J596UUcjiFtCUAKFj1tmv9vCWnbhq3
+	M7AC3RgGoGF6KFzmuDF1PE53d+5TSFofFJlYtlj5YHKM7qVzuMVauwcxEQ5fw00P3OSC
+	/iIA==
+X-Gm-Message-State: ABuFfohzTufJkaZmSHSHSu/bpRNMNV5cJRRfbJO3RE80b/JLE0FwRiUl
+	KSwzq+1d5kq4rMOQ7+zVygtmAkAI
+X-Google-Smtp-Source: ACcGV6358yezT8YYNnIxo+IrI9Bm48fVXmSkZvRhu4Ngt9IrHQBnFlIpaRekByosg/Vt5emhGzrRKA==
+X-Received: by 2002:a63:d309:: with SMTP id b9-v6mr331126pgg.163.1537820096315;
+	Mon, 24 Sep 2018 13:14:56 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::b1b1])
+	by smtp.gmail.com with ESMTPSA id
+	s195-v6sm176398pgs.76.2018.09.24.13.14.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Sep 2018 13:14:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Sep 2018 19:21:02 +0000
-Message-Id: <20180924192102.25124-1-okaya@kernel.org>
+Date: Mon, 24 Sep 2018 13:14:46 -0700
+Message-Id: <20180924201447.2360-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-Subject: [sumo] [meta-networking] [PATCH v1] dnsmasq: CVE-2017-15107
+Subject: [meta-networking][PATCH 1/2] tsocks: Add -lssp_nonshared to LIBS explicitly on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,305 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2018 19:30:15 -0000
+X-List-Received-Date: Mon, 24 Sep 2018 20:14:55 -0000
 Content-Transfer-Encoding: 8bit
 
-* CVE-2017-15107
-A vulnerability was found in Dnsmasq's implementation of DNSSEC.
-Wildcard synthesized NSEC records could be improperly interpreted
-to prove the non-existence of hostnames that actually exist.
+tsocks uses -nostdlib while linking shared library, which is not ideal
+but instead of chasing that and assuming there is a reason for that, we
+add -lssp_noshared to linker command at the end so it can build when
+security flags are enabled
 
-Affects dnsmasq <= 2.78
+Fixes
+tsocks.c:954: undefined reference to `__stack_chk_fail_local'
 
-CVE: CVE-2017-15107
-Ref: https://access.redhat.com/security/cve/cve-2017-15107
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/dnsmasq/dnsmasq_2.78.bb   |   1 +
- .../dnsmasq/files/CVE-2017-15107.patch        | 262 ++++++++++++++++++
- 2 files changed, 263 insertions(+)
- create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2017-15107.patch
+ meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.78.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.78.bb
-index 4d1dc6e69..d2465f82d 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.78.bb
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.78.bb
-@@ -2,6 +2,7 @@ require dnsmasq.inc
+diff --git a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
+index b2757f6ddc..72913579af 100644
+--- a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
++++ b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
+@@ -18,11 +18,13 @@ SRC_URI[sha256sum] = "849d7ef5af80d03e76cc05ed9fb8fa2bcc2b724b51ebfd1b6be11c7863
  
- SRC_URI += "\
-     file://lua.patch \
-+    file://CVE-2017-15107.patch \
- "
+ inherit autotools-brokensep
  
- SRC_URI[dnsmasq-2.78.md5sum] = "3bb97f264c73853f802bf70610150788"
-diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2017-15107.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2017-15107.patch
-new file mode 100644
-index 000000000..da2af56cf
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/files/CVE-2017-15107.patch
-@@ -0,0 +1,262 @@
-+From 5a56e1b78a753d3295564daddc9ce389cc69fd68 Mon Sep 17 00:00:00 2001
-+From: Simon Kelley <simon@thekelleys.org.uk>
-+Date: Fri, 19 Jan 2018 12:26:08 +0000
-+Subject: [PATCH] DNSSEC fix for wildcard NSEC records. CVE-2017-15107 applies.
++LIBS_append_libc-musl = " -lssp_nonshared"
 +
-+It's OK for NSEC records to be expanded from wildcards,
-+but in that case, the proof of non-existence is only valid
-+starting at the wildcard name, *.<domain> NOT the name expanded
-+from the wildcard. Without this check it's possible for an
-+attacker to craft an NSEC which wrongly proves non-existence
-+in a domain which includes a wildcard for NSEC.
-+
-+Upstream-Status: Backport [http://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=4fe6744a220eddd3f1749b40cac3dfc510787de6]
-+Signed-off-by: Sinan Kaya <okaya@kernel.org>
-+---
-+ CHANGELOG    |  44 +++++++++++++++++++
-+ src/dnssec.c | 117 +++++++++++++++++++++++++++++++++++++++++++++------
-+ 2 files changed, 147 insertions(+), 14 deletions(-)
-+
-+diff --git a/CHANGELOG b/CHANGELOG
-+index 075fe1a6..5226dce8 100644
-+--- a/CHANGELOG
-++++ b/CHANGELOG
-+@@ -1,3 +1,47 @@
-++version 2.79
-++	Fix parsing of CNAME arguments, which are confused by extra spaces.
-++	Thanks to Diego Aguirre for spotting the bug.
-++
-++	Where available, use IP_UNICAST_IF or IPV6_UNICAST_IF to bind
-++	upstream servers to an interface, rather than SO_BINDTODEVICE.
-++	Thanks to Beniamino Galvani for the patch.
-++
-++	Always return a SERVFAIL answer to DNS queries without the
-++	recursion desired bit set, UNLESS acting as an authoritative
-++	DNS server. This avoids a potential route to cache snooping.
-++
-++	Add support for Ed25519 signatures in DNSSEC validation.
-++
-++	No longer support RSA/MD5 signatures in DNSSEC validation,
-++	since these are not secure. This behaviour is mandated in
-++	RFC-6944.
-++
-++	Fix incorrect error exit code from dhcp_release6 utility.
-++	Thanks Gaudenz Steinlin for the bug report.
-++
-++	Use SIGINT (instead of overloading SIGHUP) to turn on DNSSEC
-++	time validation when --dnssec-no-timecheck is in use.
-++	Note that this is an incompatible change from earlier releases.
-++
-++	Allow more than one --bridge-interface option to refer to an
-++	interface, so that we can use
-++	--bridge-interface=int1,alias1
-++	--bridge-interface=int1,alias2
-++	as an alternative to
-++	--bridge-interface=int1,alias1,alias2
-++	Thanks to Neil Jerram for work on this.
-++
-++	Fix for DNSSEC with wildcard-derived NSEC records.
-++	It's OK for NSEC records to be expanded from wildcards,
-++	but in that case, the proof of non-existence is only valid
-++	starting at the wildcard name, *.<domain> NOT the name expanded
-++	from the wildcard. Without this check it's possible for an
-++	attacker to craft an NSEC which wrongly proves non-existence.
-++	Thanks to Ralph Dolmans for finding this, and co-ordinating 
-++	the vulnerability tracking and fix release.
-++	CVE-2017-15107 applies.
-++
-++
-+ version 2.78
-+         Fix logic of appending ".<layer>" to PXE basename. Thanks to Chris
-+ 	Novakovic for the patch.
-+diff --git a/src/dnssec.c b/src/dnssec.c
-+index a74d01ab..1417be56 100644
-+--- a/src/dnssec.c
-++++ b/src/dnssec.c
-+@@ -424,15 +424,17 @@ static void from_wire(char *name)
-+ static int count_labels(char *name)
-+ {
-+   int i;
-+-
-++  char *p;
-++  
-+   if (*name == 0)
-+     return 0;
-+ 
-+-  for (i = 0; *name; name++)
-+-    if (*name == '.')
-++  for (p = name, i = 0; *p; p++)
-++    if (*p == '.')
-+       i++;
-+ 
-+-  return i+1;
-++  /* Don't count empty first label. */
-++  return *name == '.' ? i : i+1;
-+ }
-+ 
-+ /* Implement RFC1982 wrapped compare for 32-bit numbers */
-+@@ -1405,8 +1407,8 @@ static int hostname_cmp(const char *a, const char *b)
-+     }
-+ }
-+ 
-+-static int prove_non_existence_nsec(struct dns_header *header, size_t plen, unsigned char **nsecs, int nsec_count,
-+-				    char *workspace1, char *workspace2, char *name, int type, int *nons)
-++static int prove_non_existence_nsec(struct dns_header *header, size_t plen, unsigned char **nsecs, unsigned char **labels, int nsec_count,
-++				    char *workspace1_in, char *workspace2, char *name, int type, int *nons)
-+ {
-+   int i, rc, rdlen;
-+   unsigned char *p, *psave;
-+@@ -1419,6 +1421,9 @@ static int prove_non_existence_nsec(struct dns_header *header, size_t plen, unsi
-+   /* Find NSEC record that proves name doesn't exist */
-+   for (i = 0; i < nsec_count; i++)
-+     {
-++      char *workspace1 = workspace1_in;
-++      int sig_labels, name_labels;
-++
-+       p = nsecs[i];
-+       if (!extract_name(header, plen, &p, workspace1, 1, 10))
-+ 	return 0;
-+@@ -1427,7 +1432,27 @@ static int prove_non_existence_nsec(struct dns_header *header, size_t plen, unsi
-+       psave = p;
-+       if (!extract_name(header, plen, &p, workspace2, 1, 10))
-+ 	return 0;
-+-      
-++
-++      /* If NSEC comes from wildcard expansion, use original wildcard
-++	 as name for computation. */
-++      sig_labels = *labels[i];
-++      name_labels = count_labels(workspace1);
-++
-++      if (sig_labels < name_labels)
-++	{
-++	  int k;
-++	  for (k = name_labels - sig_labels; k != 0; k--)
-++	    {
-++	      while (*workspace1 != '.' && *workspace1 != 0)
-++		workspace1++;
-++	      if (k != 1 && *workspace1 == '.')
-++		workspace1++;
-++	    }
-++	  
-++	  workspace1--;
-++	  *workspace1 = '*';
-++	}
-++	  
-+       rc = hostname_cmp(workspace1, name);
-+       
-+       if (rc == 0)
-+@@ -1825,24 +1850,26 @@ static int prove_non_existence_nsec3(struct dns_header *header, size_t plen, uns
-+ 
-+ static int prove_non_existence(struct dns_header *header, size_t plen, char *keyname, char *name, int qtype, int qclass, char *wildname, int *nons)
-+ {
-+-  static unsigned char **nsecset = NULL;
-+-  static int nsecset_sz = 0;
-++  static unsigned char **nsecset = NULL, **rrsig_labels = NULL;
-++  static int nsecset_sz = 0, rrsig_labels_sz = 0;
-+   
-+   int type_found = 0;
-+-  unsigned char *p = skip_questions(header, plen);
-++  unsigned char *auth_start, *p = skip_questions(header, plen);
-+   int type, class, rdlen, i, nsecs_found;
-+   
-+   /* Move to NS section */
-+   if (!p || !(p = skip_section(p, ntohs(header->ancount), header, plen)))
-+     return 0;
-++
-++  auth_start = p;
-+   
-+   for (nsecs_found = 0, i = ntohs(header->nscount); i != 0; i--)
-+     {
-+       unsigned char *pstart = p;
-+       
-+-      if (!(p = skip_name(p, header, plen, 10)))
-++      if (!extract_name(header, plen, &p, daemon->workspacename, 1, 10))
-+ 	return 0;
-+-      
-++	  
-+       GETSHORT(type, p); 
-+       GETSHORT(class, p);
-+       p += 4; /* TTL */
-+@@ -1859,7 +1886,69 @@ static int prove_non_existence(struct dns_header *header, size_t plen, char *key
-+ 	  if (!expand_workspace(&nsecset, &nsecset_sz, nsecs_found))
-+ 	    return 0; 
-+ 	  
-+-	  nsecset[nsecs_found++] = pstart;
-++	  if (type == T_NSEC)
-++	    {
-++	      /* If we're looking for NSECs, find the corresponding SIGs, to 
-++		 extract the labels value, which we need in case the NSECs
-++		 are the result of wildcard expansion.
-++		 Note that the NSEC may not have been validated yet
-++		 so if there are multiple SIGs, make sure the label value
-++		 is the same in all, to avoid be duped by a rogue one.
-++		 If there are no SIGs, that's an error */
-++	      unsigned char *p1 = auth_start;
-++	      int res, j, rdlen1, type1, class1;
-++	      
-++	      if (!expand_workspace(&rrsig_labels, &rrsig_labels_sz, nsecs_found))
-++		return 0;
-++	      
-++	      rrsig_labels[nsecs_found] = NULL;
-++	      
-++	      for (j = ntohs(header->nscount); j != 0; j--)
-++		{
-++		  if (!(res = extract_name(header, plen, &p1, daemon->workspacename, 0, 10)))
-++		    return 0;
-++
-++		   GETSHORT(type1, p1); 
-++		   GETSHORT(class1, p1);
-++		   p1 += 4; /* TTL */
-++		   GETSHORT(rdlen1, p1);
-++
-++		   if (!CHECK_LEN(header, p1, plen, rdlen1))
-++		     return 0;
-++		   
-++		   if (res == 1 && class1 == qclass && type1 == T_RRSIG)
-++		     {
-++		       int type_covered;
-++		       unsigned char *psav = p1;
-++		       
-++		       if (rdlen < 18)
-++			 return 0; /* bad packet */
-++
-++		       GETSHORT(type_covered, p1);
-++
-++		       if (type_covered == T_NSEC)
-++			 {
-++			   p1++; /* algo */
-++			   
-++			   /* labels field must be the same in every SIG we find. */
-++			   if (!rrsig_labels[nsecs_found])
-++			     rrsig_labels[nsecs_found] = p1;
-++			   else if (*rrsig_labels[nsecs_found] != *p1) /* algo */
-++			     return 0;
-++			   }
-++		       p1 = psav;
-++		     }
-++		   
-++		   if (!ADD_RDLEN(header, p1, plen, rdlen1))
-++		     return 0;
-++		}
-++
-++	      /* Must have found at least one sig. */
-++	      if (!rrsig_labels[nsecs_found])
-++		return 0;
-++	    }
-++
-++	  nsecset[nsecs_found++] = pstart;   
-+ 	}
-+       
-+       if (!ADD_RDLEN(header, p, plen, rdlen))
-+@@ -1867,7 +1956,7 @@ static int prove_non_existence(struct dns_header *header, size_t plen, char *key
-+     }
-+   
-+   if (type_found == T_NSEC)
-+-    return prove_non_existence_nsec(header, plen, nsecset, nsecs_found, daemon->workspacename, keyname, name, qtype, nons);
-++    return prove_non_existence_nsec(header, plen, nsecset, rrsig_labels, nsecs_found, daemon->workspacename, keyname, name, qtype, nons);
-+   else if (type_found == T_NSEC3)
-+     return prove_non_existence_nsec3(header, plen, nsecset, nsecs_found, daemon->workspacename, keyname, name, qtype, wildname, nons);
-+   else
-+-- 
-+2.19.0
-+
+ S = "${WORKDIR}/tsocks-1.8"
+ 
+ FILES_${PN} = "${libdir}/* ${bindir}/tsocks"
+ FILES_${PN}-dev = ""
+ INSANE_SKIP_${PN} = "dev-so"
+ 
+-EXTRA_OEMAKE = "SHCC='${CC} -fPIC ${LDFLAGS}'"
++EXTRA_OEMAKE = "SHCC='${CC} -fPIC ${LDFLAGS}' LIBS='${LIBS}'"
+ 
 -- 
 2.19.0
 
