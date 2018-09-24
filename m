@@ -1,51 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
-	[209.85.210.172])
-	by mail.openembedded.org (Postfix) with ESMTP id EACBF793B8
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 416BA600BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Sep 2018 21:51:12 +0000 (UTC)
-Received: by mail-pf1-f172.google.com with SMTP id a23-v6so2023203pfi.12
+	Mon, 24 Sep 2018 21:56:33 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id d8-v6so2751923pfo.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Sep 2018 14:51:14 -0700 (PDT)
+	Mon, 24 Sep 2018 14:56:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=QNncee08GOVLn33wyBo1JUuSKxIl9s63cNHphLm/wAs=;
-	b=rPODyu5vvSfMEEZQPQXZgavcYT0rA5UaYHU60D0hrczHIGDlj2dh1sIchGF12ZjO3p
-	Rky5WP76z4+hPlK/w2G30pBcq+T4t05lmr2GJZAuNL/7n+hzfuEwUL6JzzZ9EF8rSFxT
-	+IHcaZX56nwIV3ClGClmy7udJOVi6A3LHeX0JMI7DUUfk2V7x8tiEjx/kVr9reaHt8iC
-	mluoceqiICatfKmTL1IEB20sgj/F9dWgagPve5vM2mizVRL4nWxE+68PXLiMQ31ISyv/
-	jRTvMTtQASOcCxNV2cMaW3x91TCo6l9QRFNI8wAuyImNn98Y9jriPUyNRV0NpgyrXJ8y
-	yvcA==
+	bh=d+U3XhwBl0jmEA3cKm3ztDpnWxj+9t+S4YLPuX5IOgM=;
+	b=q3aTpX1DZ+mhPzlNkTLcze1jHgsGSdCQM5BfoGRKQ9GFlBzOdfUhp1pEfwF+FlDF3i
+	ciOKMStdNVAFosJJd6rOR73btHM+l4lgWBya5nY3Wb6jq0fx4bKXk0ApFGiN2PqNkLRk
+	VKl62iv0O2mVW8pKuXqHN3FIhNgU7f56CLgjufGB3SkntacNOUmw9ZdyP4AuJdAJkTXR
+	HorpE5MLLbNy65Ytiuj910PV5SHlk2v4368xcOgIYu9fQhWpRkZ0g/TKs2HvsGqUg2Q5
+	2srey4fthAvJrCe00i3tKsbqej+ZZnOaX6GpV5If/wDLyl6F/OaQpOlrWed+2rnLS95e
+	dnpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=QNncee08GOVLn33wyBo1JUuSKxIl9s63cNHphLm/wAs=;
-	b=jWNZP4pW4rRZsploZh03tpm96KTDfjGdPT9lpyi3IfOUzdm9ValtBdC/I0CTLRGzfE
-	Lp4xqpsW+71r/9o2+InxJBC/FUqVHq9TQ0e7lZnt7RB3zOgZFLrRbGZnumGuWc7puFNS
-	TJbR9SshjpJydy950DGcGBnP4WgVwcTKfhdjcinkexjqSVTbJnjX2w2abEcwHVLH0VeC
-	ef7vZH2YWL0bhZvmDIE9LXL+7iUKF7EaN46my124IWvzOaMMdaEdbcaxhEKvNGhS4uIO
-	9ur/gGYC0UKweSUpUGQoTfi+JF5sMc/1QUZ/SlXkw8zeO9e7UdzUiJ7VvzMrJMaralE3
-	SRNg==
-X-Gm-Message-State: ABuFfoi8M1uNh5Dl9xz3zrlJF+S/PiakAfjg9Um7lUyOBFM9zwydj26U
-	/8OrIRDFrktzlQDlTBN7SMpX3GQ1
-X-Google-Smtp-Source: ACcGV607+Yyfm4D0n8QTRgnGDR6J22QxqQRsdWfC8/KY4uZCRG2zd14G1Qn+ucOBEHVBZe40w7T48g==
-X-Received: by 2002:a63:6781:: with SMTP id
-	b123-v6mr550363pgc.151.1537825873652; 
-	Mon, 24 Sep 2018 14:51:13 -0700 (PDT)
+	bh=d+U3XhwBl0jmEA3cKm3ztDpnWxj+9t+S4YLPuX5IOgM=;
+	b=lCK/P+hfEqWIyq6hrQeZ6Keq4rXWVHK6tKW4sHQJCncqw5ulGjjZKxZhA457o05ctw
+	sn7b83i+BRudAv77wMfPIffEBmw6jYuI/h0jR76OiYKD0+Kn1olRJXAxeqOl8yaz7iO/
+	Q3/QjTOYqV4kpMpiMD3+ozjoDDxu+X8nbmJSaYsUlmKXI04ahUc8wkCo+n5k/1PVa1oS
+	lu1STA/feNyeaWXirDLP1p/dpmLjr+UMLTp/M1dQNOvgKxyUsZLfhh3wkPJEAfPYJHj7
+	Mmx2x1PsKJRdyjL5UAKbzu4fG5S7x9ubmn3hyCb1YFC+nLktpPXyJWU7nZkynY8EO0mR
+	hz/A==
+X-Gm-Message-State: ABuFfohxlKF1CHKflV9uRZ4SqePuJQMukwCLOc+E4if9Qp6/LcwEtfFk
+	XmLto3M1Y5vBziELUf+HKazZSrQj
+X-Google-Smtp-Source: ACcGV63CNQinVdd3KX5Q2sbHBamm6pzq1EO3mjuq7WxPh300bg9Y9V/jWMqIGNbia2OPx4VlHD+dyg==
+X-Received: by 2002:aa7:8613:: with SMTP id
+	p19-v6mr587975pfn.247.1537826194264; 
+	Mon, 24 Sep 2018 14:56:34 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:c33:6924:aad7:81c1:2e32?
 	([2601:202:4180:c33:6924:aad7:81c1:2e32])
 	by smtp.gmail.com with ESMTPSA id
-	p73-v6sm357595pfk.186.2018.09.24.14.51.11
+	v20-v6sm388124pfk.12.2018.09.24.14.56.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Sep 2018 14:51:12 -0700 (PDT)
-To: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	Mon, 24 Sep 2018 14:56:33 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>,
 	Nicolas Dechesne <nicolas.dechesne@linaro.org>
-References: <CAP71Wjxwv3i2=UtbzNai79h-f83xcL6G1R8+kY-C-jA==VFy9Q@mail.gmail.com>
-	<2100274.NFsm02Mysr@localhost.localdomain>
+References: <20180924201705.30209-1-nicolas.dechesne@linaro.org>
+	<CAMKF1sqg6-DnQE7MGuxe4RnScu_uoXW6iker022pW6Q7FRS5dg@mail.gmail.com>
+	<CAP71Wjw78UsD9opN1bEUCo3B_FZL0YY3HpvabQufdUhNT0JNzw@mail.gmail.com>
+	<CAMKF1sqhabbZdhZb4zhJAGFS+4RiQ0MYdd71JSHPqzwFZiDTSw@mail.gmail.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -91,14 +93,14 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <98342371-c064-7866-1ea1-14819d88a71f@gmail.com>
-Date: Mon, 24 Sep 2018 14:51:11 -0700
+Message-ID: <51c09965-9463-5220-549d-8a2472a8f165@gmail.com>
+Date: Mon, 24 Sep 2018 14:56:32 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <2100274.NFsm02Mysr@localhost.localdomain>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-oe and yocto-check-layer
+In-Reply-To: <CAMKF1sqhabbZdhZb4zhJAGFS+4RiQ0MYdd71JSHPqzwFZiDTSw@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] meta-multimedia: fixup LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,81 +113,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2018 21:51:13 -0000
+X-List-Received-Date: Mon, 24 Sep 2018 21:56:33 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 09/24/2018 02:03 PM, Paul Eggleton wrote:
-> Hi Nicolas,
->
-> On Monday, 24 September 2018 10:05:02 PM NZST Nicolas Dechesne wrote:
->> hi Armin, Paul, Richard,
+On 09/24/2018 01:53 PM, Khem Raj wrote:
+> On Mon, Sep 24, 2018 at 1:45 PM Nicolas Dechesne
+> <nicolas.dechesne@linaro.org> wrote:
+>> On Mon, Sep 24, 2018 at 10:27 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>> Dos2unix is in oe-core now please try with master
+>> ouch. sorry, i missed that. I noticed the issue while running the YP
+>> 2.0 compliance script against sumo branch... how do we get that fixed
+>> in sumo then? can we apply something like the below patch on sumo
+>> directly?
 >>
->> I was looking at getting the compliance report for meta-oe (sumo
->> branch), and I have found a few issues.
->>
->> * in meta-openembedded/sumo, grpc is in meta-oe layer, while it
->> depends on meta-networking (c-ares). It was fixes in master, with
->> 251878e8b6b9 (grpc: move it from oe to networking layer), so I think
->> this fix needs to be backported to sumo as well if we want the YP 2.0
->> compliance script to even work. If agreed, once merged, please let me
->> know so that I can try again to generate a compliance report.
-> Is it appropriate to make such moves in a stable branch? I wouldn't have 
-> thought so.
->  
+> I think that will be fine as long as Armin is fine
+> with it. Please retag the subject appropriately and resend.
+At the tone, please leave a message beep....
 
-We have to. Per my understanding and why I tried very hard to make
-meta-openembedded clean ( appears I failed) is that if you want to be
-Yocto Compliant and include any layer that does not pass this test, you
-can not become Yocto Compliant.
 
-Or relax your rules!!!.
-
-- armin
->> * in order to run the compliance report, i locally added
->> networking-layer in meta-oe/conf/layer.conf, and it creates a
->> dependency loop since meta-oe <-> meta-networking. I found out that
->> yocto-check-layer doesn't like that too much, and brutally fails. The
->> following patch makes yocto-check-layer work again even with
->> dependency loop. I am going to do a few more tests and send that over
->> as a patch.
->>
->> diff --git a/scripts/lib/checklayer/__init__.py
->> b/scripts/lib/checklayer/__init__.py
->> index 2618416fab..0cc9bf3b6d 100644
->> --- a/scripts/lib/checklayer/__init__.py
->> +++ b/scripts/lib/checklayer/__init__.py
->> @@ -151,11 +151,21 @@ def add_layer_dependencies(bblayersconf, layer,
->> layers, logger):
->>          logger.debug('Processing dependencies %s for layer %s.' % \
->>                      (depends, layer['name']))
->>
->> +        # To avoid never ending recursion, we keep track of layers while
->> +        # they are being processed in this 'static' attribute.
->> +        if not hasattr(recurse_dependencies, "layers"):
->> +            recurse_dependencies.layers = []
->> +
->>          for depend in depends.split():
->>              # core (oe-core) is suppose to be provided
->>              if depend == 'core':
->>                  continue
->>
->> +            if depend in recurse_dependencies.layers:
->> +                continue
->> +
->> +            recurse_dependencies.layers.append(depend)
->> +
->>              layer_depend = _find_layer_depends(depend, layers)
->>              if not layer_depend:
->>                  logger.error('Layer %s depends on %s and isn\'t found.' % \
-> Patch looks reasonable to me FWIW.
 >
-> Cheers,
-> Paul
->
->
+>>> On Mon, Sep 24, 2018 at 1:19 PM Nicolas Dechesne <nicolas.dechesne@linaro.org> wrote:
+>>>> libebml depends on dos2unix classe since 26dafa0f3542 (libebml: inherit
+>>>> dos2unix), so LAYERDEPENDS needs to be updated accordingly, otherwise we are
+>>>> getting a ParseError:
+>>>>
+>>>> ERROR: ParseError at
+>>>> /srv/work/oe/meta-openembedded/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb:13:
+>>>> Could not inherit file classes/dos2unix.bbclass
+>>>>
+>>>> It was initially found with yocto-check-layer script.
+>>>>
+>>>> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+>>>> ---
+>>>>  meta-multimedia/conf/layer.conf | 2 +-
+>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
+>>>> index cfedf2f6b..a1dfed4e9 100644
+>>>> --- a/meta-multimedia/conf/layer.conf
+>>>> +++ b/meta-multimedia/conf/layer.conf
+>>>> @@ -27,6 +27,6 @@ BBFILE_PRIORITY_multimedia-layer = "6"
+>>>>  # cause compatibility issues with other layers
+>>>>  LAYERVERSION_multimedia-layer = "1"
+>>>>
+>>>> -LAYERDEPENDS_multimedia-layer = "core"
+>>>> +LAYERDEPENDS_multimedia-layer = "core openembedded-layer"
+>>>>
+>>>>  LAYERSERIES_COMPAT_multimedia-layer = "sumo"
+>>>> --
+>>>> 2.18.0
+>>>>
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
