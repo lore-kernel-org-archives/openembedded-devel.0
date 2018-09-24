@@ -1,20 +1,22 @@
 Return-Path: <max+openembedded@blarg.de>
 Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CC8C78E49
+	by mail.openembedded.org (Postfix) with ESMTP id 3D8B778E4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Sep 2018 11:06:44 +0000 (UTC)
+	Mon, 24 Sep 2018 11:06:45 +0000 (UTC)
 Received: from heron.blarg.de (p5DE2B75B.dip0.t-ipconnect.de [93.226.183.91])
 	(Authenticated sender: max)
-	by swift.blarg.de (Postfix) with ESMTPSA id 9B07022051C;
-	Mon, 24 Sep 2018 13:06:45 +0200 (CEST)
+	by swift.blarg.de (Postfix) with ESMTPSA id 099E82209BB;
+	Mon, 24 Sep 2018 13:06:46 +0200 (CEST)
 From: Max Kellermann <max+openembedded@blarg.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Sep 2018 13:06:28 +0200
-Message-Id: <20180924110634.5059-1-max+openembedded@blarg.de>
+Date: Mon, 24 Sep 2018 13:06:30 +0200
+Message-Id: <20180924110634.5059-3-max+openembedded@blarg.de>
 X-Mailer: git-send-email 2.19.0
+In-Reply-To: <20180924110634.5059-1-max+openembedded@blarg.de>
+References: <20180924110634.5059-1-max+openembedded@blarg.de>
 MIME-Version: 1.0
 Cc: Max Kellermann <max.kellermann@gmail.com>
-Subject: [PATCH v4 1/7] libmpdclient: new recipe
+Subject: [PATCH v4 3/7] ncmpc: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,35 +36,39 @@ From: Max Kellermann <max.kellermann@gmail.com>
 
 Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
 ---
- .../musicpd/libmpdclient_2.15.bb              | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb
+ .../recipes-multimedia/musicpd/ncmpc_0.32.bb  | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.32.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.32.bb b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.32.bb
 new file mode 100644
-index 000000000..c78344c66
+index 000000000..936596a25
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.15.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "C client library for the Music Player Daemon"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=06b9dfd2f197dc514d8ef06549684b77"
-+HOMEPAGE = "https://www.musicpd.org/libs/libmpdclient/"
++++ b/meta-multimedia/recipes-multimedia/musicpd/ncmpc_0.32.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "A curses client for the Music Player Daemon"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++HOMEPAGE = "https://www.musicpd.org/clients/ncmpc/"
 +
 +inherit meson
 +
-+SRC_URI = " \
-+    git://github.com/MusicPlayerDaemon/libmpdclient \
++DEPENDS += " \
++    gettext-native \
++    glib-2.0 \
++    ncurses \
++    libmpdclient \
 +"
-+SRCREV = "7754ffdfb9371cd398371cb2670a54e9e1e623e2"
-+S = "${WORKDIR}/git"
 +
-+do_install_append() {
-+    # libmpdclient's Vala bindings are outdated and unmaintained; it
-+    # is likely that nobody will ever use them, so let's not install
-+    # them
-+    rm -rf ${D}${datadir}/vala
-+}
++# We're using a 0.32 pre-release commit which contains a fix for a
++# build failure.
++PV = "0.32~git${SRCPV}"
++
++SRC_URI = " \
++    git://github.com/MusicPlayerDaemon/ncmpc \
++"
++SRCREV = "1150f7931de7588643437069dd798724dc1ceb47"
++S = "${WORKDIR}/git"
 -- 
 2.19.0
 
