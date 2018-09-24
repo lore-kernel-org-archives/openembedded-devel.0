@@ -1,22 +1,48 @@
-Return-Path: <max+openembedded@blarg.de>
-Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 021D978E4B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
+	[209.85.222.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 50BC67935C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Sep 2018 11:06:46 +0000 (UTC)
-Received: from heron.blarg.de (p5DE2B75B.dip0.t-ipconnect.de [93.226.183.91])
-	(Authenticated sender: max)
-	by swift.blarg.de (Postfix) with ESMTPSA id A0BBE2209BE;
-	Mon, 24 Sep 2018 13:06:46 +0200 (CEST)
-From: Max Kellermann <max+openembedded@blarg.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Sep 2018 13:06:33 +0200
-Message-Id: <20180924110634.5059-6-max+openembedded@blarg.de>
-X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20180924110634.5059-1-max+openembedded@blarg.de>
-References: <20180924110634.5059-1-max+openembedded@blarg.de>
+	Mon, 24 Sep 2018 18:48:30 +0000 (UTC)
+Received: by mail-qk1-f169.google.com with SMTP id s129-v6so9226942qke.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Sep 2018 11:48:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=I9+FRziM4FdHLqag2M4jZ043FHeEmHWkE7Jeg85BUyk=;
+	b=U79AHFHUrvr9idyRGGa2bA4kVZWPb39mf4FqzO1kcc1WanhKP0O3W7htkHuy16VgZK
+	Wa+u1/tsHwR1YBh8+B00itZqDK3FcIIAkhdlmvn4k55HRnHa8uKcDSh7MvY9ra6DbL9e
+	8/kSJab0Y9an8R5kDhFPAKupVexkq3toSpnFFNnOK3lZifBC3xfVr6v/nusLK0igprCR
+	olPwz/oulxsNLOY8Coj2XU8A9l6QZUBicV17BkK7wUFCwId57CI9mDP9QdahWMWQWBCo
+	pc3hfsc3thsSzUR1wreL7/1VmwJa9/bdOInXdT0RXNqVNAdZPXxA9C3Nt8St7Kq7X+FM
+	r27Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=I9+FRziM4FdHLqag2M4jZ043FHeEmHWkE7Jeg85BUyk=;
+	b=YzoKOuWPCc8QLjJZaFR0nFM50ZdnpG2SQ9rGipHZcytaWOj1CRq0VIKRyACPvsckan
+	zodY93EY6RE9xTj02Kp13XXqcya+ifN3etRdmZ0QOICOwDuz2vp9oJi4QTgsn8/ORIgp
+	UuHkPDiQ8HSutUNJk1/QZ/tEDaEGFyl8n1hDxElBiJiFODkJdepr0KV8Tw9nfm8xg46N
+	rfNz13Fo3w+kgeJH0adeUCzEFuQbXDCA0I20MObS/KXAfpNIe4N+Al1OZpdAMYPDCF4R
+	xFtqBKhmWOsmg6ddqtsv0b/ZwuZZMHLGM6gvZRQTjrpiy5bI7Pp/XCVkMaFNAmK1NGjh
+	tpdQ==
+X-Gm-Message-State: ABuFfohQKNFXD0hBvuPnSizNowsmHxp74lHk70PxH9C3P9oc2FESbzKf
+	kL3E0yVsr0D4AcJ15wdgKwvNUaXI9E7oTlJxCRQ=
+X-Google-Smtp-Source: ACcGV60VmWJMAKYfk/pefu+P9XyCazbuE+FPeTQRaIcN7d0AA3aStRBIWIkHuqnSsLFD6oYcGiMxS5SZqGijZ6u5DW4=
+X-Received: by 2002:a37:2915:: with SMTP id
+	p21-v6mr135846qkh.206.1537814910741; 
+	Mon, 24 Sep 2018 11:48:30 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Max Kellermann <max.kellermann@gmail.com>
-Subject: [PATCH v4 6/7] mpd: make lots of plugins optional
+References: <20180918082608.1088-1-max+openembedded@blarg.de>
+In-Reply-To: <20180918082608.1088-1-max+openembedded@blarg.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Sep 2018 11:48:04 -0700
+Message-ID: <CAMKF1spwKoe9+NqUsU6DZ0PvSWtT9N3-uPEUS8Y7n3heCHeM8A@mail.gmail.com>
+To: max+openembedded@blarg.de
+Cc: Max Kellermann <max.kellermann@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/8] [meta-oe] devtools/php: remove the failing ${D}/${TMPDIR} code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,97 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Sep 2018 11:06:46 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 24 Sep 2018 18:48:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Max Kellermann <max.kellermann@gmail.com>
-
-The new options are enabled by default to avoid breaking existing
-configurations.
-
-Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
----
- .../recipes-multimedia/musicpd/mpd_0.20.21.bb | 44 +++++++++----------
- 1 file changed, 22 insertions(+), 22 deletions(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-index 67a0c9ff8..ebae8a521 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-@@ -6,37 +6,15 @@ HOMEPAGE ="http://www.musicpd.org"
- inherit autotools useradd systemd pkgconfig
- 
- DEPENDS += " \
--    alsa-lib \
--    libsamplerate0 \
--    libsndfile1 \
--    libvorbis \
--    libogg \
--    faad2 \
--    ffmpeg \
-     curl \
-     sqlite \
--    bzip2 \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
-     tcp-wrappers \
--    openal-soft \
-     yajl \
--    jack \
--    faad2 \
--    flac \
--    libao \
--    fluidsynth \
--    libcdio \
--    wavpack \
--    libopus \
--    mpg123 \
--    libmms \
--    libmodplug \
-     boost \
-     icu \
-     dbus \
-     expat \
--    zlib \
--    libupnp \
- "
- 
- # While this item does not require it, it depends on mpg123 which does
-@@ -52,12 +30,34 @@ SRC_URI[sha256sum] = "8322764dc265c20f05c8c8fdfdd578b0722e74626bef56fcd8eebfb01a
- EXTRA_OECONF = "enable_bzip2=yes"
- EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
- 
-+PACKAGECONFIG ??= "aac alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
-+
-+PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
-+PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
-+PACKAGECONFIG[ao] = "--enable-ao,--disable-ao,libao"
- PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
-+PACKAGECONFIG[bzip2] = "--enable-bzip2,--disable-bzip2,bzip2"
- PACKAGECONFIG[cdioparanoia] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio-paranoia"
-+PACKAGECONFIG[ffmpeg] = "--enable-ffmpeg,--disable-ffmpeg,ffmpeg"
-+PACKAGECONFIG[flac] = "--enable-flac,--disable-flac,flac"
-+PACKAGECONFIG[fluidsynth] = "--enable-fluidsynth,--disable-fluidsynth,fluidsynth"
- PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
-+PACKAGECONFIG[iso9660] = "--enable-iso9660,--disable-iso9660,libcdio"
-+PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
- PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
-+PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
-+PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
-+PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
-+PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
- PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
-+PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
-+PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
-+PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
-+PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
-+PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
-+PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
-+PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
- 
- do_configure_prepend() {
-     sed -i -e 's|libsystemd-daemon|libsystemd|' ${S}/configure.ac
--- 
-2.19.0
-
+http://errors.yoctoproject.org/Errors/Details/193970/
+On Tue, Sep 18, 2018 at 1:36 AM Max Kellermann
+<max+openembedded@blarg.de> wrote:
+>
+> From: Max Kellermann <max.kellermann@gmail.com>
+>
+> Appending ${TMPDIR} to ${D} doesn't make any sense, because both are
+> absolute paths.  And additionally, the code fails:
+>
+>  rmdir: failed to remove '/usr/src/oe/tmp-musl/work/core2-64-oe-linux-musl/php/7.1.9-r0/image//usr': Directory not empty
+>
+> Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc | 9 ---------
+>  1 file changed, 9 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+> index 65dfd2d89..120f678d7 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -139,7 +139,6 @@ do_install_append_class-target() {
+>      if [ -d ${RECIPE_SYSROOT_NATIVE}${sysconfdir} ];then
+>           install -m 0644 ${RECIPE_SYSROOT_NATIVE}${sysconfdir}/pear.conf ${D}${sysconfdir}/
+>      fi
+> -    rm -rf ${D}/${TMPDIR}
+>      rm -rf ${D}/.registry
+>      rm -rf ${D}/.channels
+>      rm -rf ${D}/.[a-z]*
+> @@ -164,14 +163,6 @@ do_install_append_class-target() {
+>              ${D}${systemd_unitdir}/system/php-fpm.service
+>      fi
+>
+> -    TMP=`dirname ${D}/${TMPDIR}`
+> -    while test ${TMP} != ${D}; do
+> -        if [ -d ${TMP} ]; then
+> -            rmdir ${TMP}
+> -        fi
+> -        TMP=`dirname ${TMP}`;
+> -    done
+> -
+>      if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
+>          install -d ${D}${libdir}/apache2/modules
+>          install -d ${D}${sysconfdir}/apache2/modules.d
+> --
+> 2.18.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
