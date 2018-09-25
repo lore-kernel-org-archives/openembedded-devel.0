@@ -1,48 +1,25 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 74E13795E9
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by mail.openembedded.org (Postfix) with ESMTP id B3B2C793B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2018 20:27:39 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id 206-v6so6893941wmb.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2018 13:27:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=7X83YpAGcNsGX+MBaL/EMpC8EZjl/4cKRO9iF3+/BnE=;
-	b=micUaJn6ZYgjqaTz/YzzrIH+K3Eyo5AIQ+3lERobcSmYhcoGm7x2SvBAuMRT94XC38
-	4j0flgZi/vTBbJvPDd826gFkF89obbjUMqYrFlFuG51GVHQKAGA/U61bXMkdM6t8daK5
-	uvV+4GjMb2doLY3Eu2eic+NuBNf4pr7vRPgLKCuEsQPubpWSAXan091nQmKUkEtIHEj/
-	+kdO+jY012DE99Y7J2/V3PamjBN8jxtqnB5tkpzS1N43NlTjbZacT23lfmYVPwA4Ggjk
-	NsrTJCJkZzruG+UQGLKZRs824L+ATQl3RRMppf/adknfJk7CGyr5uxdgs35WFZCaWgrR
-	yuRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7X83YpAGcNsGX+MBaL/EMpC8EZjl/4cKRO9iF3+/BnE=;
-	b=LTMBmimkN8+yimhuh0QKwi4KApku6MFr8EuMT0dvWo69NoCQZRL6BtTtbDtFmsU4LU
-	4DBKZERBZe74lPwSTlOb3ITlHZ8th7cxRNGE1qZKN11FF3KRO8Cmr+DyzkpNH/z26VIa
-	ruKmaNIfbuXB9AiW5bz/hkyT0mDJKdJaLBCA80GpvLnqklUh68fYfifIwxKCOgpueKcF
-	er1jGjAg5DVKlufRD+XmWHOUqrW6KNpJTYc0UW19bypJfgru63emG7nuUc5kApRj5PN3
-	VaeBobcpLTDaMHmkGQHc9PvsxscXtVf/3uljZ3CB+suTkcZftQ6P/+5guheRlInemDZB
-	O7jg==
-X-Gm-Message-State: ABuFfog6xIybuEVI1IMpxMz8AgzbdTrzHkwBOI3vVMQBSG5jebevpIQQ
-	Dw4zEOelxOPcdoGLSr+JsnMTQRSF
-X-Google-Smtp-Source: ACcGV60j4y91LCJbE9wRYh+fbBfrSXDLiIFdMJFwUsiJK0RXus26rR5avriPMIEqrq2UilpFsQbung==
-X-Received: by 2002:a1c:706:: with SMTP id 6-v6mr1961262wmh.83.1537907259538; 
-	Tue, 25 Sep 2018 13:27:39 -0700 (PDT)
-Received: from localhost.localdomain
-	(host132-248-dynamic.14-87-r.retail.telecomitalia.it.
-	[87.14.248.132]) by smtp.gmail.com with ESMTPSA id
-	u13-v6sm2056593wrq.16.2018.09.25.13.27.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 25 Sep 2018 13:27:38 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 25 Sep 2018 21:41:18 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	25 Sep 2018 14:41:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.54,303,1534834800"; d="scan'208";a="76167345"
+Received: from nsankark-mobl2.gar.corp.intel.com (HELO localhost.localdomain)
+	([10.249.72.216])
+	by orsmga008.jf.intel.com with ESMTP; 25 Sep 2018 14:40:59 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Sep 2018 22:27:32 +0200
-Message-Id: <1537907252-357-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] klibc.inc: lazy assign GCCPIE in case security_flags.inc was not included
+Date: Wed, 26 Sep 2018 09:40:56 +1200
+Message-ID: <1746555.Qn55kT1oli@localhost.localdomain>
+Organization: Intel Corporation
+MIME-Version: 1.0
+Subject: nodejs-native and OpenSSL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2018 20:27:39 -0000
+X-List-Received-Date: Tue, 25 Sep 2018 21:41:18 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-fix build error (GCCPIE is unset):
+Hi folks
 
-EXTRA_KLIBCAFLAGS=${SECURITY_CFLAGS} -Wa,--noexecstack
-EXTRA_KLIBCLDFLAGS=${@-z relro -z now -pie if  else } -z noexecstack
-| make: invalid option -- 'z'
-| make: invalid option -- ' '
+I've recently been trying to build nodejs-native with oe-core/meta-oe master 
+on Ubuntu 14.04, and unfortunately it's failing for me:
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
- 1 file changed, 1 insertion(+)
+--------- snip ---------
+/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::RandomBytesWork(uv_work_s*)':
+node_crypto.cc:(.text+0x31): undefined reference to `RAND_poll'
+node_crypto.cc:(.text+0x3a): undefined reference to `RAND_status'
+node_crypto.cc:(.text+0x52): undefined reference to `RAND_bytes'
+node_crypto.cc:(.text+0x89): undefined reference to `ERR_get_error'
+/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::DiffieHellman::GetPrime(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(dh_st const*)#1}::_FUN(dh_st const*)':
+node_crypto.cc:(.text+0x121): undefined reference to `DH_get0_pqg'
+/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::DiffieHellman::GetGenerator(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(dh_st const*)#1}::_FUN(dh_st const*)':
+node_crypto.cc:(.text+0x141): undefined reference to `DH_get0_pqg'
+/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::SecureContext::TicketCompatibilityCallback(ssl_st*, unsigned char*, unsigned char*, evp_cipher_ctx_st*, hmac_ctx_st*, int)':
+node_crypto.cc:(.text+0x172): undefined reference to `SSL_get_SSL_CTX'
+node_crypto.cc:(.text+0x17c): undefined reference to `SSL_CTX_get_ex_data'
+node_crypto.cc:(.text+0x1c1): undefined reference to `EVP_aes_128_cbc'
+--------- snip ---------
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 6342be0..be01c2f 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -75,6 +75,7 @@ KLIBC_ARCH_powerpc = "ppc"
- KLIBC_ARCH_powerpc64 = "ppc64"
- THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
- 
-+GCCPIE ?= ""
- SECURITY_LDFLAGS = "${@'-z relro -z now -pie' if '${GCCPIE}' else ''}"
- SECURITY_LDFLAGS_mips = ""
- SECURITY_LDFLAGS_mips64 = ""
+At first, since I haven't seen reports of this elsewhere I thought maybe it had
+something to do with the host OpenSSL version being 1.0, but adding -H to
+CFLAGS/CXXFLAGS and -Wl,--trace to LDFLAGS seems to suggest that it's
+using both the headers and libraries for OpenSSL from the sysroot as it 
+should.
+
+Has anyone else seen this? Any suggestions? (other than perhaps "update 
+your host distro and try again")?
+
+Cheers,
+Paul
+
+
 -- 
-2.7.4
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
 
 
