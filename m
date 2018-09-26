@@ -1,46 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
-	[209.85.222.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 13C5C79703
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6298B745A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 14:24:43 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id v18-v6so6208244qka.10
+	Wed, 26 Sep 2018 14:30:03 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id x23-v6so17458333qtr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 07:24:45 -0700 (PDT)
+	Wed, 26 Sep 2018 07:30:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=YP0N8tbzSYyG61evimSdh/eYG6RPjaBqRIyvBAxwHgc=;
-	b=YlGz7UdyTaxM6Vwl2mqmXOlkDRh66BABGcfAqPRTQRLyP2q4QXX/zx1d0Vv5imcSt4
-	Tv3sDKZa/5iUeQbYcsYSRkNoLWVE9e+AHzhENkYQGImmhRJnCxarnuDCJv9qBUvk3ZtJ
-	fiNEO9NJ0JNWK/CZswRW4on1/ypfTrcES+pGcvmpJh15FJVtS9rdZPidAMFSxoKLI73z
-	v3RaIhYe5Ctn8PDjCvbM4xBApuXGm83CYY5Ngr1LnXQbyCIZcFZCEh6iEoOlJvbNHvF8
-	e1VY/R2E+TggJvhELQtPNJtrsp6XSOF7FO2zLz4Wk6jJ18WPmfhEYmz53YARQ8pmH1+X
-	V2ng==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=XD3LoIh8yLcWJZj8BaQrlkJWqcouprPbOsmj8Aq9tNA=;
+	b=Lhmn1o9xDm952VSkljVvxrPjT+iyI/yhjQNH6RFZSJrmD1gTgjLrIVtpdCfFUwKXEm
+	c+brQNDRx/1hV0fcTkQ6mlXRVsvINPLUnGrNDk3xP8UDM8jPHWM7EFsS7ph0vwj4ItoI
+	/Po0jWb6k6F8xDzbS9GPpvSorb2XQ3qKIbSFta/CcF21WDOeBGsnHfkF6kNPHeMIND7Q
+	b1mFHBuATg3kkikPTEJtxWsTiBiI3OEvwS+qNi//58Qc2fl3tgis95QmAt5Hq2mxqLEO
+	3pYkwKFT8RhbGoSXFHi9BUsHG5O6aLCGegJhnQ2yFSZ8UQg6x4EQMOcRoklH7N2OLrK0
+	vykg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=YP0N8tbzSYyG61evimSdh/eYG6RPjaBqRIyvBAxwHgc=;
-	b=Tqg0oiHqAhZAsM9LmRw31T+5u+1j5LqgWb8scpsQRq8A5rxz7NsYl0Mf9KQRNS2mMp
-	wyNyfD4xt+8/AgYNCZbaS0rO3qQcSYt+I7dvjdI/JEfj2SN5epMXzvQrn/ltTlDw+6fL
-	To580gng0tKOxi6I8XShpk4z+ub5Y15GCPv/JlKcfaxJTf5UlPLJDerTnQeG0a9lUBcg
-	H55VvDysQ4ZFvb/9Lf6h/noTBcxvTSx/U+mX55EPddRByheNCfNdmS/rxF7+YvWd3gFZ
-	W+QQRzX0/+nun9GtilVX59A5B8OaRw+JNWDLJ056GI9ifmtwo9itBlEoTS6gtPz80gQd
-	mq+Q==
-X-Gm-Message-State: ABuFfoi4DEfpGbzh0G7Gwm3mIYI+xEVXmTSfoSjfu0aYdShL5mhMS5sU
-	z8gJu7MVMMJ+sAlWMqWCGsF6o4tYULi6ns6/6Yk=
-X-Google-Smtp-Source: ACcGV61POMlSvhWjYPoWX5RDTGt7pY3I4vKxWdUaOXCVWiMNIwGyLoxmQSmqzVpVqG/h/ak5aBRTGjzB4s3Ru6JIHVU=
-X-Received: by 2002:a37:ac02:: with SMTP id e2-v6mr4460093qkm.2.1537971884625; 
-	Wed, 26 Sep 2018 07:24:44 -0700 (PDT)
+	:message-id:subject:to;
+	bh=XD3LoIh8yLcWJZj8BaQrlkJWqcouprPbOsmj8Aq9tNA=;
+	b=jskxcCUBvOu9cyhrcVPp23j0yJPv3ys8kWRttwgM7FYHCXceEDhtexD3r5ySXaP1yB
+	JH+AesinZz8S/iaPFTBx9uN8giN/ElZ6eCl5XJQiaefvWM7/sMvDSUVOFPrEi9ORWwnT
+	Uw9TV0X2XSqtx78o/ISFj4gnJdNAHVRxlbmcrwhy1xNwpwb08ZMQBVWJtYbqq3h5hMp+
+	U+Qt5ne8P8fembRBH5Q1MAKi2uLClsCDC/2u63nJz7Kf/ehrec99uUDryEdwGvFTwiPW
+	tfy4RGDTyiTqzl7yG1NzTQruoKt1bkrjDAxfDIfsSKTYGVhQ1Fpi7VRxDOw6phIyjCYW
+	ZOgg==
+X-Gm-Message-State: ABuFfohR3sqa25cUQOse/VhMN6Irg1tVJoxvJfiLh8N5zO0SK+aWWcqm
+	EevfiJZxWBLLI6wVRVHmeVTcq0CSezggmrfK76DFOg==
+X-Google-Smtp-Source: ACcGV63iBRhmkegSZXylyZz4kOgdy/U5MqsdR7gDIrvxqYAQs/11X8mXE/NYZSEv5IJmWdnDj8Vr3e33ySkFJ/RvWls=
+X-Received: by 2002:a05:6214:1108:: with SMTP id
+	e8mr4523660qvs.194.1537972203641; 
+	Wed, 26 Sep 2018 07:30:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20180926132115.10455-1-max+openembedded@blarg.de>
-In-Reply-To: <20180926132115.10455-1-max+openembedded@blarg.de>
+	<CAMKF1soJtjx9nww37op-WSi3dhC8=zPD1tG2hBLUQZ7YiQHYTA@mail.gmail.com>
+	<20180926142844.wcbqlarv5lw6wlwd@swift.blarg.de>
+In-Reply-To: <20180926142844.wcbqlarv5lw6wlwd@swift.blarg.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 Sep 2018 07:24:18 -0700
-Message-ID: <CAMKF1soJtjx9nww37op-WSi3dhC8=zPD1tG2hBLUQZ7YiQHYTA@mail.gmail.com>
-To: max+openembedded@blarg.de
-Cc: Max Kellermann <max.kellermann@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Sep 2018 07:29:52 -0700
+Message-ID: <CAMKF1sq20aDnGhx7XNf7UZWwvqPx_A0NL-e8yGaoEgK5Nbs3qQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [PATCH 1/7] mpd: sort PACKAGECONFIGs again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -54,52 +56,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2018 14:24:44 -0000
+X-List-Received-Date: Wed, 26 Sep 2018 14:30:03 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Max
+Ok then I will take a look
 
-Please reabse this on top of current master, some of these patches are
-already in
-On Wed, Sep 26, 2018 at 6:21 AM Max Kellermann
-<max+openembedded@blarg.de> wrote:
+On Wed, Sep 26, 2018 at 7:28 AM Max Kellermann <max@blarg.de> wrote:
+
+> On 2018/09/26 16:24, Khem Raj <raj.khem@gmail.com> wrote:
+> > Please reabse this on top of current master, some of these patches are
+> > already in
 >
-> From: Max Kellermann <max.kellermann@gmail.com>
+> I know, thanks for merging - but this new patch set is already based
+> on current master (i.e. 23d794b58661).
 >
-> The new ones I added were not sorted.
 >
-> Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
-> ---
->  meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> index c0d4c8c2b..9b506ba10 100644
-> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> @@ -45,13 +45,13 @@ PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
->  PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
->  PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
->  PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
-> -PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
->  PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
-> +PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
-> +PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
-> +PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
->  PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
->  PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
->  PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
-> -PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
-> -PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
->  PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
->  PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
->  PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
-> --
-> 2.19.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
