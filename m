@@ -1,20 +1,22 @@
 Return-Path: <max+openembedded@blarg.de>
 Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E5627954B
+	by mail.openembedded.org (Postfix) with ESMTP id 6DD5F745AD
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 26 Sep 2018 13:21:25 +0000 (UTC)
 Received: from heron.blarg.de (p5DE2B75B.dip0.t-ipconnect.de [93.226.183.91])
 	(Authenticated sender: max)
-	by swift.blarg.de (Postfix) with ESMTPSA id C3029220520;
+	by swift.blarg.de (Postfix) with ESMTPSA id 00BE12209B2;
 	Wed, 26 Sep 2018 15:21:25 +0200 (CEST)
 From: Max Kellermann <max+openembedded@blarg.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Sep 2018 15:21:09 +0200
-Message-Id: <20180926132115.10455-1-max+openembedded@blarg.de>
+Date: Wed, 26 Sep 2018 15:21:10 +0200
+Message-Id: <20180926132115.10455-2-max+openembedded@blarg.de>
 X-Mailer: git-send-email 2.19.0
+In-Reply-To: <20180926132115.10455-1-max+openembedded@blarg.de>
+References: <20180926132115.10455-1-max+openembedded@blarg.de>
 MIME-Version: 1.0
 Cc: Max Kellermann <max.kellermann@gmail.com>
-Subject: [PATCH 1/7] mpd: sort PACKAGECONFIGs again
+Subject: [PATCH 2/7] mpd: fix the sqlite dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +34,26 @@ Content-Transfer-Encoding: 8bit
 
 From: Max Kellermann <max.kellermann@gmail.com>
 
-The new ones I added were not sorted.
+"sqlite" is sqlite 2.x, but MPD requires 3.x.
 
 Signed-off-by: Max Kellermann <max.kellermann@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-index c0d4c8c2b..9b506ba10 100644
+index 9b506ba10..ee70899a5 100644
 --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
 +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-@@ -45,13 +45,13 @@ PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
- PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
- PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
--PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
- PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
-+PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
-+PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
-+PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
- PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
- PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
- PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
--PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
--PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
- PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
- PACKAGECONFIG[wavpack] = "--enable-wavpack,--disable-wavpack,wavpack"
- PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib"
+@@ -7,7 +7,7 @@ inherit autotools useradd systemd pkgconfig
+ 
+ DEPENDS += " \
+     curl \
+-    sqlite \
++    sqlite3 \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
+     tcp-wrappers \
+     yajl \
 -- 
 2.19.0
 
