@@ -1,52 +1,52 @@
 Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 749007553F
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 86CF67553F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 12:18:25 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id j15-v6so22692223wrt.8
+	Wed, 26 Sep 2018 12:18:27 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id y13-v6so2088690wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 05:18:26 -0700 (PDT)
+	Wed, 26 Sep 2018 05:18:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=szxP4JmXpVb2uItWnp/bZkuA3uJ/q9wh+K6EO5BxdbA=;
-	b=H79u8qAVJmo+RazHsQexyoIbQ9Z/e83laCBJaTCyWGqpfZwXFO4WnKsFvkd3ARPdid
-	nI4dKEBLJzihERDrhFYehVDl3IRiwlR7q1jdd3pRm8xjYA4Tm+82sJ7LgPPhebrq9Jpk
-	4GNkk8KlQ6YBBqkE2pkYR4GjAZfhVrsinyWTs=
+	bh=gfStnJY23EGzo/1bcR/Se6q1hSJqt6moZTklFzwxQlk=;
+	b=JnyLNxQETwcIUwTWB+0XsPs6eSWIA4N0Yp+ZurpML48F09n5ekThPnIiisYaHVSR4h
+	ColWo1c8myOOnl7ggmCepXsJGb3MToXey+0CzWzHu3/AIEB6zGKy/yi4TgU7/vtYLTol
+	EYWqdSnmcwOgAYSuJaG/4DBbmTt633QfbXfY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=szxP4JmXpVb2uItWnp/bZkuA3uJ/q9wh+K6EO5BxdbA=;
-	b=QkZTVqb35a1UTqxQ6VokDLvMAhShyYdP6Pva5ov/nYJWTqYFSI+zAtGqZIw7Ml2Tf8
-	oKjRFeWupIvmt3JqZzK08OR3RZsbz4E0gQmREsLeNTfRkhAKPruBeozzXSIsniX8Vvbg
-	0xBDIboBCh8ldLyhLbdPqfkkKCNtMMMyO+NH0tgJudWN6GVNM4G3LPyElIUY4fK8UQ1T
-	OD/gIjoBkJ3XLRwKUxOrTp238yQk1rmldeo6UHYzkZ2YwJZzmN+DDEPm5lu2ubSKNL+/
-	AOLEMCGwpNrKdCJbSX7D0yLbe/WqD3gm0jhRaNrrwcortm/mtoMq5h0yho6qo13xoNMH
-	shEA==
-X-Gm-Message-State: ABuFfoj4BMhsen2EV5nEB/hJeBfE7WRBQavUOsoszIpRt9cBtKsz3iOo
-	InSd4vfDvjsyn9YmE71z17Cg2Q==
-X-Google-Smtp-Source: ACcGV60MdapfDXxBSsfL0QD0Wkzj24IdDY6kHzbSPy1ytlS92evrHSxhp1l3dfeg3QDqu+gkppTFfg==
-X-Received: by 2002:a5d:6782:: with SMTP id
-	v2-v6mr4859031wru.245.1537964306030; 
-	Wed, 26 Sep 2018 05:18:26 -0700 (PDT)
+	bh=gfStnJY23EGzo/1bcR/Se6q1hSJqt6moZTklFzwxQlk=;
+	b=EAoe+HzOV0Tv9hYkllsayZQWLs/dDd+8olaHOnAGe0n+uCqDF3bYmi6mMcxImevKS2
+	bMMnBTFiBLogxFJgXKmSqOAIt6ZLreu7TxqeKfqekdtEpNOB9oudVZTgDm+O9is4P4bW
+	gFbLx8hK415ziG0uJ4+O6bi79hKSn2icO9F6MKad/wEE39JNSN1exoryAnOp59zyhgBS
+	tn9C4wvNRl+MINTf0sqrukVkdEWSHTab69zChenf/uZcyRtnfM34y3GSoop0yZq+VSIS
+	SX5ke8edQxSaKb3nI9Kj3BLsJLafSYp0Py4KMWMIRBVqCQgFqocTbnTAqa6rDv6+SLOc
+	e4gQ==
+X-Gm-Message-State: ABuFfogvfQaZbAsYm99MeoB/qZvRH7rYPQfMkBy814rbLSP/wL6SPBJ8
+	otKYdae7BhkcZuDQs0ZHeixPfPev0dg=
+X-Google-Smtp-Source: ACcGV63BRXKTtxXf3C0uViGNdt5U4XvKnT8R93+6MT+cAVc+p95e67kdCX3uXRonr9QRn+L2o+nAWQ==
+X-Received: by 2002:a1c:780c:: with SMTP id
+	t12-v6mr4202635wmc.133.1537964308084; 
+	Wed, 26 Sep 2018 05:18:28 -0700 (PDT)
 Received: from localhost.localdomain ([92.154.90.120])
 	by smtp.gmail.com with ESMTPSA id
-	z12-v6sm4247960wmf.23.2018.09.26.05.18.24
+	z12-v6sm4247960wmf.23.2018.09.26.05.18.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Sep 2018 05:18:24 -0700 (PDT)
+	Wed, 26 Sep 2018 05:18:26 -0700 (PDT)
 From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Sep 2018 14:18:04 +0200
-Message-Id: <20180926121806.30667-2-nicolas.dechesne@linaro.org>
+Date: Wed, 26 Sep 2018 14:18:05 +0200
+Message-Id: <20180926121806.30667-3-nicolas.dechesne@linaro.org>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20180926121806.30667-1-nicolas.dechesne@linaro.org>
 References: <20180926121806.30667-1-nicolas.dechesne@linaro.org>
 MIME-Version: 1.0
 Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [meta-oe][sumo][PATCH 1/2] meta-multimedia: fixup LAYERDEPENDS
+Subject: [meta-oe][sumo][PATCH 2/2] grpc: move it from oe to networking layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +59,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2018 12:18:25 -0000
+X-List-Received-Date: Wed, 26 Sep 2018 12:18:27 -0000
 Content-Transfer-Encoding: 8bit
 
-libebml depends on dos2unix classe since 26dafa0f3542 (libebml: inherit
-dos2unix), so LAYERDEPENDS needs to be updated accordingly, otherwise we are
-getting a ParseError:
+From: Armin Kuster <akuster808@gmail.com>
 
-ERROR: ParseError at
-/srv/work/oe/meta-openembedded/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb:13:
-Could not inherit file classes/dos2unix.bbclass
+grpc has dependancy on meta-networking packages.
 
-It was initially found with yocto-check-layer script.
-
-In OE/master branch, the dos2unix class was moved to oe-core, so the problem
-does not exist in master, and this patch is less invasive than cherry pick the
-change from master (move dos2unix from meta-oe to oe-core).
-
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+(cherry picked from commit 251878e8b6b993b159c949f7e4860faf085e17f5)
 Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 ---
- meta-multimedia/conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch | 0
+ ...0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch | 0
+ .../0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch | 0
+ {meta-oe => meta-networking}/recipes-devtools/grpc/grpc_1.8.5.bb  | 0
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch (100%)
+ rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch (100%)
+ rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch (100%)
+ rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc_1.8.5.bb (100%)
 
-diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
-index cfedf2f6b..a1dfed4e9 100644
---- a/meta-multimedia/conf/layer.conf
-+++ b/meta-multimedia/conf/layer.conf
-@@ -27,6 +27,6 @@ BBFILE_PRIORITY_multimedia-layer = "6"
- # cause compatibility issues with other layers
- LAYERVERSION_multimedia-layer = "1"
- 
--LAYERDEPENDS_multimedia-layer = "core"
-+LAYERDEPENDS_multimedia-layer = "core openembedded-layer"
- 
- LAYERSERIES_COMPAT_multimedia-layer = "sumo"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch b/meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
+rename to meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
+diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch b/meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
+rename to meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
+diff --git a/meta-oe/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch b/meta-networking/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch
+rename to meta-networking/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb b/meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb
+rename to meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
 -- 
 2.18.0
 
