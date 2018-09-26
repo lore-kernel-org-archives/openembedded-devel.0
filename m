@@ -1,25 +1,32 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id B3B2C793B7
+Return-Path: <hongl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BA616E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Sep 2018 21:41:18 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	25 Sep 2018 14:41:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,303,1534834800"; d="scan'208";a="76167345"
-Received: from nsankark-mobl2.gar.corp.intel.com (HELO localhost.localdomain)
-	([10.249.72.216])
-	by orsmga008.jf.intel.com with ESMTP; 25 Sep 2018 14:40:59 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Sep 2018 09:40:56 +1200
-Message-ID: <1746555.Qn55kT1oli@localhost.localdomain>
-Organization: Intel Corporation
+	Wed, 26 Sep 2018 00:42:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="45348051"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Sep 2018 08:42:27 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id C36B74B6ED40
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Sep 2018 08:42:26 +0800 (CST)
+Received: from localhost.local (10.167.225.78) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.408.0; Wed, 26 Sep 2018 08:42:29 +0800
+From: Hong Liu <hongl.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Sep 2018 08:42:36 +0800
+Message-ID: <20180926004237.28406-2-hongl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.14.3
+In-Reply-To: <20180926004237.28406-1-hongl.fnst@cn.fujitsu.com>
+References: <20180926004237.28406-1-hongl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-Subject: nodejs-native and OpenSSL
+X-Originating-IP: [10.167.225.78]
+X-yoursite-MailScanner-ID: C36B74B6ED40.AED2C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: hongl.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [PATCH] [meta-oe][PATCH] mozjs: upgrade to 52.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,48 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Sep 2018 21:41:18 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 26 Sep 2018 00:42:28 -0000
+Content-Type: text/plain
 
-Hi folks
+Upgrade mozjs from 52.8.1 to 52.9.1
 
-I've recently been trying to build nodejs-native with oe-core/meta-oe master 
-on Ubuntu 14.04, and unfortunately it's failing for me:
+Signed-off-by: Hong Liu <hongl.fnst@cn.fujitsu.com>
 
---------- snip ---------
-/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::RandomBytesWork(uv_work_s*)':
-node_crypto.cc:(.text+0x31): undefined reference to `RAND_poll'
-node_crypto.cc:(.text+0x3a): undefined reference to `RAND_status'
-node_crypto.cc:(.text+0x52): undefined reference to `RAND_bytes'
-node_crypto.cc:(.text+0x89): undefined reference to `ERR_get_error'
-/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::DiffieHellman::GetPrime(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(dh_st const*)#1}::_FUN(dh_st const*)':
-node_crypto.cc:(.text+0x121): undefined reference to `DH_get0_pqg'
-/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::DiffieHellman::GetGenerator(v8::FunctionCallbackInfo<v8::Value> const&)::{lambda(dh_st const*)#1}::_FUN(dh_st const*)':
-node_crypto.cc:(.text+0x141): undefined reference to `DH_get0_pqg'
-/home/paul/poky/poky/build-minnow/tmp/work/x86_64-linux/nodejs-native/8.11.4-r0/node-v8.11.4/out/Release/obj.target/node_lib/src/node_crypto.o: In function `node::crypto::SecureContext::TicketCompatibilityCallback(ssl_st*, unsigned char*, unsigned char*, evp_cipher_ctx_st*, hmac_ctx_st*, int)':
-node_crypto.cc:(.text+0x172): undefined reference to `SSL_get_SSL_CTX'
-node_crypto.cc:(.text+0x17c): undefined reference to `SSL_CTX_get_ex_data'
-node_crypto.cc:(.text+0x1c1): undefined reference to `EVP_aes_128_cbc'
---------- snip ---------
+	renamed:    mozjs_52.8.1.bb -> mozjs_52.9.1.bb
+---
+ meta-oe/recipes-extended/mozjs/{mozjs_52.8.1.bb => mozjs_52.9.1.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/mozjs/{mozjs_52.8.1.bb => mozjs_52.9.1.bb} (95%)
 
-At first, since I haven't seen reports of this elsewhere I thought maybe it had
-something to do with the host OpenSSL version being 1.0, but adding -H to
-CFLAGS/CXXFLAGS and -Wl,--trace to LDFLAGS seems to suggest that it's
-using both the headers and libraries for OpenSSL from the sysroot as it 
-should.
-
-Has anyone else seen this? Any suggestions? (other than perhaps "update 
-your host distro and try again")?
-
-Cheers,
-Paul
-
-
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
+similarity index 95%
+rename from meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
+rename to meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
+index 626522e..0dfe2f8 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_52.8.1.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_52.9.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonk
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+ 
+-SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.8.1.orig.tar.bz2 \
++SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.9.1.orig.tar.xz \
+            file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
+            file://0010-fix-cross-compilation-on-i586-targets.patch \
+            file://0001-do-not-create-python-environment.patch \
+@@ -22,8 +22,8 @@ SRC_URI_append_mipsarchn32 = " \
+            file://0001-fix-compiling-failure-on-mips64-n32-bsp.patch \
+            "
+ 
+-SRC_URI[md5sum] = "3a44c2fd3d7b5a370ed9184163c74bc4"
+-SRC_URI[sha256sum] = "fb5e11b7f31a33be820d5c947c5fa114751b0d5033778c1cd8e0cf2dad91e8fa"
++SRC_URI[md5sum] = "c9473c625ee0a9edaaac8b742ff24c5f"
++SRC_URI[sha256sum] = "f9324a6724233ab15f10381fe13e635e89d725ef1e78025a0a7d36c58a84a0f9"
+ 
+ inherit autotools pkgconfig perlnative pythonnative
+ 
 -- 
+2.7.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
 
 
