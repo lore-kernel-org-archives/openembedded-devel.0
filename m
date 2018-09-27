@@ -1,45 +1,48 @@
 Return-Path: <mhalstead@linuxfoundation.org>
 Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
 	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 2487B6FFCD
+	by mail.openembedded.org (Postfix) with ESMTP id 17DB4745AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 23:41:45 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id x26-v6so465996pfn.4
+	Thu, 27 Sep 2018 00:46:49 +0000 (UTC)
+Received: by mail-pf1-f180.google.com with SMTP id a23-v6so533416pfi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 16:41:47 -0700 (PDT)
+	Wed, 26 Sep 2018 17:46:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=linuxfoundation.org; s=google;
-	h=to:from:subject:openpgp:autocrypt:organization:message-id:date
-	:user-agent:mime-version:content-language:content-transfer-encoding;
-	bh=71NF508EdvwuoAi8OhjfKLyjmQyvaIiodCOQ1w760jA=;
-	b=Ivwl6T0E9tYSBXGXqua2vIxQCv6HlL4X9bwqb2v0oB3D0pQY1IHvMGpPRURaNJzD5m
-	9w6mQdZOC6xg5Nx1OK37qUFAK9TQhUEmol9wmtv6az1LN6cSVkQVv74Hi0jUC2oVnz0E
-	szQPKmBg9PFGzl3WYV/IFwZ7UdaewUOHyJ9EM=
+	h=subject:from:to:references:openpgp:autocrypt:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=3Pb699Qp+zwEjw+ebyIUlyuvtHmpLC63Ojju2CgDyT4=;
+	b=Yvkm4vXAWzv1oVuzs7qa1FEe8iMuIl4v1w1hmx8m7TMFGLuQv/a7PqE5PP6IzeaMqC
+	1w+OEi1KCNpS+DlfOUshZyQ2KOil4gZqaSf1LJfGtgn7DjQ2tbG2+Q46WF+wp0hzus97
+	xw0xHSdMNcCZgD6Ia7/hEj+VJDT3+qQJwlmA0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:organization
-	:message-id:date:user-agent:mime-version:content-language
-	:content-transfer-encoding;
-	bh=71NF508EdvwuoAi8OhjfKLyjmQyvaIiodCOQ1w760jA=;
-	b=fWBfUyoC6aXA5+JCVEPhQGQ1LhfbCNumHxgCi6XRLh5IUPL669MbV7a4EZmjDHHB5r
-	gV/dMvHfH65g67dSEsM2E5wGwrIicjJyxVpQnCIuO/KadJCBXz51tUajv+PNt4pnwUkc
-	wB4UZ7uw7n+5cosVGqBP4ebdO9KZW2xGmyhXsOeEhhaE4+CZplBNVANesug8hJFcK4vp
-	P+NSuNYHF31LNK/eUBsYYS0agfpTYXBscaLTuDo/OAZiWw1veOMZ1qfDX4NRR+v62st3
-	W7ohRleVhllxuxLzW3u5zQMYPQNluAFCqq44X9W2SHrxrPHANeDbuf4uT0EftCeHso+f
-	WHJQ==
-X-Gm-Message-State: ABuFfojVfhtq64gPhReQL8MsIo0r9V2My8Fj/uDrplkZpRK5ypB/JJbj
-	NGGsbpIw6PuLcVIOVH24GJKHD2AtM1M=
-X-Google-Smtp-Source: ACcGV61cmF7UOYuStVu0i+YIwcTonK/ZH2bzKy1xygG6hxuLM2phhI9mrSYfHtTjaDHBm6sJakSg9g==
-X-Received: by 2002:a62:db46:: with SMTP id f67-v6mr8440049pfg.1.1538005306707;
-	Wed, 26 Sep 2018 16:41:46 -0700 (PDT)
+	h=x-gm-message-state:subject:from:to:references:openpgp:autocrypt
+	:organization:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=3Pb699Qp+zwEjw+ebyIUlyuvtHmpLC63Ojju2CgDyT4=;
+	b=L1My8+yA5WhkWh8CoI4YytWl1sdi2RvIu2sGkPdQ/8k7bSIR2RgXvQgMeBCEIQGNxL
+	9GJK1hQ/DgmJu4uO47rDJB+PX8Yna1cSdJBKr6245KyIEXIbrCgp8UPMlgkuqd8hOZc9
+	H2vaUdVy72quggwOAD4h17a70oYMiPhSwbSwi44KfPMfIM2sqjcmEyFr0UYoWN8ScQTG
+	xAw5ENa1HpU5gEsXqdNNLPdFL1Mt4lf6iWvIrHdPTyBEv6/1ezYRkOjtahKfHA5hWVbX
+	HgdYtmNTCKTfcijeq7LLctbSFF1lWGVYvtTRMDJCJtw9hrUDHVFY6hs7ceaLaKPgDD21
+	Vpsg==
+X-Gm-Message-State: ABuFfoj+qhIZBU3bbj9HyvnLZeghs21THV5iZD+q/he7iTOyX5fNFQGM
+	tCJxCri+EL2OJ+4hvW3BCig8Kur8MRo=
+X-Google-Smtp-Source: ACcGV6307E8QWr4QcYPwIA7PTddEULoFRjc/MzV3vDDDjVtk71rKNh7QxAEbzPa8Jx/eMIgtggo0kw==
+X-Received: by 2002:a63:d40c:: with SMTP id
+	a12-v6mr7753908pgh.394.1538009210545; 
+	Wed, 26 Sep 2018 17:46:50 -0700 (PDT)
 Received: from [192.168.17.78] (50-39-175-47.bvtn.or.frontiernet.net.
 	[50.39.175.47]) by smtp.gmail.com with ESMTPSA id
-	i65-v6sm310976pfk.43.2018.09.26.16.41.45
+	o12-v6sm431494pfh.20.2018.09.26.17.46.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Sep 2018 16:41:46 -0700 (PDT)
+	Wed, 26 Sep 2018 17:46:50 -0700 (PDT)
+From: Michael Halstead <mhalstead@linuxfoundation.org>
 To: yocto-infrastructure@yoctoproject.org,
 	openembedded-devel@lists.openembedded.org
-From: Michael Halstead <mhalstead@linuxfoundation.org>
+References: <7ccf040c-e09e-74a2-560e-ee656c117b79@linuxfoundation.org>
 Openpgp: preference=signencrypt
 Autocrypt: addr=mhalstead@linuxfoundation.org; prefer-encrypt=mutual; keydata=
 	xsFNBE8Dc30BEADBDFdUgzs/mLCh8cGWry5+FaZwBnyEZ1OMXSKFQ1Y3W3nZ2iRTCymuJyBC
@@ -81,12 +84,13 @@ Autocrypt: addr=mhalstead@linuxfoundation.org; prefer-encrypt=mutual; keydata=
 	fH1RcBkNMqTZI8lv6zvp4XP3bPdQ03/jaQ/vztvOKkgiVokdVk/nw9jdaL25mWHqFqKFRlDx
 	VEhmOibMbbTdMNpoTgLeGe583/NAP+ls2GeZmVDZ
 Organization: Linux Foundation
-Message-ID: <7ccf040c-e09e-74a2-560e-ee656c117b79@linuxfoundation.org>
-Date: Wed, 26 Sep 2018 16:41:45 -0700
+Message-ID: <11f2b816-fa52-5dea-e11a-fdd60d13de3b@linuxfoundation.org>
+Date: Wed, 26 Sep 2018 17:46:49 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: http://layers.openembedded.org/ offline since 23:10 UTC
+In-Reply-To: <7ccf040c-e09e-74a2-560e-ee656c117b79@linuxfoundation.org>
+Subject: Re: http://layers.openembedded.org/ back online
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -99,13 +103,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Sep 2018 23:41:46 -0000
+X-List-Received-Date: Thu, 27 Sep 2018 00:46:50 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-The OE layerindex is offline due to filesystem corruption. I've
-provisioned a new server and I am in the process of restoring from backups.
+The layerindex is online and serving again as of 00:40 UTC.
+
+Extensive database activity during our upgrade today revealed file
+system corruption leading to the unplanned downtime. Instead of
+repairing the issue in place the service has been moved to a more
+reliable platform. We took fresh backups before beginning the upgrade so
+no data has been lost.
+
+The upgrade is continuing now.
+
+On 09/26/2018 04:41 PM, Michael Halstead wrote:
+> The OE layerindex is offline due to filesystem corruption. I've
+> provisioned a new server and I am in the process of restoring from backups.
+> 
 
 -- 
 Michael Halstead
