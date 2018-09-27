@@ -1,96 +1,103 @@
-Return-Path: <mhalstead@linuxfoundation.org>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 17DB4745AA
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B1EBA78EFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 00:46:49 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id a23-v6so533416pfi.12
+	Thu, 27 Sep 2018 01:43:59 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id x17-v6so648812pfh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 17:46:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=subject:from:to:references:openpgp:autocrypt:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=3Pb699Qp+zwEjw+ebyIUlyuvtHmpLC63Ojju2CgDyT4=;
-	b=Yvkm4vXAWzv1oVuzs7qa1FEe8iMuIl4v1w1hmx8m7TMFGLuQv/a7PqE5PP6IzeaMqC
-	1w+OEi1KCNpS+DlfOUshZyQ2KOil4gZqaSf1LJfGtgn7DjQ2tbG2+Q46WF+wp0hzus97
-	xw0xHSdMNcCZgD6Ia7/hEj+VJDT3+qQJwlmA0=
+	Wed, 26 Sep 2018 18:44:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=jzDLHrC4GUK1jZ2T0+fG0wSrO3WfebLqZ6GGwEuayP0=;
+	b=qfb/zB53xll+Cbd8oCoA7LWEFSlNK61GQwwdLllqs4uYH4LjgWoZ6IYg76GWjTQbTx
+	x91AgYpnags4CoX6pI9P7yha/3b2YIkgPPW81aAyzMj4npmr6ZOGZjeKNuTvaIkJmzPj
+	3uI4rbB6J453BCDsF84DewHyIrj3KGr4kau4nbacGi6glHa43dx7ecuJICeKF/kRytrk
+	7TZtR4yOJdoTf7/UuNfZmn6a4yKPbwd3prA1lmGQN02RzLiPJIQP2MPX6abaCqVnspc/
+	wohoO/tWThMuO3Qs+4Y7gG3abjAIg941PSdnDFoviDOJvMYx3RPR9+8CZj/sQvqe6R8D
+	RQpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:from:to:references:openpgp:autocrypt
-	:organization:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=3Pb699Qp+zwEjw+ebyIUlyuvtHmpLC63Ojju2CgDyT4=;
-	b=L1My8+yA5WhkWh8CoI4YytWl1sdi2RvIu2sGkPdQ/8k7bSIR2RgXvQgMeBCEIQGNxL
-	9GJK1hQ/DgmJu4uO47rDJB+PX8Yna1cSdJBKr6245KyIEXIbrCgp8UPMlgkuqd8hOZc9
-	H2vaUdVy72quggwOAD4h17a70oYMiPhSwbSwi44KfPMfIM2sqjcmEyFr0UYoWN8ScQTG
-	xAw5ENa1HpU5gEsXqdNNLPdFL1Mt4lf6iWvIrHdPTyBEv6/1ezYRkOjtahKfHA5hWVbX
-	HgdYtmNTCKTfcijeq7LLctbSFF1lWGVYvtTRMDJCJtw9hrUDHVFY6hs7ceaLaKPgDD21
-	Vpsg==
-X-Gm-Message-State: ABuFfoj+qhIZBU3bbj9HyvnLZeghs21THV5iZD+q/he7iTOyX5fNFQGM
-	tCJxCri+EL2OJ+4hvW3BCig8Kur8MRo=
-X-Google-Smtp-Source: ACcGV6307E8QWr4QcYPwIA7PTddEULoFRjc/MzV3vDDDjVtk71rKNh7QxAEbzPa8Jx/eMIgtggo0kw==
-X-Received: by 2002:a63:d40c:: with SMTP id
-	a12-v6mr7753908pgh.394.1538009210545; 
-	Wed, 26 Sep 2018 17:46:50 -0700 (PDT)
-Received: from [192.168.17.78] (50-39-175-47.bvtn.or.frontiernet.net.
-	[50.39.175.47]) by smtp.gmail.com with ESMTPSA id
-	o12-v6sm431494pfh.20.2018.09.26.17.46.49
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=jzDLHrC4GUK1jZ2T0+fG0wSrO3WfebLqZ6GGwEuayP0=;
+	b=Q3rVkSkop8QguKwNhml4v7gSCwDtfHfEG/WCbb1ZrNA4yGqjGGueXKZJ6qHT+YLzGL
+	fK9+kJu8neXfeLn7XEDjhUKHIvptk2hsK0NS9xOSdoxKay5dCfpkWsyQRFtTzQTz5Vu9
+	H8S9wZfT7umeGTFt4hUF6VoWtlGq1jgwBa7jZHYwsvU1DHEWVxUOROIw/6DIQhZtMpGj
+	IqVovd2DHsDduz7imEzWB1n3zkww22wwgktxYfe/uWpPByX91Gy0WJ7HBHhFCgSeuGC9
+	jT29GSCHjeIG9TGgJurXDzOzAw6FSM1VdLvVHKR1cYlO0t3gUOVcu+RgrMDIlJJbXATZ
+	tXNA==
+X-Gm-Message-State: ABuFfogbAr8fDowd3M1trL7tWbiCTm1/AX0PVYOktZwo/oNeNB1E2iQl
+	bC/f4P/SPiq2gBUs6HkFR1V4on5y
+X-Google-Smtp-Source: ACcGV62Eel5NSpR+EFZ/YOInh5D+Gr0xEsWUhaKqWUcP4xmDJryR4gIu03noL8/sJ6sHA9z1kBQ79A==
+X-Received: by 2002:a62:4613:: with SMTP id
+	t19-v6mr8844893pfa.118.1538012640445; 
+	Wed, 26 Sep 2018 18:44:00 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:48c:9f78:37fc:8835?
+	([2601:202:4180:c33:48c:9f78:37fc:8835])
+	by smtp.gmail.com with ESMTPSA id
+	z11-v6sm551917pfi.4.2018.09.26.18.43.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Sep 2018 17:46:50 -0700 (PDT)
-From: Michael Halstead <mhalstead@linuxfoundation.org>
-To: yocto-infrastructure@yoctoproject.org,
+	Wed, 26 Sep 2018 18:43:58 -0700 (PDT)
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>,
 	openembedded-devel@lists.openembedded.org
-References: <7ccf040c-e09e-74a2-560e-ee656c117b79@linuxfoundation.org>
+References: <20180926121806.30667-1-nicolas.dechesne@linaro.org>
+	<20180926121806.30667-3-nicolas.dechesne@linaro.org>
+From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
-Autocrypt: addr=mhalstead@linuxfoundation.org; prefer-encrypt=mutual; keydata=
-	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
-Organization: Linux Foundation
-Message-ID: <11f2b816-fa52-5dea-e11a-fdd60d13de3b@linuxfoundation.org>
-Date: Wed, 26 Sep 2018 17:46:49 -0700
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <eee8496f-50ec-72c8-a4d9-6cafb9ee629d@gmail.com>
+Date: Wed, 26 Sep 2018 18:43:56 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <7ccf040c-e09e-74a2-560e-ee656c117b79@linuxfoundation.org>
-Subject: Re: http://layers.openembedded.org/ back online
+In-Reply-To: <20180926121806.30667-3-nicolas.dechesne@linaro.org>
+Subject: Re: [meta-oe][sumo][PATCH 2/2] grpc: move it from oe to networking layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -103,27 +110,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 00:46:50 -0000
+X-List-Received-Date: Thu, 27 Sep 2018 01:43:59 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-The layerindex is online and serving again as of 00:40 UTC.
 
-Extensive database activity during our upgrade today revealed file
-system corruption leading to the unplanned downtime. Instead of
-repairing the issue in place the service has been moved to a more
-reliable platform. We took fresh backups before beginning the upgrade so
-no data has been lost.
 
-The upgrade is continuing now.
+On 09/26/2018 05:18 AM, Nicolas Dechesne wrote:
+> From: Armin Kuster <akuster808@gmail.com>
+>
+> grpc has dependancy on meta-networking packages.
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> (cherry picked from commit 251878e8b6b993b159c949f7e4860faf085e17f5)
+> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 
-On 09/26/2018 04:41 PM, Michael Halstead wrote:
-> The OE layerindex is offline due to filesystem corruption. I've
-> provisioned a new server and I am in the process of restoring from backups.
-> 
+this is already in sumo-next
 
--- 
-Michael Halstead
-Linux Foundation / SysAdmin
+- armin
+> ---
+>  ...001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch | 0
+>  ...0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch | 0
+>  .../0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch | 0
+>  {meta-oe => meta-networking}/recipes-devtools/grpc/grpc_1.8.5.bb  | 0
+>  4 files changed, 0 insertions(+), 0 deletions(-)
+>  rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch (100%)
+>  rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch (100%)
+>  rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch (100%)
+>  rename {meta-oe => meta-networking}/recipes-devtools/grpc/grpc_1.8.5.bb (100%)
+>
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch b/meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
+> similarity index 100%
+> rename from meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
+> rename to meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch b/meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
+> similarity index 100%
+> rename from meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
+> rename to meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch b/meta-networking/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch
+> similarity index 100%
+> rename from meta-oe/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch
+> rename to meta-networking/recipes-devtools/grpc/grpc/0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch
+> diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb b/meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
+> similarity index 100%
+> rename from meta-oe/recipes-devtools/grpc/grpc_1.8.5.bb
+> rename to meta-networking/recipes-devtools/grpc/grpc_1.8.5.bb
+
 
