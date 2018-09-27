@@ -1,45 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B4BFA794A2
+Return-Path: <pascal.bach@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id BAD2960074
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 15:57:21 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id 84-v6so1926612qkf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 08:57:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Qmg9f5B/8+dtbcCY2aouo2MS1FQQMj0+aeIPdhNdBFo=;
-	b=et+4riXI2/XS/XAiV9Oc67o5BOj585v0axZcI7/8vPWEMxrguACQ9Vj5JU+9Yqom9U
-	QK5SkKwZyk6978Z4CbooJvo3DZs8iXQINBhQ06TTzNK7LniAvQlY7ESfDBdmddvTE5s3
-	k886wWlktVo0q8EsTqwYZA6g3F7qp3DtGGBVk2A1gRfxh1V35WwgKDdTsxsKMQ6ShLYy
-	t4vR4Z8Bx61ZWKvH71QAHW6jwkv6DncQ/K5p8uZrLYsk7kh+RUC0yMtWAxxJld3Lgiv1
-	mLx4RFjJnkqr+wJciBpVo2VySJYdqF2X94ZbmH2uwM5WtTwD4fpocSRGvBcvh7meeT9u
-	FvhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Qmg9f5B/8+dtbcCY2aouo2MS1FQQMj0+aeIPdhNdBFo=;
-	b=cuytaaormpwZUS9aKIKgFWngfmk9GninXqgm5UiFj3zPijWw7mSzPFp0z4BAHpXkrk
-	QDSEkFVMOmt4vEZ0UBn1p25ah5ydSs4nHM9ZhywGPGcqSZlBrFfMYw140JWA/dqowoO8
-	HISImIJJlMAJuszMb19Ce3y+aVwLbgcW/yvaqv2lSKA9VMu5M+FEgwBG8owaCvK3aH0d
-	SnBuMUbOVmROZa5LuoI7B2yI3vRrqIMK0JvbmNuSLyewE3ZcBY7xVEcXrBM4UXlQ6sro
-	aJE0u0nxkH2uuxgUpu7hWnQ5If2ffoy1+jqhE5LRdicvyy2vpaaBbJVz9beL6pR1FhrS
-	SV/Q==
-X-Gm-Message-State: ABuFfog5U46yM9VfXsn5JVPaz1kUUYNdWuMTCkSNxwjYD0ulUkXhbO80
-	/RReervFExdo6WJ4XK/uvA67JwXYJFr2AAJcVEs=
-X-Google-Smtp-Source: ACcGV60hO5S5kXml0FQTl45a92gFxLqemJ8mj3EcyfMWVSdjYm1DEZz4jlg51NWBbsh21OsjO8tH3rnglRQfIqbFc1c=
-X-Received: by 2002:a37:9d55:: with SMTP id
-	g82-v6mr6062963qke.315.1538063842251; 
-	Thu, 27 Sep 2018 08:57:22 -0700 (PDT)
-MIME-Version: 1.0
+	Thu, 27 Sep 2018 16:14:44 +0000 (UTC)
+Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id w8RGEi9F010366
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Thu, 27 Sep 2018 18:14:44 +0200
+Received: from DEFTHW99ERHMSX.ww902.siemens.net
+	(defthw99erhmsx.ww902.siemens.net [139.22.70.133])
+	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id w8RGE4BH018366
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Thu, 27 Sep 2018 18:14:44 +0200
+Received: from DENBGAT9ER1MSX.ww902.siemens.net (139.22.70.87) by
+	DEFTHW99ERHMSX.ww902.siemens.net (139.22.70.133) with Microsoft SMTP
+	Server (TLS) id 14.3.408.0; Thu, 27 Sep 2018 18:14:36 +0200
+Received: from DEFTHW99EH4MSX.ww902.siemens.net ([169.254.2.216]) by
+	DENBGAT9ER1MSX.ww902.siemens.net ([139.22.70.87]) with mapi id
+	14.03.0415.000; Thu, 27 Sep 2018 18:14:35 +0200
+From: "Bach, Pascal" <pascal.bach@siemens.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH] thrift: update to 0.11.0
+Thread-Index: AQHUVlPJ0e9gXz3qdkSb9LxhcIuRsaUEJz6AgAAl5YA=
+Date: Thu, 27 Sep 2018 16:14:34 +0000
+Message-ID: <355BE46A91031048906B695426A8D8E61B8E3819@DEFTHW99EH4MSX.ww902.siemens.net>
 References: <20180927111805.9919-1-pascal.bach@siemens.com>
-In-Reply-To: <20180927111805.9919-1-pascal.bach@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Sep 2018 08:56:55 -0700
-Message-ID: <CAMKF1spEo3jSZ6jXrpNjK885M6Zwj8PEEO7-PFTYn1f6T0F5Vg@mail.gmail.com>
-To: Pascal Bach <pascal.bach@siemens.com>
+	<CAMKF1spEo3jSZ6jXrpNjK885M6Zwj8PEEO7-PFTYn1f6T0F5Vg@mail.gmail.com>
+In-Reply-To: <CAMKF1spEo3jSZ6jXrpNjK885M6Zwj8PEEO7-PFTYn1f6T0F5Vg@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [139.22.70.27]
+MIME-Version: 1.0
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] thrift: update to 0.11.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -54,458 +46,420 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 15:57:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 27 Sep 2018 16:14:45 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-it seems to be doing -isystem thing and confusing the build see
-
-http://errors.yoctoproject.org/Errors/Details/194753/
-
-
-On Thu, Sep 27, 2018 at 4:24 AM Pascal Bach <pascal.bach@siemens.com> wrote:
->
-> Remove the python library feature as it was never installed so nobody should
-> miss it.
->
-> The CMake patches are no longer needed as most of the underlying issue
-> is fixed in OE core.
-> The other patches are backports that are already upstream in 0.11.
->
-> OpenSSL 1.1 is supported by this version of thrift.
->
-> Also add a feature to use boost smart pointers instead of C++ std ones.
-> This is enabled by default to keep backwards compatibility with the
-> 0.9.3 recipe. However projects depending on thrift might still need to set
-> FORCE_BOOST_SMART_PTR within their build CMake project to make sure the correct
-> headers are selected.
->
-> Further the different libraries are now split into separate packages.
->
-> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
-> ---
->  .../0001-Forcibly-disable-check-for-Qt5.patch      |  25 -----
->  ...-In-cmake-avoid-use-of-both-quoted-paths-.patch | 108 ---------------------
->  ...31-in-test-cpp-explicitly-use-signed-char.patch |  38 --------
->  ...07-enable-build-with-OpenSSL-1.1.0-series.patch |  41 --------
->  ...-Compile-error-in-TSSLSocket.cpp-with-new.patch |  26 -----
->  ...-C++-library-build-fails-if-OpenSSL-does-.patch |  46 ---------
->  .../thrift/{thrift_0.9.3.bb => thrift_0.11.0.bb}   |  34 +++----
->  7 files changed, 17 insertions(+), 301 deletions(-)
->  delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-Forcibly-disable-check-for-Qt5.patch
->  delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch
->  delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch
->  delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch
->  delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0005-THRIFT-3878-Compile-error-in-TSSLSocket.cpp-with-new.patch
->  delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0006-THRIFT-3736-C++-library-build-fails-if-OpenSSL-does-.patch
->  rename meta-oe/recipes-connectivity/thrift/{thrift_0.9.3.bb => thrift_0.11.0.bb} (57%)
->
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-Forcibly-disable-check-for-Qt5.patch b/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-Forcibly-disable-check-for-Qt5.patch
-> deleted file mode 100644
-> index a77cd284b..000000000
-> --- a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-Forcibly-disable-check-for-Qt5.patch
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -From a5544d8e543436e413379422b702f6f56ac7eb8e Mon Sep 17 00:00:00 2001
-> -From: Philip Balister <philip@balister.org>
-> -Date: Tue, 12 Apr 2016 17:30:15 -0400
-> -Subject: [PATCH] Forcibly disable check for Qt5.
-> -
-> -Signed-off-by: Philip Balister <philip@balister.org>
-> -
-> ----
-> - build/cmake/DefineOptions.cmake | 3 ---
-> - 1 file changed, 3 deletions(-)
-> -
-> -diff --git a/build/cmake/DefineOptions.cmake b/build/cmake/DefineOptions.cmake
-> -index 62e240f..f8b4493 100644
-> ---- a/build/cmake/DefineOptions.cmake
-> -+++ b/build/cmake/DefineOptions.cmake
-> -@@ -52,9 +52,6 @@ CMAKE_DEPENDENT_OPTION(WITH_LIBEVENT "Build with libevent support" ON
-> - find_package(Qt4 QUIET COMPONENTS QtCore QtNetwork)
-> - CMAKE_DEPENDENT_OPTION(WITH_QT4 "Build with Qt4 support" ON
-> -                        "QT4_FOUND" OFF)
-> --find_package(Qt5 QUIET COMPONENTS Core Network)
-> --CMAKE_DEPENDENT_OPTION(WITH_QT5 "Build with Qt5 support" ON
-> --                       "Qt5_FOUND" OFF)
-> - if(${WITH_QT4} AND ${WITH_QT5} AND ${CMAKE_MAJOR_VERSION} LESS 3)
-> -   # cmake < 3.0.0 causes conflict when building both Qt4 and Qt5
-> -   set(WITH_QT4 OFF)
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch b/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch
-> deleted file mode 100644
-> index 182eacc0e..000000000
-> --- a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch
-> +++ /dev/null
-> @@ -1,108 +0,0 @@
-> -From b8e254a2f4ba49412e541598c72159869a7770f8 Mon Sep 17 00:00:00 2001
-> -From: Cody P Schafer <dev@codyps.com>
-> -Date: Mon, 16 May 2016 15:21:10 -0400
-> -Subject: [PATCH] THRIFT-3828 In cmake avoid use of both quoted paths and
-> - SYSTEM with include_directories()
-> -
-> -This allows us to avoid issues where there are no paths to be added to
-> -the include path (include_directories() errors when given an empty
-> -string).
-> -
-> -Specifically, gcc-6 requires that libraries stop passing paths like
-> -'/usr/include' (or they will get libstdc++ build errors), so these paths
-> -will be empty more often in the future.
-> -
-> ----
-> - lib/cpp/CMakeLists.txt      | 8 ++++----
-> - lib/cpp/test/CMakeLists.txt | 2 +-
-> - test/cpp/CMakeLists.txt     | 6 +++---
-> - tutorial/cpp/CMakeLists.txt | 2 +-
-> - 4 files changed, 9 insertions(+), 9 deletions(-)
-> -
-> -diff --git a/lib/cpp/CMakeLists.txt b/lib/cpp/CMakeLists.txt
-> -index 4c7caeb..a716ac3 100755
-> ---- a/lib/cpp/CMakeLists.txt
-> -+++ b/lib/cpp/CMakeLists.txt
-> -@@ -24,7 +24,7 @@ else()
-> -   find_package(Boost 1.53.0 REQUIRED)
-> - endif()
-> -
-> --include_directories(SYSTEM "${Boost_INCLUDE_DIRS}")
-> -+include_directories(${Boost_INCLUDE_DIRS})
-> - include_directories(src)
-> -
-> - # SYSLIBS contains libraries that need to be linked to all lib targets
-> -@@ -104,7 +104,7 @@ if(OPENSSL_FOUND AND WITH_OPENSSL)
-> -        src/thrift/transport/TSSLSocket.cpp
-> -        src/thrift/transport/TSSLServerSocket.cpp
-> -     )
-> --    include_directories(SYSTEM "${OPENSSL_INCLUDE_DIR}")
-> -+    include_directories(${OPENSSL_INCLUDE_DIR})
-> -     list(APPEND SYSLIBS "${OPENSSL_LIBRARIES}")
-> - endif()
-> -
-> -@@ -162,7 +162,7 @@ TARGET_LINK_LIBRARIES_THRIFT(thrift ${SYSLIBS})
-> -
-> - if(WITH_LIBEVENT)
-> -     find_package(Libevent REQUIRED)  # Libevent comes with CMake support form upstream
-> --    include_directories(SYSTEM ${LIBEVENT_INCLUDE_DIRS})
-> -+    include_directories(${LIBEVENT_INCLUDE_DIRS})
-> -
-> -     ADD_LIBRARY_THRIFT(thriftnb ${thriftcppnb_SOURCES})
-> -     TARGET_LINK_LIBRARIES_THRIFT(thriftnb ${SYSLIBS} ${LIBEVENT_LIBRARIES})
-> -@@ -171,7 +171,7 @@ endif()
-> -
-> - if(WITH_ZLIB)
-> -     find_package(ZLIB REQUIRED)
-> --    include_directories(SYSTEM ${ZLIB_INCLUDE_DIRS})
-> -+    include_directories(${ZLIB_INCLUDE_DIRS})
-> -
-> -     ADD_LIBRARY_THRIFT(thriftz ${thriftcppz_SOURCES})
-> -     TARGET_LINK_LIBRARIES_THRIFT(thriftz ${SYSLIBS} ${ZLIB_LIBRARIES})
-> -diff --git a/lib/cpp/test/CMakeLists.txt b/lib/cpp/test/CMakeLists.txt
-> -index 5de9fc4..c956c38 100644
-> ---- a/lib/cpp/test/CMakeLists.txt
-> -+++ b/lib/cpp/test/CMakeLists.txt
-> -@@ -20,7 +20,7 @@
-> - # Find required packages
-> - set(Boost_USE_STATIC_LIBS ON) # Force the use of static boost test framework
-> - find_package(Boost 1.53.0 REQUIRED COMPONENTS chrono filesystem system thread unit_test_framework)
-> --include_directories(SYSTEM "${Boost_INCLUDE_DIRS}")
-> -+include_directories(${Boost_INCLUDE_DIRS})
-> -
-> - #Make sure gen-cpp files can be included
-> - include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-> -diff --git a/test/cpp/CMakeLists.txt b/test/cpp/CMakeLists.txt
-> -index 2d75f2e..b1409de 100755
-> ---- a/test/cpp/CMakeLists.txt
-> -+++ b/test/cpp/CMakeLists.txt
-> -@@ -22,13 +22,13 @@ include(ThriftMacros)
-> -
-> - set(Boost_USE_STATIC_LIBS ON)
-> - find_package(Boost 1.53.0 REQUIRED COMPONENTS program_options system filesystem)
-> --include_directories(SYSTEM "${Boost_INCLUDE_DIRS}")
-> -+include_directories(${Boost_INCLUDE_DIRS})
-> -
-> - find_package(OpenSSL REQUIRED)
-> --include_directories(SYSTEM "${OPENSSL_INCLUDE_DIR}")
-> -+include_directories(${OPENSSL_INCLUDE_DIR})
-> -
-> - find_package(Libevent REQUIRED)  # Libevent comes with CMake support from upstream
-> --include_directories(SYSTEM ${LIBEVENT_INCLUDE_DIRS})
-> -+include_directories(${LIBEVENT_INCLUDE_DIRS})
-> -
-> - #Make sure gen-cpp files can be included
-> - include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-> -diff --git a/tutorial/cpp/CMakeLists.txt b/tutorial/cpp/CMakeLists.txt
-> -index 2b0c143..5ecae17 100644
-> ---- a/tutorial/cpp/CMakeLists.txt
-> -+++ b/tutorial/cpp/CMakeLists.txt
-> -@@ -18,7 +18,7 @@
-> - #
-> -
-> - find_package(Boost 1.53.0 REQUIRED)
-> --include_directories(SYSTEM "${Boost_INCLUDE_DIRS}")
-> -+include_directories(${Boost_INCLUDE_DIRS})
-> -
-> - #Make sure gen-cpp files can be included
-> - include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch b/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch
-> deleted file mode 100644
-> index 37715c281..000000000
-> --- a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch
-> +++ /dev/null
-> @@ -1,38 +0,0 @@
-> -From 7b05a74432f08ef34d0f8743dd6438ad012e3b5e Mon Sep 17 00:00:00 2001
-> -From: Cody P Schafer <dev@codyps.com>
-> -Date: Fri, 9 Sep 2016 15:50:26 -0400
-> -Subject: [PATCH] THRIFT-3831 in test/cpp explicitly use `signed char`
-> -
-> -`char`'s signed-ness is implimentation dependent, and in the case where
-> -`char` was not signed, we previously recieved errors like
-> -
-> -    thrift/0.9.3-r0/git/test/cpp/src/TestClient.cpp:404:15: error: narrowing conversion of '-127' from 'int' to 'char' inside { } [-Wnarrowing]
-> -
-> -(This example from gcc-6 on arm)
-> -
-> ----
-> - test/cpp/src/TestClient.cpp | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/test/cpp/src/TestClient.cpp b/test/cpp/src/TestClient.cpp
-> -index 7c425a9..7145ebb 100644
-> ---- a/test/cpp/src/TestClient.cpp
-> -+++ b/test/cpp/src/TestClient.cpp
-> -@@ -381,7 +381,7 @@ int main(int argc, char** argv) {
-> -      * BINARY TEST
-> -      */
-> -     printf("testBinary([-128..127]) = {");
-> --    const char bin_data[256]
-> -+    const signed char bin_data[256]
-> -         = {-128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114,
-> -            -113, -112, -111, -110, -109, -108, -107, -106, -105, -104, -103, -102, -101, -100, -99,
-> -            -98,  -97,  -96,  -95,  -94,  -93,  -92,  -91,  -90,  -89,  -88,  -87,  -86,  -85,  -84,
-> -@@ -402,7 +402,7 @@ int main(int argc, char** argv) {
-> -            127};
-> -     try {
-> -       string bin_result;
-> --      testClient.testBinary(bin_result, string(bin_data, 256));
-> -+      testClient.testBinary(bin_result, string(reinterpret_cast<const char *>(bin_data), 256));
-> -       if (bin_result.size() != 256) {
-> -         printf("}\n*** FAILED ***\n");
-> -         printf("invalid length: %lu\n", bin_result.size());
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch b/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch
-> deleted file mode 100644
-> index 500cfab62..000000000
-> --- a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch
-> +++ /dev/null
-> @@ -1,41 +0,0 @@
-> -From 5f2c7e50b99d72177250c44236c41b99bfc161b5 Mon Sep 17 00:00:00 2001
-> -From: Andrej Valek <andrej.valek@siemens.com>
-> -Date: Thu, 7 Jun 2018 15:21:06 +0200
-> -Subject: [PATCH 4/6] %% original patch:
-> - 0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch
-> -
-> ----
-> - lib/cpp/src/thrift/transport/TSSLSocket.cpp | 6 ++++++
-> - 1 file changed, 6 insertions(+)
-> -
-> -diff --git a/lib/cpp/src/thrift/transport/TSSLSocket.cpp b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -index 98c5326..3da9e45 100644
-> ---- a/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -+++ b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -@@ -39,6 +39,7 @@
-> - #include <thrift/transport/PlatformSocket.h>
-> -
-> - #define OPENSSL_VERSION_NO_THREAD_ID 0x10000000L
-> -+#define OPENSSL_VERSION_WITH_TLSv1_1_AND_TLSv1_2 0x10100000L
-> -
-> - using namespace std;
-> - using namespace apache::thrift::concurrency;
-> -@@ -143,10 +144,15 @@ SSLContext::SSLContext(const SSLProtocol& protocol) {
-> -     ctx_ = SSL_CTX_new(SSLv3_method());
-> -   } else if (protocol == TLSv1_0) {
-> -     ctx_ = SSL_CTX_new(TLSv1_method());
-> -+#if (OPENSSL_VERSION_NUMBER >= OPENSSL_VERSION_WITH_TLSv1_1_AND_TLSv1_2)
-> -   } else if (protocol == TLSv1_1) {
-> -     ctx_ = SSL_CTX_new(TLSv1_1_method());
-> -   } else if (protocol == TLSv1_2) {
-> -     ctx_ = SSL_CTX_new(TLSv1_2_method());
-> -+#else
-> -+  //Support for this versions will end on 2016-12-31
-> -+  //https://www.openssl.org/about/releasestrat.html
-> -+#endif
-> -   } else {
-> -     /// UNKNOWN PROTOCOL!
-> -     throw TSSLException("SSL_CTX_new: Unknown protocol");
-> ---
-> -2.19.0
-> -
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0005-THRIFT-3878-Compile-error-in-TSSLSocket.cpp-with-new.patch b/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0005-THRIFT-3878-Compile-error-in-TSSLSocket.cpp-with-new.patch
-> deleted file mode 100644
-> index f4482b109..000000000
-> --- a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0005-THRIFT-3878-Compile-error-in-TSSLSocket.cpp-with-new.patch
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -From 81f36e7174097a1f1f3e7f94a97574b2ec68577f Mon Sep 17 00:00:00 2001
-> -From: "James E. King, III" <jim.king@simplivity.com>
-> -Date: Thu, 29 Sep 2016 15:04:09 -0400
-> -Subject: [PATCH] THRIFT-3878: fix interop with newer OpenSSL libraries
-> -
-> ----
-> - lib/cpp/src/thrift/transport/TSSLSocket.cpp | 5 +++++
-> - 1 file changed, 5 insertions(+)
-> -
-> -diff --git a/lib/cpp/src/thrift/transport/TSSLSocket.cpp b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -index 3da9e45..0a3a124 100644
-> ---- a/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -+++ b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -@@ -97,7 +97,12 @@ void initializeOpenSSL() {
-> -   SSL_library_init();
-> -   SSL_load_error_strings();
-> -   // static locking
-> -+  // newer versions of OpenSSL changed CRYPTO_num_locks - see THRIFT-3878
-> -+#ifdef CRYPTO_num_locks
-> -+  mutexes = boost::shared_array<Mutex>(new Mutex[CRYPTO_num_locks()]);
-> -+#else
-> -   mutexes = boost::shared_array<Mutex>(new Mutex[ ::CRYPTO_num_locks()]);
-> -+#endif
-> -   if (mutexes == NULL) {
-> -     throw TTransportException(TTransportException::INTERNAL_ERROR,
-> -                               "initializeOpenSSL() failed, "
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0006-THRIFT-3736-C++-library-build-fails-if-OpenSSL-does-.patch b/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0006-THRIFT-3736-C++-library-build-fails-if-OpenSSL-does-.patch
-> deleted file mode 100644
-> index dfaa2fbda..000000000
-> --- a/meta-oe/recipes-connectivity/thrift/thrift-0.9.3/0006-THRIFT-3736-C++-library-build-fails-if-OpenSSL-does-.patch
-> +++ /dev/null
-> @@ -1,46 +0,0 @@
-> -From 4cd49f470ca983369451d1141acc80fe1115cab4 Mon Sep 17 00:00:00 2001
-> -From: Nobuaki Sukegawa <nsuke@apache.org>
-> -Date: Sun, 13 Mar 2016 08:55:38 +0900
-> -Subject: [PATCH] THRIFT-3736 C++ library build fails if OpenSSL does not
-> -
-> - surrpot SSLv3
-> -
-> ----
-> - lib/cpp/src/thrift/transport/TSSLSocket.cpp | 2 ++
-> - lib/cpp/test/SecurityTest.cpp               | 8 ++++++++
-> - 2 files changed, 10 insertions(+)
-> -
-> -diff --git a/lib/cpp/src/thrift/transport/TSSLSocket.cpp b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -index 0a3a124..3e79354 100644
-> ---- a/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -+++ b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-> -@@ -145,8 +145,10 @@ static char uppercase(char c);
-> - SSLContext::SSLContext(const SSLProtocol& protocol) {
-> -   if (protocol == SSLTLS) {
-> -     ctx_ = SSL_CTX_new(SSLv23_method());
-> -+#ifndef OPENSSL_NO_SSL3
-> -   } else if (protocol == SSLv3) {
-> -     ctx_ = SSL_CTX_new(SSLv3_method());
-> -+#endif
-> -   } else if (protocol == TLSv1_0) {
-> -     ctx_ = SSL_CTX_new(TLSv1_method());
-> - #if (OPENSSL_VERSION_NUMBER >= OPENSSL_VERSION_WITH_TLSv1_1_AND_TLSv1_2)
-> -diff --git a/lib/cpp/test/SecurityTest.cpp b/lib/cpp/test/SecurityTest.cpp
-> -index 213efd4..08110e7 100644
-> ---- a/lib/cpp/test/SecurityTest.cpp
-> -+++ b/lib/cpp/test/SecurityTest.cpp
-> -@@ -239,6 +239,14 @@ BOOST_AUTO_TEST_CASE(ssl_security_matrix)
-> -                     continue;
-> -                 }
-> -
-> -+#ifdef OPENSSL_NO_SSL3
-> -+                if (si == 2 || ci == 2)
-> -+                {
-> -+                    // Skip all SSLv3 cases - protocol not supported
-> -+                    continue;
-> -+                }
-> -+#endif
-> -+
-> -                 boost::mutex::scoped_lock lock(mMutex);
-> -
-> -                 BOOST_TEST_MESSAGE(boost::format("TEST: Server = %1%, Client = %2%")
-> diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.11.0.bb
-> similarity index 57%
-> rename from meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-> rename to meta-oe/recipes-connectivity/thrift/thrift_0.11.0.bb
-> index 7ab74026b..307d3ef20 100644
-> --- a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-> +++ b/meta-oe/recipes-connectivity/thrift/thrift_0.11.0.bb
-> @@ -3,22 +3,16 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
->  HOMEPAGE = "https://thrift.apache.org/"
->
->  LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=e4ed21f679b2aafef26eac82ab0c2cbf \
-> -                    file://NOTICE;md5=115f49498b66b494b0472658f2bfe80b"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=394465e125cffc0f133695ed43f14047 \
-> +                    file://NOTICE;md5=42748ae4646b45fbfa5182807321fb6c"
->
->  DEPENDS = "thrift-native boost flex-native bison-native openssl"
->
->  SRC_URI = "http://mirror.switch.ch/mirror/apache/dist/thrift/${PV}/${BPN}-${PV}.tar.gz \
-> -           file://0001-Forcibly-disable-check-for-Qt5.patch \
-> -           file://0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch \
-> -           file://0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch \
-> -           file://0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch \
-> -           file://0005-THRIFT-3878-Compile-error-in-TSSLSocket.cpp-with-new.patch \
-> -           file://0006-THRIFT-3736-C++-library-build-fails-if-OpenSSL-does-.patch \
-> -"
-> +          "
->
-> -SRC_URI[md5sum] = "88d667a8ae870d5adeca8cb7d6795442"
-> -SRC_URI[sha256sum] = "b0740a070ac09adde04d43e852ce4c320564a292f26521c46b78e0641564969e"
-> +SRC_URI[md5sum] = "0be59730ebce071eceaf6bfdb8d3a20e"
-> +SRC_URI[sha256sum] = "c4ad38b6cb4a3498310d405a91fef37b9a8e79a50cd0968148ee2524d2fa60c2"
->
->  BBCLASSEXTEND = "native nativesdk"
->
-> @@ -30,6 +24,7 @@ export BUILD_SYS
->  export HOST_SYS
->
->  EXTRA_OECMAKE = " \
-> +    -DENABLE_PRECOMPILED_HEADERS=OFF \
->      -DBUILD_LIBRARIES=ON \
->      -DBUILD_COMPILER=ON \
->      -DBUILD_TESTING=OFF \
-> @@ -37,17 +32,19 @@ EXTRA_OECMAKE = " \
->      -DBUILD_TUTORIALS=OFF \
->      -DWITH_CPP=ON \
->      -DWITH_JAVA=OFF \
-> +    -DWITH_PYTHON=OFF \
->      -DWITH_STATIC_LIB=ON \
->      -DWITH_SHARED_LIB=ON \
->      -DWITH_OPENSSL=ON \
->      -DWITH_QT4=OFF \
->      -DWITH_QT5=OFF \
-> +    -DWITH_BOOST_FUNCTIONAL=OFF \
->  "
->
-> -PACKAGECONFIG ??= "libevent glib python"
-> -PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent,"
-> -PACKAGECONFIG[python] = "-DWITH_PYTHON=ON,-DWITH_PYTHON=OFF,python,"
-> -PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0 ,"
-> +PACKAGECONFIG ??= "libevent glib boost-smart-ptr"
-> +PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
-> +PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0"
-> +PACKAGECONFIG[boost-smart-ptr] = "-DWITH_BOOST_SMART_PTR=ON,-DWITH_BOOST_SMART_PTR=OFF,boost"
->
->  do_install_append () {
->      ln -sf thrift ${D}/${bindir}/thrift-compiler
-> @@ -56,8 +53,11 @@ do_install_append () {
->  LEAD_SONAME = "libthrift.so.${PV}"
->
->  # thrift packages
-> -PACKAGE_BEFORE_PN = "${PN}-compiler lib${BPN}"
-> -FILES_lib${BPN} = "${libdir}/*.so.*"
-> +PACKAGE_BEFORE_PN = "${PN}-compiler lib${BPN} lib${BPN}z lib${BPN}nb lib${BPN}-c-glib"
-> +FILES_lib${BPN} = "${libdir}/libthrift.so.*"
-> +FILES_lib${BPN}z = "${libdir}/libthriftz.so.*"
-> +FILES_lib${BPN}nb = "${libdir}/libthriftnb.so.*"
-> +FILES_lib${BPN}-c-glib = "${libdir}/libthrift_c_glib.so.*"
->  FILES_${PN}-compiler = "${bindir}/*"
->
->  # The thrift packages just pulls in some default dependencies but is otherwise empty
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogPHJhai5r
+aGVtQGdtYWlsLmNvbT4NCj4gU2VudDogRG9ubmVyc3RhZywgMjcuIFNlcHRlbWJlciAyMDE4IDE3
+OjU3DQo+IFRvOiBCYWNoLCBQYXNjYWwgKEJUIENQUyBSJkQgWkcgRlcgQ0NQKSA8cGFzY2FsLmJh
+Y2hAc2llbWVucy5jb20+DQo+IENjOiBvcGVuZW1iZWRlZC1kZXZlbCA8b3BlbmVtYmVkZGVkLQ0K
+PiBkZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0
+YS1vZV1bUEFUQ0hdIHRocmlmdDogdXBkYXRlIHRvIDAuMTEuMA0KPiANCj4gaXQgc2VlbXMgdG8g
+YmUgZG9pbmcgLWlzeXN0ZW0gdGhpbmcgYW5kIGNvbmZ1c2luZyB0aGUgYnVpbGQgc2VlDQo+IA0K
+PiBodHRwOi8vZXJyb3JzLnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL0RldGFpbHMvMTk0NzUzLw0K
+PiANCg0KSXQgaXMgYmVjYXVzZSBoYXZlIGh0dHBzOi8vcGF0Y2h3b3JrLm9wZW5lbWJlZGRlZC5v
+cmcvc2VyaWVzLzEzNzE1LyBhcHBsaWVkIG9uIG15IGJyYW5jaC4gV2hpY2ggc2VlbXMgdG8gbWFr
+ZSBpdCB3b3JrIG91dCBvZiB0aGUgYm94LiDimLkNCg0KVG8gbWUgaXQgaXMgc3RpbGwgbm90IGNs
+ZWFyIGlmIHRoaXMgaXMgYSBwcm9ibGVtIHdpdGggdXBzdHJlYW0gcHJvamVjdHMsIGEgY21ha2Ug
+cHJvYmxlbSBvciBhIFlvY3RvIHByb2JsZW0uDQoNCj4gDQo+IE9uIFRodSwgU2VwIDI3LCAyMDE4
+IGF0IDQ6MjQgQU0gUGFzY2FsIEJhY2ggPHBhc2NhbC5iYWNoQHNpZW1lbnMuY29tPg0KPiB3cm90
+ZToNCj4gPg0KPiA+IFJlbW92ZSB0aGUgcHl0aG9uIGxpYnJhcnkgZmVhdHVyZSBhcyBpdCB3YXMg
+bmV2ZXIgaW5zdGFsbGVkIHNvIG5vYm9keQ0KPiA+IHNob3VsZCBtaXNzIGl0Lg0KPiA+DQo+ID4g
+VGhlIENNYWtlIHBhdGNoZXMgYXJlIG5vIGxvbmdlciBuZWVkZWQgYXMgbW9zdCBvZiB0aGUgdW5k
+ZXJseWluZyBpc3N1ZQ0KPiA+IGlzIGZpeGVkIGluIE9FIGNvcmUuDQo+ID4gVGhlIG90aGVyIHBh
+dGNoZXMgYXJlIGJhY2twb3J0cyB0aGF0IGFyZSBhbHJlYWR5IHVwc3RyZWFtIGluIDAuMTEuDQo+
+ID4NCj4gPiBPcGVuU1NMIDEuMSBpcyBzdXBwb3J0ZWQgYnkgdGhpcyB2ZXJzaW9uIG9mIHRocmlm
+dC4NCj4gPg0KPiA+IEFsc28gYWRkIGEgZmVhdHVyZSB0byB1c2UgYm9vc3Qgc21hcnQgcG9pbnRl
+cnMgaW5zdGVhZCBvZiBDKysgc3RkIG9uZXMuDQo+ID4gVGhpcyBpcyBlbmFibGVkIGJ5IGRlZmF1
+bHQgdG8ga2VlcCBiYWNrd2FyZHMgY29tcGF0aWJpbGl0eSB3aXRoIHRoZQ0KPiA+IDAuOS4zIHJl
+Y2lwZS4gSG93ZXZlciBwcm9qZWN0cyBkZXBlbmRpbmcgb24gdGhyaWZ0IG1pZ2h0IHN0aWxsIG5l
+ZWQgdG8NCj4gPiBzZXQgRk9SQ0VfQk9PU1RfU01BUlRfUFRSIHdpdGhpbiB0aGVpciBidWlsZCBD
+TWFrZSBwcm9qZWN0IHRvIG1ha2UNCj4gPiBzdXJlIHRoZSBjb3JyZWN0IGhlYWRlcnMgYXJlIHNl
+bGVjdGVkLg0KPiA+DQo+ID4gRnVydGhlciB0aGUgZGlmZmVyZW50IGxpYnJhcmllcyBhcmUgbm93
+IHNwbGl0IGludG8gc2VwYXJhdGUgcGFja2FnZXMuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBQ
+YXNjYWwgQmFjaCA8cGFzY2FsLmJhY2hAc2llbWVucy5jb20+DQo+ID4gLS0tDQo+ID4gIC4uLi8w
+MDAxLUZvcmNpYmx5LWRpc2FibGUtY2hlY2stZm9yLVF0NS5wYXRjaCAgICAgIHwgIDI1IC0tLS0t
+DQo+ID4gIC4uLi1Jbi1jbWFrZS1hdm9pZC11c2Utb2YtYm90aC1xdW90ZWQtcGF0aHMtLnBhdGNo
+IHwgMTA4DQo+ID4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ID4gLi4uMzEtaW4tdGVzdC1jcHAt
+ZXhwbGljaXRseS11c2Utc2lnbmVkLWNoYXIucGF0Y2ggfCAgMzggLS0tLS0tLS0NCj4gPiAuLi4w
+Ny1lbmFibGUtYnVpbGQtd2l0aC1PcGVuU1NMLTEuMS4wLXNlcmllcy5wYXRjaCB8ICA0MSAtLS0t
+LS0tLQ0KPiA+IC4uLi1Db21waWxlLWVycm9yLWluLVRTU0xTb2NrZXQuY3BwLXdpdGgtbmV3LnBh
+dGNoIHwgIDI2IC0tLS0tICAuLi4tQysrLQ0KPiBsaWJyYXJ5LWJ1aWxkLWZhaWxzLWlmLU9wZW5T
+U0wtZG9lcy0ucGF0Y2ggfCAgNDYgLS0tLS0tLS0tDQo+ID4gIC4uLi90aHJpZnQve3RocmlmdF8w
+LjkuMy5iYiA9PiB0aHJpZnRfMC4xMS4wLmJifSAgIHwgIDM0ICsrKy0tLS0NCj4gPiAgNyBmaWxl
+cyBjaGFuZ2VkLCAxNyBpbnNlcnRpb25zKCspLCAzMDEgZGVsZXRpb25zKC0pICBkZWxldGUgbW9k
+ZQ0KPiA+IDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvdGhyaWZ0L3Ro
+cmlmdC0wLjkuMy8wMDAxLUZvcmNpYmx5LWRpc2FibGUNCj4gPiAtY2hlY2stZm9yLVF0NS5wYXRj
+aCAgZGVsZXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90
+aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDEtVEhSSUZULTM4MjgtSW4tYw0KPiA+IG1ha2UtYXZvaWQt
+dXNlLW9mLWJvdGgtcXVvdGVkLXBhdGhzLS5wYXRjaA0KPiA+ICBkZWxldGUgbW9kZSAxMDA2NDQN
+Cj4gPiBtZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnQtMC45LjMvMDAw
+Mi1USFJJRlQtMzgzMS1pbi10DQo+ID4gZXN0LWNwcC1leHBsaWNpdGx5LXVzZS1zaWduZWQtY2hh
+ci5wYXRjaA0KPiA+ICBkZWxldGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtY29u
+bmVjdGl2aXR5L3RocmlmdC90aHJpZnQtMC45LjMvMDAwNC1USFJJRlQtMzIwNy1lbmFiDQo+ID4g
+bGUtYnVpbGQtd2l0aC1PcGVuU1NMLTEuMS4wLXNlcmllcy5wYXRjaA0KPiA+ICBkZWxldGUgbW9k
+ZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnQt
+MC45LjMvMDAwNS1USFJJRlQtMzg3OC1Db21wDQo+ID4gaWxlLWVycm9yLWluLVRTU0xTb2NrZXQu
+Y3BwLXdpdGgtbmV3LnBhdGNoDQo+ID4gIGRlbGV0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2Uv
+cmVjaXBlcy1jb25uZWN0aXZpdHkvdGhyaWZ0L3RocmlmdC0wLjkuMy8wMDA2LVRIUklGVC0zNzM2
+LUMrKy0NCj4gPiBsaWJyYXJ5LWJ1aWxkLWZhaWxzLWlmLU9wZW5TU0wtZG9lcy0ucGF0Y2gNCj4g
+PiAgcmVuYW1lIG1ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvdGhyaWZ0L3t0aHJpZnRfMC45
+LjMuYmIgPT4NCj4gPiB0aHJpZnRfMC4xMS4wLmJifSAoNTclKQ0KPiA+DQo+ID4gZGlmZiAtLWdp
+dA0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90aHJpZnQvdGhyaWZ0LTAuOS4z
+LzAwMDEtRm9yY2libHktZGlzYWINCj4gPiBsZS1jaGVjay1mb3ItUXQ1LnBhdGNoDQo+ID4gYi9t
+ZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnQtMC45LjMvMDAwMS1Gb3Jj
+aWJseS1kaXNhYg0KPiA+IGxlLWNoZWNrLWZvci1RdDUucGF0Y2gNCj4gPiBkZWxldGVkIGZpbGUg
+bW9kZSAxMDA2NDQNCj4gPiBpbmRleCBhNzdjZDI4NGIuLjAwMDAwMDAwMA0KPiA+IC0tLQ0KPiA+
+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDEt
+Rm9yY2libHktZGlzYWINCj4gPiBsZS1jaGVjay1mb3ItUXQ1LnBhdGNoDQo+ID4gKysrIC9kZXYv
+bnVsbA0KPiA+IEBAIC0xLDI1ICswLDAgQEANCj4gPiAtRnJvbSBhNTU0NGQ4ZTU0MzQzNmU0MTMz
+Nzk0MjJiNzAyZjZmNTZhYzdlYjhlIE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gPiAyMDAxDQo+ID4g
+LUZyb206IFBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz4NCj4gPiAtRGF0ZTog
+VHVlLCAxMiBBcHIgMjAxNiAxNzozMDoxNSAtMDQwMA0KPiA+IC1TdWJqZWN0OiBbUEFUQ0hdIEZv
+cmNpYmx5IGRpc2FibGUgY2hlY2sgZm9yIFF0NS4NCj4gPiAtDQo+ID4gLVNpZ25lZC1vZmYtYnk6
+IFBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz4NCj4gPiAtDQo+ID4gLS0tLQ0K
+PiA+IC0gYnVpbGQvY21ha2UvRGVmaW5lT3B0aW9ucy5jbWFrZSB8IDMgLS0tDQo+ID4gLSAxIGZp
+bGUgY2hhbmdlZCwgMyBkZWxldGlvbnMoLSkNCj4gPiAtDQo+ID4gLWRpZmYgLS1naXQgYS9idWls
+ZC9jbWFrZS9EZWZpbmVPcHRpb25zLmNtYWtlDQo+ID4gYi9idWlsZC9jbWFrZS9EZWZpbmVPcHRp
+b25zLmNtYWtlIC1pbmRleCA2MmUyNDBmLi5mOGI0NDkzIDEwMDY0NA0KPiA+IC0tLS0gYS9idWls
+ZC9jbWFrZS9EZWZpbmVPcHRpb25zLmNtYWtlDQo+ID4gLSsrKyBiL2J1aWxkL2NtYWtlL0RlZmlu
+ZU9wdGlvbnMuY21ha2UNCj4gPiAtQEAgLTUyLDkgKzUyLDYgQEAgQ01BS0VfREVQRU5ERU5UX09Q
+VElPTihXSVRIX0xJQkVWRU5UICJCdWlsZA0KPiB3aXRoDQo+ID4gbGliZXZlbnQgc3VwcG9ydCIg
+T04NCj4gPiAtIGZpbmRfcGFja2FnZShRdDQgUVVJRVQgQ09NUE9ORU5UUyBRdENvcmUgUXROZXR3
+b3JrKQ0KPiA+IC0gQ01BS0VfREVQRU5ERU5UX09QVElPTihXSVRIX1FUNCAiQnVpbGQgd2l0aCBR
+dDQgc3VwcG9ydCIgT04NCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgIlFUNF9GT1VORCIg
+T0ZGKQ0KPiA+IC0tZmluZF9wYWNrYWdlKFF0NSBRVUlFVCBDT01QT05FTlRTIENvcmUgTmV0d29y
+aykNCj4gPiAtLUNNQUtFX0RFUEVOREVOVF9PUFRJT04oV0lUSF9RVDUgIkJ1aWxkIHdpdGggUXQ1
+IHN1cHBvcnQiIE9ODQo+ID4gLS0gICAgICAgICAgICAgICAgICAgICAgICJRdDVfRk9VTkQiIE9G
+RikNCj4gPiAtIGlmKCR7V0lUSF9RVDR9IEFORCAke1dJVEhfUVQ1fSBBTkQgJHtDTUFLRV9NQUpP
+Ul9WRVJTSU9OfQ0KPiBMRVNTIDMpDQo+ID4gLSAgICMgY21ha2UgPCAzLjAuMCBjYXVzZXMgY29u
+ZmxpY3Qgd2hlbiBidWlsZGluZyBib3RoIFF0NCBhbmQgUXQ1DQo+ID4gLSAgIHNldChXSVRIX1FU
+NCBPRkYpDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0
+eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDEtVEhSSUZULTM4MjgtSW4NCj4gPiAtY21ha2UtYXZv
+aWQtdXNlLW9mLWJvdGgtcXVvdGVkLXBhdGhzLS5wYXRjaA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVz
+LWNvbm5lY3Rpdml0eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDEtVEhSSUZULTM4MjgtSW4NCj4g
+PiAtY21ha2UtYXZvaWQtdXNlLW9mLWJvdGgtcXVvdGVkLXBhdGhzLS5wYXRjaA0KPiA+IGRlbGV0
+ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDE4MmVhY2MwZS4uMDAwMDAwMDAwDQo+ID4g
+LS0tDQo+ID4gYS9tZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnQtMC45
+LjMvMDAwMS1USFJJRlQtMzgyOC1Jbg0KPiA+IC1jbWFrZS1hdm9pZC11c2Utb2YtYm90aC1xdW90
+ZWQtcGF0aHMtLnBhdGNoDQo+ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0xLDEwOCArMCwwIEBA
+DQo+ID4gLUZyb20gYjhlMjU0YTJmNGJhNDk0MTJlNTQxNTk4YzcyMTU5ODY5YTc3NzBmOCBNb24g
+U2VwIDE3IDAwOjAwOjAwDQo+ID4gMjAwMQ0KPiA+IC1Gcm9tOiBDb2R5IFAgU2NoYWZlciA8ZGV2
+QGNvZHlwcy5jb20+DQo+ID4gLURhdGU6IE1vbiwgMTYgTWF5IDIwMTYgMTU6MjE6MTAgLTA0MDAN
+Cj4gPiAtU3ViamVjdDogW1BBVENIXSBUSFJJRlQtMzgyOCBJbiBjbWFrZSBhdm9pZCB1c2Ugb2Yg
+Ym90aCBxdW90ZWQgcGF0aHMNCj4gPiBhbmQNCj4gPiAtIFNZU1RFTSB3aXRoIGluY2x1ZGVfZGly
+ZWN0b3JpZXMoKQ0KPiA+IC0NCj4gPiAtVGhpcyBhbGxvd3MgdXMgdG8gYXZvaWQgaXNzdWVzIHdo
+ZXJlIHRoZXJlIGFyZSBubyBwYXRocyB0byBiZSBhZGRlZA0KPiA+IHRvIC10aGUgaW5jbHVkZSBw
+YXRoIChpbmNsdWRlX2RpcmVjdG9yaWVzKCkgZXJyb3JzIHdoZW4gZ2l2ZW4gYW4gZW1wdHkNCj4g
+PiAtc3RyaW5nKS4NCj4gPiAtDQo+ID4gLVNwZWNpZmljYWxseSwgZ2NjLTYgcmVxdWlyZXMgdGhh
+dCBsaWJyYXJpZXMgc3RvcCBwYXNzaW5nIHBhdGhzIGxpa2UNCj4gPiAtJy91c3IvaW5jbHVkZScg
+KG9yIHRoZXkgd2lsbCBnZXQgbGlic3RkYysrIGJ1aWxkIGVycm9ycyksIHNvIHRoZXNlDQo+ID4g
+cGF0aHMgLXdpbGwgYmUgZW1wdHkgbW9yZSBvZnRlbiBpbiB0aGUgZnV0dXJlLg0KPiA+IC0NCj4g
+PiAtLS0tDQo+ID4gLSBsaWIvY3BwL0NNYWtlTGlzdHMudHh0ICAgICAgfCA4ICsrKystLS0tDQo+
+ID4gLSBsaWIvY3BwL3Rlc3QvQ01ha2VMaXN0cy50eHQgfCAyICstDQo+ID4gLSB0ZXN0L2NwcC9D
+TWFrZUxpc3RzLnR4dCAgICAgfCA2ICsrKy0tLQ0KPiA+IC0gdHV0b3JpYWwvY3BwL0NNYWtlTGlz
+dHMudHh0IHwgMiArLQ0KPiA+IC0gNCBmaWxlcyBjaGFuZ2VkLCA5IGluc2VydGlvbnMoKyksIDkg
+ZGVsZXRpb25zKC0pDQo+ID4gLQ0KPiA+IC1kaWZmIC0tZ2l0IGEvbGliL2NwcC9DTWFrZUxpc3Rz
+LnR4dCBiL2xpYi9jcHAvQ01ha2VMaXN0cy50eHQgLWluZGV4DQo+ID4gNGM3Y2FlYi4uYTcxNmFj
+MyAxMDA3NTUNCj4gPiAtLS0tIGEvbGliL2NwcC9DTWFrZUxpc3RzLnR4dA0KPiA+IC0rKysgYi9s
+aWIvY3BwL0NNYWtlTGlzdHMudHh0DQo+ID4gLUBAIC0yNCw3ICsyNCw3IEBAIGVsc2UoKQ0KPiA+
+IC0gICBmaW5kX3BhY2thZ2UoQm9vc3QgMS41My4wIFJFUVVJUkVEKQ0KPiA+IC0gZW5kaWYoKQ0K
+PiA+IC0NCj4gPiAtLWluY2x1ZGVfZGlyZWN0b3JpZXMoU1lTVEVNICIke0Jvb3N0X0lOQ0xVREVf
+RElSU30iKQ0KPiA+IC0raW5jbHVkZV9kaXJlY3Rvcmllcygke0Jvb3N0X0lOQ0xVREVfRElSU30p
+DQo+ID4gLSBpbmNsdWRlX2RpcmVjdG9yaWVzKHNyYykNCj4gPiAtDQo+ID4gLSAjIFNZU0xJQlMg
+Y29udGFpbnMgbGlicmFyaWVzIHRoYXQgbmVlZCB0byBiZSBsaW5rZWQgdG8gYWxsIGxpYg0KPiA+
+IHRhcmdldHMgLUBAIC0xMDQsNyArMTA0LDcgQEAgaWYoT1BFTlNTTF9GT1VORCBBTkQgV0lUSF9P
+UEVOU1NMKQ0KPiA+IC0gICAgICAgIHNyYy90aHJpZnQvdHJhbnNwb3J0L1RTU0xTb2NrZXQuY3Bw
+DQo+ID4gLSAgICAgICAgc3JjL3RocmlmdC90cmFuc3BvcnQvVFNTTFNlcnZlclNvY2tldC5jcHAN
+Cj4gPiAtICAgICApDQo+ID4gLS0gICAgaW5jbHVkZV9kaXJlY3RvcmllcyhTWVNURU0gIiR7T1BF
+TlNTTF9JTkNMVURFX0RJUn0iKQ0KPiA+IC0rICAgIGluY2x1ZGVfZGlyZWN0b3JpZXMoJHtPUEVO
+U1NMX0lOQ0xVREVfRElSfSkNCj4gPiAtICAgICBsaXN0KEFQUEVORCBTWVNMSUJTICIke09QRU5T
+U0xfTElCUkFSSUVTfSIpDQo+ID4gLSBlbmRpZigpDQo+ID4gLQ0KPiA+IC1AQCAtMTYyLDcgKzE2
+Miw3IEBAIFRBUkdFVF9MSU5LX0xJQlJBUklFU19USFJJRlQodGhyaWZ0ICR7U1lTTElCU30pDQo+
+ID4gLQ0KPiA+IC0gaWYoV0lUSF9MSUJFVkVOVCkNCj4gPiAtICAgICBmaW5kX3BhY2thZ2UoTGli
+ZXZlbnQgUkVRVUlSRUQpICAjIExpYmV2ZW50IGNvbWVzIHdpdGggQ01ha2UNCj4gc3VwcG9ydCBm
+b3JtIHVwc3RyZWFtDQo+ID4gLS0gICAgaW5jbHVkZV9kaXJlY3RvcmllcyhTWVNURU0gJHtMSUJF
+VkVOVF9JTkNMVURFX0RJUlN9KQ0KPiA+IC0rICAgIGluY2x1ZGVfZGlyZWN0b3JpZXMoJHtMSUJF
+VkVOVF9JTkNMVURFX0RJUlN9KQ0KPiA+IC0NCj4gPiAtICAgICBBRERfTElCUkFSWV9USFJJRlQo
+dGhyaWZ0bmIgJHt0aHJpZnRjcHBuYl9TT1VSQ0VTfSkNCj4gPiAtICAgICBUQVJHRVRfTElOS19M
+SUJSQVJJRVNfVEhSSUZUKHRocmlmdG5iICR7U1lTTElCU30NCj4gJHtMSUJFVkVOVF9MSUJSQVJJ
+RVN9KQ0KPiA+IC1AQCAtMTcxLDcgKzE3MSw3IEBAIGVuZGlmKCkNCj4gPiAtDQo+ID4gLSBpZihX
+SVRIX1pMSUIpDQo+ID4gLSAgICAgZmluZF9wYWNrYWdlKFpMSUIgUkVRVUlSRUQpDQo+ID4gLS0g
+ICAgaW5jbHVkZV9kaXJlY3RvcmllcyhTWVNURU0gJHtaTElCX0lOQ0xVREVfRElSU30pDQo+ID4g
+LSsgICAgaW5jbHVkZV9kaXJlY3Rvcmllcygke1pMSUJfSU5DTFVERV9ESVJTfSkNCj4gPiAtDQo+
+ID4gLSAgICAgQUREX0xJQlJBUllfVEhSSUZUKHRocmlmdHogJHt0aHJpZnRjcHB6X1NPVVJDRVN9
+KQ0KPiA+IC0gICAgIFRBUkdFVF9MSU5LX0xJQlJBUklFU19USFJJRlQodGhyaWZ0eiAke1NZU0xJ
+QlN9ICR7WkxJQl9MSUJSQVJJRVN9KQ0KPiA+IC1kaWZmIC0tZ2l0IGEvbGliL2NwcC90ZXN0L0NN
+YWtlTGlzdHMudHh0DQo+ID4gYi9saWIvY3BwL3Rlc3QvQ01ha2VMaXN0cy50eHQgLWluZGV4IDVk
+ZTlmYzQuLmM5NTZjMzggMTAwNjQ0DQo+ID4gLS0tLSBhL2xpYi9jcHAvdGVzdC9DTWFrZUxpc3Rz
+LnR4dA0KPiA+IC0rKysgYi9saWIvY3BwL3Rlc3QvQ01ha2VMaXN0cy50eHQNCj4gPiAtQEAgLTIw
+LDcgKzIwLDcgQEANCj4gPiAtICMgRmluZCByZXF1aXJlZCBwYWNrYWdlcw0KPiA+IC0gc2V0KEJv
+b3N0X1VTRV9TVEFUSUNfTElCUyBPTikgIyBGb3JjZSB0aGUgdXNlIG9mIHN0YXRpYyBib29zdCB0
+ZXN0DQo+ID4gZnJhbWV3b3JrDQo+ID4gLSBmaW5kX3BhY2thZ2UoQm9vc3QgMS41My4wIFJFUVVJ
+UkVEIENPTVBPTkVOVFMgY2hyb25vIGZpbGVzeXN0ZW0NCj4gPiBzeXN0ZW0gdGhyZWFkIHVuaXRf
+dGVzdF9mcmFtZXdvcmspIC0taW5jbHVkZV9kaXJlY3RvcmllcyhTWVNURU0NCj4gPiAiJHtCb29z
+dF9JTkNMVURFX0RJUlN9IikNCj4gPiAtK2luY2x1ZGVfZGlyZWN0b3JpZXMoJHtCb29zdF9JTkNM
+VURFX0RJUlN9KQ0KPiA+IC0NCj4gPiAtICNNYWtlIHN1cmUgZ2VuLWNwcCBmaWxlcyBjYW4gYmUg
+aW5jbHVkZWQNCj4gPiAtIGluY2x1ZGVfZGlyZWN0b3JpZXMoIiR7Q01BS0VfQ1VSUkVOVF9CSU5B
+UllfRElSfSIpDQo+ID4gLWRpZmYgLS1naXQgYS90ZXN0L2NwcC9DTWFrZUxpc3RzLnR4dCBiL3Rl
+c3QvY3BwL0NNYWtlTGlzdHMudHh0IC1pbmRleA0KPiA+IDJkNzVmMmUuLmIxNDA5ZGUgMTAwNzU1
+DQo+ID4gLS0tLSBhL3Rlc3QvY3BwL0NNYWtlTGlzdHMudHh0DQo+ID4gLSsrKyBiL3Rlc3QvY3Bw
+L0NNYWtlTGlzdHMudHh0DQo+ID4gLUBAIC0yMiwxMyArMjIsMTMgQEAgaW5jbHVkZShUaHJpZnRN
+YWNyb3MpDQo+ID4gLQ0KPiA+IC0gc2V0KEJvb3N0X1VTRV9TVEFUSUNfTElCUyBPTikNCj4gPiAt
+IGZpbmRfcGFja2FnZShCb29zdCAxLjUzLjAgUkVRVUlSRUQgQ09NUE9ORU5UUyBwcm9ncmFtX29w
+dGlvbnMNCj4gc3lzdGVtDQo+ID4gZmlsZXN5c3RlbSkgLS1pbmNsdWRlX2RpcmVjdG9yaWVzKFNZ
+U1RFTSAiJHtCb29zdF9JTkNMVURFX0RJUlN9IikNCj4gPiAtK2luY2x1ZGVfZGlyZWN0b3JpZXMo
+JHtCb29zdF9JTkNMVURFX0RJUlN9KQ0KPiA+IC0NCj4gPiAtIGZpbmRfcGFja2FnZShPcGVuU1NM
+IFJFUVVJUkVEKQ0KPiA+IC0taW5jbHVkZV9kaXJlY3RvcmllcyhTWVNURU0gIiR7T1BFTlNTTF9J
+TkNMVURFX0RJUn0iKQ0KPiA+IC0raW5jbHVkZV9kaXJlY3Rvcmllcygke09QRU5TU0xfSU5DTFVE
+RV9ESVJ9KQ0KPiA+IC0NCj4gPiAtIGZpbmRfcGFja2FnZShMaWJldmVudCBSRVFVSVJFRCkgICMg
+TGliZXZlbnQgY29tZXMgd2l0aCBDTWFrZSBzdXBwb3J0DQo+ID4gZnJvbSB1cHN0cmVhbSAtLWlu
+Y2x1ZGVfZGlyZWN0b3JpZXMoU1lTVEVNICR7TElCRVZFTlRfSU5DTFVERV9ESVJTfSkNCj4gPiAt
+K2luY2x1ZGVfZGlyZWN0b3JpZXMoJHtMSUJFVkVOVF9JTkNMVURFX0RJUlN9KQ0KPiA+IC0NCj4g
+PiAtICNNYWtlIHN1cmUgZ2VuLWNwcCBmaWxlcyBjYW4gYmUgaW5jbHVkZWQNCj4gPiAtIGluY2x1
+ZGVfZGlyZWN0b3JpZXMoIiR7Q01BS0VfQ1VSUkVOVF9CSU5BUllfRElSfSIpDQo+ID4gLWRpZmYg
+LS1naXQgYS90dXRvcmlhbC9jcHAvQ01ha2VMaXN0cy50eHQNCj4gPiBiL3R1dG9yaWFsL2NwcC9D
+TWFrZUxpc3RzLnR4dCAtaW5kZXggMmIwYzE0My4uNWVjYWUxNyAxMDA2NDQNCj4gPiAtLS0tIGEv
+dHV0b3JpYWwvY3BwL0NNYWtlTGlzdHMudHh0DQo+ID4gLSsrKyBiL3R1dG9yaWFsL2NwcC9DTWFr
+ZUxpc3RzLnR4dA0KPiA+IC1AQCAtMTgsNyArMTgsNyBAQA0KPiA+IC0gIw0KPiA+IC0NCj4gPiAt
+IGZpbmRfcGFja2FnZShCb29zdCAxLjUzLjAgUkVRVUlSRUQpDQo+ID4gLS1pbmNsdWRlX2RpcmVj
+dG9yaWVzKFNZU1RFTSAiJHtCb29zdF9JTkNMVURFX0RJUlN9IikNCj4gPiAtK2luY2x1ZGVfZGly
+ZWN0b3JpZXMoJHtCb29zdF9JTkNMVURFX0RJUlN9KQ0KPiA+IC0NCj4gPiAtICNNYWtlIHN1cmUg
+Z2VuLWNwcCBmaWxlcyBjYW4gYmUgaW5jbHVkZWQNCj4gPiAtIGluY2x1ZGVfZGlyZWN0b3JpZXMo
+IiR7Q01BS0VfQ1VSUkVOVF9CSU5BUllfRElSfSIpDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0
+YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDItVEhSSUZU
+LTM4MzEtaW4NCj4gPiAtdGVzdC1jcHAtZXhwbGljaXRseS11c2Utc2lnbmVkLWNoYXIucGF0Y2gN
+Cj4gPiBiL21ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvdGhyaWZ0L3RocmlmdC0wLjkuMy8w
+MDAyLVRIUklGVC0zODMxLWluDQo+ID4gLXRlc3QtY3BwLWV4cGxpY2l0bHktdXNlLXNpZ25lZC1j
+aGFyLnBhdGNoDQo+ID4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMzc3MTVj
+MjgxLi4wMDAwMDAwMDANCj4gPiAtLS0NCj4gPiBhL21ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZp
+dHkvdGhyaWZ0L3RocmlmdC0wLjkuMy8wMDAyLVRIUklGVC0zODMxLWluDQo+ID4gLXRlc3QtY3Bw
+LWV4cGxpY2l0bHktdXNlLXNpZ25lZC1jaGFyLnBhdGNoDQo+ID4gKysrIC9kZXYvbnVsbA0KPiA+
+IEBAIC0xLDM4ICswLDAgQEANCj4gPiAtRnJvbSA3YjA1YTc0NDMyZjA4ZWYzNGQwZjg3NDNkZDY0
+MzhhZDAxMmUzYjVlIE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gPiAyMDAxDQo+ID4gLUZyb206IENv
+ZHkgUCBTY2hhZmVyIDxkZXZAY29keXBzLmNvbT4NCj4gPiAtRGF0ZTogRnJpLCA5IFNlcCAyMDE2
+IDE1OjUwOjI2IC0wNDAwDQo+ID4gLVN1YmplY3Q6IFtQQVRDSF0gVEhSSUZULTM4MzEgaW4gdGVz
+dC9jcHAgZXhwbGljaXRseSB1c2UgYHNpZ25lZCBjaGFyYA0KPiA+IC0NCj4gPiAtYGNoYXJgJ3Mg
+c2lnbmVkLW5lc3MgaXMgaW1wbGltZW50YXRpb24gZGVwZW5kZW50LCBhbmQgaW4gdGhlIGNhc2UN
+Cj4gPiB3aGVyZSAtYGNoYXJgIHdhcyBub3Qgc2lnbmVkLCB3ZSBwcmV2aW91c2x5IHJlY2lldmVk
+IGVycm9ycyBsaWtlDQo+ID4gLQ0KPiA+IC0gICAgdGhyaWZ0LzAuOS4zLXIwL2dpdC90ZXN0L2Nw
+cC9zcmMvVGVzdENsaWVudC5jcHA6NDA0OjE1OiBlcnJvcjogbmFycm93aW5nDQo+IGNvbnZlcnNp
+b24gb2YgJy0xMjcnIGZyb20gJ2ludCcgdG8gJ2NoYXInIGluc2lkZSB7IH0gWy1XbmFycm93aW5n
+XQ0KPiA+IC0NCj4gPiAtKFRoaXMgZXhhbXBsZSBmcm9tIGdjYy02IG9uIGFybSkNCj4gPiAtDQo+
+ID4gLS0tLQ0KPiA+IC0gdGVzdC9jcHAvc3JjL1Rlc3RDbGllbnQuY3BwIHwgNCArKy0tDQo+ID4g
+LSAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+IC0N
+Cj4gPiAtZGlmZiAtLWdpdCBhL3Rlc3QvY3BwL3NyYy9UZXN0Q2xpZW50LmNwcA0KPiA+IGIvdGVz
+dC9jcHAvc3JjL1Rlc3RDbGllbnQuY3BwIC1pbmRleCA3YzQyNWE5Li43MTQ1ZWJiIDEwMDY0NA0K
+PiA+IC0tLS0gYS90ZXN0L2NwcC9zcmMvVGVzdENsaWVudC5jcHANCj4gPiAtKysrIGIvdGVzdC9j
+cHAvc3JjL1Rlc3RDbGllbnQuY3BwDQo+ID4gLUBAIC0zODEsNyArMzgxLDcgQEAgaW50IG1haW4o
+aW50IGFyZ2MsIGNoYXIqKiBhcmd2KSB7DQo+ID4gLSAgICAgICogQklOQVJZIFRFU1QNCj4gPiAt
+ICAgICAgKi8NCj4gPiAtICAgICBwcmludGYoInRlc3RCaW5hcnkoWy0xMjguLjEyN10pID0geyIp
+Ow0KPiA+IC0tICAgIGNvbnN0IGNoYXIgYmluX2RhdGFbMjU2XQ0KPiA+IC0rICAgIGNvbnN0IHNp
+Z25lZCBjaGFyIGJpbl9kYXRhWzI1Nl0NCj4gPiAtICAgICAgICAgPSB7LTEyOCwgLTEyNywgLTEy
+NiwgLTEyNSwgLTEyNCwgLTEyMywgLTEyMiwgLTEyMSwgLTEyMCwgLTExOSwgLTExOCwgLTExNywg
+LQ0KPiAxMTYsIC0xMTUsIC0xMTQsDQo+ID4gLSAgICAgICAgICAgIC0xMTMsIC0xMTIsIC0xMTEs
+IC0xMTAsIC0xMDksIC0xMDgsIC0xMDcsIC0xMDYsIC0xMDUsIC0xMDQsIC0xMDMsIC0xMDIsIC0N
+Cj4gMTAxLCAtMTAwLCAtOTksDQo+ID4gLSAgICAgICAgICAgIC05OCwgIC05NywgIC05NiwgIC05
+NSwgIC05NCwgIC05MywgIC05MiwgIC05MSwgIC05MCwgIC04OSwgIC04OCwgIC04NywgIC04Niwg
+IC04NSwgIC0NCj4gODQsDQo+ID4gLUBAIC00MDIsNyArNDAyLDcgQEAgaW50IG1haW4oaW50IGFy
+Z2MsIGNoYXIqKiBhcmd2KSB7DQo+ID4gLSAgICAgICAgICAgIDEyN307DQo+ID4gLSAgICAgdHJ5
+IHsNCj4gPiAtICAgICAgIHN0cmluZyBiaW5fcmVzdWx0Ow0KPiA+IC0tICAgICAgdGVzdENsaWVu
+dC50ZXN0QmluYXJ5KGJpbl9yZXN1bHQsIHN0cmluZyhiaW5fZGF0YSwgMjU2KSk7DQo+ID4gLSsg
+ICAgICB0ZXN0Q2xpZW50LnRlc3RCaW5hcnkoYmluX3Jlc3VsdCwNCj4gPiAtKyBzdHJpbmcocmVp
+bnRlcnByZXRfY2FzdDxjb25zdCBjaGFyICo+KGJpbl9kYXRhKSwgMjU2KSk7DQo+ID4gLSAgICAg
+ICBpZiAoYmluX3Jlc3VsdC5zaXplKCkgIT0gMjU2KSB7DQo+ID4gLSAgICAgICAgIHByaW50Zigi
+fVxuKioqIEZBSUxFRCAqKipcbiIpOw0KPiA+IC0gICAgICAgICBwcmludGYoImludmFsaWQgbGVu
+Z3RoOiAlbHVcbiIsIGJpbl9yZXN1bHQuc2l6ZSgpKTsNCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9t
+ZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnQtMC45LjMvMDAwNC1USFJJ
+RlQtMzIwNy1lbg0KPiA+IGFibGUtYnVpbGQtd2l0aC1PcGVuU1NMLTEuMS4wLXNlcmllcy5wYXRj
+aA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90aHJpZnQvdGhyaWZ0LTAuOS4z
+LzAwMDQtVEhSSUZULTMyMDctZW4NCj4gPiBhYmxlLWJ1aWxkLXdpdGgtT3BlblNTTC0xLjEuMC1z
+ZXJpZXMucGF0Y2gNCj4gPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCA1MDBj
+ZmFiNjIuLjAwMDAwMDAwMA0KPiA+IC0tLQ0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rp
+dml0eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDQtVEhSSUZULTMyMDctZW4NCj4gPiBhYmxlLWJ1
+aWxkLXdpdGgtT3BlblNTTC0xLjEuMC1zZXJpZXMucGF0Y2gNCj4gPiArKysgL2Rldi9udWxsDQo+
+ID4gQEAgLTEsNDEgKzAsMCBAQA0KPiA+IC1Gcm9tIDVmMmM3ZTUwYjk5ZDcyMTc3MjUwYzQ0MjM2
+YzQxYjk5YmZjMTYxYjUgTW9uIFNlcCAxNyAwMDowMDowMA0KPiA+IDIwMDENCj4gPiAtRnJvbTog
+QW5kcmVqIFZhbGVrIDxhbmRyZWoudmFsZWtAc2llbWVucy5jb20+DQo+ID4gLURhdGU6IFRodSwg
+NyBKdW4gMjAxOCAxNToyMTowNiArMDIwMA0KPiA+IC1TdWJqZWN0OiBbUEFUQ0ggNC82XSAlJSBv
+cmlnaW5hbCBwYXRjaDoNCj4gPiAtIDAwMDQtVEhSSUZULTMyMDctZW5hYmxlLWJ1aWxkLXdpdGgt
+T3BlblNTTC0xLjEuMC1zZXJpZXMucGF0Y2gNCj4gPiAtDQo+ID4gLS0tLQ0KPiA+IC0gbGliL2Nw
+cC9zcmMvdGhyaWZ0L3RyYW5zcG9ydC9UU1NMU29ja2V0LmNwcCB8IDYgKysrKysrDQo+ID4gLSAx
+IGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspDQo+ID4gLQ0KPiA+IC1kaWZmIC0tZ2l0IGEv
+bGliL2NwcC9zcmMvdGhyaWZ0L3RyYW5zcG9ydC9UU1NMU29ja2V0LmNwcA0KPiA+IGIvbGliL2Nw
+cC9zcmMvdGhyaWZ0L3RyYW5zcG9ydC9UU1NMU29ja2V0LmNwcA0KPiA+IC1pbmRleCA5OGM1MzI2
+Li4zZGE5ZTQ1IDEwMDY0NA0KPiA+IC0tLS0gYS9saWIvY3BwL3NyYy90aHJpZnQvdHJhbnNwb3J0
+L1RTU0xTb2NrZXQuY3BwDQo+ID4gLSsrKyBiL2xpYi9jcHAvc3JjL3RocmlmdC90cmFuc3BvcnQv
+VFNTTFNvY2tldC5jcHANCj4gPiAtQEAgLTM5LDYgKzM5LDcgQEANCj4gPiAtICNpbmNsdWRlIDx0
+aHJpZnQvdHJhbnNwb3J0L1BsYXRmb3JtU29ja2V0Lmg+DQo+ID4gLQ0KPiA+IC0gI2RlZmluZSBP
+UEVOU1NMX1ZFUlNJT05fTk9fVEhSRUFEX0lEIDB4MTAwMDAwMDBMDQo+ID4gLSsjZGVmaW5lIE9Q
+RU5TU0xfVkVSU0lPTl9XSVRIX1RMU3YxXzFfQU5EX1RMU3YxXzIgMHgxMDEwMDAwMEwNCj4gPiAt
+DQo+ID4gLSB1c2luZyBuYW1lc3BhY2Ugc3RkOw0KPiA+IC0gdXNpbmcgbmFtZXNwYWNlIGFwYWNo
+ZTo6dGhyaWZ0Ojpjb25jdXJyZW5jeTsgLUBAIC0xNDMsMTAgKzE0NCwxNSBAQA0KPiA+IFNTTENv
+bnRleHQ6OlNTTENvbnRleHQoY29uc3QgU1NMUHJvdG9jb2wmIHByb3RvY29sKSB7DQo+ID4gLSAg
+ICAgY3R4XyA9IFNTTF9DVFhfbmV3KFNTTHYzX21ldGhvZCgpKTsNCj4gPiAtICAgfSBlbHNlIGlm
+IChwcm90b2NvbCA9PSBUTFN2MV8wKSB7DQo+ID4gLSAgICAgY3R4XyA9IFNTTF9DVFhfbmV3KFRM
+U3YxX21ldGhvZCgpKTsNCj4gPiAtKyNpZiAoT1BFTlNTTF9WRVJTSU9OX05VTUJFUiA+PQ0KPiA+
+IC0rT1BFTlNTTF9WRVJTSU9OX1dJVEhfVExTdjFfMV9BTkRfVExTdjFfMikNCj4gPiAtICAgfSBl
+bHNlIGlmIChwcm90b2NvbCA9PSBUTFN2MV8xKSB7DQo+ID4gLSAgICAgY3R4XyA9IFNTTF9DVFhf
+bmV3KFRMU3YxXzFfbWV0aG9kKCkpOw0KPiA+IC0gICB9IGVsc2UgaWYgKHByb3RvY29sID09IFRM
+U3YxXzIpIHsNCj4gPiAtICAgICBjdHhfID0gU1NMX0NUWF9uZXcoVExTdjFfMl9tZXRob2QoKSk7
+DQo+ID4gLSsjZWxzZQ0KPiA+IC0rICAvL1N1cHBvcnQgZm9yIHRoaXMgdmVyc2lvbnMgd2lsbCBl
+bmQgb24gMjAxNi0xMi0zMQ0KPiA+IC0rICAvL2h0dHBzOi8vd3d3Lm9wZW5zc2wub3JnL2Fib3V0
+L3JlbGVhc2VzdHJhdC5odG1sDQo+ID4gLSsjZW5kaWYNCj4gPiAtICAgfSBlbHNlIHsNCj4gPiAt
+ICAgICAvLy8gVU5LTk9XTiBQUk9UT0NPTCENCj4gPiAtICAgICB0aHJvdyBUU1NMRXhjZXB0aW9u
+KCJTU0xfQ1RYX25ldzogVW5rbm93biBwcm90b2NvbCIpOw0KPiA+IC0tLQ0KPiA+IC0yLjE5LjAN
+Cj4gPiAtDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0
+eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDUtVEhSSUZULTM4NzgtQ28NCj4gPiBtcGlsZS1lcnJv
+ci1pbi1UU1NMU29ja2V0LmNwcC13aXRoLW5ldy5wYXRjaA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVz
+LWNvbm5lY3Rpdml0eS90aHJpZnQvdGhyaWZ0LTAuOS4zLzAwMDUtVEhSSUZULTM4NzgtQ28NCj4g
+PiBtcGlsZS1lcnJvci1pbi1UU1NMU29ja2V0LmNwcC13aXRoLW5ldy5wYXRjaA0KPiA+IGRlbGV0
+ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IGY0NDgyYjEwOS4uMDAwMDAwMDAwDQo+ID4g
+LS0tDQo+ID4gYS9tZXRhLW9lL3JlY2lwZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnQtMC45
+LjMvMDAwNS1USFJJRlQtMzg3OC1Dbw0KPiA+IG1waWxlLWVycm9yLWluLVRTU0xTb2NrZXQuY3Bw
+LXdpdGgtbmV3LnBhdGNoDQo+ID4gKysrIC9kZXYvbnVsbA0KPiA+IEBAIC0xLDI2ICswLDAgQEAN
+Cj4gPiAtRnJvbSA4MWYzNmU3MTc0MDk3YTFmMWYzZTdmOTRhOTc1NzRiMmVjNjg1NzdmIE1vbiBT
+ZXAgMTcgMDA6MDA6MDANCj4gPiAyMDAxDQo+ID4gLUZyb206ICJKYW1lcyBFLiBLaW5nLCBJSUki
+IDxqaW0ua2luZ0BzaW1wbGl2aXR5LmNvbT4NCj4gPiAtRGF0ZTogVGh1LCAyOSBTZXAgMjAxNiAx
+NTowNDowOSAtMDQwMA0KPiA+IC1TdWJqZWN0OiBbUEFUQ0hdIFRIUklGVC0zODc4OiBmaXggaW50
+ZXJvcCB3aXRoIG5ld2VyIE9wZW5TU0wNCj4gPiBsaWJyYXJpZXMNCj4gPiAtDQo+ID4gLS0tLQ0K
+PiA+IC0gbGliL2NwcC9zcmMvdGhyaWZ0L3RyYW5zcG9ydC9UU1NMU29ja2V0LmNwcCB8IDUgKysr
+KysNCj4gPiAtIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykNCj4gPiAtDQo+ID4gLWRp
+ZmYgLS1naXQgYS9saWIvY3BwL3NyYy90aHJpZnQvdHJhbnNwb3J0L1RTU0xTb2NrZXQuY3BwDQo+
+ID4gYi9saWIvY3BwL3NyYy90aHJpZnQvdHJhbnNwb3J0L1RTU0xTb2NrZXQuY3BwDQo+ID4gLWlu
+ZGV4IDNkYTllNDUuLjBhM2ExMjQgMTAwNjQ0DQo+ID4gLS0tLSBhL2xpYi9jcHAvc3JjL3Rocmlm
+dC90cmFuc3BvcnQvVFNTTFNvY2tldC5jcHANCj4gPiAtKysrIGIvbGliL2NwcC9zcmMvdGhyaWZ0
+L3RyYW5zcG9ydC9UU1NMU29ja2V0LmNwcA0KPiA+IC1AQCAtOTcsNyArOTcsMTIgQEAgdm9pZCBp
+bml0aWFsaXplT3BlblNTTCgpIHsNCj4gPiAtICAgU1NMX2xpYnJhcnlfaW5pdCgpOw0KPiA+IC0g
+ICBTU0xfbG9hZF9lcnJvcl9zdHJpbmdzKCk7DQo+ID4gLSAgIC8vIHN0YXRpYyBsb2NraW5nDQo+
+ID4gLSsgIC8vIG5ld2VyIHZlcnNpb25zIG9mIE9wZW5TU0wgY2hhbmdlZCBDUllQVE9fbnVtX2xv
+Y2tzIC0gc2VlDQo+ID4gLStUSFJJRlQtMzg3OCAjaWZkZWYgQ1JZUFRPX251bV9sb2Nrcw0KPiA+
+IC0rICBtdXRleGVzID0gYm9vc3Q6OnNoYXJlZF9hcnJheTxNdXRleD4obmV3DQo+ID4gLStNdXRl
+eFtDUllQVE9fbnVtX2xvY2tzKCldKTsgI2Vsc2UNCj4gPiAtICAgbXV0ZXhlcyA9IGJvb3N0Ojpz
+aGFyZWRfYXJyYXk8TXV0ZXg+KG5ldyBNdXRleFsNCj4gOjpDUllQVE9fbnVtX2xvY2tzKCldKTsN
+Cj4gPiAtKyNlbmRpZg0KPiA+IC0gICBpZiAobXV0ZXhlcyA9PSBOVUxMKSB7DQo+ID4gLSAgICAg
+dGhyb3cgVFRyYW5zcG9ydEV4Y2VwdGlvbihUVHJhbnNwb3J0RXhjZXB0aW9uOjpJTlRFUk5BTF9F
+UlJPUiwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJpbml0aWFsaXplT3Bl
+blNTTCgpIGZhaWxlZCwgIg0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtb2UvcmVjaXBlcy1j
+b25uZWN0aXZpdHkvdGhyaWZ0L3RocmlmdC0wLjkuMy8wMDA2LVRIUklGVC0zNzM2LUMrDQo+ID4g
+Ky1saWJyYXJ5LWJ1aWxkLWZhaWxzLWlmLU9wZW5TU0wtZG9lcy0ucGF0Y2gNCj4gPiBiL21ldGEt
+b2UvcmVjaXBlcy1jb25uZWN0aXZpdHkvdGhyaWZ0L3RocmlmdC0wLjkuMy8wMDA2LVRIUklGVC0z
+NzM2LUMrDQo+ID4gKy1saWJyYXJ5LWJ1aWxkLWZhaWxzLWlmLU9wZW5TU0wtZG9lcy0ucGF0Y2gN
+Cj4gPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCBkZmFhMmZiZGEuLjAwMDAw
+MDAwMA0KPiA+IC0tLQ0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90aHJpZnQv
+dGhyaWZ0LTAuOS4zLzAwMDYtVEhSSUZULTM3MzYtQysNCj4gPiArLWxpYnJhcnktYnVpbGQtZmFp
+bHMtaWYtT3BlblNTTC1kb2VzLS5wYXRjaA0KPiA+ICsrKyAvZGV2L251bGwNCj4gPiBAQCAtMSw0
+NiArMCwwIEBADQo+ID4gLUZyb20gNGNkNDlmNDcwY2E5ODMzNjk0NTFkMTE0MWFjYzgwZmUxMTE1
+Y2FiNCBNb24gU2VwIDE3IDAwOjAwOjAwDQo+ID4gMjAwMQ0KPiA+IC1Gcm9tOiBOb2J1YWtpIFN1
+a2VnYXdhIDxuc3VrZUBhcGFjaGUub3JnPg0KPiA+IC1EYXRlOiBTdW4sIDEzIE1hciAyMDE2IDA4
+OjU1OjM4ICswOTAwDQo+ID4gLVN1YmplY3Q6IFtQQVRDSF0gVEhSSUZULTM3MzYgQysrIGxpYnJh
+cnkgYnVpbGQgZmFpbHMgaWYgT3BlblNTTCBkb2VzDQo+ID4gbm90DQo+ID4gLQ0KPiA+IC0gc3Vy
+cnBvdCBTU0x2Mw0KPiA+IC0NCj4gPiAtLS0tDQo+ID4gLSBsaWIvY3BwL3NyYy90aHJpZnQvdHJh
+bnNwb3J0L1RTU0xTb2NrZXQuY3BwIHwgMiArKw0KPiA+IC0gbGliL2NwcC90ZXN0L1NlY3VyaXR5
+VGVzdC5jcHAgICAgICAgICAgICAgICB8IDggKysrKysrKysNCj4gPiAtIDIgZmlsZXMgY2hhbmdl
+ZCwgMTAgaW5zZXJ0aW9ucygrKQ0KPiA+IC0NCj4gPiAtZGlmZiAtLWdpdCBhL2xpYi9jcHAvc3Jj
+L3RocmlmdC90cmFuc3BvcnQvVFNTTFNvY2tldC5jcHANCj4gPiBiL2xpYi9jcHAvc3JjL3Rocmlm
+dC90cmFuc3BvcnQvVFNTTFNvY2tldC5jcHANCj4gPiAtaW5kZXggMGEzYTEyNC4uM2U3OTM1NCAx
+MDA2NDQNCj4gPiAtLS0tIGEvbGliL2NwcC9zcmMvdGhyaWZ0L3RyYW5zcG9ydC9UU1NMU29ja2V0
+LmNwcA0KPiA+IC0rKysgYi9saWIvY3BwL3NyYy90aHJpZnQvdHJhbnNwb3J0L1RTU0xTb2NrZXQu
+Y3BwDQo+ID4gLUBAIC0xNDUsOCArMTQ1LDEwIEBAIHN0YXRpYyBjaGFyIHVwcGVyY2FzZShjaGFy
+IGMpOw0KPiA+IC0gU1NMQ29udGV4dDo6U1NMQ29udGV4dChjb25zdCBTU0xQcm90b2NvbCYgcHJv
+dG9jb2wpIHsNCj4gPiAtICAgaWYgKHByb3RvY29sID09IFNTTFRMUykgew0KPiA+IC0gICAgIGN0
+eF8gPSBTU0xfQ1RYX25ldyhTU0x2MjNfbWV0aG9kKCkpOw0KPiA+IC0rI2lmbmRlZiBPUEVOU1NM
+X05PX1NTTDMNCj4gPiAtICAgfSBlbHNlIGlmIChwcm90b2NvbCA9PSBTU0x2Mykgew0KPiA+IC0g
+ICAgIGN0eF8gPSBTU0xfQ1RYX25ldyhTU0x2M19tZXRob2QoKSk7DQo+ID4gLSsjZW5kaWYNCj4g
+PiAtICAgfSBlbHNlIGlmIChwcm90b2NvbCA9PSBUTFN2MV8wKSB7DQo+ID4gLSAgICAgY3R4XyA9
+IFNTTF9DVFhfbmV3KFRMU3YxX21ldGhvZCgpKTsNCj4gPiAtICNpZiAoT1BFTlNTTF9WRVJTSU9O
+X05VTUJFUiA+PQ0KPiA+IE9QRU5TU0xfVkVSU0lPTl9XSVRIX1RMU3YxXzFfQU5EX1RMU3YxXzIp
+DQo+ID4gLWRpZmYgLS1naXQgYS9saWIvY3BwL3Rlc3QvU2VjdXJpdHlUZXN0LmNwcA0KPiA+IGIv
+bGliL2NwcC90ZXN0L1NlY3VyaXR5VGVzdC5jcHAgLWluZGV4IDIxM2VmZDQuLjA4MTEwZTcgMTAw
+NjQ0DQo+ID4gLS0tLSBhL2xpYi9jcHAvdGVzdC9TZWN1cml0eVRlc3QuY3BwDQo+ID4gLSsrKyBi
+L2xpYi9jcHAvdGVzdC9TZWN1cml0eVRlc3QuY3BwDQo+ID4gLUBAIC0yMzksNiArMjM5LDE0IEBA
+IEJPT1NUX0FVVE9fVEVTVF9DQVNFKHNzbF9zZWN1cml0eV9tYXRyaXgpDQo+ID4gLSAgICAgICAg
+ICAgICAgICAgICAgIGNvbnRpbnVlOw0KPiA+IC0gICAgICAgICAgICAgICAgIH0NCj4gPiAtDQo+
+ID4gLSsjaWZkZWYgT1BFTlNTTF9OT19TU0wzDQo+ID4gLSsgICAgICAgICAgICAgICAgaWYgKHNp
+ID09IDIgfHwgY2kgPT0gMikNCj4gPiAtKyAgICAgICAgICAgICAgICB7DQo+ID4gLSsgICAgICAg
+ICAgICAgICAgICAgIC8vIFNraXAgYWxsIFNTTHYzIGNhc2VzIC0gcHJvdG9jb2wgbm90IHN1cHBv
+cnRlZA0KPiA+IC0rICAgICAgICAgICAgICAgICAgICBjb250aW51ZTsNCj4gPiAtKyAgICAgICAg
+ICAgICAgICB9DQo+ID4gLSsjZW5kaWYNCj4gPiAtKw0KPiA+IC0gICAgICAgICAgICAgICAgIGJv
+b3N0OjptdXRleDo6c2NvcGVkX2xvY2sgbG9jayhtTXV0ZXgpOw0KPiA+IC0NCj4gPiAtICAgICAg
+ICAgICAgICAgICBCT09TVF9URVNUX01FU1NBR0UoYm9vc3Q6OmZvcm1hdCgiVEVTVDogU2VydmVy
+ID0gJTElLA0KPiBDbGllbnQgPSAlMiUiKQ0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lw
+ZXMtY29ubmVjdGl2aXR5L3RocmlmdC90aHJpZnRfMC45LjMuYmINCj4gPiBiL21ldGEtb2UvcmVj
+aXBlcy1jb25uZWN0aXZpdHkvdGhyaWZ0L3RocmlmdF8wLjExLjAuYmINCj4gPiBzaW1pbGFyaXR5
+IGluZGV4IDU3JQ0KPiA+IHJlbmFtZSBmcm9tIG1ldGEtb2UvcmVjaXBlcy1jb25uZWN0aXZpdHkv
+dGhyaWZ0L3RocmlmdF8wLjkuMy5iYg0KPiA+IHJlbmFtZSB0byBtZXRhLW9lL3JlY2lwZXMtY29u
+bmVjdGl2aXR5L3RocmlmdC90aHJpZnRfMC4xMS4wLmJiDQo+ID4gaW5kZXggN2FiNzQwMjZiLi4z
+MDdkM2VmMjAgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rpdml0eS90
+aHJpZnQvdGhyaWZ0XzAuOS4zLmJiDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWNvbm5lY3Rp
+dml0eS90aHJpZnQvdGhyaWZ0XzAuMTEuMC5iYg0KPiA+IEBAIC0zLDIyICszLDE2IEBAIERFU0NS
+SVBUSU9OID0gICJBIHNvZnR3YXJlIGZyYW1ld29yaywgZm9yIHNjYWxhYmxlDQo+ID4gY3Jvc3Mt
+bGFuZ3VhZ2Ugc2VydmljZXMgZGV2ZWwgIEhPTUVQQUdFID0gImh0dHBzOi8vdGhyaWZ0LmFwYWNo
+ZS5vcmcvIg0KPiA+DQo+ID4gIExJQ0VOU0UgPSAiQXBhY2hlLTIuMCINCj4gPiAtTElDX0ZJTEVT
+X0NIS1NVTSA9DQo+ICJmaWxlOi8vTElDRU5TRTttZDU9ZTRlZDIxZjY3OWIyYWFmZWYyNmVhYzgy
+YWIwYzJjYmYgXA0KPiA+IC0gICAgICAgICAgICAgICAgICAgIGZpbGU6Ly9OT1RJQ0U7bWQ1PTEx
+NWY0OTQ5OGI2NmI0OTRiMDQ3MjY1OGYyYmZlODBiIg0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0N
+Cj4gImZpbGU6Ly9MSUNFTlNFO21kNT0zOTQ0NjVlMTI1Y2ZmYzBmMTMzNjk1ZWQ0M2YxNDA0NyBc
+DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgZmlsZTovL05PVElDRTttZDU9NDI3NDhhZTQ2NDZi
+NDVmYmZhNTE4MjgwNzMyMWZiNmMiDQo+ID4NCj4gPiAgREVQRU5EUyA9ICJ0aHJpZnQtbmF0aXZl
+IGJvb3N0IGZsZXgtbmF0aXZlIGJpc29uLW5hdGl2ZSBvcGVuc3NsIg0KPiA+DQo+ID4gIFNSQ19V
+UkkgPQ0KPiAiaHR0cDovL21pcnJvci5zd2l0Y2guY2gvbWlycm9yL2FwYWNoZS9kaXN0L3Rocmlm
+dC8ke1BWfS8ke0JQTn0tDQo+ICR7UFZ9LnRhci5neiBcDQo+ID4gLSAgICAgICAgICAgZmlsZTov
+LzAwMDEtRm9yY2libHktZGlzYWJsZS1jaGVjay1mb3ItUXQ1LnBhdGNoIFwNCj4gPiAtICAgICAg
+ICAgICBmaWxlOi8vMDAwMS1USFJJRlQtMzgyOC1Jbi1jbWFrZS1hdm9pZC11c2Utb2YtYm90aC1x
+dW90ZWQtcGF0aHMtDQo+IC5wYXRjaCBcDQo+ID4gLSAgICAgICAgICAgZmlsZTovLzAwMDItVEhS
+SUZULTM4MzEtaW4tdGVzdC1jcHAtZXhwbGljaXRseS11c2Utc2lnbmVkLWNoYXIucGF0Y2gNCj4g
+XA0KPiA+IC0gICAgICAgICAgIGZpbGU6Ly8wMDA0LVRIUklGVC0zMjA3LWVuYWJsZS1idWlsZC13
+aXRoLU9wZW5TU0wtMS4xLjAtDQo+IHNlcmllcy5wYXRjaCBcDQo+ID4gLSAgICAgICAgICAgZmls
+ZTovLzAwMDUtVEhSSUZULTM4NzgtQ29tcGlsZS1lcnJvci1pbi1UU1NMU29ja2V0LmNwcC13aXRo
+LQ0KPiBuZXcucGF0Y2ggXA0KPiA+IC0gICAgICAgICAgIGZpbGU6Ly8wMDA2LVRIUklGVC0zNzM2
+LUMrKy1saWJyYXJ5LWJ1aWxkLWZhaWxzLWlmLU9wZW5TU0wtZG9lcy0NCj4gLnBhdGNoIFwNCj4g
+PiAtIg0KPiA+ICsgICAgICAgICAgIg0KPiA+DQo+ID4gLVNSQ19VUklbbWQ1c3VtXSA9ICI4OGQ2
+NjdhOGFlODcwZDVhZGVjYThjYjdkNjc5NTQ0MiINCj4gPiAtU1JDX1VSSVtzaGEyNTZzdW1dID0N
+Cj4gImIwNzQwYTA3MGFjMDlhZGRlMDRkNDNlODUyY2U0YzMyMDU2NGEyOTJmMjY1MjFjNDZiNzhl
+MDY0MTU2NDk2OWUiDQo+ID4gK1NSQ19VUklbbWQ1c3VtXSA9ICIwYmU1OTczMGViY2UwNzFlY2Vh
+ZjZiZmRiOGQzYTIwZSINCj4gPiArU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gImM0YWQzOGI2Y2I0
+YTM0OTgzMTBkNDA1YTkxZmVmMzdiOWE4ZTc5YTUwY2QwOTY4MTQ4ZWUyNTI0ZDJmYTYwYzIiDQo+
+ID4NCj4gPiAgQkJDTEFTU0VYVEVORCA9ICJuYXRpdmUgbmF0aXZlc2RrIg0KPiA+DQo+ID4gQEAg
+LTMwLDYgKzI0LDcgQEAgZXhwb3J0IEJVSUxEX1NZUw0KPiA+ICBleHBvcnQgSE9TVF9TWVMNCj4g
+Pg0KPiA+ICBFWFRSQV9PRUNNQUtFID0gIiBcDQo+ID4gKyAgICAtREVOQUJMRV9QUkVDT01QSUxF
+RF9IRUFERVJTPU9GRiBcDQo+ID4gICAgICAtREJVSUxEX0xJQlJBUklFUz1PTiBcDQo+ID4gICAg
+ICAtREJVSUxEX0NPTVBJTEVSPU9OIFwNCj4gPiAgICAgIC1EQlVJTERfVEVTVElORz1PRkYgXA0K
+PiA+IEBAIC0zNywxNyArMzIsMTkgQEAgRVhUUkFfT0VDTUFLRSA9ICIgXA0KPiA+ICAgICAgLURC
+VUlMRF9UVVRPUklBTFM9T0ZGIFwNCj4gPiAgICAgIC1EV0lUSF9DUFA9T04gXA0KPiA+ICAgICAg
+LURXSVRIX0pBVkE9T0ZGIFwNCj4gPiArICAgIC1EV0lUSF9QWVRIT049T0ZGIFwNCj4gPiAgICAg
+IC1EV0lUSF9TVEFUSUNfTElCPU9OIFwNCj4gPiAgICAgIC1EV0lUSF9TSEFSRURfTElCPU9OIFwN
+Cj4gPiAgICAgIC1EV0lUSF9PUEVOU1NMPU9OIFwNCj4gPiAgICAgIC1EV0lUSF9RVDQ9T0ZGIFwN
+Cj4gPiAgICAgIC1EV0lUSF9RVDU9T0ZGIFwNCj4gPiArICAgIC1EV0lUSF9CT09TVF9GVU5DVElP
+TkFMPU9GRiBcDQo+ID4gICINCj4gPg0KPiA+IC1QQUNLQUdFQ09ORklHID8/PSAibGliZXZlbnQg
+Z2xpYiBweXRob24iDQo+ID4gLVBBQ0tBR0VDT05GSUdbbGliZXZlbnRdID0gIi1EV0lUSF9MSUJF
+VkVOVD1PTiwtDQo+IERXSVRIX0xJQkVWRU5UPU9GRixsaWJldmVudCwiDQo+ID4gLVBBQ0tBR0VD
+T05GSUdbcHl0aG9uXSA9ICItRFdJVEhfUFlUSE9OPU9OLC0NCj4gRFdJVEhfUFlUSE9OPU9GRixw
+eXRob24sIg0KPiA+IC1QQUNLQUdFQ09ORklHW2dsaWJdID0gIi1EV0lUSF9DX0dMSUI9T04sLURX
+SVRIX0NfR0xJQj1PRkYsZ2xpYi0NCj4gMi4wICwiDQo+ID4gK1BBQ0tBR0VDT05GSUcgPz89ICJs
+aWJldmVudCBnbGliIGJvb3N0LXNtYXJ0LXB0ciINCj4gPiArUEFDS0FHRUNPTkZJR1tsaWJldmVu
+dF0gPSAiLURXSVRIX0xJQkVWRU5UPU9OLC0NCj4gRFdJVEhfTElCRVZFTlQ9T0ZGLGxpYmV2ZW50
+Ig0KPiA+ICtQQUNLQUdFQ09ORklHW2dsaWJdID0gIi1EV0lUSF9DX0dMSUI9T04sLURXSVRIX0Nf
+R0xJQj1PRkYsZ2xpYi0NCj4gMi4wIg0KPiA+ICtQQUNLQUdFQ09ORklHW2Jvb3N0LXNtYXJ0LXB0
+cl0gPSAiLQ0KPiBEV0lUSF9CT09TVF9TTUFSVF9QVFI9T04sLURXSVRIX0JPT1NUX1NNQVJUX1BU
+Uj1PRkYsYm9vc3QiDQo+ID4NCj4gPiAgZG9faW5zdGFsbF9hcHBlbmQgKCkgew0KPiA+ICAgICAg
+bG4gLXNmIHRocmlmdCAke0R9LyR7YmluZGlyfS90aHJpZnQtY29tcGlsZXIgQEAgLTU2LDggKzUz
+LDExIEBADQo+ID4gZG9faW5zdGFsbF9hcHBlbmQgKCkgeyAgTEVBRF9TT05BTUUgPSAibGlidGhy
+aWZ0LnNvLiR7UFZ9Ig0KPiA+DQo+ID4gICMgdGhyaWZ0IHBhY2thZ2VzDQo+ID4gLVBBQ0tBR0Vf
+QkVGT1JFX1BOID0gIiR7UE59LWNvbXBpbGVyIGxpYiR7QlBOfSINCj4gPiAtRklMRVNfbGliJHtC
+UE59ID0gIiR7bGliZGlyfS8qLnNvLioiDQo+ID4gK1BBQ0tBR0VfQkVGT1JFX1BOID0gIiR7UE59
+LWNvbXBpbGVyIGxpYiR7QlBOfSBsaWIke0JQTn16DQo+IGxpYiR7QlBOfW5iIGxpYiR7QlBOfS1j
+LWdsaWIiDQo+ID4gK0ZJTEVTX2xpYiR7QlBOfSA9ICIke2xpYmRpcn0vbGlidGhyaWZ0LnNvLioi
+DQo+ID4gK0ZJTEVTX2xpYiR7QlBOfXogPSAiJHtsaWJkaXJ9L2xpYnRocmlmdHouc28uKiINCj4g
+PiArRklMRVNfbGliJHtCUE59bmIgPSAiJHtsaWJkaXJ9L2xpYnRocmlmdG5iLnNvLioiDQo+ID4g
+K0ZJTEVTX2xpYiR7QlBOfS1jLWdsaWIgPSAiJHtsaWJkaXJ9L2xpYnRocmlmdF9jX2dsaWIuc28u
+KiINCj4gPiAgRklMRVNfJHtQTn0tY29tcGlsZXIgPSAiJHtiaW5kaXJ9LyoiDQo+ID4NCj4gPiAg
+IyBUaGUgdGhyaWZ0IHBhY2thZ2VzIGp1c3QgcHVsbHMgaW4gc29tZSBkZWZhdWx0IGRlcGVuZGVu
+Y2llcyBidXQgaXMNCj4gPiBvdGhlcndpc2UgZW1wdHkNCj4gPiAtLQ0KPiA+IDIuMTEuMA0KPiA+
+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBPcGVuZW1iZWRk
+ZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1i
+ZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
 
