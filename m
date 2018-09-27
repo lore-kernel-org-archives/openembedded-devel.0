@@ -1,23 +1,24 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CF20271AB3
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 461A671AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 07:17:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8R7HCBb014505
+	Thu, 27 Sep 2018 07:20:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w8R7KSKU018688
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 27 Sep 2018 00:17:23 -0700
+	Thu, 27 Sep 2018 00:20:28 -0700 (PDT)
 Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.408.0; Thu, 27 Sep 2018 00:17:01 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 27 Sep 2018 00:20:28 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
-Date: Thu, 27 Sep 2018 15:17:00 +0800
-Message-ID: <1538032620-166793-1-git-send-email-mingli.yu@windriver.com>
+Date: Thu, 27 Sep 2018 15:20:26 +0800
+Message-ID: <1538032826-389294-1-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1538032620-166793-1-git-send-email-mingli.yu@windriver.com>
+References: <1538032620-166793-1-git-send-email-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] efivar: make CC_FOR_BUILD value complete
+Subject: [meta-oe][PATCH v2] efivar: make CC_FOR_BUILD value complete
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,12 +31,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 07:17:49 -0000
+X-List-Received-Date: Thu, 27 Sep 2018 07:20:28 -0000
 Content-Type: text/plain
 
 From: Mingli Yu <Mingli.Yu@windriver.com>
-
-Issue: LIN1018-2452
 
 Update CC_FOR_BUILD=${BUILD_CC} to
 CC_FOR_BUILD="${BUILD_CC}" to guarantee
@@ -46,8 +45,6 @@ when ccache enabled:
 | make: Entering directory '/mybuild/tmp-glibc/work/x86_64-linux/efivar-native/0.36-r0/git/src'
 | ccache -isystem/mybuild/tmp-glibc/work/x86_64-linux/efivar-native/0.36-r0/recipe-sysroot-native/usr/include -O2 -pipe ... -DEFIVAR_BUILD_ENVIRONMENT -o makeguids makeguids.c guid.c -ldl
 | ccache: invalid option -- 'i'
-
-(LOCAL REV: NOT UPSTREAM) -- Send to oe-devel 20180927
 
 Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
