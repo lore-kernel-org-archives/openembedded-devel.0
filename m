@@ -1,53 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id CEA767459D
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CF20271AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 04:17:53 +0000 (UTC)
-Received: by mail-pg1-f173.google.com with SMTP id g2-v6so887176pgu.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Sep 2018 21:17:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=xOip9iZoWLjMGQBTCYxPPHtbhqGLyBaqR88+EtIcSHA=;
-	b=VOv9cM1AYmOGaVoFL/ByoUTWEb+jUiteap/1dQU/1OxTIdvBzkohcR615+qcLtkHoM
-	w5ieCI30gyZkpN9hLRTn//HgxiGg22QfFtHy0bHof9Ya0PKI3N6nqWUY1h58gPQ83Irc
-	pFEGVS0nmJdmZtrFeWl5zzI43gT8+QhMP5lkb/dGysKJhV7tmK/CAb5ZXxFqAuuS8IhH
-	dcaJ9lCJkd6VKi6ZGpR5RcISMt6CvK/FogKfQ9+0JLc+diN55i5k8xRY4PcIhBzKnB/h
-	IaHYS6mw3KZlo74AUhHMinYOMScG5iZvKZOfboLXLZYO2Yh95VkFQ1Df8RhAqLqY6V1J
-	Wpkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=xOip9iZoWLjMGQBTCYxPPHtbhqGLyBaqR88+EtIcSHA=;
-	b=DDDHo0Es0m8nqxNPAvIxx7O9CgXU5nEs5wyEB+rItpbv2oQ5h64rHLTqV6+cWQVgC5
-	EVe5MVsYXpmiyw3rDLsaZPZXmRaotk3JGS8fSelhbYEGEMsLDJLMcezBRQIughBFroJT
-	CwyoD7BGpEJxcJTT/0BDvyq6ljYAc8n75Fv6UNMq8yLoXt2E0/3G//uuLYXlAAO0arWO
-	M+40xOmgcU9X/YCKByJjej0PyIhalmT5DehzGa7x5ee7drFwhcjTFZQUZcxQwB9kw4j/
-	GkFB1TQ37Luz97MdZKCXrE3N6ZwQRKv8KEjdtDZD9IEHxc7DthShWQN/OaD3jesuu9Dl
-	0qEg==
-X-Gm-Message-State: ABuFfoiHioFj8gXzBzoeP+BmS/zr6VHxoo18mfIa2f88JQde7q05f4QX
-	9KbPqDpMY82zkGKGXyB7gSp9QtuQ
-X-Google-Smtp-Source: ACcGV62+1W0/aWv3055ULllIGeYl7kvAcKIg5ODCgBnFcrhf0wPh6pwqktwPyWbDoXUE2gxk/0cFcw==
-X-Received: by 2002:a63:ad44:: with SMTP id
-	y4-v6mr8201870pgo.138.1538021874551; 
-	Wed, 26 Sep 2018 21:17:54 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::b1b1])
-	by smtp.gmail.com with ESMTPSA id
-	l85-v6sm1021774pfk.34.2018.09.26.21.17.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Sep 2018 21:17:54 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Sep 2018 21:17:43 -0700
-Message-Id: <20180927041743.2769-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20180927041743.2769-1-raj.khem@gmail.com>
-References: <20180927041743.2769-1-raj.khem@gmail.com>
+	Thu, 27 Sep 2018 07:17:48 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8R7HCBb014505
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 27 Sep 2018 00:17:23 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 27 Sep 2018 00:17:01 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <raj.khem@gmail.com>
+Date: Thu, 27 Sep 2018 15:17:00 +0800
+Message-ID: <1538032620-166793-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] netperf: Fix build error on musl
+Subject: [meta-oe][PATCH] efivar: make CC_FOR_BUILD value complete
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,94 +30,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 04:17:54 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Sep 2018 07:17:49 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Mingli Yu <Mingli.Yu@windriver.com>
+
+Issue: LIN1018-2452
+
+Update CC_FOR_BUILD=${BUILD_CC} to
+CC_FOR_BUILD="${BUILD_CC}" to guarantee
+the BUILD_CC value passed to CC_FOR_BUILD
+completely to avoid below build failure
+when ccache enabled:
+| NOTE: make -j 48 -C src makeguids CC_FOR_BUILD=ccache gcc
+| make: Entering directory '/mybuild/tmp-glibc/work/x86_64-linux/efivar-native/0.36-r0/git/src'
+| ccache -isystem/mybuild/tmp-glibc/work/x86_64-linux/efivar-native/0.36-r0/recipe-sysroot-native/usr/include -O2 -pipe ... -DEFIVAR_BUILD_ENVIRONMENT -o makeguids makeguids.c guid.c -ldl
+| ccache: invalid option -- 'i'
+
+(LOCAL REV: NOT UPSTREAM) -- Send to oe-devel 20180927
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- ...ve-including-sched.h-out-og-function.patch | 50 +++++++++++++++++++
- .../recipes-support/netperf/netperf_git.bb    | 10 ++--
- 2 files changed, 56 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-support/netperf/files/0001-netlib.c-Move-including-sched.h-out-og-function.patch
+ meta-oe/recipes-bsp/efivar/efivar_0.36.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/netperf/files/0001-netlib.c-Move-including-sched.h-out-og-function.patch b/meta-networking/recipes-support/netperf/files/0001-netlib.c-Move-including-sched.h-out-og-function.patch
-new file mode 100644
-index 0000000000..515737c8e5
---- /dev/null
-+++ b/meta-networking/recipes-support/netperf/files/0001-netlib.c-Move-including-sched.h-out-og-function.patch
-@@ -0,0 +1,50 @@
-+From 51a092ebb36dcc6180ceb93a9777258e826d9990 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 26 Sep 2018 18:11:10 -0700
-+Subject: [PATCH] netlib.c: Move including sched.h out og function
-+
-+The shutdown_control() has this code where system headers are being
-+included inside function body and this results in compile errors on musl
-+especially when sched.h is included because sched.h defines a macro
-+which defines a static function. This means it ends up being a static
-+function inside another function and compiler calls it out
-+
-+In function 'bind_to_specific_processor':
-+|
-+/mnt/a/yoe/build/tmp/work/i586-yoe-linux-musl/netperf/2.7.0+git999-r0/recipe-sysroot/usr/include/sched.h:102:1:
-+error: invalid storage class for function '__CPU_AND_S'
-+|  __CPU_op_func_S(AND, &)
-+|  ^~~~~~~~~~~~~~~
-+
-+Moving the definition out of function definition fixes the problem
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/netlib.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/netlib.c b/src/netlib.c
-+index 9258424..60b032d 100644
-+--- a/src/netlib.c
-++++ b/src/netlib.c
-+@@ -2262,6 +2262,10 @@ shutdown_control()
-+ 
-+ }
-+ 
-++#if HAVE_SCHED_SETAFFINITY
-++#include <sched.h>
-++#endif
-++
-+ /*
-+   bind_to_specific_processor will bind the calling process to the
-+   processor in "processor"  It has lots of ugly ifdefs to deal with
-+@@ -2308,7 +2312,6 @@ bind_to_specific_processor(int processor_affinity, int use_cpu_map)
-+      value will not tell you if you are bound vs unbound. */
-+   bindprocessor(BINDPROCESS,getpid(),(cpu_t)mapped_affinity);
-+ #elif HAVE_SCHED_SETAFFINITY
-+-#include <sched.h>
-+   /* in theory this should cover systems with more CPUs than bits in a
-+      long, without having to specify __USE_GNU.  we "cheat" by taking
-+      defines from /usr/include/bits/sched.h, which we ass-u-me is
-diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/meta-networking/recipes-support/netperf/netperf_git.bb
-index f0e0f9cf1f..8921ea7460 100644
---- a/meta-networking/recipes-support/netperf/netperf_git.bb
-+++ b/meta-networking/recipes-support/netperf/netperf_git.bb
-@@ -8,10 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
+diff --git a/meta-oe/recipes-bsp/efivar/efivar_0.36.bb b/meta-oe/recipes-bsp/efivar/efivar_0.36.bb
+index dfb46c2..20588ee 100644
+--- a/meta-oe/recipes-bsp/efivar/efivar_0.36.bb
++++ b/meta-oe/recipes-bsp/efivar/efivar_0.36.bb
+@@ -29,7 +29,7 @@ do_compile_prepend() {
+ }
  
- PV = "2.7.0+git${SRCPV}"
+ do_compile_class-native() {
+-    oe_runmake -C src makeguids CC_FOR_BUILD=${BUILD_CC}
++    oe_runmake -C src makeguids CC_FOR_BUILD="${BUILD_CC}"
+ }
  
--SRC_URI="git://github.com/HewlettPackard/netperf.git \
--         file://cpu_set.patch \
--         file://vfork.patch \
--         file://init"
-+SRC_URI = "git://github.com/HewlettPackard/netperf.git \
-+           file://cpu_set.patch \
-+           file://vfork.patch \
-+           file://init \
-+           file://0001-netlib.c-Move-including-sched.h-out-og-function.patch \
-+           "
- 
- SRCREV = "f482bab49fcedee46fc5b755da127f608325cd13"
- 
+ do_install() {
 -- 
-2.19.0
+2.7.4
 
 
