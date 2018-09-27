@@ -1,26 +1,36 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AA96360234
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 524 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 27 Sep 2018 15:24:10 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 03EF4798E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 15:06:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8RF3qfd025603
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 27 Sep 2018 08:06:20 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
-	Thu, 27 Sep 2018 08:05:33 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Thu, 27 Sep 2018 11:04:29 -0400
-Message-ID: <1538060669-69466-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1538059505-31813-1-git-send-email-hongxu.jia@windriver.com>
-References: <1538059505-31813-1-git-send-email-hongxu.jia@windriver.com>
+	Thu, 27 Sep 2018 15:24:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7AC2B20BC8;
+	Thu, 27 Sep 2018 15:15:27 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 8uzqAe5rO9XW; Thu, 27 Sep 2018 15:15:27 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-91-218.washdc.fios.verizon.net
+	[100.15.91.218])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4D4AF208DA;
+	Thu, 27 Sep 2018 15:15:25 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id C20C4163CC3; Thu, 27 Sep 2018 11:15:23 -0400 (EDT)
+Date: Thu, 27 Sep 2018 11:15:23 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	openembedded-members@lists.openembedded.org
+Message-ID: <20180927151523.GB7186@denix.org>
+References: <20180702040215.GT19965@denix.org>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH V2] libblockdev: correct PACKAGECONFIG
+In-Reply-To: <20180702040215.GT19965@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: OpenEmbedded branded T-shirts and Polo shirts!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,61 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 15:06:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Sep 2018 15:24:10 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Since commit `6cc057d libblockdev: make various features optional' applied,
-it introduced issues:
+Besides black and white OpenEmbedded T-shirts and Polos, the shop has also 
+added blue ones!
+https://www.hellotux.com/openembedded
 
-1. As configure.ac told us, mpath/dm/lvm/lvm-dbus should have the
-same depends, runtime depends
-[configure.ac]
-|AS_IF([test "x$with_dm" != "xno" -o "x$with_lvm" != "xno" -o "x$with_lvm_dbus" != "xno" -o "x$with_mpath" != "xno"],
-|      [LIBBLOCKDEV_PKG_CHECK_MODULES([DEVMAPPER], [devmapper >= 1.02.93])],
-|      [])
-[configure.ac]
+Plus, Yocto Project shirts are now available as well:
+https://www.hellotux.com/yocto
 
-2. Remove duplicated PACKAGECONFIG tags `lvm-dbus'
-
-3. Remove `lvm-dbus' from PACKAGECONFIG since recipe lvm2 does not support dbus
-
-4. Align with previous configure options, we should add `mpath'
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
-
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
-index 021f641..35f0cc0 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
-@@ -19,12 +19,12 @@ S = "${WORKDIR}/git"
- 
- FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
- 
--PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd lvm-dbus"
-+PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath"
- PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
- PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
- PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools, lvm2"
- PACKAGECONFIG[lvm-dbus] = "--with-lvm_dbus, --without-lvm_dbus, multipath-tools, lvm2"
--PACKAGECONFIG[dm] = "--with-dm, --without-dm"
-+PACKAGECONFIG[dm] = "--with-dm, --without-dm, multipath-tools, lvm2"
- PACKAGECONFIG[dmraid] = "--with-dmraid, --without-dmraid"
- PACKAGECONFIG[kmod] = "--with-kbd, --without-kbd, kmod"
- PACKAGECONFIG[parted] = "--with-part, --without-part, parted"
-@@ -37,8 +37,7 @@ PACKAGECONFIG[btrfs] = "--with-btrfs,--without-btrfs,libbytesize btrfs-tools"
- PACKAGECONFIG[crypto] = "--with-crypto,--without-crypto,cryptsetup nss volume-key"
- PACKAGECONFIG[mdraid] = "--with-mdraid,--without-mdraid,libbytesize"
- PACKAGECONFIG[kbd] = "--with-kbd,--without-kbd,libbytesize"
--PACKAGECONFIG[lvm-dbus] = "--with-lvm_dbus,--without-lvm_dbus"
--PACKAGECONFIG[mpath] = "--with-mpath,--without-mpath"
-+PACKAGECONFIG[mpath] = "--with-mpath,--without-mpath, multipath-tools, lvm2"
- 
- export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
- 
 -- 
-2.8.1
+Denys
 
+
+On Mon, Jul 02, 2018 at 12:02:16AM -0400, Denys Dmytriyenko wrote:
+> OpenEmbedded branded T-shirts and Polo shirts!
+> Show your support!
+> https://www.hellotux.com/openembedded
+> -- 
+> _______________________________________________
+> Openembedded-members mailing list
+> Openembedded-members@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-members
 
