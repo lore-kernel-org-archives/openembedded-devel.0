@@ -1,23 +1,20 @@
-Return-Path: <max@blarg.de>
+Return-Path: <max+openembedded@blarg.de>
 Received: from swift.blarg.de (swift.blarg.de [78.47.110.205])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DC087987E
+	by mail.openembedded.org (Postfix) with ESMTP id ED91A7987A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 12:54:22 +0000 (UTC)
-Received: by swift.blarg.de (Postfix, from userid 500)
-	id 8077D22004B; Thu, 27 Sep 2018 14:54:22 +0200 (CEST)
-Date: Thu, 27 Sep 2018 14:54:22 +0200
+	Thu, 27 Sep 2018 12:55:24 +0000 (UTC)
+Received: from heron.blarg.de (p5DE2B75B.dip0.t-ipconnect.de [93.226.183.91])
+	(Authenticated sender: max)
+	by swift.blarg.de (Postfix) with ESMTPSA id BF62922004B;
+	Thu, 27 Sep 2018 14:55:25 +0200 (CEST)
 From: Max Kellermann <max+openembedded@blarg.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20180927125422.6pt6cpm2hsp35nbj@swift.blarg.de>
-Mail-Followup-To: Khem Raj <raj.khem@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20180918082608.1088-1-max+openembedded@blarg.de>
-	<CAMKF1spwKoe9+NqUsU6DZ0PvSWtT9N3-uPEUS8Y7n3heCHeM8A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Sep 2018 14:55:18 +0200
+Message-Id: <20180927125519.2567-1-max+openembedded@blarg.de>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spwKoe9+NqUsU6DZ0PvSWtT9N3-uPEUS8Y7n3heCHeM8A@mail.gmail.com>
-User-Agent: NeoMutt/20170113 (1.7.2)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/8] [meta-oe] devtools/php: remove the failing ${D}/${TMPDIR} code
+Cc: Max Kellermann <max.kellermann@gmail.com>
+Subject: [PATCH 1/2] php: add "--without-sqlite3 --without-pdo-sqlite"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,23 +27,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 12:54:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Sep 2018 12:55:25 -0000
+Content-Transfer-Encoding: 8bit
 
-On 2018/09/24 20:48, Khem Raj <raj.khem@gmail.com> wrote:
-> http://errors.yoctoproject.org/Errors/Details/193970/
+From: Max Kellermann <max.kellermann@gmail.com>
 
-Hm, I tried to go back and forth to find what is causing this
-nonsensical path.  There must be be something which concatenates two
-absolute paths, but I can't reproduce it.
+Removing "sqlite3" from `PACKAGECONFIG` doesn't actually disable
+SQLite, because those options default to "yes".  It just switches from
+the system SQLite to PHP's internal SQLite copy.
+---
+ meta-oe/recipes-devtools/php/php.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-In any case, the code which my patch removed makes the problem only
-worse.  My build directory happens to be inside /usr/src/, and so the
-shell script finally attempts to remove /usr/ which is non-empty,
-which crashes the build.
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 9eacabe03..99a25b94b 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -79,7 +79,7 @@ PACKAGECONFIG[mysql] = "--with-mysql=${STAGING_DIR_TARGET}${prefix} \
+ 
+ PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
+                           --with-pdo-sqlite=${STAGING_LIBDIR}/.. \
+-                          , \
++                          ,--without-sqlite3 --without-pdo-sqlite \
+                           ,sqlite3"
+ PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,postgresql"
+ PACKAGECONFIG[soap] = "--enable-libxml --enable-soap, --disable-soap, libxml2"
+-- 
+2.19.0
 
-Do you have an idea how to reproduce these strange paths?
-
-Max
 
