@@ -1,47 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 32C9D79616
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 087ED79481
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 14:02:51 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id b19-v6so6055578wme.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 07:02:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=oI464zQJkvYiHrRR5uKe81pxTrzbOVqcRjCd0TwaAm8=;
-	b=lb2toU0aI46bYMV+rBzofwppEQ/C/hcYbIaEUUE6iwgPBiK2nULIA3r6ulXTLaHJpx
-	/8PaZFgiqMsxRAEw0lRnFam+T4xs4LFpxaJ4NwXfUd+0e0ISXVgHHb1YfNCa+OKFvnLO
-	n3NQpy49U3ICwsQGvq2BESazNxeU1N2l2wjCxaI0uXk8x43fsDdATg99NAxq7eTBCTlC
-	7WQuVwXyAzr2OHgc8lzXHiNGLb8K/6vOChN+t2fXMPLE9nsuti+IycmdSRXxWhqBOFp5
-	DRuPRa4O6+yO92MeprvjvzGttyJKnwq1jB4C2HrNhmbLSREDR5o7QSB8ZOAkjWCmmQql
-	DE5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=oI464zQJkvYiHrRR5uKe81pxTrzbOVqcRjCd0TwaAm8=;
-	b=UqN8zzyhj+9mtPq1k80nYcqc9iufvk7LpM4lItkjazLJk+k/zMq1Oa+PqTGLWf1ApB
-	/t7VCCKpg0Xns28pgwUYNNmgVWrBVLk3cpX0gOFpI9DuMwiCzuAwuClgIl9KsPD6SsM3
-	plnOsg5xY0ZalwcHEs3mwUJRz7WV9rT5zWkEzSLZaMV1TgZi/gGiQAyfRmp1ZCuTJRjr
-	sRBtiaRJFAkl9IbmD5V50xdDOLirgrcsiWs9YV1taAtWGvJ9pkxrC24dAbDjZR4yyB3L
-	6OKcScGsC+VAIrBZ1KJ/HGisGW4ZpG93twxSLzo+AMXl0xwUxELxr45xZBmTQGgzLI4x
-	3irQ==
-X-Gm-Message-State: ABuFfohk4sK8b63yt6dp6RUg/abvxdWbpP4R6EFePw9ql7IP30wvgXeT
-	cRW4mKmOpbhV5hiZPSyqEzRzUgEi
-X-Google-Smtp-Source: ACcGV63q1vIZ7MjPq1Jya2pCsEIqJ4jvuXQpAn6pDWReomFxUeSupizjO2yElbWX0gXSzUHy5aiMyA==
-X-Received: by 2002:a1c:8c08:: with SMTP id o8-v6mr8460990wmd.60.1538056971632;
-	Thu, 27 Sep 2018 07:02:51 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	g8-v6sm2840179wmf.10.2018.09.27.07.02.50
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 27 Sep 2018 07:02:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Sep 2018 14:02:51 +0000
-Message-Id: <20180927140251.4556-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] libldb: add pam to REQUIRED_DISTRO_FEATURES
+	Thu, 27 Sep 2018 14:35:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8REZE1s024981
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 27 Sep 2018 07:35:29 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.408.0; Thu, 27 Sep 2018 07:35:04 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Thu, 27 Sep 2018 22:45:05 +0800
+Message-ID: <1538059505-31813-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] libblockdev: correct PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,39 +31,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Sep 2018 14:02:51 -0000
+X-List-Received-Date: Thu, 27 Sep 2018 14:35:55 -0000
+Content-Type: text/plain
 
-* dependency on samba was added recently in:
-  libldb: Add samba to rdeps for pyldb
-  so now we need to match samba restriction to prevent:
+Since commit `6cc057d libblockdev: make various features optional' applied,
+it introduced issues:
 
-ERROR: Nothing RPROVIDES 'samba' (but meta-oe/meta-networking/recipes-support/libldb/libldb_1.4.1.bb RDEPENDS on or otherwise requires it)
-samba was skipped: missing required distro feature 'pam' (not in DISTRO_FEATURES)
-NOTE: Runtime target 'samba' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['samba']
-ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'libldb', 'samba']
+1. As configure.ac told us, mpath/dm/lvm/lvm-dbus should have the
+same depends, runtime depends
+[configure.ac]
+|AS_IF([test "x$with_dm" != "xno" -o "x$with_lvm" != "xno" -o "x$with_lvm_dbus" != "xno" -o "x$with_mpath" != "xno"],
+|      [LIBBLOCKDEV_PKG_CHECK_MODULES([DEVMAPPER], [devmapper >= 1.02.93])],
+|      [])
+[configure.ac]
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+2. Remove duplicated `lvm-dbus'
+
+3. Align with previous configure options, we should add `mpath'
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-networking/recipes-support/libldb/libldb_1.4.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-index 99e62f66bb..3c7e5455e9 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-@@ -35,7 +35,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
- SRC_URI[md5sum] = "159a1b1a56dcccf410d1bba911be6076"
- SRC_URI[sha256sum] = "2df13aa25b376b314ce24182c37691959019523de3cc5356c40c1a333b0890a2"
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
+index 021f641..97dc2d9 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.18.bb
+@@ -19,12 +19,12 @@ S = "${WORKDIR}/git"
  
--inherit waf-samba
-+inherit waf-samba distro_features_check
-+REQUIRED_DISTRO_FEATURES = "pam"
+ FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
  
- S = "${WORKDIR}/ldb-${PV}"
+-PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd lvm-dbus"
++PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd lvm-dbus mpath"
+ PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
+ PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
+ PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools, lvm2"
+ PACKAGECONFIG[lvm-dbus] = "--with-lvm_dbus, --without-lvm_dbus, multipath-tools, lvm2"
+-PACKAGECONFIG[dm] = "--with-dm, --without-dm"
++PACKAGECONFIG[dm] = "--with-dm, --without-dm, multipath-tools, lvm2"
+ PACKAGECONFIG[dmraid] = "--with-dmraid, --without-dmraid"
+ PACKAGECONFIG[kmod] = "--with-kbd, --without-kbd, kmod"
+ PACKAGECONFIG[parted] = "--with-part, --without-part, parted"
+@@ -37,8 +37,7 @@ PACKAGECONFIG[btrfs] = "--with-btrfs,--without-btrfs,libbytesize btrfs-tools"
+ PACKAGECONFIG[crypto] = "--with-crypto,--without-crypto,cryptsetup nss volume-key"
+ PACKAGECONFIG[mdraid] = "--with-mdraid,--without-mdraid,libbytesize"
+ PACKAGECONFIG[kbd] = "--with-kbd,--without-kbd,libbytesize"
+-PACKAGECONFIG[lvm-dbus] = "--with-lvm_dbus,--without-lvm_dbus"
+-PACKAGECONFIG[mpath] = "--with-mpath,--without-mpath"
++PACKAGECONFIG[mpath] = "--with-mpath,--without-mpath, multipath-tools, lvm2"
+ 
+ export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
  
 -- 
-2.17.1
+2.7.4
 
 
