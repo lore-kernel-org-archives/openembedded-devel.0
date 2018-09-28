@@ -1,34 +1,51 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E0FDC7993B;
-	Fri, 28 Sep 2018 00:02:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w8S01DFO006277
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 27 Sep 2018 17:01:23 -0700
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Thu, 27 Sep 2018 17:01:02 -0700
-To: Paul Eggleton <paul.eggleton@intel.com>
-References: <1721109.tuLG3TFsTU@localhost.localdomain>
-	<CAP71WjzUkYnazb3VHzEHgEDHoRqKdOT89Waw_hAy6pRyh8=BNA@mail.gmail.com>
-	<156dc277-4255-aaf3-cb9f-f25a4481189f@windriver.com>
-	<1907640.U4zZL0Bqpb@localhost.localdomain>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <ca07c8cc-7ff0-eba4-e235-0707c6c8ada1@windriver.com>
-Date: Thu, 27 Sep 2018 20:01:01 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 71F477523B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Sep 2018 06:12:02 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id q19-v6so3646975pgn.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Sep 2018 23:12:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=x59oFnSpZwZUFKHLpll741a/rxqVmZoDZJuUpOwM3VI=;
+	b=V3cBn9MJe6NaCq7R6z4QoKb1tkyShflmKl+1hFqQrkZ7ceD3QBG8Ih7LMy9Wi5cwOL
+	Bt0N430gD0APJPuFBOtTE38PHr1D/59nCStJilkTNHD1G3SLUz5dAL250gSK+WOqqbzY
+	/Xv54Enx2sCH6CNfUEcsX2RreFOALm90BY0fTn7axXLV67baV756DTUNxl53NFz5A8e1
+	tlRod1/2ixODyKY51iHyeCgV+38ijgGeCxxxWhgzhYszmUJokMLDZXZ0BAZbD83Kj2Ku
+	FUg8brtIUQhsBdoG232IUj5o1trmVj9JvVFpWdxG9j1M9xwPVE3kkRNYHpQONZlfgImR
+	iIqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=x59oFnSpZwZUFKHLpll741a/rxqVmZoDZJuUpOwM3VI=;
+	b=NaXRHdtbakIcrsBF59j5PSym+uikVfgEv+oeRwCoATcgtkVG+QssInxhQ6d7f4P1Sz
+	3xxjQ+5Py54LQ8PPU13Xo4QDX4n6mIrSJcaQI1mk5DZHQKlhEEzmSizI4HgbQMlOdSxQ
+	PoZGzkyAn0xbMwpSHyiw9drJOXF4UCmkNT/znEhS8o+EjrqQ6sOBP4wKuZHciSiqmN+C
+	rV3r4CHCW3Ss/ItGxH+T6aoHHG+8q7RGzB7VDl6zcrLLN2f/i/RMZJY8uQy6G4k5gB7f
+	VYmOa60cP2dlbBe6rGlaZEiKwi0m1pZKzlezdEXhjbeYQ8cg9HQc4prJzYO7JNOHE2xB
+	+txw==
+X-Gm-Message-State: ABuFfog/1EtakqPyY8rrGw6sI6fhyoXV+77m1/e6IrgaiEm/X6OXHEBs
+	2VB3CSOTaLlRKQX3FbEqSPGWtdw2
+X-Google-Smtp-Source: ACcGV6230LBzFYPSZfngySyBeTUTMdsfwbRsbrZzw7pVLwnYSmBhaC29Zw3o35Y+U35o03vzaWJnVQ==
+X-Received: by 2002:a63:6c04:: with SMTP id
+	h4-v6mr13572000pgc.290.1538115122786; 
+	Thu, 27 Sep 2018 23:12:02 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:877f:9499::b1b1])
+	by smtp.gmail.com with ESMTPSA id
+	z11-v6sm7361026pfi.4.2018.09.27.23.12.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Sep 2018 23:12:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Sep 2018 23:11:50 -0700
+Message-Id: <20180928061151.20175-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-In-Reply-To: <1907640.U4zZL0Bqpb@localhost.localdomain>
-X-Originating-IP: [172.25.44.4]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: yocto@yoctoproject.org,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] layers.openembedded.org upgraded
+Subject: [meta-oe][PATCH 1/2] botan: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,82 +58,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2018 00:02:17 -0000
-Content-Language: en-GB
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 Sep 2018 06:12:02 -0000
+Content-Transfer-Encoding: 8bit
 
-On 09/27/2018 07:33 PM, Paul Eggleton wrote:
-> Hi Randy
->
-> On Friday, 28 September 2018 11:22:29 AM NZST Randy MacLeod wrote:
->> On 09/27/2018 05:28 PM, Nicolas Dechesne wrote:
->>> On Thu, Sep 27, 2018 at 10:43 PM Paul Eggleton <paul.eggleton@intel.com> wrote:
->>>> I'm very happy to announce that we've finally been able to upgrade the layer
->>>> index at http://layers.openembedded.org to the latest revision on master,
->>>> incorporating quite a bit of work that's been going on for the past few
->>>> months. Improvements now visible:
->> Nice new features, thanks!
->>
->> The "Branch:" and "Filter layers" selection menus don't work
->> for me when using Firefox 62.0 (64-bit) on Ubuntu-18.04.
->>
->> Google Chrome Version 69.0.3497.100 (Official Build) (64-bit)
->> works fine.
-> Hmm, I do my development with Firefox and I just checked - with Firefox
-> 62.0 (64-bit) here on Fedora 28 both work. Do you perhaps have an add-on
-> enabled that might prevent these from working? I believe they both rely on
-> javascript (the filter dropdown definitely does).
+botan is a common crypto library used by various infrastructures e.g.
+qtcreator chromium etc. Its beneficial to build it once for the system
+and let apps use it if possible
 
-Does anyone else see this problem?
-I've also asked on IRC.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-crypto/botan/botan_2.7.0.bb | 55 +++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/botan/botan_2.7.0.bb
 
-I did have Firefox Lightbeam (disabled) and Quiick Java but I removed 
-them both,
-re-stared FF and still no joy/menus.
-
-
-Looking at:
-Menu->Web Developer -> Browser Console ( Control+Shift+J )
-I see:
-
-Error: Syntax error, unrecognized expression: # jquery-3.3.1.js:1541:8 
-<https://layers.openembedded.org/static/js/jquery-3.3.1.js>
-Sizzle</Sizzle.error 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:1541:8 
-Sizzle</Sizzle.tokenize 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:2193:4 
-Sizzle</Sizzle.select 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:2620:20 Sizzle 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:845:9 find 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:2873:4 
-jQuery.fn.init 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:2983:14 jQuery 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:139:10 
-getParent https://layers.openembedded.org/static/js/bootstrap.js:754:27 
-clearMenus/< 
-https://layers.openembedded.org/static/js/bootstrap.js:741:7 each 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:354:10 each 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:189:10 
-clearMenus https://layers.openembedded.org/static/js/bootstrap.js:740:5 
-dispatch 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:5182:16 
-add/elemData.handle 
-https://layers.openembedded.org/static/js/jquery-3.3.1.js:4991:6
-
-Does that help at all?
-
-../Randy
-
-
-
->
-> Cheers,
-> Paul
->
-
+diff --git a/meta-oe/recipes-crypto/botan/botan_2.7.0.bb b/meta-oe/recipes-crypto/botan/botan_2.7.0.bb
+new file mode 100644
+index 0000000000..25bb881997
+--- /dev/null
++++ b/meta-oe/recipes-crypto/botan/botan_2.7.0.bb
+@@ -0,0 +1,55 @@
++# Copyright (C) 2018 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++DESCRIPTION = "Crypto and TLS for C++11"
++HOMEPAGE = "https://botan.randombit.net"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://license.txt;md5=bf361fc63df3fa25652ee82c43b7601a"
++SECTION = "libs"
++
++
++#v2.7.0
++SRCREV = "5874000d42c338ec95a7ff24cdc0c64e70f967b5"
++SRC_URI = "git://github.com/randombit/botan.git"
++
++S = "${WORKDIR}/git"
++
++inherit python3native siteinfo lib_package
++
++CPU ?= "${TARGET_ARCH}"
++CPU_x86 = "x86_32"
++CPU_armv7a = "armv7"
++CPU_armv7ve = "armv7"
++
++do_configure() {
++	python3 ${S}/configure.py \
++	--prefix="${D}${prefix}" \
++	--cpu="${CPU}" \
++	--cc-bin="${CXX}" \
++	--cxxflags="${CXXFLAGS}" \
++	--ldflags="${LDFLAGS}" \
++	--with-endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
++	${@bb.utils.contains("TUNE_FEATURES","neon","--enable-neon","--disable-neon",d)} \
++	--with-sysroot-dir=${STAGING_DIR_TARGET} \
++	--with-build-dir="${B}" \
++	--optimize-for-size \
++	--with-stack-protector \
++	--enable-shared-library \
++	--with-python-versions=3 \
++	${EXTRA_OECONF}
++}
++
++do_compile() {
++	oe_runmake
++}
++do_install() {
++	oe_runmake install
++	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-2.pc
++}
++
++PACKAGES += "${PN}-python3"
++
++FILES_${PN}-python3 = "${libdir}/python3"
++
++RDEPENDS_${PN}-python3 += "python3"
++
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.19.0
 
 
