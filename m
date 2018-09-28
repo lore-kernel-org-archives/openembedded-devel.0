@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 71F477523B
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E7737523B
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 28 Sep 2018 06:12:02 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id q19-v6so3646975pgn.10
+Received: by mail-pg1-f175.google.com with SMTP id n31-v6so3656319pgm.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Sep 2018 23:12:03 -0700 (PDT)
+	Thu, 27 Sep 2018 23:12:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=x59oFnSpZwZUFKHLpll741a/rxqVmZoDZJuUpOwM3VI=;
-	b=V3cBn9MJe6NaCq7R6z4QoKb1tkyShflmKl+1hFqQrkZ7ceD3QBG8Ih7LMy9Wi5cwOL
-	Bt0N430gD0APJPuFBOtTE38PHr1D/59nCStJilkTNHD1G3SLUz5dAL250gSK+WOqqbzY
-	/Xv54Enx2sCH6CNfUEcsX2RreFOALm90BY0fTn7axXLV67baV756DTUNxl53NFz5A8e1
-	tlRod1/2ixODyKY51iHyeCgV+38ijgGeCxxxWhgzhYszmUJokMLDZXZ0BAZbD83Kj2Ku
-	FUg8brtIUQhsBdoG232IUj5o1trmVj9JvVFpWdxG9j1M9xwPVE3kkRNYHpQONZlfgImR
-	iIqw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=Rn85qnluL/CTLoAbnayKHSPxqmokgBk8hxOgvWcJUgM=;
+	b=GJNFBIleSSmrRf3oG3ObMMkJwGcUx6wS07bDn2ddUGyc5zGM0a69RlB8yMjwb/w4vr
+	xKsGxhGiMzkTtiTVqsYt7p5i6jCrZlu1HypSlLpae3ZVM8XRPsTsa+6T3HQ29I83Escs
+	eL+2A/Be9kRgrk/Tn1h4NDec52bBcqBBS94SmtBjsMgBC2S3L76XYsZUioXTH3GKNkxt
+	2nWrgvjeEVHbQy461SeiuuUGDU0iV9HMA6rnm9VHhaSKZFWLo2mTyAlRuQbFGRzLiSLQ
+	zDHIKtWdasjK7KaV3LSTlht2ooYoWDkov9b56ayMXW4pNyYYaUlydz3fVdV1gYkibkGB
+	VKfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=x59oFnSpZwZUFKHLpll741a/rxqVmZoDZJuUpOwM3VI=;
-	b=NaXRHdtbakIcrsBF59j5PSym+uikVfgEv+oeRwCoATcgtkVG+QssInxhQ6d7f4P1Sz
-	3xxjQ+5Py54LQ8PPU13Xo4QDX4n6mIrSJcaQI1mk5DZHQKlhEEzmSizI4HgbQMlOdSxQ
-	PoZGzkyAn0xbMwpSHyiw9drJOXF4UCmkNT/znEhS8o+EjrqQ6sOBP4wKuZHciSiqmN+C
-	rV3r4CHCW3Ss/ItGxH+T6aoHHG+8q7RGzB7VDl6zcrLLN2f/i/RMZJY8uQy6G4k5gB7f
-	VYmOa60cP2dlbBe6rGlaZEiKwi0m1pZKzlezdEXhjbeYQ8cg9HQc4prJzYO7JNOHE2xB
-	+txw==
-X-Gm-Message-State: ABuFfog/1EtakqPyY8rrGw6sI6fhyoXV+77m1/e6IrgaiEm/X6OXHEBs
-	2VB3CSOTaLlRKQX3FbEqSPGWtdw2
-X-Google-Smtp-Source: ACcGV6230LBzFYPSZfngySyBeTUTMdsfwbRsbrZzw7pVLwnYSmBhaC29Zw3o35Y+U35o03vzaWJnVQ==
-X-Received: by 2002:a63:6c04:: with SMTP id
-	h4-v6mr13572000pgc.290.1538115122786; 
-	Thu, 27 Sep 2018 23:12:02 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Rn85qnluL/CTLoAbnayKHSPxqmokgBk8hxOgvWcJUgM=;
+	b=OQgLXFxiC/TvO5NZS/19YSWfeMDlxiL2Q+2I4H1gEo+B0Vs6NHHmZPNZL5fVimTGWV
+	UWZO429z17jIHUB9LRUF+jZue7IYOwicwjOqW6Qru2I2RLR8CV6bXKnyuNGcTdUrlHdl
+	oLwLp2GgP9nlRbzcDBhMkyVJHfMRU37pqVivokegiYDuqUi8mYoh+5TkzjKgGKDwamIG
+	ycLWoJhvxC5p/4VM5xEAwzo9scemSxm7yoIIrrYNeuNOx5BYW+Qrf0UdkVI1r1/jqfkD
+	7Qe5sK5rmSai9zoVjLsgC34wteKGkPKikzrFjV1t9NODH5NPrdHliA4hH3rV6gvJbbmd
+	RJ4A==
+X-Gm-Message-State: ABuFfoiybTf6LS/W45+UUlSJEOU+hH3fijcqx7OdMkWIMJsnkvKq8rE1
+	wFzziuGG+wYhKwV7dO/uFEiuOVk9
+X-Google-Smtp-Source: ACcGV62BPiZ+305fdIN5GdjTKuWRrN6YoD2LlwbjnqJQfix9/3tHnKhG9gcXi8PjVAJ/E87XViIzLw==
+X-Received: by 2002:a17:902:344:: with SMTP id
+	62-v6mr14657819pld.164.1538115123744; 
+	Thu, 27 Sep 2018 23:12:03 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::b1b1])
 	by smtp.gmail.com with ESMTPSA id
-	z11-v6sm7361026pfi.4.2018.09.27.23.12.01
+	z11-v6sm7361026pfi.4.2018.09.27.23.12.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Sep 2018 23:12:01 -0700 (PDT)
+	Thu, 27 Sep 2018 23:12:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Sep 2018 23:11:50 -0700
-Message-Id: <20180928061151.20175-1-raj.khem@gmail.com>
+Date: Thu, 27 Sep 2018 23:11:51 -0700
+Message-Id: <20180928061151.20175-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.0
+In-Reply-To: <20180928061151.20175-1-raj.khem@gmail.com>
+References: <20180928061151.20175-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] botan: Add recipe
+Subject: [meta-oe][PATCH 2/2] mongodb: Consolidate COMPATIBLE_HOST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,80 +60,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Sep 2018 06:12:02 -0000
+X-List-Received-Date: Fri, 28 Sep 2018 06:12:03 -0000
 Content-Transfer-Encoding: 8bit
 
-botan is a common crypto library used by various infrastructures e.g.
-qtcreator chromium etc. Its beneficial to build it once for the system
-and let apps use it if possible
+Its only available on fewer arches so express that via COMPATIBLE_HOST
+wiredtiger is only for 64bit, so add it directly to config args based on
+bitness
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-crypto/botan/botan_2.7.0.bb | 55 +++++++++++++++++++++
- 1 file changed, 55 insertions(+)
- create mode 100644 meta-oe/recipes-crypto/botan/botan_2.7.0.bb
+ meta-oe/recipes-dbs/mongodb/mongodb_git.bb | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/meta-oe/recipes-crypto/botan/botan_2.7.0.bb b/meta-oe/recipes-crypto/botan/botan_2.7.0.bb
-new file mode 100644
-index 0000000000..25bb881997
---- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan_2.7.0.bb
-@@ -0,0 +1,55 @@
-+# Copyright (C) 2018 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
+diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+index bcb15e6c5b..d39ab0a314 100644
+--- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+@@ -29,26 +29,18 @@ SRC_URI_append_libc-musl ="\
+            "
+ S = "${WORKDIR}/git"
+ 
+-# Wiredtiger supports only 64-bit platforms
+-PACKAGECONFIG_x86-64 ??= "tcmalloc wiredtiger"
+-PACKAGECONFIG_aarch64 ??= "tcmalloc wiredtiger"
++COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
 +
-+DESCRIPTION = "Crypto and TLS for C++11"
-+HOMEPAGE = "https://botan.randombit.net"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://license.txt;md5=bf361fc63df3fa25652ee82c43b7601a"
-+SECTION = "libs"
++COMPATIBLE_HOST_arm = "null"
++COMPATIBLE_HOST_libc-musl_x86 = "null"
 +
-+
-+#v2.7.0
-+SRCREV = "5874000d42c338ec95a7ff24cdc0c64e70f967b5"
-+SRC_URI = "git://github.com/randombit/botan.git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit python3native siteinfo lib_package
-+
-+CPU ?= "${TARGET_ARCH}"
-+CPU_x86 = "x86_32"
-+CPU_armv7a = "armv7"
-+CPU_armv7ve = "armv7"
-+
-+do_configure() {
-+	python3 ${S}/configure.py \
-+	--prefix="${D}${prefix}" \
-+	--cpu="${CPU}" \
-+	--cc-bin="${CXX}" \
-+	--cxxflags="${CXXFLAGS}" \
-+	--ldflags="${LDFLAGS}" \
-+	--with-endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
-+	${@bb.utils.contains("TUNE_FEATURES","neon","--enable-neon","--disable-neon",d)} \
-+	--with-sysroot-dir=${STAGING_DIR_TARGET} \
-+	--with-build-dir="${B}" \
-+	--optimize-for-size \
-+	--with-stack-protector \
-+	--enable-shared-library \
-+	--with-python-versions=3 \
-+	${EXTRA_OECONF}
-+}
-+
-+do_compile() {
-+	oe_runmake
-+}
-+do_install() {
-+	oe_runmake install
-+	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-2.pc
-+}
-+
-+PACKAGES += "${PN}-python3"
-+
-+FILES_${PN}-python3 = "${libdir}/python3"
-+
-+RDEPENDS_${PN}-python3 += "python3"
-+
+ PACKAGECONFIG ??= "tcmalloc"
+ # gperftools compilation fails for arm below v7 because of missing support of
+ # dmb operation. So we use system-allocator instead of tcmalloc
+ PACKAGECONFIG_remove_armv6 = "tcmalloc"
+ PACKAGECONFIG_remove_libc-musl = "tcmalloc"
+ 
+-#std::current_exception is undefined for arm < v6
+-COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
+-COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+-COMPATIBLE_MACHINE_armv7a = "(!.*armv7a).*"
+-COMPATIBLE_MACHINE_armv7ve = "(!.*armv7ve).*"
+-COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
+-# https://jira.mongodb.org/browse/SERVER-16898
+-COMPATIBLE_HOST_mipsarch = "null"
+-
+ PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
+-PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
+ 
+ EXTRA_OESCONS = "--prefix=${D}${prefix} \
+                  LIBPATH=${STAGING_LIBDIR} \
+@@ -62,6 +54,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
+                  --js-engine=none \
+                  --nostrip \
+                  --endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
++                 --wiredtiger=${@['off','on'][d.getVar('SITEINFO_BITS') != '32']} \
+                  ${PACKAGECONFIG_CONFARGS} \
+                  mongod mongos"
+ 
 -- 
 2.19.0
 
