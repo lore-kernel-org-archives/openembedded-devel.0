@@ -1,103 +1,53 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 026B9799C7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 53E327997A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Sep 2018 19:41:41 +0000 (UTC)
-Received: by mail-pg1-f177.google.com with SMTP id t70-v6so6729934pgd.12
+	Sat, 29 Sep 2018 19:46:33 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id y25-v6so5127972wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Sep 2018 12:41:43 -0700 (PDT)
+	Sat, 29 Sep 2018 12:46:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=1cPZz0l3OV6zNqryioTkr2eHmnQPGsYt4FvZuGL++dc=;
-	b=JlzgFXY9o7KcLEC1FcR+6tua6GPF1GV4EK9H1tB8ye/H8h45Y3Lw8V1/BeMyMIT2i3
-	mrlCv/m1Uhz6Hgq3GF2lREa0BY0nd+lFB5t6MdKtM7oKBfQvUjnUE1xVGwG1qQgB1Vl2
-	HOjMu4w4C1hpGk/+ucGQtB6s881ad+Lyx8Q3QSy6chxAQ7T+mHHpK3UdS8XHKTqUzcAV
-	OwKZ6xf/S2GNR9rBJ/qU7l/OWu1tLqL7CAciayjoaj3cuyMdtG4lSSTyx7btaMH+nN0S
-	R40lV9Z5WkOHzwpSu7+E+XNuoUmljytX2xWK8ZrU1IjSjcV5wh+Tk4NYkNCEUMzGyjaQ
-	0Baw==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=O/vLB0gP1OYLHlbC/biZfkNNDIsUsLQbeuu72j+2xpA=;
+	b=uXm+SOJV0FgMe1TEJnmDkbD2QnaXs2DiJA3dcHJg18k3wk5e5fxvAfaAbCYAuN3/OG
+	SFrq45u9oNkbpNVI374RYUeP2i+zI5bh/bmW0ZpnwbcIQ2rxc5ZbTBuAWrknbFdtt5l3
+	jQ34gGLhIUUT0JV9ar4vfWDux20DUcksmWa5fcbtxLPfY2jtBlUS5QawrQcicBkV5cpR
+	DBW7CzCXldEB1T4I3G7SM/7vn5ufMaPjCzXWOoTajBxR7GjkqYaLIR+g9qJk6zfp3CG6
+	WKvf3OyNHff/91Su1ctD8vrQKrK4MEErj2cY1WyBJqPs/dllFwHoYEgeGls3BVDNNhE8
+	TSog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language;
-	bh=1cPZz0l3OV6zNqryioTkr2eHmnQPGsYt4FvZuGL++dc=;
-	b=SrOoDkxobQ+C914hV3AGBpdDSBEaVL3CKgXlmjhp4Xr4l28CK+iy/yoZ48i1bSRAyd
-	syjPBMtJI6IRoyW6cAAvQPjhLSiC0qVw+0NHnI0mLgzpWX1TEjC5zoDCet/NVJoWR/gy
-	itJqKF1CC3IAEZFXnggrCHzHUGFxzgsUgzMtBisvsp5oV3rZeERVfFYiOyChxdZn7F79
-	9rgbl/X5okSckd4EnwycwjzdwamrG3xxb3e3wmMqtcjAKZEvIVhpG6Xr6nHXlskaukf0
-	/HNpRIhy1il669gj8spvtXofbXKIvtODi+02VyIMVtwfEuKZifJ3gMZqZ+G3/2sHw+QV
-	A/jw==
-X-Gm-Message-State: ABuFfoiFqmInTTE+g2klXLKMf7fUBSflwh8D/X7WCtD9gCOYKgIy6mBG
-	UDuwQz4dRDWHchXd+RsAB9YYaB39
-X-Google-Smtp-Source: ACcGV62n8ci2Q8afg/fatW8EoToHMZQAVrYKT6DmivfNiiOdnNVZyd6xbrQwEDeRvgtCzBLjk5HM3w==
-X-Received: by 2002:a17:902:8a90:: with SMTP id
-	p16-v6mr4495479plo.106.1538250102868; 
-	Sat, 29 Sep 2018 12:41:42 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:d58e:d32:beb0:c4a3?
-	([2601:202:4180:c33:d58e:d32:beb0:c4a3])
-	by smtp.gmail.com with ESMTPSA id
-	p19-v6sm11559850pgh.60.2018.09.29.12.41.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 29 Sep 2018 12:41:41 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20180929181632.22446-1-akuster808@gmail.com>
-	<CA+chaQdc5ys0dGsFWe5-x1ukYKnRcJihz278ru6YTq3meASW0g@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <6cc7a545-7e52-9943-e6ab-99a937ad75ee@gmail.com>
-Date: Sat, 29 Sep 2018 12:41:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=O/vLB0gP1OYLHlbC/biZfkNNDIsUsLQbeuu72j+2xpA=;
+	b=CWl7WGCKtwEkNHK3HekqpYqhlzyzvs5y1JcF3Wi/IvWL4la1LHd3OQc23F+w+c7i0Y
+	+VAf5TOLO9LAQqtzbCppXBYiR6RHnsrjbITp9q0s6CeOtPatWp2gZ9j4avtBOg+fG0lN
+	dOM2zMUE0f1yAgb0t+t7j3ai0TjJ6c1/v1RF9E4vjOfjo8+wz3tOVjaJLOKl/ZO/lO9/
+	CSXXF7S6V06L5WyhzINhSch/Q5C8njKF7yZkY8aLMSaORWQDLY6R+1tzrWCJnrRh5QHO
+	LF5kIXd0arvWhL+/gvC1ZXWIJUjMcW5y8k80KIy74zBqS7wKOrEVCtFZIgfqc0XfhxeT
+	UViw==
+X-Gm-Message-State: ABuFfogCjTLXHWTGIGZPskvOFgqL5vtEbf3ICylhrEB6E7Nvi3SNuHVf
+	bAX+odY/efdU0fo3sVTiCh4=
+X-Google-Smtp-Source: ACcGV61urnPedRJ/Coy4s87v+OmiiM1GFWzjKcY9alU5XBnBqssFFa29MGO9RtXB0r0/LE9QzFTdQw==
+X-Received: by 2002:a1c:1608:: with SMTP id 8-v6mr5176150wmw.12.1538250393965; 
+	Sat, 29 Sep 2018 12:46:33 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	z89-v6sm19416903wrb.3.2018.09.29.12.46.32
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 29 Sep 2018 12:46:32 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 29 Sep 2018 21:46:35 +0200
+To: Armin Kuster <akuster808@gmail.com>
+Message-ID: <20180929194635.GC1449@jama>
+References: <20180929193105.25864-1-akuster808@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQdc5ys0dGsFWe5-x1ukYKnRcJihz278ru6YTq3meASW0g@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] libldb: fix yocto-check-layer
+In-Reply-To: <20180929193105.25864-1-akuster808@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH] mpd: fix yocto-check-layer issue with mulitmedia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,68 +60,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2018 19:41:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 29 Sep 2018 19:46:33 -0000
+X-Groupsio-MsgNum: 74794
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="gr/z0/N6AeWAPJVB"
+Content-Disposition: inline
 
+--gr/z0/N6AeWAPJVB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Sat, Sep 29, 2018 at 12:31:05PM -0700, Armin Kuster wrote:
+> ERROR: Nothing PROVIDES 'faad2' (but /home/akuster/oss/maint/meta-openemb=
+edded/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb DEPENDS on =
+or otherwise requires it)
+>=20
+> enable aac only if LICENSE_FLAGS is commercial
+>=20
+> [v2]
+> fix typo in commit message
+> rebase on latest master
 
-On 09/29/2018 11:21 AM, Martin Jansa wrote:
-> https://patchwork.openembedded.org/patch/155217/
+This belongs to cover later or under ---.
 
-cool. thanks
-- armin
->
-> On Sat, Sep 29, 2018 at 8:16 PM Armin Kuster <akuster808@gmail.com
-> <mailto:akuster808@gmail.com>> wrote:
->
->     ERROR: Nothing RPROVIDES 'samba' (but
->     /home/akuster/oss/maint/meta-openembedded/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
->     <http://libldb_1.4.1.bb> RDEPENDS on or otherwise requires it)
->     samba was skipped: missing required distro feature 'pam' (not in
->     DISTRO_FEATURES)
->
->     add ditrocheck for pam in libldb
->
->     Signed-off-by: Armin Kuster <akuster808@gmail.com
->     <mailto:akuster808@gmail.com>>
->     ---
->      meta-networking/recipes-support/libldb/libldb_1.4.1.bb
->     <http://libldb_1.4.1.bb> | 3 ++-
->      1 file changed, 2 insertions(+), 1 deletion(-)
->
->     diff --git
->     a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
->     <http://libldb_1.4.1.bb>
->     b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
->     <http://libldb_1.4.1.bb>
->     index 99e62f66b..3c7e5455e 100644
->     --- a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
->     <http://libldb_1.4.1.bb>
->     +++ b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
->     <http://libldb_1.4.1.bb>
->     @@ -35,7 +35,8 @@ LIC_FILES_CHKSUM =
->     "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
->      SRC_URI[md5sum] = "159a1b1a56dcccf410d1bba911be6076"
->      SRC_URI[sha256sum] =
->     "2df13aa25b376b314ce24182c37691959019523de3cc5356c40c1a333b0890a2"
->
->     -inherit waf-samba
->     +inherit waf-samba distro_features_check
->     +REQUIRED_DISTRO_FEATURES = "pam"
->
->      S = "${WORKDIR}/ldb-${PV}"
->
->     -- 
->     2.17.1
->
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+>=20
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/=
+meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+> index 9123673fb..f91ce4d62 100644
+> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+> @@ -26,7 +26,8 @@ S =3D "${WORKDIR}/git"
+>  EXTRA_OECONF =3D "enable_bzip2=3Dyes"
+>  EXTRA_OECONF +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-=
+-with-systemdsystemunitdir=3D${systemd_unitdir}/system/', '--without-system=
+dsystemunitdir', d)}"
+> =20
+> -PACKAGECONFIG ??=3D "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynt=
+h iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp =
+openal opus oss recorder vorbis wavpack zlib"
+> +PACKAGECONFIG ??=3D "alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack l=
+ibsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zli=
+b"
+> +PACKAGECONFIG +=3D "${@bb.utils.contains('LICENSE_FLAGS', 'commercial', =
+'aac', '', d)}"
 
+This removes much more than just aac now.
 
+Why did you remove daemon, fifo, libwrap, httpd, oss, recorder, vorbis?
+
+> =20
+>  PACKAGECONFIG[aac] =3D "--enable-aac,--disable-aac,faad2"
+>  PACKAGECONFIG[alsa] =3D "--enable-alsa,--disable-alsa,alsa-lib"
+> --=20
+> 2.17.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--gr/z0/N6AeWAPJVB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCW6/WmgAKCRA3VSO3ZXaA
+HPNIAJ9LQVYOwqJfCSB9x+8f7NUFIQysxACfbbbWai+5o4SLMV1+IGxG+ZoXNj8=
+=zgwt
+-----END PGP SIGNATURE-----
+
+--gr/z0/N6AeWAPJVB--
