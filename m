@@ -1,48 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6ACA9799D2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+	[209.85.210.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 009AB799C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Sep 2018 18:46:56 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id c25-v6so10120007qtp.6
+	Sat, 29 Sep 2018 19:26:30 +0000 (UTC)
+Received: by mail-pf1-f182.google.com with SMTP id k21-v6so6461284pff.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Sep 2018 11:46:57 -0700 (PDT)
+	Sat, 29 Sep 2018 12:26:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=MRgjb68kMRSd0C6MGFa7+DcmGbFTHLCjjSjL2DAzI8E=;
-	b=g7PbfC6PkKgEfa5P9gXX9awNyuANh7DsA1pdy4uW6K1T9j+pUF3Wx9gYsHlLijktYy
-	OoZ0/SxP4BXYU7E43aPjxecpBWNKdHdFVdW+qW7I/jhW2oY9LNMLskcF8DcwhpZ6s1sB
-	Hg1XwVASuzgV5Jvk+aBP8C6IqRAxg2FBdK6nw7Jakb50HaL1bu79oF4xRAUt4Y3sVp9N
-	HMJqwwZpImUH98RmujUgQi4B6CmEfY0N1Frp1hMNBgBFz3b0gImPIG0RQJFQyE0+U52I
-	R9g4xjsfyQI9y+pBq4ont1hirMWfzriFq/CMqs4nT66U5XMpdy0qu74jR7RZhv2kIux8
-	6TxQ==
+	h=from:to:subject:date:message-id;
+	bh=BCZjJJxkl7vr1uxKzK6DQlq/28fj6cmZXRT3qdgTTnI=;
+	b=ZePlsJNDgDtT6a615KPEgbx4KWweEDN3KlKC2PWnCCJ+AE+XE1JyM6f9Lmuwum65z9
+	sSlsmxaClNb+fyq+cVUYLaCKolcdqxfW4aav6OSywSM156138lDAtsCgtU6ONIrHfZAb
+	FAcdowbRhT2gCJnSGfG4rwO6U+n31/It+ipg3k0VIVZYQM2Pq1RclglqRoJ7d/HNJoSn
+	Iwa4maIgKNIjiSYPFWavSSy1kuBCQ4dDSb3FnaGnSoZgVacBvjkfpQ5V0ExodZYXv+vZ
+	Zz4IVuT7kisTdRRR9Ds8dsihiPrHZUyz24eGlk+cAj5LCQnIlEmzsvoj8I1luVvR2Pfj
+	vCjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=MRgjb68kMRSd0C6MGFa7+DcmGbFTHLCjjSjL2DAzI8E=;
-	b=cagdgWGSrvDqJgyV48VHpN/H2/AtGT2kQhohL9aCYgbtkiRFDMHTiIwDFYNpX0Fvul
-	STtimActHgoiYNWs0kclgdzMzcaIcbEtNhA9RGLxYVehmtx7n8bWk6Hwj9NEdNYmi2YC
-	RKzPu1HGbCmmFvyYhUHgwj17jZqWTKpsZMu9eXKDJQ8Z4iUNCnJZLloZDj5q1jK85hEe
-	A0zUnivgTIilA8bcRGMtlIHmmdVol+SQBYN87wFZbuXJTvC1qP9Z+3Vza8AXsFlUDuIR
-	hLxS2LbipwYolej1kQBlJgtq5c0LKFeUARIgy8hEvyyohOWpFn+dbpN3chB2AGzzLdOU
-	sHGQ==
-X-Gm-Message-State: ABuFfogmChBOFXs3DE8ei6clqfPJ5TzIl1y44wkJY96Jdklr1qnojuBg
-	upW40MR/kgpkKQecmE3L8UEhJUoI89YM4dafrag=
-X-Google-Smtp-Source: ACcGV61OKt8JOOdmxse8mK2x47XerJq8+bgYmZmwNjh2KtYzB40OG9hW6Nk9JjSsj75PrRH+FA7sOZ/fIm/FViOhtKI=
-X-Received: by 2002:a0c:e552:: with SMTP id
-	n18-v6mr1553995qvm.224.1538246817146; 
-	Sat, 29 Sep 2018 11:46:57 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180929181029.22080-1-akuster808@gmail.com>
-	<20180929181518.GB1449@jama>
-In-Reply-To: <20180929181518.GB1449@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 29 Sep 2018 11:46:31 -0700
-Message-ID: <CAMKF1spF3hNc5Bu68j3=+poRud6v6JLpbDd-gYvYJXvidiCkiA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH] mpd: fix yocto-check-layer issue with mulitmedia
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=BCZjJJxkl7vr1uxKzK6DQlq/28fj6cmZXRT3qdgTTnI=;
+	b=HFLqn5LWwopCalq16OfRRguyEyfuEOU+faP0hz3TvhjMYYf73ZJf3y/L1LpM0rSDQt
+	Moncu8d4lhlUGZpWjDIvHoGfRe+ZDUc/gka/20GPKYBv4VZD2Z22MKE0m7OALbabiEyN
+	ZCSgmKyBQMSxTdl6BS1Z5rraB7/14zym0qDoTP8pxyh4NiWpGcAY2HPQiNUFhyU0PzYm
+	nqIDI6tSzsaVzJFjlEZmVN8xxt+crsRC+H9u/vFg7GEWTVOaerwGIi5MMe1pq/iFvmgD
+	7aUF0Yj5Oc5rrdkRPFWMW0qvg9PsVYWZ5qSSc1JVLhbPsqLb+Nv0yaQA5GzUE3cydD3D
+	H+Wg==
+X-Gm-Message-State: ABuFfoiwiNCw8mNrd3Z+uLTUCxE1GaeT1Hf41RtxVkIrj2i7RQu8b7xn
+	MsTs1LVk4LeI6YFha0EFjWQ=
+X-Google-Smtp-Source: ACcGV62F9Ot88cU4eUFa0B6c8nOeEDS21jQmIif0rZmj0ygUB4zfsA3aBPpSWavwCGJBHvZwPdyj+w==
+X-Received: by 2002:a63:a40a:: with SMTP id
+	c10-v6mr4022804pgf.140.1538249192071; 
+	Sat, 29 Sep 2018 12:26:32 -0700 (PDT)
+Received: from pahoa2.kama-aina.net (c-67-181-203-136.hsd1.ca.comcast.net.
+	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
+	u21-v6sm4807000pfa.176.2018.09.29.12.26.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 29 Sep 2018 12:26:31 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sat, 29 Sep 2018 12:26:30 -0700
+Message-Id: <20180929192630.25619-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-xfce][PATCH] thunar-shares-plugin: add pam to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,52 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2018 18:46:56 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 29 Sep 2018 19:26:31 -0000
 
-v2 needs to be rebased on top of master as well.
-On Sat, Sep 29, 2018 at 11:15 AM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> On Sat, Sep 29, 2018 at 11:10:29AM -0700, Armin Kuster wrote:
-> > ERROR: Nothing PROVIDES 'faad2' (but /home/akuster/oss/maint/meta-openembedded/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb DEPENDS on or otherwise requires it)
-> >
-> > enable acc only if LICENSE_FLAGS is commercial
->
-> aac
->
-> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> > ---
-> >  meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> > index c0d4c8c2b..aee9e0769 100644
-> > --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> > +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
-> > @@ -27,7 +27,8 @@ SRC_URI[sha256sum] = "8322764dc265c20f05c8c8fdfdd578b0722e74626bef56fcd8eebfb01a
-> >  EXTRA_OECONF = "enable_bzip2=yes"
-> >  EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
-> >
-> > -PACKAGECONFIG ??= "aac alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
-> > +PACKAGECONFIG ??= "alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
-> > +PACKAGECONFIG += "${@bb.utils.contains('LICENSE_FLAGS', 'commercial', 'aac', '', d)}"
-> >
-> >  PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
-> >  PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+package has a rdepends on samba-server
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../shares/thunar-shares-plugin_0.3.0.bb                       | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.3.0.bb b/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.3.0.bb
+index b90e4e8c0..994c65282 100644
+--- a/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.3.0.bb
++++ b/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.3.0.bb
+@@ -2,7 +2,8 @@ SUMMARY = "Quickly share a folder using Samba from Thunar"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-inherit thunar-plugin
++inherit thunar-plugin distro_features_check
++REQUIRED_DISTRO_FEATURES = "pam"
+ 
+ SRC_URI[md5sum] = "a1773168c0b3c7c0f253a339f02e5ae2"
+ SRC_URI[sha256sum] = "d6adc01ca45a3d2567a2a969a3b16d1799a8975453ab1803a065fa82496b5b65"
+-- 
+2.17.1
+
 
