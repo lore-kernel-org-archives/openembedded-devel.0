@@ -1,34 +1,49 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DF7A1745F1;
-	Sat, 29 Sep 2018 17:40:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w8THedkT007745
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 29 Sep 2018 10:40:39 -0700 (PDT)
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.408.0;
-	Sat, 29 Sep 2018 10:40:38 -0700
-From: Randy MacLeod <randy.macleod@windriver.com>
-To: Paul Eggleton <paul.eggleton@intel.com>
-References: <1721109.tuLG3TFsTU@localhost.localdomain>
-	<CAP71WjzUkYnazb3VHzEHgEDHoRqKdOT89Waw_hAy6pRyh8=BNA@mail.gmail.com>
-	<156dc277-4255-aaf3-cb9f-f25a4481189f@windriver.com>
-	<1907640.U4zZL0Bqpb@localhost.localdomain>
-	<ca07c8cc-7ff0-eba4-e235-0707c6c8ada1@windriver.com>
-	<d8427b2a-b63f-e19c-1fc7-6cb365dc63ff@windriver.com>
-Message-ID: <300c15ce-48f1-dde7-c231-b604b38d0922@windriver.com>
-Date: Sat, 29 Sep 2018 13:40:30 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <d8427b2a-b63f-e19c-1fc7-6cb365dc63ff@windriver.com>
-X-Originating-IP: [172.25.44.4]
-Cc: yocto@yoctoproject.org,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>, Patches and
-	discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] layers.openembedded.org upgraded
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com
+	[209.85.215.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 57D8B78B9B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Sep 2018 18:10:30 +0000 (UTC)
+Received: by mail-pg1-f172.google.com with SMTP id v133-v6so6692461pgb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Sep 2018 11:10:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=nVjWt7BdT7YF3e6bQmFbXtRFh6WisvVJj09rWTTlfZA=;
+	b=ql9Das36SJBLu2zj0u4HdlUqdeJQWbdtzd1ZknZLKUdO/2M9i6zLFWHyDG0CeobUdl
+	12QXAwryL+kZKGmsnX2gwFkbQSgWqZBDAR/w6fHcFo5p7nLQTO6RtRpG4CXQLMMv/6aV
+	/FJ096kE00Y8TDfw/HSZE1n0gQ5bYvLkTXN3FR9nDFjshLssZeK9TDRKEo5kWi4EBqWJ
+	ZzZk4WZUdZPEGl6x+CpkAyyeWKwLrW5HRFVgbpTKODvK97IAfCxdwdcebAWeELnI/swN
+	uhRVbbnMIJcs5ZK/vDoob23sYNpillNWL2141CWH6frIrA+KTyd/RrNz2FE/87pMWwmF
+	Mx4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=nVjWt7BdT7YF3e6bQmFbXtRFh6WisvVJj09rWTTlfZA=;
+	b=AM+jbvGgTQ3OkL4l35GSbsTmLaaObLWh4gu9C3fKFfYESqpsYfuxCs41Lw4vIWtX68
+	llOi9Lu4CRmX+ra63gu4M/BydS6pWeV9ckSQ73zkU22IYVLggrcpG1ADbsjFfwuweIQQ
+	bzDcPivFYwTbMqZNTSTEEzX8jkb2HW/e+3tFwwnq8cz05NxS0Hu77+tjZP/Nlsnezqu9
+	kjckyhBajTHISbzM1OR6+NLKSWiI9+nTpHs+boqPbdDNR6lVZ9JbiGiGOd1E0xr/j1lv
+	tjsEuwcXJkot/sfC9hjkZRrkhpJSiDFAUh1rZq3cWaNEklYgUtMyTEZcMDyBA/HNVv8e
+	hndg==
+X-Gm-Message-State: ABuFfohmhoqEeUdP+StbKznDfHaUA9VDw8vz9Nd6E5yJD17lO3+s9m4j
+	ZwAr4WZfJK57Zvc26MSAh7Q=
+X-Google-Smtp-Source: ACcGV61cffbYF2pgoT9hPeEnxA0EY3f5yBldux6PCoYsu/DM+6tDG4aSmE3fe+VA4AqUCT3Vg6YW1A==
+X-Received: by 2002:a63:fe49:: with SMTP id
+	x9-v6mr3799732pgj.152.1538244631321; 
+	Sat, 29 Sep 2018 11:10:31 -0700 (PDT)
+Received: from pahoa2.kama-aina.net (c-67-181-203-136.hsd1.ca.comcast.net.
+	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
+	x77-v6sm14599110pff.37.2018.09.29.11.10.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 29 Sep 2018 11:10:30 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sat, 29 Sep 2018 11:10:29 -0700
+Message-Id: <20180929181029.22080-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-multimedia][PATCH] mpd: fix yocto-check-layer issue with mulitmedia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,183 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2018 17:40:41 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 29 Sep 2018 18:10:30 -0000
 
-On 09/28/2018 03:22 PM, Randy MacLeod wrote:
-> On 09/27/2018 08:01 PM, Randy MacLeod wrote:
->> On 09/27/2018 07:33 PM, Paul Eggleton wrote:
->>> Hi Randy
->>>
->>> On Friday, 28 September 2018 11:22:29 AM NZST Randy MacLeod wrote:
->>>> On 09/27/2018 05:28 PM, Nicolas Dechesne wrote:
->>>>> On Thu, Sep 27, 2018 at 10:43 PM Paul 
->>>>> Eggleton<paul.eggleton@intel.com>  wrote:
->>>>>> I'm very happy to announce that we've finally been able to upgrade 
->>>>>> the layer
->>>>>> index athttp://layers.openembedded.org  to the latest revision on 
->>>>>> master,
->>>>>> incorporating quite a bit of work that's been going on for the 
->>>>>> past few
->>>>>> months. Improvements now visible:
->>>> Nice new features, thanks!
->>>>
->>>> The "Branch:" and "Filter layers" selection menus don't work
->>>> for me when using Firefox 62.0 (64-bit) on Ubuntu-18.04.
->>>>
->>>> Google Chrome Version 69.0.3497.100 (Official Build) (64-bit)
->>>> works fine.
->>> Hmm, I do my development with Firefox and I just checked - with Firefox
->>> 62.0 (64-bit) here on Fedora 28 both work. Do you perhaps have an add-on
->>> enabled that might prevent these from working? I believe they both 
->>> rely on
->>> javascript (the filter dropdown definitely does).
->>
->> Does anyone else see this problem?
->> I've also asked on IRC.
->>
->> I did have Firefox Lightbeam (disabled) and Quiick Java but I removed 
->> them both,
->> re-started FF and still no joy/menus.
-> 
-> One co-worker said that it works for him using
->      Firefox 62.0 (64-bit) on Ubuntu-18.04
-> he has uBlock and Ghostery
-> and another has no problems with the new code when using:
->      Firefox 52.8.0 (32-bit)
-> 
-> ( 32 bit!! yikes! :)  )
-> 
-> I've restarted FF again, cut back on the crazy number of tabs
-> and the problem persists. Let me know if you know of any other
-> sites that use this JS code and I'd be happy to test with my
-> setup. I'll likey also reboot (sigh) and if needed try using a
-> test account on the laptop.
+ERROR: Nothing PROVIDES 'faad2' (but /home/akuster/oss/maint/meta-openembedded/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb DEPENDS on or otherwise requires it)
 
-It works for me now but it's not clear why. It seems that
-it was a problem with my firefox profile.
+enable acc only if LICENSE_FLAGS is commercial
 
-Work log below in case it might help someone else.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-../Randy
-
-
-I rebooted:
-   - still no menu.
-I logged out and then into another account on the same laptop:
-   - it worked.
-I created another firefox profile in my usual account:
-   - it worked.
-I deleted that profile and used my default profile:
-   - still no menu.
-While visiting layers.openembedded.org, I opened the firefox
-console using Shift+Control+K
-   - I re-loaded the site.
-   - it worked!
-I closed the console:
-   - it worked!
-I restarted firefox:
-   - it still works!
-
-Hmmm, oh well.
-
-../Randy
-
-> 
-> 
-> According my read of the traceback, the failing code is in:
-> view-source:https://layers.openembedded.org/static/js/jquery-3.3.1.js
-> 
-> ...
-> Sizzle.matchesSelector = function( elem, expr ) {
->      // Set document vars if needed
->      if ( ( elem.ownerDocument || elem ) !== document ) {
->          setDocument( elem );
->      }
-> 
->      // Make sure that attribute selectors are quoted
->      expr = expr.replace( rattributeQuotes, "='$1']" );
-> 
->      if ( support.matchesSelector && documentIsHTML &&
->          !compilerCache[ expr + " " ] &&
->          ( !rbuggyMatches || !rbuggyMatches.test( expr ) ) &&
->          ( !rbuggyQSA     || !rbuggyQSA.test( expr ) ) ) {
-> 
->          try {
->              var ret = matches.call( elem, expr );
-> 
->              // IE 9's matchesSelector returns false on disconnected nodes
->              if ( ret || support.disconnectedMatch ||
->                      // As well, disconnected nodes are said to be in a 
-> document
->                      // fragment in IE 9
->                      elem.document && elem.document.nodeType !== 11 ) {
->                  return ret;
->              }
->          } catch (e) {}
->      }
-> 
->      return Sizzle( expr, document, null, [ elem ] ).length > 0;
-> };
-> 
-> I don't see any relevant issues here:
->     https://github.com/jquery/sizzle/issues/
-> but I don't speak javascript.
-> 
-> ../Randy
->>
->>
->> Looking at:
->> Menu->Web Developer -> Browser Console ( Control+Shift+J )
->> I see:
->>
->> Error: Syntax error, unrecognized expression: # jquery-3.3.1.js:1541:8 
->> <https://layers.openembedded.org/static/js/jquery-3.3.1.js>
->> Sizzle</Sizzle.error 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:1541:8 
->> Sizzle</Sizzle.tokenize 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:2193:4 
->> Sizzle</Sizzle.select 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:2620:20 
->> Sizzle https://layers.openembedded.org/static/js/jquery-3.3.1.js:845:9 
->> find https://layers.openembedded.org/static/js/jquery-3.3.1.js:2873:4 
->> jQuery.fn.init 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:2983:14 
->> jQuery 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:139:10 
->> getParent 
->> https://layers.openembedded.org/static/js/bootstrap.js:754:27 
->> clearMenus/< 
->> https://layers.openembedded.org/static/js/bootstrap.js:741:7 each 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:354:10 each 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:189:10 
->> clearMenus 
->> https://layers.openembedded.org/static/js/bootstrap.js:740:5 dispatch 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:5182:16 
->> add/elemData.handle 
->> https://layers.openembedded.org/static/js/jquery-3.3.1.js:4991:6
->>
->> Does that help at all?
->>
->> ../Randy
->>
->>
->>
->>> Cheers,
->>> Paul
->>>
->>
->> -- 
->> # Randy MacLeod
->> # Wind River Linux
->>
-> 
-> 
-
-
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+index c0d4c8c2b..aee9e0769 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.21.bb
+@@ -27,7 +27,8 @@ SRC_URI[sha256sum] = "8322764dc265c20f05c8c8fdfdd578b0722e74626bef56fcd8eebfb01a
+ EXTRA_OECONF = "enable_bzip2=yes"
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ 
+-PACKAGECONFIG ??= "aac alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
++PACKAGECONFIG ??= "alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
++PACKAGECONFIG += "${@bb.utils.contains('LICENSE_FLAGS', 'commercial', 'aac', '', d)}"
+ 
+ PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
+ PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.17.1
+
 
