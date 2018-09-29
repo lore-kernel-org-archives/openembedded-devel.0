@@ -1,51 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CA3A799A4
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E2D4745A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Sep 2018 07:45:38 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id 63-v6so1288957wra.11
+	Sat, 29 Sep 2018 07:53:39 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id s14-v6so8570573wrw.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Sep 2018 00:45:39 -0700 (PDT)
+	Sat, 29 Sep 2018 00:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=yh3wryyHQCG17qu+hChYS9EMN5/lADkusl07i8dJT+0=;
-	b=TswtF+LDrOMajx828l9XCQ2lDmylUTNO7oOzYjyNHUkEuK8GhQExU7nUvsFzi1zvVK
-	S8AAlYVpxGncoV1rR7CkZSqybDATn2PPNvZoBq/pXZ8BrDMLbpeNGZdM69doMcbuYeDR
-	je7SnJqdbk5YJEAY3env5Ybiu614P0yhL6Hnw7pQCsycPKCwnkznZ02fZ+Jw9c2NbMmF
-	VRW27RKzq+Tj9YDXKXKRdasKzbrwyMoHKjn/BdEDxTn3pYl7g3pvhKwT3YpWp1qdgriP
-	QZEO6DHjuiq3Zdu0ON9QpvQM/OIbpk7wKI3iVl1nEbRt9JOZxlFtv0NnFQGj5qVI/v2m
-	4hng==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=1gpwDK4qUpyAmyV96BDFkBoAV5VWapD95RcwcFPcUG0=;
+	b=sNvV5jUWrB1KbZH0Nw9tTlRsed2OGS1RzkTaLRMfJF790UkehHtAyLWys7jTcNkJVE
+	uSBO9u84U8cqXVrFW/waBF3bFbheDzz8+LSyqRkB3iArI27qx47R1qe52i4URIOqbOjA
+	DkmrIiCM1jnWrkPqSttiZyvAXBex4eWuPYGjh2D4K66h8iWlvQ6tKiXgksHe24Gr0WpI
+	0AsTK+oeYZvAPI175M+l0t4vUK/JzVxgOWuChMAnovhjT/UYVknHUo8z48P3uaH8tSdX
+	qB07XQFm1bVZDO0uPNm74BcxqjP+AHo4cfwKDb94WBsw6Vw71Fob7HDXLn1DbFvv52Lh
+	NHfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=yh3wryyHQCG17qu+hChYS9EMN5/lADkusl07i8dJT+0=;
-	b=jh4Hahb354jcFBI/Vp14a6Hzu2llT/06umEbQdfgoCQg9Hzkom+hNVhFTajWCHGutj
-	yY71aHj8AZ16J1ZJmzDEG5/fmbhFabaZ1tOcURPqzISFt8ySUQmtDdtKhiLV7LZO2qSh
-	xgStiIzAx8/mwRJ7Ak4FxkOyjznVvUwduZCJfk2uFLRDhqWRvckmcDjw5y2yCUTr2+Xe
-	RRPBkL/UBosNSVVYaKEZ7kfwO2RROPBp6N8sTOx1wbSxQOyCND2lZa2JbQZL3TBiiN6d
-	9NQB7T3mRnRsWYlL3JquoOyL4HibXG2ei5d2040KhZ9oAYcvuUqYDBhnp545WzoDrQie
-	pz1Q==
-X-Gm-Message-State: ABuFfoj2FuCEMXWxoY1f7ZYm1J+CglTQg+XWwRhpFFj3SFtrHyZ5GZTA
-	8QmodEqZ8Ka894s5aAX4UD/cf+TH5byLN4Nb07WOwbtY
-X-Google-Smtp-Source: ACcGV61vTqJ8BZGCFeOa556Q5oXxapVCQybXgLkCe9HCdRw29RHBuUrkVj+Fy0cjFahVH2DtpleypAzWgi8geDIhcjw=
-X-Received: by 2002:adf:a925:: with SMTP id
-	u34-v6mr1164762wrc.175.1538207138857; 
-	Sat, 29 Sep 2018 00:45:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20180927140251.4556-1-Martin.Jansa@gmail.com>
-	<20180928201454.GW594@vctlabs.com>
-	<CAMKF1srXgYGFi6_Qc8sUQaK4sNR0fqpq150oeivxRocN53Rw+A@mail.gmail.com>
-	<20180928210816.GX594@vctlabs.com>
-In-Reply-To: <20180928210816.GX594@vctlabs.com>
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=1gpwDK4qUpyAmyV96BDFkBoAV5VWapD95RcwcFPcUG0=;
+	b=CMyul4e1Y4yCOZuN+mYG48LUaYJxSbBwGpfW/8z9tACVJgowJO4NWzSL/4vzatbIBo
+	u4Q+uoGTdFbVREktII/U07qhxBMexxy2wDo8mGBSjZvFwYadAPkMhhykQi5akurf3MNl
+	0vJPRu+aV6D/HAMTXCDcJDSGeDyQWDUY70C+TqdEh1XT9tGDrNAy0EUA/5OsVH3aWuRO
+	y6i2rXErFn5gCXlR0QIhrvCjgMR2V54Acxh+9DyIatpZCocwwrYW8wtzXvFGWR/W3mYI
+	XIe4AfLMf0gFtysCgRjPheIyU0gsuYdPEjjcPk4raXH7JJVJP2es0s3tPoUpX9vKmKUg
+	hhVw==
+X-Gm-Message-State: ABuFfohkjQ++qgF2jGXesKhiKLZrwFMbGcIkS7JbABw7/CHdufOH2WpT
+	27aYftZY0k0dXz+YG/C8T2kqiwIY
+X-Google-Smtp-Source: ACcGV62MvrGahhK8dF7RcV7S8/hsrIRcTqd7YI49ObYJyNUp9w0jXqeYnJweKyLIKfzlkzP5DyE7zQ==
+X-Received: by 2002:adf:f7c1:: with SMTP id
+	a1-v6mr1200193wrq.152.1538207619731; 
+	Sat, 29 Sep 2018 00:53:39 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	b13-v6sm5692633wru.51.2018.09.29.00.53.38
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 29 Sep 2018 00:53:38 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 29 Sep 2018 09:45:27 +0200
-Message-ID: <CA+chaQdG9vsvs11RGrsCEnS07H-X9+DS8wf5fixJasWdZvC+yA@mail.gmail.com>
-To: "S. Lockwood-Childs" <sjl@vctlabs.com>, Khem Raj <raj.khem@gmail.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH] libldb: add pam to REQUIRED_DISTRO_FEATURES
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 29 Sep 2018 09:53:40 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20180929075340.GA1449@jama>
+References: <20180910184016.6156-1-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20180910184016.6156-1-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Subject: Re: [meta-oe][sumo][PATCH] xmlstarlet: Disable PARALLEL_MAKE (again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,117 +60,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Sep 2018 07:45:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 29 Sep 2018 07:53:39 -0000
+X-Groupsio-MsgNum: 74781
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="SLDf9lqlvOQaIe6s"
+Content-Disposition: inline
+
+--SLDf9lqlvOQaIe6s
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-It depends on pam DISTRO_FEATURES, because it depends on libpam since:
-commit a95726df4bb1c898da7e4d4dbf9e2846914061e4
-Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-Date:   Sat Sep 17 12:04:42 2016 +0200
+On Mon, Sep 10, 2018 at 06:40:16PM +0000, Martin Jansa wrote:
+> From: Richard Purdie <richard.purdie@linuxfoundation.org>
+>=20
+> * MJ: this was applied for 1.5.0 version in:
+>   https://patchwork.openembedded.org/patch/116023/
+>   then removed with the upgrade to 1.6.1 in:
+>   https://patchwork.openembedded.org/patch/141059/
+>   but as reported before this issue is still reproducible
+>   with 1.6.1
+>=20
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-    samba: replace pam packageconfig by hard dependency
+ping for sumo
 
-    samba links against libpam even if pam is not in packageconfig and
-libpam was
-    built before. This patch avoid this floating dependency - other
-solution could
-    not be found. For those who want packageconfig back, see discussion iat
-[1] for
-    further inspiration.
+> ---
+>  meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb | 5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb b/met=
+a-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
+> index e3d52e616a..e28fd61a03 100644
+> --- a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
+> +++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
+> @@ -24,3 +24,8 @@ inherit autotools
+>  EXTRA_OECONF=3D"--disable-build-docs \
+>    --with-libxml-prefix=3D${STAGING_LIBDIR}/.. \
+>    --with-libxslt-prefix=3D${STAGING_LIBDIR}/.."
+> +
+> +# http://errors.yoctoproject.org/Errors/Details/157121/
+> +# /bin/bash: src/usage.c: No such file or directory
+> +# Makefile:2121: recipe for target 'src/usage.c' failed
+> +PARALLEL_MAKE =3D ""
+> --=20
+> 2.17.1
+>=20
 
-    [1]
-http://lists.openembedded.org/pipermail/openembedded-devel/2016-September/1=
-09143.html
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-    Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-    Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+--SLDf9lqlvOQaIe6s
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
 
-On Fri, Sep 28, 2018 at 11:04 PM S. Lockwood-Childs <sjl@vctlabs.com> wrote=
-:
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCW68vCQAKCRA3VSO3ZXaA
+HL6MAJwIQiUkWy+zpmS/YMw37Y1+6rPF6wCfaVsyx2s3vK+7BjTt4mIrbL8+iMU=
+=VKxQ
+-----END PGP SIGNATURE-----
 
-> On Fri, Sep 28, 2018 at 01:23:25PM -0700, Khem Raj wrote:
-> > On Fri, Sep 28, 2018 at 1:19 PM S. Lockwood-Childs <sjl@vctlabs.com>
-> wrote:
-> > >
-> > > Could you explain commit 0db9697dc6b8c a little bit, where libpam
-> became a
-> > > distro requirement for samba itself? I'm not sure why pam is a hard
-> > > requirement, rather than being PACKAGECONFIG option. I haven't tried
-> the server
-> > > ipk built with --without-pam but the client-side pieces are certainly
-> useful.
-> > > I've got a bbappend to override the pam forcing, and was just
-> wondering if
-> > > this change might be upstreamable.
-> >
-> > its lack of fine grained packaging that this was needed. If you can
-> > sort this out then I am all ears
->
-> What are the packaging problems to be solved when pam support is disabled=
-?
->
-> Like I said we're only running the client-side stuff so far, so I'm
-> guessing
-> the problems came up in server-side packages. There were no build errors
-> from
-> --without-pam at least.
->
-> >
-> > >
-> > > On Thu, Sep 27, 2018 at 02:02:51PM +0000, Martin Jansa wrote:
-> > > > * dependency on samba was added recently in:
-> > > >   libldb: Add samba to rdeps for pyldb
-> > > >   so now we need to match samba restriction to prevent:
-> > > >
-> > > > ERROR: Nothing RPROVIDES 'samba' (but
-> meta-oe/meta-networking/recipes-support/libldb/libldb_1.4.1.bb RDEPENDS
-> on or otherwise requires it)
-> > > > samba was skipped: missing required distro feature 'pam' (not in
-> DISTRO_FEATURES)
-> > > > NOTE: Runtime target 'samba' is unbuildable, removing...
-> > > > Missing or unbuildable dependency chain was: ['samba']
-> > > > ERROR: Required build target 'meta-world-pkgdata' has no buildable
-> providers.
-> > > > Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
-> 'libldb', 'samba']
-> > > >
-> > > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > > ---
-> > > >  meta-networking/recipes-support/libldb/libldb_1.4.1.bb | 3 ++-
-> > > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-> b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-> > > > index 99e62f66bb..3c7e5455e9 100644
-> > > > --- a/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-> > > > +++ b/meta-networking/recipes-support/libldb/libldb_1.4.1.bb
-> > > > @@ -35,7 +35,8 @@ LIC_FILES_CHKSUM =3D
-> "file://pyldb.h;endline=3D24;md5=3Ddfbd238cecad76957f7f860fbe9ada
-> > > >  SRC_URI[md5sum] =3D "159a1b1a56dcccf410d1bba911be6076"
-> > > >  SRC_URI[sha256sum] =3D
-> "2df13aa25b376b314ce24182c37691959019523de3cc5356c40c1a333b0890a2"
-> > > >
-> > > > -inherit waf-samba
-> > > > +inherit waf-samba distro_features_check
-> > > > +REQUIRED_DISTRO_FEATURES =3D "pam"
-> > > >
-> > > >  S =3D "${WORKDIR}/ldb-${PV}"
-> > > >
-> > > > --
-> > > > 2.17.1
-> > > >
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
+--SLDf9lqlvOQaIe6s--
