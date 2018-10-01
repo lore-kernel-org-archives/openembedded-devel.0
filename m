@@ -1,43 +1,20 @@
-Return-Path: <leon@sidebranch.com>
-Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com
-	[209.85.222.50])
-	by mail.openembedded.org (Postfix) with ESMTP id D713B7A0B4
+Return-Path: <bunk@stusta.de>
+X-Greylist: delayed 387 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 01 Oct 2018 14:35:06 UTC
+Received: from mail.stusta.mhn.de (mail.stusta.net [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A69579F7D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Oct 2018 14:20:57 +0000 (UTC)
-Received: by mail-ua1-f50.google.com with SMTP id j17-v6so4925700uan.5
+	Mon,  1 Oct 2018 14:35:06 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 42P4Qb18zXzwN
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Oct 2018 07:20:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=sidebranch-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=tJFsTh2GL4mAfoV0MgylcsuZy/Kt3lvfQ4wu2uBjiqc=;
-	b=ChuR0DPdZ8Z6wW1VKDUcUcHljzCUIVSnKXHyUv13ZRHqBAZ4O2783YXibsMevLIJ94
-	vruQ603oObjlxWez1zPnN4e7SKJSNtOZnEWakxOkMdYf0yWw+naJ3fpeAvdxgZUNs518
-	EPfLSEGtGNfAI2JIVy34g0S8bC9+UYThxCvI8MotexG33/SmK0HS0lhmdoednkF5RUNP
-	r2BaeMXFqPq9OlPYgOp6UOT8AbRTxzJppqUz6xbKV+kGNQPd0sRmHSl3EYSkLbTylZbv
-	tRU/gQbdfT8SmM3dyrCHAz2mT1yXlOuWn7xba3rOKskGzZEUn3BF9aSXJgAv/BCDakfH
-	t7Sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=tJFsTh2GL4mAfoV0MgylcsuZy/Kt3lvfQ4wu2uBjiqc=;
-	b=j6lcoERkhMXdCSCZHZzIbiNfqLTXS2jJd/v3yoQKqR4vPpY+/1vpxKAumRmNq6bQcf
-	3j0KZsKi2pIK+FDLnA91pYFpOpCedXx31gmMzf6c/fp46LH0zAcaahx5eCvEeevrq7d1
-	FSJDo2X5Tb8NA2W/mdJzMXECb5ZQL8z8vy/isa1R8hzkto0DEpjkgoyurkXHxMXtTn8U
-	lqfCpChp8PAvIv9DcQKIb1F4e+LF4DnHkDVJ43V87M4QSw2Wpun98YX/Oh/QmjZF7wDl
-	ZS+yCvRzCUX5TjqrDjZj2RfolPOswAkRuP605Z6DLKgW+rMXn1uj/orjSOP3sgv6QWd1
-	ePZw==
-X-Gm-Message-State: ABuFfoj2zxtxcHERs0lgcHNBeZtzntpRhnVviLcSNixYil+rDPK6Sn3o
-	wm4LU5f2TzFutMdNDC4YBCzUP2owfEoLNLci0W/+ErF1od8=
-X-Google-Smtp-Source: ACcGV62PShJ8vcpTF8GiUmRDq0DBItrUzr+B74whQ3Cu/0gG54FfS35miH2b/sdDifn3WPY8TFogUyR1KGNJo3RPsfo=
-X-Received: by 2002:ab0:1d0d:: with SMTP id j13mr101273uak.1.1538403658087;
-	Mon, 01 Oct 2018 07:20:58 -0700 (PDT)
-MIME-Version: 1.0
-From: Leon Woestenberg <leon@sidebranch.com>
-Date: Mon, 1 Oct 2018 16:20:48 +0200
-Message-ID: <CAMjhiJgX33NGofM6tDnrOF71199B50wWA4vP5FcUXjUO6s0qNw@mail.gmail.com>
+	Mon,  1 Oct 2018 16:28:39 +0200 (CEST)
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-java] Best option for headless java for ARM (32-bit) on sumo release?
+Date: Mon,  1 Oct 2018 17:28:33 +0300
+Message-Id: <20181001142833.5461-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] nano: Depend only on ncurses-terminfo-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,21 +27,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2018 14:20:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 01 Oct 2018 14:35:06 -0000
 
-Hi all,
+nano is a popular choice for a small user-friendly editor
+on embedded systems.
 
-What are the current options for a headless JRE on 32-bit ARM, for sumo?
+Depending only on ncurses-terminfo-base instead of ncurses-terminfo
+saves over 3 MB, and is sufficient in practice.
 
-Should I go with openjre-8?
+The vim recipe already depends only on ncurses-terminfo-base.
+---
+ meta-oe/recipes-support/nano/nano_3.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-And can I package for a specific profile?
+diff --git a/meta-oe/recipes-support/nano/nano_3.0.bb b/meta-oe/recipes-support/nano/nano_3.0.bb
+index 43ab9343b..2c7fbd549 100644
+--- a/meta-oe/recipes-support/nano/nano_3.0.bb
++++ b/meta-oe/recipes-support/nano/nano_3.0.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+ SECTION = "console/utils"
+ DEPENDS = "ncurses file"
+-RDEPENDS_${PN} = "ncurses-terminfo"
++RDEPENDS_${PN} = "ncurses-terminfo-base"
+ 
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+ 
+-- 
+2.11.0
 
-From: https://docs.oracle.com/javase/8/embedded/develop-apps-platforms/jrecreate.htm
-"Smallest JRE: headless, compact1 profile, minimal JVM (default for compact1)."
-
-Thanks,
-
-Leon.
 
