@@ -1,20 +1,18 @@
 Return-Path: <bunk@stusta.de>
-X-Greylist: delayed 387 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 01 Oct 2018 14:35:06 UTC
-Received: from mail.stusta.mhn.de (mail.stusta.net [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A69579F7D
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 8618D7A062
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Oct 2018 14:35:06 +0000 (UTC)
+	Mon,  1 Oct 2018 14:44:28 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 42P4Qb18zXzwN
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 42P4ms07m1zwN
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Oct 2018 16:28:39 +0200 (CEST)
+	Mon,  1 Oct 2018 16:44:28 +0200 (CEST)
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Oct 2018 17:28:33 +0300
-Message-Id: <20181001142833.5461-1-bunk@stusta.de>
+Date: Mon,  1 Oct 2018 17:44:26 +0300
+Message-Id: <20181001144426.6253-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] nano: Depend only on ncurses-terminfo-base
+Subject: [meta-oe][PATCH v2] nano: Depend only on ncurses-terminfo-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,7 +25,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Oct 2018 14:35:06 -0000
+X-List-Received-Date: Mon, 01 Oct 2018 14:44:28 -0000
 
 nano is a popular choice for a small user-friendly editor
 on embedded systems.
@@ -36,6 +34,8 @@ Depending only on ncurses-terminfo-base instead of ncurses-terminfo
 saves over 3 MB, and is sufficient in practice.
 
 The vim recipe already depends only on ncurses-terminfo-base.
+
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
  meta-oe/recipes-support/nano/nano_3.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
