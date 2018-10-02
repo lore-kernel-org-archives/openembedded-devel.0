@@ -1,67 +1,51 @@
-Return-Path: <prvs=80686d23a=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 9507079559
+Return-Path: <uvv.mail@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3AF61744C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Oct 2018 06:06:25 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.54,330,1534802400"; 
-   d="scan'208";a="1697103"
-From: Richard Leitner <richard.leitner@skidata.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
-	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
-	P3I6bcPJefUstj65yFQnTw==
-To: <openembedded-devel@lists.openembedded.org>,
-	=?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>, Andreas Obergschwandtner
-	<Andreas.Obergschwandtner@skidata.com>
-Message-ID: <daf41529-73b4-9059-bd0e-371d2095ec55@skidata.com>
-Date: Tue, 2 Oct 2018 08:07:37 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.0
+	Tue,  2 Oct 2018 08:33:00 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id 63-v6so1129066wra.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Oct 2018 01:33:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2q5KhKjnQXzDgBO6hA6T1G8gBi8BiNXGhE2QrJfEFyY=;
+	b=cXAjK1pfowxvuGjOgUjOVJoEOfmGVEAtA9Y36YeiMA6+qnHjIxCO2YRB8evATyRSfR
+	hau6ej7UwRfIFmz/93Rbadz606DF9lqFjegL/UQEcOpKq8VZtCY7Ui7fKZXvefPZYAWY
+	nBR5dmZZwRDlPipfuwMy23aWXtSaU6l4zuSaooH8VEXpAVdc2bXYegHS3/KHuyy47E2p
+	rYrH7UrHkTjF0a6CMyKSh3JFJ40ElzraVBUq1qB4qU544sAriSMySgHnhXTR0dFOpGEd
+	dbBsabaC6JkcZE00/e3uIY4jw2HXpZt6eJSV1PnaA6udSjtbi3yJ+/f/cBKkRJurlkef
+	IWtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2q5KhKjnQXzDgBO6hA6T1G8gBi8BiNXGhE2QrJfEFyY=;
+	b=UPeIpNP1ucJ3UMp5fqp1Jg30ZU7Iu68G2HsRcYn1MBW7rLWhj/pdNis3J+0VF7nENN
+	SekGiurp5Ti4a830YhF2uuyam9jXMs7cUl9zRmPyUNIIXi8U/pIjeXDCjn88OZuqW2Sd
+	c0oVphiUFT5qzkZXmVkLiwwJp2C8G4/j809VNqi5Mp/S361smA7l3XXttZlEI4Oj2onk
+	WQyKVMRmSYFOPAR9e2+q+WkHlRmFXAA6Jci3zm4uPm40PdCarFfedJSK4rHxmPW1IEPb
+	Taoh2W3aiOgLhLeabWlDSBqA54Ugxmq23INqazs9Az2wILB7H+tiInbYsqU6G+S5knpc
+	+Q/Q==
+X-Gm-Message-State: ABuFfohxZXNaMRAJ+9KZnqrrE0rVmbru6uys4yOokrvvjrVplHQ73r9+
+	FO4OXvgceSaD4RptjaXPWmEd3EpTNu4=
+X-Google-Smtp-Source: ACcGV63KRE7EVAWcV7H6YKo8Kos5bC8qrv9Vz8KqlN6+3DvwIkGhnWg/7ggF771VDEO63U6O8tQR7g==
+X-Received: by 2002:adf:8bc5:: with SMTP id
+	w5-v6mr10319032wra.110.1538469180521; 
+	Tue, 02 Oct 2018 01:33:00 -0700 (PDT)
+Received: from localhost.localdomain (ip-109-42-1-62.web.vodafone.de.
+	[109.42.1.62]) by smtp.gmail.com with ESMTPSA id
+	a205-v6sm6449392wmh.19.2018.10.02.01.32.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 02 Oct 2018 01:32:59 -0700 (PDT)
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Oct 2018 10:32:38 +0200
+Message-Id: <20181002083238.74140-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java] merged changes to master
+Subject: [meta-oe][PATCH] libeigen: allow empty packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,42 +58,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2018 06:06:26 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
+X-List-Received-Date: Tue, 02 Oct 2018 08:33:00 -0000
 Content-Transfer-Encoding: 8bit
 
-Hi,
-this is a note to let you know that I've just merged the following patches from master-next to the master branch of the meta-java repository at git://git.yoctoproject.org/meta-java.
+When libeigen is used as a dependency (e.g. in ceres library),
+the build is broken because empty packages are not constructed be default
 
-If any of them should be backported to any stable branches please get in contact with us by replying to this email. Thanks.
+Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+---
+ meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+index 31a42a9d6..a59320655 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+@@ -18,3 +18,4 @@ FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Module
+ # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+ RDEPENDS_${PN}-dev = ""
+ RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
++ALLOW_EMPTY_${PN} = "1"
+-- 
+2.19.0
 
-Andreas Obergschwandtner (1):
-      icedtea: disable error format-overflow for gcc 7
-
-André Draszik (5):
-      layer.conf: stop OpenJDK-8(native) build dependencies from being installed
-      openjdk-8: fix malformed patches
-      openjdk-8: always apply some patches
-      openjdk-8: allow to build client JVM via PACKAGECONFIG
-      openjdk-8: add aarch32 port 8u172b11
-
-Richard Leitner (12):
-      openjdk-build-helper: add get_*_arch functions
-      openjdk-8: use openjdk_build_helper's ARCH translation functions
-      openjdk-7: use openjdk_build_helper's ARCH translation functions
-      icedtea7-native: use openjdk_build_helper's ARCH translation functions
-      openjdk-7: remove version dependent stuff from openjdk-common
-      openjdk-8: use openjdk-common
-      openjdk-7: merge postinst into openjdk-7-common
-      oeqa: runtime: java: enable test_java8_jar_comp_mode for armv7
-      conf: distro: add mejate{,-musl} distributions
-      oeqa: runtime: java: skip java7 comp test for ppc
-      README: clarify supported openjdk version/arch/libc combinations
-      openjdk-7-common: fix jvm postinst scripts
-
-
-If you have any questions, please let me know.
-regards;Richard.L 
 
