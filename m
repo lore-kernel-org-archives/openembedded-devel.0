@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B383979368
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7954E79368
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Oct 2018 16:25:49 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id b7-v6so243000pfo.3
+	Tue,  2 Oct 2018 16:25:50 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id k19-v6so248902pfi.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 02 Oct 2018 09:25:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YLYhXF1zxoDpizgd+LOZZLdAh97Egluf0B1jf6h5Fbk=;
-	b=EPTmZOtNTKb5B+X+shPNp7FekJsIp+xFkO/mMDevJ4udyxpKtl6jmhDuWF22zjb2cP
-	TXmm7YlB0Qy1EtCIjf8U+2dGSq1hoL7jQnbeKJLohzzKHQUq1E3oXhGEDFOucXPcKToI
-	ogJ59v50HGQ3Gm85PbmYBs3VuDNEmYEUAsxhRY1ls/xgVFKCdGF1BBkeGEZ6EqjTgCCV
-	kSwQhIeJ8SokwmmxHwbf4PXoC4OtRyikeSL6cwB8Jf9tCPkG9m3FOUUIRoU1tQ+4x1Bt
-	kc9gdbkfd/x61tqlUWDqVy8ra9MCjVyQLvkPk5Tk42GhdUN5/TBtCTRvm7ihr4kyatgc
-	NMTA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=3YzUGGlMTCugnCo2KJ+BVVyjB85FkR65CL4vzpvEJDU=;
+	b=LpfjrSn0nqvH008sTwvDLZ437A0o1LXRc0+xPw78Ih+qni0JS/TC3apEQOfV6ySwBA
+	ufPobo4sxeDd/kBov6KgBlramT77Tn0S5FeiaQINU7OrR+dELv6ds13NIiox7vGnQmed
+	E7dK4W1tuu70gnxNviCmOt6kCju1tpddxD+58JumRapgiq7Oljes0NGUn2N1+l26Q2gH
+	CmRsxoheAEYxQdj4EMtqq7te5XtX+HeTLqCRgqA45LKNBFK8guKY6mMOgCdQkE1MM6Mr
+	DFWuz3ujzpcJ/YvpQTyydW14ELFTKTLzcqHP0I0fgoKIQzme/6QW35b+pmKy7HiJW4Ud
+	PVrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YLYhXF1zxoDpizgd+LOZZLdAh97Egluf0B1jf6h5Fbk=;
-	b=ImCsTyiX4h/JdG5iLo9Zx8h6I+kFNNd0op7fh4dwsGSseWJNoNMX5J89TZlFmr7nE0
-	+mbtQkE88jHHJdihWI4YnTPHrdUYgkRXeIfnDIU1c+jc4QTBNa+j8khwfs121WVdSf0E
-	A5+edYBOGHilzw1Tkjcsgv1XQqmx9AmEN3k+GnPJHLQOZwlZE0EMI3oWJDKdyovO7SfS
-	GwEQSCWWcAKJOmq/cEUWIPzffQdWwkGUjcZ0hyuuVyzIfVJA+Mrd8Puy+T7GUYlJcHLc
-	SAVkpiFIvUyiA/zh2oHD3oBrXOXG5nyFsDb9eJjqKFiAE0VAYTxaTwnkIMTykMgia3jW
-	bnbQ==
-X-Gm-Message-State: ABuFfoiDsGnszw1fvQx6Rc4gI0+0sb7pwZy5vrIc9McRCWMhOdqqpxAq
-	UpwYGdZKUu+MV2CVsGko6F7TDtuC
-X-Google-Smtp-Source: ACcGV60Jt1iB+HgC86wVCo9tTlh8eK94B7oCcnNhIYM7fyoMJioCMuqFw1Aa46wC2iCy3n8XtV+JcQ==
-X-Received: by 2002:a62:178f:: with SMTP id
-	137-v6mr15633657pfx.215.1538497550267; 
-	Tue, 02 Oct 2018 09:25:50 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=3YzUGGlMTCugnCo2KJ+BVVyjB85FkR65CL4vzpvEJDU=;
+	b=TP+vyD+UGeyRLb4k+Tj30/yKBjKFEGd7eJHZIp59F0IX2yZWLQpYuPF1nA3D0vEITX
+	Js6LrzLoKP1Pkiym4y9uIhNksJfZDyV/t7/VJoG10vQIyrxWXDvC4FDpn/I12bk518RO
+	ViUjnvUnuNSAQqgEhPsMHtn3j3Rt5FimXFAc5raBxSvYJi45wNTp3lK0mmuTR9XOycth
+	NypFMRktFzNEmPctpNSSbINpRbpKW/l8L2GnzWs7YiCFUHNEQxSb//XA9CRvDW1tRxCP
+	qtOZEIc8HoC0jUO1pFhM/ku6D9OUh8WedlTs4Rr6T2E7bEw19oi+tRyLu8XFWxUqeqGf
+	V5zw==
+X-Gm-Message-State: ABuFfoi01W6ZRzn1TkFD+nTND/1hPN0SHMHnf3+6VlDoHaxgpIMw/sOg
+	zNtKtUnsm/+Tj36kMZhG6MUq9V3v
+X-Google-Smtp-Source: ACcGV62OGdL1f6/XOQz3TbzrJfpC9QFh5f4lgz+x8T31bwXEtacSOCN0nSLKCCI4F0nH87FUd/6nZw==
+X-Received: by 2002:a63:c20f:: with SMTP id
+	b15-v6mr15272690pgd.13.1538497551136; 
+	Tue, 02 Oct 2018 09:25:51 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:877f:9499::fd07])
 	by smtp.gmail.com with ESMTPSA id
-	74-v6sm15706476pfx.182.2018.10.02.09.25.49
+	74-v6sm15706476pfx.182.2018.10.02.09.25.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 02 Oct 2018 09:25:49 -0700 (PDT)
+	Tue, 02 Oct 2018 09:25:50 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Oct 2018 09:25:41 -0700
-Message-Id: <20181002162542.42865-1-raj.khem@gmail.com>
+Date: Tue,  2 Oct 2018 09:25:42 -0700
+Message-Id: <20181002162542.42865-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.19.0
+In-Reply-To: <20181002162542.42865-1-raj.khem@gmail.com>
+References: <20181002162542.42865-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] tsocks: Link with libc_nonshared.a
+Subject: [meta-oe][PATCH 2/2] yasm: Switch to cmake and use 1.3.0 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,33 +60,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2018 16:25:49 -0000
+X-List-Received-Date: Tue, 02 Oct 2018 16:25:50 -0000
 Content-Transfer-Encoding: 8bit
 
-Link step uses -nostdlib which means all defaults from gcc spec file are
-not used and it results in errors when using stack protector options
-
-e.g.
-in function `send_socksv5_connect':
-| /usr/src/debug/tsocks/1.8beta5-r0/tsocks-1.8/tsocks.c:954: undefined reference to `__stack_chk_fail_local'
+latest master might have issues, so revert to using 1.3.0 release
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/yasm/yasm_git.bb | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-index 72913579af..725ba189c6 100644
---- a/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-+++ b/meta-networking/recipes-protocols/tsocks/tsocks_1.8beta5.bb
-@@ -19,6 +19,7 @@ SRC_URI[sha256sum] = "849d7ef5af80d03e76cc05ed9fb8fa2bcc2b724b51ebfd1b6be11c7863
- inherit autotools-brokensep
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index b685b42412..ebb14a8831 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -4,14 +4,20 @@ HOMEPAGE = "http://www.tortall.net/projects/yasm/"
  
- LIBS_append_libc-musl = " -lssp_nonshared"
-+LIBS_append_libc-glibc = " -lc_nonshared"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a12d8903508fb6bfd49d8d82c6170dd9"
  
- S = "${WORKDIR}/tsocks-1.8"
++DEPENDS += "flex-native bison-native xmlto-native"
++
+ PV = "1.3.0+git${SRCPV}"
+-SRCREV = "35af9720e36df19382a57be26643b0d6bb48a363"
++# v1.3.0
++SRCREV = "ba463d3c26c0ece2e797b8d6381b161633b5971a"
+ SRC_URI = "git://github.com/yasm/yasm.git"
  
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools gettext
++inherit cmake gettext pythonnative
+ 
+ export CCLD_FOR_BUILD = "${CC_FOR_BUILD}"
+ 
+ BBCLASSEXTEND = "native"
++SOLIBS = ".so"
++FILES_SOLIBSDEV = ""
++
 -- 
 2.19.0
 
