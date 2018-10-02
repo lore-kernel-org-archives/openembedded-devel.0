@@ -1,53 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A46E779313
+Return-Path: <joe@deserted.net>
+Received: from mail-it1-f195.google.com (mail-it1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 9412D745C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Oct 2018 15:31:02 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id r63-v6so2708927wma.4
+	Tue,  2 Oct 2018 16:00:16 +0000 (UTC)
+Received: by mail-it1-f195.google.com with SMTP id 134-v6so4129627itz.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Oct 2018 08:31:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=VJD7zQWLrJM4P4Q27Zo3ZIDWivgkA445dpY/g4KeaQw=;
-	b=i8JpddSDtUIsKhyGWKtDX5gvqEdfcsEBZFCmon+yF7wd78T9hOTDYxyLSbHUBXREKe
-	wpyTcLisZUBsEFfcqfyD8wlgZLZlPsXJPmCRJy+4nViKYTfYfrib+dPlYMMH4q1Jocvh
-	wn5NujVVXzCGvmfPe39keb9oXDirfObGuvfvhxwMb8hWfJs7cjbtptFzTbEZzbZlsi3C
-	lLRpE/GFxDMNRQFZMWPTHqGtEyKadRTSzWbQkmx6TTG3Xb00Hqxjdz+bn3Lnbyl7/y62
-	/QFyH91k7j0BW5lCuFv50NfT9vGcyPGAuY/GOukR5jqEquO4AFimBzePWlSkndGwwxAp
-	iW/w==
+	Tue, 02 Oct 2018 09:00:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=deserted-net.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=NNa6pMkAiNmb+Ns379Pb7fGeUpJh3SMSbvUmd+hln4Y=;
+	b=F4V0Y2IDtpEc2PurdobyGS139drgPHHEg9f2mxvI7Uy3AIRG7MIcvmb6cdi+9S22IC
+	AdwgTR8+zqMEcUfI+g2mlqlMZp7vidgj8EzDhIA6Qu9KqfUQZU3TLHlW7hpX37m2YH6y
+	kIKcMRAL9Q5GxcjLFyWYbw8bgm0eRPcSz152T4uKn+8L1nbm4XZvj6jmGQmuihwdeKjj
+	UwTp1h/TGfp3JtuiEpI9dGR35F47gh8k9TP9ukgK12QmfgiMx+a8I9ipXOlTx3Z+iETn
+	RGV2qtkaI68ZoIhPsElYx+UNu/M6T/JLGT+/TuZgcFQNo7XUUFgBVJ0EUTQEph1HMPO/
+	BCZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=VJD7zQWLrJM4P4Q27Zo3ZIDWivgkA445dpY/g4KeaQw=;
-	b=N+/4s2K9TbzjVCuu+xSNCyQpDp6ycGfTG1DpXou3ek+Gn4yBy9QS6wQcrNtYdk6Mt3
-	NdQc4gABEnafDuEQmvCri92qdIoRXreZXDKiuKmr06s5FNuXoKac/a3uJCiI4QKlda+u
-	xp3TZRhoTelVt4XsExvx0fwHAkLUCdEOJKWLrmCeOV9rfykKKsAM8a2uOwsxpP/iXbtU
-	y1A+pWusHfylMeipDwwpx8hmYgUzE/vQECti8fvu8LvI/qcKOhMaHQpFq8h64YD8Dd8G
-	ksWPdSe2IQzQAptUSjKL1dXU6YC5Dv2lLe1SE8OiOjeTWCEwFU73FZ+EC8zqdid/LFed
-	Fs2g==
-X-Gm-Message-State: ABuFfohrP75MUBTn9kd3eqV/OIfvDfgOsZ1N+UoEpFtf64aTztS86x38
-	/wBXdLNApwe15u6Lkoi/fDk=
-X-Google-Smtp-Source: ACcGV62gcowsImwz85AKyrqBYzDKnq2QdbPmgZ8N4+pavmNKnyYCwvKM/vy3sY78pFfedpvLNgw1+A==
-X-Received: by 2002:a1c:4406:: with SMTP id r6-v6mr2354073wma.4.1538494263153; 
-	Tue, 02 Oct 2018 08:31:03 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	w2-v6sm18460054wre.46.2018.10.02.08.31.01
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 02 Oct 2018 08:31:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 2 Oct 2018 17:31:02 +0200
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20181002153102.GA1345@jama>
-References: <20180930171718.41078-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20180930171718.41078-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] yasm: Add recipe ( previously in oe-core )
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=NNa6pMkAiNmb+Ns379Pb7fGeUpJh3SMSbvUmd+hln4Y=;
+	b=lu8pct2vQ08hI3KR/iIbh7PdiFAAIwd6+wsHbLMS/icqq2KAXe8YUsRqiV4+xYO4Gb
+	gJw0zSv5cKNpLau8L+6fDwyTpBy8PvS6K4rXGf6xgHPjUm0eX5016lmZLbt99SdS7C1s
+	KxoS4eQciRVPSvirDu1sKDDN9mnjG2x/c/keu6C5jAcVo9DPrtH3J8x3A1Ftl6c7YhHR
+	CuQCn2JgOwzDrVdaZbvQxYR4lGWuaJQkQMBi7Hoti45jX5xaeJkgabvWKw98EwX6cnYZ
+	PcEUqBnsCvriE8t7tJG2Dz0gvIgREH1Xr2dZrXFIloMyvMGObSHfDiIUFB2NZ3zFoQat
+	CV9A==
+X-Gm-Message-State: ABuFfoiLgNBYItjKg8ynm/NACzVFyO2Hkx2mDbJNGB/3lR9XMlQzjCEM
+	G4g7YDWOUPi8pHbJ70LXcLB6L+uK6afjzw==
+X-Google-Smtp-Source: ACcGV62YI7vKkYX5bv3wAo1KMT7gZa70N83TdAJVeE2rROcdguCeA/YjvmNV/Q4kcPTtjjGutwnFTg==
+X-Received: by 2002:a02:5f5a:: with SMTP id
+	r87-v6mr12072929jab.22.1538496016962; 
+	Tue, 02 Oct 2018 09:00:16 -0700 (PDT)
+Received: from mir.deserted.net (23-233-29-148.cpe.pppoe.ca. [23.233.29.148])
+	by smtp.gmail.com with ESMTPSA id
+	l142-v6sm4777431itl.23.2018.10.02.09.00.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 02 Oct 2018 09:00:16 -0700 (PDT)
+From: Joe MacDonald <joe@deserted.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Oct 2018 12:00:14 -0400
+Message-Id: <1538496014-1888-1-git-send-email-joe@deserted.net>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] update maintainers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,95 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2018 15:31:03 -0000
-X-Groupsio-MsgNum: 74819
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="W/nzBZO5zC0uMSeA"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Oct 2018 16:00:16 -0000
 
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Joe MacDonald <joe@deserted.net>
+---
+ meta-networking/MAINTAINERS | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-On Sun, Sep 30, 2018 at 10:17:18AM -0700, Khem Raj wrote:
-> Remove in OE-Core via
->=20
-> http://git.openembedded.org/openembedded-core/commit/?id=3Db7f3f7ecfdf261=
-29c5df2d3ee14e73c4633ea5a3
->=20
-> while apps in OE-core have move to use nasm or other things yasm is
-> still needed by some apps in rest of OE universe e.g. firefox
->=20
-> switch to github URI since master has bunch of fixes over 1.3.0 release
+diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+index bbb2d1b..5c4c4ce 100644
+--- a/meta-networking/MAINTAINERS
++++ b/meta-networking/MAINTAINERS
+@@ -26,7 +26,11 @@ Please keep this list in alphabetical order.
+ Maintainers List (try to look for most precise areas first)
+ 
+ COMMON
+-M:      Joe MacDonald <joe_macdonald@mentor.com>
++M:      Khem Raj <raj.khem@gmail.com>
++M:      "Joe MacDonald (backup)" <joe@deserted.net>
++L:      openembedded-devel@lists.openembedded.org
++Q:      https://patchwork.openembedded.org/project/oe/
++S:      Maintained
+ F:      conf
+ F:      recipes-*
+ 
+-- 
+2.7.4
 
-One from this bunch is probably causing build failure for aarch64:
 
-In file included from ../git/modules/arch/x86/x86id.c:1705:
-x86insn_gas.gperf: In function 'insnprefix_gas_find':
-x86insn_gas.gperf:1571:20: error: 'extractps_ins' undeclared (first use in =
-this function); did you mean 'extractps_insn'?
- vextractps, extractps_insn, 2, SUF_Z, 0xC0, 0, 0, ONLY_AVX, CPU_AVX, 0, 0
-                    ^~~~~~~~~~~~~
-                    extractps_insn
-x86insn_gas.gperf:1571:20: note: each undeclared identifier is reported onl=
-y once for each function it appears in
-
-At least I don't remember seeing this with oe-core recipe.
-
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/yasm/yasm_git.bb | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/yasm/yasm_git.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-=
-devtools/yasm/yasm_git.bb
-> new file mode 100644
-> index 0000000000..b685b42412
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "x86 (SSE) assembler supporting NASM and GAS-syntaxes"
-> +LICENSE =3D "BSD"
-> +HOMEPAGE =3D "http://www.tortall.net/projects/yasm/"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da12d8903508fb6bfd49d8d82c6170=
-dd9"
-> +
-> +PV =3D "1.3.0+git${SRCPV}"
-> +SRCREV =3D "35af9720e36df19382a57be26643b0d6bb48a363"
-> +SRC_URI =3D "git://github.com/yasm/yasm.git"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools gettext
-> +
-> +export CCLD_FOR_BUILD =3D "${CC_FOR_BUILD}"
-> +
-> +BBCLASSEXTEND =3D "native"
-> --=20
-> 2.19.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---W/nzBZO5zC0uMSeA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCW7OPNQAKCRA3VSO3ZXaA
-HCEYAJ90gxzCUuTP5sa2gDS4+DTtuDhuHgCgl1X8KBzaBgHnaoRtRjUVG+xdMpQ=
-=1gqR
------END PGP SIGNATURE-----
-
---W/nzBZO5zC0uMSeA--
