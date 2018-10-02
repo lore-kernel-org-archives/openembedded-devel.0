@@ -1,51 +1,47 @@
-Return-Path: <uvv.mail@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AF61744C5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CA0C074596
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Oct 2018 08:33:00 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id 63-v6so1129066wra.11
+	Tue,  2 Oct 2018 15:15:14 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id 84-v6so1367592qkf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Oct 2018 01:33:01 -0700 (PDT)
+	Tue, 02 Oct 2018 08:15:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=2q5KhKjnQXzDgBO6hA6T1G8gBi8BiNXGhE2QrJfEFyY=;
-	b=cXAjK1pfowxvuGjOgUjOVJoEOfmGVEAtA9Y36YeiMA6+qnHjIxCO2YRB8evATyRSfR
-	hau6ej7UwRfIFmz/93Rbadz606DF9lqFjegL/UQEcOpKq8VZtCY7Ui7fKZXvefPZYAWY
-	nBR5dmZZwRDlPipfuwMy23aWXtSaU6l4zuSaooH8VEXpAVdc2bXYegHS3/KHuyy47E2p
-	rYrH7UrHkTjF0a6CMyKSh3JFJ40ElzraVBUq1qB4qU544sAriSMySgHnhXTR0dFOpGEd
-	dbBsabaC6JkcZE00/e3uIY4jw2HXpZt6eJSV1PnaA6udSjtbi3yJ+/f/cBKkRJurlkef
-	IWtw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Q1y2tcOCdD2wjyR8S5BJ/g3xXyszqKbQCMQ+fjE7vo4=;
+	b=Mi/vg3SY/Xj0NqhEd0PqfRhJbnXw70c2wIh4oR6vBCVcT9LYyx1WtaYaTDn4eZcTT6
+	YAFitpOVv2ccPZQL9Q1CAa38mdLLwecg4GEBixqs7O4Hwy1MgITLCZ39UY0ctL2I6th6
+	7vVfS+a4FjmhJ503WqUV8R1DAGwQfwmXBakT2LMJC0Wnpt6byj3eLCnBRf9fNp2MRw9w
+	4u9lHTQ7P4jH3XYWPmM45dop7efR5+/gT3E56qqeM0gVGE5wS6UoJgaHnFDp2m7oIMlo
+	+5qrM35vOqIwMwqwZqHOpq/ShrpSCDOdX4nxY8MASxYR+48WsnWkQP/7fRAj5Fj9foNW
+	rxsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=2q5KhKjnQXzDgBO6hA6T1G8gBi8BiNXGhE2QrJfEFyY=;
-	b=UPeIpNP1ucJ3UMp5fqp1Jg30ZU7Iu68G2HsRcYn1MBW7rLWhj/pdNis3J+0VF7nENN
-	SekGiurp5Ti4a830YhF2uuyam9jXMs7cUl9zRmPyUNIIXi8U/pIjeXDCjn88OZuqW2Sd
-	c0oVphiUFT5qzkZXmVkLiwwJp2C8G4/j809VNqi5Mp/S361smA7l3XXttZlEI4Oj2onk
-	WQyKVMRmSYFOPAR9e2+q+WkHlRmFXAA6Jci3zm4uPm40PdCarFfedJSK4rHxmPW1IEPb
-	Taoh2W3aiOgLhLeabWlDSBqA54Ugxmq23INqazs9Az2wILB7H+tiInbYsqU6G+S5knpc
-	+Q/Q==
-X-Gm-Message-State: ABuFfohxZXNaMRAJ+9KZnqrrE0rVmbru6uys4yOokrvvjrVplHQ73r9+
-	FO4OXvgceSaD4RptjaXPWmEd3EpTNu4=
-X-Google-Smtp-Source: ACcGV63KRE7EVAWcV7H6YKo8Kos5bC8qrv9Vz8KqlN6+3DvwIkGhnWg/7ggF771VDEO63U6O8tQR7g==
-X-Received: by 2002:adf:8bc5:: with SMTP id
-	w5-v6mr10319032wra.110.1538469180521; 
-	Tue, 02 Oct 2018 01:33:00 -0700 (PDT)
-Received: from localhost.localdomain (ip-109-42-1-62.web.vodafone.de.
-	[109.42.1.62]) by smtp.gmail.com with ESMTPSA id
-	a205-v6sm6449392wmh.19.2018.10.02.01.32.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 02 Oct 2018 01:32:59 -0700 (PDT)
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Oct 2018 10:32:38 +0200
-Message-Id: <20181002083238.74140-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.19.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Q1y2tcOCdD2wjyR8S5BJ/g3xXyszqKbQCMQ+fjE7vo4=;
+	b=OGpwJrqYSKY1doRkOKJRcD439VnInvH//Vo8Cm4pvYPesmi+PqPbHFnONakryUb6hG
+	WPchSrEe8zXBP/9sNkULRRWlhEiszN6hFloUZeeFpDpkjFPJL703cH9dDr/mFTBJIPSe
+	ai+KkKOK7njq+fsZwh9giR8uCqVv6cH3GNyNUzFPG4WTCey/s61+LPkxSMx0JybQ/nU3
+	lsonaMymqWlOuTxd9ydLnbfhxwf6R4AF7N9/fFE1S9iu+KjPVVjrIvgfGqoAe3OHwpUd
+	PxDtIJ8lcOuyUa1JsmZjzgXyB+aC/uajj7FLoneK7mZbZ8is4wa1OlmAkW1p0s7Zq++Q
+	hgYg==
+X-Gm-Message-State: ABuFfohtUhSo3VB33w4prSm76iz8SgBrhgM+TaFJCIai35RMME9jx0ex
+	uV4bhxlOZCEwFSTTr1VpEJaHJNUpPR5ZfHlH2e4=
+X-Google-Smtp-Source: ACcGV63pvK4Awkex2HMil3wpzJqbj5q4N1rt1RAfSbk9EFW/VMj6QY/edXhYpgiqEdpAViX5gqElHeLt2MrGLIwDvA8=
+X-Received: by 2002:a37:655:: with SMTP id
+	82-v6mr12242080qkg.223.1538493315318; 
+	Tue, 02 Oct 2018 08:15:15 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libeigen: allow empty packages
+References: <20181002083238.74140-1-uvv.mail@gmail.com>
+In-Reply-To: <20181002083238.74140-1-uvv.mail@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 2 Oct 2018 08:14:48 -0700
+Message-ID: <CAMKF1srWp+SANX2zBC_H4tRZS_Jk7+2ZMXBgA4z==+h7KyjTsg@mail.gmail.com>
+To: uvv.mail@gmail.com
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libeigen: allow empty packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Oct 2018 08:33:00 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Oct 2018 15:15:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-When libeigen is used as a dependency (e.g. in ceres library),
-the build is broken because empty packages are not constructed be default
+Hi Vyacheslav
 
-Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
----
- meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+On Tue, Oct 2, 2018 at 1:33 AM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
+>
+> When libeigen is used as a dependency (e.g. in ceres library),
+> the build is broken because empty packages are not constructed be default
+>
 
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
-index 31a42a9d6..a59320655 100644
---- a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
-+++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
-@@ -18,3 +18,4 @@ FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Module
- # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
- RDEPENDS_${PN}-dev = ""
- RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
-+ALLOW_EMPTY_${PN} = "1"
--- 
-2.19.0
+can you explain a bit more on whats going on? it is a runtime failure
+or build time failure.
 
+> Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
+> ---
+>  meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+> index 31a42a9d6..a59320655 100644
+> --- a/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+> +++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.4.bb
+> @@ -18,3 +18,4 @@ FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Module
+>  # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+>  RDEPENDS_${PN}-dev = ""
+>  RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+> +ALLOW_EMPTY_${PN} = "1"
+> --
+> 2.19.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
