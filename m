@@ -1,51 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C192D74AFA
+Return-Path: <31lq0WwMKAEEzdnjrrjoh.frp@flex--wak.bounces.google.com>
+Received: from mail-qk1-f202.google.com (mail-qk1-f202.google.com
+	[209.85.222.202])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B471745A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Oct 2018 00:19:47 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id 80-v6so691755pgh.10
+	Wed,  3 Oct 2018 05:59:49 +0000 (UTC)
+Received: by mail-qk1-f202.google.com with SMTP id z185-v6so2892809qkb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Oct 2018 17:19:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=A49ueBh7E+jpxUg0Um69VFTx/kmp8DDYlGRaVDOhV9E=;
-	b=FTF9CcNYmUaOazmMue20vHWDy5eDcNRjf1rj/gi7szSNc2vsy/wEhnT7YRZRh8m3UO
-	56EjvB1STVLmNghMnMWwQNnt6e656tn5RuBb9skLSCJjjrZvjYEvGSDscST2ykaHe+bc
-	vurKE7tVXC6uZxOmbJyIhSooh5d8AKkzkdYbj4AZ+AchE45PPffCQTuwk2H7ae4nVUoM
-	WdSKm5t4Nt0bz/VOFrdS4mNdwKlXU7Mt6Z8WH3kTLQCbcAW/ISsN6Mv13K4IpiF1P5EI
-	1398b4T/IMaGK0tD3E+dx/w9faV4dcCgfaOvwfmJOKfsUS706kzAc5tIMvHDZCDdQmeo
-	mMFg==
+	Tue, 02 Oct 2018 22:59:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=date:message-id:mime-version:subject:from:to:cc;
+	bh=kdamJb6xXYN9Bpzv5arIM16JaqIMxfRGzAWQ4aUkpTk=;
+	b=RtyCTttaFYkiM8qP1POBcw/RGZ5dYi0YP/ZWoaR2yGWxS9E1g5YX0+3PMKW+ctG0uZ
+	toCGFF2CjfOXw6JNzJuNnw80c970Iiq6NjJn75xpn+tvGPjrFgkdU3kvOxHE0qwD08OZ
+	xRegqX935xvgkZ67HYgm2mU3JNJjpIJ1ine/80xC4N7Bb/zI5cPgudJbC72ZGqxTRfTm
+	7e7tE4sC2xxSI95CsNf5/O9tRlJbIlBR53LSYN9zrT3ByYqV8Rycy281qdf5ZrWGG+Cm
+	9GoCOC/2LKIQ3z46J48ixDAndfYlxb42hHYuESMbK4bsxBPi0T9ZqTd9fnO7B0c/AeSR
+	DHzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=A49ueBh7E+jpxUg0Um69VFTx/kmp8DDYlGRaVDOhV9E=;
-	b=qeo20wjWDyd1PjDQJTCuetkDrSksTjyeujaUqUwztLERV85jmyCkE93nxXiSMCrezO
-	kECPmDKQwaptAAWZv0/cQ4aRN+7jTSaOBtiCT164Sp45uJ1SlXQmB6DdTjD7Ba6V9QGp
-	I4cf4gUVNCG0UZEBKOfTR29qsFZOdWG9VIaVRDRFXVRtjwz2V/O3uLkm8nvgSiEf6BN+
-	oIE2Zq+RoCCIq4cGAWx5YncHfzbh5LveOt1mxga2I/+J0qBu/4Yjx/qPEQEcqn+Ki0ye
-	7eM2OZy8Jc9ev9vKU0siIi4PtKlchKjIsUbJCqCSmYbM8yBP3eFhrq9rpH0DZCDK6IIU
-	YXRQ==
-X-Gm-Message-State: ABuFfoi0pQGbU/BebVI+y2mpvRJMK0HtZgb12bABXU/KYqii3dssJo2y
-	V/2qmbwbGrR2JWNn3CaVCUmd3Qyf
-X-Google-Smtp-Source: ACcGV63RQwoKMfLi8vxYsnXdMLoAc0obGG1QeJf4pu5G8C91UVluJ9vzQuGax6pH7a9DCT1nRV1Ezg==
-X-Received: by 2002:a63:3507:: with SMTP id
-	c7-v6mr16215033pga.158.1538525988304; 
-	Tue, 02 Oct 2018 17:19:48 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::fd07])
-	by smtp.gmail.com with ESMTPSA id
-	g3-v6sm21876937pfi.9.2018.10.02.17.19.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 02 Oct 2018 17:19:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Oct 2018 17:19:40 -0700
-Message-Id: <20181003001940.31658-1-raj.khem@gmail.com>
+	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+	bh=kdamJb6xXYN9Bpzv5arIM16JaqIMxfRGzAWQ4aUkpTk=;
+	b=Uv/0/CmN5npNXjGOq5Pi2SL+fLMvwbE52aSvFQYICrQsBGOJgGbJC8m2u6+tPyYAUR
+	9EZrul48xVhOM20AGOj2uLbQpK+7kSVYhEJLfeq3CgfV1hKhySbE/eGTSvxEXg+OAE+n
+	w1w4/lYEyaKtnr4Jy3KOKH3+yBy6kzYOmHUKTyKp452W+hDRdJj3+sxUlAxCe6iv+Yby
+	/aMdI1+oRbYjzC7MsaMpBuK1P54rVvgtfwmOGmUyh7r5/rfWXmHI2RZWg3NVqHwl/ZPS
+	Sv/sDZvz4xbCPbh4IYfOslj1Wn4if2ZOCB2G37/oRHPBNbkrYbghe/3QRlVjxseJyQPQ
+	j/Xg==
+X-Gm-Message-State: ABuFfohs+338nOo0MVm8E3OF6GyXE4v6at+RHXfZfkiNwlFrSY+tWGME
+	uDSCRCmpbk4hQUcOnI91F9RB96u7DgTeoCNqdOag0ifkkI+Z2WxLnbCgz+HVWmv2SC3i9g7rnKw
+	MyYXQqCoRT/9oAPJDLOfBF23v5Pt4WvhTEVQDrd0hxOWGjL4WGY4MIcg8GYtNhUrv3KMZq5djwb
+	Oa9XU=
+X-Google-Smtp-Source: ACcGV607ySoDV8COuJiEWmSg83rxov4ymSHp8Y3Phgt5qUVEFZRA07ipGfwXwEMz5fnzbm6TECnRBQA=
+X-Received: by 2002:ac8:396b:: with SMTP id
+	t40-v6mr10322699qtb.16.1538546390438; 
+	Tue, 02 Oct 2018 22:59:50 -0700 (PDT)
+Date: Tue,  2 Oct 2018 22:59:41 -0700
+Message-Id: <20181003055941.175426-1-wak@google.com>
+Mime-Version: 1.0
 X-Mailer: git-send-email 2.19.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] yasm: Use 1.3.0 release
+From: "William A. Kennington III" <wak@google.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] cli11: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,46 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2018 00:19:47 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Oct 2018 05:59:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* latest master might have issues, so revert to using 1.3.0 release
-* Disable parallel compile
+cli11 is a c++ command line parser library that provides a simple
+user interface with modern c++ semantics.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: William A. Kennington III <wak@google.com>
 ---
-V2: Disable parallel build and add missing deps
+ meta-oe/recipes-support/cli11/cli11_1.6.1.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-support/cli11/cli11_1.6.1.bb
 
- meta-oe/recipes-devtools/yasm/yasm_git.bb | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-index b685b42412..b20d4c05ca 100644
---- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
-+++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-@@ -4,14 +4,19 @@ HOMEPAGE = "http://www.tortall.net/projects/yasm/"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=a12d8903508fb6bfd49d8d82c6170dd9"
- 
-+DEPENDS += "flex-native bison-native xmlto-native"
+diff --git a/meta-oe/recipes-support/cli11/cli11_1.6.1.bb b/meta-oe/recipes-support/cli11/cli11_1.6.1.bb
+new file mode 100644
+index 000000000..2d231b98c
+--- /dev/null
++++ b/meta-oe/recipes-support/cli11/cli11_1.6.1.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "C++11 command line parser"
++DESCRIPTION = "A command line parser for C++11 and beyond that provides a rich feature set with a simple and intuitive interface."
++HOMEPAGE = "https://github.com/CLIUtils/CLI11"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c271fee3ae28e11b24b97284d9f82887"
++SRCREV = "v${PV}"
++PV = "1.6.1"
++PR = "r1"
 +
- PV = "1.3.0+git${SRCPV}"
--SRCREV = "35af9720e36df19382a57be26643b0d6bb48a363"
-+# v1.3.0
-+SRCREV = "ba463d3c26c0ece2e797b8d6381b161633b5971a"
- SRC_URI = "git://github.com/yasm/yasm.git"
- 
- S = "${WORKDIR}/git"
- 
--inherit autotools gettext
-+inherit autotools gettext pythonnative
- 
--export CCLD_FOR_BUILD = "${CC_FOR_BUILD}"
-+CACHED_CONFIGUREVARS = "CCLD_FOR_BUILD='${CC_FOR_BUILD}'"
- 
- BBCLASSEXTEND = "native"
++SRC_URI += "git://github.com/CLIUtils/CLI11"
 +
-+PARALLEL_MAKE = ""
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE_append += " \
++        -DCLI11_TESTING=OFF \
++        -DCLI11_EXAMPLES=OFF \
++        "
 -- 
 2.19.0
 
