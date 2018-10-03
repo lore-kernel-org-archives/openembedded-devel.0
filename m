@@ -1,54 +1,102 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
-	[209.85.128.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 553B678FA0
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FB52798CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Oct 2018 21:14:41 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id a8-v6so2966284wmf.1
+	Wed,  3 Oct 2018 23:10:04 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id v133-v6so2239108pgb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2018 14:14:42 -0700 (PDT)
+	Wed, 03 Oct 2018 16:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Hhgmw5fbibP77Im1zevXByYurFWa5qZt8cC8KYgrdSY=;
-	b=IIQ0koB79kChBFNOgKyQIeBZZODoQdKZfMieTOVLPx4Q5BuUJfa7VHZmNCpYwwByb5
-	rTzpPd+Kp5V7vB50kIQmuzHyJokiSv+uCu6THL5qb/ENOF5ETD9VbOsVVbsQkr3VoWC2
-	1XmeB0wJVmUJxqmfOy84p09RpvNWJTtrrn2u0GgQRu979suGdC7M8ebqYoTmLqT+fZ7w
-	dpdX6hObq7VmoIqRNndOuU0VDGieA48XDad9GXedIEhniC2tVle3H1KmPoT2rjugeRfr
-	GlZmkamAUc3bRUQ3oq0AQG4nPZe2gfX09A8GQhXe47l/t/Kbvnxtszg2/1Lu495cQkKN
-	+rPw==
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=UwK5iUzgfFRyau6lfE+uGKVAZkWe70RBJX+PB+mLjjg=;
+	b=bhIqRru1qGHCss7l5mYdImv39nu669WLlgX6c6nyGhhEBtb5OwG1SR1DooTS57BoCh
+	1wLUsvQnm3IlDrhzSi/a1roG0w5isj0n/8COgJo1AD+9fqTVG94RH4gKyt00dqRlwFVZ
+	VB9Nu9K6ZJ+cNETdfxFck0VaxvZ4+I/xuHA/GjQ0cXE7zCyIKTrUJNJKHcCQE06YNbW8
+	MIYXfR/S111IY7WgvGvyqAcczcmWqab08Du0Zj6qEou/GfYLWZGF7uMyBkvClHrkNQIK
+	F8NBVsNZkn+rgnuh1AA1qbNbrk9CF2BsPY9S7rGjMxepPF9Jovhb0uQqzhsEULKtJ1g2
+	oFsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Hhgmw5fbibP77Im1zevXByYurFWa5qZt8cC8KYgrdSY=;
-	b=kyLN8ljFcLzF5PIk7T6pEBFXzH1gGK/lQ7q+1VIIKDuqUINb4b1oBYDukjes+Uzwpn
-	VaygO+Mj24CtQLGUcvHPmoY+EIfMqwz/Clo23McpzGMZIn15NjKjHnhyIwFboeSeC5pr
-	zChKTbK0M6MtWJ6d2zEfqVwOo2FyoOsXs9ubTr0kwXFlFc2paVvVW++Z0cl2K85SLf1t
-	ZpjMHi1No7Su2iNBO/s2su17K4rFfzq0pfuhVups0RFbBaab4HttAms/x0h8CXps2usW
-	54Uh/0xzyZFJNjxctvVErXn54ZFQEKMRyJmFHtkPlKy4FGy5VuYExOJ+tQuGKwnzAWHR
-	3XTw==
-X-Gm-Message-State: ABuFfogFe2KwSKAzCHaoD00c4d2rQLuEL502pp+6FugynstBY7mnUDJC
-	I9eAugyfcuC2tapVMomPmLh+HhVR
-X-Google-Smtp-Source: ACcGV61NaR74hizie7NR5rlzjbOJbnWeeERT7qhhhGlpT/3ivChaUDIvmmMwLMbOt8+8nlsKG3mTGg==
-X-Received: by 2002:a1c:2746:: with SMTP id
-	n67-v6mr2571955wmn.116.1538601281522; 
-	Wed, 03 Oct 2018 14:14:41 -0700 (PDT)
-Received: from localhost.localdomain
-	(p200300F07BC1EA401E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:f0:7bc1:ea40:1e6f:65ff:fe3e:7f61])
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=UwK5iUzgfFRyau6lfE+uGKVAZkWe70RBJX+PB+mLjjg=;
+	b=XmnACBmk7g88CPNLxnB8m7O0Es5AY+ZRuxXw9pzbyJsLbt2CXgIZ0EoFU13eO8/aUC
+	nhAmimfIWE9tq43AQF5rRhnIP++1BwJ73jsDKvMWmXnbtFHfoFPrMv6RRDazwi3wNOvH
+	gV5Dw0q18Z/YmLIB9ogJ0Ii+uO/Ev1FlaLyNLS317hTfJxcwL3rSlKTcYrON7ewNmpYK
+	7opg+SPmb5jIDuoX7PR18sHokPM25YnEGaTgVAt85Gk50N10+MXDMJR6j+gNw3cr8E5Y
+	hacG16yLgDfq686tjwGGlvRU269Lz97d8XLfG91uw9xzOBKXywQgbEk6CczGvvXdF/Jt
+	AxhA==
+X-Gm-Message-State: ABuFfoiOiYIgRPKrNg1gh3O9McB9HEMd26c5h2cUqmdvwKjHZZ75F/1y
+	3K+YnmvwvZ1H4RvRAKOfgBi/M7Sr
+X-Google-Smtp-Source: ACcGV61Gfh50Aai6nzNz6Rg1BxGS3pB1VufJW7VOaaUNsvsnNEtu+Wlz7l22UdejGUovPl4+9ADYEQ==
+X-Received: by 2002:a65:609a:: with SMTP id
+	t26-v6mr2844626pgu.41.1538608205006; 
+	Wed, 03 Oct 2018 16:10:05 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:c33:387c:5729:e2c3:c506?
+	([2601:202:4180:c33:387c:5729:e2c3:c506])
 	by smtp.gmail.com with ESMTPSA id
-	18-v6sm2450578wmw.26.2018.10.03.14.14.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 03 Oct 2018 14:14:40 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Oct 2018 23:14:32 +0200
-Message-Id: <20181003211432.4233-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.14.4
+	i2-v6sm2711348pgq.35.2018.10.03.16.10.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 03 Oct 2018 16:10:04 -0700 (PDT)
+To: Ankit Navik <ankit.tarot@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1538581223-13647-1-git-send-email-ankit.tarot@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
+	Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
+	mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
+	aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
+	mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
+	C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
+	Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
+	7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
+	dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
+	FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABzSFha3VzdGVyODA4
+	IDxha3VzdGVyODA4QGdtYWlsLmNvbT7CwX0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
+	FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
+	vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
+	ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
+	IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
+	g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
+	rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
+	FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
+	wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
+	t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
+	aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
+	oRoyDxDOwU0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
+	Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
+	37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
+	0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
+	IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
+	0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
+	0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
+	ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
+	UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
+	Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAHCwWUEGAEI
+	AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
+	mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
+	ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
+	vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
+	JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
+	EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
+	dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
+	/mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
+	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
+	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
+	8CS2NxU=
+Message-ID: <b0446aaa-3f8a-54c1-539f-887f671b9cb5@gmail.com>
+Date: Wed, 3 Oct 2018 16:10:03 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
 MIME-Version: 1.0
-Subject: [PATCH v2] libsdl-gfx: initial add 2.0.25
+In-Reply-To: <1538581223-13647-1-git-send-email-ankit.tarot@gmail.com>
+Subject: Re: [PATCH] opencl-headers: Initial recipe for OpenCL headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,45 +109,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2018 21:14:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Oct 2018 23:10:04 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Recipes like this live in in meta-games and meta-game-emulators. Once applied
-here, pull requests will go out.
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb b/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
-new file mode 100644
-index 000000000..b077a0bdf
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "SDL graphics drawing primitives and other support functions"
-+SECTION = "libs"
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5d1de21f0b70830e299905eac3419084"
-+
-+DEPENDS = "virtual/libsdl"
-+
-+SRC_URI = "http://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-${PV}.tar.gz"
-+SRC_URI[md5sum] = "ea24ed4b82ff1304809c363494fa8e16"
-+SRC_URI[sha256sum] = "556eedc06b6cf29eb495b6d27f2dcc51bf909ad82389ba2fa7bdc4dec89059c0"
-+
-+S = "${WORKDIR}/SDL_gfx-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF += " \
-+    --disable-mmx \
-+"
-+
--- 
-2.14.4
+On 10/03/2018 08:40 AM, Ankit Navik wrote:
+> Add generic recipe for OpenCL API headers.
+>
+> Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> ---
+>  .../recipes-core/opencl-headers/opencl-headers_git.bb | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb
+>
+> diff --git a/meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb b/meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb
+> new file mode 100644
+> index 0000000..16bc247
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/opencl-headers/opencl-headers_git.bb
+> @@ -0,0 +1,19 @@
+> +SUMMARY  = "OpenCL API Headers"
+> +DESCRIPTION = "OpenCL compute API headers from Khronos Group"
+> +LICENSE  = "CLOSED"
+There is a license file at the repo. Would adding a "Khronos" license be
+more appropriate?
+
+https://github.com/KhronosGroup/OpenCL-Headers/blob/master/LICENSE
+
+- armin
+> +LIC_FILES_CHKSUM = "file://CL/opencl.h;beginline=1;endline=27;md5=687394644e8c4ec4fd3d77f2f86bc042"
+> +SECTION = "base"
+> +
+> +S = "${WORKDIR}/git"
+> +SRCREV = "40c5d226c7c0706f0176884e9b94b3886679c983"
+> +SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git"
+> +
+> +do_configure[noexec] = "1"
+> +do_compile[noexec] = "1"
+> +
+> +do_install () {
+> +	install -d ${D}${includedir}/CL/
+> +	for f in ${S}/CL/*.h; do
+> +		install -m 0644 $f ${D}${includedir}/CL/
+> +	done
+> +}
 
 
