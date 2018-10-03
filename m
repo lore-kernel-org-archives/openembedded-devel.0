@@ -1,46 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
-	[209.85.222.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 57FCE746D3
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DE70874A13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Oct 2018 20:32:57 +0000 (UTC)
-Received: by mail-qk1-f182.google.com with SMTP id a189-v6so4356657qkb.2
+	Wed,  3 Oct 2018 20:56:45 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id c20-v6so6998072otl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Oct 2018 13:32:58 -0700 (PDT)
+	Wed, 03 Oct 2018 13:56:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=U6/3NkWdj6UW0grGciz5/9Yd0f2GWjH7B8NiWF2e+6M=;
-	b=LF4kjGr9sgHexHje+29YNiB/m5/wQT1z7TD7xQNFSXorb5iu6yUEeFhpkWFDiIktb/
-	q/Ff71s6ej+259oik97hVi35G+B5DjNB1cpe9rm69Q/4wLoKxcoOYU/5prWefoy/FsUu
-	KKMJyXLqCbxurVJYdBSzOjmp4vXJEaHTcBBxtLDBoudWfrAYfQhoHSQKzqF7hqnvoG6k
-	V7Dt89bvx1+zRYZZrJCTgaKgCVLPdwpTUFeEMXQGHg7ZArn88cNx/aSKlZQ2K25g/D0d
-	I3Rm+AKTe5nH8RduKtNHTtABB2Hk0sYSvOhUXZGVprG/8JdOGe/jtoqNjjCmLFiSVqIY
-	zpaQ==
+	bh=Iv0qva2vHwMRhZl7C5oa46HVHEJAUq5pgqEK7AZBxuM=;
+	b=s+MhKMH5aw8/0TVcIO81EFNPPJM7CH91hqzqHEWnKuGcj+hvt7gGotzsIOkbYCuSI+
+	/2WeQp/ZcZjne8EpBHCG9FavzgZJcsPWs9ktop9WUvPshOj2KbWFBqXJMCbStonekOoc
+	ubAnYc/bkBj86xVl7/ztGkYqsqQ1Es6FbR4gxzxYBVjLDgI2S+6huXoegHkoRezTvldR
+	zY7cQPCXu2JNTfnaNwaJTrECdE9hpg752V8gg00+sOxvrZHBQd1eyoOtbZUzQYy5X1oI
+	AL07SYvVE4DOHXBXi0yZ7f0J9vmR78k6dWxk6O4bKIGpg5uSQ3m09btPS2aMRtzKbFVE
+	sIIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=U6/3NkWdj6UW0grGciz5/9Yd0f2GWjH7B8NiWF2e+6M=;
-	b=nG6qGRfAz86D30rRlTWXaEWEeEy7jb7R5zmuYgr9m/8MD1LyuD5J8+VPwg9inwA8QA
-	Ni+psik5rRS7FRxF6F3iFPh+9y1a0yCBaKxdJShf72zzMGPAdQRL8LDU1QQqYUoY6jX2
-	M3Z6WJOES35pp7hy+oG6tI4YZMcO1faSDDqHOXBp+F5n+nMrI77/ZrWmpe0qmxevB0L/
-	VBWpwKQpg6dALhy/xVJ00e3iTtDh48LGRQ6+upQ8SkFyA66uDC9gGW3g82FBZp6yPRCl
-	EuM1hd1l4RQ8UHaxwJxH6x6xgTD8qlqVkfPaxN17ROa760WDzp+orByX18shvq3KDmjv
-	C4cA==
-X-Gm-Message-State: ABuFfojEhRBUPjT8oOckuRgGt8bxnHxHkcgcB57y6dRnmyPPNtfloZN1
-	fVcf+F5rO18nNslIU17ANP787BoTD2BFQSLg+p8=
-X-Google-Smtp-Source: ACcGV62m/9IkXuRQVQoPUG+Ozj2oKNcdFCfZziAMnVNEzcJjAhFpzJWj9bsKn6VdqgBHvBdHi/F99g6mrfm/YMZMAzQ=
-X-Received: by 2002:a37:2915:: with SMTP id
-	p21-v6mr2650102qkh.206.1538598777882; 
-	Wed, 03 Oct 2018 13:32:57 -0700 (PDT)
+	bh=Iv0qva2vHwMRhZl7C5oa46HVHEJAUq5pgqEK7AZBxuM=;
+	b=CoqzUerRyhG6F2w2gO89+8POfLWLLQJghzjPFltjGbv+AjUbzVWOG2po8ctBHOBo81
+	xFzBXD3mX5us7T63t0lJ48/wnZ0JG7i9sHsl+hs46tbO4tNa7zNqZUYRi8lcgPzhZclh
+	aoTtRQ4Qvrs4/X8pHLLqh5WXvY2hBvuJdqHEJEXKqetBNT2VTQ8mSy67UiwcpXLTEqdO
+	VCxNd9/daL0Rw9uj91MggJa3+9suAbd0OszLDd5WmuOtL50iLU8F3miTfnDJfBw+Mhhk
+	FLyLRh3/m1aBDwKMhzOxjsy0GjqLSuR91dNiHNl8hJ1pl5mcyO3l9wEa2XiT6lnlq1NL
+	GyoA==
+X-Gm-Message-State: ABuFfohA6qtSPVtbQkIiH2jGrwJ6g/302STQ95Ab/yQsbIz+VLuxyYz8
+	5hfUquWPKJrA6icYFdKnxeMrhRW38GeEGaL3lqM=
+X-Google-Smtp-Source: ACcGV62HCppB1ybwn+NXglyNPEGIc4NrD95QvzSbD7FEeD41CaaR0V1/1oqTDxdjZG0IfDMyOS1lQnyl1Jh1UBSrO6o=
+X-Received: by 2002:a9d:3b85:: with SMTP id k5-v6mr2056344otc.3.1538600206663; 
+	Wed, 03 Oct 2018 13:56:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20181003192455.24921-1-schnitzeltony@gmail.com>
-In-Reply-To: <20181003192455.24921-1-schnitzeltony@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Oct 2018 13:32:30 -0700
-Message-ID: <CAMKF1sotCFH3POn6S11GOdkuH2A886iKN=PGdPA_81c59TzwhA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+	<CAMKF1sotCFH3POn6S11GOdkuH2A886iKN=PGdPA_81c59TzwhA@mail.gmail.com>
+In-Reply-To: <CAMKF1sotCFH3POn6S11GOdkuH2A886iKN=PGdPA_81c59TzwhA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 3 Oct 2018 22:56:33 +0200
+Message-ID: <CALbNGRR0v4Nm1O7J2RQC0-MqRVLZNpDHn1jDYVRedpttr3AY9w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/8] libsdl-gfx: initial add 2.0.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,64 +55,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Oct 2018 20:32:57 -0000
+X-List-Received-Date: Wed, 03 Oct 2018 20:56:46 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 3, 2018 at 12:25 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
+On Wed, Oct 3, 2018 at 10:32 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Recipes like this live in in meta-games and meta-game-emulators. Once app=
-lied
-> here, pull requests will go out.
+> On Wed, Oct 3, 2018 at 12:25 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+> >
+> > Recipes like this live in in meta-games and meta-game-emulators. Once a=
+pplied
+> > here, pull requests will go out.
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >  meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb | 20 ++++++++++++=
+++++++++
+> >  1 file changed, 20 insertions(+)
+> >  create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.b=
+b
+> >
+> > diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb b/met=
+a-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
+> > new file mode 100644
+> > index 000000000..c9910cb1b
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
+> > @@ -0,0 +1,20 @@
+> > +SUMMARY =3D "SDL graphics drawing primitives and other support functio=
+ns"
+> > +SECTION =3D "libs"
+> > +LICENSE =3D "Zlib"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5d1de21f0b70830e299905eac34=
+19084"
+> > +
+> > +DEPENDS =3D "virtual/libsdl"
+> > +
+> > +SRC_URI =3D "http://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-${PV=
+}.tar.gz"
+> > +SRC_URI[md5sum] =3D "ea24ed4b82ff1304809c363494fa8e16"
+> > +SRC_URI[sha256sum] =3D "556eedc06b6cf29eb495b6d27f2dcc51bf909ad82389ba=
+2fa7bdc4dec89059c0"
+> > +
+> > +S =3D "${WORKDIR}/SDL_gfx-${PV}"
+> > +
+> > +inherit autotools pkgconfig
+> > +
+> > +EXTRA_OECONF +=3D " \
+> > +    SDL_CONFIG=3D${STAGING_BINDIR_CROSS}/pkg-config sdl \
 >
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb | 20 ++++++++++++++=
-++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
+> is the intention to have SDL_CONFIG point to pkg-config here
 >
-> diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb b/meta-=
-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
-> new file mode 100644
-> index 000000000..c9910cb1b
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/libsdl/libsdl-gfx_2.0.25.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY =3D "SDL graphics drawing primitives and other support functions=
-"
-> +SECTION =3D "libs"
-> +LICENSE =3D "Zlib"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5d1de21f0b70830e299905eac3419=
-084"
-> +
-> +DEPENDS =3D "virtual/libsdl"
-> +
-> +SRC_URI =3D "http://www.ferzkopp.net/Software/SDL_gfx-2.0/SDL_gfx-${PV}.=
-tar.gz"
-> +SRC_URI[md5sum] =3D "ea24ed4b82ff1304809c363494fa8e16"
-> +SRC_URI[sha256sum] =3D "556eedc06b6cf29eb495b6d27f2dcc51bf909ad82389ba2f=
-a7bdc4dec89059c0"
-> +
-> +S =3D "${WORKDIR}/SDL_gfx-${PV}"
-> +
-> +inherit autotools pkgconfig
-> +
-> +EXTRA_OECONF +=3D " \
-> +    SDL_CONFIG=3D${STAGING_BINDIR_CROSS}/pkg-config sdl \
+I was under the impression it replaces sdl-config (sdl-config supports
+for basic stuff as cflags and libs same arguments as pkg-config). Now
+that you ask I checked and grepping did not show my why I should set
+it (it is mentioned in the doc but...).
+So I tested and it builds fine without setting SDL_CONFIG. So V2 is
+near - thanks for the pointer.
 
-is the intention to have SDL_CONFIG point to pkg-config here
-
-> +    --disable-mmx \
-> +"
-> +
-> --
-> 2.14.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Andreas
 
