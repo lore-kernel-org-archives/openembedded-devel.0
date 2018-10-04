@@ -1,52 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D6765793ED
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8892E79A02
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Oct 2018 13:54:06 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id e22-v6so2860305qto.6
+	Thu,  4 Oct 2018 16:43:35 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id q40-v6so10626820qte.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Oct 2018 06:54:08 -0700 (PDT)
+	Thu, 04 Oct 2018 09:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Vn07wXZD2uerxKM79udV10Y1i829h0HIDwDw/cbRysU=;
-	b=KBONGAdy7r9/bMqnDo1mzJBbLqW7Bv8G4dvpKYPAbMxc7oGizEwaTFEzQXFTqC5pfF
-	car1TQtmpCdVNnlEeSHKa/IE2lpUxnwP6vO4WYEGSQOQf9k5goRmkBPRUk5ellcwyIq5
-	yzzLPJlWNurC8Us7ekVRDsmMW52GFxJSZtwUazWIKVa5Ru8QTnnCcqLjwRV/chbK0JMf
-	o4JbS7CRO1QD2zecvGerFXS5uvDIUntf9wL4eDpOT9bXJAsw5vIMPB+C7eYlDJ8OX2Hr
-	tLMJ0r+rgm8Eoo9W2+5Z96NgPHfGs2AMcvCRDoDy8bRDAxggzxPBjNNSIxNTslAKV4U3
-	21JA==
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=vpo6DQqnhYjzITjGKgYMrYvpLrxGxNQikP/ZEb5HGXQ=;
+	b=mzVxBLGVIX5lJAvKOC87xgrN6VfBho9JPCS5BTWcbY+Y90jguXNJ9PGv0LF6//BHcp
+	iLLYNEKm6fSUVtAmAVLA2IE0zgcHSBsR87J4oIfXO1xH1Jwuk9NEvjJjhphEGa2CQZIu
+	JUZWkDI9QCAYJ9zsz++Pr6UJWqKlj+AMGFn7Ku+a1wdfeTUPkDWLxV0elEwRMoWHvo0R
+	3V7j5AYupPbNgBXyxNo7wn4hl+O5Rvgctiw7ld1dzO/n/q8MLmDk/yEVS4uKu+ZKo/Q9
+	6zY1WS0urC2wcdQeuL0qjJHpjdtF9fW34MbN1Q90cytcdRxJrjSFZbzhW6l7722K8nyl
+	Gp6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Vn07wXZD2uerxKM79udV10Y1i829h0HIDwDw/cbRysU=;
-	b=sQVt6ndV9thHDa6FL+P7EfTFkO5McpCPFXyhWU2TvGdJQZSdqIdMW0HPl2F2s0DY+X
-	NjzH20zDbOJbxNOE1qRVj1L4VNaOediWn/djq1MRL+zLZXunG44DOmbxMMwpnU42QT+j
-	s6kSLyGv32Lr+tyyp0WoBYhZMODgWp5OVPm3twLKAM+4JZmEtWsRJUzSDn/b0oKTEq49
-	Ku0LcsRePMFGG3/kio1Y/vip5fLf7mTtLyR6QhHFRJQHU6YDAuQhnbfwldXc09qIw2C5
-	Ej6hjYYAOavSpjB/M3AJPLI52Tr8TPXStpbAQgRBOLJZtVWNknjJ7mIOjf/uFYXGNL7Z
-	E3ew==
-X-Gm-Message-State: ABuFfohKfTRI3Bv5SEZzZirlyuxWlqQDVKdeX3oohbq8CE1BWFBbn0Wi
-	SekB6dttz78tjZKF+yDWJ9sMsAPeLBP87vldGkM=
-X-Google-Smtp-Source: ACcGV60dvuQ6ZOeb4UFDwWSKBHtm1rlLJI7PJLaVw1c7IsoOcydayhG6EU4P5BoxDJlS8hRCg1Y0uWarnB9i11xHiYw=
-X-Received: by 2002:ac8:435b:: with SMTP id
-	a27-v6mr5193205qtn.295.1538661247333; 
-	Thu, 04 Oct 2018 06:54:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <20181003192455.24921-1-schnitzeltony@gmail.com>
-	<CAMKF1sotCFH3POn6S11GOdkuH2A886iKN=PGdPA_81c59TzwhA@mail.gmail.com>
-	<CALbNGRR0v4Nm1O7J2RQC0-MqRVLZNpDHn1jDYVRedpttr3AY9w@mail.gmail.com>
-	<ee935578-3dba-ac85-d207-9636e8916a6a@gmail.com>
-	<CALbNGRS8m0j834nTdrsGrKJmWH-b8dxv4FmKQXJQdSsb_q2+9Q@mail.gmail.com>
-In-Reply-To: <CALbNGRS8m0j834nTdrsGrKJmWH-b8dxv4FmKQXJQdSsb_q2+9Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 4 Oct 2018 06:53:39 -0700
-Message-ID: <CAMKF1sqygr=Ou2LccLDemy-3GNhzkmKkQ1uS0ZeW22aWo_VNRw@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/8] libsdl-gfx: initial add 2.0.25
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=vpo6DQqnhYjzITjGKgYMrYvpLrxGxNQikP/ZEb5HGXQ=;
+	b=mg8NY/9M15WnHS4b0iBhFJcpSvYqZ3C60wRrP+A5RNiqzIr7URJfh4n+pnHp5H7VrN
+	5l5kjxZFDqnlEy96323E4w9zFcpKV/ao/iuITqIw1WSpU/kq8iIF2ubBqE6J68dUDrIl
+	8OE5KpZN6VQaORFJu8+29gL16WcFqVRYL4zxikX473q/FzA7GATpAAAKuWZQXiaHHFx1
+	wsEsqcXqij+XhQWUYaQR/GLb2T6gAcR3UHX7XpFI9AutZ7rJHZyhEfaZslAyIXU1MO6A
+	iJInCc/0bL38h6m0KDq/QKRATCIPaevAP1MCy3Nv7D+iYpr9y76F8NWnoeoFN/xKtC+L
+	kCKw==
+X-Gm-Message-State: ABuFfogsF5tJBNCQ95iYW1/JI3yvnb7HmwSgBaIIddanb0FOa2KqdIuv
+	F0RN3LHLRUDccX9aDwmpeRHSp/L3
+X-Google-Smtp-Source: ACcGV61zjZSZeBWUA5k5uD7eUezCwCA5WnYhOMm3KVXBJbAoyR4wuVYaEbetSDSSmcrBMsfSs293QQ==
+X-Received: by 2002:a0c:9c42:: with SMTP id
+	w2-v6mr6075432qve.194.1538671415702; 
+	Thu, 04 Oct 2018 09:43:35 -0700 (PDT)
+Received: from prague.hsd1.va.comcast.net
+	([2601:5c0:c100:b84:c110:9e9e:8241:dfa])
+	by smtp.gmail.com with ESMTPSA id
+	28-v6sm2917277qtq.74.2018.10.04.09.43.34
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 04 Oct 2018 09:43:34 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 Oct 2018 12:43:23 -0400
+Message-Id: <20181004164323.31079-2-philip@balister.org>
+X-Mailer: git-send-email 2.13.6
+In-Reply-To: <20181004164323.31079-1-philip@balister.org>
+References: <20181004164323.31079-1-philip@balister.org>
+Subject: [meta-oe][PATCH 2/2] sip: Add python3 version of the sip recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,35 +60,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2018 13:54:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 Oct 2018 16:43:35 -0000
 
-Ok, thanks.
-On Thu, Oct 4, 2018 at 12:06 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Thu, Oct 4, 2018 at 8:37 AM Khem Raj <raj.khem@gmail.com> wrote:
-> > >>> +EXTRA_OECONF +=3D " \
-> > >>> +    SDL_CONFIG=3D${STAGING_BINDIR_CROSS}/pkg-config sdl \
-> > >>
-> > >> is the intention to have SDL_CONFIG point to pkg-config here
-> > >>
-> > > I was under the impression it replaces sdl-config (sdl-config support=
-s
-> > > for basic stuff as cflags and libs same arguments as pkg-config). Now
-> > > that you ask I checked and grepping did not show my why I should set
-> > > it (it is mentioned in the doc but...).
-> > > So I tested and it builds fine without setting SDL_CONFIG. So V2 is
-> > > near - thanks for the pointer.
-> >
-> > I was thinking it should be
-> >
-> > SDL_CONFIG=3D"${STAGING_BINDIR_CROSS}/pkg-config sdl"
-> >
-> Sent V2: No need to set SDL_CONFIG - have tested that with master and
-> I grepped through the code and get the impression it is a leftover not
-> changing anything.
->
-> Andreas
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ meta-oe/recipes-devtools/sip/sip.inc         | 36 ++++++++++++++++++++++++++++
+ meta-oe/recipes-devtools/sip/sip3_4.19.13.bb | 11 +++++++++
+ meta-oe/recipes-devtools/sip/sip_4.19.13.bb  | 36 ++--------------------------
+ 3 files changed, 49 insertions(+), 34 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/sip/sip.inc
+ create mode 100644 meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
+
+diff --git a/meta-oe/recipes-devtools/sip/sip.inc b/meta-oe/recipes-devtools/sip/sip.inc
+new file mode 100644
+index 000000000..d0795454e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/sip/sip.inc
+@@ -0,0 +1,36 @@
++SUMMARY = "SIP is a C++/Python Wrapper Generator"
++HOMEPAGE = "http://www.riverbankcomputing.co.uk/sip"
++SECTION = "devel"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz \
++          "
++SRC_URI[md5sum] = "9124cb8978742685747a5415179a9890"                           
++SRC_URI[sha256sum] = "e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e"
++
++S = "${WORKDIR}/sip-${PV}"
++
++BBCLASSEXTEND = "native"
++
++do_configure_prepend_class-target() {
++    echo "py_platform = linux" > sip.cfg
++    echo "py_inc_dir = %(sysroot)/${includedir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}" >> sip.cfg
++    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
++    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
++    echo "sip_module_dir = ${D}/${libdir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}/site-packages" >> sip.cfg
++    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
++    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
++}
++do_configure_prepend_class-native() {
++    echo "py_platform = linux" > sip.cfg
++    echo "py_inc_dir = ${includedir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}" >> sip.cfg
++    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
++    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
++    echo "sip_module_dir = ${D}/${libdir}/python${PYTHON_BASEVERSION}${PYTHON_ABI}/site-packages" >> sip.cfg
++    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
++    ${PYTHON} configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
++}
++do_install() {
++    oe_runmake install
++}
+diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb b/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
+new file mode 100644
+index 000000000..dc15bc2e2
+--- /dev/null
++++ b/meta-oe/recipes-devtools/sip/sip3_4.19.13.bb
+@@ -0,0 +1,11 @@
++require sip.inc
++
++DEPENDS = "python3"
++
++inherit python3-dir python3native
++
++PACKAGES += "python3-sip3"
++
++FILES_python3-sip3 = "${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/"
++FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/.debug"
++
+diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.13.bb b/meta-oe/recipes-devtools/sip/sip_4.19.13.bb
+index 09f15d421..3da15b842 100644
+--- a/meta-oe/recipes-devtools/sip/sip_4.19.13.bb
++++ b/meta-oe/recipes-devtools/sip/sip_4.19.13.bb
+@@ -1,43 +1,11 @@
+-SUMMARY = "SIP is a C++/Python Wrapper Generator"
+-HOMEPAGE = "http://www.riverbankcomputing.co.uk/sip"
+-SECTION = "devel"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
++require sip.inc
+ 
+ DEPENDS = "python"
+ 
+ inherit python-dir pythonnative
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz \
+-          "
+-SRC_URI[md5sum] = "9124cb8978742685747a5415179a9890"                           
+-SRC_URI[sha256sum] = "e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e"
+-
+-BBCLASSEXTEND = "native"
+-
+ PACKAGES += "python-sip"
+ 
+-do_configure_prepend_class-target() {
+-    echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = %(sysroot)/${includedir}/python%(py_major).%(py_minor)" >> sip.cfg
+-    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+-    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+-    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+-    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+-    python configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
+-}
+-do_configure_prepend_class-native() {
+-    echo "py_platform = linux" > sip.cfg
+-    echo "py_inc_dir = ${includedir}/python%(py_major).%(py_minor)" >> sip.cfg
+-    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
+-    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
+-    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
+-    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
+-    python configure.py --configuration sip.cfg --sip-module PyQt5.sip --sysroot=${STAGING_DIR_NATIVE}
+-}
+-do_install() {
+-    oe_runmake install
+-}
+-
+ FILES_python-sip = "${libdir}/${PYTHON_DIR}/site-packages/"
+ FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
++
+-- 
+2.13.6
+
 
