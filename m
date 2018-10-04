@@ -1,49 +1,48 @@
-Return-Path: <daniel.diaz@linaro.org>
-Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com
-	[209.85.219.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 706DC747F3
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 53D50751D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Oct 2018 22:56:51 +0000 (UTC)
-Received: by mail-yb1-f194.google.com with SMTP id o8-v6so4639650ybk.13
+	Thu,  4 Oct 2018 22:59:58 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id g20-v6so6813087qke.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Oct 2018 15:56:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Rb7Idra7fy+Zq2rLQpHTbl3waRmxBwOyMDI40sAm59Y=;
-	b=BYz0pGG0ouEsqpW3M/MC6OfbjPtoNHM8y1naDOYwNESNgJVw8jI7ENOKz0SydeELP2
-	L8h2cW13XryihJEgmzmzMmoh5Yg0dDbxRbhUSi3LdZcqLYzhLXS+J2FhCLXf06bHOA+j
-	gtp3mkQ9oG3ytEveXnbfEPZk8jcfBeWEd8RWc=
+	Thu, 04 Oct 2018 15:59:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=SIUe7GZsQq3tImDCtqRH4KlhqQZ8LGtQ80YUrjcOzgU=;
+	b=H1Pbxd+812Uhk7zkWBH69Lj2zWKEEy13iePf5Fl3NXBkIjoVUh2WKFMUjtZBMGWR6z
+	54mJolbENiX/Y2gj1/shN6NVn+ypV2nrN4kQEZ/2L2XSN6cb8VUL6qTG9J+U6KohJG8I
+	by12zSOHD/Bcn3ezrJa03YpR9JzssNFgez8wphjcGkxgqYIs1nzNB4t7fPKqWY4+oWEF
+	NzywL2bgZW6pIgXTxT/OP6uMqo+K7GAI/hO8dUvhqljL/koci1GAi68ETexcjSbl9Q/D
+	+/KrnJuD10NbCzegm6Pi++MPpO2cc6vWZwuKjbSpBxDvuX6moCoHfMQXnGQJ+GSPZPxj
+	l7iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Rb7Idra7fy+Zq2rLQpHTbl3waRmxBwOyMDI40sAm59Y=;
-	b=MUVp7IszaFfNSgao8eKn3Me4cPbXYgBDnwuGGhODsIfcse9APU6+U5xeacM3ZRmc7L
-	4j+CSvW/j5Z46pECQsjQpFUjFcs1L1fviNOTmLOAnmLnAXdkKRJEp8/kTEU1xcbv7Vuv
-	1K2Dj4IPZGw10Kn+YE0YmQllw8aT71iKFEaZJvbwvK5roDVapAr240dHXCnVTYtL5Nhs
-	w8Hcj3OKZYUIEiIB1tBq4AmVhd1Cf6OrTfmkE9OJvWI40gM4s2GalO5RWAY5Qg8lOU/A
-	nT/E/1g1Qq646hXj5dbKm5we9kf5v3TUMHIineE/PhAFBHQ73PJjgl4Npe8ZuPWpKRPZ
-	Bgog==
-X-Gm-Message-State: ABuFfoisI9N2m4Jqr4Zq78uvT0+u7aQ0vIYW6QaI2lLnHshNspw4de75
-	4nM5SJ2j7kboDMy0KpUJFldXS6FwmXOL3Q==
-X-Google-Smtp-Source: ACcGV61Zd+EFI8RCXLHLVKpo5lMM2hK+rhYGRCeXNgYnclZOuJkgQoIvzcOE2dSR8YinnspNNnVBXA==
-X-Received: by 2002:a25:6342:: with SMTP id
-	x63-v6mr4946816ybb.198.1538693811872; 
-	Thu, 04 Oct 2018 15:56:51 -0700 (PDT)
-Received: from localhost.localdomain
-	(CableLink-187-161-144-121.PCs.InterCable.net. [187.161.144.121])
-	by smtp.googlemail.com with ESMTPSA id
-	q126-v6sm2222992ywf.7.2018.10.04.15.56.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Oct 2018 15:56:50 -0700 (PDT)
-From: =?UTF-8?q?Daniel=20D=C3=ADaz?= <daniel.diaz@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Oct 2018 17:56:10 -0500
-Message-Id: <20181004225610.13853-1-daniel.diaz@linaro.org>
-X-Mailer: git-send-email 2.17.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=SIUe7GZsQq3tImDCtqRH4KlhqQZ8LGtQ80YUrjcOzgU=;
+	b=WraA5oFEKYBh6BsoH2rAGs7EyE1Gqn+XUWzWHnvDduZHAJmbpF4+ikaCSrmpmMpz5L
+	5GFzjZtQnx4YTRWaE2OS51OL/cLQv9uJS/XAyVBaYLB4MDZc4XjmzrvJGZKquJFyCk8g
+	mGJQPnx8KMIzzbHXxlzwvjOnjWWen/VjIJzxoioAcX3QC2GojEpucHdx85TSH/QcfgaP
+	xHQBUHfrY6k54HnXCyvkc4I7Z7V0witdLtT/Juf+eg5P7gQRGT16fPcqgCGWoNuQf7cO
+	laiMjizSdWSjX0i3jUfSkK3yodnLgApEavEylMOUlw4lAXxWZkReHESNe1q1rJhFq5o9
+	8w1w==
+X-Gm-Message-State: ABuFfojCjZ5QEHfcmwdlrlqS1Ua4yRKkCjY21jP5nJOuAS4Tu8w5omgp
+	U7aXXSG0o5qivuDFcqpY57H14Q8r9RJGR0jhv355AA==
+X-Google-Smtp-Source: ACcGV60RJ50W1xvR+U85tjk7rMWvH+hxA5+/lpBQ3uGXACEinCQyTpEjXu1QmBkdLaoRY6iieU0I3kySOYkJoMk7bBA=
+X-Received: by 2002:a37:9904:: with SMTP id
+	b4-v6mr7095344qke.102.1538693999032; 
+	Thu, 04 Oct 2018 15:59:59 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libhugetlbfs: Update to 2.21
+References: <20181004225610.13853-1-daniel.diaz@linaro.org>
+In-Reply-To: <20181004225610.13853-1-daniel.diaz@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 4 Oct 2018 15:59:32 -0700
+Message-ID: <CAMKF1sp9o5bUTANAHDJQORPzB-HHjcAHoA2r_NocKULEy3hovQ@mail.gmail.com>
+To: =?UTF-8?Q?Daniel_D=C3=ADaz_Rodr=C3=ADguez?= <daniel.diaz@linaro.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libhugetlbfs: Update to 2.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,89 +55,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2018 22:56:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Oct 2018 22:59:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Version 2.21 was released on 9/17 [1]. These changes update
-the recipe to use that version.
+Hi Daniel
+On Thu, Oct 4, 2018 at 3:57 PM Daniel D=C3=ADaz <daniel.diaz@linaro.org> wr=
+ote:
+>
+> Version 2.21 was released on 9/17 [1]. These changes update
+> the recipe to use that version.
+>
+> Only one of the existing patches had been merged upstream
+> (as e3928d57 "Force text segment alignment to 0x08000000 for
+> i386 with gold linker") -- the rest of them is still needed
+> for proper cross-compilation.
+>
+> Upstream commit c3e5cb22 ("Remove bit-rotting scripts") got
+> rid of the Perl stuff, due to it being "massively out of
+> date", so the Perl bits in the recipe have gone away too.
+>
+> [1] https://github.com/libhugetlbfs/libhugetlbfs/releases/tag/2.21
+>
+> Signed-off-by: Daniel D=C3=ADaz <daniel.diaz@linaro.org>
+> ---
+>  .../libhugetlbfs/libhugetlbfs_git.bb          | 20 +++++--------------
 
-Only one of the existing patches had been merged upstream
-(as e3928d57 "Force text segment alignment to 0x08000000 for
-i386 with gold linker") -- the rest of them is still needed
-for proper cross-compilation.
+seems like you forgot to delete the patch file which is removed from src ur=
+i
 
-Upstream commit c3e5cb22 ("Remove bit-rotting scripts") got
-rid of the Perl stuff, due to it being "massively out of
-date", so the Perl bits in the recipe have gone away too.
-
-[1] https://github.com/libhugetlbfs/libhugetlbfs/releases/tag/2.21
-
-Signed-off-by: Daniel Díaz <daniel.diaz@linaro.org>
----
- .../libhugetlbfs/libhugetlbfs_git.bb          | 20 +++++--------------
- 1 file changed, 5 insertions(+), 15 deletions(-)
-
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 14c909e75..66fd8e21d 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -3,14 +3,14 @@ HOMEPAGE = "https://github.com/libhugetlbfs/libhugetlbfs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
--DEPENDS = "sysfsutils perl"
--RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource ${PN}-perl"
-+DEPENDS = "sysfsutils"
-+RDEPENDS_${PN} += "bash python python-io python-lang python-subprocess python-resource"
- RDEPENDS_${PN}-tests += "bash"
- 
--PV = "2.20"
-+PV = "2.21"
- PE = "1"
- 
--SRCREV = "e44180072b796c0e28e53c4d01ef6279caaa2a99"
-+SRCREV = "73d06e69108f231696e9c5c44f4b42690fc5d752"
- SRC_URI = " \
-     git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
-     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
-@@ -18,7 +18,6 @@ SRC_URI = " \
-     file://tests-Makefile-install-static-4G-edge-testcases.patch \
-     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
-     file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
--    file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
-     file://0001-include-stddef.h-for-ptrdiff_t.patch \
-     file://0002-Mark-glibc-specific-code-so.patch \
-     file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
-@@ -51,14 +50,6 @@ do_configure() {
-     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; then
-       sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile
-     fi
--
--    # fixup perl module directory hardcoded to perl5
--    sed -i 's/perl5/perl/g'  Makefile
--
--    # fixup to install perl module under $(LIBDIR)/perl/${@get_perl_version(d)}/TLBC
--    # to avoid below error
--    # Can't locate TLBC/OpCollect.pm in @INC
--    sed -i '/^PMDIR/ s:perl:perl/${@get_perl_version(d)}:g' Makefile
- }
- 
- do_install() {
-@@ -69,11 +60,10 @@ do_install() {
- }
- 
- 
--PACKAGES =+ "${PN}-perl ${PN}-tests "
-+PACKAGES =+ "${PN}-tests "
- FILES_${PN} += "${libdir}/*.so"
- FILES_${PN}-dev = "${includedir}"
- FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
--FILES_${PN}-perl = "${libdir}/perl"
- FILES_${PN}-tests += "${libdir}/libhugetlbfs/tests"
- 
- INSANE_SKIP_${PN} = "dev-so"
--- 
-2.17.1
-
+>  1 file changed, 5 insertions(+), 15 deletions(-)
+>
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b=
+/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index 14c909e75..66fd8e21d 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -3,14 +3,14 @@ HOMEPAGE =3D "https://github.com/libhugetlbfs/libhugetl=
+bfs"
+>  LICENSE =3D "LGPLv2.1"
+>  LIC_FILES_CHKSUM =3D "file://LGPL-2.1;md5=3D2d5025d4aa3495befef8f17206a5=
+b0a1"
+>
+> -DEPENDS =3D "sysfsutils perl"
+> -RDEPENDS_${PN} +=3D "bash perl python python-io python-lang python-subpr=
+ocess python-resource ${PN}-perl"
+> +DEPENDS =3D "sysfsutils"
+> +RDEPENDS_${PN} +=3D "bash python python-io python-lang python-subprocess=
+ python-resource"
+>  RDEPENDS_${PN}-tests +=3D "bash"
+>
+> -PV =3D "2.20"
+> +PV =3D "2.21"
+>  PE =3D "1"
+>
+> -SRCREV =3D "e44180072b796c0e28e53c4d01ef6279caaa2a99"
+> +SRCREV =3D "73d06e69108f231696e9c5c44f4b42690fc5d752"
+>  SRC_URI =3D " \
+>      git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=3Dhttps \
+>      file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+> @@ -18,7 +18,6 @@ SRC_URI =3D " \
+>      file://tests-Makefile-install-static-4G-edge-testcases.patch \
+>      file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch =
+\
+>      file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+> -    file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
+>      file://0001-include-stddef.h-for-ptrdiff_t.patch \
+>      file://0002-Mark-glibc-specific-code-so.patch \
+>      file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.pat=
+ch \
+> @@ -51,14 +50,6 @@ do_configure() {
+>      if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; th=
+en
+>        sed -i 's/CUSTOM_LDSCRIPTS =3D yes/CUSTOM_LDSCRIPTS =3D no/'  Make=
+file
+>      fi
+> -
+> -    # fixup perl module directory hardcoded to perl5
+> -    sed -i 's/perl5/perl/g'  Makefile
+> -
+> -    # fixup to install perl module under $(LIBDIR)/perl/${@get_perl_vers=
+ion(d)}/TLBC
+> -    # to avoid below error
+> -    # Can't locate TLBC/OpCollect.pm in @INC
+> -    sed -i '/^PMDIR/ s:perl:perl/${@get_perl_version(d)}:g' Makefile
+>  }
+>
+>  do_install() {
+> @@ -69,11 +60,10 @@ do_install() {
+>  }
+>
+>
+> -PACKAGES =3D+ "${PN}-perl ${PN}-tests "
+> +PACKAGES =3D+ "${PN}-tests "
+>  FILES_${PN} +=3D "${libdir}/*.so"
+>  FILES_${PN}-dev =3D "${includedir}"
+>  FILES_${PN}-dbg +=3D "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir=
+}/libhugetlbfs/tests/obj64/.debug"
+> -FILES_${PN}-perl =3D "${libdir}/perl"
+>  FILES_${PN}-tests +=3D "${libdir}/libhugetlbfs/tests"
+>
+>  INSANE_SKIP_${PN} =3D "dev-so"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
