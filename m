@@ -1,47 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 53D50751D2
+Return-Path: <daniel.diaz@linaro.org>
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+	[209.85.167.46])
+	by mail.openembedded.org (Postfix) with ESMTP id D10BC79A3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Oct 2018 22:59:58 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id g20-v6so6813087qke.9
+	Thu,  4 Oct 2018 23:14:23 +0000 (UTC)
+Received: by mail-lf1-f46.google.com with SMTP id g89-v6so8047800lfl.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Oct 2018 15:59:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Thu, 04 Oct 2018 16:14:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=SIUe7GZsQq3tImDCtqRH4KlhqQZ8LGtQ80YUrjcOzgU=;
-	b=H1Pbxd+812Uhk7zkWBH69Lj2zWKEEy13iePf5Fl3NXBkIjoVUh2WKFMUjtZBMGWR6z
-	54mJolbENiX/Y2gj1/shN6NVn+ypV2nrN4kQEZ/2L2XSN6cb8VUL6qTG9J+U6KohJG8I
-	by12zSOHD/Bcn3ezrJa03YpR9JzssNFgez8wphjcGkxgqYIs1nzNB4t7fPKqWY4+oWEF
-	NzywL2bgZW6pIgXTxT/OP6uMqo+K7GAI/hO8dUvhqljL/koci1GAi68ETexcjSbl9Q/D
-	+/KrnJuD10NbCzegm6Pi++MPpO2cc6vWZwuKjbSpBxDvuX6moCoHfMQXnGQJ+GSPZPxj
-	l7iA==
+	bh=I1vHeHa4mWMg0fBe//49Bik0+1RahDWGSHuixzNBAHQ=;
+	b=R6qxoCd7NsZl4Hj/uPP7DF8qOB01iOtJd4T73btq/WYGgY3RzqpsuppgqCJ7MoJHka
+	mv/zbddC3x1HI5LTfP9fGV+sSezv6eOfu5pAlQ3ZdBS8Bd08BR0HRSC5P2alBpypcW5k
+	YeGlTK+EfLvLJ6aUvA55HD+a9aLwpRMKWxCfo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=SIUe7GZsQq3tImDCtqRH4KlhqQZ8LGtQ80YUrjcOzgU=;
-	b=WraA5oFEKYBh6BsoH2rAGs7EyE1Gqn+XUWzWHnvDduZHAJmbpF4+ikaCSrmpmMpz5L
-	5GFzjZtQnx4YTRWaE2OS51OL/cLQv9uJS/XAyVBaYLB4MDZc4XjmzrvJGZKquJFyCk8g
-	mGJQPnx8KMIzzbHXxlzwvjOnjWWen/VjIJzxoioAcX3QC2GojEpucHdx85TSH/QcfgaP
-	xHQBUHfrY6k54HnXCyvkc4I7Z7V0witdLtT/Juf+eg5P7gQRGT16fPcqgCGWoNuQf7cO
-	laiMjizSdWSjX0i3jUfSkK3yodnLgApEavEylMOUlw4lAXxWZkReHESNe1q1rJhFq5o9
-	8w1w==
-X-Gm-Message-State: ABuFfojCjZ5QEHfcmwdlrlqS1Ua4yRKkCjY21jP5nJOuAS4Tu8w5omgp
-	U7aXXSG0o5qivuDFcqpY57H14Q8r9RJGR0jhv355AA==
-X-Google-Smtp-Source: ACcGV60RJ50W1xvR+U85tjk7rMWvH+hxA5+/lpBQ3uGXACEinCQyTpEjXu1QmBkdLaoRY6iieU0I3kySOYkJoMk7bBA=
-X-Received: by 2002:a37:9904:: with SMTP id
-	b4-v6mr7095344qke.102.1538693999032; 
-	Thu, 04 Oct 2018 15:59:59 -0700 (PDT)
+	bh=I1vHeHa4mWMg0fBe//49Bik0+1RahDWGSHuixzNBAHQ=;
+	b=Zb3dvGwHErLO6DmSu/9SnYCOUEND3Aie4biatrWf+9cug2ZGELAu9qqsfqAtXTLmfy
+	wpZgy9j3LidXFC4751H8nJdPuveaQFGYukKXVmqmPTSiYX7Pcfu/Tpk2kifbjbIfL163
+	SuudqGdQVIlxxI0zDtWkm8uq0tLfjedelgkCeOyAceaN+aI2hHX6PI1+9W3a/Wc1Cv86
+	UXRBpmthFB9jM/uLHYGEpEdtJzOlVBm3mIaFQCROJhWg4voK/C8sx0Gu5J1xqEIMPbvR
+	llN9w6QieauyfXpa+DsCy453nupFzELLQSb4FdI7rNFwsREmdmoKRrZNYude/RaWBqz9
+	s5VA==
+X-Gm-Message-State: ABuFfohCbKkxeZzrX7ae37rZ1aRrHDpILvs1DIYnKhuMLAd+6MJjzx80
+	KV80GerZpZXGcwoBoLbBkN6dXfrHMO1rSLyD31hP8w==
+X-Google-Smtp-Source: ACcGV63RZdbMVgRSlcQOZXO3YH74n3PgIwOWNxBXXJV6R7f/r23CdBQLQNP+P2TCBwuZP15wjOoxN6QO+vcuKgCrkTM=
+X-Received: by 2002:a19:12a5:: with SMTP id 37-v6mr5251377lfs.51.1538694864237;
+	Thu, 04 Oct 2018 16:14:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20181004225610.13853-1-daniel.diaz@linaro.org>
-In-Reply-To: <20181004225610.13853-1-daniel.diaz@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 4 Oct 2018 15:59:32 -0700
-Message-ID: <CAMKF1sp9o5bUTANAHDJQORPzB-HHjcAHoA2r_NocKULEy3hovQ@mail.gmail.com>
-To: =?UTF-8?Q?Daniel_D=C3=ADaz_Rodr=C3=ADguez?= <daniel.diaz@linaro.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMKF1sp9o5bUTANAHDJQORPzB-HHjcAHoA2r_NocKULEy3hovQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sp9o5bUTANAHDJQORPzB-HHjcAHoA2r_NocKULEy3hovQ@mail.gmail.com>
+From: =?UTF-8?B?RGFuaWVsIETDrWF6?= <daniel.diaz@linaro.org>
+Date: Thu, 4 Oct 2018 18:14:12 -0500
+Message-ID: <CAEUSe7-KWFdmxiBSzfHtv5q00Vx=fsuOY3E91DthqFs5TgsVQA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] libhugetlbfs: Update to 2.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,113 +52,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2018 22:59:58 -0000
+X-List-Received-Date: Thu, 04 Oct 2018 23:14:24 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Daniel
-On Thu, Oct 4, 2018 at 3:57 PM Daniel D=C3=ADaz <daniel.diaz@linaro.org> wr=
-ote:
->
-> Version 2.21 was released on 9/17 [1]. These changes update
-> the recipe to use that version.
->
-> Only one of the existing patches had been merged upstream
-> (as e3928d57 "Force text segment alignment to 0x08000000 for
-> i386 with gold linker") -- the rest of them is still needed
-> for proper cross-compilation.
->
-> Upstream commit c3e5cb22 ("Remove bit-rotting scripts") got
-> rid of the Perl stuff, due to it being "massively out of
-> date", so the Perl bits in the recipe have gone away too.
->
-> [1] https://github.com/libhugetlbfs/libhugetlbfs/releases/tag/2.21
->
-> Signed-off-by: Daniel D=C3=ADaz <daniel.diaz@linaro.org>
-> ---
->  .../libhugetlbfs/libhugetlbfs_git.bb          | 20 +++++--------------
+Hello!
 
-seems like you forgot to delete the patch file which is removed from src ur=
-i
+On Thu, 4 Oct 2018 at 17:59, Khem Raj <raj.khem@gmail.com> wrote:
+> seems like you forgot to delete the patch file which is removed from src =
+uri
 
->  1 file changed, 5 insertions(+), 15 deletions(-)
->
-> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b=
-/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> index 14c909e75..66fd8e21d 100644
-> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> @@ -3,14 +3,14 @@ HOMEPAGE =3D "https://github.com/libhugetlbfs/libhugetl=
-bfs"
->  LICENSE =3D "LGPLv2.1"
->  LIC_FILES_CHKSUM =3D "file://LGPL-2.1;md5=3D2d5025d4aa3495befef8f17206a5=
-b0a1"
->
-> -DEPENDS =3D "sysfsutils perl"
-> -RDEPENDS_${PN} +=3D "bash perl python python-io python-lang python-subpr=
-ocess python-resource ${PN}-perl"
-> +DEPENDS =3D "sysfsutils"
-> +RDEPENDS_${PN} +=3D "bash python python-io python-lang python-subprocess=
- python-resource"
->  RDEPENDS_${PN}-tests +=3D "bash"
->
-> -PV =3D "2.20"
-> +PV =3D "2.21"
->  PE =3D "1"
->
-> -SRCREV =3D "e44180072b796c0e28e53c4d01ef6279caaa2a99"
-> +SRCREV =3D "73d06e69108f231696e9c5c44f4b42690fc5d752"
->  SRC_URI =3D " \
->      git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=3Dhttps \
->      file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
-> @@ -18,7 +18,6 @@ SRC_URI =3D " \
->      file://tests-Makefile-install-static-4G-edge-testcases.patch \
->      file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch =
-\
->      file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
-> -    file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
->      file://0001-include-stddef.h-for-ptrdiff_t.patch \
->      file://0002-Mark-glibc-specific-code-so.patch \
->      file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.pat=
-ch \
-> @@ -51,14 +50,6 @@ do_configure() {
->      if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; th=
-en
->        sed -i 's/CUSTOM_LDSCRIPTS =3D yes/CUSTOM_LDSCRIPTS =3D no/'  Make=
-file
->      fi
-> -
-> -    # fixup perl module directory hardcoded to perl5
-> -    sed -i 's/perl5/perl/g'  Makefile
-> -
-> -    # fixup to install perl module under $(LIBDIR)/perl/${@get_perl_vers=
-ion(d)}/TLBC
-> -    # to avoid below error
-> -    # Can't locate TLBC/OpCollect.pm in @INC
-> -    sed -i '/^PMDIR/ s:perl:perl/${@get_perl_version(d)}:g' Makefile
->  }
->
->  do_install() {
-> @@ -69,11 +60,10 @@ do_install() {
->  }
->
->
-> -PACKAGES =3D+ "${PN}-perl ${PN}-tests "
-> +PACKAGES =3D+ "${PN}-tests "
->  FILES_${PN} +=3D "${libdir}/*.so"
->  FILES_${PN}-dev =3D "${includedir}"
->  FILES_${PN}-dbg +=3D "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir=
-}/libhugetlbfs/tests/obj64/.debug"
-> -FILES_${PN}-perl =3D "${libdir}/perl"
->  FILES_${PN}-tests +=3D "${libdir}/libhugetlbfs/tests"
->
->  INSANE_SKIP_${PN} =3D "dev-so"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Yes, I did. :) V2 coming right up.
+
+Thanks and greetings!
+
+Daniel D=C3=ADaz
+daniel.diaz@linaro.org
 
