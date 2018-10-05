@@ -1,30 +1,51 @@
-Return-Path: <okaya@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id B4BE7747EC
+Return-Path: <uvv.mail@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CCC574AF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Oct 2018 03:47:47 +0000 (UTC)
-Received: from [192.168.0.106] (cpe-174-109-247-98.nc.res.rr.com
-	[174.109.247.98])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id B6ACE20834
+	Fri,  5 Oct 2018 09:18:08 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id 61-v6so12030129wrb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Oct 2018 03:47:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1538711268;
-	bh=p3zBAdzp3Z0HZyK7jAZiuZ/OoaKcA3MCLNsKERHuhow=;
-	h=To:From:Subject:Date:From;
-	b=yWl76GkDBKNmjjTmOw1OYvZgLiIqiwxKYb9dWrSS/qBkyK77ksjQmgBAwTMlsPrkC
-	HFTmd+Qyboctf0vxsOAT9dwdu0SNS0Q/SU2bV1l/zFQ6M1GPvxGYxdV0147zmyqlW5
-	GotBNm/l8N4y3HluWobfX2mxBNtQLkdjT9EHrApA=
+	Fri, 05 Oct 2018 02:18:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bqt7IFr0e4jeTFHkOpNO9s1TFnmghVJn/vXCcJKo3Dk=;
+	b=ogIEWFkwJb1NCZlHdseoDsHNlHIWnjXc7FwbJrgXtKyuLnJpDhcBpKRDuxrIlxJFTL
+	cih1aHCJOMDd40CGaESMEuyETthdaAjlWQK+aI4LqLgaldnvJQO53HfnzEHRnVb7Ecwu
+	Umcw++Le/YAjdzlp1Fb+hoBfscmqjHSUHz8LbT8qRxPSeseDGQUvhElNw1KxtL6XhOpx
+	Zav6G4eFszRQ9K/i44kcGBndRBIdjX5mlByUIl3JCa83UWnndBtVGC0ujD29QaVF00Yb
+	Jrgngn2uiK8eSBQ9HzZYjzYhYNfYwu0vgL6a2yepqGB1dyyBXlttMETTtwvsONOBd17w
+	bP+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bqt7IFr0e4jeTFHkOpNO9s1TFnmghVJn/vXCcJKo3Dk=;
+	b=tM9NUQuFKAEh9w46eE1kx9nqKM2PBnFEk/ZOHj+fw06YfC1LuJi9+OXe2zfZHCdlBT
+	SwHaYRU8Xo7MsrNzorB5DIwe/lBWLkz8y6xXOxbG7h+2IPtQ6NSB1U3PFEGeydwuIGBu
+	9nyEtBWtoidmRcT9YqNXXB4OrU03pv2fbqtbfb5XV+2GsTDQ7HoDi1TZvsiWLd5nU+nl
+	Pud+SLhE0ZZf3HDE5g4vGUR4ozK5YvkuHt1r3vqYFEVBK348DoRfVOwRJrbZsEeuBqEl
+	QCcIRm0C4P79plcs8cKJy+m29Ll95qe0VM9XukzRHuIzXIBnQ0F8rANjiryrTUuRKkGz
+	pq6g==
+X-Gm-Message-State: ABuFfoisf3CHXP0xMsfKH7KZc95A4uCHDxmgBXgzVhgmUNUIpsMIqWK9
+	9kOj0yyoxXfPwYETdkGhlPwDmaAB3JA=
+X-Google-Smtp-Source: ACcGV61GkYR84F93TR4XfvGzIThpqrEnwLy+rC7rIrJ4nOLqhSzAMVNVuC2moETRxhUdGYHtqV6+TQ==
+X-Received: by 2002:adf:f90b:: with SMTP id
+	b11-v6mr7717797wrr.307.1538731088651; 
+	Fri, 05 Oct 2018 02:18:08 -0700 (PDT)
+Received: from localhost.localdomain (ip-109-42-0-21.web.vodafone.de.
+	[109.42.0.21]) by smtp.gmail.com with ESMTPSA id
+	f1-v6sm1266418wme.23.2018.10.05.02.18.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 05 Oct 2018 02:18:08 -0700 (PDT)
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Sinan Kaya <okaya@kernel.org>
-Message-ID: <fe502ba2-ec63-285a-9e43-1a72d8e9365d@kernel.org>
-Date: Thu, 4 Oct 2018 23:47:47 -0400
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+Date: Fri,  5 Oct 2018 11:17:22 +0200
+Message-Id: <20181005091722.105122-1-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-Subject: [sumo] [meta-virtualization] [PATCH v1] docker: CVE-2018-10892
+Subject: [meta-oe][PATCH] ceres-solver: Removed empty package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,84 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2018 03:47:47 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 05 Oct 2018 09:18:08 -0000
+Content-Transfer-Encoding: 8bit
 
-* CVE-2018-10892
-Docker does not block /proc/acpi pathnames. The flaw allows an attacker to
-modify host's hardware like enabling/disabling Bluetooth or turning up/down
-keyboard brightness.
+By default ceres-solver provides a static library and headers.
+This change removes an empty package and sets an implicit dependency
+on dev and dbg packages.
 
-Affects < 18.03.01
+It also addresses missing cmake configuration files in dev package.
 
-CVE: CVE-2018-10892
-Ref: https://access.redhat.com/security/cve/cve-2018-10892
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
+Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
 ---
-  recipes-containers/docker/docker_git.bb       |  2 ++
-  .../docker/files/CVE-2018-10892.patch         | 34 +++++++++++++++++++
-  2 files changed, 36 insertions(+)
-  create mode 100644 recipes-containers/docker/files/CVE-2018-10892.patch
+ meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-containers/docker/docker_git.bb 
-b/recipes-containers/docker/docker_git.bb
-index e055a4f..7c7bd4c 100644
---- a/recipes-containers/docker/docker_git.bb
-+++ b/recipes-containers/docker/docker_git.bb
-@@ -30,6 +30,8 @@ SRC_URI = "\
-          file://0001-libnetwork-use-GO-instead-of-go.patch \
-  	"
-
-+SRC_URI_append_docker += "CVE-2018-10892.patch"
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+index ad7c8f2a3..13ca8efab 100644
+--- a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.14.bb
+@@ -13,5 +13,8 @@ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
++FILES_${PN}-dev += "${libdir}/cmake/"
 +
-  # Apache-2.0 for docker
-  LICENSE = "Apache-2.0"
-  LIC_FILES_CHKSUM = 
-"file://src/import/LICENSE;md5=9740d093a080530b5c5c6573df9af45a"
-diff --git a/recipes-containers/docker/files/CVE-2018-10892.patch 
-b/recipes-containers/docker/files/CVE-2018-10892.patch
-new file mode 100644
-index 0000000..60d0496
---- /dev/null
-+++ b/recipes-containers/docker/files/CVE-2018-10892.patch
-@@ -0,0 +1,34 @@
-+From af52f266ea15e6000ed057b13d62d27ddd5441a0 Mon Sep 17 00:00:00 2001
-+From: Antonio Murdaca <runcom@redhat.com>
-+Date: Thu, 5 Jul 2018 17:06:08 +0200
-+Subject: [PATCH] Add /proc/acpi to masked paths
-+
-+The deafult OCI linux spec in oci/defaults{_linux}.go in Docker/Moby
-+from 1.11 to current upstream master does not block /proc/acpi pathnames
-+allowing attackers to modify host's hardware like enabling/disabling
-+bluetooth or turning up/down keyboard brightness. SELinux prevents all
-+of this if enabled.
-+
-+Signed-off-by: Antonio Murdaca <runcom@redhat.com>
-+CVE: CVE-2018-10892
-+Upstream-Status: Backport 
-[https://github.com/moby/moby/pull/37404/commits/569b9702a59804617e1cd3611fbbe953e4247b3e]
-+Signed-off-by: Sinan Kaya<okaya@kernel.org>
-+---
-+ oci/defaults.go | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/oci/defaults.go b/oci/defaults.go
-+index 4145412dd..992157b0f 100644
-+--- a/oci/defaults.go
-++++ b/oci/defaults.go
-+@@ -114,6 +114,7 @@ func DefaultLinuxSpec() specs.Spec {
-+
-+ 	s.Linux = &specs.Linux{
-+ 		MaskedPaths: []string{
-++			"/proc/acpi",
-+ 			"/proc/kcore",
-+ 			"/proc/keys",
-+ 			"/proc/latency_stats",
-+--
-+2.19.0
-+
+ # Only a static library and headers are created
+-ALLOW_EMPTY_${PN} = "1"
++RDEPENDS_${PN}-dev = ""
++RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
 -- 
 2.19.0
 
