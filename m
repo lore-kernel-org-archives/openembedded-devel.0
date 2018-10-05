@@ -1,23 +1,30 @@
-Return-Path: <james.feist@linux.intel.com>
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DEA079A37
+Return-Path: <okaya@kernel.org>
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B4BE7747EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Oct 2018 23:22:51 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-	by fmsmga106.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	04 Oct 2018 16:22:52 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,342,1534834800"; d="scan'208";a="78831582"
-Received: from skyhawk.jf.intel.com ([10.54.51.81])
-	by orsmga008.jf.intel.com with ESMTP; 04 Oct 2018 16:18:28 -0700
-From: James Feist <james.feist@linux.intel.com>
+	Fri,  5 Oct 2018 03:47:47 +0000 (UTC)
+Received: from [192.168.0.106] (cpe-174-109-247-98.nc.res.rr.com
+	[174.109.247.98])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.kernel.org (Postfix) with ESMTPSA id B6ACE20834
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Oct 2018 03:47:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=default; t=1538711268;
+	bh=p3zBAdzp3Z0HZyK7jAZiuZ/OoaKcA3MCLNsKERHuhow=;
+	h=To:From:Subject:Date:From;
+	b=yWl76GkDBKNmjjTmOw1OYvZgLiIqiwxKYb9dWrSS/qBkyK77ksjQmgBAwTMlsPrkC
+	HFTmd+Qyboctf0vxsOAT9dwdu0SNS0Q/SU2bV1l/zFQ6M1GPvxGYxdV0147zmyqlW5
+	GotBNm/l8N4y3HluWobfX2mxBNtQLkdjT9EHrApA=
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Oct 2018 16:15:37 -0700
-Message-Id: <20181004231537.23403-1-james.feist@linux.intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] nlohmann-json: Add recipe
+From: Sinan Kaya <okaya@kernel.org>
+Message-ID: <fe502ba2-ec63-285a-9e43-1a72d8e9365d@kernel.org>
+Date: Thu, 4 Oct 2018 23:47:47 -0400
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101
+	Thunderbird/52.9.1
+MIME-Version: 1.0
+Subject: [sumo] [meta-virtualization] [PATCH v1] docker: CVE-2018-10892
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,46 +37,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Oct 2018 23:22:51 -0000
+X-List-Received-Date: Fri, 05 Oct 2018 03:47:47 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-nlohmann-json is a c++ header-only json library.
+* CVE-2018-10892
+Docker does not block /proc/acpi pathnames. The flaw allows an attacker to
+modify host's hardware like enabling/disabling Bluetooth or turning up/down
+keyboard brightness.
 
-Signed-off-by: James Feist <james.feist@linux.intel.com>
+Affects < 18.03.01
+
+CVE: CVE-2018-10892
+Ref: https://access.redhat.com/security/cve/cve-2018-10892
+Signed-off-by: Sinan Kaya <okaya@kernel.org>
 ---
- .../nlohmann-json/nlohmann-json_git.bb        | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb
+  recipes-containers/docker/docker_git.bb       |  2 ++
+  .../docker/files/CVE-2018-10892.patch         | 34 +++++++++++++++++++
+  2 files changed, 36 insertions(+)
+  create mode 100644 recipes-containers/docker/files/CVE-2018-10892.patch
 
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb
+diff --git a/recipes-containers/docker/docker_git.bb 
+b/recipes-containers/docker/docker_git.bb
+index e055a4f..7c7bd4c 100644
+--- a/recipes-containers/docker/docker_git.bb
++++ b/recipes-containers/docker/docker_git.bb
+@@ -30,6 +30,8 @@ SRC_URI = "\
+          file://0001-libnetwork-use-GO-instead-of-go.patch \
+  	"
+
++SRC_URI_append_docker += "CVE-2018-10892.patch"
++
+  # Apache-2.0 for docker
+  LICENSE = "Apache-2.0"
+  LIC_FILES_CHKSUM = 
+"file://src/import/LICENSE;md5=9740d093a080530b5c5c6573df9af45a"
+diff --git a/recipes-containers/docker/files/CVE-2018-10892.patch 
+b/recipes-containers/docker/files/CVE-2018-10892.patch
 new file mode 100644
-index 000000000..a89b659ae
+index 0000000..60d0496
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_git.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "JSON for modern C++"
-+HOMEPAGE = "https://nlohmann.github.io/json/"
-+SECTION = "libs"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=9a8ae1c2d606c432a2aa2e2de15be22a"
++++ b/recipes-containers/docker/files/CVE-2018-10892.patch
+@@ -0,0 +1,34 @@
++From af52f266ea15e6000ed057b13d62d27ddd5441a0 Mon Sep 17 00:00:00 2001
++From: Antonio Murdaca <runcom@redhat.com>
++Date: Thu, 5 Jul 2018 17:06:08 +0200
++Subject: [PATCH] Add /proc/acpi to masked paths
 +
-+SRC_URI = "git://github.com/nlohmann/json.git"
++The deafult OCI linux spec in oci/defaults{_linux}.go in Docker/Moby
++from 1.11 to current upstream master does not block /proc/acpi pathnames
++allowing attackers to modify host's hardware like enabling/disabling
++bluetooth or turning up/down keyboard brightness. SELinux prevents all
++of this if enabled.
 +
-+PV = "3.2.0+git${SRCPV}"
++Signed-off-by: Antonio Murdaca <runcom@redhat.com>
++CVE: CVE-2018-10892
++Upstream-Status: Backport 
+[https://github.com/moby/moby/pull/37404/commits/569b9702a59804617e1cd3611fbbe953e4247b3e]
++Signed-off-by: Sinan Kaya<okaya@kernel.org>
++---
++ oci/defaults.go | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+SRCREV = "8c20571136f2d5351b379a06ad6591bd980880fe"
++diff --git a/oci/defaults.go b/oci/defaults.go
++index 4145412dd..992157b0f 100644
++--- a/oci/defaults.go
+++++ b/oci/defaults.go
++@@ -114,6 +114,7 @@ func DefaultLinuxSpec() specs.Spec {
 +
-+S = "${WORKDIR}/git"
++ 	s.Linux = &specs.Linux{
++ 		MaskedPaths: []string{
+++			"/proc/acpi",
++ 			"/proc/kcore",
++ 			"/proc/keys",
++ 			"/proc/latency_stats",
++--
++2.19.0
 +
-+inherit cmake
-+
-+EXTRA_OECMAKE += "-DJSON_BuildTests=OFF"
-+
-+# nlohmann-json is a header only C++ library, so the main package will be empty.
-+
-+RDEPENDS_${PN}-dev = ""
-+
-+BBCLASSEXTEND = "native nativesdk"
 -- 
-2.17.1
+2.19.0
 
 
