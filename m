@@ -1,23 +1,49 @@
-Return-Path: <dwane.pottratz@intel.com>
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-	by mail.openembedded.org (Postfix) with ESMTP id B1590799F6
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D19760800
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Oct 2018 17:36:38 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Oct 2018 10:36:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,345,1534834800"; d="scan'208";a="97759484"
-Received: from dwane-desk.jf.intel.com ([10.54.70.9])
-	by orsmga002.jf.intel.com with ESMTP; 05 Oct 2018 10:36:33 -0700
-From: dwane.pottratz@intel.com
+	Sat,  6 Oct 2018 08:43:21 +0000 (UTC)
+Received: by mail-pf1-f176.google.com with SMTP id r9-v6so5994125pff.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Oct 2018 01:43:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=ceDY7rQTWaUKmrIKco/dNRs7ODenVbMAZACnDsFdQ8k=;
+	b=rJJcrT0+C2aMdkrJdGqvaz8f+MMSz2FgS5kiAUALgqTdkOx4cSZGgtwAVg7JTXl+G1
+	4x3zp0XlsM1zgW4gUW54+wgWd56ftykkoro3jKku7dswQwWkD89002It+C+hXMn2w6bh
+	rfEQAs40v4GfgUH9XtB11cnqn1nY76wXBfp1uI+eEpgpY3Ms1iIQME6tR+3o8CdHWxBK
+	pifGktu549iBWlDFV9AIb9OIkcv0YILWxg1541lEE0nAARSAWn6CTaC15FZvPHXJ6JM5
+	xQizX/HUWvyGED1QVu1hKEHj1slVYitm9jtca0gtiLI7EkpaqLoOEffwe1fPEE7xCgrK
+	C1Kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=ceDY7rQTWaUKmrIKco/dNRs7ODenVbMAZACnDsFdQ8k=;
+	b=ePVM9bgMAfMiJk9ina279CxpkaCtN9qClFEyWfE22fCfYzxp6vESBip7Xy5gQiBqEy
+	k357mQkw6tG9ZPfyKIDX3BtA9FamJvj8V+J0NM1ABLZ1FkSX0bZ2rRibnm0tGGmGzk5V
+	IIKvhHc252JvatFlh3tdc9+8DoQ2lVFTmRohtb68VSzR7eNdt54C00Lvm8grtterrrJa
+	m3f3+aFkdGz02P43AXRsiqhmceCNtolHKNRBQIKe98QPrQQ3Izk0A55/eUUTYgbFf9aP
+	dl6hgfBAseNLvcarNc2UtuoMF3z+UBeZR/Wx2lWPm9Ss3xA8I23oJnyxoMEiMZNaHjyu
+	SBQQ==
+X-Gm-Message-State: ABuFfojOq2/5HnmdCrciHegNuyuJFrQm0P6SJPr9x9iaw1XHh9N5B7p5
+	sTRpYPuk6oh6BoFVD5MoIhVVWes7aro=
+X-Google-Smtp-Source: ACcGV621D6nzxXwQgwGcIREGYGdize7ldzpnDU1eHEd9TtyxqZlvizFHneAhcybExxmAKm24/ZS9Aw==
+X-Received: by 2002:a65:4882:: with SMTP id
+	n2-v6mr12714641pgs.225.1538815402193; 
+	Sat, 06 Oct 2018 01:43:22 -0700 (PDT)
+Received: from ankit.iind.intel.com ([192.55.54.42])
+	by smtp.gmail.com with ESMTPSA id
+	g6-v6sm13824148pfb.11.2018.10.06.01.43.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 06 Oct 2018 01:43:21 -0700 (PDT)
+From: Ankit Navik <ankit.tarot@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Oct 2018 10:33:43 -0700
-Message-Id: <20181005173343.4170-1-dwane.pottratz@intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python-sh: add python sh library
+Date: Sat,  6 Oct 2018 14:09:54 +0530
+Message-Id: <1538815194-5528-1-git-send-email-ankit.tarot@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] opencl-icd-loader: Initial recipe for OpenCL ICD loader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,86 +56,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Oct 2018 17:36:38 -0000
+X-List-Received-Date: Sat, 06 Oct 2018 08:43:21 -0000
 
-From: Dwane Pottratz <dwane.pottratz@intel.com>
+This patch provides ICD loader library and ICD loader test binary
+and some helper library for test.
 
-sh is a python subprocess replacement.
-
-Signed-off-by: Dwane Pottratz <dwane.pottratz@intel.com>
+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 ---
- .../recipes-devtools/python/python-sh.inc     | 32 +++++++++++++++++++
- .../python/python-sh_1.12.14.bb               |  8 +++++
- .../python/python3-sh_1.12.14.bb              |  5 +++
- 3 files changed, 45 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-sh.inc
- create mode 100644 meta-python/recipes-devtools/python/python-sh_1.12.14.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-sh_1.12.14.bb
+ .../opencl-icd-loader/opencl-icd-loader_git.bb     | 47 ++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-sh.inc b/meta-python/recipes-devtools/python/python-sh.inc
+diff --git a/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
 new file mode 100644
-index 000000000..f2fd562bb
+index 0000000..f6a8fef
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-sh.inc
-@@ -0,0 +1,32 @@
-+SUMMARY = "Python subprocess replacement"
-+HOMEPAGE = "https://github.com/amoffat/sh"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6"
++++ b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+@@ -0,0 +1,47 @@
++SUMMARY  = "OpenCL ICD Loader"
++DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
++LICENSE  = "CLOSED"
++LIC_FILES_CHKSUM = "file://icd.h;beginline=1;endline=36;md5=c406ef72ec08f23326801455d7713b07"
++SECTION = "base"
 +
-+SRC_URI[md5sum] = "a8351aef25d25f707c17e0a7a6280251"
-+SRC_URI[sha256sum] = "b52bf5833ed01c7b5c5fb73a7f71b3d98d48e9b9b8764236237bdc7ecae850fc"
++inherit pkgconfig cmake
 +
-+PYPI_PACKAGE = "sh"
++S = "${WORKDIR}/git"
++SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
++SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
 +
-+inherit pypi
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/../build/bin/icd_loader_test ${D}${bindir}/
++	chrpath -d ${D}${bindir}/icd_loader_test
++	install -d ${D}${libdir}
++	install -m 0644 ${S}/../build/lib/libIcdLog.so ${D}${libdir}/
++	install -m 0644 ${S}/../build/lib/libOpenCLDriverStub.so ${D}${libdir}/
++	chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
++	install -m 0644 ${S}/../build/lib/libOpenCL.so.1.2 ${D}${libdir}/
++	cd ${D}${libdir}
++	ln -s libOpenCL.so.1.2 libOpenCL.so.1
++	ln -s libOpenCL.so.1 libOpenCL.so
++}
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-codecs \
-+    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-resource \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-terminal \
-+    ${PYTHON_PN}-tests \
-+    ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-unixadmin \
++PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
++PACKAGES += "libicdlog libicdlog-dbg"
++
++FILES_${PN} = " \
++	${bindir}/icd_loader_test \
++	${libdir}/libOpenCLDriverStub.so \
++	${libdir}/libOpenCL.so.1.2 \
++"
++FILES_${PN}-dev = " \
++	${libdir}/libOpenCL.so \
++	${libdir}/libOpenCL.so.1 \
 +"
 +
-+# WARNING: We were unable to map the following python package/module
-+# dependencies to the bitbake packages which include them:
-+#    coverage - only used in test and there is a check to see if it is
-+#               available before importing.
-+#    queue - part of threading
-+#    signal - part of core in python3. not sure how it is imported in python2.
-+#             No complants in compiling.
-diff --git a/meta-python/recipes-devtools/python/python-sh_1.12.14.bb b/meta-python/recipes-devtools/python/python-sh_1.12.14.bb
-new file mode 100644
-index 000000000..7cb5140d2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-sh_1.12.14.bb
-@@ -0,0 +1,8 @@
-+require python-sh.inc
-+inherit setuptools
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-contextlib \
-+    ${PYTHON_PN}-lang \
-+    ${PYTHON_PN}-textutils \
++FILES_libicdlog = "${libdir}/libIcdLog.so"
++FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so \
++	/usr/src/debug/opencl-icd-loader/git-${PR}/git/test \
++	/usr/src/debug/opencl-icd-loader/git-${PR}/git \
 +"
-diff --git a/meta-python/recipes-devtools/python/python3-sh_1.12.14.bb b/meta-python/recipes-devtools/python/python3-sh_1.12.14.bb
-new file mode 100644
-index 000000000..812bd4b1a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-sh_1.12.14.bb
-@@ -0,0 +1,5 @@
-+require python-sh.inc
-+inherit setuptools3
 +
-+RDEPENDS_${PN} += " \
-+"
++DEPENDS = "opencl-headers"
++RDEPENDS_${PN} = "opencl-headers libicdlog"
 -- 
-2.17.1
+1.9.1
 
 
