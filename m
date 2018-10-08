@@ -1,23 +1,45 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 95DEC795E9
+Return-Path: <btgoodwin@geontech.com>
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C84974775
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 17:50:50 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w98HopUL020124
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  8 Oct 2018 21:21:58 +0000 (UTC)
+Received: by mail-qt1-f174.google.com with SMTP id b4-v6so14487978qtc.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Oct 2018 10:50:51 -0700 (PDT)
-Received: from fidler.wrs.com (172.25.44.4) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
-	Mon, 8 Oct 2018 10:50:51 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Oct 2018 13:50:50 -0400
-Message-ID: <20181008175050.8926-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.17.0
+	Mon, 08 Oct 2018 14:21:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=geontech-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=7ycpRDzGptnRpdhwWwAFaZYQ/wYFQI/yIDbbi/K4geM=;
+	b=jN6tyaXc+ef7wvqrypDrCnD/qZj3KTRvitClnIhGKLQaeZPj4Ed7aX2T5V+CurhIAP
+	EtRnRQSbhfjC4bkZdQM1opkQVWvxdwsZHlW24C10vmYaEBpmFVssYxuyfo3CvxsH3rBg
+	AOOWxza2rkxuyerUItHRJhGC0e8HegBMWzvYvu5R23qQcABICDtJx7K2DnqyGkMM0TPG
+	fNL2emk90NunOzPeS1uTiqmxJp6n0x0fO33xtuFpt/vWdDyv3BvOF9KsNP1h/n9xon0B
+	Cx3MNg66R4K994GbDsW93TI5VDAcFhAW4LNj03FQ76OLOnUxXuWz/Yt3zgmMoSAjQXTT
+	cRvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=7ycpRDzGptnRpdhwWwAFaZYQ/wYFQI/yIDbbi/K4geM=;
+	b=jv5ZbAJPOV2qhw3R2Y4teuVTJTp1AkefVNfGK1wX6jzEU1DjHI/zcv6sxf1pFMCDwy
+	t2Cve0H1f9XxHGhcej+59EKRkkSq4Wbz8VVhIWkb0UUAiiyTJGaTQDn7aPlWbiNB7XGO
+	g+Zztoyw1fuI3+eFDf+KYM4s3KXF8SeMnjJKzApgM49HD/TRdiDA54WnxIzA8cLHSAlR
+	p+oqbOHhOOIkmtbARomD3iW+yLJVG0yPq3L6GI2VapdurMuZhX7tsbIWSTch2mThubu4
+	TO7/B5WC/yeMmSQ8RCAvUkPceec/HNDHE/BLIsxdmc3noP1WGx+aeQdcS1o6IdTvOQdx
+	ei3Q==
+X-Gm-Message-State: ABuFfogiX+JP4WkYb91kumb6TchobXlGZcJpxnHUfE7cSgvYod8Oerg4
+	RoYVMZRG9/ngqhffa+L9am1JSH9MvjjWwH/yKNIkOZ5XS2A=
+X-Google-Smtp-Source: ACcGV63EdM2IV2yVyOBHT2Ag9IGNoOTUz0Ap7wzUHhll6FuVJxdvr4ETbz9lQRvf1HdarA71QeboiEr4VN+96gWOs4k=
+X-Received: by 2002:ac8:3236:: with SMTP id
+	x51-v6mr20687895qta.275.1539033719141; 
+	Mon, 08 Oct 2018 14:21:59 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] postfix: update to 3.3.1
+From: Thomas Goodwin <btgoodwin@geontech.com>
+Date: Mon, 8 Oct 2018 16:21:48 -0500
+Message-ID: <CABudRdzubOL9HwpnYNBDzybRkJj-EUeHMni26oWzErqJysjF4w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [sumo, rocko, pyro, morty] xerces-c, change of SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,90 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 17:50:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Oct 2018 21:21:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The patch:
-   0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
-has ben integrated upstream.
+The URI for this recipe is to a server that seems to only maintain the most
+recent version of the source tarball (currently 3.2.x vs. recipe version
+3.1.4):
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- ...before-setting-CANT_USE_SEND_RECV_MS.patch | 26 -------------------
- .../recipes-daemons/postfix/postfix_3.2.6.bb  | 11 --------
- .../recipes-daemons/postfix/postfix_3.3.1.bb  | 11 ++++++++
- 3 files changed, 11 insertions(+), 37 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
- delete mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
- create mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
+http://apache.lauf-forum.at/xerces/c/3/sources/
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch b/meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
-deleted file mode 100644
-index 6b86e3925..000000000
---- a/meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 63619acf25151d4dade6d65732722ec4a710a5ac Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 15 Jul 2017 09:54:25 -0700
--Subject: [PATCH] Check for glibc before setting CANT_USE_SEND_RECV_MSG
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/util/sys_defs.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/util/sys_defs.h b/src/util/sys_defs.h
--index f720e2a..7314c63 100644
----- a/src/util/sys_defs.h
--+++ b/src/util/sys_defs.h
--@@ -813,7 +813,7 @@ extern int initgroups(const char *, int);
-- #define KERNEL_VERSION(a,b,c) (LINUX_VERSION_CODE + 1)
-- #endif
-- #if (LINUX_VERSION_CODE < KERNEL_VERSION(2,2,0)) \
---	|| (__GLIBC__ < 2)
--+	|| (defined(__GLIBC__) && (__GLIBC__ < 2))
-- #define CANT_USE_SEND_RECV_MSG
-- #define DEF_SMTP_CACHE_DEMAND	0
-- #else
---- 
--2.13.3
--
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb b/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
-deleted file mode 100644
-index 12144671b..000000000
---- a/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require postfix.inc
--
--SRC_URI += "file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch \
--            file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
--            file://postfix-install.patch \
--            file://icu-config.patch \
--           "
--SRC_URI[md5sum] = "d10f1fb551be86f6e48c2908dd8a12ff"
--SRC_URI[sha256sum] = "1df036380bae7c356bfa8989a87de58033b6aaa09b3bafcfa36c3694dd449039"
--
--UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
-new file mode 100644
-index 000000000..7f00c3c19
---- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
-@@ -0,0 +1,11 @@
-+require postfix.inc
-+
-+SRC_URI += "file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
-+            file://postfix-install.patch \
-+            file://icu-config.patch \
-+           "
-+
-+SRC_URI[md5sum] = "4381c6492f415e4a69cf5099d4acea76"
-+SRC_URI[sha256sum] = "54f514dae42b5275cb4bc9c69283f16c06200b71813d0bb696568c4ba7ae7e3b"
-+
-+UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
--- 
-2.17.0
 
+The server listed in APACHE_MIRROR does contain the correct sources (
+https://archive.apache.org), so:
+
+
+SRC_URI = "${APACHE_MIRROR}/dist/xerces/c/3/sources/${BP}.tar.bz2"
+SRC_URI[md5sum] = "d04ae9d8b2dee2157c6db95fa908abfd"
+SRC_URI[sha256sum] =
+"9408f12c1628ecf80730bedbe8b2caad810edd01bb4c66f77b60c873e8cc6891"
+
+
+Note, the MD5 and SHA256 are correct for each of the impacted branches of
+meta-openembedded; they're listed here for completeness.
+
+Regards,
+
+Thomas
 
