@@ -1,47 +1,29 @@
-Return-Path: <yisooan@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 69834606B2
+Return-Path: <stefan.wiehler@missinglinkelectronics.com>
+Received: from smtp.missinglinkelectronics.com
+	(smtp.missinglinkelectronics.com [94.130.14.54])
+	by mail.openembedded.org (Postfix) with ESMTP id D438476068
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 06:34:15 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id l81-v6so2794977pfg.3
+	Mon,  8 Oct 2018 08:18:47 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTP id A83CDE0184
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Oct 2018 23:34:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=RV3wYKITFuLykY4jJ4x3uKqJnDZVjC81+GzNp2ZbMV0=;
-	b=UREFk9YPM0YL1bjSqo/GdJ5qSpoisuqqjH2UaZg71QqDHO2e4VyHodxvnKRFWt2TFy
-	oLnZ4oMScJmakA9rAi9fXmsJ09S8ZeZgB/Hl+p3GQmrxoMnbH5D7jrcLLxUyK8gJ2daS
-	Sm77Gqr3JH+MGNWvNG9oCOW+D6yWVaWrJg50N+fo82cH8hMaTWE7UVpxcjiXv9u8ntFS
-	HcSdT/a6LPsD3sqdWtU0OkiuYiHpgxQJCgJSD61V0OCQ/XPlKR++RH4FuCMezZ3ldDTJ
-	7kWk0kBvkPWlVjFVUq6zr6Yn8GDkt++VyiJalQYBwF4j2J5sryXZtwPszsiSAR5SCp0z
-	CqiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RV3wYKITFuLykY4jJ4x3uKqJnDZVjC81+GzNp2ZbMV0=;
-	b=p4CeGZ47heXy/RNRQnS4U3DOnaBANiZnaUbrujqQNO0ha8u9CNB1xC9tOivWkLilW7
-	ba/DFzGKb0eaZ+vpBF6P8xxx33As1SwEWFmQqEQKZ8ayB0nEuGp9I8f51JbYEqk0IXC0
-	4ata+N2UKN5l0JpNkHoUSlBVXb55M/C/Ym6EcrMIqeEEAgwsIsI+qbJc/nReqYcqip8M
-	Om/Ot2gXE8brZn1FF7rIC/XMfA9emYKSke19GdAAgH/0bhOX8K9ggYWWRRe2ZoXVnF/Y
-	rcZNGjYUFrTJRMPnPFVwEVQXC0gR7FGyhL/+3aNtnMyc8U1DOwb0/sZYxJvu2yRs6xTd
-	KQug==
-X-Gm-Message-State: ABuFfogT+dM6H6CEv9svfjJzHwegzVbc17cvgXL/D9YL4cXd1e+HBFWP
-	SDdgtmMjpalQ0lIoZiC5D6b9XZnD
-X-Google-Smtp-Source: ACcGV63YcRdRTK376StTBL4oiueHiCTu75jcXHgjPr6SCw3XRKIrWIkH9X9hw+rUKjbKK1+eXbQuMg==
-X-Received: by 2002:a63:b08:: with SMTP id 8-v6mr19708291pgl.130.1538980455921;
-	Sun, 07 Oct 2018 23:34:15 -0700 (PDT)
-Received: from localhost.net ([168.188.236.44])
-	by smtp.gmail.com with ESMTPSA id
-	l83-v6sm39516942pfi.172.2018.10.07.23.34.14
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 07 Oct 2018 23:34:15 -0700 (PDT)
-From: Yi-Soo An <yisooan@gmail.com>
+	Mon,  8 Oct 2018 10:18:48 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at missinglinkelectronics.com
+Received: from smtp.missinglinkelectronics.com ([127.0.0.1])
+	by localhost (mail.missinglinkelectronics.com [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 6p08gERoAgxp; Mon,  8 Oct 2018 10:18:48 +0200 (CEST)
+Received: from napf-xenial1.mle (p578c5bfe.dip0.t-ipconnect.de [87.140.91.254])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested) (Authenticated sender: stefan)
+	by smtp.missinglinkelectronics.com (Postfix) with ESMTPSA id 593F0E010D;
+	Mon,  8 Oct 2018 10:18:48 +0200 (CEST)
+From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Oct 2018 15:34:05 +0900
-Message-Id: <20181008063405.5107-1-yisooan@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][sumo, rocko, pyro, morty][PATCH] libconfig: fix SRC_URI
+Date: Mon,  8 Oct 2018 10:18:37 +0200
+Message-Id: <1538986717-13998-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] nvme-cli: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +36,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 06:34:15 -0000
+X-List-Received-Date: Mon, 08 Oct 2018 08:18:48 -0000
 
-hyperrealm has moved to github and it is maintained there.
-The current SRC_URI is not available any longer.
+NVMe management command line interface.
 
-Signed-off-by: Yi-Soo An <yisooan@gmail.com>
+Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
 ---
- meta-oe/recipes-extended/libconfig/libconfig_1.5.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
 
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-index fb6e50e51..a8adebd4b 100644
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-+++ b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
-@@ -1,14 +1,14 @@
- SUMMARY = "C/C++ Configuration File Library"
- DESCRIPTION = "Library for manipulating structured configuration files"
--HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
-+HOMEPAGE = "https://hyperrealm.github.io/libconfig"
- SECTION = "libs"
- 
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
- 
--SRC_URI = "http://www.hyperrealm.com/${BPN}/${BP}.tar.gz"
-+SRC_URI = "git://github.com/hyperrealm/libconfig.git;protocol=git"
-+SRCREV = "f9f23d7a95608936ea7d839731dbd56f1667b7ed"
- 
--inherit autotools-brokensep pkgconfig
+diff --git a/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+new file mode 100644
+index 0000000..68c73ca
+--- /dev/null
++++ b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "NVMe management command line interface"
++AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
++HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
++DEPENDS = "util-linux"
++PV .= "+git${SRCPV}"
++
++SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
++SRCREV = "642d426faf8a67ed01e90f7c35c0d967f8cc52a3"
++
 +S = "${WORKDIR}/git"
- 
--SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
--SRC_URI[sha256sum] = "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
-+inherit autotools-brokensep pkgconfig
++
++do_install() {
++    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
++}
++
++FILES_${PN} += "${datadir}/bash_completion.d"
 -- 
-2.17.1
+2.7.4
 
 
