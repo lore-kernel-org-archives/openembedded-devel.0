@@ -1,51 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 82AD278493
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 8620D79017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 04:47:50 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id s4-v6so9470093plp.0
+	Mon,  8 Oct 2018 04:50:49 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id k19-v6so7770560pfi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Oct 2018 21:47:51 -0700 (PDT)
+	Sun, 07 Oct 2018 21:50:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=DgRnC/udKHFE8zv65unWzjoaUsJnxPd5YM2hA/lmvms=;
-	b=sB2DDoXZXHHN890q3Of7YfPMbjiQsPjqJFPCTL5zNGZE67Wv2AC16gQk8VhyzL0Msf
-	zMksc1oROeHL/ETSWbL4G4kN7gpki26O27O5N6mUanLx7VE7pRr7L/kP8xxSDa58DHX3
-	0nF77OXdma9/Dy4rR0ZCZlCBRzLIY6e0GnjGXeyxACnliJgheH7mjjD1gKXAC98YUeAy
-	OCjzn9A9z1uRunh+EVRKVlpXitouDc1/SXOGNXROGKrff7XnW/VZIxCrTgVuy46PSRfL
-	RYp0Y14mAYD28gzHbJrUj00Zh7KBdLeZ+hqYF4UPMBSTBoIPksJzN/2Wc8c8T12BSBOm
-	uLng==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=YcGWyTT/1DY8g0QIDkEPhUV6f6BtTvbSMCPR2IGidfE=;
+	b=jewjkwATwMA3bCrDFzbGnG0eLEHbS7dsAaMOVRXbTPz4UK46BuMxtfeMSa+SFDeCne
+	YB6BlusAehPCfZbRd90TbXwql1XlJdX2N7kfE3r6DinbQQim6CjwnaTssEqaZCVrfuN7
+	JWGDI/LtcxuUO9BD8ZBzSunWUF2uebZp+g4YiLcfW29lygAOnBGzAFuVu1ia2+2cYBSh
+	m0J94rO0waUCTPNJW8Tucpd8MFOTjweJueugxvobqrvjwHhRoAeQN1tDBL4T9nNMQklV
+	NxJoWUa4ggFqT0RdItn093dUwQBUpJ59UlsrS0jQr9rBJwtQ8TYXeyXkFon/21/ueRT9
+	TNOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=DgRnC/udKHFE8zv65unWzjoaUsJnxPd5YM2hA/lmvms=;
-	b=iEClUcXMZ7hctEx6zXv1m7bN6rzwQN5RTANL9v9079A75Wy1hNH2MbfbqgyI45e+X2
-	O+6Lf6z2ScyUCKS6o8b9tA4MB5W4Xq8xhjXymZA1vqOblFmFdP+gzMgWfeoUNwJEFTcL
-	hB7X34C1UXsqz7xMCx3mnMMEDmsNsVMVTdbqTXofuCbYwoIUvG2fA3lkV+MFAPIXrewi
-	c19P+7jUC7TWT2OoXNYyGnW1YdzTiUZ+Ap9JY7UubQ1b6tI/vWTNdWuSUcqQXK98eKN7
-	qANFZ5QeHZE/1+IUNG5B+JApcu3yxKXSuBmpm2sIK9VLoY2PfviU2Rg6ahR+9QOCeoLB
-	P/MA==
-X-Gm-Message-State: ABuFfojPjhL8Wym00lMDB0vJ5AR7HjPNlPCLkHElvW5GNF8hqlCNV0rp
-	lw+kdhgxxraqUNCC88MU3TDUcXAz
-X-Google-Smtp-Source: ACcGV63KoJPQCqM1+BfgwBmrBnbAytbzdVUeHVw9u1bFV68RONoFy7wpwWsl8SrQpHw2WHmfG31/fg==
-X-Received: by 2002:a17:902:4d45:: with SMTP id
-	o5-v6mr21770751plh.42.1538974071100; 
-	Sun, 07 Oct 2018 21:47:51 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:877f:9499::fd07])
-	by smtp.gmail.com with ESMTPSA id
-	t11-v6sm21356729pgn.38.2018.10.07.21.47.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 07 Oct 2018 21:47:50 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  7 Oct 2018 21:47:41 -0700
-Message-Id: <20181008044741.37650-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.19.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=YcGWyTT/1DY8g0QIDkEPhUV6f6BtTvbSMCPR2IGidfE=;
+	b=LXwDE5IugY348FURby0TqBj0KvXMrGwF6M7QP14BsW0JCU9xZvXDkAuL+tWnHr+Pnz
+	FnJ15mtvxBpvQvg2TW5+YzsWxrcYwjvWwKSduJIUxnOeF/3+Rdp3FIVkHLNnVGjlpjIS
+	ICWAVJ6qkPpYBSstHDdRYS4cxm0zbI3E8uzFq5Fop7KKy9UcLm9rddXowXX6bgnwRj3i
+	YGIisZfMh6QcBK5JpbdWrQ3lN7YW7ZpIYc/frYLk0HRKoUh8hLg4t5jJeqRC8Vjv4teD
+	sEvkwpvncmbKJjfPZ4uD2dk82T9fspUALwafhyxyZC/NMNTJLl+TqYmh+2Vfm8kzjQUH
+	E9bQ==
+X-Gm-Message-State: ABuFfoiTlSHcEzR/J1bOFpxUT3ylZd7+nje6NXw8zY9dQoFhvMc44RMe
+	l8VhNOWXayFF3eljz/GFze7ScjrGtl5RkeJxG9I=
+X-Google-Smtp-Source: ACcGV63LNa0WCiIRAI+nF4RHE2+hTssaFws5nhztxMPJI04YqkV7qLC1vX01vtposJDiqrSBFq8ECaSfEu7u41FB9DQ=
+X-Received: by 2002:a62:b09:: with SMTP id t9-v6mr23560964pfi.36.1538974250477;
+	Sun, 07 Oct 2018 21:50:50 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] umip: fix recipe location typo
+References: <1538815194-5528-1-git-send-email-ankit.tarot@gmail.com>
+	<CAMKF1so2RTBJFS566+VNDMC8276Vd6DSUfMrKh1TPMrhmUsX=w@mail.gmail.com>
+In-Reply-To: <CAMKF1so2RTBJFS566+VNDMC8276Vd6DSUfMrKh1TPMrhmUsX=w@mail.gmail.com>
+From: Ankit Navik <ankit.tarot@gmail.com>
+Date: Mon, 8 Oct 2018 10:20:39 +0530
+Message-ID: <CAM_RqkMAuKozLEZ0KzUTuKQgzb-7VyHaXOeB8fNg0cjn7Ms1Tw@mail.gmail.com>
+To: raj.khem@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] opencl-icd-loader: Initial recipe for OpenCL ICD loader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,84 +54,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 04:47:50 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 08 Oct 2018 04:50:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Hongxu Jia <hongxu.jia@windriver.com>
+Hi Raj,
+On Mon, Oct 8, 2018 at 8:02 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Sat, Oct 6, 2018 at 1:43 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
+> >
+> > This patch provides ICD loader library and ICD loader test binary
+> > and some helper library for test.
+> >
+> > Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> > ---
+> >  .../opencl-icd-loader/opencl-icd-loader_git.bb     | 47 ++++++++++++++++++++++
+> >  1 file changed, 47 insertions(+)
+> >  create mode 100644 meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+> >
+> > diff --git a/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+> > new file mode 100644
+> > index 0000000..f6a8fef
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+> > @@ -0,0 +1,47 @@
+> > +SUMMARY  = "OpenCL ICD Loader"
+> > +DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
+> > +LICENSE  = "CLOSED"
+>
+> this seems to be problematic, usually khronos s/w is under a known open
+> source license if its closed source then I would not like to maintain
+> it in open OE layers.
+> if its wrongly marked at closed please fix it in v2.
 
-Since `36983fe umip: move to meta-networking' applied,
-it was moved to invalid location.
+I have tried putting Khronos, but it was throwing QA error for license.
+Is there any LICENSE type or procedure to keep custom license?
+>
+> > +LIC_FILES_CHKSUM = "file://icd.h;beginline=1;endline=36;md5=c406ef72ec08f23326801455d7713b07"
+> > +SECTION = "base"
+> > +
+> > +inherit pkgconfig cmake
+> > +
+> > +S = "${WORKDIR}/git"
+> > +SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
+> > +SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
+> > +
+> > +do_install () {
+> > +       install -d ${D}${bindir}
+> > +       install -m 0755 ${S}/../build/bin/icd_loader_test ${D}${bindir}/
+>
+> could be use ${B} here
 
-Fix prior partial move to meta-networking
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../umip/umip}/0001-Add-format-string-to-fprintf-call.patch     | 0
- ...01-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch | 0
- .../umip/umip}/0001-support-openssl-1.1.x.patch                 | 0
- ...2-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch | 0
- .../umip}/add-dependency-to-support-parallel-compilation.patch  | 0
- .../recipes-connectivity/umip/umip}/mip6d                       | 0
- .../recipes-connectivity/umip/umip}/mip6d.service               | 0
- meta-networking/recipes-connectivity/{ => umip}/umip_1.0.bb     | 0
- meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb                | 2 +-
- 9 files changed, 1 insertion(+), 1 deletion(-)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/0001-Add-format-string-to-fprintf-call.patch (100%)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch (100%)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/0001-support-openssl-1.1.x.patch (100%)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch (100%)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/add-dependency-to-support-parallel-compilation.patch (100%)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/mip6d (100%)
- rename {meta-oe/recipes-connectivity/umip/files => meta-networking/recipes-connectivity/umip/umip}/mip6d.service (100%)
- rename meta-networking/recipes-connectivity/{ => umip}/umip_1.0.bb (100%)
-
-diff --git a/meta-oe/recipes-connectivity/umip/files/0001-Add-format-string-to-fprintf-call.patch b/meta-networking/recipes-connectivity/umip/umip/0001-Add-format-string-to-fprintf-call.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/0001-Add-format-string-to-fprintf-call.patch
-rename to meta-networking/recipes-connectivity/umip/umip/0001-Add-format-string-to-fprintf-call.patch
-diff --git a/meta-oe/recipes-connectivity/umip/files/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch b/meta-networking/recipes-connectivity/umip/umip/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch
-rename to meta-networking/recipes-connectivity/umip/umip/0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch
-diff --git a/meta-oe/recipes-connectivity/umip/files/0001-support-openssl-1.1.x.patch b/meta-networking/recipes-connectivity/umip/umip/0001-support-openssl-1.1.x.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/0001-support-openssl-1.1.x.patch
-rename to meta-networking/recipes-connectivity/umip/umip/0001-support-openssl-1.1.x.patch
-diff --git a/meta-oe/recipes-connectivity/umip/files/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch b/meta-networking/recipes-connectivity/umip/umip/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch
-rename to meta-networking/recipes-connectivity/umip/umip/0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch
-diff --git a/meta-oe/recipes-connectivity/umip/files/add-dependency-to-support-parallel-compilation.patch b/meta-networking/recipes-connectivity/umip/umip/add-dependency-to-support-parallel-compilation.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/add-dependency-to-support-parallel-compilation.patch
-rename to meta-networking/recipes-connectivity/umip/umip/add-dependency-to-support-parallel-compilation.patch
-diff --git a/meta-oe/recipes-connectivity/umip/files/mip6d b/meta-networking/recipes-connectivity/umip/umip/mip6d
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/mip6d
-rename to meta-networking/recipes-connectivity/umip/umip/mip6d
-diff --git a/meta-oe/recipes-connectivity/umip/files/mip6d.service b/meta-networking/recipes-connectivity/umip/umip/mip6d.service
-similarity index 100%
-rename from meta-oe/recipes-connectivity/umip/files/mip6d.service
-rename to meta-networking/recipes-connectivity/umip/umip/mip6d.service
-diff --git a/meta-networking/recipes-connectivity/umip_1.0.bb b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
-similarity index 100%
-rename from meta-networking/recipes-connectivity/umip_1.0.bb
-rename to meta-networking/recipes-connectivity/umip/umip_1.0.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
-index e3b46bc2c8..d0645007c5 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
-@@ -44,7 +44,7 @@ do_configure () {
-     export LD="${CXX}"
-     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
-     # $TARGET_ARCH settings don't match --dest-cpu settings
--   ./configure --prefix=${prefix} --without-intl --without-snapshot --shared-openssl --shared-zlib \
-+   ./configure --prefix=${prefix} --with-intl=small-icu --without-snapshot --shared-openssl --shared-zlib \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
-                --dest-os=linux \
-                ${ARCHFLAGS}
--- 
-2.19.1
-
+Will incorporate in v2.
+>
+> > +       chrpath -d ${D}${bindir}/icd_loader_test
+> > +       install -d ${D}${libdir}
+> > +       install -m 0644 ${S}/../build/lib/libIcdLog.so ${D}${libdir}/
+> > +       install -m 0644 ${S}/../build/lib/libOpenCLDriverStub.so ${D}${libdir}/
+> > +       chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
+> > +       install -m 0644 ${S}/../build/lib/libOpenCL.so.1.2 ${D}${libdir}/
+>
+> same here.
+Will incorporate in v2.
+>
+> > +       cd ${D}${libdir}
+> > +       ln -s libOpenCL.so.1.2 libOpenCL.so.1
+> > +       ln -s libOpenCL.so.1 libOpenCL.so
+> > +}
+> > +
+> > +PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
+> > +PACKAGES += "libicdlog libicdlog-dbg"
+> > +
+> > +FILES_${PN} = " \
+> > +       ${bindir}/icd_loader_test \
+> > +       ${libdir}/libOpenCLDriverStub.so \
+> > +       ${libdir}/libOpenCL.so.1.2 \
+> > +"
+> > +FILES_${PN}-dev = " \
+> > +       ${libdir}/libOpenCL.so \
+> > +       ${libdir}/libOpenCL.so.1 \
+> > +"
+> > +
+> > +FILES_libicdlog = "${libdir}/libIcdLog.so"
+> > +FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so \
+> > +       /usr/src/debug/opencl-icd-loader/git-${PR}/git/test \
+> > +       /usr/src/debug/opencl-icd-loader/git-${PR}/git \
+> > +"
+>
+> Please use bitbake variables instead of hardcoding /usr
+Will incorporate in v2.
+>
+> > +
+> > +DEPENDS = "opencl-headers"
+> > +RDEPENDS_${PN} = "opencl-headers libicdlog"
+>
+> rdep on a headers package seems wrong  here.
+Will incorporate in v2.
+>
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
