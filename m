@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 61F6D78493
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3368278890
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 02:32:25 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id g20-v6so11221288qke.9
+	Mon,  8 Oct 2018 02:44:46 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id e22-v6so12473154qto.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Oct 2018 19:32:26 -0700 (PDT)
+	Sun, 07 Oct 2018 19:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=amM4aSNslybV3jJUA9K085saRVBhVRVcV/4spECe2Js=;
-	b=cualvj6DJoy53ndTgVB0emNcZTLhLnxN52x566pfeKmEMD2OhTFWNLBpaOA5p6OZX6
-	QPnF+UAm19CAVihIgo74WSJKFQQPfr8bnq5jlqxRTe3gBiW9Jc30XNW9cmgpsOP9QRx0
-	GXbose+p8LzfeRYPaAsWxGIHD0j4I2o5iX/Merz1qPPcP6rfu/Kx7zh3rcfYpFYa+dnT
-	fRPWQNJOTV4qVmc8xoNY0gzvOmXXGtnwWMEMoPO7N8rmMwth3Lr5wH8QnVw+ZycEvXMu
-	6kJOttY7pg9fLLyhD5+EDKy9hoavK0VBLEFYFipBBJ9eYNfkIQjaLqYeKwEtkkaNUVkO
-	lr+w==
+	:cc; bh=MLrpkEUJE+hHR+accFNARhK+rc4M0DZrTdgDZwcUhZE=;
+	b=k40HhAkVxFQTq/47A/it8X/XKbjwIP65RFdVckykuNXO5TKAwSFB0M8rLIj/pPYJtv
+	Ko53VJaFxzq+CrSODRWRNo8r2sn0Smi3fZnPQ4CTQ2H9Q5RfvdGOXMLVIuSR9LnLRg5J
+	cBon6gIwTE+UleQs6le84mFuflNkBBeRjq1Hvagt9fUcf/tCM8mcWSEq7siiywe2Hrsa
+	w5dgxk5xew3CWdumZSl4ttQLf1sbkiJEYc6NKI0W2VYQf4N0RWutQ4fjIFlyDkFXQrV1
+	3F++aAgi14ObzooMAGo1gCLG66EAtSAgqez6VfB2v7OVZPlVauO/wltkJfglekKV/7ar
+	0orw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=amM4aSNslybV3jJUA9K085saRVBhVRVcV/4spECe2Js=;
-	b=b4h3MQHfsHsuszol7j5+BhIMxVlNTriC2HxFGpG1p/T7OG8x6NJsyNj/baWUN0o5u3
-	qfKeB1YgHsesqKeezoITqiN0DCX+bEBfw5+3EFym5andl/jDKcBDqmc+5r0S7qrfqUIW
-	PXXRPPnYy+mSf7OojAyC0hMNbAW/eOouGbDeyNRGLr6G8TMd13r8u3pu06+33jCXMek4
-	nIhzPu+gVvLVQ9VooWktM4urI0eOMzEJItC1wJE24hMDy4WjzUAdKQsixQxKULp9rcsA
-	vFpO7QgdDFcMltIxjtatGyT3nUMovt73yi26DtVQ02asijwpB+5iznpDrX6MEcBXL36M
-	+kjw==
-X-Gm-Message-State: ABuFfogpRkG5N2JJBkIal3BijK4nmu6bflwNkezYQQaCraafdXjIr/f7
-	A/jFGcsFYOSrfq/Xgn8jqM4COjk4PyO/EynXI3I=
-X-Google-Smtp-Source: ACcGV60fhBus8uKCaXAnZE96wswWJP++/p6/+N2xAUlBkO0Ih1h8xuOH/8oksFu0H3my4q5/KKg5c1F2mnrlM8Yrv34=
-X-Received: by 2002:a37:655:: with SMTP id
-	82-v6mr16760567qkg.223.1538965945877; 
-	Sun, 07 Oct 2018 19:32:25 -0700 (PDT)
+	bh=MLrpkEUJE+hHR+accFNARhK+rc4M0DZrTdgDZwcUhZE=;
+	b=bxX3GN2KrFMnn0eIIRD848gScjtiVZykgB3qgennhYmt2T7gXOVaYuSjTAXEW09ms2
+	RxuTYhTCLC57vZb6XLKioxz8qH92i9Aa0PayVe4zH6A6FLhwL+xBCcUhP2MAza254iNn
+	6X6W1TmGqHYhDJH8jlsaZ9MOpp4eQmwWU5FZFpImDxN2HHXOC/cc4p6ILLUTI9085XJf
+	zVOVj0ammKbMIwVQaDZKHuAFjuQxp5QB7cSn9jaouv8aT3CnC9hMnKsvilHaKVN17uh3
+	+ssUpGQPx5z3gYiBwY5aR6bL3weA6A3z0o09gdQhDa/5/4rcFmDDFSatUang1eDXRBMw
+	F55g==
+X-Gm-Message-State: ABuFfojKDAITcL0evMB2GCADxZ7lB3coSufcHwxCz5ttL44yxFVaZ6mp
+	Wq91vXzZxPCOj3iUzt0PnJdewDKu9rXdCg8MSPg=
+X-Google-Smtp-Source: ACcGV62i7RKhdh31ysUAHPW+QxMatjIUIutmOimujdwDkQ7qZdRV9DMgUiJoxcNboRSokjG3snCmpCAtIQ72i1HWkZA=
+X-Received: by 2002:a0c:9c42:: with SMTP id
+	w2-v6mr17610723qve.194.1538966686974; 
+	Sun, 07 Oct 2018 19:44:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <1538815194-5528-1-git-send-email-ankit.tarot@gmail.com>
-In-Reply-To: <1538815194-5528-1-git-send-email-ankit.tarot@gmail.com>
+References: <20181008021256.23106-1-hongxu.jia@windriver.com>
+In-Reply-To: <20181008021256.23106-1-hongxu.jia@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 7 Oct 2018 19:31:59 -0700
-Message-ID: <CAMKF1so2RTBJFS566+VNDMC8276Vd6DSUfMrKh1TPMrhmUsX=w@mail.gmail.com>
-To: ankit.tarot@gmail.com
+Date: Sun, 7 Oct 2018 19:44:20 -0700
+Message-ID: <CAMKF1sp=5xtm35NK5OyxU27=eggnKEGbfumYuyxM4DuNH63H3Q@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] opencl-icd-loader: Initial recipe for OpenCL ICD loader
+Subject: Re: [meta-networking][PATCH] umip: fix recipe location typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,97 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 02:32:25 -0000
+X-List-Received-Date: Mon, 08 Oct 2018 02:44:46 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Oct 6, 2018 at 1:43 AM Ankit Navik <ankit.tarot@gmail.com> wrote:
+ERROR: umip-1.0-r0 do_fetch: Fetcher failure for URL:
+'file://add-dependency-to-support-parallel-compilation.patch'. Unable
+to fetch URL from any source.
+On Sun, Oct 7, 2018 at 7:13 PM Hongxu Jia <hongxu.jia@windriver.com> wrote:
 >
-> This patch provides ICD loader library and ICD loader test binary
-> and some helper library for test.
+> Since `36983fe umip: move to meta-networking' applied,
+> it was moved to invalid location.
 >
-> Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 > ---
->  .../opencl-icd-loader/opencl-icd-loader_git.bb     | 47 ++++++++++++++++++++++
->  1 file changed, 47 insertions(+)
->  create mode 100644 meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
+>  meta-networking/recipes-connectivity/{ => umip}/umip_1.0.bb | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-networking/recipes-connectivity/{ => umip}/umip_1.0.bb (100%)
 >
-> diff --git a/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
-> new file mode 100644
-> index 0000000..f6a8fef
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/opencl-icd-loader/opencl-icd-loader_git.bb
-> @@ -0,0 +1,47 @@
-> +SUMMARY  = "OpenCL ICD Loader"
-> +DESCRIPTION = "OpenCL compute ICD Loader from Khronos Group"
-> +LICENSE  = "CLOSED"
-
-this seems to be problematic, usually khronos s/w is under a known open
-source license if its closed source then I would not like to maintain
-it in open OE layers.
-if its wrongly marked at closed please fix it in v2.
-
-> +LIC_FILES_CHKSUM = "file://icd.h;beginline=1;endline=36;md5=c406ef72ec08f23326801455d7713b07"
-> +SECTION = "base"
-> +
-> +inherit pkgconfig cmake
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "b342ff7b7f70a4b3f2cfc53215af8fa20adc3d86"
-> +SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git"
-> +
-> +do_install () {
-> +       install -d ${D}${bindir}
-> +       install -m 0755 ${S}/../build/bin/icd_loader_test ${D}${bindir}/
-
-could be use ${B} here
-
-> +       chrpath -d ${D}${bindir}/icd_loader_test
-> +       install -d ${D}${libdir}
-> +       install -m 0644 ${S}/../build/lib/libIcdLog.so ${D}${libdir}/
-> +       install -m 0644 ${S}/../build/lib/libOpenCLDriverStub.so ${D}${libdir}/
-> +       chrpath -d ${D}${libdir}/libOpenCLDriverStub.so
-> +       install -m 0644 ${S}/../build/lib/libOpenCL.so.1.2 ${D}${libdir}/
-
-same here.
-
-> +       cd ${D}${libdir}
-> +       ln -s libOpenCL.so.1.2 libOpenCL.so.1
-> +       ln -s libOpenCL.so.1 libOpenCL.so
-> +}
-> +
-> +PACKAGES = "opencl-icd-loader opencl-icd-loader-dev"
-> +PACKAGES += "libicdlog libicdlog-dbg"
-> +
-> +FILES_${PN} = " \
-> +       ${bindir}/icd_loader_test \
-> +       ${libdir}/libOpenCLDriverStub.so \
-> +       ${libdir}/libOpenCL.so.1.2 \
-> +"
-> +FILES_${PN}-dev = " \
-> +       ${libdir}/libOpenCL.so \
-> +       ${libdir}/libOpenCL.so.1 \
-> +"
-> +
-> +FILES_libicdlog = "${libdir}/libIcdLog.so"
-> +FILES_libicdlog-dbg = "${libdir}/.debug/libIcdLog.so \
-> +       /usr/src/debug/opencl-icd-loader/git-${PR}/git/test \
-> +       /usr/src/debug/opencl-icd-loader/git-${PR}/git \
-> +"
-
-Please use bitbake variables instead of hardcoding /usr
-
-> +
-> +DEPENDS = "opencl-headers"
-> +RDEPENDS_${PN} = "opencl-headers libicdlog"
-
-rdep on a headers package seems wrong  here.
-
+> diff --git a/meta-networking/recipes-connectivity/umip_1.0.bb b/meta-networking/recipes-connectivity/umip/umip_1.0.bb
+> similarity index 100%
+> rename from meta-networking/recipes-connectivity/umip_1.0.bb
+> rename to meta-networking/recipes-connectivity/umip/umip_1.0.bb
 > --
-> 1.9.1
+> 2.10.2
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
