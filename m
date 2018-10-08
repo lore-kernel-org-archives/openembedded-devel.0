@@ -1,50 +1,23 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
-	[209.85.215.173])
-	by mail.openembedded.org (Postfix) with ESMTP id F373C799CC
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 95DEC795E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 17:32:28 +0000 (UTC)
-Received: by mail-pg1-f173.google.com with SMTP id v133-v6so8153920pgb.2
+	Mon,  8 Oct 2018 17:50:50 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w98HopUL020124
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2018 10:32:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=DG0SMeFbmufqlh63x+vR+6d/SUYwYprxteStitkJDFI=;
-	b=tIYKRaFaiQmvj1Rk7rAdm3cYUZAhDhTIZ2nKnIWKsDRmbbyhZmAr8EbrHdr8qebbq6
-	BxDY+9YDwXMBF43Guz4m8brDtjbXkZ6JxBxzacQp9sLAbnLXEyzOh9SD/kk//0IhlvTF
-	Jd0RzhnJ23kGUlFIRbn6kDSjH7f++MnQQdzMKFayCLjKbKL1NnDxbvA5PIQzNb1TOVf4
-	2/Q4vvte6sA1m2y4GwywAbaeEdEbtNA/ACFrl3APENA+jLMEUd5XrUjpdaRrK2IAoHcS
-	cSJGK+2pspSwXRI8LmpL8I7OwtslLxE4SvW746dqcVxw7hqRx/EvE4wuOhlx9DqxfEqY
-	T1dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=DG0SMeFbmufqlh63x+vR+6d/SUYwYprxteStitkJDFI=;
-	b=M6PMXc9hQgCqGZsyC1lqhqyr9lR3r6mQDIZ+etk/yLyifosqTuqcLaoGxiIB/g9qN1
-	5sOaXbcPCWDPrQEe7oXEdP4qU+KIFvwP0qoJ9nsdnv6zcTyMSgSoYOxdt7nrd+1HqRH+
-	hc0vCBAKFHCJv3oR5yCkBbtROLWQW+RB/OscJug9zdx3tN5AFqbniiz5l5De5oVbvZ95
-	vE76Gg0SUfPmT9raN7q+Tt6KykiaRA+0bIqWnbpk8YidAwxFRkBzNLg7Jc9v7yPJyXh4
-	njg5fWvj3TiD2VHOWb7VFi+srWX+75DFG6wnOplVItd7Jdprfzbv33R1+1B/OSuPBQX5
-	UW4w==
-X-Gm-Message-State: ABuFfohPUSk1Cx4c/z1XxQHWLMMPu8XFBY3ab1knOPoWvvfogJ2SSF/z
-	5PD85rZQDZlrPRQ0e0ItKyc=
-X-Google-Smtp-Source: ACcGV60ryD7jNqJnVwfAyFqtg6oiUApd5Arugd7e17qWSJ0Z0QZxHGdFBYlawGfAGAtCQnMsBbEwKA==
-X-Received: by 2002:a63:7d43:: with SMTP id
-	m3-v6mr22096618pgn.341.1539019950116; 
-	Mon, 08 Oct 2018 10:32:30 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:c33:3c4e:eb69:ac14:ba02])
-	by smtp.gmail.com with ESMTPSA id
-	z15-v6sm22511254pfn.170.2018.10.08.10.32.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 08 Oct 2018 10:32:29 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Oct 2018 10:32:28 -0700
-Message-Id: <1539019948-25499-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] openvpn: enable sysvinit
+	Mon, 8 Oct 2018 10:50:51 -0700 (PDT)
+Received: from fidler.wrs.com (172.25.44.4) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.408.0;
+	Mon, 8 Oct 2018 10:50:51 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 8 Oct 2018 13:50:50 -0400
+Message-ID: <20181008175050.8926-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] postfix: update to 3.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +30,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 17:32:29 -0000
+X-List-Received-Date: Mon, 08 Oct 2018 17:50:50 -0000
+Content-Type: text/plain
 
-add INITSCRIPT
+The patch:
+   0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
+has ben integrated upstream.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ ...before-setting-CANT_USE_SEND_RECV_MS.patch | 26 -------------------
+ .../recipes-daemons/postfix/postfix_3.2.6.bb  | 11 --------
+ .../recipes-daemons/postfix/postfix_3.3.1.bb  | 11 ++++++++
+ 3 files changed, 11 insertions(+), 37 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
+ delete mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
+ create mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-index 4cad998..a839ab7 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e9b64491ec98eb6c6493ac5e4118f107"
- DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
--inherit autotools systemd
-+inherit autotools systemd update-rc.d
- 
- SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
-            file://openvpn \
-@@ -18,6 +18,10 @@ SRC_URI[sha256sum] = "1ae883d9522c9fa6d189e5e4aaa058a93edd3d0b897e3c2664107c4785
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
-+INITSCRIPT_PACKAGES = "${PN}"
-+INITSCRIPT_NAME_${PN} = "openvpn"
-+INITSCRIPT_PARAMS_${PN} = "start 10 2 3 4 5 . stop 70 0 1 6 ."
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch b/meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
+deleted file mode 100644
+index 6b86e3925..000000000
+--- a/meta-networking/recipes-daemons/postfix/files/0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 63619acf25151d4dade6d65732722ec4a710a5ac Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 15 Jul 2017 09:54:25 -0700
+-Subject: [PATCH] Check for glibc before setting CANT_USE_SEND_RECV_MSG
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/util/sys_defs.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/util/sys_defs.h b/src/util/sys_defs.h
+-index f720e2a..7314c63 100644
+---- a/src/util/sys_defs.h
+-+++ b/src/util/sys_defs.h
+-@@ -813,7 +813,7 @@ extern int initgroups(const char *, int);
+- #define KERNEL_VERSION(a,b,c) (LINUX_VERSION_CODE + 1)
+- #endif
+- #if (LINUX_VERSION_CODE < KERNEL_VERSION(2,2,0)) \
+--	|| (__GLIBC__ < 2)
+-+	|| (defined(__GLIBC__) && (__GLIBC__ < 2))
+- #define CANT_USE_SEND_RECV_MSG
+- #define DEF_SMTP_CACHE_DEMAND	0
+- #else
+--- 
+-2.13.3
+-
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb b/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
+deleted file mode 100644
+index 12144671b..000000000
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.2.6.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require postfix.inc
+-
+-SRC_URI += "file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch \
+-            file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
+-            file://postfix-install.patch \
+-            file://icu-config.patch \
+-           "
+-SRC_URI[md5sum] = "d10f1fb551be86f6e48c2908dd8a12ff"
+-SRC_URI[sha256sum] = "1df036380bae7c356bfa8989a87de58033b6aaa09b3bafcfa36c3694dd449039"
+-
+-UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb b/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
+new file mode 100644
+index 000000000..7f00c3c19
+--- /dev/null
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.3.1.bb
+@@ -0,0 +1,11 @@
++require postfix.inc
 +
- CFLAGS += "-fno-inline"
- 
- # I want openvpn to be able to read password from file (hrw)
++SRC_URI += "file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
++            file://postfix-install.patch \
++            file://icu-config.patch \
++           "
++
++SRC_URI[md5sum] = "4381c6492f415e4a69cf5099d4acea76"
++SRC_URI[sha256sum] = "54f514dae42b5275cb4bc9c69283f16c06200b71813d0bb696568c4ba7ae7e3b"
++
++UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
 -- 
-2.7.4
+2.17.0
 
 
