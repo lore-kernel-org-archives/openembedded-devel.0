@@ -1,28 +1,43 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C0367869E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 04:55:34 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	07 Oct 2018 21:55:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.54,355,1534834800"; d="scan'208";a="270362199"
-Received: from anmitta2-mobl1.png.intel.com (HELO [10.221.20.80])
-	([10.221.20.80])
-	by fmsmga006.fm.intel.com with ESMTP; 07 Oct 2018 21:54:37 -0700
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20181008044741.37650-1-raj.khem@gmail.com>
-From: Anuj Mittal <anuj.mittal@intel.com>
-Message-ID: <1634ed07-43f8-7f24-0cfa-9024d7a45a17@intel.com>
-Date: Mon, 8 Oct 2018 12:54:36 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id B6F4C7869E
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Oct 2018 04:56:02 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id v19-v6so19741549qtg.2
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Oct 2018 21:56:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=i0kF0ATYiQ9YpxTzX1I1BcBKYMJjf9c9O0gfCaKkCkQ=;
+	b=df+jpOlDKjqY/GXQP3CwQ9AgRtorH9uAxaAl3XYxau/HmpY9r7KswMspdGggscTyIl
+	/AgZ7G1fm+T8GdyPgtqfQ9s2uh1j9U5DLUh4NYg+E43mRs5dgCzeyFI5/onN04tnkC6m
+	PpQVMCJa5f+HIKtAa3m5a9CB/geqmHToSFq5hTlghn8udZWnfR8fzQE92Sv6PbBiiMhm
+	vGm0TEXihccY20X8eO1p6xA+66A1hOVEjJOONiasYYDhjGH3xfY6A1VzFWAcL7EIqBk6
+	Jl4x0XbT3i4fxVaFWfRspPtceJ37NfpRVajjQBoZk4AtPFaUNeKvr0Dkn/oRIZDoAvc+
+	xKeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=i0kF0ATYiQ9YpxTzX1I1BcBKYMJjf9c9O0gfCaKkCkQ=;
+	b=MZO4MzYdCpJXqpJnuamXsDWvg9ymIlHnZWbur+n6KErQ6HBGKnmMgpo5NzAP789Td3
+	crlJ3lrcuID3g40Tseyc2cd9FVwVfzxROeCRO5iAAZaKJXAWHdblkomMzhuluuq6M6ms
+	cIYIAbwGjsup5ApsAl3DwhSM74itHFO49BpPnFRyFve1P1i5VdkBwdnm5xQ61RXYlMau
+	t8Y1ox71ApX/Tcd+PhgezC7q7ih4B6h87DXoNhsemJEhkGR9is1QGqWrHxmiZDZ4BGkP
+	ebQZOpwhw7ALyD538Vyf4EyxoQTxBkbM0MxTDTHdZu4mtP2KFY18ShxSrQOrDCXCZBnj
+	QboA==
+X-Gm-Message-State: ABuFfojo0hMSctD19+bYsldTWDT0JrACY1+wZKHMyV+w0HtcFCLK7KZC
+	FhLg6dmheD6gbXClEC4UgJ244p53+E4Far3tdI1s3w==
+X-Google-Smtp-Source: ACcGV631V8KlJKoePWqiT15aeKiVD3ZLJxeMwrqHaoqAoM9v9U+MvTAsYssUHT0Gocfj+dmao4CRE5d74ly/Y0Madpg=
+X-Received: by 2002:a0c:d585:: with SMTP id
+	g5-v6mr18082262qvi.50.1538974563257; 
+	Sun, 07 Oct 2018 21:56:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20181008044741.37650-1-raj.khem@gmail.com>
-Subject: Re: [meta-networking][PATCH] umip: fix recipe location typo
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 7 Oct 2018 21:55:37 -0700
+Message-ID: <CAMKF1sr8XFvPcu-jU=hssJCEyBkP0GeZGYLT+F71ZMPD=Ve7Uw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: meta-openembedded thud release branching
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,26 +50,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 04:55:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Oct 2018 04:56:03 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 10/08/2018 12:47 PM, Khem Raj wrote:
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
-> index e3b46bc2c8..d0645007c5 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.12.0.bb
-> @@ -44,7 +44,7 @@ do_configure () {
->      export LD="${CXX}"
->      GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
->      # $TARGET_ARCH settings don't match --dest-cpu settings
-> -   ./configure --prefix=${prefix} --without-intl --without-snapshot --shared-openssl --shared-zlib \
-> +   ./configure --prefix=${prefix} --with-intl=small-icu --without-snapshot --shared-openssl --shared-zlib \
+Hi All,
 
-This hunk shouldn't have been part of this patch.
+I plan to branch out for thud really soon, and it will happen in sync
+with OE-Core, once branched
+I will maintain thud and master in sync until final GA release for
+thud and then release for more
+invasive changes.
 
-Thanks,
+At this time I am also looking for release branch maintainer for thud,
+so if you have interest and time, please sign up.
 
-Anuj
+If you have changes that you plan to include in thud, please send them
+as soon as you can, if the changes are invasive then we might have to
+wait until 2.7 development opens.
+
+All feedback is appreciated.
+
+Thanks
+-Khem
 
