@@ -1,47 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E39671A0C
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6695D71A0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Oct 2018 13:40:03 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id e22-v6so13873487qto.6
+	Mon,  8 Oct 2018 13:42:57 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id 23-v6so9674712qkh.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2018 06:40:05 -0700 (PDT)
+	Mon, 08 Oct 2018 06:42:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=RrUJDpXsDDPbRytIWcaWuvC4lpnAtN+OzDY/nY0znGw=;
-	b=m5Noqd28Y2OAducl35YSKd0ohJD9qedjzupIygYvdWjJO52Xq11RvaznLDXGezuMR6
-	ZkQPsmOZ+7kb6fs31+0hC2awIJ95/n+stK7p72Ylaa4ZuvyYK8yx+iUjWhD0skqEoe44
-	fohmhZy+8tS5G594fu9q/QwJR2b8goPUMuo7TMVfFSnlm1X0tqcWFTto46JA/bsA1ZLr
-	iuVW2bHAjrlrg9/r1BKWVJ+q3Xz54SD+2GT3+GkxiIZuuoBc3JW7Q6yOIXKt3viKi6N6
-	1XW5RCix880RiRZHF+RQQ7xFTXyWVYND3WhEjM9g5MkUlssD13roZB/C7DVJ5cqjBPb0
-	Qx7g==
+	:cc; bh=l8jac80TJAEADPibN7ZNdC+/BooDUPWVoy8g7oZndeQ=;
+	b=gd3iW59vZPu0GwpbGVDeHXaRqVtlWeqx+9dMqhpE4nsdIIwO/lHh2UyPBshcAKvYDs
+	bq+dtCDSzPaN9Oc6QG1wTTi6FSldbLw/BHmX2kFVTgFxsyXyMCN/Pwsy3xdM4t8gWUsS
+	vl2sxtT0tu91s7K9SfoYsgvBI4Sxnox4HXQSdfvAjaREyHGGkhjsZ1huk3m5rdX79OC4
+	5iGjVDJeI/CLwRnwbcDTM/2HuQpqPEM0E6/r0y0ZHBUl43tLtI3Ty8g5kKJgNwRkcYZQ
+	42CibOHmtrs+yqih1LfDgR+lTCH3jpoaBlgKfvM5sGYPREo239N2SdAW7/oitYvNaL9n
+	+M2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=RrUJDpXsDDPbRytIWcaWuvC4lpnAtN+OzDY/nY0znGw=;
-	b=bUSBkOd2YpLgSZn3hC/r1BYCJYVMAviLygeBISORgHbBYUCT3401Ewgvf1XhoU+Ius
-	l0EKwy36ukzsu666Q4DV5cxAV5A6ixpNocK4JsSUlRDNoIe0UPhb9RGYZk6X75lBjUTk
-	LY4f2PdupEyddMfri03dbGOstD9vA5QQ/ZX13fAfgqZf2SdpVBIhhDo1Z8XF1qpxjhQ6
-	1OY6SXa7jx1birhgt+4bRGY4R7zBoetTApneg/mAx8vevt+vumATgBRxFMM6uoBkdgjq
-	TDoDuXxPV+jI6EYLBf6N9/cDYfm0CaRvFgvMKflkiNysuEjaVllZKMhlAjX4O+Nkb/RE
-	LTyA==
-X-Gm-Message-State: ABuFfogu9pwWi4TfNbKT8ZWaD/dX7EAXqpHQFKhI9i4Jl5SgRjfhcHvV
-	CPWBTQOlW51Oo+7H2X/Kk8UQnwOrVmX0lX+PMF4=
-X-Google-Smtp-Source: ACcGV607IunckmeghKnNOZeHmwwNbLoacuoCVmlH8MD+HnZTavS4D/fAArAAvsYAv78eccA+iWXXdhw8jkvNZqeDTww=
-X-Received: by 2002:aed:3b04:: with SMTP id
-	p4-v6mr18925338qte.218.1539006003934; 
-	Mon, 08 Oct 2018 06:40:03 -0700 (PDT)
+	bh=l8jac80TJAEADPibN7ZNdC+/BooDUPWVoy8g7oZndeQ=;
+	b=NB5rJO3Bem1G5+YZh/y3MLoP3QO/mwuBSbB4sqF3VTSi9JembvfsrE9vBpom8zx4uf
+	XDf+oXeN1VYfwJpdjxWVWcoxhNaFpq96p5O5HcIK9n7oLyOIQbViPbrr0+XmN81N2XGy
+	L2QWQ3EK69IrFWz7tFS749Zb6CJTTsMpihWoYGkNeTv+I/tzmFoyjm5Kn+w8lTh1p+U8
+	dyalBqtsK9rRpjhZyrMiq2PAVSn2CpeZ6tL4taQzUvp0d/ZHe9JSMKDxw538sGXm6DPX
+	N22687cuzWpcXmvIG2ouSQdlQptYruqeo3C1BhrLLay/vAPIaBM0gb1NZtg3C7/qvXW7
+	RCUw==
+X-Gm-Message-State: ABuFfoh0DytlBxrwUR6u9zwqb/gm+EL7XcJjlumjjzURtLPhCXCrSJNJ
+	gwGWjfWdErrJpXG9A5XfH9UeiA0PlPuq3LoAKCA=
+X-Google-Smtp-Source: ACcGV61+UsdYVZu3ns0TVGhKBGthHdlFgo0+dJ4SJ+BnVcMxj7Gu5R/QIb+QaGRMwB6LNmjpBh7AlVU5YTehxzUc2VA=
+X-Received: by 2002:ae9:f408:: with SMTP id y8-v6mr18947822qkl.2.1539006178124;
+	Mon, 08 Oct 2018 06:42:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <1538986717-13998-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
-In-Reply-To: <1538986717-13998-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
+References: <20181008091749.45975-1-uvv.mail@gmail.com>
+In-Reply-To: <20181008091749.45975-1-uvv.mail@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Oct 2018 06:39:37 -0700
-Message-ID: <CAMKF1sqm2-6+mKtpLfk6jTwugc+vTy2U6mWrrKB8-iL-zV95qw@mail.gmail.com>
-To: stefan.wiehler@missinglinkelectronics.com
+Date: Mon, 8 Oct 2018 06:42:31 -0700
+Message-ID: <CAMKF1sp-q=SJ+R=bGNeCpSL_=ufUuqDJAnCPVMmVEZ2H7zYcjg@mail.gmail.com>
+To: Vyacheslav Yurkov <uvv.mail@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] nvme-cli: add recipe
+Subject: Re: [meta-oe][PATCH] glog: upgrade 0.3.4 -> 0.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +53,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Oct 2018 13:40:04 -0000
+X-List-Received-Date: Mon, 08 Oct 2018 13:42:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 8, 2018 at 1:19 AM Stefan Wiehler
-<stefan.wiehler@missinglinkelectronics.com> wrote:
+On Mon, Oct 8, 2018 at 2:18 AM Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
 >
-> NVMe management command line interface.
+> Upgraded glog recipe to a new stable version in favor of cmake configuration
+> Old configure.ac patch is removed.
 >
-> Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+> Another cmake patch is added. When UNWIND_LIBRARY is used directly as a public
+> dependency then absolute path is stored in cmake config file.
+> This is an issue when glog is used as part of generated SDK, which was built
+> on another machine. When SDK is installed on developer's machine,
+> cmake config contains a full path to non-existent location.
+> The solution is to find libunwind during configure stage and store target
+> name as a dependency, not a full path
+>
+> Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
 > ---
->  meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+>  ...gure.ac-Allow-user-to-disable-gflags.patch | 35 -------------------
+>  ...0001-find-libunwind-during-configure.patch | 30 ++++++++++++++++
+>  .../glog/{glog_0.3.4.bb => glog_0.3.5.bb}     | 13 +++----
+>  3 files changed, 37 insertions(+), 41 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch
+>  create mode 100644 meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configure.patch
+>  rename meta-oe/recipes-support/glog/{glog_0.3.4.bb => glog_0.3.5.bb} (55%)
 >
-> diff --git a/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+> diff --git a/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch b/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch
+> deleted file mode 100644
+> index 596281ff6..000000000
+> --- a/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch
+> +++ /dev/null
+> @@ -1,35 +0,0 @@
+> -From 0fabde0515e180c53961c27346dd7a79cffa4c1f Mon Sep 17 00:00:00 2001
+> -From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> -Date: Thu, 11 Aug 2016 11:49:36 +0200
+> -Subject: [PATCH] configure.ac: Allow user to disable gflags
+> -
+> -Under some circumstances like cross-compilation, the user might not want
+> -to enable support for gflags.
+> -
+> -This patch allows support for --without-gflags
+> -
+> -Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ----
+> - configure.ac | 6 +++++-
+> - 1 file changed, 5 insertions(+), 1 deletion(-)
+> -
+> -diff --git a/configure.ac b/configure.ac
+> -index 7b4d21e7ae8a..eba5e5cda1ea 100644
+> ---- a/configure.ac
+> -+++ b/configure.ac
+> -@@ -136,7 +136,11 @@ AC_ARG_WITH(gflags, AS_HELP_STRING[--with-gflags=GFLAGS_DIR],
+> -   CFLAGS="$CFLAGS $GFLAGS_CFLAGS"
+> -   LIBS="$LIBS $GFLAGS_LIBS"
+> - )
+> --AC_CHECK_LIB(gflags, main, ac_cv_have_libgflags=1, ac_cv_have_libgflags=0)
+> -+if test x"$with_gflags" = x"no"; then
+> -+  ac_cv_have_libgflags=0
+> -+else
+> -+  AC_CHECK_LIB(gflags, main, ac_cv_have_libgflags=1, ac_cv_have_libgflags=0)
+> -+fi
+> - if test x"$ac_cv_have_libgflags" = x"1"; then
+> -   AC_DEFINE(HAVE_LIB_GFLAGS, 1, [define if you have google gflags library])
+> -   if test x"$GFLAGS_LIBS" = x""; then
+> ---
+> -2.8.1
+> -
+> diff --git a/meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configure.patch b/meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configure.patch
 > new file mode 100644
-> index 0000000..68c73ca
+> index 000000000..33dc9d38a
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY = "NVMe management command line interface"
-> +AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
-> +HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
-> +SECTION = "console/utils"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-> +DEPENDS = "util-linux"
-> +PV .= "+git${SRCPV}"
+> +++ b/meta-oe/recipes-support/glog/glog/0001-find-libunwind-during-configure.patch
+> @@ -0,0 +1,30 @@
+> +diff -ur git/CMakeLists.txt ../0.3.5-r0.unwind/git/CMakeLists.txt
+> +--- git/CMakeLists.txt 2018-10-08 08:54:15.118989400 +0200
+> ++++ ../0.3.5-r0.unwind/git/CMakeLists.txt      2018-10-05 16:26:59.745922318 +0200
+> +@@ -384,7 +384,9 @@
+> + set_target_properties (glog PROPERTIES POSITION_INDEPENDENT_CODE ON)
 > +
-> +SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
-> +SRCREV = "642d426faf8a67ed01e90f7c35c0d967f8cc52a3"
+> + if (UNWIND_LIBRARY)
+> +-  target_link_libraries (glog PUBLIC ${UNWIND_LIBRARY})
+> ++  add_library(unwind SHARED IMPORTED)
+> ++  set_target_properties(unwind PROPERTIES IMPORTED_LOCATION ${UNWIND_LIBRARY})
+> ++  target_link_libraries (glog PUBLIC unwind)
+> + endif (UNWIND_LIBRARY)
 > +
-> +S = "${WORKDIR}/git"
+> + if (HAVE_PTHREAD)
+> +diff -ur git/glog-config.cmake.in ../0.3.5-r0.unwind/git/glog-config.cmake.in
+> +--- git/glog-config.cmake.in   2018-10-08 08:54:15.122989699 +0200
+> ++++ ../0.3.5-r0.unwind/git/glog-config.cmake.in        2018-10-08 08:14:48.550745810 +0200
+> +@@ -4,4 +4,12 @@
 > +
-> +do_install() {
-> +    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-> +}
+> + @gflags_DEPENDENCY@
 > +
-> +FILES_${PN} += "${datadir}/bash_completion.d"
+> ++find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
+> ++mark_as_advanced (UNWIND_LIBRARY)
+> ++
+> ++if (UNWIND_LIBRARY)
+> ++  add_library(unwind SHARED IMPORTED)
+> ++  set_target_properties(unwind PROPERTIES IMPORTED_LOCATION ${UNWIND_LIBRARY})
+> ++endif (UNWIND_LIBRARY)
+> ++
+> + include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
+> diff --git a/meta-oe/recipes-support/glog/glog_0.3.4.bb b/meta-oe/recipes-support/glog/glog_0.3.5.bb
+> similarity index 55%
+> rename from meta-oe/recipes-support/glog/glog_0.3.4.bb
+> rename to meta-oe/recipes-support/glog/glog_0.3.5.bb
+> index d7c1974c6..bf7df53f3 100644
+> --- a/meta-oe/recipes-support/glog/glog_0.3.4.bb
+> +++ b/meta-oe/recipes-support/glog/glog_0.3.5.bb
+> @@ -9,15 +9,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
+>  DEPENDS = "libunwind"
+>
+>  SRC_URI = " \
+> -    git://github.com/google/glog.git \
+> -    file://0001-configure.ac-Allow-user-to-disable-gflags.patch \
+> +    git://github.com/google/glog.git;branch=v035 \
+> +    file://0001-find-libunwind-during-configure.patch \
+>  "
+>
+> -SRCREV = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
+> +SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
+>
+>  S = "${WORKDIR}/git"
+>
+> -PACKAGECONFIG ??= ""
+> -PACKAGECONFIG[gflags] = ",--without-gflags,gflags,"
+> +inherit cmake
+>
+> -inherit autotools pkgconfig
+> +RDEPENDS_${PN}-dev = ""
+> +RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
+> +RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
 
-this perhaps should inherit bash-completion bbclass
+why do we need the above change
 > --
-> 2.7.4
+> 2.19.0
 >
 > --
 > _______________________________________________
