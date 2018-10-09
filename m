@@ -1,50 +1,68 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B3A99751D2
+Return-Path: <eajames@linux.ibm.com>
+X-Greylist: delayed 2568 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 09 Oct 2018 19:10:44 UTC
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by mail.openembedded.org (Postfix) with ESMTP id 3213C7198A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Oct 2018 14:58:39 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id f18-v6so979696plr.1
+	Tue,  9 Oct 2018 19:10:44 +0000 (UTC)
+Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
+	w99IJrFe066701 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 9 Oct 2018 14:27:57 -0400
+Received: from e11.ny.us.ibm.com (e11.ny.us.ibm.com [129.33.205.201])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 2n0wustsp8-1
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 07:58:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=jXasg2fiPt6KyxgiRqnR+OTcPdoERo8D/JA2m0pJxlE=;
-	b=dxbkxrlfYemovedmr+yc/MzsM0PNyqq8SRArFveTPhlmyr+C+tdiZ5NJtnAlE7VyHF
-	0knmAweOZliqzPJYhiRhrD2RHwMHr/oWyHCzQx4NKFUsFGBm8oY2EB4LPwShxFYeYIRh
-	SUn6LB6UfUpuhNNBtl26DJFdlBcbAq87irKjPfI3xSX3VUusIdt/ratoGtaOAz+8hMMz
-	pBK+2uUUV6OyQq8by/Y8vu3F9PcaGGBexW1MYwQNF24wEAXpfxXDgKq36XxFV6+HKBNy
-	B9btM0iKJWBcTvCsjEx93tTknV6Uc3Rmsgnu78sZFc3UtlFv5UMH807XRfPbNrKd150+
-	f/QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=jXasg2fiPt6KyxgiRqnR+OTcPdoERo8D/JA2m0pJxlE=;
-	b=SWw0QTxe2kFzrHfTz+EzLrO8jWnvsOEwwvObs3Z/MmUMP+kUh0Ju+bpFFgLiNN9V6m
-	HWdQYF6A31PKZ8gDl7LnNhgy0Jv+xvGYNVJVKxvu29NL/SV6XPFJjVP5UuTVMAKNFcll
-	YsZ68wqT8vFo+Ay+5z1YX/0u/t1/FuJbzQqS7ULPff/KbzgnYH5CRtLI0HkXtcVqkqli
-	QrvDJ0f+SX1ETHNzTWzuSs8tZ12WsWS3LpJDx5HFoUqUqXpFtXQcXbFWVQPnbrER4y7u
-	zckK0ng+PKSrKfMXNMaKYAyuFKprrX4OCCpOxW8tl5oAFtEpCr+viKcVJ6Y0uaz/wDxm
-	6UHg==
-X-Gm-Message-State: ABuFfog/dYmiMO5ipfgpKtWQCU2g6hu8SjdjzH0Xo4R64wyNLUdwtKPO
-	cSvRk1mZjU7+iAR8XIZtDwQ=
-X-Google-Smtp-Source: ACcGV61ugFVeCjx/M4HExybDZq18XYIFcv07fiYx03PiefzCEdVYOVeO4S4ZcR/5i8ioRO/fS47oKA==
-X-Received: by 2002:a17:902:b907:: with SMTP id
-	bf7-v6mr19260387plb.259.1539097120736; 
-	Tue, 09 Oct 2018 07:58:40 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:c33:488d:f898:e690:f18b])
-	by smtp.gmail.com with ESMTPSA id
-	r25-v6sm23169945pgm.59.2018.10.09.07.58.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 09 Oct 2018 07:58:39 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2018 07:58:38 -0700
-Message-Id: <1539097118-23856-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] openvpn: update to 2.4.6
+	Tue, 09 Oct 2018 14:27:56 -0400
+Received: from localhost
+	by e11.ny.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+	Violators will be prosecuted
+	for <openembedded-devel@lists.openembedded.org> from
+	<eajames@linux.ibm.com>; Tue, 9 Oct 2018 14:27:55 -0400
+Received: from b01cxnp22036.gho.pok.ibm.com (9.57.198.26)
+	by e11.ny.us.ibm.com (146.89.104.198) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	(version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+	Tue, 9 Oct 2018 14:27:53 -0400
+Received: from b01ledav006.gho.pok.ibm.com (b01ledav006.gho.pok.ibm.com
+	[9.57.199.111])
+	by b01cxnp22036.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+	w99IRqlq36634872
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=FAIL); Tue, 9 Oct 2018 18:27:52 GMT
+Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 0DBD2AC059;
+	Tue,  9 Oct 2018 14:27:01 -0400 (EDT)
+Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id B8E54AC05B;
+	Tue,  9 Oct 2018 14:27:00 -0400 (EDT)
+Received: from oc6728276242.ibm.com (unknown [9.80.233.74])
+	by b01ledav006.gho.pok.ibm.com (Postfix) with ESMTP;
+	Tue,  9 Oct 2018 14:27:00 -0400 (EDT)
+From: Eddie James <eajames@linux.ibm.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Oct 2018 13:27:50 -0500
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+x-cbid: 18100918-2213-0000-0000-00000300A99C
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00009849; HX=3.00000242; KW=3.00000007;
+	PH=3.00000004; SC=3.00000268; SDB=6.01100251; UDB=6.00569240;
+	IPR=6.00880299; 
+	MB=3.00023684; MTD=3.00000008; XFM=3.00000015; UTC=2018-10-09 18:27:54
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 18100918-2214-0000-0000-00005BD659DE
+Message-Id: <1539109670-43001-1-git-send-email-eajames@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+	definitions=2018-10-09_12:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	priorityscore=1501
+	malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+	clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
+	mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+	scancount=1 engine=8.0.1-1807170000 definitions=main-1810090175
+Subject: [meta-oe][PATCH] libvncserver: Update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,46 +75,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2018 14:58:39 -0000
+X-List-Received-Date: Tue, 09 Oct 2018 19:10:45 -0000
 
-LIC_FILES_CHKSUM changed do to "Update copyright to include 2018 plus company name change"
-includes: CVE-2018-9336
+The latest release of libvncserver is almost two years old. A number of
+security fixes and enhancements have recently been committed. Since the repo
+is stable, point the recipe to the latest commit.
 
-see: https://community.openvpn.net/openvpn/wiki/ChangesInOpenvpn24
+libvncserver switched from autotools to cmake, so update the recipe as
+necessary, and add PACKAGECONFIG options to allow a more minimal build and
+install.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
 ---
- .../recipes-support/openvpn/{openvpn_2.4.4.bb => openvpn_2.4.6.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.4.4.bb => openvpn_2.4.6.bb} (93%)
+ .../libvncserver/libvncserver_0.9.11.bb            | 25 ----------------------
+ .../libvncserver/libvncserver_git.bb               | 23 ++++++++++++++++++++
+ 2 files changed, 23 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.6.bb
-similarity index 93%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.4.6.bb
-index a839ab7..84fd467 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.6.bb
-@@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
- HOMEPAGE = "http://openvpn.sourceforge.net"
- SECTION = "net"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=e9b64491ec98eb6c6493ac5e4118f107"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7aee596ed2deefe3e8a861e24292abba"
- DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- inherit autotools systemd update-rc.d
-@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
-            file://openvpn@.service \
-            file://openvpn-volatile.conf"
- 
--SRC_URI[md5sum] = "705a79d005558d94fa1e2b74e4413e97"
--SRC_URI[sha256sum] = "1ae883d9522c9fa6d189e5e4aaa058a93edd3d0b897e3c2664107c4785099fc3"
-+SRC_URI[md5sum] = "971d57e29b78b4b902eb2f4aae2f05a7"
-+SRC_URI[sha256sum] = "738dbd37fcf8eb9382c53628db22258c41ba9550165519d9200e8bebaef4cbe2"
- 
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+deleted file mode 100644
+index 38dac06..0000000
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "library for easy implementation of a RDP/VNC server"
+-HOMEPAGE = "https://libvnc.github.io"
+-SECTION = "libs"
+-PRIORITY = "optional"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+-
+-DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+-
+-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+-PACKAGECONFIG[systemd] = ",,systemd"
+-
+-RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
+-
+-inherit distro_features_check autotools binconfig pkgconfig
+-
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-SRC_URI = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-${PV}.tar.gz"
+-SRC_URI[md5sum] = "7f06104d5c009813e95142932c4ddb06"
+-SRC_URI[sha256sum] = "193d630372722a532136fd25c5326b2ca1a636cbb8bf9bb115ef869c804d2894"
+-
+-S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
+-
+-TARGET_LDFLAGS += "-lgcrypt"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+new file mode 100644
+index 0000000..9fb2c09
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "library for easy implementation of a RDP/VNC server"
++HOMEPAGE = "https://libvnc.github.io"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
++
++PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
++PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
++PACKAGECONFIG[gnutls] = ",,gnutls"
++PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
++PACKAGECONFIG[openssl] = ",,openssl"
++PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
++PACKAGECONFIG[systemd] = ",,systemd"
++PACKAGECONFIG[sdl] = ",,libsdl2"
++PACKAGECONFIG[zlib] = ",,zlib"
++
++inherit cmake
++
++SRC_URI = "git://github.com/LibVNC/libvncserver"
++SRCREV = "7b1ef0ffc4815cab9a96c7278394152bdc89dc4d"
++
++S = "${WORKDIR}/git"
 -- 
 2.7.4
 
