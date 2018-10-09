@@ -1,31 +1,50 @@
-Return-Path: <stefan.wiehler@missinglinkelectronics.com>
-Received: from smtp.missinglinkelectronics.com
-	(smtp.missinglinkelectronics.com [94.130.14.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 235F765CC7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B3A99751D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Oct 2018 13:40:55 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.missinglinkelectronics.com (Postfix) with ESMTP id B35A6E0175
+	Tue,  9 Oct 2018 14:58:39 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id f18-v6so979696plr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Oct 2018 15:40:55 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at missinglinkelectronics.com
-Received: from smtp.missinglinkelectronics.com ([127.0.0.1])
-	by localhost (mail.missinglinkelectronics.com [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ngsQSLuwjsdI; Tue,  9 Oct 2018 15:40:55 +0200 (CEST)
-Received: from amphore.mle (p578c5bfe.dip0.t-ipconnect.de [87.140.91.254])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested) (Authenticated sender: stefan)
-	by smtp.missinglinkelectronics.com (Postfix) with ESMTPSA id 52459E010D;
-	Tue,  9 Oct 2018 15:40:55 +0200 (CEST)
-From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2018 15:40:29 +0200
-Message-Id: <1539092429-3587-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <CAMKF1sqm2-6+mKtpLfk6jTwugc+vTy2U6mWrrKB8-iL-zV95qw@mail.gmail.com>
-References: <CAMKF1sqm2-6+mKtpLfk6jTwugc+vTy2U6mWrrKB8-iL-zV95qw@mail.gmail.com>
-Subject: [meta-oe][PATCH v2] nvme-cli: add recipe
+	Tue, 09 Oct 2018 07:58:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=jXasg2fiPt6KyxgiRqnR+OTcPdoERo8D/JA2m0pJxlE=;
+	b=dxbkxrlfYemovedmr+yc/MzsM0PNyqq8SRArFveTPhlmyr+C+tdiZ5NJtnAlE7VyHF
+	0knmAweOZliqzPJYhiRhrD2RHwMHr/oWyHCzQx4NKFUsFGBm8oY2EB4LPwShxFYeYIRh
+	SUn6LB6UfUpuhNNBtl26DJFdlBcbAq87irKjPfI3xSX3VUusIdt/ratoGtaOAz+8hMMz
+	pBK+2uUUV6OyQq8by/Y8vu3F9PcaGGBexW1MYwQNF24wEAXpfxXDgKq36XxFV6+HKBNy
+	B9btM0iKJWBcTvCsjEx93tTknV6Uc3Rmsgnu78sZFc3UtlFv5UMH807XRfPbNrKd150+
+	f/QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=jXasg2fiPt6KyxgiRqnR+OTcPdoERo8D/JA2m0pJxlE=;
+	b=SWw0QTxe2kFzrHfTz+EzLrO8jWnvsOEwwvObs3Z/MmUMP+kUh0Ju+bpFFgLiNN9V6m
+	HWdQYF6A31PKZ8gDl7LnNhgy0Jv+xvGYNVJVKxvu29NL/SV6XPFJjVP5UuTVMAKNFcll
+	YsZ68wqT8vFo+Ay+5z1YX/0u/t1/FuJbzQqS7ULPff/KbzgnYH5CRtLI0HkXtcVqkqli
+	QrvDJ0f+SX1ETHNzTWzuSs8tZ12WsWS3LpJDx5HFoUqUqXpFtXQcXbFWVQPnbrER4y7u
+	zckK0ng+PKSrKfMXNMaKYAyuFKprrX4OCCpOxW8tl5oAFtEpCr+viKcVJ6Y0uaz/wDxm
+	6UHg==
+X-Gm-Message-State: ABuFfog/dYmiMO5ipfgpKtWQCU2g6hu8SjdjzH0Xo4R64wyNLUdwtKPO
+	cSvRk1mZjU7+iAR8XIZtDwQ=
+X-Google-Smtp-Source: ACcGV61ugFVeCjx/M4HExybDZq18XYIFcv07fiYx03PiefzCEdVYOVeO4S4ZcR/5i8ioRO/fS47oKA==
+X-Received: by 2002:a17:902:b907:: with SMTP id
+	bf7-v6mr19260387plb.259.1539097120736; 
+	Tue, 09 Oct 2018 07:58:40 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4180:c33:488d:f898:e690:f18b])
+	by smtp.gmail.com with ESMTPSA id
+	r25-v6sm23169945pgm.59.2018.10.09.07.58.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 09 Oct 2018 07:58:39 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Oct 2018 07:58:38 -0700
+Message-Id: <1539097118-23856-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] openvpn: update to 2.4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,88 +57,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2018 13:40:55 -0000
+X-List-Received-Date: Tue, 09 Oct 2018 14:58:39 -0000
 
-NVMe management command line interface.
+LIC_FILES_CHKSUM changed do to "Update copyright to include 2018 plus company name change"
+includes: CVE-2018-9336
 
-Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+see: https://community.openvpn.net/openvpn/wiki/ChangesInOpenvpn24
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
+ .../recipes-support/openvpn/{openvpn_2.4.4.bb => openvpn_2.4.6.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.4.4.bb => openvpn_2.4.6.bb} (93%)
 
-Change: Use bash-completion class and patch bash completion install path
-
- ...Makefile-fix-bash-completion-install-path.patch | 33 ++++++++++++++++++++++
- meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb  | 21 ++++++++++++++
- 2 files changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
- create mode 100644 meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
-
-diff --git a/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch b/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
-new file mode 100644
-index 0000000..ecd4f03
---- /dev/null
-+++ b/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
-@@ -0,0 +1,33 @@
-+From ef64032b34190079aab591c64a25f7535a977390 Mon Sep 17 00:00:00 2001
-+From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
-+Date: Tue, 9 Oct 2018 11:26:34 +0200
-+Subject: [PATCH] Makefile: fix bash completion install path
-+
-+Change path to bash-completion upstream recommendation used by most
-+distributions.
-+
-+Upstream-Status: Submitted [https://github.com/linux-nvme/nvme-cli/pull/418]
-+
-+Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
-+---
-+ Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index fa587dd..433bc41 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -69,8 +69,8 @@ install-bin: default
-+ 	$(INSTALL) -m 755 nvme $(DESTDIR)$(SBINDIR)
-+ 
-+ install-bash-completion:
-+-	$(INSTALL) -d $(DESTDIR)$(PREFIX)/share/bash_completion.d
-+-	$(INSTALL) -m 644 -T ./completions/bash-nvme-completion.sh $(DESTDIR)$(PREFIX)/share/bash_completion.d/nvme
-++	$(INSTALL) -d $(DESTDIR)$(PREFIX)/share/bash-completion/completions
-++	$(INSTALL) -m 644 -T ./completions/bash-nvme-completion.sh $(DESTDIR)$(PREFIX)/share/bash-completion/completions/nvme
-+ 
-+ install: install-bin install-man install-bash-completion
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
-new file mode 100644
-index 0000000..9b7e6cd
---- /dev/null
-+++ b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "NVMe management command line interface"
-+AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
-+HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-+DEPENDS = "util-linux"
-+PV .= "+git${SRCPV}"
-+
-+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git \
-+           file://0001-Makefile-fix-bash-completion-install-path.patch \
-+           "
-+SRCREV = "642d426faf8a67ed01e90f7c35c0d967f8cc52a3"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit bash-completion
-+
-+do_install() {
-+    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-+}
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.6.bb
+similarity index 93%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.4.6.bb
+index a839ab7..84fd467 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.6.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
+ HOMEPAGE = "http://openvpn.sourceforge.net"
+ SECTION = "net"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=e9b64491ec98eb6c6493ac5e4118f107"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7aee596ed2deefe3e8a861e24292abba"
+ DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ 
+ inherit autotools systemd update-rc.d
+@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+            file://openvpn@.service \
+            file://openvpn-volatile.conf"
+ 
+-SRC_URI[md5sum] = "705a79d005558d94fa1e2b74e4413e97"
+-SRC_URI[sha256sum] = "1ae883d9522c9fa6d189e5e4aaa058a93edd3d0b897e3c2664107c4785099fc3"
++SRC_URI[md5sum] = "971d57e29b78b4b902eb2f4aae2f05a7"
++SRC_URI[sha256sum] = "738dbd37fcf8eb9382c53628db22258c41ba9550165519d9200e8bebaef4cbe2"
+ 
+ SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
 -- 
-1.9.1
+2.7.4
 
 
