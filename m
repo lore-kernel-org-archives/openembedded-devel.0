@@ -1,47 +1,48 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C88B745AC
+Return-Path: <yisooan@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 58E47794BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Oct 2018 07:42:29 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id e187-v6so806590wmf.0
+	Tue,  9 Oct 2018 08:54:37 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id w14-v6so486088plp.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 00:42:30 -0700 (PDT)
+	Tue, 09 Oct 2018 01:54:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=nGz7kO+iJPSlWthdNIU0jQAdIXHgMb2zSDoCHOXsw0Y=;
-	b=YoGpCNxijUG1x0AkSVHumeySMSBCmCVVWB5dygOiGFSslMdEA8QP1IL/nHIa/Aqwi0
-	Vt6GScQ3LRofs+HG/2NKZ8iQEm3nSyCtgWrJvZSQplLRQdz09WChXdmvUiLteYxEZ3ad
-	hzNfGNDg3mSAFPqDxHKh/4nvyHqPQxk4KmK9sFqJM4DeoduOipmjZ9Am4nKCbHcs8aOz
-	39TF8vfgqsJoHh/v1zQHZF0F+xGItF9hn+aw+Q5vwoY/JigjFdk8QeVaIfLO+wg9OAIB
-	90uEoNNFHbnJZotGas632eRFtW3HWCdqybVA92tNdNQLrZRYcZvBUGWwBmdrLHAdNtm8
-	9r2A==
+	bh=S+xjXVxuSaQSbxPuOUbWoO1hFfe80XMyitslroZbMKo=;
+	b=p60/o2rxQtoCeJvjDktMwUEdoDGHBJ/+pyQnFX/tehDJXuvyWzuNLJmiIPOql1U565
+	yIHhnfn24H41Bp9bPdAbbD6Ge/plAG0UaPZGE1XpIgTjSJhEkehjlpA/C2MwqMwkHHTb
+	MRHRMwK15bb2O6s5g6EldTEYZpdcpy1nQ2e+RQ1Q0GMva7hh+amwYj2nqqutaP4e6H4i
+	6UW6VrjbmYekaDAatU6PWT+qMgY9RMNCrHH4b2l+IE/wKLLGxHXlmnEpATwbj0RMPDGX
+	mC1WSnkmTsPwQxDJJd7KWv3r3grL/ccG7a8SjlldgHbNaPu2ZozlOWs42lnB+uyoKXCH
+	H13Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nGz7kO+iJPSlWthdNIU0jQAdIXHgMb2zSDoCHOXsw0Y=;
-	b=fY7hE+lBhaBrCOL4YuE5ZAd3u8LePpm22yTuQZC28hJQTAQf3+Mw2yJwWZDVQKNEw4
-	ZTcDs0GULSGh9ZaQ2M7ZIu68Fdr+jedQep/NXX5UQwJdkTx0RTI0ZMMjk7/zn2Jm7BKL
-	ZDrSRWeFvCdMtPQ0mo8ldKqKF5mptnytu0XIYNfdTsFjBEXki5fhFkM2ylHQ4EaN/X7o
-	XMYTW9byjPwCYmhfonlX2wcY8bqqdEocp70lFwGOQvV3D6TL7au67f8lLRAAitcxc84T
-	2QaDyQ4ZXv/SIem2A9WNZOpGgc4Dx+A7kEC1z6h4LJUNJLg5tx9nMXjg7YavUx606QNB
-	cmyA==
-X-Gm-Message-State: ABuFfoizUFddMKlH4/JG8g/xOEfngnMTUnbtdMZdgRAOXHZH/jdtiOgj
-	/fCbzg28+XNuMfH9dFfX3vPBKa3IYqA=
-X-Google-Smtp-Source: ACcGV635RAArtnTayBk/BZGstB/rhsonLLneX3b5fxJHQDoml2R9gpS3NdZQ4VY3rOFu6k9+9dpGpA==
-X-Received: by 2002:a1c:6543:: with SMTP id z64-v6mr979262wmb.57.1539070949665;
-	Tue, 09 Oct 2018 00:42:29 -0700 (PDT)
-Received: from localhost.localdomain ([176.12.107.132])
+	bh=S+xjXVxuSaQSbxPuOUbWoO1hFfe80XMyitslroZbMKo=;
+	b=pF5/GPLSZ7qm3Qv4Uzzt65zMMUH320oocC4aIK2QOQtkK3l2kPg6zvLKv/fiTUPGA8
+	/3o/eZ2uSmIWqbdCPAzPfBj1YBORsYYYJ/2HhOcQqBlJCUunyjx7SSA9lhHlYK4N9eXK
+	/aJGzwm3NAeFgVoDKMZmw4SrNok4eSsOprodx8S0Wc+s5WZ0YRjU4TJVBfqORgd0avaD
+	00iN/nJQ6dMeZKALC/a9trTcaTJEc2LlibYY+0KWmp7iVNS4MRyY68Jr6adoBzwz9Z1B
+	U9s/Y5es1fSiGvk60Z3jAShseGDF7rF8svNw2BrvGL+Ti6Ot1482CfpSBsZ/vQkqkfiq
+	Ro1w==
+X-Gm-Message-State: ABuFfohZPfnAC4sv0AqOYXkEx9eGR/fj8IzpTP5ucwkTHtJAwzFVvqyN
+	6MZdUJVw7fBhbi8+RE4dTtld3mGA
+X-Google-Smtp-Source: ACcGV62W21zY9Sjbx0I6cISDADla1CupNCjom+hr+bEig4v0TWAQK3FJhjaNkwMsOhoOHgWoV2myrw==
+X-Received: by 2002:a17:902:40d:: with SMTP id
+	13-v6mr27698905ple.257.1539075277930; 
+	Tue, 09 Oct 2018 01:54:37 -0700 (PDT)
+Received: from localhost.localdomain ([221.158.206.146])
 	by smtp.gmail.com with ESMTPSA id
-	l125-v6sm19070280wmb.1.2018.10.09.00.42.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 09 Oct 2018 00:42:28 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+	n79-v6sm43298487pfk.19.2018.10.09.01.54.35
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 09 Oct 2018 01:54:37 -0700 (PDT)
+From: Yi-Soo An <yisooan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2018 07:42:20 +0000
-Message-Id: <1539070940-28150-1-git-send-email-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] crda: Fix usrmerge install path
+Date: Tue,  9 Oct 2018 17:54:24 +0900
+Message-Id: <20181009085425.18140-1-yisooan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-networking][PATCH 1/2] babeld: Add Babel routing protocol
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,33 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2018 07:42:29 -0000
+X-List-Received-Date: Tue, 09 Oct 2018 08:54:37 -0000
 
-Set UDEV_RULE_DIR so we follow usrmerge paths, fixing:
+Babel is a loop-avoiding distance-vector routing protocol for
+IPv6 and IPv4 with fast convergence properties.
 
-  ERROR: QA Issue: crda package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Yi-Soo An <yisooan@gmail.com>
 ---
+ .../recipes-protocols/babeld/babeld_1.8.3.bb  | 29 +++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
 
- meta-networking/recipes-connectivity/crda/crda_3.18.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index 853a52346db1..d5d2ab68c6c3 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -27,7 +27,8 @@ inherit python-dir pythonnative siteinfo
- DEFAULT_CRYPT ??= "gcrypt"
- 
- # Recursive make problem
--EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg'"
-+EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg' \
-+                UDEV_RULE_DIR=${nonarch_libdir}/udev/rules.d/"
- EXTRA_OEMAKE_append = " ${@oe.utils.conditional("DEFAULT_CRYPT", "openssl", "USE_OPENSSL=1", "", d)}"
- TARGET_BITS = "${SITEINFO_BITS}"
- export TARGET_BITS
+diff --git a/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb b/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
+new file mode 100644
+index 000000000..921f7dc08
+--- /dev/null
++++ b/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "Babel is a loop-avoiding distance-vector routing protocol"
++DESCRIPTION = "\
++Babel is a loop-avoiding distance-vector routing protocol for IPv6 and \
++IPv4 with fast convergence properties. It is based on the ideas in DSDV, AODV \
++and Cisco's EIGRP, but is designed to work well not only in wired networks \
++but also in wireless mesh networks, and has been extended with support \
++for overlay networks. Babel is in the process of becoming an IETF Standard. \
++"
++HOMEPAGE = "https://www.irif.fr/~jch/software/babel/"
++SECTION = "net"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
++
++SRC_URI = "git://github.com/jech/babeld.git;protocol=git"
++SRCREV = "535184173fcde5ddc43020cd197d01d1ea0e9a8b"
++
++SRC_URI += "file://0001-Rename-LICENCE-to-LICENSE.patch"
++
++S = "${WORKDIR}/git"
++
++do_compile () {
++	oe_runmake babeld
++}
++
++do_install () {
++	oe_runmake install.minimal PREFIX=${D}
++}
++
 -- 
-2.7.4
+2.17.1
 
 
