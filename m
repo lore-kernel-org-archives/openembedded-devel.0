@@ -1,48 +1,51 @@
 Return-Path: <yisooan@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 58E47794BE
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 147DD7970B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Oct 2018 08:54:37 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id w14-v6so486088plp.6
+	Tue,  9 Oct 2018 08:54:43 +0000 (UTC)
+Received: by mail-pg1-f169.google.com with SMTP id v133-v6so485963pgb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 01:54:38 -0700 (PDT)
+	Tue, 09 Oct 2018 01:54:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=S+xjXVxuSaQSbxPuOUbWoO1hFfe80XMyitslroZbMKo=;
-	b=p60/o2rxQtoCeJvjDktMwUEdoDGHBJ/+pyQnFX/tehDJXuvyWzuNLJmiIPOql1U565
-	yIHhnfn24H41Bp9bPdAbbD6Ge/plAG0UaPZGE1XpIgTjSJhEkehjlpA/C2MwqMwkHHTb
-	MRHRMwK15bb2O6s5g6EldTEYZpdcpy1nQ2e+RQ1Q0GMva7hh+amwYj2nqqutaP4e6H4i
-	6UW6VrjbmYekaDAatU6PWT+qMgY9RMNCrHH4b2l+IE/wKLLGxHXlmnEpATwbj0RMPDGX
-	mC1WSnkmTsPwQxDJJd7KWv3r3grL/ccG7a8SjlldgHbNaPu2ZozlOWs42lnB+uyoKXCH
-	H13Q==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=qLplYMmaTCzWLKhmczk+rnAgihLKyUXLFL2MoIN20Gc=;
+	b=niBfVTdk+8qMN7qwSaSlu+Rs1hz8JkisBEK1XHE7hqPJWCxij1V56j5aOmIEbvA5aN
+	bAolMCmCjWLSlrlXljmECgFLD2dmVLcks1HdmP0afpXgMvVIARnoyzsKQVpHe3fGivHZ
+	kCpYsa53GkCOI+sVPc2uot0vPAl6ZCSSRRf87r9TwLntG3kxESIUkj6nPgXNJpOHOYwH
+	+CGI0Qq64GmGOFpif79aiXwlVlMfvq/7s7HVv9en/vVbUtT2zLWg4NcTRr+IAPcV8cTE
+	LBY1fpaP0QyHqA/fQavimYNUHNE1SwzjyBWmlYHyxnHyPNnj3C1JSv4tIdvvFM0YfhFM
+	kskg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=S+xjXVxuSaQSbxPuOUbWoO1hFfe80XMyitslroZbMKo=;
-	b=pF5/GPLSZ7qm3Qv4Uzzt65zMMUH320oocC4aIK2QOQtkK3l2kPg6zvLKv/fiTUPGA8
-	/3o/eZ2uSmIWqbdCPAzPfBj1YBORsYYYJ/2HhOcQqBlJCUunyjx7SSA9lhHlYK4N9eXK
-	/aJGzwm3NAeFgVoDKMZmw4SrNok4eSsOprodx8S0Wc+s5WZ0YRjU4TJVBfqORgd0avaD
-	00iN/nJQ6dMeZKALC/a9trTcaTJEc2LlibYY+0KWmp7iVNS4MRyY68Jr6adoBzwz9Z1B
-	U9s/Y5es1fSiGvk60Z3jAShseGDF7rF8svNw2BrvGL+Ti6Ot1482CfpSBsZ/vQkqkfiq
-	Ro1w==
-X-Gm-Message-State: ABuFfohZPfnAC4sv0AqOYXkEx9eGR/fj8IzpTP5ucwkTHtJAwzFVvqyN
-	6MZdUJVw7fBhbi8+RE4dTtld3mGA
-X-Google-Smtp-Source: ACcGV62W21zY9Sjbx0I6cISDADla1CupNCjom+hr+bEig4v0TWAQK3FJhjaNkwMsOhoOHgWoV2myrw==
-X-Received: by 2002:a17:902:40d:: with SMTP id
-	13-v6mr27698905ple.257.1539075277930; 
-	Tue, 09 Oct 2018 01:54:37 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=qLplYMmaTCzWLKhmczk+rnAgihLKyUXLFL2MoIN20Gc=;
+	b=JTPT9cEoAaidEickfz6zi0v+hnMyeaS2xjw/+bQ0Jnjp3vLLdizHEsQgan7vxCZfda
+	LKURBHTIgIYFdeMQj9iL3kWqOe9WDVPl3wxiYnOeVruxagi9xQ6/9BtMgOrSWo+/Ewjc
+	k5I9xa+ZHiQ5uhNNDaW4yiF0s6XHsijPlqXfyfplct422TxkEXhgh9dT8lFKUPoANSbL
+	R6CEUgPh7icpe+voQzJoAmeh8DH0PD9YZ9LghQVH6ob1qVAZtNFoF8fdUA5HSv5NrfER
+	jZxky3NeP3qfUK03YipcJGNZQOu7FU8dZ7gUdN4HjOVJyORBdxawP3pt469UZGXa9SLZ
+	qkpA==
+X-Gm-Message-State: ABuFfojZgQUrl35LqC8yl2mNzZINYWr4+0U1xTAz8JouKQTyJ3JBVrs+
+	ISW6jG5vWBZ6q5OWJp36+1+jIvDD
+X-Google-Smtp-Source: ACcGV603/WJofXnIi5qDd3nTR85ZQIDQqULUd+0Oy7Oj3kP10AiTIh3dwAutSQFbY1rjChBa+hGsVg==
+X-Received: by 2002:a62:1b45:: with SMTP id
+	b66-v6mr29026580pfb.94.1539075284694; 
+	Tue, 09 Oct 2018 01:54:44 -0700 (PDT)
 Received: from localhost.localdomain ([221.158.206.146])
 	by smtp.gmail.com with ESMTPSA id
-	n79-v6sm43298487pfk.19.2018.10.09.01.54.35
+	n79-v6sm43298487pfk.19.2018.10.09.01.54.42
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 09 Oct 2018 01:54:37 -0700 (PDT)
+	Tue, 09 Oct 2018 01:54:43 -0700 (PDT)
 From: Yi-Soo An <yisooan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Oct 2018 17:54:24 +0900
-Message-Id: <20181009085425.18140-1-yisooan@gmail.com>
+Date: Tue,  9 Oct 2018 17:54:25 +0900
+Message-Id: <20181009085425.18140-2-yisooan@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH 1/2] babeld: Add Babel routing protocol
+In-Reply-To: <20181009085425.18140-1-yisooan@gmail.com>
+References: <20181009085425.18140-1-yisooan@gmail.com>
+Subject: [meta-networking][PATCH 2/2] babeld: Fix build fail on LICENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,51 +58,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2018 08:54:37 -0000
-
-Babel is a loop-avoiding distance-vector routing protocol for
-IPv6 and IPv4 with fast convergence properties.
+X-List-Received-Date: Tue, 09 Oct 2018 08:54:44 -0000
 
 Signed-off-by: Yi-Soo An <yisooan@gmail.com>
 ---
- .../recipes-protocols/babeld/babeld_1.8.3.bb  | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
+ .../0001-Rename-LICENCE-to-LICENSE.patch      | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
 
-diff --git a/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb b/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
+diff --git a/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch b/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
 new file mode 100644
-index 000000000..921f7dc08
+index 000000000..de374ad69
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/babeld/babeld_1.8.3.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "Babel is a loop-avoiding distance-vector routing protocol"
-+DESCRIPTION = "\
-+Babel is a loop-avoiding distance-vector routing protocol for IPv6 and \
-+IPv4 with fast convergence properties. It is based on the ideas in DSDV, AODV \
-+and Cisco's EIGRP, but is designed to work well not only in wired networks \
-+but also in wireless mesh networks, and has been extended with support \
-+for overlay networks. Babel is in the process of becoming an IETF Standard. \
-+"
-+HOMEPAGE = "https://www.irif.fr/~jch/software/babel/"
-+SECTION = "net"
++++ b/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
+@@ -0,0 +1,24 @@
++From f58103fc6da9a96c11b653eafd4c2ea7eab7ee68 Mon Sep 17 00:00:00 2001
++From: Yi-Soo An <yisooan@gmail.com>
++Date: Tue, 9 Oct 2018 16:24:32 +0900
++Subject: [PATCH] Rename LICENCE to LICENSE
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
++Although LICENCE is grammatically correct, the recipe requires
++only LICENSE file. If the name does not match LICENSE, it fails
++to build.
 +
-+SRC_URI = "git://github.com/jech/babeld.git;protocol=git"
-+SRCREV = "535184173fcde5ddc43020cd197d01d1ea0e9a8b"
++To fix it, it renames to LICENSE.
 +
-+SRC_URI += "file://0001-Rename-LICENCE-to-LICENSE.patch"
++Signed-off-by: Yi-Soo An <yisooan@gmail.com>
++---
++ LICENCE => LICENSE | 0
++ 1 file changed, 0 insertions(+), 0 deletions(-)
++ rename LICENCE => LICENSE (100%)
 +
-+S = "${WORKDIR}/git"
-+
-+do_compile () {
-+	oe_runmake babeld
-+}
-+
-+do_install () {
-+	oe_runmake install.minimal PREFIX=${D}
-+}
++diff --git a/LICENCE b/LICENSE
++similarity index 100%
++rename from LICENCE
++rename to LICENSE
++-- 
++2.17.1
 +
 -- 
 2.17.1
