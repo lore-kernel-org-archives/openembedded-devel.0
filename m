@@ -1,48 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id ADEA1746A6
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C88B745AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Oct 2018 05:29:37 +0000 (UTC)
-Received: by mail-qt1-f180.google.com with SMTP id c56-v6so317332qtd.11
+	Tue,  9 Oct 2018 07:42:29 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id e187-v6so806590wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Oct 2018 22:29:39 -0700 (PDT)
+	Tue, 09 Oct 2018 00:42:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gDtHNr9v5JYkFHg3qjNPxwbbjjscR3KpPloCSwflIj8=;
-	b=dcj5i+k/tqQi8QrpiDwpXC3FTBo/aaZ+Q8vT/cMq7CHVcsgaX6P73dXFZWSbToAdYo
-	TwLJpfTT428hVAS8YQfwfDuDuCqjujVwov9hNS1Y7zdHi6XIkKTbJHPBb6479BnfctkY
-	pcdaeElnY3+S3aUH12LV1JAepELFbIJTuk/elYCXS9PJZmp06rolMyzl/F30m+2wKsDD
-	eG53pvhVxyrBA7vOf9MmEkMqQnlyz/akiaQ1O5obE8QPS8KvSOVJ0Q1+X4QYbBFMVzTR
-	9mA1ZJbxdhxq2++bG1IUJ99UjS4vmibSFOzEl/qa4Sj70ZSLmz9B9gt/Ape0Uf24UQxS
-	SZWw==
+	h=from:to:cc:subject:date:message-id;
+	bh=nGz7kO+iJPSlWthdNIU0jQAdIXHgMb2zSDoCHOXsw0Y=;
+	b=YoGpCNxijUG1x0AkSVHumeySMSBCmCVVWB5dygOiGFSslMdEA8QP1IL/nHIa/Aqwi0
+	Vt6GScQ3LRofs+HG/2NKZ8iQEm3nSyCtgWrJvZSQplLRQdz09WChXdmvUiLteYxEZ3ad
+	hzNfGNDg3mSAFPqDxHKh/4nvyHqPQxk4KmK9sFqJM4DeoduOipmjZ9Am4nKCbHcs8aOz
+	39TF8vfgqsJoHh/v1zQHZF0F+xGItF9hn+aw+Q5vwoY/JigjFdk8QeVaIfLO+wg9OAIB
+	90uEoNNFHbnJZotGas632eRFtW3HWCdqybVA92tNdNQLrZRYcZvBUGWwBmdrLHAdNtm8
+	9r2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=gDtHNr9v5JYkFHg3qjNPxwbbjjscR3KpPloCSwflIj8=;
-	b=s6ZxNZyyfBUST82Tv6PR6Aq3TC1fprKeScS5/nm9pRElXeCaI7eLYsdpNIAA3RJrH+
-	ssni8ZEX6ENL059m6HuCnnKn8ExppJ2yCql29DeugQkrescxMvcu/FKfsdM6NrcOb2Nb
-	5qivW9e0ReJjcLlCh4RVWf9BzYY3XICOkLJ4N/XuuRbK0vvCzQKqyiWnvUCPLLToTbV0
-	WrZgdxU+wK/7qlj7fciuUVEBFw95JBAtsV/uhUfGnKK0Z8iMCCC0DbyFksZbKV2bmJSG
-	0kOKD7d+LOQvsj+dbEy6UuEasdO0d9XlMpUYIxYMojCBLWZ2tEfGOCLiRj3JW8MK/D90
-	hbvw==
-X-Gm-Message-State: ABuFfojDv+ys3l5byBprCN5E4mVc7On3eTKr/TEOnJ8sYunUunKrpjRj
-	ezrkRM1X9w2N+0DOmp86/Wh+Cz7KMFWNKnwnAiM=
-X-Google-Smtp-Source: ACcGV60FvQX3UY889Fo3yFRoC1IVLk/+lH27zOK5MNOk6wq1Xd/tgOV8Iy1QBpj0NAX6TjydYcskDbkuW7N9BSuevds=
-X-Received: by 2002:ac8:4912:: with SMTP id
-	e18-v6mr22244814qtq.34.1539062978363; 
-	Mon, 08 Oct 2018 22:29:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20181009045520.32013-1-douglas.royds@taitradio.com>
-	<61910e8d-fdb7-1cc8-8b25-f60a4e120548@taitradio.com>
-In-Reply-To: <61910e8d-fdb7-1cc8-8b25-f60a4e120548@taitradio.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Oct 2018 22:29:12 -0700
-Message-ID: <CAMKF1soj=qv2UusvK2CADBFnLGbwx8Gw7nHtLHKy-yQfZXJaqQ@mail.gmail.com>
-To: Douglas Royds <douglas.royds@taitradio.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] openldap: Reproducibility: Remove user, hostname, pwd from version string
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nGz7kO+iJPSlWthdNIU0jQAdIXHgMb2zSDoCHOXsw0Y=;
+	b=fY7hE+lBhaBrCOL4YuE5ZAd3u8LePpm22yTuQZC28hJQTAQf3+Mw2yJwWZDVQKNEw4
+	ZTcDs0GULSGh9ZaQ2M7ZIu68Fdr+jedQep/NXX5UQwJdkTx0RTI0ZMMjk7/zn2Jm7BKL
+	ZDrSRWeFvCdMtPQ0mo8ldKqKF5mptnytu0XIYNfdTsFjBEXki5fhFkM2ylHQ4EaN/X7o
+	XMYTW9byjPwCYmhfonlX2wcY8bqqdEocp70lFwGOQvV3D6TL7au67f8lLRAAitcxc84T
+	2QaDyQ4ZXv/SIem2A9WNZOpGgc4Dx+A7kEC1z6h4LJUNJLg5tx9nMXjg7YavUx606QNB
+	cmyA==
+X-Gm-Message-State: ABuFfoizUFddMKlH4/JG8g/xOEfngnMTUnbtdMZdgRAOXHZH/jdtiOgj
+	/fCbzg28+XNuMfH9dFfX3vPBKa3IYqA=
+X-Google-Smtp-Source: ACcGV635RAArtnTayBk/BZGstB/rhsonLLneX3b5fxJHQDoml2R9gpS3NdZQ4VY3rOFu6k9+9dpGpA==
+X-Received: by 2002:a1c:6543:: with SMTP id z64-v6mr979262wmb.57.1539070949665;
+	Tue, 09 Oct 2018 00:42:29 -0700 (PDT)
+Received: from localhost.localdomain ([176.12.107.132])
+	by smtp.gmail.com with ESMTPSA id
+	l125-v6sm19070280wmb.1.2018.10.09.00.42.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 09 Oct 2018 00:42:28 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Oct 2018 07:42:20 +0000
+Message-Id: <1539070940-28150-1-git-send-email-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] crda: Fix usrmerge install path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,34 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Oct 2018 05:29:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 09 Oct 2018 07:42:29 -0000
 
-On Mon, Oct 8, 2018 at 10:06 PM Douglas Royds
-<douglas.royds@taitradio.com> wrote:
->
-> Is this a good idea? We need to replace the WHOWHERE value with
-> something fixed, so I've opted for the SOURCE_DATE_EPOCH. If you're not
-> trying to do a reproducible build, it won't be set, so the existing
-> WHOWHERE string will apply.
->
-> I'll wait for other opinions before submitting this upstream.
->
+Set UDEV_RULE_DIR so we follow usrmerge paths, fixing:
 
-this is fine.
+  ERROR: QA Issue: crda package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]
 
->
-> On 09/10/18 17:55, Douglas Royds wrote:
->
-> > Upstream-Status: Pending
-> > ...
-> > +-WHOWHERE="$USER@`uname -n`:`pwd`"
-> > ++WHOWHERE="${SOURCE_DATE_EPOCH:-$USER@`uname -n`:`pwd`}"
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
+
+ meta-networking/recipes-connectivity/crda/crda_3.18.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+index 853a52346db1..d5d2ab68c6c3 100644
+--- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
++++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+@@ -27,7 +27,8 @@ inherit python-dir pythonnative siteinfo
+ DEFAULT_CRYPT ??= "gcrypt"
+ 
+ # Recursive make problem
+-EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg'"
++EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg' \
++                UDEV_RULE_DIR=${nonarch_libdir}/udev/rules.d/"
+ EXTRA_OEMAKE_append = " ${@oe.utils.conditional("DEFAULT_CRYPT", "openssl", "USE_OPENSSL=1", "", d)}"
+ TARGET_BITS = "${SITEINFO_BITS}"
+ export TARGET_BITS
+-- 
+2.7.4
+
 
