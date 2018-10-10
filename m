@@ -1,56 +1,24 @@
-Return-Path: <yisooan@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 55A3E76EBF
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8600974A25
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 00:42:24 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id 80-v6so1630922pgh.10
+	Wed, 10 Oct 2018 01:30:42 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w9A1UMuq011383
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 17:42:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=6Qww+NMQ6k5wUrYjwKckS31ONqFUgM3kDT6kPfCcvrs=;
-	b=b9yR3JGNkQNZ54MNOTUCvPpTOMgJOushu2EMAdquBmmB0pNEUg92klAtZiFHiP2o9e
-	BjwUMrWD/V8o1J3BProTg2dL3jY7xzxh2YUG6+WsMMre96mHcT/wV75tKEInTeZOGUxU
-	5+zYssYZec/S6/oHc4HbmqywGc5gNhHmEOD2UFdmanpCCWjPkATiGexD5W7nUhf/W2R0
-	WUWffaisNi5hDqAfd7BvpOOUJ29XYP50EvrphcARYT0MTZFuL42eto5+rGd5O3R9h2yv
-	wRlr3XUCic1oJYjNAGzdJKAkEQiGU4dYJM8SVmVzDzntG2cNFsBn63/cAajIKnyq+z6C
-	sI9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=6Qww+NMQ6k5wUrYjwKckS31ONqFUgM3kDT6kPfCcvrs=;
-	b=DpIRwAL7elNcWwKtXbn0s3UMyizYVwomkupeq5be/1s5RiG+m01f/nFEK/J08DQopq
-	hluWguuRjIaAe0TLPB3Pr7AArl0JKqR7TPBxFgv66Jei08ZbqMjaq0mubR5KECwr7jyK
-	LJo0bQE82m3JHBQNN6vKlk5Jrzqgt473TUkMTDmMdiGftcCGrXAUkkFYQDr8SbVttejq
-	i0w8J6M5NXHvQTHRdm0Ed5K7wLYmR1clKkavjIOJa1V7qZERaxVxgl9s6Tyw1a4fBQhI
-	p0ye6rQP1KCpDYbk9HiZXqhEo6FWMGayQjkGYllwFFDRVGpL3jnIA6zyC7nCABuoJMle
-	iaSA==
-X-Gm-Message-State: ABuFfog8AoCr2St9ws/yG/ES7mwQi6WQJb6dveZsbDFv+dAnLeGlgOD4
-	5YnubfE1ZIrmThtPY1uVkJ8=
-X-Google-Smtp-Source: ACcGV61mE9FCRP4yd5VPUWMsIOy+wEUTon8dWfoA+MqMCJXa4q1qP1Y+0jZiaBW+Mhqb8J8jnlmC2Q==
-X-Received: by 2002:a62:830e:: with SMTP id
-	h14-v6mr33057437pfe.29.1539132145293; 
-	Tue, 09 Oct 2018 17:42:25 -0700 (PDT)
-Received: from localhost.localdomain ([221.158.206.146])
-	by smtp.gmail.com with ESMTPSA id
-	r76-v6sm17493039pgr.11.2018.10.09.17.42.23
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Oct 2018 17:42:24 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org, yisooan@gmail.com
-References: <20181009085425.18140-1-yisooan@gmail.com>
-	<20181009085425.18140-2-yisooan@gmail.com>
-From: Yi-Soo An <yisooan@gmail.com>
-Message-ID: <b90c2a55-134c-9482-0600-2f3d12ba2bf7@gmail.com>
-Date: Wed, 10 Oct 2018 09:42:21 +0900
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.9.1
+	Tue, 9 Oct 2018 18:30:33 -0700
+Received: from fidler.wrs.com (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.408.0;
+	Tue, 9 Oct 2018 18:30:11 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 9 Oct 2018 21:30:10 -0400
+Message-ID: <20181010013010.15777-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-In-Reply-To: <20181009085425.18140-2-yisooan@gmail.com>
-Subject: Re: [meta-networking][PATCH 2/2] babeld: Fix build fail on LICENCE
+Subject: [meta-oe][PATCH] crash: Update from 7.2.3 to to 7.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,54 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 00:42:24 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Oct 2018 01:30:42 -0000
+Content-Type: text/plain
 
-This patch is not necessary since [meta-networking,v2][PATCH] babeld: 
-Add Babel routing protocol recipe. the v2 patch points to LICENCE 
-instead of renaming it to LICENSE.
+Change log: http://people.redhat.com/anderson/crash.changelog.html
 
-Best regards,
-Yi-Soo
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ .../recipes-kernel/crash/{crash_7.2.3.bb => crash_7.2.4.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-kernel/crash/{crash_7.2.3.bb => crash_7.2.4.bb} (97%)
 
-On 10/09/2018 05:54 PM, Yi-Soo An wrote:
-> Signed-off-by: Yi-Soo An <yisooan@gmail.com>
-> ---
->   .../0001-Rename-LICENCE-to-LICENSE.patch      | 24 +++++++++++++++++++
->   1 file changed, 24 insertions(+)
->   create mode 100644 meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
-> 
-> diff --git a/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch b/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
-> new file mode 100644
-> index 000000000..de374ad69
-> --- /dev/null
-> +++ b/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
-> @@ -0,0 +1,24 @@
-> +From f58103fc6da9a96c11b653eafd4c2ea7eab7ee68 Mon Sep 17 00:00:00 2001
-> +From: Yi-Soo An <yisooan@gmail.com>
-> +Date: Tue, 9 Oct 2018 16:24:32 +0900
-> +Subject: [PATCH] Rename LICENCE to LICENSE
-> +
-> +Although LICENCE is grammatically correct, the recipe requires
-> +only LICENSE file. If the name does not match LICENSE, it fails
-> +to build.
-> +
-> +To fix it, it renames to LICENSE.
-> +
-> +Signed-off-by: Yi-Soo An <yisooan@gmail.com>
-> +---
-> + LICENCE => LICENSE | 0
-> + 1 file changed, 0 insertions(+), 0 deletions(-)
-> + rename LICENCE => LICENSE (100%)
-> +
-> +diff --git a/LICENCE b/LICENSE
-> +similarity index 100%
-> +rename from LICENCE
-> +rename to LICENSE
-> +--
-> +2.17.1
-> +
-> 
+diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.3.bb b/meta-oe/recipes-kernel/crash/crash_7.2.4.bb
+similarity index 97%
+rename from meta-oe/recipes-kernel/crash/crash_7.2.3.bb
+rename to meta-oe/recipes-kernel/crash/crash_7.2.4.bb
+index 45a26545d..c72b1a321 100644
+--- a/meta-oe/recipes-kernel/crash/crash_7.2.3.bb
++++ b/meta-oe/recipes-kernel/crash/crash_7.2.4.bb
+@@ -25,8 +25,8 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
+            file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
+            file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
+            "
+-SRC_URI[md5sum] = "4026bc71c8c8c49477f4f551e25ee9fb"
+-SRC_URI[sha256sum] = "4c861b6fc05ab5048e8d3552445c1a08860d238e83f17ff6b51493cc17bcaa75"
++SRC_URI[md5sum] = "4f66eb0e9a82ff83de06ac2b37501f5c"
++SRC_URI[sha256sum] = "85ca2e93f1ee628ef2499ab9c78623f8b04500bdf7378c09de19283f6a7a698f"
+ 
+ SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
+ SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
+-- 
+2.17.0
+
 
