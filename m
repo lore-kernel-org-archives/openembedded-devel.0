@@ -1,49 +1,50 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E0D16E630
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+	[209.85.210.180])
+	by mail.openembedded.org (Postfix) with ESMTP id CD01E748D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 00:30:56 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id p25-v6so1618354pli.11
+	Wed, 10 Oct 2018 00:36:13 +0000 (UTC)
+Received: by mail-pf1-f180.google.com with SMTP id m77-v6so1694819pfi.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 17:30:57 -0700 (PDT)
+	Tue, 09 Oct 2018 17:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:openpgp:autocrypt:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=NjwEKLwsr7uYIof+HMrVi4siex+I6njxK1Irq2lDWp4=;
-	b=vZWz4giTrQJzRORyf64L3aEidffdumg67rceLSCCCrJR0J8qZJV+zqiM5eo0NoDJnA
-	uCHzSCeN5SDE8kucckeckyd8QVGQO6PPvhQfsM04upCMSVKqnyug+q/xV3NxgLgXo3RU
-	ZnpWdKmhI+ktlAZJL4vvZEQjPgx5U6ESAhluC7QWHGJP2AUcV2UyLe+mpyPTVGE/p1aF
-	iEz5bRRC1sE96yhC+Qozy/MCjMqSqGKgdJTZyKNn9+PLIOEJLx5/7K9vgpzylOHrAYcE
-	YtvkAJf+5JX794g1vzHAMy9EwxKJ/hxbGBsnumA7sYVx43YJLiawmcMOfWzQRExF3VpW
-	ZXcA==
+	bh=5JanwpmfO52Q01DDviPBWyawVCOJZ27/GT3ci4zaFIw=;
+	b=cgGxTKllKFF4iV3phfLDb+pAgxw9dqahMbwtu9RZoju52NFaum8nLbD9eaONcxzEaT
+	dnB/rrh981EecaAF7F9ThiSGqGvF1JRKAsYiuvAD4l4DAsLwM/uYOzT4cu2Mowt5gFiT
+	0gwajnKtF0W/Et/rhv+n4v5azA+tL8lxP8LBkAnAAHnivrEua61kzJSEA5Lp0jIMAq/x
+	3sQ5gDbaU5j18hyf3mSS5WUpTD+k9c9MchvUuBN5em2RH3KcBXYUbu3COsAECVCcnHef
+	9VtHNQKPVm+EwcHcmEehExuCJFC8kg2KfIycLiH1FaZg+2xqf3vJdCQfzNFj42Vz1DDz
+	4eSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=NjwEKLwsr7uYIof+HMrVi4siex+I6njxK1Irq2lDWp4=;
-	b=PeIJIe9aq/78U0bl3or3oA76Isns2ddTSCskdk1WEUDd3IeUc6+jR3S8D2g+sX9IsF
-	x8DXw4E6UpqWxa7NXxfIVqUWe/BapYV8UjXlEIuMrttUKDvgKEn2xnjg2iAbjwk9yrH5
-	4pogMqsUJN4Od1CElcG4pq+y+yvdfmqcDZDdlU0DDahIFJpJsL4RwMEMtNHyceV7/U02
-	dFLehoNDAtoOp3BvgxHPZLXLG53ZOX7CCXfXjON/JRCNzC/Vp8ybtVUP26krcaUqw+8R
-	H/dyVQLBQR6KcHD3sqjzrXTcngP7v3bgkobas/7/YbP54FuQxANoMz2WWBZF60YeT9tc
-	eweA==
-X-Gm-Message-State: ABuFfohTmC4f92kkc7Tk5Jo/wW2gYToiw5J215BkisQOmX+mWZ8UoKAx
-	ugrTksaE+XEakcACSRAPLpEKMaDA
-X-Google-Smtp-Source: ACcGV62DMBZliaG2Q7ysho2nOmz6odMx4Gz+NsoYqoOsTrak74zv269Vfiql+DkcKzm80ac/NAIISw==
-X-Received: by 2002:a17:902:562:: with SMTP id
-	89-v6mr23496326plf.315.1539131456382; 
-	Tue, 09 Oct 2018 17:30:56 -0700 (PDT)
+	bh=5JanwpmfO52Q01DDviPBWyawVCOJZ27/GT3ci4zaFIw=;
+	b=TXwU7DnZgEdSskATjD6NRIJL+Dqjf+fOynZ91LLjfGuna17DZ4HtR2MlaOfbdURJWk
+	3owk3OecIl8VyzSQQb8BcUabSgUa3T3/VD0uDvjMKEffpstxjzMWIMPmRp3LNqJhaXJb
+	XKW2U29Btcg6HRm58w1IOoz4LpxP50UyEPhfmWmnhsRlvY7ZrW2tF2QZsnRhhSBUjG25
+	nV+juEBP5Q2a75lvxPLlTg5xbhcLN+EQDjgzXgiyuVi8RtUYeckKrSveCJMP+EceYb48
+	Hk9bZ14KKE58TAtXNh5epif05Mjd68I8oY0bJGT1xEcatnWtMCxIz3qRV6JcyLapjw6r
+	DyZw==
+X-Gm-Message-State: ABuFfojUyS6KTmpA7LrGjNxbk3S/FY0fXQ7f2vg2LfWfeV2IJdFfS2vM
+	n/wtz1Zv3/SoL4fO7EPKBqow4Bfr
+X-Google-Smtp-Source: ACcGV61Of+RkZfAkUSl+3W4KktbYAN6tt1spjC8CTi9PUSY54ASAJ8XKBewleT9QypJ28riSJ1MWFQ==
+X-Received: by 2002:a63:d00b:: with SMTP id
+	z11-v6mr27940241pgf.317.1539131774447; 
+	Tue, 09 Oct 2018 17:36:14 -0700 (PDT)
 Received: from [10.43.100.234] (64.2.3.196.ptr.us.xo.net. [64.2.3.196])
 	by smtp.gmail.com with ESMTPSA id
-	o131-v6sm7970764pgo.53.2018.10.09.17.30.53
+	e7-v6sm32555948pfk.3.2018.10.09.17.36.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Oct 2018 17:30:53 -0700 (PDT)
-To: Eddie James <eajames@linux.ibm.com>,
+	Tue, 09 Oct 2018 17:36:13 -0700 (PDT)
+To: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>,
 	openembedded-devel@lists.openembedded.org
-References: <1539109670-43001-1-git-send-email-eajames@linux.ibm.com>
+References: <CAMKF1sqm2-6+mKtpLfk6jTwugc+vTy2U6mWrrKB8-iL-zV95qw@mail.gmail.com>
+	<1539092429-3587-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,13 +90,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <79b03cc8-41cf-f27e-c4ea-45f57f4a7ac9@gmail.com>
-Date: Tue, 9 Oct 2018 17:30:52 -0700
+Message-ID: <b927b1b3-1816-9685-4ed2-bf2bb0b6e8e6@gmail.com>
+Date: Tue, 9 Oct 2018 17:36:12 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <1539109670-43001-1-git-send-email-eajames@linux.ibm.com>
-Subject: Re: [meta-oe][PATCH] libvncserver: Update to latest version
+In-Reply-To: <1539092429-3587-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
+Subject: Re: [meta-oe][PATCH v2] nvme-cli: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,119 +109,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 00:30:56 -0000
+X-List-Received-Date: Wed, 10 Oct 2018 00:36:14 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 10/09/2018 11:27 AM, Eddie James wrote:
-> The latest release of libvncserver is almost two years old. A number of=
-
-> security fixes and enhancements have recently been committed. Since the=
- repo
-> is stable, point the recipe to the latest commit.
+On 10/09/2018 06:40 AM, Stefan Wiehler wrote:
+> NVMe management command line interface.
 >
-> libvncserver switched from autotools to cmake, so update the recipe as
-> necessary, and add PACKAGECONFIG options to allow a more minimal build =
-and
-> install.
->
-> Signed-off-by: Eddie James <eajames@linux.ibm.com>
+> Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
 > ---
->  .../libvncserver/libvncserver_0.9.11.bb            | 25 --------------=
---------
->  .../libvncserver/libvncserver_git.bb               | 23 ++++++++++++++=
-++++++
->  2 files changed, 23 insertions(+), 25 deletions(-)
->  delete mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_=
-0.9.11.bb
->  create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver_=
-git.bb
 >
-> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.=
-bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> deleted file mode 100644
-> index 38dac06..0000000
-> --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -DESCRIPTION =3D "library for easy implementation of a RDP/VNC server"
-> -HOMEPAGE =3D "https://libvnc.github.io"
-> -SECTION =3D "libs"
-> -PRIORITY =3D "optional"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D361b6b837cad26c6900a926b62a=
-ada5f"
-> -
-> -DEPENDS +=3D "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp=
-"
-> -
-> -PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES','systemd',=
-'systemd','',d)}"
-> -PACKAGECONFIG[systemd] =3D ",,systemd"
-> -
-> -RDEPENDS_${PN} +=3D "libpng gtk+ libgcrypt"
-> -
-> -inherit distro_features_check autotools binconfig pkgconfig
-> -
-> -REQUIRED_DISTRO_FEATURES =3D "x11"
-> -
-> -SRC_URI =3D "https://github.com/LibVNC/libvncserver/archive/LibVNCServ=
-er-${PV}.tar.gz"
-> -SRC_URI[md5sum] =3D "7f06104d5c009813e95142932c4ddb06"
-> -SRC_URI[sha256sum] =3D "193d630372722a532136fd25c5326b2ca1a636cbb8bf9b=
-b115ef869c804d2894"
-> -
-> -S =3D "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
-> -
-> -TARGET_LDFLAGS +=3D "-lgcrypt"
-> diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb =
-b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
+> Change: Use bash-completion class and patch bash completion install path
+>
+>  ...Makefile-fix-bash-completion-install-path.patch | 33 ++++++++++++++++++++++
+>  meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb  | 21 ++++++++++++++
+
+Would it be more appropriate to have this in the recipes-bsp ?
+
+
+>  2 files changed, 54 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
+>  create mode 100644 meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+>
+> diff --git a/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch b/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
 > new file mode 100644
-> index 0000000..9fb2c09
-
-This removes any notion of a version. I think that is not ideal.
-
-Does the git hash equate to version ?
+> index 0000000..ecd4f03
 > --- /dev/null
-> +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_git.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION =3D "library for easy implementation of a RDP/VNC server"
-> +HOMEPAGE =3D "https://libvnc.github.io"
-> +SECTION =3D "libs"
-> +PRIORITY =3D "optional"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D361b6b837cad26c6900a926b62a=
-ada5f"
+> +++ b/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
+> @@ -0,0 +1,33 @@
+> +From ef64032b34190079aab591c64a25f7535a977390 Mon Sep 17 00:00:00 2001
+> +From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+> +Date: Tue, 9 Oct 2018 11:26:34 +0200
+> +Subject: [PATCH] Makefile: fix bash completion install path
 > +
-> +PACKAGECONFIG ??=3D "gcrypt gnutls jpeg png ${@bb.utils.contains('DIST=
-RO_FEATURES','systemd','systemd','',d)} sdl zlib"
-> +PACKAGECONFIG[gcrypt] =3D ",,libgcrypt,libgcrypt"
-> +PACKAGECONFIG[gnutls] =3D ",,gnutls"
-> +PACKAGECONFIG[jpeg] =3D ",-DWITH_JPEG=3DOFF,jpeg"
-> +PACKAGECONFIG[openssl] =3D ",,openssl"
-> +PACKAGECONFIG[png] =3D ",-DWITH_PNG=3DOFF,libpng,libpng"
-> +PACKAGECONFIG[systemd] =3D ",,systemd"
-> +PACKAGECONFIG[sdl] =3D ",,libsdl2"
-> +PACKAGECONFIG[zlib] =3D ",,zlib"
+> +Change path to bash-completion upstream recommendation used by most
+> +distributions.
 > +
-> +inherit cmake
+> +Upstream-Status: Submitted [https://github.com/linux-nvme/nvme-cli/pull/418]
 > +
-
-
-Have you run " yocto-check-layer"=C2=A0 with this?
-
-I had to add 'REQUIRED_DISTRO_FEATURES =3D "x11" ' to make it pass on the=
-
-previous version.
-
-
-> +SRC_URI =3D "git://github.com/LibVNC/libvncserver"
-> +SRCREV =3D "7b1ef0ffc4815cab9a96c7278394152bdc89dc4d"
+> +Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+> +---
+> + Makefile | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
 > +
-> +S =3D "${WORKDIR}/git"
-- Armin
+> +diff --git a/Makefile b/Makefile
+> +index fa587dd..433bc41 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -69,8 +69,8 @@ install-bin: default
+> + 	$(INSTALL) -m 755 nvme $(DESTDIR)$(SBINDIR)
+> + 
+> + install-bash-completion:
+> +-	$(INSTALL) -d $(DESTDIR)$(PREFIX)/share/bash_completion.d
+> +-	$(INSTALL) -m 644 -T ./completions/bash-nvme-completion.sh $(DESTDIR)$(PREFIX)/share/bash_completion.d/nvme
+> ++	$(INSTALL) -d $(DESTDIR)$(PREFIX)/share/bash-completion/completions
+> ++	$(INSTALL) -m 644 -T ./completions/bash-nvme-completion.sh $(DESTDIR)$(PREFIX)/share/bash-completion/completions/nvme
+> + 
+> + install: install-bin install-man install-bash-completion
+> + 
+> +-- 
+> +1.9.1
+> +
+> diff --git a/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+> new file mode 100644
+> index 0000000..9b7e6cd
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY = "NVMe management command line interface"
+> +AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
+> +HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
+> +SECTION = "console/utils"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
+> +DEPENDS = "util-linux"
+> +PV .= "+git${SRCPV}"
+> +
+> +SRC_URI = "git://github.com/linux-nvme/nvme-cli.git \
+> +           file://0001-Makefile-fix-bash-completion-install-path.patch \
+> +           "
+> +SRCREV = "642d426faf8a67ed01e90f7c35c0d967f8cc52a3"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit bash-completion
+> +
+> +do_install() {
+> +    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
+> +}
 
 
