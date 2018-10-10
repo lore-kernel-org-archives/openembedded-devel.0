@@ -1,12 +1,13 @@
 Return-Path: <prvs=8141f8401=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C9A560237
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E2B074623
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 07:38:09 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.54,363,1534802400"; d="scan'208";a="12788206"
+	Wed, 10 Oct 2018 07:38:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.54,363,1534802400"; 
+   d="scan'208";a="1715745"
 To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
 	<openembedded-devel@lists.openembedded.org>
-References: <20180918151043.32634-1-git@andred.net>
+References: <20180918144844.28163-1-git@andred.net>
 From: Richard Leitner <richard.leitner@skidata.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
@@ -52,16 +53,16 @@ Autocrypt: addr=richard.leitner@skidata.com; prefer-encrypt=mutual; keydata=
 	W9UgPIInoRAuqqZQy2qy6T7zkTJa9yrlQZaJDMQX0Li/+AV33t/IYOQZtVTduVNmQJZOnpnM
 	Dsyju/Zw0e90l1NiV5ehGe3H0XI89Z0BNWrnZj2/2K/bVEdQ2fnKMT0cygvkL8fPhlyy1H9L
 	P3I6bcPJefUstj65yFQnTw==
-Message-ID: <28a8de89-a1f5-77be-0cd6-4d8424bfa2f2@skidata.com>
-Date: Wed, 10 Oct 2018 09:39:28 +0200
+Message-ID: <51f82efc-b555-745d-7bc6-f0306b3ce844@skidata.com>
+Date: Wed, 10 Oct 2018 09:39:51 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.2.1
 MIME-Version: 1.0
-In-Reply-To: <20180918151043.32634-1-git@andred.net>
+In-Reply-To: <20180918144844.28163-1-git@andred.net>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] openjdk-8: support rm_work disabled
+Subject: Re: [meta-java][PATCH v2] openjdk: remove incorrect PROVIDES (java2-vm java2-runtime)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -74,7 +75,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 07:38:09 -0000
+X-List-Received-Date: Wed, 10 Oct 2018 07:38:46 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -91,43 +92,79 @@ If you have any questions, please let me know.
 
 regards;Richard.L
 
-On 9/18/18 5:10 PM, André Draszik wrote:
+On 9/18/18 4:48 PM, André Draszik wrote:
 > From: André Draszik <andre.draszik@jci.com>
 > 
-> Now that generation of the Java keystore actually works (again?),
-> OE-core commit 09bb7718d74 ("ca-certificates: use relative symlinks from $ETCCERTSDIR"),
-> do_compile() will fail when invoked multiple times.
+> There are two issues here:
+> * PROVIDES is not package specific
+> * it doesn't look like the intention is to be able to
+>   DEPENDS on java2-vm or java2-runtime anyway
 > 
-> The reason is that during do_compile(), the Java keytool is
-> used to create a Java keystore with the certificates provided
-> by ca-certificates. Before above OE-core commit, no
-> certificates were actually being added, but as certificates
-> are being added now, multiple do_compile() runs will end up
-> adding the same certificate twice when rm_work is disabled,
-> causing a keytool exception, as that is not allowed.
+> Regarding java2-vm:
+> -------------------
+> java2-vm was originally used in the OpenJDK 6 & 7 recipes to be able to
+> select shark, zero, cacao, or jamvm VMs. OpenJDK-6 is not available any
+> more, and OpenJDK-7 has removed support for most of this in commit
+> 38f4c1365c11 ("openjdk7: remove broken/unsupported VM's")
 > 
-> So let's remove any previously generated keystore before trying
-> to add certificates to it.
+> It is not clear why it was added to the OpenJDK-8 recipe either.
+> 
+> Given OpenJDK-7 has no way of using the VM compiled as part of OpenJDK-8,
+> and given that no part of the OpenJDK-8 makes use of the java2-vm part, the
+> correct solution here is to actually *remove* the incorrect PROVIDES as
+> well as *R*PROVIDES statements for java2-vm completely.
+> 
+> Regarding java2-runtime:
+> ------------------------
+> Again, looking at the other uses of this:
+> java2-runtime is a virtual runtime package name, which is provided by
+> different *runtime* packages (created by the OpenJDK-7, OpenJDK-8, JamVM, or
+> Cacao recipes). Other recipes only ever RDEPEND on java2-runtime. It makes
+> no sense for the OpenJDK-8 recipe to PROVIDES java2-runtime given the above.
+> 
+> Remove the incorrect (R)PROVIDES statements.
 > 
 > Signed-off-by: André Draszik <andre.draszik@jci.com>
 > 
 > ---
 > This applies on top of commit ec5aae3d ("conf: distro: add mejate{,-musl} distributions")
-> ---
->  recipes-core/openjdk/openjdk-8-native.inc | 1 +
->  1 file changed, 1 insertion(+)
 > 
-> diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
-> index 6a01046..bae5d09 100644
-> --- a/recipes-core/openjdk/openjdk-8-native.inc
-> +++ b/recipes-core/openjdk/openjdk-8-native.inc
-> @@ -55,6 +55,7 @@ do_configure_prepend() {
+> v2:
+> also remove incorrect RPROVIDES java2-vm statements as per description
+> ---
+>  recipes-core/openjdk/openjdk-8_172b11.bb | 3 ---
+>  recipes-core/openjdk/openjre-8_172b11.bb | 3 ---
+>  2 files changed, 6 deletions(-)
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8_172b11.bb b/recipes-core/openjdk/openjdk-8_172b11.bb
+> index c1c6e1e..72f208e 100644
+> --- a/recipes-core/openjdk/openjdk-8_172b11.bb
+> +++ b/recipes-core/openjdk/openjdk-8_172b11.bb
+> @@ -47,10 +47,7 @@ FILES_${PN}-doc_append = "\
 >  
->  do_compile_prepend() {
->      export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS}"
-> +    rm -f "${B}/images/j2sdk-image/jre/lib/security/cacerts"
->  }
+>  FILES_${PN}-source = " ${JDK_HOME}/src.zip "
 >  
->  do_compile_append() {
+> -RPROVIDES_${PN} = "java2-vm"
+> -PROVIDES_${PN} = "java2-vm"
+>  RPROVIDES_${PN} = "java2-runtime"
+> -PROVIDES_${PN} = "java2-runtime"
+>  
+>  inherit update-alternatives
+>  
+> diff --git a/recipes-core/openjdk/openjre-8_172b11.bb b/recipes-core/openjdk/openjre-8_172b11.bb
+> index dd29691..e9b930b 100644
+> --- a/recipes-core/openjdk/openjre-8_172b11.bb
+> +++ b/recipes-core/openjdk/openjre-8_172b11.bb
+> @@ -35,10 +35,7 @@ FILES_${PN}-doc_append = "\
+>      ${JRE_HOME}/THIRD_PARTY_README \
+>  "
+>  
+> -RPROVIDES_${PN} = "java2-vm"
+> -PROVIDES_${PN} = "java2-vm"
+>  RPROVIDES_${PN} = "java2-runtime"
+> -PROVIDES_${PN} = "java2-runtime"
+>  
+>  inherit update-alternatives
+>  
 > 
 
