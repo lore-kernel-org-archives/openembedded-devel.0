@@ -1,102 +1,56 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id CD01E748D5
+Return-Path: <yisooan@gmail.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 55A3E76EBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Oct 2018 00:36:13 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id m77-v6so1694819pfi.8
+	Wed, 10 Oct 2018 00:42:24 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id 80-v6so1630922pgh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Oct 2018 17:36:15 -0700 (PDT)
+	Tue, 09 Oct 2018 17:42:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=5JanwpmfO52Q01DDviPBWyawVCOJZ27/GT3ci4zaFIw=;
-	b=cgGxTKllKFF4iV3phfLDb+pAgxw9dqahMbwtu9RZoju52NFaum8nLbD9eaONcxzEaT
-	dnB/rrh981EecaAF7F9ThiSGqGvF1JRKAsYiuvAD4l4DAsLwM/uYOzT4cu2Mowt5gFiT
-	0gwajnKtF0W/Et/rhv+n4v5azA+tL8lxP8LBkAnAAHnivrEua61kzJSEA5Lp0jIMAq/x
-	3sQ5gDbaU5j18hyf3mSS5WUpTD+k9c9MchvUuBN5em2RH3KcBXYUbu3COsAECVCcnHef
-	9VtHNQKPVm+EwcHcmEehExuCJFC8kg2KfIycLiH1FaZg+2xqf3vJdCQfzNFj42Vz1DDz
-	4eSQ==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=6Qww+NMQ6k5wUrYjwKckS31ONqFUgM3kDT6kPfCcvrs=;
+	b=b9yR3JGNkQNZ54MNOTUCvPpTOMgJOushu2EMAdquBmmB0pNEUg92klAtZiFHiP2o9e
+	BjwUMrWD/V8o1J3BProTg2dL3jY7xzxh2YUG6+WsMMre96mHcT/wV75tKEInTeZOGUxU
+	5+zYssYZec/S6/oHc4HbmqywGc5gNhHmEOD2UFdmanpCCWjPkATiGexD5W7nUhf/W2R0
+	WUWffaisNi5hDqAfd7BvpOOUJ29XYP50EvrphcARYT0MTZFuL42eto5+rGd5O3R9h2yv
+	wRlr3XUCic1oJYjNAGzdJKAkEQiGU4dYJM8SVmVzDzntG2cNFsBn63/cAajIKnyq+z6C
+	sI9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=5JanwpmfO52Q01DDviPBWyawVCOJZ27/GT3ci4zaFIw=;
-	b=TXwU7DnZgEdSskATjD6NRIJL+Dqjf+fOynZ91LLjfGuna17DZ4HtR2MlaOfbdURJWk
-	3owk3OecIl8VyzSQQb8BcUabSgUa3T3/VD0uDvjMKEffpstxjzMWIMPmRp3LNqJhaXJb
-	XKW2U29Btcg6HRm58w1IOoz4LpxP50UyEPhfmWmnhsRlvY7ZrW2tF2QZsnRhhSBUjG25
-	nV+juEBP5Q2a75lvxPLlTg5xbhcLN+EQDjgzXgiyuVi8RtUYeckKrSveCJMP+EceYb48
-	Hk9bZ14KKE58TAtXNh5epif05Mjd68I8oY0bJGT1xEcatnWtMCxIz3qRV6JcyLapjw6r
-	DyZw==
-X-Gm-Message-State: ABuFfojUyS6KTmpA7LrGjNxbk3S/FY0fXQ7f2vg2LfWfeV2IJdFfS2vM
-	n/wtz1Zv3/SoL4fO7EPKBqow4Bfr
-X-Google-Smtp-Source: ACcGV61Of+RkZfAkUSl+3W4KktbYAN6tt1spjC8CTi9PUSY54ASAJ8XKBewleT9QypJ28riSJ1MWFQ==
-X-Received: by 2002:a63:d00b:: with SMTP id
-	z11-v6mr27940241pgf.317.1539131774447; 
-	Tue, 09 Oct 2018 17:36:14 -0700 (PDT)
-Received: from [10.43.100.234] (64.2.3.196.ptr.us.xo.net. [64.2.3.196])
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=6Qww+NMQ6k5wUrYjwKckS31ONqFUgM3kDT6kPfCcvrs=;
+	b=DpIRwAL7elNcWwKtXbn0s3UMyizYVwomkupeq5be/1s5RiG+m01f/nFEK/J08DQopq
+	hluWguuRjIaAe0TLPB3Pr7AArl0JKqR7TPBxFgv66Jei08ZbqMjaq0mubR5KECwr7jyK
+	LJo0bQE82m3JHBQNN6vKlk5Jrzqgt473TUkMTDmMdiGftcCGrXAUkkFYQDr8SbVttejq
+	i0w8J6M5NXHvQTHRdm0Ed5K7wLYmR1clKkavjIOJa1V7qZERaxVxgl9s6Tyw1a4fBQhI
+	p0ye6rQP1KCpDYbk9HiZXqhEo6FWMGayQjkGYllwFFDRVGpL3jnIA6zyC7nCABuoJMle
+	iaSA==
+X-Gm-Message-State: ABuFfog8AoCr2St9ws/yG/ES7mwQi6WQJb6dveZsbDFv+dAnLeGlgOD4
+	5YnubfE1ZIrmThtPY1uVkJ8=
+X-Google-Smtp-Source: ACcGV61mE9FCRP4yd5VPUWMsIOy+wEUTon8dWfoA+MqMCJXa4q1qP1Y+0jZiaBW+Mhqb8J8jnlmC2Q==
+X-Received: by 2002:a62:830e:: with SMTP id
+	h14-v6mr33057437pfe.29.1539132145293; 
+	Tue, 09 Oct 2018 17:42:25 -0700 (PDT)
+Received: from localhost.localdomain ([221.158.206.146])
 	by smtp.gmail.com with ESMTPSA id
-	e7-v6sm32555948pfk.3.2018.10.09.17.36.13
+	r76-v6sm17493039pgr.11.2018.10.09.17.42.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Oct 2018 17:36:13 -0700 (PDT)
-To: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>,
-	openembedded-devel@lists.openembedded.org
-References: <CAMKF1sqm2-6+mKtpLfk6jTwugc+vTy2U6mWrrKB8-iL-zV95qw@mail.gmail.com>
-	<1539092429-3587-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <b927b1b3-1816-9685-4ed2-bf2bb0b6e8e6@gmail.com>
-Date: Tue, 9 Oct 2018 17:36:12 -0700
+	Tue, 09 Oct 2018 17:42:24 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org, yisooan@gmail.com
+References: <20181009085425.18140-1-yisooan@gmail.com>
+	<20181009085425.18140-2-yisooan@gmail.com>
+From: Yi-Soo An <yisooan@gmail.com>
+Message-ID: <b90c2a55-134c-9482-0600-2f3d12ba2bf7@gmail.com>
+Date: Wed, 10 Oct 2018 09:42:21 +0900
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.9.1
 MIME-Version: 1.0
-In-Reply-To: <1539092429-3587-1-git-send-email-stefan.wiehler@missinglinkelectronics.com>
-Subject: Re: [meta-oe][PATCH v2] nvme-cli: add recipe
+In-Reply-To: <20181009085425.18140-2-yisooan@gmail.com>
+Subject: Re: [meta-networking][PATCH 2/2] babeld: Fix build fail on LICENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,96 +63,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Oct 2018 00:36:14 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Oct 2018 00:42:24 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
+This patch is not necessary since [meta-networking,v2][PATCH] babeld: 
+Add Babel routing protocol recipe. the v2 patch points to LICENCE 
+instead of renaming it to LICENSE.
 
+Best regards,
+Yi-Soo
 
-On 10/09/2018 06:40 AM, Stefan Wiehler wrote:
-> NVMe management command line interface.
->
-> Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+On 10/09/2018 05:54 PM, Yi-Soo An wrote:
+> Signed-off-by: Yi-Soo An <yisooan@gmail.com>
 > ---
->
-> Change: Use bash-completion class and patch bash completion install path
->
->  ...Makefile-fix-bash-completion-install-path.patch | 33 ++++++++++++++++++++++
->  meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb  | 21 ++++++++++++++
-
-Would it be more appropriate to have this in the recipes-bsp ?
-
-
->  2 files changed, 54 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
->  create mode 100644 meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
->
-> diff --git a/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch b/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
+>   .../0001-Rename-LICENCE-to-LICENSE.patch      | 24 +++++++++++++++++++
+>   1 file changed, 24 insertions(+)
+>   create mode 100644 meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
+> 
+> diff --git a/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch b/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
 > new file mode 100644
-> index 0000000..ecd4f03
+> index 000000000..de374ad69
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/nvme-cli/files/0001-Makefile-fix-bash-completion-install-path.patch
-> @@ -0,0 +1,33 @@
-> +From ef64032b34190079aab591c64a25f7535a977390 Mon Sep 17 00:00:00 2001
-> +From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
-> +Date: Tue, 9 Oct 2018 11:26:34 +0200
-> +Subject: [PATCH] Makefile: fix bash completion install path
+> +++ b/meta-networking/recipes-protocols/babeld/babeld/0001-Rename-LICENCE-to-LICENSE.patch
+> @@ -0,0 +1,24 @@
+> +From f58103fc6da9a96c11b653eafd4c2ea7eab7ee68 Mon Sep 17 00:00:00 2001
+> +From: Yi-Soo An <yisooan@gmail.com>
+> +Date: Tue, 9 Oct 2018 16:24:32 +0900
+> +Subject: [PATCH] Rename LICENCE to LICENSE
 > +
-> +Change path to bash-completion upstream recommendation used by most
-> +distributions.
+> +Although LICENCE is grammatically correct, the recipe requires
+> +only LICENSE file. If the name does not match LICENSE, it fails
+> +to build.
 > +
-> +Upstream-Status: Submitted [https://github.com/linux-nvme/nvme-cli/pull/418]
+> +To fix it, it renames to LICENSE.
 > +
-> +Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+> +Signed-off-by: Yi-Soo An <yisooan@gmail.com>
 > +---
-> + Makefile | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> + LICENCE => LICENSE | 0
+> + 1 file changed, 0 insertions(+), 0 deletions(-)
+> + rename LICENCE => LICENSE (100%)
 > +
-> +diff --git a/Makefile b/Makefile
-> +index fa587dd..433bc41 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -69,8 +69,8 @@ install-bin: default
-> + 	$(INSTALL) -m 755 nvme $(DESTDIR)$(SBINDIR)
-> + 
-> + install-bash-completion:
-> +-	$(INSTALL) -d $(DESTDIR)$(PREFIX)/share/bash_completion.d
-> +-	$(INSTALL) -m 644 -T ./completions/bash-nvme-completion.sh $(DESTDIR)$(PREFIX)/share/bash_completion.d/nvme
-> ++	$(INSTALL) -d $(DESTDIR)$(PREFIX)/share/bash-completion/completions
-> ++	$(INSTALL) -m 644 -T ./completions/bash-nvme-completion.sh $(DESTDIR)$(PREFIX)/share/bash-completion/completions/nvme
-> + 
-> + install: install-bin install-man install-bash-completion
-> + 
-> +-- 
-> +1.9.1
+> +diff --git a/LICENCE b/LICENSE
+> +similarity index 100%
+> +rename from LICENCE
+> +rename to LICENSE
+> +--
+> +2.17.1
 > +
-> diff --git a/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
-> new file mode 100644
-> index 0000000..9b7e6cd
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/nvme-cli/nvme-cli_1.6.bb
-> @@ -0,0 +1,21 @@
-> +SUMMARY = "NVMe management command line interface"
-> +AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
-> +HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
-> +SECTION = "console/utils"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-> +DEPENDS = "util-linux"
-> +PV .= "+git${SRCPV}"
-> +
-> +SRC_URI = "git://github.com/linux-nvme/nvme-cli.git \
-> +           file://0001-Makefile-fix-bash-completion-install-path.patch \
-> +           "
-> +SRCREV = "642d426faf8a67ed01e90f7c35c0d967f8cc52a3"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit bash-completion
-> +
-> +do_install() {
-> +    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-> +}
-
+> 
 
